@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    https://last.fm/
-// @version      2026.0131.1
+// @version      2026.0212
 // @description  bleh!!! ^-^
 // @author       katelyn
 // @match        https://www.last.fm/*
@@ -8888,2731 +8888,6 @@
     }
   });
 
-  // node_modules/cropperjs/dist/cropper.js
-  var require_cropper = __commonJS({
-    "node_modules/cropperjs/dist/cropper.js"(exports, module) {
-      (function(global, factory) {
-        typeof exports === "object" && typeof module !== "undefined" ? module.exports = factory() : typeof define === "function" && define.amd ? define(factory) : (global = typeof globalThis !== "undefined" ? globalThis : global || self, global.Cropper = factory());
-      })(exports, function() {
-        "use strict";
-        function ownKeys(object, enumerableOnly) {
-          var keys2 = Object.keys(object);
-          if (Object.getOwnPropertySymbols) {
-            var symbols = Object.getOwnPropertySymbols(object);
-            enumerableOnly && (symbols = symbols.filter(function(sym) {
-              return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-            })), keys2.push.apply(keys2, symbols);
-          }
-          return keys2;
-        }
-        function _objectSpread2(target) {
-          for (var i = 1; i < arguments.length; i++) {
-            var source = null != arguments[i] ? arguments[i] : {};
-            i % 2 ? ownKeys(Object(source), true).forEach(function(key) {
-              _defineProperty(target, key, source[key]);
-            }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function(key) {
-              Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-            });
-          }
-          return target;
-        }
-        function _typeof(obj) {
-          "@babel/helpers - typeof";
-          return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(obj2) {
-            return typeof obj2;
-          } : function(obj2) {
-            return obj2 && "function" == typeof Symbol && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
-          }, _typeof(obj);
-        }
-        function _classCallCheck(instance, Constructor) {
-          if (!(instance instanceof Constructor)) {
-            throw new TypeError("Cannot call a class as a function");
-          }
-        }
-        function _defineProperties(target, props) {
-          for (var i = 0; i < props.length; i++) {
-            var descriptor = props[i];
-            descriptor.enumerable = descriptor.enumerable || false;
-            descriptor.configurable = true;
-            if ("value" in descriptor) descriptor.writable = true;
-            Object.defineProperty(target, descriptor.key, descriptor);
-          }
-        }
-        function _createClass(Constructor, protoProps, staticProps) {
-          if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-          if (staticProps) _defineProperties(Constructor, staticProps);
-          Object.defineProperty(Constructor, "prototype", {
-            writable: false
-          });
-          return Constructor;
-        }
-        function _defineProperty(obj, key, value) {
-          if (key in obj) {
-            Object.defineProperty(obj, key, {
-              value,
-              enumerable: true,
-              configurable: true,
-              writable: true
-            });
-          } else {
-            obj[key] = value;
-          }
-          return obj;
-        }
-        function _toConsumableArray(arr) {
-          return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
-        }
-        function _arrayWithoutHoles(arr) {
-          if (Array.isArray(arr)) return _arrayLikeToArray(arr);
-        }
-        function _iterableToArray(iter) {
-          if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
-        }
-        function _unsupportedIterableToArray(o, minLen) {
-          if (!o) return;
-          if (typeof o === "string") return _arrayLikeToArray(o, minLen);
-          var n2 = Object.prototype.toString.call(o).slice(8, -1);
-          if (n2 === "Object" && o.constructor) n2 = o.constructor.name;
-          if (n2 === "Map" || n2 === "Set") return Array.from(o);
-          if (n2 === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n2)) return _arrayLikeToArray(o, minLen);
-        }
-        function _arrayLikeToArray(arr, len) {
-          if (len == null || len > arr.length) len = arr.length;
-          for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-          return arr2;
-        }
-        function _nonIterableSpread() {
-          throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-        }
-        var IS_BROWSER = typeof window !== "undefined" && typeof window.document !== "undefined";
-        var WINDOW = IS_BROWSER ? window : {};
-        var IS_TOUCH_DEVICE = IS_BROWSER && WINDOW.document.documentElement ? "ontouchstart" in WINDOW.document.documentElement : false;
-        var HAS_POINTER_EVENT = IS_BROWSER ? "PointerEvent" in WINDOW : false;
-        var NAMESPACE = "cropper";
-        var ACTION_ALL = "all";
-        var ACTION_CROP = "crop";
-        var ACTION_MOVE = "move";
-        var ACTION_ZOOM = "zoom";
-        var ACTION_EAST = "e";
-        var ACTION_WEST = "w";
-        var ACTION_SOUTH = "s";
-        var ACTION_NORTH = "n";
-        var ACTION_NORTH_EAST = "ne";
-        var ACTION_NORTH_WEST = "nw";
-        var ACTION_SOUTH_EAST = "se";
-        var ACTION_SOUTH_WEST = "sw";
-        var CLASS_CROP = "".concat(NAMESPACE, "-crop");
-        var CLASS_DISABLED = "".concat(NAMESPACE, "-disabled");
-        var CLASS_HIDDEN = "".concat(NAMESPACE, "-hidden");
-        var CLASS_HIDE = "".concat(NAMESPACE, "-hide");
-        var CLASS_INVISIBLE = "".concat(NAMESPACE, "-invisible");
-        var CLASS_MODAL = "".concat(NAMESPACE, "-modal");
-        var CLASS_MOVE = "".concat(NAMESPACE, "-move");
-        var DATA_ACTION = "".concat(NAMESPACE, "Action");
-        var DATA_PREVIEW = "".concat(NAMESPACE, "Preview");
-        var DRAG_MODE_CROP = "crop";
-        var DRAG_MODE_MOVE = "move";
-        var DRAG_MODE_NONE = "none";
-        var EVENT_CROP = "crop";
-        var EVENT_CROP_END = "cropend";
-        var EVENT_CROP_MOVE = "cropmove";
-        var EVENT_CROP_START = "cropstart";
-        var EVENT_DBLCLICK = "dblclick";
-        var EVENT_TOUCH_START = IS_TOUCH_DEVICE ? "touchstart" : "mousedown";
-        var EVENT_TOUCH_MOVE = IS_TOUCH_DEVICE ? "touchmove" : "mousemove";
-        var EVENT_TOUCH_END = IS_TOUCH_DEVICE ? "touchend touchcancel" : "mouseup";
-        var EVENT_POINTER_DOWN = HAS_POINTER_EVENT ? "pointerdown" : EVENT_TOUCH_START;
-        var EVENT_POINTER_MOVE = HAS_POINTER_EVENT ? "pointermove" : EVENT_TOUCH_MOVE;
-        var EVENT_POINTER_UP = HAS_POINTER_EVENT ? "pointerup pointercancel" : EVENT_TOUCH_END;
-        var EVENT_READY = "ready";
-        var EVENT_RESIZE = "resize";
-        var EVENT_WHEEL = "wheel";
-        var EVENT_ZOOM = "zoom";
-        var MIME_TYPE_JPEG = "image/jpeg";
-        var REGEXP_ACTIONS = /^e|w|s|n|se|sw|ne|nw|all|crop|move|zoom$/;
-        var REGEXP_DATA_URL = /^data:/;
-        var REGEXP_DATA_URL_JPEG = /^data:image\/jpeg;base64,/;
-        var REGEXP_TAG_NAME = /^img|canvas$/i;
-        var MIN_CONTAINER_WIDTH = 200;
-        var MIN_CONTAINER_HEIGHT = 100;
-        var DEFAULTS = {
-          // Define the view mode of the cropper
-          viewMode: 0,
-          // 0, 1, 2, 3
-          // Define the dragging mode of the cropper
-          dragMode: DRAG_MODE_CROP,
-          // 'crop', 'move' or 'none'
-          // Define the initial aspect ratio of the crop box
-          initialAspectRatio: NaN,
-          // Define the aspect ratio of the crop box
-          aspectRatio: NaN,
-          // An object with the previous cropping result data
-          data: null,
-          // A selector for adding extra containers to preview
-          preview: "",
-          // Re-render the cropper when resize the window
-          responsive: true,
-          // Restore the cropped area after resize the window
-          restore: true,
-          // Check if the current image is a cross-origin image
-          checkCrossOrigin: true,
-          // Check the current image's Exif Orientation information
-          checkOrientation: true,
-          // Show the black modal
-          modal: true,
-          // Show the dashed lines for guiding
-          guides: true,
-          // Show the center indicator for guiding
-          center: true,
-          // Show the white modal to highlight the crop box
-          highlight: true,
-          // Show the grid background
-          background: true,
-          // Enable to crop the image automatically when initialize
-          autoCrop: true,
-          // Define the percentage of automatic cropping area when initializes
-          autoCropArea: 0.8,
-          // Enable to move the image
-          movable: true,
-          // Enable to rotate the image
-          rotatable: true,
-          // Enable to scale the image
-          scalable: true,
-          // Enable to zoom the image
-          zoomable: true,
-          // Enable to zoom the image by dragging touch
-          zoomOnTouch: true,
-          // Enable to zoom the image by wheeling mouse
-          zoomOnWheel: true,
-          // Define zoom ratio when zoom the image by wheeling mouse
-          wheelZoomRatio: 0.1,
-          // Enable to move the crop box
-          cropBoxMovable: true,
-          // Enable to resize the crop box
-          cropBoxResizable: true,
-          // Toggle drag mode between "crop" and "move" when click twice on the cropper
-          toggleDragModeOnDblclick: true,
-          // Size limitation
-          minCanvasWidth: 0,
-          minCanvasHeight: 0,
-          minCropBoxWidth: 0,
-          minCropBoxHeight: 0,
-          minContainerWidth: MIN_CONTAINER_WIDTH,
-          minContainerHeight: MIN_CONTAINER_HEIGHT,
-          // Shortcuts of events
-          ready: null,
-          cropstart: null,
-          cropmove: null,
-          cropend: null,
-          crop: null,
-          zoom: null
-        };
-        var TEMPLATE = '<div class="cropper-container" touch-action="none"><div class="cropper-wrap-box"><div class="cropper-canvas"></div></div><div class="cropper-drag-box"></div><div class="cropper-crop-box"><span class="cropper-view-box"></span><span class="cropper-dashed dashed-h"></span><span class="cropper-dashed dashed-v"></span><span class="cropper-center"></span><span class="cropper-face"></span><span class="cropper-line line-e" data-cropper-action="e"></span><span class="cropper-line line-n" data-cropper-action="n"></span><span class="cropper-line line-w" data-cropper-action="w"></span><span class="cropper-line line-s" data-cropper-action="s"></span><span class="cropper-point point-e" data-cropper-action="e"></span><span class="cropper-point point-n" data-cropper-action="n"></span><span class="cropper-point point-w" data-cropper-action="w"></span><span class="cropper-point point-s" data-cropper-action="s"></span><span class="cropper-point point-ne" data-cropper-action="ne"></span><span class="cropper-point point-nw" data-cropper-action="nw"></span><span class="cropper-point point-sw" data-cropper-action="sw"></span><span class="cropper-point point-se" data-cropper-action="se"></span></div></div>';
-        var isNaN2 = Number.isNaN || WINDOW.isNaN;
-        function isNumber3(value) {
-          return typeof value === "number" && !isNaN2(value);
-        }
-        var isPositiveNumber = function isPositiveNumber2(value) {
-          return value > 0 && value < Infinity;
-        };
-        function isUndefined2(value) {
-          return typeof value === "undefined";
-        }
-        function isObject2(value) {
-          return _typeof(value) === "object" && value !== null;
-        }
-        var hasOwnProperty3 = Object.prototype.hasOwnProperty;
-        function isPlainObject(value) {
-          if (!isObject2(value)) {
-            return false;
-          }
-          try {
-            var _constructor = value.constructor;
-            var prototype = _constructor.prototype;
-            return _constructor && prototype && hasOwnProperty3.call(prototype, "isPrototypeOf");
-          } catch (error) {
-            return false;
-          }
-        }
-        function isFunction2(value) {
-          return typeof value === "function";
-        }
-        var slice2 = Array.prototype.slice;
-        function toArray(value) {
-          return Array.from ? Array.from(value) : slice2.call(value);
-        }
-        function forEach(data2, callback2) {
-          if (data2 && isFunction2(callback2)) {
-            if (Array.isArray(data2) || isNumber3(data2.length)) {
-              toArray(data2).forEach(function(value, key) {
-                callback2.call(data2, value, key, data2);
-              });
-            } else if (isObject2(data2)) {
-              Object.keys(data2).forEach(function(key) {
-                callback2.call(data2, data2[key], key, data2);
-              });
-            }
-          }
-          return data2;
-        }
-        var assign = Object.assign || function assign2(target) {
-          for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-            args[_key - 1] = arguments[_key];
-          }
-          if (isObject2(target) && args.length > 0) {
-            args.forEach(function(arg) {
-              if (isObject2(arg)) {
-                Object.keys(arg).forEach(function(key) {
-                  target[key] = arg[key];
-                });
-              }
-            });
-          }
-          return target;
-        };
-        var REGEXP_DECIMALS = /\.\d*(?:0|9){12}\d*$/;
-        function normalizeDecimalNumber(value) {
-          var times = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : 1e11;
-          return REGEXP_DECIMALS.test(value) ? Math.round(value * times) / times : value;
-        }
-        var REGEXP_SUFFIX = /^width|height|left|top|marginLeft|marginTop$/;
-        function setStyle2(element, styles) {
-          var style = element.style;
-          forEach(styles, function(value, property) {
-            if (REGEXP_SUFFIX.test(property) && isNumber3(value)) {
-              value = "".concat(value, "px");
-            }
-            style[property] = value;
-          });
-        }
-        function hasClass(element, value) {
-          return element.classList ? element.classList.contains(value) : element.className.indexOf(value) > -1;
-        }
-        function addClass(element, value) {
-          if (!value) {
-            return;
-          }
-          if (isNumber3(element.length)) {
-            forEach(element, function(elem) {
-              addClass(elem, value);
-            });
-            return;
-          }
-          if (element.classList) {
-            element.classList.add(value);
-            return;
-          }
-          var className = element.className.trim();
-          if (!className) {
-            element.className = value;
-          } else if (className.indexOf(value) < 0) {
-            element.className = "".concat(className, " ").concat(value);
-          }
-        }
-        function removeClass(element, value) {
-          if (!value) {
-            return;
-          }
-          if (isNumber3(element.length)) {
-            forEach(element, function(elem) {
-              removeClass(elem, value);
-            });
-            return;
-          }
-          if (element.classList) {
-            element.classList.remove(value);
-            return;
-          }
-          if (element.className.indexOf(value) >= 0) {
-            element.className = element.className.replace(value, "");
-          }
-        }
-        function toggleClass(element, value, added) {
-          if (!value) {
-            return;
-          }
-          if (isNumber3(element.length)) {
-            forEach(element, function(elem) {
-              toggleClass(elem, value, added);
-            });
-            return;
-          }
-          if (added) {
-            addClass(element, value);
-          } else {
-            removeClass(element, value);
-          }
-        }
-        var REGEXP_CAMEL_CASE = /([a-z\d])([A-Z])/g;
-        function toParamCase(value) {
-          return value.replace(REGEXP_CAMEL_CASE, "$1-$2").toLowerCase();
-        }
-        function getData(element, name) {
-          if (isObject2(element[name])) {
-            return element[name];
-          }
-          if (element.dataset) {
-            return element.dataset[name];
-          }
-          return element.getAttribute("data-".concat(toParamCase(name)));
-        }
-        function setData(element, name, data2) {
-          if (isObject2(data2)) {
-            element[name] = data2;
-          } else if (element.dataset) {
-            element.dataset[name] = data2;
-          } else {
-            element.setAttribute("data-".concat(toParamCase(name)), data2);
-          }
-        }
-        function removeData(element, name) {
-          if (isObject2(element[name])) {
-            try {
-              delete element[name];
-            } catch (error) {
-              element[name] = void 0;
-            }
-          } else if (element.dataset) {
-            try {
-              delete element.dataset[name];
-            } catch (error) {
-              element.dataset[name] = void 0;
-            }
-          } else {
-            element.removeAttribute("data-".concat(toParamCase(name)));
-          }
-        }
-        var REGEXP_SPACES = /\s\s*/;
-        var onceSupported = function() {
-          var supported = false;
-          if (IS_BROWSER) {
-            var once = false;
-            var listener = function listener2() {
-            };
-            var options = Object.defineProperty({}, "once", {
-              get: function get() {
-                supported = true;
-                return once;
-              },
-              /**
-               * This setter can fix a `TypeError` in strict mode
-               * {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/Getter_only}
-               * @param {boolean} value - The value to set
-               */
-              set: function set2(value) {
-                once = value;
-              }
-            });
-            WINDOW.addEventListener("test", listener, options);
-            WINDOW.removeEventListener("test", listener, options);
-          }
-          return supported;
-        }();
-        function removeListener2(element, type, listener) {
-          var options = arguments.length > 3 && arguments[3] !== void 0 ? arguments[3] : {};
-          var handler = listener;
-          type.trim().split(REGEXP_SPACES).forEach(function(event3) {
-            if (!onceSupported) {
-              var listeners = element.listeners;
-              if (listeners && listeners[event3] && listeners[event3][listener]) {
-                handler = listeners[event3][listener];
-                delete listeners[event3][listener];
-                if (Object.keys(listeners[event3]).length === 0) {
-                  delete listeners[event3];
-                }
-                if (Object.keys(listeners).length === 0) {
-                  delete element.listeners;
-                }
-              }
-            }
-            element.removeEventListener(event3, handler, options);
-          });
-        }
-        function addListener2(element, type, listener) {
-          var options = arguments.length > 3 && arguments[3] !== void 0 ? arguments[3] : {};
-          var _handler = listener;
-          type.trim().split(REGEXP_SPACES).forEach(function(event3) {
-            if (options.once && !onceSupported) {
-              var _element$listeners = element.listeners, listeners = _element$listeners === void 0 ? {} : _element$listeners;
-              _handler = function handler() {
-                delete listeners[event3][listener];
-                element.removeEventListener(event3, _handler, options);
-                for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-                  args[_key2] = arguments[_key2];
-                }
-                listener.apply(element, args);
-              };
-              if (!listeners[event3]) {
-                listeners[event3] = {};
-              }
-              if (listeners[event3][listener]) {
-                element.removeEventListener(event3, listeners[event3][listener], options);
-              }
-              listeners[event3][listener] = _handler;
-              element.listeners = listeners;
-            }
-            element.addEventListener(event3, _handler, options);
-          });
-        }
-        function dispatchEvent(element, type, data2) {
-          var event3;
-          if (isFunction2(Event) && isFunction2(CustomEvent)) {
-            event3 = new CustomEvent(type, {
-              detail: data2,
-              bubbles: true,
-              cancelable: true
-            });
-          } else {
-            event3 = document.createEvent("CustomEvent");
-            event3.initCustomEvent(type, true, true, data2);
-          }
-          return element.dispatchEvent(event3);
-        }
-        function getOffset(element) {
-          var box = element.getBoundingClientRect();
-          return {
-            left: box.left + (window.pageXOffset - document.documentElement.clientLeft),
-            top: box.top + (window.pageYOffset - document.documentElement.clientTop)
-          };
-        }
-        var location = WINDOW.location;
-        var REGEXP_ORIGINS = /^(\w+:)\/\/([^:/?#]*):?(\d*)/i;
-        function isCrossOriginURL(url) {
-          var parts = url.match(REGEXP_ORIGINS);
-          return parts !== null && (parts[1] !== location.protocol || parts[2] !== location.hostname || parts[3] !== location.port);
-        }
-        function addTimestamp(url) {
-          var timestamp = "timestamp=".concat((/* @__PURE__ */ new Date()).getTime());
-          return url + (url.indexOf("?") === -1 ? "?" : "&") + timestamp;
-        }
-        function getTransforms(_ref) {
-          var rotate2 = _ref.rotate, scaleX = _ref.scaleX, scaleY = _ref.scaleY, translateX = _ref.translateX, translateY = _ref.translateY;
-          var values = [];
-          if (isNumber3(translateX) && translateX !== 0) {
-            values.push("translateX(".concat(translateX, "px)"));
-          }
-          if (isNumber3(translateY) && translateY !== 0) {
-            values.push("translateY(".concat(translateY, "px)"));
-          }
-          if (isNumber3(rotate2) && rotate2 !== 0) {
-            values.push("rotate(".concat(rotate2, "deg)"));
-          }
-          if (isNumber3(scaleX) && scaleX !== 1) {
-            values.push("scaleX(".concat(scaleX, ")"));
-          }
-          if (isNumber3(scaleY) && scaleY !== 1) {
-            values.push("scaleY(".concat(scaleY, ")"));
-          }
-          var transform2 = values.length ? values.join(" ") : "none";
-          return {
-            WebkitTransform: transform2,
-            msTransform: transform2,
-            transform: transform2
-          };
-        }
-        function getMaxZoomRatio(pointers) {
-          var pointers2 = _objectSpread2({}, pointers);
-          var maxRatio = 0;
-          forEach(pointers, function(pointer, pointerId) {
-            delete pointers2[pointerId];
-            forEach(pointers2, function(pointer2) {
-              var x1 = Math.abs(pointer.startX - pointer2.startX);
-              var y1 = Math.abs(pointer.startY - pointer2.startY);
-              var x2 = Math.abs(pointer.endX - pointer2.endX);
-              var y2 = Math.abs(pointer.endY - pointer2.endY);
-              var z1 = Math.sqrt(x1 * x1 + y1 * y1);
-              var z2 = Math.sqrt(x2 * x2 + y2 * y2);
-              var ratio = (z2 - z1) / z1;
-              if (Math.abs(ratio) > Math.abs(maxRatio)) {
-                maxRatio = ratio;
-              }
-            });
-          });
-          return maxRatio;
-        }
-        function getPointer(_ref2, endOnly) {
-          var pageX = _ref2.pageX, pageY = _ref2.pageY;
-          var end2 = {
-            endX: pageX,
-            endY: pageY
-          };
-          return endOnly ? end2 : _objectSpread2({
-            startX: pageX,
-            startY: pageY
-          }, end2);
-        }
-        function getPointersCenter(pointers) {
-          var pageX = 0;
-          var pageY = 0;
-          var count = 0;
-          forEach(pointers, function(_ref3) {
-            var startX = _ref3.startX, startY = _ref3.startY;
-            pageX += startX;
-            pageY += startY;
-            count += 1;
-          });
-          pageX /= count;
-          pageY /= count;
-          return {
-            pageX,
-            pageY
-          };
-        }
-        function getAdjustedSizes(_ref4) {
-          var aspectRatio = _ref4.aspectRatio, height = _ref4.height, width = _ref4.width;
-          var type = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : "contain";
-          var isValidWidth = isPositiveNumber(width);
-          var isValidHeight = isPositiveNumber(height);
-          if (isValidWidth && isValidHeight) {
-            var adjustedWidth = height * aspectRatio;
-            if (type === "contain" && adjustedWidth > width || type === "cover" && adjustedWidth < width) {
-              height = width / aspectRatio;
-            } else {
-              width = height * aspectRatio;
-            }
-          } else if (isValidWidth) {
-            height = width / aspectRatio;
-          } else if (isValidHeight) {
-            width = height * aspectRatio;
-          }
-          return {
-            width,
-            height
-          };
-        }
-        function getRotatedSizes(_ref5) {
-          var width = _ref5.width, height = _ref5.height, degree = _ref5.degree;
-          degree = Math.abs(degree) % 180;
-          if (degree === 90) {
-            return {
-              width: height,
-              height: width
-            };
-          }
-          var arc = degree % 90 * Math.PI / 180;
-          var sinArc = Math.sin(arc);
-          var cosArc = Math.cos(arc);
-          var newWidth = width * cosArc + height * sinArc;
-          var newHeight = width * sinArc + height * cosArc;
-          return degree > 90 ? {
-            width: newHeight,
-            height: newWidth
-          } : {
-            width: newWidth,
-            height: newHeight
-          };
-        }
-        function getSourceCanvas(image, _ref6, _ref7, _ref8) {
-          var imageAspectRatio = _ref6.aspectRatio, imageNaturalWidth = _ref6.naturalWidth, imageNaturalHeight = _ref6.naturalHeight, _ref6$rotate = _ref6.rotate, rotate2 = _ref6$rotate === void 0 ? 0 : _ref6$rotate, _ref6$scaleX = _ref6.scaleX, scaleX = _ref6$scaleX === void 0 ? 1 : _ref6$scaleX, _ref6$scaleY = _ref6.scaleY, scaleY = _ref6$scaleY === void 0 ? 1 : _ref6$scaleY;
-          var aspectRatio = _ref7.aspectRatio, naturalWidth = _ref7.naturalWidth, naturalHeight = _ref7.naturalHeight;
-          var _ref8$fillColor = _ref8.fillColor, fillColor = _ref8$fillColor === void 0 ? "transparent" : _ref8$fillColor, _ref8$imageSmoothingE = _ref8.imageSmoothingEnabled, imageSmoothingEnabled = _ref8$imageSmoothingE === void 0 ? true : _ref8$imageSmoothingE, _ref8$imageSmoothingQ = _ref8.imageSmoothingQuality, imageSmoothingQuality = _ref8$imageSmoothingQ === void 0 ? "low" : _ref8$imageSmoothingQ, _ref8$maxWidth = _ref8.maxWidth, maxWidth = _ref8$maxWidth === void 0 ? Infinity : _ref8$maxWidth, _ref8$maxHeight = _ref8.maxHeight, maxHeight = _ref8$maxHeight === void 0 ? Infinity : _ref8$maxHeight, _ref8$minWidth = _ref8.minWidth, minWidth = _ref8$minWidth === void 0 ? 0 : _ref8$minWidth, _ref8$minHeight = _ref8.minHeight, minHeight = _ref8$minHeight === void 0 ? 0 : _ref8$minHeight;
-          var canvas = document.createElement("canvas");
-          var context = canvas.getContext("2d");
-          var maxSizes = getAdjustedSizes({
-            aspectRatio,
-            width: maxWidth,
-            height: maxHeight
-          });
-          var minSizes = getAdjustedSizes({
-            aspectRatio,
-            width: minWidth,
-            height: minHeight
-          }, "cover");
-          var width = Math.min(maxSizes.width, Math.max(minSizes.width, naturalWidth));
-          var height = Math.min(maxSizes.height, Math.max(minSizes.height, naturalHeight));
-          var destMaxSizes = getAdjustedSizes({
-            aspectRatio: imageAspectRatio,
-            width: maxWidth,
-            height: maxHeight
-          });
-          var destMinSizes = getAdjustedSizes({
-            aspectRatio: imageAspectRatio,
-            width: minWidth,
-            height: minHeight
-          }, "cover");
-          var destWidth = Math.min(destMaxSizes.width, Math.max(destMinSizes.width, imageNaturalWidth));
-          var destHeight = Math.min(destMaxSizes.height, Math.max(destMinSizes.height, imageNaturalHeight));
-          var params = [-destWidth / 2, -destHeight / 2, destWidth, destHeight];
-          canvas.width = normalizeDecimalNumber(width);
-          canvas.height = normalizeDecimalNumber(height);
-          context.fillStyle = fillColor;
-          context.fillRect(0, 0, width, height);
-          context.save();
-          context.translate(width / 2, height / 2);
-          context.rotate(rotate2 * Math.PI / 180);
-          context.scale(scaleX, scaleY);
-          context.imageSmoothingEnabled = imageSmoothingEnabled;
-          context.imageSmoothingQuality = imageSmoothingQuality;
-          context.drawImage.apply(context, [image].concat(_toConsumableArray(params.map(function(param) {
-            return Math.floor(normalizeDecimalNumber(param));
-          }))));
-          context.restore();
-          return canvas;
-        }
-        var fromCharCode = String.fromCharCode;
-        function getStringFromCharCode(dataView, start2, length) {
-          var str = "";
-          length += start2;
-          for (var i = start2; i < length; i += 1) {
-            str += fromCharCode(dataView.getUint8(i));
-          }
-          return str;
-        }
-        var REGEXP_DATA_URL_HEAD = /^data:.*,/;
-        function dataURLToArrayBuffer(dataURL) {
-          var base64 = dataURL.replace(REGEXP_DATA_URL_HEAD, "");
-          var binary = atob(base64);
-          var arrayBuffer = new ArrayBuffer(binary.length);
-          var uint8 = new Uint8Array(arrayBuffer);
-          forEach(uint8, function(value, i) {
-            uint8[i] = binary.charCodeAt(i);
-          });
-          return arrayBuffer;
-        }
-        function arrayBufferToDataURL(arrayBuffer, mimeType) {
-          var chunks = [];
-          var chunkSize = 8192;
-          var uint8 = new Uint8Array(arrayBuffer);
-          while (uint8.length > 0) {
-            chunks.push(fromCharCode.apply(null, toArray(uint8.subarray(0, chunkSize))));
-            uint8 = uint8.subarray(chunkSize);
-          }
-          return "data:".concat(mimeType, ";base64,").concat(btoa(chunks.join("")));
-        }
-        function resetAndGetOrientation(arrayBuffer) {
-          var dataView = new DataView(arrayBuffer);
-          var orientation;
-          try {
-            var littleEndian;
-            var app1Start;
-            var ifdStart;
-            if (dataView.getUint8(0) === 255 && dataView.getUint8(1) === 216) {
-              var length = dataView.byteLength;
-              var offset3 = 2;
-              while (offset3 + 1 < length) {
-                if (dataView.getUint8(offset3) === 255 && dataView.getUint8(offset3 + 1) === 225) {
-                  app1Start = offset3;
-                  break;
-                }
-                offset3 += 1;
-              }
-            }
-            if (app1Start) {
-              var exifIDCode = app1Start + 4;
-              var tiffOffset = app1Start + 10;
-              if (getStringFromCharCode(dataView, exifIDCode, 4) === "Exif") {
-                var endianness = dataView.getUint16(tiffOffset);
-                littleEndian = endianness === 18761;
-                if (littleEndian || endianness === 19789) {
-                  if (dataView.getUint16(tiffOffset + 2, littleEndian) === 42) {
-                    var firstIFDOffset = dataView.getUint32(tiffOffset + 4, littleEndian);
-                    if (firstIFDOffset >= 8) {
-                      ifdStart = tiffOffset + firstIFDOffset;
-                    }
-                  }
-                }
-              }
-            }
-            if (ifdStart) {
-              var _length = dataView.getUint16(ifdStart, littleEndian);
-              var _offset;
-              var i;
-              for (i = 0; i < _length; i += 1) {
-                _offset = ifdStart + i * 12 + 2;
-                if (dataView.getUint16(_offset, littleEndian) === 274) {
-                  _offset += 8;
-                  orientation = dataView.getUint16(_offset, littleEndian);
-                  dataView.setUint16(_offset, 1, littleEndian);
-                  break;
-                }
-              }
-            }
-          } catch (error) {
-            orientation = 1;
-          }
-          return orientation;
-        }
-        function parseOrientation(orientation) {
-          var rotate2 = 0;
-          var scaleX = 1;
-          var scaleY = 1;
-          switch (orientation) {
-            // Flip horizontal
-            case 2:
-              scaleX = -1;
-              break;
-            // Rotate left 180°
-            case 3:
-              rotate2 = -180;
-              break;
-            // Flip vertical
-            case 4:
-              scaleY = -1;
-              break;
-            // Flip vertical and rotate right 90°
-            case 5:
-              rotate2 = 90;
-              scaleY = -1;
-              break;
-            // Rotate right 90°
-            case 6:
-              rotate2 = 90;
-              break;
-            // Flip horizontal and rotate right 90°
-            case 7:
-              rotate2 = 90;
-              scaleX = -1;
-              break;
-            // Rotate left 90°
-            case 8:
-              rotate2 = -90;
-              break;
-          }
-          return {
-            rotate: rotate2,
-            scaleX,
-            scaleY
-          };
-        }
-        var render3 = {
-          render: function render4() {
-            this.initContainer();
-            this.initCanvas();
-            this.initCropBox();
-            this.renderCanvas();
-            if (this.cropped) {
-              this.renderCropBox();
-            }
-          },
-          initContainer: function initContainer() {
-            var element = this.element, options = this.options, container = this.container, cropper2 = this.cropper;
-            var minWidth = Number(options.minContainerWidth);
-            var minHeight = Number(options.minContainerHeight);
-            addClass(cropper2, CLASS_HIDDEN);
-            removeClass(element, CLASS_HIDDEN);
-            var containerData = {
-              width: Math.max(container.offsetWidth, minWidth >= 0 ? minWidth : MIN_CONTAINER_WIDTH),
-              height: Math.max(container.offsetHeight, minHeight >= 0 ? minHeight : MIN_CONTAINER_HEIGHT)
-            };
-            this.containerData = containerData;
-            setStyle2(cropper2, {
-              width: containerData.width,
-              height: containerData.height
-            });
-            addClass(element, CLASS_HIDDEN);
-            removeClass(cropper2, CLASS_HIDDEN);
-          },
-          // Canvas (image wrapper)
-          initCanvas: function initCanvas2() {
-            var containerData = this.containerData, imageData = this.imageData;
-            var viewMode = this.options.viewMode;
-            var rotated = Math.abs(imageData.rotate) % 180 === 90;
-            var naturalWidth = rotated ? imageData.naturalHeight : imageData.naturalWidth;
-            var naturalHeight = rotated ? imageData.naturalWidth : imageData.naturalHeight;
-            var aspectRatio = naturalWidth / naturalHeight;
-            var canvasWidth = containerData.width;
-            var canvasHeight = containerData.height;
-            if (containerData.height * aspectRatio > containerData.width) {
-              if (viewMode === 3) {
-                canvasWidth = containerData.height * aspectRatio;
-              } else {
-                canvasHeight = containerData.width / aspectRatio;
-              }
-            } else if (viewMode === 3) {
-              canvasHeight = containerData.width / aspectRatio;
-            } else {
-              canvasWidth = containerData.height * aspectRatio;
-            }
-            var canvasData = {
-              aspectRatio,
-              naturalWidth,
-              naturalHeight,
-              width: canvasWidth,
-              height: canvasHeight
-            };
-            this.canvasData = canvasData;
-            this.limited = viewMode === 1 || viewMode === 2;
-            this.limitCanvas(true, true);
-            canvasData.width = Math.min(Math.max(canvasData.width, canvasData.minWidth), canvasData.maxWidth);
-            canvasData.height = Math.min(Math.max(canvasData.height, canvasData.minHeight), canvasData.maxHeight);
-            canvasData.left = (containerData.width - canvasData.width) / 2;
-            canvasData.top = (containerData.height - canvasData.height) / 2;
-            canvasData.oldLeft = canvasData.left;
-            canvasData.oldTop = canvasData.top;
-            this.initialCanvasData = assign({}, canvasData);
-          },
-          limitCanvas: function limitCanvas(sizeLimited, positionLimited) {
-            var options = this.options, containerData = this.containerData, canvasData = this.canvasData, cropBoxData = this.cropBoxData;
-            var viewMode = options.viewMode;
-            var aspectRatio = canvasData.aspectRatio;
-            var cropped = this.cropped && cropBoxData;
-            if (sizeLimited) {
-              var minCanvasWidth = Number(options.minCanvasWidth) || 0;
-              var minCanvasHeight = Number(options.minCanvasHeight) || 0;
-              if (viewMode > 1) {
-                minCanvasWidth = Math.max(minCanvasWidth, containerData.width);
-                minCanvasHeight = Math.max(minCanvasHeight, containerData.height);
-                if (viewMode === 3) {
-                  if (minCanvasHeight * aspectRatio > minCanvasWidth) {
-                    minCanvasWidth = minCanvasHeight * aspectRatio;
-                  } else {
-                    minCanvasHeight = minCanvasWidth / aspectRatio;
-                  }
-                }
-              } else if (viewMode > 0) {
-                if (minCanvasWidth) {
-                  minCanvasWidth = Math.max(minCanvasWidth, cropped ? cropBoxData.width : 0);
-                } else if (minCanvasHeight) {
-                  minCanvasHeight = Math.max(minCanvasHeight, cropped ? cropBoxData.height : 0);
-                } else if (cropped) {
-                  minCanvasWidth = cropBoxData.width;
-                  minCanvasHeight = cropBoxData.height;
-                  if (minCanvasHeight * aspectRatio > minCanvasWidth) {
-                    minCanvasWidth = minCanvasHeight * aspectRatio;
-                  } else {
-                    minCanvasHeight = minCanvasWidth / aspectRatio;
-                  }
-                }
-              }
-              var _getAdjustedSizes = getAdjustedSizes({
-                aspectRatio,
-                width: minCanvasWidth,
-                height: minCanvasHeight
-              });
-              minCanvasWidth = _getAdjustedSizes.width;
-              minCanvasHeight = _getAdjustedSizes.height;
-              canvasData.minWidth = minCanvasWidth;
-              canvasData.minHeight = minCanvasHeight;
-              canvasData.maxWidth = Infinity;
-              canvasData.maxHeight = Infinity;
-            }
-            if (positionLimited) {
-              if (viewMode > (cropped ? 0 : 1)) {
-                var newCanvasLeft = containerData.width - canvasData.width;
-                var newCanvasTop = containerData.height - canvasData.height;
-                canvasData.minLeft = Math.min(0, newCanvasLeft);
-                canvasData.minTop = Math.min(0, newCanvasTop);
-                canvasData.maxLeft = Math.max(0, newCanvasLeft);
-                canvasData.maxTop = Math.max(0, newCanvasTop);
-                if (cropped && this.limited) {
-                  canvasData.minLeft = Math.min(cropBoxData.left, cropBoxData.left + (cropBoxData.width - canvasData.width));
-                  canvasData.minTop = Math.min(cropBoxData.top, cropBoxData.top + (cropBoxData.height - canvasData.height));
-                  canvasData.maxLeft = cropBoxData.left;
-                  canvasData.maxTop = cropBoxData.top;
-                  if (viewMode === 2) {
-                    if (canvasData.width >= containerData.width) {
-                      canvasData.minLeft = Math.min(0, newCanvasLeft);
-                      canvasData.maxLeft = Math.max(0, newCanvasLeft);
-                    }
-                    if (canvasData.height >= containerData.height) {
-                      canvasData.minTop = Math.min(0, newCanvasTop);
-                      canvasData.maxTop = Math.max(0, newCanvasTop);
-                    }
-                  }
-                }
-              } else {
-                canvasData.minLeft = -canvasData.width;
-                canvasData.minTop = -canvasData.height;
-                canvasData.maxLeft = containerData.width;
-                canvasData.maxTop = containerData.height;
-              }
-            }
-          },
-          renderCanvas: function renderCanvas(changed, transformed) {
-            var canvasData = this.canvasData, imageData = this.imageData;
-            if (transformed) {
-              var _getRotatedSizes = getRotatedSizes({
-                width: imageData.naturalWidth * Math.abs(imageData.scaleX || 1),
-                height: imageData.naturalHeight * Math.abs(imageData.scaleY || 1),
-                degree: imageData.rotate || 0
-              }), naturalWidth = _getRotatedSizes.width, naturalHeight = _getRotatedSizes.height;
-              var width = canvasData.width * (naturalWidth / canvasData.naturalWidth);
-              var height = canvasData.height * (naturalHeight / canvasData.naturalHeight);
-              canvasData.left -= (width - canvasData.width) / 2;
-              canvasData.top -= (height - canvasData.height) / 2;
-              canvasData.width = width;
-              canvasData.height = height;
-              canvasData.aspectRatio = naturalWidth / naturalHeight;
-              canvasData.naturalWidth = naturalWidth;
-              canvasData.naturalHeight = naturalHeight;
-              this.limitCanvas(true, false);
-            }
-            if (canvasData.width > canvasData.maxWidth || canvasData.width < canvasData.minWidth) {
-              canvasData.left = canvasData.oldLeft;
-            }
-            if (canvasData.height > canvasData.maxHeight || canvasData.height < canvasData.minHeight) {
-              canvasData.top = canvasData.oldTop;
-            }
-            canvasData.width = Math.min(Math.max(canvasData.width, canvasData.minWidth), canvasData.maxWidth);
-            canvasData.height = Math.min(Math.max(canvasData.height, canvasData.minHeight), canvasData.maxHeight);
-            this.limitCanvas(false, true);
-            canvasData.left = Math.min(Math.max(canvasData.left, canvasData.minLeft), canvasData.maxLeft);
-            canvasData.top = Math.min(Math.max(canvasData.top, canvasData.minTop), canvasData.maxTop);
-            canvasData.oldLeft = canvasData.left;
-            canvasData.oldTop = canvasData.top;
-            setStyle2(this.canvas, assign({
-              width: canvasData.width,
-              height: canvasData.height
-            }, getTransforms({
-              translateX: canvasData.left,
-              translateY: canvasData.top
-            })));
-            this.renderImage(changed);
-            if (this.cropped && this.limited) {
-              this.limitCropBox(true, true);
-            }
-          },
-          renderImage: function renderImage(changed) {
-            var canvasData = this.canvasData, imageData = this.imageData;
-            var width = imageData.naturalWidth * (canvasData.width / canvasData.naturalWidth);
-            var height = imageData.naturalHeight * (canvasData.height / canvasData.naturalHeight);
-            assign(imageData, {
-              width,
-              height,
-              left: (canvasData.width - width) / 2,
-              top: (canvasData.height - height) / 2
-            });
-            setStyle2(this.image, assign({
-              width: imageData.width,
-              height: imageData.height
-            }, getTransforms(assign({
-              translateX: imageData.left,
-              translateY: imageData.top
-            }, imageData))));
-            if (changed) {
-              this.output();
-            }
-          },
-          initCropBox: function initCropBox() {
-            var options = this.options, canvasData = this.canvasData;
-            var aspectRatio = options.aspectRatio || options.initialAspectRatio;
-            var autoCropArea = Number(options.autoCropArea) || 0.8;
-            var cropBoxData = {
-              width: canvasData.width,
-              height: canvasData.height
-            };
-            if (aspectRatio) {
-              if (canvasData.height * aspectRatio > canvasData.width) {
-                cropBoxData.height = cropBoxData.width / aspectRatio;
-              } else {
-                cropBoxData.width = cropBoxData.height * aspectRatio;
-              }
-            }
-            this.cropBoxData = cropBoxData;
-            this.limitCropBox(true, true);
-            cropBoxData.width = Math.min(Math.max(cropBoxData.width, cropBoxData.minWidth), cropBoxData.maxWidth);
-            cropBoxData.height = Math.min(Math.max(cropBoxData.height, cropBoxData.minHeight), cropBoxData.maxHeight);
-            cropBoxData.width = Math.max(cropBoxData.minWidth, cropBoxData.width * autoCropArea);
-            cropBoxData.height = Math.max(cropBoxData.minHeight, cropBoxData.height * autoCropArea);
-            cropBoxData.left = canvasData.left + (canvasData.width - cropBoxData.width) / 2;
-            cropBoxData.top = canvasData.top + (canvasData.height - cropBoxData.height) / 2;
-            cropBoxData.oldLeft = cropBoxData.left;
-            cropBoxData.oldTop = cropBoxData.top;
-            this.initialCropBoxData = assign({}, cropBoxData);
-          },
-          limitCropBox: function limitCropBox(sizeLimited, positionLimited) {
-            var options = this.options, containerData = this.containerData, canvasData = this.canvasData, cropBoxData = this.cropBoxData, limited = this.limited;
-            var aspectRatio = options.aspectRatio;
-            if (sizeLimited) {
-              var minCropBoxWidth = Number(options.minCropBoxWidth) || 0;
-              var minCropBoxHeight = Number(options.minCropBoxHeight) || 0;
-              var maxCropBoxWidth = limited ? Math.min(containerData.width, canvasData.width, canvasData.width + canvasData.left, containerData.width - canvasData.left) : containerData.width;
-              var maxCropBoxHeight = limited ? Math.min(containerData.height, canvasData.height, canvasData.height + canvasData.top, containerData.height - canvasData.top) : containerData.height;
-              minCropBoxWidth = Math.min(minCropBoxWidth, containerData.width);
-              minCropBoxHeight = Math.min(minCropBoxHeight, containerData.height);
-              if (aspectRatio) {
-                if (minCropBoxWidth && minCropBoxHeight) {
-                  if (minCropBoxHeight * aspectRatio > minCropBoxWidth) {
-                    minCropBoxHeight = minCropBoxWidth / aspectRatio;
-                  } else {
-                    minCropBoxWidth = minCropBoxHeight * aspectRatio;
-                  }
-                } else if (minCropBoxWidth) {
-                  minCropBoxHeight = minCropBoxWidth / aspectRatio;
-                } else if (minCropBoxHeight) {
-                  minCropBoxWidth = minCropBoxHeight * aspectRatio;
-                }
-                if (maxCropBoxHeight * aspectRatio > maxCropBoxWidth) {
-                  maxCropBoxHeight = maxCropBoxWidth / aspectRatio;
-                } else {
-                  maxCropBoxWidth = maxCropBoxHeight * aspectRatio;
-                }
-              }
-              cropBoxData.minWidth = Math.min(minCropBoxWidth, maxCropBoxWidth);
-              cropBoxData.minHeight = Math.min(minCropBoxHeight, maxCropBoxHeight);
-              cropBoxData.maxWidth = maxCropBoxWidth;
-              cropBoxData.maxHeight = maxCropBoxHeight;
-            }
-            if (positionLimited) {
-              if (limited) {
-                cropBoxData.minLeft = Math.max(0, canvasData.left);
-                cropBoxData.minTop = Math.max(0, canvasData.top);
-                cropBoxData.maxLeft = Math.min(containerData.width, canvasData.left + canvasData.width) - cropBoxData.width;
-                cropBoxData.maxTop = Math.min(containerData.height, canvasData.top + canvasData.height) - cropBoxData.height;
-              } else {
-                cropBoxData.minLeft = 0;
-                cropBoxData.minTop = 0;
-                cropBoxData.maxLeft = containerData.width - cropBoxData.width;
-                cropBoxData.maxTop = containerData.height - cropBoxData.height;
-              }
-            }
-          },
-          renderCropBox: function renderCropBox() {
-            var options = this.options, containerData = this.containerData, cropBoxData = this.cropBoxData;
-            if (cropBoxData.width > cropBoxData.maxWidth || cropBoxData.width < cropBoxData.minWidth) {
-              cropBoxData.left = cropBoxData.oldLeft;
-            }
-            if (cropBoxData.height > cropBoxData.maxHeight || cropBoxData.height < cropBoxData.minHeight) {
-              cropBoxData.top = cropBoxData.oldTop;
-            }
-            cropBoxData.width = Math.min(Math.max(cropBoxData.width, cropBoxData.minWidth), cropBoxData.maxWidth);
-            cropBoxData.height = Math.min(Math.max(cropBoxData.height, cropBoxData.minHeight), cropBoxData.maxHeight);
-            this.limitCropBox(false, true);
-            cropBoxData.left = Math.min(Math.max(cropBoxData.left, cropBoxData.minLeft), cropBoxData.maxLeft);
-            cropBoxData.top = Math.min(Math.max(cropBoxData.top, cropBoxData.minTop), cropBoxData.maxTop);
-            cropBoxData.oldLeft = cropBoxData.left;
-            cropBoxData.oldTop = cropBoxData.top;
-            if (options.movable && options.cropBoxMovable) {
-              setData(this.face, DATA_ACTION, cropBoxData.width >= containerData.width && cropBoxData.height >= containerData.height ? ACTION_MOVE : ACTION_ALL);
-            }
-            setStyle2(this.cropBox, assign({
-              width: cropBoxData.width,
-              height: cropBoxData.height
-            }, getTransforms({
-              translateX: cropBoxData.left,
-              translateY: cropBoxData.top
-            })));
-            if (this.cropped && this.limited) {
-              this.limitCanvas(true, true);
-            }
-            if (!this.disabled) {
-              this.output();
-            }
-          },
-          output: function output() {
-            this.preview();
-            dispatchEvent(this.element, EVENT_CROP, this.getData());
-          }
-        };
-        var preview = {
-          initPreview: function initPreview() {
-            var element = this.element, crossOrigin = this.crossOrigin;
-            var preview2 = this.options.preview;
-            var url = crossOrigin ? this.crossOriginUrl : this.url;
-            var alt = element.alt || "The image to preview";
-            var image = document.createElement("img");
-            if (crossOrigin) {
-              image.crossOrigin = crossOrigin;
-            }
-            image.src = url;
-            image.alt = alt;
-            this.viewBox.appendChild(image);
-            this.viewBoxImage = image;
-            if (!preview2) {
-              return;
-            }
-            var previews = preview2;
-            if (typeof preview2 === "string") {
-              previews = element.ownerDocument.querySelectorAll(preview2);
-            } else if (preview2.querySelector) {
-              previews = [preview2];
-            }
-            this.previews = previews;
-            forEach(previews, function(el) {
-              var img = document.createElement("img");
-              setData(el, DATA_PREVIEW, {
-                width: el.offsetWidth,
-                height: el.offsetHeight,
-                html: el.innerHTML
-              });
-              if (crossOrigin) {
-                img.crossOrigin = crossOrigin;
-              }
-              img.src = url;
-              img.alt = alt;
-              img.style.cssText = 'display:block;width:100%;height:auto;min-width:0!important;min-height:0!important;max-width:none!important;max-height:none!important;image-orientation:0deg!important;"';
-              el.innerHTML = "";
-              el.appendChild(img);
-            });
-          },
-          resetPreview: function resetPreview() {
-            forEach(this.previews, function(element) {
-              var data2 = getData(element, DATA_PREVIEW);
-              setStyle2(element, {
-                width: data2.width,
-                height: data2.height
-              });
-              element.innerHTML = data2.html;
-              removeData(element, DATA_PREVIEW);
-            });
-          },
-          preview: function preview2() {
-            var imageData = this.imageData, canvasData = this.canvasData, cropBoxData = this.cropBoxData;
-            var cropBoxWidth = cropBoxData.width, cropBoxHeight = cropBoxData.height;
-            var width = imageData.width, height = imageData.height;
-            var left2 = cropBoxData.left - canvasData.left - imageData.left;
-            var top2 = cropBoxData.top - canvasData.top - imageData.top;
-            if (!this.cropped || this.disabled) {
-              return;
-            }
-            setStyle2(this.viewBoxImage, assign({
-              width,
-              height
-            }, getTransforms(assign({
-              translateX: -left2,
-              translateY: -top2
-            }, imageData))));
-            forEach(this.previews, function(element) {
-              var data2 = getData(element, DATA_PREVIEW);
-              var originalWidth = data2.width;
-              var originalHeight = data2.height;
-              var newWidth = originalWidth;
-              var newHeight = originalHeight;
-              var ratio = 1;
-              if (cropBoxWidth) {
-                ratio = originalWidth / cropBoxWidth;
-                newHeight = cropBoxHeight * ratio;
-              }
-              if (cropBoxHeight && newHeight > originalHeight) {
-                ratio = originalHeight / cropBoxHeight;
-                newWidth = cropBoxWidth * ratio;
-                newHeight = originalHeight;
-              }
-              setStyle2(element, {
-                width: newWidth,
-                height: newHeight
-              });
-              setStyle2(element.getElementsByTagName("img")[0], assign({
-                width: width * ratio,
-                height: height * ratio
-              }, getTransforms(assign({
-                translateX: -left2 * ratio,
-                translateY: -top2 * ratio
-              }, imageData))));
-            });
-          }
-        };
-        var events = {
-          bind: function bind() {
-            var element = this.element, options = this.options, cropper2 = this.cropper;
-            if (isFunction2(options.cropstart)) {
-              addListener2(element, EVENT_CROP_START, options.cropstart);
-            }
-            if (isFunction2(options.cropmove)) {
-              addListener2(element, EVENT_CROP_MOVE, options.cropmove);
-            }
-            if (isFunction2(options.cropend)) {
-              addListener2(element, EVENT_CROP_END, options.cropend);
-            }
-            if (isFunction2(options.crop)) {
-              addListener2(element, EVENT_CROP, options.crop);
-            }
-            if (isFunction2(options.zoom)) {
-              addListener2(element, EVENT_ZOOM, options.zoom);
-            }
-            addListener2(cropper2, EVENT_POINTER_DOWN, this.onCropStart = this.cropStart.bind(this));
-            if (options.zoomable && options.zoomOnWheel) {
-              addListener2(cropper2, EVENT_WHEEL, this.onWheel = this.wheel.bind(this), {
-                passive: false,
-                capture: true
-              });
-            }
-            if (options.toggleDragModeOnDblclick) {
-              addListener2(cropper2, EVENT_DBLCLICK, this.onDblclick = this.dblclick.bind(this));
-            }
-            addListener2(element.ownerDocument, EVENT_POINTER_MOVE, this.onCropMove = this.cropMove.bind(this));
-            addListener2(element.ownerDocument, EVENT_POINTER_UP, this.onCropEnd = this.cropEnd.bind(this));
-            if (options.responsive) {
-              addListener2(window, EVENT_RESIZE, this.onResize = this.resize.bind(this));
-            }
-          },
-          unbind: function unbind() {
-            var element = this.element, options = this.options, cropper2 = this.cropper;
-            if (isFunction2(options.cropstart)) {
-              removeListener2(element, EVENT_CROP_START, options.cropstart);
-            }
-            if (isFunction2(options.cropmove)) {
-              removeListener2(element, EVENT_CROP_MOVE, options.cropmove);
-            }
-            if (isFunction2(options.cropend)) {
-              removeListener2(element, EVENT_CROP_END, options.cropend);
-            }
-            if (isFunction2(options.crop)) {
-              removeListener2(element, EVENT_CROP, options.crop);
-            }
-            if (isFunction2(options.zoom)) {
-              removeListener2(element, EVENT_ZOOM, options.zoom);
-            }
-            removeListener2(cropper2, EVENT_POINTER_DOWN, this.onCropStart);
-            if (options.zoomable && options.zoomOnWheel) {
-              removeListener2(cropper2, EVENT_WHEEL, this.onWheel, {
-                passive: false,
-                capture: true
-              });
-            }
-            if (options.toggleDragModeOnDblclick) {
-              removeListener2(cropper2, EVENT_DBLCLICK, this.onDblclick);
-            }
-            removeListener2(element.ownerDocument, EVENT_POINTER_MOVE, this.onCropMove);
-            removeListener2(element.ownerDocument, EVENT_POINTER_UP, this.onCropEnd);
-            if (options.responsive) {
-              removeListener2(window, EVENT_RESIZE, this.onResize);
-            }
-          }
-        };
-        var handlers = {
-          resize: function resize() {
-            if (this.disabled) {
-              return;
-            }
-            var options = this.options, container = this.container, containerData = this.containerData;
-            var ratioX = container.offsetWidth / containerData.width;
-            var ratioY = container.offsetHeight / containerData.height;
-            var ratio = Math.abs(ratioX - 1) > Math.abs(ratioY - 1) ? ratioX : ratioY;
-            if (ratio !== 1) {
-              var canvasData;
-              var cropBoxData;
-              if (options.restore) {
-                canvasData = this.getCanvasData();
-                cropBoxData = this.getCropBoxData();
-              }
-              this.render();
-              if (options.restore) {
-                this.setCanvasData(forEach(canvasData, function(n2, i) {
-                  canvasData[i] = n2 * ratio;
-                }));
-                this.setCropBoxData(forEach(cropBoxData, function(n2, i) {
-                  cropBoxData[i] = n2 * ratio;
-                }));
-              }
-            }
-          },
-          dblclick: function dblclick() {
-            if (this.disabled || this.options.dragMode === DRAG_MODE_NONE) {
-              return;
-            }
-            this.setDragMode(hasClass(this.dragBox, CLASS_CROP) ? DRAG_MODE_MOVE : DRAG_MODE_CROP);
-          },
-          wheel: function wheel(event3) {
-            var _this = this;
-            var ratio = Number(this.options.wheelZoomRatio) || 0.1;
-            var delta = 1;
-            if (this.disabled) {
-              return;
-            }
-            event3.preventDefault();
-            if (this.wheeling) {
-              return;
-            }
-            this.wheeling = true;
-            setTimeout(function() {
-              _this.wheeling = false;
-            }, 50);
-            if (event3.deltaY) {
-              delta = event3.deltaY > 0 ? 1 : -1;
-            } else if (event3.wheelDelta) {
-              delta = -event3.wheelDelta / 120;
-            } else if (event3.detail) {
-              delta = event3.detail > 0 ? 1 : -1;
-            }
-            this.zoom(-delta * ratio, event3);
-          },
-          cropStart: function cropStart(event3) {
-            var buttons = event3.buttons, button2 = event3.button;
-            if (this.disabled || (event3.type === "mousedown" || event3.type === "pointerdown" && event3.pointerType === "mouse") && // No primary button (Usually the left button)
-            (isNumber3(buttons) && buttons !== 1 || isNumber3(button2) && button2 !== 0 || event3.ctrlKey)) {
-              return;
-            }
-            var options = this.options, pointers = this.pointers;
-            var action;
-            if (event3.changedTouches) {
-              forEach(event3.changedTouches, function(touch) {
-                pointers[touch.identifier] = getPointer(touch);
-              });
-            } else {
-              pointers[event3.pointerId || 0] = getPointer(event3);
-            }
-            if (Object.keys(pointers).length > 1 && options.zoomable && options.zoomOnTouch) {
-              action = ACTION_ZOOM;
-            } else {
-              action = getData(event3.target, DATA_ACTION);
-            }
-            if (!REGEXP_ACTIONS.test(action)) {
-              return;
-            }
-            if (dispatchEvent(this.element, EVENT_CROP_START, {
-              originalEvent: event3,
-              action
-            }) === false) {
-              return;
-            }
-            event3.preventDefault();
-            this.action = action;
-            this.cropping = false;
-            if (action === ACTION_CROP) {
-              this.cropping = true;
-              addClass(this.dragBox, CLASS_MODAL);
-            }
-          },
-          cropMove: function cropMove(event3) {
-            var action = this.action;
-            if (this.disabled || !action) {
-              return;
-            }
-            var pointers = this.pointers;
-            event3.preventDefault();
-            if (dispatchEvent(this.element, EVENT_CROP_MOVE, {
-              originalEvent: event3,
-              action
-            }) === false) {
-              return;
-            }
-            if (event3.changedTouches) {
-              forEach(event3.changedTouches, function(touch) {
-                assign(pointers[touch.identifier] || {}, getPointer(touch, true));
-              });
-            } else {
-              assign(pointers[event3.pointerId || 0] || {}, getPointer(event3, true));
-            }
-            this.change(event3);
-          },
-          cropEnd: function cropEnd(event3) {
-            if (this.disabled) {
-              return;
-            }
-            var action = this.action, pointers = this.pointers;
-            if (event3.changedTouches) {
-              forEach(event3.changedTouches, function(touch) {
-                delete pointers[touch.identifier];
-              });
-            } else {
-              delete pointers[event3.pointerId || 0];
-            }
-            if (!action) {
-              return;
-            }
-            event3.preventDefault();
-            if (!Object.keys(pointers).length) {
-              this.action = "";
-            }
-            if (this.cropping) {
-              this.cropping = false;
-              toggleClass(this.dragBox, CLASS_MODAL, this.cropped && this.options.modal);
-            }
-            dispatchEvent(this.element, EVENT_CROP_END, {
-              originalEvent: event3,
-              action
-            });
-          }
-        };
-        var change = {
-          change: function change2(event3) {
-            var options = this.options, canvasData = this.canvasData, containerData = this.containerData, cropBoxData = this.cropBoxData, pointers = this.pointers;
-            var action = this.action;
-            var aspectRatio = options.aspectRatio;
-            var left2 = cropBoxData.left, top2 = cropBoxData.top, width = cropBoxData.width, height = cropBoxData.height;
-            var right2 = left2 + width;
-            var bottom2 = top2 + height;
-            var minLeft = 0;
-            var minTop = 0;
-            var maxWidth = containerData.width;
-            var maxHeight = containerData.height;
-            var renderable = true;
-            var offset3;
-            if (!aspectRatio && event3.shiftKey) {
-              aspectRatio = width && height ? width / height : 1;
-            }
-            if (this.limited) {
-              minLeft = cropBoxData.minLeft;
-              minTop = cropBoxData.minTop;
-              maxWidth = minLeft + Math.min(containerData.width, canvasData.width, canvasData.left + canvasData.width);
-              maxHeight = minTop + Math.min(containerData.height, canvasData.height, canvasData.top + canvasData.height);
-            }
-            var pointer = pointers[Object.keys(pointers)[0]];
-            var range = {
-              x: pointer.endX - pointer.startX,
-              y: pointer.endY - pointer.startY
-            };
-            var check = function check2(side) {
-              switch (side) {
-                case ACTION_EAST:
-                  if (right2 + range.x > maxWidth) {
-                    range.x = maxWidth - right2;
-                  }
-                  break;
-                case ACTION_WEST:
-                  if (left2 + range.x < minLeft) {
-                    range.x = minLeft - left2;
-                  }
-                  break;
-                case ACTION_NORTH:
-                  if (top2 + range.y < minTop) {
-                    range.y = minTop - top2;
-                  }
-                  break;
-                case ACTION_SOUTH:
-                  if (bottom2 + range.y > maxHeight) {
-                    range.y = maxHeight - bottom2;
-                  }
-                  break;
-              }
-            };
-            switch (action) {
-              // Move crop box
-              case ACTION_ALL:
-                left2 += range.x;
-                top2 += range.y;
-                break;
-              // Resize crop box
-              case ACTION_EAST:
-                if (range.x >= 0 && (right2 >= maxWidth || aspectRatio && (top2 <= minTop || bottom2 >= maxHeight))) {
-                  renderable = false;
-                  break;
-                }
-                check(ACTION_EAST);
-                width += range.x;
-                if (width < 0) {
-                  action = ACTION_WEST;
-                  width = -width;
-                  left2 -= width;
-                }
-                if (aspectRatio) {
-                  height = width / aspectRatio;
-                  top2 += (cropBoxData.height - height) / 2;
-                }
-                break;
-              case ACTION_NORTH:
-                if (range.y <= 0 && (top2 <= minTop || aspectRatio && (left2 <= minLeft || right2 >= maxWidth))) {
-                  renderable = false;
-                  break;
-                }
-                check(ACTION_NORTH);
-                height -= range.y;
-                top2 += range.y;
-                if (height < 0) {
-                  action = ACTION_SOUTH;
-                  height = -height;
-                  top2 -= height;
-                }
-                if (aspectRatio) {
-                  width = height * aspectRatio;
-                  left2 += (cropBoxData.width - width) / 2;
-                }
-                break;
-              case ACTION_WEST:
-                if (range.x <= 0 && (left2 <= minLeft || aspectRatio && (top2 <= minTop || bottom2 >= maxHeight))) {
-                  renderable = false;
-                  break;
-                }
-                check(ACTION_WEST);
-                width -= range.x;
-                left2 += range.x;
-                if (width < 0) {
-                  action = ACTION_EAST;
-                  width = -width;
-                  left2 -= width;
-                }
-                if (aspectRatio) {
-                  height = width / aspectRatio;
-                  top2 += (cropBoxData.height - height) / 2;
-                }
-                break;
-              case ACTION_SOUTH:
-                if (range.y >= 0 && (bottom2 >= maxHeight || aspectRatio && (left2 <= minLeft || right2 >= maxWidth))) {
-                  renderable = false;
-                  break;
-                }
-                check(ACTION_SOUTH);
-                height += range.y;
-                if (height < 0) {
-                  action = ACTION_NORTH;
-                  height = -height;
-                  top2 -= height;
-                }
-                if (aspectRatio) {
-                  width = height * aspectRatio;
-                  left2 += (cropBoxData.width - width) / 2;
-                }
-                break;
-              case ACTION_NORTH_EAST:
-                if (aspectRatio) {
-                  if (range.y <= 0 && (top2 <= minTop || right2 >= maxWidth)) {
-                    renderable = false;
-                    break;
-                  }
-                  check(ACTION_NORTH);
-                  height -= range.y;
-                  top2 += range.y;
-                  width = height * aspectRatio;
-                } else {
-                  check(ACTION_NORTH);
-                  check(ACTION_EAST);
-                  if (range.x >= 0) {
-                    if (right2 < maxWidth) {
-                      width += range.x;
-                    } else if (range.y <= 0 && top2 <= minTop) {
-                      renderable = false;
-                    }
-                  } else {
-                    width += range.x;
-                  }
-                  if (range.y <= 0) {
-                    if (top2 > minTop) {
-                      height -= range.y;
-                      top2 += range.y;
-                    }
-                  } else {
-                    height -= range.y;
-                    top2 += range.y;
-                  }
-                }
-                if (width < 0 && height < 0) {
-                  action = ACTION_SOUTH_WEST;
-                  height = -height;
-                  width = -width;
-                  top2 -= height;
-                  left2 -= width;
-                } else if (width < 0) {
-                  action = ACTION_NORTH_WEST;
-                  width = -width;
-                  left2 -= width;
-                } else if (height < 0) {
-                  action = ACTION_SOUTH_EAST;
-                  height = -height;
-                  top2 -= height;
-                }
-                break;
-              case ACTION_NORTH_WEST:
-                if (aspectRatio) {
-                  if (range.y <= 0 && (top2 <= minTop || left2 <= minLeft)) {
-                    renderable = false;
-                    break;
-                  }
-                  check(ACTION_NORTH);
-                  height -= range.y;
-                  top2 += range.y;
-                  width = height * aspectRatio;
-                  left2 += cropBoxData.width - width;
-                } else {
-                  check(ACTION_NORTH);
-                  check(ACTION_WEST);
-                  if (range.x <= 0) {
-                    if (left2 > minLeft) {
-                      width -= range.x;
-                      left2 += range.x;
-                    } else if (range.y <= 0 && top2 <= minTop) {
-                      renderable = false;
-                    }
-                  } else {
-                    width -= range.x;
-                    left2 += range.x;
-                  }
-                  if (range.y <= 0) {
-                    if (top2 > minTop) {
-                      height -= range.y;
-                      top2 += range.y;
-                    }
-                  } else {
-                    height -= range.y;
-                    top2 += range.y;
-                  }
-                }
-                if (width < 0 && height < 0) {
-                  action = ACTION_SOUTH_EAST;
-                  height = -height;
-                  width = -width;
-                  top2 -= height;
-                  left2 -= width;
-                } else if (width < 0) {
-                  action = ACTION_NORTH_EAST;
-                  width = -width;
-                  left2 -= width;
-                } else if (height < 0) {
-                  action = ACTION_SOUTH_WEST;
-                  height = -height;
-                  top2 -= height;
-                }
-                break;
-              case ACTION_SOUTH_WEST:
-                if (aspectRatio) {
-                  if (range.x <= 0 && (left2 <= minLeft || bottom2 >= maxHeight)) {
-                    renderable = false;
-                    break;
-                  }
-                  check(ACTION_WEST);
-                  width -= range.x;
-                  left2 += range.x;
-                  height = width / aspectRatio;
-                } else {
-                  check(ACTION_SOUTH);
-                  check(ACTION_WEST);
-                  if (range.x <= 0) {
-                    if (left2 > minLeft) {
-                      width -= range.x;
-                      left2 += range.x;
-                    } else if (range.y >= 0 && bottom2 >= maxHeight) {
-                      renderable = false;
-                    }
-                  } else {
-                    width -= range.x;
-                    left2 += range.x;
-                  }
-                  if (range.y >= 0) {
-                    if (bottom2 < maxHeight) {
-                      height += range.y;
-                    }
-                  } else {
-                    height += range.y;
-                  }
-                }
-                if (width < 0 && height < 0) {
-                  action = ACTION_NORTH_EAST;
-                  height = -height;
-                  width = -width;
-                  top2 -= height;
-                  left2 -= width;
-                } else if (width < 0) {
-                  action = ACTION_SOUTH_EAST;
-                  width = -width;
-                  left2 -= width;
-                } else if (height < 0) {
-                  action = ACTION_NORTH_WEST;
-                  height = -height;
-                  top2 -= height;
-                }
-                break;
-              case ACTION_SOUTH_EAST:
-                if (aspectRatio) {
-                  if (range.x >= 0 && (right2 >= maxWidth || bottom2 >= maxHeight)) {
-                    renderable = false;
-                    break;
-                  }
-                  check(ACTION_EAST);
-                  width += range.x;
-                  height = width / aspectRatio;
-                } else {
-                  check(ACTION_SOUTH);
-                  check(ACTION_EAST);
-                  if (range.x >= 0) {
-                    if (right2 < maxWidth) {
-                      width += range.x;
-                    } else if (range.y >= 0 && bottom2 >= maxHeight) {
-                      renderable = false;
-                    }
-                  } else {
-                    width += range.x;
-                  }
-                  if (range.y >= 0) {
-                    if (bottom2 < maxHeight) {
-                      height += range.y;
-                    }
-                  } else {
-                    height += range.y;
-                  }
-                }
-                if (width < 0 && height < 0) {
-                  action = ACTION_NORTH_WEST;
-                  height = -height;
-                  width = -width;
-                  top2 -= height;
-                  left2 -= width;
-                } else if (width < 0) {
-                  action = ACTION_SOUTH_WEST;
-                  width = -width;
-                  left2 -= width;
-                } else if (height < 0) {
-                  action = ACTION_NORTH_EAST;
-                  height = -height;
-                  top2 -= height;
-                }
-                break;
-              // Move canvas
-              case ACTION_MOVE:
-                this.move(range.x, range.y);
-                renderable = false;
-                break;
-              // Zoom canvas
-              case ACTION_ZOOM:
-                this.zoom(getMaxZoomRatio(pointers), event3);
-                renderable = false;
-                break;
-              // Create crop box
-              case ACTION_CROP:
-                if (!range.x || !range.y) {
-                  renderable = false;
-                  break;
-                }
-                offset3 = getOffset(this.cropper);
-                left2 = pointer.startX - offset3.left;
-                top2 = pointer.startY - offset3.top;
-                width = cropBoxData.minWidth;
-                height = cropBoxData.minHeight;
-                if (range.x > 0) {
-                  action = range.y > 0 ? ACTION_SOUTH_EAST : ACTION_NORTH_EAST;
-                } else if (range.x < 0) {
-                  left2 -= width;
-                  action = range.y > 0 ? ACTION_SOUTH_WEST : ACTION_NORTH_WEST;
-                }
-                if (range.y < 0) {
-                  top2 -= height;
-                }
-                if (!this.cropped) {
-                  removeClass(this.cropBox, CLASS_HIDDEN);
-                  this.cropped = true;
-                  if (this.limited) {
-                    this.limitCropBox(true, true);
-                  }
-                }
-                break;
-            }
-            if (renderable) {
-              cropBoxData.width = width;
-              cropBoxData.height = height;
-              cropBoxData.left = left2;
-              cropBoxData.top = top2;
-              this.action = action;
-              this.renderCropBox();
-            }
-            forEach(pointers, function(p) {
-              p.startX = p.endX;
-              p.startY = p.endY;
-            });
-          }
-        };
-        var methods = {
-          // Show the crop box manually
-          crop: function crop() {
-            if (this.ready && !this.cropped && !this.disabled) {
-              this.cropped = true;
-              this.limitCropBox(true, true);
-              if (this.options.modal) {
-                addClass(this.dragBox, CLASS_MODAL);
-              }
-              removeClass(this.cropBox, CLASS_HIDDEN);
-              this.setCropBoxData(this.initialCropBoxData);
-            }
-            return this;
-          },
-          // Reset the image and crop box to their initial states
-          reset: function reset() {
-            if (this.ready && !this.disabled) {
-              this.imageData = assign({}, this.initialImageData);
-              this.canvasData = assign({}, this.initialCanvasData);
-              this.cropBoxData = assign({}, this.initialCropBoxData);
-              this.renderCanvas();
-              if (this.cropped) {
-                this.renderCropBox();
-              }
-            }
-            return this;
-          },
-          // Clear the crop box
-          clear: function clear() {
-            if (this.cropped && !this.disabled) {
-              assign(this.cropBoxData, {
-                left: 0,
-                top: 0,
-                width: 0,
-                height: 0
-              });
-              this.cropped = false;
-              this.renderCropBox();
-              this.limitCanvas(true, true);
-              this.renderCanvas();
-              removeClass(this.dragBox, CLASS_MODAL);
-              addClass(this.cropBox, CLASS_HIDDEN);
-            }
-            return this;
-          },
-          /**
-           * Replace the image's src and rebuild the cropper
-           * @param {string} url - The new URL.
-           * @param {boolean} [hasSameSize] - Indicate if the new image has the same size as the old one.
-           * @returns {Cropper} this
-           */
-          replace: function replace(url) {
-            var hasSameSize = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : false;
-            if (!this.disabled && url) {
-              if (this.isImg) {
-                this.element.src = url;
-              }
-              if (hasSameSize) {
-                this.url = url;
-                this.image.src = url;
-                if (this.ready) {
-                  this.viewBoxImage.src = url;
-                  forEach(this.previews, function(element) {
-                    element.getElementsByTagName("img")[0].src = url;
-                  });
-                }
-              } else {
-                if (this.isImg) {
-                  this.replaced = true;
-                }
-                this.options.data = null;
-                this.uncreate();
-                this.load(url);
-              }
-            }
-            return this;
-          },
-          // Enable (unfreeze) the cropper
-          enable: function enable() {
-            if (this.ready && this.disabled) {
-              this.disabled = false;
-              removeClass(this.cropper, CLASS_DISABLED);
-            }
-            return this;
-          },
-          // Disable (freeze) the cropper
-          disable: function disable() {
-            if (this.ready && !this.disabled) {
-              this.disabled = true;
-              addClass(this.cropper, CLASS_DISABLED);
-            }
-            return this;
-          },
-          /**
-           * Destroy the cropper and remove the instance from the image
-           * @returns {Cropper} this
-           */
-          destroy: function destroy() {
-            var element = this.element;
-            if (!element[NAMESPACE]) {
-              return this;
-            }
-            element[NAMESPACE] = void 0;
-            if (this.isImg && this.replaced) {
-              element.src = this.originalUrl;
-            }
-            this.uncreate();
-            return this;
-          },
-          /**
-           * Move the canvas with relative offsets
-           * @param {number} offsetX - The relative offset distance on the x-axis.
-           * @param {number} [offsetY=offsetX] - The relative offset distance on the y-axis.
-           * @returns {Cropper} this
-           */
-          move: function move(offsetX) {
-            var offsetY = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : offsetX;
-            var _this$canvasData = this.canvasData, left2 = _this$canvasData.left, top2 = _this$canvasData.top;
-            return this.moveTo(isUndefined2(offsetX) ? offsetX : left2 + Number(offsetX), isUndefined2(offsetY) ? offsetY : top2 + Number(offsetY));
-          },
-          /**
-           * Move the canvas to an absolute point
-           * @param {number} x - The x-axis coordinate.
-           * @param {number} [y=x] - The y-axis coordinate.
-           * @returns {Cropper} this
-           */
-          moveTo: function moveTo(x) {
-            var y = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : x;
-            var canvasData = this.canvasData;
-            var changed = false;
-            x = Number(x);
-            y = Number(y);
-            if (this.ready && !this.disabled && this.options.movable) {
-              if (isNumber3(x)) {
-                canvasData.left = x;
-                changed = true;
-              }
-              if (isNumber3(y)) {
-                canvasData.top = y;
-                changed = true;
-              }
-              if (changed) {
-                this.renderCanvas(true);
-              }
-            }
-            return this;
-          },
-          /**
-           * Zoom the canvas with a relative ratio
-           * @param {number} ratio - The target ratio.
-           * @param {Event} _originalEvent - The original event if any.
-           * @returns {Cropper} this
-           */
-          zoom: function zoom(ratio, _originalEvent) {
-            var canvasData = this.canvasData;
-            ratio = Number(ratio);
-            if (ratio < 0) {
-              ratio = 1 / (1 - ratio);
-            } else {
-              ratio = 1 + ratio;
-            }
-            return this.zoomTo(canvasData.width * ratio / canvasData.naturalWidth, null, _originalEvent);
-          },
-          /**
-           * Zoom the canvas to an absolute ratio
-           * @param {number} ratio - The target ratio.
-           * @param {Object} pivot - The zoom pivot point coordinate.
-           * @param {Event} _originalEvent - The original event if any.
-           * @returns {Cropper} this
-           */
-          zoomTo: function zoomTo(ratio, pivot, _originalEvent) {
-            var options = this.options, canvasData = this.canvasData;
-            var width = canvasData.width, height = canvasData.height, naturalWidth = canvasData.naturalWidth, naturalHeight = canvasData.naturalHeight;
-            ratio = Number(ratio);
-            if (ratio >= 0 && this.ready && !this.disabled && options.zoomable) {
-              var newWidth = naturalWidth * ratio;
-              var newHeight = naturalHeight * ratio;
-              if (dispatchEvent(this.element, EVENT_ZOOM, {
-                ratio,
-                oldRatio: width / naturalWidth,
-                originalEvent: _originalEvent
-              }) === false) {
-                return this;
-              }
-              if (_originalEvent) {
-                var pointers = this.pointers;
-                var offset3 = getOffset(this.cropper);
-                var center = pointers && Object.keys(pointers).length ? getPointersCenter(pointers) : {
-                  pageX: _originalEvent.pageX,
-                  pageY: _originalEvent.pageY
-                };
-                canvasData.left -= (newWidth - width) * ((center.pageX - offset3.left - canvasData.left) / width);
-                canvasData.top -= (newHeight - height) * ((center.pageY - offset3.top - canvasData.top) / height);
-              } else if (isPlainObject(pivot) && isNumber3(pivot.x) && isNumber3(pivot.y)) {
-                canvasData.left -= (newWidth - width) * ((pivot.x - canvasData.left) / width);
-                canvasData.top -= (newHeight - height) * ((pivot.y - canvasData.top) / height);
-              } else {
-                canvasData.left -= (newWidth - width) / 2;
-                canvasData.top -= (newHeight - height) / 2;
-              }
-              canvasData.width = newWidth;
-              canvasData.height = newHeight;
-              this.renderCanvas(true);
-            }
-            return this;
-          },
-          /**
-           * Rotate the canvas with a relative degree
-           * @param {number} degree - The rotate degree.
-           * @returns {Cropper} this
-           */
-          rotate: function rotate2(degree) {
-            return this.rotateTo((this.imageData.rotate || 0) + Number(degree));
-          },
-          /**
-           * Rotate the canvas to an absolute degree
-           * @param {number} degree - The rotate degree.
-           * @returns {Cropper} this
-           */
-          rotateTo: function rotateTo(degree) {
-            degree = Number(degree);
-            if (isNumber3(degree) && this.ready && !this.disabled && this.options.rotatable) {
-              this.imageData.rotate = degree % 360;
-              this.renderCanvas(true, true);
-            }
-            return this;
-          },
-          /**
-           * Scale the image on the x-axis.
-           * @param {number} scaleX - The scale ratio on the x-axis.
-           * @returns {Cropper} this
-           */
-          scaleX: function scaleX(_scaleX) {
-            var scaleY = this.imageData.scaleY;
-            return this.scale(_scaleX, isNumber3(scaleY) ? scaleY : 1);
-          },
-          /**
-           * Scale the image on the y-axis.
-           * @param {number} scaleY - The scale ratio on the y-axis.
-           * @returns {Cropper} this
-           */
-          scaleY: function scaleY(_scaleY) {
-            var scaleX = this.imageData.scaleX;
-            return this.scale(isNumber3(scaleX) ? scaleX : 1, _scaleY);
-          },
-          /**
-           * Scale the image
-           * @param {number} scaleX - The scale ratio on the x-axis.
-           * @param {number} [scaleY=scaleX] - The scale ratio on the y-axis.
-           * @returns {Cropper} this
-           */
-          scale: function scale(scaleX) {
-            var scaleY = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : scaleX;
-            var imageData = this.imageData;
-            var transformed = false;
-            scaleX = Number(scaleX);
-            scaleY = Number(scaleY);
-            if (this.ready && !this.disabled && this.options.scalable) {
-              if (isNumber3(scaleX)) {
-                imageData.scaleX = scaleX;
-                transformed = true;
-              }
-              if (isNumber3(scaleY)) {
-                imageData.scaleY = scaleY;
-                transformed = true;
-              }
-              if (transformed) {
-                this.renderCanvas(true, true);
-              }
-            }
-            return this;
-          },
-          /**
-           * Get the cropped area position and size data (base on the original image)
-           * @param {boolean} [rounded=false] - Indicate if round the data values or not.
-           * @returns {Object} The result cropped data.
-           */
-          getData: function getData2() {
-            var rounded = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : false;
-            var options = this.options, imageData = this.imageData, canvasData = this.canvasData, cropBoxData = this.cropBoxData;
-            var data2;
-            if (this.ready && this.cropped) {
-              data2 = {
-                x: cropBoxData.left - canvasData.left,
-                y: cropBoxData.top - canvasData.top,
-                width: cropBoxData.width,
-                height: cropBoxData.height
-              };
-              var ratio = imageData.width / imageData.naturalWidth;
-              forEach(data2, function(n2, i) {
-                data2[i] = n2 / ratio;
-              });
-              if (rounded) {
-                var bottom2 = Math.round(data2.y + data2.height);
-                var right2 = Math.round(data2.x + data2.width);
-                data2.x = Math.round(data2.x);
-                data2.y = Math.round(data2.y);
-                data2.width = right2 - data2.x;
-                data2.height = bottom2 - data2.y;
-              }
-            } else {
-              data2 = {
-                x: 0,
-                y: 0,
-                width: 0,
-                height: 0
-              };
-            }
-            if (options.rotatable) {
-              data2.rotate = imageData.rotate || 0;
-            }
-            if (options.scalable) {
-              data2.scaleX = imageData.scaleX || 1;
-              data2.scaleY = imageData.scaleY || 1;
-            }
-            return data2;
-          },
-          /**
-           * Set the cropped area position and size with new data
-           * @param {Object} data - The new data.
-           * @returns {Cropper} this
-           */
-          setData: function setData2(data2) {
-            var options = this.options, imageData = this.imageData, canvasData = this.canvasData;
-            var cropBoxData = {};
-            if (this.ready && !this.disabled && isPlainObject(data2)) {
-              var transformed = false;
-              if (options.rotatable) {
-                if (isNumber3(data2.rotate) && data2.rotate !== imageData.rotate) {
-                  imageData.rotate = data2.rotate;
-                  transformed = true;
-                }
-              }
-              if (options.scalable) {
-                if (isNumber3(data2.scaleX) && data2.scaleX !== imageData.scaleX) {
-                  imageData.scaleX = data2.scaleX;
-                  transformed = true;
-                }
-                if (isNumber3(data2.scaleY) && data2.scaleY !== imageData.scaleY) {
-                  imageData.scaleY = data2.scaleY;
-                  transformed = true;
-                }
-              }
-              if (transformed) {
-                this.renderCanvas(true, true);
-              }
-              var ratio = imageData.width / imageData.naturalWidth;
-              if (isNumber3(data2.x)) {
-                cropBoxData.left = data2.x * ratio + canvasData.left;
-              }
-              if (isNumber3(data2.y)) {
-                cropBoxData.top = data2.y * ratio + canvasData.top;
-              }
-              if (isNumber3(data2.width)) {
-                cropBoxData.width = data2.width * ratio;
-              }
-              if (isNumber3(data2.height)) {
-                cropBoxData.height = data2.height * ratio;
-              }
-              this.setCropBoxData(cropBoxData);
-            }
-            return this;
-          },
-          /**
-           * Get the container size data.
-           * @returns {Object} The result container data.
-           */
-          getContainerData: function getContainerData() {
-            return this.ready ? assign({}, this.containerData) : {};
-          },
-          /**
-           * Get the image position and size data.
-           * @returns {Object} The result image data.
-           */
-          getImageData: function getImageData() {
-            return this.sized ? assign({}, this.imageData) : {};
-          },
-          /**
-           * Get the canvas position and size data.
-           * @returns {Object} The result canvas data.
-           */
-          getCanvasData: function getCanvasData() {
-            var canvasData = this.canvasData;
-            var data2 = {};
-            if (this.ready) {
-              forEach(["left", "top", "width", "height", "naturalWidth", "naturalHeight"], function(n2) {
-                data2[n2] = canvasData[n2];
-              });
-            }
-            return data2;
-          },
-          /**
-           * Set the canvas position and size with new data.
-           * @param {Object} data - The new canvas data.
-           * @returns {Cropper} this
-           */
-          setCanvasData: function setCanvasData(data2) {
-            var canvasData = this.canvasData;
-            var aspectRatio = canvasData.aspectRatio;
-            if (this.ready && !this.disabled && isPlainObject(data2)) {
-              if (isNumber3(data2.left)) {
-                canvasData.left = data2.left;
-              }
-              if (isNumber3(data2.top)) {
-                canvasData.top = data2.top;
-              }
-              if (isNumber3(data2.width)) {
-                canvasData.width = data2.width;
-                canvasData.height = data2.width / aspectRatio;
-              } else if (isNumber3(data2.height)) {
-                canvasData.height = data2.height;
-                canvasData.width = data2.height * aspectRatio;
-              }
-              this.renderCanvas(true);
-            }
-            return this;
-          },
-          /**
-           * Get the crop box position and size data.
-           * @returns {Object} The result crop box data.
-           */
-          getCropBoxData: function getCropBoxData() {
-            var cropBoxData = this.cropBoxData;
-            var data2;
-            if (this.ready && this.cropped) {
-              data2 = {
-                left: cropBoxData.left,
-                top: cropBoxData.top,
-                width: cropBoxData.width,
-                height: cropBoxData.height
-              };
-            }
-            return data2 || {};
-          },
-          /**
-           * Set the crop box position and size with new data.
-           * @param {Object} data - The new crop box data.
-           * @returns {Cropper} this
-           */
-          setCropBoxData: function setCropBoxData(data2) {
-            var cropBoxData = this.cropBoxData;
-            var aspectRatio = this.options.aspectRatio;
-            var widthChanged;
-            var heightChanged;
-            if (this.ready && this.cropped && !this.disabled && isPlainObject(data2)) {
-              if (isNumber3(data2.left)) {
-                cropBoxData.left = data2.left;
-              }
-              if (isNumber3(data2.top)) {
-                cropBoxData.top = data2.top;
-              }
-              if (isNumber3(data2.width) && data2.width !== cropBoxData.width) {
-                widthChanged = true;
-                cropBoxData.width = data2.width;
-              }
-              if (isNumber3(data2.height) && data2.height !== cropBoxData.height) {
-                heightChanged = true;
-                cropBoxData.height = data2.height;
-              }
-              if (aspectRatio) {
-                if (widthChanged) {
-                  cropBoxData.height = cropBoxData.width / aspectRatio;
-                } else if (heightChanged) {
-                  cropBoxData.width = cropBoxData.height * aspectRatio;
-                }
-              }
-              this.renderCropBox();
-            }
-            return this;
-          },
-          /**
-           * Get a canvas drawn the cropped image.
-           * @param {Object} [options={}] - The config options.
-           * @returns {HTMLCanvasElement} - The result canvas.
-           */
-          getCroppedCanvas: function getCroppedCanvas() {
-            var options = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : {};
-            if (!this.ready || !window.HTMLCanvasElement) {
-              return null;
-            }
-            var canvasData = this.canvasData;
-            var source = getSourceCanvas(this.image, this.imageData, canvasData, options);
-            if (!this.cropped) {
-              return source;
-            }
-            var _this$getData = this.getData(), initialX = _this$getData.x, initialY = _this$getData.y, initialWidth = _this$getData.width, initialHeight = _this$getData.height;
-            var ratio = source.width / Math.floor(canvasData.naturalWidth);
-            if (ratio !== 1) {
-              initialX *= ratio;
-              initialY *= ratio;
-              initialWidth *= ratio;
-              initialHeight *= ratio;
-            }
-            var aspectRatio = initialWidth / initialHeight;
-            var maxSizes = getAdjustedSizes({
-              aspectRatio,
-              width: options.maxWidth || Infinity,
-              height: options.maxHeight || Infinity
-            });
-            var minSizes = getAdjustedSizes({
-              aspectRatio,
-              width: options.minWidth || 0,
-              height: options.minHeight || 0
-            }, "cover");
-            var _getAdjustedSizes = getAdjustedSizes({
-              aspectRatio,
-              width: options.width || (ratio !== 1 ? source.width : initialWidth),
-              height: options.height || (ratio !== 1 ? source.height : initialHeight)
-            }), width = _getAdjustedSizes.width, height = _getAdjustedSizes.height;
-            width = Math.min(maxSizes.width, Math.max(minSizes.width, width));
-            height = Math.min(maxSizes.height, Math.max(minSizes.height, height));
-            var canvas = document.createElement("canvas");
-            var context = canvas.getContext("2d");
-            canvas.width = normalizeDecimalNumber(width);
-            canvas.height = normalizeDecimalNumber(height);
-            context.fillStyle = options.fillColor || "transparent";
-            context.fillRect(0, 0, width, height);
-            var _options$imageSmoothi = options.imageSmoothingEnabled, imageSmoothingEnabled = _options$imageSmoothi === void 0 ? true : _options$imageSmoothi, imageSmoothingQuality = options.imageSmoothingQuality;
-            context.imageSmoothingEnabled = imageSmoothingEnabled;
-            if (imageSmoothingQuality) {
-              context.imageSmoothingQuality = imageSmoothingQuality;
-            }
-            var sourceWidth = source.width;
-            var sourceHeight = source.height;
-            var srcX = initialX;
-            var srcY = initialY;
-            var srcWidth;
-            var srcHeight;
-            var dstX;
-            var dstY;
-            var dstWidth;
-            var dstHeight;
-            if (srcX <= -initialWidth || srcX > sourceWidth) {
-              srcX = 0;
-              srcWidth = 0;
-              dstX = 0;
-              dstWidth = 0;
-            } else if (srcX <= 0) {
-              dstX = -srcX;
-              srcX = 0;
-              srcWidth = Math.min(sourceWidth, initialWidth + srcX);
-              dstWidth = srcWidth;
-            } else if (srcX <= sourceWidth) {
-              dstX = 0;
-              srcWidth = Math.min(initialWidth, sourceWidth - srcX);
-              dstWidth = srcWidth;
-            }
-            if (srcWidth <= 0 || srcY <= -initialHeight || srcY > sourceHeight) {
-              srcY = 0;
-              srcHeight = 0;
-              dstY = 0;
-              dstHeight = 0;
-            } else if (srcY <= 0) {
-              dstY = -srcY;
-              srcY = 0;
-              srcHeight = Math.min(sourceHeight, initialHeight + srcY);
-              dstHeight = srcHeight;
-            } else if (srcY <= sourceHeight) {
-              dstY = 0;
-              srcHeight = Math.min(initialHeight, sourceHeight - srcY);
-              dstHeight = srcHeight;
-            }
-            var params = [srcX, srcY, srcWidth, srcHeight];
-            if (dstWidth > 0 && dstHeight > 0) {
-              var scale = width / initialWidth;
-              params.push(dstX * scale, dstY * scale, dstWidth * scale, dstHeight * scale);
-            }
-            context.drawImage.apply(context, [source].concat(_toConsumableArray(params.map(function(param) {
-              return Math.floor(normalizeDecimalNumber(param));
-            }))));
-            return canvas;
-          },
-          /**
-           * Change the aspect ratio of the crop box.
-           * @param {number} aspectRatio - The new aspect ratio.
-           * @returns {Cropper} this
-           */
-          setAspectRatio: function setAspectRatio(aspectRatio) {
-            var options = this.options;
-            if (!this.disabled && !isUndefined2(aspectRatio)) {
-              options.aspectRatio = Math.max(0, aspectRatio) || NaN;
-              if (this.ready) {
-                this.initCropBox();
-                if (this.cropped) {
-                  this.renderCropBox();
-                }
-              }
-            }
-            return this;
-          },
-          /**
-           * Change the drag mode.
-           * @param {string} mode - The new drag mode.
-           * @returns {Cropper} this
-           */
-          setDragMode: function setDragMode(mode) {
-            var options = this.options, dragBox = this.dragBox, face = this.face;
-            if (this.ready && !this.disabled) {
-              var croppable = mode === DRAG_MODE_CROP;
-              var movable = options.movable && mode === DRAG_MODE_MOVE;
-              mode = croppable || movable ? mode : DRAG_MODE_NONE;
-              options.dragMode = mode;
-              setData(dragBox, DATA_ACTION, mode);
-              toggleClass(dragBox, CLASS_CROP, croppable);
-              toggleClass(dragBox, CLASS_MOVE, movable);
-              if (!options.cropBoxMovable) {
-                setData(face, DATA_ACTION, mode);
-                toggleClass(face, CLASS_CROP, croppable);
-                toggleClass(face, CLASS_MOVE, movable);
-              }
-            }
-            return this;
-          }
-        };
-        var AnotherCropper = WINDOW.Cropper;
-        var Cropper2 = /* @__PURE__ */ function() {
-          function Cropper3(element) {
-            var options = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
-            _classCallCheck(this, Cropper3);
-            if (!element || !REGEXP_TAG_NAME.test(element.tagName)) {
-              throw new Error("The first argument is required and must be an <img> or <canvas> element.");
-            }
-            this.element = element;
-            this.options = assign({}, DEFAULTS, isPlainObject(options) && options);
-            this.cropped = false;
-            this.disabled = false;
-            this.pointers = {};
-            this.ready = false;
-            this.reloading = false;
-            this.replaced = false;
-            this.sized = false;
-            this.sizing = false;
-            this.init();
-          }
-          _createClass(Cropper3, [{
-            key: "init",
-            value: function init() {
-              var element = this.element;
-              var tagName2 = element.tagName.toLowerCase();
-              var url;
-              if (element[NAMESPACE]) {
-                return;
-              }
-              element[NAMESPACE] = this;
-              if (tagName2 === "img") {
-                this.isImg = true;
-                url = element.getAttribute("src") || "";
-                this.originalUrl = url;
-                if (!url) {
-                  return;
-                }
-                url = element.src;
-              } else if (tagName2 === "canvas" && window.HTMLCanvasElement) {
-                url = element.toDataURL();
-              }
-              this.load(url);
-            }
-          }, {
-            key: "load",
-            value: function load(url) {
-              var _this = this;
-              if (!url) {
-                return;
-              }
-              this.url = url;
-              this.imageData = {};
-              var element = this.element, options = this.options;
-              if (!options.rotatable && !options.scalable) {
-                options.checkOrientation = false;
-              }
-              if (!options.checkOrientation || !window.ArrayBuffer) {
-                this.clone();
-                return;
-              }
-              if (REGEXP_DATA_URL.test(url)) {
-                if (REGEXP_DATA_URL_JPEG.test(url)) {
-                  this.read(dataURLToArrayBuffer(url));
-                } else {
-                  this.clone();
-                }
-                return;
-              }
-              var xhr = new XMLHttpRequest();
-              var clone6 = this.clone.bind(this);
-              this.reloading = true;
-              this.xhr = xhr;
-              xhr.onabort = clone6;
-              xhr.onerror = clone6;
-              xhr.ontimeout = clone6;
-              xhr.onprogress = function() {
-                if (xhr.getResponseHeader("content-type") !== MIME_TYPE_JPEG) {
-                  xhr.abort();
-                }
-              };
-              xhr.onload = function() {
-                _this.read(xhr.response);
-              };
-              xhr.onloadend = function() {
-                _this.reloading = false;
-                _this.xhr = null;
-              };
-              if (options.checkCrossOrigin && isCrossOriginURL(url) && element.crossOrigin) {
-                url = addTimestamp(url);
-              }
-              xhr.open("GET", url, true);
-              xhr.responseType = "arraybuffer";
-              xhr.withCredentials = element.crossOrigin === "use-credentials";
-              xhr.send();
-            }
-          }, {
-            key: "read",
-            value: function read2(arrayBuffer) {
-              var options = this.options, imageData = this.imageData;
-              var orientation = resetAndGetOrientation(arrayBuffer);
-              var rotate2 = 0;
-              var scaleX = 1;
-              var scaleY = 1;
-              if (orientation > 1) {
-                this.url = arrayBufferToDataURL(arrayBuffer, MIME_TYPE_JPEG);
-                var _parseOrientation = parseOrientation(orientation);
-                rotate2 = _parseOrientation.rotate;
-                scaleX = _parseOrientation.scaleX;
-                scaleY = _parseOrientation.scaleY;
-              }
-              if (options.rotatable) {
-                imageData.rotate = rotate2;
-              }
-              if (options.scalable) {
-                imageData.scaleX = scaleX;
-                imageData.scaleY = scaleY;
-              }
-              this.clone();
-            }
-          }, {
-            key: "clone",
-            value: function clone6() {
-              var element = this.element, url = this.url;
-              var crossOrigin = element.crossOrigin;
-              var crossOriginUrl = url;
-              if (this.options.checkCrossOrigin && isCrossOriginURL(url)) {
-                if (!crossOrigin) {
-                  crossOrigin = "anonymous";
-                }
-                crossOriginUrl = addTimestamp(url);
-              }
-              this.crossOrigin = crossOrigin;
-              this.crossOriginUrl = crossOriginUrl;
-              var image = document.createElement("img");
-              if (crossOrigin) {
-                image.crossOrigin = crossOrigin;
-              }
-              image.src = crossOriginUrl || url;
-              image.alt = element.alt || "The image to crop";
-              this.image = image;
-              image.onload = this.start.bind(this);
-              image.onerror = this.stop.bind(this);
-              addClass(image, CLASS_HIDE);
-              element.parentNode.insertBefore(image, element.nextSibling);
-            }
-          }, {
-            key: "start",
-            value: function start2() {
-              var _this2 = this;
-              var image = this.image;
-              image.onload = null;
-              image.onerror = null;
-              this.sizing = true;
-              var isIOSWebKit = WINDOW.navigator && /(?:iPad|iPhone|iPod).*?AppleWebKit/i.test(WINDOW.navigator.userAgent);
-              var done = function done2(naturalWidth, naturalHeight) {
-                assign(_this2.imageData, {
-                  naturalWidth,
-                  naturalHeight,
-                  aspectRatio: naturalWidth / naturalHeight
-                });
-                _this2.initialImageData = assign({}, _this2.imageData);
-                _this2.sizing = false;
-                _this2.sized = true;
-                _this2.build();
-              };
-              if (image.naturalWidth && !isIOSWebKit) {
-                done(image.naturalWidth, image.naturalHeight);
-                return;
-              }
-              var sizingImage = document.createElement("img");
-              var body = document.body || document.documentElement;
-              this.sizingImage = sizingImage;
-              sizingImage.onload = function() {
-                done(sizingImage.width, sizingImage.height);
-                if (!isIOSWebKit) {
-                  body.removeChild(sizingImage);
-                }
-              };
-              sizingImage.src = image.src;
-              if (!isIOSWebKit) {
-                sizingImage.style.cssText = "left:0;max-height:none!important;max-width:none!important;min-height:0!important;min-width:0!important;opacity:0;position:absolute;top:0;z-index:-1;";
-                body.appendChild(sizingImage);
-              }
-            }
-          }, {
-            key: "stop",
-            value: function stop() {
-              var image = this.image;
-              image.onload = null;
-              image.onerror = null;
-              image.parentNode.removeChild(image);
-              this.image = null;
-            }
-          }, {
-            key: "build",
-            value: function build() {
-              if (!this.sized || this.ready) {
-                return;
-              }
-              var element = this.element, options = this.options, image = this.image;
-              var container = element.parentNode;
-              var template = document.createElement("div");
-              template.innerHTML = TEMPLATE;
-              var cropper2 = template.querySelector(".".concat(NAMESPACE, "-container"));
-              var canvas = cropper2.querySelector(".".concat(NAMESPACE, "-canvas"));
-              var dragBox = cropper2.querySelector(".".concat(NAMESPACE, "-drag-box"));
-              var cropBox = cropper2.querySelector(".".concat(NAMESPACE, "-crop-box"));
-              var face = cropBox.querySelector(".".concat(NAMESPACE, "-face"));
-              this.container = container;
-              this.cropper = cropper2;
-              this.canvas = canvas;
-              this.dragBox = dragBox;
-              this.cropBox = cropBox;
-              this.viewBox = cropper2.querySelector(".".concat(NAMESPACE, "-view-box"));
-              this.face = face;
-              canvas.appendChild(image);
-              addClass(element, CLASS_HIDDEN);
-              container.insertBefore(cropper2, element.nextSibling);
-              removeClass(image, CLASS_HIDE);
-              this.initPreview();
-              this.bind();
-              options.initialAspectRatio = Math.max(0, options.initialAspectRatio) || NaN;
-              options.aspectRatio = Math.max(0, options.aspectRatio) || NaN;
-              options.viewMode = Math.max(0, Math.min(3, Math.round(options.viewMode))) || 0;
-              addClass(cropBox, CLASS_HIDDEN);
-              if (!options.guides) {
-                addClass(cropBox.getElementsByClassName("".concat(NAMESPACE, "-dashed")), CLASS_HIDDEN);
-              }
-              if (!options.center) {
-                addClass(cropBox.getElementsByClassName("".concat(NAMESPACE, "-center")), CLASS_HIDDEN);
-              }
-              if (options.background) {
-                addClass(cropper2, "".concat(NAMESPACE, "-bg"));
-              }
-              if (!options.highlight) {
-                addClass(face, CLASS_INVISIBLE);
-              }
-              if (options.cropBoxMovable) {
-                addClass(face, CLASS_MOVE);
-                setData(face, DATA_ACTION, ACTION_ALL);
-              }
-              if (!options.cropBoxResizable) {
-                addClass(cropBox.getElementsByClassName("".concat(NAMESPACE, "-line")), CLASS_HIDDEN);
-                addClass(cropBox.getElementsByClassName("".concat(NAMESPACE, "-point")), CLASS_HIDDEN);
-              }
-              this.render();
-              this.ready = true;
-              this.setDragMode(options.dragMode);
-              if (options.autoCrop) {
-                this.crop();
-              }
-              this.setData(options.data);
-              if (isFunction2(options.ready)) {
-                addListener2(element, EVENT_READY, options.ready, {
-                  once: true
-                });
-              }
-              dispatchEvent(element, EVENT_READY);
-            }
-          }, {
-            key: "unbuild",
-            value: function unbuild() {
-              if (!this.ready) {
-                return;
-              }
-              this.ready = false;
-              this.unbind();
-              this.resetPreview();
-              var parentNode = this.cropper.parentNode;
-              if (parentNode) {
-                parentNode.removeChild(this.cropper);
-              }
-              removeClass(this.element, CLASS_HIDDEN);
-            }
-          }, {
-            key: "uncreate",
-            value: function uncreate() {
-              if (this.ready) {
-                this.unbuild();
-                this.ready = false;
-                this.cropped = false;
-              } else if (this.sizing) {
-                this.sizingImage.onload = null;
-                this.sizing = false;
-                this.sized = false;
-              } else if (this.reloading) {
-                this.xhr.onabort = null;
-                this.xhr.abort();
-              } else if (this.image) {
-                this.stop();
-              }
-            }
-            /**
-             * Get the no conflict cropper class.
-             * @returns {Cropper} The cropper class.
-             */
-          }], [{
-            key: "noConflict",
-            value: function noConflict() {
-              window.Cropper = AnotherCropper;
-              return Cropper3;
-            }
-            /**
-             * Change the default options.
-             * @param {Object} options - The new default options.
-             */
-          }, {
-            key: "setDefaults",
-            value: function setDefaults(options) {
-              assign(DEFAULTS, isPlainObject(options) && options);
-            }
-          }]);
-          return Cropper3;
-        }();
-        assign(Cropper2.prototype, render3, preview, events, handlers, change, methods);
-        return Cropper2;
-      });
-    }
-  });
-
   // node_modules/showdown/dist/showdown.js
   var require_showdown = __commonJS({
     "node_modules/showdown/dist/showdown.js"(exports, module) {
@@ -15245,6 +12520,2731 @@
           root2.showdown = showdown2;
         }
       }).call(exports);
+    }
+  });
+
+  // node_modules/cropperjs/dist/cropper.js
+  var require_cropper = __commonJS({
+    "node_modules/cropperjs/dist/cropper.js"(exports, module) {
+      (function(global, factory) {
+        typeof exports === "object" && typeof module !== "undefined" ? module.exports = factory() : typeof define === "function" && define.amd ? define(factory) : (global = typeof globalThis !== "undefined" ? globalThis : global || self, global.Cropper = factory());
+      })(exports, function() {
+        "use strict";
+        function ownKeys(object, enumerableOnly) {
+          var keys2 = Object.keys(object);
+          if (Object.getOwnPropertySymbols) {
+            var symbols = Object.getOwnPropertySymbols(object);
+            enumerableOnly && (symbols = symbols.filter(function(sym) {
+              return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+            })), keys2.push.apply(keys2, symbols);
+          }
+          return keys2;
+        }
+        function _objectSpread2(target) {
+          for (var i = 1; i < arguments.length; i++) {
+            var source = null != arguments[i] ? arguments[i] : {};
+            i % 2 ? ownKeys(Object(source), true).forEach(function(key) {
+              _defineProperty(target, key, source[key]);
+            }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function(key) {
+              Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+            });
+          }
+          return target;
+        }
+        function _typeof(obj) {
+          "@babel/helpers - typeof";
+          return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(obj2) {
+            return typeof obj2;
+          } : function(obj2) {
+            return obj2 && "function" == typeof Symbol && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
+          }, _typeof(obj);
+        }
+        function _classCallCheck(instance, Constructor) {
+          if (!(instance instanceof Constructor)) {
+            throw new TypeError("Cannot call a class as a function");
+          }
+        }
+        function _defineProperties(target, props) {
+          for (var i = 0; i < props.length; i++) {
+            var descriptor = props[i];
+            descriptor.enumerable = descriptor.enumerable || false;
+            descriptor.configurable = true;
+            if ("value" in descriptor) descriptor.writable = true;
+            Object.defineProperty(target, descriptor.key, descriptor);
+          }
+        }
+        function _createClass(Constructor, protoProps, staticProps) {
+          if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+          if (staticProps) _defineProperties(Constructor, staticProps);
+          Object.defineProperty(Constructor, "prototype", {
+            writable: false
+          });
+          return Constructor;
+        }
+        function _defineProperty(obj, key, value) {
+          if (key in obj) {
+            Object.defineProperty(obj, key, {
+              value,
+              enumerable: true,
+              configurable: true,
+              writable: true
+            });
+          } else {
+            obj[key] = value;
+          }
+          return obj;
+        }
+        function _toConsumableArray(arr) {
+          return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
+        }
+        function _arrayWithoutHoles(arr) {
+          if (Array.isArray(arr)) return _arrayLikeToArray(arr);
+        }
+        function _iterableToArray(iter) {
+          if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
+        }
+        function _unsupportedIterableToArray(o, minLen) {
+          if (!o) return;
+          if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+          var n2 = Object.prototype.toString.call(o).slice(8, -1);
+          if (n2 === "Object" && o.constructor) n2 = o.constructor.name;
+          if (n2 === "Map" || n2 === "Set") return Array.from(o);
+          if (n2 === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n2)) return _arrayLikeToArray(o, minLen);
+        }
+        function _arrayLikeToArray(arr, len) {
+          if (len == null || len > arr.length) len = arr.length;
+          for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+          return arr2;
+        }
+        function _nonIterableSpread() {
+          throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+        }
+        var IS_BROWSER = typeof window !== "undefined" && typeof window.document !== "undefined";
+        var WINDOW = IS_BROWSER ? window : {};
+        var IS_TOUCH_DEVICE = IS_BROWSER && WINDOW.document.documentElement ? "ontouchstart" in WINDOW.document.documentElement : false;
+        var HAS_POINTER_EVENT = IS_BROWSER ? "PointerEvent" in WINDOW : false;
+        var NAMESPACE = "cropper";
+        var ACTION_ALL = "all";
+        var ACTION_CROP = "crop";
+        var ACTION_MOVE = "move";
+        var ACTION_ZOOM = "zoom";
+        var ACTION_EAST = "e";
+        var ACTION_WEST = "w";
+        var ACTION_SOUTH = "s";
+        var ACTION_NORTH = "n";
+        var ACTION_NORTH_EAST = "ne";
+        var ACTION_NORTH_WEST = "nw";
+        var ACTION_SOUTH_EAST = "se";
+        var ACTION_SOUTH_WEST = "sw";
+        var CLASS_CROP = "".concat(NAMESPACE, "-crop");
+        var CLASS_DISABLED = "".concat(NAMESPACE, "-disabled");
+        var CLASS_HIDDEN = "".concat(NAMESPACE, "-hidden");
+        var CLASS_HIDE = "".concat(NAMESPACE, "-hide");
+        var CLASS_INVISIBLE = "".concat(NAMESPACE, "-invisible");
+        var CLASS_MODAL = "".concat(NAMESPACE, "-modal");
+        var CLASS_MOVE = "".concat(NAMESPACE, "-move");
+        var DATA_ACTION = "".concat(NAMESPACE, "Action");
+        var DATA_PREVIEW = "".concat(NAMESPACE, "Preview");
+        var DRAG_MODE_CROP = "crop";
+        var DRAG_MODE_MOVE = "move";
+        var DRAG_MODE_NONE = "none";
+        var EVENT_CROP = "crop";
+        var EVENT_CROP_END = "cropend";
+        var EVENT_CROP_MOVE = "cropmove";
+        var EVENT_CROP_START = "cropstart";
+        var EVENT_DBLCLICK = "dblclick";
+        var EVENT_TOUCH_START = IS_TOUCH_DEVICE ? "touchstart" : "mousedown";
+        var EVENT_TOUCH_MOVE = IS_TOUCH_DEVICE ? "touchmove" : "mousemove";
+        var EVENT_TOUCH_END = IS_TOUCH_DEVICE ? "touchend touchcancel" : "mouseup";
+        var EVENT_POINTER_DOWN = HAS_POINTER_EVENT ? "pointerdown" : EVENT_TOUCH_START;
+        var EVENT_POINTER_MOVE = HAS_POINTER_EVENT ? "pointermove" : EVENT_TOUCH_MOVE;
+        var EVENT_POINTER_UP = HAS_POINTER_EVENT ? "pointerup pointercancel" : EVENT_TOUCH_END;
+        var EVENT_READY = "ready";
+        var EVENT_RESIZE = "resize";
+        var EVENT_WHEEL = "wheel";
+        var EVENT_ZOOM = "zoom";
+        var MIME_TYPE_JPEG = "image/jpeg";
+        var REGEXP_ACTIONS = /^e|w|s|n|se|sw|ne|nw|all|crop|move|zoom$/;
+        var REGEXP_DATA_URL = /^data:/;
+        var REGEXP_DATA_URL_JPEG = /^data:image\/jpeg;base64,/;
+        var REGEXP_TAG_NAME = /^img|canvas$/i;
+        var MIN_CONTAINER_WIDTH = 200;
+        var MIN_CONTAINER_HEIGHT = 100;
+        var DEFAULTS = {
+          // Define the view mode of the cropper
+          viewMode: 0,
+          // 0, 1, 2, 3
+          // Define the dragging mode of the cropper
+          dragMode: DRAG_MODE_CROP,
+          // 'crop', 'move' or 'none'
+          // Define the initial aspect ratio of the crop box
+          initialAspectRatio: NaN,
+          // Define the aspect ratio of the crop box
+          aspectRatio: NaN,
+          // An object with the previous cropping result data
+          data: null,
+          // A selector for adding extra containers to preview
+          preview: "",
+          // Re-render the cropper when resize the window
+          responsive: true,
+          // Restore the cropped area after resize the window
+          restore: true,
+          // Check if the current image is a cross-origin image
+          checkCrossOrigin: true,
+          // Check the current image's Exif Orientation information
+          checkOrientation: true,
+          // Show the black modal
+          modal: true,
+          // Show the dashed lines for guiding
+          guides: true,
+          // Show the center indicator for guiding
+          center: true,
+          // Show the white modal to highlight the crop box
+          highlight: true,
+          // Show the grid background
+          background: true,
+          // Enable to crop the image automatically when initialize
+          autoCrop: true,
+          // Define the percentage of automatic cropping area when initializes
+          autoCropArea: 0.8,
+          // Enable to move the image
+          movable: true,
+          // Enable to rotate the image
+          rotatable: true,
+          // Enable to scale the image
+          scalable: true,
+          // Enable to zoom the image
+          zoomable: true,
+          // Enable to zoom the image by dragging touch
+          zoomOnTouch: true,
+          // Enable to zoom the image by wheeling mouse
+          zoomOnWheel: true,
+          // Define zoom ratio when zoom the image by wheeling mouse
+          wheelZoomRatio: 0.1,
+          // Enable to move the crop box
+          cropBoxMovable: true,
+          // Enable to resize the crop box
+          cropBoxResizable: true,
+          // Toggle drag mode between "crop" and "move" when click twice on the cropper
+          toggleDragModeOnDblclick: true,
+          // Size limitation
+          minCanvasWidth: 0,
+          minCanvasHeight: 0,
+          minCropBoxWidth: 0,
+          minCropBoxHeight: 0,
+          minContainerWidth: MIN_CONTAINER_WIDTH,
+          minContainerHeight: MIN_CONTAINER_HEIGHT,
+          // Shortcuts of events
+          ready: null,
+          cropstart: null,
+          cropmove: null,
+          cropend: null,
+          crop: null,
+          zoom: null
+        };
+        var TEMPLATE = '<div class="cropper-container" touch-action="none"><div class="cropper-wrap-box"><div class="cropper-canvas"></div></div><div class="cropper-drag-box"></div><div class="cropper-crop-box"><span class="cropper-view-box"></span><span class="cropper-dashed dashed-h"></span><span class="cropper-dashed dashed-v"></span><span class="cropper-center"></span><span class="cropper-face"></span><span class="cropper-line line-e" data-cropper-action="e"></span><span class="cropper-line line-n" data-cropper-action="n"></span><span class="cropper-line line-w" data-cropper-action="w"></span><span class="cropper-line line-s" data-cropper-action="s"></span><span class="cropper-point point-e" data-cropper-action="e"></span><span class="cropper-point point-n" data-cropper-action="n"></span><span class="cropper-point point-w" data-cropper-action="w"></span><span class="cropper-point point-s" data-cropper-action="s"></span><span class="cropper-point point-ne" data-cropper-action="ne"></span><span class="cropper-point point-nw" data-cropper-action="nw"></span><span class="cropper-point point-sw" data-cropper-action="sw"></span><span class="cropper-point point-se" data-cropper-action="se"></span></div></div>';
+        var isNaN2 = Number.isNaN || WINDOW.isNaN;
+        function isNumber3(value) {
+          return typeof value === "number" && !isNaN2(value);
+        }
+        var isPositiveNumber = function isPositiveNumber2(value) {
+          return value > 0 && value < Infinity;
+        };
+        function isUndefined2(value) {
+          return typeof value === "undefined";
+        }
+        function isObject2(value) {
+          return _typeof(value) === "object" && value !== null;
+        }
+        var hasOwnProperty3 = Object.prototype.hasOwnProperty;
+        function isPlainObject(value) {
+          if (!isObject2(value)) {
+            return false;
+          }
+          try {
+            var _constructor = value.constructor;
+            var prototype = _constructor.prototype;
+            return _constructor && prototype && hasOwnProperty3.call(prototype, "isPrototypeOf");
+          } catch (error) {
+            return false;
+          }
+        }
+        function isFunction2(value) {
+          return typeof value === "function";
+        }
+        var slice2 = Array.prototype.slice;
+        function toArray(value) {
+          return Array.from ? Array.from(value) : slice2.call(value);
+        }
+        function forEach(data2, callback2) {
+          if (data2 && isFunction2(callback2)) {
+            if (Array.isArray(data2) || isNumber3(data2.length)) {
+              toArray(data2).forEach(function(value, key) {
+                callback2.call(data2, value, key, data2);
+              });
+            } else if (isObject2(data2)) {
+              Object.keys(data2).forEach(function(key) {
+                callback2.call(data2, data2[key], key, data2);
+              });
+            }
+          }
+          return data2;
+        }
+        var assign = Object.assign || function assign2(target) {
+          for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+            args[_key - 1] = arguments[_key];
+          }
+          if (isObject2(target) && args.length > 0) {
+            args.forEach(function(arg) {
+              if (isObject2(arg)) {
+                Object.keys(arg).forEach(function(key) {
+                  target[key] = arg[key];
+                });
+              }
+            });
+          }
+          return target;
+        };
+        var REGEXP_DECIMALS = /\.\d*(?:0|9){12}\d*$/;
+        function normalizeDecimalNumber(value) {
+          var times = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : 1e11;
+          return REGEXP_DECIMALS.test(value) ? Math.round(value * times) / times : value;
+        }
+        var REGEXP_SUFFIX = /^width|height|left|top|marginLeft|marginTop$/;
+        function setStyle2(element, styles) {
+          var style = element.style;
+          forEach(styles, function(value, property) {
+            if (REGEXP_SUFFIX.test(property) && isNumber3(value)) {
+              value = "".concat(value, "px");
+            }
+            style[property] = value;
+          });
+        }
+        function hasClass(element, value) {
+          return element.classList ? element.classList.contains(value) : element.className.indexOf(value) > -1;
+        }
+        function addClass(element, value) {
+          if (!value) {
+            return;
+          }
+          if (isNumber3(element.length)) {
+            forEach(element, function(elem) {
+              addClass(elem, value);
+            });
+            return;
+          }
+          if (element.classList) {
+            element.classList.add(value);
+            return;
+          }
+          var className = element.className.trim();
+          if (!className) {
+            element.className = value;
+          } else if (className.indexOf(value) < 0) {
+            element.className = "".concat(className, " ").concat(value);
+          }
+        }
+        function removeClass(element, value) {
+          if (!value) {
+            return;
+          }
+          if (isNumber3(element.length)) {
+            forEach(element, function(elem) {
+              removeClass(elem, value);
+            });
+            return;
+          }
+          if (element.classList) {
+            element.classList.remove(value);
+            return;
+          }
+          if (element.className.indexOf(value) >= 0) {
+            element.className = element.className.replace(value, "");
+          }
+        }
+        function toggleClass(element, value, added) {
+          if (!value) {
+            return;
+          }
+          if (isNumber3(element.length)) {
+            forEach(element, function(elem) {
+              toggleClass(elem, value, added);
+            });
+            return;
+          }
+          if (added) {
+            addClass(element, value);
+          } else {
+            removeClass(element, value);
+          }
+        }
+        var REGEXP_CAMEL_CASE = /([a-z\d])([A-Z])/g;
+        function toParamCase(value) {
+          return value.replace(REGEXP_CAMEL_CASE, "$1-$2").toLowerCase();
+        }
+        function getData(element, name) {
+          if (isObject2(element[name])) {
+            return element[name];
+          }
+          if (element.dataset) {
+            return element.dataset[name];
+          }
+          return element.getAttribute("data-".concat(toParamCase(name)));
+        }
+        function setData(element, name, data2) {
+          if (isObject2(data2)) {
+            element[name] = data2;
+          } else if (element.dataset) {
+            element.dataset[name] = data2;
+          } else {
+            element.setAttribute("data-".concat(toParamCase(name)), data2);
+          }
+        }
+        function removeData(element, name) {
+          if (isObject2(element[name])) {
+            try {
+              delete element[name];
+            } catch (error) {
+              element[name] = void 0;
+            }
+          } else if (element.dataset) {
+            try {
+              delete element.dataset[name];
+            } catch (error) {
+              element.dataset[name] = void 0;
+            }
+          } else {
+            element.removeAttribute("data-".concat(toParamCase(name)));
+          }
+        }
+        var REGEXP_SPACES = /\s\s*/;
+        var onceSupported = function() {
+          var supported = false;
+          if (IS_BROWSER) {
+            var once = false;
+            var listener = function listener2() {
+            };
+            var options = Object.defineProperty({}, "once", {
+              get: function get() {
+                supported = true;
+                return once;
+              },
+              /**
+               * This setter can fix a `TypeError` in strict mode
+               * {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/Getter_only}
+               * @param {boolean} value - The value to set
+               */
+              set: function set2(value) {
+                once = value;
+              }
+            });
+            WINDOW.addEventListener("test", listener, options);
+            WINDOW.removeEventListener("test", listener, options);
+          }
+          return supported;
+        }();
+        function removeListener2(element, type, listener) {
+          var options = arguments.length > 3 && arguments[3] !== void 0 ? arguments[3] : {};
+          var handler = listener;
+          type.trim().split(REGEXP_SPACES).forEach(function(event3) {
+            if (!onceSupported) {
+              var listeners = element.listeners;
+              if (listeners && listeners[event3] && listeners[event3][listener]) {
+                handler = listeners[event3][listener];
+                delete listeners[event3][listener];
+                if (Object.keys(listeners[event3]).length === 0) {
+                  delete listeners[event3];
+                }
+                if (Object.keys(listeners).length === 0) {
+                  delete element.listeners;
+                }
+              }
+            }
+            element.removeEventListener(event3, handler, options);
+          });
+        }
+        function addListener2(element, type, listener) {
+          var options = arguments.length > 3 && arguments[3] !== void 0 ? arguments[3] : {};
+          var _handler = listener;
+          type.trim().split(REGEXP_SPACES).forEach(function(event3) {
+            if (options.once && !onceSupported) {
+              var _element$listeners = element.listeners, listeners = _element$listeners === void 0 ? {} : _element$listeners;
+              _handler = function handler() {
+                delete listeners[event3][listener];
+                element.removeEventListener(event3, _handler, options);
+                for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+                  args[_key2] = arguments[_key2];
+                }
+                listener.apply(element, args);
+              };
+              if (!listeners[event3]) {
+                listeners[event3] = {};
+              }
+              if (listeners[event3][listener]) {
+                element.removeEventListener(event3, listeners[event3][listener], options);
+              }
+              listeners[event3][listener] = _handler;
+              element.listeners = listeners;
+            }
+            element.addEventListener(event3, _handler, options);
+          });
+        }
+        function dispatchEvent(element, type, data2) {
+          var event3;
+          if (isFunction2(Event) && isFunction2(CustomEvent)) {
+            event3 = new CustomEvent(type, {
+              detail: data2,
+              bubbles: true,
+              cancelable: true
+            });
+          } else {
+            event3 = document.createEvent("CustomEvent");
+            event3.initCustomEvent(type, true, true, data2);
+          }
+          return element.dispatchEvent(event3);
+        }
+        function getOffset(element) {
+          var box = element.getBoundingClientRect();
+          return {
+            left: box.left + (window.pageXOffset - document.documentElement.clientLeft),
+            top: box.top + (window.pageYOffset - document.documentElement.clientTop)
+          };
+        }
+        var location = WINDOW.location;
+        var REGEXP_ORIGINS = /^(\w+:)\/\/([^:/?#]*):?(\d*)/i;
+        function isCrossOriginURL(url) {
+          var parts = url.match(REGEXP_ORIGINS);
+          return parts !== null && (parts[1] !== location.protocol || parts[2] !== location.hostname || parts[3] !== location.port);
+        }
+        function addTimestamp(url) {
+          var timestamp = "timestamp=".concat((/* @__PURE__ */ new Date()).getTime());
+          return url + (url.indexOf("?") === -1 ? "?" : "&") + timestamp;
+        }
+        function getTransforms(_ref) {
+          var rotate2 = _ref.rotate, scaleX = _ref.scaleX, scaleY = _ref.scaleY, translateX = _ref.translateX, translateY = _ref.translateY;
+          var values = [];
+          if (isNumber3(translateX) && translateX !== 0) {
+            values.push("translateX(".concat(translateX, "px)"));
+          }
+          if (isNumber3(translateY) && translateY !== 0) {
+            values.push("translateY(".concat(translateY, "px)"));
+          }
+          if (isNumber3(rotate2) && rotate2 !== 0) {
+            values.push("rotate(".concat(rotate2, "deg)"));
+          }
+          if (isNumber3(scaleX) && scaleX !== 1) {
+            values.push("scaleX(".concat(scaleX, ")"));
+          }
+          if (isNumber3(scaleY) && scaleY !== 1) {
+            values.push("scaleY(".concat(scaleY, ")"));
+          }
+          var transform2 = values.length ? values.join(" ") : "none";
+          return {
+            WebkitTransform: transform2,
+            msTransform: transform2,
+            transform: transform2
+          };
+        }
+        function getMaxZoomRatio(pointers) {
+          var pointers2 = _objectSpread2({}, pointers);
+          var maxRatio = 0;
+          forEach(pointers, function(pointer, pointerId) {
+            delete pointers2[pointerId];
+            forEach(pointers2, function(pointer2) {
+              var x1 = Math.abs(pointer.startX - pointer2.startX);
+              var y1 = Math.abs(pointer.startY - pointer2.startY);
+              var x2 = Math.abs(pointer.endX - pointer2.endX);
+              var y2 = Math.abs(pointer.endY - pointer2.endY);
+              var z1 = Math.sqrt(x1 * x1 + y1 * y1);
+              var z2 = Math.sqrt(x2 * x2 + y2 * y2);
+              var ratio = (z2 - z1) / z1;
+              if (Math.abs(ratio) > Math.abs(maxRatio)) {
+                maxRatio = ratio;
+              }
+            });
+          });
+          return maxRatio;
+        }
+        function getPointer(_ref2, endOnly) {
+          var pageX = _ref2.pageX, pageY = _ref2.pageY;
+          var end2 = {
+            endX: pageX,
+            endY: pageY
+          };
+          return endOnly ? end2 : _objectSpread2({
+            startX: pageX,
+            startY: pageY
+          }, end2);
+        }
+        function getPointersCenter(pointers) {
+          var pageX = 0;
+          var pageY = 0;
+          var count = 0;
+          forEach(pointers, function(_ref3) {
+            var startX = _ref3.startX, startY = _ref3.startY;
+            pageX += startX;
+            pageY += startY;
+            count += 1;
+          });
+          pageX /= count;
+          pageY /= count;
+          return {
+            pageX,
+            pageY
+          };
+        }
+        function getAdjustedSizes(_ref4) {
+          var aspectRatio = _ref4.aspectRatio, height = _ref4.height, width = _ref4.width;
+          var type = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : "contain";
+          var isValidWidth = isPositiveNumber(width);
+          var isValidHeight = isPositiveNumber(height);
+          if (isValidWidth && isValidHeight) {
+            var adjustedWidth = height * aspectRatio;
+            if (type === "contain" && adjustedWidth > width || type === "cover" && adjustedWidth < width) {
+              height = width / aspectRatio;
+            } else {
+              width = height * aspectRatio;
+            }
+          } else if (isValidWidth) {
+            height = width / aspectRatio;
+          } else if (isValidHeight) {
+            width = height * aspectRatio;
+          }
+          return {
+            width,
+            height
+          };
+        }
+        function getRotatedSizes(_ref5) {
+          var width = _ref5.width, height = _ref5.height, degree = _ref5.degree;
+          degree = Math.abs(degree) % 180;
+          if (degree === 90) {
+            return {
+              width: height,
+              height: width
+            };
+          }
+          var arc = degree % 90 * Math.PI / 180;
+          var sinArc = Math.sin(arc);
+          var cosArc = Math.cos(arc);
+          var newWidth = width * cosArc + height * sinArc;
+          var newHeight = width * sinArc + height * cosArc;
+          return degree > 90 ? {
+            width: newHeight,
+            height: newWidth
+          } : {
+            width: newWidth,
+            height: newHeight
+          };
+        }
+        function getSourceCanvas(image, _ref6, _ref7, _ref8) {
+          var imageAspectRatio = _ref6.aspectRatio, imageNaturalWidth = _ref6.naturalWidth, imageNaturalHeight = _ref6.naturalHeight, _ref6$rotate = _ref6.rotate, rotate2 = _ref6$rotate === void 0 ? 0 : _ref6$rotate, _ref6$scaleX = _ref6.scaleX, scaleX = _ref6$scaleX === void 0 ? 1 : _ref6$scaleX, _ref6$scaleY = _ref6.scaleY, scaleY = _ref6$scaleY === void 0 ? 1 : _ref6$scaleY;
+          var aspectRatio = _ref7.aspectRatio, naturalWidth = _ref7.naturalWidth, naturalHeight = _ref7.naturalHeight;
+          var _ref8$fillColor = _ref8.fillColor, fillColor = _ref8$fillColor === void 0 ? "transparent" : _ref8$fillColor, _ref8$imageSmoothingE = _ref8.imageSmoothingEnabled, imageSmoothingEnabled = _ref8$imageSmoothingE === void 0 ? true : _ref8$imageSmoothingE, _ref8$imageSmoothingQ = _ref8.imageSmoothingQuality, imageSmoothingQuality = _ref8$imageSmoothingQ === void 0 ? "low" : _ref8$imageSmoothingQ, _ref8$maxWidth = _ref8.maxWidth, maxWidth = _ref8$maxWidth === void 0 ? Infinity : _ref8$maxWidth, _ref8$maxHeight = _ref8.maxHeight, maxHeight = _ref8$maxHeight === void 0 ? Infinity : _ref8$maxHeight, _ref8$minWidth = _ref8.minWidth, minWidth = _ref8$minWidth === void 0 ? 0 : _ref8$minWidth, _ref8$minHeight = _ref8.minHeight, minHeight = _ref8$minHeight === void 0 ? 0 : _ref8$minHeight;
+          var canvas = document.createElement("canvas");
+          var context = canvas.getContext("2d");
+          var maxSizes = getAdjustedSizes({
+            aspectRatio,
+            width: maxWidth,
+            height: maxHeight
+          });
+          var minSizes = getAdjustedSizes({
+            aspectRatio,
+            width: minWidth,
+            height: minHeight
+          }, "cover");
+          var width = Math.min(maxSizes.width, Math.max(minSizes.width, naturalWidth));
+          var height = Math.min(maxSizes.height, Math.max(minSizes.height, naturalHeight));
+          var destMaxSizes = getAdjustedSizes({
+            aspectRatio: imageAspectRatio,
+            width: maxWidth,
+            height: maxHeight
+          });
+          var destMinSizes = getAdjustedSizes({
+            aspectRatio: imageAspectRatio,
+            width: minWidth,
+            height: minHeight
+          }, "cover");
+          var destWidth = Math.min(destMaxSizes.width, Math.max(destMinSizes.width, imageNaturalWidth));
+          var destHeight = Math.min(destMaxSizes.height, Math.max(destMinSizes.height, imageNaturalHeight));
+          var params = [-destWidth / 2, -destHeight / 2, destWidth, destHeight];
+          canvas.width = normalizeDecimalNumber(width);
+          canvas.height = normalizeDecimalNumber(height);
+          context.fillStyle = fillColor;
+          context.fillRect(0, 0, width, height);
+          context.save();
+          context.translate(width / 2, height / 2);
+          context.rotate(rotate2 * Math.PI / 180);
+          context.scale(scaleX, scaleY);
+          context.imageSmoothingEnabled = imageSmoothingEnabled;
+          context.imageSmoothingQuality = imageSmoothingQuality;
+          context.drawImage.apply(context, [image].concat(_toConsumableArray(params.map(function(param) {
+            return Math.floor(normalizeDecimalNumber(param));
+          }))));
+          context.restore();
+          return canvas;
+        }
+        var fromCharCode = String.fromCharCode;
+        function getStringFromCharCode(dataView, start2, length) {
+          var str = "";
+          length += start2;
+          for (var i = start2; i < length; i += 1) {
+            str += fromCharCode(dataView.getUint8(i));
+          }
+          return str;
+        }
+        var REGEXP_DATA_URL_HEAD = /^data:.*,/;
+        function dataURLToArrayBuffer(dataURL) {
+          var base64 = dataURL.replace(REGEXP_DATA_URL_HEAD, "");
+          var binary = atob(base64);
+          var arrayBuffer = new ArrayBuffer(binary.length);
+          var uint8 = new Uint8Array(arrayBuffer);
+          forEach(uint8, function(value, i) {
+            uint8[i] = binary.charCodeAt(i);
+          });
+          return arrayBuffer;
+        }
+        function arrayBufferToDataURL(arrayBuffer, mimeType) {
+          var chunks = [];
+          var chunkSize = 8192;
+          var uint8 = new Uint8Array(arrayBuffer);
+          while (uint8.length > 0) {
+            chunks.push(fromCharCode.apply(null, toArray(uint8.subarray(0, chunkSize))));
+            uint8 = uint8.subarray(chunkSize);
+          }
+          return "data:".concat(mimeType, ";base64,").concat(btoa(chunks.join("")));
+        }
+        function resetAndGetOrientation(arrayBuffer) {
+          var dataView = new DataView(arrayBuffer);
+          var orientation;
+          try {
+            var littleEndian;
+            var app1Start;
+            var ifdStart;
+            if (dataView.getUint8(0) === 255 && dataView.getUint8(1) === 216) {
+              var length = dataView.byteLength;
+              var offset3 = 2;
+              while (offset3 + 1 < length) {
+                if (dataView.getUint8(offset3) === 255 && dataView.getUint8(offset3 + 1) === 225) {
+                  app1Start = offset3;
+                  break;
+                }
+                offset3 += 1;
+              }
+            }
+            if (app1Start) {
+              var exifIDCode = app1Start + 4;
+              var tiffOffset = app1Start + 10;
+              if (getStringFromCharCode(dataView, exifIDCode, 4) === "Exif") {
+                var endianness = dataView.getUint16(tiffOffset);
+                littleEndian = endianness === 18761;
+                if (littleEndian || endianness === 19789) {
+                  if (dataView.getUint16(tiffOffset + 2, littleEndian) === 42) {
+                    var firstIFDOffset = dataView.getUint32(tiffOffset + 4, littleEndian);
+                    if (firstIFDOffset >= 8) {
+                      ifdStart = tiffOffset + firstIFDOffset;
+                    }
+                  }
+                }
+              }
+            }
+            if (ifdStart) {
+              var _length = dataView.getUint16(ifdStart, littleEndian);
+              var _offset;
+              var i;
+              for (i = 0; i < _length; i += 1) {
+                _offset = ifdStart + i * 12 + 2;
+                if (dataView.getUint16(_offset, littleEndian) === 274) {
+                  _offset += 8;
+                  orientation = dataView.getUint16(_offset, littleEndian);
+                  dataView.setUint16(_offset, 1, littleEndian);
+                  break;
+                }
+              }
+            }
+          } catch (error) {
+            orientation = 1;
+          }
+          return orientation;
+        }
+        function parseOrientation(orientation) {
+          var rotate2 = 0;
+          var scaleX = 1;
+          var scaleY = 1;
+          switch (orientation) {
+            // Flip horizontal
+            case 2:
+              scaleX = -1;
+              break;
+            // Rotate left 180°
+            case 3:
+              rotate2 = -180;
+              break;
+            // Flip vertical
+            case 4:
+              scaleY = -1;
+              break;
+            // Flip vertical and rotate right 90°
+            case 5:
+              rotate2 = 90;
+              scaleY = -1;
+              break;
+            // Rotate right 90°
+            case 6:
+              rotate2 = 90;
+              break;
+            // Flip horizontal and rotate right 90°
+            case 7:
+              rotate2 = 90;
+              scaleX = -1;
+              break;
+            // Rotate left 90°
+            case 8:
+              rotate2 = -90;
+              break;
+          }
+          return {
+            rotate: rotate2,
+            scaleX,
+            scaleY
+          };
+        }
+        var render4 = {
+          render: function render5() {
+            this.initContainer();
+            this.initCanvas();
+            this.initCropBox();
+            this.renderCanvas();
+            if (this.cropped) {
+              this.renderCropBox();
+            }
+          },
+          initContainer: function initContainer() {
+            var element = this.element, options = this.options, container = this.container, cropper2 = this.cropper;
+            var minWidth = Number(options.minContainerWidth);
+            var minHeight = Number(options.minContainerHeight);
+            addClass(cropper2, CLASS_HIDDEN);
+            removeClass(element, CLASS_HIDDEN);
+            var containerData = {
+              width: Math.max(container.offsetWidth, minWidth >= 0 ? minWidth : MIN_CONTAINER_WIDTH),
+              height: Math.max(container.offsetHeight, minHeight >= 0 ? minHeight : MIN_CONTAINER_HEIGHT)
+            };
+            this.containerData = containerData;
+            setStyle2(cropper2, {
+              width: containerData.width,
+              height: containerData.height
+            });
+            addClass(element, CLASS_HIDDEN);
+            removeClass(cropper2, CLASS_HIDDEN);
+          },
+          // Canvas (image wrapper)
+          initCanvas: function initCanvas2() {
+            var containerData = this.containerData, imageData = this.imageData;
+            var viewMode = this.options.viewMode;
+            var rotated = Math.abs(imageData.rotate) % 180 === 90;
+            var naturalWidth = rotated ? imageData.naturalHeight : imageData.naturalWidth;
+            var naturalHeight = rotated ? imageData.naturalWidth : imageData.naturalHeight;
+            var aspectRatio = naturalWidth / naturalHeight;
+            var canvasWidth = containerData.width;
+            var canvasHeight = containerData.height;
+            if (containerData.height * aspectRatio > containerData.width) {
+              if (viewMode === 3) {
+                canvasWidth = containerData.height * aspectRatio;
+              } else {
+                canvasHeight = containerData.width / aspectRatio;
+              }
+            } else if (viewMode === 3) {
+              canvasHeight = containerData.width / aspectRatio;
+            } else {
+              canvasWidth = containerData.height * aspectRatio;
+            }
+            var canvasData = {
+              aspectRatio,
+              naturalWidth,
+              naturalHeight,
+              width: canvasWidth,
+              height: canvasHeight
+            };
+            this.canvasData = canvasData;
+            this.limited = viewMode === 1 || viewMode === 2;
+            this.limitCanvas(true, true);
+            canvasData.width = Math.min(Math.max(canvasData.width, canvasData.minWidth), canvasData.maxWidth);
+            canvasData.height = Math.min(Math.max(canvasData.height, canvasData.minHeight), canvasData.maxHeight);
+            canvasData.left = (containerData.width - canvasData.width) / 2;
+            canvasData.top = (containerData.height - canvasData.height) / 2;
+            canvasData.oldLeft = canvasData.left;
+            canvasData.oldTop = canvasData.top;
+            this.initialCanvasData = assign({}, canvasData);
+          },
+          limitCanvas: function limitCanvas(sizeLimited, positionLimited) {
+            var options = this.options, containerData = this.containerData, canvasData = this.canvasData, cropBoxData = this.cropBoxData;
+            var viewMode = options.viewMode;
+            var aspectRatio = canvasData.aspectRatio;
+            var cropped = this.cropped && cropBoxData;
+            if (sizeLimited) {
+              var minCanvasWidth = Number(options.minCanvasWidth) || 0;
+              var minCanvasHeight = Number(options.minCanvasHeight) || 0;
+              if (viewMode > 1) {
+                minCanvasWidth = Math.max(minCanvasWidth, containerData.width);
+                minCanvasHeight = Math.max(minCanvasHeight, containerData.height);
+                if (viewMode === 3) {
+                  if (minCanvasHeight * aspectRatio > minCanvasWidth) {
+                    minCanvasWidth = minCanvasHeight * aspectRatio;
+                  } else {
+                    minCanvasHeight = minCanvasWidth / aspectRatio;
+                  }
+                }
+              } else if (viewMode > 0) {
+                if (minCanvasWidth) {
+                  minCanvasWidth = Math.max(minCanvasWidth, cropped ? cropBoxData.width : 0);
+                } else if (minCanvasHeight) {
+                  minCanvasHeight = Math.max(minCanvasHeight, cropped ? cropBoxData.height : 0);
+                } else if (cropped) {
+                  minCanvasWidth = cropBoxData.width;
+                  minCanvasHeight = cropBoxData.height;
+                  if (minCanvasHeight * aspectRatio > minCanvasWidth) {
+                    minCanvasWidth = minCanvasHeight * aspectRatio;
+                  } else {
+                    minCanvasHeight = minCanvasWidth / aspectRatio;
+                  }
+                }
+              }
+              var _getAdjustedSizes = getAdjustedSizes({
+                aspectRatio,
+                width: minCanvasWidth,
+                height: minCanvasHeight
+              });
+              minCanvasWidth = _getAdjustedSizes.width;
+              minCanvasHeight = _getAdjustedSizes.height;
+              canvasData.minWidth = minCanvasWidth;
+              canvasData.minHeight = minCanvasHeight;
+              canvasData.maxWidth = Infinity;
+              canvasData.maxHeight = Infinity;
+            }
+            if (positionLimited) {
+              if (viewMode > (cropped ? 0 : 1)) {
+                var newCanvasLeft = containerData.width - canvasData.width;
+                var newCanvasTop = containerData.height - canvasData.height;
+                canvasData.minLeft = Math.min(0, newCanvasLeft);
+                canvasData.minTop = Math.min(0, newCanvasTop);
+                canvasData.maxLeft = Math.max(0, newCanvasLeft);
+                canvasData.maxTop = Math.max(0, newCanvasTop);
+                if (cropped && this.limited) {
+                  canvasData.minLeft = Math.min(cropBoxData.left, cropBoxData.left + (cropBoxData.width - canvasData.width));
+                  canvasData.minTop = Math.min(cropBoxData.top, cropBoxData.top + (cropBoxData.height - canvasData.height));
+                  canvasData.maxLeft = cropBoxData.left;
+                  canvasData.maxTop = cropBoxData.top;
+                  if (viewMode === 2) {
+                    if (canvasData.width >= containerData.width) {
+                      canvasData.minLeft = Math.min(0, newCanvasLeft);
+                      canvasData.maxLeft = Math.max(0, newCanvasLeft);
+                    }
+                    if (canvasData.height >= containerData.height) {
+                      canvasData.minTop = Math.min(0, newCanvasTop);
+                      canvasData.maxTop = Math.max(0, newCanvasTop);
+                    }
+                  }
+                }
+              } else {
+                canvasData.minLeft = -canvasData.width;
+                canvasData.minTop = -canvasData.height;
+                canvasData.maxLeft = containerData.width;
+                canvasData.maxTop = containerData.height;
+              }
+            }
+          },
+          renderCanvas: function renderCanvas(changed, transformed) {
+            var canvasData = this.canvasData, imageData = this.imageData;
+            if (transformed) {
+              var _getRotatedSizes = getRotatedSizes({
+                width: imageData.naturalWidth * Math.abs(imageData.scaleX || 1),
+                height: imageData.naturalHeight * Math.abs(imageData.scaleY || 1),
+                degree: imageData.rotate || 0
+              }), naturalWidth = _getRotatedSizes.width, naturalHeight = _getRotatedSizes.height;
+              var width = canvasData.width * (naturalWidth / canvasData.naturalWidth);
+              var height = canvasData.height * (naturalHeight / canvasData.naturalHeight);
+              canvasData.left -= (width - canvasData.width) / 2;
+              canvasData.top -= (height - canvasData.height) / 2;
+              canvasData.width = width;
+              canvasData.height = height;
+              canvasData.aspectRatio = naturalWidth / naturalHeight;
+              canvasData.naturalWidth = naturalWidth;
+              canvasData.naturalHeight = naturalHeight;
+              this.limitCanvas(true, false);
+            }
+            if (canvasData.width > canvasData.maxWidth || canvasData.width < canvasData.minWidth) {
+              canvasData.left = canvasData.oldLeft;
+            }
+            if (canvasData.height > canvasData.maxHeight || canvasData.height < canvasData.minHeight) {
+              canvasData.top = canvasData.oldTop;
+            }
+            canvasData.width = Math.min(Math.max(canvasData.width, canvasData.minWidth), canvasData.maxWidth);
+            canvasData.height = Math.min(Math.max(canvasData.height, canvasData.minHeight), canvasData.maxHeight);
+            this.limitCanvas(false, true);
+            canvasData.left = Math.min(Math.max(canvasData.left, canvasData.minLeft), canvasData.maxLeft);
+            canvasData.top = Math.min(Math.max(canvasData.top, canvasData.minTop), canvasData.maxTop);
+            canvasData.oldLeft = canvasData.left;
+            canvasData.oldTop = canvasData.top;
+            setStyle2(this.canvas, assign({
+              width: canvasData.width,
+              height: canvasData.height
+            }, getTransforms({
+              translateX: canvasData.left,
+              translateY: canvasData.top
+            })));
+            this.renderImage(changed);
+            if (this.cropped && this.limited) {
+              this.limitCropBox(true, true);
+            }
+          },
+          renderImage: function renderImage(changed) {
+            var canvasData = this.canvasData, imageData = this.imageData;
+            var width = imageData.naturalWidth * (canvasData.width / canvasData.naturalWidth);
+            var height = imageData.naturalHeight * (canvasData.height / canvasData.naturalHeight);
+            assign(imageData, {
+              width,
+              height,
+              left: (canvasData.width - width) / 2,
+              top: (canvasData.height - height) / 2
+            });
+            setStyle2(this.image, assign({
+              width: imageData.width,
+              height: imageData.height
+            }, getTransforms(assign({
+              translateX: imageData.left,
+              translateY: imageData.top
+            }, imageData))));
+            if (changed) {
+              this.output();
+            }
+          },
+          initCropBox: function initCropBox() {
+            var options = this.options, canvasData = this.canvasData;
+            var aspectRatio = options.aspectRatio || options.initialAspectRatio;
+            var autoCropArea = Number(options.autoCropArea) || 0.8;
+            var cropBoxData = {
+              width: canvasData.width,
+              height: canvasData.height
+            };
+            if (aspectRatio) {
+              if (canvasData.height * aspectRatio > canvasData.width) {
+                cropBoxData.height = cropBoxData.width / aspectRatio;
+              } else {
+                cropBoxData.width = cropBoxData.height * aspectRatio;
+              }
+            }
+            this.cropBoxData = cropBoxData;
+            this.limitCropBox(true, true);
+            cropBoxData.width = Math.min(Math.max(cropBoxData.width, cropBoxData.minWidth), cropBoxData.maxWidth);
+            cropBoxData.height = Math.min(Math.max(cropBoxData.height, cropBoxData.minHeight), cropBoxData.maxHeight);
+            cropBoxData.width = Math.max(cropBoxData.minWidth, cropBoxData.width * autoCropArea);
+            cropBoxData.height = Math.max(cropBoxData.minHeight, cropBoxData.height * autoCropArea);
+            cropBoxData.left = canvasData.left + (canvasData.width - cropBoxData.width) / 2;
+            cropBoxData.top = canvasData.top + (canvasData.height - cropBoxData.height) / 2;
+            cropBoxData.oldLeft = cropBoxData.left;
+            cropBoxData.oldTop = cropBoxData.top;
+            this.initialCropBoxData = assign({}, cropBoxData);
+          },
+          limitCropBox: function limitCropBox(sizeLimited, positionLimited) {
+            var options = this.options, containerData = this.containerData, canvasData = this.canvasData, cropBoxData = this.cropBoxData, limited = this.limited;
+            var aspectRatio = options.aspectRatio;
+            if (sizeLimited) {
+              var minCropBoxWidth = Number(options.minCropBoxWidth) || 0;
+              var minCropBoxHeight = Number(options.minCropBoxHeight) || 0;
+              var maxCropBoxWidth = limited ? Math.min(containerData.width, canvasData.width, canvasData.width + canvasData.left, containerData.width - canvasData.left) : containerData.width;
+              var maxCropBoxHeight = limited ? Math.min(containerData.height, canvasData.height, canvasData.height + canvasData.top, containerData.height - canvasData.top) : containerData.height;
+              minCropBoxWidth = Math.min(minCropBoxWidth, containerData.width);
+              minCropBoxHeight = Math.min(minCropBoxHeight, containerData.height);
+              if (aspectRatio) {
+                if (minCropBoxWidth && minCropBoxHeight) {
+                  if (minCropBoxHeight * aspectRatio > minCropBoxWidth) {
+                    minCropBoxHeight = minCropBoxWidth / aspectRatio;
+                  } else {
+                    minCropBoxWidth = minCropBoxHeight * aspectRatio;
+                  }
+                } else if (minCropBoxWidth) {
+                  minCropBoxHeight = minCropBoxWidth / aspectRatio;
+                } else if (minCropBoxHeight) {
+                  minCropBoxWidth = minCropBoxHeight * aspectRatio;
+                }
+                if (maxCropBoxHeight * aspectRatio > maxCropBoxWidth) {
+                  maxCropBoxHeight = maxCropBoxWidth / aspectRatio;
+                } else {
+                  maxCropBoxWidth = maxCropBoxHeight * aspectRatio;
+                }
+              }
+              cropBoxData.minWidth = Math.min(minCropBoxWidth, maxCropBoxWidth);
+              cropBoxData.minHeight = Math.min(minCropBoxHeight, maxCropBoxHeight);
+              cropBoxData.maxWidth = maxCropBoxWidth;
+              cropBoxData.maxHeight = maxCropBoxHeight;
+            }
+            if (positionLimited) {
+              if (limited) {
+                cropBoxData.minLeft = Math.max(0, canvasData.left);
+                cropBoxData.minTop = Math.max(0, canvasData.top);
+                cropBoxData.maxLeft = Math.min(containerData.width, canvasData.left + canvasData.width) - cropBoxData.width;
+                cropBoxData.maxTop = Math.min(containerData.height, canvasData.top + canvasData.height) - cropBoxData.height;
+              } else {
+                cropBoxData.minLeft = 0;
+                cropBoxData.minTop = 0;
+                cropBoxData.maxLeft = containerData.width - cropBoxData.width;
+                cropBoxData.maxTop = containerData.height - cropBoxData.height;
+              }
+            }
+          },
+          renderCropBox: function renderCropBox() {
+            var options = this.options, containerData = this.containerData, cropBoxData = this.cropBoxData;
+            if (cropBoxData.width > cropBoxData.maxWidth || cropBoxData.width < cropBoxData.minWidth) {
+              cropBoxData.left = cropBoxData.oldLeft;
+            }
+            if (cropBoxData.height > cropBoxData.maxHeight || cropBoxData.height < cropBoxData.minHeight) {
+              cropBoxData.top = cropBoxData.oldTop;
+            }
+            cropBoxData.width = Math.min(Math.max(cropBoxData.width, cropBoxData.minWidth), cropBoxData.maxWidth);
+            cropBoxData.height = Math.min(Math.max(cropBoxData.height, cropBoxData.minHeight), cropBoxData.maxHeight);
+            this.limitCropBox(false, true);
+            cropBoxData.left = Math.min(Math.max(cropBoxData.left, cropBoxData.minLeft), cropBoxData.maxLeft);
+            cropBoxData.top = Math.min(Math.max(cropBoxData.top, cropBoxData.minTop), cropBoxData.maxTop);
+            cropBoxData.oldLeft = cropBoxData.left;
+            cropBoxData.oldTop = cropBoxData.top;
+            if (options.movable && options.cropBoxMovable) {
+              setData(this.face, DATA_ACTION, cropBoxData.width >= containerData.width && cropBoxData.height >= containerData.height ? ACTION_MOVE : ACTION_ALL);
+            }
+            setStyle2(this.cropBox, assign({
+              width: cropBoxData.width,
+              height: cropBoxData.height
+            }, getTransforms({
+              translateX: cropBoxData.left,
+              translateY: cropBoxData.top
+            })));
+            if (this.cropped && this.limited) {
+              this.limitCanvas(true, true);
+            }
+            if (!this.disabled) {
+              this.output();
+            }
+          },
+          output: function output() {
+            this.preview();
+            dispatchEvent(this.element, EVENT_CROP, this.getData());
+          }
+        };
+        var preview = {
+          initPreview: function initPreview() {
+            var element = this.element, crossOrigin = this.crossOrigin;
+            var preview2 = this.options.preview;
+            var url = crossOrigin ? this.crossOriginUrl : this.url;
+            var alt = element.alt || "The image to preview";
+            var image = document.createElement("img");
+            if (crossOrigin) {
+              image.crossOrigin = crossOrigin;
+            }
+            image.src = url;
+            image.alt = alt;
+            this.viewBox.appendChild(image);
+            this.viewBoxImage = image;
+            if (!preview2) {
+              return;
+            }
+            var previews = preview2;
+            if (typeof preview2 === "string") {
+              previews = element.ownerDocument.querySelectorAll(preview2);
+            } else if (preview2.querySelector) {
+              previews = [preview2];
+            }
+            this.previews = previews;
+            forEach(previews, function(el) {
+              var img = document.createElement("img");
+              setData(el, DATA_PREVIEW, {
+                width: el.offsetWidth,
+                height: el.offsetHeight,
+                html: el.innerHTML
+              });
+              if (crossOrigin) {
+                img.crossOrigin = crossOrigin;
+              }
+              img.src = url;
+              img.alt = alt;
+              img.style.cssText = 'display:block;width:100%;height:auto;min-width:0!important;min-height:0!important;max-width:none!important;max-height:none!important;image-orientation:0deg!important;"';
+              el.innerHTML = "";
+              el.appendChild(img);
+            });
+          },
+          resetPreview: function resetPreview() {
+            forEach(this.previews, function(element) {
+              var data2 = getData(element, DATA_PREVIEW);
+              setStyle2(element, {
+                width: data2.width,
+                height: data2.height
+              });
+              element.innerHTML = data2.html;
+              removeData(element, DATA_PREVIEW);
+            });
+          },
+          preview: function preview2() {
+            var imageData = this.imageData, canvasData = this.canvasData, cropBoxData = this.cropBoxData;
+            var cropBoxWidth = cropBoxData.width, cropBoxHeight = cropBoxData.height;
+            var width = imageData.width, height = imageData.height;
+            var left2 = cropBoxData.left - canvasData.left - imageData.left;
+            var top2 = cropBoxData.top - canvasData.top - imageData.top;
+            if (!this.cropped || this.disabled) {
+              return;
+            }
+            setStyle2(this.viewBoxImage, assign({
+              width,
+              height
+            }, getTransforms(assign({
+              translateX: -left2,
+              translateY: -top2
+            }, imageData))));
+            forEach(this.previews, function(element) {
+              var data2 = getData(element, DATA_PREVIEW);
+              var originalWidth = data2.width;
+              var originalHeight = data2.height;
+              var newWidth = originalWidth;
+              var newHeight = originalHeight;
+              var ratio = 1;
+              if (cropBoxWidth) {
+                ratio = originalWidth / cropBoxWidth;
+                newHeight = cropBoxHeight * ratio;
+              }
+              if (cropBoxHeight && newHeight > originalHeight) {
+                ratio = originalHeight / cropBoxHeight;
+                newWidth = cropBoxWidth * ratio;
+                newHeight = originalHeight;
+              }
+              setStyle2(element, {
+                width: newWidth,
+                height: newHeight
+              });
+              setStyle2(element.getElementsByTagName("img")[0], assign({
+                width: width * ratio,
+                height: height * ratio
+              }, getTransforms(assign({
+                translateX: -left2 * ratio,
+                translateY: -top2 * ratio
+              }, imageData))));
+            });
+          }
+        };
+        var events = {
+          bind: function bind() {
+            var element = this.element, options = this.options, cropper2 = this.cropper;
+            if (isFunction2(options.cropstart)) {
+              addListener2(element, EVENT_CROP_START, options.cropstart);
+            }
+            if (isFunction2(options.cropmove)) {
+              addListener2(element, EVENT_CROP_MOVE, options.cropmove);
+            }
+            if (isFunction2(options.cropend)) {
+              addListener2(element, EVENT_CROP_END, options.cropend);
+            }
+            if (isFunction2(options.crop)) {
+              addListener2(element, EVENT_CROP, options.crop);
+            }
+            if (isFunction2(options.zoom)) {
+              addListener2(element, EVENT_ZOOM, options.zoom);
+            }
+            addListener2(cropper2, EVENT_POINTER_DOWN, this.onCropStart = this.cropStart.bind(this));
+            if (options.zoomable && options.zoomOnWheel) {
+              addListener2(cropper2, EVENT_WHEEL, this.onWheel = this.wheel.bind(this), {
+                passive: false,
+                capture: true
+              });
+            }
+            if (options.toggleDragModeOnDblclick) {
+              addListener2(cropper2, EVENT_DBLCLICK, this.onDblclick = this.dblclick.bind(this));
+            }
+            addListener2(element.ownerDocument, EVENT_POINTER_MOVE, this.onCropMove = this.cropMove.bind(this));
+            addListener2(element.ownerDocument, EVENT_POINTER_UP, this.onCropEnd = this.cropEnd.bind(this));
+            if (options.responsive) {
+              addListener2(window, EVENT_RESIZE, this.onResize = this.resize.bind(this));
+            }
+          },
+          unbind: function unbind() {
+            var element = this.element, options = this.options, cropper2 = this.cropper;
+            if (isFunction2(options.cropstart)) {
+              removeListener2(element, EVENT_CROP_START, options.cropstart);
+            }
+            if (isFunction2(options.cropmove)) {
+              removeListener2(element, EVENT_CROP_MOVE, options.cropmove);
+            }
+            if (isFunction2(options.cropend)) {
+              removeListener2(element, EVENT_CROP_END, options.cropend);
+            }
+            if (isFunction2(options.crop)) {
+              removeListener2(element, EVENT_CROP, options.crop);
+            }
+            if (isFunction2(options.zoom)) {
+              removeListener2(element, EVENT_ZOOM, options.zoom);
+            }
+            removeListener2(cropper2, EVENT_POINTER_DOWN, this.onCropStart);
+            if (options.zoomable && options.zoomOnWheel) {
+              removeListener2(cropper2, EVENT_WHEEL, this.onWheel, {
+                passive: false,
+                capture: true
+              });
+            }
+            if (options.toggleDragModeOnDblclick) {
+              removeListener2(cropper2, EVENT_DBLCLICK, this.onDblclick);
+            }
+            removeListener2(element.ownerDocument, EVENT_POINTER_MOVE, this.onCropMove);
+            removeListener2(element.ownerDocument, EVENT_POINTER_UP, this.onCropEnd);
+            if (options.responsive) {
+              removeListener2(window, EVENT_RESIZE, this.onResize);
+            }
+          }
+        };
+        var handlers = {
+          resize: function resize() {
+            if (this.disabled) {
+              return;
+            }
+            var options = this.options, container = this.container, containerData = this.containerData;
+            var ratioX = container.offsetWidth / containerData.width;
+            var ratioY = container.offsetHeight / containerData.height;
+            var ratio = Math.abs(ratioX - 1) > Math.abs(ratioY - 1) ? ratioX : ratioY;
+            if (ratio !== 1) {
+              var canvasData;
+              var cropBoxData;
+              if (options.restore) {
+                canvasData = this.getCanvasData();
+                cropBoxData = this.getCropBoxData();
+              }
+              this.render();
+              if (options.restore) {
+                this.setCanvasData(forEach(canvasData, function(n2, i) {
+                  canvasData[i] = n2 * ratio;
+                }));
+                this.setCropBoxData(forEach(cropBoxData, function(n2, i) {
+                  cropBoxData[i] = n2 * ratio;
+                }));
+              }
+            }
+          },
+          dblclick: function dblclick() {
+            if (this.disabled || this.options.dragMode === DRAG_MODE_NONE) {
+              return;
+            }
+            this.setDragMode(hasClass(this.dragBox, CLASS_CROP) ? DRAG_MODE_MOVE : DRAG_MODE_CROP);
+          },
+          wheel: function wheel(event3) {
+            var _this = this;
+            var ratio = Number(this.options.wheelZoomRatio) || 0.1;
+            var delta = 1;
+            if (this.disabled) {
+              return;
+            }
+            event3.preventDefault();
+            if (this.wheeling) {
+              return;
+            }
+            this.wheeling = true;
+            setTimeout(function() {
+              _this.wheeling = false;
+            }, 50);
+            if (event3.deltaY) {
+              delta = event3.deltaY > 0 ? 1 : -1;
+            } else if (event3.wheelDelta) {
+              delta = -event3.wheelDelta / 120;
+            } else if (event3.detail) {
+              delta = event3.detail > 0 ? 1 : -1;
+            }
+            this.zoom(-delta * ratio, event3);
+          },
+          cropStart: function cropStart(event3) {
+            var buttons = event3.buttons, button2 = event3.button;
+            if (this.disabled || (event3.type === "mousedown" || event3.type === "pointerdown" && event3.pointerType === "mouse") && // No primary button (Usually the left button)
+            (isNumber3(buttons) && buttons !== 1 || isNumber3(button2) && button2 !== 0 || event3.ctrlKey)) {
+              return;
+            }
+            var options = this.options, pointers = this.pointers;
+            var action;
+            if (event3.changedTouches) {
+              forEach(event3.changedTouches, function(touch) {
+                pointers[touch.identifier] = getPointer(touch);
+              });
+            } else {
+              pointers[event3.pointerId || 0] = getPointer(event3);
+            }
+            if (Object.keys(pointers).length > 1 && options.zoomable && options.zoomOnTouch) {
+              action = ACTION_ZOOM;
+            } else {
+              action = getData(event3.target, DATA_ACTION);
+            }
+            if (!REGEXP_ACTIONS.test(action)) {
+              return;
+            }
+            if (dispatchEvent(this.element, EVENT_CROP_START, {
+              originalEvent: event3,
+              action
+            }) === false) {
+              return;
+            }
+            event3.preventDefault();
+            this.action = action;
+            this.cropping = false;
+            if (action === ACTION_CROP) {
+              this.cropping = true;
+              addClass(this.dragBox, CLASS_MODAL);
+            }
+          },
+          cropMove: function cropMove(event3) {
+            var action = this.action;
+            if (this.disabled || !action) {
+              return;
+            }
+            var pointers = this.pointers;
+            event3.preventDefault();
+            if (dispatchEvent(this.element, EVENT_CROP_MOVE, {
+              originalEvent: event3,
+              action
+            }) === false) {
+              return;
+            }
+            if (event3.changedTouches) {
+              forEach(event3.changedTouches, function(touch) {
+                assign(pointers[touch.identifier] || {}, getPointer(touch, true));
+              });
+            } else {
+              assign(pointers[event3.pointerId || 0] || {}, getPointer(event3, true));
+            }
+            this.change(event3);
+          },
+          cropEnd: function cropEnd(event3) {
+            if (this.disabled) {
+              return;
+            }
+            var action = this.action, pointers = this.pointers;
+            if (event3.changedTouches) {
+              forEach(event3.changedTouches, function(touch) {
+                delete pointers[touch.identifier];
+              });
+            } else {
+              delete pointers[event3.pointerId || 0];
+            }
+            if (!action) {
+              return;
+            }
+            event3.preventDefault();
+            if (!Object.keys(pointers).length) {
+              this.action = "";
+            }
+            if (this.cropping) {
+              this.cropping = false;
+              toggleClass(this.dragBox, CLASS_MODAL, this.cropped && this.options.modal);
+            }
+            dispatchEvent(this.element, EVENT_CROP_END, {
+              originalEvent: event3,
+              action
+            });
+          }
+        };
+        var change = {
+          change: function change2(event3) {
+            var options = this.options, canvasData = this.canvasData, containerData = this.containerData, cropBoxData = this.cropBoxData, pointers = this.pointers;
+            var action = this.action;
+            var aspectRatio = options.aspectRatio;
+            var left2 = cropBoxData.left, top2 = cropBoxData.top, width = cropBoxData.width, height = cropBoxData.height;
+            var right2 = left2 + width;
+            var bottom2 = top2 + height;
+            var minLeft = 0;
+            var minTop = 0;
+            var maxWidth = containerData.width;
+            var maxHeight = containerData.height;
+            var renderable = true;
+            var offset3;
+            if (!aspectRatio && event3.shiftKey) {
+              aspectRatio = width && height ? width / height : 1;
+            }
+            if (this.limited) {
+              minLeft = cropBoxData.minLeft;
+              minTop = cropBoxData.minTop;
+              maxWidth = minLeft + Math.min(containerData.width, canvasData.width, canvasData.left + canvasData.width);
+              maxHeight = minTop + Math.min(containerData.height, canvasData.height, canvasData.top + canvasData.height);
+            }
+            var pointer = pointers[Object.keys(pointers)[0]];
+            var range = {
+              x: pointer.endX - pointer.startX,
+              y: pointer.endY - pointer.startY
+            };
+            var check = function check2(side) {
+              switch (side) {
+                case ACTION_EAST:
+                  if (right2 + range.x > maxWidth) {
+                    range.x = maxWidth - right2;
+                  }
+                  break;
+                case ACTION_WEST:
+                  if (left2 + range.x < minLeft) {
+                    range.x = minLeft - left2;
+                  }
+                  break;
+                case ACTION_NORTH:
+                  if (top2 + range.y < minTop) {
+                    range.y = minTop - top2;
+                  }
+                  break;
+                case ACTION_SOUTH:
+                  if (bottom2 + range.y > maxHeight) {
+                    range.y = maxHeight - bottom2;
+                  }
+                  break;
+              }
+            };
+            switch (action) {
+              // Move crop box
+              case ACTION_ALL:
+                left2 += range.x;
+                top2 += range.y;
+                break;
+              // Resize crop box
+              case ACTION_EAST:
+                if (range.x >= 0 && (right2 >= maxWidth || aspectRatio && (top2 <= minTop || bottom2 >= maxHeight))) {
+                  renderable = false;
+                  break;
+                }
+                check(ACTION_EAST);
+                width += range.x;
+                if (width < 0) {
+                  action = ACTION_WEST;
+                  width = -width;
+                  left2 -= width;
+                }
+                if (aspectRatio) {
+                  height = width / aspectRatio;
+                  top2 += (cropBoxData.height - height) / 2;
+                }
+                break;
+              case ACTION_NORTH:
+                if (range.y <= 0 && (top2 <= minTop || aspectRatio && (left2 <= minLeft || right2 >= maxWidth))) {
+                  renderable = false;
+                  break;
+                }
+                check(ACTION_NORTH);
+                height -= range.y;
+                top2 += range.y;
+                if (height < 0) {
+                  action = ACTION_SOUTH;
+                  height = -height;
+                  top2 -= height;
+                }
+                if (aspectRatio) {
+                  width = height * aspectRatio;
+                  left2 += (cropBoxData.width - width) / 2;
+                }
+                break;
+              case ACTION_WEST:
+                if (range.x <= 0 && (left2 <= minLeft || aspectRatio && (top2 <= minTop || bottom2 >= maxHeight))) {
+                  renderable = false;
+                  break;
+                }
+                check(ACTION_WEST);
+                width -= range.x;
+                left2 += range.x;
+                if (width < 0) {
+                  action = ACTION_EAST;
+                  width = -width;
+                  left2 -= width;
+                }
+                if (aspectRatio) {
+                  height = width / aspectRatio;
+                  top2 += (cropBoxData.height - height) / 2;
+                }
+                break;
+              case ACTION_SOUTH:
+                if (range.y >= 0 && (bottom2 >= maxHeight || aspectRatio && (left2 <= minLeft || right2 >= maxWidth))) {
+                  renderable = false;
+                  break;
+                }
+                check(ACTION_SOUTH);
+                height += range.y;
+                if (height < 0) {
+                  action = ACTION_NORTH;
+                  height = -height;
+                  top2 -= height;
+                }
+                if (aspectRatio) {
+                  width = height * aspectRatio;
+                  left2 += (cropBoxData.width - width) / 2;
+                }
+                break;
+              case ACTION_NORTH_EAST:
+                if (aspectRatio) {
+                  if (range.y <= 0 && (top2 <= minTop || right2 >= maxWidth)) {
+                    renderable = false;
+                    break;
+                  }
+                  check(ACTION_NORTH);
+                  height -= range.y;
+                  top2 += range.y;
+                  width = height * aspectRatio;
+                } else {
+                  check(ACTION_NORTH);
+                  check(ACTION_EAST);
+                  if (range.x >= 0) {
+                    if (right2 < maxWidth) {
+                      width += range.x;
+                    } else if (range.y <= 0 && top2 <= minTop) {
+                      renderable = false;
+                    }
+                  } else {
+                    width += range.x;
+                  }
+                  if (range.y <= 0) {
+                    if (top2 > minTop) {
+                      height -= range.y;
+                      top2 += range.y;
+                    }
+                  } else {
+                    height -= range.y;
+                    top2 += range.y;
+                  }
+                }
+                if (width < 0 && height < 0) {
+                  action = ACTION_SOUTH_WEST;
+                  height = -height;
+                  width = -width;
+                  top2 -= height;
+                  left2 -= width;
+                } else if (width < 0) {
+                  action = ACTION_NORTH_WEST;
+                  width = -width;
+                  left2 -= width;
+                } else if (height < 0) {
+                  action = ACTION_SOUTH_EAST;
+                  height = -height;
+                  top2 -= height;
+                }
+                break;
+              case ACTION_NORTH_WEST:
+                if (aspectRatio) {
+                  if (range.y <= 0 && (top2 <= minTop || left2 <= minLeft)) {
+                    renderable = false;
+                    break;
+                  }
+                  check(ACTION_NORTH);
+                  height -= range.y;
+                  top2 += range.y;
+                  width = height * aspectRatio;
+                  left2 += cropBoxData.width - width;
+                } else {
+                  check(ACTION_NORTH);
+                  check(ACTION_WEST);
+                  if (range.x <= 0) {
+                    if (left2 > minLeft) {
+                      width -= range.x;
+                      left2 += range.x;
+                    } else if (range.y <= 0 && top2 <= minTop) {
+                      renderable = false;
+                    }
+                  } else {
+                    width -= range.x;
+                    left2 += range.x;
+                  }
+                  if (range.y <= 0) {
+                    if (top2 > minTop) {
+                      height -= range.y;
+                      top2 += range.y;
+                    }
+                  } else {
+                    height -= range.y;
+                    top2 += range.y;
+                  }
+                }
+                if (width < 0 && height < 0) {
+                  action = ACTION_SOUTH_EAST;
+                  height = -height;
+                  width = -width;
+                  top2 -= height;
+                  left2 -= width;
+                } else if (width < 0) {
+                  action = ACTION_NORTH_EAST;
+                  width = -width;
+                  left2 -= width;
+                } else if (height < 0) {
+                  action = ACTION_SOUTH_WEST;
+                  height = -height;
+                  top2 -= height;
+                }
+                break;
+              case ACTION_SOUTH_WEST:
+                if (aspectRatio) {
+                  if (range.x <= 0 && (left2 <= minLeft || bottom2 >= maxHeight)) {
+                    renderable = false;
+                    break;
+                  }
+                  check(ACTION_WEST);
+                  width -= range.x;
+                  left2 += range.x;
+                  height = width / aspectRatio;
+                } else {
+                  check(ACTION_SOUTH);
+                  check(ACTION_WEST);
+                  if (range.x <= 0) {
+                    if (left2 > minLeft) {
+                      width -= range.x;
+                      left2 += range.x;
+                    } else if (range.y >= 0 && bottom2 >= maxHeight) {
+                      renderable = false;
+                    }
+                  } else {
+                    width -= range.x;
+                    left2 += range.x;
+                  }
+                  if (range.y >= 0) {
+                    if (bottom2 < maxHeight) {
+                      height += range.y;
+                    }
+                  } else {
+                    height += range.y;
+                  }
+                }
+                if (width < 0 && height < 0) {
+                  action = ACTION_NORTH_EAST;
+                  height = -height;
+                  width = -width;
+                  top2 -= height;
+                  left2 -= width;
+                } else if (width < 0) {
+                  action = ACTION_SOUTH_EAST;
+                  width = -width;
+                  left2 -= width;
+                } else if (height < 0) {
+                  action = ACTION_NORTH_WEST;
+                  height = -height;
+                  top2 -= height;
+                }
+                break;
+              case ACTION_SOUTH_EAST:
+                if (aspectRatio) {
+                  if (range.x >= 0 && (right2 >= maxWidth || bottom2 >= maxHeight)) {
+                    renderable = false;
+                    break;
+                  }
+                  check(ACTION_EAST);
+                  width += range.x;
+                  height = width / aspectRatio;
+                } else {
+                  check(ACTION_SOUTH);
+                  check(ACTION_EAST);
+                  if (range.x >= 0) {
+                    if (right2 < maxWidth) {
+                      width += range.x;
+                    } else if (range.y >= 0 && bottom2 >= maxHeight) {
+                      renderable = false;
+                    }
+                  } else {
+                    width += range.x;
+                  }
+                  if (range.y >= 0) {
+                    if (bottom2 < maxHeight) {
+                      height += range.y;
+                    }
+                  } else {
+                    height += range.y;
+                  }
+                }
+                if (width < 0 && height < 0) {
+                  action = ACTION_NORTH_WEST;
+                  height = -height;
+                  width = -width;
+                  top2 -= height;
+                  left2 -= width;
+                } else if (width < 0) {
+                  action = ACTION_SOUTH_WEST;
+                  width = -width;
+                  left2 -= width;
+                } else if (height < 0) {
+                  action = ACTION_NORTH_EAST;
+                  height = -height;
+                  top2 -= height;
+                }
+                break;
+              // Move canvas
+              case ACTION_MOVE:
+                this.move(range.x, range.y);
+                renderable = false;
+                break;
+              // Zoom canvas
+              case ACTION_ZOOM:
+                this.zoom(getMaxZoomRatio(pointers), event3);
+                renderable = false;
+                break;
+              // Create crop box
+              case ACTION_CROP:
+                if (!range.x || !range.y) {
+                  renderable = false;
+                  break;
+                }
+                offset3 = getOffset(this.cropper);
+                left2 = pointer.startX - offset3.left;
+                top2 = pointer.startY - offset3.top;
+                width = cropBoxData.minWidth;
+                height = cropBoxData.minHeight;
+                if (range.x > 0) {
+                  action = range.y > 0 ? ACTION_SOUTH_EAST : ACTION_NORTH_EAST;
+                } else if (range.x < 0) {
+                  left2 -= width;
+                  action = range.y > 0 ? ACTION_SOUTH_WEST : ACTION_NORTH_WEST;
+                }
+                if (range.y < 0) {
+                  top2 -= height;
+                }
+                if (!this.cropped) {
+                  removeClass(this.cropBox, CLASS_HIDDEN);
+                  this.cropped = true;
+                  if (this.limited) {
+                    this.limitCropBox(true, true);
+                  }
+                }
+                break;
+            }
+            if (renderable) {
+              cropBoxData.width = width;
+              cropBoxData.height = height;
+              cropBoxData.left = left2;
+              cropBoxData.top = top2;
+              this.action = action;
+              this.renderCropBox();
+            }
+            forEach(pointers, function(p) {
+              p.startX = p.endX;
+              p.startY = p.endY;
+            });
+          }
+        };
+        var methods = {
+          // Show the crop box manually
+          crop: function crop() {
+            if (this.ready && !this.cropped && !this.disabled) {
+              this.cropped = true;
+              this.limitCropBox(true, true);
+              if (this.options.modal) {
+                addClass(this.dragBox, CLASS_MODAL);
+              }
+              removeClass(this.cropBox, CLASS_HIDDEN);
+              this.setCropBoxData(this.initialCropBoxData);
+            }
+            return this;
+          },
+          // Reset the image and crop box to their initial states
+          reset: function reset() {
+            if (this.ready && !this.disabled) {
+              this.imageData = assign({}, this.initialImageData);
+              this.canvasData = assign({}, this.initialCanvasData);
+              this.cropBoxData = assign({}, this.initialCropBoxData);
+              this.renderCanvas();
+              if (this.cropped) {
+                this.renderCropBox();
+              }
+            }
+            return this;
+          },
+          // Clear the crop box
+          clear: function clear() {
+            if (this.cropped && !this.disabled) {
+              assign(this.cropBoxData, {
+                left: 0,
+                top: 0,
+                width: 0,
+                height: 0
+              });
+              this.cropped = false;
+              this.renderCropBox();
+              this.limitCanvas(true, true);
+              this.renderCanvas();
+              removeClass(this.dragBox, CLASS_MODAL);
+              addClass(this.cropBox, CLASS_HIDDEN);
+            }
+            return this;
+          },
+          /**
+           * Replace the image's src and rebuild the cropper
+           * @param {string} url - The new URL.
+           * @param {boolean} [hasSameSize] - Indicate if the new image has the same size as the old one.
+           * @returns {Cropper} this
+           */
+          replace: function replace(url) {
+            var hasSameSize = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : false;
+            if (!this.disabled && url) {
+              if (this.isImg) {
+                this.element.src = url;
+              }
+              if (hasSameSize) {
+                this.url = url;
+                this.image.src = url;
+                if (this.ready) {
+                  this.viewBoxImage.src = url;
+                  forEach(this.previews, function(element) {
+                    element.getElementsByTagName("img")[0].src = url;
+                  });
+                }
+              } else {
+                if (this.isImg) {
+                  this.replaced = true;
+                }
+                this.options.data = null;
+                this.uncreate();
+                this.load(url);
+              }
+            }
+            return this;
+          },
+          // Enable (unfreeze) the cropper
+          enable: function enable() {
+            if (this.ready && this.disabled) {
+              this.disabled = false;
+              removeClass(this.cropper, CLASS_DISABLED);
+            }
+            return this;
+          },
+          // Disable (freeze) the cropper
+          disable: function disable() {
+            if (this.ready && !this.disabled) {
+              this.disabled = true;
+              addClass(this.cropper, CLASS_DISABLED);
+            }
+            return this;
+          },
+          /**
+           * Destroy the cropper and remove the instance from the image
+           * @returns {Cropper} this
+           */
+          destroy: function destroy() {
+            var element = this.element;
+            if (!element[NAMESPACE]) {
+              return this;
+            }
+            element[NAMESPACE] = void 0;
+            if (this.isImg && this.replaced) {
+              element.src = this.originalUrl;
+            }
+            this.uncreate();
+            return this;
+          },
+          /**
+           * Move the canvas with relative offsets
+           * @param {number} offsetX - The relative offset distance on the x-axis.
+           * @param {number} [offsetY=offsetX] - The relative offset distance on the y-axis.
+           * @returns {Cropper} this
+           */
+          move: function move(offsetX) {
+            var offsetY = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : offsetX;
+            var _this$canvasData = this.canvasData, left2 = _this$canvasData.left, top2 = _this$canvasData.top;
+            return this.moveTo(isUndefined2(offsetX) ? offsetX : left2 + Number(offsetX), isUndefined2(offsetY) ? offsetY : top2 + Number(offsetY));
+          },
+          /**
+           * Move the canvas to an absolute point
+           * @param {number} x - The x-axis coordinate.
+           * @param {number} [y=x] - The y-axis coordinate.
+           * @returns {Cropper} this
+           */
+          moveTo: function moveTo(x) {
+            var y = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : x;
+            var canvasData = this.canvasData;
+            var changed = false;
+            x = Number(x);
+            y = Number(y);
+            if (this.ready && !this.disabled && this.options.movable) {
+              if (isNumber3(x)) {
+                canvasData.left = x;
+                changed = true;
+              }
+              if (isNumber3(y)) {
+                canvasData.top = y;
+                changed = true;
+              }
+              if (changed) {
+                this.renderCanvas(true);
+              }
+            }
+            return this;
+          },
+          /**
+           * Zoom the canvas with a relative ratio
+           * @param {number} ratio - The target ratio.
+           * @param {Event} _originalEvent - The original event if any.
+           * @returns {Cropper} this
+           */
+          zoom: function zoom(ratio, _originalEvent) {
+            var canvasData = this.canvasData;
+            ratio = Number(ratio);
+            if (ratio < 0) {
+              ratio = 1 / (1 - ratio);
+            } else {
+              ratio = 1 + ratio;
+            }
+            return this.zoomTo(canvasData.width * ratio / canvasData.naturalWidth, null, _originalEvent);
+          },
+          /**
+           * Zoom the canvas to an absolute ratio
+           * @param {number} ratio - The target ratio.
+           * @param {Object} pivot - The zoom pivot point coordinate.
+           * @param {Event} _originalEvent - The original event if any.
+           * @returns {Cropper} this
+           */
+          zoomTo: function zoomTo(ratio, pivot, _originalEvent) {
+            var options = this.options, canvasData = this.canvasData;
+            var width = canvasData.width, height = canvasData.height, naturalWidth = canvasData.naturalWidth, naturalHeight = canvasData.naturalHeight;
+            ratio = Number(ratio);
+            if (ratio >= 0 && this.ready && !this.disabled && options.zoomable) {
+              var newWidth = naturalWidth * ratio;
+              var newHeight = naturalHeight * ratio;
+              if (dispatchEvent(this.element, EVENT_ZOOM, {
+                ratio,
+                oldRatio: width / naturalWidth,
+                originalEvent: _originalEvent
+              }) === false) {
+                return this;
+              }
+              if (_originalEvent) {
+                var pointers = this.pointers;
+                var offset3 = getOffset(this.cropper);
+                var center = pointers && Object.keys(pointers).length ? getPointersCenter(pointers) : {
+                  pageX: _originalEvent.pageX,
+                  pageY: _originalEvent.pageY
+                };
+                canvasData.left -= (newWidth - width) * ((center.pageX - offset3.left - canvasData.left) / width);
+                canvasData.top -= (newHeight - height) * ((center.pageY - offset3.top - canvasData.top) / height);
+              } else if (isPlainObject(pivot) && isNumber3(pivot.x) && isNumber3(pivot.y)) {
+                canvasData.left -= (newWidth - width) * ((pivot.x - canvasData.left) / width);
+                canvasData.top -= (newHeight - height) * ((pivot.y - canvasData.top) / height);
+              } else {
+                canvasData.left -= (newWidth - width) / 2;
+                canvasData.top -= (newHeight - height) / 2;
+              }
+              canvasData.width = newWidth;
+              canvasData.height = newHeight;
+              this.renderCanvas(true);
+            }
+            return this;
+          },
+          /**
+           * Rotate the canvas with a relative degree
+           * @param {number} degree - The rotate degree.
+           * @returns {Cropper} this
+           */
+          rotate: function rotate2(degree) {
+            return this.rotateTo((this.imageData.rotate || 0) + Number(degree));
+          },
+          /**
+           * Rotate the canvas to an absolute degree
+           * @param {number} degree - The rotate degree.
+           * @returns {Cropper} this
+           */
+          rotateTo: function rotateTo(degree) {
+            degree = Number(degree);
+            if (isNumber3(degree) && this.ready && !this.disabled && this.options.rotatable) {
+              this.imageData.rotate = degree % 360;
+              this.renderCanvas(true, true);
+            }
+            return this;
+          },
+          /**
+           * Scale the image on the x-axis.
+           * @param {number} scaleX - The scale ratio on the x-axis.
+           * @returns {Cropper} this
+           */
+          scaleX: function scaleX(_scaleX) {
+            var scaleY = this.imageData.scaleY;
+            return this.scale(_scaleX, isNumber3(scaleY) ? scaleY : 1);
+          },
+          /**
+           * Scale the image on the y-axis.
+           * @param {number} scaleY - The scale ratio on the y-axis.
+           * @returns {Cropper} this
+           */
+          scaleY: function scaleY(_scaleY) {
+            var scaleX = this.imageData.scaleX;
+            return this.scale(isNumber3(scaleX) ? scaleX : 1, _scaleY);
+          },
+          /**
+           * Scale the image
+           * @param {number} scaleX - The scale ratio on the x-axis.
+           * @param {number} [scaleY=scaleX] - The scale ratio on the y-axis.
+           * @returns {Cropper} this
+           */
+          scale: function scale(scaleX) {
+            var scaleY = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : scaleX;
+            var imageData = this.imageData;
+            var transformed = false;
+            scaleX = Number(scaleX);
+            scaleY = Number(scaleY);
+            if (this.ready && !this.disabled && this.options.scalable) {
+              if (isNumber3(scaleX)) {
+                imageData.scaleX = scaleX;
+                transformed = true;
+              }
+              if (isNumber3(scaleY)) {
+                imageData.scaleY = scaleY;
+                transformed = true;
+              }
+              if (transformed) {
+                this.renderCanvas(true, true);
+              }
+            }
+            return this;
+          },
+          /**
+           * Get the cropped area position and size data (base on the original image)
+           * @param {boolean} [rounded=false] - Indicate if round the data values or not.
+           * @returns {Object} The result cropped data.
+           */
+          getData: function getData2() {
+            var rounded = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : false;
+            var options = this.options, imageData = this.imageData, canvasData = this.canvasData, cropBoxData = this.cropBoxData;
+            var data2;
+            if (this.ready && this.cropped) {
+              data2 = {
+                x: cropBoxData.left - canvasData.left,
+                y: cropBoxData.top - canvasData.top,
+                width: cropBoxData.width,
+                height: cropBoxData.height
+              };
+              var ratio = imageData.width / imageData.naturalWidth;
+              forEach(data2, function(n2, i) {
+                data2[i] = n2 / ratio;
+              });
+              if (rounded) {
+                var bottom2 = Math.round(data2.y + data2.height);
+                var right2 = Math.round(data2.x + data2.width);
+                data2.x = Math.round(data2.x);
+                data2.y = Math.round(data2.y);
+                data2.width = right2 - data2.x;
+                data2.height = bottom2 - data2.y;
+              }
+            } else {
+              data2 = {
+                x: 0,
+                y: 0,
+                width: 0,
+                height: 0
+              };
+            }
+            if (options.rotatable) {
+              data2.rotate = imageData.rotate || 0;
+            }
+            if (options.scalable) {
+              data2.scaleX = imageData.scaleX || 1;
+              data2.scaleY = imageData.scaleY || 1;
+            }
+            return data2;
+          },
+          /**
+           * Set the cropped area position and size with new data
+           * @param {Object} data - The new data.
+           * @returns {Cropper} this
+           */
+          setData: function setData2(data2) {
+            var options = this.options, imageData = this.imageData, canvasData = this.canvasData;
+            var cropBoxData = {};
+            if (this.ready && !this.disabled && isPlainObject(data2)) {
+              var transformed = false;
+              if (options.rotatable) {
+                if (isNumber3(data2.rotate) && data2.rotate !== imageData.rotate) {
+                  imageData.rotate = data2.rotate;
+                  transformed = true;
+                }
+              }
+              if (options.scalable) {
+                if (isNumber3(data2.scaleX) && data2.scaleX !== imageData.scaleX) {
+                  imageData.scaleX = data2.scaleX;
+                  transformed = true;
+                }
+                if (isNumber3(data2.scaleY) && data2.scaleY !== imageData.scaleY) {
+                  imageData.scaleY = data2.scaleY;
+                  transformed = true;
+                }
+              }
+              if (transformed) {
+                this.renderCanvas(true, true);
+              }
+              var ratio = imageData.width / imageData.naturalWidth;
+              if (isNumber3(data2.x)) {
+                cropBoxData.left = data2.x * ratio + canvasData.left;
+              }
+              if (isNumber3(data2.y)) {
+                cropBoxData.top = data2.y * ratio + canvasData.top;
+              }
+              if (isNumber3(data2.width)) {
+                cropBoxData.width = data2.width * ratio;
+              }
+              if (isNumber3(data2.height)) {
+                cropBoxData.height = data2.height * ratio;
+              }
+              this.setCropBoxData(cropBoxData);
+            }
+            return this;
+          },
+          /**
+           * Get the container size data.
+           * @returns {Object} The result container data.
+           */
+          getContainerData: function getContainerData() {
+            return this.ready ? assign({}, this.containerData) : {};
+          },
+          /**
+           * Get the image position and size data.
+           * @returns {Object} The result image data.
+           */
+          getImageData: function getImageData() {
+            return this.sized ? assign({}, this.imageData) : {};
+          },
+          /**
+           * Get the canvas position and size data.
+           * @returns {Object} The result canvas data.
+           */
+          getCanvasData: function getCanvasData() {
+            var canvasData = this.canvasData;
+            var data2 = {};
+            if (this.ready) {
+              forEach(["left", "top", "width", "height", "naturalWidth", "naturalHeight"], function(n2) {
+                data2[n2] = canvasData[n2];
+              });
+            }
+            return data2;
+          },
+          /**
+           * Set the canvas position and size with new data.
+           * @param {Object} data - The new canvas data.
+           * @returns {Cropper} this
+           */
+          setCanvasData: function setCanvasData(data2) {
+            var canvasData = this.canvasData;
+            var aspectRatio = canvasData.aspectRatio;
+            if (this.ready && !this.disabled && isPlainObject(data2)) {
+              if (isNumber3(data2.left)) {
+                canvasData.left = data2.left;
+              }
+              if (isNumber3(data2.top)) {
+                canvasData.top = data2.top;
+              }
+              if (isNumber3(data2.width)) {
+                canvasData.width = data2.width;
+                canvasData.height = data2.width / aspectRatio;
+              } else if (isNumber3(data2.height)) {
+                canvasData.height = data2.height;
+                canvasData.width = data2.height * aspectRatio;
+              }
+              this.renderCanvas(true);
+            }
+            return this;
+          },
+          /**
+           * Get the crop box position and size data.
+           * @returns {Object} The result crop box data.
+           */
+          getCropBoxData: function getCropBoxData() {
+            var cropBoxData = this.cropBoxData;
+            var data2;
+            if (this.ready && this.cropped) {
+              data2 = {
+                left: cropBoxData.left,
+                top: cropBoxData.top,
+                width: cropBoxData.width,
+                height: cropBoxData.height
+              };
+            }
+            return data2 || {};
+          },
+          /**
+           * Set the crop box position and size with new data.
+           * @param {Object} data - The new crop box data.
+           * @returns {Cropper} this
+           */
+          setCropBoxData: function setCropBoxData(data2) {
+            var cropBoxData = this.cropBoxData;
+            var aspectRatio = this.options.aspectRatio;
+            var widthChanged;
+            var heightChanged;
+            if (this.ready && this.cropped && !this.disabled && isPlainObject(data2)) {
+              if (isNumber3(data2.left)) {
+                cropBoxData.left = data2.left;
+              }
+              if (isNumber3(data2.top)) {
+                cropBoxData.top = data2.top;
+              }
+              if (isNumber3(data2.width) && data2.width !== cropBoxData.width) {
+                widthChanged = true;
+                cropBoxData.width = data2.width;
+              }
+              if (isNumber3(data2.height) && data2.height !== cropBoxData.height) {
+                heightChanged = true;
+                cropBoxData.height = data2.height;
+              }
+              if (aspectRatio) {
+                if (widthChanged) {
+                  cropBoxData.height = cropBoxData.width / aspectRatio;
+                } else if (heightChanged) {
+                  cropBoxData.width = cropBoxData.height * aspectRatio;
+                }
+              }
+              this.renderCropBox();
+            }
+            return this;
+          },
+          /**
+           * Get a canvas drawn the cropped image.
+           * @param {Object} [options={}] - The config options.
+           * @returns {HTMLCanvasElement} - The result canvas.
+           */
+          getCroppedCanvas: function getCroppedCanvas() {
+            var options = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : {};
+            if (!this.ready || !window.HTMLCanvasElement) {
+              return null;
+            }
+            var canvasData = this.canvasData;
+            var source = getSourceCanvas(this.image, this.imageData, canvasData, options);
+            if (!this.cropped) {
+              return source;
+            }
+            var _this$getData = this.getData(), initialX = _this$getData.x, initialY = _this$getData.y, initialWidth = _this$getData.width, initialHeight = _this$getData.height;
+            var ratio = source.width / Math.floor(canvasData.naturalWidth);
+            if (ratio !== 1) {
+              initialX *= ratio;
+              initialY *= ratio;
+              initialWidth *= ratio;
+              initialHeight *= ratio;
+            }
+            var aspectRatio = initialWidth / initialHeight;
+            var maxSizes = getAdjustedSizes({
+              aspectRatio,
+              width: options.maxWidth || Infinity,
+              height: options.maxHeight || Infinity
+            });
+            var minSizes = getAdjustedSizes({
+              aspectRatio,
+              width: options.minWidth || 0,
+              height: options.minHeight || 0
+            }, "cover");
+            var _getAdjustedSizes = getAdjustedSizes({
+              aspectRatio,
+              width: options.width || (ratio !== 1 ? source.width : initialWidth),
+              height: options.height || (ratio !== 1 ? source.height : initialHeight)
+            }), width = _getAdjustedSizes.width, height = _getAdjustedSizes.height;
+            width = Math.min(maxSizes.width, Math.max(minSizes.width, width));
+            height = Math.min(maxSizes.height, Math.max(minSizes.height, height));
+            var canvas = document.createElement("canvas");
+            var context = canvas.getContext("2d");
+            canvas.width = normalizeDecimalNumber(width);
+            canvas.height = normalizeDecimalNumber(height);
+            context.fillStyle = options.fillColor || "transparent";
+            context.fillRect(0, 0, width, height);
+            var _options$imageSmoothi = options.imageSmoothingEnabled, imageSmoothingEnabled = _options$imageSmoothi === void 0 ? true : _options$imageSmoothi, imageSmoothingQuality = options.imageSmoothingQuality;
+            context.imageSmoothingEnabled = imageSmoothingEnabled;
+            if (imageSmoothingQuality) {
+              context.imageSmoothingQuality = imageSmoothingQuality;
+            }
+            var sourceWidth = source.width;
+            var sourceHeight = source.height;
+            var srcX = initialX;
+            var srcY = initialY;
+            var srcWidth;
+            var srcHeight;
+            var dstX;
+            var dstY;
+            var dstWidth;
+            var dstHeight;
+            if (srcX <= -initialWidth || srcX > sourceWidth) {
+              srcX = 0;
+              srcWidth = 0;
+              dstX = 0;
+              dstWidth = 0;
+            } else if (srcX <= 0) {
+              dstX = -srcX;
+              srcX = 0;
+              srcWidth = Math.min(sourceWidth, initialWidth + srcX);
+              dstWidth = srcWidth;
+            } else if (srcX <= sourceWidth) {
+              dstX = 0;
+              srcWidth = Math.min(initialWidth, sourceWidth - srcX);
+              dstWidth = srcWidth;
+            }
+            if (srcWidth <= 0 || srcY <= -initialHeight || srcY > sourceHeight) {
+              srcY = 0;
+              srcHeight = 0;
+              dstY = 0;
+              dstHeight = 0;
+            } else if (srcY <= 0) {
+              dstY = -srcY;
+              srcY = 0;
+              srcHeight = Math.min(sourceHeight, initialHeight + srcY);
+              dstHeight = srcHeight;
+            } else if (srcY <= sourceHeight) {
+              dstY = 0;
+              srcHeight = Math.min(initialHeight, sourceHeight - srcY);
+              dstHeight = srcHeight;
+            }
+            var params = [srcX, srcY, srcWidth, srcHeight];
+            if (dstWidth > 0 && dstHeight > 0) {
+              var scale = width / initialWidth;
+              params.push(dstX * scale, dstY * scale, dstWidth * scale, dstHeight * scale);
+            }
+            context.drawImage.apply(context, [source].concat(_toConsumableArray(params.map(function(param) {
+              return Math.floor(normalizeDecimalNumber(param));
+            }))));
+            return canvas;
+          },
+          /**
+           * Change the aspect ratio of the crop box.
+           * @param {number} aspectRatio - The new aspect ratio.
+           * @returns {Cropper} this
+           */
+          setAspectRatio: function setAspectRatio(aspectRatio) {
+            var options = this.options;
+            if (!this.disabled && !isUndefined2(aspectRatio)) {
+              options.aspectRatio = Math.max(0, aspectRatio) || NaN;
+              if (this.ready) {
+                this.initCropBox();
+                if (this.cropped) {
+                  this.renderCropBox();
+                }
+              }
+            }
+            return this;
+          },
+          /**
+           * Change the drag mode.
+           * @param {string} mode - The new drag mode.
+           * @returns {Cropper} this
+           */
+          setDragMode: function setDragMode(mode) {
+            var options = this.options, dragBox = this.dragBox, face = this.face;
+            if (this.ready && !this.disabled) {
+              var croppable = mode === DRAG_MODE_CROP;
+              var movable = options.movable && mode === DRAG_MODE_MOVE;
+              mode = croppable || movable ? mode : DRAG_MODE_NONE;
+              options.dragMode = mode;
+              setData(dragBox, DATA_ACTION, mode);
+              toggleClass(dragBox, CLASS_CROP, croppable);
+              toggleClass(dragBox, CLASS_MOVE, movable);
+              if (!options.cropBoxMovable) {
+                setData(face, DATA_ACTION, mode);
+                toggleClass(face, CLASS_CROP, croppable);
+                toggleClass(face, CLASS_MOVE, movable);
+              }
+            }
+            return this;
+          }
+        };
+        var AnotherCropper = WINDOW.Cropper;
+        var Cropper2 = /* @__PURE__ */ function() {
+          function Cropper3(element) {
+            var options = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
+            _classCallCheck(this, Cropper3);
+            if (!element || !REGEXP_TAG_NAME.test(element.tagName)) {
+              throw new Error("The first argument is required and must be an <img> or <canvas> element.");
+            }
+            this.element = element;
+            this.options = assign({}, DEFAULTS, isPlainObject(options) && options);
+            this.cropped = false;
+            this.disabled = false;
+            this.pointers = {};
+            this.ready = false;
+            this.reloading = false;
+            this.replaced = false;
+            this.sized = false;
+            this.sizing = false;
+            this.init();
+          }
+          _createClass(Cropper3, [{
+            key: "init",
+            value: function init() {
+              var element = this.element;
+              var tagName2 = element.tagName.toLowerCase();
+              var url;
+              if (element[NAMESPACE]) {
+                return;
+              }
+              element[NAMESPACE] = this;
+              if (tagName2 === "img") {
+                this.isImg = true;
+                url = element.getAttribute("src") || "";
+                this.originalUrl = url;
+                if (!url) {
+                  return;
+                }
+                url = element.src;
+              } else if (tagName2 === "canvas" && window.HTMLCanvasElement) {
+                url = element.toDataURL();
+              }
+              this.load(url);
+            }
+          }, {
+            key: "load",
+            value: function load(url) {
+              var _this = this;
+              if (!url) {
+                return;
+              }
+              this.url = url;
+              this.imageData = {};
+              var element = this.element, options = this.options;
+              if (!options.rotatable && !options.scalable) {
+                options.checkOrientation = false;
+              }
+              if (!options.checkOrientation || !window.ArrayBuffer) {
+                this.clone();
+                return;
+              }
+              if (REGEXP_DATA_URL.test(url)) {
+                if (REGEXP_DATA_URL_JPEG.test(url)) {
+                  this.read(dataURLToArrayBuffer(url));
+                } else {
+                  this.clone();
+                }
+                return;
+              }
+              var xhr = new XMLHttpRequest();
+              var clone6 = this.clone.bind(this);
+              this.reloading = true;
+              this.xhr = xhr;
+              xhr.onabort = clone6;
+              xhr.onerror = clone6;
+              xhr.ontimeout = clone6;
+              xhr.onprogress = function() {
+                if (xhr.getResponseHeader("content-type") !== MIME_TYPE_JPEG) {
+                  xhr.abort();
+                }
+              };
+              xhr.onload = function() {
+                _this.read(xhr.response);
+              };
+              xhr.onloadend = function() {
+                _this.reloading = false;
+                _this.xhr = null;
+              };
+              if (options.checkCrossOrigin && isCrossOriginURL(url) && element.crossOrigin) {
+                url = addTimestamp(url);
+              }
+              xhr.open("GET", url, true);
+              xhr.responseType = "arraybuffer";
+              xhr.withCredentials = element.crossOrigin === "use-credentials";
+              xhr.send();
+            }
+          }, {
+            key: "read",
+            value: function read2(arrayBuffer) {
+              var options = this.options, imageData = this.imageData;
+              var orientation = resetAndGetOrientation(arrayBuffer);
+              var rotate2 = 0;
+              var scaleX = 1;
+              var scaleY = 1;
+              if (orientation > 1) {
+                this.url = arrayBufferToDataURL(arrayBuffer, MIME_TYPE_JPEG);
+                var _parseOrientation = parseOrientation(orientation);
+                rotate2 = _parseOrientation.rotate;
+                scaleX = _parseOrientation.scaleX;
+                scaleY = _parseOrientation.scaleY;
+              }
+              if (options.rotatable) {
+                imageData.rotate = rotate2;
+              }
+              if (options.scalable) {
+                imageData.scaleX = scaleX;
+                imageData.scaleY = scaleY;
+              }
+              this.clone();
+            }
+          }, {
+            key: "clone",
+            value: function clone6() {
+              var element = this.element, url = this.url;
+              var crossOrigin = element.crossOrigin;
+              var crossOriginUrl = url;
+              if (this.options.checkCrossOrigin && isCrossOriginURL(url)) {
+                if (!crossOrigin) {
+                  crossOrigin = "anonymous";
+                }
+                crossOriginUrl = addTimestamp(url);
+              }
+              this.crossOrigin = crossOrigin;
+              this.crossOriginUrl = crossOriginUrl;
+              var image = document.createElement("img");
+              if (crossOrigin) {
+                image.crossOrigin = crossOrigin;
+              }
+              image.src = crossOriginUrl || url;
+              image.alt = element.alt || "The image to crop";
+              this.image = image;
+              image.onload = this.start.bind(this);
+              image.onerror = this.stop.bind(this);
+              addClass(image, CLASS_HIDE);
+              element.parentNode.insertBefore(image, element.nextSibling);
+            }
+          }, {
+            key: "start",
+            value: function start2() {
+              var _this2 = this;
+              var image = this.image;
+              image.onload = null;
+              image.onerror = null;
+              this.sizing = true;
+              var isIOSWebKit = WINDOW.navigator && /(?:iPad|iPhone|iPod).*?AppleWebKit/i.test(WINDOW.navigator.userAgent);
+              var done = function done2(naturalWidth, naturalHeight) {
+                assign(_this2.imageData, {
+                  naturalWidth,
+                  naturalHeight,
+                  aspectRatio: naturalWidth / naturalHeight
+                });
+                _this2.initialImageData = assign({}, _this2.imageData);
+                _this2.sizing = false;
+                _this2.sized = true;
+                _this2.build();
+              };
+              if (image.naturalWidth && !isIOSWebKit) {
+                done(image.naturalWidth, image.naturalHeight);
+                return;
+              }
+              var sizingImage = document.createElement("img");
+              var body = document.body || document.documentElement;
+              this.sizingImage = sizingImage;
+              sizingImage.onload = function() {
+                done(sizingImage.width, sizingImage.height);
+                if (!isIOSWebKit) {
+                  body.removeChild(sizingImage);
+                }
+              };
+              sizingImage.src = image.src;
+              if (!isIOSWebKit) {
+                sizingImage.style.cssText = "left:0;max-height:none!important;max-width:none!important;min-height:0!important;min-width:0!important;opacity:0;position:absolute;top:0;z-index:-1;";
+                body.appendChild(sizingImage);
+              }
+            }
+          }, {
+            key: "stop",
+            value: function stop() {
+              var image = this.image;
+              image.onload = null;
+              image.onerror = null;
+              image.parentNode.removeChild(image);
+              this.image = null;
+            }
+          }, {
+            key: "build",
+            value: function build() {
+              if (!this.sized || this.ready) {
+                return;
+              }
+              var element = this.element, options = this.options, image = this.image;
+              var container = element.parentNode;
+              var template = document.createElement("div");
+              template.innerHTML = TEMPLATE;
+              var cropper2 = template.querySelector(".".concat(NAMESPACE, "-container"));
+              var canvas = cropper2.querySelector(".".concat(NAMESPACE, "-canvas"));
+              var dragBox = cropper2.querySelector(".".concat(NAMESPACE, "-drag-box"));
+              var cropBox = cropper2.querySelector(".".concat(NAMESPACE, "-crop-box"));
+              var face = cropBox.querySelector(".".concat(NAMESPACE, "-face"));
+              this.container = container;
+              this.cropper = cropper2;
+              this.canvas = canvas;
+              this.dragBox = dragBox;
+              this.cropBox = cropBox;
+              this.viewBox = cropper2.querySelector(".".concat(NAMESPACE, "-view-box"));
+              this.face = face;
+              canvas.appendChild(image);
+              addClass(element, CLASS_HIDDEN);
+              container.insertBefore(cropper2, element.nextSibling);
+              removeClass(image, CLASS_HIDE);
+              this.initPreview();
+              this.bind();
+              options.initialAspectRatio = Math.max(0, options.initialAspectRatio) || NaN;
+              options.aspectRatio = Math.max(0, options.aspectRatio) || NaN;
+              options.viewMode = Math.max(0, Math.min(3, Math.round(options.viewMode))) || 0;
+              addClass(cropBox, CLASS_HIDDEN);
+              if (!options.guides) {
+                addClass(cropBox.getElementsByClassName("".concat(NAMESPACE, "-dashed")), CLASS_HIDDEN);
+              }
+              if (!options.center) {
+                addClass(cropBox.getElementsByClassName("".concat(NAMESPACE, "-center")), CLASS_HIDDEN);
+              }
+              if (options.background) {
+                addClass(cropper2, "".concat(NAMESPACE, "-bg"));
+              }
+              if (!options.highlight) {
+                addClass(face, CLASS_INVISIBLE);
+              }
+              if (options.cropBoxMovable) {
+                addClass(face, CLASS_MOVE);
+                setData(face, DATA_ACTION, ACTION_ALL);
+              }
+              if (!options.cropBoxResizable) {
+                addClass(cropBox.getElementsByClassName("".concat(NAMESPACE, "-line")), CLASS_HIDDEN);
+                addClass(cropBox.getElementsByClassName("".concat(NAMESPACE, "-point")), CLASS_HIDDEN);
+              }
+              this.render();
+              this.ready = true;
+              this.setDragMode(options.dragMode);
+              if (options.autoCrop) {
+                this.crop();
+              }
+              this.setData(options.data);
+              if (isFunction2(options.ready)) {
+                addListener2(element, EVENT_READY, options.ready, {
+                  once: true
+                });
+              }
+              dispatchEvent(element, EVENT_READY);
+            }
+          }, {
+            key: "unbuild",
+            value: function unbuild() {
+              if (!this.ready) {
+                return;
+              }
+              this.ready = false;
+              this.unbind();
+              this.resetPreview();
+              var parentNode = this.cropper.parentNode;
+              if (parentNode) {
+                parentNode.removeChild(this.cropper);
+              }
+              removeClass(this.element, CLASS_HIDDEN);
+            }
+          }, {
+            key: "uncreate",
+            value: function uncreate() {
+              if (this.ready) {
+                this.unbuild();
+                this.ready = false;
+                this.cropped = false;
+              } else if (this.sizing) {
+                this.sizingImage.onload = null;
+                this.sizing = false;
+                this.sized = false;
+              } else if (this.reloading) {
+                this.xhr.onabort = null;
+                this.xhr.abort();
+              } else if (this.image) {
+                this.stop();
+              }
+            }
+            /**
+             * Get the no conflict cropper class.
+             * @returns {Cropper} The cropper class.
+             */
+          }], [{
+            key: "noConflict",
+            value: function noConflict() {
+              window.Cropper = AnotherCropper;
+              return Cropper3;
+            }
+            /**
+             * Change the default options.
+             * @param {Object} options - The new default options.
+             */
+          }, {
+            key: "setDefaults",
+            value: function setDefaults(options) {
+              assign(DEFAULTS, isPlainObject(options) && options);
+            }
+          }]);
+          return Cropper3;
+        }();
+        assign(Cropper2.prototype, render4, preview, events, handlers, change, methods);
+        return Cropper2;
+      });
     }
   });
 
@@ -20297,7 +20297,7 @@
     }
   ];
 
-  // src/components/notify.js
+  // src/components/dialog/notify.ts
   function load_notifications() {
     if (!page.structure.notifications) {
       let notification_host = html.node`
@@ -20351,20 +20351,8 @@
     });
     if (progress && persist) persist = false;
     let information;
-    let notif = html.node`
-        <div
-            class=${[
-      "bleh-notification",
-      icon ? "with-icon" : "",
-      classname ? classname : "",
-      long ? "long" : "",
-      colourful ? "colourful" : ""
-    ].join(" ")}
-            data-type=${type}
-            style=${[
-      icon ? `--mask: var(--${icon})` : ""
-    ].join(";")}
-        >
+    const notif = html.node`
+        <div class="bleh-notification" data-type=${type} style="--mask: var(--${icon})">
             <div class="notification-information" ref=${(el) => information = el}>
                 <div class="notification-title">${title}</div>
                 ${body ? html.node`
@@ -20387,6 +20375,10 @@
             </div>
         </div>
     `;
+    if (icon) notif.classList.add("with-icon");
+    if (classname) notif.classList.add(classname);
+    if (long) notif.classList.add("long");
+    if (colourful) notif.classList.add("colourful");
     page.structure.notifications.appendChild(notif);
     notif.remove = () => {
       notify_rm(notif);
@@ -27810,7 +27802,7 @@
     }
   }
 
-  // src/components/status.js
+  // src/components/dialog/status.js
   function load_status() {
     if (!page.structure.status) {
       let notification_host = html.node`
@@ -27877,10 +27869,8 @@
       h /= 6;
     }
     h = Math.round(h * 360);
-    s2 = s2 * 100;
-    s2 = Math.round(s2);
-    l2 = l2 * 100;
-    l2 = Math.round(l2);
+    s2 = round_two(s2 * 100);
+    l2 = round_two(l2 * 100);
     console.log("converted", hex2, "to", h, s2, l2);
     return {
       h,
@@ -27907,8 +27897,8 @@
     if (sat >= 1.3 && lit < 0.8) return 0.8;
     return round_two(lit);
   }
-  function round_two(value) {
-    return Math.round(value * 100) / 100;
+  function round_two(num) {
+    return Math.round((num + Number.EPSILON) * 100) / 100;
   }
   function clean_number(string) {
     if (!string) return 0;
@@ -28326,7 +28316,7 @@
       /(?:-\s?|\(|\[)reloaded/i,
       /\(best friend remix/i,
       // deco*27
-      /[-\(]live/i,
+      /(?:-\s?|\(|\[)live/i,
       /:\s?the live/i,
       /\(\s?the live/i,
       /[-\(]the live/i,
@@ -28645,14 +28635,15 @@
     badges: {}
   };
 
-  // src/components/dialog.js
+  // src/components/dialog/dialog.ts
   function load_dialogs() {
-    let dialogs2 = document.createElement("div");
-    dialogs2.classList.add("bleh-modals");
+    const dialogs2 = html.node`
+        <div class="bleh-modals" />
+    `;
     document.body.appendChild(dialogs2);
     page.structure.dialogs = dialogs2;
   }
-  function dialog({
+  function dialog2({
     id = "",
     title,
     subtitle,
@@ -28686,8 +28677,8 @@
     if (replace && replace_if_possible) replace_if_possible = false;
     if (replace_if_possible && Object.keys(dialogs).length > 0) {
       replace = true;
-      for (let dialog2 in dialogs) {
-        replace_id = dialog2;
+      for (let dialog3 in dialogs) {
+        replace_id = dialog3;
         break;
       }
     }
@@ -28714,14 +28705,16 @@
         `);
     }
     if (dismiss) {
-      let modal_close = document.createElement("button");
-      modal_close.classList.add("modal-close-button");
-      modal_close.setAttribute("onclick", `_dialog_rm({id: "${id}"})`);
-      modal.appendChild(modal_close);
-      page.structure.dialogs.setAttribute(
-        "onclick",
-        "_dialog_rm({all: true, modal_bg: true})"
-      );
+      modal.appendChild(html.node`
+            <button class="modal-close-button" onclick=${() => {
+        dialog_rm({ id });
+      }}>
+                ${tl2(trans.close)}
+            </button>
+        `);
+      page.structure.dialogs.onclick = () => {
+        dialog_rm({ all: true, modal_bg: true });
+      };
     } else {
       page.structure.dialogs.removeAttribute("onclick");
     }
@@ -28732,11 +28725,11 @@
         }
       });
     }
-    let modal_body = document.createElement("div");
-    modal_body.classList.add("bleh-modal-body");
-    modal_body.setAttribute("data-allow-scroll", allow_scroll);
-    modal_body.appendChild(body);
-    modal.appendChild(modal_body);
+    modal.appendChild(html.node`
+        <div class="bleh-modal-body" data-allow-scroll=${allow_scroll}>
+            ${body}
+        </div>
+    `);
     dialogs[id] = {
       instance: modal
     };
@@ -28749,28 +28742,19 @@
     page.structure.dialogs.classList.add("has-dialog");
     return modal;
   }
-  unsafeWindow._dialog_rm = function({
-    id = null,
+  function dialog_rm({
+    id = "",
     all = false,
     modal_bg = false
   }) {
-    dialog_rm({
-      id,
-      all,
-      modal_bg
-    });
-  };
-  function dialog_rm({ id, all = false, modal_bg = false }) {
     if (all) {
       if (modal_bg) {
-        console.log(event);
         if (event.target.classList[0] != "bleh-modals") return;
       }
-      log("requested kill all", "window");
-      console.info(dialogs);
-      for (let dialog2 in dialogs) {
+      log("requested kill all", "window", "info", { dialogs });
+      for (let dialog3 in dialogs) {
         dialog_rm({
-          id: dialog2
+          id: dialog3
         });
       }
       return;
@@ -28778,12 +28762,12 @@
     if (!id) return;
     if (!page.structure.dialogs) return;
     if (dialogs.hasOwnProperty(id)) {
-      let dialog2 = dialogs[id];
-      if (!page.structure.dialogs.contains(dialog2.instance)) return;
+      let dialog3 = dialogs[id];
+      if (!page.structure.dialogs.contains(dialog3.instance)) return;
       log(`queuing ${id} to kill`, "window");
-      dialog2.instance.classList.add("to-remove");
+      dialog3.instance.classList.add("to-remove");
       setTimeout(function() {
-        page.structure.dialogs.removeChild(dialog2.instance);
+        page.structure.dialogs.removeChild(dialog3.instance);
       }, 400);
       delete dialogs[id];
       if (JSON.stringify(dialogs) == "{}") {
@@ -28792,7 +28776,7 @@
     }
   }
 
-  // src/sku.js
+  // src/components/settings/sku.js
   function ff(flag) {
     log(`parsing ${flag}`, "flag", "log", {
       setting: settings.feature_flags[flag],
@@ -28804,8 +28788,8 @@
       return version.feature_flags[flag].default;
   }
 
-  // src/sponsor.js
-  function sponsors(force = false, func = null) {
+  // src/components/sponsor.js
+  function sponsors2(force = false, func = null) {
     if (!ff("sponsor")) return;
     let sponsor_data = localStorage.getItem("kat_sponsors");
     let sponsor_expire = new Date(localStorage.getItem("kat_sponsors_expire"));
@@ -28899,20 +28883,20 @@
     xhr.send();
   }
   unsafeWindow._sponsor_check = function() {
-    sponsors(true);
+    sponsors2(true);
   };
   unsafeWindow._sponsor = function(replace = false) {
-    sponsor(replace);
+    sponsor2(replace);
   };
-  function sponsor(replace = false) {
+  function sponsor2(replace = false) {
     open("https://katelyn.moe/sponsor");
   }
   unsafeWindow._sponsor_manage = function() {
-    sponsor_manage();
+    sponsor_manage2();
   };
-  function sponsor_manage() {
+  function sponsor_manage2() {
     if (sponsor_list.sponsors_one_time && sponsor_list.sponsors_one_time.includes(auth.name)) {
-      dialog({
+      dialog2({
         id: "sponsor_manage",
         title: tl2(trans.sponsor),
         body: html.node`
@@ -28928,7 +28912,7 @@
         type: "sponsor"
       });
     } else {
-      dialog({
+      dialog2({
         id: "sponsor_manage",
         title: tl2(trans.sponsor),
         body: html.node`
@@ -28965,10 +28949,10 @@
     log("internal bleh sponsor", "page");
     page.type = "bleh_sponsor";
     page.subpage = "";
-    sponsor();
+    sponsor2();
   }
   function new_badges(badges) {
-    dialog({
+    dialog2({
       id: "sponsor_new_badges",
       title: tl2(trans.sponsor),
       body: html.node`
@@ -28986,7 +28970,7 @@
     });
   }
 
-  // src/components/badge.js
+  // src/components/shared/badge.js
   function load_badges(user, solo = false) {
     if (!sponsor_list || !sponsor_list.badges) return;
     let badges = [];
@@ -29066,7 +29050,7 @@
     inbuilt: false,
     translation_code: ""
   }, on_avatar = false, long = false, small = false) {
-    log("creating", "badge", "info", { badge, on_avatar, long, small });
+    log(`creating '${badge.name}' for @${badge.user}`, "badge", "info", { badge, on_avatar, long, small });
     const classlist = on_avatar ? "avatar-status-dot" : "label no-hover";
     let elem = html.node`
         <span class=${classlist}>
@@ -29100,11 +29084,11 @@
             <div class="badge-reason">${badge.reason}</div>
         `
     });
-    if (badge.type == "sponsor") elem.onclick = sponsor;
+    if (badge.type == "sponsor") elem.onclick = sponsor2;
     return elem;
   }
 
-  // src/components/menu.js
+  // src/components/menu.ts
   function register_menu(element, menu) {
     element.setAttribute("data-has-bleh-menu", true);
     element.addEventListener(
@@ -29153,6 +29137,7 @@
       const is_image = elem.tagName == "IMG";
       const link = elem.href;
       const unsafe_link = elem.getAttribute("data-unsafe-href");
+      const src = elem.src;
       const text4 = elem.textContent?.trim();
       const valid_for_text = ["TEXTAREA", "INPUT"].includes(elem.tagName);
       const alt = elem.getAttribute("alt")?.trim();
@@ -29173,7 +29158,7 @@
             ${is_image ? html.node`
                 ${unsafe_link ? html.node`
                     <div class="button-combo">
-                        <a class="dropdown-menu-clickable-item" data-type="image" href=${elem.src} target="_blank">
+                        <a class="dropdown-menu-clickable-item" data-type="image" href=${src} target="_blank">
                             ${tl2(trans.view_image)}
                         </a>
                         <div class="button-combo-sep" />
@@ -29228,12 +29213,12 @@
       }}
                     </div>
                 ` : html.node`
-                    <a class="dropdown-menu-clickable-item" data-type="image" href=${elem.src} target="_blank">
+                    <a class="dropdown-menu-clickable-item" data-type="image" href=${src} target="_blank">
                         ${tl2(trans.view_image)}
                     </a>
                 `}
                 <a class="dropdown-menu-clickable-item" data-type="link" onclick=${() => {
-        copy(unsafe_link ? unsafe_link : elem.src);
+        copy(unsafe_link ? unsafe_link : src);
       }}>
                     ${tl2(trans.copy_link)}
                 </a>
@@ -29282,6 +29267,7 @@
       ))
         return;
       menu.setProps({
+        // @ts-ignore
         getReferenceClientRect: () => ({
           width: 0,
           height: 0,
@@ -29307,14 +29293,14 @@
             ${tl2(trans.open_link)}
         </a>
         <a class="dropdown-menu-clickable-item" data-type="link" onclick=${() => {
-      copy(link);
+      copy(copy_link);
     }}>
             ${tl2(trans.copy_link)}
         </a>
     `;
   }
 
-  // src/avatar.js
+  // src/components/shared/avatar.js
   function patch_avatar(avatar2, name, type = "", parent = null, side = "right") {
     if (avatar2.hasAttribute("data-bleh-avatar")) return {};
     avatar2.setAttribute("data-bleh-avatar", "true");
@@ -29413,7 +29399,7 @@
     expand_avatar(src);
   };
   function expand_avatar(src, alt = "") {
-    dialog({
+    dialog2({
       id: "avatar",
       body: html.node`
             <div class="full-avatar-wrapper">
@@ -29460,7 +29446,7 @@
     }
   }
 
-  // src/pages/wiki.js
+  // src/pages/music/wiki.js
   function bleh_wiki() {
     let wiki_panel = document.createElement("section");
     wiki_panel.classList.add("wiki-panel");
@@ -29829,7 +29815,7 @@
     });
   }
 
-  // src/components/calendar.js
+  // src/components/dialog/calendar.js
   function calendar({
     value,
     min: min2,
@@ -30304,7 +30290,7 @@
     return container;
   }
 
-  // src/components/input.js
+  // src/components/settings/input.ts
   function input({
     type = "text",
     value,
@@ -30404,6 +30390,7 @@
     container.value = (val = null) => {
       if (val == null) return input_box.value;
       input_box.value = val;
+      update_input();
       return val;
     };
     container.disabled = (state = null) => {
@@ -30451,7 +30438,7 @@
     }
   }
 
-  // src/components/colourful_counts.js
+  // src/components/music/colourful_counts.js
   function patch_artist_ranks_in_list_view(track) {
     let count_bar = track.querySelector(".chartlist-count-bar");
     if (!count_bar) return;
@@ -30504,10 +30491,10 @@
     };
   }
 
-  // src/components/music_grid.js
+  // src/components/music/music_grid.js
   var import_color_thief_browser = __toESM(require_color_thief_min(), 1);
 
-  // src/components/hoshino.js
+  // src/components/music/hoshino.js
   function hoshino(artwork, name, sister, link = null) {
     if (!ff("hoshino")) return;
     let oracle_cache = JSON.parse(localStorage.getItem("bleh_oracle_cache")) || {};
@@ -30610,7 +30597,7 @@
     set_storage("bleh_hoshino_cache", JSON.stringify(hoshino_cache));
   }
 
-  // src/components/music_grid.js
+  // src/components/music/music_grid.js
   function music_grids(search = page.structure.main, use_colour = true) {
     if (!search) return;
     let insights = {
@@ -30946,7 +30933,7 @@
     if (page.subpage.startsWith("library")) bleh_glacier_insights(insights);
   }
 
-  // src/components/select.js
+  // src/components/settings/select.js
   unsafeWindow._update_inbuilt_select = function(id, value) {
     update_inbuilt_select(id, value);
   };
@@ -31146,10 +31133,10 @@
     update_inbuilt_select(id, document.getElementById(id).value);
   };
 
-  // src/components/track.js
+  // src/components/music/track.js
   var import_color_thief_browser2 = __toESM(require_color_thief_min(), 1);
 
-  // src/components/toggle.js
+  // src/components/settings/toggle.js
   function toggle({
     value = false,
     type = "toggle",
@@ -31221,7 +31208,7 @@
     return elem;
   }
 
-  // src/components/scrobble.js
+  // src/components/music/scrobble.ts
   function submit_scrobble({
     pre_track = "",
     pre_album = "",
@@ -31257,37 +31244,83 @@
       func,
       can_api
     });
-    dialog({
+    dialog2({
       id: "submit_scrobble",
       title: tl2(trans.new_scrobble),
       body: html.node`
             <div class="new-scrobble-form">
-                <p class="generic-label">${tl2(trans.track)}</p>
-                ${track = input({
+                <div class="form-combo">
+                    <div class="form-inner">
+                        <p class="generic-label">${tl2(trans.track)}</p>
+                        ${track = input({
         type: "text",
         value: pre_track,
         placeholder: tl2(trans.example, { v: random.track }),
         warn_if_empty: true
       })}
-                <p class="generic-label">${tl2(trans.album)}</p>
-                ${album = input({
+                        <p class="generic-label">${tl2(trans.album)}</p>
+                        ${album = input({
         type: "text",
         value: pre_album,
         placeholder: tl2(trans.example, { v: random.album })
       })}
-                <p class="generic-label">${tl2(trans.artist)}</p>
-                ${artist = input({
+                    </div>
+                    <div class="form-actions">
+                        ${() => {
+        const btn = html.node`
+                                <button class="btn chibi icon subtle" data-type="switch" onclick=${() => {
+          const track_val = track.value();
+          const album_val = album.value();
+          if (!track_val && !album_val) return;
+          track.value(album_val);
+          album.value(track_val);
+        }}>
+                                    ${tl2(trans.switch)}
+                                </button>
+                            `;
+        tippy_esm_default(btn, {
+          content: btn.textContent
+        });
+        return btn;
+      }}
+                    </div>
+                </div>
+                <div class="form-combo">
+                    <div class="form-inner">
+                        <p class="generic-label">${tl2(trans.artist)}</p>
+                        ${artist = input({
         type: "text",
         value: pre_artist,
         placeholder: tl2(trans.example, { v: random.artist }),
         warn_if_empty: true
       })}
-                <p class="generic-label">${tl2(trans.album_artist)}</p>
-                ${album_artist = input({
+                        <p class="generic-label">${tl2(trans.album_artist)}</p>
+                        ${album_artist = input({
         type: "text",
         value: pre_album_artist,
         placeholder: tl2(trans.example, { v: random.album_artist })
       })}
+                    </div>
+                    <div class="form-actions">
+                        ${() => {
+        const btn = html.node`
+                                <button class="btn chibi icon subtle" data-type="switch" onclick=${() => {
+          const artist_val = artist.value();
+          const album_artist_val = album_artist.value();
+          if (!artist_val && !album_artist_val) return;
+          artist.value(album_artist_val);
+          album_artist.value(artist_val);
+        }}>
+                                    ${tl2(trans.switch)}
+                                </button>
+                            `;
+        tippy_esm_default(btn, {
+          content: btn.textContent
+        });
+        return btn;
+      }}
+                    </div>
+                </div>
                 <p class="generic-label">${tl2(trans.time)}</p>
                 <div class="toggle-and-time">
                     ${use_current = toggle({
@@ -31312,7 +31345,9 @@
                     ${tl2(trans.cancel)}
                 </button>
                 <div class="fill" />
-                <button class="btn primary icon" data-type="add" ref=${(el) => create_scrobble = el} onclick=${async () => {
+                <div class="button-group extra">
+                    ${setting({ id: "auto_close_scrobble_modal", standalone: true })}
+                    <button class="btn primary icon" data-type="add" ref=${(el) => create_scrobble = el} onclick=${async () => {
         if (track.value() == "" || artist.value() == "") {
           notify({
             id: "submit_scrobble",
@@ -31397,17 +31432,30 @@
           body: params.track,
           type: "success"
         });
-        dialog_rm({ id: "submit_scrobble" });
+        if (settings.auto_close_scrobble_modal) {
+          dialog_rm({ id: "submit_scrobble" });
+        } else {
+          submit_scrobble({
+            pre_track,
+            pre_album,
+            pre_artist,
+            pre_album_artist,
+            pre_timestamp,
+            func,
+            can_api
+          });
+        }
         if (func) func();
       }}>
-                    ${tl2(trans.new)}
-                </button>
+                        ${tl2(trans.new)}
+                    </button>
+                </div>
             </div>
         `
     });
   }
 
-  // src/components/track.js
+  // src/components/music/track.js
   function patch_titles(search = page.structure.main) {
     if (page.subpage == "tags_overview") return;
     if (!search) {
@@ -32312,10 +32360,10 @@
     if (page.subpage.startsWith("library")) bleh_glacier_insights(insights);
   }
 
-  // src/components/share.js
+  // src/components/dialog/share.js
   function share(url) {
     let input2;
-    dialog({
+    dialog2({
       id: "share",
       title: tl2(trans.share),
       body: html.node`
@@ -32327,7 +32375,7 @@
                     class="share-input"
                     ref=${(el) => input2 = el}
                 />
-                <button 
+                <button
                     class="btn primary icon copy"
                     onclick=${() => {
         input2.select();
@@ -32340,12 +32388,12 @@
                 >${tl2(trans.copy)}</button>
             </div>
             <div class="share-links">
-                <a 
+                <a
                     href=${`https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}`}
                     target="_blank"
                     class="share-link share-link-twitter"
                 >Twitter</a>
-                <a 
+                <a
                     href=${`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`}
                     target="_blank"
                     class="share-link share-link-facebook"
@@ -32371,10 +32419,10 @@
     });
   }
 
-  // src/components/collage.js
+  // src/components/minis/collage.js
   var import_html2canvas_pro = __toESM(require_html2canvas_pro(), 1);
 
-  // src/components/manage_user.js
+  // src/components/profile/manage_user.js
   function manage_user(button2) {
     const can_block = ff("can_block_in_menu");
     const can_report = ff("can_report_in_menu");
@@ -32433,7 +32481,7 @@
   function report_user(user = page.name) {
   }
 
-  // src/components/popup.js
+  // src/components/dialog/popup.js
   var popup_queue = [];
   function queue_popup(key, host, prefer = "top") {
     if (!host || !host.offsetParent) {
@@ -32515,7 +32563,7 @@
     });
   }
 
-  // src/components/profile_header.js
+  // src/components/profile/profile_header.js
   function redesign_profile_header(is_own_profile, is_following) {
     if (!auth.name) return;
     let base_header = document.body.querySelector(".header-info-secondary");
@@ -32578,7 +32626,7 @@
             create_profile_top_item(profile_header, {
               name: page.name,
               type: "sponsor",
-              link: () => sponsor(),
+              link: () => sponsor2(),
               action: "button"
             });
           }
@@ -32586,7 +32634,7 @@
           create_profile_top_item(profile_header, {
             name: page.name,
             type: "sponsor",
-            link: () => sponsor(),
+            link: () => sponsor2(),
             action: "button"
           });
           create_profile_top_item(profile_header, {
@@ -32889,7 +32937,7 @@
     const elem = html.node`
         <button class="btn side-action" data-type="close_friends" type="button" onclick=${() => {
       if (friend_state) {
-        dialog({
+        dialog2({
           id: "remove_friend",
           title: tl2(trans.remove_friend.name),
           body: html.node`
@@ -33010,7 +33058,7 @@
     }, 0);
   }
 
-  // src/components/structure.js
+  // src/components/page/structure.js
   function checkup_page_structure(is_subpage = false, header = null) {
     if (document.body.style.getPropertyValue("--hue-album")) {
       document.body.style.removeProperty("--hue-album");
@@ -33267,2033 +33315,7 @@
     page.structure.content_top.style.display = "none";
   }
 
-  // src/components/auto_edit.js
-  function bleh_auto_edits() {
-    let corrections_panel = document.body.querySelector("#subscription-corrections");
-    page.structure.main.appendChild(corrections_panel);
-    let nav = page.structure.container.querySelector("nav[data-more-string] .navlist-items");
-    nav.insertBefore(html.node`
-        <li class="navlist-item secondary-nav-item secondary-nav-item--back">
-            <a class="secondary-nav-item-link" href="${root}settings/subscription">
-                ${tl2(trans.back)}
-            </a>
-        </li>
-    `, nav.firstElementChild);
-  }
-
-  // src/pages/lastfm_settings.js
-  var import_cropperjs = __toESM(require_cropper(), 1);
-
-  // src/components/radio_toggle.js
-  function radio({ name, value, values = {} }) {
-    let buttons = [];
-    let elem = html.node`
-        <div class="primary-selections">
-        ${Object.entries(values).map(([key, val]) => {
-      const icon = val.icon;
-      let input2;
-      const button2 = html.node`
-                <div class="setting v2 standalone" data-type="radio" data-value=${key} onclick=${() => {
-        update_radio(key);
-      }}>
-                    <div class="radio-cont">
-                        <input type="radio" name=${name} value=${key} required ref=${(el) => input2 = el}>
-                        <div class="radio" aria-checked=${value == key} />
-                    </div>
-                    ${icon ? html.node`
-                                <div class="icon">
-                                    <div class="bleh-icon" style="--icon: var(--${icon})" />
-                                </div>
-                            ` : ""}
-                    <div class="heading">
-                        <h5>${typeof val.name == "object" ? tl(val.name) : val.name}</h5>
-                    </div>
-                </div>
-            `;
-      input2.checked = value == key;
-      buttons.push(button2);
-      return button2;
-    })}
-        </div>
-    `;
-    function update_radio(val) {
-      buttons.forEach((btn) => {
-        btn.querySelector("input").checked = btn.getAttribute("data-value") == val;
-        btn.querySelector(".radio").setAttribute(
-          "aria-checked",
-          btn.getAttribute("data-value") == val
-        );
-      });
-    }
-    return elem;
-  }
-  function radio_convert(existing) {
-    if (!existing) return {};
-    let values = {};
-    existing.forEach((item) => {
-      const input2 = item.querySelector("input");
-      const label = item.querySelector("label");
-      values[input2.value] = {
-        name: label.textContent.trim()
-      };
-    });
-    return values;
-  }
-
-  // src/pages/lastfm_settings.js
-  var cropper;
-  function bleh_native_settings() {
-    const no_data = page.structure.container.querySelector(":scope > .no-data-message");
-    if (no_data) page.structure.main.appendChild(no_data);
-    if (page.subpage == "overview") {
-      patch_settings_profile_tab();
-    } else if (page.subpage == "privacy") {
-      patch_settings_privacy_tab();
-    } else if (page.subpage == "subscription_overview") {
-      let panel = page.structure.container.querySelector(".row + div");
-      let subscription = panel.querySelector("#current-subscription");
-      let edits = panel.querySelector("#automatic-edits");
-      let merch_h = panel.querySelector(":scope > h2");
-      let merch = panel.querySelector("#mechandise-discount");
-      let history = panel.querySelector("#pro-history");
-      merch.insertBefore(merch_h, merch.firstElementChild);
-      page.structure.main.appendChild(subscription);
-      page.structure.main.appendChild(edits);
-      page.structure.main.appendChild(merch);
-      page.structure.main.appendChild(history);
-      let button2 = subscription.querySelector(".btn-primary");
-      if (button2)
-        button2.classList.add("subscription-button", "icon", "primary");
-      let more_link_wrap = edits.querySelector(".more-link");
-      if (more_link_wrap) {
-        more_link_wrap.classList = "";
-        let edit_buttons = more_link_wrap.querySelectorAll("a");
-        edit_buttons.forEach((edit_button, index3) => {
-          edit_button.classList.add(
-            "btn",
-            "edit-lead-button",
-            "icon",
-            "primary"
-          );
-          if (index3 == 0) edit_button.classList.add("edit-album");
-          else edit_button.classList.add("edit-track");
-        });
-      }
-    } else if (page.subpage.startsWith("subscription_automatic-edits")) {
-      bleh_auto_edits();
-    } else if (page.subpage == "account_overview") {
-      bleh_accounts();
-    } else if (page.subpage == "website") {
-      bleh_website();
-    } else if (page.subpage == "change-username_overview") {
-      bleh_name_change();
-    } else if (page.subpage == "applications_overview") {
-      bleh_applications();
-    }
-  }
-  function patch_settings_profile_tab() {
-    let update_picture = page.structure.main.querySelector("#update-picture");
-    if (!update_picture) return;
-    let token = document.body.querySelector('[name="csrfmiddlewaretoken"]').getAttribute("value");
-    patch_settings_profile_panel(token, update_picture);
-    patch_settings_charts_panel(token);
-  }
-  function patch_settings_charts_panel(token) {
-    let charts_panel = document.getElementById("update-chart");
-    if (charts_panel.hasAttribute("data-kate-processed")) return;
-    charts_panel.setAttribute("data-kate-processed", "true");
-    charts_panel.classList.add("bleh--panel");
-    let original_chart_settings = {
-      recent: {
-        recent_artwork: document.getElementById(
-          "id_show_recent_tracks_artwork"
-        ).checked,
-        count: document.getElementById("id_chart_length_recent_tracks").outerHTML,
-        recent_realtime: document.getElementById(
-          "id_auto_refresh_recent_tracks"
-        ).checked
-      },
-      artists: {
-        timeframe: document.getElementById("id_chart_range_top_artists").outerHTML,
-        style: document.getElementById(
-          "id_chart_style_and_length_top_artists"
-        ).outerHTML
-      },
-      albums: {
-        timeframe: document.getElementById("id_chart_range_top_albums").outerHTML,
-        style: document.getElementById(
-          "id_chart_style_and_length_top_albums"
-        ).outerHTML
-      },
-      tracks: {
-        count: document.getElementById("id_chart_length_top_tracks").outerHTML,
-        timeframe: document.getElementById("id_chart_range_top_tracks").outerHTML
-      }
-    };
-    charts_panel.innerHTML = `
-        <h4>${tl2(trans.recent_tracks)}</h4>
-        <form action="${root}settings#update-chart" name="chart-form" method="post">
-            <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
-            <div class="inner-preview pad">
-                <div class="tracks recent">
-                    <div class="track realtime">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="artist"></div>
-                        <div class="time"></div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="artist"></div>
-                        <div class="time"></div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="artist"></div>
-                        <div class="time"></div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="artist"></div>
-                        <div class="time"></div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="artist"></div>
-                        <div class="time"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="setting-group">
-                <div class="setting" data-type="select">
-                    <div class="heading">
-                        <h5>${tl2(trans.amount_to_display)}</h5>
-                    </div>
-                    <div class="select-wrap custom-selector" id="id_chart_length_recent_tracks_select">
-                        ${original_chart_settings.recent.count}
-                    </div>
-                </div>
-                <div class="setting" data-type="toggle" onclick="_update_inbuilt_item('recent_artwork')" id="container-recent_artwork">
-                    <button class="btn reset" onclick="_reset_inbuilt_item('recent_artwork')">Reset to default</button>
-                    <div class="heading">
-                        <h5>${tl2(trans.recent_artwork)}</h5>
-                    </div>
-                    <div class="toggle-wrap">
-                        <input class="companion-checkbox" type="checkbox" name="show_recent_tracks_artwork" id="inbuilt-companion-checkbox-recent_artwork">
-                        <span class="btn toggle" id="toggle-recent_artwork" aria-checked="false">
-                            <div class="dot"></div>
-                        </span>
-                    </div>
-                </div>
-                <div class="setting" data-type="toggle" onclick="_update_inbuilt_item('recent_realtime')" id="container-recent_realtime">
-                    <button class="btn reset" onclick="_reset_inbuilt_item('recent_realtime')">Reset to default</button>
-                    <div class="heading">
-                        <h5>${tl2(trans.recent_realtime.name)}</h5>
-                        <p>${tl2(trans.recent_realtime.body)}</p>
-                    </div>
-                    <div class="toggle-wrap">
-                        <input class="companion-checkbox" type="checkbox" name="auto_refresh_recent_tracks" id="inbuilt-companion-checkbox-recent_realtime">
-                        <span class="btn toggle" id="toggle-recent_realtime" aria-checked="false">
-                            <div class="dot"></div>
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <h4>${tl2(trans.top_artists)}</h4>
-            <div class="inner-preview pad">
-                <div class="item-grid artist">
-                    <div class="grid-primary artist">
-                        <div class="grid-item"></div>
-                    </div>
-                    <div class="grid-mains">
-                        <div class="grid-main artist">
-                            <div class="grid-item grid-item--extra artist"></div>
-                            <div class="grid-item grid-item--extra artist"></div>
-                            <div class="grid-item"></div>
-                            <div class="grid-item"></div>
-                        </div>
-                        <div class="grid-main artist">
-                            <div class="grid-item grid-item--extra artist"></div>
-                            <div class="grid-item grid-item--extra artist"></div>
-                            <div class="grid-item"></div>
-                            <div class="grid-item"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tracks artist">
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="bar">
-                            <div class="fill" style="width: 100%"></div>
-                        </div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="bar">
-                            <div class="fill" style="width: 85%"></div>
-                        </div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="bar">
-                            <div class="fill" style="width: 60%"></div>
-                        </div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="bar">
-                            <div class="fill" style="width: 30%"></div>
-                        </div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="bar">
-                            <div class="fill" style="width: 5%"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="setting-group">
-                <div class="setting" data-type="select">
-                    <div class="heading">
-                        <h5>${tl2(trans.default_timeframe)}</h5>
-                    </div>
-                    <div class="select-wrap custom-selector" id="id_chart_range_top_artists_select">
-                        ${original_chart_settings.artists.timeframe}
-                    </div>
-                </div>
-                <div class="setting" data-type="select">
-                    <div class="heading">
-                        <h5>${tl2(trans.chart_style)}</h5>
-                    </div>
-                    <div class="select-wrap custom-selector" id="id_chart_style_and_length_top_artists_select">
-                        ${original_chart_settings.artists.style}
-                    </div>
-                </div>
-            </div>
-            <h4>${tl2(trans.top_albums)}</h4>
-            <div class="inner-preview pad">
-                <div class="item-grid album">
-                    <div class="grid-primary album">
-                        <div class="grid-item"></div>
-                    </div>
-                    <div class="grid-mains">
-                        <div class="grid-main album">
-                            <div class="grid-item"></div>
-                            <div class="grid-item"></div>
-                            <div class="grid-item grid-item--extra album"></div>
-                            <div class="grid-item grid-item--extra album"></div>
-                        </div>
-                        <div class="grid-main album">
-                            <div class="grid-item"></div>
-                            <div class="grid-item"></div>
-                            <div class="grid-item grid-item--extra album"></div>
-                            <div class="grid-item grid-item--extra album"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tracks album">
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="bar">
-                            <div class="fill" style="width: 100%"></div>
-                        </div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="bar">
-                            <div class="fill" style="width: 85%"></div>
-                        </div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="bar">
-                            <div class="fill" style="width: 60%"></div>
-                        </div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="bar">
-                            <div class="fill" style="width: 30%"></div>
-                        </div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="bar">
-                            <div class="fill" style="width: 5%"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="setting-group">
-                <div class="setting" data-type="select">
-                    <div class="heading">
-                        <h5>${tl2(trans.default_timeframe)}</h5>
-                    </div>
-                    <div class="select-wrap custom-selector" id="id_chart_range_top_albums_select">
-                        ${original_chart_settings.albums.timeframe}
-                    </div>
-                </div>
-                <div class="setting" data-type="select">
-                    <div class="heading">
-                        <h5>${tl2(trans.chart_style)}</h5>
-                    </div>
-                    <div class="select-wrap custom-selector" id="id_chart_style_and_length_top_albums_select">
-                        ${original_chart_settings.albums.style}
-                    </div>
-                </div>
-            </div>
-            <h4>${tl2(trans.top_tracks)}</h4>
-            <div class="inner-preview pad">
-                <div class="tracks">
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="artist"></div>
-                        <div class="bar">
-                            <div class="fill" style="width: 100%"></div>
-                        </div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="artist"></div>
-                        <div class="bar">
-                            <div class="fill" style="width: 85%"></div>
-                        </div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="artist"></div>
-                        <div class="bar">
-                            <div class="fill" style="width: 60%"></div>
-                        </div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="artist"></div>
-                        <div class="bar">
-                            <div class="fill" style="width: 30%"></div>
-                        </div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="artist"></div>
-                        <div class="bar">
-                            <div class="fill" style="width: 5%"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="setting-group">
-                <div class="setting" data-type="select">
-                    <div class="heading">
-                        <h5>${tl2(trans.default_timeframe)}</h5>
-                    </div>
-                    <div class="select-wrap custom-selector" id="id_chart_range_top_tracks_select">
-                        ${original_chart_settings.tracks.timeframe}
-                    </div>
-                </div>
-                <div class="setting" data-type="select">
-                    <div class="heading">
-                        <h5>${tl2(trans.amount_to_display)}</h5>
-                    </div>
-                    <div class="select-wrap custom-selector" id="id_chart_length_top_tracks_select">
-                        ${original_chart_settings.tracks.count}
-                    </div>
-                </div>
-            </div>
-            <div class="settings-footer">
-                <button type="submit" class="btn-primary save">
-                    ${tl2(trans.save)}
-                </button>
-                <input type="hidden" value="chart" name="submit">
-            </div>
-        </form>
-    `;
-    custom_select(
-      charts_panel.querySelector("#id_chart_length_recent_tracks"),
-      charts_panel.querySelector("#id_chart_length_recent_tracks_select")
-    );
-    custom_select(
-      charts_panel.querySelector("#id_chart_range_top_artists"),
-      charts_panel.querySelector("#id_chart_range_top_artists_select")
-    );
-    custom_select(
-      charts_panel.querySelector("#id_chart_style_and_length_top_artists"),
-      charts_panel.querySelector(
-        "#id_chart_style_and_length_top_artists_select"
-      )
-    );
-    custom_select(
-      charts_panel.querySelector("#id_chart_range_top_albums"),
-      charts_panel.querySelector("#id_chart_range_top_albums_select")
-    );
-    custom_select(
-      charts_panel.querySelector("#id_chart_style_and_length_top_albums"),
-      charts_panel.querySelector(
-        "#id_chart_style_and_length_top_albums_select"
-      )
-    );
-    custom_select(
-      charts_panel.querySelector("#id_chart_range_top_tracks"),
-      charts_panel.querySelector("#id_chart_range_top_tracks_select")
-    );
-    custom_select(
-      charts_panel.querySelector("#id_chart_length_top_tracks"),
-      charts_panel.querySelector("#id_chart_length_top_tracks_select")
-    );
-    for (let category in original_chart_settings) {
-      for (let setting2 in original_chart_settings[category]) {
-        update_inbuilt_item(
-          setting2,
-          original_chart_settings[category][setting2],
-          false
-        );
-      }
-    }
-    let selects = document.body.querySelectorAll("select");
-    selects.forEach((select2) => {
-      select2.setAttribute(
-        "onchange",
-        `_update_inbuilt_select('${select2.getAttribute("id")}', this.value)`
-      );
-      update_inbuilt_select(select2.getAttribute("id"), select2.value);
-    });
-  }
-  function patch_settings_profile_panel(token, update_picture) {
-    const bio_max_length = 500;
-    update_picture.classList.add("bleh--panel");
-    const upload_form = update_picture.querySelector(".avatar-upload-form");
-    const avatar_url = update_picture.querySelector(".image-upload-preview img").getAttribute("src");
-    const upload_finished = update_picture.querySelector(".alert-success");
-    if (page.state.avatar_changer && upload_finished) {
-      const id = page.state.avatar_changer.getAttribute("data-modal-id");
-      dialog_rm({ id });
-    }
-    const update_profile2 = page.structure.main.querySelector("#update-profile");
-    const alert2 = update_profile2.querySelector(".alert");
-    let form_display_name = document.getElementById("id_full_name").value;
-    let form_website = document.getElementById("id_homepage").value;
-    let form_country = document.getElementById("id_country");
-    let form_about_me = document.getElementById("id_about_me").textContent;
-    const markdown_settings = {
-      allow_headers: true,
-      allow_banners: true,
-      allow_icons: true,
-      allow_hue: true,
-      allow_fonts: true,
-      cache: true,
-      take_effect: false,
-      allow_socials: true,
-      allow_alignment: true,
-      allow_lists: true
-    };
-    let chars;
-    const about = markdown_field(update_about, markdown_settings, form_about_me, "about_me", 40, 10, tl2(trans.anything_you_can_imagine));
-    let preview;
-    let accent_setting;
-    let font_setting;
-    render(page.structure.side, html`
-        <section>
-            <h2>${tl2(trans.about_me_preview)}</h2>
-            <span class="bleh--about-me-preview markdown-body" ref=${(el) => preview = el} />
-        </section>
-    `);
-    let profile_cache = JSON.parse(localStorage.getItem("bleh_profile_cache")) || {};
-    let cache2 = profile_cache[auth.name];
-    render(update_picture, html`
-        <h4>${tl2(trans.profile)}</h4>
-        ${alert2}
-        <form
-            class="dont-move"
-            action="${root}settings#update-profile"
-            name="profile-form"
-            data-form-type="identity"
-            method="post"
-        >
-            <input
-                type="hidden"
-                name="csrfmiddlewaretoken"
-                value="${token}"
-            />
-            <div class="setting-group">
-                <div class="setting" data-type="info">
-                    <div class="heading">
-                        <h5>${tl2(trans.avatar)}</h5>
-                        <p>${tl2(trans.avatar_desc)}</p>
-                    </div>
-                    <div class="info">
-                        <div class="avatar image-uploader" onclick=${() => avatar(token)}>
-                            <img
-                                src=${avatar_url}
-                                alt=${tl2(trans.your_avatar)}
-                                loading="lazy"
-                            />
-                            <div class="avatar-overlay" />
-                        </div>
-                    </div>
-                </div>
-                ${() => {
-      const username_regex = /\[name=([^\]]+)\]/;
-      const elem = html.node`
-                        <div class="setting" data-type="text" disabled=${!auth.sponsor}>
-                            <div class="heading">
-                                <h5>${tl2(trans.display_name.name)}<span class="new-badge sponsor-related">${tl2(trans.sponsors_only)}</span></h5>
-                                <p>${tl2(trans.display_name.body)}</p>
-                            </div>
-                            ${input({
-        value: cache2.username,
-        placeholder: auth.name,
-        func: (val) => {
-          const match3 = about.value().match(username_regex);
-          const new_name = `[name=${val}]`;
-          if (match3) {
-            about.value(about.value().replace(username_regex, new_name));
-          } else {
-            const trimmed = about.value().trimEnd();
-            if (trimmed.length == 0) {
-              about.value(new_name);
-            } else {
-              about.value(trimmed + "\n\n" + new_name);
-            }
-          }
-        },
-        submit_on_character: true
-      })}
-                        </div>
-                    `;
-      return elem;
-    }}
-                ${ff("profile_fonts") ? html.node`
-                <div
-                    class="setting"
-                    data-type="info"
-                    disabled=${!auth.sponsor}
-                    ref=${(el) => font_setting = el}
-                />
-                ` : ""}
-                <div class="setting" data-type="text">
-                    <div class="heading">
-                        <h5>${tl2(trans.profile_title)}</h5>
-                        <p>${tl2(trans.pronoun_tip)}</p>
-                    </div>
-                    <div class="input-container content-form">
-                        <input
-                            type="text"
-                            name="full_name"
-                            value=${form_display_name}
-                            maxlength="36"
-                            id="id_full_name"
-                            data-form-type="other"
-                        />
-                    </div>
-                </div>
-                <div class="setting" data-type="text">
-                    <div class="heading">
-                        <h5>${tl2(trans.website)}</h5>
-                    </div>
-                    <div class="input-container content-form">
-                        <input
-                            type="url"
-                            name="homepage"
-                            value=${form_website}
-                            id="id_homepage"
-                            data-form-type="website"
-                        />
-                    </div>
-                </div>
-                <div class="setting" data-type="select">
-                    <div class="heading">
-                        <h5>${tl2(trans.country)}</h5>
-                    </div>
-                    <div class="select-wrap custom-selector">
-                        ${select(
-      select_prepare(form_country),
-      form_country.value,
-      "country"
-    )}
-                    </div>
-                </div>
-                ${() => {
-      const banner_regex = /\[banner=([^\]]+)\]/;
-      const match3 = about.value().match(banner_regex);
-      const pre_existing = match3 ? match3[1] : "";
-      let preview2;
-      const elem = html.node`
-                        <div class="setting" data-type="text">
-                            <div class="heading">
-                                <h5>${tl2(trans.profile_banner.name)}</h5>
-                                <p>${tl2(trans.profile_banner.body)}</p>
-                            </div>
-                            <div class="info v">
-                                ${input({
-        value: pre_existing,
-        func: (val) => {
-          const match4 = about.value().match(banner_regex);
-          const new_banner = `[banner=${val}]`;
-          if (match4) {
-            about.value(about.value().replace(banner_regex, new_banner));
-          } else {
-            const trimmed = about.value().trimEnd();
-            if (trimmed.length == 0) {
-              about.value(new_banner);
-            } else {
-              about.value(trimmed + "\n\n" + new_banner);
-            }
-          }
-          preview2.style.setProperty("background-image", `url(${val})`);
-        },
-        submit_on_character: true
-      })}
-                                <div class="banner-image" ref=${(el) => preview2 = el} />
-                            </div>
-                        </div>
-                    `;
-      preview2.style.setProperty("background-image", `url(${pre_existing})`);
-      return elem;
-    }}
-                <div
-                    class="setting"
-                    data-type="info"
-                    disabled=${!auth.sponsor}
-                    ref=${(el) => accent_setting = el}
-                />
-                ${() => {
-      const status_regex = /\[status=([^\]]+)\]/;
-      const match3 = about.value().match(status_regex);
-      const pre_existing = match3 ? match3[1] : "";
-      const elem = html.node`
-                        <div class="setting" data-type="text">
-                            <div class="heading">
-                                <h5><a href="https://status.cafe" target="_blank">status.cafe</a><span class="new-badge new">${tl2(trans.new)}</span></h5>
-                                <p>${tl2(trans.status_cafe.body)}</p>
-                            </div>
-                            ${input({
-        value: pre_existing,
-        func: (val) => {
-          const match4 = about.value().match(status_regex);
-          const new_status = `[status=${val}]`;
-          if (match4) {
-            about.value(about.value().replace(status_regex, new_status));
-          } else {
-            const trimmed = about.value().trimEnd();
-            if (trimmed.length == 0) {
-              about.value(new_status);
-            } else {
-              about.value(trimmed + "\n\n" + new_status);
-            }
-          }
-        },
-        submit_on_character: true
-      })}
-                        </div>
-                    `;
-      return elem;
-    }}
-                <div class="setting" data-type="text">
-                    <div class="heading">
-                        <h5>${tl2(trans.about)}</h5>
-                        <p class="tip characters" ref=${(el) => chars = el}>
-                            ${tl2(
-      trans.value_characters_max,
-      { v: bio_max_length }
-    )}
-                        </p>
-                    </div>
-                    <div class="${!ff("cosplay") ? "input-container content-form textarea" : "limitless"}">
-                        ${about}
-                    </div>
-                </div>
-            </div>
-            <div class="settings-footer end">
-                <button
-                    type="submit"
-                    class="btn-primary save"
-                    data-form-type="action"
-                >
-                    ${tl2(trans.save)}
-                </button>
-                <input
-                    type="hidden"
-                    value="profile"
-                    name="submit"
-                />
-            </div>
-        </form>
-        <div class="setting-group">
-            ${setting({ id: "avatar_radius" })}
-        </div>
-    `);
-    page.structure.main.removeChild(
-      page.structure.main.querySelector("#update-profile")
-    );
-    update_about();
-    function len(text4) {
-      return text4.replace(/\n/g, "\r\n").length;
-      const normalised = text4.replace(/\r\n/g, "\n");
-      return new TextEncoder().encode(normalised).length;
-    }
-    function update_about(value = about.value()) {
-      log("re-rendering", "about", "log");
-      const length = len(value);
-      chars.textContent = tl2(trans.value_characters_max, {
-        v: `${length}/${bio_max_length}`
-      });
-      chars.setAttribute("data-exceeded", length > bio_max_length);
-      render(preview, markdown(value, markdown_settings));
-      let profile_cache2 = JSON.parse(localStorage.getItem("bleh_profile_cache")) || {};
-      let cache3 = profile_cache2[auth.name];
-      console.info("cache", cache3);
-      const accent_regex = /\[accent=([0-9]{1,3}),([0-9]*\.?[0-9]+),([0-9]*\.?[0-9]+)\]/;
-      const font_regex = /\[font=([^\]]+)\]/;
-      console.info(
-        "cache update",
-        about.value(),
-        cache3.hue,
-        cache3.sat,
-        cache3.lit
-      );
-      let accent_edit;
-      render(accent_setting, html``);
-      render(accent_setting, html`
-            <div class="heading">
-                <h5>${tl2(trans.profile_accent.name)}<span class="new-badge sponsor-related">${tl2(trans.sponsors_only)}</span></h5>
-                <p>${tl2(trans.profile_accent.body)}</p>
-            </div>
-            <div class="info">
-                <div
-                    class="colour-tile colourful"
-                    style="--hue-over: ${cache3.hue}; --sat-over: ${cache3.sat}; --lit-over: ${cache3.lit}"
-                />
-                <div class="swatch-group palette">
-                    <button
-                        class="swatch-container"
-                        ref=${(el) => accent_edit = el}
-                        type="button"
-                        onclick=${() => {
-        let hue_range;
-        let sat_range;
-        let lit_range;
-        const match3 = about.value().match(accent_regex);
-        if (match3) {
-          save_setting(
-            "profile_hue",
-            parseInt(match3[1], 10)
-          );
-          save_setting(
-            "profile_sat",
-            parseFloat(match3[2])
-          );
-          save_setting(
-            "profile_lit",
-            parseFloat(match3[3])
-          );
-        }
-        let accent_preview2;
-        dialog({
-          id: "profile_accent",
-          title: tl2(trans.profile_accent.name),
-          body: html.node`
-                                    <div class="setting-group">
-                                        <div class="setting" data-type="info">
-                                            <div class="heading">
-                                                <h5>${tl2(trans.preview)}</h5>
-                                            </div>
-                                            <div class="info">
-                                                <div class="colour-tile colourful" ref=${(el) => accent_preview2 = el} style="--hue-over: ${settings.profile_hue}; --sat-over: ${settings.profile_sat}; --lit-over: ${settings.profile_lit}" />
-                                            </div>
-                                        </div>
-                                        ${ff("colour_based_on_hex") ? html.node`
-                                        <div class="setting" data-type="text">
-                                            <div class="heading">
-                                                <h5>${tl2(trans.convert_from_hex)}</h5>
-                                            </div>
-                                            <div class="input-container content-form">
-                                                ${colour = input({
-            type: "colour",
-            value: "#999999",
-            maxlength: 7,
-            warn_if_empty: true
-          })}
-                                                <button class="btn primary icon convert" onclick=${() => {
-            const value2 = colour.value();
-            const hsl = hex_to_hsl(value2);
-            hue_range.set(hsl.h);
-            sat_range.set(
-              clamp_sat(hsl.s / 100 * 3)
-            );
-            lit_range.set(
-              hsl.l / 100 + 0.35
-            );
-          }}>${tl2(trans.convert)}</button>
-                                            </div>
-                                        </div>
-                                        ` : ""}
-                                        ${hue_range = setting({ id: "profile_hue", func: update_colour_preview })}
-                                        ${sat_range = setting({ id: "profile_sat", func: update_colour_preview })}
-                                        ${lit_range = setting({ id: "profile_lit", func: update_colour_preview })}
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button class="see-more cancel" onclick=${() => dialog_rm({ id: "profile_accent" })}>
-                                            ${tl2(trans.back)}
-                                        </button>
-                                        <div class="fill"></div>
-                                        <div class="button-group">
-                                            ${() => {
-            const btn = html.node`
-                                                    <button class="btn icon select-button" data-type="copy">
-                                                        ${tl2(trans.copy)}
-                                                    </button>
-                                                `;
-            tippy_esm_default(btn, {
-              theme: "context-menu",
-              content: html.node`
-                                                        <button class="dropdown-menu-clickable-item" data-type="profile" onclick=${() => {
-                hue_range.set(settings.hue);
-                sat_range.set(settings.sat);
-                lit_range.set(settings.lit);
-              }}>${tl2(trans.apply_global_accent)}</button>
-                                                        <button class="dropdown-menu-clickable-item" data-type="global" onclick=${() => {
-                const warn = notify({
-                  id: "confirm_accent",
-                  title: tl2(trans.are_you_sure),
-                  body: tl2(trans.this_will_replace_your_global_accent),
-                  type: "warning",
-                  actions: [
-                    {
-                      type: "check",
-                      action: () => {
-                        notify_rm(warn);
-                        save_setting("hue", settings.profile_hue);
-                        save_setting("sat", settings.profile_sat);
-                        save_setting("lit", settings.profile_lit);
-                      },
-                      text: tl2(trans.continue)
-                    }
-                  ],
-                  persist: true
-                });
-              }}>${tl2(trans.apply_profile_accent)}</button>
-                                                    `,
-              trigger: "click",
-              placement: "bottom",
-              interactive: true,
-              interactiveBorder: 10,
-              offset: [0, 0]
-            });
-            return btn;
-          }}
-                                            <button class="btn primary continue" onclick=${() => {
-            const new_accent = `[accent=${settings.profile_hue},${settings.profile_sat},${settings.profile_lit}]`;
-            if (match3) {
-              about.value(about.value().replace(
-                accent_regex,
-                new_accent
-              ));
-            } else {
-              const trimmed = about.value().trimEnd();
-              if (trimmed.length == 0) {
-                about.value(new_accent);
-              } else {
-                about.value(trimmed + "\n\n" + new_accent);
-              }
-            }
-            dialog_rm({ id: "profile_accent" });
-            status({
-              title: tl2(
-                trans.profile_accent.reminder
-              )
-            });
-          }}>
-                                                ${tl2(trans.change)}
-                                            </button>
-                                        </div>
-                                    </div>
-                                `
-        });
-        function update_colour_preview() {
-          accent_preview2.style = `--hue-over: ${settings.profile_hue}; --sat-over: ${settings.profile_sat}; --lit-over: ${settings.profile_lit}`;
-        }
-      }}
-                        >
-                            <div
-                                class="swatch colourful"
-                                data-swatch-type="customise"
-                            />
-                        </button>
-                    </div>
-                </div>
-            `);
-      tippy_esm_default(accent_edit, {
-        content: tl2(trans.edit)
-      });
-      if (font_setting) {
-        let font_edit;
-        let font_tile;
-        render(font_setting, html``);
-        render(font_setting, html`
-                <div class="heading">
-                    <h5>${tl2(trans.profile_font.name)}<span class="new-badge sponsor-related">${tl2(trans.sponsors_only)}</span></h5>
-                    <p>${tl2(trans.profile_font.body)}</p>
-                </div>
-                <div class="info">
-                    <div class="font-tile">
-                        <span class="preview-style" data-font=${cache3.font} data-font-style=${cache3.font_style} ref=${(el) => font_tile = el}>Aa</span>
-                    </div>
-                    <div class="swatch-group palette">
-                        <button
-                            class="swatch-container"
-                            ref=${(el) => font_edit = el}
-                            type="button"
-                            onclick=${() => {
-          const match3 = about.value().match(font_regex);
-          if (match3) {
-            save_setting(
-              "profile_hue",
-              parseInt(match3[1], 10)
-            );
-            save_setting(
-              "profile_sat",
-              parseFloat(match3[2])
-            );
-            save_setting(
-              "profile_lit",
-              parseFloat(match3[3])
-            );
-          }
-          let font_name = cache3.font;
-          let font_style = cache3.font_style;
-          let font_preview;
-          let font_buttons = [];
-          let font_style_buttons = [];
-          dialog({
-            id: "profile_font",
-            title: tl2(trans.profile_font.name),
-            body: html.node`
-                                        <div class="font-name-preview">
-                                            <span data-font=${font_name} data-font-style=${font_style} ref=${(el) => font_preview = el}>${cache3.username ? cache3.username : auth.name}</span>
-                                        </div>
-                                        <div class="font-name-options">
-                                            <h4 class="font-options-header">${tl2(trans.font.name)}</h4>
-                                            <div class="font-options">
-                                                ${Object.entries(page.state.fonts).map(([font, family]) => {
-              if (family == "") family = tl2(trans.none);
-              const elem = html.node`
-                                                        <button class="btn font-selection" data-font=${font} aria-checked=${font == font_name} onclick=${() => {
-                font_name = font;
-                font_preview.setAttribute("data-font", font);
-                font_tile.setAttribute("data-font", font);
-                font_buttons.forEach((btn) => {
-                  btn.setAttribute("aria-checked", btn.getAttribute("data-font") == font);
-                });
-              }}>
-                                                            <span data-font=${font}>Aa</span>
-                                                        </button>
-                                                    `;
-              tippy_esm_default(elem, {
-                content: family,
-                delay: [500, 0]
-              });
-              font_buttons.push(elem);
-              return elem;
-            })}
-                                            </div>
-                                            <h4 class="font-options-header">${tl2(trans.font_style)}</h4>
-                                            <div class="font-options">
-                                                ${["solid", "pop", "out", "glow"].map((style) => {
-              const elem = html.node`
-                                                        <button class="btn font-selection font-style" data-font-style=${style} aria-checked=${style == font_style} onclick=${() => {
-                font_style = style;
-                font_preview.setAttribute("data-font-style", style);
-                font_tile.setAttribute("data-font-style", style);
-                font_style_buttons.forEach((btn) => {
-                  btn.setAttribute("aria-checked", btn.getAttribute("data-font-style") == style);
-                });
-              }}>
-                                                            <span class="preview-style" data-font-style=${style}>${tl2(trans.font_style[style])}</span>
-                                                        </button>
-                                                    `;
-              font_style_buttons.push(elem);
-              return elem;
-            })}
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button class="see-more cancel" onclick=${() => dialog_rm({ id: "profile_font" })}>
-                                                ${tl2(trans.back)}
-                                            </button>
-                                            <div class="fill"></div>
-                                            <button class="btn primary continue" onclick=${() => {
-              const new_font = `[font=${font_name}${font_style != "solid" ? `,${font_style}` : ""}]`;
-              if (match3) {
-                about.value(about.value().replace(
-                  font_regex,
-                  new_font
-                ));
-              } else {
-                const trimmed = about.value().trimEnd();
-                if (trimmed.length == 0) {
-                  about.value(new_font);
-                } else {
-                  about.value(trimmed + "\n\n" + new_font);
-                }
-              }
-              dialog_rm({ id: "profile_font" });
-              status({
-                title: tl2(
-                  trans.profile_font.reminder
-                )
-              });
-            }}>
-                                                ${tl2(trans.change)}
-                                            </button>
-                                        </div>
-                                    `
-          });
-          function update_colour_preview() {
-            accent_preview.style = `--hue-over: ${settings.profile_hue}; --sat-over: ${settings.profile_sat}; --lit-over: ${settings.profile_lit}`;
-          }
-        }}
-                            >
-                                <div
-                                    class="swatch colourful"
-                                    data-swatch-type="customise"
-                                />
-                            </button>
-                        </div>
-                    </div>
-                `);
-        tippy_esm_default(font_edit, {
-          content: tl2(trans.edit)
-        });
-      }
-    }
-  }
-  function avatar(token = "") {
-    if (!token) token = page.token;
-    else page.token = token;
-    page.state.avatar_changer = dialog({
-      id: "edit_avatar",
-      title: tl2(trans.change_avatar),
-      body: html.node`
-            <div class="forms">
-                <form action="${root}settings" name="avatar-form" method="post" enctype="multipart/form-data">
-                    <input type="hidden" name="csrfmiddlewaretoken" value=${page.token}>
-                    <div class="form-group form-group--avatar js-form-group upload-avatar">
-                        <div class="js-form-group-controls form-group-controls">
-                            <span class="btn-secondary btn primary btn-file" data-kate-processed="true">
-                                ${tl2(trans.upload)}
-                                <input type="file" onchange=${() => update_avatar(event)} name="avatar" data-require="components/file-input" data-file-input-copy="${tl2(trans.upload)}" data-no-file-copy="No file chosen" accept="image/*" required="" id="id_avatar" data-kate-processed="true">
-                            </span>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn-primary save" id="avatar_saver">
-                        ${tl2(trans.save)}
-                    </button>
-                    <input type="hidden" value="avatar" name="submit">
-                </form>
-                <form action="${root}settings/avatar/delete" method="post">
-                    <input type="hidden" name="csrfmiddlewaretoken" value=${page.token}>
-                    <div class="form-group delete-avatar">
-                        <button class="btn image-upload-remove" type="submit" value="delete-avatar" name="delete-avatar">${tl2(trans.delete)}</button>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button class="see-more cancel" onclick=${() => dialog_rm({ id: "edit_avatar" })}>${tl2(trans.cancel)}</button>
-                <div class="fill"></div>
-                <button class="btn primary save" onclick=${() => save_avatar()} disabled>${tl2(trans.save)}</button>
-            </div>
-        `
-    });
-    page.state.avatar_changer.querySelector('[name="avatar-form"]').onsubmit = finish_saving_avatar;
-    const file_button = page.state.avatar_changer.querySelector(".btn-file");
-    const save_button = page.state.avatar_changer.querySelector(
-      ".modal-footer .primary"
-    );
-    let form;
-    function update_avatar(e) {
-      console.info(e);
-      if (!e.target.files || !e.target.files[0]) return;
-      form = page.state.avatar_changer.querySelector(".bleh-modal-body");
-      if (e.target.files[0].type == "image/gif") {
-        save_avatar();
-        finish_saving_avatar();
-        return;
-      }
-      let reader = new FileReader();
-      reader.onload = function() {
-        crop(reader.result);
-        save_button.removeAttribute("disabled");
-      };
-      reader.readAsDataURL(e.target.files[0]);
-    }
-    function save_avatar() {
-      page.state.avatar_changer.querySelector("#avatar_saver").click();
-    }
-    function finish_saving_avatar() {
-      page.state.avatar_changer.setAttribute("data-loading", "true");
-      page.state.avatar_changer.querySelectorAll(".bleh-modal-body button").forEach((button2) => {
-        button2.setAttribute("disabled", "true");
-        button2.removeAttribute("onclick");
-      });
-    }
-    function crop(file) {
-      let crop_image;
-      let save;
-      const crop_dialog = dialog({
-        id: "crop",
-        title: tl2(trans.crop_avatar),
-        body: html.node`
-                <div class="crop">
-                    <img src=${file} ref=${(el) => crop_image = el}>
-                </div>
-                <div class="alert alert-info">
-                    ${tl2(trans.crop_notice)}
-                </div>
-                <div class="modal-footer">
-                    <button class="see-more cancel" onclick=${() => {
-          if (cropper && cropper.destroy) cropper.destroy();
-          cropper = null;
-          avatar();
-        }}>${tl2(trans.cancel)}</button>
-                    <div class="fill"></div>
-                    <button class="btn primary save" onclick=${() => {
-          if (!cropper) return;
-          crop_dialog.querySelectorAll(".bleh-modal-body button").forEach((button2) => {
-            button2.setAttribute("disabled", "true");
-            button2.removeAttribute("onclick");
-          });
-          const canvas = cropper.getCroppedCanvas();
-          canvas.toBlob((blob) => {
-            const cropped_file = new File(
-              [blob],
-              "avatar.png",
-              { type: "image/png" }
-            );
-            const inner_form = form.querySelector("form");
-            inner_form.style.display = "none";
-            crop_dialog.querySelector(".bleh-modal-body").appendChild(inner_form);
-            const file_input = inner_form.querySelector('input[type="file"]');
-            const data_transfer = new DataTransfer();
-            data_transfer.items.add(cropped_file);
-            file_input.files = data_transfer.files;
-            inner_form.querySelector("#avatar_saver").click();
-          }, "image/png");
-        }} ref=${(el) => save = el} disabled>${tl2(trans.save)}</button>
-                </div>
-            `
-      });
-      page.state.avatar_changer = crop_dialog;
-      crop_image.onload = () => {
-        if (cropper && cropper.destroy) cropper.destroy();
-        crop_image.style.maxWidth = "none";
-        crop_image.style.width = crop_image.naturalWidth + "px";
-        crop_image.style.height = crop_image.naturalHeight + "px";
-        cropper = new import_cropperjs.default(crop_image, {
-          viewMode: 3,
-          dragMode: "crop",
-          movable: true,
-          zoomable: true,
-          scalable: false,
-          cropBoxMovable: true,
-          cropBoxResizable: true,
-          background: false,
-          guides: true,
-          autoCropArea: 1
-        });
-        save.removeAttribute("disabled");
-      };
-    }
-  }
-  function patch_settings_privacy_tab() {
-    let privacy_panel = document.getElementById("privacy");
-    let token = document.body.querySelector('[name="csrfmiddlewaretoken"]').getAttribute("value");
-    bleh_communication_panel(token);
-    patch_settings_privacy_panel(token, privacy_panel);
-  }
-  function bleh_communication_panel(token) {
-    let profile_notes = JSON.parse(localStorage.getItem("bleh_profile_notes")) || {};
-    let panel = page.structure.main.querySelector("#ignorelist");
-    panel.classList.add("bleh--panel");
-    const alert2 = panel.querySelector(".alert");
-    let list = panel.querySelectorAll(".ignore-list tr");
-    let new_list = document.createElement("div");
-    new_list.classList.add(
-      "generic-table-list",
-      "user-vertical-list",
-      "take-space"
-    );
-    let exceeded = false;
-    let exceed_amount = 10;
-    let amount = 0;
-    Array.from(list).reverse().forEach((item, index3) => {
-      let name = item.querySelector("td").textContent.trim();
-      let form2 = item.querySelector("form");
-      let button2 = form2.querySelector("button");
-      button2.classList.add("btn", "icon", "chibi", "danger-subtle", "list-action");
-      button2.setAttribute("data-type", "x");
-      tippy_esm_default(button2, {
-        content: tl2(trans.remove)
-      });
-      let entry = html.node`
-            <div class="generic-table-list-entry user-vertical-list-item">
-                <div class="name">
-                    <a class="mention" href="${root}user/${name}" target="_blank">@${name}</a>
-                </div>
-                <div class="text preview">
-                    ${profile_notes.hasOwnProperty(name) ? html.node`
-                        <p id="profile-note-row-preview--${name}">${{ html: profile_notes[name] }}</p>
-                    ` : ""}
-                </div>
-                <div class="actions">
-                    ${form2}
-                </div>
-            </div>
-        `;
-      if (index3 > exceed_amount && !exceeded) exceeded = true;
-      if (exceeded) entry.classList.add("entry-is-exceeded");
-      new_list.appendChild(entry);
-      amount += 1;
-    });
-    if (exceeded) {
-      let remainder = amount - exceed_amount;
-      new_list.classList.add("list-is-exceeded");
-      new_list.setAttribute("data-expanded", "false");
-      let expand = html.node`
-            <button class="see-more expand-down" onclick=${() => {
-        expand.style.display = "none";
-        new_list.setAttribute("data-expanded", "true");
-      }}>
-                ${tl2(trans.view_count_more).replace("{c}", remainder.toString())}
-            </button>
-        `;
-      new_list.appendChild(expand);
-    }
-    let form = page.structure.main.querySelector('[name="ignorelist"]');
-    if (page.token == "")
-      page.token = form.querySelector('[name="csrfmiddlewaretoken"]').getAttribute("value");
-    render(panel, html`
-        <h4>${tl2(trans.block_list)}</h4>
-        <div class="user-top-panel">
-            <div class="user-top-avatar user-top-avatar-side-left">
-                <div class="bleh-icon"></div>
-            </div>
-            <img
-                class="user-top-avatar user-top-avatar-main"
-                src=${auth.avatar.replace("avatar42s", "avatar300s")}
-                alt=${auth.name}
-            />
-            <div class="user-top-avatar user-top-avatar-side-right">
-                <div class="bleh-icon"></div>
-            </div>
-        </div>
-        ${alert2}
-        <div class="setting" data-type="text">
-            <div class="heading">
-                <h5>${tl2(trans.profile)}</h5>
-                <form
-                    action="${root}settings/privacy#ignorelist"
-                    name="ignorelist"
-                    method="post"
-                >
-                    <input
-                        type="hidden"
-                        name="csrfmiddlewaretoken"
-                        value=${page.token}
-                    />
-                    <div class="input-container">
-                        <input
-                            type="text"
-                            maxlength="80"
-                            id="id_user"
-                            name="user"
-                            placeholder=${tl2(trans.enter_username)}
-                        />
-                        <input
-                            type="hidden"
-                            name="listaction"
-                            value="add"
-                        />
-                        <input
-                            type="hidden"
-                            name="submit"
-                            value="ignorelist"
-                        />
-                        <button
-                            class="btn primary icon block"
-                            type="submit"
-                        >
-                            ${tl2(trans.block)}
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <div class="alert alert-info">
-            ${tl2(trans.blocked_count, { c: amount })}
-        </div>
-        <div class="setting-group">
-            ${new_list}
-        </div>
-        <div class="sep" />
-        <h5>${tl2(trans.when_blocked)}</h5>
-        <div class="to-consider">
-            <ul class="to-consider-good">
-                <li>${tl2(trans.blocked_user_public)}</li>
-                <li>${tl2(trans.blocked_user_message)}</li>
-                <li>${tl2(trans.blocked_user_new_shouts)}</li>
-            </ul>
-            <ul class="to-consider-bad">
-                <li>${tl2(trans.blocked_user_old_shouts)}</li>
-                <li>${tl2(trans.blocked_user_view_profile)}</li>
-            </ul>
-        </div>
-    `);
-  }
-  function patch_settings_privacy_panel(token, privacy_panel) {
-    privacy_panel.classList.add("bleh--panel");
-    let original_privacy_settings = {
-      recent_listening: document.getElementById("id_hide_realtime").checked,
-      receiving_msgs: document.getElementById("id_message_privacy").outerHTML,
-      disable_shoutbox: document.getElementById("id_shoutbox_disabled").checked
-    };
-    privacy_panel.innerHTML = `
-        <h4>${tl2(trans.privacy)}</h4>
-        <form action="${root}settings/privacy" name="privacy" method="post">
-            <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
-            <div class="inner-preview pad">
-                <div class="tracks recent_listening">
-                    <div class="track realtime">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="artist"></div>
-                        <div class="time"></div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="artist"></div>
-                        <div class="time"></div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="artist"></div>
-                        <div class="time"></div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="artist"></div>
-                        <div class="time"></div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="artist"></div>
-                        <div class="time"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="setting-group">
-                <div class="setting" data-type="toggle" onclick="_update_inbuilt_item('recent_listening')" id="container-recent_listening">
-                    <button class="btn reset" onclick="_reset_inbuilt_item('recent_listening')">Reset to default</button>
-                    <div class="heading">
-                        <h5>${tl2(trans.recent_listening.name)}</h5>
-                        <p>${tl2(trans.recent_listening.body)}</p>
-                    </div>
-                    <div class="toggle-wrap">
-                        <input class="companion-checkbox" type="checkbox" name="hide_realtime" id="inbuilt-companion-checkbox-recent_listening">
-                        <span class="btn toggle" id="toggle-recent_listening" aria-checked="false">
-                            <div class="dot"></div>
-                        </span>
-                    </div>
-                </div>
-                <div class="setting" data-type="options">
-                    <div class="heading">
-                        <h5>${tl2(trans.allow_messages_from)}</h5>
-                    </div>
-                    <div class="primary-selections">
-                        ${original_privacy_settings.receiving_msgs}
-                        <div class="btn primary-selection" id="primary-selection-receiving_msgs-everyone" onclick="_update_inbuilt_selection('id_message_privacy', 0)">
-                            <h5>${tl2(trans.everyone)}</h5>
-                        </div>
-                        <div class="btn primary-selection" id="primary-selection-receiving_msgs-neighbours" onclick="_update_inbuilt_selection('id_message_privacy', 1)">
-                            <h5>${tl2(trans.following_and_neighbours)}</h5>
-                        </div>
-                        <div class="btn primary-selection" id="primary-selection-receiving_msgs-follow" onclick="_update_inbuilt_selection('id_message_privacy', 2)">
-                            <h5>${tl2(trans.following)}</h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="inner-preview pad">
-                <div class="shouts">
-                    <div class="shout-preview">
-                        <div class="avatar-side">
-                            <div class="shout-avatar-placeholder"></div>
-                        </div>
-                        <div class="info-side">
-                            <div class="header">
-                                <div class="shout-username"></div>
-                                <div class="shout-time"></div>
-                            </div>
-                            <div class="shout-contents"></div>
-                            <div class="shout-contents"></div>
-                        </div>
-                    </div>
-                    <div class="shout-preview">
-                        <div class="avatar-side">
-                            <div class="shout-avatar-placeholder"></div>
-                        </div>
-                        <div class="info-side">
-                            <div class="header">
-                                <div class="shout-username"></div>
-                                <div class="shout-time"></div>
-                            </div>
-                            <div class="shout-contents"></div>
-                            <div class="shout-contents"></div>
-                        </div>
-                    </div>
-                    <div class="shout-preview">
-                        <div class="avatar-side">
-                            <div class="shout-avatar-placeholder"></div>
-                        </div>
-                        <div class="info-side">
-                            <div class="header">
-                                <div class="shout-username"></div>
-                                <div class="shout-time"></div>
-                            </div>
-                            <div class="shout-contents"></div>
-                            <div class="shout-contents"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="setting-group">
-                <div class="setting" data-type="toggle" onclick="_update_inbuilt_item('disable_shoutbox')" id="container-disable_shoutbox">
-                    <button class="btn reset" onclick="_reset_inbuilt_item('disable_shoutbox')">Reset to default</button>
-                    <div class="heading">
-                        <h5>${tl2(trans.close_shouts.name)}</h5>
-                        <p>${tl2(trans.close_shouts.body)}</p>
-                    </div>
-                    <div class="toggle-wrap">
-                        <input class="companion-checkbox" type="checkbox" name="shoutbox_disabled" id="inbuilt-companion-checkbox-disable_shoutbox">
-                        <span class="btn toggle" id="toggle-disable_shoutbox" aria-checked="false">
-                            <div class="dot"></div>
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <div class="settings-footer">
-                <button type="submit" class="btn-primary save">
-                    ${tl2(trans.save)}
-                </button>
-                <input type="hidden" value="privacy" name="submit">
-            </div>
-        </form>
-    `;
-    for (let setting2 in original_privacy_settings) {
-      update_inbuilt_item(setting2, original_privacy_settings[setting2], false);
-    }
-    let selects = document.body.querySelectorAll("select");
-    selects.forEach((select2) => {
-      select2.setAttribute(
-        "onchange",
-        `_update_inbuilt_select('${select2.getAttribute("id")}', this.value)`
-      );
-      update_inbuilt_select(select2.getAttribute("id"), select2.value);
-    });
-  }
-  function bleh_accounts() {
-    let token = page.structure.main.querySelector('[name="csrfmiddlewaretoken"]').getAttribute("value");
-    let original_settings = {
-      email_language: page.structure.main.querySelector('[name="language"]'),
-      marketing_emails: page.structure.main.querySelector(
-        '[name="opt_in_marketing"]'
-      ),
-      email: page.structure.main.querySelector('[name="email"]').value,
-      captcha: page.structure.main.querySelector(".lfm-recaptcha")
-    };
-    const alert2 = update_profile.querySelector(".alert");
-    render(
-      page.structure.main,
-      html`
-            <section class="bleh--panel">
-                <h4>${tl2(trans.information)}</h4>
-                ${alert2}
-                <div class="setting-group">
-                    <form
-                        action="${root}settings/change-username/send-email"
-                        method="post"
-                    >
-                        <input
-                            type="hidden"
-                            name="csrfmiddlewaretoken"
-                            value="${token}"
-                        />
-                        <div class="setting" data-type="text">
-                            <div class="heading">
-                                <h5>${tl2(trans.username.name)}</h5>
-                                <p>
-                                    ${{
-        html: tl2(trans.username.body).replace(
-          "{a}",
-          `<a href="https://support.last.fm/" target="_blank">`
-        ).replace("{/a}", "</a>")
-      }}
-                                </p>
-                            </div>
-                            <div class="input-container content-form">
-                                <input
-                                    id="id_current_username"
-                                    type="text"
-                                    name="current_username"
-                                    value="${auth.name}"
-                                    disabled
-                                    required
-                                />
-                                <button class="btn chibi icon primary submit">
-                                    ${tl2(trans.send)}
-                                </button>
-                                <input
-                                    type="hidden"
-                                    value="change_username"
-                                    name="submit"
-                                />
-                            </div>
-                        </div>
-                    </form>
-                    <form
-                        action="${root}settings/account"
-                        name="change-email"
-                        method="post"
-                    >
-                        <input
-                            type="hidden"
-                            name="csrfmiddlewaretoken"
-                            value="${token}"
-                        />
-                        <div class="setting" data-type="text">
-                            <div class="heading">
-                                <h5>${tl2(trans.email)}</h5>
-                            </div>
-                            <div class="input-container content-form">
-                                <input
-                                    id="id_email"
-                                    type="text"
-                                    name="email"
-                                    value="${original_settings.email}"
-                                    required
-                                />
-                                <button class="btn chibi icon primary submit">
-                                    ${tl2(trans.save)}
-                                </button>
-                                <input
-                                    type="hidden"
-                                    value="email_update"
-                                    name="submit"
-                                />
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <form
-                    class="password-container"
-                    action="${root}settings/account/password#change-password"
-                    name="change-password"
-                    method="post"
-                >
-                    <input
-                        type="hidden"
-                        name="csrfmiddlewaretoken"
-                        value="${token}"
-                    />
-                    <div class="setting-group">
-                        <div class="setting" data-type="text">
-                            <div class="heading">
-                                <h5>${tl2(trans.password)}</h5>
-                            </div>
-                            <div class="input-container content-form">
-                                <input
-                                    id="id_password"
-                                    type="password"
-                                    name="password"
-                                    required
-                                />
-                            </div>
-                        </div>
-                        <div class="setting" data-type="text">
-                            <div class="heading">
-                                <h5>${tl2(trans.new_password)}</h5>
-                            </div>
-                            <div class="input-container content-form">
-                                <input
-                                    id="id_new_password"
-                                    type="password"
-                                    name="new_password"
-                                    required
-                                />
-                            </div>
-                        </div>
-                        <div class="setting" data-type="text">
-                            <div class="heading">
-                                <h5>${tl2(trans.confirm_password)}</h5>
-                            </div>
-                            <div class="input-container content-form">
-                                <input
-                                    id="id_new_password_confirmation"
-                                    type="password"
-                                    name="new_password_confirmation"
-                                    required
-                                />
-                            </div>
-                        </div>
-                        ${original_settings.captcha}
-                    </div>
-                    <div class="settings-footer end">
-                        <button class="btn-primary save" type="submit">
-                            ${tl2(trans.change)}
-                        </button>
-                    </div>
-                </form>
-            </section>
-            <section class="bleh--panel">
-                <h4>${tl2(trans.communication)}</h4>
-                <form
-                    action="${root}settings/account"
-                    name="email-settings"
-                    method="post"
-                >
-                    <input
-                        type="hidden"
-                        name="csrfmiddlewaretoken"
-                        value="${token}"
-                    />
-                    <div class="setting-group">
-                        <div class="setting" data-type="select">
-                            <div class="heading">
-                                <h5>${tl2(trans.email_language)}</h5>
-                            </div>
-                            <div class="select-wrap custom-selector">
-                                ${select(
-        select_prepare(
-          original_settings.email_language
-        ),
-        original_settings.email_language.value,
-        original_settings.email_language.name
-      )}
-                            </div>
-                        </div>
-                        ${toggle({
-        value: original_settings.marketing_emails.checked,
-        name: original_settings.marketing_emails.name,
-        title: tl2(trans.marketing_emails.name),
-        body: tl2(trans.marketing_emails.body),
-        standalone: false
-      })}
-                    </div>
-                    <div class="settings-footer end">
-                        <button class="btn-primary save" type="submit">
-                            ${tl2(trans.save)}
-                        </button>
-                        <input
-                            type="hidden"
-                            value="email_settings"
-                            name="submit"
-                        />
-                    </div>
-                </form>
-            </section>
-            <section class="bleh--panel">
-                <h4>${tl2(trans.security)}</h4>
-                <form
-                    action="${root}settings/account"
-                    name="email-settings"
-                    method="post"
-                >
-                    <input
-                        type="hidden"
-                        name="csrfmiddlewaretoken"
-                        value="${token}"
-                    />
-                    <div class="setting-group">
-                        <div class="setting" data-type="action">
-                            <div class="heading">
-                                <h5>${tl2(trans.logout_everywhere)}</h5>
-                            </div>
-                            <div class="toggle-wrap">
-                                <a
-                                    class="see-more danger logout"
-                                    href="${root}settings/account/logout-everywhere"
-                                >
-                                    ${tl2(trans.logout)}
-                                </a>
-                            </div>
-                        </div>
-                        <div class="setting" data-type="action">
-                            <div class="heading">
-                                <h5>${tl2(trans.delete_account.name)}</h5>
-                                <p>${tl2(trans.delete_account.body)}</p>
-                            </div>
-                            <div class="toggle-wrap">
-                                <a
-                                    class="see-more danger delete-account"
-                                    href="${root}settings/account/delete"
-                                >
-                                    ${tl2(
-        trans.delete_account_permanently
-      ).replace("{u}", auth.name)}
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </section>
-        `
-    );
-    for (let setting2 in original_settings) {
-      update_inbuilt_item(setting2, original_settings[setting2], false);
-    }
-  }
-  function bleh_name_change() {
-    let token = page.structure.row.querySelector('[name="csrfmiddlewaretoken"]').getAttribute("value");
-    return;
-  }
-  function bleh_website() {
-    const token = page.structure.row.querySelector('[name="csrfmiddlewaretoken"]').getAttribute("value");
-    const auto_correct = page.structure.main.querySelector(
-      '[name="corrections_enabled"]:checked'
-    );
-    const preferred_affiliate = page.structure.main.querySelector(
-      '[name="preferred_affiliate"]:checked'
-    );
-    const timezone = page.structure.main.querySelector('[name="timezone"]');
-    const help_text = page.structure.main.querySelector(".js-field-help-text");
-    const location = page.structure.main.querySelector(
-      '[data-require="components/location-form-field-v2"]'
-    );
-    const radius = page.structure.main.querySelector('[name="event_radius"]');
-    let timezone_text;
-    page.structure.main.insertBefore(
-      html.node`
-            <form class="dont-move" action="${root}settings/website" method="post">
-                <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
-                <section class="bleh--panel">
-                    <h4>${tl2(trans.website)}</h4>
-                    <div class="setting-group">
-                        <div class="setting v2" data-type="options">
-                            <div class="heading">
-                                <h5>${tl2(trans.auto_correct_scrobbles.name)}</h5>
-                                <p>${tl2(trans.auto_correct_scrobbles.body)}</p>
-                            </div>
-                            ${radio({
-        name: auto_correct.name,
-        value: auto_correct.value,
-        values: {
-          False: {
-            name: tl2(
-              trans.auto_correct_scrobbles.false
-            )
-          },
-          True: {
-            name: tl2(
-              trans.auto_correct_scrobbles.true
-            )
-          }
-        }
-      })}
-                        </div>
-                    </div>
-                    <div class="alert alert-danger">
-                        ${tl2(trans.auto_correct_scrobbles.warning)}
-                    </div>
-                </section>
-                <section class="bleh--panel">
-                    <h4>${tl2(trans.events)}</h4>
-                    <div class="setting-group">
-                        <div class="setting v2" data-type="select">
-                            <div class="heading">
-                                <h5>${tl2(trans.timezone)}</h5>
-                                <p ref=${(el) => timezone_text = el}>${help_text.textContent.trim()}</p>
-                            </div>
-                            ${select(
-        select_prepare(timezone),
-        timezone.value,
-        timezone.name,
-        (val) => {
-          fetch(
-            `${root}settings/partial/timezone-help-text?tz=${val}&ajax=1`
-          ).then((res) => res.text()).then((dom) => {
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(
-              dom,
-              "text/html"
-            );
-            const text4 = doc.querySelector("p");
-            if (!text4) return;
-            timezone_text.textContent = text4.textContent;
-          }).catch(
-            (e) => log(
-              "unable to get text",
-              "timezone",
-              "error",
-              { e }
-            )
-          );
-        }
-      )}
-                        </div>
-                        <div class="setting v2" data-type="action">
-                            <div class="heading">
-                                <h5>${tl2(trans.location.name)}</h5>
-                                <p>${tl2(trans.location.body)}</p>
-                            </div>
-                            <div class="toggle-wrap">
-                                ${location}
-                            </div>
-                        </div>
-                        <div class="setting v2" data-type="select">
-                            <div class="heading">
-                                <h5>${tl2(trans.event_radius)}</h5>
-                            </div>
-                            ${select(select_prepare(radius), radius.value, radius.name)}
-                        </div>
-                    </div>
-                    <div class="settings-footer end">
-                        <button type="submit" class="btn-primary save">
-                            ${tl2(trans.save)}
-                        </button>
-                        <input type="hidden" value="website" name="submit">
-                    </div>
-                </section>
-            </form>
-            <section class="bleh--panel">
-                <h4>${tl2(trans.playback)}</h4>
-                <form action="${root}settings/website" method="post">
-                    <input type="hidden" name="csrfmiddlewaretoken" value=${token}>
-                    <div class="setting-group">
-                        <div class="setting v2" data-type="options">
-                            <div class="heading">
-                                <h5>${tl2(trans.preferred_affiliate.name)}</h5>
-                                <p>${tl2(trans.preferred_affiliate.body)}</p>
-                            </div>
-                            ${radio({
-        name: preferred_affiliate.name,
-        value: preferred_affiliate.value,
-        values: radio_convert(
-          page.structure.main.querySelectorAll(
-            "#id_preferred_affiliate > .lfm-form-radio"
-          )
-        )
-      })}
-                        </div>
-                    </div>
-                    <div class="settings-footer end">
-                        <button type="submit" class="btn-primary save">
-                            ${tl2(trans.save)}
-                        </button>
-                        <input type="hidden" value="playback" name="submit">
-                    </div>
-                </form>
-            </section>
-        `,
-      page.structure.main.firstElementChild
-    );
-    const website = page.structure.main.querySelector("#website");
-    website.remove();
-    const playback = page.structure.main.querySelector("#playback");
-    playback.remove();
-  }
-  function bleh_applications() {
-    let session_types = page.structure.main.querySelectorAll(".api-sessions");
-    let suggested;
-    let connected;
-    if (session_types.length > 1) {
-      suggested = session_types[0];
-      connected = session_types[1];
-    } else {
-      connected = session_types[0];
-    }
-    render(
-      page.structure.main,
-      html`
-            <section class="applications">
-                <div class="section-intro">
-                    <h3>${tl2(trans.applications)}</h3>
-                    <p>${tl2(trans.applications_intro)}</p>
-                </div>
-                ${suggested ? html`
-                        <h2>${tl2(trans.suggested)}</h2>
-                        ${suggested}
-                    ` : ""}
-                <h2>${tl2(trans.connected)}</h2>
-                ${connected}
-            </section>
-        `
-    );
-    session_types.forEach((session_type) => {
-      let sessions = session_type.querySelectorAll(".api-session");
-      sessions.forEach((session) => {
-        const details = session.querySelector(".api-session-details");
-        const form = session.querySelector("form");
-        const button2 = form.querySelector("button");
-        button2.classList.add("chibi");
-        tippy_esm_default(button2, {
-          content: button2.textContent
-        });
-        const name = details.querySelector(".api-session-app-name");
-        const desc = details.querySelector(".api-session-app-description");
-        const status2 = details.querySelector(".api-session-status");
-        const image = details.querySelector(".api-session-app-image");
-        image.classList = "";
-        const default_image = image.src.endsWith(
-          "14d19fbdca555c1782176cd789e81af7.png"
-        );
-        render(
-          session,
-          html`
-                    <div class="session-header">
-                        <div
-                            class="session-image"
-                            data-default-image=${default_image}
-                        >
-                            ${image}
-                        </div>
-                        <div class="session-details">${name} ${desc}</div>
-                        ${form}
-                    </div>
-                    ${status2 ? html.node`
-                <div class="session-footer">
-                    ${status2}
-                </div>
-                ` : ""}
-                `
-        );
-      });
-    });
-  }
-
-  // src/pages/obsession.js
+  // src/pages/profile/obsession.js
   function bleh_obsession() {
     let obsession_container = document.querySelector(".obsession-container");
     if (!obsession_container) return;
@@ -35542,7 +33564,7 @@
     if (pages) page.structure.container.appendChild(pages);
   }
 
-  // src/components/pronouns.js
+  // src/components/profile/pronouns.js
   function find_pronouns(string) {
     const regex = /\b[a-z]{1,4}\s*\/\s*[a-z]{1,4}(?:\s*\/\s*[a-z]{1,4})?\b/i;
     const start2 = string.match(new RegExp(`^(${regex.source})\\s*(.*)$`, "i"));
@@ -35569,10 +33591,82 @@
     return string.replace(/^[,\-–—.;:|•·/]+\s*/, "").replace(/\s*[,\-–—.;:|•·/]+$/, "").trim();
   }
 
-  // src/pages/profile.js
+  // src/pages/profile/playlist.js
+  async function bleh_playlist() {
+    page.structure.container = document.body.querySelector(".page-content");
+    try {
+      page.structure.row = page.structure.container.querySelector(".row");
+      page.structure.main = page.structure.row.querySelector(".col-main");
+      page.structure.side = page.structure.row.querySelector(".col-sidebar");
+    } catch (e) {
+      log("unable to find elements", "page structure");
+    }
+    let content_top = document.body.querySelector(".content-top");
+    checkup_page_structure(false, content_top);
+    log("status is", "page", "info", page);
+    update_page();
+    const value = page.structure.container.querySelector(".content-top-header")?.textContent;
+    page.structure.container.insertBefore(html.node`
+        <section class="redesigned-header search-header no-background">
+            <div class="tag-side">
+                <div class="tag-icon playlist-icon"></div>
+            </div>
+            <div class="info-side">
+                <div class="sub-text">${tl2(trans.playlists)}</div>
+                <h1>${value}</h1>
+            </div>
+        </section>
+    `, page.structure.container.firstElementChild);
+    let cache2;
+    if (auth.name) {
+      cache2 = await load_profile_cache_externally(auth.name);
+      if (cache2.banner)
+        register_background(cache2.banner);
+      else if (auth.avatar && !auth.avatar.endsWith("818148bf682d429dc215c1705eb27b98.png"))
+        register_background(auth.avatar.replace("/avatar42s/", "/ar0/"));
+      else
+        register_background(null);
+    } else {
+      register_background(null);
+    }
+    const options = page.structure.container.querySelector(".playlisting-create-options");
+    const generate = page.structure.container.querySelector(".playlisting-generate-search-container");
+    if (options) {
+      const back = page.structure.container.querySelector(".content-top-back-link");
+      const back_link = back.querySelector("a");
+      back.remove();
+      const form = page.structure.container.querySelector(":scope > .buffer-standard > form");
+      const form_btn = form.querySelector("button");
+      form_btn.classList = "btn inbox-button accented icon";
+      form_btn.setAttribute("data-type", "create-from-scratch");
+      form.parentElement.remove();
+      page.structure.main.appendChild(html.node`
+            <section class="playlist-creator">
+                <div class="inbox-message-buttons">
+                    <a class="back-button btn inbox-button" href=${back_link.getAttribute("href")}>
+                        ${tl2(trans.back)}
+                    </a>
+                    ${form}
+                </div>
+                ${options}
+            </section>
+        `);
+    } else if (generate) {
+      page.structure.main.appendChild(html.node`
+            <section class="playlist-generator">
+                ${generate}
+            </section>
+        `);
+    }
+  }
+
+  // src/pages/profile/profile.js
   async function bleh_profiles() {
     if (page.subpage == "obsessions_obsession") {
       bleh_obsession();
+      return;
+    } else if (page.subpage.startsWith("playlists") && page.subpage != "playlists_playlists") {
+      bleh_playlist();
       return;
     }
     let profile_header = document.body.querySelector(".header--user");
@@ -36049,7 +34143,7 @@
         } else {
           const dashboard = page.structure.container.querySelector(".user-dashboard");
           if (dashboard) {
-            dialog({
+            dialog2({
               id: "listening_report_v2",
               title: "oh no :c",
               body: html.node`
@@ -37226,7 +35320,7 @@
     }
   }
   function open_starred_friend_window(friend_func = null) {
-    dialog({
+    dialog2({
       id: "starred_friend",
       title: tl2(trans.close_friends),
       body: html.node`
@@ -37450,7 +35544,7 @@
     page.structure.side.appendChild(value_panel);
   }
 
-  // src/components/collage.js
+  // src/components/minis/collage.js
   function collage({ host, sidebar } = {}) {
     if (!host || !sidebar) return;
     let width;
@@ -38017,7 +36111,7 @@
     }
   }
 
-  // src/components/pixel.js
+  // src/components/minis/pixel.js
   function pixel({
     host,
     sidebar
@@ -38332,7 +36426,7 @@
     return output;
   }
 
-  // src/components/plot.js
+  // src/components/minis/plot.js
   function plot({ host, sidebar } = {}) {
     if (!host || !sidebar) return;
     let data_points = [];
@@ -38366,7 +36460,7 @@
             `)}
             <button class="compare-user-btn add-user" onclick=${() => {
         let input_box;
-        dialog({
+        dialog2({
           id: "add_user",
           title: tl2(trans.plot.name),
           body: html.node`
@@ -38414,7 +36508,7 @@
     }
   }
 
-  // src/pages/minis.js
+  // src/pages/home/minis.js
   var valid_minis;
   function bleh_minis(skip2 = false) {
     if (!skip2) {
@@ -38761,7 +36855,7 @@
     `;
   }
 
-  // src/components/compare.js
+  // src/components/minis/compare.js
   function compare({ host, sidebar } = {}) {
     if (!host || !sidebar) return;
     let pages;
@@ -39275,7 +37369,7 @@
     }
   }
 
-  // src/news.js
+  // src/components/news.js
   function news() {
     let changelog = localStorage.getItem("bleh_changelog");
     let changelog_expire = new Date(
@@ -39331,7 +37425,7 @@
   function open_changelog(changelog) {
     const sponsor_name = sponsor_list && sponsor_list.special ? sponsor_list.special[0] : "clairedoll";
     let changelog_list;
-    const window2 = dialog({
+    const window2 = dialog2({
       id: "changelog",
       title: {
         html: tl2(trans.news_from_user, {
@@ -39341,7 +37435,7 @@
       body: html.node`
             <div class="cta first sponsor colourful margin-bottom">
                 <strong>${tl2(trans.news_sponsor_cta)}</strong>
-                <a class="see-more" onclick=${() => sponsor(true)}>${tl2(trans.sponsor)}</a>
+                <a class="see-more" onclick=${() => sponsor2(true)}>${tl2(trans.sponsor)}</a>
             </div>
             <div class="changelog-list" ref=${(el) => changelog_list = el}></div>
         `,
@@ -39387,7 +37481,7 @@
     set_storage("bleh_changelog", JSON.stringify(json));
   };
 
-  // src/components/dynamic_theming.js
+  // src/components/settings/dynamic_theming.js
   function dynamic_theming() {
     const media = window.matchMedia("(prefers-color-scheme: dark)");
     page.state.media = media;
@@ -39405,7 +37499,7 @@
     save_setting("theme", settings[`theme_${time2}`]);
   }
 
-  // src/components/rabbit.js
+  // src/components/dialog/rabbit.js
   function register_rabbit() {
     let input_box;
     let selected = 0;
@@ -39496,7 +37590,7 @@
       }
     });
     function rabbit() {
-      page.state.rabbit_modal = dialog({
+      page.state.rabbit_modal = dialog2({
         id: "rabbit",
         title: "rabbit",
         body: html.node`
@@ -40511,7 +38605,7 @@
     `;
   }
 
-  // src/components/settings.js
+  // src/components/settings/settings.js
   function setting({
     id = "",
     text: text4 = true,
@@ -41836,7 +39930,7 @@
     }
   }
 
-  // src/pages/glacier.js
+  // src/pages/profile/glacier.js
   function bleh_user_library() {
     let date_items = page.structure.side.querySelectorAll(
       ":scope > :is(div, figure)"
@@ -42994,7 +41088,7 @@
     else view_buttons.insertBefore(bulk_edit, edit_form);
   }
 
-  // src/chart.js
+  // src/components/music/chart.js
   function chart_reflow() {
     if (!document.body) return;
     load_chart_colours();
@@ -43282,7 +41376,7 @@
     };
   }
 
-  // src/pages/gallery.js
+  // src/pages/music/gallery.js
   function bleh_gallery() {
     if (page.subpage != "image") return;
     log("focusing on image", "gallery");
@@ -43818,12 +41912,12 @@
     set_storage("bleh_bookmarked_images", JSON.stringify(bookmarked_images));
   }
 
-  // src/components/profile_shortcut.js
+  // src/components/profile/profile_shortcut.js
   unsafeWindow._open_profile_shortcut_window = function() {
     open_profile_shortcut_window();
   };
   function open_profile_shortcut_window() {
-    let modal = dialog({
+    let modal = dialog2({
       id: "profile_shortcut",
       title: tl2(trans.profile_shortcut.name),
       body: html.node`
@@ -43838,7 +41932,7 @@
   function other_listener(id) {
     let input2;
     let submit;
-    dialog({
+    dialog2({
       id: "other_listener",
       title: tl2(trans.view_others_library),
       body: html.node`
@@ -43917,7 +42011,7 @@
     });
   };
 
-  // src/components/about_artist.js
+  // src/components/music/about_artist.js
   function bleh_about_artist() {
     let legacy_container = page.structure.main.querySelector(".about-artist");
     if (!legacy_container) return;
@@ -44243,7 +42337,7 @@
     render(parent, media);
   }
 
-  // src/components/oracle.js
+  // src/components/music/oracle.js
   function oracle_process() {
     log("beginning", "oracle");
     page.state.oracle_debug = {};
@@ -45589,7 +43683,7 @@
     xhr.send();
   }
   function oracle_credits() {
-    dialog({
+    dialog2({
       id: "oracle_credits",
       title: { html: tl2(trans.credits_for_value, { v: `<i>${correct_item_by_artist(page.name, page.sister)}</i>` }) },
       body: html.node`
@@ -45605,7 +43699,7 @@
   function oracle_debug() {
     const debug = page.state.oracle_debug;
     log("debug", "oracle", "info", { debug });
-    dialog({
+    dialog2({
       id: "oracle_debug",
       title: "oracle",
       body: html.node`
@@ -45711,7 +43805,7 @@
   function manage_oracle_data() {
     const oracle = JSON.parse(localStorage.getItem("bleh_oracle_cache")) || {};
     console.info("oracle data", oracle);
-    dialog({
+    dialog2({
       id: "oracle",
       title: tl2(trans.manage_data),
       body: html.node`
@@ -45841,7 +43935,7 @@
     } else {
       template = "2-incorrect-album-listing.yml";
     }
-    dialog({
+    dialog2({
       id: "oracle_correction",
       title: tl2(trans.suggest_correction),
       body: html.node`
@@ -45869,7 +43963,7 @@
     });
   }
 
-  // src/pages/users.js
+  // src/components/shared/users.js
   function bleh_users() {
     const users2 = page.structure.main?.querySelectorAll(".user-list-item:not(.user-list-item-mobile-ad)");
     users2.forEach((user, index3) => {
@@ -45886,7 +43980,7 @@
     artists.forEach((artist) => {
       artist.textContent = correct_artist(artist.textContent);
     });
-    const md = user.querySelector(".user-list-about-me");
+    const md = user.querySelector(".user-list-about-me:not(.has-featured-track)");
     log("patching", "user", "info", { user, name: name?.textContent, md });
     if (name) {
       name.textContent = name.textContent.trim();
@@ -45910,6 +44004,8 @@
     if (follow) {
       follow.classList.add("btn");
     }
+    const tooltip = user.querySelector(".user-library-controls-tooltip");
+    if (tooltip) tooltip.remove();
     const img = avatar2.querySelector("img");
     if (!img.src.endsWith("818148bf682d429dc215c1705eb27b98.png")) {
       user.appendChild(html.node`
@@ -45920,18 +44016,407 @@
     return user;
   }
 
-  // src/components/music.js
+  // src/components/shared/shout.js
+  function patch_shouts() {
+    if (!page.structure.main) return;
+    const use_md = settings.shout_markdown;
+    let shout_controls = page.structure.main.querySelector(
+      ".shoutbox-controls-wrapper:not([data-shouts])"
+    );
+    if (shout_controls) {
+      shout_controls.setAttribute("data-shouts", "true");
+      shout_header(shout_controls);
+    }
+    let shouts = page.structure.main.querySelectorAll(
+      ".shout:not([data-kate-processed])"
+    );
+    shouts.forEach((shout, index3) => {
+      try {
+        let vote_button = function() {
+          setTimeout(() => {
+            const modified = form.getAttribute("data-ajax-form-state") == "modified-state";
+            const current_is_voted = initial_is_voted != modified;
+            indicator.setAttribute(
+              "aria-checked",
+              current_is_voted.toString()
+            );
+          }, 0);
+        };
+        shout.setAttribute("data-kate-processed", "true");
+        shout.style.setProperty("--delay", index3 * 0.04 + "s");
+        let shout_name = shout.querySelector(".shout-user a");
+        if (!shout_name) return;
+        let shout_name_text = shout_name.textContent;
+        shout_name.insertBefore(html.node`<span class="at">@</span>`, shout_name.firstChild);
+        let shout_avatar = shout.querySelector(".shout-user-avatar");
+        let badge = patch_avatar(shout_avatar, shout_name_text, "shout");
+        if (badge) {
+          if (badge.type && badge.type == "avatar-status-dot--staff")
+            shout.classList.add("staff-shout");
+          style_name_from_badge(shout_name, badge);
+        }
+        const shout_body = shout.querySelector(".shout-body p");
+        const shout_text = shout_body.textContent.trim();
+        if (settings.shout_markdown) {
+          shout_parse_queue.push({ element: shout_body });
+        }
+        const indicator = html.node`
+                <div class="shout-vote-indicator colourful" aria-checked="false" />
+            `;
+        shout.appendChild(indicator);
+        let shout_timestamp = shout.querySelector(".shout-timestamp time");
+        if (shout_timestamp) {
+          tippy_esm_default(shout_timestamp, {
+            content: shout_timestamp.getAttribute("title")
+          });
+          shout_timestamp.removeAttribute("title");
+        }
+        let actions = shout.querySelectorAll(".shout-actions .shout-action");
+        actions.forEach((action) => {
+          let buttons2 = action.querySelectorAll("button, a");
+          buttons2.forEach((button2) => {
+            button2.classList.add("shout-action-button", "see-more");
+          });
+        });
+        const more_button = shout.querySelector(".shout-more-actions");
+        if (more_button) more_button.classList.add("see-more", "shout-action-button");
+        const form = shout.querySelector(".vote-button-toggle");
+        const voted_button = form.querySelector(".vote-button--voted");
+        const unvote_button = form.querySelector(
+          ".vote-button:not(.vote-button--voted)"
+        );
+        if (!voted_button || !unvote_button) return;
+        const initial_is_voted = voted_button.getAttribute("data-ajax-form-sets-state") == "modified-state";
+        indicator.setAttribute("aria-checked", initial_is_voted.toString());
+        voted_button.addEventListener("click", (e) => vote_button());
+        unvote_button.addEventListener("click", (e) => vote_button());
+        const menu = shout.querySelector(".shout-more-actions-menu");
+        const buttons = menu.querySelectorAll("button");
+        buttons.forEach((button2) => {
+          const type = button2.classList[1];
+          if (type == "more-item--delete") {
+            button2.textContent = tl2(trans.delete);
+          } else if (type == "more-item--report") {
+            button2.textContent = tl2(trans.report);
+          }
+        });
+        menu.insertBefore(
+          html.node`
+                <button class="dropdown-menu-clickable-item" data-type="copy" onclick=${() => {
+            copy(shout_text);
+          }}>
+                    ${tl2(trans.copy)}
+                </button>
+                <div class="sep" />
+            `,
+          menu.firstElementChild
+        );
+        let send_button = shout.querySelector(".form-group--submit");
+        shout_send(send_button);
+      } catch (e) {
+        notify({
+          id: "shout",
+          title: tl2(trans.shouts),
+          body: "Failed to be modified :(",
+          type: "error",
+          icon: "icon-16-shoutbox"
+        });
+        log("failed to modify", "shout", "error", { error: e });
+      }
+    });
+    if (settings.shout_markdown && shout_parse_queue.length > 0)
+      parse_shout_queue();
+    const shout_forms = document.querySelectorAll(".shout-form:not([data-kate-processed])");
+    shout_forms.forEach((shout_form) => {
+      shout_form.setAttribute("data-kate-processed", "true");
+      let shout_avatar = shout_form.querySelector(".shout-user-avatar");
+      patch_avatar(shout_avatar, auth.name);
+      let send_button = shout_form.querySelector(".form-group--submit");
+      shout_send(send_button);
+      const help_text = shout_form.querySelector(".form-row-help-text");
+      help_text.classList.add("dual-tip");
+      const legacy_textarea = shout_form.querySelector("textarea");
+      let placeholder = legacy_textarea.placeholder;
+      const is_reply = placeholder.includes(auth.name);
+      if (!is_reply) {
+        if (page.type == "user") {
+          placeholder = tl2(trans.shoutbox_placeholder_user, {
+            u: auth.name,
+            v: page.name
+          });
+        } else {
+          placeholder = tl2(trans.shoutbox_placeholder, {
+            u: auth.name,
+            v: page.type == "artist" ? romanise(correct_artist(page.name)) : ["album", "track"].includes(page.type) ? romanise(correct_item_by_artist(page.name, page.sister)) : page.name
+          });
+        }
+      }
+      const textarea = markdown_field((val) => {
+        chars.textContent = tl2(trans.value_characters_max, {
+          v: `${val.length}/1000`
+        });
+        chars.setAttribute("data-exceeded", val.length >= 1e3);
+        if (use_md) preview.setAttribute("disabled", val.length <= 0);
+      }, {}, "", "body", null, null, placeholder, legacy_textarea.maxLength, true, !is_reply);
+      legacy_textarea.replaceWith(textarea);
+      let chars;
+      let preview;
+      render(help_text, html`
+            ${use_md ? html.node`
+                <div class="tip preview" onclick=${() => markdown_preview(textarea.value())} ref=${(el) => preview = el} disabled="true">
+                    ${tl2(trans.preview)}
+                </div>
+            ` : ""}
+            <div class="tip characters" ref=${(el) => chars = el}>
+                ${tl2(trans.value_characters_max, { v: "0/1000" })}
+            </div>
+        `);
+      shout_form.addEventListener("keydown", (e) => {
+        if (e.ctrlKey && e.keyCode == 13) {
+          e.preventDefault();
+          send_button.querySelector(".btn-post-shout").click();
+          notify({
+            id: "shout",
+            title: tl2(trans.shouts),
+            body: tl2(trans.sent),
+            icon: "icon-16-shoutbox"
+          });
+        }
+      });
+    });
+  }
+  function shout_send(send_button) {
+    if (!send_button) return;
+    let button2 = send_button.querySelector(".btn-post-shout");
+    if (!button2) return;
+    button2.classList.add("btn-send-shout-generic");
+    button2.textContent = tl2(trans.send);
+    button2.removeAttribute("disabled");
+    if (page.mobile) return;
+    tippy_esm_default(button2, {
+      content: tl2(trans.send_quickly_with).replace(
+        "{kbd}",
+        keybind(["\u2318", "\u23CE"]).outerHTML
+      ),
+      allowHTML: true,
+      delay: [500, 0]
+    });
+  }
+  function shout_header(shout_controls) {
+    let panel;
+    let settings_btn;
+    if (page.subpage == "shoutbox_shout") {
+      panel = page.structure.main.querySelector(":scope > section");
+      let link = window.location.href;
+      panel.insertBefore(
+        html.node`
+            <div class="top-container">
+                <h2>
+                    <a class="text-colour-link" href=${link}>${tl2(trans.shouts)}</a>
+                </h2>
+                <div class="accompany view-buttons blend blend-v2">
+                    <p class="notice">${tl2(trans.single_shout)}</p>
+                </div>
+                <div class="view-buttons blend blend-v2">
+                    <button class="left-icon blend-v2-btn" data-type="settings" ref=${(el) => settings_btn = el}>
+                        ${tl2(trans.settings)}
+                    </button>
+                </div>
+            </div>
+        `,
+        panel.firstElementChild
+      );
+    } else if (shout_controls) {
+      panel = shout_controls.parentElement;
+      let select_btn = panel.querySelector(".dropdown-menu-clickable-button");
+      let header = panel.querySelector("h2");
+      if (header) header.parentElement.removeChild(header);
+      let link = window.location.href;
+      let shoutbox_link = "+shoutbox";
+      if (page.type == "user" || page.type == "event")
+        shoutbox_link = "shoutbox";
+      if (!page.subpage.startsWith("shoutbox")) link += `/${shoutbox_link}`;
+      panel.insertBefore(
+        html.node`
+            <div class="top-container">
+                <h2>
+                    <a class="text-colour-link" href=${link}>${tl2(trans.shouts)}</a>
+                </h2>
+                ${select_btn ? html.node`
+                    <div class="accompany view-buttons blend blend-v2">
+                        ${() => {
+          select_btn.classList.add(
+            "select-button",
+            "link-select",
+            "blend-v2-btn"
+          );
+          select_btn.classList.remove(
+            "section-control",
+            "dropdown-menu-clickable-button"
+          );
+          return shout_controls;
+        }}
+                    </div>
+                ` : ""}
+                <div class="view-buttons blend blend-v2">
+                    <button class="left-icon blend-v2-btn" data-type="settings" ref=${(el) => settings_btn = el}>
+                        ${tl2(trans.settings)}
+                    </button>
+                </div>
+            </div>
+        `,
+        panel.firstElementChild
+      );
+    }
+    if (!settings_btn) return;
+    tippy_esm_default(settings_btn, {
+      theme: "window",
+      content: html.node`
+            <div class="dialog-settings">
+                <div class="setting-group blend">
+                    ${setting({ id: "shout_markdown" })}
+                    ${setting({ id: "accessible_name_colours" })}
+                    ${setting({ id: "underline_links" })}
+                </div>
+            </div>
+        `,
+      placement: "bottom",
+      interactive: true,
+      interactiveBorder: 10,
+      trigger: "click",
+      appendTo: document.body
+    });
+    const cant_shout = panel.querySelector(".shouting-unavailable");
+    if (cant_shout) {
+      render(
+        cant_shout,
+        html`
+                <div class="loading-data-container">
+                    <div class="loading-data-text static" data-type="shouts">
+                        ${tl2(trans.cant_shout)}
+                    </div>
+                </div>
+            `
+      );
+    }
+  }
+  function parse_shout_queue() {
+    if (shout_parse_queue.length == 0) return;
+    const shout = shout_parse_queue.shift();
+    const parsed2 = markdown(shout.element.textContent);
+    shout.element.classList.add("markdown-body");
+    render(shout.element, html.node`${parsed2}`);
+    log("parsed one shout", "shout", "log");
+    if (shout_parse_queue.length > 0) setTimeout(parse_shout_queue, 50);
+  }
+  function shout_messages() {
+    if (!page.structure.main) return;
+    let alerts = page.structure.main.querySelectorAll(
+      ".shout-messages > .alert"
+    );
+    alerts.forEach((alert2) => {
+      if (alert2.classList.contains("alert-danger")) {
+        notify({
+          id: "shout",
+          title: tl2(trans.shouts),
+          body: tl2(trans.failed_to_send),
+          type: "error",
+          icon: "icon-16-shoutbox"
+        });
+      } else {
+        return;
+      }
+      alert2.remove();
+    });
+  }
+  function join_the_conversation(blocked) {
+    if (!ff("join_the_conversation")) return;
+    const join = page.structure.main.querySelector(".btn-shouts-join");
+    if (!join) return;
+    if (blocked) {
+      join.remove();
+      return;
+    }
+    const use_partial = !ff("use_full_shoutbox");
+    const partial = use_partial ? "partial/" : "";
+    let search = window.location.search;
+    if (!use_partial) {
+      search = search.replace("shoutbox-sort=", "sort=");
+    }
+    const url = `${window.location.pathname}/+${partial}shoutbox${window.location.search}`;
+    const shoutbox = html.node`
+        <section class="shoutbox-preview" id="shoutbox">
+            <h2>${tl2(trans.shouts)}</h2>
+            <div class="loading-data-container">
+                <div class="loading-data-text">${tl2(trans.loading_conversations)}</div>
+            </div>
+        </section>
+    `;
+    join.replaceWith(shoutbox);
+    lazy(shoutbox, () => {
+      fetch(url).then((res) => {
+        if (!res.ok)
+          throw new Error();
+        return res.text();
+      }).then((res) => {
+        const doc = new DOMParser().parseFromString(res, "text/html");
+        const new_shoutbox = doc.querySelector(use_partial ? ".shoutbox" : ".col-main > section");
+        if (!new_shoutbox) throw new Error();
+        if (use_partial) {
+          render(shoutbox, html`
+                        ${new_shoutbox}
+                    `);
+        } else {
+          shoutbox.replaceWith(new_shoutbox);
+          shout_header(new_shoutbox.querySelector(".section-controls"));
+        }
+      }).catch((e) => {
+        handle_shout_error(e);
+      });
+    });
+    function handle_shout_error(e) {
+      render(shoutbox, html`
+            <h2>${tl2(trans.shouts)}</h2>
+            <div class="loading-data-container">
+                <div class="alert alert-error">${e && e.message ? e.message : tl2(trans.shoutbox_failed)}</div>
+            </div>
+        `);
+    }
+  }
+
+  // src/components/music/music.js
   unsafeWindow._other_listener = function(id) {
     other_listener(id);
   };
   async function show_your_scrobbles() {
     let katsune = ff("katsune");
     show_numbers_on_side(page.type);
-    const page_is_blocked = !page.structure.main.querySelector("#shoutbox");
+    let col_main = page.structure.container.querySelector(".top-overview-panel");
+    if (!col_main) col_main = document.body.querySelector(".col-main");
+    if (page.type == "track") {
+      let new_panel = document.createElement("section");
+      new_panel.classList.add("track-info-panel");
+      new_panel.innerHTML = col_main.innerHTML;
+      page.structure.main.insertBefore(
+        new_panel,
+        page.structure.main.firstElementChild
+      );
+      col_main.style.setProperty("display", "none");
+      page.structure.row.appendChild(col_main);
+      console.info(col_main, new_panel);
+      col_main = new_panel;
+    }
+    let page_is_blocked;
+    if (page.type == "artist") {
+      page_is_blocked = col_main.querySelector(".metadata-and-wiki-row, .cta-copy") == null;
+    } else if (page.type == "album" || page.type == "track") {
+      page_is_blocked = col_main.querySelector(".catalogue-tags") == null;
+    }
     log(
       `${page_is_blocked ? "page is blocked" : "page is not blocked"}`,
       "music"
     );
+    join_the_conversation(page_is_blocked);
     if (page.subpage == "overview") {
       let tabs = document.createElement("nav");
       tabs.classList.add(
@@ -46065,23 +44550,6 @@
       page.structure.container.insertBefore(tabs, page.structure.row);
       page.structure.tabs = tabs;
     }
-    let col_main = page.structure.container.querySelector(
-      ".top-overview-panel"
-    );
-    if (!col_main) col_main = document.body.querySelector(".col-main");
-    if (page.type == "track") {
-      let new_panel = document.createElement("section");
-      new_panel.classList.add("track-info-panel");
-      new_panel.innerHTML = col_main.innerHTML;
-      page.structure.main.insertBefore(
-        new_panel,
-        page.structure.main.firstElementChild
-      );
-      col_main.style.setProperty("display", "none");
-      page.structure.row.appendChild(col_main);
-      console.info(col_main, new_panel);
-      col_main = new_panel;
-    }
     let top_container = document.createElement("div");
     top_container.classList.add("top-container");
     if (katsune) top_container.classList.add("katsune-button-row");
@@ -46158,10 +44626,7 @@
                         <div class="info">
                             <h3>${shortcut_listens.name}</h3>
                             <p class="colourful" ref=${(el) => p = el}>
-                                ${tl2(trans.listens.count).replace(
-            "{c}",
-            listens.toLocaleString(lang)
-          )}
+                                ${tl2(trans.count_plays, { c: listens.toLocaleString(lang) })}
                             </p>
                         </div>
                     `
@@ -46396,14 +44861,11 @@
       }
     }
     if (page_is_blocked) {
-      page.structure.main.insertBefore(
-        html.node`
+      page.structure.main.insertBefore(html.node`
             <section class="cta blocked-cta">
                 <strong>${tl2(trans.blocked_page)}</strong>
             </section>
-        `,
-        page.structure.main.firstElementChild
-      );
+        `, page.structure.main.firstElementChild);
       return;
     }
     let play_on;
@@ -46831,10 +45293,7 @@
                 <div class="info">
                     <h3>${name}</h3>
                     <p class="colourful" ref=${(el) => p = el}>
-                        ${tl2(trans.listens.count).replace(
-          "{c}",
-          listens.toLocaleString(lang)
-        )}
+                        ${tl2(trans.count_plays, { c: listens.toLocaleString(lang) })}
                     </p>
                 </div>
             `
@@ -46869,7 +45328,7 @@
                 <div class="info">
                     <h3>${name}</h3>
                     <p class="colourful" ref=${(el) => p = el}>
-                        ${tl2(trans.listens)}
+                        ${tl2(trans.count_plays, { c: " " })}
                     </p>
                 </div>
             `
@@ -47212,7 +45671,7 @@
                 ${follow}
                 ${track_wrap ? html.node`
                 <div class="user-list-description">
-                    <p class="user-list-about-me" ref=${(el) => about_me = el}>
+                    <p class="user-list-about-me has-featured-track" ref=${(el) => about_me = el}>
                         ${{ html: track_wrap.innerHTML }}
                     </p>
                 </div>
@@ -47388,7 +45847,7 @@
     `);
   }
 
-  // src/components/markdown.js
+  // src/components/shared/markdown.ts
   var import_showdown = __toESM(require_showdown(), 1);
 
   // node_modules/dompurify/dist/purify.es.mjs
@@ -48371,7 +46830,7 @@
   }
   var purify = createDOMPurify();
 
-  // src/components/statuscafe.js
+  // src/components/profile/statuscafe.js
   async function fetch_status(username2) {
     const current = /* @__PURE__ */ new Date();
     const next_fetch = new Date(localStorage.getItem("next_status_cafe_fetch")) || current;
@@ -48436,6 +46895,10 @@
             `;
     }).catch((e) => {
       log(`error processing for ${username2}`, "status.cafe", "error", { e });
+      let error = e && e.message ? e.message : "";
+      if (e instanceof TypeError) {
+        error = `${username2} was not found on status.cafe`;
+      }
       return html.node`
                 <div class="status-cafe">
                     <div class="status-cafe-top">
@@ -48446,14 +46909,14 @@
                         <span class="status-cafe-emoji">
                             <span class="bleh-icon" />
                         </span>
-                        <span class="status-cafe-text">${e && e.message ? e.message : ""}</span>
+                        <span class="status-cafe-text">${error}</span>
                     </div>
                 </div>
             `;
     });
   }
 
-  // src/components/markdown.js
+  // src/components/shared/markdown.ts
   function markdown(text4, {
     allow_headers = false,
     starting_header = 3,
@@ -48721,8 +47184,9 @@
     extensions.push(mentions(), timestamp());
     let profile_cache;
     const will_cache = cache2 === true;
-    log(`prepare new cache is ${will_cache}`, "markdown", "log", { cache: cache2 });
-    if ((allow_banners || allow_hue) && will_cache) {
+    const available = allow_banners || allow_hue;
+    log(`prepare new cache is ${will_cache}, caching features available is ${available}`, "markdown", "log", { cache: cache2 });
+    if (available && will_cache) {
       profile_cache = JSON.parse(localStorage.getItem("bleh_profile_cache")) || {};
       cache2 = profile_cache[name] || {};
     }
@@ -48965,7 +47429,7 @@
     allow_alignment = false
   } = {}) {
     if (!line_breaks) allow_alignment = false;
-    dialog({
+    dialog2({
       id: "markdown",
       title: tl2(trans.preview),
       body: html.node`
@@ -49014,7 +47478,7 @@
     const hostname = link.hostname;
     const path = link.pathname + link.search + link.hash;
     let trust_site;
-    dialog({
+    dialog2({
       id: "external_url",
       type: "leaving_site",
       body: html.node`
@@ -49175,7 +47639,7 @@
             return new Promise((resolve2) => {
               let link;
               let alt;
-              dialog({
+              dialog2({
                 id: "link",
                 title: tl2(trans.create_link),
                 body: html.node`
@@ -49257,7 +47721,7 @@
             return new Promise((resolve2) => {
               let link;
               let alt;
-              dialog({
+              dialog2({
                 id: "link",
                 title: tl2(trans.attach_image),
                 body: html.node`
@@ -49496,7 +47960,7 @@
     return field;
   }
 
-  // src/seasonal.js
+  // src/components/seasonal.js
   function set_season() {
     if (!settings.seasonal) return;
     let last_season_seen = localStorage.getItem("bleh_last_season_seen") || "";
@@ -49737,7 +48201,7 @@
   // node_modules/cropperjs/dist/cropper.min.css
   var cropper_min_default = '/*!\n * Cropper.js v1.5.13\n * https://fengyuanchen.github.io/cropperjs\n *\n * Copyright 2015-present Chen Fengyuan\n * Released under the MIT license\n *\n * Date: 2022-11-20T05:30:43.444Z\n */.cropper-container{direction:ltr;font-size:0;line-height:0;position:relative;-ms-touch-action:none;touch-action:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.cropper-container img{-webkit-backface-visibility:hidden;backface-visibility:hidden;display:block;height:100%;image-orientation:0deg;max-height:none!important;max-width:none!important;min-height:0!important;min-width:0!important;width:100%}.cropper-canvas,.cropper-crop-box,.cropper-drag-box,.cropper-modal,.cropper-wrap-box{bottom:0;left:0;position:absolute;right:0;top:0}.cropper-canvas,.cropper-wrap-box{overflow:hidden}.cropper-drag-box{background-color:#fff;opacity:0}.cropper-modal{background-color:#000;opacity:.5}.cropper-view-box{display:block;height:100%;outline:1px solid #39f;outline-color:rgba(51,153,255,.75);overflow:hidden;width:100%}.cropper-dashed{border:0 dashed #eee;display:block;opacity:.5;position:absolute}.cropper-dashed.dashed-h{border-bottom-width:1px;border-top-width:1px;height:33.33333%;left:0;top:33.33333%;width:100%}.cropper-dashed.dashed-v{border-left-width:1px;border-right-width:1px;height:100%;left:33.33333%;top:0;width:33.33333%}.cropper-center{display:block;height:0;left:50%;opacity:.75;position:absolute;top:50%;width:0}.cropper-center:after,.cropper-center:before{background-color:#eee;content:" ";display:block;position:absolute}.cropper-center:before{height:1px;left:-3px;top:0;width:7px}.cropper-center:after{height:7px;left:0;top:-3px;width:1px}.cropper-face,.cropper-line,.cropper-point{display:block;height:100%;opacity:.1;position:absolute;width:100%}.cropper-face{background-color:#fff;left:0;top:0}.cropper-line{background-color:#39f}.cropper-line.line-e{cursor:ew-resize;right:-3px;top:0;width:5px}.cropper-line.line-n{cursor:ns-resize;height:5px;left:0;top:-3px}.cropper-line.line-w{cursor:ew-resize;left:-3px;top:0;width:5px}.cropper-line.line-s{bottom:-3px;cursor:ns-resize;height:5px;left:0}.cropper-point{background-color:#39f;height:5px;opacity:.75;width:5px}.cropper-point.point-e{cursor:ew-resize;margin-top:-3px;right:-3px;top:50%}.cropper-point.point-n{cursor:ns-resize;left:50%;margin-left:-3px;top:-3px}.cropper-point.point-w{cursor:ew-resize;left:-3px;margin-top:-3px;top:50%}.cropper-point.point-s{bottom:-3px;cursor:s-resize;left:50%;margin-left:-3px}.cropper-point.point-ne{cursor:nesw-resize;right:-3px;top:-3px}.cropper-point.point-nw{cursor:nwse-resize;left:-3px;top:-3px}.cropper-point.point-sw{bottom:-3px;cursor:nesw-resize;left:-3px}.cropper-point.point-se{bottom:-3px;cursor:nwse-resize;height:20px;opacity:1;right:-3px;width:20px}@media (min-width:768px){.cropper-point.point-se{height:15px;width:15px}}@media (min-width:992px){.cropper-point.point-se{height:10px;width:10px}}@media (min-width:1200px){.cropper-point.point-se{height:5px;opacity:.75;width:5px}}.cropper-point.point-se:before{background-color:#39f;bottom:-50%;content:" ";display:block;height:200%;opacity:0;position:absolute;right:-50%;width:200%}.cropper-invisible{opacity:0}.cropper-bg{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAAA3NCSVQICAjb4U/gAAAABlBMVEXMzMz////TjRV2AAAACXBIWXMAAArrAAAK6wGCiw1aAAAAHHRFWHRTb2Z0d2FyZQBBZG9iZSBGaXJld29ya3MgQ1M26LyyjAAAABFJREFUCJlj+M/AgBVhF/0PAH6/D/HkDxOGAAAAAElFTkSuQmCC")}.cropper-hide{display:block;height:0;position:absolute;width:0}.cropper-hidden{display:none!important}.cropper-move{cursor:move}.cropper-crop{cursor:crosshair}.cropper-disabled .cropper-drag-box,.cropper-disabled .cropper-face,.cropper-disabled .cropper-line,.cropper-disabled .cropper-point{cursor:not-allowed}';
 
-  // src/style.js
+  // src/components/page/style.js
   function append_style() {
     document.documentElement.classList.add("florence-supports-loading");
     for (var member in settings) delete settings[member];
@@ -49895,7 +48359,7 @@
     });
   }
   function prompt_for_update() {
-    dialog({
+    dialog2({
       id: "bleh_update",
       title: tl2(trans.update_to_version).replace(
         "{v}",
@@ -49905,7 +48369,7 @@
             <div class="forms">
                 <div class="form">
                     <div class="form-group proceed">
-                        <button class="btn primary icon" data-type="update" onclick=${() => start_update()}>${tl2(trans.update_now)}</button>
+                        <button class="btn primary icon" data-type="update" onclick=${() => start_update2()}>${tl2(trans.update_now)}</button>
                     </div>
                 </div>
                 <div class="form">
@@ -49925,9 +48389,9 @@
       id: "bleh_update"
     });
   }
-  function start_update() {
+  function start_update2() {
     open(`https://github.com/katelyynn/bleh/raw/refs/heads/uwu/fm/bleh.user.js?${Math.random()}`);
-    dialog({
+    dialog2({
       id: "bleh_update",
       title: tl2(trans.update_to_version).replace(
         "{v}",
@@ -49948,7 +48412,7 @@
     });
   }
   function finish_update() {
-    dialog({
+    dialog2({
       id: "bleh_wait",
       title: tl2(trans.update_to_version).replace(
         "{v}",
@@ -50182,7 +48646,232 @@
     }
   }
 
-  // src/components/notifications.js
+  // src/pages/bleh_settings/visual.js
+  function visual() {
+    if (auth.name && auth.sets.hue == 255 && auth.sets.sat == 1 && auth.sets.lit == 1) {
+      setTimeout(() => {
+        render_setting_page("visual");
+      }, 10);
+      page_loading();
+      return;
+    }
+    register_skip_to([]);
+    let colourful_active;
+    let colourful_all;
+    let sat_bg2;
+    let adaptive_tip;
+    let bubbles;
+    function render_tip() {
+      adaptive_tip.setAttribute("aria-hidden", !settings.theme_schedule);
+      render(adaptive_tip, html`
+            ${tl2(trans.adaptive_tip, {
+        day: tl2(trans.themes[settings.theme_day]),
+        night: tl2(trans.themes[settings.theme_night])
+      })}
+            <a onclick=${() => {
+        dialog({
+          id: "auto_theme",
+          title: tl2(trans.themes.name),
+          body: html.node`
+                        <div class="setting-group">
+                            ${theme_day = setting({
+            id: "theme_day",
+            list: [
+              {
+                value: "light",
+                text: tl2(trans.themes.light)
+              },
+              {
+                value: "ink",
+                text: tl2(trans.themes.ink)
+              },
+              {
+                value: "dark",
+                text: tl2(trans.themes.dark)
+              },
+              {
+                value: "darker",
+                text: tl2(trans.themes.darker)
+              },
+              {
+                value: "oled",
+                text: tl2(trans.themes.oled)
+              }
+            ],
+            func: () => {
+              render_tip();
+              bubbles.re_render();
+              match2();
+            }
+          })}
+                            ${theme_night = setting({
+            id: "theme_night",
+            list: [
+              {
+                value: "light",
+                text: tl2(trans.themes.light)
+              },
+              {
+                value: "ink",
+                text: tl2(trans.themes.ink)
+              },
+              {
+                value: "dark",
+                text: tl2(trans.themes.dark)
+              },
+              {
+                value: "darker",
+                text: tl2(trans.themes.darker)
+              },
+              {
+                value: "oled",
+                text: tl2(trans.themes.oled)
+              }
+            ],
+            func: () => {
+              render_tip();
+              bubbles.re_render();
+              match2();
+            }
+          })}
+                        </div>
+                        <p class="card-tip">${tl2(trans.theme_schedule)}</p>
+                    `
+        });
+      }}>
+                ${tl2(trans.change_schedule)}
+            </a>
+        `);
+    }
+    render(page.structure.main, html`
+        <section class="bleh--panel">
+            <h4>${tl2(trans.appearance)}</h4>
+            <div class="setting-group">
+                <div class="setting" data-type="action">
+                    <div class="heading">
+                        <h5>${tl2(trans.themes.name)}</h5>
+                    </div>
+                    <div class="info v">
+                        ${bubbles = theme_bubbles(() => {
+      sat_bg2.compat();
+      render_tip();
+      match2();
+    })}
+                        <p class="card-tip" ref=${(el) => adaptive_tip = el} />
+                    </div>
+                </div>
+                ${setting({ id: "solarium" })}
+                ${ff("high_contrast") ? setting({ id: "high_contrast" }) : ""}
+                <div class="setting" data-type="action">
+                    <div class="heading">
+                        <h5>${tl2(trans.hue)}</h5>
+                    </div>
+                    <div class="info swatch-info">
+                        <div
+                            id="colour_custom"
+                            class="swatch-group palette"
+                        ></div>
+                        <div class="sep swatch-sep" />
+                        <div
+                            id="colour_palette"
+                            class="swatch-group palette"
+                        ></div>
+                    </div>
+                </div>
+                <div class="setting" data-type="options">
+                    <div class="heading">
+                        <h5>${tl2(trans.change_my_colour_when.name)}</h5>
+                        <p>${tl2(trans.change_my_colour_when.body)}</p>
+                    </div>
+                    <div class="primary-selections">
+                        ${setting({
+      id: "hue_from_album",
+      standalone: true
+    })}
+                        ${colourful_active = setting({
+      id: "colourful_tracks",
+      standalone: true,
+      func: () => {
+        colourful_all.compat();
+      }
+    })}
+                        ${colourful_all = setting({
+      id: "colourful_tracks_all",
+      standalone: true,
+      func: () => {
+        colourful_active.compat();
+      }
+    })}
+                    </div>
+                </div>
+                ${ff("card_saturation") ? html.node`
+                    ${sat_bg2 = setting({ id: "sat_bg" })}
+                ` : ""}
+                ${setting({ id: "noise" })}
+            </div>
+        </section>
+        <section class="bleh--panel">
+            <h4>${tl2(trans.fonts)}</h4>
+            <div class="inner-preview pad">
+                <h1 class="font-preview">${tl2(trans.font_example)}</h1>
+            </div>
+            <div class="setting-group">
+                ${setting({ id: "font" })}
+                ${setting({ id: "font_weight" })}
+                ${setting({ id: "font_weight_medium" })}
+                ${setting({ id: "font_weight_bold" })}
+                ${setting({ id: "font_emoji" })}
+            </div>
+        </section>
+        <section class="bleh--panel">
+            <h4>${tl2(trans.artwork)}</h4>
+            <div class="inner-preview pad">
+                <div class="palette albums" style="height: fit-content">
+                    <div
+                        class="album-cover swatch"
+                        style="background-image: url('https://lastfm.freetls.fastly.net/i/u/770x0/1569198c4cf0a3b2ff8728975e8359fa.jpg')"
+                    ></div>
+                    <div
+                        class="album-cover swatch"
+                        style="background-image: url('https://lastfm.freetls.fastly.net/i/u/770x0/b897255bf422baa93a42536af293f9f8.jpg')"
+                    ></div>
+                    <div
+                        class="album-cover swatch"
+                        style="background-image: url('https://lastfm.freetls.fastly.net/i/u/770x0/def68d94aae8e52ef2d1c0c9d3e16ff4.jpg')"
+                    ></div>
+                    <div
+                        class="album-cover swatch"
+                        style="background-image: url('https://lastfm.freetls.fastly.net/i/u/770x0/510546e3b6df7504392274c528c77780.jpg')"
+                    ></div>
+                    <div
+                        class="album-cover swatch"
+                        style="background-image: url('https://lastfm.freetls.fastly.net/i/u/770x0/49cc807f69d59746b6b04be3434e6637.jpg')"
+                    ></div>
+                    <div
+                        class="album-cover swatch"
+                        style="background-image: url('https://lastfm.freetls.fastly.net/i/u/770x0/dd76702cea38c838a3090dd9496d92d9.jpg')"
+                    ></div>
+                </div>
+            </div>
+            <div class="setting-group">
+                ${setting({ id: "gloss" })}
+                ${setting({ id: "grid_glow" })}
+            </div>
+            <div class="setting-group">
+                ${setting({ id: "avatar_radius" })}
+            </div>
+        </section>
+        <section class="bleh--panel">
+            <h4>${tl2(trans.other)}</h4>
+            <div class="setting-group">${setting({ id: "rain" })}</div>
+        </section>
+    `);
+    render_tip();
+    display_colour_presets();
+    update_colour_swatches();
+  }
+
+  // src/components/inbox/notifications.js
   function bleh_notification_list(list, mini = false) {
     list.classList = "notification-list";
     if (mini) list.classList.add("mini");
@@ -50359,7 +49048,7 @@
     });
   }
 
-  // src/components/messages.js
+  // src/components/inbox/messages.js
   function bleh_message_list(list, mini = false, delete_btn = null, checkboxes = []) {
     list.classList = "notification-list";
     if (mini) list.classList.add("mini");
@@ -50460,7 +49149,7 @@
     });
   }
 
-  // src/navigation.js
+  // src/components/page/navigation.js
   function patch_masthead() {
     let masthead_logo = document.body.querySelector(".masthead-logo");
     if (!masthead_logo) return;
@@ -50756,7 +49445,7 @@
             <a class="dropdown-menu-clickable-item accent" data-type="discord" href="https://discord.gg/${discord}" target="_blank">
                 ${tl2(trans.join_discord)}
             </a>
-            <button class="dropdown-menu-clickable-item sponsor" onclick=${() => sponsor()}>
+            <button class="dropdown-menu-clickable-item sponsor" onclick=${() => sponsor2()}>
                 ${tl2(trans.sponsor)}
             </button>
             <a class="dropdown-menu-clickable-item lotus" href="https://github.com/katelyynn/lotus/issues/new/choose" target="_blank">
@@ -51726,7 +50415,352 @@
     }
   }
 
-  // src/pages/bleh_config.js
+  // src/pages/bleh_settings/general.js
+  function general() {
+    if (auth.pro == null) {
+      setTimeout(() => {
+        render_setting_page("general");
+      }, 10);
+      page_loading();
+      return;
+    }
+    register_skip_to([]);
+    let badge_count = 0;
+    let badges = load_badges(auth.name);
+    if (badges) badge_count = badges.length;
+    if (auth.pro) badge_count++;
+    const auth_key = localStorage.getItem("bleh_auth");
+    const auth_valid = localStorage.getItem("bleh_auth_valid");
+    render(page.structure.main, html`
+        <section class="bleh--panel">
+            <h4>${tl2(trans.updates)}</h4>
+            <div class="setting-group">
+                ${update_setting()}
+            </div>
+        </section>
+        <section class="bleh--panel">
+            <h4>${tl2(trans.profile)}</h4>
+            <div class="setting-group">
+                ${auth.name ? html.node`
+                    <div class="setting" data-type="info">
+                        <div class="avatar-container">
+                            <div class="avatar-inner">
+                                <img src=${auth.avatar} alt=${auth.name} />
+                            </div>
+                        </div>
+                        <div class="heading">
+                            <h5>@${auth.name}</h5>
+                        </div>
+                        <div class="info">
+                            <p>${tl2(trans.profile_and_badges, { c: badge_count.toString() })}</p>
+                            ${badge_count > 0 ? html.node`
+                                <button class="see-more" onclick=${() => {
+      dialog2({
+        id: "badges",
+        title: auth.name,
+        body: html.node`
+                                            <div class="generic-table-list badge-list">
+                                                ${badges ? badges.map((badge) => {
+          let style;
+          let classname = "";
+          if (badge.icon && badge.hue && badge.sat && badge.lit) {
+            style = `--mask: url(${badge.icon}); --hue: ${badge.hue}; --sat: ${badge.sat}; --lit: ${badge.lit}`;
+          } else {
+            classname = `user-status--bleh-${badge.type} user-status--bleh-user-${auth.name}`;
+          }
+          return html.node`
+                                                        <div class="generic-table-list-entry badge-list-entry">
+                                                            <div class="icon-container colourful ${classname}" style=${style}>
+                                                                <div class="bleh-icon" style="--icon: var(--mask)" />
+                                                            </div>
+                                                            <div class="name colourful ${classname}" style=${style}>
+                                                                ${badge.name}
+                                                            </div>
+                                                            <div class="text">
+                                                                ${badge.reason}
+                                                            </div>
+                                                        </div>
+                                                    `;
+        }) : ""}
+                                                ${auth.pro ? html.node`
+                                                    <div class="generic-table-list-entry badge-list-entry">
+                                                        <div class="icon-container colourful user-status-subscriber">
+                                                            <div class="bleh-icon" style="--icon: var(--mask)" />
+                                                        </div>
+                                                        <div class="name colourful user-status-subscriber">
+                                                            ${tl2(trans.badges["user-status-subscriber"].name)}
+                                                        </div>
+                                                        <div class="text">
+                                                            ${tl2(trans.badges["user-status-subscriber"].reason)}
+                                                        </div>
+                                                    </div>
+                                                ` : ""}
+                                            </div>
+                                        `
+      });
+    }}>${tl2(trans.view)}</button>
+                            ` : ""}
+                        </div>
+                    </div>
+                ` : ""}
+                ${auth.sponsor ? html.node`
+                    <div class="setting" data-type="action">
+                        <div class="heading">
+                            <h5>${tl2(trans.you_are_a_sponsor)}</h5>
+                            <p>${tl2(trans.sponsor_get_badge)}</p>
+                        </div>
+                        <div class="toggle-wrap">
+                            <button class="btn primary icon sponsor" data-type="sponsor" onclick=${() => sponsor_manage()}>
+                                ${tl2(trans.manage_sponsor)}
+                            </button>
+                        </div>
+                    </div>
+                ` : html.node`
+                    <div class="setting" data-type="action">
+                        <div class="heading">
+                            <h5>${tl2(trans.news_sponsor_cta)}</h5>
+                            <p>${tl2(trans.sponsor_get_badge)}</p>
+                        </div>
+                        <div class="toggle-wrap">
+                            <button class="btn primary icon sponsor" data-type="sponsor" onclick=${() => sponsor()}>
+                                ${tl2(trans.sponsor)}
+                            </button>
+                        </div>
+                    </div>
+                `}
+                <div class="setting" data-type="info">
+                    <div class="heading">
+                        <h5>${tl2(trans.current_version)}</h5>
+                    </div>
+                    <div class="info">
+                        <p>${sponsor_list.latest}</p>
+                        <button class="see-more update-check sponsor-related" onclick=${() => sponsors(true, () => {
+      render_setting_page("general");
+    })}>
+                            ${tl2(trans.update_check)}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        ${!page.mobile ? html.node`
+            <section class="bleh--panel">
+                <h4>${tl2(trans.branding)}</h4>
+                <div class="setting-group">
+                    ${setting({ id: "branding_type", func: update_branding_type })}
+                </div>
+            </section>
+        ` : ""}
+        ${auth.name ? html.node`
+            <section class="bleh--panel">
+                <h4>API</h4>
+                <div class="setting-group">
+                    <div class="setting" data-type="action">
+                        <div class="heading">
+                            <h5>${tl2(trans.api.name)}</h5>
+                            <p>${tl2(trans.api.body)}</p>
+                        </div>
+                        <div class="toggle-wrap">
+                            <a class="btn ${auth_key && auth_valid == "true" ? "" : "primary"} icon connect" href="${root}api/auth?api_key=${api_key}&cb=${root}bleh/api">
+                                ${tl2(trans.connect)}
+                            </a>
+                        </div>
+                    </div>
+                    <div class="setting" data-type="info">
+                        <div class="heading">
+                            <h5>${tl2(trans.api_status)}</h5>
+                        </div>
+                        <div class="info">
+                            ${auth_key && auth_valid == "true" ? html.node`
+                                <p>${tl2(trans.connected)}</p>
+                            ` : html.node`
+                                <p>${tl2(trans.not_connected)}</p>
+                            `}
+                        </div>
+                    </div>
+                </div>
+            </section>
+        ` : ""}
+        <section class="bleh--panel">
+            <h4>${tl2(trans.language)}</h4>
+            <div class="setting-group">
+                <div class="languages">
+                    ${Object.entries(lang_info).sort(([, a], [, b]) => b.percent - a.percent).map(([key, language]) => {
+      let date;
+      const row = html.node`
+                            <div class="language-row${lang == key ? " active" : ""}">
+                                <div class="flag-container">
+                                    <img src="https://katelyynn.github.io/bleh/fm/flags/${key}.svg" alt="flag for ${key}">
+                                </div>
+                                <div class="name">
+                                    <h5>${language.name}</h5>
+                                    <p>${{ html: tl2(trans.by_user, { u: language.by.map((user) => `<a href="${root}user/${user}">${user}</a>`).join(", ") }) }}</p>
+                                </div>
+                                ${language.new ? html.node`
+                                    <div class="badges">
+                                        <div class="new-badge">${tl2(trans.new)}</div>
+                                    </div>
+                                ` : html.node`
+                                    <div class="badges"></div>
+                                `}
+                                ${language.percent ? () => {
+        const elem = html.node`
+                                        <div class="percent colourful" style="--hue-over: ${language.percent * 1.2}; --sat-over: 1.2; --lit-over: 1;" data-percent=${language.percent}>
+                                            ${language.percent}%
+                                        </div>
+                                    `;
+        tippy_esm_default(elem, {
+          content: `${tl2(trans.amount_translated, { c: language.translated })}, ${tl2(trans.missing_translated, { c: language.missing })}`
+        });
+        return elem;
+      } : ""}
+                                <div class="date">
+                                    <p ref=${(el) => date = el}>${language.last_updated != "latest" ? DateTime.fromISO(language.last_updated).toRelative() : language.last_updated}</p>
+                                </div>
+                            </div>
+                        `;
+      if (language.last_updated != "latest") {
+        tippy_esm_default(date, {
+          content: DateTime.fromISO(language.last_updated).toLocaleString(DateTime.DATE_MED)
+        });
+      }
+      return row;
+    })}
+                </div>
+            </div>
+            <div class="setting-group">
+                <div class="setting" data-type="action">
+                    <div class="heading">
+                        <h5>${tl2(trans.submit_language.name)}</h5>
+                        <p>${tl2(trans.submit_language.body)}</p>
+                    </div>
+                    <div class="toggle-wrap">
+                        <a class="see-more" href="https://github.com/katelyynn/bleh/wiki" target="_blank">
+                            ${tl2(trans.help_contribute)}
+                        </a>
+                    </div>
+                </div>
+                ${setting({ id: "translator" })}
+            </div>
+        </section>
+    `);
+  }
+  function update_setting() {
+    let update_btn;
+    let pause_btn;
+    const update_required = localStorage.getItem("bleh_update_required") || "false";
+    const last_checked = localStorage.getItem("bleh_update_checked") || null;
+    const version_to_install = localStorage.getItem("bleh_update_to") || null;
+    let paused = localStorage.getItem("bleh_update_paused") || "false";
+    let paused_until = localStorage.getItem("bleh_update_paused_until") || null;
+    const cont = html.node`
+        <div class="setting" data-type="action" />
+    `;
+    if (paused === "true") {
+      render(cont, html`
+            <div class="setting-v2-icon update-center-icon">
+                <div class="update-container">
+                    <div class="bleh-icon" data-type="update" />
+                </div>
+                <div class="check-circle paused colourful">
+                    <div class="bleh-icon" data-type="paused" />
+                </div>
+            </div>
+            <div class="heading">
+                <h5>${tl2(trans.updates_paused)}</h5>
+                <p class="last-checked">${tl2(trans.paused_until_date).replace("{d}", DateTime.fromJSDate(new Date(paused_until)).toRelative())}</p>
+            </div>
+            <div class="toggle-wrap">
+                <button class="btn primary icon" data-type="update" ref=${(el) => update_btn = el} disabled>${tl2(trans.check)}</button>
+            </div>
+        `);
+    } else if (update_required === "false") {
+      render(cont, html`
+            <div class="setting-v2-icon update-center-icon">
+                <div class="update-container">
+                    <div class="bleh-icon" data-type="update" />
+                </div>
+                ${last_checked ? html.node`
+                <div class="check-circle colourful">
+                    <div class="bleh-icon" data-type="check-thick" />
+                </div>
+                ` : ""}
+            </div>
+            <div class="heading">
+                ${last_checked ? html.node`
+                    <h5>${tl2(trans.you_are_up_to_date)}</h5>
+                    <p class="last-checked">${tl2(trans.last_checked_date).replace("{d}", DateTime.fromJSDate(new Date(last_checked)).toRelative())}</p>
+                ` : html.node`
+                    <h5>${tl2(trans.missing_updates)}</h5>
+                    <p class="last-checked">${tl2(trans.never_checked)}</p>
+                `}
+            </div>
+            <div class="toggle-wrap">
+                <button class="btn icon" data-type="update" ref=${(el) => update_btn = el} onclick=${() => update_check(true, update_btn, () => {
+        notify({
+          id: "update",
+          title: tl2(trans.updates),
+          body: tl2(trans.checked_for_updates),
+          icon: "icon-16-update"
+        });
+        render_setting_page("general");
+      })}>${tl2(trans.check)}</button>
+            </div>
+        `);
+    } else {
+      render(cont, html`
+            <div class="setting-v2-icon update-center-icon">
+                <div class="update-container spin">
+                    <div class="bleh-icon" data-type="update" />
+                </div>
+            </div>
+            <div class="heading">
+                <h5>${tl2(trans.update_available_to_install)}</h5>
+                ${last_checked ? html.node`
+                    <p class="last-checked">${tl2(trans.last_checked_date, { d: DateTime.fromJSDate(new Date(last_checked)).toRelative() })}</p>
+                ` : html.node`
+                    <p class="last-checked">${tl2(trans.never_checked)}</p>
+                `}
+            </div>
+            <div class="toggle-wrap">
+                <div class="button-group">
+                    <button class="btn icon" data-type="update" ref=${(el) => update_btn = el} onclick=${() => update_check(true, update_btn, () => {
+        notify({
+          id: "update",
+          title: tl2(trans.updates),
+          body: tl2(trans.checked_for_updates),
+          icon: "icon-16-update"
+        });
+        render_setting_page("general");
+      })}>${tl2(trans.check)}</button>
+                    <button class="btn primary icon" data-type="update" ref=${(el) => update_btn = el} onclick=${() => start_update()}>${tl2(trans.install_now)}</button>
+                </div>
+            </div>
+        `);
+    }
+    return html.node`
+        ${cont}
+        <div class="setting" data-type="info">
+            ${last_checked && paused === "false" && update_required === "true" ? html.node`
+                <div class="heading">
+                    <h5>${tl2(trans.updating_to_version)}</h5>
+                </div>
+                <div class="info">
+                    <p>${version_to_install}</p>
+                </div>
+            ` : html.node`
+                <div class="heading">
+                    <h5>${tl2(trans.current_version)}</h5>
+                </div>
+                <div class="info">
+                    <p>${version.build}</p>
+                </div>
+            `}
+        </div>
+    `;
+  }
+
+  // src/pages/bleh_settings/bleh_settings.js
   function bleh_settings() {
     page.name = auth.name;
     page.subpage = "";
@@ -51811,14 +50845,14 @@
         <div class="cta first priority sponsor colourful">
             ${auth.sponsor ? html.node`
                 <strong>${tl2(trans.you_are_a_sponsor)}</strong>
-                <a class="see-more" onclick=${() => sponsor_manage()}>${tl2(trans.manage_sponsor)}</a>
+                <a class="see-more" onclick=${() => sponsor_manage2()}>${tl2(trans.manage_sponsor)}</a>
             ` : html.node`
                 <strong>${tl2(trans.news_sponsor_cta)}</strong>
-                <a class="see-more" onclick=${() => sponsor()}>${tl2(trans.sponsor)}</a>
+                <a class="see-more" onclick=${() => sponsor2()}>${tl2(trans.sponsor)}</a>
             `}
         </div>
         <section class="side-actions">
-            <button class="btn side-action" data-type="import" onclick=${() => import_settings24()}>
+            <button class="btn side-action" data-type="import" onclick=${() => import_settings27()}>
                 ${tl2(trans.import)}
             </button>
             <button class="btn side-action" data-type="export" onclick=${() => export_settings()}>
@@ -51863,571 +50897,26 @@
         </div>
     `);
   }
+  function page_error(e) {
+    render(page.structure.main, html`
+        <div class="bleh--panel">
+            <div class="loading-data-container">
+                <div class="alert alert-error">${e && e.message ? e.message : e}</div>
+            </div>
+        </div>
+    `);
+  }
   async function render_setting_page(page_id) {
     page_loading();
-    if (page_id == "general") {
-      if (auth.pro == null) {
-        setTimeout(() => {
-          render_setting_page("general");
-        }, 10);
-        page_loading();
-        return;
-      }
-      register_skip_to([]);
-      let update_btn;
-      let pause_btn;
-      const update_required = localStorage.getItem("bleh_update_required") || "false";
-      const last_checked = localStorage.getItem("bleh_update_checked") || null;
-      const version_to_install = localStorage.getItem("bleh_update_to") || null;
-      let paused = localStorage.getItem("bleh_update_paused") || "false";
-      let paused_until = localStorage.getItem("bleh_update_paused_until") || null;
-      let badge_count = 0;
-      let badges = load_badges(auth.name);
-      if (badges) badge_count = badges.length;
-      if (auth.pro) badge_count++;
-      const auth_key = localStorage.getItem("bleh_auth");
-      const auth_valid = localStorage.getItem("bleh_auth_valid");
-      render(
-        page.structure.main,
-        html`
-                <section class="bleh--panel">
-                    <h4>${tl2(trans.updates)}</h4>
-                    <div class="setting-group">
-                        <div class="setting" data-type="action">
-                            ${paused === "true" ? html.node`
-                                <div class="setting-v2-icon update-center-icon">
-                                    <div class="update-container">
-                                        <div class="bleh-icon" data-type="update" />
-                                    </div>
-                                    <div class="check-circle paused colourful">
-                                        <div class="bleh-icon" data-type="paused" />
-                                    </div>
-                                </div>
-                                <div class="heading">
-                                    <h5>${tl2(trans.updates_paused)}</h5>
-                                    <p class="last-checked">${tl2(trans.paused_until_date).replace("{d}", DateTime.fromJSDate(new Date(paused_until)).toRelative())}</p>
-                                </div>
-                                <div class="toggle-wrap">
-                                    <button class="btn primary icon" data-type="update" ref=${(el) => update_btn = el} disabled>${tl2(trans.check)}</button>
-                                </div>
-                            ` : update_required === "false" ? html.node`
-                                <div class="setting-v2-icon update-center-icon">
-                                    <div class="update-container">
-                                        <div class="bleh-icon" data-type="update" />
-                                    </div>
-                                    ${last_checked ? html.node`
-                                    <div class="check-circle colourful">
-                                        <div class="bleh-icon" data-type="check-thick" />
-                                    </div>
-                                    ` : ""}
-                                </div>
-                                <div class="heading">
-                                    ${last_checked ? html.node`
-                                        <h5>${tl2(trans.you_are_up_to_date)}</h5>
-                                        <p class="last-checked">${tl2(trans.last_checked_date).replace("{d}", DateTime.fromJSDate(new Date(last_checked)).toRelative())}</p>
-                                    ` : html.node`
-                                        <h5>${tl2(trans.missing_updates)}</h5>
-                                        <p class="last-checked">${tl2(trans.never_checked)}</p>
-                                    `}
-                                </div>
-                                <div class="toggle-wrap">
-                                    <button class="btn icon" data-type="update" ref=${(el) => update_btn = el} onclick=${() => update_check(true, update_btn, () => {
-          notify({
-            id: "update",
-            title: tl2(trans.updates),
-            body: tl2(trans.checked_for_updates),
-            icon: "icon-16-update"
-          });
-          render_setting_page("general");
-        })}>${tl2(trans.check)}</button>
-                                </div>
-                            ` : html.node`
-                                <div class="setting-v2-icon update-center-icon">
-                                    <div class="update-container spin">
-                                        <div class="bleh-icon" data-type="update" />
-                                    </div>
-                                </div>
-                                <div class="heading">
-                                    <h5>${tl2(trans.update_available_to_install)}</h5>
-                                    ${last_checked ? html.node`
-                                        <p class="last-checked">${tl2(trans.last_checked_date, { d: DateTime.fromJSDate(new Date(last_checked)).toRelative() })}</p>
-                                    ` : html.node`
-                                        <p class="last-checked">${tl2(trans.never_checked)}</p>
-                                    `}
-                                </div>
-                                <div class="toggle-wrap">
-                                    <div class="button-group">
-                                        <button class="btn icon" data-type="update" ref=${(el) => update_btn = el} onclick=${() => update_check(true, update_btn, () => {
-          notify({
-            id: "update",
-            title: tl2(trans.updates),
-            body: tl2(trans.checked_for_updates),
-            icon: "icon-16-update"
-          });
-          render_setting_page("general");
-        })}>${tl2(trans.check)}</button>
-                                        <button class="btn primary icon" data-type="update" ref=${(el) => update_btn = el} onclick=${() => start_update()}>${tl2(trans.install_now)}</button>
-                                    </div>
-                                </div>
-                            `}
-                        </div>
-                        <div class="setting" data-type="info">
-                            ${last_checked && paused === "false" && update_required === "true" ? html.node`
-                                <div class="heading">
-                                    <h5>${tl2(trans.updating_to_version)}</h5>
-                                </div>
-                                <div class="info">
-                                    <p>${version_to_install}</p>
-                                </div>
-                            ` : html.node`
-                                <div class="heading">
-                                    <h5>${tl2(trans.current_version)}</h5>
-                                </div>
-                                <div class="info">
-                                    <p>${version.build}</p>
-                                </div>
-                            `}
-                        </div>
-                    </div>
-                </section>
-                <section class="bleh--panel">
-                    <h4>${tl2(trans.profile)}</h4>
-                    <div class="setting-group">
-                        ${auth.name ? html.node`
-                            <div class="setting" data-type="info">
-                                <div class="avatar-container">
-                                    <div class="avatar-inner">
-                                        <img src=${auth.avatar} alt=${auth.name} />
-                                    </div>
-                                </div>
-                                <div class="heading">
-                                    <h5>@${auth.name}</h5>
-                                </div>
-                                <div class="info">
-                                    <p>${tl2(trans.profile_and_badges, { c: badge_count.toString() })}</p>
-                                    ${badge_count > 0 ? html.node`
-                                        <button class="see-more" onclick=${() => {
-          dialog({
-            id: "badges",
-            title: auth.name,
-            body: html.node`
-                                                    <div class="generic-table-list badge-list">
-                                                        ${badges ? badges.map((badge) => {
-              let style;
-              let classname = "";
-              if (badge.icon && badge.hue && badge.sat && badge.lit) {
-                style = `--mask: url(${badge.icon}); --hue: ${badge.hue}; --sat: ${badge.sat}; --lit: ${badge.lit}`;
-              } else {
-                classname = `user-status--bleh-${badge.type} user-status--bleh-user-${auth.name}`;
-              }
-              return html.node`
-                                                                <div class="generic-table-list-entry badge-list-entry">
-                                                                    <div class="icon-container colourful ${classname}" style=${style}>
-                                                                        <div class="bleh-icon" style="--icon: var(--mask)" />
-                                                                    </div>
-                                                                    <div class="name colourful ${classname}" style=${style}>
-                                                                        ${badge.name}
-                                                                    </div>
-                                                                    <div class="text">
-                                                                        ${badge.reason}
-                                                                    </div>
-                                                                </div>
-                                                            `;
-            }) : ""}
-                                                        ${auth.pro ? html.node`
-                                                            <div class="generic-table-list-entry badge-list-entry">
-                                                                <div class="icon-container colourful user-status-subscriber">
-                                                                    <div class="bleh-icon" style="--icon: var(--mask)" />
-                                                                </div>
-                                                                <div class="name colourful user-status-subscriber">
-                                                                    ${tl2(trans.badges["user-status-subscriber"].name)}
-                                                                </div>
-                                                                <div class="text">
-                                                                    ${tl2(trans.badges["user-status-subscriber"].reason)}
-                                                                </div>
-                                                            </div>
-                                                        ` : ""}
-                                                    </div>
-                                                `
-          });
-        }}>${tl2(trans.view)}</button>
-                                    ` : ""}
-                                </div>
-                            </div>
-                        ` : ""}
-                        ${auth.sponsor ? html.node`
-                            <div class="setting" data-type="action">
-                                <div class="heading">
-                                    <h5>${tl2(trans.you_are_a_sponsor)}</h5>
-                                    <p>${tl2(trans.sponsor_get_badge)}</p>
-                                </div>
-                                <div class="toggle-wrap">
-                                    <button class="btn primary icon sponsor" data-type="sponsor" onclick=${() => sponsor_manage()}>
-                                        ${tl2(trans.manage_sponsor)}
-                                    </button>
-                                </div>
-                            </div>
-                        ` : html.node`
-                            <div class="setting" data-type="action">
-                                <div class="heading">
-                                    <h5>${tl2(trans.news_sponsor_cta)}</h5>
-                                    <p>${tl2(trans.sponsor_get_badge)}</p>
-                                </div>
-                                <div class="toggle-wrap">
-                                    <button class="btn primary icon sponsor" data-type="sponsor" onclick=${() => sponsor()}>
-                                        ${tl2(trans.sponsor)}
-                                    </button>
-                                </div>
-                            </div>
-                        `}
-                        <div class="setting" data-type="info">
-                            <div class="heading">
-                                <h5>${tl2(trans.current_version)}</h5>
-                            </div>
-                            <div class="info">
-                                <p>${sponsor_list.latest}</p>
-                                <button class="see-more update-check sponsor-related" onclick=${() => sponsors(true, () => {
-          render_setting_page("general");
-        })}>
-                                    ${tl2(trans.update_check)}
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                ${!page.mobile ? html.node`
-                    <section class="bleh--panel">
-                        <h4>${tl2(trans.branding)}</h4>
-                        <div class="setting-group">
-                            ${setting({ id: "branding_type", func: update_branding_type })}
-                        </div>
-                    </section>
-                ` : ""}
-                ${auth.name ? html.node`
-                    <section class="bleh--panel">
-                        <h4>API</h4>
-                        <div class="setting-group">
-                            <div class="setting" data-type="action">
-                                <div class="heading">
-                                    <h5>${tl2(trans.api.name)}</h5>
-                                    <p>${tl2(trans.api.body)}</p>
-                                </div>
-                                <div class="toggle-wrap">
-                                    <a class="btn ${auth_key && auth_valid == "true" ? "" : "primary"} icon connect" href="${root}api/auth?api_key=${api_key}&cb=${root}bleh/api">
-                                        ${tl2(trans.connect)}
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="setting" data-type="info">
-                                <div class="heading">
-                                    <h5>${tl2(trans.api_status)}</h5>
-                                </div>
-                                <div class="info">
-                                    ${auth_key && auth_valid == "true" ? html.node`
-                                    <p>${tl2(trans.connected)}</p>
-                                    ` : html.node`
-                                    <p>${tl2(trans.not_connected)}</p>
-                                    `}
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                ` : ""}
-                <section class="bleh--panel">
-                    <h4>${tl2(trans.language)}</h4>
-                    <div class="setting-group">
-                        <div class="languages">
-                            ${Object.entries(lang_info).sort(([, a], [, b]) => b.percent - a.percent).map(([key, language]) => {
-          let date;
-          const row = html.node`
-                                    <div class="language-row${lang == key ? " active" : ""}">
-                                        <div class="flag-container">
-                                            <img src="https://katelyynn.github.io/bleh/fm/flags/${key}.svg" alt="flag for ${key}">
-                                        </div>
-                                        <div class="name">
-                                            <h5>${language.name}</h5>
-                                            <p>${{ html: tl2(trans.by_user, { u: language.by.map((user) => `<a href="${root}user/${user}">${user}</a>`).join(", ") }) }}</p>
-                                        </div>
-                                        ${language.new ? html.node`
-                                            <div class="badges">
-                                                <div class="new-badge">${tl2(trans.new)}</div>
-                                            </div>
-                                        ` : html.node`
-                                            <div class="badges"></div>
-                                        `}
-                                        ${language.percent ? () => {
-            const elem = html.node`
-                                                                    <div class="percent colourful" style="--hue-over: ${language.percent * 1.2}; --sat-over: 1.2; --lit-over: 1;" data-percent=${language.percent}>
-                                                                        ${language.percent}%
-                                                                    </div>
-                                                                `;
-            tippy_esm_default(elem, {
-              content: `${tl2(trans.amount_translated, { c: language.translated })}, ${tl2(trans.missing_translated, { c: language.missing })}`
-            });
-            return elem;
-          } : ""}
-                                        <div class="date">
-                                            <p ref=${(el) => date = el}>${language.last_updated != "latest" ? DateTime.fromISO(language.last_updated).toRelative() : language.last_updated}</p>
-                                        </div>
-                                    </div>
-                                `;
-          if (language.last_updated != "latest") {
-            tippy_esm_default(date, {
-              content: DateTime.fromISO(
-                language.last_updated
-              ).toLocaleString(DateTime.DATE_MED)
-            });
-          }
-          return row;
-        })}
-                        </div>
-                    </div>
-                    <div class="setting-group">
-                        <div class="setting" data-type="action">
-                            <div class="heading">
-                                <h5>${tl2(trans.submit_language.name)}</h5>
-                                <p>${tl2(trans.submit_language.body)}</p>
-                            </div>
-                            <div class="toggle-wrap">
-                                <a class="see-more" href="https://github.com/katelyynn/bleh/wiki" target="_blank">
-                                    ${tl2(trans.help_contribute)}
-                                </a>
-                            </div>
-                        </div>
-                        ${setting({ id: "translator" })}
-                    </div>
-                </section>
-            `
-      );
-    } else if (page_id == "visual") {
-      let render_tip = function() {
-        adaptive_tip.setAttribute("aria-hidden", !settings.theme_schedule);
-        render(adaptive_tip, html`
-                ${tl2(trans.adaptive_tip, {
-          day: tl2(trans.themes[settings.theme_day]),
-          night: tl2(trans.themes[settings.theme_night])
-        })}
-                <a onclick=${() => {
-          dialog({
-            id: "auto_theme",
-            title: tl2(trans.themes.name),
-            body: html.node`
-                            <div class="setting-group">
-                                ${theme_day = setting({
-              id: "theme_day",
-              list: [
-                {
-                  value: "light",
-                  text: tl2(trans.themes.light)
-                },
-                {
-                  value: "ink",
-                  text: tl2(trans.themes.ink)
-                },
-                {
-                  value: "dark",
-                  text: tl2(trans.themes.dark)
-                },
-                {
-                  value: "darker",
-                  text: tl2(trans.themes.darker)
-                },
-                {
-                  value: "oled",
-                  text: tl2(trans.themes.oled)
-                }
-              ],
-              func: () => {
-                render_tip();
-                bubbles.re_render();
-                match2();
-              }
-            })}
-                                ${theme_night = setting({
-              id: "theme_night",
-              list: [
-                {
-                  value: "light",
-                  text: tl2(trans.themes.light)
-                },
-                {
-                  value: "ink",
-                  text: tl2(trans.themes.ink)
-                },
-                {
-                  value: "dark",
-                  text: tl2(trans.themes.dark)
-                },
-                {
-                  value: "darker",
-                  text: tl2(trans.themes.darker)
-                },
-                {
-                  value: "oled",
-                  text: tl2(trans.themes.oled)
-                }
-              ],
-              func: () => {
-                render_tip();
-                bubbles.re_render();
-                match2();
-              }
-            })}
-                            </div>
-                            <p class="card-tip">${tl2(trans.theme_schedule)}</p>
-                        `
-          });
-        }}>
-                    ${tl2(trans.change_schedule)}
-                </a>
-            `);
-      };
-      if (auth.name && auth.sets.hue == 255 && auth.sets.sat == 1 && auth.sets.lit == 1) {
-        setTimeout(() => {
-          render_setting_page("visual");
-        }, 10);
-        page_loading();
-        return;
-      }
-      register_skip_to([]);
-      let colourful_active;
-      let colourful_all;
-      let sat_bg2;
-      let adaptive_tip;
-      let bubbles;
-      render(
-        page.structure.main,
-        html`
-                <section class="bleh--panel">
-                    <h4>${tl2(trans.appearance)}</h4>
-                    <div class="setting-group">
-                        <div class="setting" data-type="action">
-                            <div class="heading">
-                                <h5>${tl2(trans.themes.name)}</h5>
-                            </div>
-                            <div class="info v">
-                                ${bubbles = theme_bubbles(() => {
-          sat_bg2.compat();
-          render_tip();
-          match2();
-        })}
-                                <p
-                                    class="card-tip"
-                                    ref=${(el) => adaptive_tip = el}
-                                />
-                            </div>
-                        </div>
-                        ${setting({ id: "solarium" })}
-                        ${ff("high_contrast") ? setting({ id: "high_contrast" }) : ""}
-                        <div class="setting" data-type="action">
-                            <div class="heading">
-                                <h5>${tl2(trans.hue)}</h5>
-                            </div>
-                            <div class="info swatch-info">
-                                <div
-                                    id="colour_custom"
-                                    class="swatch-group palette"
-                                ></div>
-                                <div class="sep swatch-sep" />
-                                <div
-                                    id="colour_palette"
-                                    class="swatch-group palette"
-                                ></div>
-                            </div>
-                        </div>
-                        <div class="setting" data-type="options">
-                            <div class="heading">
-                                <h5>${tl2(trans.change_my_colour_when.name)}</h5>
-                                <p>${tl2(trans.change_my_colour_when.body)}</p>
-                            </div>
-                            <div class="primary-selections">
-                                ${setting({
-          id: "hue_from_album",
-          standalone: true
-        })}
-                                ${colourful_active = setting({
-          id: "colourful_tracks",
-          standalone: true,
-          func: () => {
-            colourful_all.compat();
-          }
-        })}
-                                ${colourful_all = setting({
-          id: "colourful_tracks_all",
-          standalone: true,
-          func: () => {
-            colourful_active.compat();
-          }
-        })}
-                            </div>
-                        </div>
-                        ${ff("card_saturation") ? html.node`
-                                ${sat_bg2 = setting({ id: "sat_bg" })}
-                            ` : ""}
-                        ${setting({ id: "noise" })}
-                    </div>
-                </section>
-                <section class="bleh--panel">
-                    <h4>${tl2(trans.fonts)}</h4>
-                    <div class="inner-preview pad">
-                        <h1 class="font-preview">${tl2(trans.font_example)}</h1>
-                    </div>
-                    <div class="setting-group">
-                        ${setting({ id: "font" })}
-                        ${setting({ id: "font_weight" })}
-                        ${setting({ id: "font_weight_medium" })}
-                        ${setting({ id: "font_weight_bold" })}
-                        ${setting({ id: "font_emoji" })}
-                    </div>
-                </section>
-                <section class="bleh--panel">
-                    <h4>${tl2(trans.artwork)}</h4>
-                    <div class="inner-preview pad">
-                        <div class="palette albums" style="height: fit-content">
-                            <div
-                                class="album-cover swatch"
-                                style="background-image: url('https://lastfm.freetls.fastly.net/i/u/770x0/1569198c4cf0a3b2ff8728975e8359fa.jpg')"
-                            ></div>
-                            <div
-                                class="album-cover swatch"
-                                style="background-image: url('https://lastfm.freetls.fastly.net/i/u/770x0/b897255bf422baa93a42536af293f9f8.jpg')"
-                            ></div>
-                            <div
-                                class="album-cover swatch"
-                                style="background-image: url('https://lastfm.freetls.fastly.net/i/u/770x0/def68d94aae8e52ef2d1c0c9d3e16ff4.jpg')"
-                            ></div>
-                            <div
-                                class="album-cover swatch"
-                                style="background-image: url('https://lastfm.freetls.fastly.net/i/u/770x0/510546e3b6df7504392274c528c77780.jpg')"
-                            ></div>
-                            <div
-                                class="album-cover swatch"
-                                style="background-image: url('https://lastfm.freetls.fastly.net/i/u/770x0/49cc807f69d59746b6b04be3434e6637.jpg')"
-                            ></div>
-                            <div
-                                class="album-cover swatch"
-                                style="background-image: url('https://lastfm.freetls.fastly.net/i/u/770x0/dd76702cea38c838a3090dd9496d92d9.jpg')"
-                            ></div>
-                        </div>
-                    </div>
-                    <div class="setting-group">
-                        ${setting({ id: "gloss" })}
-                        ${setting({ id: "grid_glow" })}
-                    </div>
-                    <div class="setting-group">
-                        ${setting({ id: "avatar_radius" })}
-                    </div>
-                </section>
-                <section class="bleh--panel">
-                    <h4>${tl2(trans.other)}</h4>
-                    <div class="setting-group">${setting({ id: "rain" })}</div>
-                </section>
-            `
-      );
-      render_tip();
-      display_colour_presets();
-      update_colour_swatches();
-    } else if (page_id == "interface") {
+    try {
+      if (page_id == "general")
+        general();
+      else if (page_id == "visual")
+        visual();
+    } catch (e) {
+      page_error(e);
+    }
+    if (page_id == "interface") {
       let chartlist_bar = function(value, max2) {
         let count_bar = html.node`
                 <div class="chartlist-count-bar">
@@ -52473,14 +50962,14 @@
                             <td class="kate-placeholder" />
                             <td class="track-info" data-has-bar="false">
                                 <span class="chartlist-name">
-                                    <a>Track name</a>
+                                    <a>${tl2(trans.track_name)}</a>
                                 </span>
                                 <span class="chartlist-artist">
-                                    <a>Artist name</a>
+                                    <a>${tl2(trans.artist_name)}</a>
                                 </span>
                                 ${settings.expand_tracks != "never" && settings.track_layout == "column" ? html.node`
                                     <span class="chartlist-album custom-album-text">
-                                        <a>Album name</a>
+                                        <a>${tl2(trans.album_name)}</a>
                                     </span>
                                 ` : ""}
                             </td>
@@ -52498,14 +50987,14 @@
                             <td class="kate-placeholder" />
                             <td class="track-info" data-has-bar="false">
                                 <span class="chartlist-name">
-                                    <a>Track name</a>
+                                    <a>${tl2(trans.track_name)}</a>
                                 </span>
                                 <span class="chartlist-artist">
-                                    <a>Artist name</a>
+                                    <a>${tl2(trans.artist_name)}</a>
                                 </span>
                                 ${settings.expand_tracks == "always" && settings.expand_tracks != "never" && settings.track_layout == "column" ? html.node`
                                     <span class="chartlist-album custom-album-text">
-                                        <a>Album name</a>
+                                        <a>${tl2(trans.album_name)}</a>
                                     </span>
                                 ` : ""}
                             </td>
@@ -52652,7 +51141,7 @@
                         </div>
                         <div class="toggle-wrap">
                             <button class="btn see-more" onclick=${() => {
-        dialog({
+        dialog2({
           id: "quick_switcher_keybinds",
           title: tl2(trans.quick_switcher),
           body: html.node`
@@ -53014,7 +51503,7 @@
     } else if (page_id == "performance") {
       register_skip_to([]);
       if (settings.hu_tao != "develop") {
-        dialog({
+        dialog2({
           id: "development_only",
           body: html.node`
                     <div class="modal-vertical-inner error-inner">
@@ -53116,7 +51605,7 @@
           if (settings.hu_tao == "develop") {
             change_settings_page("sku");
           } else {
-            dialog({
+            dialog2({
               id: "hu_tao",
               title: tl2(trans.development),
               body: html.node`
@@ -53902,7 +52391,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
   }
   function edit_profile_note(user) {
     let profile_notes = JSON.parse(localStorage.getItem("bleh_profile_notes")) || {};
-    let modal = dialog({
+    let modal = dialog2({
       id: "edit_profile_note",
       title: tl2(trans.edit_profile_note),
       body: html.node`
@@ -53967,9 +52456,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       }
     }
   }
-  function import_settings24() {
+  function import_settings27() {
     let text4;
-    const modal = dialog({
+    const modal = dialog2({
       id: "import_settings",
       title: tl2(trans.import_settings),
       body: html.node`
@@ -53977,7 +52466,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
             <br>
             <textarea class="modal-text" ref=${(el) => text4 = el} />
             <div class="modal-footer">
-                <button class="see-more cancel" onclick="_dialog_rm({id: 'import_settings'})">
+                <button class="see-more cancel" onclick=${() => {
+        dialog_rm({ id: "import_settings" });
+      }}>
                     ${tl2(trans.cancel)}
                 </button>
                 <div class="fill"></div>
@@ -53991,7 +52482,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
             id: "import_settings"
           });
         } catch (e) {
-          dialog({
+          dialog2({
             id: "import_failed",
             title: tl2(trans.import_failed),
             body: html.node`
@@ -54018,7 +52509,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     share(JSON.stringify(compile_settings()));
   }
   function reset_settings() {
-    dialog({
+    dialog2({
       id: "reset_settings",
       title: tl2(trans.reset_settings),
       body: html.node`
@@ -54423,7 +52914,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     }
   }
 
-  // src/components/lotus.js
+  // src/components/music/lotus.js
   var flat_patterns = [];
   Object.entries(includes).forEach(([group, patterns]) => {
     patterns.forEach((pattern) => {
@@ -54537,7 +53028,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     lotus(true);
   };
   unsafeWindow._open_correction_modal = function() {
-    dialog({
+    dialog2({
       id: "corrections",
       title: tl2(trans.music_corrections),
       body: html.node`
@@ -54912,7 +53403,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       title = `${sister} - ${name}`;
       template = "2-album_track.yml";
     }
-    dialog({
+    dialog2({
       id: "lotus_correction",
       title: tl2(trans.suggest_correction),
       body: html.node`
@@ -54956,7 +53447,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     });
   }
 
-  // src/activity.js
+  // src/components/shared/activity.js
   function render_activity_list() {
     load_activities();
     let activity_list = html.node`
@@ -55250,7 +53741,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     set_storage("bwaa_recent_activity", JSON.stringify(recent_activity_list));
   }
 
-  // src/components/nag_bar.js
+  // src/components/dialog/nag_bar.js
   function nag_bar() {
     let nags = page.structure.wrapper.querySelectorAll(".nag-bar");
     nags.forEach((active_nag) => {
@@ -56202,7 +54693,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           night: tl2(trans.themes[settings.theme_night])
         })}<a
                     onclick=${() => {
-          dialog({
+          dialog2({
             id: "auto_theme",
             title: tl2(trans.themes.name),
             body: html.node`
@@ -56566,7 +55057,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                     </div>
                     <div class="bleh-icon mini-arrow" style="--icon: var(--mask)" data-type="arrow-right" />
                 </a>
-                <button class="btn mini" onclick=${() => sponsor()}>
+                <button class="btn mini" onclick=${() => sponsor2()}>
                     <div class="mini-icon colourful" data-type="sponsor">
                         <div class="bleh-icon" />
                     </div>
@@ -56668,7 +55159,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     `);
   }
 
-  // src/pages/chart.js
+  // src/pages/home/chart.js
   function bleh_charts() {
     if (page.subpage != "overview") return;
     let charts = page.structure.main.querySelector(".charts");
@@ -56816,6 +55307,2032 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       new_panel,
       page.structure.main.firstElementChild
     );
+  }
+
+  // src/components/dialog/auto_edit.js
+  function bleh_auto_edits() {
+    let corrections_panel = document.body.querySelector("#subscription-corrections");
+    page.structure.main.appendChild(corrections_panel);
+    let nav = page.structure.container.querySelector("nav[data-more-string] .navlist-items");
+    nav.insertBefore(html.node`
+        <li class="navlist-item secondary-nav-item secondary-nav-item--back">
+            <a class="secondary-nav-item-link" href="${root}settings/subscription">
+                ${tl2(trans.back)}
+            </a>
+        </li>
+    `, nav.firstElementChild);
+  }
+
+  // src/pages/lastfm_settings.js
+  var import_cropperjs = __toESM(require_cropper(), 1);
+
+  // src/components/radio/radio_toggle.js
+  function radio({ name, value, values = {} }) {
+    let buttons = [];
+    let elem = html.node`
+        <div class="primary-selections">
+        ${Object.entries(values).map(([key, val]) => {
+      const icon = val.icon;
+      let input2;
+      const button2 = html.node`
+                <div class="setting v2 standalone" data-type="radio" data-value=${key} onclick=${() => {
+        update_radio(key);
+      }}>
+                    <div class="radio-cont">
+                        <input type="radio" name=${name} value=${key} required ref=${(el) => input2 = el}>
+                        <div class="radio" aria-checked=${value == key} />
+                    </div>
+                    ${icon ? html.node`
+                                <div class="icon">
+                                    <div class="bleh-icon" style="--icon: var(--${icon})" />
+                                </div>
+                            ` : ""}
+                    <div class="heading">
+                        <h5>${typeof val.name == "object" ? tl(val.name) : val.name}</h5>
+                    </div>
+                </div>
+            `;
+      input2.checked = value == key;
+      buttons.push(button2);
+      return button2;
+    })}
+        </div>
+    `;
+    function update_radio(val) {
+      buttons.forEach((btn) => {
+        btn.querySelector("input").checked = btn.getAttribute("data-value") == val;
+        btn.querySelector(".radio").setAttribute(
+          "aria-checked",
+          btn.getAttribute("data-value") == val
+        );
+      });
+    }
+    return elem;
+  }
+  function radio_convert(existing) {
+    if (!existing) return {};
+    let values = {};
+    existing.forEach((item) => {
+      const input2 = item.querySelector("input");
+      const label = item.querySelector("label");
+      values[input2.value] = {
+        name: label.textContent.trim()
+      };
+    });
+    return values;
+  }
+
+  // src/pages/lastfm_settings.js
+  var cropper;
+  function bleh_native_settings() {
+    const no_data = page.structure.container.querySelector(":scope > .no-data-message");
+    if (no_data) page.structure.main.appendChild(no_data);
+    if (page.subpage == "overview") {
+      patch_settings_profile_tab();
+    } else if (page.subpage == "privacy") {
+      patch_settings_privacy_tab();
+    } else if (page.subpage == "subscription_overview") {
+      let panel = page.structure.container.querySelector(".row + div");
+      let subscription = panel.querySelector("#current-subscription");
+      let edits = panel.querySelector("#automatic-edits");
+      let merch_h = panel.querySelector(":scope > h2");
+      let merch = panel.querySelector("#mechandise-discount");
+      let history = panel.querySelector("#pro-history");
+      merch.insertBefore(merch_h, merch.firstElementChild);
+      page.structure.main.appendChild(subscription);
+      page.structure.main.appendChild(edits);
+      page.structure.main.appendChild(merch);
+      page.structure.main.appendChild(history);
+      let button2 = subscription.querySelector(".btn-primary");
+      if (button2)
+        button2.classList.add("subscription-button", "icon", "primary");
+      let more_link_wrap = edits.querySelector(".more-link");
+      if (more_link_wrap) {
+        more_link_wrap.classList = "";
+        let edit_buttons = more_link_wrap.querySelectorAll("a");
+        edit_buttons.forEach((edit_button, index3) => {
+          edit_button.classList.add(
+            "btn",
+            "edit-lead-button",
+            "icon",
+            "primary"
+          );
+          if (index3 == 0) edit_button.classList.add("edit-album");
+          else edit_button.classList.add("edit-track");
+        });
+      }
+    } else if (page.subpage.startsWith("subscription_automatic-edits")) {
+      bleh_auto_edits();
+    } else if (page.subpage == "account_overview") {
+      bleh_accounts();
+    } else if (page.subpage == "website") {
+      bleh_website();
+    } else if (page.subpage == "change-username_overview") {
+      bleh_name_change();
+    } else if (page.subpage == "applications_overview") {
+      bleh_applications();
+    }
+  }
+  function patch_settings_profile_tab() {
+    let update_picture = page.structure.main.querySelector("#update-picture");
+    if (!update_picture) return;
+    let token = document.body.querySelector('[name="csrfmiddlewaretoken"]').getAttribute("value");
+    patch_settings_profile_panel(token, update_picture);
+    patch_settings_charts_panel(token);
+  }
+  function patch_settings_charts_panel(token) {
+    let charts_panel = document.getElementById("update-chart");
+    if (charts_panel.hasAttribute("data-kate-processed")) return;
+    charts_panel.setAttribute("data-kate-processed", "true");
+    charts_panel.classList.add("bleh--panel");
+    let original_chart_settings = {
+      recent: {
+        recent_artwork: document.getElementById(
+          "id_show_recent_tracks_artwork"
+        ).checked,
+        count: document.getElementById("id_chart_length_recent_tracks").outerHTML,
+        recent_realtime: document.getElementById(
+          "id_auto_refresh_recent_tracks"
+        ).checked
+      },
+      artists: {
+        timeframe: document.getElementById("id_chart_range_top_artists").outerHTML,
+        style: document.getElementById(
+          "id_chart_style_and_length_top_artists"
+        ).outerHTML
+      },
+      albums: {
+        timeframe: document.getElementById("id_chart_range_top_albums").outerHTML,
+        style: document.getElementById(
+          "id_chart_style_and_length_top_albums"
+        ).outerHTML
+      },
+      tracks: {
+        count: document.getElementById("id_chart_length_top_tracks").outerHTML,
+        timeframe: document.getElementById("id_chart_range_top_tracks").outerHTML
+      }
+    };
+    charts_panel.innerHTML = `
+        <h4>${tl2(trans.recent_tracks)}</h4>
+        <form action="${root}settings#update-chart" name="chart-form" method="post">
+            <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
+            <div class="inner-preview pad">
+                <div class="tracks recent">
+                    <div class="track realtime">
+                        <div class="cover"></div>
+                        <div class="title"></div>
+                        <div class="artist"></div>
+                        <div class="time"></div>
+                    </div>
+                    <div class="track">
+                        <div class="cover"></div>
+                        <div class="title"></div>
+                        <div class="artist"></div>
+                        <div class="time"></div>
+                    </div>
+                    <div class="track">
+                        <div class="cover"></div>
+                        <div class="title"></div>
+                        <div class="artist"></div>
+                        <div class="time"></div>
+                    </div>
+                    <div class="track">
+                        <div class="cover"></div>
+                        <div class="title"></div>
+                        <div class="artist"></div>
+                        <div class="time"></div>
+                    </div>
+                    <div class="track">
+                        <div class="cover"></div>
+                        <div class="title"></div>
+                        <div class="artist"></div>
+                        <div class="time"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="setting-group">
+                <div class="setting" data-type="select">
+                    <div class="heading">
+                        <h5>${tl2(trans.amount_to_display)}</h5>
+                    </div>
+                    <div class="select-wrap custom-selector" id="id_chart_length_recent_tracks_select">
+                        ${original_chart_settings.recent.count}
+                    </div>
+                </div>
+                <div class="setting" data-type="toggle" onclick="_update_inbuilt_item('recent_artwork')" id="container-recent_artwork">
+                    <button class="btn reset" onclick="_reset_inbuilt_item('recent_artwork')">Reset to default</button>
+                    <div class="heading">
+                        <h5>${tl2(trans.recent_artwork)}</h5>
+                    </div>
+                    <div class="toggle-wrap">
+                        <input class="companion-checkbox" type="checkbox" name="show_recent_tracks_artwork" id="inbuilt-companion-checkbox-recent_artwork">
+                        <span class="btn toggle" id="toggle-recent_artwork" aria-checked="false">
+                            <div class="dot"></div>
+                        </span>
+                    </div>
+                </div>
+                <div class="setting" data-type="toggle" onclick="_update_inbuilt_item('recent_realtime')" id="container-recent_realtime">
+                    <button class="btn reset" onclick="_reset_inbuilt_item('recent_realtime')">Reset to default</button>
+                    <div class="heading">
+                        <h5>${tl2(trans.recent_realtime.name)}</h5>
+                        <p>${tl2(trans.recent_realtime.body)}</p>
+                    </div>
+                    <div class="toggle-wrap">
+                        <input class="companion-checkbox" type="checkbox" name="auto_refresh_recent_tracks" id="inbuilt-companion-checkbox-recent_realtime">
+                        <span class="btn toggle" id="toggle-recent_realtime" aria-checked="false">
+                            <div class="dot"></div>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <h4>${tl2(trans.top_artists)}</h4>
+            <div class="inner-preview pad">
+                <div class="item-grid artist">
+                    <div class="grid-primary artist">
+                        <div class="grid-item"></div>
+                    </div>
+                    <div class="grid-mains">
+                        <div class="grid-main artist">
+                            <div class="grid-item grid-item--extra artist"></div>
+                            <div class="grid-item grid-item--extra artist"></div>
+                            <div class="grid-item"></div>
+                            <div class="grid-item"></div>
+                        </div>
+                        <div class="grid-main artist">
+                            <div class="grid-item grid-item--extra artist"></div>
+                            <div class="grid-item grid-item--extra artist"></div>
+                            <div class="grid-item"></div>
+                            <div class="grid-item"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tracks artist">
+                    <div class="track">
+                        <div class="cover"></div>
+                        <div class="title"></div>
+                        <div class="bar">
+                            <div class="fill" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    <div class="track">
+                        <div class="cover"></div>
+                        <div class="title"></div>
+                        <div class="bar">
+                            <div class="fill" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="track">
+                        <div class="cover"></div>
+                        <div class="title"></div>
+                        <div class="bar">
+                            <div class="fill" style="width: 60%"></div>
+                        </div>
+                    </div>
+                    <div class="track">
+                        <div class="cover"></div>
+                        <div class="title"></div>
+                        <div class="bar">
+                            <div class="fill" style="width: 30%"></div>
+                        </div>
+                    </div>
+                    <div class="track">
+                        <div class="cover"></div>
+                        <div class="title"></div>
+                        <div class="bar">
+                            <div class="fill" style="width: 5%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="setting-group">
+                <div class="setting" data-type="select">
+                    <div class="heading">
+                        <h5>${tl2(trans.default_timeframe)}</h5>
+                    </div>
+                    <div class="select-wrap custom-selector" id="id_chart_range_top_artists_select">
+                        ${original_chart_settings.artists.timeframe}
+                    </div>
+                </div>
+                <div class="setting" data-type="select">
+                    <div class="heading">
+                        <h5>${tl2(trans.chart_style)}</h5>
+                    </div>
+                    <div class="select-wrap custom-selector" id="id_chart_style_and_length_top_artists_select">
+                        ${original_chart_settings.artists.style}
+                    </div>
+                </div>
+            </div>
+            <h4>${tl2(trans.top_albums)}</h4>
+            <div class="inner-preview pad">
+                <div class="item-grid album">
+                    <div class="grid-primary album">
+                        <div class="grid-item"></div>
+                    </div>
+                    <div class="grid-mains">
+                        <div class="grid-main album">
+                            <div class="grid-item"></div>
+                            <div class="grid-item"></div>
+                            <div class="grid-item grid-item--extra album"></div>
+                            <div class="grid-item grid-item--extra album"></div>
+                        </div>
+                        <div class="grid-main album">
+                            <div class="grid-item"></div>
+                            <div class="grid-item"></div>
+                            <div class="grid-item grid-item--extra album"></div>
+                            <div class="grid-item grid-item--extra album"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tracks album">
+                    <div class="track">
+                        <div class="cover"></div>
+                        <div class="title"></div>
+                        <div class="bar">
+                            <div class="fill" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    <div class="track">
+                        <div class="cover"></div>
+                        <div class="title"></div>
+                        <div class="bar">
+                            <div class="fill" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="track">
+                        <div class="cover"></div>
+                        <div class="title"></div>
+                        <div class="bar">
+                            <div class="fill" style="width: 60%"></div>
+                        </div>
+                    </div>
+                    <div class="track">
+                        <div class="cover"></div>
+                        <div class="title"></div>
+                        <div class="bar">
+                            <div class="fill" style="width: 30%"></div>
+                        </div>
+                    </div>
+                    <div class="track">
+                        <div class="cover"></div>
+                        <div class="title"></div>
+                        <div class="bar">
+                            <div class="fill" style="width: 5%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="setting-group">
+                <div class="setting" data-type="select">
+                    <div class="heading">
+                        <h5>${tl2(trans.default_timeframe)}</h5>
+                    </div>
+                    <div class="select-wrap custom-selector" id="id_chart_range_top_albums_select">
+                        ${original_chart_settings.albums.timeframe}
+                    </div>
+                </div>
+                <div class="setting" data-type="select">
+                    <div class="heading">
+                        <h5>${tl2(trans.chart_style)}</h5>
+                    </div>
+                    <div class="select-wrap custom-selector" id="id_chart_style_and_length_top_albums_select">
+                        ${original_chart_settings.albums.style}
+                    </div>
+                </div>
+            </div>
+            <h4>${tl2(trans.top_tracks)}</h4>
+            <div class="inner-preview pad">
+                <div class="tracks">
+                    <div class="track">
+                        <div class="cover"></div>
+                        <div class="title"></div>
+                        <div class="artist"></div>
+                        <div class="bar">
+                            <div class="fill" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    <div class="track">
+                        <div class="cover"></div>
+                        <div class="title"></div>
+                        <div class="artist"></div>
+                        <div class="bar">
+                            <div class="fill" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="track">
+                        <div class="cover"></div>
+                        <div class="title"></div>
+                        <div class="artist"></div>
+                        <div class="bar">
+                            <div class="fill" style="width: 60%"></div>
+                        </div>
+                    </div>
+                    <div class="track">
+                        <div class="cover"></div>
+                        <div class="title"></div>
+                        <div class="artist"></div>
+                        <div class="bar">
+                            <div class="fill" style="width: 30%"></div>
+                        </div>
+                    </div>
+                    <div class="track">
+                        <div class="cover"></div>
+                        <div class="title"></div>
+                        <div class="artist"></div>
+                        <div class="bar">
+                            <div class="fill" style="width: 5%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="setting-group">
+                <div class="setting" data-type="select">
+                    <div class="heading">
+                        <h5>${tl2(trans.default_timeframe)}</h5>
+                    </div>
+                    <div class="select-wrap custom-selector" id="id_chart_range_top_tracks_select">
+                        ${original_chart_settings.tracks.timeframe}
+                    </div>
+                </div>
+                <div class="setting" data-type="select">
+                    <div class="heading">
+                        <h5>${tl2(trans.amount_to_display)}</h5>
+                    </div>
+                    <div class="select-wrap custom-selector" id="id_chart_length_top_tracks_select">
+                        ${original_chart_settings.tracks.count}
+                    </div>
+                </div>
+            </div>
+            <div class="settings-footer">
+                <button type="submit" class="btn-primary save">
+                    ${tl2(trans.save)}
+                </button>
+                <input type="hidden" value="chart" name="submit">
+            </div>
+        </form>
+    `;
+    custom_select(
+      charts_panel.querySelector("#id_chart_length_recent_tracks"),
+      charts_panel.querySelector("#id_chart_length_recent_tracks_select")
+    );
+    custom_select(
+      charts_panel.querySelector("#id_chart_range_top_artists"),
+      charts_panel.querySelector("#id_chart_range_top_artists_select")
+    );
+    custom_select(
+      charts_panel.querySelector("#id_chart_style_and_length_top_artists"),
+      charts_panel.querySelector(
+        "#id_chart_style_and_length_top_artists_select"
+      )
+    );
+    custom_select(
+      charts_panel.querySelector("#id_chart_range_top_albums"),
+      charts_panel.querySelector("#id_chart_range_top_albums_select")
+    );
+    custom_select(
+      charts_panel.querySelector("#id_chart_style_and_length_top_albums"),
+      charts_panel.querySelector(
+        "#id_chart_style_and_length_top_albums_select"
+      )
+    );
+    custom_select(
+      charts_panel.querySelector("#id_chart_range_top_tracks"),
+      charts_panel.querySelector("#id_chart_range_top_tracks_select")
+    );
+    custom_select(
+      charts_panel.querySelector("#id_chart_length_top_tracks"),
+      charts_panel.querySelector("#id_chart_length_top_tracks_select")
+    );
+    for (let category in original_chart_settings) {
+      for (let setting2 in original_chart_settings[category]) {
+        update_inbuilt_item(
+          setting2,
+          original_chart_settings[category][setting2],
+          false
+        );
+      }
+    }
+    let selects = document.body.querySelectorAll("select");
+    selects.forEach((select2) => {
+      select2.setAttribute(
+        "onchange",
+        `_update_inbuilt_select('${select2.getAttribute("id")}', this.value)`
+      );
+      update_inbuilt_select(select2.getAttribute("id"), select2.value);
+    });
+  }
+  function patch_settings_profile_panel(token, update_picture) {
+    const bio_max_length = 500;
+    update_picture.classList.add("bleh--panel");
+    const upload_form = update_picture.querySelector(".avatar-upload-form");
+    const avatar_url = update_picture.querySelector(".image-upload-preview img").getAttribute("src");
+    const upload_finished = update_picture.querySelector(".alert-success");
+    if (page.state.avatar_changer && upload_finished) {
+      const id = page.state.avatar_changer.getAttribute("data-modal-id");
+      dialog_rm({ id });
+    }
+    const update_profile2 = page.structure.main.querySelector("#update-profile");
+    const alert2 = update_profile2.querySelector(".alert");
+    let form_display_name = document.getElementById("id_full_name").value;
+    let form_website = document.getElementById("id_homepage").value;
+    let form_country = document.getElementById("id_country");
+    let form_about_me = document.getElementById("id_about_me").textContent;
+    const markdown_settings = {
+      allow_headers: true,
+      allow_banners: true,
+      allow_icons: true,
+      allow_hue: true,
+      allow_fonts: true,
+      cache: true,
+      take_effect: false,
+      allow_socials: true,
+      allow_alignment: true,
+      allow_lists: true
+    };
+    let chars;
+    const about = markdown_field(update_about, markdown_settings, form_about_me, "about_me", 40, 10, tl2(trans.anything_you_can_imagine));
+    let preview;
+    let accent_setting;
+    let font_setting;
+    render(page.structure.side, html`
+        <section>
+            <h2>${tl2(trans.about_me_preview)}</h2>
+            <span class="bleh--about-me-preview markdown-body" ref=${(el) => preview = el} />
+        </section>
+    `);
+    let profile_cache = JSON.parse(localStorage.getItem("bleh_profile_cache")) || {};
+    let cache2 = profile_cache[auth.name];
+    render(update_picture, html`
+        <h4>${tl2(trans.profile)}</h4>
+        ${alert2}
+        <form
+            class="dont-move"
+            action="${root}settings#update-profile"
+            name="profile-form"
+            data-form-type="identity"
+            method="post"
+        >
+            <input
+                type="hidden"
+                name="csrfmiddlewaretoken"
+                value="${token}"
+            />
+            <div class="setting-group">
+                <div class="setting" data-type="info">
+                    <div class="heading">
+                        <h5>${tl2(trans.avatar)}</h5>
+                        <p>${tl2(trans.avatar_desc)}</p>
+                    </div>
+                    <div class="info">
+                        <div class="avatar image-uploader" onclick=${() => avatar(token)}>
+                            <img
+                                src=${avatar_url}
+                                alt=${tl2(trans.your_avatar)}
+                                loading="lazy"
+                            />
+                            <div class="avatar-overlay" />
+                        </div>
+                    </div>
+                </div>
+                ${() => {
+      const username_regex = /\[name=([^\]]+)\]/;
+      const elem = html.node`
+                        <div class="setting" data-type="text" disabled=${!auth.sponsor}>
+                            <div class="heading">
+                                <h5>${tl2(trans.display_name.name)}<span class="new-badge sponsor-related">${tl2(trans.sponsors_only)}</span></h5>
+                                <p>${tl2(trans.display_name.body)}</p>
+                            </div>
+                            ${input({
+        value: cache2.username,
+        placeholder: auth.name,
+        func: (val) => {
+          const match3 = about.value().match(username_regex);
+          const new_name = `[name=${val}]`;
+          if (match3) {
+            about.value(about.value().replace(username_regex, new_name));
+          } else {
+            const trimmed = about.value().trimEnd();
+            if (trimmed.length == 0) {
+              about.value(new_name);
+            } else {
+              about.value(trimmed + "\n\n" + new_name);
+            }
+          }
+        },
+        submit_on_character: true
+      })}
+                        </div>
+                    `;
+      return elem;
+    }}
+                ${ff("profile_fonts") ? html.node`
+                <div
+                    class="setting"
+                    data-type="info"
+                    disabled=${!auth.sponsor}
+                    ref=${(el) => font_setting = el}
+                />
+                ` : ""}
+                <div class="setting" data-type="text">
+                    <div class="heading">
+                        <h5>${tl2(trans.profile_title)}</h5>
+                        <p>${tl2(trans.pronoun_tip)}</p>
+                    </div>
+                    <div class="input-container content-form">
+                        <input
+                            type="text"
+                            name="full_name"
+                            value=${form_display_name}
+                            maxlength="36"
+                            id="id_full_name"
+                            data-form-type="other"
+                        />
+                    </div>
+                </div>
+                <div class="setting" data-type="text">
+                    <div class="heading">
+                        <h5>${tl2(trans.website)}</h5>
+                    </div>
+                    <div class="input-container content-form">
+                        <input
+                            type="url"
+                            name="homepage"
+                            value=${form_website}
+                            id="id_homepage"
+                            data-form-type="website"
+                        />
+                    </div>
+                </div>
+                <div class="setting" data-type="select">
+                    <div class="heading">
+                        <h5>${tl2(trans.country)}</h5>
+                    </div>
+                    <div class="select-wrap custom-selector">
+                        ${select(
+      select_prepare(form_country),
+      form_country.value,
+      "country"
+    )}
+                    </div>
+                </div>
+                ${() => {
+      const banner_regex = /\[banner=([^\]]+)\]/;
+      const match3 = about.value().match(banner_regex);
+      const pre_existing = match3 ? match3[1] : "";
+      let preview2;
+      const elem = html.node`
+                        <div class="setting" data-type="text">
+                            <div class="heading">
+                                <h5>${tl2(trans.profile_banner.name)}</h5>
+                                <p>${tl2(trans.profile_banner.body)}</p>
+                            </div>
+                            <div class="info v">
+                                ${input({
+        value: pre_existing,
+        func: (val) => {
+          const match4 = about.value().match(banner_regex);
+          const new_banner = `[banner=${val}]`;
+          if (match4) {
+            about.value(about.value().replace(banner_regex, new_banner));
+          } else {
+            const trimmed = about.value().trimEnd();
+            if (trimmed.length == 0) {
+              about.value(new_banner);
+            } else {
+              about.value(trimmed + "\n\n" + new_banner);
+            }
+          }
+          preview2.style.setProperty("background-image", `url(${val})`);
+        },
+        submit_on_character: true
+      })}
+                                <div class="banner-image" ref=${(el) => preview2 = el} />
+                            </div>
+                        </div>
+                    `;
+      preview2.style.setProperty("background-image", `url(${pre_existing})`);
+      return elem;
+    }}
+                <div
+                    class="setting"
+                    data-type="info"
+                    disabled=${!auth.sponsor}
+                    ref=${(el) => accent_setting = el}
+                />
+                ${() => {
+      const status_regex = /\[status=([^\]]+)\]/;
+      const match3 = about.value().match(status_regex);
+      const pre_existing = match3 ? match3[1] : "";
+      const elem = html.node`
+                        <div class="setting" data-type="text">
+                            <div class="heading">
+                                <h5><a href="https://status.cafe" target="_blank">status.cafe</a><span class="new-badge new">${tl2(trans.new)}</span></h5>
+                                <p>${tl2(trans.status_cafe.body)}</p>
+                            </div>
+                            ${input({
+        value: pre_existing,
+        func: (val) => {
+          const match4 = about.value().match(status_regex);
+          const new_status = `[status=${val}]`;
+          if (match4) {
+            about.value(about.value().replace(status_regex, new_status));
+          } else {
+            const trimmed = about.value().trimEnd();
+            if (trimmed.length == 0) {
+              about.value(new_status);
+            } else {
+              about.value(trimmed + "\n\n" + new_status);
+            }
+          }
+        },
+        submit_on_character: true
+      })}
+                        </div>
+                    `;
+      return elem;
+    }}
+                <div class="setting" data-type="text">
+                    <div class="heading">
+                        <h5>${tl2(trans.about)}</h5>
+                        <p class="tip characters" ref=${(el) => chars = el}>
+                            ${tl2(
+      trans.value_characters_max,
+      { v: bio_max_length }
+    )}
+                        </p>
+                    </div>
+                    <div class="${!ff("cosplay") ? "input-container content-form textarea" : "limitless"}">
+                        ${about}
+                    </div>
+                </div>
+            </div>
+            <div class="settings-footer end">
+                <button
+                    type="submit"
+                    class="btn-primary save"
+                    data-form-type="action"
+                >
+                    ${tl2(trans.save)}
+                </button>
+                <input
+                    type="hidden"
+                    value="profile"
+                    name="submit"
+                />
+            </div>
+        </form>
+        <div class="setting-group">
+            ${setting({ id: "avatar_radius" })}
+        </div>
+    `);
+    page.structure.main.removeChild(
+      page.structure.main.querySelector("#update-profile")
+    );
+    update_about();
+    function len(text4) {
+      return text4.replace(/\n/g, "\r\n").length;
+      const normalised = text4.replace(/\r\n/g, "\n");
+      return new TextEncoder().encode(normalised).length;
+    }
+    function update_about(value = about.value()) {
+      log("re-rendering", "about", "log");
+      const length = len(value);
+      chars.textContent = tl2(trans.value_characters_max, {
+        v: `${length}/${bio_max_length}`
+      });
+      chars.setAttribute("data-exceeded", length > bio_max_length);
+      render(preview, markdown(value, markdown_settings));
+      let profile_cache2 = JSON.parse(localStorage.getItem("bleh_profile_cache")) || {};
+      let cache3 = profile_cache2[auth.name];
+      console.info("cache", cache3);
+      const accent_regex = /\[accent=([0-9]{1,3}),([0-9]*\.?[0-9]+),([0-9]*\.?[0-9]+)\]/;
+      const font_regex = /\[font=([^\]]+)\]/;
+      console.info(
+        "cache update",
+        about.value(),
+        cache3.hue,
+        cache3.sat,
+        cache3.lit
+      );
+      let accent_edit;
+      render(accent_setting, html``);
+      render(accent_setting, html`
+            <div class="heading">
+                <h5>${tl2(trans.profile_accent.name)}<span class="new-badge sponsor-related">${tl2(trans.sponsors_only)}</span></h5>
+                <p>${tl2(trans.profile_accent.body)}</p>
+            </div>
+            <div class="info">
+                <div
+                    class="colour-tile colourful"
+                    style="--hue-over: ${cache3.hue}; --sat-over: ${cache3.sat}; --lit-over: ${cache3.lit}"
+                />
+                <div class="swatch-group palette">
+                    <button
+                        class="swatch-container"
+                        ref=${(el) => accent_edit = el}
+                        type="button"
+                        onclick=${() => {
+        let hue_range;
+        let sat_range;
+        let lit_range;
+        const match3 = about.value().match(accent_regex);
+        if (match3) {
+          save_setting(
+            "profile_hue",
+            parseInt(match3[1], 10)
+          );
+          save_setting(
+            "profile_sat",
+            parseFloat(match3[2])
+          );
+          save_setting(
+            "profile_lit",
+            parseFloat(match3[3])
+          );
+        }
+        let accent_preview2;
+        dialog2({
+          id: "profile_accent",
+          title: tl2(trans.profile_accent.name),
+          body: html.node`
+                                    <div class="setting-group">
+                                        <div class="setting" data-type="info">
+                                            <div class="heading">
+                                                <h5>${tl2(trans.preview)}</h5>
+                                            </div>
+                                            <div class="info">
+                                                <div class="colour-tile colourful" ref=${(el) => accent_preview2 = el} style="--hue-over: ${settings.profile_hue}; --sat-over: ${settings.profile_sat}; --lit-over: ${settings.profile_lit}" />
+                                            </div>
+                                        </div>
+                                        ${ff("colour_based_on_hex") ? html.node`
+                                        <div class="setting" data-type="text">
+                                            <div class="heading">
+                                                <h5>${tl2(trans.convert_from_hex)}</h5>
+                                            </div>
+                                            <div class="input-container content-form">
+                                                ${colour = input({
+            type: "colour",
+            value: "#999999",
+            maxlength: 7,
+            warn_if_empty: true
+          })}
+                                                <button class="btn primary icon convert" onclick=${() => {
+            const value2 = colour.value();
+            const hsl = hex_to_hsl(value2);
+            hue_range.set(hsl.h);
+            sat_range.set(
+              clamp_sat(hsl.s / 100 * 3)
+            );
+            lit_range.set(
+              hsl.l / 100 + 0.35
+            );
+          }}>${tl2(trans.convert)}</button>
+                                            </div>
+                                        </div>
+                                        ` : ""}
+                                        ${hue_range = setting({ id: "profile_hue", func: update_colour_preview })}
+                                        ${sat_range = setting({ id: "profile_sat", func: update_colour_preview })}
+                                        ${lit_range = setting({ id: "profile_lit", func: update_colour_preview })}
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="see-more cancel" onclick=${() => dialog_rm({ id: "profile_accent" })}>
+                                            ${tl2(trans.back)}
+                                        </button>
+                                        <div class="fill"></div>
+                                        <div class="button-group">
+                                            ${() => {
+            const btn = html.node`
+                                                    <button class="btn icon select-button" data-type="copy">
+                                                        ${tl2(trans.copy)}
+                                                    </button>
+                                                `;
+            tippy_esm_default(btn, {
+              theme: "context-menu",
+              content: html.node`
+                                                        <button class="dropdown-menu-clickable-item" data-type="profile" onclick=${() => {
+                hue_range.set(settings.hue);
+                sat_range.set(settings.sat);
+                lit_range.set(settings.lit);
+              }}>${tl2(trans.apply_global_accent)}</button>
+                                                        <button class="dropdown-menu-clickable-item" data-type="global" onclick=${() => {
+                const warn = notify({
+                  id: "confirm_accent",
+                  title: tl2(trans.are_you_sure),
+                  body: tl2(trans.this_will_replace_your_global_accent),
+                  type: "warning",
+                  actions: [
+                    {
+                      type: "check",
+                      action: () => {
+                        notify_rm(warn);
+                        save_setting("hue", settings.profile_hue);
+                        save_setting("sat", settings.profile_sat);
+                        save_setting("lit", settings.profile_lit);
+                      },
+                      text: tl2(trans.continue)
+                    }
+                  ],
+                  persist: true
+                });
+              }}>${tl2(trans.apply_profile_accent)}</button>
+                                                    `,
+              trigger: "click",
+              placement: "bottom",
+              interactive: true,
+              interactiveBorder: 10,
+              offset: [0, 0]
+            });
+            return btn;
+          }}
+                                            <button class="btn primary continue" onclick=${() => {
+            const new_accent = `[accent=${settings.profile_hue},${settings.profile_sat},${settings.profile_lit}]`;
+            if (match3) {
+              about.value(about.value().replace(
+                accent_regex,
+                new_accent
+              ));
+            } else {
+              const trimmed = about.value().trimEnd();
+              if (trimmed.length == 0) {
+                about.value(new_accent);
+              } else {
+                about.value(trimmed + "\n\n" + new_accent);
+              }
+            }
+            dialog_rm({ id: "profile_accent" });
+            status({
+              title: tl2(
+                trans.profile_accent.reminder
+              )
+            });
+          }}>
+                                                ${tl2(trans.change)}
+                                            </button>
+                                        </div>
+                                    </div>
+                                `
+        });
+        function update_colour_preview() {
+          accent_preview2.style = `--hue-over: ${settings.profile_hue}; --sat-over: ${settings.profile_sat}; --lit-over: ${settings.profile_lit}`;
+        }
+      }}
+                        >
+                            <div
+                                class="swatch colourful"
+                                data-swatch-type="customise"
+                            />
+                        </button>
+                    </div>
+                </div>
+            `);
+      tippy_esm_default(accent_edit, {
+        content: tl2(trans.edit)
+      });
+      if (font_setting) {
+        let font_edit;
+        let font_tile;
+        render(font_setting, html``);
+        render(font_setting, html`
+                <div class="heading">
+                    <h5>${tl2(trans.profile_font.name)}<span class="new-badge sponsor-related">${tl2(trans.sponsors_only)}</span></h5>
+                    <p>${tl2(trans.profile_font.body)}</p>
+                </div>
+                <div class="info">
+                    <div class="font-tile">
+                        <span class="preview-style" data-font=${cache3.font} data-font-style=${cache3.font_style} ref=${(el) => font_tile = el}>Aa</span>
+                    </div>
+                    <div class="swatch-group palette">
+                        <button
+                            class="swatch-container"
+                            ref=${(el) => font_edit = el}
+                            type="button"
+                            onclick=${() => {
+          const match3 = about.value().match(font_regex);
+          if (match3) {
+            save_setting(
+              "profile_hue",
+              parseInt(match3[1], 10)
+            );
+            save_setting(
+              "profile_sat",
+              parseFloat(match3[2])
+            );
+            save_setting(
+              "profile_lit",
+              parseFloat(match3[3])
+            );
+          }
+          let font_name = cache3.font;
+          let font_style = cache3.font_style;
+          let font_preview;
+          let font_buttons = [];
+          let font_style_buttons = [];
+          dialog2({
+            id: "profile_font",
+            title: tl2(trans.profile_font.name),
+            body: html.node`
+                                        <div class="font-name-preview">
+                                            <span data-font=${font_name} data-font-style=${font_style} ref=${(el) => font_preview = el}>${cache3.username ? cache3.username : auth.name}</span>
+                                        </div>
+                                        <div class="font-name-options">
+                                            <h4 class="font-options-header">${tl2(trans.font.name)}</h4>
+                                            <div class="font-options">
+                                                ${Object.entries(page.state.fonts).map(([font, family]) => {
+              if (family == "") family = tl2(trans.none);
+              const elem = html.node`
+                                                        <button class="btn font-selection" data-font=${font} aria-checked=${font == font_name} onclick=${() => {
+                font_name = font;
+                font_preview.setAttribute("data-font", font);
+                font_tile.setAttribute("data-font", font);
+                font_buttons.forEach((btn) => {
+                  btn.setAttribute("aria-checked", btn.getAttribute("data-font") == font);
+                });
+              }}>
+                                                            <span data-font=${font}>Aa</span>
+                                                        </button>
+                                                    `;
+              tippy_esm_default(elem, {
+                content: family,
+                delay: [500, 0]
+              });
+              font_buttons.push(elem);
+              return elem;
+            })}
+                                            </div>
+                                            <h4 class="font-options-header">${tl2(trans.font_style)}</h4>
+                                            <div class="font-options">
+                                                ${["solid", "pop", "out", "glow"].map((style) => {
+              const elem = html.node`
+                                                        <button class="btn font-selection font-style" data-font-style=${style} aria-checked=${style == font_style} onclick=${() => {
+                font_style = style;
+                font_preview.setAttribute("data-font-style", style);
+                font_tile.setAttribute("data-font-style", style);
+                font_style_buttons.forEach((btn) => {
+                  btn.setAttribute("aria-checked", btn.getAttribute("data-font-style") == style);
+                });
+              }}>
+                                                            <span class="preview-style" data-font-style=${style}>${tl2(trans.font_style[style])}</span>
+                                                        </button>
+                                                    `;
+              font_style_buttons.push(elem);
+              return elem;
+            })}
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="see-more cancel" onclick=${() => dialog_rm({ id: "profile_font" })}>
+                                                ${tl2(trans.back)}
+                                            </button>
+                                            <div class="fill"></div>
+                                            <button class="btn primary continue" onclick=${() => {
+              const new_font = `[font=${font_name}${font_style != "solid" ? `,${font_style}` : ""}]`;
+              if (match3) {
+                about.value(about.value().replace(
+                  font_regex,
+                  new_font
+                ));
+              } else {
+                const trimmed = about.value().trimEnd();
+                if (trimmed.length == 0) {
+                  about.value(new_font);
+                } else {
+                  about.value(trimmed + "\n\n" + new_font);
+                }
+              }
+              dialog_rm({ id: "profile_font" });
+              status({
+                title: tl2(
+                  trans.profile_font.reminder
+                )
+              });
+            }}>
+                                                ${tl2(trans.change)}
+                                            </button>
+                                        </div>
+                                    `
+          });
+          function update_colour_preview() {
+            accent_preview.style = `--hue-over: ${settings.profile_hue}; --sat-over: ${settings.profile_sat}; --lit-over: ${settings.profile_lit}`;
+          }
+        }}
+                            >
+                                <div
+                                    class="swatch colourful"
+                                    data-swatch-type="customise"
+                                />
+                            </button>
+                        </div>
+                    </div>
+                `);
+        tippy_esm_default(font_edit, {
+          content: tl2(trans.edit)
+        });
+      }
+    }
+  }
+  function avatar(token = "") {
+    if (!token) token = page.token;
+    else page.token = token;
+    page.state.avatar_changer = dialog2({
+      id: "edit_avatar",
+      title: tl2(trans.change_avatar),
+      body: html.node`
+            <div class="forms">
+                <form action="${root}settings" name="avatar-form" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="csrfmiddlewaretoken" value=${page.token}>
+                    <div class="form-group form-group--avatar js-form-group upload-avatar">
+                        <div class="js-form-group-controls form-group-controls">
+                            <span class="btn-secondary btn primary btn-file" data-kate-processed="true">
+                                ${tl2(trans.upload)}
+                                <input type="file" onchange=${() => update_avatar(event)} name="avatar" data-require="components/file-input" data-file-input-copy="${tl2(trans.upload)}" data-no-file-copy="No file chosen" accept="image/*" required="" id="id_avatar" data-kate-processed="true">
+                            </span>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-primary save" id="avatar_saver">
+                        ${tl2(trans.save)}
+                    </button>
+                    <input type="hidden" value="avatar" name="submit">
+                </form>
+                <form action="${root}settings/avatar/delete" method="post">
+                    <input type="hidden" name="csrfmiddlewaretoken" value=${page.token}>
+                    <div class="form-group delete-avatar">
+                        <button class="btn image-upload-remove" type="submit" value="delete-avatar" name="delete-avatar">${tl2(trans.delete)}</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="see-more cancel" onclick=${() => dialog_rm({ id: "edit_avatar" })}>${tl2(trans.cancel)}</button>
+                <div class="fill"></div>
+                <button class="btn primary save" onclick=${() => save_avatar()} disabled>${tl2(trans.save)}</button>
+            </div>
+        `
+    });
+    page.state.avatar_changer.querySelector('[name="avatar-form"]').onsubmit = finish_saving_avatar;
+    const file_button = page.state.avatar_changer.querySelector(".btn-file");
+    const save_button = page.state.avatar_changer.querySelector(
+      ".modal-footer .primary"
+    );
+    let form;
+    function update_avatar(e) {
+      console.info(e);
+      if (!e.target.files || !e.target.files[0]) return;
+      form = page.state.avatar_changer.querySelector(".bleh-modal-body");
+      if (e.target.files[0].type == "image/gif") {
+        save_avatar();
+        finish_saving_avatar();
+        return;
+      }
+      let reader = new FileReader();
+      reader.onload = function() {
+        crop(reader.result);
+        save_button.removeAttribute("disabled");
+      };
+      reader.readAsDataURL(e.target.files[0]);
+    }
+    function save_avatar() {
+      page.state.avatar_changer.querySelector("#avatar_saver").click();
+    }
+    function finish_saving_avatar() {
+      page.state.avatar_changer.setAttribute("data-loading", "true");
+      page.state.avatar_changer.querySelectorAll(".bleh-modal-body button").forEach((button2) => {
+        button2.setAttribute("disabled", "true");
+        button2.removeAttribute("onclick");
+      });
+    }
+    function crop(file) {
+      let crop_image;
+      let save;
+      const crop_dialog = dialog2({
+        id: "crop",
+        title: tl2(trans.crop_avatar),
+        body: html.node`
+                <div class="crop">
+                    <img src=${file} ref=${(el) => crop_image = el}>
+                </div>
+                <div class="alert alert-info">
+                    ${tl2(trans.crop_notice)}
+                </div>
+                <div class="modal-footer">
+                    <button class="see-more cancel" onclick=${() => {
+          if (cropper && cropper.destroy) cropper.destroy();
+          cropper = null;
+          avatar();
+        }}>${tl2(trans.cancel)}</button>
+                    <div class="fill"></div>
+                    <button class="btn primary save" onclick=${() => {
+          if (!cropper) return;
+          crop_dialog.querySelectorAll(".bleh-modal-body button").forEach((button2) => {
+            button2.setAttribute("disabled", "true");
+            button2.removeAttribute("onclick");
+          });
+          const canvas = cropper.getCroppedCanvas();
+          canvas.toBlob((blob) => {
+            const cropped_file = new File(
+              [blob],
+              "avatar.png",
+              { type: "image/png" }
+            );
+            const inner_form = form.querySelector("form");
+            inner_form.style.display = "none";
+            crop_dialog.querySelector(".bleh-modal-body").appendChild(inner_form);
+            const file_input = inner_form.querySelector('input[type="file"]');
+            const data_transfer = new DataTransfer();
+            data_transfer.items.add(cropped_file);
+            file_input.files = data_transfer.files;
+            inner_form.querySelector("#avatar_saver").click();
+          }, "image/png");
+        }} ref=${(el) => save = el} disabled>${tl2(trans.save)}</button>
+                </div>
+            `
+      });
+      page.state.avatar_changer = crop_dialog;
+      crop_image.onload = () => {
+        if (cropper && cropper.destroy) cropper.destroy();
+        crop_image.style.maxWidth = "none";
+        crop_image.style.width = crop_image.naturalWidth + "px";
+        crop_image.style.height = crop_image.naturalHeight + "px";
+        cropper = new import_cropperjs.default(crop_image, {
+          viewMode: 3,
+          dragMode: "crop",
+          movable: true,
+          zoomable: true,
+          scalable: false,
+          cropBoxMovable: true,
+          cropBoxResizable: true,
+          background: false,
+          guides: true,
+          autoCropArea: 1
+        });
+        save.removeAttribute("disabled");
+      };
+    }
+  }
+  function patch_settings_privacy_tab() {
+    let privacy_panel = document.getElementById("privacy");
+    let token = document.body.querySelector('[name="csrfmiddlewaretoken"]').getAttribute("value");
+    bleh_communication_panel(token);
+    patch_settings_privacy_panel(token, privacy_panel);
+  }
+  function bleh_communication_panel(token) {
+    let profile_notes = JSON.parse(localStorage.getItem("bleh_profile_notes")) || {};
+    let panel = page.structure.main.querySelector("#ignorelist");
+    panel.classList.add("bleh--panel");
+    const alert2 = panel.querySelector(".alert");
+    let list = panel.querySelectorAll(".ignore-list tr");
+    let new_list = document.createElement("div");
+    new_list.classList.add(
+      "generic-table-list",
+      "user-vertical-list",
+      "take-space"
+    );
+    let exceeded = false;
+    let exceed_amount = 10;
+    let amount = 0;
+    Array.from(list).reverse().forEach((item, index3) => {
+      let name = item.querySelector("td").textContent.trim();
+      let form2 = item.querySelector("form");
+      let button2 = form2.querySelector("button");
+      button2.classList.add("btn", "icon", "chibi", "danger-subtle", "list-action");
+      button2.setAttribute("data-type", "x");
+      tippy_esm_default(button2, {
+        content: tl2(trans.remove)
+      });
+      let entry = html.node`
+            <div class="generic-table-list-entry user-vertical-list-item">
+                <div class="name">
+                    <a class="mention" href="${root}user/${name}" target="_blank">@${name}</a>
+                </div>
+                <div class="text preview">
+                    ${profile_notes.hasOwnProperty(name) ? html.node`
+                        <p id="profile-note-row-preview--${name}">${{ html: profile_notes[name] }}</p>
+                    ` : ""}
+                </div>
+                <div class="actions">
+                    ${form2}
+                </div>
+            </div>
+        `;
+      if (index3 > exceed_amount && !exceeded) exceeded = true;
+      if (exceeded) entry.classList.add("entry-is-exceeded");
+      new_list.appendChild(entry);
+      amount += 1;
+    });
+    if (exceeded) {
+      let remainder = amount - exceed_amount;
+      new_list.classList.add("list-is-exceeded");
+      new_list.setAttribute("data-expanded", "false");
+      let expand = html.node`
+            <button class="see-more expand-down" onclick=${() => {
+        expand.style.display = "none";
+        new_list.setAttribute("data-expanded", "true");
+      }}>
+                ${tl2(trans.view_count_more).replace("{c}", remainder.toString())}
+            </button>
+        `;
+      new_list.appendChild(expand);
+    }
+    let form = page.structure.main.querySelector('[name="ignorelist"]');
+    if (page.token == "")
+      page.token = form.querySelector('[name="csrfmiddlewaretoken"]').getAttribute("value");
+    render(panel, html`
+        <h4>${tl2(trans.block_list)}</h4>
+        <div class="user-top-panel">
+            <div class="user-top-avatar user-top-avatar-side-left">
+                <div class="bleh-icon"></div>
+            </div>
+            <img
+                class="user-top-avatar user-top-avatar-main"
+                src=${auth.avatar.replace("avatar42s", "avatar300s")}
+                alt=${auth.name}
+            />
+            <div class="user-top-avatar user-top-avatar-side-right">
+                <div class="bleh-icon"></div>
+            </div>
+        </div>
+        ${alert2}
+        <div class="setting" data-type="text">
+            <div class="heading">
+                <h5>${tl2(trans.profile)}</h5>
+                <form
+                    action="${root}settings/privacy#ignorelist"
+                    name="ignorelist"
+                    method="post"
+                >
+                    <input
+                        type="hidden"
+                        name="csrfmiddlewaretoken"
+                        value=${page.token}
+                    />
+                    <div class="input-container">
+                        <input
+                            type="text"
+                            maxlength="80"
+                            id="id_user"
+                            name="user"
+                            placeholder=${tl2(trans.enter_username)}
+                        />
+                        <input
+                            type="hidden"
+                            name="listaction"
+                            value="add"
+                        />
+                        <input
+                            type="hidden"
+                            name="submit"
+                            value="ignorelist"
+                        />
+                        <button
+                            class="btn primary icon block"
+                            type="submit"
+                        >
+                            ${tl2(trans.block)}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="alert alert-info">
+            ${tl2(trans.blocked_count, { c: amount })}
+        </div>
+        <div class="setting-group">
+            ${new_list}
+        </div>
+        <div class="sep" />
+        <h5>${tl2(trans.when_blocked)}</h5>
+        <div class="to-consider">
+            <ul class="to-consider-good">
+                <li>${tl2(trans.blocked_user_public)}</li>
+                <li>${tl2(trans.blocked_user_message)}</li>
+                <li>${tl2(trans.blocked_user_new_shouts)}</li>
+            </ul>
+            <ul class="to-consider-bad">
+                <li>${tl2(trans.blocked_user_old_shouts)}</li>
+                <li>${tl2(trans.blocked_user_view_profile)}</li>
+            </ul>
+        </div>
+    `);
+  }
+  function patch_settings_privacy_panel(token, privacy_panel) {
+    privacy_panel.classList.add("bleh--panel");
+    let original_privacy_settings = {
+      recent_listening: document.getElementById("id_hide_realtime").checked,
+      receiving_msgs: document.getElementById("id_message_privacy").outerHTML,
+      disable_shoutbox: document.getElementById("id_shoutbox_disabled").checked
+    };
+    privacy_panel.innerHTML = `
+        <h4>${tl2(trans.privacy)}</h4>
+        <form action="${root}settings/privacy" name="privacy" method="post">
+            <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
+            <div class="inner-preview pad">
+                <div class="tracks recent_listening">
+                    <div class="track realtime">
+                        <div class="cover"></div>
+                        <div class="title"></div>
+                        <div class="artist"></div>
+                        <div class="time"></div>
+                    </div>
+                    <div class="track">
+                        <div class="cover"></div>
+                        <div class="title"></div>
+                        <div class="artist"></div>
+                        <div class="time"></div>
+                    </div>
+                    <div class="track">
+                        <div class="cover"></div>
+                        <div class="title"></div>
+                        <div class="artist"></div>
+                        <div class="time"></div>
+                    </div>
+                    <div class="track">
+                        <div class="cover"></div>
+                        <div class="title"></div>
+                        <div class="artist"></div>
+                        <div class="time"></div>
+                    </div>
+                    <div class="track">
+                        <div class="cover"></div>
+                        <div class="title"></div>
+                        <div class="artist"></div>
+                        <div class="time"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="setting-group">
+                <div class="setting" data-type="toggle" onclick="_update_inbuilt_item('recent_listening')" id="container-recent_listening">
+                    <button class="btn reset" onclick="_reset_inbuilt_item('recent_listening')">Reset to default</button>
+                    <div class="heading">
+                        <h5>${tl2(trans.recent_listening.name)}</h5>
+                        <p>${tl2(trans.recent_listening.body)}</p>
+                    </div>
+                    <div class="toggle-wrap">
+                        <input class="companion-checkbox" type="checkbox" name="hide_realtime" id="inbuilt-companion-checkbox-recent_listening">
+                        <span class="btn toggle" id="toggle-recent_listening" aria-checked="false">
+                            <div class="dot"></div>
+                        </span>
+                    </div>
+                </div>
+                <div class="setting" data-type="options">
+                    <div class="heading">
+                        <h5>${tl2(trans.allow_messages_from)}</h5>
+                    </div>
+                    <div class="primary-selections">
+                        ${original_privacy_settings.receiving_msgs}
+                        <div class="btn primary-selection" id="primary-selection-receiving_msgs-everyone" onclick="_update_inbuilt_selection('id_message_privacy', 0)">
+                            <h5>${tl2(trans.everyone)}</h5>
+                        </div>
+                        <div class="btn primary-selection" id="primary-selection-receiving_msgs-neighbours" onclick="_update_inbuilt_selection('id_message_privacy', 1)">
+                            <h5>${tl2(trans.following_and_neighbours)}</h5>
+                        </div>
+                        <div class="btn primary-selection" id="primary-selection-receiving_msgs-follow" onclick="_update_inbuilt_selection('id_message_privacy', 2)">
+                            <h5>${tl2(trans.following)}</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="inner-preview pad">
+                <div class="shouts">
+                    <div class="shout-preview">
+                        <div class="avatar-side">
+                            <div class="shout-avatar-placeholder"></div>
+                        </div>
+                        <div class="info-side">
+                            <div class="header">
+                                <div class="shout-username"></div>
+                                <div class="shout-time"></div>
+                            </div>
+                            <div class="shout-contents"></div>
+                            <div class="shout-contents"></div>
+                        </div>
+                    </div>
+                    <div class="shout-preview">
+                        <div class="avatar-side">
+                            <div class="shout-avatar-placeholder"></div>
+                        </div>
+                        <div class="info-side">
+                            <div class="header">
+                                <div class="shout-username"></div>
+                                <div class="shout-time"></div>
+                            </div>
+                            <div class="shout-contents"></div>
+                            <div class="shout-contents"></div>
+                        </div>
+                    </div>
+                    <div class="shout-preview">
+                        <div class="avatar-side">
+                            <div class="shout-avatar-placeholder"></div>
+                        </div>
+                        <div class="info-side">
+                            <div class="header">
+                                <div class="shout-username"></div>
+                                <div class="shout-time"></div>
+                            </div>
+                            <div class="shout-contents"></div>
+                            <div class="shout-contents"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="setting-group">
+                <div class="setting" data-type="toggle" onclick="_update_inbuilt_item('disable_shoutbox')" id="container-disable_shoutbox">
+                    <button class="btn reset" onclick="_reset_inbuilt_item('disable_shoutbox')">Reset to default</button>
+                    <div class="heading">
+                        <h5>${tl2(trans.close_shouts.name)}</h5>
+                        <p>${tl2(trans.close_shouts.body)}</p>
+                    </div>
+                    <div class="toggle-wrap">
+                        <input class="companion-checkbox" type="checkbox" name="shoutbox_disabled" id="inbuilt-companion-checkbox-disable_shoutbox">
+                        <span class="btn toggle" id="toggle-disable_shoutbox" aria-checked="false">
+                            <div class="dot"></div>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="settings-footer">
+                <button type="submit" class="btn-primary save">
+                    ${tl2(trans.save)}
+                </button>
+                <input type="hidden" value="privacy" name="submit">
+            </div>
+        </form>
+    `;
+    for (let setting2 in original_privacy_settings) {
+      update_inbuilt_item(setting2, original_privacy_settings[setting2], false);
+    }
+    let selects = document.body.querySelectorAll("select");
+    selects.forEach((select2) => {
+      select2.setAttribute(
+        "onchange",
+        `_update_inbuilt_select('${select2.getAttribute("id")}', this.value)`
+      );
+      update_inbuilt_select(select2.getAttribute("id"), select2.value);
+    });
+  }
+  function bleh_accounts() {
+    let token = page.structure.main.querySelector('[name="csrfmiddlewaretoken"]').getAttribute("value");
+    let original_settings = {
+      email_language: page.structure.main.querySelector('[name="language"]'),
+      marketing_emails: page.structure.main.querySelector(
+        '[name="opt_in_marketing"]'
+      ),
+      email: page.structure.main.querySelector('[name="email"]').value,
+      captcha: page.structure.main.querySelector(".lfm-recaptcha")
+    };
+    const alert2 = update_profile.querySelector(".alert");
+    render(
+      page.structure.main,
+      html`
+            <section class="bleh--panel">
+                <h4>${tl2(trans.information)}</h4>
+                ${alert2}
+                <div class="setting-group">
+                    <form
+                        action="${root}settings/change-username/send-email"
+                        method="post"
+                    >
+                        <input
+                            type="hidden"
+                            name="csrfmiddlewaretoken"
+                            value="${token}"
+                        />
+                        <div class="setting" data-type="text">
+                            <div class="heading">
+                                <h5>${tl2(trans.username.name)}</h5>
+                                <p>
+                                    ${{
+        html: tl2(trans.username.body).replace(
+          "{a}",
+          `<a href="https://support.last.fm/" target="_blank">`
+        ).replace("{/a}", "</a>")
+      }}
+                                </p>
+                            </div>
+                            <div class="input-container content-form">
+                                <input
+                                    id="id_current_username"
+                                    type="text"
+                                    name="current_username"
+                                    value="${auth.name}"
+                                    disabled
+                                    required
+                                />
+                                <button class="btn chibi icon primary submit">
+                                    ${tl2(trans.send)}
+                                </button>
+                                <input
+                                    type="hidden"
+                                    value="change_username"
+                                    name="submit"
+                                />
+                            </div>
+                        </div>
+                    </form>
+                    <form
+                        action="${root}settings/account"
+                        name="change-email"
+                        method="post"
+                    >
+                        <input
+                            type="hidden"
+                            name="csrfmiddlewaretoken"
+                            value="${token}"
+                        />
+                        <div class="setting" data-type="text">
+                            <div class="heading">
+                                <h5>${tl2(trans.email)}</h5>
+                            </div>
+                            <div class="input-container content-form">
+                                <input
+                                    id="id_email"
+                                    type="text"
+                                    name="email"
+                                    value="${original_settings.email}"
+                                    required
+                                />
+                                <button class="btn chibi icon primary submit">
+                                    ${tl2(trans.save)}
+                                </button>
+                                <input
+                                    type="hidden"
+                                    value="email_update"
+                                    name="submit"
+                                />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <form
+                    class="password-container"
+                    action="${root}settings/account/password#change-password"
+                    name="change-password"
+                    method="post"
+                >
+                    <input
+                        type="hidden"
+                        name="csrfmiddlewaretoken"
+                        value="${token}"
+                    />
+                    <div class="setting-group">
+                        <div class="setting" data-type="text">
+                            <div class="heading">
+                                <h5>${tl2(trans.password)}</h5>
+                            </div>
+                            <div class="input-container content-form">
+                                <input
+                                    id="id_password"
+                                    type="password"
+                                    name="password"
+                                    required
+                                />
+                            </div>
+                        </div>
+                        <div class="setting" data-type="text">
+                            <div class="heading">
+                                <h5>${tl2(trans.new_password)}</h5>
+                            </div>
+                            <div class="input-container content-form">
+                                <input
+                                    id="id_new_password"
+                                    type="password"
+                                    name="new_password"
+                                    required
+                                />
+                            </div>
+                        </div>
+                        <div class="setting" data-type="text">
+                            <div class="heading">
+                                <h5>${tl2(trans.confirm_password)}</h5>
+                            </div>
+                            <div class="input-container content-form">
+                                <input
+                                    id="id_new_password_confirmation"
+                                    type="password"
+                                    name="new_password_confirmation"
+                                    required
+                                />
+                            </div>
+                        </div>
+                        ${original_settings.captcha}
+                    </div>
+                    <div class="settings-footer end">
+                        <button class="btn-primary save" type="submit">
+                            ${tl2(trans.change)}
+                        </button>
+                    </div>
+                </form>
+            </section>
+            <section class="bleh--panel">
+                <h4>${tl2(trans.communication)}</h4>
+                <form
+                    action="${root}settings/account"
+                    name="email-settings"
+                    method="post"
+                >
+                    <input
+                        type="hidden"
+                        name="csrfmiddlewaretoken"
+                        value="${token}"
+                    />
+                    <div class="setting-group">
+                        <div class="setting" data-type="select">
+                            <div class="heading">
+                                <h5>${tl2(trans.email_language)}</h5>
+                            </div>
+                            <div class="select-wrap custom-selector">
+                                ${select(
+        select_prepare(
+          original_settings.email_language
+        ),
+        original_settings.email_language.value,
+        original_settings.email_language.name
+      )}
+                            </div>
+                        </div>
+                        ${toggle({
+        value: original_settings.marketing_emails.checked,
+        name: original_settings.marketing_emails.name,
+        title: tl2(trans.marketing_emails.name),
+        body: tl2(trans.marketing_emails.body),
+        standalone: false
+      })}
+                    </div>
+                    <div class="settings-footer end">
+                        <button class="btn-primary save" type="submit">
+                            ${tl2(trans.save)}
+                        </button>
+                        <input
+                            type="hidden"
+                            value="email_settings"
+                            name="submit"
+                        />
+                    </div>
+                </form>
+            </section>
+            <section class="bleh--panel">
+                <h4>${tl2(trans.security)}</h4>
+                <form
+                    action="${root}settings/account"
+                    name="email-settings"
+                    method="post"
+                >
+                    <input
+                        type="hidden"
+                        name="csrfmiddlewaretoken"
+                        value="${token}"
+                    />
+                    <div class="setting-group">
+                        <div class="setting" data-type="action">
+                            <div class="heading">
+                                <h5>${tl2(trans.logout_everywhere)}</h5>
+                            </div>
+                            <div class="toggle-wrap">
+                                <a
+                                    class="see-more danger logout"
+                                    href="${root}settings/account/logout-everywhere"
+                                >
+                                    ${tl2(trans.logout)}
+                                </a>
+                            </div>
+                        </div>
+                        <div class="setting" data-type="action">
+                            <div class="heading">
+                                <h5>${tl2(trans.delete_account.name)}</h5>
+                                <p>${tl2(trans.delete_account.body)}</p>
+                            </div>
+                            <div class="toggle-wrap">
+                                <a
+                                    class="see-more danger delete-account"
+                                    href="${root}settings/account/delete"
+                                >
+                                    ${tl2(
+        trans.delete_account_permanently
+      ).replace("{u}", auth.name)}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </section>
+        `
+    );
+    for (let setting2 in original_settings) {
+      update_inbuilt_item(setting2, original_settings[setting2], false);
+    }
+  }
+  function bleh_name_change() {
+    let token = page.structure.row.querySelector('[name="csrfmiddlewaretoken"]').getAttribute("value");
+    return;
+  }
+  function bleh_website() {
+    const token = page.structure.row.querySelector('[name="csrfmiddlewaretoken"]').getAttribute("value");
+    const auto_correct = page.structure.main.querySelector(
+      '[name="corrections_enabled"]:checked'
+    );
+    const preferred_affiliate = page.structure.main.querySelector(
+      '[name="preferred_affiliate"]:checked'
+    );
+    const timezone = page.structure.main.querySelector('[name="timezone"]');
+    const help_text = page.structure.main.querySelector(".js-field-help-text");
+    const location = page.structure.main.querySelector(
+      '[data-require="components/location-form-field-v2"]'
+    );
+    const radius = page.structure.main.querySelector('[name="event_radius"]');
+    let timezone_text;
+    page.structure.main.insertBefore(
+      html.node`
+            <form class="dont-move" action="${root}settings/website" method="post">
+                <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
+                <section class="bleh--panel">
+                    <h4>${tl2(trans.website)}</h4>
+                    <div class="setting-group">
+                        <div class="setting v2" data-type="options">
+                            <div class="heading">
+                                <h5>${tl2(trans.auto_correct_scrobbles.name)}</h5>
+                                <p>${tl2(trans.auto_correct_scrobbles.body)}</p>
+                            </div>
+                            ${radio({
+        name: auto_correct.name,
+        value: auto_correct.value,
+        values: {
+          False: {
+            name: tl2(
+              trans.auto_correct_scrobbles.false
+            )
+          },
+          True: {
+            name: tl2(
+              trans.auto_correct_scrobbles.true
+            )
+          }
+        }
+      })}
+                        </div>
+                    </div>
+                    <div class="alert alert-danger">
+                        ${tl2(trans.auto_correct_scrobbles.warning)}
+                    </div>
+                </section>
+                <section class="bleh--panel">
+                    <h4>${tl2(trans.events)}</h4>
+                    <div class="setting-group">
+                        <div class="setting v2" data-type="select">
+                            <div class="heading">
+                                <h5>${tl2(trans.timezone)}</h5>
+                                <p ref=${(el) => timezone_text = el}>${help_text.textContent.trim()}</p>
+                            </div>
+                            ${select(
+        select_prepare(timezone),
+        timezone.value,
+        timezone.name,
+        (val) => {
+          fetch(
+            `${root}settings/partial/timezone-help-text?tz=${val}&ajax=1`
+          ).then((res) => res.text()).then((dom) => {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(
+              dom,
+              "text/html"
+            );
+            const text4 = doc.querySelector("p");
+            if (!text4) return;
+            timezone_text.textContent = text4.textContent;
+          }).catch(
+            (e) => log(
+              "unable to get text",
+              "timezone",
+              "error",
+              { e }
+            )
+          );
+        }
+      )}
+                        </div>
+                        <div class="setting v2" data-type="action">
+                            <div class="heading">
+                                <h5>${tl2(trans.location.name)}</h5>
+                                <p>${tl2(trans.location.body)}</p>
+                            </div>
+                            <div class="toggle-wrap">
+                                ${location}
+                            </div>
+                        </div>
+                        <div class="setting v2" data-type="select">
+                            <div class="heading">
+                                <h5>${tl2(trans.event_radius)}</h5>
+                            </div>
+                            ${select(select_prepare(radius), radius.value, radius.name)}
+                        </div>
+                    </div>
+                    <div class="settings-footer end">
+                        <button type="submit" class="btn-primary save">
+                            ${tl2(trans.save)}
+                        </button>
+                        <input type="hidden" value="website" name="submit">
+                    </div>
+                </section>
+            </form>
+            <section class="bleh--panel">
+                <h4>${tl2(trans.playback)}</h4>
+                <form action="${root}settings/website" method="post">
+                    <input type="hidden" name="csrfmiddlewaretoken" value=${token}>
+                    <div class="setting-group">
+                        <div class="setting v2" data-type="options">
+                            <div class="heading">
+                                <h5>${tl2(trans.preferred_affiliate.name)}</h5>
+                                <p>${tl2(trans.preferred_affiliate.body)}</p>
+                            </div>
+                            ${radio({
+        name: preferred_affiliate.name,
+        value: preferred_affiliate.value,
+        values: radio_convert(
+          page.structure.main.querySelectorAll(
+            "#id_preferred_affiliate > .lfm-form-radio"
+          )
+        )
+      })}
+                        </div>
+                    </div>
+                    <div class="settings-footer end">
+                        <button type="submit" class="btn-primary save">
+                            ${tl2(trans.save)}
+                        </button>
+                        <input type="hidden" value="playback" name="submit">
+                    </div>
+                </form>
+            </section>
+        `,
+      page.structure.main.firstElementChild
+    );
+    const website = page.structure.main.querySelector("#website");
+    website.remove();
+    const playback = page.structure.main.querySelector("#playback");
+    playback.remove();
+  }
+  function bleh_applications() {
+    let session_types = page.structure.main.querySelectorAll(".api-sessions");
+    let suggested;
+    let connected;
+    if (session_types.length > 1) {
+      suggested = session_types[0];
+      connected = session_types[1];
+    } else {
+      connected = session_types[0];
+    }
+    render(
+      page.structure.main,
+      html`
+            <section class="applications">
+                <div class="section-intro">
+                    <h3>${tl2(trans.applications)}</h3>
+                    <p>${tl2(trans.applications_intro)}</p>
+                </div>
+                ${suggested ? html`
+                        <h2>${tl2(trans.suggested)}</h2>
+                        ${suggested}
+                    ` : ""}
+                <h2>${tl2(trans.connected)}</h2>
+                ${connected}
+            </section>
+        `
+    );
+    session_types.forEach((session_type) => {
+      let sessions = session_type.querySelectorAll(".api-session");
+      sessions.forEach((session) => {
+        const details = session.querySelector(".api-session-details");
+        const form = session.querySelector("form");
+        const button2 = form.querySelector("button");
+        button2.classList.add("chibi");
+        tippy_esm_default(button2, {
+          content: button2.textContent
+        });
+        const name = details.querySelector(".api-session-app-name");
+        const desc = details.querySelector(".api-session-app-description");
+        const status2 = details.querySelector(".api-session-status");
+        const image = details.querySelector(".api-session-app-image");
+        image.classList = "";
+        const default_image = image.src.endsWith(
+          "14d19fbdca555c1782176cd789e81af7.png"
+        );
+        render(
+          session,
+          html`
+                    <div class="session-header">
+                        <div
+                            class="session-image"
+                            data-default-image=${default_image}
+                        >
+                            ${image}
+                        </div>
+                        <div class="session-details">${name} ${desc}</div>
+                        ${form}
+                    </div>
+                    ${status2 ? html.node`
+                <div class="session-footer">
+                    ${status2}
+                </div>
+                ` : ""}
+                `
+        );
+      });
+    });
   }
 
   // src/pages/home.js
@@ -57905,7 +58422,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     }
   }
 
-  // src/pages/search.js
+  // src/pages/home/search.js
   async function bleh_search() {
     page.structure.container = document.body.querySelector(".page-content");
     try {
@@ -58022,7 +58539,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     });
   }
 
-  // src/rain.js
+  // src/components/page/rain.js
   function rain() {
     let rain_container = html.node`
         <div class="rain-container" />
@@ -58059,321 +58576,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     if (settings.rain) rain();
   }
 
-  // src/shout.js
-  function patch_shouts() {
-    if (!page.structure.main) return;
-    const use_md = settings.shout_markdown;
-    let shout_controls = page.structure.main.querySelector(
-      ".shoutbox-controls-wrapper:not([data-shouts])"
-    );
-    if (shout_controls) {
-      shout_controls.setAttribute("data-shouts", "true");
-      shout_header(shout_controls);
-    }
-    let shouts = page.structure.main.querySelectorAll(
-      ".shout:not([data-kate-processed])"
-    );
-    shouts.forEach((shout, index3) => {
-      try {
-        let vote_button = function() {
-          setTimeout(() => {
-            const modified = form.getAttribute("data-ajax-form-state") == "modified-state";
-            const current_is_voted = initial_is_voted != modified;
-            indicator.setAttribute(
-              "aria-checked",
-              current_is_voted.toString()
-            );
-          }, 0);
-        };
-        shout.setAttribute("data-kate-processed", "true");
-        shout.style.setProperty("--delay", index3 * 0.04 + "s");
-        let shout_name = shout.querySelector(".shout-user a");
-        if (!shout_name) return;
-        let shout_name_text = shout_name.textContent;
-        shout_name.insertBefore(html.node`<span class="at">@</span>`, shout_name.firstChild);
-        let shout_avatar = shout.querySelector(".shout-user-avatar");
-        let badge = patch_avatar(shout_avatar, shout_name_text, "shout");
-        if (badge) {
-          if (badge.type && badge.type == "avatar-status-dot--staff")
-            shout.classList.add("staff-shout");
-          style_name_from_badge(shout_name, badge);
-        }
-        const shout_body = shout.querySelector(".shout-body p");
-        const shout_text = shout_body.textContent.trim();
-        if (settings.shout_markdown) {
-          shout_parse_queue.push({ element: shout_body });
-        }
-        const indicator = html.node`
-                <div class="shout-vote-indicator colourful" aria-checked="false" />
-            `;
-        shout.appendChild(indicator);
-        let shout_timestamp = shout.querySelector(".shout-timestamp time");
-        if (shout_timestamp) {
-          tippy_esm_default(shout_timestamp, {
-            content: shout_timestamp.getAttribute("title")
-          });
-          shout_timestamp.removeAttribute("title");
-        }
-        let actions = shout.querySelectorAll(".shout-actions .shout-action");
-        actions.forEach((action) => {
-          let buttons2 = action.querySelectorAll("button, a");
-          buttons2.forEach((button2) => {
-            button2.classList.add("shout-action-button", "see-more");
-          });
-        });
-        const more_button = shout.querySelector(".shout-more-actions");
-        if (more_button) more_button.classList.add("see-more", "shout-action-button");
-        const form = shout.querySelector(".vote-button-toggle");
-        const voted_button = form.querySelector(".vote-button--voted");
-        const unvote_button = form.querySelector(
-          ".vote-button:not(.vote-button--voted)"
-        );
-        if (!voted_button || !unvote_button) return;
-        const initial_is_voted = voted_button.getAttribute("data-ajax-form-sets-state") == "modified-state";
-        indicator.setAttribute("aria-checked", initial_is_voted.toString());
-        voted_button.addEventListener("click", (e) => vote_button());
-        unvote_button.addEventListener("click", (e) => vote_button());
-        const menu = shout.querySelector(".shout-more-actions-menu");
-        const buttons = menu.querySelectorAll("button");
-        buttons.forEach((button2) => {
-          const type = button2.classList[1];
-          if (type == "more-item--delete") {
-            button2.textContent = tl2(trans.delete);
-          } else if (type == "more-item--report") {
-            button2.textContent = tl2(trans.report);
-          }
-        });
-        menu.insertBefore(
-          html.node`
-                <button class="dropdown-menu-clickable-item" data-type="copy" onclick=${() => {
-            copy(shout_text);
-          }}>
-                    ${tl2(trans.copy)}
-                </button>
-                <div class="sep" />
-            `,
-          menu.firstElementChild
-        );
-        let send_button = shout.querySelector(".form-group--submit");
-        shout_send(send_button);
-      } catch (e) {
-        notify({
-          id: "shout",
-          title: tl2(trans.shouts),
-          body: "Failed to be modified :(",
-          type: "error",
-          icon: "icon-16-shoutbox"
-        });
-        log("failed to modify", "shout", "error", { error: e });
-      }
-    });
-    if (settings.shout_markdown && shout_parse_queue.length > 0)
-      parse_shout_queue();
-    const shout_forms = document.querySelectorAll(".shout-form:not([data-kate-processed])");
-    shout_forms.forEach((shout_form) => {
-      shout_form.setAttribute("data-kate-processed", "true");
-      let shout_avatar = shout_form.querySelector(".shout-user-avatar");
-      patch_avatar(shout_avatar, auth.name);
-      let send_button = shout_form.querySelector(".form-group--submit");
-      shout_send(send_button);
-      const help_text = shout_form.querySelector(".form-row-help-text");
-      help_text.classList.add("dual-tip");
-      const legacy_textarea = shout_form.querySelector("textarea");
-      let placeholder = legacy_textarea.placeholder;
-      const is_reply = placeholder.includes(auth.name);
-      if (!is_reply) {
-        if (page.type == "user") {
-          placeholder = tl2(trans.shoutbox_placeholder_user, {
-            u: auth.name,
-            v: page.name
-          });
-        } else {
-          placeholder = tl2(trans.shoutbox_placeholder, {
-            u: auth.name,
-            v: page.type == "artist" ? romanise(correct_artist(page.name)) : ["album", "track"].includes(page.type) ? romanise(correct_item_by_artist(page.name, page.sister)) : page.name
-          });
-        }
-      }
-      const textarea = markdown_field((val) => {
-        chars.textContent = tl2(trans.value_characters_max, {
-          v: `${val.length}/1000`
-        });
-        chars.setAttribute("data-exceeded", val.length >= 1e3);
-        if (use_md) preview.setAttribute("disabled", val.length <= 0);
-      }, {}, "", "body", null, null, placeholder, legacy_textarea.maxLength, true, !is_reply);
-      legacy_textarea.replaceWith(textarea);
-      let chars;
-      let preview;
-      render(help_text, html`
-            ${use_md ? html.node`
-                <div class="tip preview" onclick=${() => markdown_preview(textarea.value())} ref=${(el) => preview = el} disabled="true">
-                    ${tl2(trans.preview)}
-                </div>
-            ` : ""}
-            <div class="tip characters" ref=${(el) => chars = el}>
-                ${tl2(trans.value_characters_max, { v: "0/1000" })}
-            </div>
-        `);
-      shout_form.addEventListener("keydown", (e) => {
-        if (e.ctrlKey && e.keyCode == 13) {
-          e.preventDefault();
-          send_button.querySelector(".btn-post-shout").click();
-          notify({
-            id: "shout",
-            title: tl2(trans.shouts),
-            body: tl2(trans.sent),
-            icon: "icon-16-shoutbox"
-          });
-        }
-      });
-    });
-  }
-  function shout_send(send_button) {
-    if (!send_button) return;
-    let button2 = send_button.querySelector(".btn-post-shout");
-    if (!button2) return;
-    button2.classList.add("btn-send-shout-generic");
-    button2.textContent = tl2(trans.send);
-    button2.removeAttribute("disabled");
-    if (page.mobile) return;
-    tippy_esm_default(button2, {
-      content: tl2(trans.send_quickly_with).replace(
-        "{kbd}",
-        keybind(["\u2318", "\u23CE"]).outerHTML
-      ),
-      allowHTML: true,
-      delay: [500, 0]
-    });
-  }
-  function shout_header(shout_controls) {
-    let panel;
-    let settings_btn;
-    if (page.subpage == "shoutbox_shout") {
-      panel = page.structure.main.querySelector(":scope > section");
-      let link = window.location.href;
-      panel.insertBefore(
-        html.node`
-            <div class="top-container">
-                <h2>
-                    <a class="text-colour-link" href=${link}>${tl2(trans.shouts)}</a>
-                </h2>
-                <div class="accompany view-buttons blend blend-v2">
-                    <p class="notice">${tl2(trans.single_shout)}</p>
-                </div>
-                <div class="view-buttons blend blend-v2">
-                    <button class="left-icon blend-v2-btn" data-type="settings" ref=${(el) => settings_btn = el}>
-                        ${tl2(trans.settings)}
-                    </button>
-                </div>
-            </div>
-        `,
-        panel.firstElementChild
-      );
-    } else if (shout_controls) {
-      panel = shout_controls.parentElement;
-      let select_btn = panel.querySelector(".dropdown-menu-clickable-button");
-      let header = panel.querySelector("h2");
-      if (header) header.parentElement.removeChild(header);
-      let link = window.location.href;
-      let shoutbox_link = "+shoutbox";
-      if (page.type == "user" || page.type == "event")
-        shoutbox_link = "shoutbox";
-      if (!page.subpage.startsWith("shoutbox")) link += `/${shoutbox_link}`;
-      panel.insertBefore(
-        html.node`
-            <div class="top-container">
-                <h2>
-                    <a class="text-colour-link" href=${link}>${tl2(trans.shouts)}</a>
-                </h2>
-                ${select_btn ? html.node`
-                    <div class="accompany view-buttons blend blend-v2">
-                        ${() => {
-          select_btn.classList.add(
-            "select-button",
-            "link-select",
-            "blend-v2-btn"
-          );
-          select_btn.classList.remove(
-            "section-control",
-            "dropdown-menu-clickable-button"
-          );
-          return shout_controls;
-        }}
-                    </div>
-                ` : ""}
-                <div class="view-buttons blend blend-v2">
-                    <button class="left-icon blend-v2-btn" data-type="settings" ref=${(el) => settings_btn = el}>
-                        ${tl2(trans.settings)}
-                    </button>
-                </div>
-            </div>
-        `,
-        panel.firstElementChild
-      );
-    }
-    if (!settings_btn) return;
-    tippy_esm_default(settings_btn, {
-      theme: "window",
-      content: html.node`
-            <div class="dialog-settings">
-                <div class="setting-group blend">
-                    ${setting({ id: "shout_markdown" })}
-                    ${setting({ id: "accessible_name_colours" })}
-                    ${setting({ id: "underline_links" })}
-                </div>
-            </div>
-        `,
-      placement: "bottom",
-      interactive: true,
-      interactiveBorder: 10,
-      trigger: "click",
-      appendTo: document.body
-    });
-    const cant_shout = panel.querySelector(".shouting-unavailable");
-    if (cant_shout) {
-      render(
-        cant_shout,
-        html`
-                <div class="loading-data-container">
-                    <div class="loading-data-text static" data-type="shouts">
-                        ${tl2(trans.cant_shout)}
-                    </div>
-                </div>
-            `
-      );
-    }
-  }
-  function parse_shout_queue() {
-    if (shout_parse_queue.length == 0) return;
-    const shout = shout_parse_queue.shift();
-    const parsed2 = markdown(shout.element.textContent);
-    shout.element.classList.add("markdown-body");
-    render(shout.element, html.node`${parsed2}`);
-    log("parsed one shout", "shout", "log");
-    if (shout_parse_queue.length > 0) setTimeout(parse_shout_queue, 50);
-  }
-  function shout_messages() {
-    if (!page.structure.main) return;
-    let alerts = page.structure.main.querySelectorAll(
-      ".shout-messages > .alert"
-    );
-    alerts.forEach((alert2) => {
-      if (alert2.classList.contains("alert-danger")) {
-        notify({
-          id: "shout",
-          title: tl2(trans.shouts),
-          body: tl2(trans.failed_to_send),
-          type: "error",
-          icon: "icon-16-shoutbox"
-        });
-      } else {
-        return;
-      }
-      alert2.remove();
-    });
-  }
-
-  // src/components/radio.js
+  // src/components/radio/radio.js
   function bleh_radio() {
     let radios = page.structure.side.querySelectorAll(".stationlink");
     radios.forEach((radio2) => {
@@ -58415,7 +58618,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     }
   }
 
-  // src/pages/api.js
+  // src/pages/home/api.js
   async function bleh_api() {
     if (page.subpage == "docs") return;
     page.structure.container = document.body.querySelector(".page-content");
@@ -58505,7 +58708,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     }
   }
 
-  // src/footer.js
+  // src/components/page/footer.js
   function bleh_footer() {
     let footer = document.body.querySelector("footer.footer");
     let extras = html.node`
@@ -58543,7 +58746,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       }}
                     </p>
                     <p>
-                        <a onclick=${() => sponsor()}>${{ html: tl2(trans.supported_by, { c: sponsoring, s: '<span class="b">', "/s": "</span>" }) }}</a>
+                        <a onclick=${() => sponsor2()}>${{ html: tl2(trans.supported_by, { c: sponsoring, s: '<span class="b">', "/s": "</span>" }) }}</a>
                     </p>
                 </div>
                 <div class="footer-web">
@@ -58586,15 +58789,13 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         `
     );
     let heart = footer.querySelector(".heart");
-    heart.addEventListener("click", () => sponsor());
+    heart.addEventListener("click", () => sponsor2());
   }
 
-  // src/components/dialog_extender.js
+  // src/components/dialog/dialog_extender.js
   function dialog_extender() {
-    log("dialog extender", "loop");
-    let wrappers = document.body.querySelectorAll(
-      ":scope > .popup_wrapper, :scope > div > .popup_wrapper"
-    );
+    const wrappers = document.body.querySelectorAll(":scope > .popup_wrapper, :scope > div > .popup_wrapper");
+    log(`found ${Array.from(wrappers).length} dialog(s)`, "loop", "log", { wrappers });
     wrappers.forEach((wrapper) => {
       let modal_dialog = wrapper.querySelector(
         ".modal-dialog:not([data-dialog-extender])"
@@ -58706,33 +58907,28 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         let delete_btn;
         if (delete_form)
           delete_btn = delete_form.querySelector(".btn-delete");
+        const submit_input = submit.querySelector("input");
+        const submit_button = submit.querySelector('[type="submit"]');
+        submit_button.classList = "btn primary icon";
+        submit_button.setAttribute("data-type", "item-edit");
+        submit_button.textContent = tl2(trans.edit);
         render(
           submit,
           html`
-                    <button
-                        class="see-more cancel"
-                        type="button"
-                        onclick=${() => dismiss.click()}
-                    >
+                    <button class="see-more cancel" type="button" onclick=${() => dismiss.click()}>
                         ${tl2(trans.cancel)}
                     </button>
                     <div class="fill" />
                     <div class="button-group">
                         ${delete_form ? html.node`
-                    <button class="btn icon danger-subtle" data-type="delete" type="button" onclick=${() => {
+                        <button class="btn icon danger-subtle" data-type="delete" type="button" onclick=${() => {
             delete_btn.click();
           }}>
-                        ${tl2(trans.delete)}
-                    </button>
-                    ` : ""}
-                        ${submit.querySelector("input")}
-                        <button
-                            class="btn primary icon"
-                            data-type="item-edit"
-                            type="submit"
-                        >
-                            ${tl2(trans.edit)}
+                            ${tl2(trans.delete)}
                         </button>
+                        ` : ""}
+                        ${submit_input}
+                        ${submit_button}
                     </div>
                 `
         );
@@ -58816,7 +59012,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     });
   }
 
-  // src/pages/auth.js
+  // src/pages/home/auth.js
   async function bleh_auth() {
     page.structure.container = document.body.querySelector(".page-content");
     try {
@@ -58930,7 +59126,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     );
   }
 
-  // src/pages/labs.js
+  // src/pages/profile/labs.js
   function bleh_labs() {
     if (page.subpage != "overview") return;
     let quilt = document.body.querySelector(
@@ -58944,7 +59140,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     }
   }
 
-  // src/pages/mualani.js
+  // src/pages/home/mualani.js
   function mualani() {
     page.structure.container = document.body.querySelector(".page-content");
     try {
@@ -58979,16 +59175,16 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
             <section class="flexy">
                 <h2>Buttons</h2>
                 <div class="flexy h">
-                    <button>Button</button>
-                    <button class="primary">Button</button>
-                    <button disabled>Button</button>
-                    <button class="primary" disabled>Button</button>
+                    <button class="btn">Button</button>
+                    <button class="btn primary">Button</button>
+                    <button class="btn" disabled>Button</button>
+                    <button class="btn primary" disabled>Button</button>
                 </div>
                 <div class="flexy h">
-                    <button class="danger-subtle">Button</button>
-                    <button class="primary danger">Button</button>
-                    <button class="danger-subtle" disabled>Button</button>
-                    <button class="primary danger" disabled>Button</button>
+                    <button class="btn danger-subtle">Button</button>
+                    <button class="btn primary danger">Button</button>
+                    <button class="btn danger-subtle" disabled>Button</button>
+                    <button class="btn primary danger" disabled>Button</button>
                 </div>
             </section>
             <section class="flexy">
@@ -59007,7 +59203,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                 <h2>Notifications</h2>
                 <div class="flexy h">
                     <button
-                        class="continue"
+                        class="btn continue"
                         onclick=${() => notify({
         id: "test",
         title: "testing!",
@@ -59017,7 +59213,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                         Deliver notification
                     </button>
                     <button
-                        class="continue"
+                        class="btn continue"
                         onclick=${() => notify({
         id: "test",
         title: "testing!",
@@ -59028,7 +59224,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                         Deliver persistent notification
                     </button>
                     <button
-                        class="continue"
+                        class="btn continue"
                         onclick=${() => {
         let notification = notify({
           id: "async",
@@ -59059,7 +59255,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
             <section class="flexy">
                 <h2>Status alerts</h2>
                 <button
-                    class="continue"
+                    class="btn continue"
                     onclick=${() => status({
         title: "test alert",
         body: "haiaiai nothing to worry about >_<"
@@ -59070,7 +59266,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
             </section>
             <section class="flexy">
                 <h2>Modals</h2>
-                <button class="continue" onclick=${() => dialog_loop()}>
+                <button class="btn continue" onclick=${() => dialog_loop()}>
                     Open dialog loop
                 </button>
             </section>
@@ -59095,7 +59291,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
   }
   function dialog_loop() {
     const num = Math.random();
-    dialog({
+    dialog2({
       id: `loop_${num}`,
       title: num,
       body: html.node`
@@ -59104,11 +59300,11 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     });
   }
 
-  // src/components/dismissed.js
+  // src/components/dialog/dismissed.js
   function load_dismissed() {
   }
 
-  // src/components/notices.js
+  // src/components/dialog/notices.js
   function notices() {
     const res = localStorage.getItem("bleh_notices");
     const expire = Number(localStorage.getItem("bleh_notices_expire"));
@@ -59160,7 +59356,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     `);
   }
 
-  // src/components/tags.js
+  // src/components/music/tags.js
   function tag_page() {
     if (!page.structure.main) return;
     const tags = page.structure.main.querySelectorAll(".big-tags-item:not([data-tagged])");
@@ -59214,7 +59410,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         notify_if_new_update();
         lotus();
         oracle_data();
-        sponsors();
+        sponsors2();
       },
       on_mutation: main_flow,
       on_page_change: load_page,
@@ -59277,7 +59473,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
   }
   function handle_error(e = null) {
     document.body.classList.add("florence-loaded");
-    dialog({
+    dialog2({
       id: "error",
       title: "An error has occurred",
       body: html.node`
@@ -59507,7 +59703,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     if (ff("page_title")) {
       let template = tl2(trans.page_templates.type);
       if (!page.state.error) {
-        if ((page.type == "user" || page.type == "artist" || page.type == "events" || page.type == "tag") && page.subpage != "home")
+        if ((page.type == "user" || page.type == "artist" || page.type == "events" || page.type == "tag") && page.subpage != "home" && !(page.subpage.startsWith("playlists_") && page.subpage.endsWith("_overview")))
           template = tl2(trans.page_templates.name_type);
         else if (page.type == "album" || page.type == "track")
           template = tl2(trans.page_templates.name_sister_type);
@@ -59556,7 +59752,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       else if (page.subpage.startsWith("event_attendance"))
         title = tl2(trans.attendance);
       else if (page.subpage == "event_lineup") title = tl2(trans.lineup);
-      else if (page.subpage == "playlists_playlists")
+      else if (page.subpage == "playlists_playlists" || page.subpage.startsWith("playlists_") && page.subpage.endsWith("_overview"))
         title = tl2(trans.playlists);
       else if (page.subpage == "auth") title = tl2(trans.connect_app);
       else if (page.subpage.startsWith("image") && page.type == "artist")
@@ -59627,36 +59823,36 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     render(
       page.structure.indicator,
       html`
-            <div class="bleh">
-                <strong>ver</strong>
-                <span>${version.brand}</span>
-                <span>${version.build}</span>
-                <span>${version.sku}</span>
+            <div class="page-indicator-elem bleh">
+                <strong class="page-indicator-sub page-indicator-head">ver</strong>
+                <span class="page-indicator-sub">${version.brand}</span>
+                <span class="page-indicator-sub">${version.build}</span>
+                <span class="page-indicator-sub">${version.sku}</span>
             </div>
-            <div class="page">
-                <strong>auth</strong>
-                <span>${auth.name}</span>
-                <span>${lang}</span>
+            <div class="page-indicator-elem page">
+                <strong class="page-indicator-sub page-indicator-head">auth</strong>
+                <span class="page-indicator-sub">${auth.name}</span>
+                <span class="page-indicator-sub">${lang}</span>
             </div>
-            <div class="page">
-                <strong onclick=${() => console.info(page)}>page</strong>
-                <span>${page.type}</span>
-                <span>${page.subpage}</span>
+            <div class="page-indicator-elem page">
+                <strong class="page-indicator-sub page-indicator-head" onclick=${() => console.info(page)}>page</strong>
+                <span class="page-indicator-sub">${page.type}</span>
+                <span class="page-indicator-sub">${page.subpage}</span>
             </div>
-            <div class="page">
-                <strong></strong>
-                <span>${page.name}</span>
-                <span>${page.sister}</span>
+            <div class="page-indicator-elem page">
+                <strong class="page-indicator-sub page-indicator-head"></strong>
+                <span class="page-indicator-sub">${page.name || "?"}</span>
+                <span class="page-indicator-sub">${page.sister || "?"}</span>
             </div>
-            <div class="page">
-                <strong>season</strong>
-                <span>${stored_season.id}</span>
-                <span>${stored_season.year}</span>
-                <span>${stored_season.offset}</span>
+            <div class="page-indicator-elem page">
+                <strong class="page-indicator-sub page-indicator-head">season</strong>
+                <span class="page-indicator-sub">${stored_season.id}</span>
+                <span class="page-indicator-sub">${stored_season.year}</span>
+                <span class="page-indicator-sub">${stored_season.offset}</span>
             </div>
-            <div class="page">
-                <strong>solarium</strong>
-                <span>${settings.solarium}</span>
+            <div class="page-indicator-elem page">
+                <strong class="page-indicator-sub page-indicator-head">solarium</strong>
+                <span class="page-indicator-sub">${settings.solarium}</span>
             </div>
         `
     );
@@ -59765,7 +59961,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     es: {
       name: "Espa\xF1ol",
       by: ["soleilth"],
-      last_updated: "2025-11-27"
+      last_updated: "2026-02-01"
     },
     it: {
       name: "Italiano",
@@ -59795,7 +59991,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     ru: {
       name: "\u0420\u0443\u0441\u0441\u043A\u0438\u0439",
       by: ["crawqxx", "techplayz32"],
-      last_updated: "2025-12-16"
+      last_updated: "2026-02-07"
     },
     zh: {
       name: "\u7B80\u4F53\u4E2D\u6587",
@@ -60589,7 +60785,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     close_friends: {
       en: "Close friends",
-      de: "Engen Freunde"
+      de: "Engen Freunde",
+      ru: "\u0411\u043B\u0438\u0437\u043A\u0438\u0435 \u0434\u0440\u0443\u0437\u044C\u044F",
+      es: "Amigos cercanos"
     },
     friends: {
       en: "Friends",
@@ -60615,10 +60813,14 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     add_friends: {
       en: "Add close friends",
-      de: "Engen Freunde hinzuf\xFCgen"
+      de: "Engen Freunde hinzuf\xFCgen",
+      ru: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0431\u043B\u0438\u0437\u043A\u0438\u0445 \u0434\u0440\u0443\u0437\u0435\u0439",
+      es: "A\xF1adir amigos cercanos"
     },
     edit_close_friends: {
-      en: "Edit close friends"
+      en: "Edit close friends",
+      ru: "\u0420\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0431\u043B\u0438\u0437\u043A\u0438\u0445 \u0434\u0440\u0443\u0437\u0435\u0439",
+      es: "Editar amigos cercanos"
     },
     starred_friend: {
       name: {
@@ -60656,31 +60858,45 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       }
     },
     friend_difference: {
-      en: "Close friends is a bleh system that allows you to keep up to date on your friend\u2019s listening history, it does not influence your following list."
+      en: "Close friends is a bleh system that allows you to keep up to date on your friend\u2019s listening history, it does not influence your following list.",
+      ru: "\u0411\u043B\u0438\u0437\u043A\u0438\u0435 \u0434\u0440\u0443\u0437\u044C\u044F - \u044D\u0442\u043E \u0444\u0443\u043D\u043A\u0446\u0438\u044F bleh, \u043A\u043E\u0442\u043E\u0440\u0430\u044F \u043F\u043E\u0437\u0432\u043E\u043B\u044F\u0435\u0442 \u0441\u043B\u0435\u0434\u0438\u0442\u044C \u0437\u0430 \u0438\u0441\u0442\u043E\u0440\u0438\u0435\u0439 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439 \u0432\u0430\u0448\u0438\u0445 \u0434\u0440\u0443\u0437\u0435\u0439 \u0438 \u043D\u0435 \u0432\u043B\u0438\u044F\u0435\u0442 \u043D\u0430 \u0441\u043F\u0438\u0441\u043E\u043A \u0432\u0430\u0448\u0438\u0445 \u043F\u043E\u0434\u043F\u0438\u0441\u043E\u043A.",
+      es: "Amigos cercanos es un sistema de bleh que te permite estar al d\xEDa con el historial de escucha de tus amigos, no afecta tu lista de seguidos."
     },
     friend_difference_min: {
-      en: "bleh-only"
+      en: "bleh-only",
+      ru: "\u0442\u043E\u043B\u044C\u043A\u043E \u0432 bleh",
+      es: "Solo en bleh"
     },
     add_as_friend: {
       en: "Add as close friend",
-      de: "Als engen Freund hinzuf\xFCgen"
+      de: "Als engen Freund hinzuf\xFCgen",
+      ru: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0432 \u0441\u043F\u0438\u0441\u043E\u043A \u0431\u043B\u0438\u0437\u043A\u0438\u0445 \u0434\u0440\u0443\u0437\u0435\u0439",
+      es: "A\xF1adir como amigo cercano"
     },
     remove_friend: {
       name: {
         en: "Remove close friend",
-        de: "Engen Freund entfernen"
+        de: "Engen Freund entfernen",
+        ru: "\u0423\u0434\u0430\u043B\u0438\u0442\u044C \u0438\u0437 \u0441\u043F\u0438\u0441\u043A\u0430 \u0431\u043B\u0438\u0437\u043A\u0438\u0445 \u0434\u0440\u0443\u0437\u0435\u0439",
+        es: "Remover amigo cercano"
       },
       body: {
-        en: "Continue removing {u} as a close friend? (bleh-only)"
+        en: "Continue removing {u} as a close friend? (bleh-only)",
+        ru: "\u041F\u0440\u043E\u0434\u043E\u043B\u0436\u0438\u0442\u044C \u0443\u0434\u0430\u043B\u0435\u043D\u0438\u0435 {u} \u0438\u0437 \u0441\u043F\u0438\u0441\u043A\u0430 \u0431\u043B\u0438\u0437\u043A\u0438\u0445 \u0434\u0440\u0443\u0437\u0435\u0439? (bleh-only)",
+        es: "\xBFContinuar y remover a {u} como amigo cercano? (Solo en bleh)"
       }
     },
     added_as_friend: {
       en: "Added close friend",
-      de: "Engen Freund hinzugef\xFCgt"
+      de: "Engen Freund hinzugef\xFCgt",
+      ru: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D \u0432 \u0441\u043F\u0438\u0441\u043E\u043A \u0431\u043B\u0438\u0437\u043A\u0438\u0445 \u0434\u0440\u0443\u0437\u0435\u0439",
+      es: "Amigo cercano a\xF1adido"
     },
     removed_friend: {
       en: "Removed close friend",
-      de: "Engen Freund entfernt"
+      de: "Engen Freund entfernt",
+      ru: "\u0423\u0434\u0430\u043B\u0435\u043D \u0438\u0437 \u0441\u043F\u0438\u0441\u043A\u0430 \u0431\u043B\u0438\u0437\u043A\u0438\u0445 \u0434\u0440\u0443\u0437\u0435\u0439",
+      es: "Amigo cercano removido"
     },
     added_star: {
       en: "Added star status",
@@ -60707,7 +60923,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     removed_star: {
       en: "Removed star status",
       de: "Markierung entfernt",
-      es: "Removido de favoritos",
+      es: "Favorito removido",
       it: "Rimosso dai preferiti",
       pt: "Status de favorito removido",
       sv: "Tog bort stj\xE4rnm\xE4rke",
@@ -60750,7 +60966,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     account_creation: {
       // dont translate to "scrobbling since"
-      en: "Account creation date"
+      en: "Account creation date",
+      ru: "\u0414\u0430\u0442\u0430 \u0441\u043E\u0437\u0434\u0430\u043D\u0438\u044F \u0430\u043A\u043A\u0430\u0443\u043D\u0442\u0430",
+      es: "Fecha de creaci\xF3n de cuenta"
     },
     account_scrobbling_since_replace: {
       // copy this from last.fm 1:1 (including the space at the end if there)
@@ -60850,7 +61068,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     count_tracks: {
       // tracks on an album
-      en: "{c} tracks"
+      en: "{c} tracks",
+      ru: "{c} \u0442\u0440\u0435\u043A\u043E\u0432",
+      es: "{c} temas"
     },
     count_scrobbles: {
       en: "{c} scrobbles",
@@ -61879,10 +62099,14 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       zh: "\u7ED3\u675F\u65E5\u671F"
     },
     link: {
-      en: "Link"
+      en: "Link",
+      ru: "\u0421\u0441\u044B\u043B\u043A\u0430",
+      es: "V\xEDnculo"
     },
     create_link: {
-      en: "Create link"
+      en: "Create link",
+      es: "Crear v\xEDnculo",
+      ru: "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u0441\u0441\u044B\u043B\u043A\u0443"
     },
     text: {
       en: "Text",
@@ -61986,7 +62210,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     bookmark_item: {
       // bookmark track/artist/album
-      en: "Bookmark {v}"
+      en: "Bookmark {v}",
+      ru: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C {v} \u0432 \u0437\u0430\u043A\u043B\u0430\u0434\u043A\u0438",
+      es: "Marcar {v}"
     },
     charts: {
       en: "Charts",
@@ -62289,7 +62515,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     avatar_desc: {
       // shown as a description when setting your avatar
-      en: "Present yourself site-wide in your own style"
+      en: "Present yourself site-wide in your own style",
+      ru: "\u041F\u0440\u0435\u0434\u0441\u0442\u0430\u0432\u044C\u0442\u0435 \u0441\u0435\u0431\u044F \u043F\u043E \u0432\u0441\u0435\u043C\u0443 \u0441\u0430\u0439\u0442\u0443 \u0432 \u0432\u0430\u0448\u0435\u043C \u0441\u0442\u0438\u043B\u0435",
+      es: "Pres\xE9ntate con tu propio estilo por todo el sitio"
     },
     customise: {
       en: "Customise",
@@ -62371,17 +62599,23 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     apply_profile_accent: {
       // global accent: the one set in bleh settings
       // profile accent: the sponsor-exclusive colour in account settings
-      en: "Use profile accent globally"
+      en: "Use profile accent globally",
+      ru: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C \u0446\u0432\u0435\u0442 \u043F\u0440\u043E\u0444\u0438\u043B\u044F \u0433\u043B\u043E\u0431\u0430\u043B\u044C\u043D\u043E",
+      es: "Usar acento de perfil globalmente"
     },
     apply_global_accent: {
       // global accent: the one set in bleh settings
       // profile accent: the sponsor-exclusive colour in account settings
-      en: "Copy current accent to profile"
+      en: "Copy current accent to profile",
+      ru: "\u0421\u043A\u043E\u043F\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0442\u0435\u043A\u0443\u0449\u0438\u0439 \u0430\u043A\u0446\u0435\u043D\u0442 \u0432 \u043F\u0440\u043E\u0444\u0438\u043B\u044C",
+      es: "Copiar acento actual al perfil"
     },
     this_will_replace_your_global_accent: {
       // global accent: the one set in bleh settings
       // profile accent: the sponsor-exclusive colour in account settings
-      en: "This will replace your global accent (the one in use right now)"
+      en: "This will replace your global accent (the one in use right now)",
+      ru: "\u042D\u0442\u043E \u0437\u0430\u043C\u0435\u043D\u0438\u0442 \u0432\u0430\u0448 \u0433\u043B\u043E\u0431\u0430\u043B\u044C\u043D\u044B\u0439 \u0430\u043A\u0446\u0435\u043D\u0442 (\u0442\u043E\u0442, \u043A\u043E\u0442\u043E\u0440\u044B\u0439 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0435\u0442\u0441\u044F \u0441\u0435\u0439\u0447\u0430\u0441)",
+      es: "Esto reemplazar\xE1 tu acento global (el que est\xE1s usando ahora mismo)"
     },
     solarium: {
       name: {
@@ -62505,7 +62739,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     clear: {
       en: "Clear",
       de: "L\xF6schen",
-      es: "Limpiar",
+      es: "Borrar",
       it: "Cancella",
       pt: "Limpar",
       pl: "Wyczy\u015B\u0107",
@@ -62748,10 +62982,14 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pl: "S\u0105siedzi"
     },
     follows_you: {
-      en: "Follows you!"
+      en: "Follows you!",
+      es: "\xA1Te sigue!",
+      ru: "\u041F\u043E\u0434\u043F\u0438\u0441\u0430\u043D \u043D\u0430 \u0432\u0430\u0441!"
     },
     user_follows_you: {
-      en: "{u} follows you!"
+      en: "{u} follows you!",
+      es: "\xA1{u} te sigue!",
+      ru: "{u} \u043F\u043E\u0434\u043F\u0438\u0441\u0430\u043D \u043D\u0430 \u0432\u0430\u0441!"
     },
     website: {
       en: "Website",
@@ -62840,7 +63078,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     more_like_name: {
       // more artists like kitagawa
       // more albums like etc.
-      en: "More like {n}"
+      en: "More like {n}",
+      ru: "\u041F\u043E\u0445\u043E\u0436\u0438\u0435 \u043D\u0430 {n}",
+      es: "M\xE1s como {n}"
     },
     biography: {
       en: "Biography",
@@ -63172,7 +63412,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       // valentines easter egg
       // u: username
       // v: Super / Low / Very Low etc.
-      en: "You and {u} are a {v} match"
+      en: "You and {u} are a {v} match",
+      ru: "\u0412\u044B \u0438 {u} - \u0443 \u0432\u0430\u0441 {v} \u0441\u043E\u0432\u043F\u0430\u0434\u0435\u043D\u0438\u0435",
+      es: "T\xFA y {u} tienen una compatiblidad {v}"
     },
     taste_similarity: {
       en: "Taste similarity",
@@ -63187,11 +63429,15 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     generic_lastfm_compatibility_message: {
       // based on the default message last.fm shows
       // \n is a new line
-      en: "Your compatibility with {u} is {r}.\nYou both listen to {a}."
+      en: "Your compatibility with {u} is {r}.\nYou both listen to {a}.",
+      ru: "\u0412\u0430\u0448\u0430 \u0441\u043E\u0432\u043C\u0435\u0441\u0442\u0438\u043C\u043E\u0441\u0442\u044C \u0441 {u} \u0441\u043E\u0441\u0442\u0430\u0432\u043B\u044F\u0435\u0442 {r}.\n\u0412\u044B \u043E\u0431\u0430 \u0441\u043B\u0443\u0448\u0430\u0435\u0442\u0435 {a}.",
+      es: "Tu compatibilidad con {u} es {r}. \nAmbos escuchan a {a}."
     },
     subject: {
       // as in an email/message subject
-      en: "Subject"
+      en: "Subject",
+      ru: "\u0422\u0435\u043C\u0430",
+      es: "Asunto"
     },
     message: {
       // as in a direct message
@@ -63205,12 +63451,14 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pl: "Wiadomo\u015B\u0107"
     },
     send_message: {
-      en: "Send message"
+      en: "Send message",
+      ru: "\u041E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C \u0441\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u0435",
+      es: "Enviar mensaje"
     },
     join_discord: {
       en: "Join Discord",
       de: "Discord beitreten",
-      es: "Unirse al Discord",
+      es: "\xDAnete al Discord",
       it: "Unisciti al Discord",
       sv: "G\xE5 med i Discord",
       ru: "\u041F\u0440\u0438\u0441\u043E\u0435\u0434\u0438\u043D\u0438\u0442\u044C\u0441\u044F \u043A Discord",
@@ -63360,7 +63608,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pl: "Aktualna wersja"
     },
     updating_to_version: {
-      en: "Updating to version"
+      en: "Updating to version",
+      ru: "\u041E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u0435 \u0434\u043E \u0432\u0435\u0440\u0441\u0438\u0438",
+      es: "Actualizando a versi\xF3n"
     },
     manage_data: {
       en: "Manage data",
@@ -63674,7 +63924,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pl: "Kliknij aby skopiowa\u0107"
     },
     cut: {
-      en: "Cut"
+      en: "Cut",
+      ru: "\u0412\u044B\u0440\u0435\u0437\u0430\u0442\u044C",
+      es: "Cortar"
     },
     paste: {
       en: "Paste",
@@ -63689,7 +63941,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       de: "Text einf\xFCgen",
       es: "Pegar texto",
       pt: "Colar texto",
-      pl: "Wklej tekst"
+      pl: "Wklej tekst",
+      ru: "\u0412\u0441\u0442\u0430\u0432\u0438\u0442\u044C \u0442\u0435\u043A\u0441\u0442"
     },
     undo: {
       en: "Undo",
@@ -64044,7 +64297,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     cards: {
       // as in the view mode
-      en: "Cards"
+      en: "Cards",
+      ru: "\u041A\u0430\u0440\u0442\u043E\u0447\u043A\u0438",
+      es: "Tarjetas"
     },
     grid: {
       // as in the view mode
@@ -64157,7 +64412,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     love_track: {
       en: "Love track",
       de: "Als Lieblingssong markieren",
-      es: "Marcar como favorito",
+      es: "A\xF1adir a favoritos",
       it: "Imposta come preferito",
       ru: "\u041E\u0442\u043C\u0435\u0442\u0438\u0442\u044C \u0442\u0440\u0435\u043A \u043A\u0430\u043A \u043B\u044E\u0431\u0438\u043C\u044B\u0439",
       pt: "Marcar como favorito",
@@ -64824,10 +65079,14 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pl: "Podtytu\u0142"
     },
     profile_title: {
-      en: "Profile title"
+      en: "Profile title",
+      es: "T\xEDtulo de perfil",
+      ru: "\u0417\u0430\u0433\u043E\u043B\u043E\u0432\u043E\u043A \u043F\u0440\u043E\u0444\u0438\u043B\u044F"
     },
     pronoun_tip: {
-      en: "Include pronouns at the start or end of your title to separate them visually"
+      en: "Include pronouns at the start or end of your title to separate them visually",
+      es: "Incluye pronombres al inicio o final de tu t\xEDtulo para separarlos visualmente",
+      ru: "\u0420\u0430\u0437\u043C\u0435\u0441\u0442\u0438\u0442\u044C \u043C\u0435\u0441\u0442\u043E\u0438\u043C\u0435\u043D\u0438\u044F \u0432 \u043D\u0430\u0447\u0430\u043B\u0435 \u0438\u043B\u0438 \u0432 \u043A\u043E\u043D\u0446\u0435 \u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043A\u0430, \u0447\u0442\u043E\u0431\u044B \u0432\u0438\u0437\u0443\u0430\u043B\u044C\u043D\u043E \u043E\u0442\u0434\u0435\u043B\u0438\u0442\u044C \u0438\u0445"
     },
     block_list: {
       en: "Block list",
@@ -64902,7 +65161,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     blocked_user_message: {
       en: "Cannot direct message you",
       de: "Kann dir keine Direktnachrichten senden",
-      es: "No pueden mandarte mensajes directos",
+      es: "No pueden enviarte mensajes directos",
       it: "Non pu\xF2 inviarti messaggi privati",
       pt: "N\xE3o podem lhe enviar mensagens diretas",
       sv: "Kan inte skicka privat meddelande till dig",
@@ -65193,7 +65452,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     search_for_anything: {
       // used as a placeholder for the global search bar
-      en: "Search for anything"
+      en: "Search for anything",
+      ru: "\u041D\u0430\u0439\u0442\u0438 \u0447\u0442\u043E \u0443\u0433\u043E\u0434\u043D\u043E",
+      es: "Busca cualquier cosa"
     },
     search_guest: {
       en: "Search guest appearances",
@@ -65473,13 +65734,18 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       ru: "\u0420\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0437\u0430\u043C\u0435\u0442\u043A\u0443 \u043F\u0440\u043E\u0444\u0438\u043B\u044F"
     },
     saved_note_for_user: {
-      en: "Saved note for {u}"
+      en: "Saved note for {u}",
+      es: "Anotaci\xF3n para {u} guardada",
+      ru: "\u0417\u0430\u043C\u0435\u0442\u043A\u0430 \u0441\u043E\u0445\u0440\u0430\u043D\u0435\u043D\u0430 \u0434\u043B\u044F {u}"
     },
     cleared_note_for_user: {
-      en: "Cleared note for {u}"
+      en: "Cleared note for {u}",
+      es: "Anotaci\xF3n para {u} borrada",
+      ru: "\u0417\u0430\u043C\u0435\u0442\u043A\u0430 \u0443\u0434\u0430\u043B\u0435\u043D\u0430 \u0434\u043B\u044F {u}"
     },
     manage: {
-      en: "Manage"
+      en: "Manage",
+      es: "Gestionar"
     },
     font: {
       name: {
@@ -65658,7 +65924,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     enter_font_names: {
       en: "Enter installed font name(s), separated by commas",
       de: "Gebe die installierte Schriftart durch Kommas getrennt ein",
-      es: "Ingresa los nombres de fuentes instaladas, separados por comas",
+      es: "Ingresa fuentes instaladas, separadas por comas",
       it: "Inserisci nomi di font installati, separati da virgole",
       pt: "Nomes das fontes instaladas, separados por v\xEDrgulas",
       sv: "Skriv installerade typsnittsnamn, separerade av kommatecken",
@@ -65951,7 +66217,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       body: {
         en: "Last.fm can optionally send promotional emails from time to time",
         de: "Last.fm kann optional gelegentlich Werbe-E-Mails senden",
-        es: "Last.fm puede opcionalmente mandarte correos electr\xF3nicos promocionales de vez en cuando",
+        es: "Last.fm puede opcionalmente enviarte correos electr\xF3nicos promocionales de vez en cuando",
         it: "Last.fm pu\xF2 opzionalmente inviare email promozionali ogni tanto",
         pt: "A Last.fm pode, opcionalmente, enviar e-mails promocionais de tempos em tempos",
         sv: "Last.fm kan valfritt skicka reklammejl d\xE5 och d\xE5",
@@ -66119,7 +66385,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     api_status: {
       en: "API status",
       de: "API-Status",
-      es: "Estatus de API",
+      es: "Estado de API",
       it: "Stato API",
       pt: "Status da API",
       sv: "API-status",
@@ -66832,10 +67098,14 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Sem descri\xE7\xE3o"
     },
     image: {
-      en: "Image"
+      en: "Image",
+      es: "Imagen",
+      ru: "\u0418\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435"
     },
     attach_image: {
-      en: "Attach image"
+      en: "Attach image",
+      es: "Adjuntar imagen",
+      ru: "\u041F\u0440\u0438\u043A\u0440\u0435\u043F\u0438\u0442\u044C \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435"
     },
     change_avatar: {
       en: "Change avatar",
@@ -67337,7 +67607,10 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       // lowercase in design
       // ignore the curly brackets, only translate the '{c} wonderful people' thing
       // c: replaced with a number of sponsors
-      en: "{s}{c} sponsoring{/s} \u2661"
+      en: "{s}{c} sponsoring{/s} \u2661",
+      ru: "{s}{c} \u0437\u0430\u043C\u0435\u0447\u0430\u0442\u0435\u043B\u044C\u043D\u044B\u0445 \u043B\u044E\u0434\u0435\u0439{/s} \u2661",
+      // wonderful people -tech
+      es: "{s}{c} patrocinando{/s} \u2661"
     },
     love_lower: {
       // replaces the {h} in the above sentence
@@ -67547,7 +67820,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       ru: "\u041D\u0438\u0447\u0435\u0433\u043E \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u043E \u043F\u043E \u0432\u0430\u0448\u0435\u043C\u0443 \u0437\u0430\u043F\u0440\u043E\u0441\u0443"
     },
     create_collage: {
-      en: "Create collage"
+      en: "Create collage",
+      ru: "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u043A\u043E\u043B\u043B\u0430\u0436",
+      es: "Crear collage"
     },
     create_a_collage: {
       en: "Create a collage of your choosing",
@@ -68059,7 +68334,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     example: {
       en: "e.g. {v}",
       de: "z.B. {v}",
-      es: "e.g. {v}",
+      es: "p. ej. {v}",
       it: "es. {v}",
       pt: "ex.: {v}",
       sv: "t.ex. {v}",
@@ -68174,7 +68449,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         pt: "Banner do perfil"
       },
       body: {
-        en: "Showcase an image of your choosing across your profile"
+        en: "Showcase an image of your choosing across your profile",
+        ru: "\u041F\u043E\u043A\u0430\u0437\u0430\u0442\u044C \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435, \u0432\u044B\u0431\u0440\u0430\u043D\u043D\u043E\u0435 \u0432\u0430\u043C\u0438, \u0432 \u0432\u0430\u0448\u0435\u043C \u043F\u0440\u043E\u0444\u0438\u043B\u0435",
+        es: "Muestra una imagen de tu elecci\xF3n en tu perfil"
       }
     },
     profile_accent: {
@@ -68440,7 +68717,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       pt: "Minis"
     },
     explore_minis: {
-      en: "Explore minis"
+      en: "Explore minis",
+      ru: "\u0418\u0441\u0441\u043B\u0435\u0434\u0443\u0439 \u043C\u0438\u043D\u0438",
+      es: "Explorar minis"
     },
     minis_description: {
       en: "Play mini-games, puzzles, and interact with tools all powered by your listening history",
@@ -68725,7 +69004,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       release: {
         en: "Album was released on {v}",
         de: "Das Album wurde am {v} ver\xF6ffentlicht",
-        es: "El {\xE1lbum} fue lanzado en {v}",
+        es: "El \xE1lbum fue lanzado en {v}",
         it: "L\u2019album \xE8 stato rilasciato il {v}",
         pt: "O \xE1lbum foi lan\xE7ado em {v}",
         sv: "Albumet sl\xE4pptes {v}",
@@ -69443,7 +69722,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       name: {
         en: "Simulate horizontal scrolling",
         de: "Horizontales Scrollen simulieren",
-        es: "Simular scrolling horizontal",
+        es: "Simular desplazamiento horizontal",
         it: "Simula scorrimento orizzontale",
         pt: "Simular rolagem horizontal",
         sv: "Simulera v\xE5gr\xE4t skrollning",
@@ -69565,11 +69844,15 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     value_less: {
       // 50 less than last month
-      en: "{v} less"
+      en: "{v} less",
+      ru: "{v} \u043C\u0435\u043D\u044C\u0448\u0435",
+      es: "{v} menos"
     },
     value_more: {
       // 50 more than last month
-      en: "{v} more"
+      en: "{v} more",
+      ru: "{v} \u0431\u043E\u043B\u044C\u0448\u0435",
+      es: "{v} m\xE1s"
     },
     menu_replacement: {
       name: {
@@ -69578,14 +69861,15 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         es: "Reemplazar men\xFAs de clic derecho nativos del navegador",
         it: "Sostituisci i menu contestuali nativi del browser",
         pt: "Substituir menus de clique direito nativos do navegador",
-        ru: "\u0417\u0430\u043C\u0435\u043D\u0438\u0442\u044C \u0432\u0441\u0442\u0440\u043E\u0435\u043D\u043D\u044B\u0435 \u043C\u0435\u043D\u044E \u043F\u0440\u0430\u0432\u043E\u0439 \u043A\u043D\u043E\u043F\u043A\u0438 \u043C\u044B\u0448\u0438 \u0431\u0440\u0430\u0443\u0437\u0435\u0440\u0430"
+        ru: "\u0417\u0430\u043C\u0435\u043D\u0438\u0442\u044C \u043D\u0430\u0442\u0438\u0432\u043D\u044B\u0435 \u043A\u043E\u043D\u0442\u0435\u043A\u0441\u0442\u043D\u044B\u0435 \u043C\u0435\u043D\u044E \u0431\u0440\u0430\u0443\u0437\u0435\u0440\u0430"
       },
       body: {
         en: "Provide bleh context-specific actions when right-clicking",
         de: "bleh-kontextspezifische Aktionen beim Rechtsklick anzeigen",
         es: "Proporciona acciones espec\xEDficas de bleh al hacer clic derecho",
         it: "Fornisci azioni specifiche a bleh nei menu contestuali",
-        pt: "Fornecer a\xE7\xF5es espec\xEDficas do bleh ao clicar com o bot\xE3o direito"
+        pt: "Fornecer a\xE7\xF5es espec\xEDficas do bleh ao clicar com o bot\xE3o direito",
+        ru: "\u041F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u043A\u043E\u043D\u0442\u0435\u043A\u0441\u0442\u043D\u043E\u2011\u0437\u0430\u0432\u0438\u0441\u0438\u043C\u044B\u0435 \u0434\u0435\u0439\u0441\u0442\u0432\u0438\u044F bleh \u043F\u0440\u0438 \u0449\u0435\u043B\u0447\u043A\u0435 \u043F\u0440\u0430\u0432\u043E\u0439 \u043A\u043D\u043E\u043F\u043A\u043E\u0439 \u043C\u044B\u0448\u0438"
       }
     },
     you_have_new_badges: {
@@ -69608,7 +69892,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         en: "View expanded details on all languages for use when translating",
         de: "Erweiterte Details zu allen Sprachen ansehen, die bei der \xDCbersetzung verwendet werden k\xF6nnen",
         es: "Ve detalles ampliados de todos los idiomas para usar al traducir",
-        pt: "Veja detalhes expandidos sobre todos os idiomas para uso ao traduzir"
+        pt: "Veja detalhes expandidos sobre todos os idiomas para uso ao traduzir",
+        ru: "\u041F\u0440\u043E\u0441\u043C\u043E\u0442\u0440 \u0440\u0430\u0441\u0448\u0438\u0440\u0435\u043D\u043D\u044B\u0445 \u0441\u0432\u0435\u0434\u0435\u043D\u0438\u0439 \u043E \u0432\u0441\u0435\u0445 \u044F\u0437\u044B\u043A\u0430\u0445 \u0434\u043B\u044F \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u0438\u044F \u043F\u0440\u0438 \u043F\u0435\u0440\u0435\u0432\u043E\u0434\u0435"
       }
     },
     translate: {
@@ -69623,7 +69908,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       en: "Translation key",
       de: "\xDCbersetzungsschl\xFCssel",
       es: "Clave de traducci\xF3n",
-      pt: "Chave de tradu\xE7\xE3o"
+      pt: "Chave de tradu\xE7\xE3o",
+      ru: "\u041A\u043B\u044E\u0447 \u043F\u0435\u0440\u0435\u0432\u043E\u0434\u0430"
+      // this is kinda hard to translate, especially the word 'key', so this is what i came up with -tech
     },
     original: {
       en: "Original",
@@ -69665,188 +69952,316 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       }
     },
     current_status: {
-      en: "Current status"
+      en: "Current status",
+      ru: "\u0422\u0435\u043A\u0443\u0449\u0438\u0439 \u0441\u0442\u0430\u0442\u0443\u0441",
+      es: "Estado actual"
     },
     status_cafe_too_many_requests: {
-      en: "paused loading temporarily @w@"
+      en: "paused loading temporarily @w@",
+      ru: "\u0437\u0430\u0433\u0440\u0443\u0437\u043A\u0430 \u0441\u0442\u0430\u0442\u0443\u0441\u0430 \u0432\u0440\u0435\u043C\u0435\u043D\u043D\u043E \u043F\u0440\u0438\u043E\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u043D\u0430 @w@",
+      es: "carga temporalmente pausada @w@"
     },
     loading_status: {
-      en: "loading status"
+      en: "loading status",
+      ru: "\u0437\u0430\u0433\u0440\u0443\u0437\u043A\u0430 \u0441\u0442\u0430\u0442\u0443\u0441\u0430",
+      es: "Estado de carga"
     },
     status_cafe: {
       // status.cafe
       body: {
-        en: "Embed your current status onto your profile, can be moved around freely by editing your about me"
+        en: "Embed your current status onto your profile, can be moved around freely by editing your about me",
+        ru: "\u0412\u0441\u0442\u0430\u0432\u044C\u0442\u0435 \u0441\u0432\u043E\u0439 \u0442\u0435\u043A\u0443\u0449\u0438\u0439 \u0441\u0442\u0430\u0442\u0443\u0441 \u0432 \u043F\u0440\u043E\u0444\u0438\u043B\u044C, \u0435\u0433\u043E \u043C\u043E\u0436\u043D\u043E \u043F\u0435\u0440\u0435\u043C\u0435\u0449\u0430\u0442\u044C \u043F\u043E \u0441\u0432\u043E\u0431\u043E\u0434\u043D\u043E\u043C\u0443 \u043F\u0440\u043E\u0441\u0442\u0440\u0430\u043D\u0441\u0442\u0432\u0443, \u0440\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u0443\u044F \u0441\u0432\u043E\u0439 \u043F\u0440\u043E\u0444\u0438\u043B\u044C",
+        es: "A\xF1ade tu estado actual a tu perfil, puede ser movido libremente al editar tu sobre m\xED"
       }
     },
     date_at_time: {
       // date is automatically translated with luxon
-      en: "{d} at {t}"
+      en: "{d} at {t}",
+      ru: "{d} \u0432 {t}",
+      es: "{d} a las {t}"
     },
     you_sent_to: {
       // messages in your inbox
-      en: "You sent to"
+      en: "You sent to",
+      ru: "\u0412\u044B \u043E\u0442\u043F\u0440\u0430\u0432\u0438\u043B\u0438",
+      es: "Has enviado a"
     },
     sent_to_you: {
       // messages in your inbox
-      en: "Sent to you"
+      en: "Sent to you",
+      ru: "\u041E\u0442\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043E \u0432\u0430\u043C",
+      es: "Te han enviado"
     },
     shoutbox_placeholder: {
       // u: username
       // v: album/artist/track
-      en: "{u}, share your thoughts on {v}..."
+      en: "{u}, share your thoughts on {v}...",
+      ru: "{u}, \u043F\u043E\u0434\u0435\u043B\u0438\u0442\u0435\u0441\u044C \u0441\u0432\u043E\u0438\u043C\u0438 \u043C\u044B\u0441\u043B\u044F\u043C\u0438 \u043E {v}...",
+      es: "{u}, comparte lo que piensas sobre {v}..."
     },
     shoutbox_placeholder_user: {
-      en: "{u}, leave a shout for {v}..."
+      en: "{u}, leave a shout for {v}...",
+      ru: "{u}, \u043E\u0441\u0442\u0430\u0432\u044C\u0442\u0435 \u043A\u043E\u043C\u043C\u0435\u043D\u0442\u0430\u0440\u0438\u0439 \u0434\u043B\u044F {v}...",
+      es: "{u}, deja una nota para {v}..."
     },
     mention_user: {
-      en: "Mention user"
+      en: "Mention user",
+      ru: "\u0423\u043F\u043E\u043C\u044F\u043D\u0443\u0442\u044C \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F",
+      es: "Mencionar usuario"
     },
     quote: {
-      en: "Quote"
+      en: "Quote",
+      ru: "\u0426\u0438\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C",
+      es: "Citar"
     },
     code_block: {
       // block that surrounds code text:
       // `this is code`
-      en: "Code block"
+      en: "Code block",
+      ru: "\u0411\u043B\u043E\u043A \u043A\u043E\u0434\u0430",
+      es: "Bloque de c\xF3digo"
     },
     numbered_list: {
-      en: "Numbered list"
+      en: "Numbered list",
+      ru: "\u041D\u0443\u043C\u0435\u0440\u043E\u0432\u0430\u043D\u043D\u044B\u0439 \u0441\u043F\u0438\u0441\u043E\u043A",
+      es: "Lista enumerada"
     },
     left_align: {
-      en: "Left align"
+      en: "Left align",
+      ru: "\u0412\u044B\u0440\u043E\u0432\u043D\u044F\u0442\u044C \u043F\u043E \u043B\u0435\u0432\u043E\u043C\u0443 \u043A\u0440\u0430\u044E",
+      es: "Alinear a la izquierda"
     },
     center_align: {
-      en: "Center align"
+      en: "Center align",
+      ru: "\u0412\u044B\u0440\u043E\u0432\u043D\u044F\u0442\u044C \u043F\u043E \u0446\u0435\u043D\u0442\u0440\u0443",
+      es: "Centrar"
     },
     right_align: {
-      en: "Right align"
+      en: "Right align",
+      ru: "\u0412\u044B\u0440\u043E\u0432\u043D\u044F\u0442\u044C \u043F\u043E \u043F\u0440\u0430\u0432\u043E\u043C\u0443 \u043A\u0440\u0430\u044E",
+      es: "Alinear a la derecha"
     },
     header: {
-      en: "Header"
+      en: "Header",
+      ru: "\u0417\u0430\u0433\u043E\u043B\u043E\u0432\u043E\u043A",
+      es: "Encabezado"
     },
     bold: {
-      en: "Bold"
+      en: "Bold",
+      ru: "\u041F\u043E\u043B\u0443\u0436\u0438\u0440\u043D\u044B\u0439",
+      es: "Negrita"
     },
     italic: {
-      en: "Italic"
+      en: "Italic",
+      ru: "\u041A\u0443\u0440\u0441\u0438\u0432",
+      es: "Cursiva"
     },
     strikethrough: {
-      en: "Strikethrough"
+      en: "Strikethrough",
+      ru: "\u0417\u0430\u0447\u0435\u0440\u043A\u043D\u0443\u0442\u044B\u0439",
+      es: "Tachado"
     },
     underline: {
-      en: "Underline"
+      en: "Underline",
+      ru: "\u041F\u043E\u0434\u0447\u0435\u0440\u043A\u043D\u0443\u0442\u044B\u0439",
+      es: "Subrayado"
     },
     located: {
-      en: "Located"
+      en: "Located",
+      ru: "\u0420\u0430\u0441\u043F\u043E\u043B\u043E\u0436\u0435\u043D",
+      es: "Ubicado"
     },
     date: {
-      en: "Date"
+      en: "Date",
+      ru: "\u0414\u0430\u0442\u0430",
+      es: "Fecha"
     },
     contact: {
-      en: "Contact"
+      en: "Contact",
+      ru: "\u041A\u043E\u043D\u0442\u0430\u043A\u0442",
+      es: "Contacto"
     },
     show_on_map: {
-      en: "Show on map"
+      en: "Show on map",
+      ru: "\u041F\u043E\u043A\u0430\u0437\u0430\u0442\u044C \u043D\u0430 \u043A\u0430\u0440\u0442\u0435",
+      es: "Ver en mapa"
     },
     added_by: {
-      en: "Added by {u}"
+      en: "Added by {u}",
+      ru: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u043E {u}",
+      es: "A\xF1adido por {u}"
     },
     notice: {
-      en: "Notice"
+      en: "Notice",
+      ru: "\u0423\u0432\u0435\u0434\u043E\u043C\u043B\u0435\u043D\u0438\u0435",
+      es: "Noticia"
     },
     send_valentine: {
       // valentines easter egg
       // sends a message to the user
-      en: "Let them know"
+      en: "Let them know",
+      ru: "\u041E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C \u0441\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u0435",
+      es: "Hazle saber"
     },
     valentine: {
       // valentines easter egg
       // is used as the subject line of the message
       // u: username
-      en: "to the one i love most, {u} \u2661"
+      en: "to the one i love most, {u} \u2661",
+      ru: "\u0442\u043E\u043C\u0443, \u043A\u043E\u0433\u043E \u044F \u043B\u044E\u0431\u043B\u044E \u0431\u043E\u043B\u044C\u0448\u0435 \u0432\u0441\u0435\u0433\u043E, {u} \u2661",
+      es: "a la persona que m\xE1s amo, {u} \u2661"
     },
     view_details: {
-      en: "View details"
+      en: "View details",
+      ru: "\u041F\u0440\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u0434\u0435\u0442\u0430\u043B\u0438",
+      es: "Ver detalles"
     },
     valentine_info: {
-      en: "You\u2019re seeing this as {u} is on your bleh close friends list, you have a high compatibility, and it\u2019s Valentines Day!"
+      en: "You\u2019re seeing this as {u} is on your bleh close friends list, you have a high compatibility, and it\u2019s Valentines Day!",
+      ru: "\u0412\u044B \u0432\u0438\u0434\u0438\u0442\u0435 \u044D\u0442\u043E, \u043F\u043E\u0442\u043E\u043C\u0443 \u0447\u0442\u043E {u} \u043D\u0430\u0445\u043E\u0434\u0438\u0442\u0441\u044F \u0432 \u0432\u0430\u0448\u0435\u043C \u0441\u043F\u0438\u0441\u043A\u0435 \u0431\u043B\u0438\u0437\u043A\u0438\u0445 \u0434\u0440\u0443\u0437\u0435\u0439 \u0432 bleh, \u0443 \u0432\u0430\u0441 \u0432\u044B\u0441\u043E\u043A\u0430\u044F \u0441\u043E\u0432\u043C\u0435\u0441\u0442\u0438\u043C\u043E\u0441\u0442\u044C \u0438 \u0441\u0435\u0433\u043E\u0434\u043D\u044F \u0414\u0435\u043D\u044C \u0412\u043B\u044E\u0431\u043B\u0435\u043D\u043D\u044B\u0445!",
+      es: "\xA1Est\xE1s viendo esto ya que {u} est\xE1 en tu lista de amigos cercanos de bleh, tienen alta compatibilidad, y es San Valent\xEDn!"
     },
     valentine_message_footer: {
-      en: "This message\u2019s subject line indicates it was sent via bleh and {u} picked you as their valentine \u2661"
+      en: "This message\u2019s subject line indicates it was sent via bleh and {u} picked you as their valentine \u2661",
+      ru: "\u0417\u0430\u0433\u043E\u043B\u043E\u0432\u043E\u043A \u044D\u0442\u043E\u0433\u043E \u0441\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u044F \u0443\u043A\u0430\u0437\u044B\u0432\u0430\u0435\u0442, \u0447\u0442\u043E \u043E\u043D\u043E \u0431\u044B\u043B\u043E \u043E\u0442\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043E \u0447\u0435\u0440\u0435\u0437 bleh \u0438 {u} \u0432\u044B\u0431\u0440\u0430\u043B \u0432\u0430\u0441 \u0441\u0432\u043E\u0438\u043C \u0432\u043B\u044E\u0431\u043B\u0435\u043D\u043D\u044B\u043C \u2661",
+      es: "El asunto de este mensaje indica que fue enviado a trav\xE9s de bleh y {u} te escogi\xF3 como su San Valent\xEDn \u2661"
     },
     got_it: {
       // used when dismissing a popup
-      en: "Got it"
+      en: "Got it",
+      ru: "\u041F\u043E\u043D\u044F\u0442\u043D\u043E",
+      es: "Entendido"
     },
     tip: {
-      en: "Tip"
+      en: "Tip",
+      ru: "\u041F\u043E\u0434\u0441\u043A\u0430\u0437\u043A\u0430",
+      es: "Tip"
     },
     popup_navigation_menu: {
       title: {
-        en: "This is your navigator"
+        en: "This is your navigator",
+        ru: "\u042D\u0442\u043E \u0432\u0430\u0448 \u043D\u0430\u0432\u0438\u0433\u0430\u0442\u043E\u0440",
+        es: "Este es tu navegador"
       },
       body: {
-        en: "You can choose which actions to show here by right-clicking for more options"
+        en: "You can choose which actions to show here by right-clicking for more options",
+        ru: "\u0412\u044B \u043C\u043E\u0436\u0435\u0442\u0435 \u0432\u044B\u0431\u0440\u0430\u0442\u044C, \u043A\u0430\u043A\u0438\u0435 \u0434\u0435\u0439\u0441\u0442\u0432\u0438\u044F \u043F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u0437\u0434\u0435\u0441\u044C: \u0449\u0451\u043B\u043A\u043D\u0438\u0442\u0435 \u043F\u0440\u0430\u0432\u043E\u0439 \u043A\u043D\u043E\u043F\u043A\u043E\u0439 \u043C\u044B\u0448\u0438, \u0447\u0442\u043E\u0431\u044B \u043E\u0442\u043A\u0440\u044B\u0442\u044C \u0434\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0435 \u043F\u0430\u0440\u0430\u043C\u0435\u0442\u0440\u044B",
+        es: "Puedes elegir cu\xE1les acciones mostrar aqu\xED haciendo clic derecho para m\xE1s opciones"
       }
     },
     popup_inbox: {
       title: {
-        en: "Find your inbox combined"
+        en: "Find your inbox combined",
+        ru: "\u041D\u0430\u0439\u0434\u0438\u0442\u0435 \u0432\u0430\u0448\u0443 \u043F\u043E\u0447\u0442\u0443",
+        es: "Encuentra tu buz\xF3n combinado"
       },
       body: {
-        en: "Your notifications and messages have been organised into this handy button"
+        en: "Your notifications and messages have been organised into this handy button",
+        ru: "\u0412\u0430\u0448\u0430 \u0443\u0432\u0435\u0434\u043E\u043C\u043B\u0435\u043D\u0438\u044F \u0438 \u0441\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u044F \u0431\u044B\u043B\u0438 \u043E\u0431\u044A\u0435\u0434\u0438\u043D\u0435\u043D\u044B \u0432 \u044D\u0442\u0443 \u0443\u0434\u043E\u0431\u043D\u0443\u044E \u043A\u043D\u043E\u043F\u043A\u0443",
+        es: "Tus notificaciones y mensajes han sido organizados en este \xFAtil bot\xF3n"
       }
     },
     popup_close_friends: {
       title: {
-        en: "Add your close friends list"
+        en: "Add your close friends list",
+        ru: "\u0414\u043E\u0431\u0430\u0432\u044C\u0442\u0435 \u0432\u0430\u0448 \u0441\u043F\u0438\u0441\u043E\u043A \u0431\u043B\u0438\u0437\u043A\u0438\u0445 \u0434\u0440\u0443\u0437\u0435\u0439",
+        es: "A\xF1adir tu lista de amigos cercanos"
       },
       body: {
-        en: "View their scrobbles on any artist, album, or track at any time"
+        en: "View their scrobbles on any artist, album, or track at any time",
+        ru: "\u041F\u0440\u043E\u0441\u043C\u0430\u0442\u0440\u0438\u0432\u0430\u0439\u0442\u0435 \u0438\u0445 \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u044B \u043D\u0430 \u043B\u044E\u0431\u043E\u043C \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0435, \u0430\u043B\u044C\u0431\u043E\u043C\u0435 \u0438\u043B\u0438 \u0442\u0440\u0435\u043A\u0435 \u0432 \u043B\u044E\u0431\u043E\u0435 \u0432\u0440\u0435\u043C\u044F",
+        es: "Mira sus scrobbles en cualquier artista, \xE1lbum, o tema en cualquier momento"
       }
     },
     popup_profile_name_style: {
       title: {
-        en: "Choose a custom font, style, and profile colour"
+        en: "Choose a custom font, style, and profile colour",
+        ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044C\u0441\u043A\u0438\u0439 \u0448\u0440\u0438\u0444\u0442, \u0441\u0442\u0438\u043B\u044C \u0438 \u0446\u0432\u0435\u0442 \u043F\u0440\u043E\u0444\u0438\u043B\u044F",
+        es: "Elegir una fuente, estilo, y color de perfil personalizados"
       },
       body: {
-        en: "These are sponsor-exclusive perks as a thank you for supporting bleh"
+        en: "These are sponsor-exclusive perks as a thank you for supporting bleh",
+        ru: "\u042D\u0442\u043E \u044D\u043A\u0441\u043A\u043B\u044E\u0437\u0438\u0432\u043D\u044B\u0435 \u043F\u0440\u0435\u0438\u043C\u0443\u0449\u0435\u0441\u0442\u0432\u0430 \u0434\u043B\u044F \u0441\u043F\u043E\u043D\u0441\u043E\u0440\u043E\u0432, \u043A\u0430\u043A \u0431\u043B\u0430\u0433\u043E\u0434\u0430\u0440\u043D\u043E\u0441\u0442\u044C \u0437\u0430 \u043F\u043E\u0434\u0434\u0435\u0440\u0436\u043A\u0443 bleh",
+        // don't really know how to translate 'perks' -tech
+        es: "Estas son ventajas exclusivas para patrocinadores como agradecimiento por apoyar a bleh"
       }
     },
     popup_markdown: {
       title: {
-        en: "Embrace styling with Markdown"
+        en: "Embrace styling with Markdown",
+        ru: "\u0421\u0442\u0438\u043B\u0438\u0437\u0443\u0439\u0442\u0435 \u0442\u0435\u043A\u0441\u0442 \u0441 Markdown",
+        es: "Adoptar estilo con Markdown"
       },
       body: {
-        en: "Format any text, embed images and links, mention users, and much more based on the scenario"
+        en: "Format any text, embed images and links, mention users, and much more based on the scenario",
+        ru: "\u0424\u043E\u0440\u043C\u0430\u0442\u0438\u0440\u0443\u0439\u0442\u0435 \u043B\u044E\u0431\u043E\u0439 \u0442\u0435\u043A\u0441\u0442, \u0432\u0441\u0442\u0430\u0432\u043B\u044F\u0439\u0442\u0435 \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u044F \u0438 \u0441\u0441\u044B\u043B\u043A\u0438, \u0443\u043F\u043E\u043C\u0438\u043D\u0430\u0439\u0442\u0435 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u0435\u0439 \u0438 \u043C\u043D\u043E\u0433\u043E\u0435 \u0434\u0440\u0443\u0433\u043E\u0435 \u0432 \u0437\u0430\u0432\u0438\u0441\u0438\u043C\u043E\u0441\u0442\u0438 \u043E\u0442 \u0441\u0446\u0435\u043D\u0430\u0440\u0438\u044F",
+        es: "Formatea cualquier texto, a\xF1ade im\xE1genes y v\xEDnculos, menciona usuarios, y mucho m\xE1s basado en el escenario"
       }
     },
     popup_search: {
       title: {
-        en: "Hover up here to search music"
+        en: "Hover up here to search music",
+        ru: "\u041D\u0430\u0432\u0435\u0434\u0438\u0442\u0435 \u043A\u0443\u0440\u0441\u043E\u0440 \u0437\u0434\u0435\u0441\u044C, \u0447\u0442\u043E\u0431\u044B \u043D\u0430\u0439\u0442\u0438 \u043C\u0443\u0437\u044B\u043A\u0443",
+        es: "Pasar el cursor por aqu\xED para buscar m\xFAsica"
       },
       body: {
-        en: "Searching has never been easier to access, plus it hides away when you\u2019re scrolled up"
+        en: "Searching has never been easier to access, plus it hides away when you\u2019re scrolled up",
+        ru: "\u041F\u043E\u0438\u0441\u043A \u043D\u0438\u043A\u043E\u0433\u0434\u0430 \u043D\u0435 \u0431\u044B\u043B \u0442\u0430\u043A\u0438\u043C \u043F\u0440\u043E\u0441\u0442\u044B\u043C, \u0430 \u043A\u043E\u0433\u0434\u0430 \u0432\u044B \u043F\u0440\u043E\u043A\u0440\u0443\u0447\u0438\u0432\u0430\u0435\u0442\u0435 \u0432\u0432\u0435\u0440\u0445, \u043E\u043D \u0441\u043A\u0440\u044B\u0432\u0430\u0435\u0442\u0441\u044F",
+        es: "Buscar nunca ha sido m\xE1s f\xE1cil, adem\xE1s se oculta cuando te desplazas hacia arriba"
       }
     },
     send_a_reply: {
-      en: "Send a reply"
+      en: "Send a reply",
+      ru: "\u041E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C \u043E\u0442\u0432\u0435\u0442",
+      es: "Enviar una respuesta"
     },
     are_these_results_accurate: {
-      en: "Are these results accurate?"
+      en: "Are these results accurate?",
+      ru: "\u0422\u043E\u0447\u043D\u044B\u0435 \u043B\u0438 \u044D\u0442\u0438 \u0440\u0435\u0437\u0443\u043B\u044C\u0442\u0430\u0442\u044B?",
+      es: "\xBFSon estos resultados correctos?"
     },
     report_incorrect: {
-      en: "Mark incorrect"
+      en: "Mark incorrect",
+      ru: "\u041E\u0442\u043C\u0435\u0442\u0438\u0442\u044C \u043A\u0430\u043A \u043D\u0435\u0432\u0435\u0440\u043D\u044B\u0439",
+      es: "Marcar como incorrecto"
     },
     what_did_you_expect: {
-      en: "What did you expect?"
+      en: "What did you expect?",
+      ru: "\u0427\u0442\u043E \u0432\u044B \u043E\u0436\u0438\u0434\u0430\u043B\u0438 \u0443\u0432\u0438\u0434\u0435\u0442\u044C?",
+      es: "\xBFQu\xE9 esperabas?"
     },
     oracle_sources_tip_track: {
-      en: "Which albums did you expect to be linked to, e.g. Dawn FM instead of After Hours"
+      en: "Which albums did you expect to be linked to, e.g. Dawn FM instead of After Hours",
+      ru: "\u041A\u0430\u043A\u0438\u0435 \u0430\u043B\u044C\u0431\u043E\u043C\u044B \u0432\u044B \u043E\u0436\u0438\u0434\u0430\u043B\u0438 \u0443\u0432\u0438\u0434\u0435\u0442\u044C, \u043D\u0430\u043F\u0440\u0438\u043C\u0435\u0440, Dawn FM \u0432\u043C\u0435\u0441\u0442\u043E After Hours",
+      es: "A qu\xE9 \xE1lbumes esperabas ser llevado, p. ej. Dawn FM en vez de After Hours"
     },
     oracle_sources_tip_album: {
-      en: "Which copy of the album did you expect to see? Provide links and some details as to why"
+      en: "Which copy of the album did you expect to see? Provide links and some details as to why",
+      ru: "\u041A\u0430\u043A\u043E\u0439 \u043A\u043E\u043F\u0438\u0438 \u0430\u043B\u044C\u0431\u043E\u043C\u0430 \u0432\u044B \u043E\u0436\u0438\u0434\u0430\u043B\u0438 \u0443\u0432\u0438\u0434\u0435\u0442\u044C? \u0423\u043A\u0430\u0436\u0438\u0442\u0435 \u0441\u0441\u044B\u043B\u043A\u0438 \u0438 \u043D\u0435\u043A\u043E\u0442\u043E\u0440\u044B\u0435 \u043F\u043E\u0434\u0440\u043E\u0431\u043D\u043E\u0441\u0442\u0438 \u043E \u0442\u043E\u043C, \u043F\u043E\u0447\u0435\u043C\u0443",
+      es: "\xBFQu\xE9 copia del \xE1lbum esperabas ver? Proporciona v\xEDnculos y algunos detalles sobre el porqu\xE9"
+    },
+    switch: {
+      // like switch places
+      en: "Switch"
+    },
+    auto_close: {
+      // auto close dialog after action
+      en: "Auto close"
+    },
+    loading_conversations: {
+      en: "Loading conversations"
+    },
+    shoutbox_failed: {
+      en: "There was an error loading conversations \u201C(\u30CE _ <,, )"
+    },
+    track_name: {
+      en: "Track name"
+    },
+    artist_name: {
+      en: "Artist name"
+    },
+    album_name: {
+      en: "Album name"
     }
   };
   var translation_fallback = "NO_TRANSLATION_FOUND";
@@ -71232,6 +71647,11 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     popups_seen: {
       default: [],
       type: "list"
+    },
+    auto_close_scrobble_modal: {
+      default: true,
+      type: "checkbox",
+      title: trans.auto_close
     }
   };
 
@@ -71277,19 +71697,26 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         system_colour = "#C8DD88";
         break;
     }
-    if (Object.keys(append).length > 0)
+    const has_append = Object.keys(append).length > 0;
+    if (has_append)
       console[type](`%c${system}%c ${text4}`, `background: ${system_colour}; display: block; width: fit-content; font-weight: bold; color: #000; padding: 0 4px; border-radius: 4px`, "color: unset", append);
     else
       console[type](`%c${system}%c ${text4}`, `background: ${system_colour}; display: block; width: fit-content; font-weight: bold; color: #000; padding: 0 4px; border-radius: 4px`, "color: unset");
     if (settings && settings.feature_flags) {
       if (settings.feature_flags.developer == true) {
-        page.structure.logs.appendChild(
-          html.node`
-            <div class="log" data-type=${type}>
-                <span class="system" style="color: ${system_colour}">${system}</span>
-                <span class="text">${text4}</span>
-            </div>`
-        );
+        page.structure.logs.appendChild(html.node`
+                <div class="log" data-type=${type}>
+                    <span class="system" style="background: ${system_colour}">${system}</span>
+                    <span class="text">${text4}</span>
+                    ${has_append ? html.node`
+                    <span class="log-copy" onclick=${() => {
+          copy(JSON.stringify(append));
+        }}>
+                        (copy)
+                    </span>
+                    ` : ""}
+                </div>
+            `);
       }
     }
   }
@@ -71297,8 +71724,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
   // src/build/build.json
   var build_default = {
     brand: "bleh",
-    build: "2026.0131.1",
-    sku: "shunguang",
+    build: "2026.0212",
+    sku: "kurumi",
     bio: "bleh!!! ^-^",
     author: "katelyn",
     url: "https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js",
@@ -71671,6 +72098,16 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         default: false,
         name: "Can report user from menu",
         date: "2026-01-30"
+      },
+      join_the_conversation: {
+        default: true,
+        name: "Replace 'Join the conversation' with an actual shoutbox",
+        date: "2026-02-12"
+      },
+      use_full_shoutbox: {
+        default: false,
+        name: "When 'Join the conversation' is replaced, use the full shoutbox instead of a preview",
+        date: "2026-02-12"
       }
     }
   };
@@ -86263,6 +86700,9 @@ html2canvas-pro/dist/html2canvas-pro.js:
    * Released under MIT License
    *)
 
+showdown/dist/showdown.js:
+  (*! showdown v 2.1.0 - 21-04-2022 *)
+
 cropperjs/dist/cropper.js:
   (*!
    * Cropper.js v1.5.13
@@ -86273,9 +86713,6 @@ cropperjs/dist/cropper.js:
    *
    * Date: 2022-11-20T05:30:46.114Z
    *)
-
-showdown/dist/showdown.js:
-  (*! showdown v 2.1.0 - 21-04-2022 *)
 
 @ungap/weakmap/esm/index.js:
 domconstants/esm/index.js:

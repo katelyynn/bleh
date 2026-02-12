@@ -10,16 +10,16 @@ import {
     settings_base,
     settings_store,
     settings_template
-} from './build/config';
-import { log } from './build/log';
-import { page, reload_pending } from './build/page';
-import { stored_season } from './build/seasonal';
-import { tl, trans } from './build/trans';
-import { chart_reflow, load_chart_colours } from './chart';
-import { notify } from './components/notify';
-import { load_skus } from './pages/bleh_config';
-import { bleh_glacier_date_graph_generate } from './pages/glacier';
-import { compile_settings, save_setting } from './components/settings.js';
+} from '@/build/config';
+import { log } from '@/build/log';
+import { page, reload_pending } from '@/build/page';
+import { stored_season } from '@/build/seasonal';
+import { tl, trans } from '@/build/trans';
+import { load_chart_colours } from '@/components/music/chart.js';
+import { notify } from '@/components/dialog/notify';
+import { load_skus } from '@/pages/bleh_settings/bleh_settings.js';
+import { bleh_glacier_date_graph_generate } from '@/pages/profile/glacier.js';
+import { compile_settings, save_setting } from '@/components/settings/settings';
 
 // load settings
 export function load_settings(skip = false) {

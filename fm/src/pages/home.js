@@ -4,24 +4,23 @@
 // Licensed under GPLv3
 //
 
-import {render_activity_list} from "../activity";
-import {log} from "../build/log";
-import {auth, page, root} from "../build/page";
-import {tl, trans} from "../build/trans";
-import {checkup_nav, checkup_page_structure} from "../components/structure";
-import {register_background, update_page} from "../page";
-import {bleh_charts} from "./chart";
-import {bleh_native_settings} from './lastfm_settings';
+import {render_activity_list} from "@/components/shared/activity";
+import {log} from "@/build/log";
+import {auth, page, root} from "@/build/page";
+import {tl, trans} from "@/build/trans";
+import {checkup_nav, checkup_page_structure} from "@/components/page/structure";
+import {register_background, update_page} from "@/page";
+import {bleh_charts} from "@/pages/home/chart";
+import {bleh_native_settings} from '@/pages/lastfm_settings';
 import {html, render} from "lighterhtml";
-import {ff} from "../sku.js";
-import { load_profile_cache_externally } from './profile.js';
-import { correct_artist, correct_item_by_artist, name_includes, smart_artists, smart_title } from "../components/lotus.js";
-import { romanise, sanitise } from "../build/tools.js";
-import { redirect } from "../components/music.js";
-import { settings } from "../build/config.js";
-import { expand_avatar } from "../avatar.js";
+import {ff} from "@/components/settings/sku";
+import { load_profile_cache_externally } from '@/pages/profile/profile';
+import { correct_artist, correct_item_by_artist, name_includes, smart_artists, smart_title } from "@/components/music/lotus.js";
+import { romanise, sanitise } from "@/build/tools.js";
+import { redirect } from "@/components/music/music";
+import { settings } from "@/build/config.js";
+import { expand_avatar } from "@/components/shared/avatar.js";
 import tippy from "tippy.js";
-import { queue_popup } from "../components/popup.js";
 
 export async function bleh_home() {
     page.structure.container = document.body.querySelector('.page-content');

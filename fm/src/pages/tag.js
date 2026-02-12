@@ -4,15 +4,15 @@
 // Licensed under GPLv3
 //
 
-import {log} from "../build/log";
-import {page} from "../build/page";
-import {desanitise} from "../build/tools";
-import {tl, trans} from "../build/trans";
-import {patch_header_title} from "../components/lotus";
-import {checkup_page_structure} from "../components/structure";
+import {log} from "@/build/log";
+import {page} from "@/build/page";
+import {desanitise} from "@/build/tools";
+import {tl, trans} from "@/build/trans";
+import {patch_header_title} from "@/components/music/lotus";
+import {checkup_page_structure} from "@/components/page/structure";
 import {register_background, update_page} from "../page";
-import {ff} from "../sku";
-import {bleh_wiki, bleh_wiki_editor, bleh_wiki_history} from "./wiki";
+import {ff} from "@/components/settings/sku";
+import {bleh_wiki, bleh_wiki_editor, bleh_wiki_history} from "@/pages/music/wiki";
 import tippy from "tippy.js";
 
 export function bleh_tags() {

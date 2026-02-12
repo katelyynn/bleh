@@ -4,16 +4,16 @@
 // Licensed under GPLv3
 //
 
-import { log } from './log.js';
-import { notify } from '../components/notify.js';
-import { tl, trans } from './trans.js';
-import { settings } from './config.js';
+import { log } from '@/build/log';
+import { notify } from '@/components/dialog/notify';
+import { tl, trans } from '@/build/trans';
+import { settings } from '@/build/config';
 import { html } from 'lighterhtml';
-import { root } from './page.js';
 import * as wanakana from 'wanakana';
 import * as hangulRomanization from 'hangul-romanization';
 import { DateTime } from 'luxon';
-import { status } from '../components/status.js';
+import { status } from '@/components/dialog/status.js';
+import { root } from '@/build/page';
 
 // https://stackoverflow.com/questions/46432335/hex-to-hsl-convert-javascript
 /**
@@ -57,10 +57,8 @@ export function hex_to_hsl(hex) {
     }
 
     h = Math.round(h * 360);
-    s = s * 100;
-    s = Math.round(s);
-    l = l * 100;
-    l = Math.round(l);
+    s = round_two(s * 100);
+    l = round_two(l * 100);
 
     console.log('converted', hex, 'to', h, s, l);
 
@@ -116,8 +114,8 @@ export function clamp_lit(sat, lit) {
     return round_two(lit);
 }
 
-function round_two(value) {
-    return Math.round(value * 100) / 100;
+export function round_two(num) {
+    return Math.round((num + Number.EPSILON) * 100) / 100;
 }
 
 /**

@@ -4,18 +4,15 @@
 // Licensed under GPLv3
 //
 
-import tippy from "tippy.js";
-import {patch_avatar, style_name_from_badge} from "../avatar";
-import {settings} from "../build/config";
-import {log} from "../build/log";
-import {auth, page, root} from "../build/page";
-import {clean_number} from "../build/tools";
-import {tl, trans} from "../build/trans";
-import {correct_artist} from "../components/lotus";
-import {checkup_page_structure, convert_to_toolbar} from "../components/structure";
+import {patch_avatar, style_name_from_badge} from "@/components/shared/avatar";
+import {log} from "@/build/log";
+import {auth, page, root} from "@/build/page";
+import {clean_number} from "@/build/tools";
+import {tl, trans} from "@/build/trans";
+import {checkup_page_structure, convert_to_toolbar} from "@/components/page/structure";
 import {refresh_all} from "../config";
 import {register_background, update_page} from "../page";
-import {bleh_home} from './home';
+import {bleh_home} from '@/pages/home';
 import {html, render} from "lighterhtml";
 import { DateTime } from 'luxon';
 

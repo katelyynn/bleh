@@ -4,8 +4,8 @@
 // Licensed under GPLv3
 //
 
-import {auth, page, root} from "../build/page";
-import {tl, trans} from "../build/trans";
+import {auth, page, root} from "@/build/page";
+import {tl, trans} from "@/build/trans";
 import {html, render} from "lighterhtml";
 
 export function bleh_error() {
