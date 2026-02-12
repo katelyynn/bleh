@@ -1687,7 +1687,7 @@ export function convert_top_listener(listener, index, key = 'top-listeners') {
                     track_wrap ?
                         html.node`
                 <div class="user-list-description">
-                    <p class="user-list-about-me" ref=${(el) => (about_me = el)}>
+                    <p class="user-list-about-me has-featured-track" ref=${(el) => (about_me = el)}>
                         ${{ html: track_wrap.innerHTML }}
                     </p>
                 </div>

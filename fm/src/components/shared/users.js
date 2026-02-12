@@ -33,7 +33,7 @@ export function patch_user_list_item(user, index) {
         artist.textContent = correct_artist(artist.textContent);
     });
 
-    const md = user.querySelector('.user-list-about-me');
+    const md = user.querySelector('.user-list-about-me:not(.has-featured-track)');
 
     log('patching', 'user', 'info', { user, name: name?.textContent, md });
 

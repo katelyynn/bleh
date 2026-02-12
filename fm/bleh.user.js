@@ -43978,7 +43978,7 @@
     artists.forEach((artist) => {
       artist.textContent = correct_artist(artist.textContent);
     });
-    const md = user.querySelector(".user-list-about-me");
+    const md = user.querySelector(".user-list-about-me:not(.has-featured-track)");
     log("patching", "user", "info", { user, name: name?.textContent, md });
     if (name) {
       name.textContent = name.textContent.trim();
@@ -45658,7 +45658,7 @@
                 ${follow}
                 ${track_wrap ? html.node`
                 <div class="user-list-description">
-                    <p class="user-list-about-me" ref=${(el) => about_me = el}>
+                    <p class="user-list-about-me has-featured-track" ref=${(el) => about_me = el}>
                         ${{ html: track_wrap.innerHTML }}
                     </p>
                 </div>
