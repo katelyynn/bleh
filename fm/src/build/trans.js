@@ -49,7 +49,7 @@ export let lang_info = {
     pt: {
         name: 'Português',
         by: ['ArthRMH', 'satisfeita', 'fr0r', 'urwq', 'modulador592'],
-        last_updated: '2025-11-25'
+        last_updated: '2026-02-12'
     },
     sv: {
         name: 'Svenska',
