@@ -1,0 +1,191 @@
+/*     GLOBAL CARD STYLES     */
+.bleh--panel, .bleh--blank-panel,
+.col-main > section:not(.neighbours-items-section), .col-sidebar > section,
+.your-progress-component,
+/* main column is a card, no sub-cards */ .page-content[data-page-type="user"]:not([data-page-subpage="overview"]) .row.col-main-is-primary > .col-main:not(.not-a-panel):first-child /* <- */, .row.col-main-is-primary > .col-main:nth-child(3) > :is(section, #shoutbox),
+.primary-column,
+.album-and-lyrics-row,
+.lazy-shoutbox:not(
+    /* event pages */ section > .lazy-shoutbox,
+    /* gallery pages, col-main on tracks */ div.buffer-standard:not(.col-main) > .lazy-shoutbox
+    ),
+/* individual library selection */
+/* listening reports */ .user-dashboard > .user-dashboard-buffer,
+.recent-tracks-section,
+.event-summary-with-poster,
+/* event overview thing */ .event-details:not(.event-summary-with-poster .event-details),
+.wiki-history,
+/* error 500 */ .container:has(#marvin),
+:is(.namespace--music_track_tags_add, .namespace--music_artist_tags_add, .namespace--music_album_tags_add) .col-main,
+/* home page recommendations */ .homefeed .col-main,
+/* playlist content */ .playlisting-playlist-header + .page-content > .row,
+/* event lineup */ .big-artist-list,
+/* set an obsession */ .obsession-search, .obsession-search-results,
+/* user did not scrobble album in date range */ .library-header + .message,
+/* no loved tracks */ .namespace--user_loved .no-data-message,
+/* neighbours */ .friends-col-main,
+.panel-form,
+/* listeners */ .col-main:not(.bleh--gallery) > .buffer-standard,
+.no-data-message--gallery:not([data-page-subpage="images_overview"] .no-data-message--gallery), .no-data-message--album,
+.auth-container-signup, .login-form {
+    content: "";
+    --override-background: hsl(
+        var(--card-specific-background, var(--card-background, var(--b5)))
+    );
+    background: var(
+        --card-specific-background,
+        var(--card-background, hsl(var(--b5)))
+    );
+    border-radius: var(--card-specific-radius, var(--card-radius));
+    box-shadow: var(
+        --card-specific-shadow,
+        var(--card-border),
+        var(--card-shadow)
+    );
+    padding: var(--card-padding);
+    margin-left: unset;
+    margin-right: unset;
+    backdrop-filter: var(--card-filter, unset);
+    -webkit-backdrop-filter: var(--card-filter, unset);
+    /* festive */
+    /*background-image: var(--overlay-ice)/*, linear-gradient(180deg, rgba(190,233,250,0.04) 0%, rgba(0,0,0,0) 100%);*/
+    /*background-repeat: repeat-x;
+    background-position: unset !important;*/
+
+    position: relative;
+
+    .navlist {
+        margin: unset !important;
+        width: 100%;
+    }
+
+    .section-controls {
+        margin-top: unset !important;
+        margin-right: unset !important;
+    }
+
+    &.setup,
+    &.error,
+    &.sour {
+        --card-background: var(--card-blur-bg);
+        backdrop-filter: var(--solarium);
+        -webkit-backdrop-filter: var(--solarium);
+    }
+
+    &:not(.setup, .error, .sour) {
+        --card-background: transparent;
+        background-image: unset !important;
+        box-shadow: unset;
+
+        &:before {
+            display: none !important;
+        }
+
+        padding-top: unset;
+        padding-bottom: unset;
+    }
+}
+.content-top-header,
+.artist-similar-sidebar {
+    margin-top: var(--force-margin-top, unset) !important;
+}
+
+/* no playlists */
+.namespace--user_playlists_playlists .page-content,
+.page-content:has(.gallery-section, .obsession-search),
+/* obsessions */ .namespace--user_obsessions_overview .container.page-content {
+    padding-top: var(--override-padding-top, unset) !important;
+}
+
+.subpage-breadcrumb,
+.subpage-title:not(.section-controls .subpage-title) {
+    display: none;
+}
+
+.single-shout-information {
+    display: none;
+}
+
+.page-content:has(> .section .upper-overview-to-hide),
+.upper-overview-to-hide,
+.col-sidebar.masonry-right {
+    display: none !important;
+}
+
+.top-overview-panel {
+    display: flex;
+    flex-direction: column;
+
+    .masonry-left {
+        float: unset;
+    }
+
+    & > .buffer-standard.section-with-separator {
+        display: none;
+    }
+}
+
+.page-content:has(> .section) + .full-bleed-ad-container + .page-content {
+    padding-top: unset !important;
+
+    .col-sidebar {
+        top: unset !important;
+    }
+}
+
+/*     UNDO CARD STYLES     */
+.row.buffer-4 > .col-main:not(.not-a-panel):first-child > section /* for shoutbox in tabs */ {
+    --override-background: unset !important;
+    border: unset;
+    border-radius: unset;
+    box-shadow: unset !important;
+    padding: unset;
+    margin-top: unset;
+    background-image: unset;
+    background-repeat: unset;
+}
+
+.section-with-separator {
+    padding-bottom: unset;
+
+    &.lazy-shoutbox {
+        padding-bottom: var(--card-padding);
+
+        /* event shoutbox */
+        section > &,
+        /* image shoutbox */
+        div.buffer-standard:not(.col-main) & {
+            padding-bottom: unset !important;
+        }
+    }
+}
+
+article, section, .buffer-standard, .buffer-standard:not(.col-sidebar) .buffer-standard:first-child, ._buffer,
+.open-ad-container-desktop ~ .buffer-standard-ignore-hidden, :not(.visible-xs):not([data-ad-container]) ~ .buffer-standard-ignore-hidden /* lfm selector */,
+.buffer-standard\@sm,
+.content-form,
+/* album does not have a tracklist */ .visible-xs.buffer-standard + #shoutbox {
+    margin-top: var(--only-card-gap, var(--card-gap));
+}
+.buffer-standard.col-sidebar .buffer-standard:first-child {
+    margin-top: unset;
+}
+/* separator */
+.row.buffer-4 > .col-main:first-child .section-with-separator {
+    padding-bottom: unset;
+}
+.section-with-separator::after {
+    display: none;
+}
+
+.content-form .form-section,
+.buffer-4,
+.buffer-2 {
+    /* default 12px */
+    margin-top: var(--card-gap);
+}
+
+/* without pro it adds spacing to these presumably for ad spots */
+.buffer-standard.row {
+    margin-top: unset;
+}

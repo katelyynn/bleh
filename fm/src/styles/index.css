@@ -1,10 +1,15 @@
 @import './main.css';
 
+@import './page/page.css';
+
 @import './navigation/masthead.css';
 
 @import './button/button.css';
 
-@import './shared/icons.css';
+@import './settings/setting.css';
+
+@import './shared/icon_types.css';
 @import './shared/keyframes.css';
+@import './shared/tooltip.css';
 
 @import './dev.css';

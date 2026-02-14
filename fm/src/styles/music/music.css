@@ -1,0 +1,12 @@
+@import './grid.css';
+@import './track.css';
+
+.section-with-control > .buffer-standard,
+.grid-items-section > .buffer-standard,
+.grid-items,
+.chartlist {
+    margin-top: 0 !important;
+
+    margin-left: unset !important;
+    margin-right: unset !important;
+}
