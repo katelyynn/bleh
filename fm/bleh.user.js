@@ -38728,7 +38728,7 @@
         };
         let toggle2;
         const elem = html.node`
-                <div class="setting v2 ${standalone ? "standalone" : ""}" data-type="toggle" disabled=${disabled} data-hide=${hide_if_incompatible} onclick=${() => update_toggle()}>
+                <div class="setting v2 ${standalone ? "standalone" : ""}" data-type="toggle" disabled=${disabled} data-hide=${hide_if_incompatible} id="setting_${id}" onclick=${() => update_toggle()}>
                     ${icon ? html.node`
                     <div class="icon">
                         <div class="bleh-icon" style="--icon: var(--${icon})" />
@@ -38816,7 +38816,7 @@
         let marker;
         let working_max = settings_store[id].max - settings_store[id].min;
         const elem = html.node`
-                <div class="setting v2 ${standalone ? "standalone" : ""} ${settings_store[id].vertical ? "v" : ""}" data-type="range" disabled=${disabled} data-hide=${hide_if_incompatible} ref=${(el) => option = el} data-modified=${value != settings_store[id].default}>
+                <div class="setting v2 ${standalone ? "standalone" : ""} ${settings_store[id].vertical ? "v" : ""}" data-type="range" disabled=${disabled} id="setting_${id}" data-hide=${hide_if_incompatible} ref=${(el) => option = el} data-modified=${value != settings_store[id].default}>
                     ${text4 ? html.node`
                     <div class="heading">
                         <h5>${html_title}<button class="btn reset" ref=${(el) => reset_btn = el} onclick=${() => reset_range()}>${tl2(trans.reset)}</button></h5>
@@ -38893,7 +38893,7 @@
         if (placeholder && placeholder != "empty")
           placeholder = tl2(placeholder);
         let container = html.node`
-                <div class="setting v2 ${standalone ? "standalone" : ""}" data-type="text" disabled=${disabled} data-hide=${hide_if_incompatible} ref=${(el) => option = el} data-modified=${value != settings_store[id].default}>
+                <div class="setting v2 ${standalone ? "standalone" : ""}" data-type="text" disabled=${disabled} data-hide=${hide_if_incompatible} id="setting_${id}" ref=${(el) => option = el} data-modified=${value != settings_store[id].default}>
                     ${icon ? html.node`
                     <div class="icon">
                         <div class="bleh-icon" style="--icon: var(--${icon})" />
@@ -39025,7 +39025,7 @@
         };
         let toggle2;
         const elem = html.node`
-                <div class="setting v2 ${settings_store[id].horizontal ? "horizontal" : ""} ${standalone ? "standalone" : ""}" data-type="checkbox" disabled=${disabled} data-hide=${hide_if_incompatible} onclick=${() => update_toggle()}>
+                <div class="setting v2 ${settings_store[id].horizontal ? "horizontal" : ""} ${standalone ? "standalone" : ""}" data-type="checkbox" disabled=${disabled} id="setting_${id}" data-hide=${hide_if_incompatible} onclick=${() => update_toggle()}>
                     ${icon ? html.node`
                     <div class="icon">
                         <div class="bleh-icon" style="--icon: var(--${icon})" />
@@ -39136,7 +39136,7 @@
         let buttons = [];
         let reset_btn;
         const elem = html.node`
-                <div class="setting v2" data-type="options" disabled=${disabled} data-hide=${hide_if_incompatible} data-modified=${value != settings_store[id].default}>
+                <div class="setting v2" data-type="options" disabled=${disabled} data-hide=${hide_if_incompatible} id="setting_${id}" data-modified=${value != settings_store[id].default}>
                     ${icon ? html.node`
                     <div class="icon">
                         <div class="bleh-icon" style="--icon: var(--${icon})" />
@@ -39315,7 +39315,7 @@
           });
         let lists;
         const elem = html.node`
-                <div class="setting v2" data-type="list">
+                <div class="setting v2" data-type="list" id="setting_${id}">
                     ${icon ? html.node`
                     <div class="icon">
                         <div class="bleh-icon" style="--icon: var(--${icon})" />
@@ -39377,7 +39377,7 @@
         if (list.length == 0) disabled = true;
         let select_hook;
         let elem = html.node`
-                <div class="setting v2" data-type="options" disabled=${disabled} data-hide=${hide_if_incompatible} data-modified=${value != settings_store[id].default}>
+                <div class="setting v2" data-type="options" disabled=${disabled} data-hide=${hide_if_incompatible} id="setting_${id}" data-modified=${value != settings_store[id].default}>
                     ${icon ? html.node`
                     <div class="icon">
                         <div class="bleh-icon" style="--icon: var(--${icon})" />
@@ -48766,7 +48766,7 @@
         <section class="bleh--panel">
             <h4>${tl2(trans.appearance)}</h4>
             <div class="setting-group">
-                <div class="setting" data-type="action">
+                <div class="setting" data-type="action" id="setting_theme">
                     <div class="heading">
                         <h5>${tl2(trans.themes.name)}</h5>
                     </div>
@@ -48781,7 +48781,7 @@
                 </div>
                 ${setting({ id: "solarium" })}
                 ${ff("high_contrast") ? setting({ id: "high_contrast" }) : ""}
-                <div class="setting" data-type="action">
+                <div class="setting" data-type="action" id="setting_hue">
                     <div class="heading">
                         <h5>${tl2(trans.hue)}</h5>
                     </div>
@@ -50940,11 +50940,29 @@
   }
   function search_results(tabs, query, results) {
     render(page.structure.main, html`
-        <p>found ${results.length} result(s)</p>
-        ${results.map((result) => html.node`
-            <div>${result.id} - ${result.tab}</div>
-        `)}
+        <section class="search-result-container">
+            <p class="setting-search-results-count">${tl2(trans.found_value_results, { c: results.length })}</p>
+            <div class="setting-search-results">
+                ${results.map((result) => {
+      const tab = tabs[result.tab];
+      const formal = settings_store[result.id];
+      return html.node`
+                        <button class="btn setting-search-result" onclick=${() => finalise_result(result)}>
+                            <div class="bleh-icon" style="--icon: var(--mask)" data-bleh-page=${result.tab} data-type=${tab.icon} />
+                            <div class="setting-search-result-info">
+                                <strong class="setting-search-result-header">${tl2(formal.title)}</strong>
+                                <p class="setting-search-result-context">${tab.name}</p>
+                            </div>
+                        </button>
+                    `;
+    })}
+            </div>
+        </section>
     `);
+  }
+  function finalise_result(result) {
+    change_settings_page(result.tab);
+    scroll_to_setting(result.id);
   }
 
   // src/pages/bleh_settings/bleh_settings.js
@@ -50964,7 +50982,11 @@
     const tabs = {
       general: {
         name: tl2(trans.general),
-        icon: "general"
+        icon: "general",
+        settings: [
+          "branding_type",
+          "translator"
+        ]
       },
       visual: {
         name: tl2(trans.visual),
@@ -50995,21 +51017,70 @@
       },
       interface: {
         name: tl2(trans.interface),
-        icon: "layout"
+        icon: "layout",
+        settings: [
+          "track_layout",
+          "expand_tracks",
+          "track_album_name_location",
+          "colourful_counts",
+          "music_links",
+          "default_avatar_action",
+          "simulate_scroll",
+          "gendered_tags",
+          "shout_markdown",
+          "rabbit"
+        ]
       },
       profile: {
         name: tl2(trans.profile),
-        icon: "user"
+        icon: "user",
+        settings: [
+          "friends",
+          "starred_friend",
+          "navigation_items",
+          "navigation_language",
+          "profile_header_own",
+          "profile_header_others",
+          "profile_avi_background",
+          "bio_markdown",
+          "show_your_progress",
+          "activities"
+        ]
       },
       playback: {
         name: tl2(trans.playback),
-        icon: "album"
+        icon: "album",
+        settings: [
+          "corrections",
+          "prefer_no_redirect",
+          "travis",
+          "format_guest_features",
+          "show_guest_features",
+          "show_remaster_tags",
+          "romanise_jp",
+          "romanise_ko",
+          "glacier_library_graphs",
+          "oracle_beta",
+          "tracklist_source"
+        ]
       },
       seasonal: {
-        name: tl2(trans.seasonal.name)
+        name: tl2(trans.seasonal.name),
+        settings: [
+          "seasonal",
+          "seasonal_particles",
+          "seasonal_particles_fps",
+          "seasonal_overlays"
+        ]
       },
       accessibility: {
-        name: tl2(trans.accessibility)
+        name: tl2(trans.accessibility),
+        settings: [
+          "reduced_motion",
+          "underline_links",
+          "display_name_styles",
+          "accessible_name_colours"
+        ]
       },
       fill: {
         type: "fill"
@@ -51021,7 +51092,11 @@
       },
       performance: {
         name: tl2(trans.troubleshooting),
-        icon: "advanced"
+        icon: "advanced",
+        settings: [
+          "dev",
+          "branch"
+        ]
       },
       sku: {
         name: tl2(trans.flags),
@@ -52089,18 +52164,16 @@
       panel.appendChild(button2);
     });
   }
-  unsafeWindow._scroll_to_setting = function(id) {
-    scroll_to_setting(id);
-  };
   function scroll_to_setting(id) {
-    let setting2 = document.body.querySelector(`#container-${id}`);
-    if (setting2 != null) {
-      let y = setting2.getBoundingClientRect().top + window.scrollY - 300;
-      window.scroll({
-        top: y,
-        behavior: "smooth"
-      });
-    }
+    const setting2 = page.structure.main.querySelector(`#setting_${id}`);
+    if (!setting2) return;
+    setting2.scrollIntoView({
+      behavior: "smooth",
+      block: "center"
+    });
+    setTimeout(() => {
+      setting2.classList.add("highlight");
+    }, 200);
   }
   unsafeWindow._change_settings_page = function(page2, setting2 = null) {
     change_settings_page(page2, setting2);
@@ -70395,6 +70468,12 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     album_name: {
       en: "Album name"
+    },
+    search_for_settings: {
+      en: "Search for settings"
+    },
+    found_value_results: {
+      en: "Found {c} result(s)"
     }
   };
   var translation_fallback = "NO_TRANSLATION_FOUND";
@@ -71709,7 +71788,11 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       default: "",
       type: "select",
       title: trans.starred_friend.name,
-      body: trans.starred_friend.body
+      body: trans.starred_friend.body,
+      tags: [
+        trans.close_friends,
+        trans.friends_setting
+      ]
     },
     dismissed: {
       default: [],

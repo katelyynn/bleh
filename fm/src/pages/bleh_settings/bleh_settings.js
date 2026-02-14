@@ -79,7 +79,11 @@ export function bleh_settings() {
     const tabs = {
         general: {
             name: tl(trans.general),
-            icon: 'general'
+            icon: 'general',
+            settings: [
+                'branding_type',
+                'translator'
+            ]
         },
         visual: {
             name: tl(trans.visual),
@@ -110,21 +114,70 @@ export function bleh_settings() {
         },
         interface: {
             name: tl(trans.interface),
-            icon: 'layout'
+            icon: 'layout',
+            settings: [
+                'track_layout',
+                'expand_tracks',
+                'track_album_name_location',
+                'colourful_counts',
+                'music_links',
+                'default_avatar_action',
+                'simulate_scroll',
+                'gendered_tags',
+                'shout_markdown',
+                'rabbit'
+            ]
         },
         profile: {
             name: tl(trans.profile),
-            icon: 'user'
+            icon: 'user',
+            settings: [
+                'friends',
+                'starred_friend',
+                'navigation_items',
+                'navigation_language',
+                'profile_header_own',
+                'profile_header_others',
+                'profile_avi_background',
+                'bio_markdown',
+                'show_your_progress',
+                'activities'
+            ]
         },
         playback: {
             name: tl(trans.playback),
-            icon: 'album'
+            icon: 'album',
+            settings: [
+                'corrections',
+                'prefer_no_redirect',
+                'travis',
+                'format_guest_features',
+                'show_guest_features',
+                'show_remaster_tags',
+                'romanise_jp',
+                'romanise_ko',
+                'glacier_library_graphs',
+                'oracle_beta',
+                'tracklist_source'
+            ]
         },
         seasonal: {
-            name: tl(trans.seasonal.name)
+            name: tl(trans.seasonal.name),
+            settings: [
+                'seasonal',
+                'seasonal_particles',
+                'seasonal_particles_fps',
+                'seasonal_overlays'
+            ]
         },
         accessibility: {
-            name: tl(trans.accessibility)
+            name: tl(trans.accessibility),
+            settings: [
+                'reduced_motion',
+                'underline_links',
+                'display_name_styles',
+                'accessible_name_colours'
+            ]
         },
         fill: {
             type: 'fill'
@@ -136,7 +189,11 @@ export function bleh_settings() {
         },
         performance: {
             name: tl(trans.troubleshooting),
-            icon: 'advanced'
+            icon: 'advanced',
+            settings: [
+                'dev',
+                'branch'
+            ]
         },
         sku: {
             name: tl(trans.flags),
@@ -1283,20 +1340,18 @@ export function register_skip_to(list = null) {
     });
 }
 
-unsafeWindow._scroll_to_setting = function (id) {
-    scroll_to_setting(id);
-};
+export function scroll_to_setting(id) {
+    const setting = page.structure.main.querySelector(`#setting_${id}`);
+    if (!setting) return;
 
-function scroll_to_setting(id) {
-    let setting = document.body.querySelector(`#container-${id}`);
+    setting.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+    });
 
-    if (setting != null) {
-        let y = setting.getBoundingClientRect().top + window.scrollY - 300;
-        window.scroll({
-            top: y,
-            behavior: 'smooth'
-        });
-    }
+    setTimeout(() => {
+        setting.classList.add('highlight');
+    }, 200);
 }
 
 unsafeWindow._change_settings_page = function (page, setting = null) {

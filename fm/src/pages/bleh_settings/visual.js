@@ -119,7 +119,7 @@ export function visual() {
         <section class="bleh--panel">
             <h4>${tl(trans.appearance)}</h4>
             <div class="setting-group">
-                <div class="setting" data-type="action">
+                <div class="setting" data-type="action" id="setting_theme">
                     <div class="heading">
                         <h5>${tl(trans.themes.name)}</h5>
                     </div>
@@ -135,7 +135,7 @@ export function visual() {
                 </div>
                 ${setting({ id: 'solarium' })}
                 ${ff('high_contrast') ? setting({ id: 'high_contrast' }) : ''}
-                <div class="setting" data-type="action">
+                <div class="setting" data-type="action" id="setting_hue">
                     <div class="heading">
                         <h5>${tl(trans.hue)}</h5>
                     </div>

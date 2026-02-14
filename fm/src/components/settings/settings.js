@@ -115,7 +115,7 @@ export function setting({
             let toggle;
 
             const elem = html.node`
-                <div class="setting v2 ${standalone ? 'standalone' : ''}" data-type="toggle" disabled=${disabled} data-hide=${hide_if_incompatible} onclick=${() => update_toggle()}>
+                <div class="setting v2 ${standalone ? 'standalone' : ''}" data-type="toggle" disabled=${disabled} data-hide=${hide_if_incompatible} id="setting_${id}" onclick=${() => update_toggle()}>
                     ${
                         icon ?
                             html.node`
@@ -228,7 +228,7 @@ export function setting({
             let working_max = settings_store[id].max - settings_store[id].min;
 
             const elem = html.node`
-                <div class="setting v2 ${standalone ? 'standalone' : ''} ${settings_store[id].vertical ? 'v' : ''}" data-type="range" disabled=${disabled} data-hide=${hide_if_incompatible} ref=${(el) => (option = el)} data-modified=${value != settings_store[id].default}>
+                <div class="setting v2 ${standalone ? 'standalone' : ''} ${settings_store[id].vertical ? 'v' : ''}" data-type="range" disabled=${disabled} id="setting_${id}" data-hide=${hide_if_incompatible} ref=${(el) => (option = el)} data-modified=${value != settings_store[id].default}>
                     ${
                         text ?
                             html.node`
@@ -353,7 +353,7 @@ export function setting({
                 placeholder = tl(placeholder);
 
             let container = html.node`
-                <div class="setting v2 ${standalone ? 'standalone' : ''}" data-type="text" disabled=${disabled} data-hide=${hide_if_incompatible} ref=${(el) => (option = el)} data-modified=${value != settings_store[id].default}>
+                <div class="setting v2 ${standalone ? 'standalone' : ''}" data-type="text" disabled=${disabled} data-hide=${hide_if_incompatible} id="setting_${id}" ref=${(el) => (option = el)} data-modified=${value != settings_store[id].default}>
                     ${
                         icon ?
                             html.node`
@@ -514,7 +514,7 @@ export function setting({
             let toggle;
 
             const elem = html.node`
-                <div class="setting v2 ${settings_store[id].horizontal ? 'horizontal' : ''} ${standalone ? 'standalone' : ''}" data-type="checkbox" disabled=${disabled} data-hide=${hide_if_incompatible} onclick=${() => update_toggle()}>
+                <div class="setting v2 ${settings_store[id].horizontal ? 'horizontal' : ''} ${standalone ? 'standalone' : ''}" data-type="checkbox" disabled=${disabled} id="setting_${id}" data-hide=${hide_if_incompatible} onclick=${() => update_toggle()}>
                     ${
                         icon ?
                             html.node`
@@ -652,7 +652,7 @@ export function setting({
             let reset_btn;
 
             const elem = html.node`
-                <div class="setting v2" data-type="options" disabled=${disabled} data-hide=${hide_if_incompatible} data-modified=${value != settings_store[id].default}>
+                <div class="setting v2" data-type="options" disabled=${disabled} data-hide=${hide_if_incompatible} id="setting_${id}" data-modified=${value != settings_store[id].default}>
                     ${
                         icon ?
                             html.node`
@@ -791,7 +791,7 @@ export function setting({
             let lists;
 
             const elem = html.node`
-                <div class="setting v2" data-type="list">
+                <div class="setting v2" data-type="list" id="setting_${id}">
                     ${icon ? html.node`
                     <div class="icon">
                         <div class="bleh-icon" style="--icon: var(--${icon})" />
@@ -959,7 +959,7 @@ export function setting({
             let select_hook;
 
             let elem = html.node`
-                <div class="setting v2" data-type="options" disabled=${disabled} data-hide=${hide_if_incompatible} data-modified=${value != settings_store[id].default}>
+                <div class="setting v2" data-type="options" disabled=${disabled} data-hide=${hide_if_incompatible} id="setting_${id}" data-modified=${value != settings_store[id].default}>
                     ${
                         icon ?
                             html.node`

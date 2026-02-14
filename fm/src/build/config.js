@@ -1305,7 +1305,11 @@ export let settings_store = {
         default: '',
         type: 'select',
         title: trans.starred_friend.name,
-        body: trans.starred_friend.body
+        body: trans.starred_friend.body,
+        tags: [
+            trans.close_friends,
+            trans.friends_setting
+        ]
     },
     dismissed: {
         default: [],

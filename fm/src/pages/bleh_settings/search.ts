@@ -2,7 +2,7 @@ import { settings_store } from "@/build/config";
 import { tl, trans } from "@/build/trans";
 import { input } from "@/components/settings/input";
 import { html, render } from "lighterhtml";
-import { change_settings_page } from "./bleh_settings";
+import { change_settings_page, scroll_to_setting } from "./bleh_settings";
 import { page } from "@/build/page";
 
 export function settings_search(tabs) {
@@ -69,9 +69,29 @@ interface search_result {
 
 function search_results(tabs, query: string, results: search_result[]) {
     render(page.structure.main, html`
-        <p>found ${results.length} result(s)</p>
-        ${results.map(result => html.node`
-            <div>${result.id} - ${result.tab}</div>
-        `)}
+        <section class="search-result-container">
+            <p class="setting-search-results-count">${tl(trans.found_value_results, { c: results.length })}</p>
+            <div class="setting-search-results">
+                ${results.map(result => {
+                    const tab = tabs[result.tab];
+                    const formal = settings_store[result.id];
+
+                    return html.node`
+                        <button class="btn setting-search-result" onclick=${() => finalise_result(result)}>
+                            <div class="bleh-icon" style="--icon: var(--mask)" data-bleh-page=${result.tab} data-type=${tab.icon} />
+                            <div class="setting-search-result-info">
+                                <strong class="setting-search-result-header">${tl(formal.title)}</strong>
+                                <p class="setting-search-result-context">${tab.name}</p>
+                            </div>
+                        </button>
+                    `;
+                })}
+            </div>
+        </section>
     `);
+}
+
+function finalise_result(result: search_result) {
+    change_settings_page(result.tab);
+    scroll_to_setting(result.id);
 }

@@ -10314,6 +10314,12 @@ export const trans = {
     },
     album_name: {
         en: 'Album name'
+    },
+    search_for_settings: {
+        en: 'Search for settings'
+    },
+    found_value_results: {
+        en: 'Found {c} result(s)'
     }
 };
 
