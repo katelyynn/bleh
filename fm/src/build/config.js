@@ -723,12 +723,24 @@ export let settings_store = {
         default: true,
         title: trans.format_guest_features.name,
         body: trans.format_guest_features.body,
-        require_reload: 'partial'
+        require_reload: 'partial',
+        tags: [
+            'music',
+            'tracklist',
+            'title',
+            'tag'
+        ]
     },
     show_guest_features: {
         default: false,
         title: trans.show_guest_features.name,
-        body: trans.show_guest_features.body
+        body: trans.show_guest_features.body,
+        tags: [
+            'music',
+            'tracklist',
+            'title',
+            'tag'
+        ]
     },
     track_layout: {
         default: 'column',
@@ -742,7 +754,13 @@ export let settings_store = {
             row: {
                 name: trans.track_layout.row
             }
-        }
+        },
+        tags: [
+            'music',
+            'tracklist',
+            trans.track_layout.column,
+            trans.track_layout.row
+        ]
     },
     expand_tracks: {
         default: 'active',
@@ -760,7 +778,13 @@ export let settings_store = {
                 name: trans.never
             }
         },
-        incompatible: { track_layout: 'row' }
+        incompatible: { track_layout: 'row' },
+        tags: [
+            'music',
+            'tracklist',
+            trans.expand_tracks_always,
+            trans.expand_tracks_when_active
+        ]
     },
     track_album_name_location: {
         default: 'column',
@@ -775,12 +799,21 @@ export let settings_store = {
                 name: trans.track_album_name_location.row
             }
         },
-        incompatible: { track_layout: 'row' }
+        incompatible: { track_layout: 'row' },
+        tags: [
+            'music',
+            'tracklist',
+            trans.track_album_name_location.column,
+            trans.track_album_name_location.row
+        ]
     },
     glacier_library_graphs: {
         default: true,
         title: trans.glacier_graphs.name,
-        body: trans.glacier_graphs.body
+        body: trans.glacier_graphs.body,
+        tags: [
+            'music'
+        ]
     },
     show_remaster_tags: {
         default: true,
@@ -791,7 +824,10 @@ export let settings_store = {
         default: true,
         title: trans.correct_titles_with_lotus.name,
         body: trans.correct_titles_with_lotus.body,
-        require_reload: true
+        require_reload: true,
+        tags: [
+            'music'
+        ]
     },
     colourful_counts: {
         default: true,
@@ -936,17 +972,32 @@ export let settings_store = {
     profile_header_own: {
         default: true,
         type: 'checkbox',
-        title: trans.own_profile
+        title: trans.own_profile,
+        tags: [
+            trans.profile,
+            trans.username.name,
+            trans.profile_banner.name
+        ]
     },
     profile_header_others: {
         default: true,
         type: 'checkbox',
-        title: trans.other_profiles
+        title: trans.other_profiles,
+        tags: [
+            trans.profile,
+            trans.username.name,
+            trans.profile_banner.name
+        ]
     },
     profile_avi_background: {
         default: false,
         title: trans.profile_avi_background.name,
-        body: trans.profile_avi_background.body
+        body: trans.profile_avi_background.body,
+        tags: [
+            trans.profile,
+            trans.username.name,
+            trans.profile_banner.name
+        ]
     },
     profile_shortcut: {
         default: '',
@@ -966,7 +1017,10 @@ export let settings_store = {
         max: 120,
         title: trans.font.name,
         body: trans.font.body,
-        placeholder: trans.enter_font_names
+        placeholder: trans.enter_font_names,
+        tags: [
+            trans.text
+        ]
     },
     font_weight: {
         css: 'custom_font_weight',
@@ -1196,12 +1250,23 @@ export let settings_store = {
         type: 'list',
         title: trans.navigation_items.name,
         body: trans.navigation_items.body,
-        predefined: true
+        predefined: true,
+        tags: [
+            trans.profile,
+            trans.username.name,
+            'menu'
+        ]
     },
     navigation_language: {
         default: true,
         type: 'checkbox',
-        title: trans.navigation_language
+        title: trans.navigation_language,
+        tags: [
+            trans.language,
+            trans.profile,
+            trans.username.name,
+            'menu'
+        ]
     },
     branding_type: {
         default: 'bleh',
