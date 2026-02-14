@@ -48,8 +48,8 @@ export let lang_info = {
     },
     pt: {
         name: 'Português',
-        by: ['ArthRMH', 'satisfeita', 'fr0r', 'urwq', 'modulador592'],
-        last_updated: '2026-02-12'
+        by: ['ArthRMH', 'satisfeita', 'fr0r', 'urwq', 'astarrydeath'],
+        last_updated: '2026-02-14'
     },
     sv: {
         name: 'Svenska',
@@ -10002,7 +10002,7 @@ export const trans = {
             en: 'If you are a Last.fm Pro subscriber, you can view your current active track in your profile menu at all times',
             de: 'Wenn du ein Last.fm Pro-Abonnent bist, kannst du deinen aktuell aktiven Titel jederzeit in deinem Profilmenü ansehen',
             es: 'Si eres un suscriptor de Last.fm Pro, puedes ver tu tema activo actual en el menú de tu perfil en cualquier momento',
-            pt: 'Se você é assinante de Last.fm Pro, você pode ver sua faixa atual no menu de seu perfil a qualquer momento',
+            pt: 'Se você é assinante do Last.fm Pro, você pode ver sua faixa atual no menu de seu perfil a qualquer momento',
             ru: 'Если вы являетесь подписчиком Last.fm Pro, вы можете в любое время просматривать текущий активный трек в меню своего профиля'
         }
     },
@@ -10030,7 +10030,7 @@ export const trans = {
             en: 'Embed your current status onto your profile, can be moved around freely by editing your about me',
             ru: 'Вставьте свой текущий статус в профиль, его можно перемещать по свободному пространству, редактируя свой профиль',
             es: 'Añade tu estado actual a tu perfil, puede ser movido libremente al editar tu sobre mí',
-            pt: 'Insire seu status atual em seu perfil, pode ser movido livremente apenas editando seu sobre mim'
+            pt: 'Insira seu status atual em seu perfil, pode ser movido livremente apenas editando seu sobre mim'
         }
     },
     date_at_time: {
@@ -10210,7 +10210,7 @@ export const trans = {
         en: 'This message’s subject line indicates it was sent via bleh and {u} picked you as their valentine ♡',
         ru: 'Заголовок этого сообщения указывает, что оно было отправлено через bleh и {u} выбрал вас своим влюбленным ♡',
         es: 'El asunto de este mensaje indica que fue enviado a través de bleh y {u} te escogió como su San Valentín ♡',
-        pt: 'O assunto desta mensagem indica que foi enviada via bleh e {u} escolheu você como seu parceiro ♡' // in portuguese, there isn't a way to say 'valentine' without being partner -modustars
+        pt: 'O assunto desta mensagem indica que foi enviada via bleh e {u} escolheu você como seu parceiro no Dia dos Namorados ♡' // in portuguese, there isn't a way to say 'valentine' without being partner -modustars
     },
     got_it: {
         // used when dismissing a popup
@@ -10236,7 +10236,7 @@ export const trans = {
             en: 'You can choose which actions to show here by right-clicking for more options',
             ru: 'Вы можете выбрать, какие действия показывать здесь: щёлкните правой кнопкой мыши, чтобы открыть дополнительные параметры',
             es: 'Puedes elegir cuáles acciones mostrar aquí haciendo clic derecho para más opciones',
-            pt: 'Você pode escolher que ações para mostrar aqui apenas clicando botão direito para mais opções'
+            pt: 'Você pode escolher quais ações para mostrar aqui apenas clicando botão direito para mais opções'
         }
     },
     popup_inbox: {
@@ -10250,7 +10250,7 @@ export const trans = {
             en: 'Your notifications and messages have been organised into this handy button',
             ru: 'Ваша уведомления и сообщения были объединены в эту удобную кнопку',
             es: 'Tus notificaciones y mensajes han sido organizados en este útil botón',
-            pt: 'Suas notificações e mensagens foram organizadas nesse botão conveniente'
+            pt: 'Suas notificações e mensagens foram organizadas neste botão conveniente'
         }
     },
     popup_close_friends: {
@@ -10278,7 +10278,7 @@ export const trans = {
             en: 'These are sponsor-exclusive perks as a thank you for supporting bleh',
             ru: 'Это эксклюзивные преимущества для спонсоров, как благодарность за поддержку bleh', // don't really know how to translate 'perks' -tech
             es: 'Estas son ventajas exclusivas para patrocinadores como agradecimiento por apoyar a bleh',
-            pt: 'Essas são vantagens exclusivas para patrocinadores como agradecimento por apoiar bleh'
+            pt: 'Essas são vantagens exclusivas para patrocinadores, como forma de agradecimento por apoiar bleh'
         }
     },
     popup_markdown: {
@@ -10306,7 +10306,7 @@ export const trans = {
             en: 'Searching has never been easier to access, plus it hides away when you’re scrolled up',
             ru: 'Поиск никогда не был таким простым, а когда вы прокручиваете вверх, он скрывается',
             es: 'Buscar nunca ha sido más fácil, además se oculta cuando te desplazas hacia arriba',
-            pt: 'Buscar nunca tinha sido mais fácil, ademais, ele se oculta quando você rolar para cima'
+            pt: 'Pesquisar nunca tinha sido mais fácil, além de ficar oculta quando você rolar para cima'
         }
     },
     send_a_reply: {
@@ -10337,7 +10337,7 @@ export const trans = {
         en: 'Which albums did you expect to be linked to, e.g. Dawn FM instead of After Hours',
         ru: 'Какие альбомы вы ожидали увидеть, например, Dawn FM вместо After Hours',
         es: 'A qué álbumes esperabas ser llevado, p. ej. Dawn FM en vez de After Hours',
-        pt: 'A quais álbuns você espera que esperava ser vinculado, por exemplo, Dawn FM ao invés de After Hours'
+        pt: 'Quais álbuns você espera que esperava ser vinculado, p. ex, Dawn FM ao invés de After Hours'
     },
     oracle_sources_tip_album: {
         en: 'Which copy of the album did you expect to see? Provide links and some details as to why',
@@ -10357,7 +10357,7 @@ export const trans = {
     },
     loading_conversations: {
         en: 'Loading conversations',
-        pt: 'Carregando Conversas'
+        pt: 'Carregando conversas'
     },
     shoutbox_failed: {
         en: 'There was an error loading conversations “(ノ _ <,, )',
