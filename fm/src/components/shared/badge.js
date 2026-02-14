@@ -178,8 +178,7 @@ export function create_badge(
 
 export function verified() {
     const today = new Date();
-    //const april = today.getMonth() == 3 && today.getDate() == 1;
-    const april = true;
+    const april = today.getMonth() == 3 && today.getDate() == 1;
 
     page.state.april = april;
 

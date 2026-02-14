@@ -29089,7 +29089,7 @@
   }
   function verified() {
     const today = /* @__PURE__ */ new Date();
-    const april = true;
+    const april = today.getMonth() == 3 && today.getDate() == 1;
     page.state.april = april;
     if (april) document.body.setAttribute("data-verified-check", "true");
   }
