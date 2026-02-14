@@ -1,0 +1,262 @@
+.footer-link:before,
+.show-more > a:before,
+.markdown-action:before,
+.report-dropdown-button:before,
+.attendance-badge:before,
+.track-explicit:before,
+.lfmmaf-missing-artwork-button:before,
+.inbox-item:before,
+.reset:before,
+.input-container:after,
+.blend-v2-btn:before,
+.rabbit-search:after,
+.js-shout-reply-cancel:before,
+.notification-action:before,
+.inbox-compose-button:before,
+.share-link:before,
+.listener-row div:before,
+.mobile-control:before,
+.palette .swatch:before,
+.with-icon:before,
+.markdown-enabled:before, .tip.preview:before,
+.lotus-preview .before:before,
+.masthead-popup-text .btn-primary:before,
+.obsession-pagination a:before,
+.obsession-date:before, .obsession-delete-button:before, .obsession-listens:before,
+.footer-links :is(a, button):before,
+.library-search-results.async-content-loading:after,
+.radio-button:after, .radio-button h4:after,
+.listening-report-promo:after, .listening-report-promo .listening-report-promo-date:after,
+.side-action:after,
+.listen-item p:before,
+.metadata-column .cta-link-wrap a:before, .lyrics-snippet-more-link a:before,
+.see-more:before, #events-section > p > a:before,
+.more-link-fullwidth a:before,
+.modal-body .js-close:not(.btn-primary):before,
+.view-all-button:before,
+.music-featured-item-background:before,
+.gallery-image-preferred-states:before, .gallery-image-votes:before,
+.user-list-follower-btn:before,
+.to-consider li:before,
+.toggle .dot:before, .icon:before, .icon-r:before,
+.chartlist-now-scrobbling:before,
+[data-link-type]:before,
+.read-more:before, .wiki-edit-small:before, .tags-view-all:before, .featured-item-manage:before,
+.out-now-btn:before,
+.weeklychart-change:before,
+.weeklychart-listeners:before, .weeklychart-scrobblers:before,
+.music-bookmarks-tags-item-toggle:before,
+.music-bookmarks-artists-item-toggle:before,
+.music-bookmarks-albums-item-toggle:before,
+.sponsor:before,
+.skip-to-item:before,
+.chart-table--buttons button:before,
+.api-session-connect:before, .api-session-disconnect:before,
+.scrobble-canvas-container:before,
+.grid-item-plays:before, .obesssions-item-date:before,
+.lastfm-bulk-edit-form-group-controls button:before,
+.lastfm-bulk-edit-progress:before,
+.tag-icon:before, .setting-icon:before,
+.image-open-button:before, .image-share-button:before,
+.breadcrumb :is(a, .breadcrumb-origin):before, .gallery-image-uploaded-by:before,
+/* v2 */ .form-arrow:before,
+.select-button:after,
+.involved--track:before, .involved--album:before, .involved--artist:before, .involved--tag:before, .involved--user:before,
+.activity-item:before,
+.lotus-name:before,
+.modal-action-button:before,
+.big-btn:before,
+.error-page h3:before,
+.requesting:before,
+.modal-processing:before, #bleh--window-bleh_wait--body:before,
+.side-right .setting-item:before, .side-right .setting-item:after, .action:before, .action:after,
+.setup-icon:before, .setup-icon:after,
+.btn.back:before,
+.modal-close-button:before, .masthead-popup-close:before,
+.continue:before, .external:before, .done:before, .cancel:before, .btn-cancel:before, .download:before, .upload:before, .save:before, .open:before, .btn-secondary.js-close:not(.modal-action-button):before, .form-group button[type="submit"]:before, .modal-button button[type="submit"]:before,
+.badge:before,
+.btn-post-shout:before,
+.auth-link:before, .language-nav:before, .language-nav > span:before,
+.gallery-placeholder:before,
+.image-list-item-bookmarked:after, .image-list-item-preferred:after, .obsessions-item:after,
+.data-loading:after, .lazy-shoutbox.async-content-loading:after, .loading:not(.library-fetch, .library-date-picker):after,
+.nag-bar-message:before,
+/*     BLEH     */
+.arrow-divider:before,
+.view-item:not(.profile-top-item--taste):before,
+.loading-data-text:before,
+.btns .btn:before,
+.profile-note-row .btn:before,
+.btn--has-icon:before,
+.avatar-overlay:before,
+.grid-item:before,
+.primary-selection:not(.no-icon):after,
+:is(.shout-body, .about-me-sidebar, .bleh--about-me-preview, .user-list-about-me) > p a:before,
+/*     DROPDOWNS     */
+.dropdown-menu-clickable-item:not(.v2):before,
+.dropdown-menu-list-button::after, .dropdown-menu-clickable-button:not(.link-select, .report-dropdown-button)::after, .dropdown-menu-clickable-button-js-only::after, .display-options-clickable-button:after,
+/*     PAGINATION     */
+.pagination-previous a:before, .pagination-next a:before,
+/*     MORE LINK >     */
+.more-link a:before, .more-link-fullwidth-right a:before, .more-link-fullwidth-right-flush-top a:before, .inline-add-icon:before, .more-link-with-action a:not(.inline-add-icon):after,
+.more-items:before,
+.artist-similar-sidebar > h3:before,
+.btn-shortcut:before,
+.external-link:before,
+/*     NAV     */
+.secondary-nav-item-link:before,
+.navlist-more:before,
+/*     PLAYLINKS & MEDIA LINKS     */
+.music-link:before,
+.section-playlink:before, .inline-section-control:before,
+.header-new-playlink:before,
+/*     SHOUT     */
+.shout:before,
+.shout-more-replies-after:before, .shout-more-replies-before:before,
+/* managing an inbox msg */ :is(.back-button, .delete-button):before,
+/*     EVENTS     */
+.event-detail:before, .event-metadata:not(:last-child):before,
+/*     BREADCRUMBS     */
+.content-top-back-link:after, .subpage-breadcrumb li:after,
+/*     HEADER     */
+.masthead-nav-control:before,
+.masthead-search-submit:before,
+.masthead-hamburger-toggle:before,
+/*     ALERT/INFO     */
+.alert:not(.big-modal-alert, .form-disclaimer > .alert):before, .event-status:before, .async-content-error-message:before,
+/*     USER NAME LABELS     */
+.label:before, .header-new-on-tour:before,
+/*     CUSTOM AVATAR ICONS WITHOUT PRO     */
+.avatar-status-dot:after,
+/*     MODAL     */
+/*     SETTINGS     */
+#current-subscription h3:before, #current-subscription h2 + p b:before,
+.content-form .table .delete:before,
+.form-group-controls:has(select):before,
+#manage_data .btn-primary:before,
+/*     USER LISTS (EG. FOLLOWING)     */
+.user-list-avatar:before,
+/*     PROFILE     */
+.profile-header-set-obsession:before,
+.share-button-profile:before, .panel-settings-button:before,
+.inline-section-control:before,
+.header .header-message-user:before,
+/*     TRACK/ALBUM/ARTIST HEADER     */
+.header-new-more-button:before,
+/*     TAGS     */
+.tags-add:before,
+/*     CHARTLIST     */
+.chartlist-love-button:before,
+.chartlist-type:before,
+/*     HOME     */
+.home-welcome-close:before,
+/*     GALLERY     */
+.gallery-image-delete button:before, .gallery-image-report:before,
+.btn-add:before, .btn-file:before,
+.arrow:not(.scroll-button .arrow, .hidden-xs):before,
+.header-new-gallery--link .header-new-gallery-inner:before,
+.image-upload-remove:before,
+/*     PLAYLISTS     */
+.playlisting-playlist-header-more-button:before,
+.playlisting-playlists-item-toggle:before,
+.playlisting-playlists-item-name:before,
+.playlisting-create-option-icon:before,
+/*     PLAYER BAR     */
+.player-bar-btn:before,
+.dropdown-menu-item-dark:before,
+/*     UPLOAD CTA     */
+.video-preview-upload-cta .cta-link:before, .gallery-preview-cta .cta-link:before, .album-artwork-upload-cta .cta-link:before,
+.shout-more-actions:before,
+.album-overview-cover-art-action-row a:before,
+.coloured-cta:before,
+span.header-new-gallery-inner a:before,
+/*     LIBRARY     */
+.all-results-list li:before,
+.library-view-button:before,
+.library-search-submit::before,
+.date-range-picker-button:after,
+/*     WIKI     */
+.wiki-history-action:before,
+/*     SEARCH     */
+.search-submit:before, .search-reset:before,
+/*     SET AN OBSESSION     */
+.obsession-candidate-inner .btn-sm:before,
+/*     GENERIC     */
+.btn--loading:after,
+.music-more-link a:before {
+    content: "";
+    display: var(--show-icon, block) !important;
+    mask-position: 0 0 !important;
+    left: var(--left, var(--button-sides-icon)) !important;
+    margin-top: var(
+        --margin-top,
+        calc(-1 * (var(--mask-size, var(--icon-size)) / 2))
+    ) !important;
+    margin-left: var(--margin-left, unset) !important;
+    margin-right: var(--margin-right, unset) !important;
+    width: var(--mask-size, var(--icon-size)) !important;
+    height: var(--mask-size, var(--icon-size)) !important;
+    box-shadow: unset !important;
+    position: absolute;
+    right: var(--right, auto) !important;
+    top: var(--top, 50%) !important;
+    bottom: var(--bottom, unset) !important;
+    background-repeat: no-repeat;
+    background-image: var(--flag-url, unset) !important;
+    background-color: var(--mask-colour, currentColor);
+    border-radius: unset;
+    mask-image: var(--mask, var(--icon-16-placeholder));
+    -webkit-mask-image: var(--mask, var(--icon-16-placeholder));
+    mask-size: var(--mask-size, var(--icon-size));
+    -webkit-mask-size: var(--mask-size, var(--icon-size));
+    transition-property: var(
+        --transition-property,
+        opacity,
+        left,
+        background,
+        transform
+    ) !important;
+    transition-duration: var(--trans) !important;
+    transition-timing-function: var(--trans-function) !important;
+}
+.out-now-btn:before,
+.select-button:not(.link-select):after,
+.external:before,
+.open:before,
+.btn-shortcut:before,
+.gallery-next .arrow,
+.header-new-gallery--link .header-new-gallery-inner:before,
+.form-group-controls:has(select):before,
+.dropdown-menu-list-button::after,
+.dropdown-menu-clickable-button::after,
+.dropdown-menu-clickable-button-js-only::after,
+.display-options-clickable-button:after,
+.all-results-list li:before,
+.language-nav,
+.auth-link {
+    --left: none !important;
+    --right: var(--button-sides-icon) !important;
+}
+
+.bleh-icon {
+    background: var(--icon-colour, var(--mask-colour, currentColor));
+    mask-image: var(--icon, var(--icon-16-placeholder));
+    -webkit-mask-image: var(--icon, var(--icon-16-placeholder));
+    mask-size: var(--icon-size, 18px);
+    -webkit-mask-size: var(--icon-size, 18px);
+    mask-position: center;
+    -webkit-mask-position: center;
+    mask-repeat: no-repeat;
+    -webkit-mask-repeat: no-repeat;
+    width: var(--icon-size, 18px);
+    height: var(--icon-size, 18px);
+
+    &.in-markdown {
+        --icon-size: 14px;
+    }
+}
+span.bleh-icon {
+    display: inline-block;
+    height: 100%;
+    min-height: var(--icon-size);
+}

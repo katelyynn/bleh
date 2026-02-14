@@ -1,0 +1,1032 @@
+body {
+    --version-build: "2026.0212";
+
+    --font:
+        var(--custom_font, ""), Funnel Sans, Inter, Ubuntu Sans, Spline Sans,
+        Roboto, Apple Color Emoji, var(--font_emoji_name, ""), Segoe UI Symbol, Apple Symbols, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Sans TC,
+        Lucida Grande, Verdana, -apple-system, BlinkMacSystemFont,
+        sans-serif;
+    --font-code:
+        Google Sans Code, JetBrains Mono, Roboto Mono, monospace,
+        var(--font);
+    --font-brand: Darumadrop One, var(--font);
+    --font-size: 14px;
+    --line-height: calc(var(--font-size) + 4px);
+    --font-size-sm: 12px;
+    --line-height-sm: calc(var(--font-size-sm) + 4px);
+
+    --hue: var(
+        --hue-over,
+        var(--hue-album, var(--hue-user, var(--hue-seasonal, 255)))
+    );
+    --sat: var(
+        --sat-over,
+        var(--sat-album, var(--sat-user, var(--sat-seasonal, 1)))
+    );
+    --lit: var(
+        --lit-over,
+        var(--lit-album, var(--lit-user, var(--lit-seasonal, 1)))
+    );
+
+    [data-season="easter"],
+    [data-bleh--season="easter"] > & {
+        --hue-seasonal: 143;
+        --sat-seasonal: 1;
+        --lit-seasonal: 1.15;
+    }
+    [data-season="halloween"],
+    [data-bleh--season="halloween"] > & {
+        --hue-seasonal: 14;
+        --sat-seasonal: 1.6;
+        --lit-seasonal: 1;
+    }
+    [data-season="pre_fall"],
+    [data-bleh--season="pre_fall"] > & {
+        --hue-seasonal: 40;
+        --sat-seasonal: 0.9;
+        --lit-seasonal: 1.1;
+    }
+    [data-season="fall"],
+    [data-bleh--season="fall"] > & {
+        --hue-seasonal: 224;
+        --sat-seasonal: 0.85;
+        --lit-seasonal: 1.1;
+
+        --hue-pos: 150;
+    }
+    [data-season="christmas"],
+    [data-bleh--season="christmas"] > & {
+        --hue-seasonal: 204;
+        --sat-seasonal: 0.85;
+        --lit-seasonal: 1.17;
+
+        --hue-pos: 150;
+    }
+    [data-season="new_years"],
+    [data-bleh--season="new_years"] > & {
+        --hue-seasonal: 238;
+        --sat-seasonal: 0.925;
+        --lit-seasonal: 1.1;
+
+        --hue-pos: 150;
+    }
+
+    --brand: "bleh";
+
+    --hue-pos: 120;
+    --sat-pos: 1.05;
+    --lit-pos: 1.025;
+
+    --hue-neg: 0;
+    --sat-neg: 1.1;
+    --lit-neg: 0.9;
+
+    --hue-fav: 30;
+    --sat-fav: 1.5;
+    --lit-fav: 1;
+
+    --hue-orange: 33;
+    --sat-orange: 1.4;
+    --lit-orange: 0.98;
+
+    --hue-pro: 174;
+    --sat-pro: 1;
+    --lit-pro: 1;
+
+    --hue-brand-yt: -2;
+    --hue-brand-sp: 143;
+    --hue-brand-sc: 10;
+    --hue-brand-it: 340;
+    --hue-brand-am: 340;
+    --hue-brand-fb: 215;
+    --hue-brand-ig: 300;
+    --hue-brand-twt: 202;
+
+    --hue-valentine: 353;
+    --sat-valentine: 1.32;
+    --sat-valentine: 0.97;
+
+    --trans-short: 0.2s;
+    --trans: 0.2s;
+    --trans-function: cubic-bezier(0.095, 0.410, 0.055, 0.960);
+    --trans-function-ani: cubic-bezier(0.205, 0.060, 0.050, 0.965);
+
+    --ina: var(--motion, ina 0.4s var(--trans-function-ani));
+    --blur-in: var(--motion, blur_in 0.4s var(--trans-function-ani));
+
+    --button-sides: 9px;
+    --button-sides-icon: calc(var(--button-sides) - 2px);
+    --button-verts: 6px;
+    --button-height: 30px;
+    --button-radius: 12px;
+    --icon-size: 18px;
+    --icon-half: 9px;
+    --icon-gap: 4px;
+
+    --follow-button-size: 36px;
+
+    --modal-close-size: 26px;
+
+    --at-opacity: 0.6;
+    --tag-opacity: 0.6;
+
+    --message-sender-width: 190px;
+    --message-width: 800px;
+
+    @media (max-width: 980px) {
+        --button-sides: 9px;
+        --button-verts: 7px;
+        --button-height: 32px;
+    }
+
+    --banner-height: 280px;
+    --banner-offset: 240px;
+
+    [data-ff--short="true"] > & {
+        --banner-height: 800px;
+    }
+
+    [data-bleh--theme="glass"] > & {
+        --banner-height: 1200px;
+    }
+
+    --glass-bg: rgb(255 255 255 / 30%);
+    --glass-border: var(--glass-border);
+    --glass-shadow:
+        inset 2px 2px 1px 0 rgb(255 255 255 / 10%),
+        inset -1px -1px 1px 1px rgb(255 255 255 / 10%);
+    --glass-filter: blur(25px) saturate(var(--blur-saturate));
+
+    [data-ff--astra="true"] > & {
+        --font:
+            var(--custom_font, ""), Work Sans, Ubuntu Sans, Spline Sans,
+            Inter, Roboto, Noto Sans, Noto Sans JP, Noto Sans KR,
+            Noto Sans TC, var(--font_emoji_name, ""), Lucida Grande,
+            Verdana, Tahoma, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    [data-bleh--font_emoji="true"] > & {
+        --font_emoji_name: Noto Color Emoji;
+    }
+
+    [data-bleh--reduced_motion="true"] > & {
+        --motion: none;
+    }
+
+    &[data-verified-check="true"] {
+        --icon-pro: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJjdXJyZW50Q29sb3IiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1maWxsZWQgaWNvbi10YWJsZXItcm9zZXR0ZS1kaXNjb3VudC1jaGVjayI+PHBhdGggc3Ryb2tlPSJub25lIiBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTEyLjAxIDIuMDExYTMuMiAzLjIgMCAwIDEgMi4xMTMgLjc5N2wuMTU0IC4xNDVsLjY5OCAuNjk4YTEuMiAxLjIgMCAwIDAgLjcxIC4zNDFsLjEzNSAuMDA4aDFhMy4yIDMuMiAwIDAgMSAzLjE5NSAzLjAxOGwuMDA1IC4xODJ2MWMwIC4yNyAuMDkyIC41MzMgLjI1OCAuNzQzbC4wOSAuMWwuNjk3IC42OThhMy4yIDMuMiAwIDAgMSAuMTQ3IDQuMzgybC0uMTQ1IC4xNTRsLS42OTggLjY5OGExLjIgMS4yIDAgMCAwIC0uMzQxIC43MWwtLjAwOCAuMTM1djFhMy4yIDMuMiAwIDAgMSAtMy4wMTggMy4xOTVsLS4xODIgLjAwNWgtMWExLjIgMS4yIDAgMCAwIC0uNzQzIC4yNThsLS4xIC4wOWwtLjY5OCAuNjk3YTMuMiAzLjIgMCAwIDEgLTQuMzgyIC4xNDdsLS4xNTQgLS4xNDVsLS42OTggLS42OThhMS4yIDEuMiAwIDAgMCAtLjcxIC0uMzQxbC0uMTM1IC0uMDA4aC0xYTMuMiAzLjIgMCAwIDEgLTMuMTk1IC0zLjAxOGwtLjAwNSAtLjE4MnYtMWExLjIgMS4yIDAgMCAwIC0uMjU4IC0uNzQzbC0uMDkgLS4xbC0uNjk3IC0uNjk4YTMuMiAzLjIgMCAwIDEgLS4xNDcgLTQuMzgybC4xNDUgLS4xNTRsLjY5OCAtLjY5OGExLjIgMS4yIDAgMCAwIC4zNDEgLS43MWwuMDA4IC0uMTM1di0xbC4wMDUgLS4xODJhMy4yIDMuMiAwIDAgMSAzLjAxMyAtMy4wMTNsLjE4MiAtLjAwNWgxYTEuMiAxLjIgMCAwIDAgLjc0MyAtLjI1OGwuMSAtLjA5bC42OTggLS42OTdhMy4yIDMuMiAwIDAgMSAyLjI2OSAtLjk0NHptMy42OTcgNy4yODJhMSAxIDAgMCAwIC0xLjQxNCAwbC0zLjI5MyAzLjI5MmwtMS4yOTMgLTEuMjkybC0uMDk0IC0uMDgzYTEgMSAwIDAgMCAtMS4zMiAxLjQ5N2wyIDJsLjA5NCAuMDgzYTEgMSAwIDAgMCAxLjMyIC0uMDgzbDQgLTRsLjA4MyAtLjA5NGExIDEgMCAwIDAgLS4wODMgLTEuMzJ6IiAvPjwvc3ZnPg==') !important;
+        --icon-16-pro: var(--icon-pro);
+        --hue-pro: 200;
+        --sat-pro: 1.3;
+        --lit-pro: 0.96;
+    }
+
+    --blank: url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7);
+}
+
+.music-more-tags-tag-inner-wrap,
+.music-featured-item-heading-link,
+.music-featured-item-body,
+body {
+    --font-weight: var(--custom_font_weight, 480);
+    --font-weight-medium: var(--custom_font_weight_medium, 650);
+    --font-weight-bold: var(--custom_font_weight_bold, 730);
+}
+
+/* backgrounds */
+body,
+.user-dashboard-layout,
+.theme-preview,
+.theme-preview[data-bleh--theme="dark"],
+.listen-item,
+.lotus.bleh--panel,
+[data-bleh--label="bleh"],
+[data-bleh-page="seasonal"],
+.colourful-bg {
+    /* any additional highlights */
+    --b2: var(--hue), calc(var(--sat) * 6% * var(--sat-bg, 1)), 40%;
+    --b3: var(--hue), calc(var(--sat) * 6% * var(--sat-bg, 1)), 30%;
+
+    /* card border */
+    --b4: var(--hue), calc(var(--sat) * 5% * var(--sat-bg, 1)), 26%;
+
+    /* card */
+    --b5: var(--hue), calc(var(--sat) * 5% * var(--sat-bg, 1)), 18%;
+
+    /* root */
+    --b6: var(--hue), calc(var(--sat) * 4% * var(--sat-bg, 1)), 14%;
+    --b8: var(--hue), calc(var(--sat) * 4% * var(--sat-bg, 1)), 21%;
+    --b7: 0, 0%, 0%;
+    --b9: var(--b6);
+
+    --card-border: inset 0 0 0 1px hsla(var(--b4), 0.6);
+    --card-border-base: hsl(var(--b3), 0.7);
+    --card-border-base-highlight: hsl(var(--b2), 0.55);
+
+    --separator: linear-gradient(90deg, transparent, var(--separator-base), transparent);
+    --separator-base: var(--card-border-base);
+
+    --textarea: hsl(var(--b6), 60%);
+    --textarea-hov: hsl(var(--b6), 90%);
+
+    --banner-overlay: transparent;
+    --banner-mix: none;
+
+    --normal-shadow:
+        inset 0 1px 0 0 hsl(var(--b2), 70%),
+        inset 0 -30px 6px -30px hsl(var(--b2), 40%);
+    --input-shadow:
+        inset 0 -1px 0 0 hsl(var(--b3), 70%),
+        inset 0 1px 2px hsl(var(--b7), 0.2);
+    --focused-input-shadow:
+        inset 0 0 0 1px hsl(var(--h3), 40%),
+        var(--input-shadow);
+    --group-shadow:
+        inset 0 1px 0 0 hsl(var(--b2), 0.3),
+        inset 0 0 0 1px hsl(var(--b3), 0.35);
+
+    --sidebar-bg: color-mix(in hsl, hsl(var(--b6)) 22%, hsl(var(--b5)));
+    --sidebar-border: color-mix(in hsl, hsl(var(--b5)), hsl(var(--b4)) 25%);
+    --toolbar-bg: hsl(var(--b6), 30%);
+    --toolbar-border: 1px solid hsl(var(--b4), 75%);
+    --subtle-border: 1px solid hsl(var(--b4), 55%);
+
+    --card-blur-bg: hsl(var(--b5), var(--solarium-opacity, 70%));
+    --card-blur-bg-alt: hsl(var(--b5), var(--solarium-opacity, 35%));
+
+    --nav-filter-shadow: drop-shadow(0 0 4px hsl(var(--b6))) drop-shadow(0 0 10px hsl(var(--b6), 90%));
+    --header-filter-shadow: drop-shadow(0 0 3px hsl(var(--b6))) drop-shadow(0 0 10px hsl(var(--b6)));
+
+    --menu-item-hov: hsla(var(--b4), 40%);
+    --menu-item-atv: hsla(var(--b4), 60%);
+
+    --setting-hover: hsl(var(--b4), 20%);
+
+    --setting-group: hsl(var(--b6), 20%);
+
+    --lastfm-logo-filter: saturate(0%) contrast(0%) brightness(200%);
+
+    .theme-preview[data-bleh--theme="darker"],
+    [data-bleh--theme="darker"] &:not(.theme-preview) {
+        /* any additional highlights */
+        --b2: var(--hue), calc(var(--sat) * 5% * var(--sat-bg, 1)), 29%;
+        --b3: var(--hue), calc(var(--sat) * 5% * var(--sat-bg, 1)), 19%;
+
+        /* card border */
+        --b4: var(--hue), calc(var(--sat) * 6% * var(--sat-bg, 1)), 14%;
+
+        /* card */
+        --b5: var(--hue), calc(var(--sat) * 6% * var(--sat-bg, 1)), 9%;
+
+        /* root */
+        --b6: var(--hue), calc(var(--sat) * 5% * var(--sat-bg, 1)), 6%;
+        --b8: var(--hue), calc(var(--sat) * 5% * var(--sat-bg, 1)), 11%;
+        --b7: 0, 0%, 0%;
+
+        --menu-item-hov: hsla(var(--b4), 60%);
+        --menu-item-atv: hsla(var(--b4), 80%);
+
+        --card-blur-bg: hsl(var(--b5), var(--solarium-opacity, 50%));
+        --card-blur-bg-alt: hsl(var(--b5), var(--solarium-opacity, 35%));
+    }
+    .theme-preview[data-bleh--theme="oled"],
+    [data-bleh--theme="oled"] &:not(.theme-preview) {
+        /* any additional highlights */
+        --b2: var(--hue), calc(var(--sat) * 5% * var(--sat-bg, 1)), 23%;
+        --b3: var(--hue), calc(var(--sat) * 5% * var(--sat-bg, 1)), 11%;
+
+        /* card border */
+        --b4: var(--hue), calc(var(--sat) * 6% * var(--sat-bg, 1)), 10%;
+
+        /* card */
+        --b5: var(--hue), calc(var(--sat) * 6% * var(--sat-bg, 1)), 4%;
+
+        /* root */
+        --b6: 0, 0%, 0%;
+        --b8: 0, 0%, 7%;
+        --b7: 0, 0%, 0%;
+
+        --separator-base: hsl(var(--b2), 0.7);
+
+        --card-border-base: hsl(var(--b3), 0.7);
+        --card-border-base-highlight: hsl(var(--b2), 0.6);
+
+        --input-shadow:
+            inset 0 -1px 0 0 hsl(var(--b3)),
+            inset 0 1px 2px 1px hsl(var(--b3), 0.4);
+        --focused-input-shadow:
+            inset 0 0 0 1px hsl(var(--h3), 40%),
+            var(--input-shadow);
+        --group-shadow:
+            inset 0 1px 0 0 hsl(var(--b2), 0.5),
+            inset 0 0 0 1px hsl(var(--b3), 0.6);
+
+        --sidebar-bg: color-mix(in hsl, hsl(var(--b4)) 22%, hsl(var(--b5)));
+        --sidebar-border: color-mix(
+            in hsl,
+            hsl(var(--b5)),
+            hsl(var(--b4)) 35%
+        );
+        --toolbar-bg: hsl(var(--b4), 20%);
+        --toolbar-border: 1px solid hsl(var(--b4), 45%);
+        --subtle-border: 1px solid hsl(var(--b4), 35%);
+
+        --card-blur-bg: hsl(var(--b5), var(--solarium-opacity, 30%));
+        --card-blur-bg-alt: hsl(var(--b5), var(--solarium-opacity, 40%));
+
+        --setting-hover: hsl(var(--b4), 30%);
+
+        --textarea: hsl(var(--b4), 25%);
+        --textarea-hov: hsl(var(--b4), 35%);
+    }
+    .theme-preview[data-bleh--theme="light"],
+    [data-bleh--theme="light"] &:not(.theme-preview) {
+        /* any additional highlights */
+        --b2: 0, 0%, 82%;
+        --b3: 0, 0%, 98%;
+
+        /* card border */
+        --b4: 0, 0%, 91%;
+
+        /* card */
+        --b5: 0, 0%, 100%;
+
+        /* root */
+        --b6: 0, 0%, 94%;
+        --b8: 0, 0%, 100%;
+        --b7: 0, 0%, 0%;
+        --b9: 0, 0%, 100%;
+
+        --card-border-base: hsl(0, 0%, 87%) !important;
+        --card-border-base-highlight: hsl(0, 0%, 89%);
+
+        --normal-shadow:
+            inset 0 -1px 0 0 hsl(var(--b2), 60%),
+            inset 0 -30px 20px -20px hsl(var(--b4), 15%);
+        --input-shadow:
+            inset 0 -1px 0 0 var(--card-border-base),
+            inset 0 1px 3px hsl(var(--b7), 0.1);
+        --focused-input-shadow:
+            inset 0 0 0 1px hsl(var(--l3-c), 30%),
+            var(--input-shadow);
+        --group-shadow:
+            inset 0 -1px 0 0 hsl(var(--b4), 0.4),
+            inset 0 0 0 1px hsl(var(--b4), 0.4);
+
+        --sidebar-bg: color-mix(in hsl, hsl(var(--b6)) 56%, hsl(var(--b5)));
+        --sidebar-border: color-mix(
+            in hsl,
+            hsl(var(--b5)),
+            hsl(var(--b4)) 55%
+        );
+        --toolbar-bg: hsl(var(--b4), 10%);
+        --toolbar-border: 1px solid hsl(var(--b4), 85%);
+        --subtle-border: 1px solid hsl(var(--b4), 65%);
+
+        --card-blur-bg: hsl(var(--b5), var(--solarium-opacity, 65%));
+        --card-blur-bg-alt: hsl(var(--b5), var(--solarium-opacity, 22%));
+
+        --menu-item-hov: hsla(var(--b4), 60%);
+        --menu-item-atv: hsla(var(--b4), 80%);
+
+        --nav-filter-shadow: drop-shadow(0 0 2px hsl(var(--b5)));
+        --header-filter-shadow: drop-shadow(0 0 10px hsl(var(--b5)));
+
+        --banner-overlay: hsl(var(--b5), 20%);
+        --banner-mix: lighten;
+
+        --setting-group: hsl(var(--b6), 8%);
+
+        --lastfm-logo-filter: none;
+
+        --textarea: hsl(var(--b6), 40%);
+        --textarea-hov: hsl(var(--b6), 70%);
+    }
+    .theme-preview[data-bleh--theme="ink"],
+    [data-bleh--theme="ink"] &:not(.theme-preview) {
+        /* any additional highlights */
+        --b3: var(--hue), calc(var(--sat) * 18% * var(--sat-bg, 1)), 86%;
+
+        /* card border */
+        --b4: var(--hue), calc(var(--sat) * 12% * var(--sat-bg, 1)), 70%;
+
+        /* card */
+        --b5: var(--hue), calc(var(--sat) * 16% * var(--sat-bg, 1)), 83%;
+
+        /* root */
+        --b6: var(--hue), calc(var(--sat) * 14% * var(--sat-bg, 1)), 77%;
+        --b8: var(--hue), calc(var(--sat) * 12% * var(--sat-bg, 1)), 86%;
+        --b7: var(--hue), calc(var(--sat) * 34% * var(--sat-bg, 1)), 17%;
+        --b9: 0, 0%, 84%;
+
+        --card-border-base: hsl(
+            var(--hue),
+            calc(var(--sat) * 9% * var(--sat-bg, 1)),
+            72%
+        ) !important;
+        --card-border-base-highlight: hsl(
+            var(--hue),
+            calc(var(--sat) * 9% * var(--sat-bg, 1)),
+            75%
+        ) !important;
+
+        --normal-shadow:
+            inset 0 -1px 0 0 hsl(var(--b2), 25%),
+            inset 0 -30px 20px -20px hsl(var(--b4), 20%);
+        --input-shadow:
+            inset 0 -1px 0 0 var(--card-border-base),
+            inset 0 1px 3px hsl(var(--b7), 0.1);
+        --focused-input-shadow:
+            inset 0 0 0 1px hsl(var(--l3-c), 30%),
+            var(--input-shadow);
+        --group-shadow:
+            inset 0 -1px 0 0 hsl(var(--b4), 0.4),
+            inset 0 0 0 1px hsl(var(--b4), 0.15);
+
+        --sidebar-bg: color-mix(in hsl, hsl(var(--b6)) 56%, hsl(var(--b5)));
+        --sidebar-border: color-mix(
+            in hsl,
+            hsl(var(--b5)),
+            hsl(var(--b4)) 25%
+        );
+        --toolbar-bg: hsl(var(--b4), 10%);
+        --toolbar-border: 1px solid hsl(var(--b4), 50%);
+        --subtle-border: 1px solid hsl(var(--b4), 65%);
+
+        --nav-filter-shadow: drop-shadow(0 0 2px hsl(var(--b5)));
+        --header-filter-shadow: drop-shadow(0 0 10px hsl(var(--b5)));
+
+        --card-blur-bg: hsl(var(--b5), var(--solarium-opacity, 72%));
+        --card-blur-bg-alt: hsl(var(--b5), var(--solarium-opacity, 22%));
+
+        --banner-overlay: hsl(var(--b5), 20%);
+        --banner-mix: lighten;
+
+        --setting-group: hsl(var(--b6), 14%);
+
+        --lastfm-logo-filter: none;
+
+        --textarea: hsl(var(--b6), 30%);
+        --textarea-hov: hsl(var(--b6), 60%);
+    }
+}
+
+/* text */
+body,
+.tasteometer-compat-colour,
+.gallery-image-preferred-button,
+button,
+.gallery-image-preferred-states,
+stop,
+.alert, .event-status, .big-modal-alert,
+a,
+#current-subscription,
+.events-list-item-date-icon, .calendar-icon,
+.async-content-error-message,
+.avatar-status-dot, .label, .user-status-None,
+.chartlist-count-bar, .chartlist-count-bar-value,
+.nag-bar--alert,
+.form-row-help-text,
+.chartlist-loved,
+.theme-preview, .theme-preview[data-bleh--theme="dark"],
+.badge,
+[data-season],
+.small-alert,
+.lotus, .sponsor-related,
+.vote-number,
+.changelog-version-item,
+u,
+.grid-items-item.grid-items-item-has-colour > .grid-items-cover-image,
+.toggle /* for toggles that arent buttons */,
+.bleh-icon,
+.weeklychart-change,
+.new-badge,
+.error-info,
+.inbox-message-view .inbox-message-sender-avatar,
+.colourful,
+.events-list-item-attendees,
+.tip[data-exceeded="true"],
+.gallery-image-preferred-container,
+.events-list-item-date-icon-month, .calendar-icon-month,
+.attendance-badge {
+    --hue: var(--hue-over, var(--hue-album, var(--hue-user, var(--hue-seasonal, 255))));
+    --sat: var(--sat-over, var(--sat-album, var(--sat-user, var(--sat-seasonal, 1))));
+    --lit: var(--lit-over, var(--lit-album, var(--lit-user, var(--lit-seasonal, 1))));
+
+    --c1: var(--hue), calc(clamp(min(0), var(--sat), max(1)) * 40%), 100%;
+    --c2: var(--hue), calc(clamp(min(0), var(--sat), max(1)) * 30%), 87%;
+    --c3: var(--hue), calc(clamp(min(0), var(--sat), max(1)) * 7%), 60%;
+    --ov-c1: var(--c1);
+
+    --l2: var(--hue), calc(var(--sat) * 50%), calc(var(--lit) * 83%);
+    --l3: var(--hue), calc(var(--sat) * 60%), calc(var(--lit) * 70%);
+    --l4: var(--hue), calc(var(--sat) * 70%), calc(var(--lit) * 50%);
+
+    --l2-c:
+        var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 40%),
+        calc(clamp(min(0.8), var(--lit), max(2)) * 82%);
+    --l3-c:
+        var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 50%),
+        calc(clamp(min(0.5), var(--lit), max(2)) * 70%);
+    --l3-c-sat: calc(clamp(min(0), var(--sat), max(2)) * 50%);
+    --l3-c-lit: calc(clamp(min(0.5), var(--lit), max(2)) * 70%);
+    --l4-c:
+        var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 55%),
+        calc(clamp(min(0.5), var(--lit), max(2)) * 55%);
+
+    --h2: var(--l2-c);
+    --h3: var(--l3-c);
+    --h3-s: var(--hue), 50%, 70%;
+    --h3-sat: calc(clamp(min(0), var(--sat), max(2)) * 60%);
+    --h3-lit: calc(clamp(min(0.5), var(--lit), max(2)) * 70%);
+    --h4: var(--l4-c);
+    --f4:
+        var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 40%),
+        calc(clamp(min(0.8), var(--lit), max(2)) * 42%);
+    --k4: var(--f4);
+    --g4:
+        var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 60%),
+        calc(clamp(min(0.5), var(--lit), max(2)) * 15%);
+
+    --s3:
+        var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 50%),
+        calc(clamp(min(0.5), var(--lit), max(1)) * 63%);
+    --s4:
+        var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 55%),
+        calc(clamp(min(0.5), var(--lit), max(1.1)) * 56%);
+
+    --p3: var(--s3);
+
+    /* l2-c in dark modes, l4-c in light modes */
+    --l2-c-theme-switch: var(--l2-c);
+    --l3-c-theme-switch: var(--l3-c);
+    --h3-theme-switch: var(--h3);
+
+    --grid-colour-shadow: var(
+        --grid-colour-shadow-override,
+        0 24px 20px hsl(var(--h4), 10%)
+    );
+
+    --opposite-text: var(--b6);
+
+    --avatar-generic-background: linear-gradient(
+        180deg,
+        hsla(var(--h3), 20%) 0%,
+        hsl(var(--b6)) 100%
+    );
+    --avatar-generic-background: hsl(var(--b4));
+
+    --primary-shadow:
+        inset 0 1px 0 0 hsl(var(--h2), 70%),
+        inset 0 -30px 6px -30px hsla(var(--h2), 55%);
+    --bar-shadow: inset 0 1px 0 0 hsla(var(--h3), 25%);
+
+    --shout-vote-indicator: linear-gradient(
+        90deg,
+        transparent 20%,
+        hsl(var(--h4), 5%)
+    );
+
+    --glow: hsl(var(--h3), 40%);
+
+    --badge: hsl(var(--f4), 30%);
+    --badge-hov: hsl(var(--f4), 50%);
+
+    --g-red: hsl(8, 62%, 80%);
+    --g-orange: hsl(24, 86%, 80%);
+    --g-yellow: hsl(44, 100%, 80%);
+    --g-green: hsl(163, 100%, 80%);
+    --g-blue: hsl(199, 79%, 80%);
+    --g-indigo: hsl(254, 46%, 80%);
+
+    --taste-glow: drop-shadow(0 0 15px hsl(var(--h4)));
+
+    .theme-preview[data-bleh--theme="oled"],
+    [data-bleh--theme="oled"] &:not(.theme-preview) {
+        --c1: var(--hue), calc(clamp(min(0), var(--sat), max(1)) * 30%), 96%;
+        --c2: var(--hue), calc(clamp(min(0), var(--sat), max(1)) * 30%), 87%;
+        --c3: var(--hue), calc(clamp(min(0), var(--sat), max(1)) * 7%), 60%;
+
+        --l3: var(--hue), calc(var(--sat) * 50%), calc(var(--lit) * 75%);
+        --l4: var(--hue), calc(var(--sat) * 60%), calc(var(--lit) * 45%);
+
+        --l3-c:
+            var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 50%),
+            calc(clamp(min(0.5), var(--lit), max(2)) * 70%);
+        --l3-c-sat: calc(clamp(min(0), var(--sat), max(2)) * 50%);
+        --l3-c-lit: calc(clamp(min(0.5), var(--lit), max(2)) * 70%);
+        --l4-c:
+            var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 55%),
+            calc(clamp(min(0.5), var(--lit), max(2)) * 45%);
+
+        --h2: var(--l2-c);
+        --h3: var(--l3-c);
+        --h3-s: var(--hue), 50%, 70%;
+        --h3-sat: calc(clamp(min(0), var(--sat), max(2)) * 50%);
+        --h3-lit: calc(clamp(min(0.5), var(--lit), max(2)) * 70%);
+        --h4:
+            var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 65%),
+            calc(clamp(min(0.5), var(--lit), max(2)) * 55%);
+        --f4:
+            var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 32%),
+            calc(clamp(min(0.8), var(--lit), max(2)) * 40%);
+        --k4:
+            var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 32%),
+            calc(clamp(min(0.8), var(--lit), max(2)) * 45%);
+        --g4:
+            var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 60%),
+            calc(clamp(min(0.5), var(--lit), max(2)) * 10%);
+
+        --shout-vote-indicator: linear-gradient(
+            90deg,
+            transparent 20%,
+            hsl(var(--h4), 8%)
+        );
+
+        --grid-colour-shadow: var(
+            --grid-colour-shadow-override,
+            0 24px 20px hsl(var(--h4), 16%)
+        );
+    }
+    .theme-preview[data-bleh--theme="light"],
+    [data-bleh--theme="light"]
+        &:not(
+            .theme-preview,
+            .grid-items-item.grid-items-item-has-colour > .grid-items-cover-image,
+            .grid-items-item-details > p > a
+        ) {
+        --c1: var(--hue), calc(var(--sat) * 6%), 0%;
+        --c2: var(--hue), calc(var(--sat) * 4%), 6%;
+        --c3: var(--hue), calc(var(--sat) * 2%), 38%;
+        --ov-c1: var(--hue), calc(var(--sat) * 40%), 100%;
+
+        --l2: var(--hue), calc(var(--sat) * 40%), calc(var(--lit) * 63%);
+        --l3: var(--hue), calc(var(--sat) * 50%), calc(var(--lit) * 40%);
+        --l4: var(--hue), calc(var(--sat) * 60%), calc(var(--lit) * 22%);
+
+        --l2-c:
+            var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 70%),
+            calc(clamp(min(0.7), var(--lit), max(1.1)) * 86%);
+        --l3-c:
+            var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 50%),
+            calc(clamp(min(0.7), var(--lit), max(1.1)) * 36%);
+        --l3-c-sat: calc(clamp(min(0), var(--sat), max(2)) * 50%);
+        --l3-c-lit: calc(clamp(min(0.5), var(--lit), max(1.1)) * 40%);
+        --l4-c: var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 60%), calc(clamp(min(0.7), var(--lit), max(1.1)) * 26%);
+
+        --h3:
+            var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 50%),
+            calc(clamp(min(0.85), var(--lit), max(1.1)) * 86%);
+        --h3-s: var(--hue), 50%, 70%;
+        --h3-sat: calc(clamp(min(0), var(--sat), max(2)) * 50%);
+        --h3-lit: calc(clamp(min(0.5), var(--lit), max(1.1)) * 86%);
+        --h4:
+            var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 60%),
+            calc(clamp(min(0.7), var(--lit), max(1.1)) * 73%);
+        --f4:
+            var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 60%),
+            calc(clamp(min(0.8), var(--lit), max(2)) * 80%);
+        --k4:
+            var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 42%),
+            calc(clamp(min(0.8), var(--lit), max(2)) * 76%);
+        --g4:
+            var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 70%), 92%;
+
+        --p3:
+            var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 50%),
+            calc(clamp(min(0.85), var(--lit), max(1.1)) * 90%);
+
+        /* l2-c in dark modes, l4-c in light modes */
+        --l2-c-theme-switch: var(--l3-c);
+        --l3-c-theme-switch: var(--l3-c);
+        --h3-theme-switch: var(--h4);
+
+        --badge: hsl(var(--f4), 55%);
+        --badge-hov: hsl(var(--f4), 65%);
+
+        --grid-colour-shadow: var(
+            --grid-colour-shadow-override,
+            0 27px 15px hsl(var(--h4), 18%)
+        );
+
+        --opposite-text: var(--c1);
+
+        --primary-shadow:
+            inset 0 -1px 0 0 hsl(var(--h4), 30%),
+            inset 0 -30px 10px -20px hsl(var(--h2), 40%);
+        --bar-shadow: inset 0 -1px 0 0 hsl(var(--h4), 40%);
+
+        --shout-vote-indicator: linear-gradient(
+            90deg,
+            transparent 20%,
+            hsl(var(--h4), 15%)
+        );
+
+        --glow: hsl(var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 80%), calc(clamp(min(0.7), var(--lit), max(1.1)) * 30%), 20%);
+
+        --g-red: hsl(8, 42%, 50%);
+        --g-orange: hsl(24, 66%, 50%);
+        --g-yellow: hsl(44, 80%, 50%);
+        --g-green: hsl(163, 50%, 50%);
+        --g-blue: hsl(199, 69%, 50%);
+        --g-indigo: hsl(254, 26%, 50%);
+
+        --taste-glow: drop-shadow(0 0 15px hsl(var(--h3)));
+    }
+    .theme-preview[data-bleh--theme="ink"],
+    [data-bleh--theme="ink"]
+        &:not(
+            .theme-preview,
+            .grid-items-item.grid-items-item-has-colour > .grid-items-cover-image,
+            .grid-items-item-details > p > a
+        ) {
+        --c1: var(--hue), calc(var(--sat) * 60%), 14%;
+        --c2: var(--hue), calc(var(--sat) * 40%), 20%;
+        --c3: var(--hue), calc(var(--sat) * 10%), 40%;
+        --ov-c1: var(--hue), calc(var(--sat) * 40%), 100%;
+
+        --l2: var(--hue), calc(var(--sat) * 40%), calc(var(--lit) * 63%);
+        --l3: var(--hue), calc(var(--sat) * 50%), calc(var(--lit) * 40%);
+        --l4: var(--hue), calc(var(--sat) * 60%), calc(var(--lit) * 22%);
+
+        --l2-c:
+            var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 40%),
+            calc(clamp(min(0.7), var(--lit), max(1.1)) * 63%);
+        --l3-c:
+            var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 50%),
+            calc(clamp(min(0.7), var(--lit), max(1.1)) * 30%);
+        --l3-c-sat: calc(clamp(min(0), var(--sat), max(2)) * 50%);
+        --l3-c-lit: calc(clamp(min(0.5), var(--lit), max(1.1)) * 40%);
+        --l4-c:
+            var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 60%),
+            calc(clamp(min(0.7), var(--lit), max(1.1)) * 25%);
+
+        --h3:
+            var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 38%),
+            calc(clamp(min(0.7), var(--lit), max(1.1)) * 73%);
+        --h3-s: var(--hue), 50%, 70%;
+        --h3-sat: calc(clamp(min(0), var(--sat), max(2)) * 32%);
+        --h3-lit: calc(clamp(min(0.5), var(--lit), max(1.1)) * 73%);
+        --h4:
+            var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 32%),
+            calc(clamp(min(0.7), var(--lit), max(1.1)) * 64%);
+        --f4:
+            var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 30%),
+            calc(clamp(min(0.8), var(--lit), max(2)) * 60%);
+        --k4:
+            var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 45%),
+            calc(clamp(min(0.8), var(--lit), max(2)) * 60%);
+        --g4:
+            var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 25%), 75%;
+
+        --p3:
+            var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 50%),
+            calc(clamp(min(0.85), var(--lit), max(1.1)) * 90%);
+
+        /* l2-c in dark modes, l4-c in light modes */
+        --l2-c-theme-switch: var(--l3-c);
+        --l3-c-theme-switch: var(--l3-c);
+        --h3-theme-switch: var(--h4);
+
+        --grid-colour-shadow: var(
+            --grid-colour-shadow-override,
+            0 27px 15px hsl(var(--h4), 18%)
+        );
+
+        --opposite-text: var(--c1);
+
+        --primary-shadow:
+            inset 0 -1px 0 0 hsl(var(--l2-c), 50%),
+            inset 0 -30px 10px -20px hsl(var(--l2-c), 30%);
+        --bar-shadow: inset 0 -1px 0 0 hsl(var(--h4), 40%);
+
+        --shout-vote-indicator: linear-gradient(
+            90deg,
+            transparent 20%,
+            hsl(var(--h4), 15%)
+        );
+
+        --glow: hsl(var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 80%), calc(clamp(min(0.7), var(--lit), max(1.1)) * 30%), 20%);
+
+        --badge: hsl(var(--f4), 55%);
+        --badge-hov: hsl(var(--f4), 65%);
+    }
+}
+
+/* attributes */
+.theme-preview,
+body {
+    --card-padding: 20px;
+    --card-radius: var(--item-big-radius);
+    --card-shadow: 0 8px 35px rgba(0, 0, 0, 0.45);
+    --card-gap: 15px;
+
+    --cards-main-width: 902px;
+    --cards-sidebar-width: 400px;
+    --content-width: calc(var(--cards-main-width) + 1px + var(--cards-sidebar-width));
+    --cards-width: calc(1px + var(--content-width) + 1px);
+
+    --tabbed-width: calc(var(--content-width) - (var(--card-padding) * 2));
+
+    --max-tooltip-width: 400px;
+
+    --grid-default-height: calc((var(--cards-main-width) - (var(--card-padding) * 2)) / 4px);
+
+    --overview-bio-size: 440px;
+    --header-avatar-size: 180px;
+
+    @media (min-width: 2000px) {
+        --cards-main-width: 1002px;
+        --overview-bio-size: 530px;
+        --header-avatar-size: 180px;
+    }
+
+    @media (max-width: 980px) {
+        --card-padding: 15px;
+        --cards-width: 100vw;
+        --cards-main-width: 100vw;
+        --cards-sidebar-width: 100vw;
+        --card-shadow: unset;
+
+        --header-avatar-size: 120px;
+
+        --max-tooltip-width: 100vw;
+    }
+
+    --item-small-radius: 5px;
+    --item-med-radius: 8px;
+    --item-big-radius: 12px;
+
+    --profile-header-background-height: 350px;
+    --profile-header-background-offset: 27%;
+
+    --playlist-cover-size: 230px;
+    --playlist-author-avatar-size: 36px;
+
+    --calendar-size: 46px;
+    --calendar-width: 40px;
+    --calendar-height: var(--calendar-size);
+    --calendar-radius: var(--item-med-radius);
+
+    --shout-avatar-size: 48px;
+    --shout-inset: 48px;
+    --shout-padding: 10px;
+    --shout-tree: hsl(var(--b4), 70%);
+    --shout-tree-size: 2px;
+    --shout-margin-left: var(--shout-avatar-size) + 8px;
+
+    @media (max-width: 980px) {
+        --shout-avatar-size: 40px;
+        --shout-inset: 24px;
+    }
+
+    --highlight-shadow: hsla(var(--b3), 0.25) 0 0 2px 1px;
+    --menu-shadow: 0 5px 15px 11px hsla(var(--b7), 0.4);
+    --overlay-shadow: 0 20px 40px 20px hsla(var(--b7), 0.4);
+    --menu-overlay-shadow: 0 -250px 10px 100px hsla(var(--b6), 70%);
+    --avatar-shadow: 0 6px 15px 10px hsla(var(--b7), 0.05);
+    --standout-shadow: 0 6px 20px 7px hsla(var(--b7), 0.2);
+    --subtle-shadow: 0 6px 20px 2px hsla(var(--b7), 0.2);
+
+    --noise: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbG5zOnN2Z2pzPSJodHRwOi8vc3ZnanMuZGV2L3N2Z2pzIiB2aWV3Qm94PSIwIDAgNzAwIDcwMCIgd2lkdGg9IjcwMCIgaGVpZ2h0PSI3MDAiPjxkZWZzPjxmaWx0ZXIgaWQ9Im5ubm9pc2UtZmlsdGVyIiB4PSItMjAlIiB5PSItMjAlIiB3aWR0aD0iMTQwJSIgaGVpZ2h0PSIxNDAlIiBmaWx0ZXJVbml0cz0ib2JqZWN0Qm91bmRpbmdCb3giIHByaW1pdGl2ZVVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY29sb3ItaW50ZXJwb2xhdGlvbi1maWx0ZXJzPSJsaW5lYXJSR0IiPg0KCTxmZVR1cmJ1bGVuY2UgdHlwZT0idHVyYnVsZW5jZSIgYmFzZUZyZXF1ZW5jeT0iMC4xMDIiIG51bU9jdGF2ZXM9IjQiIHNlZWQ9IjE1IiBzdGl0Y2hUaWxlcz0ic3RpdGNoIiB4PSIwJSIgeT0iMCUiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHJlc3VsdD0idHVyYnVsZW5jZSI+PC9mZVR1cmJ1bGVuY2U+DQoJPGZlU3BlY3VsYXJMaWdodGluZyBzdXJmYWNlU2NhbGU9IjE1IiBzcGVjdWxhckNvbnN0YW50PSIwLjc1IiBzcGVjdWxhckV4cG9uZW50PSIyMCIgbGlnaHRpbmctY29sb3I9IiM2ZTZlNmUiIHg9IjAlIiB5PSIwJSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgaW49InR1cmJ1bGVuY2UiIHJlc3VsdD0ic3BlY3VsYXJMaWdodGluZyI+DQogICAgCQk8ZmVEaXN0YW50TGlnaHQgYXppbXV0aD0iMyIgZWxldmF0aW9uPSIxMDAiPjwvZmVEaXN0YW50TGlnaHQ+DQogIAk8L2ZlU3BlY3VsYXJMaWdodGluZz4NCiAgDQo8L2ZpbHRlcj48L2RlZnM+PHJlY3Qgd2lkdGg9IjcwMCIgaGVpZ2h0PSI3MDAiIGZpbGw9InRyYW5zcGFyZW50Ij48L3JlY3Q+PHJlY3Qgd2lkdGg9IjcwMCIgaGVpZ2h0PSI3MDAiIGZpbGw9IiM2ZTZlNmUiIGZpbHRlcj0idXJsKCNubm5vaXNlLWZpbHRlcikiPjwvcmVjdD48L3N2Zz4=");
+    --gloss-image: url("https://katelyynn.github.io/bleh/fm/gloss.svg");
+    --gloss: 0;
+
+    --interactable-inset: inset hsl(var(--b3)) 0 -1px 0;
+    --interactable-outer: 0 2px 4px hsla(var(--b7), 0.15);
+    --interactable-active-outer: hsla(var(--c1), 0.03) 0 2px 25px 0;
+
+    --interact-shadow: var(--interactable-outer);
+    --active-shadow:
+        var(--interactable-outer), var(--interactable-active-outer);
+
+    --chartlist-fill: var(--hue-gradient, hsl(var(--h3)));
+
+    --button-list-gap: 6px;
+    --chartlist-inner-gap: 8px;
+    --item-list-gap: 10px;
+
+    /* cover masks */
+    --cover-size-20: 14px;
+    --cover-size-32: 20px;
+    --cover-size-50: 24px;
+    --cover-size-70: 32px;
+    --cover-size-100: 40px;
+    --cover-size-200: 72px;
+    --cover-size-300: 96px;
+    --cover-size-400: 180px;
+
+    --blur-saturate: 240%;
+    --blur-brightness: 0.7;
+    --blur-contrast: 1;
+
+    --modal-bg: hsl(var(--b6), 0.6);
+
+    --view-buttons: hsl(var(--b6), 70%);
+    --view-buttons-shadow: var(--group-shadow);
+    --view-buttons-hov: hsl(var(--b4), 40%);
+    --view-buttons-atv: hsl(var(--b4), 60%);
+
+    --menu-bg: var(--b6);
+    --menu-opacity: 92%;
+
+    --shout-actions-opacity: 0.45;
+
+    --rain: 0, 0%, 100%;
+
+    --bright: brightness(190%);
+    --dark: brightness(60%) contrast(120%);
+
+    --solarium: var(--card-blur) url(#solarium);
+    --solarium-bright: var(--card-blur) var(--bright) url(#solarium);
+    --solarium-dark: var(--card-blur) var(--dark) url(#solarium);
+    --card-blur: blur(6px) saturate(var(--blur-saturate)) brightness(var(--blur-brightness)) contrast(1);
+
+    --solarium-percent: 1;
+
+    @supports (-moz-appearance: none) {
+        --solarium: var(--card-blur);
+        --solarium-bright: var(--card-blur) var(--bright);
+        --solarium-dark: var(--card-blur) var(--dark);
+    }
+
+    @supports (-webkit-text-size-adjust: none) and (font: -apple-system-body) {
+        --solarium: var(--card-blur);
+        --solarium-bright: var(--card-blur) var(--bright);
+        --solarium-dark: var(--card-blur) var(--dark);
+    }
+
+    @supports (not (-webkit-text-size-adjust: none)) and (font: -apple-system-body) {
+        --solarium: var(--card-blur);
+        --solarium-bright: var(--card-blur) var(--bright);
+        --solarium-dark: var(--card-blur) var(--dark);
+    }
+
+    [data-bleh--solarium="false"] > & {
+        --solarium: none !important;
+        --solarium-bright: none !important;
+        --solarium-dark: none !important;
+        --solarium-opacity: 1;
+        --solarium-display: none;
+
+        --solarium-percent: 0;
+    }
+
+    &[data-bleh--theme="light"],
+    [data-bleh--theme="light"] > & {
+        --menu-bg: var(--b5);
+        --menu-opacity: 94%;
+
+        --menu-shadow: 0 4px 40px hsla(var(--b7), 0.07);
+
+        --blur-saturate: 130%;
+        --blur-brightness: 1.2;
+        --blur-contrast: 1;
+    }
+
+    &[data-bleh--theme="ink"],
+    [data-bleh--theme="ink"] > & {
+        --menu-bg: var(--b5);
+        --menu-opacity: 94%;
+
+        --blur-saturate: 130%;
+        --blur-brightness: 1;
+        --menu-shadow: 0 4px 40px hsla(var(--b7), 0.2);
+    }
+
+    &[data-bleh--theme_type="light"],
+    [data-bleh--theme_type="light"] > & {
+        --card-shadow: hsla(var(--b7), 0.05) 0 2px 4px 0;
+        --card-shadow: 0 1.5px 4px 0 hsla(var(--b7), 0.05);
+
+        --card-border: inset 0 0 0 1px hsla(var(--b4), 0.7) !important;
+        --overlay-shadow: var(--menu-shadow);
+        --standout-shadow: 0 6px 20px 7px hsla(var(--b7), 0.06);
+        --subtle-shadow: 0 3px 13px hsla(var(--b7), 0.04);
+
+        --interactable-outer: 0 3px 2px hsl(var(--b7), 3%);
+        --interactable-active-outer: transparent 0 0 0;
+
+        color-scheme: light !important;
+
+        --avatar-generic-background: hsl(var(--b4), 30%);
+
+        --view-buttons: hsl(var(--b4), 10%);
+
+        --shout-actions-opacity: 0.6;
+
+        --rain: 0, 0%, 70%;
+    }
+
+    &[data-bleh--theme="oled"],
+    [data-bleh--theme="oled"] > & {
+        --view-buttons: hsl(var(--b4), 30%);
+
+        --card-border: inset 0 0 0 1px hsla(var(--b4), 0.8);
+
+        --modal-bg: hsl(var(--b2), 0.5);
+
+        --menu-bg: var(--b5);
+        --menu-opacity: 80%;
+    }
+}

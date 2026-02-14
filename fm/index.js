@@ -31,8 +31,12 @@ const css_banner = `/* ==UserStyle==
 @version        ${build.build}
 @license        GPL-3.0
 @author         ${build.author}
-@match          https://www.last.fm/*
-==/UserStyle== */`;
+==/UserStyle== */
+
+@-moz-document domain("www.last.fm") {`;
+
+const css_footer = `
+}`;
 
 function normalise_version(version) {
     return version
@@ -96,11 +100,14 @@ function normalise_version(version) {
     if (process.argv[2] == 'dev') {
         const js_context = await esbuild.context(userscript);
         const css_context = await esbuild.context({
-            entryPoints: ['./src/styles/main.css'],
+            entryPoints: ['./src/styles/index.css'],
             bundle: true,
             outfile: 'bleh.user.css',
             banner: {
                 css: css_banner
+            },
+            footer: {
+                css: css_footer
             },
             loader: {
                 '.css': 'css'
@@ -121,7 +128,7 @@ function normalise_version(version) {
     } else {
         await esbuild.build(userscript);
         await esbuild.build({
-            entryPoints: ['./src/styles/main.css'],
+            entryPoints: ['./src/styles/index.css'],
             bundle: true,
             minify: true,
             outfile: 'bleh.css',

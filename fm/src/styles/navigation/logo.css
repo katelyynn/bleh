@@ -1,0 +1,101 @@
+.masthead-logo {
+    position: relative !important;
+    left: unset !important;
+    flex: unset !important;
+    margin-left: unset !important;
+    height: unset;
+    background: unset;
+    font: inherit;
+    color: hsl(var(--c3));
+
+    display: flex;
+    align-items: center;
+    gap: var(--button-list-gap);
+    width: fit-content !important;
+
+    .navigation-item {
+        flex-shrink: 1;
+        position: static;
+
+        &:before {
+            display: none;
+        }
+    }
+
+    .home-link {
+        width: unset;
+        height: unset;
+    }
+
+    .home-version {
+        width: fit-content;
+        height: fit-content;
+        color: hsl(var(--c3));
+        gap: var(--icon-gap);
+
+        & > .new-badge {
+            margin: unset !important;
+            cursor: pointer;
+        }
+
+        & > .update-container {
+            animation: staggered_spinner 3s
+                cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+
+            & > .bleh-icon {
+                background: conic-gradient(
+                    from 270deg,
+                    hsl(var(--c1)),
+                    hsl(var(--c3))
+                );
+            }
+        }
+    }
+}
+
+.masthead-logo-loading {
+    display: none;
+}
+
+.lastfm-logo {
+    background-image: url("https://www.last.fm/static/images/logo_static.png");
+    background-position: 0 50%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    aspect-ratio: 9 / 4;
+    height: 28px;
+    font: 0 / 0 auto;
+
+    filter: var(--lastfm-logo-filter, none);
+}
+
+.bleh-logo {
+    font-size: 28px;
+    line-height: 28px;
+    margin-top: -7px;
+    font-family: var(--font-brand);
+    font-weight: 900;
+    color: hsl(var(--c1));
+
+    text-shadow: 0 2px 4px hsl(var(--k4));
+
+    [data-bleh--season="pride"] & {
+        /* this isnt using https://cesque.com/gaydient/ but shoutout,
+        based on https://codepen.io/charliewilco/pen/BzrJzE */
+
+        background-image: linear-gradient(
+            90deg,
+            var(--g-red) 16.6666%,
+            var(--g-orange) 33.333%,
+            var(--g-yellow) 50%,
+            var(--g-green) 66.6666%,
+            var(--g-blue) 83.3333%,
+            var(--g-indigo) 100%
+        );
+
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: unset;
+    }
+}

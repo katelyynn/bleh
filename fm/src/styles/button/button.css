@@ -1,0 +1,410 @@
+.btn, .chibi,
+.btn-primary, .btn-cancel,
+.shout-action-button,
+.content-form select,
+.dropdown-menu-clickable-item, .navlist-hidden-list a, .display-options-clickable-item, .select-button,
+.dropdown-menu-clickable-button, .dropdown-menu-clickable-button-js-only,
+.inbox-compose-button,
+.inbox-table .inbox-message,
+.header-new-playlink,
+.btn-add, .btn-file,
+.header-message-user,
+.panel-settings-button,
+.pagination-next > a, .pagination-previous > a, .pagination-page > :is(a, span),
+.video-preview-upload-cta, .album-artwork-upload-cta,
+.gallery-image-report--reported,
+.listening-report-library-link, .listening-report-promo,
+#ot-sdk-btn,
+.footer-links a, .footer-timezone strong,
+.library-search-results li,
+.music-link,
+.shout-more-replies-after, .shout-more-replies-before,
+.coloured-cta,
+.gallery-image-preferred-off,
+.arrow:not(.scroll-button .arrow, .hidden-xs),
+.date-range-picker-preset a,
+.library-top .library-view-button,
+.content-top-back-link, .content-top-back-link + .content-top-header,
+.subpage-breadcrumb li, .subpage-breadcrumb + h2.subpage-title,
+.back-button,
+.auth-avatar-mobile,
+.album-overview-cover-art-action-row a,
+.no-data-message-button,
+.playlisting-create-option,
+/* home page welcome close */ .home-welcome-close,
+.masthead-nav-control, .secondary-nav-item-link, .auth-link, .language-nav,
+.dropdown-menu-item-dark,
+.btn-secondary,
+/* go to tag page for a user tag */ .col-main > p > [href^="/tag/"],
+.footer-language :is(strong, button),
+.source-album, .big-tags-item, .music-bookmarks-tags-item,
+.wiki-history-entry,
+.attendee-summary-user,
+.about-guest-feature,
+.weeklychart-item,
+.btn-subscribe,
+.masthead-logo a, .masthead-search-form,
+.show-more a,
+/* log in */ .site-auth-control,
+.music-more-link a,
+.tag > :is(a, span), .tags-add-cta, .tags-add, .tags-view-all,
+.masthead-popup-close,
+.share-link,
+.check .box,
+.radio-cont > .radio,
+.blend-v2-btn,
+.notification,
+.user-now-empty-state-button,
+.inbox-item,
+.report-dropdown-button,
+.see-more, .music-bookmarks-artists-item-toggle, .music-bookmarks-albums-item-toggle, .music-bookmarks-tags-item-toggle, .playlisting-playlists-item-toggle,
+.modal-action-button,
+.js-shout-reply-cancel,
+.more-items,
+.modal-close-button, .modal-action-button,
+.tab-container > li > button,
+.user-list-follower-btn
+{
+    --bg: var(--cards-overlay-image-subtlest, none), hsl(var(--b3));
+    --bg-hov:
+        var(--cards-overlay-image-subtlest, none),
+        color-mix(in hsl, hsl(var(--b6)), hsl(var(--b3)) 80%);
+    --bg-atv:
+        var(--cards-overlay-image-subtlest, none),
+        color-mix(in hsl, hsl(var(--b6)), hsl(var(--b3)) 60%);
+    --col: hsl(var(--c2));
+    --mask-colour: color-mix(in hsl, hsl(var(--c2)), hsl(var(--c3)) 50%);
+    --shadow: var(--normal-shadow), var(--interact-shadow);
+    --shadow-hov: var(--active-shadow);
+    --btn-top: var(--button-verts);
+    --btn-right: var(--button-sides);
+    --btn-bottom: var(--button-verts);
+    --btn-left: var(--button-sides);
+    background: var(--bg) !important;
+    color: var(--col) !important;
+    padding: var(
+        --padding,
+        var(
+            --button-padding,
+            var(--btn-top) var(--btn-right) var(--btn-bottom)
+                var(--btn-left)
+        )
+    ) !important;
+    min-height: unset !important;
+    min-width: unset !important;
+    line-height: var(--line-height) !important;
+    text-transform: unset !important;
+    letter-spacing: unset !important;
+    font-family: var(--font) !important;
+    font-size: var(--font-size) !important;
+    font-weight: var(--force-font-weight, var(--font-weight)) !important;
+    border-radius: var(--radius, var(--button-radius)) !important;
+    box-shadow: var(--shadow) !important;
+    border: unset !important;
+    text-decoration: var(--force-underline, none) !important;
+    transition-property:
+        background-color, transform, box-shadow, color, opacity, padding,
+        font-size !important;
+    transition-duration: var(--trans) !important;
+    transition-timing-function: var(--trans-function) !important;
+    user-select: none;
+    cursor: pointer;
+
+    backdrop-filter: var(--filter);
+    -webkit-backdrop-filter: var(--filter);
+
+    background-repeat: repeat-x !important;
+    background-position: unset !important;
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    p {
+        cursor: pointer;
+    }
+
+    .listening-report-promo-title,
+    .sub-text {
+        font-size: var(--font-size-sm);
+        line-height: var(--line-height-sm);
+        color: inherit;
+        opacity: 0.7;
+        margin: unset;
+    }
+    .listening-report-promo-date,
+    h4 {
+        font: inherit;
+        color: inherit;
+    }
+
+    &[aria-expanded="true"]:not(
+            .delete-icon,
+            .header-expand-button,
+            .glacier-library-button
+        ),
+    &:is(.gallery-next, .gallery-previous):hover .arrow,
+    &:hover {
+        background: var(--bg-hov) !important;
+        transition-property: padding, transform, filter !important;
+        transition-duration: var(--trans) !important;
+        transition-timing-function: var(--trans-function) !important;
+        --transition-property: opacity, left, transform;
+        /*box-shadow: var(--shadow-hov) !important;*/
+
+        background-repeat: repeat-x !important;
+        background-position: unset !important;
+    }
+
+    &:is(.gallery-next, .gallery-previous):active .arrow,
+    &:active {
+        background: var(--bg-atv) !important;
+        transform: scale(0.98);
+
+        background-repeat: repeat-x !important;
+        background-position: unset !important;
+    }
+
+    kbd,
+    .new-badge {
+        margin-left: 6px;
+    }
+
+    kbd {
+        font-size: var(--font-size-sm);
+    }
+
+    &.flex-button {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    /*     LOADING     */
+    /*&.btn--loading {
+        background-image: unset;
+        position: relative;
+
+        &:after {
+            --left: 50%;
+            --margin-left: -8px;
+            --mask: var(--icon-16-spinner);
+            --show-icon: block;
+            animation: spinner 1.2s linear infinite;
+        }
+    }*/
+    &.btn--loading {
+        background-image: unset;
+    }
+
+    /*     STYLES     */
+
+    /*     PRIMARY     */
+    &:is(
+        .danger,
+        .btn-primary:is([type="submit"], .js-close),
+        .inbox-delete-button:not([disabled]),
+        #manage_data .btn-primary,
+        .primary,
+        .btn-subscribe,
+        .share-link,
+        .view-item[aria-checked="true"],
+        .user-now-empty-state-button
+    ):not([data-has-file], .see-more) {
+        --bg:
+            var(--cards-overlay-image-subtlest, none), hsl(var(--h3)) !important;
+        --bg-hov:
+            var(--cards-overlay-image-subtlest, none),
+            color-mix(in hsl, hsl(var(--h4)), hsl(var(--h3)) 80%) !important;
+        --bg-atv:
+            var(--cards-overlay-image-subtlest, none),
+            color-mix(in hsl, hsl(var(--h4)), hsl(var(--h3)) 60%) !important;
+        --col: hsl(var(--b7)) !important;
+        --force-font-weight: var(--font-weight-medium) !important;
+        &:not(.chibi) {
+            --mask-colour: hsl(var(--b7), 70%) !important;
+        }
+        --shadow:
+            var(--primary-shadow), 0 3px 12px hsl(var(--h4), 32%),
+            var(--interactable-outer);
+        --shadow-hov:
+            var(--interactable-outer), var(--interactable-active-outer);
+
+        [data-bleh--invert_interactable_colour="true"] & {
+            --col: hsl(var(--ov-c1)) !important;
+            --mask-colour: color-mix(
+                in hsl,
+                hsl(var(--ov-c1)),
+                hsl(var(--h4)) 40%
+            );
+        }
+
+        [data-bleh--season="christmas"] & {
+            --hue-seasonal: 130;
+            --sat-seasonal: 0.45;
+            --lit-seasonal: 0.75;
+        }
+
+        [data-bleh--season="new_years"] & {
+            --hue-seasonal: 333;
+            --sat-seasonal: 1.1;
+            --lit-seasonal: 1;
+        }
+
+        .new-badge {
+            color: var(--mask-colour);
+        }
+
+        &.select-button:not(.link-select):after {
+            color: inherit;
+            opacity: 0.6;
+        }
+    }
+
+    /*     COVER LINK     */
+    &.link-block-cover-link {
+        --bg: transparent;
+        --bg-hov: transparent;
+        --bg-atv: transparent;
+        --shadow: none !important;
+        --shadow-hov: none !important;
+    }
+
+    &.btn--loading,
+    &[disabled]:not([disabled="false"]) {
+        opacity: 0.65 !important;
+        --col: hsl(var(--c3)) !important;
+        --mask-colour: hsl(var(--c3)) !important;
+        transform: unset !important;
+        --bg-hov: var(--bg) !important;
+        --bg-atv: var(--bg) !important;
+    }
+
+    &.btn-primary.js-close {
+        --hue-over: var(--hue-neg);
+        --sat-over: 1;
+        --lit-over: 1;
+    }
+
+    &.lfmmaf-missing-artwork-button,
+    &.chibi {
+        --btn-left: var(--button-sides) !important;
+        --btn-right: var(--button-sides) !important;
+        --font-size: 0 !important;
+        --mask-colour: currentColor !important;
+        min-width: var(--button-height) !important;
+        width: var(--button-height) !important;
+        position: relative;
+
+        &:before {
+            --left: calc(
+                (var(--button-height) - var(--icon-size)) / 2
+            ) !important;
+            --right: none !important;
+        }
+    }
+}
+
+.js-shout-reply-cancel,
+.inbox-compose-button,
+.sponsor, .icon,
+.lastfm-bulk-edit-form-group-controls button,
+.search-similar-btn, .obsession-btn, .panel-settings-button, .playlist-home-top-item,
+.image-open-button, .image-share-button,
+.image-details :is(.bleh--gallery-bookmark-image-btn, .gallery-image-report, .gallery-image-delete button),
+.btn.back,
+.view-item:not(.video-item, .listen-item, .profile-top-item--taste, .interact-item, .profile-top-item--shortcut, .profile-top-item--follow, .profile-top-item--message, .profile-top-item--edit_profile, .dropdown-menu-clickable-button),
+.btn--has-icon-left,
+.dropdown-menu-clickable-item:not(.v2),
+.header-new-playlink,
+.btn-add, /*form[action*="+images/upload"] .btn-primary[type="submit"],*/ .btn-file,
+.header-message-user,
+.coloured-cta,
+.gallery-previous .arrow,
+.section-playlink,
+.image-upload-remove,
+.back-button, .delete-button,
+#manage_data .btn-primary,
+.obsession-history-play-all,
+.done, .cancel, .btn-cancel, .download, .upload, .save, .btn-secondary.js-close:not(.modal-action-button), .form-group button[type="submit"]:not(.btn-post-shout, .image-upload-remove), .modal-button button[type="submit"] {
+    --btn-left: calc(
+        var(--button-sides-icon) + var(--icon-size) + var(--icon-gap)
+    ) !important;
+}
+.side-right .setting-item,
+.external,
+.open,
+.btn--has-icon-right,
+.dropdown-menu-clickable-button,
+.dropdown-menu-clickable-button-js-only,
+.display-options-clickable-button,
+.btn-shortcut,
+.gallery-next .arrow,
+.header-new-gallery--link .header-new-gallery-inner,
+.date-range-picker-button,
+.source-album,
+.language-nav,
+.out-now-btn,
+.icon-r {
+    --btn-right: calc(
+        var(--button-sides-icon) + var(--icon-size) + var(--icon-gap)
+    ) !important;
+}
+
+
+.input-group,
+.button-group {
+    display: flex;
+    align-items: center;
+    gap: var(--button-list-gap);
+
+    & > .bleh-icon {
+        --icon-size: 14px;
+        --icon-colour: hsl(var(--c3));
+    }
+
+    &.extra {
+        gap: var(--card-gap);
+    }
+}
+
+.button-combo {
+    display: flex;
+    align-items: center;
+
+    a,
+    button {
+        min-width: 32px !important;
+        width: unset;
+
+        &:not(.chibi) {
+            flex: 1;
+            /*border-top-right-radius: 0 !important;
+            border-bottom-right-radius: 0 !important;*/
+        }
+        /*&.chibi {
+            border-top-left-radius: 0 !important;
+            border-bottom-left-radius: 0 !important;
+        }*/
+
+        flex-shrink: 0;
+    }
+
+    .button-combo-sep {
+        display: block;
+        width: 1px;
+        height: 10px;
+        margin: 0 4px;
+        background: var(--card-border-base);
+    }
+
+    & > form {
+        display: flex;
+        flex: 1;
+
+        & > button {
+            flex: 1;
+        }
+    }
+}
