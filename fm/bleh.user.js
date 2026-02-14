@@ -19116,6 +19116,7 @@
   var oracle_artists = {};
   var oracle_albums = {};
   var oracle_tracks = {};
+  var STORAGE_LAST_SEASON_SEEN = "bleh_last_season_seen";
   var theme_preview = () => html.node`
     <div class="preview-inner">
         <div class="preview-card">
@@ -28563,8 +28564,14 @@
   var seasonal_events = [
     {
       id: "new_years",
-      start: "y0-01-01T00:00:00{offset}",
-      end: "y0-01-14T23:59:59{offset}",
+      start: {
+        month: 1,
+        day: 1
+      },
+      end: {
+        month: 1,
+        day: 14
+      },
       snowflakes: {
         state: true,
         count: 90
@@ -28572,32 +28579,57 @@
     },
     {
       id: "easter",
-      start: "y0-04-02T00:00:00{offset}",
-      end: "y0-04-30T23:59:59{offset}",
+      start: {
+        month: 4,
+        day: 2
+      },
+      end: {
+        month: 4,
+        day: 30
+      },
       snowflakes: {
         state: false
       }
     },
     {
       id: "pride",
-      start: "y0-05-31T00:00:00{offset}",
-      end: "y0-07-07T23:59:59{offset}",
+      start: {
+        month: 5,
+        day: 31
+      },
+      end: {
+        month: 7,
+        day: 7
+      },
       snowflakes: {
         state: false
       }
     },
     {
       id: "halloween",
-      start: "y0-09-22T00:00:00{offset}",
-      end: "y0-11-01T11:59:59{offset}",
+      start: {
+        month: 9,
+        day: 22
+      },
+      end: {
+        month: 11,
+        day: 1
+      },
       snowflakes: {
         state: false
       }
     },
     {
       id: "pre_fall",
-      start: "y0-11-01T12:00:00{offset}",
-      end: "y0-11-12T23:59:59{offset}",
+      start: {
+        month: 11,
+        day: 1,
+        hour: 12
+      },
+      end: {
+        month: 11,
+        day: 12
+      },
       snowflakes: {
         state: true,
         count: 12
@@ -28605,8 +28637,14 @@
     },
     {
       id: "fall",
-      start: "y0-11-13T00:00:00{offset}",
-      end: "y0-11-22T23:59:59{offset}",
+      start: {
+        month: 11,
+        day: 13
+      },
+      end: {
+        month: 11,
+        day: 22
+      },
       snowflakes: {
         state: true,
         count: 80
@@ -28614,8 +28652,14 @@
     },
     {
       id: "christmas",
-      start: "y0-11-23T00:00:00{offset}",
-      end: "y0-12-31T23:59:59{offset}",
+      start: {
+        month: 11,
+        day: 23
+      },
+      end: {
+        month: 12,
+        day: 31
+      },
       snowflakes: {
         state: true,
         count: 160
@@ -39830,7 +39874,7 @@
   function update_colour_swatches() {
     let found = false;
     let custom = null;
-    let seasonal = null;
+    let seasonal2 = null;
     let swatches = page.structure.main.querySelectorAll(".swatch");
     swatches.forEach((swatch) => {
       let h = swatch.style.getPropertyValue("--hue-over");
@@ -39848,13 +39892,13 @@
       }
       if (!custom && swatch.getAttribute("data-swatch-type") == "customise")
         custom = parent;
-      if (!seasonal && swatch.getAttribute("data-swatch-type") == "default")
-        seasonal = parent;
+      if (!seasonal2 && swatch.getAttribute("data-swatch-type") == "default")
+        seasonal2 = parent;
     });
     if (found) return;
     if (custom && settings.accent_type != "season")
       custom.setAttribute("aria-checked", "true");
-    else if (seasonal) seasonal.setAttribute("aria-checked", "true");
+    else if (seasonal2) seasonal2.setAttribute("aria-checked", "true");
   }
   unsafeWindow._reset_inbuilt_item = function(item) {
     reset_inbuilt_item(item);
@@ -47957,147 +48001,126 @@
     return field;
   }
 
-  // src/components/seasonal.js
+  // src/components/seasonal.ts
   function set_season() {
     if (!settings.seasonal) return;
-    let last_season_seen = localStorage.getItem("bleh_last_season_seen") || "";
-    let now2 = /* @__PURE__ */ new Date();
-    log(`it is now ${now2}`, "season", "log");
-    stored_season.offset = calculate_offset(now2);
-    log(`calculated offset as ${stored_season.offset}`, "season");
-    let current_year = now2.getFullYear();
-    seasonal_events.forEach((season, index3) => {
-      log(
-        `running thru, ${season.id} - ${new Date(season.start.replace("y0", current_year).replace("{offset}", stored_season.offset))} ${new Date(season.end.replace("y0", current_year).replace("{offset}", stored_season.offset))}`,
-        "season",
-        "log"
-      );
-      log(
-        `${now2 >= new Date(season.start.replace("y0", current_year).replace("{offset}", stored_season.offset))} ${now2 <= new Date(season.end.replace("y0", current_year).replace("{offset}", stored_season.offset))}`,
-        "season",
-        "log"
-      );
-      season.days_until = -DateTime.now().diff(
-        DateTime.fromISO(
-          season.start.replace("y0", current_year).replace("{offset}", stored_season.offset)
-        ),
-        "days"
-      ).days;
-      season.is_next_year = false;
-      if (season.days_until < 0) {
-        season.days_until = -DateTime.now().diff(
-          DateTime.fromISO(
-            season.start.replace("y0", current_year + 1).replace("{offset}", stored_season.offset)
-          ),
-          "days"
-        ).days;
-        season.is_next_year = true;
-      }
-      if (now2 >= new Date(
-        season.start.replace("y0", current_year).replace("{offset}", stored_season.offset)
-      ) && now2 <= new Date(
-        season.end.replace("y0", current_year).replace("{offset}", stored_season.offset)
-      )) {
-        stored_season.now = now2;
-        stored_season.year = current_year;
-        update_season_nav();
-        if (stored_season.id == season.id) return;
-        stored_season.id = season.id;
-        stored_season.start = season.start;
-        stored_season.end = season.end;
-        stored_season.snowflakes = season.snowflakes;
-        if (now2.getDate() == 31) {
-          stored_season.new_years_eve = true;
-          stored_season.seasonal_timer = setInterval(
-            update_season_nav,
-            1e3
-          );
-        } else if (stored_season.seasonal_timer) {
-          clearInterval(stored_season.seasonal_timer);
-        }
-        if (seasonal_events[index3 + 1] == null) {
-          stored_season.next_id = seasonal_events[0].id;
-          stored_season.next_start = seasonal_events[0].start;
-          stored_season.next_is_new_year = true;
-        } else {
-          stored_season.next_id = seasonal_events[index3 + 1].id;
-          stored_season.next_start = seasonal_events[index3 + 1].start;
-          stored_season.next_is_new_year = false;
-        }
-        log(`${season.id} from ${season.start} to ${season.end}`, "season");
-        log(
-          `next will be ${stored_season.next_id} from ${stored_season.next_start} (is new year? ${stored_season.next_is_new_year})`,
-          "season"
-        );
-        document.documentElement.setAttribute(
-          "data-bleh--season",
-          season.id
-        );
-        if (season.snowflakes.state && settings.seasonal_particles != "none") {
-          log("let the snow start!", "season");
-          prep_snow();
-          let snowflakes_enabled = true;
-          let snowflakes_count = season.snowflakes.count;
-          if (settings.seasonal_particles == "less" && snowflakes_count > 10)
-            snowflakes_count *= 0.45;
-          if (page.mobile && snowflakes_count > 10) snowflakes_count *= 0.5;
-          begin_snowflakes(snowflakes_enabled, snowflakes_count);
-        }
-        if (last_season_seen != "" && last_season_seen != season.id) {
-          notify({
-            id: "new_season",
-            title: tl2(trans.new_season),
-            body: tl2(trans.value_for_time).replace("{v}", tl2(trans.seasonal.listing[season.id])).replace(
-              "{time}",
-              DateTime.fromISO(
-                season.end.replace("y0", stored_season.year).replace("{offset}", stored_season.offset)
-              ).toRelative(DateTime.fromISO(stored_season.now))
-            ),
-            icon: "icon-16-season",
-            persist: true
-          });
-        }
-        set_storage("bleh_last_season_seen", season.id);
-        load_chart_colours();
-        return;
-      }
-    });
-    let lowest = 400;
-    let next_season = {
-      start: ""
-    };
-    if (stored_season.id == "none") {
-      seasonal_events.forEach((season) => {
-        if (season.days_until < lowest) {
-          lowest = season.days_until;
-          next_season = season;
-        }
-      });
-      stored_season.now = now2;
-      stored_season.year = current_year;
-      stored_season.next_id = next_season.id;
-      stored_season.next_start = next_season.start;
-      stored_season.next_is_new_year = next_season.is_next_year;
-      log("next season found", "season", "info", {
-        next: next_season,
-        stored: stored_season,
-        date: stored_season.next_start.replace(
-          "y0",
-          stored_season.next_is_new_year ? stored_season.year + 1 : stored_season.year
-        ).replace("{offset}", stored_season.offset)
-      });
-    }
+    const last_season_seen = localStorage.getItem(STORAGE_LAST_SEASON_SEEN) || "";
+    const state = get_season_state();
+    page.state.seasons = state;
+    if (!state.current) return;
+    apply_season(state.current);
+    if (state.current.id != last_season_seen)
+      new_season(state.current, state.now);
   }
-  function calculate_offset(now2) {
-    let offset3 = now2.getTimezoneOffset();
-    if (offset3 == 0) return "+0000";
-    const sign2 = offset3 < 0 ? "+" : "-";
-    offset3 = Math.abs(offset3);
-    const hours = Math.floor(offset3 / 60);
-    const minutes = offset3 % 60;
-    const formatted_hours = hours < 10 ? `0${hours}` : hours.toString();
-    const formatted_minutes = minutes < 10 ? `0${minutes}` : minutes.toString();
-    return sign2 + formatted_hours + formatted_minutes;
+  function apply_season(current) {
+    log(`applying ${current.id}`, "season", "info", { current });
+    document.documentElement.setAttribute("data-bleh--season", current.id);
+    if (current.snowflakes.state && settings.seasonal_particles != "none") {
+      log("let the snow start!", "season");
+      prep_snow();
+      const snowflakes_enabled = true;
+      let snowflakes_count = current.snowflakes.count;
+      if (settings.seasonal_particles == "less" && snowflakes_count > 10)
+        snowflakes_count *= 0.45;
+      if (page.mobile && snowflakes_count > 10) snowflakes_count *= 0.5;
+      begin_snowflakes(snowflakes_enabled, snowflakes_count);
+    }
+    update_season_nav();
+  }
+  function new_season(current, now2) {
+    set_storage(STORAGE_LAST_SEASON_SEEN, current.id);
+    load_chart_colours();
+    notify({
+      id: "new_season",
+      title: tl2(trans.new_season),
+      body: tl2(trans.value_for_time, {
+        v: tl2(trans.seasonal.listing[current.id]),
+        time: current.end.toRelative(now2)
+      }),
+      icon: "icon-16-season",
+      persist: true
+    });
+  }
+  function get_season_state(now2 = DateTime.local()) {
+    const year = now2.year;
+    const seasons = resolve_seasons(now2);
+    seasons.sort((a, b) => a.start.toMillis() - b.start.toMillis());
+    const current = seasons.find((season) => season.current) || null;
+    let prev = null;
+    let next = null;
+    if (current) {
+      const index3 = seasons.findIndex((season) => season.id == current.id);
+      prev = seasons[index3 - 1] || null;
+      next = seasons[index3 + 1] || null;
+      if (!prev) {
+        const last = seasons[seasons.length - 1];
+        prev = {
+          ...last,
+          start: process_date(last.start, "start", year - 1),
+          end: process_date(last.end, "end", year - 1)
+        };
+      }
+      if (!next) {
+        const first = seasons[0];
+        next = {
+          ...first,
+          start: process_date(first.start, "start", year + 1),
+          end: process_date(first.end, "end", year + 1)
+        };
+      }
+    } else {
+      next = seasons.find((season) => now2 < season.start) || null;
+      if (!next) {
+        const first = seasons[0];
+        next = {
+          ...first,
+          start: process_date(first.start, "start", year + 1),
+          end: process_date(first.end, "end", year + 1)
+        };
+      }
+      const index3 = seasons.findIndex((season) => season.id == next.id);
+      prev = seasons[index3 - 1] || seasons[seasons.length - 1];
+    }
+    return {
+      now: now2,
+      current,
+      prev,
+      next
+    };
+  }
+  function resolve_seasons(now2 = DateTime.local()) {
+    const year = now2.year;
+    return seasonal_events.map((season) => {
+      const start2 = process_date(season.start, "start", year);
+      const end2 = process_date(season.end, "end", year);
+      const current = now2 >= start2 && now2 <= end2;
+      return {
+        ...season,
+        start: start2,
+        end: end2,
+        current
+      };
+    });
+  }
+  function process_date(date, type, year) {
+    let hour = date.hour || 0;
+    let minute = date.minute || 0;
+    let second = date.second || 0;
+    if (type == "end" && !date.hour && !date.minute && !date.second) {
+      hour = 23;
+      minute = 59;
+      second = 59;
+    }
+    return DateTime.fromObject({
+      year,
+      month: date.month,
+      day: date.day,
+      hour,
+      minute,
+      second
+    }, {
+      zone: "local"
+    });
   }
   function seasonal_timer_start(bypass = false) {
     if (stored_season.new_years_eve && !bypass) return;
@@ -50757,6 +50780,117 @@
     `;
   }
 
+  // src/pages/bleh_settings/seasonal.ts
+  function seasonal() {
+    register_skip_to([]);
+    const state = page.state.seasons;
+    render(page.structure.main, html`
+        <div class="bleh--panel">
+            ${seasonal_timeline(state.current, state.prev, state.next)}
+            <div class="seasonal-inner">
+                <div class="sub-text">
+                    ${tl2(trans.seasonal_timeline)}
+                </div>
+                <h4>
+                    ${state.now.toLocaleString(DateTime.DATE_FULL)}
+                </h4>
+            </div>
+            <div class="setting-group">
+                ${setting({ id: "seasonal" })}
+                <div class="setting" data-type="info">
+                    <div class="heading">
+                        <h5>${tl2(trans.current_season)}</h5>
+                    </div>
+                    <div class="info">
+                        <div
+                            class="icon-combo"
+                            data-season=${state.current ? state.current.id : "none"}
+                        >
+                            <div
+                                class="bleh-icon bleh-seasonal-icon"
+                            ></div>
+                            <p>
+                                ${tl2(trans.seasonal.listing[state.current ? state.current.id : "none"])}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                ${state.current ? html.node`
+                <div class="setting" data-type="info">
+                    <div class="heading">
+                        <h5>${tl2(trans.started)}</h5>
+                    </div>
+                    <div class="info">
+                        <p id="current_season_start">${state.current.start.toRelative(state.now)}</p>
+                    </div>
+                </div>
+                <div class="setting" data-type="info">
+                    <div class="heading">
+                        <h5>${tl2(trans.ends_in)}</h5>
+                    </div>
+                    <div class="info">
+                        <p id="current_season">${state.current.end.toRelative(state.now)}</p>
+                    </div>
+                </div>
+                ` : settings.seasonal ? html.node`
+                <div class="setting" data-type="info">
+                    <div class="heading">
+                        <h5>${tl2(trans.next_in)}</h5>
+                    </div>
+                    <div class="info">
+                        <p id="next_season_start">${state.next.start.toRelative(state.now)}</p>
+                    </div>
+                </div>
+                ` : ""}
+            </div>
+            <h4>${tl2(trans.settings)}</h4>
+            <div class="setting-group">
+                ${setting({ id: "seasonal_particles" })}
+                ${setting({ id: "seasonal_particles_fps" })}
+                ${setting({ id: "seasonal_overlays" })}
+            </div>
+        </div>
+    `);
+  }
+  function seasonal_timeline(current, prev, next) {
+    if (!settings.seasonal) return html.node``;
+    return html.node`
+        <div class="seasonal-timeline">
+            ${seasonal_timeline_item(prev, "prev")}
+            ${current ? seasonal_timeline_item(current, "current") : html.node`
+                <div class="seasonal-timeline-item no-season" data-season-type="current">
+                    <div class="seasonal-icon colourful" data-season="none">
+                        <div class="bleh-icon" data-season="none" />
+                    </div>
+                    <strong class="seasonal-name">${tl2(trans.seasonal.listing.none)}</strong>
+                    <p class="seasonal-desc">${tl2(trans.current)}</p>
+                </div>
+            `}
+            ${seasonal_timeline_item(next, "next")}
+        </div>
+    `;
+  }
+  function seasonal_timeline_item(season, type) {
+    let time2;
+    log2("creating timeline item", "season", "info", { season, type });
+    if (type == "prev") {
+      time2 = season.end.toRelative(page.state.seasons.now);
+    } else if (type == "next") {
+      time2 = season.start.toRelative(page.state.seasons.now);
+    } else {
+      time2 = tl2(trans.current);
+    }
+    return html.node`
+        <div class="seasonal-timeline-item" data-season-type=${type}>
+            <div class="seasonal-icon colourful" data-season=${season.id}>
+                <div class="bleh-icon" data-season=${season.id} />
+            </div>
+            <strong class="seasonal-name colourful" data-season=${season.id}>${tl2(trans.seasonal.listing[season.id])}</strong>
+            <p class="seasonal-desc">${time2}</p>
+        </div>
+    `;
+  }
+
   // src/pages/bleh_settings/bleh_settings.js
   function bleh_settings() {
     page.name = auth.name;
@@ -50849,7 +50983,7 @@
             `}
         </div>
         <section class="side-actions">
-            <button class="btn side-action" data-type="import" onclick=${() => import_settings27()}>
+            <button class="btn side-action" data-type="import" onclick=${() => import_settings28()}>
                 ${tl2(trans.import)}
             </button>
             <button class="btn side-action" data-type="export" onclick=${() => export_settings()}>
@@ -50910,6 +51044,8 @@
         general();
       else if (page_id == "visual")
         visual();
+      else if (page_id == "seasonal")
+        seasonal();
     } catch (e) {
       page_error(e);
     }
@@ -51412,91 +51548,6 @@
                 </section>
             ` : ""}
         `);
-    } else if (page_id == "seasonal") {
-      register_skip_to([]);
-      render(
-        page.structure.main,
-        html`
-                <div class="bleh--panel">
-                    <div class="seasonal-inner">
-                        <div class="sub-text">
-                            ${tl2(trans.seasonal_timeline)}
-                        </div>
-                        <h4>
-                            ${DateTime.fromJSDate(
-          new Date(stored_season.now)
-        ).toLocaleString(DateTime.DATE_FULL)}
-                        </h4>
-                    </div>
-                    <div class="setting-group">
-                        ${setting({ id: "seasonal" })}
-                        <div class="setting" data-type="info">
-                            <div class="heading">
-                                <h5>${tl2(trans.current_season)}</h5>
-                            </div>
-                            <div class="info">
-                                <div
-                                    class="icon-combo"
-                                    data-season=${stored_season.id}
-                                >
-                                    <div
-                                        class="bleh-icon bleh-seasonal-icon"
-                                    ></div>
-                                    <p>
-                                        ${tl2(
-          trans.seasonal.listing[stored_season.id]
-        )}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        ${stored_season.id != "none" && stored_season.start && stored_season.end ? html.node`
-                    <div class="setting" data-type="info">
-                        <div class="heading">
-                            <h5>${tl2(trans.started)}</h5>
-                        </div>
-                        <div class="info">
-                            <p id="current_season_start">${DateTime.fromISO(stored_season.start.replace("y0", stored_season.year).replace("{offset}", stored_season.offset)).toRelative(DateTime.fromISO(stored_season.now))}</p>
-                        </div>
-                    </div>
-                    <div class="setting" data-type="info">
-                        <div class="heading">
-                            <h5>${tl2(trans.ends_in)}</h5>
-                        </div>
-                        <div class="info">
-                            <p id="current_season">${DateTime.fromISO(stored_season.end.replace("y0", stored_season.year).replace("{offset}", stored_season.offset)).toRelative(DateTime.fromISO(stored_season.now))}</p>
-                        </div>
-                    </div>
-                    ` : settings.seasonal ? html.node`
-                    <div class="setting" data-type="info">
-                        <div class="heading">
-                            <h5>${tl2(trans.next_in)}</h5>
-                        </div>
-                        <div class="info">
-                            <p id="next_season_start">${DateTime.fromISO(stored_season.next_start.replace("y0", stored_season.next_is_new_year ? stored_season.year + 1 : stored_season.year).replace("{offset}", stored_season.offset)).toRelative(DateTime.fromISO(stored_season.now))}</p>
-                        </div>
-                    </div>
-                    ` : ""}
-                        ${settings.seasonal ? html.node`
-                    <div class="setting" data-type="info">
-                        <div class="heading">
-                            <h5>${tl2(trans.calculated_offset)}</h5>
-                        </div>
-                        <div class="info">
-                            <p>${stored_season.offset}</p>
-                        </div>
-                    </div>
-                    ` : ""}
-                    </div>
-                    <h4>${tl2(trans.settings)}</h4>
-                    <div class="setting-group">
-                        ${setting({ id: "seasonal_particles" })}
-                        ${setting({ id: "seasonal_particles_fps" })}
-                        ${setting({ id: "seasonal_overlays" })}
-                    </div>
-                </div>
-            `
-      );
     } else if (page_id == "performance") {
       register_skip_to([]);
       if (settings.hu_tao != "develop") {
@@ -52453,7 +52504,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       }
     }
   }
-  function import_settings27() {
+  function import_settings28() {
     let text4;
     const modal = dialog2({
       id: "import_settings",
@@ -59402,7 +59453,6 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         checkup_friend_cache();
         detect_mobile();
         page.platform = detect_platform();
-        set_season();
         start_rain();
         load_activities();
         notify_if_new_update();

@@ -15,9 +15,14 @@ export let stored_season = {
 export let seasonal_events = [
     {
         id: 'new_years',
-        start: 'y0-01-01T00:00:00{offset}',
-        end: 'y0-01-14T23:59:59{offset}',
-
+        start: {
+            month: 1,
+            day: 1
+        },
+        end: {
+            month: 1,
+            day: 14
+        },
         snowflakes: {
             state: true,
             count: 90
@@ -25,36 +30,57 @@ export let seasonal_events = [
     },
     {
         id: 'easter',
-        start: 'y0-04-02T00:00:00{offset}',
-        end: 'y0-04-30T23:59:59{offset}',
-
+        start: {
+            month: 4,
+            day: 2
+        },
+        end: {
+            month: 4,
+            day: 30
+        },
         snowflakes: {
             state: false
         }
     },
     {
         id: 'pride',
-        start: 'y0-05-31T00:00:00{offset}',
-        end: 'y0-07-07T23:59:59{offset}',
-
+        start: {
+            month: 5,
+            day: 31
+        },
+        end: {
+            month: 7,
+            day: 7
+        },
         snowflakes: {
             state: false
         }
     },
     {
         id: 'halloween',
-        start: 'y0-09-22T00:00:00{offset}',
-        end: 'y0-11-01T11:59:59{offset}',
-
+        start: {
+            month: 9,
+            day: 22
+        },
+        end: {
+            month: 11,
+            day: 1
+        },
         snowflakes: {
             state: false
         }
     },
     {
         id: 'pre_fall',
-        start: 'y0-11-01T12:00:00{offset}',
-        end: 'y0-11-12T23:59:59{offset}',
-
+        start: {
+            month: 11,
+            day: 1,
+            hour: 12
+        },
+        end: {
+            month: 11,
+            day: 12
+        },
         snowflakes: {
             state: true,
             count: 12
@@ -62,9 +88,14 @@ export let seasonal_events = [
     },
     {
         id: 'fall',
-        start: 'y0-11-13T00:00:00{offset}',
-        end: 'y0-11-22T23:59:59{offset}',
-
+        start: {
+            month: 11,
+            day: 13
+        },
+        end: {
+            month: 11,
+            day: 22
+        },
         snowflakes: {
             state: true,
             count: 80
@@ -72,9 +103,14 @@ export let seasonal_events = [
     },
     {
         id: 'christmas',
-        start: 'y0-11-23T00:00:00{offset}',
-        end: 'y0-12-31T23:59:59{offset}',
-
+        start: {
+            month: 11,
+            day: 23
+        },
+        end: {
+            month: 12,
+            day: 31
+        },
         snowflakes: {
             state: true,
             count: 160

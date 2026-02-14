@@ -6,7 +6,7 @@
 
 import { settings } from '@/build/config.js';
 import { auth, discord, page, root } from '@/build/page.js';
-import { stored_season } from '@/build/seasonal.js';
+import { stored_season } from '@/build/seasonal';
 import { lang, lang_info, tl, trans } from '@/build/trans';
 import { create_badge, load_badges } from '@/components/shared/badge';
 import { version } from '@/main';

@@ -57,7 +57,7 @@ import { bleh_tags } from '@/pages/tag';
 import { bleh_tracks } from '@/pages/track';
 import { patch_wiki } from '@/pages/music/wiki';
 import { start_rain } from '@/components/page/rain';
-import { seasonal_timer_end, set_season } from '@/components/seasonal.js';
+import { seasonal_timer_end, set_season } from '@/components/seasonal';
 import {
     parse_shout_queue,
     patch_shouts,
@@ -146,8 +146,6 @@ export function bleh() {
             page.platform = detect_platform();
 
             // load seasonal data
-            set_season();
-
             start_rain();
 
             load_activities();

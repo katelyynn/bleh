@@ -201,6 +201,8 @@ export let has_prompted_for_update = {
     state: false
 };
 
+export const STORAGE_LAST_SEASON_SEEN = 'bleh_last_season_seen';
+
 export let theme_preview = () => html.node`
     <div class="preview-inner">
         <div class="preview-card">

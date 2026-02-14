@@ -16,8 +16,7 @@ import {
     root,
     theme_preview
 } from '@/build/page.js';
-import { stored_season } from '@/build/seasonal.js';
-import { sponsor_list } from '@/build/sponsor.js';
+import { stored_season } from '@/build/seasonal';
 import { clamp_sat, copy, hex_to_hsl, set_storage, time } from '@/build/tools';
 import { get_trans_key, lang, lang_browser, lang_info, tl, trans } from '@/build/trans';
 import { load_badges } from '@/components/shared/badge';
@@ -27,7 +26,7 @@ import { notify } from '@/components/dialog/notify';
 import { load_settings, refresh_all, update_colour_swatches } from '../../config.js';
 import { version } from '@/main';
 import { update_page } from '@/page.js';
-import { seasonal_timer_end, seasonal_timer_start } from '@/components/seasonal.js';
+import { seasonal_timer_end, seasonal_timer_start } from '@/components/seasonal';
 import { ff } from '@/components/settings/sku.js';
 import { html, render } from 'lighterhtml';
 import {
@@ -53,6 +52,7 @@ import { version as florence_version } from '@tealmiku/florence';
 import { queue_popup } from '@/components/dialog/popup';
 import { visual } from '@/pages/bleh_settings/visual';
 import { general } from '@/pages/bleh_settings/general';
+import { seasonal } from './seasonal';
 
 export function bleh_settings() {
     page.name = auth.name;
@@ -227,6 +227,8 @@ export async function render_setting_page(page_id) {
             general();
         else if (page_id == 'visual')
             visual();
+        else if (page_id == 'seasonal')
+            seasonal();
     } catch (e) {
         page_error(e);
     }
@@ -761,102 +763,6 @@ export async function render_setting_page(page_id) {
                 </section>
             ` : ''}
         `);
-    } else if (page_id == 'seasonal') {
-        register_skip_to([]);
-
-        render(
-            page.structure.main,
-            html`
-                <div class="bleh--panel">
-                    <div class="seasonal-inner">
-                        <div class="sub-text">
-                            ${tl(trans.seasonal_timeline)}
-                        </div>
-                        <h4>
-                            ${DateTime.fromJSDate(
-                new Date(stored_season.now)
-            ).toLocaleString(DateTime.DATE_FULL)}
-                        </h4>
-                    </div>
-                    <div class="setting-group">
-                        ${setting({ id: 'seasonal' })}
-                        <div class="setting" data-type="info">
-                            <div class="heading">
-                                <h5>${tl(trans.current_season)}</h5>
-                            </div>
-                            <div class="info">
-                                <div
-                                    class="icon-combo"
-                                    data-season=${stored_season.id}
-                                >
-                                    <div
-                                        class="bleh-icon bleh-seasonal-icon"
-                                    ></div>
-                                    <p>
-                                        ${tl(
-                trans.seasonal.listing[
-                stored_season.id
-                ]
-            )}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        ${stored_season.id != 'none' &&
-                    stored_season.start &&
-                    stored_season.end
-                    ? html.node`
-                    <div class="setting" data-type="info">
-                        <div class="heading">
-                            <h5>${tl(trans.started)}</h5>
-                        </div>
-                        <div class="info">
-                            <p id="current_season_start">${DateTime.fromISO(stored_season.start.replace('y0', stored_season.year).replace('{offset}', stored_season.offset)).toRelative(DateTime.fromISO(stored_season.now))}</p>
-                        </div>
-                    </div>
-                    <div class="setting" data-type="info">
-                        <div class="heading">
-                            <h5>${tl(trans.ends_in)}</h5>
-                        </div>
-                        <div class="info">
-                            <p id="current_season">${DateTime.fromISO(stored_season.end.replace('y0', stored_season.year).replace('{offset}', stored_season.offset)).toRelative(DateTime.fromISO(stored_season.now))}</p>
-                        </div>
-                    </div>
-                    `
-                    : settings.seasonal
-                        ? html.node`
-                    <div class="setting" data-type="info">
-                        <div class="heading">
-                            <h5>${tl(trans.next_in)}</h5>
-                        </div>
-                        <div class="info">
-                            <p id="next_season_start">${DateTime.fromISO(stored_season.next_start.replace('y0', stored_season.next_is_new_year ? stored_season.year + 1 : stored_season.year).replace('{offset}', stored_season.offset)).toRelative(DateTime.fromISO(stored_season.now))}</p>
-                        </div>
-                    </div>
-                    `
-                        : ''}
-                        ${settings.seasonal
-                    ? html.node`
-                    <div class="setting" data-type="info">
-                        <div class="heading">
-                            <h5>${tl(trans.calculated_offset)}</h5>
-                        </div>
-                        <div class="info">
-                            <p>${stored_season.offset}</p>
-                        </div>
-                    </div>
-                    `
-                    : ''}
-                    </div>
-                    <h4>${tl(trans.settings)}</h4>
-                    <div class="setting-group">
-                        ${setting({ id: 'seasonal_particles' })}
-                        ${setting({ id: 'seasonal_particles_fps' })}
-                        ${setting({ id: 'seasonal_overlays' })}
-                    </div>
-                </div>
-            `
-        );
     } else if (page_id == 'performance') {
         register_skip_to([]);
 
