@@ -53,6 +53,7 @@ import { queue_popup } from '@/components/dialog/popup';
 import { visual } from '@/pages/bleh_settings/visual';
 import { general } from '@/pages/bleh_settings/general';
 import { seasonal } from './seasonal';
+import { settings_search } from './search.js';
 
 export function bleh_settings() {
     page.name = auth.name;
@@ -82,7 +83,30 @@ export function bleh_settings() {
         },
         visual: {
             name: tl(trans.visual),
-            icon: 'visual'
+            icon: 'visual',
+            settings: [
+                'theme',
+                'theme_day',
+                'theme_night',
+                'solarium',
+                'hue',
+                'sat',
+                'lit',
+                'hue_from_album',
+                'colourful_tracks',
+                'colourful_tracks_all',
+                'sat_bg',
+                'noise',
+                'font',
+                'font_weight',
+                'font_weight_medium',
+                'font_weight_bold',
+                'font_emoji',
+                'gloss',
+                'grid_glow',
+                'avatar_radius',
+                'rain'
+            ]
         },
         interface: {
             name: tl(trans.interface),
@@ -148,6 +172,7 @@ export function bleh_settings() {
     `;
 
     render(page.structure.side, html`
+        ${settings_search(tabs)}
         <div class="cta first priority sponsor colourful">
             ${auth.sponsor ? html.node`
                 <strong>${tl(trans.you_are_a_sponsor)}</strong>
@@ -1115,6 +1140,14 @@ export async function render_setting_page(page_id) {
     } else if (page_id == 'sku') {
         register_skip_to([]);
 
+        const flags = Object.entries(version.feature_flags)
+            .sort((a, b) => {
+                const a_date = new Date(a[1].date);
+                const b_date = new Date(b[1].date);
+
+                return b_date - a_date;
+            });
+
         render(page.structure.main, html`
             <div class="bleh--panel">
                 <div class="panel-intro">
@@ -1129,7 +1162,7 @@ export async function render_setting_page(page_id) {
                     ${tl(trans.beware_notice)}
                 </div>
                 <div class="setting-group">
-                    ${Object.entries(version.feature_flags).reverse().map(([flag, details]) => {
+                    ${flags.map(([flag, details]) => {
                         let value = ff(flag);
 
                         let checkbox;

@@ -21,6 +21,7 @@ import { input } from '@/components/settings/input';
 import { status } from '@/components/dialog/status';
 import { chart_reflow } from '@/components/music/chart.js';
 import { set_storage } from '@/build/tools';
+import { ff } from './sku';
 
 export function setting({
     id = '',
@@ -44,7 +45,7 @@ export function setting({
             });
 
         const type = settings_store[id].type || 'toggle';
-        const title = settings_store[id].title ? tl(settings_store[id].title) : id;
+        const title = settings_store[id].title && !ff('developer_setting_names') ? tl(settings_store[id].title) : id;
         let body = settings_store[id].body ? tl(settings_store[id].body) : null;
         const icon = settings_store[id].icon;
 

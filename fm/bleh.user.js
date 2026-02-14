@@ -38662,7 +38662,7 @@
           message: "No settings store entry present"
         });
       const type = settings_store[id].type || "toggle";
-      const title = settings_store[id].title ? tl2(settings_store[id].title) : id;
+      const title = settings_store[id].title && !ff("developer_setting_names") ? tl2(settings_store[id].title) : id;
       let body = settings_store[id].body ? tl2(settings_store[id].body) : null;
       const icon = settings_store[id].icon;
       if (![
@@ -50890,6 +50890,63 @@
     `;
   }
 
+  // src/pages/bleh_settings/search.ts
+  function settings_search(tabs) {
+    return html.node`
+        <section class="settings-search">
+            ${input({
+      placeholder: tl2(trans.search_for_settings),
+      func: (query) => {
+        const results = make_search(tabs, query);
+        change_settings_page("search");
+        search_results(tabs, query, results);
+      }
+    })}
+        </section>
+    `;
+  }
+  function make_search(tabs, query) {
+    query = query.toLowerCase().trim();
+    const results = [];
+    Object.entries(tabs).forEach(([key, tab]) => {
+      if (!tab.settings) return;
+      tab.settings.forEach((setting2) => {
+        const formal = settings_store[setting2];
+        if (!formal) return;
+        let match3 = false;
+        const name = tl2(formal.title).toLowerCase() || "";
+        const body = tl2(formal.body).toLowerCase() || "";
+        let tags = formal.tags;
+        if (tags) {
+          tags.forEach((tag) => {
+            if (typeof tag == "string") {
+              if (tag.toLowerCase().includes(query)) match3 = true;
+            } else if (typeof tag == "object") {
+              if (tl2(tag).toLowerCase().includes(query)) match3 = true;
+            }
+          });
+        }
+        if (name.includes(query) || body.includes(query))
+          match3 = true;
+        if (match3) {
+          results.push({
+            id: setting2,
+            tab: key
+          });
+        }
+      });
+    });
+    return results;
+  }
+  function search_results(tabs, query, results) {
+    render(page.structure.main, html`
+        <p>found ${results.length} result(s)</p>
+        ${results.map((result) => html.node`
+            <div>${result.id} - ${result.tab}</div>
+        `)}
+    `);
+  }
+
   // src/pages/bleh_settings/bleh_settings.js
   function bleh_settings() {
     page.name = auth.name;
@@ -50911,7 +50968,30 @@
       },
       visual: {
         name: tl2(trans.visual),
-        icon: "visual"
+        icon: "visual",
+        settings: [
+          "theme",
+          "theme_day",
+          "theme_night",
+          "solarium",
+          "hue",
+          "sat",
+          "lit",
+          "hue_from_album",
+          "colourful_tracks",
+          "colourful_tracks_all",
+          "sat_bg",
+          "noise",
+          "font",
+          "font_weight",
+          "font_weight_medium",
+          "font_weight_bold",
+          "font_emoji",
+          "gloss",
+          "grid_glow",
+          "avatar_radius",
+          "rain"
+        ]
       },
       interface: {
         name: tl2(trans.interface),
@@ -50972,6 +51052,7 @@
         </div>
     `;
     render(page.structure.side, html`
+        ${settings_search(tabs)}
         <div class="cta first priority sponsor colourful">
             ${auth.sponsor ? html.node`
                 <strong>${tl2(trans.you_are_a_sponsor)}</strong>
@@ -51886,6 +51967,11 @@
         `);
     } else if (page_id == "sku") {
       register_skip_to([]);
+      const flags = Object.entries(version.feature_flags).sort((a, b) => {
+        const a_date = new Date(a[1].date);
+        const b_date = new Date(b[1].date);
+        return b_date - a_date;
+      });
       render(page.structure.main, html`
             <div class="bleh--panel">
                 <div class="panel-intro">
@@ -51900,7 +51986,7 @@
                     ${tl2(trans.beware_notice)}
                 </div>
                 <div class="setting-group">
-                    ${Object.entries(version.feature_flags).reverse().map(([flag, details]) => {
+                    ${flags.map(([flag, details]) => {
         let value = ff(flag);
         let checkbox;
         let state;
@@ -70900,7 +70986,17 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     theme: {
       default: "darker",
       type: "radio",
-      title: trans.theme
+      title: trans.themes.name,
+      tags: [
+        trans.themes.light,
+        trans.themes.ink,
+        trans.themes.dark,
+        trans.theme.darker,
+        trans.themes.oled,
+        "oled",
+        trans.appearance,
+        trans.visual
+      ]
     },
     theme_schedule: {
       default: false
@@ -71908,7 +72004,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       developer: {
         default: false,
         name: "Developer mode",
-        date: "2025-01-03",
+        date: "2099-12-01",
         notice: "Enable developer-specific features used for debugging purposes"
       },
       api: {
@@ -72157,6 +72253,11 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         default: false,
         name: "When 'Join the conversation' is replaced, use the full shoutbox instead of a preview",
         date: "2026-02-12"
+      },
+      developer_setting_names: {
+        default: false,
+        name: "Show internal setting ids",
+        date: "2099-11-31"
       }
     }
   };

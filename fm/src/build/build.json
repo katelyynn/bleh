@@ -135,7 +135,7 @@
         "developer": {
             "default": false,
             "name": "Developer mode",
-            "date": "2025-01-03",
+            "date": "2099-12-01",
             "notice": "Enable developer-specific features used for debugging purposes"
         },
         "api": {
@@ -384,6 +384,11 @@
             "default": false,
             "name": "When 'Join the conversation' is replaced, use the full shoutbox instead of a preview",
             "date": "2026-02-12"
+        },
+        "developer_setting_names": {
+            "default": false,
+            "name": "Show internal setting ids",
+            "date": "2099-11-31"
         }
     }
 }

@@ -30742,4 +30742,9 @@
             color: hsl(var(--l3-c));
         }
     }
+
+
+    .settings-search {
+        order: -30;
+    }
 }

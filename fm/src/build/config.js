@@ -582,7 +582,17 @@ export let settings_store = {
     theme: {
         default: 'darker',
         type: 'radio',
-        title: trans.theme
+        title: trans.themes.name,
+        tags: [
+            trans.themes.light,
+            trans.themes.ink,
+            trans.themes.dark,
+            trans.theme.darker,
+            trans.themes.oled,
+            'oled',
+            trans.appearance,
+            trans.visual
+        ]
     },
     theme_schedule: {
         default: false
