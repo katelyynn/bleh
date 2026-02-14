@@ -535,7 +535,7 @@ function patch_settings_profile_panel(token, update_picture) {
     };
 
     let chars;
-    const about = markdown_field(update_about, markdown_settings, form_about_me, 'about_me', 40, 10, tl(trans.anything_you_can_imagine));
+    const about = markdown_field(update_about, markdown_settings, form_about_me, 'about_me', 40, 10, tl(trans.anything_you_can_imagine), null, false, false, false);
     let preview;
 
     let accent_setting;

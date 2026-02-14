@@ -55,7 +55,7 @@ import { find_pronouns } from '@/components/profile/pronouns';
 import { queue_popup } from '@/components/dialog/popup';
 import { bleh_playlist } from '@/pages/profile/playlist';
 
-export async function bleh_profiles() {
+export function bleh_profiles() {
     // the obsessions page is a user subpage but works very differently
     if (page.subpage == 'obsessions_obsession') {
         bleh_obsession();
@@ -1905,32 +1905,26 @@ function profile_tracks() {
 }
 
 function bio_parse(text, cache = true, take_effect = true) {
-    let temp = document.createElement('div');
-    temp.classList.add('markdown-body');
+    const body = markdown(text.textContent, {
+        allow_headers: true,
+        allow_banners: true,
+        allow_icons: true,
+        allow_hue: true,
+        allow_fonts: true,
+        cache,
+        take_effect,
+        allow_socials: true,
+        allow_alignment: true,
+        allow_lists: true
+    });
 
-    render(
-        temp,
-        markdown(text.textContent, {
-            allow_headers: true,
-            allow_banners: true,
-            allow_icons: true,
-            allow_hue: true,
-            allow_fonts: true,
-            cache,
-            take_effect,
-            allow_socials: true,
-            allow_alignment: true,
-            allow_lists: true
-        })
-    );
-
-    if (!temp.hasChildNodes()) {
-        render(temp, html`
+    if (!body.hasChildNodes()) {
+        render(body, html`
             <p class="subtle">${tl(trans.no_about).replace('{u}', page.name)}</p>
         `);
     }
 
-    return temp;
+    return body;
 }
 
 function bleh_profile_chart() {

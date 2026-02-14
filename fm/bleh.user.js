@@ -33700,7 +33700,7 @@
   }
 
   // src/pages/profile/profile.js
-  async function bleh_profiles() {
+  function bleh_profiles() {
     if (page.subpage == "obsessions_obsession") {
       bleh_obsession();
       return;
@@ -35188,29 +35188,24 @@
     });
   }
   function bio_parse(text4, cache2 = true, take_effect = true) {
-    let temp = document.createElement("div");
-    temp.classList.add("markdown-body");
-    render(
-      temp,
-      markdown(text4.textContent, {
-        allow_headers: true,
-        allow_banners: true,
-        allow_icons: true,
-        allow_hue: true,
-        allow_fonts: true,
-        cache: cache2,
-        take_effect,
-        allow_socials: true,
-        allow_alignment: true,
-        allow_lists: true
-      })
-    );
-    if (!temp.hasChildNodes()) {
-      render(temp, html`
+    const body = markdown(text4.textContent, {
+      allow_headers: true,
+      allow_banners: true,
+      allow_icons: true,
+      allow_hue: true,
+      allow_fonts: true,
+      cache: cache2,
+      take_effect,
+      allow_socials: true,
+      allow_alignment: true,
+      allow_lists: true
+    });
+    if (!body.hasChildNodes()) {
+      render(body, html`
             <p class="subtle">${tl2(trans.no_about).replace("{u}", page.name)}</p>
         `);
     }
-    return temp;
+    return body;
   }
   function bleh_profile_chart() {
     let panel = page.structure.row.querySelector(".listen-panel");
@@ -47268,7 +47263,11 @@
       ALLOWED_TAGS,
       ALLOWED_ATTR
     });
-    const body = html.node([parsed2]);
+    const body = html.node`
+        <div class="parsed-markdown markdown-body">
+            ${{ html: parsed2 }}
+        </div>
+    `;
     log("rendered", "markdown", "info", { body });
     const link_strings = {
       "open.spotify.com": "Spotify",
@@ -47322,7 +47321,7 @@
         `);
     }
     if (body.nodeName != "#text") patch_wiki_contents(body);
-    if (line_breaks && body.nodeName != "#text") {
+    if (line_breaks) {
       local_restriction(body);
       body.querySelectorAll("p").forEach((text5) => {
         local_restriction(text5);
@@ -47582,7 +47581,7 @@
         `
     });
   }
-  function markdown_field(func, options, value, name, cols, rows, placeholder, maxlength, mini = false, autofocus = false) {
+  function markdown_field(func, options, value, name, cols, rows, placeholder, maxlength, mini = false, autofocus = false, required = true) {
     const use_md = mini ? settings.shout_markdown : settings.bio_markdown;
     options = {
       allow_headers: false,
@@ -47616,7 +47615,7 @@
       },
       func_select: on_selection,
       submit_on_character: true,
-      required: true,
+      required,
       maxlength,
       focus: autofocus
     });
@@ -55897,7 +55896,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       allow_lists: true
     };
     let chars;
-    const about = markdown_field(update_about, markdown_settings, form_about_me, "about_me", 40, 10, tl2(trans.anything_you_can_imagine));
+    const about = markdown_field(update_about, markdown_settings, form_about_me, "about_me", 40, 10, tl2(trans.anything_you_can_imagine), null, false, false, false);
     let preview;
     let accent_setting;
     let font_setting;

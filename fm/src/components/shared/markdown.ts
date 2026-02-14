@@ -416,7 +416,12 @@ export function markdown(
         ALLOWED_ATTR
     });
 
-    const body = html.node([parsed]);
+    const body = html.node`
+        <div class="parsed-markdown markdown-body">
+            ${{ html: parsed }}
+        </div>
+    `;
+
     log('rendered', 'markdown', 'info', { body });
 
     const link_strings = {
@@ -477,7 +482,7 @@ export function markdown(
     if (body.nodeName != '#text') patch_wiki_contents(body);
 
     // funny local restriction message
-    if (line_breaks && body.nodeName != '#text') {
+    if (line_breaks) {
         local_restriction(body);
         body.querySelectorAll('p').forEach((text) => {
             local_restriction(text);
@@ -940,7 +945,7 @@ export function external_url_prompt(url, dangerous = false) {
     });
 }
 
-export function markdown_field(func, options, value, name, cols, rows, placeholder, maxlength, mini = false, autofocus = false) {
+export function markdown_field(func, options, value, name, cols, rows, placeholder, maxlength, mini = false, autofocus = false, required = true) {
     const use_md = mini ? settings.shout_markdown : settings.bio_markdown;
 
     options = {
@@ -976,7 +981,7 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
         },
         func_select: on_selection,
         submit_on_character: true,
-        required: true,
+        required,
         maxlength,
         focus: autofocus
     });
