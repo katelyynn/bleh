@@ -90,6 +90,7 @@ import { hideAll } from 'tippy.js';
 import { notices } from '@/components/dialog/notices';
 import { tag_page } from '@/components/music/tags';
 import { clear_popup_queue } from '@/components/dialog/popup';
+import { verified } from './components/shared/badge';
 
 export function bleh() {
     florence({
@@ -112,12 +113,13 @@ export function bleh() {
             load_settings();
 
             dynamic_theming();
-
             solarium();
 
             translation_stats();
 
             page_menu();
+
+            verified();
 
             // messaging
             load_dialogs();

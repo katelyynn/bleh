@@ -167,6 +167,9 @@ export async function bleh_profiles() {
                 return;
             }
 
+            if (type == 'user-status-subscriber')
+                badge.textContent = tl(trans.badges['user-status-subscriber'].name);
+
             tippy(badge, {
                 theme: 'badge',
                 placement: 'bottom',

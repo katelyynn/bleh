@@ -10,6 +10,7 @@ import { lang_info, tl, trans } from '@/build/trans';
 import { html } from 'lighterhtml';
 import { sponsor } from '@/components/sponsor';
 import tippy from 'tippy.js';
+import { page } from '@/build/page';
 
 export function load_badges(user, solo = false) {
     if (!sponsor_list || !sponsor_list.badges) return;
@@ -57,7 +58,7 @@ export function load_badges(user, solo = false) {
         badge = process_badge(badge, user);
     });
 
-    log('final badge list', 'sponsor', 'info', badges);
+    log(`final badge list for @${user}`, 'sponsor', 'info', { badges });
 
     if (solo) return badges[badges.length - 1];
 
@@ -173,4 +174,14 @@ export function create_badge(
     if (badge.type == 'sponsor') elem.onclick = sponsor;
 
     return elem;
+}
+
+export function verified() {
+    const today = new Date();
+    //const april = today.getMonth() == 3 && today.getDate() == 1;
+    const april = true;
+
+    page.state.april = april;
+
+    if (april) document.body.setAttribute('data-verified-check', 'true');
 }

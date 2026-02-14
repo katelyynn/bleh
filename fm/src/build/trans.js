@@ -6,7 +6,7 @@
 
 import { handle_error_500 } from '@/page';
 import { log } from '@/build/log';
-import { auth, auth_link, setRoot } from '@/build/page';
+import { auth, auth_link, page, setRoot } from '@/build/page';
 import { clamp_lit, clamp_sat, rgb_to_hsl } from '@/build/tools';
 import ColorThief from 'color-thief-browser';
 import { Settings } from 'luxon';
@@ -10331,6 +10331,9 @@ export function tl(key, replacements = {}) {
         const regex = new RegExp(`{${placeholder}}`, 'g');
         translation = translation.replace(regex, value);
     }
+
+    if (page.state.april && translation.includes('Last.fm Pro'))
+        translation = translation.replaceAll('Last.fm Pro', 'Verified');
 
     return translation;
 }

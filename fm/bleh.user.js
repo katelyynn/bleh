@@ -29006,7 +29006,7 @@
     badges.forEach((badge) => {
       badge = process_badge(badge, user);
     });
-    log("final badge list", "sponsor", "info", badges);
+    log(`final badge list for @${user}`, "sponsor", "info", { badges });
     if (solo) return badges[badges.length - 1];
     return badges;
   }
@@ -29086,6 +29086,12 @@
     });
     if (badge.type == "sponsor") elem.onclick = sponsor2;
     return elem;
+  }
+  function verified() {
+    const today = /* @__PURE__ */ new Date();
+    const april = true;
+    page.state.april = april;
+    if (april) document.body.setAttribute("data-verified-check", "true");
   }
 
   // src/components/menu.ts
@@ -29326,6 +29332,13 @@
       pre_existing_badge = null;
       pre_existing_badge_type = null;
     }
+    if (pre_existing_badge) {
+      const new_pre_existing = process_badge({
+        type: pre_existing_badge_type,
+        inbuilt: true
+      }, name);
+      badges = [new_pre_existing, ...badges];
+    }
     if (badges.length > 0)
       avatar2.appendChild(create_badge(badges[badges.length - 1], true));
     let image_header;
@@ -29341,32 +29354,9 @@
                 <div class="info">
                     <h5 class="title">@${name}</h5>
                     ${badges ? html.node`
-                    <div class="badges">
-                        ${badges.map((badge, index3) => create_badge(badge, false, index3 == badges.length - 1))}
-                        ${pre_existing_badge ? create_badge({
-        type: pre_existing_badge_type,
-        name: tl2(
-          trans.badges[pre_existing_badge_type].name
-        ),
-        reason: tl2(
-          trans.badges[pre_existing_badge_type].reason
-        ),
-        inbuilt: true
-      }) : ""}
-                    </div>
-                    ` : pre_existing_badge ? html.node`
-                    <div class="badges">
-                        ${create_badge({
-        type: pre_existing_badge_type,
-        name: tl2(
-          trans.badges[pre_existing_badge_type].name
-        ),
-        reason: tl2(
-          trans.badges[pre_existing_badge_type].reason
-        ),
-        inbuilt: true
-      })}
-                    </div>
+                        <div class="badges">
+                            ${badges.map((badge, index3) => create_badge(badge, false, index3 == badges.length - 1))}
+                        </div>
                     ` : ""}
                 </div>
             </div>
@@ -29390,10 +29380,11 @@
     });
     register_menu(parent ? parent : avatar2, popup2);
     control_gif_pause(avatar_img);
-    if (badges) return badges[badges.length - 1];
-    else if (pre_existing_badge)
-      return { type: pre_existing_badge.classList[1] };
-    else return { type: "none" };
+    if (badges.length > 0) {
+      return badges[badges.length - 1];
+    } else {
+      return {};
+    }
   }
   unsafeWindow._expand_avatar = function(src) {
     expand_avatar(src);
@@ -29437,10 +29428,14 @@
       name.style.setProperty("--sat-over", badge.sat);
       name.style.setProperty("--lit-over", badge.lit);
     } else if (badge.type) {
-      name.classList.add(
-        `user-status--bleh-${badge.type}`,
-        `user-status--bleh-user-${badge.user}`
-      );
+      if (!badge.inbuilt) {
+        name.classList.add(
+          `user-status--bleh-${badge.type}`,
+          `user-status--bleh-user-${badge.user}`
+        );
+      } else {
+        name.classList.add(badge.type);
+      }
     } else {
       name.classList.add(badge.type);
     }
@@ -33745,6 +33740,8 @@
           badge.remove();
           return;
         }
+        if (type == "user-status-subscriber")
+          badge.textContent = tl2(trans.badges["user-status-subscriber"].name);
         tippy_esm_default(badge, {
           theme: "badge",
           placement: "bottom",
@@ -59392,6 +59389,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         solarium();
         translation_stats();
         page_menu();
+        verified();
         load_dialogs();
         register_rabbit();
         lookup_lang();
@@ -70275,6 +70273,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       const regex = new RegExp(`{${placeholder}}`, "g");
       translation = translation.replace(regex, value);
     }
+    if (page.state.april && translation.includes("Last.fm Pro"))
+      translation = translation.replaceAll("Last.fm Pro", "Verified");
     return translation;
   }
   function collect_keys(object, prefix, out = []) {

@@ -116,6 +116,8 @@
         --lit-orange: 0.98;
 
         --hue-pro: 174;
+        --sat-pro: 1;
+        --lit-pro: 1;
 
         --hue-brand-yt: -2;
         --hue-brand-sp: 143;
@@ -195,6 +197,13 @@
 
         [data-bleh--reduced_motion="true"] > & {
             --motion: none;
+        }
+
+        &[data-verified-check="true"] {
+            --icon-pro: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJjdXJyZW50Q29sb3IiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1maWxsZWQgaWNvbi10YWJsZXItcm9zZXR0ZS1kaXNjb3VudC1jaGVjayI+PHBhdGggc3Ryb2tlPSJub25lIiBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTEyLjAxIDIuMDExYTMuMiAzLjIgMCAwIDEgMi4xMTMgLjc5N2wuMTU0IC4xNDVsLjY5OCAuNjk4YTEuMiAxLjIgMCAwIDAgLjcxIC4zNDFsLjEzNSAuMDA4aDFhMy4yIDMuMiAwIDAgMSAzLjE5NSAzLjAxOGwuMDA1IC4xODJ2MWMwIC4yNyAuMDkyIC41MzMgLjI1OCAuNzQzbC4wOSAuMWwuNjk3IC42OThhMy4yIDMuMiAwIDAgMSAuMTQ3IDQuMzgybC0uMTQ1IC4xNTRsLS42OTggLjY5OGExLjIgMS4yIDAgMCAwIC0uMzQxIC43MWwtLjAwOCAuMTM1djFhMy4yIDMuMiAwIDAgMSAtMy4wMTggMy4xOTVsLS4xODIgLjAwNWgtMWExLjIgMS4yIDAgMCAwIC0uNzQzIC4yNThsLS4xIC4wOWwtLjY5OCAuNjk3YTMuMiAzLjIgMCAwIDEgLTQuMzgyIC4xNDdsLS4xNTQgLS4xNDVsLS42OTggLS42OThhMS4yIDEuMiAwIDAgMCAtLjcxIC0uMzQxbC0uMTM1IC0uMDA4aC0xYTMuMiAzLjIgMCAwIDEgLTMuMTk1IC0zLjAxOGwtLjAwNSAtLjE4MnYtMWExLjIgMS4yIDAgMCAwIC0uMjU4IC0uNzQzbC0uMDkgLS4xbC0uNjk3IC0uNjk4YTMuMiAzLjIgMCAwIDEgLS4xNDcgLTQuMzgybC4xNDUgLS4xNTRsLjY5OCAtLjY5OGExLjIgMS4yIDAgMCAwIC4zNDEgLS43MWwuMDA4IC0uMTM1di0xbC4wMDUgLS4xODJhMy4yIDMuMiAwIDAgMSAzLjAxMyAtMy4wMTNsLjE4MiAtLjAwNWgxYTEuMiAxLjIgMCAwIDAgLjc0MyAtLjI1OGwuMSAtLjA5bC42OTggLS42OTdhMy4yIDMuMiAwIDAgMSAyLjI2OSAtLjk0NHptMy42OTcgNy4yODJhMSAxIDAgMCAwIC0xLjQxNCAwbC0zLjI5MyAzLjI5MmwtMS4yOTMgLTEuMjkybC0uMDk0IC0uMDgzYTEgMSAwIDAgMCAtMS4zMiAxLjQ5N2wyIDJsLjA5NCAuMDgzYTEgMSAwIDAgMCAxLjMyIC0uMDgzbDQgLTRsLjA4MyAtLjA5NGExIDEgMCAwIDAgLS4wODMgLTEuMzJ6IiAvPjwvc3ZnPg==') !important;
+            --hue-pro: 200;
+            --sat-pro: 1.3;
+            --lit-pro: 0.96;
         }
 
         --blank: url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7);
@@ -5048,8 +5057,8 @@
     .user-status-subscriber {
         --mask: var(--icon-pro);
         --hue-over: var(--hue-pro);
-        --sat-over: 1;
-        --lit-over: 1;
+        --sat-over: var(--sat-pro);
+        --lit-over: var(--lit-pro);
 
         &.label {
             order: 10;
@@ -15273,7 +15282,7 @@
     }
 
     .user-list-name > a {
-        color: inherit !important;
+        color: hsl(var(--l3-c)) !important;
     }
     .user-list-inner-wrap > .label {
         order: -1;

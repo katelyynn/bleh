@@ -7,7 +7,7 @@
 import { html } from 'lighterhtml';
 import { auth, root } from '@/build/page';
 import { tl, trans } from '@/build/trans';
-import { create_badge, load_badges } from '@/components/shared/badge';
+import { create_badge, load_badges, process_badge } from '@/components/shared/badge';
 import { dialog } from '@/components/dialog/dialog';
 import tippy from 'tippy.js';
 import { control_gif_pause } from '@/build/tools';
@@ -55,6 +55,15 @@ export function patch_avatar(
         pre_existing_badge_type = null;
     }
 
+    if (pre_existing_badge) {
+        const new_pre_existing = process_badge({
+            type: pre_existing_badge_type,
+            inbuilt: true
+        }, name);
+
+        badges = [new_pre_existing, ...badges];
+    }
+
     if (badges.length > 0)
         avatar.appendChild(create_badge(badges[badges.length - 1], true));
 
@@ -70,46 +79,11 @@ export function patch_avatar(
                 </div>
                 <div class="info">
                     <h5 class="title">@${name}</h5>
-                    ${
-                        badges ?
-                            html.node`
-                    <div class="badges">
-                        ${badges.map((badge, index) => create_badge(badge, false, index == badges.length - 1))}
-                        ${
-                            pre_existing_badge ?
-                                create_badge({
-                                    type: pre_existing_badge_type,
-                                    name: tl(
-                                        trans.badges[pre_existing_badge_type]
-                                            .name
-                                    ),
-                                    reason: tl(
-                                        trans.badges[pre_existing_badge_type]
-                                            .reason
-                                    ),
-                                    inbuilt: true
-                                })
-                            :   ''
-                        }
-                    </div>
-                    `
-                        : pre_existing_badge ?
-                            html.node`
-                    <div class="badges">
-                        ${create_badge({
-                            type: pre_existing_badge_type,
-                            name: tl(
-                                trans.badges[pre_existing_badge_type].name
-                            ),
-                            reason: tl(
-                                trans.badges[pre_existing_badge_type].reason
-                            ),
-                            inbuilt: true
-                        })}
-                    </div>
-                    `
-                        :   ''
-                    }
+                    ${badges ? html.node`
+                        <div class="badges">
+                            ${badges.map((badge, index) => create_badge(badge, false, index == badges.length - 1))}
+                        </div>
+                    ` : ''}
                 </div>
             </div>
             <a class="dropdown-menu-clickable-item" data-type="profile" href="${root}user/${name}">
@@ -135,10 +109,11 @@ export function patch_avatar(
 
     control_gif_pause(avatar_img);
 
-    if (badges) return badges[badges.length - 1];
-    else if (pre_existing_badge)
-        return { type: pre_existing_badge.classList[1] };
-    else return { type: 'none' };
+    if (badges.length > 0) {
+        return badges[badges.length - 1];
+    } else {
+        return {};
+    }
 }
 
 export function return_name_from_avatar(avatar) {
@@ -201,10 +176,14 @@ export function style_name_from_badge(name, badge) {
         name.style.setProperty('--sat-over', badge.sat);
         name.style.setProperty('--lit-over', badge.lit);
     } else if (badge.type) {
-        name.classList.add(
-            `user-status--bleh-${badge.type}`,
-            `user-status--bleh-user-${badge.user}`
-        );
+        if (!badge.inbuilt) {
+            name.classList.add(
+                `user-status--bleh-${badge.type}`,
+                `user-status--bleh-user-${badge.user}`
+            );
+        } else {
+            name.classList.add(badge.type);
+        }
     } else {
         name.classList.add(badge.type);
     }
