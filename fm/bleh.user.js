@@ -31542,6 +31542,9 @@
         }
       }
     };
+    const track_layout = settings.track_layout;
+    const album_name_location = settings.track_album_name_location;
+    const season = page.state.seasons.current?.id || "none";
     tracklists.forEach((tracklist) => {
       if (!tracklist) return;
       log("found, checking", "tracks", "log", { tracklist, search });
@@ -31550,12 +31553,8 @@
       ))
         return;
       log("new!", "tracks", "info", { tracklist });
-      const wide = tracklist.classList.contains(
-        "chartlist--wide-artist-column"
-      );
-      const tracks = tracklist.querySelectorAll(
-        ":is(.chartlist-row:not(.chartlist__placeholder-row), .chartlist-row--interlist-ad)"
-      );
+      const wide = tracklist.classList.contains("chartlist--wide-artist-column");
+      const tracks = tracklist.querySelectorAll(":scope > tbody > :is(.chartlist-row:not(.chartlist__placeholder-row), .chartlist-row--interlist-ad)");
       tracks.forEach((track, index3) => {
         smart_track(track, index3);
       });
@@ -31567,6 +31566,7 @@
           return;
         }
         track.style.setProperty("--delay", index3 * 0.04 + "s");
+        track.setAttribute("data-album-name-location", album_name_location);
         track.appendChild(html.node`
                 <div class="kate-placeholder" />
             `);
@@ -31588,6 +31588,8 @@
                 `;
           track.appendChild(track_info);
         }
+        track_info.setAttribute("data-track-layout", track_layout);
+        track_info.setAttribute("data-album-name-location", album_name_location);
         track.setAttribute(
           "data-has-bar",
           tracklist.classList.contains("chartlist--with-bar")
@@ -31675,6 +31677,10 @@
         }
         const is_active = track.classList.contains("chartlist-row--now-scrobbling");
         const has_bar = track.querySelector(":scope > .chartlist-bar");
+        if (has_bar) {
+          const count_bar = has_bar.querySelector(":scope > .chartlist-count-bar");
+          count_bar.setAttribute("data-season", season);
+        }
         let track_legacy_menu = track.querySelector(".chartlist-more-menu");
         let track_timestamp = track.querySelector(".chartlist-timestamp span");
         let track_timestamp_contents;
@@ -34438,20 +34444,20 @@
   function patch_profile_following() {
     let navlist = page.structure.nav.querySelector(".navlist-items");
     let following_tab = navlist.querySelector(".secondary-nav-item--following");
+    let followers_tab = navlist.querySelector(".secondary-nav-item--followers");
+    let neighbours_tab = navlist.querySelector(".secondary-nav-item--neighbours");
     let link = following_tab.querySelector("a");
+    followers_tab.remove();
+    neighbours_tab.remove();
     if (page.subpage != "following" && page.subpage != "followers" && page.subpage != "neighbours") {
+      following_tab.classList.remove("secondary-nav-item--following");
+      following_tab.classList.add("secondary-nav-item--friends");
       link.href = `${root}user/${page.name}/friends`;
       link.textContent = tl2(trans.friends);
       return;
     }
     if (page.subpage != "following")
       link.classList.add("secondary-nav-item-link--active");
-    let followers_tab = navlist.querySelector(".secondary-nav-item--followers");
-    let neighbours_tab = navlist.querySelector(
-      ".secondary-nav-item--neighbours"
-    );
-    navlist.removeChild(followers_tab);
-    navlist.removeChild(neighbours_tab);
     let friends_nav = html.node`
         <div class="toolbar">
             <nav class="navlist secondary-nav redesigned-navigation">
@@ -34463,6 +34469,8 @@
             </nav>
         </div>
     `;
+    following_tab.classList.remove("secondary-nav-item--following");
+    following_tab.classList.add("secondary-nav-item--friends");
     link.href = `${root}user/${page.name}/friends`;
     link.textContent = tl2(trans.friends);
     page.structure.row.insertBefore(
@@ -51380,25 +51388,25 @@
                 <h4>${tl2(trans.shouts)}</h4>
                 <div class="inner-preview pad flex">
                     <div
-                        class="shout js-shout js-link-block"
+                        class="shout js-shout js-link-block shout-preview"
                         data-kate-processed="true"
                     >
                         ${auth.name ? html.node`
-                    <h3 class="shout-user">
+                    <h3 class="shout-user shout-user-preview">
                         <a>${auth.name}</a>
                     </h3>
                     <span class="avatar shout-user-avatar">
                         <img src="${auth.avatar.replace("/avatar42s/", "/avatar170s/")}" alt="${tl2(trans.your_avatar)}" loading="lazy">
                     </span>
                     ` : html.node`
-                    <h3 class="shout-user">
+                    <h3 class="shout-user shout-user-preview">
                         <a>${tl2(trans.profile)}</a>
                     </h3>
                     <span class="avatar shout-user-avatar">
                         <img class="missing-avatar" alt="${tl2(trans.your_avatar)}" loading="lazy">
                     </span>
                     `}
-                        <a class="shout-permalink shout-timestamp">
+                        <a class="shout-permalink shout-timestamp shout-timestamp-preview">
                             <time
                                 datetime="2024-06-05T02:33:39+01:00"
                                 title="Wednesday 5 Jun 2024, 2:33am"
@@ -51472,13 +51480,13 @@
                 <h4>${tl2(trans.music_corrections)}</h4>
                 <div class="inner-preview pad">
                     <div class="lotus-preview">
-                        <div class="before">
-                            <h1>mY aNtI-aIrCrAfT fRiEnD</h1>
-                            <h2>jUlIe</h2>
+                        <div class="lotus-preview-inner before">
+                            <h1 class="lotus-preview-header">mY aNtI-aIrCrAfT fRiEnD</h1>
+                            <h2 class="lotus-preview-sub">jUlIe</h2>
                         </div>
-                        <div class="after">
-                            <h1>my anti-aircraft friend</h1>
-                            <h2>julie</h2>
+                        <div class="lotus-preview-inner after">
+                            <h1 class="lotus-preview-header">my anti-aircraft friend</h1>
+                            <h2 class="lotus-preview-sub">julie</h2>
                         </div>
                     </div>
                 </div>

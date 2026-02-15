@@ -507,12 +507,12 @@ export async function render_setting_page(page_id) {
                 <h4>${tl(trans.shouts)}</h4>
                 <div class="inner-preview pad flex">
                     <div
-                        class="shout js-shout js-link-block"
+                        class="shout js-shout js-link-block shout-preview"
                         data-kate-processed="true"
                     >
                         ${auth.name
                 ? html.node`
-                    <h3 class="shout-user">
+                    <h3 class="shout-user shout-user-preview">
                         <a>${auth.name}</a>
                     </h3>
                     <span class="avatar shout-user-avatar">
@@ -520,14 +520,14 @@ export async function render_setting_page(page_id) {
                     </span>
                     `
                 : html.node`
-                    <h3 class="shout-user">
+                    <h3 class="shout-user shout-user-preview">
                         <a>${tl(trans.profile)}</a>
                     </h3>
                     <span class="avatar shout-user-avatar">
                         <img class="missing-avatar" alt="${tl(trans.your_avatar)}" loading="lazy">
                     </span>
                     `}
-                        <a class="shout-permalink shout-timestamp">
+                        <a class="shout-permalink shout-timestamp shout-timestamp-preview">
                             <time
                                 datetime="2024-06-05T02:33:39+01:00"
                                 title="Wednesday 5 Jun 2024, 2:33am"
@@ -606,24 +606,24 @@ export async function render_setting_page(page_id) {
                 <h4>${tl(trans.music_corrections)}</h4>
                 <div class="inner-preview pad">
                     <div class="lotus-preview">
-                        <div class="before">
-                            <h1>mY aNtI-aIrCrAfT fRiEnD</h1>
-                            <h2>jUlIe</h2>
+                        <div class="lotus-preview-inner before">
+                            <h1 class="lotus-preview-header">mY aNtI-aIrCrAfT fRiEnD</h1>
+                            <h2 class="lotus-preview-sub">jUlIe</h2>
                         </div>
-                        <div class="after">
-                            <h1>my anti-aircraft friend</h1>
-                            <h2>julie</h2>
+                        <div class="lotus-preview-inner after">
+                            <h1 class="lotus-preview-header">my anti-aircraft friend</h1>
+                            <h2 class="lotus-preview-sub">julie</h2>
                         </div>
                     </div>
                 </div>
                 <div class="setting-group">
-                    ${(corrections = setting({
-            id: 'corrections',
-            func: () => {
-                romanise_jp.compat();
-                romanise_ko.compat();
-            }
-        }))}
+                    ${corrections = setting({
+                        id: 'corrections',
+                        func: () => {
+                            romanise_jp.compat();
+                            romanise_ko.compat();
+                        }
+                    })}
                     <div
                         class="setting"
                         data-type="info"

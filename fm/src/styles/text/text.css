@@ -137,3 +137,36 @@ h5 {
 h4 {
     color: hsl(var(--c1));
 }
+
+.subtle {
+    font-size: 13px;
+    color: hsl(var(--c3));
+    cursor: default;
+}
+
+h6 {
+    margin: unset !important;
+    font-size: var(--font-size);
+    line-height: var(--line-height);
+    color: hsl(var(--c1));
+    font-weight: var(--font-weight-medium);
+}
+
+.time,
+pre,
+code,
+kbd,
+samp {
+    color: hsl(var(--c3));
+    background-color: hsl(var(--b6));
+    padding: 0 4px;
+    font-size: calc(var(--font-size) - 1px);
+    line-height: var(--line-height);
+    font-family: var(--font-code);
+    border-radius: var(--item-small-radius);
+}
+
+pre {
+    padding: 4px 8px;
+    border-radius: var(--item-med-radius);
+}

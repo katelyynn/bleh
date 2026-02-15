@@ -1,3 +1,7 @@
+.personal-stats {
+    display: none !important;
+}
+
 .listen-container {
     display: flex;
     align-items: center;

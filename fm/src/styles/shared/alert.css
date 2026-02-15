@@ -1,0 +1,104 @@
+.async-content-error-message,
+.event-status,
+.alert:not(.big-modal-alert, .form-disclaimer > .alert) {
+    font-size: var(--font-size);
+    line-height: var(--line-height);
+    margin-top: var(--card-gap);
+    padding: 4px 6px 4px calc(6px + var(--icon-size) + var(--icon-gap)) !important;
+    background: var(--background, hsl(var(--k4), 15%)) !important;
+    color: hsl(var(--l3-c)) !important;
+    font-weight: var(--font-weight-medium) !important;
+    text-align: left;
+    cursor: default;
+    position: relative;
+    --icon-size: 16px;
+    --icon-gap: 4px;
+    --left: 6px;
+    --show-icon: block;
+    border-radius: var(--item-med-radius);
+
+    width: fit-content;
+
+    &:before {
+        color: currentColor;
+    }
+
+    .setting-group > &,
+    &:first-child,
+    &.no-margin {
+        margin: unset;
+    }
+
+    & + form {
+        margin-top: var(--card-gap);
+    }
+}
+
+.async-content-error-message {
+    margin: unset !important;
+}
+.event-status {
+    margin-bottom: var(--card-gap);
+}
+
+.alert-error:before,
+.async-content-error-message {
+    --mask: var(--icon-16-x);
+}
+.alert-danger {
+    --mask: var(--icon-16-warning);
+}
+.alert-warning,
+.alert-info {
+    --mask: var(--icon-16-info);
+}
+.alert-success {
+    --hue-over: var(--hue-pos);
+    --sat-over: var(--sat-pos);
+    --lit-over: var(--lit-pos);
+
+    &:before,
+    &:after {
+        --mask: var(--icon-16-check);
+    }
+}
+.event-status--cancelled {
+    --mask: var(--icon-16-block);
+}
+.alert-update {
+    --mask: var(--icon-16-download);
+    --hue-over: var(--hue-pos);
+    --sat-over: var(--sat-pos);
+    --lit-over: var(--lit-pos);
+}
+
+.alert-info {
+    --background: hsl(var(--b4), 20%) !important;
+    --l3-c: var(--c3) !important;
+
+    [data-bleh--season="halloween"] & {
+        --hue-seasonal: 255;
+        --sat-seasonal: 1;
+        --lit-seasonal: 1;
+        color: hsl(var(--l3-c)) !important;
+
+        & > a {
+            --hue-seasonal: 12;
+            --sat-seasonal: 2;
+            --lit-seasonal: 1.1;
+        }
+    }
+}
+.alert-warning {
+    --hue-over: 25;
+    --sat-over: 1;
+    --lit-over: 1;
+}
+.alert-danger,
+.alert-error,
+.async-content-error-message,
+.event-status--cancelled {
+    --hue-over: var(--hue-neg);
+    --sat-over: var(--sat-neg);
+    --lit-over: var(--lit-neg);
+}

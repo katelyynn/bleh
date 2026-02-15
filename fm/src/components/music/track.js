@@ -86,6 +86,10 @@ export function patch_titles(search = page.structure.main) {
         }
     };
 
+    const track_layout = settings.track_layout;
+    const album_name_location = settings.track_album_name_location;
+    const season = page.state.seasons.current?.id || 'none';
+
     tracklists.forEach((tracklist) => {
         if (!tracklist) return;
 
@@ -101,13 +105,9 @@ export function patch_titles(search = page.structure.main) {
 
         log('new!', 'tracks', 'info', { tracklist });
 
-        const wide = tracklist.classList.contains(
-            'chartlist--wide-artist-column'
-        );
+        const wide = tracklist.classList.contains('chartlist--wide-artist-column');
 
-        const tracks = tracklist.querySelectorAll(
-            ':is(.chartlist-row:not(.chartlist__placeholder-row), .chartlist-row--interlist-ad)'
-        );
+        const tracks = tracklist.querySelectorAll(':scope > tbody > :is(.chartlist-row:not(.chartlist__placeholder-row), .chartlist-row--interlist-ad)');
 
         tracks.forEach((track, index) => {
             smart_track(track, index);
@@ -124,6 +124,7 @@ export function patch_titles(search = page.structure.main) {
             }
 
             track.style.setProperty('--delay', index * 0.04 + 's');
+            track.setAttribute('data-album-name-location', album_name_location);
             track.appendChild(html.node`
                 <div class="kate-placeholder" />
             `);
@@ -148,6 +149,8 @@ export function patch_titles(search = page.structure.main) {
                 `;
                 track.appendChild(track_info);
             }
+            track_info.setAttribute('data-track-layout', track_layout);
+            track_info.setAttribute('data-album-name-location', album_name_location);
             track.setAttribute(
                 'data-has-bar',
                 tracklist.classList.contains('chartlist--with-bar')
@@ -267,6 +270,11 @@ export function patch_titles(search = page.structure.main) {
 
             const is_active = track.classList.contains('chartlist-row--now-scrobbling');
             const has_bar = track.querySelector(':scope > .chartlist-bar');
+
+            if (has_bar) {
+                const count_bar = has_bar.querySelector(':scope > .chartlist-count-bar');
+                count_bar.setAttribute('data-season', season);
+            }
 
             // menu
             let track_legacy_menu = track.querySelector('.chartlist-more-menu');

@@ -9,6 +9,7 @@
 @import './banner.css';
 
 @import '../tab/tab.css';
+@import '../tab/order.css';
 
 @import './content.css';
 
@@ -19,6 +20,8 @@
 
 @import '../text/markdown.css';
 @import '../text/shout.css';
+
+@import '../settings/page/main.css';
 
 .container {
     min-width: var(--cards-width);

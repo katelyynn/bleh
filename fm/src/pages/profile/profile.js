@@ -998,9 +998,15 @@ function create_profile_note_panel(username, has_note) {
 // patch following
 function patch_profile_following() {
     let navlist = page.structure.nav.querySelector('.navlist-items');
+
     let following_tab = navlist.querySelector('.secondary-nav-item--following');
+    let followers_tab = navlist.querySelector('.secondary-nav-item--followers');
+    let neighbours_tab = navlist.querySelector('.secondary-nav-item--neighbours');
 
     let link = following_tab.querySelector('a');
+
+    followers_tab.remove();
+    neighbours_tab.remove();
 
     if (
         page.subpage != 'following' &&
@@ -1008,21 +1014,17 @@ function patch_profile_following() {
         page.subpage != 'neighbours'
     ) {
         // if we're not on one of these tabs we don't need to preserve the 'Following' text
+        following_tab.classList.remove('secondary-nav-item--following');
+        following_tab.classList.add('secondary-nav-item--friends');
+
         link.href = `${root}user/${page.name}/friends`;
         link.textContent = tl(trans.friends);
+
         return;
     }
 
     if (page.subpage != 'following')
         link.classList.add('secondary-nav-item-link--active');
-
-    let followers_tab = navlist.querySelector('.secondary-nav-item--followers');
-    let neighbours_tab = navlist.querySelector(
-        '.secondary-nav-item--neighbours'
-    );
-
-    navlist.removeChild(followers_tab);
-    navlist.removeChild(neighbours_tab);
 
     // create nav
     let friends_nav = html.node`
@@ -1038,6 +1040,9 @@ function patch_profile_following() {
     `;
 
     // we do this later to preserve the 'Following' text
+    following_tab.classList.remove('secondary-nav-item--following');
+    following_tab.classList.add('secondary-nav-item--friends');
+
     link.href = `${root}user/${page.name}/friends`;
     link.textContent = tl(trans.friends);
 

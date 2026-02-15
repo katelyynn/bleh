@@ -19,6 +19,7 @@
 @import './shared/keyframes.css';
 @import './shared/badge.css';
 @import './shared/activity.css';
+@import './shared/alert.css';
 @import './shared/form.css';
 
 @import './dialog/main.css';

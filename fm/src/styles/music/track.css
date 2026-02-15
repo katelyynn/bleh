@@ -82,8 +82,11 @@
         display: none !important;
     }
 
-    [data-bleh--track_album_name_location="column"]
-        &[data-show-album-text="true"][data-has-bar="false"] {
+    & > td {
+        margin: unset !important;
+    }
+
+    &[data-album-name-location="column"][data-show-album-text="true"][data-has-bar="false"] {
         & > .chartlist-image {
             width: 56px;
             height: 56px;
@@ -115,7 +118,7 @@
             font-size: calc(var(--font-size) - 1px);
         }
 
-        [data-bleh--track_layout="column"][data-bleh--track_album_name_location="row"] &:not([data-has-bar="true"]) {
+        &[data-track-layout="column"][data-album-name-location="row"]:not([data-has-bar="true"]) {
             display: grid;
             grid-template-columns: 60% 40%;
             grid-template-rows: auto auto;
@@ -142,7 +145,7 @@
             }
         }
 
-        [data-bleh--track_layout="row"] &:not([data-has-bar="true"]) {
+        &[data-track-layout="row"]:not([data-has-bar="true"]) {
             gap: var(--item-list-gap);
             flex-direction: row;
 
@@ -175,7 +178,7 @@
     }*/
 
     @media (max-width: 980px) {
-        td {
+        & > td {
             display: inline-block;
         }
 
@@ -253,27 +256,6 @@
     }
 }
 
-.chartlist--with-image .chartlist-row,
-.chartlist--with-index.chartlist--with-image .chartlist-row,
-.chartlist--with-index .chartlist-row,
-.chartlist--with-more.chartlist--with-mobile-play .chartlist-row,
-.chartlist--with-more .chartlist-row,
-.chartlist--with-reorder.chartlist--with-image .chartlist-row,
-.chartlist--with-reorder .chartlist-row,
-.chartlist--with-type.chartlist--with-image .chartlist-row,
-.chartlist-row {
-    padding-left: 12px;
-    padding-right: 12px;
-}
-.chartlist-image,
-.chartlist-bar,
-.chartlist-loved,
-.chartlist-more,
-.chartlist-timestamp,
-.chartlist-duration {
-    margin-left: unset !important;
-    margin-right: unset !important;
-}
 .chartlist-bar {
     @media (max-width: 980px) {
         margin: unset !important;
@@ -550,15 +532,6 @@
     }
 }
 
-/*     EDIT FLASH     */
-/* TODO: why doesnt this work.. */
-.chartlist-row--flash {
-    animation: bleh-chartlist-flash 2s var(--trans-function) !important;
-}
-.chartlist-row--flash:nth-child(odd) {
-    animation: bleh-chartlist-flash-odd 2s var(--trans-function) !important;
-}
-
 /*     INFO     */
 .obsession-candidate-heading,
 .chartlist-name {
@@ -691,7 +664,7 @@
         inset: unset !important;
     }
 }
-.chartlist-row[data-track-type="user"] .chartlist-image {
+.chartlist-row[data-track-type="user"] > .chartlist-image {
     border-radius: var(--avatar-radius) !important;
 
     &:before {
@@ -703,16 +676,13 @@
 }
 .column-tracks-item-image img,
 .api-session-app-image,
-.chartlist-image img {
+.chartlist-image > .cover-art > img {
     --mask-size: var(--cover-size-32);
 }
 
 .chartlist-timestamp {
     width: 140px;
-    /*order: 1;*/
 }
-
-/* move closer to artist field */
 
 .chartlist {
     --side-left: 12px;
@@ -749,41 +719,15 @@
 [data-toggle-button-current-state="unloved"] .chartlist-love-button:not(:hover) {
     --col: hsl(var(--c3), 40%) !important;
 }
-/*[data-toggle-button-current-state="loved"] .chartlist-love-button:after,
-a.chartlist-love-button:after {
-    content: '';
-    background: transparent;
-    width: 22%;
-    height: 22%;
-    position: absolute;
-    left: 12px;
-    top: 12px;
-    z-index: 0;
-    display: block;
-    border-radius: 50px;
-    box-shadow: 0px 0px 10px 3px hsla(var(--l3-c), 80%);
-}*/
 
 /*     OTHER USER PROFILE     */
 [data-toggle-button-current-state="unloved"] span.chartlist-love-button {
     --col: hsla(var(--c3), 20%) !important;
 }
 
-/*     ARTIST SHRINK ON HOVER     */
-/* (this fixes that) */
-.chartlist-artist:before {
+.chartlist-buylinks,
+.chartlist-artist:before /* artist field shrink on hover */ {
     display: none !important;
-}
-
-/*     BUY     */
-.chartlist-buylinks {
-    display: none !important;
-}
-
-/* show more button no matter what, just no opacity */
-.chartlist-row .focus-control {
-    overflow: visible !important;
-    width: auto !important;
 }
 
 /*     PLAY     */
@@ -796,27 +740,23 @@ a.chartlist-love-button:after {
 /*     COUNT BAR - brought over from bleh */
 .chartlist-bar {
     order: 1;
-    /*margin: -6px 0;*/
 }
 .chartlist-count-bar {
     line-height: 22px; /* 22 */
-    background: linear-gradient(90deg, hsl(var(--b3)), hsl(var(--c3), 40%));
+    background: hsl(var(--chartlist-bar-bg, var(--b4), 40%));
     color: hsl(var(--b7)) !important;
-    box-shadow: var(--interact-shadow);
+    box-shadow: var(--group-shadow), var(--interact-shadow);
+    text-decoration: none !important;
     width: 180px;
     display: flex;
 
-    [data-bleh--theme_type="light"] & {
-        background: hsl(var(--b3));
-        /*box-shadow: inset 0 0 0 1px hsl(var(--c3), 10%);*/
-    }
-    [data-bleh--season="halloween"] & {
+    &[data-season="halloween"] {
         --hue-seasonal: 70;
         --sat-seasonal: 1;
         --lit-seasonal: 1;
     }
 
-    [data-bleh--season="christmas"] & {
+    &[data-season="christmas"] {
         --hue-seasonal: 130;
         --sat-seasonal: 0.45;
         --lit-seasonal: 0.75;
@@ -838,8 +778,8 @@ a.chartlist-love-button:after {
     }
 
     .chartlist-count-bar-slug {
-        background: hsl(var(--h3)) !important;
-        box-shadow: 0px 0px 20px hsla(var(--h4), 50%);
+        background: hsl(var(--h4), 50%) !important;
+        box-shadow: var(--bar-shadow);
         left: unset;
         right: 0;
 
@@ -849,55 +789,28 @@ a.chartlist-love-button:after {
     }
 
     .chartlist-count-bar-value {
-        color: hsl(var(--b7));
+        color: hsl(var(--l2-c-theme-switch));
         font-weight: inherit;
         padding: 0 10px !important;
         margin: 0 -10px;
 
         .stat-name {
             display: none !important;
-        }
 
-        [data-bleh--invert_interactable_colour="true"] & {
-            color: hsl(var(--ov-c1)) !important;
+            --hue-over: unset !important;
+            --sat-over: unset !important;
+            --lit-over: unset !important;
+            text-shadow: unset !important;
         }
     }
 
     &:hover {
         text-decoration: underline !important;
         transition-duration: 0.1s !important;
-
-        .chartlist-count-bar-slug {
-            background: color-mix(
-                in hsl,
-                hsl(var(--h4)),
-                hsl(var(--h3)) 80%
-            ) !important;
-            transition: none;
-        }
     }
 
     &:active {
         transform: scale(0.98);
-    }
-
-    [data-ff--sweet="true"] & {
-        background: hsl(var(--chartlist-bar-bg, var(--b4), 40%)) !important;
-        box-shadow: var(--group-shadow), var(--interact-shadow) !important;
-        text-decoration: none !important;
-
-        .chartlist-count-bar-slug {
-            background: hsl(var(--h4), 50%) !important;
-            box-shadow: var(--bar-shadow) !important;
-        }
-
-        .chartlist-count-bar-value {
-            color: hsl(var(--l2-c-theme-switch)) !important;
-            --hue-over: unset !important;
-            --sat-over: unset !important;
-            --lit-over: unset !important;
-            text-shadow: unset !important;
-        }
     }
 }
 .chartlist-bar.with-multiple {
