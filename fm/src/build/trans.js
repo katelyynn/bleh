@@ -850,6 +850,7 @@ export const trans = {
     close_friends: {
         en: 'Close friends',
         de: 'Engen Freunde',
+        pt: 'Amigos próximos',
         ru: 'Близкие друзья',
         es: 'Amigos cercanos'
     },
@@ -877,12 +878,14 @@ export const trans = {
     },
     add_friends: {
         en: 'Add close friends',
+        pt: 'Adicionar amigos próximos',
         de: 'Engen Freunde hinzufügen',
         ru: 'Добавить близких друзей',
         es: 'Añadir amigos cercanos'
     },
     edit_close_friends: {
         en: 'Edit close friends',
+        pt: 'Editar amigos próximos'
         ru: 'Редактировать близких друзей',
         es: 'Editar amigos cercanos'
     },
@@ -933,6 +936,7 @@ export const trans = {
     },
     add_as_friend: {
         en: 'Add as close friend',
+        pt: 'Adicionar como amigo próximo',
         de: 'Als engen Freund hinzufügen',
         ru: 'Добавить в список близких друзей',
         es: 'Añadir como amigo cercano'
@@ -940,6 +944,7 @@ export const trans = {
     remove_friend: {
         name: {
             en: 'Remove close friend',
+            pt: 'Remover amigo próximo',
             de: 'Engen Freund entfernen',
             ru: 'Удалить из списка близких друзей',
             es: 'Remover amigo cercano'
@@ -952,12 +957,14 @@ export const trans = {
     },
     added_as_friend: {
         en: 'Added close friend',
+        pt: 'Amigo próximo adicionado',
         de: 'Engen Freund hinzugefügt',
         ru: 'Добавлен в список близких друзей',
         es: 'Amigo cercano añadido'
     },
     removed_friend: {
         en: 'Removed close friend',
+        pt: 'Amigo próximo removido',
         de: 'Engen Freund entfernt',
         ru: 'Удален из списка близких друзей',
         es: 'Amigo cercano removido'
@@ -1031,6 +1038,7 @@ export const trans = {
     account_creation: {
         // dont translate to "scrobbling since"
         en: 'Account creation date',
+        pt: 'Data de criação da conta',
         ru: 'Дата создания аккаунта',
         es: 'Fecha de creación de cuenta'
     },
@@ -1132,6 +1140,7 @@ export const trans = {
     count_tracks: {
         // tracks on an album
         en: '{c} tracks',
+        pt: '{c} faixas',
         ru: '{c} треков',
         es: '{c} temas'
     },
@@ -2271,6 +2280,7 @@ export const trans = {
     bookmark_item: {
         // bookmark track/artist/album
         en: 'Bookmark {v}',
+        pt: 'Favoritar {v}',
         ru: 'Добавить {v} в закладки',
         es: 'Marcar {v}'
     },
@@ -3041,11 +3051,13 @@ export const trans = {
     },
     follows_you: {
         en: 'Follows you!',
+        pt: 'Te segue!',
         es: '¡Te sigue!',
         ru: 'Подписан на вас!'
     },
     user_follows_you: {
         en: '{u} follows you!',
+        pt: '{u} te segue!',
         es: '¡{u} te sigue!',
         ru: '{u} подписан на вас!'
     },
@@ -3511,6 +3523,7 @@ export const trans = {
     },
     send_message: {
         en: 'Send message',
+        pt: 'Enviar mensagem',
         ru: 'Отправить сообщение',
         es: 'Enviar mensaje'
     },
@@ -3668,6 +3681,7 @@ export const trans = {
     },
     updating_to_version: {
         en: 'Updating to version',
+        pt: 'Atualizando para versão',
         ru: 'Обновление до версии',
         es: 'Actualizando a versión'
     },
@@ -10131,16 +10145,19 @@ export const trans = {
     },
     contact: {
         en: 'Contact',
+        pt: 'Contato',
         ru: 'Контакт',
         es: 'Contacto'
     },
     show_on_map: {
         en: 'Show on map',
+        pt: 'Mostrar no mapa',
         ru: 'Показать на карте',
         es: 'Ver en mapa'
     },
     added_by: {
         en: 'Added by {u}',
+        pt: 'Adicionado por {u}',
         ru: 'Добавлено {u}',
         es: 'Añadido por {u}'
     },
@@ -10153,6 +10170,7 @@ export const trans = {
         // valentines easter egg
         // sends a message to the user
         en: 'Let them know',
+        pt: 'Deixe-o saber',
         ru: "Отправить сообщение",
         es: 'Hazle saber'
     },
@@ -10166,6 +10184,7 @@ export const trans = {
     },
     view_details: {
         en: 'View details',
+        pt: 'Ver detalhes',
         ru: 'Просмотреть детали',
         es: 'Ver detalles'
     },
@@ -10182,17 +10201,20 @@ export const trans = {
     got_it: {
         // used when dismissing a popup
         en: 'Got it',
+        pt: 'Entendido',
         ru: 'Понятно',
         es: 'Entendido'
     },
     tip: {
         en: 'Tip',
+        pt: 'Dica',
         ru: 'Подсказка',
         es: 'Tip'
     },
     popup_navigation_menu: {
         title: {
             en: 'This is your navigator',
+            pt: 'Este é seu navegador',
             ru: 'Это ваш навигатор',
             es: 'Este es tu navegador'
         },
@@ -10264,6 +10286,7 @@ export const trans = {
     },
     send_a_reply: {
         en: 'Send a reply',
+        pt: 'Enviar uma resposta',
         ru: 'Отправить ответ',
         es: 'Enviar una respuesta'
     },
@@ -10274,11 +10297,13 @@ export const trans = {
     },
     report_incorrect: {
         en: 'Mark incorrect',
+        pt: 'Marcar como incorreto',
         ru: 'Отметить как неверный',
         es: 'Marcar como incorrecto'
     },
     what_did_you_expect: {
         en: 'What did you expect?',
+        pt: 'O que você esperava?',
         ru: 'Что вы ожидали увидеть?',
         es: '¿Qué esperabas?'
     },
@@ -10294,26 +10319,33 @@ export const trans = {
     },
     switch: {
         // like switch places
-        en: 'Switch'
+        en: 'Switch',
+        pt: 'Trocar' //could be "inverter" too
     },
     auto_close: {
         // auto close dialog after action
-        en: 'Auto close'
+        en: 'Auto close',
+        pt: 'Fechar automaticamente'
     },
     loading_conversations: {
-        en: 'Loading conversations'
+        en: 'Loading conversations',
+        pt: 'Carregando conversas'
     },
     shoutbox_failed: {
-        en: 'There was an error loading conversations “(ノ _ <,, )'
+        en: 'There was an error loading conversations “(ノ _ <,, )',
+        pt: 'Ocorreu um erro no carregamento das conversas (ノ _ <,, )'
     },
     track_name: {
-        en: 'Track name'
+        en: 'Track name',
+        pt: 'Nome da faixa'
     },
     artist_name: {
-        en: 'Artist name'
+        en: 'Artist name',
+        pt: 'Nome do artista'
     },
     album_name: {
-        en: 'Album name'
+        en: 'Album name',
+        pt: 'Nome do álbum'
     }
 };
 
