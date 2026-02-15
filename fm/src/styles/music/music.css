@@ -7,6 +7,8 @@
 @import './oracle/oracle.css';
 @import './listens.css';
 
+@import './video.css';
+
 .section-with-control > .buffer-standard,
 .grid-items-section > .buffer-standard,
 .grid-items,

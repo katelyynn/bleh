@@ -494,3 +494,37 @@
         }
     }
 }
+
+
+.profile-cards-container,
+.profile-cards-container + .content-top-lower,
+.scrobble-stats-info-toggle,
+#explain-scrobblingdesktop + h4,
+.share-desktop {
+    display: none !important;
+}
+/* re-align content (eg. gallery) after ad */
+.full-bleed-ad-container + .image-list,
+.tonefuze + .buffer-4 {
+    margin-top: unset;
+}
+
+/* still theme ads a little */
+.full-bleed-ad-container,
+.sidebar-ad-container {
+    background: unset !important;
+}
+.sidebar-ad-container {
+    padding: unset !important;
+}
+.mpu-subscription-upsell {
+    margin: unset !important;
+    color: hsl(var(--c3));
+    line-height: 16px;
+    order: 20;
+}
+
+.related-ads,
+.lastfm-ad {
+    order: 30 !important;
+}
