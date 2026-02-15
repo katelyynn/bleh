@@ -22,7 +22,7 @@
 .lotus-preview .before:before,
 .masthead-popup-text .btn-primary:before,
 .obsession-pagination a:before,
-.obsession-date:before, .obsession-delete-button:before, .obsession-listens:before,
+.obsession-date:before, .obsession-listens:before,
 .footer-links :is(a, button):before,
 .library-search-results.async-content-loading:after,
 .radio-button:after, .radio-button h4:after,

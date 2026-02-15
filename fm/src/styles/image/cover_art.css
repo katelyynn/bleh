@@ -28,7 +28,7 @@
 }
 .catalogue-overview-similar-artists-item-image img,
 .artist-similar-artists-sidebar-item-image img,
-.cover-art img,
+.cover-art > img,
 .similar-items-sidebar-item-image img,
 :is(.music-bookmarks-artists-item-image, .music-bookmarks-albums-item-image)
     img {
@@ -36,4 +36,22 @@
     aspect-ratio: 1 / 1;
     display: block; /* requires when image fails to load */
     color: hsl(var(--c3));
+}
+
+.big-artist-list-avatar-desktop,
+.artist-similar-artists-sidebar-item-image,
+.source-album-art > .cover-art,
+.track-similar-tracks-item-image,
+.similar-items-sidebar-item-image {
+    border-radius: var(--item-big-radius);
+    box-shadow: var(--subtle-shadow);
+    overflow: hidden;
+    background: var(--avatar-generic-background);
+}
+.artist-similar-artists-sidebar-item-image > img {
+    border-radius: unset;
+}
+
+.artist-similar-artists-sidebar-item-image {
+    --mask-size: var(--cover-size-100);
 }

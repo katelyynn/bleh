@@ -1,0 +1,28 @@
+.form-submit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--card-gap);
+    margin-left: unset !important;
+
+    button {
+        margin: unset !important;
+    }
+
+    .btn-secondary.js-close {
+        order: -1;
+    }
+
+    &.form-submit--align-right {
+        justify-content: space-between;
+    }
+}
+
+.content-form .form-horizontal .form-group {
+    margin: 4px 0 0 0;
+    padding-top: 11px;
+}
+.form-group--submit,
+.form-group:has(> .form-submit) {
+    margin-top: var(--override-margin-top, var(--card-gap)) !important;
+}

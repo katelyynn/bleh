@@ -323,7 +323,7 @@
     border-radius: unset;
     background-color: unset;
     /* */
-    content: "";
+    content: '';
     position: absolute;
     display: var(--show-status, initial);
     font-size: 0 !important;
@@ -340,7 +340,7 @@
         drop-shadow(-0px -2px 0 hsl(var(--b5)));
 
     &:before {
-        content: "";
+        content: '';
         position: absolute;
         --size: 5px;
         width: var(--size);
@@ -390,9 +390,9 @@
         drop-shadow(-0px -2px 0 hsl(var(--b5)));
 }
 
-span.shout-user-avatar:before,
+.shout-user-avatar:before,
 .avatar-status-dot:after {
-    color: hsl(var(--l3-c));
+    color: hsl(var(--l3-c)) !important;
     --override-bg: currentColor !important;
 }
 

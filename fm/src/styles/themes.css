@@ -601,6 +601,9 @@ u,
 
     --taste-glow: drop-shadow(0 0 15px hsl(var(--h4)));
 
+    --menu-item-accent-hov: hsla(var(--h4), 12%);
+    --menu-item-accent-atv: hsla(var(--h4), 22%);
+
     .theme-preview[data-bleh--theme="oled"],
     [data-bleh--theme="oled"] &:not(.theme-preview) {
         --c1: var(--hue), calc(clamp(min(0), var(--sat), max(1)) * 30%), 96%;
@@ -732,6 +735,9 @@ u,
         --g-indigo: hsl(254, 26%, 50%);
 
         --taste-glow: drop-shadow(0 0 15px hsl(var(--h3)));
+
+        --menu-item-accent-hov: hsla(var(--h4), 15%);
+        --menu-item-accent-atv: hsla(var(--h4), 25%);
     }
     .theme-preview[data-bleh--theme="ink"],
     [data-bleh--theme="ink"]
@@ -810,6 +816,9 @@ u,
 
         --badge: hsl(var(--f4), 55%);
         --badge-hov: hsl(var(--f4), 65%);
+
+        --menu-item-accent-hov: hsla(var(--h4), 15%);
+        --menu-item-accent-atv: hsla(var(--h4), 25%);
     }
 }
 

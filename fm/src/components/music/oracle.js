@@ -2118,7 +2118,7 @@ function report_incorrect() {
                 <p class="form-tip">${tl(trans[`oracle_sources_tip_${page.type}`])}</p>
             </div>
             <div class="modal-footer">
-                <button class="see-more cancel" onclick=${() => dialog_rm({ id: 'oracle_correction' })}>
+                <button class="see-more cancel left-icon" onclick=${() => dialog_rm({ id: 'oracle_correction' })}>
                     ${tl(trans.cancel)}
                 </button>
                 <div class="fill" />

@@ -78,7 +78,7 @@ export async function bleh_api() {
                 <div class="description">${description}</div>
                 <div class="small-label with-icon lock">${tl(trans.ensure_you_trust)}</div>
                 <div class="connector-footer">
-                    <a class="see-more cancel" href="${cancel}">
+                    <a class="see-more cancel left-icon" href="${cancel}">
                         ${tl(trans.cancel)}
                     </a>
                     <form method="post" data-no-partial-refresh="">

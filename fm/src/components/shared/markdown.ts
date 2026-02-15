@@ -922,7 +922,7 @@ export function external_url_prompt(url, dangerous = false) {
                 }
             </div>
             <div class="modal-footer">
-                <button class="see-more cancel" onclick=${() => dialog_rm({ id: 'external_url' })}>
+                <button class="see-more cancel left-icon" onclick=${() => dialog_rm({ id: 'external_url' })}>
                     ${tl(trans.back)}
                 </button>
                 <div class="fill"></div>
@@ -1081,7 +1081,7 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
                                     })}
                                 </div>
                                 <div class="modal-footer">
-                                <button class="see-more cancel" onclick=${() => {
+                                <button class="see-more cancel left-icon" onclick=${() => {
                                     dialog_rm({ id: 'link' });
                                     resolve(null);
                                 }}>
@@ -1170,7 +1170,7 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
                                     })}
                                 </div>
                                 <div class="modal-footer">
-                                <button class="see-more cancel" onclick=${() => {
+                                <button class="see-more cancel left-icon" onclick=${() => {
                                     dialog_rm({ id: 'link' });
                                     resolve(null);
                                 }}>

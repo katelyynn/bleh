@@ -248,7 +248,7 @@ export function bleh_artists() {
 
             let play = top.querySelector('.section-playlink');
             if (play) {
-                play.classList.add('blend-v2-btn', 'radio');
+                play.classList.add('blend-v2-btn', 'radio', 'left-icon');
                 play.classList.remove(
                     'section-playlink',
                     'hover-section-control'

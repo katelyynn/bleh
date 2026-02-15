@@ -28833,7 +28833,7 @@
   }
 
   // src/components/sponsor.js
-  function sponsors2(force = false, func = null) {
+  function sponsors(force = false, func = null) {
     if (!ff("sponsor")) return;
     let sponsor_data = localStorage.getItem("kat_sponsors");
     let sponsor_expire = new Date(localStorage.getItem("kat_sponsors_expire"));
@@ -28927,18 +28927,18 @@
     xhr.send();
   }
   unsafeWindow._sponsor_check = function() {
-    sponsors2(true);
+    sponsors(true);
   };
   unsafeWindow._sponsor = function(replace = false) {
-    sponsor2(replace);
+    sponsor(replace);
   };
-  function sponsor2(replace = false) {
+  function sponsor(replace = false) {
     open("https://katelyn.moe/sponsor");
   }
   unsafeWindow._sponsor_manage = function() {
-    sponsor_manage2();
+    sponsor_manage();
   };
-  function sponsor_manage2() {
+  function sponsor_manage() {
     if (sponsor_list.sponsors_one_time && sponsor_list.sponsors_one_time.includes(auth.name)) {
       dialog2({
         id: "sponsor_manage",
@@ -28993,7 +28993,7 @@
     log("internal bleh sponsor", "page");
     page.type = "bleh_sponsor";
     page.subpage = "";
-    sponsor2();
+    sponsor();
   }
   function new_badges(badges) {
     dialog2({
@@ -29128,7 +29128,7 @@
             <div class="badge-reason">${badge.reason}</div>
         `
     });
-    if (badge.type == "sponsor") elem.onclick = sponsor2;
+    if (badge.type == "sponsor") elem.onclick = sponsor;
     return elem;
   }
   function verified() {
@@ -30026,17 +30026,17 @@
     function render_day_view() {
       return html.node`
             <div class="calendar-header">
-                <button class="btn month-year" type="button" ref=${(el) => date_button = el} onclick=${on_month_year_click} disabled=${!can_nav_month_view()}>
+                <button class="btn month-year calendar-top-button" type="button" ref=${(el) => date_button = el} onclick=${on_month_year_click} disabled=${!can_nav_month_view()}>
                     ${months2[view.month - 1]} ${view.year}
                 </button>
                 <div class="fill" />
-                <button class="btn chibi icon" data-type="manual" ref=${(el) => manual_button = el} type="button" onclick=${() => {
+                <button class="btn chibi icon calendar-top-button" data-type="manual" ref=${(el) => manual_button = el} type="button" onclick=${() => {
         view.level = "manual";
         render_popup();
       }}>
                     ${tl2(trans.manual)}
                 </button>
-                <button class="btn chibi icon" data-type="up" ref=${(el) => up_button = el} disabled=${!can_prev()} type="button" onclick=${() => {
+                <button class="btn chibi icon calendar-top-button" data-type="up" ref=${(el) => up_button = el} disabled=${!can_prev()} type="button" onclick=${() => {
         if (!can_prev()) return;
         view.month--;
         if (view.month < 1) {
@@ -30048,7 +30048,7 @@
       }}>
                     ${tl2(trans.back)}
                 </button>
-                <button class="btn chibi icon" data-type="down" ref=${(el) => down_button = el} disabled=${!can_next()} type="button" onclick=${() => {
+                <button class="btn chibi icon calendar-top-button" data-type="down" ref=${(el) => down_button = el} disabled=${!can_next()} type="button" onclick=${() => {
         if (!can_next()) return;
         view.month++;
         if (view.month > 12) {
@@ -30064,10 +30064,10 @@
             <div class="date-header">
                 ${weekdays2.map((day) => html.node`<div class="date">${day}</div>`)}
             </div>
-            <div class="days" data-last-action=${last_action}>
+            <div class="days calendar-view" data-last-action=${last_action}>
                 ${days(view.year, view.month).map(
-        (cell) => cell.type == "empty" ? html.node`<button class="btn day empty" type="button" disabled />` : html.node`
-                            <button class="btn day" type="button" aria-selected=${cell.day == state.day && cell.date >= min_date && cell.date <= max_date && cell.month == view.month ? "true" : "false"} disabled=${cell.date < min_date || cell.date > max_date} onclick=${() => {
+        (cell) => cell.type == "empty" ? html.node`<button class="btn day empty calendar-entry" type="button" disabled />` : html.node`
+                            <button class="btn day calendar-entry" type="button" aria-selected=${cell.day == state.day && cell.date >= min_date && cell.date <= max_date && cell.month == view.month ? "true" : "false"} disabled=${cell.date < min_date || cell.date > max_date} onclick=${() => {
           state.day = cell.day;
           state.year = view.year;
           state.month = view.month;
@@ -30086,17 +30086,17 @@
       const max_year = max_date.getFullYear();
       return html.node`
             <div class="calendar-header">
-                <button class="btn month-year" type="button" ref=${(el) => date_button = el} onclick=${on_month_year_click} disabled=${!can_nav_year_view()}>
+                <button class="btn month-year calendar-top-button" type="button" ref=${(el) => date_button = el} onclick=${on_month_year_click} disabled=${!can_nav_year_view()}>
                     ${view.year}
                 </button>
                 <div class="fill" />
-                <button class="btn chibi icon" data-type="manual" ref=${(el) => manual_button = el} type="button" onclick=${() => {
+                <button class="btn chibi icon calendar-top-button" data-type="manual" ref=${(el) => manual_button = el} type="button" onclick=${() => {
         view.level = "manual";
         render_popup();
       }}>
                     ${tl2(trans.manual)}
                 </button>
-                <button class="btn chibi icon" data-type="up" ref=${(el) => up_button = el} type="button" disabled=${view.year <= min_year} onclick=${() => {
+                <button class="btn chibi icon calendar-top-button" data-type="up" ref=${(el) => up_button = el} type="button" disabled=${view.year <= min_year} onclick=${() => {
         if (view.year < min_year) return;
         view.year--;
         last_action = "prev";
@@ -30104,7 +30104,7 @@
       }}>
                     ${tl2(trans.back)}
                 </button>
-                <button class="btn chibi icon" data-type="down" ref=${(el) => down_button = el} type="button" disabled=${view.year >= max_year} onclick=${() => {
+                <button class="btn chibi icon calendar-top-button" data-type="down" ref=${(el) => down_button = el} type="button" disabled=${view.year >= max_year} onclick=${() => {
         if (view.year > max_year) return;
         view.year++;
         last_action = "next";
@@ -30113,7 +30113,7 @@
                     ${tl2(trans.next)}
                 </button>
             </div>
-            <div class="months" data-last-action=${last_action}>
+            <div class="months calendar-view" data-last-action=${last_action}>
                 ${months2.map((label, i) => {
         const month_start = new Date(view.year, i, 1);
         const month_end = new Date(
@@ -30126,7 +30126,7 @@
           999
         );
         return html.node`
-                        <button class="btn month" aria-selected=${view.year === state.year && i + 1 === state.month} disabled=${month_end < min_date || month_start > max_date} onclick=${() => {
+                        <button class="btn month calendar-entry" aria-selected=${view.year === state.year && i + 1 === state.month} disabled=${month_end < min_date || month_start > max_date} onclick=${() => {
           view.month = i + 1;
           view.level = "day";
           last_action = "";
@@ -30147,24 +30147,24 @@
       const decade_start = Math.floor(view.year / 10) * 10;
       return html.node`
             <div class="calendar-header">
-                <button class="btn month-year" ref=${(el) => date_button = el} onclick=${on_month_year_click}>
+                <button class="btn month-year calendar-top-button" ref=${(el) => date_button = el} onclick=${on_month_year_click}>
                     ${decade_start} – ${decade_start + 9}
                 </button>
                 <div class="fill" />
-                <button class="btn chibi icon" data-type="manual" ref=${(el) => manual_button = el} type="button" onclick=${() => {
+                <button class="btn chibi icon calendar-top-button" data-type="manual" ref=${(el) => manual_button = el} type="button" onclick=${() => {
         view.level = "manual";
         render_popup();
       }}>
                     ${tl2(trans.manual)}
                 </button>
-                <button class="btn chibi icon" data-type="up" ref=${(el) => up_button = el} disabled=${decade_start - 10 < min_year} onclick=${() => {
+                <button class="btn chibi icon calendar-top-button" data-type="up" ref=${(el) => up_button = el} disabled=${decade_start - 10 < min_year} onclick=${() => {
         if (decade_start - 10 < min_year) return;
         view.year -= 10;
         render_popup();
       }}>
                     ${tl2(trans.back)}
                 </button>
-                <button class="btn chibi icon" data-type="down" ref=${(el) => down_button = el} disabled=${decade_start + 10 > max_year} onclick=${() => {
+                <button class="btn chibi icon calendar-top-button" data-type="down" ref=${(el) => down_button = el} disabled=${decade_start + 10 > max_year} onclick=${() => {
         if (decade_start + 10 > max_year) return;
         view.year += 10;
         render_popup();
@@ -30172,11 +30172,11 @@
                     ${tl2(trans.next)}
                 </button>
             </div>
-            <div class="years">
+            <div class="years calendar-view">
                 ${Array.from({ length: 10 }, (_, i) => decade_start + i).map(
         (yr) => {
           return html.node`
-                        <button class="btn year" aria-selected=${yr === state.year} disabled=${yr < min_date.getFullYear() || yr > max_date.getFullYear()} onclick=${() => {
+                        <button class="btn year calendar-entry" aria-selected=${yr === state.year} disabled=${yr < min_date.getFullYear() || yr > max_date.getFullYear()} onclick=${() => {
             view.year = yr;
             view.level = "month";
             render_popup();
@@ -31380,7 +31380,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="see-more cancel" onclick=${() => dialog_rm({ id: "submit_scrobble" })}>
+                <button class="see-more cancel left-icon" onclick=${() => dialog_rm({ id: "submit_scrobble" })}>
                     ${tl2(trans.cancel)}
                 </button>
                 <div class="fill" />
@@ -32665,7 +32665,7 @@
             create_profile_top_item(profile_header, {
               name: page.name,
               type: "sponsor",
-              link: () => sponsor2(),
+              link: () => sponsor(),
               action: "button"
             });
           }
@@ -32673,7 +32673,7 @@
           create_profile_top_item(profile_header, {
             name: page.name,
             type: "sponsor",
-            link: () => sponsor2(),
+            link: () => sponsor(),
             action: "button"
           });
           create_profile_top_item(profile_header, {
@@ -32982,7 +32982,7 @@
           body: html.node`
                         <p>${{ html: tl2(trans.remove_friend.body, { u: `<strong>${page.name}</strong>` }) }}</p>
                         <div class="modal-footer">
-                            <button class="see-more cancel" onclick=${() => dialog_rm({ id: "remove_friend" })}>
+                            <button class="see-more cancel left-icon" onclick=${() => dialog_rm({ id: "remove_friend" })}>
                                 ${tl2(trans.cancel)}
                             </button>
                             <div class="fill"></div>
@@ -36506,7 +36506,7 @@
             warn_if_empty: true
           })}
                         <div class="modal-footer">
-                            <button class="see-more cancel" onclick=${() => dialog_rm({ id: "add_user" })}>
+                            <button class="see-more cancel left-icon" onclick=${() => dialog_rm({ id: "add_user" })}>
                                 ${tl2(trans.cancel)}
                             </button>
                             <div class="fill"></div>
@@ -37471,7 +37471,7 @@
       body: html.node`
             <div class="cta first sponsor colourful margin-bottom">
                 <strong>${tl2(trans.news_sponsor_cta)}</strong>
-                <a class="see-more" onclick=${() => sponsor2(true)}>${tl2(trans.sponsor)}</a>
+                <a class="see-more" onclick=${() => sponsor(true)}>${tl2(trans.sponsor)}</a>
             </div>
             <div class="changelog-list" ref=${(el) => changelog_list = el}></div>
         `,
@@ -40136,7 +40136,7 @@
         const target = index3 % 2;
         picker_presets[target].appendChild(html.node`
                 <li class="date-range-picker-preset ${selected ? "date-range-picker-preset--selected" : ""}">
-                    <a href="${window.location.href.replace(window.location.search, "")}?from=${year2}-01-01&rangetype=year" onclick=${() => {
+                    <a href="${window.location.href.replace(window.location.search, "")}?from=${year2}-01-01&rangetype=year" data-analytics-action="DateSelector" onclick=${() => {
           modal.hide();
         }}>
                         ${year2}
@@ -43983,7 +43983,7 @@
                 <p class="form-tip">${tl2(trans[`oracle_sources_tip_${page.type}`])}</p>
             </div>
             <div class="modal-footer">
-                <button class="see-more cancel" onclick=${() => dialog_rm({ id: "oracle_correction" })}>
+                <button class="see-more cancel left-icon" onclick=${() => dialog_rm({ id: "oracle_correction" })}>
                     ${tl2(trans.cancel)}
                 </button>
                 <div class="fill" />
@@ -45571,7 +45571,7 @@
             <a class="link-block-cover-link" href=${playlink.href} target="_blank" />
         `);
       playlink.classList = "see-more";
-      replace.classList = "see-more add";
+      replace.classList = "see-more add left-icon";
       video.after(html.node`
             <div class="video-actions sub-text">
                 ${replace}
@@ -47560,7 +47560,7 @@
                 ` : ""}
             </div>
             <div class="modal-footer">
-                <button class="see-more cancel" onclick=${() => dialog_rm({ id: "external_url" })}>
+                <button class="see-more cancel left-icon" onclick=${() => dialog_rm({ id: "external_url" })}>
                     ${tl2(trans.back)}
                 </button>
                 <div class="fill"></div>
@@ -47702,7 +47702,7 @@
                 })}
                                 </div>
                                 <div class="modal-footer">
-                                <button class="see-more cancel" onclick=${() => {
+                                <button class="see-more cancel left-icon" onclick=${() => {
                   dialog_rm({ id: "link" });
                   resolve2(null);
                 }}>
@@ -47784,7 +47784,7 @@
                 })}
                                 </div>
                                 <div class="modal-footer">
-                                <button class="see-more cancel" onclick=${() => {
+                                <button class="see-more cancel left-icon" onclick=${() => {
                   dialog_rm({ id: "link" });
                   resolve2(null);
                 }}>
@@ -49464,7 +49464,7 @@
             <a class="dropdown-menu-clickable-item accent" data-type="discord" href="https://discord.gg/${discord}" target="_blank">
                 ${tl2(trans.join_discord)}
             </a>
-            <button class="dropdown-menu-clickable-item sponsor" onclick=${() => sponsor2()}>
+            <button class="dropdown-menu-clickable-item sponsor" onclick=${() => sponsor()}>
                 ${tl2(trans.sponsor)}
             </button>
             <a class="dropdown-menu-clickable-item lotus" href="https://github.com/katelyynn/lotus/issues/new/choose" target="_blank">
@@ -50553,7 +50553,7 @@
                     </div>
                     <div class="info">
                         <p>${sponsor_list.latest}</p>
-                        <button class="see-more update-check sponsor-related" onclick=${() => sponsors(true, () => {
+                        <button class="see-more update-check sponsor-related left-icon" onclick=${() => sponsors(true, () => {
       render_setting_page("general");
     })}>
                             ${tl2(trans.update_check)}
@@ -51131,10 +51131,10 @@
         <div class="cta first priority sponsor colourful">
             ${auth.sponsor ? html.node`
                 <strong>${tl2(trans.you_are_a_sponsor)}</strong>
-                <a class="see-more" onclick=${() => sponsor_manage2()}>${tl2(trans.manage_sponsor)}</a>
+                <a class="see-more" onclick=${() => sponsor_manage()}>${tl2(trans.manage_sponsor)}</a>
             ` : html.node`
                 <strong>${tl2(trans.news_sponsor_cta)}</strong>
-                <a class="see-more" onclick=${() => sponsor2()}>${tl2(trans.sponsor)}</a>
+                <a class="see-more" onclick=${() => sponsor()}>${tl2(trans.sponsor)}</a>
             `}
         </div>
         <section class="side-actions">
@@ -51523,7 +51523,7 @@
                                 ${artist_corrections.version == album_track_corrections.version ? artist_corrections.version : `${artist_corrections.version}, ${album_track_corrections.version}`}
                             </p>
                             <button
-                                class="see-more update-check"
+                                class="see-more update-check left-icon"
                                 onclick="_lotus_check()"
                             >
                                 ${tl2(trans.update_check)}
@@ -51678,7 +51678,7 @@
                                     ${oracle_artists.version}, ${oracle_albums.version}, ${oracle_tracks.version}
                                 </p>
                                 <button
-                                    class="see-more update-check"
+                                    class="see-more update-check left-icon"
                                     onclick=${() => oracle_data(true)}
                                 >
                                     ${tl2(trans.update_check)}
@@ -51734,7 +51734,7 @@
                             </div>
                             <div class="toggle-wrap">
                                 <button
-                                    class="btn see-more update-check"
+                                    class="see-more update-check left-icon"
                                     onclick=${() => force_refresh_style()}
                                 >
                                     ${tl2(trans.refresh)}
@@ -52603,7 +52603,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       body: html.node`
             <textarea class="modal-text" id="bleh--profile-note" placeholder=${tl2(trans.anything_you_can_imagine)}>${profile_notes[user]}</textarea>
             <div class="modal-footer">
-                <button class="see-more cancel" onclick=${() => dialog_rm({ id: "edit_profile_note" })}>
+                <button class="see-more cancel left-icon" onclick=${() => dialog_rm({ id: "edit_profile_note" })}>
                     ${tl2(trans.cancel)}
                 </button>
                 <div class="fill"></div>
@@ -52672,7 +52672,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
             <br>
             <textarea class="modal-text" ref=${(el) => text4 = el} />
             <div class="modal-footer">
-                <button class="see-more cancel" onclick=${() => {
+                <button class="see-more cancel left-icon" onclick=${() => {
         dialog_rm({ id: "import_settings" });
       }}>
                     ${tl2(trans.cancel)}
@@ -52724,7 +52724,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                 <a class="see-more" onclick=${() => export_settings()}>${tl2(trans.make_a_backup)}</a>
             </div>
             <div class="modal-footer">
-                <button class="see-more cancel" onclick=${() => dialog_rm({ id: "reset_settings" })}>
+                <button class="see-more cancel left-icon" onclick=${() => dialog_rm({ id: "reset_settings" })}>
                     ${tl2(trans.cancel)}
                 </button>
                 <div class="fill"></div>
@@ -53637,7 +53637,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                 <p class="form-tip">${tl2(trans.sources_tip)}</p>
             </div>
             <div class="modal-footer">
-                <button class="see-more cancel" onclick=${() => dialog_rm({ id: "lotus_correction" })}>
+                <button class="see-more cancel left-icon" onclick=${() => dialog_rm({ id: "lotus_correction" })}>
                     ${tl2(trans.cancel)}
                 </button>
                 <div class="fill" />
@@ -54438,7 +54438,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         }
         let play = top2.querySelector(".section-playlink");
         if (play) {
-          play.classList.add("blend-v2-btn", "radio");
+          play.classList.add("blend-v2-btn", "radio", "left-icon");
           play.classList.remove(
             "section-playlink",
             "hover-section-control"
@@ -54868,11 +54868,11 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         `);
       render(page.structure.setup_footer, html`
             ${auth.name ? html.node`
-            <a class="see-more cancel" href="${root}user/${auth.name}">
+            <a class="see-more cancel left-icon" href="${root}user/${auth.name}">
                 ${tl2(trans.skip)}
             </a>
             ` : html.node`
-            <a class="see-more cancel" href="${root}dashboard">
+            <a class="see-more cancel left-icon" href="${root}dashboard">
                 ${tl2(trans.skip)}
             </a>
             `}
@@ -55020,7 +55020,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
             `
       );
       render(page.structure.setup_footer, html`
-            <button class="see-more cancel" onclick=${() => setup_accessibility()}>
+            <button class="see-more cancel left-icon" onclick=${() => setup_accessibility()}>
                 ${tl2(trans.back)}
             </button>
             <div class="fill"></div>
@@ -55057,7 +55057,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
             `
       );
       render(page.structure.setup_footer, html`
-            <button class="see-more cancel" onclick=${() => setup()}>
+            <button class="see-more cancel left-icon" onclick=${() => setup()}>
                 ${tl2(trans.back)}
             </button>
             <div class="fill"></div>
@@ -55131,7 +55131,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
             </div>
         `);
       render(page.structure.setup_footer, html`
-            <button class="see-more cancel" onclick=${() => setup_themes()}>
+            <button class="see-more cancel left-icon" onclick=${() => setup_themes()}>
                 ${tl2(trans.back)}
             </button>
             <div class="fill"></div>
@@ -55235,7 +55235,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
             </div>
         `);
       render(page.structure.setup_footer, html`
-            <button class="see-more cancel" onclick=${() => setup_music()}>
+            <button class="see-more cancel left-icon" onclick=${() => setup_music()}>
                 ${tl2(trans.back)}
             </button>
             <div class="fill"></div>
@@ -55263,7 +55263,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                     </div>
                     <div class="bleh-icon mini-arrow" style="--icon: var(--mask)" data-type="arrow-right" />
                 </a>
-                <button class="btn mini" onclick=${() => sponsor2()}>
+                <button class="btn mini" onclick=${() => sponsor()}>
                     <div class="mini-icon colourful" data-type="sponsor">
                         <div class="bleh-icon" />
                     </div>
@@ -55276,7 +55276,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         `);
       if (auth.name) {
         render(page.structure.setup_footer, html`
-                <button class="see-more cancel" onclick=${() => setup_layout()}>
+                <button class="see-more cancel left-icon" onclick=${() => setup_layout()}>
                     ${tl2(trans.back)}
                 </button>
                 <div class="fill"></div>
@@ -55286,7 +55286,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
             `);
       } else {
         render(page.structure.setup_footer, html`
-                <button class="see-more cancel" onclick=${() => setup_layout()}>
+                <button class="see-more cancel left-icon" onclick=${() => setup_layout()}>
                     ${tl2(trans.back)}
                 </button>
                 <div class="fill"></div>
@@ -55351,7 +55351,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                         </div>
                         <div class="subtle">${window.location.pathname}</div>
                         <div class="error-footer">
-                            <a class="see-more cancel" href="${back_link.getAttribute("href")}">
+                            <a class="see-more cancel left-icon" href="${back_link.getAttribute("href")}">
                                 ${tl2(trans.back)}
                             </a>
                             <a class="btn primary continue" href="${root}user/${auth.name}">
@@ -56400,7 +56400,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                                         ${lit_range = setting({ id: "profile_lit", func: update_colour_preview })}
                                     </div>
                                     <div class="modal-footer">
-                                        <button class="see-more cancel" onclick=${() => dialog_rm({ id: "profile_accent" })}>
+                                        <button class="see-more cancel left-icon" onclick=${() => dialog_rm({ id: "profile_accent" })}>
                                             ${tl2(trans.back)}
                                         </button>
                                         <div class="fill"></div>
@@ -56585,7 +56585,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button class="see-more cancel" onclick=${() => dialog_rm({ id: "profile_font" })}>
+                                            <button class="see-more cancel left-icon" onclick=${() => dialog_rm({ id: "profile_font" })}>
                                                 ${tl2(trans.back)}
                                             </button>
                                             <div class="fill"></div>
@@ -56666,7 +56666,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                 </form>
             </div>
             <div class="modal-footer">
-                <button class="see-more cancel" onclick=${() => dialog_rm({ id: "edit_avatar" })}>${tl2(trans.cancel)}</button>
+                <button class="see-more cancel left-icon" onclick=${() => dialog_rm({ id: "edit_avatar" })}>${tl2(trans.cancel)}</button>
                 <div class="fill"></div>
                 <button class="btn primary save" onclick=${() => save_avatar()} disabled>${tl2(trans.save)}</button>
             </div>
@@ -56718,7 +56718,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                     ${tl2(trans.crop_notice)}
                 </div>
                 <div class="modal-footer">
-                    <button class="see-more cancel" onclick=${() => {
+                    <button class="see-more cancel left-icon" onclick=${() => {
           if (cropper && cropper.destroy) cropper.destroy();
           cropper = null;
           avatar();
@@ -56827,7 +56827,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       new_list.classList.add("list-is-exceeded");
       new_list.setAttribute("data-expanded", "false");
       let expand = html.node`
-            <button class="see-more expand-down" onclick=${() => {
+            <button class="see-more expand-down left-icon" onclick=${() => {
         expand.style.display = "none";
         new_list.setAttribute("data-expanded", "true");
       }}>
@@ -57291,7 +57291,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                             </div>
                             <div class="toggle-wrap">
                                 <a
-                                    class="see-more danger logout"
+                                    class="see-more danger logout left-icon"
                                     href="${root}settings/account/logout-everywhere"
                                 >
                                     ${tl2(trans.logout)}
@@ -57305,7 +57305,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                             </div>
                             <div class="toggle-wrap">
                                 <a
-                                    class="see-more danger delete-account"
+                                    class="see-more danger delete-account left-icon"
                                     href="${root}settings/account/delete"
                                 >
                                     ${tl2(
@@ -58876,7 +58876,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                 <div class="description">${description}</div>
                 <div class="small-label with-icon lock">${tl2(trans.ensure_you_trust)}</div>
                 <div class="connector-footer">
-                    <a class="see-more cancel" href="${cancel}">
+                    <a class="see-more cancel left-icon" href="${cancel}">
                         ${tl2(trans.cancel)}
                     </a>
                     <form method="post" data-no-partial-refresh="">
@@ -58952,7 +58952,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       }}
                     </p>
                     <p>
-                        <a onclick=${() => sponsor2()}>${{ html: tl2(trans.supported_by, { c: sponsoring, s: '<span class="b">', "/s": "</span>" }) }}</a>
+                        <a onclick=${() => sponsor()}>${{ html: tl2(trans.supported_by, { c: sponsoring, s: '<span class="b">', "/s": "</span>" }) }}</a>
                     </p>
                 </div>
                 <div class="footer-web">
@@ -58995,7 +58995,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         `
     );
     let heart = footer.querySelector(".heart");
-    heart.addEventListener("click", () => sponsor2());
+    heart.addEventListener("click", () => sponsor());
   }
 
   // src/components/dialog/dialog_extender.js
@@ -59121,7 +59121,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         render(
           submit,
           html`
-                    <button class="see-more cancel" type="button" onclick=${() => dismiss.click()}>
+                    <button class="see-more cancel left-icon" type="button" onclick=${() => dismiss.click()}>
                         ${tl2(trans.cancel)}
                     </button>
                     <div class="fill" />
@@ -59205,7 +59205,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         render(
           footer,
           html`
-                    <button class="see-more cancel" type="reset">
+                    <button class="see-more cancel left-icon" type="reset">
                         ${tl2(trans.cancel)}
                     </button>
                     <div class="fill" />
@@ -59616,7 +59616,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         notify_if_new_update();
         lotus();
         oracle_data();
-        sponsors2();
+        sponsors();
       },
       on_mutation: main_flow,
       on_page_change: load_page,

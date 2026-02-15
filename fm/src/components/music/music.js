@@ -1507,7 +1507,7 @@ function show_numbers_on_side(header_type) {
         `);
 
         playlink.classList = 'see-more';
-        replace.classList = 'see-more add';
+        replace.classList = 'see-more add left-icon';
 
         video.after(html.node`
             <div class="video-actions sub-text">

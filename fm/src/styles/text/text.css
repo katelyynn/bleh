@@ -1,0 +1,139 @@
+.sub-text {
+    color: hsl(var(--c3));
+    font-size: var(--font-size);
+    line-height: var(--line-height);
+    font-weight: var(--font-weight);
+    cursor: default;
+
+    &.no-margin {
+        margin: unset;
+    }
+
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    &.normal {
+        flex-direction: row !important;
+        justify-content: unset !important;
+        gap: var(--icon-gap) !important;
+    }
+
+    .has-icon {
+        display: flex;
+        align-items: center;
+        gap: var(--icon-gap);
+    }
+
+    /* see .this-month */
+    & > .see-more {
+        --bg-hov: hsl(var(--b4), 40%) !important;
+        --bg-atv: hsl(var(--b4), 60%) !important;
+        --col: hsl(var(--c3));
+        --mask-colour: hsl(var(--c3), 80%);
+    }
+
+    @media (max-width: 980px) {
+        flex-direction: column;
+        justify-content: unset;
+    }
+
+    &.space-below {
+        margin-bottom: var(--card-gap);
+    }
+
+    .prominent {
+        color: hsl(var(--c1));
+        font-size: 16px;
+        line-height: 17px;
+        font-weight: var(--font-weight-medium);
+    }
+
+    .wiki-edit-small {
+        --mask: var(--icon-16-edit-mini);
+    }
+    .read-more {
+        --mask: var(--icon-16-arrow-right);
+    }
+
+    .wiki-edit-small,
+    .read-more {
+        position: relative;
+        --mask-size: 12px;
+        --margin-top: -6px;
+        padding-right: calc(12px + 4px);
+        --left: none;
+        --right: 0;
+
+        &:not(:hover) {
+            color: inherit;
+        }
+    }
+
+    .wiki-edit-small:not(:hover),
+    .read-more:not(:hover) {
+        color: inherit;
+    }
+
+    .right-links {
+        display: flex;
+        gap: var(--card-gap);
+    }
+
+    p {
+        margin: unset;
+    }
+
+    .breadcrumb {
+        display: flex;
+        gap: 0 16px;
+
+        .breadcrumb-origin,
+        a {
+            position: relative;
+            --left: none;
+            --right: -16px;
+            --mask: var(--icon-16-dot);
+            --mask-size: 16px;
+            color: inherit;
+        }
+    }
+
+    .gallery-image-uploaded-by {
+        position: relative;
+        padding-left: calc(var(--icon-size) + var(--icon-gap));
+        --mask: var(--icon-16-upload);
+        --left: 0;
+        min-width: unset;
+    }
+
+    &.header-style {
+        .breadcrumb {
+            flex-direction: column;
+
+            a {
+                &:before {
+                    display: none !important;
+                }
+            }
+        }
+    }
+}
+
+h4 {
+    &:not(.source-album-name, .top-header, .factbox-heading) {
+        & + p {
+            margin-top: -5px;
+        }
+    }
+}
+
+h5 {
+    margin: unset;
+    color: hsl(var(--c1));
+    font-weight: var(--font-weight-medium);
+    cursor: default;
+}
+h4 {
+    color: hsl(var(--c1));
+}

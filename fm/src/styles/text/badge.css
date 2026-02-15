@@ -1,0 +1,47 @@
+.taste-badge,
+.new-badge {
+    display: inline-flex;
+    align-items: center;
+
+    font-size: calc(var(--font-size) - 1px);
+    background: hsl(var(--k4), 40%);
+    color: hsl(var(--l3-c));
+    padding: 0 4px;
+    border-radius: var(--item-small-radius);
+
+    font-weight: var(--font-weight-medium);
+
+    &.spacing {
+        gap: 4px;
+    }
+
+    & > .bleh-icon-container,
+    & > .bleh-icon {
+        --icon-size: 12px;
+        height: var(--icon-size);
+        --mask-colour: currentColor;
+    }
+
+    &.new {
+        animation: new 2.5s linear infinite;
+    }
+
+    &.sponsor-related {
+        background: unset;
+        border-radius: unset;
+    }
+
+    .side-action > & {
+        margin: unset !important;
+    }
+}
+
+.bleh-icon-container {
+    display: flex;
+    align-items: center;
+    height: var(--icon-size);
+}
+.sku > .bleh-icon-container {
+    animation: staggered_spinner 3s cubic-bezier(0.34, 1.56, 0.64, 1)
+        infinite;
+}

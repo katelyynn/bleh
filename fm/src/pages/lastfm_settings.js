@@ -927,7 +927,7 @@ function patch_settings_profile_panel(token, update_picture) {
                                         ${(lit_range = setting({ id: 'profile_lit', func: update_colour_preview }))}
                                     </div>
                                     <div class="modal-footer">
-                                        <button class="see-more cancel" onclick=${() => dialog_rm({ id: 'profile_accent' })}>
+                                        <button class="see-more cancel left-icon" onclick=${() => dialog_rm({ id: 'profile_accent' })}>
                                             ${tl(trans.back)}
                                         </button>
                                         <div class="fill"></div>
@@ -1131,7 +1131,7 @@ function patch_settings_profile_panel(token, update_picture) {
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button class="see-more cancel" onclick=${() => dialog_rm({ id: 'profile_font' })}>
+                                            <button class="see-more cancel left-icon" onclick=${() => dialog_rm({ id: 'profile_font' })}>
                                                 ${tl(trans.back)}
                                             </button>
                                             <div class="fill"></div>
@@ -1236,7 +1236,7 @@ function avatar(token = '') {
                 </form>
             </div>
             <div class="modal-footer">
-                <button class="see-more cancel" onclick=${() => dialog_rm({ id: 'edit_avatar' })}>${tl(trans.cancel)}</button>
+                <button class="see-more cancel left-icon" onclick=${() => dialog_rm({ id: 'edit_avatar' })}>${tl(trans.cancel)}</button>
                 <div class="fill"></div>
                 <button class="btn primary save" onclick=${() => save_avatar()} disabled>${tl(trans.save)}</button>
             </div>
@@ -1300,7 +1300,7 @@ function avatar(token = '') {
                     ${tl(trans.crop_notice)}
                 </div>
                 <div class="modal-footer">
-                    <button class="see-more cancel" onclick=${() => {
+                    <button class="see-more cancel left-icon" onclick=${() => {
                         if (cropper && cropper.destroy) cropper.destroy();
                         cropper = null;
 
@@ -1449,7 +1449,7 @@ function bleh_communication_panel(token) {
         new_list.setAttribute('data-expanded', 'false');
 
         let expand = html.node`
-            <button class="see-more expand-down" onclick=${() => {
+            <button class="see-more expand-down left-icon" onclick=${() => {
                 expand.style.display = 'none';
                 new_list.setAttribute('data-expanded', 'true');
             }}>
@@ -1935,7 +1935,7 @@ function bleh_accounts() {
                             </div>
                             <div class="toggle-wrap">
                                 <a
-                                    class="see-more danger logout"
+                                    class="see-more danger logout left-icon"
                                     href="${root}settings/account/logout-everywhere"
                                 >
                                     ${tl(trans.logout)}
@@ -1949,7 +1949,7 @@ function bleh_accounts() {
                             </div>
                             <div class="toggle-wrap">
                                 <a
-                                    class="see-more danger delete-account"
+                                    class="see-more danger delete-account left-icon"
                                     href="${root}settings/account/delete"
                                 >
                                     ${tl(

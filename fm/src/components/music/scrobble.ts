@@ -165,7 +165,7 @@ export function submit_scrobble({
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="see-more cancel" onclick=${() => dialog_rm({ id: 'submit_scrobble' })}>
+                <button class="see-more cancel left-icon" onclick=${() => dialog_rm({ id: 'submit_scrobble' })}>
                     ${tl(trans.cancel)}
                 </button>
                 <div class="fill" />

@@ -664,7 +664,7 @@ export async function render_setting_page(page_id) {
                 : `${artist_corrections.version}, ${album_track_corrections.version}`}
                             </p>
                             <button
-                                class="see-more update-check"
+                                class="see-more update-check left-icon"
                                 onclick="_lotus_check()"
                             >
                                 ${tl(trans.update_check)}
@@ -820,7 +820,7 @@ export async function render_setting_page(page_id) {
                                     ${oracle_artists.version}, ${oracle_albums.version}, ${oracle_tracks.version}
                                 </p>
                                 <button
-                                    class="see-more update-check"
+                                    class="see-more update-check left-icon"
                                     onclick=${() => oracle_data(true)}
                                 >
                                     ${tl(trans.update_check)}
@@ -878,7 +878,7 @@ export async function render_setting_page(page_id) {
                             </div>
                             <div class="toggle-wrap">
                                 <button
-                                    class="btn see-more update-check"
+                                    class="see-more update-check left-icon"
                                     onclick=${() => force_refresh_style()}
                                 >
                                     ${tl(trans.refresh)}
@@ -1870,7 +1870,7 @@ function edit_profile_note(user) {
         body: html.node`
             <textarea class="modal-text" id="bleh--profile-note" placeholder=${tl(trans.anything_you_can_imagine)}>${profile_notes[user]}</textarea>
             <div class="modal-footer">
-                <button class="see-more cancel" onclick=${() => dialog_rm({ id: 'edit_profile_note' })}>
+                <button class="see-more cancel left-icon" onclick=${() => dialog_rm({ id: 'edit_profile_note' })}>
                     ${tl(trans.cancel)}
                 </button>
                 <div class="fill"></div>
@@ -1962,7 +1962,7 @@ function import_settings() {
             <br>
             <textarea class="modal-text" ref=${(el) => (text = el)} />
             <div class="modal-footer">
-                <button class="see-more cancel" onclick=${() => {
+                <button class="see-more cancel left-icon" onclick=${() => {
                     dialog_rm({ id: 'import_settings' });
                 }}>
                     ${tl(trans.cancel)}
@@ -2022,7 +2022,7 @@ function reset_settings() {
                 <a class="see-more" onclick=${() => export_settings()}>${tl(trans.make_a_backup)}</a>
             </div>
             <div class="modal-footer">
-                <button class="see-more cancel" onclick=${() => dialog_rm({id: 'reset_settings'})}>
+                <button class="see-more cancel left-icon" onclick=${() => dialog_rm({id: 'reset_settings'})}>
                     ${tl(trans.cancel)}
                 </button>
                 <div class="fill"></div>

@@ -116,6 +116,8 @@
     background-repeat: repeat-x !important;
     background-position: unset !important;
 
+    position: relative;
+
     h1,
     h2,
     h3,

@@ -54,7 +54,7 @@ export function plot({ host, sidebar } = {}) {
                             warn_if_empty: true
                         }))}
                         <div class="modal-footer">
-                            <button class="see-more cancel" onclick=${() => dialog_rm({ id: 'add_user' })}>
+                            <button class="see-more cancel left-icon" onclick=${() => dialog_rm({ id: 'add_user' })}>
                                 ${tl(trans.cancel)}
                             </button>
                             <div class="fill"></div>

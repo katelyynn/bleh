@@ -174,3 +174,8 @@ inferred by it being opened in the first place */
     /* should only be overrided if a better solution can be given */
     outline: var(--focus-outline, 2px solid hsl(var(--l3-c))) !important;
 }
+
+/* no clue */
+body > canvas {
+    display: none;
+}

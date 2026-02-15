@@ -5,6 +5,8 @@
 @import './interactable/interactable.css';
 
 @import './shared/tooltip.css';
+@import './text/text.css';
+@import './text/badge.css';
 
 @import './page/page.css';
 
@@ -15,6 +17,9 @@
 
 @import './shared/icon_types.css';
 @import './shared/keyframes.css';
+@import './shared/badge.css';
+@import './shared/activity.css';
+@import './shared/form.css';
 
 @import './dialog/main.css';
 

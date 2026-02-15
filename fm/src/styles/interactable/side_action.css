@@ -282,3 +282,9 @@
         --margin-left: calc(-1 * (var(--icon-size) / 2)) !important;
     }
 }
+
+.side-actions,
+.medium-interactions,
+.mini-interactions {
+    order: -11;
+}

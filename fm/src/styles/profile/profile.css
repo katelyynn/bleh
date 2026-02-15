@@ -3,3 +3,40 @@
 @import './reports.css';
 
 @import './font.css';
+
+@import './glacier/main.css';
+
+@import './featured_item.css';
+@import './status_cafe.css';
+
+.header-title-secondary {
+    margin-top: unset !important;
+    font-size: var(--font-size) !important;
+    line-height: var(--line-height) !important;
+
+    display: flex;
+    gap: var(--item-list-gap);
+    align-items: center;
+
+    .sub-text-label {
+        display: flex;
+        align-items: center;
+        color: hsl(var(--c2), 80%);
+        --mask-colour: currentColor;
+
+        .sub-text-label-sr {
+            display: none;
+        }
+    }
+
+    .sub-text-pair {
+        display: flex;
+        align-items: center;
+        gap: var(--icon-gap);
+        margin: unset;
+
+        &.sub-text-follow {
+            font-weight: var(--font-weight-medium);
+        }
+    }
+}

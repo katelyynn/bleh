@@ -462,7 +462,7 @@ function friends_button(parent) {
                     body: html.node`
                         <p>${{ html: tl(trans.remove_friend.body, { u: `<strong>${page.name}</strong>` }) }}</p>
                         <div class="modal-footer">
-                            <button class="see-more cancel" onclick=${() => dialog_rm({ id: 'remove_friend' })}>
+                            <button class="see-more cancel left-icon" onclick=${() => dialog_rm({ id: 'remove_friend' })}>
                                 ${tl(trans.cancel)}
                             </button>
                             <div class="fill"></div>

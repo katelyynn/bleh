@@ -85,7 +85,7 @@ export function set_profile_as_shortcut() {
                 ${{ html: tl(trans.profile_shortcut.notice).replace('{u}', `<a class="mention" href="${root}user/${settings.profile_shortcut}" target="_blank">@${settings.profile_shortcut}</a>`) }}
             </div>
             <div class="modal-footer">
-                <button class="see-more cancel" onclick=${() => dialog_rm({ id: 'profile_shortcut' })}>
+                <button class="see-more cancel left-icon" onclick=${() => dialog_rm({ id: 'profile_shortcut' })}>
                     ${tl(trans.back)}
                 </button>
                 <div class="fill"></div>

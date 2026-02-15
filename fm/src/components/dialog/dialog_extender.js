@@ -167,7 +167,7 @@ export function dialog_extender() {
             render(
                 submit,
                 html`
-                    <button class="see-more cancel" type="button" onclick=${() => dismiss.click()}>
+                    <button class="see-more cancel left-icon" type="button" onclick=${() => dismiss.click()}>
                         ${tl(trans.cancel)}
                     </button>
                     <div class="fill" />
@@ -268,7 +268,7 @@ export function dialog_extender() {
             render(
                 footer,
                 html`
-                    <button class="see-more cancel" type="reset">
+                    <button class="see-more cancel left-icon" type="reset">
                         ${tl(trans.cancel)}
                     </button>
                     <div class="fill" />

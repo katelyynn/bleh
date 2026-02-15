@@ -769,7 +769,7 @@ export function create_correction(
                 <p class="form-tip">${tl(trans.sources_tip)}</p>
             </div>
             <div class="modal-footer">
-                <button class="see-more cancel" onclick=${() => dialog_rm({ id: 'lotus_correction' })}>
+                <button class="see-more cancel left-icon" onclick=${() => dialog_rm({ id: 'lotus_correction' })}>
                     ${tl(trans.cancel)}
                 </button>
                 <div class="fill" />

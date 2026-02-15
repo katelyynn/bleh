@@ -10,7 +10,6 @@
 .music-more-link > a,
 .modal-body .btn-cancel.js-close,
 .masthead-popup-text .btn-primary,
-.obsession-delete-button,
 .featured-item-manage,
 .more-items,
 .more-link-with-action > a,
@@ -67,43 +66,38 @@
     transition-duration: var(--trans);
     transition-timing-function: var(--trans-function);
 
-    &:not([disabled]):hover {
-        background: var(--bg-hov) !important;
-        text-decoration: var(--underline, none) !important;
+    &:not([disabled]) {
+        &:hover {
+            background: var(--bg-hov) !important;
+            text-decoration: var(--underline, none) !important;
 
-        transition-property: transform;
-        transition-duration: 0.1s;
-    }
+            transition-property: transform;
+            transition-duration: 0.1s;
+        }
 
-    &:not([disabled]):focus {
-        text-decoration: var(--underline, none) !important;
-    }
+        &:focus {
+            text-decoration: var(--underline, none) !important;
+        }
 
-    &:not([disabled]):active {
-        background: var(--bg-atv) !important;
-        transform: scale(0.98);
-        text-decoration: var(--underline, none) !important;
+        &:active {
+            background: var(--bg-atv) !important;
+            transform: scale(0.98);
+            text-decoration: var(--underline, none) !important;
+        }
     }
 
     width: fit-content;
 }
 
 .shout-action-button,
-.radio,
 .left-icon,
 .edit,
-.expand-down,
-.add,
-.delete-account,
 .shout-more-replies-after,
 .shout-more-replies-before,
 .pagination-previous > a,
 .modal-body .btn-cancel.js-close,
 .btn-cancel.js-disclose-close,
-.see-more.cancel,
 .see-more.sponsor,
-.update-check,
-.obsession-delete-button,
 a.inline-add-icon {
     --left: var(--see-more-pad);
     --right: none;
@@ -223,19 +217,18 @@ a.inline-add-icon {
 }
 
 .more-link,
-.anhv1 .more-link,
 .more-link-fullwidth-right,
 .more-link-fullwidth-right-flush-top,
 .more-link-with-action {
     margin-top: var(--card-gap) !important;
     margin-bottom: unset !important;
-    box-shadow: unset;
-    height: fit-content;
+    box-shadow: unset !important;
+    height: fit-content !important;
     text-align: right;
 }
-.anhv1 .more-link > a {
-    display: inline-flex;
-    width: fit-content;
+.more-link > a {
+    display: inline-flex !important;
+    width: fit-content !important;
 }
 
 .source-album-nodata .more-link {
@@ -256,4 +249,18 @@ a.inline-add-icon {
             }
         }
     }
+}
+
+
+.this-month {
+    --bg-hov: hsl(var(--b4), 40%) !important;
+    --bg-atv: hsl(var(--b4), 60%) !important;
+    --col: hsl(var(--c3));
+    --mask-colour: hsl(var(--c3), 80%);
+    --mask: var(--icon-16-trend);
+}
+.diff {
+    margin-left: 4px;
+    font-size: 13px;
+    opacity: 0.7;
 }

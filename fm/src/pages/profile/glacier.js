@@ -244,7 +244,7 @@ function bleh_glacier_library_date() {
 
             picker_presets[target].appendChild(html.node`
                 <li class="date-range-picker-preset ${selected ? 'date-range-picker-preset--selected' : ''}">
-                    <a href="${window.location.href.replace(window.location.search, '')}?from=${year}-01-01&rangetype=year" onclick=${() => {
+                    <a href="${window.location.href.replace(window.location.search, '')}?from=${year}-01-01&rangetype=year" data-analytics-action="DateSelector" onclick=${() => {
                         modal.hide();
                     }}>
                         ${year}

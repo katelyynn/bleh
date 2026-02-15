@@ -110,7 +110,3 @@ h2.text-18,
 .user-dashboard-section-header:after {
     display: none;
 }
-
-.header-title-secondary > a {
-    color: hsl(var(--l3-c)) !important;
-}

@@ -11,7 +11,7 @@
 .navlist-hidden-list a,
 .display-options-clickable-item,
 .library-search-results li,
-.date-range-picker-preset a {
+[data-analytics-action="DateSelector"] {
     --bg: transparent !important;
     --bg-hov: var(--menu-item-hov) !important;
     --bg-atv: var(--menu-item-atv) !important;
@@ -115,7 +115,7 @@
     }
 }
 
-.date-range-picker-preset a {
+[data-analytics-action="DateSelector"] {
     min-width: unset !important;
 }
 .auth-dropdown-menu-wrap {
@@ -262,4 +262,59 @@ very, very, very dated - who looks up a song on ebay? */
     & + .track-preview {
         display: none;
     }
+}
+
+
+/*     DANGEROUS     */
+.dropdown-menu-clickable-item[data-starred="true"]:not(.no-colour),
+.dropdown-menu-clickable-item.sponsor,
+.dropdown-menu-clickable-item.update,
+.dropdown-menu-clickable-item.swatch,
+.dropdown-menu-clickable-item.lotus,
+.dropdown-menu-clickable-item.accent,
+.more-item--obsession,
+[data-menu-item="bleh"],
+.more-item--delete,
+.more-item--report,
+[data-menu-item="logout"],
+[data-analytics-action="delete"],
+[data-analytics-action="unpublish"],
+[data-analytics-action="publish"] {
+    --bg-hov: var(--menu-item-accent-hov) !important;
+    --bg-atv: var(--menu-item-accent-atv) !important;
+    --col: hsl(var(--l3-c)) !important;
+    --mask-colour: color-mix(
+        in hsl,
+        hsl(var(--l3-c)),
+        hsl(var(--l4-c)) 40%
+    );
+}
+
+.more-item--delete,
+.more-item--report,
+[data-menu-item="logout"],
+[data-analytics-action="delete"],
+[data-analytics-action="unpublish"] {
+    --hue-over: var(--hue-neg);
+    --sat-over: var(--sat-neg);
+    --lit-over: var(--lit-neg);
+}
+
+
+.dropdown-menu-clickable {
+    display: flex;
+    flex-direction: column;
+
+    & > .sep {
+        margin: 6px var(--button-sides);
+        width: unset !important;
+    }
+}
+
+.date-range-picker-content {
+    display: none !important;
+}
+
+.date-range-picker-content-inner {
+    display: block !important;
 }

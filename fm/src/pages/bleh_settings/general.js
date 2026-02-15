@@ -12,6 +12,7 @@ import { update_branding_type } from "@/components/page/navigation";
 import tippy from "tippy.js";
 import { update_check } from "@/components/page/style";
 import { notify } from "@/components/dialog/notify";
+import { sponsor, sponsor_manage, sponsors } from '@/components/sponsor';
 
 export function general() {
     if (auth.pro == null) {
@@ -142,7 +143,7 @@ export function general() {
                     </div>
                     <div class="info">
                         <p>${sponsor_list.latest}</p>
-                        <button class="see-more update-check sponsor-related" onclick=${() => sponsors(true, () => {
+                        <button class="see-more update-check sponsor-related left-icon" onclick=${() => sponsors(true, () => {
                             render_setting_page('general');
                         })}>
                             ${tl(trans.update_check)}

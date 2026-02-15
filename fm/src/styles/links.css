@@ -31,3 +31,11 @@ a {
         text-decoration: underline !important;
     }
 }
+
+
+.bottom-card-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: var(--card-gap);
+    gap: var(--card-gap);
+}

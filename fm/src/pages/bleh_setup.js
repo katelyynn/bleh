@@ -115,11 +115,11 @@ function bleh_setup_start() {
         `);
         render(page.structure.setup_footer, html`
             ${auth.name ? html.node`
-            <a class="see-more cancel" href="${root}user/${auth.name}">
+            <a class="see-more cancel left-icon" href="${root}user/${auth.name}">
                 ${tl(trans.skip)}
             </a>
             ` : html.node`
-            <a class="see-more cancel" href="${root}dashboard">
+            <a class="see-more cancel left-icon" href="${root}dashboard">
                 ${tl(trans.skip)}
             </a>
             `}
@@ -276,7 +276,7 @@ function setup_themes() {
             `
         );
         render(page.structure.setup_footer, html`
-            <button class="see-more cancel" onclick=${() => setup_accessibility()}>
+            <button class="see-more cancel left-icon" onclick=${() => setup_accessibility()}>
                 ${tl(trans.back)}
             </button>
             <div class="fill"></div>
@@ -316,7 +316,7 @@ function setup_accessibility() {
             `
         );
         render(page.structure.setup_footer, html`
-            <button class="see-more cancel" onclick=${() => setup()}>
+            <button class="see-more cancel left-icon" onclick=${() => setup()}>
                 ${tl(trans.back)}
             </button>
             <div class="fill"></div>
@@ -392,7 +392,7 @@ function setup_music() {
             </div>
         `);
         render(page.structure.setup_footer, html`
-            <button class="see-more cancel" onclick=${() => setup_themes()}>
+            <button class="see-more cancel left-icon" onclick=${() => setup_themes()}>
                 ${tl(trans.back)}
             </button>
             <div class="fill"></div>
@@ -502,7 +502,7 @@ function setup_layout() {
             </div>
         `);
         render(page.structure.setup_footer, html`
-            <button class="see-more cancel" onclick=${() => setup_music()}>
+            <button class="see-more cancel left-icon" onclick=${() => setup_music()}>
                 ${tl(trans.back)}
             </button>
             <div class="fill"></div>
@@ -546,7 +546,7 @@ function setup_end() {
 
         if (auth.name) {
             render(page.structure.setup_footer, html`
-                <button class="see-more cancel" onclick=${() => setup_layout()}>
+                <button class="see-more cancel left-icon" onclick=${() => setup_layout()}>
                     ${tl(trans.back)}
                 </button>
                 <div class="fill"></div>
@@ -556,7 +556,7 @@ function setup_end() {
             `);
         } else {
             render(page.structure.setup_footer, html`
-                <button class="see-more cancel" onclick=${() => setup_layout()}>
+                <button class="see-more cancel left-icon" onclick=${() => setup_layout()}>
                     ${tl(trans.back)}
                 </button>
                 <div class="fill"></div>

@@ -1,5 +1,8 @@
 @import './range.css';
+@import './input.css';
+@import './swatch.css';
 @import './page.css';
+@import './select.css';
 
 .setting-group {
     display: flex;
@@ -64,11 +67,9 @@
         flex-direction: column;
     }
 
-    & > div {
-        opacity: var(--opacity, unset);
-        pointer-events: var(--events, auto);
-        cursor: var(--cursor, unset);
-    }
+    opacity: var(--opacity, unset);
+    pointer-events: var(--events, auto);
+    cursor: var(--cursor, unset);
 
     &[disabled="true"],
     &[aria-disabled="true"] {

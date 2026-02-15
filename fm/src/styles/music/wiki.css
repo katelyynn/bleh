@@ -1,10 +1,7 @@
 .metadata-list {
-    margin: unset;
-}
-
-.metadata-list {
-    display: flex !important;
+    display: flex;
     gap: var(--button-list-gap);
+    margin: unset;
 }
 
 .metadata-item {
