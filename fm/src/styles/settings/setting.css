@@ -3,6 +3,9 @@
 @import './swatch.css';
 @import './page.css';
 @import './select.css';
+@import './list.css';
+
+@import './search.css';
 
 .setting-group {
     display: flex;

@@ -1,3 +1,6 @@
+@import './explicit.css';
+@import './tracklist.css';
+
 .oracle-notice {
     margin-bottom: calc(-1 * var(--card-padding));
     order: -11;

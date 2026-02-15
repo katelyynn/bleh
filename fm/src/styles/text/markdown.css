@@ -218,3 +218,25 @@
     max-width: 400px;
     cursor: default;
 }
+
+
+.overdose {
+    font-family: 'Zpix';
+    font-size: 20px;
+    line-height: 20px;
+    height: 20px;
+    display: inline-block;
+
+    & > span:not(.bless) {
+        position: relative;
+        bottom: 4px;
+    }
+}
+.bless {
+    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAMAAAC67D+PAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAVUExURUVDVeGmOf/aiG1ZNVu04lJ85wAAAIMxq3cAAAAHdFJOU////////wAaSwNGAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAOUlEQVQYV2XMQQrAQAhD0TQ13v/I/UoXA4MBn4uobmnCJg/z068vynB8UjI1z5uqcKYKZiuBK5z+AEXyAU0XNzPRAAAAAElFTkSuQmCC');
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background-size: 100%;
+    image-rendering: pixelated;
+}

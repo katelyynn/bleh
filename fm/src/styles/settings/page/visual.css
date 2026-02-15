@@ -1,0 +1,177 @@
+.theme-bubbles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    .theme-bubble {
+        --bg: transparent;
+        --bg-hov: transparent;
+        --bg-atv: transparent;
+        --shadow: none;
+        --padding: 0;
+        --radius: 0;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--item-list-gap);
+
+        .bubble {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+
+            border: 1px solid hsl(var(--b4), 70%);
+            box-shadow: var(--interact-shadow);
+            overflow: hidden;
+
+            .inner {
+                background: hsl(var(--b5));
+                color: hsl(var(--c2));
+                --mask-colour: currentColor;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                height: 100%;
+
+                .bleh-icon {
+                    --icon: var(--mask);
+                    --icon-size: 24px;
+                }
+            }
+        }
+
+        &[data-theme-id="adaptive"] {
+            & > .bubble {
+                position: relative;
+
+                & > .inner {
+                    position: absolute;
+                    inset: 0;
+                    border-radius: unset;
+
+                    width: 50%;
+
+                    &:last-child {
+                        z-index: 2;
+                        left: 50%;
+                        right: none;
+                    }
+                }
+            }
+        }
+
+        & > strong {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            font-weight: var(--font-weight);
+
+            & > .new-badge {
+                font-size: 12px;
+                line-height: 14px;
+                margin: unset !important;
+            }
+        }
+
+        &[aria-selected="true"] {
+            .bubble {
+                outline: 2px solid hsl(var(--l3-c));
+                box-shadow:
+                    0 3px 12px hsl(var(--h4), 32%),
+                    var(--interact-shadow);
+            }
+
+            & > strong {
+                font-weight: var(--font-weight-medium);
+            }
+        }
+    }
+
+    .setting > .info > & {
+        .theme-bubble {
+            .bubble {
+                width: 70px;
+                height: 50px;
+                border-radius: var(--item-big-radius);
+
+                .inner {
+                    .bleh-icon {
+                        --icon-size: 18px;
+                    }
+                }
+            }
+
+            &:not([aria-selected="true"]) {
+                strong {
+                    color: hsl(var(--c3));
+                }
+            }
+        }
+    }
+}
+
+.theme-preview {
+    display: flex;
+    width: 100%;
+    flex: 1;
+    background-color: hsl(var(--b6));
+    position: relative;
+    border-radius: calc(var(--item-big-radius) - 6px);
+    overflow: hidden;
+
+    .preview-inner {
+        display: block;
+        width: 100%;
+        padding: 8px 0 0 8px;
+        text-align: left;
+
+        .preview-card {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            background-color: hsl(var(--b5));
+            box-shadow: var(--card-shadow);
+            border-top-left-radius: var(--item-med-radius);
+
+            border-top: 1px solid var(--card-border-base-highlight);
+            border-left: 1px solid var(--card-border-base);
+
+            padding: 6px 8px 10px 8px;
+
+            background-image: var(--cards-overlay-image-subtle);
+            background-repeat: repeat-x;
+            background-position: 0 0;
+
+            .preview-header {
+                display: block;
+                color: hsl(var(--c1));
+                font-size: 14px;
+                line-height: 14px;
+                font-weight: var(--font-weight-bold);
+            }
+
+            .preview-text {
+                display: block;
+                width: 40px;
+                height: 3px;
+                background-color: hsl(var(--c2));
+                border-radius: 50px;
+
+                margin-top: -4px;
+
+                &.row-2 {
+                    width: 25px;
+
+                    margin-top: -4px;
+                }
+            }
+
+            .preview-buttons {
+                display: none;
+            }
+        }
+    }
+}

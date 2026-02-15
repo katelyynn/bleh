@@ -1,0 +1,112 @@
+.page-content:is([data-page-type="overview"]) .col-main {
+    display: flex !important;
+    flex-direction: column;
+    gap: var(--card-gap);
+}
+
+.music-links {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+
+    li {
+        display: flex;
+    }
+
+    .visible-xs {
+        display: none !important;
+    }
+    .music-link {
+        display: flex !important;
+        --bg: hsl(var(--k4), 20%);
+        --bg-hov: hsl(var(--k4), 30%);
+        --bg-atv: hsl(var(--k4), 40%);
+        --padding: 5px 10px 5px
+            calc(10px + var(--icon-size) + 4px);
+        --col: hsl(var(--l3-c));
+        --mask-colour: color-mix(
+            in hsl,
+            hsl(var(--l3-c)),
+            hsl(var(--l4-c)) 30%
+        );
+        --shadow: none;
+        --radius: var(--item-big-radius);
+        flex: unset;
+        --left: 10px;
+
+        position: relative;
+
+        --icon-size: 14px;
+
+        &:not(.resource-external-link--homepage) {
+            --sat-user: 1;
+            --lit-user: 1;
+        }
+
+        &.play-this-track-playlink--disabled {
+            opacity: 0.65 !important;
+        }
+
+        &[data-host-unknown="true"] {
+            &:before {
+                mask-image: none !important;
+                -webkit-mask-image: none !important;
+                background-image: var(--favi) !important;
+                background-size: 100% !important;
+                border-radius: var(--item-small-radius) !important;
+            }
+        }
+    }
+}
+.music-small-header {
+    margin-top: var(--card-gap);
+    margin-bottom: 6px;
+
+    & > span > .new-badge {
+        margin-left: 6px;
+    }
+}
+
+.metadata-row {
+    display: flex;
+    gap: var(--card-gap) var(--card-padding);
+    margin-top: var(--card-gap);
+
+    flex-direction: column;
+
+    & > .metadata-group {
+        & > .music-small-header {
+            margin-top: unset;
+        }
+    }
+}
+
+.resource-external-link {
+    width: fit-content;
+
+    &:after {
+        display: none;
+    }
+}
+
+.social-link,
+.resource-external-link--homepage:before {
+    --mask: var(--icon-16-link);
+}
+
+.replace-playlink {
+    --mask: var(--icon-16-edit);
+    opacity: unset;
+    margin: unset;
+    inset: unset;
+}
+
+.featured-items-panel {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: var(--card-gap);
+
+    .sub-text {
+        margin-bottom: 10px;
+    }
+}

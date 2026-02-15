@@ -125,3 +125,15 @@
 .content-form select {
     background-image: none !important;
 }
+
+.link-select {
+    &:after {
+        --right: 0 !important;
+    }
+
+    &:not([data-type], .left-icon) {
+        &:before {
+            --show-icon: none;
+        }
+    }
+}

@@ -7,6 +7,7 @@ import { display_colour_presets, page_loading, register_skip_to, render_setting_
 import { ff } from "@/components/settings/sku";
 import { settings } from "@/build/config";
 import { match } from "@/components/settings/dynamic_theming";
+import { dialog } from "@/components/dialog/dialog";
 
 export function visual() {
     if (
@@ -31,6 +32,9 @@ export function visual() {
     let adaptive_tip;
     let bubbles;
 
+    let theme_day;
+    let theme_night;
+
     function render_tip() {
         adaptive_tip.setAttribute('aria-hidden', !settings.theme_schedule);
 
@@ -45,7 +49,7 @@ export function visual() {
                     title: tl(trans.themes.name),
                     body: html.node`
                         <div class="setting-group">
-                            ${(theme_day = setting({
+                            ${theme_day = setting({
                                 id: 'theme_day',
                                 list: [
                                     {
@@ -74,8 +78,8 @@ export function visual() {
                                     bubbles.re_render();
                                     match();
                                 }
-                            }))}
-                            ${(theme_night = setting({
+                            })}
+                            ${theme_night = setting({
                                 id: 'theme_night',
                                 list: [
                                     {
@@ -104,7 +108,7 @@ export function visual() {
                                     bubbles.re_render();
                                     match();
                                 }
-                            }))}
+                            })}
                         </div>
                         <p class="card-tip">${tl(trans.theme_schedule)}</p>
                     `

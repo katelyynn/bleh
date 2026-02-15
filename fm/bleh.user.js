@@ -28687,7 +28687,7 @@
     document.body.appendChild(dialogs2);
     page.structure.dialogs = dialogs2;
   }
-  function dialog2({
+  function dialog({
     id = "",
     title,
     subtitle,
@@ -28721,8 +28721,8 @@
     if (replace && replace_if_possible) replace_if_possible = false;
     if (replace_if_possible && Object.keys(dialogs).length > 0) {
       replace = true;
-      for (let dialog3 in dialogs) {
-        replace_id = dialog3;
+      for (let dialog2 in dialogs) {
+        replace_id = dialog2;
         break;
       }
     }
@@ -28796,9 +28796,9 @@
         if (event.target.classList[0] != "bleh-modals") return;
       }
       log("requested kill all", "window", "info", { dialogs });
-      for (let dialog3 in dialogs) {
+      for (let dialog2 in dialogs) {
         dialog_rm({
-          id: dialog3
+          id: dialog2
         });
       }
       return;
@@ -28806,12 +28806,12 @@
     if (!id) return;
     if (!page.structure.dialogs) return;
     if (dialogs.hasOwnProperty(id)) {
-      let dialog3 = dialogs[id];
-      if (!page.structure.dialogs.contains(dialog3.instance)) return;
+      let dialog2 = dialogs[id];
+      if (!page.structure.dialogs.contains(dialog2.instance)) return;
       log(`queuing ${id} to kill`, "window");
-      dialog3.instance.classList.add("to-remove");
+      dialog2.instance.classList.add("to-remove");
       setTimeout(function() {
-        page.structure.dialogs.removeChild(dialog3.instance);
+        page.structure.dialogs.removeChild(dialog2.instance);
       }, 400);
       delete dialogs[id];
       if (JSON.stringify(dialogs) == "{}") {
@@ -28940,7 +28940,7 @@
   };
   function sponsor_manage() {
     if (sponsor_list.sponsors_one_time && sponsor_list.sponsors_one_time.includes(auth.name)) {
-      dialog2({
+      dialog({
         id: "sponsor_manage",
         title: tl2(trans.sponsor),
         body: html.node`
@@ -28956,7 +28956,7 @@
         type: "sponsor"
       });
     } else {
-      dialog2({
+      dialog({
         id: "sponsor_manage",
         title: tl2(trans.sponsor),
         body: html.node`
@@ -28996,7 +28996,7 @@
     sponsor();
   }
   function new_badges(badges) {
-    dialog2({
+    dialog({
       id: "sponsor_new_badges",
       title: tl2(trans.sponsor),
       body: html.node`
@@ -29434,7 +29434,7 @@
     expand_avatar(src);
   };
   function expand_avatar(src, alt = "") {
-    dialog2({
+    dialog({
       id: "avatar",
       body: html.node`
             <div class="full-avatar-wrapper">
@@ -31283,7 +31283,7 @@
       func,
       can_api
     });
-    dialog2({
+    dialog({
       id: "submit_scrobble",
       title: tl2(trans.new_scrobble),
       body: html.node`
@@ -32408,7 +32408,7 @@
   // src/components/dialog/share.js
   function share(url) {
     let input2;
-    dialog2({
+    dialog({
       id: "share",
       title: tl2(trans.share),
       body: html.node`
@@ -32982,7 +32982,7 @@
     const elem = html.node`
         <button class="btn side-action" data-type="close_friends" type="button" onclick=${() => {
       if (friend_state) {
-        dialog2({
+        dialog({
           id: "remove_friend",
           title: tl2(trans.remove_friend.name),
           body: html.node`
@@ -34190,7 +34190,7 @@
         } else {
           const dashboard = page.structure.container.querySelector(".user-dashboard");
           if (dashboard) {
-            dialog2({
+            dialog({
               id: "listening_report_v2",
               title: "oh no :c",
               body: html.node`
@@ -35364,7 +35364,7 @@
     }
   }
   function open_starred_friend_window(friend_func = null) {
-    dialog2({
+    dialog({
       id: "starred_friend",
       title: tl2(trans.close_friends),
       body: html.node`
@@ -36504,7 +36504,7 @@
             `)}
             <button class="compare-user-btn add-user" onclick=${() => {
         let input_box;
-        dialog2({
+        dialog({
           id: "add_user",
           title: tl2(trans.plot.name),
           body: html.node`
@@ -36646,8 +36646,8 @@
       html`
             <section class="minis">
                 <div class="minis-header main">
-                    <h2>${tl2(trans.minis)}</h2>
-                    <p>${tl2(trans.minis_description)}</p>
+                    <h2 class="minis-header-text">${tl2(trans.minis)}</h2>
+                    <p class="minis-header-body">${tl2(trans.minis_description)}</p>
                 </div>
                 <div class="mini-list">
                     ${Object.entries(valid_minis).map(([id, mini2]) => {
@@ -36693,12 +36693,12 @@
   function return_to_minis(mini = "") {
     return html.node`
         <div class="minis-header">
-            <h2 class="previous" onclick=${() => {
+            <h2 class="minis-header-text previous" onclick=${() => {
       window.history.replaceState(null, "", `${root}bleh/minis`);
       bleh_minis(true);
     }}>${tl2(trans.minis)}</h2>
             <div class="bleh-icon mini-arrow" style="--icon: var(--mask)" data-type="arrow-right" />
-            <h2>${mini ? valid_minis[mini].name : tl2(trans.error)}</h2>
+            <h2 class="minis-header-text">${mini ? valid_minis[mini].name : tl2(trans.error)}</h2>
         </div>
     `;
   }
@@ -37469,7 +37469,7 @@
   function open_changelog(changelog) {
     const sponsor_name = sponsor_list && sponsor_list.special ? sponsor_list.special[0] : "clairedoll";
     let changelog_list;
-    const window2 = dialog2({
+    const window2 = dialog({
       id: "changelog",
       title: {
         html: tl2(trans.news_from_user, {
@@ -37634,7 +37634,7 @@
       }
     });
     function rabbit() {
-      page.state.rabbit_modal = dialog2({
+      page.state.rabbit_modal = dialog({
         id: "rabbit",
         title: "rabbit",
         body: html.node`
@@ -41961,7 +41961,7 @@
     open_profile_shortcut_window();
   };
   function open_profile_shortcut_window() {
-    let modal = dialog2({
+    let modal = dialog({
       id: "profile_shortcut",
       title: tl2(trans.profile_shortcut.name),
       body: html.node`
@@ -41976,7 +41976,7 @@
   function other_listener(id) {
     let input2;
     let submit;
-    dialog2({
+    dialog({
       id: "other_listener",
       title: tl2(trans.view_others_library),
       body: html.node`
@@ -43727,7 +43727,7 @@
     xhr.send();
   }
   function oracle_credits() {
-    dialog2({
+    dialog({
       id: "oracle_credits",
       title: { html: tl2(trans.credits_for_value, { v: `<i>${correct_item_by_artist(page.name, page.sister)}</i>` }) },
       body: html.node`
@@ -43743,7 +43743,7 @@
   function oracle_debug() {
     const debug = page.state.oracle_debug;
     log("debug", "oracle", "info", { debug });
-    dialog2({
+    dialog({
       id: "oracle_debug",
       title: "oracle",
       body: html.node`
@@ -43849,7 +43849,7 @@
   function manage_oracle_data() {
     const oracle = JSON.parse(localStorage.getItem("bleh_oracle_cache")) || {};
     console.info("oracle data", oracle);
-    dialog2({
+    dialog({
       id: "oracle",
       title: tl2(trans.manage_data),
       body: html.node`
@@ -43979,7 +43979,7 @@
     } else {
       template = "2-incorrect-album-listing.yml";
     }
-    dialog2({
+    dialog({
       id: "oracle_correction",
       title: tl2(trans.suggest_correction),
       body: html.node`
@@ -47477,7 +47477,7 @@
     allow_alignment = false
   } = {}) {
     if (!line_breaks) allow_alignment = false;
-    dialog2({
+    dialog({
       id: "markdown",
       title: tl2(trans.preview),
       body: html.node`
@@ -47526,7 +47526,7 @@
     const hostname = link.hostname;
     const path = link.pathname + link.search + link.hash;
     let trust_site;
-    dialog2({
+    dialog({
       id: "external_url",
       type: "leaving_site",
       body: html.node`
@@ -47687,7 +47687,7 @@
             return new Promise((resolve2) => {
               let link;
               let alt;
-              dialog2({
+              dialog({
                 id: "link",
                 title: tl2(trans.create_link),
                 body: html.node`
@@ -47769,7 +47769,7 @@
             return new Promise((resolve2) => {
               let link;
               let alt;
-              dialog2({
+              dialog({
                 id: "link",
                 title: tl2(trans.attach_image),
                 body: html.node`
@@ -48386,7 +48386,7 @@
     });
   }
   function prompt_for_update() {
-    dialog2({
+    dialog({
       id: "bleh_update",
       title: tl2(trans.update_to_version).replace(
         "{v}",
@@ -48418,7 +48418,7 @@
   }
   function start_update2() {
     open(`https://github.com/katelyynn/bleh/raw/refs/heads/uwu/fm/bleh.user.js?${Math.random()}`);
-    dialog2({
+    dialog({
       id: "bleh_update",
       title: tl2(trans.update_to_version).replace(
         "{v}",
@@ -48439,7 +48439,7 @@
     });
   }
   function finish_update() {
-    dialog2({
+    dialog({
       id: "bleh_wait",
       title: tl2(trans.update_to_version).replace(
         "{v}",
@@ -48688,6 +48688,8 @@
     let sat_bg2;
     let adaptive_tip;
     let bubbles;
+    let theme_day2;
+    let theme_night2;
     function render_tip() {
       adaptive_tip.setAttribute("aria-hidden", !settings.theme_schedule);
       render(adaptive_tip, html`
@@ -48701,7 +48703,7 @@
           title: tl2(trans.themes.name),
           body: html.node`
                         <div class="setting-group">
-                            ${theme_day = setting({
+                            ${theme_day2 = setting({
             id: "theme_day",
             list: [
               {
@@ -48731,7 +48733,7 @@
               match2();
             }
           })}
-                            ${theme_night = setting({
+                            ${theme_night2 = setting({
             id: "theme_night",
             list: [
               {
@@ -50482,7 +50484,7 @@
                             <p>${tl2(trans.profile_and_badges, { c: badge_count.toString() })}</p>
                             ${badge_count > 0 ? html.node`
                                 <button class="see-more" onclick=${() => {
-      dialog2({
+      dialog({
         id: "badges",
         title: auth.name,
         body: html.node`
@@ -51437,7 +51439,7 @@
                         </div>
                         <div class="toggle-wrap">
                             <button class="btn see-more" onclick=${() => {
-        dialog2({
+        dialog({
           id: "quick_switcher_keybinds",
           title: tl2(trans.quick_switcher),
           body: html.node`
@@ -51714,7 +51716,7 @@
     } else if (page_id == "performance") {
       register_skip_to([]);
       if (settings.hu_tao != "develop") {
-        dialog2({
+        dialog({
           id: "development_only",
           body: html.node`
                     <div class="modal-vertical-inner error-inner">
@@ -51816,7 +51818,7 @@
           if (settings.hu_tao == "develop") {
             change_settings_page("sku");
           } else {
-            dialog2({
+            dialog({
               id: "hu_tao",
               title: tl2(trans.development),
               body: html.node`
@@ -52605,7 +52607,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
   }
   function edit_profile_note(user) {
     let profile_notes = JSON.parse(localStorage.getItem("bleh_profile_notes")) || {};
-    let modal = dialog2({
+    let modal = dialog({
       id: "edit_profile_note",
       title: tl2(trans.edit_profile_note),
       body: html.node`
@@ -52672,7 +52674,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
   }
   function import_settings28() {
     let text4;
-    const modal = dialog2({
+    const modal = dialog({
       id: "import_settings",
       title: tl2(trans.import_settings),
       body: html.node`
@@ -52696,7 +52698,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
             id: "import_settings"
           });
         } catch (e) {
-          dialog2({
+          dialog({
             id: "import_failed",
             title: tl2(trans.import_failed),
             body: html.node`
@@ -52723,7 +52725,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     share(JSON.stringify(compile_settings()));
   }
   function reset_settings() {
-    dialog2({
+    dialog({
       id: "reset_settings",
       title: tl2(trans.reset_settings),
       body: html.node`
@@ -53242,7 +53244,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     lotus(true);
   };
   unsafeWindow._open_correction_modal = function() {
-    dialog2({
+    dialog({
       id: "corrections",
       title: tl2(trans.music_corrections),
       body: html.node`
@@ -53617,7 +53619,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       title = `${sister} - ${name}`;
       template = "2-album_track.yml";
     }
-    dialog2({
+    dialog({
       id: "lotus_correction",
       title: tl2(trans.suggest_correction),
       body: html.node`
@@ -54907,7 +54909,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           night: tl2(trans.themes[settings.theme_night])
         })}<a
                     onclick=${() => {
-          dialog2({
+          dialog({
             id: "auto_theme",
             title: tl2(trans.themes.name),
             body: html.node`
@@ -56364,7 +56366,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           );
         }
         let accent_preview2;
-        dialog2({
+        dialog({
           id: "profile_accent",
           title: tl2(trans.profile_accent.name),
           body: html.node`
@@ -56540,7 +56542,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           let font_preview;
           let font_buttons = [];
           let font_style_buttons = [];
-          dialog2({
+          dialog({
             id: "profile_font",
             title: tl2(trans.profile_font.name),
             body: html.node`
@@ -56646,7 +56648,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
   function avatar(token = "") {
     if (!token) token = page.token;
     else page.token = token;
-    page.state.avatar_changer = dialog2({
+    page.state.avatar_changer = dialog({
       id: "edit_avatar",
       title: tl2(trans.change_avatar),
       body: html.node`
@@ -56715,7 +56717,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     function crop(file) {
       let crop_image;
       let save;
-      const crop_dialog = dialog2({
+      const crop_dialog = dialog({
         id: "crop",
         title: tl2(trans.crop_avatar),
         body: html.node`
@@ -59505,7 +59507,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
   }
   function dialog_loop() {
     const num = Math.random();
-    dialog2({
+    dialog({
       id: `loop_${num}`,
       title: num,
       body: html.node`
@@ -59687,7 +59689,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
   }
   function handle_error(e = null) {
     document.body.classList.add("florence-loaded");
-    dialog2({
+    dialog({
       id: "error",
       title: "An error has occurred",
       body: html.node`

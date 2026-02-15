@@ -135,6 +135,14 @@
         bottom: 0;
     }
 
+    --only-card-gap: 0;
+
+    @media (max-width: 839px) {
+        display: flex;
+        flex-direction: column;
+        gap: var(--card-gap);
+    }
+
     &.full-w {
         &:before, &:after {
             display: none;

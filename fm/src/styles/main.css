@@ -175,7 +175,15 @@ inferred by it being opened in the first place */
     outline: var(--focus-outline, 2px solid hsl(var(--l3-c))) !important;
 }
 
-/* no clue */
+/* no clue why */
 body > canvas {
+    display: none;
+}
+
+.section-settings-toggle,
+.footer-timezone,
+#language-selector,
+.video-preview-replace,
+.header-new-info-desktop {
     display: none;
 }

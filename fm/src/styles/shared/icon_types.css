@@ -571,10 +571,13 @@
     --mask: var(--icon-16-edit);
 }
 
+.more-item--report,
 [data-type="report"],
 .gallery-image-report {
     --mask: var(--icon-16-report);
 }
+.more-item--delete,
+[data-analytics-action="delete"],
 [data-type="trash"],
 [data-type="delete"],
 .gallery-image-delete button {
@@ -777,4 +780,9 @@
 }
 [data-bleh-page="sku"] {
     --mask: var(--icon-plaster);
+}
+
+.gallery-image-votes,
+.vote-button {
+    --mask: var(--icon-16-arrow-up) !important;
 }

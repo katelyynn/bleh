@@ -9,6 +9,8 @@
 
 @import './video.css';
 
+@import './header.css';
+
 .section-with-control > .buffer-standard,
 .grid-items-section > .buffer-standard,
 .grid-items,

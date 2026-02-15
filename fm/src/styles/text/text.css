@@ -120,6 +120,20 @@
     }
 }
 
+.sub-text.normal.disc-header {
+    --mask: var(--icon-16-album);
+    gap: 12px !important;
+    margin-bottom: unset !important;
+
+    & > .bleh-icon {
+        display: none;
+    }
+
+    .chartlist + & {
+        margin-top: 10px;
+    }
+}
+
 h4 {
     &:not(.source-album-name, .top-header, .factbox-heading) {
         & + p {
@@ -169,4 +183,37 @@ samp {
 pre {
     padding: 4px 8px;
     border-radius: var(--item-med-radius);
+}
+
+.keybind {
+    display: inline-flex;
+    gap: 2px;
+    opacity: 0.9;
+
+    & > kbd {
+        margin: unset !important;
+        font-family:
+            Funnel Sans,
+            Overpass,
+            -apple-system,
+            BlinkMacSystemFont,
+            "Segoe UI",
+            "Noto Sans",
+            Helvetica,
+            Arial,
+            sans-serif,
+            "Apple Color Emoji",
+            "Segoe UI Emoji" !important;
+        font-weight: var(--font-weight) !important;
+        background: unset;
+        padding: unset;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.not-text {
+    cursor: default !important;
 }

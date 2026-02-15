@@ -410,3 +410,13 @@
         }
     }
 }
+
+
+.subtle {
+    --bg: transparent;
+    --bg-hov: hsl(var(--b4), 40%);
+    --bg-atv: hsl(var(--b4), 60%);
+    --shadow: none;
+    --col: hsl(var(--c2), 80%);
+    --mask-colour: currentColor;
+}

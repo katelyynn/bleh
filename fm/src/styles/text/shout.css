@@ -230,6 +230,7 @@
 .shout-more-actions {
     --mask: var(--icon-16-settings);
     width: 24px !important;
+    --font-size: 0;
 }
 
 .shout-action-button {
@@ -452,4 +453,10 @@ the body text becomes bigger by default - this reverts that */
         --col: hsl(var(--c3)) !important;
         --mask-colour: currentColor !important;
     }
+}
+
+
+.shout-more-actions {
+    padding-left: var(--see-more-pad) !important;
+    padding-right: var(--see-more-pad) !important;
 }

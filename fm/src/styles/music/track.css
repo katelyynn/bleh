@@ -877,3 +877,7 @@
         --bg-atv: hsla(var(--h4), 40%) !important;
     }
 }
+
+.chartlist-break {
+    display: none !important;
+}

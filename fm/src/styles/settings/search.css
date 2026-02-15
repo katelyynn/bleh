@@ -1,0 +1,35 @@
+.settings-search {
+    order: -30;
+}
+
+.setting-search-results {
+    display: flex;
+    flex-direction: column;
+    gap: var(--button-list-gap);
+
+    margin: 0 calc(-1 * var(--button-sides));
+}
+.setting-search-result {
+    --bg: transparent;
+    --bg-hov: hsl(var(--b4), 40%);
+    --bg-atv: hsl(var(--b4), 60%);
+    --shadow: none;
+
+    --button-verts: 10px;
+
+    text-align: left;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.setting-search-result-context {
+    color: hsl(var(--c3));
+    font-size: 13px;
+}
+
+.setting-search-results-count {
+    cursor: default;
+    margin-bottom: var(--card-padding);
+}

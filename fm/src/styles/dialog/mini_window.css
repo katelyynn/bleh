@@ -1,0 +1,17 @@
+.window-header {
+    font-size: var(--font-size);
+    line-height: var(--line-height);
+    margin-top: calc(var(--card-gap) - var(--item-list-gap));
+    margin-bottom: var(--card-gap);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    color: hsl(var(--c1));
+    --mask-colour: hsl(var(--c1), 80%);
+
+    .window-title {
+        font-weight: var(--font-weight-medium);
+    }
+}

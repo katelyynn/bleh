@@ -1,0 +1,195 @@
+.campfire {
+    --w: 380px;
+    --gap: 5px;
+    padding: 60px 0;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
+
+    background: hsl(var(--b5)) !important;
+    border-bottom: var(--toolbar-border);
+    border-top-left-radius: var(--card-radius);
+    border-top-right-radius: var(--card-radius);
+
+    position: relative;
+
+    @media (max-width: 900px) {
+        --w: 340px;
+    }
+
+    @media (max-width: 760px) {
+        --w: 260px;
+    }
+
+    @media (max-width: 600px) {
+        --w: 230px;
+    }
+
+    & > .campfire-bg {
+        &.previous {
+            display: none;
+        }
+
+        position: absolute;
+        inset: 0;
+        background-size: cover;
+        background-position: center;
+
+        --mask: radial-gradient(at center, white, transparent);
+        mask-image: var(--mask);
+        -webkit-mask-image: var(--mask);
+
+        filter: blur(6px);
+        opacity: 0.5;
+
+        scale: 1.05;
+    }
+
+    & > .campfire-items {
+        position: relative;
+        height: var(--w);
+        z-index: 10;
+
+        & > .campfire-item {
+            display: flex;
+            flex-direction: column;
+            gap: var(--card-gap);
+
+            position: absolute;
+            top: 0;
+
+            --offset: translateX(calc((var(--index) - var(--selected-index)) * (var(--w) + var(--gap)) - var(--w) / 2));
+
+            left: 50%;
+            transform: var(--offset);
+
+            & > .campfire-item-cover {
+                width: var(--w);
+                height: var(--w);
+                border-radius: var(--item-big-radius);
+                background: var(--avatar-generic-background);
+                box-shadow: var(--menu-shadow);
+                overflow: hidden;
+
+                position: relative;
+
+                & > img {
+                    width: 100%;
+                    --mask-size: var(--cover-size-400);
+                    user-select: none;
+                    -webkit-user-drag: none;
+                }
+
+                &:before {
+                    content: '';
+                    position: absolute;
+                    display: block;
+                    inset: 0;
+                    background-image: var(--cards-overlay-image-subtlest);
+                    border-top-left-radius: inherit;
+                    border-top-right-radius: inherit;
+                    background-repeat: repeat-x;
+                    z-index: 30;
+                    pointer-events: none;
+                }
+
+                &:after {
+                    content: "" !important;
+                    display: block !important;
+                    position: absolute;
+                    inset: 0;
+                    background-image: var(--gloss-image) !important;
+                    background-size: 100% !important;
+                    opacity: var(--gloss);
+                    pointer-events: none;
+                    padding: unset !important;
+                    box-shadow: unset !important;
+                    border-radius: inherit;
+                }
+            }
+
+            &[aria-checked="false"] {
+                opacity: 0.6;
+                filter: blur(4px) brightness(60%);
+                transform: var(--offset) scale(0.8);
+
+                cursor: pointer;
+            }
+
+            transition-property: transform, opacity, filter;
+            transition-duration: 0.5s;
+            transition-timing-function: var(--trans-function);
+        }
+    }
+
+    & > .campfire-intro {
+        z-index: 11;
+    }
+
+    & > .campfire-details {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        text-align: center;
+        z-index: 11;
+
+        & > .campfire-title {
+            font-size: 20px;
+            line-height: 24px;
+            color: hsl(var(--c1));
+            font-weight: var(--font-weight-medium);
+            justify-content: center;
+        }
+        & > .campfire-artist {
+            font-size: 16px;
+            line-height: 20px;
+            font-weight: var(--font-weight-medium);
+            margin-bottom: 10px;
+
+            display: flex;
+            justify-content: center;
+            color: hsl(var(--c3));
+            cursor: default;
+
+            & > a {
+                color: hsla(var(--c2), 80%);
+            }
+
+            & > a + a {
+                margin-left: 4px;
+            }
+        }
+        & > .campfire-plays {
+            color: hsl(var(--c3));
+            cursor: default;
+        }
+    }
+}
+
+.campfire-extended {
+    display: flex;
+    gap: 1px;
+    margin: unset;
+
+    & > .content-panel {
+        display: flex;
+        flex-direction: column;
+        gap: var(--card-padding);
+        padding: var(--card-padding) 0;
+
+        &.content-main {
+            width: var(--cards-main-width);
+        }
+        &.content-side {
+            width: var(--cards-sidebar-width);
+        }
+
+        & > section {
+            padding: 0 var(--card-padding);
+            margin: unset;
+        }
+    }
+}

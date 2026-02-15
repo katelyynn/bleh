@@ -62,7 +62,7 @@ h2.text-18,
     clip: unset;
     border: unset;
     height: unset;
-    margin: 0 0 var(--card-gap) 0 !important;
+    margin: 0 0 var(--card-gap) 0;
     overflow: unset;
     padding: unset;
     position: static;

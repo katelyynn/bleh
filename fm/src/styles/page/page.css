@@ -23,6 +23,10 @@
 
 @import '../settings/page/main.css';
 
+@import '../minis/main.css';
+
+@import '../home/main.css';
+
 .container {
     min-width: var(--cards-width);
     max-width: var(--cards-width);
@@ -530,4 +534,20 @@
 .related-ads,
 .lastfm-ad {
     order: 30 !important;
+}
+
+.bleh--profile-note-panel,
+.about-me-sidebar {
+    order: -9;
+}
+.user-events-sidebar {
+    order: 9;
+}
+.promo-v3 {
+    order: 10;
+}
+
+.labs-cta,
+.external-links-section {
+    display: none !important;
 }
