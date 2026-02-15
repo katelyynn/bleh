@@ -1,0 +1,39 @@
+.grid-items-cover-image-image img {
+    --mask-size: var(--cover-size-200);
+    font: 0/0 auto;
+}
+
+.glacier-library-metadata-avatar,
+.big-artist-list-avatar-desktop,
+.catalogue-overview-similar-artists-item-image,
+.other-obsession-artwork,
+.cover-art,
+.grid-items-cover-image-image,
+.similar-items-sidebar-item-image,
+.artist-similar-artists-sidebar-item-image,
+.column-tracks-item-image {
+    &:after {
+        content: "" !important;
+        display: block !important;
+        position: absolute;
+        inset: 0;
+        background-image: var(--gloss-image) !important;
+        background-size: 100% !important;
+        opacity: var(--gloss);
+        pointer-events: none;
+        padding: unset !important;
+        box-shadow: unset !important;
+        border-radius: inherit;
+    }
+}
+.catalogue-overview-similar-artists-item-image img,
+.artist-similar-artists-sidebar-item-image img,
+.cover-art img,
+.similar-items-sidebar-item-image img,
+:is(.music-bookmarks-artists-item-image, .music-bookmarks-albums-item-image)
+    img {
+    position: static;
+    aspect-ratio: 1 / 1;
+    display: block; /* requires when image fails to load */
+    color: hsl(var(--c3));
+}

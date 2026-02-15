@@ -1,0 +1,265 @@
+.library-search-results,
+.player-bar-playback-options-wrap,
+.dropdown-menu-clickable,
+.auth-dropdown-menu,
+.navlist-hidden-list-wrap .navlist-hidden-list {
+    padding: 4px !important;
+    animation: solarium_menu 0.25s var(--trans-function);
+}
+.dropdown-menu-item-dark,
+.dropdown-menu-clickable-item,
+.navlist-hidden-list a,
+.display-options-clickable-item,
+.library-search-results li,
+.date-range-picker-preset a {
+    --bg: transparent !important;
+    --bg-hov: var(--menu-item-hov) !important;
+    --bg-atv: var(--menu-item-atv) !important;
+    --shadow: none !important;
+    --shadow-hov: none !important;
+    --col: hsl(var(--c2)) !important;
+    --radius: var(--button-radius);
+    position: relative !important;
+    min-width: 170px !important;
+    --show-icon: block;
+
+    --button-height: 30px;
+    --btn-top: 6px;
+    --btn-bottom: 6px;
+
+    --left: var(--button-sides-icon);
+    --right: none;
+
+    --icon-size: 16px;
+
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    &[aria-checked="true"],
+    &[aria-selected="true"],
+    .date-range-picker-preset--selected > &,
+    &.dropdown-menu-clickable-item--selected,
+    &.display-options-clickable-item--selected,
+    &.active {
+        --bg: hsla(var(--h4), 20%) !important;
+        --bg-hov: hsla(var(--h4), 30%) !important;
+        --bg-atv: hsla(var(--h4), 40%) !important;
+        --col: hsl(var(--l3-c)) !important;
+        --mask-colour: color-mix(
+            in hsl,
+            hsl(var(--l3-c)),
+            hsl(var(--l4-c)) 40%
+        );
+        --force-font-weight: var(--font-weight-medium) !important;
+    }
+
+    /* mobile separator */
+    &:after {
+        display: none !important;
+    }
+
+    &.v2 {
+        display: flex;
+        align-items: center;
+        gap: var(--icon-gap);
+
+        &.opens-further {
+            --left: none;
+            --mask: var(--icon-16-arrow-right);
+            --mask-size: 12px;
+            --margin-top: -6px;
+            --right: 10px;
+        }
+    }
+
+    @media (max-width: 980px) {
+        --button-height: 36px;
+        --btn-top: 9px;
+        --btn-bottom: 9px;
+    }
+}
+
+.dropdown-menu-clickable-item[aria-checked="true"],
+.dropdown-menu-clickable-item--selected {
+    --mask: var(--icon-16-check) !important;
+    --mask-size: 14px !important;
+    /*--btn-left: calc(var(--button-sides) + 12px + 4px) !important;*/
+    --margin-top: calc(-1 * (var(--mask-size) / 2)) !important;
+}
+
+.dropdown-menu-clickable-item {
+    .auth-dropdown-item-row {
+        display: flex;
+        justify-content: space-between;
+        gap: var(--card-gap);
+        overflow: hidden;
+
+        .auth-dropdown-item-left {
+            display: flex;
+            gap: var(--icon-gap);
+            max-width: 100px;
+            overflow: hidden;
+        }
+        .auth-dropdown-item-right {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: hsl(var(--c3));
+            min-width: 14px;
+
+            .notification-count-badge {
+                margin: unset !important;
+            }
+        }
+    }
+}
+
+.date-range-picker-preset a {
+    min-width: unset !important;
+}
+.auth-dropdown-menu-wrap {
+    padding-top: unset !important;
+}
+.auth-dropdown-menu:before {
+    display: none !important;
+}
+
+.auth-dropdown-item-secondary {
+    display: none;
+}
+
+li:first-child .more-item--delete {
+    margin-top: unset !important;
+
+    &:after {
+        display: none !important;
+    }
+}
+
+/*     TRACK BUY MENU     */
+/* this hides buylinks from the menu as they are
+very, very, very dated - who looks up a song on ebay? */
+.dropdown-menu-clickable li:has(.buylinks-dropdown-menu) {
+    display: none !important;
+}
+
+
+.track-preview {
+    max-width: 500px !important;
+    display: flex;
+    gap: 10px;
+    position: relative;
+
+    /* bulk edit */
+    order: -10;
+
+    &.user-preview {
+        .image .inner-image {
+            border-radius: var(--avatar-radius);
+        }
+    }
+
+    .image {
+        flex-shrink: 0;
+
+        .inner-image {
+            width: 50px;
+            height: 50px;
+            background: hsl(var(--b5));
+            box-shadow: var(--card-shadow);
+            border-radius: var(--item-med-radius);
+            overflow: hidden;
+
+            img {
+                width: 100%;
+            }
+        }
+    }
+    .info {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        font-size: calc(var(--font-size) - 1px);
+        line-height: calc(var(--line-height) - 1px);
+        position: relative;
+
+        & > .hoshino-marker {
+            position: absolute;
+            top: 2px;
+            left: calc(-1 * (50px + 8px));
+
+            background: hsl(var(--b5));
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 1px;
+            border-radius: var(--item-med-radius);
+
+            --icon: var(--icon-16-hoshino);
+            --icon-colour: hsl(var(--l3-c));
+            --icon-size: 10px;
+        }
+
+        & > p {
+            cursor: default;
+            margin: unset;
+        }
+
+        & > h5,
+        & > p {
+            max-width: 200px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .title {
+            color: hsl(var(--c2));
+            font-weight: var(--font-weight-medium);
+            margin: unset;
+        }
+        .artist {
+            color: hsla(var(--c2), 80%);
+        }
+        .tags {
+            color: hsla(var(--c2), 70%);
+        }
+        .album {
+            color: hsl(var(--c3));
+        }
+        .timestamp {
+            color: hsl(var(--c3));
+        }
+
+        & > .badges {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: start;
+            padding-left: 12px;
+            padding-right: 1px;
+            margin-top: 4px;
+
+            & > .label {
+                position: relative;
+                z-index: 10;
+                margin-left: -12px !important;
+                border-right: 1px solid hsl(var(--b5));
+
+                &.user-status-subscriber {
+                    order: -1;
+                }
+            }
+        }
+    }
+
+    padding: calc(var(--button-sides) - 4px) 0 calc(var(--button-sides) + 2px);
+    border-bottom: 1px solid var(--card-border-base);
+    margin: 2px var(--button-sides) 6px;
+
+    & + .track-preview {
+        display: none;
+    }
+}

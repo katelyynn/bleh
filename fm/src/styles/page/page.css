@@ -2,12 +2,23 @@
 @import './card.css';
 
 @import '../music/music.css';
+@import '../profile/profile.css';
 
 @import './header.css';
 
 @import './banner.css';
 
 @import '../tab/tab.css';
+
+@import './content.css';
+
+@import '../image/avatar.css';
+@import '../image/cover_art.css';
+
+@import '../music/wiki.css';
+
+@import '../text/markdown.css';
+@import '../text/shout.css';
 
 .container {
     min-width: var(--cards-width);

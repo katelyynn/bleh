@@ -42434,14 +42434,14 @@
         html.node`
                 <section class="oracle-notice">
                     <div class="oracle" data-mobile=${page.mobile}>
-                        <p>
+                        <p class="oracle-message">
                             <span class="bleh-icon" />
-                            <span>${{ html: tl2(trans.oracle_notice).replace("oracle", "<i>oracle</i>") }}</span>
+                            <span>${{ html: tl2(trans.oracle_notice).replace("oracle", '<i class="oracle-name">oracle</i>') }}</span>
                         </p>
-                        <button class="see-more left-icon" data-type="debug" onclick=${() => oracle_debug()}>
+                        <button class="see-more left-icon oracle-button" data-type="debug" onclick=${() => oracle_debug()}>
                             ${tl2(trans.debug)}
                         </button>
-                        <a class="see-more" href="https://github.com/katelyynn/bleh/issues/new/choose" target="_blank">
+                        <a class="see-more oracle-button" href="https://github.com/katelyynn/bleh/issues/new/choose" target="_blank">
                             ${tl2(trans.send_feedback)}
                         </a>
                     </div>
@@ -58342,8 +58342,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     });
     panel.insertBefore(filters, panel.firstElementChild);
     page.structure.side.innerHTML = `
-        <section class="view-all-panel">
-            <a class="btn view-all-button add-button" href="${root}events/add?reset=true">
+        <section class="side-actions">
+            <a class="btn side-action add-button" href="${root}events/add?reset=true">
                 ${tl2(trans.create_new_event)}
             </a>
         </section>

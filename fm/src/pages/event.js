@@ -414,8 +414,8 @@ function bleh_events_home() {
     panel.insertBefore(filters, panel.firstElementChild);
 
     page.structure.side.innerHTML = (`
-        <section class="view-all-panel">
-            <a class="btn view-all-button add-button" href="${root}events/add?reset=true">
+        <section class="side-actions">
+            <a class="btn side-action add-button" href="${root}events/add?reset=true">
                 ${tl(trans.create_new_event)}
             </a>
         </section>

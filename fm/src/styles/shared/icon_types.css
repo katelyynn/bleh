@@ -1,6 +1,10 @@
 @import './icons.css';
 @import './links.css';
 
+.dropdown-menu-clickable-item {
+    --mask: url("data:image/svg+xml;base64,PHN2Zz48L3N2Zz4=");
+}
+
 [data-type="banner"] {
     --mask: var(--icon-16-banner);
 }

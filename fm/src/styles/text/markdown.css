@@ -1,0 +1,220 @@
+@import './markdown_field.css';
+
+.about-me-sidebar > .markdown-body,
+.bleh--about-me-preview {
+    width: 360px;
+}
+
+.markdown-body {
+    display: block;
+
+    /* match default last.fm */
+    .text-center,
+    .text-left,
+    .text-right {
+        & + p {
+            margin-top: var(--card-gap) !important;
+        }
+    }
+
+    h1, h2, h3, h4, h5,
+    .text-center,
+    .text-left,
+    .text-right,
+    blockquote,
+    p {
+        margin: var(--card-gap) 0 !important;
+    }
+
+    blockquote {
+        position: relative;
+        padding: 6px 10px 6px calc(10px + 4px + 6px);
+        background: hsl(var(--k4), 40%);
+        border-radius: var(--item-big-radius);
+
+        &:before {
+            content: "";
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            bottom: 10px;
+            width: 3px;
+            border-radius: var(--item-big-radius);
+            background: hsl(var(--l3-c));
+        }
+    }
+
+    del {
+        font-size: 13px;
+        color: hsl(var(--c3));
+        text-decoration: none;
+    }
+
+    .text-center {
+        text-align: center;
+
+        & > p > .markdown-image {
+            margin: 0 auto;
+        }
+    }
+    .text-left {
+        text-align: left;
+    }
+    .text-right {
+        text-align: right;
+
+        & > p > .markdown-image {
+            margin-left: auto;
+        }
+    }
+
+    .markdown-image {
+        position: relative;
+        width: fit-content;
+
+        cursor: pointer;
+
+        &:not(:hover) {
+            & > .image-interactions {
+                opacity: 0;
+            }
+
+            & > img {
+                filter: brightness(100%);
+            }
+        }
+
+        & > img {
+            border-radius: var(--item-big-radius);
+            transition-property: filter;
+            transition-duration: var(--trans);
+            transition-timing-function: var(--trans-function);
+
+            filter: brightness(80%);
+        }
+
+        br + & {
+            margin-top: 5px;
+        }
+    }
+
+    li {
+        list-style-type: disc;
+
+        &::marker {
+            color: hsl(var(--c3));
+        }
+
+        p {
+            display: inline;
+        }
+
+        ul {
+            margin-top: 2px;
+            margin-left: 12px;
+            color: hsl(var(--c2), 80%);
+            --font-size: 13px;
+            font-size: var(--font-size);
+        }
+
+        & + li {
+            margin-top: 6px;
+        }
+
+        p {
+            margin: unset;
+        }
+    }
+
+    hr {
+        display: flex;
+        width: 100%;
+        height: 1px;
+        background: var(--separator);
+        border: none;
+        margin: var(--card-gap) 0;
+    }
+
+    &.version-item-body {
+        li {
+            list-style-type: "+ ";
+
+            & > u {
+                text-decoration: none;
+                color: hsl(var(--l3-c));
+                text-shadow: 0 0 20px hsla(var(--h4), 40%);
+                font-weight: var(--font-weight-medium);
+
+                --hue-over: 17;
+                --sat-over: 1;
+                --lit-over: 1.1;
+
+                code {
+                    font-weight: var(--font-weight);
+                }
+            }
+
+            &:has(> u):not(:last-child) {
+                margin-bottom: 10px;
+            }
+        }
+
+        img {
+            max-width: 560px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+
+    img {
+        width: 100%;
+    }
+
+    h5 {
+        font-size: 16px;
+        line-height: 20px;
+        margin: var(--card-gap) 0 0 0;
+        cursor: default;
+
+        & + p,
+        & + ul {
+            margin-top: var(--item-list-gap);
+        }
+
+        & + p {
+            &:has(+ ul) {
+                margin-bottom: unset;
+
+                & + ul {
+                    margin-top: var(--item-list-gap);
+                }
+            }
+        }
+    }
+
+    :first-child {
+        margin-top: unset !important;
+    }
+    :last-child {
+        margin-bottom: unset !important;
+    }
+}
+
+/* move the sidebar to fit */
+.about-me-header,
+.markdown-body p {
+    overflow-y: hidden;
+    overflow-x: hidden;
+    word-break: break-word;
+}
+
+.local-restriction {
+    padding: 8px;
+    border-radius: var(--item-big-radius);
+    border: 1px solid var(--card-border-base);
+    background: hsl(var(--b4), 20%);
+    color: hsl(var(--c3));
+    max-width: 400px;
+    cursor: default;
+}

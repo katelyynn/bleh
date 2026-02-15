@@ -1,0 +1,33 @@
+.hide-link {
+    text-decoration: var(--force-underline, none) !important;
+
+    & > a:hover {
+        text-decoration: underline !important;
+    }
+}
+
+.metadata-column .cta-link-wrap a,
+.lyrics-snippet-more-link > a {
+    position: relative;
+    padding-right: calc(12px + 4px);
+    --left: none;
+    --right: 0;
+    --mask: var(--icon-16-external);
+    --mask-size: 12px;
+    --margin-top: -7px;
+
+    &:hover,
+    &:focus-visible {
+        text-decoration: underline !important;
+    }
+}
+
+a {
+    color: hsl(var(--l3-c));
+    text-underline-offset: 2px;
+    cursor: pointer;
+
+    [data-bleh--underline_links="true"] & {
+        text-decoration: underline !important;
+    }
+}

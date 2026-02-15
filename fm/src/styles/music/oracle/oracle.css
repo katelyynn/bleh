@@ -1,0 +1,66 @@
+.oracle-notice {
+    margin-bottom: calc(-1 * var(--card-padding));
+    order: -11;
+}
+.oracle {
+    display: flex;
+    gap: var(--card-gap);
+    --icon: var(--icon-16-oracle);
+    --icon-colour: hsl(var(--l3-c));
+
+    & > .oracle-message {
+        display: flex;
+        gap: var(--icon-gap);
+        flex: 1;
+
+        & > .bleh-icon {
+            margin-right: var(--icon-gap);
+            display: inline-flex;
+            flex-shrink: 0;
+        }
+
+        & > .oracle-button {
+            & > .oracle-name {
+                font-style: normal;
+                color: hsl(var(--l3-c));
+                font-weight: var(--font-weight-medium);
+            }
+        }
+
+        cursor: default;
+    }
+
+    & > .oracle-button,
+    & > oracle-message {
+        flex-shrink: 0;
+    }
+
+    background: linear-gradient(180deg, hsl(var(--k4), 25%), transparent);
+    padding: var(--card-padding);
+    margin: calc(-1 * var(--card-padding)) calc(-1 * var(--card-padding)) 0
+        calc(-1 * var(--card-padding));
+    border-top-left-radius: var(--card-radius);
+
+    &[data-mobile="true"] {
+        background: hsl(var(--k4), 20%);
+        padding: var(--card-gap);
+        margin: 0 0 var(--card-gap) 0;
+        border-radius: var(--item-big-radius);
+
+        flex-wrap: wrap;
+
+        & > .oracle-message {
+            flex-basis: 100%;
+        }
+    }
+}
+.oracle-debug {
+    width: 600px;
+
+    & > tbody > tr {
+        & > td:not(:first-child) {
+            display: flex;
+            gap: var(--item-list-gap);
+        }
+    }
+}

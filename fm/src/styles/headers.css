@@ -1,0 +1,116 @@
+h1 {
+    font-weight: var(--font-weight-bold);
+}
+
+.content-top-header {
+    font-size: 24px !important;
+    line-height: 30px !important;
+    font-weight: var(--font-weight-medium) !important;
+    letter-spacing: unset !important;
+    text-transform: unset !important;
+
+    margin-left: var(--card-padding);
+    cursor: default;
+
+    display: none;
+}
+
+h4,
+h3 {
+    font-weight: var(--font-weight-medium);
+    margin: unset;
+    cursor: default;
+}
+
+/*     CARD HEAD     */
+h2:not(
+    .count,
+    .mask-multi-text,
+    .mask-text,
+    .sr-only,
+    .js-gallery-heading,
+    .top-item-modal-header
+),
+h3.text-18,
+h2.text-18,
+.subpage-title:not(
+    .subpage-breadcrumb + .subpage-title,
+    .js-gallery-heading
+),
+.stationlinks-header,
+.library-artist-section-header,
+.date-heading,
+.user-sidebar-header,
+.gallery-image-title,
+.your-progress h4,
+.your-progress h3,
+.user-dashboard-section-header,
+.user-dashboard-module-title,
+.graph-description h3,
+.event-section-date-heading,
+.bookmarks-header-text,
+.obsession-search-result-header,
+.inbox-message-view .inbox-message-subject {
+    color: hsl(var(--c1));
+    font-size: 16px;
+    line-height: 17px; /* matches button on the right */
+    /*margin-bottom: 12px;*/
+    font-weight: var(--font-weight-medium);
+    letter-spacing: unset;
+    text-transform: unset;
+    /* undo hiding text */
+    clip: unset;
+    border: unset;
+    height: unset;
+    margin: 0 0 var(--card-gap) 0 !important;
+    overflow: unset;
+    padding: unset;
+    position: static;
+    width: unset;
+    cursor: default;
+
+    /*font-size: 24px !important;
+    line-height: 30px !important;*/
+
+    &.subtle-header {
+        font-size: var(--font-size);
+        line-height: var(--line-height);
+        color: hsl(var(--c3));
+        margin: 0 0 2px 0 !important;
+        cursor: default;
+    }
+
+    &.library-artist-section-header {
+        margin: unset !important;
+    }
+
+    &.metadata-title {
+        font: inherit;
+    }
+
+    &.music-section-heading {
+        font-size: 20px;
+        line-height: 24px;
+        font-weight: var(--font-weight-medium);
+        margin: 0 !important;
+        text-align: left;
+
+        &:after {
+            display: none;
+        }
+    }
+
+    & > .new-badge {
+        margin-left: 6px;
+    }
+}
+.user-sidebar-header {
+    min-width: 150px;
+}
+.user-dashboard-section-header:after {
+    display: none;
+}
+
+.header-title-secondary > a {
+    color: hsl(var(--l3-c)) !important;
+}

@@ -1,0 +1,16 @@
+.button-container-wrapper,
+.top-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    & + .library-fetch,
+    & + .buffer-standard,
+    & + .alert {
+        margin-top: unset !important;
+    }
+
+    &.spacing {
+        height: 33px;
+    }
+}

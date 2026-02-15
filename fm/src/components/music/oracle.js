@@ -123,14 +123,14 @@ export function oracle_process() {
             html.node`
                 <section class="oracle-notice">
                     <div class="oracle" data-mobile=${page.mobile}>
-                        <p>
+                        <p class="oracle-message">
                             <span class="bleh-icon" />
-                            <span>${{ html: tl(trans.oracle_notice).replace('oracle', '<i>oracle</i>') }}</span>
+                            <span>${{ html: tl(trans.oracle_notice).replace('oracle', '<i class="oracle-name">oracle</i>') }}</span>
                         </p>
-                        <button class="see-more left-icon" data-type="debug" onclick=${() => oracle_debug()}>
+                        <button class="see-more left-icon oracle-button" data-type="debug" onclick=${() => oracle_debug()}>
                             ${tl(trans.debug)}
                         </button>
-                        <a class="see-more" href="https://github.com/katelyynn/bleh/issues/new/choose" target="_blank">
+                        <a class="see-more oracle-button" href="https://github.com/katelyynn/bleh/issues/new/choose" target="_blank">
                             ${tl(trans.send_feedback)}
                         </a>
                     </div>

@@ -1,6 +1,11 @@
 @import './grid.css';
 @import './track.css';
 
+@import './lotus.css';
+@import './smart_music.css';
+
+@import './oracle/oracle.css';
+
 .section-with-control > .buffer-standard,
 .grid-items-section > .buffer-standard,
 .grid-items,

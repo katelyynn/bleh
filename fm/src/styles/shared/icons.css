@@ -260,3 +260,18 @@ span.bleh-icon {
     height: 100%;
     min-height: var(--icon-size);
 }
+
+.icon-combo {
+    display: flex;
+    align-items: center;
+    gap: var(--icon-gap);
+
+    & > .bleh-icon {
+        flex-shrink: 0;
+    }
+
+    &[data-season]:not([data-season="none"]) {
+        color: hsl(var(--l3-c));
+        font-weight: var(--font-weight-medium);
+    }
+}
