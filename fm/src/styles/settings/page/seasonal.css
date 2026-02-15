@@ -49,3 +49,36 @@
         color: hsl(var(--l3-c));
     }
 }
+
+[data-season]:not([data-season="none"]) {
+    --hue-over: var(--hue-seasonal);
+    --sat-over: var(--sat-seasonal);
+    --lit-over: var(--lit-seasonal);
+}
+
+.seasonal-icon > .bleh-icon,
+.bleh-seasonal-icon {
+    --icon: var(--mask, var(--icon-16-season));
+
+    &[data-season="easter"] {
+        --mask: var(--icon-16-egg);
+    }
+    &[data-season="pride"] {
+        --mask: var(--icon-16-pride);
+    }
+    &[data-season="halloween"] {
+        --mask: var(--icon-16-pumpkin);
+    }
+    &[data-season="pre_fall"] {
+        --mask: var(--icon-16-fall);
+    }
+    &[data-season="fall"] {
+        --mask: var(--icon-16-fall);
+    }
+    &[data-season="christmas"] {
+        --mask: var(--icon-16-snow);
+    }
+    &[data-season="new_years"] {
+        --mask: var(--icon-16-new-years);
+    }
+}
