@@ -330,3 +330,7 @@ leading to a gap from their own css */
         pointer-events: none;
     }
 }
+
+hr {
+    display: none;
+}

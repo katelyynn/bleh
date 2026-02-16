@@ -268,3 +268,64 @@
 .content-form .form-row-help-text {
     margin-top: var(--button-list-gap);
 }
+
+
+.btn-file {
+    --mask: var(--icon-16-upload);
+    margin: unset;
+}
+.btn-file-label,
+.btn-sm {
+    min-height: var(--button-height);
+    line-height: var(--line-height);
+    padding: var(--button-verts) var(--button-sides);
+}
+.btn-file-label {
+    color: hsl(var(--c3));
+    cursor: default;
+}
+
+.content-form .form-group,
+.content-form form {
+    margin-top: var(--card-gap);
+}
+.form-header + form {
+    margin-top: unset;
+}
+.form-header + form input + .form-group {
+    margin: unset !important;
+    padding: unset !important;
+}
+
+.content-form .form-horizontal .btn-file-label,
+.content-form .form-horizontal .btn-sm,
+.content-form .form-horizontal button,
+.content-form .form-horizontal input[type="date"],
+.content-form .form-horizontal input[type="email"],
+.content-form .form-horizontal input[type="password"],
+.content-form .form-horizontal input[type="text"],
+.content-form .form-horizontal input[type="url"],
+.content-form .form-horizontal select,
+.content-form .form-horizontal textarea {
+    margin-top: unset !important;
+}
+.control-label {
+    display: flex !important;
+    /*justify-content: right;*/
+    align-items: center;
+}
+
+.content-form .form-horizontal .form-group-controls {
+    min-height: 32px !important;
+}
+
+.content-form .form-horizontal .form-group {
+    padding-top: unset;
+}
+
+.content-form legend {
+    color: hsl(var(--c1));
+    font-size: var(--font-size);
+    line-height: var(--line-height);
+    font-weight: var(--font-weight-medium);
+}

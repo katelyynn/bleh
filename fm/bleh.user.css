@@ -3159,6 +3159,7 @@ li:first-child .more-item--delete {
       & > a {
         display: flex;
         gap: 6px;
+        color: inherit;
       }
       &.oracle-loading {
         height: 18px;
@@ -4342,6 +4343,9 @@ pre {
     opacity: 0.8;
     pointer-events: none;
   }
+}
+hr {
+  display: none;
 }
 
 /* src/styles/text/badge.css */
@@ -12695,49 +12699,6 @@ t {
     }
   }
 }
-.bleh--panel-main,
-.col-main {
-  width: var(--cards-main-width);
-  min-width: var(--cards-main-width);
-}
-.bleh--panel-side,
-.col-sidebar {
-  width: var(--cards-sidebar-width);
-  min-width: var(--cards-sidebar-width);
-}
-.row.force-col-main-primary,
-.page-content:is([data-page-subpage=following], [data-page-subpage=followers], [data-page-subpage=neighbours], [data-page-subpage=obsessions_set], [data-page-subpage=loved], [data-page-subpage=subscription_automatic-edits_tracks], [data-page-subpage=subscription_automatic-edits_albums], [data-page-subpage=obsessions_overview], [data-page-type=charts][data-page-subpage=overview], [data-page-type=inbox], [data-page-type=overview], [data-page-subpage=obsessions_obsession], [data-page-subpage=playlists_playlists], [data-page-subpage=auth], [data-page-type=bleh_setup], .has-error, [data-page-type=releases], [data-page-type=bleh_auth], [data-page-subpage^=event_attendance_]),
-.namespace--music_bookmarks_overview {
-  .content:not(.override) {
-    & > .col-main {
-      width: calc(var(--cards-width) - 2px);
-      display: block;
-      margin-left: calc(-1 * var(--card-padding)) !important;
-      margin-right: calc(-1 * var(--card-padding)) !important;
-      border-bottom-right-radius: var(--card-radius);
-    }
-    & > .col-sidebar {
-      display: none !important;
-    }
-    &:first-child {
-      & > .col-main {
-        border-top-right-radius: var(--card-radius);
-      }
-    }
-  }
-  & > .row.col-main-is-primary > .content {
-    padding: 0 var(--card-padding);
-    .pagination {
-      margin-top: var(--card-gap);
-    }
-  }
-}
-.bookmark-section + section.bookmark-section {
-  margin-top: var(--card-gap) !important;
-}
-.trending-tracks-section-wrapper {
-  display: none;
-}
 .page-content {
   display: flex;
   flex-direction: column;
@@ -12868,6 +12829,49 @@ t {
   width: 100%;
   height: 1px;
   background: var(--separator);
+}
+.bleh--panel-main,
+.col-main {
+  width: var(--cards-main-width);
+  min-width: var(--cards-main-width);
+}
+.bleh--panel-side,
+.col-sidebar {
+  width: var(--cards-sidebar-width);
+  min-width: var(--cards-sidebar-width);
+}
+.row.force-col-main-primary,
+.page-content:is([data-page-subpage=following], [data-page-subpage=followers], [data-page-subpage=neighbours], [data-page-subpage=obsessions_set], [data-page-subpage=loved], [data-page-subpage=subscription_automatic-edits_tracks], [data-page-subpage=subscription_automatic-edits_albums], [data-page-subpage=obsessions_overview], [data-page-type=charts][data-page-subpage=overview], [data-page-type=inbox], [data-page-type=overview], [data-page-subpage=obsessions_obsession], [data-page-subpage=playlists_playlists], [data-page-subpage=auth], [data-page-type=bleh_setup], .has-error, [data-page-type=releases], [data-page-type=bleh_auth], [data-page-subpage^=event_attendance_]),
+.namespace--music_bookmarks_overview {
+  .content:not(.override) {
+    & > .col-main {
+      width: calc(var(--cards-width) - 2px);
+      display: block;
+      margin-left: calc(-1 * var(--card-padding)) !important;
+      margin-right: calc(-1 * var(--card-padding)) !important;
+      border-bottom-right-radius: var(--card-radius);
+    }
+    & > .col-sidebar {
+      display: none !important;
+    }
+    &:first-child {
+      & > .col-main {
+        border-top-right-radius: var(--card-radius);
+      }
+    }
+  }
+  & > .row.col-main-is-primary > .content {
+    padding: 0 var(--card-padding);
+    .pagination {
+      margin-top: var(--card-gap);
+    }
+  }
+}
+.bookmark-section + section.bookmark-section {
+  margin-top: var(--card-gap) !important;
+}
+.trending-tracks-section-wrapper {
+  display: none;
 }
 
 /* src/styles/navigation/logo.css */
@@ -18031,6 +18035,59 @@ span.bleh-icon {
 .content-form .form-row-help-text {
   margin-top: var(--button-list-gap);
 }
+.btn-file {
+  --mask: var(--icon-16-upload);
+  margin: unset;
+}
+.btn-file-label,
+.btn-sm {
+  min-height: var(--button-height);
+  line-height: var(--line-height);
+  padding: var(--button-verts) var(--button-sides);
+}
+.btn-file-label {
+  color: hsl(var(--c3));
+  cursor: default;
+}
+.content-form .form-group,
+.content-form form {
+  margin-top: var(--card-gap);
+}
+.form-header + form {
+  margin-top: unset;
+}
+.form-header + form input + .form-group {
+  margin: unset !important;
+  padding: unset !important;
+}
+.content-form .form-horizontal .btn-file-label,
+.content-form .form-horizontal .btn-sm,
+.content-form .form-horizontal button,
+.content-form .form-horizontal input[type=date],
+.content-form .form-horizontal input[type=email],
+.content-form .form-horizontal input[type=password],
+.content-form .form-horizontal input[type=text],
+.content-form .form-horizontal input[type=url],
+.content-form .form-horizontal select,
+.content-form .form-horizontal textarea {
+  margin-top: unset !important;
+}
+.control-label {
+  display: flex !important;
+  align-items: center;
+}
+.content-form .form-horizontal .form-group-controls {
+  min-height: 32px !important;
+}
+.content-form .form-horizontal .form-group {
+  padding-top: unset;
+}
+.content-form legend {
+  color: hsl(var(--c1));
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  font-weight: var(--font-weight-medium);
+}
 
 /* src/styles/shared/hateful.css */
 :is(.tag, .big-tags-item-wrap):has([href="/tag/sexual+assault+apologist"], [href="/tag/trash"], [href="/tag/%F0%9F%92%A9"], [href^="/tag/worst+of+"], [href^="/tag/worst+album+of+"], [href="/tag/vile"], [href="/tag/albums+i+will+never+listen+to"], [href="tag/pretentious+cringeshit"], [href="/tag/aoty+my+ass"], [href="/tag/garbage"], [href^="/tag/overrate"], [href^="/tag/turn+it+off"], [href^="/tag/goes+hard+on+mute"], [href^="/tag/i+will+play+this+song+after+killing"]) {
@@ -18763,6 +18820,7 @@ span.bleh-icon {
   letter-spacing: unset;
   text-align: left;
   margin-right: calc(var(--modal-close-size) + 10px) !important;
+  margin-bottom: var(--card-gap);
   & + .modal-inner-content {
     margin: unset;
   }

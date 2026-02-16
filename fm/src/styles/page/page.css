@@ -325,79 +325,6 @@
     }
 }
 
-.bleh--panel-main,
-.col-main {
-    width: var(--cards-main-width);
-    min-width: var(--cards-main-width);
-}
-.bleh--panel-side,
-.col-sidebar {
-    width: var(--cards-sidebar-width);
-    min-width: var(--cards-sidebar-width);
-}
-
-
-/* no need for a sidebar */
-.row.force-col-main-primary,
-.page-content:is(
-    [data-page-subpage="following"],
-    [data-page-subpage="followers"],
-    [data-page-subpage="neighbours"],
-    [data-page-subpage="obsessions_set"],
-    [data-page-subpage="loved"],
-    [data-page-subpage="subscription_automatic-edits_tracks"],
-    [data-page-subpage="subscription_automatic-edits_albums"],
-    [data-page-subpage="obsessions_overview"],
-    [data-page-type="charts"][data-page-subpage="overview"],
-    [data-page-type="inbox"],
-    [data-page-type="overview"],
-    [data-page-subpage="obsessions_obsession"],
-    [data-page-subpage="playlists_playlists"],
-    [data-page-subpage="auth"],
-    [data-page-type="bleh_setup"],
-    .has-error,
-    [data-page-type="releases"],
-    [data-page-type="bleh_auth"],
-    [data-page-subpage^="event_attendance_"]
-),
-.namespace--music_bookmarks_overview {
-    .content:not(.override) {
-        & > .col-main {
-            width: calc(var(--cards-width) - 2px);
-            display: block;
-            margin-left: calc(-1 * var(--card-padding)) !important;
-            margin-right: calc(-1 * var(--card-padding)) !important;
-            border-bottom-right-radius: var(--card-radius);
-        }
-        & > .col-sidebar {
-            display: none !important;
-        }
-
-        &:first-child {
-            & > .col-main {
-                border-top-right-radius: var(--card-radius);
-            }
-        }
-    }
-
-    & > .row.col-main-is-primary > .content {
-        padding: 0 var(--card-padding);
-
-        .pagination {
-            margin-top: var(--card-gap);
-        }
-    }
-}
-
-/* required bc of the display: block above */
-.bookmark-section + section.bookmark-section {
-    margin-top: var(--card-gap) !important;
-}
-
-.trending-tracks-section-wrapper {
-    display: none;
-}
-
 
 .page-content {
     display: flex;
@@ -557,4 +484,78 @@
     width: 100%;
     height: 1px;
     background: var(--separator);
+}
+
+
+.bleh--panel-main,
+.col-main {
+    width: var(--cards-main-width);
+    min-width: var(--cards-main-width);
+}
+.bleh--panel-side,
+.col-sidebar {
+    width: var(--cards-sidebar-width);
+    min-width: var(--cards-sidebar-width);
+}
+
+
+/* no need for a sidebar */
+.row.force-col-main-primary,
+.page-content:is(
+    [data-page-subpage="following"],
+    [data-page-subpage="followers"],
+    [data-page-subpage="neighbours"],
+    [data-page-subpage="obsessions_set"],
+    [data-page-subpage="loved"],
+    [data-page-subpage="subscription_automatic-edits_tracks"],
+    [data-page-subpage="subscription_automatic-edits_albums"],
+    [data-page-subpage="obsessions_overview"],
+    [data-page-type="charts"][data-page-subpage="overview"],
+    [data-page-type="inbox"],
+    [data-page-type="overview"],
+    [data-page-subpage="obsessions_obsession"],
+    [data-page-subpage="playlists_playlists"],
+    [data-page-subpage="auth"],
+    [data-page-type="bleh_setup"],
+    .has-error,
+    [data-page-type="releases"],
+    [data-page-type="bleh_auth"],
+    [data-page-subpage^="event_attendance_"]
+),
+.namespace--music_bookmarks_overview {
+    .content:not(.override) {
+        & > .col-main {
+            width: calc(var(--cards-width) - 2px);
+            display: block;
+            margin-left: calc(-1 * var(--card-padding)) !important;
+            margin-right: calc(-1 * var(--card-padding)) !important;
+            border-bottom-right-radius: var(--card-radius);
+        }
+        & > .col-sidebar {
+            display: none !important;
+        }
+
+        &:first-child {
+            & > .col-main {
+                border-top-right-radius: var(--card-radius);
+            }
+        }
+    }
+
+    & > .row.col-main-is-primary > .content {
+        padding: 0 var(--card-padding);
+
+        .pagination {
+            margin-top: var(--card-gap);
+        }
+    }
+}
+
+/* required bc of the display: block above */
+.bookmark-section + section.bookmark-section {
+    margin-top: var(--card-gap) !important;
+}
+
+.trending-tracks-section-wrapper {
+    display: none;
 }
