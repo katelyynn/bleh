@@ -18,7 +18,7 @@
         align-items: center;
         gap: var(--card-padding);
 
-        & > p {
+        & > .footer-credit-text {
             margin: unset;
 
             .b {

@@ -42,7 +42,7 @@ export function bleh_footer() {
             </div>
             <div class="footer-bleh-top">
                 <div class="footer-credit">
-                    <p>
+                    <p class="footer-credit-text">
                         ${{
                             html: tl(trans.made_with_love, {
                                 u: `<a class="b" href="${root}user/${kate}">${kate}</a>`,
@@ -52,7 +52,7 @@ export function bleh_footer() {
                             })
                         }}
                     </p>
-                    <p>
+                    <p class="footer-credit-text">
                         <a onclick=${() => sponsor()}>${{ html: tl(trans.supported_by, { c: sponsoring, s: '<span class="b">', '/s': '</span>' }) }}</a>
                     </p>
                 </div>

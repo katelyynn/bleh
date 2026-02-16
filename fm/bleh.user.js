@@ -58953,7 +58953,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
             </div>
             <div class="footer-bleh-top">
                 <div class="footer-credit">
-                    <p>
+                    <p class="footer-credit-text">
                         ${{
         html: tl2(trans.made_with_love, {
           u: `<a class="b" href="${root}user/${kate}">${kate}</a>`,
@@ -58963,7 +58963,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         })
       }}
                     </p>
-                    <p>
+                    <p class="footer-credit-text">
                         <a onclick=${() => sponsor()}>${{ html: tl2(trans.supported_by, { c: sponsoring, s: '<span class="b">', "/s": "</span>" }) }}</a>
                     </p>
                 </div>
