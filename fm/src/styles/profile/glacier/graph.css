@@ -262,10 +262,10 @@
                 display: none;
             }
 
-            & > .info {
+            & > .listen-item-info {
                 order: -1;
 
-                & > h3 > .colourful {
+                & > .listen-item-name > .colourful {
                     color: hsl(var(--l3-c));
                     text-shadow: 0 0 15px hsl(var(--h4), 80%);
                 }

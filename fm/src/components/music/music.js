@@ -346,9 +346,9 @@ export async function show_your_scrobbles() {
                         <div class="listen-badge star colourful">
                             <div class="bleh-icon" />
                         </div>
-                        <div class="info">
-                            <h3>${shortcut_listens.name}</h3>
-                            <p class="colourful" ref=${(el) => (p = el)}>
+                        <div class="listen-item-info">
+                            <h3 class="listen-item-name">${shortcut_listens.name}</h3>
+                            <p class="colourful listen-item-text" ref=${(el) => (p = el)}>
                                 ${tl(trans.count_plays, { c: listens.toLocaleString(lang) })}
                             </p>
                         </div>
@@ -1200,9 +1200,9 @@ function create_listen_item(
             listen_item,
             html`
                 <img class="view-item-avatar" src=${avi} alt=${name} />
-                <div class="info">
-                    <h3>${name}</h3>
-                    <p class="colourful" ref=${(el) => (p = el)}>
+                <div class="listen-item-info">
+                    <h3 class="listen-item-name">${name}</h3>
+                    <p class="colourful listen-item-text" ref=${(el) => (p = el)}>
                         ${tl(trans.count_plays, { c: listens.toLocaleString(lang) })}
                     </p>
                 </div>
@@ -1239,9 +1239,9 @@ function create_listen_item(
                 <div class="listen-badge star colourful">
                     <div class="bleh-icon" />
                 </div>
-                <div class="info">
-                    <h3>${name}</h3>
-                    <p class="colourful" ref=${(el) => (p = el)}>
+                <div class="listen-item-info">
+                    <h3 class="listen-item-name">${name}</h3>
+                    <p class="colourful listen-item-text" ref=${(el) => (p = el)}>
                         ${tl(trans.count_plays, { c: ' ' })}
                     </p>
                 </div>
@@ -1296,9 +1296,9 @@ function create_listen_item(
                 ${avi[2] ?
                     html.node`<img class="view-item-avatar" src=${avi[2].getAttribute('src')} alt="">`
                 :   ''}
-                <div class="info">
-                    <h3>${tl(trans.following)}</h3>
-                    <p class="colourful" ref=${(el) => (p = el)}>
+                <div class="listen-item-info">
+                    <h3 class="listen-item-name">${tl(trans.following)}</h3>
+                    <p class="colourful listen-item-text" ref=${(el) => (p = el)}>
                         ${tl(trans.others_count).replace('{c}', count)}
                     </p>
                 </div>

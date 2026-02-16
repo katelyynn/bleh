@@ -19,6 +19,10 @@
 @import './about_artist.css';
 @import './lyrics.css';
 
+@import './chart.css';
+
+@import './similar_artists.css';
+
 .section-with-control > .buffer-standard,
 .grid-items-section > .buffer-standard,
 .grid-items,

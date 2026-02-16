@@ -32777,11 +32777,11 @@
                 <div class="span">
                     <img class="view-item-avatar" src=${auth.avatar} alt=${auth.name}>
                     <img class="view-item-avatar" src=${page.avatar} alt=${page.name}>
-                    <div class="info">
-                        <h3>
+                    <div class="listen-item-info">
+                        <h3 class="listen-item-name">
                             ${{ html: tl2(trans.you_share_count_with, { c: `<span class="colourful" data-taste=${taste}>${taste_percentage}</span>` }) }}
                         </h3>
-                        <p>
+                        <p class="listen-item-text">
                             ${taste_artists.length == 1 ? taste_artists[0] : ""}
                             ${taste_artists.length == 2 ? tl2(trans.you_share_count_with.two, { artist1: taste_artists[0], artist2: taste_artists[1] }) : ""}
                             ${taste_artists.length == 3 ? tl2(trans.you_share_count_with.three, { artist1: taste_artists[0], artist2: taste_artists[1], artist3: taste_artists[2] }) : ""}
@@ -44670,9 +44670,9 @@
                         <div class="listen-badge star colourful">
                             <div class="bleh-icon" />
                         </div>
-                        <div class="info">
-                            <h3>${shortcut_listens.name}</h3>
-                            <p class="colourful" ref=${(el) => p = el}>
+                        <div class="listen-item-info">
+                            <h3 class="listen-item-name">${shortcut_listens.name}</h3>
+                            <p class="colourful listen-item-text" ref=${(el) => p = el}>
                                 ${tl2(trans.count_plays, { c: listens.toLocaleString(lang) })}
                             </p>
                         </div>
@@ -45337,9 +45337,9 @@
         listen_item,
         html`
                 <img class="view-item-avatar" src=${avi} alt=${name} />
-                <div class="info">
-                    <h3>${name}</h3>
-                    <p class="colourful" ref=${(el) => p = el}>
+                <div class="listen-item-info">
+                    <h3 class="listen-item-name">${name}</h3>
+                    <p class="colourful listen-item-text" ref=${(el) => p = el}>
                         ${tl2(trans.count_plays, { c: listens.toLocaleString(lang) })}
                     </p>
                 </div>
@@ -45372,9 +45372,9 @@
                 <div class="listen-badge star colourful">
                     <div class="bleh-icon" />
                 </div>
-                <div class="info">
-                    <h3>${name}</h3>
-                    <p class="colourful" ref=${(el) => p = el}>
+                <div class="listen-item-info">
+                    <h3 class="listen-item-name">${name}</h3>
+                    <p class="colourful listen-item-text" ref=${(el) => p = el}>
                         ${tl2(trans.count_plays, { c: " " })}
                     </p>
                 </div>
@@ -45417,9 +45417,9 @@
                 ${avi[0] ? html.node`<img class="view-item-avatar" src=${avi[0].getAttribute("src")} alt="">` : ""}
                 ${avi[1] ? html.node`<img class="view-item-avatar" src=${avi[1].getAttribute("src")} alt="">` : ""}
                 ${avi[2] ? html.node`<img class="view-item-avatar" src=${avi[2].getAttribute("src")} alt="">` : ""}
-                <div class="info">
-                    <h3>${tl2(trans.following)}</h3>
-                    <p class="colourful" ref=${(el) => p = el}>
+                <div class="listen-item-info">
+                    <h3 class="listen-item-name">${tl2(trans.following)}</h3>
+                    <p class="colourful listen-item-text" ref=${(el) => p = el}>
                         ${tl2(trans.others_count).replace("{c}", count)}
                     </p>
                 </div>

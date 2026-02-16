@@ -567,3 +567,15 @@ button.navlist-more {
         padding-top: unset !important;
     }
 }
+
+
+.bleh-settings-navigation {
+    .secondary-nav-item-link {
+        &[data-bleh-page="sku"]:not(
+                .secondary-nav-item-link--active,
+                [data-password="develop"]
+            ) {
+            display: none;
+        }
+    }
+}

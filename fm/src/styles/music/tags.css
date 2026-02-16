@@ -1,3 +1,5 @@
+@import './big_tags.css';
+
 .music-tags {
     grid-template-columns: repeat(2, 627px);
     grid-template-rows: repeat(2, 627px);

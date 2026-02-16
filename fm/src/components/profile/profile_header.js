@@ -228,11 +228,11 @@ export function redesign_profile_header(is_own_profile, is_following) {
                 <div class="span">
                     <img class="view-item-avatar" src=${auth.avatar} alt=${auth.name}>
                     <img class="view-item-avatar" src=${page.avatar} alt=${page.name}>
-                    <div class="info">
-                        <h3>
+                    <div class="listen-item-info">
+                        <h3 class="listen-item-name">
                             ${{html: tl(trans.you_share_count_with, { c: `<span class="colourful" data-taste=${taste}>${taste_percentage}</span>` })}}
                         </h3>
-                        <p>
+                        <p class="listen-item-text">
                             ${taste_artists.length == 1 ? taste_artists[0] : ''}
                             ${taste_artists.length == 2 ? tl(trans.you_share_count_with.two, { artist1: taste_artists[0], artist2: taste_artists[1] }) : ''}
                             ${taste_artists.length == 3 ? tl(trans.you_share_count_with.three, { artist1: taste_artists[0], artist2: taste_artists[1], artist3: taste_artists[2] }) : ''}

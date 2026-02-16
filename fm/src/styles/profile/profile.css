@@ -9,6 +9,9 @@
 @import './featured_item.css';
 @import './status_cafe.css';
 
+@import './obsession.css';
+/* @import './badged.css'; */
+
 .header-title-secondary {
     margin-top: unset !important;
     font-size: var(--font-size) !important;

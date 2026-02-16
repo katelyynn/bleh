@@ -1,6 +1,7 @@
 @import './list.css';
 @import './lineup.css';
 @import './attendance.css';
+@import './poster.css';
 
 .event-summary-with-poster .event-details {
     padding: unset;

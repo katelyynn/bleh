@@ -25,6 +25,8 @@
 @import './shared/user.css';
 @import './shared/user_mini.css';
 @import './shared/loading.css';
+@import './shared/nag_bar.css';
+@import './shared/rain.css';
 
 @import './dialog/main.css';
 

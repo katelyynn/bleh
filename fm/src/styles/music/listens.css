@@ -48,6 +48,10 @@
     min-width: 32px !important;
     position: relative;
 
+    &:hover {
+        --hover-underline: underline hsl(var(--c3));
+    }
+
     &:not([data-listens="-3"]) {
         --bg: transparent;
         --bg-hov: transparent;
@@ -81,14 +85,14 @@
             drop-shadow(-0px -2px 0 hsl(var(--b5)));
     }
 
-    .info {
-        & > h3 {
+    .listen-item-info {
+        & > .listen-item-name {
             font-size: var(--font-size);
             line-height: var(--line-height);
             color: hsl(var(--c3));
             font-weight: var(--font-weight);
         }
-        & > p {
+        & > .listen-item-text {
             font-size: 16px;
             line-height: 20px;
             font-weight: var(--font-weight-medium);
@@ -97,6 +101,8 @@
             transition-property: left;
             transition-duration: var(--trans);
             transition-timing-function: var(--trans-function);
+
+            text-decoration: var(--hover-underline, none);
 
             &:before {
                 animation: spinner 1.2s linear infinite;
@@ -111,7 +117,7 @@
     }
 
     &[data-listens="-1"] {
-        & > .info > p {
+        & > .listen-item-info > .listen-item-text {
             padding-left: calc(12px + 4px);
 
             &:before {
@@ -122,7 +128,7 @@
     }
 
     &[data-listens="-4"] {
-        & > .info > p {
+        & > .listen-item-info > .listen-item-text {
             padding-left: calc(12px + 4px);
 
             &:before {
@@ -154,7 +160,7 @@
         }
     }
 
-    &[data-bleh--scrobble-milestone] > .info > p {
+    &[data-bleh--scrobble-milestone] > .listen-item-info > .listen-item-text {
         color: hsl(var(--l3-c)) !important;
         text-shadow: 0 0 12px hsla(var(--h4), 60%);
     }
