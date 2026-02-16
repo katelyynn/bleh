@@ -55,3 +55,18 @@
 .artist-similar-artists-sidebar-item-image {
     --mask-size: var(--cover-size-100);
 }
+
+
+/* more specific selector to override */
+button.lfmmaf-missing-artwork-button {
+    position: relative;
+    --bg: transparent;
+    --bg-hov: hsl(var(--b6), 20%);
+    --bg-atv: hsl(var(--b6), 40%);
+    --shadow: none;
+    --mask: var(--icon-16-plus);
+
+    & > img {
+        display: none !important;
+    }
+}

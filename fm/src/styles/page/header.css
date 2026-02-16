@@ -619,3 +619,13 @@
     cursor: default;
     font-weight: var(--font-weight-medium);
 }
+
+
+.suggest-side {
+    background: hsl(var(--b5), 40%);
+    border-radius: var(--card-radius);
+
+    & > .cta {
+        margin: unset !important;
+    }
+}

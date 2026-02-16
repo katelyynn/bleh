@@ -54827,8 +54827,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     page.state.trans = 0;
     page.structure.row.removeChild(page.structure.row.firstElementChild);
     page.structure.row.removeChild(page.structure.row.firstElementChild);
-    page.structure.container.removeAttribute("data-beret");
-    page.structure.container.removeAttribute("data-short");
+    page.structure.container.classList.add("sour");
     page.structure.content.classList.add("cards-view");
     let masthead = document.body.querySelector(".masthead");
     masthead.classList.add("in-setup");

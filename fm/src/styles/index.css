@@ -9,6 +9,7 @@
 @import './text/badge.css';
 
 @import './page/page.css';
+@import './page/cards_view.css';
 
 @import './navigation/masthead.css';
 @import './navigation/auth_menu.css';

@@ -47,7 +47,7 @@
     display: flex;
     gap: var(--card-gap);
 }
-.container:not(.has-error) > .row[data-assigned]:not(.row--equal-height-cols) {
+.container:not(.sour) > .row[data-assigned]:not(.row--equal-height-cols) {
     display: flex;
     flex-direction: column;
     gap: unset;
@@ -359,7 +359,7 @@
         }
     }
 
-    &[data-beret="true"]:not([style], .ignore-katsune, .has-error) {
+    &[data-beret="true"]:not([style], .ignore-katsune, .sour) {
         & > .row:not(.row--equal-height-cols) {
             margin-top: unset;
             border-radius: unset;
@@ -530,4 +530,19 @@
 
 .trending-tracks-section-wrapper {
     display: none;
+}
+
+
+@media (max-width: 1360px) {
+    body {
+        --cards-main-width: calc(100vw - ((var(--card-padding)) * 2 + var(--cards-sidebar-width))) !important;
+        --cards-sidebar-width: 400px !important;
+    }
+}
+
+@media (max-width: 980px) {
+    body {
+        --cards-main-width: 100vw !important;
+        --cards-sidebar-width: 100vw !important;
+    }
 }
