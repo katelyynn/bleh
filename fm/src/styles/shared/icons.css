@@ -91,7 +91,7 @@
 .avatar-overlay:before,
 .grid-item:before,
 .primary-selection:not(.no-icon):after,
-:is(.shout-body, .about-me-sidebar, .bleh--about-me-preview, .user-list-about-me) > p a:before,
+.wiki-link:before,
 /*     DROPDOWNS     */
 .dropdown-menu-clickable-item:not(.v2):before,
 .dropdown-menu-list-button::after, .dropdown-menu-clickable-button:not(.link-select, .report-dropdown-button)::after, .dropdown-menu-clickable-button-js-only::after, .display-options-clickable-button:after,

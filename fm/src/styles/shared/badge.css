@@ -188,11 +188,6 @@
         --sat-over: 1;
         --lit-over: 1;
     }
-    &.user-status--bleh-user-ivyshandle {
-        --hue-over: 333;
-        --sat-over: 1;
-        --lit-over: 1.1;
-    }
 }
 
 .user-status--bleh-mask,
