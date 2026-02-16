@@ -30451,7 +30451,7 @@
       if (type != "number" && !skip_most) {
         if (input_box.value == "" && warn_if_empty) {
           error_input2(tl2(trans.this_field_is_required));
-        } else if (input_box.value.length > maxlength) {
+        } else if (maxlength && input_box.value.length > maxlength) {
           error_input2(tl2(trans.keep_within_the_range));
         } else if (warn_if_matches_auth && input_box.value == auth.name) {
           error_input2(tl2(trans.please_dont_clone_yourself));
