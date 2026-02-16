@@ -25,7 +25,7 @@ export function patch_user_list_item(user, index) {
     let avatar = user.querySelector('.user-list-avatar');
     let name = user.querySelector('.user-list-link');
 
-    const badge = patch_avatar(avatar, name.textContent, 'follow');
+    const badge = patch_avatar(avatar, name.textContent.trim(), 'follow');
     style_name_from_badge(name, badge);
 
     let artists = user.querySelectorAll('.user-list-shared-artists a');
