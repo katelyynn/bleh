@@ -242,3 +242,115 @@
         display: none;
     }
 }
+
+
+.listening-report-promos {
+    margin-bottom: var(--card-gap);
+
+    &:last-child {
+        margin: unset;
+    }
+}
+.promo-v3.visible-xs {
+    display: none !important;
+}
+.promo-v3 .listening-report-promo {
+    position: relative;
+    background-image: unset !important;
+    display: flex;
+    flex-direction: column;
+    margin-top: unset;
+}
+.promo-v3 .listening-report-promo-title {
+    min-width: 80px;
+    color: inherit;
+    font-weight: var(--font-weight-medium) !important;
+    order: -1;
+}
+.promo-v3 .listening-report-promo-date {
+    margin-top: unset;
+    padding-right: unset;
+}
+.promo-v3 .listening-report-promo-date:after {
+    display: none;
+}
+
+.listening-report-promo-animation-container {
+    height: 32px;
+    margin-top: -7px;
+    right: 12px;
+
+    display: none;
+}
+
+.listening-report-promo--week {
+    --mask: var(--icon-16-listening-report-weekly) !important;
+}
+.listening-report-promo--month {
+    --mask: var(--icon-16-listening-report-monthly) !important;
+}
+.listening-report-promo--year {
+    --mask: var(--icon-16-listening-report-yearly) !important;
+}
+
+/* removes weird scrollbars */
+.listening-report-secondary-top-item-name {
+    overflow: hidden;
+}
+
+
+[data-bleh--show_your_progress="false"] .your-progress-component {
+    /* while loading, this would get overrided */
+    display: none !important;
+}
+.your-progress-chart {
+    margin-top: -7px;
+}
+.highcharts-root,
+.highcharts-background {
+    fill: transparent !important;
+}
+text:has(> .your-progress-label-position) {
+    font-family: var(--font) !important;
+    font-size: var(--font-size) !important;
+    line-height: var(--line-height) !important;
+    font-weight: var(--font-weight) !important;
+    color: hsl(var(--c2)) !important;
+    fill: hsl(var(--c2)) !important;
+}
+
+.your-progress {
+    .description {
+        color: hsl(var(--c2));
+        margin-top: 12px;
+        line-height: var(--line-height);
+
+        span {
+            font-weight: var(--font-weight-medium);
+        }
+    }
+
+    .highcharts-point {
+        &[fill^="rgb(2"],
+        &[fill="#d92323"] {
+            fill: hsl(var(--l3-c)) !important;
+            stroke: hsl(var(--b5)) !important;
+            width: 7px !important;
+        }
+        &[fill^="rgb(1"],
+        &[fill="#999999"] {
+            fill: hsl(var(--l4-c)) !important;
+            stroke: hsl(var(--b5)) !important;
+            width: 7px !important;
+        }
+    }
+
+    [data-analytics-label="UpsellCTA"] {
+        display: flex;
+        text-decoration: none !important;
+
+        .btn-subscribe {
+            margin-top: var(--card-gap);
+        }
+    }
+}

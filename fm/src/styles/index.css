@@ -22,6 +22,8 @@
 @import './shared/alert.css';
 @import './shared/form.css';
 @import './shared/hateful.css';
+@import './shared/user.css';
+@import './shared/loading.css';
 
 @import './dialog/main.css';
 

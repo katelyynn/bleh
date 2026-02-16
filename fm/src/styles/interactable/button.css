@@ -439,3 +439,20 @@
         hsl(var(--l4-c)) 30%
     );
 }
+
+.danger-subtle,
+.block,
+.danger {
+    --hue-over: var(--hue-neg);
+    --sat-over: var(--sat-neg);
+    --lit-over: var(--lit-neg);
+
+    &:not(.primary, .btn-primary) {
+        --col: hsl(var(--l3-c));
+        --mask-colour: color-mix(
+            in hsl,
+            hsl(var(--l3-c)),
+            hsl(var(--l4-c)) 30%
+        );
+    }
+}

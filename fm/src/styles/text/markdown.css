@@ -254,3 +254,25 @@ t {
         font-weight: var(--font-weight-medium);
     }
 }
+
+.mention {
+    font-weight: var(--font-weight-medium);
+    padding: 0 4px;
+    background-color: hsl(var(--k4), 20%);
+    border-radius: var(--item-small-radius);
+    text-decoration: var(--force-underline, none) !important;
+
+    transition-property: background-color;
+    transition-duration: var(--trans);
+    transition-timing-function: var(--trans-function);
+
+    &:hover,
+    &:focus-visible {
+        transition: none;
+        background-color: hsl(var(--k4), 30%);
+    }
+
+    &:active {
+        background-color: hsl(var(--k4), 40%);
+    }
+}

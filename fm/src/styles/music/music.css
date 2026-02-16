@@ -14,6 +14,10 @@
 @import './gallery.css';
 
 @import './playlink.css';
+@import './tags.css';
+
+@import './about_artist.css';
+@import './lyrics.css';
 
 .section-with-control > .buffer-standard,
 .grid-items-section > .buffer-standard,
@@ -47,6 +51,28 @@
                 display: block;
                 background: var(--separator);
             }
+        }
+    }
+}
+
+.album-and-lyrics-row {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: var(--card-gap);
+    margin-top: var(--card-gap);
+
+    &:before,
+    &:after {
+        display: none;
+    }
+
+    & > section {
+        width: unset;
+    }
+
+    @media (max-width: 980px) {
+        & > .secondary-album-column {
+            display: none;
         }
     }
 }

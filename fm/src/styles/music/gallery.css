@@ -810,3 +810,17 @@ button.bleh--gallery-bookmark-image-btn {
         padding: unset;
     }
 }
+
+.image-upload-remove {
+    --col: hsl(var(--l3-c)) !important;
+    --mask-colour: color-mix(
+        in hsl,
+        hsl(var(--l3-c)),
+        hsl(var(--l4-c)) 40%
+    );
+    --hue: var(--hue-neg);
+    --sat: 1;
+    --lit: 1;
+    position: relative;
+    --mask: var(--icon-16-x);
+}

@@ -288,3 +288,19 @@
 .mini-interactions {
     order: -11;
 }
+
+
+.follow-combo {
+    gap: calc((var(--button-sides) * 2) + 2px) !important;
+}
+
+.header-new-love-button {
+    & > .toggle-button--text {
+        display: none;
+    }
+
+    & > span {
+        font-size: var(--font-size) !important;
+        order: -1;
+    }
+}

@@ -87,3 +87,63 @@
         --shadow: none;
     }
 }
+
+.pixel-guess {
+    display: flex;
+    gap: 10px;
+    margin: var(--card-padding) 0;
+
+    &.center {
+        justify-content: center;
+    }
+
+    --button-sides: var(--card-gap);
+    --font-size: 16px !important;
+    --button-height: 40px;
+
+    width: calc((var(--artwork-padding) * 2) + var(--artwork-size));
+
+    & > .input-container {
+        flex: 1;
+
+        & > input {
+            --padding: 7px var(--card-gap);
+            height: 40px;
+            font-size: 16px !important;
+        }
+    }
+
+    & > button {
+        height: var(--button-height);
+
+        &.guess {
+            --btn-left: var(--button-sides) !important;
+            --btn-right: var(--button-sides) !important;
+            --font-size: 0 !important;
+            --mask-colour: currentColor !important;
+            min-width: var(--button-height) !important;
+            width: var(--button-height) !important;
+            --font-size: 0;
+            --mask-size: 24px;
+            --left: 50% !important;
+            --margin-left: calc(-1 * (var(--mask-size) / 2)) !important;
+        }
+    }
+}
+
+.pixel-home {
+    margin: 70px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--card-gap);
+}
+.pixel-logo {
+    font-family: "Bitcount Grid Single", var(--font);
+    font-size: 54px;
+    line-height: 60px;
+    font-weight: 400;
+    margin: unset;
+    letter-spacing: unset;
+    cursor: default;
+}

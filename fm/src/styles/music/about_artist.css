@@ -1,0 +1,39 @@
+.about-artist-container {
+    overflow: hidden;
+    border-radius: 0 !important;
+
+    .sep {
+        margin: var(--card-gap) 0;
+    }
+    .about-guest-features-panel {
+        margin-top: 2px;
+        display: flex;
+        gap: var(--item-list-gap);
+        flex-wrap: wrap;
+
+        .about-guest-feature {
+            --bg: unset;
+            --bg-hov: unset;
+            --bg-atv: unset;
+            --shadow: unset;
+            --font-size: 16px;
+            --line-height: 20px;
+            --font-weight: var(--font-weight-medium);
+            --padding: 0;
+
+            &:hover {
+                text-decoration: underline !important;
+                --col: hsl(var(--l3-c));
+                --mask-colour: color-mix(
+                    in hsl,
+                    hsl(var(--l3-c)),
+                    hsl(var(--l4-c)) 30%
+                );
+            }
+        }
+    }
+}
+
+.about-artist {
+    margin-top: unset;
+}

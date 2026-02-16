@@ -1,0 +1,27 @@
+.share-top {
+    display: flex;
+    gap: var(--button-list-gap);
+
+    .share-input {
+        width: 300px !important;
+    }
+}
+.share-links {
+    margin-top: var(--card-gap);
+    display: none;
+    gap: var(--button-list-gap);
+
+    .share-link {
+        position: relative;
+        width: 48px;
+        height: 48px;
+        border-radius: var(--item-med-radius);
+        box-shadow: var(--interact-shadow);
+        --mask-size: 24px;
+        --btn-left: var(--button-sides) !important;
+        --left: 50%;
+        --margin-left: -12px;
+        --margin-top: -12px;
+        --font-size: 0;
+    }
+}

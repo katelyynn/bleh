@@ -175,3 +175,8 @@
         }
     }
 }
+
+.font-preview {
+    text-align: center;
+    margin: var(--card-gap) 0 !important;
+}

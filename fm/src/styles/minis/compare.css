@@ -1,0 +1,87 @@
+.compare-header {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding-bottom: var(--card-gap);
+    margin-bottom: var(--card-gap);
+    border-bottom: 1px solid var(--card-border-base);
+    gap: var(--card-gap);
+
+    .alert + & {
+        margin-top: var(--card-gap);
+    }
+
+    .compare-users {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: var(--card-gap);
+        flex: 1;
+
+        & > .bleh-icon {
+            --icon: var(--icon-16-dots);
+            background-image: linear-gradient(
+                90deg,
+                hsl(var(--b4)),
+                hsl(var(--c1)),
+                hsl(var(--b4)),
+                hsl(var(--c1)),
+                hsl(var(--b4))
+            );
+            background-size: 200% 100%;
+            animation: gradient 1.3s linear infinite;
+
+            [data-bleh--theme_type="light"] & {
+                background-image: linear-gradient(
+                    90deg,
+                    hsl(var(--c3)),
+                    hsl(var(--b5)),
+                    hsl(var(--c3)),
+                    hsl(var(--b5)),
+                    hsl(var(--c3))
+                );
+            }
+        }
+    }
+
+    .compare-selection {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: var(--button-list-gap);
+
+        & > .bleh-icon {
+            --icon: var(--icon-16-info);
+            color: hsl(var(--c3));
+            cursor: pointer;
+        }
+    }
+
+    .compare-user {
+        display: flex;
+        align-items: center;
+        gap: var(--item-list-gap);
+        cursor: default;
+
+        & > .avatar {
+            width: var(--button-height);
+            height: var(--button-height);
+            --mask-size: 18px;
+
+            &:after {
+                padding-top: unset;
+                --left: 50%;
+                --margin-left: calc(-1 * (var(--mask-size) / 2));
+                --mask: var(--icon-16-spinner);
+                animation: spinner 1.2s linear infinite;
+            }
+        }
+    }
+}
+
+.compare-body {
+    overflow-y: auto;
+
+    padding: var(--card-padding);
+    margin: calc(-1 * var(--card-padding));
+}

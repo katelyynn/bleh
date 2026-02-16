@@ -441,3 +441,44 @@
         margin: var(--card-gap) 0;
     }
 }
+
+.wiki-truncate-4-lines,
+.wiki-truncate-5-lines,
+.wiki-truncate-6-lines {
+    line-clamp: 6;
+    -webkit-line-clamp: 6;
+}
+
+.wiki-block-inner-2 {
+    line-height: 20px;
+}
+.wiki-block-cta {
+    color: hsl(var(--c2), 80%);
+    cursor: default;
+
+    margin: unset;
+    padding: unset;
+
+    &:before,
+    &:after {
+        display: none;
+    }
+
+    & > .cta-copy {
+        padding: unset;
+
+        &:before,
+        & > .cta-link-wrap {
+            display: none;
+        }
+    }
+}
+
+.wiki-legal {
+    color: hsl(var(--c3));
+    font-size: calc(var(--font-size) - 1px);
+    line-height: var(--line-height);
+    border-top: unset;
+    margin-top: var(--card-gap);
+    padding: unset;
+}

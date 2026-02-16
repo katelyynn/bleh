@@ -184,3 +184,34 @@
 .col-main > .section-controls {
     display: none;
 }
+
+.info-tip {
+    display: inline-flex;
+    --icon-size: 16px;
+    --icon-colour: hsl(var(--c3));
+}
+
+.top-header {
+    display: flex;
+    text-align: center;
+
+    .left,
+    .right {
+        width: 200px;
+    }
+
+    .middle {
+        flex: 1;
+    }
+
+    .right {
+        display: flex;
+        justify-content: end;
+        align-items: start;
+    }
+
+    .view-buttons {
+        width: fit-content;
+        margin: unset !important;
+    }
+}

@@ -37,3 +37,16 @@
         background-color: hsl(var(--c3)) !important;
     }
 }
+
+
+.taste-menu-header {
+    color: hsl(var(--l3-c));
+    font-weight: var(--font-weight-medium);
+    padding: 9px;
+    cursor: default;
+    text-align: center;
+
+    background: linear-gradient(180deg, hsl(var(--h4), 20%), transparent);
+    margin: -4px;
+    border-radius: calc(var(--button-radius) + 2px);
+}

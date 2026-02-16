@@ -40,3 +40,71 @@
         }
     }
 }
+
+.profile-name {
+    text-decoration: none !important;
+    cursor: default !important;
+}
+
+.about-me-sidebar {
+    display: block;
+    z-index: 10;
+    position: relative;
+
+    .sep {
+        margin-top: var(--card-gap);
+    }
+
+    & > .top-container > h2 {
+        display: flex;
+        justify-content: space-between;
+        gap: var(--icon-gap);
+    }
+}
+.about-me-preview {
+    flex: unset !important;
+}
+
+.profile-items {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin: 6px 0;
+
+    & > .profile-item {
+        display: flex;
+        gap: var(--icon-gap);
+        text-align: left;
+
+        & > .bleh-icon {
+            --icon-colour: color-mix(
+                in hsl,
+                hsl(var(--c2)),
+                hsl(var(--c3)) 50%
+            );
+        }
+
+        & > p {
+            margin: unset !important;
+        }
+
+        & > p:not(.subtle) {
+            flex: 1;
+            min-width: 130px;
+        }
+    }
+}
+
+.tab-container {
+    width: 100% !important;
+    justify-content: center;
+    height: fit-content;
+
+    & > li {
+        font: inherit;
+        flex: unset;
+    }
+}
+.tab-container .selector {
+    display: none;
+}

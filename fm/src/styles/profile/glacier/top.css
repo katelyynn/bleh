@@ -138,3 +138,64 @@
         margin-top: var(--card-gap) !important;
     }
 }
+
+.library-top {
+    /* matches user profile buttons */
+    gap: var(--button-list-gap);
+
+    .library-sort {
+        margin: unset;
+        padding: unset;
+    }
+
+    .library-view {
+        margin: unset;
+    }
+
+    .metadata-list {
+        flex: 0;
+    }
+
+    .metadata-item {
+        width: max-content;
+    }
+}
+
+[data-require="components/library-manager"] {
+    .col-sidebar {
+        --force-margin-top: unset;
+    }
+
+    .content-top:has(.secondary-nav) + .page-content& {
+        padding-top: unset !important;
+        margin-top: var(--card-gap);
+    }
+}
+
+.library-sort {
+    display: flex;
+    justify-content: right;
+}
+
+.library-format-container {
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+}
+.library-view-button {
+    width: 32px;
+    height: 32px;
+    position: relative;
+    margin: unset !important;
+    --left: calc((32px - var(--icon-size)) / 2);
+}
+.view-icon,
+#list-view-icon {
+    display: none;
+}
+
+/* user did not scrobble album in date range */
+.library-header + .message {
+    color: hsl(var(--c3));
+    cursor: default;
+}

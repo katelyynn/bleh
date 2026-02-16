@@ -424,3 +424,20 @@
     --sat-over: 1;
     --lit-over: 1;
 }
+
+
+.star-icon {
+    display: flex;
+    align-items: center;
+    --icon-colour: linear-gradient(
+        0deg,
+        hsl(var(--l3-c)),
+        hsl(var(--l2-c))
+    );
+    --icon: var(--icon-16-star-fill);
+    --icon-size: 12px;
+    --hue-over: var(--hue-fav);
+    --sat-over: var(--sat-fav);
+    --lit-over: var(--lit-fav);
+    margin-left: 2px;
+}

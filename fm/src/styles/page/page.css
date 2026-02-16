@@ -27,6 +27,8 @@
 
 @import '../home/main.css';
 
+@import './pagination.css';
+
 .container {
     min-width: var(--cards-width);
     max-width: var(--cards-width);
@@ -503,6 +505,10 @@
 }
 
 
+.labs-cta,
+.external-links-section,
+.charts-nav,
+.legacy-charts,
 .profile-cards-container,
 .profile-cards-container + .content-top-lower,
 .scrobble-stats-info-toggle,
@@ -547,7 +553,8 @@
     order: 10;
 }
 
-.labs-cta,
-.external-links-section {
-    display: none !important;
+.sep:not(.btns) {
+    width: 100%;
+    height: 1px;
+    background: var(--separator);
 }

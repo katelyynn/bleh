@@ -67,3 +67,17 @@
         }
     }
 }
+
+.oracle-hidden {
+    display: none !important;
+}
+
+.oracle-releases {
+    & > .loading-data-container {
+        height: 64px;
+    }
+}
+
+img.empty {
+    opacity: 0 !important;
+}

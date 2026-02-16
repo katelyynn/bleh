@@ -1,3 +1,6 @@
+.image-overlay-playlink-link:not(
+    #track-page-video-playlink,
+    .obsession-video-container .image-overlay-playlink-link),
 .resource-list--release-list-item-playlink,
 .similar-albums-item-playlink,
 .track-similar-tracks-item-playlink,

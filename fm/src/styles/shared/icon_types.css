@@ -66,6 +66,7 @@
 [data-type="layout"] {
     --mask: var(--icon-16-layout-manage);
 }
+.update-check,
 [data-type="update"] {
     --mask: var(--icon-16-update);
 }
@@ -101,6 +102,9 @@
         }
     }
 }
+.modal-button button[type="submit"],
+.form-group button[type="submit"],
+.done,
 [data-type="save"] {
     --mask: var(--icon-16-check);
 }
@@ -119,6 +123,7 @@
 [data-type="reports"] {
     --mask: var(--icon-16-listening-report);
 }
+.edit,
 [data-type="edit"] {
     --mask: var(--icon-16-edit);
 
@@ -258,6 +263,8 @@
 [data-type="add"] {
     --mask: var(--icon-16-plus);
 }
+.obsession-history-play-all,
+.header-new-playlink,
 .play-radio,
 [data-type="play"] {
     --mask: var(--icon-16-play);
@@ -717,9 +724,13 @@
     --mask: var(--icon-16-quick-access);
 }
 
+.shout-more-replies-before,
 [data-type="up"] {
     --mask: var(--icon-16-arrow-up);
 }
+.expand-down,
+.shout-more-replies-after,
+.more-items,
 [data-type="down"] {
     --mask: var(--icon-16-arrow-down);
 }
@@ -787,4 +798,20 @@
 .gallery-image-votes,
 .vote-button {
     --mask: var(--icon-16-arrow-up) !important;
+}
+
+.header-new-bookmark-button {
+    --mask: var(--icon-16-bookmark) !important;
+
+    [data-toggle-button-current-state="bookmarked"] & {
+        --mask: var(--icon-16-bookmark-saved) !important;
+    }
+}
+
+.header-new-love-button {
+    --mask: var(--icon-16-heart) !important;
+
+    [data-toggle-button-current-state="loved"] & {
+        --mask: var(--icon-16-heart-solid) !important;
+    }
 }

@@ -375,3 +375,19 @@
         opacity: 0.22;
     }*/
 }
+
+
+.update-available-banner {
+    padding: var(--item-list-gap);
+    margin: calc(-1 * var(--item-list-gap)) calc(-1 * var(--item-list-gap)) 0;
+    font-weight: var(--font-weight-medium);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--icon-gap);
+
+    & > .update-container {
+        animation: staggered_spinner 3s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+    }
+}

@@ -157,6 +157,9 @@ h4 {
     color: hsl(var(--c3));
     cursor: default;
 }
+.text-light {
+    color: hsl(var(--c3));
+}
 
 h6 {
     margin: unset !important;
@@ -245,4 +248,59 @@ pre {
     .bleh--panel > .setting-group + & {
         margin-top: -10px;
     }
+}
+
+.no-data-message {
+    color: hsl(var(--c3));
+    font-weight: var(--font-weight);
+    cursor: default;
+    width: unset !important;
+    margin-top: unset !important;
+
+    &:not(.no-data-message--album) {
+        padding: unset;
+    }
+
+    /* any icons or whatever */
+    &:before {
+        display: none;
+    }
+
+    /* some have special styling */
+    p {
+        margin-top: var(--card-gap);
+    }
+
+    /* in shoutboxes */
+    .shoutbox & {
+        margin-top: 48px !important;
+        padding-bottom: 24px;
+    }
+
+    /* what even...............
+    on followers/following pages, lastfm returns
+    .no-data-message followed by a blank <p></p>,
+    leading to a gap from their own css */
+    & + p:empty {
+        display: none;
+    }
+
+    .no-data-message-heading {
+        font: inherit;
+        color: inherit;
+    }
+}
+
+.no-data-message-heading {
+    font-size: var(--font-size);
+    line-height: var(--line-height);
+    font-weight: var(--font-weight);
+}
+
+/* what even...............
+on followers/following pages, lastfm returns
+.no-data-message followed by a blank <p></p>,
+leading to a gap from their own css */
+.no-data-message + p:empty {
+    display: none;
 }

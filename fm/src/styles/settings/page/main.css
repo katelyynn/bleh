@@ -1,6 +1,10 @@
+@import './general.css';
 @import './visual.css';
+@import './interface.css';
 @import './playback.css';
 @import './seasonal.css';
+
+@import './profile.css';
 
 .inner-preview {
     background: hsl(var(--b6), 70%);

@@ -1,0 +1,4 @@
+[data-bleh--shout_markdown="false"] .if-markdown-on,
+[data-bleh--shout_markdown="true"] .if-markdown-off {
+    display: none;
+}
