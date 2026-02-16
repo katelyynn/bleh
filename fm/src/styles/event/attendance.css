@@ -1,0 +1,85 @@
+.attendance-control {
+    display: flex;
+    flex-direction: column;
+    gap: var(--card-gap);
+}
+.attendance-btn {
+    position: relative;
+
+    /* weirdly displaying if u have none selected */
+    [data-ajax-form-state=""] &.attendance-btn--turn-off,
+    [data-ajax-form-state="no"] &.attendance-btn--turn-off {
+        display: none !important;
+    }
+}
+
+.attendance-btn--attending {
+    --mask: var(--icon-16-check);
+}
+.attendance-btn--maybe {
+    --mask: var(--icon-16-question);
+}
+
+/*     ATTENDEES     */
+.attendee-you-know-going {
+    display: none;
+}
+
+/*     IN PANEL (NOT DEDICATED PAGE)     */
+.attendee-summary-users {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--card-gap) 6px;
+    margin: unset;
+
+    &:before,
+    &:after {
+        display: none;
+    }
+}
+.attendee-summary-user {
+    margin: unset !important;
+    width: unset;
+
+    --bg: transparent;
+    --bg-hov: transparent;
+    --bg-atv: transparent;
+    --padding: 0;
+    --radius: 0;
+    --shadow: none;
+
+    .attendee-summary-user-link {
+        color: hsl(var(--l3-c));
+        text-decoration: var(--force-underline, none) !important;
+
+        &:before {
+            content: '@';
+            opacity: var(--at-opacity);
+        }
+    }
+
+    .attendee-summary-user-avatar {
+        border-radius: var(--avatar-radius);
+
+        &:after {
+            display: none;
+        }
+    }
+}
+
+.at {
+    opacity: var(--at-opacity);
+}
+
+.attendee-summary-user-inner-wrap {
+    display: flex;
+    align-items: center;
+    font-weight: var(--font-weight-medium);
+    /* 32px is the avatar size */
+    padding-left: calc(32px + 10px);
+
+    --mask-size: var(--cover-size-32);
+}
+.attendee-summary-user-link {
+    position: static !important;
+}

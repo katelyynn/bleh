@@ -1,0 +1,86 @@
+@import './list.css';
+@import './lineup.css';
+@import './attendance.css';
+
+.event-summary-with-poster .event-details {
+    padding: unset;
+    width: unset;
+    flex: 1;
+}
+.event-summary-with-poster {
+    display: flex;
+    flex-direction: column;
+}
+.event-summary-with-poster:before,
+.event-summary-with-poster:after {
+    display: none;
+}
+
+.expanded-image,
+.event-poster-inner-wrap {
+    border-radius: var(--item-big-radius);
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+}
+
+.event-metadata:not(:last-child),
+.event-detail {
+    padding-left: calc(var(--icon-size) + var(--icon-gap));
+    position: relative;
+    font-size: var(--font-size);
+    line-height: var(--line-height);
+}
+.event-metadata:not(:last-child),
+.event-detail {
+    --left: 0;
+    --mask: var(--icon-16-calendar);
+}
+.event-detail[itemprop="location"] {
+    --mask: var(--icon-16-location);
+}
+.event-detail:has(.event-detail-heading-link) {
+    --mask: var(--icon-16-link);
+}
+.event-metadata:not(:last-child) {
+    --mask: var(--icon-16-dot);
+}
+
+/*     EXTERNAL LINK     */
+.external-link {
+    --left: none !important;
+    --right: 0 !important;
+    --mask-size: 12px;
+    --margin-top: -6px;
+    --mask: var(--icon-16-external);
+    padding-right: calc(12px + 4px);
+    --show-icon: block;
+    position: relative;
+
+    &:after {
+        display: none;
+    }
+}
+.event-detail-long-link {
+    overflow: hidden;
+    word-wrap: unset;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    width: fit-content;
+}
+
+.event-metadata + .event-metadata:before,
+.event-detail-heading-link,
+.event-detail-heading-location,
+.event-detail-heading-date {
+    display: none;
+}
+
+.stubhub-section + section {
+    position: relative;
+}
+
+.qa-event-description {
+    margin-bottom: var(--card-gap);
+}

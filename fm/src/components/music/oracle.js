@@ -1955,7 +1955,7 @@ export function manage_oracle_data() {
         const entry = html.node`
             <div class="data-table-entry">
                 <div class="entry-header">
-                    <strong>${artist}</strong>
+                    <strong class="entry-header-text">${artist}</strong>
                     <div class="entry-actions">
                         <button class="btn icon danger-subtle chibi" data-type="delete" onclick=${() => delete_artist()}>${tl(trans.delete)}</button>
                     </div>
@@ -1980,7 +1980,7 @@ export function manage_oracle_data() {
         const entry = html.node`
             <div class="data-table-entry">
                 <div class="entry-header">
-                    <strong>${item}</strong>
+                    <strong class="entry-header-text">${item}</strong>
                     <div class="entry-actions">
                         <button class="btn icon danger-subtle chibi" data-type="delete" onclick=${() => delete_item()}>${tl(trans.delete)}</button>
                     </div>
@@ -2011,26 +2011,18 @@ export function manage_oracle_data() {
                             ${type}
                         </strong>
                         <div class="entry-subdata">
-                            ${
-                                data.date ?
-                                    html.node`
+                            ${data.date ? html.node`
                                 <div class="entry-data-row">
-                                    <strong>fetched:</strong>
-                                    <p>${DateTime.fromMillis(data.date).toRelative()}</p>
+                                    <strong class="entry-data-head">fetched:</strong>
+                                    <p class="entry-data-text">${DateTime.fromMillis(data.date).toRelative()}</p>
                                 </div>
-                            `
-                                :   ''
-                            }
-                            ${
-                                data.expire ?
-                                    html.node`
+                            ` : ''}
+                            ${data.expire ? html.node`
                                 <div class="entry-data-row">
-                                    <strong>expires:</strong>
-                                    <p>${DateTime.fromMillis(data.expire).toRelative()}</p>
+                                    <strong class="entry-data-head">expires:</strong>
+                                    <p class="entry-data-text">${DateTime.fromMillis(data.expire).toRelative()}</p>
                                 </div>
-                            `
-                                :   ''
-                            }
+                            ` : ''}
                         </div>
                         <div class="entry-actions">
                             <button class="btn icon danger-subtle chibi" data-type="delete" onclick=${() => delete_item()}>${tl(trans.delete)}</button>

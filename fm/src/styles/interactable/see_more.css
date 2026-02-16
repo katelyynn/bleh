@@ -264,3 +264,11 @@ a.inline-add-icon {
     font-size: 13px;
     opacity: 0.7;
 }
+
+.blend-text {
+    cursor: default;
+    color: hsl(var(--c3), 60%);
+}
+.mark-incorrect:not(:hover, :active) {
+    opacity: 0.8;
+}

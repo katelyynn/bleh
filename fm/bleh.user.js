@@ -43866,7 +43866,7 @@
       const entry = html.node`
             <div class="data-table-entry">
                 <div class="entry-header">
-                    <strong>${artist}</strong>
+                    <strong class="entry-header-text">${artist}</strong>
                     <div class="entry-actions">
                         <button class="btn icon danger-subtle chibi" data-type="delete" onclick=${() => delete_artist()}>${tl2(trans.delete)}</button>
                     </div>
@@ -43888,7 +43888,7 @@
       const entry = html.node`
             <div class="data-table-entry">
                 <div class="entry-header">
-                    <strong>${item}</strong>
+                    <strong class="entry-header-text">${item}</strong>
                     <div class="entry-actions">
                         <button class="btn icon danger-subtle chibi" data-type="delete" onclick=${() => delete_item()}>${tl2(trans.delete)}</button>
                     </div>
@@ -43918,14 +43918,14 @@
                         <div class="entry-subdata">
                             ${data2.date ? html.node`
                                 <div class="entry-data-row">
-                                    <strong>fetched:</strong>
-                                    <p>${DateTime.fromMillis(data2.date).toRelative()}</p>
+                                    <strong class="entry-data-head">fetched:</strong>
+                                    <p class="entry-data-text">${DateTime.fromMillis(data2.date).toRelative()}</p>
                                 </div>
                             ` : ""}
                             ${data2.expire ? html.node`
                                 <div class="entry-data-row">
-                                    <strong>expires:</strong>
-                                    <p>${DateTime.fromMillis(data2.expire).toRelative()}</p>
+                                    <strong class="entry-data-head">expires:</strong>
+                                    <p class="entry-data-text">${DateTime.fromMillis(data2.expire).toRelative()}</p>
                                 </div>
                             ` : ""}
                         </div>
