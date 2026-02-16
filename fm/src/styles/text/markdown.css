@@ -1,5 +1,3 @@
-@import './markdown_field.css';
-
 .about-me-sidebar > .markdown-body,
 .bleh--about-me-preview {
     width: 360px;
@@ -274,5 +272,28 @@ t {
 
     &:active {
         background-color: hsl(var(--k4), 40%);
+    }
+}
+
+.markdown-body {
+    h5 {
+        margin: unset;
+        color: hsl(var(--c1));
+        font-weight: var(--font-weight-medium);
+    }
+    h4 {
+        font-size: 16px;
+        line-height: 20px;
+        color: hsl(var(--c1));
+    }
+    h3 {
+        font-size: 24px;
+        line-height: 28px;
+        color: hsl(var(--c1));
+        cursor: default;
+    }
+
+    img {
+        max-width: 100%;
     }
 }

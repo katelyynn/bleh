@@ -482,3 +482,49 @@
     margin-top: var(--card-gap);
     padding: unset;
 }
+
+.presets {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: var(--item-list-gap);
+
+    .preset {
+        display: flex;
+        justify-content: center;
+        padding: 12px;
+        box-shadow: 0 0 0 1px var(--card-border-base) inset;
+        border-radius: var(--item-med-radius);
+        font-size: 20px;
+        font-weight: var(--font-weight-medium);
+
+        cursor: pointer;
+        user-select: none;
+        transition-property: background-color;
+        transition-duration: var(--trans);
+        transition-timing-function: var(--trans-function);
+
+        &:hover {
+            background-color: hsla(var(--b4), 20%);
+            transition: none;
+        }
+    }
+}
+
+.wiki-standards {
+    margin-top: var(--card-gap);
+}
+
+.generic-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    li {
+        list-style-type: disc;
+        margin-left: 13px;
+
+        &::marker {
+            color: hsl(var(--c3));
+        }
+    }
+}

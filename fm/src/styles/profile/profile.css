@@ -108,3 +108,14 @@
 .tab-container .selector {
     display: none;
 }
+
+.header-avatar-add {
+    width: 100%;
+    padding: unset;
+    border-radius: unset;
+    --mask: var(--icon-16-plus);
+
+    & > .header-avatar-add-label {
+        display: none;
+    }
+}

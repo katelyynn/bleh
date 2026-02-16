@@ -304,3 +304,29 @@ leading to a gap from their own css */
 .no-data-message + p:empty {
     display: none;
 }
+
+
+.dual-tip {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--card-gap);
+}
+
+.tip {
+    color: hsl(var(--c3));
+    font-size: 13px;
+    width: fit-content;
+    cursor: default;
+
+    &[data-exceeded="true"] {
+        color: hsl(var(--l3-c)) !important;
+        --hue-over: var(--hue-neg);
+        --sat-over: 1;
+        --lit-over: 1;
+    }
+
+    &[disabled="true"] {
+        opacity: 0.8;
+        pointer-events: none;
+    }
+}

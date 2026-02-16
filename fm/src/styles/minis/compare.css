@@ -85,3 +85,50 @@
     padding: var(--card-padding);
     margin: calc(-1 * var(--card-padding));
 }
+
+.compare-users.for-plot {
+    --plot-user-pad: 0;
+    margin: calc(-1 * var(--plot-user-pad));
+}
+.compare-user-btn {
+    --bg: transparent;
+    --bg-hov: transparent;
+    --bg-atv: transparent;
+    --shadow: none;
+    --padding: var(--plot-user-pad);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--icon-gap);
+
+    min-width: 30px !important;
+    min-height: 30px !important;
+
+    & > .compare-user {
+        cursor: pointer;
+        background: hsl(var(--b5));
+    }
+
+    & > .bleh-icon {
+        --icon: var(--mask);
+        transform-origin: left;
+
+        transition-property: margin-left, opacity;
+        transition-duration: 0.2s;
+        transition-timing-function: var(--trans-function);
+    }
+
+    &:not(.add-user) {
+        & > .bleh-icon {
+            --icon-size: 14px;
+        }
+
+        &:not(:hover) {
+            & > .bleh-icon {
+                opacity: 0;
+                margin-left: calc(-1 * (var(--icon-size) + var(--icon-gap)));
+            }
+        }
+    }
+}

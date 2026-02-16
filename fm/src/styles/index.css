@@ -23,6 +23,7 @@
 @import './shared/form.css';
 @import './shared/hateful.css';
 @import './shared/user.css';
+@import './shared/user_mini.css';
 @import './shared/loading.css';
 
 @import './dialog/main.css';
@@ -30,3 +31,5 @@
 @import './seasonal/snow.css';
 
 @import './dev.css';
+
+@import './text/markdown_field.css';
