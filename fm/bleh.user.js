@@ -47631,15 +47631,16 @@
       focus: autofocus
     });
     let overlay;
-    const editor = textarea.editor();
+    const md_editor = textarea.editor();
     let is_bold_selected;
-    function on_selection(editor2, val, has_selection = true) {
+    function on_selection(editor, val, has_selection = true) {
+      overlay.scrollTop = md_editor.scrollTop;
       let sel_start;
       let sel_end;
       let selected = "";
       if (has_selection) {
-        sel_start = editor2.selectionStart;
-        sel_end = editor2.selectionEnd;
+        sel_start = editor.selectionStart;
+        sel_end = editor.selectionEnd;
         selected = val.slice(sel_start, sel_end);
       }
       Object.values(action_lookup).forEach((item) => {
@@ -47877,8 +47878,8 @@
         if (item.hide) return html.node``;
         const button2 = html.node`
                                 <button class="btn markdown-action" data-type=${item.type} aria-checked="false" type="button" onclick=${() => {
-          const sel_start = editor.selectionStart;
-          const sel_end = editor.selectionEnd;
+          const sel_start = md_editor.selectionStart;
+          const sel_end = md_editor.selectionEnd;
           const val = textarea.value();
           if (item.func) {
             item.func().then((replacement) => {
@@ -47958,8 +47959,8 @@
         </div>
     `;
     render_overlay();
-    editor.addEventListener("scroll", () => {
-      overlay.scrollTop = editor.scrollTop;
+    md_editor.addEventListener("scroll", () => {
+      overlay.scrollTop = md_editor.scrollTop;
     });
     field.value = (val) => {
       if (!val) return textarea.value();

@@ -987,11 +987,13 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
     });
     let overlay;
 
-    const editor = textarea.editor();
+    const md_editor = textarea.editor();
 
     let is_bold_selected;
 
     function on_selection(editor, val, has_selection = true) {
+        overlay.scrollTop = md_editor.scrollTop;
+
         let sel_start;
         let sel_end;
         let selected = '';
@@ -1260,8 +1262,8 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
 
                             const button = html.node`
                                 <button class="btn markdown-action" data-type=${item.type} aria-checked="false" type="button" onclick=${() => {
-                                    const sel_start = editor.selectionStart;
-                                    const sel_end = editor.selectionEnd;
+                                    const sel_start = md_editor.selectionStart;
+                                    const sel_end = md_editor.selectionEnd;
 
                                     const val = textarea.value();
 
@@ -1365,8 +1367,8 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
 
     render_overlay();
 
-    editor.addEventListener('scroll', () => {
-        overlay.scrollTop = editor.scrollTop;
+    md_editor.addEventListener('scroll', () => {
+        overlay.scrollTop = md_editor.scrollTop;
     });
 
     field.value = (val) => {
