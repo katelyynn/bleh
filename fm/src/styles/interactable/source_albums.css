@@ -24,6 +24,10 @@
 
     overflow: hidden;
 
+    &:hover {
+        --hover-underline: underline hsl(var(--c3));
+    }
+
     &:not(.featured-item) {
         min-width: 430px !important;
     }
@@ -83,6 +87,7 @@
             font-weight: var(--font-weight-medium) !important;
             margin: unset;
             -webkit-line-clamp: 1;
+            text-decoration: var(--hover-underline, none) !important;
 
             & > a {
                 display: flex;
@@ -114,6 +119,7 @@
             }
         }
         .source-album-stats {
+            color: hsl(var(--c3));
             font-size: 13px;
             font-weight: var(--font-weight);
             margin: unset;

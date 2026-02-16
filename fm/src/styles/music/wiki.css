@@ -256,3 +256,188 @@
     font-size: 16px;
     line-height: 22px;
 }
+
+
+.wiki-style-rules,
+.wiki-author,
+.wiki-history-link--desktop,
+.wiki-history-link--mobile,
+.qa-wiki-edit.btn-primary {
+    display: none;
+}
+
+
+.wiki-container,
+.wiki-edit-container {
+    margin-top: unset;
+
+    .alert + & {
+        margin-top: var(--card-gap);
+    }
+}
+.wiki-edit-container {
+    .alert-warning {
+        display: none;
+    }
+}
+.wiki-edit-form textarea {
+    height: 500px;
+    min-height: 100px;
+    max-height: 1600px;
+    font-size: 16px !important;
+    line-height: 24px;
+}
+
+/*     WIKI HISTORY     */
+.wiki-history {
+    margin-top: unset !important;
+}
+
+.wiki-history td,
+.wiki-history th {
+    padding: 6px;
+    box-shadow: unset;
+}
+
+.wiki-history-table {
+    --gap: 10px;
+
+    & > thead {
+        display: none;
+    }
+    & > tbody {
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap);
+    }
+}
+.wiki-history-entry {
+    --bg: transparent;
+    --bg-hov: transparent;
+    --bg-atv: transparent;
+    --shadow: none;
+    --padding: var(--gap) 0 0;
+    border-top: 1px solid var(--separator-base) !important;
+    --radius: 0;
+    transform: none !important;
+
+    &:first-child {
+        --padding: 0;
+        border-top: none !important;
+    }
+
+    .wiki-history-revision {
+        padding: unset;
+        width: 50px;
+
+        flex-shrink: 0;
+    }
+    .wiki-history-action {
+        height: fit-content;
+        width: 130px;
+        margin: unset;
+        color: hsl(var(--c3));
+        --mask-colour: hsl(var(--c3), 80%);
+        --left: 0;
+
+        flex-shrink: 0;
+
+        &.wiki-history-action--edit {
+            --mask: var(--icon-16-edit);
+        }
+        &.wiki-history-action--revert {
+            --mask: var(--icon-16-revert);
+        }
+        &.wiki-history-action--locked {
+            --mask: var(--icon-16-lock);
+        }
+        &.wiki-history-action--unlocked {
+            --mask: var(--icon-16-unlock);
+        }
+    }
+    .wiki-history-summary {
+        flex: 1;
+        position: static;
+        font-weight: var(--font-weight);
+
+        .link-block-cover-link {
+            position: absolute;
+            inset: 0;
+        }
+    }
+    .wiki-history-author {
+        order: 5;
+        padding-left: unset !important;
+        padding-right: calc(32px + 6px) !important;
+
+        width: fit-content;
+        text-align: right;
+
+        flex-shrink: 0;
+
+        .wiki-history-author-avatar {
+            left: unset;
+            right: 0;
+            --mask-size: var(--cover-size-32);
+            border-radius: var(--avatar-radius);
+
+            .avatar-status-dot {
+                width: 14px;
+                height: 14px;
+                --mask-size: 14px;
+                /* remove the heavy bottom shadow */
+                filter: drop-shadow(2px 0px 0 hsl(var(--b5)))
+                    drop-shadow(0px 2px 0 hsl(var(--b5)))
+                    drop-shadow(-2px -0px 0 hsl(var(--b5)))
+                    drop-shadow(-0px -2px 0 hsl(var(--b5)));
+            }
+        }
+    }
+}
+
+.wiki-history-author a {
+    color: hsl(var(--l3-c)) !important;
+    font-weight: var(--font-weight-medium);
+}
+.wiki-history-date {
+    color: hsl(var(--c3));
+    font-size: calc(var(--font-size) - 2px);
+}
+
+.wiki-history-summary:before {
+    display: none !important;
+}
+
+.wiki-history-action {
+    padding-left: calc(var(--icon-size) + var(--icon-gap)) !important;
+}
+
+.wiki-history-revision-number {
+    font-size: var(--font-size);
+    line-height: var(--line-height);
+    color: hsl(var(--c3)) !important;
+}
+
+
+.wiki-syntax-panel {
+    .syntax-listing {
+        display: flex;
+        flex-direction: column;
+        gap: var(--item-list-gap);
+
+        .syntax-listing-item {
+            display: flex;
+            /*justify-content: space-between;*/
+            flex-direction: column;
+
+            .code-side {
+                color: hsl(var(--c3));
+                letter-spacing: 0.4px;
+            }
+        }
+    }
+
+    .sep {
+        margin: var(--card-gap) 0;
+    }
+}

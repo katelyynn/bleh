@@ -217,3 +217,32 @@ pre {
 .not-text {
     cursor: default !important;
 }
+
+.card-tip {
+    margin-top: var(--card-gap);
+    font-size: 13px;
+    color: hsl(var(--c3));
+    cursor: default;
+
+    &[aria-hidden="true"] {
+        display: none;
+    }
+
+    .bleh--panel > &,
+    .setting > .info > & {
+        margin-top: unset;
+    }
+
+    &.copyright {
+        order: 1;
+    }
+
+    .setting-group + & {
+        margin-top: 5px;
+        padding: 0 12px;
+    }
+
+    .bleh--panel > .setting-group + & {
+        margin-top: -10px;
+    }
+}

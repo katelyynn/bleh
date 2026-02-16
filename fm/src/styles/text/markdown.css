@@ -240,3 +240,17 @@
     background-size: 100%;
     image-rendering: pixelated;
 }
+
+
+t {
+    transition-property: color, font-weight;
+    transition-duration: var(--trans);
+    transition-timing-function: var(--trans-function);
+
+    cursor: default;
+
+    &:hover {
+        color: hsl(var(--l3-c));
+        font-weight: var(--font-weight-medium);
+    }
+}

@@ -29850,7 +29850,10 @@
                     <span class="sister">${sister}</span>
                 `
         });
-      if (type) link.setAttribute("data-link-type", type);
+      if (type) {
+        link.classList.add("wiki-link");
+        link.setAttribute("data-link-type", type);
+      }
     });
   }
 

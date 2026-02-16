@@ -1,0 +1,7 @@
+.resource-list--release-list-item-playlink,
+.similar-albums-item-playlink,
+.track-similar-tracks-item-playlink,
+.artist-top-albums-item-playlink,
+.similar-items-sidebar-item-playlink {
+    display: none;
+}

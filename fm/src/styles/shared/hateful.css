@@ -1,0 +1,32 @@
+/*     HATEFUL TAGS     */
+:is(.tag, .big-tags-item-wrap):has(
+    [href="/tag/sexual+assault+apologist"],
+    [href="/tag/trash"],
+    [href="/tag/%F0%9F%92%A9"],
+    [href^="/tag/worst+of+"],
+    [href^="/tag/worst+album+of+"],
+    [href="/tag/vile"],
+    [href="/tag/albums+i+will+never+listen+to"],
+    [href="tag/pretentious+cringeshit"],
+    [href="/tag/aoty+my+ass"],
+    [href="/tag/garbage"],
+    [href^="/tag/overrate"],
+    [href^="/tag/turn+it+off"],
+    [href^="/tag/goes+hard+on+mute"],
+    [href^="/tag/i+will+play+this+song+after+killing"]
+) {
+    display: none;
+}
+
+/*     OLD GENDER TAGS     */
+/* ordered alphabetically, this is configurable but from talking to people these tags are so far from
+being exhaustive lists, and also are like never helpful? theres a female vocalist in every genre it's basically
+trying to list every song ever made by someone identifying as a female, which is impossible */
+[data-bleh--gendered_tags="true"]
+    :is(.tag, .big-tags-item-wrap):has(
+        [href^="/tag/female+vocalist"],
+        [href^="/tag/male+vocalist"],
+        [href^="/tag/nonbinary+vocalist"]
+    ) {
+    display: none;
+}

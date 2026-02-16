@@ -21,6 +21,10 @@ body {
     color-scheme: dark;
     accent-color: hsl(var(--l3-c));
 
+    --underline-offset: 3px;
+
+    text-underline-offset: var(--underline-offset);
+
     &:before {
         content: "";
         display: block;

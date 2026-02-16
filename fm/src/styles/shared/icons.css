@@ -40,7 +40,7 @@
 .to-consider li:before,
 .toggle .dot:before, .icon:before, .icon-r:before,
 .chartlist-now-scrobbling:before,
-[data-link-type]:before,
+.wiki-link:before,
 .read-more:before, .wiki-edit-small:before, .tags-view-all:before, .featured-item-manage:before,
 .out-now-btn:before,
 .weeklychart-change:before,

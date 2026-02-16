@@ -26,3 +26,155 @@
 .form-group:has(> .form-submit) {
     margin-top: var(--override-margin-top, var(--card-gap)) !important;
 }
+
+.lfm-recaptcha {
+    display: flex;
+    justify-content: end;
+    width: unset;
+}
+
+.form-disclaimer {
+    margin-bottom: var(--card-gap);
+}
+
+.content-form {
+    margin: unset;
+}
+
+
+.bleh-modal-body textarea,
+.modal-body textarea {
+    width: 100%;
+    height: 150px;
+    max-height: 150px;
+    resize: none;
+}
+
+.toggle-and-time {
+    display: flex;
+    flex-wrap: wrap;
+
+    @media (max-width: 980px) {
+        flex-direction: column;
+    }
+
+    & > .setting {
+        min-height: var(--button-height);
+        flex: 1;
+
+        & > .check {
+            height: var(--button-height) !important;
+        }
+
+        & > .heading {
+            min-width: 200px;
+        }
+    }
+}
+
+.bleh--panel form {
+    margin: unset !important;
+}
+.bleh--panel > form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--card-gap);
+}
+.settings-footer {
+    display: flex;
+    justify-content: center;
+    gap: var(--button-list-gap);
+
+    &.end {
+        justify-content: end;
+    }
+
+    &.gap {
+        margin-top: var(--card-gap);
+    }
+}
+
+
+.modal-body .modal-buttons {
+    align-items: center;
+
+    & > .modal-button {
+        flex: 1;
+
+        &:has(.js-close) {
+            display: flex;
+            justify-content: start;
+        }
+
+        & + .modal-button {
+            justify-content: end !important;
+        }
+    }
+}
+.modal-body .modal-buttons,
+.modal-footer {
+    display: flex;
+    gap: var(--button-list-gap);
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: var(--card-gap) 0 calc(-1 * var(--card-padding)) 0;
+    padding: calc(var(--card-padding) + 1px) 0 var(--card-padding);
+
+    position: relative;
+
+    &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        display: block;
+        background: var(--separator);
+    }
+
+    /* native modal footer */
+    .modal-button {
+        margin: unset;
+    }
+}
+.modal-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.modal-body .form-group--submit {
+    padding-top: var(--card-gap) !important;
+    border-top: 1px solid var(--card-border-base);
+}
+
+@media (max-width: 980px) {
+    .connector-footer,
+    .settings-footer,
+    .modal-footer,
+    .setup-footer {
+        flex-direction: column;
+        align-items: stretch !important;
+        gap: 10px;
+        text-align: center;
+
+        & > form {
+            display: flex;
+
+            & > button {
+                flex: 1;
+            }
+        }
+    }
+}
+
+
+/* we can't use display: none as 'Last.fm Artwork Upload Helper' uses offsetParent, which doesnt find hidden elements - weird choice */
+.hidden-file-input {
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}

@@ -89,7 +89,7 @@
     --extra-white: 0%;
 
     &:hover {
-        transform: var(--motion, translateY(-2px));
+        transform: var(--motion, translateY(-1px));
     }
 
     &.generic-cover {
@@ -144,6 +144,10 @@
 
     & > .link-block-cover-link {
         z-index: 20;
+    }
+
+    &.link-block--hover {
+        --hover-underline: underline hsl(var(--c3));
     }
 }
 
@@ -353,6 +357,7 @@
     color: hsl(var(--c1));
     font-weight: var(--font-weight-medium);
     margin: 0 0 1px;
+    text-decoration: var(--hover-underline, none);
 
     & > .link-block-target {
         display: flex;

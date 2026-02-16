@@ -11,6 +11,10 @@
 
 @import './header.css';
 
+@import './gallery.css';
+
+@import './playlink.css';
+
 .section-with-control > .buffer-standard,
 .grid-items-section > .buffer-standard,
 .grid-items,
@@ -19,4 +23,30 @@
 
     margin-left: unset !important;
     margin-right: unset !important;
+}
+
+.music-like {
+    display: flex;
+    flex-direction: column;
+    gap: var(--card-padding);
+
+    & > section {
+        margin: unset;
+        position: relative;
+
+        &:first-child {
+            padding-top: calc(var(--card-padding) + 1px);
+
+            &:before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 1px;
+                display: block;
+                background: var(--separator);
+            }
+        }
+    }
 }

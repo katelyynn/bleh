@@ -420,3 +420,22 @@
     --col: hsl(var(--c2), 80%);
     --mask-colour: currentColor;
 }
+
+
+.continue {
+    --btn-right: calc(var(--button-sides-icon) + var(--mask-size) + 4px);
+    --mask: var(--icon-16-arrow-right);
+    --mask-size: 12px;
+    --right: var(--button-sides-icon);
+    --left: none;
+    --margin-top: -6px;
+}
+
+.accented {
+    --col: hsl(var(--l3-c));
+    --mask-colour: color-mix(
+        in hsl,
+        hsl(var(--l3-c)),
+        hsl(var(--l4-c)) 30%
+    );
+}

@@ -253,10 +253,12 @@
 [data-type="minus"] {
     --mask: var(--icon-16-minus);
 }
+.inline-add-icon,
 [data-type="plus"],
 [data-type="add"] {
     --mask: var(--icon-16-plus);
 }
+.play-radio,
 [data-type="play"] {
     --mask: var(--icon-16-play);
 }
