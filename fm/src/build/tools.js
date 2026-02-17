@@ -526,3 +526,21 @@ export function year_from_date(string) {
 
     return match ? match[1] : 0;
 }
+
+
+export async function translate(text, lang = 'en') {
+    const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=${lang}&dt=t&q=${encodeURIComponent(text)}`;
+
+    const res = await fetch(url);
+    const data = await res.json();
+
+    const translated = data[0].map(chunk => chunk[0]).join('');
+    const detected = data[2];
+
+    log(`translated to '${translated}'`, 'translate', 'info', { translated, detected });
+
+    return {
+        translated,
+        detected
+    };
+}

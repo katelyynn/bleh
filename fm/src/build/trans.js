@@ -10320,6 +10320,9 @@ export const trans = {
     },
     found_value_results: {
         en: 'Found {c} result(s)'
+    },
+    translated_from_value: {
+        en: 'Translated from {v}'
     }
 };
 

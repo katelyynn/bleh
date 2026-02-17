@@ -17,7 +17,7 @@ import {
     markdown_field,
     markdown_preview
 } from '@/components/shared/markdown';
-import { copy, lazy, romanise } from '@/build/tools';
+import { copy, lazy, romanise, translate } from '@/build/tools';
 import tippy from 'tippy.js';
 import { keybind } from '@/components/dialog/rabbit';
 import { correct_artist, correct_item_by_artist } from '@/components/music/lotus.js';
@@ -62,10 +62,12 @@ export function patch_shouts() {
                 style_name_from_badge(shout_name, badge);
             }
 
-            const shout_body = shout.querySelector('.shout-body p');
-            const shout_text = shout_body.textContent.trim();
+            const shout_body = shout.querySelector('.shout-body');
+            const shout_p = shout_body.querySelector('p');
+            const shout_text = shout_p.textContent.trim();
+
             if (settings.shout_markdown) {
-                shout_parse_queue.push({ element: shout_body });
+                shout_parse_queue.push({ element: shout_p });
             }
 
             const indicator = html.node`
@@ -141,17 +143,39 @@ export function patch_shouts() {
                 }
             });
 
-            menu.insertBefore(
-                html.node`
+            menu.insertBefore(html.node`
+                <button class="dropdown-menu-clickable-item" data-type="translate" onclick=${async () => {
+                    if (shout.translated) return;
+
+                    translate(shout_text).then(res => {
+                        shout.translated = true;
+
+                        shout_body.setAttribute('data-show-translated', 'true');
+
+                        if (settings.shout_markdown) {
+                            res.translated = markdown(res.translated);
+                        }
+
+                        shout_body.appendChild(html.node`
+                            <div class="translated-notice">
+                                <div class="bleh-icon translated-notice-icon" data-type="translate" style="--icon: var(--mask)" />
+                                <p class="translated-notice-text">${tl(trans.translated_from_value, { v: res.detected })}</p>
+                            </div>
+                            <p class="translated-body">
+                                ${res.translated}
+                            </p>
+                        `);
+                    });
+                }}>
+                    ${tl(trans.translate)}
+                </button>
                 <button class="dropdown-menu-clickable-item" data-type="copy" onclick=${() => {
                     copy(shout_text);
                 }}>
                     ${tl(trans.copy)}
                 </button>
                 <div class="sep" />
-            `,
-                menu.firstElementChild
-            );
+            `, menu.firstElementChild);
 
             let send_button = shout.querySelector('.form-group--submit');
             shout_send(send_button);

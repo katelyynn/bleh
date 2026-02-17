@@ -28162,6 +28162,18 @@
     const match3 = string.match(/\b(\d{4})\b/);
     return match3 ? match3[1] : 0;
   }
+  async function translate(text4, lang2 = "en") {
+    const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=${lang2}&dt=t&q=${encodeURIComponent(text4)}`;
+    const res = await fetch(url);
+    const data2 = await res.json();
+    const translated = data2[0].map((chunk) => chunk[0]).join("");
+    const detected = data2[2];
+    log(`translated to '${translated}'`, "translate", "info", { translated, detected });
+    return {
+      translated,
+      detected
+    };
+  }
 
   // src/build/music.js
   var artist_corrections = {};
@@ -44102,10 +44114,11 @@
             shout.classList.add("staff-shout");
           style_name_from_badge(shout_name, badge);
         }
-        const shout_body = shout.querySelector(".shout-body p");
-        const shout_text = shout_body.textContent.trim();
+        const shout_body = shout.querySelector(".shout-body");
+        const shout_p = shout_body.querySelector("p");
+        const shout_text = shout_p.textContent.trim();
         if (settings.shout_markdown) {
-          shout_parse_queue.push({ element: shout_body });
+          shout_parse_queue.push({ element: shout_p });
         }
         const indicator = html.node`
                 <div class="shout-vote-indicator colourful" aria-checked="false" />
@@ -44147,17 +44160,35 @@
             button2.textContent = tl2(trans.report);
           }
         });
-        menu.insertBefore(
-          html.node`
+        menu.insertBefore(html.node`
+                <button class="dropdown-menu-clickable-item" data-type="translate" onclick=${async () => {
+          if (shout.translated) return;
+          translate(shout_text).then((res) => {
+            shout.translated = true;
+            shout_body.setAttribute("data-show-translated", "true");
+            if (settings.shout_markdown) {
+              res.translated = markdown(res.translated);
+            }
+            shout_body.appendChild(html.node`
+                            <div class="translated-notice">
+                                <div class="bleh-icon translated-notice-icon" data-type="translate" style="--icon: var(--mask)" />
+                                <p class="translated-notice-text">${tl2(trans.translated_from_value, { v: res.detected })}</p>
+                            </div>
+                            <p class="translated-body">
+                                ${res.translated}
+                            </p>
+                        `);
+          });
+        }}>
+                    ${tl2(trans.translate)}
+                </button>
                 <button class="dropdown-menu-clickable-item" data-type="copy" onclick=${() => {
-            copy(shout_text);
-          }}>
+          copy(shout_text);
+        }}>
                     ${tl2(trans.copy)}
                 </button>
                 <div class="sep" />
-            `,
-          menu.firstElementChild
-        );
+            `, menu.firstElementChild);
         let send_button = shout.querySelector(".form-group--submit");
         shout_send(send_button);
       } catch (e) {
@@ -70489,6 +70520,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     found_value_results: {
       en: "Found {c} result(s)"
+    },
+    translated_from_value: {
+      en: "Translated from {v}"
     }
   };
   var translation_fallback = "NO_TRANSLATION_FOUND";

@@ -408,6 +408,7 @@
 [data-type="copy_scrobble"] {
     --mask: var(--icon-16-copy-scrobble);
 }
+[data-type="translate"],
 [data-type="language"] {
     --mask: var(--icon-16-language);
 }

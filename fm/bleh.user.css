@@ -11789,7 +11789,7 @@ t {
 .shout-body {
   font-size: var(--font-size) !important;
   line-height: var(--line-height) !important;
-  p {
+  & > p {
     max-height: 700px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -11798,6 +11798,20 @@ t {
       max-height: 320px;
     }
   }
+  display: flex;
+  flex-direction: column;
+}
+.translated-notice {
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  color: hsl(var(--c3));
+  cursor: default;
+}
+.translated-notice-icon {
+  --icon-size: 14px;
 }
 .shout-user {
   width: fit-content;
@@ -17763,6 +17777,7 @@ span.bleh-icon {
 [data-type=copy_scrobble] {
   --mask: var(--icon-16-copy-scrobble);
 }
+[data-type=translate],
 [data-type=language] {
   --mask: var(--icon-16-language);
 }
