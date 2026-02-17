@@ -5206,9 +5206,7 @@ section,
   --image-offset: 2px;
   line-height: var(--line-height) !important;
   &:not(.chartlist--with-image) {
-    .chartlist-image {
-      display: none;
-    }
+    --chartlist-image-display: none;
   }
   &.chartlist--with-image {
     --image-offset: 44px;
@@ -5426,6 +5424,7 @@ section,
   }
 }
 .chartlist-image {
+  display: var(--chartlist-image-display, unset);
   margin-left: unset !important;
   overflow: unset !important;
   transition-property: transform, filter;
@@ -5802,7 +5801,7 @@ section,
   display: flex;
   flex-direction: column;
   gap: 4px;
-  .chartlist-count-bar {
+  & > .chartlist-count-bar {
     line-height: 18px;
     .avatar {
       position: absolute;

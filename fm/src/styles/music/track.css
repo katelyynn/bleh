@@ -6,9 +6,7 @@
     transform-origin: top;*/
 
     &:not(.chartlist--with-image) {
-        .chartlist-image {
-            display: none;
-        }
+        --chartlist-image-display: none;
     }
 
     &.chartlist--with-image {
@@ -288,6 +286,7 @@
     }
 }
 .chartlist-image {
+    display: var(--chartlist-image-display, unset);
     margin-left: unset !important;
     overflow: unset !important;
 
@@ -744,7 +743,7 @@
     flex-direction: column;
     gap: 4px;
 
-    .chartlist-count-bar {
+    & > .chartlist-count-bar {
         line-height: 18px;
 
         .avatar {
