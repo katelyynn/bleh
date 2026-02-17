@@ -1,0 +1,70 @@
+.support-inner {
+    padding: var(--card-padding) 0;
+
+    & > .avatar {
+        width: 64px;
+        height: 64px;
+
+        & > img {
+            border-radius: var(--avatar-radius);
+        }
+
+        & > .avatar-status-dot {
+            width: 18px;
+            height: 18px;
+        }
+    }
+
+    & > h1 {
+        color: hsl(var(--c1));
+        font-size: 16px;
+        line-height: 20px;
+        font-weight: var(--font-weight-medium);
+        letter-spacing: unset;
+        margin: unset;
+        cursor: default;
+
+        &.colourful {
+            color: hsl(var(--l3-c));
+            --hue-over: 336;
+            --sat-over: 1.4;
+            --lit-over: 1.1;
+        }
+    }
+
+    & > p {
+        max-width: 360px;
+        text-align: center;
+        cursor: default;
+    }
+
+    & > .badges {
+        display: flex;
+        flex-direction: row-reverse;
+        gap: 4px;
+        flex-wrap: wrap;
+    }
+}
+.sponsor {
+    position: relative;
+    --hue-over: 336;
+    --sat-over: 1.4;
+    --lit-over: 1.1;
+
+    &:before,
+    &:after {
+        --mask: var(--icon-16-sponsor);
+    }
+}
+.sponsor-related {
+    --hue-over: 336;
+    --sat-over: 1.4;
+    --lit-over: 1.1;
+}
+
+.modal-vertical-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--item-list-gap);
+}

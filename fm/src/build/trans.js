@@ -3923,6 +3923,9 @@ export const trans = {
         ru: 'Поделиться',
         pl: 'Udostępni'
     },
+    share_via_device: {
+        en: 'Share via device'
+    },
     copy: {
         en: 'Copy',
         de: 'Kopieren',

@@ -137,6 +137,10 @@
     .modal-button {
         margin: unset;
     }
+
+    &.center {
+        justify-content: center !important;
+    }
 }
 .modal-footer {
     display: flex;

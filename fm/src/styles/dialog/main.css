@@ -22,3 +22,7 @@
 
 @import './bulk_edit.css';
 @import './news.css';
+
+@import './external.css';
+@import './sponsor.css';
+@import './error.css';

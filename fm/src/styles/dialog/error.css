@@ -1,0 +1,38 @@
+.error-inner {
+    padding: var(--card-padding) 0;
+
+    .bleh-icon {
+        --icon-size: 48px;
+    }
+
+    h1 {
+        font-size: 16px;
+        line-height: 20px;
+        font-weight: var(--font-weight-medium);
+        letter-spacing: unset;
+        margin: unset !important;
+        cursor: default;
+    }
+
+    p {
+        max-width: 410px;
+        text-align: center;
+        cursor: default;
+
+        &.error-info-header {
+            font-weight: var(--font-weight-medium);
+            color: hsl(var(--c3));
+        }
+    }
+
+    .error-info {
+        --hue-over: var(--hue-neg);
+        --sat-over: 1;
+        --lit-over: 1;
+        max-width: 100%;
+    }
+
+    .error-type {
+        color: hsl(var(--l3-c));
+    }
+}

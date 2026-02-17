@@ -4,6 +4,10 @@
     gap: 4px;
     cursor: pointer;
 
+    &:hover {
+        --hover-underline: underline hsl(var(--c3));
+    }
+
     .status-cafe-top {
         display: flex;
         justify-content: end;
@@ -19,17 +23,23 @@
 
         .status-cafe-time {
             flex-shrink: 0;
+            text-decoration: var(--hover-underline, none);
         }
     }
 
     .status-cafe-content {
-        background-color: hsl(var(--f4), 20%);
+        background: linear-gradient(90deg, hsl(var(--f4), 20%), transparent);
         border-radius: 10px;
+        border-bottom-right-radius: unset;
 
         padding: 6px 10px;
 
         display: flex;
         gap: 8px;
+
+        transition-property: background-color;
+        transition-duration: var(--trans);
+        transition-timing-function: var(--trans-function);
 
         .status-cafe-emoji {
             display: flex;
