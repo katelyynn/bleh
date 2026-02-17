@@ -46886,15 +46886,14 @@
     } else {
       return html.node`
             <div class="status-cafe">
-                <div class="status-cafe-top">
-                    <span class="status-cafe-author">${tl2(trans.current_status)}</span>
-                    <span class="status-cafe-time">...</span>
-                </div>
                 <div class="status-cafe-content is-loading">
                     <span class="status-cafe-emoji">
                         <span class="bleh-icon" />
                     </span>
                     <span class="status-cafe-text">${tl2(trans.status_cafe_too_many_requests)}</span>
+                </div>
+                <div class="status-cafe-top">
+                    <span class="status-cafe-time">...</span>
                 </div>
             </div>
         `;
@@ -46930,13 +46929,12 @@
         }
         external_url_prompt(status_link);
       }}>
-                    <div class="status-cafe-top">
-                        <span class="status-cafe-author">${tl2(trans.current_status)}</span>
-                        <span class="status-cafe-time">${data2.timeAgo}</span>
-                    </div>
                     <div class="status-cafe-content">
                         <span class="status-cafe-emoji">${data2.face}</span>
                         <span class="status-cafe-text">${data2.content}</span>
+                    </div>
+                    <div class="status-cafe-top">
+                        <span class="status-cafe-time">${data2.timeAgo}</span>
                     </div>
                 </div>
             `;
@@ -46948,15 +46946,14 @@
       }
       return html.node`
                 <div class="status-cafe">
-                    <div class="status-cafe-top">
-                        <span class="status-cafe-author">${tl2(trans.current_status)}</span>
-                        <span class="status-cafe-time">...</span>
-                    </div>
                     <div class="status-cafe-content is-loading">
                         <span class="status-cafe-emoji">
                             <span class="bleh-icon" />
                         </span>
                         <span class="status-cafe-text">${error}</span>
+                    </div>
+                    <div class="status-cafe-top">
+                        <span class="status-cafe-time">...</span>
                     </div>
                 </div>
             `;
@@ -47378,10 +47375,6 @@
         const status_cafe_host = body.querySelector(".status-cafe-host");
         render(status_cafe_host, html`
                 <div class="status-cafe">
-                    <div class="status-cafe-top">
-                        <span class="status-cafe-author">${tl2(trans.current_status)}</span>
-                        <span class="status-cafe-time">...</span>
-                    </div>
                     <div class="status-cafe-content is-loading">
                         <span class="status-cafe-emoji">
                             <span class="status-cafe-loading-spinner">
@@ -47389,6 +47382,9 @@
                             </span>
                         </span>
                         <span class="status-cafe-text">${tl2(trans.loading_status, { u: status_cafe_user })}</span>
+                    </div>
+                    <div class="status-cafe-top">
+                        <span class="status-cafe-time">...</span>
                     </div>
                 </div>
             `);

@@ -9007,11 +9007,14 @@ text:has(> .your-progress-label-position) {
 .status-cafe {
   display: flex;
   flex-direction: column;
+  gap: 4px;
   cursor: pointer;
   .status-cafe-top {
     display: flex;
+    justify-content: end;
     font-size: 13px;
     color: hsl(var(--c3));
+    padding: 0 10px;
     .status-cafe-author {
       flex: 1;
       flex-shrink: 1;
@@ -9021,16 +9024,18 @@ text:has(> .your-progress-label-position) {
     }
   }
   .status-cafe-content {
+    background-color: hsl(var(--f4), 20%);
+    border-radius: 10px;
+    padding: 6px 10px;
     display: flex;
-    gap: 4px;
+    gap: 8px;
     .status-cafe-emoji {
       display: flex;
       justify-content: center;
       align-items: center;
-      max-height: 18px;
-      font-size: 11px;
-      --icon-size: 14px;
-      width: 14px;
+      font-size: 13px;
+      --icon-size: 16px;
+      width: 16px;
       .status-cafe-loading-spinner {
         display: flex;
         align-items: center;
@@ -9040,6 +9045,10 @@ text:has(> .your-progress-label-position) {
       & > .bleh-icon {
         --icon: var(--icon-16-x);
       }
+    }
+    .status-cafe-text {
+      width: 250px;
+      text-align: left;
     }
     &.is-loading {
       color: hsl(var(--c2), 80%);

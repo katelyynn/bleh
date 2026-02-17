@@ -546,10 +546,6 @@ export function markdown(
 
             render(status_cafe_host, html`
                 <div class="status-cafe">
-                    <div class="status-cafe-top">
-                        <span class="status-cafe-author">${tl(trans.current_status)}</span>
-                        <span class="status-cafe-time">...</span>
-                    </div>
                     <div class="status-cafe-content is-loading">
                         <span class="status-cafe-emoji">
                             <span class="status-cafe-loading-spinner">
@@ -557,6 +553,9 @@ export function markdown(
                             </span>
                         </span>
                         <span class="status-cafe-text">${tl(trans.loading_status, { u: status_cafe_user })}</span>
+                    </div>
+                    <div class="status-cafe-top">
+                        <span class="status-cafe-time">...</span>
                     </div>
                 </div>
             `);
