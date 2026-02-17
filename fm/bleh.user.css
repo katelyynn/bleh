@@ -13270,9 +13270,6 @@ t {
 :is(.events-list, .events-list-anhv1) {
   margin: unset;
 }
-.event-section-date-heading {
-  margin: unset !important;
-}
 .sidebar-date-heading {
   color: hsl(var(--c3));
   margin-top: var(--card-gap);
