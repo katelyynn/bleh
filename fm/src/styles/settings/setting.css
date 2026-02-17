@@ -300,6 +300,7 @@
         background-position: center;
         background-size: cover;
         border-radius: var(--item-big-radius);
+        cursor: pointer;
     }
 
     &[data-type="toggle"] {

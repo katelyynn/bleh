@@ -56221,6 +56221,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
             }
           }
           preview2.style.setProperty("background-image", `url(${val})`);
+          preview2.onclick = () => {
+            expand_avatar(val);
+          };
         },
         submit_on_character: true
       })}
@@ -56229,6 +56232,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                         </div>
                     `;
       preview2.style.setProperty("background-image", `url(${pre_existing})`);
+      preview2.onclick = () => {
+        expand_avatar(pre_existing);
+      };
       return elem;
     }}
                 <div

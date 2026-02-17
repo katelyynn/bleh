@@ -29,6 +29,7 @@ import { toggle } from '@/components/settings/toggle';
 import { status } from '@/components/dialog/status';
 import { radio, radio_convert } from '@/components/radio/radio_toggle';
 import { notify, notify_rm } from '@/components/dialog/notify';
+import { expand_avatar } from '@/components/shared/avatar';
 
 let cropper;
 
@@ -703,6 +704,9 @@ function patch_settings_profile_panel(token, update_picture) {
                                         }
 
                                         preview.style.setProperty('background-image', `url(${val})`);
+                                        preview.onclick = () => {
+                                            expand_avatar(val);
+                                        }
                                     },
                                     submit_on_character: true
                                 })}
@@ -712,6 +716,9 @@ function patch_settings_profile_panel(token, update_picture) {
                     `;
 
                     preview.style.setProperty('background-image', `url(${pre_existing})`);
+                    preview.onclick = () => {
+                        expand_avatar(pre_existing);
+                    }
 
                     return elem;
                 }}
