@@ -10,6 +10,8 @@
 @import './status_cafe.css';
 
 @import './obsession.css';
+@import './playlist/create.css';
+@import './note.css';
 /* @import './badged.css'; */
 
 .header-title-secondary {

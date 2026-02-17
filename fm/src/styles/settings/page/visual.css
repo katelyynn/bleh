@@ -180,3 +180,13 @@
     text-align: center;
     margin: var(--card-gap) 0 !important;
 }
+
+
+.colour-tile {
+    display: block;
+    width: 64px;
+    height: 36px;
+    background: hsl(var(--h3));
+    box-shadow: var(--primary-shadow);
+    border-radius: var(--item-med-radius);
+}

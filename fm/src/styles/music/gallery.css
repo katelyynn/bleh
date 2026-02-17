@@ -824,3 +824,11 @@ button.bleh--gallery-bookmark-image-btn {
     position: relative;
     --mask: var(--icon-16-x);
 }
+
+
+.info.artwork-finder-info {
+    max-width: 500px;
+    flex-direction: column;
+    align-items: end;
+    flex-shrink: 1;
+}

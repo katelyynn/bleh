@@ -817,3 +817,15 @@
         --mask: var(--icon-16-heart-solid) !important;
     }
 }
+
+.btn.back {
+    --mask: var(--icon-16-arrow-left);
+}
+.open,
+.external {
+    --mask: var(--icon-16-external);
+}
+
+.submit {
+    --mask: var(--icon-16-arrow-f-up);
+}

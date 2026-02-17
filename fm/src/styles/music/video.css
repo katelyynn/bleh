@@ -76,3 +76,16 @@
 .video-preview-replace {
     margin-top: unset;
 }
+
+
+.video-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: default;
+    gap: 6px;
+
+    font-weight: var(--font-weight-medium);
+    color: hsl(var(--c3));
+    padding: calc(var(--card-padding) * 2) var(--card-padding) !important;
+}

@@ -28174,6 +28174,16 @@
       detected
     };
   }
+  function get_language_name(code) {
+    try {
+      const display = new Intl.DisplayNames([code], {
+        type: "language"
+      });
+      return display.of(code) || code;
+    } catch (e) {
+      return code;
+    }
+  }
 
   // src/build/music.js
   var artist_corrections = {};
@@ -44191,10 +44201,11 @@
             if (settings.shout_markdown) {
               res.translated = markdown(res.translated);
             }
+            const detected = get_language_name(res.detected);
             shout_body.appendChild(html.node`
                             <div class="translated-notice">
                                 <div class="bleh-icon translated-notice-icon" data-type="translate" style="--icon: var(--mask)" />
-                                <p class="translated-notice-text">${tl2(trans.translated_from_value, { v: res.detected })}</p>
+                                <p class="translated-notice-text">${tl2(trans.translated_from_value, { v: detected })}</p>
                             </div>
                             <p class="translated-body">
                                 ${res.translated}
@@ -58985,6 +58996,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
   // src/components/page/footer.js
   function bleh_footer() {
     let footer = document.body.querySelector("footer.footer");
+    if (!footer) return;
     let extras = html.node`
         <div class="footer-extras">
             ${footer.querySelector(".footer-top")}

@@ -459,3 +459,15 @@
         -webkit-backdrop-filter: var(--solarium);
     }
 }
+
+.tippy-box[data-theme="popup"] {
+    padding: 12px;
+
+    & > .tippy-content {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+
+        text-align: left;
+    }
+}

@@ -544,3 +544,15 @@ export async function translate(text, lang = 'en') {
         detected
     };
 }
+
+export function get_language_name(code) {
+    try {
+        const display = new Intl.DisplayNames([code], {
+            type: 'language'
+        });
+
+        return display.of(code) || code;
+    } catch (e) {
+        return code;
+    }
+}

@@ -456,3 +456,11 @@
         );
     }
 }
+
+
+.danger,
+.danger-subtle {
+    --hue-over: var(--hue-neg);
+    --sat-over: 1.1;
+    --lit-over: 0.9;
+}

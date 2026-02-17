@@ -30,6 +30,7 @@
 @import './pagination.css';
 
 @import '../event/main.css';
+@import './error.css';
 
 .container {
     min-width: var(--cards-width);

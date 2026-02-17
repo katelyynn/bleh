@@ -1,6 +1,7 @@
 @import './graph.css';
 @import './date.css';
 @import './top.css';
+@import './jumpto.css';
 
 .library-fetch > div > .top-container, /* vue is duplicating it lol (it sucks) */
 .user-library-search-back-link,

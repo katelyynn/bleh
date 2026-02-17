@@ -1,0 +1,49 @@
+.container:has(#marvin) {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: var(--card-gap);
+}
+.container:has(#marvin) h1 {
+    font-size: 90px;
+    line-height: 90px;
+    font-weight: 700;
+    margin-top: 60px;
+    margin-bottom: -30px;
+    background: linear-gradient(180deg, hsla(var(--l3-c), 40%), transparent);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: unset;
+}
+
+.container:has(#marvin) p {
+    color: hsl(var(--c2));
+}
+#error {
+    font-size: 16px;
+    margin-top: var(--card-gap);
+    color: hsl(var(--c3));
+    font-weight: var(--font-weight);
+    font-family: var(--font-code);
+}
+
+#marvin {
+    margin: 30px 0 calc(30px - var(--card-gap));
+}
+
+.grid {
+    margin-top: var(--card-gap);
+    padding-top: var(--card-gap);
+    border-top: 1px solid hsl(var(--b4));
+    margin-bottom: unset;
+}
+.translation > b {
+    font-weight: var(--font-weight);
+    color: hsl(var(--c3));
+}
+.translation {
+    color: hsl(var(--c2));
+}
+.translation a {
+    font-weight: var(--font-weight);
+}

@@ -62,3 +62,21 @@
         opacity: 1;
     }
 }
+
+.nag-bar--alert {
+    .container {
+        min-width: fit-content;
+        width: fit-content !important;
+    }
+
+    .nag-bar-message {
+        padding-left: calc(var(--icon-size) + var(--icon-gap));
+        padding-right: unset;
+        --left: 0;
+        --mask: var(--icon-16-warning);
+    }
+}
+
+#redirect-bar {
+    display: none;
+}

@@ -285,3 +285,7 @@ t {
         max-width: 100%;
     }
 }
+
+.social-links-container {
+    margin-top: var(--card-gap) !important;
+}

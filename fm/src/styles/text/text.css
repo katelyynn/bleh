@@ -290,6 +290,9 @@ pre {
         color: inherit;
     }
 }
+.no-data-message--obsession-history {
+    padding: unset;
+}
 
 .no-data-message-heading {
     font-size: var(--font-size);
@@ -330,7 +333,38 @@ leading to a gap from their own css */
         pointer-events: none;
     }
 }
+.tip.preview {
+    position: relative;
+    padding-left: calc(var(--mask-size) + 4px);
+    --mask-size: 16px;
+    --left: 0;
+    --margin-top: calc(-1 * (var(--mask-size) / 2));
+    --mask: var(--icon-16-preview);
+
+    cursor: pointer !important;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
 
 hr {
     display: none;
+}
+
+
+.info-box {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: hsl(var(--c3));
+    cursor: default;
+
+    .bleh-icon {
+        --icon-size: 14px;
+    }
+}
+
+.bleh-info-icon {
+    --icon: var(--icon-16-info);
 }

@@ -3,8 +3,12 @@
 @import './interface.css';
 @import './playback.css';
 @import './seasonal.css';
+@import './translate.css';
 
 @import './profile.css';
+@import './auto_edit.css';
+@import './pro.css';
+@import './privacy.css';
 
 .inner-preview {
     background: hsl(var(--b6), 70%);

@@ -11,12 +11,6 @@
     .col-sm-12 {
         width: var(--cards-width);
     }
-
-    background: hsl(var(--h2)) !important;
-}
-
-.report-headline-top {
-    color: hsl(var(--l2-c)) !important;
 }
 
 .share-button-row {

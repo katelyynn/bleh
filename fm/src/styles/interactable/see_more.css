@@ -272,3 +272,14 @@ a.inline-add-icon {
 .mark-incorrect:not(:hover, :active) {
     opacity: 0.8;
 }
+
+
+.show-more {
+    display: flex;
+    justify-content: center;
+    margin-top: var(--card-gap);
+
+    & > a {
+        --mask: var(--icon-16-arrow-down);
+    }
+}

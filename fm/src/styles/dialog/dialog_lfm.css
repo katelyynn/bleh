@@ -169,3 +169,7 @@
         pointer-events: auto;
     }
 }
+
+.modal-inner-content {
+    text-align: left;
+}

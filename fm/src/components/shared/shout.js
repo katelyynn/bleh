@@ -17,7 +17,7 @@ import {
     markdown_field,
     markdown_preview
 } from '@/components/shared/markdown';
-import { copy, lazy, romanise, translate } from '@/build/tools';
+import { copy, get_language_name, lazy, romanise, translate } from '@/build/tools';
 import tippy from 'tippy.js';
 import { keybind } from '@/components/dialog/rabbit';
 import { correct_artist, correct_item_by_artist } from '@/components/music/lotus.js';
@@ -156,10 +156,12 @@ export function patch_shouts() {
                             res.translated = markdown(res.translated);
                         }
 
+                        const detected = get_language_name(res.detected);
+
                         shout_body.appendChild(html.node`
                             <div class="translated-notice">
                                 <div class="bleh-icon translated-notice-icon" data-type="translate" style="--icon: var(--mask)" />
-                                <p class="translated-notice-text">${tl(trans.translated_from_value, { v: res.detected })}</p>
+                                <p class="translated-notice-text">${tl(trans.translated_from_value, { v: detected })}</p>
                             </div>
                             <p class="translated-body">
                                 ${res.translated}

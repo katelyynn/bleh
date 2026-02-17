@@ -13,6 +13,7 @@ import { version } from '@/main';
 
 export function bleh_footer() {
     let footer = document.body.querySelector('footer.footer');
+    if (!footer) return;
 
     let extras = html.node`
         <div class="footer-extras">
