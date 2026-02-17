@@ -17,7 +17,7 @@
 .tab-container,
 .view-buttons {
     display: flex;
-    align-items: center;
+    align-items: center !important;
     gap: 2px;
     padding: 4px;
     background-color: var(--view-buttons);

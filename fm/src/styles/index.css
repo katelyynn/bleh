@@ -31,6 +31,8 @@
 
 @import './dialog/main.css';
 
+@import './inbox/main.css';
+
 @import './seasonal/snow.css';
 @import './seasonal/valentine.css';
 

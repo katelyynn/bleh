@@ -2200,7 +2200,7 @@ h2.text-18,
 .tab-container,
 .view-buttons {
   display: flex;
-  align-items: center;
+  align-items: center !important;
   gap: 2px;
   padding: 4px;
   background-color: var(--view-buttons);
@@ -21731,6 +21731,367 @@ span.bleh-icon {
 }
 
 /* src/styles/dialog/main.css */
+
+/* src/styles/inbox/messages.css */
+.inbox-message-view {
+  display: flex;
+  flex-direction: column;
+  gap: var(--card-padding);
+  & > .inbox-message {
+    display: flex;
+    gap: var(--card-padding);
+    margin: unset;
+  }
+}
+.inbox-message-buttons {
+  display: flex;
+  gap: var(--button-list-gap);
+  padding: unset !important;
+  margin: unset !important;
+}
+.inbox-message > .message-sender {
+  padding: 30px var(--card-padding);
+  background:
+    linear-gradient(
+      180deg,
+      hsl(var(--h4), 30%) 0%,
+      rgba(0, 0, 0, 0) 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: var(--message-sender-width);
+  height: 300px;
+  border-radius: var(--card-radius);
+  &:not(:hover) {
+    & > .message-sender-actions {
+      opacity: 0.4;
+      transition-property: opacity;
+      transition-duration: var(--trans);
+      transition-timing-function: var(--trans-function-ani);
+    }
+  }
+}
+.inbox-message > .message-content {
+  width: 100%;
+  max-width: var(--message-width);
+}
+.message-reply-section {
+  position: relative;
+  padding-top: calc(var(--card-padding) + 1px);
+  &:before {
+    content: "";
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--separator);
+    width: calc(var(--message-sender-width) + var(--card-padding) + var(--message-width));
+  }
+}
+.inbox-message-sender-avatar {
+  width: 70px !important;
+  height: 70px !important;
+  padding: unset !important;
+  margin: unset !important;
+  --mask-size: var(--cover-size-70);
+}
+.inbox-message-sender-name {
+  text-align: center;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: var(--font-weight-medium);
+  margin-top: var(--card-gap);
+  margin-bottom: 4px;
+}
+.inbox-message-timestamp {
+  text-align: center;
+  font-size: calc(var(--font-size) - 1px);
+  line-height: var(--line-height);
+  color: hsl(var(--c3));
+  cursor: default;
+}
+.message-sender-actions {
+  margin-top: var(--card-padding);
+  transition: none;
+}
+.message-sender-action {
+  --bg: transparent;
+  --bg-hov: hsl(var(--h3), 20%);
+  --bg-atv: hsl(var(--h3), 40%);
+  --shadow: none;
+}
+.inbox-button {
+  --bg: hsl(var(--b4), 40%);
+  --bg-hov: hsl(var(--b4), 60%);
+  --bg-atv: hsl(var(--b4), 80%);
+  --shadow: none;
+}
+.inbox-message-view .inbox-message {
+  height: 100%;
+}
+.inbox-message-view .inbox-message-preview,
+.inbox-message-view .inbox-message-info {
+  margin: initial;
+  padding: unset;
+  float: unset;
+  width: var(--message-width);
+}
+.inbox-message-view .inbox-message-message blockquote {
+  background: hsla(var(--b4), 40%);
+  border: none;
+  border-radius: var(--item-med-radius);
+  margin: 0 0 var(--card-gap) 0;
+  padding: var(--card-padding);
+}
+.inbox-message-view .inbox-message-message blockquote cite {
+  color: hsl(var(--c3));
+  display: block;
+}
+.inbox-message-view .form-group-controls {
+  width: 600px !important;
+}
+.inbox-table-legacy {
+  display: flex;
+  flex-direction: column;
+}
+
+/* src/styles/inbox/notifications.css */
+.notification-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--button-list-gap);
+  .notification {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: unset;
+    position: relative;
+    & > .link-block-cover-link {
+      position: absolute;
+      inset: 0;
+    }
+    & > .message-checkbox {
+      width: 16px;
+      z-index: 3;
+      & > .setting {
+        & > .heading {
+          display: none;
+        }
+      }
+    }
+    --bg: hsl(var(--b4), 40%);
+    --bg-hov: hsl(var(--b4), 80%);
+    --bg-atv: hsl(var(--b4));
+    --shadow: none;
+    --padding: 12px 12px;
+    transform: none !important;
+    &.valentine {
+      --hue-over: var(--hue-valentine);
+      --sat-over: var(--sat-valentine);
+      --lit-over: var(--lit-valentine);
+      & > .message-content > .message-subject {
+        color: hsl(var(--l3-c));
+        font-weight: var(--font-weight-medium);
+      }
+    }
+    &.mini {
+      --padding: 5px 10px;
+      width: 100%;
+      .notification-avatar {
+        & > .avatar {
+          width: 32px;
+          height: 32px;
+          --mask-size: var(--cover-size-32);
+          & > .avatar-status-dot {
+            --mask-size: 14px;
+          }
+        }
+      }
+      .notification-time {
+        display: none;
+      }
+      .notification-content.not-main {
+        width: 100px;
+      }
+    }
+    & > .bleh-icon {
+      flex-shrink: 0;
+    }
+    &[aria-checked=true],
+    &.active {
+      --bg: hsla(var(--h4), 35%);
+      --bg-hov: hsla(var(--h4), 45%);
+      --bg-atv: hsla(var(--h4), 55%);
+      --shadow: 0 10px 50px 5px hsla(var(--h4), 35%);
+      z-index: 20;
+    }
+    .notification-avatar {
+      z-index: 10;
+      flex-shrink: 0;
+      & > .avatar {
+        background: hsl(var(--b5));
+        width: 42px;
+        height: 42px;
+        --mask-size: var(--cover-size-50);
+        & > img {
+          position: static;
+        }
+        & > .avatar-status-dot {
+          width: var(--mask-size);
+          height: var(--mask-size);
+        }
+      }
+    }
+    .notification-content {
+      min-width: 0;
+      flex-shrink: 0;
+      &:not(.not-main) {
+        flex: 1;
+      }
+      &.not-main {
+        width: 200px;
+      }
+      .notification-title {
+        flex: 1 1 auto;
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .notification-context {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        color: hsl(var(--c3));
+        --mask-colour: currentColor;
+        min-width: 0;
+        & > .bleh-icon {
+          --icon-size: 12px;
+        }
+        & > .notification-type {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+          --icon-size: 14px;
+          flex: 1 1 auto;
+          min-width: 0;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          & > span:last-child {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            flex: 1 1 auto;
+            min-width: 0;
+          }
+        }
+      }
+    }
+    .message-content {
+      flex: 1;
+      min-width: 0;
+      .message-subject {
+        color: hsl(var(--c3));
+      }
+      .message-subject,
+      .message-summary {
+        display: -webkit-box;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-clamp: 1;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+      }
+    }
+    .notification-time {
+      color: hsl(var(--c3));
+      font-weight: var(--font-weight);
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+  }
+}
+.mini-notifications {
+  text-align: left;
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  width: 400px;
+  height: 287px;
+  @media (max-width: 980px) {
+    width: 100%;
+  }
+  &.content-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+.notifications-panel {
+  .form-group--submit {
+    margin-top: unset !important;
+    margin-bottom: var(--card-gap);
+    .form-submit {
+      justify-content: end;
+    }
+  }
+}
+.notifications {
+  margin-top: unset !important;
+  margin-bottom: var(--card-gap);
+}
+
+/* src/styles/inbox/main.css */
+.inbox .inbox-buttons {
+  padding-top: unset;
+  padding-left: 12px;
+  padding-bottom: var(--card-gap);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  & > .setting {
+    width: 16px;
+    & > .heading {
+      display: none;
+    }
+  }
+  .inbox-compose-button {
+    position: relative;
+    --mask: var(--icon-16-compose);
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
+.inbox-delete-button {
+  --hue-over: var(--hue-neg);
+  --sat-over: 1;
+  --lit-over: 1;
+}
+.inbox-message-status,
+.inbox-message-status:after {
+  display: none !important;
+}
+.inbox-message-select {
+  width: 14px !important;
+}
+.back-button,
+.delete-button {
+  display: flex;
+  margin: unset !important;
+}
+.back-button {
+  --mask: var(--icon-16-arrow-left);
+}
+.delete-button {
+  --mask: var(--icon-16-trash);
+  --hue-over: var(--hue-neg);
+  --sat-over: 1;
+  --lit-over: 1;
+}
 
 /* src/styles/seasonal/snow.css */
 .snow-container {
