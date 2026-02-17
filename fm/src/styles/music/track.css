@@ -49,7 +49,7 @@
     --shadow: none !important;
     color: hsl(var(--c2));
     background-color: var(--bg);
-    padding: 8px calc(var(--side-left) + var(--love-offset)) 8px var(--side-left) !important;
+    padding: 8px calc(var(--side-left) + var(--love-offset, 0px)) 8px var(--side-left) !important;
     min-height: 40px;
     max-height: fit-content;
     border-radius: var(--item-big-radius);
