@@ -1,5 +1,5 @@
 {
-    "latest": "2026.0204",
+    "latest": "2026.0217",
     "sponsors": [
         "clairedoll", "kateshapedbox", "evangelicgirl",
         "astrablooms", "ItsProyal", "vwvwvwvwvwvwv", "Orofil",
@@ -14,7 +14,7 @@
         "dylandotat", "Angel0Lust", "liminelle", "quikwise",
         "BosozokuGF", "tainaronian", "NozomiBear", "nin0dev",
         "milkdrinker3000", "wiichicken", "duskwitch", "rgoracz",
-        "thomasb2k", "ThatJumpyFrog"
+        "thomasb2k", "ThatJumpyFrog", "nite_", "mitsurin"
     ],
     "sponsors_one_time": [
         "kateshapedbox",
@@ -26,7 +26,7 @@
         "fourohclok", "K40M0J1", "goldenstuffed",
         "kar1x", "nojonsko", "s0540a",
         "Angel0Lust", "tainaronian", "wiichicken",
-        "rgoracz"
+        "rgoracz", "nite_"
     ],
     "sponsor_count_remove": 3,
     "sponsor_account": "kateshapedbox",
@@ -508,6 +508,22 @@
         },
         "ThatJumpyFrog": {
             "type": "sponsor"
-        }
+        },
+        "nite_": {
+            "type": "sponsor"
+        },
+        "mitsurin": [
+            {
+                "type": "sponsor"
+            },
+            {
+                "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLXNsaWNlIj48cGF0aCBzdHJva2U9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNMyAxOWwxNSAtMTVsMyAzbC02IDZsMiAyYTE0IDE0IDAgMCAxIC0xNCA0IiAvPjwvc3ZnPg==",
+                "reason": "sponsor",
+                "name": "mother",
+                "hue": 300,
+                "sat": 1.5,
+                "lit": 1.24
+            }
+        ]
     }
 }
