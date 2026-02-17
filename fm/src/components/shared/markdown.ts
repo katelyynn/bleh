@@ -345,7 +345,7 @@ export function markdown(
     if (!line_breaks) allow_alignment = false;
 
     if (allow_alignment) extensions.push(aligner());
-    if (line_breaks) extensions.push(blockquotes());
+    if (!line_breaks) extensions.push(blockquotes());
     if (allow_banners) extensions.push(banner());
     if (allow_icons) extensions.push(icons());
     if (allow_hue) extensions.push(accent(), display_name(), status());

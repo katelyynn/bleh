@@ -25,21 +25,9 @@
     }
 
     blockquote {
-        position: relative;
-        padding: 6px 10px 6px calc(10px + 4px + 6px);
-        background: hsl(var(--k4), 40%);
-        border-radius: var(--item-big-radius);
-
-        &:before {
-            content: "";
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            bottom: 10px;
-            width: 3px;
-            border-radius: var(--item-big-radius);
-            background: hsl(var(--l3-c));
-        }
+        padding: 6px;
+        background: hsl(var(--f4), 10%);
+        border-radius: var(--item-med-radius);
     }
 
     del {

@@ -27890,7 +27890,7 @@
     let hex2 = comp.toString(16);
     return hex2.length == 1 ? "0" + hex2 : hex2;
   }
-  function clamp_sat2(sat) {
+  function clamp_sat(sat) {
     if (sat > 1.5) return 1.5;
     return round_two(sat);
   }
@@ -30711,7 +30711,7 @@
               `rgb(${colour2})`
             );
             let hue2 = hsl.h;
-            let sat = clamp_sat2(hsl.s / 100 * 3);
+            let sat = clamp_sat(hsl.s / 100 * 3);
             let lit = clamp_lit(sat, hsl.l / 100 + 0.35);
             grid.classList.add("grid-items-item-has-colour");
             grid.style.setProperty("--hue-over", hue2);
@@ -32381,7 +32381,7 @@
               let colour2 = thief.getColor(image);
               let hsl = rgb_to_hsl(colour2[0], colour2[1], colour2[2]);
               let hue2 = hsl.h;
-              let sat = clamp_sat2(hsl.s / 100 * 3);
+              let sat = clamp_sat(hsl.s / 100 * 3);
               let lit = clamp_lit(sat, hsl.l / 100 + 0.35);
               const to_colour = track.querySelectorAll(
                 ".chartlist-count-bar, .chartlist-loved"
@@ -33399,11 +33399,11 @@
         document.body.style.setProperty("--hue-album", hsl.h);
         document.body.style.setProperty(
           "--sat-album",
-          clamp_sat2(hsl.s / 100 * 3)
+          clamp_sat(hsl.s / 100 * 3)
         );
         document.body.style.setProperty("--lit-album", hsl.l / 100 + 0.35);
         log(
-          `sourced hsl of (${hsl.h}, ${hsl.s}, ${hsl.l}) - using final value of (${hsl.h}, ${clamp_sat2(hsl.s / 100 * 3)}, ${hsl.l / 100 + 0.35})`,
+          `sourced hsl of (${hsl.h}, ${hsl.s}, ${hsl.l}) - using final value of (${hsl.h}, ${clamp_sat(hsl.s / 100 * 3)}, ${hsl.l / 100 + 0.35})`,
           "hue from album"
         );
       } catch (e) {
@@ -47221,7 +47221,7 @@
     let extensions = [];
     if (!line_breaks) allow_alignment = false;
     if (allow_alignment) extensions.push(aligner());
-    if (line_breaks) extensions.push(blockquotes());
+    if (!line_breaks) extensions.push(blockquotes());
     if (allow_banners) extensions.push(banner());
     if (allow_icons) extensions.push(icons());
     if (allow_hue) extensions.push(accent(), display_name(), status2());
@@ -52513,7 +52513,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
             const hsl = hex_to_hsl(value);
             hue_range.set(hsl.h);
             sat_range.set(
-              clamp_sat2(hsl.s / 100 * 3)
+              clamp_sat(hsl.s / 100 * 3)
             );
             lit_range.set(hsl.l / 100 + 0.35);
           }}>${tl2(trans.convert)}</button>
@@ -54122,7 +54122,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       try {
         let bg = header_inner.getAttribute("style").replace("background: #", "");
         let hsl = hex_to_hsl(bg);
-        let sat = clamp_sat2(hsl.s / 100 * 3);
+        let sat = clamp_sat(hsl.s / 100 * 3);
         let lit = clamp_lit(sat, hsl.l / 100 + 0.35);
         document.body.style.setProperty("--hue-album", hsl.h);
         document.body.style.setProperty("--sat-album", sat);
@@ -70574,7 +70574,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
             let colour2 = thief.getColor(avatar2);
             let hsl = rgb_to_hsl(colour2[0], colour2[1], colour2[2]);
             auth.sets.hue = hsl.h;
-            auth.sets.sat = clamp_sat2(hsl.s / 100 * 3);
+            auth.sets.sat = clamp_sat(hsl.s / 100 * 3);
             auth.sets.lit = clamp_lit(auth.sets.sat, hsl.l / 100 + 0.35);
           });
         } catch (e) {
