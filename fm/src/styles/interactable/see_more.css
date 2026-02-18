@@ -78,6 +78,10 @@
     width: fit-content;
 }
 
+.blend-v2-btn {
+    font-weight: var(--font-weight) !important;
+}
+
 .shout-action-button,
 .left-icon,
 .edit,
