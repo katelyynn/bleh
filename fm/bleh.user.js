@@ -44301,7 +44301,7 @@
     if (!send_button) return;
     let button2 = send_button.querySelector(".btn-post-shout");
     if (!button2) return;
-    button2.classList.add("btn btn-send-shout-generic icon");
+    button2.classList.add("btn", "btn-send-shout-generic", "icon");
     button2.textContent = tl2(trans.send);
     button2.removeAttribute("disabled");
     if (page.mobile) return;

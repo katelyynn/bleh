@@ -277,7 +277,7 @@ function shout_send(send_button) {
     let button = send_button.querySelector('.btn-post-shout');
     if (!button) return;
 
-    button.classList.add('btn btn-send-shout-generic icon');
+    button.classList.add('btn', 'btn-send-shout-generic', 'icon');
     button.textContent = tl(trans.send);
     button.removeAttribute('disabled');
 
