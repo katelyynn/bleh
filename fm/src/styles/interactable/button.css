@@ -10,7 +10,7 @@
 .btn-add, .btn-file,
 .header-message-user,
 .panel-settings-button,
-.pagination-next > a, .pagination-previous > a, .pagination-page > :is(a, span),
+.pagination-page > :is(a, span),
 .video-preview-upload-cta, .album-artwork-upload-cta,
 .gallery-image-report--reported,
 .listening-report-library-link, .listening-report-promo,

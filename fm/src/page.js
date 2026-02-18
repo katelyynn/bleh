@@ -91,6 +91,7 @@ import { notices } from '@/components/dialog/notices';
 import { tag_page } from '@/components/music/tags';
 import { clear_popup_queue } from '@/components/dialog/popup';
 import { verified } from './components/shared/badge';
+import { see_more } from './components/page/see_more';
 
 export function bleh() {
     florence({
@@ -375,6 +376,8 @@ function main_flow() {
     subscribe_to_events();
 
     dialog_extender();
+
+    see_more();
 }
 
 function load_page(main_content = null) {

@@ -1219,7 +1219,7 @@ function bleh_featured_profile_track(object) {
 
     if (form) {
         let button = form.querySelector('button');
-        button.classList = 'featured-item-manage icon';
+        button.classList = 'see-more featured-item-manage icon';
         button.setAttribute('data-type', 'delete');
         button.textContent = tl(trans.remove);
     }

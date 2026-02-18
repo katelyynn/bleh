@@ -1801,8 +1801,6 @@ h2.text-18,
 .btn-file,
 .header-message-user,
 .panel-settings-button,
-.pagination-next > a,
-.pagination-previous > a,
 .pagination-page > :is(a, span),
 .video-preview-upload-cta,
 .album-artwork-upload-cta,
@@ -2356,25 +2354,14 @@ h2.text-18,
 }
 
 /* src/styles/interactable/see_more.css */
-.show-more > a,
 .shout-action-button,
 .blend-v2-btn,
 .js-disclose-close.btn-cancel,
 .shout-more-replies-after,
 .shout-more-replies-before,
-.pagination-next > a,
-.pagination-previous > a,
-.more-link-fullwidth > a,
-.music-more-link > a,
 .modal-body .btn-cancel.js-close,
 .masthead-popup-text .btn-primary,
-.featured-item-manage,
 .more-items,
-.more-link-with-action > a,
-.more-link-fullwidth-right > a,
-.more-link-fullwidth-right-flush-top > a,
-.more-link > a,
-#events-section > p > a,
 .see-more {
   --see-more-pad-v: 3px;
   --see-more-pad: 6px;
@@ -2432,7 +2419,7 @@ h2.text-18,
 .edit,
 .shout-more-replies-after,
 .shout-more-replies-before,
-.pagination-previous > a,
+.pagination-previous-link,
 .modal-body .btn-cancel.js-close,
 .btn-cancel.js-disclose-close,
 .see-more.sponsor,
@@ -2445,6 +2432,9 @@ a.inline-add-icon {
     mask-image: var( --mask, var(--icon-16-plus, var(--icon-16-placeholder)) );
     -webkit-mask-image: var( --mask, var(--icon-16-plus, var(--icon-16-placeholder)) );
   }
+}
+.pagination-previous-link {
+  --mask: var(--icon-16-arrow-left);
 }
 .blend-v2 {
   gap: var(--card-gap) !important;
@@ -17368,7 +17358,6 @@ input[type=range]::-moz-range-progress {
 
 /* src/styles/shared/icons.css */
 .footer-link:before,
-.show-more > a:before,
 .report-dropdown-button:before,
 .attendance-badge:before,
 .lfmmaf-missing-artwork-button:before,
@@ -17399,7 +17388,6 @@ input[type=range]::-moz-range-progress {
 .metadata-column .cta-link-wrap > a:before,
 .lyrics-snippet-more-link > a:before,
 .see-more:before,
-.more-link-fullwidth > a:before,
 .modal-body .js-close:not(.btn-primary):before,
 .view-all-button:before,
 .music-featured-item-background:before,
@@ -17482,13 +17470,7 @@ input[type=range]::-moz-range-progress {
 .dropdown-menu-clickable-button:not(.link-select, .report-dropdown-button)::after,
 .dropdown-menu-clickable-button-js-only::after,
 .display-options-clickable-button:after,
-.pagination-previous > a:before,
-.pagination-next > a:before,
-.more-link > a:before,
-.more-link-fullwidth-right a:before,
-.more-link-fullwidth-right-flush-top a:before,
 .inline-add-icon:before,
-.more-link-with-action a:not(.inline-add-icon):after,
 .more-items:before,
 .artist-similar-sidebar > h3:before,
 .external-link:before,
@@ -17516,7 +17498,6 @@ input[type=range]::-moz-range-progress {
 .header-new-on-tour:before,
 .avatar-status-dot:after,
 .content-form .table .delete:before,
-.form-group-controls:has(select):before,
 .user-list-avatar:before,
 .header-new-more-button:before,
 .tags-add:before,

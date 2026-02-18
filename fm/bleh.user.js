@@ -33625,12 +33625,12 @@
         obsession_author
       );
       related.appendChild(header);
-      let see_more = other_tracks.nextElementSibling;
+      let see_more2 = other_tracks.nextElementSibling;
       related.appendChild(other_tracks);
-      if (see_more) {
+      if (see_more2) {
         let more = document.createElement("div");
         more.classList.add("more-link-fullwidth-right");
-        more.appendChild(see_more.querySelector("a"));
+        more.appendChild(see_more2.querySelector("a"));
         related.appendChild(more);
       }
     }
@@ -34653,7 +34653,7 @@
     }
     if (form) {
       let button2 = form.querySelector("button");
-      button2.classList = "featured-item-manage icon";
+      button2.classList = "see-more featured-item-manage icon";
       button2.setAttribute("data-type", "delete");
       button2.textContent = tl2(trans.remove);
     }
@@ -59658,6 +59658,21 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     });
   }
 
+  // src/components/page/see_more.ts
+  function see_more() {
+    if (!page.structure.container) return;
+    const links = page.structure.container.querySelectorAll(":is(.more-link, .more-link-with-action, .more-link-fullwidth-right, .more-link-fullwidth-right-flush-top, .more-link-fullwidth, .show-more, .music-more-link, .pagination-next, .pagination-previous) > a:not([data-see-more])");
+    links.forEach((link) => {
+      link.setAttribute("data-see-more", "true");
+      const parent = link.parentElement;
+      const classes = parent.classList;
+      link.classList.add("see-more");
+      if (classes == "pagination-previous") {
+        link.classList.add("pagination-previous-link");
+      }
+    });
+  }
+
   // src/page.js
   function bleh() {
     florence({
@@ -59850,6 +59865,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     shout_messages();
     subscribe_to_events();
     dialog_extender();
+    see_more();
   }
   function load_page(main_content = null) {
     if (page.state.activity_preview_timer)

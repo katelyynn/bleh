@@ -1,22 +1,11 @@
-.show-more > a,
 .shout-action-button,
 .blend-v2-btn,
 .js-disclose-close.btn-cancel,
 .shout-more-replies-after,
 .shout-more-replies-before,
-.pagination-next > a,
-.pagination-previous > a,
-.more-link-fullwidth > a,
-.music-more-link > a,
 .modal-body .btn-cancel.js-close,
 .masthead-popup-text .btn-primary,
-.featured-item-manage,
 .more-items,
-.more-link-with-action > a,
-.more-link-fullwidth-right > a,
-.more-link-fullwidth-right-flush-top > a,
-.more-link > a,
-#events-section > p > a,
 .see-more {
     --see-more-pad-v: 3px;
     --see-more-pad: 6px;
@@ -94,7 +83,7 @@
 .edit,
 .shout-more-replies-after,
 .shout-more-replies-before,
-.pagination-previous > a,
+.pagination-previous-link,
 .modal-body .btn-cancel.js-close,
 .btn-cancel.js-disclose-close,
 .see-more.sponsor,
@@ -114,6 +103,10 @@ a.inline-add-icon {
             var(--icon-16-plus, var(--icon-16-placeholder))
         );
     }
+}
+
+.pagination-previous-link {
+    --mask: var(--icon-16-arrow-left);
 }
 
 .blend-v2 {

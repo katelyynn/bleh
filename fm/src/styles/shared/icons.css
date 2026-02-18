@@ -1,5 +1,4 @@
 .footer-link:before,
-.show-more > a:before,
 .report-dropdown-button:before,
 .attendance-badge:before,
 .lfmmaf-missing-artwork-button:before,
@@ -27,7 +26,6 @@
 .listen-item-text:before,
 .metadata-column .cta-link-wrap > a:before, .lyrics-snippet-more-link > a:before,
 .see-more:before,
-.more-link-fullwidth > a:before,
 .modal-body .js-close:not(.btn-primary):before,
 .view-all-button:before,
 .music-featured-item-background:before,
@@ -78,10 +76,8 @@
 /*     DROPDOWNS     */
 .dropdown-menu-clickable-item:not(.v2):before,
 .dropdown-menu-list-button::after, .dropdown-menu-clickable-button:not(.link-select, .report-dropdown-button)::after, .dropdown-menu-clickable-button-js-only::after, .display-options-clickable-button:after,
-/*     PAGINATION     */
-.pagination-previous > a:before, .pagination-next > a:before,
 /*     MORE LINK >     */
-.more-link > a:before, .more-link-fullwidth-right a:before, .more-link-fullwidth-right-flush-top a:before, .inline-add-icon:before, .more-link-with-action a:not(.inline-add-icon):after,
+.inline-add-icon:before,
 .more-items:before,
 .artist-similar-sidebar > h3:before,
 .external-link:before,
@@ -112,7 +108,6 @@
 /*     MODAL     */
 /*     SETTINGS     */
 .content-form .table .delete:before,
-.form-group-controls:has(select):before,
 /*     USER LISTS (EG. FOLLOWING)     */
 .user-list-avatar:before,
 /*     TRACK/ALBUM/ARTIST HEADER     */
