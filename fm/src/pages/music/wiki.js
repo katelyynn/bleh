@@ -351,7 +351,7 @@ export function patch_wiki() {
 
         let read_more = wiki_block.querySelector('a:last-child');
         if (read_more) {
-            read_more.classList.add('read-more');
+            read_more.classList.add('read-more', 'icon');
             read_more.textContent = tl(trans.read_more).toLowerCase();
         }
 
@@ -359,7 +359,7 @@ export function patch_wiki() {
             <div class="sub-text">
                 <p>${tl(trans.about)}</p>
                 <span class="right-links">
-                    <p><a class="wiki-edit-small" href="${document.location.href}/+wiki/edit">${tl(trans.edit_wiki).toLowerCase()}</a></p>
+                    <p><a class="wiki-edit-small icon" href="${document.location.href}/+wiki/edit">${tl(trans.edit_wiki).toLowerCase()}</a></p>
                     ${(!wiki_empty && read_more) ? html.node`<p>${read_more}</p>` : ''}
                 </span>
             </div>
@@ -482,7 +482,7 @@ export function patch_wiki_contents(wiki_block) {
             });
 
         if (type) {
-            link.classList.add('wiki-link');
+            link.classList.add('wiki-link', 'icon');
             link.setAttribute('data-link-type', type);
         }
     });

@@ -28,7 +28,7 @@ export function bleh_charts() {
     let out_now = page.structure.side.querySelector(
         '.more-link-fullwidth-right a'
     );
-    if (out_now) out_now.classList.add('btn', 'out-now-btn');
+    if (out_now) out_now.classList.add('btn', 'out-now-btn', 'icon', 'icon-r');
 
     let header = html.node`
         <div class="charts-header top-header">

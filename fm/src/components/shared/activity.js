@@ -47,7 +47,7 @@ export function render_activity(activity) {
     // date: string
 
     const activity_item = html.node`
-        <a class="activity-item activity--${activity.type}" href=${activity.context} />
+        <a class="activity-item activity--${activity.type} icon" href=${activity.context} />
     `;
 
     let involved_text = '';

@@ -122,9 +122,6 @@
 
     /*     BUTTON HAS ICON     */
 
-    .btn-shortcut {
-        --mask: var(--icon-16-arrow-right);
-    }
 
     /*     ICON MASK     */
 

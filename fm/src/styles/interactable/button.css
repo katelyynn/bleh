@@ -341,13 +341,11 @@
 .dropdown-menu-clickable-button,
 .dropdown-menu-clickable-button-js-only,
 .display-options-clickable-button,
-.btn-shortcut,
 .gallery-next .arrow,
 .header-new-gallery--link .header-new-gallery-inner,
 .date-range-picker-button,
 .source-album,
 .language-nav,
-.out-now-btn,
 .icon-r {
     --btn-right: calc(
         var(--button-sides-icon) + var(--icon-size) + var(--icon-gap)

@@ -211,7 +211,7 @@ export function bleh_gallery() {
     // delete
     let delete_button = image_details.querySelector('.gallery-image-delete');
     if (delete_button) {
-        delete_button.querySelector('button').classList = 'btn';
+        delete_button.querySelector('button').classList = 'btn icon';
         buttons_extra.appendChild(delete_button);
     }
 
@@ -219,14 +219,14 @@ export function bleh_gallery() {
     const report_form = image_details.querySelector('.gallery-image-report-form');
 
     const report = report_form.querySelector('button');
-    report.classList.add('btn');
+    report.classList.add('btn', 'icon');
     tippy(report, {
         content: report.textContent
     });
     report.textContent = tl(trans.report);
 
     const reported = report_form.querySelector('.gallery-image-report--reported');
-    reported.classList.add('btn');
+    reported.classList.add('btn', 'icon');
 
     buttons_extra.appendChild(report_form);
 

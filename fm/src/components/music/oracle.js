@@ -1519,7 +1519,7 @@ export function oracle_process() {
             if (recording.disambiguation == 'explicit') {
                 artist_elem.insertBefore(
                     html.node`
-                    <span class="track-explicit">${tl(trans.explicit)}</span>
+                    <span class="track-explicit icon">${tl(trans.explicit)}</span>
                 `,
                     artist_elem.firstChild
                 );

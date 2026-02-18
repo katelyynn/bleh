@@ -29766,14 +29766,14 @@
       }
       let read_more = wiki_block.querySelector("a:last-child");
       if (read_more) {
-        read_more.classList.add("read-more");
+        read_more.classList.add("read-more", "icon");
         read_more.textContent = tl2(trans.read_more).toLowerCase();
       }
       wiki_col.insertBefore(html.node`
             <div class="sub-text">
                 <p>${tl2(trans.about)}</p>
                 <span class="right-links">
-                    <p><a class="wiki-edit-small" href="${document.location.href}/+wiki/edit">${tl2(trans.edit_wiki).toLowerCase()}</a></p>
+                    <p><a class="wiki-edit-small icon" href="${document.location.href}/+wiki/edit">${tl2(trans.edit_wiki).toLowerCase()}</a></p>
                     ${!wiki_empty && read_more ? html.node`<p>${read_more}</p>` : ""}
                 </span>
             </div>
@@ -29873,7 +29873,7 @@
                 `
         });
       if (type) {
-        link.classList.add("wiki-link");
+        link.classList.add("wiki-link", "icon");
         link.setAttribute("data-link-type", type);
       }
     });
@@ -31805,7 +31805,7 @@
           if (track.getAttribute("data-disambig") == "explicit") {
             song_artist_element.insertBefore(
               html.node`
-                        <span class="track-explicit">${tl2(trans.explicit)}</span>
+                        <span class="track-explicit icon">${tl2(trans.explicit)}</span>
                     `,
               song_artist_element.firstChild
             );
@@ -34653,7 +34653,7 @@
     }
     if (form) {
       let button2 = form.querySelector("button");
-      button2.classList = "featured-item-manage";
+      button2.classList = "featured-item-manage icon";
       button2.setAttribute("data-type", "delete");
       button2.textContent = tl2(trans.remove);
     }
@@ -41608,18 +41608,18 @@
     share_button.after(create_divider());
     let delete_button = image_details.querySelector(".gallery-image-delete");
     if (delete_button) {
-      delete_button.querySelector("button").classList = "btn";
+      delete_button.querySelector("button").classList = "btn icon";
       buttons_extra.appendChild(delete_button);
     }
     const report_form = image_details.querySelector(".gallery-image-report-form");
     const report = report_form.querySelector("button");
-    report.classList.add("btn");
+    report.classList.add("btn", "icon");
     tippy_esm_default(report, {
       content: report.textContent
     });
     report.textContent = tl2(trans.report);
     const reported = report_form.querySelector(".gallery-image-report--reported");
-    reported.classList.add("btn");
+    reported.classList.add("btn", "icon");
     buttons_extra.appendChild(report_form);
     let star_buttons = image_details.querySelectorAll(".gallery-image-preferred-button :is(button, a)");
     star_buttons.forEach((star_button) => {
@@ -43553,7 +43553,7 @@
         if (recording.disambiguation == "explicit") {
           artist_elem.insertBefore(
             html.node`
-                    <span class="track-explicit">${tl2(trans.explicit)}</span>
+                    <span class="track-explicit icon">${tl2(trans.explicit)}</span>
                 `,
             artist_elem.firstChild
           );
@@ -44300,7 +44300,7 @@
     if (!send_button) return;
     let button2 = send_button.querySelector(".btn-post-shout");
     if (!button2) return;
-    button2.classList.add("btn-send-shout-generic");
+    button2.classList.add("btn btn-send-shout-generic icon");
     button2.textContent = tl2(trans.send);
     button2.removeAttribute("disabled");
     if (page.mobile) return;
@@ -47937,7 +47937,7 @@
                         ${group.map((item) => {
         if (item.hide) return html.node``;
         const button2 = html.node`
-                                <button class="btn markdown-action" data-type=${item.type} aria-checked="false" type="button" onclick=${() => {
+                                <button class="btn markdown-action icon" data-type=${item.type} aria-checked="false" type="button" onclick=${() => {
           const sel_start = md_editor.selectionStart;
           const sel_end = md_editor.selectionEnd;
           const val = textarea.value();
@@ -53742,7 +53742,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
   }
   function render_activity(activity) {
     const activity_item = html.node`
-        <a class="activity-item activity--${activity.type}" href=${activity.context} />
+        <a class="activity-item activity--${activity.type} icon" href=${activity.context} />
     `;
     let involved_text = "";
     let tooltip_name;
@@ -55451,7 +55451,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     let out_now = page.structure.side.querySelector(
       ".more-link-fullwidth-right a"
     );
-    if (out_now) out_now.classList.add("btn", "out-now-btn");
+    if (out_now) out_now.classList.add("btn", "out-now-btn", "icon", "icon-r");
     let header = html.node`
         <div class="charts-header top-header">
             <div class="left">
@@ -56740,7 +56740,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                 <form action="${root}settings/avatar/delete" method="post">
                     <input type="hidden" name="csrfmiddlewaretoken" value=${page.token}>
                     <div class="form-group delete-avatar">
-                        <button class="btn image-upload-remove" type="submit" value="delete-avatar" name="delete-avatar">${tl2(trans.delete)}</button>
+                        <button class="btn image-upload-remove icon" type="submit" value="delete-avatar" name="delete-avatar">${tl2(trans.delete)}</button>
                     </div>
                 </form>
             </div>

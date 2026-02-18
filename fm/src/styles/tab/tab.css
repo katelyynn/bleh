@@ -250,10 +250,6 @@ input::placeholder {
 button.navlist-more {
     margin-left: var(--button-list-gap) !important;
 }
-/* mobile nav re-purposed as extra nav */
-.visible-xs .masthead-nav {
-    display: flex;
-}
 
 .masthead-nav-control {
     /* left padding for icon, otherwise just 12px 16px */
@@ -283,13 +279,6 @@ button.navlist-more {
     & > .new-badge {
         margin-left: 6px;
     }
-
-    /*&:hover {
-        &:after {
-            opacity: 1;
-            transition: none !important;
-        }
-    }*/
 
     &.live,
     &.masthead-nav-control--active[data-analytics-label="charts"] {

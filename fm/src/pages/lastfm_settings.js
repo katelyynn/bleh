@@ -1238,7 +1238,7 @@ function avatar(token = '') {
                 <form action="${root}settings/avatar/delete" method="post">
                     <input type="hidden" name="csrfmiddlewaretoken" value=${page.token}>
                     <div class="form-group delete-avatar">
-                        <button class="btn image-upload-remove" type="submit" value="delete-avatar" name="delete-avatar">${tl(trans.delete)}</button>
+                        <button class="btn image-upload-remove icon" type="submit" value="delete-avatar" name="delete-avatar">${tl(trans.delete)}</button>
                     </div>
                 </form>
             </div>
