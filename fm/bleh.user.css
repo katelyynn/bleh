@@ -6643,11 +6643,9 @@ section,
   right: 0;
   font-size: 0;
 }
-.gallery-image-vote-down-off .gallery-image-votes {
-  --mask: var(--icon-16-arrow-down);
-}
+.gallery-image-vote-down-off .gallery-image-votes,
 .gallery-image-vote-down-on .gallery-image-votes {
-  --mask: var(--icon-16-arrow-down);
+  --mask: var(--icon-16-arrow-down) !important;
 }
 .gallery-image-preferred-states,
 .gallery-image-votes {
@@ -9498,6 +9496,9 @@ h2.playlisting-create-option-title {
   & > .header-avatar-add-label {
     display: none;
   }
+}
+.share-chart {
+  display: none;
 }
 
 /* src/styles/page/header.css */

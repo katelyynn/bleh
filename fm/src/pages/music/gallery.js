@@ -127,7 +127,7 @@ export function bleh_gallery() {
     let buttons = image_details.querySelector('.gallery-image-buttons');
 
     buttons.querySelectorAll('button').forEach(btn => {
-        btn.classList.add('btn');
+        btn.classList.add('btn', 'colourful');
         btn.removeAttribute('title');
     });
 
@@ -211,7 +211,7 @@ export function bleh_gallery() {
     // delete
     let delete_button = image_details.querySelector('.gallery-image-delete');
     if (delete_button) {
-        delete_button.querySelector('button').classList = 'btn icon';
+        delete_button.querySelector('button').classList = 'btn icon colourful';
         buttons_extra.appendChild(delete_button);
     }
 
@@ -219,14 +219,14 @@ export function bleh_gallery() {
     const report_form = image_details.querySelector('.gallery-image-report-form');
 
     const report = report_form.querySelector('button');
-    report.classList.add('btn', 'icon');
+    report.classList.add('btn', 'icon', 'colourful');
     tippy(report, {
         content: report.textContent
     });
     report.textContent = tl(trans.report);
 
     const reported = report_form.querySelector('.gallery-image-report--reported');
-    reported.classList.add('btn', 'icon');
+    reported.classList.add('btn', 'icon', 'colourful');
 
     buttons_extra.appendChild(report_form);
 

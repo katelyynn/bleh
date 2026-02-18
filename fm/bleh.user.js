@@ -41555,7 +41555,7 @@
     }
     let buttons = image_details.querySelector(".gallery-image-buttons");
     buttons.querySelectorAll("button").forEach((btn) => {
-      btn.classList.add("btn");
+      btn.classList.add("btn", "colourful");
       btn.removeAttribute("title");
     });
     let button_container = document.createElement("div");
@@ -41608,18 +41608,18 @@
     share_button.after(create_divider());
     let delete_button = image_details.querySelector(".gallery-image-delete");
     if (delete_button) {
-      delete_button.querySelector("button").classList = "btn icon";
+      delete_button.querySelector("button").classList = "btn icon colourful";
       buttons_extra.appendChild(delete_button);
     }
     const report_form = image_details.querySelector(".gallery-image-report-form");
     const report = report_form.querySelector("button");
-    report.classList.add("btn", "icon");
+    report.classList.add("btn", "icon", "colourful");
     tippy_esm_default(report, {
       content: report.textContent
     });
     report.textContent = tl2(trans.report);
     const reported = report_form.querySelector(".gallery-image-report--reported");
-    reported.classList.add("btn", "icon");
+    reported.classList.add("btn", "icon", "colourful");
     buttons_extra.appendChild(report_form);
     let star_buttons = image_details.querySelectorAll(".gallery-image-preferred-button :is(button, a)");
     star_buttons.forEach((star_button) => {
@@ -45314,7 +45314,7 @@
             ".resource-external-link"
           );
           externals_links.forEach((link) => {
-            link.classList.add("music-link");
+            link.classList.add("music-link", "colourful");
             let type = link.classList[1];
             if (type == "resource-external-link--homepage")
               link.textContent = tl2(trans.website);
