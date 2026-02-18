@@ -1314,6 +1314,7 @@ function bleh_glacier_library_focused() {
             } else {
                 // have to read classlist
                 if (button.classList.contains('delete-icon')) {
+                    button.classList.add('colourful');
                     button.textContent = tl(trans.delete);
                 }
             }

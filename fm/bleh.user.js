@@ -41028,6 +41028,7 @@
           }
         } else {
           if (button2.classList.contains("delete-icon")) {
+            button2.classList.add("colourful");
             button2.textContent = tl2(trans.delete);
           }
         }
