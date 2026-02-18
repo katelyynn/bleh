@@ -1,5 +1,4 @@
 [data-host="facebook.com"],
-.share-link-facebook,
 .resource-external-link--facebook {
     &.music-link {
         --hue-over: 217;
@@ -178,7 +177,6 @@
 }
 
 [data-host="twitter.com"],
-.share-link-twitter,
 .resource-external-link--twitter {
     &.music-link {
         --hue-over: 200;

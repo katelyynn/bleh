@@ -49,7 +49,6 @@
 .music-more-link a,
 .tag > :is(a, span), .tags-add-cta, .tags-add, .tags-view-all,
 .masthead-popup-close,
-.share-link,
 .check .box,
 .radio-cont > .radio,
 .blend-v2-btn,
@@ -210,7 +209,6 @@
         #manage_data .btn-primary,
         .primary,
         .btn-subscribe,
-        .share-link,
         .view-item[aria-checked="true"],
         .user-now-empty-state-button
     ):not([data-has-file], .see-more) {

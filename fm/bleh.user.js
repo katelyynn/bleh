@@ -28992,7 +28992,7 @@
                 </div>
                 <div class="modal-footer">
                     <div class="fill"></div>
-                    <a class="btn primary sponsor" href="${root}user/${sponsor_list.sponsor_account}" target="_blank">
+                    <a class="btn primary sponsor icon colourful" href="${root}user/${sponsor_list.sponsor_account}" target="_blank">
                         ${tl2(trans.manage_sponsor)}
                     </a>
                     <div class="fill"></div>
@@ -33098,7 +33098,7 @@
           instance.hide();
         });
         instance.setContent(html.node`
-                <button class="dropdown-menu-clickable-item" data-type="starred_friend" data-starred="true" onclick=${() => {
+                <button class="dropdown-menu-clickable-item colourful" data-type="starred_friend" data-starred="true" onclick=${() => {
           if (star_state) {
             star_state = false;
             save_setting("starred_friend", "");
@@ -34033,15 +34033,15 @@
       let listen_container = html.node`
             <section class="listen-panel listen-profile-panel">
                 <div class="listener-row">
-                    <div class="scrobble-side">
+                    <div class="listener-row-item scrobble-side">
                         <h3>${tl2(trans.scrobbles)}</h3>
                         <p ref=${(el) => scrobble_text = el}><a href="${root}user/${page.name}/library">${scrobbles.toLocaleString(lang)}</a></p>
                     </div>
-                    <div class="artist-side">
+                    <div class="listener-row-item artist-side">
                         <h3>${tl2(trans.artists)}</h3>
                         <p><a href="${root}user/${page.name}/library/artists">${artists.toLocaleString(lang)}</a></p>
                     </div>
-                    <div class="loved-side">
+                    <div class="listener-row-item loved-side">
                         <h3>${tl2(trans.loved)}</h3>
                         <p><a href="${root}user/${page.name}/loved">${loved.toLocaleString(lang)}</a></p>
                     </div>
@@ -35862,7 +35862,7 @@
       }}
                         ${() => {
         let btn = html.node`
-                            <button class="btn chibi icon" data-type="starred_friend" data-starred=${settings.starred_friend != ""} onclick=${() => {
+                            <button class="btn chibi icon colourful" data-type="starred_friend" data-starred=${settings.starred_friend != ""} onclick=${() => {
           if (settings.starred_friend == "") return;
           inputter2.value = settings.starred_friend;
           inputter2.dispatchEvent(new Event("change"));
@@ -36235,7 +36235,7 @@
     }}
                     ${() => {
       let btn = html.node`
-                            <button class="btn chibi icon" data-type="starred_friend" data-is-shortcut=${settings.starred_friend != ""} onclick=${() => {
+                            <button class="btn chibi icon colourful" data-type="starred_friend" data-is-shortcut=${settings.starred_friend != ""} onclick=${() => {
         if (settings.starred_friend == "") return;
         inputter.value = settings.starred_friend;
         inputter.dispatchEvent(new Event("change"));
@@ -37167,7 +37167,7 @@
                         />
                         ${() => {
         let btn = html.node`
-                            <button class="btn chibi icon" data-type="starred_friend" data-starred=${settings.starred_friend != ""} onclick=${() => {
+                            <button class="btn chibi icon colourful" data-type="starred_friend" data-starred=${settings.starred_friend != ""} onclick=${() => {
           if (settings.starred_friend == "") return;
           inputter.value = settings.starred_friend;
           inputter.dispatchEvent(new Event("change"));
@@ -45554,16 +45554,16 @@
     panel.setAttribute("data-auth-name", auth.name);
     let row = html.node`
         <div class="listener-row">
-            <div class="listener-side">
+            <div class="listener-row-item listener-side">
                 <h3>${listeners.text}</h3>
                 <p>${listeners.abbr}</p>
             </div>
-            <div class="scrobble-side">
+            <div class="listener-row-item scrobble-side">
                 <h3>${scrobbles.text}</h3>
                 <p>${scrobbles.abbr}</p>
             </div>
             ${metascore.text ? html.node`
-            <div class="metascore-side">
+            <div class="listener-row-item metascore-side">
                 <h3>${metascore.text}</h3>
                 <p><a href="${metascore.link}" target="_blank">${metascore.abbr}</a></p>
             </div>
@@ -49891,7 +49891,7 @@
           let form2 = html.node`
                                     <form>
                                         <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
-                                        <a class="dropdown-menu-clickable-item chibi" ref=${(el) => button2 = el} data-menu-item="logout" href="${root}logout">
+                                        <a class="dropdown-menu-clickable-item chibi colourful" ref=${(el) => button2 = el} data-menu-item="logout" href="${root}logout">
                                             ${tl2(trans.logout)}
                                         </a>
                                     </form>
@@ -49903,7 +49903,7 @@
         }}
                             ${settings.starred_friend != "" ? () => {
           let button2 = html.node`
-                                    <a class="dropdown-menu-clickable-item chibi" data-type="starred_friend" data-starred="true" href="${root}user/${settings.starred_friend}">${settings.starred_friend}</a>
+                                    <a class="dropdown-menu-clickable-item chibi colourful" data-type="starred_friend" data-starred="true" href="${root}user/${settings.starred_friend}">${settings.starred_friend}</a>
                                 `;
           tippy_esm_default(button2, {
             content: settings.starred_friend
@@ -49911,7 +49911,7 @@
           return button2;
         } : () => {
           let button2 = html.node`
-                                    <button class="dropdown-menu-clickable-item chibi" data-type="starred_friend" data-is-shortcut="false" onclick=${() => open_starred_friend_window()}>${tl2(trans.starred_friend.name)}</button>
+                                    <button class="dropdown-menu-clickable-item chibi colourful" data-type="starred_friend" data-is-shortcut="false" onclick=${() => open_starred_friend_window()}>${tl2(trans.starred_friend.name)}</button>
                                 `;
           tippy_esm_default(button2, {
             content: tl2(
@@ -50304,7 +50304,7 @@
                         <div class="window-menu-items">
                             <form>
                                 <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
-                                <a class="dropdown-menu-clickable-item" ref=${(el) => button = el} data-menu-item="logout" href="${root}logout">
+                                <a class="dropdown-menu-clickable-item colourful" ref=${(el) => button = el} data-menu-item="logout" href="${root}logout">
                                     ${tl2(trans.logout)}
                                 </a>
                             </form>
@@ -50348,7 +50348,7 @@
           return elem;
         })}
                             ${settings.starred_friend != "" ? html.node`
-                                        <a class="dropdown-menu-clickable-item no-colour" data-type="starred_friend" data-is-shortcut="true" href="${root}user/${settings.starred_friend}">
+                                        <a class="dropdown-menu-clickable-item no-colour colourful" data-type="starred_friend" data-is-shortcut="true" href="${root}user/${settings.starred_friend}">
                                             ${settings.starred_friend}
                                         </a>
                                     ` : ""}
@@ -50603,7 +50603,7 @@
                             <p>${tl2(trans.sponsor_get_badge)}</p>
                         </div>
                         <div class="toggle-wrap">
-                            <button class="btn primary icon sponsor" data-type="sponsor" onclick=${() => sponsor_manage()}>
+                            <button class="btn primary icon sponsor colourful" data-type="sponsor" onclick=${() => sponsor_manage()}>
                                 ${tl2(trans.manage_sponsor)}
                             </button>
                         </div>
@@ -50615,7 +50615,7 @@
                             <p>${tl2(trans.sponsor_get_badge)}</p>
                         </div>
                         <div class="toggle-wrap">
-                            <button class="btn primary icon sponsor" data-type="sponsor" onclick=${() => sponsor()}>
+                            <button class="btn primary icon sponsor colourful" data-type="sponsor" onclick=${() => sponsor()}>
                                 ${tl2(trans.sponsor)}
                             </button>
                         </div>

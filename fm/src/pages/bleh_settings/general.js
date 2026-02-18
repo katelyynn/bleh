@@ -119,7 +119,7 @@ export function general() {
                             <p>${tl(trans.sponsor_get_badge)}</p>
                         </div>
                         <div class="toggle-wrap">
-                            <button class="btn primary icon sponsor" data-type="sponsor" onclick=${() => sponsor_manage()}>
+                            <button class="btn primary icon sponsor colourful" data-type="sponsor" onclick=${() => sponsor_manage()}>
                                 ${tl(trans.manage_sponsor)}
                             </button>
                         </div>
@@ -131,7 +131,7 @@ export function general() {
                             <p>${tl(trans.sponsor_get_badge)}</p>
                         </div>
                         <div class="toggle-wrap">
-                            <button class="btn primary icon sponsor" data-type="sponsor" onclick=${() => sponsor()}>
+                            <button class="btn primary icon sponsor colourful" data-type="sponsor" onclick=${() => sponsor()}>
                                 ${tl(trans.sponsor)}
                             </button>
                         </div>

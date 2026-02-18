@@ -1389,18 +1389,18 @@ function show_numbers_on_side(header_type) {
 
     let row = html.node`
         <div class="listener-row">
-            <div class="listener-side">
+            <div class="listener-row-item listener-side">
                 <h3>${listeners.text}</h3>
                 <p>${listeners.abbr}</p>
             </div>
-            <div class="scrobble-side">
+            <div class="listener-row-item scrobble-side">
                 <h3>${scrobbles.text}</h3>
                 <p>${scrobbles.abbr}</p>
             </div>
             ${
                 metascore.text ?
                     html.node`
-            <div class="metascore-side">
+            <div class="listener-row-item metascore-side">
                 <h3>${metascore.text}</h3>
                 <p><a href="${metascore.link}" target="_blank">${metascore.abbr}</a></p>
             </div>

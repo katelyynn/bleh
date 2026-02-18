@@ -277,6 +277,10 @@ body,
   --setting-hover: hsl(var(--b4), 20%);
   --setting-group: hsl(var(--b6), 20%);
   --lastfm-logo-filter: saturate(0%) contrast(0%) brightness(200%);
+  --view-buttons: hsl(var(--b6), 70%);
+  --view-buttons-shadow: var(--group-shadow);
+  --view-buttons-hov: hsl(var(--b4), 40%);
+  --view-buttons-atv: hsl(var(--b4), 60%);
   .theme-preview[data-bleh--theme=darker],
   [data-bleh--theme=darker] &:not(.theme-preview) {
     --b2:
@@ -368,7 +372,7 @@ body,
     --b3:
       0,
       0%,
-      98%;
+      99%;
     --b4:
       0,
       0%,
@@ -398,7 +402,7 @@ body,
     --normal-shadow: inset 0 -1px 0 0 hsl(var(--b2), 60%), inset 0 -30px 20px -20px hsl(var(--b4), 15%);
     --input-shadow: inset 0 -1px 0 0 var(--card-border-base), inset 0 1px 3px hsl(var(--b7), 0.1);
     --focused-input-shadow: inset 0 0 0 1px hsl(var(--l3-c), 30%), var(--input-shadow);
-    --group-shadow: inset 0 -1px 0 0 hsl(var(--b4), 0.4), inset 0 0 0 1px hsl(var(--b4), 0.4);
+    --group-shadow: inset 0 -1px 0 0 hsl(var(--b4)), inset 0 0 0 1px hsl(var(--b4), 0.4);
     --sidebar-bg: color-mix(in hsl, hsl(var(--b6)) 56%, hsl(var(--b5)));
     --sidebar-border: color-mix( in hsl, hsl(var(--b5)), hsl(var(--b4)) 55% );
     --toolbar-bg: hsl(var(--b4), 10%);
@@ -412,10 +416,13 @@ body,
     --header-filter-shadow: drop-shadow(0 0 10px hsl(var(--b5)));
     --banner-overlay: hsl(var(--b5), 20%);
     --banner-mix: lighten;
-    --setting-group: hsl(var(--b6), 8%);
+    --setting-group: hsl(var(--b6), 25%);
     --lastfm-logo-filter: none;
     --textarea: hsl(var(--b6), 40%);
     --textarea-hov: hsl(var(--b6), 70%);
+    --view-buttons: hsl(var(--b6), 25%);
+    --view-buttons-hov: hsl(var(--b4), 60%);
+    --view-buttons-atv: hsl(var(--b4), 80%);
   }
   .theme-preview[data-bleh--theme=ink],
   [data-bleh--theme=ink] &:not(.theme-preview) {
@@ -473,13 +480,11 @@ body,
 body,
 .tasteometer-compat-colour,
 .gallery-image-preferred-button,
-button,
 .gallery-image-preferred-states,
 stop,
 .alert,
 .event-status,
 .big-modal-alert,
-a,
 #current-subscription,
 .events-list-item-date-icon,
 .calendar-icon,
@@ -493,7 +498,6 @@ a,
 .form-row-help-text,
 .chartlist-loved,
 .theme-preview,
-.theme-preview[data-bleh--theme=dark],
 .badge,
 [data-season],
 .lotus,
@@ -955,10 +959,6 @@ body {
   --blur-brightness: 0.7;
   --blur-contrast: 1;
   --modal-bg: hsl(var(--b6), 0.6);
-  --view-buttons: hsl(var(--b6), 70%);
-  --view-buttons-shadow: var(--group-shadow);
-  --view-buttons-hov: hsl(var(--b4), 40%);
-  --view-buttons-atv: hsl(var(--b4), 60%);
   --menu-bg: var(--b6);
   --menu-opacity: 92%;
   --shout-actions-opacity: 0.45;
@@ -1025,7 +1025,6 @@ body {
     --interactable-active-outer: transparent 0 0 0;
     color-scheme: light !important;
     --avatar-generic-background: hsl(var(--b4), 30%);
-    --view-buttons: hsl(var(--b4), 10%);
     --shout-actions-opacity: 0.6;
     --rain:
       0,
@@ -1034,7 +1033,6 @@ body {
   }
   &[data-bleh--theme=oled],
   [data-bleh--theme=oled] > & {
-    --view-buttons: hsl(var(--b4), 30%);
     --card-border: inset 0 0 0 1px hsla(var(--b4), 0.8);
     --modal-bg: hsl(var(--b2), 0.5);
     --menu-bg: var(--b5);
@@ -1859,7 +1857,6 @@ h2.text-18,
 .tags-add,
 .tags-view-all,
 .masthead-popup-close,
-.share-link,
 .check .box,
 .radio-cont > .radio,
 .blend-v2-btn,
@@ -1982,7 +1979,7 @@ h2.text-18,
   &.btn--loading {
     background-image: unset;
   }
-  &:is(.danger, .btn-primary:is([type=submit], .js-close), .inbox-delete-button:not([disabled]), #manage_data .btn-primary, .primary, .btn-subscribe, .share-link, .view-item[aria-checked=true], .user-now-empty-state-button):not([data-has-file], .see-more) {
+  &:is(.danger, .btn-primary:is([type=submit], .js-close), .inbox-delete-button:not([disabled]), #manage_data .btn-primary, .primary, .btn-subscribe, .view-item[aria-checked=true], .user-now-empty-state-button):not([data-has-file], .see-more) {
     --bg: var(--cards-overlay-image-subtlest, none), hsl(var(--h3)) !important;
     --bg-hov: var(--cards-overlay-image-subtlest, none), color-mix(in hsl, hsl(var(--h4)), hsl(var(--h3)) 80%) !important;
     --bg-atv: var(--cards-overlay-image-subtlest, none), color-mix(in hsl, hsl(var(--h4)), hsl(var(--h3)) 60%) !important;
@@ -3039,6 +3036,7 @@ li:first-child .more-item--delete {
     display: none;
   }
 }
+.accented-menu-item,
 .dropdown-menu-clickable-item[data-starred=true]:not(.no-colour),
 .dropdown-menu-clickable-item.sponsor,
 .dropdown-menu-clickable-item.update,
@@ -8206,7 +8204,7 @@ text:has(> .your-progress-label-position) {
     .metascore-side {
       --mask: url(data:image/svg+xml;base64,PHN2ZyByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+TWV0YWNyaXRpYzwvdGl0bGU+PHBhdGggZD0iTTExLjk5IDBBMTIgMTIgMCAxIDAgMjQgMTJ2LS4wMTRBMTIgMTIgMCAwIDAgMTEuOTkgMFptLS4wNTUgMi41NjRhOS4zOTkgOS4zOTkgMCAwIDEgOS40MDcgOS4zODl2LjAxYTkuMzk5IDkuMzk5IDAgMSAxLTkuNDA4LTkuMzk5Wm0tMS42MSAxNy4xOTggMi4wNDYtMi4wNDYtMy45NC0zLjk0Yy0uMTY1LS4xNjYtLjM0NS0uMzczLS40NDItLjYwOC0uMjIxLS40Ny0uMzE4LTEuMjAzLjIyMS0xLjc0Mi42NjQtLjY2NCAxLjU0OC0uMzg3IDIuNDA2LjQ3bDMuNzg4IDMuNzg4IDIuMDQ2LTIuMDQ2LTMuOTU0LTMuOTU0YTIuNDggMi40OCAwIDAgMS0uNDU2LS42MjJjLS4yNjMtLjUzOS0uMjUtMS4yMTYuMjM1LTEuNy42NzctLjY3OCAxLjU2Mi0uNDI5IDIuNTQ0LjU1M2wzLjY3NyAzLjY3NyAyLjA0Ni0yLjA0Ni0zLjk4Mi0zLjk4MmMtMi4wMTgtMi4wMTgtMy45MTItMS45NDktNS4yMTItLjY1LS40OTguNDk5LS44MDIgMS4wMjQtLjk1NCAxLjYxOGE0LjAyNiA0LjAyNiAwIDAgMC0uMDU1IDEuNjg2bC0uMDI3LjAyOGMtLjk5Ni0uNDE0LTIuMTMtLjE2Ni0zIC43MDUtMS4xNjIgMS4xNjEtMS4xMiAyLjM5Mi0uOTgyIDMuMTFsLS4wNDIuMDQzLTEuMDA5LS44MTYtMS43NyAxLjc3YTY0LjEgNjQuMSAwIDAgMSAyLjIxMyAyLjF6Ii8+PC9zdmc+);
     }
-    div {
+    .listener-row-item {
       display: flex;
       flex-direction: column;
       position: relative;
@@ -17382,10 +17380,9 @@ input[type=range]::-moz-range-progress {
 .js-shout-reply-cancel:before,
 .notification-action:before,
 .inbox-compose-button:before,
-.share-link:before,
-.listener-row div:before,
+.listener-row-item:before,
 .mobile-control:before,
-.palette .swatch:before,
+.swatch:before,
 .with-icon:before,
 .tip.preview:before,
 .lotus-preview .before:before,
@@ -17396,7 +17393,7 @@ input[type=range]::-moz-range-progress {
 .library-search-results.async-content-loading:after,
 .radio-button:after,
 .listening-report-promo:after,
-.listening-report-promo .listening-report-promo-date:after,
+.listening-report-promo-date:after,
 .side-action:after,
 .listen-item-text:before,
 .metadata-column .cta-link-wrap > a:before,
@@ -17420,7 +17417,6 @@ input[type=range]::-moz-range-progress {
 .music-bookmarks-tags-item-toggle:before,
 .music-bookmarks-artists-item-toggle:before,
 .music-bookmarks-albums-item-toggle:before,
-.sponsor:before,
 .chart-table--buttons button:before,
 .api-session-connect:before,
 .api-session-disconnect:before,
@@ -17627,7 +17623,6 @@ span.bleh-icon {
 
 /* src/styles/shared/links.css */
 [data-host="facebook.com"],
-.share-link-facebook,
 .resource-external-link--facebook {
   &.music-link {
     --hue-over: 217;
@@ -17792,7 +17787,6 @@ span.bleh-icon {
   --mask: url(data:image/svg+xml;base64,PHN2ZyByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+U291bmRDbG91ZDwvdGl0bGU+PHBhdGggZD0iTTEuMTc1IDEyLjIyNWMtLjA1MSAwLS4wOTQuMDQ2LS4xMDEuMWwtLjIzMyAyLjE1NC4yMzMgMi4xMDVjLjAwNy4wNTguMDUuMDk4LjEwMS4wOTguMDUgMCAuMDktLjA0LjA5OS0uMDk4bC4yNTUtMi4xMDUtLjI3LTIuMTU0YzAtLjA1Ny0uMDQ1LS4xLS4wOS0uMW0tLjg5OS44MjhjLS4wNiAwLS4wOTEuMDM3LS4xMDQuMDk0TDAgMTQuNDc5bC4xNjUgMS4zMDhjMCAuMDU1LjA0NS4wOTQuMDkuMDk0cy4wODktLjA0NS4xMDQtLjEwNGwuMjEtMS4zMTktLjIxLTEuMzM0YzAtLjA2MS0uMDQ0LS4wOS0uMDktLjA5bTEuODMtMS4yMjljLS4wNjEgMC0uMTIuMDQ1LS4xMi4xMDRsLS4yMSAyLjU2My4yMjUgMi40NThjMCAuMDYuMDQ1LjEyLjExOS4xMi4wNjEgMCAuMTA1LS4wNjEuMTIxLS4xMmwuMjU0LTIuNDc0LS4yNTQtMi41NDhjLS4wMTYtLjA2LS4wNjEtLjEyLS4xMjEtLjEybS45NDUtLjA4OWMtLjA3NSAwLS4xMzUuMDYtLjE1LjEzNWwtLjE5MyAyLjY0LjIxIDIuNTQ0Yy4wMTYuMDc3LjA3NS4xMzguMTQ5LjEzOC4wNzUgMCAuMTM1LS4wNjEuMTUtLjE1bC4yNC0yLjUzMi0uMjQtMi42MjNjMC0uMDc1LS4wNi0uMTM1LS4xMzUtLjEzNWwtLjAzMS0uMDE3em0xLjE1NS4zNmMtLjAwNS0uMDktLjA3NS0uMTQ5LS4xNTktLjE0OS0uMDkgMC0uMTU4LjA2LS4xNjQuMTQ5bC0uMjE3IDIuNDMuMiAyLjU2M2MwIC4wOS4wNzUuMTU3LjE1OS4xNTcuMDc0IDAgLjE0OC0uMDY4LjE0OC0uMTU4bC4yMjctMi41NjMtLjIyNy0yLjQ0NC4wMzMuMDE1em0uODA5LTEuNzA5Yy0uMTAxIDAtLjE4LjA5LS4xOC4xODFsLS4yMSAzLjk1Ny4xODcgMi41NjNjMCAuMDkuMDguMTY0LjE4LjE2NC4wOTQgMCAuMTc0LS4wOS4xOC0uMThsLjIwOS0yLjU2My0uMjA5LTMuOTcyYy0uMDA4LS4xMDQtLjA4OC0uMTgtLjE4LS4xOG0uOTU5LS45MTRjLS4xMDUgMC0uMTk1LjA5LS4yMDMuMTk0bC0uMTggNC44NzIuMTY1IDIuNTQ4YzAgLjEyLjA5LjIwOS4xOTUuMjA5LjEwNCAwIC4xOTQtLjA4OS4yMS0uMjA5bC4xOTMtMi41NDgtLjE5Mi00Ljg1NmMtLjAxNi0uMTItLjEwNS0uMjEtLjIxLS4yMW0uOTg5LS40NDljLS4xMjEgMC0uMjExLjA4OS0uMjI1LjIwOWwtLjE2NSA1LjI3NS4xNjUgMi41MmMuMDE0LjExOS4xMDQuMjI1LjIyNS4yMjUuMTE5IDAgLjIyNS0uMTA1LjIyNS0uMjI1bC4xOTUtMi41Mi0uMTk2LTUuMjc1YzAtLjEyLS4xMDUtLjIyNS0uMjI1LS4yMjVtMS4yNDUuMDQ1YzAtLjEzNS0uMTA1LS4yNC0uMjQtLjI0LS4xMTkgMC0uMjQuMTA1LS4yNC4yNGwtLjE0OSA1LjQ0MS4xNDkgMi41MDNjLjAxNi4xMzUuMTIxLjI0LjI1Ni4yNHMuMjQtLjEwNS4yNC0uMjRsLjE2NC0yLjUwMy0uMTY0LTUuNDU2LS4wMTYuMDE1em0uNzQ5LS4xMzRjLS4xMzUgMC0uMjU1LjExOS0uMjU1LjI1NGwtLjE1IDUuMzIyLjE1IDIuNDczYzAgLjE1LjEyLjI1NS4yNTUuMjU1cy4yNTUtLjEyLjI1NS0uMjdsLjE1LTIuNDc0LS4xNjUtNS4zMDdjMC0uMTQ4LS4xMi0uMjctLjI3MS0uMjdtMS4wMDUuMTY2Yy0uMTY0IDAtLjI4NC4xMzUtLjI4NC4yODVsLS4xMDMgNS4xNDMuMTM1IDIuNDc0YzAgLjE0OS4xMTkuMjc3LjI4NC4yNzcuMTQ5IDAgLjI3MS0uMTIuMjg0LS4yODVsLjEyMS0yLjQ0My0uMTM1LTUuMTEyYy0uMDEyLS4xNjQtLjEzNS0uMjg1LS4yODUtLjI4NW0xLjE4NC0uOTQ1Yy0uMDQ1LS4wMjktLjEwNS0uMDQ0LS4xNjUtLjA0NHMtLjExOS4wMTUtLjE2NS4wNDRjLS4wOS4wNTQtLjE0OS4xNS0uMTQ5LjI1NXYuMDYxbC0uMTA0IDYuMDQ4LjExNSAyLjQ0OXYuMDA4Yy4wMDguMDYuMDMuMTM1LjA3NC4xOC4wNTguMDYxLjE0Mi4xMDQuMjM0LjEwNC4wOCAwIC4xNTgtLjA0NC4yMDktLjA5LjA1OC0uMDYuMDkxLS4xMzUuMDkxLS4yMjVsLjAxNS0uMjQuMTE3LTIuMjAzLS4xMzUtNi4wODZjMC0uMTA0LS4wNjEtLjE5My0uMTM1LS4yMzlsLS4wMDItLjAyMnptMS4wMDYtLjU0N2MtLjA0NS0uMDQ1LS4wOS0uMDYxLS4xNS0uMDYxLS4wNzQgMC0uMTQ5LjAxNi0uMjA5LjA2MS0uMDc1LjA2MS0uMTE5LjE1LS4xMTkuMjR2LjAyOWwtLjEzNyA2LjYwOS4wNzYgMS4yMTUuMDYxIDEuMTg1YzAgLjE2NC4xNDguMzE0LjMyOC4zMTQuMTgxIDAgLjMzLS4xNS4zMy0uMzI5bC4xNS0yLjQxNC0uMTUtNi42MzdjMC0uMTItLjA3NC0uMjIxLS4xNjUtLjI3N204LjkzNCAzLjc3N2MtLjQwNSAwLS43OTUuMDg2LTEuMTM5LjIzMi0uMjQtMi42NTQtMi40Ni00LjczNi01LjE4OC00LjczNi0uNjU5IDAtMS4zMDUuMTM1LTEuODg5LjM1OS0uMjI1LjA5LS4yNy4xOC0uMjg1LjM1OXY5LjM2OGMuMDE2LjE4LjE1LjMzLjMzLjM0NWg4LjE4NUMyMi42ODEgMTcuMjE4IDI0IDE1LjkxNCAyNCAxNC4yOHMtMS4zMTktMi45NTItMi45MzgtMi45NTIiLz48L3N2Zz4=);
 }
 [data-host="twitter.com"],
-.share-link-twitter,
 .resource-external-link--twitter {
   &.music-link {
     --hue-over: 200;
@@ -21873,24 +21867,6 @@ span.bleh-icon {
   .share-input {
     width: 300px !important;
   }
-}
-.share-links {
-  margin-top: var(--card-gap);
-  display: none;
-  gap: var(--button-list-gap);
-}
-.share-link {
-  position: relative;
-  width: 48px;
-  height: 48px;
-  border-radius: var(--item-med-radius);
-  box-shadow: var(--interact-shadow);
-  --mask-size: 24px;
-  --btn-left: var(--button-sides) !important;
-  --left: 50%;
-  --margin-left: -12px;
-  --margin-top: -12px;
-  --font-size: 0;
 }
 
 /* src/styles/dialog/bulk_edit.css */

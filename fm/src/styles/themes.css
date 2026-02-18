@@ -266,6 +266,11 @@ body,
 
     --lastfm-logo-filter: saturate(0%) contrast(0%) brightness(200%);
 
+    --view-buttons: hsl(var(--b6), 70%);
+    --view-buttons-shadow: var(--group-shadow);
+    --view-buttons-hov: hsl(var(--b4), 40%);
+    --view-buttons-atv: hsl(var(--b4), 60%);
+
     .theme-preview[data-bleh--theme="darker"],
     [data-bleh--theme="darker"] &:not(.theme-preview) {
         /* any additional highlights */
@@ -343,7 +348,7 @@ body,
     [data-bleh--theme="light"] &:not(.theme-preview) {
         /* any additional highlights */
         --b2: 0, 0%, 82%;
-        --b3: 0, 0%, 98%;
+        --b3: 0, 0%, 99%;
 
         /* card border */
         --b4: 0, 0%, 91%;
@@ -370,7 +375,7 @@ body,
             inset 0 0 0 1px hsl(var(--l3-c), 30%),
             var(--input-shadow);
         --group-shadow:
-            inset 0 -1px 0 0 hsl(var(--b4), 0.4),
+            inset 0 -1px 0 0 hsl(var(--b4)),
             inset 0 0 0 1px hsl(var(--b4), 0.4);
 
         --sidebar-bg: color-mix(in hsl, hsl(var(--b6)) 56%, hsl(var(--b5)));
@@ -395,12 +400,16 @@ body,
         --banner-overlay: hsl(var(--b5), 20%);
         --banner-mix: lighten;
 
-        --setting-group: hsl(var(--b6), 8%);
+        --setting-group: hsl(var(--b6), 25%);
 
         --lastfm-logo-filter: none;
 
         --textarea: hsl(var(--b6), 40%);
         --textarea-hov: hsl(var(--b6), 70%);
+
+        --view-buttons: hsl(var(--b6), 25%);
+        --view-buttons-hov: hsl(var(--b4), 60%);
+        --view-buttons-atv: hsl(var(--b4), 80%);
     }
     .theme-preview[data-bleh--theme="ink"],
     [data-bleh--theme="ink"] &:not(.theme-preview) {
@@ -475,11 +484,9 @@ body,
 body,
 .tasteometer-compat-colour,
 .gallery-image-preferred-button,
-button,
 .gallery-image-preferred-states,
 stop,
 .alert, .event-status, .big-modal-alert,
-a,
 #current-subscription,
 .events-list-item-date-icon, .calendar-icon,
 .async-content-error-message,
@@ -488,7 +495,7 @@ a,
 .nag-bar--alert,
 .form-row-help-text,
 .chartlist-loved,
-.theme-preview, .theme-preview[data-bleh--theme="dark"],
+.theme-preview,
 .badge,
 [data-season],
 .lotus, .sponsor-related,
@@ -930,11 +937,6 @@ body {
 
     --modal-bg: hsl(var(--b6), 0.6);
 
-    --view-buttons: hsl(var(--b6), 70%);
-    --view-buttons-shadow: var(--group-shadow);
-    --view-buttons-hov: hsl(var(--b4), 40%);
-    --view-buttons-atv: hsl(var(--b4), 60%);
-
     --menu-bg: var(--b6);
     --menu-opacity: 92%;
 
@@ -1019,8 +1021,6 @@ body {
 
         --avatar-generic-background: hsl(var(--b4), 30%);
 
-        --view-buttons: hsl(var(--b4), 10%);
-
         --shout-actions-opacity: 0.6;
 
         --rain: 0, 0%, 70%;
@@ -1028,8 +1028,6 @@ body {
 
     &[data-bleh--theme="oled"],
     [data-bleh--theme="oled"] > & {
-        --view-buttons: hsl(var(--b4), 30%);
-
         --card-border: inset 0 0 0 1px hsla(var(--b4), 0.8);
 
         --modal-bg: hsl(var(--b2), 0.5);

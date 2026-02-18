@@ -822,7 +822,7 @@ export function append_nav() {
                                 let form = html.node`
                                     <form>
                                         <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
-                                        <a class="dropdown-menu-clickable-item chibi" ref=${(el) => (button = el)} data-menu-item="logout" href="${root}logout">
+                                        <a class="dropdown-menu-clickable-item chibi colourful" ref=${(el) => (button = el)} data-menu-item="logout" href="${root}logout">
                                             ${tl(trans.logout)}
                                         </a>
                                     </form>
@@ -838,7 +838,7 @@ export function append_nav() {
                                 settings.starred_friend != '' ?
                                     () => {
                                         let button = html.node`
-                                    <a class="dropdown-menu-clickable-item chibi" data-type="starred_friend" data-starred="true" href="${root}user/${settings.starred_friend}">${settings.starred_friend}</a>
+                                    <a class="dropdown-menu-clickable-item chibi colourful" data-type="starred_friend" data-starred="true" href="${root}user/${settings.starred_friend}">${settings.starred_friend}</a>
                                 `;
 
                                         tippy(button, {
@@ -849,7 +849,7 @@ export function append_nav() {
                                     }
                                 :   () => {
                                         let button = html.node`
-                                    <button class="dropdown-menu-clickable-item chibi" data-type="starred_friend" data-is-shortcut="false" onclick=${() => open_starred_friend_window()}>${tl(trans.starred_friend.name)}</button>
+                                    <button class="dropdown-menu-clickable-item chibi colourful" data-type="starred_friend" data-is-shortcut="false" onclick=${() => open_starred_friend_window()}>${tl(trans.starred_friend.name)}</button>
                                 `;
 
                                         tippy(button, {
@@ -1295,7 +1295,7 @@ export function append_nav() {
                         <div class="window-menu-items">
                             <form>
                                 <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
-                                <a class="dropdown-menu-clickable-item" ref=${(el) => (button = el)} data-menu-item="logout" href="${root}logout">
+                                <a class="dropdown-menu-clickable-item colourful" ref=${(el) => (button = el)} data-menu-item="logout" href="${root}logout">
                                     ${tl(trans.logout)}
                                 </a>
                             </form>
@@ -1349,7 +1349,7 @@ export function append_nav() {
                             ${
                                 settings.starred_friend != '' ?
                                     html.node`
-                                        <a class="dropdown-menu-clickable-item no-colour" data-type="starred_friend" data-is-shortcut="true" href="${root}user/${settings.starred_friend}">
+                                        <a class="dropdown-menu-clickable-item no-colour colourful" data-type="starred_friend" data-is-shortcut="true" href="${root}user/${settings.starred_friend}">
                                             ${settings.starred_friend}
                                         </a>
                                     `

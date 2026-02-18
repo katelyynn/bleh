@@ -415,15 +415,15 @@ export function bleh_profiles() {
         let listen_container = html.node`
             <section class="listen-panel listen-profile-panel">
                 <div class="listener-row">
-                    <div class="scrobble-side">
+                    <div class="listener-row-item scrobble-side">
                         <h3>${tl(trans.scrobbles)}</h3>
                         <p ref=${(el) => (scrobble_text = el)}><a href="${root}user/${page.name}/library">${scrobbles.toLocaleString(lang)}</a></p>
                     </div>
-                    <div class="artist-side">
+                    <div class="listener-row-item artist-side">
                         <h3>${tl(trans.artists)}</h3>
                         <p><a href="${root}user/${page.name}/library/artists">${artists.toLocaleString(lang)}</a></p>
                     </div>
-                    <div class="loved-side">
+                    <div class="listener-row-item loved-side">
                         <h3>${tl(trans.loved)}</h3>
                         <p><a href="${root}user/${page.name}/loved">${loved.toLocaleString(lang)}</a></p>
                     </div>
