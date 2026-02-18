@@ -45003,7 +45003,7 @@
           ".play-this-track-playlink:not(.visible-xs)"
         );
         link.classList.remove("play-this-track-playlink");
-        link.classList.add("music-link");
+        link.classList.add("music-link", "colourful");
         const replace = item.querySelector(".replace-playlink");
         if (link.classList.contains("play-this-track-playlink--youtube")) {
           link.textContent = "YouTube";
@@ -45042,22 +45042,22 @@
       )) {
         link_container.appendChild(html.node`
                 ${settings.music_links.includes("genius") ? html.node`
-                    <a class="music-link play-this-track-playlink--genius" href="https://genius.com/search?q=${sanitise(page.sister)}+${sanitise(page.name)}" target="_blank">
+                    <a class="music-link play-this-track-playlink--genius colourful" href="https://genius.com/search?q=${sanitise(page.sister)}+${sanitise(page.name)}" target="_blank">
                         Genius
                     </a>
                 ` : ""}
                 ${settings.music_links.includes("tidal") ? html.node`
-                    <a class="music-link play-this-track-playlink--tidal" href="https://listen.tidal.com/search?q=${sanitise(page.sister, " ")} ${sanitise(page.name, " ")}" target="_blank">
+                    <a class="music-link play-this-track-playlink--tidal colourful" href="https://listen.tidal.com/search?q=${sanitise(page.sister, " ")} ${sanitise(page.name, " ")}" target="_blank">
                         Tidal
                     </a>
                 ` : ""}
                 ${settings.music_links.includes("deezer") ? html.node`
-                    <a class="music-link play-this-track-playlink--deezer" href="https://www.deezer.com/search/${sanitise(page.sister, " ")} ${sanitise(page.name, " ")}" target="_blank">
+                    <a class="music-link play-this-track-playlink--deezer colourful" href="https://www.deezer.com/search/${sanitise(page.sister, " ")} ${sanitise(page.name, " ")}" target="_blank">
                         Deezer
                     </a>
                 ` : ""}
                 ${settings.music_links.includes("qobuz") ? html.node`
-                    <a class="music-link play-this-track-playlink--qobuz" href="https://www.qobuz.com/gb-en/search/tracks/${sanitise(page.name, " ")}?ssf[s]=main_catalog&ssf[f][an]=${sanitise(page.sister, " ")}" target="_blank">
+                    <a class="music-link play-this-track-playlink--qobuz colourful" href="https://www.qobuz.com/gb-en/search/tracks/${sanitise(page.name, " ")}?ssf[s]=main_catalog&ssf[f][an]=${sanitise(page.sister, " ")}" target="_blank">
                         Qobuz
                     </a>
                 ` : ""}
@@ -45070,7 +45070,7 @@
           html`
                     ${settings.music_links.includes("spotify") ? html.node`
                             <a
-                                class="music-link play-this-track-playlink--spotify"
+                                class="music-link play-this-track-playlink--spotify colourful"
                                 href="https://open.spotify.com/search/${sanitise(
             page.sister,
             " "
@@ -45082,7 +45082,7 @@
                     ` : ""}
                     ${settings.music_links.includes("itunes") ? html.node`
                             <a
-                                class="music-link play-this-track-playlink--itunes"
+                                class="music-link play-this-track-playlink--itunes colourful"
                                 href="https://music.apple.com/gb/search?term=${sanitise(
             page.sister,
             " "
@@ -45094,7 +45094,7 @@
                     ` : ""}
                     ${settings.music_links.includes("youtube") ? html.node`
                             <a
-                                class="music-link play-this-track-playlink--youtube-music"
+                                class="music-link play-this-track-playlink--youtube-music colourful"
                                 href="https://music.youtube.com/search?q=${sanitise(
             page.sister
           )}+${sanitise(page.name)}"
@@ -45105,7 +45105,7 @@
                     ` : ""}
                     ${settings.music_links.includes("tidal") ? html.node`
                             <a
-                                class="music-link play-this-track-playlink--tidal"
+                                class="music-link play-this-track-playlink--tidal colourful"
                                 href="https://listen.tidal.com/search?q=${sanitise(
             page.sister,
             " "
@@ -45117,7 +45117,7 @@
                     ` : ""}
                     ${settings.music_links.includes("deezer") ? html.node`
                             <a
-                                class="music-link play-this-track-playlink--deezer"
+                                class="music-link play-this-track-playlink--deezer colourful"
                                 href="https://www.deezer.com/search/${sanitise(
             page.sister,
             " "
@@ -45129,7 +45129,7 @@
                     ` : ""}
                     ${settings.music_links.includes("discogs") ? html.node`
                             <a
-                                class="music-link play-this-track-playlink--discogs"
+                                class="music-link play-this-track-playlink--discogs colourful"
                                 href="https://www.discogs.com/search?q=${sanitise(
             page.sister
           )}+${sanitise(page.name)}&type=all"
@@ -45140,7 +45140,7 @@
                     ` : ""}
                     ${settings.music_links.includes("qobuz") ? html.node`
                             <a
-                                class="music-link play-this-track-playlink--qobuz"
+                                class="music-link play-this-track-playlink--qobuz colourful"
                                 href="https://www.qobuz.com/gb-en/search/albums/${sanitise(page.name, " ")}?ssf[s]=main_catalog&ssf[f][an]=${sanitise(page.sister, " ")}"
                                 target="_blank"
                             >
@@ -45149,7 +45149,7 @@
                     ` : ""}
                     ${settings.music_links.includes("aoty") ? html.node`
                             <a
-                                class="music-link play-this-track-playlink--aoty"
+                                class="music-link play-this-track-playlink--aoty colourful"
                                 href="https://www.albumoftheyear.org/search/?q=${sanitise(
             page.sister
           )}+${sanitise(page.name)}"
@@ -45160,7 +45160,7 @@
                     ` : ""}
                     ${settings.music_links.includes("rym") ? html.node`
                             <a
-                                class="music-link play-this-track-playlink--rym"
+                                class="music-link play-this-track-playlink--rym colourful"
                                 href="https://rateyourmusic.com/search?searchterm=${sanitise(
             page.sister,
             " "
@@ -45172,7 +45172,7 @@
                     ` : ""}
                     ${settings.music_links.includes("genius") ? html.node`
                             <a
-                                class="music-link play-this-track-playlink--genius"
+                                class="music-link play-this-track-playlink--genius colourful"
                                 href="https://genius.com/search?q=${sanitise(
             page.sister
           )}+${sanitise(page.name)}"
@@ -45189,7 +45189,7 @@
           html`
                     ${settings.music_links.includes("spotify") ? html.node`
                             <a
-                                class="music-link play-this-track-playlink--spotify"
+                                class="music-link play-this-track-playlink--spotify colourful"
                                 href="https://open.spotify.com/search/${sanitise(
             page.name,
             " "
@@ -45201,7 +45201,7 @@
                     ` : ""}
                     ${settings.music_links.includes("itunes") ? html.node`
                             <a
-                                class="music-link play-this-track-playlink--itunes"
+                                class="music-link play-this-track-playlink--itunes colourful"
                                 href="https://music.apple.com/gb/search?term=${sanitise(
             page.name,
             " "
@@ -45213,7 +45213,7 @@
                     ` : ""}
                     ${settings.music_links.includes("youtube") ? html.node`
                             <a
-                                class="music-link play-this-track-playlink--youtube-music"
+                                class="music-link play-this-track-playlink--youtube-music colourful"
                                 href="https://music.youtube.com/search?q=${sanitise(
             page.name
           )}"
@@ -45224,7 +45224,7 @@
                     ` : ""}
                     ${settings.music_links.includes("tidal") ? html.node`
                             <a
-                                class="music-link play-this-track-playlink--tidal"
+                                class="music-link play-this-track-playlink--tidal colourful"
                                 href="https://listen.tidal.com/search?q=${sanitise(
             page.name,
             " "
@@ -45236,7 +45236,7 @@
                     ` : ""}
                     ${settings.music_links.includes("deezer") ? html.node`
                             <a
-                                class="music-link play-this-track-playlink--deezer"
+                                class="music-link play-this-track-playlink--deezer colourful"
                                 href="https://www.deezer.com/search/${sanitise(
             page.name,
             " "
@@ -45248,7 +45248,7 @@
                     ` : ""}
                     ${settings.music_links.includes("discogs") ? html.node`
                             <a
-                                class="music-link play-this-track-playlink--discogs"
+                                class="music-link play-this-track-playlink--discogs colourful"
                                 href="https://www.discogs.com/search?q=${sanitise(
             page.name
           )}&type=artist"
@@ -45259,7 +45259,7 @@
                     ` : ""}
                     ${settings.music_links.includes("qobuz") ? html.node`
                             <a
-                                class="music-link play-this-track-playlink--qobuz"
+                                class="music-link play-this-track-playlink--qobuz colourful"
                                 href="https://www.qobuz.com/gb-en/search/artists/${sanitise(
             page.name,
             " "
@@ -45271,7 +45271,7 @@
                     ` : ""}
                     ${settings.music_links.includes("aoty") ? html.node`
                             <a
-                                class="music-link play-this-track-playlink--aoty"
+                                class="music-link play-this-track-playlink--aoty colourful"
                                 href="https://www.albumoftheyear.org/search/?q=${sanitise(
             page.name
           )}"
@@ -45282,7 +45282,7 @@
                     ` : ""}
                     ${settings.music_links.includes("rym") ? html.node`
                             <a
-                                class="music-link play-this-track-playlink--rym"
+                                class="music-link play-this-track-playlink--rym colourful"
                                 href="https://rateyourmusic.com/search?searchterm=${sanitise(
             page.name,
             " "
@@ -45294,7 +45294,7 @@
                     ` : ""}
                     ${settings.music_links.includes("genius") ? html.node`
                             <a
-                                class="music-link play-this-track-playlink--genius"
+                                class="music-link play-this-track-playlink--genius colourful"
                                 href="https://genius.com/search?q=${sanitise(
             page.name
           )}"
@@ -47383,7 +47383,7 @@
           label = link_strings[link.host];
         }
         return html.node`
-                            <a class="music-link social-link" href=${link.url} target="_blank" data-host=${link.host} data-host-unknown=${!link_strings.hasOwnProperty(link.host)} data-path=${link.path} style="--favi: url(https://icons.duckduckgo.com/ip3/${link.host}.ico)">
+                            <a class="music-link social-link colourful" href=${link.url} target="_blank" data-host=${link.host} data-host-unknown=${!link_strings.hasOwnProperty(link.host)} data-path=${link.path} style="--favi: url(https://icons.duckduckgo.com/ip3/${link.host}.ico)">
                                 ${label}
                             </a>
                         `;
@@ -58265,12 +58265,12 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                         <div class="sub-text music-small-header">${tl2(trans.find_on)}</div>
                         <div class="music-links">
                             ${web ? html.node`
-                                <a class="resource-external-link resource-external-link--homepage music-link" href=${web} target="_blank">
+                                <a class="resource-external-link resource-external-link--homepage music-link colourful" href=${web} target="_blank">
                                     ${tl2(trans.website)}
                                 </a>
                             ` : ""}
                             ${maps ? html.node`
-                                <a class="music-link" data-host="maps.google.com" data-host-unknown="true" href=${maps} target="_blank" style="--favi: url(https://icons.duckduckgo.com/ip3/maps.google.com.ico)">
+                                <a class="music-link colourful" data-host="maps.google.com" data-host-unknown="true" href=${maps} target="_blank" style="--favi: url(https://icons.duckduckgo.com/ip3/maps.google.com.ico)">
                                     ${tl2(trans.show_on_map)}
                                 </a>
                             ` : ""}
