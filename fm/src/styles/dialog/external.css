@@ -9,7 +9,7 @@
         margin: unset;
         cursor: default;
 
-        color: hsl(var(--c1));
+        color: oklch(var(--c1));
     }
 
     p {
@@ -21,7 +21,7 @@
 
 .external-warn-input {
     padding: 12px 24px;
-    background: hsl(var(--b6), 60%);
+    background: oklch(var(--b6), 60%);
     border-radius: var(--item-med-radius);
     box-shadow: var(--input-shadow);
 
@@ -46,9 +46,9 @@
 .link {
     display: flex;
     align-items: center;
-    color: hsl(var(--c3));
+    color: oklch(var(--c3));
 
     & > .hostname {
-        color: hsl(var(--c2));
+        color: oklch(var(--c2));
     }
 }

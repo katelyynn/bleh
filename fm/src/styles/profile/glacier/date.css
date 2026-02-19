@@ -7,7 +7,7 @@
 
         .user-sidebar-header {
             margin: unset !important;
-            color: hsl(var(--c3));
+            color: oklch(var(--c3));
         }
 
         .library-controls-datepicker {
@@ -46,7 +46,7 @@
                 transition-timing-function: var(
                     --trans-function
                 ) !important;
-                color: hsl(var(--c3));
+                color: oklch(var(--c3));
             }
 
             &[aria-expanded="true"] {

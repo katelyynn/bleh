@@ -52,7 +52,7 @@
         letter-spacing: unset;
         margin: unset;
         cursor: default;
-        color: hsl(var(--c1));
+        color: oklch(var(--c1));
     }
 
     .connector-footer {
@@ -120,7 +120,7 @@
         letter-spacing: unset;
         margin: unset;
         cursor: default;
-        color: hsl(var(--c1));
+        color: oklch(var(--c1));
     }
 
     .setup-footer {
@@ -216,7 +216,7 @@
         letter-spacing: unset;
         margin: unset;
         cursor: default;
-        color: hsl(var(--c1));
+        color: oklch(var(--c1));
     }
 
     .error-footer {

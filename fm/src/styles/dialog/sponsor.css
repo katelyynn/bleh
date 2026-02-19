@@ -16,7 +16,7 @@
     }
 
     & > h1 {
-        color: hsl(var(--c1));
+        color: oklch(var(--c1));
         font-size: 16px;
         line-height: 20px;
         font-weight: var(--font-weight-medium);
@@ -25,7 +25,7 @@
         cursor: default;
 
         &.colourful {
-            color: hsl(var(--l3-c));
+            color: oklch(var(--l3-c));
             --hue-over: 336;
             --sat-over: 1.4;
             --lit-over: 1.1;

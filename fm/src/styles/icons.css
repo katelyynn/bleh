@@ -434,7 +434,7 @@
     }
 
     &[data-bleh--accessible_name_colours="true"] > body {
-        --name-colour: hsl(var(--c1));
+        --name-colour: oklch(var(--c1));
     }
 
     &[data-bleh--season="halloween"] {

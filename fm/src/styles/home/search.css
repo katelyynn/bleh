@@ -16,11 +16,11 @@
             font-size: var(--font-size);
             line-height: var(--line-height);
             font-weight: var(--font-weight-medium);
-            color: hsl(var(--c2));
+            color: oklch(var(--c2));
         }
         .album-result-artist,
         .artist-result-listeners {
-            color: hsl(var(--c3));
+            color: oklch(var(--c3));
             margin: unset;
         }
 

@@ -144,7 +144,7 @@
         flex: 1;
 
         & > h5 {
-            color: hsl(var(--c2));
+            color: oklch(var(--c2));
             font-weight: var(--font-weight);
             margin: unset;
             cursor: default;
@@ -164,10 +164,10 @@
                 opacity: 0.4;
 
                 position: relative;
-                --bg: hsl(var(--k4), 10%);
-                --bg-hov: hsl(var(--k4), 20%);
-                --bg-atv: hsl(var(--k4), 30%);
-                --col: hsl(var(--l3-c));
+                --bg: oklch(var(--k4), 10%);
+                --bg-hov: oklch(var(--k4), 20%);
+                --bg-atv: oklch(var(--k4), 30%);
+                --col: oklch(var(--l3-c));
                 --mask-colour: currentColor;
                 --shadow: none;
 
@@ -192,7 +192,7 @@
         }
 
         & > p {
-            color: hsl(var(--c3));
+            color: oklch(var(--c3));
             font-size: 13px;
             cursor: default;
 
@@ -222,7 +222,7 @@
 
             & > .date {
                 width: 90px;
-                color: hsla(var(--c3), 80%);
+                color: oklch(var(--c3), 80%);
             }
 
             & > p {
@@ -267,7 +267,7 @@
         align-items: center;
         gap: var(--card-gap);
         flex-shrink: 0;
-        color: hsl(var(--c3));
+        color: oklch(var(--c3));
 
         &.v {
             flex-direction: column;
@@ -383,7 +383,7 @@
                 --icon: var(--icon-16-check-thick);
                 --icon-size: 12px;
 
-                --col: hsl(var(--b7)) !important;
+                --col: oklch(var(--b7)) !important;
                 --mask-colour: var(--col);
 
                 .bleh-icon {
@@ -399,16 +399,16 @@
                 &[aria-checked="true"] {
                     --bg:
                         var(--cards-overlay-image-subtlest, none),
-                        hsl(var(--h3)) !important;
+                        oklch(var(--h3)) !important;
                     --bg-hov:
                         var(--cards-overlay-image-subtlest, none),
-                        hsla(var(--h3), 80%) !important;
+                        oklch(var(--h3) / 80%) !important;
                     --bg-atv:
                         var(--cards-overlay-image-subtlest, none),
-                        hsla(var(--h3), 60%) !important;
+                        oklch(var(--h3) / 60%) !important;
                     --shadow:
                         var(--primary-shadow),
-                        0 3px 12px hsl(var(--h4), 25%),
+                        0 3px 12px oklch(var(--h4) / 25%),
                         var(--interactable-outer);
                     --shadow-hov:
                         var(--interactable-outer),
@@ -470,15 +470,15 @@
                 --icon: var(--icon-16-check-thick);
                 --icon-size: 12px;
 
-                --col: hsl(var(--b7)) !important;
+                --col: oklch(var(--b7)) !important;
                 --mask-colour: var(--col);
 
                 &[aria-checked="true"] {
                     --bg: var(--bg-atv) !important;
                     --bg-hov: var(--bg) !important;
                     --shadow:
-                        inset 0 0 0 4px hsl(var(--l3-c)),
-                        0 3px 12px hsl(var(--h4), 25%),
+                        inset 0 0 0 4px oklch(var(--l3-c)),
+                        0 3px 12px oklch(var(--h4) / 25%),
                         var(--interactable-outer);
                 }
             }
@@ -501,7 +501,7 @@
         max-height: 32px;
         margin-right: -5px;
         --show-icon: none;
-        color: color-mix(in hsl, hsl(var(--c2)), hsl(var(--c3)) 50%);
+        color: color-mix(in hsl, oklch(var(--c2)), oklch(var(--c3)) 50%);
     }
 
     .extensions {
@@ -512,7 +512,7 @@
             display: flex;
             align-items: center;
             height: 28px;
-            color: color-mix(in hsl, hsl(var(--c2)), hsl(var(--c3)) 50%);
+            color: color-mix(in hsl, oklch(var(--c2)), oklch(var(--c3)) 50%);
             --icon: var(--icon-16-extension);
         }
     }
@@ -541,7 +541,7 @@
 
         p {
             font-size: 12px;
-            color: hsl(var(--l3-c));
+            color: oklch(var(--l3-c));
             font-weight: var(--font-weight-medium);
             width: 30px;
             text-align: right;
@@ -558,7 +558,7 @@
         }
 
         .hint {
-            color: hsl(var(--c3));
+            color: oklch(var(--c3));
             font-size: 12px;
             position: absolute;
             top: 18px;
@@ -595,7 +595,7 @@
             &.requesting {
                 --left: 50%;
                 --margin-left: -9px;
-                color: hsl(var(--c3));
+                color: oklch(var(--c3));
                 --mask: var(--icon-16-spinner);
 
                 & > img {
@@ -768,7 +768,7 @@
         &:hover {
             &:before {
                 border-width: 2px;
-                border-color: hsl(var(--l2-c));
+                border-color: oklch(var(--l2-c));
             }
         }
 
@@ -787,8 +787,8 @@
             &#primary-selection-receiving_msgs-follow {
             &:before {
                 border-width: 4px;
-                border-color: hsl(var(--l3-c));
-                background: hsl(var(--b9));
+                border-color: oklch(var(--l3-c));
+                background: oklch(var(--b9));
             }
         }
     }
@@ -796,7 +796,7 @@
 
 .inner-preview {
     .tracks {
-        background-color: hsl(var(--b5));
+        background-color: oklch(var(--b5));
         display: flex;
         flex-direction: column;
 
@@ -860,38 +860,38 @@
             .title {
                 flex: 1;
                 height: 6px;
-                background-color: hsl(var(--c2));
+                background-color: oklch(var(--c2));
                 border-radius: 50px;
             }
             .artist {
                 width: 150px;
                 height: 6px;
-                background-color: hsl(var(--c2), 80%);
+                background-color: oklch(var(--c2), 80%);
                 border-radius: 50px;
             }
             .album {
                 width: 40px;
                 height: 4px;
-                background-color: hsl(var(--c3));
+                background-color: oklch(var(--c3));
                 border-radius: 50px;
                 display: none;
             }
             .time {
                 width: 60px;
                 height: 6px;
-                background-color: hsl(var(--c3));
+                background-color: oklch(var(--c3));
                 border-radius: 50px;
             }
             .bar {
                 width: 120px;
                 height: 16px;
-                background-color: hsl(var(--b4));
+                background-color: oklch(var(--b4));
                 border-radius: var(--item-small-radius);
                 display: flex;
                 justify-content: end;
 
                 .fill {
-                    background-color: hsl(var(--h3));
+                    background-color: oklch(var(--h3));
                     border-radius: var(--item-small-radius);
                     height: 16px;
                 }
@@ -909,7 +909,7 @@
             }
 
             &.realtime {
-                background-color: hsla(var(--h4), 10%);
+                background-color: oklch(var(--h4) / 10%);
             }
 
             [data-bleh--expand_tracks="never"] &,
@@ -945,9 +945,9 @@
                 width: 224px;
                 height: 224px;
                 border-radius: var(--item-med-radius);
-                background-color: hsl(var(--b4));
+                background-color: oklch(var(--b4));
                 position: relative;
-                color: hsl(var(--c3));
+                color: oklch(var(--c3));
                 --mask: var(--icon-album);
                 --mask-size: 72px;
                 --left: 50%;
@@ -987,9 +987,9 @@
                     width: 110px;
                     height: 110px;
                     border-radius: var(--item-small-radius);
-                    background-color: hsl(var(--b4));
+                    background-color: oklch(var(--b4));
                     position: relative;
-                    color: hsl(var(--c3));
+                    color: oklch(var(--c3));
                     --mask: var(--icon-album);
                     --mask-size: 48px;
                     --left: 50%;
@@ -1044,7 +1044,7 @@
             .shout-avatar-placeholder {
                 width: 40px;
                 height: 40px;
-                background-color: hsl(var(--b4));
+                background-color: oklch(var(--b4));
                 border-radius: var(--avatar-radius);
             }
 
@@ -1063,14 +1063,14 @@
                     .shout-username {
                         width: 80px;
                         height: 6px;
-                        background-color: hsl(var(--l3-c));
+                        background-color: oklch(var(--l3-c));
                         border-radius: 50px;
                     }
 
                     .shout-time {
                         width: 50px;
                         height: 4px;
-                        background-color: hsl(var(--c3));
+                        background-color: oklch(var(--c3));
                         border-radius: 50px;
                     }
                 }
@@ -1078,7 +1078,7 @@
                 .shout-contents {
                     width: 250px;
                     height: 6px;
-                    background-color: hsl(var(--c2));
+                    background-color: oklch(var(--c2));
                     border-radius: 50px;
 
                     & + .shout-contents {
@@ -1097,7 +1097,7 @@
     width: 34px !important;
     height: 20px;
     position: relative;
-    --col: hsl(var(--c3));
+    --col: oklch(var(--c3));
     transition-duration: 0.2s !important;
 
     --radius: 50px;
@@ -1115,7 +1115,7 @@
         left: 3px;
         border-radius: var(--item-big-radius);
         background: var(--col);
-        box-shadow: inset 0 -1px 2px hsl(var(--c2), 15%);
+        box-shadow: inset 0 -1px 2px oklch(var(--c2), 15%);
 
         transition-property: left, background;
         transition-duration: 0.2s;
@@ -1124,23 +1124,23 @@
         --mask-size: 12px;
         --margin-top: -6px;
         --left: -3px;
-        color: hsl(var(--c1));
+        color: oklch(var(--c1));
         --mask: var(--icon-16-x);
         --show-icon: var(--show-toggle-icon, none);
     }
 
     &[aria-checked="true"] {
         --bg:
-            var(--cards-overlay-image-subtlest, none), hsl(var(--h3)) !important;
+            var(--cards-overlay-image-subtlest, none), oklch(var(--h3)) !important;
         --bg-hov:
             var(--cards-overlay-image-subtlest, none),
-            color-mix(in hsl, hsl(var(--h4)), hsl(var(--h3)) 80%) !important;
+            color-mix(in hsl, oklch(var(--h4)), oklch(var(--h3)) 80%) !important;
         --bg-atv:
             var(--cards-overlay-image-subtlest, none),
-            color-mix(in hsl, hsl(var(--h4)), hsl(var(--h3)) 60%) !important;
-        --col: hsl(var(--b7));
+            color-mix(in hsl, oklch(var(--h4)), oklch(var(--h3)) 60%) !important;
+        --col: oklch(var(--b7));
         --shadow:
-            var(--primary-shadow), 0 3px 12px hsl(var(--h4), 25%),
+            var(--primary-shadow), 0 3px 12px oklch(var(--h4) / 25%),
             var(--interactable-outer);
         --shadow-hov:
             var(--interactable-outer), var(--interactable-active-outer);
@@ -1148,14 +1148,14 @@
         .dot {
             background: var(--col);
             left: calc(34px - 8px - 9px);
-            color: hsl(var(--h2));
+            color: oklch(var(--h2));
             --mask-colour: currentColor;
             --mask: var(--icon-16-check);
         }
 
         /*&:after {
-            border: 2px solid hsl(var(--c1), 65%);
-            box-shadow: 0 0 30px hsl(var(--c1), 30%);
+            border: 2px solid oklch(var(--c1), 65%);
+            box-shadow: 0 0 30px oklch(var(--c1), 30%);
         }*/
 
         [data-bleh--season="christmas"] & {
@@ -1178,8 +1178,8 @@
         border-radius: 50px;
         opacity: 0;
 
-        border: 2px solid hsl(var(--c1), 30%);
-        box-shadow: 0 0 30px hsl(var(--c1), 10%);
+        border: 2px solid oklch(var(--c1), 30%);
+        box-shadow: 0 0 30px oklch(var(--c1), 10%);
 
         transition-property: opacity;
         transition-duration: var(--trans);

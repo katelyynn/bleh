@@ -19,7 +19,7 @@
         & > .date {
             text-align: center;
             cursor: default;
-            color: hsl(var(--c3));
+            color: oklch(var(--c3));
         }
     }
 
@@ -44,7 +44,7 @@
 
         & > p {
             font-size: 13px;
-            color: hsl(var(--c3));
+            color: oklch(var(--c3));
             cursor: default;
         }
     }
@@ -52,8 +52,8 @@
 
 .calendar-top-button {
     --bg: transparent;
-    --bg-hov: hsla(var(--b4), 60%);
-    --bg-atv: hsla(var(--b4), 80%);
+    --bg-hov: oklch(var(--b4) / 60%);
+    --bg-atv: oklch(var(--b4) / 80%);
     --shadow: none;
 
     &.chibi {
@@ -106,21 +106,21 @@
 
 .calendar-entry {
     --bg: transparent;
-    --bg-hov: hsla(var(--b4), 60%);
-    --bg-atv: hsla(var(--b4), 80%);
+    --bg-hov: oklch(var(--b4) / 60%);
+    --bg-atv: oklch(var(--b4) / 80%);
     --shadow: none;
 
     aspect-ratio: 1 / 1;
 
     &[aria-selected="true"] {
-        --bg: hsla(var(--h4), 20%);
-        --bg-hov: hsla(var(--h4), 30%);
-        --bg-atv: hsla(var(--h4), 40%);
-        --col: hsl(var(--l3-c));
+        --bg: oklch(var(--h4) / 20%);
+        --bg-hov: oklch(var(--h4) / 30%);
+        --bg-atv: oklch(var(--h4) / 40%);
+        --col: oklch(var(--l3-c));
         --mask-colour: color-mix(
             in hsl,
-            hsl(var(--l3-c)),
-            hsl(var(--l4-c)) 40%
+            oklch(var(--l3-c)),
+            oklch(var(--l4-c)) 40%
         );
         --force-font-weight: var(--font-weight-medium) !important;
     }

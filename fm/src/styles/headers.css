@@ -51,7 +51,7 @@ h2.text-18,
 .bookmarks-header-text,
 .obsession-search-result-header,
 .inbox-message-view .inbox-message-subject {
-    color: hsl(var(--c1));
+    color: oklch(var(--c1));
     font-size: 16px;
     line-height: 17px; /* matches button on the right */
     /*margin-bottom: 12px;*/
@@ -75,7 +75,7 @@ h2.text-18,
     &.subtle-header {
         font-size: var(--font-size);
         line-height: var(--line-height);
-        color: hsl(var(--c3));
+        color: oklch(var(--c3));
         margin: 0 0 2px 0 !important;
         cursor: default;
     }

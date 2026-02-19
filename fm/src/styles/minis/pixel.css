@@ -25,11 +25,11 @@
 
             & > .chibi {
                 --bg: transparent;
-                --bg-hov: hsl(var(--b4), 60%);
-                --bg-atv: hsl(var(--b4), 80%);
+                --bg-hov: oklch(var(--b4) / 60%);
+                --bg-atv: oklch(var(--b4) / 80%);
                 --shadow: none;
 
-                --col: hsl(var(--c3));
+                --col: oklch(var(--c3));
                 --mask-colour: currentColor;
                 --icon-size: 24px;
                 --button-height: 40px;
@@ -39,7 +39,7 @@
     }
 }
 .pixel-artwork {
-    background: hsl(var(--b4), 10%);
+    background: oklch(var(--b4) / 10%);
     box-shadow: var(--group-shadow);
     padding: var(--artwork-padding);
     border-radius: calc(var(--item-big-radius) + 10px);
@@ -69,7 +69,7 @@
     font-size: 22px;
     line-height: 36px;
     font-weight: 400;
-    color: hsl(var(--c3));
+    color: oklch(var(--c3));
 }
 
 .pixel-info {
@@ -81,9 +81,9 @@
     gap: var(--button-list-gap);
 
     & > button {
-        --bg: hsl(var(--b4), 40%);
-        --bg-hov: hsl(var(--b4), 60%);
-        --bg-atv: hsl(var(--b4), 80%);
+        --bg: oklch(var(--b4) / 40%);
+        --bg-hov: oklch(var(--b4) / 60%);
+        --bg-atv: oklch(var(--b4) / 80%);
         --shadow: none;
     }
 }

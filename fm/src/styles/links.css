@@ -23,7 +23,7 @@
 }
 
 a {
-    color: hsl(var(--l3-c));
+    color: oklch(var(--l3-c));
     text-underline-offset: var(--underline-offset);
     cursor: pointer;
 

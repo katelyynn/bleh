@@ -38,7 +38,7 @@
     --bg-hov: var(--side-action-hov);
     --bg-atv: var(--side-action-atv);
     --shadow: none;
-    --col: hsl(var(--c2));
+    --col: oklch(var(--c2));
     overflow: unset;
     text-overflow: ellipsis;
     --mask-size: 12px;
@@ -108,7 +108,7 @@
 
     &:hover {
         &:before {
-            background: hsl(var(--f4)) !important;
+            background: oklch(var(--f4)) !important;
             transition: none;
         }
     }
@@ -133,45 +133,45 @@
     [data-toggle-button-current-state="bookmarked"] > form > &,
     &[data-is-shortcut="true"],
     [data-toggle-button-current-state="followed"] > form > &[data-type="follow"] {
-        --col: hsl(var(--l3-c));
+        --col: oklch(var(--l3-c));
         --mask-colour: color-mix(
             in hsl,
-            hsl(var(--l3-c)),
-            hsl(var(--l4-c)) 40%
+            oklch(var(--l3-c)),
+            oklch(var(--l4-c)) 40%
         );
         --force-font-weight: var(--font-weight-medium) !important;
 
         &:before {
-            background: hsl(var(--h3)) !important;
+            background: oklch(var(--h3)) !important;
             box-shadow:
-                0 3px 12px hsl(var(--h4), 32%),
+                0 3px 12px oklch(var(--h4) / 32%),
                 var(--interactable-outer) !important;
         }
 
         &:after {
-            background: hsl(var(--b7)) !important;
+            background: oklch(var(--b7)) !important;
         }
 
         &:hover {
             &:before {
                 background: color-mix(
                     in hsl,
-                    hsl(var(--h4)),
-                    hsl(var(--h3)) 80%
+                    oklch(var(--h4)),
+                    oklch(var(--h3)) 80%
                 ) !important;
                 transition: none;
             }
         }
 
         [data-ff--menu_like_side_actions="true"] & {
-            --bg: hsla(var(--h4), 15%) !important;
-            --bg-hov: hsla(var(--h4), 25%) !important;
-            --bg-atv: hsla(var(--h4), 35%) !important;
-            --col: hsl(var(--l3-c)) !important;
+            --bg: oklch(var(--h4) / 15%) !important;
+            --bg-hov: oklch(var(--h4) / 25%) !important;
+            --bg-atv: oklch(var(--h4) / 35%) !important;
+            --col: oklch(var(--l3-c)) !important;
             --mask-colour: color-mix(
                 in hsl,
-                hsl(var(--l3-c)),
-                hsl(var(--l4-c)) 40%
+                oklch(var(--l3-c)),
+                oklch(var(--l4-c)) 40%
             );
 
             &:before {

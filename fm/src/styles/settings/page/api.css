@@ -4,7 +4,7 @@
     padding-bottom: var(--card-padding);
 
     & > h3 {
-        color: hsl(var(--c1));
+        color: oklch(var(--c1));
         font-size: 16px;
         line-height: 20px;
     }
@@ -66,15 +66,15 @@
                 }
 
                 .api-session-app-description {
-                    color: hsla(var(--c2), 80%);
+                    color: oklch(var(--c2), 80%);
                 }
             }
 
             .api-session-connect,
             .api-session-disconnect {
                 --bg: transparent;
-                --bg-hov: hsl(var(--b4), 40%);
-                --bg-atv: hsl(var(--b4), 60%);
+                --bg-hov: oklch(var(--b4) / 40%);
+                --bg-atv: oklch(var(--b4) / 60%);
                 --shadow: none;
                 position: relative;
             }
@@ -85,7 +85,7 @@
 
             .api-session-disconnect {
                 --mask: var(--icon-16-minus);
-                --col: hsl(var(--c3));
+                --col: oklch(var(--c3));
             }
         }
         .session-footer {
@@ -94,7 +94,7 @@
 
             .api-session-app-last-used,
             .api-session-status {
-                color: hsl(var(--c3));
+                color: oklch(var(--c3));
                 font-size: 13px;
                 line-height: inherit;
             }

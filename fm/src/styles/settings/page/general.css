@@ -10,8 +10,8 @@
         & > .bleh-icon {
             background: conic-gradient(
                 from 270deg,
-                hsl(var(--l2-c)),
-                hsl(var(--l4-c))
+                oklch(var(--l2-c)),
+                oklch(var(--l4-c))
             );
             --icon-size: 40px;
             --icon: var(--mask);
@@ -19,10 +19,10 @@
     }
 
     .check-circle {
-        background: hsl(var(--h3), var(--solarium-opacity, 40%));
-        box-shadow: 0px 0px 9px 0px hsl(var(--l2-c), 60%) inset;
-        color: hsl(var(--b7));
-        outline: 4px solid hsl(var(--b5));
+        background: oklch(var(--h3) / var(--solarium-opacity, 40%));
+        box-shadow: 0px 0px 9px 0px oklch(var(--l2-c) / 60%) inset;
+        color: oklch(var(--b7));
+        outline: 4px solid oklch(var(--b5));
         border-radius: 50px;
         position: absolute;
         bottom: 0;
@@ -49,7 +49,7 @@
 }
 
 .update-minor-details {
-    color: hsl(var(--c3));
+    color: oklch(var(--c3));
     cursor: default;
 
     display: flex;
@@ -90,17 +90,17 @@
             gap: 0 4px;
 
             & > h5 {
-                color: hsl(var(--c2));
+                color: oklch(var(--c2));
             }
             & > p {
-                color: hsla(var(--c2), 80%);
+                color: oklch(var(--c2), 80%);
                 cursor: default;
             }
         }
 
         & > .date {
             flex-shrink: 0;
-            color: hsl(var(--c3));
+            color: oklch(var(--c3));
             font-size: 13px;
             cursor: default;
             width: 130px;
@@ -116,7 +116,7 @@
             width: fit-content;
             text-align: right;
             cursor: default;
-            color: hsl(var(--l3-c));
+            color: oklch(var(--l3-c));
             font-weight: var(--font-weight-medium);
         }
 

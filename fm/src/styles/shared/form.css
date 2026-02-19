@@ -185,7 +185,7 @@
 
 
 .content-top-header {
-    color: hsl(var(--c1));
+    color: oklch(var(--c1));
 }
 
 .form-section .form-horizontal .form-group-controls {
@@ -201,7 +201,7 @@
 
 .content-form .control-label,
 .events-filter-location-dropdown .control-label {
-    color: hsl(var(--c2));
+    color: oklch(var(--c2));
     font-size: var(--font-size);
     line-height: var(--line-height);
     font-weight: var(--font-weight-medium);
@@ -264,7 +264,7 @@
 
 .footnotes,
 .content-form .form-row-help-text {
-    color: hsl(var(--c3));
+    color: oklch(var(--c3));
     font-size: 13px;
     line-height: var(--line-height);
     cursor: default;
@@ -285,7 +285,7 @@
     padding: var(--button-verts) var(--button-sides);
 }
 .btn-file-label {
-    color: hsl(var(--c3));
+    color: oklch(var(--c3));
     cursor: default;
 }
 
@@ -328,7 +328,7 @@
 }
 
 .content-form legend {
-    color: hsl(var(--c1));
+    color: oklch(var(--c1));
     font-size: var(--font-size);
     line-height: var(--line-height);
     font-weight: var(--font-weight-medium);

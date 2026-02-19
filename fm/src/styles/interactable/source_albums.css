@@ -25,7 +25,7 @@
     overflow: hidden;
 
     &:hover {
-        --hover-underline: underline hsl(var(--c3));
+        --hover-underline: underline oklch(var(--c3));
     }
 
     &:not(.featured-item) {
@@ -75,7 +75,7 @@
             justify-content: center;
             align-items: center;
             --icon: var(--icon-16-spinner);
-            --icon-colour: hsl(var(--c3));
+            --icon-colour: oklch(var(--c3));
             animation: spinner 1.2s linear infinite;
         }
     }
@@ -103,7 +103,7 @@
         .source-album-artist {
             display: flex !important;
             font-weight: var(--font-weight);
-            color: hsl(var(--c3)) !important;
+            color: oklch(var(--c3)) !important;
             margin-top: 2px;
 
             &.oracle-loading {
@@ -112,7 +112,7 @@
             }
 
             & > a {
-                color: hsla(var(--c2), 80%);
+                color: oklch(var(--c2), 80%);
             }
 
             & > a + a {
@@ -120,7 +120,7 @@
             }
         }
         .source-album-stats {
-            color: hsl(var(--c3));
+            color: oklch(var(--c3));
             font-size: 13px;
             font-weight: var(--font-weight);
             margin: unset;
@@ -170,7 +170,7 @@
     margin-top: unset;
 }
 .source-album-nodata {
-    color: hsl(var(--c2), 80%);
+    color: oklch(var(--c2), 80%);
     cursor: default;
 }
 

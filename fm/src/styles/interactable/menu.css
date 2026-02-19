@@ -17,7 +17,7 @@
     --bg-atv: var(--menu-item-atv) !important;
     --shadow: none !important;
     --shadow-hov: none !important;
-    --col: hsl(var(--c2)) !important;
+    --col: oklch(var(--c2)) !important;
     --radius: var(--button-radius);
     position: relative !important;
     min-width: 170px !important;
@@ -42,14 +42,14 @@
     &.dropdown-menu-clickable-item--selected,
     &.display-options-clickable-item--selected,
     &.active {
-        --bg: hsla(var(--h4), 20%) !important;
-        --bg-hov: hsla(var(--h4), 30%) !important;
-        --bg-atv: hsla(var(--h4), 40%) !important;
-        --col: hsl(var(--l3-c)) !important;
+        --bg: oklch(var(--h4) / 20%) !important;
+        --bg-hov: oklch(var(--h4) / 30%) !important;
+        --bg-atv: oklch(var(--h4) / 40%) !important;
+        --col: oklch(var(--l3-c)) !important;
         --mask-colour: color-mix(
             in hsl,
-            hsl(var(--l3-c)),
-            hsl(var(--l4-c)) 40%
+            oklch(var(--l3-c)),
+            oklch(var(--l4-c)) 40%
         );
         --force-font-weight: var(--font-weight-medium) !important;
     }
@@ -105,7 +105,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            color: hsl(var(--c3));
+            color: oklch(var(--c3));
             min-width: 14px;
 
             .notification-count-badge {
@@ -166,7 +166,7 @@ very, very, very dated - who looks up a song on ebay? */
         .inner-image {
             width: 50px;
             height: 50px;
-            background: hsl(var(--b5));
+            background: oklch(var(--b5));
             box-shadow: var(--card-shadow);
             border-radius: var(--item-med-radius);
             overflow: hidden;
@@ -189,7 +189,7 @@ very, very, very dated - who looks up a song on ebay? */
             top: 2px;
             left: calc(-1 * (50px + 8px));
 
-            background: hsl(var(--b5));
+            background: oklch(var(--b5));
 
             display: flex;
             justify-content: center;
@@ -199,7 +199,7 @@ very, very, very dated - who looks up a song on ebay? */
             border-radius: var(--item-med-radius);
 
             --icon: var(--icon-16-hoshino);
-            --icon-colour: hsl(var(--l3-c));
+            --icon-colour: oklch(var(--l3-c));
             --icon-size: 10px;
         }
 
@@ -217,21 +217,21 @@ very, very, very dated - who looks up a song on ebay? */
         }
 
         .title {
-            color: hsl(var(--c2));
+            color: oklch(var(--c2));
             font-weight: var(--font-weight-medium);
             margin: unset;
         }
         .artist {
-            color: hsla(var(--c2), 80%);
+            color: oklch(var(--c2), 80%);
         }
         .tags {
-            color: hsla(var(--c2), 70%);
+            color: oklch(var(--c2), 70%);
         }
         .album {
-            color: hsl(var(--c3));
+            color: oklch(var(--c3));
         }
         .timestamp {
-            color: hsl(var(--c3));
+            color: oklch(var(--c3));
         }
 
         & > .badges {
@@ -246,7 +246,7 @@ very, very, very dated - who looks up a song on ebay? */
                 position: relative;
                 z-index: 10;
                 margin-left: -12px !important;
-                border-right: 1px solid hsl(var(--b5));
+                border-right: 1px solid oklch(var(--b5));
 
                 &.user-status-subscriber {
                     order: -1;
@@ -283,11 +283,11 @@ very, very, very dated - who looks up a song on ebay? */
 [data-analytics-action="publish"] {
     --bg-hov: var(--menu-item-accent-hov) !important;
     --bg-atv: var(--menu-item-accent-atv) !important;
-    --col: hsl(var(--l3-c)) !important;
+    --col: oklch(var(--l3-c)) !important;
     --mask-colour: color-mix(
-        in hsl,
-        hsl(var(--l3-c)),
-        hsl(var(--l4-c)) 40%
+        in oklch,
+        oklch(var(--l3-c)),
+        oklch(var(--l4-c)) 40%
     );
 }
 

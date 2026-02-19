@@ -232,7 +232,7 @@ span.bleh-icon {
     }
 
     &[data-season]:not([data-season="none"]) {
-        color: hsl(var(--l3-c));
+        color: oklch(var(--l3-c));
         font-weight: var(--font-weight-medium);
     }
 }

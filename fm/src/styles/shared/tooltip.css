@@ -1,6 +1,6 @@
 .tippy-box,
 .tooltip-dark {
-    background: hsla(var(--b8), var(--solarium-opacity, 80%));
+    background: oklch(var(--b8) / var(--solarium-opacity, 80%));
     backdrop-filter: var(--solarium);
     -webkit-backdrop-filter: var(--solarium);
     border-radius: var(--item-big-radius);
@@ -11,7 +11,7 @@
     font-size: calc(var(--font-size) - 1px);
     font-weight: var(--font-weight);
     line-height: var(--line-height);
-    color: hsl(var(--c2));
+    color: oklch(var(--c2));
 
     text-align: center;
 
@@ -19,7 +19,7 @@
 
     .tooltip-sub {
         font-size: 12px;
-        color: hsl(var(--c3));
+        color: oklch(var(--c3));
     }
 
     animation: var(--motion, solarium 0.22s var(--trans-function));
@@ -35,7 +35,7 @@
     }
 
     &[data-theme="lotus-tooltip-corrected"] {
-        background-color: hsla(var(--h4), 20%);
+        background-color: oklch(var(--h4) / 20%);
     }
 
     kbd,
@@ -51,14 +51,14 @@
     &[data-theme="language-menu"],
     &[data-theme="menu"] {
         padding: 4px !important;
-        background: hsl(var(--menu-bg), var(--solarium-opacity, var(--menu-opacity))) !important;
+        background: oklch(var(--menu-bg) / var(--solarium-opacity, var(--menu-opacity))) !important;
         border-radius: calc(var(--button-radius) + 4px) !important;
         box-shadow: var(
             --override-full-shadow,
             var(--menu-shadow)
         ) !important;
         border: 1px solid var(--card-border-base) !important;
-        color: hsl(var(--c2));
+        color: oklch(var(--c2));
 
         /*[data-theme="window"] & {
             box-shadow: var(--highlight-shadow), var(--menu-shadow) !important;
@@ -97,7 +97,7 @@
 
         &[data-theme="context-menu"] {
             .menu-header {
-                color: hsl(var(--c3));
+                color: oklch(var(--c3));
                 font-weight: var(--font-weight-medium);
                 padding: 3px var(--button-sides) 4px;
                 cursor: default;
@@ -150,14 +150,14 @@
 
     &[data-theme="mobile"] {
         padding: var(--card-gap) var(--card-gap) calc(var(--card-gap) * 3) !important;
-        background: hsl(var(--b5), var(--solarium-opacity, var(--menu-opacity))) !important;
+        background: oklch(var(--b5) / var(--solarium-opacity, var(--menu-opacity))) !important;
         border-radius: var(--item-big-radius) !important;
         box-shadow: var(
             --override-full-shadow,
             var(--menu-shadow)
         ) !important;
         border: 1px solid var(--card-border-base) !important;
-        color: hsl(var(--c2));
+        color: oklch(var(--c2));
 
         backdrop-filter: var(--solarium);
         -webkit-backdrop-filter: var(--solarium);
@@ -167,7 +167,7 @@
         font-size: var(--font-size);
 
         [data-bleh--solarium="false"] & {
-            background: hsl(var(--b5)) !important;
+            background: oklch(var(--b5)) !important;
         }
 
         [data-tippy-root]:has(> &) {
@@ -187,14 +187,14 @@
 
     &[data-theme="window"] {
         padding: var(--card-gap) !important;
-        background: hsl(var(--b5), var(--solarium-opacity, var(--menu-opacity))) !important;
+        background: oklch(var(--b5) / var(--solarium-opacity, var(--menu-opacity))) !important;
         border-radius: var(--item-big-radius) !important;
         box-shadow: var(
             --override-full-shadow,
             var(--menu-shadow)
         ) !important;
         border: 1px solid var(--card-border-base) !important;
-        color: hsl(var(--c2));
+        color: oklch(var(--c2));
 
         backdrop-filter: var(--solarium);
         -webkit-backdrop-filter: var(--solarium);
@@ -204,7 +204,7 @@
         font-size: var(--font-size);
 
         [data-bleh--solarium="false"] & {
-            background: hsl(var(--b5)) !important;
+            background: oklch(var(--b5)) !important;
         }
 
         background-image:
@@ -295,7 +295,7 @@
 
             .hint {
                 font-size: var(--font-size-sm);
-                color: hsl(var(--c3));
+                color: oklch(var(--c3));
             }
         }
     }
@@ -306,14 +306,14 @@
             flex-direction: column;
 
             .season-colour-name {
-                color: hsl(var(--l3-c));
+                color: oklch(var(--l3-c));
                 font-weight: var(--font-weight-medium);
             }
             .season-exclusive {
-                color: hsl(var(--c3));
+                color: oklch(var(--c3));
 
                 .season-name {
-                    color: hsl(var(--c2));
+                    color: oklch(var(--c2));
                 }
             }
         }
@@ -328,7 +328,7 @@
                 font-weight: var(--font-weight-medium);
             }
             .badge-reason {
-                color: hsl(var(--c3));
+                color: oklch(var(--c3));
             }
         }
     }
@@ -339,12 +339,12 @@
             gap: 10px;
 
             .key {
-                color: hsl(var(--c3));
+                color: oklch(var(--c3));
             }
             .value {
                 margin-left: 4px;
                 font-family: var(--font-code);
-                color: hsl(var(--c2));
+                color: oklch(var(--c2));
             }
         }
     }
@@ -357,7 +357,7 @@
 
             & > small {
                 font: inherit;
-                color: hsl(var(--c2), 80%);
+                color: oklch(var(--c2), 80%);
             }
         }
     }
@@ -376,7 +376,7 @@
                 }
             }
             .sister {
-                color: hsl(var(--c2), 80%);
+                color: oklch(var(--c2), 80%);
             }
         }
     }
@@ -402,14 +402,14 @@
 .library-search-results,
 .events-filter-location-dropdown {
     margin: unset !important;
-    background: hsl(var(--menu-bg), var(--solarium-opacity, var(--menu-opacity))) !important;
+    background: oklch(var(--menu-bg) / var(--solarium-opacity, var(--menu-opacity))) !important;
     border-radius: calc(var(--button-radius) + 4px) !important;
     box-shadow: var(
         --override-full-shadow,
         var(--menu-shadow)
     ) !important;
     border: 1px solid var(--card-border-base) !important;
-    color: hsl(var(--c2));
+    color: oklch(var(--c2));
 
     &:not(.date-range-picker-content) {
         overflow: hidden;
@@ -448,7 +448,7 @@
     }
 
     &.modal-body {
-        background: hsl(var(--b5), var(--solarium-opacity, 90%)) !important;
+        background: oklch(var(--b5), var(--solarium-opacity, 90%)) !important;
         box-shadow: var(
             --override-full-shadow,
             var(--overlay-shadow)

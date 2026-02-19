@@ -27,8 +27,8 @@
             }
             &.delete-icon {
                 --mask: var(--icon-16-trash);
-                --bg-hov: hsla(var(--h4), 10%);
-                --bg-atv: hsla(var(--h4), 20%);
+                --bg-hov: oklch(var(--h4) / 10%);
+                --bg-atv: oklch(var(--h4) / 20%);
                 --hue-over: var(--hue-neg);
                 --sat-over: 1;
                 --lit-over: 1;
@@ -95,7 +95,7 @@
             }
 
             a:not(:hover) {
-                color: hsl(var(--c1));
+                color: oklch(var(--c1));
             }
         }
     }
@@ -196,6 +196,6 @@
 
 /* user did not scrobble album in date range */
 .library-header + .message {
-    color: hsl(var(--c3));
+    color: oklch(var(--c3));
     cursor: default;
 }

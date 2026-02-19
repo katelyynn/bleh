@@ -31,13 +31,13 @@
     --icon-size: 28px;
     margin-bottom: 10px;
 
-    background-color: hsl(var(--b2), 20%);
+    background-color: oklch(var(--b2), 20%);
     padding: 12px;
     border-radius: 50%;
 
     &:not([data-season="none"]) {
-        background-color: hsl(var(--f4), 20%);
-        --mask-colour: hsl(var(--l3-c));
+        background-color: oklch(var(--f4), 20%);
+        --mask-colour: oklch(var(--l3-c));
     }
 }
 
@@ -46,7 +46,7 @@
     line-height: 20px;
 
     &:not([data-season="none"]) {
-        color: hsl(var(--l3-c));
+        color: oklch(var(--l3-c));
     }
 }
 

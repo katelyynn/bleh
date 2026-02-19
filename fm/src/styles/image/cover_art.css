@@ -35,7 +35,7 @@
     position: static;
     aspect-ratio: 1 / 1;
     display: block; /* requires when image fails to load */
-    color: hsl(var(--c3));
+    color: oklch(var(--c3));
 }
 
 .big-artist-list-avatar-desktop,
@@ -61,8 +61,8 @@
 button.lfmmaf-missing-artwork-button {
     position: relative;
     --bg: transparent;
-    --bg-hov: hsl(var(--b6), 20%);
-    --bg-atv: hsl(var(--b6), 40%);
+    --bg-hov: oklch(var(--b6), 20%);
+    --bg-atv: oklch(var(--b6), 40%);
     --shadow: none;
     --mask: var(--icon-16-plus);
 

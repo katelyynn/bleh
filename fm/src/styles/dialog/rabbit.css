@@ -8,13 +8,13 @@
 
     .rabbit-search {
         margin-bottom: var(--card-gap);
-        /*box-shadow: 0 20px 60px 15px hsl(var(--h4), 7%);
+        /*box-shadow: 0 20px 60px 15px oklch(var(--h4), 7%);
         border-radius: var(--item-big-radius);*/
 
         &:after {
             --show-icon: block;
             --mask: var(--icon-16-rabbit);
-            --mask-colour: hsl(var(--c3));
+            --mask-colour: oklch(var(--c3));
         }
 
         &[data-showing-fake="true"] {
@@ -42,7 +42,7 @@
 
         label {
             margin-right: 4px;
-            color: hsl(var(--c3));
+            color: oklch(var(--c3));
             font-weight: var(--font-weight);
 
             cursor: default;
@@ -62,7 +62,7 @@
 
         i {
             font-style: normal;
-            color: hsl(var(--c3));
+            color: oklch(var(--c3));
 
             cursor: default;
         }
@@ -111,7 +111,7 @@
     .tip {
         margin-top: var(--card-gap);
         font-size: var(--font-size-sm);
-        color: hsl(var(--c3));
+        color: oklch(var(--c3));
 
         display: flex;
         justify-content: space-between;

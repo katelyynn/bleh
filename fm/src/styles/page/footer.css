@@ -1,6 +1,6 @@
 .footer {
     background: transparent;
-    color: hsl(var(--c3));
+    color: oklch(var(--c3));
     padding: 120px 0 120px 0;
 
     display: flex;
@@ -32,7 +32,7 @@
             &.heart {
                 --icon: var(--icon-16-heart-solid);
                 --icon-size: 14px;
-                color: hsl(var(--l3-c));
+                color: oklch(var(--l3-c));
                 vertical-align: middle;
                 margin: 0 2px;
 
@@ -79,7 +79,7 @@
         margin-top: -7px;
         font-family: var(--font-brand);
         font-weight: 900;
-        color: hsl(var(--c3)) !important;
+        color: oklch(var(--c3)) !important;
         text-decoration: none !important;
     }
 
@@ -137,7 +137,7 @@
     }
 
     a:hover {
-        color: hsl(var(--l3-c));
+        color: oklch(var(--l3-c));
     }
 }
 
@@ -171,11 +171,11 @@
             }
 
             &:hover {
-                --col: hsl(var(--l3-c));
+                --col: oklch(var(--l3-c));
                 --mask-colour: color-mix(
                     in hsl,
-                    hsl(var(--l3-c)),
-                    hsl(var(--l4-c)) 30%
+                    oklch(var(--l3-c)),
+                    oklch(var(--l4-c)) 30%
                 );
                 text-decoration: underline !important;
 
@@ -262,8 +262,8 @@
 .footer-links a,
 .footer-links button {
     --bg: transparent !important;
-    --bg-hov: hsla(var(--b5), 60%) !important;
-    --bg-atv: hsla(var(--b5), 80%) !important;
+    --bg-hov: oklch(var(--b5), 60%) !important;
+    --bg-atv: oklch(var(--b5), 80%) !important;
     --shadow: none !important;
     --shadow-hov: none !important;
 }
@@ -280,7 +280,7 @@
 }
 
 .footer .footer-legal {
-    color: hsl(var(--c3));
+    color: oklch(var(--c3));
     font-size: var(--font-size);
     line-height: var(--line-height);
     margin-top: var(--card-gap);

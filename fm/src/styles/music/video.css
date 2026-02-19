@@ -14,8 +14,8 @@
 .video-preview,
 .video-preview-upload-cta {
     --bg: transparent !important;
-    --bg-hov: hsl(var(--b4), 20%) !important;
-    --bg-atv: hsl(var(--b2), 40%) !important;
+    --bg-hov: oklch(var(--b4) / 20%) !important;
+    --bg-atv: oklch(var(--b2), 40%) !important;
     --shadow: none !important;
     margin-top: unset !important;
     border-radius: var(--item-med-radius) !important;
@@ -33,7 +33,7 @@
         & > .cta-link {
             font-size: var(--font-size);
             line-height: var(--line-height);
-            color: hsl(var(--c2)) !important;
+            color: oklch(var(--c2)) !important;
             font-weight: var(--font-weight-medium) !important;
             text-decoration: var(--force-underline, none) !important;
             --show-icon: none;
@@ -86,6 +86,6 @@
     gap: 6px;
 
     font-weight: var(--font-weight-medium);
-    color: hsl(var(--c3));
+    color: oklch(var(--c3));
     padding: calc(var(--card-padding) * 2) var(--card-padding) !important;
 }

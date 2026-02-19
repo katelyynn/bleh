@@ -1,6 +1,6 @@
 .tippy-box[data-theme="nav-window"],
 .tippy-box[data-theme="auth-menu-v2"] {
-    background: hsl(var(--menu-bg), var(--solarium-opacity, var(--menu-opacity))) !important;
+    background: oklch(var(--menu-bg) / var(--solarium-opacity, var(--menu-opacity))) !important;
     padding: var(--item-list-gap) !important;
     border-radius: var(--card-radius) !important;
     border: 1px solid var(--card-border-base) !important;
@@ -107,10 +107,10 @@
                     inset: 0;
                     background: linear-gradient(
                         180deg,
-                        hsl(var(--b6)) 0%,
+                        oklch(var(--b6)) 0%,
                         transparent 10%,
                         transparent 90%,
-                        hsl(var(--b6)) 100%
+                        oklch(var(--b6)) 100%
                     );
                 }
             }
@@ -140,7 +140,7 @@
                         position: relative;
                         z-index: 10;
                         margin-left: -12px !important;
-                        border-right: 1px solid hsl(var(--b5));
+                        border-right: 1px solid oklch(var(--b5));
 
                         &.user-status-subscriber {
                             order: -1;
@@ -160,7 +160,7 @@
                 }
 
                 & > .name {
-                    color: hsl(var(--c1));
+                    color: oklch(var(--c1));
                     font-size: 16px;
                     line-height: 20px;
                     font-weight: var(--font-weight-medium);
@@ -202,7 +202,7 @@
                 left: var(--side);
                 bottom: 0;
                 --icon: var(--icon-16-track);
-                color: hsl(var(--c3));
+                color: oklch(var(--c3));
 
                 display: none;
             }
@@ -225,7 +225,7 @@
             }
 
             & > .status-text {
-                color: hsl(var(--c3));
+                color: oklch(var(--c3));
                 cursor: default;
 
                 display: flex;
@@ -237,7 +237,7 @@
                 white-space: nowrap;
 
                 & > a {
-                    color: hsl(var(--c2));
+                    color: oklch(var(--c2));
 
                     min-width: 0;
                     overflow: hidden;
@@ -247,7 +247,7 @@
 
                     &:hover,
                     &:focus {
-                        color: hsl(var(--l3-c)) !important;
+                        color: oklch(var(--l3-c)) !important;
                     }
                 }
 
@@ -256,7 +256,7 @@
                 }
 
                 & > :last-child {
-                    color: hsl(var(--c2), 60%);
+                    color: oklch(var(--c2), 60%);
                 }
 
                 & > .smart-title {
@@ -265,7 +265,7 @@
 
                 & > .artist {
                     display: flex;
-                    color: hsl(var(--c3), 60%);
+                    color: oklch(var(--c3), 60%);
                     cursor: default;
 
                     min-width: 0;
@@ -276,7 +276,7 @@
 
                     & > a {
                         &:not(:hover) {
-                            color: hsl(var(--c2), 60%) !important;
+                            color: oklch(var(--c2), 60%) !important;
                         }
 
                         min-width: 0;

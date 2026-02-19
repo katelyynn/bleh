@@ -11,18 +11,18 @@
         letter-spacing: unset;
         margin: unset;
         cursor: default;
-        color: hsl(var(--c1));
+        color: oklch(var(--c1));
     }
     h3 {
         font-size: 24px;
         line-height: 28px;
-        color: hsl(var(--c1));
+        color: oklch(var(--c1));
         cursor: default;
     }
     h4 {
         font-size: 16px;
         line-height: 20px;
-        color: hsl(var(--c1));
+        color: oklch(var(--c1));
 
         &.top-header {
             width: fit-content;
@@ -44,7 +44,7 @@
     }
     h5 {
         margin: unset;
-        color: hsl(var(--c1));
+        color: oklch(var(--c1));
         font-weight: var(--font-weight-medium);
     }
 
@@ -53,7 +53,7 @@
     }
 
     .subtext {
-        color: hsl(var(--c3));
+        color: oklch(var(--c3));
         font-size: var(--font-size-sm);
         line-height: var(--line-height-sm);
         margin-top: -5px;

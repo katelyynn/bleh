@@ -11,8 +11,8 @@
 }
 .setting-search-result {
     --bg: transparent;
-    --bg-hov: hsl(var(--b4), 40%);
-    --bg-atv: hsl(var(--b4), 60%);
+    --bg-hov: oklch(var(--b4) / 40%);
+    --bg-atv: oklch(var(--b4) / 60%);
     --shadow: none;
 
     --button-verts: 10px;
@@ -25,7 +25,7 @@
 }
 
 .setting-search-result-context {
-    color: hsl(var(--c3));
+    color: oklch(var(--c3));
     font-size: 13px;
 }
 

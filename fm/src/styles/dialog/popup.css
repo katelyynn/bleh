@@ -1,7 +1,7 @@
 .popup-sub {
     display: block;
     font-size: 11px;
-    color: hsl(var(--c3));
+    color: oklch(var(--c3));
     cursor: default;
     user-select: none;
 }

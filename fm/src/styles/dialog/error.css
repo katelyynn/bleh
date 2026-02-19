@@ -21,7 +21,7 @@
 
         &.error-info-header {
             font-weight: var(--font-weight-medium);
-            color: hsl(var(--c3));
+            color: oklch(var(--c3));
         }
     }
 
@@ -33,6 +33,6 @@
     }
 
     .error-type {
-        color: hsl(var(--l3-c));
+        color: oklch(var(--l3-c));
     }
 }

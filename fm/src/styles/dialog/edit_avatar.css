@@ -28,8 +28,8 @@
 
                 &[data-has-file] {
                     --bg: transparent !important;
-                    --bg-hov: hsl(var(--b5), 10%) !important;
-                    --bg-atv: hsl(var(--b5), 20%) !important;
+                    --bg-hov: oklch(var(--b5), 10%) !important;
+                    --bg-atv: oklch(var(--b5), 20%) !important;
                     --col: #000;
 
                     text-shadow: 0 0 8px #fff;

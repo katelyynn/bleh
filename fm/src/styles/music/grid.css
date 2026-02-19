@@ -126,13 +126,13 @@
     }
 
     &.generic-cover {
-        --grid-colour-shadow: 0 27px 15px hsl(var(--b4), 40%);
+        --grid-colour-shadow: 0 27px 15px oklch(var(--b4) / 40%);
     }
 
     --shadow: rgba(0, 0, 0, 0.2);
 
     &.grid-items-item-has-colour {
-        --shadow: color-mix(in hsl, hsl(var(--h4)) 60%, black 70%);
+        --shadow: color-mix(in hsl, oklch(var(--h4)) 60%, black 70%);
     }
 
     transition-property: transform;
@@ -180,7 +180,7 @@
     }
 
     &.link-block--hover {
-        --hover-underline: underline hsl(var(--c3));
+        --hover-underline: underline oklch(var(--c3));
     }
 }
 
@@ -219,7 +219,7 @@
 
     &.grid-items-cover-default {
         & > img {
-            background-color: hsl(var(--c3), 50%);
+            background-color: oklch(var(--c3), 50%);
         }
     }
 
@@ -245,7 +245,7 @@
         inset: 0;
         z-index: 9;
 
-        background: hsl(var(--b4));
+        background: oklch(var(--b4));
 
         transition-property: background;
         transition-duration: var(--trans);
@@ -257,7 +257,7 @@
         &[style] {
             background: color-mix(
                 in hsl,
-                hsl(var(--h4)) 60%,
+                oklch(var(--h4)) 60%,
                 black 70%
             ) !important;
         }
@@ -313,7 +313,7 @@
     }
 
     &:after {
-        background: linear-gradient(180deg, transparent, hsl(var(--b5)));
+        background: linear-gradient(180deg, transparent, oklch(var(--b5)));
     }
 }
 .grid-items-cta {
@@ -322,13 +322,13 @@
     }
 
     h3 {
-        color: hsl(var(--c1));
+        color: oklch(var(--c1));
         font-size: 16px;
         line-height: 20px;
     }
     .grid-cta-text {
         margin-top: 2px;
-        color: hsl(var(--c2));
+        color: oklch(var(--c2));
         cursor: default;
 
         & + p {
@@ -338,7 +338,7 @@
 }
 
 .grid-items-empty-inner {
-    background: hsla(var(--b4), 60%);
+    background: oklch(var(--b4) / 60%);
     width: 100%;
     height: 100%;
     border-radius: var(--item-med-radius);
@@ -346,16 +346,16 @@
 .grid-items__placeholder .grid-items-item--loading {
     background-image: linear-gradient(
         270deg,
-        hsla(var(--b3), 0.05),
-        hsla(var(--b3), 0.3),
-        hsla(var(--b3), 0.6),
-        hsla(var(--b3), 0.3),
-        hsla(var(--b3), 0.05)
+        oklch(var(--b3) / 0.05),
+        oklch(var(--b3) / 0.3),
+        oklch(var(--b3) / 0.6),
+        oklch(var(--b3) / 0.3),
+        oklch(var(--b3) / 0.05)
     );
 }
 
 .grid-items-item-main-text {
-    color: hsl(var(--c1));
+    color: oklch(var(--c1));
     font-weight: var(--font-weight-medium);
     margin: 0 0 1px;
     text-decoration: var(--hover-underline, none);
@@ -385,7 +385,7 @@
     opacity: unset;
     z-index: 21;
     position: relative;
-    color: hsl(var(--c2));
+    color: oklch(var(--c2));
     overflow: visible;
     margin: unset;
 
@@ -424,8 +424,8 @@
         &[data-bleh--scrobble-milestone] {
             color: color-mix(
                 in hsl,
-                hsl(var(--l3-c)),
-                hsl(var(--l4-c)) 30%
+                oklch(var(--l3-c)),
+                oklch(var(--l4-c)) 30%
             );
         }
 

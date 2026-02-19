@@ -31,7 +31,7 @@
                 background: linear-gradient(
                     to bottom,
                     transparent,
-                    hsl(var(--rain), 0.25)
+                    oklch(var(--rain), 0.25)
                 );
                 animation: stem 0.5s linear infinite;
             }
@@ -39,7 +39,7 @@
             .splat {
                 width: 15px;
                 height: 10px;
-                border-top: 2px dotted hsl(var(--rain), 0.5);
+                border-top: 2px dotted oklch(var(--rain), 0.5);
                 border-radius: 50%;
                 opacity: 1;
                 transform: scale(0);

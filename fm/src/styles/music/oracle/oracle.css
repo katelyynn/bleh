@@ -9,7 +9,7 @@
     display: flex;
     gap: var(--card-gap);
     --icon: var(--icon-16-oracle);
-    --icon-colour: hsl(var(--l3-c));
+    --icon-colour: oklch(var(--l3-c));
 
     & > .oracle-message {
         display: flex;
@@ -26,14 +26,14 @@
         cursor: default;
     }
 
-    background: linear-gradient(180deg, hsl(var(--k4), 25%), transparent);
+    background: linear-gradient(180deg, oklch(var(--k4), 25%), transparent);
     padding: var(--card-padding);
     margin: calc(-1 * var(--card-padding)) calc(-1 * var(--card-padding)) 0
         calc(-1 * var(--card-padding));
     border-top-left-radius: var(--card-radius);
 
     &[data-mobile="true"] {
-        background: hsl(var(--k4), 20%);
+        background: oklch(var(--k4), 20%);
         padding: var(--card-gap);
         margin: 0 0 var(--card-gap) 0;
         border-radius: var(--item-big-radius);
@@ -48,7 +48,7 @@
 
 .oracle-name {
     font-style: normal;
-    color: hsl(var(--l3-c));
+    color: oklch(var(--l3-c));
     font-weight: var(--font-weight-medium);
 }
 
@@ -92,7 +92,7 @@ img.empty {
     transition-timing-function: var(--trans-function);
 
     &:hover {
-        background: hsl(var(--b4), 20%);
+        background: oklch(var(--b4) / 20%);
         transition: none;
 
         & > .entry-header > .entry-subdata,
@@ -117,7 +117,7 @@ img.empty {
                 gap: 4px;
 
                 font-size: 13px;
-                color: hsl(var(--c2), 80%);
+                color: oklch(var(--c2), 80%);
                 --icon-colour: currentColor;
                 --icon-size: 14px;
             }
@@ -133,8 +133,8 @@ img.empty {
 
             & > button {
                 --bg: transparent;
-                --bg-hov: hsl(var(--h4), 10%);
-                --bg-atv: hsl(var(--h4), 20%);
+                --bg-hov: oklch(var(--h4) / 10%);
+                --bg-atv: oklch(var(--h4) / 20%);
                 --shadow: none;
                 --button-height: 24px;
                 height: var(--button-height);
@@ -182,7 +182,7 @@ img.empty {
             --lit-over: var(--lit-neg);
 
             & > .entry-data-text {
-                color: hsl(var(--l3-c));
+                color: oklch(var(--l3-c));
 
                 &:after {
                     content: " (invalid)";
@@ -191,12 +191,12 @@ img.empty {
         }
 
         & > .entry-data-head {
-            color: hsl(var(--c3), 60%);
+            color: oklch(var(--c3), 60%);
             cursor: default;
         }
 
         & > .entry-data-text {
-            color: hsl(var(--c3));
+            color: oklch(var(--c3));
             cursor: default;
         }
     }

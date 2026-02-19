@@ -84,7 +84,7 @@
         }
 
         & > .swatch {
-            background: hsl(var(--h3));
+            background: oklch(var(--h3));
 
             &:after {
                 scale: 1 !important;
@@ -94,7 +94,7 @@
     }
 
     & > strong {
-        color: hsl(var(--l3-c)) !important;
+        color: oklch(var(--l3-c)) !important;
         margin: 0 -150px;
 
         translate: 0 2px;
@@ -105,7 +105,7 @@
     &:hover {
         & > strong {
             opacity: 1;
-            color: hsl(var(--c3));
+            color: oklch(var(--c3));
         }
     }*/
 
@@ -122,12 +122,12 @@
     }
 }
 .palette .swatch:not(.dropdown-menu-clickable-item, .album-cover) {
-    background: hsl(var(--h3));
+    background: oklch(var(--h3));
     box-shadow:
         var(--primary-shadow),
-        0 3px 12px hsl(var(--h4), 32%),
+        0 3px 12px oklch(var(--h4) / 32%),
         var(--interact-shadow);
-    color: hsl(var(--b7));
+    color: oklch(var(--b7));
     --mask-colour: currentColor;
     --font-size: 0;
 
@@ -162,8 +162,8 @@
         --mask: var(--icon-16-edit-mini);
 
         &:not([aria-checked="true"] > &) {
-            background: hsl(var(--b6), 20%);
-            color: hsl(var(--c2));
+            background: oklch(var(--b6) / 20%);
+            color: oklch(var(--c2));
             box-shadow: var(--group-shadow);
         }
     }
@@ -191,7 +191,7 @@
 }
 
 .swatch {
-    background-color: var(--col, hsl(var(--b6)));
+    background-color: var(--col, oklch(var(--b6)));
     border-radius: var(--item-med-radius);
 }
 

@@ -19,7 +19,7 @@
         transition-property: transform !important;
         transition-duration: var(--trans) !important;
         transition-timing-function: var(--trans-function) !important;
-        color: hsl(var(--c3));
+        color: oklch(var(--c3));
     }
 
     &.blend-v2-btn {
@@ -65,7 +65,7 @@
 }
 
 .select-header {
-    color: hsl(var(--c3));
+    color: oklch(var(--c3));
     padding: 3px var(--button-sides) 4px;
     cursor: default;
 }
@@ -84,7 +84,7 @@
         --right: var(--button-sides-icon);
 
         &:after {
-            color: hsl(var(--c3));
+            color: oklch(var(--c3));
         }
     }
 

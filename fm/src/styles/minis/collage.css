@@ -53,7 +53,7 @@
     strong {
         font-size: 16px;
         line-height: 20px;
-        color: hsl(var(--c1));
+        color: oklch(var(--c1));
         cursor: default;
     }
 }

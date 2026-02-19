@@ -11,13 +11,13 @@
 .content-form input[type="url"],
 .content-form select,
 .content-form textarea {
-    --bg: hsl(var(--b4));
+    --bg: oklch(var(--b4));
     --bg-hov: var(--bg);
     --bg-atv: var(--bg);
     /* ^ on firefox (at least) transparent backgrounds get
     overlayed over white, which is not readable at all */
-    --col: hsl(var(--c2));
-    --mask-colour: color-mix(in hsl, hsl(var(--c2)), hsl(var(--c3)) 50%);
+    --col: oklch(var(--c2));
+    --mask-colour: color-mix(in hsl, oklch(var(--c2)), oklch(var(--c3)) 50%);
     background-color: var(--bg) !important;
     color: var(--col) !important;
     padding: var(
@@ -55,7 +55,7 @@
             --bg-atv: var(--bg) !important;
             --focus-outline: none !important;
             pointer-events: none;
-            --col: hsl(var(--c3));
+            --col: oklch(var(--c3));
         }
     }
 
@@ -75,7 +75,7 @@
 
     &[disabled]:not([disabled="false"]),
     &::placeholder {
-        color: hsl(var(--c3)) !important;
+        color: oklch(var(--c3)) !important;
     }
 }
 .content-form textarea {
@@ -120,9 +120,9 @@
         background: linear-gradient(
             180deg,
             transparent,
-            hsl(var(--h4), 20%)
+            oklch(var(--h4) / 20%)
         );
-        box-shadow: inset 0 0 0 1px hsl(var(--l3-c), 40%);
+        box-shadow: inset 0 0 0 1px oklch(var(--l3-c), 40%);
         opacity: 0;
         pointer-events: none;
 
@@ -136,10 +136,10 @@
         pointer-events: none;
     }
 
-    --mask-colour: color-mix(in hsl, hsl(var(--c2)), hsl(var(--c3)) 50%);
+    --mask-colour: color-mix(in hsl, oklch(var(--c2)), oklch(var(--c3)) 50%);
 
     &:has(> .modern-input[disabled]) {
-        --mask-colour: hsl(var(--c3));
+        --mask-colour: oklch(var(--c3));
     }
 
     &.in-settings {
@@ -246,10 +246,10 @@
                 -1 * (var(--button-list-gap) + var(--button-height))
             ) !important;
             --bg: transparent;
-            --bg-hov: hsl(var(--h3), 5%);
-            --bg-atv: hsl(var(--h3), 10%);
+            --bg-hov: oklch(var(--h3) / 5%);
+            --bg-atv: oklch(var(--h3) / 10%);
             --shadow: none;
-            --col: hsl(var(--l3-c));
+            --col: oklch(var(--l3-c));
             --mask-colour: currentColor;
         }
     }

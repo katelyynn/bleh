@@ -4,7 +4,7 @@
     font-weight: var(--font-weight) !important;
     display: flex;
     align-items: center;
-    color: hsl(var(--l3-c)) !important;
+    color: oklch(var(--l3-c)) !important;
     padding: unset;
     border-radius: var(--item-med-radius);
     background-color: transparent;
@@ -37,7 +37,7 @@
 
     --bg: var(--badge);
     --bg-hov: var(--badge-hov);
-    box-shadow: 0 3px 15px 1px hsl(var(--h4), 20%), 0px 0px 10px 0px hsl(var(--l3-c), 8%) inset !important;
+    box-shadow: 0 3px 15px 1px oklch(var(--h4) / 20%), 0px 0px 10px 0px oklch(var(--l3-c), 8%) inset !important;
     background-color: var(--bg) !important;
     border-radius: var(--item-big-radius) !important;
     cursor: pointer;
@@ -99,7 +99,7 @@
 
 .header-new-on-tour,
 .label {
-    color: hsl(var(--l3-c)) !important;
+    color: oklch(var(--l3-c)) !important;
     --mask-colour: currentColor !important;
 }
 .user-status-subscriber {
@@ -248,8 +248,8 @@
 }
 
 .user-status--bleh-missing {
-    --bg: hsla(var(--b4), 75%) !important;
-    --bg-hov: hsla(var(--b3), 80%) !important;
+    --bg: oklch(var(--b4) / 75%) !important;
+    --bg-hov: oklch(var(--b3) / 80%) !important;
     --mask: var(--icon-16-x);
 }
 
@@ -329,10 +329,10 @@
     --margin-top: 0;
     --mask-size: 18px;
     background: var(--override-bg, none) !important;
-    filter: drop-shadow(2px 0px 0 hsl(var(--b5)))
-        drop-shadow(0px 2px 0 hsl(var(--b5)))
-        drop-shadow(-2px -0px 0 hsl(var(--b5)))
-        drop-shadow(-0px -2px 0 hsl(var(--b5)));
+    filter: drop-shadow(2px 0px 0 oklch(var(--b5)))
+        drop-shadow(0px 2px 0 oklch(var(--b5)))
+        drop-shadow(-2px -0px 0 oklch(var(--b5)))
+        drop-shadow(-0px -2px 0 oklch(var(--b5)));
 
     &:before {
         content: '';
@@ -344,7 +344,7 @@
         left: 50%;
         margin-top: calc(-1 * (var(--size) / 2));
         margin-left: calc(-1 * (var(--size) / 2));
-        background-color: hsl(var(--b5));
+        background-color: oklch(var(--b5));
         border-radius: 50px;
     }
 
@@ -371,23 +371,23 @@
     height: 14px;
     --mask-size: 14px;
     /* remove the heavy bottom shadow */
-    filter: drop-shadow(2px 0px 0 hsl(var(--b5)))
-        drop-shadow(0px 2px 0 hsl(var(--b5)))
-        drop-shadow(-2px -0px 0 hsl(var(--b5)))
-        drop-shadow(-0px -2px 0 hsl(var(--b5)));
+    filter: drop-shadow(2px 0px 0 oklch(var(--b5)))
+        drop-shadow(0px 2px 0 oklch(var(--b5)))
+        drop-shadow(-2px -0px 0 oklch(var(--b5)))
+        drop-shadow(-0px -2px 0 oklch(var(--b5)));
 }
 
 .obsession-details-intro-avatar-wrap .avatar-status-dot {
     /* remove the heavy bottom shadow */
-    filter: drop-shadow(2px 0px 0 hsl(var(--b5)))
-        drop-shadow(0px 2px 0 hsl(var(--b5)))
-        drop-shadow(-2px -0px 0 hsl(var(--b5)))
-        drop-shadow(-0px -2px 0 hsl(var(--b5)));
+    filter: drop-shadow(2px 0px 0 oklch(var(--b5)))
+        drop-shadow(0px 2px 0 oklch(var(--b5)))
+        drop-shadow(-2px -0px 0 oklch(var(--b5)))
+        drop-shadow(-0px -2px 0 oklch(var(--b5)));
 }
 
 .shout-user-avatar:before,
 .avatar-status-dot:after {
-    color: hsl(var(--l3-c)) !important;
+    color: oklch(var(--l3-c)) !important;
     --override-bg: currentColor !important;
 }
 
@@ -426,8 +426,8 @@
     align-items: center;
     --icon-colour: linear-gradient(
         0deg,
-        hsl(var(--l3-c)),
-        hsl(var(--l2-c))
+        oklch(var(--l3-c)),
+        oklch(var(--l2-c))
     );
     --icon: var(--icon-16-star-fill);
     --icon-size: 12px;

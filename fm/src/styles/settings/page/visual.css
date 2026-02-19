@@ -21,13 +21,13 @@
             height: 60px;
             border-radius: 50%;
 
-            border: 1px solid hsl(var(--b4), 70%);
+            border: 1px solid oklch(var(--b4) / 70%);
             box-shadow: var(--interact-shadow);
             overflow: hidden;
 
             .inner {
-                background: hsl(var(--b6));
-                color: hsl(var(--c2));
+                background: oklch(var(--b6));
+                color: oklch(var(--c2));
                 --mask-colour: currentColor;
                 display: flex;
                 justify-content: center;
@@ -78,9 +78,9 @@
 
         &[aria-selected="true"] {
             .bubble {
-                outline: 2px solid hsl(var(--l3-c));
+                outline: 2px solid oklch(var(--l3-c));
                 box-shadow:
-                    0 3px 12px hsl(var(--h4), 32%),
+                    0 3px 12px oklch(var(--h4) / 32%),
                     var(--interact-shadow);
             }
 
@@ -106,7 +106,7 @@
 
             &:not([aria-selected="true"]) {
                 strong {
-                    color: hsl(var(--c3));
+                    color: oklch(var(--c3));
                 }
             }
         }
@@ -117,7 +117,7 @@
     display: flex;
     width: 100%;
     flex: 1;
-    background-color: hsl(var(--b6));
+    background-color: oklch(var(--b6));
     position: relative;
     border-radius: calc(var(--item-big-radius) - 6px);
     overflow: hidden;
@@ -132,7 +132,7 @@
             display: flex;
             flex-direction: column;
             gap: 6px;
-            background-color: hsl(var(--b5));
+            background-color: oklch(var(--b5));
             box-shadow: var(--card-shadow);
             border-top-left-radius: var(--item-med-radius);
 
@@ -147,7 +147,7 @@
 
             .preview-header {
                 display: block;
-                color: hsl(var(--c1));
+                color: oklch(var(--c1));
                 font-size: 14px;
                 line-height: 14px;
                 font-weight: var(--font-weight-bold);
@@ -157,7 +157,7 @@
                 display: block;
                 width: 40px;
                 height: 3px;
-                background-color: hsl(var(--c2));
+                background-color: oklch(var(--c2));
                 border-radius: 50px;
 
                 margin-top: -4px;
@@ -186,7 +186,7 @@
     display: block;
     width: 64px;
     height: 36px;
-    background: hsl(var(--h3));
+    background: oklch(var(--h3));
     box-shadow: var(--primary-shadow);
     border-radius: var(--item-med-radius);
 }

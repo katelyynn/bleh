@@ -49,7 +49,7 @@
     --shadow: none;
 
     .attendee-summary-user-link {
-        color: hsl(var(--l3-c));
+        color: oklch(var(--l3-c));
         text-decoration: var(--force-underline, none) !important;
 
         &:before {

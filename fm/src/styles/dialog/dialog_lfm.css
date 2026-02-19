@@ -81,10 +81,10 @@
 }
 .modal-action-button {
     --bg: transparent;
-    --bg-hov: hsl(var(--b4), 40%);
-    --bg-atv: hsl(var(--b4), 60%);
+    --bg-hov: oklch(var(--b4) / 40%);
+    --bg-atv: oklch(var(--b4) / 60%);
     --shadow: none;
-    --col: hsl(var(--c3));
+    --col: oklch(var(--c3));
     --mask-colour: currentColor;
 
     --left: calc((var(--modal-close-size) - var(--icon-size)) / 2);

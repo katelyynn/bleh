@@ -18,16 +18,16 @@
     }
     .music-link {
         display: flex !important;
-        --bg: hsl(var(--k4), 20%);
-        --bg-hov: hsl(var(--k4), 30%);
-        --bg-atv: hsl(var(--k4), 40%);
+        --bg: oklch(var(--k4), 20%);
+        --bg-hov: oklch(var(--k4), 30%);
+        --bg-atv: oklch(var(--k4), 40%);
         --padding: 5px 10px 5px
             calc(10px + var(--icon-size) + 4px);
-        --col: hsl(var(--l3-c));
+        --col: oklch(var(--l3-c));
         --mask-colour: color-mix(
             in hsl,
-            hsl(var(--l3-c)),
-            hsl(var(--l4-c)) 30%
+            oklch(var(--l3-c)),
+            oklch(var(--l4-c)) 30%
         );
         --shadow: none;
         --radius: var(--item-big-radius);
@@ -128,7 +128,7 @@
     .cta-link {
         font-size: var(--font-size);
         line-height: var(--line-height);
-        color: hsl(var(--c2));
+        color: oklch(var(--c2));
         text-decoration: var(--force-underline, none) !important;
     }
 
@@ -188,7 +188,7 @@
 .info-tip {
     display: inline-flex;
     --icon-size: 16px;
-    --icon-colour: hsl(var(--c3));
+    --icon-colour: oklch(var(--c3));
 }
 
 .top-header {

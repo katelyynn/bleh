@@ -23,11 +23,11 @@
 
             &:hover {
                 text-decoration: underline !important;
-                --col: hsl(var(--l3-c));
+                --col: oklch(var(--l3-c));
                 --mask-colour: color-mix(
                     in hsl,
-                    hsl(var(--l3-c)),
-                    hsl(var(--l4-c)) 30%
+                    oklch(var(--l3-c)),
+                    oklch(var(--l4-c)) 30%
                 );
             }
         }

@@ -29,8 +29,8 @@
                 left: 0;
                 bottom: 0;
                 border-radius: 50px;
-                background-color: hsl(var(--h3));
-                box-shadow: 0 2px 8px 1px hsl(var(--h4), 45%);
+                background-color: oklch(var(--h3));
+                box-shadow: 0 2px 8px 1px oklch(var(--h4) / 45%);
             }
         }
     }
@@ -45,21 +45,21 @@
         position: relative;
 
         font-size: 16px;
-        color: hsl(var(--c1));
+        color: oklch(var(--c1));
         font-weight: var(--font-weight-medium);
         cursor: default;
 
         .progress-percent {
             text-shadow:
-                0 0 15px hsl(var(--h4)),
-                0 0 15px hsl(var(--h4));
+                0 0 15px oklch(var(--h4)),
+                0 0 15px oklch(var(--h4));
         }
 
         .progress-icon {
             position: absolute;
             inset: 0;
             pointer-events: none;
-            background: linear-gradient(hsl(var(--c1)), hsl(var(--h3)));
+            background: linear-gradient(oklch(var(--c1)), oklch(var(--h3)));
 
             --mask: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIxLjI1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWNpcmNsZSI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiLz48L3N2Zz4=");
             mask-image: var(--mask);
@@ -69,8 +69,8 @@
 
             [data-bleh--theme_type="light"] & {
                 background: linear-gradient(
-                    hsl(var(--l4-c)),
-                    hsl(var(--h3))
+                    oklch(var(--l4-c)),
+                    oklch(var(--h3))
                 );
             }
         }
@@ -145,25 +145,25 @@
                     background: linear-gradient(
                         180deg,
                         transparent,
-                        hsl(var(--h4), 30%)
+                        oklch(var(--h4) / 30%)
                     );
                 }
 
-                color: hsl(var(--h2));
+                color: oklch(var(--h2));
                 font-weight: var(--font-weight-medium);
 
                 .tier-name {
                     background-image: linear-gradient(
                         180deg,
-                        hsl(var(--c1)),
-                        hsl(var(--h3))
+                        oklch(var(--c1)),
+                        oklch(var(--h3))
                     );
                     background-clip: text;
                     -webkit-background-clip: text;
                     -webkit-text-fill-color: transparent;
 
                     [data-bleh--theme_type="light"] & {
-                        color: hsl(var(--l4-c));
+                        color: oklch(var(--l4-c));
 
                         background: unset;
                         background-clip: unset;

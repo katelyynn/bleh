@@ -17,7 +17,7 @@
 
         .edit-scrobble-label--originally {
             display: -webkit-box !important;
-            color: hsl(var(--c3)) !important;
+            color: oklch(var(--c3)) !important;
             font-size: var(--font-size-sm);
             font-weight: var(--font-weight) !important;
 
@@ -54,7 +54,7 @@
     }
 
     .edit-scrobble-label {
-        color: hsl(var(--c3));
+        color: oklch(var(--c3));
         font-weight: var(--font-weight) !important;
         margin-bottom: 4px;
         cursor: default;
@@ -71,7 +71,7 @@
     }
 
     a {
-        color: hsl(var(--l3-c)) !important;
+        color: oklch(var(--l3-c)) !important;
     }
 
     .checkbox {
@@ -92,7 +92,7 @@
 }
 
 .generic-label {
-    color: hsl(var(--c2), 70%);
+    color: oklch(var(--c2), 70%);
     font-weight: var(--font-weight) !important;
     margin-bottom: calc(-1 * (var(--item-list-gap) - 4px));
     cursor: default;
@@ -100,7 +100,7 @@
 
 .form-tip {
     font-size: 13px;
-    color: hsl(var(--c3));
+    color: oklch(var(--c3));
     cursor: default;
     margin-top: calc(-1 * (var(--item-list-gap) - 6px));
 }

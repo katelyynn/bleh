@@ -26,13 +26,13 @@
 
     blockquote {
         padding: 6px;
-        background: hsl(var(--f4), 10%);
+        background: oklch(var(--f4), 10%);
         border-radius: var(--item-med-radius);
     }
 
     del {
         font-size: 13px;
-        color: hsl(var(--c3));
+        color: oklch(var(--c3));
         text-decoration: none;
     }
 
@@ -88,7 +88,7 @@
         list-style-type: disc;
 
         &::marker {
-            color: hsl(var(--c3));
+            color: oklch(var(--c3));
         }
 
         p {
@@ -98,7 +98,7 @@
         ul {
             margin-top: 2px;
             margin-left: 12px;
-            color: hsl(var(--c2), 80%);
+            color: oklch(var(--c2), 80%);
             --font-size: 13px;
             font-size: var(--font-size);
         }
@@ -127,8 +127,8 @@
 
             & > u {
                 text-decoration: none;
-                color: hsl(var(--l3-c));
-                text-shadow: 0 0 20px hsla(var(--h4), 40%);
+                color: oklch(var(--l3-c));
+                text-shadow: 0 0 20px oklch(var(--h4) / 40%);
                 font-weight: var(--font-weight-medium);
 
                 --hue-over: 17;
@@ -199,8 +199,8 @@
     padding: 8px;
     border-radius: var(--item-big-radius);
     border: 1px solid var(--card-border-base);
-    background: hsl(var(--b4), 20%);
-    color: hsl(var(--c3));
+    background: oklch(var(--b4) / 20%);
+    color: oklch(var(--c3));
     max-width: 400px;
     cursor: default;
 }
@@ -236,7 +236,7 @@ t {
     cursor: default;
 
     &:hover {
-        color: hsl(var(--l3-c));
+        color: oklch(var(--l3-c));
         font-weight: var(--font-weight-medium);
     }
 }
@@ -244,7 +244,7 @@ t {
 .mention {
     font-weight: var(--font-weight-medium);
     padding: 0 4px;
-    background-color: hsl(var(--k4), 20%);
+    background-color: oklch(var(--k4) / 20%);
     border-radius: var(--item-small-radius);
     text-decoration: var(--force-underline, none) !important;
 
@@ -255,29 +255,29 @@ t {
     &:hover,
     &:focus-visible {
         transition: none;
-        background-color: hsl(var(--k4), 30%);
+        background-color: oklch(var(--k4) / 30%);
     }
 
     &:active {
-        background-color: hsl(var(--k4), 40%);
+        background-color: oklch(var(--k4) / 40%);
     }
 }
 
 .markdown-body {
     h5 {
         margin: unset;
-        color: hsl(var(--c1));
+        color: oklch(var(--c1));
         font-weight: var(--font-weight-medium);
     }
     h4 {
         font-size: 16px;
         line-height: 20px;
-        color: hsl(var(--c1));
+        color: oklch(var(--c1));
     }
     h3 {
         font-size: 24px;
         line-height: 28px;
-        color: hsl(var(--c1));
+        color: oklch(var(--c1));
         cursor: default;
     }
 

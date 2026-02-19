@@ -6,11 +6,11 @@
 .featured-item-panel {
     background: var(--card-specific-background) !important;
     --card-specific-background:
-        linear-gradient(hsl(var(--b5)), hsl(var(--g4))) padding-box,
+        linear-gradient(oklch(var(--b5)), oklch(var(--g4))) padding-box,
         linear-gradient(
                 0deg,
-                hsla(var(--l3-c), 80%) 0%,
-                hsl(var(--b5)) 100%
+                oklch(var(--l3-c), 80%) 0%,
+                oklch(var(--b5)) 100%
             )
             border-box;
     border: 2px solid transparent !important;
@@ -19,13 +19,13 @@
     margin-top: var(--card-padding) !important;
 
     /*.cover-art {
-        background: linear-gradient(180deg, hsla(var(--h3), 20%) 0%, var(--avatar-generic-background) 100%);
+        background: linear-gradient(180deg, oklch(var(--h3), 20%) 0%, var(--avatar-generic-background) 100%);
     }*/
 
     @media (max-width: 980px) {
         --card-specific-background: linear-gradient(
-                hsl(var(--b5)),
-                hsl(var(--g4))
+                oklch(var(--b5)),
+                oklch(var(--g4))
             )
             padding-box;
         border: unset !important;
@@ -66,18 +66,18 @@
         justify-content: end;
 
         .featured-item-manage {
-            color: hsl(var(--c3)) !important;
+            color: oklch(var(--c3)) !important;
             --mask-colour: currentColor !important;
             text-transform: lowercase !important;
 
             --mask: var(--icon-16-trash);
 
             &:hover {
-                color: hsl(var(--l3-c)) !important;
+                color: oklch(var(--l3-c)) !important;
                 --mask-colour: color-mix(
                     in hsl,
-                    hsl(var(--l3-c)),
-                    hsl(var(--l4-c)) 30%
+                    oklch(var(--l3-c)),
+                    oklch(var(--l4-c)) 30%
                 ) !important;
 
                 --hue-over: var(--hue-neg);

@@ -12,9 +12,9 @@
     font: 0 / 0 auto;
     display: inline-flex;
 
-    background: hsl(var(--b4));
+    background: oklch(var(--b4));
     border-radius: 3px;
-    color: hsl(var(--c3));
+    color: oklch(var(--c3));
 
     .chartlist-artist > & {
         margin: 3px 4px 3px 0;

@@ -6,7 +6,7 @@
 
 .metadata-item {
     padding: 7px var(--button-sides) !important; /* tasteometer overrides with padding-left: 20px */
-    background-color: hsla(
+    background-color: oklch(
         var(--b4),
         50%
     ); /* would be b5, but we have a background */
@@ -20,7 +20,7 @@
     --show-icon: none;
 }
 .metadata-title {
-    color: hsl(var(--c3)) !important;
+    color: oklch(var(--c3)) !important;
     font-size: var(--font-size);
     line-height: var(--line-height);
     text-transform: unset;
@@ -37,7 +37,7 @@
     position: unset;
 }
 .metadata-display {
-    color: hsl(var(--c2));
+    color: oklch(var(--c2));
     font-size: var(--font-size);
     line-height: var(--line-height);
     font-weight: var(--font-weight-medium);
@@ -50,7 +50,7 @@
 .metadata-and-wiki-row .catalogue-metadata .catalogue-metadata-heading,
 .factbox-heading {
     font-weight: var(--font-weight);
-    color: hsl(var(--c3));
+    color: oklch(var(--c3));
     cursor: default;
 }
 
@@ -96,7 +96,7 @@
             font-size: var(--font-size);
             line-height: var(--line-height);
             font-weight: var(--font-weight);
-            color: hsl(var(--c2), 80%);
+            color: oklch(var(--c2), 80%);
         }
     }
 
@@ -116,7 +116,7 @@
         display: block;
         height: 100%;
         width: var(--card-padding);
-        background: linear-gradient(90deg, hsl(var(--b5)), transparent);
+        background: linear-gradient(90deg, oklch(var(--b5)), transparent);
         left: var(--overview-bio-size);
         top: 0;
         bottom: 0;
@@ -129,7 +129,7 @@
         display: block;
         height: 100%;
         width: var(--card-padding);
-        background: linear-gradient(270deg, hsl(var(--b5)), transparent);
+        background: linear-gradient(270deg, oklch(var(--b5)), transparent);
         right: calc(-1 * var(--card-padding));
         top: 0;
         bottom: 0;
@@ -336,8 +336,8 @@
         height: fit-content;
         width: 130px;
         margin: unset;
-        color: hsl(var(--c3));
-        --mask-colour: hsl(var(--c3), 80%);
+        color: oklch(var(--c3));
+        --mask-colour: oklch(var(--c3), 80%);
         --left: 0;
 
         flex-shrink: 0;
@@ -386,21 +386,21 @@
                 height: 14px;
                 --mask-size: 14px;
                 /* remove the heavy bottom shadow */
-                filter: drop-shadow(2px 0px 0 hsl(var(--b5)))
-                    drop-shadow(0px 2px 0 hsl(var(--b5)))
-                    drop-shadow(-2px -0px 0 hsl(var(--b5)))
-                    drop-shadow(-0px -2px 0 hsl(var(--b5)));
+                filter: drop-shadow(2px 0px 0 oklch(var(--b5)))
+                    drop-shadow(0px 2px 0 oklch(var(--b5)))
+                    drop-shadow(-2px -0px 0 oklch(var(--b5)))
+                    drop-shadow(-0px -2px 0 oklch(var(--b5)));
             }
         }
     }
 }
 
 .wiki-history-author a {
-    color: hsl(var(--l3-c)) !important;
+    color: oklch(var(--l3-c)) !important;
     font-weight: var(--font-weight-medium);
 }
 .wiki-history-date {
-    color: hsl(var(--c3));
+    color: oklch(var(--c3));
     font-size: calc(var(--font-size) - 2px);
 }
 
@@ -415,7 +415,7 @@
 .wiki-history-revision-number {
     font-size: var(--font-size);
     line-height: var(--line-height);
-    color: hsl(var(--c3)) !important;
+    color: oklch(var(--c3)) !important;
 }
 
 
@@ -431,7 +431,7 @@
             flex-direction: column;
 
             .code-side {
-                color: hsl(var(--c3));
+                color: oklch(var(--c3));
                 letter-spacing: 0.4px;
             }
         }
@@ -453,7 +453,7 @@
     line-height: 20px;
 }
 .wiki-block-cta {
-    color: hsl(var(--c2), 80%);
+    color: oklch(var(--c2), 80%);
     cursor: default;
 
     margin: unset;
@@ -475,7 +475,7 @@
 }
 
 .wiki-legal {
-    color: hsl(var(--c3));
+    color: oklch(var(--c3));
     font-size: calc(var(--font-size) - 1px);
     line-height: var(--line-height);
     border-top: unset;
@@ -504,7 +504,7 @@
         transition-timing-function: var(--trans-function);
 
         &:hover {
-            background-color: hsla(var(--b4), 20%);
+            background-color: oklch(var(--b4) / 20%);
             transition: none;
         }
     }
@@ -524,7 +524,7 @@
         margin-left: 13px;
 
         &::marker {
-            color: hsl(var(--c3));
+            color: oklch(var(--c3));
         }
     }
 }

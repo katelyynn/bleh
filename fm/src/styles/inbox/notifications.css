@@ -27,9 +27,9 @@
             }
         }
 
-        --bg: hsl(var(--b4), 40%);
-        --bg-hov: hsl(var(--b4), 80%);
-        --bg-atv: hsl(var(--b4));
+        --bg: oklch(var(--b4) / 40%);
+        --bg-hov: oklch(var(--b4) / 80%);
+        --bg-atv: oklch(var(--b4));
         --shadow: none;
         --padding: 12px 12px;
         transform: none !important;
@@ -40,7 +40,7 @@
             --lit-over: var(--lit-valentine);
 
             & > .message-content > .message-subject {
-                color: hsl(var(--l3-c));
+                color: oklch(var(--l3-c));
                 font-weight: var(--font-weight-medium);
             }
         }
@@ -76,10 +76,10 @@
 
         &[aria-checked="true"],
         &.active {
-            --bg: hsla(var(--h4), 35%);
-            --bg-hov: hsla(var(--h4), 45%);
-            --bg-atv: hsla(var(--h4), 55%);
-            --shadow: 0 10px 50px 5px hsla(var(--h4), 35%);
+            --bg: oklch(var(--h4) / 35%);
+            --bg-hov: oklch(var(--h4) / 45%);
+            --bg-atv: oklch(var(--h4) / 55%);
+            --shadow: 0 10px 50px 5px oklch(var(--h4) / 35%);
             z-index: 20;
         }
 
@@ -88,7 +88,7 @@
             flex-shrink: 0;
 
             & > .avatar {
-                background: hsl(var(--b5));
+                background: oklch(var(--b5));
                 width: 42px;
                 height: 42px;
                 --mask-size: var(--cover-size-50);
@@ -128,7 +128,7 @@
                 display: flex;
                 align-items: center;
                 gap: 4px;
-                color: hsl(var(--c3));
+                color: oklch(var(--c3));
                 --mask-colour: currentColor;
 
                 min-width: 0;
@@ -166,7 +166,7 @@
             min-width: 0;
 
             .message-subject {
-                color: hsl(var(--c3));
+                color: oklch(var(--c3));
             }
 
             .message-subject,
@@ -181,7 +181,7 @@
         }
 
         .notification-time {
-            color: hsl(var(--c3));
+            color: oklch(var(--c3));
             font-weight: var(--font-weight);
             font-size: 13px;
 

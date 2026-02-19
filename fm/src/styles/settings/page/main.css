@@ -11,7 +11,7 @@
 @import './privacy.css';
 
 .inner-preview {
-    background: hsl(var(--b6), 70%);
+    background: oklch(var(--b6), 70%);
     padding: var(--card-gap);
     border-radius: var(--item-med-radius);
     border: 1px solid transparent;

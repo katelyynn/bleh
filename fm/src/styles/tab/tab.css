@@ -99,16 +99,16 @@
     width: 100%;
     --padding: 12px var(--button-sides) 12px
         calc(var(--button-sides-icon) + var(--icon-size) + var(--icon-gap)) !important;
-    --col: hsl(var(--c2)) !important;
+    --col: oklch(var(--c2)) !important;
     height: var(--button-height);
 }
 .library-search-form .library-search-submit::before {
     --mask: var(--icon-16-search);
-    background-color: hsl(var(--c3));
+    background-color: oklch(var(--c3));
 }
 input::placeholder {
     opacity: 1 !important;
-    color: hsl(var(--c3)) !important;
+    color: oklch(var(--c3)) !important;
 }
 
 .library-search-form[data-search-state="loaded"] > .library-search-input,
@@ -137,7 +137,7 @@ input::placeholder {
     justify-content: center;
 
     & > [data-state="no-results"] {
-        color: hsl(var(--c3));
+        color: oklch(var(--c3));
         font-weight: var(--font-weight-medium);
         cursor: default;
     }
@@ -147,7 +147,7 @@ input::placeholder {
 }
 .library-search-results .library-search-results-header {
     height: unset;
-    color: hsl(var(--c3));
+    color: oklch(var(--c3));
     padding: 0 var(--button-sides);
     font-weight: var(--font-weight-medium);
     margin-bottom: var(--button-list-gap) !important;
@@ -188,14 +188,14 @@ input::placeholder {
     line-height: var(--line-height) !important;
     max-height: unset !important;
     font-weight: var(--font-weight-medium) !important;
-    color: hsl(var(--c2)) !important;
+    color: oklch(var(--c2)) !important;
     -webkit-line-clamp: 1 !important;
     margin: unset !important;
     flex-shrink: 0;
     text-decoration: var(--force-underline, none) !important;
 }
 .column-tracks-item-aux-text {
-    color: hsl(var(--c3)) !important;
+    color: oklch(var(--c3)) !important;
     font-size: calc(var(--font-size) - 1px) !important;
     line-height: var(--line-height) !important;
     margin: unset !important;
@@ -207,7 +207,7 @@ input::placeholder {
     height: fit-content !important;
 }
 .column-tracks-item-image {
-    background: hsl(var(--b4)) !important;
+    background: oklch(var(--b4)) !important;
     box-shadow: unset !important;
 
     img {
@@ -267,7 +267,7 @@ button.navlist-more {
     opacity: unset !important;
     margin: unset !important;
     font-weight: var(--font-weight-medium);
-    color: hsl(var(--c2));
+    color: oklch(var(--c2));
     cursor: pointer;
     transition-property: color, transform;
     transition-duration: var(--trans);
@@ -282,14 +282,14 @@ button.navlist-more {
 
     &.live,
     &.masthead-nav-control--active[data-analytics-label="charts"] {
-        --bg: hsla(var(--h4), 10%) !important;
-        --bg-hov: hsla(var(--h4), 16%) !important;
-        --bg-atv: hsla(var(--h4), 26%) !important;
-        --col: hsl(var(--l3-c)) !important;
+        --bg: oklch(var(--h4) / 10%) !important;
+        --bg-hov: oklch(var(--h4) / 16%) !important;
+        --bg-atv: oklch(var(--h4) / 26%) !important;
+        --col: oklch(var(--l3-c)) !important;
         --mask-colour: color-mix(
             in hsl,
-            hsl(var(--l3-c)),
-            hsl(var(--l4-c)) 40%
+            oklch(var(--l3-c)),
+            oklch(var(--l4-c)) 40%
         );
 
         .new-badge {
@@ -317,7 +317,7 @@ button.navlist-more {
         position: absolute;
         inset: 0 0 -1px 0;
         display: block;
-        background: hsl(var(--b5), 64%);
+        background: oklch(var(--b5) / 64%);
         backdrop-filter: var(--solarium);
         -webkit-backdrop-filter: var(--solarium);
         border-top-left-radius: inherit;
@@ -327,7 +327,7 @@ button.navlist-more {
 
     [data-bleh--solarium="false"] & {
         &:before {
-            background: color-mix(in hsl, hsl(var(--b6)) 20%, hsl(var(--b5)));
+            background: color-mix(in oklch, oklch(var(--b6)) 20%, oklch(var(--b5)));
         }
     }
 }
@@ -365,7 +365,7 @@ button.navlist-more {
     --bg-atv: transparent !important;
     --shadow: none !important;
     --shadow-hov: none !important;
-    --col: hsl(var(--c2)) !important;
+    --col: oklch(var(--c2)) !important;
     filter: var(--nav-filter-shadow) !important;
 
     transition-property: transform !important;
@@ -376,7 +376,7 @@ button.navlist-more {
     opacity: unset !important;
     margin: unset !important;
     font-weight: var(--font-weight-medium);
-    color: hsl(var(--c2));
+    color: oklch(var(--c2));
     cursor: pointer;
     transition-property: color, transform;
     transition-duration: var(--trans);
@@ -412,8 +412,8 @@ button.navlist-more {
         transform: scaleY(0);
         transform-origin: bottom;
 
-        background: hsl(var(--l3-c-theme-switch)) !important;
-        box-shadow: 0 0 20px 2px hsl(var(--l4-c), 50%) !important;
+        background: oklch(var(--l3-c-theme-switch)) !important;
+        box-shadow: 0 0 20px 2px oklch(var(--l4-c), 50%) !important;
 
         transition-property: transform !important;
         transition-duration: 0.2s !important;
@@ -432,8 +432,8 @@ button.navlist-more {
     }
 
     :is(.toolbar > .navlist, .library-controls > .navlist) & {
-        --bg-hov: hsl(var(--b4), 40%) !important;
-        --bg-atv: hsl(var(--b4), 60%) !important;
+        --bg-hov: oklch(var(--b4) / 40%) !important;
+        --bg-atv: oklch(var(--b4) / 60%) !important;
         --padding: var(--button-verts) var(--button-sides) var(--button-verts) calc(var(--button-sides-icon) + var(--icon-size) + var(--icon-gap)) !important;
         filter: none !important;
 
@@ -452,8 +452,8 @@ button.navlist-more {
 
     &.secondary-nav-item-link--disabled {
         opacity: 0.65 !important;
-        --col: hsl(var(--c3)) !important;
-        --mask-colour: hsl(var(--c3)) !important;
+        --col: oklch(var(--c3)) !important;
+        --mask-colour: oklch(var(--c3)) !important;
         transform: unset !important;
         --bg-hov: var(--bg) !important;
         --bg-atv: var(--bg) !important;
@@ -470,11 +470,11 @@ button.navlist-more {
     &.secondary-nav-item-link.active,
     &.secondary-nav-item-link--active {
         transform: translateY(0);
-        --col: hsl(var(--l2-c-theme-switch)) !important;
+        --col: oklch(var(--l2-c-theme-switch)) !important;
         --mask-colour: color-mix(
             in hsl,
-            hsl(var(--l2-c-theme-switch)),
-            hsl(var(--l3-c)) 50%
+            oklch(var(--l2-c-theme-switch)),
+            oklch(var(--l3-c)) 50%
         ) !important;
         --force-font-weight: var(--font-weight-medium) !important;
 
@@ -485,14 +485,14 @@ button.navlist-more {
         }
 
         [data-ff--mualani="true"] .row .navlist & {
-            --bg: hsla(var(--h4), 10%) !important;
-            --bg-hov: hsla(var(--h4), 16%) !important;
-            --bg-atv: hsla(var(--h4), 26%) !important;
-            --col: hsl(var(--l3-c)) !important;
+            --bg: oklch(var(--h4) / 10%) !important;
+            --bg-hov: oklch(var(--h4) / 16%) !important;
+            --bg-atv: oklch(var(--h4) / 26%) !important;
+            --col: oklch(var(--l3-c)) !important;
             --mask-colour: color-mix(
                 in hsl,
-                hsl(var(--l3-c)),
-                hsl(var(--l4-c)) 40%
+                oklch(var(--l3-c)),
+                oklch(var(--l4-c)) 40%
             ) !important;
         }
     }
@@ -540,7 +540,7 @@ button.navlist-more {
 
     margin-top: unset;
     width: 100%;
-    background: hsl(var(--b5));
+    background: oklch(var(--b5));
     padding-top: unset !important;
 
     .navlist {

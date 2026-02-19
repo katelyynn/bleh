@@ -33,14 +33,14 @@ last.fm changes as of 2024-05-20 */
         height: calc(20px + var(--button-height));
         z-index: 10;
 
-        /*background: hsl(var(--b6), 60%);
+        /*background: oklch(var(--b6), 60%);
         backdrop-filter: blur(20px) saturate(var(--blur-saturate)) brightness(var(--blur-brightness)) contrast(var(--blur-contrast));
         -webkit-backdrop-filter: blur(20px) saturate(var(--blur-saturate)) brightness(var(--blur-brightness)) contrast(var(--blur-contrast));
         --mask: linear-gradient(0deg, transparent 30%, white 100%);
         mask-image: var(--mask);
         -webkit-mask-image: var(--mask);*/
 
-        background: linear-gradient(180deg, hsl(var(--b6)), transparent);
+        background: linear-gradient(180deg, oklch(var(--b6)), transparent);
 
         opacity: 0;
         translate: 0 -4px;
@@ -86,7 +86,7 @@ last.fm changes as of 2024-05-20 */
 
     &:hover,
     &.scrolled {
-        background: hsla(var(--b5), 80%);
+        background: oklch(var(--b5), 80%);
         backdrop-filter: blur(25px) saturate(var(--blur-saturate)) brightness(var(--blur-brightness)) contrast(var(--blur-contrast));
         -webkit-backdrop-filter: blur(25px) saturate(var(--blur-saturate)) brightness(var(--blur-brightness)) contrast(var(--blur-contrast));
         border-color: var(--card-border-base);
@@ -126,7 +126,7 @@ last.fm changes as of 2024-05-20 */
         border-right: 1px solid var(--card-border-base) !important;
 
         &:before {
-            background: hsl(
+            background: oklch(
                 var(--b6),
                 var(--solarium-opacity, 85%)
             ) !important;
@@ -178,7 +178,7 @@ last.fm changes as of 2024-05-20 */
                     height: 3px !important;
                     margin: unset !important;
 
-                    background: hsl(var(--l3-c-theme-switch)) !important;
+                    background: oklch(var(--l3-c-theme-switch)) !important;
 
                     transition-property: opacity !important;
                     transition-duration: var(--trans) !important;
@@ -194,7 +194,7 @@ last.fm changes as of 2024-05-20 */
                 }
 
                 &[aria-expanded="true"] {
-                    --bg: hsl(var(--b4), 20%);
+                    --bg: oklch(var(--b4) / 20%);
                 }
 
                 .notification-count-badge {

@@ -11,8 +11,8 @@
         inset: 0;
         background: linear-gradient(
             180deg,
-            hsla(var(--b5), 50%) 0%,
-            hsl(var(--b5)) 100%
+            oklch(var(--b5), 50%) 0%,
+            oklch(var(--b5)) 100%
         );
     }
 

@@ -64,10 +64,10 @@
             position: relative;
 
             & > p {
-                color: hsl(var(--c2), 80%);
+                color: oklch(var(--c2), 80%);
 
                 & > strong {
-                    color: hsl(var(--c2));
+                    color: oklch(var(--c2));
                     font-weight: var(--font-weight-medium);
                 }
             }
@@ -84,7 +84,7 @@
             display: flex;
             align-items: center;
             gap: 4px;
-            color: hsl(var(--c2), 80%);
+            color: oklch(var(--c2), 80%);
             cursor: default;
             font-weight: var(--font-weight-medium);
 

@@ -163,7 +163,7 @@
         }
 
         & > .col-main {
-            background: hsl(var(--b5));
+            background: oklch(var(--b5));
         }
 
         & > .col-sidebar {
@@ -381,7 +381,7 @@
             width: 100%;
             display: flex;
             justify-content: center;
-            background: hsl(var(--b5)) !important;
+            background: oklch(var(--b5)) !important;
             order: -1;
         }
 
@@ -432,7 +432,7 @@
 }
 .mpu-subscription-upsell {
     margin: unset !important;
-    color: hsl(var(--c3));
+    color: oklch(var(--c3));
     line-height: 16px;
     order: 20;
 }

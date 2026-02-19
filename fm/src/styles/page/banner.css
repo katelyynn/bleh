@@ -66,7 +66,7 @@
     -webkit-mask-image: var(--mask);
 
     &[data-accent-based] {
-        background-color: hsl(var(--h3));
+        background-color: oklch(var(--h3));
     }
 
     &:after {
@@ -75,14 +75,14 @@
         inset: 0;
         background: linear-gradient(
             180deg,
-            hsla(var(--b6), 70%) 0%,
-            hsl(var(--b6)) 100%
+            oklch(var(--b6), 70%) 0%,
+            oklch(var(--b6)) 100%
         ) !important;
     }
 
     &.katsune-bleh-background {
         &:after {
-            background: linear-gradient(180deg, transparent 0%, hsl(var(--b6)) 100%) !important;
+            background: linear-gradient(180deg, transparent 0%, oklch(var(--b6)) 100%) !important;
         }
 
         .katsune-bleh-background-border {
@@ -94,7 +94,7 @@
                 height: 700px;
 
                 /*&:after {
-                    background: linear-gradient(180deg, hsl(var(--b6), 20%) 0%, hsl(var(--b6)) 100%) !important;
+                    background: linear-gradient(180deg, oklch(var(--b6), 20%) 0%, oklch(var(--b6)) 100%) !important;
                 }*/
             }
         }
@@ -103,13 +103,13 @@
             content: "";
             position: absolute;
             inset: 0;
-            background: hsl(var(--b6), 44%);
+            background: oklch(var(--b6), 44%);
             mix-blend-mode: darken;
         }
 
         [data-bleh--theme_type="light"] & {
             &:before {
-                background: hsl(var(--b5), 50%);
+                background: oklch(var(--b5), 50%);
                 mix-blend-mode: lighten;
             }
         }

@@ -64,15 +64,15 @@
 .tab-container > li > button,
 .user-list-follower-btn
 {
-    --bg: var(--cards-overlay-image-subtlest, none), hsl(var(--b3));
+    --bg: var(--cards-overlay-image-subtlest, none), oklch(var(--b3));
     --bg-hov:
         var(--cards-overlay-image-subtlest, none),
-        color-mix(in hsl, hsl(var(--b6)), hsl(var(--b3)) 80%);
+        color-mix(in hsl, oklch(var(--b6)), oklch(var(--b3)) 80%);
     --bg-atv:
         var(--cards-overlay-image-subtlest, none),
-        color-mix(in hsl, hsl(var(--b6)), hsl(var(--b3)) 60%);
-    --col: hsl(var(--c2));
-    --mask-colour: color-mix(in hsl, hsl(var(--c2)), hsl(var(--c3)) 50%);
+        color-mix(in hsl, oklch(var(--b6)), oklch(var(--b3)) 60%);
+    --col: oklch(var(--c2));
+    --mask-colour: color-mix(in hsl, oklch(var(--c2)), oklch(var(--c3)) 50%);
     --shadow: var(--normal-shadow), var(--interact-shadow);
     --shadow-hov: var(--active-shadow);
     --btn-top: var(--button-verts);
@@ -213,30 +213,30 @@
         .user-now-empty-state-button
     ):not([data-has-file], .see-more) {
         --bg:
-            var(--cards-overlay-image-subtlest, none), hsl(var(--h3)) !important;
+            var(--cards-overlay-image-subtlest, none), oklch(var(--h3)) !important;
         --bg-hov:
             var(--cards-overlay-image-subtlest, none),
-            color-mix(in hsl, hsl(var(--h4)), hsl(var(--h3)) 80%) !important;
+            color-mix(in hsl, oklch(var(--h4)), oklch(var(--h3)) 80%) !important;
         --bg-atv:
             var(--cards-overlay-image-subtlest, none),
-            color-mix(in hsl, hsl(var(--h4)), hsl(var(--h3)) 60%) !important;
-        --col: hsl(var(--b7)) !important;
+            color-mix(in hsl, oklch(var(--h4)), oklch(var(--h3)) 60%) !important;
+        --col: oklch(var(--b7)) !important;
         --force-font-weight: var(--font-weight-medium) !important;
         &:not(.chibi) {
-            --mask-colour: hsl(var(--b7), 70%) !important;
+            --mask-colour: oklch(var(--b7) / 0.7) !important;
         }
         --shadow:
-            var(--primary-shadow), 0 3px 12px hsl(var(--h4), 32%),
+            var(--primary-shadow), 0 3px 12px oklch(var(--h4) / 32%),
             var(--interactable-outer);
         --shadow-hov:
             var(--interactable-outer), var(--interactable-active-outer);
 
         [data-bleh--invert_interactable_colour="true"] & {
-            --col: hsl(var(--ov-c1)) !important;
+            --col: oklch(var(--ov-c1)) !important;
             --mask-colour: color-mix(
                 in hsl,
-                hsl(var(--ov-c1)),
-                hsl(var(--h4)) 40%
+                oklch(var(--ov-c1)),
+                oklch(var(--h4)) 40%
             );
         }
 
@@ -274,8 +274,8 @@
     &.btn--loading,
     &[disabled]:not([disabled="false"]) {
         opacity: 0.65 !important;
-        --col: hsl(var(--c3)) !important;
-        --mask-colour: hsl(var(--c3)) !important;
+        --col: oklch(var(--c3)) !important;
+        --mask-colour: oklch(var(--c3)) !important;
         transform: unset !important;
         --bg-hov: var(--bg) !important;
         --bg-atv: var(--bg) !important;
@@ -359,7 +359,7 @@
 
     & > .bleh-icon {
         --icon-size: 14px;
-        --icon-colour: hsl(var(--c3));
+        --icon-colour: oklch(var(--c3));
     }
 
     &.extra {
@@ -410,10 +410,10 @@
 
 .subtle {
     --bg: transparent;
-    --bg-hov: hsl(var(--b4), 40%);
-    --bg-atv: hsl(var(--b4), 60%);
+    --bg-hov: oklch(var(--b4) / 40%);
+    --bg-atv: oklch(var(--b4) / 60%);
     --shadow: none;
-    --col: hsl(var(--c2), 80%);
+    --col: oklch(var(--c2), 80%);
     --mask-colour: currentColor;
 }
 
@@ -428,11 +428,11 @@
 }
 
 .accented {
-    --col: hsl(var(--l3-c));
+    --col: oklch(var(--l3-c));
     --mask-colour: color-mix(
         in hsl,
-        hsl(var(--l3-c)),
-        hsl(var(--l4-c)) 30%
+        oklch(var(--l3-c)),
+        oklch(var(--l4-c)) 30%
     );
 }
 
@@ -444,11 +444,11 @@
     --lit-over: var(--lit-neg);
 
     &:not(.primary, .btn-primary) {
-        --col: hsl(var(--l3-c));
+        --col: oklch(var(--l3-c));
         --mask-colour: color-mix(
             in hsl,
-            hsl(var(--l3-c)),
-            hsl(var(--l4-c)) 30%
+            oklch(var(--l3-c)),
+            oklch(var(--l4-c)) 30%
         );
     }
 }

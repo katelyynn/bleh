@@ -20,11 +20,11 @@
     }
 
     .bleh-modal {
-        background: hsl(var(--b5), var(--solarium-opacity, 90%));
+        background: oklch(var(--b5) / var(--solarium-opacity, 90%));
         border-radius: var(--item-big-radius);
         box-shadow: var(--override-full-shadow, var(--overlay-shadow));
         border: 1px solid var(--card-border-base);
-        color: hsl(var(--c2));
+        color: oklch(var(--c2));
         padding: var(--card-padding);
         max-width: 800px;
         position: relative;
@@ -114,7 +114,7 @@
 
             h1 {
                 margin: unset;
-                color: hsl(var(--c1));
+                color: oklch(var(--c1));
                 font-size: 16px;
                 line-height: 20px;
                 font-weight: var(--font-weight-medium);
@@ -123,7 +123,7 @@
             }
 
             .bleh-modal-subtitle {
-                color: hsl(var(--c3));
+                color: oklch(var(--c3));
                 line-height: 20px;
             }
 
@@ -135,10 +135,10 @@
 
         .modal-close-button {
             --bg: transparent;
-            --bg-hov: hsl(var(--b4), 40%);
-            --bg-atv: hsl(var(--b4), 60%);
+            --bg-hov: oklch(var(--b4) / 40%);
+            --bg-atv: oklch(var(--b4) / 60%);
             --shadow: none;
-            --col: hsl(var(--c3));
+            --col: oklch(var(--c3));
             --mask-colour: currentColor;
             --font-size: 0;
             position: absolute;
@@ -190,7 +190,7 @@
 
                 .full-avatar {
                     display: inline-block;
-                    background: hsl(var(--b5));
+                    background: oklch(var(--b5));
                     border-radius: var(--card-radius);
                     box-shadow: var(--overlay-shadow);
                     overflow: hidden;

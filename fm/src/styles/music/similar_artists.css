@@ -29,11 +29,11 @@
                     font-size: 16px;
                     line-height: 20px;
                     font-weight: var(--font-weight-medium);
-                    color: hsl(var(--c2));
+                    color: oklch(var(--c2));
                 }
 
                 .similar-artists-item-aux-text {
-                    color: hsl(var(--c3));
+                    color: oklch(var(--c3));
                 }
             }
 

@@ -21,11 +21,11 @@
     pointer-events: auto;
     cursor: default;
 
-    background: linear-gradient(0deg, hsl(var(--k4), 65%), hsl(var(--b4)));
+    background: linear-gradient(0deg, oklch(var(--k4), 65%), oklch(var(--b4)));
     --hue-over: var(--hue-neg);
     --sat-over: var(--sat-neg);
     --lit-over: var(--lit-neg);
-    color: hsl(var(--l3-c));
+    color: oklch(var(--l3-c));
 
     backdrop-filter: var(--solarium);
     -webkit-backdrop-filter: var(--solarium);
@@ -37,7 +37,7 @@
         justify-content: space-between;
         gap: 20px;
 
-        color: hsl(var(--l2-c-theme-switch));
+        color: oklch(var(--l2-c-theme-switch));
         font-size: 12px;
     }
 

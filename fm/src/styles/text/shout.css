@@ -29,7 +29,7 @@
 }
 .shout,
 .shout-form {
-    border-bottom: 1px solid hsl(var(--b4));
+    border-bottom: 1px solid oklch(var(--b4));
     padding-bottom: 6px;
     min-height: unset;
     margin-left: calc(var(--shout-margin-left)) !important;
@@ -237,8 +237,8 @@
     height: fit-content !important;
 
     &:not(:hover, :focus-visible, .vote-button--voted, .shout-reply--open) {
-        --col: hsl(var(--c3));
-        --mask-colour: hsl(var(--c3), 80%);
+        --col: oklch(var(--c3));
+        --mask-colour: oklch(var(--c3), 80%);
     }
 }
 
@@ -254,7 +254,7 @@
     }
 
     .shout-container--active & {
-        background: hsl(var(--h4), 20%);
+        background: oklch(var(--h4) / 20%);
     }
 }
 [data-ff--shout_popover="true"] .shout-form {
@@ -278,11 +278,11 @@
 }
 
 .vote-button--voted {
-    --col: hsl(var(--l3-c)) !important;
+    --col: oklch(var(--l3-c)) !important;
     --mask-colour: color-mix(
         in hsl,
-        hsl(var(--l3-c)),
-        hsl(var(--l4-c)) 30%
+        oklch(var(--l3-c)),
+        oklch(var(--l4-c)) 30%
     );
     --force-font-weight: var(--font-weight-medium) !important;
 }
@@ -297,7 +297,7 @@
 .user-list-name,
 .listeners-section-item-name,
 .top-listeners-item-name {
-    color: var(--name-colour, hsl(var(--l3-c)));
+    color: var(--name-colour, oklch(var(--l3-c)));
     font-weight: var(--font-weight-medium);
 }
 
@@ -330,7 +330,7 @@ the body text becomes bigger by default - this reverts that */
     gap: 4px;
 
     font-size: 13px;
-    color: hsl(var(--c3));
+    color: oklch(var(--c3));
     cursor: default;
 }
 .translated-notice-icon {
@@ -349,7 +349,7 @@ the body text becomes bigger by default - this reverts that */
 }
 .shout-timestamp {
     height: fit-content;
-    color: hsla(var(--c3), 85%) !important;
+    color: oklch(var(--c3), 85%) !important;
     font-size: 12px;
     line-height: var(--line-height);
     display: inline-flex;
@@ -370,7 +370,7 @@ the body text becomes bigger by default - this reverts that */
     /* text */
     /*&:before {
         content: 'Copy link';
-        color: hsl(var(--l2-c)) !important;
+        color: oklch(var(--l2-c)) !important;
         font-size: 12px;
         position: absolute;
         top: 0;
@@ -423,7 +423,7 @@ the body text becomes bigger by default - this reverts that */
 .shout--reported {
     padding: 0 !important;
     background: unset;
-    color: hsla(var(--c3), 40%);
+    color: oklch(var(--c3), 40%);
     margin-bottom: 0;
     position: relative;
 
@@ -441,7 +441,7 @@ the body text becomes bigger by default - this reverts that */
     .shout--bleh-redacted[data-bleh--shout-expanded="false"]:before,
 .shout:not(.shout--deleted, .shout--reported):before {
     --mask: var(--icon-16-warning);
-    color: hsla(var(--c3), 40%);
+    color: oklch(var(--c3), 40%);
 }
 .shout--deleted {
     --mask: var(--icon-16-trash);
@@ -454,7 +454,7 @@ the body text becomes bigger by default - this reverts that */
 .shout-container--active {
     background: linear-gradient(
         0deg,
-        hsla(var(--h4), 20%) 0%,
+        oklch(var(--h4) / 20%) 0%,
         rgba(0, 0, 0, 0) 100%
     );
     margin: unset;
@@ -468,7 +468,7 @@ the body text becomes bigger by default - this reverts that */
 .shout-more-replies-after,
 .shout-more-replies-before {
     &:not(:hover, :focus) {
-        --col: hsl(var(--c3)) !important;
+        --col: oklch(var(--c3)) !important;
         --mask-colour: currentColor !important;
     }
 }

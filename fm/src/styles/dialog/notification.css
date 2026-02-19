@@ -27,15 +27,15 @@
 
         overflow: hidden;
 
-        background: hsl(var(--b5), var(--solarium-opacity, var(--menu-opacity)));
+        background: oklch(var(--b5), var(--solarium-opacity, var(--menu-opacity)));
         box-shadow: var(--card-shadow);
         padding: 12px var(--button-sides);
         border: 1px solid var(--card-border-base);
         border-radius: var(--button-radius);
         --mask-colour: color-mix(
             in hsl,
-            hsl(var(--c2)),
-            hsl(var(--c3)) 50%
+            oklch(var(--c2)),
+            oklch(var(--c3)) 50%
         );
 
         backdrop-filter: var(--solarium);
@@ -78,9 +78,9 @@
             .notification-action {
                 position: relative;
                 --bg: transparent;
-                --bg-hov: hsl(var(--b4), 40%);
-                --bg-atv: hsl(var(--b4), 60%);
-                --mask-colour: hsl(var(--c3));
+                --bg-hov: oklch(var(--b4) / 40%);
+                --bg-atv: oklch(var(--b4) / 60%);
+                --mask-colour: oklch(var(--c3));
                 --shadow: none;
                 --font-size: 0;
                 width: 38px;
@@ -106,7 +106,7 @@
         text-align: left;
 
         .notification-title {
-            color: hsl(var(--c1));
+            color: oklch(var(--c1));
             font-weight: var(--font-weight-medium);
             cursor: default;
         }
@@ -141,8 +141,8 @@
         &.colourful {
             --mask-colour: color-mix(
                 in hsl,
-                hsl(var(--l3-c)),
-                hsl(var(--l4-c)) 30%
+                oklch(var(--l3-c)),
+                oklch(var(--l4-c)) 30%
             );
         }
 
@@ -158,7 +158,7 @@
 
             .fill {
                 width: 100%;
-                background-color: hsl(var(--l3-c), 60%);
+                background-color: oklch(var(--l3-c), 60%);
                 height: 3px;
 
                 border-radius: var(--button-radius);
@@ -174,11 +174,11 @@
 
     .masthead-popup-inner {
         animation: notif var(--trans) var(--trans-function);
-        background: hsl(var(--b5));
+        background: oklch(var(--b5));
         border-radius: var(--item-big-radius);
         box-shadow: var(--menu-shadow);
         padding: var(--card-gap);
-        color: hsl(var(--c2));
+        color: oklch(var(--c2));
 
         &:before {
             display: none;
@@ -187,7 +187,7 @@
         .masthead-popup-title {
             font: inherit;
             font-weight: var(--font-weight-medium);
-            color: hsl(var(--c1));
+            color: oklch(var(--c1));
         }
 
         p + p,
@@ -197,8 +197,8 @@
 
         .masthead-popup-close {
             --bg: transparent;
-            --bg-hov: hsl(var(--b3), 40%);
-            --bg-hov: hsl(var(--b3), 60%);
+            --bg-hov: oklch(var(--b3) / 40%);
+            --bg-hov: oklch(var(--b3) / 60%);
             --left: var(--icon-half);
             --font-size: 0;
             --mask: var(--icon-16-x);

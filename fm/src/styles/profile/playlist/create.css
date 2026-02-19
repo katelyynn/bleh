@@ -42,14 +42,14 @@ h2.playlisting-create-option-title {
     font-size: var(--font-size);
     line-height: var(--line-height);
     margin-bottom: unset !important;
-    color: hsl(var(--c2));
+    color: oklch(var(--c2));
     font-weight: inherit !important;
 }
 .playlisting-create-option .buffer-1 {
     font-size: 12px;
     line-height: 16px;
     font-weight: var(--font-weight);
-    color: hsl(var(--c3));
+    color: oklch(var(--c3));
     margin-top: unset;
 }
 

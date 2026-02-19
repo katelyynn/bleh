@@ -1,5 +1,5 @@
 .sub-text {
-    color: hsl(var(--c3));
+    color: oklch(var(--c3));
     font-size: var(--font-size);
     line-height: var(--line-height);
     font-weight: var(--font-weight);
@@ -27,10 +27,10 @@
 
     /* see .this-month */
     & > .see-more {
-        --bg-hov: hsl(var(--b4), 40%) !important;
-        --bg-atv: hsl(var(--b4), 60%) !important;
-        --col: hsl(var(--c3));
-        --mask-colour: hsl(var(--c3), 80%);
+        --bg-hov: oklch(var(--b4) / 40%) !important;
+        --bg-atv: oklch(var(--b4) / 60%) !important;
+        --col: oklch(var(--c3));
+        --mask-colour: oklch(var(--c3), 80%);
     }
 
     @media (max-width: 980px) {
@@ -43,7 +43,7 @@
     }
 
     .prominent {
-        color: hsl(var(--c1));
+        color: oklch(var(--c1));
         font-size: 16px;
         line-height: 17px;
         font-weight: var(--font-weight-medium);
@@ -144,28 +144,28 @@ h4 {
 
 h5 {
     margin: unset;
-    color: hsl(var(--c1));
+    color: oklch(var(--c1));
     font-weight: var(--font-weight-medium);
     cursor: default;
 }
 h4 {
-    color: hsl(var(--c1));
+    color: oklch(var(--c1));
 }
 
 .subtle {
     font-size: 13px;
-    color: hsl(var(--c3));
+    color: oklch(var(--c3));
     cursor: default;
 }
 .text-light {
-    color: hsl(var(--c3));
+    color: oklch(var(--c3));
 }
 
 h6 {
     margin: unset !important;
     font-size: var(--font-size);
     line-height: var(--line-height);
-    color: hsl(var(--c1));
+    color: oklch(var(--c1));
     font-weight: var(--font-weight-medium);
 }
 
@@ -174,8 +174,8 @@ pre,
 code,
 kbd,
 samp {
-    color: hsl(var(--c3));
-    background-color: hsl(var(--b6));
+    color: oklch(var(--c3));
+    background-color: oklch(var(--b6));
     padding: 0 4px;
     font-size: calc(var(--font-size) - 1px);
     line-height: var(--line-height);
@@ -224,7 +224,7 @@ pre {
 .card-tip {
     margin-top: var(--card-gap);
     font-size: 13px;
-    color: hsl(var(--c3));
+    color: oklch(var(--c3));
     cursor: default;
 
     &[aria-hidden="true"] {
@@ -251,7 +251,7 @@ pre {
 }
 
 .no-data-message {
-    color: hsl(var(--c3));
+    color: oklch(var(--c3));
     font-weight: var(--font-weight);
     cursor: default;
     width: unset !important;
@@ -316,13 +316,13 @@ leading to a gap from their own css */
 }
 
 .tip {
-    color: hsl(var(--c3));
+    color: oklch(var(--c3));
     font-size: 13px;
     width: fit-content;
     cursor: default;
 
     &[data-exceeded="true"] {
-        color: hsl(var(--l3-c)) !important;
+        color: oklch(var(--l3-c)) !important;
         --hue-over: var(--hue-neg);
         --sat-over: 1;
         --lit-over: 1;
@@ -357,7 +357,7 @@ hr {
     display: flex;
     align-items: center;
     gap: 6px;
-    color: hsl(var(--c3));
+    color: oklch(var(--c3));
     cursor: default;
 
     .bleh-icon {

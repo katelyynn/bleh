@@ -22,7 +22,7 @@
     padding: 30px var(--card-padding);
     background: linear-gradient(
         180deg,
-        hsl(var(--h4), 30%) 0%,
+        oklch(var(--h4) / 30%) 0%,
         rgba(0, 0, 0, 0) 100%
     );
 
@@ -89,7 +89,7 @@
     text-align: center;
     font-size: calc(var(--font-size) - 1px);
     line-height: var(--line-height);
-    color: hsl(var(--c3));
+    color: oklch(var(--c3));
     cursor: default;
 }
 
@@ -100,15 +100,15 @@
 }
 .message-sender-action {
     --bg: transparent;
-    --bg-hov: hsl(var(--h3), 20%);
-    --bg-atv: hsl(var(--h3), 40%);
+    --bg-hov: oklch(var(--h3) / 20%);
+    --bg-atv: oklch(var(--h3) / 40%);
     --shadow: none;
 }
 
 .inbox-button {
-    --bg: hsl(var(--b4), 40%);
-    --bg-hov: hsl(var(--b4), 60%);
-    --bg-atv: hsl(var(--b4), 80%);
+    --bg: oklch(var(--b4) / 40%);
+    --bg-hov: oklch(var(--b4) / 60%);
+    --bg-atv: oklch(var(--b4) / 80%);
     --shadow: none;
 }
 
@@ -124,14 +124,14 @@
     width: var(--message-width);
 }
 .inbox-message-view .inbox-message-message blockquote {
-    background: hsla(var(--b4), 40%);
+    background: oklch(var(--b4) / 40%);
     border: none;
     border-radius: var(--item-med-radius);
     margin: 0 0 var(--card-gap) 0;
     padding: var(--card-padding);
 }
 .inbox-message-view .inbox-message-message blockquote cite {
-    color: hsl(var(--c3));
+    color: oklch(var(--c3));
     display: block;
 }
 

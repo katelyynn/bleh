@@ -5,8 +5,8 @@
     line-height: var(--line-height);
     margin-top: var(--card-gap);
     padding: 4px 6px 4px calc(6px + var(--icon-size) + var(--icon-gap)) !important;
-    background: var(--background, hsl(var(--k4), 15%)) !important;
-    color: hsl(var(--l3-c)) !important;
+    background: var(--background, oklch(var(--k4), 15%)) !important;
+    color: oklch(var(--l3-c)) !important;
     font-weight: var(--font-weight-medium) !important;
     text-align: left;
     cursor: default;
@@ -73,14 +73,14 @@
 }
 
 .alert-info {
-    --background: hsl(var(--b4), 20%) !important;
+    --background: oklch(var(--b4) / 20%) !important;
     --l3-c: var(--c3) !important;
 
     [data-bleh--season="halloween"] & {
         --hue-seasonal: 255;
         --sat-seasonal: 1;
         --lit-seasonal: 1;
-        color: hsl(var(--l3-c)) !important;
+        color: oklch(var(--l3-c)) !important;
 
         & > a {
             --hue-seasonal: 12;
@@ -109,10 +109,10 @@
 .cta {
     background: var(--card-specific-background) !important;
     border-radius: var(--card-radius);
-    --card-specific-background: hsl(var(--f4), 15%);
+    --card-specific-background: oklch(var(--f4) / 15%);
     padding: 10px 12px !important;
     box-shadow: unset !important;
-    color: hsl(var(--c2)) !important;
+    color: oklch(var(--c2)) !important;
     order: 10;
     cursor: default;
 
@@ -144,12 +144,12 @@
     }
 
     strong {
-        color: hsl(var(--c3));
+        color: oklch(var(--c3));
     }
 
     a {
         font-weight: var(--font-weight-medium);
-        color: hsl(var(--l3-c)) !important;
+        color: oklch(var(--l3-c)) !important;
     }
 
     &.first,
@@ -174,12 +174,12 @@
         --lit-over: 1;
 
         strong {
-            color: hsl(var(--l3-c));
+            color: oklch(var(--l3-c));
         }
     }
 
     &:before {
-        color: hsl(var(--l3-c));
+        color: oklch(var(--l3-c));
     }
 }
 .form-disclaimer > .alert,

@@ -12,14 +12,14 @@
     scroll-padding-top: calc(52px + 15px);
 }
 body {
-    color: hsl(var(--c2));
+    color: oklch(var(--c2));
     font-family: var(--font);
     font-size: var(--font-size);
     line-height: var(--line-height);
     font-weight: var(--font-weight);
     letter-spacing: unset !important;
     color-scheme: dark;
-    accent-color: hsl(var(--l3-c));
+    accent-color: oklch(var(--l3-c));
 
     --underline-offset: 3px;
 
@@ -36,7 +36,7 @@ body {
 
     .florence-supports-loading > &:not(.florence-loaded, .labs-section, [style="zoom: 1;"]) {
         &:before {
-            background-color: hsl(var(--b6));
+            background-color: oklch(var(--b6));
         }
     }
 
@@ -69,7 +69,7 @@ body {
     & > .loader {
         position: fixed;
         inset: 0;
-        /*background: hsl(var(--b6), 20%);*/
+        /*background: oklch(var(--b6), 20%);*/
         z-index: 1000000;
 
         opacity: 0;
@@ -91,8 +91,8 @@ body {
             padding: 2px;
 
             & > .loader-bar-fill {
-                background-color: hsl(var(--h3));
-                box-shadow: 0 6px 20px hsl(var(--h4));
+                background-color: oklch(var(--h3));
+                box-shadow: 0 6px 20px oklch(var(--h4));
                 border-radius: var(--item-big-radius);
                 height: 4px;
                 width: 100%;
@@ -144,7 +144,7 @@ html body {
     /* html body is used cus last.fm decided so */
     /* !important fixes bulk edit extension when managing
     auto edits as of 2024/12 */
-    background-color: hsl(var(--b6)) !important;
+    background-color: oklch(var(--b6)) !important;
 }
 
 .main-content {
@@ -163,12 +163,12 @@ html body {
 }
 
 ::selection {
-    background: hsla(var(--h4), 30%);
-    color: hsl(var(--l3-c));
+    background: oklch(var(--h4) / 30%);
+    color: oklch(var(--l3-c));
 }
 ::-moz-selection {
-    background: hsla(var(--h4), 30%);
-    color: hsl(var(--l3-c));
+    background: oklch(var(--h4) / 30%);
+    color: oklch(var(--l3-c));
 }
 
 /* applies focus outline to everything except
@@ -176,7 +176,7 @@ masthead search, as it looks too ugly and focus can be
 inferred by it being opened in the first place */
 :not(#masthead-search-field):focus-visible {
     /* should only be overrided if a better solution can be given */
-    outline: var(--focus-outline, 2px solid hsl(var(--l3-c))) !important;
+    outline: var(--focus-outline, 2px solid oklch(var(--l3-c))) !important;
 }
 
 /* no clue why */

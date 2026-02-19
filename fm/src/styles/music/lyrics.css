@@ -21,11 +21,11 @@
 
         &:hover {
             transition: none;
-            background-color: hsla(var(--b4), 40%);
+            background-color: oklch(var(--b4) / 40%);
         }
 
         &:nth-child(even) {
-            color: hsla(var(--c2), 90%);
+            color: oklch(var(--c2), 90%);
         }
     }
 }
@@ -33,8 +33,8 @@
 .lyrics-attribution {
     margin-top: var(--card-gap);
     padding-top: var(--card-gap);
-    border-top: 1px solid hsl(var(--b4));
-    color: hsl(var(--c3));
+    border-top: 1px solid oklch(var(--b4));
+    color: oklch(var(--c3));
     font-size: var(--font-size);
     line-height: var(--line-height);
 }

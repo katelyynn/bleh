@@ -13,17 +13,17 @@
     display: inline-flex;
     background: var(--bg) !important;
     --bg: transparent;
-    --bg-hov: hsl(var(--h4), 10%);
-    --bg-atv: hsl(var(--h4), 20%);
+    --bg-hov: oklch(var(--h4) / 10%);
+    --bg-atv: oklch(var(--h4) / 20%);
     --padding: var(--see-more-pad-v) var(--see-more-pad);
     --radius: var(--item-med-radius);
     border-radius: var(--radius) !important;
     --shadow: none;
-    --col: hsl(var(--l3-c));
+    --col: oklch(var(--l3-c));
     --mask-colour: color-mix(
-        in hsl,
-        hsl(var(--l3-c)),
-        hsl(var(--l4-c)) 30%
+        in oklch,
+        oklch(var(--l3-c)),
+        oklch(var(--l4-c)) 30%
     );
     --force-font-weight: var(--font-weight-medium);
     font-weight: var(--force-font-weight);
@@ -120,8 +120,8 @@ a.inline-add-icon {
         height: fit-content !important;
 
         &:not(:hover, :focus-visible, [aria-expanded="true"]) {
-            --col: hsl(var(--c3));
-            --mask-colour: hsl(var(--c3), 80%);
+            --col: oklch(var(--c3));
+            --mask-colour: oklch(var(--c3) / 80%);
         }
     }
 
@@ -250,10 +250,10 @@ a.inline-add-icon {
 
 
 .this-month {
-    --bg-hov: hsl(var(--b4), 40%) !important;
-    --bg-atv: hsl(var(--b4), 60%) !important;
-    --col: hsl(var(--c3));
-    --mask-colour: hsl(var(--c3), 80%);
+    --bg-hov: oklch(var(--b4) / 40%) !important;
+    --bg-atv: oklch(var(--b4) / 60%) !important;
+    --col: oklch(var(--c3));
+    --mask-colour: oklch(var(--c3), 80%);
     --mask: var(--icon-16-trend);
 }
 .diff {
@@ -264,7 +264,7 @@ a.inline-add-icon {
 
 .blend-text {
     cursor: default;
-    color: hsl(var(--c3), 60%);
+    color: oklch(var(--c3), 60%);
 }
 .mark-incorrect:not(:hover, :active) {
     opacity: 0.8;

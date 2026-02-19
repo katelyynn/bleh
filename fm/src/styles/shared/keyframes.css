@@ -73,7 +73,7 @@
 
 @keyframes bleh-chartlist-flash {
     from {
-        --bg: hsla(var(--h4), 15%) !important;
+        --bg: oklch(var(--h4) / 15%) !important;
     }
     to {
         --bg: transparent !important;
@@ -81,10 +81,10 @@
 }
 @keyframes bleh-chartlist-flash-odd {
     from {
-        --bg: hsla(var(--h4), 15%) !important;
+        --bg: oklch(var(--h4) / 15%) !important;
     }
     to {
-        --bg: hsla(var(--b4), 40%) !important;
+        --bg: oklch(var(--b4) / 40%) !important;
     }
 }
 
@@ -208,7 +208,7 @@
         background: transparent;
     }
     40% {
-        background: hsl(var(--f4), 20%);
+        background: oklch(var(--f4), 20%);
     }
 }
 
@@ -343,10 +343,10 @@
 @keyframes new {
     from,
     to {
-        background: hsl(var(--k4), 40%);
+        background: oklch(var(--k4), 40%);
     }
     50% {
-        background: hsl(var(--k4), 70%);
+        background: oklch(var(--k4), 70%);
     }
 }
 
@@ -364,20 +364,20 @@
 @keyframes progress {
     from,
     to {
-        background-color: hsl(var(--h3));
+        background-color: oklch(var(--h3));
     }
     50% {
-        background-color: hsl(var(--h2));
+        background-color: oklch(var(--h2));
     }
 }
 
 @keyframes valentine {
     from, to {
-        color: hsl(var(--l3-c));
+        color: oklch(var(--l3-c));
         scale: 1;
     }
     40% {
-        color: color-mix(in hsl, hsl(var(--l2-c)) 40%, hsl(var(--l3-c)));
+        color: color-mix(in hsl, oklch(var(--l2-c)) 40%, oklch(var(--l3-c)));
         scale: 1.1;
     }
 }
@@ -440,10 +440,10 @@
 
 @keyframes follow_notice {
     from, to {
-        color: hsl(var(--l3-c));
+        color: oklch(var(--l3-c));
     }
     50% {
-        color: color-mix(in hsl, hsl(var(--l2-c)) 70%, hsl(var(--l3-c)));
+        color: color-mix(in hsl, oklch(var(--l2-c)) 70%, oklch(var(--l3-c)));
     }
 }
 

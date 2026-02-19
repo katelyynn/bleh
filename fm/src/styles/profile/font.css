@@ -9,7 +9,7 @@
     justify-content: center;
     align-items: center;
     font-weight: var(--font-weight-bold);
-    color: hsl(var(--c2));
+    color: oklch(var(--c2));
     font-size: 20px;
     line-height: 20px;
 }
@@ -18,7 +18,7 @@
     text-align: center;
     padding: 20px 0 40px;
 
-    color: hsl(var(--c1));
+    color: oklch(var(--c1));
     line-height: 40px;
     font-weight: var(--custom-font-weight, var(--font-weight-bold));
     cursor: default;
@@ -51,13 +51,13 @@
     & > .font-selection {
         height: 50px;
 
-        --bg: hsl(var(--b4), 40%);
-        --bg-hov: hsl(var(--b4), 60%);
-        --bg-atv: hsl(var(--b4), 80%);
+        --bg: oklch(var(--b4) / 40%);
+        --bg-hov: oklch(var(--b4) / 60%);
+        --bg-atv: oklch(var(--b4) / 80%);
         --shadow: unset;
 
         --font-weight: var(--custom-font-weight, var(--font-weight-bold));
-        --col: hsl(var(--c2));
+        --col: oklch(var(--c2));
         --font-size: 24px;
 
         & > span {
@@ -66,9 +66,9 @@
         }
 
         &[aria-checked="true"] {
-            --bg: hsla(var(--h4), 20%);
-            --bg-hov: hsla(var(--h4), 25%);
-            --bg-atv: hsla(var(--h4), 35%);
+            --bg: oklch(var(--h4) / 20%);
+            --bg-hov: oklch(var(--h4) / 25%);
+            --bg-atv: oklch(var(--h4) / 35%);
         }
 
         &.font-style {
@@ -171,13 +171,13 @@
 }
 
 [data-font-style="pop"] {
-    --custom-font-style-shadow: 0 3px 0 hsl(var(--p3));
-    --custom-font-style-shadow-mini: 0 2px 0 hsl(var(--p3));
+    --custom-font-style-shadow: 0 3px 0 oklch(var(--p3));
+    --custom-font-style-shadow-mini: 0 2px 0 oklch(var(--p3));
 }
 [data-font-style="out"] {
     --custom-font-colour: #fff;
-    --stroke: hsl(var(--s3));
-    --stroke-outer: hsl(var(--s4), 60%);
+    --stroke: oklch(var(--s3));
+    --stroke-outer: oklch(var(--s4), 60%);
 
     --size: 3px;
     --size-n: calc(-1 * var(--size));
@@ -193,6 +193,6 @@
         var(--size-m) var(--size-m) 0 var(--stroke-outer), var(--size-mn) var(--size-mn) 0 var(--stroke-outer), var(--size-mn) var(--size-m) 0 var(--stroke-outer), var(--size-m) var(--size-mn) 0 var(--stroke-outer);
 }
 [data-font-style="glow"] {
-    --custom-font-style-shadow: 0 0 20px hsl(var(--h4)), 0 0 20px hsl(var(--h4));
-    --custom-font-style-shadow-mini: 0 0 10px hsl(var(--h4)), 0 0 10px hsl(var(--h4));
+    --custom-font-style-shadow: 0 0 20px oklch(var(--h4)), 0 0 20px oklch(var(--h4));
+    --custom-font-style-shadow-mini: 0 0 10px oklch(var(--h4)), 0 0 10px oklch(var(--h4));
 }

@@ -22,11 +22,11 @@
             --icon: var(--icon-16-dots);
             background-image: linear-gradient(
                 90deg,
-                hsl(var(--b4)),
-                hsl(var(--c1)),
-                hsl(var(--b4)),
-                hsl(var(--c1)),
-                hsl(var(--b4))
+                oklch(var(--b4)),
+                oklch(var(--c1)),
+                oklch(var(--b4)),
+                oklch(var(--c1)),
+                oklch(var(--b4))
             );
             background-size: 200% 100%;
             animation: gradient 1.3s linear infinite;
@@ -34,11 +34,11 @@
             [data-bleh--theme_type="light"] & {
                 background-image: linear-gradient(
                     90deg,
-                    hsl(var(--c3)),
-                    hsl(var(--b5)),
-                    hsl(var(--c3)),
-                    hsl(var(--b5)),
-                    hsl(var(--c3))
+                    oklch(var(--c3)),
+                    oklch(var(--b5)),
+                    oklch(var(--c3)),
+                    oklch(var(--b5)),
+                    oklch(var(--c3))
                 );
             }
         }
@@ -52,7 +52,7 @@
 
         & > .bleh-icon {
             --icon: var(--icon-16-info);
-            color: hsl(var(--c3));
+            color: oklch(var(--c3));
             cursor: pointer;
         }
     }
@@ -107,7 +107,7 @@
 
     & > .compare-user {
         cursor: pointer;
-        background: hsl(var(--b5));
+        background: oklch(var(--b5));
     }
 
     & > .bleh-icon {

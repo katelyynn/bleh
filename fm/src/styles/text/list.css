@@ -50,7 +50,7 @@
         &.badge-list-entry {
             & > .icon-container,
             & > .name {
-                color: hsl(var(--l3-c));
+                color: oklch(var(--l3-c));
             }
 
             & > .name {
@@ -58,7 +58,7 @@
             }
 
             & > .text {
-                color: hsl(var(--c3));
+                color: oklch(var(--c3));
             }
         }
 
@@ -89,18 +89,18 @@
 
 .list-action {
     --bg: transparent;
-    --bg-hov: hsl(var(--b4), 40%);
-    --bg-atv: hsl(var(--b4), 60%);
+    --bg-hov: oklch(var(--b4) / 40%);
+    --bg-atv: oklch(var(--b4) / 60%);
     --shadow: none;
 
     &.danger-subtle {
-        --bg-hov: hsl(var(--h4), 20%);
-        --bg-atv: hsl(var(--h4), 30%);
-        --col: hsl(var(--l3-c));
+        --bg-hov: oklch(var(--h4) / 20%);
+        --bg-atv: oklch(var(--h4) / 30%);
+        --col: oklch(var(--l3-c));
         --mask-colour: color-mix(
             in hsl,
-            hsl(var(--l3-c)),
-            hsl(var(--l4-c)) 30%
+            oklch(var(--l3-c)),
+            oklch(var(--l4-c)) 30%
         );
     }
 }
@@ -111,7 +111,7 @@
     text-align: left;
 
     & > thead {
-        border-bottom: 1px solid hsl(var(--b4), 60%);
+        border-bottom: 1px solid oklch(var(--b4) / 60%);
     }
 
     th,
@@ -120,7 +120,7 @@
     }
 
     th {
-        color: hsl(var(--c3));
+        color: oklch(var(--c3));
     }
 
     th,
@@ -155,7 +155,7 @@ table.table th {
     box-shadow: unset !important;
 }
 table.table tr:nth-child(2n) td {
-    background-color: hsla(var(--b4), 40%);
+    background-color: oklch(var(--b4) / 40%);
 }
 
 
@@ -165,18 +165,18 @@ table.table tr:nth-child(2n) td {
     }
 
     tr:nth-child(2n) td {
-        background-color: hsla(var(--b4), 40%);
+        background-color: oklch(var(--b4) / 40%);
     }
 
     td, th {
         box-shadow: none;
-        border-bottom: 1px solid hsl(var(--b4));
+        border-bottom: 1px solid oklch(var(--b4));
         padding: 7px 12px;
-        color: hsl(var(--c3));
+        color: oklch(var(--c3));
         font-weight: var(--font-weight);
     }
 
     td {
-        color: hsl(var(--c2));
+        color: oklch(var(--c2));
     }
 }

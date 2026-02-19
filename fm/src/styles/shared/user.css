@@ -50,7 +50,7 @@
     &.listener-list-item {
         .listener-list-position {
             font-size: 13px;
-            color: hsl(var(--c3));
+            color: oklch(var(--c3));
             cursor: pointer;
         }
     }
@@ -77,7 +77,7 @@
         padding: 1px !important;
         border-radius: 50px !important;
 
-        background-color: hsl(var(--b6), calc(var(--solarium-opacity) * 80%)) !important;
+        background-color: oklch(var(--b6), calc(var(--solarium-opacity) * 80%)) !important;
 
         min-width: unset;
 
@@ -97,9 +97,9 @@
     }
 
     .user-list-item {
-        --follow-button-bg-hov: hsl(var(--b4), 40%);
-        --follow-button-bg-atv: hsl(var(--b4), 60%);
-        --follow-button-col: hsl(var(--c3));
+        --follow-button-bg-hov: oklch(var(--b4) / 40%);
+        --follow-button-bg-atv: oklch(var(--b4) / 60%);
+        --follow-button-col: oklch(var(--c3));
 
         &:not(:hover, :focus-within) {
             --follow-button-opacity: 0.3;
@@ -134,7 +134,7 @@
 
             &[data-is-followed="true"],
             &[data-position="1"] {
-                background: linear-gradient(90deg, hsla(var(--h4), 20%) 0%, transparent 28%);
+                background: linear-gradient(90deg, oklch(var(--h4) / 20%) 0%, transparent 28%);
             }
         }
     }
@@ -155,10 +155,10 @@
 
             &[data-is-followed="true"],
             &[data-position="1"] {
-                background: hsla(var(--h4), 15%);
-                --follow-button-bg-hov: hsl(var(--h3), 10%);
-                --follow-button-bg-atv: hsl(var(--h3), 20%);
-                --follow-button-col: hsl(var(--l3-c));
+                background: oklch(var(--h4) / 15%);
+                --follow-button-bg-hov: oklch(var(--h3) / 10%);
+                --follow-button-bg-atv: oklch(var(--h3) / 20%);
+                --follow-button-col: oklch(var(--l3-c));
             }
         }
 
@@ -268,14 +268,14 @@
                 }
             }
 
-            background-color: hsl(var(--b4), 40%);
+            background-color: oklch(var(--b4) / 40%);
 
             &[data-is-followed="true"],
             &[data-position="1"] {
-                background-color: hsla(var(--h4), 15%);
-                --follow-button-bg-hov: hsl(var(--h3), 10%);
-                --follow-button-bg-atv: hsl(var(--h3), 20%);
-                --follow-button-col: hsl(var(--l3-c));
+                background-color: oklch(var(--h4) / 15%);
+                --follow-button-bg-hov: oklch(var(--h3) / 10%);
+                --follow-button-bg-atv: oklch(var(--h3) / 20%);
+                --follow-button-col: oklch(var(--l3-c));
             }
 
             .user-list-inner-wrap {
@@ -390,7 +390,7 @@
 }
 
 .user-list-name > a {
-    color: hsl(var(--l3-c)) !important;
+    color: oklch(var(--l3-c)) !important;
 }
 .user-list-inner-wrap > .label {
     order: -1;
@@ -401,7 +401,7 @@
     position: relative;
     --mask: var(--icon-16-followers);
     --left: 0;
-    color: hsl(var(--c3)) !important;
+    color: oklch(var(--c3)) !important;
 }
 
 .user-list-avatar {
@@ -477,7 +477,7 @@
     padding-top: unset;
     margin-top: unset !important;
     border: unset;
-    color: hsl(var(--c3));
+    color: oklch(var(--c3));
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;

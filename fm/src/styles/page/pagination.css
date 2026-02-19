@@ -34,8 +34,8 @@
 .pagination-page--ellipsis span,
 .pagination-page > :is(a, span) {
     --bg: transparent !important;
-    --bg-hov: hsla(var(--b4), 40%) !important;
-    --bg-atv: hsla(var(--b4), 60%) !important;
+    --bg-hov: oklch(var(--b4) / 40%) !important;
+    --bg-atv: oklch(var(--b4) / 60%) !important;
     --shadow: none !important;
     --shadow-hov: none !important;
 
@@ -48,10 +48,10 @@
 }
 .pagination-page[aria-current] > span {
     cursor: default;
-    --bg: hsl(var(--h4), 20%) !important;
-    --bg-hov: hsla(var(--h4), 40%) !important;
-    --bg-atv: hsla(var(--h4), 60%) !important;
-    --col: hsl(var(--l3-c));
+    --bg: oklch(var(--h4) / 20%) !important;
+    --bg-hov: oklch(var(--h4) / 40%) !important;
+    --bg-atv: oklch(var(--h4) / 60%) !important;
+    --col: oklch(var(--l3-c));
 }
 
 .pagination-next,

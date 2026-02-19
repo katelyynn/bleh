@@ -186,10 +186,10 @@
 .secondary-nav-item--bleh {
     --mask: var(--icon-16-bleh);
     --mask-size: var(--icon-size);
-    --col: hsl(var(--l3-c)) !important;
+    --col: oklch(var(--l3-c)) !important;
     --mask-colour: color-mix(
         in hsl,
-        hsl(var(--l3-c)),
-        hsl(var(--l4-c)) 30%
+        oklch(var(--l3-c)),
+        oklch(var(--l4-c)) 30%
     ) !important;
 }

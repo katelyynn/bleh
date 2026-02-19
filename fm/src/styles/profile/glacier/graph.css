@@ -66,7 +66,7 @@
             padding-left: calc(var(--icon-size) + 10px);
 
             &:before {
-                color: hsl(var(--c3));
+                color: oklch(var(--c3));
             }
 
             /*& + div {
@@ -78,7 +78,7 @@
             h3 {
                 font-size: var(--font-size);
                 line-height: var(--line-height);
-                color: hsl(var(--c3));
+                color: oklch(var(--c3));
                 font-weight: var(--font-weight);
                 cursor: default;
 
@@ -96,7 +96,7 @@
                 }
             }
             p {
-                color: hsl(var(--c2));
+                color: oklch(var(--c2));
                 font-size: 16px;
                 line-height: 20px;
                 font-weight: var(--font-weight-medium);
@@ -112,7 +112,7 @@
 
                 &:hover > a,
                 &[aria-describedby] {
-                    color: hsl(var(--l3-c));
+                    color: oklch(var(--l3-c));
                     transition: none;
                 }
 
@@ -172,8 +172,8 @@
 
     .listen-item {
         --bg: transparent !important;
-        --bg-hov: hsla(var(--b4), 40%) !important;
-        --bg-atv: hsla(var(--b4), 60%) !important;
+        --bg-hov: oklch(var(--b4) / 40%) !important;
+        --bg-atv: oklch(var(--b4) / 60%) !important;
         --radius: var(--button-radius) !important;
         --padding: 6px var(--button-sides) 6px calc(var(--button-sides) + var(--icon-size) + 10px) !important;
         margin: -6px calc(-1 * var(--button-sides)) calc(var(--card-padding) - 6px) !important;
@@ -200,7 +200,7 @@
 
             --mask-colour: currentColor;
 
-            color: hsl(var(--l3-c));
+            color: oklch(var(--l3-c));
             filter: var(--taste-glow);
         }
 
@@ -225,7 +225,7 @@
                 top: 10px;
                 right: var(--button-sides);
                 --icon: var(--icon-16-info);
-                --mask-colour: hsl(var(--c3));
+                --mask-colour: oklch(var(--c3));
             }
 
             .valentine-pics {
@@ -266,8 +266,8 @@
                 order: -1;
 
                 & > .listen-item-name > .colourful {
-                    color: hsl(var(--l3-c));
-                    text-shadow: 0 0 15px hsl(var(--h4), 80%);
+                    color: oklch(var(--l3-c));
+                    text-shadow: 0 0 15px oklch(var(--h4) / 80%);
                 }
             }
         }
@@ -285,8 +285,8 @@
                 left: 0;
                 bottom: 0;
                 border-radius: 50px;
-                background-color: hsl(var(--h3));
-                box-shadow: 0 2px 3px 0 hsl(var(--h4), 25%);
+                background-color: oklch(var(--h3));
+                box-shadow: 0 2px 3px 0 oklch(var(--h4) / 25%);
             }
         }
 
@@ -295,7 +295,7 @@
             justify-content: center;
             align-items: center;
             --icon: var(--icon-16-arrow-right);
-            --mask-colour: hsl(var(--c3));
+            --mask-colour: oklch(var(--c3));
             flex-shrink: 0;
 
             opacity: 0;

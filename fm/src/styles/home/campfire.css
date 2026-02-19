@@ -9,7 +9,7 @@
     align-items: center;
     gap: 60px;
 
-    background: hsl(var(--b5)) !important;
+    background: oklch(var(--b5)) !important;
     border-bottom: var(--toolbar-border);
     border-top-left-radius: var(--card-radius);
     border-top-right-radius: var(--card-radius);
@@ -139,7 +139,7 @@
         & > .campfire-title {
             font-size: 20px;
             line-height: 24px;
-            color: hsl(var(--c1));
+            color: oklch(var(--c1));
             font-weight: var(--font-weight-medium);
             justify-content: center;
         }
@@ -151,11 +151,11 @@
 
             display: flex;
             justify-content: center;
-            color: hsl(var(--c3));
+            color: oklch(var(--c3));
             cursor: default;
 
             & > a {
-                color: hsla(var(--c2), 80%);
+                color: oklch(var(--c2), 80%);
             }
 
             & > a + a {
@@ -163,7 +163,7 @@
             }
         }
         & > .campfire-plays {
-            color: hsl(var(--c3));
+            color: oklch(var(--c3));
             cursor: default;
         }
     }

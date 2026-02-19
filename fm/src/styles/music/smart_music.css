@@ -23,7 +23,7 @@
         width: fit-content;
         height: fit-content;
         margin: auto 0;
-        color: hsla(var(--c2), 80%);
+        color: oklch(var(--c2), 80%);
 
         min-width: 0;
         overflow: hidden;
@@ -37,7 +37,7 @@
             [data-bleh--tag-group="stems"],
             [data-bleh--tag-group="bonus"]
         ) {
-            color: hsl(var(--c3));
+            color: oklch(var(--c3));
         }
 
         &[data-bleh--tag-group="mixes_numbers"] {

@@ -5,14 +5,14 @@
     cursor: pointer;
 
     &:hover {
-        --hover-underline: underline hsl(var(--c3));
+        --hover-underline: underline oklch(var(--c3));
     }
 
     .status-cafe-top {
         display: flex;
         justify-content: end;
         font-size: 13px;
-        color: hsl(var(--c3));
+        color: oklch(var(--c3));
 
         padding: 0 10px;
 
@@ -28,7 +28,7 @@
     }
 
     .status-cafe-content {
-        background: linear-gradient(90deg, hsl(var(--f4), 20%), transparent);
+        background: linear-gradient(90deg, oklch(var(--f4) / 20%), transparent);
         border-radius: 10px;
         border-bottom-right-radius: unset;
 
@@ -67,7 +67,7 @@
         }
 
         &.is-loading {
-            color: hsl(var(--c2), 80%);
+            color: oklch(var(--c2), 80%);
         }
     }
 }

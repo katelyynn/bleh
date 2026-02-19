@@ -1,6 +1,6 @@
 .user-top-panel {
     padding: calc(var(--card-gap) * 2) calc(var(--card-gap) * 6);
-    background: hsl(var(--b6), 70%);
+    background: oklch(var(--b6), 70%);
     border-radius: var(--item-med-radius);
     user-select: none;
 
@@ -14,8 +14,8 @@
     &[data-sponsoring="true"] {
         background-image: linear-gradient(
             0deg,
-            hsl(var(--h4), 15%),
-            hsl(var(--b6))
+            oklch(var(--h4) / 15%),
+            oklch(var(--b6))
         );
         --hue-over: 342;
         --sat-over: 1.7;
@@ -26,13 +26,13 @@
         --w: 80px;
         width: var(--w);
         height: var(--w);
-        background-color: hsla(var(--b4), 60%);
+        background-color: oklch(var(--b4) / 60%);
         border-radius: var(--avatar-radius);
 
         display: flex;
         justify-content: center;
         align-items: center;
-        color: hsl(var(--opposite-text));
+        color: oklch(var(--opposite-text));
 
         --icon: var(--icon-16-x);
         --icon-size: 40px;

@@ -18,7 +18,7 @@
     padding-left: calc(var(--icon-size) + var(--icon-gap)) !important;
     font-size: var(--font-size);
     line-height: var(--line-height);
-    color: hsl(var(--c3));
+    color: oklch(var(--c3));
     --left: 0;
     --mask: var(--icon-16-info);
 
@@ -38,10 +38,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: hsla(var(--h4), 25%) !important;
+    background: oklch(var(--h4) / 25%) !important;
     border: 2px solid transparent;
-    border-left: 2px solid hsl(var(--l3-c));
-    color: hsl(var(--l3-c));
+    border-left: 2px solid oklch(var(--l3-c));
+    color: oklch(var(--l3-c));
     --hue-over: var(--hue-neg);
     --sat-over: 1;
     --lit-over: 1;

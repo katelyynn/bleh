@@ -1,5 +1,5 @@
 .loading-spinner {
-    color: hsl(var(--c3));
+    color: oklch(var(--c3));
     --icon: var(--icon-16-spinner);
     animation: spinner 1.2s linear infinite;
 }
@@ -20,7 +20,7 @@
 .data-loading,
 .loading:not(.library-fetch, .library-date-picker, .avatar),
 .lazy-shoutbox.async-content-loading {
-    color: hsl(var(--c3));
+    color: oklch(var(--c3));
     position: relative;
     background-image: unset !important;
 
@@ -54,7 +54,7 @@
 
     & > p,
     .loading-data-text {
-        color: hsl(var(--c3));
+        color: oklch(var(--c3));
         user-select: none;
         cursor: default;
     }

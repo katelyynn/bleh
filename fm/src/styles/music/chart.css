@@ -22,9 +22,9 @@
     align-items: center;
     gap: var(--item-list-gap);
 
-    --bg: hsla(var(--b4), 40%);
-    --bg-hov: hsla(var(--b4), 80%);
-    --bg-atv: hsl(var(--b4));
+    --bg: oklch(var(--b4) / 40%);
+    --bg-hov: oklch(var(--b4) / 80%);
+    --bg-atv: oklch(var(--b4));
     --shadow: none;
 
     td {
@@ -79,7 +79,7 @@
     .weeklychart-change {
         min-width: 18px;
         --left: 0;
-        color: hsl(var(--c3));
+        color: oklch(var(--c3));
         position: relative;
         --mask: var(--icon-16-dot);
 
@@ -89,12 +89,12 @@
         &.weeklychart-change--up {
             --hue-over: var(--hue-pos);
             --mask: var(--icon-16-arrow-up);
-            color: hsl(var(--l3-c));
+            color: oklch(var(--l3-c));
         }
         &.weeklychart-change--down {
             --hue-over: var(--hue-neg);
             --mask: var(--icon-16-arrow-down);
-            color: hsl(var(--l3-c));
+            color: oklch(var(--l3-c));
         }
     }
 }
@@ -173,11 +173,11 @@
                         line-height: 36px;
                         font-weight: 1000;
                         letter-spacing: -5px;
-                        text-shadow: 0 0 10px hsl(var(--b6), 60%);
+                        text-shadow: 0 0 10px oklch(var(--b6), 60%);
 
-                        color: hsl(var(--b6), 85%);
+                        color: oklch(var(--b6), 85%);
                         -webkit-text-stroke-width: 2px;
-                        -webkit-text-stroke-color: hsl(var(--c1), 70%);
+                        -webkit-text-stroke-color: oklch(var(--c1), 70%);
 
                         transition-property: transform, opacity;
                         transition-duration: var(--trans);

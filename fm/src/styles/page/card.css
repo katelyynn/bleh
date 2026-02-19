@@ -29,12 +29,12 @@
 .no-data-message--gallery:not([data-page-subpage="images_overview"] .no-data-message--gallery), .no-data-message--album,
 .auth-container-signup, .login-form {
     content: "";
-    --override-background: hsl(
+    --override-background: oklch(
         var(--card-specific-background, var(--card-background, var(--b5)))
     );
     background: var(
         --card-specific-background,
-        var(--card-background, hsl(var(--b5)))
+        var(--card-background, oklch(var(--b5)))
     );
     border-radius: var(--card-specific-radius, var(--card-radius));
     box-shadow: var(

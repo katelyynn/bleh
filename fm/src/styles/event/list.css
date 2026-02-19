@@ -1,8 +1,8 @@
 .events-list-item-date-icon,
 .calendar-icon {
-    background: hsl(var(--b4), 40%) !important;
+    background: oklch(var(--b4) / 40%) !important;
     box-shadow: var(--group-shadow) !important;
-    color: hsl(var(--c2));
+    color: oklch(var(--c2));
     width: var(--calendar-width) !important;
     height: var(--calendar-height) !important;
     cursor: default;
@@ -21,7 +21,7 @@
     font-weight: var(--font-weight-medium) !important;
     text-transform: initial !important;
     width: 100% !important;
-    color: hsl(var(--b7)) !important;
+    color: oklch(var(--b7)) !important;
     margin: unset !important;
 
     /* calendar-icon specific */
@@ -29,10 +29,10 @@
 
     &.calendar-icon-month,
     &.events-list-item-date-icon-month {
-        background: hsl(var(--h3)) !important;
+        background: oklch(var(--h3)) !important;
         box-shadow:
             var(--primary-shadow),
-            0 3px 12px hsl(var(--h4), 32%),
+            0 3px 12px oklch(var(--h4) / 32%),
             var(--interactable-outer) !important;
         padding: 0 !important;
         font-size: 12px !important;
@@ -47,7 +47,7 @@
         font-size: 16px !important;
         line-height: 20px !important;
         font-weight: var(--font-weight-bold) !important;
-        color: hsl(var(--c2)) !important;
+        color: oklch(var(--c2)) !important;
 
         display: flex !important;
         justify-content: center !important;
@@ -65,7 +65,7 @@
     text-transform: initial;
     font-size: var(--font-size);
     line-height: var(--line-height);
-    color: hsl(var(--c3));
+    color: oklch(var(--c3));
     font-weight: var(--font-weight-medium);
     margin-top: unset;
     margin-bottom: var(--card-gap);
@@ -98,9 +98,9 @@
     left: unset !important;
     right: 0 !important;
 
-    background: hsl(var(--h3)) !important;
-    box-shadow: var(--primary-shadow), 0 3px 12px hsl(var(--h4), 32%) !important;
-    color: hsl(var(--b7)) !important;
+    background: oklch(var(--h3)) !important;
+    box-shadow: var(--primary-shadow), 0 3px 12px oklch(var(--h4) / 32%) !important;
+    color: oklch(var(--b7)) !important;
     --mask: var(--icon-16-check);
     --left: 50% !important;
     --top: 50% !important;
@@ -149,7 +149,7 @@
 
         .events-list-item-date-icon,
         .calendar-icon {
-            background: hsl(var(--h4), 20%) !important;
+            background: oklch(var(--h4) / 20%) !important;
         }
     }
 
@@ -160,7 +160,7 @@
 
         .events-list-item-date-icon,
         .calendar-icon {
-            background: hsl(var(--h4), 20%) !important;
+            background: oklch(var(--h4) / 20%) !important;
         }
     }
 }
@@ -194,7 +194,7 @@
 [data-lazy-filter-options="events-select"] {
     .text-bold {
         font-weight: var(--font-weight-medium);
-        color: hsl(var(--c3));
+        color: oklch(var(--c3));
         position: relative;
         width: fit-content;
     }
@@ -210,7 +210,7 @@
 }
 
 .sidebar-date-heading {
-    color: hsl(var(--c3));
+    color: oklch(var(--c3));
     margin-top: var(--card-gap);
     margin-bottom: var(--card-gap);
     text-align: left;
@@ -264,7 +264,7 @@
     }
 }
 .events-list-item-venue {
-    color: hsla(var(--c2), 80%);
+    color: oklch(var(--c2), 80%);
     margin-top: unset !important;
 
     .events-list-sidebar & {
@@ -273,13 +273,13 @@
 }
 
 .events-list-sidebar .events-list-item-attendees {
-    color: hsl(var(--c3));
+    color: oklch(var(--c3));
     line-height: 16px;
     margin-top: unset;
     display: none;
 }
 .events-list-item-attendees {
-    color: hsl(var(--l2-c-theme-switch));
+    color: oklch(var(--l2-c-theme-switch));
     --hue-over: var(--hue-pos);
     --sat-over: 1;
     --lit-over: 1;
@@ -366,14 +366,14 @@
 .events-list-item-event--lineup,
 .events-list-item-venue--address,
 .events-list-item-acts {
-    color: hsla(var(--c2), 80%);
+    color: oklch(var(--c2), 80%);
     margin-top: unset !important;
 }
 
 .events-list-sidebar .events-list-item-venue--title,
 :is(.events-list, .events-list-anhv1) .events-list-item-venue--title {
     font-weight: var(--font-weight);
-    color: hsl(var(--c2));
+    color: oklch(var(--c2));
 }
 
 /* hides the lil separator dot */

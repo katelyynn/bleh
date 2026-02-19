@@ -24,9 +24,9 @@
 .tags-add,
 .tags-view-all {
     --bg: transparent;
-    --bg-hov: hsl(var(--b4), 40%);
-    --bg-atv: hsl(var(--b4), 60%);
-    --col: hsl(var(--c3));
+    --bg-hov: oklch(var(--b4) / 40%);
+    --bg-atv: oklch(var(--b4) / 60%);
+    --col: oklch(var(--c3));
     --shadow: inset 0 0 0 1px var(--card-border-base);
     --padding: 5px 9px;
     --radius: var(--item-med-radius);
@@ -50,11 +50,11 @@
     }
 
     &.user-created-tag {
-        --bg: hsl(var(--h3), 5%);
-        --bg-hov: hsl(var(--h3), 10%);
-        --bg-atv: hsl(var(--h3), 15%);
-        color: hsl(var(--l2-c-theme-switch)) !important;
-        /*box-shadow: 0 0 0 2px hsl(var(--h4), 30%) inset, var(--interact-shadow) !important;*/
+        --bg: oklch(var(--h3) / 5%);
+        --bg-hov: oklch(var(--h3) / 10%);
+        --bg-atv: oklch(var(--h3) / 15%);
+        color: oklch(var(--l2-c-theme-switch)) !important;
+        /*box-shadow: 0 0 0 2px oklch(var(--h4), 30%) inset, var(--interact-shadow) !important;*/
     }
 
     &:not(.music-label) {
@@ -68,7 +68,7 @@
     transition-timing-function: var(--trans-function);
 
     &[aria-describedby] {
-        color: hsl(var(--l3-c));
+        color: oklch(var(--l3-c));
         transition: none;
     }
 }

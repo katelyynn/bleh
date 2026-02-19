@@ -29,17 +29,17 @@
         top: 4px;
         right: 4px;
 
-        --col: hsl(var(--l3-c));
+        --col: oklch(var(--l3-c));
         --mask-colour: color-mix(
             in hsl,
-            hsl(var(--l3-c)),
-            hsl(var(--l4-c)) 30%
+            oklch(var(--l3-c)),
+            oklch(var(--l4-c)) 30%
         );
         --mask: var(--icon-16-bookmark-saved);
 
-        --bg: hsla(var(--b6), 60%);
-        --bg-hov: hsla(var(--b6), 80%);
-        --bg-atv: hsla(var(--b6), 100%);
+        --bg: oklch(var(--b6), 60%);
+        --bg-hov: oklch(var(--b6), 80%);
+        --bg-atv: oklch(var(--b6), 100%);
         --shadow: none;
         backdrop-filter: var(--solarium);
         -webkit-backdrop-filter: var(--solarium);
@@ -79,7 +79,7 @@
     }
 
     .music-bookmarks-albums-item-artist {
-        color: hsl(var(--c2), 80%);
+        color: oklch(var(--c2), 80%);
 
         & > a {
             color: inherit;
@@ -133,7 +133,7 @@
                 gap: var(--gap);
                 --size: 300px;
                 --gap: 10px;
-                color: hsl(var(--c2));
+                color: oklch(var(--c2));
                 height: fit-content;
 
                 .music-featured-item-background {
@@ -158,7 +158,7 @@
 
                     &[style='background: url("https://lastfm.freetls.fastly.net/i/u/arG/2a96cbd8b46e442fc41c2b86b821562f.jpg");']
                     {
-                        background: hsl(var(--b4)) !important;
+                        background: oklch(var(--b4)) !important;
                         --show-icon: block;
                     }
                 }
@@ -174,7 +174,7 @@
                     h3 {
                         font-size: 16px;
                         line-height: 20px;
-                        color: hsl(var(--c1));
+                        color: oklch(var(--c1));
                         font-weight: var(--font-weight-bold);
                         margin: unset;
                         letter-spacing: unset;
@@ -192,7 +192,7 @@
                     width: 300px;
 
                     .music-featured-artist-similar {
-                        color: hsl(var(--c3));
+                        color: oklch(var(--c3));
                         margin: unset;
                         opacity: unset;
                     }
@@ -205,7 +205,7 @@
                         margin: unset;
 
                         a {
-                            color: hsl(var(--l3-c));
+                            color: oklch(var(--l3-c));
                         }
                     }
 
@@ -349,7 +349,7 @@
                 filter: brightness(110%);
             }
 
-            --hover-underline: underline hsl(var(--c3));
+            --hover-underline: underline oklch(var(--c3));
         }
 
         .lazy-buylinks,
@@ -369,7 +369,7 @@
         .music-bookmarks-albums-item-name,
         .music-releases-item-name,
         .music-more-artists-item-name {
-            color: hsl(var(--c2));
+            color: oklch(var(--c2));
             font: inherit;
             font-weight: var(--font-weight-medium);
             margin-top: 10px;
@@ -388,7 +388,7 @@
         .artist-top-albums-item-artist,
         .music-bookmarks-albums-item-artist,
         .music-releases-item-artist {
-            color: hsl(var(--c2), 80%);
+            color: oklch(var(--c2), 80%);
             margin-top: 2px;
             margin-bottom: unset;
         }
@@ -411,7 +411,7 @@
         .music-more-artists-item-aux-text {
             font-size: 13px;
             line-height: var(--line-height);
-            color: hsl(var(--c3));
+            color: oklch(var(--c3));
             margin-top: 4px;
             margin-bottom: unset;
             cursor: default;

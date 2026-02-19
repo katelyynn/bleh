@@ -43,9 +43,9 @@
 .obsession-candidate,
 .chartlist-row {
     --bg: transparent;
-    --bg-hov: hsl(var(--b4), 30%);
+    --bg-hov: oklch(var(--b4) / 30%);
     --shadow: none !important;
-    color: hsl(var(--c2));
+    color: oklch(var(--c2));
     background-color: var(--bg);
     padding: 8px calc(var(--side-left) + var(--love-offset, 0px)) 8px var(--side-left) !important;
     min-height: 40px;
@@ -154,7 +154,7 @@
     }
 
     & > .chartlist-album {
-        color: hsl(var(--c3));
+        color: oklch(var(--c3));
         font-size: calc(var(--font-size) - 1px);
     }
 
@@ -222,7 +222,7 @@
 
     .chartlist-album {
         order: 1;
-        color: hsl(var(--c3));
+        color: oklch(var(--c3));
 
         /* no hover offset nonsense */
         margin-right: unset !important;
@@ -233,7 +233,7 @@
 }
 .chartlist-artist {
     display: flex !important;
-    color: hsl(var(--c3)) !important;
+    color: oklch(var(--c3)) !important;
     cursor: default;
 
     & > a + a {
@@ -269,7 +269,7 @@
             width: 100%;
 
             .chartlist-count-bar-slug {
-                background: hsl(var(--l4-c)) !important;
+                background: oklch(var(--l4-c)) !important;
             }
 
             .chartlist-count-bar-link {
@@ -277,7 +277,7 @@
             }
 
             .chartlist-count-bar-value {
-                color: hsl(var(--c2));
+                color: oklch(var(--c2));
                 overflow: unset !important;
                 position: relative;
                 bottom: 9px;
@@ -301,8 +301,8 @@
         border-radius: calc(var(--item-small-radius) + 2px);
         opacity: 0;
 
-        border: 2px solid hsl(var(--c2), 30%);
-        box-shadow: 0 0 30px hsl(var(--c2), 10%);
+        border: 2px solid oklch(var(--c2) / 30%);
+        box-shadow: 0 0 30px oklch(var(--c2) / 10%);
 
         transition-property: opacity;
         transition-duration: var(--trans);
@@ -341,7 +341,7 @@
     width: var(--icon-size);
     height: var(--icon-size);
     --left: 0;
-    color: hsl(var(--c3));
+    color: oklch(var(--c3));
 
     &.chartlist-type--track {
         --mask: var(--icon-16-track);
@@ -397,9 +397,9 @@
         top: 50%;
         right: 15px;
         margin-top: -6px;
-        background: hsl(var(--h3), 50%);
+        background: oklch(var(--h3) / 50%);
         border-radius: 50px;
-        box-shadow: 0 0 30px 1px hsl(var(--h4));
+        box-shadow: 0 0 30px 1px oklch(var(--h4));
         transition-property: opacity;
         transition-duration: var(--trans);
         transition-timing-function: var(--trans-function);
@@ -417,7 +417,7 @@
 
 .chartlist__placeholder-bar,
 .chartlist__placeholder-name {
-    background: hsl(var(--b4), 50%);
+    background: oklch(var(--b4) / 50%);
     border-radius: var(--item-med-radius);
     height: 24px;
 }
@@ -425,11 +425,11 @@
 .chartlist__placeholder-loading {
     background-image: linear-gradient(
         270deg,
-        hsla(var(--b4), 0.05),
-        hsla(var(--b4), 0.3),
-        hsla(var(--b4), 0.6),
-        hsla(var(--b4), 0.3),
-        hsla(var(--b4), 0.05)
+        oklch(var(--b4) / 0.05),
+        oklch(var(--b4) / 0.3),
+        oklch(var(--b4) / 0.6),
+        oklch(var(--b4) / 0.3),
+        oklch(var(--b4) / 0.05)
     );
 }
 
@@ -440,11 +440,11 @@
 
 /*     ACTIVE     */
 .chartlist-row--now-scrobbling {
-    /*--bg: hsla(var(--h3), 45%) !important;
-    --bg-hov: hsla(var(--h3), 60%) !important;
-    --shadow: 0 0 50px 5px hsla(var(--h3), 45%) !important;*/
-    --bg: hsla(var(--h4), 10%) !important;
-    --bg-hov: hsla(var(--h4), 17%) !important;
+    /*--bg: oklch(var(--h3), 45%) !important;
+    --bg-hov: oklch(var(--h3), 60%) !important;
+    --shadow: 0 0 50px 5px oklch(var(--h3), 45%) !important;*/
+    --bg: oklch(var(--h4) / 10%) !important;
+    --bg-hov: oklch(var(--h4) / 17%) !important;
     z-index: 20;
 }
 .chartlist-row--now-scrobbling:before {
@@ -470,19 +470,19 @@
 }
 .chartlist-now-scrobbling:before,
 .chartlist-now-scrobbling > a {
-    color: hsl(var(--l2-c-theme-switch)) !important;
+    color: oklch(var(--l2-c-theme-switch)) !important;
 }
 
 /*     YOU!     */
 .chartlist-row--highlight {
-    --bg: hsla(var(--h4), 10%) !important;
-    --bg-hov: hsla(var(--h4), 17%) !important;
+    --bg: oklch(var(--h4) / 10%) !important;
+    --bg-hov: oklch(var(--h4) / 17%) !important;
 
-    --chartlist-bar-bg: var(--b3), 60%;
+    --chartlist-bar-bg: var(--b3) / 60%;
 
     /* not theme_type on purpose */
     [data-bleh--theme="light"] & {
-        --chartlist-bar-bg: var(--b5), 80%;
+        --chartlist-bar-bg: var(--b5) / 80%;
     }
 }
 
@@ -518,7 +518,7 @@
 .featured-item-artist,
 .similar-albums-item-artist,
 .track-similar-tracks-item-artist {
-    color: hsla(var(--c2), 80%) !important;
+    color: oklch(var(--c2) / 80%) !important;
     font-weight: var(--font-weight);
 }
 
@@ -555,7 +555,7 @@
 .chartlist-timestamp,
 .chartlist-duration {
     font-size: calc(var(--font-size) - 1px);
-    color: hsl(var(--c3));
+    color: oklch(var(--c3));
     height: fit-content;
     cursor: default;
 }
@@ -567,7 +567,7 @@
 
 .chartlist-index {
     height: fit-content;
-    color: hsl(var(--c3));
+    color: oklch(var(--c3));
     text-align: right;
     cursor: default;
     width: 16px;
@@ -639,7 +639,7 @@
     position: relative;
     --left: calc((var(--button-height) - var(--icon-size)) / 2);
     --mask: var(--icon-16-heart);
-    --col: hsl(var(--l3-c)) !important;
+    --col: oklch(var(--l3-c)) !important;
     --mask-colour: var(--col) !important;
     color: var(--col);
 
@@ -658,12 +658,12 @@
 }
 
 [data-toggle-button-current-state="unloved"] .chartlist-love-button:not(:hover) {
-    --col: hsl(var(--c3), 40%) !important;
+    --col: oklch(var(--c3) / 40%) !important;
 }
 
 /*     OTHER USER PROFILE     */
 [data-toggle-button-current-state="unloved"] span.chartlist-love-button {
-    --col: hsla(var(--c3), 20%) !important;
+    --col: oklch(var(--c3) / 20%) !important;
 }
 
 .chartlist-buylinks,
@@ -683,8 +683,8 @@
 }
 .chartlist-count-bar {
     line-height: 22px; /* 22 */
-    background: hsl(var(--chartlist-bar-bg, var(--b4), 40%));
-    color: hsl(var(--b7)) !important;
+    background: oklch(var(--chartlist-bar-bg, var(--b4) / 40%));
+    color: oklch(var(--b7)) !important;
     box-shadow: var(--group-shadow), var(--interact-shadow);
     text-decoration: none !important;
     width: 180px;
@@ -703,7 +703,7 @@
     }
 
     .chartlist-count-bar-slug {
-        background: hsl(var(--h4), 50%) !important;
+        background: oklch(var(--h4) / 50%) !important;
         box-shadow: var(--bar-shadow);
         left: unset;
         right: 0;
@@ -714,7 +714,7 @@
     }
 
     .chartlist-count-bar-value {
-        color: hsl(var(--l2-c-theme-switch));
+        color: oklch(var(--l2-c-theme-switch));
         font-weight: inherit;
         padding: 0 10px !important;
         margin: 0 -10px;
@@ -760,8 +760,8 @@
             .chartlist-count-bar-slug {
                 background: color-mix(
                     in hsl,
-                    hsl(var(--h3)),
-                    hsl(var(--h4)) 40%
+                    oklch(var(--h3)),
+                    oklch(var(--h4)) 40%
                 ) !important;
             }
         }
@@ -790,16 +790,16 @@
 .track-more-button,
 .obsession-candidate-inner .btn-sm {
     --bg: transparent !important;
-    --bg-hov: hsla(var(--b4), 60%) !important;
-    --bg-atv: hsla(var(--b4), 80%) !important;
+    --bg-hov: oklch(var(--b4) / 60%) !important;
+    --bg-atv: oklch(var(--b4) / 80%) !important;
     --shadow: none !important;
     --shadow-hov: none !important;
     --font-size: 0;
 
     .chartlist-row--now-scrobbling > &,
     .chartlist-row--now-scrobbling > td & {
-        --bg-hov: hsla(var(--h4), 20%) !important;
-        --bg-atv: hsla(var(--h4), 40%) !important;
+        --bg-hov: oklch(var(--h4) / 20%) !important;
+        --bg-atv: oklch(var(--h4) / 40%) !important;
     }
 }
 

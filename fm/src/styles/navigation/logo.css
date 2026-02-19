@@ -6,7 +6,7 @@
     height: unset;
     background: unset;
     font: inherit;
-    color: hsl(var(--c3));
+    color: oklch(var(--c3));
 
     display: flex;
     align-items: center;
@@ -30,7 +30,7 @@
     .home-version {
         width: fit-content;
         height: fit-content;
-        color: hsl(var(--c3));
+        color: oklch(var(--c3));
         gap: var(--icon-gap);
 
         & > .new-badge {
@@ -45,8 +45,8 @@
             & > .bleh-icon {
                 background: conic-gradient(
                     from 270deg,
-                    hsl(var(--c1)),
-                    hsl(var(--c3))
+                    oklch(var(--c1)),
+                    oklch(var(--c3))
                 );
             }
         }
@@ -75,9 +75,9 @@
     margin-top: -7px;
     font-family: var(--font-brand);
     font-weight: 900;
-    color: hsl(var(--c1));
+    color: oklch(var(--c1));
 
-    text-shadow: 0 2px 4px hsl(var(--k4));
+    text-shadow: 0 2px 4px oklch(var(--k4));
 
     [data-bleh--season="pride"] & {
         /* this isnt using https://cesque.com/gaydient/ but shoutout,

@@ -6,7 +6,7 @@
 
     .lastfm-bulk-edit-progress {
         font-weight: var(--font-weight-medium);
-        color: hsl(var(--c3));
+        color: oklch(var(--c3));
         padding-left: calc(var(--icon-size) + var(--icon-gap));
         position: relative;
         --left: 0;

@@ -14,7 +14,7 @@
         th {
             font: inherit;
             font-weight: var(--font-weight-medium);
-            color: hsl(var(--c3));
+            color: oklch(var(--c3));
             cursor: default;
 
             a {
@@ -37,8 +37,8 @@
         width: 100%;
 
         tr {
-            --bg: hsla(var(--b4), 30%);
-            --bg-hov: hsla(var(--b4), 50%);
+            --bg: oklch(var(--b4) / 30%);
+            --bg-hov: oklch(var(--b4) / 50%);
 
             border: unset;
             border-radius: var(--item-big-radius);
@@ -73,8 +73,8 @@
                             );
 
                             --bg: transparent !important;
-                            --bg-hov: hsla(var(--b4), 60%) !important;
-                            --bg-atv: hsla(var(--b4), 80%) !important;
+                            --bg-hov: oklch(var(--b4) / 60%) !important;
+                            --bg-atv: oklch(var(--b4) / 80%) !important;
                             --shadow: none !important;
                             --shadow-hov: none !important;
 
@@ -84,11 +84,11 @@
                         }
 
                         [value="delete"] ~ button {
-                            --col: hsl(var(--l3-c));
+                            --col: oklch(var(--l3-c));
                             --mask-colour: color-mix(
                                 in hsl,
-                                hsl(var(--l3-c)),
-                                hsl(var(--l4-c)) 30%
+                                oklch(var(--l3-c)),
+                                oklch(var(--l4-c)) 30%
                             );
                             --hue-over: var(--hue-neg);
                             --sat-over: 1;
@@ -101,7 +101,7 @@
                 small {
                     font-size: var(--font-size-sm);
                     line-height: var(--line-height) !important;
-                    color: hsl(var(--c3));
+                    color: oklch(var(--c3));
                 }
             }
 

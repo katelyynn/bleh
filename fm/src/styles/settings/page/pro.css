@@ -1,5 +1,5 @@
 #current-subscription {
-    color: hsl(var(--c2));
+    color: oklch(var(--c2));
     box-shadow: var(--card-shadow) !important;
 
     &:has(> .subscription-button-row) {
@@ -7,7 +7,7 @@
         --sat-over: 1;
         --lit-over: 1;
 
-        background: hsl(var(--f4), 20%) !important;
+        background: oklch(var(--f4), 20%) !important;
         border: unset !important;
         padding: var(--card-padding) !important;
         box-shadow: unset !important;
@@ -24,7 +24,7 @@
         font-size: var(--font-size) !important;
         line-height: var(--line-height) !important;
         font-weight: var(--font-weight-medium) !important;
-        color: hsl(var(--c3)) !important;
+        color: oklch(var(--c3)) !important;
         margin-bottom: 2px !important;
     }
 
@@ -46,7 +46,7 @@
     }
 
     h3 {
-        color: hsl(var(--l3-c));
+        color: oklch(var(--l3-c));
         --mask: var(--icon-16-pro);
     }
 
