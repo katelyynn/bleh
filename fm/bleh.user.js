@@ -32274,7 +32274,7 @@
                             ${() => {
                 if (!is_own_profile || !can_delete) return;
                 let button2 = html.node`
-                                    <button class="dropdown-menu-clickable-item more-item--delete" data-type="delete">
+                                    <button class="dropdown-menu-clickable-item more-item--delete colourful" data-type="delete">
                                         ${tl2(trans.delete)}
                                     </button>
                                 `;

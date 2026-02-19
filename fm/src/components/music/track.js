@@ -963,7 +963,7 @@ export function patch_titles(search = page.structure.main) {
                                 if (!is_own_profile || !can_delete) return;
 
                                 let button = html.node`
-                                    <button class="dropdown-menu-clickable-item more-item--delete" data-type="delete">
+                                    <button class="dropdown-menu-clickable-item more-item--delete colourful" data-type="delete">
                                         ${tl(trans.delete)}
                                     </button>
                                 `;
