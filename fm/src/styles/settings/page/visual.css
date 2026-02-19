@@ -26,7 +26,7 @@
             overflow: hidden;
 
             .inner {
-                background: hsl(var(--b5));
+                background: hsl(var(--b6));
                 color: hsl(var(--c2));
                 --mask-colour: currentColor;
                 display: flex;
