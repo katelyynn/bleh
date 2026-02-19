@@ -15,9 +15,13 @@ body {
     --font-size-sm: 12px;
     --line-height-sm: calc(var(--font-size-sm) + 4px);
 
-    --hue: var(--hue-over, var(--hue-album, var(--hue-user, var(--hue-seasonal, 255))));
-    --sat-raw: var(--sat-over, var(--sat-album, var(--sat-user, var(--sat-seasonal, 1))));
-    --lit-raw: var(--lit-over, var(--lit-album, var(--lit-user, var(--lit-seasonal, 1))));
+    --default-hue: 298;
+    --default-sat: 1.28;
+    --default-lit: 0.9;
+
+    --hue: var(--hue-over, var(--hue-album, var(--hue-user, var(--hue-seasonal, var(--default-hue)))));
+    --sat-raw: var(--sat-over, var(--sat-album, var(--sat-user, var(--sat-seasonal, var(--default-sat)))));
+    --lit-raw: var(--lit-over, var(--lit-album, var(--lit-user, var(--lit-seasonal, var(--default-lit)))));
 
     --sat-multiply: 0.18;
     --lit-multiply: 1.25;
@@ -197,6 +201,10 @@ body,
 [data-bleh--label="bleh"],
 [data-bleh-page="seasonal"],
 .colourful-bg {
+    --hue: var(--hue-over, var(--hue-album, var(--hue-user, var(--hue-seasonal, var(--default-hue)))));
+    --sat-raw: var(--sat-over, var(--sat-album, var(--sat-user, var(--sat-seasonal, var(--default-sat)))));
+    --lit-raw: var(--lit-over, var(--lit-album, var(--lit-user, var(--lit-seasonal, var(--default-lit)))));
+
     --sat: calc(var(--sat-raw) * var(--sat-multiply));
     --lit: calc(var(--lit-raw) * var(--lit-multiply));
 
@@ -270,18 +278,18 @@ body,
     .theme-preview[data-bleh--theme="darker"],
     [data-bleh--theme="darker"] &:not(.theme-preview) {
         /* any additional highlights */
-        --b2: 0.41 calc(var(--sat) * 5% * var(--sat-bg, 1)) var(--hue);
-        --b3: 0.31 calc(var(--sat) * 5% * var(--sat-bg, 1)) var(--hue);
+        --b2: 0.41 calc(var(--sat) * 0.05 * var(--sat-bg, 1)) var(--hue);
+        --b3: 0.31 calc(var(--sat) * 0.05 * var(--sat-bg, 1)) var(--hue);
 
         /* card border */
-        --b4: 0.26 calc(var(--sat) * 6% * var(--sat-bg, 1)) var(--hue);
+        --b4: 0.26 calc(var(--sat) * 0.06 * var(--sat-bg, 1)) var(--hue);
 
         /* card */
-        --b5: 0.21 calc(var(--sat) * 6% * var(--sat-bg, 1)) var(--hue);
+        --b5: 0.21 calc(var(--sat) * 0.06 * var(--sat-bg, 1)) var(--hue);
 
         /* root */
-        --b6: 0.18 calc(var(--sat) * 5% * var(--sat-bg, 1)) var(--hue);
-        --b8: 0.23 calc(var(--sat) * 5% * var(--sat-bg, 1)) var(--hue);
+        --b6: 0.18 calc(var(--sat) * 0.05 * var(--sat-bg, 1)) var(--hue);
+        --b8: 0.23 calc(var(--sat) * 0.05 * var(--sat-bg, 1)) var(--hue);
         --b7: 0 0 0;
 
         --menu-item-hov: oklch(var(--b4) / 60%);
@@ -299,14 +307,14 @@ body,
     .theme-preview[data-bleh--theme="oled"],
     [data-bleh--theme="oled"] &:not(.theme-preview) {
         /* any additional highlights */
-        --b2: 0.32 calc(var(--sat) * 0.05 * var(--sat-bg, 1)) var(--hue);
-        --b3: 0.23 calc(var(--sat) * 0.05 * var(--sat-bg, 1)) var(--hue);
+        --b2: 0.32 calc(var(--sat) * 0.01 * var(--sat-bg, 1)) var(--hue);
+        --b3: 0.23 calc(var(--sat) * 0.01 * var(--sat-bg, 1)) var(--hue);
 
         /* card border */
-        --b4: 0.19 calc(var(--sat) * 0.06 * var(--sat-bg, 1)) var(--hue);
+        --b4: 0.19 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue);
 
         /* card */
-        --b5: 0.13 calc(var(--sat) * 0.06 * var(--sat-bg, 1)) var(--hue);
+        --b5: 0.13 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue);
 
         /* root */
         --b6: 0 0 0;
@@ -519,11 +527,10 @@ u,
 .gallery-image-preferred-container,
 .events-list-item-date-icon-month, .calendar-icon-month,
 .attendance-badge {
-    --hue-raw: var(--hue-over, var(--hue-album, var(--hue-user, var(--hue-seasonal, 255))));
-    --sat-raw: var(--sat-over, var(--sat-album, var(--sat-user, var(--sat-seasonal, 1))));
-    --lit-raw: var(--lit-over, var(--lit-album, var(--lit-user, var(--lit-seasonal, 1))));
+    --hue: var(--hue-over, var(--hue-album, var(--hue-user, var(--hue-seasonal, var(--default-hue)))));
+    --sat-raw: var(--sat-over, var(--sat-album, var(--sat-user, var(--sat-seasonal, var(--default-sat)))));
+    --lit-raw: var(--lit-over, var(--lit-album, var(--lit-user, var(--lit-seasonal, var(--default-lit)))));
 
-    --hue: var(--hue-raw);
     --sat: calc(var(--sat-raw) * var(--sat-multiply));
     --lit: calc(var(--lit-raw) * var(--lit-multiply));
 

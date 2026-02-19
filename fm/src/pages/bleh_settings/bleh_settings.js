@@ -4,7 +4,7 @@
 // Licensed under GPLv3
 //
 
-import { settings } from '@/build/config.js';
+import { settings, settings_store } from '@/build/config.js';
 import { album_track_corrections, artist_corrections } from '@/build/music.js';
 import {
     api_key,
@@ -1500,14 +1500,14 @@ export function display_colour_presets() {
             {
                 type: 'default',
                 sets: {
-                    hue: 255,
-                    sat: 1,
-                    lit: 1
+                    hue: settings_store.hue.default,
+                    sat: settings_store.sat.default,
+                    lit: settings_store.lit.default
                 },
                 displays: {
-                    hue: 'var(--hue-seasonal, 255)',
-                    sat: 'var(--sat-seasonal, 1)',
-                    lit: 'var(--lit-seasonal, 1)'
+                    hue: `var(--hue-seasonal, ${settings_store.hue.default})`,
+                    sat: `var(--sat-seasonal, ${settings_store.sat.default})`,
+                    lit: `var(--lit-seasonal, ${settings_store.lit.default})`
                 }
             },
             {
@@ -1530,73 +1530,73 @@ export function display_colour_presets() {
         palette: [
             {
                 sets: {
-                    hue: 0,
-                    sat: 1.2,
-                    lit: 0.9
+                    hue: 19,
+                    sat: 1.5,
+                    lit: 0.84
                 },
                 label: trans.red
             },
             {
                 sets: {
-                    hue: 19,
-                    sat: 1.275,
-                    lit: 0.95
+                    hue: 37,
+                    sat: 1.4,
+                    lit: 0.9
                 },
                 label: trans.orange
             },
             {
                 sets: {
-                    hue: 48,
-                    sat: 1.5,
-                    lit: 1
+                    hue: 73,
+                    sat: 1.38,
+                    lit: 1.07
                 },
                 label: trans.yellow
             },
             {
                 sets: {
-                    hue: 98,
-                    sat: 1.05,
-                    lit: 1.025
+                    hue: 115,
+                    sat: 1.16,
+                    lit: 1
                 },
                 label: trans.lime
             },
             {
                 sets: {
-                    hue: 131,
-                    sat: 1,
-                    lit: 0.925
+                    hue: 145,
+                    sat: 1.6,
+                    lit: 0.95
                 },
                 label: trans.green
             },
             {
                 sets: {
-                    hue: 188,
+                    hue: 178,
                     sat: 1,
-                    lit: 1.1
+                    lit: 1
                 },
                 label: trans.aqua
             },
             {
                 sets: {
-                    hue: 228,
-                    sat: 1.3,
-                    lit: 0.9
+                    hue: 248,
+                    sat: 1.45,
+                    lit: 0.82
                 },
                 label: trans.blue
             },
             {
                 sets: {
-                    hue: 254,
-                    sat: 1.07,
-                    lit: 1
+                    hue: 290,
+                    sat: 1.45,
+                    lit: 0.82
                 },
                 label: trans.purple
             },
             {
                 sets: {
-                    hue: 317,
-                    sat: 1.1,
-                    lit: 1
+                    hue: 340,
+                    sat: 1.35,
+                    lit: 0.93
                 },
                 label: trans.pink
             },

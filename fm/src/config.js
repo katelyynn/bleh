@@ -73,6 +73,14 @@ export function load_settings(skip = false) {
         if (settings.noise == 0.5) settings.noise = settings_store.noise.default;
     }
 
+    if (settings.version < 2026.0220) {
+        if (settings.hue == 255 && settings.sat == 1 && settings.lit == 1) {
+            settings.hue = settings_store.hue.default;
+            settings.sat = settings_store.sat.default;
+            settings.lit = settings_store.lit.default;
+        }
+    }
+
     if (Number.isInteger(settings.list_view)) {
         if (settings.list_view == 0) {
             settings.list_view = 'list';
@@ -412,9 +420,9 @@ export function update_colour_swatches() {
         if (
             (h == settings.hue && s == settings.sat && l == settings.lit) ||
             (swatch.getAttribute('data-swatch-type') == 'default' &&
-                settings.hue == 255 &&
-                settings.sat == 1 &&
-                settings.lit == 1) // default
+                settings.hue == settings_store.hue.default &&
+                settings.sat == settings_store.sat.default &&
+                settings.lit == settings_store.lit.default)
         ) {
             parent.setAttribute('aria-checked', 'true');
 

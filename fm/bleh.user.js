@@ -39697,6 +39697,13 @@
     if (settings.version < 2026.0201) {
       if (settings.noise == 0.5) settings.noise = settings_store.noise.default;
     }
+    if (settings.version < 2026.022) {
+      if (settings.hue == 255 && settings.sat == 1 && settings.lit == 1) {
+        settings.hue = settings_store.hue.default;
+        settings.sat = settings_store.sat.default;
+        settings.lit = settings_store.lit.default;
+      }
+    }
     if (Number.isInteger(settings.list_view)) {
       if (settings.list_view == 0) {
         settings.list_view = "list";
@@ -39933,7 +39940,7 @@
       let parent = swatch.parentElement;
       if (swatch.classList[0] == "dropdown-menu-clickable-item")
         parent = swatch;
-      if (h == settings.hue && s2 == settings.sat && l2 == settings.lit || swatch.getAttribute("data-swatch-type") == "default" && settings.hue == 255 && settings.sat == 1 && settings.lit == 1) {
+      if (h == settings.hue && s2 == settings.sat && l2 == settings.lit || swatch.getAttribute("data-swatch-type") == "default" && settings.hue == settings_store.hue.default && settings.sat == settings_store.sat.default && settings.lit == settings_store.lit.default) {
         parent.setAttribute("aria-checked", "true");
         if (swatch.classList[0] != "dropdown-menu-clickable-item")
           found = true;
@@ -52375,14 +52382,14 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         {
           type: "default",
           sets: {
-            hue: 255,
-            sat: 1,
-            lit: 1
+            hue: settings_store.hue.default,
+            sat: settings_store.sat.default,
+            lit: settings_store.lit.default
           },
           displays: {
-            hue: "var(--hue-seasonal, 255)",
-            sat: "var(--sat-seasonal, 1)",
-            lit: "var(--lit-seasonal, 1)"
+            hue: `var(--hue-seasonal, ${settings_store.hue.default})`,
+            sat: `var(--sat-seasonal, ${settings_store.sat.default})`,
+            lit: `var(--lit-seasonal, ${settings_store.lit.default})`
           }
         },
         {
@@ -52405,73 +52412,73 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       palette: [
         {
           sets: {
-            hue: 0,
-            sat: 1.2,
-            lit: 0.9
+            hue: 19,
+            sat: 1.5,
+            lit: 0.84
           },
           label: trans.red
         },
         {
           sets: {
-            hue: 19,
-            sat: 1.275,
-            lit: 0.95
+            hue: 37,
+            sat: 1.4,
+            lit: 0.9
           },
           label: trans.orange
         },
         {
           sets: {
-            hue: 48,
-            sat: 1.5,
-            lit: 1
+            hue: 73,
+            sat: 1.38,
+            lit: 1.07
           },
           label: trans.yellow
         },
         {
           sets: {
-            hue: 98,
-            sat: 1.05,
-            lit: 1.025
+            hue: 115,
+            sat: 1.16,
+            lit: 1
           },
           label: trans.lime
         },
         {
           sets: {
-            hue: 131,
-            sat: 1,
-            lit: 0.925
+            hue: 145,
+            sat: 1.6,
+            lit: 0.95
           },
           label: trans.green
         },
         {
           sets: {
-            hue: 188,
+            hue: 178,
             sat: 1,
-            lit: 1.1
+            lit: 1
           },
           label: trans.aqua
         },
         {
           sets: {
-            hue: 228,
-            sat: 1.3,
-            lit: 0.9
+            hue: 248,
+            sat: 1.45,
+            lit: 0.82
           },
           label: trans.blue
         },
         {
           sets: {
-            hue: 254,
-            sat: 1.07,
-            lit: 1
+            hue: 290,
+            sat: 1.45,
+            lit: 0.82
           },
           label: trans.purple
         },
         {
           sets: {
-            hue: 317,
-            sat: 1.1,
-            lit: 1
+            hue: 340,
+            sat: 1.35,
+            lit: 0.93
           },
           label: trans.pink
         },
@@ -71229,7 +71236,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     hue: {
       css: "hue-user",
-      default: 255,
+      default: 298,
       type: "range",
       min: 0,
       max: 360,
@@ -71239,7 +71246,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     sat: {
       css: "sat-user",
-      default: 1,
+      default: 1.28,
       type: "range",
       min: 0,
       max: 2,
@@ -71260,7 +71267,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     lit: {
       css: "lit-user",
-      default: 1,
+      default: 0.9,
       type: "range",
       min: 0,
       max: 1.5,

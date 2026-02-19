@@ -624,7 +624,7 @@ export let settings_store = {
     },
     hue: {
         css: 'hue-user',
-        default: 255,
+        default: 298,
         type: 'range',
         min: 0,
         max: 360,
@@ -634,7 +634,7 @@ export let settings_store = {
     },
     sat: {
         css: 'sat-user',
-        default: 1,
+        default: 1.28,
         type: 'range',
         min: 0,
         max: 2,
@@ -655,7 +655,7 @@ export let settings_store = {
     },
     lit: {
         css: 'lit-user',
-        default: 1,
+        default: 0.9,
         type: 'range',
         min: 0,
         max: 1.5,
