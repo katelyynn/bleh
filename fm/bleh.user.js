@@ -44318,7 +44318,9 @@
     let panel;
     let settings_btn;
     if (page.subpage == "shoutbox_shout") {
-      panel = page.structure.main.querySelector(":scope > section");
+      panel = page.structure.main.querySelector(":scope > section:not([data-shout-patched])");
+      if (!panel) return;
+      panel.setAttribute("data-shout-patched", "true");
       let link = window.location.href;
       panel.insertBefore(
         html.node`
@@ -44340,6 +44342,8 @@
       );
     } else if (shout_controls) {
       panel = shout_controls.parentElement;
+      if (shout_controls.hasAttribute("data-shout-patched")) return;
+      shout_controls.setAttribute("data-shout-patched", "true");
       let select_btn = panel.querySelector(".dropdown-menu-clickable-button");
       let header = panel.querySelector("h2");
       if (header) header.parentElement.removeChild(header);
@@ -44379,6 +44383,21 @@
         `,
         panel.firstElementChild
       );
+    } else {
+      const candidate = page.structure.main.querySelector("#shoutbox > h2");
+      if (!candidate) return;
+      candidate.replaceWith(html.node`
+            <div class="top-container">
+                <h2>
+                    <a class="text-colour-link">${tl2(trans.shouts)}</a>
+                </h2>
+                <div class="view-buttons blend blend-v2">
+                    <button class="left-icon blend-v2-btn" data-type="settings" ref=${(el) => settings_btn = el}>
+                        ${tl2(trans.settings)}
+                    </button>
+                </div>
+            </div>
+        `);
     }
     if (!settings_btn) return;
     tippy_esm_default(settings_btn, {
@@ -59867,6 +59886,12 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     subscribe_to_events();
     dialog_extender();
     see_more();
+    if (["artist", "album", "track", "user", "tag", "events"].includes(page.type)) {
+      if (!["user", "tag"].includes(page.type) && page.subpage.startsWith("shoutbox"))
+        shout_header(page.structure.main.querySelector(".section-controls"));
+      else if (page.subpage == "overview" || page.subpage == "image")
+        shout_header(page.structure.main.querySelector(".shoutbox"));
+    }
   }
   function load_page(main_content = null) {
     if (page.state.activity_preview_timer)
@@ -59979,12 +60004,6 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                     ${tl2(trans.starred)}
                 `);
         });
-      }
-      if (["artist", "album", "track", "user", "tag", "events"].includes(page.type)) {
-        if (!["user", "tag"].includes(page.type) && page.subpage.startsWith("shoutbox"))
-          shout_header(page.structure.main.querySelector(".section-controls"));
-        else if (page.subpage == "overview" || page.subpage == "image")
-          shout_header(page.structure.main.querySelector(".shoutbox"));
       }
     }
     seasonal_colour_switch();

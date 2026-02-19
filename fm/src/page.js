@@ -378,6 +378,13 @@ function main_flow() {
     dialog_extender();
 
     see_more();
+
+    if (['artist', 'album', 'track', 'user', 'tag', 'events'].includes(page.type)) {
+        if (!['user', 'tag'].includes(page.type) && page.subpage.startsWith('shoutbox'))
+            shout_header(page.structure.main.querySelector('.section-controls'));
+        else if (page.subpage == 'overview' || page.subpage == 'image')
+            shout_header(page.structure.main.querySelector('.shoutbox'));
+    }
 }
 
 function load_page(main_content = null) {
@@ -550,13 +557,6 @@ function load_page(main_content = null) {
                     ${tl(trans.starred)}
                 `);
             });
-        }
-
-        if (['artist', 'album', 'track', 'user', 'tag', 'events'].includes(page.type)) {
-            if (!['user', 'tag'].includes(page.type) && page.subpage.startsWith('shoutbox'))
-                shout_header(page.structure.main.querySelector('.section-controls'));
-            else if (page.subpage == 'overview' || page.subpage == 'image')
-                shout_header(page.structure.main.querySelector('.shoutbox'));
         }
     }
 

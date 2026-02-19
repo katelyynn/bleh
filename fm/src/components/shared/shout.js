@@ -298,7 +298,10 @@ export function shout_header(shout_controls) {
     let settings_btn;
 
     if (page.subpage == 'shoutbox_shout') {
-        panel = page.structure.main.querySelector(':scope > section');
+        panel = page.structure.main.querySelector(':scope > section:not([data-shout-patched])');
+        if (!panel) return;
+
+        panel.setAttribute('data-shout-patched', 'true');
 
         let link = window.location.href;
 
@@ -322,6 +325,9 @@ export function shout_header(shout_controls) {
         );
     } else if (shout_controls) {
         panel = shout_controls.parentElement;
+
+        if (shout_controls.hasAttribute('data-shout-patched')) return;
+        shout_controls.setAttribute('data-shout-patched', 'true');
 
         let select_btn = panel.querySelector('.dropdown-menu-clickable-button');
 
@@ -370,6 +376,22 @@ export function shout_header(shout_controls) {
         `,
             panel.firstElementChild
         );
+    } else {
+        const candidate = page.structure.main.querySelector('#shoutbox > h2');
+        if (!candidate) return;
+
+        candidate.replaceWith(html.node`
+            <div class="top-container">
+                <h2>
+                    <a class="text-colour-link">${tl(trans.shouts)}</a>
+                </h2>
+                <div class="view-buttons blend blend-v2">
+                    <button class="left-icon blend-v2-btn" data-type="settings" ref=${(el) => (settings_btn = el)}>
+                        ${tl(trans.settings)}
+                    </button>
+                </div>
+            </div>
+        `);
     }
 
     if (!settings_btn) return;
