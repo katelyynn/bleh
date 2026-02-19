@@ -226,15 +226,15 @@ body,
     --separator: linear-gradient(90deg, transparent, var(--separator-base), transparent);
     --separator-base: hsl(var(--b3), 0.9);
 
-    --textarea: hsl(var(--b6), 60%);
-    --textarea-hov: hsl(var(--b6), 90%);
+    --textarea: hsl(var(--b6), 20%);
+    --textarea-hov: hsl(var(--b6), 40%);
 
     --banner-overlay: transparent;
     --banner-mix: none;
 
     --normal-shadow: inset 0 0 0 1px hsl(var(--b2), 40%);
     --input-shadow:
-        inset 0 -1px 0 0 hsl(var(--b3), 70%),
+        inset 0 0 0 1px hsl(var(--b3), 70%),
         inset 0 1px 2px hsl(var(--b7), 0.2);
     --focused-input-shadow:
         inset 0 0 0 1px hsl(var(--h3), 40%),
@@ -320,7 +320,7 @@ body,
         --card-border-base-highlight: hsl(var(--b2), 0.6);
 
         --input-shadow:
-            inset 0 -1px 0 0 hsl(var(--b3)),
+            inset 0 0 0 1px hsl(var(--b3)),
             inset 0 1px 2px 1px hsl(var(--b3), 0.4);
         --focused-input-shadow:
             inset 0 0 0 1px hsl(var(--h3), 40%),
@@ -375,7 +375,7 @@ body,
             inset 0 0 0 1px hsl(var(--b2), 50%);
         --input-shadow:
             inset 0 0 0 1px hsl(var(--b2), 30%),
-            inset 0 1px 3px hsl(var(--b7), 0.1);
+            inset 0 1px 3px hsl(var(--b7), 5%);
         --focused-input-shadow:
             inset 0 0 0 1px hsl(var(--l3-c), 30%),
             var(--input-shadow);

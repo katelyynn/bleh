@@ -47938,7 +47938,7 @@
                         ${group.map((item) => {
         if (item.hide) return html.node``;
         const button2 = html.node`
-                                <button class="btn markdown-action icon" data-type=${item.type} aria-checked="false" type="button" onclick=${() => {
+                                <button class="btn markdown-action chibi icon" data-type=${item.type} aria-checked="false" type="button" onclick=${() => {
           const sel_start = md_editor.selectionStart;
           const sel_end = md_editor.selectionEnd;
           const val = textarea.value();
