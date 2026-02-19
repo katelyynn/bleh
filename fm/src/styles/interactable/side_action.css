@@ -43,7 +43,7 @@
     text-overflow: ellipsis;
     --mask-size: 12px;
     --padding: 6px var(--button-sides) 6px calc(var(--button-sides-icon) + var(--icon-size) + 6px);
-    width: unset;
+    width: unset !important;
     margin: 0 calc(-1 * var(--button-sides)) !important;
     position: relative;
     min-height: var(--side-action-height) !important;

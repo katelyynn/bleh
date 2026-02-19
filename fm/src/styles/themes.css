@@ -239,7 +239,7 @@ body,
     --focused-input-shadow:
         inset 0 0 0 1px hsl(var(--h3), 40%),
         var(--input-shadow);
-    --group-shadow: inset 0 0 0 1px hsl(var(--b2), 0.2);
+    --group-shadow: inset 0 0 0 1px hsl(var(--b2), 30%);
 
     --sidebar-bg: color-mix(in hsl, hsl(var(--b6)) 22%, hsl(var(--b5)));
     --sidebar-border: color-mix(in hsl, hsl(var(--b5)), hsl(var(--b4)) 25%);
@@ -256,7 +256,7 @@ body,
     --menu-item-hov: hsla(var(--b4), 40%);
     --menu-item-atv: hsla(var(--b4), 60%);
 
-    --setting-hover: hsl(var(--b4), 20%);
+    --setting-hover: hsl(var(--b4), 30%);
 
     --setting-group: hsl(var(--b4), 10%);
 
@@ -292,6 +292,8 @@ body,
 
         --separator-base: var(--card-border-base);
 
+        --setting-hover: hsl(var(--b4), 40%);
+
         --card-blur-bg: hsl(var(--b5), var(--solarium-opacity, 50%));
         --card-blur-bg-alt: hsl(var(--b5), var(--solarium-opacity, 35%));
 
@@ -325,7 +327,7 @@ body,
         --focused-input-shadow:
             inset 0 0 0 1px hsl(var(--h3), 40%),
             var(--input-shadow);
-        --group-shadow: inset 0 0 0 1px hsl(var(--b3), 0.7);
+        --group-shadow: inset 0 0 0 1px hsl(var(--b2), 22%);
 
         --sidebar-bg: color-mix(in hsl, hsl(var(--b4)) 22%, hsl(var(--b5)));
         --sidebar-border: color-mix(
@@ -340,9 +342,9 @@ body,
         --card-blur-bg: hsl(var(--b5), var(--solarium-opacity, 30%));
         --card-blur-bg-alt: hsl(var(--b5), var(--solarium-opacity, 40%));
 
-        --setting-hover: hsl(var(--b4), 50%);
+        --setting-hover: hsl(var(--b4), 30%);
 
-        --setting-group: hsl(var(--b4), 30%);
+        --setting-group: hsl(var(--b4), 18%);
 
         --textarea: hsl(var(--b4), 25%);
         --textarea-hov: hsl(var(--b4), 35%);
