@@ -238,7 +238,7 @@
 
     &:not(:hover, :focus-visible, .vote-button--voted, .shout-reply--open) {
         --col: oklch(var(--c3));
-        --mask-colour: oklch(var(--c3), 80%);
+        --mask-colour: oklch(var(--c3) / 80%);
     }
 }
 

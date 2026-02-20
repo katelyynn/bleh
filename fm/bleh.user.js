@@ -49721,9 +49721,7 @@
                 <div class="mini-notifications">
                     ${notifications}
                     <p class="more-link">
-                        <a href="${root}inbox/notifications"
-                            >${tl2(trans.read_more)}</a
-                        >
+                        <a class="see-more" href="${root}inbox/notifications">${tl2(trans.read_more)}</a>
                     </p>
                 </div>
             `
@@ -49738,7 +49736,7 @@
                 <div class="mini-notifications">
                     ${messages}
                     <p class="more-link">
-                        <a href="${root}inbox">${tl2(trans.read_more)}</a>
+                        <a class="see-more" href="${root}inbox">${tl2(trans.read_more)}</a>
                     </p>
                 </div>
             `

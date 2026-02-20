@@ -536,9 +536,7 @@ export function append_nav() {
                 <div class="mini-notifications">
                     ${notifications}
                     <p class="more-link">
-                        <a href="${root}inbox/notifications"
-                            >${tl(trans.read_more)}</a
-                        >
+                        <a class="see-more" href="${root}inbox/notifications">${tl(trans.read_more)}</a>
                     </p>
                 </div>
             `
@@ -556,7 +554,7 @@ export function append_nav() {
                 <div class="mini-notifications">
                     ${messages}
                     <p class="more-link">
-                        <a href="${root}inbox">${tl(trans.read_more)}</a>
+                        <a class="see-more" href="${root}inbox">${tl(trans.read_more)}</a>
                     </p>
                 </div>
             `
