@@ -4,7 +4,7 @@
     align-items: center;
 
     font-size: calc(var(--font-size) - 1px);
-    background: oklch(var(--k4), 40%);
+    background: oklch(var(--k4) / 40%);
     color: oklch(var(--l3-c));
     padding: 0 4px;
     border-radius: var(--item-small-radius);

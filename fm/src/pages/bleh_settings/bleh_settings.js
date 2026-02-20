@@ -17,9 +17,8 @@ import {
     theme_preview
 } from '@/build/page.js';
 import { stored_season } from '@/build/seasonal';
-import { clamp_sat, copy, hex_to_hsl, set_storage, time } from '@/build/tools';
-import { get_trans_key, lang, lang_browser, lang_info, tl, trans } from '@/build/trans';
-import { load_badges } from '@/components/shared/badge';
+import { clamp_lit, clamp_sat, copy, hex_to_oklch, set_storage, time } from '@/build/tools';
+import { get_trans_key, lang_info, tl, trans } from '@/build/trans';
 import { dialog, dialog_rm } from '@/components/dialog/dialog';
 import { markdown } from '@/components/shared/markdown';
 import { notify } from '@/components/dialog/notify';
@@ -1736,13 +1735,13 @@ export function display_colour_presets() {
                                     }))}
                                     <button class="btn primary icon convert" onclick=${() => {
                                         const value = colour.value();
-                                        const hsl = hex_to_hsl(value);
+                                        const hsl = hex_to_oklch(value);
+
+                                        const sat = clamp_sat((hsl.s / 100) * 3);
 
                                         hue_range.set(hsl.h);
-                                        sat_range.set(
-                                            clamp_sat((hsl.s / 100) * 3)
-                                        );
-                                        lit_range.set(hsl.l / 100 + 0.35);
+                                        sat_range.set(sat);
+                                        lit_range.set(clamp_lit(sat, hsl.l / 100 + 0.35));
                                     }}>${tl(trans.convert)}</button>
                                 </div>
                             </div>

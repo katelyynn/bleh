@@ -5,7 +5,7 @@
     line-height: var(--line-height);
     margin-top: var(--card-gap);
     padding: 4px 6px 4px calc(6px + var(--icon-size) + var(--icon-gap)) !important;
-    background: var(--background, oklch(var(--k4), 15%)) !important;
+    background: var(--background, oklch(var(--k4) / 15%)) !important;
     color: oklch(var(--l3-c)) !important;
     font-weight: var(--font-weight-medium) !important;
     text-align: left;

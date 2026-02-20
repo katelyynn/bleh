@@ -32,20 +32,20 @@ export function chart_reflow() {
 }
 
 export function prep_chart_colours() {
-    if (page.state.chart_colours.link_col == 'hsl()')
+    if (page.state.chart_colours.link_col == 'oklch()')
         load_chart_colours();
 }
 
 export function load_chart_colours() {
-    let link_col = `hsl(${getComputedStyle(document.body).getPropertyValue('--l3-c')})`;
+    let link_col = `oklch(${getComputedStyle(document.body).getPropertyValue('--l3-c')})`;
     let link_h_col = getComputedStyle(document.body).getPropertyValue('--h3-s');
-    let link_bg_col = `hsla(${getComputedStyle(document.body).getPropertyValue('--h4')}, 30%)`;
-    let link_bg_col_2 = `hsla(${getComputedStyle(document.body).getPropertyValue('--h4')}, 2%)`;
-    let text_col = `hsl(${getComputedStyle(document.body).getPropertyValue('--c3')})`;
-    let axis_col = `hsla(${getComputedStyle(document.body).getPropertyValue('--b4')}, 40%)`;
-    let text_primary_col = `hsl(${getComputedStyle(document.body).getPropertyValue('--c2')})`;
-    let bg_col = `hsl(${getComputedStyle(document.body).getPropertyValue('--b5')})`;
-    let root_bg_col = `hsla(${getComputedStyle(document.body).getPropertyValue('--b6')}, 92%)`;
+    let link_bg_col = `oklch(${getComputedStyle(document.body).getPropertyValue('--h4')} / 30%)`;
+    let link_bg_col_2 = `oklch(${getComputedStyle(document.body).getPropertyValue('--h4')} / 2%)`;
+    let text_col = `oklch(${getComputedStyle(document.body).getPropertyValue('--c3')})`;
+    let axis_col = `oklch(${getComputedStyle(document.body).getPropertyValue('--b4')} / 40%)`;
+    let text_primary_col = `oklch(${getComputedStyle(document.body).getPropertyValue('--c2')})`;
+    let bg_col = `oklch(${getComputedStyle(document.body).getPropertyValue('--b5')})`;
+    let root_bg_col = `oklch(${getComputedStyle(document.body).getPropertyValue('--b6')} / 92%)`;
     let hue = getComputedStyle(document.body).getPropertyValue('--hue');
     page.state.chart_colours = {
         link_col: link_col,

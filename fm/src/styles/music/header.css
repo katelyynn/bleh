@@ -18,9 +18,9 @@
     }
     .music-link {
         display: flex !important;
-        --bg: oklch(var(--k4), 20%);
-        --bg-hov: oklch(var(--k4), 30%);
-        --bg-atv: oklch(var(--k4), 40%);
+        --bg: oklch(var(--k4) / 20%);
+        --bg-hov: oklch(var(--k4) / 30%);
+        --bg-atv: oklch(var(--k4) / 40%);
         --padding: 5px 10px 5px
             calc(10px + var(--icon-size) + 4px);
         --col: oklch(var(--l3-c));

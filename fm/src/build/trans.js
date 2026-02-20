@@ -7,7 +7,7 @@
 import { handle_error_500 } from '@/page';
 import { log } from '@/build/log';
 import { auth, auth_link, page, setRoot } from '@/build/page';
-import { clamp_lit, clamp_sat, rgb_to_hsl } from '@/build/tools';
+import { clamp_lit, clamp_sat, rgb_to_hsl, rgb_to_oklch } from '@/build/tools';
 import ColorThief from 'color-thief-browser';
 import { Settings } from 'luxon';
 
@@ -10433,7 +10433,7 @@ export function lookup_lang() {
                     let thief = new ColorThief();
                     let colour = thief.getColor(avatar);
 
-                    let hsl = rgb_to_hsl(colour[0], colour[1], colour[2]);
+                    let hsl = rgb_to_oklch(colour[0], colour[1], colour[2]);
 
                     auth.sets.hue = hsl.h;
                     auth.sets.sat = clamp_sat((hsl.s / 100) * 3);

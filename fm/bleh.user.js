@@ -27879,6 +27879,43 @@
       l: l2
     };
   }
+  function hex_to_oklch(hex2) {
+    hex2 = hex2.replace("#", "");
+    if (hex2.length == 3) {
+      hex2 = hex2.split("").map((x) => x + x).join("");
+    }
+    const r = parseInt(hex2.slice(0, 2), 16);
+    const g = parseInt(hex2.slice(2, 4), 16);
+    const b = parseInt(hex2.slice(4, 6), 16);
+    return rgb_to_oklch(r, g, b);
+  }
+  function rgb_to_oklch(r, g, b) {
+    r = r / 255;
+    g = g / 255;
+    b = b / 255;
+    function srgb_to_linear(c2) {
+      if (c2 <= 0.04045) return c2 / 12.92;
+      return Math.pow((c2 + 0.055) / 1.055, 2.4);
+    }
+    r = srgb_to_linear(r);
+    g = srgb_to_linear(g);
+    b = srgb_to_linear(b);
+    const l2 = 0.4122214708 * r + 0.5363325363 * g + 0.0514459929 * b;
+    const m = 0.2119034982 * r + 0.6806995451 * g + 0.1073969566 * b;
+    const s2 = 0.0883024619 * r + 0.2817188376 * g + 0.6299787005 * b;
+    const l_ = Math.cbrt(l2);
+    const m_ = Math.cbrt(m);
+    const s_ = Math.cbrt(s2);
+    const L = 0.2104542553 * l_ + 0.793617785 * m_ - 0.0040720468 * s_;
+    const a = 1.9779984951 * l_ - 2.428592205 * m_ + 0.4505937099 * s_;
+    const b2 = 0.0259040371 * l_ + 0.7827717662 * m_ - 0.808675766 * s_;
+    const c = Math.sqrt(a * a + b2 * b2);
+    let h = Math.atan2(b2, a) * (180 / Math.PI);
+    if (h < 0) h += 360;
+    const max_chroma = 0.4;
+    const sat = Math.min(c / max_chroma, 1);
+    return { l: L * 100 * 0.8, s: sat * 100, h: Math.round(h) };
+  }
   function rgb_to_hsl(r, g, b) {
     let hex2 = rgb_to_hex(r, g, b);
     return hex_to_hsl(hex2);
@@ -27891,7 +27928,7 @@
     return hex2.length == 1 ? "0" + hex2 : hex2;
   }
   function clamp_sat(sat) {
-    if (sat > 1.5) return 1.5;
+    if (sat > 2) return 2;
     return round_two(sat);
   }
   function clamp_lit(sat, lit) {
@@ -28689,18 +28726,6 @@
     }
   ];
 
-  // src/build/sponsor.js
-  var sponsor_list = {
-    latest: 0,
-    sponsors: [],
-    sponsors_one_time: [],
-    sponsor_count_remove: 0,
-    sponsor_account: "",
-    sponsor_link: "",
-    special: [],
-    badges: {}
-  };
-
   // src/components/dialog/dialog.ts
   function load_dialogs() {
     const dialogs2 = html.node`
@@ -28841,6 +28866,18 @@
       }
     }
   }
+
+  // src/build/sponsor.js
+  var sponsor_list = {
+    latest: 0,
+    sponsors: [],
+    sponsors_one_time: [],
+    sponsor_count_remove: 0,
+    sponsor_account: "",
+    sponsor_link: "",
+    special: [],
+    badges: {}
+  };
 
   // src/components/settings/sku.js
   function ff(flag) {
@@ -41201,19 +41238,19 @@
     }
   }
   function prep_chart_colours() {
-    if (page.state.chart_colours.link_col == "hsl()")
+    if (page.state.chart_colours.link_col == "oklch()")
       load_chart_colours();
   }
   function load_chart_colours() {
-    let link_col = `hsl(${getComputedStyle(document.body).getPropertyValue("--l3-c")})`;
+    let link_col = `oklch(${getComputedStyle(document.body).getPropertyValue("--l3-c")})`;
     let link_h_col = getComputedStyle(document.body).getPropertyValue("--h3-s");
-    let link_bg_col = `hsla(${getComputedStyle(document.body).getPropertyValue("--h4")}, 30%)`;
-    let link_bg_col_2 = `hsla(${getComputedStyle(document.body).getPropertyValue("--h4")}, 2%)`;
-    let text_col = `hsl(${getComputedStyle(document.body).getPropertyValue("--c3")})`;
-    let axis_col = `hsla(${getComputedStyle(document.body).getPropertyValue("--b4")}, 40%)`;
-    let text_primary_col = `hsl(${getComputedStyle(document.body).getPropertyValue("--c2")})`;
-    let bg_col = `hsl(${getComputedStyle(document.body).getPropertyValue("--b5")})`;
-    let root_bg_col = `hsla(${getComputedStyle(document.body).getPropertyValue("--b6")}, 92%)`;
+    let link_bg_col = `oklch(${getComputedStyle(document.body).getPropertyValue("--h4")} / 30%)`;
+    let link_bg_col_2 = `oklch(${getComputedStyle(document.body).getPropertyValue("--h4")} / 2%)`;
+    let text_col = `oklch(${getComputedStyle(document.body).getPropertyValue("--c3")})`;
+    let axis_col = `oklch(${getComputedStyle(document.body).getPropertyValue("--b4")} / 40%)`;
+    let text_primary_col = `oklch(${getComputedStyle(document.body).getPropertyValue("--c2")})`;
+    let bg_col = `oklch(${getComputedStyle(document.body).getPropertyValue("--b5")})`;
+    let root_bg_col = `oklch(${getComputedStyle(document.body).getPropertyValue("--b6")} / 92%)`;
     let hue2 = getComputedStyle(document.body).getPropertyValue("--hue");
     page.state.chart_colours = {
       link_col,
@@ -44424,6 +44461,7 @@
       trigger: "click",
       appendTo: document.body
     });
+    if (!panel) return;
     const cant_shout = panel.querySelector(".shouting-unavailable");
     if (cant_shout) {
       render(
@@ -52597,12 +52635,11 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           })}
                                     <button class="btn primary icon convert" onclick=${() => {
             const value = colour3.value();
-            const hsl = hex_to_hsl(value);
+            const hsl = hex_to_oklch(value);
+            const sat = clamp_sat(hsl.s / 100 * 3);
             hue_range.set(hsl.h);
-            sat_range.set(
-              clamp_sat(hsl.s / 100 * 3)
-            );
-            lit_range.set(hsl.l / 100 + 0.35);
+            sat_range.set(sat);
+            lit_range.set(clamp_lit(sat, hsl.l / 100 + 0.35));
           }}>${tl2(trans.convert)}</button>
                                 </div>
                             </div>
@@ -54208,7 +54245,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       let header_inner = album_header.querySelector(".header-new-inner");
       try {
         let bg = header_inner.getAttribute("style").replace("background: #", "");
-        let hsl = hex_to_hsl(bg);
+        let hsl = hex_to_oklch(bg);
         let sat = clamp_sat(hsl.s / 100 * 3);
         let lit = clamp_lit(sat, hsl.l / 100 + 0.35);
         document.body.style.setProperty("--hue-album", hsl.h);
@@ -56489,7 +56526,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           })}
                                                 <button class="btn primary icon convert" onclick=${() => {
             const value2 = colour.value();
-            const hsl = hex_to_hsl(value2);
+            const hsl = hex_to_oklch(value2);
             hue_range.set(hsl.h);
             sat_range.set(
               clamp_sat(hsl.s / 100 * 3)
@@ -59598,6 +59635,20 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       })}
                 <div class="sep" />
                 <div class="markdown-body" ref=${(el) => md_body_default = el} />
+            </section>
+            <section class="flexy">
+                <h2>Badges</h2>
+                <div class="button-group">
+                    ${sponsor_list && sponsor_list.badges ? Object.entries(sponsor_list.badges).map(([user, contents]) => {
+        const badges = load_badges(user);
+        return html.node`
+                            ${badges.map((badge) => {
+          if (badge.type == "sponsor") return html.node``;
+          return create_badge(badge, false, true);
+        })}
+                        `;
+      }) : ""}
+                </div>
             </section>
         `
     );
@@ -70682,7 +70733,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
           avatar2.addEventListener("load", () => {
             let thief = new import_color_thief_browser3.default();
             let colour2 = thief.getColor(avatar2);
-            let hsl = rgb_to_hsl(colour2[0], colour2[1], colour2[2]);
+            let hsl = rgb_to_oklch(colour2[0], colour2[1], colour2[2]);
             auth.sets.hue = hsl.h;
             auth.sets.sat = clamp_sat(hsl.s / 100 * 3);
             auth.sets.lit = clamp_lit(auth.sets.sat, hsl.l / 100 + 0.35);

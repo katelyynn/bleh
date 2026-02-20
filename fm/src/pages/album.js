@@ -12,7 +12,7 @@ import {
     clamp_sat,
     clean_number,
     desanitise,
-    hex_to_hsl,
+    hex_to_oklch,
     sanitise
 } from '@/build/tools';
 import { tl, trans } from '@/build/trans';
@@ -226,7 +226,7 @@ export function bleh_albums() {
             let bg = header_inner
                 .getAttribute('style')
                 .replace('background: #', '');
-            let hsl = hex_to_hsl(bg);
+            let hsl = hex_to_oklch(bg);
 
             let sat = clamp_sat((hsl.s / 100) * 3);
             let lit = clamp_lit(sat, hsl.l / 100 + 0.35);

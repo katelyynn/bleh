@@ -15,6 +15,8 @@ import { status } from '@/components/dialog/status.js';
 import { dialog } from '@/components/dialog/dialog';
 import { setting } from '@/components/settings/settings';
 import { markdown, markdown_field } from '@/components/shared/markdown';
+import { sponsor_list } from '@/build/sponsor';
+import { create_badge, load_badges } from '@/components/shared/badge';
 
 export function mualani() {
     page.structure.container = document.body.querySelector('.page-content');
@@ -175,6 +177,22 @@ export function mualani() {
                 })}
                 <div class="sep" />
                 <div class="markdown-body" ref=${el => md_body_default = el} />
+            </section>
+            <section class="flexy">
+                <h2>Badges</h2>
+                <div class="button-group">
+                    ${sponsor_list && sponsor_list.badges ? Object.entries(sponsor_list.badges).map(([user, contents]) => {
+                        const badges = load_badges(user);
+
+                        return html.node`
+                            ${badges.map(badge => {
+                                if (badge.type == 'sponsor') return html.node``;
+
+                                return create_badge(badge, false, true);
+                            })}
+                        `;
+                    }) : ''}
+                </div>
             </section>
         `
     );

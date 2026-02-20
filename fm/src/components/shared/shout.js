@@ -414,6 +414,8 @@ export function shout_header(shout_controls) {
         appendTo: document.body
     });
 
+    if (!panel) return;
+
     const cant_shout = panel.querySelector('.shouting-unavailable');
     if (cant_shout) {
         render(

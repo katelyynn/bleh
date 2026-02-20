@@ -27,7 +27,7 @@
 
         overflow: hidden;
 
-        background: oklch(var(--b5), var(--solarium-opacity, var(--menu-opacity)));
+        background: oklch(var(--b5) / var(--solarium-opacity, var(--menu-opacity)));
         box-shadow: var(--card-shadow);
         padding: 12px var(--button-sides);
         border: 1px solid var(--card-border-base);
@@ -158,7 +158,7 @@
 
             .fill {
                 width: 100%;
-                background-color: oklch(var(--l3-c), 60%);
+                background-color: oklch(var(--l3-c) / 60%);
                 height: 3px;
 
                 border-radius: var(--button-radius);

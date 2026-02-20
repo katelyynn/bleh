@@ -71,25 +71,25 @@ body {
 
     --brand: "bleh";
 
-    --hue-pos: 120;
-    --sat-pos: 1.05;
-    --lit-pos: 1.025;
+    --hue-pos: 145;
+    --sat-pos: 1.38;
+    --lit-pos: 0.95;
 
-    --hue-neg: 0;
-    --sat-neg: 1.1;
-    --lit-neg: 0.9;
+    --hue-neg: 23;
+    --sat-neg: 1.65;
+    --lit-neg: 0.76;
 
-    --hue-fav: 30;
-    --sat-fav: 1.5;
-    --lit-fav: 1;
+    --hue-fav: 54;
+    --sat-fav: 1.21;
+    --lit-fav: 0.87;
 
-    --hue-orange: 33;
+    --hue-orange: 37;
     --sat-orange: 1.4;
-    --lit-orange: 0.98;
+    --lit-orange: 0.9;
 
-    --hue-pro: 174;
-    --sat-pro: 1;
-    --lit-pro: 1;
+    --hue-pro: 165;
+    --sat-pro: 1.08;
+    --lit-pro: 0.91;
 
     --hue-brand-yt: -2;
     --hue-brand-sp: 143;
@@ -100,9 +100,9 @@ body {
     --hue-brand-ig: 300;
     --hue-brand-twt: 202;
 
-    --hue-valentine: 353;
-    --sat-valentine: 1.32;
-    --sat-valentine: 0.97;
+    --hue-valentine: 8;
+    --sat-valentine: 1.73;
+    --sat-valentine: 0.9;
 
     --trans-short: 0.2s;
     --trans: 0.2s;
@@ -534,9 +534,9 @@ u,
     --sat: calc(var(--sat-raw) * var(--sat-multiply));
     --lit: calc(var(--lit-raw) * var(--lit-multiply));
 
-    --c1: 1 calc(clamp(min(0), var(--sat), max(1)) * 0.3) var(--hue);
-    --c2: 0.87 calc(clamp(min(0), var(--sat), max(1)) * 0.17) var(--hue);
-    --c3: 0.6 calc(clamp(min(0), var(--sat), max(1)) * 0.17) var(--hue);
+    --c1: 1 calc(clamp(min(0), var(--sat), max(1)) * 0.1) var(--hue);
+    --c2: 0.87 calc(clamp(min(0), var(--sat), max(1)) * 0.07) var(--hue);
+    --c3: 0.6 calc(clamp(min(0), var(--sat), max(1)) * 0.07) var(--hue);
     --ov-c1: var(--c1);
 
     --l2: calc(var(--lit) * 0.83) calc(var(--sat) * 0.5) var(--hue);
@@ -558,18 +558,11 @@ u,
     --h4: var(--l4-c);
 
     --f4: calc(var(--lit) * 0.42) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue);
-
     --k4: var(--f4);
-    --g4:
-        var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 60%),
-        calc(clamp(min(0.5), var(--lit), max(2)) * 15%);
+    --g4: calc(var(--lit) * 0.15) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue);
 
-    --s3:
-        var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 50%),
-        calc(clamp(min(0.5), var(--lit), max(1)) * 63%);
-    --s4:
-        var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 55%),
-        calc(clamp(min(0.5), var(--lit), max(1.1)) * 56%);
+    --s3: calc(var(--lit) * 0.58) calc(clamp(min(0), var(--sat), max(2)) * 0.5) var(--hue);
+    --s4: calc(var(--lit) * 0.45) calc(clamp(min(0), var(--sat), max(2)) * 0.55) var(--hue);
 
     --p3: var(--s3);
 
@@ -620,9 +613,9 @@ u,
 
     .theme-preview[data-bleh--theme="oled"],
     [data-bleh--theme="oled"] &:not(.theme-preview) {
-        --c1: 0.96 calc(clamp(min(0), var(--sat), max(1)) * 0.3) var(--hue);
-        --c2: 0.87 calc(clamp(min(0), var(--sat), max(1)) * 0.17) var(--hue);
-        --c3: 0.6 calc(clamp(min(0), var(--sat), max(1)) * 0.17) var(--hue);
+        --c1: 0.96 calc(clamp(min(0), var(--sat), max(1)) * 0.1) var(--hue);
+        --c2: 0.87 calc(clamp(min(0), var(--sat), max(1)) * 0.07) var(--hue);
+        --c3: 0.6 calc(clamp(min(0), var(--sat), max(1)) * 0.07) var(--hue);
 
         --l3: calc(var(--lit) * 0.75) calc(var(--sat) * 0.5) var(--hue);
         --l4: calc(var(--lit) * 0.45) calc(var(--sat) * 0.6) var(--hue);
@@ -643,13 +636,8 @@ u,
         --h4: calc(var(--lit) * 0.55) calc(clamp(min(0), var(--sat), max(2)) * 0.65) var(--hue);
 
         --f4: calc(var(--lit) * 0.4) calc(clamp(min(0), var(--sat), max(2)) * 0.32) var(--hue);
-
-        --k4:
-            var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 32%),
-            calc(clamp(min(0.8), var(--lit), max(2)) * 45%);
-        --g4:
-            var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 60%),
-            calc(clamp(min(0.5), var(--lit), max(2)) * 10%);
+        --k4: calc(var(--lit) * 0.45) calc(clamp(min(0), var(--sat), max(2)) * 0.32) var(--hue);
+        --g4: calc(var(--lit) * 0.1) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue);
 
         --shout-vote-indicator: linear-gradient(
             90deg,

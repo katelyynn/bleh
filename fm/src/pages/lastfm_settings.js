@@ -21,9 +21,9 @@ import { html, render } from 'lighterhtml';
 import tippy from 'tippy.js';
 import Cropper from 'cropperjs';
 import { save_setting, setting } from '@/components/settings/settings';
-import { settings, settings_store } from '@/build/config';
+import { settings } from '@/build/config';
 import { input } from '@/components/settings/input';
-import { clamp_sat, hex_to_hsl } from '@/build/tools';
+import { clamp_sat, hex_to_oklch } from '@/build/tools';
 import { log } from '@/build/log';
 import { toggle } from '@/components/settings/toggle';
 import { status } from '@/components/dialog/status';
@@ -914,7 +914,7 @@ function patch_settings_profile_panel(token, update_picture) {
                                                 }))}
                                                 <button class="btn primary icon convert" onclick=${() => {
                                                     const value = colour.value();
-                                                    const hsl = hex_to_hsl(value);
+                                                    const hsl = hex_to_oklch(value);
 
                                                     hue_range.set(hsl.h);
                                                     sat_range.set(
