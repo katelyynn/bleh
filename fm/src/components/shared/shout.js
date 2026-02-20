@@ -305,8 +305,7 @@ export function shout_header(shout_controls) {
 
         let link = window.location.href;
 
-        panel.insertBefore(
-            html.node`
+        panel.insertBefore(html.node`
             <div class="top-container">
                 <h2>
                     <a class="text-colour-link" href=${link}>${tl(trans.shouts)}</a>
@@ -320,18 +319,17 @@ export function shout_header(shout_controls) {
                     </button>
                 </div>
             </div>
-        `,
-            panel.firstElementChild
-        );
+        `, panel.firstElementChild);
     } else if (shout_controls) {
         panel = shout_controls.parentElement;
 
-        if (shout_controls.hasAttribute('data-shout-patched')) return;
-        shout_controls.setAttribute('data-shout-patched', 'true');
+        if (panel.hasAttribute('data-shout-patched')) return;
+        panel.setAttribute('data-shout-patched', 'true');
 
         let select_btn = panel.querySelector('.dropdown-menu-clickable-button');
 
-        let header = panel.querySelector('h2');
+        let header = panel.querySelector(':scope > h2');
+        if (!header) return;
         if (header) header.parentElement.removeChild(header);
 
         let link = window.location.href;
@@ -341,15 +339,12 @@ export function shout_header(shout_controls) {
 
         if (!page.subpage.startsWith('shoutbox')) link += `/${shoutbox_link}`;
 
-        panel.insertBefore(
-            html.node`
+        panel.insertBefore(html.node`
             <div class="top-container">
                 <h2>
                     <a class="text-colour-link" href=${link}>${tl(trans.shouts)}</a>
                 </h2>
-                ${
-                    select_btn ?
-                        html.node`
+                ${select_btn ? html.node`
                     <div class="accompany view-buttons blend blend-v2">
                         ${() => {
                             select_btn.classList.add(
@@ -364,18 +359,14 @@ export function shout_header(shout_controls) {
                             return shout_controls;
                         }}
                     </div>
-                `
-                    :   ''
-                }
+                ` : ''}
                 <div class="view-buttons blend blend-v2">
                     <button class="left-icon blend-v2-btn" data-type="settings" ref=${(el) => (settings_btn = el)}>
                         ${tl(trans.settings)}
                     </button>
                 </div>
             </div>
-        `,
-            panel.firstElementChild
-        );
+        `, panel.firstElementChild);
     } else {
         const candidate = page.structure.main.querySelector('#shoutbox > h2');
         if (!candidate) return;
@@ -386,7 +377,7 @@ export function shout_header(shout_controls) {
                     <a class="text-colour-link">${tl(trans.shouts)}</a>
                 </h2>
                 <div class="view-buttons blend blend-v2">
-                    <button class="left-icon blend-v2-btn" data-type="settings" ref=${(el) => (settings_btn = el)}>
+                    <button class="left-icon blend-v2-btn" data-type="settings" ref=${el => settings_btn = el}>
                         ${tl(trans.settings)}
                     </button>
                 </div>
@@ -496,7 +487,7 @@ export function join_the_conversation(blocked) {
     //
 
     const shoutbox = html.node`
-        <section class="shoutbox-preview" id="shoutbox">
+        <section class="shoutbox-preview lazy-shoutbox shoutbox--with-header" id="shoutbox">
             <h2>${tl(trans.shouts)}</h2>
             <div class="loading-data-container">
                 <div class="loading-data-text">${tl(trans.loading_conversations)}</div>
@@ -521,9 +512,8 @@ export function join_the_conversation(blocked) {
                 if (!new_shoutbox) throw new Error();
 
                 if (use_partial) {
-                    render(shoutbox, html`
-                        ${new_shoutbox}
-                    `);
+                    render(shoutbox, html``);
+                    shoutbox.appendChild(new_shoutbox);
                 } else {
                     shoutbox.replaceWith(new_shoutbox);
                     shout_header(new_shoutbox.querySelector('.section-controls'));

@@ -44366,8 +44366,7 @@
       if (!panel) return;
       panel.setAttribute("data-shout-patched", "true");
       let link = window.location.href;
-      panel.insertBefore(
-        html.node`
+      panel.insertBefore(html.node`
             <div class="top-container">
                 <h2>
                     <a class="text-colour-link" href=${link}>${tl2(trans.shouts)}</a>
@@ -44381,23 +44380,21 @@
                     </button>
                 </div>
             </div>
-        `,
-        panel.firstElementChild
-      );
+        `, panel.firstElementChild);
     } else if (shout_controls) {
       panel = shout_controls.parentElement;
-      if (shout_controls.hasAttribute("data-shout-patched")) return;
-      shout_controls.setAttribute("data-shout-patched", "true");
+      if (panel.hasAttribute("data-shout-patched")) return;
+      panel.setAttribute("data-shout-patched", "true");
       let select_btn = panel.querySelector(".dropdown-menu-clickable-button");
-      let header = panel.querySelector("h2");
+      let header = panel.querySelector(":scope > h2");
+      if (!header) return;
       if (header) header.parentElement.removeChild(header);
       let link = window.location.href;
       let shoutbox_link = "+shoutbox";
       if (page.type == "user" || page.type == "event")
         shoutbox_link = "shoutbox";
       if (!page.subpage.startsWith("shoutbox")) link += `/${shoutbox_link}`;
-      panel.insertBefore(
-        html.node`
+      panel.insertBefore(html.node`
             <div class="top-container">
                 <h2>
                     <a class="text-colour-link" href=${link}>${tl2(trans.shouts)}</a>
@@ -44405,17 +44402,17 @@
                 ${select_btn ? html.node`
                     <div class="accompany view-buttons blend blend-v2">
                         ${() => {
-          select_btn.classList.add(
-            "select-button",
-            "link-select",
-            "blend-v2-btn"
-          );
-          select_btn.classList.remove(
-            "section-control",
-            "dropdown-menu-clickable-button"
-          );
-          return shout_controls;
-        }}
+        select_btn.classList.add(
+          "select-button",
+          "link-select",
+          "blend-v2-btn"
+        );
+        select_btn.classList.remove(
+          "section-control",
+          "dropdown-menu-clickable-button"
+        );
+        return shout_controls;
+      }}
                     </div>
                 ` : ""}
                 <div class="view-buttons blend blend-v2">
@@ -44424,9 +44421,7 @@
                     </button>
                 </div>
             </div>
-        `,
-        panel.firstElementChild
-      );
+        `, panel.firstElementChild);
     } else {
       const candidate = page.structure.main.querySelector("#shoutbox > h2");
       if (!candidate) return;
@@ -44521,7 +44516,7 @@
     }
     const url = `${window.location.pathname}/+${partial}shoutbox${window.location.search}`;
     const shoutbox = html.node`
-        <section class="shoutbox-preview" id="shoutbox">
+        <section class="shoutbox-preview lazy-shoutbox shoutbox--with-header" id="shoutbox">
             <h2>${tl2(trans.shouts)}</h2>
             <div class="loading-data-container">
                 <div class="loading-data-text">${tl2(trans.loading_conversations)}</div>
@@ -44539,9 +44534,8 @@
         const new_shoutbox = doc.querySelector(use_partial ? ".shoutbox" : ".col-main > section");
         if (!new_shoutbox) throw new Error();
         if (use_partial) {
-          render(shoutbox, html`
-                        ${new_shoutbox}
-                    `);
+          render(shoutbox, html``);
+          shoutbox.appendChild(new_shoutbox);
         } else {
           shoutbox.replaceWith(new_shoutbox);
           shout_header(new_shoutbox.querySelector(".section-controls"));
