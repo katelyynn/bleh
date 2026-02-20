@@ -18812,7 +18812,7 @@ span.bleh-icon {
   transition-delay: 0s !important;
   --bg: var(--badge);
   --bg-hov: var(--badge-hov);
-  box-shadow: 0 3px 15px 1px oklch(var(--h4) / 20%), 0px 0px 10px 0px oklch(var(--l3-c), 8%) inset !important;
+  box-shadow: 0 3px 15px 1px oklch(var(--h4) / 10%), 0 0 6px 1px oklch(var(--l3-c) / 12%) inset !important;
   background-color: var(--bg) !important;
   border-radius: var(--item-big-radius) !important;
   cursor: pointer;
