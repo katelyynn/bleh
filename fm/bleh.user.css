@@ -121,6 +121,9 @@ body {
   --hue-pro: 165;
   --sat-pro: 1.08;
   --lit-pro: 0.91;
+  --hue-sponsor: 6;
+  --sat-sponsor: 1.56;
+  --lit-sponsor: 0.87;
   --hue-brand-yt: -2;
   --hue-brand-sp: 143;
   --hue-brand-sc: 10;
@@ -18981,15 +18984,15 @@ span.bleh-icon {
 .user-status--bleh-contributor,
 .label.user-status--bleh-contributor {
   --mask: var(--icon-contributor);
-  --hue-over: 24;
-  --sat-over: 1.1;
-  --lit-over: 1.2;
+  --hue-over: 52;
+  --sat-over: 1.22;
+  --lit-over: 0.98;
 }
 .user-status--bleh-translation,
 .label.user-status--bleh-translation {
   --mask: var(--icon-translation);
-  --hue-over: 143;
-  --sat-over: 1.15;
+  --hue-over: 124;
+  --sat-over: 1.34;
   --lit-over: 0.94;
 }
 .user-status--bleh-missing {
@@ -18999,9 +19002,9 @@ span.bleh-icon {
 }
 .user-status--bleh-sponsor {
   --mask: var(--icon-16-sponsor);
-  --hue-over: 336;
-  --sat-over: 1.4;
-  --lit-over: 1.1;
+  --hue-over: var(--hue-sponsor);
+  --sat-over: var(--sat-sponsor);
+  --lit-over: var(--lit-sponsor);
 }
 .user-status--bleh-cosmic {
   --mask: var(--icon-cosmic);
@@ -21804,9 +21807,9 @@ span.bleh-icon {
     cursor: default;
     &.colourful {
       color: oklch(var(--l3-c));
-      --hue-over: 336;
-      --sat-over: 1.4;
-      --lit-over: 1.1;
+      --hue-over: var(--hue-sponsor);
+      --sat-over: var(--sat-sponsor);
+      --lit-over: var(--lit-sponsor);
     }
   }
   & > p {
@@ -21823,18 +21826,18 @@ span.bleh-icon {
 }
 .sponsor {
   position: relative;
-  --hue-over: 336;
-  --sat-over: 1.4;
-  --lit-over: 1.1;
+  --hue-over: var(--hue-sponsor);
+  --sat-over: var(--sat-sponsor);
+  --lit-over: var(--lit-sponsor);
   &:before,
   &:after {
     --mask: var(--icon-16-sponsor);
   }
 }
 .sponsor-related {
-  --hue-over: 336;
-  --sat-over: 1.4;
-  --lit-over: 1.1;
+  --hue-over: var(--hue-sponsor);
+  --sat-over: var(--sat-sponsor);
+  --lit-over: var(--lit-sponsor);
 }
 .modal-vertical-inner {
   display: flex;

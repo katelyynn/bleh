@@ -26,9 +26,9 @@
 
         &.colourful {
             color: oklch(var(--l3-c));
-            --hue-over: 336;
-            --sat-over: 1.4;
-            --lit-over: 1.1;
+            --hue-over: var(--hue-sponsor);
+            --sat-over: var(--sat-sponsor);
+            --lit-over: var(--lit-sponsor);
         }
     }
 
@@ -47,9 +47,9 @@
 }
 .sponsor {
     position: relative;
-    --hue-over: 336;
-    --sat-over: 1.4;
-    --lit-over: 1.1;
+    --hue-over: var(--hue-sponsor);
+    --sat-over: var(--sat-sponsor);
+    --lit-over: var(--lit-sponsor);
 
     &:before,
     &:after {
@@ -57,9 +57,9 @@
     }
 }
 .sponsor-related {
-    --hue-over: 336;
-    --sat-over: 1.4;
-    --lit-over: 1.1;
+    --hue-over: var(--hue-sponsor);
+    --sat-over: var(--sat-sponsor);
+    --lit-over: var(--lit-sponsor);
 }
 
 .modal-vertical-inner {
