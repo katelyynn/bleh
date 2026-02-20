@@ -11,11 +11,10 @@
 @import './privacy.css';
 
 .inner-preview {
-    background: oklch(var(--b6), 70%);
+    background: oklch(var(--b6) / 70%);
     padding: var(--card-gap);
     border-radius: var(--item-med-radius);
     border: 1px solid transparent;
-    box-shadow: var(--input-shadow);
     overflow: hidden;
 
     &.gap-top {
