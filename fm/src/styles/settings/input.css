@@ -17,7 +17,7 @@
     /* ^ on firefox (at least) transparent backgrounds get
     overlayed over white, which is not readable at all */
     --col: oklch(var(--c2));
-    --mask-colour: color-mix(in hsl, oklch(var(--c2)), oklch(var(--c3)) 50%);
+    --mask-colour: color-mix(in oklch, oklch(var(--c2)), oklch(var(--c3)) 50%);
     background-color: var(--bg) !important;
     color: var(--col) !important;
     padding: var(
@@ -136,7 +136,7 @@
         pointer-events: none;
     }
 
-    --mask-colour: color-mix(in hsl, oklch(var(--c2)), oklch(var(--c3)) 50%);
+    --mask-colour: color-mix(in oklch, oklch(var(--c2)), oklch(var(--c3)) 50%);
 
     &:has(> .modern-input[disabled]) {
         --mask-colour: oklch(var(--c3));

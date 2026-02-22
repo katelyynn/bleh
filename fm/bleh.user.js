@@ -44225,7 +44225,9 @@
         if (!voted_button || !unvote_button) return;
         const initial_is_voted = voted_button.getAttribute("data-ajax-form-sets-state") == "modified-state";
         indicator.setAttribute("aria-checked", initial_is_voted.toString());
+        voted_button.classList.add("colourful");
         voted_button.addEventListener("click", (e) => vote_button());
+        unvote_button.classList.add("colourful");
         unvote_button.addEventListener("click", (e) => vote_button());
         const menu = shout.querySelector(".shout-more-actions-menu");
         const buttons = menu.querySelectorAll("button");

@@ -132,7 +132,7 @@
     --shadow: rgba(0, 0, 0, 0.2);
 
     &.grid-items-item-has-colour {
-        --shadow: color-mix(in hsl, oklch(var(--h4)) 60%, black 70%);
+        --shadow: color-mix(in oklch, oklch(var(--h4)) 60%, black 70%);
     }
 
     transition-property: transform;
@@ -219,7 +219,7 @@
 
     &.grid-items-cover-default {
         & > img {
-            background-color: oklch(var(--c3), 50%);
+            background-color: oklch(var(--c3) / 50%);
         }
     }
 
@@ -256,7 +256,7 @@
 
         &[style] {
             background: color-mix(
-                in hsl,
+                in oklch,
                 oklch(var(--h4)) 60%,
                 black 70%
             ) !important;
@@ -423,7 +423,7 @@
 
         &[data-bleh--scrobble-milestone] {
             color: color-mix(
-                in hsl,
+                in oklch,
                 oklch(var(--l3-c)),
                 oklch(var(--l4-c)) 30%
             );

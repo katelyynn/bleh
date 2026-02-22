@@ -222,7 +222,7 @@
 
             & > .date {
                 width: 90px;
-                color: oklch(var(--c3), 80%);
+                color: oklch(var(--c3) / 80%);
             }
 
             & > p {
@@ -501,7 +501,7 @@
         max-height: 32px;
         margin-right: -5px;
         --show-icon: none;
-        color: color-mix(in hsl, oklch(var(--c2)), oklch(var(--c3)) 50%);
+        color: color-mix(in oklch, oklch(var(--c2)), oklch(var(--c3)) 50%);
     }
 
     .extensions {
@@ -512,7 +512,7 @@
             display: flex;
             align-items: center;
             height: 28px;
-            color: color-mix(in hsl, oklch(var(--c2)), oklch(var(--c3)) 50%);
+            color: color-mix(in oklch, oklch(var(--c2)), oklch(var(--c3)) 50%);
             --icon: var(--icon-16-extension);
         }
     }
@@ -1134,10 +1134,10 @@
             var(--cards-overlay-image-subtlest, none), oklch(var(--h3)) !important;
         --bg-hov:
             var(--cards-overlay-image-subtlest, none),
-            color-mix(in hsl, oklch(var(--h4)), oklch(var(--h3)) 80%) !important;
+            color-mix(in oklch, oklch(var(--h4)), oklch(var(--h3)) 80%) !important;
         --bg-atv:
             var(--cards-overlay-image-subtlest, none),
-            color-mix(in hsl, oklch(var(--h4)), oklch(var(--h3)) 60%) !important;
+            color-mix(in oklch, oklch(var(--h4)), oklch(var(--h3)) 60%) !important;
         --col: oklch(var(--b7));
         --shadow:
             var(--primary-shadow), 0 3px 12px oklch(var(--h4) / 25%),

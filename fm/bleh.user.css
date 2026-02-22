@@ -321,6 +321,8 @@ body,
     --textarea-hov: oklch(var(--b4) / 0.35);
     --side-action-hov: oklch(var(--b4) / 0.8);
     --side-action-atv: oklch(var(--b4) / 1);
+    --menu-item-hov: oklch(var(--b2) / 20%);
+    --menu-item-atv: oklch(var(--b2) / 40%);
   }
   .theme-preview[data-bleh--theme=light],
   [data-bleh--theme=light] &:not(.theme-preview) {
@@ -483,8 +485,8 @@ u,
   --f4: calc(var(--lit) * 0.42) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue);
   --k4: var(--f4);
   --g4: calc(var(--lit) * 0.15) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue);
-  --s3: calc(var(--lit) * 0.58) calc(clamp(min(0), var(--sat), max(2)) * 0.5) var(--hue);
-  --s4: calc(var(--lit) * 0.45) calc(clamp(min(0), var(--sat), max(2)) * 0.55) var(--hue);
+  --s3: calc(var(--lit) * 0.6) calc(clamp(min(0), var(--sat), max(2)) * 0.55) var(--hue);
+  --s4: calc(var(--lit) * 0.5) calc(clamp(min(0), var(--sat), max(2)) * 0.55) var(--hue);
   --p3: var(--s3);
   --l2-c-theme-switch: var(--l2-c);
   --l3-c-theme-switch: var(--l3-c);
@@ -1697,10 +1699,10 @@ h2.text-18,
 .tab-container > li > button,
 .user-list-follower-btn {
   --bg: var(--cards-overlay-image-subtlest, none), oklch(var(--b3));
-  --bg-hov: var(--cards-overlay-image-subtlest, none), color-mix(in hsl, oklch(var(--b6)), oklch(var(--b3)) 80%);
-  --bg-atv: var(--cards-overlay-image-subtlest, none), color-mix(in hsl, oklch(var(--b6)), oklch(var(--b3)) 60%);
+  --bg-hov: var(--cards-overlay-image-subtlest, none), color-mix(in oklch, oklch(var(--b6)), oklch(var(--b3)) 90%);
+  --bg-atv: var(--cards-overlay-image-subtlest, none), color-mix(in oklch, oklch(var(--b6)), oklch(var(--b3)) 80%);
   --col: oklch(var(--c2));
-  --mask-colour: color-mix(in hsl, oklch(var(--c2)), oklch(var(--c3)) 50%);
+  --mask-colour: color-mix(in oklch, oklch(var(--c2)), oklch(var(--c3)) 50%);
   --shadow: var(--normal-shadow), var(--interact-shadow);
   --shadow-hov: var(--active-shadow);
   --btn-top: var(--button-verts);
@@ -1801,8 +1803,8 @@ h2.text-18,
   }
   &:is(.danger, .btn-primary:is([type=submit], .js-close), .inbox-delete-button:not([disabled]), #manage_data .btn-primary, .primary, .btn-subscribe, .view-item[aria-checked=true], .user-now-empty-state-button):not([data-has-file], .see-more) {
     --bg: var(--cards-overlay-image-subtlest, none), oklch(var(--h3)) !important;
-    --bg-hov: var(--cards-overlay-image-subtlest, none), color-mix(in hsl, oklch(var(--h4)), oklch(var(--h3)) 80%) !important;
-    --bg-atv: var(--cards-overlay-image-subtlest, none), color-mix(in hsl, oklch(var(--h4)), oklch(var(--h3)) 60%) !important;
+    --bg-hov: var(--cards-overlay-image-subtlest, none), color-mix(in oklch, oklch(var(--h4)), oklch(var(--h3)) 80%) !important;
+    --bg-atv: var(--cards-overlay-image-subtlest, none), color-mix(in oklch, oklch(var(--h4)), oklch(var(--h3)) 60%) !important;
     --col: oklch(var(--b7)) !important;
     --force-font-weight: var(--font-weight-medium) !important;
     &:not(.chibi) {
@@ -1815,7 +1817,7 @@ h2.text-18,
     --shadow-hov: var(--interactable-outer), var(--interactable-active-outer);
     [data-bleh--invert_interactable_colour=true] & {
       --col: oklch(var(--ov-c1)) !important;
-      --mask-colour: color-mix( in hsl, oklch(var(--ov-c1)), oklch(var(--h4)) 40% );
+      --mask-colour: color-mix( in oklch, oklch(var(--ov-c1)), oklch(var(--h4)) 40% );
     }
     [data-bleh--season=christmas] & {
       --hue-seasonal: 130;
@@ -1984,7 +1986,7 @@ h2.text-18,
 }
 .accented {
   --col: oklch(var(--l3-c));
-  --mask-colour: color-mix( in hsl, oklch(var(--l3-c)), oklch(var(--l4-c)) 30% );
+  --mask-colour: color-mix( in oklch, oklch(var(--l3-c)), oklch(var(--l4-c)) 30% );
 }
 .danger-subtle,
 .block,
@@ -1994,7 +1996,7 @@ h2.text-18,
   --lit-over: var(--lit-neg);
   &:not(.primary, .btn-primary) {
     --col: oklch(var(--l3-c));
-    --mask-colour: color-mix( in hsl, oklch(var(--l3-c)), oklch(var(--l4-c)) 30% );
+    --mask-colour: color-mix( in oklch, oklch(var(--l3-c)), oklch(var(--l4-c)) 30% );
   }
 }
 .danger,
@@ -2063,8 +2065,8 @@ h2.text-18,
   &:not(.blend) {
     :is(.btn, a, button):not(.not-a-view-button, .toggle, .reset, .select-button, .btn-primary, .js-close, .blend-v2-btn, .dropdown-menu-clickable-item) {
       --bg: var(--cards-overlay-image-subtlest, none), oklch(var(--h3));
-      --bg-hov: var(--cards-overlay-image-subtlest, none), color-mix(in hsl, oklch(var(--h4)), oklch(var(--h3)) 80%);
-      --bg-atv: var(--cards-overlay-image-subtlest, none), color-mix(in hsl, oklch(var(--h4)), oklch(var(--h3)) 60%);
+      --bg-hov: var(--cards-overlay-image-subtlest, none), color-mix(in oklch, oklch(var(--h4)), oklch(var(--h3)) 80%);
+      --bg-atv: var(--cards-overlay-image-subtlest, none), color-mix(in oklch, oklch(var(--h4)), oklch(var(--h3)) 60%);
       --col: oklch(var(--b7));
       --mask-colour: oklch(var(--b7), 70%);
       --shadow:
@@ -2083,14 +2085,14 @@ h2.text-18,
       --bg-atv: var(--view-buttons-atv);
       --shadow: none;
       --col: oklch(var(--c2));
-      --mask-colour: color-mix( in hsl, oklch(var(--c2)), oklch(var(--c3)) 50% );
+      --mask-colour: color-mix( in oklch, oklch(var(--c2)), oklch(var(--c3)) 50% );
       --force-font-weight: var(--font-weight);
       .gallery-image-buttons &:not(.image-open-button, .image-share-button),
       &.delete-icon {
         --bg-hov: oklch(var(--h4) / 15%);
         --bg-atv: oklch(var(--h4) / 25%);
         --col: oklch(var(--l3-c));
-        --mask-colour: color-mix( in hsl, oklch(var(--l3-c)), oklch(var(--l4-c)) 30% );
+        --mask-colour: color-mix( in oklch, oklch(var(--l3-c)), oklch(var(--l4-c)) 30% );
         --sat-over: 1;
         --lit-over: 1;
       }
@@ -2361,7 +2363,7 @@ a.inline-add-icon {
   --bg-hov: oklch(var(--b4) / 40%) !important;
   --bg-atv: oklch(var(--b4) / 60%) !important;
   --col: oklch(var(--c3));
-  --mask-colour: oklch(var(--c3), 80%);
+  --mask-colour: oklch(var(--c3) / 80%);
   --mask: var(--icon-16-trend);
 }
 .diff {
@@ -2371,7 +2373,7 @@ a.inline-add-icon {
 }
 .blend-text {
   cursor: default;
-  color: oklch(var(--c3), 60%);
+  color: oklch(var(--c3) / 60%);
 }
 .mark-incorrect:not(:hover, :active) {
   opacity: 0.8;
@@ -2504,7 +2506,7 @@ a.inline-add-icon {
   &[data-is-shortcut=true],
   [data-toggle-button-current-state=followed] > form > &[data-type=follow] {
     --col: oklch(var(--l3-c));
-    --mask-colour: color-mix( in hsl, oklch(var(--l3-c)), oklch(var(--l4-c)) 40% );
+    --mask-colour: color-mix( in oklch, oklch(var(--l3-c)), oklch(var(--l4-c)) 40% );
     --force-font-weight: var(--font-weight-medium) !important;
     &:before {
       background: oklch(var(--h3)) !important;
@@ -2515,7 +2517,7 @@ a.inline-add-icon {
     }
     &:hover {
       &:before {
-        background: color-mix(in hsl, oklch(var(--h4)), oklch(var(--h3)) 80%) !important;
+        background: color-mix(in oklch, oklch(var(--h4)), oklch(var(--h3)) 80%) !important;
         transition: none;
       }
     }
@@ -2524,7 +2526,7 @@ a.inline-add-icon {
       --bg-hov: oklch(var(--h4) / 25%) !important;
       --bg-atv: oklch(var(--h4) / 35%) !important;
       --col: oklch(var(--l3-c)) !important;
-      --mask-colour: color-mix( in hsl, oklch(var(--l3-c)), oklch(var(--l4-c)) 40% );
+      --mask-colour: color-mix( in oklch, oklch(var(--l3-c)), oklch(var(--l4-c)) 40% );
       &:before {
         background: var(--card-border-base) !important;
       }
@@ -2606,7 +2608,7 @@ a.inline-add-icon {
     --bg-hov: oklch(var(--h4) / 30%) !important;
     --bg-atv: oklch(var(--h4) / 40%) !important;
     --col: oklch(var(--l3-c)) !important;
-    --mask-colour: color-mix( in hsl, oklch(var(--l3-c)), oklch(var(--l4-c)) 40% );
+    --mask-colour: color-mix( in oklch, oklch(var(--l3-c)), oklch(var(--l4-c)) 40% );
     --force-font-weight: var(--font-weight-medium) !important;
   }
   &:after {
@@ -3111,7 +3113,7 @@ li:first-child .more-item--delete {
     top: 4px;
     right: 4px;
     --col: oklch(var(--l3-c));
-    --mask-colour: color-mix( in hsl, oklch(var(--l3-c)), oklch(var(--l4-c)) 30% );
+    --mask-colour: color-mix( in oklch, oklch(var(--l3-c)), oklch(var(--l4-c)) 30% );
     --mask: var(--icon-16-bookmark-saved);
     --bg: oklch(var(--b6), 60%);
     --bg-hov: oklch(var(--b6), 80%);
@@ -3872,7 +3874,7 @@ li:first-child .more-item--delete {
     --bg-hov: oklch(var(--b4) / 40%) !important;
     --bg-atv: oklch(var(--b4) / 60%) !important;
     --col: oklch(var(--c3));
-    --mask-colour: oklch(var(--c3), 80%);
+    --mask-colour: oklch(var(--c3) / 80%);
   }
   @media (max-width: 980px) {
     flex-direction: column;
@@ -4323,7 +4325,7 @@ hr {
       }
       &:hover {
         --col: oklch(var(--l3-c));
-        --mask-colour: color-mix( in hsl, oklch(var(--l3-c)), oklch(var(--l4-c)) 30% );
+        --mask-colour: color-mix( in oklch, oklch(var(--l3-c)), oklch(var(--l4-c)) 30% );
         text-decoration: underline !important;
         transition-property: transform;
         transition-duration: 0.1s;
@@ -4676,7 +4678,7 @@ section,
   }
   --shadow: rgba(0, 0, 0, 0.2);
   &.grid-items-item-has-colour {
-    --shadow: color-mix(in hsl, oklch(var(--h4)) 60%, black 70%);
+    --shadow: color-mix(in oklch, oklch(var(--h4)) 60%, black 70%);
   }
   transition-property: transform;
   transition-duration: 0.3s;
@@ -4748,7 +4750,7 @@ section,
   }
   &.grid-items-cover-default {
     & > img {
-      background-color: oklch(var(--c3), 50%);
+      background-color: oklch(var(--c3) / 50%);
     }
   }
   &:not(.grid-items-cover-default) {
@@ -4777,7 +4779,7 @@ section,
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
     &[style] {
-      background: color-mix(in hsl, oklch(var(--h4)) 60%, black 70%) !important;
+      background: color-mix(in oklch, oklch(var(--h4)) 60%, black 70%) !important;
     }
   }
   &:after {
@@ -4922,7 +4924,7 @@ section,
       --mask: var(--icon-16-calendar);
     }
     &[data-bleh--scrobble-milestone] {
-      color: color-mix(in hsl, oklch(var(--l3-c)), oklch(var(--l4-c)) 30%);
+      color: color-mix(in oklch, oklch(var(--l3-c)), oklch(var(--l4-c)) 30%);
     }
     &.with-avatar {
       padding-left: unset;
@@ -5554,7 +5556,7 @@ section,
     }
     &:last-child {
       .chartlist-count-bar-slug {
-        background: color-mix(in hsl, oklch(var(--h3)), oklch(var(--h4)) 40%) !important;
+        background: color-mix(in oklch, oklch(var(--h3)), oklch(var(--h4)) 40%) !important;
       }
     }
   }
@@ -5930,7 +5932,7 @@ section,
     --bg-atv: oklch(var(--k4) / 40%);
     --padding: 5px 10px 5px calc(10px + var(--icon-size) + 4px);
     --col: oklch(var(--l3-c));
-    --mask-colour: color-mix( in hsl, oklch(var(--l3-c)), oklch(var(--l4-c)) 30% );
+    --mask-colour: color-mix( in oklch, oklch(var(--l3-c)), oklch(var(--l4-c)) 30% );
     --shadow: none;
     --radius: var(--item-big-radius);
     flex: unset;
@@ -6756,7 +6758,7 @@ button.bleh--gallery-bookmark-image-btn {
 }
 .image-upload-remove {
   --col: oklch(var(--l3-c)) !important;
-  --mask-colour: color-mix( in hsl, oklch(var(--l3-c)), oklch(var(--l4-c)) 40% );
+  --mask-colour: color-mix( in oklch, oklch(var(--l3-c)), oklch(var(--l4-c)) 40% );
   --hue: var(--hue-neg);
   --sat: 1;
   --lit: 1;
@@ -8604,7 +8606,7 @@ text:has(> .your-progress-label-position) {
       --mask: var(--icon-16-trash);
       &:hover {
         color: oklch(var(--l3-c)) !important;
-        --mask-colour: color-mix( in hsl, oklch(var(--l3-c)), oklch(var(--l4-c)) 30% ) !important;
+        --mask-colour: color-mix( in oklch, oklch(var(--l3-c)), oklch(var(--l4-c)) 30% ) !important;
         --hue-over: var(--hue-neg);
         --sat-over: 1;
         --lit-over: 1;
@@ -8723,7 +8725,7 @@ text:has(> .your-progress-label-position) {
         content: "\275d";
         font-size: 110px;
         line-height: 60px;
-        color: oklch(var(--c3), 20%);
+        color: oklch(var(--c3) / 20%);
         position: absolute;
         left: -24px;
         top: 0;
@@ -9058,7 +9060,7 @@ text:has(> .your-progress-label-position) {
     --mask: var(--icon-16-add);
     width: 32px;
     --col: oklch(var(--l3-c));
-    --mask-colour: color-mix( in hsl, oklch(var(--l3-c)), oklch(var(--l4-c)) 30% );
+    --mask-colour: color-mix( in oklch, oklch(var(--l3-c)), oklch(var(--l4-c)) 30% );
     margin-left: 4px;
   }
 }
@@ -9219,7 +9221,7 @@ h2.playlisting-create-option-title {
     gap: var(--icon-gap);
     text-align: left;
     & > .bleh-icon {
-      --icon-colour: color-mix( in hsl, oklch(var(--c2)), oklch(var(--c3)) 50% );
+      --icon-colour: color-mix( in oklch, oklch(var(--c2)), oklch(var(--c3)) 50% );
     }
     & > p {
       margin: unset !important;
@@ -10170,7 +10172,7 @@ button.navlist-more {
     --bg-hov: oklch(var(--h4) / 16%) !important;
     --bg-atv: oklch(var(--h4) / 26%) !important;
     --col: oklch(var(--l3-c)) !important;
-    --mask-colour: color-mix( in hsl, oklch(var(--l3-c)), oklch(var(--l4-c)) 40% );
+    --mask-colour: color-mix( in oklch, oklch(var(--l3-c)), oklch(var(--l4-c)) 40% );
     .new-badge {
       color: var(--mask-colour);
     }
@@ -10316,7 +10318,7 @@ button.navlist-more {
   &.secondary-nav-item-link--active {
     transform: translateY(0);
     --col: oklch(var(--l2-c-theme-switch)) !important;
-    --mask-colour: color-mix( in hsl, oklch(var(--l2-c-theme-switch)), oklch(var(--l3-c)) 50% ) !important;
+    --mask-colour: color-mix( in oklch, oklch(var(--l2-c-theme-switch)), oklch(var(--l3-c)) 50% ) !important;
     --force-font-weight: var(--font-weight-medium) !important;
     &:after {
       opacity: 1;
@@ -10549,7 +10551,7 @@ button.navlist-more {
   --mask: var(--icon-16-bleh);
   --mask-size: var(--icon-size);
   --col: oklch(var(--l3-c)) !important;
-  --mask-colour: color-mix( in hsl, oklch(var(--l3-c)), oklch(var(--l4-c)) 30% ) !important;
+  --mask-colour: color-mix( in oklch, oklch(var(--l3-c)), oklch(var(--l4-c)) 30% ) !important;
 }
 
 /* src/styles/page/content.css */
@@ -11067,7 +11069,7 @@ button.lfmmaf-missing-artwork-button {
     width: 130px;
     margin: unset;
     color: oklch(var(--c3));
-    --mask-colour: oklch(var(--c3), 80%);
+    --mask-colour: oklch(var(--c3) / 80%);
     --left: 0;
     flex-shrink: 0;
     &.wiki-history-action--edit {
@@ -11691,7 +11693,7 @@ t {
 }
 .vote-button--voted {
   --col: oklch(var(--l3-c)) !important;
-  --mask-colour: color-mix( in hsl, oklch(var(--l3-c)), oklch(var(--l4-c)) 30% );
+  --mask-colour: color-mix( in oklch, oklch(var(--l3-c)), oklch(var(--l4-c)) 30% );
   --force-font-weight: var(--font-weight-medium) !important;
 }
 .shout-user,
@@ -11745,7 +11747,7 @@ t {
 }
 .shout-timestamp {
   height: fit-content;
-  color: oklch(var(--c3), 85%) !important;
+  color: oklch(var(--c3) / 85%) !important;
   font-size: 12px;
   line-height: var(--line-height);
   display: inline-flex;
@@ -11786,7 +11788,7 @@ t {
 .shout--reported {
   padding: 0 !important;
   background: unset;
-  color: oklch(var(--c3), 40%);
+  color: oklch(var(--c3) / 40%);
   margin-bottom: 0;
   position: relative;
   & > p {
@@ -11800,7 +11802,7 @@ t {
 [data-bleh--hide_hateful=true] .shout--bleh-redacted[data-bleh--shout-expanded=false]:before,
 .shout:not(.shout--deleted, .shout--reported):before {
   --mask: var(--icon-16-warning);
-  color: oklch(var(--c3), 40%);
+  color: oklch(var(--c3) / 40%);
 }
 .shout--deleted {
   --mask: var(--icon-16-trash);
@@ -12379,7 +12381,7 @@ t {
             }
             [value=delete] ~ button {
               --col: oklch(var(--l3-c));
-              --mask-colour: color-mix( in hsl, oklch(var(--l3-c)), oklch(var(--l4-c)) 30% );
+              --mask-colour: color-mix( in oklch, oklch(var(--l3-c)), oklch(var(--l4-c)) 30% );
               --hue-over: var(--hue-neg);
               --sat-over: 1;
               --lit-over: 1;
@@ -15326,7 +15328,7 @@ t {
         }
         & > .artist {
           display: flex;
-          color: oklch(var(--c3), 60%);
+          color: oklch(var(--c3) / 60%);
           cursor: default;
           min-width: 0;
           overflow: hidden;
@@ -15551,7 +15553,7 @@ input[type=range]::-moz-range-progress {
   --bg-hov: var(--bg);
   --bg-atv: var(--bg);
   --col: oklch(var(--c2));
-  --mask-colour: color-mix(in hsl, oklch(var(--c2)), oklch(var(--c3)) 50%);
+  --mask-colour: color-mix(in oklch, oklch(var(--c2)), oklch(var(--c3)) 50%);
   background-color: var(--bg) !important;
   color: var(--col) !important;
   padding: var( --padding, var(--button-verts) var(--button-sides) ) !important;
@@ -15651,7 +15653,7 @@ input[type=range]::-moz-range-progress {
     --show-icon: none;
     pointer-events: none;
   }
-  --mask-colour: color-mix(in hsl, oklch(var(--c2)), oklch(var(--c3)) 50%);
+  --mask-colour: color-mix(in oklch, oklch(var(--c2)), oklch(var(--c3)) 50%);
   &:has(> .modern-input[disabled]) {
     --mask-colour: oklch(var(--c3));
   }
@@ -16111,7 +16113,7 @@ input[type=range]::-moz-range-progress {
       --bg-atv: oklch(var(--b4) / 50%);
       --shadow: none;
       --col: oklch(var(--c3));
-      --mask-colour: oklch(var(--c3), 80%);
+      --mask-colour: oklch(var(--c3) / 80%);
     }
     --bg: oklch(var(--b4) / 60%);
     --bg-hov: oklch(var(--b4) / 80%);
@@ -16344,7 +16346,7 @@ input[type=range]::-moz-range-progress {
       }
       & > .date {
         width: 90px;
-        color: oklch(var(--c3), 80%);
+        color: oklch(var(--c3) / 80%);
       }
       & > p {
         margin: unset;
@@ -16567,7 +16569,7 @@ input[type=range]::-moz-range-progress {
     max-height: 32px;
     margin-right: -5px;
     --show-icon: none;
-    color: color-mix(in hsl, oklch(var(--c2)), oklch(var(--c3)) 50%);
+    color: color-mix(in oklch, oklch(var(--c2)), oklch(var(--c3)) 50%);
   }
   .extensions {
     display: flex;
@@ -16576,7 +16578,7 @@ input[type=range]::-moz-range-progress {
       display: flex;
       align-items: center;
       height: 28px;
-      color: color-mix(in hsl, oklch(var(--c2)), oklch(var(--c3)) 50%);
+      color: color-mix(in oklch, oklch(var(--c2)), oklch(var(--c3)) 50%);
       --icon: var(--icon-16-extension);
     }
   }
@@ -17082,8 +17084,8 @@ input[type=range]::-moz-range-progress {
   }
   &[aria-checked=true] {
     --bg: var(--cards-overlay-image-subtlest, none), oklch(var(--h3)) !important;
-    --bg-hov: var(--cards-overlay-image-subtlest, none), color-mix(in hsl, oklch(var(--h4)), oklch(var(--h3)) 80%) !important;
-    --bg-atv: var(--cards-overlay-image-subtlest, none), color-mix(in hsl, oklch(var(--h4)), oklch(var(--h3)) 60%) !important;
+    --bg-hov: var(--cards-overlay-image-subtlest, none), color-mix(in oklch, oklch(var(--h4)), oklch(var(--h3)) 80%) !important;
+    --bg-atv: var(--cards-overlay-image-subtlest, none), color-mix(in oklch, oklch(var(--h4)), oklch(var(--h3)) 60%) !important;
     --col: oklch(var(--b7));
     --shadow:
       var(--primary-shadow),
@@ -18698,7 +18700,7 @@ span.bleh-icon {
     scale: 1;
   }
   40% {
-    color: color-mix(in hsl, oklch(var(--l2-c)) 40%, oklch(var(--l3-c)));
+    color: color-mix(in oklch, oklch(var(--l2-c)) 40%, oklch(var(--l3-c)));
     scale: 1.1;
   }
 }
@@ -18759,7 +18761,7 @@ span.bleh-icon {
     color: oklch(var(--l3-c));
   }
   50% {
-    color: color-mix(in hsl, oklch(var(--l2-c)) 70%, oklch(var(--l3-c)));
+    color: color-mix(in oklch, oklch(var(--l2-c)) 70%, oklch(var(--l3-c)));
   }
 }
 @keyframes ina {
@@ -21076,7 +21078,7 @@ span.bleh-icon {
     --bg-hov: oklch(var(--h4) / 30%);
     --bg-atv: oklch(var(--h4) / 40%);
     --col: oklch(var(--l3-c));
-    --mask-colour: color-mix( in hsl, oklch(var(--l3-c)), oklch(var(--l4-c)) 40% );
+    --mask-colour: color-mix( in oklch, oklch(var(--l3-c)), oklch(var(--l4-c)) 40% );
     --force-font-weight: var(--font-weight-medium) !important;
   }
 }
@@ -21290,7 +21292,7 @@ span.bleh-icon {
     padding: 12px var(--button-sides);
     border: 1px solid var(--card-border-base);
     border-radius: var(--button-radius);
-    --mask-colour: color-mix( in hsl, oklch(var(--c2)), oklch(var(--c3)) 50% );
+    --mask-colour: color-mix( in oklch, oklch(var(--c2)), oklch(var(--c3)) 50% );
     backdrop-filter: var(--solarium);
     -webkit-backdrop-filter: var(--solarium);
     display: flex;
@@ -21369,7 +21371,7 @@ span.bleh-icon {
       --lit-over: 1;
     }
     &.colourful {
-      --mask-colour: color-mix( in hsl, oklch(var(--l3-c)), oklch(var(--l4-c)) 30% );
+      --mask-colour: color-mix( in oklch, oklch(var(--l3-c)), oklch(var(--l4-c)) 30% );
     }
     .notification-progress {
       position: absolute;
@@ -21541,6 +21543,19 @@ span.bleh-icon {
       }
     }
   }
+}
+.image-upload-remove {
+  --mask: var(--icon-16-trash) !important;
+  --mask-size: 24px;
+  --btn-left: var(--button-sides) !important;
+  width: 130px;
+  height: 130px;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  --left: 50%;
+  --margin-left: -12px;
+  --margin-top: calc(-12px - 7px);
 }
 #avatar_saver {
   display: none;
@@ -22523,7 +22538,7 @@ span.bleh-icon {
   }
 }
 .md-tag-wrap {
-  color: oklch(var(--c3), 50%);
+  color: oklch(var(--c3) / 50%);
 }
 .md-link,
 .md-tag {
@@ -22745,7 +22760,7 @@ img.empty {
       }
     }
     & > .entry-data-head {
-      color: oklch(var(--c3), 60%);
+      color: oklch(var(--c3) / 60%);
       cursor: default;
     }
     & > .entry-data-text {

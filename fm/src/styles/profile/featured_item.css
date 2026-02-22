@@ -75,7 +75,7 @@
             &:hover {
                 color: oklch(var(--l3-c)) !important;
                 --mask-colour: color-mix(
-                    in hsl,
+                    in oklch,
                     oklch(var(--l3-c)),
                     oklch(var(--l4-c)) 30%
                 ) !important;

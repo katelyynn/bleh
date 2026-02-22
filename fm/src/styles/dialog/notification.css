@@ -33,7 +33,7 @@
         border: 1px solid var(--card-border-base);
         border-radius: var(--button-radius);
         --mask-colour: color-mix(
-            in hsl,
+            in oklch,
             oklch(var(--c2)),
             oklch(var(--c3)) 50%
         );
@@ -140,7 +140,7 @@
 
         &.colourful {
             --mask-colour: color-mix(
-                in hsl,
+                in oklch,
                 oklch(var(--l3-c)),
                 oklch(var(--l4-c)) 30%
             );

@@ -337,7 +337,7 @@
         width: 130px;
         margin: unset;
         color: oklch(var(--c3));
-        --mask-colour: oklch(var(--c3), 80%);
+        --mask-colour: oklch(var(--c3) / 80%);
         --left: 0;
 
         flex-shrink: 0;

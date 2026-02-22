@@ -135,7 +135,7 @@
     [data-toggle-button-current-state="followed"] > form > &[data-type="follow"] {
         --col: oklch(var(--l3-c));
         --mask-colour: color-mix(
-            in hsl,
+            in oklch,
             oklch(var(--l3-c)),
             oklch(var(--l4-c)) 40%
         );
@@ -155,7 +155,7 @@
         &:hover {
             &:before {
                 background: color-mix(
-                    in hsl,
+                    in oklch,
                     oklch(var(--h4)),
                     oklch(var(--h3)) 80%
                 ) !important;
@@ -169,7 +169,7 @@
             --bg-atv: oklch(var(--h4) / 35%) !important;
             --col: oklch(var(--l3-c)) !important;
             --mask-colour: color-mix(
-                in hsl,
+                in oklch,
                 oklch(var(--l3-c)),
                 oklch(var(--l4-c)) 40%
             );

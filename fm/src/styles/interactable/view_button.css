@@ -78,10 +78,10 @@
             --bg: var(--cards-overlay-image-subtlest, none), oklch(var(--h3));
             --bg-hov:
                 var(--cards-overlay-image-subtlest, none),
-                color-mix(in hsl, oklch(var(--h4)), oklch(var(--h3)) 80%);
+                color-mix(in oklch, oklch(var(--h4)), oklch(var(--h3)) 80%);
             --bg-atv:
                 var(--cards-overlay-image-subtlest, none),
-                color-mix(in hsl, oklch(var(--h4)), oklch(var(--h3)) 60%);
+                color-mix(in oklch, oklch(var(--h4)), oklch(var(--h3)) 60%);
             --col: oklch(var(--b7));
             --mask-colour: oklch(var(--b7), 70%);
             --shadow:
@@ -123,7 +123,7 @@
             --shadow: none;
             --col: oklch(var(--c2));
             --mask-colour: color-mix(
-                in hsl,
+                in oklch,
                 oklch(var(--c2)),
                 oklch(var(--c3)) 50%
             );
@@ -136,7 +136,7 @@
                 --bg-atv: oklch(var(--h4) / 25%);
                 --col: oklch(var(--l3-c));
                 --mask-colour: color-mix(
-                    in hsl,
+                    in oklch,
                     oklch(var(--l3-c)),
                     oklch(var(--l4-c)) 30%
                 );

@@ -83,7 +83,7 @@
 
         & > .bleh-icon {
             --icon-colour: color-mix(
-                in hsl,
+                in oklch,
                 oklch(var(--c2)),
                 oklch(var(--c3)) 50%
             );

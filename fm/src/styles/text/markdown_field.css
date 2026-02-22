@@ -128,7 +128,7 @@
 }
 
 .md-tag-wrap {
-    color: oklch(var(--c3), 50%);
+    color: oklch(var(--c3) / 50%);
 }
 .md-link,
 .md-tag {

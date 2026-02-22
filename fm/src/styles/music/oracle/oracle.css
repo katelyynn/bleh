@@ -191,7 +191,7 @@ img.empty {
         }
 
         & > .entry-data-head {
-            color: oklch(var(--c3), 60%);
+            color: oklch(var(--c3) / 60%);
             cursor: default;
         }
 

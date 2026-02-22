@@ -377,7 +377,7 @@
         scale: 1;
     }
     40% {
-        color: color-mix(in hsl, oklch(var(--l2-c)) 40%, oklch(var(--l3-c)));
+        color: color-mix(in oklch, oklch(var(--l2-c)) 40%, oklch(var(--l3-c)));
         scale: 1.1;
     }
 }
@@ -443,7 +443,7 @@
         color: oklch(var(--l3-c));
     }
     50% {
-        color: color-mix(in hsl, oklch(var(--l2-c)) 70%, oklch(var(--l3-c)));
+        color: color-mix(in oklch, oklch(var(--l2-c)) 70%, oklch(var(--l3-c)));
     }
 }
 

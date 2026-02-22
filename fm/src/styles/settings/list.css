@@ -15,7 +15,7 @@
             --bg-atv: oklch(var(--b4) / 50%);
             --shadow: none;
             --col: oklch(var(--c3));
-            --mask-colour: oklch(var(--c3), 80%);
+            --mask-colour: oklch(var(--c3) / 80%);
         }
 
         --bg: oklch(var(--b4) / 60%);

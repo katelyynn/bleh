@@ -30,7 +30,7 @@
         --bg-hov: oklch(var(--b4) / 40%) !important;
         --bg-atv: oklch(var(--b4) / 60%) !important;
         --col: oklch(var(--c3));
-        --mask-colour: oklch(var(--c3), 80%);
+        --mask-colour: oklch(var(--c3) / 80%);
     }
 
     @media (max-width: 980px) {

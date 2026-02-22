@@ -67,12 +67,12 @@
     --bg: var(--cards-overlay-image-subtlest, none), oklch(var(--b3));
     --bg-hov:
         var(--cards-overlay-image-subtlest, none),
-        color-mix(in hsl, oklch(var(--b6)), oklch(var(--b3)) 80%);
+        color-mix(in oklch, oklch(var(--b6)), oklch(var(--b3)) 90%);
     --bg-atv:
         var(--cards-overlay-image-subtlest, none),
-        color-mix(in hsl, oklch(var(--b6)), oklch(var(--b3)) 60%);
+        color-mix(in oklch, oklch(var(--b6)), oklch(var(--b3)) 80%);
     --col: oklch(var(--c2));
-    --mask-colour: color-mix(in hsl, oklch(var(--c2)), oklch(var(--c3)) 50%);
+    --mask-colour: color-mix(in oklch, oklch(var(--c2)), oklch(var(--c3)) 50%);
     --shadow: var(--normal-shadow), var(--interact-shadow);
     --shadow-hov: var(--active-shadow);
     --btn-top: var(--button-verts);
@@ -216,10 +216,10 @@
             var(--cards-overlay-image-subtlest, none), oklch(var(--h3)) !important;
         --bg-hov:
             var(--cards-overlay-image-subtlest, none),
-            color-mix(in hsl, oklch(var(--h4)), oklch(var(--h3)) 80%) !important;
+            color-mix(in oklch, oklch(var(--h4)), oklch(var(--h3)) 80%) !important;
         --bg-atv:
             var(--cards-overlay-image-subtlest, none),
-            color-mix(in hsl, oklch(var(--h4)), oklch(var(--h3)) 60%) !important;
+            color-mix(in oklch, oklch(var(--h4)), oklch(var(--h3)) 60%) !important;
         --col: oklch(var(--b7)) !important;
         --force-font-weight: var(--font-weight-medium) !important;
         &:not(.chibi) {
@@ -234,7 +234,7 @@
         [data-bleh--invert_interactable_colour="true"] & {
             --col: oklch(var(--ov-c1)) !important;
             --mask-colour: color-mix(
-                in hsl,
+                in oklch,
                 oklch(var(--ov-c1)),
                 oklch(var(--h4)) 40%
             );
@@ -431,7 +431,7 @@
 .accented {
     --col: oklch(var(--l3-c));
     --mask-colour: color-mix(
-        in hsl,
+        in oklch,
         oklch(var(--l3-c)),
         oklch(var(--l4-c)) 30%
     );
@@ -447,7 +447,7 @@
     &:not(.primary, .btn-primary) {
         --col: oklch(var(--l3-c));
         --mask-colour: color-mix(
-            in hsl,
+            in oklch,
             oklch(var(--l3-c)),
             oklch(var(--l4-c)) 30%
         );

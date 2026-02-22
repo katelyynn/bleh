@@ -114,7 +114,9 @@ export function patch_shouts() {
 
             indicator.setAttribute('aria-checked', initial_is_voted.toString());
 
+            voted_button.classList.add('colourful');
             voted_button.addEventListener('click', (e) => vote_button());
+            unvote_button.classList.add('colourful');
             unvote_button.addEventListener('click', (e) => vote_button());
 
             function vote_button() {

@@ -54,7 +54,7 @@
                 content: "❝";
                 font-size: 110px;
                 line-height: 60px;
-                color: oklch(var(--c3), 20%);
+                color: oklch(var(--c3) / 20%);
 
                 position: absolute;
                 left: -24px;
@@ -455,7 +455,7 @@
         width: 32px;
         --col: oklch(var(--l3-c));
         --mask-colour: color-mix(
-            in hsl,
+            in oklch,
             oklch(var(--l3-c)),
             oklch(var(--l4-c)) 30%
         );

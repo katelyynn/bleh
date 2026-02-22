@@ -280,7 +280,7 @@
 .vote-button--voted {
     --col: oklch(var(--l3-c)) !important;
     --mask-colour: color-mix(
-        in hsl,
+        in oklch,
         oklch(var(--l3-c)),
         oklch(var(--l4-c)) 30%
     );
@@ -349,7 +349,7 @@ the body text becomes bigger by default - this reverts that */
 }
 .shout-timestamp {
     height: fit-content;
-    color: oklch(var(--c3), 85%) !important;
+    color: oklch(var(--c3) / 85%) !important;
     font-size: 12px;
     line-height: var(--line-height);
     display: inline-flex;
@@ -423,7 +423,7 @@ the body text becomes bigger by default - this reverts that */
 .shout--reported {
     padding: 0 !important;
     background: unset;
-    color: oklch(var(--c3), 40%);
+    color: oklch(var(--c3) / 40%);
     margin-bottom: 0;
     position: relative;
 
@@ -441,7 +441,7 @@ the body text becomes bigger by default - this reverts that */
     .shout--bleh-redacted[data-bleh--shout-expanded="false"]:before,
 .shout:not(.shout--deleted, .shout--reported):before {
     --mask: var(--icon-16-warning);
-    color: oklch(var(--c3), 40%);
+    color: oklch(var(--c3) / 40%);
 }
 .shout--deleted {
     --mask: var(--icon-16-trash);

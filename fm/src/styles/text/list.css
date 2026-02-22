@@ -98,7 +98,7 @@
         --bg-atv: oklch(var(--h4) / 30%);
         --col: oklch(var(--l3-c));
         --mask-colour: color-mix(
-            in hsl,
+            in oklch,
             oklch(var(--l3-c)),
             oklch(var(--l4-c)) 30%
         );

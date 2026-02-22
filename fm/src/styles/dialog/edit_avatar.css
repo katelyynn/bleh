@@ -52,6 +52,22 @@
     }
 }
 
+.image-upload-remove {
+    --mask: var(--icon-16-trash) !important;
+    --mask-size: 24px;
+    --btn-left: var(--button-sides) !important;
+    width: 130px;
+    height: 130px;
+
+    display: flex;
+    justify-content: center;
+    align-items: end;
+
+    --left: 50%;
+    --margin-left: -12px;
+    --margin-top: calc(-12px - 7px);
+}
+
 #avatar_saver {
     display: none;
 }

@@ -759,7 +759,7 @@
         &:last-child {
             .chartlist-count-bar-slug {
                 background: color-mix(
-                    in hsl,
+                    in oklch,
                     oklch(var(--h3)),
                     oklch(var(--h4)) 40%
                 ) !important;
