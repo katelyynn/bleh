@@ -48,8 +48,8 @@ export let lang_info = {
     },
     pt: {
         name: 'Português',
-        by: ['ArthRMH', 'satisfeita', 'fr0r', 'urwq'],
-        last_updated: '2025-11-25'
+        by: ['ArthRMH', 'satisfeita', 'fr0r', 'urwq', 'anjoskron'],
+        last_updated: '2026-02-22'
     },
     sv: {
         name: 'Svenska',
@@ -9995,84 +9995,98 @@ export const trans = {
             en: 'This page is not properly supported in bleh, but..',
             es: 'Esta página no es compatible con bleh, pero...',
             de: 'Diese Seite wird in bleh nicht richtig unterstützt, aber...',
-            ru: 'Это страница не поддерживается в bleh, но...'
+            ru: 'Это страница не поддерживается в bleh, но...',
+            pt: 'Esta página não é compatível com bleh, mas...'
         },
         body: {
             en: 'If you are a Last.fm Pro subscriber, you can view your current active track in your profile menu at all times',
             de: 'Wenn du ein Last.fm Pro-Abonnent bist, kannst du deinen aktuell aktiven Titel jederzeit in deinem Profilmenü ansehen',
             es: 'Si eres un suscriptor de Last.fm Pro, puedes ver tu tema activo actual en el menú de tu perfil en cualquier momento',
-            ru: 'Если вы являетесь подписчиком Last.fm Pro, вы можете в любое время просматривать текущий активный трек в меню своего профиля'
+            ru: 'Если вы являетесь подписчиком Last.fm Pro, вы можете в любое время просматривать текущий активный трек в меню своего профиля',
+            pt: 'Se você é um assinante de Last.fm pro, poderá visualizar sua faixa ativa atual no menu do seu perfil a qualquer momento.'
         }
     },
     current_status: {
         en: 'Current status',
         ru: 'Текущий статус',
-        es: 'Estado actual'
+        es: 'Estado actual',
+        pt: 'Estado atual'
     },
     status_cafe_too_many_requests: {
         en: 'paused loading temporarily @w@',
         ru: 'загрузка статуса временно приостановлена @w@',
-        es: 'carga temporalmente pausada @w@'
+        es: 'carga temporalmente pausada @w@',
+        pt: 'carregamento pausado temporáriamente @w@'
     },
     loading_status: {
         en: 'loading status',
         ru: 'загрузка статуса',
-        es: 'Estado de carga'
+        es: 'Estado de carga',
+        pt: 'estado de carregamento'
     },
     status_cafe: {
         // status.cafe
         body: {
             en: 'Embed your current status onto your profile, can be moved around freely by editing your about me',
             ru: 'Вставьте свой текущий статус в профиль, его можно перемещать по свободному пространству, редактируя свой профиль',
-            es: 'Añade tu estado actual a tu perfil, puede ser movido libremente al editar tu sobre mí'
+            es: 'Añade tu estado actual a tu perfil, puede ser movido libremente al editar tu sobre mí',
+            pt: 'Adicione seu status atual ao seu perfil, você pode mover ele pra onde quiser editando a parte “Sobre mim”.'
         }
     },
     date_at_time: {
         // date is automatically translated with luxon
         en: '{d} at {t}',
         ru: '{d} в {t}',
-        es: '{d} a las {t}'
+        es: '{d} a las {t}',
+        pt: '{d} as {t}'
     },
     you_sent_to: {
         // messages in your inbox
         en: 'You sent to',
         ru: 'Вы отправили',
-        es: 'Has enviado a'
+        es: 'Has enviado a',
+        pt: 'Enviado para'
     },
     sent_to_you: {
         // messages in your inbox
         en: 'Sent to you',
         ru: 'Отправлено вам',
-        es: 'Te han enviado'
+        es: 'Te han enviado',
+        pt: 'Enviado por'
     },
     shoutbox_placeholder: {
         // u: username
         // v: album/artist/track
         en: '{u}, share your thoughts on {v}...',
         ru: '{u}, поделитесь своими мыслями о {v}...',
-        es: '{u}, comparte lo que piensas sobre {v}...'
+        es: '{u}, comparte lo que piensas sobre {v}...',
+        pt: '{u}, compartilhe sua opinião sobre {v}…'
     },
     shoutbox_placeholder_user: {
         en: '{u}, leave a shout for {v}...',
         ru: '{u}, оставьте комментарий для {v}...',
-        es: '{u}, deja una nota para {v}...'
+        es: '{u}, deja una nota para {v}...',
+        pt: '{u}, deixe uma nota para {v}...'
     },
     mention_user: {
         en: 'Mention user',
         ru: 'Упомянуть пользователя',
-        es: 'Mencionar usuario'
+        es: 'Mencionar usuario',
+        pt: 'Mencionar usuário'
     },
     quote: {
         en: 'Quote',
         ru: 'Цитировать',
-        es: 'Citar'
+        es: 'Citar',
+        pt: 'Citar'
     },
     code_block: {
         // block that surrounds code text:
         // `this is code`
         en: 'Code block',
         ru: 'Блок кода',
-        es: 'Bloque de código'
+        es: 'Bloque de código',
+        pt: 'Bloco de código'
     },
     numbered_list: {
         en: 'Numbered list',
@@ -10087,74 +10101,88 @@ export const trans = {
     center_align: {
         en: 'Center align',
         ru: 'Выровнять по центру',
-        es: 'Centrar'
+        es: 'Centrar',
+        pt: 'Centralizar'
     },
     right_align: {
         en: 'Right align',
         ru: 'Выровнять по правому краю',
-        es: 'Alinear a la derecha'
+        es: 'Alinear a la derecha',
+        pt: 'Alinhar para a direita'
     },
     header: {
         en: 'Header',
         ru: 'Заголовок',
-        es: 'Encabezado'
+        es: 'Encabezado',
+        pt: 'Cabeçalho'
     },
     bold: {
         en: 'Bold',
         ru: 'Полужирный',
-        es: 'Negrita'
+        es: 'Negrita',
+        pt: 'Negrito'
     },
     italic: {
         en: 'Italic',
         ru: 'Курсив',
-        es: 'Cursiva'
+        es: 'Cursiva',
+        pt: 'Itálico'
     },
     strikethrough: {
         en: 'Strikethrough',
         ru: 'Зачеркнутый',
-        es: 'Tachado'
+        es: 'Tachado',
+        pt: 'Tachado'
     },
     underline: {
         en: 'Underline',
         ru: 'Подчеркнутый',
-        es: 'Subrayado'
+        es: 'Subrayado',
+        pt: 'Sublinhado'
     },
     located: {
         en: 'Located',
         ru: 'Расположен',
-        es: 'Ubicado'
+        es: 'Ubicado',
+        pt: 'Localizado'
     },
     date: {
         en: 'Date',
         ru: 'Дата',
-        es: 'Fecha'
+        es: 'Fecha',
+        pt: 'Data'
     },
     contact: {
         en: 'Contact',
         ru: 'Контакт',
-        es: 'Contacto'
+        es: 'Contacto',
+        pt: 'Contato'
     },
     show_on_map: {
         en: 'Show on map',
         ru: 'Показать на карте',
-        es: 'Ver en mapa'
+        es: 'Ver en mapa',
+        pt: 'Ver no mapa'
     },
     added_by: {
         en: 'Added by {u}',
         ru: 'Добавлено {u}',
-        es: 'Añadido por {u}'
+        es: 'Añadido por {u}',
+        pt: 'Adicionado por {u}
     },
     notice: {
         en: 'Notice',
         ru: 'Уведомление',
-        es: 'Noticia'
+        es: 'Noticia',
+        pt: 'Notícia'
     },
     send_valentine: {
         // valentines easter egg
         // sends a message to the user
         en: 'Let them know',
         ru: "Отправить сообщение",
-        es: 'Hazle saber'
+        es: 'Hazle saber',
+        pt: 'Deixe-os saber'
     },
     valentine: {
         // valentines easter egg
@@ -10162,158 +10190,189 @@ export const trans = {
         // u: username
         en: 'to the one i love most, {u} ♡',
         ru: 'тому, кого я люблю больше всего, {u} ♡',
-        es: 'a la persona que más amo, {u} ♡'
+        es: 'a la persona que más amo, {u} ♡',
+        pt: 'para a pessoa que eu mais amo, {u}♡'
     },
     view_details: {
         en: 'View details',
         ru: 'Просмотреть детали',
-        es: 'Ver detalles'
+        es: 'Ver detalles',
+        pt: 'Ver detalhes'
     },
     valentine_info: {
         en: 'You’re seeing this as {u} is on your bleh close friends list, you have a high compatibility, and it’s Valentines Day!',
         ru: 'Вы видите это, потому что {u} находится в вашем списке близких друзей в bleh, у вас высокая совместимость и сегодня День Влюбленных!',
-        es: '¡Estás viendo esto ya que {u} está en tu lista de amigos cercanos de bleh, tienen alta compatibilidad, y es San Valentín!'
+        es: '¡Estás viendo esto ya que {u} está en tu lista de amigos cercanos de bleh, tienen alta compatibilidad, y es San Valentín!',
+        pt: 'Você está vendo isso porque {u} está na sua lista de amigos próximos do bleh, vocês têm muita afinidade e é Dia dos Namorados!'
     },
     valentine_message_footer: {
         en: 'This message’s subject line indicates it was sent via bleh and {u} picked you as their valentine ♡',
         ru: 'Заголовок этого сообщения указывает, что оно было отправлено через bleh и {u} выбрал вас своим влюбленным ♡',
-        es: 'El asunto de este mensaje indica que fue enviado a través de bleh y {u} te escogió como su San Valentín ♡'
+        es: 'El asunto de este mensaje indica que fue enviado a través de bleh y {u} te escogió como su San Valentín ♡',
+        pt: 'O assunto desta mensagem indica que ela foi enviada pelo bleh e que {u} te escolheu como seu crush ♡'
     },
     got_it: {
         // used when dismissing a popup
         en: 'Got it',
         ru: 'Понятно',
-        es: 'Entendido'
+        es: 'Entendido',
+        pt: 'Entendi'
     },
     tip: {
         en: 'Tip',
         ru: 'Подсказка',
-        es: 'Tip'
+        es: 'Tip',
+        pt: 'Sugestão'
     },
     popup_navigation_menu: {
         title: {
             en: 'This is your navigator',
             ru: 'Это ваш навигатор',
-            es: 'Este es tu navegador'
+            es: 'Este es tu navegador',
+            pt: 'Esse é seu navegador'
         },
         body: {
             en: 'You can choose which actions to show here by right-clicking for more options',
             ru: 'Вы можете выбрать, какие действия показывать здесь: щёлкните правой кнопкой мыши, чтобы открыть дополнительные параметры',
-            es: 'Puedes elegir cuáles acciones mostrar aquí haciendo clic derecho para más opciones'
+            es: 'Puedes elegir cuáles acciones mostrar aquí haciendo clic derecho para más opciones',
+            pt: 'Pode escolher quais ações mostrar aqui clicando botão direito para mais opções',
         }
     },
     popup_inbox: {
         title: {
             en: 'Find your inbox combined',
             ru: 'Найдите вашу почту',
-            es: 'Encuentra tu buzón combinado'
+            es: 'Encuentra tu buzón combinado',
+            pt: 'Encontre sua caixa de entrada combinada'
         },
         body: {
             en: 'Your notifications and messages have been organised into this handy button',
             ru: 'Ваша уведомления и сообщения были объединены в эту удобную кнопку',
-            es: 'Tus notificaciones y mensajes han sido organizados en este útil botón'
+            es: 'Tus notificaciones y mensajes han sido organizados en este útil botón',
+            pt: 'Suas notificações e mensagens foram organizadas neste botão mega-útil'
         }
     },
     popup_close_friends: {
         title: {
             en: 'Add your close friends list',
             ru: 'Добавьте ваш список близких друзей',
-            es: 'Añadir tu lista de amigos cercanos'
+            es: 'Añadir tu lista de amigos cercanos',
+            pt: 'Adicionar a sua lista de amigos próximos'
         },
         body: {
             en: 'View their scrobbles on any artist, album, or track at any time',
             ru: 'Просматривайте их скробблы на любом исполнителе, альбоме или треке в любое время',
-            es: 'Mira sus scrobbles en cualquier artista, álbum, o tema en cualquier momento'
+            es: 'Mira sus scrobbles en cualquier artista, álbum, o tema en cualquier momento',
+            pt: 'Veja seus scrobbles em qualquer artista, álbum, ou música a qualquer momento'
         }
     },
     popup_profile_name_style: {
         title: {
             en: 'Choose a custom font, style, and profile colour',
             ru: 'Выберите пользовательский шрифт, стиль и цвет профиля',
-            es: 'Elegir una fuente, estilo, y color de perfil personalizados'
+            es: 'Elegir una fuente, estilo, y color de perfil personalizados',
+            pt: 'Escolha uma fonte, estilo, e uma cor de perfil personalizada'
         },
         body: {
             en: 'These are sponsor-exclusive perks as a thank you for supporting bleh',
             ru: 'Это эксклюзивные преимущества для спонсоров, как благодарность за поддержку bleh', // don't really know how to translate 'perks' -tech
-            es: 'Estas son ventajas exclusivas para patrocinadores como agradecimiento por apoyar a bleh'
+            es: 'Estas son ventajas exclusivas para patrocinadores como agradecimiento por apoyar a bleh',
+            pt: 'Estas são as vantagens esclusivas para apoiadores como agradecimento por apoiar bleh'
         }
     },
     popup_markdown: {
         title: {
             en: 'Embrace styling with Markdown',
             ru: 'Стилизуйте текст с Markdown',
-            es: 'Adoptar estilo con Markdown'
+            es: 'Adoptar estilo con Markdown',
+            pt: 'Abraçe estilo com Markdown'
         },
         body: {
             en: 'Format any text, embed images and links, mention users, and much more based on the scenario',
             ru: 'Форматируйте любой текст, вставляйте изображения и ссылки, упоминайте пользователей и многое другое в зависимости от сценария',
-            es: 'Formatea cualquier texto, añade imágenes y vínculos, menciona usuarios, y mucho más basado en el escenario'
+            es: 'Formatea cualquier texto, añade imágenes y vínculos, menciona usuarios, y mucho más basado en el escenario',
+            pt: 'Formate qualquer texto, anexe imagens e links, mencione usuários, e muito mais baseado em seu cenário'
         }
     },
     popup_search: {
         title: {
             en: 'Hover up here to search music',
             ru: 'Наведите курсор здесь, чтобы найти музыку',
-            es: 'Pasar el cursor por aquí para buscar música'
+            es: 'Pasar el cursor por aquí para buscar música',
+            pt: 'Passe o cursor aqui para pesquisar por música'
         },
         body: {
             en: 'Searching has never been easier to access, plus it hides away when you’re scrolled up',
             ru: 'Поиск никогда не был таким простым, а когда вы прокручиваете вверх, он скрывается',
-            es: 'Buscar nunca ha sido más fácil, además se oculta cuando te desplazas hacia arriba'
+            es: 'Buscar nunca ha sido más fácil, además se oculta cuando te desplazas hacia arriba',
+            pt: 'Pesquisar nunca foi tão fácil, e ainda se esconde quando você rola pra cima.'
         }
     },
     send_a_reply: {
         en: 'Send a reply',
         ru: 'Отправить ответ',
-        es: 'Enviar una respuesta'
+        es: 'Enviar una respuesta',
+        pt: 'Enviar uma resposta'
     },
     are_these_results_accurate: {
         en: 'Are these results accurate?',
         ru: 'Точные ли эти результаты?',
-        es: '¿Son estos resultados correctos?'
+        es: '¿Son estos resultados correctos?',
+        pt: 'Esses resultados estão corretos?'
     },
     report_incorrect: {
         en: 'Mark incorrect',
         ru: 'Отметить как неверный',
-        es: 'Marcar como incorrecto'
+        es: 'Marcar como incorrecto',
+        pt: 'Marcar como incorreto'
     },
     what_did_you_expect: {
         en: 'What did you expect?',
         ru: 'Что вы ожидали увидеть?',
-        es: '¿Qué esperabas?'
+        es: '¿Qué esperabas?',
+        pt: 'O que esperava?'
     },
     oracle_sources_tip_track: {
         en: 'Which albums did you expect to be linked to, e.g. Dawn FM instead of After Hours',
         ru: 'Какие альбомы вы ожидали увидеть, например, Dawn FM вместо After Hours',
-        es: 'A qué álbumes esperabas ser llevado, p. ej. Dawn FM en vez de After Hours'
+        es: 'A qué álbumes esperabas ser llevado, p. ej. Dawn FM en vez de After Hours',
+        pt: 'A que album esperava a ser direcionado, ex. Dawn FM ao invés de After Hours'
     },
     oracle_sources_tip_album: {
         en: 'Which copy of the album did you expect to see? Provide links and some details as to why',
         ru: 'Какой копии альбома вы ожидали увидеть? Укажите ссылки и некоторые подробности о том, почему',
-        es: '¿Qué copia del álbum esperabas ver? Proporciona vínculos y algunos detalles sobre el porqué'
+        es: '¿Qué copia del álbum esperabas ver? Proporciona vínculos y algunos detalles sobre el porqué',
+        pt: 'Qual cópia do album esperava ver? Proporcione links e alguns detalhes do por que'
     },
     switch: {
         // like switch places
-        en: 'Switch'
+        en: 'Switch',
+        pt: 'Trocar'
     },
     auto_close: {
         // auto close dialog after action
-        en: 'Auto close'
+        en: 'Auto close',
+        pt: 'Fechar automáticamente'
     },
     loading_conversations: {
-        en: 'Loading conversations'
+        en: 'Loading conversations',
+        pt: 'Carregando conversas'
     },
     shoutbox_failed: {
-        en: 'There was an error loading conversations “(ノ _ <,, )'
+        en: 'There was an error loading conversations “(ノ _ <,, )',
+        pt: 'Teve um erro ao carregar conversas “(ノ _ <,, )'
     },
     track_name: {
-        en: 'Track name'
+        en: 'Track name',
+        pt: 'Nome da faixa'
     },
     artist_name: {
-        en: 'Artist name'
+        en: 'Artist name',
+        pt: 'Nome do artista'
     },
     album_name: {
-        en: 'Album name'
+        en: 'Album name',
+        pt: 'Nome do álbum'
     }
 };
 
