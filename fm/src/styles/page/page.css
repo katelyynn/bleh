@@ -280,7 +280,7 @@
         }
     }
 
-    gap: var(--card-padding);
+    gap: var(--card-padding-v);
 
     & > .sep {
         width: calc(100% - (var(--card-padding) * 2)) !important;

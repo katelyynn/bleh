@@ -816,6 +816,7 @@ u,
 .theme-preview,
 body {
     --card-padding: 20px;
+    --card-padding-v: 40px;
     --card-radius: var(--item-big-radius);
     --card-shadow: 0 8px 35px rgba(0, 0, 0, 0.45);
     --card-gap: 15px;

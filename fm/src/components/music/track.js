@@ -509,7 +509,7 @@ export function patch_titles(search = page.structure.main) {
 
                 const can_copy_scrobble = !is_album && !has_bar && !is_active && ['user', 'overview'].includes(page.type);
 
-                const timestamp = parseInt(track.getAttribute('data-timestamp')) || track_timestamp_contents?.replace(/^[A-Za-z]+\s+/, '').replace(',', '').replace(/\s?(am|pm)$/i, '');
+                const timestamp = parseInt(track.getAttribute('data-timestamp')) || Math.floor(new Date(track_timestamp_contents?.replace(/^[A-Za-z]+\s+/, '').replace(',', '').trim()).getTime() / 1000);
 
                 let more_button = html.node`
                     <button class="track-more-button icon chibi" data-type="more" onclick=${() => {
