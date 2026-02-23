@@ -14095,9 +14095,10 @@ t {
     flex-direction: column;
     gap: var(--card-gap);
   }
+  display: flex;
+  flex-direction: column;
   &.col-main {
-    display: flex;
-    flex-direction: column;
+    gap: var(--card-padding-v);
     & > form > section,
     & > div,
     & > section {
@@ -14105,9 +14106,8 @@ t {
     }
   }
   &.col-sidebar {
-    display: flex;
-    flex-direction: column;
     background: var(--sidebar-bg);
+    gap: var(--card-padding);
     & > div,
     & > section {
       margin-top: unset;
@@ -14116,7 +14116,6 @@ t {
       display: block !important;
     }
   }
-  gap: var(--card-padding-v);
   & > .sep {
     width: calc(100% - (var(--card-padding) * 2)) !important;
     margin: 0 var(--card-padding);
