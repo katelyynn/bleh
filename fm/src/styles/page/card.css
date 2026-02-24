@@ -1,8 +1,7 @@
 /*     GLOBAL CARD STYLES     */
 .bleh--panel, .bleh--blank-panel,
-.col-main > section:not(.neighbours-items-section), .col-sidebar > section,
+.col-main > section, .col-sidebar > section,
 .your-progress-component,
-/* main column is a card, no sub-cards */ .page-content[data-page-type="user"]:not([data-page-subpage="overview"]) .row.col-main-is-primary > .col-main:not(.not-a-panel):first-child /* <- */, .row.col-main-is-primary > .col-main:nth-child(3) > :is(section, #shoutbox),
 .primary-column,
 .album-and-lyrics-row,
 .lazy-shoutbox:not(
@@ -10,20 +9,10 @@
     /* gallery pages, col-main on tracks */ div.buffer-standard:not(.col-main) > .lazy-shoutbox
     ),
 /* individual library selection */
-/* listening reports */ .user-dashboard > .user-dashboard-buffer,
 .recent-tracks-section,
-.event-summary-with-poster,
-/* event overview thing */ .event-details:not(.event-summary-with-poster .event-details),
-.wiki-history,
-/* error 500 */ .container:has(#marvin),
-:is(.namespace--music_track_tags_add, .namespace--music_artist_tags_add, .namespace--music_album_tags_add) .col-main,
-/* home page recommendations */ .homefeed .col-main,
 /* playlist content */ .playlisting-playlist-header + .page-content > .row,
 /* event lineup */ .big-artist-list,
 /* set an obsession */ .obsession-search, .obsession-search-results,
-/* user did not scrobble album in date range */ .library-header + .message,
-/* no loved tracks */ .namespace--user_loved .no-data-message,
-/* neighbours */ .friends-col-main,
 .panel-form,
 /* listeners */ .col-main:not(.bleh--gallery) > .buffer-standard,
 .no-data-message--gallery:not([data-page-subpage="images_overview"] .no-data-message--gallery), .no-data-message--album,
