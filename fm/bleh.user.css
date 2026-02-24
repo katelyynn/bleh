@@ -8847,6 +8847,7 @@ text:has(> .your-progress-label-position) {
   max-height: 638px;
   width: var(--cards-width);
   margin-left: calc(-1 * (var(--cards-width) / 2));
+  z-index: 100;
   @media (max-width: 980px) {
     top: 0;
     max-height: 150px;
@@ -8868,11 +8869,11 @@ text:has(> .your-progress-label-position) {
   --mask: var(--icon-16-arrow-right);
   right: 0;
 }
-.obsession-pagination a {
-  margin: unset;
-  width: 100%;
-  height: 100%;
-  opacity: 0.7;
+.obsession-pagination-link {
+  margin: unset !important;
+  width: 100% !important;
+  height: 100% !important;
+  opacity: 0.7 !important;
   color: oklch(var(--c1)) !important;
   --left: 50%;
   --margin-left: calc(-1 * var(--button-sides));
@@ -17086,7 +17087,6 @@ input[type=range]::-moz-range-progress {
 }
 
 /* src/styles/shared/icons.css */
-.footer-link:before,
 .report-dropdown-button:before,
 .attendance-badge:before,
 .lfmmaf-missing-artwork-button:before,
@@ -17104,8 +17104,7 @@ input[type=range]::-moz-range-progress {
 .with-icon:before,
 .tip.preview:before,
 .lotus-preview .before:before,
-.masthead-popup-text .btn-primary:before,
-.obsession-pagination > a:before,
+.obsession-pagination-link:before,
 .obsession-date:before,
 .obsession-listens:before,
 .library-search-results.async-content-loading:after,
@@ -17118,7 +17117,6 @@ input[type=range]::-moz-range-progress {
 .lyrics-snippet-more-link > a:before,
 .see-more:before,
 .modal-body .js-close:not(.btn-primary):before,
-.view-all-button:before,
 .music-featured-item-background:before,
 .gallery-image-preferred-states:before,
 .gallery-image-votes:before,
@@ -17134,12 +17132,10 @@ input[type=range]::-moz-range-progress {
 .music-bookmarks-tags-item-toggle:before,
 .music-bookmarks-artists-item-toggle:before,
 .music-bookmarks-albums-item-toggle:before,
-.chart-table--buttons button:before,
 .api-session-connect:before,
 .api-session-disconnect:before,
 .scrobble-canvas-container:before,
 .grid-item-plays:before,
-.obesssions-item-date:before,
 .lastfm-bulk-edit-form-group-controls button:before,
 .lastfm-bulk-edit-progress:before,
 .tag-icon:before,
@@ -17176,8 +17172,6 @@ input[type=range]::-moz-range-progress {
 .modal-button button[type=submit]:before,
 .badge:before,
 .auth-link:before,
-.language-nav:before,
-.language-nav > span:before,
 .gallery-placeholder:before,
 .image-list-item-bookmarked:after,
 .image-list-item-preferred:after,
@@ -17193,15 +17187,11 @@ input[type=range]::-moz-range-progress {
 .avatar-overlay:before,
 .grid-item:before,
 .primary-selection:not(.no-icon):after,
-.wiki-link:before,
 .dropdown-menu-clickable-item:not(.v2):before,
 .dropdown-menu-list-button::after,
 .dropdown-menu-clickable-button:not(.link-select, .report-dropdown-button)::after,
 .dropdown-menu-clickable-button-js-only::after,
 .display-options-clickable-button:after,
-.inline-add-icon:before,
-.more-items:before,
-.artist-similar-sidebar > h3:before,
 .external-link:before,
 .secondary-nav-item-link:before,
 .navlist-more:before,
@@ -17216,17 +17206,14 @@ input[type=range]::-moz-range-progress {
 .event-detail:before,
 .event-metadata:not(:last-child):before,
 .content-top-back-link:after,
-.subpage-breadcrumb li:after,
 .masthead-nav-control:before,
 .masthead-search-submit:before,
-.masthead-hamburger-toggle:before,
 .alert:not(.big-modal-alert, .form-disclaimer > .alert):before,
 .event-status:before,
 .async-content-error-message:before,
 .label:before,
 .header-new-on-tour:before,
 .avatar-status-dot:after,
-.content-form .table .delete:before,
 .user-list-avatar:before,
 .header-new-more-button:before,
 .tags-add:before,
@@ -17252,8 +17239,7 @@ input[type=range]::-moz-range-progress {
 .search-submit:before,
 .search-reset:before,
 .obsession-candidate-inner .btn-sm:before,
-.btn--loading:after,
-.music-more-link a:before {
+.btn--loading:after {
   content: "";
   display: var(--show-icon, block) !important;
   mask-position: 0 0 !important;
@@ -17285,8 +17271,6 @@ input[type=range]::-moz-range-progress {
 .external:before,
 .open:before,
 .gallery-next .arrow,
-.header-new-gallery--link .header-new-gallery-inner:before,
-.form-group-controls:has(select):before,
 .dropdown-menu-list-button::after,
 .dropdown-menu-clickable-button::after,
 .dropdown-menu-clickable-button-js-only::after,

@@ -38,8 +38,8 @@ export function bleh_obsession() {
     log('status is', 'page', 'info', page);
     update_page();
 
-    page.structure.container.setAttribute('data-beret', 'false');
-    page.structure.container.setAttribute('data-short', 'false');
+    page.structure.container.classList.add('sour');
+    page.structure.content.classList.add('cards-view');
 
     let background = obsession_container.querySelector(
         '.obsession-background-inner'
@@ -334,5 +334,12 @@ export function bleh_obsession() {
     quote.after(related);
 
     let pages = obsession_container.querySelector('.obsession-pagination');
-    if (pages) page.structure.container.appendChild(pages);
+    if (pages) {
+        page.structure.container.appendChild(pages);
+
+        const links = pages.querySelectorAll('a');
+        links.forEach(link => {
+            link.classList.add('obsession-pagination-link');
+        });
+    }
 }

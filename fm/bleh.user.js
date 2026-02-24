@@ -33462,8 +33462,8 @@
     checkup_page_structure(false, content_top);
     log("status is", "page", "info", page);
     update_page();
-    page.structure.container.setAttribute("data-beret", "false");
-    page.structure.container.setAttribute("data-short", "false");
+    page.structure.container.classList.add("sour");
+    page.structure.content.classList.add("cards-view");
     let background = obsession_container.querySelector(
       ".obsession-background-inner"
     );
@@ -33690,7 +33690,13 @@
     }
     quote.after(related);
     let pages = obsession_container.querySelector(".obsession-pagination");
-    if (pages) page.structure.container.appendChild(pages);
+    if (pages) {
+      page.structure.container.appendChild(pages);
+      const links = pages.querySelectorAll("a");
+      links.forEach((link2) => {
+        link2.classList.add("obsession-pagination-link");
+      });
+    }
   }
 
   // src/components/profile/pronouns.js
