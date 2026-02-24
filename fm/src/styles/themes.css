@@ -384,6 +384,8 @@ body,
         --b7: 0 0 0;
         --b9: 1 0 0;
 
+        --separator-base: oklch(var(--b2) / 0.3);
+
         --card-border-base: oklch(0.87 0 0) !important;
         --card-border-base-highlight: oklch(0.89 0 0);
 

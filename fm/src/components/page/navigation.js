@@ -73,7 +73,7 @@ export function update_masthead(
     render(masthead_logo, html``);
     render(masthead_logo, html`
         <a class="hidden-link" style="display: none !important" href="/">Last.fm</a>
-        <a class="navigation-item home-link" href="${root}music" ref=${el => home_link = el} />
+        <a class="btn navigation-item home-link" href="${root}music" ref=${el => home_link = el} />
     `);
 
     page.state.home_link = home_link;
@@ -105,7 +105,7 @@ export function update_masthead(
     let link;
     if (update_required === 'false') {
         link = html.node`
-            <a class="navigation-item home-version" href="${root}bleh">
+            <a class="btn navigation-item home-version" href="${root}bleh">
                 ${version.build}
                 <div class="new-badge sku spacing">
                     ${version.sku}
@@ -119,7 +119,7 @@ export function update_masthead(
         `;
     } else {
         link = html.node`
-            <a class="navigation-item home-version" onclick=${() => prompt_for_update()}>
+            <a class="btn navigation-item home-version" onclick=${() => prompt_for_update()}>
                 <div class="update-container">
                     <div class="bleh-icon" style="--icon: var(--icon-16-update)" />
                 </div>
