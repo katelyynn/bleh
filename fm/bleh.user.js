@@ -44186,11 +44186,11 @@
         };
         shout.setAttribute("data-kate-processed", "true");
         shout.style.setProperty("--delay", index3 * 0.04 + "s");
-        let shout_name = shout.querySelector(".shout-user a");
+        const shout_name = shout.querySelector(".shout-user > a");
         if (!shout_name) return;
-        let shout_name_text = shout_name.textContent;
+        const shout_name_text = shout_name.textContent;
         shout_name.insertBefore(html.node`<span class="at">@</span>`, shout_name.firstChild);
-        let shout_avatar = shout.querySelector(".shout-user-avatar");
+        const shout_avatar = shout.querySelector(".shout-user-avatar");
         let badge = patch_avatar(shout_avatar, shout_name_text, "shout");
         if (badge) {
           if (badge.type && badge.type == "avatar-status-dot--staff")
@@ -44207,20 +44207,31 @@
                 <div class="shout-vote-indicator colourful" aria-checked="false" />
             `;
         shout.appendChild(indicator);
-        let shout_timestamp = shout.querySelector(".shout-timestamp time");
-        if (shout_timestamp) {
-          tippy_esm_default(shout_timestamp, {
-            content: shout_timestamp.getAttribute("title")
+        const timestamp = shout.querySelector(".shout-timestamp");
+        if (timestamp) {
+          const timestamp_text = timestamp.querySelector(".shout-timestamp time");
+          tippy_esm_default(timestamp, {
+            content: timestamp_text.getAttribute("title")
           });
-          shout_timestamp.removeAttribute("title");
+          timestamp_text.removeAttribute("title");
         }
-        let actions = shout.querySelectorAll(".shout-actions .shout-action");
+        const action_list = shout.querySelector(".shout-actions");
+        let actions = action_list.querySelectorAll(".shout-actions .shout-action");
         actions.forEach((action) => {
           let buttons2 = action.querySelectorAll("button, a");
           buttons2.forEach((button2) => {
             button2.classList.add("shout-action-button", "see-more");
           });
         });
+        shout.insertBefore(html.node`
+                <div class="shout-top">
+                    <div class="shout-basics">
+                        ${shout_name.parentElement}
+                        ${timestamp}
+                    </div>
+                    ${action_list}
+                </div>
+            `, shout.firstChild);
         const more_button = shout.querySelector(".shout-more-actions");
         if (more_button) more_button.classList.add("see-more", "shout-action-button");
         const form = shout.querySelector(".vote-button-toggle");
@@ -44248,7 +44259,7 @@
         menu.insertBefore(html.node`
                 <button class="dropdown-menu-clickable-item" data-type="translate" onclick=${async () => {
           if (shout.translated) return;
-          translate(shout_text).then((res) => {
+          translate(shout_text, lang).then((res) => {
             shout.translated = true;
             shout_body.setAttribute("data-show-translated", "true");
             if (settings.shout_markdown) {
@@ -44290,15 +44301,15 @@
     });
     if (settings.shout_markdown && shout_parse_queue.length > 0)
       parse_shout_queue();
-    const shout_forms = document.querySelectorAll(".shout-form:not([data-kate-processed])");
+    const shout_forms = document.querySelectorAll(".shout-form:not([data-shout-form])");
     shout_forms.forEach((shout_form) => {
-      shout_form.setAttribute("data-kate-processed", "true");
-      let shout_avatar = shout_form.querySelector(".shout-user-avatar");
-      patch_avatar(shout_avatar, auth.name);
+      shout_form.setAttribute("data-shout-form", "true");
+      const avatar2 = shout_form.querySelector(".shout-user-avatar");
+      patch_avatar(avatar2, auth.name);
       let send_button = shout_form.querySelector(".form-group--submit");
       shout_send(send_button);
       const help_text = shout_form.querySelector(".form-row-help-text");
-      help_text.classList.add("dual-tip");
+      help_text.classList.add("dual-tip", "shout-help-text");
       const legacy_textarea = shout_form.querySelector("textarea");
       let placeholder = legacy_textarea.placeholder;
       const is_reply = placeholder.includes(auth.name);
@@ -70654,6 +70665,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     },
     translated_from_value: {
       en: "Translated from {v}"
+    },
+    follow_guidelines: {
+      en: "Keep in mind the {a}community guidelines{/a}"
     }
   };
   var translation_fallback = "NO_TRANSLATION_FOUND";
@@ -72586,6 +72600,11 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         default: false,
         name: "Show internal setting ids",
         date: "2099-11-31"
+      },
+      music_notes: {
+        default: false,
+        name: "Display and write notes for music",
+        date: "2026-02-25"
       }
     }
   };

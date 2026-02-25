@@ -182,6 +182,11 @@
             text-decoration: underline !important;
         }
     }
+
+    &:before {
+        --left: -41px;
+        --margin-top: -17px;
+    }
 }
 
 .shout-form {
@@ -192,11 +197,21 @@
     }
 }
 
+.shout-top {
+    display: flex;
+}
+
+.shout-basics {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+}
+
 .shout-actions {
     margin: unset;
-    position: absolute;
-    top: 6px;
-    right: calc(var(--card-padding) - 12px);
+    position: static;
+    flex-shrink: 0;
 
     opacity: var(--shout-actions-opacity);
     transition-property: opacity;
@@ -222,7 +237,7 @@
     }
 }
 
-.shout:is(:hover, :focus-within) > .shout-actions {
+.shout:is(:hover, :focus-within) > .shout-top > .shout-actions {
     opacity: 1;
     transition: none;
 }
@@ -340,7 +355,7 @@ the body text becomes bigger by default - this reverts that */
 .shout-user {
     width: fit-content;
     display: inline-flex;
-    margin-right: 6px;
+    margin-right: unset;
     font-weight: var(--font-weight-medium);
 
     @media (max-width: 980px) {
@@ -351,48 +366,18 @@ the body text becomes bigger by default - this reverts that */
     height: fit-content;
     color: oklch(var(--c3) / 85%) !important;
     font-size: 12px;
-    line-height: var(--line-height);
+    line-height: 12px;
     display: inline-flex;
     align-items: center;
     right: unset;
     top: unset;
     text-transform: lowercase;
-    transition-property: color;
-    transition-duration: var(--trans);
-    transition-timing-function: var(--trans-function);
     cursor: pointer;
     position: relative;
 
     @media (max-width: 980px) {
         margin: unset;
     }
-
-    /* text */
-    /*&:before {
-        content: 'Copy link';
-        color: oklch(var(--l2-c)) !important;
-        font-size: 12px;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100px;
-        opacity: 0;
-        transition-property: opacity;
-        transition-duration: var(--trans);
-        transition-timing-function: var(--trans-function);
-    }*/
-
-    /* hide date on hover */
-    /*&:hover {
-        color: transparent !important;
-        transition: none;
-
-        /* ..then show pseudo elements */
-    /*&:before {
-            opacity: 1;
-            transition: none;
-        }
-    }*/
 }
 
 .shout-user-avatar,
@@ -405,20 +390,10 @@ the body text becomes bigger by default - this reverts that */
     display: flex !important;
 }
 .shout-user-avatar {
-    top: 2px !important;
+    top: 0 !important;
     z-index: 20;
 }
 
-/*     DELETED / REPORTED     */
-.shout {
-    &:before {
-        --left: -41px;
-        --margin-top: -17px;
-    }
-}
-
-[data-bleh--hide_hateful="true"]
-    .shout--bleh-redacted[data-bleh--shout-expanded="false"],
 .shout--deleted,
 .shout--reported {
     padding: 0 !important;
@@ -437,8 +412,6 @@ the body text becomes bigger by default - this reverts that */
     }
 }
 
-[data-bleh--hide_hateful="true"]
-    .shout--bleh-redacted[data-bleh--shout-expanded="false"]:before,
 .shout:not(.shout--deleted, .shout--reported):before {
     --mask: var(--icon-16-warning);
     color: oklch(var(--c3) / 40%);
@@ -452,17 +425,9 @@ the body text becomes bigger by default - this reverts that */
 
 /*     ACTIVE     */
 .shout-container--active {
-    background: linear-gradient(
-        0deg,
-        oklch(var(--h4) / 20%) 0%,
-        rgba(0, 0, 0, 0) 100%
-    );
+    background: unset;
     margin: unset;
     padding: unset;
-
-    [data-ff--shout_popover="true"] & {
-        background: unset;
-    }
 }
 
 .shout-more-replies-after,
@@ -477,4 +442,18 @@ the body text becomes bigger by default - this reverts that */
 .shout-more-actions {
     padding-left: var(--see-more-pad) !important;
     padding-right: var(--see-more-pad) !important;
+}
+
+
+
+.shout-help-text {
+    align-items: center;
+
+    clip: unset !important;
+    width: unset !important;
+    height: var(--button-height) !important;
+    inset: unset !important;
+    margin: unset !important;
+
+    bottom: 0 !important;
 }

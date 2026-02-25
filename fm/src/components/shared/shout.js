@@ -8,7 +8,7 @@ import { patch_avatar, style_name_from_badge } from '@/components/shared/avatar'
 import { settings } from '@/build/config.js';
 import { log } from '@/build/log.js';
 import { auth, page, root, shout_parse_queue } from '@/build/page.js';
-import { tl, trans } from '@/build/trans';
+import { lang, tl, trans } from '@/build/trans';
 import { notify } from '@/components/dialog/notify';
 import { html, render } from 'lighterhtml';
 import { setting } from '@/components/settings/settings';
@@ -45,13 +45,13 @@ export function patch_shouts() {
             shout.setAttribute('data-kate-processed', 'true');
             shout.style.setProperty('--delay', index * 0.04 + 's');
 
-            let shout_name = shout.querySelector('.shout-user a');
+            const shout_name = shout.querySelector('.shout-user > a');
             if (!shout_name) return;
 
-            let shout_name_text = shout_name.textContent;
+            const shout_name_text = shout_name.textContent;
             shout_name.insertBefore(html.node`<span class="at">@</span>`, shout_name.firstChild);
 
-            let shout_avatar = shout.querySelector('.shout-user-avatar');
+            const shout_avatar = shout.querySelector('.shout-user-avatar');
 
             let badge = patch_avatar(shout_avatar, shout_name_text, 'shout');
 
@@ -76,22 +76,36 @@ export function patch_shouts() {
             shout.appendChild(indicator);
 
             // timestamp
-            let shout_timestamp = shout.querySelector('.shout-timestamp time');
-            if (shout_timestamp) {
-                tippy(shout_timestamp, {
-                    content: shout_timestamp.getAttribute('title')
+            const timestamp = shout.querySelector('.shout-timestamp');
+            if (timestamp) {
+                const timestamp_text = timestamp.querySelector('.shout-timestamp time');
+
+                tippy(timestamp, {
+                    content: timestamp_text.getAttribute('title')
                 });
 
-                shout_timestamp.removeAttribute('title');
+                timestamp_text.removeAttribute('title');
             }
 
-            let actions = shout.querySelectorAll('.shout-actions .shout-action');
+            const action_list = shout.querySelector('.shout-actions');
+
+            let actions = action_list.querySelectorAll('.shout-actions .shout-action');
             actions.forEach((action) => {
                 let buttons = action.querySelectorAll('button, a');
                 buttons.forEach((button) => {
                     button.classList.add('shout-action-button', 'see-more');
                 });
             });
+
+            shout.insertBefore(html.node`
+                <div class="shout-top">
+                    <div class="shout-basics">
+                        ${shout_name.parentElement}
+                        ${timestamp}
+                    </div>
+                    ${action_list}
+                </div>
+            `, shout.firstChild);
 
             const more_button = shout.querySelector('.shout-more-actions');
             if (more_button) more_button.classList.add('see-more', 'shout-action-button');
@@ -149,7 +163,7 @@ export function patch_shouts() {
                 <button class="dropdown-menu-clickable-item" data-type="translate" onclick=${async () => {
                     if (shout.translated) return;
 
-                    translate(shout_text).then(res => {
+                    translate(shout_text, lang).then(res => {
                         shout.translated = true;
 
                         shout_body.setAttribute('data-show-translated', 'true');
@@ -199,18 +213,19 @@ export function patch_shouts() {
         parse_shout_queue();
 
     // enter a shout field
-    const shout_forms = document.querySelectorAll('.shout-form:not([data-kate-processed])');
+    const shout_forms = document.querySelectorAll('.shout-form:not([data-shout-form])');
     shout_forms.forEach((shout_form) => {
-        shout_form.setAttribute('data-kate-processed', 'true');
-        let shout_avatar = shout_form.querySelector('.shout-user-avatar');
+        shout_form.setAttribute('data-shout-form', 'true');
 
-        patch_avatar(shout_avatar, auth.name);
+        const avatar = shout_form.querySelector('.shout-user-avatar');
+
+        patch_avatar(avatar, auth.name);
 
         let send_button = shout_form.querySelector('.form-group--submit');
         shout_send(send_button);
 
         const help_text = shout_form.querySelector('.form-row-help-text');
-        help_text.classList.add('dual-tip');
+        help_text.classList.add('dual-tip', 'shout-help-text');
 
         const legacy_textarea = shout_form.querySelector('textarea');
 

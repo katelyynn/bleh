@@ -10326,6 +10326,9 @@ export const trans = {
     },
     translated_from_value: {
         en: 'Translated from {v}'
+    },
+    follow_guidelines: {
+        en: 'Keep in mind the {a}community guidelines{/a}'
     }
 };
 
