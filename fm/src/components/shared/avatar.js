@@ -72,15 +72,15 @@ export function patch_avatar(
         theme: 'context-menu',
         content: html.node`
             <div class="track-preview user-preview">
-                <div class="image">
+                <div class="track-preview-image">
                     <div class="inner-image">
                         <img src=${avatar_img.getAttribute('src').replace('/avatar42s/', '/avatar170s/')} alt=${name}>
                     </div>
                 </div>
-                <div class="info">
-                    <h5 class="title">@${name}</h5>
+                <div class="track-preview-info">
+                    <h5 class="track-preview-text track-preview-title">@${name}</h5>
                     ${badges ? html.node`
-                        <div class="badges">
+                        <div class="badges track-preview-badges">
                             ${badges.map((badge, index) => create_badge(badge, false, index == badges.length - 1))}
                         </div>
                     ` : ''}

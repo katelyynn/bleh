@@ -108,7 +108,7 @@
             color: oklch(var(--c3));
             min-width: 14px;
 
-            .notification-count-badge {
+            & > .notification-count-badge {
                 margin: unset !important;
             }
         }
@@ -155,15 +155,15 @@ very, very, very dated - who looks up a song on ebay? */
     order: -10;
 
     &.user-preview {
-        .image .inner-image {
+        & > .track-preview-image > .inner-image {
             border-radius: var(--avatar-radius);
         }
     }
 
-    .image {
+    .track-preview-image {
         flex-shrink: 0;
 
-        .inner-image {
+        & > .inner-image {
             width: 50px;
             height: 50px;
             background: oklch(var(--b5));
@@ -171,12 +171,12 @@ very, very, very dated - who looks up a song on ebay? */
             border-radius: var(--item-med-radius);
             overflow: hidden;
 
-            img {
+            & > img {
                 width: 100%;
             }
         }
     }
-    .info {
+    .track-preview-info {
         display: flex;
         flex-direction: column;
         flex: 1;
@@ -203,38 +203,7 @@ very, very, very dated - who looks up a song on ebay? */
             --icon-size: 10px;
         }
 
-        & > p {
-            cursor: default;
-            margin: unset;
-        }
-
-        & > h5,
-        & > p {
-            max-width: 200px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .title {
-            color: oklch(var(--c2));
-            font-weight: var(--font-weight-medium);
-            margin: unset;
-        }
-        .artist {
-            color: oklch(var(--c2), 80%);
-        }
-        .tags {
-            color: oklch(var(--c2), 70%);
-        }
-        .album {
-            color: oklch(var(--c3));
-        }
-        .timestamp {
-            color: oklch(var(--c3));
-        }
-
-        & > .badges {
+        & > .track-preview-badges {
             display: flex;
             flex-direction: row-reverse;
             justify-content: start;
@@ -264,23 +233,41 @@ very, very, very dated - who looks up a song on ebay? */
     }
 }
 
+.track-preview-text {
+    cursor: default;
+    margin: unset;
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.track-preview-title {
+    color: oklch(var(--c2));
+    font-weight: var(--font-weight-medium);
+    margin: unset;
+}
+.track-preview-artist {
+    color: oklch(var(--c2) / 80%);
+}
+.track-preview-tags {
+    color: oklch(var(--c2) / 70%);
+}
+.track-preview-album, .track-preview-timestamp {
+    color: oklch(var(--c3));
+}
+
 
 /*     DANGEROUS     */
 .accented-menu-item,
 .dropdown-menu-clickable-item[data-starred="true"]:not(.no-colour),
-.dropdown-menu-clickable-item.sponsor,
 .dropdown-menu-clickable-item.update,
 .dropdown-menu-clickable-item.swatch,
-.dropdown-menu-clickable-item.lotus,
 .dropdown-menu-clickable-item.colourful,
 .more-item--obsession,
-[data-menu-item="bleh"],
 .more-item--delete,
 .more-item--report,
-[data-menu-item="logout"],
-[data-analytics-action="delete"],
-[data-analytics-action="unpublish"],
-[data-analytics-action="publish"] {
+[data-menu-item="logout"] {
     --bg-hov: var(--menu-item-accent-hov) !important;
     --bg-atv: var(--menu-item-accent-atv) !important;
     --col: oklch(var(--l3-c)) !important;
@@ -293,9 +280,7 @@ very, very, very dated - who looks up a song on ebay? */
 
 .more-item--delete,
 .more-item--report,
-[data-menu-item="logout"],
-[data-analytics-action="delete"],
-[data-analytics-action="unpublish"] {
+[data-menu-item="logout"] {
     --hue-over: var(--hue-neg);
     --sat-over: var(--sat-neg);
     --lit-over: var(--lit-neg);

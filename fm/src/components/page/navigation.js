@@ -399,10 +399,10 @@ export function append_nav() {
             <a class="dropdown-menu-clickable-item colourful" data-type="discord" href="https://discord.gg/${discord}" target="_blank">
                 ${tl(trans.join_discord)}
             </a>
-            <button class="dropdown-menu-clickable-item sponsor" onclick=${() => sponsor()}>
+            <button class="dropdown-menu-clickable-item sponsor colourful" onclick=${() => sponsor()}>
                 ${tl(trans.sponsor)}
             </button>
-            <a class="dropdown-menu-clickable-item lotus" href="https://github.com/katelyynn/lotus/issues/new/choose" target="_blank">
+            <a class="dropdown-menu-clickable-item lotus colourful" href="https://github.com/katelyynn/lotus/issues/new/choose" target="_blank">
                 ${tl(trans.suggest_correction)}
             </a>
             <div class="sep" />
@@ -1088,7 +1088,7 @@ export function append_nav() {
                             </div>
 
                             <div class="button-combo">
-                                <a class="dropdown-menu-clickable-item" data-menu-item="bleh" href="${root}bleh">
+                                <a class="dropdown-menu-clickable-item accented-menu-item" data-menu-item="bleh" href="${root}bleh">
                                     ${tl(trans.settings)}
                                 </a>
                                 <div class="button-combo-sep" />

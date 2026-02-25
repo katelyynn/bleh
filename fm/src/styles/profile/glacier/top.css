@@ -30,8 +30,8 @@
                 --bg-hov: oklch(var(--h4) / 10%);
                 --bg-atv: oklch(var(--h4) / 20%);
                 --hue-over: var(--hue-neg);
-                --sat-over: 1;
-                --lit-over: 1;
+                --sat-over: var(--sat-neg);
+                --lit-over: var(--lit-neg);
             }
             &.love-button {
                 --mask: var(--icon-16-heart);
@@ -110,7 +110,7 @@
         overflow: hidden;
         flex-shrink: 0;
 
-        img {
+        & > img {
             width: 38px;
             height: 38px;
         }
@@ -139,59 +139,9 @@
     }
 }
 
-.library-top {
-    /* matches user profile buttons */
-    gap: var(--button-list-gap);
-
-    .library-sort {
-        margin: unset;
-        padding: unset;
-    }
-
-    .library-view {
-        margin: unset;
-    }
-
-    .metadata-list {
-        flex: 0;
-    }
-
-    .metadata-item {
-        width: max-content;
-    }
-}
-
-[data-require="components/library-manager"] {
-    .col-sidebar {
-        --force-margin-top: unset;
-    }
-
-    .content-top:has(.secondary-nav) + .page-content& {
-        padding-top: unset !important;
-        margin-top: var(--card-gap);
-    }
-}
-
 .library-sort {
     display: flex;
     justify-content: right;
-}
-
-.library-format-container {
-    width: fit-content;
-    height: fit-content;
-    display: flex;
-}
-.library-view-button {
-    width: 32px;
-    height: 32px;
-    position: relative;
-    margin: unset !important;
-    --left: calc((32px - var(--icon-size)) / 2);
-}
-.view-icon,
-#list-view-icon {
-    display: none;
 }
 
 /* user did not scrobble album in date range */

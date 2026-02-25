@@ -29448,15 +29448,15 @@
       theme: "context-menu",
       content: html.node`
             <div class="track-preview user-preview">
-                <div class="image">
+                <div class="track-preview-image">
                     <div class="inner-image">
                         <img src=${avatar_img.getAttribute("src").replace("/avatar42s/", "/avatar170s/")} alt=${name}>
                     </div>
                 </div>
-                <div class="info">
-                    <h5 class="title">@${name}</h5>
+                <div class="track-preview-info">
+                    <h5 class="track-preview-text track-preview-title">@${name}</h5>
                     ${badges ? html.node`
-                        <div class="badges">
+                        <div class="badges track-preview-badges">
                             ${badges.map((badge, index3) => create_badge(badge, false, index3 == badges.length - 1))}
                         </div>
                     ` : ""}
@@ -31849,26 +31849,26 @@
           if (track_legacy_menu) {
             track.preview = html.node`
                         <div class="track-preview">
-                            <div class="image">
+                            <div class="track-preview-image">
                                 <div class="inner-image">
                                     ${image ? html.node`<img src=${image.src} alt=${song_title}>` : html.node`<img class="missing-track" alt="">`}
                                 </div>
                             </div>
-                            <div class="info">
-                                <h5 class="title">${song_title}</h5>
-                                <p class="artist">${song_artist_element.firstElementChild.textContent}</p>
-                                <div class="tags">
+                            <div class="track-preview-info">
+                                <h5 class="track-preview-text track-preview-title">${song_title}</h5>
+                                <p class="track-preview-text track-preview-artist">${song_artist_element.firstElementChild.textContent}</p>
+                                <div class="track-preview-tags">
                                     ${song_tags.map(
               (tag) => html.node`
                                         <div class="feat" data-bleh--tag-type="${tag.type}" data-bleh--tag-group="${tag.group}">${tag.text}</div>
                                     `
             )}
                                 </div>
-                                ${is_album ? "" : html.node`<p class="album">${image && album_link ? correct_item_by_artist(
+                                ${is_album ? "" : html.node`<p class="track-preview-text track-preview-album">${image && album_link ? correct_item_by_artist(
               image.getAttribute("alt"),
               track_artist
             ) : album ? album.textContent : ""}</p>`}
-                                ${track_timestamp && track_timestamp_contents ? html.node`<p class="timestamp">${track_timestamp_contents}</p>` : ""}
+                                ${track_timestamp && track_timestamp_contents ? html.node`<p class="track-preview-text track-preview-timestamp">${track_timestamp_contents}</p>` : ""}
                                 ${image?.getAttribute("data-hoshino") ? html.node`
                                             <div class="hoshino-marker">
                                                 <div class="bleh-icon" />
@@ -40423,15 +40423,20 @@
       }
     }
     if (!static_page && page.subpage != "library_tracks") {
-      let format_button = document.createElement("button");
-      format_button.classList.add(
-        "btn",
-        "view-item",
-        "glacier-library-button",
-        "glacier-view-button"
-      );
-      format_button.setAttribute("onclick", "_update_glacier_view()");
-      page.structure.glacier.format = format_button;
+      const format_button = html.node`
+            <button class="btn view-item glacier-library-button glacier-view-button" onclick=${() => {
+        const format = page.structure.main.querySelector(".library-view-button");
+        if (!format) return;
+        format.click();
+        if (format.getAttribute("href") && format.getAttribute("href").endsWith("reset")) {
+          format_button.setAttribute("data-glacier-view", "list");
+          format_button.textContent = tl2(trans.list);
+        } else {
+          format_button.setAttribute("data-glacier-view", "grid");
+          format_button.textContent = tl2(trans.grid);
+        }
+      }} />
+        `;
       add_divider = true;
       if (top_wrap.getAttribute("data-current-format") == "grid") {
         format_button.setAttribute("data-glacier-view", "grid");
@@ -40443,9 +40448,9 @@
       view_buttons.appendChild(format_button);
     }
     if (!static_page && add_divider) {
-      let listen_divider = document.createElement("div");
-      listen_divider.classList.add("listen-divider");
-      view_buttons.appendChild(listen_divider);
+      view_buttons.appendChild(html.node`
+            <div class="listen-divider" />
+        `);
     }
     let configure_button = document.createElement("button");
     configure_button.classList.add(
@@ -40496,18 +40501,6 @@
       page.structure.main.firstElementChild
     );
   }
-  unsafeWindow._update_glacier_view = function() {
-    let format = page.structure.main.querySelector(".library-view-button");
-    if (format == null) return;
-    format.click();
-    if (format.getAttribute("href") && format.getAttribute("href").endsWith("reset")) {
-      page.structure.glacier.format.setAttribute("data-glacier-view", "list");
-      page.structure.glacier.format.textContent = tl2(trans.list);
-    } else {
-      page.structure.glacier.format.setAttribute("data-glacier-view", "grid");
-      page.structure.glacier.format.textContent = tl2(trans.grid);
-    }
-  };
   function bleh_glacier_date_graph(static_page = false, own_table = null) {
     if (!page.structure.glacier.refresh) return;
     if (!settings.glacier_library_graphs) return;
@@ -49615,10 +49608,10 @@
             <a class="dropdown-menu-clickable-item colourful" data-type="discord" href="https://discord.gg/${discord}" target="_blank">
                 ${tl2(trans.join_discord)}
             </a>
-            <button class="dropdown-menu-clickable-item sponsor" onclick=${() => sponsor()}>
+            <button class="dropdown-menu-clickable-item sponsor colourful" onclick=${() => sponsor()}>
                 ${tl2(trans.sponsor)}
             </button>
-            <a class="dropdown-menu-clickable-item lotus" href="https://github.com/katelyynn/lotus/issues/new/choose" target="_blank">
+            <a class="dropdown-menu-clickable-item lotus colourful" href="https://github.com/katelyynn/lotus/issues/new/choose" target="_blank">
                 ${tl2(trans.suggest_correction)}
             </a>
             <div class="sep" />
@@ -50197,7 +50190,7 @@
                             </div>
 
                             <div class="button-combo">
-                                <a class="dropdown-menu-clickable-item" data-menu-item="bleh" href="${root}bleh">
+                                <a class="dropdown-menu-clickable-item accented-menu-item" data-menu-item="bleh" href="${root}bleh">
                                     ${tl2(trans.settings)}
                                 </a>
                                 <div class="button-combo-sep" />
@@ -59800,6 +59793,14 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       if (classes == "pagination-previous") {
         link.classList.add("pagination-previous-link");
       }
+    });
+    const pagination = page.structure.container.querySelectorAll(".pagination-page:not([data-pagination])");
+    pagination.forEach((page2) => {
+      page2.setAttribute("data-pagination", "true");
+      const current = page2.hasAttribute("aria-current");
+      const link = page2.querySelector("a, span");
+      link.classList.add("btn", "pagination-page-link");
+      if (current) link.setAttribute("aria-checked", "true");
     });
   }
 

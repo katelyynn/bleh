@@ -480,15 +480,22 @@ function bleh_glacier_library_top(static_page = false) {
     }
 
     if (!static_page && page.subpage != 'library_tracks') {
-        let format_button = document.createElement('button');
-        format_button.classList.add(
-            'btn',
-            'view-item',
-            'glacier-library-button',
-            'glacier-view-button'
-        );
-        format_button.setAttribute('onclick', '_update_glacier_view()');
-        page.structure.glacier.format = format_button;
+        const format_button = html.node`
+            <button class="btn view-item glacier-library-button glacier-view-button" onclick=${() => {
+                const format = page.structure.main.querySelector('.library-view-button');
+                if (!format) return;
+
+                format.click();
+
+                if (format.getAttribute('href') && format.getAttribute('href').endsWith('reset')) {
+                    format_button.setAttribute('data-glacier-view', 'list');
+                    format_button.textContent = tl(trans.list);
+                } else {
+                    format_button.setAttribute('data-glacier-view', 'grid');
+                    format_button.textContent = tl(trans.grid);
+                }
+            }} />
+        `;
         add_divider = true;
 
         if (top_wrap.getAttribute('data-current-format') == 'grid') {
@@ -503,9 +510,9 @@ function bleh_glacier_library_top(static_page = false) {
     }
 
     if (!static_page && add_divider) {
-        let listen_divider = document.createElement('div');
-        listen_divider.classList.add('listen-divider');
-        view_buttons.appendChild(listen_divider);
+        view_buttons.appendChild(html.node`
+            <div class="listen-divider" />
+        `);
     }
 
     let configure_button = document.createElement('button');
@@ -576,24 +583,6 @@ function bleh_glacier_library_top(static_page = false) {
         page.structure.main.firstElementChild
     );
 }
-
-unsafeWindow._update_glacier_view = function () {
-    let format = page.structure.main.querySelector('.library-view-button');
-    if (format == null) return;
-
-    format.click();
-
-    if (
-        format.getAttribute('href') &&
-        format.getAttribute('href').endsWith('reset')
-    ) {
-        page.structure.glacier.format.setAttribute('data-glacier-view', 'list');
-        page.structure.glacier.format.textContent = tl(trans.list);
-    } else {
-        page.structure.glacier.format.setAttribute('data-glacier-view', 'grid');
-        page.structure.glacier.format.textContent = tl(trans.grid);
-    }
-};
 
 function bleh_glacier_date_graph(static_page = false, own_table = null) {
     if (!page.structure.glacier.refresh) return;

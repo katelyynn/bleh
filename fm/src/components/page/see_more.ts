@@ -16,4 +16,16 @@ export function see_more() {
             link.classList.add('pagination-previous-link');
         }
     });
+
+    const pagination = page.structure.container.querySelectorAll('.pagination-page:not([data-pagination])');
+    pagination.forEach(page => {
+        page.setAttribute('data-pagination', 'true');
+
+        const current = page.hasAttribute('aria-current');
+
+        const link = page.querySelector('a, span');
+        link.classList.add('btn', 'pagination-page-link');
+
+        if (current) link.setAttribute('aria-checked', 'true');
+    });
 }

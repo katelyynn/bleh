@@ -418,15 +418,15 @@ export function patch_titles(search = page.structure.main) {
                 if (track_legacy_menu) {
                     track.preview = html.node`
                         <div class="track-preview">
-                            <div class="image">
+                            <div class="track-preview-image">
                                 <div class="inner-image">
                                     ${image ? html.node`<img src=${image.src} alt=${song_title}>` : html.node`<img class="missing-track" alt="">`}
                                 </div>
                             </div>
-                            <div class="info">
-                                <h5 class="title">${song_title}</h5>
-                                <p class="artist">${song_artist_element.firstElementChild.textContent}</p>
-                                <div class="tags">
+                            <div class="track-preview-info">
+                                <h5 class="track-preview-text track-preview-title">${song_title}</h5>
+                                <p class="track-preview-text track-preview-artist">${song_artist_element.firstElementChild.textContent}</p>
+                                <div class="track-preview-tags">
                                     ${song_tags.map(
                                         (tag) => html.node`
                                         <div class="feat" data-bleh--tag-type="${tag.type}" data-bleh--tag-group="${tag.group}">${tag.text}</div>
@@ -435,7 +435,7 @@ export function patch_titles(search = page.structure.main) {
                                 </div>
                                 ${
                                     is_album ? '' : (
-                                        html.node`<p class="album">${
+                                        html.node`<p class="track-preview-text track-preview-album">${
                                             image && album_link ?
                                                 correct_item_by_artist(
                                                     image.getAttribute('alt'),
@@ -446,7 +446,7 @@ export function patch_titles(search = page.structure.main) {
                                         }</p>`
                                     )
                                 }
-                                ${track_timestamp && track_timestamp_contents ? html.node`<p class="timestamp">${track_timestamp_contents}</p>` : ''}
+                                ${track_timestamp && track_timestamp_contents ? html.node`<p class="track-preview-text track-preview-timestamp">${track_timestamp_contents}</p>` : ''}
                                 ${
                                     image?.getAttribute('data-hoshino') ?
                                         html.node`
