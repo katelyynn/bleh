@@ -3,7 +3,7 @@
 
     .modal-close-button,
     .bleh-modal-title {
-        display: none;
+        display: none !important;
     }
 
     .rabbit-search {
@@ -27,7 +27,7 @@
     .fake-input,
     .modern-input {
         width: 400px;
-        height: 48px;
+        height: 36px;
         --padding: var(--card-gap) var(--button-sides) var(--card-gap)
             calc(
                 var(--button-sides-icon) + var(--icon-size) +
@@ -40,7 +40,7 @@
         display: flex;
         align-items: center;
 
-        label {
+        .rabbit-label {
             margin-right: 4px;
             color: oklch(var(--c3));
             font-weight: var(--font-weight);
@@ -48,7 +48,7 @@
             cursor: default;
         }
 
-        p {
+        .rabbit-text {
             margin-right: 8px;
 
             overflow: hidden;
@@ -60,7 +60,7 @@
             cursor: default;
         }
 
-        i {
+        .rabbit-hint {
             font-style: normal;
             color: oklch(var(--c3));
 
@@ -69,23 +69,21 @@
     }
 
     .rabbit-hole {
-        max-height: calc(36px * 8 + var(--overflow));
+        max-height: calc(34px * 8 + var(--overflow));
         overflow-y: auto;
         padding: var(--overflow) var(--card-gap) 0;
         margin: calc(-1 * var(--overflow)) calc(-1 * var(--card-gap)) 0;
 
-        --overflow: calc(48px + var(--card-gap));
+        --overflow: calc(36px + var(--card-gap));
 
-        --mask: linear-gradient(180deg, transparent 13%, white 18%);
+        --mask: linear-gradient(180deg, transparent 11%, white 16%);
         mask-image: var(--mask);
         -webkit-mask-image: var(--mask);
     }
     .rabbit-hole-item {
-        --padding: 9px var(--button-sides) 9px
-            calc(
-                var(--button-sides-icon) + var(--icon-size) +
-                    var(--icon-gap)
-            );
+        --button-verts: 8px;
+        --btn-top: var(--button-verts);
+        --btn-bottom: var(--button-verts);
         display: flex;
 
         .info {

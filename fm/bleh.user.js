@@ -37950,11 +37950,9 @@
           if (item.hide) match3 = false;
           if (match3) matches.push(item);
         });
-        render(
-          rabbit_hole,
-          html`
-                    ${matches.length > 0 ? matches.map((item, index3) => () => {
-            let button2 = html.node`
+        render(rabbit_hole, html`
+                ${matches.length > 0 ? matches.map((item, index3) => () => {
+          let button2 = html.node`
                         <button class="dropdown-menu-clickable-item rabbit-hole-item" data-type=${item.type} onclick=${item.action} disabled=${item.disabled}>
                             <div class="info">
                                 <div class="text">${item.text}</div>
@@ -37962,20 +37960,19 @@
                             ${item.keybind ? keybind(item.keybind) : ""}
                         </button>
                     `;
-            if (!item.disabled) {
-              button2.addEventListener("mouseover", () => {
-                selected = index3;
-                rabbit_select(false, true);
-              });
-            }
-            return button2;
-          }) : html.node`
+          if (!item.disabled) {
+            button2.addEventListener("mouseover", () => {
+              selected = index3;
+              rabbit_select(false, true);
+            });
+          }
+          return button2;
+        }) : html.node`
                     <div class="loading-data-container">
                         <div class="loading-data-text failed">${tl2(trans.nothing_matches_your_search)}</div>
                     </div>
                 `}
-                `
-        );
+            `);
         rabbit_select();
       } else {
         matches = feed;
@@ -38533,22 +38530,22 @@
         render(
           fake,
           html`
-                    <label>${searching.primary.type}:</label>
-                    <p>${searching.primary.name}</p>
+                    <label class="rabbit-label">${searching.primary.type}:</label>
+                    <p class="rabbit-text">${searching.primary.name}</p>
                     <label>${searching.secondary.type}:</label>
-                    <p>${searching.secondary.name}</p>
+                    <p class="rabbit-text">${searching.secondary.name}</p>
                 `
         );
       } else if (searching.primary.type) {
         render(
           fake,
           html`
-                    <label>${searching.primary.type}:</label>
-                    <p>${searching.primary.name}</p>
+                    <label class="rabbit-label">${searching.primary.type}:</label>
+                    <p class="rabbit-text">${searching.primary.name}</p>
                 `
         );
       } else {
-        render(fake, html` <i>${tl2(trans.choose_a_search_type)}</i> `);
+        render(fake, html` <i class="rabbit-hint">${tl2(trans.choose_a_search_type)}</i> `);
       }
       if (searching.primary.type == "artist") {
         rabbit_search("internal:search", [
