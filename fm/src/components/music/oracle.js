@@ -444,9 +444,9 @@ export function oracle_process() {
         log('using artist data', 'oracle', 'info', { artist_data });
 
         if (page.type == 'track')
-            url = `https://musicbrainz.org/ws/2/recording?inc=release-events&query="${sanitise(clean_title(page.name), ' ')}" AND ${artist_template} AND status:Official`;
+            url = `https://musicbrainz.org/ws/2/recording?inc=release-events&query=${encodeURIComponent(`recording:"${sanitise(clean_title(page.name), ' ')}" AND ${artist_template} AND status:Official`)}`;
         else if (page.type == 'album')
-            url = `https://musicbrainz.org/ws/2/release?query=release:"${sanitise(clean_title(page.name), ' ')}" AND ${artist_template}`;
+            url = `https://musicbrainz.org/ws/2/release?query=${encodeURIComponent(`release:"${sanitise(clean_title(page.name), ' ')}" AND ${artist_template}`)}`;
 
         if (page.type == 'album') {
             const local =
