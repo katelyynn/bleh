@@ -11449,6 +11449,11 @@ button.navlist-more {
     &:active {
       transform: scale(0.98) !important;
     }
+    &.secondary-nav-item-link--active {
+      --bg: oklch(var(--h4) / 10%) !important;
+      --bg-hov: oklch(var(--h4) / 20%) !important;
+      --bg-atv: oklch(var(--h4) / 30%) !important;
+    }
   }
   &.secondary-nav-item-link--disabled {
     opacity: 0.65 !important;
