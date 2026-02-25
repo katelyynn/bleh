@@ -10,6 +10,8 @@
 @import './pro.css';
 @import './privacy.css';
 
+@import './test.css';
+
 .inner-preview {
     background: oklch(var(--b6) / 70%);
     padding: var(--card-gap);

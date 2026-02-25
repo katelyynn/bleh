@@ -27914,7 +27914,7 @@
     if (h < 0) h += 360;
     const max_chroma = 0.4;
     const sat = Math.min(c / max_chroma, 1);
-    return { l: L * 100 * 0.8, s: sat * 100, h: Math.round(h) };
+    return { l: L * 100 * 0.92 - 20, s: sat * 140, h: Math.round(h) };
   }
   function rgb_to_hsl(r, g, b) {
     let hex2 = rgb_to_hex(r, g, b);
@@ -27928,11 +27928,10 @@
     return hex2.length == 1 ? "0" + hex2 : hex2;
   }
   function clamp_sat(sat) {
-    if (sat > 2) return 2;
+    if (sat > 4) return 4;
     return round_two(sat);
   }
   function clamp_lit(sat, lit) {
-    if (sat >= 1.3 && lit < 0.8) return 0.8;
     return round_two(lit);
   }
   function round_two(num) {
@@ -59530,6 +59529,25 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       allow_alignment: true,
       allow_lists: true
     };
+    let colours = [
+      [0, 0, 0],
+      [64, 64, 64],
+      [128, 128, 128],
+      [255, 255, 255],
+      [137, 105, 128],
+      [217, 85, 102],
+      [243, 179, 134],
+      [122, 68, 205],
+      [86, 126, 81],
+      [188, 243, 211],
+      [195, 121, 82],
+      [26, 99, 253],
+      [255, 0, 220],
+      [255, 216, 0],
+      [0, 127, 70],
+      [38, 127, 0],
+      [0, 255, 255]
+    ];
     render(
       page.structure.main,
       html`
@@ -59646,6 +59664,29 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       })}
                 <div class="sep" />
                 <div class="markdown-body" ref=${(el) => md_body_default = el} />
+            </section>
+            <section class="flexy">
+                <h2>Colour conversions</h2>
+                <div class="colour-list">
+                        ${colours.map((colour2) => {
+        const hsl = rgb_to_oklch(colour2[0], colour2[1], colour2[2]);
+        hsl.s = clamp_sat(hsl.s / 100 * 3);
+        const hue2 = {
+          h: hsl.h,
+          s: hsl.s,
+          l: clamp_lit(hsl.s, hsl.l / 100 + 0.35)
+        };
+        return html.node`
+                                <div class="colour-list-item">
+                                    <div class="colour-tile colourful" style="background: rgb(${colour2[0]}, ${colour2[1]}, ${colour2[2]})" />
+                                    <div class="colour-text">rgb(${colour2[0]}, ${colour2[1]}, ${colour2[2]})</div>
+                                    <div class="bleh-icon" data-type="arrow-right" style="--icon: var(--mask)" />
+                                    <div class="colour-tile colourful" style="--hue-over: ${hue2.h}; --sat-over: ${hue2.s}; --lit-over: ${hue2.l}" />
+                                    <div class="colour-text">hue ${hue2.h}, sat ${hue2.s}, lit ${hue2.l}</div>
+                                </div>
+                            `;
+      })}
+                </div>
             </section>
             <section class="flexy">
                 <h2>Badges</h2>

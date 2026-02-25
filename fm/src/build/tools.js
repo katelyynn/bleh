@@ -120,7 +120,7 @@ export function rgb_to_oklch(r, g, b) {
     const max_chroma = 0.4;
     const sat = Math.min(c / max_chroma, 1);
 
-    return { l: (L * 100) * 0.8, s: sat * 100, h: Math.round(h) };
+    return { l: ((L * 100) * 0.92) - 20, s: (sat * 140), h: Math.round(h) };
 }
 
 /**
@@ -157,14 +157,12 @@ function comp_to_hex(comp) {
  * @returns {number}
  */
 export function clamp_sat(sat) {
-    if (sat > 2) return 2;
+    if (sat > 4) return 4;
 
     return round_two(sat);
 }
 
 export function clamp_lit(sat, lit) {
-    if (sat >= 1.3 && lit < 0.8) return 0.8;
-
     return round_two(lit);
 }
 

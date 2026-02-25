@@ -17,6 +17,7 @@ import { setting } from '@/components/settings/settings';
 import { markdown, markdown_field } from '@/components/shared/markdown';
 import { sponsor_list } from '@/build/sponsor';
 import { create_badge, load_badges } from '@/components/shared/badge';
+import { rgb_to_oklch, clamp_sat, clamp_lit } from '@/build/tools';
 
 export function mualani() {
     page.structure.container = document.body.querySelector('.page-content');
@@ -54,6 +55,26 @@ export function mualani() {
         allow_alignment: true,
         allow_lists: true
     };
+
+    let colours = [
+        [0, 0, 0],
+        [64, 64, 64],
+        [128, 128, 128],
+        [255, 255, 255],
+        [137, 105, 128],
+        [217, 85, 102],
+        [243, 179, 134],
+        [122, 68, 205],
+        [86, 126, 81],
+        [188, 243, 211],
+        [195, 121, 82],
+        [26, 99, 253],
+        [255, 0, 220],
+        [255, 216, 0],
+        [0, 127, 70],
+        [38, 127, 0],
+        [0, 255, 255]
+    ];
 
     render(
         page.structure.main,
@@ -177,6 +198,32 @@ export function mualani() {
                 })}
                 <div class="sep" />
                 <div class="markdown-body" ref=${el => md_body_default = el} />
+            </section>
+            <section class="flexy">
+                <h2>Colour conversions</h2>
+                <div class="colour-list">
+                        ${colours.map(colour => {
+                            const hsl = rgb_to_oklch(colour[0], colour[1], colour[2]);
+
+                            hsl.s = clamp_sat((hsl.s / 100) * 3);
+
+                            const hue = {
+                                h: hsl.h,
+                                s: hsl.s,
+                                l: clamp_lit(hsl.s, hsl.l / 100 + 0.35)
+                            };
+
+                            return html.node`
+                                <div class="colour-list-item">
+                                    <div class="colour-tile colourful" style="background: rgb(${colour[0]}, ${colour[1]}, ${colour[2]})" />
+                                    <div class="colour-text">rgb(${colour[0]}, ${colour[1]}, ${colour[2]})</div>
+                                    <div class="bleh-icon" data-type="arrow-right" style="--icon: var(--mask)" />
+                                    <div class="colour-tile colourful" style="--hue-over: ${hue.h}; --sat-over: ${hue.s}; --lit-over: ${hue.l}" />
+                                    <div class="colour-text">hue ${hue.h}, sat ${hue.s}, lit ${hue.l}</div>
+                                </div>
+                            `;
+                        })}
+                </div>
             </section>
             <section class="flexy">
                 <h2>Badges</h2>

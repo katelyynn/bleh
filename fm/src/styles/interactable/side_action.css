@@ -133,6 +133,9 @@
     [data-toggle-button-current-state="bookmarked"] > form > &,
     &[data-is-shortcut="true"],
     [data-toggle-button-current-state="followed"] > form > &[data-type="follow"] {
+        --bg: oklch(var(--h4) / 15%) !important;
+        --bg-hov: oklch(var(--h4) / 25%) !important;
+        --bg-atv: oklch(var(--h4) / 35%) !important;
         --col: oklch(var(--l3-c));
         --mask-colour: color-mix(
             in oklch,
@@ -141,46 +144,8 @@
         );
         --force-font-weight: var(--font-weight-medium) !important;
 
-        &:before {
-            background: oklch(var(--h3)) !important;
-            box-shadow:
-                0 3px 12px oklch(var(--h4) / 32%),
-                var(--interactable-outer) !important;
-        }
-
         &:after {
-            background: oklch(var(--b7)) !important;
-        }
-
-        &:hover {
-            &:before {
-                background: color-mix(
-                    in oklch,
-                    oklch(var(--h4)),
-                    oklch(var(--h3)) 80%
-                ) !important;
-                transition: none;
-            }
-        }
-
-        [data-ff--menu_like_side_actions="true"] & {
-            --bg: oklch(var(--h4) / 15%) !important;
-            --bg-hov: oklch(var(--h4) / 25%) !important;
-            --bg-atv: oklch(var(--h4) / 35%) !important;
-            --col: oklch(var(--l3-c)) !important;
-            --mask-colour: color-mix(
-                in oklch,
-                oklch(var(--l3-c)),
-                oklch(var(--l4-c)) 40%
-            );
-
-            &:before {
-                background: var(--card-border-base) !important;
-            }
-
-            &:after {
-                background: var(--mask-colour) !important;
-            }
+            background: var(--mask-colour) !important;
         }
     }
 }
