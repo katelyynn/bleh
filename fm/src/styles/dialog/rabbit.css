@@ -121,7 +121,7 @@
             display: flex;
             gap: 8px;
 
-            kbd {
+            & > kbd {
                 position: relative;
                 font-family: inherit !important;
                 font-size: inherit;

@@ -543,7 +543,7 @@ function patch_settings_profile_panel(token, update_picture) {
     let font_setting;
 
     render(page.structure.side, html`
-        <section>
+        <section class="about-me-preview">
             <h2>${tl(trans.about_me_preview)}</h2>
             <span class="bleh--about-me-preview markdown-body" ref=${(el) => (preview = el)} />
         </section>

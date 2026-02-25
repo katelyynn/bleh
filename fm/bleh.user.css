@@ -1435,7 +1435,6 @@ html body {
 }
 .main-content {
   padding-top: calc(5px + var(--button-height)) !important;
-  overflow-x: hidden;
   @media (max-width: 980px) {
     padding-top: unset !important;
     &:before {
@@ -2838,8 +2837,7 @@ h2.text-18,
 .btn-primary,
 .btn-cancel,
 .btn-secondary,
-.shout-action-button,
-.content-form select,
+select,
 .dropdown-menu-clickable-item,
 .display-options-clickable-item,
 .select-button,
@@ -13399,6 +13397,10 @@ t {
     }
   }
 }
+.about-me-preview {
+  position: sticky !important;
+  top: 50px !important;
+}
 
 /* src/styles/settings/page/auto_edit.css */
 .chart-table {
@@ -15849,8 +15851,7 @@ t {
     display: flex;
     align-items: center;
     gap: var(--icon-gap);
-    & > .bleh-icon {
-      --icon: var(--mask);
+    & > .bleh-icon-inbox-tooltip {
       --icon-size: 14px;
     }
   }
@@ -21040,7 +21041,7 @@ input[type=range]::-moz-range-progress {
     .left {
       display: flex;
       gap: 8px;
-      kbd {
+      & > kbd {
         position: relative;
         font-family: inherit !important;
         font-size: inherit;

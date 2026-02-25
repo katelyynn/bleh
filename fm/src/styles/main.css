@@ -150,9 +150,6 @@ html body {
 .main-content {
     padding-top: calc(5px + var(--button-height)) !important;
 
-    /* overflow on library page for some rsn 2024-11-10 */
-    overflow-x: hidden;
-
     @media (max-width: 980px) {
         padding-top: unset !important;
 

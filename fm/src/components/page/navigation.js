@@ -39,6 +39,7 @@ import { DateTime } from 'luxon';
 import { input } from '@/components/settings/input';
 import { bleh_message_list } from '@/components/inbox/messages';
 import { queue_popup } from '@/components/dialog/popup';
+import { icon } from '../shared/icon';
 
 export function patch_masthead() {
     let masthead_logo = document.body.querySelector('.masthead-logo');
@@ -111,7 +112,7 @@ export function update_masthead(
                     ${version.sku}
                     ${settings.dev ? html.node`
                         <span class="bleh-icon-container">
-                            <span class="bleh-icon" data-type="dev" style="--icon: var(--mask)"/>
+                            ${icon({ name: 'dev' })}
                         </span>
                     ` : ''}
                 </div>
@@ -128,7 +129,7 @@ export function update_masthead(
                     ${version.sku}
                     ${settings.dev ? html.node`
                         <span class="bleh-icon-container">
-                            <span class="bleh-icon" data-type="dev" style="--icon: var(--mask)"/>
+                            ${icon({ name: 'dev' })}
                         </span>
                     ` : ''}
                 </div>
@@ -481,12 +482,12 @@ export function append_nav() {
             <strong>${tl(trans.inbox)}</strong>
             <div class="inbox-info">
                 <div class="inbox-info-item">
-                    <div class="bleh-icon" data-type="notifications" />
+                    ${icon({ name: 'notifications', identifier: 'inbox-tooltip' })}
                     ${notif_count}
                 </div>
                 <div class="inbox-sep" />
                 <div class="inbox-info-item">
-                    <div class="bleh-icon" data-type="messages" />
+                    ${icon({ name: 'messages', identifier: 'inbox-tooltip' })}
                     ${inbox_count}
                 </div>
             </div>

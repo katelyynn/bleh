@@ -163,8 +163,7 @@
         align-items: center;
         gap: var(--icon-gap);
 
-        & > .bleh-icon {
-            --icon: var(--mask);
+        & > .bleh-icon-inbox-tooltip {
             --icon-size: 14px;
         }
     }

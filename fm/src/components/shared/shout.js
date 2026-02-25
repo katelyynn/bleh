@@ -93,7 +93,7 @@ export function patch_shouts() {
             actions.forEach((action) => {
                 let buttons = action.querySelectorAll('button, a');
                 buttons.forEach((button) => {
-                    button.classList.add('shout-action-button', 'see-more');
+                    button.classList.add('btn', 'shout-action-button', 'see-more');
                 });
             });
 
@@ -108,7 +108,7 @@ export function patch_shouts() {
             `, shout.firstChild);
 
             const more_button = shout.querySelector('.shout-more-actions');
-            if (more_button) more_button.classList.add('see-more', 'shout-action-button');
+            if (more_button) more_button.classList.add('btn', 'see-more', 'shout-action-button');
 
             // detect vote status
             const form = shout.querySelector('.vote-button-toggle');

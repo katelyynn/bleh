@@ -20312,7 +20312,7 @@
     id,
     title,
     body,
-    icon,
+    icon: icon2,
     classname,
     actions = [],
     persist = false,
@@ -20325,7 +20325,7 @@
       id,
       title,
       body,
-      icon,
+      icon: icon2,
       classname,
       persist,
       type,
@@ -20334,16 +20334,16 @@
       progress
     });
     if (type === "error") {
-      if (!icon) icon = "icon-16-x";
+      if (!icon2) icon2 = "icon-16-x";
       colourful = true;
     } else if (type === "warning") {
-      if (!icon) icon = "icon-16-warning";
+      if (!icon2) icon2 = "icon-16-warning";
       colourful = true;
     } else if (type === "success") {
-      if (!icon) icon = "icon-16-check";
+      if (!icon2) icon2 = "icon-16-check";
       colourful = true;
     }
-    if (!icon) icon = "icon-16-info";
+    if (!icon2) icon2 = "icon-16-info";
     let bar;
     actions.push({
       type: "close",
@@ -20353,7 +20353,7 @@
     if (progress && persist) persist = false;
     let information;
     const notif = html.node`
-        <div class="bleh-notification" data-type=${type} style="--mask: var(--${icon})">
+        <div class="bleh-notification" data-type=${type} style="--mask: var(--${icon2})">
             <div class="notification-information" ref=${(el) => information = el}>
                 <div class="notification-title">${title}</div>
                 ${body ? html.node`
@@ -20376,7 +20376,7 @@
             </div>
         </div>
     `;
-    if (icon) notif.classList.add("with-icon");
+    if (icon2) notif.classList.add("with-icon");
     if (classname) notif.classList.add(classname);
     if (long) notif.classList.add("long");
     if (colourful) notif.classList.add("colourful");
@@ -27814,14 +27814,14 @@
     }
   }
   function status({ title, body, type }) {
-    let icon = "icon-16-info";
+    let icon2 = "icon-16-info";
     if (type == "error") {
-      icon = "icon-16-x";
+      icon2 = "icon-16-x";
     }
     const alert2 = html.node`
         <div class="status-alert colourful colourful-bg" onclick=${() => status_remove()}>
             <div class="status-icon">
-                <div class="bleh-icon" style="--icon: var(--${icon})" />
+                <div class="bleh-icon" style="--icon: var(--${icon2})" />
             </div>
             <div class="status-title">${title}</div>
             ${body ? html.node`<div class="status-body">${body}</div>` : ""}
@@ -31142,9 +31142,9 @@
     });
     return values;
   }
-  function select_prepare_list(list, icon = null) {
+  function select_prepare_list(list, icon2 = null) {
     return list.map((item) => {
-      if (typeof item === "string") return { value: item, text: item, icon };
+      if (typeof item === "string") return { value: item, text: item, icon: icon2 };
       return item;
     });
   }
@@ -36559,6 +36559,18 @@
     return output;
   }
 
+  // src/components/shared/icon.ts
+  function icon({ name, identifier, use_mask = true }) {
+    const elem = html.node`
+        <span class="bleh-icon" data-type=${name}>
+            ${name} (icon)
+        </span>
+    `;
+    if (use_mask) elem.classList.add("use-mask");
+    if (identifier) elem.classList.add(`bleh-icon-${identifier}`);
+    return elem;
+  }
+
   // src/components/minis/plot.js
   function plot({ host, sidebar } = {}) {
     if (!host || !sidebar) return;
@@ -36588,7 +36600,7 @@
         render_users();
       }}>
                     ${user_placeholder(user)}
-                    <div class="bleh-icon" data-type="minus" />
+                    ${icon({ name: "minus" })}
                 </button>
             `)}
             <button class="compare-user-btn add-user" onclick=${() => {
@@ -36623,7 +36635,7 @@
           render_users();
         }
       }}>
-                <div class="bleh-icon" data-type="plus" />
+                ${icon({ name: "plus" })}
             </button>
         `);
     }
@@ -38758,7 +38770,7 @@
       const type = settings_store[id].type || "toggle";
       const title = settings_store[id].title && !ff("developer_setting_names") ? tl2(settings_store[id].title) : id;
       let body = settings_store[id].body ? tl2(settings_store[id].body) : null;
-      const icon = settings_store[id].icon;
+      const icon2 = settings_store[id].icon;
       if (![
         "toggle",
         "range",
@@ -38823,9 +38835,9 @@
         let toggle2;
         const elem = html.node`
                 <div class="setting v2 ${standalone ? "standalone" : ""}" data-type="toggle" disabled=${disabled} data-hide=${hide_if_incompatible} id="setting_${id}" onclick=${() => update_toggle()}>
-                    ${icon ? html.node`
+                    ${icon2 ? html.node`
                     <div class="icon">
-                        <div class="bleh-icon" style="--icon: var(--${icon})" />
+                        <div class="bleh-icon" style="--icon: var(--${icon2})" />
                     </div>
                     ` : ""}
                     ${text4 ? html.node`
@@ -38988,9 +39000,9 @@
           placeholder = tl2(placeholder);
         let container = html.node`
                 <div class="setting v2 ${standalone ? "standalone" : ""}" data-type="text" disabled=${disabled} data-hide=${hide_if_incompatible} id="setting_${id}" ref=${(el) => option = el} data-modified=${value != settings_store[id].default}>
-                    ${icon ? html.node`
+                    ${icon2 ? html.node`
                     <div class="icon">
-                        <div class="bleh-icon" style="--icon: var(--${icon})" />
+                        <div class="bleh-icon" style="--icon: var(--${icon2})" />
                     </div>
                     ` : ""}
                     ${text4 ? html.node`
@@ -39120,9 +39132,9 @@
         let toggle2;
         const elem = html.node`
                 <div class="setting v2 ${settings_store[id].horizontal ? "horizontal" : ""} ${standalone ? "standalone" : ""}" data-type="checkbox" disabled=${disabled} id="setting_${id}" data-hide=${hide_if_incompatible} onclick=${() => update_toggle()}>
-                    ${icon ? html.node`
+                    ${icon2 ? html.node`
                     <div class="icon">
-                        <div class="bleh-icon" style="--icon: var(--${icon})" />
+                        <div class="bleh-icon" style="--icon: var(--${icon2})" />
                     </div>
                     ` : ""}
                     ${text4 ? html.node`
@@ -39182,9 +39194,9 @@
           });
         const inner2 = html.node`
                 ${Object.entries(values).map(([key, val]) => {
-          const icon2 = val.icon || key;
+          const icon3 = val.icon || key;
           const button2 = html.node`
-                        <button class="btn view-item" data-type=${icon2} data-value=${key} onclick=${() => {
+                        <button class="btn view-item" data-type=${icon3} data-value=${key} onclick=${() => {
             save_setting(id, key);
             buttons.forEach((btn) => {
               btn.setAttribute(
@@ -39231,9 +39243,9 @@
         let reset_btn;
         const elem = html.node`
                 <div class="setting v2" data-type="options" disabled=${disabled} data-hide=${hide_if_incompatible} id="setting_${id}" data-modified=${value != settings_store[id].default}>
-                    ${icon ? html.node`
+                    ${icon2 ? html.node`
                     <div class="icon">
-                        <div class="bleh-icon" style="--icon: var(--${icon})" />
+                        <div class="bleh-icon" style="--icon: var(--${icon2})" />
                     </div>
                     ` : ""}
                     ${text4 ? html.node`
@@ -39265,7 +39277,7 @@
                     <div class="primary-selections">
                         ${Object.entries(settings_store[id].values).map(
           ([key, val]) => {
-            const icon2 = val.icon;
+            const icon3 = val.icon;
             const button2 = html.node`
                                     <div class="setting v2 standalone" data-type="radio" data-value=${key} onclick=${() => {
               update_radio(key);
@@ -39273,9 +39285,9 @@
                                         <div class="radio-cont">
                                             <div class="radio" aria-checked=${value == key} />
                                         </div>
-                                        ${icon2 ? html.node`
+                                        ${icon3 ? html.node`
                                                     <div class="icon">
-                                                        <div class="bleh-icon" style="--icon: var(--${icon2})" />
+                                                        <div class="bleh-icon" style="--icon: var(--${icon3})" />
                                                     </div>
                                                 ` : ""}
                                         <div class="heading">
@@ -39410,9 +39422,9 @@
         let lists;
         const elem = html.node`
                 <div class="setting v2" data-type="list" id="setting_${id}">
-                    ${icon ? html.node`
+                    ${icon2 ? html.node`
                     <div class="icon">
-                        <div class="bleh-icon" style="--icon: var(--${icon})" />
+                        <div class="bleh-icon" style="--icon: var(--${icon2})" />
                     </div>
                     ` : ""}
                     ${text4 ? html.node`
@@ -39472,9 +39484,9 @@
         let select_hook;
         let elem = html.node`
                 <div class="setting v2" data-type="options" disabled=${disabled} data-hide=${hide_if_incompatible} id="setting_${id}" data-modified=${value != settings_store[id].default}>
-                    ${icon ? html.node`
+                    ${icon2 ? html.node`
                     <div class="icon">
-                        <div class="bleh-icon" style="--icon: var(--${icon})" />
+                        <div class="bleh-icon" style="--icon: var(--${icon2})" />
                     </div>
                     ` : ""}
                     ${text4 ? html.node`
@@ -43996,7 +44008,7 @@
                 <div class="data-table-entry">
                     <div class="entry-header">
                         <strong class="entry-type">
-                            <span class="bleh-icon" data-type=${type} style="--icon: var(--mask)" />
+                            ${icon({ name: type })}
                             ${type}
                         </strong>
                         <div class="entry-subdata">
@@ -44209,7 +44221,7 @@
         actions.forEach((action) => {
           let buttons2 = action.querySelectorAll("button, a");
           buttons2.forEach((button2) => {
-            button2.classList.add("shout-action-button", "see-more");
+            button2.classList.add("btn", "shout-action-button", "see-more");
           });
         });
         shout.insertBefore(html.node`
@@ -44222,7 +44234,7 @@
                 </div>
             `, shout.firstChild);
         const more_button = shout.querySelector(".shout-more-actions");
-        if (more_button) more_button.classList.add("see-more", "shout-action-button");
+        if (more_button) more_button.classList.add("btn", "see-more", "shout-action-button");
         const form = shout.querySelector(".vote-button-toggle");
         const voted_button = form.querySelector(".vote-button--voted");
         const unvote_button = form.querySelector(
@@ -47198,8 +47210,8 @@
       {
         type: "lang",
         regex: /\[icon=([a-zA-Z-]+)\]/g,
-        replace: (_, icon) => {
-          return `<span class="bleh-icon in-markdown" style="--icon: var(--icon-16-${icon})">A</span>`;
+        replace: (_, icon2) => {
+          return `<span class="bleh-icon in-markdown" style="--icon: var(--icon-16-${icon2})">A</span>`;
         }
       },
       {
@@ -49367,7 +49379,7 @@
                     ${version.sku}
                     ${settings.dev ? html.node`
                         <span class="bleh-icon-container">
-                            <span class="bleh-icon" data-type="dev" style="--icon: var(--mask)"/>
+                            ${icon({ name: "dev" })}
                         </span>
                     ` : ""}
                 </div>
@@ -49384,7 +49396,7 @@
                     ${version.sku}
                     ${settings.dev ? html.node`
                         <span class="bleh-icon-container">
-                            <span class="bleh-icon" data-type="dev" style="--icon: var(--mask)"/>
+                            ${icon({ name: "dev" })}
                         </span>
                     ` : ""}
                 </div>
@@ -49678,12 +49690,12 @@
             <strong>${tl2(trans.inbox)}</strong>
             <div class="inbox-info">
                 <div class="inbox-info-item">
-                    <div class="bleh-icon" data-type="notifications" />
+                    ${icon({ name: "notifications", identifier: "inbox-tooltip" })}
                     ${notif_count}
                 </div>
                 <div class="inbox-sep" />
                 <div class="inbox-info-item">
-                    <div class="bleh-icon" data-type="messages" />
+                    ${icon({ name: "messages", identifier: "inbox-tooltip" })}
                     ${inbox_count}
                 </div>
             </div>
@@ -55675,7 +55687,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     let elem = html.node`
         <div class="primary-selections">
         ${Object.entries(values).map(([key, val]) => {
-      const icon = val.icon;
+      const icon2 = val.icon;
       let input2;
       const button2 = html.node`
                 <div class="setting v2 standalone" data-type="radio" data-value=${key} onclick=${() => {
@@ -55685,9 +55697,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                         <input type="radio" name=${name} value=${key} required ref=${(el) => input2 = el}>
                         <div class="radio" aria-checked=${value == key} />
                     </div>
-                    ${icon ? html.node`
+                    ${icon2 ? html.node`
                                 <div class="icon">
-                                    <div class="bleh-icon" style="--icon: var(--${icon})" />
+                                    <div class="bleh-icon" style="--icon: var(--${icon2})" />
                                 </div>
                             ` : ""}
                     <div class="heading">
@@ -56197,7 +56209,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     let accent_setting;
     let font_setting;
     render(page.structure.side, html`
-        <section>
+        <section class="about-me-preview">
             <h2>${tl2(trans.about_me_preview)}</h2>
             <span class="bleh--about-me-preview markdown-body" ref=${(el) => preview = el} />
         </section>
@@ -60223,8 +60235,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
             <meta name="apple-mobile-web-app-capable" content="yes" />
             <link rel="manifest" href="https://github.com/katelyynn/bleh/raw/uwu/fm/app.webmanifest" />
         `);
-      let icon = document.head.querySelector('[rel="apple-touch-icon"]');
-      icon.setAttribute(
+      let icon2 = document.head.querySelector('[rel="apple-touch-icon"]');
+      icon2.setAttribute(
         "href",
         "https://github.com/katelyynn/bleh/raw/uwu/fm/app.png"
       );
