@@ -49612,7 +49612,7 @@
     });
     const more_menu = tippy_esm_default(more_button, {
       content: html.node`
-            <a class="dropdown-menu-clickable-item accent" data-type="discord" href="https://discord.gg/${discord}" target="_blank">
+            <a class="dropdown-menu-clickable-item colourful" data-type="discord" href="https://discord.gg/${discord}" target="_blank">
                 ${tl2(trans.join_discord)}
             </a>
             <button class="dropdown-menu-clickable-item sponsor" onclick=${() => sponsor()}>
@@ -71355,7 +71355,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       default: 1.28,
       type: "range",
       min: 0,
-      max: 2,
+      max: 4,
       step: 0.01,
       title: trans.sat,
       vertical: true

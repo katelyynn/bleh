@@ -637,7 +637,7 @@ export let settings_store = {
         default: 1.28,
         type: 'range',
         min: 0,
-        max: 2,
+        max: 4,
         step: 0.01,
         title: trans.sat,
         vertical: true

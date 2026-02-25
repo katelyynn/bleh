@@ -1,4 +1,6 @@
 @import './main.css';
+@import './shared/icon_types.css';
+@import './shared/links.css';
 @import './links.css';
 @import './headers.css';
 
@@ -16,7 +18,6 @@
 
 @import './settings/setting.css';
 
-@import './shared/icon_types.css';
 @import './shared/keyframes.css';
 @import './shared/badge.css';
 @import './shared/activity.css';

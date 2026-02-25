@@ -396,7 +396,7 @@ export function append_nav() {
 
     const more_menu = tippy(more_button, {
         content: html.node`
-            <a class="dropdown-menu-clickable-item accent" data-type="discord" href="https://discord.gg/${discord}" target="_blank">
+            <a class="dropdown-menu-clickable-item colourful" data-type="discord" href="https://discord.gg/${discord}" target="_blank">
                 ${tl(trans.join_discord)}
             </a>
             <button class="dropdown-menu-clickable-item sponsor" onclick=${() => sponsor()}>
