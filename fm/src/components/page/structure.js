@@ -282,7 +282,7 @@ export function checkup_page_structure(is_subpage = false, header = null) {
                     else page.structure.main.appendChild(side_actions);
 
                     radio.classList =
-                        'btn stationlink js-playlink-station radio-button';
+                        'btn stationlink js-playlink-station radio-button side-action';
 
                     let type = radio.getAttribute('data-analytics-label');
 

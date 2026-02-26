@@ -47,14 +47,27 @@
     text-overflow: ellipsis;
     --mask-size: 12px;
     --padding: 6px var(--button-sides) 6px calc(var(--button-sides) + var(--icon-size) + 10px);
+    margin: unset !important;
     width: unset !important;
     position: relative;
     min-height: var(--side-action-height) !important;
     --show-icon: block !important;
     --side-action-height: 34px;
 
-    &.side-action {
+    &:not(.stationlink, .listening-report-promo) {
         height: var(--side-action-height) !important;
+
+        display: flex;
+        align-items: center;
+        text-align: left;
+        gap: 4px;
+        width: 100%;
+
+        & > i {
+            font-size: var(--font-size-sm);
+            font-style: normal;
+            opacity: 0.6;
+        }
     }
 
     &.stationlink {
@@ -116,20 +129,6 @@
         }
     }
 
-    &.side-action {
-        display: flex;
-        align-items: center;
-        text-align: left;
-        gap: 4px;
-        width: 100%;
-
-        i {
-            font-size: var(--font-size-sm);
-            font-style: normal;
-            opacity: 0.6;
-        }
-    }
-
     &[data-friends="true"],
     &.attendance-btn--turn-off,
     [data-toggle-button-current-state="loved"] > form > &,
@@ -185,4 +184,9 @@
         font-size: var(--font-size) !important;
         order: -1;
     }
+}
+
+
+.listen-sep {
+    margin: var(--card-gap) 0;
 }

@@ -33352,7 +33352,7 @@
             if (!page.mobile)
               page.structure.side.appendChild(side_actions);
             else page.structure.main.appendChild(side_actions);
-            radio2.classList = "btn stationlink js-playlink-station radio-button";
+            radio2.classList = "btn stationlink js-playlink-station radio-button side-action";
             let type = radio2.getAttribute("data-analytics-label");
             render(
               radio2,
@@ -58936,7 +58936,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
     let radios = page.structure.side.querySelectorAll(".stationlink");
     radios.forEach((radio2) => {
       let type = radio2.getAttribute("data-analytics-label");
-      radio2.classList.add("radio-button");
+      radio2.classList.add("radio-button", "side-action");
       let text4 = tl2(trans[type]);
       if (type == "tag")
         text4 = page.name;
@@ -58955,17 +58955,19 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       header.textContent = tl2(trans.listening);
       let promos = promo_v3.querySelectorAll(".listening-report-promo");
       let container = document.createElement("div");
-      container.classList.add("listening-report-promos");
+      container.classList.add("listening-report-promos", "side-actions");
       promos.forEach((promo) => {
+        promo.classList.add("side-action");
         container.appendChild(promo);
       });
       promo_v3.appendChild(container);
       if (radios.length == 0) return;
       let sep = document.createElement("div");
-      sep.classList.add("sep");
+      sep.classList.add("sep", "listen-sep");
       promo_v3.appendChild(sep);
       let list = page.structure.side.querySelector(".stationlink-list");
-      page.structure.side.removeChild(list.parentElement);
+      list.classList.add("side-actions");
+      list.parentElement.remove();
       promo_v3.appendChild(list);
     } else {
       let header = page.structure.side.querySelector(".stationlinks-header");
