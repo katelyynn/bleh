@@ -6127,19 +6127,16 @@ section,
   & + .chartlist {
     margin-top: 4px !important;
   }
-  .buffer-standard:has(> &) {
-    margin-top: unset;
+  & > tbody {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
   }
 }
 .section-controls + .buffer-standard {
-  .chartlist {
+  & > .chartlist {
     margin-top: var(--card-gap) !important;
   }
-}
-.chartlist > tbody {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
 }
 .obsession-candidate,
 .chartlist-row {
@@ -6390,10 +6387,6 @@ section,
     --mask: var(--icon-16-album);
   }
 }
-.col-main > p > [href^="/tag/"] {
-  display: flex;
-  width: fit-content;
-}
 .chartlist-loved {
   position: absolute !important;
   top: 0;
@@ -6408,12 +6401,12 @@ section,
   @media (max-width: 980px) {
     padding: 0 5px;
   }
-  [data-bleh--season=halloween] & {
+  &[data-season=halloween] {
     --hue-seasonal: 70;
     --sat-seasonal: 1;
     --lit-seasonal: 1;
   }
-  [data-bleh--season=christmas] & {
+  &[data-season=christmas] {
     --hue-seasonal: 352;
     --sat-seasonal: 1.8;
     --lit-seasonal: 0.925;
@@ -6527,7 +6520,7 @@ section,
   color: oklch(var(--c2) / 80%) !important;
   font-weight: var(--font-weight);
 }
-[data-bleh--show_guest_features=false] {
+html[data-bleh--show_guest_features=false] {
   .feat {
     &[data-bleh--tag-group=guests] {
       display: none !important;
@@ -6539,7 +6532,7 @@ section,
     }
   }
 }
-[data-bleh--show_remaster_tags=false] {
+html[data-bleh--show_remaster_tags=false] {
   .title-container .feat,
   .chartlist-name .feat {
     &[data-bleh--tag-group=remasters] {

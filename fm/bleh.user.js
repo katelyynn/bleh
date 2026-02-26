@@ -32397,8 +32397,10 @@
             track_title.getAttribute("data-name")
           );
         }
-        const love = track.querySelector(".chartlist-love-button");
-        if (love) {
+        const loved = track.querySelector(".chartlist-loved");
+        const love = loved.querySelector(".chartlist-love-button");
+        if (loved) {
+          loved.setAttribute("data-season", season);
           love.classList.add("btn");
           tippy_esm_default(love, {
             content: tl2(trans.love_track)

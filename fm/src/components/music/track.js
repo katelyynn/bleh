@@ -1079,8 +1079,11 @@ export function patch_titles(search = page.structure.main) {
                 );
             }
 
-            const love = track.querySelector('.chartlist-love-button');
-            if (love) {
+            const loved = track.querySelector('.chartlist-loved');
+            const love = loved.querySelector('.chartlist-love-button');
+            if (loved) {
+                loved.setAttribute('data-season', season);
+
                 love.classList.add('btn');
                 tippy(love, {
                     content: tl(trans.love_track)
