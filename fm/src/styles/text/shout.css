@@ -53,6 +53,10 @@
     .form-submit {
         gap: var(--button-list-gap);
     }
+
+    .form-group--submit {
+        --override-margin-top: 8px !important;
+    }
 }
 .js-shout-reply-cancel {
     position: relative;
@@ -202,14 +206,6 @@
     &[aria-checked="true"] {
         opacity: 1;
         transform: scaleX(1);
-    }
-}
-
-.shout-form {
-    padding-top: var(--card-gap) !important;
-
-    .form-group--submit {
-        --override-margin-top: 8px !important;
     }
 }
 
