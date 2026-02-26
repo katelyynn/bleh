@@ -28211,104 +28211,80 @@
   var artist_corrections = {};
   var album_track_corrections = {};
   var combined_artists = {};
-  var ranks = {
-    15: {
+  var ranks = [
+    {
+      start: 1e5,
+      hue: 261,
+      sat: 2.54,
+      lit: 0
+    },
+    {
       start: 6e4,
-      hue: 240,
-      sat: 1.15,
+      hue: 261,
+      sat: 2.54,
+      lit: 0.42
+    },
+    {
+      start: 4e4,
+      hue: 278,
+      sat: 3.07,
+      lit: 0.65
+    },
+    {
+      start: 32e3,
+      hue: 279,
+      sat: 1.91,
+      lit: 0.71
+    },
+    {
+      start: 22e3,
+      hue: 356,
+      sat: 2.1,
+      lit: 0.8
+    },
+    {
+      start: 13e3,
+      hue: 18,
+      sat: 2.06,
+      lit: 0.85
+    },
+    {
+      start: 8e3,
+      hue: 42,
+      sat: 1.51,
+      lit: 0.95
+    },
+    {
+      start: 5500,
+      hue: 105,
+      sat: 1.42,
       lit: 1.1
     },
-    14: {
-      start: 44e3,
-      hue: 260,
-      sat: 1.2,
-      lit: 1.15
+    {
+      start: 3500,
+      hue: 135,
+      sat: 2.23,
+      lit: 1.1
     },
-    13: {
-      start: 32e3,
-      hue: 280,
-      sat: 1.25,
-      lit: 1.17
+    {
+      start: 2e3,
+      hue: 161,
+      sat: 1.8,
+      lit: 1.04
     },
-    12: {
-      start: 26e3,
-      hue: 300,
-      sat: 1.2,
-      lit: 1.2
-    },
-    11: {
-      start: 17e3,
-      hue: 320,
-      sat: 1.15,
-      lit: 1.22
-    },
-    10: {
-      start: 12e3,
-      hue: 0,
-      sat: 1.25,
-      lit: 1.2
-    },
-    9: {
-      start: 8e3,
-      hue: 15,
-      sat: 1.25,
-      lit: 1.22
-    },
-    8: {
-      start: 5300,
-      hue: 30,
-      sat: 1.2,
-      lit: 1.23
-    },
-    7: {
-      start: 4e3,
-      hue: 45,
-      sat: 1.15,
-      lit: 1.25
-    },
-    6: {
-      start: 2250,
-      hue: 60,
-      sat: 1.1,
-      lit: 1.25
-    },
-    5: {
-      start: 1500,
-      hue: 80,
-      sat: 1.05,
-      lit: 1.23
-    },
-    4: {
+    {
       start: 1e3,
-      hue: 100,
-      sat: 1,
-      lit: 1.2
-    },
-    3: {
-      start: 500,
-      hue: 120,
-      sat: 0.95,
-      lit: 1.17
-    },
-    2: {
-      start: 300,
-      hue: 150,
-      sat: 1,
+      hue: 232,
+      sat: 1.48,
       lit: 1.15
     },
-    1: {
-      start: 100,
-      hue: 180,
-      sat: 1.05,
-      lit: 1.13
-    },
-    0: {
+    {
       start: 0,
-      hue: 200,
-      sat: 1.1,
-      lit: 1.17
+      hue: 258,
+      sat: 1.91,
+      lit: 1.15
     }
-  };
+  ];
   var includes = {
     guests: [
       /\sfeat\s/i,
@@ -30544,13 +30520,13 @@
   function parse_scrobbles_as_rank(scrobbles) {
     let scrobble_milestone = 0;
     let scrobble_proximity = 0;
-    let max_rank = 15;
-    for (let rank = max_rank; rank >= 0; rank--) {
-      if (scrobbles >= ranks[rank].start) {
-        scrobble_milestone = rank;
-        break;
+    let max_rank = ranks.length - 1;
+    ranks.forEach((rank, index3) => {
+      if (scrobbles <= rank.start) {
+        scrobble_milestone = index3;
+        return;
       }
-    }
+    });
     let milestone_hue = ranks[scrobble_milestone].hue;
     let milestone_sat = ranks[scrobble_milestone].sat;
     let milestone_lit = ranks[scrobble_milestone].lit;
@@ -30567,13 +30543,18 @@
       milestone_sat += (next_milestone_sat - milestone_sat) * scrobble_proximity;
       milestone_lit += (next_milestone_lit - milestone_lit) * scrobble_proximity;
     }
+    let contrast = false;
+    if (scrobbles >= 5e4) {
+      contrast = true;
+    }
     log(`milestone for ${scrobbles} is ${scrobble_milestone} within ${scrobble_proximity} proximity`, "colourful counts", "info", { hue: milestone_hue, sat: milestone_sat, lit: milestone_lit });
     return {
       milestone: scrobble_milestone,
       proximity: scrobble_proximity,
       hue: milestone_hue,
       sat: milestone_sat,
-      lit: milestone_lit
+      lit: milestone_lit,
+      contrast
     };
   }
 
@@ -30821,6 +30802,10 @@
         if (!is_album && settings.colourful_counts && page.type == "user") {
           if (!plays_elem.getAttribute("href").includes("?from=") && (!plays_elem.getAttribute("href").includes("?date_preset=") || plays_elem.getAttribute("href").endsWith("?date_preset=ALL") || plays_elem.getAttribute("href").endsWith("?date_preset=null"))) {
             let parsed_scrobble_as_rank = parse_scrobbles_as_rank(plays);
+            plays_elem.classList.add("colourful");
+            if (parsed_scrobble_as_rank.contrast) {
+              plays_elem.classList.add("plays-contrast");
+            }
             plays_elem.setAttribute(
               "data-bleh--scrobble-milestone",
               parsed_scrobble_as_rank.milestone
@@ -32398,9 +32383,9 @@
           );
         }
         const loved = track.querySelector(".chartlist-loved");
-        const love = loved.querySelector(".chartlist-love-button");
         if (loved) {
           loved.setAttribute("data-season", season);
+          const love = loved.querySelector(".chartlist-love-button");
           love.classList.add("btn");
           tippy_esm_default(love, {
             content: tl2(trans.love_track)
@@ -51104,6 +51089,42 @@
     scroll_to_setting(result.id);
   }
 
+  // src/components/music/bar.js
+  function chartlist_bar(value, max2) {
+    let slug;
+    let val;
+    let count_bar = html.node`
+        <div class="chartlist-count-bar">
+            <a class="chartlist-count-bar-link">
+                <span class="chartlist-count-bar-slug" data-max-stat-value="${max2}" data-stat-value="${value}" style="width: ${max2 / max2 * 100}%" ref=${(el) => slug = el} />
+                <span class="chartlist-count-bar-value" ref=${(el) => val = el}>${value.toLocaleString(DateTime.DATE_MED)}</span>
+            </a>
+        </div>
+    `;
+    let parsed_scrobble_as_rank = parse_scrobbles_as_rank(value);
+    count_bar.setAttribute(
+      "data-bleh--scrobble-milestone",
+      parsed_scrobble_as_rank.milestone
+    );
+    count_bar.style.setProperty(
+      "--hue-over",
+      parsed_scrobble_as_rank.hue
+    );
+    count_bar.style.setProperty(
+      "--sat-over",
+      parsed_scrobble_as_rank.sat
+    );
+    count_bar.style.setProperty(
+      "--lit-over",
+      parsed_scrobble_as_rank.lit
+    );
+    if (parsed_scrobble_as_rank.contrast) {
+      slug.classList.add("bar-contrast");
+      val.classList.add("bar-contrast");
+    }
+    return count_bar;
+  }
+
   // src/pages/bleh_settings/bleh_settings.js
   function bleh_settings() {
     page.name = auth.name;
@@ -51344,34 +51365,7 @@
       page_error(e);
     }
     if (page_id == "interface") {
-      let chartlist_bar = function(value, max2) {
-        let count_bar = html.node`
-                <div class="chartlist-count-bar">
-                    <a class="chartlist-count-bar-link">
-                        <span class="chartlist-count-bar-slug" data-max-stat-value="${max2}" data-stat-value="${value}" style="width: ${max2 / max2 * 100}%" />
-                        <span class="chartlist-count-bar-value">${value.toLocaleString(DateTime.DATE_MED)}</span>
-                    </a>
-                </div>
-            `;
-        let parsed_scrobble_as_rank = parse_scrobbles_as_rank(value);
-        count_bar.setAttribute(
-          "data-bleh--scrobble-milestone",
-          parsed_scrobble_as_rank.milestone
-        );
-        count_bar.style.setProperty(
-          "--hue-over",
-          parsed_scrobble_as_rank.hue
-        );
-        count_bar.style.setProperty(
-          "--sat-over",
-          parsed_scrobble_as_rank.sat
-        );
-        count_bar.style.setProperty(
-          "--lit-over",
-          parsed_scrobble_as_rank.lit
-        );
-        return count_bar;
-      }, render_track_preview = function() {
+      let render_track_preview = function() {
         const avi = auth.avatar.replace("/avatar42s/", "/avatar170s/");
         render(preview, html`
                 <table class="chartlist chartlist--with-image chartlist--with-loved chartlist--with-artist chartlist--with-more">
@@ -51464,8 +51458,8 @@
                 <div class="inner-preview pad">
                     <div class="bars" ref=${(el) => bars = el}>
                         ${() => {
-        let max2 = 3e4;
-        for (let value = 1e3; value <= max2; value += page.mobile ? 3e3 : 1e3) {
+        let max2 = 2e4;
+        for (let value = 0; value <= max2; value += page.mobile ? 3e3 : 1e3) {
           bars.appendChild(chartlist_bar(value, max2));
         }
       }}
@@ -59550,6 +59544,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       [38, 127, 0],
       [0, 255, 255]
     ];
+    let bars;
     render(
       page.structure.main,
       html`
@@ -59666,6 +59661,18 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       })}
                 <div class="sep" />
                 <div class="markdown-body" ref=${(el) => md_body_default = el} />
+            </section>
+            <section class="flexy">
+                <div class="inner-preview pad">
+                    <div class="bars" ref=${(el) => bars = el}>
+                        ${() => {
+        let max2 = 1e5;
+        for (let value = 0; value <= max2; value += 200) {
+          bars.appendChild(chartlist_bar(value, max2));
+        }
+      }}
+                    </div>
+                </div>
             </section>
             <section class="flexy">
                 <h2>Colour conversions</h2>

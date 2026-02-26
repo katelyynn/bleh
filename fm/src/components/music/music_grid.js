@@ -213,8 +213,13 @@ export function music_grids(search = page.structure.main, use_colour = true) {
                             .getAttribute('href')
                             .endsWith('?date_preset=null'))
                 ) {
-                    let parsed_scrobble_as_rank =
-                        parse_scrobbles_as_rank(plays);
+                    let parsed_scrobble_as_rank = parse_scrobbles_as_rank(plays);
+
+                    plays_elem.classList.add('colourful');
+
+                    if (parsed_scrobble_as_rank.contrast) {
+                        plays_elem.classList.add('plays-contrast');
+                    }
 
                     plays_elem.setAttribute(
                         'data-bleh--scrobble-milestone',

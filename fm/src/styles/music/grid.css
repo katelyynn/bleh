@@ -422,11 +422,15 @@
         }
 
         &[data-bleh--scrobble-milestone] {
-            color: color-mix(
-                in oklch,
-                oklch(var(--l3-c)),
-                oklch(var(--l4-c)) 30%
-            );
+            color: oklch(var(--l2-c));
+            filter: drop-shadow(0 0 8px oklch(var(--l4-c) / 60%));
+
+            &.plays-contrast {
+                color: oklch(var(--l2-c));
+                --hue-over: 65 !important;
+                --sat-over: 1.8 !important;
+                --lit-over: 0.84 !important;
+            }
         }
 
         &.with-avatar {

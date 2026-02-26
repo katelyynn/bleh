@@ -52,6 +52,7 @@ import { general } from '@/pages/bleh_settings/general';
 import { seasonal } from './seasonal';
 import { settings_search } from './search.js';
 import { icon } from '@/components/shared/icon.js';
+import { chartlist_bar } from '@/components/music/bar.js';
 
 export function bleh_settings() {
     page.name = auth.name;
@@ -316,38 +317,6 @@ export async function render_setting_page(page_id) {
     if (page_id == 'interface') {
         register_skip_to([]);
 
-        function chartlist_bar(value, max) {
-            let count_bar = html.node`
-                <div class="chartlist-count-bar">
-                    <a class="chartlist-count-bar-link">
-                        <span class="chartlist-count-bar-slug" data-max-stat-value="${max}" data-stat-value="${value}" style="width: ${(max / max) * 100}%" />
-                        <span class="chartlist-count-bar-value">${value.toLocaleString(DateTime.DATE_MED)}</span>
-                    </a>
-                </div>
-            `;
-
-            let parsed_scrobble_as_rank = parse_scrobbles_as_rank(value);
-
-            count_bar.setAttribute(
-                'data-bleh--scrobble-milestone',
-                parsed_scrobble_as_rank.milestone
-            );
-            count_bar.style.setProperty(
-                '--hue-over',
-                parsed_scrobble_as_rank.hue
-            );
-            count_bar.style.setProperty(
-                '--sat-over',
-                parsed_scrobble_as_rank.sat
-            );
-            count_bar.style.setProperty(
-                '--lit-over',
-                parsed_scrobble_as_rank.lit
-            );
-
-            return count_bar;
-        }
-
         let bars;
 
         let track_layout;
@@ -445,10 +414,10 @@ export async function render_setting_page(page_id) {
                 <div class="inner-preview pad">
                     <div class="bars" ref=${(el) => (bars = el)}>
                         ${() => {
-                            let max = 30_000;
+                            let max = 20_000;
 
                             for (
-                                let value = 1_000;
+                                let value = 0;
                                 value <= max;
                                 value += page.mobile ? 3_000 : 1_000
                             ) {

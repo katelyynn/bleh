@@ -1080,9 +1080,10 @@ export function patch_titles(search = page.structure.main) {
             }
 
             const loved = track.querySelector('.chartlist-loved');
-            const love = loved.querySelector('.chartlist-love-button');
             if (loved) {
                 loved.setAttribute('data-season', season);
+
+                const love = loved.querySelector('.chartlist-love-button');
 
                 love.classList.add('btn');
                 tippy(love, {

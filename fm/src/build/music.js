@@ -11,104 +11,80 @@ export let artist_corrections = {};
 export let album_track_corrections = {};
 export let combined_artists = {};
 
-export let ranks = {
-    15: {
+export let ranks = [
+    {
+        start: 100_000,
+        hue: 261,
+        sat: 2.54,
+        lit: 0
+    },
+    {
         start: 60_000,
-        hue: 240,
-        sat: 1.15,
+        hue: 261,
+        sat: 2.54,
+        lit: 0.42
+    },
+    {
+        start: 40_000,
+        hue: 278,
+        sat: 3.07,
+        lit: 0.65
+    },
+    {
+        start: 32_000,
+        hue: 279,
+        sat: 1.91,
+        lit: 0.71
+    },
+    {
+        start: 22_000,
+        hue: 356,
+        sat: 2.1,
+        lit: 0.8
+    },
+    {
+        start: 13_000,
+        hue: 18,
+        sat: 2.06,
+        lit: 0.85
+    },
+    {
+        start: 8_000,
+        hue: 42,
+        sat: 1.51,
+        lit: 0.95
+    },
+    {
+        start: 5_500,
+        hue: 105,
+        sat: 1.42,
         lit: 1.1
     },
-    14: {
-        start: 44_000,
-        hue: 260,
-        sat: 1.2,
-        lit: 1.15
+    {
+        start: 3_500,
+        hue: 135,
+        sat: 2.23,
+        lit: 1.1
     },
-    13: {
-        start: 32_000,
-        hue: 280,
-        sat: 1.25,
-        lit: 1.17
+    {
+        start: 2_000,
+        hue: 161,
+        sat: 1.8,
+        lit: 1.04
     },
-    12: {
-        start: 26_000,
-        hue: 300,
-        sat: 1.2,
-        lit: 1.2
-    },
-    11: {
-        start: 17_000,
-        hue: 320,
-        sat: 1.15,
-        lit: 1.22
-    },
-    10: {
-        start: 12_000,
-        hue: 0,
-        sat: 1.25,
-        lit: 1.2
-    },
-    9: {
-        start: 8_000,
-        hue: 15,
-        sat: 1.25,
-        lit: 1.22
-    },
-    8: {
-        start: 5_300,
-        hue: 30,
-        sat: 1.2,
-        lit: 1.23
-    },
-    7: {
-        start: 4_000,
-        hue: 45,
-        sat: 1.15,
-        lit: 1.25
-    },
-    6: {
-        start: 2_250,
-        hue: 60,
-        sat: 1.1,
-        lit: 1.25
-    },
-    5: {
-        start: 1_500,
-        hue: 80,
-        sat: 1.05,
-        lit: 1.23
-    },
-    4: {
+    {
         start: 1_000,
-        hue: 100,
-        sat: 1.0,
-        lit: 1.2
-    },
-    3: {
-        start: 500,
-        hue: 120,
-        sat: 0.95,
-        lit: 1.17
-    },
-    2: {
-        start: 300,
-        hue: 150,
-        sat: 1.0,
+        hue: 232,
+        sat: 1.48,
         lit: 1.15
     },
-    1: {
-        start: 100,
-        hue: 180,
-        sat: 1.05,
-        lit: 1.13
-    },
-    0: {
+    {
         start: 0,
-        hue: 200,
-        sat: 1.1,
-        lit: 1.17
+        hue: 258,
+        sat: 1.91,
+        lit: 1.15
     }
-};
+];
 
 export let includes = {
     guests: [

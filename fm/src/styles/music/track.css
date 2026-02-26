@@ -658,7 +658,7 @@ html[data-bleh--show_remaster_tags="false"] {
     line-height: 22px; /* 22 */
     background: oklch(var(--chartlist-bar-bg, var(--b4) / 40%));
     color: oklch(var(--b7)) !important;
-    box-shadow: var(--group-shadow), var(--interact-shadow);
+    box-shadow: unset;
     text-decoration: none !important;
     width: 180px;
     display: flex;
@@ -691,6 +691,13 @@ html[data-bleh--show_remaster_tags="false"] {
         font-weight: inherit;
         padding: 0 10px !important;
         margin: 0 -10px;
+
+        &.bar-contrast {
+            color: oklch(var(--l2-c));
+            --hue-over: 65;
+            --sat-over: 1.8;
+            --lit-over: 0.84;
+        }
 
         .stat-name {
             display: none !important;
@@ -755,7 +762,7 @@ html[data-bleh--show_remaster_tags="false"] {
 
 .chartlist-count-bar,
 .chartlist-count-bar-slug {
-    border-radius: var(--item-med-radius); /* 50 */
+    border-radius: 8px; /* 50 */
 }
 
 

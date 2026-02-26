@@ -18,6 +18,7 @@ import { markdown, markdown_field } from '@/components/shared/markdown';
 import { sponsor_list } from '@/build/sponsor';
 import { create_badge, load_badges } from '@/components/shared/badge';
 import { rgb_to_oklch, clamp_sat, clamp_lit } from '@/build/tools';
+import { chartlist_bar } from '@/components/music/bar';
 
 export function mualani() {
     page.structure.container = document.body.querySelector('.page-content');
@@ -75,6 +76,8 @@ export function mualani() {
         [38, 127, 0],
         [0, 255, 255]
     ];
+
+    let bars;
 
     render(
         page.structure.main,
@@ -198,6 +201,23 @@ export function mualani() {
                 })}
                 <div class="sep" />
                 <div class="markdown-body" ref=${el => md_body_default = el} />
+            </section>
+            <section class="flexy">
+                <div class="inner-preview pad">
+                    <div class="bars" ref=${(el) => (bars = el)}>
+                        ${() => {
+                            let max = 100_000;
+
+                            for (
+                                let value = 0;
+                                value <= max;
+                                value += 200
+                            ) {
+                                bars.appendChild(chartlist_bar(value, max));
+                            }
+                        }}
+                    </div>
+                </div>
             </section>
             <section class="flexy">
                 <h2>Colour conversions</h2>
