@@ -606,11 +606,11 @@
 [data-bleh-theme="ink"] {
     --mask: var(--icon-16-pen);
 }
-[data-type="theme_ash"],
+[data-type="theme_dark"],
 [data-bleh-theme="dark"] {
     --mask: var(--icon-16-moon);
 }
-[data-type="theme_dark"],
+[data-type="theme_darker"],
 [data-bleh-theme="darker"] {
     --mask: var(--icon-16-moon-star);
 }
@@ -618,7 +618,7 @@
 [data-bleh-theme="adaptive"] {
     --mask: var(--icon-16-adaptive);
 }
-[data-type="theme_void"],
+[data-type="theme_oled"],
 [data-bleh-theme="oled"] {
     --mask: var(--icon-16-moon-fill);
 }

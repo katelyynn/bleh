@@ -203,21 +203,6 @@ export let has_prompted_for_update = {
 
 export const STORAGE_LAST_SEASON_SEEN = 'bleh_last_season_seen';
 
-export let theme_preview = () => html.node`
-    <div class="preview-inner">
-        <div class="preview-card">
-            <div class="preview-header">Aa</div>
-            <div class="preview-text"></div>
-            <div class="preview-text row-2"></div>
-            <div class="preview-buttons">
-                <div class="preview-button preview-button-primary"></div>
-                <div class="preview-button"></div>
-                <div class="preview-button preview-track"></div>
-            </div>
-        </div>
-    </div>
-`;
-
 export const random_list = [
     {
         track: 'DIFFERENT DAY',

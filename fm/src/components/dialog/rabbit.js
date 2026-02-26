@@ -564,7 +564,7 @@ export function register_rabbit() {
                 }
             },
             {
-                type: 'theme_ash',
+                type: 'theme_dark',
                 text: tl(trans.themes.dark),
                 body: tl(trans.changes_your_theme),
                 keywords: ['dark', 'night', 'grey', 'gray'],
@@ -574,7 +574,7 @@ export function register_rabbit() {
                 }
             },
             {
-                type: 'theme_dark',
+                type: 'theme_darker',
                 text: tl(trans.themes.darker),
                 body: tl(trans.changes_your_theme),
                 keywords: ['dark', 'night', 'grey', 'gray'],
@@ -584,7 +584,7 @@ export function register_rabbit() {
                 }
             },
             {
-                type: 'theme_void',
+                type: 'theme_oled',
                 text: tl(trans.themes.oled),
                 body: tl(trans.changes_your_theme),
                 keywords: ['dark', 'night', 'black'],

@@ -7,14 +7,12 @@
 import { settings, settings_store } from '@/build/config.js';
 import { album_track_corrections, artist_corrections } from '@/build/music.js';
 import {
-    api_key,
     auth,
     oracle_albums,
     oracle_artists,
     oracle_tracks,
     page,
-    root,
-    theme_preview
+    root
 } from '@/build/page.js';
 import { stored_season } from '@/build/seasonal';
 import { clamp_lit, clamp_sat, copy, hex_to_oklch, set_storage, time } from '@/build/tools';
@@ -53,6 +51,7 @@ import { visual } from '@/pages/bleh_settings/visual';
 import { general } from '@/pages/bleh_settings/general';
 import { seasonal } from './seasonal';
 import { settings_search } from './search.js';
+import { icon } from '@/components/shared/icon.js';
 
 export function bleh_settings() {
     page.name = auth.name;
@@ -2289,6 +2288,28 @@ function activity_preview_new(parent, activity) {
 }
 
 export function theme_bubbles(func = null) {
+    const theme_preview = () => html.node`
+        <div class="preview-inner">
+            <div class="preview-image" style="background-image: url(${auth.avatar.replace('/avatar42s/', '/avatar70s/')})" />
+            <div class="preview-card">
+                <div class="preview-card-main">
+                    <div class="preview-header">Aa</div>
+                    <div class="preview-text"></div>
+                    <div class="preview-text row-2"></div>
+                    <div class="preview-text row-3"></div>
+                    <div class="preview-buttons">
+                        <div class="preview-button preview-button-primary"></div>
+                        <div class="preview-button"></div>
+                        <div class="preview-button preview-track"></div>
+                    </div>
+                </div>
+                <div class="preview-card-side">
+
+                </div>
+            </div>
+        </div>
+    `;
+
     const themes = [
         {
             id: 'adaptive',
@@ -2343,47 +2364,48 @@ export function theme_bubbles(func = null) {
 
     const bubbles = html.node`
         <div class="theme-bubbles">
-            ${themes.map((theme) => {
-        if (theme.hide) return html.node``;
+            ${themes.map(theme => {
+                if (theme.hide) return html.node``;
 
-        if (theme.type == 'sep') {
-            return html.node`
+                if (theme.type == 'sep') {
+                    return html.node`
                         <div class="sep theme-bubble-sep" />
                     `;
-        }
+                }
 
-        if (!theme.formal) theme.formal = theme.id;
+                if (!theme.formal) theme.formal = theme.id;
 
-        const bubble = html.node`
+                const bubble = html.node`
                     <button class="theme-bubble" data-theme-id=${theme.id} onclick=${() => update_theme_bubble(theme.id)}>
                         <div class="bubble">
-                            ${theme.id == 'adaptive'
-                ? html.node`
-                            <div class="inner theme-preview" data-bleh--theme=${settings.theme_day} data-bleh--theme_type=${['light', 'ink'].includes(settings.theme_day) ? 'light' : 'dark'}>
-                                ${theme_preview()}
-                            </div>
-                            <div class="inner theme-preview" data-bleh--theme=${settings.theme_night} data-bleh--theme_type=${['light', 'ink'].includes(settings.theme_night) ? 'light' : 'dark'}>
-                                ${theme_preview()}
-                            </div>
+                            ${theme.id == 'adaptive' ? html.node`
+                                <div class="inner theme-preview" data-bleh--theme=${settings.theme_day} data-bleh--theme_type=${['light', 'ink'].includes(settings.theme_day) ? 'light' : 'dark'}>
+                                    ${theme_preview()}
+                                </div>
+                                <div class="inner theme-preview" data-bleh--theme=${settings.theme_night} data-bleh--theme_type=${['light', 'ink'].includes(settings.theme_night) ? 'light' : 'dark'}>
+                                    ${theme_preview()}
+                                </div>
+                            ` : html.node`
+                                <div class="inner theme-preview" data-bleh--theme=${theme.id} data-bleh--theme_type=${theme.type}>
+                                    ${theme_preview()}
+                                </div>
                             `
-                : html.node`
-                            <div class="inner theme-preview" data-bleh--theme=${theme.id} data-bleh--theme_type=${theme.type}>
-                                ${theme_preview()}
-                            </div>
-                            `
-            }
+                            }
                         </div>
                         <strong>
-                            ${theme.name}
+                            <span class="theme-name">
+                                ${icon({ name: `theme_${theme.id}`, identifier: 'theme' })}
+                                ${theme.name}
+                            </span>
                             ${theme.new_release ? html.node`<div class="new-badge">${tl(trans.new)}</div>` : ''}
                         </strong>
                     </button>
                 `;
 
-        buttons.push(bubble);
+                buttons.push(bubble);
 
-        return bubble;
-    })}
+                return bubble;
+            })}
         </div>
     `;
 
@@ -2394,33 +2416,14 @@ export function theme_bubbles(func = null) {
 
         const bubble = adaptive.querySelector(':scope > .bubble');
 
-        render(
-            bubble,
-            html`
-                <div
-                    class="inner theme-preview"
-                    data-bleh--theme=${settings.theme_day}
-                    data-bleh--theme_type=${['light', 'ink'].includes(
-                settings.theme_day
-            )
-                    ? 'light'
-                    : 'dark'}
-                >
-                    ${theme_preview()}
-                </div>
-                <div
-                    class="inner theme-preview"
-                    data-bleh--theme=${settings.theme_night}
-                    data-bleh--theme_type=${['light', 'ink'].includes(
-                        settings.theme_night
-                    )
-                    ? 'light'
-                    : 'dark'}
-                >
-                    ${theme_preview()}
-                </div>
-            `
-        );
+        render(bubble, html`
+            <div class="inner theme-preview" data-bleh--theme=${settings.theme_day} data-bleh--theme_type=${['light', 'ink'].includes(settings.theme_day) ? 'light' : 'dark'}>
+                ${theme_preview()}
+            </div>
+            <div class="inner theme-preview" data-bleh--theme=${settings.theme_night} data-bleh--theme_type=${['light', 'ink'].includes(settings.theme_night) ? 'light' : 'dark'}>
+                ${theme_preview()}
+            </div>
+        `);
     };
 
     update_theme_bubble();

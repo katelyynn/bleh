@@ -2270,11 +2270,11 @@ span.bleh-icon {
 [data-bleh-theme=ink] {
   --mask: var(--icon-16-pen);
 }
-[data-type=theme_ash],
+[data-type=theme_dark],
 [data-bleh-theme=dark] {
   --mask: var(--icon-16-moon);
 }
-[data-type=theme_dark],
+[data-type=theme_darker],
 [data-bleh-theme=darker] {
   --mask: var(--icon-16-moon-star);
 }
@@ -2282,7 +2282,7 @@ span.bleh-icon {
 [data-bleh-theme=adaptive] {
   --mask: var(--icon-16-adaptive);
 }
-[data-type=theme_void],
+[data-type=theme_oled],
 [data-bleh-theme=oled] {
   --mask: var(--icon-16-moon-fill);
 }
@@ -13031,7 +13031,7 @@ t {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--item-list-gap);
+    gap: 6px;
     .bubble {
       width: 60px;
       height: 60px;
@@ -13074,6 +13074,7 @@ t {
       flex-direction: column;
       align-items: center;
       gap: 2px;
+      font-size: 13px;
       font-weight: var(--font-weight);
       & > .new-badge {
         font-size: 12px;
@@ -13087,6 +13088,7 @@ t {
         box-shadow: 0 3px 12px oklch(var(--h4) / 32%), var(--interact-shadow);
       }
       & > strong {
+        color: oklch(var(--l3-c));
         font-weight: var(--font-weight-medium);
       }
     }
@@ -13124,42 +13126,97 @@ t {
     width: 100%;
     padding: 8px 0 0 8px;
     text-align: left;
+    .preview-image {
+      position: absolute;
+      inset: 0;
+      bottom: 10px;
+      z-index: 2;
+      opacity: 0.7;
+      background-size: cover;
+      --mask:
+        linear-gradient(
+          
+          180deg,
+          white 20%,
+          transparent );
+      mask-image: var(--mask);
+      -webkit-mask-image: var(--mask);
+      &:after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        display: block;
+        background:
+          linear-gradient(
+            180deg,
+            transparent 0%,
+            oklch(var(--b6)) 100%);
+      }
+    }
     .preview-card {
       display: flex;
-      flex-direction: column;
-      gap: 6px;
-      background-color: oklch(var(--b5));
       box-shadow: var(--card-shadow);
       border-top-left-radius: var(--item-med-radius);
       border-top: 1px solid var(--card-border-base-highlight);
       border-left: 1px solid var(--card-border-base);
-      padding: 6px 8px 10px 8px;
       background-image: var(--cards-overlay-image-subtle);
       background-repeat: repeat-x;
       background-position: 0 0;
+      position: relative;
+      z-index: 3;
+      overflow: hidden;
+      .preview-card-main {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        padding: 6px 8px 10px 8px;
+        background-color: oklch(var(--b5));
+        flex: 1;
+      }
+      .preview-card-side {
+        width: 20px;
+        background: var(--card-blur-bg);
+        backdrop-filter: var(--solarium);
+        -webkit-backdrop-filter: var(--solarium);
+        border-left: 1px solid var(--sidebar-border);
+        [data-bleh--solarium=false] & {
+          background: var(--sidebar-bg);
+        }
+      }
       .preview-header {
         display: block;
         color: oklch(var(--c1));
-        font-size: 14px;
-        line-height: 14px;
+        font-size: 12px;
+        line-height: 12px;
         font-weight: var(--font-weight-bold);
+        margin-bottom: 2px;
       }
       .preview-text {
         display: block;
-        width: 40px;
-        height: 3px;
+        width: 20px;
+        height: 1px;
         background-color: oklch(var(--c2));
         border-radius: 50px;
-        margin-top: -4px;
         &.row-2 {
-          width: 25px;
-          margin-top: -4px;
+          width: 17px;
+        }
+        &.row-3 {
+          width: 14px;
         }
       }
       .preview-buttons {
         display: none;
       }
     }
+  }
+}
+.theme-name {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  & > .bleh-icon-theme {
+    height: var(--icon-size);
+    --icon-size: 14px;
   }
 }
 .font-preview {
@@ -20457,7 +20514,7 @@ input[type=range]::-moz-range-progress {
     -webkit-backdrop-filter: var(--solarium);
     display: flex;
     flex-direction: column;
-    gap: var(--card-gap);
+    gap: var(--card-padding);
     animation: var(--motion, solarium 0.24s var(--trans-function));
     transition-property:
       transform,
