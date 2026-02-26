@@ -280,9 +280,7 @@ select,
         position: relative;
 
         &:before {
-            --left: calc(
-                (var(--button-height) - var(--icon-size)) / 2
-            ) !important;
+            --left: calc((var(--button-height) - var(--icon-size)) / 2) !important;
             --right: none !important;
         }
     }
@@ -305,7 +303,6 @@ select,
 .coloured-cta,
 .gallery-previous .arrow,
 .section-playlink,
-.image-upload-remove,
 .back-button, .delete-button,
 #manage_data .btn-primary,
 .obsession-history-play-all,
@@ -440,6 +437,23 @@ select,
 .danger,
 .danger-subtle {
     --hue-over: var(--hue-neg);
-    --sat-over: 1.1;
-    --lit-over: 0.9;
+    --sat-over: var(--sat-neg);
+    --lit-over: var(--lit-neg);
+}
+
+
+.btn-lg {
+    --mask-size: 24px;
+    --btn-left: var(--button-sides) !important;
+    --button-verts: 12px;
+    width: 130px;
+    height: 130px;
+
+    display: flex;
+    justify-content: center;
+    align-items: end;
+
+    --left: 50%;
+    --margin-left: -12px;
+    --margin-top: calc(-12px - 7px);
 }

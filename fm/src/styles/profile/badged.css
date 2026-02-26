@@ -120,7 +120,7 @@
 }
 
 [data-theme="progress-badges"] {
-    .tippy-content {
+    & > .tippy-content {
         display: flex;
         flex-direction: column;
         gap: 8px;

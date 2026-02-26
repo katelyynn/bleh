@@ -1462,5 +1462,10 @@ export let settings_store = {
         default: true,
         type: 'checkbox',
         title: trans.auto_close
+    },
+    crop_image_before_uploading: {
+        default: true,
+        type: 'checkbox',
+        title: trans.crop_before_uploading
     }
 };

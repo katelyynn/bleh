@@ -242,12 +242,8 @@ body,
     --banner-mix: none;
 
     --normal-shadow: inset 0 0 0 1px oklch(var(--b2) / 40%);
-    --input-shadow:
-        inset 0 0 0 1px oklch(var(--b3) / 0.7),
-        inset 0 1px 2px oklch(var(--b7) / 0.2);
-    --focused-input-shadow:
-        inset 0 0 0 1px oklch(var(--h3) / 0.4),
-        var(--input-shadow);
+    --input-shadow: inset 0 0 0 1px oklch(var(--b3) / 0.7), inset 0 1px 2px oklch(var(--b7) / 0.2);
+    --focused-input-shadow: inset 0 0 0 1px oklch(var(--h3) / 0.4), var(--input-shadow);
     --group-shadow: inset 0 0 0 1px oklch(var(--b2) / 0.3);
 
     --sidebar-bg: color-mix(in oklch, oklch(var(--b6)) 22%, oklch(var(--b5)));
@@ -282,8 +278,8 @@ body,
     .theme-preview[data-bleh--theme="darker"],
     [data-bleh--theme="darker"] &:not(.theme-preview) {
         /* any additional highlights */
-        --b2: 0.41 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue);
-        --b3: 0.31 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue);
+        --b2: 0.41 calc(var(--sat) * 0.04 * var(--sat-bg, 1)) var(--hue);
+        --b3: 0.31 calc(var(--sat) * 0.04 * var(--sat-bg, 1)) var(--hue);
 
         /* card border */
         --b4: 0.26 calc(var(--sat) * 0.03 * var(--sat-bg, 1)) var(--hue);
@@ -311,8 +307,8 @@ body,
     .theme-preview[data-bleh--theme="oled"],
     [data-bleh--theme="oled"] &:not(.theme-preview) {
         /* any additional highlights */
-        --b2: 0.32 calc(var(--sat) * 0.005 * var(--sat-bg, 1)) var(--hue);
-        --b3: 0.23 calc(var(--sat) * 0.005 * var(--sat-bg, 1)) var(--hue);
+        --b2: 0.32 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue);
+        --b3: 0.23 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue);
 
         /* card border */
         --b4: 0.19 calc(var(--sat) * 0.01 * var(--sat-bg, 1)) var(--hue);
@@ -425,8 +421,8 @@ body,
 
         --lastfm-logo-filter: none;
 
-        --textarea: oklch(var(--b6) / 40%);
-        --textarea-hov: oklch(var(--b6) / 70%);
+        --textarea: oklch(var(--b6) / 10%);
+        --textarea-hov: oklch(var(--b6) / 30%);
 
         --view-buttons: oklch(var(--b6) / 25%);
         --view-buttons-hov: oklch(var(--b4) / 60%);
@@ -899,8 +895,7 @@ body {
     --interactable-active-outer: oklch(var(--c1) / 0.03) 0 2px 25px 0;
 
     --interact-shadow: var(--interactable-outer);
-    --active-shadow:
-        var(--interactable-outer), var(--interactable-active-outer);
+    --active-shadow: var(--interactable-outer), var(--interactable-active-outer);
 
     --chartlist-fill: var(--hue-gradient, oklch(var(--h3)));
 

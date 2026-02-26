@@ -13,19 +13,6 @@
             position: relative;
 
             & > .btn-file {
-                --mask-size: 24px;
-                --btn-left: var(--button-sides) !important;
-                width: 130px;
-                height: 130px;
-
-                display: flex;
-                justify-content: center;
-                align-items: end;
-
-                --left: 50%;
-                --margin-left: -12px;
-                --margin-top: calc(-12px - 7px);
-
                 &[data-has-file] {
                     --bg: transparent !important;
                     --bg-hov: oklch(var(--b5), 10%) !important;
@@ -54,18 +41,21 @@
 
 .image-upload-remove {
     --mask: var(--icon-16-trash) !important;
-    --mask-size: 24px;
-    --btn-left: var(--button-sides) !important;
-    width: 130px;
-    height: 130px;
 
-    display: flex;
-    justify-content: center;
-    align-items: end;
+    --col: oklch(var(--l3-c)) !important;
+    --mask-colour: color-mix(
+        in oklch,
+        oklch(var(--l3-c)),
+        oklch(var(--l4-c)) 40%
+    );
 
-    --left: 50%;
-    --margin-left: -12px;
-    --margin-top: calc(-12px - 7px);
+    --hue-over: var(--hue-neg);
+    --sat-over: var(--sat-neg);
+    --lit-over: var(--lit-neg);
+}
+
+.crop-before-uploading {
+    margin-top: var(--card-gap);
 }
 
 #avatar_saver {

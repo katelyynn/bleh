@@ -7194,6 +7194,9 @@ export const trans = {
         sv: 'Använd ditt scrollhjul för att zooma in och ut, klicka och dra för att flytta på bilden.',
         ru: 'Используйте колесо прокрутки для приближения и отдаления, нажмите и перетащите, чтобы переместить изображение.'
     },
+    crop_before_uploading: {
+        en: 'Crop image before uploading'
+    },
     update_to_version: {
         en: 'Update to {v}',
         de: 'Auf {v} aktualisieren',

@@ -2,7 +2,7 @@
 @import './tracklist.css';
 
 .oracle-notice {
-    margin-bottom: calc(-1 * var(--card-padding));
+    margin-bottom: calc(-1 * var(--card-padding-v));
     order: -11;
 }
 .oracle {
@@ -26,7 +26,7 @@
         cursor: default;
     }
 
-    background: linear-gradient(180deg, oklch(var(--k4), 25%), transparent);
+    background: linear-gradient(180deg, oklch(var(--k4) / 25%), transparent);
     padding: var(--card-padding);
     margin: calc(-1 * var(--card-padding)) calc(-1 * var(--card-padding)) 0
         calc(-1 * var(--card-padding));

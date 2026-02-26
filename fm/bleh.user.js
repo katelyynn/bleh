@@ -49573,13 +49573,13 @@
       );
       masthead.appendChild(html.node`
             <div class="mobile-controls">
-                <a class="btn mobile-control" data-type="register" href="${root}join">
+                <a class="btn mobile-control icon" data-type="register" href="${root}join">
                     ${tl2(trans.sign_up)}
                 </a>
-                <a class="btn mobile-control" aria-checked=${page.type == "settings" || page.type == "bleh_settings"} data-menu-item="settings" href="${root}bleh">
+                <a class="btn mobile-control icon" aria-checked=${page.type == "settings" || page.type == "bleh_settings"} data-menu-item="settings" href="${root}bleh">
                     ${tl2(trans.settings)}
                 </a>
-                <a class="btn mobile-control" data-type="login" href="${root}login">
+                <a class="btn mobile-control icon" data-type="login" href="${root}login">
                     ${tl2(trans.log_in)}
                 </a>
             </div>
@@ -50324,12 +50324,12 @@
     });
     masthead.appendChild(html.node`
         <div class="mobile-controls">
-            <a class="btn mobile-control" aria-checked=${page.type == "overview" || page.type == "recommended" || page.type == "releases" || page.type == "bookmarks" || page.type == "charts"} data-menu-item="home" href="${root}music">
+            <a class="btn mobile-control icon" aria-checked=${page.type == "overview" || page.type == "recommended" || page.type == "releases" || page.type == "bookmarks" || page.type == "charts"} data-menu-item="home" href="${root}music">
                 ${tl2(trans.home)}
             </a>
             ${() => {
       const btn = html.node`
-                    <a class="btn mobile-control" aria-checked=${page.type == "search"} data-menu-item="search">
+                    <a class="btn mobile-control icon" aria-checked=${page.type == "search"} data-menu-item="search">
                         ${tl2(trans.search)}
                     </a>
                 `;
@@ -50368,7 +50368,7 @@
     }}
             ${() => {
       const btn = html.node`
-                    <a class="btn mobile-control" aria-checked=${page.type == "user" && page.name == auth.name} data-menu-item="profile_mobile">
+                    <a class="btn mobile-control icon" aria-checked=${page.type == "user" && page.name == auth.name} data-menu-item="profile_mobile">
                         <span class="avatar">
                             <img src=${auth.avatar} alt=${auth.name}>
                         </span>
@@ -50444,7 +50444,7 @@
     }}
             ${() => {
       const btn = html.node`
-                    <a class="btn mobile-control" aria-checked=${page.type == "inbox"} data-type="inbox">
+                    <a class="btn mobile-control icon" aria-checked=${page.type == "inbox"} data-type="inbox">
                         ${tl2(trans.inbox)}
                         ${count > 0 ? html.node`<div class="notification-count-badge"></div>` : ""}
                     </a>
@@ -50476,7 +50476,7 @@
       });
       return btn;
     }}
-            <a class="btn mobile-control" aria-checked=${page.type == "settings" || page.type == "bleh_settings"} data-menu-item="settings" href="${root}bleh">
+            <a class="btn mobile-control icon" aria-checked=${page.type == "settings" || page.type == "bleh_settings"} data-menu-item="settings" href="${root}bleh">
                 ${tl2(trans.settings)}
                 ${update_required === "true" ? html.node`<div class="notification-count-badge"></div>` : ""}
             </a>
@@ -56802,7 +56802,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                     <input type="hidden" name="csrfmiddlewaretoken" value=${page.token}>
                     <div class="form-group form-group--avatar js-form-group upload-avatar">
                         <div class="js-form-group-controls form-group-controls">
-                            <span class="btn-secondary btn primary btn-file" data-kate-processed="true">
+                            <span class="btn-secondary btn primary btn-file btn-lg" data-kate-processed="true">
                                 ${tl2(trans.upload)}
                                 <input type="file" onchange=${() => update_avatar(event)} name="avatar" data-require="components/file-input" data-file-input-copy="${tl2(trans.upload)}" data-no-file-copy="No file chosen" accept="image/*" required="" id="id_avatar" data-kate-processed="true">
                             </span>
@@ -56816,9 +56816,12 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
                 <form action="${root}settings/avatar/delete" method="post">
                     <input type="hidden" name="csrfmiddlewaretoken" value=${page.token}>
                     <div class="form-group delete-avatar">
-                        <button class="btn image-upload-remove icon" type="submit" value="delete-avatar" name="delete-avatar">${tl2(trans.delete)}</button>
+                        <button class="btn image-upload-remove icon colourful btn-lg" type="submit" value="delete-avatar" name="delete-avatar">${tl2(trans.delete)}</button>
                     </div>
                 </form>
+            </div>
+            <div class="crop-before-uploading">
+                ${setting({ id: "crop_image_before_uploading", standalone: true })}
             </div>
             <div class="modal-footer">
                 <button class="see-more cancel left-icon" onclick=${() => dialog_rm({ id: "edit_avatar" })}>${tl2(trans.cancel)}</button>
@@ -56837,7 +56840,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       console.info(e);
       if (!e.target.files || !e.target.files[0]) return;
       form = page.state.avatar_changer.querySelector(".bleh-modal-body");
-      if (e.target.files[0].type == "image/gif") {
+      if (e.target.files[0].type == "image/gif" || !settings.crop_image_before_uploading) {
         save_avatar();
         finish_saving_avatar();
         return;
@@ -67579,6 +67582,9 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       sv: "Anv\xE4nd ditt scrollhjul f\xF6r att zooma in och ut, klicka och dra f\xF6r att flytta p\xE5 bilden.",
       ru: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0439\u0442\u0435 \u043A\u043E\u043B\u0435\u0441\u043E \u043F\u0440\u043E\u043A\u0440\u0443\u0442\u043A\u0438 \u0434\u043B\u044F \u043F\u0440\u0438\u0431\u043B\u0438\u0436\u0435\u043D\u0438\u044F \u0438 \u043E\u0442\u0434\u0430\u043B\u0435\u043D\u0438\u044F, \u043D\u0430\u0436\u043C\u0438\u0442\u0435 \u0438 \u043F\u0435\u0440\u0435\u0442\u0430\u0449\u0438\u0442\u0435, \u0447\u0442\u043E\u0431\u044B \u043F\u0435\u0440\u0435\u043C\u0435\u0441\u0442\u0438\u0442\u044C \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435."
     },
+    crop_before_uploading: {
+      en: "Crop image before uploading"
+    },
     update_to_version: {
       en: "Update to {v}",
       de: "Auf {v} aktualisieren",
@@ -72190,6 +72196,11 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       default: true,
       type: "checkbox",
       title: trans.auto_close
+    },
+    crop_image_before_uploading: {
+      default: true,
+      type: "checkbox",
+      title: trans.crop_before_uploading
     }
   };
 

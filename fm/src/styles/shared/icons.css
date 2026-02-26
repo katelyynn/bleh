@@ -10,7 +10,6 @@
 .notification-action:before,
 .inbox-compose-button:before,
 .listener-row-item:before,
-.mobile-control:before,
 .swatch:before,
 .with-icon:before,
 .tip.preview:before,
@@ -177,7 +176,6 @@
 .dropdown-menu-clickable-button-js-only::after,
 .display-options-clickable-button:after,
 .all-results-list li:before,
-.language-nav,
 .auth-link {
     --left: none !important;
     --right: var(--button-sides-icon) !important;
@@ -198,6 +196,10 @@
 
     &.in-markdown {
         --icon-size: 14px;
+    }
+
+    &.use-mask {
+        --icon: var(--mask);
     }
 }
 span.bleh-icon {

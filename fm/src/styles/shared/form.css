@@ -117,21 +117,7 @@
     gap: var(--button-list-gap);
     justify-content: center;
     flex-wrap: wrap;
-    margin: var(--card-gap) 0 calc(-1 * var(--card-padding)) 0;
-    padding: calc(var(--card-padding) + 1px) 0 var(--card-padding);
-
-    position: relative;
-
-    &:before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 1px;
-        display: block;
-        background: var(--separator);
-    }
+    margin: var(--card-padding) 0 0 0;
 
     /* native modal footer */
     .modal-button {

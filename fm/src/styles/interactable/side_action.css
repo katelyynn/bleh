@@ -4,13 +4,19 @@
 .side-actions > div:not([data-toggle-button], [data-tippy-root], .sep) {
     display: none;
 }
-.side-actions,
-.listening-report-promos,
-.stationlink-list {
+.side-actions {
     display: flex;
     flex-direction: column;
     gap: 2px;
-    margin-top: var(--card-gap);
+    /*margin: 0 calc(var(--card-padding) - (var(--inner) + var(--button-sides))) !important;
+
+    --inner: 6px;
+
+    background-color: oklch(var(--b6) / 80%) !important;
+    padding: var(--inner) !important;
+    border-radius: calc(var(--item-big-radius) + var(--inner)) !important;*/
+
+    margin: 0 calc(-1 * var(--button-sides)) !important;
 
     & > form {
         margin: unset;
@@ -31,9 +37,7 @@
     }
 }
 
-.side-action,
-.listening-report-promo,
-.stationlink {
+.side-action {
     --bg: transparent;
     --bg-hov: var(--side-action-hov);
     --bg-atv: var(--side-action-atv);
@@ -42,9 +46,8 @@
     overflow: unset;
     text-overflow: ellipsis;
     --mask-size: 12px;
-    --padding: 6px var(--button-sides) 6px calc(var(--button-sides-icon) + var(--icon-size) + 6px);
+    --padding: 6px var(--button-sides) 6px calc(var(--button-sides) + var(--icon-size) + 10px);
     width: unset !important;
-    margin: 0 calc(-1 * var(--button-sides)) !important;
     position: relative;
     min-height: var(--side-action-height) !important;
     --show-icon: block !important;
@@ -65,7 +68,7 @@
     &:after {
         --mask-size: var(--icon-size);
 
-        --left: var(--button-sides-icon);
+        --left: var(--button-sides) !important;
         --margin-top: calc(-1 * (var(--mask-size, var(--icon-size)) / 2));
         background: var(--mask-colour) !important;
         border: unset;

@@ -1224,7 +1224,7 @@ function avatar(token = '') {
                     <input type="hidden" name="csrfmiddlewaretoken" value=${page.token}>
                     <div class="form-group form-group--avatar js-form-group upload-avatar">
                         <div class="js-form-group-controls form-group-controls">
-                            <span class="btn-secondary btn primary btn-file" data-kate-processed="true">
+                            <span class="btn-secondary btn primary btn-file btn-lg" data-kate-processed="true">
                                 ${tl(trans.upload)}
                                 <input type="file" onchange=${() => update_avatar(event)} name="avatar" data-require="components/file-input" data-file-input-copy="${tl(trans.upload)}" data-no-file-copy="No file chosen" accept="image/*" required="" id="id_avatar" data-kate-processed="true">
                             </span>
@@ -1238,9 +1238,12 @@ function avatar(token = '') {
                 <form action="${root}settings/avatar/delete" method="post">
                     <input type="hidden" name="csrfmiddlewaretoken" value=${page.token}>
                     <div class="form-group delete-avatar">
-                        <button class="btn image-upload-remove icon" type="submit" value="delete-avatar" name="delete-avatar">${tl(trans.delete)}</button>
+                        <button class="btn image-upload-remove icon colourful btn-lg" type="submit" value="delete-avatar" name="delete-avatar">${tl(trans.delete)}</button>
                     </div>
                 </form>
+            </div>
+            <div class="crop-before-uploading">
+                ${setting({ id: 'crop_image_before_uploading', standalone: true })}
             </div>
             <div class="modal-footer">
                 <button class="see-more cancel left-icon" onclick=${() => dialog_rm({ id: 'edit_avatar' })}>${tl(trans.cancel)}</button>
@@ -1264,7 +1267,7 @@ function avatar(token = '') {
         if (!e.target.files || !e.target.files[0]) return;
         form = page.state.avatar_changer.querySelector('.bleh-modal-body');
 
-        if (e.target.files[0].type == 'image/gif') {
+        if (e.target.files[0].type == 'image/gif' || !settings.crop_image_before_uploading) {
             save_avatar();
             finish_saving_avatar();
             return;

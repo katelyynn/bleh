@@ -332,13 +332,13 @@ export function append_nav() {
 
         masthead.appendChild(html.node`
             <div class="mobile-controls">
-                <a class="btn mobile-control" data-type="register" href="${root}join">
+                <a class="btn mobile-control icon" data-type="register" href="${root}join">
                     ${tl(trans.sign_up)}
                 </a>
-                <a class="btn mobile-control" aria-checked=${page.type == 'settings' || page.type == 'bleh_settings'} data-menu-item="settings" href="${root}bleh">
+                <a class="btn mobile-control icon" aria-checked=${page.type == 'settings' || page.type == 'bleh_settings'} data-menu-item="settings" href="${root}bleh">
                     ${tl(trans.settings)}
                 </a>
-                <a class="btn mobile-control" data-type="login" href="${root}login">
+                <a class="btn mobile-control icon" data-type="login" href="${root}login">
                     ${tl(trans.log_in)}
                 </a>
             </div>
@@ -1231,12 +1231,12 @@ export function append_nav() {
     // mobile
     masthead.appendChild(html.node`
         <div class="mobile-controls">
-            <a class="btn mobile-control" aria-checked=${page.type == 'overview' || page.type == 'recommended' || page.type == 'releases' || page.type == 'bookmarks' || page.type == 'charts'} data-menu-item="home" href="${root}music">
+            <a class="btn mobile-control icon" aria-checked=${page.type == 'overview' || page.type == 'recommended' || page.type == 'releases' || page.type == 'bookmarks' || page.type == 'charts'} data-menu-item="home" href="${root}music">
                 ${tl(trans.home)}
             </a>
             ${() => {
                 const btn = html.node`
-                    <a class="btn mobile-control" aria-checked=${page.type == 'search'} data-menu-item="search">
+                    <a class="btn mobile-control icon" aria-checked=${page.type == 'search'} data-menu-item="search">
                         ${tl(trans.search)}
                     </a>
                 `;
@@ -1280,7 +1280,7 @@ export function append_nav() {
             }}
             ${() => {
                 const btn = html.node`
-                    <a class="btn mobile-control" aria-checked=${page.type == 'user' && page.name == auth.name} data-menu-item="profile_mobile">
+                    <a class="btn mobile-control icon" aria-checked=${page.type == 'user' && page.name == auth.name} data-menu-item="profile_mobile">
                         <span class="avatar">
                             <img src=${auth.avatar} alt=${auth.name}>
                         </span>
@@ -1370,7 +1370,7 @@ export function append_nav() {
             }}
             ${() => {
                 const btn = html.node`
-                    <a class="btn mobile-control" aria-checked=${page.type == 'inbox'} data-type="inbox">
+                    <a class="btn mobile-control icon" aria-checked=${page.type == 'inbox'} data-type="inbox">
                         ${tl(trans.inbox)}
                         ${count > 0 ? html.node`<div class="notification-count-badge"></div>` : ''}
                     </a>
@@ -1407,7 +1407,7 @@ export function append_nav() {
 
                 return btn;
             }}
-            <a class="btn mobile-control" aria-checked=${page.type == 'settings' || page.type == 'bleh_settings'} data-menu-item="settings" href="${root}bleh">
+            <a class="btn mobile-control icon" aria-checked=${page.type == 'settings' || page.type == 'bleh_settings'} data-menu-item="settings" href="${root}bleh">
                 ${tl(trans.settings)}
                 ${update_required === 'true' ? html.node`<div class="notification-count-badge"></div>` : ''}
             </a>
