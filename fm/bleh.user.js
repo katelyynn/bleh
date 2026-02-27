@@ -63396,7 +63396,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                 <div class="bleh-icon" style="--icon: var(--icon-error)"></div>
                 <h1>oops.. something broke</h1>
                 <p>An error prevented ${version.brand} from finishing loading, it's recommended to leave the page and refresh.</p>
-                <pre class="error-info">${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""}${e4.stack ? html.node`<br><span class="error-stack">${e4.stack}</span>` : ""}<br>on: ${page.type}/${page.subpage}<br>    ${window.location.pathname}<br>    ${version.build}</pre>
+                <pre class="error-info">${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""}${e4.stack ? html.node`<br><span class="error-stack">${e4.stack}</span>` : ""}<br>on: ${page.type}/${page.subpage}<br>    ${window.location.pathname}<br>    ${version.build} (${version.sku})</pre>
                 <p>It would be helpful if you could report this bug on Github, including the error message above.</p>
             </div>
             <div class="modal-footer">
@@ -75755,7 +75755,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
   // src/build/build.json
   var build_default = {
     brand: "bleh",
-    build: "2026.0214",
+    build: "2026.0227",
     sku: "tokisaki",
     bio: "bleh!!! ^-^",
     author: "katelyn",
