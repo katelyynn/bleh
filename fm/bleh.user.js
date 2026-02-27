@@ -27917,7 +27917,8 @@
     if (sat > 4) return 4;
     return round_two(sat);
   }
-  function clamp_lit(sat, lit) {
+  function clamp_lit(sat, lit, raise_minimum = false) {
+    if (raise_minimum && lit < 0.5) lit = 0.5;
     return round_two(lit);
   }
   function round_two(num) {
@@ -32413,7 +32414,7 @@
               let hsl = rgb_to_hsl(colour2[0], colour2[1], colour2[2]);
               let hue2 = hsl.h;
               let sat = clamp_sat(hsl.s / 100 * 3);
-              let lit = clamp_lit(sat, hsl.l / 100 + 0.35);
+              let lit = clamp_lit(sat, hsl.l / 100 + 0.35, true);
               const to_colour = track.querySelectorAll(
                 ".chartlist-count-bar, .chartlist-loved"
               );
@@ -54250,7 +54251,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
         let bg = header_inner.getAttribute("style").replace("background: #", "");
         let hsl = hex_to_oklch(bg);
         let sat = clamp_sat(hsl.s / 100 * 3);
-        let lit = clamp_lit(sat, hsl.l / 100 + 0.35);
+        let lit = clamp_lit(sat, hsl.l / 100 + 0.35, true);
         document.body.style.setProperty("--hue-album", hsl.h);
         document.body.style.setProperty("--sat-album", sat);
         document.body.style.setProperty("--lit-album", lit);
@@ -59544,7 +59545,8 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
       [255, 216, 0],
       [0, 127, 70],
       [38, 127, 0],
-      [0, 255, 255]
+      [0, 255, 255],
+      [12, 7, 34]
     ];
     let bars;
     render(
@@ -70813,7 +70815,7 @@ ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ""}</
             let hsl = rgb_to_oklch(colour2[0], colour2[1], colour2[2]);
             auth.sets.hue = hsl.h;
             auth.sets.sat = clamp_sat(hsl.s / 100 * 3);
-            auth.sets.lit = clamp_lit(auth.sets.sat, hsl.l / 100 + 0.35);
+            auth.sets.lit = clamp_lit(auth.sets.sat, hsl.l / 100 + 0.35, true);
           });
         } catch (e) {
         }

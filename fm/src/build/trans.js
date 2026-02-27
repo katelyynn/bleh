@@ -10443,7 +10443,7 @@ export function lookup_lang() {
 
                     auth.sets.hue = hsl.h;
                     auth.sets.sat = clamp_sat((hsl.s / 100) * 3);
-                    auth.sets.lit = clamp_lit(auth.sets.sat, hsl.l / 100 + 0.35);
+                    auth.sets.lit = clamp_lit(auth.sets.sat, hsl.l / 100 + 0.35, true);
                 });
             } catch (e) {}
         }

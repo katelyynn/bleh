@@ -1122,7 +1122,7 @@ export function patch_titles(search = page.structure.main) {
 
                         let hue = hsl.h;
                         let sat = clamp_sat((hsl.s / 100) * 3);
-                        let lit = clamp_lit(sat, hsl.l / 100 + 0.35);
+                        let lit = clamp_lit(sat, hsl.l / 100 + 0.35, true);
 
                         const to_colour = track.querySelectorAll(
                             '.chartlist-count-bar, .chartlist-loved'

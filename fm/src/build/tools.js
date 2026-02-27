@@ -162,7 +162,9 @@ export function clamp_sat(sat) {
     return round_two(sat);
 }
 
-export function clamp_lit(sat, lit) {
+export function clamp_lit(sat, lit, raise_minimum = false) {
+    if (raise_minimum && lit < 0.5) lit = 0.5;
+
     return round_two(lit);
 }
 

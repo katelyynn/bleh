@@ -229,7 +229,7 @@ export function bleh_albums() {
             let hsl = hex_to_oklch(bg);
 
             let sat = clamp_sat((hsl.s / 100) * 3);
-            let lit = clamp_lit(sat, hsl.l / 100 + 0.35);
+            let lit = clamp_lit(sat, hsl.l / 100 + 0.35, true);
 
             document.body.style.setProperty('--hue-album', hsl.h);
             document.body.style.setProperty('--sat-album', sat);
