@@ -53119,12 +53119,7 @@
       theme: "context-menu",
       content: html.node`
             <a class="dropdown-menu-clickable-item" data-type="update" href="${root}bleh/general">
-                ${last_checked ? tl2(trans.last_checked_date).replace(
-        "{d}",
-        DateTime.fromJSDate(
-          new Date(last_checked)
-        ).toRelative()
-      ) : tl2(trans.never_checked)}
+                ${last_checked ? tl2(trans.last_checked_date, { d: DateTime.fromJSDate(new Date(last_checked)).toRelative() }) : tl2(trans.never_checked)}
             </a>
         `,
       placement: "right-start",
@@ -74300,12 +74295,13 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       }
     }
     lang = document.documentElement.getAttribute("lang");
-    lang_browser = navigator.language || navigator.userLanguage;
-    if (["en"].includes(lang)) {
+    lang_browser = navigator.language;
+    if (lang.startsWith("en") && lang_browser.startsWith("en")) {
       Settings.defaultLocale = lang_browser;
     } else {
       Settings.defaultLocale = lang;
     }
+    log(`using locale ${Settings.defaultLocale}`, "lang", "info", { lang, lang_browser });
   }
   function get_trans_key(key) {
     return key.split(".").reduce((trans2, key2) => trans2[key2], trans);

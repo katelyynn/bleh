@@ -147,16 +147,7 @@ export function update_masthead(
         theme: 'context-menu',
         content: html.node`
             <a class="dropdown-menu-clickable-item" data-type="update" href="${root}bleh/general">
-                ${
-                    last_checked ?
-                        tl(trans.last_checked_date).replace(
-                            '{d}',
-                            DateTime.fromJSDate(
-                                new Date(last_checked)
-                            ).toRelative()
-                        )
-                    :   tl(trans.never_checked)
-                }
+                ${last_checked ? tl(trans.last_checked_date, { d: DateTime.fromJSDate(new Date(last_checked)).toRelative() }) : tl(trans.never_checked)}
             </a>
         `,
         placement: 'right-start',

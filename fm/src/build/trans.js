@@ -10459,13 +10459,15 @@ export function lookup_lang() {
         }
     }
     lang = document.documentElement.getAttribute('lang');
-    lang_browser = navigator.language || navigator.userLanguage;
+    lang_browser = navigator.language;
 
-    if (['en'].includes(lang)) {
+    if (lang.startsWith('en') && lang_browser.startsWith('en')) {
         Settings.defaultLocale = lang_browser;
     } else {
         Settings.defaultLocale = lang;
     }
+
+    log(`using locale ${Settings.defaultLocale}`, 'lang', 'info', { lang, lang_browser });
 }
 
 export function get_trans_key(key) {
