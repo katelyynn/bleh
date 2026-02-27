@@ -52482,7 +52482,6 @@
         const colour_preview = page.state.colour_preview;
         const bg_colour = window.getComputedStyle(colour_preview).backgroundColor;
         const final = formatHex(bg_colour);
-        console.info("converted", final);
         colour2.value(final);
       }
       function update_values() {

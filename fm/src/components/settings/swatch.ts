@@ -323,9 +323,6 @@ export function display_colour_presets() {
             const bg_colour = window.getComputedStyle(colour_preview).backgroundColor;
 
             const final = formatHex(bg_colour);
-
-            console.info('converted', final);
-
             colour.value(final);
         }
 

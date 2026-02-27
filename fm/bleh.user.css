@@ -5012,7 +5012,7 @@ li:first-child .more-item--delete {
     width: unset;
   }
   &.modal-body {
-    background: oklch(var(--b5), var(--solarium-opacity, 90%)) !important;
+    background: oklch(var(--b5) / var(--solarium-opacity, 90%)) !important;
     box-shadow: var( --override-full-shadow, var(--overlay-shadow) ) !important;
     border-radius: var(--item-big-radius) !important;
     backdrop-filter: var(--solarium);
