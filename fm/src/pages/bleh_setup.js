@@ -14,7 +14,7 @@ import { checkup_page_structure } from '@/components/page/structure';
 import { update_colour_swatches } from '../config';
 import { version } from '@/main';
 import { register_background, update_page } from '@/page';
-import { display_colour_presets, theme_bubbles } from '@/pages/bleh_settings/bleh_settings';
+import { theme_bubbles } from '@/pages/bleh_settings/bleh_settings';
 import { html, render } from 'lighterhtml';
 import { setting } from '@/components/settings/settings';
 import { ff } from '@/components/settings/sku';
@@ -23,6 +23,7 @@ import { settings } from '@/build/config.js';
 import { dialog } from '@/components/dialog/dialog';
 import { match } from '@/components/settings/dynamic_theming';
 import { set_storage } from '@/build/tools';
+import { display_colour_presets } from '@/components/settings/swatch';
 
 export function bleh_setup() {
     page.structure.container = document.body.querySelector('.page-content');

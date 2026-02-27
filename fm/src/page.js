@@ -105,6 +105,11 @@ export function bleh() {
         on_body_load: () => {
             favi();
 
+            page.state.colour_preview = html.node`
+                <div class="colour-preview" />
+            `;
+            document.body.appendChild(page.state.colour_preview);
+
             auth_link.state = document.querySelector('a.auth-link');
             if (auth_link.state)
                 auth.name = auth_link.state

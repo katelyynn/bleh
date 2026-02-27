@@ -14,6 +14,7 @@ import * as hangulRomanization from 'hangul-romanization';
 import { DateTime } from 'luxon';
 import { status } from '@/components/dialog/status.js';
 import { root } from '@/build/page';
+import { oklch } from 'culori';
 
 // https://stackoverflow.com/questions/46432335/hex-to-hsl-convert-javascript
 /**
@@ -87,40 +88,16 @@ export function hex_to_oklch(hex) {
 }
 
 export function rgb_to_oklch(r, g, b) {
-    r = r / 255;
-    g = g / 255;
-    b = b / 255;
+    const result = oklch({ mode: 'rgb', r: r / 255, g: g / 255, b: b / 255 });
 
-    function srgb_to_linear(c) {
-        if (c <= 0.04045) return c / 12.92;
-        return Math.pow((c + 0.055) / 1.055, 2.4);
-    }
-
-    r = srgb_to_linear(r);
-    g = srgb_to_linear(g);
-    b = srgb_to_linear(b);
-
-    const l = 0.4122214708 * r + 0.5363325363 * g + 0.0514459929 * b;
-    const m = 0.2119034982 * r + 0.6806995451 * g + 0.1073969566 * b;
-    const s = 0.0883024619 * r + 0.2817188376 * g + 0.6299787005 * b;
-
-    const l_ = Math.cbrt(l);
-    const m_ = Math.cbrt(m);
-    const s_ = Math.cbrt(s);
-
-    const L = 0.2104542553 * l_ + 0.7936177850 * m_ - 0.0040720468 * s_;
-    const a = 1.9779984951 * l_ - 2.4285922050 * m_ + 0.4505937099 * s_;
-    const b2 = 0.0259040371 * l_ + 0.7827717662 * m_ - 0.8086757660 * s_;
-
-    const c = Math.sqrt(a * a + b2 * b2);
-    let h = Math.atan2(b2, a) * (180 / Math.PI);
-
-    if (h < 0) h += 360;
+    const L = result.l ?? 0;
+    const c = result.c ?? 0;
+    const h = result.h ?? 0;
 
     const max_chroma = 0.4;
     const sat = Math.min(c / max_chroma, 1);
 
-    return { l: ((L * 100) * 0.92) - 20, s: (sat * 140), h: Math.round(h) };
+    return { l: ((L * 100) * 0.92) - 21, s: (sat * 158), h: Math.round(h) };
 }
 
 /**

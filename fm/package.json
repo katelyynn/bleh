@@ -6,6 +6,7 @@
         "color-thief-browser": "^2.0.2",
         "cropperjs": "^1.5.13",
         "cssnano": "^7.1.0",
+        "culori": "^4.0.2",
         "dompurify": "^3.2.6",
         "esbuild": "^0.25.8",
         "hangul-js": "^0.2.6",

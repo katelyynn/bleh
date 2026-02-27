@@ -23,6 +23,16 @@ import { chart_reflow } from '@/components/music/chart.js';
 import { set_storage } from '@/build/tools';
 import { ff } from './sku';
 
+interface setting {
+    id: string,
+    text?: boolean,
+    focus?: boolean,
+    standalone?: boolean,
+    func?: Function,
+    list?: [],
+    center?: boolean
+}
+
 export function setting({
     id = '',
     text = true,
@@ -31,7 +41,7 @@ export function setting({
     func,
     list,
     center = true
-}) {
+}: setting) {
     try {
         let value = settings[id];
         log(`creating ${id} with value ${value}`, 'settings', 'log', {

@@ -1463,6 +1463,14 @@ body > canvas {
 .header-new-info-desktop {
   display: none;
 }
+.colour-preview {
+  background-color: oklch(var(--l3-c));
+  visibility: hidden;
+  position: fixed;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+}
 
 /* src/styles/shared/icons.css */
 .report-dropdown-button:before,

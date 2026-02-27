@@ -3,11 +3,12 @@ import { auth, page } from "@/build/page";
 import { tl, trans } from "@/build/trans";
 import { setting } from "@/components/settings/settings";
 import { update_colour_swatches } from "@/config";
-import { display_colour_presets, page_loading, register_skip_to, render_setting_page, theme_bubbles } from "./bleh_settings";
+import { page_loading, register_skip_to, render_setting_page, theme_bubbles } from "./bleh_settings";
 import { ff } from "@/components/settings/sku";
 import { settings, settings_store } from "@/build/config";
 import { match } from "@/components/settings/dynamic_theming";
 import { dialog } from "@/components/dialog/dialog";
+import { display_colour_presets } from "@/components/settings/swatch";
 
 export function visual() {
     if (
