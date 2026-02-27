@@ -99,13 +99,17 @@ export function load_settings(skip = false) {
 
     // save setting into body
     for (let setting in settings) {
+        document.body.classList.toggle('increase-btn-contrast', settings.lit <= 0.3);
+
         if (
             (setting == 'hue' || setting == 'sat' || setting == 'lit') &&
             settings.hue == settings_store.hue.default &&
             settings.sat == settings_store.sat.default &&
             settings.lit == settings_store.lit.default
-        )
+        ) {
+            document.body.classList.remove('increase-btn-contrast');
             continue;
+        }
 
         if (settings_store[setting] && settings_store[setting].css)
             document.body.style.setProperty(

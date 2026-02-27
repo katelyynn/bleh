@@ -275,6 +275,19 @@ export function display_colour_presets() {
             content: html.node`
                 <div class="dialog-settings">
                     <div class="setting-group blend">
+                        <div class="setting" data-type="info">
+                            <div class="heading">
+                                <h5>${tl(trans.preview)}</h5>
+                            </div>
+                            <div class="info">
+                                <div class="colour-tiles">
+                                    ${colour_tile('l3')}
+                                    ${colour_tile('l4')}
+                                    ${colour_tile('h3')}
+                                    ${colour_tile('h4')}
+                                </div>
+                            </div>
+                        </div>
                         ${ff('colour_based_on_hex') ? html.node`
                         <div class="setting" data-type="text">
                             <div class="heading">
@@ -331,4 +344,22 @@ export function display_colour_presets() {
             update_colour_swatches();
         }
     }
+}
+
+export function colour_tile(type) {
+    let text;
+    const number = type.slice(-1);
+
+    if (type.startsWith('l')) {
+        text = tl(trans.link_val, { v: number });
+    } else {
+        text = tl(trans.bg_val, { v: number });
+    }
+
+    return html.node`
+        <div class="colour-tile-wrap">
+            <div class="colour-tile mini ${type}" />
+            <div class="colour-tile-type">${text}</div>
+        </div>
+    `;
 }

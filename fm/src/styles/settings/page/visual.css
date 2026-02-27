@@ -253,4 +253,33 @@
     background: oklch(var(--h3));
     box-shadow: var(--primary-shadow);
     border-radius: var(--item-med-radius);
+
+    &.l3 {
+        background: oklch(var(--l3-c));
+    }
+    &.l4 {
+        background: oklch(var(--l4-c));
+    }
+    &.h4 {
+        background: oklch(var(--h4));
+    }
+
+    &.mini {
+        height: 24px;
+    }
+}
+
+.colour-tile-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-align: center;
+}
+.colour-tile-type {
+    font-size: 12px;
+}
+
+.colour-tiles {
+    display: flex;
+    gap: 4px;
 }

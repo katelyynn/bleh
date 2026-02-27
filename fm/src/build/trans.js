@@ -10332,6 +10332,16 @@ export const trans = {
     },
     follow_guidelines: {
         en: 'Keep in mind the {a}community guidelines{/a}'
+    },
+    link_val: {
+        // text 1, text 2
+        // text colour
+        en: 'Text {v}'
+    },
+    bg_val: {
+        // fill 1, fill 2
+        // the filling of a background colour
+        en: 'Fill {v}'
     }
 };
 

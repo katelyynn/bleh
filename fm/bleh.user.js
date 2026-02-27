@@ -43040,11 +43040,13 @@
       );
       chart_reflow();
     }
+    document.body.classList.toggle("increase-btn-contrast", settings.lit <= 0.3);
     if (["hue", "sat", "lit"].includes(id)) {
       if (settings.hue == settings_store.hue.default && settings.sat == settings_store.sat.default && settings.lit == settings_store.lit.default) {
         document.body.style.removeProperty(`--${settings_store.hue.css}`);
         document.body.style.removeProperty(`--${settings_store.sat.css}`);
         document.body.style.removeProperty(`--${settings_store.lit.css}`);
+        document.body.classList.remove("increase-btn-contrast");
       } else {
         document.body.style.setProperty(`--${settings_store.hue.css}`, settings.hue);
         document.body.style.setProperty(`--${settings_store.sat.css}`, settings.sat);
@@ -43157,8 +43159,11 @@
       delete settings.profile_shortcut;
     }
     for (let setting2 in settings) {
-      if ((setting2 == "hue" || setting2 == "sat" || setting2 == "lit") && settings.hue == settings_store.hue.default && settings.sat == settings_store.sat.default && settings.lit == settings_store.lit.default)
+      document.body.classList.toggle("increase-btn-contrast", settings.lit <= 0.3);
+      if ((setting2 == "hue" || setting2 == "sat" || setting2 == "lit") && settings.hue == settings_store.hue.default && settings.sat == settings_store.sat.default && settings.lit == settings_store.lit.default) {
+        document.body.classList.remove("increase-btn-contrast");
         continue;
+      }
       if (settings_store[setting2] && settings_store[setting2].css)
         document.body.style.setProperty(
           `--${settings_store[setting2].css}`,
@@ -52440,6 +52445,19 @@
         content: html.node`
                 <div class="dialog-settings">
                     <div class="setting-group blend">
+                        <div class="setting" data-type="info">
+                            <div class="heading">
+                                <h5>${tl2(trans.preview)}</h5>
+                            </div>
+                            <div class="info">
+                                <div class="colour-tiles">
+                                    ${colour_tile("l3")}
+                                    ${colour_tile("l4")}
+                                    ${colour_tile("h3")}
+                                    ${colour_tile("h4")}
+                                </div>
+                            </div>
+                        </div>
                         ${ff("colour_based_on_hex") ? html.node`
                         <div class="setting" data-type="text">
                             <div class="heading">
@@ -52489,6 +52507,21 @@
         update_colour_swatches();
       }
     }
+  }
+  function colour_tile(type) {
+    let text4;
+    const number = type.slice(-1);
+    if (type.startsWith("l")) {
+      text4 = tl2(trans.link_val, { v: number });
+    } else {
+      text4 = tl2(trans.bg_val, { v: number });
+    }
+    return html.node`
+        <div class="colour-tile-wrap">
+            <div class="colour-tile mini ${type}" />
+            <div class="colour-tile-type">${text4}</div>
+        </div>
+    `;
   }
 
   // src/pages/bleh_settings/visual.js
@@ -74168,6 +74201,16 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     },
     follow_guidelines: {
       en: "Keep in mind the {a}community guidelines{/a}"
+    },
+    link_val: {
+      // text 1, text 2
+      // text colour
+      en: "Text {v}"
+    },
+    bg_val: {
+      // fill 1, fill 2
+      // the filling of a background colour
+      en: "Fill {v}"
     }
   };
   var translation_fallback = "NO_TRANSLATION_FOUND";

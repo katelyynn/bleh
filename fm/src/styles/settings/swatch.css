@@ -168,6 +168,10 @@
         }
     }
 
+    &:not([data-swatch-type="customise"]) {
+        color: oklch(0 0 0);
+    }
+
     transition-property: scale;
     transition-duration: 0.2s;
     transition-timing-function: var(--trans-function-ani);

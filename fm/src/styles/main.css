@@ -191,7 +191,7 @@ body > canvas {
 
 
 .colour-preview {
-    background-color: oklch(var(--l3-c));
+    background-color: oklch(var(--h3));
     visibility: hidden;
     position: fixed;
     inset: 0;

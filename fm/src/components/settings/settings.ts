@@ -1216,6 +1216,8 @@ export function save_setting(id, value) {
         chart_reflow();
     }
 
+    document.body.classList.toggle('increase-btn-contrast', settings.lit <= 0.3);
+
     // if using a seasonal default,
     // do not apply the colour
     if (['hue', 'sat', 'lit'].includes(id)) {
@@ -1227,6 +1229,7 @@ export function save_setting(id, value) {
             document.body.style.removeProperty(`--${settings_store.hue.css}`);
             document.body.style.removeProperty(`--${settings_store.sat.css}`);
             document.body.style.removeProperty(`--${settings_store.lit.css}`);
+            document.body.classList.remove('increase-btn-contrast');
         } else {
             document.body.style.setProperty(`--${settings_store.hue.css}`, settings.hue);
             document.body.style.setProperty(`--${settings_store.sat.css}`, settings.sat);
