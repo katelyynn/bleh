@@ -980,8 +980,7 @@ function patch_settings_profile_panel(token, update_picture) {
                                                     trigger: 'click',
                                                     placement: 'bottom',
                                                     interactive: true,
-                                                    interactiveBorder: 10,
-                                                    offset: [0, 0]
+                                                    interactiveBorder: 10
                                                 });
 
                                                 return btn;

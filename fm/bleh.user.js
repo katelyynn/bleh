@@ -60023,8 +60023,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
               trigger: "click",
               placement: "bottom",
               interactive: true,
-              interactiveBorder: 10,
-              offset: [0, 0]
+              interactiveBorder: 10
             });
             return btn;
           }}
