@@ -1215,7 +1215,7 @@ export async function render_setting_page(page_id) {
                                 </div>
                                 <div class="toggle-wrap">
                                     <input type="checkbox" ref=${(el) => (checkbox = el)} value=${value} checked=${value} />
-                                    <button class="btn toggle" aria-checked=${value} ref=${(el) => (state = el)}>
+                                    <button class="btn toggle colourful" aria-checked=${value} ref=${(el) => (state = el)}>
                                         <div class="dot" />
                                     </button>
                                 </div>
@@ -1359,7 +1359,7 @@ export function change_settings_page(page_id, setting = null) {
                 tl(trans.settings)
             )}
                         </div>
-                        <pre class="error-info">
+                        <pre class="error-info colourful">
 ${e
                     ? html.node`<span class="error-type">${e.name}</span>: ${e.message}`
                     : ''}</pre
@@ -1434,7 +1434,7 @@ export function load_skus() {
         if (settings.feature_flags[flag] != null)
             current_state = settings.feature_flags[flag];
 
-        document.documentElement.setAttribute(
+        document.body.setAttribute(
             `data-ff--${flag}`,
             current_state
         );

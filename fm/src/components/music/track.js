@@ -1081,6 +1081,7 @@ export function patch_titles(search = page.structure.main) {
 
             const loved = track.querySelector('.chartlist-loved');
             if (loved) {
+                loved.classList.add('colourful');
                 loved.setAttribute('data-season', season);
 
                 const love = loved.querySelector('.chartlist-love-button');

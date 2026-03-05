@@ -111,7 +111,7 @@ function open_changelog(changelog) {
         //if (index > 10) continue;
 
         const version_item = html.node`
-            <div class="changelog-version-item" data-changelog-type="${changelog[version].type}" data-changelog-latest="${index == 0 ? 'true' : 'false'}" data-changelog-version="${version}">
+            <div class="changelog-version-item colourful" data-changelog-type="${changelog[version].type}" data-changelog-latest="${index == 0 ? 'true' : 'false'}" data-changelog-version="${version}">
                 <div class="version-item-header">
                     <div class="sub-text">
                         <div class="breadcrumb">

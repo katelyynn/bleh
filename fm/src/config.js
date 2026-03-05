@@ -6,6 +6,7 @@
 
 import {
     inbuilt_settings,
+    other_setting_types,
     settings,
     settings_base,
     settings_store,
@@ -111,15 +112,20 @@ export function load_settings(skip = false) {
             continue;
         }
 
-        if (settings_store[setting] && settings_store[setting].css)
-            document.body.style.setProperty(
-                `--${settings_store[setting].css}`,
-                `${settings[setting]}${settings_store[setting].suffix || ''}`
-            );
-        document.documentElement.setAttribute(
-            `data-bleh--${setting}`,
-            `${settings[setting]}`
-        );
+        if (settings_store[setting]) {
+            const type = settings_store[setting].type || 'toggle';
+
+            if (settings_store[setting].css) {
+                document.body.style.setProperty(
+                    `--${settings_store[setting].css}`,
+                    `${settings[setting]}${settings_store[setting].suffix || ''}`
+                );
+            }
+
+            if (!other_setting_types.includes(type)) {
+                document.body.setAttribute(`data-bleh--${setting}`, settings[setting]);
+            }
+        }
     }
 
     load_skus();

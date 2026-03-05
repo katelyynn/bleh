@@ -266,7 +266,7 @@ export function patch_shouts() {
                     ${tl(trans.preview)}
                 </div>
             ` : ''}
-            <div class="tip characters" ref=${(el) => (chars = el)}>
+            <div class="tip characters colourful" ref=${(el) => (chars = el)}>
                 ${tl(trans.value_characters_max, { v: '0/1000' })}
             </div>
         `);

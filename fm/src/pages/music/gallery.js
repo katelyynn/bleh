@@ -97,7 +97,7 @@ export function bleh_gallery() {
         </div>
         <div class="title-layer">
             ${image_title.outerHTML}
-            <div class="vote-number" data-side="pos">+0</div>
+            <div class="vote-number colourful" data-side="pos">+0</div>
         </div>
     `;
 

@@ -578,6 +578,8 @@ export let inbuilt_settings = {
     }
 };
 
+export const other_setting_types = ['list', 'tabs'];
+
 export let settings_store = {
     theme: {
         default: 'darker',

@@ -5,7 +5,7 @@
 //
 
 import { html, render } from 'lighterhtml';
-import { settings, settings_store } from '@/build/config.js';
+import { other_setting_types, settings, settings_store } from '@/build/config.js';
 import { tl, trans } from '@/build/trans';
 import { notify } from '@/components/dialog/notify';
 import { auth, page } from '@/build/page.js';
@@ -172,7 +172,7 @@ export function setting({
                     }
                     ${setting_incompatible_block(settings_store[id].incompatible)}
                     <div class="toggle-wrap">
-                        <button class="btn toggle" ref=${(el) => (toggle = el)} aria-checked=${value}>
+                        <button class="btn toggle colourful" ref=${(el) => (toggle = el)} aria-checked=${value}>
                             <div class="dot"></div>
                         </button>
                     </div>
@@ -1197,9 +1197,15 @@ function reset_text(id, input, submit, option, reset_btn, avatar) {
     });
 }
 
-export function save_setting(id, value) {
+export function save_setting(id: string, value: string | number | boolean) {
+    const store = settings_store[setting] || {};
+    const type = store.type || 'toggle';
+
     settings[id] = value;
-    document.documentElement.setAttribute(`data-bleh--${id}`, value);
+
+    if (!other_setting_types.includes(type)) {
+        document.body.setAttribute(`data-bleh--${id}`, value.toString());
+    }
 
     if (id == 'theme') {
         if (value == 'light' || value == 'ink' || value == 'glass') {
@@ -1208,7 +1214,7 @@ export function save_setting(id, value) {
             settings.theme_type = 'dark';
         }
 
-        document.documentElement.setAttribute(
+        document.body.setAttribute(
             `data-bleh--theme_type`,
             settings.theme_type
         );
@@ -1235,20 +1241,17 @@ export function save_setting(id, value) {
             document.body.style.setProperty(`--${settings_store.sat.css}`, settings.sat);
             document.body.style.setProperty(`--${settings_store.lit.css}`, settings.lit);
         }
-    } else if (settings_store[id] && settings_store[id] == settings_store[id].default) {
-        document.body.style.removeProperty(`--${settings_store[id].css}`);
-    } else if (settings_store[id] && settings_store[id].css) {
-        document.body.style.setProperty(
-            `--${settings_store[id].css}`,
-            `${value}${settings_store[id].suffix || ''}`
-        );
+    } else if (value == store.default) {
+        document.body.style.removeProperty(`--${store.css}`);
+    } else if (store.css) {
+        document.body.style.setProperty(`--${store.css}`, `${value}${store.suffix || ''}`);
     }
 
     seasonal_colour_switch();
 
     if (
-        settings_store[id].require_reload == true ||
-        (settings_store[id].require_reload == 'partial' &&
+        store.require_reload == true ||
+        (store.require_reload == 'partial' &&
             page.type != 'bleh_settings')
     )
         request_reload();

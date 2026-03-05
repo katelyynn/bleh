@@ -1381,7 +1381,7 @@ function profile_recents() {
                         id="inbuilt-companion-checkbox-recent_artwork"
                     />
                     <span
-                        class="btn toggle"
+                        class="btn toggle colourful"
                         id="toggle-recent_artwork"
                         aria-checked="false"
                     >
@@ -1407,7 +1407,7 @@ function profile_recents() {
                         id="inbuilt-companion-checkbox-recent_realtime"
                     />
                     <span
-                        class="btn toggle"
+                        class="btn toggle colourful"
                         id="toggle-recent_realtime"
                         aria-checked="false"
                         type="button"

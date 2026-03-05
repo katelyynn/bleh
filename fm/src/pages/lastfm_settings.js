@@ -200,7 +200,7 @@ function patch_settings_charts_panel(token) {
                     </div>
                     <div class="toggle-wrap">
                         <input class="companion-checkbox" type="checkbox" name="show_recent_tracks_artwork" id="inbuilt-companion-checkbox-recent_artwork">
-                        <span class="btn toggle" id="toggle-recent_artwork" aria-checked="false">
+                        <span class="btn toggle colourful" id="toggle-recent_artwork" aria-checked="false">
                             <div class="dot"></div>
                         </span>
                     </div>
@@ -213,7 +213,7 @@ function patch_settings_charts_panel(token) {
                     </div>
                     <div class="toggle-wrap">
                         <input class="companion-checkbox" type="checkbox" name="auto_refresh_recent_tracks" id="inbuilt-companion-checkbox-recent_realtime">
-                        <span class="btn toggle" id="toggle-recent_realtime" aria-checked="false">
+                        <span class="btn toggle colourful" id="toggle-recent_realtime" aria-checked="false">
                             <div class="dot"></div>
                         </span>
                     </div>
@@ -769,7 +769,7 @@ function patch_settings_profile_panel(token, update_picture) {
                 <div class="setting" data-type="text">
                     <div class="heading">
                         <h5>${tl(trans.about)}</h5>
-                        <p class="tip characters" ref=${(el) => (chars = el)}>
+                        <p class="tip characters colourful" ref=${(el) => (chars = el)}>
                             ${tl(
                                 trans.value_characters_max,
                                 { v: bio_max_length }
@@ -1613,7 +1613,7 @@ function patch_settings_privacy_panel(token, privacy_panel) {
                     </div>
                     <div class="toggle-wrap">
                         <input class="companion-checkbox" type="checkbox" name="hide_realtime" id="inbuilt-companion-checkbox-recent_listening">
-                        <span class="btn toggle" id="toggle-recent_listening" aria-checked="false">
+                        <span class="btn toggle colourful" id="toggle-recent_listening" aria-checked="false">
                             <div class="dot"></div>
                         </span>
                     </div>
@@ -1688,7 +1688,7 @@ function patch_settings_privacy_panel(token, privacy_panel) {
                     </div>
                     <div class="toggle-wrap">
                         <input class="companion-checkbox" type="checkbox" name="shoutbox_disabled" id="inbuilt-companion-checkbox-disable_shoutbox">
-                        <span class="btn toggle" id="toggle-disable_shoutbox" aria-checked="false">
+                        <span class="btn toggle colourful" id="toggle-disable_shoutbox" aria-checked="false">
                             <div class="dot"></div>
                         </span>
                     </div>

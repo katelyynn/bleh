@@ -35807,6 +35807,7 @@
         }
         const loved = track.querySelector(".chartlist-loved");
         if (loved) {
+          loved.classList.add("colourful");
           loved.setAttribute("data-season", season);
           const love = loved.querySelector(".chartlist-love-button");
           love.classList.add("btn");
@@ -38222,7 +38223,7 @@
                         id="inbuilt-companion-checkbox-recent_artwork"
                     />
                     <span
-                        class="btn toggle"
+                        class="btn toggle colourful"
                         id="toggle-recent_artwork"
                         aria-checked="false"
                     >
@@ -38248,7 +38249,7 @@
                         id="inbuilt-companion-checkbox-recent_realtime"
                     />
                     <span
-                        class="btn toggle"
+                        class="btn toggle colourful"
                         id="toggle-recent_realtime"
                         aria-checked="false"
                         type="button"
@@ -40987,7 +40988,7 @@
     for (let version4 in changelog) {
       if (version4 == "updated" || version4 == "latest") continue;
       const version_item = html.node`
-            <div class="changelog-version-item" data-changelog-type="${changelog[version4].type}" data-changelog-latest="${index3 == 0 ? "true" : "false"}" data-changelog-version="${version4}">
+            <div class="changelog-version-item colourful" data-changelog-type="${changelog[version4].type}" data-changelog-latest="${index3 == 0 ? "true" : "false"}" data-changelog-version="${version4}">
                 <div class="version-item-header">
                     <div class="sub-text">
                         <div class="breadcrumb">
@@ -42263,7 +42264,7 @@
                     ` : ""}
                     ${setting_incompatible_block(settings_store[id].incompatible)}
                     <div class="toggle-wrap">
-                        <button class="btn toggle" ref=${(el) => toggle2 = el} aria-checked=${value}>
+                        <button class="btn toggle colourful" ref=${(el) => toggle2 = el} aria-checked=${value}>
                             <div class="dot"></div>
                         </button>
                     </div>
@@ -43034,15 +43035,19 @@
     });
   }
   function save_setting(id, value) {
+    const store = settings_store[setting] || {};
+    const type = store.type || "toggle";
     settings[id] = value;
-    document.documentElement.setAttribute(`data-bleh--${id}`, value);
+    if (!other_setting_types.includes(type)) {
+      document.body.setAttribute(`data-bleh--${id}`, value.toString());
+    }
     if (id == "theme") {
       if (value == "light" || value == "ink" || value == "glass") {
         settings.theme_type = "light";
       } else {
         settings.theme_type = "dark";
       }
-      document.documentElement.setAttribute(
+      document.body.setAttribute(
         `data-bleh--theme_type`,
         settings.theme_type
       );
@@ -43060,16 +43065,13 @@
         document.body.style.setProperty(`--${settings_store.sat.css}`, settings.sat);
         document.body.style.setProperty(`--${settings_store.lit.css}`, settings.lit);
       }
-    } else if (settings_store[id] && settings_store[id] == settings_store[id].default) {
-      document.body.style.removeProperty(`--${settings_store[id].css}`);
-    } else if (settings_store[id] && settings_store[id].css) {
-      document.body.style.setProperty(
-        `--${settings_store[id].css}`,
-        `${value}${settings_store[id].suffix || ""}`
-      );
+    } else if (value == store.default) {
+      document.body.style.removeProperty(`--${store.css}`);
+    } else if (store.css) {
+      document.body.style.setProperty(`--${store.css}`, `${value}${store.suffix || ""}`);
     }
     seasonal_colour_switch();
-    if (settings_store[id].require_reload == true || settings_store[id].require_reload == "partial" && page.type != "bleh_settings")
+    if (store.require_reload == true || store.require_reload == "partial" && page.type != "bleh_settings")
       request_reload();
     compile_settings();
     log(`saved ${id} as ${value}`, "settings", "log", {
@@ -43172,15 +43174,18 @@
         document.body.classList.remove("increase-btn-contrast");
         continue;
       }
-      if (settings_store[setting2] && settings_store[setting2].css)
-        document.body.style.setProperty(
-          `--${settings_store[setting2].css}`,
-          `${settings[setting2]}${settings_store[setting2].suffix || ""}`
-        );
-      document.documentElement.setAttribute(
-        `data-bleh--${setting2}`,
-        `${settings[setting2]}`
-      );
+      if (settings_store[setting2]) {
+        const type = settings_store[setting2].type || "toggle";
+        if (settings_store[setting2].css) {
+          document.body.style.setProperty(
+            `--${settings_store[setting2].css}`,
+            `${settings[setting2]}${settings_store[setting2].suffix || ""}`
+          );
+        }
+        if (!other_setting_types.includes(type)) {
+          document.body.setAttribute(`data-bleh--${setting2}`, settings[setting2]);
+        }
+      }
     }
     load_skus();
     compile_settings();
@@ -44986,7 +44991,7 @@
         </div>
         <div class="title-layer">
             ${image_title.outerHTML}
-            <div class="vote-number" data-side="pos">+0</div>
+            <div class="vote-number colourful" data-side="pos">+0</div>
         </div>
     `;
     image_details.insertBefore(image_title_container, image_sidebar);
@@ -47744,7 +47749,7 @@
                     ${tl2(trans.preview)}
                 </div>
             ` : ""}
-            <div class="tip characters" ref=${(el) => chars = el}>
+            <div class="tip characters colourful" ref=${(el) => chars = el}>
                 ${tl2(trans.value_characters_max, { v: "0/1000" })}
             </div>
         `);
@@ -55957,7 +55962,7 @@
                                 </div>
                                 <div class="toggle-wrap">
                                     <input type="checkbox" ref=${(el) => checkbox = el} value=${value} checked=${value} />
-                                    <button class="btn toggle" aria-checked=${value} ref=${(el) => state = el}>
+                                    <button class="btn toggle colourful" aria-checked=${value} ref=${(el) => state = el}>
                                         <div class="dot" />
                                     </button>
                                 </div>
@@ -56076,7 +56081,7 @@
           tl2(trans.settings)
         )}
                         </div>
-                        <pre class="error-info">
+                        <pre class="error-info colourful">
 ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""}</pre
                         >
                     </div>
@@ -56125,7 +56130,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       let current_state = version.feature_flags[flag].default;
       if (settings.feature_flags[flag] != null)
         current_state = settings.feature_flags[flag];
-      document.documentElement.setAttribute(
+      document.body.setAttribute(
         `data-ff--${flag}`,
         current_state
       );
@@ -59341,7 +59346,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                     </div>
                     <div class="toggle-wrap">
                         <input class="companion-checkbox" type="checkbox" name="show_recent_tracks_artwork" id="inbuilt-companion-checkbox-recent_artwork">
-                        <span class="btn toggle" id="toggle-recent_artwork" aria-checked="false">
+                        <span class="btn toggle colourful" id="toggle-recent_artwork" aria-checked="false">
                             <div class="dot"></div>
                         </span>
                     </div>
@@ -59354,7 +59359,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                     </div>
                     <div class="toggle-wrap">
                         <input class="companion-checkbox" type="checkbox" name="auto_refresh_recent_tracks" id="inbuilt-companion-checkbox-recent_realtime">
-                        <span class="btn toggle" id="toggle-recent_realtime" aria-checked="false">
+                        <span class="btn toggle colourful" id="toggle-recent_realtime" aria-checked="false">
                             <div class="dot"></div>
                         </span>
                     </div>
@@ -59874,7 +59879,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                 <div class="setting" data-type="text">
                     <div class="heading">
                         <h5>${tl2(trans.about)}</h5>
-                        <p class="tip characters" ref=${(el) => chars = el}>
+                        <p class="tip characters colourful" ref=${(el) => chars = el}>
                             ${tl2(
       trans.value_characters_max,
       { v: bio_max_length }
@@ -60588,7 +60593,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                     </div>
                     <div class="toggle-wrap">
                         <input class="companion-checkbox" type="checkbox" name="hide_realtime" id="inbuilt-companion-checkbox-recent_listening">
-                        <span class="btn toggle" id="toggle-recent_listening" aria-checked="false">
+                        <span class="btn toggle colourful" id="toggle-recent_listening" aria-checked="false">
                             <div class="dot"></div>
                         </span>
                     </div>
@@ -60663,7 +60668,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                     </div>
                     <div class="toggle-wrap">
                         <input class="companion-checkbox" type="checkbox" name="shoutbox_disabled" id="inbuilt-companion-checkbox-disable_shoutbox">
-                        <span class="btn toggle" id="toggle-disable_shoutbox" aria-checked="false">
+                        <span class="btn toggle colourful" id="toggle-disable_shoutbox" aria-checked="false">
                             <div class="dot"></div>
                         </span>
                     </div>
@@ -63404,7 +63409,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                 <div class="bleh-icon" style="--icon: var(--icon-error)"></div>
                 <h1>oops.. something broke</h1>
                 <p>An error prevented ${version.brand} from finishing loading, it's recommended to leave the page and refresh.</p>
-                <pre class="error-info">${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""}${e4.stack ? html.node`<br><span class="error-stack">${e4.stack}</span>` : ""}<br>on: ${page.type}/${page.subpage}<br>    ${window.location.pathname}<br>    ${version.build} (${version.sku})</pre>
+                <pre class="error-info colourful">${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""}${e4.stack ? html.node`<br><span class="error-stack">${e4.stack}</span>` : ""}<br>on: ${page.type}/${page.subpage}<br>    ${window.location.pathname}<br>    ${version.build} (${version.sku})</pre>
                 <p>It would be helpful if you could report this bug on Github, including the error message above.</p>
             </div>
             <div class="modal-footer">
@@ -74802,6 +74807,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       type: "toggle"
     }
   };
+  var other_setting_types = ["list", "tabs"];
   var settings_store = {
     theme: {
       default: "darker",
