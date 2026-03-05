@@ -2046,7 +2046,7 @@ export function theme_bubbles(func = null) {
                 if (!theme.formal) theme.formal = theme.id;
 
                 const bubble = html.node`
-                    <button class="theme-bubble" data-theme-id=${theme.id} onclick=${() => update_theme_bubble(theme.id)}>
+                    <button class="btn theme-bubble" data-theme-id=${theme.id} onclick=${() => update_theme_bubble(theme.id)}>
                         <div class="bubble">
                             ${theme.id == 'adaptive' ? html.node`
                                 <div class="inner theme-preview" data-bleh--theme=${settings.theme_day} data-bleh--theme_type=${['light', 'ink'].includes(settings.theme_day) ? 'light' : 'dark'}>

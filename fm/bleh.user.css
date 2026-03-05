@@ -13031,9 +13031,8 @@ t {
       width: 60px;
       height: 60px;
       border-radius: 50%;
-      border: 1px solid oklch(var(--b4) / 70%);
+      position: relative;
       box-shadow: var(--interact-shadow);
-      overflow: hidden;
       .inner {
         background: oklch(var(--b6));
         color: oklch(var(--c2));
@@ -13041,11 +13040,26 @@ t {
         display: flex;
         justify-content: center;
         align-items: center;
+        overflow: hidden;
+        border-radius: inherit;
         height: 100%;
         .bleh-icon {
           --icon: var(--mask);
           --icon-size: 24px;
         }
+      }
+      &:after {
+        --inset: 4px;
+        content: "";
+        position: absolute;
+        inset: calc(-1 * var(--inset));
+        border: 2px solid var(--glow);
+        border-radius: calc(var(--item-med-radius) + var(--inset));
+        scale: 0.95;
+        opacity: 0;
+        transition-property: scale, opacity;
+        transition-duration: 0.3s;
+        transition-timing-function: var(--trans-function-ani);
       }
     }
     &[data-theme-id=adaptive] {
@@ -13054,12 +13068,17 @@ t {
         & > .inner {
           position: absolute;
           inset: 0;
-          border-radius: unset;
           width: 50%;
+          &:first-child {
+            border-top-right-radius: unset;
+            border-bottom-right-radius: unset;
+          }
           &:last-child {
             z-index: 2;
             left: 50%;
             right: none;
+            border-top-left-radius: unset;
+            border-bottom-left-radius: unset;
           }
         }
       }
@@ -13078,9 +13097,9 @@ t {
       }
     }
     &[aria-selected=true] {
-      .bubble {
-        outline: 2px solid oklch(var(--l3-c));
-        box-shadow: 0 3px 12px oklch(var(--h4) / 32%), var(--interact-shadow);
+      & > .bubble:after {
+        scale: 1 !important;
+        opacity: 1 !important;
       }
       & > strong {
         color: oklch(var(--l3-c));
@@ -13093,7 +13112,7 @@ t {
       .bubble {
         width: 70px;
         height: 50px;
-        border-radius: var(--item-big-radius);
+        border-radius: var(--item-med-radius);
         .inner {
           .bleh-icon {
             --icon-size: 18px;
@@ -13210,6 +13229,7 @@ t {
   align-items: center;
   gap: 4px;
   & > .bleh-icon-theme {
+    --mask-colour: currentColor;
     height: var(--icon-size);
     --icon-size: 14px;
   }
