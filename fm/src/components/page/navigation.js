@@ -634,7 +634,7 @@ export function append_nav() {
                     language_options,
                     language_option,
                     raw: language_option.innerHTML,
-                    raw_options: language_options.innerHTML
+                    raw_options: language_options
                 }
             );
             return;

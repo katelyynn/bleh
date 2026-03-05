@@ -65,6 +65,7 @@
 }
 
 .select-header {
+    font-size: 13px;
     color: oklch(var(--c3));
     padding: 3px var(--button-sides) 4px;
     cursor: default;

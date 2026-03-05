@@ -724,7 +724,7 @@ body {
     --max-tooltip-width: 100vw;
   }
   --item-small-radius: 5px;
-  --item-med-radius: 8px;
+  --item-med-radius: 10px;
   --item-big-radius: 12px;
   --profile-header-background-height: 350px;
   --profile-header-background-offset: 27%;
@@ -3778,7 +3778,7 @@ a.inline-add-icon {
   --shadow: none !important;
   --shadow-hov: none !important;
   --col: oklch(var(--c2)) !important;
-  --radius: var(--button-radius);
+  --radius: var(--item-med-radius);
   position: relative !important;
   min-width: 170px !important;
   --show-icon: block;
@@ -4698,7 +4698,7 @@ li:first-child .more-item--delete {
   &[data-theme=menu] {
     padding: 4px !important;
     background: oklch(var(--menu-bg) / var(--solarium-opacity, var(--menu-opacity))) !important;
-    border-radius: calc(var(--button-radius) + 4px) !important;
+    border-radius: calc(var(--item-med-radius) + 4px) !important;
     box-shadow: var( --override-full-shadow, var(--menu-shadow) ) !important;
     border: 1px solid var(--card-border-base) !important;
     color: oklch(var(--c2));
@@ -17239,6 +17239,7 @@ input[type=range]::-moz-range-progress {
   width: 100% !important;
 }
 .select-header {
+  font-size: 13px;
   color: oklch(var(--c3));
   padding: 3px var(--button-sides) 4px;
   cursor: default;

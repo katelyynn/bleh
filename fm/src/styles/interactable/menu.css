@@ -18,7 +18,7 @@
     --shadow: none !important;
     --shadow-hov: none !important;
     --col: oklch(var(--c2)) !important;
-    --radius: var(--button-radius);
+    --radius: var(--item-med-radius);
     position: relative !important;
     min-width: 170px !important;
     --show-icon: block;

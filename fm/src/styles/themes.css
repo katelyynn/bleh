@@ -843,7 +843,7 @@ body {
     }
 
     --item-small-radius: 5px;
-    --item-med-radius: 8px;
+    --item-med-radius: 10px;
     --item-big-radius: 12px;
 
     --profile-header-background-height: 350px;

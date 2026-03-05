@@ -50,7 +50,7 @@
     &[data-theme="menu"] {
         padding: 4px !important;
         background: oklch(var(--menu-bg) / var(--solarium-opacity, var(--menu-opacity))) !important;
-        border-radius: calc(var(--button-radius) + 4px) !important;
+        border-radius: calc(var(--item-med-radius) + 4px) !important;
         box-shadow: var(
             --override-full-shadow,
             var(--menu-shadow)
