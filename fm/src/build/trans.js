@@ -33,8 +33,8 @@ export let lang_info = {
     },
     it: {
         name: "Italiano",
-        by: ['cutotopo'],
-        last_updated: '2025-11-14'
+        by: ['cutotopo', 'nikilite'],
+        last_updated: '2026-02-20'
     },
     ja: {
         name: "日本語",
@@ -393,6 +393,7 @@ export const trans = {
                 sv: 'escoffier :3',
                 ru: 'ескоффьер :3',
                 pt: 'escoffier :3',
+                it: 'escoffier :3',
                 pl: 'escoffier :3',
                 zh: 'escoffier :3'
             },
@@ -851,7 +852,8 @@ export const trans = {
         en: 'Close friends',
         de: 'Engen Freunde',
         ru: 'Близкие друзья',
-        es: 'Amigos cercanos'
+        es: 'Amigos cercanos',
+        it: 'Amici stretti'
     },
     friends: {
         en: 'Friends',
@@ -879,12 +881,14 @@ export const trans = {
         en: 'Add close friends',
         de: 'Engen Freunde hinzufügen',
         ru: 'Добавить близких друзей',
-        es: 'Añadir amigos cercanos'
+        es: 'Añadir amigos cercanos',
+        it: 'Aggiungi amici stretti'
     },
     edit_close_friends: {
         en: 'Edit close friends',
         ru: 'Редактировать близких друзей',
-        es: 'Editar amigos cercanos'
+        es: 'Editar amigos cercanos',
+        it: 'Modifica amici stretti'
     },
     starred_friend: {
         name: {
@@ -924,43 +928,50 @@ export const trans = {
     friend_difference: {
         en: 'Close friends is a bleh system that allows you to keep up to date on your friend’s listening history, it does not influence your following list.',
         ru: 'Близкие друзья - это функция bleh, которая позволяет следить за историей прослушиваний ваших друзей и не влияет на список ваших подписок.',
-        es: 'Amigos cercanos es un sistema de bleh que te permite estar al día con el historial de escucha de tus amigos, no afecta tu lista de seguidos.'
+        es: 'Amigos cercanos es un sistema de bleh que te permite estar al día con el historial de escucha de tus amigos, no afecta tu lista de seguidos.',
+        it: 'Gli amici stretti sono un sistema di bleh che ti permette di rimanere aggiornato sulla cronologia di ascolto dei tuoi amici, senza influenzare la tua lista di follower.'
     },
     friend_difference_min: {
         en: 'bleh-only',
         ru: 'только в bleh',
-        es: 'Solo en bleh'
+        es: 'Solo en bleh',
+        it: 'solo su bleh'
     },
     add_as_friend: {
         en: 'Add as close friend',
         de: 'Als engen Freund hinzufügen',
         ru: 'Добавить в список близких друзей',
-        es: 'Añadir como amigo cercano'
+        es: 'Añadir como amigo cercano',
+        it: 'Aggiungi come amico stretto'
     },
     remove_friend: {
         name: {
             en: 'Remove close friend',
             de: 'Engen Freund entfernen',
             ru: 'Удалить из списка близких друзей',
-            es: 'Remover amigo cercano'
+            es: 'Remover amigo cercano',
+            it: 'Rimuovi amico stretto'
         },
         body: {
             en: 'Continue removing {u} as a close friend? (bleh-only)',
             ru: 'Продолжить удаление {u} из списка близких друзей? (bleh-only)',
-            es: '¿Continuar y remover a {u} como amigo cercano? (Solo en bleh)'
+            es: '¿Continuar y remover a {u} como amigo cercano? (Solo en bleh)',
+            it: 'Vuoi continuare a rimuovere {u} come amico stretto? (solo su bleh)'
         },
     },
     added_as_friend: {
         en: 'Added close friend',
         de: 'Engen Freund hinzugefügt',
         ru: 'Добавлен в список близких друзей',
-        es: 'Amigo cercano añadido'
+        es: 'Amigo cercano añadido',
+        it: 'Amico stretto aggiunto'
     },
     removed_friend: {
         en: 'Removed close friend',
         de: 'Engen Freund entfernt',
         ru: 'Удален из списка близких друзей',
-        es: 'Amigo cercano removido'
+        es: 'Amigo cercano removido',
+        it: 'Amico stretto rimosso'
     },
     added_star: {
         en: 'Added star status',
@@ -1032,7 +1043,8 @@ export const trans = {
         // dont translate to "scrobbling since"
         en: 'Account creation date',
         ru: 'Дата создания аккаунта',
-        es: 'Fecha de creación de cuenta'
+        es: 'Fecha de creación de cuenta',
+        it: 'Data di creazione dell’account'
     },
     account_scrobbling_since_replace: {
         // copy this from last.fm 1:1 (including the space at the end if there)
@@ -1086,6 +1098,7 @@ export const trans = {
         en: 'Scrobble {v}',
         de: '{v} scrobbeln',
         es: 'Hacer scrobbling al {v}',
+        it: 'Scrobble {v}',
         ru: 'Скробблить {v}',
         pt: 'Scrobble {v}',
         pl: 'Scrobble {v}',
@@ -1133,7 +1146,8 @@ export const trans = {
         // tracks on an album
         en: '{c} tracks',
         ru: '{c} треков',
-        es: '{c} temas'
+        es: '{c} temas',
+        it: '{c} tracce'
     },
     count_scrobbles: {
         en: '{c} scrobbles',
@@ -3985,12 +3999,14 @@ export const trans = {
     cut: {
         en: 'Cut',
         ru: 'Вырезать',
-        es: 'Cortar'
+        es: 'Cortar',
+        it: 'Taglia'
     },
     paste: {
         en: 'Paste',
         de: 'Einfügen',
         es: 'Pegar',
+        it: 'Incolla',
         pt: 'Colar',
         pl: 'Wklej',
         ru: 'Вставить'
@@ -3999,6 +4015,7 @@ export const trans = {
         en: 'Paste text',
         de: 'Text einfügen',
         es: 'Pegar texto',
+        it: 'Incolla testo',
         pt: 'Colar texto',
         pl: 'Wklej tekst',
         ru: 'Вставить текст'
@@ -4007,6 +4024,7 @@ export const trans = {
         en: 'Undo',
         de: 'Rückgängig',
         es: 'Deshacer',
+        it: 'Annulla',
         pt: 'Desfazer',
         pl: 'Cofnij',
         ru: 'Отменить'
@@ -4015,6 +4033,7 @@ export const trans = {
         en: 'Redo',
         de: 'Wiederholen',
         es: 'Rehacer',
+        it: 'Rifai',
         pt: 'Refazer',
         pl: 'Powtórz',
         ru: 'Повторить'
@@ -4023,6 +4042,7 @@ export const trans = {
         en: 'Pasted text',
         de: 'Eingefügter Text',
         es: 'Texto pegado',
+        it: 'Testo incollato',
         pt: 'Texto colado',
         pl: 'Wklejono tekst',
         ru: 'Вставленный текст'
