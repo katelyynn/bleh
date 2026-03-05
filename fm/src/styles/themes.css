@@ -418,7 +418,7 @@ body,
         --nav-filter-shadow: drop-shadow(0 0 2px oklch(var(--b5)));
         --header-filter-shadow: drop-shadow(0 0 10px oklch(var(--b5)));
 
-        --banner-overlay: oklch(var(--b5) / 20%);
+        --banner-overlay: oklch(var(--b5) / 50%);
         --banner-mix: lighten;
 
         --setting-group: oklch(var(--b6) / 5%);

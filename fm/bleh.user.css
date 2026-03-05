@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           bleh (re:dev)
 @namespace      github.com/katelyynn/bleh
-@version        2026.0214
+@version        2026.0227
 @license        GPL-3.0
 @author         katelyn
 ==/UserStyle== */
@@ -355,7 +355,7 @@ body,
     --menu-item-atv: oklch(var(--b4) / 80%);
     --nav-filter-shadow: drop-shadow(0 0 2px oklch(var(--b5)));
     --header-filter-shadow: drop-shadow(0 0 10px oklch(var(--b5)));
-    --banner-overlay: oklch(var(--b5) / 20%);
+    --banner-overlay: oklch(var(--b5) / 50%);
     --banner-mix: lighten;
     --setting-group: oklch(var(--b6) / 5%);
     --lastfm-logo-filter: none;

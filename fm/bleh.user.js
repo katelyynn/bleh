@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    https://last.fm/
-// @version      2026.0214
+// @version      2026.0227
 // @description  bleh!!! ^-^
 // @author       katelyn
 // @match        https://www.last.fm/*
