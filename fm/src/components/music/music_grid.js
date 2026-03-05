@@ -85,8 +85,9 @@ export function music_grids(search = page.structure.main, use_colour = true) {
             is_album = grid.querySelector('.grid-items-item-aux-block') != null;
         }
 
-        let image_wrap = grid.querySelector('.grid-items-cover-image-image');
-        let image = image_wrap.querySelector('img');
+        const cover = grid.querySelector('.grid-items-cover-image');
+        const image_wrap = cover.querySelector('.grid-items-cover-image-image');
+        const image = image_wrap.querySelector('img');
 
         if (grid.classList.contains('grid-items-item--big'))
             image.src = image.src.replace('/avatar300s/', '/500x500/');
@@ -96,8 +97,9 @@ export function music_grids(search = page.structure.main, use_colour = true) {
             !image_wrap.classList.contains('grid-items-cover-default') &&
             use_colour
         ) {
-            let grid_colour = document.createElement('div');
-            grid_colour.classList.add('grid-item-colour-bg');
+            const grid_colour = html.node`
+                <div class="grid-item-colour-bg" />
+            `;
             image_wrap.appendChild(grid_colour);
 
             image.setAttribute('crossorigin', 'anonymous');
@@ -121,6 +123,8 @@ export function music_grids(search = page.structure.main, use_colour = true) {
                     grid.style.setProperty('--hue-over', hue);
                     grid.style.setProperty('--sat-over', sat);
                     grid.style.setProperty('--lit-over', lit);
+
+                    cover.classList.add('colourful');
                 });
             } catch (e) {}
 
@@ -241,6 +245,12 @@ export function music_grids(search = page.structure.main, use_colour = true) {
             }
         }
 
+        const details = grid.querySelector('.grid-items-item-details');
+        const links = details.querySelectorAll('a');
+        links.forEach(link => {
+            link.classList.add('grid-item-text');
+        });
+
         let name = grid.querySelector('.grid-items-item-main-text a');
         if (!name) return;
 
@@ -289,7 +299,7 @@ export function music_grids(search = page.structure.main, use_colour = true) {
                     <span class="title">${song_title}</span>
                     ${song_tags.map(
                         (tag) => html.node`
-                        <span class="feat" data-bleh--tag-type="${tag.type}" data-bleh--tag-group="${tag.group}">${romanise(tag.text)}</span>
+                        <span class="feat" data-bleh--tag-type=${tag.type} data-bleh--tag-group=${tag.group}>${romanise(tag.text)}</span>
                     `
                     )}
                 `
