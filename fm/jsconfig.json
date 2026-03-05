@@ -4,7 +4,9 @@
         "baseUrl": ".",
         "paths": {
             "@/*": ["./src/*"]
-        }
+        },
+        "lib": ["es2015", "dom"],
+        "target": "es2015"
     },
     "include": ["**/*.js", "**/*.ts"]
 }

@@ -53618,7 +53618,7 @@
         let length = current.length;
         if (length < 2) length = 2;
         const show_language = settings.navigation_language == true ? 1 : 0;
-        const height = (length + 3 + show_language) * 30;
+        const height = (length + 3 + show_language) * 28;
         const themes_disabled = page.subpage.startsWith("listening-report") || page.state.settings_page == "visual";
         let auth_header;
         let auth_bg;

@@ -3782,12 +3782,13 @@ a.inline-add-icon {
   position: relative !important;
   min-width: 170px !important;
   --show-icon: block;
-  --button-height: 30px;
-  --btn-top: 6px;
-  --btn-bottom: 6px;
+  --button-height: 28px;
+  --btn-top: 5px;
+  --btn-bottom: 5px;
   --left: var(--button-sides-icon);
   --right: none;
-  --icon-size: 16px;
+  --icon-size: 14px;
+  --mask-size: var(--icon-size) !important;
   display: flex;
   align-items: center;
   gap: 4px;
