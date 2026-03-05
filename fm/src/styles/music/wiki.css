@@ -96,7 +96,7 @@
             font-size: var(--font-size);
             line-height: var(--line-height);
             font-weight: var(--font-weight);
-            color: oklch(var(--c2), 80%);
+            color: oklch(var(--c2) / 80%);
         }
     }
 
@@ -453,7 +453,7 @@
     line-height: 20px;
 }
 .wiki-block-cta {
-    color: oklch(var(--c2), 80%);
+    color: oklch(var(--c2) / 80%);
     cursor: default;
 
     margin: unset;

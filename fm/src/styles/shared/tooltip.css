@@ -355,7 +355,7 @@
 
             & > small {
                 font: inherit;
-                color: oklch(var(--c2), 80%);
+                color: oklch(var(--c2) / 80%);
             }
         }
     }

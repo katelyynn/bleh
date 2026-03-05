@@ -461,7 +461,7 @@
 
                 & > .feat {
                     font-size: 18px;
-                    color: oklch(var(--c2), 70%);
+                    color: oklch(var(--c2) / 70%);
                 }
             }
 
@@ -471,7 +471,7 @@
 
             &[data-multi="true"] {
                 & > h1 {
-                    color: oklch(var(--c2), 80%);
+                    color: oklch(var(--c2) / 80%);
                     gap: unset;
 
                     & > a {
@@ -507,7 +507,7 @@
         & > h2 {
             font-size: 18px;
             line-height: 22px;
-            color: oklch(var(--c2), 80%);
+            color: oklch(var(--c2) / 80%);
             cursor: default;
 
             display: -webkit-box;

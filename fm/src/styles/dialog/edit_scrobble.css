@@ -92,7 +92,7 @@
 }
 
 .generic-label {
-    color: oklch(var(--c2), 70%);
+    color: oklch(var(--c2) / 70%);
     font-weight: var(--font-weight) !important;
     margin-bottom: calc(-1 * (var(--item-list-gap) - 4px));
     cursor: default;

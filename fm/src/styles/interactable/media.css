@@ -78,7 +78,7 @@
     }
 
     .music-bookmarks-albums-item-artist {
-        color: oklch(var(--c2), 80%);
+        color: oklch(var(--c2) / 80%);
 
         & > a {
             color: inherit;
@@ -400,7 +400,7 @@
 .artist-top-albums-item-artist,
 .music-bookmarks-albums-item-artist,
 .music-releases-item-artist {
-    color: oklch(var(--c2), 80%);
+    color: oklch(var(--c2) / 80%);
     margin-top: 2px;
     margin-bottom: unset;
 }

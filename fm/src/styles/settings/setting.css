@@ -866,7 +866,7 @@
             .artist {
                 width: 150px;
                 height: 6px;
-                background-color: oklch(var(--c2), 80%);
+                background-color: oklch(var(--c2) / 80%);
                 border-radius: 50px;
             }
             .album {

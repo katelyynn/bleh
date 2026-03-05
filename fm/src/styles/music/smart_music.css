@@ -23,7 +23,7 @@
         width: fit-content;
         height: fit-content;
         margin: auto 0;
-        color: oklch(var(--c2), 80%);
+        color: oklch(var(--c2) / 80%);
 
         min-width: 0;
         overflow: hidden;

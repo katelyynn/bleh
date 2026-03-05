@@ -393,7 +393,7 @@ select,
     --bg-hov: oklch(var(--b4) / 40%);
     --bg-atv: oklch(var(--b4) / 60%);
     --shadow: none;
-    --col: oklch(var(--c2), 80%);
+    --col: oklch(var(--c2) / 80%);
     --mask-colour: currentColor;
 }
 

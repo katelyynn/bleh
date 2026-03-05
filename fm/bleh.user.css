@@ -3120,7 +3120,7 @@ select,
   --bg-hov: oklch(var(--b4) / 40%);
   --bg-atv: oklch(var(--b4) / 60%);
   --shadow: none;
-  --col: oklch(var(--c2), 80%);
+  --col: oklch(var(--c2) / 80%);
   --mask-colour: currentColor;
 }
 .continue {
@@ -4064,7 +4064,7 @@ li:first-child .more-item--delete {
         width: 130px;
       }
       & > a {
-        color: oklch(var(--c2), 80%);
+        color: oklch(var(--c2) / 80%);
       }
       & > a + a {
         margin-left: 4px;
@@ -4113,7 +4113,7 @@ li:first-child .more-item--delete {
   margin-top: unset;
 }
 .source-album-nodata {
-  color: oklch(var(--c2), 80%);
+  color: oklch(var(--c2) / 80%);
   cursor: default;
 }
 .similar-panel {
@@ -4273,7 +4273,7 @@ li:first-child .more-item--delete {
     transform: scale(0.98);
   }
   .music-bookmarks-albums-item-artist {
-    color: oklch(var(--c2), 80%);
+    color: oklch(var(--c2) / 80%);
     & > a {
       color: inherit;
     }
@@ -4547,7 +4547,7 @@ li:first-child .more-item--delete {
 .artist-top-albums-item-artist,
 .music-bookmarks-albums-item-artist,
 .music-releases-item-artist {
-  color: oklch(var(--c2), 80%);
+  color: oklch(var(--c2) / 80%);
   margin-top: 2px;
   margin-bottom: unset;
 }
@@ -4875,7 +4875,7 @@ li:first-child .more-item--delete {
       text-align: center;
       & > small {
         font: inherit;
-        color: oklch(var(--c2), 80%);
+        color: oklch(var(--c2) / 80%);
       }
     }
   }
@@ -6750,7 +6750,7 @@ html[data-bleh--show_remaster_tags=false] {
     width: fit-content;
     height: fit-content;
     margin: auto 0;
-    color: oklch(var(--c2), 80%);
+    color: oklch(var(--c2) / 80%);
     min-width: 0;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -9714,7 +9714,7 @@ text:has(> .your-progress-label-position) {
       text-align: left;
     }
     &.is-loading {
-      color: oklch(var(--c2), 80%);
+      color: oklch(var(--c2) / 80%);
     }
   }
 }
@@ -10215,7 +10215,7 @@ h2.playlisting-create-option-title {
   .sub-text-label {
     display: flex;
     align-items: center;
-    color: oklch(var(--c2), 80%);
+    color: oklch(var(--c2) / 80%);
     --mask-colour: currentColor;
     .sub-text-label-sr {
       display: none;
@@ -10692,7 +10692,7 @@ h2.playlisting-create-option-title {
         gap: var(--item-list-gap);
         & > .feat {
           font-size: 18px;
-          color: oklch(var(--c2), 70%);
+          color: oklch(var(--c2) / 70%);
         }
       }
       @media (max-width: 980px) {
@@ -10700,7 +10700,7 @@ h2.playlisting-create-option-title {
       }
       &[data-multi=true] {
         & > h1 {
-          color: oklch(var(--c2), 80%);
+          color: oklch(var(--c2) / 80%);
           gap: unset;
           & > a {
             color: oklch(var(--c1));
@@ -10729,7 +10729,7 @@ h2.playlisting-create-option-title {
     & > h2 {
       font-size: 18px;
       line-height: 22px;
-      color: oklch(var(--c2), 80%);
+      color: oklch(var(--c2) / 80%);
       cursor: default;
       display: -webkit-box;
       overflow: hidden;
@@ -11886,7 +11886,7 @@ button.lfmmaf-missing-artwork-button {
       font-size: var(--font-size);
       line-height: var(--line-height);
       font-weight: var(--font-weight);
-      color: oklch(var(--c2), 80%);
+      color: oklch(var(--c2) / 80%);
     }
   }
   & > p {
@@ -12189,7 +12189,7 @@ button.lfmmaf-missing-artwork-button {
   line-height: 20px;
 }
 .wiki-block-cta {
-  color: oklch(var(--c2), 80%);
+  color: oklch(var(--c2) / 80%);
   cursor: default;
   margin: unset;
   padding: unset;
@@ -12337,7 +12337,7 @@ button.lfmmaf-missing-artwork-button {
     ul {
       margin-top: 2px;
       margin-left: 12px;
-      color: oklch(var(--c2), 80%);
+      color: oklch(var(--c2) / 80%);
       --font-size: 13px;
       font-size: var(--font-size);
     }
@@ -12927,7 +12927,7 @@ t {
         color: oklch(var(--c2));
       }
       & > p {
-        color: oklch(var(--c2), 80%);
+        color: oklch(var(--c2) / 80%);
         cursor: default;
       }
     }
@@ -14319,7 +14319,7 @@ t {
       color: oklch(var(--c3));
       cursor: default;
       & > a {
-        color: oklch(var(--c2), 80%);
+        color: oklch(var(--c2) / 80%);
       }
       & > a + a {
         margin-left: 4px;
@@ -14665,7 +14665,7 @@ t {
   }
 }
 .events-list-item-venue {
-  color: oklch(var(--c2), 80%);
+  color: oklch(var(--c2) / 80%);
   margin-top: unset !important;
   .events-list-sidebar & {
     -webkit-line-clamp: 1;
@@ -14752,7 +14752,7 @@ t {
 .events-list-item-event--lineup,
 .events-list-item-venue--address,
 .events-list-item-acts {
-  color: oklch(var(--c2), 80%);
+  color: oklch(var(--c2) / 80%);
   margin-top: unset !important;
 }
 .events-list-sidebar .events-list-item-venue--title,
@@ -18018,7 +18018,7 @@ input[type=range]::-moz-range-progress {
       .artist {
         width: 150px;
         height: 6px;
-        background-color: oklch(var(--c2), 80%);
+        background-color: oklch(var(--c2) / 80%);
         border-radius: 50px;
       }
       .album {
@@ -20089,7 +20089,7 @@ input[type=range]::-moz-range-progress {
       cursor: default;
       position: relative;
       & > p {
-        color: oklch(var(--c2), 80%);
+        color: oklch(var(--c2) / 80%);
         & > strong {
           color: oklch(var(--c2));
           font-weight: var(--font-weight-medium);
@@ -20106,7 +20106,7 @@ input[type=range]::-moz-range-progress {
       display: flex;
       align-items: center;
       gap: 4px;
-      color: oklch(var(--c2), 80%);
+      color: oklch(var(--c2) / 80%);
       cursor: default;
       font-weight: var(--font-weight-medium);
       & > .bleh-icon {
@@ -20850,7 +20850,7 @@ input[type=range]::-moz-range-progress {
   gap: var(--item-list-gap);
 }
 .generic-label {
-  color: oklch(var(--c2), 70%);
+  color: oklch(var(--c2) / 70%);
   font-weight: var(--font-weight) !important;
   margin-bottom: calc(-1 * (var(--item-list-gap) - 4px));
   cursor: default;
@@ -21355,7 +21355,7 @@ input[type=range]::-moz-range-progress {
       color: oklch(var(--c2));
     }
     .status-body {
-      color: oklch(var(--c2), 80%);
+      color: oklch(var(--c2) / 80%);
       display: -webkit-box;
       -webkit-line-clamp: 1;
       overflow: hidden;
@@ -22594,7 +22594,7 @@ img.empty {
         align-items: center;
         gap: 4px;
         font-size: 13px;
-        color: oklch(var(--c2), 80%);
+        color: oklch(var(--c2) / 80%);
         --icon-colour: currentColor;
         --icon-size: 14px;
       }

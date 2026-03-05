@@ -66,7 +66,7 @@
                 }
 
                 .api-session-app-description {
-                    color: oklch(var(--c2), 80%);
+                    color: oklch(var(--c2) / 80%);
                 }
             }
 

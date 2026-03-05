@@ -155,7 +155,7 @@
             cursor: default;
 
             & > a {
-                color: oklch(var(--c2), 80%);
+                color: oklch(var(--c2) / 80%);
             }
 
             & > a + a {

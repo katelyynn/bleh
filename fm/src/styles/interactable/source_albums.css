@@ -112,7 +112,7 @@
             }
 
             & > a {
-                color: oklch(var(--c2), 80%);
+                color: oklch(var(--c2) / 80%);
             }
 
             & > a + a {
@@ -170,7 +170,7 @@
     margin-top: unset;
 }
 .source-album-nodata {
-    color: oklch(var(--c2), 80%);
+    color: oklch(var(--c2) / 80%);
     cursor: default;
 }
 

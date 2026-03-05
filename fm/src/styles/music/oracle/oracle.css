@@ -117,7 +117,7 @@ img.empty {
                 gap: 4px;
 
                 font-size: 13px;
-                color: oklch(var(--c2), 80%);
+                color: oklch(var(--c2) / 80%);
                 --icon-colour: currentColor;
                 --icon-size: 14px;
             }

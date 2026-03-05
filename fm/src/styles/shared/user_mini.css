@@ -64,7 +64,7 @@
             position: relative;
 
             & > p {
-                color: oklch(var(--c2), 80%);
+                color: oklch(var(--c2) / 80%);
 
                 & > strong {
                     color: oklch(var(--c2));
@@ -84,7 +84,7 @@
             display: flex;
             align-items: center;
             gap: 4px;
-            color: oklch(var(--c2), 80%);
+            color: oklch(var(--c2) / 80%);
             cursor: default;
             font-weight: var(--font-weight-medium);
 

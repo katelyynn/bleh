@@ -98,7 +98,7 @@
         ul {
             margin-top: 2px;
             margin-left: 12px;
-            color: oklch(var(--c2), 80%);
+            color: oklch(var(--c2) / 80%);
             --font-size: 13px;
             font-size: var(--font-size);
         }

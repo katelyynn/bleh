@@ -264,7 +264,7 @@
     }
 }
 .events-list-item-venue {
-    color: oklch(var(--c2), 80%);
+    color: oklch(var(--c2) / 80%);
     margin-top: unset !important;
 
     .events-list-sidebar & {
@@ -366,7 +366,7 @@
 .events-list-item-event--lineup,
 .events-list-item-venue--address,
 .events-list-item-acts {
-    color: oklch(var(--c2), 80%);
+    color: oklch(var(--c2) / 80%);
     margin-top: unset !important;
 }
 

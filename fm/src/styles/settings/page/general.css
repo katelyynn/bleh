@@ -93,7 +93,7 @@
                 color: oklch(var(--c2));
             }
             & > p {
-                color: oklch(var(--c2), 80%);
+                color: oklch(var(--c2) / 80%);
                 cursor: default;
             }
         }
