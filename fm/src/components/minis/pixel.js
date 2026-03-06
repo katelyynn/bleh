@@ -5,7 +5,7 @@
 //
 
 import {html, render} from "lighterhtml";
-import {api_key, auth, page} from "@/build/page.js";
+import {api_key, auth, page} from "@/build/page";
 import {tl, trans} from "@/build/trans";
 import {input} from "@/components/settings/input";
 import tippy from "tippy.js";

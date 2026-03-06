@@ -784,7 +784,7 @@ export function update_page() {
     page.structure.container.setAttribute('data-short', ff('short'));
 }
 
-export async function register_background(url, origin = null) {
+export async function register_background(url: string | null, origin = null) {
     if (url && url.endsWith('c6f59c1e5e7240a4c0d427abd71f3dbb.jpg')) url = '';
 
     log(`requested register of ${url} from ${origin}`, 'background', 'log');
@@ -818,11 +818,7 @@ export async function register_background(url, origin = null) {
     background.style.removeProperty('background-image');
 
     if (url) {
-        if (url == 'accent') {
-            background.setAttribute('data-accent-based', true);
-        } else {
-            background.style.setProperty('background-image', `url(${url})`);
-        }
+        background.style.setProperty('background-image', `url(${url})`);
     }
 
     if (page.type == 'user') {
@@ -840,7 +836,7 @@ export async function register_background(url, origin = null) {
     return background;
 }
 
-export function register_banner(url, origin = null) {
+export function register_banner(url: string | null, origin = null) {
     let background = page.structure.banner;
 
     if (!background) {
@@ -856,17 +852,15 @@ export function register_banner(url, origin = null) {
     background.setAttribute('data-background-origin', origin);
     background.setAttribute('data-background-coloured', settings.hue_from_album);
 
+    let inner: HTMLSpanElement;
+
     render(background, html``);
     render(background, html`
         <span class="background-inner" ref=${el => inner = el} />
     `);
 
     if (url) {
-        if (url == 'accent') {
-            inner.setAttribute('data-accent-based', true);
-        } else {
-            inner.style.setProperty('background-image', `url(${url})`);
-        }
+        inner.style.setProperty('background-image', `url(${url})`);
     }
 
     if (page.type == 'user') {

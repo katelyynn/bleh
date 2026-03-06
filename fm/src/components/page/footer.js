@@ -7,7 +7,7 @@
 import { html, render } from 'lighterhtml';
 import { lang, lang_info, tl, trans } from '@/build/trans';
 import { sponsor_list } from '@/build/sponsor.js';
-import { root } from '@/build/page.js';
+import { root } from '@/build/page';
 import { sponsor } from '@/components/sponsor';
 import { version } from '@/main';
 

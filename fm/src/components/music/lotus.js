@@ -12,7 +12,7 @@ import {
     combined_artists,
     includes
 } from '@/build/music.js';
-import { page, root } from '@/build/page.js';
+import { page, root } from '@/build/page';
 import {
     desanitise,
     return_artist_from_generic,

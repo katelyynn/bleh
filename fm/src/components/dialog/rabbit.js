@@ -4,7 +4,7 @@
 // Licensed under GPLv3
 //
 
-import { auth, page, root } from '@/build/page.js';
+import { auth, page, root } from '@/build/page';
 import { dialog, dialog_rm } from '@/components/dialog/dialog';
 import { html, render } from 'lighterhtml';
 import { input } from '@/components/settings/input';

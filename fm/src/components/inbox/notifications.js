@@ -4,7 +4,7 @@
 // Licensed under GPLv3
 //
 
-import { auth, root } from '@/build/page.js';
+import { auth, root } from '@/build/page';
 import { desanitise } from '@/build/tools';
 import { correct_artist, correct_item_by_artist } from '@/components/music/lotus';
 import { html, render } from 'lighterhtml';

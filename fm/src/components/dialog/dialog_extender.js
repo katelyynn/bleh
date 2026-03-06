@@ -4,7 +4,7 @@
 // Licensed under GPLv3
 //
 
-import { page, root } from '@/build/page.js';
+import { page, root } from '@/build/page';
 import { tl, trans } from '@/build/trans';
 import { html, render } from 'lighterhtml';
 import { toggle } from '@/components/settings/toggle';

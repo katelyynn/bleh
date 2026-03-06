@@ -13,7 +13,7 @@ import {
     oracle_tracks,
     page,
     root
-} from '@/build/page.js';
+} from '@/build/page';
 import { stored_season } from '@/build/seasonal';
 import { clamp_lit, clamp_sat, copy, hex_to_oklch, set_storage, time } from '@/build/tools';
 import { get_trans_key, lang_info, tl, trans } from '@/build/trans';
@@ -22,7 +22,7 @@ import { markdown } from '@/components/shared/markdown';
 import { notify } from '@/components/dialog/notify';
 import { load_settings } from '../../config.js';
 import { version } from '@/main';
-import { update_page } from '@/page.js';
+import { update_page } from '@/page';
 import { seasonal_timer_end, seasonal_timer_start } from '@/components/seasonal';
 import { ff } from '@/components/settings/sku.js';
 import { html, render } from 'lighterhtml';

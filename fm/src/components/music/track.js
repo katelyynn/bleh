@@ -7,7 +7,7 @@
 import { html, render } from 'lighterhtml';
 import { settings } from '@/build/config.js';
 import { log } from '@/build/log.js';
-import { auth, page, root } from '@/build/page.js';
+import { auth, page, root } from '@/build/page';
 import {
     clamp_lit,
     clamp_sat,

@@ -33444,17 +33444,17 @@
     });
     register_menu(date_display, menu);
     function render_popup() {
-      let inner2;
+      let inner;
       if (view.level === "year") {
-        inner2 = render_year_view();
+        inner = render_year_view();
       } else if (view.level === "month") {
-        inner2 = render_month_view();
+        inner = render_month_view();
       } else if (view.level === "manual") {
-        inner2 = render_manual_view();
+        inner = render_manual_view();
       } else {
-        inner2 = render_day_view();
+        inner = render_day_view();
       }
-      tooltip.setContent(html.node`<div class="calendar">${inner2}</div>`);
+      tooltip.setContent(html.node`<div class="calendar">${inner}</div>`);
       if (date_button) tippy_esm_default(date_button, { content: tl2(trans.change_zoom) });
       if (manual_button)
         tippy_esm_default(manual_button, { content: manual_button.textContent });
@@ -42809,7 +42809,7 @@
           return setting_fail(id, {
             message: "Tabs type requires you to either define values in config or pass a list to instance."
           });
-        const inner2 = html.node`
+        const inner = html.node`
                 ${Object.entries(values).map(([key, val]) => {
           const icon3 = val.icon || key;
           const button2 = html.node`
@@ -42830,10 +42830,10 @@
           return button2;
         })}
             `;
-        if (standalone) return inner2;
+        if (standalone) return inner;
         return html.node`
                 <div class="view-buttons ${center ? "view-buttons-middle" : ""}">
-                    ${inner2}
+                    ${inner}
                 </div>
             `;
       } else if (type == "radio") {
@@ -50456,8 +50456,8 @@
           for (let i = 0; i < offset3; i++)
             if (text5[i] == "`") backticks++;
           if (backticks % 2 == 1) return _;
-          const inner2 = converter2.makeHtml(content.trim());
-          const clean2 = purify.sanitize(inner2, {
+          const inner = converter2.makeHtml(content.trim());
+          const clean2 = purify.sanitize(inner, {
             ALLOWED_TAGS,
             ALLOWED_ATTR
           });
@@ -53102,12 +53102,12 @@
       }
     };
     const masthead = document.body.querySelector(".masthead");
-    const inner2 = masthead.querySelector(".masthead-inner-wrap");
-    const navs = inner2.querySelector(".masthead-nav-wrap");
-    const search = inner2.querySelector(".masthead-search-form");
+    const inner = masthead.querySelector(".masthead-inner-wrap");
+    const navs = inner.querySelector(".masthead-nav-wrap");
+    const search = inner.querySelector(".masthead-search-form");
     const form = search.querySelector(".masthead-search-field");
     form.placeholder = tl2(trans.search_for_anything);
-    inner2.insertBefore(
+    inner.insertBefore(
       html.node`
         <div class="masthead-search-wrap">
             ${search}
@@ -63141,7 +63141,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     });
   }
 
-  // src/page.js
+  // src/page.ts
   function bleh() {
     florence({
       page,
@@ -63649,11 +63649,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     background.removeAttribute("data-accent-based");
     background.style.removeProperty("background-image");
     if (url) {
-      if (url == "accent") {
-        background.setAttribute("data-accent-based", true);
-      } else {
-        background.style.setProperty("background-image", `url(${url})`);
-      }
+      background.style.setProperty("background-image", `url(${url})`);
     }
     if (page.type == "user") {
       if (page.name == auth.name) {
@@ -63679,16 +63675,13 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     background.setAttribute("data-page-subpage", page.subpage);
     background.setAttribute("data-background-origin", origin);
     background.setAttribute("data-background-coloured", settings.hue_from_album);
+    let inner;
     render(background, html``);
     render(background, html`
         <span class="background-inner" ref=${(el) => inner = el} />
     `);
     if (url) {
-      if (url == "accent") {
-        inner.setAttribute("data-accent-based", true);
-      } else {
-        inner.style.setProperty("background-image", `url(${url})`);
-      }
+      inner.style.setProperty("background-image", `url(${url})`);
     }
     if (page.type == "user") {
       if (page.name == auth.name) {
@@ -85137,13 +85130,13 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
   function drawBorder(ctx, element, offset3, spacing, circular) {
     const { fullCircles, startAngle, circumference, options } = element;
     const { borderWidth, borderJoinStyle, borderDash, borderDashOffset, borderRadius } = options;
-    const inner2 = options.borderAlign === "inner";
+    const inner = options.borderAlign === "inner";
     if (!borderWidth) {
       return;
     }
     ctx.setLineDash(borderDash || []);
     ctx.lineDashOffset = borderDashOffset;
-    if (inner2) {
+    if (inner) {
       ctx.lineWidth = borderWidth * 2;
       ctx.lineJoin = borderJoinStyle || "round";
     } else {
@@ -85160,7 +85153,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         endAngle = startAngle + (circumference % TAU || TAU);
       }
     }
-    if (inner2) {
+    if (inner) {
       clipArc(ctx, element, endAngle);
     }
     if (options.selfJoin && endAngle - startAngle >= PI && borderRadius === 0 && borderJoinStyle !== "miter") {
@@ -85792,19 +85785,19 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     }
     draw(ctx) {
       const { inflateAmount, options: { borderColor, backgroundColor } } = this;
-      const { inner: inner2, outer: outer2 } = boundingRects(this);
+      const { inner, outer: outer2 } = boundingRects(this);
       const addRectPath = hasRadius(outer2.radius) ? addRoundedRectPath : addNormalRectPath;
       ctx.save();
-      if (outer2.w !== inner2.w || outer2.h !== inner2.h) {
+      if (outer2.w !== inner.w || outer2.h !== inner.h) {
         ctx.beginPath();
-        addRectPath(ctx, inflateRect(outer2, inflateAmount, inner2));
+        addRectPath(ctx, inflateRect(outer2, inflateAmount, inner));
         ctx.clip();
-        addRectPath(ctx, inflateRect(inner2, -inflateAmount, outer2));
+        addRectPath(ctx, inflateRect(inner, -inflateAmount, outer2));
         ctx.fillStyle = borderColor;
         ctx.fill("evenodd");
       }
       ctx.beginPath();
-      addRectPath(ctx, inflateRect(inner2, inflateAmount));
+      addRectPath(ctx, inflateRect(inner, inflateAmount));
       ctx.fillStyle = backgroundColor;
       ctx.fill();
       ctx.restore();

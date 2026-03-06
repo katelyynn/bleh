@@ -5,7 +5,7 @@
 //
 
 import { html } from 'lighterhtml';
-import { random_list, root } from '@/build/page.js';
+import { random_list, root } from '@/build/page';
 import { tl, trans } from '@/build/trans';
 import { dialog, dialog_rm } from '@/components/dialog/dialog';
 import { input } from '@/components/settings/input';

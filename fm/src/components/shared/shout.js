@@ -7,7 +7,7 @@
 import { patch_avatar, style_name_from_badge } from '@/components/shared/avatar';
 import { settings } from '@/build/config.js';
 import { log } from '@/build/log.js';
-import { auth, page, root, shout_parse_queue } from '@/build/page.js';
+import { auth, page, root, shout_parse_queue } from '@/build/page';
 import { lang, tl, trans } from '@/build/trans';
 import { notify } from '@/components/dialog/notify';
 import { html, render } from 'lighterhtml';

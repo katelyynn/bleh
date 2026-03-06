@@ -9,7 +9,7 @@ import { tl, trans } from '@/build/trans';
 import { log } from '@/build/log.js';
 import tippy from 'tippy.js';
 import { calendar } from '@/components/dialog/calendar';
-import { auth } from '@/build/page.js';
+import { auth } from '@/build/page';
 
 type input = {
     type?: string,

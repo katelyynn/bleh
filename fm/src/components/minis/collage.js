@@ -9,7 +9,7 @@ import { html, render } from 'lighterhtml';
 import { select } from '@/components/settings/select';
 import { setting } from '@/components/settings/settings';
 import { input } from '@/components/settings/input';
-import { auth, page, root } from '@/build/page.js';
+import { auth, page, root } from '@/build/page';
 import { notify, notify_rm } from '@/components/dialog/notify';
 import { clean_number, pad2, sanitise, year_from_date } from '@/build/tools';
 import { log } from '@/build/log.js';

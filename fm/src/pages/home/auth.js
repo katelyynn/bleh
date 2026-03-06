@@ -4,7 +4,7 @@
 // Licensed under GPLv3
 //
 
-import { auth, page, root } from '@/build/page.js';
+import { auth, page, root } from '@/build/page';
 import { register_background, update_page } from '@/page';
 import { log } from '@/build/log.js';
 import { checkup_page_structure } from '@/components/page/structure.js';

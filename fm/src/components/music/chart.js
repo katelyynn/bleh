@@ -4,7 +4,7 @@
 // Licensed under GPLv3
 //
 
-import {page} from "@/build/page.js";
+import {page} from "@/build/page";
 import {
     bleh_glacier_date_graph_generate,
     bleh_glacier_insights,
