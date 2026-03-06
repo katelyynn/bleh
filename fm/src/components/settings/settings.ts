@@ -33,6 +33,12 @@ interface setting {
     center?: boolean
 }
 
+interface setting_element extends HTMLElement {
+    value?: string,
+    compat?: () => void,
+    update?: (new_list: []) => void
+}
+
 export function setting({
     id = '',
     text = true,
@@ -41,7 +47,7 @@ export function setting({
     func,
     list,
     center = true
-}: setting) {
+}: setting): setting_element {
     try {
         let value = settings[id];
         log(`creating ${id} with value ${value}`, 'settings', 'log', {
@@ -177,7 +183,7 @@ export function setting({
                         </button>
                     </div>
                 </div>
-            `;
+            ` as setting_element;
 
             function update_toggle() {
                 if (elem.getAttribute('disabled') == 'true') {
@@ -282,7 +288,7 @@ export function setting({
                         <p class="value-marker" ref=${(el) => (marker = el)}>${value}${settings_store[id].suffix || ''}</p>
                     </div>
                 </div>
-            `;
+            ` as setting_element;
 
             elem.compat = () => {
                 if (!incompatible_with) return;
@@ -425,7 +431,7 @@ export function setting({
                         <button class="btn chibi icon submit" ref=${(el) => (submit = el)} onclick=${() => update_text(id, input, submit, option, input.value, reset_btn, avatar)}>${tl(trans.save)}</button>
                     </div>
                 </div>
-            `;
+            ` as setting_element;
 
             container.compat = () => {
                 if (!incompatible_with) return;
@@ -576,7 +582,7 @@ export function setting({
                         </div>
                     </div>
                 </div>
-            `;
+            ` as setting_element;
 
             function update_toggle() {
                 if (elem.getAttribute('disabled') == 'true') {
@@ -741,7 +747,7 @@ export function setting({
                         )}
                     </div>
                 </div>
-            `;
+            ` as setting_element;
 
             elem.compat = () => {
                 if (!incompatible_with) return;
@@ -770,10 +776,7 @@ export function setting({
             function update_radio(val) {
                 save_setting(id, val);
 
-                elem.setAttribute(
-                    'data-modified',
-                    val != settings_store[id].default
-                );
+                elem.setAttribute('data-modified', (val != settings_store[id].default).toString());
 
                 buttons.forEach((btn) => {
                     btn.querySelector('.radio').setAttribute(
@@ -817,7 +820,7 @@ export function setting({
                     ` : ''}
                     <div class="setting-lists" ref=${(el) => (lists = el)} />
                 </div>
-            `;
+            ` as setting_element;
 
             elem.compat = () => {
                 if (!incompatible_with) return;
@@ -1017,7 +1020,7 @@ export function setting({
                     ${setting_incompatible_block(settings_store[id].incompatible)}
                     <div class="select-hook" ref=${el => select_hook = el} />
                 </div>
-            `;
+            ` as setting_element;
 
             render_select();
 

@@ -42848,10 +42848,7 @@
       } else if (type == "radio") {
         let update_radio = function(val) {
           save_setting(id, val);
-          elem.setAttribute(
-            "data-modified",
-            val != settings_store[id].default
-          );
+          elem.setAttribute("data-modified", (val != settings_store[id].default).toString());
           buttons.forEach((btn) => {
             btn.querySelector(".radio").setAttribute(
               "aria-checked",
