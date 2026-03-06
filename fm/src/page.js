@@ -419,17 +419,12 @@ function load_page(main_content = null) {
 
     bleh_footer();
 
-    let masthead = document.body.querySelector('.masthead');
-    window.addEventListener('scroll', (e) => {
-        detect_scroll();
-    });
+    const masthead = document.body.querySelector('.masthead');
+    const loading_indicator = document.body.querySelector(':scope > #initial-tealium-data');
 
-    detect_scroll();
-
-    function detect_scroll() {
-        if (window.scrollY > 10) masthead.classList.add('scrolled');
-        else masthead.classList.remove('scrolled');
-    }
+    new IntersectionObserver(([entry]) => {
+        masthead.classList.toggle('scrolled', !entry.isIntersecting);
+    }).observe(loading_indicator);
 
     prepare_music();
 

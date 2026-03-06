@@ -35225,7 +35225,6 @@
         smart_track(track, index3);
       });
       function smart_track(track, index3) {
-        console.log("track", track);
         if (track.getAttribute("data-track-type")) return;
         if (track.classList[0] == "chartlist-row--interlist-ad") {
           track.parentElement.removeChild(track);
@@ -35236,6 +35235,9 @@
         track.appendChild(html.node`
                 <div class="kate-placeholder" />
             `);
+        const elem = track;
+        track = track.cloneNode(true);
+        elem.replaceWith(track);
         let track_title = track.querySelector(".chartlist-name a:not(.offset-section-anchor)");
         if (!track_title) return;
         if (track_title.hasAttribute("title")) {
@@ -36058,11 +36060,11 @@
                 track.style.setProperty("--sat-over", sat);
                 track.style.setProperty("--lit-over", lit);
               } else {
-                to_colour.forEach((elem) => {
-                  elem.classList.add("colourful");
-                  elem.style.setProperty("--hue-over", hue4);
-                  elem.style.setProperty("--sat-over", sat);
-                  elem.style.setProperty("--lit-over", lit);
+                to_colour.forEach((elem2) => {
+                  elem2.classList.add("colourful");
+                  elem2.style.setProperty("--hue-over", hue4);
+                  elem2.style.setProperty("--sat-over", sat);
+                  elem2.style.setProperty("--lit-over", lit);
                 });
               }
             });
@@ -45546,11 +45548,16 @@
     update_page();
   }
   function bleh_tags_mini() {
+    const tags = page.structure.main.querySelectorAll(".tag");
+    tags.forEach((tag) => {
+      const elem = tag.firstElementChild;
+      elem.classList.add("btn", "tag-item");
+    });
     let tag_user_avatar = page.structure.main.querySelector(".tags-user-avatar");
     if (!tag_user_avatar) return;
     let tags_list = tag_user_avatar.nextElementSibling;
-    let tags = tags_list.querySelectorAll(".tag a");
-    tags.forEach((tag) => {
+    const user_tags = tags_list.querySelectorAll(".tag a");
+    user_tags.forEach((tag) => {
       tag.classList.add("user-created-tag");
       tippy_esm_default(tag, {
         content: tl2(trans.personal_tag)
@@ -62249,7 +62256,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     let radios = page.structure.side.querySelectorAll(".stationlink");
     radios.forEach((radio2) => {
       let type = radio2.getAttribute("data-analytics-label");
-      radio2.classList.add("radio-button", "side-action");
+      radio2.classList.add("btn", "radio-button", "side-action");
       let text4 = tl2(trans[type]);
       if (type == "tag")
         text4 = page.name;
@@ -62270,7 +62277,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       let container = document.createElement("div");
       container.classList.add("listening-report-promos", "side-actions");
       promos.forEach((promo) => {
-        promo.classList.add("side-action");
+        promo.classList.add("btn", "side-action");
         container.appendChild(promo);
       });
       promo_v3.appendChild(container);
@@ -63354,15 +63361,11 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     set_season();
     seasonal_timer_end();
     bleh_footer();
-    let masthead = document.body.querySelector(".masthead");
-    window.addEventListener("scroll", (e4) => {
-      detect_scroll();
-    });
-    detect_scroll();
-    function detect_scroll() {
-      if (window.scrollY > 10) masthead.classList.add("scrolled");
-      else masthead.classList.remove("scrolled");
-    }
+    const masthead = document.body.querySelector(".masthead");
+    const loading_indicator = document.body.querySelector(":scope > #initial-tealium-data");
+    new IntersectionObserver(([entry]) => {
+      masthead.classList.toggle("scrolled", !entry.isIntersecting);
+    }).observe(loading_indicator);
     prepare_music();
     if (window.location.pathname.startsWith(setup_url.replace("{root}", root))) {
       bleh_setup();

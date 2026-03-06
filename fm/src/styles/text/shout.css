@@ -310,7 +310,7 @@
         margin-right: unset;
     }
 
-    & > p {
+    & > .markdown-body {
         max-height: 700px;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -343,12 +343,8 @@
 .shout-user {
     width: fit-content;
     display: inline-flex;
-    margin-right: unset;
+    margin: unset;
     font-weight: var(--font-weight-medium);
-
-    @media (max-width: 980px) {
-        margin-left: unset;
-    }
 }
 .shout-timestamp {
     height: fit-content;
@@ -362,10 +358,7 @@
     text-transform: lowercase;
     cursor: pointer;
     position: relative;
-
-    @media (max-width: 980px) {
-        margin: unset;
-    }
+    margin: unset;
 }
 
 .shout-user-avatar,

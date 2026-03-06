@@ -114,7 +114,6 @@ export function patch_titles(search = page.structure.main) {
         });
 
         function smart_track(track, index) {
-            console.log('track', track);
             if (track.getAttribute('data-track-type')) return;
 
             // ads slowly move up the tree until eventually causing a crash
@@ -128,6 +127,11 @@ export function patch_titles(search = page.structure.main) {
             track.appendChild(html.node`
                 <div class="kate-placeholder" />
             `);
+
+            const elem = track;
+            track = track.cloneNode(true);
+
+            elem.replaceWith(track);
 
             let track_title = track.querySelector('.chartlist-name a:not(.offset-section-anchor)');
             if (!track_title) return;
