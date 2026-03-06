@@ -172,7 +172,7 @@
 
 
 .follow-combo {
-    gap: calc((var(--button-sides) * 2) + 2px) !important;
+    gap: 2px !important;
 }
 
 .header-new-love-button {

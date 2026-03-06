@@ -69,7 +69,7 @@ export function bleh_profiles() {
     let profile_header = document.body.querySelector('.header--user');
     if (!profile_header) return;
 
-    const profile_name = profile_header.querySelector('.header-title a');
+    const profile_name = profile_header.querySelector('.header-title > a');
     page.name = profile_name.textContent;
     profile_name.removeAttribute('href');
 
@@ -80,8 +80,7 @@ export function bleh_profiles() {
         '.page-content:not(.profile-cards-container, .report-box-container .page-content)'
     );
     try {
-        page.structure.row =
-            page.structure.container.querySelector('.row:not(._buffer)');
+        page.structure.row = page.structure.container.querySelector('.row:not(._buffer)');
         page.structure.main = page.structure.row.querySelector('.col-main');
         page.structure.side = page.structure.row.querySelector('.col-sidebar');
     } catch (e) {
@@ -104,15 +103,15 @@ export function bleh_profiles() {
         page.structure.row.querySelector('.about-me-sidebar');
 
     if (page.subpage == 'overview') {
-        if (!about_me_sidebar) {
-            delete cache.banner;
-            delete cache.hue;
-            delete cache.sat;
-            delete cache.lit;
-            delete cache.font;
-            delete cache.font_style;
-            delete cache.username;
+        delete cache.banner;
+        delete cache.hue;
+        delete cache.sat;
+        delete cache.lit;
+        delete cache.font;
+        delete cache.font_style;
+        delete cache.username;
 
+        if (!about_me_sidebar) {
             about_me_sidebar = html.node`
                 <section class="about-me-sidebar">
                     <h2>${tl(trans.about)}</h2>

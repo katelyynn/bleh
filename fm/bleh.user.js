@@ -36674,7 +36674,7 @@
       save_setting("starred_friend", "");
     }
     const elem = html.node`
-        <button class="btn side-action" data-type="close_friends" type="button" onclick=${() => {
+        <button class="btn side-action colourful" data-type="close_friends" type="button" onclick=${() => {
       if (friend_state) {
         dialog({
           id: "remove_friend",
@@ -37598,7 +37598,7 @@
     }
     let profile_header = document.body.querySelector(".header--user");
     if (!profile_header) return;
-    const profile_name = profile_header.querySelector(".header-title a");
+    const profile_name = profile_header.querySelector(".header-title > a");
     page.name = profile_name.textContent;
     profile_name.removeAttribute("href");
     let is_subpage = page.subpage != "overview";
@@ -37621,14 +37621,14 @@
     let cache2 = profile_cache[page.name] || {};
     let about_me_sidebar = page.structure.row.querySelector(".about-me-sidebar");
     if (page.subpage == "overview") {
+      delete cache2.banner;
+      delete cache2.hue;
+      delete cache2.sat;
+      delete cache2.lit;
+      delete cache2.font;
+      delete cache2.font_style;
+      delete cache2.username;
       if (!about_me_sidebar) {
-        delete cache2.banner;
-        delete cache2.hue;
-        delete cache2.sat;
-        delete cache2.lit;
-        delete cache2.font;
-        delete cache2.font_style;
-        delete cache2.username;
         about_me_sidebar = html.node`
                 <section class="about-me-sidebar">
                     <h2>${tl2(trans.about)}</h2>
