@@ -164,13 +164,13 @@ export function general() {
             <section class="bleh--panel">
                 <h4>API</h4>
                 <div class="setting-group">
-                    <div class="setting" data-type="action">
+                    <div class="setting" data-type="action" id="setting_api">
                         <div class="heading">
                             <h5>${tl(trans.api.name)}</h5>
                             <p>${tl(trans.api.body)}</p>
                         </div>
                         <div class="toggle-wrap">
-                            <a class="btn ${auth_key && auth_valid == 'true' ? '' : 'primary'} icon connect" href="${root}api/auth?api_key=${api_key}&cb=${root}bleh/api">
+                            <a class="btn ${auth_key && auth_valid == 'true' ? '' : 'primary'} icon" data-type="plus" href="${root}api/auth?api_key=${api_key}&cb=${root}bleh/api">
                                 ${tl(trans.connect)}
                             </a>
                         </div>

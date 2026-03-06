@@ -84,7 +84,7 @@ export async function bleh_api() {
                     <form method="post" data-no-partial-refresh="">
                         <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
                         <input type="hidden" name="confirmation" value="confirm">
-                        <button class="btn primary icon connect" type="submit" name="confirm">
+                        <button class="btn primary icon" data-type="plus" type="submit" name="confirm">
                             ${tl(trans.connect)}
                         </button>
                     </form>

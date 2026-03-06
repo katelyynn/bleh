@@ -30,7 +30,7 @@ export function submit_scrobble({
         can_api = localStorage.getItem('bleh_auth') && localStorage.getItem('bleh_auth_valid') === 'true';
 
     if (!can_api) {
-        window.location.href = `${root}bleh/general`;
+        window.location.href = `${root}bleh/general?setting=api`;
         return;
     }
 

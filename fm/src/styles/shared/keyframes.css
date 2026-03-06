@@ -208,7 +208,7 @@
         background: transparent;
     }
     40% {
-        background: oklch(var(--f4), 20%);
+        background: oklch(var(--f4) / 20%);
     }
 }
 

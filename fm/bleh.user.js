@@ -34926,7 +34926,7 @@
     if (!can_api)
       can_api = localStorage.getItem("bleh_auth") && localStorage.getItem("bleh_auth_valid") === "true";
     if (!can_api) {
-      window.location.href = `${root}bleh/general`;
+      window.location.href = `${root}bleh/general?setting=api`;
       return;
     }
     const random = random_list[Math.floor(Math.random() * random_list.length)];
@@ -54278,13 +54278,13 @@
             <section class="bleh--panel">
                 <h4>API</h4>
                 <div class="setting-group">
-                    <div class="setting" data-type="action">
+                    <div class="setting" data-type="action" id="setting_api">
                         <div class="heading">
                             <h5>${tl2(trans.api.name)}</h5>
                             <p>${tl2(trans.api.body)}</p>
                         </div>
                         <div class="toggle-wrap">
-                            <a class="btn ${auth_key && auth_valid == "true" ? "" : "primary"} icon connect" href="${root}api/auth?api_key=${api_key}&cb=${root}bleh/api">
+                            <a class="btn ${auth_key && auth_valid == "true" ? "" : "primary"} icon" data-type="plus" href="${root}api/auth?api_key=${api_key}&cb=${root}bleh/api">
                                 ${tl2(trans.connect)}
                             </a>
                         </div>
@@ -62339,7 +62339,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                     <form method="post" data-no-partial-refresh="">
                         <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
                         <input type="hidden" name="confirmation" value="confirm">
-                        <button class="btn primary icon connect" type="submit" name="confirm">
+                        <button class="btn primary icon" data-type="plus" type="submit" name="confirm">
                             ${tl2(trans.connect)}
                         </button>
                     </form>
