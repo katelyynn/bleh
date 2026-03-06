@@ -249,6 +249,9 @@ pre {
         margin-top: -10px;
     }
 }
+.card-tip-link {
+    margin-left: 8px;
+}
 
 .no-data-message {
     color: oklch(var(--c3));

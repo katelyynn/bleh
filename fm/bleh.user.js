@@ -52414,7 +52414,7 @@
         day: tl2(trans.themes[settings.theme_day]),
         night: tl2(trans.themes[settings.theme_night])
       })}
-            <a onclick=${() => {
+            <a class="card-tip-link" onclick=${() => {
         dialog({
           id: "auto_theme",
           title: tl2(trans.themes.name),
@@ -52484,9 +52484,7 @@
                         <p class="card-tip">${tl2(trans.theme_schedule)}</p>
                     `
         });
-      }}>
-                ${tl2(trans.change_schedule)}
-            </a>
+      }}>${tl2(trans.change_schedule)}</a>
         `);
     }
     render(page.structure.main, html`
@@ -59571,12 +59569,14 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                                 <h5>${tl2(trans.display_name.name)}<span class="new-badge sponsor-related">${tl2(trans.sponsors_only)}</span></h5>
                                 <p>${tl2(trans.display_name.body)}</p>
                             </div>
-                            ${input({
+                            <div class="info v">
+                                ${input({
         value: cache2.username,
         placeholder: auth.name,
         func: (val) => {
           const match3 = about.value().match(username_regex);
-          const new_name = val.trim() ? `[name=${val}]` : "";
+          let new_name = val.trim() ? `[name=${val}]` : "";
+          if (!new_name.match(username_regex)) new_name = "";
           if (match3) {
             about.value(about.value().replace(username_regex, new_name));
           } else {
@@ -59590,18 +59590,12 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         },
         submit_on_character: true
       })}
+                                <p class="card-tip" ref=${(el) => font_setting = el} />
+                            </div>
                         </div>
                     `;
       return elem;
     }}
-                ${ff("profile_fonts") ? html.node`
-                <div
-                    class="setting"
-                    data-type="info"
-                    disabled=${!auth.sponsor}
-                    ref=${(el) => font_setting = el}
-                />
-                ` : ""}
                 <div class="setting" data-type="text">
                     <div class="heading">
                         <h5>${tl2(trans.profile_title)}</h5>
@@ -59660,7 +59654,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         value: pre_existing,
         func: (val) => {
           const match4 = about.value().match(banner_regex);
-          const new_banner = val.trim() ? `[banner=${val}]` : "";
+          let new_banner = val.trim() ? `[banner=${val}]` : "";
+          if (!new_banner.match(banner_regex)) new_banner = "";
           if (match4) {
             about.value(about.value().replace(banner_regex, new_banner));
           } else {
@@ -59694,6 +59689,20 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                     disabled=${!auth.sponsor}
                     ref=${(el) => accent_setting = el}
                 />
+                <div class="setting" data-type="text">
+                    <div class="heading">
+                        <h5>${tl2(trans.about)}</h5>
+                        <p class="tip characters colourful" ref=${(el) => chars = el}>
+                            ${tl2(
+      trans.value_characters_max,
+      { v: bio_max_length }
+    )}
+                        </p>
+                    </div>
+                    <div class="${!ff("cosplay") ? "input-container content-form textarea" : "limitless"}">
+                        ${about}
+                    </div>
+                </div>
                 ${() => {
       const status_regex = /\[status=([^\]]+)\]/;
       const match3 = about.value().match(status_regex);
@@ -59708,7 +59717,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         value: pre_existing,
         func: (val) => {
           const match4 = about.value().match(status_regex);
-          const new_status = val.trim() ? `[status=${val}]` : "";
+          let new_status = val.trim() ? `[status=${val}]` : "";
+          if (!new_status.match(status_regex)) new_status = "";
           if (match4) {
             about.value(about.value().replace(status_regex, new_status));
           } else {
@@ -59726,20 +59736,6 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                     `;
       return elem;
     }}
-                <div class="setting" data-type="text">
-                    <div class="heading">
-                        <h5>${tl2(trans.about)}</h5>
-                        <p class="tip characters colourful" ref=${(el) => chars = el}>
-                            ${tl2(
-      trans.value_characters_max,
-      { v: bio_max_length }
-    )}
-                        </p>
-                    </div>
-                    <div class="${!ff("cosplay") ? "input-container content-form textarea" : "limitless"}">
-                        ${about}
-                    </div>
-                </div>
             </div>
             <div class="settings-footer end">
                 <button
@@ -59825,7 +59821,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
             parseFloat(match3[3])
           );
         }
-        let accent_preview2;
+        let accent_preview;
         dialog({
           id: "profile_accent",
           title: tl2(trans.profile_accent.name),
@@ -59836,7 +59832,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                                                 <h5>${tl2(trans.preview)}</h5>
                                             </div>
                                             <div class="info">
-                                                <div class="colour-tile colourful" ref=${(el) => accent_preview2 = el} style="--hue-over: ${settings.profile_hue}; --sat-over: ${settings.profile_sat}; --lit-over: ${settings.profile_lit}" />
+                                                <div class="colour-tile colourful" ref=${(el) => accent_preview = el} style="--hue-over: ${settings.profile_hue}; --sat-over: ${settings.profile_sat}; --lit-over: ${settings.profile_lit}" />
                                             </div>
                                         </div>
                                         ${ff("colour_based_on_hex") ? html.node`
@@ -59947,7 +59943,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                                 `
         });
         function update_colour_preview() {
-          accent_preview2.style = `--hue-over: ${settings.profile_hue}; --sat-over: ${settings.profile_sat}; --lit-over: ${settings.profile_lit}`;
+          accent_preview.style = `--hue-over: ${settings.profile_hue}; --sat-over: ${settings.profile_sat}; --lit-over: ${settings.profile_lit}`;
         }
       }}
                         >
@@ -59963,41 +59959,17 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         content: tl2(trans.edit)
       });
       if (font_setting) {
-        let font_edit;
+        let font_name = cache3.font;
+        let font_style = cache3.font_style;
+        let font_name_preview;
         let font_tile;
         render(font_setting, html``);
         render(font_setting, html`
-                <div class="heading">
-                    <h5>${tl2(trans.profile_font.name)}<span class="new-badge sponsor-related">${tl2(trans.sponsors_only)}</span></h5>
-                    <p>${tl2(trans.profile_font.body)}</p>
-                </div>
-                <div class="info">
-                    <div class="font-tile">
-                        <span class="preview-style" data-font=${cache3.font} data-font-style=${cache3.font_style} ref=${(el) => font_tile = el}>Aa</span>
-                    </div>
-                    <div class="swatch-group palette">
-                        <button
-                            class="swatch-container"
-                            ref=${(el) => font_edit = el}
-                            type="button"
-                            onclick=${() => {
+                <span ref=${(el) => font_name_preview = el}>${{ html: tl2(trans.styled_with_font, { f: `<span class="font-name-preview-mini" data-font=${font_name}>${font_name && font_name != "none" ? page.state.fonts[font_name] : tl2(trans.none)}</span>` }) }}</span>
+                <a class="card-tip-link" onclick=${() => {
           const match3 = about.value().match(font_regex);
-          if (match3) {
-            save_setting(
-              "profile_hue",
-              parseInt(match3[1], 10)
-            );
-            save_setting(
-              "profile_sat",
-              parseFloat(match3[2])
-            );
-            save_setting(
-              "profile_lit",
-              parseFloat(match3[3])
-            );
-          }
-          let font_name = cache3.font;
-          let font_style = cache3.font_style;
+          font_name = cache3.font;
+          font_style = cache3.font_style;
           let font_preview;
           let font_buttons = [];
           let font_style_buttons = [];
@@ -60005,26 +59977,25 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
             id: "profile_font",
             title: tl2(trans.profile_font.name),
             body: html.node`
-                                        <div class="font-name-preview">
-                                            <span data-font=${font_name} data-font-style=${font_style} ref=${(el) => font_preview = el}>${cache3.username ? cache3.username : auth.name}</span>
-                                        </div>
-                                        <div class="font-name-options">
-                                            <h4 class="font-options-header">${tl2(trans.font.name)}</h4>
-                                            <div class="font-options">
-                                                ${Object.entries(page.state.fonts).map(([font, family]) => {
+                            <div class="font-name-preview">
+                                <span data-font=${font_name} data-font-style=${font_style} ref=${(el) => font_preview = el}>${cache3.username ? cache3.username : auth.name}</span>
+                            </div>
+                            <div class="font-name-options">
+                                <h4 class="font-options-header">${tl2(trans.font.name)}</h4>
+                                <div class="font-options">
+                                    ${Object.entries(page.state.fonts).map(([font, family]) => {
               if (family == "") family = tl2(trans.none);
               const elem = html.node`
-                                                        <button class="btn font-selection" data-font=${font} aria-checked=${font == font_name} onclick=${() => {
+                                            <button class="btn font-selection" data-font=${font} aria-checked=${font == font_name} onclick=${() => {
                 font_name = font;
                 font_preview.setAttribute("data-font", font);
-                font_tile.setAttribute("data-font", font);
                 font_buttons.forEach((btn) => {
                   btn.setAttribute("aria-checked", btn.getAttribute("data-font") == font);
                 });
               }}>
-                                                            <span data-font=${font}>Aa</span>
-                                                        </button>
-                                                    `;
+                                                <span data-font=${font}>Aa</span>
+                                            </button>
+                                        `;
               tippy_esm_default(elem, {
                 content: family,
                 delay: [500, 0]
@@ -60032,33 +60003,32 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
               font_buttons.push(elem);
               return elem;
             })}
-                                            </div>
-                                            <h4 class="font-options-header">${tl2(trans.font_style)}</h4>
-                                            <div class="font-options">
-                                                ${["solid", "pop", "out", "glow"].map((style) => {
+                                </div>
+                                <h4 class="font-options-header">${tl2(trans.font_style)}</h4>
+                                <div class="font-options">
+                                    ${["solid", "pop", "out", "glow"].map((style) => {
               const elem = html.node`
-                                                        <button class="btn font-selection font-style" data-font-style=${style} aria-checked=${style == font_style} onclick=${() => {
+                                            <button class="btn font-selection font-style" data-font-style=${style} aria-checked=${style == font_style} onclick=${() => {
                 font_style = style;
                 font_preview.setAttribute("data-font-style", style);
-                font_tile.setAttribute("data-font-style", style);
                 font_style_buttons.forEach((btn) => {
                   btn.setAttribute("aria-checked", btn.getAttribute("data-font-style") == style);
                 });
               }}>
-                                                            <span class="preview-style" data-font-style=${style}>${tl2(trans.font_style[style])}</span>
-                                                        </button>
-                                                    `;
+                                                <span class="preview-style" data-font-style=${style}>${tl2(trans.font_style[style])}</span>
+                                            </button>
+                                        `;
               font_style_buttons.push(elem);
               return elem;
             })}
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button class="see-more cancel left-icon" onclick=${() => dialog_rm({ id: "profile_font" })}>
-                                                ${tl2(trans.back)}
-                                            </button>
-                                            <div class="fill"></div>
-                                            <button class="btn primary continue" onclick=${() => {
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="see-more cancel left-icon" onclick=${() => dialog_rm({ id: "profile_font" })}>
+                                    ${tl2(trans.back)}
+                                </button>
+                                <div class="fill"></div>
+                                <button class="btn primary continue" onclick=${() => {
               const new_font = `[font=${font_name}${font_style != "solid" ? `,${font_style}` : ""}]`;
               if (match3) {
                 about.value(about.value().replace(
@@ -60073,6 +60043,9 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                   about.value(trimmed + "\n\n" + new_font);
                 }
               }
+              render(font_name_preview, html`
+                                        ${{ html: tl2(trans.styled_with_font, { f: `<span class="font-name-preview-mini" data-font=${font_name} data-font-style=${font_style}>${font_name && font_name != "none" ? page.state.fonts[font_name] : tl2(trans.none)}</span>` }) }}
+                                    `);
               dialog_rm({ id: "profile_font" });
               status({
                 title: tl2(
@@ -60080,27 +60053,13 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                 )
               });
             }}>
-                                                ${tl2(trans.change)}
-                                            </button>
-                                        </div>
-                                    `
+                                    ${tl2(trans.change)}
+                                </button>
+                            </div>
+                        `
           });
-          function update_colour_preview() {
-            accent_preview.style = `--hue-over: ${settings.profile_hue}; --sat-over: ${settings.profile_sat}; --lit-over: ${settings.profile_lit}`;
-          }
-        }}
-                            >
-                                <div
-                                    class="swatch colourful"
-                                    data-swatch-type="customise"
-                                />
-                            </button>
-                        </div>
-                    </div>
-                `);
-        tippy_esm_default(font_edit, {
-          content: tl2(trans.edit)
-        });
+        }}>${tl2(trans.change_font)}</a>
+            `);
       }
     }
   }
@@ -65245,16 +65204,15 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       zh: "\u81EA\u9002\u5E94"
     },
     adaptive_tip: {
-      // the space on the end is intentional, its followed by the translation change_schedule right after
-      en: "Your theme preference will be either {day} or {night}, based on your system. ",
-      de: "Dein bevorzugtes Farbschema wird entweder {day} oder {night} sein, basierend auf deinem System. ",
-      es: "El aspecto elegido ser\xE1 {day} o {night}, bas\xE1ndose en tu dispositivo. ",
-      it: "Il tuo tema selezionato sar\xE0 {day} o {night}, in base al tuo tema di sistema. ",
-      pt: "Sua prefer\xEAncia de tema ser\xE1 {day} ou {night}, com base no seu sistema. ",
-      sv: "Ditt f\xF6redragna tema blir antigen {day} eller {night}, beroende p\xE5 ditt system. ",
-      ru: "\u041F\u0440\u0435\u0434\u043F\u043E\u0447\u0442\u0438\u0442\u0435\u043B\u044C\u043D\u0430\u044F \u0442\u0435\u043C\u0430 \u0431\u0443\u0434\u0435\u0442 {day} \u0438\u043B\u0438 {night} \u0432 \u0437\u0430\u0432\u0438\u0441\u0438\u043C\u043E\u0441\u0442\u0438 \u043E\u0442 \u043D\u0430\u0441\u0442\u0440\u043E\u0435\u043A \u0432\u0430\u0448\u0435\u0439 \u0441\u0438\u0441\u0442\u0435\u043C\u044B. ",
-      pl: "Tw\xF3j motyw ustawi si\u0119 jako {day} albo {night}, bazuj\u0105c na ustawieniach twojego systemu. ",
-      zh: "\u5C06\u6839\u636E\u7CFB\u7EDF\u8BBE\u7F6E\uFF0C\u4E3A\u60A8\u5E94\u7528 {day} \u6216 {night}\u3002 "
+      en: "Your theme preference will be either {day} or {night}, based on your system.",
+      de: "Dein bevorzugtes Farbschema wird entweder {day} oder {night} sein, basierend auf deinem System.",
+      es: "El aspecto elegido ser\xE1 {day} o {night}, bas\xE1ndose en tu dispositivo.",
+      it: "Il tuo tema selezionato sar\xE0 {day} o {night}, in base al tuo tema di sistema.",
+      pt: "Sua prefer\xEAncia de tema ser\xE1 {day} ou {night}, com base no seu sistema.",
+      sv: "Ditt f\xF6redragna tema blir antigen {day} eller {night}, beroende p\xE5 ditt system.",
+      ru: "\u041F\u0440\u0435\u0434\u043F\u043E\u0447\u0442\u0438\u0442\u0435\u043B\u044C\u043D\u0430\u044F \u0442\u0435\u043C\u0430 \u0431\u0443\u0434\u0435\u0442 {day} \u0438\u043B\u0438 {night} \u0432 \u0437\u0430\u0432\u0438\u0441\u0438\u043C\u043E\u0441\u0442\u0438 \u043E\u0442 \u043D\u0430\u0441\u0442\u0440\u043E\u0435\u043A \u0432\u0430\u0448\u0435\u0439 \u0441\u0438\u0441\u0442\u0435\u043C\u044B.",
+      pl: "Tw\xF3j motyw ustawi si\u0119 jako {day} albo {night}, bazuj\u0105c na ustawieniach twojego systemu.",
+      zh: "\u5C06\u6839\u636E\u7CFB\u7EDF\u8BBE\u7F6E\uFF0C\u4E3A\u60A8\u5E94\u7528 {day} \u6216 {night}\u3002"
     },
     change_schedule: {
       en: "Change schedule",
@@ -74051,6 +74009,12 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       // fill 1, fill 2
       // the filling of a background colour
       en: "Fill {v}"
+    },
+    styled_with_font: {
+      en: "Styled with {f}."
+    },
+    change_font: {
+      en: "Change font"
     }
   };
   var translation_fallback = "NO_TRANSLATION_FOUND";

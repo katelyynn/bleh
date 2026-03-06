@@ -44,7 +44,7 @@ export function visual() {
                 day: tl(trans.themes[settings.theme_day]),
                 night: tl(trans.themes[settings.theme_night])
             })}
-            <a onclick=${() => {
+            <a class="card-tip-link" onclick=${() => {
                 dialog({
                     id: 'auto_theme',
                     title: tl(trans.themes.name),
@@ -114,9 +114,7 @@ export function visual() {
                         <p class="card-tip">${tl(trans.theme_schedule)}</p>
                     `
                 });
-            }}>
-                ${tl(trans.change_schedule)}
-            </a>
+            }}>${tl(trans.change_schedule)}</a>
         `);
     }
 

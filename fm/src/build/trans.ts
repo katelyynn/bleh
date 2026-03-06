@@ -1544,16 +1544,15 @@ export const trans: translations = {
         zh: '自适应'
     },
     adaptive_tip: {
-        // the space on the end is intentional, its followed by the translation change_schedule right after
-        en: 'Your theme preference will be either {day} or {night}, based on your system. ',
-        de: 'Dein bevorzugtes Farbschema wird entweder {day} oder {night} sein, basierend auf deinem System. ',
-        es: 'El aspecto elegido será {day} o {night}, basándose en tu dispositivo. ',
-        it: 'Il tuo tema selezionato sarà {day} o {night}, in base al tuo tema di sistema. ',
-        pt: 'Sua preferência de tema será {day} ou {night}, com base no seu sistema. ',
-        sv: 'Ditt föredragna tema blir antigen {day} eller {night}, beroende på ditt system. ',
-        ru: 'Предпочтительная тема будет {day} или {night} в зависимости от настроек вашей системы. ',
-        pl: 'Twój motyw ustawi się jako {day} albo {night}, bazując na ustawieniach twojego systemu. ',
-        zh: '将根据系统设置，为您应用 {day} 或 {night}。 '
+        en: 'Your theme preference will be either {day} or {night}, based on your system.',
+        de: 'Dein bevorzugtes Farbschema wird entweder {day} oder {night} sein, basierend auf deinem System.',
+        es: 'El aspecto elegido será {day} o {night}, basándose en tu dispositivo.',
+        it: 'Il tuo tema selezionato sarà {day} o {night}, in base al tuo tema di sistema.',
+        pt: 'Sua preferência de tema será {day} ou {night}, com base no seu sistema.',
+        sv: 'Ditt föredragna tema blir antigen {day} eller {night}, beroende på ditt system.',
+        ru: 'Предпочтительная тема будет {day} или {night} в зависимости от настроек вашей системы.',
+        pl: 'Twój motyw ustawi się jako {day} albo {night}, bazując na ustawieniach twojego systemu.',
+        zh: '将根据系统设置，为您应用 {day} 或 {night}。'
     },
     change_schedule: {
         en: 'Change schedule',
@@ -10342,6 +10341,12 @@ export const trans: translations = {
         // fill 1, fill 2
         // the filling of a background colour
         en: 'Fill {v}'
+    },
+    styled_with_font: {
+        en: 'Styled with {f}.'
+    },
+    change_font: {
+        en: 'Change font'
     }
 };
 
