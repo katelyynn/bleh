@@ -1202,25 +1202,7 @@
 
     /*     TAGS     */
 
-    .small-label {
-        color: hsl(var(--c3));
-        font-weight: var(--font-weight-medium);
-        cursor: default;
-        --left: 0;
-        --mask-size: 12px;
-        --margin-top: -6px;
 
-        &.with-icon {
-            position: relative;
-            padding-left: calc(12px + 4px);
-        }
-    }
-    .lock {
-        --mask: var(--icon-16-lock);
-    }
-    .connect {
-        --mask: var(--icon-16-add);
-    }
 
     .music-page-placeholder {
         display: flex;

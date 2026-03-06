@@ -828,3 +828,7 @@
 .submit {
     --mask: var(--icon-16-arrow-f-up);
 }
+
+[data-type="lock"] {
+    --mask: var(--icon-16-lock);
+}

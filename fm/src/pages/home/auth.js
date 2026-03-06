@@ -42,8 +42,7 @@ export async function bleh_auth() {
     page.structure.row.removeChild(page.structure.row.firstElementChild);
     page.structure.row.removeChild(page.structure.row.firstElementChild);
 
-    page.structure.container.removeAttribute('data-beret');
-    page.structure.container.removeAttribute('data-short');
+    page.structure.container.classList.add('sour');
     page.structure.content.classList.add('cards-view');
 
     if (!page.requested.token) {

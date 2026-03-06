@@ -2406,6 +2406,9 @@ span.bleh-icon {
 .submit {
   --mask: var(--icon-16-arrow-f-up);
 }
+[data-type=lock] {
+  --mask: var(--icon-16-lock);
+}
 
 /* src/styles/shared/links.css */
 [data-host="facebook.com"],
@@ -5239,6 +5242,18 @@ pre {
   cursor: pointer !important;
   &:hover {
     text-decoration: underline;
+  }
+}
+.small-label {
+  color: oklch(var(--c3));
+  font-weight: var(--font-weight-medium);
+  cursor: default;
+  --left: 0;
+  --mask-size: 12px;
+  --margin-top: -6px;
+  &.with-icon {
+    position: relative;
+    padding-left: calc(12px + 4px);
   }
 }
 hr {

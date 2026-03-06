@@ -42,8 +42,7 @@ export async function bleh_api() {
     if (page.subpage == 'create_account') return;
 
 
-    page.structure.container.removeAttribute('data-beret');
-    page.structure.container.removeAttribute('data-short');
+    page.structure.container.classList.add('sour');
     page.structure.content.classList.add('cards-view');
 
 
@@ -76,7 +75,7 @@ export async function bleh_api() {
                 </div>
                 <div class="sep"></div>
                 <div class="description">${description}</div>
-                <div class="small-label with-icon lock">${tl(trans.ensure_you_trust)}</div>
+                <div class="small-label with-icon" data-type="lock">${tl(trans.ensure_you_trust)}</div>
                 <div class="connector-footer">
                     <a class="see-more cancel left-icon" href="${cancel}">
                         ${tl(trans.cancel)}

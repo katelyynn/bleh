@@ -62304,8 +62304,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     else
       register_background(null);
     if (page.subpage == "create_account") return;
-    page.structure.container.removeAttribute("data-beret");
-    page.structure.container.removeAttribute("data-short");
+    page.structure.container.classList.add("sour");
     page.structure.content.classList.add("cards-view");
     let success = page.structure.container.querySelector(".alert-success");
     if (!success) {
@@ -62331,7 +62330,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                 </div>
                 <div class="sep"></div>
                 <div class="description">${description}</div>
-                <div class="small-label with-icon lock">${tl2(trans.ensure_you_trust)}</div>
+                <div class="small-label with-icon" data-type="lock">${tl2(trans.ensure_you_trust)}</div>
                 <div class="connector-footer">
                     <a class="see-more cancel left-icon" href="${cancel}">
                         ${tl2(trans.cancel)}
@@ -62698,8 +62697,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     update_page();
     page.structure.row.removeChild(page.structure.row.firstElementChild);
     page.structure.row.removeChild(page.structure.row.firstElementChild);
-    page.structure.container.removeAttribute("data-beret");
-    page.structure.container.removeAttribute("data-short");
+    page.structure.container.classList.add("sour");
     page.structure.content.classList.add("cards-view");
     if (!page.requested.token) {
       render(
