@@ -42,18 +42,19 @@ import { update_inbuilt_item } from '@/config';
 import { register_background, update_page } from '@/page';
 import { ff } from '@/components/settings/sku';
 import { bleh_user_library } from '@/pages/profile/glacier';
-import { bleh_obsession } from '@/pages/profile/obsession';
+import { bleh_obsession, obsession_list } from '@/pages/profile/obsession';
 import { html, render } from 'lighterhtml';
 import { save_setting, setting } from '@/components/settings/settings';
 import { submit_scrobble } from '@/components/music/scrobble';
 import tippy from 'tippy.js';
-import { Chart, version } from '@/main';
+import { Chart } from '@/main';
 import { expand_avatar } from '@/components/shared/avatar.js';
 import { status } from '@/components/dialog/status.js';
 import { hoshino } from '@/components/music/hoshino.js';
 import { find_pronouns } from '@/components/profile/pronouns';
 import { queue_popup } from '@/components/dialog/popup';
 import { bleh_playlist } from '@/pages/profile/playlist';
+import { profile_reports } from './reports';
 
 export function bleh_profiles() {
     // the obsessions page is a user subpage but works very differently
@@ -225,7 +226,6 @@ export function bleh_profiles() {
         profile_name.textContent = cache.username;
     }
 
-    let expander;
     let redesigned_profile_header = html.node`
         <section class="redesigned-header redesigned-profile-header no-background">
             <div class="avatar-side">
@@ -615,238 +615,9 @@ export function bleh_profiles() {
 
             bleh_profile_events(no_events);
         } else if (page.subpage.startsWith('listening-report')) {
-            page.structure.content_top.classList.add(
-                'listening-report-navlist'
-            );
-            page.structure.row.classList.add('listening-report');
-
-            convert_to_toolbar();
-
-            const report_box_container = document.body.querySelector('.report-box-container--overview');
-            if (report_box_container) {
-                // v3+ (2023)
-                document.body.setAttribute(
-                    'data-bleh--theme',
-                    'oled'
-                );
-                document.body.setAttribute(
-                    'data-bleh--theme_type',
-                    'dark'
-                );
-
-                page.structure.row.after(report_box_container);
-
-                // 2025
-                const share_row = document.body.querySelector('.share-button-row');
-                if (share_row) {
-                    const title = document.body.querySelector('.report-headline-title').textContent.trim();
-
-                    const split = window.location.pathname.split('/');
-                    const len = split.length - 1;
-                    const year = split[len] == 'year';
-
-                    const items = document.body.querySelectorAll('.listening-report-top-item-wrap');
-                    items.forEach(item => {
-                        const type = item.querySelector('.listening-report-top-item').getAttribute('id').replace('listening-report-top-item-', '');
-
-                        const buttons = item.querySelector('.top-item-buttons');
-                        const album_grid = buttons.querySelector('.album-grid-button');
-                        if (album_grid) album_grid.remove();
-
-                        if (year) {
-                            buttons.insertBefore(html.node`
-                                <a class="btn album-grid-button icon" data-type="collage" href="${root}bleh/minis/collage?type=${type}s&timeframe=from=${title}-01-01%26rangetype=year" target="_blank">
-                                    ${tl(trans.collage)} (${version.brand})
-                                </a>
-                            `, buttons.firstElementChild);
-                        }
-                    });
-                }
-            } else {
-                const dashboard = page.structure.container.querySelector('.user-dashboard');
-                if (dashboard) {
-                    // v2
-                    dialog({
-                        id: 'listening_report_v2',
-                        title: 'oh no :c',
-                        body: html.node`
-                            <div class="alert alert-error">This listening report is too old</div>
-                            <br>
-                            <p>Legacy listening reports are not properly viewable yet in bleh for now. Sorry for the inconvenience.</p>
-                        `
-                    });
-                }
-            }
+            profile_reports();
         } else if (page.subpage == 'obsessions_overview') {
-            let section_controls =
-                page.structure.container.querySelector('.section-controls');
-            let buttons;
-            if (section_controls != null) {
-                section_controls.classList.add('legacy-section-controls');
-                buttons = section_controls.querySelectorAll(':is(button, a)');
-
-                let header = page.structure.container.querySelector(
-                    '.content-top-header'
-                );
-                page.structure.content_top.innerHTML = `
-                    <div class="content-top-inner-wrap">
-                        <div class="container content-top-lower">
-                            <h1 class="content-top-header">${header.textContent.trim()}</h1>
-                        </div>
-                    </div>
-                `;
-            }
-
-            let count_text = page.structure.content_top
-                .querySelector('h1')
-                .textContent.trim();
-            let chr = count_text.indexOf('(');
-
-            let count = 0;
-            if (chr != -1)
-                count = count_text
-                    .substring(chr)
-                    .replace('(', '')
-                    .replace(')', '');
-
-            page.structure.nav.querySelector(
-                '.secondary-nav-item--obsessions a'
-            ).appendChild(html.node`
-                <div class="new-badge count-badge">${count}</div>
-            `);
-
-            let new_panel = document.createElement('section');
-            new_panel.classList.add('obsessions-panel');
-
-            let wrap = document.createElement('div');
-            wrap.classList.add('view-buttons-wrapper');
-            let button_header = document.createElement('div');
-            button_header.classList.add(
-                'view-buttons',
-                'obsession-buttons',
-                'blend'
-            );
-
-            buttons.forEach((button) => {
-                if (button.classList.contains('btn-sm')) {
-                    button.classList = [];
-                    button.classList.add('obsession-btn');
-
-                    tippy(button, {
-                        content: button.textContent
-                    });
-
-                    button.textContent = tl(trans.obsess);
-                }
-
-                button.classList.add(
-                    'btn',
-                    'view-item',
-                    'interact-item',
-                    'obsession-top-item'
-                );
-
-                button_header.appendChild(button);
-            });
-            wrap.appendChild(button_header);
-            new_panel.appendChild(wrap);
-
-            page.structure.main.appendChild(new_panel);
-
-            //
-
-            let grid = document.createElement('ol');
-            grid.classList.add(
-                'grid-items',
-                'grid-items--numbered',
-                'obsessions-grid'
-            );
-
-            let items = page.structure.container.querySelectorAll(
-                '.obsession-history-item'
-            );
-            items.forEach((item) => {
-                let link = item.querySelector(
-                    '.obsession-history-item-heading-link'
-                );
-
-                let artist = item.querySelector(
-                    '.obsession-history-item-artist a'
-                );
-                let artist_link = artist.getAttribute('href');
-                artist = artist.textContent.trim();
-
-                let title = link.textContent.trim();
-                link = link.getAttribute('href');
-                let date = item
-                    .querySelector('.obsession-history-item-date')
-                    .textContent.trim();
-
-                let bg = item
-                    .querySelector('.obsession-history-item-background')
-                    .style.getPropertyValue('background-image')
-                    .trim();
-                let cover_substr = bg.indexOf('url');
-                const cover = html.node`
-                    <img
-                    src=${bg
-                        .substring(cover_substr)
-                        .replace('url("', '')
-                        .replace('")', '')
-                        .trim()}
-                    alt=${title} loading="lazy">
-                `;
-
-                hoshino(cover, title, artist);
-
-                let obsession_is_first =
-                    item.querySelector('.obsession-first') != null;
-
-                const grid_item = html.node`
-                    <li class="grid-items-item obsessions-item ${obsession_is_first ? 'first' : ''}">
-                        <div class="grid-items-cover-image">
-                            <div class="grid-items-cover-image-image ${cover.src.endsWith('4128a6eb29f94943c9d206c08e625904.jpg') ? 'grid-items-cover-default' : ''}">
-                                ${cover}
-                            </div>
-                            <div class="grid-items-item-details">
-                                <p class="grid-items-item-main-text">
-                                    <a class="link-block-target" href="${link}" title="${title}">
-                                        ${title}
-                                    </a>
-                                </p>
-                                <p class="grid-items-item-aux-text obsessions-item-aux">
-                                    <a class="grid-items-item-aux-block" href="${artist_link}">
-                                        ${artist}
-                                    </a>
-                                    <a class="obsessions-item-date" href="${link}">
-                                        ${date}
-                                    </a>
-                                </p>
-                            </div>
-                            <a class="link-block-cover-link" href="${link}" tabindex="-1" aria-hidden="true"></a>
-                        </div>
-                    </li>
-                `;
-
-                if (obsession_is_first) {
-                    tippy(grid_item, {
-                        content: tl(trans.obsession_first)
-                    });
-                }
-
-                grid.appendChild(grid_item);
-            });
-
-            new_panel.appendChild(grid);
-
-            let no_data = page.structure.container.querySelector(
-                '.no-data-message--obsession-history'
-            );
-            if (no_data) wrap.after(no_data);
-
-            let pagination =
-                page.structure.container.querySelector('.pagination');
-            if (pagination) new_panel.appendChild(pagination);
+            obsession_list();
         } else if (page.subpage == 'playlists_playlists') {
             let section_controls = page.structure.container.querySelector(
                 '.section-controls-full-width'

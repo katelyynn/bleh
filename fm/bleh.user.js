@@ -19008,7 +19008,7 @@
     }
   };
   var auth_link = {
-    state: ""
+    state: null
   };
   var root = "/";
   function setRoot(data2) {
@@ -37305,6 +37305,133 @@
       });
     }
   }
+  function obsession_list() {
+    let section_controls = page.structure.container.querySelector(".section-controls");
+    let buttons;
+    if (section_controls != null) {
+      section_controls.classList.add("legacy-section-controls");
+      buttons = section_controls.querySelectorAll(":is(button, a)");
+      let header = page.structure.container.querySelector(
+        ".content-top-header"
+      );
+      page.structure.content_top.innerHTML = `
+            <div class="content-top-inner-wrap">
+                <div class="container content-top-lower">
+                    <h1 class="content-top-header">${header.textContent.trim()}</h1>
+                </div>
+            </div>
+        `;
+    }
+    let count_text = page.structure.content_top.querySelector("h1").textContent.trim();
+    let chr = count_text.indexOf("(");
+    let count = 0;
+    if (chr != -1)
+      count = count_text.substring(chr).replace("(", "").replace(")", "");
+    page.structure.nav.querySelector(
+      ".secondary-nav-item--obsessions a"
+    ).appendChild(html.node`
+        <div class="new-badge count-badge">${count}</div>
+    `);
+    let new_panel = document.createElement("section");
+    new_panel.classList.add("obsessions-panel");
+    let wrap = document.createElement("div");
+    wrap.classList.add("view-buttons-wrapper");
+    let button_header = document.createElement("div");
+    button_header.classList.add(
+      "view-buttons",
+      "obsession-buttons",
+      "blend"
+    );
+    buttons.forEach((button2) => {
+      if (button2.classList.contains("btn-sm")) {
+        button2.classList = [];
+        button2.classList.add("obsession-btn");
+        tippy_esm_default(button2, {
+          content: button2.textContent
+        });
+        button2.textContent = tl2(trans.obsess);
+      }
+      button2.classList.add(
+        "btn",
+        "view-item",
+        "interact-item",
+        "obsession-top-item"
+      );
+      button_header.appendChild(button2);
+    });
+    wrap.appendChild(button_header);
+    new_panel.appendChild(wrap);
+    page.structure.main.appendChild(new_panel);
+    let grid = document.createElement("ol");
+    grid.classList.add(
+      "grid-items",
+      "grid-items--numbered",
+      "obsessions-grid"
+    );
+    let items = page.structure.container.querySelectorAll(
+      ".obsession-history-item"
+    );
+    items.forEach((item) => {
+      let link = item.querySelector(
+        ".obsession-history-item-heading-link"
+      );
+      let artist = item.querySelector(
+        ".obsession-history-item-artist a"
+      );
+      let artist_link = artist.getAttribute("href");
+      artist = artist.textContent.trim();
+      let title = link.textContent.trim();
+      link = link.getAttribute("href");
+      let date = item.querySelector(".obsession-history-item-date").textContent.trim();
+      let bg = item.querySelector(".obsession-history-item-background").style.getPropertyValue("background-image").trim();
+      let cover_substr = bg.indexOf("url");
+      const cover = html.node`
+            <img
+            src=${bg.substring(cover_substr).replace('url("', "").replace('")', "").trim()}
+            alt=${title} loading="lazy">
+        `;
+      hoshino(cover, title, artist);
+      let obsession_is_first = item.querySelector(".obsession-first") != null;
+      const grid_item = html.node`
+            <li class="grid-items-item obsessions-item ${obsession_is_first ? "first" : ""}">
+                <div class="grid-items-cover-image">
+                    <div class="grid-items-cover-image-image ${cover.src.endsWith("4128a6eb29f94943c9d206c08e625904.jpg") ? "grid-items-cover-default" : ""}">
+                        ${cover}
+                    </div>
+                    <div class="grid-items-item-details">
+                        <p class="grid-items-item-main-text">
+                            <a class="link-block-target" href="${link}" title="${title}">
+                                ${title}
+                            </a>
+                        </p>
+                        <p class="grid-items-item-aux-text obsessions-item-aux">
+                            <a class="grid-items-item-aux-block" href="${artist_link}">
+                                ${artist}
+                            </a>
+                            <a class="obsessions-item-date" href="${link}">
+                                ${date}
+                            </a>
+                        </p>
+                    </div>
+                    <a class="link-block-cover-link" href="${link}" tabindex="-1" aria-hidden="true"></a>
+                </div>
+            </li>
+        `;
+      if (obsession_is_first) {
+        tippy_esm_default(grid_item, {
+          content: tl2(trans.obsession_first)
+        });
+      }
+      grid.appendChild(grid_item);
+    });
+    new_panel.appendChild(grid);
+    let no_data = page.structure.container.querySelector(
+      ".no-data-message--obsession-history"
+    );
+    if (no_data) wrap.after(no_data);
+    let pagination = page.structure.container.querySelector(".pagination");
+    if (pagination) new_panel.appendChild(pagination);
+  }
 
   // src/components/profile/pronouns.js
   function find_pronouns(string) {
@@ -37399,6 +37526,61 @@
                 ${generate}
             </section>
         `);
+    }
+  }
+
+  // src/pages/profile/reports.ts
+  function profile_reports() {
+    page.structure.content_top.classList.add(
+      "listening-report-navlist"
+    );
+    page.structure.row.classList.add("listening-report");
+    convert_to_toolbar();
+    const report_box_container = document.body.querySelector(".report-box-container--overview");
+    if (report_box_container) {
+      document.body.setAttribute(
+        "data-bleh--theme",
+        "oled"
+      );
+      document.body.setAttribute(
+        "data-bleh--theme_type",
+        "dark"
+      );
+      page.structure.row.after(report_box_container);
+      const share_row = document.body.querySelector(".share-button-row");
+      if (share_row) {
+        const title = document.body.querySelector(".report-headline-title").textContent.trim();
+        const split = window.location.pathname.split("/");
+        const len = split.length - 1;
+        const year = split[len] == "year";
+        const items = document.body.querySelectorAll(".listening-report-top-item-wrap");
+        items.forEach((item) => {
+          const type = item.querySelector(".listening-report-top-item").getAttribute("id").replace("listening-report-top-item-", "");
+          const buttons = item.querySelector(".top-item-buttons");
+          const album_grid = buttons.querySelector(".album-grid-button");
+          if (album_grid) album_grid.remove();
+          if (year) {
+            buttons.insertBefore(html.node`
+                        <a class="btn album-grid-button icon" data-type="collage" href="${root}bleh/minis/collage?type=${type}s&timeframe=from=${title}-01-01%26rangetype=year" target="_blank">
+                            ${tl2(trans.collage)} (${version.brand})
+                        </a>
+                    `, buttons.firstElementChild);
+          }
+        });
+      }
+    } else {
+      const dashboard = page.structure.container.querySelector(".user-dashboard");
+      if (dashboard) {
+        dialog({
+          id: "listening_report_v2",
+          title: "oh no :c",
+          body: html.node`
+                    <div class="alert alert-error">This listening report is too old</div>
+                    <br>
+                    <p>Legacy listening reports are not properly viewable yet in bleh for now. Sorry for the inconvenience.</p>
+                `
+        });
+      }
     }
   }
 
@@ -37526,7 +37708,6 @@
     if (cache2.username) {
       profile_name.textContent = cache2.username;
     }
-    let expander;
     let redesigned_profile_header = html.node`
         <section class="redesigned-header redesigned-profile-header no-background">
             <div class="avatar-side">
@@ -37847,183 +38028,9 @@
         const no_events = page.structure.main.querySelector(":scope > .no-events");
         bleh_profile_events(no_events);
       } else if (page.subpage.startsWith("listening-report")) {
-        page.structure.content_top.classList.add(
-          "listening-report-navlist"
-        );
-        page.structure.row.classList.add("listening-report");
-        convert_to_toolbar();
-        const report_box_container = document.body.querySelector(".report-box-container--overview");
-        if (report_box_container) {
-          document.body.setAttribute(
-            "data-bleh--theme",
-            "oled"
-          );
-          document.body.setAttribute(
-            "data-bleh--theme_type",
-            "dark"
-          );
-          page.structure.row.after(report_box_container);
-          const share_row = document.body.querySelector(".share-button-row");
-          if (share_row) {
-            const title = document.body.querySelector(".report-headline-title").textContent.trim();
-            const split = window.location.pathname.split("/");
-            const len = split.length - 1;
-            const year = split[len] == "year";
-            const items = document.body.querySelectorAll(".listening-report-top-item-wrap");
-            items.forEach((item) => {
-              const type = item.querySelector(".listening-report-top-item").getAttribute("id").replace("listening-report-top-item-", "");
-              const buttons = item.querySelector(".top-item-buttons");
-              const album_grid = buttons.querySelector(".album-grid-button");
-              if (album_grid) album_grid.remove();
-              if (year) {
-                buttons.insertBefore(html.node`
-                                <a class="btn album-grid-button icon" data-type="collage" href="${root}bleh/minis/collage?type=${type}s&timeframe=from=${title}-01-01%26rangetype=year" target="_blank">
-                                    ${tl2(trans.collage)} (${version.brand})
-                                </a>
-                            `, buttons.firstElementChild);
-              }
-            });
-          }
-        } else {
-          const dashboard = page.structure.container.querySelector(".user-dashboard");
-          if (dashboard) {
-            dialog({
-              id: "listening_report_v2",
-              title: "oh no :c",
-              body: html.node`
-                            <div class="alert alert-error">This listening report is too old</div>
-                            <br>
-                            <p>Legacy listening reports are not properly viewable yet in bleh for now. Sorry for the inconvenience.</p>
-                        `
-            });
-          }
-        }
+        profile_reports();
       } else if (page.subpage == "obsessions_overview") {
-        let section_controls = page.structure.container.querySelector(".section-controls");
-        let buttons;
-        if (section_controls != null) {
-          section_controls.classList.add("legacy-section-controls");
-          buttons = section_controls.querySelectorAll(":is(button, a)");
-          let header = page.structure.container.querySelector(
-            ".content-top-header"
-          );
-          page.structure.content_top.innerHTML = `
-                    <div class="content-top-inner-wrap">
-                        <div class="container content-top-lower">
-                            <h1 class="content-top-header">${header.textContent.trim()}</h1>
-                        </div>
-                    </div>
-                `;
-        }
-        let count_text = page.structure.content_top.querySelector("h1").textContent.trim();
-        let chr = count_text.indexOf("(");
-        let count = 0;
-        if (chr != -1)
-          count = count_text.substring(chr).replace("(", "").replace(")", "");
-        page.structure.nav.querySelector(
-          ".secondary-nav-item--obsessions a"
-        ).appendChild(html.node`
-                <div class="new-badge count-badge">${count}</div>
-            `);
-        let new_panel = document.createElement("section");
-        new_panel.classList.add("obsessions-panel");
-        let wrap = document.createElement("div");
-        wrap.classList.add("view-buttons-wrapper");
-        let button_header = document.createElement("div");
-        button_header.classList.add(
-          "view-buttons",
-          "obsession-buttons",
-          "blend"
-        );
-        buttons.forEach((button2) => {
-          if (button2.classList.contains("btn-sm")) {
-            button2.classList = [];
-            button2.classList.add("obsession-btn");
-            tippy_esm_default(button2, {
-              content: button2.textContent
-            });
-            button2.textContent = tl2(trans.obsess);
-          }
-          button2.classList.add(
-            "btn",
-            "view-item",
-            "interact-item",
-            "obsession-top-item"
-          );
-          button_header.appendChild(button2);
-        });
-        wrap.appendChild(button_header);
-        new_panel.appendChild(wrap);
-        page.structure.main.appendChild(new_panel);
-        let grid = document.createElement("ol");
-        grid.classList.add(
-          "grid-items",
-          "grid-items--numbered",
-          "obsessions-grid"
-        );
-        let items = page.structure.container.querySelectorAll(
-          ".obsession-history-item"
-        );
-        items.forEach((item) => {
-          let link = item.querySelector(
-            ".obsession-history-item-heading-link"
-          );
-          let artist = item.querySelector(
-            ".obsession-history-item-artist a"
-          );
-          let artist_link = artist.getAttribute("href");
-          artist = artist.textContent.trim();
-          let title = link.textContent.trim();
-          link = link.getAttribute("href");
-          let date = item.querySelector(".obsession-history-item-date").textContent.trim();
-          let bg = item.querySelector(".obsession-history-item-background").style.getPropertyValue("background-image").trim();
-          let cover_substr = bg.indexOf("url");
-          const cover = html.node`
-                    <img
-                    src=${bg.substring(cover_substr).replace('url("', "").replace('")', "").trim()}
-                    alt=${title} loading="lazy">
-                `;
-          hoshino(cover, title, artist);
-          let obsession_is_first = item.querySelector(".obsession-first") != null;
-          const grid_item = html.node`
-                    <li class="grid-items-item obsessions-item ${obsession_is_first ? "first" : ""}">
-                        <div class="grid-items-cover-image">
-                            <div class="grid-items-cover-image-image ${cover.src.endsWith("4128a6eb29f94943c9d206c08e625904.jpg") ? "grid-items-cover-default" : ""}">
-                                ${cover}
-                            </div>
-                            <div class="grid-items-item-details">
-                                <p class="grid-items-item-main-text">
-                                    <a class="link-block-target" href="${link}" title="${title}">
-                                        ${title}
-                                    </a>
-                                </p>
-                                <p class="grid-items-item-aux-text obsessions-item-aux">
-                                    <a class="grid-items-item-aux-block" href="${artist_link}">
-                                        ${artist}
-                                    </a>
-                                    <a class="obsessions-item-date" href="${link}">
-                                        ${date}
-                                    </a>
-                                </p>
-                            </div>
-                            <a class="link-block-cover-link" href="${link}" tabindex="-1" aria-hidden="true"></a>
-                        </div>
-                    </li>
-                `;
-          if (obsession_is_first) {
-            tippy_esm_default(grid_item, {
-              content: tl2(trans.obsession_first)
-            });
-          }
-          grid.appendChild(grid_item);
-        });
-        new_panel.appendChild(grid);
-        let no_data = page.structure.container.querySelector(
-          ".no-data-message--obsession-history"
-        );
-        if (no_data) wrap.after(no_data);
-        let pagination = page.structure.container.querySelector(".pagination");
-        if (pagination) new_panel.appendChild(pagination);
+        obsession_list();
       } else if (page.subpage == "playlists_playlists") {
         let section_controls = page.structure.container.querySelector(
           ".section-controls-full-width"
@@ -62323,9 +62330,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                     <h1>${page.name}</h1>
                     <div class="sub-text no-margin">${tl2(trans.app_would_like_to_connect)}</div>
                     <div class="subtle">
-                        ${html.node([
-        tl2(trans.logged_in_as).replace("{user}", `<a class="mention" href="${root}user/${auth.name}">@${auth.name}</a>`)
-      ])}
+                        ${{ html: tl2(trans.logged_in_as, { user: `<a class="mention" href="${root}user/${auth.name}">@${auth.name}</a>` }) }}
                     </div>
                 </div>
                 <div class="sep"></div>
@@ -63111,7 +63116,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     links.forEach((link) => {
       link.setAttribute("data-see-more", "true");
       const parent = link.parentElement;
-      const classes = parent.classList;
+      const classes = String(parent.classList);
       link.classList.add("see-more");
       if (classes == "pagination-previous") {
         link.classList.add("pagination-previous-link");
@@ -63270,7 +63275,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
   }
   function main_flow() {
     lookup_lang();
-    patch_masthead(document.body);
+    patch_masthead();
     if (page.state.error) return;
     if (page.type == "artist" || page.type == "album") {
       bleh_gallery();
@@ -63460,89 +63465,87 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     }, 1e3);
   }
   function page_title() {
-    if (ff("page_title")) {
-      let template = tl2(trans.page_templates.type);
-      if (!page.state.error) {
-        if ((page.type == "user" || page.type == "artist" || page.type == "events" || page.type == "tag") && page.subpage != "home" && !(page.subpage.startsWith("playlists_") && page.subpage.endsWith("_overview")))
-          template = tl2(trans.page_templates.name_type);
-        else if (page.type == "album" || page.type == "track")
-          template = tl2(trans.page_templates.name_sister_type);
-      }
-      let name = page.name;
-      let sister = page.sister;
-      if (page.type == "album" || page.type == "track") {
-        name = correct_item_by_artist(name, sister);
-        sister = correct_artist(sister);
-      } else if (page.type == "artist") {
-        name = correct_artist(name);
-      }
-      let title;
-      if (page.subpage != "overview" && page.subpage != "event_overview" && page.subpage != "home" && (page.type == "user" || page.type == "artist" || page.type == "album" || page.type == "track" || page.type == "events" || page.type == "tag"))
-        title = tl2(trans[page.subpage]);
-      if (page.type == "settings" || page.type == "bleh_settings")
-        title = tl2(trans.settings);
-      else if (page.type == "bleh_setup") title = tl2(trans.bleh_setup);
-      else if (page.type == "bleh_sponsor") title = tl2(trans.sponsor);
-      else if (page.type == "search") title = tl2(trans.search);
-      else if (page.type == "overview" || page.type == "home")
-        title = tl2(trans.home);
-      else if (page.type == "recommended") title = tl2(trans.recommendations);
-      else if (page.type == "releases") title = tl2(trans.releases);
-      else if (page.type == "events" && page.subpage == "home")
-        title = tl2(trans.events);
-      else if (page.type == "bookmarks") title = tl2(trans.bookmarks);
-      else if (page.type == "charts") title = tl2(trans.charts);
-      else if (page.type == "labs") title = tl2(trans.labs.name);
-      else if (page.type == "minis") title = tl2(trans.minis);
-      if (page.type == "inbox") {
-        if (page.subpage == "notifications")
-          title = tl2(trans.notifications);
-        else title = tl2(trans.messages);
-      }
-      if (page.subpage.replace("event_", "").startsWith("shoutbox"))
-        title = tl2(trans.shouts);
-      else if (page.subpage.startsWith("library")) title = tl2(trans.library);
-      else if (page.subpage == "obsessions_overview")
-        title = tl2(trans.obsessions);
-      else if (page.subpage == "obsessions_obsession")
-        title = tl2(trans.obsession);
-      else if (page.subpage.startsWith("tags")) title = tl2(trans.tags);
-      else if (page.subpage.startsWith("listening-report"))
-        title = tl2(trans.reports);
-      else if (page.subpage.startsWith("event_attendance"))
-        title = tl2(trans.attendance);
-      else if (page.subpage == "event_lineup") title = tl2(trans.lineup);
-      else if (page.subpage == "playlists_playlists" || page.subpage.startsWith("playlists_") && page.subpage.endsWith("_overview"))
-        title = tl2(trans.playlists);
-      else if (page.subpage == "auth") title = tl2(trans.connect_app);
-      else if (page.subpage.startsWith("image") && page.type == "artist")
-        title = tl2(trans.photos);
-      else if (page.subpage.startsWith("image") && page.type == "album")
-        title = tl2(trans.artwork);
-      else if (page.subpage.startsWith("listeners"))
-        title = tl2(trans.listeners);
-      else if (page.subpage == "similar") title = tl2(trans.similar_artists);
-      else if (page.subpage.startsWith("wiki")) title = tl2(trans.wiki);
-      else if (page.subpage == "lyrics") title = tl2(trans.lyrics);
-      if (page.subpage == "overview" || page.subpage == "event_overview") {
-        if (page.type == "user") title = tl2(trans.profile);
-        else if (page.type == "artist") title = tl2(trans.artist);
-        else if (page.type == "album") title = tl2(trans.album);
-        else if (page.type == "track") title = tl2(trans.track);
-        else if (page.type == "events") title = tl2(trans.event);
-        else if (page.type == "tag") title = tl2(trans.tag);
-      }
-      if (page.state.error) title = tl2(trans.error);
-      template = template.replace("{page}", title).replace("{name}", name).replace("{sister}", sister).replace("{build}", version.build).replace("{sku}", version.sku);
-      if (settings.branding_type == "bleh")
-        template = template.replace("{brand}", version.brand);
-      else if (settings.branding_type == "lastfm")
-        template = template.replace(
-          "{brand}",
-          `Last.fm (${version.brand})`
-        );
-      document.title = template;
+    let template = tl2(trans.page_templates.type);
+    if (!page.state.error) {
+      if ((page.type == "user" || page.type == "artist" || page.type == "events" || page.type == "tag") && page.subpage != "home" && !(page.subpage.startsWith("playlists_") && page.subpage.endsWith("_overview")))
+        template = tl2(trans.page_templates.name_type);
+      else if (page.type == "album" || page.type == "track")
+        template = tl2(trans.page_templates.name_sister_type);
     }
+    let name = page.name;
+    let sister = page.sister;
+    if (page.type == "album" || page.type == "track") {
+      name = correct_item_by_artist(name, sister);
+      sister = correct_artist(sister);
+    } else if (page.type == "artist") {
+      name = correct_artist(name);
+    }
+    let title;
+    if (page.subpage != "overview" && page.subpage != "event_overview" && page.subpage != "home" && (page.type == "user" || page.type == "artist" || page.type == "album" || page.type == "track" || page.type == "events" || page.type == "tag"))
+      title = tl2(trans[page.subpage]);
+    if (page.type == "settings" || page.type == "bleh_settings")
+      title = tl2(trans.settings);
+    else if (page.type == "bleh_setup") title = tl2(trans.bleh_setup);
+    else if (page.type == "bleh_sponsor") title = tl2(trans.sponsor);
+    else if (page.type == "search") title = tl2(trans.search);
+    else if (page.type == "overview" || page.type == "home")
+      title = tl2(trans.home);
+    else if (page.type == "recommended") title = tl2(trans.recommendations);
+    else if (page.type == "releases") title = tl2(trans.releases);
+    else if (page.type == "events" && page.subpage == "home")
+      title = tl2(trans.events);
+    else if (page.type == "bookmarks") title = tl2(trans.bookmarks);
+    else if (page.type == "charts") title = tl2(trans.charts);
+    else if (page.type == "labs") title = tl2(trans.labs.name);
+    else if (page.type == "minis") title = tl2(trans.minis);
+    if (page.type == "inbox") {
+      if (page.subpage == "notifications")
+        title = tl2(trans.notifications);
+      else title = tl2(trans.messages);
+    }
+    if (page.subpage.replace("event_", "").startsWith("shoutbox"))
+      title = tl2(trans.shouts);
+    else if (page.subpage.startsWith("library")) title = tl2(trans.library);
+    else if (page.subpage == "obsessions_overview")
+      title = tl2(trans.obsessions);
+    else if (page.subpage == "obsessions_obsession")
+      title = tl2(trans.obsession);
+    else if (page.subpage.startsWith("tags")) title = tl2(trans.tags);
+    else if (page.subpage.startsWith("listening-report"))
+      title = tl2(trans.reports);
+    else if (page.subpage.startsWith("event_attendance"))
+      title = tl2(trans.attendance);
+    else if (page.subpage == "event_lineup") title = tl2(trans.lineup);
+    else if (page.subpage == "playlists_playlists" || page.subpage.startsWith("playlists_") && page.subpage.endsWith("_overview"))
+      title = tl2(trans.playlists);
+    else if (page.subpage == "auth") title = tl2(trans.connect_app);
+    else if (page.subpage.startsWith("image") && page.type == "artist")
+      title = tl2(trans.photos);
+    else if (page.subpage.startsWith("image") && page.type == "album")
+      title = tl2(trans.artwork);
+    else if (page.subpage.startsWith("listeners"))
+      title = tl2(trans.listeners);
+    else if (page.subpage == "similar") title = tl2(trans.similar_artists);
+    else if (page.subpage.startsWith("wiki")) title = tl2(trans.wiki);
+    else if (page.subpage == "lyrics") title = tl2(trans.lyrics);
+    if (page.subpage == "overview" || page.subpage == "event_overview") {
+      if (page.type == "user") title = tl2(trans.profile);
+      else if (page.type == "artist") title = tl2(trans.artist);
+      else if (page.type == "album") title = tl2(trans.album);
+      else if (page.type == "track") title = tl2(trans.track);
+      else if (page.type == "events") title = tl2(trans.event);
+      else if (page.type == "tag") title = tl2(trans.tag);
+    }
+    if (page.state.error) title = tl2(trans.error);
+    template = template.replace("{page}", title).replace("{name}", name).replace("{sister}", sister).replace("{build}", version.build).replace("{sku}", version.sku);
+    if (settings.branding_type == "bleh")
+      template = template.replace("{brand}", version.brand);
+    else if (settings.branding_type == "lastfm")
+      template = template.replace(
+        "{brand}",
+        `Last.fm (${version.brand})`
+      );
+    document.title = template;
     if (page.structure.indicator) page_indicator();
   }
   function detect_mobile() {

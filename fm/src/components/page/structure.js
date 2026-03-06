@@ -27,7 +27,7 @@ export function basic_page_structure() {
 /**
  * ensures general health of the page structure, fills in the global page object
  * @param {boolean} is_subpage controls if the checker should identify content_top's etc.
- * @param {HTMLObjectElement|null} header legacy header from last.fm to extract data from
+ * @param {Element|null} header legacy header from last.fm to extract data from
  */
 export function checkup_page_structure(is_subpage = false, header = null) {
     if (document.body.style.getPropertyValue('--hue-album')) {

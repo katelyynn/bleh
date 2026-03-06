@@ -273,7 +273,7 @@ export function handle_error_500() {
 
 function main_flow() {
     lookup_lang();
-    patch_masthead(document.body);
+    patch_masthead();
 
     if (page.state.error) return;
 
@@ -587,121 +587,119 @@ function load_page(main_content = null) {
 }
 
 function page_title() {
-    if (ff('page_title')) {
-        let template = tl(trans.page_templates.type);
-        if (!page.state.error) {
-            if (
-                (page.type == 'user' ||
-                    page.type == 'artist' ||
-                    page.type == 'events' ||
-                    page.type == 'tag') &&
-                page.subpage != 'home' && !(page.subpage.startsWith('playlists_') && page.subpage.endsWith('_overview'))
-            )
-                template = tl(trans.page_templates.name_type);
-            else if (page.type == 'album' || page.type == 'track')
-                template = tl(trans.page_templates.name_sister_type);
-        }
-
-        let name = page.name;
-        let sister = page.sister;
-
-        if (page.type == 'album' || page.type == 'track') {
-            name = correct_item_by_artist(name, sister);
-            sister = correct_artist(sister);
-        } else if (page.type == 'artist') {
-            name = correct_artist(name);
-        }
-
-        let title;
+    let template = tl(trans.page_templates.type);
+    if (!page.state.error) {
         if (
-            page.subpage != 'overview' &&
-            page.subpage != 'event_overview' &&
-            page.subpage != 'home' &&
             (page.type == 'user' ||
                 page.type == 'artist' ||
-                page.type == 'album' ||
-                page.type == 'track' ||
                 page.type == 'events' ||
-                page.type == 'tag')
+                page.type == 'tag') &&
+            page.subpage != 'home' && !(page.subpage.startsWith('playlists_') && page.subpage.endsWith('_overview'))
         )
-            title = tl(trans[page.subpage]);
-
-        if (page.type == 'settings' || page.type == 'bleh_settings')
-            title = tl(trans.settings);
-        else if (page.type == 'bleh_setup') title = tl(trans.bleh_setup);
-        else if (page.type == 'bleh_sponsor') title = tl(trans.sponsor);
-        else if (page.type == 'search') title = tl(trans.search);
-        else if (page.type == 'overview' || page.type == 'home')
-            title = tl(trans.home);
-        else if (page.type == 'recommended') title = tl(trans.recommendations);
-        else if (page.type == 'releases') title = tl(trans.releases);
-        else if (page.type == 'events' && page.subpage == 'home')
-            title = tl(trans.events);
-        else if (page.type == 'bookmarks') title = tl(trans.bookmarks);
-        else if (page.type == 'charts') title = tl(trans.charts);
-        else if (page.type == 'labs') title = tl(trans.labs.name);
-        else if (page.type == 'minis') title = tl(trans.minis);
-
-        if (page.type == 'inbox') {
-            if (page.subpage == 'notifications')
-                title = tl(trans.notifications);
-            else title = tl(trans.messages);
-        }
-
-        if (page.subpage.replace('event_', '').startsWith('shoutbox'))
-            title = tl(trans.shouts);
-        else if (page.subpage.startsWith('library')) title = tl(trans.library);
-        else if (page.subpage == 'obsessions_overview')
-            title = tl(trans.obsessions);
-        else if (page.subpage == 'obsessions_obsession')
-            title = tl(trans.obsession);
-        else if (page.subpage.startsWith('tags')) title = tl(trans.tags);
-        else if (page.subpage.startsWith('listening-report'))
-            title = tl(trans.reports);
-        else if (page.subpage.startsWith('event_attendance'))
-            title = tl(trans.attendance);
-        else if (page.subpage == 'event_lineup') title = tl(trans.lineup);
-        else if (page.subpage == 'playlists_playlists' || (page.subpage.startsWith('playlists_') && page.subpage.endsWith('_overview')))
-            title = tl(trans.playlists);
-        else if (page.subpage == 'auth') title = tl(trans.connect_app);
-        else if (page.subpage.startsWith('image') && page.type == 'artist')
-            title = tl(trans.photos);
-        else if (page.subpage.startsWith('image') && page.type == 'album')
-            title = tl(trans.artwork);
-        else if (page.subpage.startsWith('listeners'))
-            title = tl(trans.listeners);
-        else if (page.subpage == 'similar') title = tl(trans.similar_artists);
-        else if (page.subpage.startsWith('wiki')) title = tl(trans.wiki);
-        else if (page.subpage == 'lyrics') title = tl(trans.lyrics);
-
-        if (page.subpage == 'overview' || page.subpage == 'event_overview') {
-            if (page.type == 'user') title = tl(trans.profile);
-            else if (page.type == 'artist') title = tl(trans.artist);
-            else if (page.type == 'album') title = tl(trans.album);
-            else if (page.type == 'track') title = tl(trans.track);
-            else if (page.type == 'events') title = tl(trans.event);
-            else if (page.type == 'tag') title = tl(trans.tag);
-        }
-
-        if (page.state.error) title = tl(trans.error);
-
-        template = template
-            .replace('{page}', title)
-            .replace('{name}', name)
-            .replace('{sister}', sister)
-            .replace('{build}', version.build)
-            .replace('{sku}', version.sku);
-
-        if (settings.branding_type == 'bleh')
-            template = template.replace('{brand}', version.brand);
-        else if (settings.branding_type == 'lastfm')
-            template = template.replace(
-                '{brand}',
-                `Last.fm (${version.brand})`
-            );
-
-        document.title = template;
+            template = tl(trans.page_templates.name_type);
+        else if (page.type == 'album' || page.type == 'track')
+            template = tl(trans.page_templates.name_sister_type);
     }
+
+    let name = page.name;
+    let sister = page.sister;
+
+    if (page.type == 'album' || page.type == 'track') {
+        name = correct_item_by_artist(name, sister);
+        sister = correct_artist(sister);
+    } else if (page.type == 'artist') {
+        name = correct_artist(name);
+    }
+
+    let title;
+    if (
+        page.subpage != 'overview' &&
+        page.subpage != 'event_overview' &&
+        page.subpage != 'home' &&
+        (page.type == 'user' ||
+            page.type == 'artist' ||
+            page.type == 'album' ||
+            page.type == 'track' ||
+            page.type == 'events' ||
+            page.type == 'tag')
+    )
+        title = tl(trans[page.subpage]);
+
+    if (page.type == 'settings' || page.type == 'bleh_settings')
+        title = tl(trans.settings);
+    else if (page.type == 'bleh_setup') title = tl(trans.bleh_setup);
+    else if (page.type == 'bleh_sponsor') title = tl(trans.sponsor);
+    else if (page.type == 'search') title = tl(trans.search);
+    else if (page.type == 'overview' || page.type == 'home')
+        title = tl(trans.home);
+    else if (page.type == 'recommended') title = tl(trans.recommendations);
+    else if (page.type == 'releases') title = tl(trans.releases);
+    else if (page.type == 'events' && page.subpage == 'home')
+        title = tl(trans.events);
+    else if (page.type == 'bookmarks') title = tl(trans.bookmarks);
+    else if (page.type == 'charts') title = tl(trans.charts);
+    else if (page.type == 'labs') title = tl(trans.labs.name);
+    else if (page.type == 'minis') title = tl(trans.minis);
+
+    if (page.type == 'inbox') {
+        if (page.subpage == 'notifications')
+            title = tl(trans.notifications);
+        else title = tl(trans.messages);
+    }
+
+    if (page.subpage.replace('event_', '').startsWith('shoutbox'))
+        title = tl(trans.shouts);
+    else if (page.subpage.startsWith('library')) title = tl(trans.library);
+    else if (page.subpage == 'obsessions_overview')
+        title = tl(trans.obsessions);
+    else if (page.subpage == 'obsessions_obsession')
+        title = tl(trans.obsession);
+    else if (page.subpage.startsWith('tags')) title = tl(trans.tags);
+    else if (page.subpage.startsWith('listening-report'))
+        title = tl(trans.reports);
+    else if (page.subpage.startsWith('event_attendance'))
+        title = tl(trans.attendance);
+    else if (page.subpage == 'event_lineup') title = tl(trans.lineup);
+    else if (page.subpage == 'playlists_playlists' || (page.subpage.startsWith('playlists_') && page.subpage.endsWith('_overview')))
+        title = tl(trans.playlists);
+    else if (page.subpage == 'auth') title = tl(trans.connect_app);
+    else if (page.subpage.startsWith('image') && page.type == 'artist')
+        title = tl(trans.photos);
+    else if (page.subpage.startsWith('image') && page.type == 'album')
+        title = tl(trans.artwork);
+    else if (page.subpage.startsWith('listeners'))
+        title = tl(trans.listeners);
+    else if (page.subpage == 'similar') title = tl(trans.similar_artists);
+    else if (page.subpage.startsWith('wiki')) title = tl(trans.wiki);
+    else if (page.subpage == 'lyrics') title = tl(trans.lyrics);
+
+    if (page.subpage == 'overview' || page.subpage == 'event_overview') {
+        if (page.type == 'user') title = tl(trans.profile);
+        else if (page.type == 'artist') title = tl(trans.artist);
+        else if (page.type == 'album') title = tl(trans.album);
+        else if (page.type == 'track') title = tl(trans.track);
+        else if (page.type == 'events') title = tl(trans.event);
+        else if (page.type == 'tag') title = tl(trans.tag);
+    }
+
+    if (page.state.error) title = tl(trans.error);
+
+    template = template
+        .replace('{page}', title)
+        .replace('{name}', name)
+        .replace('{sister}', sister)
+        .replace('{build}', version.build)
+        .replace('{sku}', version.sku);
+
+    if (settings.branding_type == 'bleh')
+        template = template.replace('{brand}', version.brand);
+    else if (settings.branding_type == 'lastfm')
+        template = template.replace(
+            '{brand}',
+            `Last.fm (${version.brand})`
+        );
+
+    document.title = template;
 
     if (page.structure.indicator) page_indicator();
 }

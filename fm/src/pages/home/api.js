@@ -68,9 +68,7 @@ export async function bleh_api() {
                     <h1>${page.name}</h1>
                     <div class="sub-text no-margin">${tl(trans.app_would_like_to_connect)}</div>
                     <div class="subtle">
-                        ${html.node([
-                            tl(trans.logged_in_as).replace('{user}', `<a class="mention" href="${root}user/${auth.name}">@${auth.name}</a>`)
-                        ])}
+                        ${{ html: tl(trans.logged_in_as, { user: `<a class="mention" href="${root}user/${auth.name}">@${auth.name}</a>` })}}
                     </div>
                 </div>
                 <div class="sep"></div>

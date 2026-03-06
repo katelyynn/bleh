@@ -47,7 +47,7 @@ export let auth = {
     }
 };
 export let auth_link = {
-    state: ''
+    state: null
 };
 
 /**
