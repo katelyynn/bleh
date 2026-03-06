@@ -1202,7 +1202,7 @@ function reset_text(id, input, submit, option, reset_btn, avatar) {
     });
 }
 
-export function save_setting(id: string, value: string | number | boolean) {
+export function save_setting(id: string, value: string | number | boolean | []) {
     const store = settings_store[id] || {};
     const type = store.type || 'toggle';
 
