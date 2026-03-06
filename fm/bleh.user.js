@@ -63872,7 +63872,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     });
   }
 
-  // src/build/trans.js
+  // src/build/trans.ts
   var import_color_thief_browser3 = __toESM(require_color_thief_min(), 1);
   var lang = "en";
   var lang_browser = "en";
@@ -74223,6 +74223,9 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
   };
   var translation_fallback = "NO_TRANSLATION_FOUND";
   function tl2(key, replacements = {}) {
+    if (typeof key === "string") {
+      return key;
+    }
     if (!key) {
       log("your key is undefined", "trans");
       return translation_fallback;

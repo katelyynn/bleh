@@ -68,7 +68,7 @@ export let lang_info = {
     }
 };
 
-export const trans = {
+export const trans: translations = {
     comma: {
         // yes this is just a comma
         // yes the space on the end is intentional and should be
@@ -10347,17 +10347,39 @@ export const trans = {
 
 export const translation_fallback = 'NO_TRANSLATION_FOUND';
 
-export function tl(key, replacements = {}) {
+interface translations {
+    [key: string]: translation
+}
+
+export interface translation {
+    en?: string,
+    de?: string,
+    es?: string,
+    it?: string,
+    ja?: string,
+    pl?: string,
+    pt?: string,
+    sv?: string,
+    ru?: string,
+    zh?: string,
+    [key: string]: translation | string | undefined
+}
+
+export function tl(key: translation, replacements = {}) {
+    if (typeof key === 'string') {
+        return key;
+    }
+
     if (!key) {
         log('your key is undefined', 'trans');
         return translation_fallback;
     }
 
-    let translation = key[lang] || key.en;
+    let translation = (key[lang] || key.en) as string;
 
     for (const [placeholder, value] of Object.entries(replacements)) {
         const regex = new RegExp(`{${placeholder}}`, 'g');
-        translation = translation.replace(regex, value);
+        translation = translation.replace(regex, value as string);
     }
 
     if (page.state.april && translation.includes('Last.fm Pro'))

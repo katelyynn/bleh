@@ -5,8 +5,8 @@
         "paths": {
             "@/*": ["./src/*"]
         },
-        "lib": ["es2016", "dom"],
-        "target": "es2016"
+        "lib": ["es2024", "dom"],
+        "target": "es2024"
     },
     "include": ["**/*.js", "**/*.ts"]
 }

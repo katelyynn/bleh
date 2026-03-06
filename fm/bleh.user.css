@@ -6464,7 +6464,7 @@ section,
   color: oklch(var(--c2) / 80%) !important;
   font-weight: var(--font-weight);
 }
-html[data-bleh--show_guest_features=false] {
+body[data-bleh--show_guest_features=false] {
   .feat {
     &[data-bleh--tag-group=guests] {
       display: none !important;
@@ -6476,7 +6476,7 @@ html[data-bleh--show_guest_features=false] {
     }
   }
 }
-html[data-bleh--show_remaster_tags=false] {
+body[data-bleh--show_remaster_tags=false] {
   .title-container .feat,
   .chartlist-name .feat {
     &[data-bleh--tag-group=remasters] {
