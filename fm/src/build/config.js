@@ -597,6 +597,11 @@ export let settings_store = {
         ],
         bubble: true
     },
+    theme_type: {
+        default: 'dark',
+        type: 'radio',
+        bubble: true
+    },
     theme_schedule: {
         default: false
     },

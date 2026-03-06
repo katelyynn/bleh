@@ -74228,6 +74228,11 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       ],
       bubble: true
     },
+    theme_type: {
+      default: "dark",
+      type: "radio",
+      bubble: true
+    },
     theme_schedule: {
       default: false
     },
