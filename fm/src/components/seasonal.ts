@@ -47,7 +47,7 @@ export function set_season() {
 
 function apply_season(current: season) {
     log(`applying ${current.id}`, 'season', 'info', { current });
-    document.documentElement.setAttribute('data-bleh--season', current.id);
+    document.body.setAttribute('data-bleh--season', current.id);
 
     if (current.snowflakes.state && settings.seasonal_particles != 'none') {
         log('let the snow start!', 'season');

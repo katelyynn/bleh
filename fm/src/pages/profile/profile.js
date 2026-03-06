@@ -625,11 +625,11 @@ export function bleh_profiles() {
             const report_box_container = document.body.querySelector('.report-box-container--overview');
             if (report_box_container) {
                 // v3+ (2023)
-                document.documentElement.setAttribute(
+                document.body.setAttribute(
                     'data-bleh--theme',
                     'oled'
                 );
-                document.documentElement.setAttribute(
+                document.body.setAttribute(
                     'data-bleh--theme_type',
                     'dark'
                 );

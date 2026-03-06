@@ -122,7 +122,7 @@ export function load_settings(skip = false) {
                 );
             }
 
-            if (!other_setting_types.includes(type)) {
+            if (!other_setting_types.includes(type) && settings_store[setting].bubble) {
                 document.body.setAttribute(`data-bleh--${setting}`, settings[setting]);
             }
         }
@@ -135,7 +135,7 @@ export function load_settings(skip = false) {
 
     // override theme when browsing listening reports
     if (document.body.classList.contains('user-dashboard-layout')) {
-        document.documentElement.setAttribute('data-bleh--theme', 'oled');
+        document.body.setAttribute('data-bleh--theme', 'oled');
         page.state.settings_reload = true;
     }
 
@@ -242,7 +242,7 @@ function update_item(item, value, modify = true, search = document) {
                 `--${settings_base[item].css}`,
                 `${value}${settings_base[item].unit}`
             );
-            document.documentElement.setAttribute(
+            document.body.setAttribute(
                 `data-bleh--${item}`,
                 `${value}`
             );
@@ -264,12 +264,12 @@ function update_item(item, value, modify = true, search = document) {
                     document.body.style.removeProperty(
                         `--${settings_base.lit.css}`
                     );
-                    document.documentElement.setAttribute(
+                    document.body.setAttribute(
                         'data-bleh--hsl-override',
                         'true'
                     );
                 } else {
-                    document.documentElement.setAttribute(
+                    document.body.setAttribute(
                         'data-bleh--hsl-override',
                         'false'
                     );
@@ -287,7 +287,7 @@ function update_item(item, value, modify = true, search = document) {
                     `--${item}`,
                     settings_base[item].values[1]
                 );
-                document.documentElement.setAttribute(
+                document.body.setAttribute(
                     `data-bleh--${item}`,
                     `${settings_base[item].values[1]}`
                 );
@@ -303,7 +303,7 @@ function update_item(item, value, modify = true, search = document) {
                     `--${item}`,
                     settings_base[item].values[0]
                 );
-                document.documentElement.setAttribute(
+                document.body.setAttribute(
                     `data-bleh--${item}`,
                     `${settings_base[item].values[0]}`
                 );
@@ -325,7 +325,7 @@ function update_item(item, value, modify = true, search = document) {
 
                 // save setting into body
                 document.body.style.setProperty(`--${item}`, value);
-                document.documentElement.setAttribute(
+                document.body.setAttribute(
                     `data-bleh--${item}`,
                     value
                 );
@@ -498,7 +498,7 @@ export function update_inbuilt_item(
             element
                 .querySelector(`#toggle-${item}`)
                 .setAttribute('aria-checked', false);
-            document.documentElement.setAttribute(
+            document.body.setAttribute(
                 `data-bleh--inbuilt-${item}`,
                 inbuilt_settings[item].values[1]
             );
@@ -509,7 +509,7 @@ export function update_inbuilt_item(
             element
                 .querySelector(`#toggle-${item}`)
                 .setAttribute('aria-checked', true);
-            document.documentElement.setAttribute(
+            document.body.setAttribute(
                 `data-bleh--inbuilt-${item}`,
                 inbuilt_settings[item].values[0]
             );
@@ -531,7 +531,7 @@ export function update_inbuilt_item(
                 element
                     .querySelector(`#toggle-${item}`)
                     .setAttribute('aria-checked', true);
-                document.documentElement.setAttribute(
+                document.body.setAttribute(
                     `data-bleh--inbuilt-${item}`,
                     true
                 );
@@ -543,7 +543,7 @@ export function update_inbuilt_item(
                 element
                     .querySelector(`#toggle-${item}`)
                     .setAttribute('aria-checked', false);
-                document.documentElement.setAttribute(
+                document.body.setAttribute(
                     `data-bleh--inbuilt-${item}`,
                     false
                 );

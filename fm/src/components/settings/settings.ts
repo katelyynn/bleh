@@ -1203,7 +1203,7 @@ export function save_setting(id: string, value: string | number | boolean) {
 
     settings[id] = value;
 
-    if (!other_setting_types.includes(type)) {
+    if (!other_setting_types.includes(type) && store.bubble) {
         document.body.setAttribute(`data-bleh--${id}`, value.toString());
     }
 
@@ -1266,7 +1266,7 @@ export function save_setting(id: string, value: string | number | boolean) {
 export function seasonal_colour_switch() {
     const has_user_accent = document.body.style.getPropertyValue('--hue-album');
 
-    document.documentElement.setAttribute(
+    document.body.setAttribute(
         'data-seasonal-accent',
         settings.hue == 255 &&
             settings.sat == 1 &&

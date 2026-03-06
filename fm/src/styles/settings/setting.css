@@ -897,17 +897,6 @@
                 }
             }
 
-            [data-bleh--stacked_chartlist_info="true"] & {
-                .cover {
-                    width: 34px;
-                    height: 34px;
-                }
-
-                .album {
-                    display: block;
-                }
-            }
-
             &.realtime {
                 background-color: oklch(var(--h4) / 10%);
             }

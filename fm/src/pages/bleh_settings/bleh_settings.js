@@ -1200,7 +1200,7 @@ export async function render_setting_page(page_id) {
                                 state.setAttribute('aria-checked', !current);
 
                                 settings.feature_flags[flag] = !current;
-                                document.documentElement.setAttribute(
+                                document.body.setAttribute(
                                     `data-ff--${flag}`,
                                     (!current).toString()
                                 );
@@ -1452,7 +1452,7 @@ function update_flag_toggle(flag, container) {
 
     button.setAttribute('aria-checked', !current_state);
     settings.feature_flags[flag] = !current_state;
-    document.documentElement.setAttribute(
+    document.body.setAttribute(
         `data-ff--${flag}`,
         `${!current_state}`
     );

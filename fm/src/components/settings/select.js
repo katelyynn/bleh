@@ -12,7 +12,7 @@ unsafeWindow._update_inbuilt_select = function (id, value) {
     update_inbuilt_select(id, value);
 };
 export function update_inbuilt_select(id, value) {
-    document.documentElement.setAttribute(`data-bleh--inbuilt-${id}`, value);
+    document.body.setAttribute(`data-bleh--inbuilt-${id}`, value);
 }
 
 export function select(values, initial = '', name = '', func = null, blend = false, title_func = null, hide = false) {
@@ -98,7 +98,7 @@ export function select(values, initial = '', name = '', func = null, blend = fal
         select.value = selected;
 
         if (name != '')
-            document.documentElement.setAttribute(
+            document.body.setAttribute(
                 `data-bleh--inbuilt-id_${name}`,
                 selected
             );
@@ -229,7 +229,7 @@ unsafeWindow._set_custom_select_value = function (select_id, value) {
         value,
         select_id
     );
-    document.documentElement.setAttribute(
+    document.body.setAttribute(
         `data-bleh--inbuilt-${select_id}`,
         value
     );

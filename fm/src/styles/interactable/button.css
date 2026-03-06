@@ -213,15 +213,6 @@ select,
         --shadow-hov:
             var(--interactable-outer), var(--interactable-active-outer);
 
-        [data-bleh--invert_interactable_colour="true"] & {
-            --col: oklch(var(--ov-c1)) !important;
-            --mask-colour: color-mix(
-                in oklch,
-                oklch(var(--ov-c1)),
-                oklch(var(--h4)) 40%
-            );
-        }
-
         [data-bleh--season="christmas"] & {
             --hue-seasonal: 130;
             --sat-seasonal: 0.45;

@@ -34432,7 +34432,7 @@
     update_inbuilt_select(id, value);
   };
   function update_inbuilt_select(id, value) {
-    document.documentElement.setAttribute(`data-bleh--inbuilt-${id}`, value);
+    document.body.setAttribute(`data-bleh--inbuilt-${id}`, value);
   }
   function select(values, initial = "", name = "", func = null, blend = false, title_func = null, hide2 = false) {
     let select2;
@@ -34500,7 +34500,7 @@
       });
       select2.value = selected;
       if (name != "")
-        document.documentElement.setAttribute(
+        document.body.setAttribute(
           `data-bleh--inbuilt-id_${name}`,
           selected
         );
@@ -34601,7 +34601,7 @@
       value,
       select_id
     );
-    document.documentElement.setAttribute(
+    document.body.setAttribute(
       `data-bleh--inbuilt-${select_id}`,
       value
     );
@@ -37643,11 +37643,11 @@
         convert_to_toolbar();
         const report_box_container = document.body.querySelector(".report-box-container--overview");
         if (report_box_container) {
-          document.documentElement.setAttribute(
+          document.body.setAttribute(
             "data-bleh--theme",
             "oled"
           );
-          document.documentElement.setAttribute(
+          document.body.setAttribute(
             "data-bleh--theme_type",
             "dark"
           );
@@ -43038,7 +43038,7 @@
     const store = settings_store[setting] || {};
     const type = store.type || "toggle";
     settings[id] = value;
-    if (!other_setting_types.includes(type)) {
+    if (!other_setting_types.includes(type) && store.bubble) {
       document.body.setAttribute(`data-bleh--${id}`, value.toString());
     }
     if (id == "theme") {
@@ -43081,7 +43081,7 @@
   }
   function seasonal_colour_switch() {
     const has_user_accent = document.body.style.getPropertyValue("--hue-album");
-    document.documentElement.setAttribute(
+    document.body.setAttribute(
       "data-seasonal-accent",
       settings.hue == 255 && settings.sat == 1 && settings.lit == 1 && !has_user_accent
     );
@@ -43182,7 +43182,7 @@
             `${settings[setting2]}${settings_store[setting2].suffix || ""}`
           );
         }
-        if (!other_setting_types.includes(type)) {
+        if (!other_setting_types.includes(type) && settings_store[setting2].bubble) {
           document.body.setAttribute(`data-bleh--${setting2}`, settings[setting2]);
         }
       }
@@ -43190,7 +43190,7 @@
     load_skus();
     compile_settings();
     if (document.body.classList.contains("user-dashboard-layout")) {
-      document.documentElement.setAttribute("data-bleh--theme", "oled");
+      document.body.setAttribute("data-bleh--theme", "oled");
       page.state.settings_reload = true;
     }
     load_chart_colours();
@@ -43262,7 +43262,7 @@
           `--${settings_base[item].css}`,
           `${value}${settings_base[item].unit}`
         );
-        document.documentElement.setAttribute(
+        document.body.setAttribute(
           `data-bleh--${item}`,
           `${value}`
         );
@@ -43277,12 +43277,12 @@
             document.body.style.removeProperty(
               `--${settings_base.lit.css}`
             );
-            document.documentElement.setAttribute(
+            document.body.setAttribute(
               "data-bleh--hsl-override",
               "true"
             );
           } else {
-            document.documentElement.setAttribute(
+            document.body.setAttribute(
               "data-bleh--hsl-override",
               "false"
             );
@@ -43296,7 +43296,7 @@
             `--${item}`,
             settings_base[item].values[1]
           );
-          document.documentElement.setAttribute(
+          document.body.setAttribute(
             `data-bleh--${item}`,
             `${settings_base[item].values[1]}`
           );
@@ -43308,7 +43308,7 @@
             `--${item}`,
             settings_base[item].values[0]
           );
-          document.documentElement.setAttribute(
+          document.body.setAttribute(
             `data-bleh--${item}`,
             `${settings_base[item].values[0]}`
           );
@@ -43323,7 +43323,7 @@
         if (modify) {
           settings[item] = value;
           document.body.style.setProperty(`--${item}`, value);
-          document.documentElement.setAttribute(
+          document.body.setAttribute(
             `data-bleh--${item}`,
             value
           );
@@ -43438,7 +43438,7 @@
           `#inbuilt-companion-checkbox-${item}`
         ).checked = false;
         element.querySelector(`#toggle-${item}`).setAttribute("aria-checked", false);
-        document.documentElement.setAttribute(
+        document.body.setAttribute(
           `data-bleh--inbuilt-${item}`,
           inbuilt_settings[item].values[1]
         );
@@ -43447,7 +43447,7 @@
           `#inbuilt-companion-checkbox-${item}`
         ).checked = true;
         element.querySelector(`#toggle-${item}`).setAttribute("aria-checked", true);
-        document.documentElement.setAttribute(
+        document.body.setAttribute(
           `data-bleh--inbuilt-${item}`,
           inbuilt_settings[item].values[0]
         );
@@ -43466,7 +43466,7 @@
             `#inbuilt-companion-checkbox-${item}`
           ).checked = true;
           element.querySelector(`#toggle-${item}`).setAttribute("aria-checked", true);
-          document.documentElement.setAttribute(
+          document.body.setAttribute(
             `data-bleh--inbuilt-${item}`,
             true
           );
@@ -43476,7 +43476,7 @@
             `#inbuilt-companion-checkbox-${item}`
           ).checked = false;
           element.querySelector(`#toggle-${item}`).setAttribute("aria-checked", false);
-          document.documentElement.setAttribute(
+          document.body.setAttribute(
             `data-bleh--inbuilt-${item}`,
             false
           );
@@ -51570,7 +51570,7 @@
   }
   function apply_season(current) {
     log(`applying ${current.id}`, "season", "info", { current });
-    document.documentElement.setAttribute("data-bleh--season", current.id);
+    document.body.setAttribute("data-bleh--season", current.id);
     if (current.snowflakes.state && settings.seasonal_particles != "none") {
       log("let the snow start!", "season");
       prep_snow();
@@ -51789,7 +51789,7 @@
       log("disabled loading for special interface", "style");
       return;
     }
-    document.documentElement.setAttribute("data-bleh--theme", settings.theme);
+    document.body.setAttribute("data-bleh--theme", settings.theme);
     document.documentElement.appendChild(
       html.node`<style>${cropper_min_default}</style>`
     );
@@ -55947,7 +55947,7 @@
           checkbox.checked = !current;
           state.setAttribute("aria-checked", !current);
           settings.feature_flags[flag] = !current;
-          document.documentElement.setAttribute(
+          document.body.setAttribute(
             `data-ff--${flag}`,
             (!current).toString()
           );
@@ -56145,7 +56145,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     let current_state = ff(flag);
     button2.setAttribute("aria-checked", !current_state);
     settings.feature_flags[flag] = !current_state;
-    document.documentElement.setAttribute(
+    document.body.setAttribute(
       `data-ff--${flag}`,
       `${!current_state}`
     );
@@ -74825,7 +74825,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         "oled",
         trans.appearance,
         trans.visual
-      ]
+      ],
+      bubble: true
     },
     theme_schedule: {
       default: false
@@ -74899,7 +74900,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     solarium: {
       default: true,
       title: trans.solarium.name,
-      body: trans.solarium.body
+      body: trans.solarium.body,
+      bubble: true
     },
     noise: {
       css: "noise-opacity",
@@ -74924,7 +74926,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     gendered_tags: {
       default: true,
       title: trans.gendered_tags.name,
-      body: trans.gendered_tags.body
+      body: trans.gendered_tags.body,
+      bubble: true
     },
     dev: {
       default: false,
@@ -74934,7 +74937,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     accessible_name_colours: {
       default: false,
       title: trans.accessible_name_colours.name,
-      body: trans.accessible_name_colours.body
+      body: trans.accessible_name_colours.body,
+      bubble: true
     },
     display_name_styles: {
       default: true,
@@ -74945,12 +74949,14 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     reduced_motion: {
       default: false,
       title: trans.reduced_motion.name,
-      body: trans.reduced_motion.body
+      body: trans.reduced_motion.body,
+      bubble: true
     },
     underline_links: {
       default: false,
       title: trans.underline_links.name,
-      body: trans.underline_links.body
+      body: trans.underline_links.body,
+      bubble: true
     },
     format_guest_features: {
       default: true,
@@ -74962,7 +74968,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         "tracklist",
         "title",
         "tag"
-      ]
+      ],
+      bubble: true
     },
     show_guest_features: {
       default: false,
@@ -74973,7 +74980,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         "tracklist",
         "title",
         "tag"
-      ]
+      ],
+      bubble: true
     },
     track_layout: {
       default: "column",
@@ -74993,7 +75001,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         "tracklist",
         trans.track_layout.column,
         trans.track_layout.row
-      ]
+      ],
+      bubble: true
     },
     expand_tracks: {
       default: "active",
@@ -75017,7 +75026,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         "tracklist",
         trans.expand_tracks_always,
         trans.expand_tracks_when_active
-      ]
+      ],
+      bubble: true
     },
     track_album_name_location: {
       default: "column",
@@ -75051,7 +75061,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     show_remaster_tags: {
       default: true,
       title: trans.show_remaster_tags,
-      beta: true
+      beta: true,
+      bubble: true
     },
     corrections: {
       default: true,
@@ -75085,12 +75096,14 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     show_your_progress: {
       default: true,
       title: trans.show_your_progress.name,
-      body: trans.show_your_progress.body
+      body: trans.show_your_progress.body,
+      bubble: true
     },
     travis: {
       default: true,
       title: trans.redirect_messages.name,
-      body: trans.redirect_messages.body
+      body: trans.redirect_messages.body,
+      bubble: true
     },
     list_view: {
       default: "cards",
@@ -75120,7 +75133,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         bar: {
           name: trans.bar
         }
-      }
+      },
+      bubble: true
     },
     chart_bar_axis: {
       default: "horizontal",
@@ -75132,7 +75146,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         vertical: {
           name: trans.vertical
         }
-      }
+      },
+      bubble: true
     },
     chart_insights_view: {
       default: "pie",
@@ -75142,13 +75157,15 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       default: true,
       require_reload: "partial",
       title: trans.markdown_shouts.name,
-      body: trans.markdown_shouts.body
+      body: trans.markdown_shouts.body,
+      bubble: true
     },
     bio_markdown: {
       default: true,
       require_reload: "partial",
       title: trans.markdown_profiles.name,
-      body: trans.markdown_profiles.body
+      body: trans.markdown_profiles.body,
+      bubble: true
     },
     avatar_radius: {
       default: 50,
@@ -75200,7 +75217,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       default: true,
       type: "checkbox",
       title: trans.seasonal_overlays.name,
-      body: trans.seasonal_overlays.body
+      body: trans.seasonal_overlays.body,
+      bubble: true
     },
     profile_header_own: {
       default: true,
@@ -75289,12 +75307,14 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       default: true,
       title: trans.font_emoji.name,
       body: trans.font_emoji.body,
-      platforms: ["win32", "linux", "android", "other"]
+      platforms: ["win32", "linux", "android", "other"],
+      bubble: true
     },
     grid_glow: {
       default: true,
       title: trans.grid_glow.name,
-      body: trans.grid_glow.body
+      body: trans.grid_glow.body,
+      bubble: true
     },
     default_avatar_action: {
       default: "expand",
@@ -75399,7 +75419,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       default: true,
       title: trans.simulate_scroll.name,
       body: trans.simulate_scroll.body,
-      require_reload: "partial"
+      require_reload: "partial",
+      bubble: true
     },
     rabbit: {
       default: true,

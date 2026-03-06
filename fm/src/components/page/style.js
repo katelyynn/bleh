@@ -33,7 +33,7 @@ export function append_style() {
         return;
     }
 
-    document.documentElement.setAttribute('data-bleh--theme', settings.theme);
+    document.body.setAttribute('data-bleh--theme', settings.theme);
     document.documentElement.appendChild(
         html.node`<style>${cropper_css}</style>`
     );

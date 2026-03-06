@@ -594,7 +594,8 @@ export let settings_store = {
             'oled',
             trans.appearance,
             trans.visual
-        ]
+        ],
+        bubble: true
     },
     theme_schedule: {
         default: false
@@ -668,7 +669,8 @@ export let settings_store = {
     solarium: {
         default: true,
         title: trans.solarium.name,
-        body: trans.solarium.body
+        body: trans.solarium.body,
+        bubble: true
     },
     noise: {
         css: 'noise-opacity',
@@ -693,7 +695,8 @@ export let settings_store = {
     gendered_tags: {
         default: true,
         title: trans.gendered_tags.name,
-        body: trans.gendered_tags.body
+        body: trans.gendered_tags.body,
+        bubble: true
     },
     dev: {
         default: false,
@@ -703,7 +706,8 @@ export let settings_store = {
     accessible_name_colours: {
         default: false,
         title: trans.accessible_name_colours.name,
-        body: trans.accessible_name_colours.body
+        body: trans.accessible_name_colours.body,
+        bubble: true
     },
     display_name_styles: {
         default: true,
@@ -714,12 +718,14 @@ export let settings_store = {
     reduced_motion: {
         default: false,
         title: trans.reduced_motion.name,
-        body: trans.reduced_motion.body
+        body: trans.reduced_motion.body,
+        bubble: true
     },
     underline_links: {
         default: false,
         title: trans.underline_links.name,
-        body: trans.underline_links.body
+        body: trans.underline_links.body,
+        bubble: true
     },
     format_guest_features: {
         default: true,
@@ -731,7 +737,8 @@ export let settings_store = {
             'tracklist',
             'title',
             'tag'
-        ]
+        ],
+        bubble: true
     },
     show_guest_features: {
         default: false,
@@ -742,7 +749,8 @@ export let settings_store = {
             'tracklist',
             'title',
             'tag'
-        ]
+        ],
+        bubble: true
     },
     track_layout: {
         default: 'column',
@@ -762,7 +770,8 @@ export let settings_store = {
             'tracklist',
             trans.track_layout.column,
             trans.track_layout.row
-        ]
+        ],
+        bubble: true
     },
     expand_tracks: {
         default: 'active',
@@ -786,7 +795,8 @@ export let settings_store = {
             'tracklist',
             trans.expand_tracks_always,
             trans.expand_tracks_when_active
-        ]
+        ],
+        bubble: true
     },
     track_album_name_location: {
         default: 'column',
@@ -820,7 +830,8 @@ export let settings_store = {
     show_remaster_tags: {
         default: true,
         title: trans.show_remaster_tags,
-        beta: true
+        beta: true,
+        bubble: true
     },
     corrections: {
         default: true,
@@ -854,12 +865,14 @@ export let settings_store = {
     show_your_progress: {
         default: true,
         title: trans.show_your_progress.name,
-        body: trans.show_your_progress.body
+        body: trans.show_your_progress.body,
+        bubble: true
     },
     travis: {
         default: true,
         title: trans.redirect_messages.name,
-        body: trans.redirect_messages.body
+        body: trans.redirect_messages.body,
+        bubble: true
     },
     list_view: {
         default: 'cards',
@@ -889,7 +902,8 @@ export let settings_store = {
             bar: {
                 name: trans.bar
             }
-        }
+        },
+        bubble: true
     },
     chart_bar_axis: {
         default: 'horizontal',
@@ -901,7 +915,8 @@ export let settings_store = {
             vertical: {
                 name: trans.vertical
             }
-        }
+        },
+        bubble: true
     },
     chart_insights_view: {
         default: 'pie',
@@ -911,13 +926,15 @@ export let settings_store = {
         default: true,
         require_reload: 'partial',
         title: trans.markdown_shouts.name,
-        body: trans.markdown_shouts.body
+        body: trans.markdown_shouts.body,
+        bubble: true
     },
     bio_markdown: {
         default: true,
         require_reload: 'partial',
         title: trans.markdown_profiles.name,
-        body: trans.markdown_profiles.body
+        body: trans.markdown_profiles.body,
+        bubble: true
     },
     avatar_radius: {
         default: 50,
@@ -969,7 +986,8 @@ export let settings_store = {
         default: true,
         type: 'checkbox',
         title: trans.seasonal_overlays.name,
-        body: trans.seasonal_overlays.body
+        body: trans.seasonal_overlays.body,
+        bubble: true
     },
     profile_header_own: {
         default: true,
@@ -1058,12 +1076,14 @@ export let settings_store = {
         default: true,
         title: trans.font_emoji.name,
         body: trans.font_emoji.body,
-        platforms: ['win32', 'linux', 'android', 'other']
+        platforms: ['win32', 'linux', 'android', 'other'],
+        bubble: true
     },
     grid_glow: {
         default: true,
         title: trans.grid_glow.name,
-        body: trans.grid_glow.body
+        body: trans.grid_glow.body,
+        bubble: true
     },
     default_avatar_action: {
         default: 'expand',
@@ -1168,7 +1188,8 @@ export let settings_store = {
         default: true,
         title: trans.simulate_scroll.name,
         body: trans.simulate_scroll.body,
-        require_reload: 'partial'
+        require_reload: 'partial',
+        bubble: true
     },
     rabbit: {
         default: true,
