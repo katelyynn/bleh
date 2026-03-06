@@ -48,7 +48,7 @@ import { save_setting, setting } from '@/components/settings/settings';
 import { submit_scrobble } from '@/components/music/scrobble';
 import tippy from 'tippy.js';
 import { Chart } from '@/main';
-import { expand_avatar } from '@/components/shared/avatar.js';
+import { expand_avatar, style_name_from_badge } from '@/components/shared/avatar.js';
 import { status } from '@/components/dialog/status.js';
 import { hoshino } from '@/components/music/hoshino.js';
 import { find_pronouns } from '@/components/profile/pronouns';
@@ -170,13 +170,19 @@ export function bleh_profiles() {
             if (type == 'user-status-subscriber')
                 badge.textContent = tl(trans.badges['user-status-subscriber'].name);
 
+            let badge_name;
             tippy(badge, {
                 theme: 'badge',
                 placement: 'bottom',
                 content: html.node`
-                    <div class="badge-name">${badge.textContent}</div>
+                    <div class="badge-name" ref=${el => badge_name = el}>${badge.textContent}</div>
                     <div class="badge-reason">${tl(trans.badges[type].reason)}</div>
                 `
+            });
+
+            style_name_from_badge(badge_name, {
+                type,
+                inbuilt: true
             });
         });
     }

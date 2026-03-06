@@ -1081,8 +1081,8 @@
 
     .dot {
         position: absolute;
-        width: 14px;
-        height: 14px;
+        width: 12px;
+        height: 12px;
         left: 3px;
         border-radius: var(--item-big-radius);
         background: var(--col);

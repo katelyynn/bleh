@@ -784,7 +784,7 @@ export function append_nav() {
                             <div class="name"><span class="at">@</span>${auth.name}</div>
                             ${auth.pro ? html.node`
                                 <div class="badges">
-                                    ${auth.pro ? () => {
+                                    ${() => {
                                         const elem = html.node`
                                             <span class="label user-status-subscriber no-hover">
                                                 ${tl(trans.badges['user-status-subscriber'].name)}
@@ -795,13 +795,13 @@ export function append_nav() {
                                             theme: 'badge',
                                             placement: 'bottom',
                                             content: html.node`
-                                                <div class="badge-name">${tl(trans.badges['user-status-subscriber'].name)}</div>
+                                                <div class="badge-name colourful user-status-subscriber">${tl(trans.badges['user-status-subscriber'].name)}</div>
                                                 <div class="badge-reason">${tl(trans.badges['user-status-subscriber'].reason)}</div>
                                             `
                                         });
 
                                         return elem;
-                                    } : ''}
+                                    }}
                                 </div>
                             ` : ''}
                             <a class="link-block-cover-link" href="${root}user/${auth.name}" />
@@ -1130,7 +1130,7 @@ export function append_nav() {
                                     theme: 'badge',
                                     placement: 'bottom',
                                     content: html.node`
-                                        <div class="badge-name">${tl(trans.badges['user-status-subscriber'].name)}</div>
+                                        <div class="badge-name colourful user-status-subscriber">${tl(trans.badges['user-status-subscriber'].name)}</div>
                                         <div class="badge-reason">${tl(trans.badges['user-status-subscriber'].reason)}</div>
                                     `
                                 });

@@ -6,6 +6,8 @@
 
     position: relative;
 
+    --button-sides: 9px;
+
     &:after {
         content: "";
         position: absolute;
@@ -319,12 +321,12 @@ button.navlist-more {
 
 .library-controls > .secondary-nav,
 .toolbar > .secondary-nav {
-    --button-verts: 6px;
+    --button-verts: 5px;
     margin: unset !important;
     padding-bottom: unset !important;
     padding-left: calc(var(--card-padding) - var(--button-sides-icon));
 
-    --button-sides: 9px;
+    --button-sides: 11px;
     --button-sides-icon: calc(var(--button-sides) - 2px);
 
     &:before,

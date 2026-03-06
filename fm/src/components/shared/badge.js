@@ -11,6 +11,7 @@ import { html } from 'lighterhtml';
 import { sponsor } from '@/components/sponsor';
 import tippy from 'tippy.js';
 import { page } from '@/build/page';
+import { style_name_from_badge } from './avatar';
 
 export function load_badges(user, solo = false) {
     if (!sponsor_list || !sponsor_list.badges) return;
@@ -162,14 +163,17 @@ export function create_badge(
 
     if (on_avatar || small) return elem;
 
+    let badge_name;
     tippy(elem, {
         theme: 'badge',
         placement: 'bottom',
         content: html.node`
-            <div class="badge-name">${badge.name}</div>
+            <div class="badge-name colourful" ref=${el => badge_name = el}>${badge.name}</div>
             <div class="badge-reason">${badge.reason}</div>
         `
     });
+
+    style_name_from_badge(badge_name, badge);
 
     if (badge.type == 'sponsor') elem.onclick = sponsor;
 

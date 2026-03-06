@@ -5,7 +5,7 @@
     -webkit-backdrop-filter: var(--solarium);
     border-radius: var(--item-med-radius);
     box-shadow: inset 0 0 0 1px var(--card-border-base), var(--avatar-shadow);
-    padding: 4px 10px;
+    padding: 4px 11px;
     font-size: calc(var(--font-size) - 1px);
     font-weight: var(--font-weight);
     line-height: calc(var(--line-height) - 1px);
@@ -321,11 +321,16 @@
         .tippy-content {
             display: flex;
             flex-direction: column;
+            padding: 2px 0;
 
             .badge-name {
+                color: oklch(var(--l3-c));
+                text-shadow: 0 0 20px oklch(var(--h4));
                 font-weight: var(--font-weight-medium);
             }
             .badge-reason {
+                font-size: 12px;
+                margin-top: -2px;
                 color: oklch(var(--c3));
             }
         }
@@ -352,10 +357,12 @@
             display: flex;
             flex-direction: column;
             text-align: center;
+            padding: 2px 0;
 
             & > small {
-                font: inherit;
-                color: oklch(var(--c2) / 80%);
+                font-size: 12px;
+                margin-top: -2px;
+                color: oklch(var(--c3));
             }
         }
     }
@@ -365,6 +372,7 @@
             display: flex;
             flex-direction: column;
             text-align: center;
+            padding: 2px 0;
 
             & > .name {
                 font-weight: var(--font-weight-medium);
@@ -374,7 +382,9 @@
                 }
             }
             & > .sister {
-                color: oklch(var(--c2) / 80%);
+                font-size: 12px;
+                margin-top: -2px;
+                color: oklch(var(--c3));
             }
         }
     }

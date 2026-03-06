@@ -91,6 +91,8 @@ select,
     backdrop-filter: var(--filter);
     -webkit-backdrop-filter: var(--filter);
 
+    --icon-size: 16px;
+
     background-repeat: repeat-x !important;
     background-position: unset !important;
 

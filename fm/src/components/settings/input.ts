@@ -37,7 +37,6 @@ type input = {
 }
 
 interface input_element extends HTMLElement {
-    editor: HTMLTextAreaElement | HTMLInputElement,
     range: [start: number, end: number],
     value: string
 }

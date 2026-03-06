@@ -102,11 +102,11 @@ body {
   --trans-function-ani: cubic-bezier(0.205, 0.060, 0.050, 0.965);
   --ina: var(--motion, ina 0.4s var(--trans-function-ani));
   --blur-in: var(--motion, blur_in 0.4s var(--trans-function-ani));
-  --button-sides: 9px;
+  --button-sides: 10px;
   --button-sides-icon: calc(var(--button-sides) - 2px);
-  --button-verts: 6px;
-  --button-height: 30px;
-  --button-radius: 12px;
+  --button-verts: 5px;
+  --button-height: 28px;
+  --button-radius: 9px;
   --icon-size: 18px;
   --icon-half: 9px;
   --icon-gap: 4px;
@@ -216,18 +216,13 @@ body,
   --card-border: inset 0 0 0 1px oklch(var(--b4) / 0.6);
   --card-border-base: oklch(var(--b3) / 0.7);
   --card-border-base-highlight: oklch(var(--b2) / 0.55);
-  --separator:
-    linear-gradient(
-      90deg,
-      transparent,
-      var(--separator-base),
-      transparent);
-  --separator-base: oklch(var(--b3) / 0.9);
+  --separator: var(--separator-base);
+  --separator-base: oklch(var(--b3) / 0.5);
   --textarea: oklch(var(--b6) / 20%);
   --textarea-hov: oklch(var(--b6) / 40%);
   --banner-overlay: transparent;
   --banner-mix: none;
-  --normal-shadow: inset 0 0 0 1px oklch(var(--b2) / 40%);
+  --normal-shadow: inset 0 0 0 1px oklch(var(--b2) / 20%);
   --input-shadow: inset 0 0 0 1px oklch(var(--b3) / 0.7), inset 0 1px 2px oklch(0 0 0 / 0.2);
   --focused-input-shadow: inset 0 0 0 1px oklch(var(--h3) / 0.4), var(--input-shadow);
   --group-shadow: inset 0 0 0 1px oklch(var(--b2) / 0.3);
@@ -261,11 +256,11 @@ body,
     --b7: 0 0 0;
     --menu-item-hov: oklch(var(--b4) / 60%);
     --menu-item-atv: oklch(var(--b4) / 80%);
-    --separator-base: var(--card-border-base);
+    --separator-base: oklch(var(--b3) / 0.3);
     --setting-hover: oklch(var(--b4) / 40%);
     --card-blur-bg: oklch(var(--b5) / var(--solarium-opacity, 50%));
     --card-blur-bg-alt: oklch(var(--b5) / var(--solarium-opacity, 35%));
-    --normal-shadow: inset 0 0 0 1px oklch(var(--b2) / 80%);
+    --normal-shadow: inset 0 0 0 1px oklch(var(--b2) / 40%);
   }
   &[data-bleh--theme=oled] {
     --b2: 0.32 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue);
@@ -275,7 +270,7 @@ body,
     --b6: 0 0 0;
     --b8: 0.17 0 0;
     --b7: 0 0 0;
-    --separator-base: oklch(var(--b2) / 0.5);
+    --separator-base: oklch(var(--b2) / 0.2);
     --card-border-base: oklch(var(--b3) / 0.7);
     --card-border-base-highlight: oklch(var(--b2) / 0.6);
     --input-shadow: inset 0 0 0 1px oklch(var(--b3)), inset 0 1px 2px 1px oklch(var(--b3) / 0.4);
@@ -286,7 +281,7 @@ body,
     --toolbar-bg: oklch(var(--b4) / 20%);
     --toolbar-border: 1px solid oklch(var(--b4) / 45%);
     --subtle-border: 1px solid oklch(var(--b4) / 35%);
-    --normal-shadow: inset 0 0 0 1px oklch(var(--b2) / 100%);
+    --normal-shadow: inset 0 0 0 1px oklch(var(--b2) / 50%);
     --card-blur-bg: oklch(var(--b5) / var(--solarium-opacity, 30%));
     --card-blur-bg-alt: oklch(var(--b5) / var(--solarium-opacity, 40%));
     --setting-hover: oklch(var(--b4) / 30%);
@@ -2879,6 +2874,7 @@ select,
   cursor: pointer;
   backdrop-filter: var(--filter);
   -webkit-backdrop-filter: var(--filter);
+  --icon-size: 16px;
   background-repeat: repeat-x !important;
   background-position: unset !important;
   position: relative;
@@ -4591,7 +4587,7 @@ li:first-child .more-item--delete {
   -webkit-backdrop-filter: var(--solarium);
   border-radius: var(--item-med-radius);
   box-shadow: inset 0 0 0 1px var(--card-border-base), var(--avatar-shadow);
-  padding: 4px 10px;
+  padding: 4px 11px;
   font-size: calc(var(--font-size) - 1px);
   font-weight: var(--font-weight);
   line-height: calc(var(--line-height) - 1px);
@@ -4831,10 +4827,15 @@ li:first-child .more-item--delete {
     .tippy-content {
       display: flex;
       flex-direction: column;
+      padding: 2px 0;
       .badge-name {
+        color: oklch(var(--l3-c));
+        text-shadow: 0 0 20px oklch(var(--h4));
         font-weight: var(--font-weight-medium);
       }
       .badge-reason {
+        font-size: 12px;
+        margin-top: -2px;
         color: oklch(var(--c3));
       }
     }
@@ -4858,9 +4859,11 @@ li:first-child .more-item--delete {
       display: flex;
       flex-direction: column;
       text-align: center;
+      padding: 2px 0;
       & > small {
-        font: inherit;
-        color: oklch(var(--c2) / 80%);
+        font-size: 12px;
+        margin-top: -2px;
+        color: oklch(var(--c3));
       }
     }
   }
@@ -4869,6 +4872,7 @@ li:first-child .more-item--delete {
       display: flex;
       flex-direction: column;
       text-align: center;
+      padding: 2px 0;
       & > .name {
         font-weight: var(--font-weight-medium);
         & > .link {
@@ -4876,7 +4880,9 @@ li:first-child .more-item--delete {
         }
       }
       & > .sister {
-        color: oklch(var(--c2) / 80%);
+        font-size: 12px;
+        margin-top: -2px;
+        color: oklch(var(--c3));
       }
     }
   }
@@ -10964,6 +10970,7 @@ h2.playlisting-create-option-title {
   margin: unset !important;
   width: unset !important;
   position: relative;
+  --button-sides: 9px;
   &:after {
     content: "";
     position: absolute;
@@ -11219,11 +11226,11 @@ button.navlist-more {
 }
 .library-controls > .secondary-nav,
 .toolbar > .secondary-nav {
-  --button-verts: 6px;
+  --button-verts: 5px;
   margin: unset !important;
   padding-bottom: unset !important;
   padding-left: calc(var(--card-padding) - var(--button-sides-icon));
-  --button-sides: 9px;
+  --button-sides: 11px;
   --button-sides-icon: calc(var(--button-sides) - 2px);
   &:before,
   &:after {
@@ -18084,8 +18091,8 @@ input[type=range]::-moz-range-progress {
   }
   .dot {
     position: absolute;
-    width: 14px;
-    height: 14px;
+    width: 12px;
+    height: 12px;
     left: 3px;
     border-radius: var(--item-big-radius);
     background: var(--col);

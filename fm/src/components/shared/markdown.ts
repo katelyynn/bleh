@@ -944,7 +944,13 @@ export function external_url_prompt(url, dangerous = false) {
     });
 }
 
-export function markdown_field(func, options, value, name, cols, rows, placeholder, maxlength, mini = false, autofocus = false, required = true) {
+interface markdown_field_element extends HTMLElement {
+    editor: HTMLTextAreaElement | HTMLInputElement,
+    range: [start: number, end: number],
+    value: string
+}
+
+export function markdown_field(func, options, value, name, cols, rows, placeholder, maxlength, mini = false, autofocus = false, required = true): markdown_field_element {
     const use_md = mini ? settings.shout_markdown : settings.bio_markdown;
 
     options = {

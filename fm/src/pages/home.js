@@ -11,7 +11,7 @@ import {tl, trans} from "@/build/trans";
 import {checkup_nav, checkup_page_structure} from "@/components/page/structure";
 import {register_background, update_page} from "@/page";
 import {bleh_charts} from "@/pages/home/chart";
-import {bleh_native_settings} from '@/pages/lastfm_settings';
+import {bleh_native_settings} from '@/pages/lastfm_settings/lastfm_settings';
 import {html, render} from "lighterhtml";
 import {ff} from "@/components/settings/sku";
 import { load_profile_cache_externally } from '@/pages/profile/profile';

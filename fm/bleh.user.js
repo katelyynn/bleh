@@ -27799,7 +27799,7 @@
       document.body.appendChild(notification_host);
     }
   }
-  function status({ title, body, type }) {
+  function status2({ title, body, type }) {
     let icon2 = "icon-16-info";
     if (type == "error") {
       icon2 = "icon-16-x";
@@ -31408,7 +31408,7 @@
     if (text4.trim().length == 0) return;
     navigator.clipboard.writeText(text4).then(() => {
       log("copied", "copy", "info", { text: text4 });
-      status({
+      status2({
         id: "copy",
         title: tl2(trans.copied_to_clipboard),
         body: text4
@@ -31430,7 +31430,7 @@
         document.execCommand("insertText", false, text4);
         log("pasted", "paste", "info", { text: text4 });
         if (!silent) {
-          status({
+          status2({
             id: "paste",
             title: tl2(trans.pasted_text),
             body: text4
@@ -31444,7 +31444,7 @@
         elem.setRangeText(text4, start2, end2, "end");
         log("pasted", "paste", "info", { text: text4 });
         if (!silent) {
-          status({
+          status2({
             id: "paste",
             title: tl2(trans.pasted_text),
             body: text4
@@ -31454,7 +31454,7 @@
     } catch (e4) {
       log("failed", "paste", "info", { text, e: e4 });
       if (!silent) {
-        status({
+        status2({
           id: "paste",
           title: tl2(trans.failed),
           body: e4.message ? e4.message : e4
@@ -32334,7 +32334,7 @@
               }
             }
             if (should_notify)
-              status({
+              status2({
                 title: tl2(trans.downloaded_value, { v: tl2(trans.sponsor_details) })
               });
             set_storage("kat_sponsors", this.response);
@@ -32555,14 +32555,16 @@
       );
     }
     if (on_avatar || small) return elem;
+    let badge_name;
     tippy_esm_default(elem, {
       theme: "badge",
       placement: "bottom",
       content: html.node`
-            <div class="badge-name">${badge.name}</div>
+            <div class="badge-name colourful" ref=${(el) => badge_name = el}>${badge.name}</div>
             <div class="badge-reason">${badge.reason}</div>
         `
     });
+    style_name_from_badge(badge_name, badge);
     if (badge.type == "sponsor") elem.onclick = sponsor;
     return elem;
   }
@@ -34068,9 +34070,9 @@
     update_inbuilt_params(params);
   };
   unsafeWindow._update_inbuilt_item = function(item, value) {
-    update_inbuilt_item(item, value);
+    update_inbuilt_item2(item, value);
   };
-  function update_inbuilt_item(item, value, modify = true, element = document.body) {
+  function update_inbuilt_item2(item, value, modify = true, element = document.body) {
     console.warn("update item", item, value, "modify", modify);
     let test_if_valid = element.querySelector(`#toggle-${item}`);
     console.warn(test_if_valid, `toggle-${item}`);
@@ -34363,11 +34365,11 @@
         try {
           image.addEventListener("load", function() {
             let thief = new import_color_thief_browser.default();
-            let colour2 = thief.getColor(image);
-            let hsl3 = rgb_to_hsl(colour2[0], colour2[1], colour2[2]);
+            let colour = thief.getColor(image);
+            let hsl3 = rgb_to_hsl(colour[0], colour[1], colour[2]);
             grid_colour.style.setProperty(
               "background",
-              `rgb(${colour2})`
+              `rgb(${colour})`
             );
             let hue4 = hsl3.h;
             let sat = clamp_sat(hsl3.s / 100 * 3);
@@ -36054,8 +36056,8 @@
           try {
             image.addEventListener("load", () => {
               let thief = new import_color_thief_browser2.default();
-              let colour2 = thief.getColor(image);
-              let hsl3 = rgb_to_hsl(colour2[0], colour2[1], colour2[2]);
+              let colour = thief.getColor(image);
+              let hsl3 = rgb_to_hsl(colour[0], colour[1], colour[2]);
               let hue4 = hsl3.h;
               let sat = clamp_sat(hsl3.s / 100 * 3);
               let lit = clamp_lit(sat, hsl3.l / 100 + 0.35, true);
@@ -37681,13 +37683,18 @@
         }
         if (type == "user-status-subscriber")
           badge.textContent = tl2(trans.badges["user-status-subscriber"].name);
+        let badge_name;
         tippy_esm_default(badge, {
           theme: "badge",
           placement: "bottom",
           content: html.node`
-                    <div class="badge-name">${badge.textContent}</div>
+                    <div class="badge-name" ref=${(el) => badge_name = el}>${badge.textContent}</div>
                     <div class="badge-reason">${tl2(trans.badges[type].reason)}</div>
                 `
+        });
+        style_name_from_badge(badge_name, {
+          type,
+          inbuilt: true
         });
       });
     }
@@ -38130,7 +38137,7 @@
       delete notes[page.name];
       note.value = "";
       set_storage("bleh_profile_notes", JSON.stringify(notes));
-      status({
+      status2({
         id: "note",
         title: tl2(trans.cleared_note_for_user, { u: page.name })
       });
@@ -38141,7 +38148,7 @@
       ) || {};
       notes[page.name] = note.value;
       set_storage("bleh_profile_notes", JSON.stringify(notes));
-      status({
+      status2({
         id: "note",
         title: tl2(trans.saved_note_for_user, { u: page.name }),
         body: note.value
@@ -38250,7 +38257,7 @@
       button2.removeAttribute("disabled");
       if (!tracklist_panel) {
         if (!quiet) {
-          status({
+          status2({
             title: tl2(trans.recent_tracks),
             body: tl2(trans.value_failed_to_load).replace(
               "{v}",
@@ -38262,7 +38269,7 @@
         return;
       }
       if (!quiet) {
-        status({
+        status2({
           title: tl2(trans.recent_tracks),
           body: tl2(trans.refreshed)
         });
@@ -38497,7 +38504,7 @@
         </div>
     `);
     for (let setting2 in original_chart_settings) {
-      update_inbuilt_item(
+      update_inbuilt_item2(
         setting2,
         original_chart_settings[setting2],
         false,
@@ -40128,7 +40135,7 @@
       }
       function pixel_make_a_guess(guess) {
         if (clean_pixel_name(guess) == clean_pixel_name(name)) {
-          status({
+          status2({
             title: tl2(trans.you_guessed_correctly)
           });
           timer_end(true);
@@ -42446,7 +42453,7 @@
       if (type == "toggle") {
         let update_toggle = function() {
           if (elem.getAttribute("disabled") == "true") {
-            status({
+            status2({
               title: tl2(trans.incompatible_alert)
             });
             return;
@@ -42528,7 +42535,7 @@
           if (func) func(val);
         }, reset_range = function() {
           update_range(settings_store[id].default);
-          status({
+          status2({
             title: tl2(trans.reset_item_to_default)
           });
         };
@@ -42745,7 +42752,7 @@
       } else if (type == "checkbox") {
         let update_toggle = function() {
           if (elem.getAttribute("disabled") == "true") {
-            status({
+            status2({
               title: tl2(trans.incompatible_alert)
             });
             return;
@@ -42858,7 +42865,7 @@
           if (func) func(val);
         }, reset_radio = function() {
           update_radio(settings_store[id].default);
-          status({
+          status2({
             title: tl2(trans.reset_item_to_default)
           });
         };
@@ -43092,7 +43099,7 @@
           if (func) func(val);
         }, reset_select = function() {
           menu.value = settings_store[id].default;
-          status({
+          status2({
             title: tl2(trans.reset_item_to_default)
           });
         };
@@ -46587,9 +46594,9 @@
         recording.releases.forEach((release) => {
           const artist2 = release["artist-credit"] ? release["artist-credit"][0].name : recording["artist-credit"].name;
           if (artist2 == "Various Artists") return;
-          const status2 = release.status?.toLowerCase();
+          const status3 = release.status?.toLowerCase();
           const disambiguation = release.disambiguation?.toLowerCase();
-          if (status2 && status2.startsWith("pseudo")) return;
+          if (status3 && status3.startsWith("pseudo")) return;
           if (disambiguation) {
             if (disambiguation.includes("english")) {
               releases_to_move.push(release);
@@ -46603,9 +46610,9 @@
           releases
         });
         releases.sort((a, b) => {
-          const rank = (status2) => {
-            if (status2 == "Official") return 0;
-            if (!status2) return 1;
+          const rank = (status3) => {
+            if (status3 == "Official") return 0;
+            if (!status3) return 1;
             return 2;
           };
           return rank(a.status) - rank(b.status);
@@ -50537,7 +50544,7 @@
         }
       }
     ];
-    const status2 = () => [
+    const status3 = () => [
       {
         type: "lang",
         regex: /\[status=([^\]]+)\]/g,
@@ -50629,7 +50636,7 @@
     if (!line_breaks) extensions.push(blockquotes());
     if (allow_banners) extensions.push(banner());
     if (allow_icons) extensions.push(icons());
-    if (allow_hue) extensions.push(accent(), display_name(), status2());
+    if (allow_hue) extensions.push(accent(), display_name(), status3());
     if (allow_fonts) extensions.push(font());
     if (allow_socials) extensions.push(social_links());
     if (!allow_headers) extensions.push(header_minify());
@@ -52249,54 +52256,54 @@
     for (let type in colours) {
       const swatch_group = page.structure.main.querySelector(`#colour_${type}`);
       if (!swatch_group) return;
-      colours[type].forEach((colour2) => {
-        if (colour2.type == "default" && stored_season.id != "none" && exclusives[stored_season.id]) {
-          swatch_group.appendChild(create_swatch(type, colour2));
+      colours[type].forEach((colour) => {
+        if (colour.type == "default" && stored_season.id != "none" && exclusives[stored_season.id]) {
+          swatch_group.appendChild(create_swatch(type, colour));
           exclusives[stored_season.id].forEach((exclusive) => {
             swatch_group.appendChild(create_swatch(type, exclusive, true));
           });
           return;
         }
-        swatch_group.appendChild(create_swatch(type, colour2));
+        swatch_group.appendChild(create_swatch(type, colour));
       });
     }
-    function create_swatch(type, colour2, exclusive = false) {
-      if (colour2.requires_flag && version.feature_flags.hasOwnProperty(colour2.requires_flag)) {
-        if (!ff(colour2.requires_flag)) return html.node``;
+    function create_swatch(type, colour, exclusive = false) {
+      if (colour.requires_flag && version.feature_flags.hasOwnProperty(colour.requires_flag)) {
+        if (!ff(colour.requires_flag)) return html.node``;
       }
-      if (colour2.type == "avatar" && !auth.name) return html.node``;
+      if (colour.type == "avatar" && !auth.name) return html.node``;
       let text4;
       let label;
-      if (colour2.label) text4 = tl2(colour2.label);
+      if (colour.label) text4 = tl2(colour.label);
       if (exclusive) label = tl2(trans.seasonal.exclusive);
-      if (!colour2.type) colour2.type = "colour";
-      if (!colour2.displays && colour2.sets) colour2.displays = colour2.sets;
+      if (!colour.type) colour.type = "colour";
+      if (!colour.displays && colour.sets) colour.displays = colour.sets;
       let blob;
       let text_elem;
       const swatch = html.node`
             <button class="swatch-container" onclick=${() => {
-        if (!colour2.sets) return;
-        hue_range.value = colour2.sets.hue;
-        sat_range.value = colour2.sets.sat;
-        lit_range.value = colour2.sets.lit;
+        if (!colour.sets) return;
+        hue_range.value = colour.sets.hue;
+        sat_range.value = colour.sets.sat;
+        lit_range.value = colour.sets.lit;
       }}>
-                <div class="swatch colourful" ref=${(el) => blob = el} data-swatch-type=${colour2.type} />
+                <div class="swatch colourful" ref=${(el) => blob = el} data-swatch-type=${colour.type} />
                 <strong ref=${(el) => text_elem = el} />
             </button>
         `;
-      if (type == "custom" && !colour2.label) text4 = tl2(trans[colour2.type]);
-      if (colour2.type == "customise") {
+      if (type == "custom" && !colour.label) text4 = tl2(trans[colour.type]);
+      if (colour.type == "customise") {
         text4 = tl2(trans.edit);
-        let colour3;
-        customise_swatch(swatch, colour3);
+        let colour2;
+        customise_swatch(swatch, colour2);
       }
-      if (colour2.sets) {
-        colour2.sets.accent_type = colour2.type;
-        blob.style.setProperty("--hue-over", colour2.displays.hue);
-        blob.style.setProperty("--sat-over", colour2.displays.sat);
-        blob.style.setProperty("--lit-over", colour2.displays.lit);
+      if (colour.sets) {
+        colour.sets.accent_type = colour.type;
+        blob.style.setProperty("--hue-over", colour.displays.hue);
+        blob.style.setProperty("--sat-over", colour.displays.sat);
+        blob.style.setProperty("--lit-over", colour.displays.lit);
       }
-      if (colour2.type == "default" && stored_season.id != "none") {
+      if (colour.type == "default" && stored_season.id != "none") {
         text4 = tl2(trans.seasonal.name);
       }
       text_elem.textContent = text4;
@@ -52315,7 +52322,7 @@
       }
       return swatch;
     }
-    function customise_swatch(swatch, colour2) {
+    function customise_swatch(swatch, colour) {
       tippy_esm_default(swatch, {
         theme: "window",
         content: html.node`
@@ -52340,14 +52347,14 @@
                                 <h5>${tl2(trans.convert_from_hex)}</h5>
                             </div>
                             <div class="input-container content-form">
-                                ${colour2 = input({
+                                ${colour = input({
           type: "colour",
           value: "#999999",
           maxlength: 7,
           warn_if_empty: true
         })}
                                 <button class="btn primary icon convert" onclick=${() => {
-          const value = colour2.value;
+          const value = colour.value;
           const hsl3 = hex_to_oklch(value);
           const sat = clamp_sat(hsl3.s / 100 * 3);
           hue_range.value = hsl3.h;
@@ -52376,7 +52383,7 @@
         const colour_preview = page.state.colour_preview;
         const bg_colour = window.getComputedStyle(colour_preview).backgroundColor;
         const final = formatHex(bg_colour);
-        colour2.value = final;
+        colour.value = final;
       }
       function update_values() {
         show_preview_as_hex();
@@ -53519,7 +53526,7 @@
                             <div class="name"><span class="at">@</span>${auth.name}</div>
                             ${auth.pro ? html.node`
                                 <div class="badges">
-                                    ${auth.pro ? () => {
+                                    ${() => {
           const elem = html.node`
                                             <span class="label user-status-subscriber no-hover">
                                                 ${tl2(trans.badges["user-status-subscriber"].name)}
@@ -53529,12 +53536,12 @@
             theme: "badge",
             placement: "bottom",
             content: html.node`
-                                                <div class="badge-name">${tl2(trans.badges["user-status-subscriber"].name)}</div>
+                                                <div class="badge-name colourful user-status-subscriber">${tl2(trans.badges["user-status-subscriber"].name)}</div>
                                                 <div class="badge-reason">${tl2(trans.badges["user-status-subscriber"].reason)}</div>
                                             `
           });
           return elem;
-        } : ""}
+        }}
                                 </div>
                             ` : ""}
                             <a class="link-block-cover-link" href="${root}user/${auth.name}" />
@@ -53824,7 +53831,7 @@
               theme: "badge",
               placement: "bottom",
               content: html.node`
-                                        <div class="badge-name">${tl2(trans.badges["user-status-subscriber"].name)}</div>
+                                        <div class="badge-name colourful user-status-subscriber">${tl2(trans.badges["user-status-subscriber"].name)}</div>
                                         <div class="badge-reason">${tl2(trans.badges["user-status-subscriber"].reason)}</div>
                                     `
             });
@@ -53835,8 +53842,8 @@
                     <a class="link-block-cover-link" href="${root}user/${auth.name}" />
                 `);
         });
-        function render_status_container(status2) {
-          if (!status2) return;
+        function render_status_container(status3) {
+          if (!status3) return;
           render(
             status_container,
             html`
@@ -53844,10 +53851,10 @@
                             <div class="bleh-icon" />
                             <div
                                 class="status-bg"
-                                style="background-image: url(${status2.avatar})"
+                                style="background-image: url(${status3.avatar})"
                             />
                             <div class="status-text">
-                                ${status2.name} ${tl2(trans.by)} ${status2.artist}
+                                ${status3.name} ${tl2(trans.by)} ${status3.artist}
                             </div>
                         </div>
                     `
@@ -53855,7 +53862,7 @@
         }
         if (ff("status_in_menu") && auth.pro) {
           if (page.now.name) render_status_container(page.now);
-          live_status().then((status2) => render_status_container(status2));
+          live_status().then((status3) => render_status_container(status3));
         }
       },
       onHide(instance) {
@@ -56687,7 +56694,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
           Object.assign(combined_artists, JSON.parse(this.response));
         }
         if (send_notify)
-          status({
+          status2({
             title: tl2(trans.downloaded_value).replace(
               "{v}",
               tl2(trans.lotus[type])
@@ -59001,9 +59008,6 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     `, nav.firstElementChild);
   }
 
-  // src/pages/lastfm_settings.js
-  var import_cropperjs = __toESM(require_cropper(), 1);
-
   // src/components/radio/radio_toggle.js
   function radio({ name, value, values = {} }) {
     let buttons = [];
@@ -59060,58 +59064,10 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     return values;
   }
 
-  // src/pages/lastfm_settings.js
+  // src/pages/lastfm_settings/profile.ts
+  var import_cropperjs = __toESM(require_cropper(), 1);
   var cropper;
-  function bleh_native_settings() {
-    const no_data = page.structure.container.querySelector(":scope > .no-data-message");
-    if (no_data) page.structure.main.appendChild(no_data);
-    if (page.subpage == "overview") {
-      patch_settings_profile_tab();
-    } else if (page.subpage == "privacy") {
-      patch_settings_privacy_tab();
-    } else if (page.subpage == "subscription_overview") {
-      let panel = page.structure.container.querySelector(".row + div");
-      let subscription = panel.querySelector("#current-subscription");
-      let edits = panel.querySelector("#automatic-edits");
-      let merch_h = panel.querySelector(":scope > h2");
-      let merch = panel.querySelector("#mechandise-discount");
-      let history = panel.querySelector("#pro-history");
-      merch.insertBefore(merch_h, merch.firstElementChild);
-      page.structure.main.appendChild(subscription);
-      page.structure.main.appendChild(edits);
-      page.structure.main.appendChild(merch);
-      page.structure.main.appendChild(history);
-      let button2 = subscription.querySelector(".btn-primary");
-      if (button2)
-        button2.classList.add("subscription-button", "icon", "primary");
-      let more_link_wrap = edits.querySelector(".more-link");
-      if (more_link_wrap) {
-        more_link_wrap.classList = "";
-        let edit_buttons = more_link_wrap.querySelectorAll("a");
-        edit_buttons.forEach((edit_button, index3) => {
-          edit_button.classList.add(
-            "btn",
-            "edit-lead-button",
-            "icon",
-            "primary"
-          );
-          if (index3 == 0) edit_button.classList.add("edit-album");
-          else edit_button.classList.add("edit-track");
-        });
-      }
-    } else if (page.subpage.startsWith("subscription_automatic-edits")) {
-      bleh_auto_edits();
-    } else if (page.subpage == "account_overview") {
-      bleh_accounts();
-    } else if (page.subpage == "website") {
-      bleh_website();
-    } else if (page.subpage == "change-username_overview") {
-      bleh_name_change();
-    } else if (page.subpage == "applications_overview") {
-      bleh_applications();
-    }
-  }
-  function patch_settings_profile_tab() {
+  function lastfm_settings_profile() {
     let update_picture = page.structure.main.querySelector("#update-picture");
     if (!update_picture) return;
     let token = document.body.querySelector('[name="csrfmiddlewaretoken"]').getAttribute("value");
@@ -59831,6 +59787,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
             parseFloat(match3[3])
           );
         }
+        let colour;
         let accent_preview;
         dialog({
           id: "profile_accent",
@@ -60204,6 +60161,57 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       };
     }
   }
+
+  // src/pages/lastfm_settings/lastfm_settings.ts
+  function bleh_native_settings() {
+    const no_data = page.structure.container.querySelector(":scope > .no-data-message");
+    if (no_data) page.structure.main.appendChild(no_data);
+    if (page.subpage == "overview") {
+      lastfm_settings_profile();
+    } else if (page.subpage == "privacy") {
+      patch_settings_privacy_tab();
+    } else if (page.subpage == "subscription_overview") {
+      let panel = page.structure.container.querySelector(".row + div");
+      let subscription = panel.querySelector("#current-subscription");
+      let edits = panel.querySelector("#automatic-edits");
+      let merch_h = panel.querySelector(":scope > h2");
+      let merch = panel.querySelector("#mechandise-discount");
+      let history = panel.querySelector("#pro-history");
+      merch.insertBefore(merch_h, merch.firstElementChild);
+      page.structure.main.appendChild(subscription);
+      page.structure.main.appendChild(edits);
+      page.structure.main.appendChild(merch);
+      page.structure.main.appendChild(history);
+      let button2 = subscription.querySelector(".btn-primary");
+      if (button2)
+        button2.classList.add("subscription-button", "icon", "primary");
+      let more_link_wrap = edits.querySelector(".more-link");
+      if (more_link_wrap) {
+        more_link_wrap.classList = "";
+        let edit_buttons = more_link_wrap.querySelectorAll("a");
+        edit_buttons.forEach((edit_button, index3) => {
+          edit_button.classList.add(
+            "btn",
+            "edit-lead-button",
+            "icon",
+            "primary"
+          );
+          if (index3 == 0) edit_button.classList.add("edit-album");
+          else edit_button.classList.add("edit-track");
+        });
+      }
+    } else if (page.subpage.startsWith("subscription_automatic-edits")) {
+      bleh_auto_edits();
+    } else if (page.subpage == "account_overview") {
+      bleh_accounts();
+    } else if (page.subpage == "website") {
+      bleh_website();
+    } else if (page.subpage == "change-username_overview") {
+      bleh_name_change();
+    } else if (page.subpage == "applications_overview") {
+      bleh_applications();
+    }
+  }
   function patch_settings_privacy_tab() {
     let privacy_panel = document.getElementById("privacy");
     let token = document.body.querySelector('[name="csrfmiddlewaretoken"]').getAttribute("value");
@@ -60493,7 +60501,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         </form>
     `;
     for (let setting2 in original_privacy_settings) {
-      update_inbuilt_item(setting2, original_privacy_settings[setting2], false);
+      update_inbuilt_item2(setting2, original_privacy_settings[setting2], false);
     }
     let selects = document.body.querySelectorAll("select");
     selects.forEach((select2) => {
@@ -60752,7 +60760,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         `
     );
     for (let setting2 in original_settings) {
-      update_inbuilt_item(setting2, original_settings[setting2], false);
+      update_inbuilt_item2(setting2, original_settings[setting2], false);
     }
   }
   function bleh_name_change() {
@@ -60943,7 +60951,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         });
         const name = details.querySelector(".api-session-app-name");
         const desc = details.querySelector(".api-session-app-description");
-        const status2 = details.querySelector(".api-session-status");
+        const status3 = details.querySelector(".api-session-status");
         const image = details.querySelector(".api-session-app-image");
         image.classList = "";
         const default_image = image.src.endsWith(
@@ -60962,9 +60970,9 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                         <div class="session-details">${name} ${desc}</div>
                         ${form}
                     </div>
-                    ${status2 ? html.node`
+                    ${status3 ? html.node`
                 <div class="session-footer">
-                    ${status2}
+                    ${status3}
                 </div>
                 ` : ""}
                 `
@@ -62913,7 +62921,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                 <h2>Status alerts</h2>
                 <button
                     class="btn continue"
-                    onclick=${() => status({
+                    onclick=${() => status2({
         title: "test alert",
         body: "haiaiai nothing to worry about >_<"
       })}
@@ -62958,8 +62966,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
             <section class="flexy">
                 <h2>Colour conversions</h2>
                 <div class="colour-list">
-                        ${colours.map((colour2) => {
-        const hsl3 = rgb_to_oklch(colour2[0], colour2[1], colour2[2]);
+                        ${colours.map((colour) => {
+        const hsl3 = rgb_to_oklch(colour[0], colour[1], colour[2]);
         hsl3.s = clamp_sat(hsl3.s / 100 * 3);
         const hue4 = {
           h: hsl3.h,
@@ -62968,8 +62976,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         };
         return html.node`
                                 <div class="colour-list-item">
-                                    <div class="colour-tile colourful" style="background: rgb(${colour2[0]}, ${colour2[1]}, ${colour2[2]})" />
-                                    <div class="colour-text">rgb(${colour2[0]}, ${colour2[1]}, ${colour2[2]})</div>
+                                    <div class="colour-tile colourful" style="background: rgb(${colour[0]}, ${colour[1]}, ${colour[2]})" />
+                                    <div class="colour-text">rgb(${colour[0]}, ${colour[1]}, ${colour[2]})</div>
                                     <div class="bleh-icon" data-type="arrow-right" style="--icon: var(--mask)" />
                                     <div class="colour-tile colourful" style="--hue-over: ${hue4.h}; --sat-over: ${hue4.s}; --lit-over: ${hue4.l}" />
                                     <div class="colour-text">hue ${hue4.h}, sat ${hue4.s}, lit ${hue4.l}</div>
@@ -74097,8 +74105,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         try {
           avatar2.addEventListener("load", () => {
             let thief = new import_color_thief_browser3.default();
-            let colour2 = thief.getColor(avatar2);
-            let hsl3 = rgb_to_oklch(colour2[0], colour2[1], colour2[2]);
+            let colour = thief.getColor(avatar2);
+            let hsl3 = rgb_to_oklch(colour[0], colour[1], colour[2]);
             auth.sets.hue = hsl3.h;
             auth.sets.sat = clamp_sat(hsl3.s / 100 * 3);
             auth.sets.lit = clamp_lit(auth.sets.sat, hsl3.l / 100 + 0.35, true);
