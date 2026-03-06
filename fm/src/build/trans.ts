@@ -10351,7 +10351,7 @@ interface translations {
     [key: string]: translation
 }
 
-export interface translation {
+export type translation = {
     en?: string,
     de?: string,
     es?: string,
@@ -10361,8 +10361,9 @@ export interface translation {
     pt?: string,
     sv?: string,
     ru?: string,
-    zh?: string,
-    [key: string]: translation | string | undefined
+    zh?: string
+} & {
+    [key: string]: translation | undefined
 }
 
 export function tl(key: translation, replacements = {}) {

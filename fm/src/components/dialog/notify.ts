@@ -35,7 +35,7 @@ export function deliver_notif(content: string, persist=false, has_icon=false, ap
 }
 
 type notify = {
-    id: string,
+    id?: string,
     title: string,
     body?: string | HTMLElement,
     icon?: string,
