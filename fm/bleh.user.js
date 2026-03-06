@@ -59576,7 +59576,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         placeholder: auth.name,
         func: (val) => {
           const match3 = about.value().match(username_regex);
-          const new_name = `[name=${val}]`;
+          const new_name = val.trim() ? `[name=${val}]` : "";
           if (match3) {
             about.value(about.value().replace(username_regex, new_name));
           } else {
@@ -59660,7 +59660,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         value: pre_existing,
         func: (val) => {
           const match4 = about.value().match(banner_regex);
-          const new_banner = `[banner=${val}]`;
+          const new_banner = val.trim() ? `[banner=${val}]` : "";
           if (match4) {
             about.value(about.value().replace(banner_regex, new_banner));
           } else {
@@ -59708,7 +59708,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         value: pre_existing,
         func: (val) => {
           const match4 = about.value().match(status_regex);
-          const new_status = `[status=${val}]`;
+          const new_status = val.trim() ? `[status=${val}]` : "";
           if (match4) {
             about.value(about.value().replace(status_regex, new_status));
           } else {

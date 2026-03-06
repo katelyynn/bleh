@@ -599,7 +599,7 @@ function patch_settings_profile_panel(token, update_picture) {
                                 func: (val) => {
                                     const match = about.value().match(username_regex);
 
-                                    const new_name = `[name=${val}]`;
+                                    const new_name = val.trim() ? `[name=${val}]` : '';
 
                                     if (match) {
                                         about.value(about.value().replace(username_regex, new_name));
@@ -689,7 +689,7 @@ function patch_settings_profile_panel(token, update_picture) {
                                     func: (val) => {
                                         const match = about.value().match(banner_regex);
 
-                                        const new_banner = `[banner=${val}]`;
+                                        const new_banner = val.trim() ? `[banner=${val}]` : '';
 
                                         if (match) {
                                             about.value(about.value().replace(banner_regex, new_banner));
@@ -745,7 +745,7 @@ function patch_settings_profile_panel(token, update_picture) {
                                 func: (val) => {
                                     const match = about.value().match(status_regex);
 
-                                    const new_status = `[status=${val}]`;
+                                    const new_status = val.trim() ? `[status=${val}]` : '';
 
                                     if (match) {
                                         about.value(about.value().replace(status_regex, new_status));
