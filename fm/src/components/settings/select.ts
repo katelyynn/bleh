@@ -70,13 +70,14 @@ export function select(values, initial = '', name = '', func = null, blend = fal
 
     set_select(initial, false);
 
-    container.set = (val) => {
-        set_select(val);
-    };
-
-    container.value = () => {
-        return select.value;
-    };
+    Object.defineProperty(container, 'value', {
+        get() {
+            return select.value;
+        },
+        set(val: string) {
+            set_select(val);
+        }
+    });
 
     return container;
 

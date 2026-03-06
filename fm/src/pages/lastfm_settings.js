@@ -23,7 +23,7 @@ import Cropper from 'cropperjs';
 import { save_setting, setting } from '@/components/settings/settings';
 import { settings } from '@/build/config';
 import { input } from '@/components/settings/input';
-import { clamp_sat, hex_to_oklch } from '@/build/tools';
+import { clamp_sat, clamp_lit, hex_to_oklch } from '@/build/tools';
 import { log } from '@/build/log';
 import { toggle } from '@/components/settings/toggle';
 import { status } from '@/components/dialog/status';
@@ -598,21 +598,21 @@ function patch_settings_profile_panel(token, update_picture) {
                                     value: cache.username,
                                     placeholder: auth.name,
                                     func: (val) => {
-                                        const match = about.value().match(username_regex);
+                                        const match = about.value.match(username_regex);
 
                                         let new_name = val.trim() ? `[name=${val}]` : '';
 
                                         if (!new_name.match(username_regex)) new_name = '';
 
                                         if (match) {
-                                            about.value(about.value().replace(username_regex, new_name));
+                                            about.value = about.value.replace(username_regex, new_name);
                                         } else {
-                                            const trimmed = about.value().trimEnd();
+                                            const trimmed = about.value.trimEnd();
 
                                             if (trimmed.length == 0) {
-                                                about.value(new_name);
+                                                about.value = new_name;
                                             } else {
-                                                about.value(trimmed + '\n\n' + new_name);
+                                                about.value = trimmed + '\n\n' + new_name;
                                             }
                                         }
                                     },
@@ -669,7 +669,7 @@ function patch_settings_profile_panel(token, update_picture) {
                 </div>
                 ${() => {
                     const banner_regex = /\[banner=([^\]]+)\]/;
-                    const match = about.value().match(banner_regex);
+                    const match = about.value.match(banner_regex);
 
                     const pre_existing = match ? match[1] : '';
                     let preview;
@@ -684,21 +684,21 @@ function patch_settings_profile_panel(token, update_picture) {
                                 ${input({
                                     value: pre_existing,
                                     func: (val) => {
-                                        const match = about.value().match(banner_regex);
+                                        const match = about.value.match(banner_regex);
 
                                         let new_banner = val.trim() ? `[banner=${val}]` : '';
 
                                         if (!new_banner.match(banner_regex)) new_banner = '';
 
                                         if (match) {
-                                            about.value(about.value().replace(banner_regex, new_banner));
+                                            about.value = about.value.replace(banner_regex, new_banner);
                                         } else {
-                                            const trimmed = about.value().trimEnd();
+                                            const trimmed = about.value.trimEnd();
 
                                             if (trimmed.length == 0) {
-                                                about.value(new_banner);
+                                                about.value = new_banner;
                                             } else {
-                                                about.value(trimmed + '\n\n' + new_banner);
+                                                about.value = trimmed + '\n\n' + new_banner;
                                             }
                                         }
 
@@ -743,7 +743,7 @@ function patch_settings_profile_panel(token, update_picture) {
                 </div>
                 ${() => {
                     const status_regex = /\[status=([^\]]+)\]/;
-                    const match = about.value().match(status_regex);
+                    const match = about.value.match(status_regex);
 
                     const pre_existing = match ? match[1] : '';
 
@@ -756,21 +756,21 @@ function patch_settings_profile_panel(token, update_picture) {
                             ${input({
                                 value: pre_existing,
                                 func: (val) => {
-                                    const match = about.value().match(status_regex);
+                                    const match = about.value.match(status_regex);
 
                                     let new_status = val.trim() ? `[status=${val}]` : '';
 
                                     if (!new_status.match(status_regex)) new_status = '';
 
                                     if (match) {
-                                        about.value(about.value().replace(status_regex, new_status));
+                                        about.value = about.value.replace(status_regex, new_status);
                                     } else {
-                                        const trimmed = about.value().trimEnd();
+                                        const trimmed = about.value.trimEnd();
 
                                         if (trimmed.length == 0) {
-                                            about.value(new_status);
+                                            about.value = new_status;
                                         } else {
-                                            about.value(trimmed + '\n\n' + new_status);
+                                            about.value = trimmed + '\n\n' + new_status;
                                         }
                                     }
                                 },
@@ -818,7 +818,7 @@ function patch_settings_profile_panel(token, update_picture) {
         return new TextEncoder().encode(normalised).length;
     }
 
-    function update_about(value = about.value()) {
+    function update_about(value = about.value) {
         log('re-rendering', 'about', 'log');
 
         const length = len(value);
@@ -839,7 +839,7 @@ function patch_settings_profile_panel(token, update_picture) {
 
         console.info(
             'cache update',
-            about.value(),
+            about.value,
             cache.hue,
             cache.sat,
             cache.lit
@@ -867,7 +867,7 @@ function patch_settings_profile_panel(token, update_picture) {
                             let sat_range;
                             let lit_range;
 
-                            const match = about.value().match(accent_regex);
+                            const match = about.value.match(accent_regex);
 
                             if (match) {
                                 save_setting(
@@ -914,16 +914,14 @@ function patch_settings_profile_panel(token, update_picture) {
                                                     warn_if_empty: true
                                                 }))}
                                                 <button class="btn primary icon convert" onclick=${() => {
-                                                    const value = colour.value();
+                                                    const value = colour.value;
                                                     const hsl = hex_to_oklch(value);
 
-                                                    hue_range.set(hsl.h);
-                                                    sat_range.set(
-                                                        clamp_sat((hsl.s / 100) * 3)
-                                                    );
-                                                    lit_range.set(
-                                                        hsl.l / 100 + 0.35
-                                                    );
+                                                    const sat = clamp_sat((hsl.s / 100) * 3);
+
+                                                    hue_range.value = hsl.h;
+                                                    sat_range.value = sat;
+                                                    lit_range.value = clamp_lit(sat, hsl.l / 100 + 0.35);
                                                 }}>${tl(trans.convert)}</button>
                                             </div>
                                         </div>
@@ -951,9 +949,9 @@ function patch_settings_profile_panel(token, update_picture) {
                                                     theme: 'context-menu',
                                                     content: html.node`
                                                         <button class="dropdown-menu-clickable-item" data-type="profile" onclick=${() => {
-                                                            hue_range.set(settings.hue);
-                                                            sat_range.set(settings.sat);
-                                                            lit_range.set(settings.lit);
+                                                            hue_range.value = settings.hue;
+                                                            sat_range.value = settings.sat;
+                                                            lit_range.value = settings.lit;
                                                         }}>${tl(trans.apply_global_accent)}</button>
                                                         <button class="dropdown-menu-clickable-item" data-type="global" onclick=${() => {
                                                             const warn = notify({
@@ -990,17 +988,14 @@ function patch_settings_profile_panel(token, update_picture) {
                                                 const new_accent = `[accent=${settings.profile_hue},${settings.profile_sat},${settings.profile_lit}]`;
 
                                                 if (match) {
-                                                    about.value(about.value().replace(
-                                                        accent_regex,
-                                                        new_accent
-                                                    ));
+                                                    about.value = about.value.replace(accent_regex, new_accent);
                                                 } else {
-                                                    const trimmed = about.value().trimEnd();
+                                                    const trimmed = about.value.trimEnd();
 
                                                     if (trimmed.length == 0) {
-                                                        about.value(new_accent);
+                                                        about.value = new_accent;
                                                     } else {
-                                                        about.value(trimmed + '\n\n' + new_accent);
+                                                        about.value = trimmed + '\n\n' + new_accent;
                                                     }
                                                 }
 
@@ -1047,7 +1042,7 @@ function patch_settings_profile_panel(token, update_picture) {
             render(font_setting, html`
                 <span ref=${el => font_name_preview = el}>${{ html: tl(trans.styled_with_font, { f: `<span class="font-name-preview-mini" data-font=${font_name}>${font_name && font_name != 'none' ? page.state.fonts[font_name] : tl(trans.none)}</span>` }) }}</span>
                 <a class="card-tip-link" onclick=${() => {
-                    const match = about.value().match(font_regex);
+                    const match = about.value.match(font_regex);
 
                     font_name = cache.font;
                     font_style = cache.font_style;
@@ -1121,17 +1116,14 @@ function patch_settings_profile_panel(token, update_picture) {
                                     const new_font = `[font=${font_name}${font_style != 'solid' ? `,${font_style}` : ''}]`;
 
                                     if (match) {
-                                        about.value(about.value().replace(
-                                            font_regex,
-                                            new_font
-                                        ));
+                                        about.value = about.value.replace(font_regex, new_font);
                                     } else {
-                                        const trimmed = about.value().trimEnd();
+                                        const trimmed = about.value.trimEnd();
 
                                         if (trimmed.length == 0) {
-                                            about.value(new_font);
+                                            about.value = new_font;
                                         } else {
-                                            about.value(trimmed + '\n\n' + new_font);
+                                            about.value = trimmed + '\n\n' + new_font;
                                         }
                                     }
 

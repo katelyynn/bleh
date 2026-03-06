@@ -59,7 +59,7 @@ export function plot({ host, sidebar } = {}) {
                                 ${tl(trans.cancel)}
                             </button>
                             <div class="fill"></div>
-                            <button class="btn primary icon" data-type="add" onclick=${() => complete_add(input_box.value())}>
+                            <button class="btn primary icon" data-type="add" onclick=${() => complete_add(input_box.value)}>
                                 ${tl(trans.add)}
                             </button>
                         </div>

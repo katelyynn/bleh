@@ -448,9 +448,7 @@ export function calendar({
                         const parsed = validate_text_date(value);
 
                         if (!parsed) {
-                            manual_date.value(
-                                `${state.year}-${pad2(state.month)}-${pad2(state.day)}`
-                            );
+                            manual_date.value = `${state.year}-${pad2(state.month)}-${pad2(state.day)}`;
                             return;
                         }
 

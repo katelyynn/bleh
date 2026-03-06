@@ -36,6 +36,12 @@ type input = {
     required?: boolean
 }
 
+interface input_element extends HTMLElement {
+    editor: HTMLTextAreaElement | HTMLInputElement,
+    range: [start: number, end: number],
+    value: string
+}
+
 export function input({
     type = 'text',
     value,
@@ -59,7 +65,7 @@ export function input({
     cols,
     rows,
     required = false
-}: input) {
+}: input): input_element {
     if (type == 'date') {
         return calendar({
             value,
@@ -138,9 +144,11 @@ export function input({
         if (func_mouseup) func_mouseup(input_box, input_box.value);
     });
 
-    container.editor = () => {
-        return input_box;
-    };
+    Object.defineProperty(container, 'editor', {
+        get() {
+            return input_box;
+        }
+    });
 
     container.submit = () => {
         if (func) func(input_box.value);
@@ -152,13 +160,15 @@ export function input({
         }, 5);
     };
 
-    container.value = (val = null) => {
-        if (val == null) return input_box.value;
-
-        input_box.value = val;
-        update_input();
-        return val;
-    };
+    Object.defineProperty(container, 'value', {
+        get() {
+            return input_box.value;
+        },
+        set(val: string | number) {
+            input_box.value = val;
+            update_input();
+        }
+    })
 
     container.disabled = (state = null) => {
         if (state === null) return input_box.getAttribute('disabled') || false;
@@ -169,9 +179,11 @@ export function input({
         return state;
     };
 
-    container.range = (start, end) => {
-        input_box.setSelectionRange(start, end);
-    };
+    Object.defineProperty(container, 'range', {
+        set([start, end]: [start: number, end: number]) {
+            input_box.setSelectionRange(start, end);
+        }
+    });
 
     return container;
 

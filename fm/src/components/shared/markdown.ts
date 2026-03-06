@@ -972,7 +972,7 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
         placeholder,
         func: () => {
             on_selection(null, null, false);
-            if (func) func(textarea.value());
+            if (func) func(textarea.value);
             render_overlay();
         },
         func_mouseup: () => {
@@ -986,7 +986,7 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
     });
     let overlay;
 
-    const md_editor = textarea.editor();
+    const md_editor = textarea.editor;
 
     let is_bold_selected;
 
@@ -1099,8 +1099,8 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
                         });
 
                         function submit_link() {
-                            let alt_text = alt.value();
-                            let link_text = link.value();
+                            let alt_text = alt.value;
+                            let link_text = link.value;
 
                             if (!link_text) return;
 
@@ -1188,8 +1188,8 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
                         });
 
                         function submit_link() {
-                            let alt_text = alt.value();
-                            let link_text = link.value();
+                            let alt_text = alt.value;
+                            let link_text = link.value;
 
                             if (!link_text) return;
 
@@ -1264,18 +1264,18 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
                                     const sel_start = md_editor.selectionStart;
                                     const sel_end = md_editor.selectionEnd;
 
-                                    const val = textarea.value();
+                                    const val = textarea.value;
 
                                     if (item.func) {
                                         item.func().then(replacement => {
                                             if (!replacement) return;
 
-                                            textarea.value(val.slice(0, sel_start) + replacement + val.slice(sel_end));
+                                            textarea.value = val.slice(0, sel_start) + replacement + val.slice(sel_end);
 
                                             textarea.focus();
-                                            textarea.range(sel_start, sel_start + replacement.length);
+                                            textarea.range = [sel_start, sel_start + replacement.length];
 
-                                            if (func) func(textarea.value());
+                                            if (func) func(textarea.value);
 
                                             render_overlay();
                                         });
@@ -1301,12 +1301,12 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
                                             replacement = `${item.start}${selected}${item.end}`;
                                         }
 
-                                        textarea.value(val.slice(0, sel_start) + replacement + val.slice(sel_end));
+                                        textarea.value = val.slice(0, sel_start) + replacement + val.slice(sel_end);
 
                                         textarea.focus();
-                                        textarea.range(sel_start, sel_start + replacement.length);
+                                        textarea.range = [sel_start, sel_start + replacement.length];
 
-                                        if (func) func(textarea.value());
+                                        if (func) func(textarea.value);
 
                                         render_overlay();
 
@@ -1370,16 +1370,19 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
         overlay.scrollTop = md_editor.scrollTop;
     });
 
-    field.value = (val) => {
-        if (!val) return textarea.value();
+    Object.defineProperty(field, 'value', {
+        get() {
+            return textarea.value;
+        },
+        set(val: string) {
+            textarea.value = val;
+            if (func) func(val);
 
-        textarea.value(val);
-        if (func) func(val);
+            render_overlay(val);
+        }
+    });
 
-        render_overlay(val);
-    }
-
-    function render_overlay(val = textarea.value()) {
+    function render_overlay(val = textarea.value) {
         val = val.replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
         if (use_md) {

@@ -262,7 +262,7 @@ export function patch_shouts() {
         let preview;
         render(help_text, html`
             ${use_md ? html.node`
-                <div class="tip preview" onclick=${() => markdown_preview(textarea.value())} ref=${(el) => (preview = el)} disabled="true">
+                <div class="tip preview" onclick=${() => markdown_preview(textarea.value)} ref=${(el) => (preview = el)} disabled="true">
                     ${tl(trans.preview)}
                 </div>
             ` : ''}

@@ -308,9 +308,11 @@ export function setting({
                 content: tl(trans.reset)
             });
 
-            elem.set = (val) => {
-                update_range(val);
-            };
+            Object.defineProperty(elem, 'value', {
+                set(val: number) {
+                    update_range(val);
+                }
+            });
 
             const max_range = max - min;
 
@@ -1071,7 +1073,7 @@ export function setting({
             }
 
             function reset_select() {
-                menu.set(settings_store[id].default);
+                menu.value = settings_store[id].default;
                 status({
                     title: tl(trans.reset_item_to_default)
                 });

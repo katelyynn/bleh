@@ -85,13 +85,13 @@ export function submit_scrobble({
                         ${() => {
                             const btn = html.node`
                                 <button class="btn chibi icon subtle" data-type="switch" onclick=${() => {
-                                    const track_val = track.value();
-                                    const album_val = album.value();
+                                    const track_val = track.value;
+                                    const album_val = album.value;
 
                                     if (!track_val && !album_val) return;
 
-                                    track.value(album_val);
-                                    album.value(track_val);
+                                    track.value = album_val;
+                                    album.value = track_val;
                                 }}>
                                     ${tl(trans.switch)}
                                 </button>
@@ -125,13 +125,13 @@ export function submit_scrobble({
                         ${() => {
                             const btn = html.node`
                                 <button class="btn chibi icon subtle" data-type="switch" onclick=${() => {
-                                    const artist_val = artist.value();
-                                    const album_artist_val = album_artist.value();
+                                    const artist_val = artist.value;
+                                    const album_artist_val = album_artist.value;
 
                                     if (!artist_val && !album_artist_val) return;
 
-                                    artist.value(album_artist_val);
-                                    album_artist.value(artist_val);
+                                    artist.value = album_artist_val;
+                                    album_artist.value = artist_val;
                                 }}>
                                     ${tl(trans.switch)}
                                 </button>
@@ -172,7 +172,7 @@ export function submit_scrobble({
                 <div class="button-group extra">
                     ${setting({ id: 'auto_close_scrobble_modal', standalone: true })}
                     <button class="btn primary icon" data-type="add" ref=${(el) => (create_scrobble = el)} onclick=${async () => {
-                        if (track.value() == '' || artist.value() == '') {
+                        if (track.value == '' || artist.value == '') {
                             notify({
                                 id: 'submit_scrobble',
                                 title: tl(trans.new_scrobble),
@@ -190,19 +190,19 @@ export function submit_scrobble({
                         date.disabled(true);
                         create_scrobble.disabled = true;
 
-                        if (album.value() != '' && album_artist.value() == '')
-                            album_artist.value(artist.value());
+                        if (album.value != '' && album_artist.value == '')
+                            album_artist.value = artist.value;
 
                         let params = {
                             sk: localStorage.getItem('bleh_auth'),
-                            artist: artist.value(),
-                            track: track.value(),
-                            timestamp: Math.floor(date.value() / 1000)
+                            artist: artist.value,
+                            track: track.value,
+                            timestamp: Math.floor(date.value / 1000)
                         };
 
-                        if (album.value() != '') params.album = album.value();
-                        if (album_artist.value() != '')
-                            params.albumArtist = album_artist.value();
+                        if (album.value != '') params.album = album.value;
+                        if (album_artist.value != '')
+                            params.albumArtist = album_artist.value;
 
                         const res = await fetch(
                             'https://jufufu.katelyn.moe/api/lastfm',

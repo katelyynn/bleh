@@ -2117,7 +2117,7 @@ function report_incorrect() {
                 <div class="fill" />
                 <button class="btn primary continue" onclick=${() => {
                     open(
-                        `https://github.com/katelyynn/oracle/issues/new?template=${template}&title=${sanitise(title, ' ')}&link=${encodeURIComponent(link)}&sources=${sanitise(sources.value(), ' ')}`
+                        `https://github.com/katelyynn/oracle/issues/new?template=${template}&title=${sanitise(title, ' ')}&link=${encodeURIComponent(link)}&sources=${sanitise(sources.value, ' ')}`
                     );
                 }}>
                     ${tl(trans.suggest)}

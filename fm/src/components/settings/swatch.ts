@@ -219,9 +219,9 @@ export function display_colour_presets() {
             <button class="swatch-container" onclick=${() => {
                 if (!colour.sets) return;
 
-                hue_range.set(colour.sets.hue);
-                sat_range.set(colour.sets.sat);
-                lit_range.set(colour.sets.lit);
+                hue_range.value = colour.sets.hue;
+                sat_range.value = colour.sets.sat;
+                lit_range.value = colour.sets.lit;
             }}>
                 <div class="swatch colourful" ref=${(el) => (blob = el)} data-swatch-type=${colour.type} />
                 <strong ref=${(el) => (text_elem = el)} />
@@ -301,14 +301,14 @@ export function display_colour_presets() {
                                     warn_if_empty: true
                                 })}
                                 <button class="btn primary icon convert" onclick=${() => {
-                                    const value = colour.value();
+                                    const value = colour.value;
                                     const hsl = hex_to_oklch(value);
 
                                     const sat = clamp_sat((hsl.s / 100) * 3);
 
-                                    hue_range.set(hsl.h);
-                                    sat_range.set(sat);
-                                    lit_range.set(clamp_lit(sat, hsl.l / 100 + 0.35));
+                                    hue_range.value = hsl.h;
+                                    sat_range.value = sat;
+                                    lit_range.value = clamp_lit(sat, hsl.l / 100 + 0.35);
                                 }}>${tl(trans.convert)}</button>
                             </div>
                         </div>
@@ -336,7 +336,7 @@ export function display_colour_presets() {
             const bg_colour = window.getComputedStyle(colour_preview).backgroundColor;
 
             const final = formatHex(bg_colour);
-            colour.value(final);
+            colour.value = final;
         }
 
         function update_values() {
