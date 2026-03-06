@@ -21320,7 +21320,7 @@ input[type=range]::-moz-range-progress {
   gap: 10px;
   .status-alert {
     padding: 10px 16px;
-    background: oklch(var(--b8), var(--solarium-opacity, 80%));
+    background: oklch(var(--b8) / var(--solarium-opacity, 80%));
     border: 1px solid var(--card-border-base);
     box-shadow: var(--menu-shadow);
     backdrop-filter: var(--solarium);
