@@ -32902,6 +32902,7 @@
   }
   function style_name_from_badge(name, badge) {
     if (!badge) return;
+    name.classList.add("colourful");
     if (badge.hue > -1 && badge.sat > -1 && badge.lit > -1) {
       name.style.setProperty("--hue-over", badge.hue);
       name.style.setProperty("--sat-over", badge.sat);
