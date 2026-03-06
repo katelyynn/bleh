@@ -1198,7 +1198,7 @@ function reset_text(id, input, submit, option, reset_btn, avatar) {
 }
 
 export function save_setting(id: string, value: string | number | boolean) {
-    const store = settings_store[setting] || {};
+    const store = settings_store[id] || {};
     const type = store.type || 'toggle';
 
     settings[id] = value;
@@ -1208,7 +1208,7 @@ export function save_setting(id: string, value: string | number | boolean) {
     }
 
     if (id == 'theme') {
-        if (value == 'light' || value == 'ink' || value == 'glass') {
+        if (['light', 'ink'].includes(value as string)) {
             settings.theme_type = 'light';
         } else {
             settings.theme_type = 'dark';

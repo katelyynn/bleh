@@ -10,7 +10,6 @@ import {auth, page, root} from "@/build/page";
 import {clean_number} from "@/build/tools";
 import {tl, trans} from "@/build/trans";
 import {checkup_page_structure, convert_to_toolbar} from "@/components/page/structure";
-import {refresh_all} from "../config";
 import {register_background, update_page} from "../page";
 import {bleh_home} from '@/pages/home';
 import {html, render} from "lighterhtml";
@@ -314,8 +313,6 @@ export function bleh_events() {
             `;
 
             render(page.structure.main, user_panel);
-
-            refresh_all();
 
 
             // users

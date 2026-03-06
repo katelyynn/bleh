@@ -12,7 +12,6 @@ import { desanitise, sanitise, sanitise_text, year_from_date } from '@/build/too
 import { tl, trans } from '@/build/trans';
 import { prep_chart_colours } from '@/components/music/chart';
 import { correct_artist, correct_item_by_artist } from '@/components/music/lotus';
-import { refresh_all } from '@/config';
 import { ff } from '@/components/settings/sku';
 import { input } from '@/components/settings/input';
 import { setting } from '@/components/settings/settings';
@@ -113,8 +112,6 @@ export function bleh_user_library() {
                 ${setting({ id: 'chart_bar_axis', standalone: true, func: bleh_glacier_date_graph_generate })}
             </div>
         `);
-
-        refresh_all(page.structure.glacier.date_panel);
     }
 
     //let picker_content = date_button_panel.querySelector('.date-range-picker-content');

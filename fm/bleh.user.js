@@ -33915,6 +33915,217 @@
     }
   }
 
+  // src/config.js
+  function load_settings(skip2 = false) {
+    if (!skip2) {
+      for (let setting2 in settings_store) {
+        if (settings[setting2] == null)
+          settings[setting2] = structuredClone(settings_store[setting2].default);
+      }
+      if (!settings.version) settings.version = 1e7;
+    }
+    if (!settings.theme_type) {
+      if (settings.theme == "light" || settings.theme == "ink")
+        settings.theme_type = "light";
+      else settings.theme_type = "dark";
+    }
+    if (settings.version < 2025.0929) {
+      if (settings.seasonal_particles == true)
+        settings.seasonal_particles = "all";
+      else if (settings.seasonal_particles == false)
+        settings.seasonal_particles = "none";
+      if (settings.seasonal_particles_reduced == true) {
+        settings.seasonal_particles = "less";
+        delete settings.seasonal_particles_reduced;
+      } else if (settings.seasonal_particles_reduced == false) {
+        delete settings.seasonal_particles_reduced;
+      }
+      if (settings.font_weight == 480 || settings.font_weight == 440)
+        settings.font_weight = settings_store.font_weight.default;
+      if (settings.font_weight_medium == 650 || settings.font_weight_medium == 570)
+        settings.font_weight_medium = settings_store.font_weight_medium.default;
+      if (settings.font_weight_bold == 730 || settings.font_weight_bold == 760 || settings.font_weight_bold == 680)
+        settings.font_weight_bold = settings_store.font_weight_bold.default;
+    }
+    if (settings.version < 2026.0201) {
+      if (settings.noise == 0.5) settings.noise = settings_store.noise.default;
+    }
+    if (settings.version < 2026.022) {
+      if (settings.hue == 255 && settings.sat == 1 && settings.lit == 1) {
+        settings.hue = settings_store.hue.default;
+        settings.sat = settings_store.sat.default;
+        settings.lit = settings_store.lit.default;
+      }
+    }
+    if (Number.isInteger(settings.list_view)) {
+      if (settings.list_view == 0) {
+        settings.list_view = "list";
+      } else {
+        settings.list_view = "cards";
+      }
+    }
+    if (settings.profile_shortcut) {
+      settings.friends = [settings.profile_shortcut];
+      settings.starred_friend = settings.profile_shortcut;
+      localStorage.removeItem("bleh_profile_shortcut_avi");
+      delete settings.profile_shortcut;
+    }
+    for (let setting2 in settings) {
+      document.body.classList.toggle("increase-btn-contrast", settings.lit <= 0.3);
+      if ((setting2 == "hue" || setting2 == "sat" || setting2 == "lit") && settings.hue == settings_store.hue.default && settings.sat == settings_store.sat.default && settings.lit == settings_store.lit.default) {
+        document.body.classList.remove("increase-btn-contrast");
+        continue;
+      }
+      if (settings_store[setting2]) {
+        const type = settings_store[setting2].type || "toggle";
+        if (settings_store[setting2].css) {
+          document.body.style.setProperty(
+            `--${settings_store[setting2].css}`,
+            `${settings[setting2]}${settings_store[setting2].suffix || ""}`
+          );
+        }
+        if (!other_setting_types.includes(type) && settings_store[setting2].bubble) {
+          document.body.setAttribute(`data-bleh--${setting2}`, settings[setting2]);
+        }
+      }
+    }
+    load_skus();
+    compile_settings();
+    if (document.body.classList.contains("user-dashboard-layout")) {
+      document.body.setAttribute("data-bleh--theme", "oled");
+      page.state.settings_reload = true;
+    }
+    load_chart_colours();
+  }
+  function toggle_theme() {
+    if (page.subpage.startsWith("listening-report")) return;
+    const themes = ["light", "ink", "dark", "darker", "oled"];
+    const current = settings.theme;
+    const next = themes[(themes.indexOf(current) + 1) % themes.length];
+    save_setting("theme_schedule", false);
+    save_setting("theme", next);
+  }
+  function request_reload() {
+    if (page.type == "bleh_setup") return;
+    log("requesting reload", "settings");
+    reload_pending.state = true;
+    notify({
+      title: tl2(trans.refresh_pending.name),
+      body: tl2(trans.refresh_pending.body),
+      icon: "icon-16-settings",
+      persist: true,
+      actions: [
+        {
+          action: () => invoke_reload(),
+          text: tl2(trans.refresh),
+          type: "refresh"
+        }
+      ]
+    });
+  }
+  function invoke_reload() {
+    window.location.reload();
+  }
+  function update_colour_swatches() {
+    let found = false;
+    let custom = null;
+    let seasonal2 = null;
+    let swatches = page.structure.main.querySelectorAll(".swatch");
+    swatches.forEach((swatch) => {
+      let h = swatch.style.getPropertyValue("--hue-over");
+      let s2 = swatch.style.getPropertyValue("--sat-over");
+      let l2 = swatch.style.getPropertyValue("--lit-over");
+      let parent = swatch.parentElement;
+      if (swatch.classList[0] == "dropdown-menu-clickable-item")
+        parent = swatch;
+      if (h == settings.hue && s2 == settings.sat && l2 == settings.lit || swatch.getAttribute("data-swatch-type") == "default" && settings.hue == settings_store.hue.default && settings.sat == settings_store.sat.default && settings.lit == settings_store.lit.default) {
+        parent.setAttribute("aria-checked", "true");
+        if (swatch.classList[0] != "dropdown-menu-clickable-item")
+          found = true;
+      } else {
+        parent.setAttribute("aria-checked", "false");
+      }
+      if (!custom && swatch.getAttribute("data-swatch-type") == "customise")
+        custom = parent;
+      if (!seasonal2 && swatch.getAttribute("data-swatch-type") == "default")
+        seasonal2 = parent;
+    });
+    if (found) return;
+    if (custom && settings.accent_type != "season")
+      custom.setAttribute("aria-checked", "true");
+    else if (seasonal2) seasonal2.setAttribute("aria-checked", "true");
+  }
+  unsafeWindow._reset_inbuilt_item = function(item) {
+    reset_inbuilt_item(item);
+  };
+  unsafeWindow._update_inbuilt_params = function(params = {}) {
+    update_inbuilt_params(params);
+  };
+  unsafeWindow._update_inbuilt_item = function(item, value) {
+    update_inbuilt_item(item, value);
+  };
+  function update_inbuilt_item(item, value, modify = true, element = document.body) {
+    console.warn("update item", item, value, "modify", modify);
+    let test_if_valid = element.querySelector(`#toggle-${item}`);
+    console.warn(test_if_valid, `toggle-${item}`);
+    if (test_if_valid == void 0) return;
+    if (inbuilt_settings[item].type == "toggle") {
+      if (modify) {
+        value = document.getElementById(`toggle-${item}`).getAttribute("aria-checked") === "true";
+        log(`updated (inbuilt) ${item} to ${!value}`, "settings");
+      }
+      if (value == inbuilt_settings[item].values[0] && modify) {
+        element.querySelector(
+          `#inbuilt-companion-checkbox-${item}`
+        ).checked = false;
+        element.querySelector(`#toggle-${item}`).setAttribute("aria-checked", false);
+        document.body.setAttribute(
+          `data-bleh--inbuilt-${item}`,
+          inbuilt_settings[item].values[1]
+        );
+      } else if (modify) {
+        element.querySelector(
+          `#inbuilt-companion-checkbox-${item}`
+        ).checked = true;
+        element.querySelector(`#toggle-${item}`).setAttribute("aria-checked", true);
+        document.body.setAttribute(
+          `data-bleh--inbuilt-${item}`,
+          inbuilt_settings[item].values[0]
+        );
+      } else {
+        console.warn(
+          item,
+          value,
+          value == true,
+          value == false,
+          typeof value,
+          "boolean"
+        );
+        if (value == true) {
+          console.warn(item, value, "TRUE");
+          element.querySelector(
+            `#inbuilt-companion-checkbox-${item}`
+          ).checked = true;
+          element.querySelector(`#toggle-${item}`).setAttribute("aria-checked", true);
+          document.body.setAttribute(
+            `data-bleh--inbuilt-${item}`,
+            true
+          );
+        } else if (value == false) {
+          console.warn(item, value, "FALSE");
+          element.querySelector(
+            `#inbuilt-companion-checkbox-${item}`
+          ).checked = false;
+          element.querySelector(`#toggle-${item}`).setAttribute("aria-checked", false);
+          document.body.setAttribute(
+            `data-bleh--inbuilt-${item}`,
+            false
+          );
+        }
+      }
+    }
+  }
+
   // src/components/music/colourful_counts.js
   function patch_artist_ranks_in_list_view(track) {
     let count_bar = track.querySelector(".chartlist-count-bar");
@@ -38276,7 +38487,6 @@
         form
       );
     }
-    refresh_all(form);
     tooltip = tippy_esm_default(settings_btn, {
       theme: "window",
       content: form,
@@ -43035,14 +43245,14 @@
     });
   }
   function save_setting(id, value) {
-    const store = settings_store[setting] || {};
+    const store = settings_store[id] || {};
     const type = store.type || "toggle";
     settings[id] = value;
     if (!other_setting_types.includes(type) && store.bubble) {
       document.body.setAttribute(`data-bleh--${id}`, value.toString());
     }
     if (id == "theme") {
-      if (value == "light" || value == "ink" || value == "glass") {
+      if (["light", "ink"].includes(value)) {
         settings.theme_type = "light";
       } else {
         settings.theme_type = "dark";
@@ -43111,378 +43321,6 @@
     }
     set_storage("bleh", JSON.stringify(clone6));
     return clone6;
-  }
-
-  // src/config.js
-  function load_settings(skip2 = false) {
-    if (!skip2) {
-      for (let setting2 in settings_store) {
-        if (settings[setting2] == null)
-          settings[setting2] = structuredClone(settings_store[setting2].default);
-      }
-      if (!settings.version) settings.version = 1e7;
-    }
-    if (!settings.theme_type) {
-      if (settings.theme == "light" || settings.theme == "ink")
-        settings.theme_type = "light";
-      else settings.theme_type = "dark";
-    }
-    if (settings.version < 2025.0929) {
-      if (settings.seasonal_particles == true)
-        settings.seasonal_particles = "all";
-      else if (settings.seasonal_particles == false)
-        settings.seasonal_particles = "none";
-      if (settings.seasonal_particles_reduced == true) {
-        settings.seasonal_particles = "less";
-        delete settings.seasonal_particles_reduced;
-      } else if (settings.seasonal_particles_reduced == false) {
-        delete settings.seasonal_particles_reduced;
-      }
-      if (settings.font_weight == 480 || settings.font_weight == 440)
-        settings.font_weight = settings_store.font_weight.default;
-      if (settings.font_weight_medium == 650 || settings.font_weight_medium == 570)
-        settings.font_weight_medium = settings_store.font_weight_medium.default;
-      if (settings.font_weight_bold == 730 || settings.font_weight_bold == 760 || settings.font_weight_bold == 680)
-        settings.font_weight_bold = settings_store.font_weight_bold.default;
-    }
-    if (settings.version < 2026.0201) {
-      if (settings.noise == 0.5) settings.noise = settings_store.noise.default;
-    }
-    if (settings.version < 2026.022) {
-      if (settings.hue == 255 && settings.sat == 1 && settings.lit == 1) {
-        settings.hue = settings_store.hue.default;
-        settings.sat = settings_store.sat.default;
-        settings.lit = settings_store.lit.default;
-      }
-    }
-    if (Number.isInteger(settings.list_view)) {
-      if (settings.list_view == 0) {
-        settings.list_view = "list";
-      } else {
-        settings.list_view = "cards";
-      }
-    }
-    if (settings.profile_shortcut) {
-      settings.friends = [settings.profile_shortcut];
-      settings.starred_friend = settings.profile_shortcut;
-      localStorage.removeItem("bleh_profile_shortcut_avi");
-      delete settings.profile_shortcut;
-    }
-    for (let setting2 in settings) {
-      document.body.classList.toggle("increase-btn-contrast", settings.lit <= 0.3);
-      if ((setting2 == "hue" || setting2 == "sat" || setting2 == "lit") && settings.hue == settings_store.hue.default && settings.sat == settings_store.sat.default && settings.lit == settings_store.lit.default) {
-        document.body.classList.remove("increase-btn-contrast");
-        continue;
-      }
-      if (settings_store[setting2]) {
-        const type = settings_store[setting2].type || "toggle";
-        if (settings_store[setting2].css) {
-          document.body.style.setProperty(
-            `--${settings_store[setting2].css}`,
-            `${settings[setting2]}${settings_store[setting2].suffix || ""}`
-          );
-        }
-        if (!other_setting_types.includes(type) && settings_store[setting2].bubble) {
-          document.body.setAttribute(`data-bleh--${setting2}`, settings[setting2]);
-        }
-      }
-    }
-    load_skus();
-    compile_settings();
-    if (document.body.classList.contains("user-dashboard-layout")) {
-      document.body.setAttribute("data-bleh--theme", "oled");
-      page.state.settings_reload = true;
-    }
-    load_chart_colours();
-  }
-  function toggle_theme() {
-    if (page.subpage.startsWith("listening-report")) return;
-    let current_theme = settings.theme;
-    if (current_theme == "dark") current_theme = "darker";
-    else if (current_theme == "darker") current_theme = "oled";
-    else if (current_theme == "oled" || current_theme == "classic")
-      current_theme = "light";
-    else if (current_theme == "light") current_theme = "ink";
-    else if (current_theme == "ink") current_theme = "dark";
-    save_setting("theme_schedule", false);
-    save_setting("theme", current_theme);
-  }
-  function reset_all() {
-    for (let item in settings_base) reset_item(item);
-  }
-  function refresh_all(search = document) {
-    for (let item in settings_base)
-      update_item(item, settings[item], false, search);
-  }
-  function reset_item(item) {
-    update_item(item, settings_base[item].value);
-  }
-  function update_params(params = {}) {
-    for (let item in params) {
-      update_item(item, params[item]);
-    }
-  }
-  unsafeWindow._reset_all = function() {
-    reset_all();
-  };
-  unsafeWindow._reset_item = function(item) {
-    reset_item(item);
-  };
-  unsafeWindow._update_params = function(params = {}) {
-    update_params(params);
-  };
-  unsafeWindow._update_item = function(item, value) {
-    update_item(item, value);
-  };
-  function update_item(item, value, modify = true, search = document) {
-    let container = search.querySelector(`#container-${item}`);
-    if (container) console.info(container);
-    else if (settings_base[item].type != "slider" && settings_base[item].type != "options")
-      return;
-    try {
-      let new_value = false;
-      if (value != settings[item]) new_value = true;
-      if ((settings_base[item].require_reload == true || settings_base[item].require_reload == "partial" && page.type != "bleh_settings") && new_value)
-        request_reload();
-      if (settings_base[item].type == "slider" && modify)
-        settings[item] = value;
-      if (!modify) console.info(item, value, modify);
-      if (settings_base[item].type == "slider") {
-        try {
-          let slider = search.querySelector(`#slider-${item}`);
-          search.querySelector(`#value-${item}`).textContent = `${settings[item]}${settings_base[item].unit}`;
-          slider.value = settings[item];
-          search.querySelector(`#slider-track-${item}`).style.setProperty(
-            "--percent",
-            `${settings[item] / slider.getAttribute("max") * 100}%`
-          );
-        } catch (e4) {
-        }
-        document.body.style.setProperty(
-          `--${settings_base[item].css}`,
-          `${value}${settings_base[item].unit}`
-        );
-        document.body.setAttribute(
-          `data-bleh--${item}`,
-          `${value}`
-        );
-        if (item == "hue" || item == "sat" || item == "lit") {
-          if (settings.hue == settings_base.hue.value && settings.sat == settings_base.sat.value && settings.lit == settings_base.lit.value && settings.seasonal && stored_season.id != "none") {
-            document.body.style.removeProperty(
-              `--${settings_base.hue.css}`
-            );
-            document.body.style.removeProperty(
-              `--${settings_base.sat.css}`
-            );
-            document.body.style.removeProperty(
-              `--${settings_base.lit.css}`
-            );
-            document.body.setAttribute(
-              "data-bleh--hsl-override",
-              "true"
-            );
-          } else {
-            document.body.setAttribute(
-              "data-bleh--hsl-override",
-              "false"
-            );
-          }
-        }
-      } else if (settings_base[item].type == "toggle") {
-        if (settings[item] == settings_base[item].values[0] && modify) {
-          settings[item] = settings_base[item].values[1];
-          search.querySelector(`#toggle-${item}`).setAttribute("aria-checked", false);
-          document.body.style.setProperty(
-            `--${item}`,
-            settings_base[item].values[1]
-          );
-          document.body.setAttribute(
-            `data-bleh--${item}`,
-            `${settings_base[item].values[1]}`
-          );
-        } else if (modify) {
-          settings[item] = settings_base[item].values[0];
-          console.log(`toggle-${item}`);
-          search.querySelector(`#toggle-${item}`).setAttribute("aria-checked", true);
-          document.body.style.setProperty(
-            `--${item}`,
-            settings_base[item].values[0]
-          );
-          document.body.setAttribute(
-            `data-bleh--${item}`,
-            `${settings_base[item].values[0]}`
-          );
-        } else {
-          if (settings[item] == settings_base[item].values[0]) {
-            search.querySelector(`#toggle-${item}`).setAttribute("aria-checked", true);
-          } else {
-            search.querySelector(`#toggle-${item}`).setAttribute("aria-checked", false);
-          }
-        }
-      } else if (settings_base[item].type == "options") {
-        if (modify) {
-          settings[item] = value;
-          document.body.style.setProperty(`--${item}`, value);
-          document.body.setAttribute(
-            `data-bleh--${item}`,
-            value
-          );
-          let toggle2 = document.getElementById(`toggle-${item}-${value}`);
-          if (toggle2) toggle2.setAttribute("aria-checked", true);
-          let other_toggles = search.querySelectorAll(
-            `[data-toggle="${item}"]`
-          );
-          other_toggles.forEach((toggle3) => {
-            let other_value = toggle3.getAttribute("data-toggle-value");
-            if (other_value == value) return;
-            else toggle3.setAttribute("aria-checked", false);
-          });
-          if ((item == "chart_view" || item == "chart_bar_axis") && page.type == "user" && page.subpage.startsWith("library"))
-            bleh_glacier_date_graph_generate();
-        } else {
-          if (settings[item] == value) {
-            document.getElementById(`toggle-${item}-${value}`).setAttribute("aria-checked", true);
-          } else {
-            document.getElementById(`toggle-${item}-${value}`).setAttribute("aria-checked", false);
-          }
-        }
-      }
-      if (modify) log(`updated ${item} to ${settings[item]}`, "settings");
-      compile_settings();
-    } catch (e4) {
-    }
-    if (container) {
-      if (settings[item] != settings_base[item].value)
-        container.classList.add("modified");
-      else container.classList.remove("modified");
-    }
-    if (item == "hue" || item == "sat" || item == "lit") {
-      update_colour_swatches();
-      load_chart_colours();
-    }
-  }
-  function request_reload() {
-    if (page.type == "bleh_setup") return;
-    log("requesting reload", "settings");
-    reload_pending.state = true;
-    notify({
-      title: tl2(trans.refresh_pending.name),
-      body: tl2(trans.refresh_pending.body),
-      icon: "icon-16-settings",
-      persist: true,
-      actions: [
-        {
-          action: () => invoke_reload(),
-          text: tl2(trans.refresh),
-          type: "refresh"
-        }
-      ]
-    });
-  }
-  unsafeWindow._invoke_reload = function() {
-    invoke_reload();
-  };
-  function invoke_reload() {
-    window.location.reload();
-  }
-  function update_colour_swatches() {
-    let found = false;
-    let custom = null;
-    let seasonal2 = null;
-    let swatches = page.structure.main.querySelectorAll(".swatch");
-    swatches.forEach((swatch) => {
-      let h = swatch.style.getPropertyValue("--hue-over");
-      let s2 = swatch.style.getPropertyValue("--sat-over");
-      let l2 = swatch.style.getPropertyValue("--lit-over");
-      let parent = swatch.parentElement;
-      if (swatch.classList[0] == "dropdown-menu-clickable-item")
-        parent = swatch;
-      if (h == settings.hue && s2 == settings.sat && l2 == settings.lit || swatch.getAttribute("data-swatch-type") == "default" && settings.hue == settings_store.hue.default && settings.sat == settings_store.sat.default && settings.lit == settings_store.lit.default) {
-        parent.setAttribute("aria-checked", "true");
-        if (swatch.classList[0] != "dropdown-menu-clickable-item")
-          found = true;
-      } else {
-        parent.setAttribute("aria-checked", "false");
-      }
-      if (!custom && swatch.getAttribute("data-swatch-type") == "customise")
-        custom = parent;
-      if (!seasonal2 && swatch.getAttribute("data-swatch-type") == "default")
-        seasonal2 = parent;
-    });
-    if (found) return;
-    if (custom && settings.accent_type != "season")
-      custom.setAttribute("aria-checked", "true");
-    else if (seasonal2) seasonal2.setAttribute("aria-checked", "true");
-  }
-  unsafeWindow._reset_inbuilt_item = function(item) {
-    reset_inbuilt_item(item);
-  };
-  unsafeWindow._update_inbuilt_params = function(params = {}) {
-    update_inbuilt_params(params);
-  };
-  unsafeWindow._update_inbuilt_item = function(item, value) {
-    update_inbuilt_item(item, value);
-  };
-  function update_inbuilt_item(item, value, modify = true, element = document.body) {
-    console.warn("update item", item, value, "modify", modify);
-    let test_if_valid = element.querySelector(`#toggle-${item}`);
-    console.warn(test_if_valid, `toggle-${item}`);
-    if (test_if_valid == void 0) return;
-    if (inbuilt_settings[item].type == "toggle") {
-      if (modify) {
-        value = document.getElementById(`toggle-${item}`).getAttribute("aria-checked") === "true";
-        log(`updated (inbuilt) ${item} to ${!value}`, "settings");
-      }
-      if (value == inbuilt_settings[item].values[0] && modify) {
-        element.querySelector(
-          `#inbuilt-companion-checkbox-${item}`
-        ).checked = false;
-        element.querySelector(`#toggle-${item}`).setAttribute("aria-checked", false);
-        document.body.setAttribute(
-          `data-bleh--inbuilt-${item}`,
-          inbuilt_settings[item].values[1]
-        );
-      } else if (modify) {
-        element.querySelector(
-          `#inbuilt-companion-checkbox-${item}`
-        ).checked = true;
-        element.querySelector(`#toggle-${item}`).setAttribute("aria-checked", true);
-        document.body.setAttribute(
-          `data-bleh--inbuilt-${item}`,
-          inbuilt_settings[item].values[0]
-        );
-      } else {
-        console.warn(
-          item,
-          value,
-          value == true,
-          value == false,
-          typeof value,
-          "boolean"
-        );
-        if (value == true) {
-          console.warn(item, value, "TRUE");
-          element.querySelector(
-            `#inbuilt-companion-checkbox-${item}`
-          ).checked = true;
-          element.querySelector(`#toggle-${item}`).setAttribute("aria-checked", true);
-          document.body.setAttribute(
-            `data-bleh--inbuilt-${item}`,
-            true
-          );
-        } else if (value == false) {
-          console.warn(item, value, "FALSE");
-          element.querySelector(
-            `#inbuilt-companion-checkbox-${item}`
-          ).checked = false;
-          element.querySelector(`#toggle-${item}`).setAttribute("aria-checked", false);
-          document.body.setAttribute(
-            `data-bleh--inbuilt-${item}`,
-            false
-          );
-        }
-      }
-    }
   }
 
   // src/pages/profile/glacier.js
@@ -43559,7 +43397,6 @@
                 ${setting({ id: "chart_bar_axis", standalone: true, func: bleh_glacier_date_graph_generate })}
             </div>
         `);
-      refresh_all(page.structure.glacier.date_panel);
     }
     if (date_items.length > 0) bleh_glacier_library_date();
     if (page.subpage == "library_overview" || page.subpage.endsWith("-search")) {
@@ -56089,9 +55926,6 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
             `
       );
     }
-    if (page_id == "seasonal") {
-      refresh_all();
-    }
     if (page_id == "seasonal" && settings.seasonal && stored_season.id != "none" && stored_season.start && stored_season.end) {
       tippy_esm_default(document.getElementById("current_season"), {
         content: new Date(
@@ -61890,7 +61724,6 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                 </section>
             `;
         render(page.structure.main, user_panel);
-        refresh_all();
         let users2 = page.structure.main.querySelectorAll(".user-list-inner-wrap");
         users2.forEach((user) => {
           let avatar2 = user.querySelector(".user-list-avatar");
@@ -74325,440 +74158,6 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
 
   // src/build/config.js
   var settings = {};
-  var settings_base = {
-    theme: {
-      css: "theme",
-      unit: "",
-      value: "dark",
-      type: "options"
-    },
-    high_contrast: {
-      css: "high_contrast",
-      unit: "",
-      value: false,
-      values: [true, false],
-      type: "toggle"
-    },
-    hue: {
-      css: "hue-user",
-      unit: "",
-      value: 255,
-      type: "slider"
-    },
-    sat: {
-      css: "sat-user",
-      unit: "",
-      value: 1,
-      type: "slider"
-    },
-    sat_bg: {
-      css: "sat-bg",
-      unit: "",
-      value: 1,
-      type: "slider"
-    },
-    lit: {
-      css: "lit-user",
-      unit: "",
-      value: 1,
-      type: "slider"
-    },
-    accent_type: {
-      css: "accent_type",
-      unit: "",
-      value: "colour",
-      type: "options"
-    },
-    gloss: {
-      css: "gloss",
-      unit: "",
-      value: 0,
-      type: "slider"
-    },
-    profile_header_expand: {
-      css: "profile_header_expand",
-      unit: "",
-      value: true,
-      values: [true, false],
-      type: "toggle"
-    },
-    gendered_tags: {
-      css: "gendered_tags",
-      unit: "",
-      value: true,
-      values: [true, false],
-      type: "toggle"
-    },
-    hide_hateful: {
-      css: "hide_hateful",
-      unit: "",
-      value: true,
-      values: [true, false],
-      type: "toggle"
-    },
-    accessible_name_colours: {
-      css: "accessible_name_colours",
-      unit: "",
-      value: false,
-      values: [true, false],
-      type: "toggle"
-    },
-    reduced_motion: {
-      css: "reduced_motion",
-      unit: "",
-      value: false,
-      values: [true, false],
-      type: "toggle"
-    },
-    underline_links: {
-      css: "underline_links",
-      unit: "",
-      value: false,
-      values: [true, false],
-      type: "toggle"
-    },
-    dev: {
-      css: "dev",
-      unit: "",
-      value: false,
-      values: [true, false],
-      type: "toggle"
-    },
-    format_guest_features: {
-      css: "format_guest_features",
-      unit: "",
-      value: true,
-      values: [true, false],
-      type: "toggle",
-      require_reload: "partial"
-    },
-    show_guest_features: {
-      css: "show_guest_features",
-      unit: "",
-      value: false,
-      values: [true, false],
-      type: "toggle"
-    },
-    stacked_chartlist_info: {
-      css: "stacked_chartlist_info",
-      unit: "",
-      value: true,
-      values: [true, false],
-      type: "toggle"
-    },
-    show_remaster_tags: {
-      css: "show_remaster_tags",
-      unit: "",
-      value: true,
-      values: [true, false],
-      type: "toggle"
-    },
-    corrections: {
-      css: "corrections",
-      unit: "",
-      value: true,
-      values: [true, false],
-      type: "toggle"
-    },
-    colourful_counts: {
-      css: "colourful_counts",
-      unit: "",
-      value: true,
-      values: [true, false],
-      type: "toggle",
-      require_reload: "partial"
-    },
-    colourful_tracks: {
-      css: "colourful_tracks",
-      unit: "",
-      value: true,
-      values: [true, false],
-      type: "toggle",
-      require_reload: "partial"
-    },
-    rain: {
-      css: "rain",
-      unit: "",
-      value: false,
-      values: [true, false],
-      type: "toggle",
-      require_reload: true
-    },
-    show_your_progress: {
-      css: "show_your_progress",
-      unit: "",
-      value: true,
-      values: [true, false],
-      type: "toggle",
-      require_reload: "partial"
-    },
-    travis: {
-      css: "travis",
-      unit: "",
-      value: false,
-      values: [true, false],
-      type: "toggle"
-    },
-    list_view: {
-      css: "list_view",
-      unit: "",
-      value: 0,
-      type: "options"
-    },
-    chart_view: {
-      css: "chart_view",
-      unit: "",
-      value: "line",
-      type: "options"
-    },
-    chart_bar_axis: {
-      css: "chart_bar_axis",
-      unit: "",
-      value: "horizontal",
-      type: "options"
-    },
-    shout_markdown: {
-      css: "shout_markdown",
-      unit: "",
-      value: true,
-      values: [true, false],
-      type: "toggle",
-      require_reload: "partial"
-    },
-    bio_markdown: {
-      css: "bio_markdown",
-      unit: "",
-      value: true,
-      values: [true, false],
-      type: "toggle",
-      require_reload: "partial"
-    },
-    hue_from_album: {
-      css: "hue_from_album",
-      unit: "",
-      value: true,
-      values: [true, false],
-      type: "toggle",
-      require_reload: "partial"
-    },
-    seasonal: {
-      css: "seasonal",
-      unit: "",
-      value: true,
-      values: [true, false],
-      type: "toggle",
-      require_reload: true
-    },
-    seasonal_particles: {
-      css: "seasonal_particles",
-      unit: "",
-      value: "all",
-      type: "options",
-      require_reload: true
-    },
-    seasonal_particles_fps: {
-      css: "seasonal_particles_fps",
-      unit: "",
-      value: false,
-      values: [true, false],
-      type: "toggle"
-    },
-    seasonal_overlays: {
-      css: "seasonal_overlays",
-      unit: "",
-      value: true,
-      values: [true, false],
-      type: "toggle"
-    },
-    profile_header_own: {
-      css: "profile_header_own",
-      unit: "",
-      value: true,
-      values: [true, false],
-      type: "toggle"
-    },
-    profile_header_others: {
-      css: "profile_header_others",
-      unit: "",
-      value: true,
-      values: [true, false],
-      type: "toggle"
-    },
-    profile_avi_background: {
-      css: "profile_avi_background",
-      unit: "",
-      value: false,
-      values: [true, false],
-      type: "toggle"
-    },
-    branch: {
-      css: "branch",
-      unit: "",
-      value: "",
-      type: "text"
-    },
-    font: {
-      css: "custom_font",
-      unit: "",
-      value: "",
-      type: "text"
-    },
-    font_weight: {
-      css: "custom_font_weight",
-      unit: "",
-      value: 480,
-      type: "slider"
-    },
-    font_weight_medium: {
-      css: "custom_font_weight_medium",
-      unit: "",
-      value: 650,
-      type: "slider"
-    },
-    font_weight_bold: {
-      css: "custom_font_weight_bold",
-      unit: "",
-      value: 730,
-      type: "slider"
-    },
-    font_emoji: {
-      css: "font_emoji",
-      unit: "",
-      value: true,
-      values: [true, false],
-      type: "toggle"
-    },
-    show_bulk_edit_album: {
-      css: "show_bulk_edit_album",
-      unit: "",
-      value: false,
-      values: [true, false],
-      type: "toggle"
-    },
-    grid_glow: {
-      css: "show_grid_glow",
-      unit: "",
-      value: true,
-      values: [true, false],
-      type: "toggle"
-    },
-    activities: {
-      css: "activities",
-      unit: "",
-      value: true,
-      values: [true, false],
-      type: "toggle"
-    },
-    auth_menu_obsessions: {
-      css: "auth_menu_obsessions",
-      unit: "",
-      value: true,
-      values: [true, false],
-      type: "toggle"
-    },
-    default_avatar_action: {
-      css: "default_avatar_action",
-      unit: "",
-      value: "expand",
-      type: "options"
-    },
-    glacier_library_graphs: {
-      css: "glacier_library_graphs",
-      unit: "",
-      value: true,
-      values: [true, false],
-      type: "toggle"
-    },
-    activity_shout: {
-      css: "activity_shout",
-      unit: "",
-      value: true,
-      values: [true, false],
-      type: "toggle"
-    },
-    activity_image: {
-      css: "activity_image",
-      unit: "",
-      value: true,
-      values: [true, false],
-      type: "toggle"
-    },
-    activity_obsess: {
-      css: "activity_obsess",
-      unit: "",
-      value: true,
-      values: [true, false],
-      type: "toggle"
-    },
-    activity_love: {
-      css: "activity_love",
-      unit: "",
-      value: true,
-      values: [true, false],
-      type: "toggle"
-    },
-    activity_bookmark: {
-      css: "activity_bookmark",
-      unit: "",
-      value: true,
-      values: [true, false],
-      type: "toggle"
-    },
-    activity_install: {
-      css: "activity_install",
-      unit: "",
-      value: true,
-      values: [true, false],
-      type: "toggle"
-    },
-    activity_wiki: {
-      css: "activity_wiki",
-      unit: "",
-      value: true,
-      values: [true, false],
-      type: "toggle"
-    },
-    simulate_scroll: {
-      css: "simulate_scroll",
-      unit: "",
-      value: true,
-      values: [true, false],
-      type: "toggle",
-      require_reload: "partial"
-    },
-    toggle_icon: {
-      css: "toggle_icon",
-      unit: "",
-      value: true,
-      values: [true, false],
-      type: "toggle"
-    },
-    log_show_all: {
-      css: "log_show_all",
-      unit: "",
-      value: false,
-      values: [true, false],
-      type: "toggle"
-    },
-    avatar_radius: {
-      css: "avatar-radius",
-      unit: "%",
-      value: 50,
-      type: "slider"
-    },
-    profile_shortcut: {
-      css: "profile_shortcut",
-      unit: "",
-      value: "",
-      type: "text"
-    },
-    api_key: {
-      css: "api_key",
-      unit: "",
-      value: "",
-      type: "text"
-    }
-  };
   var inbuilt_settings = {
     recent_artwork: {
       css: "recent_artwork",
