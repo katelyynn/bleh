@@ -203,13 +203,13 @@ export function create_avatar(parent, src, override = 'expand') {
 
     const media = html.node`
         <div class="media">
-            <img src=${src}>
+            <img class="media-image" src=${src}>
             ${override == 'expand' ? html.node`
-                <a class="bleh--avatar-clickable-link" onclick=${() => {
+                <a class="media-link bleh--avatar-clickable-link" onclick=${() => {
                     expand_avatar(full);
                 }} />
             ` : html.node`
-                <a class="bleh--avatar-clickable-link" href=${override} />
+                <a class="media-link bleh--avatar-clickable-link" href=${override} />
             `}
         </div>
     `;

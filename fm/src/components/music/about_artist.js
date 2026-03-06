@@ -11,6 +11,7 @@ import { tl, trans } from '@/build/trans';
 import { expand_avatar } from '@/components/shared/avatar';
 import { correct_artist } from '@/components/music/lotus.js';
 import { redirect } from '@/components/music/music';
+import { bleh_tags_mini } from '@/pages/tag';
 
 export function bleh_about_artist() {
     let legacy_container = page.structure.main.querySelector('.about-artist');
@@ -27,6 +28,8 @@ export function bleh_about_artist() {
 
     let about_artist_container = legacy_container.parentElement;
     about_artist_container.classList.add('about-artist-container');
+
+    bleh_tags_mini(tags);
 
     render(
         about_artist_container,

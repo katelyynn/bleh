@@ -30,8 +30,8 @@
                 --bg-hov: oklch(var(--h4) / 10%);
                 --bg-atv: oklch(var(--h4) / 20%);
                 --hue-over: var(--hue-neg);
-                --sat-over: var(--sat-neg);
-                --lit-over: var(--lit-neg);
+                --sat-over: var(--sat-neg) !important;
+                --lit-over: var(--lit-neg) !important;
             }
             &.love-button {
                 --mask: var(--icon-16-heart);

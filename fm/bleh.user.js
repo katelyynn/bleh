@@ -45406,63 +45406,6 @@
     });
   };
 
-  // src/components/music/about_artist.js
-  function bleh_about_artist() {
-    let legacy_container = page.structure.main.querySelector(".about-artist");
-    if (!legacy_container) return;
-    let avatar2 = legacy_container.querySelector(
-      ".gallery-preview-image--0 img"
-    );
-    let listeners = legacy_container.querySelector(".about-artist-listeners");
-    let tags = legacy_container.querySelector(".about-artist-tags");
-    let wiki = legacy_container.querySelector(".wiki-block.visible-lg");
-    if (wiki) wiki.classList.remove("visible-lg");
-    let about_artist_container = legacy_container.parentElement;
-    about_artist_container.classList.add("about-artist-container");
-    render(
-      about_artist_container,
-      html`
-            <div class="about-artist-panel">
-                <div class="avatar-side">
-                    ${avatar2 ? html.node`
-                    <img src=${avatar2.src.replace("/300x300/", "/500x500/")}>
-                    <a onclick=${() => expand_avatar(avatar2.src.replace("/300x300/", "/ar0/"))} class="bleh--avatar-clickable-link"></a>
-                ` : html.node`
-                    <img class="missing-artist">
-                `}
-                </div>
-                <div class="info-side">
-                    <div class="sub-text">${tl2(trans.about)}</div>
-                    <h1>
-                        <a
-                            href="${root}music/${redirect()}${sanitise(
-        page.sister
-      )}"
-                            >${correct_artist(page.sister)}</a
-                        >
-                    </h1>
-                    ${listeners} ${tags} ${wiki}
-                </div>
-            </div>
-            ${page.sister_others.length > 0 ? html.node`<div class="sep"></div><div class="sub-text">${tl2(trans.others_featured)}</div>` : ""}
-        `
-    );
-    if (page.sister_others.length > 0) {
-      about_artist_container.appendChild(html.node`
-            <div class="about-guest-features-panel">
-                ${page.sister_others.map((guest) => {
-        return html.node`
-                        <a class="about-guest-feature" href="${root}music/${redirect()}${sanitise(guest)}">
-                            ${guest}
-                        </a>
-                    `;
-      })}
-            </div>
-        `);
-    }
-    page.structure.side.appendChild(about_artist_container);
-  }
-
   // src/pages/tag.js
   function bleh_tags() {
     let tag_header = document.body.querySelector(".header--tag");
@@ -45547,13 +45490,13 @@
     log("status is", "page", "info", page);
     update_page();
   }
-  function bleh_tags_mini() {
-    const tags = page.structure.main.querySelectorAll(".tag");
+  function bleh_tags_mini(observer = page.structure.main) {
+    const tags = observer.querySelectorAll(".tag");
     tags.forEach((tag) => {
       const elem = tag.firstElementChild;
       elem.classList.add("btn", "tag-item");
     });
-    let tag_user_avatar = page.structure.main.querySelector(".tags-user-avatar");
+    let tag_user_avatar = observer.querySelector(".tags-user-avatar");
     if (!tag_user_avatar) return;
     let tags_list = tag_user_avatar.nextElementSibling;
     const user_tags = tags_list.querySelectorAll(".tag a");
@@ -45563,6 +45506,64 @@
         content: tl2(trans.personal_tag)
       });
     });
+  }
+
+  // src/components/music/about_artist.js
+  function bleh_about_artist() {
+    let legacy_container = page.structure.main.querySelector(".about-artist");
+    if (!legacy_container) return;
+    let avatar2 = legacy_container.querySelector(
+      ".gallery-preview-image--0 img"
+    );
+    let listeners = legacy_container.querySelector(".about-artist-listeners");
+    let tags = legacy_container.querySelector(".about-artist-tags");
+    let wiki = legacy_container.querySelector(".wiki-block.visible-lg");
+    if (wiki) wiki.classList.remove("visible-lg");
+    let about_artist_container = legacy_container.parentElement;
+    about_artist_container.classList.add("about-artist-container");
+    bleh_tags_mini(tags);
+    render(
+      about_artist_container,
+      html`
+            <div class="about-artist-panel">
+                <div class="avatar-side">
+                    ${avatar2 ? html.node`
+                    <img src=${avatar2.src.replace("/300x300/", "/500x500/")}>
+                    <a onclick=${() => expand_avatar(avatar2.src.replace("/300x300/", "/ar0/"))} class="bleh--avatar-clickable-link"></a>
+                ` : html.node`
+                    <img class="missing-artist">
+                `}
+                </div>
+                <div class="info-side">
+                    <div class="sub-text">${tl2(trans.about)}</div>
+                    <h1>
+                        <a
+                            href="${root}music/${redirect()}${sanitise(
+        page.sister
+      )}"
+                            >${correct_artist(page.sister)}</a
+                        >
+                    </h1>
+                    ${listeners} ${tags} ${wiki}
+                </div>
+            </div>
+            ${page.sister_others.length > 0 ? html.node`<div class="sep"></div><div class="sub-text">${tl2(trans.others_featured)}</div>` : ""}
+        `
+    );
+    if (page.sister_others.length > 0) {
+      about_artist_container.appendChild(html.node`
+            <div class="about-guest-features-panel">
+                ${page.sister_others.map((guest) => {
+        return html.node`
+                        <a class="about-guest-feature" href="${root}music/${redirect()}${sanitise(guest)}">
+                            ${guest}
+                        </a>
+                    `;
+      })}
+            </div>
+        `);
+    }
+    page.structure.side.appendChild(about_artist_container);
   }
 
   // src/pages/track.js
@@ -45698,13 +45699,13 @@
     register_background(full);
     const media = html.node`
         <div class="media">
-            <img src=${src}>
+            <img class="media-image" src=${src}>
             ${override == "expand" ? html.node`
-                <a class="bleh--avatar-clickable-link" onclick=${() => {
+                <a class="media-link bleh--avatar-clickable-link" onclick=${() => {
       expand_avatar(full);
     }} />
             ` : html.node`
-                <a class="bleh--avatar-clickable-link" href=${override} />
+                <a class="media-link bleh--avatar-clickable-link" href=${override} />
             `}
         </div>
     `;

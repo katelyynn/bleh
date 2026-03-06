@@ -1,24 +1,3 @@
-.container:has(#marvin) {
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: var(--card-gap);
-}
-.container:has(#marvin) h1 {
-    font-size: 90px;
-    line-height: 90px;
-    font-weight: 700;
-    margin-top: 60px;
-    margin-bottom: -30px;
-    background: linear-gradient(180deg, oklch(var(--l3-c), 40%), transparent);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    letter-spacing: unset;
-}
-
-.container:has(#marvin) p {
-    color: oklch(var(--c2));
-}
 #error {
     font-size: 16px;
     margin-top: var(--card-gap);

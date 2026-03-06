@@ -128,14 +128,14 @@ export function bleh_tags() {
 }
 
 
-export function bleh_tags_mini() {
-    const tags = page.structure.main.querySelectorAll('.tag');
+export function bleh_tags_mini(observer = page.structure.main) {
+    const tags = observer.querySelectorAll('.tag');
     tags.forEach(tag => {
         const elem = tag.firstElementChild;
         elem.classList.add('btn', 'tag-item');
     });
 
-    let tag_user_avatar = page.structure.main.querySelector('.tags-user-avatar');
+    let tag_user_avatar = observer.querySelector('.tags-user-avatar');
     if (!tag_user_avatar) return;
 
     let tags_list = tag_user_avatar.nextElementSibling;

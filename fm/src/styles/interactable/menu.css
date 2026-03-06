@@ -138,11 +138,7 @@ li:first-child .more-item--delete {
 }
 
 /*     TRACK BUY MENU     */
-/* this hides buylinks from the menu as they are
-very, very, very dated - who looks up a song on ebay? */
-.dropdown-menu-clickable li:has(.buylinks-dropdown-menu) {
-    display: none !important;
-}
+
 
 
 .track-preview {

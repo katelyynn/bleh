@@ -55,6 +55,11 @@
     animation-delay: var(--delay, 0s) !important;
     animation-fill-mode: backwards !important;
 
+    --chart-cover-radius: var(--item-small-radius);
+
+    --chart-button-hov: oklch(var(--b4) / 60%);
+    --chart-button-atv: oklch(var(--b4) / 80%);
+
     &:hover {
         background-color: var(--bg-hov);
         transition: none !important;
@@ -69,6 +74,10 @@
         & > .more-button-wrapper {
             opacity: 0;
         }
+    }
+
+    &[data-track-type="user"] {
+        --chart-cover-radius: var(--avatar-radius);
     }
 
     & > .kate-placeholder,
@@ -114,6 +123,11 @@
                 -webkit-line-clamp: 1;
             }
         }
+    }
+
+    /* separators */
+    &:after {
+        display: none;
     }
 }
 
@@ -265,47 +279,7 @@
         }
     }
 }
-.chartlist-image {
-    display: var(--chartlist-image-display, unset);
-    margin-left: unset !important;
-    overflow: unset !important;
 
-    transition-property: transform, filter;
-    transition-duration: 0.2s;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-
-    &:before {
-        content: "";
-        position: absolute;
-        inset: -2px;
-        border-radius: calc(var(--item-small-radius) + 2px);
-        opacity: 0;
-
-        border: 2px solid oklch(var(--c2) / 30%);
-        box-shadow: 0 0 30px oklch(var(--c2) / 10%);
-
-        transition-property: opacity;
-        transition-duration: var(--trans);
-        transition-timing-function: var(--trans-function);
-    }
-
-    &:hover {
-        transition-duration: 0.1s !important;
-
-        &:before {
-            opacity: 1;
-            transition: none;
-        }
-    }
-
-    &:active {
-        transform: scale(0.98);
-    }
-}
-.chartlist-bar:last-child,
-.chartlist:not(.chartlist--with-bar) .chartlist-loved {
-    margin-right: unset !important;
-}
 .chartlist-type,
 .chartlist-index {
     margin-right: unset;
@@ -378,7 +352,7 @@
         transition-timing-function: var(--trans-function);
     }
 }
-.chartlist-loved:has([data-toggle-button-current-state="unloved"]):before {
+.chartlist-loved:has(> [data-toggle-button-current-state="unloved"]):before {
     opacity: 0;
 }
 
@@ -406,11 +380,6 @@
     );
 }
 
-/* let's make our own separators */
-.chartlist-row::after {
-    display: none;
-}
-
 /*     ACTIVE     */
 .chartlist-row--now-scrobbling {
     /*--bg: oklch(var(--h3), 45%) !important;
@@ -419,15 +388,19 @@
     --bg: oklch(var(--h4) / 10%) !important;
     --bg-hov: oklch(var(--h4) / 17%) !important;
     z-index: 20;
-}
-.chartlist-row--now-scrobbling:before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: var(--hue-gradient, unset);
-    border-radius: var(--item-small-radius);
-    opacity: 0.35;
-    filter: brightness(80%) saturate(120%);
+
+    --chart-button-hov: oklch(var(--h4) / 20%) !important;
+    --chart-button-atv: oklch(var(--h4) / 40%) !important;
+
+    &:before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: var(--hue-gradient, unset);
+        border-radius: var(--item-small-radius);
+        opacity: 0.35;
+        filter: brightness(80%) saturate(120%);
+    }
 }
 
 .chartlist-now-scrobbling {
@@ -487,7 +460,7 @@
     position: relative;
 }
 .obsession-candidate-artist,
-.chartlist-artist a,
+.chartlist-artist > a,
 .featured-item-artist,
 .similar-albums-item-artist,
 .track-similar-tracks-item-artist {
@@ -548,11 +521,10 @@ body[data-bleh--show_remaster_tags="false"] {
 
 .obsession-candidate-image,
 .column-tracks-item-image,
-.api-session-app-image,
 .chartlist-image {
     width: 38px;
     height: 38px;
-    border-radius: var(--item-small-radius) !important;
+    border-radius: var(--chart-cover-radius) !important;
     box-shadow: var(--interact-shadow);
     overflow: hidden;
     background: var(--avatar-generic-background);
@@ -583,8 +555,45 @@ body[data-bleh--show_remaster_tags="false"] {
         }
     }
 }
+
 .chartlist-image {
+    display: var(--chartlist-image-display, unset);
+    margin-left: unset !important;
+    overflow: unset !important;
+
+    transition-property: transform, filter;
+    transition-duration: 0.2s;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
     flex-shrink: 0;
+
+    &:before {
+        content: "";
+        position: absolute;
+        inset: -2px;
+        border-radius: calc(var(--chart-cover-radius) + 2px);
+        opacity: 0;
+
+        border: 2px solid oklch(var(--c2) / 30%);
+        box-shadow: 0 0 30px oklch(var(--c2) / 10%);
+
+        transition-property: opacity;
+        transition-duration: var(--trans);
+        transition-timing-function: var(--trans-function);
+    }
+
+    &:hover {
+        transition-duration: 0.1s !important;
+
+        &:before {
+            opacity: 1;
+            transition: none;
+        }
+    }
+
+    &:active {
+        transform: scale(0.98);
+    }
 
     @media (max-width: 980px) {
         position: relative;
@@ -592,13 +601,7 @@ body[data-bleh--show_remaster_tags="false"] {
         inset: unset !important;
     }
 }
-.chartlist-row[data-track-type="user"] > .chartlist-image {
-    border-radius: var(--avatar-radius) !important;
 
-    &:before {
-        border-radius: calc(var(--avatar-radius) + 2px);
-    }
-}
 .similar-items-sidebar-item-image img {
     border-radius: var(--item-small-radius);
 }
@@ -770,17 +773,11 @@ body[data-bleh--show_remaster_tags="false"] {
 .track-more-button,
 .obsession-candidate-inner .btn-sm {
     --bg: transparent !important;
-    --bg-hov: oklch(var(--b4) / 60%) !important;
-    --bg-atv: oklch(var(--b4) / 80%) !important;
+    --bg-hov: var(--chart-button-hov) !important;
+    --bg-atv: var(--chart-button-atv) !important;
     --shadow: none !important;
     --shadow-hov: none !important;
     --font-size: 0;
-
-    .chartlist-row--now-scrobbling > &,
-    .chartlist-row--now-scrobbling > td & {
-        --bg-hov: oklch(var(--h4) / 20%) !important;
-        --bg-atv: oklch(var(--h4) / 40%) !important;
-    }
 }
 
 .chartlist-break {
