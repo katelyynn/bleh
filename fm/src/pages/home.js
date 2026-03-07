@@ -19,7 +19,7 @@ import { correct_artist, correct_item_by_artist, name_includes, smart_artists, s
 import { romanise, sanitise } from "@/build/tools.js";
 import { redirect } from "@/components/music/music";
 import { settings } from "@/build/config.js";
-import { expand_avatar } from "@/components/shared/avatar.js";
+import { avatar, expand_avatar } from "@/components/shared/avatar";
 import tippy from "tippy.js";
 
 export async function bleh_home() {
@@ -46,7 +46,7 @@ export async function bleh_home() {
         if (cache.banner)
             register_background(cache.banner);
         else if (auth.avatar && !auth.avatar.endsWith('818148bf682d429dc215c1705eb27b98.png'))
-            register_background(auth.avatar.replace('/avatar42s/', '/ar0/'));
+            register_background(avatar(auth.avatar, 'ar0'));
         else
             register_background(null);
     } else {
@@ -73,9 +73,9 @@ export async function bleh_home() {
             <section class="redesigned-header redesigned-profile-header no-background">
                 <div class="avatar-side">
                     <div class="avatar" onclick=${() => {
-                        expand_avatar(auth.avatar.replace('/avatar42s/', '/ar0/'));
+                        expand_avatar(avatar(auth.avatar, 'ar0'));
                     }}>
-                        <img src=${auth.avatar.replace('/avatar42s/', '/avatar300s/')} alt=${tl(trans.your_avatar)}>
+                        <img src=${avatar(auth.avatar, 'avatar300s')} alt=${tl(trans.your_avatar)}>
                     </div>
                 </div>
                 <div class="info-side has-main-info">

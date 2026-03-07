@@ -48,7 +48,7 @@ import { save_setting, setting } from '@/components/settings/settings';
 import { submit_scrobble } from '@/components/music/scrobble';
 import tippy from 'tippy.js';
 import { Chart } from '@/main';
-import { expand_avatar, style_name_from_badge } from '@/components/shared/avatar.js';
+import { expand_avatar, style_name_from_badge } from '@/components/shared/avatar';
 import { status } from '@/components/dialog/status.js';
 import { hoshino } from '@/components/music/hoshino.js';
 import { find_pronouns } from '@/components/profile/pronouns';

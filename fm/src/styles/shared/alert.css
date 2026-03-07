@@ -1,10 +1,10 @@
 .async-content-error-message,
 .event-status,
 .alert:not(.big-modal-alert, .form-disclaimer > .alert) {
-    font-size: var(--font-size);
+    font-size: 13px;
     line-height: var(--line-height);
     margin-top: var(--card-gap);
-    padding: 4px 6px 4px calc(6px + var(--icon-size) + var(--icon-gap)) !important;
+    padding: 3px 10px 3px calc(10px + var(--icon-size) + var(--icon-gap)) !important;
     background: var(--background, oklch(var(--k4) / 15%)) !important;
     color: oklch(var(--l3-c)) !important;
     font-weight: var(--font-weight-medium) !important;
@@ -73,7 +73,7 @@
 }
 
 .alert-info {
-    --background: oklch(var(--b4) / 20%) !important;
+    --background: oklch(var(--b2) / 10%) !important;
     --l3-c: var(--c3) !important;
 
     [data-bleh--season="halloween"] & {

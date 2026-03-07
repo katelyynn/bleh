@@ -19,6 +19,7 @@ import { redirect } from '@/components/music/music';
 import tippy from 'tippy.js';
 import { ff } from '@/components/settings/sku';
 import { setting } from '@/components/settings/settings';
+import { avatar } from '../shared/avatar';
 
 export function compare({ host, sidebar } = {}) {
     if (!host || !sidebar) return;
@@ -52,10 +53,7 @@ export function compare({ host, sidebar } = {}) {
                     <div class="compare-user">
                         <div class="avatar">
                             <img
-                                src="${auth.avatar.replace(
-                                    '/avatar42s/',
-                                    '/avatar170s/'
-                                )}"
+                                src="${avatar(auth.avatar, 'avatar170s')}"
                                 alt="${tl(trans.your_avatar)}"
                             />
                         </div>

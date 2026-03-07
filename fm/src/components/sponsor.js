@@ -15,6 +15,7 @@ import { status } from '@/components/dialog/status';
 import { set_storage } from '@/build/tools';
 import { create_badge, process_badge } from '@/components/shared/badge';
 import { notify } from '@/components/dialog/notify';
+import { avatar } from './shared/avatar';
 
 export function sponsors(force = false, func = null) {
     if (!ff('sponsor')) return;
@@ -164,7 +165,7 @@ export function sponsor_manage() {
             body: html.node`
                 <div class="modal-vertical-inner support-inner">
                     <div class="avatar">
-                        <img src="${auth.avatar.replace('/avatar42s/', '/avatar170s/')}" alt="${tl(trans.your_avatar)}">
+                        <img src="${avatar(auth.avatar, 'avatar170s')}" alt="${tl(trans.your_avatar)}">
                         <span class="avatar-status-dot user-status--bleh-sponsor"></span>
                     </div>
                     <h1 class="colourful">${tl(trans.you_are_a_sponsor)}</h1>
@@ -180,7 +181,7 @@ export function sponsor_manage() {
             body: html.node`
                 <div class="modal-vertical-inner support-inner">
                     <div class="avatar">
-                        <img src="${auth.avatar.replace('/avatar42s/', '/avatar170s/')}" alt="${tl(trans.your_avatar)}">
+                        <img src="${avatar(auth.avatar, 'avatar170s')}" alt="${tl(trans.your_avatar)}">
                         <span class="avatar-status-dot user-status--bleh-sponsor"></span>
                     </div>
                     <h1 class="colourful">${tl(trans.you_are_a_sponsor)}</h1>
@@ -228,7 +229,7 @@ export function new_badges(badges) {
         body: html.node`
             <div class="modal-vertical-inner support-inner">
                 <div class="avatar">
-                    <img src="${auth.avatar.replace('/avatar42s/', '/avatar170s/')}" alt="${tl(trans.your_avatar)}">
+                    <img src="${avatar(auth.avatar, 'avatar170s')}" alt="${tl(trans.your_avatar)}">
                 </div>
                 <h1>${tl(trans.you_have_new_badges)}</h1>
                 <div class="badges">

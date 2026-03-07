@@ -22,6 +22,7 @@ import { dialog, dialog_rm } from '@/components/dialog/dialog';
 import { save_setting } from '@/components/settings/settings';
 import { manage_user } from '@/components/profile/manage_user';
 import { queue_popup } from '@/components/dialog/popup';
+import { avatar } from '../shared/avatar';
 
 export function redesign_profile_header(is_own_profile, is_following) {
     if (!auth.name) return;
@@ -321,7 +322,7 @@ export function redesign_profile_header(is_own_profile, is_following) {
             render(taste_wrap, html`
                 <div class="valentine-pics">
                     <div class="taste-avatar avatar">
-                        <img src=${auth.avatar.replace('/avatar42s/', '/avatar300s/')} alt=${auth.name}>
+                        <img src=${avatar(auth.avatar, 'avatar300s')} alt=${auth.name}>
                     </div>
                     <div class="taste-icon colourful valentine" data-taste=${taste}>
                         <div class="bleh-icon" />

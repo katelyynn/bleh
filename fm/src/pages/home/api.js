@@ -11,6 +11,7 @@ import {checkup_page_structure} from '@/components/page/structure';
 import {register_background, update_page} from '@/page';
 import {html, render} from "lighterhtml";
 import { load_profile_cache_externally } from '@/pages/profile/profile';
+import { avatar } from '@/components/shared/avatar';
 
 export async function bleh_api() {
     if (page.subpage == 'docs') return;
@@ -34,7 +35,7 @@ export async function bleh_api() {
     if (cache.banner)
         register_background(cache.banner);
     else if (!auth.avatar.endsWith('818148bf682d429dc215c1705eb27b98.png'))
-        register_background(auth.avatar.replace('/avatar42s/', '/ar0/'));
+        register_background(avatar(auth.avatar, 'ar0'));
     else
         register_background(null);
 
@@ -62,7 +63,7 @@ export async function bleh_api() {
         render(page.structure.main, html`
             <section class="api-connector sour">
                 <div class="avatar">
-                    <img src="${auth.avatar.replace('/avatar42s/', '/avatar170s/')}" alt="${tl(trans.your_avatar)}">
+                    <img src="${avatar(auth.avatar, 'avatar170s')}" alt="${tl(trans.your_avatar)}">
                 </div>
                 <div class="info">
                     <h1>${page.name}</h1>
@@ -94,7 +95,7 @@ export async function bleh_api() {
         render(page.structure.main, html`
             <section class="api-connector sour">
                 <div class="avatar">
-                    <img src="${auth.avatar.replace('/avatar42s/', '/avatar170s/')}" alt="${tl(trans.your_avatar)}">
+                    <img src="${avatar(auth.avatar, 'avatar170s')}" alt="${tl(trans.your_avatar)}">
                 </div>
                 <div class="info">
                     <h1>${page.name}</h1>

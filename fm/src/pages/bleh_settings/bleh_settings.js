@@ -53,6 +53,7 @@ import { seasonal } from './seasonal';
 import { settings_search } from './search.js';
 import { icon } from '@/components/shared/icon.js';
 import { chartlist_bar } from '@/components/music/bar.js';
+import { avatar } from '@/components/shared/avatar.js';
 
 export function bleh_settings() {
     page.name = auth.name;
@@ -1036,7 +1037,7 @@ export async function render_setting_page(page_id) {
                                     <div class="mockup-panel main"></div>
                                 </div>
                             </div>
-                            <div class="profile-mockup-background from-avatar" style="background-image: url(${auth.avatar.replace('/avatar42s/','/avatar300s/')})" />
+                            <div class="profile-mockup-background from-avatar" style="background-image: url(${avatar(auth.avatar, 'avatar300s')})" />
                             ${cache.banner ? html.node`
                                 <div class="profile-mockup-background from-banner" style="background-image: url(${cache.banner})"></div>
                             ` : html.node`
@@ -1957,7 +1958,7 @@ function activity_preview_new(parent, activity) {
 export function theme_bubbles(func = null) {
     const theme_preview = () => html.node`
         <div class="preview-inner">
-            <div class="preview-image" style="background-image: url(${auth.avatar.replace('/avatar42s/', '/avatar70s/')})" />
+            <div class="preview-image" style="background-image: url(${avatar(auth.avatar, 'avatar70s')})" />
             <div class="preview-card">
                 <div class="preview-card-main">
                     <div class="preview-header">Aa</div>

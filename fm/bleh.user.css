@@ -237,7 +237,7 @@ body,
   --header-filter-shadow: drop-shadow(0 0 3px oklch(var(--b6))) drop-shadow(0 0 10px oklch(var(--b6)));
   --menu-item-hov: oklch(var(--b4) / 40%);
   --menu-item-atv: oklch(var(--b4) / 60%);
-  --setting-hover: oklch(var(--b4) / 30%);
+  --setting-hover: oklch(var(--b4) / 20%);
   --setting-group: oklch(var(--b4) / 10%);
   --lastfm-logo-filter: saturate(0%) contrast(0%) brightness(200%);
   --view-buttons: oklch(var(--b6) / 70%);
@@ -257,7 +257,7 @@ body,
     --menu-item-hov: oklch(var(--b4) / 60%);
     --menu-item-atv: oklch(var(--b4) / 80%);
     --separator-base: oklch(var(--b3) / 0.3);
-    --setting-hover: oklch(var(--b4) / 40%);
+    --setting-hover: oklch(var(--b4) / 30%);
     --card-blur-bg: oklch(var(--b5) / var(--solarium-opacity, 50%));
     --card-blur-bg-alt: oklch(var(--b5) / var(--solarium-opacity, 35%));
     --normal-shadow: inset 0 0 0 1px oklch(var(--b2) / 40%);
@@ -284,7 +284,7 @@ body,
     --normal-shadow: inset 0 0 0 1px oklch(var(--b2) / 50%);
     --card-blur-bg: oklch(var(--b5) / var(--solarium-opacity, 30%));
     --card-blur-bg-alt: oklch(var(--b5) / var(--solarium-opacity, 40%));
-    --setting-hover: oklch(var(--b4) / 30%);
+    --setting-hover: oklch(var(--b4) / 20%);
     --setting-group: oklch(var(--b4) / 18%);
     --textarea: oklch(var(--b4) / 0.25);
     --textarea-hov: oklch(var(--b4) / 0.35);
@@ -666,7 +666,7 @@ body {
     --header-avatar-size: 120px;
     --max-tooltip-width: 100vw;
   }
-  --item-small-radius: 5px;
+  --item-small-radius: 7px;
   --item-med-radius: 10px;
   --item-big-radius: 12px;
   --profile-header-background-height: 350px;
@@ -16481,8 +16481,9 @@ input[type=range] {
 .range {
   --nub-w: 12px;
   --nub-h: 16px;
+  --range-h: 6px;
   position: relative;
-  [data-bleh--solarium=true] & {
+  body[data-bleh--solarium=true] & {
     &:active {
       --nub-w: 22px;
       --nub-h: 14px;
@@ -16502,7 +16503,7 @@ input[type=range] {
     border-radius: var(--item-big-radius);
     box-shadow: var(--group-shadow);
     width: calc(100% - (30px + var(--card-gap)));
-    height: 8px;
+    height: var(--range-h);
     position: absolute;
     pointer-events: none;
     html[data-bleh--season=halloween][data-seasonal-accent=true] & {
@@ -16524,7 +16525,7 @@ input[type=range] {
       background-color: oklch(var(--h3));
       border-radius: var(--item-big-radius);
       box-shadow: var(--primary-shadow), 0 3px 12px oklch(var(--h4) / 32%);
-      margin: calc(-1 * ((var(--nub-h) - 8px) / 2)) calc(-1 * (var(--nub-w) / 2));
+      margin: calc(-1 * ((var(--nub-h) - var(--range-h)) / 2)) calc(-1 * (var(--nub-w) / 2));
       transition-property:
         opacity,
         width,
@@ -16825,14 +16826,13 @@ input[type=range]::-moz-range-progress {
   --bg-atv: transparent;
   --shadow: none;
   --padding: 0 4px;
-  margin: 0 -4px !important;
+  margin: unset !important;
   --radius: 0;
   transform: none !important;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: var(--item-list-gap);
-  width: 32px;
   & > strong,
   & > .swatch[data-swatch-type=colour]:before {
     opacity: 0;
@@ -16874,7 +16874,7 @@ input[type=range]::-moz-range-progress {
     }
   }
 }
-.palette .swatch:not(.dropdown-menu-clickable-item, .album-cover) {
+.swatch.colourful {
   background: oklch(var(--h3));
   box-shadow:
     var(--primary-shadow),
@@ -16890,8 +16890,9 @@ input[type=range]::-moz-range-progress {
   --left: 50%;
   --margin-top: calc(-1 * (var(--mask-size) / 2));
   --margin-left: calc(-1 * (var(--mask-size) / 2));
-  width: 24px;
-  height: 24px;
+  border-radius: var(--item-small-radius);
+  width: 22px;
+  height: 22px;
   &[data-swatch-type=colour] {
     --mask-size: 12px;
   }
@@ -16927,7 +16928,7 @@ input[type=range]::-moz-range-progress {
     position: absolute;
     inset: calc(-1 * var(--inset));
     border: 2px solid var(--glow);
-    border-radius: calc(var(--item-med-radius) + var(--inset));
+    border-radius: calc(var(--item-small-radius) + var(--inset));
     scale: 0.95;
     opacity: 0;
     transition-property: scale, opacity;
@@ -17225,28 +17226,30 @@ input[type=range]::-moz-range-progress {
 .setting-group {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  padding: 12px;
+  gap: var(--setting-group-padding);
+  padding: var(--setting-group-padding);
   text-align: left;
+  overflow: hidden;
+  --setting-group-padding: 10px;
   &:not(.blend) {
     background: var(--setting-group);
     border-radius: var(--item-big-radius);
     box-shadow: var(--group-shadow);
     width: 100%;
-    --setting-item-radius: var(--item-big-radius);
   }
   &.blend {
-    margin: -12px !important;
+    margin: calc(-1 * var(--setting-group-padding)) !important;
+    --setting-item-radius: var(--item-big-radius);
   }
   & > form > .setting,
   & > .setting {
     & + .setting {
-      margin-top: calc(-12px + 1px + 12px) !important;
+      margin-top: calc((-1 * var(--setting-group-padding)) + 1px + var(--setting-group-padding)) !important;
       &:after {
         content: "";
         position: absolute;
-        left: 12px;
-        right: 12px;
+        left: var(--setting-group-padding);
+        right: var(--setting-group-padding);
         top: -1px;
         height: 1px;
         background: var(--separator);
@@ -17279,8 +17282,8 @@ input[type=range]::-moz-range-progress {
     }
   }
   &:not(.standalone) {
-    padding: 12px;
-    margin: -12px !important;
+    padding: var(--setting-group-padding);
+    margin: calc(-1 * var(--setting-group-padding)) !important;
   }
   border-radius: var(--setting-item-radius, none);
   &.highlight {
@@ -17429,7 +17432,7 @@ input[type=range]::-moz-range-progress {
   }
   &[data-type=list],
   &[data-type=options] {
-    gap: var(--item-list-gap);
+    gap: 6px var(--item-list-gap);
   }
   .banner-image {
     width: 240px;
@@ -17737,10 +17740,13 @@ input[type=range]::-moz-range-progress {
 .primary-selections {
   flex: 0 0 100%;
 }
+.setting-lists {
+  margin-top: 4px;
+}
 .primary-selections {
   display: flex;
   flex-direction: column;
-  gap: var(--item-list-gap);
+  gap: 6px;
   select {
     display: none;
   }
@@ -18093,7 +18099,7 @@ input[type=range]::-moz-range-progress {
     position: absolute;
     width: 12px;
     height: 12px;
-    left: 3px;
+    left: 4px;
     border-radius: var(--item-big-radius);
     background: var(--col);
     box-shadow: inset 0 -1px 2px oklch(var(--c2), 15%);
@@ -19043,10 +19049,10 @@ input[type=range]::-moz-range-progress {
 .async-content-error-message,
 .event-status,
 .alert:not(.big-modal-alert, .form-disclaimer > .alert) {
-  font-size: var(--font-size);
+  font-size: 13px;
   line-height: var(--line-height);
   margin-top: var(--card-gap);
-  padding: 4px 6px 4px calc(6px + var(--icon-size) + var(--icon-gap)) !important;
+  padding: 3px 10px 3px calc(10px + var(--icon-size) + var(--icon-gap)) !important;
   background: var(--background, oklch(var(--k4) / 15%)) !important;
   color: oklch(var(--l3-c)) !important;
   font-weight: var(--font-weight-medium) !important;
@@ -19107,7 +19113,7 @@ input[type=range]::-moz-range-progress {
   --lit-over: var(--lit-pos);
 }
 .alert-info {
-  --background: oklch(var(--b4) / 20%) !important;
+  --background: oklch(var(--b2) / 10%) !important;
   --l3-c: var(--c3) !important;
   [data-bleh--season=halloween] & {
     --hue-seasonal: 255;

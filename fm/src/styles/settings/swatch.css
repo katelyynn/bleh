@@ -52,7 +52,7 @@
     --bg-atv: transparent;
     --shadow: none;
     --padding: 0 4px;
-    margin: 0 -4px !important;
+    margin: unset !important;
     --radius: 0;
 
     transform: none !important;
@@ -61,7 +61,6 @@
     flex-direction: column;
     align-items: center;
     gap: var(--item-list-gap);
-    width: 32px;
 
     & > strong,
     & > .swatch[data-swatch-type="colour"]:before {
@@ -121,7 +120,7 @@
         }
     }
 }
-.palette .swatch:not(.dropdown-menu-clickable-item, .album-cover) {
+.swatch.colourful {
     background: oklch(var(--h3));
     box-shadow:
         var(--primary-shadow),
@@ -138,9 +137,10 @@
     --left: 50%;
     --margin-top: calc(-1 * (var(--mask-size) / 2));
     --margin-left: calc(-1 * (var(--mask-size) / 2));
+    border-radius: var(--item-small-radius);
 
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 22px;
 
     &[data-swatch-type="colour"] {
         --mask-size: 12px;
@@ -183,7 +183,7 @@
         position: absolute;
         inset: calc(-1 * var(--inset));
         border: 2px solid var(--glow);
-        border-radius: calc(var(--item-med-radius) + var(--inset));
+        border-radius: calc(var(--item-small-radius) + var(--inset));
 
         scale: 0.95;
         opacity: 0;

@@ -249,7 +249,7 @@ body,
     --menu-item-hov: oklch(var(--b4) / 40%);
     --menu-item-atv: oklch(var(--b4) / 60%);
 
-    --setting-hover: oklch(var(--b4) / 30%);
+    --setting-hover: oklch(var(--b4) / 20%);
 
     --setting-group: oklch(var(--b4) / 10%);
 
@@ -284,7 +284,7 @@ body,
 
         --separator-base: oklch(var(--b3) / 0.3);
 
-        --setting-hover: oklch(var(--b4) / 40%);
+        --setting-hover: oklch(var(--b4) / 30%);
 
         --card-blur-bg: oklch(var(--b5) / var(--solarium-opacity, 50%));
         --card-blur-bg-alt: oklch(var(--b5) / var(--solarium-opacity, 35%));
@@ -335,7 +335,7 @@ body,
         --card-blur-bg: oklch(var(--b5) / var(--solarium-opacity, 30%));
         --card-blur-bg-alt: oklch(var(--b5) / var(--solarium-opacity, 40%));
 
-        --setting-hover: oklch(var(--b4) / 30%);
+        --setting-hover: oklch(var(--b4) / 20%);
 
         --setting-group: oklch(var(--b4) / 18%);
 
@@ -804,7 +804,7 @@ body {
         --max-tooltip-width: 100vw;
     }
 
-    --item-small-radius: 5px;
+    --item-small-radius: 7px;
     --item-med-radius: 10px;
     --item-big-radius: 12px;
 

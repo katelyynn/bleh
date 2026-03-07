@@ -16,6 +16,7 @@ import { tl, trans } from '@/build/trans';
 import { load_profile_cache_externally } from '@/pages/profile/profile';
 import { sanitise } from '@/build/tools';
 import tippy from 'tippy.js';
+import { avatar } from '@/components/shared/avatar';
 
 export async function bleh_search() {
     page.structure.container = document.body.querySelector('.page-content');
@@ -113,7 +114,7 @@ export async function bleh_search() {
         if (cache.banner)
             register_background(cache.banner);
         else if (auth.avatar && !auth.avatar.endsWith('818148bf682d429dc215c1705eb27b98.png'))
-            register_background(auth.avatar.replace('/avatar42s/', '/ar0/'));
+            register_background(avatar(auth.avatar, 'ar0'));
         else
             register_background(null);
     } else {

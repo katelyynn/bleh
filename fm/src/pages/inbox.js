@@ -4,7 +4,7 @@
 // Licensed under GPLv3
 //
 
-import {patch_avatar, style_name_from_badge} from "@/components/shared/avatar.js";
+import {avatar, patch_avatar, style_name_from_badge} from "@/components/shared/avatar";
 import {log} from "@/build/log";
 import {auth, page, root} from "@/build/page";
 import {copy, sanitise} from "@/build/tools";
@@ -54,7 +54,7 @@ export async function bleh_inbox() {
         if (cache.banner)
             register_background(cache.banner);
         else if (auth.avatar && !auth.avatar.endsWith('818148bf682d429dc215c1705eb27b98.png'))
-            register_background(auth.avatar.replace('/avatar42s/', '/ar0/'));
+            register_background(avatar(auth.avatar, 'ar0'));
         else
             register_background(null);
     } else {
@@ -194,7 +194,7 @@ export async function bleh_inbox() {
             <div class="message-sender colourful" ref=${el => sender_panel_own = el}>
                 <div class="inbox-message-sender-avatar">
                     <span class="avatar" ref=${el => your_avatar = el}>
-                        <img src=${auth.avatar.replace('/avatar42s/', '/avatar70s/')} alt=${auth.name} loading="lazy" />
+                        <img src=${avatar(auth.avatar, 'avatar70s')} alt=${auth.name} loading="lazy" />
                     </span>
                 </div>
                 <a class="inbox-message-sender-name" href="${root}user/${auth.name}">${auth.name}</a>
@@ -297,7 +297,7 @@ export async function bleh_inbox() {
             <div class="message-sender colourful" ref=${el => sender_panel_own = el}>
                 <div class="inbox-message-sender-avatar">
                     <span class="avatar" ref=${el => your_avatar = el}>
-                        <img src=${auth.avatar.replace('/avatar42s/', '/avatar70s/')} alt=${auth.name} loading="lazy" />
+                        <img src=${avatar(auth.avatar, 'avatar70s')} alt=${auth.name} loading="lazy" />
                     </span>
                 </div>
                 <a class="inbox-message-sender-name" href="${root}user/${auth.name}">${auth.name}</a>

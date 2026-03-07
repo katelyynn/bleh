@@ -10,33 +10,35 @@
 .setting-group {
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    padding: 12px;
+    gap: var(--setting-group-padding);
+    padding: var(--setting-group-padding);
     text-align: left;
+    overflow: hidden;
+
+    --setting-group-padding: 10px;
 
     &:not(.blend) {
         background: var(--setting-group);
         border-radius: var(--item-big-radius);
         box-shadow: var(--group-shadow);
         width: 100%;
-
-        --setting-item-radius: var(--item-big-radius);
     }
 
     &.blend {
-        margin: -12px !important;
+        margin: calc(-1 * var(--setting-group-padding)) !important;
+        --setting-item-radius: var(--item-big-radius);
     }
 
     & > form > .setting,
     & > .setting {
         & + .setting {
-            margin-top: calc(-12px + 1px + 12px) !important;
+            margin-top: calc((-1 * var(--setting-group-padding)) + 1px + var(--setting-group-padding)) !important;
 
             &:after {
                 content: "";
                 position: absolute;
-                left: 12px;
-                right: 12px;
+                left: var(--setting-group-padding);
+                right: var(--setting-group-padding);
                 top: -1px;
                 height: 1px;
                 background: var(--separator);
@@ -76,8 +78,8 @@
     }
 
     &:not(.standalone) {
-        padding: 12px;
-        margin: -12px !important;
+        padding: var(--setting-group-padding);
+        margin: calc(-1 * var(--setting-group-padding)) !important;
     }
 
     border-radius: var(--setting-item-radius, none);
@@ -261,7 +263,7 @@
 
     &[data-type="list"],
     &[data-type="options"] {
-        gap: var(--item-list-gap);
+        gap: 6px var(--item-list-gap);
     }
 
     .banner-image {
@@ -646,11 +648,15 @@
     flex: 0 0 100%;
 }
 
+.setting-lists {
+    margin-top: 4px;
+}
+
 
 .primary-selections {
     display: flex;
     flex-direction: column;
-    gap: var(--item-list-gap);
+    gap: 6px;
 
     select {
         display: none;
@@ -1083,7 +1089,7 @@
         position: absolute;
         width: 12px;
         height: 12px;
-        left: 3px;
+        left: 4px;
         border-radius: var(--item-big-radius);
         background: var(--col);
         box-shadow: inset 0 -1px 2px oklch(var(--c2), 15%);

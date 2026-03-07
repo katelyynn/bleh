@@ -12,6 +12,7 @@ import { dialog } from '@/components/dialog/dialog';
 import tippy from 'tippy.js';
 import { control_gif_pause } from '@/build/tools';
 import { register_menu } from '@/components/menu';
+import { log } from '@/build/log';
 
 export function patch_avatar(
     avatar,
@@ -189,4 +190,26 @@ export function style_name_from_badge(name, badge) {
     } else {
         name.classList.add(badge.type);
     }
+}
+
+/**
+ * builds an avatar or cover art url with the specified sizing
+ * @param url full original image url or filename
+ * @param requested requested sizing
+ * @returns
+ */
+export function avatar(url: string, requested: 'avatar42s' | 'avatar70s' | 'avatar170s' | 'avatar300s' | '300x300' | 'ar0') {
+    let image: string;
+
+    if (url.startsWith('https')) {
+        const built = new URL(url);
+
+        const split = built.pathname.split('/');
+        image = split[split.length - 1];
+    }
+
+    const final = `https://lastfm.freetls.fastly.net/i/u/${requested}/${image}`;
+    log(`created ${requested} image`, 'avatar', 'info', { final, url });
+
+    return final;
 }

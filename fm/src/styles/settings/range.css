@@ -19,9 +19,10 @@ input[type="range"] {
 .range {
     --nub-w: 12px;
     --nub-h: 16px;
+    --range-h: 6px;
     position: relative;
 
-    [data-bleh--solarium="true"] & {
+    body[data-bleh--solarium="true"] & {
         &:active {
             --nub-w: 22px;
             --nub-h: 14px;
@@ -49,7 +50,7 @@ input[type="range"] {
         border-radius: var(--item-big-radius);
         box-shadow: var(--group-shadow);
         width: calc(100% - (30px + var(--card-gap))); /* 30px = value width */
-        height: 8px;
+        height: var(--range-h);
         position: absolute;
 
         pointer-events: none;
@@ -79,7 +80,7 @@ input[type="range"] {
             box-shadow:
                 var(--primary-shadow),
                 0 3px 12px oklch(var(--h4) / 32%);
-            margin: calc(-1 * ((var(--nub-h) - 8px) / 2))
+            margin: calc(-1 * ((var(--nub-h) - var(--range-h)) / 2))
                 calc(-1 * (var(--nub-w) / 2));
 
             transition-property:

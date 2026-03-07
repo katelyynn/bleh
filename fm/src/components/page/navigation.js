@@ -40,6 +40,7 @@ import { input } from '@/components/settings/input';
 import { bleh_message_list } from '@/components/inbox/messages';
 import { queue_popup } from '@/components/dialog/popup';
 import { icon } from '../shared/icon';
+import { avatar } from '../shared/avatar';
 
 export function patch_masthead() {
     let masthead_logo = document.body.querySelector('.masthead-logo');
@@ -754,9 +755,7 @@ export function append_nav() {
 
             // you cant change your theme when viewing
             // a listening report or on a page with theme settings
-            const themes_disabled =
-                page.subpage.startsWith('listening-report') ||
-                page.state.settings_page == 'visual';
+            const themes_disabled = page.subpage.startsWith('listening-report') || page.state.settings_page == 'visual';
 
             let auth_header;
             let auth_bg;
@@ -774,12 +773,12 @@ export function append_nav() {
                     <div class="side primary">
                         <div class="auth-bg-container" ref=${el => auth_bg = el}>
                             ${!auth.avatar.endsWith('818148bf682d429dc215c1705eb27b98.png') ? html.node`
-                            <div class="bg" style="background-image: url(${auth.avatar.replace('avatar42s', 'avatar170s')})" />
+                            <div class="bg" style="background-image: url(${avatar(auth.avatar, 'avatar170s')})" />
                             ` : ''}
                         </div>
                         <div class="auth-menu-header" ref=${el => auth_header = el}>
                             <div class="avatar">
-                                <img src=${auth.avatar.replace('avatar42s', 'avatar170s')} alt=${auth.name} />
+                                <img src=${avatar(auth.avatar, 'avatar170s')} alt=${auth.name} />
                             </div>
                             <div class="name"><span class="at">@</span>${auth.name}</div>
                             ${auth.pro ? html.node`
@@ -1108,12 +1107,12 @@ export function append_nav() {
                     ${cache.banner ? html.node`
                     <div class="bg" style="background-image: url(${cache.banner})" />
                     ` : !auth.avatar.endsWith('818148bf682d429dc215c1705eb27b98.png') ? html.node`
-                    <div class="bg" style="background-image: url(${auth.avatar.replace('avatar42s', 'avatar170s')})" />
+                    <div class="bg" style="background-image: url(${avatar(auth.avatar, 'avatar170s')})" />
                     ` : ''}
                 `);
                 render(auth_header, html`
                     <div class="avatar">
-                        <img src=${auth.avatar.replace('avatar42s', 'avatar170s')} alt=${auth.name} />
+                        <img src=${avatar(auth.avatar, 'avatar170s')} alt=${auth.name} />
                     </div>
                     <div class="name">${cache.username ? cache.username : `@${auth.name}`}</div>
                     ${badges || auth.pro ? html.node`

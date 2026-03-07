@@ -19,6 +19,7 @@ import { sponsor_list } from '@/build/sponsor';
 import { create_badge, load_badges } from '@/components/shared/badge';
 import { rgb_to_oklch, clamp_sat, clamp_lit } from '@/build/tools';
 import { chartlist_bar } from '@/components/music/bar';
+import { avatar } from '@/components/shared/avatar';
 
 export function mualani() {
     page.structure.container = document.body.querySelector('.page-content');
@@ -32,7 +33,7 @@ export function mualani() {
 
     checkup_page_structure();
 
-    register_background(auth.avatar.replace('/avatar42s/', '/ar0/'));
+    register_background(avatar(auth.avatar, 'ar0'));
 
     page.type = 'bleh_mualani';
     page.subpage = '';

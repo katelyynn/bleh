@@ -28,7 +28,7 @@ import { toggle } from '@/components/settings/toggle';
 import { status } from '@/components/dialog/status';
 import { radio, radio_convert } from '@/components/radio/radio_toggle';
 import { notify, notify_rm } from '@/components/dialog/notify';
-import { expand_avatar } from '@/components/shared/avatar';
+import { avatar } from '@/components/shared/avatar';
 import { lastfm_settings_profile } from './profile';
 
 // patch last.fm settings
@@ -192,7 +192,7 @@ function bleh_communication_panel(token) {
             </div>
             <img
                 class="user-top-avatar user-top-avatar-main"
-                src=${auth.avatar.replace('avatar42s', 'avatar300s')}
+                src=${avatar(auth.avatar, 'avatar300s')}
                 alt=${auth.name}
             />
             <div class="user-top-avatar user-top-avatar-side-right">

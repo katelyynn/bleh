@@ -24,6 +24,7 @@ import { dialog } from '@/components/dialog/dialog';
 import { match } from '@/components/settings/dynamic_theming';
 import { set_storage } from '@/build/tools';
 import { display_colour_presets } from '@/components/settings/swatch';
+import { avatar } from '@/components/shared/avatar';
 
 export function bleh_setup() {
     page.structure.container = document.body.querySelector('.page-content');
@@ -40,7 +41,7 @@ export function bleh_setup() {
     checkup_page_structure(false, content_top);
 
     if (auth.avatar)
-        register_background(auth.avatar.replace('/avatar42s/', '/ar0/'));
+        register_background(avatar(auth.avatar, 'ar0'));
     else register_background(null);
 
     page.type = 'bleh_setup';
@@ -69,7 +70,7 @@ export function bleh_setup() {
                 ${auth.name ?
                     html.node`
             <div class="avatar">
-                <img src=${auth.avatar.replace('/avatar42s/', '/avatar170s/')} alt=${tl(trans.your_avatar)}>
+                <img src=${avatar(auth.avatar, 'avatar170s')} alt=${tl(trans.your_avatar)}>
             </div>
             <div class="info">
                 <h1>${tl(trans.bleh_setup)}</h1>
@@ -416,7 +417,7 @@ function setup_layout() {
         let preview;
 
         function render_track_preview() {
-            const avi = auth.avatar.replace('/avatar42s/', '/avatar170s/');
+            const avi = avatar(auth.avatar, 'avatar170s');
 
             render(preview, html`
                 <table class="chartlist chartlist--with-image chartlist--with-loved chartlist--with-artist chartlist--with-more">
