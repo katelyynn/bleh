@@ -131,6 +131,10 @@ export function input({
         }
     });
 
+    input_box.addEventListener('paste', () => {
+        if (func) func(input_box.value);
+    });
+
     input_box.addEventListener('select', () => {
         if (func_select) func_select(input_box, input_box.value);
     });

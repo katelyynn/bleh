@@ -158,21 +158,9 @@
 .user-status--bleh-cute,
 .label.user-status--bleh-cute {
     --mask: var(--icon-16-bleh);
-    --hue-over: 330;
-    --sat-over: 1;
-    --lit-over: 1.1;
-}
-.user-status--bleh-plaster {
-    --mask: var(--icon-plaster);
-    --hue-over: 26;
-    --sat-over: 1.2;
-    --lit-over: 1.02;
-}
-.user-status--bleh-bubble-tea {
-    --mask: var(--icon-bubble-tea);
-    --hue-over: 2;
-    --sat-over: 1.5;
-    --lit-over: 1.15;
+    --hue-over: 6;
+    --sat-over: 1.46;
+    --lit-over: 0.9;
 }
 
 .user-status--bleh-cat,
