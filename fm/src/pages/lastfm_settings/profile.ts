@@ -19,25 +19,19 @@ import { toggle } from "@/components/settings/toggle";
 let cropper: Cropper;
 
 export function lastfm_settings_profile() {
-    let update_picture = page.structure.main.querySelector('#update-picture');
-    if (!update_picture) return;
+    page.token = page.structure.main.querySelector('[name="csrfmiddlewaretoken"]').value;
 
-    // if we can continue, we are on profile tab
-    let token = document.body
-        .querySelector('[name="csrfmiddlewaretoken"]')
-        .getAttribute('value');
-
-    patch_settings_profile_panel(token, update_picture);
-    patch_settings_charts_panel(token);
+    profile_panel();
+    charts_panel();
 }
 
-function patch_settings_charts_panel(token) {
-    let charts_panel = document.getElementById('update-chart');
+function charts_panel() {
+    const charts_panel = page.structure.main.querySelector('#update-chart');
+    if (!charts_panel) return;
 
-    if (charts_panel.hasAttribute('data-kate-processed')) return;
-
-    charts_panel.setAttribute('data-kate-processed', 'true');
     charts_panel.classList.add('bleh--panel');
+
+    const alert = charts_panel.querySelector('.alert');
 
     const form = charts_panel.querySelector('form');
 
@@ -63,8 +57,9 @@ function patch_settings_charts_panel(token) {
 
     render(charts_panel, html`
         <h4>${tl(trans.recent_tracks)}</h4>
+        ${alert}
         <form action="${root}settings#update-chart" name="chart-form" method="post">
-            <input type="hidden" name="csrfmiddlewaretoken" value=${token}>
+            <input type="hidden" name="csrfmiddlewaretoken" value=${page.token}>
             <div class="inner-preview pad">
                 <div class="tracks recent">
                     <div class="track realtime">
@@ -368,69 +363,18 @@ function patch_settings_charts_panel(token) {
             </div>
         </form>
     `);
-
-    custom_select(
-        charts_panel.querySelector('#id_chart_length_recent_tracks'),
-        charts_panel.querySelector('#id_chart_length_recent_tracks_select')
-    );
-    custom_select(
-        charts_panel.querySelector('#id_chart_range_top_artists'),
-        charts_panel.querySelector('#id_chart_range_top_artists_select')
-    );
-    custom_select(
-        charts_panel.querySelector('#id_chart_style_and_length_top_artists'),
-        charts_panel.querySelector(
-            '#id_chart_style_and_length_top_artists_select'
-        )
-    );
-    custom_select(
-        charts_panel.querySelector('#id_chart_range_top_albums'),
-        charts_panel.querySelector('#id_chart_range_top_albums_select')
-    );
-    custom_select(
-        charts_panel.querySelector('#id_chart_style_and_length_top_albums'),
-        charts_panel.querySelector(
-            '#id_chart_style_and_length_top_albums_select'
-        )
-    );
-    custom_select(
-        charts_panel.querySelector('#id_chart_range_top_tracks'),
-        charts_panel.querySelector('#id_chart_range_top_tracks_select')
-    );
-    custom_select(
-        charts_panel.querySelector('#id_chart_length_top_tracks'),
-        charts_panel.querySelector('#id_chart_length_top_tracks_select')
-    );
-
-    for (let category in original_chart_settings) {
-        for (let setting in original_chart_settings[category]) {
-            update_inbuilt_item(
-                setting,
-                original_chart_settings[category][setting],
-                false
-            );
-        }
-    }
-
-    let selects = document.body.querySelectorAll('select');
-    selects.forEach((select) => {
-        select.setAttribute(
-            'onchange',
-            `_update_inbuilt_select('${select.getAttribute('id')}', this.value)`
-        );
-        update_inbuilt_select(select.getAttribute('id'), select.value);
-    });
 }
 
-function patch_settings_profile_panel(token, update_picture) {
-    const bio_max_length = 500;
+function profile_panel() {
+    const update_picture = page.structure.main.querySelector('#update-picture');
+    if (!update_picture) return;
 
     update_picture.classList.add('bleh--panel');
 
+    const bio_max_length = 500;
+
     const upload_form = update_picture.querySelector('.avatar-upload-form');
-    const avatar_url = update_picture
-        .querySelector('.image-upload-preview img')
-        .getAttribute('src');
+    const avatar_url = update_picture.querySelector('.image-upload-preview img').src;
     const upload_finished = update_picture.querySelector('.alert-success');
 
     if (page.state.avatar_changer && upload_finished) {
@@ -489,7 +433,7 @@ function patch_settings_profile_panel(token, update_picture) {
             <input
                 type="hidden"
                 name="csrfmiddlewaretoken"
-                value="${token}"
+                value="${page.token}"
             />
             <div class="setting-group">
                 <div class="setting" data-type="info">
@@ -498,7 +442,7 @@ function patch_settings_profile_panel(token, update_picture) {
                         <p>${tl(trans.avatar_desc)}</p>
                     </div>
                     <div class="info">
-                        <div class="avatar image-uploader" onclick=${() => avatar(token)}>
+                        <div class="avatar image-uploader" onclick=${() => avatar()}>
                             <img
                                 src=${avatar_url}
                                 alt=${tl(trans.your_avatar)}
@@ -1074,10 +1018,7 @@ function patch_settings_profile_panel(token, update_picture) {
     }
 }
 
-function avatar(token = '') {
-    if (!token) token = page.token;
-    else page.token = token;
-
+function avatar() {
     page.state.avatar_changer = dialog({
         id: 'edit_avatar',
         title: tl(trans.change_avatar),

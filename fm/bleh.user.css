@@ -16985,8 +16985,8 @@ input[type=range]::-moz-range-progress {
     color: oklch(var(--c1));
     font-weight: var(--font-weight-medium);
   }
-  .alert {
-    margin: unset;
+  & > .alert {
+    margin: unset !important;
   }
   .subtext {
     color: oklch(var(--c3));

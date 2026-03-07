@@ -34080,9 +34080,9 @@
     update_inbuilt_params(params);
   };
   unsafeWindow._update_inbuilt_item = function(item, value) {
-    update_inbuilt_item2(item, value);
+    update_inbuilt_item(item, value);
   };
-  function update_inbuilt_item2(item, value, modify = true, element = document.body) {
+  function update_inbuilt_item(item, value, modify = true, element = document.body) {
     console.warn("update item", item, value, "modify", modify);
     let test_if_valid = element.querySelector(`#toggle-${item}`);
     console.warn(test_if_valid, `toggle-${item}`);
@@ -34777,50 +34777,6 @@
       value: key,
       text: val.name
     }));
-  }
-  function custom_select(select2, element_to_append) {
-    console.info(select2);
-    let id = select2.getAttribute("id");
-    let value = select2.value;
-    let value_objects = select2.querySelectorAll("option");
-    let menu_list = document.createElement("div");
-    value_objects.forEach((object) => {
-      let object_value = object.getAttribute("value");
-      let object_text = object.textContent;
-      let item = document.createElement("button");
-      item.classList.add(
-        "btn",
-        "dropdown-menu-clickable-item",
-        "select-item"
-      );
-      item.setAttribute(
-        "onclick",
-        `_set_custom_select_value('${id}', '${object_value}')`
-      );
-      item.setAttribute("data-value", object_value);
-      item.setAttribute("type", "button");
-      item.textContent = object_text;
-      menu_list.appendChild(item);
-    });
-    let button2 = document.createElement("button");
-    button2.classList.add("select-button");
-    button2.setAttribute("id", `select-${id}`);
-    button2.setAttribute("type", "button");
-    button2.textContent = menu_list.querySelector(
-      `[data-value="${value}"]`
-    ).textContent;
-    let theme_menu_item = tippy_esm_default(button2, {
-      theme: "select-menu",
-      content: html.node([menu_list.innerHTML]),
-      placement: "bottom",
-      interactive: true,
-      interactiveBorder: 10,
-      trigger: "click",
-      onShow(instance) {
-        update_custom_select(instance.popper, select2.value);
-      }
-    });
-    element_to_append.appendChild(button2);
   }
   unsafeWindow._set_custom_select_value = function(select_id, value) {
     let select2 = document.getElementById(select_id);
@@ -38504,7 +38460,7 @@
         </div>
     `);
     for (let setting2 in original_chart_settings) {
-      update_inbuilt_item2(
+      update_inbuilt_item(
         setting2,
         original_chart_settings[setting2],
         false,
@@ -59091,18 +59047,16 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
   var import_cropperjs = __toESM(require_cropper(), 1);
   var cropper;
   function lastfm_settings_profile() {
-    let update_picture = page.structure.main.querySelector("#update-picture");
-    if (!update_picture) return;
-    let token = document.body.querySelector('[name="csrfmiddlewaretoken"]').getAttribute("value");
-    patch_settings_profile_panel(token, update_picture);
-    patch_settings_charts_panel(token);
+    page.token = page.structure.main.querySelector('[name="csrfmiddlewaretoken"]').value;
+    profile_panel();
+    charts_panel();
   }
-  function patch_settings_charts_panel(token) {
-    let charts_panel = document.getElementById("update-chart");
-    if (charts_panel.hasAttribute("data-kate-processed")) return;
-    charts_panel.setAttribute("data-kate-processed", "true");
-    charts_panel.classList.add("bleh--panel");
-    const form = charts_panel.querySelector("form");
+  function charts_panel() {
+    const charts_panel2 = page.structure.main.querySelector("#update-chart");
+    if (!charts_panel2) return;
+    charts_panel2.classList.add("bleh--panel");
+    const alert2 = charts_panel2.querySelector(".alert");
+    const form = charts_panel2.querySelector("form");
     let original_chart_settings = {
       recent: {
         recent_artwork: form.querySelector("#id_show_recent_tracks_artwork"),
@@ -59122,10 +59076,11 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         timeframe: form.querySelector("#id_chart_range_top_tracks")
       }
     };
-    render(charts_panel, html`
+    render(charts_panel2, html`
         <h4>${tl2(trans.recent_tracks)}</h4>
+        ${alert2}
         <form action="${root}settings#update-chart" name="chart-form" method="post">
-            <input type="hidden" name="csrfmiddlewaretoken" value=${token}>
+            <input type="hidden" name="csrfmiddlewaretoken" value=${page.token}>
             <div class="inner-preview pad">
                 <div class="tracks recent">
                     <div class="track realtime">
@@ -59429,61 +59384,14 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
             </div>
         </form>
     `);
-    custom_select(
-      charts_panel.querySelector("#id_chart_length_recent_tracks"),
-      charts_panel.querySelector("#id_chart_length_recent_tracks_select")
-    );
-    custom_select(
-      charts_panel.querySelector("#id_chart_range_top_artists"),
-      charts_panel.querySelector("#id_chart_range_top_artists_select")
-    );
-    custom_select(
-      charts_panel.querySelector("#id_chart_style_and_length_top_artists"),
-      charts_panel.querySelector(
-        "#id_chart_style_and_length_top_artists_select"
-      )
-    );
-    custom_select(
-      charts_panel.querySelector("#id_chart_range_top_albums"),
-      charts_panel.querySelector("#id_chart_range_top_albums_select")
-    );
-    custom_select(
-      charts_panel.querySelector("#id_chart_style_and_length_top_albums"),
-      charts_panel.querySelector(
-        "#id_chart_style_and_length_top_albums_select"
-      )
-    );
-    custom_select(
-      charts_panel.querySelector("#id_chart_range_top_tracks"),
-      charts_panel.querySelector("#id_chart_range_top_tracks_select")
-    );
-    custom_select(
-      charts_panel.querySelector("#id_chart_length_top_tracks"),
-      charts_panel.querySelector("#id_chart_length_top_tracks_select")
-    );
-    for (let category in original_chart_settings) {
-      for (let setting2 in original_chart_settings[category]) {
-        update_inbuilt_item(
-          setting2,
-          original_chart_settings[category][setting2],
-          false
-        );
-      }
-    }
-    let selects = document.body.querySelectorAll("select");
-    selects.forEach((select2) => {
-      select2.setAttribute(
-        "onchange",
-        `_update_inbuilt_select('${select2.getAttribute("id")}', this.value)`
-      );
-      update_inbuilt_select(select2.getAttribute("id"), select2.value);
-    });
   }
-  function patch_settings_profile_panel(token, update_picture) {
-    const bio_max_length = 500;
+  function profile_panel() {
+    const update_picture = page.structure.main.querySelector("#update-picture");
+    if (!update_picture) return;
     update_picture.classList.add("bleh--panel");
+    const bio_max_length = 500;
     const upload_form = update_picture.querySelector(".avatar-upload-form");
-    const avatar_url = update_picture.querySelector(".image-upload-preview img").getAttribute("src");
+    const avatar_url = update_picture.querySelector(".image-upload-preview img").src;
     const upload_finished = update_picture.querySelector(".alert-success");
     if (page.state.avatar_changer && upload_finished) {
       const id = page.state.avatar_changer.getAttribute("data-modal-id");
@@ -59533,7 +59441,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
             <input
                 type="hidden"
                 name="csrfmiddlewaretoken"
-                value="${token}"
+                value="${page.token}"
             />
             <div class="setting-group">
                 <div class="setting" data-type="info">
@@ -59542,7 +59450,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                         <p>${tl2(trans.avatar_desc)}</p>
                     </div>
                     <div class="info">
-                        <div class="avatar image-uploader" onclick=${() => avatar2(token)}>
+                        <div class="avatar image-uploader" onclick=${() => avatar2()}>
                             <img
                                 src=${avatar_url}
                                 alt=${tl2(trans.your_avatar)}
@@ -60047,9 +59955,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       }
     }
   }
-  function avatar2(token = "") {
-    if (!token) token = page.token;
-    else page.token = token;
+  function avatar2() {
     page.state.avatar_changer = dialog({
       id: "edit_avatar",
       title: tl2(trans.change_avatar),
@@ -60527,7 +60433,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         </form>
     `;
     for (let setting2 in original_privacy_settings) {
-      update_inbuilt_item2(setting2, original_privacy_settings[setting2], false);
+      update_inbuilt_item(setting2, original_privacy_settings[setting2], false);
     }
     let selects = document.body.querySelectorAll("select");
     selects.forEach((select2) => {
@@ -60785,7 +60691,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         `
     );
     for (let setting2 in original_settings) {
-      update_inbuilt_item2(setting2, original_settings[setting2], false);
+      update_inbuilt_item(setting2, original_settings[setting2], false);
     }
   }
   function bleh_name_change() {

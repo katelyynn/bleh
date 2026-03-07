@@ -48,8 +48,8 @@
         font-weight: var(--font-weight-medium);
     }
 
-    .alert {
-        margin: unset;
+    & > .alert {
+        margin: unset !important;
     }
 
     .subtext {
