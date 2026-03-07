@@ -25,7 +25,7 @@ export function status({ title, body, type }) {
     }
 
     const alert = html.node`
-        <div class="status-alert colourful colourful-bg" onclick=${() => status_remove()}>
+        <div class="status-alert colourful" onclick=${() => status_remove()}>
             <div class="status-icon">
                 <div class="bleh-icon" style="--icon: var(--${icon})" />
             </div>

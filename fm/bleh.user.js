@@ -27805,7 +27805,7 @@
       icon2 = "icon-16-x";
     }
     const alert2 = html.node`
-        <div class="status-alert colourful colourful-bg" onclick=${() => status_remove()}>
+        <div class="status-alert colourful" onclick=${() => status_remove()}>
             <div class="status-icon">
                 <div class="bleh-icon" style="--icon: var(--${icon2})" />
             </div>
@@ -32153,8 +32153,7 @@
         <div
         class=${[
       "bleh-modal",
-      colourful ? "colorful" : "",
-      colourful_bg ? "colourful-bg" : ""
+      colourful ? "colorful" : ""
     ].join(" ")}
         role="dialog"
         data-modal-id=${id}
@@ -34664,7 +34663,16 @@
   function update_inbuilt_select(id, value) {
     document.body.setAttribute(`data-bleh--inbuilt-${id}`, value);
   }
-  function select(values, initial = "", name = "", func = null, blend = false, title_func = null, hide2 = false, in_settings = false) {
+  function select({
+    values,
+    initial = "",
+    name = "",
+    func,
+    blend = false,
+    title_func,
+    hide: hide2 = false,
+    in_settings = false
+  }) {
     let select2;
     let button2;
     if (!values || values.length == 0) return html.node`
@@ -38446,11 +38454,12 @@
                 <div class="heading">
                     <h5>${tl2(trans.amount_to_display)}</h5>
                 </div>
-                ${select(
-      select_prepare(count),
-      count.value,
-      "chart_length_recent_tracks"
-    )}
+                ${select({
+      values: select_prepare(count),
+      initial: count.value,
+      name: "chart_length_recent_tracks",
+      in_settings: true
+    })}
             </div>
             <div
                 class="setting"
@@ -38612,41 +38621,45 @@
                     <div class="heading">
                         <h5>${tl2(trans.default_timeframe)}</h5>
                     </div>
-                    ${select(
-        select_prepare(timeframe),
-        timeframe.value,
-        "chart_range_top_artists"
-      )}
+                    ${select({
+        values: select_prepare(timeframe),
+        initial: timeframe.value,
+        name: "chart_range_top_artists",
+        in_settings: true
+      })}
                 </div>
                 <div class="setting" data-type="select">
                     <div class="heading">
                         <h5>${tl2(trans.chart_style)}</h5>
                     </div>
-                    ${select(
-        select_prepare(style),
-        style.value,
-        "chart_style_top_artists"
-      )}
+                    ${select({
+        values: select_prepare(timeframe),
+        initial: timeframe.value,
+        name: "chart_range_top_artists",
+        in_settings: true
+      })}
                 </div>
                 <div class="setting hide-if-artist-list" data-type="select">
                     <div class="heading">
                         <h5>${tl2(trans.chart_size)}</h5>
                     </div>
-                    ${select(
-        select_prepare(grid_length),
-        grid_length.value,
-        "artists_image_grid_length"
-      )}
+                    ${select({
+        values: select_prepare(grid_length),
+        initial: grid_length.value,
+        name: "artists_image_grid_length",
+        in_settings: true
+      })}
                 </div>
                 <div class="setting hide-if-artist-grid" data-type="select">
                     <div class="heading">
                         <h5>${tl2(trans.chart_size)}</h5>
                     </div>
-                    ${select(
-        select_prepare(chartlist_length),
-        chartlist_length.value,
-        "artists_chartlist_length"
-      )}
+                    ${select({
+        values: select_prepare(chartlist_length),
+        initial: chartlist_length.value,
+        name: "artists_chartlist_length",
+        in_settings: true
+      })}
                 </div>
                 <div class="settings-footer">
                     <button type="submit" class="btn-primary save" onclick=${() => {
@@ -38747,41 +38760,45 @@
                     <div class="heading">
                         <h5>${tl2(trans.default_timeframe)}</h5>
                     </div>
-                    ${select(
-        select_prepare(timeframe),
-        timeframe.value,
-        "chart_range_top_albums"
-      )}
+                    ${select({
+        values: select_prepare(timeframe),
+        initial: timeframe.value,
+        name: "chart_range_top_albums",
+        in_settings: true
+      })}
                 </div>
                 <div class="setting" data-type="select">
                     <div class="heading">
                         <h5>${tl2(trans.chart_style)}</h5>
                     </div>
-                    ${select(
-        select_prepare(style),
-        style.value,
-        "chart_style_top_albums"
-      )}
+                    ${select({
+        values: select_prepare(timeframe),
+        initial: timeframe.value,
+        name: "chart_range_top_albums",
+        in_settings: true
+      })}
                 </div>
                 <div class="setting hide-if-album-list" data-type="select">
                     <div class="heading">
                         <h5>${tl2(trans.chart_size)}</h5>
                     </div>
-                    ${select(
-        select_prepare(grid_length),
-        grid_length.value,
-        "albums_image_grid_length"
-      )}
+                    ${select({
+        values: select_prepare(grid_length),
+        initial: grid_length.value,
+        name: "albums_image_grid_length",
+        in_settings: true
+      })}
                 </div>
                 <div class="setting hide-if-album-grid" data-type="select">
                     <div class="heading">
                         <h5>${tl2(trans.chart_size)}</h5>
                     </div>
-                    ${select(
-        select_prepare(chartlist_length),
-        chartlist_length.value,
-        "albums_chartlist_length"
-      )}
+                    ${select({
+        values: select_prepare(chartlist_length),
+        initial: chartlist_length.value,
+        name: "albums_chartlist_length",
+        in_settings: true
+      })}
                 </div>
                 <div class="settings-footer">
                     <button type="submit" class="btn-primary save" onclick=${() => {
@@ -38880,21 +38897,23 @@
                     <div class="heading">
                         <h5>${tl2(trans.default_timeframe)}</h5>
                     </div>
-                    ${select(
-        select_prepare(timeframe),
-        timeframe.value,
-        "chart_range_top_tracks"
-      )}
+                    ${select({
+        values: select_prepare(timeframe),
+        initial: timeframe.value,
+        name: "chart_range_top_tracks",
+        in_settings: true
+      })}
                 </div>
                 <div class="setting hide-if-track-grid" data-type="select">
                     <div class="heading">
                         <h5>${tl2(trans.chart_size)}</h5>
                     </div>
-                    ${select(
-        select_prepare(chartlist_length),
-        chartlist_length.value,
-        "chart_length_top_tracks"
-      )}
+                    ${select({
+        values: select_prepare(timeframe),
+        initial: timeframe.value,
+        name: "chart_range_top_tracks",
+        in_settings: true
+      })}
                 </div>
                 <div class="sep" />
                 ${setting({ id: "format_guest_features" })}
@@ -43093,9 +43112,14 @@
       } else if (type == "select") {
         let render_select = function(use_list = list, use_value = value) {
           render(select_hook, html`
-                    ${menu = select(use_list, use_value, "", (val) => {
-            update_select(val);
-          }, false, null, false, true)}
+                    ${menu = select({
+            values: use_list,
+            initial: use_value,
+            func: (val) => {
+              update_select(val);
+            },
+            in_settings: true
+          })}
                 `);
         }, update_select = function(val) {
           if (!elem) return;
@@ -59475,8 +59499,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       const id = page.state.avatar_changer.getAttribute("data-modal-id");
       dialog_rm({ id });
     }
-    const update_profile2 = page.structure.main.querySelector("#update-profile");
-    const alert2 = update_profile2.querySelector(".alert");
+    const update_profile = page.structure.main.querySelector("#update-profile");
+    const alert2 = update_profile.querySelector(".alert");
     let form_display_name = document.getElementById("id_full_name").value;
     let form_website = document.getElementById("id_homepage").value;
     let form_country = document.getElementById("id_country");
@@ -59608,16 +59632,12 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                         <h5>${tl2(trans.country)}</h5>
                     </div>
                     <div class="select-wrap custom-selector">
-                        ${select(
-      select_prepare(form_country),
-      form_country.value,
-      "country",
-      null,
-      false,
-      null,
-      false,
-      true
-    )}
+                        ${select({
+      values: select_prepare(form_country),
+      initial: form_country.value,
+      name: form_country.name,
+      in_settings: true
+    })}
                     </div>
                 </div>
                 ${() => {
@@ -60538,7 +60558,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       email: page.structure.main.querySelector('[name="email"]').value,
       captcha: page.structure.main.querySelector(".lfm-recaptcha")
     };
-    const alert2 = update_profile.querySelector(".alert");
+    const alert2 = page.structure.main.querySelector(".alert-success");
     render(
       page.structure.main,
       html`
@@ -60699,13 +60719,12 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                                 <h5>${tl2(trans.email_language)}</h5>
                             </div>
                             <div class="select-wrap custom-selector">
-                                ${select(
-        select_prepare(
-          original_settings.email_language
-        ),
-        original_settings.email_language.value,
-        original_settings.email_language.name
-      )}
+                                ${select({
+        values: select_prepare(original_settings.email_language),
+        initial: original_settings.email_language.value,
+        name: original_settings.email_language.name,
+        in_settings: true
+      })}
                             </div>
                         </div>
                         ${toggle({
@@ -60840,11 +60859,11 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                                 <h5>${tl2(trans.timezone)}</h5>
                                 <p ref=${(el) => timezone_text = el}>${help_text.textContent.trim()}</p>
                             </div>
-                            ${select(
-        select_prepare(timezone),
-        timezone.value,
-        timezone.name,
-        (val) => {
+                            ${select({
+        values: select_prepare(timezone),
+        initial: timezone.value,
+        name: timezone.name,
+        func: (val) => {
           fetch(
             `${root}settings/partial/timezone-help-text?tz=${val}&ajax=1`
           ).then((res) => res.text()).then((dom) => {
@@ -60864,8 +60883,9 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
               { e: e4 }
             )
           );
-        }
-      )}
+        },
+        in_settings: true
+      })}
                         </div>
                         <div class="setting v2" data-type="action">
                             <div class="heading">
@@ -60880,7 +60900,12 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                             <div class="heading">
                                 <h5>${tl2(trans.event_radius)}</h5>
                             </div>
-                            ${select(select_prepare(radius), radius.value, radius.name)}
+                            ${select({
+        values: select_prepare(radius),
+        initial: radius.value,
+        name: radius.name,
+        in_settings: true
+      })}
                         </div>
                     </div>
                     <div class="settings-footer end">

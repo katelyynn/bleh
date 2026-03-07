@@ -11,7 +11,7 @@ import tippy from 'tippy.js';
 import { calendar } from '@/components/dialog/calendar';
 import { auth } from '@/build/page';
 
-type input = {
+interface input {
     type?: string,
     value?: string | number,
     placeholder?: string,

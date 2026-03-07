@@ -123,6 +123,8 @@
 
     &:hover {
         transform: var(--motion, translateY(-1px));
+        --grid-cover-image-filter: brightness(105%);
+        --grid-cover-image-transition: none !important;
     }
 
     &.generic-cover {
@@ -162,11 +164,6 @@
         background-repeat: repeat-x;
         z-index: 30;
         pointer-events: none;
-    }
-
-    &:hover {
-        --grid-cover-image-filter: brightness(115%);
-        --grid-cover-image-transition: none !important;
     }
 }
 .grid-items-cover-image {
@@ -240,29 +237,6 @@
         }
     }
 
-    .grid-item-colour-bg {
-        position: absolute;
-        inset: 0;
-        z-index: 9;
-
-        background: oklch(var(--b4));
-
-        transition-property: background;
-        transition-duration: var(--trans);
-        transition-timing-function: var(--trans-function);
-
-        border-top-left-radius: 12px;
-        border-top-right-radius: 12px;
-
-        &[style] {
-            background: color-mix(
-                in oklch,
-                oklch(var(--h4)) 60%,
-                black 70%
-            ) !important;
-        }
-    }
-
     /* gloss */
     &:after {
         z-index: 20;
@@ -272,6 +246,29 @@
         top: 10px;
         right: 10px;
         pointer-events: auto;
+    }
+}
+
+.grid-item-colour-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 9;
+
+    background: oklch(var(--b4));
+
+    transition-property: background;
+    transition-duration: var(--trans);
+    transition-timing-function: var(--trans-function);
+
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+
+    &[style] {
+        background: color-mix(
+            in oklch,
+            oklch(var(--h4)) 60%,
+            black 70%
+        ) !important;
     }
 }
 
@@ -307,7 +304,7 @@
 }
 
 .grid-items.grid-items--fade-out {
-    .grid-items-item {
+    & > .grid-items-item {
         box-shadow: unset;
         pointer-events: none;
     }
@@ -317,11 +314,11 @@
     }
 }
 .grid-items-cta {
-    img {
+    & > img {
         display: none;
     }
 
-    h3 {
+    & > h3 {
         color: oklch(var(--c1));
         font-size: 16px;
         line-height: 20px;

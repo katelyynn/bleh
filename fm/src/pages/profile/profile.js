@@ -1134,11 +1134,12 @@ function profile_recents() {
                 <div class="heading">
                     <h5>${tl(trans.amount_to_display)}</h5>
                 </div>
-                ${select(
-                    select_prepare(count),
-                    count.value,
-                    'chart_length_recent_tracks'
-                )}
+                ${select({
+                    values: select_prepare(count),
+                    initial: count.value,
+                    name: 'chart_length_recent_tracks',
+                    in_settings: true
+                })}
             </div>
             <div
                 class="setting"
@@ -1323,41 +1324,45 @@ function profile_artists() {
                     <div class="heading">
                         <h5>${tl(trans.default_timeframe)}</h5>
                     </div>
-                    ${select(
-                        select_prepare(timeframe),
-                        timeframe.value,
-                        'chart_range_top_artists'
-                    )}
+                    ${select({
+                        values: select_prepare(timeframe),
+                        initial: timeframe.value,
+                        name: 'chart_range_top_artists',
+                        in_settings: true
+                    })}
                 </div>
                 <div class="setting" data-type="select">
                     <div class="heading">
                         <h5>${tl(trans.chart_style)}</h5>
                     </div>
-                    ${select(
-                        select_prepare(style),
-                        style.value,
-                        'chart_style_top_artists'
-                    )}
+                    ${select({
+                        values: select_prepare(timeframe),
+                        initial: timeframe.value,
+                        name: 'chart_range_top_artists',
+                        in_settings: true
+                    })}
                 </div>
                 <div class="setting hide-if-artist-list" data-type="select">
                     <div class="heading">
                         <h5>${tl(trans.chart_size)}</h5>
                     </div>
-                    ${select(
-                        select_prepare(grid_length),
-                        grid_length.value,
-                        'artists_image_grid_length'
-                    )}
+                    ${select({
+                        values: select_prepare(grid_length),
+                        initial: grid_length.value,
+                        name: 'artists_image_grid_length',
+                        in_settings: true
+                    })}
                 </div>
                 <div class="setting hide-if-artist-grid" data-type="select">
                     <div class="heading">
                         <h5>${tl(trans.chart_size)}</h5>
                     </div>
-                    ${select(
-                        select_prepare(chartlist_length),
-                        chartlist_length.value,
-                        'artists_chartlist_length'
-                    )}
+                    ${select({
+                        values: select_prepare(chartlist_length),
+                        initial: chartlist_length.value,
+                        name: 'artists_chartlist_length',
+                        in_settings: true
+                    })}
                 </div>
                 <div class="settings-footer">
                     <button type="submit" class="btn-primary save" onclick=${() => {
@@ -1479,41 +1484,45 @@ function profile_albums() {
                     <div class="heading">
                         <h5>${tl(trans.default_timeframe)}</h5>
                     </div>
-                    ${select(
-                        select_prepare(timeframe),
-                        timeframe.value,
-                        'chart_range_top_albums'
-                    )}
+                    ${select({
+                        values: select_prepare(timeframe),
+                        initial: timeframe.value,
+                        name: 'chart_range_top_albums',
+                        in_settings: true
+                    })}
                 </div>
                 <div class="setting" data-type="select">
                     <div class="heading">
                         <h5>${tl(trans.chart_style)}</h5>
                     </div>
-                    ${select(
-                        select_prepare(style),
-                        style.value,
-                        'chart_style_top_albums'
-                    )}
+                    ${select({
+                        values: select_prepare(timeframe),
+                        initial: timeframe.value,
+                        name: 'chart_range_top_albums',
+                        in_settings: true
+                    })}
                 </div>
                 <div class="setting hide-if-album-list" data-type="select">
                     <div class="heading">
                         <h5>${tl(trans.chart_size)}</h5>
                     </div>
-                    ${select(
-                        select_prepare(grid_length),
-                        grid_length.value,
-                        'albums_image_grid_length'
-                    )}
+                    ${select({
+                        values: select_prepare(grid_length),
+                        initial: grid_length.value,
+                        name: 'albums_image_grid_length',
+                        in_settings: true
+                    })}
                 </div>
                 <div class="setting hide-if-album-grid" data-type="select">
                     <div class="heading">
                         <h5>${tl(trans.chart_size)}</h5>
                     </div>
-                    ${select(
-                        select_prepare(chartlist_length),
-                        chartlist_length.value,
-                        'albums_chartlist_length'
-                    )}
+                    ${select({
+                        values: select_prepare(chartlist_length),
+                        initial: chartlist_length.value,
+                        name: 'albums_chartlist_length',
+                        in_settings: true
+                    })}
                 </div>
                 <div class="settings-footer">
                     <button type="submit" class="btn-primary save" onclick=${() => {
@@ -1633,21 +1642,23 @@ function profile_tracks() {
                     <div class="heading">
                         <h5>${tl(trans.default_timeframe)}</h5>
                     </div>
-                    ${select(
-                        select_prepare(timeframe),
-                        timeframe.value,
-                        'chart_range_top_tracks'
-                    )}
+                    ${select({
+                        values: select_prepare(timeframe),
+                        initial: timeframe.value,
+                        name: 'chart_range_top_tracks',
+                        in_settings: true
+                    })}
                 </div>
                 <div class="setting hide-if-track-grid" data-type="select">
                     <div class="heading">
                         <h5>${tl(trans.chart_size)}</h5>
                     </div>
-                    ${select(
-                        select_prepare(chartlist_length),
-                        chartlist_length.value,
-                        'chart_length_top_tracks'
-                    )}
+                    ${select({
+                        values: select_prepare(timeframe),
+                        initial: timeframe.value,
+                        name: 'chart_range_top_tracks',
+                        in_settings: true
+                    })}
                 </div>
                 <div class="sep" />
                 ${setting({ id: 'format_guest_features' })}

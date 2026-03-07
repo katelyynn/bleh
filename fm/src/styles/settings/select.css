@@ -68,6 +68,8 @@
 
 .select-in-settings {
     --bg: transparent;
+    --bg-hov: oklch(var(--b2) / 20%);
+    --bg-atv: oklch(var(--b2) / 40%);
     --shadow: none;
 
     &:before {

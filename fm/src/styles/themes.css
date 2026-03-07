@@ -189,10 +189,7 @@ body {
 
 /* backgrounds */
 body,
-.user-dashboard-layout,
-.theme-preview,
-.theme-preview[data-bleh--theme="dark"],
-.colourful-bg {
+.theme-preview {
     --hue: var(--hue-over, var(--hue-album, var(--hue-user, var(--hue-seasonal, var(--default-hue)))));
     --sat-raw: var(--sat-over, var(--sat-album, var(--sat-user, var(--sat-seasonal, var(--default-sat)))));
     --lit-raw: var(--lit-over, var(--lit-album, var(--lit-user, var(--lit-seasonal, var(--default-lit)))));
@@ -583,7 +580,7 @@ u,
     --menu-item-accent-atv: oklch(var(--h4) / 22%);
 
     &[data-bleh--theme="oled"],
-    [data-bleh--theme="oled"] & {
+    body[data-bleh--theme="oled"] & {
         --c1: 0.96 calc(clamp(min(0), var(--sat), max(1)) * 0.1) var(--hue);
         --c2: 0.87 calc(clamp(min(0), var(--sat), max(1)) * 0.07) var(--hue);
         --c3: 0.6 calc(clamp(min(0), var(--sat), max(1)) * 0.07) var(--hue);
@@ -609,7 +606,7 @@ u,
         );
     }
     &[data-bleh--theme="light"],
-    [data-bleh--theme="light"]
+    body[data-bleh--theme="light"]
         &:not(
             .theme-preview,
             .grid-items-cover-image.colourful,
@@ -684,7 +681,7 @@ u,
         --menu-item-accent-atv: oklch(var(--h4) / 25%);
     }
     &[data-bleh--theme="ink"],
-    [data-bleh--theme="ink"]
+    body[data-bleh--theme="ink"]
         &:not(
             .theme-preview,
             .grid-items-cover-image.colourful,

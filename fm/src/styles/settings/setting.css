@@ -253,7 +253,7 @@
         &.v {
             flex-direction: column;
             align-items: end;
-            gap: 12px;
+            gap: 6px 12px;
         }
 
         @media (max-width: 980px) {

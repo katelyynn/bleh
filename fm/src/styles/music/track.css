@@ -63,11 +63,6 @@
     &:hover {
         background-color: var(--bg-hov);
         transition: none !important;
-
-        & > .chartlist-image {
-            transform: scale(1.05);
-            filter: brightness(120%);
-        }
     }
 
     &:not(:hover) {
@@ -563,7 +558,7 @@ body[data-bleh--show_remaster_tags="false"] {
 
     transition-property: transform, filter;
     transition-duration: 0.2s;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-timing-function: var(--trans-function);
 
     flex-shrink: 0;
 

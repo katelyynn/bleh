@@ -15,9 +15,38 @@ export function update_inbuilt_select(id, value) {
     document.body.setAttribute(`data-bleh--inbuilt-${id}`, value);
 }
 
-export function select(values, initial = '', name = '', func = null, blend = false, title_func = null, hide = false, in_settings = false) {
-    let select;
-    let button;
+export interface select_option {
+    value?: string,
+    text: string
+}
+
+interface select {
+    values: select_option[],
+    initial?: string,
+    name?: string,
+    func?: (selected: string) => void,
+    blend?: boolean,
+    title_func?: (value: string) => void,
+    hide?: boolean,
+    in_settings?: boolean
+}
+
+interface select_element extends HTMLElement {
+    value?: string
+}
+
+export function select({
+    values,
+    initial = '',
+    name = '',
+    func,
+    blend = false,
+    title_func,
+    hide = false,
+    in_settings = false
+}: select): select_element {
+    let select: HTMLSelectElement;
+    let button: HTMLButtonElement;
 
     if (!values || values.length == 0) return html.node`
         <div class="alert alert-error no-margin">
@@ -31,16 +60,16 @@ export function select(values, initial = '', name = '', func = null, blend = fal
 
     let container = html.node`
         <div class="select-wrap custom-selector">
-            <select ref=${(el) => (select = el)} name=${name}>
+            <select ref=${(el: HTMLSelectElement) => (select = el)} name=${name}>
                 ${values.map((value) => {
-        if (value.value == null) return html.node``;
+                    if (value.value == null) return html.node``;
 
-        return html.node`
+                    return html.node`
                         <option value=${value.value} selected=${value.value == initial}>${value.text}</option>
                     `;
-    })}
+                })}
             </select>
-            <button class="select-button ${blend ? 'link-select blend-v2-btn' : ''} ${in_settings ? 'select-in-settings' : ''}" data-hide=${hide} type="button" ref=${(el) => (button = el)} />
+            <button class="select-button ${blend ? 'link-select blend-v2-btn' : ''} ${in_settings ? 'select-in-settings' : ''}" data-hide=${hide} type="button" ref=${(el: HTMLButtonElement) => (button = el)} />
         </div>
     `;
 
@@ -129,10 +158,10 @@ export function select(values, initial = '', name = '', func = null, blend = fal
     }
 }
 
-export function select_prepare(element) {
-    let values = [];
+export function select_prepare(element: HTMLSelectElement) {
+    let values: select_option[] = [];
 
-    element.querySelectorAll('option').forEach((option) => {
+    element.querySelectorAll('option').forEach((option: HTMLOptionElement) => {
         values.push({
             value: option.value,
             text: option.textContent

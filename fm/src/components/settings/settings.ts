@@ -1026,9 +1026,14 @@ export function setting({
 
             function render_select(use_list = list, use_value = value) {
                 render(select_hook, html`
-                    ${menu = select(use_list, use_value, '', (val) => {
-                        update_select(val);
-                    }, false, null, false, true)}
+                    ${menu = select({
+                        values: use_list,
+                        initial: use_value,
+                        func: (val: string) => {
+                            update_select(val);
+                        },
+                        in_settings: true
+                    })}
                 `);
             }
 

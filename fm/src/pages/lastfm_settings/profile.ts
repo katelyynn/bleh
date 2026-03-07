@@ -443,10 +443,10 @@ function patch_settings_profile_panel(token, update_picture) {
     const update_profile = page.structure.main.querySelector('#update-profile');
     const alert = update_profile.querySelector('.alert');
 
-    let form_display_name = document.getElementById('id_full_name').value;
-    let form_website = document.getElementById('id_homepage').value;
-    let form_country = document.getElementById('id_country');
-    let form_about_me = document.getElementById('id_about_me').textContent;
+    let form_display_name = (document.getElementById('id_full_name') as HTMLInputElement).value;
+    let form_website = (document.getElementById('id_homepage') as HTMLInputElement).value;
+    let form_country = document.getElementById('id_country') as HTMLSelectElement;
+    let form_about_me = (document.getElementById('id_about_me') as HTMLTextAreaElement).textContent;
 
     const markdown_settings = {
         allow_headers: true,
@@ -586,16 +586,12 @@ function patch_settings_profile_panel(token, update_picture) {
                         <h5>${tl(trans.country)}</h5>
                     </div>
                     <div class="select-wrap custom-selector">
-                        ${select(
-                            select_prepare(form_country),
-                            form_country.value,
-                            'country',
-                            null,
-                            false,
-                            null,
-                            false,
-                            true
-                        )}
+                        ${select({
+                            values: select_prepare(form_country),
+                            initial: form_country.value,
+                            name: form_country.name,
+                            in_settings: true
+                        })}
                     </div>
                 </div>
                 ${() => {

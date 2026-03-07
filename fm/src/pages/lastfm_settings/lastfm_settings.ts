@@ -440,7 +440,7 @@ function bleh_accounts() {
         captcha: page.structure.main.querySelector('.lfm-recaptcha')
     };
 
-    const alert = update_profile.querySelector('.alert');
+    const alert = page.structure.main.querySelector('.alert-success');
 
     render(
         page.structure.main,
@@ -604,13 +604,12 @@ function bleh_accounts() {
                                 <h5>${tl(trans.email_language)}</h5>
                             </div>
                             <div class="select-wrap custom-selector">
-                                ${select(
-                                    select_prepare(
-                                        original_settings.email_language
-                                    ),
-                                    original_settings.email_language.value,
-                                    original_settings.email_language.name
-                                )}
+                                ${select({
+                                    values: select_prepare(original_settings.email_language),
+                                    initial: original_settings.email_language.value,
+                                    name: original_settings.email_language.name,
+                                    in_settings: true
+                                })}
                             </div>
                         </div>
                         ${toggle({
@@ -758,11 +757,11 @@ function bleh_website() {
                                 <h5>${tl(trans.timezone)}</h5>
                                 <p ref=${(el) => (timezone_text = el)}>${help_text.textContent.trim()}</p>
                             </div>
-                            ${select(
-                                select_prepare(timezone),
-                                timezone.value,
-                                timezone.name,
-                                (val) => {
+                            ${select({
+                                values: select_prepare(timezone),
+                                initial: timezone.value,
+                                name: timezone.name,
+                                func: (val: string) => {
                                     fetch(
                                         `${root}settings/partial/timezone-help-text?tz=${val}&ajax=1`
                                     )
@@ -788,8 +787,9 @@ function bleh_website() {
                                                 { e }
                                             )
                                         );
-                                }
-                            )}
+                                },
+                                in_settings: true
+                            })}
                         </div>
                         <div class="setting v2" data-type="action">
                             <div class="heading">
@@ -804,7 +804,12 @@ function bleh_website() {
                             <div class="heading">
                                 <h5>${tl(trans.event_radius)}</h5>
                             </div>
-                            ${select(select_prepare(radius), radius.value, radius.name)}
+                            ${select({
+                                values: select_prepare(radius),
+                                initial: radius.value,
+                                name: radius.name,
+                                in_settings: true
+                            })}
                         </div>
                     </div>
                     <div class="settings-footer end">
