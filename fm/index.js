@@ -5,8 +5,11 @@
 //
 
 import esbuild from 'esbuild';
-import fs from 'fs';
-import build from './src/build/build.json' with { type: 'json' };
+import * as fs from 'fs';
+
+const build = JSON.parse(fs.readFileSync('./src/build/build.json', 'utf-8'));
+build.built_on = new Date().toISOString();
+fs.writeFileSync('./src/build/build.json', JSON.stringify(build, null, 4));
 
 const js_banner = `// ==UserScript==
 // @name         ${build.brand}

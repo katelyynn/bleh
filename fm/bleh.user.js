@@ -54940,6 +54940,9 @@
             <p class="card-tip">
                 florence ${version2}
             </p>
+            <p class="card-tip">
+                ${DateTime.fromISO(version.built_on).toLocaleString(DateTime.DATETIME_MED)}
+            </p>
         </div>
     `);
     page.structure.row.insertBefore(nav, page.structure.content);
@@ -75574,7 +75577,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         name: "Display and write notes for music",
         date: "2026-02-25"
       }
-    }
+    },
+    built_on: "2026-03-07T01:50:53.694Z"
   };
 
   // node_modules/@kurkle/color/dist/color.esm.js

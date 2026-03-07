@@ -263,6 +263,9 @@ export function bleh_settings() {
             <p class="card-tip">
                 florence ${florence_version}
             </p>
+            <p class="card-tip">
+                ${DateTime.fromISO(version.built_on).toLocaleString(DateTime.DATETIME_MED)}
+            </p>
         </div>
     `);
 
