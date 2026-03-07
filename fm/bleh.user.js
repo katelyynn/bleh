@@ -32540,6 +32540,7 @@
       elem.style.setProperty("--flag", `url(https://katelyynn.github.io/bleh/fm/flags/${badge.translation_code}.svg)`);
     }
     if (long) elem.classList.add("expand");
+    if (small) elem.classList.add("small");
     if (badge.icon != "" && badge.hue > -1 && badge.sat > -1 && badge.lit > -1) {
       elem.style.setProperty("--mask", `url(${badge.icon})`);
       elem.style.setProperty("--hue-over", badge.hue);
@@ -32832,10 +32833,11 @@
                     </div>
                 </div>
                 <div class="track-preview-info">
-                    <h5 class="track-preview-text track-preview-title">@${name}</h5>
+                    <h5 class="track-preview-text track-preview-title"><span class="at">@</span>${name}</h5>
                     ${badges ? html.node`
                         <div class="badges track-preview-badges">
-                            ${badges.map((badge, index3) => create_badge(badge, false, index3 == badges.length - 1))}
+                            ${create_badge(badges[badges.length - 1], false, true, true)}
+                            ${badges.length > 1 ? html.node`<div class="extra-badges-text">${tl2(trans.and_count_more, { c: badges.length - 1 })}</div>` : ""}
                         </div>
                     ` : ""}
                 </div>
@@ -73958,6 +73960,9 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     },
     change_font: {
       en: "Change font"
+    },
+    and_count_more: {
+      en: "and {c} more"
     }
   };
   var translation_fallback = "NO_TRANSLATION_FOUND";

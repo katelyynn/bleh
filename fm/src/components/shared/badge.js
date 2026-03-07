@@ -140,6 +140,7 @@ export function create_badge(
     }
 
     if (long) elem.classList.add('expand');
+    if (small) elem.classList.add('small');
 
     if (
         badge.icon != '' &&

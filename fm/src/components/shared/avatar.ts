@@ -79,10 +79,11 @@ export function patch_avatar(
                     </div>
                 </div>
                 <div class="track-preview-info">
-                    <h5 class="track-preview-text track-preview-title">@${name}</h5>
+                    <h5 class="track-preview-text track-preview-title"><span class="at">@</span>${name}</h5>
                     ${badges ? html.node`
                         <div class="badges track-preview-badges">
-                            ${badges.map((badge, index) => create_badge(badge, false, index == badges.length - 1))}
+                            ${create_badge(badges[badges.length - 1], false, true, true)}
+                            ${badges.length > 1 ? html.node`<div class="extra-badges-text">${tl(trans.and_count_more, { c: badges.length - 1 })}</div>` : ''}
                         </div>
                     ` : ''}
                 </div>

@@ -203,26 +203,6 @@ li:first-child .more-item--delete {
             --icon-colour: oklch(var(--l3-c));
             --icon-size: 10px;
         }
-
-        & > .track-preview-badges {
-            display: flex;
-            flex-direction: row-reverse;
-            justify-content: start;
-            padding-left: 12px;
-            padding-right: 1px;
-            margin-top: 4px;
-
-            & > .label {
-                position: relative;
-                z-index: 10;
-                margin-left: -12px !important;
-                border-right: 1px solid oklch(var(--b5));
-
-                &.user-status-subscriber {
-                    order: -1;
-                }
-            }
-        }
     }
 
     padding: calc(var(--button-sides) - 4px) 0 calc(var(--button-sides) + 2px);
@@ -232,6 +212,22 @@ li:first-child .more-item--delete {
     & + .track-preview {
         display: none;
     }
+}
+
+.track-preview-badges {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    margin-top: 4px;
+
+    gap: 8px;
+}
+.extra-badges-text {
+    color: oklch(var(--c3));
+    cursor: default;
+    font-size: 12px;
+    line-height: 12px;
 }
 
 .track-preview-text {

@@ -10347,6 +10347,9 @@ export const trans: translations = {
     },
     change_font: {
         en: 'Change font'
+    },
+    and_count_more: {
+        en: 'and {c} more'
     }
 };
 
