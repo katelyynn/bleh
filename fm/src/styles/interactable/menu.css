@@ -160,6 +160,7 @@ li:first-child .more-item--delete {
     .track-preview-image {
         flex-shrink: 0;
         margin-top: -30px;
+        pointer-events: none;
 
         & > .inner-image {
             width: 48px;
@@ -168,6 +169,7 @@ li:first-child .more-item--delete {
             box-shadow: var(--card-shadow);
             border-radius: var(--item-small-radius);
             overflow: hidden;
+            pointer-events: auto;
 
             & > img {
                 width: 100%;
