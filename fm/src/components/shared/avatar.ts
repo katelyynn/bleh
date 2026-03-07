@@ -80,7 +80,7 @@ export function patch_avatar(
                 </div>
                 <div class="track-preview-info">
                     <h5 class="track-preview-text track-preview-title"><span class="at">@</span>${name}</h5>
-                    ${badges ? html.node`
+                    ${badges.length > 0 ? html.node`
                         <div class="badges track-preview-badges">
                             ${create_badge(badges[badges.length - 1], false, true, true)}
                             ${badges.length > 1 ? html.node`<div class="extra-badges-text">${tl(trans.and_count_more, { c: badges.length - 1 })}</div>` : ''}
