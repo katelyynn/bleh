@@ -34664,7 +34664,7 @@
   function update_inbuilt_select(id, value) {
     document.body.setAttribute(`data-bleh--inbuilt-${id}`, value);
   }
-  function select(values, initial = "", name = "", func = null, blend = false, title_func = null, hide2 = false) {
+  function select(values, initial = "", name = "", func = null, blend = false, title_func = null, hide2 = false, in_settings = false) {
     let select2;
     let button2;
     if (!values || values.length == 0) return html.node`
@@ -34685,7 +34685,7 @@
                     `;
     })}
             </select>
-            <button class="select-button ${blend ? "link-select blend-v2-btn" : ""}" data-hide=${hide2} type="button" ref=${(el) => button2 = el} />
+            <button class="select-button ${blend ? "link-select blend-v2-btn" : ""} ${in_settings ? "select-in-settings" : ""}" data-hide=${hide2} type="button" ref=${(el) => button2 = el} />
         </div>
     `;
     let menu = tippy_esm_default(button2, {
@@ -43095,7 +43095,7 @@
           render(select_hook, html`
                     ${menu = select(use_list, use_value, "", (val) => {
             update_select(val);
-          })}
+          }, false, null, false, true)}
                 `);
         }, update_select = function(val) {
           if (!elem) return;
@@ -59608,7 +59608,12 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                         ${select(
       select_prepare(form_country),
       form_country.value,
-      "country"
+      "country",
+      null,
+      false,
+      null,
+      false,
+      true
     )}
                     </div>
                 </div>

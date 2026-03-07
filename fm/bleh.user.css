@@ -17034,9 +17034,10 @@ input[type=range]::-moz-range-progress {
   width: max-content;
   position: relative;
   --btn-right: calc(var(--button-sides) + 12px + 4px) !important;
+  --select-arrow-icon-size: 12px;
   &:after {
     --mask: var(--icon-16-dropdown);
-    --mask-size: 12px;
+    --mask-size: var(--select-arrow-icon-size);
     --margin-top: -6px;
     --right: var(--button-sides-icon);
     transition-property: transform !important;
@@ -17080,6 +17081,37 @@ input[type=range]::-moz-range-progress {
   align-items: center;
   gap: var(--icon-gap);
   width: 100% !important;
+}
+.select-in-settings {
+  --bg: transparent;
+  --shadow: none;
+  &:before {
+    content: "";
+    position: absolute;
+    display: block;
+    right: calc(var(--button-sides-icon) - (var(--margin) / 2));
+    --size: calc(var(--select-arrow-icon-size) + 2px);
+    --margin: calc(var(--size) - var(--select-arrow-icon-size));
+    background-color: oklch(var(--b2) / 20%);
+    border-radius: 4px;
+    width: var(--size);
+    height: var(--size);
+    top: 50%;
+    margin-top: calc(-1 * (var(--size) / 2));
+    transition-property: opacity;
+    transition-duration: var(--trans);
+    transition-timing-function: var(--trans-function);
+  }
+  &:hover:before {
+    transition: none;
+  }
+  &:hover,
+  &:active,
+  &[aria-expanded=true] {
+    &:before {
+      opacity: 0;
+    }
+  }
 }
 .select-header {
   font-size: 13px;

@@ -15,7 +15,7 @@ export function update_inbuilt_select(id, value) {
     document.body.setAttribute(`data-bleh--inbuilt-${id}`, value);
 }
 
-export function select(values, initial = '', name = '', func = null, blend = false, title_func = null, hide = false) {
+export function select(values, initial = '', name = '', func = null, blend = false, title_func = null, hide = false, in_settings = false) {
     let select;
     let button;
 
@@ -33,14 +33,14 @@ export function select(values, initial = '', name = '', func = null, blend = fal
         <div class="select-wrap custom-selector">
             <select ref=${(el) => (select = el)} name=${name}>
                 ${values.map((value) => {
-                    if (value.value == null) return html.node``;
+        if (value.value == null) return html.node``;
 
-                    return html.node`
+        return html.node`
                         <option value=${value.value} selected=${value.value == initial}>${value.text}</option>
                     `;
-                })}
+    })}
             </select>
-            <button class="select-button ${blend ? 'link-select blend-v2-btn' : ''}" data-hide=${hide} type="button" ref=${(el) => (button = el)} />
+            <button class="select-button ${blend ? 'link-select blend-v2-btn' : ''} ${in_settings ? 'select-in-settings' : ''}" data-hide=${hide} type="button" ref=${(el) => (button = el)} />
         </div>
     `;
 

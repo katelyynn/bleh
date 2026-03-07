@@ -589,7 +589,12 @@ function patch_settings_profile_panel(token, update_picture) {
                         ${select(
                             select_prepare(form_country),
                             form_country.value,
-                            'country'
+                            'country',
+                            null,
+                            false,
+                            null,
+                            false,
+                            true
                         )}
                     </div>
                 </div>

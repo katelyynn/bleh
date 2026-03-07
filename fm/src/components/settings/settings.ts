@@ -1028,7 +1028,7 @@ export function setting({
                 render(select_hook, html`
                     ${menu = select(use_list, use_value, '', (val) => {
                         update_select(val);
-                    })}
+                    }, false, null, false, true)}
                 `);
             }
 
