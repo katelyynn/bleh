@@ -83,7 +83,7 @@
                 var(--cards-overlay-image-subtlest, none),
                 color-mix(in oklch, oklch(var(--h4)), oklch(var(--h3)) 60%);
             --col: oklch(var(--b7));
-            --mask-colour: oklch(var(--b7), 70%);
+            --mask-colour: oklch(var(--b7) / 70%);
             --shadow:
                 var(--primary-shadow), 0 3px 12px oklch(var(--h4) / 32%),
                 var(--interactable-outer);

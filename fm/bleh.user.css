@@ -3212,7 +3212,7 @@ select,
       --bg-hov: var(--cards-overlay-image-subtlest, none), color-mix(in oklch, oklch(var(--h4)), oklch(var(--h3)) 80%);
       --bg-atv: var(--cards-overlay-image-subtlest, none), color-mix(in oklch, oklch(var(--h4)), oklch(var(--h3)) 60%);
       --col: oklch(var(--b7));
-      --mask-colour: oklch(var(--b7), 70%);
+      --mask-colour: oklch(var(--b7) / 70%);
       --shadow:
         var(--primary-shadow),
         0 3px 12px oklch(var(--h4) / 32%),
@@ -3821,6 +3821,7 @@ li:first-child .more-item--delete {
       width: 48px;
       height: 48px;
       background: color-mix(in oklch, oklch(var(--b2)), oklch(var(--b5)) 70%);
+      outline: 1px solid oklch(var(--b8) / 60%);
       box-shadow: var(--card-shadow);
       border-radius: var(--item-small-radius);
       overflow: hidden;
@@ -8599,9 +8600,9 @@ button.bleh--gallery-bookmark-image-btn {
 }
 .album-grid-button,
 .report-dropdown-button {
-  --bg: oklch(var(--b7), 20%);
-  --bg-hov: oklch(var(--b7), 40%);
-  --bg-atv: oklch(var(--b7), 60%);
+  --bg: oklch(var(--b7) / 20%);
+  --bg-hov: oklch(var(--b7) / 40%);
+  --bg-atv: oklch(var(--b7) / 60%);
   --shadow: none;
   --filter: var(--card-blur);
   --col: #fff !important;

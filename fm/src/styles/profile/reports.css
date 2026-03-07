@@ -122,9 +122,9 @@
 
 .album-grid-button,
 .report-dropdown-button {
-    --bg: oklch(var(--b7), 20%);
-    --bg-hov: oklch(var(--b7), 40%);
-    --bg-atv: oklch(var(--b7), 60%);
+    --bg: oklch(var(--b7) / 20%);
+    --bg-hov: oklch(var(--b7) / 40%);
+    --bg-atv: oklch(var(--b7) / 60%);
     --shadow: none;
     --filter: var(--card-blur);
 
