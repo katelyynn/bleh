@@ -337,7 +337,7 @@
                 position: relative;
                 width: 16px;
                 height: 16px;
-                --radius: var(--item-small-radius);
+                --radius: 4px;
                 --padding: 0;
 
                 display: flex;

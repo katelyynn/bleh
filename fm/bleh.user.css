@@ -3805,7 +3805,8 @@ li:first-child .more-item--delete {
 .track-preview {
   max-width: 500px !important;
   display: flex;
-  gap: 10px;
+  flex-direction: column;
+  gap: 6px;
   position: relative;
   order: -10;
   &.user-preview {
@@ -3815,12 +3816,13 @@ li:first-child .more-item--delete {
   }
   .track-preview-image {
     flex-shrink: 0;
+    margin-top: -30px;
     & > .inner-image {
-      width: 50px;
-      height: 50px;
+      width: 48px;
+      height: 48px;
       background: oklch(var(--b5));
       box-shadow: var(--card-shadow);
-      border-radius: var(--item-med-radius);
+      border-radius: var(--item-small-radius);
       overflow: hidden;
       & > img {
         width: 100%;
@@ -3837,7 +3839,7 @@ li:first-child .more-item--delete {
     & > .hoshino-marker {
       position: absolute;
       top: 2px;
-      left: calc(-1 * (50px + 8px));
+      left: calc(-1 * (48px + 8px));
       background: oklch(var(--b5));
       display: flex;
       justify-content: center;
@@ -3867,7 +3869,7 @@ li:first-child .more-item--delete {
     }
   }
   padding: calc(var(--button-sides) - 4px) 0 calc(var(--button-sides) + 2px);
-  border-bottom: 1px solid var(--card-border-base);
+  border-bottom: 1px solid var(--separator-base);
   margin: 2px var(--button-sides) 6px;
   & + .track-preview {
     display: none;
@@ -3889,12 +3891,15 @@ li:first-child .more-item--delete {
 .track-preview-artist {
   color: oklch(var(--c2) / 80%);
 }
+.track-preview-album,
 .track-preview-tags {
   color: oklch(var(--c2) / 70%);
 }
-.track-preview-album,
 .track-preview-timestamp {
   color: oklch(var(--c3));
+}
+.track-preview-timestamp {
+  font-size: calc(var(--font-size) - 2px);
 }
 .accented-menu-item,
 .dropdown-menu-clickable-item[data-starred=true]:not(.no-colour),
@@ -10830,6 +10835,9 @@ h2.playlisting-create-option-title {
   border-bottom-left-radius: var(--card-radius);
   border-bottom-right-radius: var(--card-radius);
   overflow: hidden;
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
   @media (max-width: 980px) {
     --w: var(--cards-width);
     opacity: 0.8;
@@ -10889,6 +10897,9 @@ h2.playlisting-create-option-title {
       white 100%);
   mask-image: var(--mask);
   -webkit-mask-image: var(--mask);
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
   &[data-accent-based] {
     background-color: oklch(var(--h3));
   }
@@ -17524,7 +17535,7 @@ input[type=range]::-moz-range-progress {
         position: relative;
         width: 16px;
         height: 16px;
-        --radius: var(--item-small-radius);
+        --radius: 4px;
         --padding: 0;
         display: flex;
         justify-content: center;

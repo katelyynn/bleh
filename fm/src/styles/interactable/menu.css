@@ -144,7 +144,8 @@ li:first-child .more-item--delete {
 .track-preview {
     max-width: 500px !important;
     display: flex;
-    gap: 10px;
+    flex-direction: column;
+    gap: 6px;
     position: relative;
 
     /* bulk edit */
@@ -158,13 +159,14 @@ li:first-child .more-item--delete {
 
     .track-preview-image {
         flex-shrink: 0;
+        margin-top: -30px;
 
         & > .inner-image {
-            width: 50px;
-            height: 50px;
+            width: 48px;
+            height: 48px;
             background: oklch(var(--b5));
             box-shadow: var(--card-shadow);
-            border-radius: var(--item-med-radius);
+            border-radius: var(--item-small-radius);
             overflow: hidden;
 
             & > img {
@@ -183,7 +185,7 @@ li:first-child .more-item--delete {
         & > .hoshino-marker {
             position: absolute;
             top: 2px;
-            left: calc(-1 * (50px + 8px));
+            left: calc(-1 * (48px + 8px));
 
             background: oklch(var(--b5));
 
@@ -221,7 +223,7 @@ li:first-child .more-item--delete {
     }
 
     padding: calc(var(--button-sides) - 4px) 0 calc(var(--button-sides) + 2px);
-    border-bottom: 1px solid var(--card-border-base);
+    border-bottom: 1px solid var(--separator-base);
     margin: 2px var(--button-sides) 6px;
 
     & + .track-preview {
@@ -246,11 +248,16 @@ li:first-child .more-item--delete {
 .track-preview-artist {
     color: oklch(var(--c2) / 80%);
 }
+.track-preview-album,
 .track-preview-tags {
     color: oklch(var(--c2) / 70%);
 }
-.track-preview-album, .track-preview-timestamp {
+.track-preview-timestamp {
     color: oklch(var(--c3));
+}
+
+.track-preview-timestamp {
+    font-size: calc(var(--font-size) - 2px);
 }
 
 
