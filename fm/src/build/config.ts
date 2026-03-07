@@ -4,94 +4,46 @@
 // Licensed under GPLv3
 //
 
-import { trans } from '@/build/trans';
+import { trans, translation } from '@/build/trans';
 
-export let settings = {};
-export let settings_template = {
-    theme: 'dark',
-    high_contrast: false,
-    gloss: 0,
-    gendered_tags: true,
-    show_extra_nav: true,
+type setting_value = string | boolean | number | [] | string[] | {};
 
-    accent_type: 'avatar',
-    hue: 255,
-    sat: 1,
-    sat_bg: 1,
-    lit: 1,
+interface setting_instance {
+    css?: string,
+    default: setting_value,
+    type?: 'toggle' | 'checkbox' | 'range' | 'select' | 'radio' | 'list' | 'tabs' | 'text' | 'other',
+    title?: translation,
+    body?: translation,
+    incompatible?: Record<string, boolean | setting_value>,
+    hide_if_incompatible?: boolean,
+    require_reload?: boolean | 'partial',
+    tags?: (translation | string)[],
+    bubble?: boolean,
+    beta?: boolean,
+    new_release?: boolean,
+    values?: Record<string, radio_item>,
+    min?: number,
+    max?: number,
+    step?: number,
+    platforms?: string[],
+    icon?: string,
+    horizontal?: boolean,
+    vertical?: boolean,
+    placeholder?: translation | string,
+    keybind?: string[],
+    warn_if_empty?: boolean,
+    predefined?: boolean,
+    warn_if_matches_auth?: boolean,
+    avatar?: boolean,
+    suffix?: string,
+    wait?: boolean
+}
 
-    dev: false,
-    branch: 'uwu',
+interface radio_item {
+    name: translation | string
+}
 
-    api_key: '',
-
-    profile_header_expand: true,
-
-    hide_hateful: true,
-    accessible_name_colours: false,
-    reduced_motion: false,
-    underline_links: false,
-    big_numbers: false,
-    format_guest_features: true,
-    show_guest_features: false,
-    stacked_chartlist_info: true,
-    show_remaster_tags: true,
-    corrections: true,
-    colourful_counts: true,
-    colourful_tracks: true,
-    rain: false,
-    feature_flags: {},
-    show_your_progress: true,
-    travis: false,
-    list_view: 1,
-    chart_view: 'line',
-    chart_bar_axis: 'horizontal',
-    chart_insights_view: 'pie',
-    shout_markdown: true,
-    bio_markdown: true,
-    hue_from_album: true,
-    seasonal: true,
-    seasonal_particles: 'all',
-    seasonal_particles_fps: false,
-    seasonal_overlays: true,
-
-    profile_header_own: true,
-    profile_header_others: true,
-    profile_avi_background: false,
-
-    profile_shortcut: '',
-    font: '',
-    font_weight: 480,
-    font_weight_medium: 650,
-    font_weight_bold: 730,
-    font_emoji: true,
-
-    show_bulk_edit_album: false,
-    grid_glow: true,
-
-    auth_menu_obsessions: false,
-
-    default_avatar_action: 'expand',
-
-    glacier_library_graphs: true,
-
-    activities: true,
-    activity_shout: true,
-    activity_image: true,
-    activity_obsess: true,
-    activity_love: true,
-    activity_bookmark: true,
-    activity_install: true,
-    activity_wiki: true,
-
-    simulate_scroll: true,
-
-    toggle_icon: false,
-
-    log_show_all: false,
-
-    avatar_radius: 50
-};
+export let settings: Record<string, setting_value> = {};
 export let settings_base = {
     theme: {
         css: 'theme',
@@ -580,7 +532,7 @@ export let inbuilt_settings = {
 
 export const other_setting_types = ['list', 'tabs'];
 
-export let settings_store = {
+export let settings_store: Record<string, setting_instance> = {
     theme: {
         default: 'darker',
         type: 'radio',

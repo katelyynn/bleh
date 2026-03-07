@@ -17,7 +17,7 @@ import {
 import { lang, tl, trans } from '@/build/trans';
 import { bleh_glacier_insights } from '@/pages/profile/glacier';
 import { parse_scrobbles_as_rank } from '@/components/music/colourful_counts';
-import { correct_artist, correct_item_by_artist, name_includes } from '@/components/music/lotus';
+import { correct_artist, correct_item_by_artist, name_includes, smart_title } from '@/components/music/lotus';
 import { html, render } from 'lighterhtml';
 import ColorThief from 'color-thief-browser';
 import { register_menu } from '@/components/menu';
@@ -293,17 +293,7 @@ export function music_grids(search = page.structure.main, use_colour = true) {
                 }
 
                 // combine
-                render(
-                    name_elem,
-                    html.node`
-                    <span class="title">${song_title}</span>
-                    ${song_tags.map(
-                        (tag) => html.node`
-                        <span class="feat" data-bleh--tag-type=${tag.type} data-bleh--tag-group=${tag.group}>${romanise(tag.text)}</span>
-                    `
-                    )}
-                `
-                );
+                render(name_elem, smart_title(song_title, song_tags));
             } else {
                 artist.textContent = romanise(
                     correct_artist(artist.textContent.trim())

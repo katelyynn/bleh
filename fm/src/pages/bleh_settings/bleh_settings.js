@@ -4,7 +4,7 @@
 // Licensed under GPLv3
 //
 
-import { settings, settings_store } from '@/build/config.js';
+import { settings, settings_store } from '@/build/config';
 import { album_track_corrections, artist_corrections } from '@/build/music.js';
 import {
     auth,
@@ -700,15 +700,15 @@ export async function render_setting_page(page_id) {
                                     <div class="title">California Love</div>
                                     <div
                                         class="feat"
-                                        data-bleh--tag-type="ft."
-                                        data-bleh--tag-group="guests"
+                                        data-tag-type="ft."
+                                        data-tag-group="guests"
                                     >
                                         ft. Dr. Dre, Roger Troutman
                                     </div>
                                     <div
                                         class="feat"
-                                        data-bleh--tag-type="- remix"
-                                        data-bleh--tag-group="mixes"
+                                        data-tag-type="- remix"
+                                        data-tag-group="mixes"
                                     >
                                         Remix
                                     </div>

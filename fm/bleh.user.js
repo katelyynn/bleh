@@ -34510,17 +34510,7 @@
             song_tags = formatted_title[1];
             artist.textContent = romanise(formatted_title[2]);
           }
-          render(
-            name_elem,
-            html.node`
-                    <span class="title">${song_title}</span>
-                    ${song_tags.map(
-              (tag) => html.node`
-                        <span class="feat" data-bleh--tag-type=${tag.type} data-bleh--tag-group=${tag.group}>${romanise(tag.text)}</span>
-                    `
-            )}
-                `
-          );
+          render(name_elem, smart_title(song_title, song_tags));
         } else {
           artist.textContent = romanise(
             correct_artist(artist.textContent.trim())
@@ -35496,7 +35486,7 @@
                                 <div class="track-preview-tags">
                                     ${song_tags.map(
               (tag) => html.node`
-                                        <div class="feat" data-bleh--tag-type="${tag.type}" data-bleh--tag-group="${tag.group}">${tag.text}</div>
+                                        <div class="feat" data-tag-type="${tag.type}" data-tag-group="${tag.group}">${tag.text}</div>
                                     `
             )}
                                 </div>
@@ -37162,17 +37152,7 @@
       let song_title = formatted_title[0];
       let song_tags = formatted_title[1];
       page.corrected = formatted_title[4];
-      render(
-        track_title,
-        html.node`
-            <div class="title">${song_title.trim()}</div>
-            ${song_tags.map(
-          (tag) => html.node`
-                <div class="feat" data-bleh--tag-type="${tag.type}" data-bleh--tag-group="${tag.group}">${tag.text}</div>
-            `
-        )}
-        `
-      );
+      render(track_title, smart_title(song_title, song_tags));
       let song_guests = formatted_title[3];
       page.sister_others = formatted_title[3];
       for (let guest in song_guests) {
@@ -52865,8 +52845,8 @@
       const content = message.querySelector(".inbox-message-message > span").textContent.trim();
       let valentine = false;
       if (subject.endsWith("\u2661")) {
-        for (let translation in trans.valentine) {
-          if (subject == trans.valentine[translation].replace("{u}", auth.name)) {
+        for (let translation2 in trans.valentine) {
+          if (subject == trans.valentine[translation2].replace("{u}", auth.name)) {
             valentine = true;
             break;
           }
@@ -55366,15 +55346,15 @@
                                     <div class="title">California Love</div>
                                     <div
                                         class="feat"
-                                        data-bleh--tag-type="ft."
-                                        data-bleh--tag-group="guests"
+                                        data-tag-type="ft."
+                                        data-tag-group="guests"
                                     >
                                         ft. Dr. Dre, Roger Troutman
                                     </div>
                                     <div
                                         class="feat"
-                                        data-bleh--tag-type="- remix"
-                                        data-bleh--tag-group="mixes"
+                                        data-tag-type="- remix"
+                                        data-tag-group="mixes"
                                     >
                                         Remix
                                     </div>
@@ -56972,13 +56952,18 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     return result;
   }
   function smart_title(song_title, song_tags) {
+    const show_features = settings.show_guest_features;
+    const show_remaster = settings.show_remaster_tags;
     return html`
         <div class="title">${romanise(song_title.trim())}</div>
-        ${song_tags.map(
-      (tag) => html.node`
-                <div class="feat" data-bleh--tag-type=${tag.type} data-bleh--tag-group=${tag.group}>${romanise(tag.text)}</div>
-            `
-    )}
+        ${song_tags.map((tag) => {
+      if (!show_features && tag.group == "guests" || !show_remaster && tag.group == "remasters") {
+        return html.node``;
+      }
+      return html.node`
+                <div class="feat" data-tag-type=${tag.type} data-tag-group=${tag.group}>${romanise(tag.text)}</div>
+            `;
+    })}
     `;
   }
   function smart_artists(song_artist, song_guests) {
@@ -58601,15 +58586,15 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                                     <div class="title">California Love</div>
                                     <div
                                         class="feat"
-                                        data-bleh--tag-type="ft."
-                                        data-bleh--tag-group="guests"
+                                        data-tag-type="ft."
+                                        data-tag-group="guests"
                                     >
                                         ft. Dr. Dre, Roger Troutman
                                     </div>
                                     <div
                                         class="feat"
-                                        data-bleh--tag-type="- remix"
-                                        data-bleh--tag-group="mixes"
+                                        data-tag-type="- remix"
+                                        data-tag-group="mixes"
                                     >
                                         Remix
                                     </div>
@@ -61940,8 +61925,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       if (page.subpage != "sent_message") {
         let valentine = false;
         if (message_subject.textContent.trim().endsWith("\u2661")) {
-          for (let translation in trans.valentine) {
-            if (message_subject.textContent.trim() == trans.valentine[translation].replace("{u}", auth.name)) {
+          for (let translation2 in trans.valentine) {
+            if (message_subject.textContent.trim() == trans.valentine[translation2].replace("{u}", auth.name)) {
               valentine = true;
               break;
             }
@@ -74073,14 +74058,14 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       log("your key is undefined", "trans");
       return translation_fallback;
     }
-    let translation = key[lang] || key.en;
+    let translation2 = key[lang] || key.en;
     for (const [placeholder, value] of Object.entries(replacements)) {
       const regex = new RegExp(`{${placeholder}}`, "g");
-      translation = translation.replace(regex, value);
+      translation2 = translation2.replace(regex, value);
     }
-    if (page.state.april && translation.includes("Last.fm Pro"))
-      translation = translation.replaceAll("Last.fm Pro", "Verified");
-    return translation;
+    if (page.state.april && translation2.includes("Last.fm Pro"))
+      translation2 = translation2.replaceAll("Last.fm Pro", "Verified");
+    return translation2;
   }
   function collect_keys(object, prefix, out = []) {
     for (const k4 in object) {
@@ -74166,7 +74151,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     return key.split(".").reduce((trans2, key2) => trans2[key2], trans);
   }
 
-  // src/build/config.js
+  // src/build/config.ts
   var settings = {};
   var inbuilt_settings = {
     recent_artwork: {

@@ -4,7 +4,7 @@
 // Licensed under GPLv3
 //
 
-import { settings } from '@/build/config.js';
+import { settings } from '@/build/config';
 import { auth, discord, page, root } from '@/build/page';
 import { stored_season } from '@/build/seasonal';
 import { lang, lang_info, tl, trans } from '@/build/trans';

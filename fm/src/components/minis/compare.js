@@ -14,7 +14,7 @@ import { notify, notify_rm } from '@/components/dialog/notify';
 import { select } from '@/components/settings/select';
 import { patch_titles } from '@/components/music/track';
 import { render_user } from '@/pages/home/minis.js';
-import { settings } from '@/build/config.js';
+import { settings } from '@/build/config';
 import { redirect } from '@/components/music/music';
 import tippy from 'tippy.js';
 import { ff } from '@/components/settings/sku';

@@ -19,7 +19,7 @@ import { html, render } from 'lighterhtml';
 import { setting } from '@/components/settings/settings';
 import { ff } from '@/components/settings/sku';
 import { sponsor } from '@/components/sponsor';
-import { settings } from '@/build/config.js';
+import { settings } from '@/build/config';
 import { dialog } from '@/components/dialog/dialog';
 import { match } from '@/components/settings/dynamic_theming';
 import { set_storage } from '@/build/tools';
@@ -349,15 +349,15 @@ function setup_music() {
                                     <div class="title">California Love</div>
                                     <div
                                         class="feat"
-                                        data-bleh--tag-type="ft."
-                                        data-bleh--tag-group="guests"
+                                        data-tag-type="ft."
+                                        data-tag-group="guests"
                                     >
                                         ft. Dr. Dre, Roger Troutman
                                     </div>
                                     <div
                                         class="feat"
-                                        data-bleh--tag-type="- remix"
-                                        data-bleh--tag-group="mixes"
+                                        data-tag-type="- remix"
+                                        data-tag-group="mixes"
                                     >
                                         Remix
                                     </div>

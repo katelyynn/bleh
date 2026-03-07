@@ -4,7 +4,7 @@
 // Licensed under GPLv3
 //
 
-import { settings } from '@/build/config.js';
+import { settings } from '@/build/config';
 import { log } from '@/build/log.js';
 import {
     album_track_corrections,
@@ -532,13 +532,23 @@ export function name_includes(
 }
 
 export function smart_title(song_title, song_tags) {
+    const show_features = settings.show_guest_features;
+    const show_remaster = settings.show_remaster_tags;
+
     return html`
         <div class="title">${romanise(song_title.trim())}</div>
-        ${song_tags.map(
-            (tag) => html.node`
-                <div class="feat" data-bleh--tag-type=${tag.type} data-bleh--tag-group=${tag.group}>${romanise(tag.text)}</div>
-            `
-        )}
+        ${song_tags.map((tag) => {
+            if (
+                (!show_features && tag.group == 'guests') ||
+                (!show_remaster && tag.group == 'remasters')
+            ) {
+                return html.node``;
+            }
+
+            return html.node`
+                <div class="feat" data-tag-type=${tag.type} data-tag-group=${tag.group}>${romanise(tag.text)}</div>
+            `;
+        })}
     `;
 }
 

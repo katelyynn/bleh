@@ -463,29 +463,6 @@
     font-weight: var(--font-weight);
 }
 
-body[data-bleh--show_guest_features="false"] {
-    .feat {
-        &[data-bleh--tag-group="guests"] {
-            display: none !important;
-        }
-    }
-
-    .title-container
-        h1:has(.title + [data-bleh--tag-group="guests"]:last-child) {
-        .title {
-            margin: unset !important;
-        }
-    }
-}
-body[data-bleh--show_remaster_tags="false"] {
-    .title-container .feat,
-    .chartlist-name .feat {
-        &[data-bleh--tag-group="remasters"] {
-            display: none;
-        }
-    }
-}
-
 .chartlist {
     --chartlist-type: 0px;
 }

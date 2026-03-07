@@ -18,38 +18,37 @@
         white-space: nowrap;
         flex-shrink: 1;
     }
-
-    & > .feat {
-        width: fit-content;
-        height: fit-content;
-        margin: auto 0;
-        color: oklch(var(--c2) / 80%);
-
-        min-width: 0;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        flex-shrink: 1;
-
-        &:is(
-            [data-bleh--tag-group="mixes"],
-            [data-bleh--tag-group="mixes_numbers"],
-            [data-bleh--tag-group="stems"],
-            [data-bleh--tag-group="bonus"]
-        ) {
-            color: oklch(var(--c3));
-        }
-
-        &[data-bleh--tag-group="mixes_numbers"] {
-            order: 10;
-        }
-    }
 }
+
 .feat {
-    &[data-bleh--tag-group="mixes_numbers"] {
+    width: fit-content;
+    height: fit-content;
+    margin: auto 0;
+    color: oklch(var(--c2) / 80%);
+
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex-shrink: 1;
+
+    &:is(
+        [data-tag-group="mixes"],
+        [data-tag-group="mixes_numbers"],
+        [data-tag-group="stems"],
+        [data-tag-group="bonus"]
+    ) {
+        color: oklch(var(--c3));
+    }
+
+    &[data-tag-group="mixes_numbers"] {
+        order: 10;
+    }
+
+    &[data-tag-group="mixes_numbers"] {
         text-transform: uppercase;
     }
-    &[data-bleh--tag-type="(session"] {
+    &[data-tag-type="(session"] {
         text-transform: capitalize;
     }
 }

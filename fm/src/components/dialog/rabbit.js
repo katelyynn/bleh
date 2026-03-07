@@ -13,7 +13,7 @@ import { save_setting } from '@/components/settings/settings';
 import { sanitise } from '@/build/tools';
 import { compare } from '@/components/minis/compare';
 import { collage } from '@/components/minis/collage';
-import { settings } from '@/build/config.js';
+import { settings } from '@/build/config';
 import { news } from '@/components/news';
 import { ff } from '@/components/settings/sku';
 import { redirect } from '@/components/music/music';

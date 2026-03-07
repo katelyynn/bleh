@@ -11,7 +11,7 @@ import { artist_corrections } from '@/build/music';
 import { page, root } from '@/build/page';
 import { clamp_sat, rgb_to_hsl, sanitise } from '@/build/tools';
 import { tl, trans } from '@/build/trans';
-import { correct_item_by_artist, name_includes } from '@/components/music/lotus';
+import { correct_item_by_artist, name_includes, smart_title } from '@/components/music/lotus';
 import { checkup_page_structure } from '@/components/page/structure';
 import { register_background, update_page } from '@/page';
 import { html, render } from 'lighterhtml';
@@ -123,17 +123,7 @@ export function bleh_obsession() {
         page.corrected = formatted_title[4];
 
         // combine
-        render(
-            track_title,
-            html.node`
-            <div class="title">${song_title.trim()}</div>
-            ${song_tags.map(
-                (tag) => html.node`
-                <div class="feat" data-bleh--tag-type="${tag.type}" data-bleh--tag-group="${tag.group}">${tag.text}</div>
-            `
-            )}
-        `
-        );
+        render(track_title, smart_title(song_title, song_tags));
 
         let song_guests = formatted_title[3];
         page.sister_others = formatted_title[3];

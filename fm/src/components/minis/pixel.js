@@ -14,7 +14,7 @@ import { notify } from '@/components/dialog/notify';
 import { correct_artist, correct_item_by_artist } from '@/components/music/lotus';
 import { keybind } from '@/components/dialog/rabbit';
 import { log } from '@/build/log.js';
-import { settings } from '@/build/config.js';
+import { settings } from '@/build/config';
 
 export function pixel({
     host,

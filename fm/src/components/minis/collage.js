@@ -14,7 +14,7 @@ import { notify, notify_rm } from '@/components/dialog/notify';
 import { clean_number, pad2, sanitise, year_from_date } from '@/build/tools';
 import { log } from '@/build/log.js';
 import { music_grids } from '@/components/music/music_grid';
-import { settings } from '@/build/config.js';
+import { settings } from '@/build/config';
 import { version } from '@/main';
 import { download } from '@/components/dialog/share';
 import { render_user } from '@/pages/home/minis.js';

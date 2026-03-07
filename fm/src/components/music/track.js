@@ -5,7 +5,7 @@
 //
 
 import { html, render } from 'lighterhtml';
-import { settings } from '@/build/config.js';
+import { settings } from '@/build/config';
 import { log } from '@/build/log.js';
 import { auth, page, root } from '@/build/page';
 import {
@@ -433,7 +433,7 @@ export function patch_titles(search = page.structure.main) {
                                 <div class="track-preview-tags">
                                     ${song_tags.map(
                                         (tag) => html.node`
-                                        <div class="feat" data-bleh--tag-type="${tag.type}" data-bleh--tag-group="${tag.group}">${tag.text}</div>
+                                        <div class="feat" data-tag-type="${tag.type}" data-tag-group="${tag.group}">${tag.text}</div>
                                     `
                                     )}
                                 </div>
