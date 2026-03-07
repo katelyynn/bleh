@@ -165,7 +165,7 @@ li:first-child .more-item--delete {
         & > .inner-image {
             width: 48px;
             height: 48px;
-            background: oklch(var(--b5));
+            background: color-mix(in oklch, oklch(var(--b2)), oklch(var(--b5)) 70%);
             box-shadow: var(--card-shadow);
             border-radius: var(--item-small-radius);
             overflow: hidden;

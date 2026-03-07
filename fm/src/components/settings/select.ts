@@ -7,6 +7,7 @@
 import { html, render } from 'lighterhtml';
 import { tl, trans } from '@/build/trans';
 import tippy from 'tippy.js';
+import { setting_value } from '@/build/config';
 
 unsafeWindow._update_inbuilt_select = function (id, value) {
     update_inbuilt_select(id, value);
@@ -22,7 +23,7 @@ export interface select_option {
 
 interface select {
     values: select_option[],
-    initial?: string,
+    initial?: setting_value,
     name?: string,
     func?: (selected: string) => void,
     blend?: boolean,

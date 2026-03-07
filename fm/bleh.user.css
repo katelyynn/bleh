@@ -3820,7 +3820,7 @@ li:first-child .more-item--delete {
     & > .inner-image {
       width: 48px;
       height: 48px;
-      background: oklch(var(--b5));
+      background: color-mix(in oklch, oklch(var(--b2)), oklch(var(--b5)) 70%);
       box-shadow: var(--card-shadow);
       border-radius: var(--item-small-radius);
       overflow: hidden;
@@ -6708,20 +6708,12 @@ section,
   flex-wrap: wrap;
   gap: 2px 6px;
 }
-.user-about > a,
-.smart-title,
-.source-album-name,
-.activity-item .name > a,
-.grid-items-item-main-text,
-.featured-item-name,
-.chartlist-name > a {
-  & > .title {
-    min-width: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    flex-shrink: 1;
-  }
+.title {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex-shrink: 1;
 }
 .feat {
   width: fit-content;
@@ -6741,9 +6733,6 @@ section,
   }
   &[data-tag-group=mixes_numbers] {
     text-transform: uppercase;
-  }
-  &[data-tag-type="(session"] {
-    text-transform: capitalize;
   }
 }
 

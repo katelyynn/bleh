@@ -14,6 +14,7 @@ import { html, render } from "lighterhtml";
 import tippy from "tippy.js";
 import Cropper from 'cropperjs';
 import { ff } from "@/components/settings/sku";
+import { toggle } from "@/components/settings/toggle";
 
 let cropper: Cropper;
 
@@ -38,44 +39,32 @@ function patch_settings_charts_panel(token) {
     charts_panel.setAttribute('data-kate-processed', 'true');
     charts_panel.classList.add('bleh--panel');
 
-    // get info before destroying
+    const form = charts_panel.querySelector('form');
+
     let original_chart_settings = {
         recent: {
-            recent_artwork: document.getElementById(
-                'id_show_recent_tracks_artwork'
-            ).checked,
-            count: document.getElementById('id_chart_length_recent_tracks')
-                .outerHTML,
-            recent_realtime: document.getElementById(
-                'id_auto_refresh_recent_tracks'
-            ).checked
+            recent_artwork: form.querySelector('#id_show_recent_tracks_artwork') as HTMLInputElement,
+            count: form.querySelector('#id_chart_length_recent_tracks') as HTMLSelectElement,
+            recent_realtime: form.querySelector('#id_auto_refresh_recent_tracks') as HTMLInputElement
         },
         artists: {
-            timeframe: document.getElementById('id_chart_range_top_artists')
-                .outerHTML,
-            style: document.getElementById(
-                'id_chart_style_and_length_top_artists'
-            ).outerHTML
+            timeframe: form.querySelector('#id_chart_range_top_artists') as HTMLSelectElement,
+            style: form.querySelector('#id_chart_style_and_length_top_artists') as HTMLSelectElement
         },
         albums: {
-            timeframe: document.getElementById('id_chart_range_top_albums')
-                .outerHTML,
-            style: document.getElementById(
-                'id_chart_style_and_length_top_albums'
-            ).outerHTML
+            timeframe: form.querySelector('#id_chart_range_top_albums') as HTMLSelectElement,
+            style: form.querySelector('#id_chart_style_and_length_top_albums') as HTMLSelectElement
         },
         tracks: {
-            count: document.getElementById('id_chart_length_top_tracks')
-                .outerHTML,
-            timeframe: document.getElementById('id_chart_range_top_tracks')
-                .outerHTML
+            count: form.querySelector('#id_chart_length_top_tracks') as HTMLSelectElement,
+            timeframe: form.querySelector('#id_chart_range_top_tracks') as HTMLSelectElement
         }
     };
 
-    charts_panel.innerHTML = `
+    render(charts_panel, html`
         <h4>${tl(trans.recent_tracks)}</h4>
         <form action="${root}settings#update-chart" name="chart-form" method="post">
-            <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
+            <input type="hidden" name="csrfmiddlewaretoken" value=${token}>
             <div class="inner-preview pad">
                 <div class="tracks recent">
                     <div class="track realtime">
@@ -115,35 +104,26 @@ function patch_settings_charts_panel(token) {
                     <div class="heading">
                         <h5>${tl(trans.amount_to_display)}</h5>
                     </div>
-                    <div class="select-wrap custom-selector" id="id_chart_length_recent_tracks_select">
-                        ${original_chart_settings.recent.count}
-                    </div>
+                    ${select({
+                        values: select_prepare(original_chart_settings.recent.count),
+                        initial: original_chart_settings.recent.count.value,
+                        name: original_chart_settings.recent.count.name,
+                        in_settings: true
+                    })}
                 </div>
-                <div class="setting" data-type="toggle" onclick="_update_inbuilt_item('recent_artwork')" id="container-recent_artwork">
-                    <button class="btn reset" onclick="_reset_inbuilt_item('recent_artwork')">Reset to default</button>
-                    <div class="heading">
-                        <h5>${tl(trans.recent_artwork)}</h5>
-                    </div>
-                    <div class="toggle-wrap">
-                        <input class="companion-checkbox" type="checkbox" name="show_recent_tracks_artwork" id="inbuilt-companion-checkbox-recent_artwork">
-                        <span class="btn toggle colourful" id="toggle-recent_artwork" aria-checked="false">
-                            <div class="dot"></div>
-                        </span>
-                    </div>
-                </div>
-                <div class="setting" data-type="toggle" onclick="_update_inbuilt_item('recent_realtime')" id="container-recent_realtime">
-                    <button class="btn reset" onclick="_reset_inbuilt_item('recent_realtime')">Reset to default</button>
-                    <div class="heading">
-                        <h5>${tl(trans.recent_realtime.name)}</h5>
-                        <p>${tl(trans.recent_realtime.body)}</p>
-                    </div>
-                    <div class="toggle-wrap">
-                        <input class="companion-checkbox" type="checkbox" name="auto_refresh_recent_tracks" id="inbuilt-companion-checkbox-recent_realtime">
-                        <span class="btn toggle colourful" id="toggle-recent_realtime" aria-checked="false">
-                            <div class="dot"></div>
-                        </span>
-                    </div>
-                </div>
+                ${toggle({
+                    title: tl(trans.recent_artwork),
+                    value: original_chart_settings.recent.recent_artwork.checked,
+                    name: original_chart_settings.recent.recent_artwork.name,
+                    standalone: false
+                })}
+                ${toggle({
+                    title: tl(trans.recent_realtime.name),
+                    body: tl(trans.recent_realtime.body),
+                    value: original_chart_settings.recent.recent_realtime.checked,
+                    name: original_chart_settings.recent.recent_realtime.name,
+                    standalone: false
+                })}
             </div>
             <h4>${tl(trans.top_artists)}</h4>
             <div class="inner-preview pad">
@@ -209,17 +189,23 @@ function patch_settings_charts_panel(token) {
                     <div class="heading">
                         <h5>${tl(trans.default_timeframe)}</h5>
                     </div>
-                    <div class="select-wrap custom-selector" id="id_chart_range_top_artists_select">
-                        ${original_chart_settings.artists.timeframe}
-                    </div>
+                    ${select({
+                        values: select_prepare(original_chart_settings.artists.timeframe),
+                        initial: original_chart_settings.artists.timeframe.value,
+                        name: original_chart_settings.artists.timeframe.name,
+                        in_settings: true
+                    })}
                 </div>
                 <div class="setting" data-type="select">
                     <div class="heading">
                         <h5>${tl(trans.chart_style)}</h5>
                     </div>
-                    <div class="select-wrap custom-selector" id="id_chart_style_and_length_top_artists_select">
-                        ${original_chart_settings.artists.style}
-                    </div>
+                    ${select({
+                        values: select_prepare(original_chart_settings.artists.style),
+                        initial: original_chart_settings.artists.style.value,
+                        name: original_chart_settings.artists.style.name,
+                        in_settings: true
+                    })}
                 </div>
             </div>
             <h4>${tl(trans.top_albums)}</h4>
@@ -286,17 +272,23 @@ function patch_settings_charts_panel(token) {
                     <div class="heading">
                         <h5>${tl(trans.default_timeframe)}</h5>
                     </div>
-                    <div class="select-wrap custom-selector" id="id_chart_range_top_albums_select">
-                        ${original_chart_settings.albums.timeframe}
-                    </div>
+                    ${select({
+                        values: select_prepare(original_chart_settings.albums.timeframe),
+                        initial: original_chart_settings.albums.timeframe.value,
+                        name: original_chart_settings.albums.timeframe.name,
+                        in_settings: true
+                    })}
                 </div>
                 <div class="setting" data-type="select">
                     <div class="heading">
                         <h5>${tl(trans.chart_style)}</h5>
                     </div>
-                    <div class="select-wrap custom-selector" id="id_chart_style_and_length_top_albums_select">
-                        ${original_chart_settings.albums.style}
-                    </div>
+                    ${select({
+                        values: select_prepare(original_chart_settings.albums.style),
+                        initial: original_chart_settings.albums.style.value,
+                        name: original_chart_settings.albums.style.name,
+                        in_settings: true
+                    })}
                 </div>
             </div>
             <h4>${tl(trans.top_tracks)}</h4>
@@ -349,17 +341,23 @@ function patch_settings_charts_panel(token) {
                     <div class="heading">
                         <h5>${tl(trans.default_timeframe)}</h5>
                     </div>
-                    <div class="select-wrap custom-selector" id="id_chart_range_top_tracks_select">
-                        ${original_chart_settings.tracks.timeframe}
-                    </div>
+                    ${select({
+                        values: select_prepare(original_chart_settings.tracks.timeframe),
+                        initial: original_chart_settings.tracks.timeframe.value,
+                        name: original_chart_settings.tracks.timeframe.name,
+                        in_settings: true
+                    })}
                 </div>
                 <div class="setting" data-type="select">
                     <div class="heading">
                         <h5>${tl(trans.amount_to_display)}</h5>
                     </div>
-                    <div class="select-wrap custom-selector" id="id_chart_length_top_tracks_select">
-                        ${original_chart_settings.tracks.count}
-                    </div>
+                    ${select({
+                        values: select_prepare(original_chart_settings.tracks.count),
+                        initial: original_chart_settings.tracks.count.value,
+                        name: original_chart_settings.tracks.count.name,
+                        in_settings: true
+                    })}
                 </div>
             </div>
             <div class="settings-footer">
@@ -369,7 +367,7 @@ function patch_settings_charts_panel(token) {
                 <input type="hidden" value="chart" name="submit">
             </div>
         </form>
-    `;
+    `);
 
     custom_select(
         charts_panel.querySelector('#id_chart_length_recent_tracks'),

@@ -6,7 +6,7 @@
 
 import { trans, translation } from '@/build/trans';
 
-type setting_value = string | boolean | number | [] | string[] | {};
+export type setting_value = string | boolean | number | [] | string[] | {};
 
 interface setting_instance {
     css?: string,

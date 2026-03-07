@@ -4,20 +4,12 @@
     gap: 2px 6px;
 }
 
-.user-about > a,
-.smart-title,
-.source-album-name,
-.activity-item .name > a,
-.grid-items-item-main-text,
-.featured-item-name,
-.chartlist-name > a {
-    & > .title {
-        min-width: 0;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        flex-shrink: 1;
-    }
+.title {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex-shrink: 1;
 }
 
 .feat {
@@ -47,8 +39,5 @@
 
     &[data-tag-group="mixes_numbers"] {
         text-transform: uppercase;
-    }
-    &[data-tag-type="(session"] {
-        text-transform: capitalize;
     }
 }

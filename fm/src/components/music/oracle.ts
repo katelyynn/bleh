@@ -220,12 +220,17 @@ export function oracle_process() {
                 <div class="top-container">
                     <h2>${tl(trans.tracklist)}<span class="new-badge beta">${tl(trans.beta)}</span></h2>
                     <div class="accompany view-buttons blend blend-v2">
-                        ${select(page.state.tracklist_sources, settings.tracklist_source, '', (val) => {
-                            save_setting('tracklist_source', val);
-                            tracklist_view_panel.setAttribute('data-view', val);
+                        ${select({
+                            values: page.state.tracklist_sources,
+                            initial: settings.tracklist_source,
+                            func: (val: string) => {
+                                save_setting('tracklist_source', val);
+                                tracklist_view_panel.setAttribute('data-view', val);
 
-                            if (!tracklist_own_loaded) source_own_tracklist();
-                        }, true)}
+                                if (!tracklist_own_loaded) source_own_tracklist();
+                            },
+                            blend: true
+                        })}
                     </div>
                     <div class="view-buttons blend blend-v2">
                         <p class="blend-text">${tl(trans.are_these_results_accurate)}</p>

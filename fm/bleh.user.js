@@ -45764,7 +45764,7 @@
     render(parent, media);
   }
 
-  // src/components/music/oracle.js
+  // src/components/music/oracle.ts
   function oracle_process() {
     log("beginning", "oracle");
     page.state.oracle_debug = {};
@@ -45933,11 +45933,16 @@
                 <div class="top-container">
                     <h2>${tl2(trans.tracklist)}<span class="new-badge beta">${tl2(trans.beta)}</span></h2>
                     <div class="accompany view-buttons blend blend-v2">
-                        ${select(page.state.tracklist_sources, settings.tracklist_source, "", (val) => {
-        save_setting("tracklist_source", val);
-        tracklist_view_panel.setAttribute("data-view", val);
-        if (!tracklist_own_loaded) source_own_tracklist();
-      }, true)}
+                        ${select({
+        values: page.state.tracklist_sources,
+        initial: settings.tracklist_source,
+        func: (val) => {
+          save_setting("tracklist_source", val);
+          tracklist_view_panel.setAttribute("data-view", val);
+          if (!tracklist_own_loaded) source_own_tracklist();
+        },
+        blend: true
+      })}
                     </div>
                     <div class="view-buttons blend blend-v2">
                         <p class="blend-text">${tl2(trans.are_these_results_accurate)}</p>
@@ -56969,11 +56974,9 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
   function smart_artists(song_artist, song_guests) {
     return html`
         <a href="${root}music/${redirect()}${sanitise(song_artist)}">${romanise(song_artist)}</a>
-        ${song_guests.map(
-      (guest) => html.node`
-                ,<a href="${root}music/${redirect()}${sanitise(guest)}">${romanise(guest)}</a>
-            `
-    )}
+        ${song_guests.map((guest) => html.node`
+            ,<a href="${root}music/${redirect()}${sanitise(guest)}">${romanise(guest)}</a>
+        `)}
     `;
   }
   function artist_title() {
@@ -59099,37 +59102,30 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     if (charts_panel.hasAttribute("data-kate-processed")) return;
     charts_panel.setAttribute("data-kate-processed", "true");
     charts_panel.classList.add("bleh--panel");
+    const form = charts_panel.querySelector("form");
     let original_chart_settings = {
       recent: {
-        recent_artwork: document.getElementById(
-          "id_show_recent_tracks_artwork"
-        ).checked,
-        count: document.getElementById("id_chart_length_recent_tracks").outerHTML,
-        recent_realtime: document.getElementById(
-          "id_auto_refresh_recent_tracks"
-        ).checked
+        recent_artwork: form.querySelector("#id_show_recent_tracks_artwork"),
+        count: form.querySelector("#id_chart_length_recent_tracks"),
+        recent_realtime: form.querySelector("#id_auto_refresh_recent_tracks")
       },
       artists: {
-        timeframe: document.getElementById("id_chart_range_top_artists").outerHTML,
-        style: document.getElementById(
-          "id_chart_style_and_length_top_artists"
-        ).outerHTML
+        timeframe: form.querySelector("#id_chart_range_top_artists"),
+        style: form.querySelector("#id_chart_style_and_length_top_artists")
       },
       albums: {
-        timeframe: document.getElementById("id_chart_range_top_albums").outerHTML,
-        style: document.getElementById(
-          "id_chart_style_and_length_top_albums"
-        ).outerHTML
+        timeframe: form.querySelector("#id_chart_range_top_albums"),
+        style: form.querySelector("#id_chart_style_and_length_top_albums")
       },
       tracks: {
-        count: document.getElementById("id_chart_length_top_tracks").outerHTML,
-        timeframe: document.getElementById("id_chart_range_top_tracks").outerHTML
+        count: form.querySelector("#id_chart_length_top_tracks"),
+        timeframe: form.querySelector("#id_chart_range_top_tracks")
       }
     };
-    charts_panel.innerHTML = `
+    render(charts_panel, html`
         <h4>${tl2(trans.recent_tracks)}</h4>
         <form action="${root}settings#update-chart" name="chart-form" method="post">
-            <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
+            <input type="hidden" name="csrfmiddlewaretoken" value=${token}>
             <div class="inner-preview pad">
                 <div class="tracks recent">
                     <div class="track realtime">
@@ -59169,35 +59165,26 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                     <div class="heading">
                         <h5>${tl2(trans.amount_to_display)}</h5>
                     </div>
-                    <div class="select-wrap custom-selector" id="id_chart_length_recent_tracks_select">
-                        ${original_chart_settings.recent.count}
-                    </div>
+                    ${select({
+      values: select_prepare(original_chart_settings.recent.count),
+      initial: original_chart_settings.recent.count.value,
+      name: original_chart_settings.recent.count.name,
+      in_settings: true
+    })}
                 </div>
-                <div class="setting" data-type="toggle" onclick="_update_inbuilt_item('recent_artwork')" id="container-recent_artwork">
-                    <button class="btn reset" onclick="_reset_inbuilt_item('recent_artwork')">Reset to default</button>
-                    <div class="heading">
-                        <h5>${tl2(trans.recent_artwork)}</h5>
-                    </div>
-                    <div class="toggle-wrap">
-                        <input class="companion-checkbox" type="checkbox" name="show_recent_tracks_artwork" id="inbuilt-companion-checkbox-recent_artwork">
-                        <span class="btn toggle colourful" id="toggle-recent_artwork" aria-checked="false">
-                            <div class="dot"></div>
-                        </span>
-                    </div>
-                </div>
-                <div class="setting" data-type="toggle" onclick="_update_inbuilt_item('recent_realtime')" id="container-recent_realtime">
-                    <button class="btn reset" onclick="_reset_inbuilt_item('recent_realtime')">Reset to default</button>
-                    <div class="heading">
-                        <h5>${tl2(trans.recent_realtime.name)}</h5>
-                        <p>${tl2(trans.recent_realtime.body)}</p>
-                    </div>
-                    <div class="toggle-wrap">
-                        <input class="companion-checkbox" type="checkbox" name="auto_refresh_recent_tracks" id="inbuilt-companion-checkbox-recent_realtime">
-                        <span class="btn toggle colourful" id="toggle-recent_realtime" aria-checked="false">
-                            <div class="dot"></div>
-                        </span>
-                    </div>
-                </div>
+                ${toggle({
+      title: tl2(trans.recent_artwork),
+      value: original_chart_settings.recent.recent_artwork.checked,
+      name: original_chart_settings.recent.recent_artwork.name,
+      standalone: false
+    })}
+                ${toggle({
+      title: tl2(trans.recent_realtime.name),
+      body: tl2(trans.recent_realtime.body),
+      value: original_chart_settings.recent.recent_realtime.checked,
+      name: original_chart_settings.recent.recent_realtime.name,
+      standalone: false
+    })}
             </div>
             <h4>${tl2(trans.top_artists)}</h4>
             <div class="inner-preview pad">
@@ -59263,17 +59250,23 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                     <div class="heading">
                         <h5>${tl2(trans.default_timeframe)}</h5>
                     </div>
-                    <div class="select-wrap custom-selector" id="id_chart_range_top_artists_select">
-                        ${original_chart_settings.artists.timeframe}
-                    </div>
+                    ${select({
+      values: select_prepare(original_chart_settings.artists.timeframe),
+      initial: original_chart_settings.artists.timeframe.value,
+      name: original_chart_settings.artists.timeframe.name,
+      in_settings: true
+    })}
                 </div>
                 <div class="setting" data-type="select">
                     <div class="heading">
                         <h5>${tl2(trans.chart_style)}</h5>
                     </div>
-                    <div class="select-wrap custom-selector" id="id_chart_style_and_length_top_artists_select">
-                        ${original_chart_settings.artists.style}
-                    </div>
+                    ${select({
+      values: select_prepare(original_chart_settings.artists.style),
+      initial: original_chart_settings.artists.style.value,
+      name: original_chart_settings.artists.style.name,
+      in_settings: true
+    })}
                 </div>
             </div>
             <h4>${tl2(trans.top_albums)}</h4>
@@ -59340,17 +59333,23 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                     <div class="heading">
                         <h5>${tl2(trans.default_timeframe)}</h5>
                     </div>
-                    <div class="select-wrap custom-selector" id="id_chart_range_top_albums_select">
-                        ${original_chart_settings.albums.timeframe}
-                    </div>
+                    ${select({
+      values: select_prepare(original_chart_settings.albums.timeframe),
+      initial: original_chart_settings.albums.timeframe.value,
+      name: original_chart_settings.albums.timeframe.name,
+      in_settings: true
+    })}
                 </div>
                 <div class="setting" data-type="select">
                     <div class="heading">
                         <h5>${tl2(trans.chart_style)}</h5>
                     </div>
-                    <div class="select-wrap custom-selector" id="id_chart_style_and_length_top_albums_select">
-                        ${original_chart_settings.albums.style}
-                    </div>
+                    ${select({
+      values: select_prepare(original_chart_settings.albums.style),
+      initial: original_chart_settings.albums.style.value,
+      name: original_chart_settings.albums.style.name,
+      in_settings: true
+    })}
                 </div>
             </div>
             <h4>${tl2(trans.top_tracks)}</h4>
@@ -59403,17 +59402,23 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                     <div class="heading">
                         <h5>${tl2(trans.default_timeframe)}</h5>
                     </div>
-                    <div class="select-wrap custom-selector" id="id_chart_range_top_tracks_select">
-                        ${original_chart_settings.tracks.timeframe}
-                    </div>
+                    ${select({
+      values: select_prepare(original_chart_settings.tracks.timeframe),
+      initial: original_chart_settings.tracks.timeframe.value,
+      name: original_chart_settings.tracks.timeframe.name,
+      in_settings: true
+    })}
                 </div>
                 <div class="setting" data-type="select">
                     <div class="heading">
                         <h5>${tl2(trans.amount_to_display)}</h5>
                     </div>
-                    <div class="select-wrap custom-selector" id="id_chart_length_top_tracks_select">
-                        ${original_chart_settings.tracks.count}
-                    </div>
+                    ${select({
+      values: select_prepare(original_chart_settings.tracks.count),
+      initial: original_chart_settings.tracks.count.value,
+      name: original_chart_settings.tracks.count.name,
+      in_settings: true
+    })}
                 </div>
             </div>
             <div class="settings-footer">
@@ -59423,7 +59428,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                 <input type="hidden" value="chart" name="submit">
             </div>
         </form>
-    `;
+    `);
     custom_select(
       charts_panel.querySelector("#id_chart_length_recent_tracks"),
       charts_panel.querySelector("#id_chart_length_recent_tracks_select")

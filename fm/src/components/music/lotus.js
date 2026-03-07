@@ -555,11 +555,9 @@ export function smart_title(song_title, song_tags) {
 export function smart_artists(song_artist, song_guests) {
     return html`
         <a href="${root}music/${redirect()}${sanitise(song_artist)}">${romanise(song_artist)}</a>
-        ${song_guests.map(
-            (guest) => html.node`
-                ,<a href="${root}music/${redirect()}${sanitise(guest)}">${romanise(guest)}</a>
-            `
-        )}
+        ${song_guests.map((guest) => html.node`
+            ,<a href="${root}music/${redirect()}${sanitise(guest)}">${romanise(guest)}</a>
+        `)}
     `;
 }
 
