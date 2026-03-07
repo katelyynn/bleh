@@ -159,7 +159,7 @@
 .dropdown-menu-clickable-button-js-only::after {
     --mask: var(--icon-16-dropdown);
     opacity: unset !important;
-    --top: 16px; /* 50% breaks if theres form-row-help-text below it eg. time zone selector */
+    --top: 15px; /* 50% breaks if theres form-row-help-text below it eg. time zone selector */
     z-index: 20; /* stay above dropdown if active */
 }
 .content-form select {

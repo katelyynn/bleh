@@ -786,6 +786,9 @@ body {
     --overview-bio-size: 440px;
     --header-avatar-size: 180px;
 
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
     @media (min-width: 2000px) {
         --cards-main-width: 1002px;
         --overview-bio-size: 530px;

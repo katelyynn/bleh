@@ -652,6 +652,8 @@ body {
   --grid-default-height: calc((var(--cards-main-width) - (var(--card-padding) * 2)) / 4px);
   --overview-bio-size: 440px;
   --header-avatar-size: 180px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   @media (min-width: 2000px) {
     --cards-main-width: 1002px;
     --overview-bio-size: 530px;
@@ -17171,7 +17173,7 @@ input[type=range]::-moz-range-progress {
 .dropdown-menu-clickable-button-js-only::after {
   --mask: var(--icon-16-dropdown);
   opacity: unset !important;
-  --top: 16px;
+  --top: 15px;
   z-index: 20;
 }
 .content-form select {
