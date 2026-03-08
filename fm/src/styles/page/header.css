@@ -9,7 +9,7 @@
     gap: var(--card-padding);
     margin-top: var(--card-gap) !important;
 
-    --page-header-avatar-size: 160px;
+    --page-header-avatar-size: 170px;
     --page-header-avatar-radius: var(--item-big-radius);
 
     &.redesigned-profile-header {

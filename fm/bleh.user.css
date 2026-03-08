@@ -10274,7 +10274,7 @@ h2.playlisting-create-option-title {
   display: flex;
   gap: var(--card-padding);
   margin-top: var(--card-gap) !important;
-  --page-header-avatar-size: 160px;
+  --page-header-avatar-size: 170px;
   --page-header-avatar-radius: var(--item-big-radius);
   &.redesigned-profile-header {
     --page-header-avatar-radius: var(--avatar-radius);
