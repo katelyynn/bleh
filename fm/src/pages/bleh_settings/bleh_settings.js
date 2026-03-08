@@ -1234,12 +1234,18 @@ export async function render_setting_page(page_id) {
 
         render(page.structure.main, html`
             <section class="bleh--panel">
-                ${select(select_prepare_convert_from_setting(lang_info), settings.translator_view, '', translation_view, false, (val) => html.node`
-                    <span class="language-header">
-                        <span class="flag" style="background-image: url(https://katelyynn.github.io/bleh/fm/flags/${val.value}.svg)" />
-                        <p>${val.text}</p>
-                    </span>
-                `, true)}
+                ${select({
+                    values: select_prepare_convert_from_setting(lang_info),
+                    initial: settings.translator_view,
+                    func: translation_view,
+                    title_func: (val) => html.node`
+                        <span class="language-header">
+                            <span class="flag" style="background-image: url(https://katelyynn.github.io/bleh/fm/flags/${val.value}.svg)" />
+                            <p>${val.text}</p>
+                        </span>
+                    `,
+                    hide: true
+                })}
                 <div class="translation-view" ref=${el => translation_view_container = el} />
             </section>
         `);

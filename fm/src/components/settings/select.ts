@@ -4,7 +4,7 @@
 // Licensed under GPLv3
 //
 
-import { html, render } from 'lighterhtml';
+import { Hole, html, render } from 'lighterhtml';
 import { tl, trans } from '@/build/trans';
 import tippy from 'tippy.js';
 import { setting_value } from '@/build/config';
@@ -18,7 +18,7 @@ export function update_inbuilt_select(id, value) {
 
 export interface select_option {
     value?: string,
-    text: string
+    text: string | Hole | number
 }
 
 interface select {

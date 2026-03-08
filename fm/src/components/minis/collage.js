@@ -87,8 +87,8 @@ export function collage({ host, sidebar } = {}) {
                         max: max
                     }))}
                 </div>
-                ${(type = select(
-                    [
+                ${type = select({
+                    values: [
                         {
                             text: tl(trans.item_type)
                         },
@@ -117,8 +117,8 @@ export function collage({ host, sidebar } = {}) {
                                 ${tl(trans.tracks)}`
                         }
                     ],
-                    default_type
-                ))}
+                    initial: default_type
+                })}
                 <div class="timeframe-container" ref=${el => timeframe_container = el} />
                 <button
                     class="btn primary icon"
@@ -176,12 +176,11 @@ export function collage({ host, sidebar } = {}) {
             }
         ];
 
-        timeframe = select(
-            options,
-            default_timeframe,
-            '',
-            update_timeframe_selection
-        );
+        timeframe = select({
+            values: options,
+            initial: default_timeframe,
+            func: update_timeframe_selection
+        });
 
         render(timeframe_container, timeframe);
 
@@ -200,12 +199,11 @@ export function collage({ host, sidebar } = {}) {
                 });
             }
 
-            timeframe = select(
-                options,
-                default_timeframe,
-                '',
-                update_timeframe_selection
-            );
+            timeframe = select({
+                values: options,
+                initial: default_timeframe,
+                func: update_timeframe_selection
+            });
 
             render(timeframe_container, timeframe);
         });

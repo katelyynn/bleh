@@ -65,8 +65,8 @@ export function compare({ host, sidebar } = {}) {
                     </div>
                 </div>
                 <div class="compare-selection">
-                    ${(pages = select(
-                        [
+                    ${pages = select({
+                        values: [
                             {
                                 text: tl(trans.page_count)
                             },
@@ -95,10 +95,10 @@ export function compare({ host, sidebar } = {}) {
                                 text: 300
                             }
                         ],
-                        '3'
-                    ))}
-                    ${(type = select(
-                        [
+                        initial: '3'
+                    })}
+                    ${type = select({
+                        values: [
                             {
                                 text: tl(trans.item_type)
                             },
@@ -127,10 +127,10 @@ export function compare({ host, sidebar } = {}) {
                                     ${tl(trans.tracks)}`
                             }
                         ],
-                        default_type
-                    ))}
-                    ${(timeframe = select(
-                        [
+                        initial: default_type
+                    })}
+                    ${timeframe = select({
+                        values: [
                             {
                                 text: tl(trans.timeframe)
                             },
@@ -182,8 +182,8 @@ export function compare({ host, sidebar } = {}) {
                                 text: previous_year
                             }
                         ],
-                        default_timeframe
-                    ))}
+                        initial: default_timeframe
+                    })}
                     <button
                         class="btn icon primary compare"
                         ref=${(el) => (submit = el)}
