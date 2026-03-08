@@ -7,11 +7,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 6px;
+    gap: 4px;
     color: oklch(var(--c1));
     --mask-colour: oklch(var(--c1) / 80%);
 
+    --icon-size: 16px;
+
     .window-title {
         font-weight: var(--font-weight-medium);
+        cursor: default;
     }
 }

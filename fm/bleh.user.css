@@ -15581,9 +15581,9 @@ t {
   filter: var(--lastfm-logo-filter, none);
 }
 .bleh-logo {
-  font-size: 28px;
-  line-height: 28px;
-  margin-top: -7px;
+  font-size: 24px;
+  line-height: 24px;
+  margin-top: -8px;
   font-family: var(--font-brand);
   font-weight: 900;
   color: oklch(var(--c1));
@@ -20587,11 +20587,13 @@ input[type=range]::-moz-range-progress {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
   color: oklch(var(--c1));
   --mask-colour: oklch(var(--c1) / 80%);
+  --icon-size: 16px;
   .window-title {
     font-weight: var(--font-weight-medium);
+    cursor: default;
   }
 }
 

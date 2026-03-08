@@ -70,9 +70,9 @@
 }
 
 .bleh-logo {
-    font-size: 28px;
-    line-height: 28px;
-    margin-top: -7px;
+    font-size: 24px;
+    line-height: 24px;
+    margin-top: -8px;
     font-family: var(--font-brand);
     font-weight: 900;
     color: oklch(var(--c1));
