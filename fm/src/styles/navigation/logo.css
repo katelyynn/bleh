@@ -77,7 +77,7 @@
     font-weight: 900;
     color: oklch(var(--c1));
 
-    text-shadow: 0 2px 4px oklch(var(--k4));
+    text-shadow: 0 2px 0 oklch(var(--k4));
 
     [data-bleh--season="pride"] & {
         /* this isnt using https://cesque.com/gaydient/ but shoutout,
