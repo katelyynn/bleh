@@ -97,7 +97,7 @@
     }
 
     &:not(.about-artist-panel) {
-        margin: 40px -40px 30px !important;
+        margin: 50px -40px 20px !important;
         padding: 0 var(--card-padding) !important;
         align-items: center;
         gap: calc(var(--card-gap) + var(--card-padding));
@@ -183,15 +183,15 @@
                         line-clamp: 1;
                         -webkit-line-clamp: 1;
                         -webkit-box-orient: vertical;
-                        font-size: 30px;
-                        line-height: 36px;
+                        font-size: 26px;
+                        line-height: 40px;
 
                         .feat {
                             padding: 0 6px;
                             background-color: oklch(var(--b5), 40%);
                             border-radius: var(--item-med-radius);
-                            font-size: 22px;
-                            line-height: 31px;
+                            font-size: 20px;
+                            line-height: 27px;
                             display: inline-flex;
                             position: relative;
                             bottom: 2px;
@@ -206,8 +206,8 @@
                         }
                     }
                     h2 {
-                        font-size: 22px;
-                        line-height: 28px;
+                        font-size: 20px;
+                        line-height: 24px;
                     }
 
                     [data-multi="true"] h1 {

@@ -51,6 +51,7 @@
             &:before {
                 mask-image: none !important;
                 -webkit-mask-image: none !important;
+                background-color: transparent !important;
                 background-image: var(--favi) !important;
                 background-size: 100% !important;
                 border-radius: var(--item-small-radius) !important;

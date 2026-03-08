@@ -788,7 +788,7 @@ export function append_nav() {
                                 <div class="badges">
                                     ${() => {
                                         const elem = html.node`
-                                            <span class="label user-status-subscriber no-hover expand">
+                                            <span class="label user-status-subscriber no-hover expand small">
                                                 ${tl(trans.badges['user-status-subscriber'].name)}
                                             </span>
                                         `;
@@ -826,36 +826,31 @@ export function append_nav() {
 
                                 return form;
                             }}
-                            ${
-                                settings.starred_friend != '' ?
-                                    () => {
-                                        let button = html.node`
+                            ${settings.starred_friend != '' ? () => {
+                                let button = html.node`
                                     <a class="dropdown-menu-clickable-item chibi colourful" data-type="starred_friend" data-starred="true" href="${root}user/${settings.starred_friend}">${settings.starred_friend}</a>
                                 `;
 
-                                        tippy(button, {
-                                            content: settings.starred_friend
-                                        });
+                                tippy(button, {
+                                    content: settings.starred_friend
+                                });
 
-                                        return button;
-                                    }
-                                :   () => {
-                                        let button = html.node`
-                                    <button class="dropdown-menu-clickable-item chibi colourful" data-type="starred_friend" data-is-shortcut="false" onclick=${() => open_starred_friend_window()}>${tl(trans.starred_friend.name)}</button>
+                                return button;
+                            } : () => {
+                                let button = html.node`
+                                    <button class="dropdown-menu-clickable-item chibi" data-type="starred_friend" data-is-shortcut="false" onclick=${() => open_starred_friend_window()}>${tl(trans.starred_friend.name)}</button>
                                 `;
 
-                                        tippy(button, {
-                                            content: tl(
-                                                trans.starred_friend.name
-                                            )
-                                        });
+                                tippy(button, {
+                                    content: tl(
+                                        trans.starred_friend.name
+                                    )
+                                });
 
-                                        return button;
-                                    }
-                            }
+                                return button;
+                            }}
                         </div>
                     </div>
-                    <div class="vertical-sep" />
                     <div class="side" ref=${(el) => (side = el)} data-page="1">
                         <div class="side-page" data-page="1">
                             ${current.map((val) => {
@@ -1117,16 +1112,16 @@ export function append_nav() {
                     <div class="avatar">
                         <img src=${avatar(auth.avatar, 'avatar170s')} alt=${auth.name} />
                     </div>
-                    <div class="name">${cache.username ? cache.username : `@${auth.name}`}</div>
+                    <div class="name">${cache.username ? cache.username : html.node`<span class="at">@</span>${auth.name}`}</div>
                     ${badges ? html.node`
                         <div class="badges">
-                            ${create_badge(badges, false, true)}
+                            ${create_badge(badges, false, true, true)}
                         </div>
                     ` : auth.pro ? html.node`
                         <div class="badges">
                             ${() => {
                                 const elem = html.node`
-                                    <span class="label user-status-subscriber no-hover expand">
+                                    <span class="label user-status-subscriber no-hover expand small">
                                         ${tl(trans.badges['user-status-subscriber'].name)}
                                     </span>
                                 `;

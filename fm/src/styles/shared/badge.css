@@ -83,7 +83,7 @@
             position: absolute;
             background: var(--flag);
 
-            --flag-size: 10px;
+            --flag-size: 8px;
             width: var(--flag-size);
             height: var(--flag-size);
 

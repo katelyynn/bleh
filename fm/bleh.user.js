@@ -38380,16 +38380,12 @@
     `;
     let count = form.querySelector('[name="chart_length_recent_tracks"]');
     original_chart_settings = {
-      recent_artwork: form.querySelector("#id_show_recent_tracks_artwork").checked,
-      recent_realtime: form.querySelector("#id_auto_refresh_recent_tracks").checked
+      recent_artwork: form.querySelector("#id_show_recent_tracks_artwork"),
+      recent_realtime: form.querySelector("#id_auto_refresh_recent_tracks")
     };
     form.classList = "";
     render(form, html`
-        <input
-            type="hidden"
-            name="csrfmiddlewaretoken"
-            value="${page.token}"
-        />
+        <input type="hidden" name="csrfmiddlewaretoken" value=${page.token} />
         <div class="setting-group blend">
             <div class="setting" data-type="select">
                 <div class="heading">
@@ -38398,62 +38394,23 @@
                 ${select({
       values: select_prepare(count),
       initial: count.value,
-      name: "chart_length_recent_tracks",
+      name: count.name,
       in_settings: true
     })}
             </div>
-            <div
-                class="setting"
-                data-type="toggle"
-                id="container-recent_artwork"
-                onclick="_update_inbuilt_item('recent_artwork')"
-            >
-                <div class="heading">
-                    <h5>${tl2(trans.recent_artwork)}</h5>
-                </div>
-                <div class="toggle-wrap">
-                    <input
-                        class="companion-checkbox"
-                        type="checkbox"
-                        name="show_recent_tracks_artwork"
-                        id="inbuilt-companion-checkbox-recent_artwork"
-                    />
-                    <span
-                        class="btn toggle colourful"
-                        id="toggle-recent_artwork"
-                        aria-checked="false"
-                    >
-                        <div class="dot"></div>
-                    </span>
-                </div>
-            </div>
-            <div
-                class="setting"
-                data-type="toggle"
-                id="container-recent_realtime"
-                onclick="_update_inbuilt_item('recent_realtime')"
-            >
-                <div class="heading">
-                    <h5>${tl2(trans.recent_realtime.name)}</h5>
-                    <p>${tl2(trans.recent_realtime.body)}</p>
-                </div>
-                <div class="toggle-wrap">
-                    <input
-                        class="companion-checkbox"
-                        type="checkbox"
-                        name="auto_refresh_recent_tracks"
-                        id="inbuilt-companion-checkbox-recent_realtime"
-                    />
-                    <span
-                        class="btn toggle colourful"
-                        id="toggle-recent_realtime"
-                        aria-checked="false"
-                        type="button"
-                    >
-                        <div class="dot"></div>
-                    </span>
-                </div>
-            </div>
+            ${toggle({
+      title: tl2(trans.recent_artwork),
+      value: original_chart_settings.recent_artwork.checked,
+      name: original_chart_settings.recent_artwork.name,
+      standalone: false
+    })}
+            ${toggle({
+      title: tl2(trans.recent_realtime.name),
+      body: tl2(trans.recent_realtime.body),
+      value: original_chart_settings.recent_realtime.checked,
+      name: original_chart_settings.recent_realtime.name,
+      standalone: false
+    })}
             ${setting({ id: "format_guest_features" })}
             <div class="settings-footer">
                 <button type="submit" class="btn-primary save" onclick=${() => {
@@ -38565,7 +38522,7 @@
                     ${select({
         values: select_prepare(timeframe),
         initial: timeframe.value,
-        name: "chart_range_top_artists",
+        name: timeframe.name,
         in_settings: true
       })}
                 </div>
@@ -38574,9 +38531,9 @@
                         <h5>${tl2(trans.chart_style)}</h5>
                     </div>
                     ${select({
-        values: select_prepare(timeframe),
-        initial: timeframe.value,
-        name: "chart_range_top_artists",
+        values: select_prepare(style),
+        initial: style.value,
+        name: style.name,
         in_settings: true
       })}
                 </div>
@@ -38587,7 +38544,7 @@
                     ${select({
         values: select_prepare(grid_length),
         initial: grid_length.value,
-        name: "artists_image_grid_length",
+        name: grid_length.name,
         in_settings: true
       })}
                 </div>
@@ -38598,7 +38555,7 @@
                     ${select({
         values: select_prepare(chartlist_length),
         initial: chartlist_length.value,
-        name: "artists_chartlist_length",
+        name: chartlist_length.name,
         in_settings: true
       })}
                 </div>
@@ -38704,7 +38661,7 @@
                     ${select({
         values: select_prepare(timeframe),
         initial: timeframe.value,
-        name: "chart_range_top_albums",
+        name: timeframe.name,
         in_settings: true
       })}
                 </div>
@@ -38713,9 +38670,9 @@
                         <h5>${tl2(trans.chart_style)}</h5>
                     </div>
                     ${select({
-        values: select_prepare(timeframe),
-        initial: timeframe.value,
-        name: "chart_range_top_albums",
+        values: select_prepare(style),
+        initial: style.value,
+        name: style.name,
         in_settings: true
       })}
                 </div>
@@ -38726,7 +38683,7 @@
                     ${select({
         values: select_prepare(grid_length),
         initial: grid_length.value,
-        name: "albums_image_grid_length",
+        name: grid_length.name,
         in_settings: true
       })}
                 </div>
@@ -38737,7 +38694,7 @@
                     ${select({
         values: select_prepare(chartlist_length),
         initial: chartlist_length.value,
-        name: "albums_chartlist_length",
+        name: chartlist_length.name,
         in_settings: true
       })}
                 </div>
@@ -38820,9 +38777,7 @@
     if (page.token == "")
       page.token = form.querySelector('[name="csrfmiddlewaretoken"]').getAttribute("value");
     let timeframe = form.querySelector('[name="chart_range_top_tracks"]');
-    let chartlist_length = form.querySelector(
-      '[name="chart_length_top_tracks"]'
-    );
+    let chartlist_length = form.querySelector('[name="chart_length_top_tracks"]');
     let tooltip;
     form.classList = "";
     render(
@@ -38841,7 +38796,7 @@
                     ${select({
         values: select_prepare(timeframe),
         initial: timeframe.value,
-        name: "chart_range_top_tracks",
+        name: timeframe.name,
         in_settings: true
       })}
                 </div>
@@ -38850,9 +38805,9 @@
                         <h5>${tl2(trans.chart_size)}</h5>
                     </div>
                     ${select({
-        values: select_prepare(timeframe),
-        initial: timeframe.value,
-        name: "chart_range_top_tracks",
+        values: select_prepare(chartlist_length),
+        initial: chartlist_length.value,
+        name: chartlist_length.name,
         in_settings: true
       })}
                 </div>
@@ -53509,7 +53464,7 @@
                                 <div class="badges">
                                     ${() => {
           const elem = html.node`
-                                            <span class="label user-status-subscriber no-hover expand">
+                                            <span class="label user-status-subscriber no-hover expand small">
                                                 ${tl2(trans.badges["user-status-subscriber"].name)}
                                             </span>
                                         `;
@@ -53553,7 +53508,7 @@
           return button2;
         } : () => {
           let button2 = html.node`
-                                    <button class="dropdown-menu-clickable-item chibi colourful" data-type="starred_friend" data-is-shortcut="false" onclick=${() => open_starred_friend_window()}>${tl2(trans.starred_friend.name)}</button>
+                                    <button class="dropdown-menu-clickable-item chibi" data-type="starred_friend" data-is-shortcut="false" onclick=${() => open_starred_friend_window()}>${tl2(trans.starred_friend.name)}</button>
                                 `;
           tippy_esm_default(button2, {
             content: tl2(
@@ -53564,7 +53519,6 @@
         }}
                         </div>
                     </div>
-                    <div class="vertical-sep" />
                     <div class="side" ref=${(el) => side = el} data-page="1">
                         <div class="side-page" data-page="1">
                             ${current.map((val) => {
@@ -53798,16 +53752,16 @@
                     <div class="avatar">
                         <img src=${avatar(auth.avatar, "avatar170s")} alt=${auth.name} />
                     </div>
-                    <div class="name">${cache2.username ? cache2.username : `@${auth.name}`}</div>
+                    <div class="name">${cache2.username ? cache2.username : html.node`<span class="at">@</span>${auth.name}`}</div>
                     ${badges ? html.node`
                         <div class="badges">
-                            ${create_badge(badges, false, true)}
+                            ${create_badge(badges, false, true, true)}
                         </div>
                     ` : auth.pro ? html.node`
                         <div class="badges">
                             ${() => {
             const elem = html.node`
-                                    <span class="label user-status-subscriber no-hover expand">
+                                    <span class="label user-status-subscriber no-hover expand small">
                                         ${tl2(trans.badges["user-status-subscriber"].name)}
                                     </span>
                                 `;

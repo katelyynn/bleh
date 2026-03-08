@@ -55,6 +55,7 @@ import { find_pronouns } from '@/components/profile/pronouns';
 import { queue_popup } from '@/components/dialog/popup';
 import { bleh_playlist } from '@/pages/profile/playlist';
 import { profile_reports } from './reports';
+import { toggle } from '@/components/settings/toggle';
 
 export function bleh_profiles() {
     // the obsessions page is a user subpage but works very differently
@@ -1116,19 +1117,13 @@ function profile_recents() {
 
     let count = form.querySelector('[name="chart_length_recent_tracks"]');
     original_chart_settings = {
-        recent_artwork: form.querySelector('#id_show_recent_tracks_artwork')
-            .checked,
+        recent_artwork: form.querySelector('#id_show_recent_tracks_artwork'),
         recent_realtime: form.querySelector('#id_auto_refresh_recent_tracks')
-            .checked
     };
 
     form.classList = '';
     render(form, html`
-        <input
-            type="hidden"
-            name="csrfmiddlewaretoken"
-            value="${page.token}"
-        />
+        <input type="hidden" name="csrfmiddlewaretoken" value=${page.token} />
         <div class="setting-group blend">
             <div class="setting" data-type="select">
                 <div class="heading">
@@ -1137,62 +1132,23 @@ function profile_recents() {
                 ${select({
                     values: select_prepare(count),
                     initial: count.value,
-                    name: 'chart_length_recent_tracks',
+                    name: count.name,
                     in_settings: true
                 })}
             </div>
-            <div
-                class="setting"
-                data-type="toggle"
-                id="container-recent_artwork"
-                onclick="_update_inbuilt_item('recent_artwork')"
-            >
-                <div class="heading">
-                    <h5>${tl(trans.recent_artwork)}</h5>
-                </div>
-                <div class="toggle-wrap">
-                    <input
-                        class="companion-checkbox"
-                        type="checkbox"
-                        name="show_recent_tracks_artwork"
-                        id="inbuilt-companion-checkbox-recent_artwork"
-                    />
-                    <span
-                        class="btn toggle colourful"
-                        id="toggle-recent_artwork"
-                        aria-checked="false"
-                    >
-                        <div class="dot"></div>
-                    </span>
-                </div>
-            </div>
-            <div
-                class="setting"
-                data-type="toggle"
-                id="container-recent_realtime"
-                onclick="_update_inbuilt_item('recent_realtime')"
-            >
-                <div class="heading">
-                    <h5>${tl(trans.recent_realtime.name)}</h5>
-                    <p>${tl(trans.recent_realtime.body)}</p>
-                </div>
-                <div class="toggle-wrap">
-                    <input
-                        class="companion-checkbox"
-                        type="checkbox"
-                        name="auto_refresh_recent_tracks"
-                        id="inbuilt-companion-checkbox-recent_realtime"
-                    />
-                    <span
-                        class="btn toggle colourful"
-                        id="toggle-recent_realtime"
-                        aria-checked="false"
-                        type="button"
-                    >
-                        <div class="dot"></div>
-                    </span>
-                </div>
-            </div>
+            ${toggle({
+                title: tl(trans.recent_artwork),
+                value: original_chart_settings.recent_artwork.checked,
+                name: original_chart_settings.recent_artwork.name,
+                standalone: false
+            })}
+            ${toggle({
+                title: tl(trans.recent_realtime.name),
+                body: tl(trans.recent_realtime.body),
+                value: original_chart_settings.recent_realtime.checked,
+                name: original_chart_settings.recent_realtime.name,
+                standalone: false
+            })}
             ${setting({ id: 'format_guest_features' })}
             <div class="settings-footer">
                 <button type="submit" class="btn-primary save" onclick=${() => {
@@ -1327,7 +1283,7 @@ function profile_artists() {
                     ${select({
                         values: select_prepare(timeframe),
                         initial: timeframe.value,
-                        name: 'chart_range_top_artists',
+                        name: timeframe.name,
                         in_settings: true
                     })}
                 </div>
@@ -1336,9 +1292,9 @@ function profile_artists() {
                         <h5>${tl(trans.chart_style)}</h5>
                     </div>
                     ${select({
-                        values: select_prepare(timeframe),
-                        initial: timeframe.value,
-                        name: 'chart_range_top_artists',
+                        values: select_prepare(style),
+                        initial: style.value,
+                        name: style.name,
                         in_settings: true
                     })}
                 </div>
@@ -1349,7 +1305,7 @@ function profile_artists() {
                     ${select({
                         values: select_prepare(grid_length),
                         initial: grid_length.value,
-                        name: 'artists_image_grid_length',
+                        name: grid_length.name,
                         in_settings: true
                     })}
                 </div>
@@ -1360,7 +1316,7 @@ function profile_artists() {
                     ${select({
                         values: select_prepare(chartlist_length),
                         initial: chartlist_length.value,
-                        name: 'artists_chartlist_length',
+                        name: chartlist_length.name,
                         in_settings: true
                     })}
                 </div>
@@ -1487,7 +1443,7 @@ function profile_albums() {
                     ${select({
                         values: select_prepare(timeframe),
                         initial: timeframe.value,
-                        name: 'chart_range_top_albums',
+                        name: timeframe.name,
                         in_settings: true
                     })}
                 </div>
@@ -1496,9 +1452,9 @@ function profile_albums() {
                         <h5>${tl(trans.chart_style)}</h5>
                     </div>
                     ${select({
-                        values: select_prepare(timeframe),
-                        initial: timeframe.value,
-                        name: 'chart_range_top_albums',
+                        values: select_prepare(style),
+                        initial: style.value,
+                        name: style.name,
                         in_settings: true
                     })}
                 </div>
@@ -1509,7 +1465,7 @@ function profile_albums() {
                     ${select({
                         values: select_prepare(grid_length),
                         initial: grid_length.value,
-                        name: 'albums_image_grid_length',
+                        name: grid_length.name,
                         in_settings: true
                     })}
                 </div>
@@ -1520,7 +1476,7 @@ function profile_albums() {
                     ${select({
                         values: select_prepare(chartlist_length),
                         initial: chartlist_length.value,
-                        name: 'albums_chartlist_length',
+                        name: chartlist_length.name,
                         in_settings: true
                     })}
                 </div>
@@ -1622,9 +1578,7 @@ function profile_tracks() {
             .getAttribute('value');
 
     let timeframe = form.querySelector('[name="chart_range_top_tracks"]');
-    let chartlist_length = form.querySelector(
-        '[name="chart_length_top_tracks"]'
-    );
+    let chartlist_length = form.querySelector('[name="chart_length_top_tracks"]');
 
     let tooltip;
 
@@ -1645,7 +1599,7 @@ function profile_tracks() {
                     ${select({
                         values: select_prepare(timeframe),
                         initial: timeframe.value,
-                        name: 'chart_range_top_tracks',
+                        name: timeframe.name,
                         in_settings: true
                     })}
                 </div>
@@ -1654,9 +1608,9 @@ function profile_tracks() {
                         <h5>${tl(trans.chart_size)}</h5>
                     </div>
                     ${select({
-                        values: select_prepare(timeframe),
-                        initial: timeframe.value,
-                        name: 'chart_range_top_tracks',
+                        values: select_prepare(chartlist_length),
+                        initial: chartlist_length.value,
+                        name: chartlist_length.name,
                         in_settings: true
                     })}
                 </div>
