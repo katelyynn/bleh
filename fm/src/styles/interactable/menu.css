@@ -215,8 +215,7 @@ li:first-child .more-item--delete {
 }
 
 .track-preview-badges {
-    display: flex;
-    flex-direction: row;
+    flex-direction: row !important;
     justify-content: start;
     align-items: center;
     margin-top: 4px;
