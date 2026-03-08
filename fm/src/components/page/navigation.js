@@ -734,7 +734,6 @@ export function append_nav() {
 
         onShow: (instance) => {
             page.structure.notifications.setAttribute('data-auth-open', 'true');
-            badges = load_badges(auth.name);
 
             const update_required = localStorage.getItem('bleh_update_required') || 'false';
 
@@ -781,11 +780,15 @@ export function append_nav() {
                                 <img src=${avatar(auth.avatar, 'avatar170s')} alt=${auth.name} />
                             </div>
                             <div class="name"><span class="at">@</span>${auth.name}</div>
-                            ${auth.pro ? html.node`
+                            ${badges ? html.node`
+                                <div class="badges">
+                                    ${create_badge(badges, false, true)}
+                                </div>
+                            ` : auth.pro ? html.node`
                                 <div class="badges">
                                     ${() => {
                                         const elem = html.node`
-                                            <span class="label user-status-subscriber no-hover">
+                                            <span class="label user-status-subscriber no-hover expand">
                                                 ${tl(trans.badges['user-status-subscriber'].name)}
                                             </span>
                                         `;
@@ -1115,12 +1118,15 @@ export function append_nav() {
                         <img src=${avatar(auth.avatar, 'avatar170s')} alt=${auth.name} />
                     </div>
                     <div class="name">${cache.username ? cache.username : `@${auth.name}`}</div>
-                    ${badges || auth.pro ? html.node`
+                    ${badges ? html.node`
                         <div class="badges">
-                            ${badges ? badges.map((badge) => create_badge(badge)) : ''}
-                            ${auth.pro ? () => {
+                            ${create_badge(badges, false, true)}
+                        </div>
+                    ` : auth.pro ? html.node`
+                        <div class="badges">
+                            ${() => {
                                 const elem = html.node`
-                                    <span class="label user-status-subscriber no-hover">
+                                    <span class="label user-status-subscriber no-hover expand">
                                         ${tl(trans.badges['user-status-subscriber'].name)}
                                     </span>
                                 `;
@@ -1135,7 +1141,7 @@ export function append_nav() {
                                 });
 
                                 return elem;
-                            } : ''}
+                            }}
                         </div>
                     ` : ''}
                     <a class="link-block-cover-link" href="${root}user/${auth.name}" />
