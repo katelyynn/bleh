@@ -45,11 +45,16 @@
     width: calc(((var(--font-item-size) + var(--gap)) * 4) - var(--gap));
 
     @media (max-width: 450px) {
-        width: calc(((var(--font-item-size) + var(--gap)) * 3) - var(--gap));
+        width: calc(((var(--font-item-size) + var(--gap)) * 3) - var(--gap)) !important;
+    }
+
+    &.primary {
+        width: calc(((var(--font-item-size) + var(--gap)) * 5) - var(--gap));
+        --font-item-size: 70px;
     }
 
     & > .font-selection {
-        height: 50px;
+        height: 60px;
 
         --bg: oklch(var(--b4) / 40%);
         --bg-hov: oklch(var(--b4) / 60%);
@@ -58,7 +63,7 @@
 
         --font-weight: var(--custom-font-weight, var(--font-weight-bold));
         --col: oklch(var(--c2));
-        --font-size: 24px;
+        --font-size: calc(20px * var(--custom-font-size-multiplier, 1));
 
         & > span {
             font-family: var(--custom-font, var(--font)) !important;

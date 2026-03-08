@@ -59860,7 +59860,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                             </div>
                             <div class="font-name-options">
                                 <h4 class="font-options-header">${tl2(trans.font.name)}</h4>
-                                <div class="font-options">
+                                <div class="font-options primary">
                                     ${Object.entries(page.state.fonts).map(([font, family]) => {
               if (family == "") family = tl2(trans.none);
               const elem = html.node`

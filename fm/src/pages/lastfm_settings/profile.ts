@@ -930,7 +930,7 @@ function profile_panel() {
                             </div>
                             <div class="font-name-options">
                                 <h4 class="font-options-header">${tl(trans.font.name)}</h4>
-                                <div class="font-options">
+                                <div class="font-options primary">
                                     ${Object.entries(page.state.fonts).map(([font, family]) => {
                                         if (family == '') family = tl(trans.none);
 
