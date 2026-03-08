@@ -730,6 +730,7 @@ body {
   --solarium-bright: var(--card-blur) var(--bright) url(#solarium);
   --solarium-dark: var(--card-blur) var(--dark) url(#solarium);
   --card-blur: blur(6px) saturate(var(--blur-saturate)) brightness(var(--blur-brightness)) contrast(1);
+  --solarium-compensate: brightness(70%);
   --solarium-percent: 1;
   @supports (-moz-appearance: none) {
     --solarium: var(--card-blur);
@@ -747,9 +748,9 @@ body {
     --solarium-dark: var(--card-blur) var(--dark);
   }
   &[data-bleh--solarium=false] {
-    --solarium: none !important;
-    --solarium-bright: none !important;
-    --solarium-dark: none !important;
+    --solarium: var(--solarium-compensate) !important;
+    --solarium-bright: var(--solarium-compensate) !important;
+    --solarium-dark: var(--solarium-compensate) !important;
     --solarium-opacity: 1;
     --solarium-display: none;
     --solarium-percent: 0;
@@ -761,6 +762,7 @@ body {
     --blur-saturate: 130%;
     --blur-brightness: 1.04;
     --blur-contrast: 1;
+    --solarium-compensate: brightness(110%);
   }
   &[data-bleh--theme=ink] {
     --menu-bg: var(--b5);
@@ -10706,23 +10708,6 @@ h2.playlisting-create-option-title {
         }
       }
     }
-    & > .badges {
-      display: flex;
-      flex-direction: row-reverse;
-      gap: 4px;
-      flex-wrap: wrap;
-      width: fit-content;
-      margin-top: 10px;
-      @media (max-width: 980px) {
-        justify-content: center;
-      }
-      & > .user-status-subscriber {
-        order: -1;
-      }
-      & > .user-follow {
-        order: -2;
-      }
-    }
     .profile-top-header {
       margin-top: var(--card-gap);
     }
@@ -18577,8 +18562,9 @@ input[type=range]::-moz-range-progress {
 /* src/styles/shared/badge.css */
 .label,
 .header-new-on-tour {
-  font-size: var(--font-size);
-  font-weight: var(--font-weight) !important;
+  font-size: 13px;
+  line-height: 13px;
+  font-weight: var(--font-weight-medium) !important;
   display: flex;
   align-items: center;
   color: oklch(var(--l3-c)) !important;
@@ -18598,19 +18584,22 @@ input[type=range]::-moz-range-progress {
   transition-timing-function: var(--trans-function);
   background: none !important;
   position: relative;
-  --mask-size: var(--icon-size);
-  --sides: 8px;
+  --mask-size: 16px;
+  --sides: 10px;
   --left: var(--sides);
   --top: 50%;
   --margin-left: none;
   --margin-top: calc(-1 * var(--mask-size) / 2);
-  height: 28px;
+  height: 26px;
   min-width: calc(var(--mask-size) + (var(--sides) * 2));
   max-width: unset;
   transition-delay: 0s !important;
   --bg: var(--badge);
   --bg-hov: var(--badge-hov);
-  box-shadow: 0 3px 15px 1px oklch(var(--h4) / 10%), 0 0 6px 1px oklch(var(--l3-c) / 12%) inset !important;
+  box-shadow:
+    0 3px 15px 1px oklch(var(--h4) / 10%),
+    0 -4px 10px 0 oklch(var(--h4) / 20%) inset,
+    0 0 0 1px oklch(var(--l3-c) / 8%) inset !important;
   background-color: var(--bg) !important;
   border-radius: var(--item-big-radius) !important;
   cursor: pointer;
@@ -18621,6 +18610,7 @@ input[type=range]::-moz-range-progress {
     transition-duration: 0s !important;
   }
   &:not(.expand) {
+    --sides: 8px;
     font-size: 0 !important;
   }
   &.expand {
@@ -18665,6 +18655,22 @@ input[type=range]::-moz-range-progress {
     cursor: default;
   }
 }
+.badges {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 4px;
+  flex-wrap: wrap;
+  width: fit-content;
+}
+.profile-badges {
+  margin-top: 10px;
+  & > .user-status-subscriber {
+    order: -1 !important;
+  }
+  @media (max-width: 980px) {
+    justify-content: center;
+  }
+}
 .header-new-on-tour {
   top: unset;
   text-align: unset;
@@ -18686,28 +18692,21 @@ input[type=range]::-moz-range-progress {
 }
 .user-status-staff {
   --mask: var(--icon-staff);
-  --hue-over: 360;
-  --sat-over: 1.325;
-  --lit-over: 0.825;
+  --hue-over: 19;
+  --sat-over: 2.68;
+  --lit-over: 0.77;
 }
 .user-status-mod {
   --mask: var(--icon-mod);
-  --hue-over: 10;
-  --sat-over: 1;
-  --lit-over: 1;
+  --hue-over: 36;
+  --sat-over: 2.16;
+  --lit-over: 0.85;
 }
 .user-status-alum {
   --mask: var(--icon-alum);
-  --hue-over: 20;
-  --sat-over: 1;
-  --lit-over: 1;
-}
-.user-status--bleh-queen,
-.label.user-status--bleh-queen {
-  --mask: var(--icon-queen);
-  --hue-over: 210;
-  --sat-over: 1.3;
-  --lit-over: 1;
+  --hue-over: 56;
+  --sat-over: 1.14;
+  --lit-over: 1.26;
 }
 .user-status--bleh-cute,
 .label.user-status--bleh-cute {

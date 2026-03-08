@@ -887,6 +887,8 @@ body {
     --solarium-dark: var(--card-blur) var(--dark) url(#solarium);
     --card-blur: blur(6px) saturate(var(--blur-saturate)) brightness(var(--blur-brightness)) contrast(1);
 
+    --solarium-compensate: brightness(70%);
+
     --solarium-percent: 1;
 
     @supports (-moz-appearance: none) {
@@ -908,9 +910,9 @@ body {
     }
 
     &[data-bleh--solarium="false"] {
-        --solarium: none !important;
-        --solarium-bright: none !important;
-        --solarium-dark: none !important;
+        --solarium: var(--solarium-compensate) !important;
+        --solarium-bright: var(--solarium-compensate) !important;
+        --solarium-dark: var(--solarium-compensate) !important;
         --solarium-opacity: 1;
         --solarium-display: none;
 
@@ -926,6 +928,8 @@ body {
         --blur-saturate: 130%;
         --blur-brightness: 1.04;
         --blur-contrast: 1;
+
+        --solarium-compensate: brightness(110%);
     }
 
     &[data-bleh--theme="ink"] {

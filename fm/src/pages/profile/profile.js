@@ -251,7 +251,7 @@ export function bleh_profiles() {
                     return elem;
                 } : ''}
                 ${badge_elements.length > 0 ? html.node`
-                <div class="badges">
+                <div class="badges profile-badges">
                     ${badge_elements.map(badge => html.node`
                         ${badge}
                     `)}

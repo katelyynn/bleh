@@ -528,27 +528,6 @@
             }
         }
 
-        & > .badges {
-            display: flex;
-            flex-direction: row-reverse;
-            gap: 4px;
-            flex-wrap: wrap;
-            width: fit-content;
-
-            margin-top: 10px;
-
-            @media (max-width: 980px) {
-                justify-content: center;
-            }
-
-            & > .user-status-subscriber {
-                order: -1;
-            }
-            & > .user-follow {
-                order: -2;
-            }
-        }
-
         .profile-top-header {
             margin-top: var(--card-gap);
         }
