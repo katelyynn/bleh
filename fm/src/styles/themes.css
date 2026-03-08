@@ -737,7 +737,7 @@ u,
     --menu-item-accent-atv: oklch(var(--h4) / 22%);
 
     &[data-bleh--theme="oled"],
-    body[data-bleh--theme="oled"] & {
+    body[data-bleh--theme="oled"] &:not(.theme-preview) {
         --c1: 0.96 calc(clamp(min(0), var(--sat), max(1)) * 0.1) var(--hue);
         --c2: 0.87 calc(clamp(min(0), var(--sat), max(1)) * 0.07) var(--hue);
         --c3: 0.6 calc(clamp(min(0), var(--sat), max(1)) * 0.07) var(--hue);
