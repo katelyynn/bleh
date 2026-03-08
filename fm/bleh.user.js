@@ -52843,7 +52843,7 @@
     });
   }
 
-  // src/components/page/navigation.js
+  // src/components/page/navigation.ts
   function patch_masthead() {
     let masthead_logo = document.body.querySelector(".masthead-logo");
     if (!masthead_logo) return;
@@ -53164,11 +53164,9 @@
     });
     links.appendChild(more_button);
     let bleh_container = html.node`
-        <li class="masthead-nav-item">
-            <a class="masthead-nav-control ${stored_season.new_years_eve ? "" : "chibi"}" href="${root}bleh${stored_season.id != "none" ? "/seasonal" : ""}" data-label="bleh" data-season="${stored_season.id}" data-season-active="${stored_season.id != "none" ? "true" : "false"}" data-live="false">
-                ${stored_season.id == "none" ? tl2(trans.bleh_settings) : DateTime.fromISO(stored_season.end.replace("y0", stored_season.year).replace("{offset}", stored_season.offset)).toRelative(DateTime.fromISO(stored_season.now))}
-            </a>
-        </li>
+        <a class="masthead-nav-control ${stored_season.new_years_eve ? "" : "chibi"}" href="${root}bleh${stored_season.id != "none" ? "/seasonal" : ""}" data-label="bleh" data-season="${stored_season.id}" data-season-active="${stored_season.id != "none" ? "true" : "false"}" data-live="false">
+            ${stored_season.id == "none" ? tl2(trans.bleh_settings) : DateTime.fromISO(stored_season.end.replace("y0", stored_season.year).replace("{offset}", stored_season.offset)).toRelative(DateTime.fromISO(stored_season.now))}
+        </a>
     `;
     if (stored_season.id == "none") {
       tippy_esm_default(bleh_container, {
@@ -53184,7 +53182,7 @@
       });
     }
     links.appendChild(bleh_container);
-    page.header.season = bleh_container.querySelector("a");
+    page.header.season = bleh_container;
     let notif_count = new_auth.querySelector(
       '[data-analytics-label="notifications"] + .auth-avatar-notification-count-badge'
     );
@@ -53304,6 +53302,58 @@
     links.appendChild(inbox);
     queue_popup("inbox", inbox);
     queue_popup("search", search);
+    if (auth.pro) {
+      let render_status_container = function(status3) {
+        if (!status3) return;
+        render(
+          status_container,
+          html`
+                    <div class="status">
+                        <div class="status-image">
+                            <img src=${status3.avatar} alt=${status3.album}>
+                        </div>
+                        <div class="status-info">
+                            <strong class="status-text status-title">${status3.name}</strong>
+                            <p class="status-text status-artist">${status3.artist}</p>
+                            <p class="status-text status-album">${status3.album}</p>
+                        </div>
+                    </div>
+                `
+        );
+      };
+      const music = html.node`
+            <button class="masthead-nav-control chibi" data-type="now-playing">
+                ${tl2(trans.music)}
+            </button>
+        `;
+      let status_container;
+      tippy_esm_default(music, {
+        content: tl2(trans.music)
+      });
+      tippy_esm_default(music, {
+        content: html.node`
+                <div class="window-header">
+                    <div class="bleh-icon" data-type="now-playing" style="--icon: var(--mask)" />
+                    <div class="window-title">${tl2(trans.music)}</div>
+                </div>
+                <div class="window-content music-status" ref=${(el) => status_container = el}>
+                    <div class="loading-data-container">
+                        <div class="loading-data-text">${tl2(trans.loading)}</div>
+                    </div>
+                </div>
+            `,
+        theme: "nav-window",
+        placement: "top",
+        interactive: true,
+        interactiveBorder: 10,
+        trigger: "click",
+        onShow(instance) {
+          if (page.now.name) render_status_container(page.now);
+          live_status().then((status3) => render_status_container(status3));
+        }
+      });
+      links.appendChild(music);
+    }
     let selected_language = document.querySelector(
       ".footer-language--active strong"
     )?.textContent;
@@ -53426,7 +53476,6 @@
         const update_required2 = localStorage.getItem("bleh_update_required") || "false";
         let page_2;
         let side;
-        let status_container;
         const current = settings.navigation_items;
         let length = current.length;
         if (length < 2) length = 2;
@@ -53730,15 +53779,6 @@
                         <div class="side-page" data-page="2" ref=${(el) => page_2 = el} />
                     </div>
                 </div>
-                ${ff("status_in_menu") && auth.pro ? html.node`
-                <div class="auth-menu-status" ref=${(el) => status_container = el}>
-                    <div class="status">
-                        <div class="loading-data-container">
-                            <div class="loading-data-text">${tl2(trans.loading)}</div>
-                        </div>
-                    </div>
-                </div>
-                ` : ""}
             `);
         load_profile_cache_externally(auth.name).then((cache2) => {
           render(auth_bg, html`
@@ -53780,28 +53820,6 @@
                     <a class="link-block-cover-link" href="${root}user/${auth.name}" />
                 `);
         });
-        function render_status_container(status3) {
-          if (!status3) return;
-          render(
-            status_container,
-            html`
-                        <div class="status">
-                            <div class="bleh-icon" />
-                            <div
-                                class="status-bg"
-                                style="background-image: url(${status3.avatar})"
-                            />
-                            <div class="status-text">
-                                ${status3.name} ${tl2(trans.by)} ${status3.artist}
-                            </div>
-                        </div>
-                    `
-          );
-        }
-        if (ff("status_in_menu") && auth.pro) {
-          if (page.now.name) render_status_container(page.now);
-          live_status().then((status3) => render_status_container(status3));
-        }
       },
       onHide(instance) {
         page.structure.notifications.setAttribute(
@@ -75467,7 +75485,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-02-25"
       }
     },
-    built_on: "2026-03-07T13:33:36.818Z"
+    built_on: "2026-03-08T14:20:25.899Z"
   };
 
   // node_modules/@kurkle/color/dist/color.esm.js

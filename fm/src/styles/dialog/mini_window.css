@@ -9,7 +9,7 @@
     align-items: center;
     gap: 6px;
     color: oklch(var(--c1));
-    --mask-colour: oklch(var(--c1), 80%);
+    --mask-colour: oklch(var(--c1) / 80%);
 
     .window-title {
         font-weight: var(--font-weight-medium);

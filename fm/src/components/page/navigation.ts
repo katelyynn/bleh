@@ -426,11 +426,9 @@ export function append_nav() {
 
     // configure bleh
     let bleh_container = html.node`
-        <li class="masthead-nav-item">
-            <a class="masthead-nav-control ${stored_season.new_years_eve ? '' : 'chibi'}" href="${root}bleh${stored_season.id != 'none' ? '/seasonal' : ''}" data-label="bleh" data-season="${stored_season.id}" data-season-active="${stored_season.id != 'none' ? 'true' : 'false'}" data-live="false">
-                ${stored_season.id == 'none' ? tl(trans.bleh_settings) : DateTime.fromISO(stored_season.end.replace('y0', stored_season.year).replace('{offset}', stored_season.offset)).toRelative(DateTime.fromISO(stored_season.now))}
-            </a>
-        </li>
+        <a class="masthead-nav-control ${stored_season.new_years_eve ? '' : 'chibi'}" href="${root}bleh${stored_season.id != 'none' ? '/seasonal' : ''}" data-label="bleh" data-season="${stored_season.id}" data-season-active="${stored_season.id != 'none' ? 'true' : 'false'}" data-live="false">
+            ${stored_season.id == 'none' ? tl(trans.bleh_settings) : DateTime.fromISO(stored_season.end.replace('y0', stored_season.year).replace('{offset}', stored_season.offset)).toRelative(DateTime.fromISO(stored_season.now))}
+        </a>
     `;
     if (stored_season.id == 'none') {
         tippy(bleh_container, {
@@ -447,7 +445,7 @@ export function append_nav() {
     }
     links.appendChild(bleh_container);
 
-    page.header.season = bleh_container.querySelector('a');
+    page.header.season = bleh_container;
 
     let notif_count = new_auth.querySelector(
         '[data-analytics-label="notifications"] + .auth-avatar-notification-count-badge'
@@ -594,6 +592,68 @@ export function append_nav() {
     queue_popup('inbox', inbox);
     queue_popup('search', search);
 
+    // music
+    if (auth.pro) {
+        const music = html.node`
+            <button class="masthead-nav-control chibi" data-type="now-playing">
+                ${tl(trans.music)}
+            </button>
+        `;
+
+        let status_container;
+
+        tippy(music, {
+            content: tl(trans.music)
+        });
+
+        tippy(music, {
+            content: html.node`
+                <div class="window-header">
+                    <div class="bleh-icon" data-type="now-playing" style="--icon: var(--mask)" />
+                    <div class="window-title">${tl(trans.music)}</div>
+                </div>
+                <div class="window-content music-status" ref=${el => status_container = el}>
+                    <div class="loading-data-container">
+                        <div class="loading-data-text">${tl(trans.loading)}</div>
+                    </div>
+                </div>
+            `,
+            theme: 'nav-window',
+            placement: 'top',
+            interactive: true,
+            interactiveBorder: 10,
+            trigger: 'click',
+
+            onShow(instance) {
+                if (page.now.name) render_status_container(page.now);
+
+                live_status().then((status) => render_status_container(status));
+            }
+        });
+
+        function render_status_container(status: music_status) {
+            if (!status) return;
+
+            render(
+                status_container,
+                html`
+                    <div class="status">
+                        <div class="status-image">
+                            <img src=${status.avatar} alt=${status.album}>
+                        </div>
+                        <div class="status-info">
+                            <strong class="status-text status-title">${status.name}</strong>
+                            <p class="status-text status-artist">${status.artist}</p>
+                            <p class="status-text status-album">${status.album}</p>
+                        </div>
+                    </div>
+                `
+            );
+        }
+
+        links.appendChild(music);
+    }
+
     // language
     let selected_language = document.querySelector(
         '.footer-language--active strong'
@@ -739,8 +799,6 @@ export function append_nav() {
 
             let page_2;
             let side;
-
-            let status_container;
 
             const current = settings.navigation_items;
 
@@ -1089,15 +1147,6 @@ export function append_nav() {
                         <div class="side-page" data-page="2" ref=${(el) => (page_2 = el)} />
                     </div>
                 </div>
-                ${ff('status_in_menu') && auth.pro ? html.node`
-                <div class="auth-menu-status" ref=${(el) => (status_container = el)}>
-                    <div class="status">
-                        <div class="loading-data-container">
-                            <div class="loading-data-text">${tl(trans.loading)}</div>
-                        </div>
-                    </div>
-                </div>
-                ` : ''}
             `);
 
             load_profile_cache_externally(auth.name).then(cache => {
@@ -1142,32 +1191,6 @@ export function append_nav() {
                     <a class="link-block-cover-link" href="${root}user/${auth.name}" />
                 `);
             });
-
-            function render_status_container(status) {
-                if (!status) return;
-
-                render(
-                    status_container,
-                    html`
-                        <div class="status">
-                            <div class="bleh-icon" />
-                            <div
-                                class="status-bg"
-                                style="background-image: url(${status.avatar})"
-                            />
-                            <div class="status-text">
-                                ${status.name} ${tl(trans.by)} ${status.artist}
-                            </div>
-                        </div>
-                    `
-                );
-            }
-
-            if (ff('status_in_menu') && auth.pro) {
-                if (page.now.name) render_status_container(page.now);
-
-                live_status().then((status) => render_status_container(status));
-            }
         },
 
         onHide(instance) {
@@ -1406,6 +1429,15 @@ export function append_nav() {
     `);
 }
 
+interface music_status {
+    next_fetch: Date,
+    name: Element,
+    artist: Element,
+    album: Element,
+    avatar: string,
+    active: boolean
+}
+
 export async function live_status() {
     if (page.now.next_fetch && Date.now() < page.now.next_fetch)
         return page.now;
@@ -1468,7 +1500,7 @@ export async function live_status() {
             album,
             avatar,
             active
-        };
+        } as music_status;
 
         return page.now;
     } catch (error) {

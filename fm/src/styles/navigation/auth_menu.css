@@ -77,51 +77,12 @@
         opacity: 0.22;
     }*/
 }
-[data-theme="auth-menu"] {
-    &:before {
-        content: "";
-        display: block !important;
-
-        border-top-left-radius: calc(var(--button-radius) + 4px);
-        border-top-right-radius: calc(var(--button-radius) + 4px);
-
-        background-image: var(--url) !important;
-        position: absolute;
-        inset: 0 !important;
-        width: unset !important;
-        height: calc(
-            84px + var(--button-list-gap) + var(--button-list-gap)
-        ) !important;
-        background-size: cover !important;
-        background-position-y: 30% !important;
-        --mask: linear-gradient(0deg, transparent 0%, rgb(0, 0, 0) 100%);
-        mask-image: var(--mask);
-        -webkit-mask-image: var(--mask);
-        opacity: 0.3;
-    }
-
-    /*&:after {
-        content: '';
-        display: block !important;
-
-        background-image: var(--url) !important;
-        position: absolute;
-        inset: 0 !important;
-        top: calc(64px + var(--button-list-gap)) !important;
-        width: unset !important;
-        height: calc(64px + var(--button-list-gap) + var(--button-list-gap)) !important;
-        background-size: cover !important;
-        background-position-y: 30% !important;
-        --mask: linear-gradient(0deg, transparent, rgb(0, 0, 0), transparent);
-        mask-image: var(--mask);
-        -webkit-mask-image: var(--mask);
-        opacity: 0.22;
-    }*/
-}
 
 .tippy-box[data-theme="auth-menu-v2"] {
     padding: 4px !important;
     border-radius: calc(var(--item-med-radius) + 4px) !important;
+
+    --page-width: 230px;
 }
 
 .auth-menu-v2 {
@@ -136,8 +97,6 @@
         width: var(--page-width);
         height: var(--page-height);
         overflow: hidden;
-
-        --page-width: 230px;
 
         .side-page {
             position: absolute;
@@ -260,116 +219,78 @@
     }
 }
 
-.auth-menu-status {
-    padding: var(--item-list-gap);
-    margin: var(--item-list-gap) calc(-1 * var(--item-list-gap))
-        calc(-1 * var(--item-list-gap));
+.music-status {
+    width: 300px;
+}
 
-    --side: calc(var(--button-sides) - 3px);
+.status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.status-image {
+    --size: 56px;
+
+    width: var(--size);
+    height: var(--size);
+    background-color: var(--avatar-generic-background);
+    border-radius: var(--item-med-radius);
     overflow: hidden;
 
-    & > .status {
-        display: flex;
-        justify-content: center;
-        position: relative;
-        font-size: 13px;
-        padding: 0 var(--side);
+    & > img {
+        width: 100%;
+        height: 100%;
+    }
+}
 
-        & > .bleh-icon {
-            position: absolute;
-            top: 0;
-            left: var(--side);
-            bottom: 0;
-            --icon: var(--icon-16-track);
-            color: oklch(var(--c3));
+.status-info {
+    display: flex;
+    flex-direction: column;
+}
 
-            display: none;
+.status-text {
+    margin: unset;
+    cursor: default;
+    position: relative;
+    z-index: 20;
+
+    & > .artist > a,
+    & > a {
+        display: inline-block;
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        flex-shrink: 1;
+
+        &:not(:hover) {
+            color: inherit;
         }
+    }
 
-        & > .loading-data-container {
-            padding: unset;
-        }
+    &.status-title {
+        color: oklch(var(--c2));
+    }
+    &.status-artist {
+        color: oklch(var(--c2) / 80%);
 
-        & > .status-bg {
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-            margin: calc(-1 * var(--item-list-gap));
-            background-position: center;
-            opacity: 0.15;
-
-            --mask: linear-gradient(180deg, transparent 0%, black 90%);
-            mask-image: var(--mask);
-            -webkit-mask-image: var(--mask);
-        }
-
-        & > .status-text {
-            color: oklch(var(--c3));
-            cursor: default;
-
+        & > .artist {
             display: flex;
-            justify-content: center;
-            gap: 4px;
-
-            width: 100%;
+            min-width: 0;
             overflow: hidden;
+            text-overflow: ellipsis;
             white-space: nowrap;
+            flex-shrink: 1;
 
-            & > a {
-                color: oklch(var(--c2));
-
-                min-width: 0;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-                flex-shrink: 1;
-
-                &:hover,
-                &:focus {
-                    color: oklch(var(--l3-c)) !important;
-                }
-            }
-
-            & > :first-child {
-                font-weight: var(--font-weight-medium);
-            }
-
-            & > :last-child {
-                color: oklch(var(--c2), 60%);
-            }
-
-            & > .smart-title {
-                flex-wrap: unset;
-            }
-
-            & > .artist {
-                display: flex;
-                color: oklch(var(--c3) / 60%);
-                cursor: default;
-
-                min-width: 0;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-                flex-shrink: 1;
-
-                & > a {
-                    &:not(:hover) {
-                        color: oklch(var(--c2), 60%) !important;
-                    }
-
-                    min-width: 0;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    white-space: nowrap;
-                    flex-shrink: 1;
-
-                    & + a {
-                        margin-left: 4px;
-                    }
-                }
+            & > a + a {
+                margin-left: 4px;
             }
         }
+    }
+    &.status-album {
+        color: oklch(var(--c3));
+        font-size: 13px;
     }
 }
 

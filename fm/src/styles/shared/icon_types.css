@@ -832,3 +832,7 @@
 [data-type="lock"] {
     --mask: var(--icon-16-lock);
 }
+
+[data-type="now-playing"] {
+    --mask: var(--icon-16-play);
+}
