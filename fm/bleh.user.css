@@ -16123,9 +16123,6 @@ t {
   box-shadow: var( --override-full-shadow, var(--menu-shadow) ) !important;
   overflow: hidden;
   text-align: left;
-  &[data-theme=auth-menu-v2] {
-    overflow: hidden;
-  }
   &[data-theme=nav-window] {
     max-width: 980px !important;
   }
@@ -16140,32 +16137,12 @@ t {
       display: none;
     }
   }
-  &:before {
-    content: "";
-    display: block !important;
-    border-top-left-radius: calc(var(--button-radius) + 4px);
-    border-top-right-radius: calc(var(--button-radius) + 4px);
-    background-image: var(--url) !important;
-    position: absolute;
-    inset: 0 !important;
-    width: unset !important;
-    height: calc(84px + var(--button-list-gap) + var(--button-list-gap)) !important;
-    background-size: cover !important;
-    background-position-y: 30% !important;
-    --mask:
-      linear-gradient(
-        0deg,
-        transparent 0%,
-        rgb(0, 0, 0) 100%);
-    mask-image: var(--mask);
-    -webkit-mask-image: var(--mask);
-    opacity: 0.3;
-  }
 }
 .tippy-box[data-theme=auth-menu-v2] {
   padding: 4px !important;
   border-radius: calc(var(--item-med-radius) + 4px) !important;
   --page-width: 230px;
+  overflow: hidden;
 }
 .auth-menu-v2 {
   display: flex;
@@ -16219,7 +16196,7 @@ t {
     & > .auth-bg-container > .bg {
       z-index: 0;
       position: absolute;
-      inset: calc(-1 * var(--item-list-gap)) 0;
+      inset: calc(-1 * var(--item-list-gap)) 0 0;
       pointer-events: none;
       opacity: 0.17;
       background-size: cover;
