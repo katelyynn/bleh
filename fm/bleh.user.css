@@ -8931,7 +8931,7 @@ text:has(> .your-progress-label-position) {
 [data-font-style=out] {
   --custom-font-colour: #fff;
   --stroke: oklch(var(--s3));
-  --stroke-outer: oklch(var(--s4) / 60%);
+  --stroke-outer: oklch(var(--s3) / 80%);
   --size: 3px;
   --size-n: calc(-1 * var(--size));
   --size-m: 2px;
