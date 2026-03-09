@@ -1,5 +1,5 @@
 {
-    "latest": "2026.0307",
+    "latest": "2026.0309",
     "sponsors": [
         "clairedoll", "kateshapedbox", "evangelicgirl",
         "astrablooms", "ItsProyal", "vwvwvwvwvwvwv", "Orofil",
@@ -66,14 +66,16 @@
                 "lit": 1.18
             }
         ],
-        "bIeak": {
-            "type": "kitty",
-            "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLWNhdCI+PHBhdGggc3Ryb2tlPSJub25lIiBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTIwIDN2MTBhOCA4IDAgMSAxIC0xNiAwdi0xMGwzLjQzMiAzLjQzMmE3Ljk2MyA3Ljk2MyAwIDAgMSA0LjU2OCAtMS40MzJjMS43NjkgMCAzLjQwMyAuNTc0IDQuNzI4IDEuNTQ2bDMuMjcyIC0zLjU0NiIgLz48cGF0aCBkPSJNMiAxNmg1bC00IDQiIC8+PHBhdGggZD0iTTIyIDE2aC01bDQgNCIgLz48cGF0aCBkPSJNMTEgMTZhMSAxIDAgMSAwIDIgMGExIDEgMCAxIDAgLTIgMCIgLz48cGF0aCBkPSJNOSAxMXYuMDEiIC8+PHBhdGggZD0iTTE1IDExdi4wMSIgLz48L3N2Zz4=",
-            "name": "its a kitty!!",
-            "hue": 0.0001,
-            "sat": 0.0001,
-            "lit": 1.5
-        },
+        "bIeak": [
+            {
+                "type": "kitty",
+                "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLWNhdCI+PHBhdGggc3Ryb2tlPSJub25lIiBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTIwIDN2MTBhOCA4IDAgMSAxIC0xNiAwdi0xMGwzLjQzMiAzLjQzMmE3Ljk2MyA3Ljk2MyAwIDAgMSA0LjU2OCAtMS40MzJjMS43NjkgMCAzLjQwMyAuNTc0IDQuNzI4IDEuNTQ2bDMuMjcyIC0zLjU0NiIgLz48cGF0aCBkPSJNMiAxNmg1bC00IDQiIC8+PHBhdGggZD0iTTIyIDE2aC01bDQgNCIgLz48cGF0aCBkPSJNMTEgMTZhMSAxIDAgMSAwIDIgMGExIDEgMCAxIDAgLTIgMCIgLz48cGF0aCBkPSJNOSAxMXYuMDEiIC8+PHBhdGggZD0iTTE1IDExdi4wMSIgLz48L3N2Zz4=",
+                "name": "its a kitty!!",
+                "hue": 0.0001,
+                "sat": 0.0001,
+                "lit": 1.5
+            }
+        ],
         "kateshapedbox": [
             {
                 "type": "contributor"
