@@ -37918,7 +37918,7 @@
       about_me_sidebar.insertBefore(
         html.node`
             <div class="top-container">
-                <h2>
+                <h2 class="about-me-title">
                     ${tl2(trans.about)}
                     <span class="info-tip" ref=${(el) => info_tip = el}>
                         <span class="bleh-icon" data-type="info" style="--icon: var(--mask)" />
@@ -37972,17 +37972,17 @@
           content: html.node`
                     <div class="profile-items">
                         ${cache2.banner ? html.node`
-                        <div class="profile-item" data-type="banner">
-                            <span class="bleh-icon" style="--icon: var(--mask)" />
-                            <p>${tl2(trans.profile_banner.name)}</p>
-                        </div>
+                            <div class="profile-item" data-type="banner">
+                                <span class="bleh-icon" style="--icon: var(--mask)" />
+                                <p class="profile-item-text">${tl2(trans.profile_banner.name)}</p>
+                            </div>
                         ` : ""}
                         ${cache2.hue > -1 && cache2.sat > -1 && cache2.lit > -1 ? html.node`
-                        <div class="profile-item" data-type="accent">
-                            <span class="bleh-icon" style="--icon: var(--mask)" />
-                            <p>${tl2(trans.profile_accent.name)}</p>
-                            <p class="subtle">${cache2.hue}, ${cache2.sat}, ${cache2.lit}</p>
-                        </div>
+                            <div class="profile-item" data-type="accent">
+                                <span class="bleh-icon" style="--icon: var(--mask)" />
+                                <p class="profile-item-text">${tl2(trans.profile_accent.name)}</p>
+                                <p class="profile-item-text subtle">${cache2.hue}, ${cache2.sat}, ${cache2.lit}</p>
+                            </div>
                         ` : ""}
                     </div>
                 `
@@ -45273,8 +45273,8 @@
       body: html.node`
         <div class="setting standalone" data-type="text">
             <div class="avatar-container">
-                <div class="avatar-inner avatar--bleh-missing">
-                    <img>
+                <div class="avatar-inner">
+                    <img class="missing-avatar">
                 </div>
             </div>
             <div class="input-container content-form">
@@ -75509,7 +75509,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-02-25"
       }
     },
-    built_on: "2026-03-08T14:20:25.899Z"
+    built_on: "2026-03-09T02:14:47.464Z"
   };
 
   // node_modules/@kurkle/color/dist/color.esm.js

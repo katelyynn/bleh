@@ -417,6 +417,9 @@ body,
     --side-action-hov: oklch(var(--b4) / 40%);
     --side-action-atv: oklch(var(--b4) / 60%);
 
+    --background-overlay: oklch(var(--b6) / 44%);
+    --background-mix-mode: darken;
+
     &[data-bleh--theme="darker"] {
         /* any additional highlights */
         --b2: 0.41 calc(var(--sat) * 0.04 * var(--sat-bg, 1)) var(--hue);
@@ -566,6 +569,9 @@ body,
         --view-buttons: oklch(var(--b6) / 25%);
         --view-buttons-hov: oklch(var(--b4) / 60%);
         --view-buttons-atv: oklch(var(--b4) / 80%);
+
+        --background-overlay: oklch(var(--b5) / 50%);
+        --background-mix-mode: lighten;
     }
     &[data-bleh--theme="ink"] {
         /* any additional highlights */
@@ -632,6 +638,9 @@ body,
 
         --textarea: oklch(var(--b6), 30%);
         --textarea-hov: oklch(var(--b6), 60%);
+
+        --background-overlay: oklch(var(--b5) / 50%);
+        --background-mix-mode: lighten;
     }
 }
 

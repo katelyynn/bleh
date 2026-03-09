@@ -9,13 +9,9 @@
     /* gallery pages, col-main on tracks */ div.buffer-standard:not(.col-main) > .lazy-shoutbox
     ),
 /* individual library selection */
-.recent-tracks-section,
-/* playlist content */ .playlisting-playlist-header + .page-content > .row,
 /* event lineup */ .big-artist-list,
 /* set an obsession */ .obsession-search, .obsession-search-results,
 .panel-form,
-/* listeners */ .col-main:not(.bleh--gallery) > .buffer-standard,
-.no-data-message--gallery:not([data-page-subpage="images_overview"] .no-data-message--gallery), .no-data-message--album,
 .auth-container-signup, .login-form {
     content: "";
     --override-background: oklch(
@@ -43,25 +39,7 @@
 
     position: relative;
 
-    .navlist {
-        margin: unset !important;
-        width: 100%;
-    }
-
-    .section-controls {
-        margin-top: unset !important;
-        margin-right: unset !important;
-    }
-
-    &.setup,
-    &.error,
-    &.sour {
-        --card-background: var(--card-blur-bg);
-        backdrop-filter: var(--solarium);
-        -webkit-backdrop-filter: var(--solarium);
-    }
-
-    &:not(.setup, .error, .sour) {
+    &:not(.sour) {
         --card-background: transparent;
         background-image: unset !important;
         box-shadow: unset;
@@ -74,28 +52,26 @@
         padding-bottom: unset;
     }
 }
+
+.sour {
+    --card-background: var(--card-blur-bg);
+    backdrop-filter: var(--solarium);
+    -webkit-backdrop-filter: var(--solarium);
+}
+
+.section-controls {
+    margin-top: unset !important;
+    margin-right: unset !important;
+}
+
 .content-top-header,
 .artist-similar-sidebar {
     margin-top: var(--force-margin-top, unset) !important;
 }
 
-/* no playlists */
-.namespace--user_playlists_playlists .page-content,
-.page-content:has(.gallery-section, .obsession-search),
-/* obsessions */ .namespace--user_obsessions_overview .container.page-content {
-    padding-top: var(--override-padding-top, unset) !important;
-}
-
-.subpage-breadcrumb,
-.subpage-title:not(.section-controls .subpage-title) {
-    display: none;
-}
-
-.single-shout-information {
-    display: none;
-}
-
-.page-content:has(> .section .upper-overview-to-hide),
+.single-shout-information,
+.subpage-breadcrumb, .subpage-title,
+.page-content:has(> .section > .upper-overview-to-hide),
 .upper-overview-to-hide,
 .col-sidebar.masonry-right {
     display: none !important;
@@ -114,26 +90,6 @@
     }
 }
 
-.page-content:has(> .section) + .full-bleed-ad-container + .page-content {
-    padding-top: unset !important;
-
-    .col-sidebar {
-        top: unset !important;
-    }
-}
-
-/*     UNDO CARD STYLES     */
-.row.buffer-4 > .col-main:not(.not-a-panel):first-child > section /* for shoutbox in tabs */ {
-    --override-background: unset !important;
-    border: unset;
-    border-radius: unset;
-    box-shadow: unset !important;
-    padding: unset;
-    margin-top: unset;
-    background-image: unset;
-    background-repeat: unset;
-}
-
 .section-with-separator {
     padding-bottom: unset;
 
@@ -147,24 +103,19 @@
             padding-bottom: unset !important;
         }
     }
+
+    &:after {
+        display: none;
+    }
 }
 
 article, section, .buffer-standard, .buffer-standard:not(.col-sidebar) .buffer-standard:first-child, ._buffer,
-.open-ad-container-desktop ~ .buffer-standard-ignore-hidden, :not(.visible-xs):not([data-ad-container]) ~ .buffer-standard-ignore-hidden /* lfm selector */,
 .buffer-standard\@sm,
-.content-form,
-/* album does not have a tracklist */ .visible-xs.buffer-standard + #shoutbox {
+.content-form {
     margin-top: var(--only-card-gap, var(--card-gap));
 }
 .buffer-standard.col-sidebar .buffer-standard:first-child {
     margin-top: unset;
-}
-/* separator */
-.row.buffer-4 > .col-main:first-child .section-with-separator {
-    padding-bottom: unset;
-}
-.section-with-separator::after {
-    display: none;
 }
 
 .content-form .form-section,

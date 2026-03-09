@@ -510,7 +510,7 @@ export function bleh_profiles() {
         about_me_sidebar.insertBefore(
             html.node`
             <div class="top-container">
-                <h2>
+                <h2 class="about-me-title">
                     ${tl(trans.about)}
                     <span class="info-tip" ref=${(el) => (info_tip = el)}>
                         <span class="bleh-icon" data-type="info" style="--icon: var(--mask)" />
@@ -573,27 +573,19 @@ export function bleh_profiles() {
             tippy(info_tip, {
                 content: html.node`
                     <div class="profile-items">
-                        ${
-                            cache.banner ?
-                                html.node`
-                        <div class="profile-item" data-type="banner">
-                            <span class="bleh-icon" style="--icon: var(--mask)" />
-                            <p>${tl(trans.profile_banner.name)}</p>
-                        </div>
-                        `
-                            :   ''
-                        }
-                        ${
-                            cache.hue > -1 && cache.sat > -1 && cache.lit > -1 ?
-                                html.node`
-                        <div class="profile-item" data-type="accent">
-                            <span class="bleh-icon" style="--icon: var(--mask)" />
-                            <p>${tl(trans.profile_accent.name)}</p>
-                            <p class="subtle">${cache.hue}, ${cache.sat}, ${cache.lit}</p>
-                        </div>
-                        `
-                            :   ''
-                        }
+                        ${cache.banner ? html.node`
+                            <div class="profile-item" data-type="banner">
+                                <span class="bleh-icon" style="--icon: var(--mask)" />
+                                <p class="profile-item-text">${tl(trans.profile_banner.name)}</p>
+                            </div>
+                        ` : ''}
+                        ${cache.hue > -1 && cache.sat > -1 && cache.lit > -1 ? html.node`
+                            <div class="profile-item" data-type="accent">
+                                <span class="bleh-icon" style="--icon: var(--mask)" />
+                                <p class="profile-item-text">${tl(trans.profile_accent.name)}</p>
+                                <p class="profile-item-text subtle">${cache.hue}, ${cache.sat}, ${cache.lit}</p>
+                            </div>
+                        ` : ''}
                     </div>
                 `
             });

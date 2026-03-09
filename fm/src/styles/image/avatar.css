@@ -38,10 +38,9 @@ img {
 }
 
 /* missing avatar */
+.missing-avatar,
 .header-avatar-add,
-[src=""],
 .avatar > img:not([src]),
-.avatar--bleh-missing img,
 [src^="/static/images/icons/default_user_v4"],
 [src$="818148bf682d429dc215c1705eb27b98.png"] {
     content: var(--blank) !important;
@@ -145,8 +144,4 @@ img {
     mask-position: center;
     -webkit-mask-position: center;
     aspect-ratio: 1 / 1;
-}
-
-.header-avatar-inner-wrap > .avatar img {
-    --mask-size: var(--cover-size-100);
 }

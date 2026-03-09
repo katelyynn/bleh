@@ -22,27 +22,27 @@
     display: flex;
     gap: var(--item-list-gap);
     align-items: center;
+}
 
-    .sub-text-label {
-        display: flex;
-        align-items: center;
-        color: oklch(var(--c2) / 80%);
-        --mask-colour: currentColor;
+.sub-text-label {
+    display: flex;
+    align-items: center;
+    color: oklch(var(--c2) / 80%);
+    --mask-colour: currentColor;
 
-        .sub-text-label-sr {
-            display: none;
-        }
+    .sub-text-label-sr {
+        display: none;
     }
+}
 
-    .sub-text-pair {
-        display: flex;
-        align-items: center;
-        gap: var(--icon-gap);
-        margin: unset;
+.sub-text-pair {
+    display: flex;
+    align-items: center;
+    gap: var(--icon-gap);
+    margin: unset;
 
-        &.sub-text-follow {
-            font-weight: var(--font-weight-medium);
-        }
+    &.sub-text-follow {
+        font-weight: var(--font-weight-medium);
     }
 }
 
@@ -56,15 +56,14 @@
     z-index: 10;
     position: relative;
 
-    .sep {
+    & > .sep {
         margin-top: var(--card-gap);
     }
-
-    & > .top-container > h2 {
-        display: flex;
-        justify-content: space-between;
-        gap: var(--icon-gap);
-    }
+}
+.about-me-title {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--icon-gap);
 }
 .about-me-preview {
     flex: unset !important;
@@ -75,28 +74,26 @@
     flex-direction: column;
     gap: 6px;
     margin: 6px 0;
+}
+.profile-item {
+    display: flex;
+    gap: var(--icon-gap);
+    text-align: left;
 
-    & > .profile-item {
-        display: flex;
-        gap: var(--icon-gap);
-        text-align: left;
+    & > .bleh-icon {
+        --icon-colour: color-mix(
+            in oklch,
+            oklch(var(--c2)),
+            oklch(var(--c3)) 50%
+        );
+    }
+}
+.profile-item-text {
+    margin: unset !important;
 
-        & > .bleh-icon {
-            --icon-colour: color-mix(
-                in oklch,
-                oklch(var(--c2)),
-                oklch(var(--c3)) 50%
-            );
-        }
-
-        & > p {
-            margin: unset !important;
-        }
-
-        & > p:not(.subtle) {
-            flex: 1;
-            min-width: 130px;
-        }
+    &:not(.subtle) {
+        flex: 1;
+        min-width: 130px;
     }
 }
 

@@ -24,28 +24,6 @@
     overflow: hidden;
 }
 
-.event-metadata:not(:last-child),
-.event-detail {
-    padding-left: calc(var(--icon-size) + var(--icon-gap));
-    position: relative;
-    font-size: var(--font-size);
-    line-height: var(--line-height);
-}
-.event-metadata:not(:last-child),
-.event-detail {
-    --left: 0;
-    --mask: var(--icon-16-calendar);
-}
-.event-detail[itemprop="location"] {
-    --mask: var(--icon-16-location);
-}
-.event-detail:has(.event-detail-heading-link) {
-    --mask: var(--icon-16-link);
-}
-.event-metadata:not(:last-child) {
-    --mask: var(--icon-16-dot);
-}
-
 /*     EXTERNAL LINK     */
 .external-link {
     --left: none !important;
@@ -69,17 +47,6 @@
     display: -webkit-box;
     -webkit-line-clamp: 1;
     width: fit-content;
-}
-
-.event-metadata + .event-metadata:before,
-.event-detail-heading-link,
-.event-detail-heading-location,
-.event-detail-heading-date {
-    display: none;
-}
-
-.stubhub-section + section {
-    position: relative;
 }
 
 .qa-event-description {

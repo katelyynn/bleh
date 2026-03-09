@@ -172,24 +172,16 @@
         }
     }
 
-    &.redesigned-profile-header {
-        .avatar-side {
-            --mask-size: var(--cover-size-200) !important;
-            --avatar-size: var(--header-avatar-size) !important;
-            cursor: pointer;
-        }
-    }
-
     & > .info-side {
-        &:not(.has-main-info),
-        & > .main-info {
-            filter: var(--header-filter-shadow) !important;
-        }
-
         & > h2 {
             position: relative;
         }
     }
+}
+
+.info-side:not(.has-main-info),
+.main-info {
+    filter: var(--header-filter-shadow) !important;
 }
 
 .avatar-side {
@@ -230,7 +222,7 @@
         cursor: pointer;
     }
 
-    transition-property: width, height, transform;
+    transition-property: transform;
     transition-duration: 0.3s;
     transition-timing-function: var(--trans-function);
 

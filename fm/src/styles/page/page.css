@@ -48,7 +48,7 @@
     display: flex;
     gap: var(--card-gap);
 }
-.container:not(.sour) > .row[data-assigned]:not(.row--equal-height-cols) {
+.container:not(.sour) > .row[data-assigned] {
     display: flex;
     flex-direction: column;
     gap: unset;
@@ -145,99 +145,98 @@
     }
 
     & > .redesigned-content-top,
-    & > .bleh--nav-wrap,
     & > .navlist:first-child {
         margin-top: var(--card-gap) !important;
-    }
-
-    & > .content {
-        display: flex;
-        justify-content: center;
-        width: 100%;
-
-        position: relative;
-
-        @media (max-width: 980px) {
-            display: flex;
-            flex-direction: column;
-        }
-
-        & > .col-main {
-            background: oklch(var(--b5));
-        }
-
-        & > .col-sidebar {
-            position: relative;
-            background: var(--card-blur-bg);
-
-            &:before {
-                content: "";
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                height: 100%;
-                max-height: 505px;
-                display: block;
-                z-index: -1;
-                background: var(--solarium-image, none);
-                backdrop-filter: var(--solarium);
-                -webkit-backdrop-filter: var(--solarium);
-
-                border-radius: inherit;
-
-                --mask: linear-gradient(
-                    180deg,
-                    white 86%,
-                    transparent
-                );
-                mask-image: var(--mask);
-                -webkit-mask-image: var(--mask);
-            }
-
-            &:after {
-                content: "";
-                position: absolute;
-                width: 1px;
-                top: 0;
-                left: -1px;
-                bottom: 0;
-                display: block;
-                background: var(--sidebar-border);
-            }
-
-            [data-bleh--solarium="false"] & {
-                background: var(--sidebar-bg);
-
-                &:before {
-                    --mask: none;
-                    background: transparent;
-                }
-            }
-        }
-
-        @media (min-width: 981px) {
-            &:first-child {
-                & > .col-main {
-                    border-top-left-radius: var(--card-radius);
-                }
-                & > .col-sidebar {
-                    border-top-right-radius: var(--card-radius);
-                }
-            }
-
-            & > .col-main {
-                border-bottom-left-radius: var(--card-radius);
-            }
-            & > .col-sidebar {
-                border-bottom-right-radius: var(--card-radius);
-            }
-        }
     }
 
     &:before,
     &:after {
         display: none;
+    }
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+    position: relative;
+
+    @media (max-width: 980px) {
+        display: flex;
+        flex-direction: column;
+    }
+
+    & > .col-main {
+        background: oklch(var(--b5));
+    }
+
+    & > .col-sidebar {
+        position: relative;
+        background: var(--card-blur-bg);
+
+        &:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            max-height: 505px;
+            display: block;
+            z-index: -1;
+            background: var(--solarium-image, none);
+            backdrop-filter: var(--solarium);
+            -webkit-backdrop-filter: var(--solarium);
+
+            border-radius: inherit;
+
+            --mask: linear-gradient(
+                180deg,
+                white 86%,
+                transparent
+            );
+            mask-image: var(--mask);
+            -webkit-mask-image: var(--mask);
+        }
+
+        &:after {
+            content: "";
+            position: absolute;
+            width: 1px;
+            top: 0;
+            left: -1px;
+            bottom: 0;
+            display: block;
+            background: var(--sidebar-border);
+        }
+
+        [data-bleh--solarium="false"] & {
+            background: var(--sidebar-bg);
+
+            &:before {
+                --mask: none;
+                background: transparent;
+            }
+        }
+    }
+
+    @media (min-width: 981px) {
+        &:first-child {
+            & > .col-main {
+                border-top-left-radius: var(--card-radius);
+            }
+            & > .col-sidebar {
+                border-top-right-radius: var(--card-radius);
+            }
+        }
+
+        & > .col-main {
+            border-bottom-left-radius: var(--card-radius);
+        }
+        & > .col-sidebar {
+            border-bottom-right-radius: var(--card-radius);
+        }
     }
 }
 
@@ -489,7 +488,6 @@
     [data-page-subpage="playlists_playlists"],
     [data-page-subpage="auth"],
     [data-page-type="bleh_setup"],
-    .has-error,
     [data-page-type="releases"],
     [data-page-type="bleh_auth"],
     [data-page-subpage^="event_attendance_"]

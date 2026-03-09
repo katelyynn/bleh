@@ -42,8 +42,8 @@ export function other_listener(id) {
         body: html.node`
         <div class="setting standalone" data-type="text">
             <div class="avatar-container">
-                <div class="avatar-inner avatar--bleh-missing">
-                    <img>
+                <div class="avatar-inner">
+                    <img class="missing-avatar">
                 </div>
             </div>
             <div class="input-container content-form">

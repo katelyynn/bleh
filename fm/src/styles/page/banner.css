@@ -22,34 +22,33 @@
     @media (max-width: 980px) {
         --w: var(--cards-width);
         opacity: 0.8;
-
-        .background-inner {
-            --mask: none !important;
-        }
     }
 
     --mask: linear-gradient(0deg, transparent 0%, white 70%);
     mask-image: var(--mask);
     -webkit-mask-image: var(--mask);
+}
+.background-inner {
+    position: absolute;
+    inset: 0;
+    background-position: center;
+    background-size: 100%;
+    background-repeat: no-repeat;
 
-    .background-inner {
+    --mask: linear-gradient(90deg, transparent 0%, white 40%, white 60%, transparent 100%);
+    mask-image: var(--mask);
+    -webkit-mask-image: var(--mask);
+
+    &:before {
+        content: '';
         position: absolute;
         inset: 0;
-        background-position: center;
-        background-size: 100%;
-        background-repeat: no-repeat;
+        background: var(--banner-overlay);
+        mix-blend-mode: var(--banner-mix);
+    }
 
-        --mask: linear-gradient(90deg, transparent 0%, white 40%, white 60%, transparent 100%);
-        mask-image: var(--mask);
-        -webkit-mask-image: var(--mask);
-
-        &:before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: var(--banner-overlay);
-            mix-blend-mode: var(--banner-mix);
-        }
+    @media (max-width: 980px) {
+        --mask: none !important;
     }
 }
 
@@ -71,92 +70,34 @@
 
     will-change: transform;
     transform: translateZ(0);
-    backface-visibility: hidden;
-
-    &[data-accent-based] {
-        background-color: oklch(var(--h3));
-    }
 
     &:after {
         content: "";
         position: absolute;
         inset: 0;
-        background: linear-gradient(
-            180deg,
-            oklch(var(--b6), 70%) 0%,
-            oklch(var(--b6)) 100%
-        ) !important;
+        background: linear-gradient(180deg, transparent 0%, oklch(var(--b6)) 100%) !important;
     }
 
-    &.katsune-bleh-background {
-        &:after {
-            background: linear-gradient(180deg, transparent 0%, oklch(var(--b6)) 100%) !important;
-        }
-
-        .katsune-bleh-background-border {
-            display: none;
-        }
-
-        &[data-page-type="user"] {
-            &[data-page-subpage="obsessions_obsession"] {
-                height: 700px;
-
-                /*&:after {
-                    background: linear-gradient(180deg, oklch(var(--b6), 20%) 0%, oklch(var(--b6)) 100%) !important;
-                }*/
-            }
-        }
-
-        &:before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: oklch(var(--b6), 44%);
-            mix-blend-mode: darken;
-        }
-
-        [data-bleh--theme_type="light"] & {
-            &:before {
-                background: oklch(var(--b5), 50%);
-                mix-blend-mode: lighten;
-            }
-        }
-
-        &[data-page-type="api"],
-        &[data-page-type="error"] {
-            height: 450px;
+    &[data-page-type="user"] {
+        &[data-page-subpage="obsessions_obsession"] {
+            height: 700px;
         }
     }
 
-    .bleh-background-buttons {
+    &:before {
+        content: "";
         position: absolute;
-        top: calc(20px + 32px + var(--card-gap));
-        right: calc(var(--card-gap) + var(--card-padding));
-
-        background: unset !important;
-        border-radius: unset;
-        box-shadow: unset !important;
-        padding: unset;
-
-        opacity: 0.1;
-        transition: opacity 0.2s;
-        z-index: 100;
-
-        .view-item {
-            --btn-left: var(--button-sides) !important;
-        }
-
-        .origin-button {
-            --mask: var(--icon-16-info);
-        }
-
-        display: none;
+        inset: 0;
+        background: var(--background-overlay);
+        mix-blend-mode: var(--background-mix-mode);
     }
 
-    &:hover,
-    &:focus-within {
-        .bleh-background-buttons {
-            opacity: 1;
-        }
+    &[data-page-type="api"],
+    &[data-page-type="error"] {
+        height: 450px;
     }
+}
+
+.katsune-bleh-background-border {
+    display: none;
 }

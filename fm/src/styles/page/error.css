@@ -16,13 +16,15 @@
     border-top: 1px solid oklch(var(--b4));
     margin-bottom: unset;
 }
-.translation > b {
-    font-weight: var(--font-weight);
-    color: oklch(var(--c3));
-}
 .translation {
     color: oklch(var(--c2));
-}
-.translation a {
-    font-weight: var(--font-weight);
+
+    & > a {
+        font-weight: var(--font-weight);
+    }
+
+    & > b {
+        font-weight: var(--font-weight);
+        color: oklch(var(--c3));
+    }
 }

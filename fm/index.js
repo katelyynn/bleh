@@ -114,7 +114,8 @@ function normalise_version(version) {
             },
             loader: {
                 '.css': 'css'
-            }
+            },
+            minify: true
         });
 
         const serve = await js_context.serve({
