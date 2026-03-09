@@ -17636,7 +17636,6 @@ input[type=range]::-moz-range-progress {
   input {
     width: calc((var(--max) * 4) + var(--button-height));
     min-width: 240px;
-    max-width: 380px;
     @media (max-width: 980px) {
       width: 100%;
     }

@@ -32440,7 +32440,7 @@
                 </div>
                 <h1>${tl2(trans.you_have_new_badges)}</h1>
                 <div class="badges">
-                    ${badges.map((badge) => create_badge(process_badge(badge, auth.name)))}
+                    ${Array.isArray(badges) ? badges.map((badge) => create_badge(process_badge(badge, auth.name))) : create_badge(process_badge(badges, auth.name))}
                 </div>
             </div>
         `,
