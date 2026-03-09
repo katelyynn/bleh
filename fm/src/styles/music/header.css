@@ -112,54 +112,6 @@
     }
 }
 
-
-.coloured-cta {
-    width: fit-content;
-    margin-top: unset;
-
-    .section-with-control .buffer-standard:has(&) {
-        margin-top: unset !important;
-    }
-
-    .cta-copy {
-        font-size: 0;
-        line-height: 0;
-    }
-
-    .cta-link {
-        font-size: var(--font-size);
-        line-height: var(--line-height);
-        color: oklch(var(--c2));
-        text-decoration: var(--force-underline, none) !important;
-    }
-
-    /*     ICONS     */
-    &.coloured-cta--add-event-icon {
-        --mask: var(--icon-16-calendar-add);
-    }
-    &.coloured-cta--upload-image-icon {
-        --mask: var(--icon-16-upload);
-    }
-    &.coloured-cta--wiki-icon {
-        --mask: var(--icon-16-bio);
-    }
-    &.coloured-cta--tag-icon {
-        --mask: var(--icon-16-tag);
-    }
-}
-/* cta's on an artist page */
-.top-container + section + .section {
-    margin: unset !important;
-}
-.row--equal-height-cols {
-    gap: var(--button-list-gap);
-
-    & > .col-sm-4 {
-        width: unset;
-        padding: unset !important;
-    }
-}
-
 .section-controls {
     position: relative;
 

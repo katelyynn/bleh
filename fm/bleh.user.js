@@ -20283,6 +20283,7 @@
       album_artist: "Ariana Grande"
     }
   ];
+  var gendered_pattern = /^(female|male|nonbinary) vocalists?$/i;
 
   // src/components/dialog/notify.ts
   function load_notifications() {
@@ -45430,11 +45431,26 @@
     log("status is", "page", "info", page);
     update_page();
   }
+  function bleh_tags_large(observer = page.structure.main) {
+    const hide_gendered = settings.gendered_tags;
+    const tags = observer.querySelectorAll(".big-tags-item-wrap");
+    tags.forEach((tag) => {
+      const text4 = tag.querySelector(".big-tags-item-name").textContent.trim();
+      if (hide_gendered && gendered_pattern.test(text4)) {
+        tag.remove();
+      }
+    });
+  }
   function bleh_tags_mini(observer = page.structure.main) {
+    const hide_gendered = settings.gendered_tags;
     const tags = observer.querySelectorAll(".tag");
     tags.forEach((tag) => {
       const elem = tag.firstElementChild;
       elem.classList.add("btn", "tag-item");
+      const text4 = elem.textContent.trim();
+      if (hide_gendered && gendered_pattern.test(text4)) {
+        tag.remove();
+      }
     });
     let tag_user_avatar = observer.querySelector(".tags-user-avatar");
     if (!tag_user_avatar) return;
@@ -63326,6 +63342,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         patch_wiki();
       if ((page.type == "user" || page.type == "tag" || page.type == "events") && (page.subpage == "overview" || page.subpage == "event_overview"))
         bleh_radio();
+      if ((page.type == "artist" || page.type == "album" || page.type == "track") && page.subpage == "tags_overview")
+        bleh_tags_large();
       if (page.subpage == "images_overview") {
         let sort_button = page.structure.main.querySelector(
           ".dropdown-menu-clickable-button"
@@ -75509,7 +75527,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-02-25"
       }
     },
-    built_on: "2026-03-09T02:14:47.464Z"
+    built_on: "2026-03-09T14:38:01.525Z"
   };
 
   // node_modules/@kurkle/color/dist/color.esm.js

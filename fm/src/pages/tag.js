@@ -5,7 +5,7 @@
 //
 
 import {log} from "@/build/log";
-import {page} from "@/build/page";
+import {gendered_pattern, page} from "@/build/page";
 import {desanitise} from "@/build/tools";
 import {tl, trans} from "@/build/trans";
 import {patch_header_title} from "@/components/music/lotus";
@@ -14,6 +14,7 @@ import {register_background, update_page} from "../page";
 import {ff} from "@/components/settings/sku";
 import {bleh_wiki, bleh_wiki_editor, bleh_wiki_history} from "@/pages/music/wiki";
 import tippy from "tippy.js";
+import { settings } from "@/build/config";
 
 export function bleh_tags() {
     let tag_header = document.body.querySelector('.header--tag');
@@ -127,12 +128,32 @@ export function bleh_tags() {
     update_page();
 }
 
+export function bleh_tags_large(observer = page.structure.main) {
+    const hide_gendered = settings.gendered_tags;
+
+    const tags = observer.querySelectorAll('.big-tags-item-wrap');
+    tags.forEach(tag => {
+        const text = tag.querySelector('.big-tags-item-name').textContent.trim();
+
+        if (hide_gendered && gendered_pattern.test(text)) {
+            tag.remove();
+        }
+    });
+}
 
 export function bleh_tags_mini(observer = page.structure.main) {
+    const hide_gendered = settings.gendered_tags;
+
     const tags = observer.querySelectorAll('.tag');
     tags.forEach(tag => {
         const elem = tag.firstElementChild;
         elem.classList.add('btn', 'tag-item');
+
+        const text = elem.textContent.trim();
+
+        if (hide_gendered && gendered_pattern.test(text)) {
+            tag.remove();
+        }
     });
 
     let tag_user_avatar = observer.querySelector('.tags-user-avatar');

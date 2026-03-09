@@ -53,7 +53,7 @@ import { bleh_home, bleh_home_legacy } from '@/pages/home';
 import { bleh_inbox } from '@/pages/inbox';
 import { bleh_profiles, checkup_friend_cache } from '@/pages/profile/profile.js';
 import { bleh_search } from '@/pages/home/search';
-import { bleh_tags } from '@/pages/tag';
+import { bleh_tags, bleh_tags_large } from '@/pages/tag';
 import { bleh_tracks } from '@/pages/track';
 import { patch_wiki } from '@/pages/music/wiki';
 import { start_rain } from '@/components/page/rain';
@@ -524,6 +524,14 @@ function load_page(main_content = null) {
             (page.subpage == 'overview' || page.subpage == 'event_overview')
         )
             bleh_radio();
+
+        if (
+            (page.type == 'artist' ||
+                page.type == 'album' ||
+                page.type == 'track') &&
+            page.subpage == 'tags_overview'
+        )
+            bleh_tags_large();
 
         if (page.subpage == 'images_overview') {
             let sort_button = page.structure.main.querySelector(

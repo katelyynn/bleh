@@ -1370,3 +1370,5 @@ export const random_list = [
         album_artist: 'Ariana Grande'
     }
 ];
+
+export const gendered_pattern = /^(female|male|nonbinary) vocalists?$/i;

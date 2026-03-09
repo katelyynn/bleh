@@ -88,6 +88,10 @@
     & > .buffer-standard.section-with-separator {
         display: none;
     }
+
+    & > .section {
+        margin: unset !important;
+    }
 }
 
 .section-with-separator {

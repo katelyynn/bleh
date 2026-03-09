@@ -88,7 +88,7 @@
     --mask: var(--icon-16-tag);
 }
 
-.col-sm-8:has(.catalogue-tags) {
+.col-sm-8 {
     padding: unset !important;
 }
 

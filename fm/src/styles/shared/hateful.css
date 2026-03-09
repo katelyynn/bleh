@@ -17,16 +17,3 @@
 ) {
     display: none;
 }
-
-/*     OLD GENDER TAGS     */
-/* ordered alphabetically, this is configurable but from talking to people these tags are so far from
-being exhaustive lists, and also are like never helpful? theres a female vocalist in every genre it's basically
-trying to list every song ever made by someone identifying as a female, which is impossible */
-[data-bleh--gendered_tags="true"]
-    :is(.tag, .big-tags-item-wrap):has(
-        [href^="/tag/female+vocalist"],
-        [href^="/tag/male+vocalist"],
-        [href^="/tag/nonbinary+vocalist"]
-    ) {
-    display: none;
-}
