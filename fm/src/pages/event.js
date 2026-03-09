@@ -202,12 +202,12 @@ export function bleh_events() {
                         <div class="sub-text music-small-header">${tl(trans.find_on)}</div>
                         <div class="music-links">
                             ${web ? html.node`
-                                <a class="resource-external-link resource-external-link--homepage music-link colourful" href=${web} target="_blank">
+                                <a class="btn resource-external-link resource-external-link--homepage music-link colourful" href=${web} target="_blank">
                                     ${tl(trans.website)}
                                 </a>
                             ` : ''}
                             ${maps ? html.node`
-                                <a class="music-link colourful" data-host="maps.google.com" data-host-unknown="true" href=${maps} target="_blank" style="--favi: url(https://icons.duckduckgo.com/ip3/maps.google.com.ico)">
+                                <a class="btn music-link colourful" data-host="maps.google.com" data-host-unknown="true" href=${maps} target="_blank" style="--favi: url(https://icons.duckduckgo.com/ip3/maps.google.com.ico)">
                                     ${tl(trans.show_on_map)}
                                 </a>
                             ` : ''}

@@ -52,6 +52,7 @@
 [data-type="listening-report"] {
     --mask: var(--icon-16-listening-report);
 }
+[data-type="prev"],
 .secondary-nav-item--back,
 [data-type="back"] {
     --mask: var(--icon-16-arrow-left);
@@ -743,6 +744,7 @@
 [data-type="mini"] {
     --mask: var(--icon-16-mini);
 }
+[data-type="next"],
 [data-type="arrow-right"] {
     --mask: var(--icon-16-arrow-right);
 }

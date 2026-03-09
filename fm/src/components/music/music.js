@@ -240,10 +240,6 @@ export async function show_your_scrobbles() {
     }
 
     // create container
-    let top_container = document.createElement('div');
-    top_container.classList.add('top-container');
-    if (katsune) top_container.classList.add('katsune-button-row');
-
     let listen_container = document.createElement('div');
     listen_container.classList.add('listen-container');
 
@@ -396,11 +392,6 @@ export async function show_your_scrobbles() {
 
     // append
     col_main.insertBefore(listen_container, col_main.firstElementChild);
-
-    if (!katsune)
-        col_main.insertBefore(top_container, col_main.firstElementChild);
-    else
-        page.structure.container.insertBefore(top_container, page.structure.container.firstElementChild);
 
     // other listeners
     if (page.type == 'artist') {
@@ -700,7 +691,7 @@ export async function show_your_scrobbles() {
             );
 
             link.classList.remove('play-this-track-playlink');
-            link.classList.add('music-link', 'colourful');
+            link.classList.add('btn', 'music-link', 'colourful');
 
             const replace = item.querySelector('.replace-playlink');
 
@@ -758,7 +749,7 @@ export async function show_your_scrobbles() {
                 ${
                     settings.music_links.includes('genius') ?
                         html.node`
-                    <a class="music-link play-this-track-playlink--genius colourful" href="https://genius.com/search?q=${sanitise(page.sister)}+${sanitise(page.name)}" target="_blank">
+                    <a class="btn music-link play-this-track-playlink--genius colourful" href="https://genius.com/search?q=${sanitise(page.sister)}+${sanitise(page.name)}" target="_blank">
                         Genius
                     </a>
                 `
@@ -767,7 +758,7 @@ export async function show_your_scrobbles() {
                 ${
                     settings.music_links.includes('tidal') ?
                         html.node`
-                    <a class="music-link play-this-track-playlink--tidal colourful" href="https://listen.tidal.com/search?q=${sanitise(page.sister, ' ')} ${sanitise(page.name, ' ')}" target="_blank">
+                    <a class="btn music-link play-this-track-playlink--tidal colourful" href="https://listen.tidal.com/search?q=${sanitise(page.sister, ' ')} ${sanitise(page.name, ' ')}" target="_blank">
                         Tidal
                     </a>
                 `
@@ -776,7 +767,7 @@ export async function show_your_scrobbles() {
                 ${
                     settings.music_links.includes('deezer') ?
                         html.node`
-                    <a class="music-link play-this-track-playlink--deezer colourful" href="https://www.deezer.com/search/${sanitise(page.sister, ' ')} ${sanitise(page.name, ' ')}" target="_blank">
+                    <a class="btn music-link play-this-track-playlink--deezer colourful" href="https://www.deezer.com/search/${sanitise(page.sister, ' ')} ${sanitise(page.name, ' ')}" target="_blank">
                         Deezer
                     </a>
                 `
@@ -785,7 +776,7 @@ export async function show_your_scrobbles() {
                 ${
                     settings.music_links.includes('qobuz') ?
                         html.node`
-                    <a class="music-link play-this-track-playlink--qobuz colourful" href="https://www.qobuz.com/gb-en/search/tracks/${sanitise(page.name, ' ')}?ssf[s]=main_catalog&ssf[f][an]=${sanitise(page.sister, ' ')}" target="_blank">
+                    <a class="btn music-link play-this-track-playlink--qobuz colourful" href="https://www.qobuz.com/gb-en/search/tracks/${sanitise(page.name, ' ')}?ssf[s]=main_catalog&ssf[f][an]=${sanitise(page.sister, ' ')}" target="_blank">
                         Qobuz
                     </a>
                 `
@@ -801,7 +792,7 @@ export async function show_your_scrobbles() {
                     ${settings.music_links.includes('spotify') ?
                         html.node`
                             <a
-                                class="music-link play-this-track-playlink--spotify colourful"
+                                class="btn music-link play-this-track-playlink--spotify colourful"
                                 href="https://open.spotify.com/search/${sanitise(
                                     page.sister,
                                     ' '
@@ -815,7 +806,7 @@ export async function show_your_scrobbles() {
                     ${settings.music_links.includes('itunes') ?
                         html.node`
                             <a
-                                class="music-link play-this-track-playlink--itunes colourful"
+                                class="btn music-link play-this-track-playlink--itunes colourful"
                                 href="https://music.apple.com/gb/search?term=${sanitise(
                                     page.sister,
                                     ' '
@@ -829,7 +820,7 @@ export async function show_your_scrobbles() {
                     ${settings.music_links.includes('youtube') ?
                         html.node`
                             <a
-                                class="music-link play-this-track-playlink--youtube-music colourful"
+                                class="btn music-link play-this-track-playlink--youtube-music colourful"
                                 href="https://music.youtube.com/search?q=${sanitise(
                                     page.sister
                                 )}+${sanitise(page.name)}"
@@ -842,7 +833,7 @@ export async function show_your_scrobbles() {
                     ${settings.music_links.includes('tidal') ?
                         html.node`
                             <a
-                                class="music-link play-this-track-playlink--tidal colourful"
+                                class="btn music-link play-this-track-playlink--tidal colourful"
                                 href="https://listen.tidal.com/search?q=${sanitise(
                                     page.sister,
                                     ' '
@@ -856,7 +847,7 @@ export async function show_your_scrobbles() {
                     ${settings.music_links.includes('deezer') ?
                         html.node`
                             <a
-                                class="music-link play-this-track-playlink--deezer colourful"
+                                class="btn music-link play-this-track-playlink--deezer colourful"
                                 href="https://www.deezer.com/search/${sanitise(
                                     page.sister,
                                     ' '
@@ -870,7 +861,7 @@ export async function show_your_scrobbles() {
                     ${settings.music_links.includes('discogs') ?
                         html.node`
                             <a
-                                class="music-link play-this-track-playlink--discogs colourful"
+                                class="btn music-link play-this-track-playlink--discogs colourful"
                                 href="https://www.discogs.com/search?q=${sanitise(
                                     page.sister
                                 )}+${sanitise(page.name)}&type=all"
@@ -883,7 +874,7 @@ export async function show_your_scrobbles() {
                     ${settings.music_links.includes('qobuz') ?
                         html.node`
                             <a
-                                class="music-link play-this-track-playlink--qobuz colourful"
+                                class="btn music-link play-this-track-playlink--qobuz colourful"
                                 href="https://www.qobuz.com/gb-en/search/albums/${sanitise(page.name, ' ')}?ssf[s]=main_catalog&ssf[f][an]=${sanitise(page.sister, ' ')}"
                                 target="_blank"
                             >
@@ -894,7 +885,7 @@ export async function show_your_scrobbles() {
                     ${settings.music_links.includes('aoty') ?
                         html.node`
                             <a
-                                class="music-link play-this-track-playlink--aoty colourful"
+                                class="btn music-link play-this-track-playlink--aoty colourful"
                                 href="https://www.albumoftheyear.org/search/?q=${sanitise(
                                     page.sister
                                 )}+${sanitise(page.name)}"
@@ -907,7 +898,7 @@ export async function show_your_scrobbles() {
                     ${settings.music_links.includes('rym') ?
                         html.node`
                             <a
-                                class="music-link play-this-track-playlink--rym colourful"
+                                class="btn music-link play-this-track-playlink--rym colourful"
                                 href="https://rateyourmusic.com/search?searchterm=${sanitise(
                                     page.sister,
                                     ' '
@@ -921,7 +912,7 @@ export async function show_your_scrobbles() {
                     ${settings.music_links.includes('genius') ?
                         html.node`
                             <a
-                                class="music-link play-this-track-playlink--genius colourful"
+                                class="btn music-link play-this-track-playlink--genius colourful"
                                 href="https://genius.com/search?q=${sanitise(
                                     page.sister
                                 )}+${sanitise(page.name)}"
@@ -940,7 +931,7 @@ export async function show_your_scrobbles() {
                     ${settings.music_links.includes('spotify') ?
                         html.node`
                             <a
-                                class="music-link play-this-track-playlink--spotify colourful"
+                                class="btn music-link play-this-track-playlink--spotify colourful"
                                 href="https://open.spotify.com/search/${sanitise(
                                     page.name,
                                     ' '
@@ -954,7 +945,7 @@ export async function show_your_scrobbles() {
                     ${settings.music_links.includes('itunes') ?
                         html.node`
                             <a
-                                class="music-link play-this-track-playlink--itunes colourful"
+                                class="btn music-link play-this-track-playlink--itunes colourful"
                                 href="https://music.apple.com/gb/search?term=${sanitise(
                                     page.name,
                                     ' '
@@ -968,7 +959,7 @@ export async function show_your_scrobbles() {
                     ${settings.music_links.includes('youtube') ?
                         html.node`
                             <a
-                                class="music-link play-this-track-playlink--youtube-music colourful"
+                                class="btn music-link play-this-track-playlink--youtube-music colourful"
                                 href="https://music.youtube.com/search?q=${sanitise(
                                     page.name
                                 )}"
@@ -981,7 +972,7 @@ export async function show_your_scrobbles() {
                     ${settings.music_links.includes('tidal') ?
                         html.node`
                             <a
-                                class="music-link play-this-track-playlink--tidal colourful"
+                                class="btn music-link play-this-track-playlink--tidal colourful"
                                 href="https://listen.tidal.com/search?q=${sanitise(
                                     page.name,
                                     ' '
@@ -995,7 +986,7 @@ export async function show_your_scrobbles() {
                     ${settings.music_links.includes('deezer') ?
                         html.node`
                             <a
-                                class="music-link play-this-track-playlink--deezer colourful"
+                                class="btn music-link play-this-track-playlink--deezer colourful"
                                 href="https://www.deezer.com/search/${sanitise(
                                     page.name,
                                     ' '
@@ -1009,7 +1000,7 @@ export async function show_your_scrobbles() {
                     ${settings.music_links.includes('discogs') ?
                         html.node`
                             <a
-                                class="music-link play-this-track-playlink--discogs colourful"
+                                class="btn music-link play-this-track-playlink--discogs colourful"
                                 href="https://www.discogs.com/search?q=${sanitise(
                                     page.name
                                 )}&type=artist"
@@ -1022,7 +1013,7 @@ export async function show_your_scrobbles() {
                     ${settings.music_links.includes('qobuz') ?
                         html.node`
                             <a
-                                class="music-link play-this-track-playlink--qobuz colourful"
+                                class="btn music-link play-this-track-playlink--qobuz colourful"
                                 href="https://www.qobuz.com/gb-en/search/artists/${sanitise(
                                     page.name,
                                     ' '
@@ -1036,7 +1027,7 @@ export async function show_your_scrobbles() {
                     ${settings.music_links.includes('aoty') ?
                         html.node`
                             <a
-                                class="music-link play-this-track-playlink--aoty colourful"
+                                class="btn music-link play-this-track-playlink--aoty colourful"
                                 href="https://www.albumoftheyear.org/search/?q=${sanitise(
                                     page.name
                                 )}"
@@ -1049,7 +1040,7 @@ export async function show_your_scrobbles() {
                     ${settings.music_links.includes('rym') ?
                         html.node`
                             <a
-                                class="music-link play-this-track-playlink--rym colourful"
+                                class="btn music-link play-this-track-playlink--rym colourful"
                                 href="https://rateyourmusic.com/search?searchterm=${sanitise(
                                     page.name,
                                     ' '
@@ -1063,7 +1054,7 @@ export async function show_your_scrobbles() {
                     ${settings.music_links.includes('genius') ?
                         html.node`
                             <a
-                                class="music-link play-this-track-playlink--genius colourful"
+                                class="btn music-link play-this-track-playlink--genius colourful"
                                 href="https://genius.com/search?q=${sanitise(
                                     page.name
                                 )}"
@@ -1085,7 +1076,7 @@ export async function show_your_scrobbles() {
                     '.resource-external-link'
                 );
                 externals_links.forEach((link) => {
-                    link.classList.add('music-link', 'colourful');
+                    link.classList.add('btn', 'music-link', 'colourful');
 
                     let type = link.classList[1];
                     if (type == 'resource-external-link--homepage')

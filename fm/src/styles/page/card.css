@@ -1,60 +1,29 @@
 /*     GLOBAL CARD STYLES     */
 .bleh--panel, .bleh--blank-panel,
 .col-main > section, .col-sidebar > section,
+.col-main > div.buffer-standard, /* covers weird shoutbox sections, 2026 */
 .your-progress-component,
 .primary-column,
 .album-and-lyrics-row,
-.lazy-shoutbox:not(
-    /* event pages */ section > .lazy-shoutbox,
-    /* gallery pages, col-main on tracks */ div.buffer-standard:not(.col-main) > .lazy-shoutbox
-    ),
-/* individual library selection */
 /* event lineup */ .big-artist-list,
-/* set an obsession */ .obsession-search, .obsession-search-results,
-.panel-form,
-.auth-container-signup, .login-form {
-    content: "";
-    --override-background: oklch(
-        var(--card-specific-background, var(--card-background, var(--b5)))
-    );
-    background: var(
-        --card-specific-background,
-        var(--card-background, oklch(var(--b5)))
-    );
-    border-radius: var(--card-specific-radius, var(--card-radius));
-    box-shadow: var(
-        --card-specific-shadow,
-        var(--card-border),
-        var(--card-shadow)
-    );
-    padding: var(--card-padding);
+.panel-form {
+    background: transparent;
+    background-image: unset !important;
+    border-radius: unset;
+    box-shadow: unset;
+    padding: 0 var(--card-padding);
     margin-left: unset;
     margin-right: unset;
-    backdrop-filter: var(--card-filter, unset);
-    -webkit-backdrop-filter: var(--card-filter, unset);
-    /* festive */
-    /*background-image: var(--overlay-ice)/*, linear-gradient(180deg, rgba(190,233,250,0.04) 0%, rgba(0,0,0,0) 100%);*/
-    /*background-repeat: repeat-x;
-    background-position: unset !important;*/
 
     position: relative;
-
-    &:not(.sour) {
-        --card-background: transparent;
-        background-image: unset !important;
-        box-shadow: unset;
-
-        &:before {
-            display: none !important;
-        }
-
-        padding-top: unset;
-        padding-bottom: unset;
-    }
 }
 
 .sour {
-    --card-background: var(--card-blur-bg);
+    background: var(--card-specific-background, var(--card-background, var(--card-blur-bg)));
+    border-radius: var(--card-specific-radius, var(--card-radius));
+    box-shadow: var(--card-specific-shadow, var(--card-border), var(--card-shadow));
+    padding: var(--card-padding);
+
     backdrop-filter: var(--solarium);
     -webkit-backdrop-filter: var(--solarium);
 }
@@ -71,7 +40,6 @@
 
 .single-shout-information,
 .subpage-breadcrumb, .subpage-title,
-.page-content:has(> .section > .upper-overview-to-hide),
 .upper-overview-to-hide,
 .col-sidebar.masonry-right {
     display: none !important;
@@ -97,32 +65,17 @@
 .section-with-separator {
     padding-bottom: unset;
 
-    &.lazy-shoutbox {
-        padding-bottom: var(--card-padding);
-
-        /* event shoutbox */
-        section > &,
-        /* image shoutbox */
-        div.buffer-standard:not(.col-main) & {
-            padding-bottom: unset !important;
-        }
-    }
-
     &:after {
         display: none;
     }
 }
 
-article, section, .buffer-standard, .buffer-standard:not(.col-sidebar) .buffer-standard:first-child, ._buffer,
-.buffer-standard\@sm,
+article, section, .buffer-standard, ._buffer,
 .content-form {
     margin-top: var(--only-card-gap, var(--card-gap));
 }
-.buffer-standard.col-sidebar .buffer-standard:first-child {
-    margin-top: unset;
-}
 
-.content-form .form-section,
+.form-section,
 .buffer-4,
 .buffer-2 {
     /* default 12px */

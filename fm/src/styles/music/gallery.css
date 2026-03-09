@@ -499,58 +499,28 @@ a.gallery-image-preferred-off {
     }
 }
 
-#bleh--window-bleh_wait--body {
-    min-height: 200px;
-}
-
-.arrow:not(.scroll-button .arrow, .hidden-xs) {
-    width: fit-content !important;
-    height: var(--button-height) !important;
-    margin-top: unset !important;
-    font-size: 0 !important;
+.gallery-pagination {
     --bg: transparent;
     --bg-hov: oklch(var(--b4) / 40%);
     --bg-atv: oklch(var(--b4) / 60%);
     --col: oklch(var(--c3));
+    --mask-colour: oklch(var(--c3) / 80%);
     --shadow: none !important;
     --shadow-hov: none !important;
 
-    left: unset !important;
-    top: unset !important;
-    right: unset !important;
-
     &:before {
-        background-color: currentColor !important;
-    }
-    &:after {
-        content: var(--arrow-txt);
-        font-size: var(--font-size) !important;
-    }
-
-    .gallery-previous & {
-        --arrow-txt: "Prev";
-        --mask: var(--icon-16-arrow-left);
-    }
-    .gallery-next & {
-        --arrow-txt: "Next";
-        --mask: var(--icon-16-arrow-right);
+        background-color: var(--mask-colour) !important;
     }
 }
 
-.gallery-next,
-.gallery-previous {
+.gallery-next, .gallery-previous {
     display: flex;
     align-items: center;
     opacity: unset !important;
     text-decoration: none !important;
 }
-
 .gallery-next {
     justify-content: end;
-}
-
-:is(.gallery-next, .gallery-previous):not(:hover) .arrow {
-    opacity: 0;
 }
 
 .gallery-thumbnail-container {

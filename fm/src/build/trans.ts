@@ -6636,6 +6636,10 @@ export const trans: translations = {
         sv: 'Välkommen till {b}, tack för att du har installerat!<br>Du kan fortsätta genom den här snabba setupen för att starta eller hoppa rakt till din profil och klura ut det helt själv <3',
         ru: 'Добро пожаловать в {b}, спасибо за установку!<br>Вы можете пройти эту быструю настройку, чтобы начать, или сразу перейти к своему профилю и разобраться во всем самостоятельно <3'
     },
+    prev: {
+        // previous
+        en: 'Prev'
+    },
     next: {
         en: 'Next',
         de: 'Weiter',

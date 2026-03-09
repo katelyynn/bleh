@@ -21,6 +21,8 @@ export function bleh_gallery() {
 
     log('focusing on image', 'gallery');
 
+    gallery_arrows();
+
     let image_sidebar = page.structure.side.querySelector(
         '.js-gallery-image-details > div'
     );
@@ -28,14 +30,6 @@ export function bleh_gallery() {
 
     if (image_sidebar.hasAttribute('data-bleh-gallery')) return;
     image_sidebar.setAttribute('data-bleh-gallery', 'true');
-
-    if (!ff('new_gallery_experience')) {
-        patch_gallery_focused_image(
-            image_sidebar,
-            page.structure.container.querySelector('.gallery-image-buttons')
-        );
-        return;
-    }
 
     // move image to its own spot above
     let image_details;
@@ -278,26 +272,26 @@ export function bleh_gallery() {
         }
     }
 
-    // extra thumbnails for clarity
-    // doesnt work :(
-    /*let gallery_thumbnail_panel = document.createElement('section');
-    gallery_thumbnail_panel.classList.add('gallery-thumbnail-panel');
-    gallery_thumbnail_panel.innerHTML = page.structure.container.querySelector('.gallery-thumbnail-container').innerHTML;
-
-    view_all_panel.after(gallery_thumbnail_panel);*/
-
     // bookmark-related info
     if (page.type == 'artist' || ff('display_album_bookmark'))
         patch_gallery_focused_image(image_sidebar, buttons);
+}
 
-    /*let gallery_slides = gallery_section.querySelectorAll('.gallery-slide');
-    gallery_slides.forEach((slide) => {
-        console.info(slide);
-        let left = parseInt(slide.style.getPropertyValue('left').replace('%', ''));
-        console.info(left);
+function gallery_arrows() {
+    const container = page.structure.row.querySelector('.gallery-image-container');
+    const next = container.querySelector('.gallery-next');
+    const prev = container.querySelector('.gallery-previous');
 
-        slide.style.setProperty('left', `${left / 10}%`)
-    });*/
+    render(next, html`
+        <button class="btn gallery-pagination icon-r" data-type="next">
+            ${tl(trans.next)}
+        </button>
+    `);
+    render(prev, html`
+        <button class="btn gallery-pagination icon" data-type="prev">
+            ${tl(trans.prev)}
+        </button>
+    `);
 }
 
 function expand_gallery_image() {

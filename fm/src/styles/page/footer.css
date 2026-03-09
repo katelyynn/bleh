@@ -109,21 +109,10 @@
         transition-duration: var(--trans);
         transition-timing-function: var(--trans-function);
 
-        pointer-events: none;
-
-        a,
-        button {
-            pointer-events: auto;
-        }
-
         &:not([aria-expanded]) {
             max-height: 0;
             margin-top: calc(-1 * (var(--card-gap) + 40px));
-
-            a,
-            button {
-                pointer-events: none;
-            }
+            pointer-events: none;
         }
     }
 
@@ -135,10 +124,6 @@
             display: inline-flex;
         }
     }
-
-    a:hover {
-        color: oklch(var(--l3-c));
-    }
 }
 
 .footer-links {
@@ -148,59 +133,6 @@
 
     li {
         height: fit-content;
-
-        & > a,
-        button {
-            --bg: transparent !important;
-            --bg-hov: transparent !important;
-            --bg-atv: transparent !important;
-            --padding: 6px 0;
-            margin: -6px 0 !important;
-            --shadow: none !important;
-            --mask: var(--icon-16-arrow-right);
-            position: relative;
-            --mask-size: 12px;
-            --margin-top: -6px;
-            padding-right: calc(12px + 4px) !important;
-            --left: none;
-            --right: 0;
-            --show-icon: block;
-
-            &:before {
-                opacity: 0;
-            }
-
-            &:hover {
-                --col: oklch(var(--l3-c));
-                --mask-colour: color-mix(
-                    in oklch,
-                    oklch(var(--l3-c)),
-                    oklch(var(--l4-c)) 30%
-                );
-                text-decoration: underline !important;
-
-                transition-property: transform;
-                transition-duration: 0.1s;
-
-                &:before {
-                    opacity: 1;
-                }
-            }
-
-            width: fit-content;
-
-            &[href$="/pro"] {
-                --hue-over: var(--hue-pro);
-                --sat-over: 1;
-                --lit-over: 1;
-            }
-        }
-
-        & > [data-require="components/logout-form"] > button {
-            --hue-over: var(--hue-neg);
-            --sat-over: 1;
-            --lit-over: 1;
-        }
     }
 }
 
