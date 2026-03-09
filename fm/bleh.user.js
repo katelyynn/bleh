@@ -33308,7 +33308,7 @@
     });
   }
 
-  // src/components/dialog/calendar.js
+  // src/components/dialog/calendar.ts
   function calendar({
     value,
     min: min2,
@@ -33745,8 +33745,8 @@
         day: "numeric"
       });
     }
-    container.value = (val = null) => {
-      if (val === null) {
+    Object.defineProperty(container, "value", {
+      get() {
         return new Date(
           state.year,
           state.month - 1,
@@ -33755,22 +33755,24 @@
           state.mins,
           state.secs
         );
+      },
+      set(val) {
+        const date_object = new Date(val);
+        state.year = date_object.getFullYear();
+        state.month = date_object.getMonth() + 1;
+        state.day = date_object.getDate();
+        state.hours = date_object.getHours();
+        state.mins = date_object.getMinutes();
+        state.secs = date_object.getSeconds();
+        view.year = state.year;
+        view.month = state.month;
+        render_popup();
+        update_display();
+        if (time_input)
+          time_input.value = `${pad2(state.hours)}:${pad2(state.mins)}:${pad2(state.secs)}`;
+        return date_object;
       }
-      const date_object = new Date(val);
-      state.year = date_object.getFullYear();
-      state.month = date_object.getMonth() + 1;
-      state.day = date_object.getDate();
-      state.hours = date_object.getHours();
-      state.mins = date_object.getMinutes();
-      state.secs = date_object.getSeconds();
-      view.year = state.year;
-      view.month = state.month;
-      render_popup();
-      update_display();
-      if (time_input)
-        time_input.value = `${pad2(state.hours)}:${pad2(state.mins)}:${pad2(state.secs)}`;
-      return date_object;
-    };
+    });
     container.disabled = (val = null) => {
       if (val === null) return time_input.disabled;
       if (!val) date_display.removeAttribute("disabled");

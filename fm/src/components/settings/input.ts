@@ -171,7 +171,7 @@ export function input({
             input_box.value = val;
             update_input();
         }
-    })
+    });
 
     container.disabled = (state = null) => {
         if (state === null) return input_box.getAttribute('disabled') || false;

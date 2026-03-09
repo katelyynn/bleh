@@ -1,25 +1,18 @@
-.user-list-item {
-    margin-top: unset;
+.user-list .link-block-cover-link {
+    width: 32px;
+    height: 32px;
 }
 
-.inbox-message-sender-avatar > .avatar,
 .listeners-section-item-image,
 .top-listeners-item-image,
 .user-list-avatar {
     box-shadow: var(--card-shadow);
     border-radius: var(--avatar-radius);
-    width: 64px;
-    height: 64px;
-    margin-top: unset;
-    background: var(--avatar-generic-background);
-}
-.user-list .link-block-cover-link,
-.listeners-section-item-image,
-.top-listeners-item-image,
-.user-list-avatar {
     width: 32px;
     height: 32px;
     --mask-size: var(--cover-size-32);
+    margin-top: unset;
+    background: var(--avatar-generic-background);
 }
 
 .col-main-is-primary > .col-main > .pagination {
@@ -44,8 +37,10 @@
     }
 }
 .user-list-item {
-    width: 100%;
-    padding: 0 var(--item-list-gap);
+    width: var(--user-list-item-width, 100%);
+    padding: var(--user-list-item-padding, 0 var(--item-list-gap));
+    border-radius: var(--user-list-item-radius, unset);
+    margin: unset;
 
     &.listener-list-item {
         .listener-list-position {
@@ -59,6 +54,40 @@
         top: 50%;
         margin-top: -16px;
     }
+
+    --follow-button-bg-hov: oklch(var(--b4) / 40%);
+    --follow-button-bg-atv: oklch(var(--b4) / 60%);
+    --follow-button-col: oklch(var(--c3));
+
+    &:not(:hover, :focus-within) {
+        --follow-button-opacity: 0.3;
+    }
+
+    animation: var(--motion, chartlist 0.4s var(--trans-function-ani)) !important;
+    animation-delay: var(--delay, 0s) !important;
+    animation-fill-mode: backwards !important;
+}
+
+.user-background {
+    display: none;
+}
+
+.user-list-follower-btn {
+    --bg: transparent;
+    --bg-hov: var(--follow-button-bg-hov);
+    --bg-atv: var(--follow-button-bg-atv);
+    --shadow: none;
+    --shadow-hov: none;
+    --col: var(--follow-button-col);
+    --button-height: var(--follow-button-size);
+    --left: 50%;
+    --margin-left: calc(-1 * (var(--icon-size) / 2));
+    --radius: 50%;
+
+    width: var(--button-height) !important;
+    height: var(--button-height) !important;
+
+    opacity: var(--follow-button-opacity, 1);
 }
 
 .user-list {
@@ -92,42 +121,6 @@
         }
     }
 
-    .user-background {
-        display: none;
-    }
-
-    .user-list-item {
-        --follow-button-bg-hov: oklch(var(--b4) / 40%);
-        --follow-button-bg-atv: oklch(var(--b4) / 60%);
-        --follow-button-col: oklch(var(--c3));
-
-        &:not(:hover, :focus-within) {
-            --follow-button-opacity: 0.3;
-        }
-
-        animation: var(--motion, chartlist 0.4s var(--trans-function-ani)) !important;
-        animation-delay: var(--delay, 0s) !important;
-        animation-fill-mode: backwards !important;
-    }
-
-    .user-list-follower-btn {
-        --bg: transparent;
-        --bg-hov: var(--follow-button-bg-hov);
-        --bg-atv: var(--follow-button-bg-atv);
-        --shadow: none;
-        --shadow-hov: none;
-        --col: var(--follow-button-col);
-        --button-height: var(--follow-button-size);
-        --left: 50%;
-        --margin-left: calc(-1 * (var(--icon-size) / 2));
-        --radius: 50%;
-
-        width: var(--button-height) !important;
-        height: var(--button-height) !important;
-
-        opacity: var(--follow-button-opacity, 1);
-    }
-
     &[data-list-view="list"] {
         .user-list-item {
             border-bottom: 1px solid var(--separator-base);
@@ -149,10 +142,10 @@
             grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
         }
 
-        .user-list-item {
-            padding: var(--item-list-gap);
-            border-radius: var(--item-big-radius);
+        --user-list-item-padding: var(--item-list-gap);
+        --user-list-item-radius: var(--item-big-radius);
 
+        .user-list-item {
             &[data-is-followed="true"],
             &[data-position="1"] {
                 background: oklch(var(--h4) / 15%);
@@ -222,10 +215,14 @@
             grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
         }
 
+        --user-list-item-padding: var(--item-list-gap);
+        --user-list-item-radius: var(--item-big-radius);
+        --user-list-item-width: 100%;
+
         .user-list-item {
-            width: unset;
-            padding: 40px var(--item-list-gap);
-            border-radius: var(--item-big-radius);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
             height: 270px;
             overflow: hidden;
 
@@ -387,11 +384,13 @@
 
 .user-list-name {
     min-width: 200px;
+
+    & > a {
+        color: oklch(var(--l3-c)) !important;
+        text-decoration: var(--force-underline, none) !important;
+    }
 }
 
-.user-list-name > a {
-    color: oklch(var(--l3-c)) !important;
-}
 .user-list-inner-wrap > .label {
     order: -1;
     width: 18px;
@@ -423,11 +422,6 @@
     transition-property: none !important;
 }*/
 
-.user-list-name a,
-.listeners-section-item-name a,
-.top-listeners-item-name a {
-    text-decoration: var(--force-underline, none) !important;
-}
 .user-list-description {
     max-width: fit-content;
     overflow: hidden;
@@ -502,7 +496,7 @@
         background-color: currentColor !important;
     }
 
-    [data-toggle-button-current-state="followed"] & {
+    div[data-toggle-button-current-state="followed"] > form > & {
         --mask: var(--icon-16-check);
     }
 }

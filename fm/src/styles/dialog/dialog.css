@@ -104,77 +104,6 @@
             }
         }
 
-        .bleh-modal-title {
-            display: flex;
-            gap: var(--item-list-gap);
-            cursor: default;
-            margin-right: calc(var(--modal-close-size) + 10px);
-            z-index: 100;
-            position: relative;
-
-            h1 {
-                margin: unset;
-                color: oklch(var(--c1));
-                font-size: 16px;
-                line-height: 20px;
-                font-weight: var(--font-weight-medium);
-                letter-spacing: unset;
-                text-align: left;
-            }
-
-            .bleh-modal-subtitle {
-                color: oklch(var(--c3));
-                line-height: 20px;
-            }
-
-            @media (max-width: 980px) {
-                margin-left: calc(var(--modal-close-size) + 10px);
-                justify-content: center;
-            }
-        }
-
-        .modal-close-button {
-            --bg: transparent;
-            --bg-hov: oklch(var(--b4) / 40%);
-            --bg-atv: oklch(var(--b4) / 60%);
-            --shadow: none;
-            --col: oklch(var(--c3));
-            --mask-colour: currentColor;
-            --font-size: 0;
-            position: absolute;
-            top: calc(var(--card-padding) - ((var(--modal-close-size) - 20px) / 2));
-            right: calc(var(--card-padding) - ((var(--modal-close-size) - 20px) / 2));
-            --icon-size: 16px;
-            --left: calc((var(--modal-close-size) - var(--icon-size)) / 2);
-            width: var(--modal-close-size);
-            height: var(--modal-close-size);
-            z-index: 100;
-        }
-
-        .bleh-modal-body {
-            & > :first-child {
-                margin-top: unset !important;
-            }
-
-            & > img {
-                width: 100%;
-                border-radius: var(--item-big-radius);
-                box-shadow: var(--card-shadow);
-                max-width: 560px;
-                display: block;
-                margin-left: auto;
-                margin-right: auto;
-            }
-
-            & > .sep {
-                margin: var(--card-gap) 0;
-            }
-
-            & > p:not(.big-modal-alert, .card-tip) {
-                max-width: 430px;
-            }
-        }
-
         &[data-modal-type="avatar"] {
             background: unset;
             backdrop-filter: unset;
@@ -258,6 +187,77 @@
             width: 96vw;
             max-width: 96vw;
         }
+    }
+}
+
+.bleh-modal-title {
+    display: flex;
+    gap: var(--item-list-gap);
+    cursor: default;
+    margin-right: calc(var(--modal-close-size) + 10px);
+    z-index: 100;
+    position: relative;
+
+    h1 {
+        margin: unset;
+        color: oklch(var(--c1));
+        font-size: 16px;
+        line-height: 20px;
+        font-weight: var(--font-weight-medium);
+        letter-spacing: unset;
+        text-align: left;
+    }
+
+    .bleh-modal-subtitle {
+        color: oklch(var(--c3));
+        line-height: 20px;
+    }
+
+    @media (max-width: 980px) {
+        margin-left: calc(var(--modal-close-size) + 10px);
+        justify-content: center;
+    }
+}
+
+.modal-close-button {
+    --bg: transparent;
+    --bg-hov: oklch(var(--b4) / 40%);
+    --bg-atv: oklch(var(--b4) / 60%);
+    --shadow: none;
+    --col: oklch(var(--c3));
+    --mask-colour: currentColor;
+    --font-size: 0;
+    position: absolute;
+    top: calc(var(--card-padding) - ((var(--modal-close-size) - 20px) / 2));
+    right: calc(var(--card-padding) - ((var(--modal-close-size) - 20px) / 2));
+    --icon-size: 16px;
+    --left: calc((var(--modal-close-size) - var(--icon-size)) / 2);
+    width: var(--modal-close-size);
+    height: var(--modal-close-size);
+    z-index: 100;
+}
+
+.bleh-modal-body {
+    & > :first-child {
+        margin-top: unset !important;
+    }
+
+    & > img {
+        width: 100%;
+        border-radius: var(--item-big-radius);
+        box-shadow: var(--card-shadow);
+        max-width: 560px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    & > .sep {
+        margin: var(--card-gap) 0;
+    }
+
+    & > p:not(.big-modal-alert, .card-tip) {
+        max-width: 430px;
     }
 }
 

@@ -164,10 +164,6 @@
 
         font-size: var(--font-size);
 
-        [data-bleh--solarium="false"] & {
-            background: oklch(var(--b5)) !important;
-        }
-
         [data-tippy-root]:has(> &) {
             position: fixed !important;
             transform: unset !important;
