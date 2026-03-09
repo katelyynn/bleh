@@ -16365,6 +16365,7 @@ t {
     }
   }
   &.status-title {
+    display: flex;
     color: oklch(var(--c2));
   }
   &.status-artist {
@@ -16385,6 +16386,14 @@ t {
     color: oklch(var(--c3));
     font-size: 13px;
   }
+}
+.status-time {
+  font-size: 13px;
+  margin-top: 10px;
+  color: oklch(var(--c3));
+}
+.status-time-text {
+  --mask-colour: oklch(var(--c3) / 80%);
 }
 .update-available-banner {
   padding: var(--card-gap) var(--item-list-gap);

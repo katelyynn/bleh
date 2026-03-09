@@ -634,21 +634,29 @@ export function append_nav() {
         function render_status_container(status: music_status) {
             if (!status) return;
 
-            render(
-                status_container,
-                html`
-                    <div class="status">
-                        <div class="status-image">
-                            <img src=${status.avatar} alt=${status.album}>
-                        </div>
-                        <div class="status-info">
-                            <strong class="status-text status-title">${status.name}</strong>
-                            <p class="status-text status-artist">${status.artist}</p>
-                            <p class="status-text status-album">${status.album}</p>
-                        </div>
+            render(status_container, html`
+                <div class="status">
+                    <div class="status-image">
+                        <img src=${status.avatar} alt=${status.album}>
                     </div>
-                `
-            );
+                    <div class="status-info">
+                        <strong class="status-text status-title">${status.name}</strong>
+                        <p class="status-text status-artist">${status.artist}</p>
+                        <p class="status-text status-album">${status.album}</p>
+                    </div>
+                </div>
+                <div class="status-time">
+                    ${status.active ? html.node`
+                        <p class="status-text status-time-text chartlist-now-scrobbling">
+                            ${tl(trans.scrobbling_now)}
+                        </p>
+                    ` : html.node`
+                        <p class="status-text status-time-text inactive">
+                            ${tl(trans.recent_scrobble)}
+                        </p>
+                    `}
+                </div>
+            `);
         }
 
         links.appendChild(music);
@@ -1478,6 +1486,8 @@ export async function live_status() {
         next.setMinutes(next.getMinutes() + 1);
 
         if (settings.format_guest_features) {
+            album.textContent = romanise(correct_item_by_artist(album.textContent, artist.textContent));
+
             const formatted = name_includes(
                 track.textContent,
                 artist.textContent
@@ -1487,6 +1497,7 @@ export async function live_status() {
             render(track, smart_title(formatted[0], formatted[1]));
             artist = html.node`<span class="artist">${smart_artists(formatted[2], formatted[3])}</span>`;
         } else if (settings.corrections) {
+            album.textContent = romanise(correct_item_by_artist(album.textContent, artist.textContent));
             track.textContent = romanise(
                 correct_item_by_artist(track.textContent, artist.textContent)
             );

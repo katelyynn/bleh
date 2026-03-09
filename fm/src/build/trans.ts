@@ -10350,6 +10350,12 @@ export const trans: translations = {
     },
     and_count_more: {
         en: 'and {c} more'
+    },
+    scrobbling_now: {
+        en: 'Scrobbling now'
+    },
+    recent_scrobble: {
+        en: 'Recently scrobbled'
     }
 };
 

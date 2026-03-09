@@ -53303,21 +53303,29 @@
     if (auth.pro) {
       let render_status_container = function(status3) {
         if (!status3) return;
-        render(
-          status_container,
-          html`
-                    <div class="status">
-                        <div class="status-image">
-                            <img src=${status3.avatar} alt=${status3.album}>
-                        </div>
-                        <div class="status-info">
-                            <strong class="status-text status-title">${status3.name}</strong>
-                            <p class="status-text status-artist">${status3.artist}</p>
-                            <p class="status-text status-album">${status3.album}</p>
-                        </div>
+        render(status_container, html`
+                <div class="status">
+                    <div class="status-image">
+                        <img src=${status3.avatar} alt=${status3.album}>
                     </div>
-                `
-        );
+                    <div class="status-info">
+                        <strong class="status-text status-title">${status3.name}</strong>
+                        <p class="status-text status-artist">${status3.artist}</p>
+                        <p class="status-text status-album">${status3.album}</p>
+                    </div>
+                </div>
+                <div class="status-time">
+                    ${status3.active ? html.node`
+                        <p class="status-text status-time-text chartlist-now-scrobbling">
+                            ${tl2(trans.scrobbling_now)}
+                        </p>
+                    ` : html.node`
+                        <p class="status-text status-time-text inactive">
+                            ${tl2(trans.recent_scrobble)}
+                        </p>
+                    `}
+                </div>
+            `);
       };
       const music = html.node`
             <button class="masthead-nav-control chibi" data-type="now-playing">
@@ -54048,6 +54056,7 @@
       let next = /* @__PURE__ */ new Date();
       next.setMinutes(next.getMinutes() + 1);
       if (settings.format_guest_features) {
+        album.textContent = romanise(correct_item_by_artist(album.textContent, artist.textContent));
         const formatted = name_includes(
           track.textContent,
           artist.textContent
@@ -54056,6 +54065,7 @@
         render(track, smart_title(formatted[0], formatted[1]));
         artist = html.node`<span class="artist">${smart_artists(formatted[2], formatted[3])}</span>`;
       } else if (settings.corrections) {
+        album.textContent = romanise(correct_item_by_artist(album.textContent, artist.textContent));
         track.textContent = romanise(
           correct_item_by_artist(track.textContent, artist.textContent)
         );
@@ -73948,6 +73958,12 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     },
     and_count_more: {
       en: "and {c} more"
+    },
+    scrobbling_now: {
+      en: "Scrobbling now"
+    },
+    recent_scrobble: {
+      en: "Recently scrobbled"
     }
   };
   var translation_fallback = "NO_TRANSLATION_FOUND";
