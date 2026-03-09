@@ -2,6 +2,7 @@
 .bleh--panel, .bleh--blank-panel,
 .col-main > section, .col-sidebar > section,
 .col-main > div.buffer-standard, /* covers weird shoutbox sections, 2026 */
+.col-main > .lazy-shoutbox,
 .your-progress-component,
 .primary-column,
 .album-and-lyrics-row,
