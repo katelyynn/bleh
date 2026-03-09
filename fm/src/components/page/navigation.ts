@@ -1212,7 +1212,7 @@ export function append_nav() {
     const auth_drop_menu = tippy(auth_link, {
         theme: 'context-menu',
         content: html.node`
-            <a class="dropdown-menu-clickable-item" data-type="quick_access" href="${root}bleh/interface">
+            <a class="dropdown-menu-clickable-item" data-type="quick_access" href="${root}bleh/profile?setting=navigation_items">
                 ${tl(trans.edit_quick_access)}
             </a>
             <button class="dropdown-menu-clickable-item" data-type="copy" onclick=${() => copy(auth.name)}>

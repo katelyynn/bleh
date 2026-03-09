@@ -274,7 +274,11 @@ export function bleh_settings() {
     if (!tab) change_settings_page('general');
     else change_settings_page(tab);
 
-    if (page.requested.setting) scroll_to_setting(page.requested.setting);
+    if (page.requested.setting) {
+        setTimeout(() => {
+            scroll_to_setting(page.requested.setting);
+        }, 100);
+    }
 
     const profile_tab = nav.querySelector('[data-bleh-page="profile"]');
     if (profile_tab) {

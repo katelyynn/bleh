@@ -53837,7 +53837,7 @@
     const auth_drop_menu = tippy_esm_default(auth_link2, {
       theme: "context-menu",
       content: html.node`
-            <a class="dropdown-menu-clickable-item" data-type="quick_access" href="${root}bleh/interface">
+            <a class="dropdown-menu-clickable-item" data-type="quick_access" href="${root}bleh/profile?setting=navigation_items">
                 ${tl2(trans.edit_quick_access)}
             </a>
             <button class="dropdown-menu-clickable-item" data-type="copy" onclick=${() => copy(auth.name)}>
@@ -54904,7 +54904,11 @@
     page.structure.row.insertBefore(nav, page.structure.content);
     if (!tab) change_settings_page("general");
     else change_settings_page(tab);
-    if (page.requested.setting) scroll_to_setting(page.requested.setting);
+    if (page.requested.setting) {
+      setTimeout(() => {
+        scroll_to_setting(page.requested.setting);
+      }, 100);
+    }
     const profile_tab = nav.querySelector('[data-bleh-page="profile"]');
     if (profile_tab) {
       setTimeout(() => {
