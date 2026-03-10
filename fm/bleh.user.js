@@ -55138,7 +55138,7 @@
       page_error(e4);
     }
     if (page_id == "interface") {
-      let render_track_preview = function() {
+      let render_track_preview2 = function() {
         const avi = auth.avatar.replace("/avatar42s/", "/avatar170s/");
         render(preview, html`
                 <table class="chartlist chartlist--with-image chartlist--with-loved chartlist--with-artist chartlist--with-more">
@@ -55213,13 +55213,13 @@
         func: () => {
           expand_tracks.compat();
           track_album_name_location.compat();
-          render_track_preview();
+          render_track_preview2();
         }
       })}
                     ${expand_tracks = setting({
         id: "expand_tracks",
         func: () => {
-          render_track_preview();
+          render_track_preview2();
         }
       })}
                     ${track_album_name_location = setting({
@@ -55357,7 +55357,7 @@
             </section>
             ` : ""}
         `);
-      render_track_preview();
+      render_track_preview2();
     } else if (page_id == "playback") {
       let total_artists = 0;
       let total_album_tracks = 0;
@@ -58800,7 +58800,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       let expand_tracks;
       let track_album_name_location;
       let preview;
-      function render_track_preview() {
+      function render_track_preview2() {
         const avi = avatar(auth.avatar, "avatar170s");
         render(preview, html`
                 <table class="chartlist chartlist--with-image chartlist--with-loved chartlist--with-artist chartlist--with-more">
@@ -58869,13 +58869,13 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         func: () => {
           expand_tracks.compat();
           track_album_name_location.compat();
-          render_track_preview();
+          render_track_preview2();
         }
       })}
                     ${expand_tracks = setting({
         id: "expand_tracks",
         func: () => {
-          render_track_preview();
+          render_track_preview2();
         }
       })}
                     ${track_album_name_location = setting({
@@ -58893,7 +58893,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                 ${tl2(trans.next)}
             </button>
         `);
-      render_track_preview();
+      render_track_preview2();
     }, page.state.trans);
   }
   function setup_end() {
@@ -59237,6 +59237,105 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
 
   // src/pages/lastfm_settings/profile.ts
   var import_cropperjs = __toESM(require_cropper(), 1);
+
+  // src/components/settings/preview.ts
+  function render_track_preview(val, bar = false, art = true, has_realtime = false) {
+    let bar_width = 100;
+    return html.node`
+        <div class="tracks recent_listening ${val ? "blur" : ""}">
+            ${track_preview(has_realtime)}
+            ${Array.from({ length: 4 }).map(() => track_preview())}
+        </div>
+    `;
+    function track_preview(realtime = false) {
+      return html.node`
+            <div class="track ${realtime ? "realtime" : ""}">
+                ${art ? html.node`
+                    <div class="cover" />
+                ` : ""}
+                <div class="title" />
+                <div class="artist" />
+                ${!bar ? html.node`
+                    <div class="time" />
+                ` : () => {
+        const elem = html.node`
+                        <div class="bar">
+                            <div class="fill" style="width: ${bar_width}%" />
+                        </div>
+                    `;
+        bar_width * 0.9;
+        return elem;
+      }}
+            </div>
+        `;
+    }
+  }
+  function render_shoutbox_preview(val) {
+    return html.node`
+        <div class="shouts ${val ? "blur" : ""}">
+            ${Array.from({ length: 3 }).map(() => shout_preview())}
+        </div>
+    `;
+    function shout_preview() {
+      return html.node`
+            <div class="shout-preview">
+                <div class="shout-preview-avatar">
+                    <div class="shout-avatar-placeholder"></div>
+                </div>
+                <div class="shout-preview-info">
+                    <div class="shout-preview-header">
+                        <div class="shout-preview-username"></div>
+                        <div class="shout-preview-time"></div>
+                    </div>
+                    <div class="shout-preview-contents"></div>
+                    <div class="shout-preview-contents second"></div>
+                </div>
+            </div>
+        `;
+    }
+  }
+  function render_chart_preview(type, second_row = true, primary = false) {
+    if (primary) {
+      return html.node`
+            <div class="grid-items-preview">
+                <div class="grid-primary">
+                    ${grid_preview()}
+                </div>
+                <div class="grid-mains">
+                    <div class="grid-main">
+                        ${Array.from({ length: 2 }).map(() => grid_preview())}
+                    </div>
+                    ${second_row ? html.node`
+                        <div class="grid-main">
+                            ${Array.from({ length: 2 }).map(() => grid_preview())}
+                        </div>
+                    ` : ""}
+                </div>
+            </div>
+        `;
+    }
+    return html.node`
+        <div class="grid-items-preview">
+            <div class="grid-mains">
+                <div class="grid-main">
+                    ${Array.from({ length: 4 }).map(() => grid_preview())}
+                </div>
+                ${second_row ? html.node`
+                    <div class="grid-main">
+                        ${Array.from({ length: 4 }).map(() => grid_preview())}
+                    </div>
+                ` : ""}
+            </div>
+        </div>
+    `;
+    function grid_preview(primary2 = false) {
+      return html.node`
+            <div class="grid-item-preview grid-item-${type} icon-mask" />
+        `;
+    }
+  }
+
+  // src/pages/lastfm_settings/profile.ts
   var cropper;
   function lastfm_settings_profile() {
     page.token = page.structure.main.querySelector('[name="csrfmiddlewaretoken"]').value;
@@ -59268,44 +59367,28 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         timeframe: form.querySelector("#id_chart_range_top_tracks")
       }
     };
+    let recent_listening_preview;
+    let top_artists_preview;
+    let top_albums_preview;
+    function render_chart(type, val) {
+      const split = val.split(",");
+      const arrange = split[0];
+      const second = Number(split[1]) > 4;
+      if (arrange == "classic") {
+        return render_chart_preview(type, second, true);
+      }
+      if (arrange == "grid") {
+        return render_chart_preview(type, second, false);
+      }
+      return render_track_preview(false, true, true);
+    }
     render(charts_panel2, html`
         <h4>${tl2(trans.recent_tracks)}</h4>
         ${alert2}
         <form action="${root}settings#update-chart" name="chart-form" method="post">
             <input type="hidden" name="csrfmiddlewaretoken" value=${page.token}>
-            <div class="inner-preview pad">
-                <div class="tracks recent">
-                    <div class="track realtime">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="artist"></div>
-                        <div class="time"></div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="artist"></div>
-                        <div class="time"></div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="artist"></div>
-                        <div class="time"></div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="artist"></div>
-                        <div class="time"></div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="artist"></div>
-                        <div class="time"></div>
-                    </div>
-                </div>
+            <div class="inner-preview pad" ref=${(el) => recent_listening_preview = el}>
+                ${render_track_preview(false, false, original_chart_settings.recent.recent_artwork.checked)}
             </div>
             <div class="setting-group">
                 <div class="setting" data-type="select">
@@ -59323,7 +59406,10 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       title: tl2(trans.recent_artwork),
       value: original_chart_settings.recent.recent_artwork.checked,
       name: original_chart_settings.recent.recent_artwork.name,
-      standalone: false
+      standalone: false,
+      func: (val) => {
+        render(recent_listening_preview, render_track_preview(false, false, val));
+      }
     })}
                 ${toggle({
       title: tl2(trans.recent_realtime.name),
@@ -59334,63 +59420,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     })}
             </div>
             <h4>${tl2(trans.top_artists)}</h4>
-            <div class="inner-preview pad">
-                <div class="item-grid artist">
-                    <div class="grid-primary artist">
-                        <div class="grid-item icon-mask"></div>
-                    </div>
-                    <div class="grid-mains">
-                        <div class="grid-main artist">
-                            <div class="grid-item icon-mask grid-item--extra artist"></div>
-                            <div class="grid-item icon-mask grid-item--extra artist"></div>
-                            <div class="grid-item icon-mask"></div>
-                            <div class="grid-item icon-mask"></div>
-                        </div>
-                        <div class="grid-main artist">
-                            <div class="grid-item icon-mask grid-item--extra artist"></div>
-                            <div class="grid-item icon-mask grid-item--extra artist"></div>
-                            <div class="grid-item icon-mask"></div>
-                            <div class="grid-item icon-mask"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tracks artist">
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="bar">
-                            <div class="fill" style="width: 100%"></div>
-                        </div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="bar">
-                            <div class="fill" style="width: 85%"></div>
-                        </div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="bar">
-                            <div class="fill" style="width: 60%"></div>
-                        </div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="bar">
-                            <div class="fill" style="width: 30%"></div>
-                        </div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="bar">
-                            <div class="fill" style="width: 5%"></div>
-                        </div>
-                    </div>
-                </div>
+            <div class="inner-preview pad" ref=${(el) => top_artists_preview = el}>
+                ${render_chart("artist", original_chart_settings.artists.style.value)}
             </div>
             <div class="setting-group">
                 <div class="setting" data-type="select">
@@ -59412,68 +59443,16 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       values: select_prepare(original_chart_settings.artists.style),
       initial: original_chart_settings.artists.style.value,
       name: original_chart_settings.artists.style.name,
-      in_settings: true
+      in_settings: true,
+      func: (val) => {
+        render(top_artists_preview, render_chart("artist", val));
+      }
     })}
                 </div>
             </div>
             <h4>${tl2(trans.top_albums)}</h4>
-            <div class="inner-preview pad">
-                <div class="item-grid album">
-                    <div class="grid-primary album">
-                        <div class="grid-item icon-mask"></div>
-                    </div>
-                    <div class="grid-mains">
-                        <div class="grid-main album">
-                            <div class="grid-item icon-mask"></div>
-                            <div class="grid-item icon-mask"></div>
-                            <div class="grid-item icon-maskgrid-item--extra album"></div>
-                            <div class="grid-item icon-mask grid-item--extra album"></div>
-                        </div>
-                        <div class="grid-main album">
-                            <div class="grid-item icon-mask"></div>
-                            <div class="grid-item icon-mask"></div>
-                            <div class="grid-item icon-mask grid-item--extra album"></div>
-                            <div class="grid-item icon-mask grid-item--extra album"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tracks album">
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="bar">
-                            <div class="fill" style="width: 100%"></div>
-                        </div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="bar">
-                            <div class="fill" style="width: 85%"></div>
-                        </div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="bar">
-                            <div class="fill" style="width: 60%"></div>
-                        </div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="bar">
-                            <div class="fill" style="width: 30%"></div>
-                        </div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="bar">
-                            <div class="fill" style="width: 5%"></div>
-                        </div>
-                    </div>
-                </div>
+            <div class="inner-preview pad" ref=${(el) => top_albums_preview = el}>
+                ${render_chart("album", original_chart_settings.albums.style.value)}
             </div>
             <div class="setting-group">
                 <div class="setting" data-type="select">
@@ -59495,7 +59474,10 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       values: select_prepare(original_chart_settings.albums.style),
       initial: original_chart_settings.albums.style.value,
       name: original_chart_settings.albums.style.name,
-      in_settings: true
+      in_settings: true,
+      func: (val) => {
+        render(top_albums_preview, render_chart("album", val));
+      }
     })}
                 </div>
             </div>
@@ -60485,137 +60467,55 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
   function patch_settings_privacy_panel(token, privacy_panel) {
     privacy_panel.classList.add("bleh--panel");
     let original_privacy_settings = {
-      recent_listening: document.getElementById("id_hide_realtime").checked,
-      receiving_msgs: document.getElementById("id_message_privacy").outerHTML,
-      disable_shoutbox: document.getElementById("id_shoutbox_disabled").checked
+      recent_listening: privacy_panel.querySelector("#id_hide_realtime"),
+      receiving_msgs: privacy_panel.querySelector("#id_message_privacy"),
+      disable_shoutbox: privacy_panel.querySelector("#id_shoutbox_disabled")
     };
-    privacy_panel.innerHTML = `
+    let recent_listening_preview;
+    let shoutbox_preview;
+    render(privacy_panel, html`
         <h4>${tl2(trans.privacy)}</h4>
         <form action="${root}settings/privacy" name="privacy" method="post">
-            <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
-            <div class="inner-preview pad">
-                <div class="tracks recent_listening">
-                    <div class="track realtime">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="artist"></div>
-                        <div class="time"></div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="artist"></div>
-                        <div class="time"></div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="artist"></div>
-                        <div class="time"></div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="artist"></div>
-                        <div class="time"></div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="artist"></div>
-                        <div class="time"></div>
-                    </div>
-                </div>
+            <input type="hidden" name="csrfmiddlewaretoken" value=${token}>
+            <div class="inner-preview pad" ref=${(el) => recent_listening_preview = el}>
+                ${render_track_preview(original_privacy_settings.recent_listening.checked, false, true, true)}
             </div>
             <div class="setting-group">
-                <div class="setting" data-type="toggle" onclick="_update_inbuilt_item('recent_listening')" id="container-recent_listening">
-                    <button class="btn reset" onclick="_reset_inbuilt_item('recent_listening')">Reset to default</button>
-                    <div class="heading">
-                        <h5>${tl2(trans.recent_listening.name)}</h5>
-                        <p>${tl2(trans.recent_listening.body)}</p>
-                    </div>
-                    <div class="toggle-wrap">
-                        <input class="companion-checkbox" type="checkbox" name="hide_realtime" id="inbuilt-companion-checkbox-recent_listening">
-                        <span class="btn toggle colourful" id="toggle-recent_listening" aria-checked="false">
-                            <div class="dot"></div>
-                        </span>
-                    </div>
-                </div>
-                <div class="setting" data-type="options">
+                ${toggle({
+      value: original_privacy_settings.recent_listening.checked,
+      name: original_privacy_settings.recent_listening.name,
+      title: tl2(trans.recent_listening.name),
+      body: tl2(trans.recent_listening.body),
+      standalone: false,
+      func: (val) => {
+        render(recent_listening_preview, render_recent_listening(val));
+      }
+    })}
+                <div class="setting" data-type="select">
                     <div class="heading">
                         <h5>${tl2(trans.allow_messages_from)}</h5>
                     </div>
-                    <div class="primary-selections">
-                        ${original_privacy_settings.receiving_msgs}
-                        <div class="btn primary-selection" id="primary-selection-receiving_msgs-everyone" onclick="_update_inbuilt_selection('id_message_privacy', 0)">
-                            <h5>${tl2(trans.everyone)}</h5>
-                        </div>
-                        <div class="btn primary-selection" id="primary-selection-receiving_msgs-neighbours" onclick="_update_inbuilt_selection('id_message_privacy', 1)">
-                            <h5>${tl2(trans.following_and_neighbours)}</h5>
-                        </div>
-                        <div class="btn primary-selection" id="primary-selection-receiving_msgs-follow" onclick="_update_inbuilt_selection('id_message_privacy', 2)">
-                            <h5>${tl2(trans.following)}</h5>
-                        </div>
-                    </div>
+                    ${select({
+      values: select_prepare(original_privacy_settings.receiving_msgs),
+      initial: original_privacy_settings.receiving_msgs.value,
+      in_settings: true
+    })}
                 </div>
             </div>
-            <div class="inner-preview pad">
-                <div class="shouts">
-                    <div class="shout-preview">
-                        <div class="avatar-side">
-                            <div class="shout-avatar-placeholder"></div>
-                        </div>
-                        <div class="info-side">
-                            <div class="header">
-                                <div class="shout-username"></div>
-                                <div class="shout-time"></div>
-                            </div>
-                            <div class="shout-contents"></div>
-                            <div class="shout-contents"></div>
-                        </div>
-                    </div>
-                    <div class="shout-preview">
-                        <div class="avatar-side">
-                            <div class="shout-avatar-placeholder"></div>
-                        </div>
-                        <div class="info-side">
-                            <div class="header">
-                                <div class="shout-username"></div>
-                                <div class="shout-time"></div>
-                            </div>
-                            <div class="shout-contents"></div>
-                            <div class="shout-contents"></div>
-                        </div>
-                    </div>
-                    <div class="shout-preview">
-                        <div class="avatar-side">
-                            <div class="shout-avatar-placeholder"></div>
-                        </div>
-                        <div class="info-side">
-                            <div class="header">
-                                <div class="shout-username"></div>
-                                <div class="shout-time"></div>
-                            </div>
-                            <div class="shout-contents"></div>
-                            <div class="shout-contents"></div>
-                        </div>
-                    </div>
-                </div>
+            <div class="inner-preview pad" ref=${(el) => shoutbox_preview = el}>
+                ${render_shoutbox_preview(original_privacy_settings.disable_shoutbox.checked)}
             </div>
             <div class="setting-group">
-                <div class="setting" data-type="toggle" onclick="_update_inbuilt_item('disable_shoutbox')" id="container-disable_shoutbox">
-                    <button class="btn reset" onclick="_reset_inbuilt_item('disable_shoutbox')">Reset to default</button>
-                    <div class="heading">
-                        <h5>${tl2(trans.close_shouts.name)}</h5>
-                        <p>${tl2(trans.close_shouts.body)}</p>
-                    </div>
-                    <div class="toggle-wrap">
-                        <input class="companion-checkbox" type="checkbox" name="shoutbox_disabled" id="inbuilt-companion-checkbox-disable_shoutbox">
-                        <span class="btn toggle colourful" id="toggle-disable_shoutbox" aria-checked="false">
-                            <div class="dot"></div>
-                        </span>
-                    </div>
-                </div>
+                ${toggle({
+      value: original_privacy_settings.disable_shoutbox.checked,
+      name: original_privacy_settings.disable_shoutbox.name,
+      title: tl2(trans.close_shouts.name),
+      body: tl2(trans.close_shouts.body),
+      standalone: false,
+      func: (val) => {
+        render(shoutbox_preview, render_shoutbox_preview(val));
+      }
+    })}
             </div>
             <div class="settings-footer">
                 <button type="submit" class="btn-primary save">
@@ -60624,18 +60524,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                 <input type="hidden" value="privacy" name="submit">
             </div>
         </form>
-    `;
-    for (let setting2 in original_privacy_settings) {
-      update_inbuilt_item(setting2, original_privacy_settings[setting2], false);
-    }
-    let selects = document.body.querySelectorAll("select");
-    selects.forEach((select2) => {
-      select2.setAttribute(
-        "onchange",
-        `_update_inbuilt_select('${select2.getAttribute("id")}', this.value)`
-      );
-      update_inbuilt_select(select2.getAttribute("id"), select2.value);
-    });
+    `);
   }
   function bleh_accounts() {
     let token = page.structure.main.querySelector('[name="csrfmiddlewaretoken"]').getAttribute("value");

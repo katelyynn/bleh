@@ -486,34 +486,12 @@
 
             position: relative;
 
-            &.requesting {
-                --left: 50%;
-                --margin-left: -9px;
-                color: oklch(var(--c3));
-                --mask: var(--icon-16-spinner);
-
-                & > img {
-                    opacity: 0;
-                }
-
-                &:before {
-                    animation: spinner 1.2s linear infinite;
-                }
-            }
-            &:not(.requesting) {
-                animation: requested calc(var(--trans) * 1.2)
-                    var(--trans-function);
-            }
-
             & > img {
                 width: 100%;
                 height: 100%;
 
                 --mask: var(--icon-16-user);
                 --mask-size: 14px;
-                transition-property: opacity;
-                transition-duration: var(--trans);
-                transition-timing-function: var(--trans-function);
             }
         }
     }
@@ -656,161 +634,27 @@
     display: flex;
     flex-direction: column;
     gap: 6px;
-
-    select {
-        display: none;
-    }
-
-    .primary-selection {
-        --bg: transparent;
-        --bg-hov: transparent;
-        --bg-atv: transparent;
-        --shadow: none;
-
-        --padding: 0 0 0
-            calc(14px + 10px + var(--icon-size) + var(--icon-gap));
-        --left: calc(14px + var(--card-gap));
-        /*--mask: var(--icon-16-dot);*/
-        width: 100% !important;
-        min-height: fit-content !important;
-        position: relative;
-
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-
-        &.no-icon {
-            --padding: 0 0 0 calc(14px + 10px);
-        }
-
-        color: inherit !important;
-
-        h5 {
-            cursor: pointer;
-            color: inherit;
-            font-weight: var(--font-weight) !important;
-        }
-        p {
-            font-size: var(--font-size-sm);
-            line-height: var(--line-height-sm);
-            opacity: 0.7;
-        }
-
-        &:before {
-            content: "";
-            position: absolute;
-            width: 14px;
-            height: 14px;
-            box-sizing: border-box;
-            border: 2px solid var(--card-border-base);
-            border-radius: 50px;
-
-            left: 0;
-            top: 50%;
-            margin-top: -7px;
-
-            transition-property: border-width, border-color;
-            transition-duration: var(--trans);
-            transition-timing-function: var(--trans-function);
-        }
-
-        &#primary-selection-receiving_msgs-everyone {
-            --hue-over: 160;
-            --sat-over: 1;
-            --lit-over: 1;
-            --mask: var(--icon-16-globe);
-        }
-        &#primary-selection-receiving_msgs-neighbours {
-            --hue-over: 30;
-            --sat-over: 1;
-            --lit-over: 1;
-            --mask: var(--icon-16-users);
-        }
-        &#primary-selection-receiving_msgs-follow {
-            --hue-over: -2;
-            --sat-over: 1;
-            --lit-over: 1;
-            --mask: var(--icon-16-lock);
-        }
-
-        &[data-toggle-value="expand"] {
-            --mask: var(--icon-16-expand);
-        }
-        &[data-toggle-value="gallery"] {
-            --mask: var(--icon-16-gallery-vertical);
-        }
-        &[data-toggle-value="shouts"] {
-            --mask: var(--icon-16-shoutbox);
-        }
-        &[data-toggle-value="wiki"] {
-            --mask: var(--icon-16-bio);
-        }
-        &[data-toggle-value="listens"] {
-            --mask: var(--icon-16-listener);
-        }
-
-        transform: unset !important;
-
-        &:active,
-        &:hover {
-            &:before {
-                border-width: 2px;
-                border-color: oklch(var(--l2-c));
-            }
-        }
-
-        &:active {
-            &:before {
-                border-width: 4px;
-            }
-        }
-
-        &[aria-checked="true"],
-        [data-bleh--inbuilt-id_message_privacy="all"]
-            &#primary-selection-receiving_msgs-everyone,
-        [data-bleh--inbuilt-id_message_privacy="n"]
-            &#primary-selection-receiving_msgs-neighbours,
-        [data-bleh--inbuilt-id_message_privacy="f"]
-            &#primary-selection-receiving_msgs-follow {
-            &:before {
-                border-width: 4px;
-                border-color: oklch(var(--l3-c));
-                background: oklch(var(--b9));
-            }
-        }
-    }
 }
 
 .inner-preview {
     .tracks {
-        background-color: oklch(var(--b5));
         display: flex;
         flex-direction: column;
+        gap: 2px;
 
-        [data-bleh--inbuilt-id_chart_style_and_length_top_albums^="classic"]
-            &.album,
-        [data-bleh--inbuilt-id_chart_style_and_length_top_albums^="grid"]
-            &.album,
-        [data-bleh--inbuilt-id_chart_style_and_length_top_artists^="classic"]
-            &.artist,
-        [data-bleh--inbuilt-id_chart_style_and_length_top_artists^="grid"]
-            &.artist {
-            display: none;
-        }
-        [data-bleh--inbuilt-recent_listening="true"] &.recent_listening {
+        &.blur {
             opacity: 0.5;
             filter: blur(3px);
         }
 
         .track {
+            background-color: oklch(var(--b4) / 30%);
             padding: 7px 12px;
-            min-height: 24px;
-            border-top: 1px solid var(--card-border-base);
+            min-height: 34px;
             display: flex;
             align-items: center;
             gap: 12px;
-
-            animation: track_in var(--trans) var(--trans-function);
+            border-radius: 6px;
 
             .cover {
                 width: 20px;
@@ -828,21 +672,6 @@
                 display: flex;
                 gap: 12px;
                 flex: 1;
-
-                [data-bleh--track_layout="column"] & {
-                    display: inline-block;
-
-                    .title {
-                        width: 180px;
-                    }
-                    .artist {
-                        margin-top: 4px;
-                        width: 70px;
-                    }
-                    .album {
-                        margin-top: 4px;
-                    }
-                }
             }
             .title {
                 flex: 1;
@@ -871,130 +700,22 @@
             }
             .bar {
                 width: 120px;
-                height: 16px;
-                background-color: oklch(var(--b4));
+                height: 8px;
+                background-color: oklch(var(--b4) / 60%);
                 border-radius: var(--item-small-radius);
                 display: flex;
+                align-items: center;
                 justify-content: end;
 
                 .fill {
                     background-color: oklch(var(--h3));
                     border-radius: var(--item-small-radius);
-                    height: 16px;
+                    height: 8px;
                 }
             }
 
             &.realtime {
                 background-color: oklch(var(--h4) / 10%);
-            }
-
-            [data-bleh--expand_tracks="never"] &,
-            [data-bleh--expand_tracks="active"] &:not(.realtime) {
-                .cover {
-                    width: 20px;
-                    height: 20px;
-                }
-
-                .album {
-                    display: none !important;
-                }
-            }
-        }
-    }
-
-    .item-grid {
-        display: flex;
-        justify-content: center;
-        gap: 4px;
-
-        [data-bleh--inbuilt-id_chart_style_and_length_top_albums^="list"]
-            &.album,
-        [data-bleh--inbuilt-id_chart_style_and_length_top_artists^="list"]
-            &.artist {
-            display: none;
-        }
-
-        .grid-primary {
-            aspect-ratio: 1 / 1;
-
-            .grid-item {
-                width: 224px;
-                height: 224px;
-                border-radius: var(--item-med-radius);
-                background-color: oklch(var(--b4));
-                position: relative;
-                color: oklch(var(--c3));
-                --mask: var(--icon-album);
-                --mask-size: 72px;
-                --left: 50%;
-                --top: 50%;
-                --margin-left: calc(-1 * (var(--mask-size) / 2));
-                --margin-top: calc(-1 * (var(--mask-size) / 2));
-
-                animation: grid_primary var(--trans) var(--trans-function);
-
-                .artist & {
-                    --mask: var(--icon-artist);
-                }
-            }
-
-            [data-bleh--inbuilt-id_chart_style_and_length_top_albums="grid,4"]
-                &.album,
-            [data-bleh--inbuilt-id_chart_style_and_length_top_albums="grid,8"]
-                &.album,
-            [data-bleh--inbuilt-id_chart_style_and_length_top_artists="grid,4"]
-                &.artist,
-            [data-bleh--inbuilt-id_chart_style_and_length_top_artists="grid,8"]
-                &.artist {
-                display: none;
-            }
-        }
-
-        .grid-mains {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-
-            .grid-main {
-                display: flex;
-                gap: 4px;
-
-                .grid-item {
-                    width: 110px;
-                    height: 110px;
-                    border-radius: var(--item-small-radius);
-                    background-color: oklch(var(--b4));
-                    position: relative;
-                    color: oklch(var(--c3));
-                    --mask: var(--icon-album);
-                    --mask-size: 48px;
-                    --left: 50%;
-                    --top: 50%;
-                    --margin-left: calc(-1 * (var(--mask-size) / 2));
-                    --margin-top: calc(-1 * (var(--mask-size) / 2));
-
-                    animation: grid_item var(--trans) var(--trans-function);
-
-                    .artist & {
-                        --mask: var(--icon-artist);
-                    }
-
-                    [data-bleh--inbuilt-id_chart_style_and_length_top_albums="classic,5"]
-                        &.grid-item--extra.album,
-                    [data-bleh--inbuilt-id_chart_style_and_length_top_artists="classic,5"]
-                        &.grid-item--extra.artist {
-                        display: none;
-                    }
-                }
-
-                [data-bleh--inbuilt-id_chart_style_and_length_top_albums="grid,4"]
-                    &
-                    + .grid-main.album,
-                [data-bleh--inbuilt-id_chart_style_and_length_top_artists="grid,4"]
-                    &
-                    + .grid-main.artist {
-                    display: none;
-                }
             }
         }
     }
@@ -1004,7 +725,7 @@
         flex-direction: column;
         gap: 10px;
 
-        [data-bleh--inbuilt-disable_shoutbox="true"] & {
+        &.blur {
             opacity: 0.5;
             filter: blur(3px);
         }
@@ -1015,8 +736,6 @@
             height: unset;
             margin-left: unset;
 
-            animation: track_in var(--trans) var(--trans-function);
-
             .shout-avatar-placeholder {
                 width: 40px;
                 height: 40px;
@@ -1024,26 +743,26 @@
                 border-radius: var(--avatar-radius);
             }
 
-            .info-side {
+            .shout-preview-info {
                 display: flex;
                 justify-content: center;
                 flex-direction: column;
                 gap: 8px;
 
-                .header {
+                .shout-preview-header {
                     display: flex;
                     align-items: end;
                     gap: 6px;
                     height: unset;
 
-                    .shout-username {
+                    .shout-preview-username {
                         width: 80px;
                         height: 6px;
                         background-color: oklch(var(--l3-c));
                         border-radius: 50px;
                     }
 
-                    .shout-time {
+                    .shout-preview-time {
                         width: 50px;
                         height: 4px;
                         background-color: oklch(var(--c3));
@@ -1051,18 +770,69 @@
                     }
                 }
 
-                .shout-contents {
+                .shout-preview-contents {
                     width: 250px;
                     height: 6px;
                     background-color: oklch(var(--c2));
                     border-radius: 50px;
 
-                    & + .shout-contents {
+                    &.second {
                         width: 170px;
                     }
                 }
             }
         }
+    }
+}
+
+.grid-items-preview {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+
+    & > .grid-primary {
+        aspect-ratio: 1 / 1;
+
+        & > .grid-item-preview {
+            width: 224px;
+            height: 224px;
+            border-radius: var(--item-med-radius);
+            --mask-size: 72px;
+        }
+    }
+
+    & > .grid-mains {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+
+        & > .grid-main {
+            display: flex;
+            gap: 4px;
+
+            & > .grid-item-preview {
+                width: 110px;
+                height: 110px;
+                border-radius: var(--item-small-radius);
+                --mask-size: 48px;
+            }
+        }
+    }
+}
+
+.grid-item-preview {
+    background-color: oklch(var(--b4));
+    position: relative;
+    color: oklch(var(--c3));
+    --mask: var(--icon-16-album);
+
+    --left: 50%;
+    --top: 50%;
+    --margin-left: calc(-1 * (var(--mask-size) / 2));
+    --margin-top: calc(-1 * (var(--mask-size) / 2));
+
+    &.grid-item-artist {
+        --mask: var(--icon-16-artist);
     }
 }
 

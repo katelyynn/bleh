@@ -30,6 +30,7 @@ import { radio, radio_convert } from '@/components/radio/radio_toggle';
 import { notify, notify_rm } from '@/components/dialog/notify';
 import { avatar } from '@/components/shared/avatar';
 import { lastfm_settings_profile } from './profile';
+import { render_shoutbox_preview, render_track_preview } from '@/components/settings/preview';
 
 // patch last.fm settings
 export function bleh_native_settings() {
@@ -268,139 +269,57 @@ function patch_settings_privacy_panel(token, privacy_panel) {
 
     // get info before destroying
     let original_privacy_settings = {
-        recent_listening: document.getElementById('id_hide_realtime').checked,
-        receiving_msgs: document.getElementById('id_message_privacy').outerHTML,
-        disable_shoutbox: document.getElementById('id_shoutbox_disabled')
-            .checked
+        recent_listening: privacy_panel.querySelector('#id_hide_realtime') as HTMLInputElement,
+        receiving_msgs: privacy_panel.querySelector('#id_message_privacy') as HTMLSelectElement,
+        disable_shoutbox: privacy_panel.querySelector('#id_shoutbox_disabled') as HTMLInputElement
     };
 
-    privacy_panel.innerHTML = `
+    let recent_listening_preview;
+    let shoutbox_preview;
+
+    render(privacy_panel, html`
         <h4>${tl(trans.privacy)}</h4>
         <form action="${root}settings/privacy" name="privacy" method="post">
-            <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
-            <div class="inner-preview pad">
-                <div class="tracks recent_listening">
-                    <div class="track realtime">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="artist"></div>
-                        <div class="time"></div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="artist"></div>
-                        <div class="time"></div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="artist"></div>
-                        <div class="time"></div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="artist"></div>
-                        <div class="time"></div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="artist"></div>
-                        <div class="time"></div>
-                    </div>
-                </div>
+            <input type="hidden" name="csrfmiddlewaretoken" value=${token}>
+            <div class="inner-preview pad" ref=${el => recent_listening_preview = el}>
+                ${render_track_preview(original_privacy_settings.recent_listening.checked, false, true, true)}
             </div>
             <div class="setting-group">
-                <div class="setting" data-type="toggle" onclick="_update_inbuilt_item('recent_listening')" id="container-recent_listening">
-                    <button class="btn reset" onclick="_reset_inbuilt_item('recent_listening')">Reset to default</button>
-                    <div class="heading">
-                        <h5>${tl(trans.recent_listening.name)}</h5>
-                        <p>${tl(trans.recent_listening.body)}</p>
-                    </div>
-                    <div class="toggle-wrap">
-                        <input class="companion-checkbox" type="checkbox" name="hide_realtime" id="inbuilt-companion-checkbox-recent_listening">
-                        <span class="btn toggle colourful" id="toggle-recent_listening" aria-checked="false">
-                            <div class="dot"></div>
-                        </span>
-                    </div>
-                </div>
-                <div class="setting" data-type="options">
+                ${toggle({
+                    value: original_privacy_settings.recent_listening.checked,
+                    name: original_privacy_settings.recent_listening.name,
+                    title: tl(trans.recent_listening.name),
+                    body: tl(trans.recent_listening.body),
+                    standalone: false,
+                    func: (val: boolean) => {
+                        render(recent_listening_preview, render_recent_listening(val));
+                    }
+                })}
+                <div class="setting" data-type="select">
                     <div class="heading">
                         <h5>${tl(trans.allow_messages_from)}</h5>
                     </div>
-                    <div class="primary-selections">
-                        ${original_privacy_settings.receiving_msgs}
-                        <div class="btn primary-selection" id="primary-selection-receiving_msgs-everyone" onclick="_update_inbuilt_selection('id_message_privacy', 0)">
-                            <h5>${tl(trans.everyone)}</h5>
-                        </div>
-                        <div class="btn primary-selection" id="primary-selection-receiving_msgs-neighbours" onclick="_update_inbuilt_selection('id_message_privacy', 1)">
-                            <h5>${tl(trans.following_and_neighbours)}</h5>
-                        </div>
-                        <div class="btn primary-selection" id="primary-selection-receiving_msgs-follow" onclick="_update_inbuilt_selection('id_message_privacy', 2)">
-                            <h5>${tl(trans.following)}</h5>
-                        </div>
-                    </div>
+                    ${select({
+                        values: select_prepare(original_privacy_settings.receiving_msgs),
+                        initial: original_privacy_settings.receiving_msgs.value,
+                        in_settings: true
+                    })}
                 </div>
             </div>
-            <div class="inner-preview pad">
-                <div class="shouts">
-                    <div class="shout-preview">
-                        <div class="avatar-side">
-                            <div class="shout-avatar-placeholder"></div>
-                        </div>
-                        <div class="info-side">
-                            <div class="header">
-                                <div class="shout-username"></div>
-                                <div class="shout-time"></div>
-                            </div>
-                            <div class="shout-contents"></div>
-                            <div class="shout-contents"></div>
-                        </div>
-                    </div>
-                    <div class="shout-preview">
-                        <div class="avatar-side">
-                            <div class="shout-avatar-placeholder"></div>
-                        </div>
-                        <div class="info-side">
-                            <div class="header">
-                                <div class="shout-username"></div>
-                                <div class="shout-time"></div>
-                            </div>
-                            <div class="shout-contents"></div>
-                            <div class="shout-contents"></div>
-                        </div>
-                    </div>
-                    <div class="shout-preview">
-                        <div class="avatar-side">
-                            <div class="shout-avatar-placeholder"></div>
-                        </div>
-                        <div class="info-side">
-                            <div class="header">
-                                <div class="shout-username"></div>
-                                <div class="shout-time"></div>
-                            </div>
-                            <div class="shout-contents"></div>
-                            <div class="shout-contents"></div>
-                        </div>
-                    </div>
-                </div>
+            <div class="inner-preview pad" ref=${el => shoutbox_preview = el}>
+                ${render_shoutbox_preview(original_privacy_settings.disable_shoutbox.checked)}
             </div>
             <div class="setting-group">
-                <div class="setting" data-type="toggle" onclick="_update_inbuilt_item('disable_shoutbox')" id="container-disable_shoutbox">
-                    <button class="btn reset" onclick="_reset_inbuilt_item('disable_shoutbox')">Reset to default</button>
-                    <div class="heading">
-                        <h5>${tl(trans.close_shouts.name)}</h5>
-                        <p>${tl(trans.close_shouts.body)}</p>
-                    </div>
-                    <div class="toggle-wrap">
-                        <input class="companion-checkbox" type="checkbox" name="shoutbox_disabled" id="inbuilt-companion-checkbox-disable_shoutbox">
-                        <span class="btn toggle colourful" id="toggle-disable_shoutbox" aria-checked="false">
-                            <div class="dot"></div>
-                        </span>
-                    </div>
-                </div>
+                ${toggle({
+                    value: original_privacy_settings.disable_shoutbox.checked,
+                    name: original_privacy_settings.disable_shoutbox.name,
+                    title: tl(trans.close_shouts.name),
+                    body: tl(trans.close_shouts.body),
+                    standalone: false,
+                    func: (val: boolean) => {
+                        render(shoutbox_preview, render_shoutbox_preview(val));
+                    }
+                })}
             </div>
             <div class="settings-footer">
                 <button type="submit" class="btn-primary save">
@@ -409,20 +328,7 @@ function patch_settings_privacy_panel(token, privacy_panel) {
                 <input type="hidden" value="privacy" name="submit">
             </div>
         </form>
-    `;
-
-    for (let setting in original_privacy_settings) {
-        update_inbuilt_item(setting, original_privacy_settings[setting], false);
-    }
-
-    let selects = document.body.querySelectorAll('select');
-    selects.forEach((select) => {
-        select.setAttribute(
-            'onchange',
-            `_update_inbuilt_select('${select.getAttribute('id')}', this.value)`
-        );
-        update_inbuilt_select(select.getAttribute('id'), select.value);
-    });
+    `);
 }
 
 function bleh_accounts() {

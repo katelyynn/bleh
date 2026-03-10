@@ -15,6 +15,7 @@ import tippy from "tippy.js";
 import Cropper from 'cropperjs';
 import { ff } from "@/components/settings/sku";
 import { toggle } from "@/components/settings/toggle";
+import { render_chart_preview, render_track_preview } from '@/components/settings/preview';
 
 let cropper: Cropper;
 
@@ -55,44 +56,34 @@ function charts_panel() {
         }
     };
 
+    let recent_listening_preview;
+    let top_artists_preview;
+    let top_albums_preview;
+
+    function render_chart(type: 'album' | 'artist', val: string) {
+        const split = val.split(',');
+
+        const arrange = split[0];
+        const second = Number(split[1]) > 4;
+
+        if (arrange == 'classic') {
+            return render_chart_preview(type, second, true);
+        }
+
+        if (arrange == 'grid') {
+            return render_chart_preview(type, second, false);
+        }
+
+        return render_track_preview(false, true, true);
+    }
+
     render(charts_panel, html`
         <h4>${tl(trans.recent_tracks)}</h4>
         ${alert}
         <form action="${root}settings#update-chart" name="chart-form" method="post">
             <input type="hidden" name="csrfmiddlewaretoken" value=${page.token}>
-            <div class="inner-preview pad">
-                <div class="tracks recent">
-                    <div class="track realtime">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="artist"></div>
-                        <div class="time"></div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="artist"></div>
-                        <div class="time"></div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="artist"></div>
-                        <div class="time"></div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="artist"></div>
-                        <div class="time"></div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="artist"></div>
-                        <div class="time"></div>
-                    </div>
-                </div>
+            <div class="inner-preview pad" ref=${el => recent_listening_preview = el}>
+                ${render_track_preview(false, false, original_chart_settings.recent.recent_artwork.checked)}
             </div>
             <div class="setting-group">
                 <div class="setting" data-type="select">
@@ -110,7 +101,10 @@ function charts_panel() {
                     title: tl(trans.recent_artwork),
                     value: original_chart_settings.recent.recent_artwork.checked,
                     name: original_chart_settings.recent.recent_artwork.name,
-                    standalone: false
+                    standalone: false,
+                    func: (val: boolean) => {
+                        render(recent_listening_preview, render_track_preview(false, false, val));
+                    }
                 })}
                 ${toggle({
                     title: tl(trans.recent_realtime.name),
@@ -121,63 +115,8 @@ function charts_panel() {
                 })}
             </div>
             <h4>${tl(trans.top_artists)}</h4>
-            <div class="inner-preview pad">
-                <div class="item-grid artist">
-                    <div class="grid-primary artist">
-                        <div class="grid-item icon-mask"></div>
-                    </div>
-                    <div class="grid-mains">
-                        <div class="grid-main artist">
-                            <div class="grid-item icon-mask grid-item--extra artist"></div>
-                            <div class="grid-item icon-mask grid-item--extra artist"></div>
-                            <div class="grid-item icon-mask"></div>
-                            <div class="grid-item icon-mask"></div>
-                        </div>
-                        <div class="grid-main artist">
-                            <div class="grid-item icon-mask grid-item--extra artist"></div>
-                            <div class="grid-item icon-mask grid-item--extra artist"></div>
-                            <div class="grid-item icon-mask"></div>
-                            <div class="grid-item icon-mask"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tracks artist">
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="bar">
-                            <div class="fill" style="width: 100%"></div>
-                        </div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="bar">
-                            <div class="fill" style="width: 85%"></div>
-                        </div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="bar">
-                            <div class="fill" style="width: 60%"></div>
-                        </div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="bar">
-                            <div class="fill" style="width: 30%"></div>
-                        </div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="bar">
-                            <div class="fill" style="width: 5%"></div>
-                        </div>
-                    </div>
-                </div>
+            <div class="inner-preview pad" ref=${el => top_artists_preview = el}>
+                ${render_chart('artist', original_chart_settings.artists.style.value)}
             </div>
             <div class="setting-group">
                 <div class="setting" data-type="select">
@@ -199,68 +138,16 @@ function charts_panel() {
                         values: select_prepare(original_chart_settings.artists.style),
                         initial: original_chart_settings.artists.style.value,
                         name: original_chart_settings.artists.style.name,
-                        in_settings: true
+                        in_settings: true,
+                        func: (val: string) => {
+                            render(top_artists_preview, render_chart('artist', val));
+                        }
                     })}
                 </div>
             </div>
             <h4>${tl(trans.top_albums)}</h4>
-            <div class="inner-preview pad">
-                <div class="item-grid album">
-                    <div class="grid-primary album">
-                        <div class="grid-item icon-mask"></div>
-                    </div>
-                    <div class="grid-mains">
-                        <div class="grid-main album">
-                            <div class="grid-item icon-mask"></div>
-                            <div class="grid-item icon-mask"></div>
-                            <div class="grid-item icon-maskgrid-item--extra album"></div>
-                            <div class="grid-item icon-mask grid-item--extra album"></div>
-                        </div>
-                        <div class="grid-main album">
-                            <div class="grid-item icon-mask"></div>
-                            <div class="grid-item icon-mask"></div>
-                            <div class="grid-item icon-mask grid-item--extra album"></div>
-                            <div class="grid-item icon-mask grid-item--extra album"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tracks album">
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="bar">
-                            <div class="fill" style="width: 100%"></div>
-                        </div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="bar">
-                            <div class="fill" style="width: 85%"></div>
-                        </div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="bar">
-                            <div class="fill" style="width: 60%"></div>
-                        </div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="bar">
-                            <div class="fill" style="width: 30%"></div>
-                        </div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="bar">
-                            <div class="fill" style="width: 5%"></div>
-                        </div>
-                    </div>
-                </div>
+            <div class="inner-preview pad" ref=${el => top_albums_preview = el}>
+                ${render_chart('album', original_chart_settings.albums.style.value)}
             </div>
             <div class="setting-group">
                 <div class="setting" data-type="select">
@@ -282,7 +169,10 @@ function charts_panel() {
                         values: select_prepare(original_chart_settings.albums.style),
                         initial: original_chart_settings.albums.style.value,
                         name: original_chart_settings.albums.style.name,
-                        in_settings: true
+                        in_settings: true,
+                        func: (val: string) => {
+                            render(top_albums_preview, render_chart('album', val));
+                        }
                     })}
                 </div>
             </div>
