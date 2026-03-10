@@ -27,6 +27,8 @@
     --mask: linear-gradient(0deg, transparent 0%, white 70%);
     mask-image: var(--mask);
     -webkit-mask-image: var(--mask);
+
+    contain: strict;
 }
 .background-inner {
     position: absolute;
@@ -70,6 +72,8 @@
 
     will-change: transform;
     transform: translateZ(0);
+
+    contain: strict;
 
     &:after {
         content: "";

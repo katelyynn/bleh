@@ -118,6 +118,9 @@
     box-shadow: var(--grid-colour-shadow, none), var(--interact-shadow);
     position: relative;
 
+    contain: content;
+    will-change: transform;
+
     --extra-trans: 0%;
     --extra-white: 0%;
 
@@ -137,7 +140,7 @@
         --shadow: color-mix(in oklch, oklch(var(--h4)) 60%, black 70%);
     }
 
-    transition-property: transform;
+    transition-property: transform, translate, scale, opacity;
     transition-duration: 0.3s;
     transition-timing-function: var(--trans-function-ani);
 

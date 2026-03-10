@@ -94,6 +94,7 @@ export function update_masthead(
         interactive: true,
         interactiveBorder: 10,
         offset: [0, 0],
+        appendTo: document.body,
 
         onShow(instance) {
             instance.popper.addEventListener('click', (event) => {
@@ -156,6 +157,7 @@ export function update_masthead(
         interactive: true,
         interactiveBorder: 10,
         offset: [0, 0],
+        appendTo: document.body,
 
         onShow(instance) {
             instance.popper.addEventListener('click', (event) => {
@@ -416,6 +418,7 @@ export function append_nav() {
         interactive: true,
         interactiveBorder: 10,
         trigger: 'click',
+        appendTo: document.body,
 
         onShow(instance) {
             instance.popper.addEventListener('click', (event) => {
@@ -508,6 +511,7 @@ export function append_nav() {
         interactive: true,
         interactiveBorder: 10,
         trigger: 'click',
+        appendTo: document.body,
 
         onShow(instance) {
             console.info('navigation instance MAIN', instance, instance.popper);
@@ -625,6 +629,7 @@ export function append_nav() {
             interactive: true,
             interactiveBorder: 10,
             trigger: 'click',
+            appendTo: document.body,
 
             onShow(instance) {
                 if (page.now.name) render_status_container(page.now);
@@ -801,6 +806,7 @@ export function append_nav() {
         interactive: true,
         interactiveBorder: 10,
         trigger: 'click',
+        appendTo: document.body,
 
         onShow: (instance) => {
             page.structure.notifications.setAttribute('data-auth-open', 'true');
@@ -1228,6 +1234,7 @@ export function append_nav() {
         interactive: true,
         interactiveBorder: 10,
         offset: [0, 0],
+        appendTo: document.body,
 
         onShow(instance) {
             instance.popper.addEventListener('click', (event) => {

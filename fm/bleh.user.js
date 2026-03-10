@@ -52910,6 +52910,7 @@
       interactive: true,
       interactiveBorder: 10,
       offset: [0, 0],
+      appendTo: document.body,
       onShow(instance) {
         instance.popper.addEventListener("click", (event3) => {
           instance.hide();
@@ -52966,6 +52967,7 @@
       interactive: true,
       interactiveBorder: 10,
       offset: [0, 0],
+      appendTo: document.body,
       onShow(instance) {
         instance.popper.addEventListener("click", (event3) => {
           instance.hide();
@@ -53182,6 +53184,7 @@
       interactive: true,
       interactiveBorder: 10,
       trigger: "click",
+      appendTo: document.body,
       onShow(instance) {
         instance.popper.addEventListener("click", (event3) => {
           instance.hide();
@@ -53261,6 +53264,7 @@
       interactive: true,
       interactiveBorder: 10,
       trigger: "click",
+      appendTo: document.body,
       onShow(instance) {
         console.info("navigation instance MAIN", instance, instance.popper);
         page.state.inbox_content = instance.popper.querySelector(".window-content");
@@ -53381,6 +53385,7 @@
         interactive: true,
         interactiveBorder: 10,
         trigger: "click",
+        appendTo: document.body,
         onShow(instance) {
           if (page.now.name) render_status_container(page.now);
           live_status().then((status3) => render_status_container(status3));
@@ -53505,6 +53510,7 @@
       interactive: true,
       interactiveBorder: 10,
       trigger: "click",
+      appendTo: document.body,
       onShow: (instance) => {
         page.structure.notifications.setAttribute("data-auth-open", "true");
         const update_required2 = localStorage.getItem("bleh_update_required") || "false";
@@ -53879,6 +53885,7 @@
       interactive: true,
       interactiveBorder: 10,
       offset: [0, 0],
+      appendTo: document.body,
       onShow(instance) {
         instance.popper.addEventListener("click", (event3) => {
           instance.hide();
@@ -75544,7 +75551,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-02-25"
       }
     },
-    built_on: "2026-03-10T00:32:08.229Z"
+    built_on: "2026-03-10T14:18:08.642Z"
   };
 
   // node_modules/@kurkle/color/dist/color.esm.js

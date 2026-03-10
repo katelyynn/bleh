@@ -55,6 +55,8 @@
     animation-delay: var(--delay, 0s) !important;
     animation-fill-mode: backwards !important;
 
+    contain: content;
+
     --chart-cover-radius: var(--item-small-radius);
 
     --chart-button-hov: oklch(var(--b4) / 60%);

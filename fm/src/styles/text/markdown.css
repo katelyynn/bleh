@@ -5,6 +5,7 @@
 
 .markdown-body {
     display: block;
+    contain: content;
 
     /* match default last.fm */
     .text-center,

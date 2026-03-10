@@ -26,6 +26,8 @@
     &.no-margin {
         margin-top: unset !important;
     }
+
+    contain: layout paint;
 }
 
 .calendar-side {
