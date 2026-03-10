@@ -8,13 +8,13 @@ import {log} from "@/build/log";
 import {gendered_pattern, page} from "@/build/page";
 import {desanitise} from "@/build/tools";
 import {tl, trans} from "@/build/trans";
-import {patch_header_title} from "@/components/music/lotus";
 import {checkup_page_structure} from "@/components/page/structure";
 import {register_background, update_page} from "../page";
 import {ff} from "@/components/settings/sku";
 import {bleh_wiki, bleh_wiki_editor, bleh_wiki_history} from "@/pages/music/wiki";
 import tippy from "tippy.js";
 import { settings } from "@/build/config";
+import { page_header_title } from '@/components/music/header';
 
 export function bleh_tags() {
     let tag_header = document.body.querySelector('.header--tag');
@@ -24,7 +24,7 @@ export function bleh_tags() {
         return;
     tag_header.setAttribute('data-bwaa', 'true');
 
-    patch_header_title();
+    page_header_title(tag_header);
 
     let is_subpage = tag_header.classList.contains('header--sub-page');
 

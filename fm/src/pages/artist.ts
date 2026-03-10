@@ -10,14 +10,12 @@ import { auth, page, root } from '@/build/page';
 import { romanise, sanitise } from '@/build/tools';
 import { tl, trans } from '@/build/trans';
 import {
-    artist_title,
     correct_artist,
     correct_generic_combo_no_artist,
     correct_item_by_artist,
     name_includes,
     smart_title
 } from '@/components/music/lotus.js';
-import { register_menu } from '@/components/menu';
 import {
     bleh_music_page_charts,
     bleh_top_listeners,
@@ -33,12 +31,11 @@ import { bleh_gallery_list, bleh_gallery_upload } from '@/pages/music/gallery';
 import { bleh_tags_mini } from '@/pages/tag';
 import { bleh_wiki, bleh_wiki_editor, bleh_wiki_history } from '@/pages/music/wiki';
 import { html, render } from 'lighterhtml';
-import { expand_avatar } from '@/components/shared/avatar';
 import { other_listener } from '@/components/profile/profile_shortcut';
 import { setting } from '@/components/settings/settings';
 import tippy from 'tippy.js';
 import { open_starred_friend_window } from '@/pages/profile/profile.js';
-import { page_header_avatar } from '@/components/music/header';
+import { artist_title, page_header_avatar } from '@/components/music/header';
 
 export function bleh_artists() {
     let artist_header = document.body.querySelector('.header-new--artist') as HTMLElement;
@@ -46,9 +43,9 @@ export function bleh_artists() {
     page.name = artist_header.querySelector('.header-new-title').textContent;
     page.sister = '';
 
-    artist_title();
+    artist_title(artist_header);
 
-    let is_subpage = artist_header.classList.contains('header-new--subpage');
+    let is_subpage = page.subpage != 'overview';
 
     // without pro theres two containers
     if (auth.pro) {

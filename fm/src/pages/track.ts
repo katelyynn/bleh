@@ -9,7 +9,6 @@ import { log } from '@/build/log';
 import { auth, page, root } from '@/build/page';
 import { tl, trans } from '@/build/trans';
 import { bleh_about_artist } from '@/components/music/about_artist.js';
-import { patch_header_title } from '@/components/music/lotus.js';
 import { register_menu } from '@/components/menu';
 import {
     bleh_music_page_charts,
@@ -22,13 +21,14 @@ import { ff } from '@/components/settings/sku';
 import { bleh_tags_mini } from '@/pages/tag';
 import { bleh_wiki, bleh_wiki_editor, bleh_wiki_history } from '@/pages/music/wiki';
 import { html, render } from 'lighterhtml';
-import { expand_avatar } from '@/components/shared/avatar';
+import { avatar, expand_avatar } from '@/components/shared/avatar';
 import tippy from 'tippy.js';
 import { oracle_process } from '@/components/music/oracle';
 import { hoshino_return } from '@/components/music/hoshino.js';
+import { page_header_avatar, page_header_title } from '@/components/music/header';
 
 export function bleh_tracks() {
-    let track_header = document.body.querySelector('.header-new--track');
+    const track_header = document.body.querySelector('.header-new--track') as HTMLElement;
 
     page.sister = track_header.querySelector(
         '.header-new-crumb span'
@@ -37,9 +37,9 @@ export function bleh_tracks() {
         .querySelector('[data-page-resource-name]')
         .getAttribute('data-page-resource-name');
 
-    patch_header_title();
+    page_header_title(track_header);
 
-    let is_subpage = track_header.classList.contains('header-new--subpage');
+    let is_subpage = page.subpage != 'overview';
 
     // without pro theres two containers
     if (auth.pro) {
@@ -105,15 +105,15 @@ export function bleh_tracks() {
         page.state.avatar_side_override = settings.default_avatar_action == 'expand' ? 'expand' : source_album ? source_album.querySelector('.link-block-cover-link').getAttribute('href') : '';
 
         let redesigned_track_header = html.node`
-            <section class="redesigned-header redesigned-track-header no-background">
-                <div class="avatar-side" ref=${(el) => (page.state.avatar_side = el)} />
-                <div class="info-side">
+            <section class="page-header for-track">
+                <div class="page-header-avatar-list" ref=${(el) => (page.state.avatar_side = el)} />
+                <div class="page-header-info">
                     <div class="sub-text">${tl(trans.track)}</div>
                     <div class="title-container">
                         ${title}
                         ${position ? position : ''}
                     </div>
-                    <h2>${artist}</h2>
+                    <h2 class="page-header-artist artist-for-track">${artist}</h2>
                 </div>
             </section>
         `;
@@ -186,66 +186,14 @@ export function create_avatar(parent, src, override = 'expand') {
 
     if (src.endsWith('c6f59c1e5e7240a4c0d427abd71f3dbb.jpg') || src == '') {
         register_background(null);
-
-        render(parent, html`
-            <div class="media">
-                <img class="missing-track" />
-            </div>
-        `);
+        return;
     }
 
-    const full = src
-        .replace('/300x300/', '/ar0/')
-        .replace('/avatar300s/', '/ar0/')
-        .replace('/avatar170s/', '/ar0/');
+    const full = avatar(src, 'ar0');
 
     register_background(full);
 
-    const media = html.node`
-        <div class="media">
-            <img class="media-image" src=${src}>
-            ${override == 'expand' ? html.node`
-                <a class="media-link bleh--avatar-clickable-link" onclick=${() => {
-                    expand_avatar(full);
-                }} />
-            ` : html.node`
-                <a class="media-link bleh--avatar-clickable-link" href=${override} />
-            `}
-        </div>
-    `;
-
-    let menu = tippy(media, {
-        theme: 'context-menu',
-        content: html.node`
-            ${
-                override != 'expand' ?
-                    html.node`
-                        <button class="dropdown-menu-clickable-item" onclick=${() => expand_avatar(full)} data-menu-item="expand">
-                            ${tl(trans.expand)}
-                        </button>
-                    `
-                :   ''
-            }
-            <div class="sep"></div>
-            <a class="dropdown-menu-clickable-item" href="${root}bleh/customise" data-menu-item="settings">
-                ${tl(trans.settings)}
-            </a>
-        `,
-        placement: 'right-start',
-        trigger: 'manual',
-        interactive: true,
-        interactiveBorder: 10,
-        offset: [0, 0],
-        appendTo: document.body,
-
-        onShow(instance) {
-            instance.popper.addEventListener('click', (event) => {
-                instance.hide();
-            });
-        }
-    });
-
-    register_menu(media, menu);
-
-    render(parent, media);
+    render(parent, html`
+        ${page_header_avatar(src)}
+    `);
 }

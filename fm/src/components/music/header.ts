@@ -1,12 +1,15 @@
 import { page, root } from '@/build/page';
-import { html } from 'lighterhtml';
+import { html, render } from 'lighterhtml';
 import { avatar, expand_avatar } from '../shared/avatar';
 import { settings } from '@/build/config';
-import { sanitise } from '@/build/tools';
+import { romanise, sanitise } from '@/build/tools';
 import { redirect } from './music';
 import tippy from 'tippy.js';
 import { tl, trans } from '@/build/trans';
 import { register_menu } from '../menu';
+import { correct_artist, correct_item_by_artist, name_includes, smart_title } from './lotus';
+import { artist_corrections, combined_artists } from '@/build/music';
+import { log } from '@/build/log';
 
 export function page_header_avatar(url?: string) {
     const supports_gallery = ['artist', 'album'].includes(page.type);
@@ -60,6 +63,7 @@ export function page_header_avatar(url?: string) {
         interactive: true,
         interactiveBorder: 10,
         offset: [0, 0],
+        appendTo: document.body,
 
         onShow(instance) {
             instance.popper.addEventListener('click', (event) => {
@@ -70,4 +74,174 @@ export function page_header_avatar(url?: string) {
     register_menu(elem, menu);
 
     return elem;
+}
+
+export function artist_title(header = document.body) {
+    const title = header.querySelector('.header-new-title') as HTMLElement;
+    title.classList.add('page-header-title');
+
+    let title_text = title.textContent.trim();
+
+    let has_multi = false;
+    if (title_text.includes(', ') || title_text.includes('&')) has_multi = true;
+
+    page.multi = false;
+
+    if (!has_multi) {
+        if (!settings.corrections) {
+            title.textContent = romanise(title_text);
+            return;
+        }
+
+        title.textContent = romanise(correct_artist(title_text, true));
+    } else {
+        title_text = title_text
+            .replaceAll('&', ';')
+            .replaceAll(', ', ';')
+            .replaceAll(';;', ';');
+
+        for (const [key, value] of Object.entries(combined_artists)) {
+            if (key == 'version') continue;
+
+            // passing thru regex, so
+            const escaped = key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+            const regex = new RegExp(escaped, 'gi');
+
+            title_text = title_text.replace(regex, value);
+        }
+
+        page.multi = true;
+        title.innerHTML = '';
+
+        let split = title_text.split(';');
+
+        if (split.length < 2) {
+            page.multi = false;
+
+            if (!settings.corrections) return;
+
+            title.textContent = romanise(correct_artist(title_text, true));
+
+            return;
+        }
+
+        split.forEach((artist, index) => {
+            if (index > 0) title.innerHTML += ',';
+
+            artist = artist.trim();
+
+            let part = document.createElement('a');
+            part.classList.add('multi-artist-part');
+            part.setAttribute(
+                'href',
+                `${root}music/${redirect()}${sanitise(artist)}`
+            );
+
+            if (settings.corrections)
+                part.textContent = romanise(correct_artist(artist));
+            else part.textContent = romanise(artist);
+
+            title.appendChild(part);
+        });
+    }
+}
+
+export function page_header_title(header = document.body) {
+    page.suggest = null;
+
+    if (!settings.corrections && !settings.format_guest_features && !page.multi)
+        return;
+
+    page.corrected = false;
+
+    const track_title = header.querySelector('.header-new-title');
+    const track_artist = header.querySelector('.header-new-crumb span');
+
+    if (!track_title) return;
+
+    track_title.classList.add('page-header-title');
+
+    // correct artist
+    if (track_artist) {
+        // album/track page
+        if (artist_corrections.hasOwnProperty(track_artist.textContent)) {
+            let corrected_artist = artist_corrections[track_artist.textContent];
+            log(
+                `corrected ${track_artist.textContent} as ${corrected_artist}`,
+                'lotus'
+            );
+
+            track_artist.parentElement.setAttribute(
+                'href',
+                `${root}music/${redirect()}${sanitise(track_artist.textContent)}`
+            );
+            track_artist.textContent = romanise(corrected_artist);
+        } else {
+            track_artist.parentElement.setAttribute(
+                'href',
+                `${root}music/${redirect()}${sanitise(track_artist.textContent)}`
+            );
+            track_artist.textContent = romanise(track_artist.textContent);
+        }
+    }
+
+    if (settings.format_guest_features) {
+        try {
+            if (!track_title.hasAttribute('data-kate-processed')) {
+                track_title.setAttribute('data-kate-processed', 'true');
+
+                let formatted_title = name_includes(
+                    track_title.textContent,
+                    track_artist.textContent
+                );
+                let song_title = formatted_title[0];
+                let song_tags = formatted_title[1];
+
+                page.corrected = formatted_title[4];
+
+                // combine
+                render(track_title, smart_title(song_title, song_tags));
+
+                // (spotify) / (explicit) / (clean) in title
+                if (song_tags.some((tag) => tag.group == 'form'))
+                    page.suggest = sanitise(song_title.trim());
+
+                let song_artist_element = document.body.querySelector(
+                    'span[itemprop="byArtist"]'
+                );
+                let song_guests = formatted_title[3];
+                page.sister_others = formatted_title[3];
+                song_artist_element.innerHTML =
+                    song_artist_element.innerHTML.trim();
+                for (let guest in song_guests) {
+                    // &
+                    song_artist_element.innerHTML = `${song_artist_element.innerHTML},`;
+
+                    // no whitespace to make sure it looks correct
+                    song_artist_element.appendChild(html.node`
+                    <a class="header-new-crumb" href="${root}music/${redirect()}${sanitise(song_guests[guest])}">${romanise(song_guests[guest])}</a>
+                `);
+                }
+            }
+        } catch (e) {}
+    } else {
+        if (!track_title.hasAttribute('data-kate-processed')) {
+            track_title.setAttribute('data-kate-processed', 'true');
+
+            let corrected_title = correct_item_by_artist(
+                track_title.textContent,
+                track_artist.textContent
+            );
+            log(
+                `corrected ${track_title.textContent} by ${track_artist.textContent} as ${corrected_title}`,
+                'lotus'
+            );
+
+            if (corrected_title != track_title.textContent)
+                page.corrected = true;
+
+            track_title.textContent = romanise(corrected_title);
+        }
+    }
 }

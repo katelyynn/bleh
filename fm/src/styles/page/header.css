@@ -16,7 +16,7 @@
     --page-header-avatar-size: 170px;
     --page-header-avatar-radius: var(--item-big-radius);
 
-    contain: layout paint;
+    contain: layout;
 }
 
 .page-header {
@@ -60,13 +60,13 @@
             align-items: center;
             flex: unset;
 
-            h2,
+            .page-header-artist,
             .sub-text,
             .header-title-label-wrap {
                 justify-content: center;
             }
 
-            h2 {
+            .page-header-artist {
                 flex-wrap: wrap;
             }
         }
@@ -98,7 +98,7 @@
 
 .for-artist, .for-album, .for-track {
     & > .page-header-info {
-        h1 {
+        .page-header-title {
             display: -webkit-box;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -127,12 +127,12 @@
                 }
             }
         }
-        h2 {
+        .page-header-artist {
             font-size: 20px;
             line-height: 24px;
         }
 
-        [data-multi="true"] h1 {
+        [data-multi="true"] .page-header-title {
             gap: unset;
         }
     }
@@ -174,6 +174,8 @@
     overflow: hidden;
     flex-shrink: 0;
     --mask-size: var(--cover-size-200) !important;
+
+    cursor: pointer;
 
     &:after {
         content: "";
@@ -274,7 +276,7 @@
         }
     }
 
-    h1 {
+    .page-header-title {
         margin: unset;
         font-size: 26px;
         line-height: 40px;
@@ -291,7 +293,7 @@
         }
     }
 
-    & > h2 {
+    & > .page-header-artist {
         font-size: 18px;
         line-height: 22px;
         color: oklch(var(--c2) / 80%);
@@ -337,15 +339,8 @@
     gap: 6px;
     cursor: default;
 
-    & > h1 {
+    & > .page-header-title {
         color: oklch(var(--c1));
-
-        .staff-profile & {
-            color: oklch(var(--l3-c));
-            --hue-over: 360;
-            --sat-over: 1.325;
-            --lit-over: 0.825;
-        }
 
         & > a {
             text-decoration: var(
@@ -368,7 +363,7 @@
     }
 
     &[data-multi="true"] {
-        & > h1 {
+        & > .page-header-title {
             color: oklch(var(--c2) / 80%);
             gap: unset;
 
@@ -390,16 +385,16 @@
             }
         }
     }
+}
 
-    .header-new-chart-position-number {
-        font-weight: var(--font-weight-medium);
-        margin-left: calc(var(--card-gap) - 6px);
-        color: oklch(var(--l2-c-theme-switch));
-        text-shadow: 0 0 20px oklch(var(--h4));
+.header-new-chart-position-number {
+    font-weight: var(--font-weight-medium);
+    margin-left: calc(var(--card-gap) - 6px);
+    color: oklch(var(--l2-c-theme-switch));
+    text-shadow: 0 0 20px oklch(var(--h4));
 
-        font-size: 18px;
-        line-height: 22px;
-    }
+    font-size: 18px;
+    line-height: 22px;
 }
 
 .about-artist-panel {
@@ -457,8 +452,7 @@
 }
 
 
-.for-album h2,
-.for-track h2 {
+.artist-for-album, .artist-for-track {
     display: flex;
     color: oklch(var(--c1), 0.8);
     font-size: 24px;

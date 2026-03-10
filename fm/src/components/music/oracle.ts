@@ -141,7 +141,7 @@ export function oracle_process() {
         );
     }
 
-    const header = page.structure.container.querySelector('.redesigned-header');
+    const header = page.structure.container.querySelector('.page-header');
     let releases_panel;
 
     let tracklist_panel;

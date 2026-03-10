@@ -18,7 +18,6 @@ import {
 import { tl, trans } from '@/build/trans';
 import { load_chart_colours } from '@/components/music/chart.js';
 import { bleh_about_artist } from '@/components/music/about_artist.js';
-import { patch_header_title } from '@/components/music/lotus.js';
 import { register_menu } from '@/components/menu';
 import {
     bleh_music_page_charts,
@@ -38,20 +37,19 @@ import { setting } from '@/components/settings/settings';
 import tippy from 'tippy.js';
 import { oracle_process } from '@/components/music/oracle';
 import { save_hoshino_artwork } from '@/components/music/hoshino.js';
+import { page_header_avatar, page_header_title } from '@/components/music/header';
 
 export function bleh_albums() {
-    let album_header = document.body.querySelector('.header-new--album');
+    const album_header = document.body.querySelector('.header-new--album') as HTMLElement;
 
-    page.sister = album_header.querySelector(
-        '.header-new-crumb span'
-    ).textContent;
+    page.sister = album_header.querySelector('.header-new-crumb span').textContent;
     page.name = document.body
         .querySelector('[data-page-resource-name]')
         .getAttribute('data-page-resource-name');
 
-    patch_header_title();
+    page_header_title(album_header);
 
-    let is_subpage = album_header.classList.contains('header-new--subpage');
+    let is_subpage = page.subpage != 'overview';
 
     // without pro theres two containers
     if (auth.pro) {
@@ -122,30 +120,17 @@ export function bleh_albums() {
         );
 
         let redesigned_album_header = html.node`
-            <section class="redesigned-header redesigned-album-header no-background">
-                ${
-                    is_subpage || ff('show_album_cover_always') ?
-                        html.node`
-                <div class="avatar-side">
-                    ${
-                        avatar ?
-                            html.node`
-                    <img src="${avatar.getAttribute('content').replace('/ar0/', '/avatar170s/')}">
-                    <a class="bleh--avatar-clickable-link"></a>
-                    `
-                        :   html.node`<img class="missing-album">`
-                    }
+            <section class="page-header for-album">
+                <div class="page-header-avatar-list">
+                    ${page_header_avatar(avatar.getAttribute('content'))}
                 </div>
-                `
-                    :   ''
-                }
-                <div class="info-side">
+                <div class="page-header-info">
                     <div class="sub-text">${tl(trans.album)}</div>
                     <div class="title-container">
                         ${title}
                         ${position ? position : ''}
                     </div>
-                    <h2>${artist}</h2>
+                    <h2 class="page-header-artist artist-for-album">${artist}</h2>
                 </div>
                 ${
                     page.suggest ?
@@ -169,54 +154,6 @@ export function bleh_albums() {
             page.structure.container.firstElementChild
         );
         album_header.classList.add('legacy-header');
-
-        let avatar_side = redesigned_album_header.querySelector('.avatar-side');
-        let avatar_link = avatar_side.querySelector('a');
-
-        if (avatar && avatar_link) {
-            if (settings.default_avatar_action == 'expand' && avatar)
-                avatar_link.setAttribute(
-                    'onclick',
-                    `_expand_avatar('${avatar.getAttribute('content')}')`
-                );
-            else if (settings.default_avatar_action == 'gallery')
-                avatar_link.href = `${root}music/${redirect()}${sanitise(page.sister)}/${sanitise(page.name)}/+images`;
-
-            let menu = tippy(avatar_side, {
-                theme: 'context-menu',
-                content: html.node`
-                    ${
-                        avatar ?
-                            html.node`
-                    <button class="dropdown-menu-clickable-item" onclick=${() => expand_avatar(avatar.getAttribute('content'))} data-menu-item="expand">
-                        ${tl(trans.expand)}
-                    </button>
-                    `
-                        :   ''
-                    }
-                    <a class="dropdown-menu-clickable-item" href="${root}music/${redirect()}${sanitise(page.sister)}/${sanitise(page.name)}/+images" data-menu-item="gallery">
-                        ${tl(trans.artwork)}
-                    </a>
-                    <div class="sep"></div>
-                    <a class="dropdown-menu-clickable-item" href="${root}bleh/customise" data-menu-item="settings">
-                        ${tl(trans.settings)}
-                    </a>
-                `,
-                placement: 'right-start',
-                trigger: 'manual',
-                interactive: true,
-                interactiveBorder: 10,
-                offset: [0, 0],
-
-                onShow(instance) {
-                    instance.popper.addEventListener('click', (event) => {
-                        instance.hide();
-                    });
-                }
-            });
-
-            register_menu(avatar_side, menu);
-        }
     }
 
     // cover

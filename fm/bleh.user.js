@@ -5591,7 +5591,7 @@
           }(ElementContainer)
         );
         var LIST_OWNERS = ["OL", "UL", "MENU"];
-        var parseNodeTree = function(context, node, parent, root3) {
+        var parseNodeTree = function(context, node, parent, root4) {
           for (var childNode = node.firstChild, nextNode = void 0; childNode; childNode = nextNode) {
             nextNode = childNode.nextSibling;
             if (isTextNode(childNode) && childNode.data.length > 0) {
@@ -5599,12 +5599,12 @@
             } else if (isElementNode(childNode)) {
               if (isSlotElement(childNode) && childNode.assignedNodes) {
                 childNode.assignedNodes().forEach(function(childNode2) {
-                  return parseNodeTree(context, childNode2, parent, root3);
+                  return parseNodeTree(context, childNode2, parent, root4);
                 });
               } else {
                 var container = createContainer(context, childNode);
                 if (container.styles.isVisible()) {
-                  if (createsRealStackingContext(childNode, container, root3)) {
+                  if (createsRealStackingContext(childNode, container, root4)) {
                     container.flags |= 4;
                   } else if (createsStackingContext(container.styles)) {
                     container.flags |= 2;
@@ -5615,9 +5615,9 @@
                   parent.elements.push(container);
                   childNode.slot;
                   if (childNode.shadowRoot) {
-                    parseNodeTree(context, childNode.shadowRoot, container, root3);
+                    parseNodeTree(context, childNode.shadowRoot, container, root4);
                   } else if (!isTextareaElement(childNode) && !isSVGElement(childNode) && !isSelectElement(childNode)) {
-                    parseNodeTree(context, childNode, container, root3);
+                    parseNodeTree(context, childNode, container, root4);
                   }
                 }
               }
@@ -5660,8 +5660,8 @@
           parseNodeTree(context, element, container, container);
           return container;
         };
-        var createsRealStackingContext = function(node, container, root3) {
-          return container.styles.isPositionedWithZIndex() || container.styles.opacity < 1 || container.styles.isTransformed() || isBodyElement(node) && root3.styles.isTransparent();
+        var createsRealStackingContext = function(node, container, root4) {
+          return container.styles.isPositionedWithZIndex() || container.styles.opacity < 1 || container.styles.isTransformed() || isBodyElement(node) && root4.styles.isTransparent();
         };
         var createsStackingContext = function(styles) {
           return styles.isPositioned() || styles.isFloating();
@@ -7265,11 +7265,11 @@
         };
         var parseStackingContexts = function(container) {
           var paintContainer = new ElementPaint(container, null);
-          var root3 = new StackingContext(paintContainer);
+          var root4 = new StackingContext(paintContainer);
           var listItems = [];
-          parseStackTree(paintContainer, root3, root3, listItems);
+          parseStackTree(paintContainer, root4, root4, listItems);
           processListItems(paintContainer.container, listItems);
-          return root3;
+          return root4;
         };
         var parsePathForBorder = function(curves, borderSide) {
           switch (borderSide) {
@@ -8784,7 +8784,7 @@
         }
         var renderElement = function(element, opts) {
           return __awaiter(void 0, void 0, void 0, function() {
-            var ownerDocument, defaultView, resourceOptions, contextOptions, windowOptions, windowBounds, context, foreignObjectRendering, cloneOptions, documentCloner, clonedElement, container, _a2, width, height, left2, top2, backgroundColor2, renderOptions, canvas, renderer, root3, renderer;
+            var ownerDocument, defaultView, resourceOptions, contextOptions, windowOptions, windowBounds, context, foreignObjectRendering, cloneOptions, documentCloner, clonedElement, container, _a2, width, height, left2, top2, backgroundColor2, renderOptions, canvas, renderer, root4, renderer;
             var _b2, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t;
             return __generator(this, function(_u) {
               switch (_u.label) {
@@ -8854,13 +8854,13 @@
                 case 3:
                   context.logger.debug("Document cloned, element located at ".concat(left2, ",").concat(top2, " with size ").concat(width, "x").concat(height, " using computed rendering"));
                   context.logger.debug("Starting DOM parsing");
-                  root3 = parseTree(context, clonedElement);
-                  if (backgroundColor2 === root3.styles.backgroundColor) {
-                    root3.styles.backgroundColor = COLORS.TRANSPARENT;
+                  root4 = parseTree(context, clonedElement);
+                  if (backgroundColor2 === root4.styles.backgroundColor) {
+                    root4.styles.backgroundColor = COLORS.TRANSPARENT;
                   }
                   context.logger.debug("Starting renderer for element at ".concat(renderOptions.x, ",").concat(renderOptions.y, " with size ").concat(renderOptions.width, "x").concat(renderOptions.height));
                   renderer = new CanvasRenderer(context, renderOptions);
-                  return [4, renderer.render(root3)];
+                  return [4, renderer.render(root4)];
                 case 4:
                   canvas = _u.sent();
                   _u.label = 5;
@@ -12508,7 +12508,7 @@
           txt = txt.replace(/^ {0,3}\[([\S \t]*?)]:/gm, "\\[$1]:");
           return txt;
         });
-        var root3 = this;
+        var root4 = this;
         if (typeof define === "function" && define.amd) {
           define(function() {
             "use strict";
@@ -12517,7 +12517,7 @@
         } else if (typeof module !== "undefined" && module.exports) {
           module.exports = showdown2;
         } else {
-          root3.showdown = showdown2;
+          root4.showdown = showdown2;
         }
       }).call(exports);
     }
@@ -15403,10 +15403,10 @@
     return function createContent2(markup, type) {
       return (type === "svg" ? createSVG : createHTML)(markup);
     };
-    function append(root3, childNodes) {
+    function append(root4, childNodes) {
       var length = childNodes.length;
       while (length--)
-        root3.appendChild(childNodes[0]);
+        root4.appendChild(childNodes[0]);
     }
     function create3(element) {
       return element === FRAGMENT ? document2.createDocumentFragment() : document2.createElementNS("http://www.w3.org/1999/xhtml", element);
@@ -20648,7 +20648,7 @@
   }
   var mergeWithDefaultOptions = (opts = {}) => Object.assign({}, DEFAULT_OPTIONS2, opts);
   function applyMapping(string, mapping, convertEnding) {
-    const root3 = mapping;
+    const root4 = mapping;
     function nextSubtree(tree, nextChar) {
       const subtree = tree[nextChar];
       if (subtree === void 0) {
@@ -20658,7 +20658,7 @@
     }
     function newChunk(remaining, currentCursor) {
       const firstChar = remaining.charAt(0);
-      return parse5(Object.assign({ "": firstChar }, root3[firstChar]), remaining.slice(1), currentCursor, currentCursor + 1);
+      return parse5(Object.assign({ "": firstChar }, root4[firstChar]), remaining.slice(1), currentCursor, currentCursor + 1);
     }
     function parse5(tree, remaining, lastCursor, currentCursor) {
       if (!remaining) {
@@ -45534,6 +45534,186 @@
     });
   };
 
+  // src/components/music/header.ts
+  function page_header_avatar(url) {
+    const supports_gallery = ["artist", "album"].includes(page.type);
+    let link = sanitise(page.name);
+    if (page.type != "artist")
+      link = `${sanitise(page.sister)}/${sanitise(page.name)}`;
+    let action = "expand";
+    if (supports_gallery)
+      action = settings.default_avatar_action;
+    const elem = html.node`
+        <div class="page-header-avatar" onclick=${() => {
+      if (!url) return;
+      if (action == "expand") {
+        expand_avatar(avatar(url, "ar0"));
+      } else if (action == "gallery") {
+        open(`${root}music/${redirect()}${link}/+images`);
+      }
+    }}>
+            ${url ? html.node`
+                <img src=${avatar(url, "avatar300s")}>
+            ` : html.node`
+                <div class="missing-${page.type}" />
+            `}
+        </div>
+    `;
+    const menu = tippy_esm_default(elem, {
+      theme: "context-menu",
+      content: html.node`
+            ${url ? html.node`
+                <button class="dropdown-menu-clickable-item" data-type="expand" onclick=${() => expand_avatar(avatar(url, "ar0"))}>
+                    ${tl2(trans.expand)}
+                </button>
+            ` : ""}
+            ${supports_gallery ? html.node`
+                <a class="dropdown-menu-clickable-item" data-type="gallery" href="${root}music/${redirect()}${link}/+images">
+                    ${tl2(trans.photos)}
+                </a>
+                <div class="sep"></div>
+                <a class="dropdown-menu-clickable-item" href="${root}bleh/customise" data-menu-item="settings">
+                    ${tl2(trans.settings)}
+                </a>
+            ` : ""}
+        `,
+      placement: "right-start",
+      trigger: "manual",
+      interactive: true,
+      interactiveBorder: 10,
+      offset: [0, 0],
+      appendTo: document.body,
+      onShow(instance) {
+        instance.popper.addEventListener("click", (event3) => {
+          instance.hide();
+        });
+      }
+    });
+    register_menu(elem, menu);
+    return elem;
+  }
+  function artist_title(header = document.body) {
+    const title = header.querySelector(".header-new-title");
+    title.classList.add("page-header-title");
+    let title_text = title.textContent.trim();
+    let has_multi = false;
+    if (title_text.includes(", ") || title_text.includes("&")) has_multi = true;
+    page.multi = false;
+    if (!has_multi) {
+      if (!settings.corrections) {
+        title.textContent = romanise(title_text);
+        return;
+      }
+      title.textContent = romanise(correct_artist(title_text, true));
+    } else {
+      title_text = title_text.replaceAll("&", ";").replaceAll(", ", ";").replaceAll(";;", ";");
+      for (const [key, value] of Object.entries(combined_artists)) {
+        if (key == "version") continue;
+        const escaped = key.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        const regex = new RegExp(escaped, "gi");
+        title_text = title_text.replace(regex, value);
+      }
+      page.multi = true;
+      title.innerHTML = "";
+      let split = title_text.split(";");
+      if (split.length < 2) {
+        page.multi = false;
+        if (!settings.corrections) return;
+        title.textContent = romanise(correct_artist(title_text, true));
+        return;
+      }
+      split.forEach((artist, index3) => {
+        if (index3 > 0) title.innerHTML += ",";
+        artist = artist.trim();
+        let part = document.createElement("a");
+        part.classList.add("multi-artist-part");
+        part.setAttribute(
+          "href",
+          `${root}music/${redirect()}${sanitise(artist)}`
+        );
+        if (settings.corrections)
+          part.textContent = romanise(correct_artist(artist));
+        else part.textContent = romanise(artist);
+        title.appendChild(part);
+      });
+    }
+  }
+  function page_header_title(header = document.body) {
+    page.suggest = null;
+    if (!settings.corrections && !settings.format_guest_features && !page.multi)
+      return;
+    page.corrected = false;
+    const track_title = header.querySelector(".header-new-title");
+    const track_artist = header.querySelector(".header-new-crumb span");
+    if (!track_title) return;
+    track_title.classList.add("page-header-title");
+    if (track_artist) {
+      if (artist_corrections.hasOwnProperty(track_artist.textContent)) {
+        let corrected_artist = artist_corrections[track_artist.textContent];
+        log(
+          `corrected ${track_artist.textContent} as ${corrected_artist}`,
+          "lotus"
+        );
+        track_artist.parentElement.setAttribute(
+          "href",
+          `${root}music/${redirect()}${sanitise(track_artist.textContent)}`
+        );
+        track_artist.textContent = romanise(corrected_artist);
+      } else {
+        track_artist.parentElement.setAttribute(
+          "href",
+          `${root}music/${redirect()}${sanitise(track_artist.textContent)}`
+        );
+        track_artist.textContent = romanise(track_artist.textContent);
+      }
+    }
+    if (settings.format_guest_features) {
+      try {
+        if (!track_title.hasAttribute("data-kate-processed")) {
+          track_title.setAttribute("data-kate-processed", "true");
+          let formatted_title = name_includes(
+            track_title.textContent,
+            track_artist.textContent
+          );
+          let song_title = formatted_title[0];
+          let song_tags = formatted_title[1];
+          page.corrected = formatted_title[4];
+          render(track_title, smart_title(song_title, song_tags));
+          if (song_tags.some((tag) => tag.group == "form"))
+            page.suggest = sanitise(song_title.trim());
+          let song_artist_element = document.body.querySelector(
+            'span[itemprop="byArtist"]'
+          );
+          let song_guests = formatted_title[3];
+          page.sister_others = formatted_title[3];
+          song_artist_element.innerHTML = song_artist_element.innerHTML.trim();
+          for (let guest in song_guests) {
+            song_artist_element.innerHTML = `${song_artist_element.innerHTML},`;
+            song_artist_element.appendChild(html.node`
+                    <a class="header-new-crumb" href="${root}music/${redirect()}${sanitise(song_guests[guest])}">${romanise(song_guests[guest])}</a>
+                `);
+          }
+        }
+      } catch (e4) {
+      }
+    } else {
+      if (!track_title.hasAttribute("data-kate-processed")) {
+        track_title.setAttribute("data-kate-processed", "true");
+        let corrected_title = correct_item_by_artist(
+          track_title.textContent,
+          track_artist.textContent
+        );
+        log(
+          `corrected ${track_title.textContent} by ${track_artist.textContent} as ${corrected_title}`,
+          "lotus"
+        );
+        if (corrected_title != track_title.textContent)
+          page.corrected = true;
+        track_title.textContent = romanise(corrected_title);
+      }
+    }
+  }
+
   // src/pages/tag.js
   function bleh_tags() {
     let tag_header = document.body.querySelector(".header--tag");
@@ -45541,7 +45721,7 @@
     if (tag_header.hasAttribute("data-bwaa"))
       return;
     tag_header.setAttribute("data-bwaa", "true");
-    patch_header_title();
+    page_header_title(tag_header);
     let is_subpage = tag_header.classList.contains("header--sub-page");
     page.structure.container = document.body.querySelector(".page-content");
     page.structure.row = page.structure.container.querySelector(".row");
@@ -45709,15 +45889,15 @@
     page.structure.side.appendChild(about_artist_container);
   }
 
-  // src/pages/track.js
+  // src/pages/track.ts
   function bleh_tracks() {
-    let track_header = document.body.querySelector(".header-new--track");
+    const track_header = document.body.querySelector(".header-new--track");
     page.sister = track_header.querySelector(
       ".header-new-crumb span"
     ).textContent;
     page.name = document.body.querySelector("[data-page-resource-name]").getAttribute("data-page-resource-name");
-    patch_header_title();
-    let is_subpage = track_header.classList.contains("header-new--subpage");
+    page_header_title(track_header);
+    let is_subpage = page.subpage != "overview";
     if (auth.pro) {
       page.structure.container = document.body.querySelector(".page-content");
     } else {
@@ -45766,15 +45946,15 @@
         album_avatar = source_album.querySelector(".source-album-art img");
       page.state.avatar_side_override = settings.default_avatar_action == "expand" ? "expand" : source_album ? source_album.querySelector(".link-block-cover-link").getAttribute("href") : "";
       let redesigned_track_header = html.node`
-            <section class="redesigned-header redesigned-track-header no-background">
-                <div class="avatar-side" ref=${(el) => page.state.avatar_side = el} />
-                <div class="info-side">
+            <section class="page-header for-track">
+                <div class="page-header-avatar-list" ref=${(el) => page.state.avatar_side = el} />
+                <div class="page-header-info">
                     <div class="sub-text">${tl2(trans.track)}</div>
                     <div class="title-container">
                         ${title}
                         ${position ? position : ""}
                     </div>
-                    <h2>${artist}</h2>
+                    <h2 class="page-header-artist artist-for-track">${artist}</h2>
                 </div>
             </section>
         `;
@@ -45832,53 +46012,13 @@
     log(`creating avatar for ${src} with override ${override}`, "track");
     if (src.endsWith("c6f59c1e5e7240a4c0d427abd71f3dbb.jpg") || src == "") {
       register_background(null);
-      render(parent, html`
-            <div class="media">
-                <img class="missing-track" />
-            </div>
-        `);
+      return;
     }
-    const full = src.replace("/300x300/", "/ar0/").replace("/avatar300s/", "/ar0/").replace("/avatar170s/", "/ar0/");
+    const full = avatar(src, "ar0");
     register_background(full);
-    const media = html.node`
-        <div class="media">
-            <img class="media-image" src=${src}>
-            ${override == "expand" ? html.node`
-                <a class="media-link bleh--avatar-clickable-link" onclick=${() => {
-      expand_avatar(full);
-    }} />
-            ` : html.node`
-                <a class="media-link bleh--avatar-clickable-link" href=${override} />
-            `}
-        </div>
-    `;
-    let menu = tippy_esm_default(media, {
-      theme: "context-menu",
-      content: html.node`
-            ${override != "expand" ? html.node`
-                        <button class="dropdown-menu-clickable-item" onclick=${() => expand_avatar(full)} data-menu-item="expand">
-                            ${tl2(trans.expand)}
-                        </button>
-                    ` : ""}
-            <div class="sep"></div>
-            <a class="dropdown-menu-clickable-item" href="${root}bleh/customise" data-menu-item="settings">
-                ${tl2(trans.settings)}
-            </a>
-        `,
-      placement: "right-start",
-      trigger: "manual",
-      interactive: true,
-      interactiveBorder: 10,
-      offset: [0, 0],
-      appendTo: document.body,
-      onShow(instance) {
-        instance.popper.addEventListener("click", (event3) => {
-          instance.hide();
-        });
-      }
-    });
-    register_menu(media, menu);
-    render(parent, media);
+    render(parent, html`
+        ${page_header_avatar(src)}
+    `);
   }
 
   // src/components/music/oracle.ts
@@ -45958,7 +46098,7 @@
         page.structure.main.firstChild
       );
     }
-    const header = page.structure.container.querySelector(".redesigned-header");
+    const header = page.structure.container.querySelector(".page-header");
     let releases_panel;
     let tracklist_panel;
     let tracklist_oracle;
@@ -49672,7 +49812,7 @@
   };
   function createDOMPurify() {
     let window2 = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : getGlobal();
-    const DOMPurify = (root3) => createDOMPurify(root3);
+    const DOMPurify = (root4) => createDOMPurify(root4);
     DOMPurify.version = "3.2.6";
     DOMPurify.removed = [];
     if (!window2 || !window2.document || window2.document.nodeType !== NODE_TYPE.document || !window2.Element) {
@@ -50053,10 +50193,10 @@
       }
       return WHOLE_DOCUMENT ? doc.documentElement : body;
     };
-    const _createNodeIterator = function _createNodeIterator2(root3) {
+    const _createNodeIterator = function _createNodeIterator2(root4) {
       return createNodeIterator.call(
-        root3.ownerDocument || root3,
-        root3,
+        root4.ownerDocument || root4,
+        root4,
         // eslint-disable-next-line no-bitwise
         NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_COMMENT | NodeFilter.SHOW_TEXT | NodeFilter.SHOW_PROCESSING_INSTRUCTION | NodeFilter.SHOW_CDATA_SECTION,
         null
@@ -57129,125 +57269,6 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         `)}
     `;
   }
-  function artist_title() {
-    let title = document.body.querySelector(".header-new-title");
-    let title_text = title.textContent.trim();
-    let has_multi = false;
-    if (title_text.includes(", ") || title_text.includes("&")) has_multi = true;
-    page.multi = false;
-    if (!has_multi) {
-      if (!settings.corrections) {
-        title.textContent = romanise(title_text);
-        return;
-      }
-      title.textContent = romanise(correct_artist(title_text, true));
-    } else {
-      title_text = title_text.replaceAll("&", ";").replaceAll(", ", ";").replaceAll(";;", ";");
-      for (const [key, value] of Object.entries(combined_artists)) {
-        if (key == "version") continue;
-        const escaped = key.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-        const regex = new RegExp(escaped, "gi");
-        title_text = title_text.replace(regex, value);
-      }
-      page.multi = true;
-      title.innerHTML = "";
-      let split = title_text.split(";");
-      if (split.length < 2) {
-        page.multi = false;
-        if (!settings.corrections) return;
-        title.textContent = romanise(correct_artist(title_text, true));
-        return;
-      }
-      split.forEach((artist, index3) => {
-        if (index3 > 0) title.innerHTML += ",";
-        artist = artist.trim();
-        let part = document.createElement("a");
-        part.classList.add("multi-artist-part");
-        part.setAttribute(
-          "href",
-          `${root}music/${redirect()}${sanitise(artist)}`
-        );
-        if (settings.corrections)
-          part.textContent = romanise(correct_artist(artist));
-        else part.textContent = romanise(artist);
-        title.appendChild(part);
-      });
-    }
-  }
-  function patch_header_title() {
-    page.suggest = null;
-    if (!settings.corrections && !settings.format_guest_features && !page.multi)
-      return;
-    page.corrected = false;
-    let track_title = document.body.querySelector(".header-new-title");
-    let track_artist = document.body.querySelector(".header-new-crumb span");
-    if (!track_title) return;
-    if (track_artist) {
-      if (artist_corrections.hasOwnProperty(track_artist.textContent)) {
-        let corrected_artist = artist_corrections[track_artist.textContent];
-        log(
-          `corrected ${track_artist.textContent} as ${corrected_artist}`,
-          "lotus"
-        );
-        track_artist.parentElement.setAttribute(
-          "href",
-          `${root}music/${redirect()}${sanitise(track_artist.textContent)}`
-        );
-        track_artist.textContent = romanise(corrected_artist);
-      } else {
-        track_artist.parentElement.setAttribute(
-          "href",
-          `${root}music/${redirect()}${sanitise(track_artist.textContent)}`
-        );
-        track_artist.textContent = romanise(track_artist.textContent);
-      }
-    }
-    if (settings.format_guest_features) {
-      try {
-        if (!track_title.hasAttribute("data-kate-processed")) {
-          track_title.setAttribute("data-kate-processed", "true");
-          let formatted_title = name_includes(
-            track_title.textContent,
-            track_artist.textContent
-          );
-          let song_title = formatted_title[0];
-          let song_tags = formatted_title[1];
-          page.corrected = formatted_title[4];
-          render(track_title, smart_title(song_title, song_tags));
-          if (song_tags.some((tag) => tag.group == "form"))
-            page.suggest = sanitise(song_title.trim());
-          let song_artist_element = document.body.querySelector(
-            'span[itemprop="byArtist"]'
-          );
-          let song_guests = formatted_title[3];
-          page.sister_others = formatted_title[3];
-          song_artist_element.innerHTML = song_artist_element.innerHTML.trim();
-          for (let guest in song_guests) {
-            song_artist_element.innerHTML = `${song_artist_element.innerHTML},`;
-            song_artist_element.appendChild(html.node`
-                    <a class="header-new-crumb" href="${root}music/${redirect()}${sanitise(song_guests[guest])}">${romanise(song_guests[guest])}</a>
-                `);
-          }
-        }
-      } catch (e4) {
-      }
-    } else {
-      if (!track_title.hasAttribute("data-kate-processed")) {
-        track_title.setAttribute("data-kate-processed", "true");
-        let corrected_title = correct_item_by_artist(
-          track_title.textContent,
-          track_artist.textContent
-        );
-        log(
-          `corrected ${track_title.textContent} by ${track_artist.textContent} as ${corrected_title}`,
-          "lotus"
-        );
-        if (corrected_title != track_title.textContent)
-          page.corrected = true;
-        track_title.textContent = romanise(corrected_title);
-      }
-    }
-  }
   function create_correction(type, name = page.name, sister = page.sister) {
     let title;
     let current = name;
@@ -57622,15 +57643,13 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     });
   }
 
-  // src/pages/album.js
+  // src/pages/album.ts
   function bleh_albums() {
-    let album_header = document.body.querySelector(".header-new--album");
-    page.sister = album_header.querySelector(
-      ".header-new-crumb span"
-    ).textContent;
+    const album_header = document.body.querySelector(".header-new--album");
+    page.sister = album_header.querySelector(".header-new-crumb span").textContent;
     page.name = document.body.querySelector("[data-page-resource-name]").getAttribute("data-page-resource-name");
-    patch_header_title();
-    let is_subpage = album_header.classList.contains("header-new--subpage");
+    page_header_title(album_header);
+    let is_subpage = page.subpage != "overview";
     if (auth.pro) {
       page.structure.container = document.body.querySelector(
         ".page-content:not(:has(.content-top-lower-row, a + .js-gallery-heading))"
@@ -57683,22 +57702,17 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         clean_number(listeners?.title)
       );
       let redesigned_album_header = html.node`
-            <section class="redesigned-header redesigned-album-header no-background">
-                ${is_subpage || ff("show_album_cover_always") ? html.node`
-                <div class="avatar-side">
-                    ${avatar3 ? html.node`
-                    <img src="${avatar3.getAttribute("content").replace("/ar0/", "/avatar170s/")}">
-                    <a class="bleh--avatar-clickable-link"></a>
-                    ` : html.node`<img class="missing-album">`}
+            <section class="page-header for-album">
+                <div class="page-header-avatar-list">
+                    ${page_header_avatar(avatar3.getAttribute("content"))}
                 </div>
-                ` : ""}
-                <div class="info-side">
+                <div class="page-header-info">
                     <div class="sub-text">${tl2(trans.album)}</div>
                     <div class="title-container">
                         ${title}
                         ${position ? position : ""}
                     </div>
-                    <h2>${artist}</h2>
+                    <h2 class="page-header-artist artist-for-album">${artist}</h2>
                 </div>
                 ${page.suggest ? html.node`
                 <div class="suggest-side">
@@ -57716,45 +57730,6 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         page.structure.container.firstElementChild
       );
       album_header.classList.add("legacy-header");
-      let avatar_side = redesigned_album_header.querySelector(".avatar-side");
-      let avatar_link = avatar_side.querySelector("a");
-      if (avatar3 && avatar_link) {
-        if (settings.default_avatar_action == "expand" && avatar3)
-          avatar_link.setAttribute(
-            "onclick",
-            `_expand_avatar('${avatar3.getAttribute("content")}')`
-          );
-        else if (settings.default_avatar_action == "gallery")
-          avatar_link.href = `${root}music/${redirect()}${sanitise(page.sister)}/${sanitise(page.name)}/+images`;
-        let menu = tippy_esm_default(avatar_side, {
-          theme: "context-menu",
-          content: html.node`
-                    ${avatar3 ? html.node`
-                    <button class="dropdown-menu-clickable-item" onclick=${() => expand_avatar(avatar3.getAttribute("content"))} data-menu-item="expand">
-                        ${tl2(trans.expand)}
-                    </button>
-                    ` : ""}
-                    <a class="dropdown-menu-clickable-item" href="${root}music/${redirect()}${sanitise(page.sister)}/${sanitise(page.name)}/+images" data-menu-item="gallery">
-                        ${tl2(trans.artwork)}
-                    </a>
-                    <div class="sep"></div>
-                    <a class="dropdown-menu-clickable-item" href="${root}bleh/customise" data-menu-item="settings">
-                        ${tl2(trans.settings)}
-                    </a>
-                `,
-          placement: "right-start",
-          trigger: "manual",
-          interactive: true,
-          interactiveBorder: 10,
-          offset: [0, 0],
-          onShow(instance) {
-            instance.popper.addEventListener("click", (event3) => {
-              instance.hide();
-            });
-          }
-        });
-        register_menu(avatar_side, menu);
-      }
     }
     if (settings.hue_from_album) {
       let header_inner = album_header.querySelector(".header-new-inner");
@@ -57923,71 +57898,13 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     });
   }
 
-  // src/components/music/header.ts
-  function page_header_avatar(url) {
-    const supports_gallery = ["artist", "album"].includes(page.type);
-    let link = sanitise(page.name);
-    if (page.type != "artist")
-      link = `${sanitise(page.sister)}/${sanitise(page.name)}`;
-    let action = "expand";
-    if (supports_gallery)
-      action = settings.default_avatar_action;
-    const elem = html.node`
-        <div class="page-header-avatar" onclick=${() => {
-      if (!url) return;
-      if (action == "expand") {
-        expand_avatar(avatar(url, "ar0"));
-      } else if (action == "gallery") {
-        open(`${root}music/${redirect()}${link}/+images`);
-      }
-    }}>
-            ${url ? html.node`
-                <img src=${avatar(url, "avatar300s")}>
-            ` : html.node`
-                <div class="missing-${page.type}" />
-            `}
-        </div>
-    `;
-    const menu = tippy_esm_default(elem, {
-      theme: "context-menu",
-      content: html.node`
-            ${url ? html.node`
-                <button class="dropdown-menu-clickable-item" data-type="expand" onclick=${() => expand_avatar(avatar(url, "ar0"))}>
-                    ${tl2(trans.expand)}
-                </button>
-            ` : ""}
-            ${supports_gallery ? html.node`
-                <a class="dropdown-menu-clickable-item" data-type="gallery" href="${root}music/${redirect()}${link}/+images">
-                    ${tl2(trans.photos)}
-                </a>
-                <div class="sep"></div>
-                <a class="dropdown-menu-clickable-item" href="${root}bleh/customise" data-menu-item="settings">
-                    ${tl2(trans.settings)}
-                </a>
-            ` : ""}
-        `,
-      placement: "right-start",
-      trigger: "manual",
-      interactive: true,
-      interactiveBorder: 10,
-      offset: [0, 0],
-      onShow(instance) {
-        instance.popper.addEventListener("click", (event3) => {
-          instance.hide();
-        });
-      }
-    });
-    register_menu(elem, menu);
-    return elem;
-  }
-
   // src/pages/artist.ts
   function bleh_artists() {
     let artist_header = document.body.querySelector(".header-new--artist");
     page.name = artist_header.querySelector(".header-new-title").textContent;
     page.sister = "";
-    artist_title();
-    let is_subpage = artist_header.classList.contains("header-new--subpage");
+    artist_title(artist_header);
+    let is_subpage = page.subpage != "overview";
     if (auth.pro) {
       page.structure.container = document.body.querySelector(
         ".page-content:not(.visible-xs, :has(.content-top-lower-row, a + .js-gallery-heading))"
@@ -76966,11 +76883,11 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     }
     return node;
   }
-  function set(root3, scope, values) {
+  function set(root4, scope, values) {
     if (typeof scope === "string") {
-      return merge(getScope$1(root3, scope), values);
+      return merge(getScope$1(root4, scope), values);
     }
-    return merge(getScope$1(root3, ""), scope);
+    return merge(getScope$1(root4, ""), scope);
   }
   var Defaults = class {
     constructor(_descriptors2, _appliers) {
