@@ -34,7 +34,7 @@ import { html, render } from 'lighterhtml';
 import { other_listener } from '@/components/profile/profile_shortcut';
 import { setting } from '@/components/settings/settings';
 import tippy from 'tippy.js';
-import { open_starred_friend_window } from '@/pages/profile/profile.js';
+import { open_starred_friend_window } from '@/pages/profile/profile';
 import { artist_title, page_header_avatar } from '@/components/music/header';
 
 export function bleh_artists() {

@@ -48,7 +48,7 @@ import { save_setting, setting } from '@/components/settings/settings';
 import { submit_scrobble } from '@/components/music/scrobble';
 import tippy from 'tippy.js';
 import { Chart } from '@/main';
-import { expand_avatar, style_name_from_badge } from '@/components/shared/avatar';
+import { avatar, expand_avatar, style_name_from_badge } from '@/components/shared/avatar';
 import { status } from '@/components/dialog/status.js';
 import { hoshino } from '@/components/music/hoshino.js';
 import { find_pronouns } from '@/components/profile/pronouns';
@@ -56,6 +56,7 @@ import { queue_popup } from '@/components/dialog/popup';
 import { bleh_playlist } from '@/pages/profile/playlist';
 import { profile_reports } from './reports';
 import { toggle } from '@/components/settings/toggle';
+import { page_header_avatar } from '@/components/music/header';
 
 export function bleh_profiles() {
     // the obsessions page is a user subpage but works very differently
@@ -70,9 +71,8 @@ export function bleh_profiles() {
     let profile_header = document.body.querySelector('.header--user');
     if (!profile_header) return;
 
-    const profile_name = profile_header.querySelector('.header-title > a');
+    let profile_name = profile_header.querySelector('.header-title > a');
     page.name = profile_name.textContent;
-    profile_name.removeAttribute('href');
 
     // are we on the overview page?
     let is_subpage = page.subpage != 'overview';
@@ -141,7 +141,7 @@ export function bleh_profiles() {
             );
     }
 
-    let avatar = profile_header.querySelector('.avatar');
+    let profile_avatar = profile_header.querySelector('.avatar > img');
     let title_wrap = profile_header.querySelector('.header-title-label-wrap');
     let sub_wrap = profile_header.querySelector('.header-title-secondary');
 
@@ -198,7 +198,9 @@ export function bleh_profiles() {
 
     const badge_elements = Array.from(title_wrap.querySelectorAll('.label'));
 
-    profile_name.classList.add('profile-name');
+    profile_name = html.node`
+        <h1 class="page-header-title profile-name">${cache.username || profile_name.textContent}</h1>
+    `;
 
     if (ff('profile_fonts') && settings.display_name_styles) {
         profile_name.setAttribute('data-font', cache.font);
@@ -212,37 +214,27 @@ export function bleh_profiles() {
     }
 
     // new account
-    if (!avatar) {
-        avatar = profile_header.querySelector('.header-avatar-add');
+    if (!profile_avatar) {
+        profile_avatar = profile_header.querySelector('.header-avatar-add');
         new_account = true;
-    }
+    } else {
+        const src = (profile_avatar as HTMLImageElement).src;
 
-    // me :3
-    if (
-        sponsor_list &&
-        sponsor_list.special &&
-        sponsor_list.special.includes(page.name)
-    ) {
-        title_wrap
-            .querySelector('.header-title a')
-            .classList.add('bleh--name-is-cute');
-    }
-
-    if (cache.username) {
-        profile_name.textContent = cache.username;
+        cache.avatar = src;
+        page.avatar = src;
     }
 
     let redesigned_profile_header = html.node`
-        <section class="redesigned-header redesigned-profile-header no-background">
-            <div class="avatar-side">
-                ${avatar}
+        <section class="page-header for-profile">
+            <div class="page-header-avatar-list">
+                ${!new_account ? page_header_avatar((profile_avatar as HTMLImageElement).src) : profile_avatar}
             </div>
-            <div class="info-side has-main-info">
+            <div class="page-header-info has-main-info">
                 <div class="main-info">
                     <div class="sub-text">${tl(trans.profile)}</div>
-                    <div class="title-container">${title_wrap}</div>
+                    <div class="title-container">${profile_name}</div>
                 </div>
-                ${sub_wrap ? sub_wrap : cache.username || cache.aka || cache.created ? () => {
+                ${sub_wrap || (cache.username || cache.aka || cache.created) ? () => {
                     const elem = html.node`
                         <p class="header-title-secondary" />
                     `;
@@ -253,22 +245,12 @@ export function bleh_profiles() {
                 } : ''}
                 ${badge_elements.length > 0 ? html.node`
                 <div class="badges profile-badges">
-                    ${badge_elements.map(badge => html.node`
-                        ${badge}
-                    `)}
+                    ${badge_elements.map(badge => badge)}
                 </div>
                 ` : ''}
             </div>
         </section>
     `;
-
-    const avatar_img = avatar.querySelector(':scope > img');
-
-    if (avatar_img) {
-        avatar_img.src = avatar_img.src.replace('/avatar170s/', '/avatar300s/');
-        cache.avatar = avatar_img.src;
-        page.avatar = avatar_img.src;
-    }
 
     if (page.name == auth.name && !settings.profile_header_own) {
         register_background(null, 'hidden');
@@ -278,11 +260,8 @@ export function bleh_profiles() {
         register_background(cache.banner, 'bio');
     } else {
         if (settings.profile_avi_background) {
-            if (avatar_img)
-                register_background(
-                    avatar_img.src.replace('/avatar170s/', '/ar0/'),
-                    'avatar'
-                );
+            if (!new_account)
+                register_background(avatar(page.avatar, 'ar0'));
             else register_background(null, 'none');
         } else {
             let background = document.body.querySelector(
@@ -304,15 +283,6 @@ export function bleh_profiles() {
         page.structure.container.firstElementChild
     );
     profile_header.classList.add('legacy-header');
-
-    // make avatar clickable
-    if (avatar_img) {
-        avatar.addEventListener('click', () => {
-            expand_avatar(avatar_img.src.replace('/avatar300s/', '/ar0/'));
-        });
-    }
-
-    control_gif_pause(avatar_img);
 
     // translations in other languages
     let library_tab = page.structure.nav.querySelector(

@@ -20,7 +20,7 @@
 }
 
 .page-header {
-    margin: 50px -40px 20px;
+    margin: 50px -40px 20px !important;
     padding: 0 var(--card-padding);
 
     align-items: center;
@@ -213,56 +213,14 @@
     }
 }
 
-.tag-side {
+.page-header-icon {
     display: flex;
     width: 28px;
     flex-shrink: 0;
     filter: var(--header-filter-shadow);
     margin-right: calc(-1 * var(--card-gap));
 
-    .tag-icon {
-        display: flex;
-        width: 28px;
-        aspect-ratio: 1 / 1;
-        cursor: default;
-
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-
-        position: relative;
-        --left: 50%;
-        --mask-size: 28px;
-        --margin-left: calc(-1 * (var(--mask-size) / 2));
-        --margin-top: calc(-1 * (var(--mask-size) / 2));
-        --mask: var(--icon-tag);
-        color: oklch(var(--c3));
-
-        &.cog-icon {
-            --mask: var(--icon-16-settings);
-        }
-        &.search-icon {
-            --mask: var(--icon-16-search);
-        }
-        &.charts-icon {
-            --mask: var(--icon-16-charts);
-        }
-        &.notifications-icon {
-            --mask: var(--icon-16-notifications);
-        }
-        &.inbox-icon {
-            --mask: var(--icon-16-inbox);
-        }
-        &.event-icon {
-            --mask: var(--icon-16-event);
-        }
-        &.bookmarks-icon {
-            --mask: var(--icon-16-bookmark);
-        }
-        &.playlist-icon {
-            --mask: var(--icon-16-playlist);
-        }
-    }
+    --icon-size: 28px;
 }
 
 .page-header-info {
@@ -278,19 +236,14 @@
 
     .page-header-title {
         margin: unset;
-        font-size: 26px;
+        font-size: calc(26px * var(--custom-font-size-multiplier, 1));
         line-height: 40px;
         font-weight: var(--font-weight-bold);
         letter-spacing: unset;
         cursor: default;
 
         color: oklch(var(--c1));
-
-        & > a {
-            color: inherit;
-            position: relative;
-            font-size: calc(26px * var(--custom-font-size-multiplier, 1));
-        }
+        position: relative;
     }
 
     & > .page-header-artist {

@@ -30,7 +30,7 @@ import { DateTime } from 'luxon';
 import {
     load_profile_cache_externally,
     open_starred_friend_window
-} from '@/pages/profile/profile.js';
+} from '@/pages/profile/profile';
 import { oracle_credits } from '@/components/music/oracle';
 import { setting } from '@/components/settings/settings';
 import { patch_user_list_item } from '@/components/shared/users';

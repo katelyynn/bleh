@@ -37743,7 +37743,187 @@
     }
   }
 
-  // src/pages/profile/profile.js
+  // src/components/music/header.ts
+  function page_header_avatar(url) {
+    const supports_gallery = ["artist", "album"].includes(page.type);
+    let link = sanitise(page.name);
+    if (page.type != "artist")
+      link = `${sanitise(page.sister)}/${sanitise(page.name)}`;
+    let action = "expand";
+    if (supports_gallery)
+      action = settings.default_avatar_action;
+    const elem = html.node`
+        <div class="page-header-avatar" onclick=${() => {
+      if (!url) return;
+      if (action == "expand") {
+        expand_avatar(avatar(url, "ar0"));
+      } else if (action == "gallery") {
+        open(`${root}music/${redirect()}${link}/+images`);
+      }
+    }}>
+            ${url ? html.node`
+                <img src=${avatar(url, "avatar300s")}>
+            ` : html.node`
+                <div class="missing-${page.type}" />
+            `}
+        </div>
+    `;
+    const menu = tippy_esm_default(elem, {
+      theme: "context-menu",
+      content: html.node`
+            ${url ? html.node`
+                <button class="dropdown-menu-clickable-item" data-type="expand" onclick=${() => expand_avatar(avatar(url, "ar0"))}>
+                    ${tl2(trans.expand)}
+                </button>
+            ` : ""}
+            ${supports_gallery ? html.node`
+                <a class="dropdown-menu-clickable-item" data-type="gallery" href="${root}music/${redirect()}${link}/+images">
+                    ${tl2(trans.photos)}
+                </a>
+                <div class="sep"></div>
+                <a class="dropdown-menu-clickable-item" href="${root}bleh/customise" data-menu-item="settings">
+                    ${tl2(trans.settings)}
+                </a>
+            ` : ""}
+        `,
+      placement: "right-start",
+      trigger: "manual",
+      interactive: true,
+      interactiveBorder: 10,
+      offset: [0, 0],
+      appendTo: document.body,
+      onShow(instance) {
+        instance.popper.addEventListener("click", (event3) => {
+          instance.hide();
+        });
+      }
+    });
+    register_menu(elem, menu);
+    return elem;
+  }
+  function artist_title(header = document.body) {
+    const title = header.querySelector(".header-new-title");
+    title.classList.add("page-header-title");
+    let title_text = title.textContent.trim();
+    let has_multi = false;
+    if (title_text.includes(", ") || title_text.includes("&")) has_multi = true;
+    page.multi = false;
+    if (!has_multi) {
+      if (!settings.corrections) {
+        title.textContent = romanise(title_text);
+        return;
+      }
+      title.textContent = romanise(correct_artist(title_text, true));
+    } else {
+      title_text = title_text.replaceAll("&", ";").replaceAll(", ", ";").replaceAll(";;", ";");
+      for (const [key, value] of Object.entries(combined_artists)) {
+        if (key == "version") continue;
+        const escaped = key.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        const regex = new RegExp(escaped, "gi");
+        title_text = title_text.replace(regex, value);
+      }
+      page.multi = true;
+      title.innerHTML = "";
+      let split = title_text.split(";");
+      if (split.length < 2) {
+        page.multi = false;
+        if (!settings.corrections) return;
+        title.textContent = romanise(correct_artist(title_text, true));
+        return;
+      }
+      split.forEach((artist, index3) => {
+        if (index3 > 0) title.innerHTML += ",";
+        artist = artist.trim();
+        let part = document.createElement("a");
+        part.classList.add("multi-artist-part");
+        part.setAttribute(
+          "href",
+          `${root}music/${redirect()}${sanitise(artist)}`
+        );
+        if (settings.corrections)
+          part.textContent = romanise(correct_artist(artist));
+        else part.textContent = romanise(artist);
+        title.appendChild(part);
+      });
+    }
+  }
+  function page_header_title(header = document.body) {
+    page.suggest = null;
+    if (!settings.corrections && !settings.format_guest_features && !page.multi)
+      return;
+    page.corrected = false;
+    const track_title = header.querySelector(".header-new-title");
+    const track_artist = header.querySelector(".header-new-crumb span");
+    if (!track_title) return;
+    track_title.classList.add("page-header-title");
+    if (track_artist) {
+      if (artist_corrections.hasOwnProperty(track_artist.textContent)) {
+        let corrected_artist = artist_corrections[track_artist.textContent];
+        log(
+          `corrected ${track_artist.textContent} as ${corrected_artist}`,
+          "lotus"
+        );
+        track_artist.parentElement.setAttribute(
+          "href",
+          `${root}music/${redirect()}${sanitise(track_artist.textContent)}`
+        );
+        track_artist.textContent = romanise(corrected_artist);
+      } else {
+        track_artist.parentElement.setAttribute(
+          "href",
+          `${root}music/${redirect()}${sanitise(track_artist.textContent)}`
+        );
+        track_artist.textContent = romanise(track_artist.textContent);
+      }
+    }
+    if (settings.format_guest_features) {
+      try {
+        if (!track_title.hasAttribute("data-kate-processed")) {
+          track_title.setAttribute("data-kate-processed", "true");
+          let formatted_title = name_includes(
+            track_title.textContent,
+            track_artist.textContent
+          );
+          let song_title = formatted_title[0];
+          let song_tags = formatted_title[1];
+          page.corrected = formatted_title[4];
+          render(track_title, smart_title(song_title, song_tags));
+          if (song_tags.some((tag) => tag.group == "form"))
+            page.suggest = sanitise(song_title.trim());
+          let song_artist_element = document.body.querySelector(
+            'span[itemprop="byArtist"]'
+          );
+          let song_guests = formatted_title[3];
+          page.sister_others = formatted_title[3];
+          song_artist_element.innerHTML = song_artist_element.innerHTML.trim();
+          for (let guest in song_guests) {
+            song_artist_element.innerHTML = `${song_artist_element.innerHTML},`;
+            song_artist_element.appendChild(html.node`
+                    <a class="header-new-crumb" href="${root}music/${redirect()}${sanitise(song_guests[guest])}">${romanise(song_guests[guest])}</a>
+                `);
+          }
+        }
+      } catch (e4) {
+      }
+    } else {
+      if (!track_title.hasAttribute("data-kate-processed")) {
+        track_title.setAttribute("data-kate-processed", "true");
+        let corrected_title = correct_item_by_artist(
+          track_title.textContent,
+          track_artist.textContent
+        );
+        log(
+          `corrected ${track_title.textContent} by ${track_artist.textContent} as ${corrected_title}`,
+          "lotus"
+        );
+        if (corrected_title != track_title.textContent)
+          page.corrected = true;
+        track_title.textContent = romanise(corrected_title);
+      }
+    }
+  }
+
+  // src/pages/profile/profile.ts
   function bleh_profiles() {
     if (page.subpage == "obsessions_obsession") {
       bleh_obsession();
@@ -37754,9 +37934,8 @@
     }
     let profile_header = document.body.querySelector(".header--user");
     if (!profile_header) return;
-    const profile_name = profile_header.querySelector(".header-title > a");
+    let profile_name = profile_header.querySelector(".header-title > a");
     page.name = profile_name.textContent;
-    profile_name.removeAttribute("href");
     let is_subpage = page.subpage != "overview";
     page.structure.container = document.body.querySelector(
       ".page-content:not(.profile-cards-container, .report-box-container .page-content)"
@@ -37809,7 +37988,7 @@
           page.structure.main.firstElementChild
         );
     }
-    let avatar3 = profile_header.querySelector(".avatar");
+    let profile_avatar = profile_header.querySelector(".avatar > img");
     let title_wrap = profile_header.querySelector(".header-title-label-wrap");
     let sub_wrap = profile_header.querySelector(".header-title-secondary");
     log(`querying badges for ${page.name}`, "profile");
@@ -37852,7 +38031,9 @@
       });
     }
     const badge_elements = Array.from(title_wrap.querySelectorAll(".label"));
-    profile_name.classList.add("profile-name");
+    profile_name = html.node`
+        <h1 class="page-header-title profile-name">${cache2.username || profile_name.textContent}</h1>
+    `;
     if (ff("profile_fonts") && settings.display_name_styles) {
       profile_name.setAttribute("data-font", cache2.font);
       profile_name.setAttribute("data-font-style", cache2.font_style);
@@ -37862,27 +38043,25 @@
         }, 0);
       }
     }
-    if (!avatar3) {
-      avatar3 = profile_header.querySelector(".header-avatar-add");
+    if (!profile_avatar) {
+      profile_avatar = profile_header.querySelector(".header-avatar-add");
       new_account = true;
-    }
-    if (sponsor_list && sponsor_list.special && sponsor_list.special.includes(page.name)) {
-      title_wrap.querySelector(".header-title a").classList.add("bleh--name-is-cute");
-    }
-    if (cache2.username) {
-      profile_name.textContent = cache2.username;
+    } else {
+      const src = profile_avatar.src;
+      cache2.avatar = src;
+      page.avatar = src;
     }
     let redesigned_profile_header = html.node`
-        <section class="redesigned-header redesigned-profile-header no-background">
-            <div class="avatar-side">
-                ${avatar3}
+        <section class="page-header for-profile">
+            <div class="page-header-avatar-list">
+                ${!new_account ? page_header_avatar(profile_avatar.src) : profile_avatar}
             </div>
-            <div class="info-side has-main-info">
+            <div class="page-header-info has-main-info">
                 <div class="main-info">
                     <div class="sub-text">${tl2(trans.profile)}</div>
-                    <div class="title-container">${title_wrap}</div>
+                    <div class="title-container">${profile_name}</div>
                 </div>
-                ${sub_wrap ? sub_wrap : cache2.username || cache2.aka || cache2.created ? () => {
+                ${sub_wrap || (cache2.username || cache2.aka || cache2.created) ? () => {
       const elem = html.node`
                         <p class="header-title-secondary" />
                     `;
@@ -37891,20 +38070,12 @@
     } : ""}
                 ${badge_elements.length > 0 ? html.node`
                 <div class="badges profile-badges">
-                    ${badge_elements.map((badge) => html.node`
-                        ${badge}
-                    `)}
+                    ${badge_elements.map((badge) => badge)}
                 </div>
                 ` : ""}
             </div>
         </section>
     `;
-    const avatar_img = avatar3.querySelector(":scope > img");
-    if (avatar_img) {
-      avatar_img.src = avatar_img.src.replace("/avatar170s/", "/avatar300s/");
-      cache2.avatar = avatar_img.src;
-      page.avatar = avatar_img.src;
-    }
     if (page.name == auth.name && !settings.profile_header_own) {
       register_background(null, "hidden");
     } else if (page.name != auth.name && !settings.profile_header_others) {
@@ -37913,11 +38084,8 @@
       register_background(cache2.banner, "bio");
     } else {
       if (settings.profile_avi_background) {
-        if (avatar_img)
-          register_background(
-            avatar_img.src.replace("/avatar170s/", "/ar0/"),
-            "avatar"
-          );
+        if (!new_account)
+          register_background(avatar(page.avatar, "ar0"));
         else register_background(null, "none");
       } else {
         let background = document.body.querySelector(
@@ -37936,12 +38104,6 @@
       page.structure.container.firstElementChild
     );
     profile_header.classList.add("legacy-header");
-    if (avatar_img) {
-      avatar3.addEventListener("click", () => {
-        expand_avatar(avatar_img.src.replace("/avatar300s/", "/ar0/"));
-      });
-    }
-    control_gif_pause(avatar_img);
     let library_tab = page.structure.nav.querySelector(
       ".secondary-nav-item--library a"
     );
@@ -45534,186 +45696,6 @@
     });
   };
 
-  // src/components/music/header.ts
-  function page_header_avatar(url) {
-    const supports_gallery = ["artist", "album"].includes(page.type);
-    let link = sanitise(page.name);
-    if (page.type != "artist")
-      link = `${sanitise(page.sister)}/${sanitise(page.name)}`;
-    let action = "expand";
-    if (supports_gallery)
-      action = settings.default_avatar_action;
-    const elem = html.node`
-        <div class="page-header-avatar" onclick=${() => {
-      if (!url) return;
-      if (action == "expand") {
-        expand_avatar(avatar(url, "ar0"));
-      } else if (action == "gallery") {
-        open(`${root}music/${redirect()}${link}/+images`);
-      }
-    }}>
-            ${url ? html.node`
-                <img src=${avatar(url, "avatar300s")}>
-            ` : html.node`
-                <div class="missing-${page.type}" />
-            `}
-        </div>
-    `;
-    const menu = tippy_esm_default(elem, {
-      theme: "context-menu",
-      content: html.node`
-            ${url ? html.node`
-                <button class="dropdown-menu-clickable-item" data-type="expand" onclick=${() => expand_avatar(avatar(url, "ar0"))}>
-                    ${tl2(trans.expand)}
-                </button>
-            ` : ""}
-            ${supports_gallery ? html.node`
-                <a class="dropdown-menu-clickable-item" data-type="gallery" href="${root}music/${redirect()}${link}/+images">
-                    ${tl2(trans.photos)}
-                </a>
-                <div class="sep"></div>
-                <a class="dropdown-menu-clickable-item" href="${root}bleh/customise" data-menu-item="settings">
-                    ${tl2(trans.settings)}
-                </a>
-            ` : ""}
-        `,
-      placement: "right-start",
-      trigger: "manual",
-      interactive: true,
-      interactiveBorder: 10,
-      offset: [0, 0],
-      appendTo: document.body,
-      onShow(instance) {
-        instance.popper.addEventListener("click", (event3) => {
-          instance.hide();
-        });
-      }
-    });
-    register_menu(elem, menu);
-    return elem;
-  }
-  function artist_title(header = document.body) {
-    const title = header.querySelector(".header-new-title");
-    title.classList.add("page-header-title");
-    let title_text = title.textContent.trim();
-    let has_multi = false;
-    if (title_text.includes(", ") || title_text.includes("&")) has_multi = true;
-    page.multi = false;
-    if (!has_multi) {
-      if (!settings.corrections) {
-        title.textContent = romanise(title_text);
-        return;
-      }
-      title.textContent = romanise(correct_artist(title_text, true));
-    } else {
-      title_text = title_text.replaceAll("&", ";").replaceAll(", ", ";").replaceAll(";;", ";");
-      for (const [key, value] of Object.entries(combined_artists)) {
-        if (key == "version") continue;
-        const escaped = key.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-        const regex = new RegExp(escaped, "gi");
-        title_text = title_text.replace(regex, value);
-      }
-      page.multi = true;
-      title.innerHTML = "";
-      let split = title_text.split(";");
-      if (split.length < 2) {
-        page.multi = false;
-        if (!settings.corrections) return;
-        title.textContent = romanise(correct_artist(title_text, true));
-        return;
-      }
-      split.forEach((artist, index3) => {
-        if (index3 > 0) title.innerHTML += ",";
-        artist = artist.trim();
-        let part = document.createElement("a");
-        part.classList.add("multi-artist-part");
-        part.setAttribute(
-          "href",
-          `${root}music/${redirect()}${sanitise(artist)}`
-        );
-        if (settings.corrections)
-          part.textContent = romanise(correct_artist(artist));
-        else part.textContent = romanise(artist);
-        title.appendChild(part);
-      });
-    }
-  }
-  function page_header_title(header = document.body) {
-    page.suggest = null;
-    if (!settings.corrections && !settings.format_guest_features && !page.multi)
-      return;
-    page.corrected = false;
-    const track_title = header.querySelector(".header-new-title");
-    const track_artist = header.querySelector(".header-new-crumb span");
-    if (!track_title) return;
-    track_title.classList.add("page-header-title");
-    if (track_artist) {
-      if (artist_corrections.hasOwnProperty(track_artist.textContent)) {
-        let corrected_artist = artist_corrections[track_artist.textContent];
-        log(
-          `corrected ${track_artist.textContent} as ${corrected_artist}`,
-          "lotus"
-        );
-        track_artist.parentElement.setAttribute(
-          "href",
-          `${root}music/${redirect()}${sanitise(track_artist.textContent)}`
-        );
-        track_artist.textContent = romanise(corrected_artist);
-      } else {
-        track_artist.parentElement.setAttribute(
-          "href",
-          `${root}music/${redirect()}${sanitise(track_artist.textContent)}`
-        );
-        track_artist.textContent = romanise(track_artist.textContent);
-      }
-    }
-    if (settings.format_guest_features) {
-      try {
-        if (!track_title.hasAttribute("data-kate-processed")) {
-          track_title.setAttribute("data-kate-processed", "true");
-          let formatted_title = name_includes(
-            track_title.textContent,
-            track_artist.textContent
-          );
-          let song_title = formatted_title[0];
-          let song_tags = formatted_title[1];
-          page.corrected = formatted_title[4];
-          render(track_title, smart_title(song_title, song_tags));
-          if (song_tags.some((tag) => tag.group == "form"))
-            page.suggest = sanitise(song_title.trim());
-          let song_artist_element = document.body.querySelector(
-            'span[itemprop="byArtist"]'
-          );
-          let song_guests = formatted_title[3];
-          page.sister_others = formatted_title[3];
-          song_artist_element.innerHTML = song_artist_element.innerHTML.trim();
-          for (let guest in song_guests) {
-            song_artist_element.innerHTML = `${song_artist_element.innerHTML},`;
-            song_artist_element.appendChild(html.node`
-                    <a class="header-new-crumb" href="${root}music/${redirect()}${sanitise(song_guests[guest])}">${romanise(song_guests[guest])}</a>
-                `);
-          }
-        }
-      } catch (e4) {
-      }
-    } else {
-      if (!track_title.hasAttribute("data-kate-processed")) {
-        track_title.setAttribute("data-kate-processed", "true");
-        let corrected_title = correct_item_by_artist(
-          track_title.textContent,
-          track_artist.textContent
-        );
-        log(
-          `corrected ${track_title.textContent} by ${track_artist.textContent} as ${corrected_title}`,
-          "lotus"
-        );
-        if (corrected_title != track_title.textContent)
-          page.corrected = true;
-        track_title.textContent = romanise(corrected_title);
-      }
-    }
-  }
-
   // src/pages/tag.js
   function bleh_tags() {
     let tag_header = document.body.querySelector(".header--tag");
@@ -45739,16 +45721,16 @@
         index3 = 5;
       let title = desanitise(split[index3]);
       page.name = title;
-      let redesigned_tag_header = document.createElement("section");
-      redesigned_tag_header.classList.add("redesigned-header", "redesigned-tag-header", "no-background");
-      redesigned_tag_header.innerHTML = `
-            <div class="tag-side">
-                <div class="tag-icon"></div>
-            </div>
-            <div class="info-side">
-                <div class="sub-text">${tl2(trans.tag)}</div>
-                <h1>${title}</h1>
-            </div>
+      const redesigned_tag_header = html.node`
+            <section class="page-header for-generic">
+                <div class="page-header-icon">
+                    ${icon({ name: icons.tag })}
+                </div>
+                <div class="page-header-info">
+                    <div class="sub-text">${tl2(trans.tag)}</div>
+                    <h1 class="page-header-title">${title}</h1>
+                </div>
+            </section>
         `;
       let background = document.body.querySelector(".header-background--has-image");
       if (background)
@@ -62033,13 +62015,13 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       });
     }
     page.structure.container.insertBefore(html.node`
-        <section class="redesigned-header search-header no-background">
-            <div class="tag-side">
-                <div class="tag-icon search-icon"></div>
+        <section class="page-header for-generic">
+            <div class="page-header-icon">
+                ${icon({ name: icons.search })}
             </div>
-            <div class="info-side">
+            <div class="page-header-info">
                 <div class="sub-text">${tl2(trans.search)}</div>
-                <h1>${value}</h1>
+                <h1 class="page-header-title">${value}</h1>
             </div>
         </section>
     `, page.structure.container.firstElementChild);
@@ -75484,7 +75466,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-02-25"
       }
     },
-    built_on: "2026-03-10T19:44:55.849Z"
+    built_on: "2026-03-10T23:39:02.455Z"
   };
 
   // node_modules/@kurkle/color/dist/color.esm.js

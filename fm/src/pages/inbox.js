@@ -13,7 +13,7 @@ import {register_background, update_page} from "../page";
 import {bleh_notification_list} from "@/components/inbox/notifications";
 import { tl, trans } from "@/build/trans";
 import { html, render } from "lighterhtml";
-import { load_profile_cache_externally } from "./profile/profile.js";
+import { load_profile_cache_externally } from "./profile/profile";
 import { bleh_message_list } from "@/components/inbox/messages";
 import { toggle } from "@/components/settings/toggle.js";
 import tippy from "tippy.js";

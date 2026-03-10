@@ -15,6 +15,8 @@ import {bleh_wiki, bleh_wiki_editor, bleh_wiki_history} from "@/pages/music/wiki
 import tippy from "tippy.js";
 import { settings } from "@/build/config";
 import { page_header_title } from '@/components/music/header';
+import { html } from 'lighterhtml';
+import { icon, icons } from '@/components/shared/icon';
 
 export function bleh_tags() {
     let tag_header = document.body.querySelector('.header--tag');
@@ -51,17 +53,17 @@ export function bleh_tags() {
         let title = desanitise(split[index]);
         page.name = title;
 
-        let redesigned_tag_header = document.createElement('section');
-        redesigned_tag_header.classList.add('redesigned-header', 'redesigned-tag-header', 'no-background');
-        redesigned_tag_header.innerHTML = (`
-            <div class="tag-side">
-                <div class="tag-icon"></div>
-            </div>
-            <div class="info-side">
-                <div class="sub-text">${tl(trans.tag)}</div>
-                <h1>${title}</h1>
-            </div>
-        `);
+        const redesigned_tag_header = html.node`
+            <section class="page-header for-generic">
+                <div class="page-header-icon">
+                    ${icon({ name: icons.tag })}
+                </div>
+                <div class="page-header-info">
+                    <div class="sub-text">${tl(trans.tag)}</div>
+                    <h1 class="page-header-title">${title}</h1>
+                </div>
+            </section>
+        `;
 
         let background = document.body.querySelector('.header-background--has-image');
         if (background)

@@ -51,7 +51,7 @@ import {
 } from '@/pages/profile/glacier.js';
 import { bleh_home, bleh_home_legacy } from '@/pages/home';
 import { bleh_inbox } from '@/pages/inbox';
-import { bleh_profiles, checkup_friend_cache } from '@/pages/profile/profile.js';
+import { bleh_profiles, checkup_friend_cache } from '@/pages/profile/profile';
 import { bleh_search } from '@/pages/home/search';
 import { bleh_tags, bleh_tags_large } from '@/pages/tag';
 import { bleh_tracks } from '@/pages/track';

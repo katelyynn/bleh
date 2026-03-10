@@ -18,7 +18,7 @@ import { setting } from '@/components/settings/settings';
 import { redirect } from '@/components/music/music';
 import tippy from 'tippy.js';
 import { Chart } from '@/main';
-import { load_profile_cache_externally } from '@/pages/profile/profile.js';
+import { load_profile_cache_externally } from '@/pages/profile/profile';
 
 export function bleh_user_library() {
     // date sidebar into its own panel

@@ -17,6 +17,7 @@ import { load_profile_cache_externally } from '@/pages/profile/profile';
 import { sanitise } from '@/build/tools';
 import tippy from 'tippy.js';
 import { avatar } from '@/components/shared/avatar';
+import { icon, icons } from '@/components/shared/icon';
 
 export async function bleh_search() {
     page.structure.container = document.body.querySelector('.page-content');
@@ -97,13 +98,13 @@ export async function bleh_search() {
     }
 
     page.structure.container.insertBefore(html.node`
-        <section class="redesigned-header search-header no-background">
-            <div class="tag-side">
-                <div class="tag-icon search-icon"></div>
+        <section class="page-header for-generic">
+            <div class="page-header-icon">
+                ${icon({ name: icons.search })}
             </div>
-            <div class="info-side">
+            <div class="page-header-info">
                 <div class="sub-text">${tl(trans.search)}</div>
-                <h1>${value}</h1>
+                <h1 class="page-header-title">${value}</h1>
             </div>
         </section>
     `, page.structure.container.firstElementChild);

@@ -21,7 +21,7 @@ import { render_user } from '@/pages/home/minis.js';
 import { redirect } from '@/components/music/music';
 import tippy from 'tippy.js';
 import html2canvas from 'html2canvas-pro';
-import { load_profile_cache_externally } from '@/pages/profile/profile.js';
+import { load_profile_cache_externally } from '@/pages/profile/profile';
 import { icon, icons } from '../shared/icon';
 
 export function collage({ host, sidebar } = {}) {
