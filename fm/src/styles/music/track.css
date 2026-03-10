@@ -55,7 +55,7 @@
     animation-delay: var(--delay, 0s) !important;
     animation-fill-mode: backwards !important;
 
-    contain: content;
+    contain: layout;
 
     --chart-cover-radius: var(--item-small-radius);
 
