@@ -429,7 +429,7 @@ export function patch_titles(search = page.structure.main) {
                             </div>
                             <div class="track-preview-info">
                                 <h5 class="track-preview-text track-preview-title">${song_title}</h5>
-                                <p class="track-preview-text track-preview-artist">${song_artist_element.firstElementChild.textContent}</p>
+                                <p class="track-preview-text track-preview-artist">${song_artist_element.querySelector('a').textContent}</p>
                                 <div class="track-preview-tags">
                                     ${song_tags.map(
                                         (tag) => html.node`
