@@ -11,6 +11,7 @@ import { html, render } from 'lighterhtml';
 import { tl, trans } from '@/build/trans';
 import { patch_avatar } from '@/components/shared/avatar';
 import { toggle } from '@/components/settings/toggle';
+import { icon, icons } from '../shared/icon';
 
 export function bleh_message_list(list, mini = false, delete_btn = null, checkboxes = []) {
     list.classList = 'notification-list';
@@ -91,11 +92,7 @@ export function bleh_message_list(list, mini = false, delete_btn = null, checkbo
                 </div>
             ` : ''}
             <div class="notification-avatar">${avatar}</div>
-            <div
-                class="bleh-icon"
-                data-type=${!valentine ? 'message' : 'valentine'}
-                style="--icon: var(--mask)"
-            />
+            ${icon({ name: !valentine ? icons.message : icons.valentine })}
             <div class="notification-content not-main">
                 ${sent_to ? html.node`
                     <div class="notification-context">

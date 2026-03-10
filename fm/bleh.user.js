@@ -27790,6 +27790,188 @@
     }
   }
 
+  // src/components/shared/icon.ts
+  var icons = {
+    banner: "banner",
+    accent: "accent",
+    username: "mention",
+    pronouns: "pronouns",
+    aka: "aka",
+    created: "created",
+    manage: "dots",
+    share: "share",
+    overview: "home",
+    mention: "mention",
+    profile: "user",
+    global: "globe",
+    library: "library",
+    shoutbox: "shoutbox",
+    listening_report: "listening-report",
+    general: "settings",
+    visual: "themes",
+    layout: "layout-manage",
+    update: "update",
+    ignore: "block",
+    finish: "refresh",
+    advanced: "advanced",
+    follow: "user-plus",
+    save: "check",
+    done: "check",
+    command: "command",
+    shift: "shift",
+    home: "home",
+    edit: "edit",
+    bulk_edit: "edit-bulk",
+    more: "dots",
+    history: "bio-history",
+    latest_wiki: "bio",
+    labs: "labs",
+    compare: "arrows",
+    message: "mail",
+    shortcut: "unlink",
+    profile_shortcut: "profile-shortcut",
+    obsession: "obsession",
+    expand: "expand",
+    link: "link",
+    quote: "quote",
+    code: "code",
+    header: "header",
+    bold: "bold",
+    italic: "italic",
+    strike: "strike",
+    underline: "underline",
+    ul: "ul",
+    ol: "ol",
+    align_left: "align-left",
+    align_center: "align-center",
+    align_right: "align-right",
+    listeners: "listener",
+    support: "support",
+    import: "import",
+    export: "export",
+    reset: "revert",
+    gallery: "gallery-vertical",
+    gallery_saved: "bookmark",
+    cards: "layout-manage",
+    grid: "grid",
+    list: "list",
+    minus: "minus",
+    plus: "plus",
+    play: "play",
+    sponsor: "sponsor",
+    message_sponsor: "sponsor-rewards",
+    bookmark: "bookmark",
+    playlist: "playlist",
+    dev: "settings",
+    settings: "settings",
+    collage: "collage",
+    plot: "plot",
+    continue: "arrow-right",
+    bleh_settings: "bleh",
+    on_this_page: "page",
+    friends: "users",
+    close_friends: "close-friend",
+    following: "following",
+    followers: "followers",
+    neighbours: "neighbours",
+    loved: "heart",
+    obsessions: "obsession",
+    events: "event",
+    playlists: "playlist",
+    news: "changelog",
+    artists: "artist",
+    artist: "artist",
+    albums: "album",
+    album: "album",
+    tracks: "track",
+    track: "track",
+    user: "user",
+    tags: "tag",
+    tag: "tag",
+    search: "search",
+    wiki: "bio",
+    select_all: "select-all",
+    deselect_all: "deselect-all",
+    copy_scrobble: "copy-scrobble",
+    translate: "language",
+    language: "language",
+    inbox: "inbox",
+    notifications: "notifications",
+    messages: "mail",
+    theme: "themes",
+    line: "chart-line",
+    pie: "chart-pie",
+    bar: "chart-bar",
+    horizontal: "chart-axis-x",
+    vertical: "chart-axis-y",
+    undo: "undo",
+    redo: "redo",
+    cut: "cut",
+    copy: "copy",
+    paste: "paste",
+    report: "report",
+    trash: "trash",
+    delete: "trash",
+    theme_glass: "sphere",
+    theme_light: "sun",
+    theme_ink: "pen",
+    theme_dark: "moon",
+    theme_darker: "moon-star",
+    theme_adaptive: "adaptive",
+    theme_oled: "moon-fill",
+    issue: "issues",
+    debug: "plaster",
+    check: "check",
+    check_thick: "check-thick",
+    x: "x",
+    paused: "paused",
+    close: "x",
+    info: "info",
+    refresh: "refresh",
+    block: "block",
+    upload: "upload",
+    download: "download",
+    details: "info",
+    valentine: "valentine",
+    cmd: "command",
+    quick_access: "quick-access",
+    up: "arrow-up",
+    down: "arrow-down",
+    arrow_up: "arrow-up",
+    arrow_down: "arrow-down",
+    arrow_left: "arrow-left",
+    arrow_right: "arrow-right",
+    pixel: "pixel",
+    rainbow: "rainbow",
+    receipt: "receipt",
+    lyrics: "lyrics",
+    jumble: "jumble",
+    send: "send",
+    web: "web",
+    dislike: "dislike",
+    create_from_scratch: "create-from-scratch",
+    switch: "arrows",
+    lock: "lock",
+    now_playing: "play",
+    accessibility: "accessibility",
+    seasonal: "season",
+    sku: "plaster",
+    indent: "indent"
+  };
+  function icon({ name, identifier, use_mask = true }) {
+    const elem = html.node`
+        <span class="bleh-icon" style="${icon_mask({ name })}">
+            ${name} (icon)
+        </span>
+    `;
+    if (use_mask) elem.classList.add("use-mask");
+    if (identifier) elem.classList.add(`bleh-icon-${identifier}`);
+    return elem;
+  }
+  function icon_mask({ name }) {
+    return `--icon: var(--icon-16-${name})`;
+  }
+
   // src/components/dialog/status.js
   function load_status() {
     if (!page.structure.status) {
@@ -27801,14 +27983,14 @@
     }
   }
   function status2({ title, body, type }) {
-    let icon2 = "icon-16-info";
+    let status_icon = "icon-16-info";
     if (type == "error") {
-      icon2 = "icon-16-x";
+      status_icon = "icon-16-x";
     }
     const alert2 = html.node`
         <div class="status-alert colourful" onclick=${() => status_remove()}>
             <div class="status-icon">
-                <div class="bleh-icon" style="--icon: var(--${icon2})" />
+                ${icon({ name: icons[status_icon] })}
             </div>
             <div class="status-title">${title}</div>
             ${body ? html.node`<div class="status-body">${body}</div>` : ""}
@@ -39282,10 +39464,7 @@
       min: min2,
       max: max2
     })}
-                    <div
-                        class="bleh-icon"
-                        style="--icon: var(--icon-16-x)"
-                    />
+                    ${icon({ name: icons.x })}
                     ${height = input({
       type: "number",
       value,
@@ -40117,18 +40296,6 @@
     return output;
   }
 
-  // src/components/shared/icon.ts
-  function icon({ name, identifier, use_mask = true }) {
-    const elem = html.node`
-        <span class="bleh-icon" data-type=${name}>
-            ${name} (icon)
-        </span>
-    `;
-    if (use_mask) elem.classList.add("use-mask");
-    if (identifier) elem.classList.add(`bleh-icon-${identifier}`);
-    return elem;
-  }
-
   // src/components/minis/plot.js
   function plot({ host, sidebar } = {}) {
     if (!host || !sidebar) return;
@@ -40158,7 +40325,7 @@
         render_users();
       }}>
                     ${user_placeholder(user)}
-                    ${icon({ name: "minus" })}
+                    ${icon({ name: icons.minus })}
                 </button>
             `)}
             <button class="compare-user-btn add-user" onclick=${() => {
@@ -40193,7 +40360,7 @@
           render_users();
         }
       }}>
-                ${icon({ name: "plus" })}
+                ${icon({ name: icons.plus })}
             </button>
         `);
     }
@@ -47245,7 +47412,7 @@
                 <div class="data-table-entry">
                     <div class="entry-header">
                         <strong class="entry-type">
-                            ${icon({ name: type })}
+                            ${icon({ name: icons[type] })}
                             ${type}
                         </strong>
                         <div class="entry-subdata">
@@ -50436,7 +50603,7 @@
         }
       }
     ];
-    const icons = () => [
+    const icons2 = () => [
       {
         type: "lang",
         regex: /\[icon=([a-zA-Z-]+)\]/g,
@@ -50593,7 +50760,7 @@
     if (allow_alignment) extensions.push(aligner());
     if (!line_breaks) extensions.push(blockquotes());
     if (allow_banners) extensions.push(banner());
-    if (allow_icons) extensions.push(icons());
+    if (allow_icons) extensions.push(icons2());
     if (allow_hue) extensions.push(accent(), display_name(), status3());
     if (allow_fonts) extensions.push(font());
     if (allow_socials) extensions.push(social_links());
@@ -52712,11 +52879,7 @@
         notification,
         html`
                 <div class="notification-avatar">${avatar3}</div>
-                <div
-                    class="bleh-icon"
-                    data-type=${type}
-                    style="--icon: var(--mask)"
-                />
+                ${icon({ name: icons[type] })}
                 <div class="notification-content">
                     <div class="notification-title">
                         ${type == "shoutbox" ? html.node`
@@ -52731,10 +52894,7 @@
         ) : ""}
                     </div>
                     <div class="notification-context">
-                        <span
-                            class="bleh-icon"
-                            style="--icon: var(--icon-16-indent)"
-                        />
+                        ${icon({ name: icons.indent })}
                         <span
                             class="notification-type"
                             data-type=${context.type}
@@ -52826,11 +52986,7 @@
                 </div>
             ` : ""}
             <div class="notification-avatar">${avatar3}</div>
-            <div
-                class="bleh-icon"
-                data-type=${!valentine ? "message" : "valentine"}
-                style="--icon: var(--mask)"
-            />
+            ${icon({ name: !valentine ? icons.message : icons.valentine })}
             <div class="notification-content not-main">
                 ${sent_to ? html.node`
                     <div class="notification-context">
@@ -52927,7 +53083,7 @@
                     ${version.sku}
                     ${settings.dev ? html.node`
                         <span class="bleh-icon-container">
-                            ${icon({ name: "dev" })}
+                            ${icon({ name: icons.dev })}
                         </span>
                     ` : ""}
                 </div>
@@ -52944,7 +53100,7 @@
                     ${version.sku}
                     ${settings.dev ? html.node`
                         <span class="bleh-icon-container">
-                            ${icon({ name: "dev" })}
+                            ${icon({ name: icons.dev })}
                         </span>
                     ` : ""}
                 </div>
@@ -53234,12 +53390,12 @@
             <strong>${tl2(trans.inbox)}</strong>
             <div class="inbox-info">
                 <div class="inbox-info-item">
-                    ${icon({ name: "notifications", identifier: "inbox-tooltip" })}
+                    ${icon({ name: icons.notifications, identifier: "inbox-tooltip" })}
                     ${notif_count}
                 </div>
                 <div class="inbox-sep" />
                 <div class="inbox-info-item">
-                    ${icon({ name: "messages", identifier: "inbox-tooltip" })}
+                    ${icon({ name: icons.messages, identifier: "inbox-tooltip" })}
                     ${inbox_count}
                 </div>
             </div>
@@ -53253,7 +53409,7 @@
     tippy_esm_default(inbox, {
       content: html.node`
             <div class="window-header">
-                <div class="bleh-icon" data-type="inbox" style="--icon: var(--mask)" />
+                ${icon({ name: icons.inbox, identifier: "window_header" })}
                 <div class="window-title">${tl2(trans.inbox)}</div>
             </div>
             ${setting({ id: "inbox_view", func: render_inbox })}
@@ -53371,7 +53527,7 @@
       tippy_esm_default(music, {
         content: html.node`
                 <div class="window-header">
-                    <div class="bleh-icon" data-type="now-playing" style="--icon: var(--mask)" />
+                    ${icon({ name: icons.now_playing, identifier: "window_header" })}
                     <div class="window-title">${tl2(trans.music)}</div>
                 </div>
                 <div class="window-content music-status" ref=${(el) => status_container = el}>
@@ -53528,7 +53684,7 @@
                 ${update_required2 == "true" ? html.node`
                 <div class="update-available-banner">
                     <div class="update-container">
-                        <div class="bleh-icon" style="--icon: var(--icon-16-update)" />
+                        ${icon({ name: icons.update })}
                     </div>
                     <span>${tl2(trans.update_available_to_install)}</span>
                 </div>
@@ -56561,7 +56717,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                         </div>
                         <strong>
                             <span class="theme-name">
-                                ${icon({ name: `theme_${theme.id}`, identifier: "theme" })}
+                                ${icon({ name: icons[`theme_${theme.id}`], identifier: "theme" })}
                                 ${theme.name}
                             </span>
                             ${theme.new_release ? html.node`<div class="new-badge">${tl2(trans.new)}</div>` : ""}
@@ -62567,7 +62723,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
               check.check();
             });
           }} type="button">
-                            <div class="bleh-icon" data-type="select-all" style="--icon: var(--mask)" />
+                            ${icon({ name: icons.select_all })}
                             ${tl2(trans.select_all)}
                         </button>
                         <button class="btn flex-button" onclick=${() => {
@@ -62575,7 +62731,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
               check.uncheck();
             });
           }} type="button">
-                            <div class="bleh-icon" data-type="deselect-all" style="--icon: var(--mask)" />
+                            ${icon({ name: icons.deselect_all })}
                             ${tl2(trans.deselect_all)}
                         </button>
                     </div>
@@ -63190,7 +63346,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       title: "An error has occurred",
       body: html.node`
             <div class="modal-vertical-inner error-inner">
-                <div class="bleh-icon" style="--icon: var(--icon-error)"></div>
+                ${icon({ name: icons.error })}
                 <h1>oops.. something broke</h1>
                 <p>An error prevented ${version.brand} from finishing loading, it's recommended to leave the page and refresh.</p>
                 <pre class="error-info colourful">${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""}${e4.stack ? html.node`<br><span class="error-stack">${e4.stack}</span>` : ""}<br>on: ${page.type}/${page.subpage}<br>    ${window.location.pathname}<br>    ${version.build} (${version.sku})</pre>
@@ -75551,7 +75707,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-02-25"
       }
     },
-    built_on: "2026-03-10T14:18:08.642Z"
+    built_on: "2026-03-10T14:48:14.788Z"
   };
 
   // node_modules/@kurkle/color/dist/color.esm.js

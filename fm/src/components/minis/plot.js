@@ -4,7 +4,7 @@ import { render_user } from "@/pages/home/minis";
 import { tl, trans } from "@/build/trans";
 import { dialog, dialog_rm } from "@/components/dialog/dialog";
 import { input } from "@/components/settings/input";
-import { icon } from "../shared/icon";
+import { icon, icons } from "../shared/icon";
 
 export function plot({ host, sidebar } = {}) {
     if (!host || !sidebar) return;
@@ -39,7 +39,7 @@ export function plot({ host, sidebar } = {}) {
                     render_users();
                 }}>
                     ${user_placeholder(user)}
-                    ${icon({ name: 'minus' })}
+                    ${icon({ name: icons.minus })}
                 </button>
             `)}
             <button class="compare-user-btn add-user" onclick=${() => {
@@ -79,7 +79,7 @@ export function plot({ host, sidebar } = {}) {
                     render_users();
                 }
             }}>
-                ${icon({ name: 'plus' })}
+                ${icon({ name: icons.plus })}
             </button>
         `);
     }

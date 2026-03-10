@@ -60,7 +60,8 @@ function normalise_version(version) {
         },
         platform: 'browser',
         loader: {
-            '.css': 'text'
+            '.css': 'text',
+            '.svg': 'text'
         }
     };
 
@@ -75,7 +76,8 @@ function normalise_version(version) {
         },
         platform: 'browser',
         loader: {
-            '.css': 'text'
+            '.css': 'text',
+            '.svg': 'text'
         }
     };
 

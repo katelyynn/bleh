@@ -135,6 +135,7 @@
     ) !important;
     transition-duration: var(--trans) !important;
     transition-timing-function: var(--trans-function) !important;
+    contain: strict;
 }
 .icon-r:before,
 .select-button:not(.link-select):after,
@@ -163,6 +164,9 @@
     -webkit-mask-repeat: no-repeat;
     width: var(--icon-size, 18px);
     height: var(--icon-size, 18px);
+    contain: strict;
+
+    font-size: 0 !important;
 
     &.in-markdown {
         --icon-size: 14px;

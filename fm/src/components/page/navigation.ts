@@ -39,7 +39,7 @@ import { DateTime } from 'luxon';
 import { input } from '@/components/settings/input';
 import { bleh_message_list } from '@/components/inbox/messages';
 import { queue_popup } from '@/components/dialog/popup';
-import { icon } from '../shared/icon';
+import { icon, icons } from '../shared/icon';
 import { avatar } from '../shared/avatar';
 
 export function patch_masthead() {
@@ -114,7 +114,7 @@ export function update_masthead(
                     ${version.sku}
                     ${settings.dev ? html.node`
                         <span class="bleh-icon-container">
-                            ${icon({ name: 'dev' })}
+                            ${icon({ name: icons.dev })}
                         </span>
                     ` : ''}
                 </div>
@@ -131,7 +131,7 @@ export function update_masthead(
                     ${version.sku}
                     ${settings.dev ? html.node`
                         <span class="bleh-icon-container">
-                            ${icon({ name: 'dev' })}
+                            ${icon({ name: icons.dev })}
                         </span>
                     ` : ''}
                 </div>
@@ -477,12 +477,12 @@ export function append_nav() {
             <strong>${tl(trans.inbox)}</strong>
             <div class="inbox-info">
                 <div class="inbox-info-item">
-                    ${icon({ name: 'notifications', identifier: 'inbox-tooltip' })}
+                    ${icon({ name: icons.notifications, identifier: 'inbox-tooltip' })}
                     ${notif_count}
                 </div>
                 <div class="inbox-sep" />
                 <div class="inbox-info-item">
-                    ${icon({ name: 'messages', identifier: 'inbox-tooltip' })}
+                    ${icon({ name: icons.messages, identifier: 'inbox-tooltip' })}
                     ${inbox_count}
                 </div>
             </div>
@@ -500,7 +500,7 @@ export function append_nav() {
     tippy(inbox, {
         content: html.node`
             <div class="window-header">
-                <div class="bleh-icon" data-type="inbox" style="--icon: var(--mask)" />
+                ${icon({ name: icons.inbox, identifier: 'window_header' })}
                 <div class="window-title">${tl(trans.inbox)}</div>
             </div>
             ${setting({ id: 'inbox_view', func: render_inbox })}
@@ -615,7 +615,7 @@ export function append_nav() {
         tippy(music, {
             content: html.node`
                 <div class="window-header">
-                    <div class="bleh-icon" data-type="now-playing" style="--icon: var(--mask)" />
+                    ${icon({ name: icons.now_playing, identifier: 'window_header' })}
                     <div class="window-title">${tl(trans.music)}</div>
                 </div>
                 <div class="window-content music-status" ref=${el => status_container = el}>
@@ -837,7 +837,7 @@ export function append_nav() {
                 ${update_required == 'true' ? html.node`
                 <div class="update-available-banner">
                     <div class="update-container">
-                        <div class="bleh-icon" style="--icon: var(--icon-16-update)" />
+                        ${icon({ name: icons.update })}
                     </div>
                     <span>${tl(trans.update_available_to_install)}</span>
                 </div>

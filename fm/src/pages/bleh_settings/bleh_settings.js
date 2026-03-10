@@ -51,7 +51,7 @@ import { visual } from '@/pages/bleh_settings/visual';
 import { general } from '@/pages/bleh_settings/general';
 import { seasonal } from './seasonal';
 import { settings_search } from './search.js';
-import { icon } from '@/components/shared/icon.js';
+import { icon, icons } from '@/components/shared/icon.js';
 import { chartlist_bar } from '@/components/music/bar.js';
 import { avatar } from '@/components/shared/avatar.js';
 
@@ -2075,7 +2075,7 @@ export function theme_bubbles(func = null) {
                         </div>
                         <strong>
                             <span class="theme-name">
-                                ${icon({ name: `theme_${theme.id}`, identifier: 'theme' })}
+                                ${icon({ name: icons[`theme_${theme.id}`], identifier: 'theme' })}
                                 ${theme.name}
                             </span>
                             ${theme.new_release ? html.node`<div class="new-badge">${tl(trans.new)}</div>` : ''}

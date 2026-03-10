@@ -39,7 +39,7 @@ import { DateTime } from 'luxon';
 import { select } from '@/components/settings/select';
 import { save_setting, setting } from '@/components/settings/settings';
 import { input } from '@/components/settings/input';
-import { icon } from '../shared/icon';
+import { icon, icons } from '../shared/icon';
 
 export function oracle_process() {
     log('beginning', 'oracle');
@@ -2013,7 +2013,7 @@ export function manage_oracle_data() {
                 <div class="data-table-entry">
                     <div class="entry-header">
                         <strong class="entry-type">
-                            ${icon({ name: type })}
+                            ${icon({ name: icons[type] })}
                             ${type}
                         </strong>
                         <div class="entry-subdata">

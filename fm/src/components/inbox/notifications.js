@@ -10,6 +10,7 @@ import { correct_artist, correct_item_by_artist } from '@/components/music/lotus
 import { html, render } from 'lighterhtml';
 import { tl, trans } from '@/build/trans';
 import { patch_avatar } from '@/components/shared/avatar';
+import { icon, icons } from '../shared/icon';
 
 export function bleh_notification_list(list, mini = false) {
     list.classList = 'notification-list';
@@ -168,11 +169,7 @@ export function bleh_notification_list(list, mini = false) {
             notification,
             html`
                 <div class="notification-avatar">${avatar}</div>
-                <div
-                    class="bleh-icon"
-                    data-type=${type}
-                    style="--icon: var(--mask)"
-                />
+                ${icon({ name: icons[type] })}
                 <div class="notification-content">
                     <div class="notification-title">
                         ${type == 'shoutbox' ?
@@ -196,10 +193,7 @@ export function bleh_notification_list(list, mini = false) {
                         :   ''}
                     </div>
                     <div class="notification-context">
-                        <span
-                            class="bleh-icon"
-                            style="--icon: var(--icon-16-indent)"
-                        />
+                        ${icon({ name: icons.indent })}
                         <span
                             class="notification-type"
                             data-type=${context.type}

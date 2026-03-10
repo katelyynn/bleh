@@ -22,6 +22,7 @@ import { redirect } from '@/components/music/music';
 import tippy from 'tippy.js';
 import html2canvas from 'html2canvas-pro';
 import { load_profile_cache_externally } from '@/pages/profile/profile.js';
+import { icon, icons } from '../shared/icon';
 
 export function collage({ host, sidebar } = {}) {
     if (!host || !sidebar) return;
@@ -75,10 +76,7 @@ export function collage({ host, sidebar } = {}) {
                         min: min,
                         max: max
                     }))}
-                    <div
-                        class="bleh-icon"
-                        style="--icon: var(--icon-16-x)"
-                    />
+                    ${icon({ name: icons.x })}
                     ${(height = input({
                         type: 'number',
                         value: value,
