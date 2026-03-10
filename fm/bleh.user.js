@@ -52800,7 +52800,7 @@
         );
         patch_avatar(avatar3, involved[0]);
       } else if (href.endsWith("/listening-report/month")) {
-        type = "listening-report";
+        type = "listening_report";
         involved.push(strongs[0].textContent);
         let img = avatar3.querySelector("img");
         img.src = auth.avatar;
@@ -52888,7 +52888,7 @@
                     ` : html.node`
                         ${is_reply ? tl2(trans.users_replied).replace("{u}", involved.join(", ")).replace("{c}", others_included) : tl2(trans.users_commented).replace("{u}", involved.join(", ")).replace("{c}", others_included)}
                     `}
-                    ` : type == "obsession" ? tl2(trans.obsession_expired) : type == "listening-report" ? tl2(trans.listening_report_available).replace(
+                    ` : type == "obsession" ? tl2(trans.obsession_expired) : type == "listening_report" ? tl2(trans.listening_report_available).replace(
           "{m}",
           involved[0]
         ) : ""}

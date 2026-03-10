@@ -71,7 +71,7 @@ export function bleh_notification_list(list, mini = false) {
 
             patch_avatar(avatar, involved[0]);
         } else if (href.endsWith('/listening-report/month')) {
-            type = 'listening-report';
+            type = 'listening_report';
             involved.push(strongs[0].textContent);
 
             let img = avatar.querySelector('img');
@@ -185,7 +185,7 @@ export function bleh_notification_list(list, mini = false) {
                     }
                     `
                         : type == 'obsession' ? tl(trans.obsession_expired)
-                        : type == 'listening-report' ?
+                        : type == 'listening_report' ?
                             tl(trans.listening_report_available).replace(
                                 '{m}',
                                 involved[0]
