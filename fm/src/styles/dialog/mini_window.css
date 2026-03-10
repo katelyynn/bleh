@@ -12,9 +12,9 @@
     --mask-colour: oklch(var(--c1) / 80%);
 
     --icon-size: 16px;
+}
 
-    .window-title {
-        font-weight: var(--font-weight-medium);
-        cursor: default;
-    }
+.window-title {
+    font-weight: var(--font-weight-medium);
+    cursor: default;
 }
