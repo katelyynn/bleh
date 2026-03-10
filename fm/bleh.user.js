@@ -59263,7 +59263,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                             <div class="fill" style="width: ${bar_width}%" />
                         </div>
                     `;
-        bar_width * 0.9;
+        bar_width *= 0.75;
         return elem;
       }}
             </div>
@@ -59483,48 +59483,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
             </div>
             <h4>${tl2(trans.top_tracks)}</h4>
             <div class="inner-preview pad">
-                <div class="tracks">
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="artist"></div>
-                        <div class="bar">
-                            <div class="fill" style="width: 100%"></div>
-                        </div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="artist"></div>
-                        <div class="bar">
-                            <div class="fill" style="width: 85%"></div>
-                        </div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="artist"></div>
-                        <div class="bar">
-                            <div class="fill" style="width: 60%"></div>
-                        </div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="artist"></div>
-                        <div class="bar">
-                            <div class="fill" style="width: 30%"></div>
-                        </div>
-                    </div>
-                    <div class="track">
-                        <div class="cover"></div>
-                        <div class="title"></div>
-                        <div class="artist"></div>
-                        <div class="bar">
-                            <div class="fill" style="width: 5%"></div>
-                        </div>
-                    </div>
-                </div>
+                ${render_track_preview(false, true)}
             </div>
             <div class="setting-group">
                 <div class="setting" data-type="select">

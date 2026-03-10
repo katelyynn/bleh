@@ -27,7 +27,7 @@ export function render_track_preview(val: boolean, bar = false, art = true, has_
                         </div>
                     `;
 
-                    bar_width * 0.9;
+                    bar_width *= 0.75;
 
                     return elem;
                 }}
