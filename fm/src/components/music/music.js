@@ -1076,7 +1076,7 @@ export async function show_your_scrobbles() {
                     '.resource-external-link'
                 );
                 externals_links.forEach((link) => {
-                    link.classList.add('btn', 'music-link', 'colourful');
+                    link.classList.add('btn', 'music-link', 'colourful', 'icon');
 
                     let type = link.classList[1];
                     if (type == 'resource-external-link--homepage')

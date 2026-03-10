@@ -38,9 +38,10 @@ import { other_listener } from '@/components/profile/profile_shortcut';
 import { setting } from '@/components/settings/settings';
 import tippy from 'tippy.js';
 import { open_starred_friend_window } from '@/pages/profile/profile.js';
+import { page_header_avatar } from '@/components/music/header';
 
 export function bleh_artists() {
-    let artist_header = document.body.querySelector('.header-new--artist');
+    let artist_header = document.body.querySelector('.header-new--artist') as HTMLElement;
 
     page.name = artist_header.querySelector('.header-new-title').textContent;
     page.sister = '';
@@ -104,7 +105,7 @@ export function bleh_artists() {
     let featured_items = artist_header.querySelector('.artist-header-featured-items');
 
     if (ff('refreshed_music_nav')) {
-        let avatar = artist_header.querySelector('.header-new-background-image');
+        let avatar = artist_header.querySelector('.header-new-background-image') as HTMLElement;
         let title = artist_header.querySelector('.header-new-title');
         let on_tour = artist_header.querySelector('.header-new-on-tour');
         let position = artist_header.querySelector('.header-new-chart-position-number');
@@ -113,14 +114,11 @@ export function bleh_artists() {
 
         let multi_info_box;
         let redesigned_artist_header = html.node`
-            <section class="redesigned-header redesigned-artist-header no-background">
-                <div class="avatar-side">
-                    ${avatar ? html.node`
-                    <img src="${avatar.getAttribute('content').replace('/ar0/', '/avatar300s/')}">
-                    <a class="bleh--avatar-clickable-link"></a>
-                    ` : html.node`<img class="missing-artist">`}
+            <section class="page-header for-artist">
+                <div class="page-header-avatar-list">
+                    ${page_header_avatar(avatar.getAttribute('content'))}
                 </div>
-                <div class="info-side has-main-info">
+                <div class="page-header-info has-main-info">
                     <div class="main-info">
                         ${page.multi ? html.node`
                         <div class="sub-text">
@@ -138,9 +136,9 @@ export function bleh_artists() {
                         </div>
                     </div>
                     ${on_tour ? html.node`
-                    <div class="badges">
-                        ${on_tour}
-                    </div>
+                        <div class="badges">
+                            ${on_tour}
+                        </div>
                     ` : ''}
                 </div>
             </section>
@@ -166,54 +164,6 @@ export function bleh_artists() {
             page.structure.container.firstElementChild
         );
         artist_header.classList.add('legacy-header');
-
-        let avatar_side = redesigned_artist_header.querySelector('.avatar-side');
-        let avatar_link = avatar_side.querySelector('a');
-
-        if (avatar != null && avatar_link != null) {
-            if (settings.default_avatar_action == 'expand' && avatar != null)
-                avatar_link.setAttribute(
-                    'onclick',
-                    `_expand_avatar('${avatar.getAttribute('content')}')`
-                );
-            else if (settings.default_avatar_action == 'gallery')
-                avatar_link.href = `${root}music/${redirect()}${sanitise(page.name)}/+images`;
-
-            let menu = tippy(avatar_side, {
-                theme: 'context-menu',
-                content: html.node`
-                    ${
-                        avatar != null ?
-                            html.node`
-                    <button class="dropdown-menu-clickable-item" onclick=${() => expand_avatar(avatar.getAttribute('content'))} data-menu-item="expand">
-                        ${tl(trans.expand)}
-                    </button>
-                    `
-                        :   ''
-                    }
-                    <a class="dropdown-menu-clickable-item" href="${root}music/${redirect()}${sanitise(page.name)}/+images" data-menu-item="gallery">
-                        ${tl(trans.photos)}
-                    </a>
-                    <div class="sep"></div>
-                    <a class="dropdown-menu-clickable-item" href="${root}bleh/customise" data-menu-item="settings">
-                        ${tl(trans.settings)}
-                    </a>
-                `,
-                placement: 'right-start',
-                trigger: 'manual',
-                interactive: true,
-                interactiveBorder: 10,
-                offset: [0, 0],
-
-                onShow(instance) {
-                    instance.popper.addEventListener('click', (event) => {
-                        instance.hide();
-                    });
-                }
-            });
-
-            register_menu(avatar_side, menu);
-        }
     }
 
     if (!is_subpage) {

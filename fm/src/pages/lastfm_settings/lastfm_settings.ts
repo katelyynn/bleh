@@ -696,7 +696,7 @@ function bleh_website() {
                                 <h5>${tl(trans.location.name)}</h5>
                                 <p>${tl(trans.location.body)}</p>
                             </div>
-                            <div class="toggle-wrap">
+                            <div>
                                 ${location}
                             </div>
                         </div>
@@ -801,7 +801,7 @@ function bleh_applications() {
             const form = session.querySelector('form');
 
             const button = form.querySelector('button');
-            button.classList.add('chibi');
+            button.classList.add('btn', 'api-session-button', 'icon-mask', 'chibi');
 
             tippy(button, {
                 content: button.textContent

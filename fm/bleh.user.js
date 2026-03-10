@@ -48792,7 +48792,7 @@
             ".resource-external-link"
           );
           externals_links.forEach((link) => {
-            link.classList.add("btn", "music-link", "colourful");
+            link.classList.add("btn", "music-link", "colourful", "icon");
             let type = link.classList[1];
             if (type == "resource-external-link--homepage")
               link.textContent = tl2(trans.website);
@@ -57923,7 +57923,65 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     });
   }
 
-  // src/pages/artist.js
+  // src/components/music/header.ts
+  function page_header_avatar(url) {
+    const supports_gallery = ["artist", "album"].includes(page.type);
+    let link = sanitise(page.name);
+    if (page.type != "artist")
+      link = `${sanitise(page.sister)}/${sanitise(page.name)}`;
+    let action = "expand";
+    if (supports_gallery)
+      action = settings.default_avatar_action;
+    const elem = html.node`
+        <div class="page-header-avatar" onclick=${() => {
+      if (!url) return;
+      if (action == "expand") {
+        expand_avatar(avatar(url, "ar0"));
+      } else if (action == "gallery") {
+        open(`${root}music/${redirect()}${link}/+images`);
+      }
+    }}>
+            ${url ? html.node`
+                <img src=${avatar(url, "avatar300s")}>
+            ` : html.node`
+                <div class="missing-${page.type}" />
+            `}
+        </div>
+    `;
+    const menu = tippy_esm_default(elem, {
+      theme: "context-menu",
+      content: html.node`
+            ${url ? html.node`
+                <button class="dropdown-menu-clickable-item" data-type="expand" onclick=${() => expand_avatar(avatar(url, "ar0"))}>
+                    ${tl2(trans.expand)}
+                </button>
+            ` : ""}
+            ${supports_gallery ? html.node`
+                <a class="dropdown-menu-clickable-item" data-type="gallery" href="${root}music/${redirect()}${link}/+images">
+                    ${tl2(trans.photos)}
+                </a>
+                <div class="sep"></div>
+                <a class="dropdown-menu-clickable-item" href="${root}bleh/customise" data-menu-item="settings">
+                    ${tl2(trans.settings)}
+                </a>
+            ` : ""}
+        `,
+      placement: "right-start",
+      trigger: "manual",
+      interactive: true,
+      interactiveBorder: 10,
+      offset: [0, 0],
+      onShow(instance) {
+        instance.popper.addEventListener("click", (event3) => {
+          instance.hide();
+        });
+      }
+    });
+    register_menu(elem, menu);
+    return elem;
+  }
+
+  // src/pages/artist.ts
   function bleh_artists() {
     let artist_header = document.body.querySelector(".header-new--artist");
     page.name = artist_header.querySelector(".header-new-title").textContent;
@@ -57978,14 +58036,11 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       if (on_tour) on_tour.classList.add("label", "no-hover", "expand");
       let multi_info_box;
       let redesigned_artist_header = html.node`
-            <section class="redesigned-header redesigned-artist-header no-background">
-                <div class="avatar-side">
-                    ${avatar3 ? html.node`
-                    <img src="${avatar3.getAttribute("content").replace("/ar0/", "/avatar300s/")}">
-                    <a class="bleh--avatar-clickable-link"></a>
-                    ` : html.node`<img class="missing-artist">`}
+            <section class="page-header for-artist">
+                <div class="page-header-avatar-list">
+                    ${page_header_avatar(avatar3.getAttribute("content"))}
                 </div>
-                <div class="info-side has-main-info">
+                <div class="page-header-info has-main-info">
                     <div class="main-info">
                         ${page.multi ? html.node`
                         <div class="sub-text">
@@ -58003,9 +58058,9 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                         </div>
                     </div>
                     ${on_tour ? html.node`
-                    <div class="badges">
-                        ${on_tour}
-                    </div>
+                        <div class="badges">
+                            ${on_tour}
+                        </div>
                     ` : ""}
                 </div>
             </section>
@@ -58027,45 +58082,6 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         page.structure.container.firstElementChild
       );
       artist_header.classList.add("legacy-header");
-      let avatar_side = redesigned_artist_header.querySelector(".avatar-side");
-      let avatar_link = avatar_side.querySelector("a");
-      if (avatar3 != null && avatar_link != null) {
-        if (settings.default_avatar_action == "expand" && avatar3 != null)
-          avatar_link.setAttribute(
-            "onclick",
-            `_expand_avatar('${avatar3.getAttribute("content")}')`
-          );
-        else if (settings.default_avatar_action == "gallery")
-          avatar_link.href = `${root}music/${redirect()}${sanitise(page.name)}/+images`;
-        let menu = tippy_esm_default(avatar_side, {
-          theme: "context-menu",
-          content: html.node`
-                    ${avatar3 != null ? html.node`
-                    <button class="dropdown-menu-clickable-item" onclick=${() => expand_avatar(avatar3.getAttribute("content"))} data-menu-item="expand">
-                        ${tl2(trans.expand)}
-                    </button>
-                    ` : ""}
-                    <a class="dropdown-menu-clickable-item" href="${root}music/${redirect()}${sanitise(page.name)}/+images" data-menu-item="gallery">
-                        ${tl2(trans.photos)}
-                    </a>
-                    <div class="sep"></div>
-                    <a class="dropdown-menu-clickable-item" href="${root}bleh/customise" data-menu-item="settings">
-                        ${tl2(trans.settings)}
-                    </a>
-                `,
-          placement: "right-start",
-          trigger: "manual",
-          interactive: true,
-          interactiveBorder: 10,
-          offset: [0, 0],
-          onShow(instance) {
-            instance.popper.addEventListener("click", (event3) => {
-              instance.hide();
-            });
-          }
-        });
-        register_menu(avatar_side, menu);
-      }
     }
     if (!is_subpage) {
       show_your_scrobbles();
@@ -60825,7 +60841,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                                 <h5>${tl2(trans.location.name)}</h5>
                                 <p>${tl2(trans.location.body)}</p>
                             </div>
-                            <div class="toggle-wrap">
+                            <div>
                                 ${location}
                             </div>
                         </div>
@@ -60919,7 +60935,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         const details = session.querySelector(".api-session-details");
         const form = session.querySelector("form");
         const button2 = form.querySelector("button");
-        button2.classList.add("chibi");
+        button2.classList.add("btn", "api-session-button", "icon-mask", "chibi");
         tippy_esm_default(button2, {
           content: button2.textContent
         });
@@ -75551,7 +75567,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-02-25"
       }
     },
-    built_on: "2026-03-10T14:48:14.788Z"
+    built_on: "2026-03-10T19:44:55.849Z"
   };
 
   // node_modules/@kurkle/color/dist/color.esm.js
