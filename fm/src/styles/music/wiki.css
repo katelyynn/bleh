@@ -107,7 +107,7 @@
 
 .metadata-and-wiki-row {
     gap: var(--card-padding);
-    margin: unset;
+    margin: unset !important;
     position: relative;
 
     &:before {
