@@ -34926,24 +34926,26 @@
         );
       if (func && bubble) {
         func(selected);
-        menu.hide();
       }
-      menu.setContent(html.node`
-            ${values.map((value) => {
-        if (value.value == null) {
+      menu.hide();
+      setTimeout(() => {
+        menu.setContent(html.node`
+                ${values.map((value) => {
+          if (value.value == null) {
+            return html.node`
+                            <div class="select-header">
+                                ${value.text}
+                            </div>
+                        `;
+          }
           return html.node`
-                        <div class="select-header">
+                        <button class="btn dropdown-menu-clickable-item select-item" aria-checked=${selected == value.value} onclick=${() => set_select(value.value)}>
                             ${value.text}
-                        </div>
+                        </button>
                     `;
-        }
-        return html.node`
-                    <button class="btn dropdown-menu-clickable-item select-item" aria-checked=${selected == value.value} onclick=${() => set_select(value.value)}>
-                        ${value.text}
-                    </button>
-                `;
-      })}
-        `);
+        })}
+            `);
+      }, 300);
     }
   }
   function select_prepare(element) {
@@ -60303,7 +60305,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       let name = item.querySelector("td").textContent.trim();
       let form2 = item.querySelector("form");
       let button2 = form2.querySelector("button");
-      button2.classList.add("btn", "icon", "chibi", "danger-subtle", "list-action");
+      button2.classList.add("btn", "icon", "chibi", "danger-subtle", "list-action", "colourful");
       button2.setAttribute("data-type", "x");
       tippy_esm_default(button2, {
         content: tl2(trans.remove)
@@ -60361,20 +60363,14 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
             </div>
         </div>
         ${alert2}
-        <div class="setting" data-type="text">
-            <div class="heading">
-                <h5>${tl2(trans.profile)}</h5>
-                <form
-                    action="${root}settings/privacy#ignorelist"
-                    name="ignorelist"
-                    method="post"
-                >
-                    <input
-                        type="hidden"
-                        name="csrfmiddlewaretoken"
-                        value=${page.token}
-                    />
-                    <div class="input-container">
+        <form action="${root}settings/privacy#ignorelist" name="ignorelist" method="post">
+            <input type="hidden" name="csrfmiddlewaretoken" value=${page.token} />
+            <div class="setting-group">
+                <div class="setting v" data-type="text">
+                    <div class="heading">
+                        <h5>${tl2(trans.profile)}</h5>
+                    </div>
+                    <div class="input-container content-form">
                         <input
                             type="text"
                             maxlength="80"
@@ -60393,20 +60389,20 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                             value="ignorelist"
                         />
                         <button
-                            class="btn primary icon block"
+                            class="btn primary icon block colourful danger-subtle"
                             type="submit"
                         >
                             ${tl2(trans.block)}
                         </button>
                     </div>
-                </form>
+                </div>
             </div>
+        </form>
+        <div class="setting-group">
+            ${new_list}
         </div>
         <div class="alert alert-info">
             ${tl2(trans.blocked_count, { c: amount })}
-        </div>
-        <div class="setting-group">
-            ${new_list}
         </div>
         <div class="sep" />
         <h5>${tl2(trans.when_blocked)}</h5>

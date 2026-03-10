@@ -136,26 +136,29 @@ export function select({
 
         if (func && bubble) {
             func(selected);
-            menu.hide();
         }
 
-        menu.setContent(html.node`
-            ${values.map((value) => {
-                if (value.value == null) {
-                    return html.node`
-                        <div class="select-header">
-                            ${value.text}
-                        </div>
-                    `;
-                }
+        menu.hide();
 
-                return html.node`
-                    <button class="btn dropdown-menu-clickable-item select-item" aria-checked=${selected == value.value} onclick=${() => set_select(value.value)}>
-                        ${value.text}
-                    </button>
-                `;
-            })}
-        `);
+        setTimeout(() => {
+            menu.setContent(html.node`
+                ${values.map((value) => {
+                    if (value.value == null) {
+                        return html.node`
+                            <div class="select-header">
+                                ${value.text}
+                            </div>
+                        `;
+                    }
+
+                    return html.node`
+                        <button class="btn dropdown-menu-clickable-item select-item" aria-checked=${selected == value.value} onclick=${() => set_select(value.value)}>
+                            ${value.text}
+                        </button>
+                    `;
+                })}
+            `);
+        }, 300);
     }
 }
 

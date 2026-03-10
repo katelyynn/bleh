@@ -130,7 +130,7 @@ function bleh_communication_panel(token) {
         let form = item.querySelector('form');
         let button = form.querySelector('button');
 
-        button.classList.add('btn', 'icon', 'chibi', 'danger-subtle', 'list-action');
+        button.classList.add('btn', 'icon', 'chibi', 'danger-subtle', 'list-action', 'colourful');
         button.setAttribute('data-type', 'x');
         tippy(button, {
             content: tl(trans.remove)
@@ -201,20 +201,14 @@ function bleh_communication_panel(token) {
             </div>
         </div>
         ${alert}
-        <div class="setting" data-type="text">
-            <div class="heading">
-                <h5>${tl(trans.profile)}</h5>
-                <form
-                    action="${root}settings/privacy#ignorelist"
-                    name="ignorelist"
-                    method="post"
-                >
-                    <input
-                        type="hidden"
-                        name="csrfmiddlewaretoken"
-                        value=${page.token}
-                    />
-                    <div class="input-container">
+        <form action="${root}settings/privacy#ignorelist" name="ignorelist" method="post">
+            <input type="hidden" name="csrfmiddlewaretoken" value=${page.token} />
+            <div class="setting-group">
+                <div class="setting v" data-type="text">
+                    <div class="heading">
+                        <h5>${tl(trans.profile)}</h5>
+                    </div>
+                    <div class="input-container content-form">
                         <input
                             type="text"
                             maxlength="80"
@@ -233,20 +227,20 @@ function bleh_communication_panel(token) {
                             value="ignorelist"
                         />
                         <button
-                            class="btn primary icon block"
+                            class="btn primary icon block colourful danger-subtle"
                             type="submit"
                         >
                             ${tl(trans.block)}
                         </button>
                     </div>
-                </form>
+                </div>
             </div>
+        </form>
+        <div class="setting-group">
+            ${new_list}
         </div>
         <div class="alert alert-info">
             ${tl(trans.blocked_count, { c: amount })}
-        </div>
-        <div class="setting-group">
-            ${new_list}
         </div>
         <div class="sep" />
         <h5>${tl(trans.when_blocked)}</h5>

@@ -1,11 +1,11 @@
 .user-top-panel {
     padding: calc(var(--card-gap) * 2) calc(var(--card-gap) * 6);
-    background: oklch(var(--b6), 70%);
+    background: oklch(var(--b6) / 70%);
+    padding: var(--card-gap);
     border-radius: var(--item-med-radius);
-    user-select: none;
-
     border: 1px solid transparent;
-    box-shadow: var(--input-shadow);
+    overflow: hidden;
+    user-select: none;
 
     display: flex;
     justify-content: center;

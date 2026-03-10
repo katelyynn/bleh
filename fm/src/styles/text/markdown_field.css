@@ -50,37 +50,42 @@
             height: 70px !important;
         }
     }
+}
 
-    .markdown-field-text {
-        position: relative;
-        --padding: var(--button-verts) calc(var(--button-sides) + (var(--button-height) - var(--icon-size)) / 2);
+.markdown-field-text {
+    position: relative;
+    --padding: var(--button-verts) calc(var(--button-sides) + (var(--button-height) - var(--icon-size)) / 2);
 
-        .markdown-field-overlay {
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
+    & > .content-form {
+        width: 100% !important;
+        margin: unset !important;
 
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            overflow: hidden;
-            padding: var(--padding);
-        }
+        & > textarea {
+            --bg-hov: transparent !important;
+            --bg-atv: transparent !important;
 
-        & > .content-form {
-            width: 100% !important;
-            margin: unset !important;
+            background: unset !important;
+            box-shadow: none !important;
+            color: transparent !important;
+            caret-color: oklch(var(--c2));
 
-            & > textarea {
-                background: unset !important;
-                box-shadow: none !important;
-                color: transparent !important;
-                caret-color: oklch(var(--c2));
-
-                z-index: 10;
-            }
+            z-index: 10;
         }
     }
 }
+.markdown-field-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow: hidden;
+    padding: var(--padding);
+
+    z-index: 20;
+}
+
 .markdown-actions {
     display: flex;
     align-items: center;
