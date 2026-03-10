@@ -1033,7 +1033,7 @@ export function bleh_glacier_date_graph_generate() {
     let scrobble_canvas_container = page.structure.glacier.date_panel.querySelector('.scrobble-canvas-container');
     if (scrobble_canvas_container == null) {
         scrobble_canvas_container = document.createElement('div');
-        scrobble_canvas_container.classList.add('scrobble-canvas-container');
+        scrobble_canvas_container.classList.add('scrobble-canvas-container', 'icon-mask');
         new_run = true;
     } else {
         scrobble_canvas_container.innerHTML = '';

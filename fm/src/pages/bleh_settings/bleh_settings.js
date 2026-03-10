@@ -581,7 +581,7 @@ export async function render_setting_page(page_id) {
                 <h4>${tl(trans.music_corrections)}</h4>
                 <div class="inner-preview pad">
                     <div class="lotus-preview">
-                        <div class="lotus-preview-inner before">
+                        <div class="lotus-preview-inner before icon-mask">
                             <h1 class="lotus-preview-header">mY aNtI-aIrCrAfT fRiEnD</h1>
                             <h2 class="lotus-preview-sub">jUlIe</h2>
                         </div>
@@ -1592,7 +1592,7 @@ export function prepare_corrections_page() {
                 <div class="primary-name pre-transition">
                     <h5>${artist}</h5>
                 </div>
-                <div class="arrow-divider"></div>
+                <div class="arrow-divider icon-mask"></div>
                 <div class="primary-name post-transition">
                     <h5>${artist_corrections[artist]}</h5>
                 </div>
@@ -1620,7 +1620,7 @@ export function prepare_corrections_page() {
                     <div class="primary-name pre-transition">
                         <h5>${media}</h5>
                     </div>
-                    <div class="arrow-divider"></div>
+                    <div class="arrow-divider icon-mask"></div>
                     <div class="primary-name post-transition">
                         <h5>${album_track_corrections[artist][media]}</h5>
                     </div>

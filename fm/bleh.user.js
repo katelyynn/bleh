@@ -5591,7 +5591,7 @@
           }(ElementContainer)
         );
         var LIST_OWNERS = ["OL", "UL", "MENU"];
-        var parseNodeTree = function(context, node, parent, root2) {
+        var parseNodeTree = function(context, node, parent, root3) {
           for (var childNode = node.firstChild, nextNode = void 0; childNode; childNode = nextNode) {
             nextNode = childNode.nextSibling;
             if (isTextNode(childNode) && childNode.data.length > 0) {
@@ -5599,12 +5599,12 @@
             } else if (isElementNode(childNode)) {
               if (isSlotElement(childNode) && childNode.assignedNodes) {
                 childNode.assignedNodes().forEach(function(childNode2) {
-                  return parseNodeTree(context, childNode2, parent, root2);
+                  return parseNodeTree(context, childNode2, parent, root3);
                 });
               } else {
                 var container = createContainer(context, childNode);
                 if (container.styles.isVisible()) {
-                  if (createsRealStackingContext(childNode, container, root2)) {
+                  if (createsRealStackingContext(childNode, container, root3)) {
                     container.flags |= 4;
                   } else if (createsStackingContext(container.styles)) {
                     container.flags |= 2;
@@ -5615,9 +5615,9 @@
                   parent.elements.push(container);
                   childNode.slot;
                   if (childNode.shadowRoot) {
-                    parseNodeTree(context, childNode.shadowRoot, container, root2);
+                    parseNodeTree(context, childNode.shadowRoot, container, root3);
                   } else if (!isTextareaElement(childNode) && !isSVGElement(childNode) && !isSelectElement(childNode)) {
-                    parseNodeTree(context, childNode, container, root2);
+                    parseNodeTree(context, childNode, container, root3);
                   }
                 }
               }
@@ -5660,8 +5660,8 @@
           parseNodeTree(context, element, container, container);
           return container;
         };
-        var createsRealStackingContext = function(node, container, root2) {
-          return container.styles.isPositionedWithZIndex() || container.styles.opacity < 1 || container.styles.isTransformed() || isBodyElement(node) && root2.styles.isTransparent();
+        var createsRealStackingContext = function(node, container, root3) {
+          return container.styles.isPositionedWithZIndex() || container.styles.opacity < 1 || container.styles.isTransformed() || isBodyElement(node) && root3.styles.isTransparent();
         };
         var createsStackingContext = function(styles) {
           return styles.isPositioned() || styles.isFloating();
@@ -7265,11 +7265,11 @@
         };
         var parseStackingContexts = function(container) {
           var paintContainer = new ElementPaint(container, null);
-          var root2 = new StackingContext(paintContainer);
+          var root3 = new StackingContext(paintContainer);
           var listItems = [];
-          parseStackTree(paintContainer, root2, root2, listItems);
+          parseStackTree(paintContainer, root3, root3, listItems);
           processListItems(paintContainer.container, listItems);
-          return root2;
+          return root3;
         };
         var parsePathForBorder = function(curves, borderSide) {
           switch (borderSide) {
@@ -8784,7 +8784,7 @@
         }
         var renderElement = function(element, opts) {
           return __awaiter(void 0, void 0, void 0, function() {
-            var ownerDocument, defaultView, resourceOptions, contextOptions, windowOptions, windowBounds, context, foreignObjectRendering, cloneOptions, documentCloner, clonedElement, container, _a2, width, height, left2, top2, backgroundColor2, renderOptions, canvas, renderer, root2, renderer;
+            var ownerDocument, defaultView, resourceOptions, contextOptions, windowOptions, windowBounds, context, foreignObjectRendering, cloneOptions, documentCloner, clonedElement, container, _a2, width, height, left2, top2, backgroundColor2, renderOptions, canvas, renderer, root3, renderer;
             var _b2, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t;
             return __generator(this, function(_u) {
               switch (_u.label) {
@@ -8854,13 +8854,13 @@
                 case 3:
                   context.logger.debug("Document cloned, element located at ".concat(left2, ",").concat(top2, " with size ").concat(width, "x").concat(height, " using computed rendering"));
                   context.logger.debug("Starting DOM parsing");
-                  root2 = parseTree(context, clonedElement);
-                  if (backgroundColor2 === root2.styles.backgroundColor) {
-                    root2.styles.backgroundColor = COLORS.TRANSPARENT;
+                  root3 = parseTree(context, clonedElement);
+                  if (backgroundColor2 === root3.styles.backgroundColor) {
+                    root3.styles.backgroundColor = COLORS.TRANSPARENT;
                   }
                   context.logger.debug("Starting renderer for element at ".concat(renderOptions.x, ",").concat(renderOptions.y, " with size ").concat(renderOptions.width, "x").concat(renderOptions.height));
                   renderer = new CanvasRenderer(context, renderOptions);
-                  return [4, renderer.render(root2)];
+                  return [4, renderer.render(root3)];
                 case 4:
                   canvas = _u.sent();
                   _u.label = 5;
@@ -12508,7 +12508,7 @@
           txt = txt.replace(/^ {0,3}\[([\S \t]*?)]:/gm, "\\[$1]:");
           return txt;
         });
-        var root2 = this;
+        var root3 = this;
         if (typeof define === "function" && define.amd) {
           define(function() {
             "use strict";
@@ -12517,7 +12517,7 @@
         } else if (typeof module !== "undefined" && module.exports) {
           module.exports = showdown2;
         } else {
-          root2.showdown = showdown2;
+          root3.showdown = showdown2;
         }
       }).call(exports);
     }
@@ -15403,10 +15403,10 @@
     return function createContent2(markup, type) {
       return (type === "svg" ? createSVG : createHTML)(markup);
     };
-    function append(root2, childNodes) {
+    function append(root3, childNodes) {
       var length = childNodes.length;
       while (length--)
-        root2.appendChild(childNodes[0]);
+        root3.appendChild(childNodes[0]);
     }
     function create3(element) {
       return element === FRAGMENT ? document2.createDocumentFragment() : document2.createElementNS("http://www.w3.org/1999/xhtml", element);
@@ -18985,7 +18985,7 @@
   });
   var tippy_esm_default = tippy;
 
-  // src/build/page.js
+  // src/build/page.ts
   var reload_pending = {
     state: false
   };
@@ -20353,7 +20353,7 @@
             <div class="notification-actions">
                 ${actions.length > 0 ? actions.map((action) => () => {
       let button2 = html.node`
-                        <button class="btn notification-action" data-type=${action.type} onclick=${action.action}>${action.text}</button>
+                        <button class="btn notification-action icon-mask" data-type=${action.type} onclick=${action.action}>${action.text}</button>
                     `;
       tippy_esm_default(button2, {
         content: action.text
@@ -20648,7 +20648,7 @@
   }
   var mergeWithDefaultOptions = (opts = {}) => Object.assign({}, DEFAULT_OPTIONS2, opts);
   function applyMapping(string, mapping, convertEnding) {
-    const root2 = mapping;
+    const root3 = mapping;
     function nextSubtree(tree, nextChar) {
       const subtree = tree[nextChar];
       if (subtree === void 0) {
@@ -20658,7 +20658,7 @@
     }
     function newChunk(remaining, currentCursor) {
       const firstChar = remaining.charAt(0);
-      return parse5(Object.assign({ "": firstChar }, root2[firstChar]), remaining.slice(1), currentCursor, currentCursor + 1);
+      return parse5(Object.assign({ "": firstChar }, root3[firstChar]), remaining.slice(1), currentCursor, currentCursor + 1);
     }
     function parse5(tree, remaining, lastCursor, currentCursor) {
       if (!remaining) {
@@ -36006,7 +36006,7 @@
           loved.classList.add("colourful");
           loved.setAttribute("data-season", season);
           const love = loved.querySelector(".chartlist-love-button");
-          love.classList.add("btn");
+          love.classList.add("btn", "icon-mask");
           tippy_esm_default(love, {
             content: tl2(trans.love_track)
           });
@@ -37197,11 +37197,11 @@
                     <a class="link-block-cover-link" href="${root}user/${obsession_author}"></a>
                 </div>
                 ${scrobbles ? html.node`
-                <div class="obsession-listens">
+                <div class="obsession-listens icon-mask">
                     ${html.node([scrobbles.innerHTML])}
                 </div>
                 ` : ""}
-                <div class="obsession-date">
+                <div class="obsession-date icon-mask">
                     ${date.textContent}
                 </div>
             </div>
@@ -37844,21 +37844,21 @@
       let listen_container = html.node`
             <section class="listen-panel listen-profile-panel">
                 <div class="listener-row">
-                    <div class="listener-row-item scrobble-side">
+                    <div class="listener-row-item scrobble-side icon-mask">
                         <h3>${tl2(trans.scrobbles)}</h3>
                         <p ref=${(el) => scrobble_text = el}><a href="${root}user/${page.name}/library">${scrobbles.toLocaleString(lang)}</a></p>
                     </div>
-                    <div class="listener-row-item artist-side">
+                    <div class="listener-row-item artist-side icon-mask">
                         <h3>${tl2(trans.artists)}</h3>
                         <p><a href="${root}user/${page.name}/library/artists">${artists.toLocaleString(lang)}</a></p>
                     </div>
-                    <div class="listener-row-item loved-side">
+                    <div class="listener-row-item loved-side icon-mask">
                         <h3>${tl2(trans.loved)}</h3>
                         <p><a href="${root}user/${page.name}/loved">${loved.toLocaleString(lang)}</a></p>
                     </div>
                 </div>
                 ${scrobbles > 0 ? html.node`
-                <div class="scrobble-canvas-container mini">
+                <div class="scrobble-canvas-container mini icon-mask">
                     <div class="loading-data-container">
                         <div class="loading-data-text">${tl2(trans.loading_count_days).replace("{c}", "90")}</div>
                     </div>
@@ -37872,7 +37872,7 @@
                     </a>
                 </div>
                 ` : auth.name ? html.node`
-                <div class="scrobble-canvas-container mini">
+                <div class="scrobble-canvas-container mini icon-mask">
                     <div class="loading-data-container">
                         <div class="loading-data-text failed">${tl2(trans.profile_does_not_have_enough_scrobbles)}</div>
                     </div>
@@ -44047,7 +44047,7 @@
     let scrobble_canvas_container = page.structure.glacier.date_panel.querySelector(".scrobble-canvas-container");
     if (scrobble_canvas_container == null) {
       scrobble_canvas_container = document.createElement("div");
-      scrobble_canvas_container.classList.add("scrobble-canvas-container");
+      scrobble_canvas_container.classList.add("scrobble-canvas-container", "icon-mask");
       new_run = true;
     } else {
       scrobble_canvas_container.innerHTML = "";
@@ -47396,7 +47396,7 @@
     return user;
   }
 
-  // src/components/shared/shout.js
+  // src/components/shared/shout.ts
   function patch_shouts() {
     if (!page.structure.main) return;
     const use_md = settings.shout_markdown;
@@ -47407,9 +47407,7 @@
       shout_controls.setAttribute("data-shouts", "true");
       shout_header(shout_controls);
     }
-    let shouts = page.structure.main.querySelectorAll(
-      ".shout:not([data-kate-processed])"
-    );
+    let shouts = page.structure.main.querySelectorAll(".shout:not([data-kate-processed])");
     shouts.forEach((shout, index3) => {
       try {
         let vote_button = function() {
@@ -47424,6 +47422,7 @@
         };
         shout.setAttribute("data-kate-processed", "true");
         shout.style.setProperty("--delay", index3 * 0.04 + "s");
+        shout.classList.add("icon-mask");
         const shout_name = shout.querySelector(".shout-user > a");
         if (!shout_name) return;
         const shout_name_text = shout_name.textContent;
@@ -47436,6 +47435,7 @@
           style_name_from_badge(shout_name, badge);
         }
         const shout_body = shout.querySelector(".shout-body");
+        if (!shout_body) return;
         const shout_p = shout_body.querySelector("p");
         const shout_text = shout_p.textContent.trim();
         if (settings.shout_markdown) {
@@ -48863,16 +48863,16 @@
     panel.setAttribute("data-auth-name", auth.name);
     let row = html.node`
         <div class="listener-row">
-            <div class="listener-row-item listener-side">
+            <div class="listener-row-item listener-side icon-mask">
                 <h3>${listeners.text}</h3>
                 <p>${listeners.abbr}</p>
             </div>
-            <div class="listener-row-item scrobble-side">
+            <div class="listener-row-item scrobble-side icon-mask">
                 <h3>${scrobbles.text}</h3>
                 <p>${scrobbles.abbr}</p>
             </div>
             ${metascore.text ? html.node`
-            <div class="listener-row-item metascore-side">
+            <div class="listener-row-item metascore-side icon-mask">
                 <h3>${metascore.text}</h3>
                 <p><a href="${metascore.link}" target="_blank">${metascore.abbr}</a></p>
             </div>
@@ -49010,7 +49010,7 @@
     });
     prep_chart_colours();
     let scrobble_canvas_container = document.createElement("div");
-    scrobble_canvas_container.classList.add("scrobble-canvas-container");
+    scrobble_canvas_container.classList.add("scrobble-canvas-container", "icon-mask");
     let scrobble_canvas = document.createElement("canvas");
     scrobble_canvas.classList.add("scrobble-canvas");
     let gradient = scrobble_canvas.getContext("2d").createLinearGradient(0, 0, 0, 160);
@@ -49503,7 +49503,7 @@
   };
   function createDOMPurify() {
     let window2 = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : getGlobal();
-    const DOMPurify = (root2) => createDOMPurify(root2);
+    const DOMPurify = (root3) => createDOMPurify(root3);
     DOMPurify.version = "3.2.6";
     DOMPurify.removed = [];
     if (!window2 || !window2.document || window2.document.nodeType !== NODE_TYPE.document || !window2.Element) {
@@ -49884,10 +49884,10 @@
       }
       return WHOLE_DOCUMENT ? doc.documentElement : body;
     };
-    const _createNodeIterator = function _createNodeIterator2(root2) {
+    const _createNodeIterator = function _createNodeIterator2(root3) {
       return createNodeIterator.call(
-        root2.ownerDocument || root2,
-        root2,
+        root3.ownerDocument || root3,
+        root3,
         // eslint-disable-next-line no-bitwise
         NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_COMMENT | NodeFilter.SHOW_TEXT | NodeFilter.SHOW_PROCESSING_INSTRUCTION | NodeFilter.SHOW_CDATA_SECTION,
         null
@@ -50692,7 +50692,7 @@
           label = link_strings[link.host];
         }
         return html.node`
-                            <a class="btn music-link social-link colourful" href=${link.url} target="_blank" data-host=${link.host} data-host-unknown=${!link_strings.hasOwnProperty(link.host)} data-path=${link.path} style="--favi: url(https://icons.duckduckgo.com/ip3/${link.host}.ico)">
+                            <a class="btn music-link social-link colourful icon" href=${link.url} target="_blank" data-host=${link.host} data-host-unknown=${!link_strings.hasOwnProperty(link.host)} data-path=${link.path} style="--favi: url(https://icons.duckduckgo.com/ip3/${link.host}.ico)">
                                 ${label}
                             </a>
                         `;
@@ -55215,7 +55215,7 @@
                 <h4>${tl2(trans.music_corrections)}</h4>
                 <div class="inner-preview pad">
                     <div class="lotus-preview">
-                        <div class="lotus-preview-inner before">
+                        <div class="lotus-preview-inner before icon-mask">
                             <h1 class="lotus-preview-header">mY aNtI-aIrCrAfT fRiEnD</h1>
                             <h2 class="lotus-preview-sub">jUlIe</h2>
                         </div>
@@ -56107,7 +56107,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                 <div class="primary-name pre-transition">
                     <h5>${artist}</h5>
                 </div>
-                <div class="arrow-divider"></div>
+                <div class="arrow-divider icon-mask"></div>
                 <div class="primary-name post-transition">
                     <h5>${artist_corrections[artist]}</h5>
                 </div>
@@ -56129,7 +56129,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                     <div class="primary-name pre-transition">
                         <h5>${media}</h5>
                     </div>
-                    <div class="arrow-divider"></div>
+                    <div class="arrow-divider icon-mask"></div>
                     <div class="primary-name post-transition">
                         <h5>${album_track_corrections[artist][media]}</h5>
                     </div>
@@ -59174,20 +59174,20 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
             <div class="inner-preview pad">
                 <div class="item-grid artist">
                     <div class="grid-primary artist">
-                        <div class="grid-item"></div>
+                        <div class="grid-item icon-mask"></div>
                     </div>
                     <div class="grid-mains">
                         <div class="grid-main artist">
-                            <div class="grid-item grid-item--extra artist"></div>
-                            <div class="grid-item grid-item--extra artist"></div>
-                            <div class="grid-item"></div>
-                            <div class="grid-item"></div>
+                            <div class="grid-item icon-mask grid-item--extra artist"></div>
+                            <div class="grid-item icon-mask grid-item--extra artist"></div>
+                            <div class="grid-item icon-mask"></div>
+                            <div class="grid-item icon-mask"></div>
                         </div>
                         <div class="grid-main artist">
-                            <div class="grid-item grid-item--extra artist"></div>
-                            <div class="grid-item grid-item--extra artist"></div>
-                            <div class="grid-item"></div>
-                            <div class="grid-item"></div>
+                            <div class="grid-item icon-mask grid-item--extra artist"></div>
+                            <div class="grid-item icon-mask grid-item--extra artist"></div>
+                            <div class="grid-item icon-mask"></div>
+                            <div class="grid-item icon-mask"></div>
                         </div>
                     </div>
                 </div>
@@ -59257,20 +59257,20 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
             <div class="inner-preview pad">
                 <div class="item-grid album">
                     <div class="grid-primary album">
-                        <div class="grid-item"></div>
+                        <div class="grid-item icon-mask"></div>
                     </div>
                     <div class="grid-mains">
                         <div class="grid-main album">
-                            <div class="grid-item"></div>
-                            <div class="grid-item"></div>
-                            <div class="grid-item grid-item--extra album"></div>
-                            <div class="grid-item grid-item--extra album"></div>
+                            <div class="grid-item icon-mask"></div>
+                            <div class="grid-item icon-mask"></div>
+                            <div class="grid-item icon-maskgrid-item--extra album"></div>
+                            <div class="grid-item icon-mask grid-item--extra album"></div>
                         </div>
                         <div class="grid-main album">
-                            <div class="grid-item"></div>
-                            <div class="grid-item"></div>
-                            <div class="grid-item grid-item--extra album"></div>
-                            <div class="grid-item grid-item--extra album"></div>
+                            <div class="grid-item icon-mask"></div>
+                            <div class="grid-item icon-mask"></div>
+                            <div class="grid-item icon-mask grid-item--extra album"></div>
+                            <div class="grid-item icon-mask grid-item--extra album"></div>
                         </div>
                     </div>
                 </div>
@@ -59485,7 +59485,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                                 alt=${tl2(trans.your_avatar)}
                                 loading="lazy"
                             />
-                            <div class="avatar-overlay" />
+                            <div class="avatar-overlay icon-mask" />
                         </div>
                     </div>
                 </div>
@@ -75544,7 +75544,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-02-25"
       }
     },
-    built_on: "2026-03-10T00:24:30.216Z"
+    built_on: "2026-03-10T00:32:08.229Z"
   };
 
   // node_modules/@kurkle/color/dist/color.esm.js
@@ -76943,11 +76943,11 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     }
     return node;
   }
-  function set(root2, scope, values) {
+  function set(root3, scope, values) {
     if (typeof scope === "string") {
-      return merge(getScope$1(root2, scope), values);
+      return merge(getScope$1(root3, scope), values);
     }
-    return merge(getScope$1(root2, ""), scope);
+    return merge(getScope$1(root3, ""), scope);
   }
   var Defaults = class {
     constructor(_descriptors2, _appliers) {

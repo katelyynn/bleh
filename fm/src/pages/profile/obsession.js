@@ -231,13 +231,13 @@ export function bleh_obsession() {
                 ${
                     scrobbles ?
                         html.node`
-                <div class="obsession-listens">
+                <div class="obsession-listens icon-mask">
                     ${html.node([scrobbles.innerHTML])}
                 </div>
                 `
                     :   ''
                 }
-                <div class="obsession-date">
+                <div class="obsession-date icon-mask">
                     ${date.textContent}
                 </div>
             </div>

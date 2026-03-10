@@ -36,14 +36,14 @@ export function patch_shouts() {
         shout_header(shout_controls);
     }
 
-    let shouts = page.structure.main.querySelectorAll(
-        '.shout:not([data-kate-processed])'
-    );
+    let shouts = page.structure.main.querySelectorAll('.shout:not([data-kate-processed])') as NodeListOf<HTMLElement>;
 
     shouts.forEach((shout, index) => {
         try {
             shout.setAttribute('data-kate-processed', 'true');
             shout.style.setProperty('--delay', index * 0.04 + 's');
+
+            shout.classList.add('icon-mask');
 
             const shout_name = shout.querySelector('.shout-user > a');
             if (!shout_name) return;
@@ -63,6 +63,8 @@ export function patch_shouts() {
             }
 
             const shout_body = shout.querySelector('.shout-body');
+            if (!shout_body) return;
+
             const shout_p = shout_body.querySelector('p');
             const shout_text = shout_p.textContent.trim();
 

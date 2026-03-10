@@ -120,7 +120,7 @@ export function notify({
             <div class="notification-actions">
                 ${(actions.length > 0) ? actions.map(action => () => {
                     let button = html.node`
-                        <button class="btn notification-action" data-type=${action.type} onclick=${action.action}>${action.text}</button>
+                        <button class="btn notification-action icon-mask" data-type=${action.type} onclick=${action.action}>${action.text}</button>
                     `;
 
                     tippy(button, {

@@ -124,20 +124,20 @@ function charts_panel() {
             <div class="inner-preview pad">
                 <div class="item-grid artist">
                     <div class="grid-primary artist">
-                        <div class="grid-item"></div>
+                        <div class="grid-item icon-mask"></div>
                     </div>
                     <div class="grid-mains">
                         <div class="grid-main artist">
-                            <div class="grid-item grid-item--extra artist"></div>
-                            <div class="grid-item grid-item--extra artist"></div>
-                            <div class="grid-item"></div>
-                            <div class="grid-item"></div>
+                            <div class="grid-item icon-mask grid-item--extra artist"></div>
+                            <div class="grid-item icon-mask grid-item--extra artist"></div>
+                            <div class="grid-item icon-mask"></div>
+                            <div class="grid-item icon-mask"></div>
                         </div>
                         <div class="grid-main artist">
-                            <div class="grid-item grid-item--extra artist"></div>
-                            <div class="grid-item grid-item--extra artist"></div>
-                            <div class="grid-item"></div>
-                            <div class="grid-item"></div>
+                            <div class="grid-item icon-mask grid-item--extra artist"></div>
+                            <div class="grid-item icon-mask grid-item--extra artist"></div>
+                            <div class="grid-item icon-mask"></div>
+                            <div class="grid-item icon-mask"></div>
                         </div>
                     </div>
                 </div>
@@ -207,20 +207,20 @@ function charts_panel() {
             <div class="inner-preview pad">
                 <div class="item-grid album">
                     <div class="grid-primary album">
-                        <div class="grid-item"></div>
+                        <div class="grid-item icon-mask"></div>
                     </div>
                     <div class="grid-mains">
                         <div class="grid-main album">
-                            <div class="grid-item"></div>
-                            <div class="grid-item"></div>
-                            <div class="grid-item grid-item--extra album"></div>
-                            <div class="grid-item grid-item--extra album"></div>
+                            <div class="grid-item icon-mask"></div>
+                            <div class="grid-item icon-mask"></div>
+                            <div class="grid-item icon-maskgrid-item--extra album"></div>
+                            <div class="grid-item icon-mask grid-item--extra album"></div>
                         </div>
                         <div class="grid-main album">
-                            <div class="grid-item"></div>
-                            <div class="grid-item"></div>
-                            <div class="grid-item grid-item--extra album"></div>
-                            <div class="grid-item grid-item--extra album"></div>
+                            <div class="grid-item icon-mask"></div>
+                            <div class="grid-item icon-mask"></div>
+                            <div class="grid-item icon-mask grid-item--extra album"></div>
+                            <div class="grid-item icon-mask grid-item--extra album"></div>
                         </div>
                     </div>
                 </div>
@@ -448,7 +448,7 @@ function profile_panel() {
                                 alt=${tl(trans.your_avatar)}
                                 loading="lazy"
                             />
-                            <div class="avatar-overlay" />
+                            <div class="avatar-overlay icon-mask" />
                         </div>
                     </div>
                 </div>

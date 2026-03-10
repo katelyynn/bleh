@@ -421,21 +421,21 @@ export function bleh_profiles() {
         let listen_container = html.node`
             <section class="listen-panel listen-profile-panel">
                 <div class="listener-row">
-                    <div class="listener-row-item scrobble-side">
+                    <div class="listener-row-item scrobble-side icon-mask">
                         <h3>${tl(trans.scrobbles)}</h3>
                         <p ref=${(el) => (scrobble_text = el)}><a href="${root}user/${page.name}/library">${scrobbles.toLocaleString(lang)}</a></p>
                     </div>
-                    <div class="listener-row-item artist-side">
+                    <div class="listener-row-item artist-side icon-mask">
                         <h3>${tl(trans.artists)}</h3>
                         <p><a href="${root}user/${page.name}/library/artists">${artists.toLocaleString(lang)}</a></p>
                     </div>
-                    <div class="listener-row-item loved-side">
+                    <div class="listener-row-item loved-side icon-mask">
                         <h3>${tl(trans.loved)}</h3>
                         <p><a href="${root}user/${page.name}/loved">${loved.toLocaleString(lang)}</a></p>
                     </div>
                 </div>
                 ${scrobbles > 0 ? html.node`
-                <div class="scrobble-canvas-container mini">
+                <div class="scrobble-canvas-container mini icon-mask">
                     <div class="loading-data-container">
                         <div class="loading-data-text">${tl(trans.loading_count_days).replace('{c}', '90')}</div>
                     </div>
@@ -449,7 +449,7 @@ export function bleh_profiles() {
                     </a>
                 </div>
                 ` : auth.name ? html.node`
-                <div class="scrobble-canvas-container mini">
+                <div class="scrobble-canvas-container mini icon-mask">
                     <div class="loading-data-container">
                         <div class="loading-data-text failed">${tl(trans.profile_does_not_have_enough_scrobbles)}</div>
                     </div>

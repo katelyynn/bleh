@@ -1090,7 +1090,7 @@ export function patch_titles(search = page.structure.main) {
 
                 const love = loved.querySelector('.chartlist-love-button');
 
-                love.classList.add('btn');
+                love.classList.add('btn', 'icon-mask');
                 tippy(love, {
                     content: tl(trans.love_track)
                 });

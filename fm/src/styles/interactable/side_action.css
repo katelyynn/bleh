@@ -84,6 +84,10 @@
         transition-timing-function: var(--trans-function);
     }
 
+    &:after {
+        display: none !important;
+    }
+
     &.side-action,
     &.listening-report-promo {
         &:before {
@@ -104,7 +108,7 @@
         --right: 0;
         padding-right: calc(12px + 4px) !important;
 
-        &:before {
+        &:after {
             transform: unset !important;
             filter: unset !important;
             transition: unset !important;

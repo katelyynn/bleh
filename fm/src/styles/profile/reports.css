@@ -265,9 +265,6 @@
     margin-top: unset;
     padding-right: unset;
 }
-.promo-v3 .listening-report-promo-date:after {
-    display: none;
-}
 
 .listening-report-promo-animation-container {
     height: 32px;

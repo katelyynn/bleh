@@ -89,7 +89,7 @@ export let recent_activity_list = [];
  * @property {Object} state - Dynamic variables
  * @property {boolean} state.settings_reload - Whether the page is pending a reload due to user settings
  */
-export let page = {
+export let page: page = {
     initial: '',
     type: '',
     name: '',
@@ -178,6 +178,78 @@ export let page = {
         }
     }
 };
+
+interface page {
+    initial: string,
+    type: string,
+    name: string,
+    sister: string,
+    sister_others: Array<string>,
+    subpage: string,
+    avatar: string,
+    multi: boolean,
+    corrected: boolean,
+    token: string,
+    mobile: boolean,
+    platform: string,
+    suggest: any,
+    now: {
+        next_fetch: Date | null,
+        name: HTMLElement | null,
+        artist: HTMLElement | null,
+        album: HTMLElement | null,
+        avatar: string | null,
+        active: boolean
+    },
+    notifications: {
+        next_fetch: Date | null,
+        list: Array<any> | null
+    },
+    messages: {
+        next_fetch: Date | null,
+        list: Array<any> | null
+    },
+    structure: {
+        wrapper: HTMLElement | null,
+        container: HTMLElement | null,
+        row: HTMLElement | null,
+        main: HTMLElement | null,
+        side: HTMLElement | null,
+        nav: HTMLElement | null,
+        content_top: HTMLElement | null,
+        glacier: {
+            refresh: boolean
+        },
+        indicator: HTMLElement | null,
+        logs: HTMLElement | null
+    },
+    requested: {
+        tab: string | null
+    },
+    header: any,
+    state: {
+        settings_reload: boolean,
+        glacier: {
+            insights: {
+                artist: glacier_insight,
+                album: glacier_insight,
+                track: glacier_insight
+            }
+        }
+    }
+}
+
+interface glacier_insight {
+    display: boolean,
+    values: Array<any>,
+    labels: Array<string>,
+    highest: {
+        value: number,
+        label: string,
+        link: string,
+        img: string
+    }
+}
 
 export let shout_parse_queue = [];
 

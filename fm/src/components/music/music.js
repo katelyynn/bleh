@@ -34,7 +34,7 @@ import {
 import { oracle_credits } from '@/components/music/oracle';
 import { setting } from '@/components/settings/settings';
 import { patch_user_list_item } from '@/components/shared/users';
-import { join_the_conversation } from '../shared/shout.js';
+import { join_the_conversation } from '../shared/shout';
 
 unsafeWindow._other_listener = function (id) {
     other_listener(id);
@@ -1380,18 +1380,18 @@ function show_numbers_on_side(header_type) {
 
     let row = html.node`
         <div class="listener-row">
-            <div class="listener-row-item listener-side">
+            <div class="listener-row-item listener-side icon-mask">
                 <h3>${listeners.text}</h3>
                 <p>${listeners.abbr}</p>
             </div>
-            <div class="listener-row-item scrobble-side">
+            <div class="listener-row-item scrobble-side icon-mask">
                 <h3>${scrobbles.text}</h3>
                 <p>${scrobbles.abbr}</p>
             </div>
             ${
                 metascore.text ?
                     html.node`
-            <div class="listener-row-item metascore-side">
+            <div class="listener-row-item metascore-side icon-mask">
                 <h3>${metascore.text}</h3>
                 <p><a href="${metascore.link}" target="_blank">${metascore.abbr}</a></p>
             </div>
@@ -1576,7 +1576,7 @@ export function bleh_music_page_charts() {
     prep_chart_colours();
 
     let scrobble_canvas_container = document.createElement('div');
-    scrobble_canvas_container.classList.add('scrobble-canvas-container');
+    scrobble_canvas_container.classList.add('scrobble-canvas-container', 'icon-mask');
 
     let scrobble_canvas = document.createElement('canvas');
     scrobble_canvas.classList.add('scrobble-canvas');
