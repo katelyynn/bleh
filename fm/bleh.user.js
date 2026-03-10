@@ -38109,8 +38109,6 @@
     );
     library_tab.textContent = tl2(trans.library);
     let is_own_profile = page.name == auth.name;
-    if (is_own_profile)
-      profile_header.setAttribute("data-is-own-profile", "true");
     let loved_tab = page.structure.nav.querySelector(
       ".secondary-nav-item--loved a"
     );
