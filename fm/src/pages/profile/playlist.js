@@ -67,7 +67,7 @@ export async function bleh_playlist() {
         page.structure.main.appendChild(html.node`
             <section class="playlist-creator">
                 <div class="inbox-message-buttons">
-                    <a class="back-button btn inbox-button" href=${back_link.getAttribute('href')}>
+                    <a class="back-button btn inbox-button icon" href=${back_link.getAttribute('href')}>
                         ${tl(trans.back)}
                     </a>
                     ${form}

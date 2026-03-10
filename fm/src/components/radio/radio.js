@@ -12,7 +12,7 @@ export function bleh_radio() {
     let radios = page.structure.side.querySelectorAll('.stationlink');
     radios.forEach((radio) => {
         let type = radio.getAttribute('data-analytics-label');
-        radio.classList.add('btn', 'radio-button', 'side-action');
+        radio.classList.add('btn', 'radio-button', 'side-action', 'icon-mask');
 
         let text = tl(trans[type]);
 
@@ -40,7 +40,7 @@ export function bleh_radio() {
         let container = document.createElement('div');
         container.classList.add('listening-report-promos', 'side-actions');
         promos.forEach((promo) => {
-            promo.classList.add('btn', 'side-action');
+            promo.classList.add('btn', 'side-action', 'icon-mask');
             container.appendChild(promo);
         });
         promo_v3.appendChild(container);

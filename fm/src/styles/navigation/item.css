@@ -1,5 +1,4 @@
 .navigation-item,
-.inbox-item,
 .masthead-search-form,
 .masthead-nav-control
 {
@@ -41,12 +40,10 @@
 .masthead-search-toggle {
     display: none;
 }
-.inbox-item,
 .site-auth-control,
 .masthead-search-form,
 .masthead-logo a,
 .auth-link,
-.language-nav,
 .masthead-nav-control {
     --bg: transparent !important;
     --bg-hov: oklch(var(--b4) / 60%) !important;
@@ -119,9 +116,6 @@
 }
 
 .inbox-item {
-    display: flex;
-    --padding: 7px var(--button-sides) !important;
-    --mask: var(--icon-16-inbox);
     position: relative;
 
     & > .counter {
@@ -198,10 +192,6 @@
     }
 }
 
-.language-nav {
-    display: flex !important;
-    order: 1;
-}
 .masthead-nav .masthead-nav-control {
     &[data-label="bleh"]:not([data-season-active="true"]) {
         display: none !important;
@@ -287,30 +277,6 @@
 
 .auth-avatar-notification-count-badge {
     display: var(--auth-badge, none);
-}
-
-.language-nav {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    height: 32px !important;
-    text-decoration: var(--force-underline, none) !important;
-
-    --font-size: 0;
-    --mask: var(--icon-16-arrow-down);
-
-    & > span {
-        width: 20px;
-        position: relative;
-        font-size: var(--font-size);
-        --left: none !important;
-        --right: none !important;
-    }
-
-    &:before {
-        color: oklch(var(--c3));
-    }
 }
 
 [data-lang] {

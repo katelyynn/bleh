@@ -105,7 +105,7 @@ export async function bleh_inbox() {
         message_buttons.querySelectorAll(':is(button, a)').forEach(link => {
             const type = link.classList[0];
 
-            link.classList.add('btn', 'inbox-button');
+            link.classList.add('btn', 'inbox-button', 'icon');
 
             if (type == 'back-button') {
                 link.textContent = tl(trans.back);

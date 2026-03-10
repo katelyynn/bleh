@@ -240,13 +240,13 @@ export function bleh_settings() {
             `}
         </div>
         <section class="side-actions">
-            <button class="btn side-action" data-type="import" onclick=${() => import_settings()}>
+            <button class="btn side-action icon-mask" data-type="import" onclick=${() => import_settings()}>
                 ${tl(trans.import)}
             </button>
-            <button class="btn side-action" data-type="export" onclick=${() => export_settings()}>
+            <button class="btn side-action icon-mask" data-type="export" onclick=${() => export_settings()}>
                 ${tl(trans.export)}
             </button>
-            <button class="btn side-action" data-type="reset" onclick=${() => reset_settings()}>
+            <button class="btn side-action icon-mask" data-type="reset" onclick=${() => reset_settings()}>
                 ${tl(trans.reset)}
             </button>
         </section>

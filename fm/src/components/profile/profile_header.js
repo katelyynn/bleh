@@ -73,7 +73,7 @@ export function redesign_profile_header(is_own_profile, is_following) {
 
         if (follow_wrap) {
             let follow_btn = follow_wrap.querySelector('button');
-            follow_btn.classList.add('btn', 'side-action');
+            follow_btn.classList.add('btn', 'side-action', 'icon-mask');
             follow_btn.classList.remove('toggle-button', 'header-follower-btn');
             follow_btn.setAttribute('data-type', 'follow');
             profile_header.appendChild(follow_wrap);
@@ -90,7 +90,7 @@ export function redesign_profile_header(is_own_profile, is_following) {
         } else {
             // ignore list
             profile_header.appendChild(html.node`
-                <button class="btn side-action" data-type="follow" disabled="true" data-ignored="true">
+                <button class="btn side-action icon-mask" data-type="follow" disabled="true" data-ignored="true">
                     ${tl(trans.blocked)}
                 </button>
             `);
@@ -416,7 +416,7 @@ export function create_profile_top_item(
     if (action == 'button') {
         side_action = html.node`
             <button
-                class="btn side-action"
+                class="btn side-action icon-mask"
                 data-type=${type}
                 onclick=${link}
             >
@@ -429,7 +429,7 @@ export function create_profile_top_item(
     } else {
         side_action = html.node`
             <a
-                class="btn side-action"
+                class="btn side-action icon-mask"
                 data-type=${type}
                 href=${link}
             >
@@ -455,7 +455,7 @@ function friends_button(parent) {
     }
 
     const elem = html.node`
-        <button class="btn side-action colourful" data-type="close_friends" type="button" onclick=${() => {
+        <button class="btn side-action colourful icon-mask" data-type="close_friends" type="button" onclick=${() => {
             if (friend_state) {
                 dialog({
                     id: 'remove_friend',

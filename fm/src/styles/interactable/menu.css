@@ -10,7 +10,7 @@
 .dropdown-menu-clickable-item,
 .display-options-clickable-item,
 .library-search-results li,
-[data-analytics-action="DateSelector"] {
+.date-picker-preset-item {
     --bg: transparent !important;
     --bg-hov: var(--menu-item-hov) !important;
     --bg-atv: var(--menu-item-atv) !important;
@@ -115,7 +115,7 @@
     }
 }
 
-[data-analytics-action="DateSelector"] {
+.date-picker-preset-item {
     min-width: unset !important;
 }
 .auth-dropdown-menu-wrap {

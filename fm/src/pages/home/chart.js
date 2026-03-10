@@ -41,7 +41,7 @@ export function bleh_charts() {
             </div>
             <div class="right">
                 <div class="view-buttons">
-                    <button class="btn view-item glacier-configure-button panel-settings-button">
+                    <button class="btn view-item icon glacier-configure-button panel-settings-button">
                         ${tl(trans.settings)}
                     </button>
                 </div>

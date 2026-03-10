@@ -79,36 +79,7 @@
     }
 }
 
-.involved--track,
-.involved--album,
-.involved--artist,
-.involved--tag,
-.involved--user {
-    position: relative;
-    padding-left: calc(12px + 2px);
-    --left: 0;
-    --mask-size: 12px;
-    --margin-top: -6px;
-}
-.involved--track {
-    --mask: var(--icon-16-track);
-}
-.involved--album {
-    --mask: var(--icon-16-album);
-}
-.involved--artist {
-    --mask: var(--icon-16-artist);
-}
-.involved--tag {
-    --mask: var(--icon-16-tag);
-}
-
-.involved--user {
-    --mask: var(--icon-16-user);
-}
-
-.involved--track,
-.involved--album {
+.wiki-link-smart-title {
     display: flex;
     gap: 6px;
 }

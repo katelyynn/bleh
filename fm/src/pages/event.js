@@ -114,7 +114,7 @@ export function bleh_events() {
         let form = document.body.querySelector('.attendance-control');
         let buttons = form.querySelectorAll('button');
         buttons.forEach((button) => {
-            button.classList.add('btn', 'side-action');
+            button.classList.add('btn', 'side-action', 'icon-mask');
         });
 
         side_actions.appendChild(form);
@@ -236,7 +236,7 @@ export function bleh_events() {
             sep.classList.add('sep');
             side_actions.appendChild(sep);
 
-            edit_button.classList.add('btn', 'side-action');
+            edit_button.classList.add('btn', 'side-action', 'icon-mask');
             edit_button.setAttribute('data-type', 'edit');
             side_actions.appendChild(edit_button);
         }
@@ -412,7 +412,7 @@ function bleh_events_home() {
 
     page.structure.side.innerHTML = (`
         <section class="side-actions">
-            <a class="btn side-action add-button" href="${root}events/add?reset=true">
+            <a class="btn side-action add-button icon-mask" href="${root}events/add?reset=true">
                 ${tl(trans.create_new_event)}
             </a>
         </section>

@@ -654,11 +654,11 @@ function bleh_listeners() {
         const friends = settings.friends.filter(friend => friend != settings.starred_friend);
 
         render(friends_panel, html`
-            <a class="btn side-action" data-type="profile" href="${root}user/${auth.name}/library/music/${redirect()}${sanitise(page.name)}">
+            <a class="btn side-action icon-mask" data-type="profile" href="${root}user/${auth.name}/library/music/${redirect()}${sanitise(page.name)}">
                 <span><span class="at">@</span>${auth.name}</span>
             </a>
             ${settings.starred_friend != '' ? html.node`
-            <a class="btn side-action" data-type="profile" href="${root}user/${settings.starred_friend}/library/music/${redirect()}${sanitise(page.name)}">
+            <a class="btn side-action icon-mask" data-type="profile" href="${root}user/${settings.starred_friend}/library/music/${redirect()}${sanitise(page.name)}">
                 <span><span class="at">@</span>${settings.starred_friend}</span>
                 <span class="star-icon colourful">
                     <span class="bleh-icon" />
@@ -666,17 +666,17 @@ function bleh_listeners() {
             </a>
             ` : ''}
             ${friends.map(friend => html.node`
-            <a class="btn side-action" data-type="profile" href="${root}user/${friend}/library/music/${redirect()}${sanitise(page.name)}">
+            <a class="btn side-action icon-mask" data-type="profile" href="${root}user/${friend}/library/music/${redirect()}${sanitise(page.name)}">
                 <span><span class="at">@</span>${friend}</span>
             </a>
             `)}
-            <button class="btn side-action" data-type="edit" onclick=${() => open_starred_friend_window(() => {
+            <button class="btn side-action icon-mask" data-type="edit" onclick=${() => open_starred_friend_window(() => {
                 render_friends();
             })}>
                 ${tl(trans.edit_close_friends)}
             </button>
             <div class="sep" />
-            <button class="btn side-action" data-type="add" onclick=${() => other_listener(sanitise(page.name))}>
+            <button class="btn side-action icon-mask" data-type="add" onclick=${() => other_listener(sanitise(page.name))}>
                 ${tl(trans.custom)}
             </button>
         `);

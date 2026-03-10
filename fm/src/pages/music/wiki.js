@@ -37,7 +37,7 @@ export function bleh_wiki() {
 
     if (original_edit_button) {
         let side_edit = document.createElement('a');
-        side_edit.classList.add('btn', 'side-action');
+        side_edit.classList.add('btn', 'side-action', 'icon-mask');
         side_edit.setAttribute('href', original_edit_button.getAttribute('href'));
         side_edit.setAttribute('data-type', 'edit');
         side_edit.textContent = tl(trans.edit);
@@ -46,7 +46,7 @@ export function bleh_wiki() {
 
     if (original_version_history) {
         let side_history = document.createElement('a');
-        side_history.classList.add('btn', 'side-action');
+        side_history.classList.add('btn', 'side-action', 'icon-mask');
         side_history.setAttribute('href', original_version_history.getAttribute('href'));
         side_history.setAttribute('data-type', 'history');
         side_history.textContent = tl(trans.timeline);
@@ -147,7 +147,7 @@ export function bleh_wiki_history() {
     // latest
     let side_actions = html.node`
         <section class="side-actions">
-            <a class="btn side-action" data-type="latest-wiki" href="${sub_text.querySelector('a').getAttribute('href')}">
+            <a class="btn side-action icon-mask" data-type="latest-wiki" href="${sub_text.querySelector('a').getAttribute('href')}">
                 ${tl(trans.view_latest)}
             </a>
         </section>
@@ -232,7 +232,7 @@ export function bleh_wiki_editor() {
     // latest
     const side_actions = html.node`
         <section class="side-actions">
-            <a class="btn side-action" data-type="latest-wiki" href="${sub_text.querySelector('a').getAttribute('href')}">
+            <a class="btn side-action icon-mask" data-type="latest-wiki" href="${sub_text.querySelector('a').getAttribute('href')}">
                 ${tl(trans.view_latest)}
             </a>
         </section>

@@ -344,7 +344,7 @@ export async function show_your_scrobbles() {
                         </div>
                         <div class="listen-item-info">
                             <h3 class="listen-item-name">${shortcut_listens.name}</h3>
-                            <p class="colourful listen-item-text" ref=${(el) => (p = el)}>
+                            <p class="colourful listen-item-text icon-mask" ref=${(el) => (p = el)}>
                                 ${tl(trans.count_plays, { c: listens.toLocaleString(lang) })}
                             </p>
                         </div>
@@ -447,7 +447,7 @@ export async function show_your_scrobbles() {
     let buttons = interact_container.querySelectorAll('button');
     buttons.forEach((button) => {
         if (button.classList[0] != 'header-new-playlink')
-            button.classList.add('btn', 'side-action');
+            button.classList.add('btn', 'side-action', 'icon-mask');
         else button.classList.add('dropdown-menu-clickable-item');
 
         if (button.classList[0] == 'header-new-more-button')
@@ -464,7 +464,7 @@ export async function show_your_scrobbles() {
     let links = interact_container.querySelectorAll('a');
     links.forEach((button) => {
         if (button.classList[0] != 'header-new-playlink')
-            button.classList.add('btn', 'side-action');
+            button.classList.add('btn', 'side-action', 'icon-mask');
         else button.classList.add('dropdown-menu-clickable-item');
     });
 
@@ -474,7 +474,7 @@ export async function show_your_scrobbles() {
     );
     if (obsession_form) {
         let obsession_btn = obsession_form.querySelector('button');
-        obsession_btn.classList = 'btn side-action';
+        obsession_btn.classList = 'btn side-action icon-mask';
         obsession_btn.setAttribute('data-type', 'obsession');
         obsession_btn.textContent = tl(trans.set_obsession);
 
@@ -522,7 +522,7 @@ export async function show_your_scrobbles() {
             };
 
         const scrobble_btn = html.node`
-            <button class="btn side-action" data-type="add" onclick=${() => submit_scrobble(props)}>
+            <button class="btn side-action icon-mask" data-type="add" onclick=${() => submit_scrobble(props)}>
                 ${tl(trans.scrobble_value, {v: tl(trans[`${page.type}_lower`])})}
             </button>
         `;
@@ -543,7 +543,7 @@ export async function show_your_scrobbles() {
         ['album', 'track'].includes(page.type)
     ) {
         interact_container.appendChild(html.node`
-            <button class="btn side-action" data-type="credits" onclick=${() => oracle_credits()}>
+            <button class="btn side-action icon-mask" data-type="credits" onclick=${() => oracle_credits()}>
                 ${tl(trans.view_credits)}
             </button>
         `);
@@ -585,7 +585,7 @@ export async function show_your_scrobbles() {
         header.remove();
 
         let playlist_button = new_playlist.querySelector('button');
-        playlist_button.classList = 'btn side-action';
+        playlist_button.classList = 'btn side-action icon-mask';
         playlist_button.setAttribute('data-type', 'playlist');
         playlist_button.textContent = tl(trans.create_playlist);
 
@@ -1193,7 +1193,7 @@ function create_listen_item(
                 <img class="view-item-avatar" src=${avi} alt=${name} />
                 <div class="listen-item-info">
                     <h3 class="listen-item-name">${name}</h3>
-                    <p class="colourful listen-item-text" ref=${(el) => (p = el)}>
+                    <p class="colourful listen-item-text icon-mask" ref=${(el) => (p = el)}>
                         ${tl(trans.count_plays, { c: listens.toLocaleString(lang) })}
                     </p>
                 </div>
@@ -1232,7 +1232,7 @@ function create_listen_item(
                 </div>
                 <div class="listen-item-info">
                     <h3 class="listen-item-name">${name}</h3>
-                    <p class="colourful listen-item-text" ref=${(el) => (p = el)}>
+                    <p class="colourful listen-item-text icon-mask" ref=${(el) => (p = el)}>
                         ${tl(trans.count_plays, { c: ' ' })}
                     </p>
                 </div>
@@ -1289,7 +1289,7 @@ function create_listen_item(
                 :   ''}
                 <div class="listen-item-info">
                     <h3 class="listen-item-name">${tl(trans.following)}</h3>
-                    <p class="colourful listen-item-text" ref=${(el) => (p = el)}>
+                    <p class="colourful listen-item-text icon-mask" ref=${(el) => (p = el)}>
                         ${tl(trans.others_count).replace('{c}', count)}
                     </p>
                 </div>

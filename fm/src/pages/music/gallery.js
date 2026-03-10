@@ -182,7 +182,7 @@ export function bleh_gallery() {
 
     // open in a new tab button
     let open_button = html.node`
-        <button class="btn image-open-button" onclick=${() => expand_gallery_image()}>
+        <button class="btn image-open-button icon" onclick=${() => expand_gallery_image()}>
             ${tl(trans.expand)}
         </button>
     `;
@@ -194,7 +194,7 @@ export function bleh_gallery() {
 
     // share button
     let share_button = html.node`
-        <button class="btn image-share-button" onclick=${() => share(window.location.href)}>
+        <button class="btn image-share-button icon" onclick=${() => share(window.location.href)}>
             ${tl(trans.share)}
         </button>
     `;
@@ -250,7 +250,7 @@ export function bleh_gallery() {
         else page.structure.main.appendChild(side_actions);
 
         let view_all = view_all_container.querySelector('a');
-        view_all.classList.add('btn', 'side-action');
+        view_all.classList.add('btn', 'side-action', 'icon-mask');
         view_all.setAttribute('data-type', 'gallery');
 
         side_actions.appendChild(view_all);
@@ -260,7 +260,7 @@ export function bleh_gallery() {
         // saved button
         if (page.type == 'artist' || ff('display_album_bookmark')) {
             let view_saved = document.createElement('a');
-            view_saved.classList.add('btn', 'side-action');
+            view_saved.classList.add('btn', 'side-action', 'icon-mask');
             view_saved.setAttribute(
                 'href',
                 `${view_all.getAttribute('href')}?tab=saved`

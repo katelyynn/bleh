@@ -98,7 +98,7 @@ export function bleh_tags() {
         view_all_panel.classList.add('side-actions');
 
         let button = bookmark_form.querySelector('button');
-        button.classList = 'btn side-action';
+        button.classList = 'btn side-action icon-mask';
         button.setAttribute('data-type', 'bookmark');
 
         view_all_panel.appendChild(bookmark_form);
@@ -111,7 +111,7 @@ export function bleh_tags() {
         new_playlist.removeChild(header);
 
         let playlist_button = new_playlist.querySelector('button');
-        playlist_button.classList = 'btn side-action';
+        playlist_button.classList = 'btn side-action icon-mask';
         playlist_button.setAttribute('data-type', 'playlist');
 
         view_all_panel.appendChild(new_playlist);

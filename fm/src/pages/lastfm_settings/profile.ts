@@ -849,7 +849,8 @@ function profile_panel() {
                                                     trigger: 'click',
                                                     placement: 'bottom',
                                                     interactive: true,
-                                                    interactiveBorder: 10
+                                                    interactiveBorder: 10,
+                                                    appendTo: document.body
                                                 });
 
                                                 return btn;

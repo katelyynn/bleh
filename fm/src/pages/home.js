@@ -545,7 +545,7 @@ function campfire_friend(friend) {
                 `);
 
                 const track_elem = html.node`
-                    <a class="involved--track" href="${root}music/${item.sister}/_/${item.name}">${name}</a>
+                    <a class="wiki-link icon" data-link-type="track" href="${root}music/${item.sister}/_/${item.name}">${name}</a>
                 `;
 
                 tippy(track_elem, {

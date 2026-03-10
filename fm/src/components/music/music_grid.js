@@ -178,7 +178,7 @@ export function music_grids(search = page.structure.main, use_colour = true) {
             !grid.classList.contains('compare-item')
         ) {
             let plays = int_from_string(plays_elem.textContent.trim());
-            plays_elem.classList.add('grid-item-plays');
+            plays_elem.classList.add('grid-item-plays', 'icon-mask');
             if (is_album) {
                 plays_elem.textContent = plays.toLocaleString(lang);
             } else {

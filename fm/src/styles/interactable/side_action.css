@@ -1,9 +1,6 @@
 .stationlinks {
     order: 10;
 }
-.side-actions > div:not([data-toggle-button], [data-tippy-root], .sep) {
-    display: none;
-}
 .side-actions {
     display: flex;
     flex-direction: column;
@@ -75,10 +72,6 @@
     }
 
     &:before {
-        display: none !important;
-    }
-
-    &:after {
         --mask-size: var(--icon-size);
 
         --left: var(--button-sides) !important;
@@ -94,10 +87,6 @@
     &.side-action,
     &.listening-report-promo {
         &:before {
-            border-radius: var(--item-med-radius);
-        }
-
-        &:after {
             --mask-size: 18px;
             --left: 5px;
             --margin-top: -9px;
@@ -115,17 +104,10 @@
         --right: 0;
         padding-right: calc(12px + 4px) !important;
 
-        &:after {
+        &:before {
             transform: unset !important;
             filter: unset !important;
             transition: unset !important;
-        }
-    }
-
-    &:hover {
-        &:before {
-            background: oklch(var(--f4)) !important;
-            transition: none;
         }
     }
 
@@ -146,7 +128,7 @@
         );
         --force-font-weight: var(--font-weight-medium) !important;
 
-        &:after {
+        &:before {
             background: var(--mask-colour) !important;
         }
     }

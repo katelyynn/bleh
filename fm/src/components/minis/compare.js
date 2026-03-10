@@ -495,14 +495,14 @@ export function compare({ host, sidebar } = {}) {
                                     :   ''
                                 }
                                 <p class="grid-items-item-aux-text">
-                                    <a class="grid-item-plays with-avatar" href="${root}user/${auth.name}/library/music/${redirect()}${template}?${timeframe.value}" target="_blank">
-                                        <span class="avatar">
+                                    <a class="grid-item-plays with-avatar icon-mask" href="${root}user/${auth.name}/library/music/${redirect()}${template}?${timeframe.value}" target="_blank">
+                                        <span class="avatar grid-item-avatar">
                                             <img src="${auth.avatar}" alt="${tl(trans.your_avatar)}">
                                         </span>
                                         ${data.plays.you.toLocaleString(lang)}
                                     </a>
-                                    <a class="grid-item-plays with-avatar" href="${root}user/${page.name}/library/music/${redirect()}${template}?${timeframe.value}" target="_blank">
-                                        <span class="avatar">
+                                    <a class="grid-item-plays with-avatar icon-mask" href="${root}user/${page.name}/library/music/${redirect()}${template}?${timeframe.value}" target="_blank">
+                                        <span class="avatar grid-item-avatar">
                                             <img src="${page.avatar}" alt="${tl(trans.avatar_for_user).replace('{u}', page.name)}">
                                         </span>
                                         ${data.plays.other.toLocaleString(lang)}

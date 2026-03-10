@@ -307,7 +307,7 @@ export function append_nav() {
                 ${() => {
                     const elem = html.node`
                     <li class="masthead-nav-item">
-                        <a class="masthead-nav-control chibi" href="${root}bleh" data-label="bleh_no_auth">
+                        <a class="btn masthead-nav-control chibi" href="${root}bleh" data-label="bleh_no_auth">
                             ${tl(trans.bleh_settings)}
                         </a>
                     </li>
@@ -341,6 +341,8 @@ export function append_nav() {
 
     if (auth_link.hasAttribute('data-bleh')) return;
     auth_link.setAttribute('data-bleh', 'true');
+
+    auth_link.classList.add('icon-r');
 
     const name = html.node`
         <p class="auth-link-name">${auth.name}</p>
@@ -378,7 +380,7 @@ export function append_nav() {
     links.appendChild(quick_switcher);*/
 
     const more_button = html.node`
-        <button class="masthead-nav-control chibi icon" data-type="more">
+        <button class="btn masthead-nav-control chibi icon" data-type="more">
             ${tl(trans.more)}
         </button>
     `;
@@ -426,7 +428,7 @@ export function append_nav() {
 
     // configure bleh
     let bleh_container = html.node`
-        <a class="masthead-nav-control ${stored_season.new_years_eve ? '' : 'chibi'}" href="${root}bleh${stored_season.id != 'none' ? '/seasonal' : ''}" data-label="bleh" data-season="${stored_season.id}" data-season-active="${stored_season.id != 'none' ? 'true' : 'false'}" data-live="false">
+        <a class="btn masthead-nav-control ${stored_season.new_years_eve ? '' : 'chibi'}" href="${root}bleh${stored_season.id != 'none' ? '/seasonal' : ''}" data-label="bleh" data-season="${stored_season.id}" data-season-active="${stored_season.id != 'none' ? 'true' : 'false'}" data-live="false">
             ${stored_season.id == 'none' ? tl(trans.bleh_settings) : DateTime.fromISO(stored_season.end.replace('y0', stored_season.year).replace('{offset}', stored_season.offset)).toRelative(DateTime.fromISO(stored_season.now))}
         </a>
     `;
@@ -461,7 +463,7 @@ export function append_nav() {
     const count = parseInt(notif_count) + parseInt(inbox_count);
 
     const inbox = html.node`
-        <a class="inbox-item chibi" href="${root}inbox/notifications">
+        <a class="btn masthead-nav-control icon chibi inbox-item" data-type="inbox" href="${root}inbox/notifications">
             <div class="counter" data-count=${count}>${count}</div>
         </a>
     `;
@@ -595,7 +597,7 @@ export function append_nav() {
     // music
     if (auth.pro) {
         const music = html.node`
-            <button class="masthead-nav-control chibi" data-type="now-playing">
+            <button class="btn masthead-nav-control icon chibi" data-type="now-playing">
                 ${tl(trans.music)}
             </button>
         `;

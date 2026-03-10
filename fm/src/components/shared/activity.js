@@ -114,9 +114,9 @@ export function render_activity(activity) {
         }
 
         if (involved_text != '')
-            involved_text = html.node`${involved_text}, <a class="involved--${involved.type}" href="${involved_link}">${name}</a>`;
+            involved_text = html.node`${involved_text}, <a class="wiki-link icon wiki-link-smart-title" data-link-type=${involved.type} href="${involved_link}">${name}</a>`;
         else
-            involved_text = html.node`${involved_text}<a class="involved--${involved.type}" href="${involved_link}">${name}</a>`;
+            involved_text = html.node`${involved_text}<a class="wiki-link icon wiki-link-smart-title" data-link-type=${involved.type} href="${involved_link}">${name}</a>`;
     });
 
     render(activity_item, html`

@@ -32954,7 +32954,7 @@
       page.structure.main.appendChild(side_actions);
     if (original_edit_button) {
       let side_edit = document.createElement("a");
-      side_edit.classList.add("btn", "side-action");
+      side_edit.classList.add("btn", "side-action", "icon-mask");
       side_edit.setAttribute("href", original_edit_button.getAttribute("href"));
       side_edit.setAttribute("data-type", "edit");
       side_edit.textContent = tl2(trans.edit);
@@ -32962,7 +32962,7 @@
     }
     if (original_version_history) {
       let side_history = document.createElement("a");
-      side_history.classList.add("btn", "side-action");
+      side_history.classList.add("btn", "side-action", "icon-mask");
       side_history.setAttribute("href", original_version_history.getAttribute("href"));
       side_history.setAttribute("data-type", "history");
       side_history.textContent = tl2(trans.timeline);
@@ -33032,7 +33032,7 @@
       wiki_panel.appendChild(pagination);
     let side_actions = html.node`
         <section class="side-actions">
-            <a class="btn side-action" data-type="latest-wiki" href="${sub_text.querySelector("a").getAttribute("href")}">
+            <a class="btn side-action icon-mask" data-type="latest-wiki" href="${sub_text.querySelector("a").getAttribute("href")}">
                 ${tl2(trans.view_latest)}
             </a>
         </section>
@@ -33096,7 +33096,7 @@
     page.structure.side.innerHTML = "";
     const side_actions = html.node`
         <section class="side-actions">
-            <a class="btn side-action" data-type="latest-wiki" href="${sub_text.querySelector("a").getAttribute("href")}">
+            <a class="btn side-action icon-mask" data-type="latest-wiki" href="${sub_text.querySelector("a").getAttribute("href")}">
                 ${tl2(trans.view_latest)}
             </a>
         </section>
@@ -34433,7 +34433,7 @@
       }
       if (plays_elem && !grid.classList.contains("obsessions-item") && !grid.classList.contains("compare-item")) {
         let plays = int_from_string(plays_elem.textContent.trim());
-        plays_elem.classList.add("grid-item-plays");
+        plays_elem.classList.add("grid-item-plays", "icon-mask");
         if (is_album) {
           plays_elem.textContent = plays.toLocaleString(lang);
         } else {
@@ -35508,7 +35508,7 @@
           const can_copy_scrobble = !is_album && !has_bar && !is_active && ["user", "overview"].includes(page.type);
           const timestamp = parseInt(track.getAttribute("data-timestamp")) || Math.floor(new Date(track_timestamp_contents?.replace(/^[A-Za-z]+\s+/, "").replace(",", "").trim()).getTime() / 1e3);
           let more_button = html.node`
-                    <button class="track-more-button icon chibi" data-type="more" onclick=${() => {
+                    <button class="btn track-more-button icon chibi" data-type="more" onclick=${() => {
             log("requested track in-built", "menu", "info", {
               menu
             });
@@ -36315,7 +36315,7 @@
       let follow_wrap = document.body.querySelector(".header-avatar .class > div");
       if (follow_wrap) {
         let follow_btn = follow_wrap.querySelector("button");
-        follow_btn.classList.add("btn", "side-action");
+        follow_btn.classList.add("btn", "side-action", "icon-mask");
         follow_btn.classList.remove("toggle-button", "header-follower-btn");
         follow_btn.setAttribute("data-type", "follow");
         profile_header.appendChild(follow_wrap);
@@ -36327,7 +36327,7 @@
         friends_button(follow_btn.parentElement);
       } else {
         profile_header.appendChild(html.node`
-                <button class="btn side-action" data-type="follow" disabled="true" data-ignored="true">
+                <button class="btn side-action icon-mask" data-type="follow" disabled="true" data-ignored="true">
                     ${tl2(trans.blocked)}
                 </button>
             `);
@@ -36621,7 +36621,7 @@
     if (action == "button") {
       side_action = html.node`
             <button
-                class="btn side-action"
+                class="btn side-action icon-mask"
                 data-type=${type}
                 onclick=${link}
             >
@@ -36634,7 +36634,7 @@
     } else {
       side_action = html.node`
             <a
-                class="btn side-action"
+                class="btn side-action icon-mask"
                 data-type=${type}
                 href=${link}
             >
@@ -36656,7 +36656,7 @@
       save_setting("starred_friend", "");
     }
     const elem = html.node`
-        <button class="btn side-action colourful" data-type="close_friends" type="button" onclick=${() => {
+        <button class="btn side-action colourful icon-mask" data-type="close_friends" type="button" onclick=${() => {
       if (friend_state) {
         dialog({
           id: "remove_friend",
@@ -36958,7 +36958,7 @@
             if (!page.mobile)
               page.structure.side.appendChild(side_actions);
             else page.structure.main.appendChild(side_actions);
-            btn_add.classList = "btn side-action";
+            btn_add.classList = "btn side-action icon-mask";
             btn_add.setAttribute("data-type", "add");
             btn_add.textContent = tl2(trans.add);
             side_actions.appendChild(btn_add);
@@ -36972,7 +36972,7 @@
             if (!page.mobile)
               page.structure.side.appendChild(side_actions);
             else page.structure.main.appendChild(side_actions);
-            radio2.classList = "btn stationlink js-playlink-station radio-button side-action";
+            radio2.classList = "btn stationlink js-playlink-station radio-button side-action icon-mask";
             let type = radio2.getAttribute("data-analytics-label");
             render(
               radio2,
@@ -37487,7 +37487,7 @@
       page.structure.main.appendChild(html.node`
             <section class="playlist-creator">
                 <div class="inbox-message-buttons">
-                    <a class="back-button btn inbox-button" href=${back_link.getAttribute("href")}>
+                    <a class="back-button btn inbox-button icon" href=${back_link.getAttribute("href")}>
                         ${tl2(trans.back)}
                     </a>
                     ${form}
@@ -39659,12 +39659,12 @@
                                     ${data2.sister}
                                 </a>
                                 ${settings.collage_grid_plays ? html.node`
-                                <a class="grid-item-plays" href="${root}user/${page.name}/library/music/${redirect()}${template}?date_preset=${timeframe.value}" target="_blank">
+                                <a class="grid-item-plays icon-mask" href="${root}user/${page.name}/library/music/${redirect()}${template}?date_preset=${timeframe.value}" target="_blank">
                                     ${data2.plays.toLocaleString(lang)}
                                 </a>
                                 ` : ""}
                                 ` : settings.collage_grid_plays ? html.node`
-                                <a class="grid-item-plays" href="${root}user/${page.name}/library/music/${redirect()}${template}?date_preset=${timeframe.value}" target="_blank">
+                                <a class="grid-item-plays icon-mask" href="${root}user/${page.name}/library/music/${redirect()}${template}?date_preset=${timeframe.value}" target="_blank">
                                     ${tl2(trans.count_plays, { c: data2.plays.toLocaleString(lang) })}
                                 </a>
                                 ` : ""}
@@ -39672,7 +39672,7 @@
                             ` : html.node`
                             ${settings.collage_grid_plays ? html.node`
                             <p class="grid-items-item-aux-text">
-                                <a class="grid-item-plays" href="${root}user/${page.name}/library/music/${redirect()}${template}?date_preset=${timeframe.value()}" target="_blank">
+                                <a class="grid-item-plays icon-mask" href="${root}user/${page.name}/library/music/${redirect()}${template}?date_preset=${timeframe.value()}" target="_blank">
                                     ${tl2(trans.count_plays, { c: data2.plays.toLocaleString(lang) })}
                                 </a>
                             </p>
@@ -40981,14 +40981,14 @@
                                 </p>
                                 ` : ""}
                                 <p class="grid-items-item-aux-text">
-                                    <a class="grid-item-plays with-avatar" href="${root}user/${auth.name}/library/music/${redirect()}${template}?${timeframe.value}" target="_blank">
-                                        <span class="avatar">
+                                    <a class="grid-item-plays with-avatar icon-mask" href="${root}user/${auth.name}/library/music/${redirect()}${template}?${timeframe.value}" target="_blank">
+                                        <span class="avatar grid-item-avatar">
                                             <img src="${auth.avatar}" alt="${tl2(trans.your_avatar)}">
                                         </span>
                                         ${data2.plays.you.toLocaleString(lang)}
                                     </a>
-                                    <a class="grid-item-plays with-avatar" href="${root}user/${page.name}/library/music/${redirect()}${template}?${timeframe.value}" target="_blank">
-                                        <span class="avatar">
+                                    <a class="grid-item-plays with-avatar icon-mask" href="${root}user/${page.name}/library/music/${redirect()}${template}?${timeframe.value}" target="_blank">
+                                        <span class="avatar grid-item-avatar">
                                             <img src="${page.avatar}" alt="${tl2(trans.avatar_for_user).replace("{u}", page.name)}">
                                         </span>
                                         ${data2.plays.other.toLocaleString(lang)}
@@ -42753,7 +42753,7 @@
                 ${Object.entries(values).map(([key, val]) => {
           const icon3 = val.icon || key;
           const button2 = html.node`
-                        <button class="btn view-item" data-type=${icon3} data-value=${key} onclick=${() => {
+                        <button class="btn view-item icon" data-type=${icon3} data-value=${key} onclick=${() => {
             save_setting(id, key);
             buttons.forEach((btn) => {
               btn.setAttribute(
@@ -43434,6 +43434,11 @@
     page.requested.to = params.get("to");
     page.requested.rangetype = params.get("rangetype");
     const picker_presets = picker_content.querySelectorAll(".date-range-picker-presets-wrap > .date-range-picker-presets");
+    const items = picker_content.querySelectorAll(".date-range-picker-preset");
+    items.forEach((item) => {
+      const link = item.firstElementChild;
+      link.classList.add("btn", "date-picker-preset-item");
+    });
     load_profile_cache_externally(page.name).then((cache2) => {
       if (!cache2.created) return;
       const year = parseInt(year_from_date(cache2.created));
@@ -43444,7 +43449,7 @@
         const target = index3 % 2;
         picker_presets[target].appendChild(html.node`
                 <li class="date-range-picker-preset ${selected ? "date-range-picker-preset--selected" : ""}">
-                    <a href="${window.location.href.replace(window.location.search, "")}?from=${year2}-01-01&rangetype=year" data-analytics-action="DateSelector" onclick=${() => {
+                    <a class="btn date-picker-preset-item" href="${window.location.href.replace(window.location.search, "")}?from=${year2}-01-01&rangetype=year" data-analytics-action="DateSelector" onclick=${() => {
           modal.hide();
         }}>
                         ${year2}
@@ -43628,7 +43633,7 @@
     }
     if (!static_page && page.subpage != "library_tracks") {
       const format_button = html.node`
-            <button class="btn view-item glacier-library-button glacier-view-button" onclick=${() => {
+            <button class="btn view-item icon glacier-library-button glacier-view-button" onclick=${() => {
         const format = page.structure.main.querySelector(".library-view-button");
         if (!format) return;
         format.click();
@@ -43660,6 +43665,7 @@
     configure_button.classList.add(
       "btn",
       "view-item",
+      "icon",
       "glacier-library-button",
       "glacier-configure-button",
       "panel-settings-button"
@@ -44308,6 +44314,7 @@
     configure_button.classList.add(
       "btn",
       "view-item",
+      "icon",
       "glacier-library-button",
       "glacier-configure-button",
       "panel-settings-button"
@@ -44832,7 +44839,7 @@
     button_container.appendChild(buttons_extra);
     image_details.appendChild(button_container);
     let open_button = html.node`
-        <button class="btn image-open-button" onclick=${() => expand_gallery_image()}>
+        <button class="btn image-open-button icon" onclick=${() => expand_gallery_image()}>
             ${tl2(trans.expand)}
         </button>
     `;
@@ -44841,7 +44848,7 @@
     });
     buttons_extra.appendChild(open_button);
     let share_button = html.node`
-        <button class="btn image-share-button" onclick=${() => share(window.location.href)}>
+        <button class="btn image-share-button icon" onclick=${() => share(window.location.href)}>
             ${tl2(trans.share)}
         </button>
     `;
@@ -44878,13 +44885,13 @@
       if (!page.mobile) page.structure.side.appendChild(side_actions);
       else page.structure.main.appendChild(side_actions);
       let view_all = view_all_container.querySelector("a");
-      view_all.classList.add("btn", "side-action");
+      view_all.classList.add("btn", "side-action", "icon-mask");
       view_all.setAttribute("data-type", "gallery");
       side_actions.appendChild(view_all);
       page.structure.main.removeChild(view_all_container);
       if (page.type == "artist" || ff("display_album_bookmark")) {
         let view_saved = document.createElement("a");
-        view_saved.classList.add("btn", "side-action");
+        view_saved.classList.add("btn", "side-action", "icon-mask");
         view_saved.setAttribute(
           "href",
           `${view_all.getAttribute("href")}?tab=saved`
@@ -45420,7 +45427,7 @@
       let view_all_panel = document.createElement("section");
       view_all_panel.classList.add("side-actions");
       let button2 = bookmark_form.querySelector("button");
-      button2.classList = "btn side-action";
+      button2.classList = "btn side-action icon-mask";
       button2.setAttribute("data-type", "bookmark");
       view_all_panel.appendChild(bookmark_form);
       page.structure.side.appendChild(view_all_panel);
@@ -45428,7 +45435,7 @@
       let header = new_playlist.querySelector("h3");
       new_playlist.removeChild(header);
       let playlist_button = new_playlist.querySelector("button");
-      playlist_button.classList = "btn side-action";
+      playlist_button.classList = "btn side-action icon-mask";
       playlist_button.setAttribute("data-type", "playlist");
       view_all_panel.appendChild(new_playlist);
     } else {
@@ -45522,7 +45529,7 @@
             <div class="about-guest-features-panel">
                 ${page.sister_others.map((guest) => {
         return html.node`
-                        <a class="about-guest-feature" href="${root}music/${redirect()}${sanitise(guest)}">
+                        <a class="btn about-guest-feature" href="${root}music/${redirect()}${sanitise(guest)}">
                             ${guest}
                         </a>
                     `;
@@ -48042,7 +48049,7 @@
                         </div>
                         <div class="listen-item-info">
                             <h3 class="listen-item-name">${shortcut_listens.name}</h3>
-                            <p class="colourful listen-item-text" ref=${(el) => p4 = el}>
+                            <p class="colourful listen-item-text icon-mask" ref=${(el) => p4 = el}>
                                 ${tl2(trans.count_plays, { c: listens.toLocaleString(lang) })}
                             </p>
                         </div>
@@ -48118,7 +48125,7 @@
     let buttons = interact_container.querySelectorAll("button");
     buttons.forEach((button2) => {
       if (button2.classList[0] != "header-new-playlink")
-        button2.classList.add("btn", "side-action");
+        button2.classList.add("btn", "side-action", "icon-mask");
       else button2.classList.add("dropdown-menu-clickable-item");
       if (button2.classList[0] == "header-new-more-button")
         interact_container.removeChild(button2.parentElement);
@@ -48133,7 +48140,7 @@
     let links = interact_container.querySelectorAll("a");
     links.forEach((button2) => {
       if (button2.classList[0] != "header-new-playlink")
-        button2.classList.add("btn", "side-action");
+        button2.classList.add("btn", "side-action", "icon-mask");
       else button2.classList.add("dropdown-menu-clickable-item");
     });
     let obsession_form = header_actions.querySelector(
@@ -48141,7 +48148,7 @@
     );
     if (obsession_form) {
       let obsession_btn = obsession_form.querySelector("button");
-      obsession_btn.classList = "btn side-action";
+      obsession_btn.classList = "btn side-action icon-mask";
       obsession_btn.setAttribute("data-type", "obsession");
       obsession_btn.textContent = tl2(trans.set_obsession);
       interact_container.appendChild(obsession_form);
@@ -48177,7 +48184,7 @@
           pre_album_artist: page.name
         };
       const scrobble_btn = html.node`
-            <button class="btn side-action" data-type="add" onclick=${() => submit_scrobble(props)}>
+            <button class="btn side-action icon-mask" data-type="add" onclick=${() => submit_scrobble(props)}>
                 ${tl2(trans.scrobble_value, { v: tl2(trans[`${page.type}_lower`]) })}
             </button>
         `;
@@ -48190,7 +48197,7 @@
     }
     if (ff("credits") && ff("oracle") && settings.oracle_beta && ["album", "track"].includes(page.type)) {
       interact_container.appendChild(html.node`
-            <button class="btn side-action" data-type="credits" onclick=${() => oracle_credits()}>
+            <button class="btn side-action icon-mask" data-type="credits" onclick=${() => oracle_credits()}>
                 ${tl2(trans.view_credits)}
             </button>
         `);
@@ -48214,7 +48221,7 @@
       let header = new_playlist.querySelector("h3");
       header.remove();
       let playlist_button = new_playlist.querySelector("button");
-      playlist_button.classList = "btn side-action";
+      playlist_button.classList = "btn side-action icon-mask";
       playlist_button.setAttribute("data-type", "playlist");
       playlist_button.textContent = tl2(trans.create_playlist);
       interact_container.appendChild(new_playlist);
@@ -48705,7 +48712,7 @@
                 <img class="view-item-avatar" src=${avi} alt=${name} />
                 <div class="listen-item-info">
                     <h3 class="listen-item-name">${name}</h3>
-                    <p class="colourful listen-item-text" ref=${(el) => p4 = el}>
+                    <p class="colourful listen-item-text icon-mask" ref=${(el) => p4 = el}>
                         ${tl2(trans.count_plays, { c: listens.toLocaleString(lang) })}
                     </p>
                 </div>
@@ -48740,7 +48747,7 @@
                 </div>
                 <div class="listen-item-info">
                     <h3 class="listen-item-name">${name}</h3>
-                    <p class="colourful listen-item-text" ref=${(el) => p4 = el}>
+                    <p class="colourful listen-item-text icon-mask" ref=${(el) => p4 = el}>
                         ${tl2(trans.count_plays, { c: " " })}
                     </p>
                 </div>
@@ -48785,7 +48792,7 @@
                 ${avi[2] ? html.node`<img class="view-item-avatar" src=${avi[2].getAttribute("src")} alt="">` : ""}
                 <div class="listen-item-info">
                     <h3 class="listen-item-name">${tl2(trans.following)}</h3>
-                    <p class="colourful listen-item-text" ref=${(el) => p4 = el}>
+                    <p class="colourful listen-item-text icon-mask" ref=${(el) => p4 = el}>
                         ${tl2(trans.others_count).replace("{c}", count)}
                     </p>
                 </div>
@@ -53094,7 +53101,7 @@
                 ${() => {
           const elem = html.node`
                     <li class="masthead-nav-item">
-                        <a class="masthead-nav-control chibi" href="${root}bleh" data-label="bleh_no_auth">
+                        <a class="btn masthead-nav-control chibi" href="${root}bleh" data-label="bleh_no_auth">
                             ${tl2(trans.bleh_settings)}
                         </a>
                     </li>
@@ -53123,6 +53130,7 @@
     }
     if (auth_link2.hasAttribute("data-bleh")) return;
     auth_link2.setAttribute("data-bleh", "true");
+    auth_link2.classList.add("icon-r");
     const name = html.node`
         <p class="auth-link-name">${auth.name}</p>
     `;
@@ -53140,7 +53148,7 @@
         `);
     }
     const more_button = html.node`
-        <button class="masthead-nav-control chibi icon" data-type="more">
+        <button class="btn masthead-nav-control chibi icon" data-type="more">
             ${tl2(trans.more)}
         </button>
     `;
@@ -53182,7 +53190,7 @@
     });
     links.appendChild(more_button);
     let bleh_container = html.node`
-        <a class="masthead-nav-control ${stored_season.new_years_eve ? "" : "chibi"}" href="${root}bleh${stored_season.id != "none" ? "/seasonal" : ""}" data-label="bleh" data-season="${stored_season.id}" data-season-active="${stored_season.id != "none" ? "true" : "false"}" data-live="false">
+        <a class="btn masthead-nav-control ${stored_season.new_years_eve ? "" : "chibi"}" href="${root}bleh${stored_season.id != "none" ? "/seasonal" : ""}" data-label="bleh" data-season="${stored_season.id}" data-season-active="${stored_season.id != "none" ? "true" : "false"}" data-live="false">
             ${stored_season.id == "none" ? tl2(trans.bleh_settings) : DateTime.fromISO(stored_season.end.replace("y0", stored_season.year).replace("{offset}", stored_season.offset)).toRelative(DateTime.fromISO(stored_season.now))}
         </a>
     `;
@@ -53213,7 +53221,7 @@
     else inbox_count = inbox_count.textContent;
     const count = parseInt(notif_count) + parseInt(inbox_count);
     const inbox = html.node`
-        <a class="inbox-item chibi" href="${root}inbox/notifications">
+        <a class="btn masthead-nav-control icon chibi inbox-item" data-type="inbox" href="${root}inbox/notifications">
             <div class="counter" data-count=${count}>${count}</div>
         </a>
     `;
@@ -53348,7 +53356,7 @@
             `);
       };
       const music = html.node`
-            <button class="masthead-nav-control chibi" data-type="now-playing">
+            <button class="btn masthead-nav-control icon chibi" data-type="now-playing">
                 ${tl2(trans.music)}
             </button>
         `;
@@ -54893,13 +54901,13 @@
             `}
         </div>
         <section class="side-actions">
-            <button class="btn side-action" data-type="import" onclick=${() => import_settings29()}>
+            <button class="btn side-action icon-mask" data-type="import" onclick=${() => import_settings29()}>
                 ${tl2(trans.import)}
             </button>
-            <button class="btn side-action" data-type="export" onclick=${() => export_settings()}>
+            <button class="btn side-action icon-mask" data-type="export" onclick=${() => export_settings()}>
                 ${tl2(trans.export)}
             </button>
-            <button class="btn side-action" data-type="reset" onclick=${() => reset_settings()}>
+            <button class="btn side-action icon-mask" data-type="reset" onclick=${() => reset_settings()}>
                 ${tl2(trans.reset)}
             </button>
         </section>
@@ -57194,9 +57202,9 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         name = romanise(correct_artist(name));
       }
       if (involved_text != "")
-        involved_text = html.node`${involved_text}, <a class="involved--${involved.type}" href="${involved_link}">${name}</a>`;
+        involved_text = html.node`${involved_text}, <a class="wiki-link icon wiki-link-smart-title" data-link-type=${involved.type} href="${involved_link}">${name}</a>`;
       else
-        involved_text = html.node`${involved_text}<a class="involved--${involved.type}" href="${involved_link}">${name}</a>`;
+        involved_text = html.node`${involved_text}<a class="wiki-link icon wiki-link-smart-title" data-link-type=${involved.type} href="${involved_link}">${name}</a>`;
     });
     render(activity_item, html`
         <div class="type">
@@ -58243,11 +58251,11 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     function render_friends() {
       const friends2 = settings.friends.filter((friend) => friend != settings.starred_friend);
       render(friends_panel, html`
-            <a class="btn side-action" data-type="profile" href="${root}user/${auth.name}/library/music/${redirect()}${sanitise(page.name)}">
+            <a class="btn side-action icon-mask" data-type="profile" href="${root}user/${auth.name}/library/music/${redirect()}${sanitise(page.name)}">
                 <span><span class="at">@</span>${auth.name}</span>
             </a>
             ${settings.starred_friend != "" ? html.node`
-            <a class="btn side-action" data-type="profile" href="${root}user/${settings.starred_friend}/library/music/${redirect()}${sanitise(page.name)}">
+            <a class="btn side-action icon-mask" data-type="profile" href="${root}user/${settings.starred_friend}/library/music/${redirect()}${sanitise(page.name)}">
                 <span><span class="at">@</span>${settings.starred_friend}</span>
                 <span class="star-icon colourful">
                     <span class="bleh-icon" />
@@ -58255,17 +58263,17 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
             </a>
             ` : ""}
             ${friends2.map((friend) => html.node`
-            <a class="btn side-action" data-type="profile" href="${root}user/${friend}/library/music/${redirect()}${sanitise(page.name)}">
+            <a class="btn side-action icon-mask" data-type="profile" href="${root}user/${friend}/library/music/${redirect()}${sanitise(page.name)}">
                 <span><span class="at">@</span>${friend}</span>
             </a>
             `)}
-            <button class="btn side-action" data-type="edit" onclick=${() => open_starred_friend_window(() => {
+            <button class="btn side-action icon-mask" data-type="edit" onclick=${() => open_starred_friend_window(() => {
         render_friends();
       })}>
                 ${tl2(trans.edit_close_friends)}
             </button>
             <div class="sep" />
-            <button class="btn side-action" data-type="add" onclick=${() => other_listener(sanitise(page.name))}>
+            <button class="btn side-action icon-mask" data-type="add" onclick=${() => other_listener(sanitise(page.name))}>
                 ${tl2(trans.custom)}
             </button>
         `);
@@ -58869,7 +58877,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
             </div>
             <div class="right">
                 <div class="view-buttons">
-                    <button class="btn view-item glacier-configure-button panel-settings-button">
+                    <button class="btn view-item icon glacier-configure-button panel-settings-button">
                         ${tl2(trans.settings)}
                     </button>
                 </div>
@@ -59829,7 +59837,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
               trigger: "click",
               placement: "bottom",
               interactive: true,
-              interactiveBorder: 10
+              interactiveBorder: 10,
+              appendTo: document.body
             });
             return btn;
           }}
@@ -61393,7 +61402,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                     <a class="link-block-cover-link" href="${root}music/${item.sister}/_/${item.name}" />
                 `);
           const track_elem = html.node`
-                    <a class="involved--track" href="${root}music/${item.sister}/_/${item.name}">${name}</a>
+                    <a class="wiki-link icon" data-link-type="track" href="${root}music/${item.sister}/_/${item.name}">${name}</a>
                 `;
           tippy_esm_default(track_elem, {
             theme: "name-sister-combo",
@@ -61509,7 +61518,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       let form = document.body.querySelector(".attendance-control");
       let buttons = form.querySelectorAll("button");
       buttons.forEach((button2) => {
-        button2.classList.add("btn", "side-action");
+        button2.classList.add("btn", "side-action", "icon-mask");
       });
       side_actions.appendChild(form);
       let main_panel = page.structure.main.querySelector(".event-summary-with-poster");
@@ -61611,7 +61620,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         let sep = document.createElement("div");
         sep.classList.add("sep");
         side_actions.appendChild(sep);
-        edit_button.classList.add("btn", "side-action");
+        edit_button.classList.add("btn", "side-action", "icon-mask");
         edit_button.setAttribute("data-type", "edit");
         side_actions.appendChild(edit_button);
       }
@@ -61740,7 +61749,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     panel.insertBefore(filters, panel.firstElementChild);
     page.structure.side.innerHTML = `
         <section class="side-actions">
-            <a class="btn side-action add-button" href="${root}events/add?reset=true">
+            <a class="btn side-action add-button icon-mask" href="${root}events/add?reset=true">
                 ${tl2(trans.create_new_event)}
             </a>
         </section>
@@ -61818,7 +61827,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       const message_buttons = message.querySelector(".inbox-message-buttons");
       message_buttons.querySelectorAll(":is(button, a)").forEach((link) => {
         const type = link.classList[0];
-        link.classList.add("btn", "inbox-button");
+        link.classList.add("btn", "inbox-button", "icon");
         if (type == "back-button") {
           link.textContent = tl2(trans.back);
         } else if (type == "delete-button") {
@@ -62184,7 +62193,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     let radios = page.structure.side.querySelectorAll(".stationlink");
     radios.forEach((radio2) => {
       let type = radio2.getAttribute("data-analytics-label");
-      radio2.classList.add("btn", "radio-button", "side-action");
+      radio2.classList.add("btn", "radio-button", "side-action", "icon-mask");
       let text4 = tl2(trans[type]);
       if (type == "tag")
         text4 = page.name;
@@ -62205,7 +62214,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       let container = document.createElement("div");
       container.classList.add("listening-report-promos", "side-actions");
       promos.forEach((promo) => {
-        promo.classList.add("btn", "side-action");
+        promo.classList.add("btn", "side-action", "icon-mask");
         container.appendChild(promo);
       });
       promo_v3.appendChild(container);
@@ -75535,7 +75544,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-02-25"
       }
     },
-    built_on: "2026-03-09T14:38:01.525Z"
+    built_on: "2026-03-10T00:24:30.216Z"
   };
 
   // node_modules/@kurkle/color/dist/color.esm.js

@@ -70,7 +70,7 @@ export function bleh_about_artist() {
             <div class="about-guest-features-panel">
                 ${page.sister_others.map((guest) => {
                     return html.node`
-                        <a class="about-guest-feature" href="${root}music/${redirect()}${sanitise(guest)}">
+                        <a class="btn about-guest-feature" href="${root}music/${redirect()}${sanitise(guest)}">
                             ${guest}
                         </a>
                     `;

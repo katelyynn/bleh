@@ -261,7 +261,7 @@ export function checkup_page_structure(is_subpage = false, header = null) {
                         page.structure.side.appendChild(side_actions);
                     else page.structure.main.appendChild(side_actions);
 
-                    btn_add.classList = 'btn side-action';
+                    btn_add.classList = 'btn side-action icon-mask';
                     btn_add.setAttribute('data-type', 'add');
                     btn_add.textContent = tl(trans.add);
 
@@ -282,7 +282,7 @@ export function checkup_page_structure(is_subpage = false, header = null) {
                     else page.structure.main.appendChild(side_actions);
 
                     radio.classList =
-                        'btn stationlink js-playlink-station radio-button side-action';
+                        'btn stationlink js-playlink-station radio-button side-action icon-mask';
 
                     let type = radio.getAttribute('data-analytics-label');
 

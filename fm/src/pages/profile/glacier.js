@@ -227,6 +227,14 @@ function bleh_glacier_library_date() {
     page.requested.rangetype = params.get('rangetype');
 
     const picker_presets = picker_content.querySelectorAll('.date-range-picker-presets-wrap > .date-range-picker-presets');
+
+    const items = picker_content.querySelectorAll('.date-range-picker-preset');
+    items.forEach(item => {
+        const link = item.firstElementChild;
+
+        link.classList.add('btn', 'date-picker-preset-item');
+    });
+
     load_profile_cache_externally(page.name).then(cache => {
         if (!cache.created) return;
 
@@ -241,7 +249,7 @@ function bleh_glacier_library_date() {
 
             picker_presets[target].appendChild(html.node`
                 <li class="date-range-picker-preset ${selected ? 'date-range-picker-preset--selected' : ''}">
-                    <a href="${window.location.href.replace(window.location.search, '')}?from=${year}-01-01&rangetype=year" data-analytics-action="DateSelector" onclick=${() => {
+                    <a class="btn date-picker-preset-item" href="${window.location.href.replace(window.location.search, '')}?from=${year}-01-01&rangetype=year" data-analytics-action="DateSelector" onclick=${() => {
                         modal.hide();
                     }}>
                         ${year}
@@ -478,7 +486,7 @@ function bleh_glacier_library_top(static_page = false) {
 
     if (!static_page && page.subpage != 'library_tracks') {
         const format_button = html.node`
-            <button class="btn view-item glacier-library-button glacier-view-button" onclick=${() => {
+            <button class="btn view-item icon glacier-library-button glacier-view-button" onclick=${() => {
                 const format = page.structure.main.querySelector('.library-view-button');
                 if (!format) return;
 
@@ -516,6 +524,7 @@ function bleh_glacier_library_top(static_page = false) {
     configure_button.classList.add(
         'btn',
         'view-item',
+        'icon',
         'glacier-library-button',
         'glacier-configure-button',
         'panel-settings-button'
@@ -1339,6 +1348,7 @@ function bleh_glacier_library_focused() {
     configure_button.classList.add(
         'btn',
         'view-item',
+        'icon',
         'glacier-library-button',
         'glacier-configure-button',
         'panel-settings-button'

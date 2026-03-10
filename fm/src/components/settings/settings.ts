@@ -636,7 +636,7 @@ export function setting({
                     const icon = val.icon || key;
 
                     const button = html.node`
-                        <button class="btn view-item" data-type=${icon} data-value=${key} onclick=${() => {
+                        <button class="btn view-item icon" data-type=${icon} data-value=${key} onclick=${() => {
                             save_setting(id, key);
 
                             buttons.forEach((btn) => {

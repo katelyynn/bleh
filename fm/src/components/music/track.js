@@ -516,7 +516,7 @@ export function patch_titles(search = page.structure.main) {
                 const timestamp = parseInt(track.getAttribute('data-timestamp')) || Math.floor(new Date(track_timestamp_contents?.replace(/^[A-Za-z]+\s+/, '').replace(',', '').trim()).getTime() / 1000);
 
                 let more_button = html.node`
-                    <button class="track-more-button icon chibi" data-type="more" onclick=${() => {
+                    <button class="btn track-more-button icon chibi" data-type="more" onclick=${() => {
                         log('requested track in-built', 'menu', 'info', {
                             menu
                         });
