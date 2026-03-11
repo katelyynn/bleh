@@ -33109,6 +33109,7 @@
   function avatar(url, requested) {
     let image;
     if (url.startsWith("https")) {
+      if (!url.startsWith("https://lastfm.freetls.fastly.net/i/u/")) return url;
       const built = new URL(url);
       const split = built.pathname.split("/");
       image = split[split.length - 1];
@@ -60910,25 +60911,19 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     if (auth.name) {
       let profile_name;
       welcome = html.node`
-            <section class="redesigned-header redesigned-profile-header no-background">
-                <div class="avatar-side">
-                    <div class="avatar" onclick=${() => {
-        expand_avatar(avatar(auth.avatar, "ar0"));
-      }}>
-                        <img src=${avatar(auth.avatar, "avatar300s")} alt=${tl2(trans.your_avatar)}>
-                    </div>
+            <section class="page-header for-profile">
+                <div class="page-header-avatar-list">
+                    ${page_header_avatar(auth.avatar)}
                 </div>
-                <div class="info-side has-main-info">
+                <div class="page-header-info has-main-info">
                     <div class="main-info">
                         <div class="greeting">
                             ${tl2(trans[`good_${time2}_user`])}
                         </div>
                         <div class="title-container">
-                            <div class="header-title-label-wrap">
-                                <h1 class="header-title">
-                                    <a class="profile-name" ref=${(el) => profile_name = el}>${cache2.username ? cache2.username : auth.name}</a>
-                                </h1>
-                            </div>
+                            <h1 class="page-header-title profile-name" ref=${(el) => profile_name = el}>
+                                ${cache2.username || auth.name}
+                            </h1>
                         </div>
                     </div>
                 </div>
@@ -60940,21 +60935,19 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       }
     } else {
       welcome = html.node`
-            <section class="redesigned-header redesigned-profile-header no-background">
-                <div class="avatar-side">
-                    <div class="avatar">
-                        <img class="missing-avatar" alt=${tl2(trans.your_avatar)}>
+            <section class="page-header for-profile">
+                <div class="page-header-avatar-list">
+                    <div class="page-header-avatar">
+                        <img class="missing-avatar">
                     </div>
                 </div>
-                <div class="info-side has-main-info">
+                <div class="page-header-info has-main-info">
                     <div class="main-info">
                         <div class="greeting">
                             ${tl2(trans[`good_${time2}_user`])}
                         </div>
                         <div class="title-container">
-                            <div class="header-title-label-wrap">
-                                <h1>${tl2(trans.not_logged_in)}</h1>
-                            </div>
+                            <h1 class="page-header-title">${tl2(trans.not_logged_in)}</h1>
                         </div>
                     </div>
                 </div>
@@ -63487,6 +63480,24 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
   }
   async function register_background(url, origin = null) {
     if (url && url.endsWith("c6f59c1e5e7240a4c0d427abd71f3dbb.jpg")) url = "";
+    register_banner(url, origin);
+    if (url) {
+      url = avatar(url, "avatar170s");
+      const img = html.node`
+            <img src=${url} crossorigin="anonymous" />
+        `;
+      await img.decode();
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+      const scale = 300;
+      canvas.width = scale;
+      canvas.height = scale;
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = "high";
+      ctx.filter = "blur(10px)";
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      url = canvas.toDataURL();
+    }
     log(`requested register of ${url} from ${origin}`, "background", "log");
     let background = page.structure.background;
     if (!background) {
@@ -63500,10 +63511,13 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     background.setAttribute("data-page-subpage", page.subpage);
     background.setAttribute("data-background-origin", origin);
     background.setAttribute("data-background-coloured", settings.hue_from_album);
-    background.removeAttribute("data-accent-based");
-    background.style.removeProperty("background-image");
+    render(background, html``);
     if (url) {
-      background.style.setProperty("background-image", `url(${url})`);
+      render(background, html`
+            <div class="page-background-image">
+                <div class="page-background-image-inner" style="background-image: url(${url})" />
+            </div>
+        `);
     }
     if (page.type == "user") {
       if (page.name == auth.name) {
@@ -63513,7 +63527,6 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       }
     }
     log(`registered ${url} from ${origin}`, "background");
-    register_banner(url, origin);
     return background;
   }
   function register_banner(url, origin = null) {

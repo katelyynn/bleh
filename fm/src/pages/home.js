@@ -21,6 +21,7 @@ import { redirect } from "@/components/music/music";
 import { settings } from "@/build/config";
 import { avatar, expand_avatar } from "@/components/shared/avatar";
 import tippy from "tippy.js";
+import { page_header_avatar } from '@/components/music/header';
 
 export async function bleh_home() {
     page.structure.container = document.body.querySelector('.page-content');
@@ -70,25 +71,19 @@ export async function bleh_home() {
     if (auth.name) {
         let profile_name;
         welcome = html.node`
-            <section class="redesigned-header redesigned-profile-header no-background">
-                <div class="avatar-side">
-                    <div class="avatar" onclick=${() => {
-                        expand_avatar(avatar(auth.avatar, 'ar0'));
-                    }}>
-                        <img src=${avatar(auth.avatar, 'avatar300s')} alt=${tl(trans.your_avatar)}>
-                    </div>
+            <section class="page-header for-profile">
+                <div class="page-header-avatar-list">
+                    ${page_header_avatar(auth.avatar)}
                 </div>
-                <div class="info-side has-main-info">
+                <div class="page-header-info has-main-info">
                     <div class="main-info">
                         <div class="greeting">
                             ${tl(trans[`good_${time}_user`])}
                         </div>
                         <div class="title-container">
-                            <div class="header-title-label-wrap">
-                                <h1 class="header-title">
-                                    <a class="profile-name" ref=${el => profile_name = el}>${cache.username ? cache.username : auth.name}</a>
-                                </h1>
-                            </div>
+                            <h1 class="page-header-title profile-name" ref=${el => profile_name = el}>
+                                ${cache.username || auth.name}
+                            </h1>
                         </div>
                     </div>
                 </div>
@@ -101,21 +96,19 @@ export async function bleh_home() {
         }
     } else {
         welcome = html.node`
-            <section class="redesigned-header redesigned-profile-header no-background">
-                <div class="avatar-side">
-                    <div class="avatar">
-                        <img class="missing-avatar" alt=${tl(trans.your_avatar)}>
+            <section class="page-header for-profile">
+                <div class="page-header-avatar-list">
+                    <div class="page-header-avatar">
+                        <img class="missing-avatar">
                     </div>
                 </div>
-                <div class="info-side has-main-info">
+                <div class="page-header-info has-main-info">
                     <div class="main-info">
                         <div class="greeting">
                             ${tl(trans[`good_${time}_user`])}
                         </div>
                         <div class="title-container">
-                            <div class="header-title-label-wrap">
-                                <h1>${tl(trans.not_logged_in)}</h1>
-                            </div>
+                            <h1 class="page-header-title">${tl(trans.not_logged_in)}</h1>
                         </div>
                     </div>
                 </div>

@@ -93,6 +93,7 @@ import { clear_popup_queue } from '@/components/dialog/popup';
 import { verified } from './components/shared/badge';
 import { see_more } from './components/page/see_more';
 import { icon, icons } from './components/shared/icon';
+import { avatar } from './components/shared/avatar';
 
 export function bleh() {
     florence({
@@ -796,6 +797,33 @@ export function update_page() {
 export async function register_background(url: string | null, origin = null) {
     if (url && url.endsWith('c6f59c1e5e7240a4c0d427abd71f3dbb.jpg')) url = '';
 
+    register_banner(url, origin);
+
+    if (url) {
+        url = avatar(url, 'avatar170s');
+
+        const img = html.node`
+            <img src=${url} crossorigin="anonymous" />
+        ` as HTMLImageElement;
+
+        await img.decode();
+
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+
+        const scale = 300;
+
+        canvas.width = scale;
+        canvas.height = scale;
+
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
+        ctx.filter = 'blur(10px)';
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+        url = canvas.toDataURL();
+    }
+
     log(`requested register of ${url} from ${origin}`, 'background', 'log');
     let background = page.structure.background;
 
@@ -823,11 +851,13 @@ export async function register_background(url: string | null, origin = null) {
     background.setAttribute('data-background-origin', origin);
     background.setAttribute('data-background-coloured', settings.hue_from_album);
 
-    background.removeAttribute('data-accent-based');
-    background.style.removeProperty('background-image');
-
+    render(background, html``);
     if (url) {
-        background.style.setProperty('background-image', `url(${url})`);
+        render(background, html`
+            <div class="page-background-image">
+                <div class="page-background-image-inner" style="background-image: url(${url})" />
+            </div>
+        `);
     }
 
     if (page.type == 'user') {
@@ -839,8 +869,6 @@ export async function register_background(url: string | null, origin = null) {
     }
 
     log(`registered ${url} from ${origin}`, 'background');
-
-    register_banner(url, origin);
 
     return background;
 }

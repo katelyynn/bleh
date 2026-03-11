@@ -58,11 +58,7 @@
     position: absolute;
     inset: 0;
     z-index: -5;
-    background-position: center 60%;
-    background-size: cover;
 
-    filter: blur(20px);
-    -webkit-filter: blur(20px);
     opacity: 0.4;
     height: var(--banner-height);
 
@@ -70,8 +66,9 @@
     mask-image: var(--mask);
     -webkit-mask-image: var(--mask);
 
-    will-change: transform;
+    will-change: transform, filter;
     transform: translateZ(0);
+    backface-visibility: hidden;
 
     contain: strict;
 
@@ -100,6 +97,20 @@
     &[data-page-type="error"] {
         height: 450px;
     }
+}
+
+.page-background-image {
+    position: absolute;
+    inset: 0;
+}
+
+.page-background-image-inner {
+    position: absolute;
+    inset: 0;
+    background-position: center 60%;
+    background-size: cover;
+
+    scale: 1.2;
 }
 
 .katsune-bleh-background-border {

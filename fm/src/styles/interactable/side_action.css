@@ -67,10 +67,6 @@
         }
     }
 
-    &.stationlink {
-        --mask: var(--icon-16-radio);
-    }
-
     &:before {
         --mask-size: var(--icon-size);
 
@@ -114,27 +110,31 @@
             transition: unset !important;
         }
     }
+}
 
-    &[data-friends="true"],
-    &.attendance-btn--turn-off,
-    [data-toggle-button-current-state="loved"] > form > &,
-    [data-toggle-button-current-state="bookmarked"] > form > &,
-    &[data-is-shortcut="true"],
-    [data-toggle-button-current-state="followed"] > form > &[data-type="follow"] {
-        --bg: oklch(var(--h4) / 15%) !important;
-        --bg-hov: oklch(var(--h4) / 25%) !important;
-        --bg-atv: oklch(var(--h4) / 35%) !important;
-        --col: oklch(var(--l3-c));
-        --mask-colour: color-mix(
-            in oklch,
-            oklch(var(--l3-c)),
-            oklch(var(--l4-c)) 40%
-        );
-        --force-font-weight: var(--font-weight-medium) !important;
+.stationlink {
+    --mask: var(--icon-16-radio);
+}
 
-        &:before {
-            background: var(--mask-colour) !important;
-        }
+.side-action[data-friends="true"],
+.attendance-btn--turn-off,
+[data-toggle-button-current-state="loved"] > form > .header-new-love-button,
+[data-toggle-button-current-state="bookmarked"] > form > .header-new-bookmark-button,
+.side-action[data-is-shortcut="true"],
+[data-toggle-button-current-state="followed"] > form > .side-action[data-type="follow"] {
+    --bg: oklch(var(--h4) / 15%) !important;
+    --bg-hov: oklch(var(--h4) / 25%) !important;
+    --bg-atv: oklch(var(--h4) / 35%) !important;
+    --col: oklch(var(--l3-c));
+    --mask-colour: color-mix(
+        in oklch,
+        oklch(var(--l3-c)),
+        oklch(var(--l4-c)) 40%
+    );
+    --force-font-weight: var(--font-weight-medium) !important;
+
+    &:before {
+        background: var(--mask-colour) !important;
     }
 }
 

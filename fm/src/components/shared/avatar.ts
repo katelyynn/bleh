@@ -203,6 +203,8 @@ export function avatar(url: string, requested: 'avatar42s' | 'avatar70s' | 'avat
     let image: string;
 
     if (url.startsWith('https')) {
+        if (!url.startsWith('https://lastfm.freetls.fastly.net/i/u/')) return url;
+
         const built = new URL(url);
 
         const split = built.pathname.split('/');
