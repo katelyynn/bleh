@@ -130,6 +130,8 @@ export function checkup_page_structure(is_subpage = false, header = null) {
             </main>
         `;
         page.structure.row.appendChild(page.structure.content);
+
+        single_column();
     }
 
     log('finished', 'page structure');
@@ -360,4 +362,21 @@ export function convert_to_toolbar() {
         page.structure.row.firstChild
     );
     page.structure.content_top.style.display = 'none';
+}
+
+function single_column() {
+    if ([
+        'following', 'followers', 'neighbours',
+        'obsessions_set', 'obsessions_overview', 'obsessions_obsession',
+        'loved',
+        'subscription_automatic-edits_tracks', 'subscription_automatic-edits_albums',
+        'playlists_playlists',
+        'auth'].includes(page.subpage) || [
+            'charts',
+            'inbox',
+            'overview',
+            'releases'
+        ].includes(page.type) || page.subpage.startsWith('event_attendance_')) {
+            page.structure.content.classList.add('single-column');
+        }
 }

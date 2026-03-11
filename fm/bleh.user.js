@@ -37041,6 +37041,7 @@
             </main>
         `;
       page.structure.row.appendChild(page.structure.content);
+      single_column();
     }
     log("finished", "page structure");
     if (ff("refreshed_music_nav") && header) {
@@ -37219,6 +37220,28 @@
       page.structure.row.firstChild
     );
     page.structure.content_top.style.display = "none";
+  }
+  function single_column() {
+    if ([
+      "following",
+      "followers",
+      "neighbours",
+      "obsessions_set",
+      "obsessions_overview",
+      "obsessions_obsession",
+      "loved",
+      "subscription_automatic-edits_tracks",
+      "subscription_automatic-edits_albums",
+      "playlists_playlists",
+      "auth"
+    ].includes(page.subpage) || [
+      "charts",
+      "inbox",
+      "overview",
+      "releases"
+    ].includes(page.type) || page.subpage.startsWith("event_attendance_")) {
+      page.structure.content.classList.add("single-column");
+    }
   }
 
   // src/pages/profile/obsession.js
@@ -47048,9 +47071,9 @@
                                                 <h4 class="source-album-name">${title_elem}</h4>
                                                 <p class="source-album-artist">${artist_elem2}</p>
                                                 <p class="source-album-stats oracle-stats" ref=${(el) => stats = el}>
-                                                    <span class="type">${type}</span>
+                                                    <span class="oracle-stat type">${type}</span>
                                                     ${match3 ? html.node`
-                                                        <span class="plays">
+                                                        <span class="oracle-stat plays">
                                                             <span class="bleh-icon" />
                                                             ${plays.toLocaleString(lang)}
                                                         </span>
@@ -47067,9 +47090,9 @@
                                                 <h3 class="resource-list--release-list-item-name">${title_elem}</h3>
                                                 <p class="resource-list--release-list-item-artist">${artist_elem2}</p>
                                                 <p class="resource-list--release-list-item-aux-text resource-list--release-list-item-listeners oracle-stats" ref=${(el) => stats = el}>
-                                                    <span class="type">${type}</span>
+                                                    <span class="oracle-stat type">${type}</span>
                                                     ${match3 ? html.node`
-                                                        <span class="plays">
+                                                        <span class="oracle-stat plays">
                                                             <span class="bleh-icon" />
                                                             ${plays.toLocaleString(lang)}
                                                         </span>
@@ -75477,7 +75500,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-02-25"
       }
     },
-    built_on: "2026-03-10T23:39:02.455Z"
+    built_on: "2026-03-11T14:21:49.261Z"
   };
 
   // node_modules/@kurkle/color/dist/color.esm.js

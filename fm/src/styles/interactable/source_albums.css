@@ -150,18 +150,17 @@
 .oracle-stats {
     display: flex;
     gap: 10px;
+}
+.oracle-stat {
+    display: flex;
+    align-items: center;
+    gap: var(--icon-gap);
 
-    & > span {
-        display: flex;
-        align-items: center;
-        gap: var(--icon-gap);
+    --icon-size: 14px;
+    --icon-colour: currentColor;
 
-        --icon-size: 14px;
-        --icon-colour: currentColor;
-
-        &.plays {
-            --icon: var(--icon-16-users);
-        }
+    &.plays {
+        --icon: var(--icon-16-users);
     }
 }
 

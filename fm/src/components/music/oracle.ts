@@ -1435,9 +1435,9 @@ export function oracle_process() {
                                                 <h4 class="source-album-name">${title_elem}</h4>
                                                 <p class="source-album-artist">${artist_elem}</p>
                                                 <p class="source-album-stats oracle-stats" ref=${(el) => (stats = el)}>
-                                                    <span class="type">${type}</span>
+                                                    <span class="oracle-stat type">${type}</span>
                                                     ${match ? html.node`
-                                                        <span class="plays">
+                                                        <span class="oracle-stat plays">
                                                             <span class="bleh-icon" />
                                                             ${plays.toLocaleString(lang)}
                                                         </span>
@@ -1454,9 +1454,9 @@ export function oracle_process() {
                                                 <h3 class="resource-list--release-list-item-name">${title_elem}</h3>
                                                 <p class="resource-list--release-list-item-artist">${artist_elem}</p>
                                                 <p class="resource-list--release-list-item-aux-text resource-list--release-list-item-listeners oracle-stats" ref=${el => stats = el}>
-                                                    <span class="type">${type}</span>
+                                                    <span class="oracle-stat type">${type}</span>
                                                     ${match ? html.node`
-                                                        <span class="plays">
+                                                        <span class="oracle-stat plays">
                                                             <span class="bleh-icon" />
                                                             ${plays.toLocaleString(lang)}
                                                         </span>
