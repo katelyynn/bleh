@@ -243,6 +243,8 @@
                 &.row-3 {
                     width: 14px;
                 }
+
+                opacity: 0.8;
             }
 
             .preview-buttons {
