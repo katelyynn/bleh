@@ -27,6 +27,7 @@ import { html, render } from 'lighterhtml';
 import { redirect } from '@/components/music/music';
 import { status } from '@/components/dialog/status';
 import { input } from '@/components/settings/input';
+import JSON5 from 'json5';
 
 const flat_patterns = [];
 
@@ -75,7 +76,7 @@ export function lotus(force = false) {
         lotus_request('artist', true);
     } else {
         // we prefer to load the current cache before waiting for a new response
-        Object.assign(artist_corrections, JSON.parse(lotus_artist));
+        Object.assign(artist_corrections, JSON5.parse(lotus_artist));
 
         // is it valid?
         if (lotus_artist_expire < current_time && !force) {
@@ -90,7 +91,7 @@ export function lotus(force = false) {
         lotus_request('album_track', true);
     } else {
         // we prefer to load the current cache before waiting for a new response
-        Object.assign(album_track_corrections, JSON.parse(lotus_album_track));
+        Object.assign(album_track_corrections, JSON5.parse(lotus_album_track));
 
         // is it valid?
         if (lotus_album_track_expire < current_time && !force) {
@@ -105,7 +106,7 @@ export function lotus(force = false) {
         lotus_request('combined_artists', true);
     } else {
         // we prefer to load the current cache before waiting for a new response
-        Object.assign(combined_artists, JSON.parse(lotus_combined_artists));
+        Object.assign(combined_artists, JSON5.parse(lotus_combined_artists));
 
         // is it valid?
         if (lotus_combined_artists_expire < current_time && !force) {
@@ -140,14 +141,14 @@ function lotus_request(type = 'artist', send_notify = false, refresh_page = fals
 
         if (xhr.status == 200) {
             if (type == 'artist') {
-                Object.assign(artist_corrections, JSON.parse(this.response));
+                Object.assign(artist_corrections, JSON5.parse(this.response));
             } else if (type == 'album_track') {
                 Object.assign(
                     album_track_corrections,
-                    JSON.parse(this.response)
+                    JSON5.parse(this.response)
                 );
             } else {
-                Object.assign(combined_artists, JSON.parse(this.response));
+                Object.assign(combined_artists, JSON5.parse(this.response));
             }
 
             if (send_notify)

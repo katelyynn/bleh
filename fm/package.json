@@ -12,6 +12,7 @@
         "hangul-js": "^0.2.6",
         "hangul-romanization": "^1.0.1",
         "html2canvas-pro": "^1.5.11",
+        "json5": "^2.2.3",
         "lighterhtml": "^4.2.0",
         "luxon": "^3.7.1",
         "postcss": "^8.5.6",

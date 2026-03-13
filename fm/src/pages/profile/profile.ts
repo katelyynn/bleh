@@ -17,7 +17,7 @@ import {
     set_storage
 } from '@/build/tools';
 import { lang, tl, trans } from '@/build/trans';
-import { prep_chart_colours } from '@/components/music/chart.js';
+import { load_chart_colours, prep_chart_colours } from '@/components/music/chart.js';
 import { create_badge, load_badges } from '@/components/shared/badge';
 import { dialog } from '@/components/dialog/dialog';
 import {
@@ -1915,6 +1915,10 @@ function load_profile_cache(
         if (sat) document.body.style.setProperty('--sat-album', sat);
         if (lit) document.body.style.setProperty('--lit-album', lit);
         if (banner) register_background(banner, 'bio');
+
+        if (hue || sat || lit) {
+            load_chart_colours();
+        }
 
         return;
     }
