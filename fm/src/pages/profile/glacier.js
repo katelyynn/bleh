@@ -474,7 +474,8 @@ function bleh_glacier_library_top(static_page = false) {
                 sort_button.classList.add(
                     'btn',
                     'view-item',
-                    'glacier-library-button'
+                    'glacier-library-button',
+                    'icon'
                 );
                 let sort_menu = sort.querySelector('.dropdown-menu-clickable');
 
@@ -1277,7 +1278,7 @@ function bleh_glacier_library_focused() {
 
             if (!button) return;
 
-            button.classList.add('btn', 'view-item', 'glacier-library-button');
+            button.classList.add('btn', 'view-item', 'icon', 'glacier-library-button');
 
             let tooltips = wrapper.querySelectorAll(
                 '.user-library-controls-tooltip'
@@ -1303,6 +1304,7 @@ function bleh_glacier_library_focused() {
                         button.classList.add(
                             'btn',
                             'view-item',
+                            'icon',
                             'glacier-library-button'
                         );
                 }
@@ -1327,6 +1329,7 @@ function bleh_glacier_library_focused() {
         search.classList.add(
             'btn',
             'view-item',
+            'icon',
             'glacier-library-button',
             'glacier-search-button'
         );
@@ -1488,6 +1491,7 @@ export function bleh_glacier_library_bulk_edit() {
     bulk_edit.classList.add(
         'btn',
         'view-item',
+        'icon',
         'glacier-library-button',
         'bulk-edit-button'
     );

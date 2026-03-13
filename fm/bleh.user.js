@@ -45363,7 +45363,8 @@
           sort_button.classList.add(
             "btn",
             "view-item",
-            "glacier-library-button"
+            "glacier-library-button",
+            "icon"
           );
           let sort_menu = sort.querySelector(".dropdown-menu-clickable");
           view_buttons.appendChild(sort_button);
@@ -45994,7 +45995,7 @@
         else button2 = wrapper.querySelector("button");
         if (!button2) button2 = wrapper.querySelector("span");
         if (!button2) return;
-        button2.classList.add("btn", "view-item", "glacier-library-button");
+        button2.classList.add("btn", "view-item", "icon", "glacier-library-button");
         let tooltips = wrapper.querySelectorAll(
           ".user-library-controls-tooltip"
         );
@@ -46015,6 +46016,7 @@
               button2.classList.add(
                 "btn",
                 "view-item",
+                "icon",
                 "glacier-library-button"
               );
           }
@@ -46036,6 +46038,7 @@
       search.classList.add(
         "btn",
         "view-item",
+        "icon",
         "glacier-library-button",
         "glacier-search-button"
       );
@@ -46165,6 +46168,7 @@
     bulk_edit.classList.add(
       "btn",
       "view-item",
+      "icon",
       "glacier-library-button",
       "bulk-edit-button"
     );
@@ -76888,7 +76892,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-02-25"
       }
     },
-    built_on: "2026-03-13T20:36:15.546Z"
+    built_on: "2026-03-13T20:47:14.161Z"
   };
 
   // node_modules/@kurkle/color/dist/color.esm.js
