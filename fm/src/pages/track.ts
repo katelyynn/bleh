@@ -184,12 +184,12 @@ export function bleh_tracks() {
 export function create_avatar(parent, src, override = 'expand') {
     log(`creating avatar for ${src} with override ${override}`, 'track');
 
-    if (src.endsWith('c6f59c1e5e7240a4c0d427abd71f3dbb.jpg') || src == '') {
-        register_background(null);
-        return;
-    }
+    let full = avatar(src, 'ar0');
 
-    const full = avatar(src, 'ar0');
+    if (src.endsWith('c6f59c1e5e7240a4c0d427abd71f3dbb.jpg') || src.endsWith('c6f59c1e5e7240a4c0d427abd71f3dbb.jpg') || src == '') {
+        src = '';
+        full = '';
+    }
 
     register_background(full);
 

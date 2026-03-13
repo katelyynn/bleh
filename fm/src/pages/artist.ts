@@ -113,7 +113,7 @@ export function bleh_artists() {
         let redesigned_artist_header = html.node`
             <section class="page-header for-artist">
                 <div class="page-header-avatar-list">
-                    ${page_header_avatar(avatar.getAttribute('content'))}
+                    ${page_header_avatar(avatar?.getAttribute('content'))}
                 </div>
                 <div class="page-header-info has-main-info">
                     <div class="main-info">

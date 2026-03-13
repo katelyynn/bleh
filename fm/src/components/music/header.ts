@@ -35,7 +35,7 @@ export function page_header_avatar(url?: string) {
             ${url ? html.node`
                 <img src=${avatar(url, 'avatar300s')}>
             ` : html.node`
-                <div class="missing-${page.type}" />
+                <img class="missing-${page.type}">
             `}
         </div>
     `;

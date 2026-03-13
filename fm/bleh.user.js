@@ -37788,7 +37788,7 @@
             ${url ? html.node`
                 <img src=${avatar(url, "avatar300s")}>
             ` : html.node`
-                <div class="missing-${page.type}" />
+                <img class="missing-${page.type}">
             `}
         </div>
     `;
@@ -46016,11 +46016,11 @@
   }
   function create_avatar(parent, src, override = "expand") {
     log(`creating avatar for ${src} with override ${override}`, "track");
-    if (src.endsWith("c6f59c1e5e7240a4c0d427abd71f3dbb.jpg") || src == "") {
-      register_background(null);
-      return;
+    let full = avatar(src, "ar0");
+    if (src.endsWith("c6f59c1e5e7240a4c0d427abd71f3dbb.jpg") || src.endsWith("c6f59c1e5e7240a4c0d427abd71f3dbb.jpg") || src == "") {
+      src = "";
+      full = "";
     }
-    const full = avatar(src, "ar0");
     register_background(full);
     render(parent, html`
         ${page_header_avatar(src)}
@@ -57710,7 +57710,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       let redesigned_album_header = html.node`
             <section class="page-header for-album">
                 <div class="page-header-avatar-list">
-                    ${page_header_avatar(avatar3.getAttribute("content"))}
+                    ${page_header_avatar(avatar_img)}
                 </div>
                 <div class="page-header-info">
                     <div class="sub-text">${tl2(trans.album)}</div>
@@ -57961,7 +57961,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       let redesigned_artist_header = html.node`
             <section class="page-header for-artist">
                 <div class="page-header-avatar-list">
-                    ${page_header_avatar(avatar3.getAttribute("content"))}
+                    ${page_header_avatar(avatar3?.getAttribute("content"))}
                 </div>
                 <div class="page-header-info has-main-info">
                     <div class="main-info">

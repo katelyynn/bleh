@@ -104,9 +104,7 @@ export function bleh_albums() {
             '.header-new-chart-position-number'
         );
 
-        const avatar_img = avatar
-            ?.getAttribute('content')
-            .replace('/ar0/', '/avatar300s/');
+        const avatar_img = avatar?.getAttribute('content').replace('/ar0/', '/avatar300s/');
 
         const listeners = document.body.querySelector(
             '.header-new-info-desktop .header-metadata-tnew-display > p > abbr'
@@ -122,7 +120,7 @@ export function bleh_albums() {
         let redesigned_album_header = html.node`
             <section class="page-header for-album">
                 <div class="page-header-avatar-list">
-                    ${page_header_avatar(avatar.getAttribute('content'))}
+                    ${page_header_avatar(avatar_img)}
                 </div>
                 <div class="page-header-info">
                     <div class="sub-text">${tl(trans.album)}</div>
