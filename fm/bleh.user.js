@@ -62284,6 +62284,211 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     });
   }
 
+  // src/pages/home/campfire.ts
+  function campfire() {
+    let selected_index = 0;
+    let previous_index = 0;
+    let max_index = 0;
+    let items_container;
+    let item_details;
+    let current_bg;
+    let previous_bg;
+    const container = html.node`
+        <div class="campfire">
+            <div class="campfire-intro">
+                <h2 class="music-section-heading">${tl2(trans.your_recent_30_days)}</h2>
+            </div>
+            <div class="campfire-items" ref=${(el) => items_container = el} />
+            <div class="campfire-details" ref=${(el) => item_details = el} />
+            <div class="campfire-bg current" ref=${(el) => current_bg = el} />
+            <div class="campfire-bg previous" ref=${(el) => previous_bg = el} />
+        </div>
+    `;
+    page.structure.row.insertBefore(container, page.structure.content);
+    campfire_extended(container);
+    let albums = [];
+    let album_elements = [];
+    fetch(`${root}user/${auth.name}/partial/albums?albums_date_preset=LAST_30_DAYS&ajax=1`).then(function(response) {
+      console.log("returned", response, response.text);
+      return response.text();
+    }).then(function(dom) {
+      let doc = new DOMParser().parseFromString(dom, "text/html");
+      console.log("DOC", doc);
+      const items = doc.querySelectorAll(".grid-items > .grid-items-item");
+      items.forEach((item) => {
+        const image = item.querySelector(".grid-items-cover-image-image img").src;
+        const title = item.querySelector(".grid-items-item-main-text a").textContent;
+        const artist = item.querySelector(".grid-items-item-aux-block").textContent;
+        const plays = item.querySelector(".grid-items-item-aux-text a:last-child").textContent.trim();
+        let corrected_title = romanise(correct_item_by_artist(title, artist));
+        let corrected_artist = romanise(correct_artist(artist));
+        let formatted_title = corrected_title;
+        let formatted_artist = corrected_artist;
+        if (settings.format_guest_features) {
+          const formatted = name_includes(title, artist);
+          formatted_title = smart_title(formatted[0], formatted[1]);
+          formatted_artist = smart_artists(formatted[2], formatted[3]);
+        }
+        albums.push({
+          image: image.replace("/avatar300s/", "/500x500/"),
+          title,
+          artist,
+          plays,
+          formatted_title,
+          formatted_artist,
+          corrected_title,
+          corrected_artist
+        });
+      });
+      max_index = albums.length - 1;
+      render(items_container, html`
+                ${albums.map((album, index3) => {
+        const elem = html.node`
+                        <div class="campfire-item" style="--index: ${index3}" onclick=${() => {
+          if (selected_index != index3) set_index(index3);
+        }}>
+                            <div class="campfire-item-cover">
+                                <img src=${album.image} alt=${album.corrected_title} />
+                            </div>
+                        </div>
+                    `;
+        album_elements.push(elem);
+        return elem;
+      })}
+            `);
+      let timeout;
+      container.addEventListener("wheel", (e4) => {
+        e4.preventDefault();
+        if (timeout) return;
+        timeout = setTimeout(() => {
+          timeout = null;
+        }, 0.15);
+        const direction = Math.sign(e4.deltaY);
+        if (direction == 0) return;
+        set_index(selected_index + direction);
+      }, { passive: false });
+      set_index(selected_index);
+    });
+    function set_index(index3) {
+      if (index3 > max_index) index3 = 0;
+      else if (index3 < 0) index3 = max_index;
+      album_elements.forEach((album2, album_index) => {
+        album2.setAttribute("aria-checked", album_index == index3);
+      });
+      previous_index = selected_index;
+      selected_index = index3;
+      items_container.style.setProperty("--selected-index", index3);
+      const album = albums[index3];
+      current_bg.style.setProperty("background-image", `url(${album.image})`);
+      render(item_details, html`
+            <a class="campfire-title smart-title" href="${root}music/${sanitise(album.artist)}/${sanitise(album.title)}" target="_blank">
+                ${album.formatted_title}
+            </a>
+            <span class="campfire-artist">
+                ${settings.format_guest_features ? album.formatted_artist : html.node`<a class="campfire-artist" href="${root}music/${redirect()}${sanitise(album.artist)}" target="_blank">${album.corrected_artist}</a>`}
+            </span>
+            <div class="campfire-plays">
+                ${album.plays}
+            </div>
+        `);
+    }
+  }
+  function campfire_extended(container) {
+    const friends2 = settings.friends;
+    container.after(html.node`
+        <section class="campfire-extended">
+            <div class="content-panel content-main">
+
+            </div>
+            <div class="content-panel content-side">
+                <section class="friends-panel">
+                    <h2>Friends</h2>
+                    <div class="friends">
+                        ${friends2.length > 0 ? html.node`
+                            ${friends2.map((friend) => campfire_friend(friend))}
+                        ` : html.node`
+
+                        `}
+                    </div>
+                </section>
+            </div>
+        </section>
+    `);
+  }
+  function campfire_friend(friend) {
+    let cover_art;
+    let track_info;
+    let user_avatar;
+    let user_name;
+    const elem = html.node`
+        <div class="user friend" data-live="false">
+            <div class="user-avatar cover-art" ref=${(el) => cover_art = el}>
+                <div class="bleh-icon loading-spinner" />
+            </div>
+            <div class="user-info">
+                <div class="user-name">
+                    <div class="avatar" ref=${(el) => user_avatar = el}>
+                        <div class="bleh-icon loading-spinner" />
+                    </div>
+                    <p ref=${(el) => user_name = el}>@${friend}</p>
+                    <a class="link-block-cover-link" href="${root}user/${friend}" />
+                </div>
+                <div class="user-about track" ref=${(el) => track_info = el}>
+                    <p>${tl2(trans.loading)}</p>
+                </div>
+            </div>
+        </div>
+    `;
+    load_profile_cache_externally(friend).then((cache2) => {
+      render(user_avatar, html`
+            <img src=${cache2.avatar} alt=${friend}>
+        `);
+      if (cache2.username)
+        user_name.textContent = cache2.username;
+      load_recent_tracks(friend).then((tracks) => {
+        const item = tracks[0];
+        if (item) {
+          let sister = item.sister;
+          let name = item.name;
+          if (settings.format_guest_features) {
+            const formatted = name_includes(name, sister);
+            name = html.node`${smart_title(formatted[0], formatted[1])}`;
+            sister = html.node`${smart_artists(formatted[2], formatted[3])}`;
+          } else if (settings.corrections) {
+            sister = romanise(correct_artist(item.sister));
+            name = romanise(correct_item_by_artist(item.name, item.sister));
+          }
+          if (item.time) {
+            render(user_name, html`
+                        ${{ html: tl2(trans.user_listened_time, { u: `<strong>${cache2.username ? cache2.username : `@${friend}`}</strong>`, time: item.time }) }}
+                    `);
+          } else {
+            render(user_name, html`
+                        ${{ html: tl2(trans.user_is_listening_to, { u: `<strong>${cache2.username ? cache2.username : `@${friend}`}</strong>` }) }}
+                    `);
+            elem.setAttribute("data-live", true);
+          }
+          render(cover_art, html`
+                    <img src=${item.avatar} alt=${name}>
+                    <a class="link-block-cover-link" href="${root}music/${item.sister}/_/${item.name}" />
+                `);
+          const track_elem = html.node`
+                    <a class="wiki-link icon" data-link-type="track" href="${root}music/${item.sister}/_/${item.name}">${name}</a>
+                `;
+          tippy_esm_default(track_elem, {
+            theme: "name-sister-combo",
+            content: html.node`
+                        <span class="name">${{ html: track_elem.innerHTML }}</span>
+                        <span class="sister">${sister}</span>
+                    `
+          });
+          render(track_info, track_elem);
+        }
+      });
+    });
+    return elem;
+  }
+
   // src/pages/home.js
   async function bleh_home() {
     page.structure.container = document.body.querySelector(".page-content");
@@ -62542,208 +62747,6 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     if (!main_content) return;
     render(main_content, html``);
     window.location.href = `${root}music`;
-  }
-  function campfire() {
-    let selected_index = 0;
-    let previous_index = 0;
-    let max_index = 0;
-    let items_container;
-    let item_details;
-    let current_bg;
-    let previous_bg;
-    const container = html.node`
-        <div class="campfire">
-            <div class="campfire-intro">
-                <h2 class="music-section-heading">${tl2(trans.your_recent_30_days)}</h2>
-            </div>
-            <div class="campfire-items" ref=${(el) => items_container = el} />
-            <div class="campfire-details" ref=${(el) => item_details = el} />
-            <div class="campfire-bg current" ref=${(el) => current_bg = el} />
-            <div class="campfire-bg previous" ref=${(el) => previous_bg = el} />
-        </div>
-    `;
-    page.structure.row.insertBefore(container, page.structure.content);
-    campfire_extended(container);
-    let albums = [];
-    let album_elements = [];
-    fetch(`${root}user/${auth.name}/partial/albums?albums_date_preset=LAST_30_DAYS&ajax=1`).then(function(response) {
-      console.log("returned", response, response.text);
-      return response.text();
-    }).then(function(dom) {
-      let doc = new DOMParser().parseFromString(dom, "text/html");
-      console.log("DOC", doc);
-      const items = doc.querySelectorAll(".grid-items > .grid-items-item");
-      items.forEach((item) => {
-        const image = item.querySelector(".grid-items-cover-image-image img").src;
-        const title = item.querySelector(".grid-items-item-main-text a").textContent;
-        const artist = item.querySelector(".grid-items-item-aux-block").textContent;
-        const plays = item.querySelector(".grid-items-item-aux-text a:last-child").textContent.trim();
-        let corrected_title = romanise(correct_item_by_artist(title, artist));
-        let corrected_artist = romanise(correct_artist(artist));
-        let formatted_title = corrected_title;
-        let formatted_artist = corrected_artist;
-        if (settings.format_guest_features) {
-          const formatted = name_includes(title, artist);
-          formatted_title = smart_title(formatted[0], formatted[1]);
-          formatted_artist = smart_artists(formatted[2], formatted[3]);
-        }
-        albums.push({
-          image: image.replace("/avatar300s/", "/500x500/"),
-          title,
-          artist,
-          plays,
-          formatted_title,
-          formatted_artist,
-          corrected_title,
-          corrected_artist
-        });
-      });
-      max_index = albums.length - 1;
-      render(items_container, html`
-                ${albums.map((album, index3) => {
-        const elem = html.node`
-                        <div class="campfire-item" style="--index: ${index3}" onclick=${() => {
-          if (selected_index != index3) set_index(index3);
-        }}>
-                            <div class="campfire-item-cover">
-                                <img src=${album.image} alt=${album.corrected_title} />
-                            </div>
-                        </div>
-                    `;
-        album_elements.push(elem);
-        return elem;
-      })}
-            `);
-      let timeout;
-      container.addEventListener("wheel", (e4) => {
-        e4.preventDefault();
-        if (timeout) return;
-        timeout = setTimeout(() => {
-          timeout = null;
-        }, 0.15);
-        const direction = Math.sign(e4.deltaY);
-        if (direction == 0) return;
-        set_index(selected_index + direction);
-      }, { passive: false });
-      set_index(selected_index);
-    });
-    function set_index(index3) {
-      if (index3 > max_index) index3 = 0;
-      else if (index3 < 0) index3 = max_index;
-      album_elements.forEach((album2, album_index) => {
-        album2.setAttribute("aria-checked", album_index == index3);
-      });
-      previous_index = selected_index;
-      selected_index = index3;
-      items_container.style.setProperty("--selected-index", index3);
-      const album = albums[index3];
-      current_bg.style.setProperty("background-image", `url(${album.image})`);
-      render(item_details, html`
-            <a class="campfire-title smart-title" href="${root}music/${sanitise(album.artist)}/${sanitise(album.title)}" target="_blank">
-                ${album.formatted_title}
-            </a>
-            <span class="campfire-artist">
-                ${settings.format_guest_features ? album.formatted_artist : html.node`<a class="campfire-artist" href="${root}music/${redirect()}${sanitise(album.artist)}" target="_blank">${album.corrected_artist}</a>`}
-            </span>
-            <div class="campfire-plays">
-                ${album.plays}
-            </div>
-        `);
-    }
-  }
-  function campfire_extended(container) {
-    container.after(html.node`
-        <section class="campfire-extended">
-            <div class="content-panel content-main">
-
-            </div>
-            <div class="content-panel content-side">
-                <section class="friends-panel">
-                    <h2>Friends</h2>
-                    <div class="friends">
-                        ${settings.friends.length > 0 ? html.node`
-                            ${settings.friends.map((friend) => campfire_friend(friend))}
-                        ` : html.node`
-
-                        `}
-                    </div>
-                </section>
-            </div>
-        </section>
-    `);
-  }
-  function campfire_friend(friend) {
-    let cover_art;
-    let track_info;
-    let user_avatar;
-    let user_name;
-    const elem = html.node`
-        <div class="user friend" data-live="false">
-            <div class="user-avatar cover-art" ref=${(el) => cover_art = el}>
-                <div class="bleh-icon loading-spinner" />
-            </div>
-            <div class="user-info">
-                <div class="user-name">
-                    <div class="avatar" ref=${(el) => user_avatar = el}>
-                        <div class="bleh-icon loading-spinner" />
-                    </div>
-                    <p ref=${(el) => user_name = el}>@${friend}</p>
-                    <a class="link-block-cover-link" href="${root}user/${friend}" />
-                </div>
-                <div class="user-about track" ref=${(el) => track_info = el}>
-                    <p>${tl2(trans.loading)}</p>
-                </div>
-            </div>
-        </div>
-    `;
-    load_profile_cache_externally(friend).then((cache2) => {
-      render(user_avatar, html`
-            <img src=${cache2.avatar} alt=${friend}>
-        `);
-      if (cache2.username)
-        user_name.textContent = cache2.username;
-      load_recent_tracks(friend).then((tracks) => {
-        const item = tracks[0];
-        if (item) {
-          let sister = item.sister;
-          let name = item.name;
-          if (settings.format_guest_features) {
-            const formatted = name_includes(name, sister);
-            name = html.node`${smart_title(formatted[0], formatted[1])}`;
-            sister = html.node`${smart_artists(formatted[2], formatted[3])}`;
-          } else if (settings.corrections) {
-            sister = romanise(correct_artist(item.sister));
-            name = romanise(correct_item_by_artist(item.name, item.sister));
-          }
-          if (item.time) {
-            render(user_name, html`
-                        ${{ html: tl2(trans.user_listened_time, { u: `<strong>${cache2.username ? cache2.username : `@${friend}`}</strong>`, time: item.time }) }}
-                    `);
-          } else {
-            render(user_name, html`
-                        ${{ html: tl2(trans.user_is_listening_to, { u: `<strong>${cache2.username ? cache2.username : `@${friend}`}</strong>` }) }}
-                    `);
-            elem.setAttribute("data-live", true);
-          }
-          render(cover_art, html`
-                    <img src=${item.avatar} alt=${name}>
-                    <a class="link-block-cover-link" href="${root}music/${item.sister}/_/${item.name}" />
-                `);
-          const track_elem = html.node`
-                    <a class="wiki-link icon" data-link-type="track" href="${root}music/${item.sister}/_/${item.name}">${name}</a>
-                `;
-          tippy_esm_default(track_elem, {
-            theme: "name-sister-combo",
-            content: html.node`
-                        <span class="name">${{ html: track_elem.innerHTML }}</span>
-                        <span class="sister">${sister}</span>
-                    `
-          });
-          render(track_info, track_elem);
-        }
-      });
-    });
-    return elem;
   }
   async function load_recent_tracks(name) {
     return new Promise((resolve2, reject) => {
@@ -76892,7 +76895,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-02-25"
       }
     },
-    built_on: "2026-03-13T20:47:14.161Z"
+    built_on: "2026-03-13T22:20:35.934Z"
   };
 
   // node_modules/@kurkle/color/dist/color.esm.js

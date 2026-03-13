@@ -1,5 +1,5 @@
 .campfire {
-    --w: 380px;
+    --w: 320px;
     --gap: 5px;
     padding: 60px 0;
     overflow: hidden;
@@ -7,17 +7,20 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 60px;
+    gap: 40px;
 
-    background: oklch(var(--b5)) !important;
-    border-bottom: var(--toolbar-border);
+    background: oklch(var(--b6)) !important;
     border-top-left-radius: var(--card-radius);
     border-top-right-radius: var(--card-radius);
 
     position: relative;
 
+    @media (max-width: 2000px) {
+        --w: 280px;
+    }
+
     @media (max-width: 900px) {
-        --w: 340px;
+        --w: 280px;
     }
 
     @media (max-width: 760px) {
@@ -38,12 +41,11 @@
         background-size: cover;
         background-position: center;
 
-        --mask: radial-gradient(at center, white, transparent);
+        --mask: linear-gradient(180deg, white, transparent);
         mask-image: var(--mask);
         -webkit-mask-image: var(--mask);
 
-        filter: blur(6px);
-        opacity: 0.5;
+        opacity: 0.2;
 
         scale: 1.05;
     }
@@ -112,8 +114,8 @@
             }
 
             &[aria-checked="false"] {
-                opacity: 0.6;
-                filter: blur(4px) brightness(60%);
+                opacity: 0.8;
+                filter: brightness(20%);
                 transform: var(--offset) scale(0.8);
 
                 cursor: pointer;
