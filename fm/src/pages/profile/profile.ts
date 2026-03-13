@@ -234,7 +234,7 @@ export function bleh_profiles() {
                     <div class="sub-text">${tl(trans.profile)}</div>
                     <div class="title-container">${profile_name}</div>
                 </div>
-                ${sub_wrap || (cache.username || cache.aka || cache.created) ? () => {
+                ${sub_wrap ? sub_wrap : cache.created ? () => {
                     const elem = html.node`
                         <p class="header-title-secondary" />
                     `;
@@ -448,8 +448,8 @@ export function bleh_profiles() {
         }
 
         // secondary text
-        const profile_sub_text = page.structure.container.querySelector(
-            '.redesigned-profile-header .header-title-secondary'
+        const profile_sub_text = redesigned_profile_header.querySelector(
+            '.header-title-secondary'
         );
         if (profile_sub_text)
             parse_sub_text(profile_sub_text, page.name, cache);
@@ -1973,6 +1973,9 @@ function request_profile_cache(
 }
 
 function parse_sub_text(profile_sub_text, name = page.name, cache) {
+    delete cache.aka;
+    delete cache.created;
+
     const display_name = profile_sub_text.querySelector('.header-title-display-name');
     const scrobble_since = profile_sub_text.querySelector('.header-scrobble-since');
 
@@ -1980,7 +1983,7 @@ function parse_sub_text(profile_sub_text, name = page.name, cache) {
         .slice(2)
         .replace(tl(trans.account_scrobbling_since_replace), '');
 
-    cache.aka = display_name.textContent.trim();
+    if (display_name) cache.aka = display_name.textContent.trim();
     cache.created = scrobble_since.textContent.trim();
 
     render_sub_text(profile_sub_text, cache.aka, cache.created, cache.username);

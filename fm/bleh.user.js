@@ -38085,7 +38085,7 @@
                     <div class="sub-text">${tl2(trans.profile)}</div>
                     <div class="title-container">${profile_name}</div>
                 </div>
-                ${sub_wrap || (cache2.username || cache2.aka || cache2.created) ? () => {
+                ${sub_wrap ? sub_wrap : cache2.created ? () => {
       const elem = html.node`
                         <p class="header-title-secondary" />
                     `;
@@ -38266,8 +38266,8 @@
           );
         if (scrobbles > 0 && auth.name) bleh_profile_chart();
       }
-      const profile_sub_text = page.structure.container.querySelector(
-        ".redesigned-profile-header .header-title-secondary"
+      const profile_sub_text = redesigned_profile_header.querySelector(
+        ".header-title-secondary"
       );
       if (profile_sub_text)
         parse_sub_text(profile_sub_text, page.name, cache2);
@@ -39483,10 +39483,12 @@
     });
   }
   function parse_sub_text(profile_sub_text, name = page.name, cache2) {
+    delete cache2.aka;
+    delete cache2.created;
     const display_name = profile_sub_text.querySelector(".header-title-display-name");
     const scrobble_since = profile_sub_text.querySelector(".header-scrobble-since");
     scrobble_since.textContent = scrobble_since.textContent.slice(2).replace(tl2(trans.account_scrobbling_since_replace), "");
-    cache2.aka = display_name.textContent.trim();
+    if (display_name) cache2.aka = display_name.textContent.trim();
     cache2.created = scrobble_since.textContent.trim();
     render_sub_text(profile_sub_text, cache2.aka, cache2.created, cache2.username);
   }
@@ -75500,7 +75502,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-02-25"
       }
     },
-    built_on: "2026-03-11T14:21:49.261Z"
+    built_on: "2026-03-13T03:34:11.300Z"
   };
 
   // node_modules/@kurkle/color/dist/color.esm.js
