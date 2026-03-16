@@ -90,13 +90,13 @@ export async function bleh_inbox() {
 
         const message = inbox.querySelector('.inbox-message');
 
-        const sender_avatar = message.querySelector('.inbox-message-sender-avatar');
+        const sender_avatar_cont = message.querySelector('.inbox-message-sender-avatar');
         const sender_name = message.querySelector('.inbox-message-sender-name');
         const sender_time = message.querySelector('.inbox-message-timestamp');
 
-        const avatar = sender_avatar.querySelector('.avatar');
+        const sender_avatar = sender_avatar_cont.querySelector('.avatar');
         const name_text = sender_name.textContent.trim();
-        const badge = patch_avatar(avatar, sanitise(name_text));
+        const badge = patch_avatar(sender_avatar_cont, sanitise(name_text));
 
         const message_subject = message.querySelector('.inbox-message-subject');
         const message_preview = message.querySelector('.inbox-message-preview');

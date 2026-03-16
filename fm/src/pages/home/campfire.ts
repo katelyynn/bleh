@@ -9,14 +9,25 @@ import { load_profile_cache_externally } from '../profile/profile';
 import { load_recent_tracks } from '../home';
 import tippy from 'tippy.js';
 
+interface album {
+    image: string,
+    title: string,
+    artist: string,
+    plays: string,
+    formatted_title: string | ReturnType<typeof html.node>,
+    formatted_artist: string | ReturnType<typeof html.node>,
+    corrected_title: string,
+    corrected_artist: string
+}
+
 export function campfire() {
     let selected_index = 0;
     let previous_index = 0;
     let max_index = 0;
-    let items_container;
-    let item_details;
-    let current_bg;
-    let previous_bg;
+    let items_container: HTMLElement;
+    let item_details: HTMLElement;
+    let current_bg: HTMLElement;
+    let previous_bg: HTMLElement;
 
     const container = html.node`
         <div class="campfire">
@@ -33,8 +44,8 @@ export function campfire() {
 
     campfire_extended(container);
 
-    let albums = [];
-    let album_elements = [];
+    let albums: album[] = [];
+    let album_elements: HTMLElement[] = [];
 
     fetch(`${root}user/${auth.name}/partial/albums?albums_date_preset=LAST_30_DAYS&ajax=1`)
         .then(function (response) {
@@ -115,17 +126,17 @@ export function campfire() {
             set_index(selected_index);
         });
 
-    function set_index(index) {
+    function set_index(index: number) {
         if (index > max_index) index = 0;
         else if (index < 0) index = max_index;
 
         album_elements.forEach((album, album_index) => {
-            album.setAttribute('aria-checked', album_index == index);
+            album.setAttribute('aria-checked', (album_index == index).toString());
         });
 
         previous_index = selected_index;
         selected_index = index;
-        items_container.style.setProperty('--selected-index', index);
+        items_container.style.setProperty('--selected-index', index.toString());
 
         const album = albums[index];
 
@@ -145,7 +156,7 @@ export function campfire() {
     }
 }
 
-function campfire_extended(container) {
+function campfire_extended(container: HTMLElement) {
     const friends = settings.friends as string[];
 
     container.after(html.node`
@@ -155,12 +166,12 @@ function campfire_extended(container) {
             </div>
             <div class="content-panel content-side">
                 <section class="friends-panel">
-                    <h2>Friends</h2>
+                    <h2>${tl(trans.friends)}</h2>
                     <div class="friends">
                         ${friends.length > 0 ? html.node`
                             ${friends.map((friend: string) => campfire_friend(friend))}
                         ` : html.node`
-
+                            bleh is better with friends!! add from your following list
                         `}
                     </div>
                 </section>
@@ -170,10 +181,10 @@ function campfire_extended(container) {
 }
 
 function campfire_friend(friend: string) {
-    let cover_art;
-    let track_info;
-    let user_avatar;
-    let user_name;
+    let cover_art: HTMLElement;
+    let track_info: HTMLElement;
+    let user_avatar: HTMLElement;
+    let user_name: HTMLElement;
 
     const elem = html.node`
         <div class="user friend" data-live="false">

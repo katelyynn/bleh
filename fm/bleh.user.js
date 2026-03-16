@@ -62373,11 +62373,11 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       if (index3 > max_index) index3 = 0;
       else if (index3 < 0) index3 = max_index;
       album_elements.forEach((album2, album_index) => {
-        album2.setAttribute("aria-checked", album_index == index3);
+        album2.setAttribute("aria-checked", (album_index == index3).toString());
       });
       previous_index = selected_index;
       selected_index = index3;
-      items_container.style.setProperty("--selected-index", index3);
+      items_container.style.setProperty("--selected-index", index3.toString());
       const album = albums[index3];
       current_bg.style.setProperty("background-image", `url(${album.image})`);
       render(item_details, html`
@@ -62402,12 +62402,12 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
             </div>
             <div class="content-panel content-side">
                 <section class="friends-panel">
-                    <h2>Friends</h2>
+                    <h2>${tl2(trans.friends)}</h2>
                     <div class="friends">
                         ${friends2.length > 0 ? html.node`
                             ${friends2.map((friend) => campfire_friend(friend))}
                         ` : html.node`
-
+                            bleh is better with friends!! add from your following list
                         `}
                     </div>
                 </section>
@@ -63147,12 +63147,12 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       let inbox = page.structure.container.querySelector(".inbox-message-view");
       page.structure.main.appendChild(inbox);
       const message = inbox.querySelector(".inbox-message");
-      const sender_avatar = message.querySelector(".inbox-message-sender-avatar");
+      const sender_avatar_cont = message.querySelector(".inbox-message-sender-avatar");
       const sender_name = message.querySelector(".inbox-message-sender-name");
       const sender_time = message.querySelector(".inbox-message-timestamp");
-      const avatar3 = sender_avatar.querySelector(".avatar");
+      const sender_avatar = sender_avatar_cont.querySelector(".avatar");
       const name_text = sender_name.textContent.trim();
-      const badge = patch_avatar(avatar3, sanitise(name_text));
+      const badge = patch_avatar(sender_avatar_cont, sanitise(name_text));
       const message_subject = message.querySelector(".inbox-message-subject");
       const message_preview = message.querySelector(".inbox-message-preview");
       const message_buttons = message.querySelector(".inbox-message-buttons");
@@ -63226,7 +63226,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
             <div class="message-sender colourful" ref=${(el) => sender_panel_own = el}>
                 <div class="inbox-message-sender-avatar">
                     <span class="avatar" ref=${(el) => your_avatar = el}>
-                        <img src=${avatar3(auth.avatar, "avatar70s")} alt=${auth.name} loading="lazy" />
+                        <img src=${avatar(auth.avatar, "avatar70s")} alt=${auth.name} loading="lazy" />
                     </span>
                 </div>
                 <a class="inbox-message-sender-name" href="${root}user/${auth.name}">${auth.name}</a>
@@ -76895,7 +76895,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-02-25"
       }
     },
-    built_on: "2026-03-13T22:20:35.934Z"
+    built_on: "2026-03-16T19:22:03.323Z"
   };
 
   // node_modules/@kurkle/color/dist/color.esm.js

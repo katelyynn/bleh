@@ -38,7 +38,7 @@
 
         --icon-size: 14px;
 
-        &:not(.resource-external-link--homepage) {
+        &:not(.resource-external-link--homepage, .social-link) {
             --sat-user: 1;
             --lit-user: 1;
         }
