@@ -357,7 +357,7 @@ select,
         background: var(--card-border-base);
     }
 
-    & > form {
+    & > form:not(.chibi) {
         display: flex;
         flex: 1;
 

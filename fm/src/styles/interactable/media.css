@@ -225,8 +225,7 @@
 .music-bookmarks-artists,
 .music-releases,
 .music-more-artists {
-    margin-left: unset;
-    margin-right: unset;
+    margin: unset;
     padding: unset;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));

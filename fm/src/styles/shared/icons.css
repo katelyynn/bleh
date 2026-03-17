@@ -99,7 +99,7 @@
 /*     SET AN OBSESSION     */
 .obsession-candidate-inner .btn-sm:before,
 /*     GENERIC     */
-.btn--loading:after {
+.btn--loading:after, .more-items:before {
     content: "";
     display: var(--show-icon, block) !important;
     mask-position: 0 0 !important;

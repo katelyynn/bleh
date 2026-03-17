@@ -1835,7 +1835,7 @@ export function prepare_music() {
 }
 
 export function similar_items() {
-    const artists = page.type == 'artist' ? page.structure.main.querySelector('.catalogue-overview-similar-artists-full-width')?.parentElement : page.structure.main.querySelector('.catalogue-overview-similar-artists')?.parentElement;
+    const artists = page.structure.main.querySelector('.catalogue-overview-similar-artists')?.parentElement;
 
     if (artists) {
         artists.classList = 'artists-like';

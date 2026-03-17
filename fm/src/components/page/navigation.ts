@@ -884,21 +884,17 @@ export function append_nav() {
                         </div>
                         <div class="floating button-group">
                             ${() => {
-                                let button;
-                                let form = html.node`
-                                    <form>
-                                        <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
-                                        <a class="dropdown-menu-clickable-item chibi colourful" ref=${(el) => (button = el)} data-menu-item="logout" href="${root}logout">
-                                            ${tl(trans.logout)}
-                                        </a>
-                                    </form>
+                                let button = html.node`
+                                    <a class="dropdown-menu-clickable-item chibi" data-type="edit" href="${root}settings">
+                                        ${tl(trans.edit_profile)}
+                                    </a>
                                 `;
 
                                 tippy(button, {
-                                    content: tl(trans.logout)
+                                    content: button.textContent
                                 });
 
-                                return form;
+                                return button;
                             }}
                             ${settings.starred_friend != '' ? () => {
                                 let button = html.node`
@@ -1142,22 +1138,46 @@ export function append_nav() {
                                     ${tl(trans.minis)}
                                 </a>
                                 <div class="button-combo-sep" />
-                                <button class="dropdown-menu-clickable-item chibi" data-menu-item="news" onclick=${() => {
-                                    news();
-                                    instance.hide();
-                                }}>
-                                    ${tl(trans.news)}
-                                </button>
-                            </div>
+                                ${() => {
+                                    let button = html.node`
+                                        <button class="dropdown-menu-clickable-item chibi" data-menu-item="news" onclick=${() => {
+                                            news();
+                                            instance.hide();
+                                        }}>
+                                            ${tl(trans.news)}
+                                        </button>
+                                    `;
 
+                                    tippy(button, {
+                                        content: button.textContent
+                                    });
+
+                                    return button;
+                                }}
+                            </div>
                             <div class="button-combo">
                                 <a class="dropdown-menu-clickable-item accented-menu-item" data-menu-item="bleh" href="${root}bleh">
                                     ${tl(trans.settings)}
                                 </a>
                                 <div class="button-combo-sep" />
-                                <a class="dropdown-menu-clickable-item chibi" data-type="settings" href="${root}settings">
-                                    ${tl(trans.settings)}
-                                </a>
+                                ${() => {
+                                    let button;
+                                    let form = html.node`
+                                        <form class="chibi">
+                                            <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
+                                            <a class="dropdown-menu-clickable-item chibi colourful" ref=${(el) => (button = el)} data-menu-item="logout" href="${root}logout">
+                                                ${tl(trans.logout)}
+                                            </a>
+                                        </form>
+                                    `;
+
+                                    tippy(button, {
+                                        content: button.textContent
+                                    });
+
+                                    return form;
+                                }}
+
                             </div>
                         </div>
                         <div class="side-page" data-page="2" ref=${(el) => (page_2 = el)} />

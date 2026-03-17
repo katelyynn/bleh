@@ -50934,7 +50934,7 @@
     };
   }
   function similar_items() {
-    const artists = page.type == "artist" ? page.structure.main.querySelector(".catalogue-overview-similar-artists-full-width")?.parentElement : page.structure.main.querySelector(".catalogue-overview-similar-artists")?.parentElement;
+    const artists = page.structure.main.querySelector(".catalogue-overview-similar-artists")?.parentElement;
     if (artists) {
       artists.classList = "artists-like";
       const controls = artists.querySelector(".section-controls");
@@ -55266,19 +55266,15 @@
                         </div>
                         <div class="floating button-group">
                             ${() => {
-          let button2;
-          let form2 = html.node`
-                                    <form>
-                                        <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
-                                        <a class="dropdown-menu-clickable-item chibi colourful" ref=${(el) => button2 = el} data-menu-item="logout" href="${root}logout">
-                                            ${tl2(trans.logout)}
-                                        </a>
-                                    </form>
+          let button2 = html.node`
+                                    <a class="dropdown-menu-clickable-item chibi" data-type="edit" href="${root}settings">
+                                        ${tl2(trans.edit_profile)}
+                                    </a>
                                 `;
           tippy_esm_default(button2, {
-            content: tl2(trans.logout)
+            content: button2.textContent
           });
-          return form2;
+          return button2;
         }}
                             ${settings.starred_friend != "" ? () => {
           let button2 = html.node`
@@ -55491,22 +55487,42 @@
                                     ${tl2(trans.minis)}
                                 </a>
                                 <div class="button-combo-sep" />
-                                <button class="dropdown-menu-clickable-item chibi" data-menu-item="news" onclick=${() => {
-          news();
-          instance.hide();
-        }}>
-                                    ${tl2(trans.news)}
-                                </button>
+                                ${() => {
+          let button2 = html.node`
+                                        <button class="dropdown-menu-clickable-item chibi" data-menu-item="news" onclick=${() => {
+            news();
+            instance.hide();
+          }}>
+                                            ${tl2(trans.news)}
+                                        </button>
+                                    `;
+          tippy_esm_default(button2, {
+            content: button2.textContent
+          });
+          return button2;
+        }}
                             </div>
-
                             <div class="button-combo">
                                 <a class="dropdown-menu-clickable-item accented-menu-item" data-menu-item="bleh" href="${root}bleh">
                                     ${tl2(trans.settings)}
                                 </a>
                                 <div class="button-combo-sep" />
-                                <a class="dropdown-menu-clickable-item chibi" data-type="settings" href="${root}settings">
-                                    ${tl2(trans.settings)}
-                                </a>
+                                ${() => {
+          let button2;
+          let form2 = html.node`
+                                        <form class="chibi">
+                                            <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
+                                            <a class="dropdown-menu-clickable-item chibi colourful" ref=${(el) => button2 = el} data-menu-item="logout" href="${root}logout">
+                                                ${tl2(trans.logout)}
+                                            </a>
+                                        </form>
+                                    `;
+          tippy_esm_default(button2, {
+            content: button2.textContent
+          });
+          return form2;
+        }}
+
                             </div>
                         </div>
                         <div class="side-page" data-page="2" ref=${(el) => page_2 = el} />
@@ -64900,19 +64916,19 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     if (url && url.endsWith("c6f59c1e5e7240a4c0d427abd71f3dbb.jpg")) url = "";
     register_banner(url, origin);
     if (url) {
-      url = avatar(url, "avatar170s");
+      url = avatar(url, "avatar300s");
       const img = html.node`
             <img src=${url} crossorigin="anonymous" />
         `;
       await img.decode();
       const canvas = document.createElement("canvas");
       const ctx = canvas.getContext("2d");
-      const scale = 300;
+      const scale = 400;
       canvas.width = scale;
       canvas.height = scale;
       ctx.imageSmoothingEnabled = true;
       ctx.imageSmoothingQuality = "high";
-      ctx.filter = "blur(10px)";
+      ctx.filter = "blur(7px)";
       ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
       url = canvas.toDataURL();
     }
@@ -76895,7 +76911,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-02-25"
       }
     },
-    built_on: "2026-03-16T19:22:03.323Z"
+    built_on: "2026-03-17T01:36:19.111Z"
   };
 
   // node_modules/@kurkle/color/dist/color.esm.js

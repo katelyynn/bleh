@@ -800,7 +800,7 @@ export async function register_background(url: string | null, origin = null) {
     register_banner(url, origin);
 
     if (url) {
-        url = avatar(url, 'avatar170s');
+        url = avatar(url, 'avatar300s');
 
         const img = html.node`
             <img src=${url} crossorigin="anonymous" />
@@ -811,14 +811,14 @@ export async function register_background(url: string | null, origin = null) {
         const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d');
 
-        const scale = 300;
+        const scale = 400;
 
         canvas.width = scale;
         canvas.height = scale;
 
         ctx.imageSmoothingEnabled = true;
         ctx.imageSmoothingQuality = 'high';
-        ctx.filter = 'blur(10px)';
+        ctx.filter = 'blur(7px)';
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
         url = canvas.toDataURL();

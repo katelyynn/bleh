@@ -280,3 +280,9 @@ a.inline-add-icon {
         --mask: var(--icon-16-arrow-down);
     }
 }
+
+.more-items {
+    margin-top: var(--card-gap) !important;
+    --mask: var(--icon-16-arrow-down);
+    display: none;
+}
