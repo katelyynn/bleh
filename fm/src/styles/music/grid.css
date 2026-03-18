@@ -24,11 +24,11 @@
 }
 
 .collage-grid {
-    grid-template-columns: repeat(var(--width), var(--grid-item-size));
-    grid-template-rows: repeat(var(--height), var(--grid-item-size));
-    grid-template-areas: unset;
+    grid-template-columns: repeat(var(--width), var(--grid-item-size)) !important;
+    grid-template-rows: repeat(var(--height), var(--grid-item-size)) !important;
+    grid-template-areas: unset !important;
 
-    gap: var(--item-list-gap, 6px);
+    gap: var(--item-list-gap, 6px) !important;
 
     --cards-overlay-image-subtlest: none;
     --collage-mask-override: none;
