@@ -394,6 +394,32 @@ export async function render_setting_page(page_id) {
             `);
         }
 
+        let tag_preview;
+
+        function render_tags(hide = settings.gendered_tags) {
+            render(tag_preview, html`
+                <ul class="tags-list tags-list--global">
+                    <li class="tag">
+                        <a class="btn tag-item">pop</a>
+                    </li>
+                    <li class="tag">
+                        <a class="btn tag-item">country</a>
+                    </li>
+                    <li class="tag">
+                        <a class="btn tag-item">singer-songwriter</a>
+                    </li>
+                    ${!hide ? html.node`
+                        <li class="tag">
+                            <a class="btn tag-item">female vocalists</a>
+                        </li>
+                    ` : ''}
+                    <li class="tag">
+                        <a class="btn tag-item">synthpop</a>
+                    </li>
+                </ul>
+            `);
+        }
+
         render(page.structure.main, html`
             <section class="bleh--panel">
                 <h4>${tl(trans.tracklist)}</h4>
@@ -450,32 +476,10 @@ export async function render_setting_page(page_id) {
                     ${ff('menus') ? setting({ id: 'menu_replacement' }) : ''}
                 </div>
                 <div class="inner-preview pad flex">
-                    <section class="catalogue-tags">
-                        <ul class="tags-list tags-list--global">
-                            <li class="tag">
-                                <a href="/tag/pop">pop</a>
-                            </li>
-                            <li class="tag">
-                                <a href="/tag/country">country</a>
-                            </li>
-                            <li class="tag">
-                                <a href="/tag/singer-songwriter"
-                                    >singer-songwriter</a
-                                >
-                            </li>
-                            <li class="tag">
-                                <a href="/tag/female+vocalists"
-                                    >female vocalists</a
-                                >
-                            </li>
-                            <li class="tag">
-                                <a href="/tag/synthpop">synthpop</a>
-                            </li>
-                        </ul>
-                    </section>
+                    <section class="catalogue-tags" ref=${el => tag_preview = el} />
                 </div>
                 <div class="setting-group">
-                    ${setting({ id: 'gendered_tags' })}
+                    ${setting({ id: 'gendered_tags', func: (val) => render_tags(val) })}
                 </div>
             </section>
             <section class="bleh--panel">
@@ -557,6 +561,7 @@ export async function render_setting_page(page_id) {
         `);
 
         render_track_preview();
+        render_tags();
     } else if (page_id == 'playback') {
         let total_artists = 0;
         let total_album_tracks = 0;

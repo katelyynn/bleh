@@ -56774,6 +56774,28 @@
                     </tbody>
                 </table>
             `);
+      }, render_tags = function(hide2 = settings.gendered_tags) {
+        render(tag_preview, html`
+                <ul class="tags-list tags-list--global">
+                    <li class="tag">
+                        <a class="btn tag-item">pop</a>
+                    </li>
+                    <li class="tag">
+                        <a class="btn tag-item">country</a>
+                    </li>
+                    <li class="tag">
+                        <a class="btn tag-item">singer-songwriter</a>
+                    </li>
+                    ${!hide2 ? html.node`
+                        <li class="tag">
+                            <a class="btn tag-item">female vocalists</a>
+                        </li>
+                    ` : ""}
+                    <li class="tag">
+                        <a class="btn tag-item">synthpop</a>
+                    </li>
+                </ul>
+            `);
       };
       register_skip_to([]);
       let bars;
@@ -56781,6 +56803,7 @@
       let expand_tracks;
       let track_album_name_location;
       let preview;
+      let tag_preview;
       render(page.structure.main, html`
             <section class="bleh--panel">
                 <h4>${tl2(trans.tracklist)}</h4>
@@ -56832,32 +56855,10 @@
                     ${ff("menus") ? setting({ id: "menu_replacement" }) : ""}
                 </div>
                 <div class="inner-preview pad flex">
-                    <section class="catalogue-tags">
-                        <ul class="tags-list tags-list--global">
-                            <li class="tag">
-                                <a href="/tag/pop">pop</a>
-                            </li>
-                            <li class="tag">
-                                <a href="/tag/country">country</a>
-                            </li>
-                            <li class="tag">
-                                <a href="/tag/singer-songwriter"
-                                    >singer-songwriter</a
-                                >
-                            </li>
-                            <li class="tag">
-                                <a href="/tag/female+vocalists"
-                                    >female vocalists</a
-                                >
-                            </li>
-                            <li class="tag">
-                                <a href="/tag/synthpop">synthpop</a>
-                            </li>
-                        </ul>
-                    </section>
+                    <section class="catalogue-tags" ref=${(el) => tag_preview = el} />
                 </div>
                 <div class="setting-group">
-                    ${setting({ id: "gendered_tags" })}
+                    ${setting({ id: "gendered_tags", func: (val) => render_tags(val) })}
                 </div>
             </section>
             <section class="bleh--panel">
@@ -56936,6 +56937,7 @@
             ` : ""}
         `);
       render_track_preview2();
+      render_tags();
     } else if (page_id == "playback") {
       let total_artists = 0;
       let total_album_tracks = 0;

@@ -18,8 +18,8 @@
             --mask-colour: oklch(var(--c3) / 80%);
         }
 
-        --bg: oklch(var(--b4) / 60%);
-        --bg-hov: oklch(var(--b4) / 80%);
+        --bg: oklch(var(--b4) / 40%);
+        --bg-hov: oklch(var(--b4) / 60%);
         --bg-atv: oklch(var(--b4));
         --shadow: var(--normal-shadow);
 
