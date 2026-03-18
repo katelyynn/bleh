@@ -440,12 +440,13 @@
             align-items: center;
             gap: 6px;
         }
-
-        & > .avatar {
-            width: 16px;
-            height: 16px;
-            background: var(--avatar-generic-background);
-            border-radius: var(--avatar-radius);
-        }
     }
+}
+
+.grid-item-avatar {
+    width: 14px;
+    height: 14px;
+    background: var(--avatar-generic-background);
+    border-radius: var(--avatar-radius);
+    display: flex;
 }
