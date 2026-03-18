@@ -23,6 +23,7 @@ import { avatar, expand_avatar } from "@/components/shared/avatar";
 import tippy from "tippy.js";
 import { page_header_avatar } from '@/components/music/header';
 import { campfire } from './home/campfire';
+import { bleh_suggested } from './home/suggested';
 
 export async function bleh_home() {
     page.structure.container = document.body.querySelector('.page-content');
@@ -300,6 +301,8 @@ export async function bleh_home() {
         });
 
         render(page.structure.main, panel);
+    } else if (page.type == 'recommended') {
+        bleh_suggested();
     }
 }
 

@@ -38620,7 +38620,8 @@
       "charts",
       "inbox",
       "overview",
-      "releases"
+      "releases",
+      "recommended"
     ].includes(page.type) || page.subpage.startsWith("event_attendance_")) {
       page.structure.content.classList.add("single-column");
     }
@@ -62505,6 +62506,32 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     return elem;
   }
 
+  // src/pages/home/suggested.ts
+  function bleh_suggested() {
+    const items = page.structure.main.children;
+    render(page.structure.main, html`
+        <section class="suggested-panel">
+            ${Array.from(items).map((item) => item)}
+        </section>
+    `);
+    if (["artists", "albums"].includes(page.subpage)) {
+      const suggestions = page.structure.main.querySelector(`.music-recommended-${page.subpage}`);
+      suggestions?.querySelectorAll(":scope > li").forEach((suggestion) => {
+        const avi = suggestion.querySelector(".media-item");
+        const anchor = suggestion.querySelector(".users-you-know-anchor");
+        if (anchor) {
+          avi?.appendChild(anchor);
+        }
+        const form = suggestion.querySelector("form");
+        if (form) {
+          const remove2 = form.querySelector("button");
+          remove2.classList = "btn remove-suggestion icon chibi";
+          remove2?.setAttribute("data-type", "x");
+        }
+      });
+    }
+  }
+
   // src/pages/home.js
   async function bleh_home() {
     page.structure.container = document.body.querySelector(".page-content");
@@ -62756,6 +62783,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         panel.appendChild(element);
       });
       render(page.structure.main, panel);
+    } else if (page.type == "recommended") {
+      bleh_suggested();
     }
   }
   function bleh_home_legacy() {
@@ -76911,7 +76940,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-02-25"
       }
     },
-    built_on: "2026-03-17T01:36:19.111Z"
+    built_on: "2026-03-17T23:21:32.440Z"
   };
 
   // node_modules/@kurkle/color/dist/color.esm.js

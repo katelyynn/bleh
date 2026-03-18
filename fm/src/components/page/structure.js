@@ -375,7 +375,8 @@ function single_column() {
             'charts',
             'inbox',
             'overview',
-            'releases'
+            'releases',
+            'recommended'
         ].includes(page.type) || page.subpage.startsWith('event_attendance_')) {
             page.structure.content.classList.add('single-column');
         }

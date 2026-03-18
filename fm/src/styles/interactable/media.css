@@ -231,6 +231,8 @@
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     gap: var(--card-padding) var(--card-gap);
 
+    &.music-recommended-artists,
+    &.music-recommended-albums,
     &.resource-list--release-list,
     &.similar-albums,
     &.catalogue-overview-similar-artists,
@@ -389,7 +391,7 @@
 
     text-decoration: var(--hover-underline, none);
 
-    a {
+    & > a {
         color: inherit;
         text-decoration: none !important;
     }
