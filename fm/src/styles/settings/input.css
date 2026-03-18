@@ -231,7 +231,7 @@
     }
 
     & > .modern-input {
-        width: 100%;
+        width: fit-content !important;
     }
 
     &.can-submit {

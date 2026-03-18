@@ -497,7 +497,7 @@
     }
 }
 
-.input-container {
+.setting > .input-container {
     display: flex;
     gap: var(--button-list-gap);
     margin: unset;
