@@ -10500,7 +10500,7 @@ export function lookup_lang() {
         }
     }
     lang = document.documentElement.getAttribute('lang');
-    lang_browser = navigator.language;
+    lang_browser = navigator.language.replaceAll('"', '');
 
     if (lang.startsWith('en') && lang_browser.startsWith('en')) {
         Settings.defaultLocale = lang_browser;

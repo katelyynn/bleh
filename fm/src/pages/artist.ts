@@ -547,7 +547,9 @@ function bleh_artist_similar() {
 
     artists.forEach((artist) => {
         const name = artist.querySelector('.similar-artists-item-name a');
-        name.textContent = romanise(correct_artist(name.textContent));
+        if (name) name.textContent = romanise(correct_artist(name.textContent));
+
+        bleh_tags_mini(artist);
     });
 }
 

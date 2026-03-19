@@ -376,7 +376,8 @@ function single_column() {
             'inbox',
             'overview',
             'releases',
-            'recommended'
+            'recommended',
+            'bookmarks'
         ].includes(page.type) || page.subpage.startsWith('event_attendance_')) {
             page.structure.content.classList.add('single-column');
         }

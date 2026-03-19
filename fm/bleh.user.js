@@ -38621,7 +38621,8 @@
       "inbox",
       "overview",
       "releases",
-      "recommended"
+      "recommended",
+      "bookmarks"
     ].includes(page.type) || page.subpage.startsWith("event_attendance_")) {
       page.structure.content.classList.add("single-column");
     }
@@ -47191,6 +47192,7 @@
         header_tags.textContent = tl2(trans.related_to);
         col_main.appendChild(header_tags);
         col_main.appendChild(tags);
+        bleh_tags_mini(tags);
       }
       let bookmark_form = page.structure.side.querySelector(":scope > div");
       let view_all_panel = document.createElement("section");
@@ -59748,7 +59750,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     );
     artists.forEach((artist) => {
       const name = artist.querySelector(".similar-artists-item-name a");
-      name.textContent = romanise(correct_artist(name.textContent));
+      if (name) name.textContent = romanise(correct_artist(name.textContent));
+      bleh_tags_mini(artist);
     });
   }
   function bleh_listeners() {
@@ -75517,7 +75520,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       }
     }
     lang = document.documentElement.getAttribute("lang");
-    lang_browser = navigator.language;
+    lang_browser = navigator.language.replaceAll('"', "");
     if (lang.startsWith("en") && lang_browser.startsWith("en")) {
       Settings.defaultLocale = lang_browser;
     } else {
@@ -76966,7 +76969,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-02-25"
       }
     },
-    built_on: "2026-03-18T15:59:42.324Z"
+    built_on: "2026-03-19T15:22:56.563Z"
   };
 
   // node_modules/@kurkle/color/dist/color.esm.js

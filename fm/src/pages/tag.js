@@ -92,6 +92,8 @@ export function bleh_tags() {
             col_main.appendChild(header_tags);
 
             col_main.appendChild(tags);
+
+            bleh_tags_mini(tags);
         }
 
 
