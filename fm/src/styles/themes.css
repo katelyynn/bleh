@@ -585,44 +585,28 @@ body,
         --card-overlay-mix-mode: unset;
     }
     &[data-bleh--theme="ink"] {
-        /* any additional highlights */
-        --b3: var(--hue), calc(var(--sat) * 18% * var(--sat-bg, 1)), 86%;
+        --b2: 0.41 calc(var(--sat) * 0 * var(--sat-bg, 1)) var(--hue);
+        --b3: 0.86 calc(var(--sat) * 0.12 * var(--sat-bg, 1)) var(--hue);
+        --b4: 0.7 calc(var(--sat) * 0.06 * var(--sat-bg, 1)) var(--hue);
+        --b5: 0.83 calc(var(--sat) * 0.10 * var(--sat-bg, 1)) var(--hue);
+        --b6: 0.77 calc(var(--sat) * 0.10 * var(--sat-bg, 1)) var(--hue);
+        --b8: 0.86 calc(var(--sat) * 0.10 * var(--sat-bg, 1)) var(--hue);
+        --b7: 0.17 calc(var(--sat) * 0.26 * var(--sat-bg, 1)) var(--hue);
+        --b9: 0.84 0 0;
 
-        /* card border */
-        --b4: var(--hue), calc(var(--sat) * 12% * var(--sat-bg, 1)), 70%;
+        --separator-base: oklch(var(--b2) / 0.1);
 
-        /* card */
-        --b5: var(--hue), calc(var(--sat) * 16% * var(--sat-bg, 1)), 83%;
+        --card-border-base: oklch(0.72 calc(var(--sat) * 0.09 * var(--sat-bg, 1)) var(--hue)) !important;
+        --card-border-base-highlight: oklch(0.75 calc(var(--sat) * 0.09 * var(--sat-bg, 1)) var(--hue)) !important;
 
-        /* root */
-        --b6: var(--hue), calc(var(--sat) * 14% * var(--sat-bg, 1)), 77%;
-        --b8: var(--hue), calc(var(--sat) * 12% * var(--sat-bg, 1)), 86%;
-        --b7: var(--hue), calc(var(--sat) * 34% * var(--sat-bg, 1)), 17%;
-        --b9: 0, 0%, 84%;
-
-        --card-border-base: oklch(
-            var(--hue),
-            calc(var(--sat) * 9% * var(--sat-bg, 1)),
-            72%
-        ) !important;
-        --card-border-base-highlight: oklch(
-            var(--hue),
-            calc(var(--sat) * 9% * var(--sat-bg, 1)),
-            75%
-        ) !important;
-
-        --normal-shadow:
-            inset 0 -1px 0 0 oklch(var(--b2), 25%),
-            inset 0 -30px 20px -20px oklch(var(--b4) / 20%);
+        --normal-shadow: inset 0 0 0 1px oklch(var(--b2) / 20%);
         --input-shadow:
-            inset 0 -1px 0 0 var(--card-border-base),
-            inset 0 1px 3px oklch(0 0 0 / 0.1);
+            inset 0 0 0 1px oklch(var(--b2) / 20%),
+            inset 0 1px 2px 1px oklch(var(--b6) / 0.4);
         --focused-input-shadow:
-            inset 0 0 0 1px oklch(var(--l3-c), 30%),
+            inset 0 0 0 1px oklch(var(--h3) / 0.4),
             var(--input-shadow);
-        --group-shadow:
-            inset 0 -1px 0 0 oklch(var(--b4) / 0.4),
-            inset 0 0 0 1px oklch(var(--b4) / 0.15);
+        --group-shadow: inset 0 0 0 1px oklch(var(--b2) / 12%);
 
         --sidebar-bg: color-mix(in oklch, oklch(var(--b6)) 56%, oklch(var(--b5)));
         --sidebar-border: color-mix(
@@ -630,25 +614,25 @@ body,
             oklch(var(--b5)),
             oklch(var(--b4)) 25%
         );
-        --toolbar-bg: oklch(var(--b5), 30%);
+        --toolbar-bg: oklch(var(--b5) / 30%);
         --toolbar-border: 1px solid oklch(var(--b4) / 50%);
         --subtle-border: 1px solid oklch(var(--b4) / 65%);
 
         --nav-filter-shadow: drop-shadow(0 0 2px oklch(var(--b5)));
         --header-filter-shadow: drop-shadow(0 0 10px oklch(var(--b5)));
 
-        --card-blur-bg: oklch(var(--b5), var(--solarium-opacity, 72%));
-        --card-blur-bg-alt: oklch(var(--b5), var(--solarium-opacity, 22%));
+        --card-blur-bg: oklch(var(--b5) / var(--solarium-opacity, 72%));
+        --card-blur-bg-alt: oklch(var(--b5) / var(--solarium-opacity, 22%));
 
-        --banner-overlay: oklch(var(--b5), 20%);
+        --banner-overlay: oklch(var(--b5) / 20%);
         --banner-mix: lighten;
 
-        --setting-group: oklch(var(--b6), 14%);
+        --setting-group: oklch(var(--b6) / 14%);
 
         --lastfm-logo-filter: none;
 
-        --textarea: oklch(var(--b6), 30%);
-        --textarea-hov: oklch(var(--b6), 60%);
+        --textarea: oklch(var(--b6) / 30%);
+        --textarea-hov: oklch(var(--b6) / 60%);
 
         --background-overlay: oklch(var(--b5) / 50%);
         --background-mix-mode: lighten;
@@ -868,44 +852,31 @@ u,
             .grid-items-cover-image.colourful,
             .grid-item-text
         ) {
-        --c1: var(--hue), calc(var(--sat) * 60%), 14%;
-        --c2: var(--hue), calc(var(--sat) * 40%), 20%;
-        --c3: var(--hue), calc(var(--sat) * 10%), 40%;
+        --c1: 0.14 calc(var(--sat) * 0.6) var(--hue);
+        --c2: 0.2 calc(var(--sat) * 0.4) var(--hue);
+        --c3: 0.4 calc(var(--sat) * 0.1) var(--hue);
+
         --ov-c1: var(--hue), calc(var(--sat) * 40%), 100%;
 
-        --l2: var(--hue), calc(var(--sat) * 40%), calc(var(--lit) * 63%);
-        --l3: var(--hue), calc(var(--sat) * 50%), calc(var(--lit) * 40%);
-        --l4: var(--hue), calc(var(--sat) * 60%), calc(var(--lit) * 22%);
+        --l2: calc(var(--lit) * 0.63) calc(var(--sat) * 0.4) var(--hue);
+        --l3: calc(var(--lit) * 0.4) calc(var(--sat) * 0.5) var(--hue);
+        --l4: calc(var(--lit) * 0.22) calc(var(--sat) * 0.6) var(--hue);
 
-        --l2-c:
-            var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 40%),
-            calc(clamp(min(0.7), var(--lit), max(1.1)) * 63%);
-        --l3-c:
-            var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 50%),
-            calc(clamp(min(0.7), var(--lit), max(1.1)) * 30%);
-        --l3-c-sat: calc(clamp(min(0), var(--sat), max(2)) * 50%);
-        --l3-c-lit: calc(clamp(min(0.5), var(--lit), max(1.1)) * 40%);
-        --l4-c:
-            var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 60%),
-            calc(clamp(min(0.7), var(--lit), max(1.1)) * 25%);
+        --l2-c: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.63) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue);
+        --l3-c: var(--l3-c-lit) var(--l3-c-sat) var(--hue);
+        --l4-c: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.25) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue);
 
-        --h3:
-            var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 38%),
-            calc(clamp(min(0.7), var(--lit), max(1.1)) * 73%);
-        --h3-s: var(--hue), 50%, 70%;
-        --h3-sat: calc(clamp(min(0), var(--sat), max(2)) * 32%);
-        --h3-lit: calc(clamp(min(0.5), var(--lit), max(1.1)) * 73%);
-        --h4:
-            var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 32%),
-            calc(clamp(min(0.7), var(--lit), max(1.1)) * 64%);
-        --f4:
-            var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 30%),
-            calc(clamp(min(0.8), var(--lit), max(2)) * 60%);
-        --k4:
-            var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 45%),
-            calc(clamp(min(0.8), var(--lit), max(2)) * 60%);
-        --g4:
-            var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 25%), 75%;
+        --l3-c-sat: calc(clamp(min(0), var(--sat), max(2)) * 0.5);
+        --l3-c-lit: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.4);
+
+        --h3: var(--h3-lit) var(--h3-sat) var(--hue);
+        --h3-sat: calc(clamp(min(0), var(--sat), max(2)) * 0.32);
+        --h3-lit: calc(clamp(min(0.85), var(--lit), max(1.1)) * 0.73);
+
+        --h4: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.64) calc(clamp(min(0), var(--sat), max(2)) * 0.32) var(--hue);
+        --f4: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.6) calc(clamp(min(0), var(--sat), max(2)) * 0.3) var(--hue);
+        --k4: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.6) calc(clamp(min(0), var(--sat), max(2)) * 0.45) var(--hue);
+        --g4: 0.92 calc(clamp(min(0), var(--sat), max(2)) * 0.25) var(--hue);
 
         --p3:
             var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 50%),
@@ -931,10 +902,10 @@ u,
             oklch(var(--h4) / 15%)
         );
 
-        --glow: oklch(var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 80%), calc(clamp(min(0.7), var(--lit), max(1.1)) * 30%), 20%);
+        --glow: oklch(var(--h3) / 60%);
 
-        --badge: oklch(var(--f4), 55%);
-        --badge-hov: oklch(var(--f4), 65%);
+        --badge: oklch(var(--f4) / 55%);
+        --badge-hov: oklch(var(--f4) / 65%);
 
         --menu-item-accent-hov: oklch(var(--h4) / 15%);
         --menu-item-accent-atv: oklch(var(--h4) / 25%);
