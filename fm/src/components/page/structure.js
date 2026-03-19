@@ -371,6 +371,7 @@ function single_column() {
         'loved',
         'subscription_automatic-edits_tracks', 'subscription_automatic-edits_albums',
         'playlists_playlists',
+        'listeners_overview',
         'auth'].includes(page.subpage) || [
             'charts',
             'inbox',

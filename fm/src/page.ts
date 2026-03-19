@@ -506,7 +506,7 @@ function load_page(main_content = null) {
         else if (page.type == 'api') bleh_api();
         else if (page.type == 'labs') bleh_labs();
 
-        if (['user', 'events'].includes(page.type) && ['following', 'followers', 'neighbours', 'event_attendance_going', 'event_attendance_maybe'].includes(page.subpage)) {
+        if (['user', 'events'].includes(page.type) && ['following', 'followers', 'neighbours', 'event_attendance_going', 'event_attendance_interested'].includes(page.subpage)) {
             bleh_users();
         }
 

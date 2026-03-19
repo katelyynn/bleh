@@ -14,6 +14,9 @@ import {register_background, update_page} from "../page";
 import {bleh_home} from '@/pages/home';
 import {html, render} from "lighterhtml";
 import { DateTime } from 'luxon';
+import { icon, icons } from '@/components/shared/icon';
+import { settings } from '@/build/config';
+import { setting } from '@/components/settings/settings';
 
 export function bleh_events() {
     if (page.subpage == 'overview') {
@@ -60,17 +63,17 @@ export function bleh_events() {
     page.name = event_header.querySelector('.header-title').textContent.trim();
     page.sister = event_header.querySelector('.header-title').textContent.trim();
 
-    let redesigned_event_header = document.createElement('section');
-    redesigned_event_header.classList.add('redesigned-header', 'redesigned-event-header', 'no-background');
-    redesigned_event_header.innerHTML = (`
-        <div class="tag-side">
-            <div class="tag-icon event-icon"></div>
-        </div>
-        <div class="info-side">
-            <div class="sub-text">${tl(trans.event)}</div>
-            <h1>${page.name}</h1>
-        </div>
-    `);
+    const redesigned_event_header = html.node`
+        <section class="page-header for-generic">
+            <div class="page-header-icon">
+                ${icon({ name: icons.events })}
+            </div>
+            <div class="page-header-info">
+                <div class="sub-text">${tl(trans.event)}</div>
+                <h1 class="page-header-title">${page.name}</h1>
+            </div>
+        </section>
+    `;
 
     let background = document.body.querySelector('.header-background--has-image');
     if (background)
@@ -202,12 +205,12 @@ export function bleh_events() {
                         <div class="sub-text music-small-header">${tl(trans.find_on)}</div>
                         <div class="music-links">
                             ${web ? html.node`
-                                <a class="btn resource-external-link resource-external-link--homepage music-link colourful" href=${web} target="_blank">
+                                <a class="btn resource-external-link resource-external-link--homepage music-link colourful icon" href=${web} target="_blank">
                                     ${tl(trans.website)}
                                 </a>
                             ` : ''}
                             ${maps ? html.node`
-                                <a class="btn music-link colourful" data-host="maps.google.com" data-host-unknown="true" href=${maps} target="_blank" style="--favi: url(https://icons.duckduckgo.com/ip3/maps.google.com.ico)">
+                                <a class="btn music-link colourful social-link icon" data-host="maps.google.com" data-host-unknown="true" href=${maps} target="_blank" style="--favi: url(https://icons.duckduckgo.com/ip3/maps.google.com.ico)">
                                     ${tl(trans.show_on_map)}
                                 </a>
                             ` : ''}
@@ -291,41 +294,22 @@ export function bleh_events() {
         if (page.subpage == 'event_attendance_going' || page.subpage == 'event_attendance_interested') {
             convert_to_toolbar();
 
-            // view-related buttons
-            let view_buttons = document.createElement('div');
-            view_buttons.classList.add('view-buttons-wrapper');
-            view_buttons.innerHTML = (`
-                <div class="view-buttons">
-                    <button class="btn view-item" id="toggle-list_view-1" data-toggle="list_view" data-toggle-value="1" onclick="_update_item('list_view', 1)">
-                        ${tl(trans.grid)}
-                    </button>
-                    <button class="btn view-item" id="toggle-list_view-0" data-toggle="list_view" data-toggle-value="0" onclick="_update_item('list_view', 0)">
-                        ${tl(trans.list)}
-                    </button>
-                </div>
-            `);
+            const no_data = page.structure.main.querySelector('.no-data-message');
+            const pagination = page.structure.main.querySelector('.pagination');
 
-            const user_panel = html.node`
+            const user_list = page.structure.main.querySelector('.user-list');
+            user_list?.setAttribute('data-list-view', settings.list_view);
+
+            render(page.structure.main, html.node`
                 <section class="users">
-                    ${view_buttons}
-                    ${html.node([page.structure.main.innerHTML])}
+                    ${!no_data ? setting({ id: 'list_view', func: (val) => {
+                        user_list?.setAttribute('data-list-view', val);
+                    } }) : ''}
+                    ${no_data}
+                    ${user_list}
+                    ${pagination}
                 </section>
-            `;
-
-            render(page.structure.main, user_panel);
-
-
-            // users
-            let users = page.structure.main.querySelectorAll('.user-list-inner-wrap');
-            users.forEach((user) => {
-                let avatar = user.querySelector('.user-list-avatar');
-                let name = user.querySelector('.user-list-link').textContent;
-
-                let badge = patch_avatar(avatar, name, 'follow');
-
-                if (badge.type == 'avatar-status-dot--staff')
-                    user.classList.add('staff-user');
-            });
+            `);
         }
     }
 

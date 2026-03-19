@@ -17,6 +17,7 @@ import { load_profile_cache_externally } from "./profile/profile";
 import { bleh_message_list } from "@/components/inbox/messages";
 import { toggle } from "@/components/settings/toggle.js";
 import tippy from "tippy.js";
+import { icon, icons } from '@/components/shared/icon';
 
 export async function bleh_inbox() {
     page.structure.container = document.body.querySelector('.page-content');
@@ -37,13 +38,13 @@ export async function bleh_inbox() {
     update_page();
 
     page.structure.container.insertBefore(html.node`
-        <section class="redesigned-header search-header no-background">
-            <div class="tag-side">
-                <div class="tag-icon inbox-icon"></div>
+        <section class="page-header">
+            <div class="page-header-icon">
+                ${icon({ name: icons.inbox })}
             </div>
-            <div class="info-side">
+            <div class="page-header-info">
                 <div class="sub-text">${tl(trans.inbox)}</div>
-                <h1>${page.subpage == 'notifications' ? tl(trans.notifications) : tl(trans.messages)}</h1>
+                <h1 class="page-header-title">${page.subpage == 'notifications' ? tl(trans.notifications) : tl(trans.messages)}</h1>
             </div>
         </section>
     `, page.structure.container.firstElementChild);

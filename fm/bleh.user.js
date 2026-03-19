@@ -38615,6 +38615,7 @@
       "subscription_automatic-edits_tracks",
       "subscription_automatic-edits_albums",
       "playlists_playlists",
+      "listeners_overview",
       "auth"
     ].includes(page.subpage) || [
       "charts",
@@ -62882,16 +62883,16 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     }
     page.name = event_header.querySelector(".header-title").textContent.trim();
     page.sister = event_header.querySelector(".header-title").textContent.trim();
-    let redesigned_event_header = document.createElement("section");
-    redesigned_event_header.classList.add("redesigned-header", "redesigned-event-header", "no-background");
-    redesigned_event_header.innerHTML = `
-        <div class="tag-side">
-            <div class="tag-icon event-icon"></div>
-        </div>
-        <div class="info-side">
-            <div class="sub-text">${tl2(trans.event)}</div>
-            <h1>${page.name}</h1>
-        </div>
+    const redesigned_event_header = html.node`
+        <section class="page-header for-generic">
+            <div class="page-header-icon">
+                ${icon({ name: icons.events })}
+            </div>
+            <div class="page-header-info">
+                <div class="sub-text">${tl2(trans.event)}</div>
+                <h1 class="page-header-title">${page.name}</h1>
+            </div>
+        </section>
     `;
     let background = document.body.querySelector(".header-background--has-image");
     if (background)
@@ -62998,12 +62999,12 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                         <div class="sub-text music-small-header">${tl2(trans.find_on)}</div>
                         <div class="music-links">
                             ${web ? html.node`
-                                <a class="btn resource-external-link resource-external-link--homepage music-link colourful" href=${web} target="_blank">
+                                <a class="btn resource-external-link resource-external-link--homepage music-link colourful icon" href=${web} target="_blank">
                                     ${tl2(trans.website)}
                                 </a>
                             ` : ""}
                             ${maps ? html.node`
-                                <a class="btn music-link colourful" data-host="maps.google.com" data-host-unknown="true" href=${maps} target="_blank" style="--favi: url(https://icons.duckduckgo.com/ip3/maps.google.com.ico)">
+                                <a class="btn music-link colourful social-link icon" data-host="maps.google.com" data-host-unknown="true" href=${maps} target="_blank" style="--favi: url(https://icons.duckduckgo.com/ip3/maps.google.com.ico)">
                                     ${tl2(trans.show_on_map)}
                                 </a>
                             ` : ""}
@@ -63061,33 +63062,20 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     } else {
       if (page.subpage == "event_attendance_going" || page.subpage == "event_attendance_interested") {
         convert_to_toolbar();
-        let view_buttons = document.createElement("div");
-        view_buttons.classList.add("view-buttons-wrapper");
-        view_buttons.innerHTML = `
-                <div class="view-buttons">
-                    <button class="btn view-item" id="toggle-list_view-1" data-toggle="list_view" data-toggle-value="1" onclick="_update_item('list_view', 1)">
-                        ${tl2(trans.grid)}
-                    </button>
-                    <button class="btn view-item" id="toggle-list_view-0" data-toggle="list_view" data-toggle-value="0" onclick="_update_item('list_view', 0)">
-                        ${tl2(trans.list)}
-                    </button>
-                </div>
-            `;
-        const user_panel = html.node`
+        const no_data = page.structure.main.querySelector(".no-data-message");
+        const pagination = page.structure.main.querySelector(".pagination");
+        const user_list = page.structure.main.querySelector(".user-list");
+        user_list?.setAttribute("data-list-view", settings.list_view);
+        render(page.structure.main, html.node`
                 <section class="users">
-                    ${view_buttons}
-                    ${html.node([page.structure.main.innerHTML])}
+                    ${!no_data ? setting({ id: "list_view", func: (val) => {
+          user_list?.setAttribute("data-list-view", val);
+        } }) : ""}
+                    ${no_data}
+                    ${user_list}
+                    ${pagination}
                 </section>
-            `;
-        render(page.structure.main, user_panel);
-        let users2 = page.structure.main.querySelectorAll(".user-list-inner-wrap");
-        users2.forEach((user) => {
-          let avatar3 = user.querySelector(".user-list-avatar");
-          let name = user.querySelector(".user-list-link").textContent;
-          let badge = patch_avatar(avatar3, name, "follow");
-          if (badge.type == "avatar-status-dot--staff")
-            user.classList.add("staff-user");
-        });
+            `);
       }
     }
     log("status is", "page", "info", page);
@@ -63177,13 +63165,13 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     log("status is", "page", "info", page);
     update_page();
     page.structure.container.insertBefore(html.node`
-        <section class="redesigned-header search-header no-background">
-            <div class="tag-side">
-                <div class="tag-icon inbox-icon"></div>
+        <section class="page-header">
+            <div class="page-header-icon">
+                ${icon({ name: icons.inbox })}
             </div>
-            <div class="info-side">
+            <div class="page-header-info">
                 <div class="sub-text">${tl2(trans.inbox)}</div>
-                <h1>${page.subpage == "notifications" ? tl2(trans.notifications) : tl2(trans.messages)}</h1>
+                <h1 class="page-header-title">${page.subpage == "notifications" ? tl2(trans.notifications) : tl2(trans.messages)}</h1>
             </div>
         </section>
     `, page.structure.container.firstElementChild);
@@ -64753,7 +64741,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         bleh_home();
       else if (page.type == "api") bleh_api();
       else if (page.type == "labs") bleh_labs();
-      if (["user", "events"].includes(page.type) && ["following", "followers", "neighbours", "event_attendance_going", "event_attendance_maybe"].includes(page.subpage)) {
+      if (["user", "events"].includes(page.type) && ["following", "followers", "neighbours", "event_attendance_going", "event_attendance_interested"].includes(page.subpage)) {
         bleh_users();
       }
       if ((page.type == "artist" || page.type == "album" || page.type == "track" || page.type == "tag") && page.subpage == "overview")
