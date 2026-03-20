@@ -1,5 +1,5 @@
 {
-    "latest": "2026.0316",
+    "latest": "2026.0320",
     "sponsors": [
         "clairedoll", "kateshapedbox", "evangelicgirl",
         "astrablooms", "ItsProyal", "vwvwvwvwvwvwv", "Orofil",
@@ -10,12 +10,12 @@
         "noapop", "celebrating", "myraisounds", "riskyrizey",
         "fourohclok", "HuxP", "K40M0J1",
         "goldenstuffed", "satisfeita", "kar1x", "nojonsko",
-        "urwq", "driftpsalm", "popcorniscrazy", "s0540a",
+        "urwq", "driftpsalm", "popcorniscrazy", "v4nnen",
         "dylandotat", "Angel0Lust", "liminelle", "quikwise",
         "BosozokuGF", "tainaronian", "NozomiBear", "nin0dev",
         "milkdrinker3000", "wiichicken", "duskwitch", "rgoracz",
         "thomasb2k", "ThatJumpyFrog", "nite_", "mitsurin",
-        "vamti", "lxjv"
+        "vamti", "lxjv", "f-ff"
     ],
     "sponsors_one_time": [
         "kateshapedbox",
@@ -25,9 +25,9 @@
         "saettbyeol", "lyeule", "noapop",
         "celebrating", "riskyrizey",
         "fourohclok", "K40M0J1", "goldenstuffed",
-        "kar1x", "nojonsko", "s0540a",
+        "kar1x", "nojonsko", "v4nnen",
         "Angel0Lust", "tainaronian", "wiichicken",
-        "rgoracz", "nite_", "vamti"
+        "rgoracz", "nite_", "vamti", "f-ff"
     ],
     "sponsor_count_remove": 3,
     "sponsor_account": "kateshapedbox",
@@ -366,9 +366,11 @@
                 "lit": 0.94
             }
         ],
-        "s0540a": {
-            "type": "sponsor"
-        },
+        "v4nnen": [
+            {
+                "type": "sponsor"
+            }
+        ],
         "popcorniscrazy": [
             {
                 "type": "sponsor"
@@ -530,6 +532,11 @@
             }
         ],
         "lxjv": [
+            {
+                "type": "sponsor"
+            }
+        ],
+        "f-ff": [
             {
                 "type": "sponsor"
             }
