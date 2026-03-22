@@ -343,6 +343,11 @@ export function oracle_process() {
         if (buffer) {
             buffer.classList.remove('buffer-standard');
             tracklist_lfm.appendChild(buffer);
+
+            const more = buffer.querySelectorAll('.more-items');
+            more.forEach(item => {
+                item.classList.add('more-tracklist-items');
+            });
         }
 
         old_tracklist.remove();

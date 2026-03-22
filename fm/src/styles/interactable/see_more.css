@@ -284,5 +284,8 @@ a.inline-add-icon {
 .more-items {
     margin-top: var(--card-gap) !important;
     --mask: var(--icon-16-arrow-down);
-    display: none;
+
+    &:not(.more-tracklist-items) {
+        display: none;
+    }
 }
