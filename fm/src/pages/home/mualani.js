@@ -262,6 +262,19 @@ export function mualani() {
                         `;
                     }) : ''}
                 </div>
+                <div class="button-group">
+                    ${sponsor_list && sponsor_list.badges ? Object.entries(sponsor_list.badges).map(([user, contents]) => {
+                        const badges = load_badges(user);
+
+                        return html.node`
+                            ${badges.map(badge => {
+                                if (badge.type == 'sponsor') return html.node``;
+
+                                return create_badge(badge, false, true, true);
+                            })}
+                        `;
+                    }) : ''}
+                </div>
             </section>
         `
     );

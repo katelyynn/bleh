@@ -134,6 +134,12 @@ export function create_badge(
         </span>
     `;
 
+    if (small) {
+        elem.appendChild(html.node`
+            <span class="badge-back" />
+        `);
+    }
+
     if (badge.translation_code) {
         elem.classList.add('translation-lang');
         elem.style.setProperty('--flag', `url(https://katelyynn.github.io/bleh/fm/flags/${badge.translation_code}.svg)`);

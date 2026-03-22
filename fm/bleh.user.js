@@ -34100,6 +34100,11 @@
             ${badge.name}
         </span>
     `;
+    if (small) {
+      elem.appendChild(html.node`
+            <span class="badge-back" />
+        `);
+    }
     if (badge.translation_code) {
       elem.classList.add("translation-lang");
       elem.style.setProperty("--flag", `url(https://katelyynn.github.io/bleh/fm/flags/${badge.translation_code}.svg)`);
@@ -64370,6 +64375,17 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                             ${badges.map((badge) => {
           if (badge.type == "sponsor") return html.node``;
           return create_badge(badge, false, true);
+        })}
+                        `;
+      }) : ""}
+                </div>
+                <div class="button-group">
+                    ${sponsor_list && sponsor_list.badges ? Object.entries(sponsor_list.badges).map(([user, contents]) => {
+        const badges = load_badges(user);
+        return html.node`
+                            ${badges.map((badge) => {
+          if (badge.type == "sponsor") return html.node``;
+          return create_badge(badge, false, true, true);
         })}
                         `;
       }) : ""}
