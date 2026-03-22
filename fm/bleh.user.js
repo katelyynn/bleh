@@ -59212,7 +59212,20 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       else if (page.subpage == "wiki_history") bleh_wiki_history();
       else if (page.subpage == "wiki_edit") bleh_wiki_editor();
     }
-    if (ff("oracle") && settings.oracle_beta) oracle_process();
+    if (ff("oracle") && settings.oracle_beta) {
+      oracle_process();
+    } else {
+      const old_tracklist = page.structure.main.querySelector("#tracklist");
+      if (old_tracklist) {
+        const buffer = old_tracklist.querySelector(".buffer-standard");
+        if (buffer) {
+          const more = buffer.querySelectorAll(".more-items");
+          more.forEach((item) => {
+            item.classList.add("more-tracklist-items");
+          });
+        }
+      }
+    }
     log("status is", "page", "info", page);
     update_page();
   }
