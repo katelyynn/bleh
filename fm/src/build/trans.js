@@ -5302,7 +5302,7 @@ export const trans = {
         it: 'Passione',
         pt: 'Obsessão',
         sv: 'Aktuell besatthet',
-        ru: 'Зависимости', //for parity . i still like "увлечения" more rather than "addictions"
+        ru: 'Одержимость',
         pl: 'Obsesja'
     },
     obsessions: {
@@ -5312,7 +5312,7 @@ export const trans = {
         it: 'Passioni',
         pt: 'Obsessões',
         sv: 'Besattheter',
-        ru: 'Зависимости',
+        ru: 'Одержимости',
         pl: 'Obsesje'
     },
     finding_your_tracks: {
