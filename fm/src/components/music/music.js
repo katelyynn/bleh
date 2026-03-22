@@ -1830,7 +1830,8 @@ export function prepare_music() {
         crimson: 'Crimson Text',
         rokkitt: 'Rokkitt',
         code: 'Google Sans Code',
-        zpix: 'Zpix'
+        zpix: 'Zpix',
+        mask: 'Expose'
     };
 }
 
