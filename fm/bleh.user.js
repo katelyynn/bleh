@@ -48618,7 +48618,7 @@
           stats,
           html`
                     ${type}
-                    <span class="plays">
+                    <span class="oracle-stat plays">
                         <span class="bleh-icon" />
                         ${entry.listeners.toLocaleString(lang)}
                     </span>
@@ -76957,7 +76957,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-02-25"
       }
     },
-    built_on: "2026-03-19T15:22:56.563Z"
+    built_on: "2026-03-22T18:39:33.253Z"
   };
 
   // node_modules/@kurkle/color/dist/color.esm.js

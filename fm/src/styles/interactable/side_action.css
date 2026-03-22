@@ -144,7 +144,7 @@
     flex: unset !important;
     --padding: 6px var(--button-sides) !important;
 
-    &:after {
+    &:before {
         --left: 50% !important;
         --margin-left: calc(-1 * (var(--icon-size) / 2)) !important;
     }
