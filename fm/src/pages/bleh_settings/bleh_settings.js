@@ -4,7 +4,7 @@
 // Licensed under GPLv3
 //
 
-import { settings, settings_store } from '@/build/config';
+import { settings } from '@/build/config';
 import { album_track_corrections, artist_corrections } from '@/build/music.js';
 import {
     auth,
@@ -14,8 +14,7 @@ import {
     page,
     root
 } from '@/build/page';
-import { stored_season } from '@/build/seasonal';
-import { clamp_lit, clamp_sat, copy, hex_to_oklch, set_storage, time } from '@/build/tools';
+import { copy, set_storage, time } from '@/build/tools';
 import { get_trans_key, lang_info, tl, trans } from '@/build/trans';
 import { dialog, dialog_rm } from '@/components/dialog/dialog';
 import { markdown } from '@/components/shared/markdown';
@@ -23,7 +22,6 @@ import { notify } from '@/components/dialog/notify';
 import { load_settings } from '../../config.js';
 import { version } from '@/main';
 import { update_page } from '@/page';
-import { seasonal_timer_end, seasonal_timer_start } from '@/components/seasonal';
 import { ff } from '@/components/settings/sku.js';
 import { html, render } from 'lighterhtml';
 import {
@@ -31,10 +29,8 @@ import {
     save_setting,
     setting
 } from '@/components/settings/settings';
-import { parse_scrobbles_as_rank } from '@/components/music/colourful_counts';
-import { input } from '@/components/settings/input';
 import { share } from '@/components/dialog/share';
-import { force_refresh_style, start_update, update_check } from '@/components/page/style';
+import { force_refresh_style } from '@/components/page/style';
 import tippy from 'tippy.js';
 import {
     checkup_friend_cache,
@@ -1361,9 +1357,6 @@ export function change_settings_page(page_id, setting = null) {
         btn.classList.toggle('secondary-nav-item-link--active', page_id == id);
     });
 
-    if (page_id == 'seasonal') seasonal_timer_start();
-    else seasonal_timer_end();
-
     try {
         render_setting_page(page_id);
     } catch (e) {
@@ -1387,42 +1380,6 @@ ${e
                 </div>
             `
         );
-    }
-
-
-    if (
-        page_id == 'seasonal' &&
-        settings.seasonal &&
-        stored_season.id != 'none' &&
-        stored_season.start &&
-        stored_season.end
-    ) {
-        tippy(document.getElementById('current_season'), {
-            content: new Date(
-                stored_season.end
-                    .replace('y0', stored_season.year)
-                    .replace('{offset}', stored_season.offset)
-            ).toLocaleString(DateTime.DATE_MED)
-        });
-        tippy(document.getElementById('current_season_start'), {
-            content: new Date(
-                stored_season.start
-                    .replace('y0', stored_season.year)
-                    .replace('{offset}', stored_season.offset)
-            ).toLocaleString(DateTime.DATE_MED)
-        });
-        tippy(document.getElementById('next_season_start'), {
-            content: new Date(
-                stored_season.next_start
-                    .replace(
-                        'y0',
-                        stored_season.next_is_new_year
-                            ? stored_season.year + 1
-                            : stored_season.year
-                    )
-                    .replace('{offset}', stored_season.offset)
-            ).toLocaleString(DateTime.DATE_MED)
-        });
     }
 
     if (setting != null) {

@@ -33553,120 +33553,6 @@
     return title.replace(/[\u2010\u2011\u2012\u2013]/g, "-").replace(/\u2026/g, "...");
   }
 
-  // src/build/seasonal.js
-  var seasonal_timer = {
-    state: void 0
-  };
-  var stored_season = {
-    id: "none",
-    new_years_eve: false
-  };
-  var seasonal_events = [
-    {
-      id: "new_years",
-      start: {
-        month: 1,
-        day: 1
-      },
-      end: {
-        month: 1,
-        day: 14
-      },
-      snowflakes: {
-        state: true,
-        count: 90
-      }
-    },
-    {
-      id: "easter",
-      start: {
-        month: 4,
-        day: 2
-      },
-      end: {
-        month: 4,
-        day: 30
-      },
-      snowflakes: {
-        state: false
-      }
-    },
-    {
-      id: "pride",
-      start: {
-        month: 5,
-        day: 31
-      },
-      end: {
-        month: 7,
-        day: 7
-      },
-      snowflakes: {
-        state: false
-      }
-    },
-    {
-      id: "halloween",
-      start: {
-        month: 9,
-        day: 22
-      },
-      end: {
-        month: 11,
-        day: 1
-      },
-      snowflakes: {
-        state: false
-      }
-    },
-    {
-      id: "pre_fall",
-      start: {
-        month: 11,
-        day: 1,
-        hour: 12
-      },
-      end: {
-        month: 11,
-        day: 12
-      },
-      snowflakes: {
-        state: true,
-        count: 12
-      }
-    },
-    {
-      id: "fall",
-      start: {
-        month: 11,
-        day: 13
-      },
-      end: {
-        month: 11,
-        day: 22
-      },
-      snowflakes: {
-        state: true,
-        count: 80
-      }
-    },
-    {
-      id: "christmas",
-      start: {
-        month: 11,
-        day: 23
-      },
-      end: {
-        month: 12,
-        day: 31
-      },
-      snowflakes: {
-        state: true,
-        count: 160
-      }
-    }
-  ];
-
   // src/components/dialog/dialog.ts
   function load_dialogs() {
     const dialogs2 = html.node`
@@ -53127,223 +53013,6 @@
     return field;
   }
 
-  // src/components/seasonal.ts
-  function set_season() {
-    if (!settings.seasonal) return;
-    const last_season_seen = localStorage.getItem(STORAGE_LAST_SEASON_SEEN) || "";
-    const state = get_season_state();
-    page.state.seasons = state;
-    if (!state.current) return;
-    apply_season(state.current);
-    if (state.current.id != last_season_seen)
-      new_season(state.current, state.now);
-  }
-  function apply_season(current) {
-    log(`applying ${current.id}`, "season", "info", { current });
-    document.body.setAttribute("data-bleh--season", current.id);
-    if (current.snowflakes.state && settings.seasonal_particles != "none") {
-      log("let the snow start!", "season");
-      prep_snow();
-      const snowflakes_enabled = true;
-      let snowflakes_count = current.snowflakes.count;
-      if (settings.seasonal_particles == "less" && snowflakes_count > 10)
-        snowflakes_count *= 0.45;
-      if (page.mobile && snowflakes_count > 10) snowflakes_count *= 0.5;
-      begin_snowflakes(snowflakes_enabled, snowflakes_count);
-    }
-    update_season_nav();
-  }
-  function new_season(current, now2) {
-    set_storage(STORAGE_LAST_SEASON_SEEN, current.id);
-    load_chart_colours();
-    notify({
-      id: "new_season",
-      title: tl2(trans.new_season),
-      body: tl2(trans.value_for_time, {
-        v: tl2(trans.seasonal.listing[current.id]),
-        time: current.end.toRelative(now2)
-      }),
-      icon: "icon-16-season",
-      persist: true
-    });
-  }
-  function get_season_state(now2 = DateTime.local()) {
-    const year = now2.year;
-    const seasons = resolve_seasons(now2);
-    seasons.sort((a, b) => a.start.toMillis() - b.start.toMillis());
-    const current = seasons.find((season) => season.current) || null;
-    let prev = null;
-    let next = null;
-    if (current) {
-      const index3 = seasons.findIndex((season) => season.id == current.id);
-      prev = seasons[index3 - 1] || null;
-      next = seasons[index3 + 1] || null;
-      if (!prev) {
-        const last = seasons[seasons.length - 1];
-        prev = {
-          ...last,
-          start: process_date(last.start, "start", year - 1),
-          end: process_date(last.end, "end", year - 1)
-        };
-      }
-      if (!next) {
-        const first = seasons[0];
-        next = {
-          ...first,
-          start: process_date(first.start, "start", year + 1),
-          end: process_date(first.end, "end", year + 1)
-        };
-      }
-    } else {
-      next = seasons.find((season) => now2 < season.start) || null;
-      if (!next) {
-        const first = seasons[0];
-        next = {
-          ...first,
-          start: process_date(first.start, "start", year + 1),
-          end: process_date(first.end, "end", year + 1)
-        };
-      }
-      const index3 = seasons.findIndex((season) => season.id == next.id);
-      prev = seasons[index3 - 1] || seasons[seasons.length - 1];
-    }
-    return {
-      now: now2,
-      current,
-      prev,
-      next
-    };
-  }
-  function resolve_seasons(now2 = DateTime.local()) {
-    const year = now2.year;
-    return seasonal_events.map((season) => {
-      const start2 = process_date(season.start, "start", year);
-      const end2 = process_date(season.end, "end", year);
-      const current = now2 >= start2 && now2 <= end2;
-      return {
-        ...season,
-        start: start2,
-        end: end2,
-        current
-      };
-    });
-  }
-  function process_date(date, type, year) {
-    let hour = date.hour || 0;
-    let minute = date.minute || 0;
-    let second = date.second || 0;
-    if (type == "end" && !date.hour && !date.minute && !date.second) {
-      hour = 23;
-      minute = 59;
-      second = 59;
-    }
-    return DateTime.fromObject({
-      year,
-      month: date.month,
-      day: date.day,
-      hour,
-      minute,
-      second
-    }, {
-      zone: "local"
-    });
-  }
-  function seasonal_timer_start(bypass = false) {
-    if (stored_season.new_years_eve && !bypass) return;
-    if (seasonal_timer.state) return;
-    seasonal_timer.state = setInterval(set_season, 1e3);
-    log("started interval", "season", "info");
-    if (!page.header.season_tooltip) return;
-    page.header.season_tooltip.setContent(html.node`
-        <span class="season-colour-name colourful" data-season=${stored_season.id}>${tl2(trans.seasonal.listing[stored_season.id])}</span>
-        <span class="season-exclusive">${tl2(trans.seasonal.live)}</span>
-    `);
-    page.header.season.setAttribute("data-live", true);
-    page.header.season.classList.toggle("chibi", !stored_season.new_years_eve);
-  }
-  function seasonal_timer_end() {
-    if (stored_season.new_years_eve) return;
-    if (!seasonal_timer.state) return;
-    clearInterval(seasonal_timer.state);
-    seasonal_timer.state = null;
-    log("ended interval", "season", "info");
-    if (!page.header.season_tooltip) return;
-    page.header.season_tooltip.setContent(html.node`
-        <span class="season-colour-name colourful" data-season=${stored_season.id}>${tl2(trans.seasonal.listing[stored_season.id])}</span>
-        <span class="season-exclusive">${tl2(trans.seasonal.notice)}</span>
-    `);
-    page.header.season.setAttribute("data-live", false);
-    page.header.season.classList.toggle("chibi", !stored_season.new_years_eve);
-  }
-  function update_season_nav() {
-    if (!page.header.season) return;
-    page.header.season.setAttribute("data-season", stored_season.id);
-    page.header.season.classList.toggle("chibi", !stored_season.new_years_eve);
-    if (!stored_season.new_years_eve) {
-      page.header.season.textContent = DateTime.fromISO(
-        stored_season.end.replace("y0", stored_season.year).replace("{offset}", stored_season.offset)
-      ).toRelative(DateTime.fromISO(stored_season.now));
-    } else {
-      let next = stored_season.next_start.replace("y0", stored_season.year).replace("{offset}", stored_season.offset);
-      if (stored_season.next_is_new_year)
-        next = stored_season.next_start.replace("y0", stored_season.year + 1).replace("{offset}", stored_season.offset);
-      let time_until = new Date(next) - /* @__PURE__ */ new Date();
-      page.header.season.textContent = countdown_to(time_until);
-      page.header.season.setAttribute("data-live", true);
-      page.header.season_tooltip.setContent(html.node`
-            <span class="season-colour-name">${tl2(trans.seasonal.listing[stored_season.id])}</span>
-            <span class="season-exclusive">${tl2(trans.seasonal.live)}</span>
-        `);
-    }
-  }
-  function countdown_to(time_until) {
-    const duration = Duration.fromMillis(time_until).shiftTo(
-      "days",
-      "hours",
-      "minutes",
-      "seconds"
-    );
-    let { days, hours, minutes, seconds } = duration.toObject();
-    days = Math.floor(days);
-    hours = Math.floor(hours);
-    minutes = Math.floor(minutes);
-    seconds = Math.floor(seconds);
-    hours = String(hours).padStart(2, "0");
-    minutes = String(minutes).padStart(2, "0");
-    seconds = String(seconds).padStart(2, "0");
-    if (days != 0)
-      return DateTime.fromISO(
-        stored_season.end.replace("y0", stored_season.year).replace("{offset}", stored_season.offset)
-      ).toRelative(DateTime.fromISO(stored_season.now));
-    if (hours == "00" && minutes == "00" && seconds == "00") set_season();
-    return `${hours}:${minutes}:${seconds}`;
-  }
-  function prep_snow() {
-    if (page.state.snow) return;
-    page.state.snow = html.node`
-        <div class="snow-container" />
-    `;
-    document.documentElement.appendChild(page.state.snow);
-  }
-  function begin_snowflakes(enabled, count) {
-    if (!enabled) return;
-    const flakes = Array.from({ length: count * 0.7 }, () => {
-      const x = (Math.random() * 100).toFixed(1);
-      const drift = (Math.random() * 40 - 10).toFixed(1);
-      const scale = (Math.random() * 0.9 + 0.4).toFixed(1);
-      const size = 8 * scale;
-      const duration = (Math.random() * 64 + 20).toFixed(1);
-      const delay = (Math.random() * -30).toFixed(1);
-      const opacity = (Math.random() * 0.7 + 0.2).toFixed(1);
-      return { x, drift, scale, size, duration, delay, opacity };
-    });
-    render(page.state.snow, html`
-        ${flakes.map((flake) => html.node`
-            <div class="snow" style="width: ${flake.size}px; height: ${flake.size}px; --x: ${flake.x}vw; --x-end: calc(${flake.x}vw + ${flake.drift}vw); --s: ${flake.scale}; animation-duration: ${flake.duration}s; animation-delay: ${flake.delay}s; opacity: ${flake.opacity}" />
-        `)}
-    `);
-  }
-
   // node_modules/cropperjs/dist/cropper.min.css
   var cropper_min_default = '/*!\n * Cropper.js v1.5.13\n * https://fengyuanchen.github.io/cropperjs\n *\n * Copyright 2015-present Chen Fengyuan\n * Released under the MIT license\n *\n * Date: 2022-11-20T05:30:43.444Z\n */.cropper-container{direction:ltr;font-size:0;line-height:0;position:relative;-ms-touch-action:none;touch-action:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.cropper-container img{-webkit-backface-visibility:hidden;backface-visibility:hidden;display:block;height:100%;image-orientation:0deg;max-height:none!important;max-width:none!important;min-height:0!important;min-width:0!important;width:100%}.cropper-canvas,.cropper-crop-box,.cropper-drag-box,.cropper-modal,.cropper-wrap-box{bottom:0;left:0;position:absolute;right:0;top:0}.cropper-canvas,.cropper-wrap-box{overflow:hidden}.cropper-drag-box{background-color:#fff;opacity:0}.cropper-modal{background-color:#000;opacity:.5}.cropper-view-box{display:block;height:100%;outline:1px solid #39f;outline-color:rgba(51,153,255,.75);overflow:hidden;width:100%}.cropper-dashed{border:0 dashed #eee;display:block;opacity:.5;position:absolute}.cropper-dashed.dashed-h{border-bottom-width:1px;border-top-width:1px;height:33.33333%;left:0;top:33.33333%;width:100%}.cropper-dashed.dashed-v{border-left-width:1px;border-right-width:1px;height:100%;left:33.33333%;top:0;width:33.33333%}.cropper-center{display:block;height:0;left:50%;opacity:.75;position:absolute;top:50%;width:0}.cropper-center:after,.cropper-center:before{background-color:#eee;content:" ";display:block;position:absolute}.cropper-center:before{height:1px;left:-3px;top:0;width:7px}.cropper-center:after{height:7px;left:0;top:-3px;width:1px}.cropper-face,.cropper-line,.cropper-point{display:block;height:100%;opacity:.1;position:absolute;width:100%}.cropper-face{background-color:#fff;left:0;top:0}.cropper-line{background-color:#39f}.cropper-line.line-e{cursor:ew-resize;right:-3px;top:0;width:5px}.cropper-line.line-n{cursor:ns-resize;height:5px;left:0;top:-3px}.cropper-line.line-w{cursor:ew-resize;left:-3px;top:0;width:5px}.cropper-line.line-s{bottom:-3px;cursor:ns-resize;height:5px;left:0}.cropper-point{background-color:#39f;height:5px;opacity:.75;width:5px}.cropper-point.point-e{cursor:ew-resize;margin-top:-3px;right:-3px;top:50%}.cropper-point.point-n{cursor:ns-resize;left:50%;margin-left:-3px;top:-3px}.cropper-point.point-w{cursor:ew-resize;left:-3px;margin-top:-3px;top:50%}.cropper-point.point-s{bottom:-3px;cursor:s-resize;left:50%;margin-left:-3px}.cropper-point.point-ne{cursor:nesw-resize;right:-3px;top:-3px}.cropper-point.point-nw{cursor:nwse-resize;left:-3px;top:-3px}.cropper-point.point-sw{bottom:-3px;cursor:nesw-resize;left:-3px}.cropper-point.point-se{bottom:-3px;cursor:nwse-resize;height:20px;opacity:1;right:-3px;width:20px}@media (min-width:768px){.cropper-point.point-se{height:15px;width:15px}}@media (min-width:992px){.cropper-point.point-se{height:10px;width:10px}}@media (min-width:1200px){.cropper-point.point-se{height:5px;opacity:.75;width:5px}}.cropper-point.point-se:before{background-color:#39f;bottom:-50%;content:" ";display:block;height:200%;opacity:0;position:absolute;right:-50%;width:200%}.cropper-invisible{opacity:0}.cropper-bg{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAAA3NCSVQICAjb4U/gAAAABlBMVEXMzMz////TjRV2AAAACXBIWXMAAArrAAAK6wGCiw1aAAAAHHRFWHRTb2Z0d2FyZQBBZG9iZSBGaXJld29ya3MgQ1M26LyyjAAAABFJREFUCJlj+M/AgBVhF/0PAH6/D/HkDxOGAAAAAElFTkSuQmCC")}.cropper-hide{display:block;height:0;position:absolute;width:0}.cropper-hidden{display:none!important}.cropper-move{cursor:move}.cropper-crop{cursor:crosshair}.cropper-disabled .cropper-drag-box,.cropper-disabled .cropper-face,.cropper-disabled .cropper-line,.cropper-disabled .cropper-point{cursor:not-allowed}';
 
@@ -53791,6 +53460,117 @@
       }
     }
   }
+
+  // src/build/seasonal.js
+  var stored_season = {
+    id: "none",
+    new_years_eve: false
+  };
+  var seasonal_events = [
+    {
+      id: "new_years",
+      start: {
+        month: 1,
+        day: 1
+      },
+      end: {
+        month: 1,
+        day: 14
+      },
+      snowflakes: {
+        state: true,
+        count: 90
+      }
+    },
+    {
+      id: "easter",
+      start: {
+        month: 4,
+        day: 2
+      },
+      end: {
+        month: 4,
+        day: 30
+      },
+      snowflakes: {
+        state: false
+      }
+    },
+    {
+      id: "pride",
+      start: {
+        month: 5,
+        day: 31
+      },
+      end: {
+        month: 7,
+        day: 7
+      },
+      snowflakes: {
+        state: false
+      }
+    },
+    {
+      id: "halloween",
+      start: {
+        month: 9,
+        day: 22
+      },
+      end: {
+        month: 11,
+        day: 1
+      },
+      snowflakes: {
+        state: false
+      }
+    },
+    {
+      id: "pre_fall",
+      start: {
+        month: 11,
+        day: 1,
+        hour: 12
+      },
+      end: {
+        month: 11,
+        day: 12
+      },
+      snowflakes: {
+        state: true,
+        count: 12
+      }
+    },
+    {
+      id: "fall",
+      start: {
+        month: 11,
+        day: 13
+      },
+      end: {
+        month: 11,
+        day: 22
+      },
+      snowflakes: {
+        state: true,
+        count: 80
+      }
+    },
+    {
+      id: "christmas",
+      start: {
+        month: 11,
+        day: 23
+      },
+      end: {
+        month: 12,
+        day: 31
+      },
+      snowflakes: {
+        state: true,
+        count: 160
+      }
+    }
+  ];
 
   // src/components/settings/swatch.ts
   function display_colour_presets() {
@@ -54923,12 +54703,13 @@
       }
     });
     links.appendChild(more_button);
+    const state = page.state.seasons;
     let bleh_container = html.node`
-        <a class="btn masthead-nav-control ${stored_season.new_years_eve ? "" : "chibi"}" href="${root}bleh${stored_season.id != "none" ? "/seasonal" : ""}" data-label="bleh" data-season="${stored_season.id}" data-season-active="${stored_season.id != "none" ? "true" : "false"}" data-live="false">
-            ${stored_season.id == "none" ? tl2(trans.bleh_settings) : DateTime.fromISO(stored_season.end.replace("y0", stored_season.year).replace("{offset}", stored_season.offset)).toRelative(DateTime.fromISO(stored_season.now))}
+        <a class="btn masthead-nav-control icon chibi" href="${root}bleh" data-label="bleh" data-season="none">
+            ${tl2(trans.bleh_settings)}
         </a>
     `;
-    if (stored_season.id == "none") {
+    if (!state.current) {
       tippy_esm_default(bleh_container, {
         content: tl2(trans.bleh_settings)
       });
@@ -54936,13 +54717,74 @@
       page.header.season_tooltip = tippy_esm_default(bleh_container, {
         theme: "seasonal-swatch",
         content: html.node`
-                <span class="season-colour-name colourful" data-season=${stored_season.id}>${tl2(trans.seasonal.listing[stored_season.id])}</span>
+                <span class="season-colour-name colourful" data-season=${stored_season.id}>${tl2(trans.seasonal.listing[state.current.id])}</span>
                 <span class="season-exclusive">${tl2(trans.seasonal.notice)}</span>
             `
       });
     }
     links.appendChild(bleh_container);
     page.header.season = bleh_container;
+    if (auth.pro) {
+      let render_status_container = function(status3) {
+        if (!status3) return;
+        render(status_container, html`
+                <div class="status">
+                    <div class="status-image">
+                        <img src=${status3.avatar} alt=${status3.album}>
+                    </div>
+                    <div class="status-info">
+                        <strong class="status-text status-title">${status3.name}</strong>
+                        <p class="status-text status-artist">${status3.artist}</p>
+                        <p class="status-text status-album">${status3.album}</p>
+                    </div>
+                </div>
+                <div class="status-time">
+                    ${status3.active ? html.node`
+                        <p class="status-text status-time-text chartlist-now-scrobbling">
+                            ${tl2(trans.scrobbling_now)}
+                        </p>
+                    ` : html.node`
+                        <p class="status-text status-time-text inactive">
+                            ${tl2(trans.recent_scrobble)}
+                        </p>
+                    `}
+                </div>
+            `);
+      };
+      const music = html.node`
+            <button class="btn masthead-nav-control icon chibi" data-type="now-playing">
+                ${tl2(trans.music)}
+            </button>
+        `;
+      let status_container;
+      tippy_esm_default(music, {
+        content: tl2(trans.music)
+      });
+      tippy_esm_default(music, {
+        content: html.node`
+                <div class="window-header">
+                    ${icon({ name: icons.now_playing, identifier: "window_header" })}
+                    <div class="window-title">${tl2(trans.music)}</div>
+                </div>
+                <div class="window-content music-status" ref=${(el) => status_container = el}>
+                    <div class="loading-data-container">
+                        <div class="loading-data-text">${tl2(trans.loading)}</div>
+                    </div>
+                </div>
+            `,
+        theme: "nav-window",
+        placement: "top",
+        interactive: true,
+        interactiveBorder: 10,
+        trigger: "click",
+        appendTo: document.body,
+        onShow(instance) {
+          if (page.now.name) render_status_container(page.now);
+          live_status().then((status3) => render_status_container(status3));
+        }
+      });
+      links.appendChild(music);
+    }
     let notif_count = new_auth.querySelector(
       '[data-analytics-label="notifications"] + .auth-avatar-notification-count-badge'
     );
@@ -54997,7 +54839,6 @@
       trigger: "click",
       appendTo: document.body,
       onShow(instance) {
-        console.info("navigation instance MAIN", instance, instance.popper);
         page.state.inbox_content = instance.popper.querySelector(".window-content");
         render_inbox();
       }
@@ -55063,67 +54904,6 @@
     links.appendChild(inbox);
     queue_popup("inbox", inbox);
     queue_popup("search", search);
-    if (auth.pro) {
-      let render_status_container = function(status3) {
-        if (!status3) return;
-        render(status_container, html`
-                <div class="status">
-                    <div class="status-image">
-                        <img src=${status3.avatar} alt=${status3.album}>
-                    </div>
-                    <div class="status-info">
-                        <strong class="status-text status-title">${status3.name}</strong>
-                        <p class="status-text status-artist">${status3.artist}</p>
-                        <p class="status-text status-album">${status3.album}</p>
-                    </div>
-                </div>
-                <div class="status-time">
-                    ${status3.active ? html.node`
-                        <p class="status-text status-time-text chartlist-now-scrobbling">
-                            ${tl2(trans.scrobbling_now)}
-                        </p>
-                    ` : html.node`
-                        <p class="status-text status-time-text inactive">
-                            ${tl2(trans.recent_scrobble)}
-                        </p>
-                    `}
-                </div>
-            `);
-      };
-      const music = html.node`
-            <button class="btn masthead-nav-control icon chibi" data-type="now-playing">
-                ${tl2(trans.music)}
-            </button>
-        `;
-      let status_container;
-      tippy_esm_default(music, {
-        content: tl2(trans.music)
-      });
-      tippy_esm_default(music, {
-        content: html.node`
-                <div class="window-header">
-                    ${icon({ name: icons.now_playing, identifier: "window_header" })}
-                    <div class="window-title">${tl2(trans.music)}</div>
-                </div>
-                <div class="window-content music-status" ref=${(el) => status_container = el}>
-                    <div class="loading-data-container">
-                        <div class="loading-data-text">${tl2(trans.loading)}</div>
-                    </div>
-                </div>
-            `,
-        theme: "nav-window",
-        placement: "top",
-        interactive: true,
-        interactiveBorder: 10,
-        trigger: "click",
-        appendTo: document.body,
-        onShow(instance) {
-          if (page.now.name) render_status_container(page.now);
-          live_status().then((status3) => render_status_container(status3));
-        }
-      });
-      links.appendChild(music);
-    }
     let selected_language = document.querySelector(
       ".footer-language--active strong"
     )?.textContent;
@@ -57694,8 +57474,6 @@
       btn.setAttribute("data-hide", page_id != id);
       btn.classList.toggle("secondary-nav-item-link--active", page_id == id);
     });
-    if (page_id == "seasonal") seasonal_timer_start();
-    else seasonal_timer_end();
     try {
       render_setting_page(page_id);
     } catch (e4) {
@@ -57717,26 +57495,6 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                 </div>
             `
       );
-    }
-    if (page_id == "seasonal" && settings.seasonal && stored_season.id != "none" && stored_season.start && stored_season.end) {
-      tippy_esm_default(document.getElementById("current_season"), {
-        content: new Date(
-          stored_season.end.replace("y0", stored_season.year).replace("{offset}", stored_season.offset)
-        ).toLocaleString(DateTime.DATE_MED)
-      });
-      tippy_esm_default(document.getElementById("current_season_start"), {
-        content: new Date(
-          stored_season.start.replace("y0", stored_season.year).replace("{offset}", stored_season.offset)
-        ).toLocaleString(DateTime.DATE_MED)
-      });
-      tippy_esm_default(document.getElementById("next_season_start"), {
-        content: new Date(
-          stored_season.next_start.replace(
-            "y0",
-            stored_season.next_is_new_year ? stored_season.year + 1 : stored_season.year
-          ).replace("{offset}", stored_season.offset)
-        ).toLocaleString(DateTime.DATE_MED)
-      });
     }
     if (setting2 != null) {
       let setting_container = page.structure.main.querySelector(
@@ -63604,6 +63362,161 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     if (settings.rain) rain();
   }
 
+  // src/components/seasonal.ts
+  function set_season() {
+    if (!settings.seasonal) return;
+    const last_season_seen = localStorage.getItem(STORAGE_LAST_SEASON_SEEN) || "";
+    const state = get_season_state();
+    page.state.seasons = state;
+    if (!state.current) return;
+    apply_season(state.current);
+    if (state.current.id != last_season_seen)
+      new_season(state.current, state.now);
+  }
+  function apply_season(current) {
+    log(`applying ${current.id}`, "season", "info", { current });
+    document.body.setAttribute("data-bleh--season", current.id);
+    if (current.snowflakes.state && settings.seasonal_particles != "none") {
+      log("let the snow start!", "season");
+      prep_snow();
+      const snowflakes_enabled = true;
+      let snowflakes_count = current.snowflakes.count;
+      if (settings.seasonal_particles == "less" && snowflakes_count > 10)
+        snowflakes_count *= 0.45;
+      if (page.mobile && snowflakes_count > 10) snowflakes_count *= 0.5;
+      begin_snowflakes(snowflakes_enabled, snowflakes_count);
+    }
+    update_season_nav();
+  }
+  function new_season(current, now2) {
+    set_storage(STORAGE_LAST_SEASON_SEEN, current.id);
+    load_chart_colours();
+    notify({
+      id: "new_season",
+      title: tl2(trans.new_season),
+      body: tl2(trans.value_for_time, {
+        v: tl2(trans.seasonal.listing[current.id]),
+        time: current.end.toRelative(now2)
+      }),
+      icon: "icon-16-season",
+      persist: true
+    });
+  }
+  function get_season_state(now2 = DateTime.local()) {
+    const year = now2.year;
+    const seasons = resolve_seasons(now2);
+    seasons.sort((a, b) => a.start.toMillis() - b.start.toMillis());
+    const current = seasons.find((season) => season.current) || null;
+    let prev = null;
+    let next = null;
+    if (current) {
+      const index3 = seasons.findIndex((season) => season.id == current.id);
+      prev = seasons[index3 - 1] || null;
+      next = seasons[index3 + 1] || null;
+      if (!prev) {
+        const last = seasons[seasons.length - 1];
+        prev = {
+          ...last,
+          start: process_date(last.start, "start", year - 1),
+          end: process_date(last.end, "end", year - 1)
+        };
+      }
+      if (!next) {
+        const first = seasons[0];
+        next = {
+          ...first,
+          start: process_date(first.start, "start", year + 1),
+          end: process_date(first.end, "end", year + 1)
+        };
+      }
+    } else {
+      next = seasons.find((season) => now2 < season.start) || null;
+      if (!next) {
+        const first = seasons[0];
+        next = {
+          ...first,
+          start: process_date(first.start, "start", year + 1),
+          end: process_date(first.end, "end", year + 1)
+        };
+      }
+      const index3 = seasons.findIndex((season) => season.id == next.id);
+      prev = seasons[index3 - 1] || seasons[seasons.length - 1];
+    }
+    return {
+      now: now2,
+      current,
+      prev,
+      next
+    };
+  }
+  function resolve_seasons(now2 = DateTime.local()) {
+    const year = now2.year;
+    return seasonal_events.map((season) => {
+      const start2 = process_date(season.start, "start", year);
+      const end2 = process_date(season.end, "end", year);
+      const current = now2 >= start2 && now2 <= end2;
+      return {
+        ...season,
+        start: start2,
+        end: end2,
+        current
+      };
+    });
+  }
+  function process_date(date, type, year) {
+    let hour = date.hour || 0;
+    let minute = date.minute || 0;
+    let second = date.second || 0;
+    if (type == "end" && !date.hour && !date.minute && !date.second) {
+      hour = 23;
+      minute = 59;
+      second = 59;
+    }
+    return DateTime.fromObject({
+      year,
+      month: date.month,
+      day: date.day,
+      hour,
+      minute,
+      second
+    }, {
+      zone: "local"
+    });
+  }
+  function update_season_nav() {
+    if (!page.header.season) return;
+    const state = page.state.seasons;
+    page.header.season.setAttribute("href", `${root}bleh${state.current ? "/seasonal" : ""}`);
+    page.header.season.setAttribute("data-season", state.current ? state.current.id : "none");
+    page.header.season.setAttribute("data-season-active", !!state.current);
+    page.header.season.textContent = state.current ? state.current.end.toRelative(state.now) : tl2(trans.bleh_settings);
+  }
+  function prep_snow() {
+    if (page.state.snow) return;
+    page.state.snow = html.node`
+        <div class="snow-container" />
+    `;
+    document.documentElement.appendChild(page.state.snow);
+  }
+  function begin_snowflakes(enabled, count) {
+    if (!enabled) return;
+    const flakes = Array.from({ length: count * 0.7 }, () => {
+      const x = (Math.random() * 100).toFixed(1);
+      const drift = (Math.random() * 40 - 10).toFixed(1);
+      const scale = (Math.random() * 0.9 + 0.4).toFixed(1);
+      const size = 8 * scale;
+      const duration = (Math.random() * 64 + 20).toFixed(1);
+      const delay = (Math.random() * -30).toFixed(1);
+      const opacity = (Math.random() * 0.7 + 0.2).toFixed(1);
+      return { x, drift, scale, size, duration, delay, opacity };
+    });
+    render(page.state.snow, html`
+        ${flakes.map((flake) => html.node`
+            <div class="snow" style="width: ${flake.size}px; height: ${flake.size}px; --x: ${flake.x}vw; --x-end: calc(${flake.x}vw + ${flake.drift}vw); --s: ${flake.scale}; animation-duration: ${flake.duration}s; animation-delay: ${flake.delay}s; opacity: ${flake.opacity}" />
+        `)}
+    `);
+  }
+
   // src/components/radio/radio.js
   function bleh_radio() {
     let radios = page.structure.side.querySelectorAll(".stationlink");
@@ -64720,7 +64633,6 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     detect_mobile();
     page.platform = detect_platform();
     set_season();
-    seasonal_timer_end();
     bleh_footer();
     const masthead = document.body.querySelector(".masthead");
     const loading_indicator = document.body.querySelector(":scope > #initial-tealium-data");
@@ -64817,6 +64729,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     }
     seasonal_colour_switch();
     append_nav();
+    update_season_nav();
     page_title();
     setTimeout(() => {
       if (page.structure.row) {
@@ -76991,7 +76904,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-02-25"
       }
     },
-    built_on: "2026-03-22T18:39:33.253Z"
+    built_on: "2026-04-02T16:43:21.666Z"
   };
 
   // node_modules/@kurkle/color/dist/color.esm.js

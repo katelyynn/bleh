@@ -6,7 +6,7 @@
 
 import { settings } from '@/build/config';
 import { log } from '@/build/log';
-import { page, STORAGE_LAST_SEASON_SEEN } from '@/build/page';
+import { page, root, STORAGE_LAST_SEASON_SEEN } from '@/build/page';
 import {
     seasonal_events,
     seasonal_timer,
@@ -192,122 +192,15 @@ function process_date(date: date, type: 'start' | 'end', year: number) {
     });
 }
 
-function calculate_offset(now) {
-    let offset = now.getTimezoneOffset();
-
-    if (offset == 0) return '+0000';
-
-    const sign = offset < 0 ? '+' : '-';
-    offset = Math.abs(offset);
-
-    const hours = Math.floor(offset / 60);
-    const minutes = offset % 60;
-
-    const formatted_hours = hours < 10 ? `0${hours}` : hours.toString();
-    const formatted_minutes = minutes < 10 ? `0${minutes}` : minutes.toString();
-
-    return sign + formatted_hours + formatted_minutes;
-}
-
-export function seasonal_timer_start(bypass = false) {
-    if (stored_season.new_years_eve && !bypass) return;
-
-    if (seasonal_timer.state) return;
-
-    seasonal_timer.state = setInterval(set_season, 1000);
-    log('started interval', 'season', 'info');
-
-    if (!page.header.season_tooltip) return;
-
-    page.header.season_tooltip.setContent(html.node`
-        <span class="season-colour-name colourful" data-season=${stored_season.id}>${tl(trans.seasonal.listing[stored_season.id])}</span>
-        <span class="season-exclusive">${tl(trans.seasonal.live)}</span>
-    `);
-
-    page.header.season.setAttribute('data-live', true);
-    page.header.season.classList.toggle('chibi', !stored_season.new_years_eve);
-}
-export function seasonal_timer_end() {
-    if (stored_season.new_years_eve) return;
-
-    if (!seasonal_timer.state) return;
-
-    clearInterval(seasonal_timer.state);
-    seasonal_timer.state = null;
-    log('ended interval', 'season', 'info');
-
-    if (!page.header.season_tooltip) return;
-
-    page.header.season_tooltip.setContent(html.node`
-        <span class="season-colour-name colourful" data-season=${stored_season.id}>${tl(trans.seasonal.listing[stored_season.id])}</span>
-        <span class="season-exclusive">${tl(trans.seasonal.notice)}</span>
-    `);
-
-    page.header.season.setAttribute('data-live', false);
-    page.header.season.classList.toggle('chibi', !stored_season.new_years_eve);
-}
-
-function update_season_nav() {
+export function update_season_nav() {
     if (!page.header.season) return;
 
-    page.header.season.setAttribute('data-season', stored_season.id);
-    page.header.season.classList.toggle('chibi', !stored_season.new_years_eve);
+    const state = page.state.seasons;
 
-    if (!stored_season.new_years_eve) {
-        page.header.season.textContent = DateTime.fromISO(
-            stored_season.end
-                .replace('y0', stored_season.year)
-                .replace('{offset}', stored_season.offset)
-        ).toRelative(DateTime.fromISO(stored_season.now));
-    } else {
-        let next = stored_season.next_start
-            .replace('y0', stored_season.year)
-            .replace('{offset}', stored_season.offset);
-        if (stored_season.next_is_new_year)
-            next = stored_season.next_start
-                .replace('y0', stored_season.year + 1)
-                .replace('{offset}', stored_season.offset);
-
-        let time_until = new Date(next) - new Date();
-
-        page.header.season.textContent = countdown_to(time_until);
-        page.header.season.setAttribute('data-live', true);
-
-        page.header.season_tooltip.setContent(html.node`
-            <span class="season-colour-name">${tl(trans.seasonal.listing[stored_season.id])}</span>
-            <span class="season-exclusive">${tl(trans.seasonal.live)}</span>
-        `);
-    }
-}
-
-function countdown_to(time_until) {
-    const duration = Duration.fromMillis(time_until).shiftTo(
-        'days',
-        'hours',
-        'minutes',
-        'seconds'
-    );
-    let { days, hours, minutes, seconds } = duration.toObject();
-
-    days = Math.floor(days);
-    hours = Math.floor(hours);
-    minutes = Math.floor(minutes);
-    seconds = Math.floor(seconds);
-
-    hours = String(hours).padStart(2, '0');
-    minutes = String(minutes).padStart(2, '0');
-    seconds = String(seconds).padStart(2, '0');
-
-    if (days != 0)
-        return DateTime.fromISO(
-            stored_season.end
-                .replace('y0', stored_season.year)
-                .replace('{offset}', stored_season.offset)
-        ).toRelative(DateTime.fromISO(stored_season.now));
-
-    if (hours == '00' && minutes == '00' && seconds == '00') set_season();
-
-    return `${hours}:${minutes}:${seconds}`;
+    page.header.season.setAttribute('href', `${root}bleh${state.current ? '/seasonal' : ''}`);
+    page.header.season.setAttribute('data-season', state.current ? state.current.id : 'none');
+    page.header.season.setAttribute('data-season-active', !!state.current);
+    page.header.season.textContent = state.current ? state.current.end.toRelative(state.now) : tl(trans.bleh_settings);
 }
 
 function prep_snow() {

@@ -7,6 +7,8 @@
 import { html } from 'lighterhtml';
 import tippy from 'tippy.js';
 import { version } from '@/main';
+import { season } from '@/components/seasonal';
+import { DateTime } from 'luxon';
 // require page reload
 export let reload_pending = {
     state: false
@@ -235,6 +237,12 @@ interface page {
                 album: glacier_insight,
                 track: glacier_insight
             }
+        },
+        seasons: {
+            now: DateTime,
+            current: season | null,
+            prev: season | null,
+            next: season | null
         }
     }
 }

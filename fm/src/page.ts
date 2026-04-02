@@ -57,7 +57,7 @@ import { bleh_tags, bleh_tags_large } from '@/pages/tag';
 import { bleh_tracks } from '@/pages/track';
 import { patch_wiki } from '@/pages/music/wiki';
 import { start_rain } from '@/components/page/rain';
-import { seasonal_timer_end, set_season } from '@/components/seasonal';
+import { set_season, update_season_nav } from '@/components/seasonal';
 import {
     parse_shout_queue,
     patch_shouts,
@@ -417,7 +417,6 @@ function load_page(main_content = null) {
     page.platform = detect_platform();
 
     set_season();
-    seasonal_timer_end();
 
     bleh_footer();
 
@@ -573,6 +572,7 @@ function load_page(main_content = null) {
     seasonal_colour_switch();
 
     append_nav();
+    update_season_nav();
 
     page_title();
 

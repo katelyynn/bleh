@@ -193,7 +193,7 @@
 }
 
 .masthead-nav .masthead-nav-control {
-    &[data-label="bleh"]:not([data-season-active="true"]) {
+    &[data-label="bleh"][data-season="none"] {
         display: none !important;
     }
 }

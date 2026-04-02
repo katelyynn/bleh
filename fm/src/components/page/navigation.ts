@@ -429,13 +429,15 @@ export function append_nav() {
 
     links.appendChild(more_button);
 
+    const state = page.state.seasons;
+
     // configure bleh
     let bleh_container = html.node`
-        <a class="btn masthead-nav-control ${stored_season.new_years_eve ? '' : 'chibi'}" href="${root}bleh${stored_season.id != 'none' ? '/seasonal' : ''}" data-label="bleh" data-season="${stored_season.id}" data-season-active="${stored_season.id != 'none' ? 'true' : 'false'}" data-live="false">
-            ${stored_season.id == 'none' ? tl(trans.bleh_settings) : DateTime.fromISO(stored_season.end.replace('y0', stored_season.year).replace('{offset}', stored_season.offset)).toRelative(DateTime.fromISO(stored_season.now))}
+        <a class="btn masthead-nav-control icon chibi" href="${root}bleh" data-label="bleh" data-season="none">
+            ${tl(trans.bleh_settings)}
         </a>
     `;
-    if (stored_season.id == 'none') {
+    if (!state.current) {
         tippy(bleh_container, {
             content: tl(trans.bleh_settings)
         });
@@ -443,7 +445,7 @@ export function append_nav() {
         page.header.season_tooltip = tippy(bleh_container, {
             theme: 'seasonal-swatch',
             content: html.node`
-                <span class="season-colour-name colourful" data-season=${stored_season.id}>${tl(trans.seasonal.listing[stored_season.id])}</span>
+                <span class="season-colour-name colourful" data-season=${stored_season.id}>${tl(trans.seasonal.listing[state.current.id])}</span>
                 <span class="season-exclusive">${tl(trans.seasonal.notice)}</span>
             `
         });
@@ -451,6 +453,77 @@ export function append_nav() {
     links.appendChild(bleh_container);
 
     page.header.season = bleh_container;
+
+    // music
+    if (auth.pro) {
+        const music = html.node`
+            <button class="btn masthead-nav-control icon chibi" data-type="now-playing">
+                ${tl(trans.music)}
+            </button>
+        `;
+
+        let status_container;
+
+        tippy(music, {
+            content: tl(trans.music)
+        });
+
+        tippy(music, {
+            content: html.node`
+                <div class="window-header">
+                    ${icon({ name: icons.now_playing, identifier: 'window_header' })}
+                    <div class="window-title">${tl(trans.music)}</div>
+                </div>
+                <div class="window-content music-status" ref=${el => status_container = el}>
+                    <div class="loading-data-container">
+                        <div class="loading-data-text">${tl(trans.loading)}</div>
+                    </div>
+                </div>
+            `,
+            theme: 'nav-window',
+            placement: 'top',
+            interactive: true,
+            interactiveBorder: 10,
+            trigger: 'click',
+            appendTo: document.body,
+
+            onShow(instance) {
+                if (page.now.name) render_status_container(page.now);
+
+                live_status().then((status) => render_status_container(status));
+            }
+        });
+
+        function render_status_container(status: music_status) {
+            if (!status) return;
+
+            render(status_container, html`
+                <div class="status">
+                    <div class="status-image">
+                        <img src=${status.avatar} alt=${status.album}>
+                    </div>
+                    <div class="status-info">
+                        <strong class="status-text status-title">${status.name}</strong>
+                        <p class="status-text status-artist">${status.artist}</p>
+                        <p class="status-text status-album">${status.album}</p>
+                    </div>
+                </div>
+                <div class="status-time">
+                    ${status.active ? html.node`
+                        <p class="status-text status-time-text chartlist-now-scrobbling">
+                            ${tl(trans.scrobbling_now)}
+                        </p>
+                    ` : html.node`
+                        <p class="status-text status-time-text inactive">
+                            ${tl(trans.recent_scrobble)}
+                        </p>
+                    `}
+                </div>
+            `);
+        }
+
+        links.appendChild(music);
+    }
 
     let notif_count = new_auth.querySelector(
         '[data-analytics-label="notifications"] + .auth-avatar-notification-count-badge'
@@ -514,9 +587,7 @@ export function append_nav() {
         appendTo: document.body,
 
         onShow(instance) {
-            console.info('navigation instance MAIN', instance, instance.popper);
-            page.state.inbox_content =
-                instance.popper.querySelector('.window-content');
+            page.state.inbox_content = instance.popper.querySelector('.window-content');
 
             render_inbox();
         }
@@ -597,77 +668,6 @@ export function append_nav() {
 
     queue_popup('inbox', inbox);
     queue_popup('search', search);
-
-    // music
-    if (auth.pro) {
-        const music = html.node`
-            <button class="btn masthead-nav-control icon chibi" data-type="now-playing">
-                ${tl(trans.music)}
-            </button>
-        `;
-
-        let status_container;
-
-        tippy(music, {
-            content: tl(trans.music)
-        });
-
-        tippy(music, {
-            content: html.node`
-                <div class="window-header">
-                    ${icon({ name: icons.now_playing, identifier: 'window_header' })}
-                    <div class="window-title">${tl(trans.music)}</div>
-                </div>
-                <div class="window-content music-status" ref=${el => status_container = el}>
-                    <div class="loading-data-container">
-                        <div class="loading-data-text">${tl(trans.loading)}</div>
-                    </div>
-                </div>
-            `,
-            theme: 'nav-window',
-            placement: 'top',
-            interactive: true,
-            interactiveBorder: 10,
-            trigger: 'click',
-            appendTo: document.body,
-
-            onShow(instance) {
-                if (page.now.name) render_status_container(page.now);
-
-                live_status().then((status) => render_status_container(status));
-            }
-        });
-
-        function render_status_container(status: music_status) {
-            if (!status) return;
-
-            render(status_container, html`
-                <div class="status">
-                    <div class="status-image">
-                        <img src=${status.avatar} alt=${status.album}>
-                    </div>
-                    <div class="status-info">
-                        <strong class="status-text status-title">${status.name}</strong>
-                        <p class="status-text status-artist">${status.artist}</p>
-                        <p class="status-text status-album">${status.album}</p>
-                    </div>
-                </div>
-                <div class="status-time">
-                    ${status.active ? html.node`
-                        <p class="status-text status-time-text chartlist-now-scrobbling">
-                            ${tl(trans.scrobbling_now)}
-                        </p>
-                    ` : html.node`
-                        <p class="status-text status-time-text inactive">
-                            ${tl(trans.recent_scrobble)}
-                        </p>
-                    `}
-                </div>
-            `);
-        }
-
-        links.appendChild(music);
-    }
 
     // language
     let selected_language = document.querySelector(
