@@ -51,9 +51,9 @@
 }
 
 [data-season]:not([data-season="none"]) {
-    --hue-over: var(--hue-seasonal);
-    --sat-over: var(--sat-seasonal);
-    --lit-over: var(--lit-seasonal);
+    --hue-user: var(--hue-seasonal);
+    --sat-user: var(--sat-seasonal);
+    --lit-user: var(--lit-seasonal);
 }
 
 .seasonal-icon > .bleh-icon,
