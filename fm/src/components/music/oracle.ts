@@ -949,6 +949,16 @@ export function oracle_process() {
         const media = data.media;
         const discs = media.filter((item) => item.tracks != null);
 
+        if (discs.length == 0) {
+            render(tracklist_oracle, html`
+                <div class="loading-data-container">
+                    <div class="loading-data-text failed">${tl(trans.no_tracks_found_mb)}</div>
+                </div>
+            `);
+
+            return;
+        }
+
         render(tracklist_oracle, html`
             ${discs.map((disc) => render_tracklist(disc, discs.length, artist))}
         `);

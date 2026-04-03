@@ -48034,6 +48034,14 @@
       log("entry", "oracle", "info", { oracle_entry });
       const media = data2.media;
       const discs = media.filter((item2) => item2.tracks != null);
+      if (discs.length == 0) {
+        render(tracklist_oracle, html`
+                <div class="loading-data-container">
+                    <div class="loading-data-text failed">${tl2(trans.no_tracks_found_mb)}</div>
+                </div>
+            `);
+        return;
+      }
       render(tracklist_oracle, html`
             ${discs.map((disc) => render_tracklist(disc, discs.length, artist2))}
         `);
@@ -75373,6 +75381,9 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     },
     recent_scrobble: {
       en: "Recently scrobbled"
+    },
+    no_tracks_found_mb: {
+      en: "No tracks found, possibly a MusicBrainz error"
     }
   };
   var translation_fallback = "NO_TRANSLATION_FOUND";
