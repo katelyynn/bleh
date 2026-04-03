@@ -35836,26 +35836,34 @@
             `;
         image_wrap.appendChild(grid_colour);
         image.setAttribute("crossorigin", "anonymous");
-        try {
-          image.addEventListener("load", function() {
-            let thief = new import_color_thief_browser.default();
-            let colour = thief.getColor(image);
-            let hsl3 = rgb_to_hsl(colour[0], colour[1], colour[2]);
-            grid_colour.style.setProperty(
-              "background",
-              `rgb(${colour})`
-            );
-            let hue4 = hsl3.h;
-            let sat = clamp_sat(hsl3.s / 100 * 3);
-            let lit = clamp_lit(sat, hsl3.l / 100 + 0.35);
-            grid.classList.add("grid-items-item-has-colour");
-            grid.style.setProperty("--hue-over", hue4);
-            grid.style.setProperty("--sat-over", sat);
-            grid.style.setProperty("--lit-over", lit);
-            cover.classList.add("colourful");
-          });
-        } catch (e4) {
-        }
+        lazy(grid, () => {
+          console.info("scrolled", grid, "into view");
+          try {
+            const run = () => {
+              let thief = new import_color_thief_browser.default();
+              let colour = thief.getColor(image);
+              let hsl3 = rgb_to_hsl(colour[0], colour[1], colour[2]);
+              grid_colour.style.setProperty(
+                "background",
+                `rgb(${colour})`
+              );
+              let hue4 = hsl3.h;
+              let sat = clamp_sat(hsl3.s / 100 * 3);
+              let lit = clamp_lit(sat, hsl3.l / 100 + 0.35);
+              grid.classList.add("grid-items-item-has-colour");
+              grid.style.setProperty("--hue-over", hue4);
+              grid.style.setProperty("--sat-over", sat);
+              grid.style.setProperty("--lit-over", lit);
+              cover.classList.add("colourful");
+            };
+            if (image.complete && image.naturalWidth != 0) {
+              run();
+            } else {
+              image.addEventListener("load", run, { once: true });
+            }
+          } catch (e4) {
+          }
+        });
       } else {
         grid.classList.add("generic-cover");
       }
@@ -49358,10 +49366,12 @@
   function parse_shout_queue() {
     if (shout_parse_queue.length == 0) return;
     const shout = shout_parse_queue.shift();
-    const parsed2 = markdown(shout.element.textContent);
-    shout.element.classList.add("markdown-body");
-    render(shout.element, html.node`${parsed2}`);
-    log("parsed one shout", "shout", "log");
+    lazy(shout.element, () => {
+      const parsed2 = markdown(shout.element.textContent);
+      shout.element.classList.add("markdown-body");
+      render(shout.element, html.node`${parsed2}`);
+      log("parsed one shout", "shout", "log");
+    });
     if (shout_parse_queue.length > 0) setTimeout(parse_shout_queue, 50);
   }
   function shout_messages() {
@@ -76904,7 +76914,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-02-25"
       }
     },
-    built_on: "2026-04-03T01:41:36.300Z"
+    built_on: "2026-04-03T17:47:29.446Z"
   };
 
   // node_modules/@kurkle/color/dist/color.esm.js

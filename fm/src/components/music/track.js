@@ -12,6 +12,7 @@ import {
     clamp_lit,
     clamp_sat,
     copy,
+    lazy,
     return_artist_from_track,
     rgb_to_hsl,
     romanise,

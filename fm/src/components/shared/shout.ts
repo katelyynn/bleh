@@ -446,12 +446,14 @@ export function parse_shout_queue() {
 
     const shout = shout_parse_queue.shift();
 
-    const parsed = markdown(shout.element.textContent);
+    lazy(shout.element, () => {
+        const parsed = markdown(shout.element.textContent);
 
-    shout.element.classList.add('markdown-body');
-    render(shout.element, html.node`${parsed}`);
+        shout.element.classList.add('markdown-body');
+        render(shout.element, html.node`${parsed}`);
 
-    log('parsed one shout', 'shout', 'log');
+        log('parsed one shout', 'shout', 'log');
+    });
 
     if (shout_parse_queue.length > 0) setTimeout(parse_shout_queue, 50);
 }

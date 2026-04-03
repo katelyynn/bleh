@@ -11,6 +11,7 @@ import {
     clamp_sat,
     copy,
     int_from_string,
+    lazy,
     rgb_to_hsl,
     romanise
 } from '@/build/tools';
@@ -103,33 +104,41 @@ export function music_grids(search = page.structure.main, use_colour = true) {
             image_wrap.appendChild(grid_colour);
 
             image.setAttribute('crossorigin', 'anonymous');
-            try {
-                image.addEventListener('load', function () {
-                    let thief = new ColorThief();
-                    let colour = thief.getColor(image);
 
-                    let hsl = rgb_to_hsl(colour[0], colour[1], colour[2]);
+            lazy(grid, () => {
+                console.info('scrolled', grid, 'into view');
 
-                    grid_colour.style.setProperty(
-                        'background',
-                        `rgb(${colour})`
-                    );
+                try {
+                    const run = () => {
+                        let thief = new ColorThief();
+                        let colour = thief.getColor(image);
 
-                    let hue = hsl.h;
-                    let sat = clamp_sat((hsl.s / 100) * 3);
-                    let lit = clamp_lit(sat, hsl.l / 100 + 0.35);
+                        let hsl = rgb_to_hsl(colour[0], colour[1], colour[2]);
 
-                    grid.classList.add('grid-items-item-has-colour');
-                    grid.style.setProperty('--hue-over', hue);
-                    grid.style.setProperty('--sat-over', sat);
-                    grid.style.setProperty('--lit-over', lit);
+                        grid_colour.style.setProperty(
+                            'background',
+                            `rgb(${colour})`
+                        );
 
-                    cover.classList.add('colourful');
-                });
-            } catch (e) {}
+                        let hue = hsl.h;
+                        let sat = clamp_sat((hsl.s / 100) * 3);
+                        let lit = clamp_lit(sat, hsl.l / 100 + 0.35);
 
-            // TODO: add a timeout to check if the image has had its
-            // colour taken and if not do it manually after a set amount of time
+                        grid.classList.add('grid-items-item-has-colour');
+                        grid.style.setProperty('--hue-over', hue);
+                        grid.style.setProperty('--sat-over', sat);
+                        grid.style.setProperty('--lit-over', lit);
+
+                        cover.classList.add('colourful');
+                    };
+
+                    if (image.complete && image.naturalWidth != 0) {
+                        run();
+                    } else {
+                        image.addEventListener('load', run, { once: true });
+                    }
+                } catch (e) {}
+            });
         } else {
             grid.classList.add('generic-cover');
         }

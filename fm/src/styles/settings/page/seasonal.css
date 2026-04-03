@@ -38,6 +38,10 @@
     &:not([data-season="none"]) {
         background-color: oklch(var(--f4), 20%);
         --mask-colour: oklch(var(--l3-c));
+
+        --hue-over: var(--hue-seasonal);
+        --sat-over: var(--sat-seasonal);
+        --lit-over: var(--lit-seasonal);
     }
 }
 
@@ -47,13 +51,11 @@
 
     &:not([data-season="none"]) {
         color: oklch(var(--l3-c));
-    }
-}
 
-[data-season]:not([data-season="none"]) {
-    --hue-user: var(--hue-seasonal);
-    --sat-user: var(--sat-seasonal);
-    --lit-user: var(--lit-seasonal);
+        --hue-over: var(--hue-seasonal);
+        --sat-over: var(--sat-seasonal);
+        --lit-over: var(--lit-seasonal);
+    }
 }
 
 .seasonal-icon > .bleh-icon,
