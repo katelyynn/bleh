@@ -36,6 +36,7 @@ import { setting } from '@/components/settings/settings';
 import tippy from 'tippy.js';
 import { open_starred_friend_window } from '@/pages/profile/profile';
 import { artist_title, page_header_avatar } from '@/components/music/header';
+import { header_colour } from '@/components/page/colour';
 
 export function bleh_artists() {
     let artist_header = document.body.querySelector('.header-new--artist') as HTMLElement;
@@ -109,11 +110,13 @@ export function bleh_artists() {
 
         if (on_tour) on_tour.classList.add('label', 'no-hover', 'expand');
 
+        let page_avatar;
+
         let multi_info_box;
         let redesigned_artist_header = html.node`
             <section class="page-header for-artist">
                 <div class="page-header-avatar-list">
-                    ${page_header_avatar(avatar?.getAttribute('content'))}
+                    ${page_avatar = page_header_avatar(avatar?.getAttribute('content'))}
                 </div>
                 <div class="page-header-info has-main-info">
                     <div class="main-info">
@@ -140,6 +143,8 @@ export function bleh_artists() {
                 </div>
             </section>
         `;
+
+        header_colour(artist_header, false, page_avatar);
 
         if (multi_info_box) {
             tippy(multi_info_box, {

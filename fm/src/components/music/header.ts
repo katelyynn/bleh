@@ -23,7 +23,7 @@ export function page_header_avatar(url?: string) {
         action = settings.default_avatar_action as string;
 
     const elem = html.node`
-        <div class="page-header-avatar" onclick=${() => {
+        <div class="page-header-avatar colourful" onclick=${() => {
             if (!url) return;
 
             if (action == 'expand') {

@@ -26,6 +26,7 @@ import tippy from 'tippy.js';
 import { oracle_process } from '@/components/music/oracle';
 import { hoshino_return } from '@/components/music/hoshino.js';
 import { page_header_avatar, page_header_title } from '@/components/music/header';
+import { header_colour } from '@/components/page/colour';
 
 export function bleh_tracks() {
     const track_header = document.body.querySelector('.header-new--track') as HTMLElement;
@@ -122,18 +123,21 @@ export function bleh_tracks() {
 
         if (hoshino_entry && ff('ruby')) {
             create_avatar(
+                artist_header,
                 page.state.avatar_side,
                 hoshino_entry,
                 page.state.avatar_side_override
             );
         } else if (album_avatar) {
             create_avatar(
+                artist_header,
                 page.state.avatar_side,
                 album_avatar.src.replace('300x300', 'avatar300s'),
                 page.state.avatar_side_override
             );
         } else if (artist_avatar) {
             create_avatar(
+                artist_header,
                 page.state.avatar_side,
                 artist_avatar
                     .getAttribute('content')
@@ -142,6 +146,7 @@ export function bleh_tracks() {
             );
         } else {
             create_avatar(
+                artist_header,
                 page.state.avatar_side,
                 '',
                 page.state.avatar_side_override
@@ -175,13 +180,13 @@ export function bleh_tracks() {
         else if (page.subpage == 'wiki_edit') bleh_wiki_editor();
     }
 
-    if (ff('oracle') && settings.oracle_beta) oracle_process();
+    if (ff('oracle') && settings.oracle_beta) oracle_process(artist_header);
 
     log('status is', 'page', 'info', page);
     update_page();
 }
 
-export function create_avatar(parent, src, override = 'expand') {
+export function create_avatar(header, parent, src, override = 'expand') {
     log(`creating avatar for ${src} with override ${override}`, 'track');
 
     let full = avatar(src, 'ar0');
@@ -193,7 +198,11 @@ export function create_avatar(parent, src, override = 'expand') {
 
     register_background(full);
 
+    let page_avatar;
+
     render(parent, html`
-        ${page_header_avatar(src)}
+        ${page_avatar = page_header_avatar(src)}
     `);
+
+    header_colour(header, false, page_avatar);
 }

@@ -39061,7 +39061,7 @@
     if (supports_gallery)
       action = settings.default_avatar_action;
     const elem = html.node`
-        <div class="page-header-avatar" onclick=${() => {
+        <div class="page-header-avatar colourful" onclick=${() => {
       if (!url) return;
       if (action == "expand") {
         expand_avatar(avatar(url, "ar0"));
@@ -47211,6 +47211,35 @@
     page.structure.side.appendChild(about_artist_container);
   }
 
+  // src/components/page/colour.ts
+  function header_colour(header, apply_to_page = false, apply_to_elem) {
+    const header_inner = header.querySelector(".header-new-inner");
+    if (!header_inner) return;
+    try {
+      let bg = header_inner.getAttribute("style").replace("background: #", "");
+      let hsl3 = hex_to_oklch(bg);
+      let sat = clamp_sat(hsl3.s / 100 * 3);
+      let lit = clamp_lit(sat, hsl3.l / 100 + 0.35, true);
+      if (apply_to_page) {
+        document.body.style.setProperty("--hue-album", hsl3.h);
+        document.body.style.setProperty("--sat-album", sat);
+        document.body.style.setProperty("--lit-album", lit);
+        load_chart_colours();
+      }
+      if (apply_to_elem instanceof HTMLElement) {
+        apply_to_elem.style.setProperty("--hue-over", hsl3.h);
+        apply_to_elem.style.setProperty("--sat-over", sat);
+        apply_to_elem.style.setProperty("--lit-over", lit);
+      }
+      log(
+        `sourced hsl of (${hsl3.h}, ${hsl3.s}, ${hsl3.l}) - using final value of (${hsl3.h}, ${sat}, ${lit})`,
+        "hue from album"
+      );
+    } catch (e4) {
+      log("no cover present", "hue from album");
+    }
+  }
+
   // src/pages/track.ts
   function bleh_tracks() {
     const track_header = document.body.querySelector(".header-new--track");
@@ -47283,24 +47312,28 @@
       const hoshino_entry = hoshino_return(page.name, page.sister);
       if (hoshino_entry && ff("ruby")) {
         create_avatar(
+          artist_header,
           page.state.avatar_side,
           hoshino_entry,
           page.state.avatar_side_override
         );
       } else if (album_avatar) {
         create_avatar(
+          artist_header,
           page.state.avatar_side,
           album_avatar.src.replace("300x300", "avatar300s"),
           page.state.avatar_side_override
         );
       } else if (artist_avatar) {
         create_avatar(
+          artist_header,
           page.state.avatar_side,
           artist_avatar.getAttribute("content").replace("/ar0/", "/avatar170s/"),
           page.state.avatar_side_override
         );
       } else {
         create_avatar(
+          artist_header,
           page.state.avatar_side,
           "",
           page.state.avatar_side_override
@@ -47326,11 +47359,11 @@
       else if (page.subpage == "wiki_history") bleh_wiki_history();
       else if (page.subpage == "wiki_edit") bleh_wiki_editor();
     }
-    if (ff("oracle") && settings.oracle_beta) oracle_process();
+    if (ff("oracle") && settings.oracle_beta) oracle_process(artist_header);
     log("status is", "page", "info", page);
     update_page();
   }
-  function create_avatar(parent, src, override = "expand") {
+  function create_avatar(header, parent, src, override = "expand") {
     log(`creating avatar for ${src} with override ${override}`, "track");
     let full = avatar(src, "ar0");
     if (src.endsWith("c6f59c1e5e7240a4c0d427abd71f3dbb.jpg") || src.endsWith("c6f59c1e5e7240a4c0d427abd71f3dbb.jpg") || src == "") {
@@ -47338,13 +47371,15 @@
       full = "";
     }
     register_background(full);
+    let page_avatar;
     render(parent, html`
-        ${page_header_avatar(src)}
+        ${page_avatar = page_header_avatar(src)}
     `);
+    header_colour(header, false, page_avatar);
   }
 
   // src/components/music/oracle.ts
-  function oracle_process() {
+  function oracle_process(page_header) {
     log("beginning", "oracle");
     page.state.oracle_debug = {};
     if (ff("oracle_album_reordering") && page.type == "track") {
@@ -48453,6 +48488,7 @@
               cache2.track.link = `${root}music/${sanitise(artist2)}/${sanitise(title)}`;
               if (artwork) {
                 create_avatar(
+                  page_header,
                   page.state.avatar_side,
                   artwork,
                   page.state.avatar_side_override
@@ -48520,6 +48556,7 @@
         );
         if (index3 == 0) {
           create_avatar(
+            page_header,
             page.state.avatar_side,
             entry.artwork,
             page.state.avatar_side_override
@@ -48598,6 +48635,7 @@
           cache2.track.sister = artist2;
           cache2.track.link = `${root}music/${sanitise(artist2)}/${sanitise(title)}`;
           create_avatar(
+            page_header,
             page.state.avatar_side,
             artwork,
             page.state.avatar_side_override
@@ -58929,10 +58967,11 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         page.sister,
         clean_number(listeners?.title)
       );
+      let page_avatar;
       let redesigned_album_header = html.node`
             <section class="page-header for-album">
                 <div class="page-header-avatar-list">
-                    ${page_header_avatar(avatar_img)}
+                    ${page_avatar = page_header_avatar(avatar_img)}
                 </div>
                 <div class="page-header-info">
                     <div class="sub-text">${tl2(trans.album)}</div>
@@ -58951,6 +58990,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                 </div>
                 ` : ""}
         `;
+      header_colour(album_header, settings.hue_from_album, page_avatar);
       if (avatar3) register_background(avatar3.getAttribute("content"));
       else register_background(null);
       page.structure.container.insertBefore(
@@ -58958,25 +58998,6 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         page.structure.container.firstElementChild
       );
       album_header.classList.add("legacy-header");
-    }
-    if (settings.hue_from_album) {
-      let header_inner = album_header.querySelector(".header-new-inner");
-      try {
-        let bg = header_inner.getAttribute("style").replace("background: #", "");
-        let hsl3 = hex_to_oklch(bg);
-        let sat = clamp_sat(hsl3.s / 100 * 3);
-        let lit = clamp_lit(sat, hsl3.l / 100 + 0.35, true);
-        document.body.style.setProperty("--hue-album", hsl3.h);
-        document.body.style.setProperty("--sat-album", sat);
-        document.body.style.setProperty("--lit-album", lit);
-        log(
-          `sourced hsl of (${hsl3.h}, ${hsl3.s}, ${hsl3.l}) - using final value of (${hsl3.h}, ${sat}, ${lit})`,
-          "hue from album"
-        );
-        load_chart_colours();
-      } catch (e4) {
-        log("no cover present", "hue from album");
-      }
     }
     if (!is_subpage) {
       show_your_scrobbles();
@@ -59141,10 +59162,10 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
 
   // src/pages/artist.ts
   function bleh_artists() {
-    let artist_header = document.body.querySelector(".header-new--artist");
-    page.name = artist_header.querySelector(".header-new-title").textContent;
+    let artist_header2 = document.body.querySelector(".header-new--artist");
+    page.name = artist_header2.querySelector(".header-new-title").textContent;
     page.sister = "";
-    artist_title(artist_header);
+    artist_title(artist_header2);
     let is_subpage = page.subpage != "overview";
     if (auth.pro) {
       page.structure.container = document.body.querySelector(
@@ -59183,20 +59204,21 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     } catch (e4) {
       log("unable to find elements", "page structure");
     }
-    checkup_page_structure(is_subpage, artist_header);
+    checkup_page_structure(is_subpage, artist_header2);
     let katsune = ff("katsune");
-    let featured_items = artist_header.querySelector(".artist-header-featured-items");
+    let featured_items = artist_header2.querySelector(".artist-header-featured-items");
     if (ff("refreshed_music_nav")) {
-      let avatar3 = artist_header.querySelector(".header-new-background-image");
-      let title = artist_header.querySelector(".header-new-title");
-      let on_tour = artist_header.querySelector(".header-new-on-tour");
-      let position = artist_header.querySelector(".header-new-chart-position-number");
+      let avatar3 = artist_header2.querySelector(".header-new-background-image");
+      let title = artist_header2.querySelector(".header-new-title");
+      let on_tour = artist_header2.querySelector(".header-new-on-tour");
+      let position = artist_header2.querySelector(".header-new-chart-position-number");
       if (on_tour) on_tour.classList.add("label", "no-hover", "expand");
+      let page_avatar;
       let multi_info_box;
       let redesigned_artist_header = html.node`
             <section class="page-header for-artist">
                 <div class="page-header-avatar-list">
-                    ${page_header_avatar(avatar3?.getAttribute("content"))}
+                    ${page_avatar = page_header_avatar(avatar3?.getAttribute("content"))}
                 </div>
                 <div class="page-header-info has-main-info">
                     <div class="main-info">
@@ -59223,6 +59245,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                 </div>
             </section>
         `;
+      header_colour(artist_header2, false, page_avatar);
       if (multi_info_box) {
         tippy_esm_default(multi_info_box, {
           content: tl2(trans.artists_tooltip)
@@ -59239,7 +59262,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         redesigned_artist_header,
         page.structure.container.firstElementChild
       );
-      artist_header.classList.add("legacy-header");
+      artist_header2.classList.add("legacy-header");
     }
     if (!is_subpage) {
       show_your_scrobbles();

@@ -38,6 +38,7 @@ import tippy from 'tippy.js';
 import { oracle_process } from '@/components/music/oracle';
 import { save_hoshino_artwork } from '@/components/music/hoshino.js';
 import { page_header_avatar, page_header_title } from '@/components/music/header';
+import { header_colour } from '@/components/page/colour';
 
 export function bleh_albums() {
     const album_header = document.body.querySelector('.header-new--album') as HTMLElement;
@@ -117,10 +118,12 @@ export function bleh_albums() {
             clean_number(listeners?.title)
         );
 
+        let page_avatar;
+
         let redesigned_album_header = html.node`
             <section class="page-header for-album">
                 <div class="page-header-avatar-list">
-                    ${page_header_avatar(avatar_img)}
+                    ${page_avatar = page_header_avatar(avatar_img)}
                 </div>
                 <div class="page-header-info">
                     <div class="sub-text">${tl(trans.album)}</div>
@@ -144,6 +147,8 @@ export function bleh_albums() {
                 }
         `;
 
+        header_colour(album_header, settings.hue_from_album, page_avatar);
+
         if (avatar) register_background(avatar.getAttribute('content'));
         else register_background(null);
 
@@ -152,33 +157,6 @@ export function bleh_albums() {
             page.structure.container.firstElementChild
         );
         album_header.classList.add('legacy-header');
-    }
-
-    // cover
-    if (settings.hue_from_album) {
-        let header_inner = album_header.querySelector('.header-new-inner');
-        try {
-            let bg = header_inner
-                .getAttribute('style')
-                .replace('background: #', '');
-            let hsl = hex_to_oklch(bg);
-
-            let sat = clamp_sat((hsl.s / 100) * 3);
-            let lit = clamp_lit(sat, hsl.l / 100 + 0.35, true);
-
-            document.body.style.setProperty('--hue-album', hsl.h);
-            document.body.style.setProperty('--sat-album', sat);
-            document.body.style.setProperty('--lit-album', lit);
-
-            log(
-                `sourced hsl of (${hsl.h}, ${hsl.s}, ${hsl.l}) - using final value of (${hsl.h}, ${sat}, ${lit})`,
-                'hue from album'
-            );
-
-            load_chart_colours();
-        } catch (e) {
-            log('no cover present', 'hue from album');
-        }
     }
 
     if (!is_subpage) {

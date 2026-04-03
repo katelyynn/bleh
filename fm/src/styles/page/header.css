@@ -169,7 +169,7 @@
     width: var(--page-header-avatar-size);
     height: var(--page-header-avatar-size);
     border-radius: var(--page-header-avatar-radius);
-    box-shadow: var(--subtle-shadow);
+    box-shadow: var(--grid-colour-shadow), var(--subtle-shadow);
     position: relative;
     overflow: hidden;
     flex-shrink: 0;
