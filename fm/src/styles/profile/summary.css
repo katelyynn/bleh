@@ -1,0 +1,68 @@
+.profile-summary {
+    display: flex;
+    flex-direction: column;
+    gap: var(--card-gap);
+}
+
+.summary-blocks {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--card-gap);
+    cursor: default;
+}
+
+.summary-block {
+    background: oklch(var(--b4) / 30%);
+    padding: 10px 14px;
+    border-radius: var(--item-med-radius);
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.summary-icon {
+    display: flex;
+    align-items: center;
+}
+.bleh-icon-summary {
+    color: oklch(var(--c3));
+}
+
+.summary-label {
+    font-size: var(--font-size);
+    line-height: var(--line-height);
+    color: oklch(var(--c3));
+}
+
+.summary-value {
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: var(--font-weight-medium);
+}
+
+
+.graph-blocks {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-rows: repeat(3, 1fr);
+
+    justify-content: start;
+    gap: 4px;
+}
+
+.graph-block {
+    --w: 40px;
+
+    width: var(--w);
+    height: var(--w);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: oklch(var(--h3));
+    color: oklch(var(--b7));
+    border-radius: var(--item-small-radius);
+
+    cursor: default;
+}

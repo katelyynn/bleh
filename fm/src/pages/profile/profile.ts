@@ -345,8 +345,6 @@ export function bleh_profiles() {
             }
         }
 
-        profile_summary(recent_tracks, top_artists);
-
         if (is_own_profile && settings.activities) {
             let recent_activity_section = html.node`
                 <section class="recent-activity-section">
@@ -367,9 +365,7 @@ export function bleh_profiles() {
         let artists = 0;
         let loved = 0;
 
-        let metadata = profile_header.querySelectorAll(
-            '.header-metadata-display'
-        );
+        let metadata = profile_header.querySelectorAll('.header-metadata-display');
         metadata.forEach((item, index) => {
             if (index == 0) {
                 let para = item.querySelector('p');
@@ -386,6 +382,8 @@ export function bleh_profiles() {
         page.state.scrobbles = scrobbles;
         page.state.artists = artists;
         page.state.loved = loved;
+
+        profile_summary(recent_tracks, top_artists);
 
         const date = new Date();
         const year = date.getFullYear();

@@ -169,7 +169,7 @@ export const icons = {
 };
 
 interface icon {
-    name: string,
+    name?: string,
     identifier?: string,
     use_mask?: boolean
 }
@@ -187,6 +187,6 @@ export function icon({ name, identifier, use_mask = true }: icon) {
     return elem;
 }
 
-export function icon_mask({ name }: { name: string }) {
+export function icon_mask({ name }: { name?: string }) {
     return `--icon: var(--icon-16-${name})`;
 }

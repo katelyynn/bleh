@@ -39207,8 +39207,24 @@
   // src/components/profile/summary.ts
   function profile_summary(recent_tracks, top_artists) {
     const panel = html.node`
-        <p>${page.name} summary</p>
+        <section class="profile-summary">
+            <div class="top-container">
+                <h2>{v} scrobbles recently</h2>
+            </div>
+            <div class="summary-main">
+                <div class="graph-blocks">
+                    ${Array.from({ length: 30 }).map((_, i) => create_graph_block(i + 1))}
+                </div>
+            </div>
+            <div class="summary-blocks">
+                ${summary_block("scrobbles", page.state.scrobbles)}
+                ${summary_block("artists", page.state.artists)}
+                ${summary_block("loved", page.state.loved)}
+            </div>
+        </section>
     `;
+    page.structure.main.insertBefore(panel, page.structure.main.firstChild);
+    return;
     if (top_artists) {
       page.structure.main.insertBefore(panel, top_artists);
     } else if (recent_tracks) {
@@ -39216,6 +39232,38 @@
     } else {
       page.structure.main.insertBefore(panel, page.structure.main.firstChild);
     }
+  }
+  function create_graph_block(index3) {
+    return html.node`
+        <div class="graph-block">
+            ${index3}
+        </div>
+    `;
+  }
+  function summary_block(type, value) {
+    let text4;
+    let icon_name;
+    if (type == "scrobbles") {
+      text4 = tl2(trans.scrobbles);
+      icon_name = icons.track;
+    } else if (type == "artists") {
+      text4 = tl2(trans.artists);
+      icon_name = icons.artist;
+    } else if (type == "loved") {
+      text4 = tl2(trans.loved);
+      icon_name = icons.loved;
+    }
+    return html.node`
+        <div class="summary-block">
+            <div class="summary-icon">
+                ${icon({ name: icon_name, identifier: "summary" })}
+            </div>
+            <div class="summary-info">
+                <h3 class="summary-label">${text4}</h3>
+                <p class="summary-value">${value.toLocaleString(lang)}</p>
+            </div>
+        </div>
+    `;
   }
 
   // src/components/page/colour.ts
@@ -39476,7 +39524,6 @@
                 `;
         }
       }
-      profile_summary(recent_tracks, top_artists);
       if (is_own_profile && settings.activities) {
         let recent_activity_section = html.node`
                 <section class="recent-activity-section">
@@ -39493,9 +39540,7 @@
       let average = 0;
       let artists = 0;
       let loved = 0;
-      let metadata = profile_header.querySelectorAll(
-        ".header-metadata-display"
-      );
+      let metadata = profile_header.querySelectorAll(".header-metadata-display");
       metadata.forEach((item, index3) => {
         if (index3 == 0) {
           let para = item.querySelector("p");
@@ -39510,6 +39555,7 @@
       page.state.scrobbles = scrobbles;
       page.state.artists = artists;
       page.state.loved = loved;
+      profile_summary(recent_tracks, top_artists);
       const date = /* @__PURE__ */ new Date();
       const year = date.getFullYear();
       const month = date.getMonth() + 1;
