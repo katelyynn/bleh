@@ -23,7 +23,7 @@ export let notifications = {};
 
 tippy.setDefaultProps({
     arrow: false,
-    duration: [0, 220],
+    duration: [220, 220],
     offset: [0, 4]
 });
 
