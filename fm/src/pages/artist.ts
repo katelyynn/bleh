@@ -144,7 +144,7 @@ export function bleh_artists() {
             </section>
         `;
 
-        header_colour(artist_header, false, page_avatar);
+        header_colour(page_avatar.image, false, page_avatar);
 
         if (multi_info_box) {
             tippy(multi_info_box, {

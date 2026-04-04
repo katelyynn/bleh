@@ -181,12 +181,12 @@
       }, CanvasImage.prototype.removeCanvas = function() {
         this.canvas.parentNode.removeChild(this.canvas);
       };
-      var ColorThief4 = function() {
+      var ColorThief5 = function() {
       };
-      if (ColorThief4.prototype.getColor = function(a, b) {
+      if (ColorThief5.prototype.getColor = function(a, b) {
         var c2 = this.getPalette(a, 5, b), d = c2[0];
         return d;
-      }, ColorThief4.prototype.getPalette = function(a, b, c2) {
+      }, ColorThief5.prototype.getPalette = function(a, b, c2) {
         "undefined" == typeof b && (b = 10), ("undefined" == typeof c2 || 1 > c2) && (c2 = 10);
         for (var d, e4, f3, g, h, i = new CanvasImage(a), j = i.getImageData(), k4 = j.data, l2 = i.getPixelCount(), m = [], n2 = 0; l2 > n2; n2 += c2) d = 4 * n2, e4 = k4[d + 0], f3 = k4[d + 1], g = k4[d + 2], h = k4[d + 3], h >= 125 && (e4 > 250 && f3 > 250 && g > 250 || m.push([e4, f3, g]));
         var o = MMCQ.quantize(m, b), p4 = o ? o.palette() : null;
@@ -358,7 +358,7 @@
           d2[0] > 251 && d2[1] > 251 && d2[2] > 251 && (a2[c3].color = [255, 255, 255]);
         } }, { quantize: h };
       }();
-      module.exports = ColorThief4;
+      module.exports = ColorThief5;
     }
   });
 
@@ -32824,44 +32824,6 @@
   var yiq = useMode(definition_default28);
 
   // src/build/tools.js
-  function hex_to_hsl(hex3) {
-    let result = new RegExp(/^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i).exec(
-      hex3
-    );
-    let r2 = parseInt(result[1], 16);
-    let g = parseInt(result[2], 16);
-    let b = parseInt(result[3], 16);
-    r2 /= 255, g /= 255, b /= 255;
-    let max2 = Math.max(r2, g, b), min2 = Math.min(r2, g, b);
-    let h, s2, l2 = (max2 + min2) / 2;
-    if (max2 == min2) {
-      h = s2 = 0;
-    } else {
-      let d = max2 - min2;
-      s2 = l2 > 0.5 ? d / (2 - max2 - min2) : d / (max2 + min2);
-      switch (max2) {
-        case r2:
-          h = (g - b) / d + (g < b ? 6 : 0);
-          break;
-        case g:
-          h = (b - r2) / d + 2;
-          break;
-        case b:
-          h = (r2 - g) / d + 4;
-          break;
-      }
-      h /= 6;
-    }
-    h = Math.round(h * 360);
-    s2 = round_two(s2 * 100);
-    l2 = round_two(l2 * 100);
-    console.log("converted", hex3, "to", h, s2, l2);
-    return {
-      h,
-      s: s2,
-      l: l2
-    };
-  }
   function hex_to_oklch(hex3) {
     hex3 = hex3.replace("#", "");
     if (hex3.length == 3) {
@@ -32883,7 +32845,7 @@
   }
   function rgb_to_hsl(r2, g, b) {
     let hex3 = rgb_to_hex(r2, g, b);
-    return hex_to_hsl(hex3);
+    return hex_to_oklch(hex3);
   }
   function rgb_to_hex(r2, g, b) {
     return "#" + comp_to_hex(r2) + comp_to_hex(g) + comp_to_hex(b);
@@ -39060,6 +39022,7 @@
     let action = "expand";
     if (supports_gallery)
       action = settings.default_avatar_action;
+    let image;
     const elem = html.node`
         <div class="page-header-avatar colourful" onclick=${() => {
       if (!url) return;
@@ -39070,12 +39033,22 @@
       }
     }}>
             ${url ? html.node`
-                <img src=${avatar(url, "avatar300s")}>
+                <img src=${avatar(url, "avatar300s")} crossorigin="anonymous" ref=${(el) => image = el}>
             ` : html.node`
-                <img class="missing-${page.type}">
+                <img class="missing-${page.type}" crossorigin="anonymous" ref=${(el) => image = el}>
             `}
         </div>
     `;
+    Object.defineProperty(elem, "image", {
+      get() {
+        return image;
+      }
+    });
+    Object.defineProperty(elem, "src", {
+      get() {
+        return url;
+      }
+    });
     const menu = tippy_esm_default(elem, {
       theme: "context-menu",
       content: html.node`
@@ -39231,6 +39204,52 @@
     }
   }
 
+  // src/components/profile/summary.ts
+  function profile_summary(recent_tracks, top_artists) {
+    const panel = html.node`
+        <p>${page.name} summary</p>
+    `;
+    if (top_artists) {
+      page.structure.main.insertBefore(panel, top_artists);
+    } else if (recent_tracks) {
+      recent_tracks.after(panel);
+    } else {
+      page.structure.main.insertBefore(panel, page.structure.main.firstChild);
+    }
+  }
+
+  // src/components/page/colour.ts
+  var import_color_thief_browser3 = __toESM(require_color_thief_min(), 1);
+  function header_colour(source, apply_to_page = false, apply_to_elem) {
+    try {
+      source.onload = () => {
+        let thief = new import_color_thief_browser3.default();
+        let colour = thief.getColor(source);
+        let hsl3 = rgb_to_hsl(colour[0], colour[1], colour[2]);
+        let hue4 = hsl3.h;
+        let sat = clamp_sat(hsl3.s / 100 * 3);
+        let lit = clamp_lit(sat, hsl3.l / 100 + 0.35);
+        if (apply_to_page) {
+          document.body.style.setProperty("--hue-album", hue4);
+          document.body.style.setProperty("--sat-album", sat);
+          document.body.style.setProperty("--lit-album", lit);
+          load_chart_colours();
+        }
+        if (apply_to_elem instanceof HTMLElement) {
+          apply_to_elem.style.setProperty("--hue-over", hue4);
+          apply_to_elem.style.setProperty("--sat-over", sat);
+          apply_to_elem.style.setProperty("--lit-over", lit);
+        }
+        log(
+          `sourced hsl of (${hsl3.h}, ${hsl3.s}, ${hsl3.l}) - using final value of (${hue4}, ${sat}, ${lit})`,
+          "hue from album"
+        );
+      };
+    } catch (e4) {
+      log("received error", "hue from album", "error", { e: e4 });
+    }
+  }
+
   // src/pages/profile/profile.ts
   function bleh_profiles() {
     if (page.subpage == "obsessions_obsession") {
@@ -39359,10 +39378,11 @@
       cache2.avatar = src;
       page.avatar = src;
     }
+    let page_avatar;
     let redesigned_profile_header = html.node`
         <section class="page-header for-profile">
             <div class="page-header-avatar-list">
-                ${!new_account ? page_header_avatar(profile_avatar.src) : profile_avatar}
+                ${!new_account ? page_avatar = page_header_avatar(profile_avatar.src) : profile_avatar}
             </div>
             <div class="page-header-info has-main-info">
                 <div class="main-info">
@@ -39407,6 +39427,9 @@
         else register_background(null, "none");
       }
     }
+    if (page_avatar) {
+      header_colour(page_avatar.image, false, page_avatar);
+    }
     page.structure.container.insertBefore(
       redesigned_profile_header,
       page.structure.container.firstElementChild
@@ -39423,22 +39446,10 @@
     if (loved_tab) loved_tab.textContent = tl2(trans.loved);
     if (!is_subpage) {
       let is_following = page.state.follows_user;
-      profile_recents();
-      profile_artists();
+      let recent_tracks = profile_recents();
+      const top_artists = profile_artists();
       profile_albums();
       profile_tracks();
-      if (is_own_profile && settings.activities) {
-        let recent_activity_section = html.node`
-                <section class="recent-activity-section">
-                    <h2>${tl2(trans.activity)}</h2>
-                    ${render_activity_list()}
-                    <div class="more-link">
-                        <a href="${root}bleh/profile">${tl2(trans.activity_settings)}</a>
-                    </div>
-                </section>
-            `;
-        page.structure.side.appendChild(recent_activity_section);
-      }
       if (page.name == sponsor_list.sponsor_account && !is_own_profile) {
         page.structure.container.removeChild(page.structure.nav);
         page.structure.main.innerHTML = "";
@@ -39449,9 +39460,6 @@
                 </section>
             `);
       }
-      let recent_tracks = page.structure.main.querySelector(
-        "#recent-tracks-section"
-      );
       if (!recent_tracks) {
         recent_tracks = page.structure.main.querySelector(".no-data-message");
         if (recent_tracks) {
@@ -39467,6 +39475,19 @@
                     </div>
                 `;
         }
+      }
+      profile_summary(recent_tracks, top_artists);
+      if (is_own_profile && settings.activities) {
+        let recent_activity_section = html.node`
+                <section class="recent-activity-section">
+                    <h2>${tl2(trans.activity)}</h2>
+                    ${render_activity_list()}
+                    <div class="more-link">
+                        <a href="${root}bleh/profile">${tl2(trans.activity_settings)}</a>
+                    </div>
+                </section>
+            `;
+        page.structure.side.appendChild(recent_activity_section);
       }
       let scrobbles = 0;
       let average = 0;
@@ -40024,7 +40045,7 @@
     view_buttons.appendChild(refresh_btn);
     header.appendChild(view_buttons);
     panel.insertBefore(header, panel.firstElementChild);
-    if (!form) return;
+    if (!form) return panel;
     if (page.token == "")
       page.token = form.querySelector('[name="csrfmiddlewaretoken"]').getAttribute("value");
     let original_chart_settings = {};
@@ -40076,14 +40097,6 @@
             </div>
         </div>
     `);
-    for (let setting2 in original_chart_settings) {
-      update_inbuilt_item(
-        setting2,
-        original_chart_settings[setting2],
-        false,
-        form
-      );
-    }
     tooltip = tippy_esm_default(settings_btn, {
       theme: "window",
       content: form,
@@ -40101,6 +40114,7 @@
       }
     });
     view_buttons.appendChild(settings_btn);
+    return panel;
   }
   function profile_artists() {
     let panel = page.structure.main.querySelector("#top-artists");
@@ -40111,35 +40125,38 @@
     let collage_btn;
     let select_btn = panel.querySelector(".dropdown-menu-clickable-button");
     let settings_btn;
-    panel.insertBefore(
-      html.node`
+    const head = panel.querySelector(":scope > h2");
+    if (head) head.remove();
+    panel.insertBefore(html.node`
         <div class="top-container">
-            ${panel.querySelector("h2")}
+            <h2>
+                ${tl2(trans.artists)}
+            </h2>
             <div class="accompany view-buttons blend blend-v2">
                 ${() => {
-        select_btn.classList.add(
-          "select-button",
-          "link-select",
-          "blend-v2-btn"
-        );
-        select_btn.classList.remove(
-          "section-control",
-          "dropdown-menu-clickable-button"
-        );
-        return select_btn;
-      }}
+      select_btn.classList.add(
+        "select-button",
+        "link-select",
+        "blend-v2-btn"
+      );
+      select_btn.classList.remove(
+        "section-control",
+        "dropdown-menu-clickable-button"
+      );
+      return select_btn;
+    }}
             </div>
             <div class="view-buttons blend blend-v2">
                 <button class="left-icon blend-v2-btn" data-type="collage" ref=${(el) => collage_btn = el} onclick=${() => {
-        let btn = list.querySelector(
-          ".dropdown-menu-clickable-item--selected"
-        );
-        let link = new URL(
-          "https://www.last.fm" + btn.getAttribute("href")
-        );
-        let selected = link.searchParams.get("artists_date_preset");
-        window.location.href = `${root}bleh/minis/collage?type=artists&timeframe=date_preset=${selected}`;
-      }}>${tl2(trans.collage)}</button>
+      let btn = list.querySelector(
+        ".dropdown-menu-clickable-item--selected"
+      );
+      let link = new URL(
+        "https://www.last.fm" + btn.getAttribute("href")
+      );
+      let selected = link.searchParams.get("artists_date_preset");
+      window.location.href = `${root}bleh/minis/collage?type=artists&timeframe=date_preset=${selected}`;
+    }}>${tl2(trans.collage)}</button>
                 ${form ? html.node`
                 <button class="left-icon blend-v2-btn" data-type="settings" ref=${(el) => settings_btn = el}>
                     ${tl2(trans.settings)}
@@ -40147,10 +40164,8 @@
                 ` : ""}
             </div>
         </div>
-    `,
-      panel.firstElementChild
-    );
-    if (!form) return;
+    `, panel.firstElementChild);
+    if (!form) return panel;
     if (page.token == "")
       page.token = form.querySelector('[name="csrfmiddlewaretoken"]').getAttribute("value");
     let timeframe = form.querySelector('[name="chart_range_top_artists"]');
@@ -40240,6 +40255,7 @@
         instance.hide();
       }
     });
+    return panel;
   }
   function profile_albums() {
     let panel = page.structure.main.querySelector("#top-albums");
@@ -40250,35 +40266,38 @@
     let collage_btn;
     let select_btn = panel.querySelector(".dropdown-menu-clickable-button");
     let settings_btn;
-    panel.insertBefore(
-      html.node`
+    const head = panel.querySelector(":scope > h2");
+    if (head) head.remove();
+    panel.insertBefore(html.node`
         <div class="top-container">
-            ${panel.querySelector("h2")}
+            <h2>
+                ${tl2(trans.albums)}
+            </h2>
             <div class="accompany view-buttons blend blend-v2">
                 ${() => {
-        select_btn.classList.add(
-          "select-button",
-          "link-select",
-          "blend-v2-btn"
-        );
-        select_btn.classList.remove(
-          "section-control",
-          "dropdown-menu-clickable-button"
-        );
-        return select_btn;
-      }}
+      select_btn.classList.add(
+        "select-button",
+        "link-select",
+        "blend-v2-btn"
+      );
+      select_btn.classList.remove(
+        "section-control",
+        "dropdown-menu-clickable-button"
+      );
+      return select_btn;
+    }}
             </div>
             <div class="view-buttons blend blend-v2">
                 <button class="left-icon blend-v2-btn" data-type="collage" ref=${(el) => collage_btn = el} onclick=${() => {
-        let btn = list.querySelector(
-          ".dropdown-menu-clickable-item--selected"
-        );
-        let link = new URL(
-          "https://www.last.fm" + btn.getAttribute("href")
-        );
-        let selected = link.searchParams.get("albums_date_preset");
-        window.location.href = `${root}bleh/minis/collage?type=albums&timeframe=date_preset=${selected}`;
-      }}>${tl2(trans.collage)}</button>
+      let btn = list.querySelector(
+        ".dropdown-menu-clickable-item--selected"
+      );
+      let link = new URL(
+        "https://www.last.fm" + btn.getAttribute("href")
+      );
+      let selected = link.searchParams.get("albums_date_preset");
+      window.location.href = `${root}bleh/minis/collage?type=albums&timeframe=date_preset=${selected}`;
+    }}>${tl2(trans.collage)}</button>
                 ${form ? html.node`
                 <button class="left-icon blend-v2-btn" data-type="settings" ref=${(el) => settings_btn = el}>
                     ${tl2(trans.settings)}
@@ -40286,9 +40305,7 @@
                 ` : ""}
             </div>
         </div>
-    `,
-      panel.firstElementChild
-    );
+    `, panel.firstElementChild);
     if (!form) return;
     if (page.token == "")
       page.token = form.querySelector('[name="csrfmiddlewaretoken"]').getAttribute("value");
@@ -40389,35 +40406,38 @@
     let collage_btn;
     let select_btn = panel.querySelector(".dropdown-menu-clickable-button");
     let settings_btn;
-    panel.insertBefore(
-      html.node`
+    const head = panel.querySelector(":scope > h2");
+    if (head) head.remove();
+    panel.insertBefore(html.node`
         <div class="top-container">
-            ${panel.querySelector("h2")}
+            <h2>
+                ${tl2(trans.tracks)}
+            </h2>
             <div class="accompany view-buttons blend blend-v2">
                 ${() => {
-        select_btn.classList.add(
-          "select-button",
-          "link-select",
-          "blend-v2-btn"
-        );
-        select_btn.classList.remove(
-          "section-control",
-          "dropdown-menu-clickable-button"
-        );
-        return select_btn;
-      }}
+      select_btn.classList.add(
+        "select-button",
+        "link-select",
+        "blend-v2-btn"
+      );
+      select_btn.classList.remove(
+        "section-control",
+        "dropdown-menu-clickable-button"
+      );
+      return select_btn;
+    }}
             </div>
             <div class="view-buttons blend blend-v2">
                 <button class="left-icon blend-v2-btn" data-type="collage" ref=${(el) => collage_btn = el} onclick=${() => {
-        let btn = list.querySelector(
-          ".dropdown-menu-clickable-item--selected"
-        );
-        let link = new URL(
-          "https://www.last.fm" + btn.getAttribute("href")
-        );
-        let selected = link.searchParams.get("tracks_date_preset");
-        window.location.href = `${root}bleh/minis/collage?type=tracks&timeframe=date_preset=${selected}`;
-      }}>${tl2(trans.collage)}</button>
+      let btn = list.querySelector(
+        ".dropdown-menu-clickable-item--selected"
+      );
+      let link = new URL(
+        "https://www.last.fm" + btn.getAttribute("href")
+      );
+      let selected = link.searchParams.get("tracks_date_preset");
+      window.location.href = `${root}bleh/minis/collage?type=tracks&timeframe=date_preset=${selected}`;
+    }}>${tl2(trans.collage)}</button>
                 ${form ? html.node`
                 <button class="left-icon blend-v2-btn" data-type="settings" ref=${(el) => settings_btn = el}>
                     ${tl2(trans.settings)}
@@ -40425,9 +40445,7 @@
                 ` : ""}
             </div>
         </div>
-    `,
-      panel.firstElementChild
-    );
+    `, panel.firstElementChild);
     if (!form) return;
     if (page.token == "")
       page.token = form.querySelector('[name="csrfmiddlewaretoken"]').getAttribute("value");
@@ -47211,35 +47229,6 @@
     page.structure.side.appendChild(about_artist_container);
   }
 
-  // src/components/page/colour.ts
-  function header_colour(header, apply_to_page = false, apply_to_elem) {
-    const header_inner = header.querySelector(".header-new-inner");
-    if (!header_inner) return;
-    try {
-      let bg = header_inner.getAttribute("style").replace("background: #", "");
-      let hsl3 = hex_to_oklch(bg);
-      let sat = clamp_sat(hsl3.s / 100 * 3);
-      let lit = clamp_lit(sat, hsl3.l / 100 + 0.35, true);
-      if (apply_to_page) {
-        document.body.style.setProperty("--hue-album", hsl3.h);
-        document.body.style.setProperty("--sat-album", sat);
-        document.body.style.setProperty("--lit-album", lit);
-        load_chart_colours();
-      }
-      if (apply_to_elem instanceof HTMLElement) {
-        apply_to_elem.style.setProperty("--hue-over", hsl3.h);
-        apply_to_elem.style.setProperty("--sat-over", sat);
-        apply_to_elem.style.setProperty("--lit-over", lit);
-      }
-      log(
-        `sourced hsl of (${hsl3.h}, ${hsl3.s}, ${hsl3.l}) - using final value of (${hsl3.h}, ${sat}, ${lit})`,
-        "hue from album"
-      );
-    } catch (e4) {
-      log("no cover present", "hue from album");
-    }
-  }
-
   // src/pages/track.ts
   function bleh_tracks() {
     const track_header = document.body.querySelector(".header-new--track");
@@ -47312,28 +47301,24 @@
       const hoshino_entry = hoshino_return(page.name, page.sister);
       if (hoshino_entry && ff("ruby")) {
         create_avatar(
-          artist_header,
           page.state.avatar_side,
           hoshino_entry,
           page.state.avatar_side_override
         );
       } else if (album_avatar) {
         create_avatar(
-          artist_header,
           page.state.avatar_side,
           album_avatar.src.replace("300x300", "avatar300s"),
           page.state.avatar_side_override
         );
       } else if (artist_avatar) {
         create_avatar(
-          artist_header,
           page.state.avatar_side,
           artist_avatar.getAttribute("content").replace("/ar0/", "/avatar170s/"),
           page.state.avatar_side_override
         );
       } else {
         create_avatar(
-          artist_header,
           page.state.avatar_side,
           "",
           page.state.avatar_side_override
@@ -47359,11 +47344,11 @@
       else if (page.subpage == "wiki_history") bleh_wiki_history();
       else if (page.subpage == "wiki_edit") bleh_wiki_editor();
     }
-    if (ff("oracle") && settings.oracle_beta) oracle_process(artist_header);
+    if (ff("oracle") && settings.oracle_beta) oracle_process();
     log("status is", "page", "info", page);
     update_page();
   }
-  function create_avatar(header, parent, src, override = "expand") {
+  function create_avatar(parent, src, override = "expand") {
     log(`creating avatar for ${src} with override ${override}`, "track");
     let full = avatar(src, "ar0");
     if (src.endsWith("c6f59c1e5e7240a4c0d427abd71f3dbb.jpg") || src.endsWith("c6f59c1e5e7240a4c0d427abd71f3dbb.jpg") || src == "") {
@@ -47375,11 +47360,11 @@
     render(parent, html`
         ${page_avatar = page_header_avatar(src)}
     `);
-    header_colour(header, false, page_avatar);
+    header_colour(page_avatar.image, false, page_avatar);
   }
 
   // src/components/music/oracle.ts
-  function oracle_process(page_header) {
+  function oracle_process() {
     log("beginning", "oracle");
     page.state.oracle_debug = {};
     if (ff("oracle_album_reordering") && page.type == "track") {
@@ -48488,7 +48473,6 @@
               cache2.track.link = `${root}music/${sanitise(artist2)}/${sanitise(title)}`;
               if (artwork) {
                 create_avatar(
-                  page_header,
                   page.state.avatar_side,
                   artwork,
                   page.state.avatar_side_override
@@ -48556,7 +48540,6 @@
         );
         if (index3 == 0) {
           create_avatar(
-            page_header,
             page.state.avatar_side,
             entry.artwork,
             page.state.avatar_side_override
@@ -48635,7 +48618,6 @@
           cache2.track.sister = artist2;
           cache2.track.link = `${root}music/${sanitise(artist2)}/${sanitise(title)}`;
           create_avatar(
-            page_header,
             page.state.avatar_side,
             artwork,
             page.state.avatar_side_override
@@ -58990,7 +58972,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                 </div>
                 ` : ""}
         `;
-      header_colour(album_header, settings.hue_from_album, page_avatar);
+      header_colour(page_avatar.image, settings.hue_from_album, page_avatar);
       if (avatar3) register_background(avatar3.getAttribute("content"));
       else register_background(null);
       page.structure.container.insertBefore(
@@ -59162,10 +59144,10 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
 
   // src/pages/artist.ts
   function bleh_artists() {
-    let artist_header2 = document.body.querySelector(".header-new--artist");
-    page.name = artist_header2.querySelector(".header-new-title").textContent;
+    let artist_header = document.body.querySelector(".header-new--artist");
+    page.name = artist_header.querySelector(".header-new-title").textContent;
     page.sister = "";
-    artist_title(artist_header2);
+    artist_title(artist_header);
     let is_subpage = page.subpage != "overview";
     if (auth.pro) {
       page.structure.container = document.body.querySelector(
@@ -59204,14 +59186,14 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     } catch (e4) {
       log("unable to find elements", "page structure");
     }
-    checkup_page_structure(is_subpage, artist_header2);
+    checkup_page_structure(is_subpage, artist_header);
     let katsune = ff("katsune");
-    let featured_items = artist_header2.querySelector(".artist-header-featured-items");
+    let featured_items = artist_header.querySelector(".artist-header-featured-items");
     if (ff("refreshed_music_nav")) {
-      let avatar3 = artist_header2.querySelector(".header-new-background-image");
-      let title = artist_header2.querySelector(".header-new-title");
-      let on_tour = artist_header2.querySelector(".header-new-on-tour");
-      let position = artist_header2.querySelector(".header-new-chart-position-number");
+      let avatar3 = artist_header.querySelector(".header-new-background-image");
+      let title = artist_header.querySelector(".header-new-title");
+      let on_tour = artist_header.querySelector(".header-new-on-tour");
+      let position = artist_header.querySelector(".header-new-chart-position-number");
       if (on_tour) on_tour.classList.add("label", "no-hover", "expand");
       let page_avatar;
       let multi_info_box;
@@ -59245,7 +59227,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                 </div>
             </section>
         `;
-      header_colour(artist_header2, false, page_avatar);
+      header_colour(page_avatar.image, false, page_avatar);
       if (multi_info_box) {
         tippy_esm_default(multi_info_box, {
           content: tl2(trans.artists_tooltip)
@@ -59262,7 +59244,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         redesigned_artist_header,
         page.structure.container.firstElementChild
       );
-      artist_header2.classList.add("legacy-header");
+      artist_header.classList.add("legacy-header");
     }
     if (!is_subpage) {
       show_your_scrobbles();
@@ -65040,7 +65022,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
   }
 
   // src/build/trans.ts
-  var import_color_thief_browser3 = __toESM(require_color_thief_min(), 1);
+  var import_color_thief_browser4 = __toESM(require_color_thief_min(), 1);
   var lang = "en";
   var lang_browser = "en";
   var lang_info = {
@@ -75487,7 +75469,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         avatar3.setAttribute("crossorigin", "anonymous");
         try {
           avatar3.addEventListener("load", () => {
-            let thief = new import_color_thief_browser3.default();
+            let thief = new import_color_thief_browser4.default();
             let colour = thief.getColor(avatar3);
             let hsl3 = rgb_to_oklch(colour[0], colour[1], colour[2]);
             auth.sets.hue = hsl3.h;
@@ -76948,7 +76930,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-02-25"
       }
     },
-    built_on: "2026-04-03T17:47:29.446Z"
+    built_on: "2026-04-04T16:20:25.872Z"
   };
 
   // node_modules/@kurkle/color/dist/color.esm.js

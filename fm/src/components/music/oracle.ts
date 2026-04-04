@@ -41,7 +41,7 @@ import { save_setting, setting } from '@/components/settings/settings';
 import { input } from '@/components/settings/input';
 import { icon, icons } from '../shared/icon';
 
-export function oracle_process(page_header?: HTMLElement) {
+export function oracle_process() {
     log('beginning', 'oracle');
 
     page.state.oracle_debug = {};
@@ -1504,7 +1504,6 @@ export function oracle_process(page_header?: HTMLElement) {
 
                                     if (artwork) {
                                         create_avatar(
-                                            page_header,
                                             page.state.avatar_side,
                                             artwork,
                                             page.state.avatar_side_override
@@ -1586,7 +1585,6 @@ export function oracle_process(page_header?: HTMLElement) {
 
             if (index == 0) {
                 create_avatar(
-                    page_header,
                     page.state.avatar_side,
                     entry.artwork,
                     page.state.avatar_side_override
@@ -1685,7 +1683,6 @@ export function oracle_process(page_header?: HTMLElement) {
                     cache.track.link = `${root}music/${sanitise(artist)}/${sanitise(title)}`;
 
                     create_avatar(
-                        page_header,
                         page.state.avatar_side,
                         artwork,
                         page.state.avatar_side_override

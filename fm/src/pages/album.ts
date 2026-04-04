@@ -147,7 +147,7 @@ export function bleh_albums() {
                 }
         `;
 
-        header_colour(album_header, settings.hue_from_album, page_avatar);
+        header_colour(page_avatar.image, settings.hue_from_album, page_avatar);
 
         if (avatar) register_background(avatar.getAttribute('content'));
         else register_background(null);

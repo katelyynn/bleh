@@ -57,6 +57,8 @@ import { bleh_playlist } from '@/pages/profile/playlist';
 import { profile_reports } from './reports';
 import { toggle } from '@/components/settings/toggle';
 import { page_header_avatar } from '@/components/music/header';
+import { profile_summary } from '@/components/profile/summary';
+import { header_colour } from '@/components/page/colour';
 
 export function bleh_profiles() {
     // the obsessions page is a user subpage but works very differently
@@ -224,10 +226,12 @@ export function bleh_profiles() {
         page.avatar = src;
     }
 
+    let page_avatar;
+
     let redesigned_profile_header = html.node`
         <section class="page-header for-profile">
             <div class="page-header-avatar-list">
-                ${!new_account ? page_header_avatar((profile_avatar as HTMLImageElement).src) : profile_avatar}
+                ${!new_account ? page_avatar = page_header_avatar((profile_avatar as HTMLImageElement).src) : profile_avatar}
             </div>
             <div class="page-header-info has-main-info">
                 <div class="main-info">
@@ -278,6 +282,10 @@ export function bleh_profiles() {
         }
     }
 
+    if (page_avatar) {
+        header_colour(page_avatar.image, false, page_avatar);
+    }
+
     page.structure.container.insertBefore(
         redesigned_profile_header,
         page.structure.container.firstElementChild
@@ -302,31 +310,17 @@ export function bleh_profiles() {
 
         //
 
-        profile_recents();
-        profile_artists();
+        let recent_tracks = profile_recents();
+        const top_artists = profile_artists();
         profile_albums();
         profile_tracks();
 
-        if (is_own_profile && settings.activities) {
-            let recent_activity_section = html.node`
-                <section class="recent-activity-section">
-                    <h2>${tl(trans.activity)}</h2>
-                    ${render_activity_list()}
-                    <div class="more-link">
-                        <a href="${root}bleh/profile">${tl(trans.activity_settings)}</a>
-                    </div>
-                </section>
-            `;
-
-            page.structure.side.appendChild(recent_activity_section);
-        }
-
         if (page.name == sponsor_list.sponsor_account && !is_own_profile) {
-            page.structure.container.removeChild(page.structure.nav);
-            page.structure.main.innerHTML = '';
-            page.structure.side.innerHTML = '';
+            page.structure.container!.removeChild(page.structure.nav!);
+            page.structure.main!.innerHTML = '';
+            page.structure.side!.innerHTML = '';
 
-            page.structure.main.appendChild(html.node`
+            page.structure.main!.appendChild(html.node`
                 <section class="cta">
                     <strong>${tl(trans.sponsor_info)}</strong>
                 </section>
@@ -334,12 +328,8 @@ export function bleh_profiles() {
         }
 
         // recent tracks
-        let recent_tracks = page.structure.main.querySelector(
-            '#recent-tracks-section'
-        );
         if (!recent_tracks) {
-            recent_tracks =
-                page.structure.main.querySelector('.no-data-message');
+            recent_tracks = page.structure.main!.querySelector('.no-data-message');
             if (recent_tracks) {
                 recent_tracks.classList = 'recent-tracks-section';
                 recent_tracks.innerHTML = `
@@ -353,6 +343,22 @@ export function bleh_profiles() {
                     </div>
                 `;
             }
+        }
+
+        profile_summary(recent_tracks, top_artists);
+
+        if (is_own_profile && settings.activities) {
+            let recent_activity_section = html.node`
+                <section class="recent-activity-section">
+                    <h2>${tl(trans.activity)}</h2>
+                    ${render_activity_list()}
+                    <div class="more-link">
+                        <a href="${root}bleh/profile">${tl(trans.activity_settings)}</a>
+                    </div>
+                </section>
+            `;
+
+            page.structure.side.appendChild(recent_activity_section);
         }
 
         // acquire info
@@ -1060,7 +1066,7 @@ function profile_recents() {
     header.appendChild(view_buttons);
     panel.insertBefore(header, panel.firstElementChild);
 
-    if (!form) return;
+    if (!form) return panel;
 
     if (page.token == '')
         page.token = form
@@ -1120,15 +1126,6 @@ function profile_recents() {
         </div>
     `);
 
-    for (let setting in original_chart_settings) {
-        update_inbuilt_item(
-            setting,
-            original_chart_settings[setting],
-            false,
-            form
-        );
-    }
-
     tooltip = tippy(settings_btn, {
         theme: 'window',
         content: form,
@@ -1149,6 +1146,8 @@ function profile_recents() {
     });
 
     view_buttons.appendChild(settings_btn);
+
+    return panel;
 }
 
 function profile_artists() {
@@ -1164,10 +1163,14 @@ function profile_artists() {
     let select_btn = panel.querySelector('.dropdown-menu-clickable-button');
     let settings_btn;
 
-    panel.insertBefore(
-        html.node`
+    const head = panel.querySelector(':scope > h2');
+    if (head) head.remove();
+
+    panel.insertBefore(html.node`
         <div class="top-container">
-            ${panel.querySelector('h2')}
+            <h2>
+                ${tl(trans.artists)}
+            </h2>
             <div class="accompany view-buttons blend blend-v2">
                 ${() => {
                     select_btn.classList.add(
@@ -1205,13 +1208,11 @@ function profile_artists() {
                 }
             </div>
         </div>
-    `,
-        panel.firstElementChild
-    );
+    `, panel.firstElementChild);
 
     // own profile only
 
-    if (!form) return;
+    if (!form) return panel;
     if (page.token == '')
         page.token = form
             .querySelector('[name="csrfmiddlewaretoken"]')
@@ -1309,6 +1310,8 @@ function profile_artists() {
             instance.hide();
         }
     });
+
+    return panel;
 }
 
 function profile_albums() {
@@ -1324,10 +1327,14 @@ function profile_albums() {
     let select_btn = panel.querySelector('.dropdown-menu-clickable-button');
     let settings_btn;
 
-    panel.insertBefore(
-        html.node`
+    const head = panel.querySelector(':scope > h2');
+    if (head) head.remove();
+
+    panel.insertBefore(html.node`
         <div class="top-container">
-            ${panel.querySelector('h2')}
+            <h2>
+                ${tl(trans.albums)}
+            </h2>
             <div class="accompany view-buttons blend blend-v2">
                 ${() => {
                     select_btn.classList.add(
@@ -1365,9 +1372,7 @@ function profile_albums() {
                 }
             </div>
         </div>
-    `,
-        panel.firstElementChild
-    );
+    `, panel.firstElementChild);
 
     // own profile only
 
@@ -1484,10 +1489,14 @@ function profile_tracks() {
     let select_btn = panel.querySelector('.dropdown-menu-clickable-button');
     let settings_btn;
 
-    panel.insertBefore(
-        html.node`
+    const head = panel.querySelector(':scope > h2');
+    if (head) head.remove();
+
+    panel.insertBefore(html.node`
         <div class="top-container">
-            ${panel.querySelector('h2')}
+            <h2>
+                ${tl(trans.tracks)}
+            </h2>
             <div class="accompany view-buttons blend blend-v2">
                 ${() => {
                     select_btn.classList.add(
@@ -1525,9 +1534,7 @@ function profile_tracks() {
                 }
             </div>
         </div>
-    `,
-        panel.firstElementChild
-    );
+    `, panel.firstElementChild);
 
     // own profile only
 

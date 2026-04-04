@@ -11,7 +11,12 @@ import { correct_artist, correct_item_by_artist, name_includes, smart_title } fr
 import { artist_corrections, combined_artists } from '@/build/music';
 import { log } from '@/build/log';
 
-export function page_header_avatar(url?: string) {
+interface page_header_avatar extends HTMLDivElement {
+    image: HTMLImageElement,
+    src: string
+}
+
+export function page_header_avatar(url?: string): page_header_avatar {
     const supports_gallery = ['artist', 'album'].includes(page.type);
 
     let link = sanitise(page.name);
@@ -21,6 +26,8 @@ export function page_header_avatar(url?: string) {
     let action = 'expand';
     if (supports_gallery)
         action = settings.default_avatar_action as string;
+
+    let image: HTMLImageElement;
 
     const elem = html.node`
         <div class="page-header-avatar colourful" onclick=${() => {
@@ -33,12 +40,24 @@ export function page_header_avatar(url?: string) {
             }
         }}>
             ${url ? html.node`
-                <img src=${avatar(url, 'avatar300s')}>
+                <img src=${avatar(url, 'avatar300s')} crossorigin="anonymous" ref=${el => image = el}>
             ` : html.node`
-                <img class="missing-${page.type}">
+                <img class="missing-${page.type}" crossorigin="anonymous" ref=${el => image = el}>
             `}
         </div>
     `;
+
+    Object.defineProperty(elem, 'image', {
+        get() {
+            return image;
+        }
+    });
+
+    Object.defineProperty(elem, 'src', {
+        get() {
+            return url;
+        }
+    });
 
     const menu = tippy(elem, {
         theme: 'context-menu',

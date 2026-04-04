@@ -109,7 +109,7 @@ export function rgb_to_oklch(r, g, b) {
  */
 export function rgb_to_hsl(r, g, b) {
     let hex = rgb_to_hex(r, g, b);
-    return hex_to_hsl(hex);
+    return hex_to_oklch(hex);
 }
 
 /**
