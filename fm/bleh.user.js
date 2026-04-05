@@ -29338,7 +29338,9 @@
     accessibility: "accessibility",
     seasonal: "season",
     sku: "plaster",
-    indent: "indent"
+    indent: "indent",
+    lotus: "lotus",
+    oracle: "oracle"
   };
   function icon({ name, identifier, use_mask = true }) {
     const elem = html.node`
@@ -62178,12 +62180,12 @@
     }
     if (page.subpage == "overview" || page.subpage == "albums") {
       page.structure.side.appendChild(html.node`
-            <section class="oracle-notice">
-                <div class="oracle" data-mobile=${page.mobile}>
-                    <p class="oracle-message">
-                        <span class="bleh-icon" />
-                        <span>${{ html: tl2(trans.oracle_notice).replace("oracle", '<i class="oracle-name">oracle</i>') }}</span>
-                    </p>
+            <section class="oracle cta colourful">
+                <label class="cta-label">
+                    ${icon({ name: icons.oracle })}
+                    <strong>${tl2(trans.oracle_notice)}</strong>
+                </label>
+                <div class="cta-actions">
                     <button class="see-more left-icon oracle-button" data-type="debug" onclick=${() => oracle_debug()}>
                         ${tl2(trans.debug)}
                     </button>
@@ -65096,7 +65098,10 @@
     if (!settings.corrections) return;
     page.structure.side.appendChild(html.node`
         <section class="lotus cta colourful">
-            <strong>${tl2(trans.lotus_cta[page.corrected]).replace("{t}", tl2(trans[`${page.type}_lower`]))}</strong>
+            <label class="cta-label">
+                ${icon({ name: icons.lotus })}
+                <strong>${tl2(trans.lotus_cta[page.corrected], { t: tl2(trans[`${page.type}_lower`]) })}</strong>
+            </label>
             ${ff("refreshed_lotus") ? html.node`
                 <button class="see-more" onclick=${() => create_correction(page.type)}>${tl2(trans.suggest_correction)}</button>
             ` : html.node`

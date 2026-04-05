@@ -9,7 +9,7 @@
 /* event lineup */ .big-artist-list,
 .panel-form {
     background: transparent;
-    background-image: unset !important;
+    background-image: unset;
     border-radius: unset;
     box-shadow: unset;
     padding: 0 var(--card-padding);

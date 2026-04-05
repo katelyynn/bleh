@@ -165,7 +165,9 @@ export const icons = {
     accessibility: 'accessibility',
     seasonal: 'season',
     sku: 'plaster',
-    indent: 'indent'
+    indent: 'indent',
+    lotus: 'lotus',
+    oracle: 'oracle'
 };
 
 interface icon {

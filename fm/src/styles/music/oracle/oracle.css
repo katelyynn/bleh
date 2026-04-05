@@ -1,46 +1,8 @@
 @import './explicit.css';
 @import './tracklist.css';
 
-.oracle-notice {
-    order: 11;
-}
 .oracle {
-    display: flex;
-    gap: var(--card-gap);
-    --icon: var(--icon-16-oracle);
-    --icon-colour: oklch(var(--l3-c));
-
-    & > .oracle-message {
-        display: flex;
-        gap: var(--icon-gap);
-        flex: 1;
-        flex-shrink: 0;
-
-        & > .bleh-icon {
-            margin-right: var(--icon-gap);
-            display: inline-flex;
-            flex-shrink: 0;
-        }
-
-        cursor: default;
-    }
-
-    background: oklch(var(--k4) / 20%);
-    padding: 10px 12px;
-    margin: 0 0 var(--card-gap) 0;
-    border-radius: var(--item-med-radius);
-
-    flex-wrap: wrap;
-
-    & > .oracle-message {
-        flex-basis: 100%;
-    }
-}
-
-.oracle-name {
-    font-style: normal;
-    color: oklch(var(--l3-c));
-    font-weight: var(--font-weight-medium);
+    order: 11;
 }
 
 .oracle-debug {

@@ -36,6 +36,7 @@ import { setting } from '@/components/settings/settings';
 import { patch_user_list_item } from '@/components/shared/users';
 import { join_the_conversation } from '../shared/shout';
 import { music_summary } from './summary';
+import { icon, icons } from '../shared/icon';
 
 unsafeWindow._other_listener = function (id) {
     other_listener(id);
@@ -1144,16 +1145,15 @@ export async function show_your_scrobbles() {
 
     page.structure.side.appendChild(html.node`
         <section class="lotus cta colourful">
-            <strong>${tl(trans.lotus_cta[page.corrected]).replace('{t}', tl(trans[`${page.type}_lower`]))}</strong>
-            ${
-                ff('refreshed_lotus') ?
-                    html.node`
+            <label class="cta-label">
+                ${icon({ name: icons.lotus })}
+                <strong>${tl(trans.lotus_cta[page.corrected], { t: tl(trans[`${page.type}_lower`]) })}</strong>
+            </label>
+            ${ff('refreshed_lotus') ? html.node`
                 <button class="see-more" onclick=${() => create_correction(page.type)}>${tl(trans.suggest_correction)}</button>
-            `
-                :   html.node`
+            ` : html.node`
                 <a class="see-more" href="https://github.com/katelyynn/lotus/issues/new/choose" target="_blank">${tl(trans.suggest_correction)}</a>
-            `
-            }
+            `}
         </section>
     `);
 }

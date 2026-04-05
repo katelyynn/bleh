@@ -109,7 +109,7 @@
 .cta {
     background: var(--card-specific-background) !important;
     border-radius: var(--item-med-radius) !important;
-    --card-specific-background: oklch(var(--f4) / 15%);
+    --card-specific-background: linear-gradient(180deg, oklch(var(--f4) / 15%), transparent);
     padding: 10px 12px !important;
     box-shadow: unset !important;
     color: oklch(var(--c2)) !important;
@@ -125,6 +125,7 @@
     &.cta {
         display: flex;
         flex-direction: column;
+        gap: 6px;
         margin: 0 var(--card-padding);
 
         .bleh-modal-body > & {
@@ -134,22 +135,9 @@
         }
     }
 
-    & > .see-more {
-        --see-more-pad: 0px;
-        --see-more-pad-v: 0px;
-        --bg-hov: transparent;
-        --bg-atv: transparent;
-        border-radius: unset !important;
-        --underline: underline;
-    }
-
     strong {
         color: oklch(var(--c3));
-    }
-
-    a {
         font-weight: var(--font-weight-medium);
-        color: oklch(var(--l3-c)) !important;
     }
 
     &.first,
@@ -189,4 +177,20 @@
     &:before {
         display: none;
     }
+}
+
+.cta-label {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    gap: 6px;
+
+    --icon-size: 16px;
+    --icon-colour: oklch(var(--c3));
+}
+
+.cta-actions {
+    display: flex;
+    gap: var(--card-gap);
+    flex-wrap: wrap;
 }

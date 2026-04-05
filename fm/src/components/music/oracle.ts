@@ -121,12 +121,12 @@ export function oracle_process() {
 
     if (page.subpage == 'overview' || page.subpage == 'albums') {
         page.structure.side!.appendChild(html.node`
-            <section class="oracle-notice">
-                <div class="oracle" data-mobile=${page.mobile}>
-                    <p class="oracle-message">
-                        <span class="bleh-icon" />
-                        <span>${{ html: tl(trans.oracle_notice).replace('oracle', '<i class="oracle-name">oracle</i>') }}</span>
-                    </p>
+            <section class="oracle cta colourful">
+                <label class="cta-label">
+                    ${icon({ name: icons.oracle })}
+                    <strong>${tl(trans.oracle_notice)}</strong>
+                </label>
+                <div class="cta-actions">
                     <button class="see-more left-icon oracle-button" data-type="debug" onclick=${() => oracle_debug()}>
                         ${tl(trans.debug)}
                     </button>

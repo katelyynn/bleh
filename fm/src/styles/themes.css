@@ -745,11 +745,11 @@ u,
     --menu-item-accent-atv: oklch(var(--h4) / 22%);
 
     --summary-block-0: oklch(calc(var(--lit) * 0.45) calc(clamp(min(0), var(--sat), max(2)) * 0.76) var(--hue) / 20%);
-    --summary-block-1: oklch(calc(var(--lit) * 0.5) calc(clamp(min(0), var(--sat), max(2)) * 0.72) var(--hue) / 40%);
-    --summary-block-2: oklch(calc(var(--lit) * 0.56) calc(clamp(min(0), var(--sat), max(2)) * 0.64) var(--hue) / 60%);
-    --summary-block-3: oklch(calc(var(--lit) * 0.6) calc(clamp(min(0), var(--sat), max(2)) * 0.62) var(--hue) / 75%);
-    --summary-block-4: oklch(calc(var(--lit) * 0.67) calc(clamp(min(0), var(--sat), max(2)) * 0.56) var(--hue) / 95%);
-    --summary-block-5: oklch(calc(var(--lit) * 0.76) calc(clamp(min(0), var(--sat), max(2)) * 0.53) var(--hue));
+    --summary-block-1: oklch(calc(var(--lit) * 0.5) calc(clamp(min(0), var(--sat), max(2)) * 0.72) var(--hue) / 35%);
+    --summary-block-2: oklch(calc(var(--lit) * 0.56) calc(clamp(min(0), var(--sat), max(2)) * 0.64) var(--hue) / 50%);
+    --summary-block-3: oklch(calc(var(--lit) * 0.6) calc(clamp(min(0), var(--sat), max(2)) * 0.62) var(--hue) / 60%);
+    --summary-block-4: oklch(calc(var(--lit) * 0.67) calc(clamp(min(0), var(--sat), max(2)) * 0.56) var(--hue) / 80%);
+    --summary-block-5: oklch(calc(var(--lit) * 0.76) calc(clamp(min(0), var(--sat), max(2)) * 0.53) var(--hue) / 90%);
     --summary-block-6: oklch(calc(var(--lit) * 0.82) calc(clamp(min(0), var(--sat), max(2)) * 0.48) var(--hue));
     --summary-block-7: oklch(calc(var(--lit) * 0.9) calc(clamp(min(0), var(--sat), max(2)) * 0.43) var(--hue));
     --summary-block-8: oklch(calc(var(--lit) * 0.98) calc(clamp(min(0), var(--sat), max(2)) * 0.37) var(--hue));

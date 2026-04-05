@@ -1,7 +1,7 @@
 .lotus {
-    --hue-over: 141;
-    --sat-over: 0.63;
-    --lit-over: 1;
+    --hue-over: 3;
+    --sat-over: 1.47;
+    --lit-over: 0.86;
 
     &.lotus-name {
         color: oklch(var(--l3-c));
