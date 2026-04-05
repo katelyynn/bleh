@@ -190,6 +190,11 @@
     }
 }
 
+.monthly-chart-line,
+.monthly-chart-pie {
+    height: calc((var(--w) * 3) + (var(--g) * 2)) !important;
+}
+
 .monthly-chart-line {
     flex: 1;
 }
