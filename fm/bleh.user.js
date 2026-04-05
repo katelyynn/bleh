@@ -60715,7 +60715,7 @@
     const panel = html.node`
         <section class="profile-summary music-summary">
             <div class="top-container">
-                <p class="subtle-like">${tl2(trans.about)}</p>
+                <h2 class="summary-title">${tl2(trans.about)}</h2>
                 <div class="summary-blocks">
                     ${summary_block2("listeners", listeners)}
                     ${summary_block2("scrobbles", scrobbles)}
@@ -64243,7 +64243,7 @@
     let col_main = page.structure.container.querySelector(".top-overview-panel");
     if (!col_main) col_main = document.body.querySelector(".col-main");
     if (page.type == "track") {
-      let new_panel = document.createElement("section");
+      let new_panel = document.createElement("div");
       new_panel.classList.add("track-info-panel");
       new_panel.innerHTML = col_main.innerHTML;
       page.structure.main.insertBefore(
@@ -74045,7 +74045,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         )}
                 </section>
             `;
-        page.structure.main.querySelector(".top-overview-panel").after(featured_panel);
+        page.structure.main.querySelector(".music-summary").after(featured_panel);
       }
       const listeners_section = page.structure.main.querySelector(".listeners-section");
       if (listeners_section) {
@@ -91577,7 +91577,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-02-25"
       }
     },
-    built_on: "2026-04-04T16:20:25.872Z"
+    built_on: "2026-04-05T16:10:21.775Z"
   };
 
   // node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

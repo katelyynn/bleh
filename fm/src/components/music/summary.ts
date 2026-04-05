@@ -24,7 +24,7 @@ export function music_summary(listeners: music_stat, scrobbles: music_stat, meta
     const panel = html.node`
         <section class="profile-summary music-summary">
             <div class="top-container">
-                <p class="subtle-like">${tl(trans.about)}</p>
+                <h2 class="summary-title">${tl(trans.about)}</h2>
                 <div class="summary-blocks">
                     ${summary_block('listeners', listeners)}
                     ${summary_block('scrobbles', scrobbles)}

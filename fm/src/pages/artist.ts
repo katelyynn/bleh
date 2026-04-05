@@ -366,7 +366,7 @@ export function bleh_artists() {
                 page.structure.side.insertBefore(featured_panel, page.structure.side.firstElementChild);*/
 
             page.structure.main
-                .querySelector('.top-overview-panel')
+                .querySelector('.music-summary')
                 .after(featured_panel);
         }
 

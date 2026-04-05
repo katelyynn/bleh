@@ -4,6 +4,12 @@
     --w: 30px !important;
     --c: 3 !important;
     --g: 4px !important;
+
+    .summary-sep {
+        height: unset !important;
+    }
+
+    margin-bottom: unset !important;
 }
 
 .summary-aside {

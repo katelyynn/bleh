@@ -58,7 +58,7 @@ export async function show_your_scrobbles() {
     if (!col_main) col_main = document.body.querySelector('.col-main');
 
     if (page.type == 'track') {
-        let new_panel = document.createElement('section');
+        let new_panel = document.createElement('div');
         new_panel.classList.add('track-info-panel');
         new_panel.innerHTML = col_main.innerHTML;
 
