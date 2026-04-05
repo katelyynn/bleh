@@ -225,7 +225,7 @@ function bleh_profile_chart(panel: HTMLElement) {
 
             if (table) {
                 panel.appendChild(table);
-                bleh_profile_chart_render(panel, table);
+                bleh_profile_chart_render(panel);
             } else {
                 log('table is null?', 'glacier library', 'error');
                 console.info('glacier library', doc.body.innerHTML);
@@ -241,9 +241,11 @@ function bleh_profile_chart(panel: HTMLElement) {
 }
 
 export function bleh_profile_chart_render(
-    panel = page.structure.main!.querySelector('.month-graph'), table: HTMLTableElement
+    panel = page.structure.main!.querySelector('.month-graph')
 ) {
-    if (!panel || !table) return;
+    if (!panel) return;
+
+    const table = panel.querySelector('table');
 
     let entries = table.querySelectorAll('tbody tr');
 

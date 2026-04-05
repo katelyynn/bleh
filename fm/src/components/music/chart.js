@@ -10,7 +10,8 @@ import {
     bleh_glacier_insights,
     bleh_glacier_library_open_index
 } from "@/pages/profile/glacier.js";
-import {bleh_music_page_charts} from "./music.js";
+import { bleh_music_chart_render } from './summary.js';
+import { bleh_profile_chart_render } from '../profile/summary.js';
 
 export function chart_reflow() {
     if (!document.body) return;
@@ -19,7 +20,7 @@ export function chart_reflow() {
 
     // trigger re-flow of chart
     if ((page.type == 'artist' || page.type == 'album' || page.type == 'track') && page.subpage == 'overview')
-        bleh_music_page_charts();
+        bleh_music_chart_render();
 
     if (page.type == 'user' && page.subpage == 'overview')
         bleh_profile_chart_render();

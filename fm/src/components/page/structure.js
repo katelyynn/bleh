@@ -31,6 +31,23 @@ export function basic_page_structure() {
  */
 export function checkup_page_structure(is_subpage = false, header = null) {
     if (document.body.style.getPropertyValue('--hue-album')) {
+        /*const previous_hue = document.body.style.getPropertyValue('--hue-album');
+        const previous_sat = document.body.style.getPropertyValue('--sat-album');
+        const previous_lit = document.body.style.getPropertyValue('--lit-album');
+
+        setTimeout(() => {
+            const current_hue = document.body.style.getPropertyValue('--hue-album');
+            const current_sat = document.body.style.getPropertyValue('--sat-album');
+            const current_lit = document.body.style.getPropertyValue('--lit-album');
+
+            if (previous_hue == current_hue && previous_sat == current_sat && previous_lit == current_lit) {
+                document.body.style.removeProperty('--hue-album');
+                document.body.style.removeProperty('--sat-album');
+                document.body.style.removeProperty('--lit-album');
+                load_chart_colours();
+            }
+        }, 5);*/
+
         document.body.style.removeProperty('--hue-album');
         document.body.style.removeProperty('--sat-album');
         document.body.style.removeProperty('--lit-album');

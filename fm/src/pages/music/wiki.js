@@ -355,15 +355,14 @@ export function patch_wiki() {
             read_more.textContent = tl(trans.read_more).toLowerCase();
         }
 
-        wiki_col.insertBefore(html.node`
-            <div class="sub-text">
-                <p>${tl(trans.about)}</p>
+        wiki_col.appendChild(html.node`
+            <div class="sub-text wiki-sub-text">
                 <span class="right-links">
                     <p><a class="wiki-edit-small icon" href="${document.location.href}/+wiki/edit">${tl(trans.edit_wiki).toLowerCase()}</a></p>
                     ${(!wiki_empty && read_more) ? html.node`<p>${read_more}</p>` : ''}
                 </span>
             </div>
-        `, wiki_col.firstElementChild);
+        `);
 
         if (!wiki_empty)
             patch_wiki_contents(wiki_block);

@@ -5591,7 +5591,7 @@
           }(ElementContainer)
         );
         var LIST_OWNERS = ["OL", "UL", "MENU"];
-        var parseNodeTree = function(context, node, parent, root4) {
+        var parseNodeTree = function(context, node, parent, root5) {
           for (var childNode = node.firstChild, nextNode = void 0; childNode; childNode = nextNode) {
             nextNode = childNode.nextSibling;
             if (isTextNode(childNode) && childNode.data.length > 0) {
@@ -5599,12 +5599,12 @@
             } else if (isElementNode(childNode)) {
               if (isSlotElement(childNode) && childNode.assignedNodes) {
                 childNode.assignedNodes().forEach(function(childNode2) {
-                  return parseNodeTree(context, childNode2, parent, root4);
+                  return parseNodeTree(context, childNode2, parent, root5);
                 });
               } else {
                 var container = createContainer(context, childNode);
                 if (container.styles.isVisible()) {
-                  if (createsRealStackingContext(childNode, container, root4)) {
+                  if (createsRealStackingContext(childNode, container, root5)) {
                     container.flags |= 4;
                   } else if (createsStackingContext(container.styles)) {
                     container.flags |= 2;
@@ -5615,9 +5615,9 @@
                   parent.elements.push(container);
                   childNode.slot;
                   if (childNode.shadowRoot) {
-                    parseNodeTree(context, childNode.shadowRoot, container, root4);
+                    parseNodeTree(context, childNode.shadowRoot, container, root5);
                   } else if (!isTextareaElement(childNode) && !isSVGElement(childNode) && !isSelectElement(childNode)) {
-                    parseNodeTree(context, childNode, container, root4);
+                    parseNodeTree(context, childNode, container, root5);
                   }
                 }
               }
@@ -5660,8 +5660,8 @@
           parseNodeTree(context, element, container, container);
           return container;
         };
-        var createsRealStackingContext = function(node, container, root4) {
-          return container.styles.isPositionedWithZIndex() || container.styles.opacity < 1 || container.styles.isTransformed() || isBodyElement(node) && root4.styles.isTransparent();
+        var createsRealStackingContext = function(node, container, root5) {
+          return container.styles.isPositionedWithZIndex() || container.styles.opacity < 1 || container.styles.isTransformed() || isBodyElement(node) && root5.styles.isTransparent();
         };
         var createsStackingContext = function(styles) {
           return styles.isPositioned() || styles.isFloating();
@@ -7265,11 +7265,11 @@
         };
         var parseStackingContexts = function(container) {
           var paintContainer = new ElementPaint(container, null);
-          var root4 = new StackingContext(paintContainer);
+          var root5 = new StackingContext(paintContainer);
           var listItems = [];
-          parseStackTree(paintContainer, root4, root4, listItems);
+          parseStackTree(paintContainer, root5, root5, listItems);
           processListItems(paintContainer.container, listItems);
-          return root4;
+          return root5;
         };
         var parsePathForBorder = function(curves, borderSide) {
           switch (borderSide) {
@@ -8784,7 +8784,7 @@
         }
         var renderElement = function(element, opts) {
           return __awaiter(void 0, void 0, void 0, function() {
-            var ownerDocument, defaultView, resourceOptions, contextOptions, windowOptions, windowBounds, context, foreignObjectRendering, cloneOptions, documentCloner, clonedElement, container, _a2, width, height, left2, top2, backgroundColor2, renderOptions, canvas, renderer, root4, renderer;
+            var ownerDocument, defaultView, resourceOptions, contextOptions, windowOptions, windowBounds, context, foreignObjectRendering, cloneOptions, documentCloner, clonedElement, container, _a2, width, height, left2, top2, backgroundColor2, renderOptions, canvas, renderer, root5, renderer;
             var _b2, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t;
             return __generator(this, function(_u) {
               switch (_u.label) {
@@ -8854,13 +8854,13 @@
                 case 3:
                   context.logger.debug("Document cloned, element located at ".concat(left2, ",").concat(top2, " with size ").concat(width, "x").concat(height, " using computed rendering"));
                   context.logger.debug("Starting DOM parsing");
-                  root4 = parseTree(context, clonedElement);
-                  if (backgroundColor2 === root4.styles.backgroundColor) {
-                    root4.styles.backgroundColor = COLORS.TRANSPARENT;
+                  root5 = parseTree(context, clonedElement);
+                  if (backgroundColor2 === root5.styles.backgroundColor) {
+                    root5.styles.backgroundColor = COLORS.TRANSPARENT;
                   }
                   context.logger.debug("Starting renderer for element at ".concat(renderOptions.x, ",").concat(renderOptions.y, " with size ").concat(renderOptions.width, "x").concat(renderOptions.height));
                   renderer = new CanvasRenderer(context, renderOptions);
-                  return [4, renderer.render(root4)];
+                  return [4, renderer.render(root5)];
                 case 4:
                   canvas = _u.sent();
                   _u.label = 5;
@@ -12508,7 +12508,7 @@
           txt = txt.replace(/^ {0,3}\[([\S \t]*?)]:/gm, "\\[$1]:");
           return txt;
         });
-        var root4 = this;
+        var root5 = this;
         if (typeof define === "function" && define.amd) {
           define(function() {
             "use strict";
@@ -12517,7 +12517,7 @@
         } else if (typeof module !== "undefined" && module.exports) {
           module.exports = showdown2;
         } else {
-          root4.showdown = showdown2;
+          root5.showdown = showdown2;
         }
       }).call(exports);
     }
@@ -12845,7 +12845,7 @@
         var column;
         var token;
         var key;
-        var root4;
+        var root5;
         var parse5 = function parse6(text4, reviver) {
           source = String(text4);
           parseState = "start";
@@ -12855,15 +12855,15 @@
           column = 0;
           token = void 0;
           key = void 0;
-          root4 = void 0;
+          root5 = void 0;
           do {
             token = lex();
             parseStates[parseState]();
           } while (token.type !== "eof");
           if (typeof reviver === "function") {
-            return internalize({ "": root4 }, "", reviver);
+            return internalize({ "": root5 }, "", reviver);
           }
-          return root4;
+          return root5;
         };
         function internalize(holder, name, reviver) {
           var value = holder[name];
@@ -13588,8 +13588,8 @@
               value = token.value;
               break;
           }
-          if (root4 === void 0) {
-            root4 = value;
+          if (root5 === void 0) {
+            root5 = value;
           } else {
             var parent = stack[stack.length - 1];
             if (Array.isArray(parent)) {
@@ -16785,10 +16785,10 @@
     return function createContent2(markup, type) {
       return (type === "svg" ? createSVG : createHTML)(markup);
     };
-    function append(root4, childNodes) {
+    function append(root5, childNodes) {
       var length = childNodes.length;
       while (length--)
-        root4.appendChild(childNodes[0]);
+        root5.appendChild(childNodes[0]);
     }
     function create3(element) {
       return element === FRAGMENT ? document2.createDocumentFragment() : document2.createElementNS("http://www.w3.org/1999/xhtml", element);
@@ -22030,7 +22030,7 @@
   }
   var mergeWithDefaultOptions = (opts = {}) => Object.assign({}, DEFAULT_OPTIONS2, opts);
   function applyMapping(string, mapping, convertEnding) {
-    const root4 = mapping;
+    const root5 = mapping;
     function nextSubtree(tree, nextChar) {
       const subtree = tree[nextChar];
       if (subtree === void 0) {
@@ -22040,7 +22040,7 @@
     }
     function newChunk(remaining, currentCursor) {
       const firstChar = remaining.charAt(0);
-      return parse5(Object.assign({ "": firstChar }, root4[firstChar]), remaining.slice(1), currentCursor, currentCursor + 1);
+      return parse5(Object.assign({ "": firstChar }, root5[firstChar]), remaining.slice(1), currentCursor, currentCursor + 1);
     }
     function parse5(tree, remaining, lastCursor, currentCursor) {
       if (!remaining) {
@@ -34616,15 +34616,14 @@
         read_more.classList.add("read-more", "icon");
         read_more.textContent = tl2(trans.read_more).toLowerCase();
       }
-      wiki_col.insertBefore(html.node`
-            <div class="sub-text">
-                <p>${tl2(trans.about)}</p>
+      wiki_col.appendChild(html.node`
+            <div class="sub-text wiki-sub-text">
                 <span class="right-links">
                     <p><a class="wiki-edit-small icon" href="${document.location.href}/+wiki/edit">${tl2(trans.edit_wiki).toLowerCase()}</a></p>
                     ${!wiki_empty && read_more ? html.node`<p>${read_more}</p>` : ""}
                 </span>
             </div>
-        `, wiki_col.firstElementChild);
+        `);
       if (!wiki_empty)
         patch_wiki_contents(wiki_block);
     }
@@ -40600,11 +40599,11 @@
     }
     return node;
   }
-  function set(root4, scope, values) {
+  function set(root5, scope, values) {
     if (typeof scope === "string") {
-      return merge(getScope$1(root4, scope), values);
+      return merge(getScope$1(root5, scope), values);
     }
-    return merge(getScope$1(root4, ""), scope);
+    return merge(getScope$1(root5, ""), scope);
   }
   var Defaults = class {
     constructor(_descriptors2, _appliers) {
@@ -53803,7 +53802,7 @@
   function bleh_profile_chart(panel) {
     let table = panel.querySelector("table");
     if (table) {
-      bleh_profile_chart_render2(panel, table);
+      bleh_profile_chart_render(panel, table);
       return;
     }
     fetch(`${root}user/${page.name}/library/artists/chart?date_preset=LAST_90_DAYS&page=1&ajax=1`).then(function(response) {
@@ -53829,7 +53828,7 @@
       table = doc.querySelector(".table");
       if (table) {
         panel.appendChild(table);
-        bleh_profile_chart_render2(panel, table);
+        bleh_profile_chart_render(panel);
       } else {
         log("table is null?", "glacier library", "error");
         console.info("glacier library", doc.body.innerHTML);
@@ -53843,8 +53842,9 @@
       }
     });
   }
-  function bleh_profile_chart_render2(panel = page.structure.main.querySelector(".month-graph"), table) {
-    if (!panel || !table) return;
+  function bleh_profile_chart_render(panel = page.structure.main.querySelector(".month-graph")) {
+    if (!panel) return;
+    const table = panel.querySelector("table");
     let entries2 = table.querySelectorAll("tbody tr");
     if (entries2.length == 0) return;
     let labels = [];
@@ -53947,10 +53947,10 @@
       source.onload = () => {
         let thief = new import_color_thief_browser3.default();
         let colour = thief.getColor(source);
-        let hsl3 = rgb_to_hsl(colour[0], colour[1], colour[2]);
+        let hsl3 = rgb_to_oklch(colour[0], colour[1], colour[2]);
         let hue4 = hsl3.h;
         let sat = clamp_sat(hsl3.s / 100 * 3);
-        let lit = clamp_lit(sat, hsl3.l / 100 + 0.35);
+        let lit = clamp_lit(sat, hsl3.l / 100 + 0.35, true);
         if (apply_to_page) {
           document.body.style.setProperty("--hue-album", hue4);
           document.body.style.setProperty("--sat-album", sat);
@@ -60707,12 +60707,183 @@
     else view_buttons.insertBefore(bulk_edit, edit_form);
   }
 
+  // src/components/music/summary.ts
+  function music_summary(listeners, scrobbles, metascore) {
+    let graph_blocks = [];
+    page.state.graph_blocks = graph_blocks;
+    let title;
+    const panel = html.node`
+        <section class="profile-summary music-summary">
+            <div class="top-container">
+                <p class="subtle-like">${tl2(trans.about)}</p>
+                <div class="summary-blocks">
+                    ${summary_block2("listeners", listeners)}
+                    ${summary_block2("scrobbles", scrobbles)}
+                </div>
+            </div>
+            <div class="summary-main">
+                <div class="summary-content" />
+                <div class="summary-sep" />
+                <div class="summary-aside">
+                    <div class="graph-blocks">
+                        ${Array.from({ length: 3 * 10 }).map((_, i) => {
+      const elem = create_graph_block2(i + 1);
+      graph_blocks.push(elem);
+      return elem;
+    })}
+                    </div>
+                    <p class="subtle-like" ref=${(el) => title = el}>${tl2(trans.value_scrobbles_recently, { v: 0 })}</p>
+                </div>
+            </div>
+        </section>
+    `;
+    page.state.graph_title = title;
+    page.structure.main.insertBefore(panel, page.structure.main.firstChild);
+    bleh_music_chart();
+  }
+  function create_graph_block2(index3) {
+    return html.node`
+        <div class="graph-block empty" style="--delay: ${index3 * 0.04 + "s"}" />
+    `;
+  }
+  function graph_block_level2(value, max2, avg) {
+    if (max2 == 0) return 0;
+    const normalized = value / (avg * 2);
+    return Math.min(9, Math.floor(normalized * 10));
+  }
+  function summary_block2(type, stat) {
+    let text4;
+    let icon_name;
+    if (type == "scrobbles") {
+      text4 = tl2(trans.scrobbles);
+      icon_name = icons.track;
+    } else if (type == "listeners") {
+      text4 = tl2(trans.listeners);
+      icon_name = icons.listeners;
+    }
+    const elem = html.node`
+        <div class="summary-block">
+            <div class="summary-icon">
+                ${icon({ name: icon_name, identifier: "summary" })}
+            </div>
+            <div class="summary-info">
+                <h3 class="summary-label">${text4}</h3>
+                <p class="summary-value">${stat.abbr || stat.value?.toLocaleString(lang)}</p>
+            </div>
+        </div>
+    `;
+    if (stat.abbr && stat.value) {
+      tippy_esm_default(elem, {
+        content: stat.value
+      });
+    }
+    return elem;
+  }
+  function bleh_music_chart() {
+    let trend = page.structure.container.querySelector(".listener-trend");
+    if (!trend) return;
+    let table = trend.querySelector("tbody");
+    let days = table.querySelectorAll("tr");
+    if (days.length == 0) return;
+    let labels = [];
+    let values = [];
+    let has_seen_more_than_0 = false;
+    days.forEach((day, index3) => {
+      if (!day) return;
+      let label = DateTime.fromISO(day.querySelector("time").getAttribute("datetime"));
+      let value = day.querySelector(".js-value");
+      console.log("day", index3, label, day, day.innerHTML);
+      if (!value.getAttribute("data-value")) value = 0;
+      else value = Number(value.getAttribute("data-value"));
+      if (value == 0 && index3 < 120 && !has_seen_more_than_0) return;
+      has_seen_more_than_0 = true;
+      labels.push(label);
+      values.push(value);
+    });
+    page.state.labels = labels;
+    page.state.values = values;
+    setTimeout(() => {
+      fill_graph_blocks(labels.slice(-30), values.slice(-30));
+    }, 100);
+    bleh_music_chart_render();
+  }
+  function bleh_music_chart_render() {
+    const labels = page.state.labels;
+    const values = page.state.values;
+    let aside = page.structure.side.querySelector(".listen-panel");
+    if (!aside) {
+      aside = html.node`
+            <section class="listen-panel" />
+        `;
+      page.structure.side.appendChild(aside);
+    }
+    prep_chart_colours();
+    let scrobble_canvas_container = document.createElement("div");
+    scrobble_canvas_container.classList.add("scrobble-canvas-container", "icon-mask");
+    let scrobble_canvas = document.createElement("canvas");
+    scrobble_canvas.classList.add("scrobble-canvas");
+    let gradient = scrobble_canvas.getContext("2d").createLinearGradient(0, 0, 0, 160);
+    try {
+      gradient.addColorStop(0, page.state.chart_colours.link_bg_col);
+      gradient.addColorStop(1, page.state.chart_colours.link_bg_col_2);
+    } catch (e4) {
+      gradient = page.state.chart_colours.link_bg_col;
+    }
+    Chart.defaults.color = page.state.chart_colours.text_col;
+    Chart.defaults.font.family = page.state.chart_colours.font;
+    let scrobble_chart = new Chart(scrobble_canvas.getContext("2d"), {
+      type: "line",
+      data: {
+        labels,
+        datasets: [
+          {
+            data: values,
+            borderWidth: 2,
+            backgroundColor: gradient,
+            borderColor: page.state.chart_colours.link_col,
+            fill: true,
+            pointRadius: 0,
+            pointHitRadius: 20,
+            tension: 0.1
+          }
+        ]
+      },
+      options: page.state.chart_line_options
+    });
+    scrobble_canvas_container.appendChild(scrobble_canvas);
+    render(aside, html`
+        ${scrobble_canvas_container}
+    `);
+  }
+  function fill_graph_blocks(labels, values) {
+    const graph_blocks = page.state.graph_blocks;
+    const title = page.state.graph_title;
+    let sum = 0;
+    let max2 = Math.max(...values);
+    let avg = values.reduce((sum2, val) => sum2 + val, 0) / values.length;
+    values.forEach((value, i) => {
+      const label = labels[i];
+      const elem = graph_blocks[i];
+      if (!elem) return;
+      if (value > 0) {
+        elem.classList.remove("empty");
+        const level = graph_block_level2(value, max2, avg);
+        elem.classList.add(`level-${level}`);
+        sum += value;
+      }
+      tippy_esm_default(elem, {
+        content: `${label.toLocaleString(DateTime.DATE_SHORT)}: ${value.toLocaleString(lang)}`
+      });
+    });
+    title.textContent = tl2(trans.value_scrobbles_recently, { v: sum.toLocaleString(lang) });
+  }
+
   // src/components/music/chart.js
   function chart_reflow() {
     if (!document.body) return;
     load_chart_colours();
     if ((page.type == "artist" || page.type == "album" || page.type == "track") && page.subpage == "overview")
-      bleh_music_page_charts();
+      bleh_music_chart_render();
     if (page.type == "user" && page.subpage == "overview")
       bleh_profile_chart_render();
     if (page.type == "user" && page.subpage.startsWith("library")) {
@@ -64090,6 +64261,9 @@
     } else if (page.type == "album" || page.type == "track") {
       page_is_blocked = col_main.querySelector(".catalogue-tags") == null;
     }
+    const summary = page.structure.main.querySelector(".music-summary");
+    const summary_info = summary?.querySelector(".summary-content");
+    summary_info?.appendChild(col_main);
     log(
       `${page_is_blocked ? "page is blocked" : "page is not blocked"}`,
       "music"
@@ -64228,6 +64402,7 @@
       page.structure.container.insertBefore(tabs, page.structure.row);
       page.structure.tabs = tabs;
     }
+    const main2 = summary?.querySelector(".summary-aside");
     let listen_container = document.createElement("div");
     listen_container.classList.add("listen-container");
     const no_auth_callout = page.structure.main.querySelector(".catalogue-callout");
@@ -64327,7 +64502,6 @@
         }
       });
     }
-    if (page.type != "artist") listen_container.appendChild(create_divider());
     create_listen_item(
       listen_container,
       {
@@ -64339,15 +64513,12 @@
       },
       page.type
     );
-    col_main.insertBefore(listen_container, col_main.firstElementChild);
+    main2?.appendChild(listen_container);
     if (page.type == "artist") {
       let other_container = col_main.querySelector(
         ".personal-stats-item--listeners"
       );
       if (other_container) {
-        let listen_divider = document.createElement("div");
-        listen_divider.classList.add("listen-divider");
-        listen_container.appendChild(listen_divider);
         let avatars = other_container.querySelectorAll(
           ".personal-stats-listener-avatar img"
         );
@@ -65093,61 +65264,11 @@
       }
     });
     page.structure.side.classList.remove("hidden-xs");
+    music_summary(listeners, scrobbles, metascore);
     let panel = page.structure.side.querySelector(
       "section.section-with-separator:has(.listener-trend)"
     );
-    if (!panel) {
-      panel = document.createElement("section");
-      panel.classList.add("section-with-separator");
-      if (!page.mobile)
-        page.structure.side.insertBefore(
-          panel,
-          page.structure.side.firstElementChild
-        );
-      else
-        page.structure.main.insertBefore(
-          panel,
-          page.structure.main.firstElementChild
-        );
-    }
-    panel.classList.add("listen-panel");
-    panel.setAttribute("data-auth-name", auth.name);
-    let row = html.node`
-        <div class="listener-row">
-            <div class="listener-row-item listener-side icon-mask">
-                <h3>${listeners.text}</h3>
-                <p>${listeners.abbr}</p>
-            </div>
-            <div class="listener-row-item scrobble-side icon-mask">
-                <h3>${scrobbles.text}</h3>
-                <p>${scrobbles.abbr}</p>
-            </div>
-            ${metascore.text ? html.node`
-            <div class="listener-row-item metascore-side icon-mask">
-                <h3>${metascore.text}</h3>
-                <p><a href="${metascore.link}" target="_blank">${metascore.abbr}</a></p>
-            </div>
-            ` : ""}
-        </div>
-    `;
-    panel.insertBefore(row, panel.firstElementChild);
-    if (page.mobile)
-      page.structure.main.insertBefore(
-        panel,
-        page.structure.main.firstElementChild
-      );
-    tippy_esm_default(row.querySelector(".listener-side p"), {
-      content: tl2(trans.count_listeners).replace(
-        "{c}",
-        listeners.value.toLocaleString(lang)
-      )
-    });
-    tippy_esm_default(row.querySelector(".scrobble-side p"), {
-      content: tl2(trans.count_scrobbles).replace(
-        "{c}",
-        scrobbles.value.toLocaleString(lang)
-      )
-    });
+    if (panel) panel.remove();
     if (page.type == "album") {
       let album_artwork = document.body.querySelector(
         ".artwork-and-metadata-row"
@@ -65168,7 +65289,7 @@
       let upper = document.body.querySelector(".col-main");
       upper.classList.add("upper-overview-to-hide");
       page.structure.row.appendChild(upper);
-      let new_upper = document.createElement("section");
+      let new_upper = document.createElement("div");
       new_upper.classList.add("top-overview-panel");
       new_upper.setAttribute("data-page-type", page.type);
       new_upper.innerHTML = upper.innerHTML;
@@ -65233,69 +65354,6 @@
     );
   }
   function bleh_music_page_charts() {
-    if (!ff("music_page_charts")) return;
-    log("beginning replacement", "music charts");
-    let panel = page.structure.container.querySelector(".listen-panel");
-    let trend = panel.querySelector(".listener-trend");
-    if (!trend) return;
-    let previous_chart = panel.querySelector(".scrobble-canvas-container");
-    if (previous_chart) panel.removeChild(previous_chart);
-    let table = trend.querySelector("tbody");
-    let days = table.querySelectorAll("tr");
-    let labels = [];
-    let values = [];
-    let has_seen_more_than_0 = false;
-    days.forEach((day, index3) => {
-      if (!day) return;
-      let label = DateTime.fromISO(
-        day.querySelector("time").getAttribute("datetime")
-      );
-      let value = day.querySelector(".js-value");
-      console.log("day", index3, label, day, day.innerHTML);
-      if (!value.getAttribute("data-value")) value = 0;
-      else value = value.getAttribute("data-value");
-      if (value == "0" && index3 < 120 && !has_seen_more_than_0) return;
-      has_seen_more_than_0 = true;
-      labels.push(label);
-      values.push(value);
-    });
-    prep_chart_colours();
-    let scrobble_canvas_container = document.createElement("div");
-    scrobble_canvas_container.classList.add("scrobble-canvas-container", "icon-mask");
-    let scrobble_canvas = document.createElement("canvas");
-    scrobble_canvas.classList.add("scrobble-canvas");
-    let gradient = scrobble_canvas.getContext("2d").createLinearGradient(0, 0, 0, 160);
-    try {
-      gradient.addColorStop(0, page.state.chart_colours.link_bg_col);
-      gradient.addColorStop(1, page.state.chart_colours.link_bg_col_2);
-    } catch (e4) {
-      gradient = page.state.chart_colours.link_bg_col;
-    }
-    Chart.defaults.color = page.state.chart_colours.text_col;
-    Chart.defaults.font.family = page.state.chart_colours.font;
-    let scrobble_chart = new Chart(scrobble_canvas.getContext("2d"), {
-      type: "line",
-      data: {
-        labels,
-        datasets: [
-          {
-            data: values,
-            borderWidth: 2,
-            backgroundColor: gradient,
-            borderColor: page.state.chart_colours.link_col,
-            fill: true,
-            pointRadius: 0,
-            pointHitRadius: 20,
-            tension: 0.1
-          }
-        ]
-      },
-      options: page.state.chart_line_options
-    });
-    scrobble_canvas_container.appendChild(scrobble_canvas);
-    panel.appendChild(scrobble_canvas_container);
-    trend.style.setProperty("display", "none");
-    log("finished", "music charts");
   }
   function bleh_top_listeners() {
     if (!ff("unify_top_listeners")) return;
@@ -65755,7 +65813,7 @@
   };
   function createDOMPurify() {
     let window2 = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : getGlobal();
-    const DOMPurify = (root4) => createDOMPurify(root4);
+    const DOMPurify = (root5) => createDOMPurify(root5);
     DOMPurify.version = "3.2.6";
     DOMPurify.removed = [];
     if (!window2 || !window2.document || window2.document.nodeType !== NODE_TYPE.document || !window2.Element) {
@@ -66136,10 +66194,10 @@
       }
       return WHOLE_DOCUMENT ? doc.documentElement : body;
     };
-    const _createNodeIterator = function _createNodeIterator2(root4) {
+    const _createNodeIterator = function _createNodeIterator2(root5) {
       return createNodeIterator.call(
-        root4.ownerDocument || root4,
-        root4,
+        root5.ownerDocument || root5,
+        root5,
         // eslint-disable-next-line no-bitwise
         NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_COMMENT | NodeFilter.SHOW_TEXT | NodeFilter.SHOW_PROCESSING_INSTRUCTION | NodeFilter.SHOW_CDATA_SECTION,
         null

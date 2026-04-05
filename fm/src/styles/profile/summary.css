@@ -4,6 +4,7 @@
     gap: var(--card-gap);
 
     --w: 30px;
+    --c: 3;
     --g: 4px;
 
     margin-bottom: calc( (-1 * var(--card-padding-v)) + var(--card-gap) );
@@ -63,12 +64,12 @@
 .graph-blocks {
     display: grid;
     grid-auto-flow: column;
-    grid-template-rows: repeat(3, 1fr);
+    grid-template-rows: repeat(var(--c), 1fr);
 
     justify-content: start;
     gap: var(--g);
 
-    max-height: calc((var(--w) * 3) + (var(--g) * 2));
+    max-height: calc((var(--w) * var(--c)) + (var(--g) * (var(--c) - 1)));
 }
 
 .graph-block {
@@ -105,8 +106,8 @@
     }
 
     &.empty {
-        background-color: transparent;
-        box-shadow: 0 0 0 1px inset var(--card-border-base);
+        background-color: oklch(var(--b6) / 50%);
+        box-shadow: 0 0 0 1px inset var(--separator-base);
         color: oklch(var(--c2));
     }
 
@@ -166,7 +167,7 @@
 
 .summary-sep {
     width: 1px;
-    height: calc((var(--w) * 3) + (var(--g) * 2));
+    height: calc((var(--w) * var(--c)) + (var(--g) * (var(--c) - 1)));
     display: block;
     background: var(--separator);
 
@@ -176,6 +177,7 @@
 .month-graph {
     flex: 1;
 
+    & > tbody,
     & > table {
         display: none;
     }
@@ -192,7 +194,7 @@
 
 .monthly-chart-line,
 .monthly-chart-pie {
-    height: calc((var(--w) * 3) + (var(--g) * 2)) !important;
+    height: calc((var(--w) * var(--c)) + (var(--g) * (var(--c) - 1))) !important;
 }
 
 .monthly-chart-line {
@@ -207,10 +209,10 @@
 
 .monthly-canvas {
     width: 100% !important;
-    height: calc((var(--w) * 3) + (var(--g) * 2)) !important;
+    height: calc((var(--w) * var(--c)) + (var(--g) * (var(--c) - 1))) !important;
 }
 
 .monthly-canvas-pie {
     width: 100% !important;
-    height: calc((var(--w) * 3) + (var(--g) * 2)) !important;
+    height: calc((var(--w) * var(--c)) + (var(--g) * (var(--c) - 1))) !important;
 }

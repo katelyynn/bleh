@@ -22,6 +22,8 @@
 
 @import './similar_artists.css';
 
+@import './summary.css';
+
 .section-with-control > .buffer-standard,
 .grid-items-section > .buffer-standard,
 .grid-items,

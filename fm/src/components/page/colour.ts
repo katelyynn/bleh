@@ -1,6 +1,6 @@
 import { log } from '@/build/log';
 import { chart_reflow, load_chart_colours } from '../music/chart';
-import { clamp_lit, clamp_sat, rgb_to_hsl } from '@/build/tools';
+import { clamp_lit, clamp_sat, rgb_to_hsl, rgb_to_oklch } from '@/build/tools';
 import ColorThief from 'color-thief-browser';
 
 export function header_colour(source: HTMLImageElement, apply_to_page = false, apply_to_elem?: HTMLElement) {
@@ -9,11 +9,11 @@ export function header_colour(source: HTMLImageElement, apply_to_page = false, a
             let thief = new ColorThief();
             let colour = thief.getColor(source);
 
-            let hsl = rgb_to_hsl(colour[0], colour[1], colour[2]);
+            let hsl = rgb_to_oklch(colour[0], colour[1], colour[2]);
 
             let hue = hsl.h;
             let sat = clamp_sat((hsl.s / 100) * 3);
-            let lit = clamp_lit(sat, hsl.l / 100 + 0.35);
+            let lit = clamp_lit(sat, hsl.l / 100 + 0.35, true);
 
             if (apply_to_page) {
                 document.body.style.setProperty('--hue-album', hue);

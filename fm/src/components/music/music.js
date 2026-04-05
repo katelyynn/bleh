@@ -35,6 +35,7 @@ import { oracle_credits } from '@/components/music/oracle';
 import { setting } from '@/components/settings/settings';
 import { patch_user_list_item } from '@/components/shared/users';
 import { join_the_conversation } from '../shared/shout';
+import { music_summary } from './summary';
 
 unsafeWindow._other_listener = function (id) {
     other_listener(id);
@@ -83,6 +84,11 @@ export async function show_your_scrobbles() {
     } else if (page.type == 'album' || page.type == 'track') {
         page_is_blocked = col_main.querySelector('.catalogue-tags') == null;
     }
+
+    const summary = page.structure.main.querySelector('.music-summary');
+    const summary_info = summary?.querySelector('.summary-content');
+
+    summary_info?.appendChild(col_main);
 
     log(
         `${page_is_blocked ? 'page is blocked' : 'page is not blocked'}`,
@@ -239,6 +245,8 @@ export async function show_your_scrobbles() {
         page.structure.tabs = tabs;
     }
 
+    const main = summary?.querySelector('.summary-aside');
+
     // create container
     let listen_container = document.createElement('div');
     listen_container.classList.add('listen-container');
@@ -377,7 +385,6 @@ export async function show_your_scrobbles() {
     }
 
     // other user
-    if (page.type != 'artist') listen_container.appendChild(create_divider());
     create_listen_item(
         listen_container,
         {
@@ -391,7 +398,7 @@ export async function show_your_scrobbles() {
     );
 
     // append
-    col_main.insertBefore(listen_container, col_main.firstElementChild);
+    main?.appendChild(listen_container);
 
     // other listeners
     if (page.type == 'artist') {
@@ -400,11 +407,6 @@ export async function show_your_scrobbles() {
             '.personal-stats-item--listeners'
         );
         if (other_container) {
-            let listen_divider = document.createElement('div');
-            listen_divider.classList.add('listen-divider');
-
-            listen_container.appendChild(listen_divider);
-
             let avatars = other_container.querySelectorAll(
                 '.personal-stats-listener-avatar img'
             );
@@ -1354,73 +1356,14 @@ function show_numbers_on_side(header_type) {
 
     page.structure.side.classList.remove('hidden-xs');
 
+    music_summary(listeners, scrobbles, metascore);
+
     // get panel
     let panel = page.structure.side.querySelector(
         'section.section-with-separator:has(.listener-trend)'
     );
 
-    if (!panel) {
-        panel = document.createElement('section');
-        panel.classList.add('section-with-separator');
-
-        if (!page.mobile)
-            page.structure.side.insertBefore(
-                panel,
-                page.structure.side.firstElementChild
-            );
-        else
-            page.structure.main.insertBefore(
-                panel,
-                page.structure.main.firstElementChild
-            );
-    }
-
-    panel.classList.add('listen-panel');
-    panel.setAttribute('data-auth-name', auth.name);
-
-    let row = html.node`
-        <div class="listener-row">
-            <div class="listener-row-item listener-side icon-mask">
-                <h3>${listeners.text}</h3>
-                <p>${listeners.abbr}</p>
-            </div>
-            <div class="listener-row-item scrobble-side icon-mask">
-                <h3>${scrobbles.text}</h3>
-                <p>${scrobbles.abbr}</p>
-            </div>
-            ${
-                metascore.text ?
-                    html.node`
-            <div class="listener-row-item metascore-side icon-mask">
-                <h3>${metascore.text}</h3>
-                <p><a href="${metascore.link}" target="_blank">${metascore.abbr}</a></p>
-            </div>
-            `
-                :   ''
-            }
-        </div>
-    `;
-
-    panel.insertBefore(row, panel.firstElementChild);
-
-    if (page.mobile)
-        page.structure.main.insertBefore(
-            panel,
-            page.structure.main.firstElementChild
-        );
-
-    tippy(row.querySelector('.listener-side p'), {
-        content: tl(trans.count_listeners).replace(
-            '{c}',
-            listeners.value.toLocaleString(lang)
-        )
-    });
-    tippy(row.querySelector('.scrobble-side p'), {
-        content: tl(trans.count_scrobbles).replace(
-            '{c}',
-            scrobbles.value.toLocaleString(lang)
-        )
-    });
+    if (panel) panel.remove();
 
     // is there album artwork?
     if (page.type == 'album') {
@@ -1449,7 +1392,7 @@ function show_numbers_on_side(header_type) {
         // make last-child
         page.structure.row.appendChild(upper);
 
-        let new_upper = document.createElement('section');
+        let new_upper = document.createElement('div');
         new_upper.classList.add('top-overview-panel');
         new_upper.setAttribute('data-page-type', page.type);
         new_upper.innerHTML = upper.innerHTML;
@@ -1532,93 +1475,7 @@ function video_unavailable(video_col = null) {
 }
 
 export function bleh_music_page_charts() {
-    if (!ff('music_page_charts')) return;
 
-    log('beginning replacement', 'music charts');
-
-    let panel = page.structure.container.querySelector('.listen-panel'); // page.structure.side fails without pro
-    let trend = panel.querySelector('.listener-trend');
-
-    if (!trend) return;
-
-    // is this a chart reflow due to style loading?
-    let previous_chart = panel.querySelector('.scrobble-canvas-container');
-    if (previous_chart) panel.removeChild(previous_chart);
-
-    let table = trend.querySelector('tbody');
-    let days = table.querySelectorAll('tr');
-
-    let labels = [];
-    let values = [];
-
-    let has_seen_more_than_0 = false;
-    days.forEach((day, index) => {
-        if (!day) return;
-
-        //let label = day.querySelector('time').textContent.trim();
-        let label = DateTime.fromISO(
-            day.querySelector('time').getAttribute('datetime')
-        );
-        let value = day.querySelector('.js-value');
-
-        console.log('day', index, label, day, day.innerHTML);
-
-        if (!value.getAttribute('data-value')) value = 0;
-        else value = value.getAttribute('data-value');
-
-        if (value == '0' && index < 120 && !has_seen_more_than_0) return;
-        has_seen_more_than_0 = true;
-
-        labels.push(label);
-        values.push(value);
-    });
-
-    prep_chart_colours();
-
-    let scrobble_canvas_container = document.createElement('div');
-    scrobble_canvas_container.classList.add('scrobble-canvas-container', 'icon-mask');
-
-    let scrobble_canvas = document.createElement('canvas');
-    scrobble_canvas.classList.add('scrobble-canvas');
-
-    let gradient = scrobble_canvas
-        .getContext('2d')
-        .createLinearGradient(0, 0, 0, 160);
-    try {
-        gradient.addColorStop(0, page.state.chart_colours.link_bg_col);
-        gradient.addColorStop(1, page.state.chart_colours.link_bg_col_2);
-    } catch (e) {
-        gradient = page.state.chart_colours.link_bg_col;
-    }
-
-    Chart.defaults.color = page.state.chart_colours.text_col;
-    Chart.defaults.font.family = page.state.chart_colours.font;
-    let scrobble_chart = new Chart(scrobble_canvas.getContext('2d'), {
-        type: 'line',
-        data: {
-            labels: labels,
-            datasets: [
-                {
-                    data: values,
-                    borderWidth: 2,
-                    backgroundColor: gradient,
-                    borderColor: page.state.chart_colours.link_col,
-                    fill: true,
-                    pointRadius: 0,
-                    pointHitRadius: 20,
-                    tension: 0.1
-                }
-            ]
-        },
-        options: page.state.chart_line_options
-    });
-
-    scrobble_canvas_container.appendChild(scrobble_canvas);
-    panel.appendChild(scrobble_canvas_container);
-
-    trend.style.setProperty('display', 'none');
-
-    log('finished', 'music charts');
 }
 
 export function bleh_top_listeners() {
