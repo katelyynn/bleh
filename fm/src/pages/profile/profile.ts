@@ -386,45 +386,6 @@ export function bleh_profiles() {
 
         profile_summary(recent_tracks, top_artists);
 
-        let scrobble_text;
-        let listen_container = html.node`
-            <section class="listen-panel listen-profile-panel">
-                <div class="listener-row">
-                    <div class="listener-row-item scrobble-side icon-mask">
-                        <h3>${tl(trans.scrobbles)}</h3>
-                        <p ref=${(el) => (scrobble_text = el)}><a href="${root}user/${page.name}/library">${scrobbles.toLocaleString(lang)}</a></p>
-                    </div>
-                    <div class="listener-row-item artist-side icon-mask">
-                        <h3>${tl(trans.artists)}</h3>
-                        <p><a href="${root}user/${page.name}/library/artists">${artists.toLocaleString(lang)}</a></p>
-                    </div>
-                    <div class="listener-row-item loved-side icon-mask">
-                        <h3>${tl(trans.loved)}</h3>
-                        <p><a href="${root}user/${page.name}/loved">${loved.toLocaleString(lang)}</a></p>
-                    </div>
-                </div>
-            </section>
-        `;
-
-        if (scrobbles > 0) {
-            tippy(scrobble_text, {
-                content: average
-            });
-        }
-
-        if (sponsor_list && page.name != sponsor_list.sponsor_account) {
-            if (!page.mobile)
-                page.structure.side.insertBefore(
-                    listen_container,
-                    page.structure.side.firstChild
-                );
-            else
-                page.structure.main.insertBefore(
-                    listen_container,
-                    page.structure.main.firstChild
-                );
-        }
-
         // secondary text
         const profile_sub_text = redesigned_profile_header.querySelector(
             '.header-title-secondary'

@@ -204,7 +204,7 @@ export function redesign_profile_header(is_own_profile, is_following) {
             page.structure.main.firstElementChild
         );
 
-    let listen_container = page.structure.row.querySelector('.listen-panel');
+    const summary = page.structure.main.querySelector('.profile-summary');
 
     if (
         !is_own_profile &&
@@ -212,7 +212,7 @@ export function redesign_profile_header(is_own_profile, is_following) {
         auth.name
     ) {
         if (taste == '') {
-            listen_container.appendChild(html.node`
+            summary.appendChild(html.node`
                 <div class="loading-data-container">
                     <div class="loading-data-text error">${tl(trans.missing_component)}</div>
                 </div>
@@ -310,8 +310,7 @@ export function redesign_profile_header(is_own_profile, is_following) {
             `;
         }
 
-        const row = listen_container.querySelector('.listener-row');
-        row.after(taste_wrap);
+        summary.appendChild(taste_wrap);
 
         const today = new Date();
         const february = today.getMonth() == 1 && today.getDate() == 14;

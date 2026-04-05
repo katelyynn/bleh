@@ -11250,7 +11250,7 @@
             return text4;
           }
           text4 = globals.converter._dispatch("completeHTMLDocument.before", text4, options, globals);
-          var doctype = "html", doctypeParsed = "<!DOCTYPE HTML>\n", title = "", charset = '<meta charset="utf-8">\n', lang2 = "", metadata = "";
+          var doctype = "html", doctypeParsed = "<!DOCTYPE HTML>\n", title = "", charset = '<meta charset="utf-8">\n', lang3 = "", metadata = "";
           if (typeof globals.metadata.parsed.doctype !== "undefined") {
             doctypeParsed = "<!DOCTYPE " + globals.metadata.parsed.doctype + ">\n";
             doctype = globals.metadata.parsed.doctype.toString().toLowerCase();
@@ -11275,7 +11275,7 @@
                   break;
                 case "language":
                 case "lang":
-                  lang2 = ' lang="' + globals.metadata.parsed[meta] + '"';
+                  lang3 = ' lang="' + globals.metadata.parsed[meta] + '"';
                   metadata += '<meta name="' + meta + '" content="' + globals.metadata.parsed[meta] + '">\n';
                   break;
                 default:
@@ -11283,7 +11283,7 @@
               }
             }
           }
-          text4 = doctypeParsed + "<html" + lang2 + ">\n<head>\n" + title + charset + metadata + "</head>\n<body>\n" + text4.trim() + "\n</body>\n</html>";
+          text4 = doctypeParsed + "<html" + lang3 + ">\n<head>\n" + title + charset + metadata + "</head>\n<body>\n" + text4.trim() + "\n</body>\n</html>";
           text4 = globals.converter._dispatch("completeHTMLDocument.after", text4, options, globals);
           return text4;
         });
@@ -12157,8 +12157,8 @@
         });
         showdown2.subParser("makeMarkdown.codeBlock", function(node, globals) {
           "use strict";
-          var lang2 = node.getAttribute("language"), num3 = node.getAttribute("precodenum");
-          return "```" + lang2 + "\n" + globals.preList[num3] + "\n```";
+          var lang3 = node.getAttribute("language"), num3 = node.getAttribute("precodenum");
+          return "```" + lang3 + "\n" + globals.preList[num3] + "\n```";
         });
         showdown2.subParser("makeMarkdown.codeSpan", function(node) {
           "use strict";
@@ -33128,8 +33128,8 @@
     const match3 = string.match(/\b(\d{4})\b/);
     return match3 ? match3[1] : 0;
   }
-  async function translate(text4, lang2 = "en") {
-    const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=${lang2}&dt=t&q=${encodeURIComponent(text4)}`;
+  async function translate(text4, lang3 = "en") {
+    const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=${lang3}&dt=t&q=${encodeURIComponent(text4)}`;
     const res = await fetch(url);
     const data2 = await res.json();
     const translated = data2[0].map((chunk) => chunk[0]).join("");
@@ -37861,10 +37861,10 @@
         profile_header,
         page.structure.main.firstElementChild
       );
-    let listen_container = page.structure.row.querySelector(".listen-panel");
+    const summary = page.structure.main.querySelector(".profile-summary");
     if (!is_own_profile && page.name != sponsor_list.sponsor_account && auth.name) {
       if (taste == "") {
-        listen_container.appendChild(html.node`
+        summary.appendChild(html.node`
                 <div class="loading-data-container">
                     <div class="loading-data-text error">${tl2(trans.missing_component)}</div>
                 </div>
@@ -37957,8 +37957,7 @@
                 </button>
             `;
       }
-      const row = listen_container.querySelector(".listener-row");
-      row.after(taste_wrap);
+      summary.appendChild(taste_wrap);
       const today = /* @__PURE__ */ new Date();
       const february = today.getMonth() == 1 && today.getDate() == 14;
       if (ff("sandrone") && february && settings.friends.includes(page.name) && ["super", "very_high", "high"].includes(taste)) {
@@ -54233,42 +54232,6 @@
       page.state.loved = loved;
       page.state.average = average;
       profile_summary(recent_tracks, top_artists);
-      let scrobble_text;
-      let listen_container = html.node`
-            <section class="listen-panel listen-profile-panel">
-                <div class="listener-row">
-                    <div class="listener-row-item scrobble-side icon-mask">
-                        <h3>${tl2(trans.scrobbles)}</h3>
-                        <p ref=${(el) => scrobble_text = el}><a href="${root}user/${page.name}/library">${scrobbles.toLocaleString(lang)}</a></p>
-                    </div>
-                    <div class="listener-row-item artist-side icon-mask">
-                        <h3>${tl2(trans.artists)}</h3>
-                        <p><a href="${root}user/${page.name}/library/artists">${artists.toLocaleString(lang)}</a></p>
-                    </div>
-                    <div class="listener-row-item loved-side icon-mask">
-                        <h3>${tl2(trans.loved)}</h3>
-                        <p><a href="${root}user/${page.name}/loved">${loved.toLocaleString(lang)}</a></p>
-                    </div>
-                </div>
-            </section>
-        `;
-      if (scrobbles > 0) {
-        tippy_esm_default(scrobble_text, {
-          content: average
-        });
-      }
-      if (sponsor_list && page.name != sponsor_list.sponsor_account) {
-        if (!page.mobile)
-          page.structure.side.insertBefore(
-            listen_container,
-            page.structure.side.firstChild
-          );
-        else
-          page.structure.main.insertBefore(
-            listen_container,
-            page.structure.main.firstChild
-          );
-      }
       const profile_sub_text = redesigned_profile_header.querySelector(
         ".header-title-secondary"
       );
@@ -72060,8 +72023,8 @@
             </div>
         `);
     } else if (page_id == "translate") {
-      let translation_view = function(lang2) {
-        const language = lang_info[lang2];
+      let translation_view = function(lang3) {
+        const language = lang_info[lang3];
         render(translation_view_container, html`
                 <div class="language-sub">
                     <div class="language-info colourful translated"><span class="bleh-icon" />${tl2(trans.amount_translated, { c: language.translated })} (${language.percent}%)</div>
@@ -90062,7 +90025,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     for (const k4 in object) {
       const val = object[k4];
       const key = prefix ? `${prefix}.${k4}` : k4;
-      if (typeof val == "object" && !Object.keys(lang_info).some((lang2) => lang2 in val)) {
+      if (typeof val == "object" && !Object.keys(lang_info).some((lang3) => lang3 in val)) {
         collect_keys(val, key, out);
       } else {
         out.push(key);
@@ -90075,31 +90038,31 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
   }
   function translation_stats() {
     const keys2 = collect_keys(trans);
-    for (const lang2 of Object.keys(lang_info)) {
+    for (const lang3 of Object.keys(lang_info)) {
       let translated = 0;
       const missing = [];
       for (const key of keys2) {
         const value = get_value_by_path(trans, key);
-        if (value && value[lang2]) {
+        if (value && value[lang3]) {
           translated++;
         } else {
           missing.push(key);
         }
       }
-      lang_info[lang2].total = keys2.length;
-      lang_info[lang2].translated = translated;
-      lang_info[lang2].missing = missing.length;
-      lang_info[lang2].missing_keys = missing;
-      lang_info[lang2].percent = Math.round(translated / keys2.length * 100);
+      lang_info[lang3].total = keys2.length;
+      lang_info[lang3].translated = translated;
+      lang_info[lang3].missing = missing.length;
+      lang_info[lang3].missing_keys = missing;
+      lang_info[lang3].percent = Math.round(translated / keys2.length * 100);
     }
     log("translation stats", "trans", "info", { lang_info });
   }
   function get_lang() {
     const path = window.location.pathname;
     const segments = path.split("/");
-    const lang2 = segments[1];
-    if (/^[a-z]{2}$/.test(lang2)) {
-      return `/${lang2}/`;
+    const lang3 = segments[1];
+    if (/^[a-z]{2}$/.test(lang3)) {
+      return `/${lang3}/`;
     }
     return "/";
   }
