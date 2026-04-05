@@ -349,9 +349,9 @@
 }
 .header-new-on-tour {
     --mask: var(--icon-tour);
-    --hue: 333;
-    --sat: 1;
-    --lit: 1;
+    --hue-over: 11;
+    --sat-over: 1.53;
+    --lit-over: 0.93;
 }
 
 /* hides cancelled label on event pages */
