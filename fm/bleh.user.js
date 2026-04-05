@@ -60774,7 +60774,7 @@
     `;
     if (stat.abbr && stat.value) {
       tippy_esm_default(elem, {
-        content: stat.value
+        content: stat.value.toLocaleString(lang)
       });
     }
     return elem;

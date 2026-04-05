@@ -125,43 +125,43 @@
     transition-delay: var(--delay, 0s);
 
     &.level-0 {
-        background-color: oklch(var(--h4) / 10%);
+        background-color: var(--summary-block-0);
     }
 
     &.level-1 {
-        background-color: oklch(var(--h4) / 23%);
+        background-color: var(--summary-block-1);
     }
 
     &.level-2 {
-        background-color: oklch(var(--h4) / 45%);
+        background-color: var(--summary-block-2);
     }
 
     &.level-3 {
-        background-color: color-mix(in oklch, oklch(var(--h3)) 6%, oklch(var(--h4) / 60%));
+        background-color: var(--summary-block-3);
     }
 
     &.level-4 {
-        background-color: color-mix(in oklch, oklch(var(--h3)) 24%, oklch(var(--h4) / 60%));
+        background-color: var(--summary-block-4);
     }
 
     &.level-5 {
-        background-color: color-mix(in oklch, oklch(var(--h3)) 60%, oklch(var(--h4) / 60%));
+        background-color: var(--summary-block-5);
     }
 
     &.level-6 {
-        background-color: color-mix(in oklch, oklch(var(--h2)) 10%, oklch(var(--h3)));
+        background-color: var(--summary-block-6);
     }
 
     &.level-7 {
-        background-color: color-mix(in oklch, oklch(var(--h2)) 40%, oklch(var(--h3)));
+        background-color: var(--summary-block-7);
     }
 
     &.level-8 {
-        background-color: color-mix(in oklch, oklch(var(--h2)) 70%, oklch(var(--h3)));
+        background-color: var(--summary-block-8);
     }
 
     &.level-9 {
-        background-color: oklch(var(--h2));
+        background-color: var(--summary-block-9);
     }
 }
 

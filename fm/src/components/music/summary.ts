@@ -95,7 +95,7 @@ function summary_block(type: string, stat: music_stat) {
 
     if (stat.abbr && stat.value) {
         tippy(elem, {
-            content: stat.value
+            content: stat.value.toLocaleString(lang)
         });
     }
 

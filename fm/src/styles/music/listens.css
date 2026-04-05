@@ -171,7 +171,7 @@
 
     &[data-bleh--scrobble-milestone] > .listen-item-info > .listen-item-text {
         color: oklch(var(--l3-c)) !important;
-        text-shadow: 0 0 12px oklch(var(--h4) / 60%);
+        text-shadow: 0 0 20px oklch(var(--h4) / 80%);
     }
 
     &:before {

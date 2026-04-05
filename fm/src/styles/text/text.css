@@ -238,6 +238,7 @@ pre {
 
     &.copyright {
         order: 1;
+        margin: unset !important;
     }
 
     .setting-group + & {
