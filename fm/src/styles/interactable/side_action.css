@@ -13,7 +13,7 @@
     padding: var(--inner) !important;
     border-radius: calc(var(--item-big-radius) + var(--inner)) !important;*/
 
-    margin: 0 calc(-1 * var(--button-sides)) !important;
+    margin: -6px calc(-1 * var(--button-sides)) 0 !important;
 
     & > form {
         margin: unset;

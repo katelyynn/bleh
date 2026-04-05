@@ -382,12 +382,9 @@ export function bleh_profiles() {
         page.state.scrobbles = scrobbles;
         page.state.artists = artists;
         page.state.loved = loved;
+        page.state.average = average;
 
         profile_summary(recent_tracks, top_artists);
-
-        const date = new Date();
-        const year = date.getFullYear();
-        const month = date.getMonth() + 1;
 
         let scrobble_text;
         let listen_container = html.node`
@@ -406,27 +403,6 @@ export function bleh_profiles() {
                         <p><a href="${root}user/${page.name}/loved">${loved.toLocaleString(lang)}</a></p>
                     </div>
                 </div>
-                ${scrobbles > 0 ? html.node`
-                <div class="scrobble-canvas-container mini icon-mask">
-                    <div class="loading-data-container">
-                        <div class="loading-data-text">${tl(trans.loading_count_days).replace('{c}', '90')}</div>
-                    </div>
-                </div>
-                <div class="bottom-card-links">
-                    <a class="this-month see-more left-icon" href="${root}user/${page.name}/library?from=${year}-${month}-01&rangetype=1month">
-                        ${tl(trans.value_this_month, { v: 0 })}
-                    </a>
-                    <a class="see-more" href="${root}user/${page.name}/library/artists?date_preset=LAST_90_DAYS&page=1">
-                        ${tl(trans.explore_in_library)}
-                    </a>
-                </div>
-                ` : auth.name ? html.node`
-                <div class="scrobble-canvas-container mini icon-mask">
-                    <div class="loading-data-container">
-                        <div class="loading-data-text failed">${tl(trans.profile_does_not_have_enough_scrobbles)}</div>
-                    </div>
-                </div>
-                ` : html.node``}
             </section>
         `;
 
@@ -447,8 +423,6 @@ export function bleh_profiles() {
                     listen_container,
                     page.structure.main.firstChild
                 );
-
-            if (scrobbles > 0 && auth.name) bleh_profile_chart();
         }
 
         // secondary text
@@ -1634,147 +1608,6 @@ function bio_parse(text, cache = true, take_effect = true) {
     }
 
     return body;
-}
-
-function bleh_profile_chart() {
-    let panel = page.structure.row.querySelector('.listen-panel');
-    let table = panel.querySelector('table');
-
-    if (table) {
-        bleh_profile_chart_render(panel, table);
-        return;
-    }
-
-    lazy(panel, () => {
-        fetch(`${root}user/${page.name}/library/artists/chart?date_preset=LAST_90_DAYS&page=1&ajax=1`)
-            .then(function (response) {
-                console.log(
-                    'glacier library returned',
-                    response,
-                    response.text,
-                    response.status
-                );
-
-                if (response.status != 200) throw new Error();
-
-                return response.text();
-            })
-            .then(function (html) {
-                let doc = new DOMParser().parseFromString(
-                    html,
-                    'text/html'
-                );
-                console.log(
-                    'glacier library DOC',
-                    doc,
-                    doc.querySelector('.table')
-                );
-
-                log('received response', 'glacier library');
-
-                table = doc.querySelector('.table');
-
-                if (table) {
-                    panel.appendChild(table);
-                    bleh_profile_chart_render(panel, table);
-                } else {
-                    log('table is null?', 'glacier library', 'error');
-                    console.info('glacier library', doc.body.innerHTML);
-                    console.info(
-                        'glacier library',
-                        new DOMParser().parseFromString(
-                            doc.body.innerHTML,
-                            'text/html'
-                        )
-                    );
-                }
-            });
-    }, { threshold: 0.3, rootMargin: '0px' });
-}
-
-export function bleh_profile_chart_render(
-    panel = page.structure.side?.querySelector('.listen-profile-panel'),
-    table = null
-) {
-    if (!panel) return;
-
-    if (!table) table = panel.querySelector('table');
-    if (!table) return;
-
-    let entries = table.querySelectorAll('tbody tr');
-
-    if (entries.length == 0) return;
-
-    let labels = [];
-    let links = [];
-    let values = [];
-
-    page.state.glacier.links = [];
-    entries.forEach((entry) => {
-        let period = entry.querySelector('.js-period a');
-        let value = entry.querySelector('.js-scrobbles').textContent.trim();
-
-        labels.push(period.textContent.trim());
-        links.push(period.getAttribute('href'));
-        values.push(value);
-
-        page.state.glacier.links.push(
-            `${root}user/${page.name}/library` + period.getAttribute('href')
-        );
-    });
-
-    const last_month = parseInt(values[values.length - 2]);
-    const this_month = parseInt(values[values.length - 1]);
-    const diff = this_month - last_month;
-
-    render(panel.querySelector('.this-month'), html`
-        ${tl(trans.value_this_month, { v: this_month.toLocaleString(lang) })}
-        ${!Number.isNaN(diff) ? html.node`<span class="diff">(${tl(trans[diff > 0 ? 'value_more' : 'value_less'], { v: diff > 0 ? diff.toLocaleString(lang) : Math.abs(diff).toLocaleString(lang) })})</span>` : ''}
-    `);
-
-    prep_chart_colours();
-
-    let scrobble_canvas_container = panel.querySelector(
-        '.scrobble-canvas-container'
-    );
-    scrobble_canvas_container.innerHTML = '';
-
-    let scrobble_canvas = document.createElement('canvas');
-    scrobble_canvas.classList.add('scrobble-canvas');
-
-    let gradient = scrobble_canvas
-        .getContext('2d')
-        .createLinearGradient(0, 0, 0, 160);
-    try {
-        gradient.addColorStop(0, page.state.chart_colours.link_bg_col);
-        gradient.addColorStop(1, page.state.chart_colours.link_bg_col_2);
-    } catch (e) {
-        gradient = page.state.chart_colours.link_bg_col;
-    }
-
-    Chart.defaults.color = page.state.chart_colours.text_col;
-    Chart.defaults.font.family = page.state.chart_colours.font;
-    let scrobble_chart = new Chart(scrobble_canvas.getContext('2d'), {
-        type: 'line',
-        data: {
-            labels: labels,
-            datasets: [
-                {
-                    data: values,
-                    borderWidth: 2,
-                    backgroundColor: gradient,
-                    borderColor: page.state.chart_colours.link_col,
-                    fill: true,
-                    pointRadius: 0,
-                    pointHitRadius: 20,
-                    tension: 0.1
-                }
-            ]
-        },
-        options: page.state.chart_library_line_options_mini
-    });
-
-    scrobble_canvas_container.appendChild(scrobble_canvas);
 }
 
 export function save_profile_cache(

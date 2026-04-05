@@ -11,7 +11,6 @@ import {
     bleh_glacier_library_open_index
 } from "@/pages/profile/glacier.js";
 import {bleh_music_page_charts} from "./music.js";
-import {bleh_profile_chart_render} from "@/pages/profile/profile";
 
 export function chart_reflow() {
     if (!document.body) return;

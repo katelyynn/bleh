@@ -1,16 +1,31 @@
-import { page, root } from '@/build/page';
+import { auth, page, root } from '@/build/page';
 import { lang, tl, trans } from '@/build/trans';
-import { html } from 'lighterhtml';
+import { html, render } from 'lighterhtml';
 import { icon, icons } from '../shared/icon';
 import tippy from 'tippy.js';
+import { prep_chart_colours } from '../music/chart';
+import { Chart } from 'chart.js';
+import { log } from '@/build/log';
 
 export function profile_summary(recent_tracks: Element | undefined, top_artists: Element | undefined) {
     let graph_blocks: HTMLElement[] = [];
 
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+
+    let title;
+    let graph_container;
+
     const panel = html.node`
         <section class="profile-summary">
             <div class="top-container">
-                <h2>{v} scrobbles recently</h2>
+                <h2 class="summary-title" ref=${el => title = el}>${tl(trans.value_scrobbles_recently, { v: 0 })}</h2>
+                <div class="summary-blocks">
+                    ${summary_block('scrobbles', page.state.scrobbles)}
+                    ${summary_block('artists', page.state.artists)}
+                    ${summary_block('loved', page.state.loved)}
+                </div>
             </div>
             <div class="summary-main">
                 <div class="graph-blocks">
@@ -22,16 +37,47 @@ export function profile_summary(recent_tracks: Element | undefined, top_artists:
                         return elem;
                     })}
                 </div>
-            </div>
-            <div class="summary-blocks">
-                ${summary_block('scrobbles', page.state.scrobbles)}
-                ${summary_block('artists', page.state.artists)}
-                ${summary_block('loved', page.state.loved)}
+                <div class="summary-sep" />
+                <div class="month-graph" ref=${el => graph_container = el}>
+                    ${page.state.scrobbles > 0 ? html.node`
+                    <div class="scrobble-canvas-container mini icon-mask">
+                        <div class="loading-data-container">
+                            <div class="loading-data-text">${tl(trans.loading_count_days).replace('{c}', '90')}</div>
+                        </div>
+                    </div>
+                    <div class="bottom-card-links" style="display: none">
+                        <a class="this-month see-more left-icon" href="${root}user/${page.name}/library?from=${year}-${month}-01&rangetype=1month">
+                            ${tl(trans.value_this_month, { v: 0 })}
+                        </a>
+                        <a class="see-more" href="${root}user/${page.name}/library/artists?date_preset=LAST_90_DAYS&page=1">
+                            ${tl(trans.explore_in_library)}
+                        </a>
+                    </div>
+                    ` : auth.name ? html.node`
+                    <div class="scrobble-canvas-container mini icon-mask">
+                        <div class="loading-data-container">
+                            <div class="loading-data-text failed">${tl(trans.profile_does_not_have_enough_scrobbles)}</div>
+                        </div>
+                    </div>
+                    ` : html.node``}
+                </div>
             </div>
         </section>
     `;
 
     page.structure.main!.insertBefore(panel, page.structure.main!.firstChild);
+
+    /*
+
+    if (top_artists) {
+        page.structure.main!.insertBefore(panel, top_artists);
+    } else if (recent_tracks) {
+        recent_tracks.after(panel);
+    } else {
+        page.structure.main!.insertBefore(panel, page.structure.main!.firstChild);
+    }
+
+    */
 
     fetch_30_day();
 
@@ -48,12 +94,19 @@ export function profile_summary(recent_tracks: Element | undefined, top_artists:
                 const table = doc.querySelector('table');
                 if (!table) throw new Error();
 
+                let sum = 0;
+
                 const entries = table.querySelectorAll('tbody tr');
                 entries.forEach((entry, i) => {
+                    if (i == 0) {
+                        return;
+                    }
+
                     const period = entry.querySelector('.js-period a')?.textContent.trim();
                     const value = Number(entry.querySelector('.js-scrobbles')?.textContent.trim());
 
-                    const elem = graph_blocks[i];
+                    const elem = graph_blocks[i - 1];
+                    if (!elem) return;
 
                     if (value > 0) {
                         elem.classList.remove('empty');
@@ -62,24 +115,20 @@ export function profile_summary(recent_tracks: Element | undefined, top_artists:
 
                         elem.classList.add(`level-${level}`);
                         //elem.textContent = level;
+
+                        sum += value;
                     }
 
                     tippy(elem, {
                         content: `${period}: ${value}`
                     });
                 });
+
+                title.textContent = tl(trans.value_scrobbles_recently, { v: sum.toLocaleString(lang) });
             });
     }
 
-    return;
-
-    if (top_artists) {
-        page.structure.main!.insertBefore(panel, top_artists);
-    } else if (recent_tracks) {
-        recent_tracks.after(panel);
-    } else {
-        page.structure.main!.insertBefore(panel, page.structure.main!.firstChild);
-    }
+    if (page.state.scrobbles > 0 && auth.name) bleh_profile_chart(graph_container);
 }
 
 function create_graph_block(index: number) {
@@ -117,7 +166,7 @@ function summary_block(type: string, value: number) {
         icon_name = icons.loved;
     }
 
-    return html.node`
+    const elem = html.node`
         <div class="summary-block">
             <div class="summary-icon">
                 ${icon({ name: icon_name, identifier: 'summary' })}
@@ -128,4 +177,184 @@ function summary_block(type: string, value: number) {
             </div>
         </div>
     `;
+
+    if (type == 'scrobbles') {
+        tippy(elem, {
+            content: page.state.average
+        });
+    }
+
+    return elem;
+}
+
+function bleh_profile_chart(panel: HTMLElement) {
+    let table = panel.querySelector('table');
+
+    if (table) {
+        bleh_profile_chart_render(panel, table);
+        return;
+    }
+
+    fetch(`${root}user/${page.name}/library/artists/chart?date_preset=LAST_90_DAYS&page=1&ajax=1`)
+        .then(function (response) {
+            console.log(
+                'glacier library returned',
+                response,
+                response.text,
+                response.status
+            );
+
+            if (response.status != 200) throw new Error();
+
+            return response.text();
+        })
+        .then(function (html) {
+            let doc = new DOMParser().parseFromString(
+                html,
+                'text/html'
+            );
+            console.log(
+                'glacier library DOC',
+                doc,
+                doc.querySelector('.table')
+            );
+
+            log('received response', 'glacier library');
+
+            table = doc.querySelector('.table');
+
+            if (table) {
+                panel.appendChild(table);
+                bleh_profile_chart_render(panel, table);
+            } else {
+                log('table is null?', 'glacier library', 'error');
+                console.info('glacier library', doc.body.innerHTML);
+                console.info(
+                    'glacier library',
+                    new DOMParser().parseFromString(
+                        doc.body.innerHTML,
+                        'text/html'
+                    )
+                );
+            }
+        });
+}
+
+export function bleh_profile_chart_render(
+    panel = page.structure.main!.querySelector('.month-graph'), table: HTMLTableElement
+) {
+    if (!panel || !table) return;
+
+    let entries = table.querySelectorAll('tbody tr');
+
+    if (entries.length == 0) return;
+
+    let labels = [];
+    let links = [];
+    let values = [];
+
+    page.state.glacier.links = [];
+    entries.forEach((entry) => {
+        let period = entry.querySelector('.js-period a');
+        let value = entry.querySelector('.js-scrobbles').textContent.trim();
+
+        labels.push(period.textContent.trim());
+        links.push(period.getAttribute('href'));
+        values.push(value);
+
+        page.state.glacier.links.push(
+            `${root}user/${page.name}/library` + period.getAttribute('href')
+        );
+    });
+
+    const last_month = parseInt(values[values.length - 2]);
+    const this_month = parseInt(values[values.length - 1]);
+    const diff = this_month - last_month;
+
+    render(panel.querySelector('.this-month'), html`
+        ${tl(trans.value_this_month, { v: this_month.toLocaleString(lang) })}
+        ${!Number.isNaN(diff) ? html.node`<span class="diff">(${tl(trans[diff > 0 ? 'value_more' : 'value_less'], { v: diff > 0 ? diff.toLocaleString(lang) : Math.abs(diff).toLocaleString(lang) })})</span>` : ''}
+    `);
+
+    prep_chart_colours();
+
+    let scrobble_canvas_container = panel.querySelector(
+        '.scrobble-canvas-container'
+    );
+    scrobble_canvas_container.innerHTML = '';
+
+
+    let scrobble_canvas = document.createElement('canvas');
+    scrobble_canvas.classList.add('scrobble-canvas', 'monthly-canvas');
+
+    let gradient = scrobble_canvas.getContext('2d').createLinearGradient(0, 0, 0, 160);
+    try {
+        gradient.addColorStop(0, page.state.chart_colours.link_bg_col);
+        gradient.addColorStop(1, page.state.chart_colours.link_bg_col_2);
+    } catch (e) {
+        gradient = page.state.chart_colours.link_bg_col;
+    }
+
+    Chart.defaults.color = page.state.chart_colours.text_col;
+    Chart.defaults.font.family = page.state.chart_colours.font;
+    let scrobble_chart = new Chart(scrobble_canvas.getContext('2d'), {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    data: values,
+                    borderWidth: 2,
+                    backgroundColor: gradient,
+                    borderColor: page.state.chart_colours.link_col,
+                    fill: true,
+                    pointRadius: 0,
+                    pointHitRadius: 20,
+                    tension: 0.1
+                }
+            ]
+        },
+        options: page.state.chart_library_line_options_mini
+    });
+
+    scrobble_canvas_container.appendChild(html.node`
+        <div class="monthly-chart-line">
+            ${scrobble_canvas}
+        </div>
+    `);
+
+    //
+
+    let scrobble_canvas_2 = document.createElement('canvas');
+    scrobble_canvas_2.classList.add('scrobble-canvas', 'monthly-canvas-pie');
+
+    let scrobble_chart_2 = new Chart(scrobble_canvas_2.getContext('2d'), {
+        type: 'pie',
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    data: values,
+                    borderWidth: 2,
+                    backgroundColor: [
+                        `hsl(${page.state.chart_colours.link_h_col.replace(page.state.chart_colours.hue, '360')})`,
+                        `hsl(${page.state.chart_colours.link_h_col.replace(page.state.chart_colours.hue, '340')})`,
+                        `hsl(${page.state.chart_colours.link_h_col.replace(page.state.chart_colours.hue, '320')})`,
+                        `hsl(${page.state.chart_colours.link_h_col.replace(page.state.chart_colours.hue, '300')})`
+                    ],
+                    borderColor: page.state.chart_colours.bg_col,
+                    pointRadius: 0,
+                    pointHitRadius: 20,
+                    tension: 0.1
+                }
+            ]
+        },
+        options: page.state.chart_library_pie_options
+    });
+
+    scrobble_canvas_container.appendChild(html.node`
+        <div class="monthly-chart-pie">
+            ${scrobble_canvas_2}
+        </div>
+    `);
 }

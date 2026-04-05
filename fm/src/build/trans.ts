@@ -10363,6 +10363,9 @@ export const trans: translations = {
     },
     no_tracks_found_mb: {
         en: 'No tracks found, possibly a MusicBrainz error'
+    },
+    value_scrobbles_recently: {
+        en: '{v} scrobbles recently'
     }
 };
 

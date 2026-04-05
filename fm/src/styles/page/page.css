@@ -240,7 +240,7 @@
 
     & > form > section,
     & > div,
-    & > section {
+    & > section:not(.side-actions) {
         margin-top: unset !important;
     }
 
