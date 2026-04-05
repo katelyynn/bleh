@@ -53955,7 +53955,7 @@
           document.body.style.setProperty("--hue-album", hue4);
           document.body.style.setProperty("--sat-album", sat);
           document.body.style.setProperty("--lit-album", lit);
-          load_chart_colours();
+          chart_reflow();
         }
         if (apply_to_elem instanceof HTMLElement) {
           apply_to_elem.style.setProperty("--hue-over", hue4);

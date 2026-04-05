@@ -1,5 +1,5 @@
 import { log } from '@/build/log';
-import { load_chart_colours } from '../music/chart';
+import { chart_reflow, load_chart_colours } from '../music/chart';
 import { clamp_lit, clamp_sat, rgb_to_hsl } from '@/build/tools';
 import ColorThief from 'color-thief-browser';
 
@@ -20,7 +20,7 @@ export function header_colour(source: HTMLImageElement, apply_to_page = false, a
                 document.body.style.setProperty('--sat-album', sat);
                 document.body.style.setProperty('--lit-album', lit);
 
-                load_chart_colours();
+                chart_reflow();
             }
 
             if (apply_to_elem instanceof HTMLElement) {
