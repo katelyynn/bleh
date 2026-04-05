@@ -62177,25 +62177,22 @@
       set_storage("bleh_oracle_cache", JSON.stringify(oracle_cache));
     }
     if (page.subpage == "overview" || page.subpage == "albums") {
-      page.structure.main.insertBefore(
-        html.node`
-                <section class="oracle-notice">
-                    <div class="oracle" data-mobile=${page.mobile}>
-                        <p class="oracle-message">
-                            <span class="bleh-icon" />
-                            <span>${{ html: tl2(trans.oracle_notice).replace("oracle", '<i class="oracle-name">oracle</i>') }}</span>
-                        </p>
-                        <button class="see-more left-icon oracle-button" data-type="debug" onclick=${() => oracle_debug()}>
-                            ${tl2(trans.debug)}
-                        </button>
-                        <a class="see-more oracle-button" href="https://github.com/katelyynn/bleh/issues/new/choose" target="_blank">
-                            ${tl2(trans.send_feedback)}
-                        </a>
-                    </div>
-                </section>
-            `,
-        page.structure.main.firstChild
-      );
+      page.structure.side.appendChild(html.node`
+            <section class="oracle-notice">
+                <div class="oracle" data-mobile=${page.mobile}>
+                    <p class="oracle-message">
+                        <span class="bleh-icon" />
+                        <span>${{ html: tl2(trans.oracle_notice).replace("oracle", '<i class="oracle-name">oracle</i>') }}</span>
+                    </p>
+                    <button class="see-more left-icon oracle-button" data-type="debug" onclick=${() => oracle_debug()}>
+                        ${tl2(trans.debug)}
+                    </button>
+                    <a class="see-more oracle-button" href="https://github.com/katelyynn/bleh/issues/new/choose" target="_blank">
+                        ${tl2(trans.send_feedback)}
+                    </a>
+                </div>
+            </section>
+        `);
     }
     const header = page.structure.container.querySelector(".page-header");
     let releases_panel;
@@ -65098,7 +65095,7 @@
     }
     if (!settings.corrections) return;
     page.structure.side.appendChild(html.node`
-        <section class="lotus cta">
+        <section class="lotus cta colourful">
             <strong>${tl2(trans.lotus_cta[page.corrected]).replace("{t}", tl2(trans[`${page.type}_lower`]))}</strong>
             ${ff("refreshed_lotus") ? html.node`
                 <button class="see-more" onclick=${() => create_correction(page.type)}>${tl2(trans.suggest_correction)}</button>

@@ -2,8 +2,7 @@
 @import './tracklist.css';
 
 .oracle-notice {
-    margin-bottom: calc(-1 * var(--card-padding-v));
-    order: -11;
+    order: 11;
 }
 .oracle {
     display: flex;
@@ -26,23 +25,15 @@
         cursor: default;
     }
 
-    background: linear-gradient(180deg, oklch(var(--k4) / 25%), transparent);
-    padding: var(--card-padding);
-    margin: calc(-1 * var(--card-padding)) calc(-1 * var(--card-padding)) 0
-        calc(-1 * var(--card-padding));
-    border-top-left-radius: var(--card-radius);
+    background: oklch(var(--k4) / 20%);
+    padding: 10px 12px;
+    margin: 0 0 var(--card-gap) 0;
+    border-radius: var(--item-med-radius);
 
-    &[data-mobile="true"] {
-        background: oklch(var(--k4), 20%);
-        padding: var(--card-gap);
-        margin: 0 0 var(--card-gap) 0;
-        border-radius: var(--item-big-radius);
+    flex-wrap: wrap;
 
-        flex-wrap: wrap;
-
-        & > .oracle-message {
-            flex-basis: 100%;
-        }
+    & > .oracle-message {
+        flex-basis: 100%;
     }
 }
 

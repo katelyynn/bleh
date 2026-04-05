@@ -120,25 +120,22 @@ export function oracle_process() {
     }
 
     if (page.subpage == 'overview' || page.subpage == 'albums') {
-        page.structure.main.insertBefore(
-            html.node`
-                <section class="oracle-notice">
-                    <div class="oracle" data-mobile=${page.mobile}>
-                        <p class="oracle-message">
-                            <span class="bleh-icon" />
-                            <span>${{ html: tl(trans.oracle_notice).replace('oracle', '<i class="oracle-name">oracle</i>') }}</span>
-                        </p>
-                        <button class="see-more left-icon oracle-button" data-type="debug" onclick=${() => oracle_debug()}>
-                            ${tl(trans.debug)}
-                        </button>
-                        <a class="see-more oracle-button" href="https://github.com/katelyynn/bleh/issues/new/choose" target="_blank">
-                            ${tl(trans.send_feedback)}
-                        </a>
-                    </div>
-                </section>
-            `,
-            page.structure.main.firstChild
-        );
+        page.structure.side!.appendChild(html.node`
+            <section class="oracle-notice">
+                <div class="oracle" data-mobile=${page.mobile}>
+                    <p class="oracle-message">
+                        <span class="bleh-icon" />
+                        <span>${{ html: tl(trans.oracle_notice).replace('oracle', '<i class="oracle-name">oracle</i>') }}</span>
+                    </p>
+                    <button class="see-more left-icon oracle-button" data-type="debug" onclick=${() => oracle_debug()}>
+                        ${tl(trans.debug)}
+                    </button>
+                    <a class="see-more oracle-button" href="https://github.com/katelyynn/bleh/issues/new/choose" target="_blank">
+                        ${tl(trans.send_feedback)}
+                    </a>
+                </div>
+            </section>
+        `);
     }
 
     const header = page.structure.container.querySelector('.page-header');

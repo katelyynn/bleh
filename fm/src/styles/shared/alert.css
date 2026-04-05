@@ -108,7 +108,7 @@
 .big-modal-alert,
 .cta {
     background: var(--card-specific-background) !important;
-    border-radius: var(--card-radius);
+    border-radius: var(--item-med-radius) !important;
     --card-specific-background: oklch(var(--f4) / 15%);
     padding: 10px 12px !important;
     box-shadow: unset !important;

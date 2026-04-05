@@ -706,7 +706,7 @@ u,
 
     --grid-colour-shadow: var(
         --grid-colour-shadow-override,
-        0 24px 20px oklch(var(--h4) / 10%)
+        0 10px 30px oklch(var(--h4) / 35%)
     );
 
     --opposite-text: var(--b6);
@@ -778,7 +778,7 @@ u,
 
         --grid-colour-shadow: var(
             --grid-colour-shadow-override,
-            0 24px 20px oklch(var(--h4) / 16%)
+            0 10px 30px oklch(var(--h4) / 35%)
         );
     }
     &[data-bleh--theme="light"],
@@ -829,7 +829,7 @@ u,
 
         --grid-colour-shadow: var(
             --grid-colour-shadow-override,
-            0 27px 15px oklch(var(--h4) / 18%)
+            0 10px 30px oklch(var(--h4) / 45%)
         );
 
         --opposite-text: var(--c1);

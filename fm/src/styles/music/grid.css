@@ -131,7 +131,7 @@
     }
 
     &.generic-cover {
-        --grid-colour-shadow: 0 27px 15px oklch(var(--b4) / 40%);
+        --grid-colour-shadow-override: 0 10px 30px oklch(var(--b2) / 20%);
     }
 
     --shadow: rgba(0, 0, 0, 0.2);
@@ -267,11 +267,7 @@
     border-top-right-radius: 12px;
 
     &[style] {
-        background: color-mix(
-            in oklch,
-            oklch(var(--h4)) 60%,
-            black 70%
-        ) !important;
+        background: oklch(var(--h4) / 80%) !important;
     }
 }
 

@@ -1143,7 +1143,7 @@ export async function show_your_scrobbles() {
     if (!settings.corrections) return;
 
     page.structure.side.appendChild(html.node`
-        <section class="lotus cta">
+        <section class="lotus cta colourful">
             <strong>${tl(trans.lotus_cta[page.corrected]).replace('{t}', tl(trans[`${page.type}_lower`]))}</strong>
             ${
                 ff('refreshed_lotus') ?
