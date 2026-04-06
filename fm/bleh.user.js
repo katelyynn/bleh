@@ -69344,6 +69344,7 @@
     });
     links.appendChild(more_button);
     const state = page.state.seasons;
+    console.info("season", state);
     let bleh_container = html.node`
         <a class="btn masthead-nav-control icon chibi" href="${root}bleh" data-label="bleh" data-season="none">
             ${tl2(trans.bleh_settings)}
@@ -77984,7 +77985,15 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
 
   // src/components/seasonal.ts
   function set_season() {
-    if (!settings.seasonal) return;
+    if (!settings.seasonal) {
+      page.state.seasons = {
+        now: DateTime.local(),
+        current: null,
+        prev: null,
+        next: null
+      };
+      return;
+    }
     const last_season_seen = localStorage.getItem(STORAGE_LAST_SEASON_SEEN) || "";
     const state = get_season_state();
     page.state.seasons = state;

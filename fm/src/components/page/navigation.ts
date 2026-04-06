@@ -430,6 +430,7 @@ export function append_nav() {
     links.appendChild(more_button);
 
     const state = page.state.seasons;
+    console.info('season', state);
 
     // configure bleh
     let bleh_container = html.node`

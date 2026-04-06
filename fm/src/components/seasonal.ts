@@ -30,7 +30,15 @@ export interface season {
 }
 
 export function set_season() {
-    if (!settings.seasonal) return;
+    if (!settings.seasonal) {
+        page.state.seasons = {
+            now: DateTime.local(),
+            current: null,
+            prev: null,
+            next: null
+        }
+        return;
+    }
 
     const last_season_seen = localStorage.getItem(STORAGE_LAST_SEASON_SEEN) || '';
 

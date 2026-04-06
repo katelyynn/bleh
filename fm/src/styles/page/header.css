@@ -15,8 +15,6 @@
 
     --page-header-avatar-size: 170px;
     --page-header-avatar-radius: var(--item-big-radius);
-
-    contain: layout;
 }
 
 .page-header {
@@ -26,6 +24,8 @@
     align-items: center;
     gap: calc(var(--card-gap) + var(--card-padding));
     width: var(--cards-width);
+
+    contain: layout;
 
     &.for-profile {
         --page-header-avatar-radius: var(--avatar-radius);
