@@ -16,7 +16,7 @@ import {html, render} from "lighterhtml";
 import {ff} from "@/components/settings/sku";
 import { load_profile_cache_externally } from '@/pages/profile/profile';
 import { correct_artist, correct_item_by_artist, name_includes, smart_artists, smart_title } from "@/components/music/lotus";
-import { romanise, sanitise } from "@/build/tools.js";
+import { romanise, sanitise } from "@/build/tools";
 import { redirect } from "@/components/music/music";
 import { settings } from "@/build/config";
 import { avatar, expand_avatar } from "@/components/shared/avatar";

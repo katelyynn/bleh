@@ -603,6 +603,28 @@ export async function render_setting_page(page_id) {
                     <div
                         class="setting"
                         data-type="info"
+                    >
+                        <div class="heading">
+                            <h5>${tl(trans.current_version)}</h5>
+                        </div>
+                        <div class="info">
+                            <p>
+                                ${artist_corrections.version ==
+                album_track_corrections.version
+                ? artist_corrections.version
+                : `${artist_corrections.version}, ${album_track_corrections.version}`}
+                            </p>
+                            <button
+                                class="see-more update-check left-icon"
+                                onclick="_lotus_check()"
+                            >
+                                ${tl(trans.update_check)}
+                            </button>
+                        </div>
+                    </div>
+                    <div
+                        class="setting"
+                        data-type="info"
                         disabled=${!artist_corrections.version ||
             !album_track_corrections.version}
                     >
@@ -620,30 +642,6 @@ export async function render_setting_page(page_id) {
                                 onclick="_open_correction_modal()"
                             >
                                 ${tl(trans.view_all)}
-                            </button>
-                        </div>
-                    </div>
-                    <div
-                        class="setting"
-                        data-type="info"
-                        disabled=${!artist_corrections.version ||
-            !album_track_corrections.version}
-                    >
-                        <div class="heading">
-                            <h5>${tl(trans.current_version)}</h5>
-                        </div>
-                        <div class="info">
-                            <p>
-                                ${artist_corrections.version ==
-                album_track_corrections.version
-                ? artist_corrections.version
-                : `${artist_corrections.version}, ${album_track_corrections.version}`}
-                            </p>
-                            <button
-                                class="see-more update-check left-icon"
-                                onclick="_lotus_check()"
-                            >
-                                ${tl(trans.update_check)}
                             </button>
                         </div>
                     </div>

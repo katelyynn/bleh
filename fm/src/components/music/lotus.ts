@@ -15,6 +15,8 @@ import {
 import { page, root } from '@/build/page';
 import {
     desanitise,
+    get_storage,
+    parse_object,
     return_artist_from_generic,
     romanise,
     sanitise,
@@ -126,7 +128,7 @@ export function lotus(force = false) {
 
 function parse(value: {}, key: string, type: string) {
     try {
-        Object.assign(value, JSON5.parse(key));
+        Object.assign(value, parse_object(type, key));
     } catch (e) {
         notify({
             title: `Loading of lotus ${type} data failed`,
@@ -161,14 +163,11 @@ function lotus_request(type = 'artist', send_notify = false, refresh_page = fals
 
         if (xhr.status == 200) {
             if (type == 'artist') {
-                Object.assign(artist_corrections, JSON5.parse(this.response));
+                parse(artist_corrections, this.response, 'artist');
             } else if (type == 'album_track') {
-                Object.assign(
-                    album_track_corrections,
-                    JSON5.parse(this.response)
-                );
+                parse(album_track_corrections, this.response, 'album_track');
             } else {
-                Object.assign(combined_artists, JSON5.parse(this.response));
+                parse(combined_artists, this.response, 'combined_artists');
             }
 
             if (send_notify)

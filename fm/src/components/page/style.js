@@ -12,7 +12,7 @@ import { chart_reflow } from '@/components/music/chart';
 import { dialog, dialog_rm } from '@/components/dialog/dialog';
 import { invoke_reload } from '@/config';
 import { version } from '@/main';
-import { download_with_progress, set_storage } from '@/build/tools.js';
+import { download_with_progress, set_storage } from '@/build/tools';
 import cropper_css from 'cropperjs/dist/cropper.min.css';
 import { root } from '@/build/page';
 

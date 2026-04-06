@@ -15,6 +15,7 @@ import { DateTime } from 'luxon';
 import { status } from '@/components/dialog/status.js';
 import { root } from '@/build/page';
 import { oklch } from 'culori';
+import JSON5 from 'json5';
 
 // https://stackoverflow.com/questions/46432335/hex-to-hsl-convert-javascript
 /**
@@ -535,7 +536,7 @@ export function int_from_string(string) {
     return string;
 }
 
-export function set_storage(key, val) {
+export function set_storage(key: string, val: string) {
     try {
         localStorage.setItem(key, val);
         log(`set ${key}`, 'storage', 'info', { key, val });
@@ -545,6 +546,19 @@ export function set_storage(key, val) {
         notify({
             id: 'storage',
             title: `Failed to set ${key}`,
+            body: e.message ? e.message : e,
+            type: 'error',
+            persist: true
+        });
+    }
+}
+
+export function parse_object(key: string, value: string) {
+    try {
+        return JSON5.parse(value);
+    } catch (e) {
+        notify({
+            title: `Failed to parse ${key}`,
             body: e.message ? e.message : e,
             type: 'error',
             persist: true
