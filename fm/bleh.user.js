@@ -53733,10 +53733,14 @@
           if (i == 0) {
             return;
           }
-          const period = entry.querySelector(".js-period a")?.textContent.trim();
+          const period = entry.querySelector(".js-period a");
           const value = Number(entry.querySelector(".js-scrobbles")?.textContent.trim());
           const elem = graph_blocks[i - 1];
           if (!elem) return;
+          const link = `${root}user/${page.name}/library${period?.getAttribute("href")}`;
+          elem.href = link;
+          const url = new URL(`https://www.last.fm${link}`);
+          const date2 = DateTime.fromISO(url.searchParams.get("from") || "");
           if (value > 0) {
             elem.classList.remove("empty");
             const level = graph_block_level(value);
@@ -53744,7 +53748,7 @@
             sum += value;
           }
           tippy_esm_default(elem, {
-            content: `${period}: ${value}`
+            content: `${date2.toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY)}: ${value.toLocaleString(lang)}`
           });
         });
         title.textContent = tl2(trans.value_scrobbles_recently, { v: sum.toLocaleString(lang) });
@@ -53754,7 +53758,7 @@
   }
   function create_graph_block(index3) {
     return html.node`
-        <div class="graph-block empty" style="--delay: ${index3 * 0.04 + "s"}" />
+        <a class="graph-block empty" style="--delay: ${index3 * 0.04 + "s"}" />
     `;
   }
   function graph_block_level(value) {
@@ -60846,7 +60850,7 @@
         sum += value;
       }
       tippy_esm_default(elem, {
-        content: `${label.toLocaleString(DateTime.DATE_SHORT)}: ${value.toLocaleString(lang)}`
+        content: `${label.toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY)}: ${value.toLocaleString(lang)}`
       });
     });
     title.textContent = tl2(trans.value_scrobbles_recently, { v: sum.toLocaleString(lang) });

@@ -239,7 +239,7 @@ function fill_graph_blocks(labels: DateTime[], values: number[]) {
         }
 
         tippy(elem, {
-            content: `${label.toLocaleString(DateTime.DATE_SHORT)}: ${value.toLocaleString(lang)}`
+            content: `${label.toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY)}: ${value.toLocaleString(lang)}`
         });
     });
 

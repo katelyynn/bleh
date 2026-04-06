@@ -6,6 +6,7 @@ import tippy from 'tippy.js';
 import { prep_chart_colours } from '../music/chart';
 import { Chart } from 'chart.js';
 import { log } from '@/build/log';
+import { DateTime } from 'luxon';
 
 export function profile_summary(recent_tracks: Element | undefined, top_artists: Element | undefined) {
     let graph_blocks: HTMLElement[] = [];
@@ -102,11 +103,17 @@ export function profile_summary(recent_tracks: Element | undefined, top_artists:
                         return;
                     }
 
-                    const period = entry.querySelector('.js-period a')?.textContent.trim();
+                    const period = entry.querySelector('.js-period a');
                     const value = Number(entry.querySelector('.js-scrobbles')?.textContent.trim());
 
                     const elem = graph_blocks[i - 1];
                     if (!elem) return;
+
+                    const link = `${root}user/${page.name}/library${period?.getAttribute('href')}`;
+                    elem.href = link;
+
+                    const url = new URL(`https://www.last.fm${link}`);
+                    const date = DateTime.fromISO(url.searchParams.get('from') || '');
 
                     if (value > 0) {
                         elem.classList.remove('empty');
@@ -120,7 +127,7 @@ export function profile_summary(recent_tracks: Element | undefined, top_artists:
                     }
 
                     tippy(elem, {
-                        content: `${period}: ${value}`
+                        content: `${date.toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY)}: ${value.toLocaleString(lang)}`
                     });
                 });
 
@@ -133,7 +140,7 @@ export function profile_summary(recent_tracks: Element | undefined, top_artists:
 
 function create_graph_block(index: number) {
     return html.node`
-        <div class="graph-block empty" style="--delay: ${index * 0.04 + 's'}" />
+        <a class="graph-block empty" style="--delay: ${index * 0.04 + 's'}" />
     `;
 }
 
