@@ -253,6 +253,8 @@
         flex-direction: row;
         gap: var(--item-list-gap);
 
+        transform: unset !important;
+
         position: relative;
 
         &:before {
@@ -273,6 +275,10 @@
 
             color: oklch(var(--l3-c));
             filter: var(--taste-glow);
+        }
+
+        .listen-item-info {
+            flex-direction: column;
         }
 
         &.valentine {
