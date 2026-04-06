@@ -66,6 +66,13 @@
 
             opacity: 0.6;
         }
+
+        &.play-this-track-playlink--disabled {
+            &:after {
+                --mask: var(--icon-16-plus);
+                opacity: 1;
+            }
+        }
     }
 }
 .music-small-header {
