@@ -363,18 +363,27 @@
 .chartlist__placeholder-name {
     background: oklch(var(--b4) / 50%);
     border-radius: var(--item-med-radius);
-    height: 24px;
+    height: 16px;
+    animation: chartlist_loading 2s var(--trans-function-ani) infinite !important;
+}
+
+.chartlist__placeholder-image {
+    background: oklch(var(--b4) / 50%);
+    animation: chartlist_loading 2s var(--trans-function-ani) infinite !important;
 }
 
 .chartlist__placeholder-loading {
-    background-image: linear-gradient(
-        270deg,
-        oklch(var(--b4) / 0.05),
-        oklch(var(--b4) / 0.3),
-        oklch(var(--b4) / 0.6),
-        oklch(var(--b4) / 0.3),
-        oklch(var(--b4) / 0.05)
-    );
+    background: unset !important;
+    animation: none !important;
+}
+
+@keyframes chartlist_loading {
+    from, to {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
 }
 
 /*     ACTIVE     */
