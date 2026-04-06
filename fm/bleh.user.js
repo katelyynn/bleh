@@ -54238,7 +54238,7 @@
       page.state.artists = artists;
       page.state.loved = loved;
       page.state.average = average;
-      profile_summary(recent_tracks, top_artists);
+      if (page.name != sponsor_list.sponsor_account || is_own_profile) profile_summary(recent_tracks, top_artists);
       const profile_sub_text = redesigned_profile_header.querySelector(
         ".header-title-secondary"
       );
