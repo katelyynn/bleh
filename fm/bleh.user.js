@@ -91136,8 +91136,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
   // src/build/build.json
   var build_default = {
     brand: "bleh",
-    build: "2026.0227",
-    sku: "tokisaki",
+    build: "2026.0406",
+    sku: "kaguya",
     bio: "bleh!!! ^-^",
     author: "katelyn",
     url: "https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js",
