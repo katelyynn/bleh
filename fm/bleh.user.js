@@ -54186,17 +54186,20 @@
       if (!recent_tracks) {
         recent_tracks = page.structure.main.querySelector(".no-data-message");
         if (recent_tracks) {
-          recent_tracks.classList = "recent-tracks-section";
-          recent_tracks.innerHTML = `
-                    <h2>
-                        <a class="text-colour-link" href="${window.location.href}/library">${tl2(trans.recent_tracks)}</a>
-                    </h2>
-                    <div class="loading-data-container">
-                        <div class="loading-data-text private">
-                            ${recent_tracks.textContent}
+          const elem = html.node`
+                    <section class="recent-tracks-section">
+                        <h2>
+                            <a class="text-colour-link" href="${window.location.href}/library">${tl2(trans.recent_tracks)}</a>
+                        </h2>
+                        <div class="loading-data-container">
+                            <div class="loading-data-text private">
+                                ${recent_tracks.textContent}
+                            </div>
                         </div>
-                    </div>
+                    </section>
                 `;
+          recent_tracks.replaceWith(elem);
+          recent_tracks = elem;
         }
       }
       if (is_own_profile && settings.activities) {
