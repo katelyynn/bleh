@@ -247,7 +247,7 @@
         --bg-atv: oklch(var(--b4) / 60%) !important;
         --radius: var(--button-radius) !important;
         --padding: 6px var(--button-sides) 6px calc(var(--button-sides) + var(--icon-size) + 10px) !important;
-        margin: -6px calc(-1 * var(--button-sides)) calc(var(--card-padding) - 6px) !important;
+        margin: -6px calc(-1 * var(--button-sides)) 0 !important;
 
         align-items: unset;
         flex-direction: row;
