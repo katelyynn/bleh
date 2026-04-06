@@ -48,6 +48,10 @@
     display: flex;
     align-items: center;
     gap: 4px;
+
+    &[aria-describedby] {
+        text-decoration: underline dotted oklch(var(--c3) / 60%);
+    }
 }
 
 .summary-icon {

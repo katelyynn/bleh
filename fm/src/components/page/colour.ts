@@ -9,7 +9,7 @@ export function header_colour(source: HTMLImageElement, apply_to_page = false, a
             let thief = new ColorThief();
             let colour = thief.getColor(source);
 
-            let hsl = rgb_to_oklch(colour[0], colour[1], colour[2]);
+            let hsl = rgb_to_hsl(colour[0], colour[1], colour[2]);
 
             let hue = hsl.h;
             let sat = clamp_sat((hsl.s / 100) * 3);

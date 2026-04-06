@@ -53948,7 +53948,7 @@
       source.onload = () => {
         let thief = new import_color_thief_browser3.default();
         let colour = thief.getColor(source);
-        let hsl3 = rgb_to_oklch(colour[0], colour[1], colour[2]);
+        let hsl3 = rgb_to_hsl(colour[0], colour[1], colour[2]);
         let hue4 = hsl3.h;
         let sat = clamp_sat(hsl3.s / 100 * 3);
         let lit = clamp_lit(sat, hsl3.l / 100 + 0.35, true);
