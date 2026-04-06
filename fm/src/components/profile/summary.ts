@@ -90,48 +90,58 @@ export function profile_summary(recent_tracks: Element | undefined, top_artists:
                 return res.text();
             })
             .then((dom) => {
-                const doc = new DOMParser().parseFromString(dom, 'text/html');
+                try {
+                    const doc = new DOMParser().parseFromString(dom, 'text/html');
 
-                const table = doc.querySelector('table');
-                if (!table) throw new Error();
+                    const table = doc.querySelector('table');
+                    if (!table) throw new Error();
 
-                let sum = 0;
+                    const values: number[] = [];
 
-                const entries = table.querySelectorAll('tbody tr');
-                entries.forEach((entry, i) => {
-                    if (i == 0) {
-                        return;
-                    }
+                    const entries = table.querySelectorAll('tbody tr');
+                    entries.forEach((entry, i) => {
+                        const period = entry.querySelector('.js-period a');
+                        const value = Number(entry.querySelector('.js-scrobbles')?.textContent.trim());
 
-                    const period = entry.querySelector('.js-period a');
-                    const value = Number(entry.querySelector('.js-scrobbles')?.textContent.trim());
+                        const elem = graph_blocks[i - 1];
+                        if (!elem) return;
 
-                    const elem = graph_blocks[i - 1];
-                    if (!elem) return;
+                        const link = `${root}user/${page.name}/library${period?.getAttribute('href')}`;
+                        elem.href = link;
 
-                    const link = `${root}user/${page.name}/library${period?.getAttribute('href')}`;
-                    elem.href = link;
+                        const url = new URL(`https://www.last.fm${link}`);
+                        const date = DateTime.fromISO(url.searchParams.get('from') || '');
 
-                    const url = new URL(`https://www.last.fm${link}`);
-                    const date = DateTime.fromISO(url.searchParams.get('from') || '');
+                        values.push(value);
 
-                    if (value > 0) {
-                        elem.classList.remove('empty');
-
-                        const level = graph_block_level(value);
-
-                        elem.classList.add(`level-${level}`);
-                        //elem.textContent = level;
-
-                        sum += value;
-                    }
-
-                    tippy(elem, {
-                        content: `${date.toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY)}: ${value.toLocaleString(lang)}`
+                        tippy(elem, {
+                            content: `${date.toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY)}: ${value.toLocaleString(lang)}`
+                        });
                     });
-                });
 
-                title.textContent = tl(trans.value_scrobbles_recently, { v: sum.toLocaleString(lang) });
+                    let sum = 0;
+                    let max = Math.max(...values);
+                    let avg = values.reduce((sum, val) => sum + val, 0) / values.length;
+
+                    values.forEach((value, i) => {
+                        const elem = graph_blocks[i];
+                        if (!elem) return;
+
+                        if (value > 0) {
+                            elem.classList.remove('empty');
+
+                            const level = graph_block_level(value, max, avg);
+
+                            elem.classList.add(`level-${level}`);
+
+                            sum += value;
+                        }
+                    });
+
+                    title.textContent = tl(trans.value_scrobbles_recently, { v: sum.toLocaleString(lang) });
+                } catch (e) {
+                    throw new Error(e);
+                }
             });
     }
 
@@ -144,18 +154,11 @@ function create_graph_block(index: number) {
     `;
 }
 
-function graph_block_level(value: number) {
-    if (value <= 8) return 0;
-    if (value <= 16) return 1;
-    if (value <= 25) return 2;
-    if (value <= 34) return 3;
-    if (value <= 50) return 4;
-    if (value <= 80) return 5;
-    if (value <= 150) return 6;
-    if (value <= 240) return 7;
-    if (value <= 360) return 8;
+function graph_block_level(value: number, max: number, avg: number) {
+    if (max == 0) return 0;
 
-    return 9;
+    const normalized = value / (avg * 2);
+    return Math.min(9, Math.floor(normalized * 10));
 }
 
 function summary_block(type: string, value: number) {

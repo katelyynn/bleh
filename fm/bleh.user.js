@@ -53724,34 +53724,43 @@
         if (!res.ok) throw new Error();
         return res.text();
       }).then((dom) => {
-        const doc = new DOMParser().parseFromString(dom, "text/html");
-        const table = doc.querySelector("table");
-        if (!table) throw new Error();
-        let sum = 0;
-        const entries2 = table.querySelectorAll("tbody tr");
-        entries2.forEach((entry, i) => {
-          if (i == 0) {
-            return;
-          }
-          const period = entry.querySelector(".js-period a");
-          const value = Number(entry.querySelector(".js-scrobbles")?.textContent.trim());
-          const elem = graph_blocks[i - 1];
-          if (!elem) return;
-          const link = `${root}user/${page.name}/library${period?.getAttribute("href")}`;
-          elem.href = link;
-          const url = new URL(`https://www.last.fm${link}`);
-          const date2 = DateTime.fromISO(url.searchParams.get("from") || "");
-          if (value > 0) {
-            elem.classList.remove("empty");
-            const level = graph_block_level(value);
-            elem.classList.add(`level-${level}`);
-            sum += value;
-          }
-          tippy_esm_default(elem, {
-            content: `${date2.toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY)}: ${value.toLocaleString(lang)}`
+        try {
+          const doc = new DOMParser().parseFromString(dom, "text/html");
+          const table = doc.querySelector("table");
+          if (!table) throw new Error();
+          const values = [];
+          const entries2 = table.querySelectorAll("tbody tr");
+          entries2.forEach((entry, i) => {
+            const period = entry.querySelector(".js-period a");
+            const value = Number(entry.querySelector(".js-scrobbles")?.textContent.trim());
+            const elem = graph_blocks[i - 1];
+            if (!elem) return;
+            const link = `${root}user/${page.name}/library${period?.getAttribute("href")}`;
+            elem.href = link;
+            const url = new URL(`https://www.last.fm${link}`);
+            const date2 = DateTime.fromISO(url.searchParams.get("from") || "");
+            values.push(value);
+            tippy_esm_default(elem, {
+              content: `${date2.toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY)}: ${value.toLocaleString(lang)}`
+            });
           });
-        });
-        title.textContent = tl2(trans.value_scrobbles_recently, { v: sum.toLocaleString(lang) });
+          let sum = 0;
+          let max2 = Math.max(...values);
+          let avg = values.reduce((sum2, val) => sum2 + val, 0) / values.length;
+          values.forEach((value, i) => {
+            const elem = graph_blocks[i];
+            if (!elem) return;
+            if (value > 0) {
+              elem.classList.remove("empty");
+              const level = graph_block_level(value, max2, avg);
+              elem.classList.add(`level-${level}`);
+              sum += value;
+            }
+          });
+          title.textContent = tl2(trans.value_scrobbles_recently, { v: sum.toLocaleString(lang) });
+        } catch (e4) {
+          throw new Error(e4);
+        }
       });
     }
     if (page.state.scrobbles > 0 && auth.name) bleh_profile_chart(graph_container);
@@ -53761,17 +53770,10 @@
         <a class="graph-block empty" style="--delay: ${index3 * 0.04 + "s"}" />
     `;
   }
-  function graph_block_level(value) {
-    if (value <= 8) return 0;
-    if (value <= 16) return 1;
-    if (value <= 25) return 2;
-    if (value <= 34) return 3;
-    if (value <= 50) return 4;
-    if (value <= 80) return 5;
-    if (value <= 150) return 6;
-    if (value <= 240) return 7;
-    if (value <= 360) return 8;
-    return 9;
+  function graph_block_level(value, max2, avg) {
+    if (max2 == 0) return 0;
+    const normalized = value / (avg * 2);
+    return Math.min(9, Math.floor(normalized * 10));
   }
   function summary_block(type, value) {
     let text4;
