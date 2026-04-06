@@ -106,11 +106,6 @@
     }
 }
 
-.social-link,
-.resource-external-link--homepage:before {
-    --mask: var(--icon-16-link);
-}
-
 .replace-playlink {
     --mask: var(--icon-16-edit);
     opacity: unset;

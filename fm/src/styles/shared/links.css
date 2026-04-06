@@ -1,3 +1,8 @@
+.social-link,
+.resource-external-link--homepage {
+    --mask: var(--icon-16-link);
+}
+
 [data-host="facebook.com"],
 .resource-external-link--facebook {
     &.music-link {
