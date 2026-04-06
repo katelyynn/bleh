@@ -352,7 +352,7 @@ export async function show_your_scrobbles() {
                             <div class="bleh-icon" />
                         </div>
                         <div class="listen-item-info">
-                            <h3 class="listen-item-name">${shortcut_listens.name}</h3>
+                            <h3 class="listen-item-name"><span class="at">@</span>${shortcut_listens.name}</h3>
                             <p class="colourful listen-item-text icon-mask" ref=${(el) => (p = el)}>
                                 ${tl(trans.count_plays, { c: listens.toLocaleString(lang) })}
                             </p>
@@ -1170,7 +1170,7 @@ function create_listen_item(
             html`
                 <img class="view-item-avatar" src=${avi} alt=${name} />
                 <div class="listen-item-info">
-                    <h3 class="listen-item-name">${name}</h3>
+                    <h3 class="listen-item-name"><span class="at">@</span>${name}</h3>
                     <p class="colourful listen-item-text icon-mask" ref=${(el) => (p = el)}>
                         ${tl(trans.count_plays, { c: listens.toLocaleString(lang) })}
                     </p>
@@ -1190,6 +1190,7 @@ function create_listen_item(
             interactive: true,
             interactiveBorder: 10,
             offset: [0, 0],
+            appendTo: document.body,
 
             onShow(instance) {
                 instance.popper.addEventListener('click', (event) => {
@@ -1209,7 +1210,7 @@ function create_listen_item(
                     <div class="bleh-icon" />
                 </div>
                 <div class="listen-item-info">
-                    <h3 class="listen-item-name">${name}</h3>
+                    <h3 class="listen-item-name"><span class="at">@</span>${name}</h3>
                     <p class="colourful listen-item-text icon-mask" ref=${(el) => (p = el)}>
                         ${tl(trans.count_plays, { c: ' ' })}
                     </p>
@@ -1233,6 +1234,7 @@ function create_listen_item(
             interactive: true,
             interactiveBorder: 10,
             offset: [0, 0],
+            appendTo: document.body,
 
             onShow(instance) {
                 instance.popper.addEventListener('click', (event) => {

@@ -103,7 +103,7 @@
         & > .listen-item-name {
             font-size: var(--font-size);
             line-height: var(--line-height);
-            color: oklch(var(--c3));
+            color: oklch(var(--c2));
             font-weight: var(--font-weight);
 
             flex: 1;
@@ -189,7 +189,7 @@
 
         width: var(--w);
         height: var(--w);
-        margin-right: 10px;
+        margin-right: 8px;
         border-radius: var(--avatar-radius);
 
         --mask-size: 18px;
@@ -199,7 +199,7 @@
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 
         & + .view-item-avatar {
-            margin-left: -20px;
+            margin-left: -22px;
         }
     }
 }

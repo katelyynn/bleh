@@ -3,11 +3,11 @@
     display: inline-flex;
     align-items: center;
 
-    font-size: calc(var(--font-size) - 1px);
-    background: oklch(var(--k4) / 40%);
+    font-size: 12px;
+    background: oklch(var(--f4) / 20%);
     color: oklch(var(--l3-c));
-    padding: 0 4px;
-    border-radius: var(--item-small-radius);
+    padding: 0 6px;
+    border-radius: 4px;
 
     font-weight: var(--font-weight-medium);
 

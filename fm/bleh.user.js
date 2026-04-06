@@ -64449,7 +64449,7 @@
                             <div class="bleh-icon" />
                         </div>
                         <div class="listen-item-info">
-                            <h3 class="listen-item-name">${shortcut_listens.name}</h3>
+                            <h3 class="listen-item-name"><span class="at">@</span>${shortcut_listens.name}</h3>
                             <p class="colourful listen-item-text icon-mask" ref=${(el) => p4 = el}>
                                 ${tl2(trans.count_plays, { c: listens.toLocaleString(lang) })}
                             </p>
@@ -65089,7 +65089,7 @@
         html`
                 <img class="view-item-avatar" src=${avi} alt=${name} />
                 <div class="listen-item-info">
-                    <h3 class="listen-item-name">${name}</h3>
+                    <h3 class="listen-item-name"><span class="at">@</span>${name}</h3>
                     <p class="colourful listen-item-text icon-mask" ref=${(el) => p4 = el}>
                         ${tl2(trans.count_plays, { c: listens.toLocaleString(lang) })}
                     </p>
@@ -65108,6 +65108,7 @@
         interactive: true,
         interactiveBorder: 10,
         offset: [0, 0],
+        appendTo: document.body,
         onShow(instance) {
           instance.popper.addEventListener("click", (event3) => {
             instance.hide();
@@ -65124,7 +65125,7 @@
                     <div class="bleh-icon" />
                 </div>
                 <div class="listen-item-info">
-                    <h3 class="listen-item-name">${name}</h3>
+                    <h3 class="listen-item-name"><span class="at">@</span>${name}</h3>
                     <p class="colourful listen-item-text icon-mask" ref=${(el) => p4 = el}>
                         ${tl2(trans.count_plays, { c: " " })}
                     </p>
@@ -65147,6 +65148,7 @@
         interactive: true,
         interactiveBorder: 10,
         offset: [0, 0],
+        appendTo: document.body,
         onShow(instance) {
           instance.popper.addEventListener("click", (event3) => {
             instance.hide();

@@ -241,7 +241,7 @@
 }
 
 .profile-summary {
-    .listen-item {
+    .listen-item.taste {
         --bg: transparent !important;
         --bg-hov: oklch(var(--b4) / 40%) !important;
         --bg-atv: oklch(var(--b4) / 60%) !important;
