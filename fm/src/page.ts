@@ -30,7 +30,7 @@ import {
     correct_generic_combo_no_artist,
     correct_item_by_artist,
     lotus
-} from '@/components/music/lotus.js';
+} from '@/components/music/lotus';
 import { music_grids } from '@/components/music/music_grid';
 import { nag_bar } from '@/components/dialog/nag_bar';
 import { load_notifications, notify } from '@/components/dialog/notify';

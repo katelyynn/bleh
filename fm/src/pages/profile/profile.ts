@@ -26,7 +26,7 @@ import {
     name_includes,
     smart_artists,
     smart_title
-} from '@/components/music/lotus.js';
+} from '@/components/music/lotus';
 import { markdown } from '@/components/shared/markdown';
 import { redesign_profile_header } from '@/components/profile/profile_header';
 import {

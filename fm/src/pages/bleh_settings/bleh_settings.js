@@ -5,7 +5,7 @@
 //
 
 import { settings } from '@/build/config';
-import { album_track_corrections, artist_corrections } from '@/build/music.js';
+import { album_track_corrections, artist_corrections } from '@/build/music';
 import {
     auth,
     oracle_albums,

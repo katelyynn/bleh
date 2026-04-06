@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    https://last.fm/
-// @version      2026.0227
+// @version      2026.0406
 // @description  bleh!!! ^-^
 // @author       katelyn
 // @match        https://www.last.fm/*
@@ -4560,74 +4560,74 @@
           function() {
             function CSSParsedDeclaration2(context, declaration) {
               var _a2, _b2;
-              this.animationDuration = parse5(context, duration, declaration.animationDuration);
-              this.backgroundClip = parse5(context, backgroundClip, declaration.backgroundClip);
-              this.backgroundColor = parse5(context, backgroundColor, declaration.backgroundColor);
-              this.backgroundImage = parse5(context, backgroundImage, declaration.backgroundImage);
-              this.backgroundOrigin = parse5(context, backgroundOrigin, declaration.backgroundOrigin);
-              this.backgroundPosition = parse5(context, backgroundPosition, declaration.backgroundPosition);
-              this.backgroundRepeat = parse5(context, backgroundRepeat, declaration.backgroundRepeat);
-              this.backgroundSize = parse5(context, backgroundSize, declaration.backgroundSize);
-              this.borderTopColor = parse5(context, borderTopColor, declaration.borderTopColor);
-              this.borderRightColor = parse5(context, borderRightColor, declaration.borderRightColor);
-              this.borderBottomColor = parse5(context, borderBottomColor, declaration.borderBottomColor);
-              this.borderLeftColor = parse5(context, borderLeftColor, declaration.borderLeftColor);
-              this.borderTopLeftRadius = parse5(context, borderTopLeftRadius, declaration.borderTopLeftRadius);
-              this.borderTopRightRadius = parse5(context, borderTopRightRadius, declaration.borderTopRightRadius);
-              this.borderBottomRightRadius = parse5(context, borderBottomRightRadius, declaration.borderBottomRightRadius);
-              this.borderBottomLeftRadius = parse5(context, borderBottomLeftRadius, declaration.borderBottomLeftRadius);
-              this.borderTopStyle = parse5(context, borderTopStyle, declaration.borderTopStyle);
-              this.borderRightStyle = parse5(context, borderRightStyle, declaration.borderRightStyle);
-              this.borderBottomStyle = parse5(context, borderBottomStyle, declaration.borderBottomStyle);
-              this.borderLeftStyle = parse5(context, borderLeftStyle, declaration.borderLeftStyle);
-              this.borderTopWidth = parse5(context, borderTopWidth, declaration.borderTopWidth);
-              this.borderRightWidth = parse5(context, borderRightWidth, declaration.borderRightWidth);
-              this.borderBottomWidth = parse5(context, borderBottomWidth, declaration.borderBottomWidth);
-              this.borderLeftWidth = parse5(context, borderLeftWidth, declaration.borderLeftWidth);
-              this.boxShadow = parse5(context, boxShadow, declaration.boxShadow);
-              this.color = parse5(context, color2, declaration.color);
-              this.direction = parse5(context, direction, declaration.direction);
-              this.display = parse5(context, display, declaration.display);
-              this.float = parse5(context, float, declaration.cssFloat);
-              this.fontFamily = parse5(context, fontFamily, declaration.fontFamily);
-              this.fontSize = parse5(context, fontSize, declaration.fontSize);
-              this.fontStyle = parse5(context, fontStyle, declaration.fontStyle);
-              this.fontVariant = parse5(context, fontVariant, declaration.fontVariant);
-              this.fontWeight = parse5(context, fontWeight, declaration.fontWeight);
-              this.letterSpacing = parse5(context, letterSpacing, declaration.letterSpacing);
-              this.lineBreak = parse5(context, lineBreak, declaration.lineBreak);
-              this.lineHeight = parse5(context, lineHeight, declaration.lineHeight);
-              this.listStyleImage = parse5(context, listStyleImage, declaration.listStyleImage);
-              this.listStylePosition = parse5(context, listStylePosition, declaration.listStylePosition);
-              this.listStyleType = parse5(context, listStyleType, declaration.listStyleType);
-              this.marginTop = parse5(context, marginTop, declaration.marginTop);
-              this.marginRight = parse5(context, marginRight, declaration.marginRight);
-              this.marginBottom = parse5(context, marginBottom, declaration.marginBottom);
-              this.marginLeft = parse5(context, marginLeft, declaration.marginLeft);
-              this.opacity = parse5(context, opacity, declaration.opacity);
-              var overflowTuple = parse5(context, overflow, declaration.overflow);
+              this.animationDuration = parse6(context, duration, declaration.animationDuration);
+              this.backgroundClip = parse6(context, backgroundClip, declaration.backgroundClip);
+              this.backgroundColor = parse6(context, backgroundColor, declaration.backgroundColor);
+              this.backgroundImage = parse6(context, backgroundImage, declaration.backgroundImage);
+              this.backgroundOrigin = parse6(context, backgroundOrigin, declaration.backgroundOrigin);
+              this.backgroundPosition = parse6(context, backgroundPosition, declaration.backgroundPosition);
+              this.backgroundRepeat = parse6(context, backgroundRepeat, declaration.backgroundRepeat);
+              this.backgroundSize = parse6(context, backgroundSize, declaration.backgroundSize);
+              this.borderTopColor = parse6(context, borderTopColor, declaration.borderTopColor);
+              this.borderRightColor = parse6(context, borderRightColor, declaration.borderRightColor);
+              this.borderBottomColor = parse6(context, borderBottomColor, declaration.borderBottomColor);
+              this.borderLeftColor = parse6(context, borderLeftColor, declaration.borderLeftColor);
+              this.borderTopLeftRadius = parse6(context, borderTopLeftRadius, declaration.borderTopLeftRadius);
+              this.borderTopRightRadius = parse6(context, borderTopRightRadius, declaration.borderTopRightRadius);
+              this.borderBottomRightRadius = parse6(context, borderBottomRightRadius, declaration.borderBottomRightRadius);
+              this.borderBottomLeftRadius = parse6(context, borderBottomLeftRadius, declaration.borderBottomLeftRadius);
+              this.borderTopStyle = parse6(context, borderTopStyle, declaration.borderTopStyle);
+              this.borderRightStyle = parse6(context, borderRightStyle, declaration.borderRightStyle);
+              this.borderBottomStyle = parse6(context, borderBottomStyle, declaration.borderBottomStyle);
+              this.borderLeftStyle = parse6(context, borderLeftStyle, declaration.borderLeftStyle);
+              this.borderTopWidth = parse6(context, borderTopWidth, declaration.borderTopWidth);
+              this.borderRightWidth = parse6(context, borderRightWidth, declaration.borderRightWidth);
+              this.borderBottomWidth = parse6(context, borderBottomWidth, declaration.borderBottomWidth);
+              this.borderLeftWidth = parse6(context, borderLeftWidth, declaration.borderLeftWidth);
+              this.boxShadow = parse6(context, boxShadow, declaration.boxShadow);
+              this.color = parse6(context, color2, declaration.color);
+              this.direction = parse6(context, direction, declaration.direction);
+              this.display = parse6(context, display, declaration.display);
+              this.float = parse6(context, float, declaration.cssFloat);
+              this.fontFamily = parse6(context, fontFamily, declaration.fontFamily);
+              this.fontSize = parse6(context, fontSize, declaration.fontSize);
+              this.fontStyle = parse6(context, fontStyle, declaration.fontStyle);
+              this.fontVariant = parse6(context, fontVariant, declaration.fontVariant);
+              this.fontWeight = parse6(context, fontWeight, declaration.fontWeight);
+              this.letterSpacing = parse6(context, letterSpacing, declaration.letterSpacing);
+              this.lineBreak = parse6(context, lineBreak, declaration.lineBreak);
+              this.lineHeight = parse6(context, lineHeight, declaration.lineHeight);
+              this.listStyleImage = parse6(context, listStyleImage, declaration.listStyleImage);
+              this.listStylePosition = parse6(context, listStylePosition, declaration.listStylePosition);
+              this.listStyleType = parse6(context, listStyleType, declaration.listStyleType);
+              this.marginTop = parse6(context, marginTop, declaration.marginTop);
+              this.marginRight = parse6(context, marginRight, declaration.marginRight);
+              this.marginBottom = parse6(context, marginBottom, declaration.marginBottom);
+              this.marginLeft = parse6(context, marginLeft, declaration.marginLeft);
+              this.opacity = parse6(context, opacity, declaration.opacity);
+              var overflowTuple = parse6(context, overflow, declaration.overflow);
               this.overflowX = overflowTuple[0];
               this.overflowY = overflowTuple[overflowTuple.length > 1 ? 1 : 0];
-              this.overflowWrap = parse5(context, overflowWrap, declaration.overflowWrap);
-              this.paddingTop = parse5(context, paddingTop, declaration.paddingTop);
-              this.paddingRight = parse5(context, paddingRight, declaration.paddingRight);
-              this.paddingBottom = parse5(context, paddingBottom, declaration.paddingBottom);
-              this.paddingLeft = parse5(context, paddingLeft, declaration.paddingLeft);
-              this.paintOrder = parse5(context, paintOrder, declaration.paintOrder);
-              this.position = parse5(context, position, declaration.position);
-              this.textAlign = parse5(context, textAlign, declaration.textAlign);
-              this.textDecorationColor = parse5(context, textDecorationColor, (_a2 = declaration.textDecorationColor) !== null && _a2 !== void 0 ? _a2 : declaration.color);
-              this.textDecorationLine = parse5(context, textDecorationLine, (_b2 = declaration.textDecorationLine) !== null && _b2 !== void 0 ? _b2 : declaration.textDecoration);
-              this.textShadow = parse5(context, textShadow, declaration.textShadow);
-              this.textTransform = parse5(context, textTransform, declaration.textTransform);
-              this.transform = parse5(context, transform$1, declaration.transform);
-              this.transformOrigin = parse5(context, transformOrigin, declaration.transformOrigin);
-              this.visibility = parse5(context, visibility, declaration.visibility);
-              this.webkitTextStrokeColor = parse5(context, webkitTextStrokeColor, declaration.webkitTextStrokeColor);
-              this.webkitTextStrokeWidth = parse5(context, webkitTextStrokeWidth, declaration.webkitTextStrokeWidth);
-              this.wordBreak = parse5(context, wordBreak, declaration.wordBreak);
-              this.zIndex = parse5(context, zIndex, declaration.zIndex);
-              this.objectFit = parse5(context, objectFit, declaration.objectFit);
+              this.overflowWrap = parse6(context, overflowWrap, declaration.overflowWrap);
+              this.paddingTop = parse6(context, paddingTop, declaration.paddingTop);
+              this.paddingRight = parse6(context, paddingRight, declaration.paddingRight);
+              this.paddingBottom = parse6(context, paddingBottom, declaration.paddingBottom);
+              this.paddingLeft = parse6(context, paddingLeft, declaration.paddingLeft);
+              this.paintOrder = parse6(context, paintOrder, declaration.paintOrder);
+              this.position = parse6(context, position, declaration.position);
+              this.textAlign = parse6(context, textAlign, declaration.textAlign);
+              this.textDecorationColor = parse6(context, textDecorationColor, (_a2 = declaration.textDecorationColor) !== null && _a2 !== void 0 ? _a2 : declaration.color);
+              this.textDecorationLine = parse6(context, textDecorationLine, (_b2 = declaration.textDecorationLine) !== null && _b2 !== void 0 ? _b2 : declaration.textDecoration);
+              this.textShadow = parse6(context, textShadow, declaration.textShadow);
+              this.textTransform = parse6(context, textTransform, declaration.textTransform);
+              this.transform = parse6(context, transform$1, declaration.transform);
+              this.transformOrigin = parse6(context, transformOrigin, declaration.transformOrigin);
+              this.visibility = parse6(context, visibility, declaration.visibility);
+              this.webkitTextStrokeColor = parse6(context, webkitTextStrokeColor, declaration.webkitTextStrokeColor);
+              this.webkitTextStrokeWidth = parse6(context, webkitTextStrokeWidth, declaration.webkitTextStrokeWidth);
+              this.wordBreak = parse6(context, wordBreak, declaration.wordBreak);
+              this.zIndex = parse6(context, zIndex, declaration.zIndex);
+              this.objectFit = parse6(context, objectFit, declaration.objectFit);
             }
             CSSParsedDeclaration2.prototype.isVisible = function() {
               return this.display > 0 && this.opacity > 0 && this.visibility === 0;
@@ -4681,8 +4681,8 @@
           /** @class */
           /* @__PURE__ */ function() {
             function CSSParsedPseudoDeclaration2(context, declaration) {
-              this.content = parse5(context, content, declaration.content);
-              this.quotes = parse5(context, quotes, declaration.quotes);
+              this.content = parse6(context, content, declaration.content);
+              this.quotes = parse6(context, quotes, declaration.quotes);
             }
             return CSSParsedPseudoDeclaration2;
           }()
@@ -4691,13 +4691,13 @@
           /** @class */
           /* @__PURE__ */ function() {
             function CSSParsedCounterDeclaration2(context, declaration) {
-              this.counterIncrement = parse5(context, counterIncrement, declaration.counterIncrement);
-              this.counterReset = parse5(context, counterReset, declaration.counterReset);
+              this.counterIncrement = parse6(context, counterIncrement, declaration.counterIncrement);
+              this.counterReset = parse6(context, counterReset, declaration.counterReset);
             }
             return CSSParsedCounterDeclaration2;
           }()
         );
-        var parse5 = function(context, descriptor, style) {
+        var parse6 = function(context, descriptor, style) {
           var tokenizer = new Tokenizer();
           var value = style !== null && typeof style !== "undefined" ? style.toString() : descriptor.initialValue;
           tokenizer.write(value);
@@ -12846,7 +12846,7 @@
         var token;
         var key;
         var root4;
-        var parse5 = function parse6(text4, reviver) {
+        var parse6 = function parse7(text4, reviver) {
           source = String(text4);
           parseState = "start";
           stack = [];
@@ -13895,7 +13895,7 @@
           }
         };
         var JSON52 = {
-          parse: parse5,
+          parse: parse6,
           stringify
         };
         var lib = JSON52;
@@ -22040,9 +22040,9 @@
     }
     function newChunk(remaining, currentCursor) {
       const firstChar = remaining.charAt(0);
-      return parse5(Object.assign({ "": firstChar }, root4[firstChar]), remaining.slice(1), currentCursor, currentCursor + 1);
+      return parse6(Object.assign({ "": firstChar }, root4[firstChar]), remaining.slice(1), currentCursor, currentCursor + 1);
     }
-    function parse5(tree, remaining, lastCursor, currentCursor) {
+    function parse6(tree, remaining, lastCursor, currentCursor) {
       if (!remaining) {
         if (convertEnding || Object.keys(tree).length === 1) {
           return tree[""] ? [[lastCursor, currentCursor, tree[""]]] : [];
@@ -22056,7 +22056,7 @@
       if (subtree === void 0) {
         return [[lastCursor, currentCursor, tree[""]]].concat(newChunk(remaining, currentCursor));
       }
-      return parse5(subtree, remaining.slice(1), lastCursor, currentCursor + 1);
+      return parse6(subtree, remaining.slice(1), lastCursor, currentCursor + 1);
     }
     return newChunk(string, 0);
   }
@@ -33151,9 +33151,11 @@
     }
   }
 
-  // src/build/music.js
+  // src/build/music.ts
   var artist_corrections = {};
-  var album_track_corrections = {};
+  var album_track_corrections = {
+    version: ""
+  };
   var combined_artists = {};
   var ranks = [
     {
@@ -72762,7 +72764,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     }
   }
 
-  // src/components/music/lotus.js
+  // src/components/music/lotus.ts
   var import_json5 = __toESM(require_dist2(), 1);
   var flat_patterns = [];
   Object.entries(includes).forEach(([group, patterns]) => {
@@ -72799,7 +72801,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       log("artist list is not cached, fetching", "lotus");
       lotus_request("artist", true);
     } else {
-      Object.assign(artist_corrections, import_json5.default.parse(lotus_artist));
+      parse5(artist_corrections, lotus_artist, "artist");
       if (lotus_artist_expire < current_time && !force) {
         lotus_request();
       } else if (force) {
@@ -72810,7 +72812,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       log("album track list is not cached, fetching", "lotus");
       lotus_request("album_track", true);
     } else {
-      Object.assign(album_track_corrections, import_json5.default.parse(lotus_album_track));
+      parse5(album_track_corrections, lotus_album_track, "album_track");
       if (lotus_album_track_expire < current_time && !force) {
         lotus_request("album_track");
       } else if (force) {
@@ -72821,12 +72823,24 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       log("combined artists list is not cached, fetching", "lotus");
       lotus_request("combined_artists", true);
     } else {
-      Object.assign(combined_artists, import_json5.default.parse(lotus_combined_artists));
+      parse5(combined_artists, lotus_combined_artists, "combined_artists");
       if (lotus_combined_artists_expire < current_time && !force) {
         lotus_request("combined_artists");
       } else if (force) {
         lotus_request("combined_artists", true, true);
       }
+    }
+  }
+  function parse5(value, key, type) {
+    try {
+      Object.assign(value, import_json5.default.parse(key));
+    } catch (e4) {
+      notify({
+        title: `Loading of lotus ${type} data failed`,
+        body: "Please report this as a bug",
+        type: "error",
+        persist: true
+      });
     }
   }
   function lotus_request(type = "artist", send_notify = false, refresh_page = false) {
@@ -78962,14 +78976,14 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       fetch_notices();
       return;
     }
-    let parse5;
+    let parse6;
     try {
-      parse5 = JSON.parse(res);
+      parse6 = JSON.parse(res);
     } catch (e4) {
       fetch_notices();
       return;
     }
-    load_notices(parse5);
+    load_notices(parse6);
   }
   function fetch_notices() {
     fetch(`https://katelyynn.github.io/bleh/dynamic/notices.json?${Math.random()}`).then((res) => {
@@ -91545,7 +91559,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-02-25"
       }
     },
-    built_on: "2026-04-06T16:58:08.460Z"
+    built_on: "2026-04-06T21:24:27.891Z"
   };
 
   // node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

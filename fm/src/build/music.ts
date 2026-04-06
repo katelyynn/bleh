@@ -5,11 +5,17 @@
 //
 
 import { name_includes } from '@/components/music/lotus';
-import { trans } from '@/build/trans';
 
-export let artist_corrections = {};
-export let album_track_corrections = {};
-export let combined_artists = {};
+export let artist_corrections: Record<string, string> = {};
+export let album_track_corrections: album_track_corrections = {
+    version: ''
+};
+export let combined_artists: Record<string, string> = {};
+
+type album_track_corrections = {
+    version: string,
+    [k: string]: string | Record<string, string>
+}
 
 export let ranks = [
     {

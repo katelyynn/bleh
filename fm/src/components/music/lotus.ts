@@ -11,7 +11,7 @@ import {
     artist_corrections,
     combined_artists,
     includes
-} from '@/build/music.js';
+} from '@/build/music';
 import { page, root } from '@/build/page';
 import {
     desanitise,
@@ -28,8 +28,15 @@ import { redirect } from '@/components/music/music';
 import { status } from '@/components/dialog/status';
 import { input } from '@/components/settings/input';
 import JSON5 from 'json5';
+import { notify } from '../dialog/notify';
 
-const flat_patterns = [];
+const flat_patterns: flat_pattern[] = [];
+
+interface flat_pattern {
+    group: string,
+    pattern: string | RegExp,
+    regex: boolean
+}
 
 Object.entries(includes).forEach(([group, patterns]) => {
     patterns.forEach((pattern) => {
@@ -43,8 +50,8 @@ Object.entries(includes).forEach(([group, patterns]) => {
 
 // prefer longest patterns first
 flat_patterns.sort((a, b) => {
-    const a_length = a.regex ? a.pattern.source.length : a.pattern.length;
-    const b_length = b.regex ? b.pattern.source.length : b.pattern.length;
+    const a_length = a.regex ? (a.pattern as RegExp).source.length : (a.pattern as string).length;
+    const b_length = b.regex ? (b.pattern as RegExp).source.length : (b.pattern as string).length;
 
     return b_length - a_length;
 });
@@ -76,7 +83,7 @@ export function lotus(force = false) {
         lotus_request('artist', true);
     } else {
         // we prefer to load the current cache before waiting for a new response
-        Object.assign(artist_corrections, JSON5.parse(lotus_artist));
+        parse(artist_corrections, lotus_artist, 'artist');
 
         // is it valid?
         if (lotus_artist_expire < current_time && !force) {
@@ -91,7 +98,7 @@ export function lotus(force = false) {
         lotus_request('album_track', true);
     } else {
         // we prefer to load the current cache before waiting for a new response
-        Object.assign(album_track_corrections, JSON5.parse(lotus_album_track));
+        parse(album_track_corrections, lotus_album_track, 'album_track');
 
         // is it valid?
         if (lotus_album_track_expire < current_time && !force) {
@@ -106,7 +113,7 @@ export function lotus(force = false) {
         lotus_request('combined_artists', true);
     } else {
         // we prefer to load the current cache before waiting for a new response
-        Object.assign(combined_artists, JSON5.parse(lotus_combined_artists));
+        parse(combined_artists, lotus_combined_artists, 'combined_artists');
 
         // is it valid?
         if (lotus_combined_artists_expire < current_time && !force) {
@@ -114,6 +121,19 @@ export function lotus(force = false) {
         } else if (force) {
             lotus_request('combined_artists', true, true);
         }
+    }
+}
+
+function parse(value: {}, key: string, type: string) {
+    try {
+        Object.assign(value, JSON5.parse(key));
+    } catch (e) {
+        notify({
+            title: `Loading of lotus ${type} data failed`,
+            body: 'Please report this as a bug',
+            type: 'error',
+            persist: true
+        });
     }
 }
 

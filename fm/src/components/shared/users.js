@@ -8,7 +8,7 @@ import { html, render } from 'lighterhtml';
 import { page } from '@/build/page';
 import { markdown } from '@/components/shared/markdown';
 import { patch_avatar, style_name_from_badge } from '@/components/shared/avatar';
-import { correct_artist } from '@/components/music/lotus.js';
+import { correct_artist } from '@/components/music/lotus';
 import { log } from '@/build/log.js';
 
 export function bleh_users() {

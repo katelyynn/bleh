@@ -13,7 +13,7 @@ import { ff } from '@/components/settings/sku';
 import { html, render } from 'lighterhtml';
 import { share } from '@/components/dialog/share';
 import tippy from 'tippy.js';
-import { correct_artist, correct_item_by_artist } from '@/components/music/lotus.js';
+import { correct_artist, correct_item_by_artist } from '@/components/music/lotus';
 import { set_storage } from '@/build/tools';
 
 export function bleh_gallery() {

@@ -15,7 +15,7 @@ import {
     correct_item_by_artist,
     name_includes,
     smart_title
-} from '@/components/music/lotus.js';
+} from '@/components/music/lotus';
 import {
     bleh_music_page_charts,
     bleh_top_listeners,

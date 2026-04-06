@@ -20,7 +20,7 @@ import {
 import { copy, get_language_name, lazy, romanise, translate } from '@/build/tools';
 import tippy from 'tippy.js';
 import { keybind } from '@/components/dialog/rabbit';
-import { correct_artist, correct_item_by_artist } from '@/components/music/lotus.js';
+import { correct_artist, correct_item_by_artist } from '@/components/music/lotus';
 import { ff } from '../settings/sku';
 
 export function patch_shouts() {
