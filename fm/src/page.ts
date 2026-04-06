@@ -399,6 +399,7 @@ function load_page(main_content = null) {
         clearInterval(page.state.activity_preview_timer);
 
     page.state.settings_page = '';
+    page.state.on_tour = false;
 
     hideAll({ duration: 0 });
     clear_popup_queue();

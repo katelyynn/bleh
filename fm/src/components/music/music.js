@@ -629,30 +629,6 @@ export async function show_your_scrobbles() {
                 )}
             `
         );
-
-        if (groups.length > 2) {
-            if (settings.simulate_scroll) {
-                metadata.addEventListener('wheel', (e) => {
-                    e.preventDefault();
-
-                    if (e.deltaY > 0) {
-                        metadata.scrollBy({
-                            top: 0,
-                            left: +200,
-                            behavior: 'smooth'
-                        });
-                    } else {
-                        metadata.scrollBy({
-                            top: 0,
-                            left: -200,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            } else {
-                metadata.classList.add('no-scroll-simulation');
-            }
-        }
     }
 
     if (page_is_blocked) {

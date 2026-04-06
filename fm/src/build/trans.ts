@@ -9606,7 +9606,7 @@ export const trans: translations = {
         ru: 'Вам необходимо войти в систему'
     },
     oracle_notice: {
-        en: 'You are currently testing ‘oracle’, a redesigned album and track view',
+        en: 'You are testing ‘oracle’',
         de: 'Du testest gerade „oracle“, eine neu gestaltete Album- und Titelseite',
         es: 'Estás actualmente probando ‘oracle’, un estilo rediseñado de álbumes y temas',
         it: 'Stai provando ‘oracle’, una vista di album e brani ridisegnata',
@@ -10366,6 +10366,9 @@ export const trans: translations = {
     },
     value_scrobbles_recently: {
         en: '{v} scrobbles recently'
+    },
+    on_tour: {
+        en: 'On tour'
     }
 };
 

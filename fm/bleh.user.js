@@ -5591,7 +5591,7 @@
           }(ElementContainer)
         );
         var LIST_OWNERS = ["OL", "UL", "MENU"];
-        var parseNodeTree = function(context, node, parent, root5) {
+        var parseNodeTree = function(context, node, parent, root4) {
           for (var childNode = node.firstChild, nextNode = void 0; childNode; childNode = nextNode) {
             nextNode = childNode.nextSibling;
             if (isTextNode(childNode) && childNode.data.length > 0) {
@@ -5599,12 +5599,12 @@
             } else if (isElementNode(childNode)) {
               if (isSlotElement(childNode) && childNode.assignedNodes) {
                 childNode.assignedNodes().forEach(function(childNode2) {
-                  return parseNodeTree(context, childNode2, parent, root5);
+                  return parseNodeTree(context, childNode2, parent, root4);
                 });
               } else {
                 var container = createContainer(context, childNode);
                 if (container.styles.isVisible()) {
-                  if (createsRealStackingContext(childNode, container, root5)) {
+                  if (createsRealStackingContext(childNode, container, root4)) {
                     container.flags |= 4;
                   } else if (createsStackingContext(container.styles)) {
                     container.flags |= 2;
@@ -5615,9 +5615,9 @@
                   parent.elements.push(container);
                   childNode.slot;
                   if (childNode.shadowRoot) {
-                    parseNodeTree(context, childNode.shadowRoot, container, root5);
+                    parseNodeTree(context, childNode.shadowRoot, container, root4);
                   } else if (!isTextareaElement(childNode) && !isSVGElement(childNode) && !isSelectElement(childNode)) {
-                    parseNodeTree(context, childNode, container, root5);
+                    parseNodeTree(context, childNode, container, root4);
                   }
                 }
               }
@@ -5660,8 +5660,8 @@
           parseNodeTree(context, element, container, container);
           return container;
         };
-        var createsRealStackingContext = function(node, container, root5) {
-          return container.styles.isPositionedWithZIndex() || container.styles.opacity < 1 || container.styles.isTransformed() || isBodyElement(node) && root5.styles.isTransparent();
+        var createsRealStackingContext = function(node, container, root4) {
+          return container.styles.isPositionedWithZIndex() || container.styles.opacity < 1 || container.styles.isTransformed() || isBodyElement(node) && root4.styles.isTransparent();
         };
         var createsStackingContext = function(styles) {
           return styles.isPositioned() || styles.isFloating();
@@ -7265,11 +7265,11 @@
         };
         var parseStackingContexts = function(container) {
           var paintContainer = new ElementPaint(container, null);
-          var root5 = new StackingContext(paintContainer);
+          var root4 = new StackingContext(paintContainer);
           var listItems = [];
-          parseStackTree(paintContainer, root5, root5, listItems);
+          parseStackTree(paintContainer, root4, root4, listItems);
           processListItems(paintContainer.container, listItems);
-          return root5;
+          return root4;
         };
         var parsePathForBorder = function(curves, borderSide) {
           switch (borderSide) {
@@ -8784,7 +8784,7 @@
         }
         var renderElement = function(element, opts) {
           return __awaiter(void 0, void 0, void 0, function() {
-            var ownerDocument, defaultView, resourceOptions, contextOptions, windowOptions, windowBounds, context, foreignObjectRendering, cloneOptions, documentCloner, clonedElement, container, _a2, width, height, left2, top2, backgroundColor2, renderOptions, canvas, renderer, root5, renderer;
+            var ownerDocument, defaultView, resourceOptions, contextOptions, windowOptions, windowBounds, context, foreignObjectRendering, cloneOptions, documentCloner, clonedElement, container, _a2, width, height, left2, top2, backgroundColor2, renderOptions, canvas, renderer, root4, renderer;
             var _b2, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t;
             return __generator(this, function(_u) {
               switch (_u.label) {
@@ -8854,13 +8854,13 @@
                 case 3:
                   context.logger.debug("Document cloned, element located at ".concat(left2, ",").concat(top2, " with size ").concat(width, "x").concat(height, " using computed rendering"));
                   context.logger.debug("Starting DOM parsing");
-                  root5 = parseTree(context, clonedElement);
-                  if (backgroundColor2 === root5.styles.backgroundColor) {
-                    root5.styles.backgroundColor = COLORS.TRANSPARENT;
+                  root4 = parseTree(context, clonedElement);
+                  if (backgroundColor2 === root4.styles.backgroundColor) {
+                    root4.styles.backgroundColor = COLORS.TRANSPARENT;
                   }
                   context.logger.debug("Starting renderer for element at ".concat(renderOptions.x, ",").concat(renderOptions.y, " with size ").concat(renderOptions.width, "x").concat(renderOptions.height));
                   renderer = new CanvasRenderer(context, renderOptions);
-                  return [4, renderer.render(root5)];
+                  return [4, renderer.render(root4)];
                 case 4:
                   canvas = _u.sent();
                   _u.label = 5;
@@ -12508,7 +12508,7 @@
           txt = txt.replace(/^ {0,3}\[([\S \t]*?)]:/gm, "\\[$1]:");
           return txt;
         });
-        var root5 = this;
+        var root4 = this;
         if (typeof define === "function" && define.amd) {
           define(function() {
             "use strict";
@@ -12517,7 +12517,7 @@
         } else if (typeof module !== "undefined" && module.exports) {
           module.exports = showdown2;
         } else {
-          root5.showdown = showdown2;
+          root4.showdown = showdown2;
         }
       }).call(exports);
     }
@@ -12845,7 +12845,7 @@
         var column;
         var token;
         var key;
-        var root5;
+        var root4;
         var parse5 = function parse6(text4, reviver) {
           source = String(text4);
           parseState = "start";
@@ -12855,15 +12855,15 @@
           column = 0;
           token = void 0;
           key = void 0;
-          root5 = void 0;
+          root4 = void 0;
           do {
             token = lex();
             parseStates[parseState]();
           } while (token.type !== "eof");
           if (typeof reviver === "function") {
-            return internalize({ "": root5 }, "", reviver);
+            return internalize({ "": root4 }, "", reviver);
           }
-          return root5;
+          return root4;
         };
         function internalize(holder, name, reviver) {
           var value = holder[name];
@@ -13588,8 +13588,8 @@
               value = token.value;
               break;
           }
-          if (root5 === void 0) {
-            root5 = value;
+          if (root4 === void 0) {
+            root4 = value;
           } else {
             var parent = stack[stack.length - 1];
             if (Array.isArray(parent)) {
@@ -16785,10 +16785,10 @@
     return function createContent2(markup, type) {
       return (type === "svg" ? createSVG : createHTML)(markup);
     };
-    function append(root5, childNodes) {
+    function append(root4, childNodes) {
       var length = childNodes.length;
       while (length--)
-        root5.appendChild(childNodes[0]);
+        root4.appendChild(childNodes[0]);
     }
     function create3(element) {
       return element === FRAGMENT ? document2.createDocumentFragment() : document2.createElementNS("http://www.w3.org/1999/xhtml", element);
@@ -22030,7 +22030,7 @@
   }
   var mergeWithDefaultOptions = (opts = {}) => Object.assign({}, DEFAULT_OPTIONS2, opts);
   function applyMapping(string, mapping, convertEnding) {
-    const root5 = mapping;
+    const root4 = mapping;
     function nextSubtree(tree, nextChar) {
       const subtree = tree[nextChar];
       if (subtree === void 0) {
@@ -22040,7 +22040,7 @@
     }
     function newChunk(remaining, currentCursor) {
       const firstChar = remaining.charAt(0);
-      return parse5(Object.assign({ "": firstChar }, root5[firstChar]), remaining.slice(1), currentCursor, currentCursor + 1);
+      return parse5(Object.assign({ "": firstChar }, root4[firstChar]), remaining.slice(1), currentCursor, currentCursor + 1);
     }
     function parse5(tree, remaining, lastCursor, currentCursor) {
       if (!remaining) {
@@ -40600,11 +40600,11 @@
     }
     return node;
   }
-  function set(root5, scope, values) {
+  function set(root4, scope, values) {
     if (typeof scope === "string") {
-      return merge(getScope$1(root5, scope), values);
+      return merge(getScope$1(root4, scope), values);
     }
-    return merge(getScope$1(root5, ""), scope);
+    return merge(getScope$1(root4, ""), scope);
   }
   var Defaults = class {
     constructor(_descriptors2, _appliers) {
@@ -60677,10 +60677,16 @@
     let graph_blocks = [];
     page.state.graph_blocks = graph_blocks;
     let title;
+    const on_tour = !!page.state.on_tour;
     const panel = html.node`
         <section class="profile-summary music-summary">
             <div class="top-container">
-                <h2 class="summary-title">${tl2(trans.about)}</h2>
+                <h2 class="summary-title">
+                    ${tl2(trans.about)}
+                    ${on_tour ? html.node`
+                    <a class="on-tour colourful" href="${root}music/${sanitise(page.name)}/+events">${tl2(trans.on_tour)}</a>
+                    ` : ""}
+                </h2>
                 <div class="summary-blocks">
                     ${summary_block2("listeners", listeners)}
                     ${summary_block2("scrobbles", scrobbles)}
@@ -64641,28 +64647,6 @@
         )}
             `
       );
-      if (groups.length > 2) {
-        if (settings.simulate_scroll) {
-          metadata.addEventListener("wheel", (e4) => {
-            e4.preventDefault();
-            if (e4.deltaY > 0) {
-              metadata.scrollBy({
-                top: 0,
-                left: 200,
-                behavior: "smooth"
-              });
-            } else {
-              metadata.scrollBy({
-                top: 0,
-                left: -200,
-                behavior: "smooth"
-              });
-            }
-          });
-        } else {
-          metadata.classList.add("no-scroll-simulation");
-        }
-      }
     }
     if (page_is_blocked) {
       page.structure.main.insertBefore(html.node`
@@ -65778,7 +65762,7 @@
   };
   function createDOMPurify() {
     let window2 = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : getGlobal();
-    const DOMPurify = (root5) => createDOMPurify(root5);
+    const DOMPurify = (root4) => createDOMPurify(root4);
     DOMPurify.version = "3.2.6";
     DOMPurify.removed = [];
     if (!window2 || !window2.document || window2.document.nodeType !== NODE_TYPE.document || !window2.Element) {
@@ -66159,10 +66143,10 @@
       }
       return WHOLE_DOCUMENT ? doc.documentElement : body;
     };
-    const _createNodeIterator = function _createNodeIterator2(root5) {
+    const _createNodeIterator = function _createNodeIterator2(root4) {
       return createNodeIterator.call(
-        root5.ownerDocument || root5,
-        root5,
+        root4.ownerDocument || root4,
+        root4,
         // eslint-disable-next-line no-bitwise
         NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_COMMENT | NodeFilter.SHOW_TEXT | NodeFilter.SHOW_PROCESSING_INSTRUCTION | NodeFilter.SHOW_CDATA_SECTION,
         null
@@ -73803,7 +73787,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       let title = artist_header.querySelector(".header-new-title");
       let on_tour = artist_header.querySelector(".header-new-on-tour");
       let position = artist_header.querySelector(".header-new-chart-position-number");
-      if (on_tour) on_tour.classList.add("label", "no-hover", "expand");
+      if (on_tour) page.state.on_tour = true;
       let page_avatar;
       let multi_info_box;
       let redesigned_artist_header = html.node`
@@ -73828,11 +73812,6 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                             ${position}
                         </div>
                     </div>
-                    ${on_tour ? html.node`
-                        <div class="badges">
-                            ${on_tour}
-                        </div>
-                    ` : ""}
                 </div>
             </section>
         `;
@@ -79253,6 +79232,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     if (page.state.activity_preview_timer)
       clearInterval(page.state.activity_preview_timer);
     page.state.settings_page = "";
+    page.state.on_tour = false;
     hideAll({ duration: 0 });
     clear_popup_queue();
     if (main_content) {
@@ -89238,7 +89218,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       ru: "\u0412\u0430\u043C \u043D\u0435\u043E\u0431\u0445\u043E\u0434\u0438\u043C\u043E \u0432\u043E\u0439\u0442\u0438 \u0432 \u0441\u0438\u0441\u0442\u0435\u043C\u0443"
     },
     oracle_notice: {
-      en: "You are currently testing \u2018oracle\u2019, a redesigned album and track view",
+      en: "You are testing \u2018oracle\u2019",
       de: "Du testest gerade \u201Eoracle\u201C, eine neu gestaltete Album- und Titelseite",
       es: "Est\xE1s actualmente probando \u2018oracle\u2019, un estilo redise\xF1ado de \xE1lbumes y temas",
       it: "Stai provando \u2018oracle\u2019, una vista di album e brani ridisegnata",
@@ -90001,6 +89981,9 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     },
     value_scrobbles_recently: {
       en: "{v} scrobbles recently"
+    },
+    on_tour: {
+      en: "On tour"
     }
   };
   var translation_fallback = "NO_TRANSLATION_FOUND";

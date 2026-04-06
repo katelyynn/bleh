@@ -21,8 +21,7 @@
         --bg: oklch(var(--k4) / 20%);
         --bg-hov: oklch(var(--k4) / 30%);
         --bg-atv: oklch(var(--k4) / 40%);
-        --padding: 5px 10px 5px
-            calc(10px + var(--icon-size) + 4px);
+        --padding: var(--button-verts) calc(var(--button-sides) + 12px + 4px) var(--button-verts) calc(var(--button-sides) + var(--icon-size) + 4px);
         --col: oklch(var(--l3-c));
         --mask-colour: color-mix(
             in oklch,
@@ -30,9 +29,9 @@
             oklch(var(--l4-c)) 30%
         );
         --shadow: none;
-        --radius: var(--item-big-radius);
+        --radius: var(--item-med-radius);
         flex: unset;
-        --left: 10px;
+        --left: var(--button-sides);
 
         position: relative;
 
@@ -56,6 +55,16 @@
                 background-size: 100% !important;
                 border-radius: 4px !important;
             }
+        }
+
+        &:after {
+            border: unset !important;
+            --mask: var(--icon-16-external);
+            --icon-size: 12px;
+            --left: none !important;
+            --right: var(--button-sides);
+
+            opacity: 0.6;
         }
     }
 }

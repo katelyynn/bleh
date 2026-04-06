@@ -108,7 +108,7 @@ export function bleh_artists() {
         let on_tour = artist_header.querySelector('.header-new-on-tour');
         let position = artist_header.querySelector('.header-new-chart-position-number');
 
-        if (on_tour) on_tour.classList.add('label', 'no-hover', 'expand');
+        if (on_tour) page.state.on_tour = true;
 
         let page_avatar;
 
@@ -135,11 +135,6 @@ export function bleh_artists() {
                             ${position}
                         </div>
                     </div>
-                    ${on_tour ? html.node`
-                        <div class="badges">
-                            ${on_tour}
-                        </div>
-                    ` : ''}
                 </div>
             </section>
         `;

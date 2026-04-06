@@ -7,6 +7,7 @@ import { prep_chart_colours } from '../music/chart';
 import { Chart } from 'chart.js';
 import { log } from '@/build/log';
 import { DateTime } from 'luxon';
+import { sanitise } from '@/build/tools';
 
 export interface music_stat {
     text?: string,
@@ -21,10 +22,17 @@ export function music_summary(listeners: music_stat, scrobbles: music_stat, meta
 
     let title;
 
+    const on_tour = !!page.state.on_tour;
+
     const panel = html.node`
         <section class="profile-summary music-summary">
             <div class="top-container">
-                <h2 class="summary-title">${tl(trans.about)}</h2>
+                <h2 class="summary-title">
+                    ${tl(trans.about)}
+                    ${on_tour ? html.node`
+                    <a class="on-tour colourful" href="${root}music/${sanitise(page.name)}/+events">${tl(trans.on_tour)}</a>
+                    ` : ''}
+                </h2>
                 <div class="summary-blocks">
                     ${summary_block('listeners', listeners)}
                     ${summary_block('scrobbles', scrobbles)}

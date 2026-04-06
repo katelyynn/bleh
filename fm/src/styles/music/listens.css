@@ -62,11 +62,14 @@
     --bg-hov: oklch(var(--b4) / 60%);
     --bg-atv: oklch(var(--b4) / 80%);
     --shadow: none;
-    --padding: var(--gap) 20px;
-    --radius: 0;
-    margin: calc(-1 * var(--gap)) -20px !important;
 
-    height: 38px;
+    &:not(.taste) {
+        --padding: var(--gap) 20px;
+        --radius: 0;
+        margin: calc(-1 * var(--gap)) -20px !important;
+
+        height: 38px;
+    }
 
     & > .listen-badge {
         position: absolute;

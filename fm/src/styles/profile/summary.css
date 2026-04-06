@@ -12,6 +12,25 @@
 
 .summary-title {
     margin: unset !important;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.on-tour {
+    display: flex;
+
+    background: oklch(var(--f4) / 20%);
+    color: oklch(var(--l3-c));
+    font-size: 12px;
+    font-weight: var(--font-weight-bold);
+    padding: 0 6px;
+    border-radius: 4px;
+
+    --hue-over: 11;
+    --sat-over: 1.53;
+    --lit-over: 0.93;
 }
 
 .summary-main {

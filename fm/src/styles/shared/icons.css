@@ -99,6 +99,7 @@
 /*     SET AN OBSESSION     */
 .obsession-candidate-inner .btn-sm:before,
 /*     GENERIC     */
+.music-link:after,
 .btn--loading:after, .more-items:before {
     content: "";
     display: var(--show-icon, block) !important;
@@ -166,6 +167,7 @@
     contain: strict;
 
     font-size: 0 !important;
+    flex-shrink: 0;
 
     &.in-markdown {
         --icon-size: 14px;
