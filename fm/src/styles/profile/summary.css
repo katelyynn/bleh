@@ -279,6 +279,10 @@
 
         .listen-item-info {
             flex-direction: column;
+
+            .listen-item-name {
+                color: oklch(var(--c3));
+            }
         }
 
         &.valentine {
