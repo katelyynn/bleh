@@ -16,13 +16,18 @@
     &.normal {
         flex-direction: row !important;
         justify-content: unset !important;
-        gap: var(--icon-gap) !important;
+        align-items: center;
+        gap: 4px !important;
+
+        --icon-size: 14px;
     }
 
     .has-icon {
         display: flex;
         align-items: center;
-        gap: var(--icon-gap);
+        gap: 4px !important;
+
+        --icon-size: 14px;
     }
 
     /* see .this-month */
