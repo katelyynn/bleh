@@ -131,6 +131,9 @@
         --mask: var(--icon-16-edit-mini);
     }
 }
+[data-type="edit_mini"] {
+    --mask: var(--icon-16-edit-mini);
+}
 [data-type="bulk-edit"] {
     --mask: var(--icon-16-edit-bulk);
 }

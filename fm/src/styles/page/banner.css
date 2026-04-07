@@ -4,9 +4,9 @@
     z-index: -4;
 
     --w: calc(var(--cards-width) + (var(--card-padding) * 8));
-    --h: 346px;
+    --h: 325px;
 
-    height: calc(52px + var(--banner-offset) + 30px + (var(--h) * 2));
+    height: calc(var(--h) * 3);
     width: var(--w);
     margin-left: calc(-1 * (var(--w) / 2));
 

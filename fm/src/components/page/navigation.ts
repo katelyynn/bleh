@@ -886,7 +886,7 @@ export function append_nav() {
                         <div class="floating button-group">
                             ${() => {
                                 let button = html.node`
-                                    <a class="dropdown-menu-clickable-item chibi" data-type="edit" href="${root}settings">
+                                    <a class="dropdown-menu-clickable-item chibi" data-type="edit_mini" href="${root}settings">
                                         ${tl(trans.edit_profile)}
                                     </a>
                                 `;

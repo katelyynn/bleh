@@ -120,7 +120,7 @@
                 background: linear-gradient(
                     180deg,
                     transparent 0%,
-                    transparent 80%,
+                    transparent 50%,
                     oklch(var(--b6)) 100%
                 );
             }

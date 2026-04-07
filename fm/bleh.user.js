@@ -69749,7 +69749,7 @@
                         <div class="floating button-group">
                             ${() => {
           let button2 = html.node`
-                                    <a class="dropdown-menu-clickable-item chibi" data-type="edit" href="${root}settings">
+                                    <a class="dropdown-menu-clickable-item chibi" data-type="edit_mini" href="${root}settings">
                                         ${tl2(trans.edit_profile)}
                                     </a>
                                 `;

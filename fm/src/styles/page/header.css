@@ -13,12 +13,12 @@
     display: flex;
     gap: var(--card-padding);
 
-    --page-header-avatar-size: 200px;
+    --page-header-avatar-size: 180px;
     --page-header-avatar-radius: var(--item-big-radius);
 }
 
 .page-header {
-    margin: 50px -40px 20px !important;
+    margin: 30px -40px 20px !important;
     padding: 0 var(--card-padding);
 
     align-items: center;
@@ -268,7 +268,7 @@
     }
 
     .header-title-secondary {
-        margin-top: 4px !important;
+        margin-top: 6px !important;
         flex-wrap: wrap;
         filter: var(--nav-filter-shadow);
 
