@@ -35645,7 +35645,7 @@
   }
 
   // src/components/music/music_grid.js
-  var import_color_thief_browser = __toESM(require_color_thief_min(), 1);
+  var import_color_thief_browser2 = __toESM(require_color_thief_min(), 1);
 
   // src/components/music/hoshino.js
   function hoshino(artwork, name, sister, link = null) {
@@ -35750,6 +35750,43 @@
     set_storage("bleh_hoshino_cache", JSON.stringify(hoshino_cache));
   }
 
+  // src/components/page/colour.ts
+  var import_color_thief_browser = __toESM(require_color_thief_min(), 1);
+  function header_colour(source, apply_to_page = false, apply_to_elem) {
+    try {
+      const image = new Image();
+      image.width = 300;
+      image.height = 300;
+      image.crossOrigin = "anonymous";
+      image.src = source.src;
+      image.onload = () => {
+        let thief = new import_color_thief_browser.default();
+        let colour = thief.getColor(image);
+        let hsl3 = rgb_to_hsl(colour[0], colour[1], colour[2]);
+        let hue4 = hsl3.h;
+        let sat = clamp_sat(hsl3.s / 100 * 3);
+        let lit = clamp_lit(sat, hsl3.l / 100 + 0.35, true);
+        if (apply_to_page) {
+          document.body.style.setProperty("--hue-album", hue4);
+          document.body.style.setProperty("--sat-album", sat);
+          document.body.style.setProperty("--lit-album", lit);
+          chart_reflow();
+        }
+        if (apply_to_elem instanceof HTMLElement) {
+          apply_to_elem.style.setProperty("--hue-over", hue4);
+          apply_to_elem.style.setProperty("--sat-over", sat);
+          apply_to_elem.style.setProperty("--lit-over", lit);
+        }
+        log(
+          `sourced rgb of (${colour[0]}, ${colour[1]}, ${colour[2]}), hsl of (${hsl3.h}, ${hsl3.s}, ${hsl3.l}) - using final value of (${hue4}, ${sat}, ${lit})`,
+          "hue from album"
+        );
+      };
+    } catch (e4) {
+      log("received error", "hue from album", "error", { e: e4 });
+    }
+  }
+
   // src/components/music/music_grid.js
   function music_grids(search = page.structure.main, use_colour = true) {
     if (!search) return;
@@ -35816,31 +35853,8 @@
         image.setAttribute("crossorigin", "anonymous");
         lazy(grid, () => {
           console.info("scrolled", grid, "into view");
-          try {
-            const run = () => {
-              let thief = new import_color_thief_browser.default();
-              let colour = thief.getColor(image);
-              let hsl3 = rgb_to_hsl(colour[0], colour[1], colour[2]);
-              grid_colour.style.setProperty(
-                "background",
-                `rgb(${colour})`
-              );
-              let hue4 = hsl3.h;
-              let sat = clamp_sat(hsl3.s / 100 * 3);
-              let lit = clamp_lit(sat, hsl3.l / 100 + 0.35);
-              grid.classList.add("grid-items-item-has-colour");
-              grid.style.setProperty("--hue-over", hue4);
-              grid.style.setProperty("--sat-over", sat);
-              grid.style.setProperty("--lit-over", lit);
-              cover.classList.add("colourful");
-            };
-            if (image.complete && image.naturalWidth != 0) {
-              run();
-            } else {
-              image.addEventListener("load", run, { once: true });
-            }
-          } catch (e4) {
-          }
+          header_colour(image, false, grid);
+          cover.classList.add("colourful");
         });
       } else {
         grid.classList.add("generic-cover");
@@ -36266,7 +36280,7 @@
   };
 
   // src/components/music/track.js
-  var import_color_thief_browser2 = __toESM(require_color_thief_min(), 1);
+  var import_color_thief_browser3 = __toESM(require_color_thief_min(), 1);
 
   // src/components/settings/toggle.js
   function toggle({
@@ -37472,7 +37486,7 @@
           image.setAttribute("crossorigin", "anonymous");
           try {
             image.addEventListener("load", () => {
-              let thief = new import_color_thief_browser2.default();
+              let thief = new import_color_thief_browser3.default();
               let colour = thief.getColor(image);
               let hsl3 = rgb_to_hsl(colour[0], colour[1], colour[2]);
               let hue4 = hsl3.h;
@@ -53962,38 +53976,6 @@
     `);
   }
 
-  // src/components/page/colour.ts
-  var import_color_thief_browser3 = __toESM(require_color_thief_min(), 1);
-  function header_colour(source, apply_to_page = false, apply_to_elem) {
-    try {
-      source.onload = () => {
-        let thief = new import_color_thief_browser3.default();
-        let colour = thief.getColor(source);
-        let hsl3 = rgb_to_hsl(colour[0], colour[1], colour[2]);
-        let hue4 = hsl3.h;
-        let sat = clamp_sat(hsl3.s / 100 * 3);
-        let lit = clamp_lit(sat, hsl3.l / 100 + 0.35, true);
-        if (apply_to_page) {
-          document.body.style.setProperty("--hue-album", hue4);
-          document.body.style.setProperty("--sat-album", sat);
-          document.body.style.setProperty("--lit-album", lit);
-          chart_reflow();
-        }
-        if (apply_to_elem instanceof HTMLElement) {
-          apply_to_elem.style.setProperty("--hue-over", hue4);
-          apply_to_elem.style.setProperty("--sat-over", sat);
-          apply_to_elem.style.setProperty("--lit-over", lit);
-        }
-        log(
-          `sourced hsl of (${hsl3.h}, ${hsl3.s}, ${hsl3.l}) - using final value of (${hue4}, ${sat}, ${lit})`,
-          "hue from album"
-        );
-      };
-    } catch (e4) {
-      log("received error", "hue from album", "error", { e: e4 });
-    }
-  }
-
   // src/pages/profile/profile.ts
   function bleh_profiles() {
     if (page.subpage == "obsessions_obsession") {
@@ -57328,7 +57310,7 @@
     }
   }
 
-  // src/components/news.js
+  // src/components/news.ts
   function news() {
     let changelog = localStorage.getItem("bleh_changelog");
     let changelog_expire = new Date(
@@ -57384,6 +57366,8 @@
   function open_changelog(changelog) {
     const sponsor_name = sponsor_list && sponsor_list.special ? sponsor_list.special[0] : "clairedoll";
     let changelog_list;
+    const versions = Object.keys(changelog);
+    let focused_version = 0;
     const window2 = dialog({
       id: "changelog",
       title: {
@@ -57401,27 +57385,53 @@
       type: "changelog",
       allow_scroll: true
     });
-    let index3 = 0;
-    for (let version4 in changelog) {
-      if (version4 == "updated" || version4 == "latest") continue;
-      const version_item = html.node`
-            <div class="changelog-version-item colourful" data-changelog-type="${changelog[version4].type}" data-changelog-latest="${index3 == 0 ? "true" : "false"}" data-changelog-version="${version4}">
-                <div class="version-item-header">
-                    <div class="sub-text">
-                        <div class="breadcrumb">
-                            <div class="breadcrumb-origin">
-                                ${version4}
-                            </div>
-                            <div class="breadcrumb-name">
-                                ${tl2(trans.news.type[changelog[version4].type])}
-                            </div>
-                        </div>
+    render_update();
+    function render_update() {
+      console.info("news", versions, changelog, focused_version);
+      const title = versions[focused_version];
+      const version4 = changelog[title];
+      const can_go_back = focused_version > 0;
+      const can_go_forward = focused_version < versions.length - 1;
+      render(changelog_list, html`
+            <div class="news-update colourful" data-changelog-type=${version4.type}>
+                <div class="news-update-head">
+                    ${() => {
+        const btn = html.node`
+                            <button class="btn news-update-action chibi icon-mask" data-type="prev" disabled=${!can_go_forward} onclick=${() => {
+          if (!can_go_forward) return;
+          focused_version++;
+          render_update();
+        }}>
+                                ${tl2(trans.prev)}
+                            </button>
+                        `;
+        tippy_esm_default(btn, {
+          content: btn.textContent
+        });
+        return btn;
+      }}
+                    <div class="news-update-middle">
+                        <label class="news-update-label">${tl2(trans.news.type[version4.type])}</label>
+                        <h3 class="news-update-name"><span class="news-update-version">${title}:</span> ${version4.name}</h3>
                     </div>
-                    <h3>${changelog[version4].name}</h3>
-                    ${version4 == "2025.0113" ? html.node`<h4 class="header-over">${changelog[version4].name}</h4>` : ""}
+                    ${() => {
+        const btn = html.node`
+                            <button class="btn news-update-action chibi icon-mask" data-type="next" disabled=${!can_go_back} onclick=${() => {
+          if (!can_go_back) return;
+          focused_version--;
+          render_update();
+        }}>
+                                ${tl2(trans.next)}
+                            </button>
+                        `;
+        tippy_esm_default(btn, {
+          content: btn.textContent
+        });
+        return btn;
+      }}
                 </div>
-                <div class="version-item-body markdown-body">
-                    ${markdown(changelog[version4].bio, {
+                <div class="news-update-body markdown-body">
+                    ${markdown(version4.bio, {
         allow_lists: true,
         allow_headers: true,
         starting_header: 5,
@@ -57429,11 +57439,7 @@
       })}
                 </div>
             </div>
-        `;
-      if (changelog[version4].type == "major")
-        version_item.setAttribute("id", "latest_major_release");
-      changelog_list.appendChild(version_item);
-      index3++;
+        `);
     }
   }
   unsafeWindow._update_local_changelog_cache = function(json) {

@@ -13,7 +13,7 @@
     display: flex;
     gap: var(--card-padding);
 
-    --page-header-avatar-size: 170px;
+    --page-header-avatar-size: 200px;
     --page-header-avatar-radius: var(--item-big-radius);
 }
 
@@ -238,7 +238,7 @@
         margin: unset;
         font-size: calc(26px * var(--custom-font-size-multiplier, 1));
         line-height: 40px;
-        font-weight: var(--font-weight-bold);
+        font-weight: var(--font-weight-medium);
         letter-spacing: unset;
         cursor: default;
 
@@ -291,6 +291,7 @@
     align-items: center;
     gap: 6px;
     cursor: default;
+    color: oklch(var(--c1));
 
     & > .page-header-title {
         color: oklch(var(--c1));

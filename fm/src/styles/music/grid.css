@@ -257,7 +257,7 @@
     inset: 0;
     z-index: 9;
 
-    background: oklch(var(--b4));
+    background: color-mix(in oklch, oklch(var(--h4)) 70%, black);
 
     transition-property: background;
     transition-duration: var(--trans);
@@ -265,10 +265,6 @@
 
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
-
-    &[style] {
-        background: oklch(var(--h4) / 80%) !important;
-    }
 }
 
 .grid-items-item-details {

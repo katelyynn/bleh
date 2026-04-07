@@ -25,6 +25,7 @@ import { register_menu } from '@/components/menu';
 import tippy from 'tippy.js';
 import { expand_avatar } from '@/components/shared/avatar';
 import { save_hoshino_artwork } from '@/components/music/hoshino';
+import { header_colour } from '../page/colour';
 
 export function music_grids(search = page.structure.main, use_colour = true) {
     if (!search) return;
@@ -108,36 +109,8 @@ export function music_grids(search = page.structure.main, use_colour = true) {
             lazy(grid, () => {
                 console.info('scrolled', grid, 'into view');
 
-                try {
-                    const run = () => {
-                        let thief = new ColorThief();
-                        let colour = thief.getColor(image);
-
-                        let hsl = rgb_to_hsl(colour[0], colour[1], colour[2]);
-
-                        grid_colour.style.setProperty(
-                            'background',
-                            `rgb(${colour})`
-                        );
-
-                        let hue = hsl.h;
-                        let sat = clamp_sat((hsl.s / 100) * 3);
-                        let lit = clamp_lit(sat, hsl.l / 100 + 0.35);
-
-                        grid.classList.add('grid-items-item-has-colour');
-                        grid.style.setProperty('--hue-over', hue);
-                        grid.style.setProperty('--sat-over', sat);
-                        grid.style.setProperty('--lit-over', lit);
-
-                        cover.classList.add('colourful');
-                    };
-
-                    if (image.complete && image.naturalWidth != 0) {
-                        run();
-                    } else {
-                        image.addEventListener('load', run, { once: true });
-                    }
-                } catch (e) {}
+                header_colour(image, false, grid);
+                cover.classList.add('colourful');
             });
         } else {
             grid.classList.add('generic-cover');

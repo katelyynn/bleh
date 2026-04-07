@@ -3,11 +3,17 @@ import { chart_reflow, load_chart_colours } from '../music/chart';
 import { clamp_lit, clamp_sat, rgb_to_hsl, rgb_to_oklch } from '@/build/tools';
 import ColorThief from 'color-thief-browser';
 
-export function header_colour(source: HTMLImageElement, apply_to_page = false, apply_to_elem?: HTMLElement) {
+export function header_colour(source: HTMLImageElement, apply_to_page = false, apply_to_elem?: Element) {
     try {
-        source.onload = () => {
+        const image = new Image();
+        image.width = 300;
+        image.height = 300;
+        image.crossOrigin = 'anonymous';
+        image.src = source.src;
+
+        image.onload = () => {
             let thief = new ColorThief();
-            let colour = thief.getColor(source);
+            let colour = thief.getColor(image);
 
             let hsl = rgb_to_hsl(colour[0], colour[1], colour[2]);
 
@@ -30,7 +36,7 @@ export function header_colour(source: HTMLImageElement, apply_to_page = false, a
             }
 
             log(
-                `sourced hsl of (${hsl.h}, ${hsl.s}, ${hsl.l}) - using final value of (${hue}, ${sat}, ${lit})`,
+                `sourced rgb of (${colour[0]}, ${colour[1]}, ${colour[2]}), hsl of (${hsl.h}, ${hsl.s}, ${hsl.l}) - using final value of (${hue}, ${sat}, ${lit})`,
                 'hue from album'
             );
         }

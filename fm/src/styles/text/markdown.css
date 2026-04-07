@@ -122,7 +122,7 @@
         margin: var(--card-gap) 0;
     }
 
-    &.version-item-body {
+    &.news-update-body {
         li {
             list-style-type: "+ ";
 
@@ -132,9 +132,9 @@
                 text-shadow: 0 0 20px oklch(var(--h4) / 40%);
                 font-weight: var(--font-weight-medium);
 
-                --hue-over: 17;
-                --sat-over: 1;
-                --lit-over: 1.1;
+                --hue-over: 32;
+                --sat-over: 1.5;
+                --lit-over: 1;
 
                 code {
                     font-weight: var(--font-weight);

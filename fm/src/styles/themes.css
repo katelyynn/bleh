@@ -667,7 +667,7 @@ u,
     --sat: calc(var(--sat-raw) * var(--sat-multiply));
     --lit: calc(var(--lit-raw) * var(--lit-multiply));
 
-    --c1: 1 calc(clamp(min(0), var(--sat), max(1)) * 0.1) var(--hue);
+    --c1: 2 0 var(--hue);
     --c2: 0.87 calc(clamp(min(0), var(--sat), max(1)) * 0.07) var(--hue);
     --c3: 0.6 calc(clamp(min(0), var(--sat), max(1)) * 0.07) var(--hue);
     --ov-c1: var(--c1);
@@ -757,7 +757,7 @@ u,
 
     &[data-bleh--theme="oled"],
     body[data-bleh--theme="oled"] &:not(.theme-preview) {
-        --c1: 0.96 calc(clamp(min(0), var(--sat), max(1)) * 0.1) var(--hue);
+        --c1: 0.98 0 var(--hue);
         --c2: 0.87 calc(clamp(min(0), var(--sat), max(1)) * 0.07) var(--hue);
         --c3: 0.6 calc(clamp(min(0), var(--sat), max(1)) * 0.07) var(--hue);
 

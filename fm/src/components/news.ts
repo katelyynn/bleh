@@ -4,15 +4,16 @@
 // Licensed under GPLv3
 //
 
-import { html } from 'lighterhtml';
+import { html, render } from 'lighterhtml';
 import { log } from '@/build/log';
 import { page, root } from '@/build/page';
 import { tl, trans } from '@/build/trans';
 import { dialog, dialog_rm } from '@/components/dialog/dialog';
 import { sponsor_list } from '@/build/sponsor.js';
 import { markdown } from '@/components/shared/markdown';
-import { set_storage } from '@/build/tools';
+import { lazy, set_storage } from '@/build/tools';
 import { sponsor } from '@/components/sponsor';
+import tippy from 'tippy.js';
 
 export function news() {
     let changelog = localStorage.getItem('bleh_changelog');
@@ -84,7 +85,11 @@ export function request_changelog(open_after = true) {
 
 function open_changelog(changelog) {
     const sponsor_name = sponsor_list && sponsor_list.special ? sponsor_list.special[0] : 'clairedoll';
-    let changelog_list;
+    let changelog_list: HTMLDivElement;
+
+    const versions = Object.keys(changelog);
+
+    let focused_version = 0;
 
     const window = dialog({
         id: 'changelog',
@@ -104,30 +109,63 @@ function open_changelog(changelog) {
         allow_scroll: true
     });
 
-    let index = 0;
-    for (let version in changelog) {
-        if (version == 'updated' || version == 'latest') continue;
+    render_update();
 
-        //if (index > 10) continue;
+    function render_update() {
+        console.info('news', versions, changelog, focused_version);
 
-        const version_item = html.node`
-            <div class="changelog-version-item colourful" data-changelog-type="${changelog[version].type}" data-changelog-latest="${index == 0 ? 'true' : 'false'}" data-changelog-version="${version}">
-                <div class="version-item-header">
-                    <div class="sub-text">
-                        <div class="breadcrumb">
-                            <div class="breadcrumb-origin">
-                                ${version}
-                            </div>
-                            <div class="breadcrumb-name">
-                                ${tl(trans.news.type[changelog[version].type])}
-                            </div>
-                        </div>
+        const title = versions[focused_version];
+        const version = changelog[title];
+
+        const can_go_back = focused_version > 0;
+        const can_go_forward = focused_version < versions.length - 1;
+
+        render(changelog_list, html`
+            <div class="news-update colourful" data-changelog-type=${version.type}>
+                <div class="news-update-head">
+                    ${() => {
+                        const btn = html.node`
+                            <button class="btn news-update-action chibi icon-mask" data-type="prev" disabled=${!can_go_forward} onclick=${() => {
+                                if (!can_go_forward) return;
+
+                                focused_version++;
+                                render_update();
+                            }}>
+                                ${tl(trans.prev)}
+                            </button>
+                        `;
+
+                        tippy(btn, {
+                            content: btn.textContent
+                        });
+
+                        return btn;
+                    }}
+                    <div class="news-update-middle">
+                        <label class="news-update-label">${tl(trans.news.type[version.type])}</label>
+                        <h3 class="news-update-name"><span class="news-update-version">${title}:</span> ${version.name}</h3>
                     </div>
-                    <h3>${changelog[version].name}</h3>
-                    ${version == '2025.0113' ? html.node`<h4 class="header-over">${changelog[version].name}</h4>` : ''}
+                    ${() => {
+                        const btn = html.node`
+                            <button class="btn news-update-action chibi icon-mask" data-type="next" disabled=${!can_go_back} onclick=${() => {
+                                if (!can_go_back) return;
+
+                                focused_version--;
+                                render_update();
+                            }}>
+                                ${tl(trans.next)}
+                            </button>
+                        `;
+
+                        tippy(btn, {
+                            content: btn.textContent
+                        });
+
+                        return btn;
+                    }}
                 </div>
-                <div class="version-item-body markdown-body">
-                    ${markdown(changelog[version].bio, {
+                <div class="news-update-body markdown-body">
+                    ${markdown(version.bio, {
                         allow_lists: true,
                         allow_headers: true,
                         starting_header: 5,
@@ -135,14 +173,7 @@ function open_changelog(changelog) {
                     })}
                 </div>
             </div>
-        `;
-
-        if (changelog[version].type == 'major')
-            version_item.setAttribute('id', 'latest_major_release');
-
-        changelog_list.appendChild(version_item);
-
-        index++;
+        `);
     }
 }
 

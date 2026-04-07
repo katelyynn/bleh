@@ -8,7 +8,7 @@ import { register_activity } from '@/components/shared/activity';
 import { log } from '@/build/log';
 import { auth, discord, page, root } from '@/build/page';
 import { tl, trans } from '@/build/trans';
-import { request_changelog } from '@/components/news.js';
+import { request_changelog } from '@/components/news';
 import { notify } from '@/components/dialog/notify';
 import { checkup_page_structure } from '@/components/page/structure';
 import { update_colour_swatches } from '../config';
