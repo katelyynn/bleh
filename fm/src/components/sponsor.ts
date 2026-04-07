@@ -12,10 +12,11 @@ import { tl, trans } from '@/build/trans';
 import { dialog } from '@/components/dialog/dialog';
 import { ff } from '@/components/settings/sku';
 import { status } from '@/components/dialog/status';
-import { set_storage } from '@/build/tools';
+import { parse_object, set_storage } from '@/build/tools';
 import { create_badge, process_badge } from '@/components/shared/badge';
 import { notify } from '@/components/dialog/notify';
 import { avatar } from './shared/avatar';
+import JSON5 from 'json5';
 
 export function sponsors(force = false, func = null) {
     if (!ff('sponsor')) return;
@@ -30,20 +31,18 @@ export function sponsors(force = false, func = null) {
         sponsor_request(true, func);
     } else {
         // we prefer to load the current cache before waiting for a new response
-        for (var member in sponsor_list) delete sponsor_list[member];
-        Object.assign(sponsor_list, JSON.parse(sponsor_data));
+        Object.assign(sponsor_list, parse_object('sponsor_data', sponsor_data));
 
-        if (sponsor_list) {
-            auth.sponsor = sponsor_list.sponsors.includes(auth.name);
-            auth.sponsor_full = !sponsor_list.sponsors_one_time.includes(auth.name);
+        if (auth.name && sponsor_list.version) {
+            auth.sponsor = sponsor_list.users.hasOwnProperty(auth.name);
 
-            if (sponsor_list.badges?.[auth.name]) {
-                const old_badges = JSON.parse(localStorage.getItem('kat_sponsor_cache')) || {};
+            if (sponsor_list.users[auth.name]?.badges) {
+                const old_badges = parse_object('sponsor_data', localStorage.getItem('kat_sponsor_cache')) || {};
 
-                if (JSON.stringify(old_badges) != JSON.stringify(sponsor_list.badges[auth.name])) {
-                    console.info('sponsor initial', old_badges, sponsor_list.badges[auth.name]);
-                    set_storage('kat_sponsor_cache', JSON.stringify(sponsor_list.badges[auth.name]));
-                    new_badges(sponsor_list.badges[auth.name]);
+                if (JSON5.stringify(old_badges) != JSON5.stringify(sponsor_list.users[auth.name].badges)) {
+                    console.info('sponsor initial', old_badges, sponsor_list.users[auth.name]);
+                    set_storage('kat_sponsor_cache', JSON5.stringify(sponsor_list.users[auth.name]));
+                    new_badges(sponsor_list.users[auth.name].badges);
 
                     return;
                 }
@@ -66,7 +65,7 @@ function sponsor_request(should_notify = false, func = null) {
     if (button) button.setAttribute('disabled', '');
 
     let xhr = new XMLHttpRequest();
-    let url = `https://katelyynn.github.io/bleh/fm/badges/badges.json?${Math.random()}`;
+    let url = `https://katelyynn.github.io/bleh/fm/public/sponsors.json5?${Math.random()}`;
     xhr.open('GET', url, true);
 
     xhr.onload = function () {
@@ -85,37 +84,33 @@ function sponsor_request(should_notify = false, func = null) {
 
         if (xhr.status == 200) {
             try {
-                if (sponsor_list.latest != 0.0 || (sponsor_list && parseFloat(JSON.parse(this.response).latest) >= parseFloat(sponsor_list.latest))) {
-                    for (const member in sponsor_list) delete sponsor_list[member];
-                    Object.assign(sponsor_list, JSON.parse(this.response));
+                Object.assign(sponsor_list, parse_object('sponsor_data', this.response));
 
-                    if (sponsor_list) {
-                        auth.sponsor = sponsor_list.sponsors.includes(auth.name);
-                        auth.sponsor_full = !sponsor_list.sponsors_one_time.includes(auth.name);
+                if (auth.name && sponsor_list.version) {
+                    auth.sponsor = sponsor_list.users.hasOwnProperty(auth.name);
 
-                        if (sponsor_list.badges?.[auth.name]) {
-                            const old_badges = JSON.parse(localStorage.getItem('kat_sponsor_cache')) || {};
+                    if (sponsor_list.users[auth.name]?.badges) {
+                        const old_badges = parse_object('sponsor_data', localStorage.getItem('kat_sponsor_cache')) || {};
 
-                            if (JSON.stringify(old_badges) != JSON.stringify(sponsor_list.badges[auth.name])) {
-                                console.info('sponsor request', old_badges, sponsor_list.badges[auth.name]);
-                                set_storage('kat_sponsor_cache', JSON.stringify(sponsor_list.badges[auth.name]));
-                                new_badges(sponsor_list.badges[auth.name]);
-                            }
+                        if (JSON5.stringify(old_badges) != JSON5.stringify(sponsor_list.users[auth.name].badges)) {
+                            console.info('sponsor request', old_badges, sponsor_list.users[auth.name]);
+                            set_storage('kat_sponsor_cache', JSON5.stringify(sponsor_list.users[auth.name]));
+                            new_badges(sponsor_list.users[auth.name].badges);
                         }
                     }
-
-                    if (should_notify)
-                        status({
-                            title: tl(trans.downloaded_value, { v: tl(trans.sponsor_details) })
-                        });
-
-                    // save to cache for next page load
-                    set_storage('kat_sponsors', this.response);
-                    if (func) func();
-
-                    api_expire.setHours(api_expire.getHours() + 4);
-                    log(`list cached until ${api_expire}`, 'sponsor');
                 }
+
+                if (should_notify)
+                    status({
+                        title: tl(trans.downloaded_value, { v: tl(trans.sponsor_details) })
+                    });
+
+                // save to cache for next page load
+                set_storage('kat_sponsors', this.response);
+                if (func) func();
+
+                api_expire.setHours(api_expire.getHours() + 4);
+                log(`list cached until ${api_expire}`, 'sponsor');
             } catch (e) {
                 log('parsing list failed', 'sponsor', 'error', { e });
                 notify({
@@ -134,7 +129,7 @@ function sponsor_request(should_notify = false, func = null) {
 
         set_storage('kat_sponsors_expire', api_expire);
 
-        if (button != null) button.removeAttribute('disabled');
+        if (button) button.removeAttribute('disabled');
     };
 
     xhr.send();
@@ -148,6 +143,11 @@ unsafeWindow._sponsor = function (replace = false) {
     sponsor(replace);
 };
 export function sponsor(replace = false) {
+    if (sponsor_list.version) {
+        open(sponsor_list.related.link);
+        return;
+    }
+
     open('https://katelyn.moe/sponsor');
 }
 
@@ -155,49 +155,30 @@ unsafeWindow._sponsor_manage = function () {
     sponsor_manage();
 };
 export function sponsor_manage() {
-    if (
-        sponsor_list.sponsors_one_time &&
-        sponsor_list.sponsors_one_time.includes(auth.name)
-    ) {
-        dialog({
-            id: 'sponsor_manage',
-            title: tl(trans.sponsor),
-            body: html.node`
-                <div class="modal-vertical-inner support-inner">
-                    <div class="avatar">
-                        <img src="${avatar(auth.avatar, 'avatar170s')}" alt="${tl(trans.your_avatar)}">
-                        <span class="avatar-status-dot user-status--bleh-sponsor"></span>
-                    </div>
-                    <h1 class="colourful">${tl(trans.you_are_a_sponsor)}</h1>
-                    <p>${tl(trans.sponsor_no_badge)}</p>
+    if (!auth.name) return;
+
+    dialog({
+        id: 'sponsor_manage',
+        title: tl(trans.sponsor),
+        body: html.node`
+            <div class="modal-vertical-inner support-inner">
+                <div class="avatar">
+                    <img src="${avatar(auth.avatar, 'avatar170s')}" alt="${tl(trans.your_avatar)}">
+                    <span class="avatar-status-dot user-status--bleh-sponsor"></span>
                 </div>
-            `,
-            type: 'sponsor'
-        });
-    } else {
-        dialog({
-            id: 'sponsor_manage',
-            title: tl(trans.sponsor),
-            body: html.node`
-                <div class="modal-vertical-inner support-inner">
-                    <div class="avatar">
-                        <img src="${avatar(auth.avatar, 'avatar170s')}" alt="${tl(trans.your_avatar)}">
-                        <span class="avatar-status-dot user-status--bleh-sponsor"></span>
-                    </div>
-                    <h1 class="colourful">${tl(trans.you_are_a_sponsor)}</h1>
-                    <p>${tl(trans.sponsor_get_badge)}</p>
-                </div>
-                <div class="modal-footer">
-                    <div class="fill"></div>
-                    <a class="btn primary sponsor icon colourful" href="${root}user/${sponsor_list.sponsor_account}" target="_blank">
-                        ${tl(trans.manage_sponsor)}
-                    </a>
-                    <div class="fill"></div>
-                </div>
-            `,
-            type: 'sponsor'
-        });
-    }
+                <h1 class="colourful">${tl(trans.you_are_a_sponsor)}</h1>
+                <p>${tl(trans.sponsor_get_badge)}</p>
+            </div>
+            <div class="modal-footer">
+                <div class="fill"></div>
+                <a class="btn primary sponsor icon colourful" href="${root}user/${sponsor_list.related.account_name}" target="_blank">
+                    ${tl(trans.manage_sponsor)}
+                </a>
+                <div class="fill"></div>
+            </div>
+        `,
+        type: 'sponsor'
+    });
 }
 
 export function bleh_sponsor_page() {

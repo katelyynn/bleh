@@ -250,7 +250,7 @@ export function mualani() {
             <section class="flexy">
                 <h2>Badges</h2>
                 <div class="button-group">
-                    ${sponsor_list && sponsor_list.badges ? Object.entries(sponsor_list.badges).map(([user, contents]) => {
+                    ${sponsor_list.version ? Object.entries(sponsor_list.users).map(([user, contents]) => {
                         const badges = load_badges(user);
 
                         return html.node`
@@ -263,7 +263,7 @@ export function mualani() {
                     }) : ''}
                 </div>
                 <div class="button-group">
-                    ${sponsor_list && sponsor_list.badges ? Object.entries(sponsor_list.badges).map(([user, contents]) => {
+                    ${sponsor_list.version ? Object.entries(sponsor_list.users).map(([user, contents]) => {
                         const badges = load_badges(user);
 
                         return html.node`

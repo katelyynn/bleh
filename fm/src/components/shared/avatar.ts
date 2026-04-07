@@ -199,7 +199,9 @@ export function style_name_from_badge(name, badge) {
  * @param requested requested sizing
  * @returns
  */
-export function avatar(url: string, requested: 'avatar42s' | 'avatar70s' | 'avatar170s' | 'avatar300s' | '300x300' | 'arG' | 'ar0') {
+export function avatar(url: string | null, requested: 'avatar42s' | 'avatar70s' | 'avatar170s' | 'avatar300s' | '300x300' | 'arG' | 'ar0') {
+    if (url == null) return url;
+
     let image: string;
 
     if (url.startsWith('https')) {

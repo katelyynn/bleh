@@ -1535,11 +1535,11 @@
             return final;
           }
         };
-        var JSON52 = {
+        var JSON53 = {
           parse: parse6,
           stringify
         };
-        var lib = JSON52;
+        var lib = JSON53;
         var es5 = lib;
         return es5;
       });
@@ -33674,16 +33674,15 @@
     }
   }
 
-  // src/build/sponsor.js
+  // src/build/sponsor.ts
   var sponsor_list = {
-    latest: 0,
-    sponsors: [],
-    sponsors_one_time: [],
-    sponsor_count_remove: 0,
-    sponsor_account: "",
-    sponsor_link: "",
-    special: [],
-    badges: {}
+    version: "",
+    related: {
+      account_name: "",
+      link: "",
+      special: []
+    },
+    users: {}
   };
 
   // src/components/settings/sku.js
@@ -33698,7 +33697,8 @@
       return version.feature_flags[flag].default;
   }
 
-  // src/components/sponsor.js
+  // src/components/sponsor.ts
+  var import_json52 = __toESM(require_dist2(), 1);
   function sponsors(force = false, func = null) {
     if (!ff("sponsor")) return;
     let sponsor_data = localStorage.getItem("kat_sponsors");
@@ -33708,17 +33708,15 @@
       log("not cached, fetching", "sponsor");
       sponsor_request(true, func);
     } else {
-      for (var member in sponsor_list) delete sponsor_list[member];
-      Object.assign(sponsor_list, JSON.parse(sponsor_data));
-      if (sponsor_list) {
-        auth.sponsor = sponsor_list.sponsors.includes(auth.name);
-        auth.sponsor_full = !sponsor_list.sponsors_one_time.includes(auth.name);
-        if (sponsor_list.badges?.[auth.name]) {
-          const old_badges = JSON.parse(localStorage.getItem("kat_sponsor_cache")) || {};
-          if (JSON.stringify(old_badges) != JSON.stringify(sponsor_list.badges[auth.name])) {
-            console.info("sponsor initial", old_badges, sponsor_list.badges[auth.name]);
-            set_storage("kat_sponsor_cache", JSON.stringify(sponsor_list.badges[auth.name]));
-            new_badges(sponsor_list.badges[auth.name]);
+      Object.assign(sponsor_list, parse_object("sponsor_data", sponsor_data));
+      if (auth.name && sponsor_list.version) {
+        auth.sponsor = sponsor_list.users.hasOwnProperty(auth.name);
+        if (sponsor_list.users[auth.name]?.badges) {
+          const old_badges = parse_object("sponsor_data", localStorage.getItem("kat_sponsor_cache")) || {};
+          if (import_json52.default.stringify(old_badges) != import_json52.default.stringify(sponsor_list.users[auth.name].badges)) {
+            console.info("sponsor initial", old_badges, sponsor_list.users[auth.name]);
+            set_storage("kat_sponsor_cache", import_json52.default.stringify(sponsor_list.users[auth.name]));
+            new_badges(sponsor_list.users[auth.name].badges);
             return;
           }
         }
@@ -33735,7 +33733,7 @@
     let button2 = document.body.querySelector('[onclick="_sponsor_check()"]');
     if (button2) button2.setAttribute("disabled", "");
     let xhr = new XMLHttpRequest();
-    let url = `https://katelyynn.github.io/bleh/fm/badges/badges.json?${Math.random()}`;
+    let url = `https://katelyynn.github.io/bleh/fm/public/sponsors.json5?${Math.random()}`;
     xhr.open("GET", url, true);
     xhr.onload = function() {
       log(`list responded with ${xhr.status}`, "sponsor");
@@ -33749,30 +33747,26 @@
       }
       if (xhr.status == 200) {
         try {
-          if (sponsor_list.latest != 0 || sponsor_list && parseFloat(JSON.parse(this.response).latest) >= parseFloat(sponsor_list.latest)) {
-            for (const member in sponsor_list) delete sponsor_list[member];
-            Object.assign(sponsor_list, JSON.parse(this.response));
-            if (sponsor_list) {
-              auth.sponsor = sponsor_list.sponsors.includes(auth.name);
-              auth.sponsor_full = !sponsor_list.sponsors_one_time.includes(auth.name);
-              if (sponsor_list.badges?.[auth.name]) {
-                const old_badges = JSON.parse(localStorage.getItem("kat_sponsor_cache")) || {};
-                if (JSON.stringify(old_badges) != JSON.stringify(sponsor_list.badges[auth.name])) {
-                  console.info("sponsor request", old_badges, sponsor_list.badges[auth.name]);
-                  set_storage("kat_sponsor_cache", JSON.stringify(sponsor_list.badges[auth.name]));
-                  new_badges(sponsor_list.badges[auth.name]);
-                }
+          Object.assign(sponsor_list, parse_object("sponsor_data", this.response));
+          if (auth.name && sponsor_list.version) {
+            auth.sponsor = sponsor_list.users.hasOwnProperty(auth.name);
+            if (sponsor_list.users[auth.name]?.badges) {
+              const old_badges = parse_object("sponsor_data", localStorage.getItem("kat_sponsor_cache")) || {};
+              if (import_json52.default.stringify(old_badges) != import_json52.default.stringify(sponsor_list.users[auth.name].badges)) {
+                console.info("sponsor request", old_badges, sponsor_list.users[auth.name]);
+                set_storage("kat_sponsor_cache", import_json52.default.stringify(sponsor_list.users[auth.name]));
+                new_badges(sponsor_list.users[auth.name].badges);
               }
             }
-            if (should_notify)
-              status2({
-                title: tl2(trans.downloaded_value, { v: tl2(trans.sponsor_details) })
-              });
-            set_storage("kat_sponsors", this.response);
-            if (func) func();
-            api_expire.setHours(api_expire.getHours() + 4);
-            log(`list cached until ${api_expire}`, "sponsor");
           }
+          if (should_notify)
+            status2({
+              title: tl2(trans.downloaded_value, { v: tl2(trans.sponsor_details) })
+            });
+          set_storage("kat_sponsors", this.response);
+          if (func) func();
+          api_expire.setHours(api_expire.getHours() + 4);
+          log(`list cached until ${api_expire}`, "sponsor");
         } catch (e4) {
           log("parsing list failed", "sponsor", "error", { e: e4 });
           notify({
@@ -33788,7 +33782,7 @@
         }
       }
       set_storage("kat_sponsors_expire", api_expire);
-      if (button2 != null) button2.removeAttribute("disabled");
+      if (button2) button2.removeAttribute("disabled");
     };
     xhr.send();
   }
@@ -33799,52 +33793,39 @@
     sponsor(replace);
   };
   function sponsor(replace = false) {
+    if (sponsor_list.version) {
+      open(sponsor_list.related.link);
+      return;
+    }
     open("https://katelyn.moe/sponsor");
   }
   unsafeWindow._sponsor_manage = function() {
     sponsor_manage();
   };
   function sponsor_manage() {
-    if (sponsor_list.sponsors_one_time && sponsor_list.sponsors_one_time.includes(auth.name)) {
-      dialog({
-        id: "sponsor_manage",
-        title: tl2(trans.sponsor),
-        body: html.node`
-                <div class="modal-vertical-inner support-inner">
-                    <div class="avatar">
-                        <img src="${avatar(auth.avatar, "avatar170s")}" alt="${tl2(trans.your_avatar)}">
-                        <span class="avatar-status-dot user-status--bleh-sponsor"></span>
-                    </div>
-                    <h1 class="colourful">${tl2(trans.you_are_a_sponsor)}</h1>
-                    <p>${tl2(trans.sponsor_no_badge)}</p>
+    if (!auth.name) return;
+    dialog({
+      id: "sponsor_manage",
+      title: tl2(trans.sponsor),
+      body: html.node`
+            <div class="modal-vertical-inner support-inner">
+                <div class="avatar">
+                    <img src="${avatar(auth.avatar, "avatar170s")}" alt="${tl2(trans.your_avatar)}">
+                    <span class="avatar-status-dot user-status--bleh-sponsor"></span>
                 </div>
-            `,
-        type: "sponsor"
-      });
-    } else {
-      dialog({
-        id: "sponsor_manage",
-        title: tl2(trans.sponsor),
-        body: html.node`
-                <div class="modal-vertical-inner support-inner">
-                    <div class="avatar">
-                        <img src="${avatar(auth.avatar, "avatar170s")}" alt="${tl2(trans.your_avatar)}">
-                        <span class="avatar-status-dot user-status--bleh-sponsor"></span>
-                    </div>
-                    <h1 class="colourful">${tl2(trans.you_are_a_sponsor)}</h1>
-                    <p>${tl2(trans.sponsor_get_badge)}</p>
-                </div>
-                <div class="modal-footer">
-                    <div class="fill"></div>
-                    <a class="btn primary sponsor icon colourful" href="${root}user/${sponsor_list.sponsor_account}" target="_blank">
-                        ${tl2(trans.manage_sponsor)}
-                    </a>
-                    <div class="fill"></div>
-                </div>
-            `,
-        type: "sponsor"
-      });
-    }
+                <h1 class="colourful">${tl2(trans.you_are_a_sponsor)}</h1>
+                <p>${tl2(trans.sponsor_get_badge)}</p>
+            </div>
+            <div class="modal-footer">
+                <div class="fill"></div>
+                <a class="btn primary sponsor icon colourful" href="${root}user/${sponsor_list.related.account_name}" target="_blank">
+                    ${tl2(trans.manage_sponsor)}
+                </a>
+                <div class="fill"></div>
+            </div>
+        `,
+      type: "sponsor"
+    });
   }
   function bleh_sponsor_page() {
     document.body.style.removeProperty("--hue-album");
@@ -33882,7 +33863,7 @@
 
   // src/components/shared/badge.js
   function load_badges(user, solo = false) {
-    if (!sponsor_list || !sponsor_list.badges) return;
+    if (!sponsor_list.version) return;
     let badges = [];
     const trans_contributions = get_trans_contributions(user);
     log(`found ${trans_contributions.length} contribution(s) for ${user}`, "sponsor", "info", { trans_contributions });
@@ -33895,23 +33876,14 @@
         });
       });
     }
-    if (sponsor_list.badges.hasOwnProperty(user)) {
-      if (!Array.isArray(sponsor_list.badges[user])) {
-        log("1 badge found", "sponsor", "info", sponsor_list.badges[user]);
-        badges.push(sponsor_list.badges[user]);
-      } else {
-        log(
-          "multiple badges found",
-          "sponsor",
-          "info",
-          sponsor_list.badges[user]
-        );
-        badges = [...badges, ...sponsor_list.badges[user]];
-      }
-      badges = badges.filter((badge) => {
-        if (badge.type != "translation") return true;
-        return "translation_code" in badge;
-      });
+    if (sponsor_list.users[user]?.badges) {
+      log(
+        "multiple badges found",
+        "sponsor",
+        "info",
+        sponsor_list.users[user].badges
+      );
+      badges = [...badges, ...sponsor_list.users[user].badges];
     }
     badges.forEach((badge) => {
       badge = process_badge(badge, user);
@@ -34361,6 +34333,7 @@
     }
   }
   function avatar(url, requested) {
+    if (url == null) return url;
     let image;
     if (url.startsWith("https")) {
       if (!url.startsWith("https://lastfm.freetls.fastly.net/i/u/")) return url;
@@ -37753,7 +37726,7 @@
     let taste_percentage = "";
     let taste_artists = [];
     let taste_formal = "NONE";
-    if (!is_own_profile && page.name != sponsor_list.sponsor_account) {
+    if (!is_own_profile && page.name != sponsor_list.related.account_name) {
       let taste_meter = base_header.querySelector(".tasteometer");
       if (taste_meter) {
         taste = taste_meter.classList[1].replace("tasteometer-compat-", "");
@@ -37771,7 +37744,7 @@
     let profile_header = html.node`
         <section class="side-actions" />
     `;
-    if (!is_own_profile && page.name != sponsor_list.sponsor_account && auth.name) {
+    if (!is_own_profile && page.name != sponsor_list.related.account_name && auth.name) {
       let follow_wrap = document.body.querySelector(".header-avatar .class > div");
       if (follow_wrap) {
         let follow_btn = follow_wrap.querySelector("button");
@@ -37796,14 +37769,14 @@
     if (!is_own_profile) {
       let msg_button = document.body.querySelector(".header-message-user");
       if (msg_button) {
-        if (page.name != sponsor_list.sponsor_account) {
+        if (page.name != sponsor_list.related.account_name) {
           create_profile_top_item(profile_header, {
             name: page.name,
             type: "message",
             link: msg_button.getAttribute("href"),
             text: tl2(trans.send_message)
           });
-          if (page.name == sponsor_list.special[0]) {
+          if (sponsor_list.related.special.length > 0 && page.name == sponsor_list.related.special[0]) {
             create_profile_top_item(profile_header, {
               name: page.name,
               type: "sponsor",
@@ -37826,7 +37799,7 @@
           });
         }
       }
-      if (page.name != sponsor_list.sponsor_account) {
+      if (page.name != sponsor_list.related.account_name) {
         if (ff("compare")) {
           create_profile_top_item(profile_header, {
             name: page.name,
@@ -37893,7 +37866,7 @@
         page.structure.main.firstElementChild
       );
     const summary = page.structure.main.querySelector(".profile-summary");
-    if (!is_own_profile && page.name != sponsor_list.sponsor_account && auth.name) {
+    if (!is_own_profile && page.name != sponsor_list.related.account_name && auth.name) {
       if (taste == "") {
         summary.appendChild(html.node`
                 <div class="loading-data-container">
@@ -54178,7 +54151,7 @@
       const top_artists = profile_artists();
       profile_albums();
       profile_tracks();
-      if (page.name == sponsor_list.sponsor_account && !is_own_profile) {
+      if (page.name == sponsor_list.related.account_name && !is_own_profile) {
         page.structure.container.removeChild(page.structure.nav);
         page.structure.main.innerHTML = "";
         page.structure.side.innerHTML = "";
@@ -54239,7 +54212,7 @@
       page.state.artists = artists;
       page.state.loved = loved;
       page.state.average = average;
-      if (page.name != sponsor_list.sponsor_account || is_own_profile) profile_summary(recent_tracks, top_artists);
+      if (page.name != sponsor_list.related.account_name || is_own_profile) profile_summary(recent_tracks, top_artists);
       const profile_sub_text = redesigned_profile_header.querySelector(
         ".header-title-secondary"
       );
@@ -57366,7 +57339,7 @@
     xhr.send();
   }
   function open_changelog(changelog) {
-    const sponsor_name = sponsor_list && sponsor_list.special ? sponsor_list.special[0] : "clairedoll";
+    const sponsor_name = sponsor_list.related.special.length > 0 ? sponsor_list.related.special[0] : "clairedoll";
     let changelog_list;
     const versions = Object.keys(changelog);
     let focused_version = 0;
@@ -66773,7 +66746,7 @@
         replace: (_, family) => {
           delete cache2.font;
           delete cache2.font_style;
-          if (sponsor_list && sponsor_list.sponsors.includes(name)) {
+          if (sponsor_list.version && sponsor_list.users.hasOwnProperty(name)) {
             const split = family.split(",");
             cache2.font = split[0];
             cache2.font_style = split[1] || "solid";
@@ -66788,7 +66761,7 @@
         regex: /\[name=([^\]]+)\]/g,
         replace: (_, username2) => {
           delete cache2.username;
-          if (sponsor_list && sponsor_list.sponsors.includes(name)) {
+          if (sponsor_list.version && sponsor_list.users.hasOwnProperty(name)) {
             cache2.username = username2;
           }
           return "";
@@ -67002,7 +66975,7 @@
       });
     }
     if (allow_hue) {
-      if (!sponsor_list || sponsor_list && !sponsor_list.sponsors.includes(name))
+      if (sponsor_list.users.hasOwnProperty(name))
         allow_hue = false;
     }
     if (body.nodeName != "#text") {
@@ -70497,7 +70470,7 @@
                         <h5>${tl2(trans.current_version)}</h5>
                     </div>
                     <div class="info">
-                        <p>${sponsor_list.latest}</p>
+                        <p>${sponsor_list.version}</p>
                         <button class="see-more update-check sponsor-related left-icon" onclick=${() => sponsors(true, () => {
       render_setting_page("general");
     })}>
@@ -78339,11 +78312,10 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     `;
     let kate = "katelyn";
     let sponsoring = 0;
-    if (sponsor_list) {
-      if (sponsor_list.special)
-        kate = sponsor_list.special[0];
-      if (sponsor_list.sponsors && sponsor_list.sponsor_count_remove)
-        sponsoring = sponsor_list.sponsors.length - sponsor_list.sponsor_count_remove;
+    if (sponsor_list.version) {
+      if (sponsor_list.related.special.length > 0)
+        kate = sponsor_list.related.special[0];
+      sponsoring = Object.keys(sponsor_list.users).length - 3;
     }
     render(
       footer,
@@ -78961,7 +78933,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
             <section class="flexy">
                 <h2>Badges</h2>
                 <div class="button-group">
-                    ${sponsor_list && sponsor_list.badges ? Object.entries(sponsor_list.badges).map(([user, contents]) => {
+                    ${sponsor_list.version ? Object.entries(sponsor_list.users).map(([user, contents]) => {
         const badges = load_badges(user);
         return html.node`
                             ${badges.map((badge) => {
@@ -78972,7 +78944,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       }) : ""}
                 </div>
                 <div class="button-group">
-                    ${sponsor_list && sponsor_list.badges ? Object.entries(sponsor_list.badges).map(([user, contents]) => {
+                    ${sponsor_list.version ? Object.entries(sponsor_list.users).map(([user, contents]) => {
         const badges = load_badges(user);
         return html.node`
                             ${badges.map((badge) => {

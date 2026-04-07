@@ -36,7 +36,7 @@ export function redesign_profile_header(is_own_profile, is_following) {
     let taste_artists = [];
     let taste_formal = 'NONE';
 
-    if (!is_own_profile && page.name != sponsor_list.sponsor_account) {
+    if (!is_own_profile && page.name != sponsor_list.related.account_name) {
         let taste_meter = base_header.querySelector('.tasteometer');
 
         if (taste_meter) {
@@ -65,7 +65,7 @@ export function redesign_profile_header(is_own_profile, is_following) {
 
     if (
         !is_own_profile &&
-        page.name != sponsor_list.sponsor_account &&
+        page.name != sponsor_list.related.account_name &&
         auth.name
     ) {
         // follow
@@ -101,7 +101,7 @@ export function redesign_profile_header(is_own_profile, is_following) {
         // message
         let msg_button = document.body.querySelector('.header-message-user');
         if (msg_button) {
-            if (page.name != sponsor_list.sponsor_account) {
+            if (page.name != sponsor_list.related.account_name) {
                 create_profile_top_item(profile_header, {
                     name: page.name,
                     type: 'message',
@@ -109,7 +109,7 @@ export function redesign_profile_header(is_own_profile, is_following) {
                     text: tl(trans.send_message)
                 });
 
-                if (page.name == sponsor_list.special[0]) {
+                if (sponsor_list.related.special.length > 0 && page.name == sponsor_list.related.special[0]) {
                     create_profile_top_item(profile_header, {
                         name: page.name,
                         type: 'sponsor',
@@ -133,7 +133,7 @@ export function redesign_profile_header(is_own_profile, is_following) {
             }
         }
 
-        if (page.name != sponsor_list.sponsor_account) {
+        if (page.name != sponsor_list.related.account_name) {
             if (ff('compare')) {
                 create_profile_top_item(profile_header, {
                     name: page.name,
@@ -208,7 +208,7 @@ export function redesign_profile_header(is_own_profile, is_following) {
 
     if (
         !is_own_profile &&
-        page.name != sponsor_list.sponsor_account &&
+        page.name != sponsor_list.related.account_name &&
         auth.name
     ) {
         if (taste == '') {

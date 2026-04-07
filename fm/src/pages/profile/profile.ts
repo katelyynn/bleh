@@ -8,7 +8,7 @@ import { render_activity_list } from '@/components/shared/activity';
 import { settings } from '@/build/config';
 import { log } from '@/build/log.js';
 import { auth, page, root } from '@/build/page';
-import { sponsor_list } from '@/build/sponsor.js';
+import { sponsor_list } from '@/build/sponsor';
 import {
     clean_number,
     control_gif_pause,
@@ -315,7 +315,7 @@ export function bleh_profiles() {
         profile_albums();
         profile_tracks();
 
-        if (page.name == sponsor_list.sponsor_account && !is_own_profile) {
+        if (page.name == sponsor_list.related.account_name && !is_own_profile) {
             page.structure.container!.removeChild(page.structure.nav!);
             page.structure.main!.innerHTML = '';
             page.structure.side!.innerHTML = '';
@@ -388,7 +388,7 @@ export function bleh_profiles() {
         page.state.loved = loved;
         page.state.average = average;
 
-        if (page.name != sponsor_list.sponsor_account || is_own_profile) profile_summary(recent_tracks, top_artists);
+        if (page.name != sponsor_list.related.account_name || is_own_profile) profile_summary(recent_tracks, top_artists);
 
         // secondary text
         const profile_sub_text = redesigned_profile_header.querySelector(

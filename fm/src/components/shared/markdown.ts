@@ -19,7 +19,7 @@ import { save_profile_cache } from '@/pages/profile/profile';
 import { toggle } from '@/components/settings/toggle';
 import { save_setting } from '@/components/settings/settings';
 import { load_chart_colours } from '@/components/music/chart.js';
-import { sponsor_list } from '@/build/sponsor.js';
+import { sponsor_list } from '@/build/sponsor';
 import { fetch_status } from '@/components/profile/statuscafe';
 import tippy from 'tippy.js';
 import { DateTime } from 'luxon';
@@ -206,7 +206,7 @@ export function markdown(
                 delete cache.font;
                 delete cache.font_style;
 
-                if (sponsor_list && sponsor_list.sponsors.includes(name)) {
+                if (sponsor_list.version && sponsor_list.users.hasOwnProperty(name)) {
                     const split = family.split(',');
 
                     cache.font = split[0];
@@ -226,7 +226,7 @@ export function markdown(
             replace: (_, username) => {
                 delete cache.username;
 
-                if (sponsor_list && sponsor_list.sponsors.includes(name)) {
+                if (sponsor_list.version && sponsor_list.users.hasOwnProperty(name)) {
                     cache.username = username;
                 }
 
@@ -492,10 +492,7 @@ export function markdown(
     // this looks like a mess, but essentially profile colours are
     // a nice 'thank you' vanity reward for sponsors <3
     if (allow_hue) {
-        if (
-            !sponsor_list ||
-            (sponsor_list && !sponsor_list.sponsors.includes(name))
-        )
+        if (sponsor_list.users.hasOwnProperty(name))
             allow_hue = false;
     }
 

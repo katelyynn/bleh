@@ -14,7 +14,7 @@ import { page } from '@/build/page';
 import { style_name_from_badge } from './avatar';
 
 export function load_badges(user, solo = false) {
-    if (!sponsor_list || !sponsor_list.badges) return;
+    if (!sponsor_list.version) return;
 
     let badges = [];
 
@@ -31,27 +31,15 @@ export function load_badges(user, solo = false) {
         });
     }
 
-    if (sponsor_list.badges.hasOwnProperty(user)) {
-        if (!Array.isArray(sponsor_list.badges[user])) {
-            log('1 badge found', 'sponsor', 'info', sponsor_list.badges[user]);
-            badges.push(sponsor_list.badges[user]);
-        } else {
-            log(
-                'multiple badges found',
-                'sponsor',
-                'info',
-                sponsor_list.badges[user]
-            );
+    if (sponsor_list.users[user]?.badges) {
+        log(
+            'multiple badges found',
+            'sponsor',
+            'info',
+            sponsor_list.users[user].badges
+        );
 
-            badges = [...badges, ...sponsor_list.badges[user]];
-        }
-
-        // remove old translation badges
-        badges = badges.filter(badge => {
-            if (badge.type != 'translation') return true;
-
-            return 'translation_code' in badge;
-        });
+        badges = [...badges, ...sponsor_list.users[user].badges];
     }
 
     // now we run thru to add missing metadata

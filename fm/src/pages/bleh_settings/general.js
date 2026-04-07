@@ -142,7 +142,7 @@ export function general() {
                         <h5>${tl(trans.current_version)}</h5>
                     </div>
                     <div class="info">
-                        <p>${sponsor_list.latest}</p>
+                        <p>${sponsor_list.version}</p>
                         <button class="see-more update-check sponsor-related left-icon" onclick=${() => sponsors(true, () => {
                             render_setting_page('general');
                         })}>

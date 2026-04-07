@@ -6,7 +6,7 @@
 
 import { html, render } from 'lighterhtml';
 import { lang, lang_info, tl, trans } from '@/build/trans';
-import { sponsor_list } from '@/build/sponsor.js';
+import { sponsor_list } from '@/build/sponsor';
 import { root } from '@/build/page';
 import { sponsor } from '@/components/sponsor';
 import { version } from '@/main';
@@ -25,12 +25,11 @@ export function bleh_footer() {
     let kate = 'katelyn';
     let sponsoring = 0;
 
-    if (sponsor_list) {
-        if (sponsor_list.special)
-            kate = sponsor_list.special[0];
+    if (sponsor_list.version) {
+        if (sponsor_list.related.special.length > 0)
+            kate = sponsor_list.related.special[0];
 
-        if (sponsor_list.sponsors && sponsor_list.sponsor_count_remove)
-            sponsoring = sponsor_list.sponsors.length - sponsor_list.sponsor_count_remove;
+        sponsoring = Object.keys(sponsor_list.users).length - 3;
     }
 
     render(

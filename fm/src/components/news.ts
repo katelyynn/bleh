@@ -9,7 +9,7 @@ import { log } from '@/build/log';
 import { page, root } from '@/build/page';
 import { tl, trans } from '@/build/trans';
 import { dialog, dialog_rm } from '@/components/dialog/dialog';
-import { sponsor_list } from '@/build/sponsor.js';
+import { sponsor_list } from '@/build/sponsor';
 import { markdown } from '@/components/shared/markdown';
 import { lazy, set_storage } from '@/build/tools';
 import { sponsor } from '@/components/sponsor';
@@ -84,7 +84,7 @@ export function request_changelog(open_after = true) {
 }
 
 function open_changelog(changelog) {
-    const sponsor_name = sponsor_list && sponsor_list.special ? sponsor_list.special[0] : 'clairedoll';
+    const sponsor_name = sponsor_list.related.special.length > 0 ? sponsor_list.related.special[0] : 'clairedoll';
     let changelog_list: HTMLDivElement;
 
     const versions = Object.keys(changelog);
