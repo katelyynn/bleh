@@ -1698,7 +1698,7 @@ export function oracle_process() {
                     stats,
                     html`
                         ${type}
-                        <span class="plays">
+                        <span class="oracle-stat plays">
                             <span class="bleh-icon" />
                             ${listeners?.title.toLocaleString(lang)}
                         </span>
