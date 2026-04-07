@@ -1,20 +1,6 @@
 body {
     --version-build: "2026.0212";
 
-    --font:
-        var(--custom_font, ""), Funnel Sans, Inter, Ubuntu Sans, Spline Sans,
-        Roboto, Apple Color Emoji, var(--font_emoji_name, ""), Segoe UI Symbol, Apple Symbols, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Sans TC,
-        Lucida Grande, Verdana, -apple-system, BlinkMacSystemFont,
-        sans-serif;
-    --font-code:
-        Google Sans Code, JetBrains Mono, Roboto Mono, monospace,
-        var(--font);
-    --font-brand: Darumadrop One, var(--font);
-    --font-size: 14px;
-    --line-height: calc(var(--font-size) + 4px);
-    --font-size-sm: 12px;
-    --line-height-sm: calc(var(--font-size-sm) + 4px);
-
     --default-hue: 298;
     --default-sat: 1.28;
     --default-lit: 0.9;

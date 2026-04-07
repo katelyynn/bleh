@@ -6,6 +6,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Funnel+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Cherry+Bomb+One&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Lilita+One&family=Rokkitt:ital,wght@0,100..900;1,100..900&family=Single+Day&family=UnifrakturCook:wght@700&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap');
+
 @font-face {
     font-family: 'Zpix';
     src: url('https://katelyynn.github.io/needy-streamer-overdose-font/fonts/DinkieBitmap9px.woff') format('woff');
@@ -20,4 +22,20 @@
     font-weight: 500;
     font-style: normal;
     font-display: swap;
+}
+
+body {
+    --font:
+        var(--custom_font, ""), Bricolage Grotesque, Funnel Sans, Inter, Ubuntu Sans, Spline Sans,
+        Roboto, Apple Color Emoji, var(--font_emoji_name, ""), Segoe UI Symbol, Apple Symbols, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Sans TC,
+        Lucida Grande, Verdana, -apple-system, BlinkMacSystemFont,
+        sans-serif;
+    --font-code:
+        Google Sans Code, JetBrains Mono, Roboto Mono, monospace,
+        var(--font);
+    --font-brand: Darumadrop One, var(--font);
+    --font-size: 14px;
+    --line-height: calc(var(--font-size) + 4px);
+    --font-size-sm: 12px;
+    --line-height-sm: calc(var(--font-size-sm) + 4px);
 }
