@@ -238,7 +238,7 @@
         margin: unset;
         font-size: calc(26px * var(--custom-font-size-multiplier, 1));
         line-height: 40px;
-        font-weight: var(--font-weight-medium);
+        font-weight: var(--font-weight-bold);
         letter-spacing: unset;
         cursor: default;
 

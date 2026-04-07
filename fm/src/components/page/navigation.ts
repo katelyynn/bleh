@@ -844,7 +844,7 @@ export function append_nav() {
                 </div>
                 ` : ''}
                 <div class="auth-menu-v2" style="--page-height: ${height}px">
-                    <div class="side primary">
+                    <div class="side primary" onclick=${() => { instance.hide() }}>
                         <div class="auth-bg-container" ref=${el => auth_bg = el}>
                             ${!auth.avatar.endsWith('818148bf682d429dc215c1705eb27b98.png') ? html.node`
                             <div class="bg" style="background-image: url(${avatar(auth.avatar, 'avatar170s')})" />
@@ -881,12 +881,12 @@ export function append_nav() {
                                     }}
                                 </div>
                             ` : ''}
-                            <a class="link-block-cover-link" href="${root}user/${auth.name}" />
+                            <a class="link-block-cover-link" href="${root}user/${auth.name}" onclick=${() => { instance.hide() }} />
                         </div>
                         <div class="floating button-group">
                             ${() => {
                                 let button = html.node`
-                                    <a class="dropdown-menu-clickable-item chibi" data-type="edit_mini" href="${root}settings">
+                                    <a class="dropdown-menu-clickable-item chibi" data-type="edit_mini" href="${root}settings" onclick=${() => { instance.hide() }}>
                                         ${tl(trans.edit_profile)}
                                     </a>
                                 `;
@@ -899,7 +899,7 @@ export function append_nav() {
                             }}
                             ${settings.starred_friend != '' ? () => {
                                 let button = html.node`
-                                    <a class="dropdown-menu-clickable-item chibi colourful" data-type="starred_friend" data-starred="true" href="${root}user/${settings.starred_friend}">${settings.starred_friend}</a>
+                                    <a class="dropdown-menu-clickable-item chibi colourful" data-type="starred_friend" data-starred="true" href="${root}user/${settings.starred_friend}" onclick=${() => { instance.hide() }}>${settings.starred_friend}</a>
                                 `;
 
                                 tippy(button, {
@@ -931,7 +931,7 @@ export function append_nav() {
                                     page.state.quick_access_items[val];
 
                                 if (formal.url)
-                                    elem = html.node`<a href=${formal.url} />`;
+                                    elem = html.node`<a href=${formal.url} onclick=${() => { instance.hide() }} />`;
                                 else
                                     elem = html.node`<button onclick=${() => {
                                         formal.action();
@@ -963,7 +963,7 @@ export function append_nav() {
                                 if (val == 'friends') {
                                     elem = html.node`
                                         <div class="button-combo">
-                                            <a class="dropdown-menu-clickable-item" data-type=${formal.icon} href=${formal.url}>
+                                            <a class="dropdown-menu-clickable-item" data-type=${formal.icon} href=${formal.url} onclick=${() => { instance.hide() }}>
                                                 ${formal.name}
                                             </a>
                                             <div class="button-combo-sep" />
@@ -1135,7 +1135,7 @@ export function append_nav() {
                                 :   ''
                             }
                             <div class="button-combo">
-                                <a class="dropdown-menu-clickable-item" data-type="mini" href="${root}bleh/minis">
+                                <a class="dropdown-menu-clickable-item" data-type="mini" href="${root}bleh/minis" onclick=${() => { instance.hide() }}>
                                     ${tl(trans.minis)}
                                 </a>
                                 <div class="button-combo-sep" />
@@ -1157,7 +1157,7 @@ export function append_nav() {
                                 }}
                             </div>
                             <div class="button-combo">
-                                <a class="dropdown-menu-clickable-item accented-menu-item" data-menu-item="bleh" href="${root}bleh">
+                                <a class="dropdown-menu-clickable-item accented-menu-item" data-menu-item="bleh" href="${root}bleh" onclick=${() => { instance.hide() }}>
                                     ${tl(trans.settings)}
                                 </a>
                                 <div class="button-combo-sep" />
@@ -1166,7 +1166,7 @@ export function append_nav() {
                                     let form = html.node`
                                         <form class="chibi">
                                             <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
-                                            <a class="dropdown-menu-clickable-item chibi colourful" ref=${(el) => (button = el)} data-menu-item="logout" href="${root}logout">
+                                            <a class="dropdown-menu-clickable-item chibi colourful" ref=${(el) => (button = el)} data-menu-item="logout" href="${root}logout" onclick=${() => { instance.hide() }}>
                                                 ${tl(trans.logout)}
                                             </a>
                                         </form>

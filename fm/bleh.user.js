@@ -20375,7 +20375,9 @@
   tippy_esm_default.setDefaultProps({
     arrow: false,
     duration: [220, 220],
-    offset: [0, 4]
+    offset: [0, 4],
+    ignoreAttributes: true,
+    animation: "bleh"
   });
   var auth = {
     name: null,
@@ -69709,7 +69711,9 @@
                 </div>
                 ` : ""}
                 <div class="auth-menu-v2" style="--page-height: ${height}px">
-                    <div class="side primary">
+                    <div class="side primary" onclick=${() => {
+          instance.hide();
+        }}>
                         <div class="auth-bg-container" ref=${(el) => auth_bg = el}>
                             ${!auth.avatar.endsWith("818148bf682d429dc215c1705eb27b98.png") ? html.node`
                             <div class="bg" style="background-image: url(${avatar(auth.avatar, "avatar170s")})" />
@@ -69744,12 +69748,16 @@
         }}
                                 </div>
                             ` : ""}
-                            <a class="link-block-cover-link" href="${root}user/${auth.name}" />
+                            <a class="link-block-cover-link" href="${root}user/${auth.name}" onclick=${() => {
+          instance.hide();
+        }} />
                         </div>
                         <div class="floating button-group">
                             ${() => {
           let button2 = html.node`
-                                    <a class="dropdown-menu-clickable-item chibi" data-type="edit_mini" href="${root}settings">
+                                    <a class="dropdown-menu-clickable-item chibi" data-type="edit_mini" href="${root}settings" onclick=${() => {
+            instance.hide();
+          }}>
                                         ${tl2(trans.edit_profile)}
                                     </a>
                                 `;
@@ -69760,7 +69768,9 @@
         }}
                             ${settings.starred_friend != "" ? () => {
           let button2 = html.node`
-                                    <a class="dropdown-menu-clickable-item chibi colourful" data-type="starred_friend" data-starred="true" href="${root}user/${settings.starred_friend}">${settings.starred_friend}</a>
+                                    <a class="dropdown-menu-clickable-item chibi colourful" data-type="starred_friend" data-starred="true" href="${root}user/${settings.starred_friend}" onclick=${() => {
+            instance.hide();
+          }}>${settings.starred_friend}</a>
                                 `;
           tippy_esm_default(button2, {
             content: settings.starred_friend
@@ -69785,7 +69795,9 @@
           let elem;
           const formal = page.state.quick_access_items[val];
           if (formal.url)
-            elem = html.node`<a href=${formal.url} />`;
+            elem = html.node`<a href=${formal.url} onclick=${() => {
+              instance.hide();
+            }} />`;
           else
             elem = html.node`<button onclick=${() => {
               formal.action();
@@ -69812,7 +69824,9 @@
           if (val == "friends") {
             elem = html.node`
                                         <div class="button-combo">
-                                            <a class="dropdown-menu-clickable-item" data-type=${formal.icon} href=${formal.url}>
+                                            <a class="dropdown-menu-clickable-item" data-type=${formal.icon} href=${formal.url} onclick=${() => {
+              instance.hide();
+            }}>
                                                 ${formal.name}
                                             </a>
                                             <div class="button-combo-sep" />
@@ -69965,7 +69979,9 @@
                             </div>
                             ` : ""}
                             <div class="button-combo">
-                                <a class="dropdown-menu-clickable-item" data-type="mini" href="${root}bleh/minis">
+                                <a class="dropdown-menu-clickable-item" data-type="mini" href="${root}bleh/minis" onclick=${() => {
+          instance.hide();
+        }}>
                                     ${tl2(trans.minis)}
                                 </a>
                                 <div class="button-combo-sep" />
@@ -69985,7 +70001,9 @@
         }}
                             </div>
                             <div class="button-combo">
-                                <a class="dropdown-menu-clickable-item accented-menu-item" data-menu-item="bleh" href="${root}bleh">
+                                <a class="dropdown-menu-clickable-item accented-menu-item" data-menu-item="bleh" href="${root}bleh" onclick=${() => {
+          instance.hide();
+        }}>
                                     ${tl2(trans.settings)}
                                 </a>
                                 <div class="button-combo-sep" />
@@ -69994,7 +70012,9 @@
           let form2 = html.node`
                                         <form class="chibi">
                                             <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
-                                            <a class="dropdown-menu-clickable-item chibi colourful" ref=${(el) => button2 = el} data-menu-item="logout" href="${root}logout">
+                                            <a class="dropdown-menu-clickable-item chibi colourful" ref=${(el) => button2 = el} data-menu-item="logout" href="${root}logout" onclick=${() => {
+            instance.hide();
+          }}>
                                                 ${tl2(trans.logout)}
                                             </a>
                                         </form>
@@ -91573,7 +91593,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-02-25"
       }
     },
-    built_on: "2026-04-06T21:24:27.891Z"
+    built_on: "2026-04-07T17:12:02.318Z"
   };
 
   // node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

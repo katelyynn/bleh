@@ -24,7 +24,9 @@ export let notifications = {};
 tippy.setDefaultProps({
     arrow: false,
     duration: [220, 220],
-    offset: [0, 4]
+    offset: [0, 4],
+    ignoreAttributes: true,
+    animation: 'bleh'
 });
 
 /**

@@ -20,23 +20,24 @@
         color: oklch(var(--c3));
     }
 
-    transition-property: visibility, opacity, translate !important;
-    transition-duration: 0.22s !important;
-    transition-timing-function: var(--trans-function-ani);
+    &[data-animation="bleh"] {
+        transition-property: visibility, opacity, translate, transform !important;
+        transition-duration: 0.22s !important;
+        transition-timing-function: var(--trans-function-ani);
 
-    &[data-state="hidden"] {
         opacity: 0 !important;
-    }
 
-    &[data-placement="bottom"] {
-        &[data-state="hidden"] {
+        &[data-placement="bottom"] {
             translate: 0 -4px;
         }
-    }
 
-    &[data-placement="top"] {
-        &[data-state="hidden"] {
+        &[data-placement="top"] {
             translate: 0 4px;
+        }
+
+        &[data-state="visible"] {
+            opacity: 1 !important;
+            translate: 0 0 !important;
         }
     }
 
