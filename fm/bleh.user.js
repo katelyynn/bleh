@@ -57393,7 +57393,7 @@
       const can_go_back = focused_version > 0;
       const can_go_forward = focused_version < versions.length - 1;
       render(changelog_list, html`
-            <div class="news-update colourful" data-changelog-type=${version4.type}>
+            <div class="news-update">
                 <div class="news-update-head">
                     ${() => {
         const btn = html.node`
@@ -57430,7 +57430,7 @@
         return btn;
       }}
                 </div>
-                <div class="news-update-body markdown-body">
+                <div class="news-update-body markdown-body colourful" data-changelog-type=${version4.type}>
                     ${markdown(version4.bio, {
         allow_lists: true,
         allow_headers: true,
