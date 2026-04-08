@@ -341,6 +341,22 @@
     }
 }
 
+.dollar {
+    font-style: normal;
+    color: #E51419;
+    font-family: Arial;
+    font-weight: 500;
+}
+
+.brat {
+    font-family: Arial;
+    text-transform: lowercase;
+    font-weight: 100;
+    transform: scaleX(0.95) scaleY(1.2);
+    transform-origin: left;
+    display: inline-block;
+}
+
 .header-new-chart-position-number {
     font-weight: var(--font-weight-medium);
     margin-left: calc(var(--card-gap) - 6px);

@@ -551,12 +551,12 @@ export function name_includes(
     return result;
 }
 
-export function smart_title(song_title, song_tags) {
+export function smart_title(song_title: string, song_tags, in_header = false) {
     const show_features = settings.show_guest_features;
     const show_remaster = settings.show_remaster_tags;
 
     return html`
-        <div class="title">${romanise(song_title.trim())}</div>
+        <div class="title">${fancy_title(romanise(song_title.trim()), in_header)}</div>
         ${song_tags.map((tag) => {
             if (
                 (!show_features && tag.group == 'guests') ||
@@ -570,6 +570,30 @@ export function smart_title(song_title, song_tags) {
             `;
         })}
     `;
+}
+
+export function fancy_title(song_title: string, in_header: boolean) {
+    const dollar = page.name == 'WOR$T GIRL IN AMERICA' && page.sister == 'Slayyyter';
+    const brat = page.name.toLowerCase().startsWith('brat') && page.sister.toLowerCase() == 'charli xcx';
+
+
+    const elem = html.node`
+        <span>${song_title}</span>
+    `;
+
+    console.info('fancy title', elem);
+
+    if (dollar) {
+        elem.innerHTML = elem.innerHTML.replace(/\$/g, '<i class="dollar">$</i>');
+    }
+
+    if (brat && in_header) {
+        render(elem, html`
+            <span class="brat">${song_title}</span>
+        `);
+    }
+
+    return html.node`${{html: elem.innerHTML }}`;
 }
 
 export function smart_artists(song_artist, song_guests) {

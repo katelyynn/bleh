@@ -220,7 +220,7 @@ export function page_header_title(header = document.body) {
                 page.corrected = formatted_title[4];
 
                 // combine
-                render(track_title, smart_title(song_title, song_tags));
+                render(track_title, smart_title(song_title, song_tags, true));
 
                 // (spotify) / (explicit) / (clean) in title
                 if (song_tags.some((tag) => tag.group == 'form'))

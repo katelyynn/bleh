@@ -42,7 +42,7 @@ a {
 
 .wiki-link {
     position: relative;
-    padding-left: calc(12px + 4px);
+    padding-left: calc(12px + 2px);
     --left: 0;
     --mask-size: 12px;
     --margin-top: -6px;
