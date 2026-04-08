@@ -94,8 +94,6 @@
 
     padding: var(--button-verts) var(--button-sides);
 
-    background: linear-gradient(180deg, oklch(var(--b2) / 10%), transparent);
-
     & > .group {
         display: flex;
         gap: var(--button-list-gap);

@@ -197,9 +197,9 @@ select,
             var(--cards-overlay-image-subtlest, none),
             color-mix(in oklch, oklch(var(--h4)), oklch(var(--h3)) 60%) !important;
         --col: oklch(var(--b7)) !important;
-        --force-font-weight: var(--font-weight-medium) !important;
+        --force-font-weight: var(--font-weight-bold) !important;
         &:not(.chibi) {
-            --mask-colour: oklch(var(--b7) / 0.7) !important;
+            --mask-colour: oklch(var(--b7) / 0.8) !important;
         }
         --shadow:
             var(--primary-shadow), 0 3px 12px oklch(var(--h4) / 32%),

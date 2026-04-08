@@ -19,7 +19,7 @@
     & > .mini {
         display: flex;
         align-items: center;
-        gap: var(--card-gap);
+        gap: 10px;
         text-align: left;
         position: relative;
 
@@ -58,22 +58,19 @@
         }
 
         & > .mini-icon {
-            width: 40px;
-            height: 40px;
-            background: oklch(var(--h3));
-            box-shadow:
-                var(--primary-shadow),
-                0 3px 12px oklch(var(--h4) / 32%);
-            border-radius: var(--item-med-radius);
+            width: 34px;
+            height: 34px;
+            background: oklch(var(--h4) / 20%);
+            border-radius: 50px;
 
             display: flex;
             justify-content: center;
             align-items: center;
-            color: oklch(var(--b7));
+            color: oklch(var(--l3-c));
             --mask-colour: currentColor;
 
             --icon: var(--mask);
-            --icon-size: 24px;
+            --icon-size: 16px;
         }
 
         & > .mini-info {
@@ -85,6 +82,7 @@
 
             & > p {
                 color: oklch(var(--c3));
+                font-size: 13px;
             }
         }
 

@@ -162,7 +162,6 @@
                         position: absolute;
                         inset: 0;
                         overflow: hidden;
-                        display: none;
                     }
 
                     .charts-list-rank-overlay {
@@ -172,16 +171,27 @@
                         font-size: 60px;
                         line-height: 36px;
                         font-weight: 1000;
-                        letter-spacing: -5px;
-                        text-shadow: 0 0 10px oklch(var(--b6), 60%);
+                        letter-spacing: -2px;
 
-                        color: oklch(var(--b6), 85%);
-                        -webkit-text-stroke-width: 2px;
-                        -webkit-text-stroke-color: oklch(var(--c1), 70%);
+                        color: oklch(var(--b6));
 
                         transition-property: transform, opacity;
                         transition-duration: var(--trans);
                         transition-timing-function: var(--trans-function);
+                    }
+
+                    .rank-overlay-text {
+                        position: relative;
+                        z-index: 2;
+                    }
+
+                    .rank-overlay-back {
+                        opacity: 0.8;
+
+                        position: absolute;
+                        inset: 0;
+                        color: transparent;
+                        text-shadow: 0 1px 0 oklch(var(--c1)), 1px 1px 0 oklch(var(--c1)), -1px -1px 0 oklch(var(--c1)), 1px -1px 0 oklch(var(--c1)), -1px 1px 0 oklch(var(--c1)), 0 -1px 0 oklch(var(--c1)), 1px 0 0 oklch(var(--c1)), -1px 0 0 oklch(var(--c1));
                     }
                 }
 
@@ -202,6 +212,7 @@
                 .charts-list-rank {
                     margin-top: 10px;
                     font-weight: var(--font-weight-medium);
+                    display: none;
                 }
             }
         }

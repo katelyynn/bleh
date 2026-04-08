@@ -128,7 +128,10 @@ export function bleh_charts() {
                                     ${image}
                                 </span>
                                 <div class="charts-list-rank-overlay-wrap">
-                                    <div class="charts-list-rank-overlay">${rank.textContent}</div>
+                                    <div class="charts-list-rank-overlay">
+                                        <span class="rank-overlay-text">${rank.textContent}</span>
+                                        <span class="rank-overlay-back">${rank.textContent}</span>
+                                    </div>
                                 </div>
                             </div>
                             <a class="link-block-cover-link" href=${link}></a>
@@ -160,7 +163,10 @@ export function bleh_charts() {
                                     ${image}
                                 </span>
                                 <div class="charts-list-rank-overlay-wrap">
-                                    <div class="charts-list-rank-overlay">${rank.textContent}</div>
+                                    <div class="charts-list-rank-overlay">
+                                        <span class="rank-overlay-text">${rank.textContent}</span>
+                                        <span class="rank-overlay-back">${rank.textContent}</span>
+                                    </div>
                                 </div>
                             </div>
                             <a class="link-block-cover-link" href=${link}></a>

@@ -74918,7 +74918,10 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                                     ${image}
                                 </span>
                                 <div class="charts-list-rank-overlay-wrap">
-                                    <div class="charts-list-rank-overlay">${rank.textContent}</div>
+                                    <div class="charts-list-rank-overlay">
+                                        <span class="rank-overlay-text">${rank.textContent}</span>
+                                        <span class="rank-overlay-back">${rank.textContent}</span>
+                                    </div>
                                 </div>
                             </div>
                             <a class="link-block-cover-link" href=${link}></a>
@@ -74949,7 +74952,10 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                                     ${image}
                                 </span>
                                 <div class="charts-list-rank-overlay-wrap">
-                                    <div class="charts-list-rank-overlay">${rank.textContent}</div>
+                                    <div class="charts-list-rank-overlay">
+                                        <span class="rank-overlay-text">${rank.textContent}</span>
+                                        <span class="rank-overlay-back">${rank.textContent}</span>
+                                    </div>
                                 </div>
                             </div>
                             <a class="link-block-cover-link" href=${link}></a>
