@@ -541,6 +541,9 @@ export function oracle_process() {
                     log('error fetching connect data', 'oracle', 'error', {
                         response
                     });
+
+                    oracle_error(response);
+
                     return;
                 }
 
@@ -864,6 +867,9 @@ export function oracle_process() {
                     log('error fetching connect data', 'oracle', 'error', {
                         response
                     });
+
+                    oracle_error(response);
+
                     return;
                 }
 
@@ -1081,7 +1087,7 @@ export function oracle_process() {
                                 oracle_entry.guests_in_title &&
                                 guests.length > 0
                             ) {
-                                title += ` (${first_joinphrase} `;
+                                title += ` ${oracle_entry.guest_brackets != 'none' ? '(' : ''}${first_joinphrase} `;
 
                                 guests.forEach((artist, index) => {
                                     log(`guest ${index}`, 'oracle', 'info', {
@@ -1098,7 +1104,7 @@ export function oracle_process() {
                                     title += `${fix_title(artist.name)}${joinphrase}`;
                                 });
 
-                                title += ')';
+                                if (oracle_entry.guest_brackets != 'none') title += ')';
                             } else if (!oracle_entry.guests_in_title) {
                                 inherit_guests.push(...guests);
 
@@ -1272,7 +1278,8 @@ export function oracle_process() {
                 const title_lower = title.toLowerCase();
 
                 const defaults = {
-                    guests_in_title: false
+                    guests_in_title: false,
+                    guest_brackets: true
                 };
 
                 const oracle_entry = {
@@ -1757,6 +1764,16 @@ export function oracle_process() {
                 console.error('oracle', err);
                 return;
             });
+    }
+
+    function oracle_error(response: XMLHttpRequestResponseType) {
+        info_panel?.after(html.node`
+            <section class="oracle-error">
+                <div class="alert alert-error">
+                    ${response.status}: ${response.responseText}
+                </div>
+            </section>
+        `);
     }
 }
 

@@ -14,29 +14,29 @@ body {
 
     --brand: "bleh";
 
-    --hue-pos: 145;
-    --sat-pos: 1.38;
-    --lit-pos: 0.95;
+    --hue-pos: 133;
+    --sat-pos: 1.69;
+    --lit-pos: 0.88;
 
     --hue-neg: 23;
-    --sat-neg: 1.65;
-    --lit-neg: 0.76;
+    --sat-neg: 1.9;
+    --lit-neg: 0.83;
 
-    --hue-fav: 54;
-    --sat-fav: 1.21;
-    --lit-fav: 0.87;
+    --hue-fav: 68;
+    --sat-fav: 1.58;
+    --lit-fav: 0.9;
 
     --hue-orange: 37;
-    --sat-orange: 1.4;
+    --sat-orange: 2.02;
     --lit-orange: 0.9;
 
-    --hue-pro: 165;
-    --sat-pro: 1.08;
-    --lit-pro: 0.91;
+    --hue-pro: 155;
+    --sat-pro: 1.24;
+    --lit-pro: 0.95;
 
-    --hue-sponsor: 6;
-    --sat-sponsor: 1.56;
-    --lit-sponsor: 0.87;
+    --hue-sponsor: 15;
+    --sat-sponsor: 2;
+    --lit-sponsor: 0.93;
 
     --hue-brand-yt: -2;
     --hue-brand-sp: 143;
@@ -47,9 +47,9 @@ body {
     --hue-brand-ig: 300;
     --hue-brand-twt: 202;
 
-    --hue-valentine: 8;
-    --sat-valentine: 1.73;
-    --sat-valentine: 0.9;
+    --hue-valentine: 18;
+    --sat-valentine: 2.56;
+    --sat-valentine: 0.91;
 
     --trans-short: 0.2s;
     --trans: 0.2s;
@@ -775,7 +775,7 @@ u,
             0 10px 30px oklch(var(--h4) / 35%)
         );
 
-        --card-gradient: oklch(var(--h4) / 20%);
+        --card-gradient: oklch(calc(clamp(min(0.5), var(--lit), max(0.9)) * 0.5) calc(clamp(min(0), var(--sat), max(2)) * 0.55) var(--hue) / 16%);
     }
     &[data-bleh--theme="light"],
     body[data-bleh--theme="light"]

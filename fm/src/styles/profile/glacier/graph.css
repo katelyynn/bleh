@@ -229,6 +229,12 @@
     }
 }
 .scrobble-insights-panel {
+    text-align: center;
+    background: oklch(var(--b4) / 20%) !important;
+    padding: var(--card-padding) !important;
+    border-radius: var(--card-radius) !important;
+    margin: 0 var(--card-padding) !important;
+
     .scrobble-insights-canvas-container {
         height: 240px;
         /*margin-top: var(--card-gap);*/

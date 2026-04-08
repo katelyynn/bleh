@@ -62547,6 +62547,7 @@
             log("error fetching connect data", "oracle", "error", {
               response
             });
+            oracle_error(response);
             return;
           }
           let data2;
@@ -62762,6 +62763,7 @@
             log("error fetching connect data", "oracle", "error", {
               response
             });
+            oracle_error(response);
             return;
           }
           let data3;
@@ -62917,7 +62919,7 @@
           if (track_entry) {
             title = track_entry;
           } else if (oracle_entry.guests_in_title && guests.length > 0) {
-            title += ` (${first_joinphrase} `;
+            title += ` ${oracle_entry.guest_brackets != "none" ? "(" : ""}${first_joinphrase} `;
             guests.forEach((artist3, index3) => {
               log(`guest ${index3}`, "oracle", "info", {
                 artist: artist3
@@ -62927,7 +62929,7 @@
                 joinphrase = oracle_entry.final_guest_separator;
               title += `${fix_title(artist3.name)}${joinphrase}`;
             });
-            title += ")";
+            if (oracle_entry.guest_brackets != "none") title += ")";
           } else if (!oracle_entry.guests_in_title) {
             inherit_guests.push(...guests);
             log(`${track.position}: artists, changed due to disabled title injection`, "oracle", "log", {
@@ -63059,7 +63061,8 @@
           const artist_lower = artist2.toLowerCase();
           const title_lower = title.toLowerCase();
           const defaults2 = {
-            guests_in_title: false
+            guests_in_title: false,
+            guest_brackets: true
           };
           const oracle_entry = {
             ...defaults2,
@@ -63447,6 +63450,15 @@
         console.error("oracle", err);
         return;
       });
+    }
+    function oracle_error(response) {
+      info_panel?.after(html.node`
+            <section class="oracle-error">
+                <div class="alert alert-error">
+                    ${response.status}: ${response.responseText}
+                </div>
+            </section>
+        `);
     }
   }
   function oracle_data(force = false) {
