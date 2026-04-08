@@ -137,7 +137,7 @@
     --shadow: rgba(0, 0, 0, 0.2);
 
     &.grid-items-item-has-colour {
-        --shadow: color-mix(in oklch, oklch(var(--h4)) 60%, black 70%);
+        --shadow: color-mix(in oklch, oklch(var(--h4)) 100%, black 50%);
     }
 
     transition-property: transform, translate, scale, opacity;

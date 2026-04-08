@@ -111,6 +111,7 @@ export function music_grids(search = page.structure.main, use_colour = true) {
 
                 header_colour(image, false, grid);
                 cover.classList.add('colourful');
+                grid.classList.add('grid-items-item-has-colour');
             });
         } else {
             grid.classList.add('generic-cover');
