@@ -37,3 +37,83 @@
 .about-artist {
     margin-top: unset;
 }
+
+.about-artist-panel {
+    display: flex;
+    flex-direction: column;
+    margin: unset !important;
+    padding-top: calc(var(--card-padding) + 200px);
+
+    position: relative;
+
+    & > .about-artist-avatar {
+        position: absolute;
+        top: 0;
+        left: calc(-1 * var(--card-padding));
+        right: calc(-1 * var(--card-padding));
+        width: unset !important;
+        height: 350px;
+        box-shadow: unset;
+        transform: unset !important;
+        border-radius: unset !important;
+
+        &:before {
+            display: none !important;
+        }
+
+        --mask: linear-gradient(0deg, transparent 0%, #000 50%, transparent 100%);
+        mask-image: var(--mask);
+        -webkit-mask-image: var(--mask);
+        opacity: 0.2;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        & > img {
+            object-fit: cover;
+            border-radius: unset !important;
+
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    & > .about-artist-info {
+        z-index: 30;
+        pointer-events: none;
+        padding: unset !important;
+        width: unset !important;
+
+        .wiki-block,
+        a {
+            pointer-events: auto;
+        }
+    }
+
+    .wiki-block {
+        width: 100%;
+    }
+
+    & > .link-block-cover-link {
+        position: absolute;
+        inset: 0;
+    }
+}
+
+.about-artist-name {
+    color: oklch(var(--c1));
+    font-weight: var(--font-weight-medium);
+    font-size: 20px;
+    line-height: 24px;
+
+    margin: 4px 0 8px;
+}
+
+.about-artist-listeners {
+    color: oklch(var(--c3));
+    margin: 6px 0;
+}
+.about-artist-tags {
+    margin-bottom: var(--card-gap);
+}

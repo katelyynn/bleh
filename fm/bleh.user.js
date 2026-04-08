@@ -61952,9 +61952,7 @@
   function bleh_about_artist() {
     let legacy_container = page.structure.main.querySelector(".about-artist");
     if (!legacy_container) return;
-    let avatar3 = legacy_container.querySelector(
-      ".gallery-preview-image--0 img"
-    );
+    let image = legacy_container.querySelector(".gallery-preview-image--0 img");
     let listeners = legacy_container.querySelector(".about-artist-listeners");
     let tags = legacy_container.querySelector(".about-artist-tags");
     let wiki = legacy_container.querySelector(".wiki-block.visible-lg");
@@ -61962,34 +61960,26 @@
     let about_artist_container = legacy_container.parentElement;
     about_artist_container.classList.add("about-artist-container");
     bleh_tags_mini(tags);
-    render(
-      about_artist_container,
-      html`
-            <div class="about-artist-panel">
-                <div class="avatar-side">
-                    ${avatar3 ? html.node`
-                    <img src=${avatar3.src.replace("/300x300/", "/500x500/")}>
-                    <a onclick=${() => expand_avatar(avatar3.src.replace("/300x300/", "/ar0/"))} class="bleh--avatar-clickable-link"></a>
+    render(about_artist_container, html`
+        <div class="about-artist-panel">
+            <div class="about-artist-avatar">
+                ${image ? html.node`
+                <img src=${avatar(image.src, "avatar300s")}>
                 ` : html.node`
-                    <img class="missing-artist">
+                <img class="missing-artist">
                 `}
-                </div>
-                <div class="info-side">
-                    <div class="sub-text">${tl2(trans.about)}</div>
-                    <h1>
-                        <a
-                            href="${root}music/${redirect()}${sanitise(
-        page.sister
-      )}"
-                            >${correct_artist(page.sister)}</a
-                        >
-                    </h1>
-                    ${listeners} ${tags} ${wiki}
-                </div>
             </div>
-            ${page.sister_others.length > 0 ? html.node`<div class="sep"></div><div class="sub-text">${tl2(trans.others_featured)}</div>` : ""}
-        `
-    );
+            <div class="about-artist-info">
+                <div class="sub-text">${tl2(trans.about)}</div>
+                <h1 class="about-artist-name">${correct_artist(page.sister)}</h1>
+                ${listeners} ${tags} ${wiki}
+            </div>
+            <a class="link-block-cover-link" href="${root}music/${redirect()}${sanitise(page.sister)}"
+        </div>
+        ${page.sister_others.length > 0 ? html.node`
+        <div class="sep"></div><div class="sub-text">${tl2(trans.others_featured)}</div>
+        ` : ""}
+    `);
     if (page.sister_others.length > 0) {
       about_artist_container.appendChild(html.node`
             <div class="about-guest-features-panel">
@@ -91675,7 +91665,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-02-25"
       }
     },
-    built_on: "2026-04-07T17:12:02.318Z"
+    built_on: "2026-04-08T16:24:14.672Z"
   };
 
   // node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

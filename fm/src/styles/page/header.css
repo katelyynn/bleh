@@ -4,11 +4,6 @@
     display: none;
 }
 
-.about-artist-panel {
-    margin-top: var(--card-gap) !important;
-}
-
-.about-artist-panel,
 .page-header {
     display: flex;
     gap: var(--card-padding);
@@ -365,60 +360,6 @@
 
     font-size: 18px;
     line-height: 22px;
-}
-
-.about-artist-panel {
-    flex-direction: column;
-    margin: unset !important;
-    padding-top: calc(var(--card-padding) + 200px);
-
-    & > .avatar-side {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        width: unset !important;
-        height: 350px;
-        box-shadow: unset;
-        transform: unset !important;
-        border-radius: unset !important;
-
-        &:before {
-            display: none !important;
-        }
-
-        --mask: linear-gradient(0deg, transparent 0%, #000 50%, transparent 100%);
-        mask-image: var(--mask);
-        -webkit-mask-image: var(--mask);
-        opacity: 0.2;
-
-        img {
-            object-fit: cover;
-            border-radius: unset !important;
-        }
-    }
-
-    & > .info-side {
-        z-index: 30;
-        pointer-events: none;
-
-        .wiki-block,
-        a {
-            pointer-events: auto;
-        }
-    }
-
-    .wiki-block {
-        width: 100%;
-    }
-}
-
-.about-artist-listeners {
-    color: oklch(var(--c3));
-    margin: 6px 0;
-}
-.about-artist-tags {
-    margin-bottom: var(--card-gap);
 }
 
 
