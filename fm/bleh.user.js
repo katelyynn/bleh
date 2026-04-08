@@ -62226,9 +62226,9 @@
                             </span>
                         </div>
                         <div class="source-album-details" data-kate-processed="true">
-                            <h4 class="source-album-name oracle-loading" />
-                            <p class="source-album-artist oracle-loading" />
-                            <p class="source-album-stats oracle-stats oracle-loading" />
+                            <h4 class="source-album-name placeholder-text">Album name</h4>
+                            <p class="source-album-artist placeholder-text">Artist name</p>
+                            <p class="source-album-stats oracle-stats placeholder-text">5 listens</p>
                         </div>
                     </div>
                     <div class="source-album oracle-loading">
@@ -62238,9 +62238,9 @@
                             </span>
                         </div>
                         <div class="source-album-details" data-kate-processed="true">
-                            <h4 class="source-album-name oracle-loading" />
-                            <p class="source-album-artist oracle-loading" />
-                            <p class="source-album-stats oracle-stats oracle-loading" />
+                            <h4 class="source-album-name placeholder-text">Album name</h4>
+                            <p class="source-album-artist placeholder-text">Artist name</p>
+                            <p class="source-album-stats oracle-stats placeholder-text">5 listens</p>
                         </div>
                     </div>
                 </div>
@@ -62737,7 +62737,7 @@
     function oracle_album_fetch(data2) {
       if (tries < 1) return;
       tries--;
-      const url = `https://musicbrainz.org/ws/2/release/${data2.id}?inc=recordings+labels+artist-credits`;
+      const url = `https://musicbrainz.org/ws/2/release/${data2.id}?inc=recordings+labels+artist-credits+url-rels+annotation`;
       const local = oracle_cache[artist]?.[item];
       if (local && local.album?.fetch) {
         log("skipping album fetch (local cache)", "oracle", "info", {

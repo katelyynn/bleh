@@ -396,12 +396,11 @@ hr {
 }
 
 .placeholder-text {
-    cursor: default;
-    font-family: Flow Circular, var(--font);
-    user-select: none;
-    color: oklch(var(--c3));
+    cursor: default !important;
+    font-family: Flow Circular, var(--font) !important;
+    user-select: none !important;
 
-    animation: placeholder-text 4s var(--trans-function-ani) infinite;
+    animation: placeholder-text 4s var(--trans-function-ani) infinite !important;
 }
 
 @keyframes placeholder-text {

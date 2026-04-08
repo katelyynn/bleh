@@ -163,9 +163,9 @@ export function oracle_process() {
                             </span>
                         </div>
                         <div class="source-album-details" data-kate-processed="true">
-                            <h4 class="source-album-name oracle-loading" />
-                            <p class="source-album-artist oracle-loading" />
-                            <p class="source-album-stats oracle-stats oracle-loading" />
+                            <h4 class="source-album-name placeholder-text">Album name</h4>
+                            <p class="source-album-artist placeholder-text">Artist name</p>
+                            <p class="source-album-stats oracle-stats placeholder-text">5 listens</p>
                         </div>
                     </div>
                     <div class="source-album oracle-loading">
@@ -175,9 +175,9 @@ export function oracle_process() {
                             </span>
                         </div>
                         <div class="source-album-details" data-kate-processed="true">
-                            <h4 class="source-album-name oracle-loading" />
-                            <p class="source-album-artist oracle-loading" />
-                            <p class="source-album-stats oracle-stats oracle-loading" />
+                            <h4 class="source-album-name placeholder-text">Album name</h4>
+                            <p class="source-album-artist placeholder-text">Artist name</p>
+                            <p class="source-album-stats oracle-stats placeholder-text">5 listens</p>
                         </div>
                     </div>
                 </div>
@@ -838,7 +838,7 @@ export function oracle_process() {
         if (tries < 1) return;
         tries--;
 
-        const url = `https://musicbrainz.org/ws/2/release/${data.id}?inc=recordings+labels+artist-credits`;
+        const url = `https://musicbrainz.org/ws/2/release/${data.id}?inc=recordings+labels+artist-credits+url-rels+annotation`;
 
         const local = oracle_cache[artist]?.[item];
         if (local && local.album?.fetch) {
@@ -914,6 +914,23 @@ export function oracle_process() {
 
             return;
         }
+
+        /*if (page.subpage == 'overview') {
+            const metadata_row = info_panel?.querySelector('.metadata-row');
+
+            if (data.annotation && metadata_row) {
+                metadata_row.appendChild(html.node`
+                    <div class="metadata-group">
+                        <div class="sub-text music-small-header">
+                            ${tl(trans.annotation)}
+                        </div>
+                        <div class="oracle-annotation">
+                            ${data.annotation}
+                        </div>
+                    </div>
+                `);
+            }
+        }*/
 
         let labels = data['label-info'];
         if (labels && labels.length > 0 && page.subpage == 'overview') {
