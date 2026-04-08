@@ -1,7 +1,7 @@
 import { html, render } from "lighterhtml";
 import { page_loading, register_skip_to, render_setting_page } from "./bleh_settings";
 import { api_key, auth, page, root } from "@/build/page";
-import { load_badges } from "@/components/shared/badge";
+import { create_badge, load_badges } from "@/components/shared/badge";
 import { dialog } from "@/components/dialog/dialog";
 import { lang, lang_info, tl, trans } from "@/build/trans";
 import { setting } from "@/components/settings/settings";
@@ -29,7 +29,7 @@ export function general() {
 
     let badges = load_badges(auth.name);
     if (badges) badge_count = badges.length;
-    if (auth.pro) badge_count++;
+    //if (auth.pro) badge_count++;
 
     const auth_key = localStorage.getItem('bleh_auth');
     const auth_valid = localStorage.getItem('bleh_auth_valid');
@@ -64,26 +64,10 @@ export function general() {
                                         body: html.node`
                                             <div class="generic-table-list badge-list">
                                                 ${badges ? badges.map(badge => {
-                                                    let style;
-                                                    let classname = '';
-                                                    if (
-                                                        badge.icon &&
-                                                        badge.hue &&
-                                                        badge.sat &&
-                                                        badge.lit
-                                                    ) {
-                                                        style = `--mask: url(${badge.icon}); --hue: ${badge.hue}; --sat: ${badge.sat}; --lit: ${badge.lit}`;
-                                                    } else {
-                                                        classname = `user-status--bleh-${badge.type} user-status--bleh-user-${auth.name}`;
-                                                    }
-
                                                     return html.node`
                                                         <div class="generic-table-list-entry badge-list-entry">
-                                                            <div class="icon-container colourful ${classname}" style=${style}>
-                                                                <div class="bleh-icon" style="--icon: var(--mask)" />
-                                                            </div>
-                                                            <div class="name colourful ${classname}" style=${style}>
-                                                                ${badge.name}
+                                                            <div class="name">
+                                                                ${create_badge(badge, false, true, true)}
                                                             </div>
                                                             <div class="text">
                                                                 ${badge.reason}
@@ -91,19 +75,6 @@ export function general() {
                                                         </div>
                                                     `;
                                                 }) : ''}
-                                                ${auth.pro ? html.node`
-                                                    <div class="generic-table-list-entry badge-list-entry">
-                                                        <div class="icon-container colourful user-status-subscriber">
-                                                            <div class="bleh-icon" style="--icon: var(--mask)" />
-                                                        </div>
-                                                        <div class="name colourful user-status-subscriber">
-                                                            ${tl(trans.badges['user-status-subscriber'].name)}
-                                                        </div>
-                                                        <div class="text">
-                                                            ${tl(trans.badges['user-status-subscriber'].reason)}
-                                                        </div>
-                                                    </div>
-                                                ` : ''}
                                             </div>
                                         `
                                     });

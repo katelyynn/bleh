@@ -58580,6 +58580,7 @@
           message: `Invalid type "${type}"`
         });
       const incompatible_with = settings_store[id].incompatible;
+      const requires = settings_store[id].requires;
       const hide_if_incompatible = settings_store[id].hide_if_incompatible || false;
       if (!body && settings_store[id].keybind)
         body = keybind(settings_store[id].keybind);
@@ -58842,17 +58843,29 @@
                 </div>
             `;
         container.compat = () => {
-          if (!incompatible_with) return;
           container.setAttribute("disabled", "false");
-          Object.entries(incompatible_with).forEach(([key, val]) => {
-            if (Array.isArray(val)) {
-              if (val.includes(settings[key]))
-                container.setAttribute("disabled", "true");
-            } else {
-              if (JSON.stringify(val) == JSON.stringify(settings[key]))
-                container.setAttribute("disabled", "true");
+          if (incompatible_with) {
+            Object.entries(incompatible_with).forEach(([key, val]) => {
+              if (Array.isArray(val)) {
+                if (val.includes(settings[key]))
+                  container.setAttribute("disabled", "true");
+              } else {
+                if (JSON.stringify(val) == JSON.stringify(settings[key]))
+                  container.setAttribute("disabled", "true");
+              }
+            });
+          } else if (requires) {
+            const all_met = Object.entries(requires).every(([key, val]) => {
+              if (Array.isArray(val)) {
+                return val.includes(settings[key]);
+              } else {
+                return JSON.stringify(val) == JSON.stringify(settings[key]);
+              }
+            });
+            if (!all_met) {
+              container.setAttribute("disabled", "true");
             }
-          });
+          }
         };
         container.compat();
         input2.addEventListener("keydown", (event3) => {
@@ -59097,17 +59110,29 @@
                 </div>
             `;
         elem.compat = () => {
-          if (!incompatible_with) return;
           elem.setAttribute("disabled", "false");
-          Object.entries(incompatible_with).forEach(([key, val]) => {
-            if (Array.isArray(val)) {
-              if (val.includes(settings[key]))
-                elem.setAttribute("disabled", "true");
-            } else {
-              if (JSON.stringify(val) == JSON.stringify(settings[key]))
-                elem.setAttribute("disabled", "true");
+          if (incompatible_with) {
+            Object.entries(incompatible_with).forEach(([key, val]) => {
+              if (Array.isArray(val)) {
+                if (val.includes(settings[key]))
+                  elem.setAttribute("disabled", "true");
+              } else {
+                if (JSON.stringify(val) == JSON.stringify(settings[key]))
+                  elem.setAttribute("disabled", "true");
+              }
+            });
+          } else if (requires) {
+            const all_met = Object.entries(requires).every(([key, val]) => {
+              if (Array.isArray(val)) {
+                return val.includes(settings[key]);
+              } else {
+                return JSON.stringify(val) == JSON.stringify(settings[key]);
+              }
+            });
+            if (!all_met) {
+              elem.setAttribute("disabled", "true");
             }
-          });
+          }
         };
         elem.compat();
         tippy_esm_default(reset_btn, {
@@ -68622,6 +68647,9 @@
       }}>${tl2(trans.change_schedule)}</a>
         `);
     }
+    let font_choice;
+    let custom_font;
+    let font_preview;
     render(page.structure.main, html`
         <section class="bleh--panel">
             <h4>${tl2(trans.appearance)}</h4>
@@ -68691,11 +68719,15 @@
         </section>
         <section class="bleh--panel">
             <h4>${tl2(trans.fonts)}</h4>
-            <div class="inner-preview pad">
-                <h1 class="font-preview">${tl2(trans.font_example)}</h1>
+            <div class="inner-preview pad" ref=${(el) => font_preview = el} />
+            <div class="setting-group">
+                ${font_choice = setting({ id: "font_choice", func: () => {
+      custom_font.compat();
+      render_font_preview();
+    } })}
+                ${custom_font = setting({ id: "font", text: false })}
             </div>
             <div class="setting-group">
-                ${setting({ id: "font" })}
                 ${setting({ id: "font_weight" })}
                 ${setting({ id: "font_weight_medium" })}
                 ${setting({ id: "font_weight_bold" })}
@@ -68748,6 +68780,17 @@
     render_tip();
     display_colour_presets();
     update_colour_swatches();
+    render_font_preview();
+    function render_font_preview() {
+      let font = window.getComputedStyle(document.body).getPropertyValue("--font-choice");
+      if (font == `""`) font = tl2(trans.no_font_selected);
+      render(font_preview, html`
+            <div class="font-preview-stack">
+                <h1 class="font-preview">${tl2(trans.font_example)}</h1>
+                <span class="font-preview-label">${tl2(trans.previewing, { v: font })}</span>
+            </div>
+        `);
+    }
   }
 
   // src/components/inbox/notifications.js
@@ -70365,7 +70408,6 @@
     let badge_count = 0;
     let badges = load_badges(auth.name);
     if (badges) badge_count = badges.length;
-    if (auth.pro) badge_count++;
     const auth_key = localStorage.getItem("bleh_auth");
     const auth_valid = localStorage.getItem("bleh_auth_valid");
     render(page.structure.main, html`
@@ -70398,20 +70440,10 @@
         body: html.node`
                                             <div class="generic-table-list badge-list">
                                                 ${badges ? badges.map((badge) => {
-          let style;
-          let classname = "";
-          if (badge.icon && badge.hue && badge.sat && badge.lit) {
-            style = `--mask: url(${badge.icon}); --hue: ${badge.hue}; --sat: ${badge.sat}; --lit: ${badge.lit}`;
-          } else {
-            classname = `user-status--bleh-${badge.type} user-status--bleh-user-${auth.name}`;
-          }
           return html.node`
                                                         <div class="generic-table-list-entry badge-list-entry">
-                                                            <div class="icon-container colourful ${classname}" style=${style}>
-                                                                <div class="bleh-icon" style="--icon: var(--mask)" />
-                                                            </div>
-                                                            <div class="name colourful ${classname}" style=${style}>
-                                                                ${badge.name}
+                                                            <div class="name">
+                                                                ${create_badge(badge, false, true, true)}
                                                             </div>
                                                             <div class="text">
                                                                 ${badge.reason}
@@ -70419,19 +70451,6 @@
                                                         </div>
                                                     `;
         }) : ""}
-                                                ${auth.pro ? html.node`
-                                                    <div class="generic-table-list-entry badge-list-entry">
-                                                        <div class="icon-container colourful user-status-subscriber">
-                                                            <div class="bleh-icon" style="--icon: var(--mask)" />
-                                                        </div>
-                                                        <div class="name colourful user-status-subscriber">
-                                                            ${tl2(trans.badges["user-status-subscriber"].name)}
-                                                        </div>
-                                                        <div class="text">
-                                                            ${tl2(trans.badges["user-status-subscriber"].reason)}
-                                                        </div>
-                                                    </div>
-                                                ` : ""}
                                             </div>
                                         `
       });
@@ -85484,6 +85503,33 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         pl: "Wybierz w\u0142asne czcionki kt\xF3re ci pasuj\u0105"
       }
     },
+    font_choice: {
+      name: {
+        en: "Interface font"
+      },
+      body: {
+        en: "Choose the font that suits you best"
+      },
+      custom: {
+        en: "Provide your own font"
+      },
+      stylised: {
+        en: "Stylised"
+      },
+      simple: {
+        en: "Simple"
+      },
+      hyperlegible: {
+        en: "Accessible"
+      }
+    },
+    previewing: {
+      // used as subtext for previewing a font
+      en: "Previewing: {v}"
+    },
+    no_font_selected: {
+      en: "No font selected"
+    },
     font_style: {
       en: "Font style",
       de: "Schriftstil",
@@ -90197,7 +90243,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         trans.themes.light,
         trans.themes.ink,
         trans.themes.dark,
-        trans.theme.darker,
+        trans.themes.darker,
         trans.themes.oled,
         "oled",
         trans.appearance,
@@ -90653,7 +90699,29 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       placeholder: trans.enter_font_names,
       tags: [
         trans.text
-      ]
+      ],
+      requires: { font_choice: "custom" }
+    },
+    font_choice: {
+      default: "font_2026",
+      type: "radio",
+      title: trans.font_choice.name,
+      body: trans.font_choice.body,
+      values: {
+        font_2026: {
+          name: trans.font_choice.stylised
+        },
+        font_2025: {
+          name: trans.font_choice.simple
+        },
+        hyperlegible: {
+          name: trans.font_choice.hyperlegible
+        },
+        custom: {
+          name: trans.font_choice.custom
+        }
+      },
+      bubble: true
     },
     font_weight: {
       css: "custom_font_weight",

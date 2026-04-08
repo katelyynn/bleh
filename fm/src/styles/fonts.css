@@ -3,10 +3,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Darumadrop+One&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Bitcount+Grid+Single:wght@100..900&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Funnel+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Cherry+Bomb+One&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Lilita+One&family=Rokkitt:ital,wght@0,100..900;1,100..900&family=Single+Day&family=UnifrakturCook:wght@700&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&family=Funnel+Sans:ital,wght@0,300..800;1,300..800&family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&display=swap');
 
 @font-face {
     font-family: 'Zpix';
@@ -25,11 +24,12 @@
 }
 
 body {
-    --font:
-        var(--custom_font, ""), Bricolage Grotesque, Funnel Sans, Inter, Ubuntu Sans, Spline Sans,
+    --font-choice: Hanken Grotesk;
+    --font: var(--font-choice), Inter, Ubuntu Sans, Spline Sans,
         Roboto, Apple Color Emoji, var(--font_emoji_name, ""), Segoe UI Symbol, Apple Symbols, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Sans TC,
         Lucida Grande, Verdana, -apple-system, BlinkMacSystemFont,
         sans-serif;
+
     --font-code:
         Google Sans Code, JetBrains Mono, Roboto Mono, monospace,
         var(--font);
@@ -38,4 +38,16 @@ body {
     --line-height: calc(var(--font-size) + 4px);
     --font-size-sm: 12px;
     --line-height-sm: calc(var(--font-size-sm) + 4px);
+
+    &[data-bleh--font_choice="font_2025"] {
+        --font-choice: Funnel Sans;
+    }
+
+    &[data-bleh--font_choice="hyperlegible"] {
+        --font-choice: Atkinson Hyperlegible Next;
+    }
+
+    &[data-bleh--font_choice="custom"] {
+        --font-choice: var(--custom_font, "");
+    }
 }

@@ -82,6 +82,7 @@ export function setting({
             });
 
         const incompatible_with = settings_store[id].incompatible;
+        const requires = settings_store[id].requires;
         const hide_if_incompatible =
             settings_store[id].hide_if_incompatible || false;
 
@@ -434,21 +435,33 @@ export function setting({
             ` as setting_element;
 
             container.compat = () => {
-                if (!incompatible_with) return;
-
                 container.setAttribute('disabled', 'false');
 
-                Object.entries(incompatible_with).forEach(([key, val]) => {
-                    if (Array.isArray(val)) {
-                        if (val.includes(settings[key]))
-                            container.setAttribute('disabled', 'true');
-                    } else {
-                        if (
-                            JSON.stringify(val) == JSON.stringify(settings[key])
-                        )
-                            container.setAttribute('disabled', 'true');
+                if (incompatible_with) {
+                    Object.entries(incompatible_with).forEach(([key, val]) => {
+                        if (Array.isArray(val)) {
+                            if (val.includes(settings[key]))
+                                container.setAttribute('disabled', 'true');
+                        } else {
+                            if (
+                                JSON.stringify(val) == JSON.stringify(settings[key])
+                            )
+                                container.setAttribute('disabled', 'true');
+                        }
+                    });
+                } else if (requires) {
+                    const all_met = Object.entries(requires).every(([key, val]) => {
+                        if (Array.isArray(val)) {
+                            return val.includes(settings[key]);
+                        } else {
+                            return JSON.stringify(val) == JSON.stringify(settings[key]);
+                        }
+                    });
+
+                    if (!all_met) {
+                        container.setAttribute('disabled', 'true');
                     }
-                });
+                }
             };
 
             container.compat();
@@ -750,21 +763,33 @@ export function setting({
             ` as setting_element;
 
             elem.compat = () => {
-                if (!incompatible_with) return;
-
                 elem.setAttribute('disabled', 'false');
 
-                Object.entries(incompatible_with).forEach(([key, val]) => {
-                    if (Array.isArray(val)) {
-                        if (val.includes(settings[key]))
-                            elem.setAttribute('disabled', 'true');
-                    } else {
-                        if (
-                            JSON.stringify(val) == JSON.stringify(settings[key])
-                        )
-                            elem.setAttribute('disabled', 'true');
+                if (incompatible_with) {
+                    Object.entries(incompatible_with).forEach(([key, val]) => {
+                        if (Array.isArray(val)) {
+                            if (val.includes(settings[key]))
+                                elem.setAttribute('disabled', 'true');
+                        } else {
+                            if (
+                                JSON.stringify(val) == JSON.stringify(settings[key])
+                            )
+                                elem.setAttribute('disabled', 'true');
+                        }
+                    });
+                } else if (requires) {
+                    const all_met = Object.entries(requires).every(([key, val]) => {
+                        if (Array.isArray(val)) {
+                            return val.includes(settings[key]);
+                        } else {
+                            return JSON.stringify(val) == JSON.stringify(settings[key]);
+                        }
+                    });
+
+                    if (!all_met) {
+                        elem.setAttribute('disabled', 'true');
                     }
-                });
+                }
             };
 
             elem.compat();

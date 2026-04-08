@@ -158,9 +158,12 @@ h4 {
 }
 
 .subtle {
-    font-size: 13px;
     color: oklch(var(--c3));
-    cursor: default;
+
+    &:not(.btn) {
+        font-size: 13px;
+        cursor: default;
+    }
 }
 .text-light {
     color: oklch(var(--c3));

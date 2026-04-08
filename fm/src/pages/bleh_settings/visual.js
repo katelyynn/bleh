@@ -118,6 +118,10 @@ export function visual() {
         `);
     }
 
+    let font_choice;
+    let custom_font;
+    let font_preview;
+
     render(page.structure.main, html`
         <section class="bleh--panel">
             <h4>${tl(trans.appearance)}</h4>
@@ -188,11 +192,15 @@ export function visual() {
         </section>
         <section class="bleh--panel">
             <h4>${tl(trans.fonts)}</h4>
-            <div class="inner-preview pad">
-                <h1 class="font-preview">${tl(trans.font_example)}</h1>
+            <div class="inner-preview pad" ref=${el => font_preview = el} />
+            <div class="setting-group">
+                ${font_choice = setting({ id: 'font_choice', func: () => {
+                    custom_font.compat();
+                    render_font_preview();
+                } })}
+                ${custom_font = setting({ id: 'font', text: false })}
             </div>
             <div class="setting-group">
-                ${setting({ id: 'font' })}
                 ${setting({ id: 'font_weight' })}
                 ${setting({ id: 'font_weight_medium' })}
                 ${setting({ id: 'font_weight_bold' })}
@@ -247,4 +255,18 @@ export function visual() {
 
     display_colour_presets();
     update_colour_swatches();
+
+    render_font_preview();
+
+    function render_font_preview() {
+        let font = window.getComputedStyle(document.body).getPropertyValue('--font-choice');
+        if (font == `""`) font = tl(trans.no_font_selected);
+
+        render(font_preview, html`
+            <div class="font-preview-stack">
+                <h1 class="font-preview">${tl(trans.font_example)}</h1>
+                <span class="font-preview-label">${tl(trans.previewing, { v: font })}</span>
+            </div>
+        `);
+    }
 }

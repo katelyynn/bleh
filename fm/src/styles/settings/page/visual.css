@@ -266,9 +266,15 @@
     }
 }
 
-.font-preview {
-    text-align: center;
+.font-preview-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
     margin: var(--card-gap) 0 !important;
+}
+.font-preview-label {
+    color: oklch(var(--c3));
 }
 
 

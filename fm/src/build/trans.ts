@@ -68,7 +68,7 @@ export let lang_info = {
     }
 };
 
-export const trans: translations = {
+export const trans = {
     comma: {
         // yes this is just a comma
         // yes the space on the end is intentional and should be
@@ -5828,6 +5828,33 @@ export const trans: translations = {
             pl: 'Wybierz własne czcionki które ci pasują'
         }
     },
+    font_choice: {
+        name: {
+            en: 'Interface font'
+        },
+        body: {
+            en: 'Choose the font that suits you best'
+        },
+        custom: {
+            en: 'Provide your own font'
+        },
+        stylised: {
+            en: 'Stylised'
+        },
+        simple: {
+            en: 'Simple'
+        },
+        hyperlegible: {
+            en: 'Accessible'
+        }
+    },
+    previewing: {
+        // used as subtext for previewing a font
+        en: 'Previewing: {v}'
+    },
+    no_font_selected: {
+        en: 'No font selected'
+    },
     font_style: {
         en: 'Font style',
         de: 'Schriftstil',
@@ -10370,7 +10397,7 @@ export const trans: translations = {
     on_tour: {
         en: 'On tour'
     }
-};
+} as const satisfies Record<string, any>;
 
 export const translation_fallback = 'NO_TRANSLATION_FOUND';
 
@@ -10378,7 +10405,7 @@ interface translations {
     [key: string]: translation
 }
 
-export type translation = {
+interface translation_leaf {
     en?: string,
     de?: string,
     es?: string,
@@ -10389,8 +10416,10 @@ export type translation = {
     sv?: string,
     ru?: string,
     zh?: string
-} & {
-    [key: string]: translation | undefined
+}
+
+export type translation = translation_leaf | {
+    [key: string]: translation
 }
 
 export function tl(key: translation, replacements = {}) {

@@ -14,7 +14,8 @@ interface setting_instance {
     type?: 'toggle' | 'checkbox' | 'range' | 'select' | 'radio' | 'list' | 'tabs' | 'text' | 'other',
     title?: translation,
     body?: translation,
-    incompatible?: Record<string, boolean | setting_value>,
+    incompatible?: Record<string, setting_value>,
+    requires?: Record<string, setting_value>,
     hide_if_incompatible?: boolean,
     require_reload?: boolean | 'partial',
     tags?: (translation | string)[],
@@ -44,440 +45,6 @@ interface radio_item {
 }
 
 export let settings: Record<string, setting_value> = {};
-export let settings_base = {
-    theme: {
-        css: 'theme',
-        unit: '',
-        value: 'dark',
-        type: 'options'
-    },
-    high_contrast: {
-        css: 'high_contrast',
-        unit: '',
-        value: false,
-        values: [true, false],
-        type: 'toggle'
-    },
-    hue: {
-        css: 'hue-user',
-        unit: '',
-        value: 255,
-        type: 'slider'
-    },
-    sat: {
-        css: 'sat-user',
-        unit: '',
-        value: 1,
-        type: 'slider'
-    },
-    sat_bg: {
-        css: 'sat-bg',
-        unit: '',
-        value: 1,
-        type: 'slider'
-    },
-    lit: {
-        css: 'lit-user',
-        unit: '',
-        value: 1,
-        type: 'slider'
-    },
-    accent_type: {
-        css: 'accent_type',
-        unit: '',
-        value: 'colour',
-        type: 'options'
-    },
-    gloss: {
-        css: 'gloss',
-        unit: '',
-        value: 0,
-        type: 'slider'
-    },
-    profile_header_expand: {
-        css: 'profile_header_expand',
-        unit: '',
-        value: true,
-        values: [true, false],
-        type: 'toggle'
-    },
-    gendered_tags: {
-        css: 'gendered_tags',
-        unit: '',
-        value: true,
-        values: [true, false],
-        type: 'toggle'
-    },
-    hide_hateful: {
-        css: 'hide_hateful',
-        unit: '',
-        value: true,
-        values: [true, false],
-        type: 'toggle'
-    },
-    accessible_name_colours: {
-        css: 'accessible_name_colours',
-        unit: '',
-        value: false,
-        values: [true, false],
-        type: 'toggle'
-    },
-    reduced_motion: {
-        css: 'reduced_motion',
-        unit: '',
-        value: false,
-        values: [true, false],
-        type: 'toggle'
-    },
-    underline_links: {
-        css: 'underline_links',
-        unit: '',
-        value: false,
-        values: [true, false],
-        type: 'toggle'
-    },
-    dev: {
-        css: 'dev',
-        unit: '',
-        value: false,
-        values: [true, false],
-        type: 'toggle'
-    },
-    format_guest_features: {
-        css: 'format_guest_features',
-        unit: '',
-        value: true,
-        values: [true, false],
-        type: 'toggle',
-        require_reload: 'partial'
-    },
-    show_guest_features: {
-        css: 'show_guest_features',
-        unit: '',
-        value: false,
-        values: [true, false],
-        type: 'toggle'
-    },
-    stacked_chartlist_info: {
-        css: 'stacked_chartlist_info',
-        unit: '',
-        value: true,
-        values: [true, false],
-        type: 'toggle'
-    },
-    show_remaster_tags: {
-        css: 'show_remaster_tags',
-        unit: '',
-        value: true,
-        values: [true, false],
-        type: 'toggle'
-    },
-    corrections: {
-        css: 'corrections',
-        unit: '',
-        value: true,
-        values: [true, false],
-        type: 'toggle'
-    },
-    colourful_counts: {
-        css: 'colourful_counts',
-        unit: '',
-        value: true,
-        values: [true, false],
-        type: 'toggle',
-        require_reload: 'partial'
-    },
-    colourful_tracks: {
-        css: 'colourful_tracks',
-        unit: '',
-        value: true,
-        values: [true, false],
-        type: 'toggle',
-        require_reload: 'partial'
-    },
-    rain: {
-        css: 'rain',
-        unit: '',
-        value: false,
-        values: [true, false],
-        type: 'toggle',
-        require_reload: true
-    },
-    show_your_progress: {
-        css: 'show_your_progress',
-        unit: '',
-        value: true,
-        values: [true, false],
-        type: 'toggle',
-        require_reload: 'partial'
-    },
-    travis: {
-        css: 'travis',
-        unit: '',
-        value: false,
-        values: [true, false],
-        type: 'toggle'
-    },
-    list_view: {
-        css: 'list_view',
-        unit: '',
-        value: 0,
-        type: 'options'
-    },
-    chart_view: {
-        css: 'chart_view',
-        unit: '',
-        value: 'line',
-        type: 'options'
-    },
-    chart_bar_axis: {
-        css: 'chart_bar_axis',
-        unit: '',
-        value: 'horizontal',
-        type: 'options'
-    },
-    shout_markdown: {
-        css: 'shout_markdown',
-        unit: '',
-        value: true,
-        values: [true, false],
-        type: 'toggle',
-        require_reload: 'partial'
-    },
-    bio_markdown: {
-        css: 'bio_markdown',
-        unit: '',
-        value: true,
-        values: [true, false],
-        type: 'toggle',
-        require_reload: 'partial'
-    },
-    hue_from_album: {
-        css: 'hue_from_album',
-        unit: '',
-        value: true,
-        values: [true, false],
-        type: 'toggle',
-        require_reload: 'partial'
-    },
-    seasonal: {
-        css: 'seasonal',
-        unit: '',
-        value: true,
-        values: [true, false],
-        type: 'toggle',
-        require_reload: true
-    },
-    seasonal_particles: {
-        css: 'seasonal_particles',
-        unit: '',
-        value: 'all',
-        type: 'options',
-        require_reload: true
-    },
-    seasonal_particles_fps: {
-        css: 'seasonal_particles_fps',
-        unit: '',
-        value: false,
-        values: [true, false],
-        type: 'toggle'
-    },
-    seasonal_overlays: {
-        css: 'seasonal_overlays',
-        unit: '',
-        value: true,
-        values: [true, false],
-        type: 'toggle'
-    },
-    profile_header_own: {
-        css: 'profile_header_own',
-        unit: '',
-        value: true,
-        values: [true, false],
-        type: 'toggle'
-    },
-    profile_header_others: {
-        css: 'profile_header_others',
-        unit: '',
-        value: true,
-        values: [true, false],
-        type: 'toggle'
-    },
-    profile_avi_background: {
-        css: 'profile_avi_background',
-        unit: '',
-        value: false,
-        values: [true, false],
-        type: 'toggle'
-    },
-    branch: {
-        css: 'branch',
-        unit: '',
-        value: '',
-        type: 'text'
-    },
-    font: {
-        css: 'custom_font',
-        unit: '',
-        value: '',
-        type: 'text'
-    },
-    font_weight: {
-        css: 'custom_font_weight',
-        unit: '',
-        value: 480,
-        type: 'slider'
-    },
-    font_weight_medium: {
-        css: 'custom_font_weight_medium',
-        unit: '',
-        value: 650,
-        type: 'slider'
-    },
-    font_weight_bold: {
-        css: 'custom_font_weight_bold',
-        unit: '',
-        value: 730,
-        type: 'slider'
-    },
-    font_emoji: {
-        css: 'font_emoji',
-        unit: '',
-        value: true,
-        values: [true, false],
-        type: 'toggle'
-    },
-    show_bulk_edit_album: {
-        css: 'show_bulk_edit_album',
-        unit: '',
-        value: false,
-        values: [true, false],
-        type: 'toggle'
-    },
-    grid_glow: {
-        css: 'show_grid_glow',
-        unit: '',
-        value: true,
-        values: [true, false],
-        type: 'toggle'
-    },
-    activities: {
-        css: 'activities',
-        unit: '',
-        value: true,
-        values: [true, false],
-        type: 'toggle'
-    },
-    auth_menu_obsessions: {
-        css: 'auth_menu_obsessions',
-        unit: '',
-        value: true,
-        values: [true, false],
-        type: 'toggle'
-    },
-    default_avatar_action: {
-        css: 'default_avatar_action',
-        unit: '',
-        value: 'expand',
-        type: 'options'
-    },
-    glacier_library_graphs: {
-        css: 'glacier_library_graphs',
-        unit: '',
-        value: true,
-        values: [true, false],
-        type: 'toggle'
-    },
-    activity_shout: {
-        css: 'activity_shout',
-        unit: '',
-        value: true,
-        values: [true, false],
-        type: 'toggle'
-    },
-    activity_image: {
-        css: 'activity_image',
-        unit: '',
-        value: true,
-        values: [true, false],
-        type: 'toggle'
-    },
-    activity_obsess: {
-        css: 'activity_obsess',
-        unit: '',
-        value: true,
-        values: [true, false],
-        type: 'toggle'
-    },
-    activity_love: {
-        css: 'activity_love',
-        unit: '',
-        value: true,
-        values: [true, false],
-        type: 'toggle'
-    },
-    activity_bookmark: {
-        css: 'activity_bookmark',
-        unit: '',
-        value: true,
-        values: [true, false],
-        type: 'toggle'
-    },
-    activity_install: {
-        css: 'activity_install',
-        unit: '',
-        value: true,
-        values: [true, false],
-        type: 'toggle'
-    },
-    activity_wiki: {
-        css: 'activity_wiki',
-        unit: '',
-        value: true,
-        values: [true, false],
-        type: 'toggle'
-    },
-    simulate_scroll: {
-        css: 'simulate_scroll',
-        unit: '',
-        value: true,
-        values: [true, false],
-        type: 'toggle',
-        require_reload: 'partial'
-    },
-    toggle_icon: {
-        css: 'toggle_icon',
-        unit: '',
-        value: true,
-        values: [true, false],
-        type: 'toggle'
-    },
-    log_show_all: {
-        css: 'log_show_all',
-        unit: '',
-        value: false,
-        values: [true, false],
-        type: 'toggle'
-    },
-    avatar_radius: {
-        css: 'avatar-radius',
-        unit: '%',
-        value: 50,
-        type: 'slider'
-    },
-    profile_shortcut: {
-        css: 'profile_shortcut',
-        unit: '',
-        value: '',
-        type: 'text'
-    },
-    api_key: {
-        css: 'api_key',
-        unit: '',
-        value: '',
-        type: 'text'
-    }
-};
 export let inbuilt_settings = {
     recent_artwork: {
         css: 'recent_artwork',
@@ -541,7 +108,7 @@ export let settings_store: Record<string, setting_instance> = {
             trans.themes.light,
             trans.themes.ink,
             trans.themes.dark,
-            trans.theme.darker,
+            trans.themes.darker,
             trans.themes.oled,
             'oled',
             trans.appearance,
@@ -997,7 +564,29 @@ export let settings_store: Record<string, setting_instance> = {
         placeholder: trans.enter_font_names,
         tags: [
             trans.text
-        ]
+        ],
+        requires: { font_choice: 'custom' }
+    },
+    font_choice: {
+        default: 'font_2026',
+        type: 'radio',
+        title: trans.font_choice.name,
+        body: trans.font_choice.body,
+        values: {
+            font_2026: {
+                name: trans.font_choice.stylised
+            },
+            font_2025: {
+                name: trans.font_choice.simple
+            },
+            hyperlegible: {
+                name: trans.font_choice.hyperlegible
+            },
+            custom: {
+                name: trans.font_choice.custom
+            }
+        },
+        bubble: true
     },
     font_weight: {
         css: 'custom_font_weight',
