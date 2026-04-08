@@ -33714,8 +33714,8 @@
         if (sponsor_list.users[auth.name]?.badges) {
           const old_badges = parse_object("sponsor_data", localStorage.getItem("kat_sponsor_cache")) || {};
           if (import_json52.default.stringify(old_badges) != import_json52.default.stringify(sponsor_list.users[auth.name].badges)) {
-            console.info("sponsor initial", old_badges, sponsor_list.users[auth.name]);
-            set_storage("kat_sponsor_cache", import_json52.default.stringify(sponsor_list.users[auth.name]));
+            console.info("sponsor initial", old_badges, import_json52.default.stringify(old_badges), sponsor_list.users[auth.name].badges, import_json52.default.stringify(sponsor_list.users[auth.name].badges));
+            set_storage("kat_sponsor_cache", import_json52.default.stringify(sponsor_list.users[auth.name].badges));
             new_badges(sponsor_list.users[auth.name].badges);
             return;
           }
@@ -33754,7 +33754,7 @@
               const old_badges = parse_object("sponsor_data", localStorage.getItem("kat_sponsor_cache")) || {};
               if (import_json52.default.stringify(old_badges) != import_json52.default.stringify(sponsor_list.users[auth.name].badges)) {
                 console.info("sponsor request", old_badges, sponsor_list.users[auth.name]);
-                set_storage("kat_sponsor_cache", import_json52.default.stringify(sponsor_list.users[auth.name]));
+                set_storage("kat_sponsor_cache", import_json52.default.stringify(sponsor_list.users[auth.name].badges));
                 new_badges(sponsor_list.users[auth.name].badges);
               }
             }

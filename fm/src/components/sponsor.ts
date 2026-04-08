@@ -40,8 +40,8 @@ export function sponsors(force = false, func = null) {
                 const old_badges = parse_object('sponsor_data', localStorage.getItem('kat_sponsor_cache')) || {};
 
                 if (JSON5.stringify(old_badges) != JSON5.stringify(sponsor_list.users[auth.name].badges)) {
-                    console.info('sponsor initial', old_badges, sponsor_list.users[auth.name]);
-                    set_storage('kat_sponsor_cache', JSON5.stringify(sponsor_list.users[auth.name]));
+                    console.info('sponsor initial', old_badges, JSON5.stringify(old_badges), sponsor_list.users[auth.name].badges, JSON5.stringify(sponsor_list.users[auth.name].badges));
+                    set_storage('kat_sponsor_cache', JSON5.stringify(sponsor_list.users[auth.name].badges));
                     new_badges(sponsor_list.users[auth.name].badges);
 
                     return;
@@ -94,7 +94,7 @@ function sponsor_request(should_notify = false, func = null) {
 
                         if (JSON5.stringify(old_badges) != JSON5.stringify(sponsor_list.users[auth.name].badges)) {
                             console.info('sponsor request', old_badges, sponsor_list.users[auth.name]);
-                            set_storage('kat_sponsor_cache', JSON5.stringify(sponsor_list.users[auth.name]));
+                            set_storage('kat_sponsor_cache', JSON5.stringify(sponsor_list.users[auth.name].badges));
                             new_badges(sponsor_list.users[auth.name].badges);
                         }
                     }
