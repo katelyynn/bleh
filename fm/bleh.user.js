@@ -55265,7 +55265,7 @@
     let cache2 = profile_cache[name];
     if (cache2) {
       if (cache2.hue || cache2.sat || cache2.lit) {
-        if (!sponsor_list || sponsor_list && sponsor_list.sponsors && !sponsor_list.sponsors.includes(name)) {
+        if (!sponsor_list.version || sponsor_list.version && !sponsor_list.users.hasOwnProperty(name)) {
           delete cache2.hue;
           delete cache2.sat;
           delete cache2.lit;
@@ -55285,7 +55285,7 @@
     if (!cache2) cache2 = profile_cache[name] || {};
     if (cache2) {
       if (cache2.hue || cache2.sat || cache2.lit) {
-        if (!sponsor_list || sponsor_list && !sponsor_list.sponsors.includes(name)) {
+        if (!sponsor_list.version || sponsor_list.version && !sponsor_list.users.hasOwnProperty(name)) {
           delete cache2.hue;
           delete cache2.sat;
           delete cache2.lit;
