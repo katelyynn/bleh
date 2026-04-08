@@ -128,7 +128,7 @@
 .sub-text.normal.disc-header {
     --mask: var(--icon-16-album);
     gap: 12px !important;
-    margin-bottom: unset !important;
+    margin-bottom: 4px !important;
 
     & > .bleh-icon {
         display: none;
