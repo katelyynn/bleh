@@ -31,15 +31,37 @@ export function load_badges(user, solo = false) {
         });
     }
 
-    if (sponsor_list.users[user]?.badges) {
-        log(
-            'multiple badges found',
-            'sponsor',
-            'info',
-            sponsor_list.users[user].badges
-        );
+    let entry = sponsor_list.users[user];
 
-        badges = [...badges, ...sponsor_list.users[user].badges];
+    if (entry) {
+        entry = {
+            sponsor: true,
+            contributor: false,
+            ...entry
+        }
+
+        if (entry.contributor) {
+            badges.push({
+                type: 'contributor'
+            });
+        }
+
+        if (entry.sponsor) {
+            badges.push({
+                type: 'sponsor'
+            });
+        }
+
+        if (entry.badges) {
+            log(
+                'multiple badges found',
+                'sponsor',
+                'info',
+                sponsor_list.users[user].badges
+            );
+
+            badges = [...badges, ...sponsor_list.users[user].badges];
+        }
     }
 
     // now we run thru to add missing metadata
