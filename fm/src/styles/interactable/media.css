@@ -356,8 +356,8 @@
     }
 
     .link-block-cover-link {
-        width: 100%;
-        height: unset;
+        width: 100% !important;
+        height: unset !important;
         left: unset;
         aspect-ratio: 1 / 1;
 
