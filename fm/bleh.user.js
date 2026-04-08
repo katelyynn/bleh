@@ -62144,7 +62144,7 @@
     let artist_template = `artist:"${page.sister}"`;
     const info_panel = page.structure.main.firstElementChild;
     const meta_and_wiki = info_panel.querySelector(".metadata-and-wiki-row");
-    let metadata = meta_and_wiki.querySelector(".metadata-column");
+    let metadata = meta_and_wiki?.querySelector(".metadata-column");
     const mb_delay = 1600;
     const split = window.location.pathname.split("/");
     let oracle_cache = JSON.parse(localStorage.getItem("bleh_oracle_cache")) || {};
@@ -62305,7 +62305,7 @@
                 </div>
             </div>
         `;
-      meta_and_wiki.appendChild(metadata);
+      meta_and_wiki?.appendChild(metadata);
       let tracklist_view_panel;
       tracklist_panel = html.node`
             <section class="oracle-tracks">
