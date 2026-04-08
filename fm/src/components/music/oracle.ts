@@ -1272,7 +1272,8 @@ export function oracle_process() {
                     oracle_aliases(
                         release['artist-credit']?.[0] ||
                             recording['artist-credit'][0],
-                        page.sister
+                        page.sister,
+                        ''
                     )
                 );
 

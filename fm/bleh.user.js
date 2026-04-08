@@ -63056,7 +63056,8 @@
           const artist2 = fix_title(
             oracle_aliases(
               release["artist-credit"]?.[0] || recording["artist-credit"][0],
-              page.sister
+              page.sister,
+              ""
             )
           );
           const artist_lower = artist2.toLowerCase();
