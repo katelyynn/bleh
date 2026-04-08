@@ -368,16 +368,17 @@ export function oracle_process() {
         old_tracklist.remove();
     }
 
-    function oracle_aliases(artist, desired) {
+    function oracle_aliases(artist, desired, desired_id) {
         log('alias request', 'oracle', 'log', {
             artist,
             desired,
-            artist_data
+            desired_id
         });
 
         if (
             artist.name.toLowerCase() == desired.toLowerCase() ||
-            (artist_data.type == 'id' && artist.artist.id == artist_data.name)
+            (artist_data.type == 'id' && artist.artist.id == artist_data.name) ||
+            (artist.id == desired_id)
         )
             return desired;
 
@@ -982,6 +983,7 @@ export function oracle_process() {
 
         if (page.subpage != 'overview') return;
 
+        const artist_id = data['artist-credit'][0].id;
         const artist = data['artist-credit'][0].name.toLowerCase();
         const album = page.name.toLowerCase();
 
@@ -1121,7 +1123,7 @@ export function oracle_process() {
                                 <tr class="chartlist-row" data-disambig=${disambig}>
                                     <td class="chartlist-index">${track.position}</td>
                                     <td class="chartlist-name">
-                                        <a href="${root}music/${sanitise(fix_title(oracle_aliases(track['artist-credit'][0], page.sister)))}/_/${sanitise(title)}" data-name=${title} data-inherit-artists=${inherit_guests.map((artist) => sanitise(fix_title(artist.name), ' ')).join(';')}>
+                                        <a href="${root}music/${sanitise(fix_title(oracle_aliases(track['artist-credit'][0], page.sister, artist_id)))}/_/${sanitise(title)}" data-name=${title} data-inherit-artists=${inherit_guests.map((artist) => sanitise(fix_title(artist.name), ' ')).join(';')}>
                                             ${title}
                                         </a>
                                     </td>
