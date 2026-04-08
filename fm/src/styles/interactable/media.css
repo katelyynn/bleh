@@ -70,9 +70,8 @@
         h3 > a {
             text-decoration: var(--force-underline, none) !important;
         }
-
-        transition: none;
     }
+
     &:active {
         transform: scale(0.98);
     }

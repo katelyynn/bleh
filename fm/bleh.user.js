@@ -62833,7 +62833,7 @@
       }, { count: 0, length: 0 });
       const total_s = Math.floor(result.length / 1e3);
       const h = Math.floor(total_s / 3600);
-      const m = Math.floor(total_s / 60);
+      const m = Math.floor(total_s % 3600 / 60);
       const s2 = total_s % 60;
       const length = `${h > 0 ? `${h}:` : ""}${pad2(m)}:${pad2(s2)}`;
       render(metadata, html`
