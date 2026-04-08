@@ -14,7 +14,7 @@ import {
     page,
     root
 } from '@/build/page';
-import { clean_number, romanise, sanitise, set_storage } from '@/build/tools';
+import { clean_number, pad2, romanise, sanitise, set_storage } from '@/build/tools';
 import { ff } from '@/components/settings/sku';
 import {
     correct_artist,
@@ -59,6 +59,8 @@ export function oracle_process() {
     let artist_template = `artist:"${page.sister}"`;
 
     const info_panel = page.structure.main.firstElementChild;
+    const meta_and_wiki = info_panel!.querySelector('.metadata-and-wiki-row');
+    let metadata = meta_and_wiki!.querySelector('.metadata-column');
 
     const mb_delay = 1600;
 
@@ -211,6 +213,22 @@ export function oracle_process() {
         `;
         page.structure.main.appendChild(releases_panel);
     } else if (page.type == 'album' && page.subpage == 'overview') {
+        if (metadata) metadata.remove();
+
+        metadata = html.node`
+            <div class="metadata-column">
+                <div class="metadata-group">
+                    <dt class="catalogue-metadata-heading">${tl(trans.length)}</dt>
+                    <dd class="catalogue-metadata-description placeholder-text">15 tracks, 46:01</dd>
+                </div>
+                <div class="metadata-group">
+                    <dt class="catalogue-metadata-heading">${tl(trans.released)}</dt>
+                    <dd class="catalogue-metadata-description placeholder-text">7 June 2024</dd>
+                </div>
+            </div>
+        `;
+        meta_and_wiki!.appendChild(metadata);
+
         let tracklist_view_panel;
         tracklist_panel = html.node`
             <section class="oracle-tracks">
@@ -286,7 +304,7 @@ export function oracle_process() {
 
         label_panel = html.node`
             <div class="card-tip copyright">
-                © <span>...</span>
+                © <span class="placeholder-text">Label</span>
             </div>
         `;
         info_panel.appendChild(label_panel);
@@ -923,6 +941,39 @@ export function oracle_process() {
             `);
         }
 
+        const media = data.media;
+        const discs = media.filter((item) => item.tracks != null);
+
+        const result = discs.reduce((acc, disc) => {
+            acc.count += disc['track-count'];
+
+            const length = disc.tracks.reduce((sum, track) => {
+                return sum + track.length;
+            }, 0);
+
+            acc.length += length;
+
+            return acc;
+        }, { count: 0, length: 0 });
+
+        const total_s = Math.floor(result.length / 1000);
+        const h = Math.floor(total_s / 3600);
+        const m = Math.floor(total_s / 60);
+        const s = total_s % 60;
+
+        const length = `${h > 0 ? `${h}:` : ''}${pad2(m)}:${pad2(s)}`;
+
+        render(metadata, html`
+            <div class="metadata-group">
+                <dt class="catalogue-metadata-heading">${tl(trans.length)}</dt>
+                <dd class="catalogue-metadata-description">${tl(trans.value_tracks_time, { count: result.count, length })}</dd>
+            </div>
+            <div class="metadata-group">
+                <dt class="catalogue-metadata-heading">${tl(trans.released)}</dt>
+                <dd class="catalogue-metadata-description">${DateTime.fromISO(data.date).toLocaleString(DateTime.DATE_MED)}</dd>
+            </div>
+        `);
+
         if (page.subpage != 'overview') return;
 
         const artist = data['artist-credit'][0].name.toLowerCase();
@@ -942,9 +993,6 @@ export function oracle_process() {
             :   {})
         };
         log('entry', 'oracle', 'info', { oracle_entry });
-
-        const media = data.media;
-        const discs = media.filter((item) => item.tracks != null);
 
         if (discs.length == 0) {
             render(tracklist_oracle, html`

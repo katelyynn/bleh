@@ -747,6 +747,8 @@ u,
     --summary-block-8: oklch(calc(var(--lit) * 0.98) calc(clamp(min(0), var(--sat), max(2)) * 0.37) var(--hue));
     --summary-block-9: oklch(calc(var(--lit) * 1.12) calc(clamp(min(0), var(--sat), max(2)) * 0.34) var(--hue));
 
+    --card-gradient: oklch(calc(clamp(min(0.5), var(--lit), max(0.9)) * 0.5) calc(clamp(min(0), var(--sat), max(2)) * 0.55) var(--hue) / 16%);
+
     &[data-bleh--theme="oled"],
     body[data-bleh--theme="oled"] &:not(.theme-preview) {
         --c1: 0.98 0 var(--hue);
@@ -772,6 +774,8 @@ u,
             --grid-colour-shadow-override,
             0 10px 30px oklch(var(--h4) / 35%)
         );
+
+        --card-gradient: oklch(var(--h4) / 20%);
     }
     &[data-bleh--theme="light"],
     body[data-bleh--theme="light"]
@@ -858,6 +862,8 @@ u,
         --summary-block-7: oklch(calc(var(--lit) * 0.45) calc(clamp(min(0), var(--sat), max(2)) * 0.57) var(--hue));
         --summary-block-8: oklch(calc(var(--lit) * 0.3) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue));
         --summary-block-9: oklch(calc(var(--lit) * 0.2) calc(clamp(min(0), var(--sat), max(2)) * 0.64) var(--hue));
+
+        --card-gradient: oklch(var(--h2) / 6%);
     }
     &[data-bleh--theme="ink"],
     body[data-bleh--theme="ink"]

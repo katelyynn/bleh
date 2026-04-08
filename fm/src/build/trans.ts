@@ -10396,6 +10396,15 @@ export const trans = {
     },
     on_tour: {
         en: 'On tour'
+    },
+    length: {
+        en: 'Length'
+    },
+    released: {
+        en: 'Released'
+    },
+    value_tracks_time: {
+        en: '{count} tracks, {length}'
     }
 } as const satisfies Record<string, any>;
 

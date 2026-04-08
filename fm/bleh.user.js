@@ -62143,6 +62143,8 @@
     let artist_data;
     let artist_template = `artist:"${page.sister}"`;
     const info_panel = page.structure.main.firstElementChild;
+    const meta_and_wiki = info_panel.querySelector(".metadata-and-wiki-row");
+    let metadata = meta_and_wiki.querySelector(".metadata-column");
     const mb_delay = 1600;
     const split = window.location.pathname.split("/");
     let oracle_cache = JSON.parse(localStorage.getItem("bleh_oracle_cache")) || {};
@@ -62290,6 +62292,20 @@
           tracklist_own_loaded = true;
         });
       };
+      if (metadata) metadata.remove();
+      metadata = html.node`
+            <div class="metadata-column">
+                <div class="metadata-group">
+                    <dt class="catalogue-metadata-heading">${tl2(trans.length)}</dt>
+                    <dd class="catalogue-metadata-description placeholder-text">15 tracks, 46:01</dd>
+                </div>
+                <div class="metadata-group">
+                    <dt class="catalogue-metadata-heading">${tl2(trans.released)}</dt>
+                    <dd class="catalogue-metadata-description placeholder-text">7 June 2024</dd>
+                </div>
+            </div>
+        `;
+      meta_and_wiki.appendChild(metadata);
       let tracklist_view_panel;
       tracklist_panel = html.node`
             <section class="oracle-tracks">
@@ -62361,7 +62377,7 @@
       info_panel.after(tracklist_panel);
       label_panel = html.node`
             <div class="card-tip copyright">
-                © <span>...</span>
+                © <span class="placeholder-text">Label</span>
             </div>
         `;
       info_panel.appendChild(label_panel);
@@ -62805,6 +62821,31 @@
         })}
             `);
       }
+      const media = data2.media;
+      const discs = media.filter((item2) => item2.tracks != null);
+      const result = discs.reduce((acc, disc) => {
+        acc.count += disc["track-count"];
+        const length2 = disc.tracks.reduce((sum, track) => {
+          return sum + track.length;
+        }, 0);
+        acc.length += length2;
+        return acc;
+      }, { count: 0, length: 0 });
+      const total_s = Math.floor(result.length / 1e3);
+      const h = Math.floor(total_s / 3600);
+      const m = Math.floor(total_s / 60);
+      const s2 = total_s % 60;
+      const length = `${h > 0 ? `${h}:` : ""}${pad2(m)}:${pad2(s2)}`;
+      render(metadata, html`
+            <div class="metadata-group">
+                <dt class="catalogue-metadata-heading">${tl2(trans.length)}</dt>
+                <dd class="catalogue-metadata-description">${tl2(trans.value_tracks_time, { count: result.count, length })}</dd>
+            </div>
+            <div class="metadata-group">
+                <dt class="catalogue-metadata-heading">${tl2(trans.released)}</dt>
+                <dd class="catalogue-metadata-description">${DateTime.fromISO(data2.date).toLocaleString(DateTime.DATE_MED)}</dd>
+            </div>
+        `);
       if (page.subpage != "overview") return;
       const artist2 = data2["artist-credit"][0].name.toLowerCase();
       const album = page.name.toLowerCase();
@@ -62816,8 +62857,6 @@
         ...oracle_albums.hasOwnProperty(artist2) && oracle_albums[artist2].hasOwnProperty(album) ? oracle_albums[artist2][album] : {}
       };
       log("entry", "oracle", "info", { oracle_entry });
-      const media = data2.media;
-      const discs = media.filter((item2) => item2.tracks != null);
       if (discs.length == 0) {
         render(tracklist_oracle, html`
                 <div class="loading-data-container">
@@ -62829,9 +62868,9 @@
       render(tracklist_oracle, html`
             ${discs.map((disc) => render_tracklist(disc, discs.length, artist2))}
         `);
-      function render_tracklist(disc, length, retrieved_artist) {
+      function render_tracklist(disc, length2, retrieved_artist) {
         return html.node`
-                ${length > 1 ? html.node`
+                ${length2 > 1 ? html.node`
                 <div class="sub-text normal disc-header">
                     <span class="bleh-icon" style="--icon: var(--mask)" />
                     ${tl2(trans.disc_number, { n: disc.position })}
@@ -62844,9 +62883,9 @@
           const artist_lower = fix_title(track["artist-credit"][0].name).toLowerCase();
           const title_lower = title.toLowerCase();
           const track_entry = oracle_tracks.hasOwnProperty(artist_lower) && oracle_tracks[artist_lower].hasOwnProperty(title_lower) ? oracle_tracks[artist_lower][title_lower] : null;
-          const total_s = Math.floor(track.length / 1e3);
-          const m = Math.floor(total_s / 60);
-          const s2 = total_s % 60;
+          const total_s2 = Math.floor(track.length / 1e3);
+          const m2 = Math.floor(total_s2 / 60);
+          const s3 = total_s2 % 60;
           const disambig = track.recording.disambiguation;
           const video = track.recording.video;
           if (video) return html.node``;
@@ -62907,7 +62946,7 @@
                                         </a>
                                     </td>
                                     <td class="chartlist-duration">
-                                        ${m}:${s2.toString().padStart(2, "0")}
+                                        ${m2}:${s3.toString().padStart(2, "0")}
                                     </td>
                                     <td class="chartlist-more">
                                         <div>
@@ -90102,6 +90141,15 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     },
     on_tour: {
       en: "On tour"
+    },
+    length: {
+      en: "Length"
+    },
+    released: {
+      en: "Released"
+    },
+    value_tracks_time: {
+      en: "{count} tracks, {length}"
     }
   };
   var translation_fallback = "NO_TRANSLATION_FOUND";
@@ -91665,7 +91713,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-02-25"
       }
     },
-    built_on: "2026-04-08T16:24:14.672Z"
+    built_on: "2026-04-08T19:52:20.963Z"
   };
 
   // node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

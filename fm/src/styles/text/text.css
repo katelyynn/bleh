@@ -394,3 +394,21 @@ hr {
 .bleh-info-icon {
     --icon: var(--icon-16-info);
 }
+
+.placeholder-text {
+    cursor: default;
+    font-family: Flow Circular, var(--font);
+    user-select: none;
+    color: oklch(var(--c3));
+
+    animation: placeholder-text 4s var(--trans-function-ani) infinite;
+}
+
+@keyframes placeholder-text {
+    from, to {
+        opacity: 0.2;
+    }
+    50% {
+        opacity: 1;
+    }
+}

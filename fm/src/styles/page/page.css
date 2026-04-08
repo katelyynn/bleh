@@ -240,7 +240,7 @@
 
     & > form > section,
     & > div,
-    & > section:not(.side-actions) {
+    & > section:not(.side-actions, .profile-summary) {
         margin-top: unset !important;
     }
 
