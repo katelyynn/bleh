@@ -492,7 +492,7 @@ export function markdown(
     // this looks like a mess, but essentially profile colours are
     // a nice 'thank you' vanity reward for sponsors <3
     if (allow_hue) {
-        if (sponsor_list.users.hasOwnProperty(name))
+        if (!sponsor_list.users.hasOwnProperty(name))
             allow_hue = false;
     }
 

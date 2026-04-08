@@ -67019,7 +67019,7 @@
       });
     }
     if (allow_hue) {
-      if (sponsor_list.users.hasOwnProperty(name))
+      if (!sponsor_list.users.hasOwnProperty(name))
         allow_hue = false;
     }
     if (body.nodeName != "#text") {
