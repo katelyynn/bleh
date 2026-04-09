@@ -63,7 +63,8 @@ export function oracle_process() {
     if (ff('oracle_album_reordering') && page.type == 'track') {
     }
 
-    if (!ff('oracle_connect') || page.type == 'artist' || (!['overview', 'albums'].includes(page.subpage) && page.type == 'album')) return;
+    //if (!ff('oracle_connect') || page.type == 'artist' || (!['overview', 'albums'].includes(page.subpage) && page.type == 'album')) return;
+    if (!ff('oracle_connect') || page.type == 'artist') return;
 
     let tries = 3;
     const item = page.name.toLowerCase();
@@ -136,24 +137,22 @@ export function oracle_process() {
         set_storage('bleh_oracle_cache', JSON.stringify(oracle_cache));
     }
 
-    if (page.subpage == 'overview' || page.subpage == 'albums') {
-        page.structure.side!.appendChild(html.node`
-            <section class="oracle cta colourful">
-                <label class="cta-label">
-                    ${icon({ name: icons.oracle })}
-                    <strong>${tl(trans.oracle_notice)}</strong>
-                </label>
-                <div class="cta-actions">
-                    <button class="see-more left-icon oracle-button" data-type="debug" onclick=${() => oracle_debug()}>
-                        ${tl(trans.debug)}
-                    </button>
-                    <a class="see-more oracle-button" href="https://github.com/katelyynn/bleh/issues/new/choose" target="_blank">
-                        ${tl(trans.send_feedback)}
-                    </a>
-                </div>
-            </section>
-        `);
-    }
+    page.structure.side!.appendChild(html.node`
+        <section class="oracle cta colourful">
+            <label class="cta-label">
+                ${icon({ name: icons.oracle })}
+                <strong>${tl(trans.oracle_notice)}</strong>
+            </label>
+            <div class="cta-actions">
+                <button class="see-more left-icon oracle-button" data-type="debug" onclick=${() => oracle_debug()}>
+                    ${tl(trans.debug)}
+                </button>
+                <a class="see-more oracle-button" href="https://github.com/katelyynn/bleh/issues/new/choose" target="_blank">
+                    ${tl(trans.send_feedback)}
+                </a>
+            </div>
+        </section>
+    `);
 
     const header = page.structure.container.querySelector('.page-header');
     let releases_panel;
@@ -1529,6 +1528,100 @@ export function oracle_process() {
                 return 0;
             });
 
+            if (releases[0]) {
+                const release = releases[0];
+
+                let title = release.title;
+                const artist = fix_title(
+                    oracle_aliases(
+                        release['artist-credit']?.[0] ||
+                            recording['artist-credit'][0],
+                        page.sister
+                    )
+                );
+
+                const match = lastfm_releases.find(
+                    (r) =>
+                        r.title == title &&
+                        r.artist == artist
+                );
+
+                let plays = 0;
+                let artwork;
+                if (match) {
+                    plays = match.plays;
+                    artwork = match.artwork;
+                }
+
+                if (artwork) {
+                    create_avatar(
+                        page.state.avatar_side,
+                        artwork,
+                        page.state.avatar_side_override
+                    );
+
+                    save_hoshino_artwork(
+                        artwork,
+                        title,
+                        artist,
+                        plays
+                    );
+                } else {
+                    const entry = load_hoshino_artwork(title, artist);
+
+                    if (entry && entry.artwork && entry.listeners) {
+                        create_avatar(
+                            page.state.avatar_side,
+                            entry.artwork,
+                            page.state.avatar_side_override
+                        );
+                    } else {
+                        fetch(`${root}music/${sanitise(artist)}/${sanitise(title)}/`)
+                            .then((res) => {
+                                if (!res.ok) {
+                                    log('error fetching cover art', 'oracle', 'error', { res });
+
+                                    throw new Error();
+                                }
+
+                                return res.text();
+                            })
+                            .then((dom) => {
+                                const doc = new DOMParser().parseFromString(dom, 'text/html');
+
+                                const background_image = doc.querySelector(
+                                    '.header-new-background-image'
+                                );
+
+                                let artwork = null;
+
+                                if (background_image) {
+                                    artwork = background_image
+                                        .getAttribute('content')
+                                        .replace('/ar0/', '/300x300/');
+                                }
+
+                                create_avatar(
+                                    page.state.avatar_side,
+                                    artwork,
+                                    page.state.avatar_side_override
+                                );
+
+                                save_hoshino_artwork(
+                                    artwork,
+                                    title,
+                                    artist,
+                                    clean_number(listeners?.title)
+                                );
+                            })
+                            .catch((err) => {
+                                console.error('oracle', err);
+                                return;
+                            });
+                    }
+                }
+            }
+
             log('releases in recording after filter', 'oracle', 'info', {
                 releases
             });
@@ -1683,27 +1776,6 @@ export function oracle_process() {
                                             </div>
                                         </div>
                                     `;
-                                }
-
-                                if (index == 0) {
-                                    cache.track.name = title;
-                                    cache.track.sister = artist;
-                                    cache.track.link = `${root}music/${sanitise(artist)}/${sanitise(title)}`;
-
-                                    if (artwork) {
-                                        create_avatar(
-                                            page.state.avatar_side,
-                                            artwork,
-                                            page.state.avatar_side_override
-                                        );
-
-                                        save_hoshino_artwork(
-                                            artwork,
-                                            title,
-                                            artist,
-                                            plays
-                                        );
-                                    }
                                 }
 
                                 if (!artwork && index < 2)
@@ -1863,21 +1935,6 @@ export function oracle_process() {
                 const listeners = doc.querySelector(
                     '.header-new-info-desktop .header-metadata-tnew-display > p > abbr'
                 );
-
-                if (index == 0) {
-                    create_avatar(
-                        page.state.avatar_side,
-                        artwork,
-                        page.state.avatar_side_override
-                    );
-
-                    save_hoshino_artwork(
-                        artwork,
-                        title,
-                        artist,
-                        clean_number(listeners?.title)
-                    );
-                }
 
                 render(
                     stats,
