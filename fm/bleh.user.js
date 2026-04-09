@@ -77131,7 +77131,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     }
   }
 
-  // src/pages/home.js
+  // src/pages/home.ts
   async function bleh_home() {
     page.structure.container = document.body.querySelector(".page-content");
     try {
@@ -77172,10 +77172,11 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     let welcome;
     if (auth.name) {
       let profile_name;
+      let page_avatar;
       welcome = html.node`
             <section class="page-header for-profile">
                 <div class="page-header-avatar-list">
-                    ${page_header_avatar(auth.avatar)}
+                    ${page_avatar = page_header_avatar(auth.avatar)}
                 </div>
                 <div class="page-header-info has-main-info">
                     <div class="main-info">
@@ -77195,6 +77196,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         profile_name.setAttribute("data-font", cache2.font);
         profile_name.setAttribute("data-font-style", cache2.font_style);
       }
+      header_colour(page_avatar.image, false, page_avatar);
     } else {
       welcome = html.node`
             <section class="page-header for-profile">

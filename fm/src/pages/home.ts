@@ -24,6 +24,7 @@ import tippy from "tippy.js";
 import { page_header_avatar } from '@/components/music/header';
 import { campfire } from './home/campfire';
 import { bleh_suggested } from './home/suggested';
+import { header_colour } from '@/components/page/colour';
 
 export async function bleh_home() {
     page.structure.container = document.body.querySelector('.page-content');
@@ -72,10 +73,12 @@ export async function bleh_home() {
     let welcome;
     if (auth.name) {
         let profile_name;
+        let page_avatar;
+
         welcome = html.node`
             <section class="page-header for-profile">
                 <div class="page-header-avatar-list">
-                    ${page_header_avatar(auth.avatar)}
+                    ${page_avatar = page_header_avatar(auth.avatar)}
                 </div>
                 <div class="page-header-info has-main-info">
                     <div class="main-info">
@@ -93,9 +96,11 @@ export async function bleh_home() {
         `;
 
         if (settings.display_name_styles) {
-            profile_name.setAttribute('data-font', cache.font);
-            profile_name.setAttribute('data-font-style', cache.font_style);
+            profile_name!.setAttribute('data-font', cache.font);
+            profile_name!.setAttribute('data-font-style', cache.font_style);
         }
+
+        header_colour(page_avatar.image, false, page_avatar);
     } else {
         welcome = html.node`
             <section class="page-header for-profile">
