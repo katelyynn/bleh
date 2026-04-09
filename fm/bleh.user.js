@@ -29369,16 +29369,16 @@
     }
   }
   function status2({ title, body, type }) {
-    let status_icon = "icon-16-info";
+    let status_icon = icons.info;
     if (type == "error") {
-      status_icon = "icon-16-x";
+      status_icon = icons.x;
     }
     const alert2 = html.node`
         <div class="status-alert colourful" onclick=${() => status_remove()}>
-            <div class="status-icon">
-                ${icon({ name: icons[status_icon] })}
+            <div class="status-title">
+                ${icon({ name: status_icon })}
+                ${title}
             </div>
-            <div class="status-title">${title}</div>
             ${body ? html.node`<div class="status-body">${body}</div>` : ""}
         </div>
     `;
