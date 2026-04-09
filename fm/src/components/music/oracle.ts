@@ -1721,7 +1721,6 @@ export function oracle_process() {
                         </div>
                     </div>
                 `);
-                oracle_save_cache('track', false);
             }
 
             const artist_elem = header.querySelector('h2');
@@ -1866,10 +1865,6 @@ export function oracle_process() {
                 );
 
                 if (index == 0) {
-                    cache.track.name = title;
-                    cache.track.sister = artist;
-                    cache.track.link = `${root}music/${sanitise(artist)}/${sanitise(title)}`;
-
                     create_avatar(
                         page.state.avatar_side,
                         artwork,
@@ -1882,7 +1877,6 @@ export function oracle_process() {
                         artist,
                         clean_number(listeners?.title)
                     );
-                    oracle_save_cache('track', false);
                 }
 
                 render(

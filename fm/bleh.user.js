@@ -63412,7 +63412,6 @@
                         </div>
                     </div>
                 `);
-          oracle_save_cache("track", false);
         }
         const artist_elem = header.querySelector("h2");
         if (recording.disambiguation == "explicit") {
@@ -63527,9 +63526,6 @@
           ".header-new-info-desktop .header-metadata-tnew-display > p > abbr"
         );
         if (index3 == 0) {
-          cache2.track.name = title;
-          cache2.track.sister = artist2;
-          cache2.track.link = `${root}music/${sanitise(artist2)}/${sanitise(title)}`;
           create_avatar(
             page.state.avatar_side,
             artwork,
@@ -63541,7 +63537,6 @@
             artist2,
             clean_number(listeners?.title)
           );
-          oracle_save_cache("track", false);
         }
         render(
           stats,
