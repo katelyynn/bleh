@@ -64,7 +64,7 @@
             --mask-size: var(--cover-size-50);
         }
 
-        transition-property: transform, filter;
+        transition-property: filter;
         transition-duration: 0.2s;
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 
@@ -141,7 +141,6 @@
 
     &:hover {
         .source-album-art {
-            transform: scale(1.02);
             filter: brightness(110%);
         }
     }
