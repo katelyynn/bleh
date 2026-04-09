@@ -65301,9 +65301,9 @@
         "data-bleh--scrobble-milestone",
         parsed_scrobble_as_rank.milestone
       );
-      p4.style.setProperty("--hue-user", parsed_scrobble_as_rank.hue);
-      p4.style.setProperty("--sat-user", parsed_scrobble_as_rank.sat);
-      p4.style.setProperty("--lit-user", parsed_scrobble_as_rank.lit);
+      p4.style.setProperty("--hue-over", parsed_scrobble_as_rank.hue);
+      p4.style.setProperty("--sat-over", parsed_scrobble_as_rank.sat);
+      p4.style.setProperty("--lit-over", parsed_scrobble_as_rank.lit);
     }
     if (katsune) listen_item.classList.add("icon");
     parent.appendChild(listen_item);

@@ -1289,9 +1289,9 @@ function create_listen_item(
             'data-bleh--scrobble-milestone',
             parsed_scrobble_as_rank.milestone
         );
-        p.style.setProperty('--hue-user', parsed_scrobble_as_rank.hue);
-        p.style.setProperty('--sat-user', parsed_scrobble_as_rank.sat);
-        p.style.setProperty('--lit-user', parsed_scrobble_as_rank.lit);
+        p.style.setProperty('--hue-over', parsed_scrobble_as_rank.hue);
+        p.style.setProperty('--sat-over', parsed_scrobble_as_rank.sat);
+        p.style.setProperty('--lit-over', parsed_scrobble_as_rank.lit);
     }
 
     if (katsune) listen_item.classList.add('icon');
