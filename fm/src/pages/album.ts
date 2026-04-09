@@ -126,7 +126,7 @@ export function bleh_albums() {
                     ${page_avatar = page_header_avatar(avatar_img)}
                 </div>
                 <div class="page-header-info">
-                    <div class="sub-text">${tl(trans.album)}</div>
+                    <div class="sub-text" ref=${el => page.state.header_type = el}>${tl(trans.album)}</div>
                     <div class="title-container">
                         ${title}
                         ${position ? position : ''}

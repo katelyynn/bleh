@@ -62824,7 +62824,7 @@
     function oracle_album_fetch(data2) {
       if (tries < 1) return;
       tries--;
-      const url = `https://musicbrainz.org/ws/2/release/${data2.id}?inc=recordings+labels+artist-credits+url-rels+annotation`;
+      const url = `https://musicbrainz.org/ws/2/release/${data2.id}?inc=recordings+labels+artist-credits+url-rels+annotation+release-groups`;
       log(
         `using url ${encodeURI(url)} with ${tries} tries available`,
         "oracle"
@@ -62887,6 +62887,18 @@
                 </div>
             `);
         return;
+      }
+      const types = {
+        album: tl2(trans.album),
+        single: tl2(trans.single),
+        ep: "EP",
+        other: tl2(trans.other)
+      };
+      let type = data2["release-group"]["primary-type"];
+      if (type && type.toLowerCase() in types)
+        type = types[type.toLowerCase()];
+      if (type && page.state.header_type) {
+        page.state.header_type.textContent = type;
       }
       let labels = data2["label-info"];
       if (labels && labels.length > 0 && page.subpage == "overview") {
@@ -73806,7 +73818,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                     ${page_avatar = page_header_avatar(avatar_img)}
                 </div>
                 <div class="page-header-info">
-                    <div class="sub-text">${tl2(trans.album)}</div>
+                    <div class="sub-text" ref=${(el) => page.state.header_type = el}>${tl2(trans.album)}</div>
                     <div class="title-container">
                         ${title}
                         ${position ? position : ""}

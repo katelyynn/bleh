@@ -937,7 +937,7 @@ export function oracle_process() {
         if (tries < 1) return;
         tries--;
 
-        const url = `https://musicbrainz.org/ws/2/release/${data.id}?inc=recordings+labels+artist-credits+url-rels+annotation`;
+        const url = `https://musicbrainz.org/ws/2/release/${data.id}?inc=recordings+labels+artist-credits+url-rels+annotation+release-groups`;
 
         log(
             `using url ${encodeURI(url)} with ${tries} tries available`,
@@ -1015,6 +1015,21 @@ export function oracle_process() {
             `);
 
             return;
+        }
+
+        const types = {
+            album: tl(trans.album),
+            single: tl(trans.single),
+            ep: 'EP',
+            other: tl(trans.other)
+        };
+
+        let type = data['release-group']['primary-type'];
+        if (type && type.toLowerCase() in types)
+            type = types[type.toLowerCase()];
+
+        if (type && page.state.header_type) {
+            page.state.header_type.textContent = type;
         }
 
         /*if (page.subpage == 'overview') {
@@ -1560,10 +1575,7 @@ export function oracle_process() {
                                     other: tl(trans.other)
                                 };
 
-                                let type =
-                                    release['release-group'][
-                                        'primary-type'
-                                    ];
+                                let type = release['release-group']['primary-type'];
                                 if (type && type.toLowerCase() in types)
                                     type = types[type.toLowerCase()];
 
