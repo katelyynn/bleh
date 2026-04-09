@@ -106,7 +106,7 @@
         min-width: 14px;
 
         overflow: unset;
-        cursor: default;
+        pointer-events: none;
 
         height: 18px;
 
@@ -202,95 +202,22 @@
 }
 
 /* blehhhh :3 */
-.user-status--bleh-cute,
-.label.user-status--bleh-cute {
+.user-status--bleh-cute {
     --mask: var(--icon-16-bleh);
     --hue-over: 6;
     --sat-over: 1.46;
     --lit-over: 0.9;
 }
 
-.user-status--bleh-cat,
-.label.user-status--bleh-cat {
-    --mask: var(--icon-cat);
-
-    &.user-status--bleh-user-boba2814 {
-        --hue-over: 206;
-        --sat-over: 1;
-        --lit-over: 1.1;
-    }
-    &.user-status--bleh-user-iwas15with100k {
-        --hue-over: 333;
-        --sat-over: 1;
-        --lit-over: 1;
-    }
-    &.user-status--bleh-user-aoivee {
-        --hue-over: 110;
-        --sat-over: 1;
-        --lit-over: 1;
-    }
-    &.user-status--bleh-user-Serprety {
-        --hue-over: 255;
-        --sat-over: 1;
-        --lit-over: 1;
-    }
-    &.user-status--bleh-user-RazzBX {
-        --hue-over: 245;
-        --sat-over: 1;
-        --lit-over: 1;
-    }
-}
-
-.user-status--bleh-mask,
-.label.user-status--bleh-mask {
-    --mask: var(--icon-mask);
-
-    &.user-status--bleh-user-KuroinHeroin {
-        --hue: 343;
-        --sat: 1.5;
-        --lit: 0.9;
-    }
-}
-
-.user-status--bleh-paw,
-.label.user-status--bleh-paw {
-    --mask: var(--icon-paw);
-
-    &.user-status--bleh-user-u5c {
-        --hue: 273;
-        --sat: 1.15;
-        --lit: 0.8;
-    }
-
-    &.user-status--bleh-user-yourfriendoss {
-        --hue-over: 346;
-        --sat-over: 1.3;
-        --lit-over: 1.2;
-    }
-}
-
-.user-status--bleh-colon-three,
-.label.user-status--bleh-colon-three {
-    --mask: var(--icon-colon-three);
-
-    &.user-status--bleh-user-destons {
-        --hue: 35;
-        --sat: 1.5;
-        --lit: 1.05;
-    }
-}
-
-.user-status--bleh-contributor,
-.label.user-status--bleh-contributor {
+.user-status--bleh-contributor {
     --mask: var(--icon-contributor);
 
-    --hue-over: 52;
+    --hue-over: 42;
     --sat-over: 1.22;
     --lit-over: 0.98;
 }
 
-.user-status--bleh-translation,
-.label.user-status--bleh-translation {
+.user-status--bleh-translation {
     --mask: var(--icon-translation);
 
     --hue-over: 124;
@@ -310,31 +237,6 @@
     --hue-over: var(--hue-sponsor);
     --sat-over: var(--sat-sponsor);
     --lit-over: var(--lit-sponsor);
-}
-
-.user-status--bleh-cosmic {
-    --mask: var(--icon-cosmic);
-    --hue-over: 46;
-    --sat-over: 1.2;
-    --lit-over: 0.98;
-}
-.user-status--bleh-loader {
-    --mask: var(--icon-loader);
-    --hue-over: 90;
-    --sat-over: 1.15;
-    --lit-over: 0.8;
-}
-.user-status--bleh-grapes {
-    --mask: var(--icon-grapes);
-    --hue-over: 332;
-    --sat-over: 1.2;
-    --lit-over: 0.3;
-}
-.user-status--bleh-altar {
-    --mask: var(--icon-scroll);
-    --hue-over: 270;
-    --sat-over: 0.6;
-    --lit-over: 1;
 }
 
 .label.user-follow {
