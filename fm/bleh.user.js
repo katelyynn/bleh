@@ -62667,6 +62667,7 @@
             },
             ...data3
           };
+          log("saved temp", "oracle", "info", { temp: page.state.oracle_temp });
           oracle_track_releases(data3);
         },
         onerror: function(err) {
@@ -62864,6 +62865,7 @@
             },
             ...data3
           };
+          log("saved temp", "oracle", "info", { temp: page.state.oracle_temp });
           oracle_album(data3);
         },
         onerror: function(err) {
@@ -62924,6 +62926,7 @@
         })}
             `);
       }
+      if (page.subpage != "overview") return;
       const media = data2.media;
       const discs = media.filter((item2) => item2.tracks != null);
       const result = discs.reduce((acc, disc) => {
@@ -62949,7 +62952,6 @@
                 <dd class="catalogue-metadata-description">${DateTime.fromISO(data2.date).toLocaleString(DateTime.DATE_MED)}</dd>
             </div>
         `);
-      if (page.subpage != "overview") return;
       const artist_id = data2["artist-credit"][0].id;
       const artist2 = data2["artist-credit"][0].name.toLowerCase();
       const album = page.name.toLowerCase();
