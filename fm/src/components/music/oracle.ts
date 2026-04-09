@@ -120,7 +120,7 @@ export function oracle_process() {
 
     log('loaded cache', 'oracle', 'info', { oracle_cache, cache });
 
-    function oracle_save_cache(type, bump = true) {
+    function oracle_save_cache(type: string, bump = true) {
         if (bump) {
             const day = 24 * 60 * 60 * 1000;
 
@@ -1285,7 +1285,7 @@ export function oracle_process() {
         const recording = oracle_pick_recording(data);
 
         cache.track = {
-            id: data.id
+            id: recording.id
         };
         oracle_save_cache('track');
 
@@ -2298,61 +2298,44 @@ export function manage_oracle_data() {
 
     function load_item_data(type, data, item, artist) {
         const entry = html.node`
-                <div class="data-table-entry">
-                    <div class="entry-header">
-                        <strong class="entry-type">
-                            ${icon({ name: icons[type] })}
-                            ${type}
-                        </strong>
-                        <div class="entry-subdata">
-                            ${data.date ? html.node`
-                                <div class="entry-data-row">
-                                    <strong class="entry-data-head">fetched:</strong>
-                                    <p class="entry-data-text">${DateTime.fromMillis(data.date).toRelative()}</p>
-                                </div>
-                            ` : ''}
-                            ${data.expire ? html.node`
-                                <div class="entry-data-row">
-                                    <strong class="entry-data-head">expires:</strong>
-                                    <p class="entry-data-text">${DateTime.fromMillis(data.expire).toRelative()}</p>
-                                </div>
-                            ` : ''}
-                        </div>
-                        <div class="entry-actions">
-                            <button class="btn icon danger-subtle chibi" data-type="delete" onclick=${() => delete_item()}>${tl(trans.delete)}</button>
-                        </div>
-                    </div>
+            <div class="data-table-entry">
+                <div class="entry-header">
+                    <strong class="entry-type">
+                        ${icon({ name: icons[type] })}
+                        ${type}
+                    </strong>
                     <div class="entry-subdata">
-                        ${
-                            data.fetch ?
-                                html.node`
-                            <div class="entry-data-row colourful" data-danger=${type == 'track'}>
-                                <p>fetch</p>
-                            </div>
-                        `
-                            :   ''
-                        }
-                        ${
-                            data.recording ?
-                                html.node`
+                        ${data.date ? html.node`
                             <div class="entry-data-row">
-                                <p>recording</p>
+                                <strong class="entry-data-head">fetched:</strong>
+                                <p class="entry-data-text">${DateTime.fromMillis(data.date).toRelative()}</p>
                             </div>
-                        `
-                            :   ''
-                        }
-                        ${
-                            data.artwork ?
-                                html.node`
+                        ` : ''}
+                        ${data.expire ? html.node`
                             <div class="entry-data-row">
-                                <p>artwork</p>
+                                <strong class="entry-data-head">expires:</strong>
+                                <p class="entry-data-text">${DateTime.fromMillis(data.expire).toRelative()}</p>
                             </div>
-                        `
-                            :   ''
-                        }
+                        ` : ''}
+                    </div>
+                    <div class="entry-actions">
+                        <button class="btn icon danger-subtle chibi" data-type="delete" onclick=${() => delete_item()}>${tl(trans.delete)}</button>
                     </div>
                 </div>
-            `;
+                <div class="entry-subdata">
+                    ${data.id ? html.node`
+                        <div class="entry-data-row">
+                            <p>id: ${data.id}</p>
+                        </div>
+                    ` : ''}
+                    ${data.artwork ? html.node`
+                        <div class="entry-data-row">
+                            <p>artwork</p>
+                        </div>
+                    ` : ''}
+                </div>
+            </div>
+        `;
 
         function delete_item() {
             delete oracle[artist][item][type];
