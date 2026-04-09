@@ -62138,6 +62138,19 @@
   function oracle_process() {
     log("beginning", "oracle");
     page.state.oracle_debug = {};
+    if (!page.state.oracle_temp || !page.state.oracle_temp.id) {
+      page.state.oracle_temp = {};
+    } else {
+      if (page.type == "album" || page.type == "track") {
+        if (page.name != page.state.oracle_temp.page.name || page.sister != page.state.oracle_temp.page.sister || page.type != page.state.oracle_temp.page.type) {
+          page.state.oracle_temp = {};
+        }
+      } else if (page.type == "artist") {
+        if (page.name != page.state.oracle_temp.page.name || page.type != page.state.oracle_temp.page.type) {
+          page.state.oracle_temp = {};
+        }
+      }
+    }
     if (ff("oracle_album_reordering") && page.type == "track") {
     }
     if (!ff("oracle_connect") || page.type == "artist" || !["overview", "albums"].includes(page.subpage) && page.type == "album") return;
@@ -62176,6 +62189,7 @@
     log("cleaned cache", "oracle", "info", { oracle_cache });
     if (!oracle_cache[artist]) oracle_cache[artist] = {};
     let cache2 = oracle_cache[artist][item] || {
+      album: {},
       track: {}
     };
     log("loaded cache", "oracle", "info", { oracle_cache, cache: cache2 });
@@ -62494,45 +62508,61 @@
       else if (page.type == "album")
         url = `https://musicbrainz.org/ws/2/release?query=${encodeURIComponent(`release:"${sanitise(clean_title(page.name), " ")}" AND ${artist_template}`)}`;
       if (page.type == "album") {
-        const local = oracle_albums[artist]?.[item] || oracle_cache[artist]?.[item]?.album;
-        if (local?.fetch || local?.id) {
+        if (page.state.oracle_temp.page && (page.name == page.state.oracle_temp.page.name && page.sister == page.state.oracle_temp.page.sister && page.type == page.state.oracle_temp.page.type)) {
+          oracle_album(page.state.oracle_temp);
+        } else if (oracle_albums[artist]?.[item]) {
+          const local = oracle_albums[artist]?.[item];
           tries = 3;
-          if (local.id) {
-            log(
-              "skipping album search for id (oracle database)",
-              "oracle",
-              "info",
-              { local }
-            );
-            page.state.oracle_debug.release_id = local.id;
-            oracle_album_fetch({
-              id: local.id
-            });
-          } else {
-            log(
-              "skipping album search for id (local cache)",
-              "oracle",
-              "info",
-              { local }
-            );
-            page.state.oracle_debug.release_id = local.fetch.id;
-            oracle_album(local.fetch);
-          }
+          log(
+            "skipping album search for id (oracle database)",
+            "oracle",
+            "info",
+            { local }
+          );
+          page.state.oracle_debug.release_id = local.id;
+          oracle_album_fetch({
+            id: local.id
+          });
+          return;
+        } else if (oracle_cache[artist]?.[item]?.album) {
+          const local = oracle_cache[artist]?.[item]?.album;
+          tries = 3;
+          log(
+            "skipping album search for id (local cache)",
+            "oracle",
+            "info",
+            { local }
+          );
+          page.state.oracle_debug.release_id = local.id;
+          oracle_album_fetch({
+            id: local.id
+          });
           return;
         }
       } else if (page.type == "track") {
-        const local = oracle_cache[artist]?.[item]?.track;
-        if (local?.fetch) {
-          delete local.fetch;
-          log("deleted legacy track fetch data", "oracle");
-          oracle_save_cache("track", false);
-        }
-        if (local?.recording) {
-          log("skipping track search (local cache)", "oracle", "info", {
-            local
-          });
-          oracle_track_releases(local.recording);
-          return;
+        if (page.state.oracle_temp.page && (page.name == page.state.oracle_temp.page.name && page.sister == page.state.oracle_temp.page.sister && page.type == page.state.oracle_temp.page.type)) {
+          oracle_track_releases(page.state.oracle_temp);
+        } else {
+          const local = oracle_cache[artist]?.[item]?.track;
+          if (local?.fetch) {
+            delete local.fetch;
+            log("deleted legacy track fetch data", "oracle");
+            oracle_save_cache("track", false);
+          }
+          if (local?.recording) {
+            delete local.recording;
+            log("deleted legacy track recording data", "oracle");
+            oracle_save_cache("track", false);
+          }
+          if (local?.id) {
+            log("skipping track search (local cache)", "oracle", "info", {
+              local
+            });
+            oracle_track_fetch({
+              id: local.id
+            });
+            return;
+          }
         }
       }
       log(
@@ -62597,6 +62627,57 @@
           oracle_album_fetch(release);
         }, mb_delay);
       }
+    }
+    function oracle_track_fetch(data2) {
+      if (tries < 1) return;
+      tries--;
+      const url = `https://musicbrainz.org/ws/2/recording/${data2.id}?inc=artist-credits+url-rels+annotation+work-level-rels+artist-rels+work-rels+releases+release-groups`;
+      log(
+        `using url ${encodeURI(url)} with ${tries} tries available`,
+        "oracle"
+      );
+      GM_xmlhttpRequest({
+        method: "GET",
+        url,
+        headers: {
+          "User-Agent": `bleh/${version.build} <https://github.com/katelyynn/bleh>`,
+          Accept: "application/json"
+        },
+        onload: function(response) {
+          if (response.status < 200 || response.status >= 300) {
+            log("error fetching connect data", "oracle", "error", {
+              response
+            });
+            oracle_error(response);
+            return;
+          }
+          let data3;
+          try {
+            data3 = JSON.parse(response.responseText);
+          } catch (e4) {
+            log("failed to parse", "oracle", "error", { e: e4 });
+            oracle_error(e4);
+            return;
+          }
+          log("received connect track data", "oracle", "info", { data: data3 });
+          page.state.oracle = data3;
+          page.state.oracle_temp = {
+            page: {
+              name: page.name,
+              sister: page.sister,
+              type: page.type
+            },
+            ...data3
+          };
+          oracle_track_releases(data3);
+        },
+        onerror: function(err) {
+          console.error("oracle", err);
+          setTimeout(() => {
+            oracle_track_fetch(data2);
+          }, 1e3);
+        }
+      });
     }
     function oracle_pick_recording(data2) {
       if (!data2 || !data2.recordings) return null;
@@ -62744,15 +62825,6 @@
       if (tries < 1) return;
       tries--;
       const url = `https://musicbrainz.org/ws/2/release/${data2.id}?inc=recordings+labels+artist-credits+url-rels+annotation`;
-      const local = oracle_cache[artist]?.[item];
-      if (local && local.album?.fetch) {
-        log("skipping album fetch (local cache)", "oracle", "info", {
-          local
-        });
-        page.state.oracle = local.album.fetch;
-        oracle_album(local.album.fetch);
-        return;
-      }
       log(
         `using url ${encodeURI(url)} with ${tries} tries available`,
         "oracle"
@@ -62782,6 +62854,18 @@
           }
           log("received connect album data", "oracle", "info", { data: data3 });
           page.state.oracle = data3;
+          cache2.album = {
+            id: data3.id
+          };
+          oracle_save_cache("album");
+          page.state.oracle_temp = {
+            page: {
+              name: page.name,
+              sister: page.sister,
+              type: page.type
+            },
+            ...data3
+          };
           oracle_album(data3);
         },
         onerror: function(err) {
@@ -62974,9 +63058,11 @@
     }
     function oracle_track_releases_process(data2) {
       const recording = oracle_pick_recording(data2);
-      if (recording) cache2.track.recording = recording;
+      cache2.track = {
+        id: data2.id
+      };
       oracle_save_cache("track");
-      oracle_track_releases(recording);
+      oracle_track_fetch(recording);
     }
     function oracle_track_releases(recording) {
       let releases = [];

@@ -46,6 +46,20 @@ export function oracle_process() {
 
     page.state.oracle_debug = {};
 
+    if (!page.state.oracle_temp || !page.state.oracle_temp.id) {
+        page.state.oracle_temp = {};
+    } else {
+        if (page.type == 'album' || page.type == 'track') {
+            if (page.name != page.state.oracle_temp.page.name || page.sister != page.state.oracle_temp.page.sister || page.type != page.state.oracle_temp.page.type) {
+                page.state.oracle_temp = {};
+            }
+        } else if (page.type == 'artist') {
+            if (page.name != page.state.oracle_temp.page.name || page.type != page.state.oracle_temp.page.type) {
+                page.state.oracle_temp = {};
+            }
+        }
+    }
+
     if (ff('oracle_album_reordering') && page.type == 'track') {
     }
 
@@ -99,6 +113,7 @@ export function oracle_process() {
     if (!oracle_cache[artist]) oracle_cache[artist] = {};
 
     let cache = oracle_cache[artist][item] || {
+        album: {},
         track: {}
     };
 
@@ -476,52 +491,69 @@ export function oracle_process() {
             url = `https://musicbrainz.org/ws/2/release?query=${encodeURIComponent(`release:"${sanitise(clean_title(page.name), ' ')}" AND ${artist_template}`)}`;
 
         if (page.type == 'album') {
-            const local =
-                oracle_albums[artist]?.[item] ||
-                oracle_cache[artist]?.[item]?.album;
-
-            if (local?.fetch || local?.id) {
+            if (page.state.oracle_temp.page && (page.name == page.state.oracle_temp.page.name && page.sister == page.state.oracle_temp.page.sister && page.type == page.state.oracle_temp.page.type)) {
+                oracle_album(page.state.oracle_temp);
+            } else if (oracle_albums[artist]?.[item]) {
+                const local = oracle_albums[artist]?.[item];
                 tries = 3;
 
-                if (local.id) {
-                    log(
-                        'skipping album search for id (oracle database)',
-                        'oracle',
-                        'info',
-                        { local }
-                    );
-                    page.state.oracle_debug.release_id = local.id;
-                    oracle_album_fetch({
-                        id: local.id
-                    });
-                } else {
-                    log(
-                        'skipping album search for id (local cache)',
-                        'oracle',
-                        'info',
-                        { local }
-                    );
-                    page.state.oracle_debug.release_id = local.fetch.id;
-                    oracle_album(local.fetch);
-                }
+                log(
+                    'skipping album search for id (oracle database)',
+                    'oracle',
+                    'info',
+                    { local }
+                );
+                page.state.oracle_debug.release_id = local.id;
+                oracle_album_fetch({
+                    id: local.id
+                });
+
+                return;
+            } else if (oracle_cache[artist]?.[item]?.album) {
+                const local = oracle_cache[artist]?.[item]?.album;
+                tries = 3;
+
+                log(
+                    'skipping album search for id (local cache)',
+                    'oracle',
+                    'info',
+                    { local }
+                );
+                page.state.oracle_debug.release_id = local.id;
+                oracle_album_fetch({
+                    id: local.id
+                });
+
                 return;
             }
         } else if (page.type == 'track') {
-            const local = oracle_cache[artist]?.[item]?.track;
+            if (page.state.oracle_temp.page && (page.name == page.state.oracle_temp.page.name && page.sister == page.state.oracle_temp.page.sister && page.type == page.state.oracle_temp.page.type)) {
+                oracle_track_releases(page.state.oracle_temp);
+            } else {
+                const local = oracle_cache[artist]?.[item]?.track;
 
-            if (local?.fetch) {
-                delete local.fetch;
-                log('deleted legacy track fetch data', 'oracle');
-                oracle_save_cache('track', false);
-            }
+                if (local?.fetch) {
+                    delete local.fetch;
+                    log('deleted legacy track fetch data', 'oracle');
+                    oracle_save_cache('track', false);
+                }
 
-            if (local?.recording) {
-                log('skipping track search (local cache)', 'oracle', 'info', {
-                    local
-                });
+                if (local?.recording) {
+                    delete local.recording;
+                    log('deleted legacy track recording data', 'oracle');
+                    oracle_save_cache('track', false);
+                }
 
-                oracle_track_releases(local.recording);
-                return;
+                if (local?.id) {
+                    log('skipping track search (local cache)', 'oracle', 'info', {
+                        local
+                    });
+
+                    oracle_track_fetch({
+                        id: local.id
+                    });
+                    return;
+                }
             }
         }
 
@@ -604,6 +636,70 @@ export function oracle_process() {
                 oracle_album_fetch(release);
             }, mb_delay);
         }
+    }
+
+    function oracle_track_fetch(data) {
+        if (tries < 1) return;
+        tries--;
+
+        const url = `https://musicbrainz.org/ws/2/recording/${data.id}?inc=artist-credits+url-rels+annotation+work-level-rels+artist-rels+work-rels+releases+release-groups`;
+
+        log(
+            `using url ${encodeURI(url)} with ${tries} tries available`,
+            'oracle'
+        );
+
+        GM_xmlhttpRequest({
+            method: 'GET',
+            url,
+            headers: {
+                'User-Agent': `bleh/${version.build} <https://github.com/katelyynn/bleh>`,
+                Accept: 'application/json'
+            },
+            onload: function (response) {
+                if (response.status < 200 || response.status >= 300) {
+                    log('error fetching connect data', 'oracle', 'error', {
+                        response
+                    });
+
+                    oracle_error(response);
+
+                    return;
+                }
+
+                let data;
+                try {
+                    data = JSON.parse(response.responseText);
+                } catch (e) {
+                    log('failed to parse', 'oracle', 'error', { e });
+
+                    oracle_error(e);
+
+                    return;
+                }
+
+                log('received connect track data', 'oracle', 'info', { data });
+                page.state.oracle = data;
+
+                page.state.oracle_temp = {
+                    page: {
+                        name: page.name,
+                        sister: page.sister,
+                        type: page.type
+                    },
+                    ...data
+                }
+
+                oracle_track_releases(data);
+            },
+            onerror: function (err) {
+                console.error('oracle', err);
+
+                setTimeout(() => {
+                    oracle_track_fetch(data);
+                }, 1000);
+            }
+        });
     }
 
     function oracle_pick_recording(data) {
@@ -843,17 +939,6 @@ export function oracle_process() {
 
         const url = `https://musicbrainz.org/ws/2/release/${data.id}?inc=recordings+labels+artist-credits+url-rels+annotation`;
 
-        const local = oracle_cache[artist]?.[item];
-        if (local && local.album?.fetch) {
-            log('skipping album fetch (local cache)', 'oracle', 'info', {
-                local
-            });
-            page.state.oracle = local.album.fetch;
-            oracle_album(local.album.fetch);
-
-            return;
-        }
-
         log(
             `using url ${encodeURI(url)} with ${tries} tries available`,
             'oracle'
@@ -891,8 +976,19 @@ export function oracle_process() {
                 log('received connect album data', 'oracle', 'info', { data });
                 page.state.oracle = data;
 
-                //cache.album.fetch = data;
-                //oracle_save_cache('album');
+                cache.album = {
+                    id: data.id
+                };
+                oracle_save_cache('album');
+
+                page.state.oracle_temp = {
+                    page: {
+                        name: page.name,
+                        sister: page.sister,
+                        type: page.type
+                    },
+                    ...data
+                }
 
                 oracle_album(data);
             },
@@ -1171,11 +1267,13 @@ export function oracle_process() {
 
     function oracle_track_releases_process(data) {
         const recording = oracle_pick_recording(data);
-        if (recording) cache.track.recording = recording;
 
+        cache.track = {
+            id: data.id
+        };
         oracle_save_cache('track');
 
-        oracle_track_releases(recording);
+        oracle_track_fetch(recording);
     }
 
     function oracle_track_releases(recording) {
