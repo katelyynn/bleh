@@ -35746,6 +35746,7 @@
   // src/components/page/colour.ts
   var import_color_thief_browser = __toESM(require_color_thief_min(), 1);
   function header_colour(source, apply_to_page = false, apply_to_elem) {
+    apply2(0, 0, 0.5);
     try {
       const image = new Image();
       image.width = 300;
@@ -35759,17 +35760,7 @@
         let hue4 = hsl3.h;
         let sat = clamp_sat(hsl3.s / 100 * 3);
         let lit = clamp_lit(sat, hsl3.l / 100 + 0.35, true);
-        if (apply_to_page) {
-          document.body.style.setProperty("--hue-album", hue4);
-          document.body.style.setProperty("--sat-album", sat);
-          document.body.style.setProperty("--lit-album", lit);
-          chart_reflow();
-        }
-        if (apply_to_elem instanceof HTMLElement) {
-          apply_to_elem.style.setProperty("--hue-over", hue4);
-          apply_to_elem.style.setProperty("--sat-over", sat);
-          apply_to_elem.style.setProperty("--lit-over", lit);
-        }
+        apply2(hue4, sat, lit);
         log(
           `sourced rgb of (${colour[0]}, ${colour[1]}, ${colour[2]}), hsl of (${hsl3.h}, ${hsl3.s}, ${hsl3.l}) - using final value of (${hue4}, ${sat}, ${lit})`,
           "hue from album"
@@ -35777,6 +35768,19 @@
       };
     } catch (e4) {
       log("received error", "hue from album", "error", { e: e4 });
+    }
+    function apply2(hue4, sat, lit) {
+      if (apply_to_page) {
+        document.body.style.setProperty("--hue-album", hue4);
+        document.body.style.setProperty("--sat-album", sat);
+        document.body.style.setProperty("--lit-album", lit);
+        chart_reflow();
+      }
+      if (apply_to_elem instanceof HTMLElement) {
+        apply_to_elem.style.setProperty("--hue-over", hue4);
+        apply_to_elem.style.setProperty("--sat-over", sat);
+        apply_to_elem.style.setProperty("--lit-over", lit);
+      }
     }
   }
 
@@ -62127,7 +62131,7 @@
     render(parent, html`
         ${page_avatar = page_header_avatar(src)}
     `);
-    header_colour(page_avatar.image, false, page_avatar);
+    header_colour(page_avatar.image, settings.hue_from_track, page_avatar);
   }
 
   // src/components/music/oracle.ts
@@ -62555,6 +62559,7 @@
             data2 = JSON.parse(response.responseText);
           } catch (e4) {
             log("failed to parse", "oracle", "error", { e: e4 });
+            oracle_error(e4);
             return;
           }
           log("received connect data", "oracle", "info", { data: data2 });
@@ -62580,6 +62585,7 @@
             data: data2,
             release
           });
+          oracle_error("No useable data was found");
           return;
         }
         page.state.oracle_debug.release_id = release.id;
@@ -62771,6 +62777,7 @@
             data3 = JSON.parse(response.responseText);
           } catch (e4) {
             log("failed to parse", "oracle", "error", { e: e4 });
+            oracle_error(e4);
             return;
           }
           log("received connect album data", "oracle", "info", { data: data3 });
@@ -63454,10 +63461,30 @@
       });
     }
     function oracle_error(response) {
+      if (typeof response == "string") {
+        info_panel?.after(html.node`
+                <section class="oracle-error">
+                    <div class="alert alert-error">
+                        oracle: ${response}
+                    </div>
+                </section>
+            `);
+        return;
+      }
+      if (!response.status) {
+        info_panel?.after(html.node`
+                <section class="oracle-error">
+                    <div class="alert alert-error">
+                        oracle: ${response.message ? response.message : response}
+                    </div>
+                </section>
+            `);
+        return;
+      }
       info_panel?.after(html.node`
             <section class="oracle-error">
                 <div class="alert alert-error">
-                    ${response.status}: ${response.responseText}
+                    oracle: (Error ${response.status}) ${response.responseText}
                 </div>
             </section>
         `);
@@ -68731,6 +68758,9 @@
                 </div>
                 ${setting({ id: "solarium" })}
                 ${ff("high_contrast") ? setting({ id: "high_contrast" }) : ""}
+                ${setting({ id: "noise" })}
+            </div>
+            <div class="setting-group">
                 <div class="setting" data-type="action" id="setting_hue">
                     <div class="heading">
                         <h5>${tl2(trans.hue)}</h5>
@@ -68754,9 +68784,18 @@
                     </div>
                     <div class="primary-selections">
                         ${setting({
+      id: "hue_from_artist",
+      standalone: true
+    })}
+                        ${setting({
       id: "hue_from_album",
       standalone: true
     })}
+                        ${setting({
+      id: "hue_from_track",
+      standalone: true
+    })}
+                        <div class="primary-selection-sep" />
                         ${colourful_active = setting({
       id: "colourful_tracks",
       standalone: true,
@@ -68776,7 +68815,6 @@
                 ${ff("card_saturation") ? html.node`
                     ${sat_bg2 = setting({ id: "sat_bg" })}
                 ` : ""}
-                ${setting({ id: "noise" })}
             </div>
         </section>
         <section class="bleh--panel">
@@ -71035,6 +71073,8 @@
           "sat",
           "lit",
           "hue_from_album",
+          "hue_from_track",
+          "hue_from_artist",
           "colourful_tracks",
           "colourful_tracks_all",
           "sat_bg",
@@ -73946,7 +73986,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                 </div>
             </section>
         `;
-      header_colour(page_avatar.image, false, page_avatar);
+      header_colour(page_avatar.image, settings.hue_from_artist, page_avatar);
       if (multi_info_box) {
         tippy_esm_default(multi_info_box, {
           content: tl2(trans.artists_tooltip)
@@ -81320,63 +81360,31 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       name: {
         // this is followed by options which describe contexts the user
         // may want their colour to be changed
-        en: "Use a context-based accent colour when",
-        de: "Kontextbasierte Akzentfarbe verwenden, wenn",
-        es: "Usar un color de acento basado en contexto al",
-        it: "Usa un colore di accento basato sul contesto quando",
-        pt: "Usar uma cor de destaque baseada no contexto quando",
-        sv: "Anv\xE4nd kontextbaserad accentf\xE4rg n\xE4r",
-        ru: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C \u043A\u043E\u043D\u0442\u0435\u043A\u0441\u0442\u043D\u044B\u0439 \u0430\u043A\u0446\u0435\u043D\u0442\u043D\u044B\u0439 \u0446\u0432\u0435\u0442, \u043A\u043E\u0433\u0434\u0430",
-        pl: "U\u017Cywaj akcentu bazuj\u0105cego na kontek\u015Bcie kiedy",
-        zh: "\u5728\u4EE5\u4E0B\u60C5\u51B5\u4F7F\u7528\u81EA\u9002\u5E94\u5F3A\u8C03\u8272"
+        en: "Change my accent colour for"
       },
       body: {
-        en: "Temporarily override your selected accent to match album art",
-        de: "\xDCberschreibe vor\xFCbergehend deine ausgew\xE4hlte Akzentfarbe, damit sie zum Albumcover passt",
-        es: "Substituye temporalmente el color de acento seleccionado para combinar con la car\xE1tula del \xE1lbum",
-        it: "Sovrascrivi temporaneamente il tuo colore di accento selezionato per abbinarsi con la copertina dell\u2019album",
-        pt: "Substituir temporariamente sua cor de destaque selecionada para combinar com a arte do \xE1lbum",
-        sv: "\xC4ndra tillf\xE4lligt din valda accentf\xE4rg f\xF6r att matcha albumkonsten",
-        ru: "\u0412\u0440\u0435\u043C\u0435\u043D\u043D\u043E \u0437\u0430\u043C\u0435\u043D\u044F\u0442\u044C \u0432\u044B\u0431\u0440\u0430\u043D\u043D\u044B\u0439 \u0430\u043A\u0446\u0435\u043D\u0442\u043D\u044B\u0439 \u0446\u0432\u0435\u0442 \u043D\u0430 \u0446\u0432\u0435\u0442 \u043E\u0431\u043B\u043E\u0436\u043A\u0438 \u0430\u043B\u044C\u0431\u043E\u043C\u0430",
-        pl: "Tymczasowo nadpisz tw\xF3j wybrany akcent \u017Ceby dopasowa\u0107 do ok\u0142adki albumu",
-        zh: "\u6839\u636E\u4E13\u8F91\u5C01\u9762\u8272\u5F69\u4E34\u65F6\u66FF\u6362\u4F60\u9009\u62E9\u7684\u5F3A\u8C03\u8272"
+        en: "Temporarily override your selected accent to match artwork"
       }
     },
-    hue_from_album: {
+    viewing_albums: {
       // a sub-option for change_my_colour_when
-      en: "Browsing album pages",
-      de: "Albumseiten angesehen werden",
-      es: "Navegar la p\xE1gina de un \xE1lbum",
-      it: "Navigo tra le pagine degli album",
-      pt: "Navegando pelas p\xE1ginas de \xE1lbuns",
-      sv: "Du \xE4r p\xE5 albumsidor",
-      ru: "\u041F\u0440\u043E\u0441\u043C\u0430\u0442\u0440\u0438\u0432\u0430\u044E\u0442\u0441\u044F \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u044B \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432",
-      pl: "Przegl\u0105dania album\xF3w",
-      zh: "\u6D4F\u89C8\u4E13\u8F91\u9875\u9762\u65F6"
+      en: "Viewing albums"
+    },
+    viewing_tracks: {
+      // a sub-option for change_my_colour_when
+      en: "Viewing artists"
+    },
+    viewing_artists: {
+      // a sub-option for change_my_colour_when
+      en: "Viewing tracks"
     },
     colourful_active: {
       // a sub-option for change_my_colour_when
-      en: "Actively scrobbling a track",
-      de: "ein Titel aktiv gescrobbelt wird",
-      es: "Hacer scrobbling a un tema",
-      it: "Sto facendo lo scrobbling di un brano",
-      pt: "Scrobblando uma faixa ativamente",
-      sv: "Aktivt skrobblar en l\xE5t",
-      ru: "\u041F\u0440\u043E\u0438\u0441\u0445\u043E\u0434\u0438\u0442 \u0430\u043A\u0442\u0438\u0432\u043D\u044B\u0439 \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u0438\u043D\u0433 \u0442\u0440\u0435\u043A\u0430",
-      pl: "Aktualnie scrobbluje utw\xF3r",
-      zh: "\u6B63\u5728 Scrobble \u5355\u66F2\u65F6"
+      en: "Scrobbling a track"
     },
     colourful_all: {
       // a sub-option for change_my_colour_when
-      en: "Viewing any track",
-      de: "ein beliebiger Titel angesehen wird",
-      es: "Ver cualquier tema",
-      it: "Sto visualizzando un brano",
-      pt: "Visualizando qualquer faixa",
-      sv: "Visar en l\xE5t",
-      ru: "\u041F\u0440\u043E\u0441\u043C\u0430\u0442\u0440\u0438\u0432\u0430\u0435\u0442\u0441\u044F \u043B\u044E\u0431\u043E\u0439 \u0442\u0440\u0435\u043A",
-      pl: "Ogl\u0105dania utworu",
-      zh: "\u67E5\u770B\u4EFB\u4F55\u5355\u66F2\u65F6"
+      en: "All tracklists"
     },
     configure: {
       en: "Configure",
@@ -90697,7 +90705,17 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     hue_from_album: {
       default: true,
       type: "checkbox",
-      title: trans.hue_from_album
+      title: trans.viewing_albums
+    },
+    hue_from_track: {
+      default: true,
+      type: "checkbox",
+      title: trans.viewing_tracks
+    },
+    hue_from_artist: {
+      default: true,
+      type: "checkbox",
+      title: trans.viewing_artists
     },
     seasonal: {
       default: true,

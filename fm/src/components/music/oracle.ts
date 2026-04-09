@@ -553,6 +553,7 @@ export function oracle_process() {
                     data = JSON.parse(response.responseText);
                 } catch (e) {
                     log('failed to parse', 'oracle', 'error', { e });
+                    oracle_error(e);
                     return;
                 }
 
@@ -584,6 +585,8 @@ export function oracle_process() {
                     data,
                     release
                 });
+
+                oracle_error('No useable data was found');
 
                 //cache.album.fetch = data;
                 //oracle_save_cache('album');
@@ -879,6 +882,9 @@ export function oracle_process() {
                     data = JSON.parse(response.responseText);
                 } catch (e) {
                     log('failed to parse', 'oracle', 'error', { e });
+
+                    oracle_error(e);
+
                     return;
                 }
 
@@ -1786,11 +1792,33 @@ export function oracle_process() {
             });
     }
 
-    function oracle_error(response: XMLHttpRequestResponseType) {
+    function oracle_error(response: XMLHttpRequestResponseType | Error | string) {
+        if (typeof response == 'string') {
+            info_panel?.after(html.node`
+                <section class="oracle-error">
+                    <div class="alert alert-error">
+                        oracle: ${response}
+                    </div>
+                </section>
+            `);
+            return;
+        }
+
+        if (!response.status) {
+            info_panel?.after(html.node`
+                <section class="oracle-error">
+                    <div class="alert alert-error">
+                        oracle: ${response.message ? response.message : response}
+                    </div>
+                </section>
+            `);
+            return;
+        }
+
         info_panel?.after(html.node`
             <section class="oracle-error">
                 <div class="alert alert-error">
-                    ${response.status}: ${response.responseText}
+                    oracle: (Error ${response.status}) ${response.responseText}
                 </div>
             </section>
         `);

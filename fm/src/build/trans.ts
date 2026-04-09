@@ -1569,63 +1569,31 @@ export const trans = {
         name: {
             // this is followed by options which describe contexts the user
             // may want their colour to be changed
-            en: 'Use a context-based accent colour when',
-            de: 'Kontextbasierte Akzentfarbe verwenden, wenn',
-            es: 'Usar un color de acento basado en contexto al',
-            it: 'Usa un colore di accento basato sul contesto quando',
-            pt: 'Usar uma cor de destaque baseada no contexto quando',
-            sv: 'Använd kontextbaserad accentfärg när',
-            ru: 'Использовать контекстный акцентный цвет, когда',
-            pl: 'Używaj akcentu bazującego na kontekście kiedy',
-            zh: '在以下情况使用自适应强调色'
+            en: 'Change my accent colour for'
         },
         body: {
-            en: 'Temporarily override your selected accent to match album art',
-            de: 'Überschreibe vorübergehend deine ausgewählte Akzentfarbe, damit sie zum Albumcover passt',
-            es: 'Substituye temporalmente el color de acento seleccionado para combinar con la carátula del álbum',
-            it: 'Sovrascrivi temporaneamente il tuo colore di accento selezionato per abbinarsi con la copertina dell’album',
-            pt: 'Substituir temporariamente sua cor de destaque selecionada para combinar com a arte do álbum',
-            sv: 'Ändra tillfälligt din valda accentfärg för att matcha albumkonsten',
-            ru: 'Временно заменять выбранный акцентный цвет на цвет обложки альбома',
-            pl: 'Tymczasowo nadpisz twój wybrany akcent żeby dopasować do okładki albumu',
-            zh: '根据专辑封面色彩临时替换你选择的强调色'
+            en: 'Temporarily override your selected accent to match artwork'
         }
     },
-    hue_from_album: {
+    viewing_albums: {
         // a sub-option for change_my_colour_when
-        en: 'Browsing album pages',
-        de: 'Albumseiten angesehen werden',
-        es: 'Navegar la página de un álbum',
-        it: 'Navigo tra le pagine degli album',
-        pt: 'Navegando pelas páginas de álbuns',
-        sv: 'Du är på albumsidor',
-        ru: 'Просматриваются страницы альбомов',
-        pl: 'Przeglądania albumów',
-        zh: '浏览专辑页面时'
+        en: 'Viewing albums'
+    },
+    viewing_tracks: {
+        // a sub-option for change_my_colour_when
+        en: 'Viewing artists'
+    },
+    viewing_artists: {
+        // a sub-option for change_my_colour_when
+        en: 'Viewing tracks'
     },
     colourful_active: {
         // a sub-option for change_my_colour_when
-        en: 'Actively scrobbling a track',
-        de: 'ein Titel aktiv gescrobbelt wird',
-        es: 'Hacer scrobbling a un tema',
-        it: 'Sto facendo lo scrobbling di un brano',
-        pt: 'Scrobblando uma faixa ativamente',
-        sv: 'Aktivt skrobblar en låt',
-        ru: 'Происходит активный скробблинг трека',
-        pl: 'Aktualnie scrobbluje utwór',
-        zh: '正在 Scrobble 单曲时'
+        en: 'Scrobbling a track'
     },
     colourful_all: {
         // a sub-option for change_my_colour_when
-        en: 'Viewing any track',
-        de: 'ein beliebiger Titel angesehen wird',
-        es: 'Ver cualquier tema',
-        it: 'Sto visualizzando un brano',
-        pt: 'Visualizando qualquer faixa',
-        sv: 'Visar en låt',
-        ru: 'Просматривается любой трек',
-        pl: 'Oglądania utworu',
-        zh: '查看任何单曲时'
+        en: 'All tracklists'
     },
     configure: {
         en: 'Configure',

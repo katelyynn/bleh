@@ -142,6 +142,9 @@ export function visual() {
                 </div>
                 ${setting({ id: 'solarium' })}
                 ${ff('high_contrast') ? setting({ id: 'high_contrast' }) : ''}
+                ${setting({ id: 'noise' })}
+            </div>
+            <div class="setting-group">
                 <div class="setting" data-type="action" id="setting_hue">
                     <div class="heading">
                         <h5>${tl(trans.hue)}</h5>
@@ -165,9 +168,18 @@ export function visual() {
                     </div>
                     <div class="primary-selections">
                         ${setting({
+                            id: 'hue_from_artist',
+                            standalone: true
+                        })}
+                        ${setting({
                             id: 'hue_from_album',
                             standalone: true
                         })}
+                        ${setting({
+                            id: 'hue_from_track',
+                            standalone: true
+                        })}
+                        <div class="primary-selection-sep" />
                         ${colourful_active = setting({
                             id: 'colourful_tracks',
                             standalone: true,
@@ -187,7 +199,6 @@ export function visual() {
                 ${ff('card_saturation') ? html.node`
                     ${(sat_bg = setting({ id: 'sat_bg' }))}
                 ` : ''}
-                ${setting({ id: 'noise' })}
             </div>
         </section>
         <section class="bleh--panel">

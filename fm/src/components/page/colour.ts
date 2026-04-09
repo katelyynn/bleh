@@ -4,6 +4,8 @@ import { clamp_lit, clamp_sat, rgb_to_hsl, rgb_to_oklch } from '@/build/tools';
 import ColorThief from 'color-thief-browser';
 
 export function header_colour(source: HTMLImageElement, apply_to_page = false, apply_to_elem?: Element) {
+    apply(0, 0, 0.5);
+
     try {
         const image = new Image();
         image.width = 300;
@@ -21,19 +23,7 @@ export function header_colour(source: HTMLImageElement, apply_to_page = false, a
             let sat = clamp_sat((hsl.s / 100) * 3);
             let lit = clamp_lit(sat, hsl.l / 100 + 0.35, true);
 
-            if (apply_to_page) {
-                document.body.style.setProperty('--hue-album', hue);
-                document.body.style.setProperty('--sat-album', sat);
-                document.body.style.setProperty('--lit-album', lit);
-
-                chart_reflow();
-            }
-
-            if (apply_to_elem instanceof HTMLElement) {
-                apply_to_elem.style.setProperty('--hue-over', hue);
-                apply_to_elem.style.setProperty('--sat-over', sat);
-                apply_to_elem.style.setProperty('--lit-over', lit);
-            }
+            apply(hue, sat, lit);
 
             log(
                 `sourced rgb of (${colour[0]}, ${colour[1]}, ${colour[2]}), hsl of (${hsl.h}, ${hsl.s}, ${hsl.l}) - using final value of (${hue}, ${sat}, ${lit})`,
@@ -42,5 +32,21 @@ export function header_colour(source: HTMLImageElement, apply_to_page = false, a
         }
     } catch (e) {
         log('received error', 'hue from album', 'error', { e });
+    }
+
+    function apply(hue: number, sat: number, lit: number) {
+        if (apply_to_page) {
+            document.body.style.setProperty('--hue-album', hue);
+            document.body.style.setProperty('--sat-album', sat);
+            document.body.style.setProperty('--lit-album', lit);
+
+            chart_reflow();
+        }
+
+        if (apply_to_elem instanceof HTMLElement) {
+            apply_to_elem.style.setProperty('--hue-over', hue);
+            apply_to_elem.style.setProperty('--sat-over', sat);
+            apply_to_elem.style.setProperty('--lit-over', lit);
+        }
     }
 }

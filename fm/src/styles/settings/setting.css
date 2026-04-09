@@ -636,6 +636,13 @@
     gap: 6px;
 }
 
+.primary-selection-sep {
+    width: 16px;
+    height: 1px;
+    background: var(--card-border-base);
+    display: block;
+}
+
 .inner-preview {
     .tracks {
         display: flex;

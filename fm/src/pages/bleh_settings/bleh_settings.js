@@ -93,6 +93,8 @@ export function bleh_settings() {
                 'sat',
                 'lit',
                 'hue_from_album',
+                'hue_from_track',
+                'hue_from_artist',
                 'colourful_tracks',
                 'colourful_tracks_all',
                 'sat_bg',

@@ -474,7 +474,17 @@ export let settings_store: Record<string, setting_instance> = {
     hue_from_album: {
         default: true,
         type: 'checkbox',
-        title: trans.hue_from_album
+        title: trans.viewing_albums
+    },
+    hue_from_track: {
+        default: true,
+        type: 'checkbox',
+        title: trans.viewing_tracks
+    },
+    hue_from_artist: {
+        default: true,
+        type: 'checkbox',
+        title: trans.viewing_artists
     },
     seasonal: {
         default: true,
