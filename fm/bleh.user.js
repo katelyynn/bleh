@@ -78461,7 +78461,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     if (sponsor_list.version) {
       if (sponsor_list.related.special.length > 0)
         kate = sponsor_list.related.special[0];
-      sponsoring = Object.keys(sponsor_list.users).length - 3;
+      sponsoring = Object.keys(sponsor_list.users).length - 2;
     }
     render(
       footer,
@@ -91747,7 +91747,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-02-25"
       }
     },
-    built_on: "2026-04-08T19:52:20.963Z"
+    built_on: "2026-04-09T18:25:00.115Z"
   };
 
   // node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

@@ -29,7 +29,7 @@ export function bleh_footer() {
         if (sponsor_list.related.special.length > 0)
             kate = sponsor_list.related.special[0];
 
-        sponsoring = Object.keys(sponsor_list.users).length - 3;
+        sponsoring = Object.keys(sponsor_list.users).length - 2;
     }
 
     render(
