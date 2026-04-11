@@ -841,3 +841,7 @@
 [data-type="now-playing"] {
     --mask: var(--icon-16-play);
 }
+
+[data-type="credits"] {
+    --mask: var(--icon-16-credits);
+}

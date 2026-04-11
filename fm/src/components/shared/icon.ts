@@ -167,7 +167,8 @@ export const icons = {
     sku: 'plaster',
     indent: 'indent',
     lotus: 'lotus',
-    oracle: 'oracle'
+    oracle: 'oracle',
+    credits: 'credits'
 };
 
 interface icon {

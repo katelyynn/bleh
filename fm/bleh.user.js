@@ -29342,7 +29342,8 @@
     sku: "plaster",
     indent: "indent",
     lotus: "lotus",
-    oracle: "oracle"
+    oracle: "oracle",
+    credits: "credits"
   };
   function icon({ name, identifier, use_mask = true }) {
     const elem = html.node`
