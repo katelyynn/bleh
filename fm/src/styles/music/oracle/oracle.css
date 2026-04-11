@@ -1,5 +1,6 @@
 @import './explicit.css';
 @import './tracklist.css';
+@import './credits.css';
 
 .oracle {
     order: 11;

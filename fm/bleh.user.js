@@ -63714,24 +63714,90 @@
   function oracle_credits() {
     const relations = page.state.oracle?.relations;
     if (!relations) return;
+    const list = (relations2) => {
+      return relations2.reduce((acc, relation) => {
+        if (!relation.artist) return acc;
+        let type = relation.type;
+        if (["programming", "producer"].includes(type)) {
+          type = "mix";
+        } else if (type == "instrument") {
+          type = "recording";
+        }
+        const name = relation.artist.name;
+        if (!acc[type]) {
+          acc[type] = [];
+        }
+        let existing = acc[type].find((a) => a.name == name);
+        if (!existing) {
+          acc[type].push({
+            name,
+            attributes: relation.attributes ? [...relation.attributes] : []
+          });
+        } else {
+          if (relation.attributes && relation.attributes.length) {
+            const merged = /* @__PURE__ */ new Set([
+              ...existing.attributes,
+              ...relation.attributes
+            ]);
+            existing.attributes = [...merged];
+          }
+        }
+        return acc;
+      }, {});
+    };
+    const order2 = [
+      "vocal",
+      "recording",
+      "mix",
+      "engineer"
+    ];
+    const grouped = Object.entries(list(relations)).sort(([a], [b]) => {
+      const a_index = order2.indexOf(a);
+      const b_index = order2.indexOf(b);
+      if (a_index == -1) return 1;
+      if (b_index == -1) return -1;
+      return a_index - b_index;
+    });
+    console.info("oracle list", grouped, relations);
     dialog({
       id: "oracle_credits",
       title: { html: tl2(trans.credits_for_value, { v: `<i>${correct_item_by_artist(page.name, page.sister)}</i>` }) },
       body: html.node`
             <div class="oracle-credits">
-                ${relations.map((relation) => {
-        console.info("relation", relation);
-        if (!relation.artist) return html.node``;
-        const type = relation.type;
-        const name = relation.artist.name;
-        const attributes = relation.attributes;
-        const elem = html.node`
-                        <div class="credit">
-                            <h4>${type}</h4>
-                            <span>${name}${attributes.length > 0 ? ` (${attributes.join(",")})` : ""}</span>
+                ${grouped.map(([type, artists]) => {
+        let text4 = trans.hasOwnProperty(`oracle_${type}`) ? tl2(trans[`oracle_${type}`]) : `${type} (unknown, please report as bug)`;
+        return html.node`
+                        <div class="oracle-credit-group">
+                            <h4 class="oracle-credit-group-title">${text4}</h4>
+                            <div class="oracle-credit-list">
+                                ${artists.map((artist, i) => {
+          const name = artist.name;
+          const attributes = artist.attributes;
+          const last = i == artists.length - 1;
+          const info_box = html.node`
+                                        <div class="oracle-info-box">
+                                            ${icon({ name: icons.info })}
+                                        </div>
+                                    `;
+          const elem = html.node`
+                                        <div class="oracle-credit">
+                                            <a class="oracle-credit-link" href="${root}music/${redirect()}${sanitise(name)}">${romanise(correct_artist(name))}</a>
+                                            ${attributes.length ? info_box : ""}
+                                            ${!last ? ", " : ""}
+                                        </div>
+                                    `;
+          if (attributes.length) {
+            tippy_esm_default(elem, {
+              content: html.node`
+                                                <span class="oracle-attributes">${attributes.join(", ")}</span>
+                                            `
+            });
+          }
+          return elem;
+        })}
+                            </div>
                         </div>
                     `;
-        return elem;
       })}
             </div>
         `
@@ -90323,6 +90389,21 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     },
     value_tracks_time: {
       en: "{count} tracks, {length}"
+    },
+    oracle_vocal: {
+      en: "Performed by"
+    },
+    oracle_recording: {
+      en: "Recorded by"
+    },
+    oracle_mix: {
+      en: "Produced by"
+    },
+    oracle_engineer: {
+      en: "Engineered by"
+    },
+    oracle_editor: {
+      en: "Edited by"
     }
   };
   var translation_fallback = "NO_TRANSLATION_FOUND";

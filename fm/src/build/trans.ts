@@ -10373,6 +10373,21 @@ export const trans = {
     },
     value_tracks_time: {
         en: '{count} tracks, {length}'
+    },
+    oracle_vocal: {
+        en: 'Performed by'
+    },
+    oracle_recording: {
+        en: 'Recorded by'
+    },
+    oracle_mix: {
+        en: 'Produced by'
+    },
+    oracle_engineer: {
+        en: 'Engineered by'
+    },
+    oracle_editor: {
+        en: 'Edited by'
     }
 } as const satisfies Record<string, any>;
 

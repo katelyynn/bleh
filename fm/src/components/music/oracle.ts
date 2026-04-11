@@ -40,6 +40,7 @@ import { select } from '@/components/settings/select';
 import { save_setting, setting } from '@/components/settings/settings';
 import { input } from '@/components/settings/input';
 import { icon, icons } from '../shared/icon';
+import { redirect } from './music';
 
 export function oracle_process() {
     log('beginning', 'oracle');
@@ -2101,28 +2102,109 @@ export function oracle_credits() {
     const relations = page.state.oracle?.relations;
     if (!relations) return;
 
+    const list = relations => {
+        return relations.reduce((acc, relation) => {
+            if (!relation.artist) return acc;
+
+            let type = relation.type;
+
+            if (['programming', 'producer'].includes(type)) {
+                type = 'mix';
+            } else if (type == 'instrument') {
+                type = 'recording';
+            }
+
+            const name = relation.artist.name;
+
+            if (!acc[type]) {
+                acc[type] = [];
+            }
+
+            let existing = acc[type].find(a => a.name == name);
+
+            if (!existing) {
+                acc[type].push({
+                    name,
+                    attributes: relation.attributes ? [...relation.attributes] : []
+                });
+            } else {
+                if (relation.attributes && relation.attributes.length) {
+                    const merged = new Set([
+                        ...existing.attributes,
+                        ...relation.attributes
+                    ]);
+                    existing.attributes = [...merged];
+                }
+            }
+
+            return acc;
+        }, {});
+    }
+
+    const order = [
+        'vocal',
+        'recording',
+        'mix',
+        'engineer'
+    ];
+
+    const grouped = Object.entries(list(relations))
+        .sort(([a], [b]) => {
+            const a_index = order.indexOf(a);
+            const b_index = order.indexOf(b);
+
+            if (a_index == -1) return 1;
+            if (b_index == -1) return -1;
+
+            return a_index - b_index;
+        });
+
+    console.info('oracle list', grouped, relations);
+
     dialog({
         id: 'oracle_credits',
         title: {html: tl(trans.credits_for_value, {v: `<i>${correct_item_by_artist(page.name, page.sister)}</i>`})},
         body: html.node`
             <div class="oracle-credits">
-                ${relations.map(relation => {
-                    console.info('relation', relation);
+                ${grouped.map(([type, artists]) => {
+                    let text = trans.hasOwnProperty(`oracle_${type}`) ? tl(trans[`oracle_${type}`]) : `${type} (unknown, please report as bug)`;
 
-                    if (!relation.artist) return html.node``;
+                    return html.node`
+                        <div class="oracle-credit-group">
+                            <h4 class="oracle-credit-group-title">${text}</h4>
+                            <div class="oracle-credit-list">
+                                ${artists.map((artist, i) => {
+                                    const name = artist.name;
+                                    const attributes = artist.attributes;
+                                    const last = i == artists.length - 1;
 
-                    const type = relation.type;
-                    const name = relation.artist.name;
-                    const attributes = relation.attributes;
+                                    const info_box = html.node`
+                                        <div class="oracle-info-box">
+                                            ${icon({ name: icons.info })}
+                                        </div>
+                                    `;
 
-                    const elem = html.node`
-                        <div class="credit">
-                            <h4>${type}</h4>
-                            <span>${name}${attributes.length > 0 ? ` (${attributes.join(',')})` : ''}</span>
+                                    const elem = html.node`
+                                        <div class="oracle-credit">
+                                            <a class="oracle-credit-link" href="${root}music/${redirect()}${sanitise(name)}">${romanise(correct_artist(name))}</a>
+                                            ${attributes.length ? info_box : ''}
+                                            ${!last ? ', ' : ''}
+                                        </div>
+                                    `;
+
+                                    if (attributes.length) {
+                                        tippy(elem, {
+                                            content: html.node`
+                                                <span class="oracle-attributes">${attributes.join(', ')}</span>
+                                            `
+                                        });
+                                    }
+
+                                    return elem;
+                                })}
+                            </div>
                         </div>
                     `;
-
-                    return elem;
                 })}
             </div>
         `
