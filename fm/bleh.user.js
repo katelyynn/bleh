@@ -62517,9 +62517,9 @@
       page.state.oracle_debug.artist = artist_data;
       log("using artist data", "oracle", "info", { artist_data });
       if (page.type == "track")
-        url = `https://musicbrainz.org/ws/2/recording?inc=release-events&query=${encodeURIComponent(`recording:"${sanitise(clean_title(page.name), " ")}" AND ${artist_template} AND status:Official`)}`;
+        url = `https://musicbrainz.org/ws/2/recording?inc=release-events&query=${encodeURIComponent(`recording:"${clean_title(page.name)}" AND ${artist_template} AND status:Official`)}`;
       else if (page.type == "album")
-        url = `https://musicbrainz.org/ws/2/release?query=${encodeURIComponent(`release:"${sanitise(clean_title(page.name), " ")}" AND ${artist_template}`)}`;
+        url = `https://musicbrainz.org/ws/2/release?query=${encodeURIComponent(`release:"${clean_title(page.name), " "}" AND ${artist_template}`)}`;
       if (page.type == "album") {
         if (page.state.oracle_temp.page && (page.name == page.state.oracle_temp.page.name && page.sister == page.state.oracle_temp.page.sister && page.type == page.state.oracle_temp.page.type)) {
           log("using temporary storage", "oracle", "info", { temp: page.state.oracle_temp });
@@ -63090,6 +63090,10 @@
     }
     function oracle_track_releases_process(data2) {
       const recording = oracle_pick_recording(data2);
+      if (!recording) {
+        oracle_error("No track found to continue with");
+        return;
+      }
       log("picked recording, proceeding to connect", "oracle", "info", { recording });
       cache2.track = {
         id: recording.id
