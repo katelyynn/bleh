@@ -82,6 +82,13 @@
     height: unset;
 }
 
+.wiki-editor-body {
+    --font-size: 16px !important;
+    --line-height: 20px !important;
+
+    min-height: 500px !important;
+}
+
 .modal-text {
     width: 500px !important;
 }

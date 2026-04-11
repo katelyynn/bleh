@@ -185,6 +185,14 @@ export function bleh_wiki_history() {
 }
 
 export function bleh_wiki_editor() {
+    const editor = page.structure.main.querySelector('.wiki-edit-container');
+    if (editor) {
+        const form = editor.querySelector(':scope > form');
+
+        const body = form?.querySelector('#id_body');
+        body?.classList.add('wiki-editor-body');
+    }
+
     // make a new panel
     let wiki_edit_panel = document.createElement('section');
     wiki_edit_panel.classList.add('wiki-edit-panel');
