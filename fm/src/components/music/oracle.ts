@@ -492,7 +492,10 @@ export function oracle_process() {
 
         if (page.type == 'album') {
             if (page.state.oracle_temp.page && (page.name == page.state.oracle_temp.page.name && page.sister == page.state.oracle_temp.page.sister && page.type == page.state.oracle_temp.page.type)) {
+                log('using temporary storage', 'oracle', 'info', { temp: page.state.oracle_temp });
                 oracle_album(page.state.oracle_temp);
+
+                return;
             } else if (oracle_albums[artist]?.[item]) {
                 const local = oracle_albums[artist]?.[item];
                 tries = 3;
@@ -528,7 +531,10 @@ export function oracle_process() {
             }
         } else if (page.type == 'track') {
             if (page.state.oracle_temp.page && (page.name == page.state.oracle_temp.page.name && page.sister == page.state.oracle_temp.page.sister && page.type == page.state.oracle_temp.page.type)) {
+                log('using temporary storage', 'oracle', 'info', { temp: page.state.oracle_temp });
                 oracle_track_releases(page.state.oracle_temp);
+
+                return;
             } else {
                 const local = oracle_cache[artist]?.[item]?.track;
 
@@ -1607,6 +1613,10 @@ export function oracle_process() {
                                         .replace('/ar0/', '/300x300/');
                                 }
 
+                                const listeners = doc.querySelector(
+                                    '.header-new-info-desktop .header-metadata-tnew-display > p > abbr'
+                                );
+
                                 create_avatar(
                                     page.state.avatar_side,
                                     artwork,
@@ -1617,7 +1627,7 @@ export function oracle_process() {
                                     artwork,
                                     title,
                                     artist,
-                                    clean_number(listeners?.title)
+                                    listeners
                                 );
                             })
                             .catch((err) => {

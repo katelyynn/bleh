@@ -12105,7 +12105,7 @@
         };
         showdown2.Converter = function(converterOptions) {
           "use strict";
-          var options = {}, langExtensions = [], outputModifiers = [], listeners2 = {}, setConvFlavor = setFlavor, metadata = {
+          var options = {}, langExtensions = [], outputModifiers = [], listeners = {}, setConvFlavor = setFlavor, metadata = {
             parsed: {},
             raw: "",
             format: ""
@@ -12205,19 +12205,19 @@
             if (typeof callback2 !== "function") {
               throw Error("Invalid argument in converter.listen() method: callback must be a function, but " + typeof callback2 + " given");
             }
-            if (!listeners2.hasOwnProperty(name)) {
-              listeners2[name] = [];
+            if (!listeners.hasOwnProperty(name)) {
+              listeners[name] = [];
             }
-            listeners2[name].push(callback2);
+            listeners[name].push(callback2);
           }
           function rTrimInputText(text4) {
             var rsp = text4.match(/^\s*/)[0].length, rgx = new RegExp("^\\s{0," + rsp + "}", "gm");
             return text4.replace(rgx, "");
           }
           this._dispatch = function dispatch(evtName, text4, options2, globals) {
-            if (listeners2.hasOwnProperty(evtName)) {
-              for (var ei = 0; ei < listeners2[evtName].length; ++ei) {
-                var nText = listeners2[evtName][ei](evtName, text4, this, options2, globals);
+            if (listeners.hasOwnProperty(evtName)) {
+              for (var ei = 0; ei < listeners[evtName].length; ++ei) {
+                var nText = listeners[evtName][ei](evtName, text4, this, options2, globals);
                 if (nText && typeof nText !== "undefined") {
                   text4 = nText;
                 }
@@ -14330,14 +14330,14 @@
           var handler = listener;
           type.trim().split(REGEXP_SPACES).forEach(function(event3) {
             if (!onceSupported) {
-              var listeners2 = element.listeners;
-              if (listeners2 && listeners2[event3] && listeners2[event3][listener]) {
-                handler = listeners2[event3][listener];
-                delete listeners2[event3][listener];
-                if (Object.keys(listeners2[event3]).length === 0) {
-                  delete listeners2[event3];
+              var listeners = element.listeners;
+              if (listeners && listeners[event3] && listeners[event3][listener]) {
+                handler = listeners[event3][listener];
+                delete listeners[event3][listener];
+                if (Object.keys(listeners[event3]).length === 0) {
+                  delete listeners[event3];
                 }
-                if (Object.keys(listeners2).length === 0) {
+                if (Object.keys(listeners).length === 0) {
                   delete element.listeners;
                 }
               }
@@ -14350,23 +14350,23 @@
           var _handler = listener;
           type.trim().split(REGEXP_SPACES).forEach(function(event3) {
             if (options.once && !onceSupported) {
-              var _element$listeners = element.listeners, listeners2 = _element$listeners === void 0 ? {} : _element$listeners;
+              var _element$listeners = element.listeners, listeners = _element$listeners === void 0 ? {} : _element$listeners;
               _handler = function handler() {
-                delete listeners2[event3][listener];
+                delete listeners[event3][listener];
                 element.removeEventListener(event3, _handler, options);
                 for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
                   args[_key2] = arguments[_key2];
                 }
                 listener.apply(element, args);
               };
-              if (!listeners2[event3]) {
-                listeners2[event3] = {};
+              if (!listeners[event3]) {
+                listeners[event3] = {};
               }
-              if (listeners2[event3][listener]) {
-                element.removeEventListener(event3, listeners2[event3][listener], options);
+              if (listeners[event3][listener]) {
+                element.removeEventListener(event3, listeners[event3][listener], options);
               }
-              listeners2[event3][listener] = _handler;
-              element.listeners = listeners2;
+              listeners[event3][listener] = _handler;
+              element.listeners = listeners;
             }
             element.addEventListener(event3, _handler, options);
           });
@@ -19578,7 +19578,7 @@
     var lastTriggerEvent;
     var currentTransitionEndListener;
     var onFirstUpdate;
-    var listeners2 = [];
+    var listeners = [];
     var debouncedOnMouseMove = debounce2(onMouseMove, props.interactiveDebounce);
     var currentTarget;
     var id = idCounter++;
@@ -19826,7 +19826,7 @@
       var nodes = normalizeToArray(instance.props.triggerTarget || reference2);
       nodes.forEach(function(node) {
         node.addEventListener(eventType, handler, options);
-        listeners2.push({
+        listeners.push({
           node,
           eventType,
           handler,
@@ -19862,11 +19862,11 @@
       });
     }
     function removeListeners() {
-      listeners2.forEach(function(_ref) {
+      listeners.forEach(function(_ref) {
         var node = _ref.node, eventType = _ref.eventType, handler = _ref.handler, options = _ref.options;
         node.removeEventListener(eventType, handler, options);
       });
-      listeners2 = [];
+      listeners = [];
     }
     function onTrigger2(event3) {
       var _lastTriggerEvent;
@@ -35726,7 +35726,7 @@
     });
     return entry;
   }
-  function save_hoshino_artwork(artwork, name, sister, listeners2 = null) {
+  function save_hoshino_artwork(artwork, name, sister, listeners = null) {
     let hoshino_cache = JSON.parse(localStorage.getItem("bleh_hoshino_cache")) || {};
     const name_lower = name.toLowerCase();
     const sister_lower = sister.toLowerCase();
@@ -35739,13 +35739,13 @@
     } else {
       hoshino_cache[sister_lower][name_lower].artwork = artwork;
     }
-    if (listeners2)
-      hoshino_cache[sister_lower][name_lower].listeners = listeners2;
+    if (listeners)
+      hoshino_cache[sister_lower][name_lower].listeners = listeners;
     log(`saved artwork ${artwork} to cache`, "hoshino", "info", {
       artwork,
       name,
       sister,
-      listeners: listeners2
+      listeners
     });
     set_storage("bleh_hoshino_cache", JSON.stringify(hoshino_cache));
   }
@@ -35753,7 +35753,7 @@
   // src/components/page/colour.ts
   var import_color_thief_browser = __toESM(require_color_thief_min(), 1);
   function header_colour(source, apply_to_page = false, apply_to_elem) {
-    apply2(0, 0, 0.5);
+    apply2(0, 0, 0.5, true);
     try {
       const image = new Image();
       image.width = 300;
@@ -35776,8 +35776,9 @@
     } catch (e4) {
       log("received error", "hue from album", "error", { e: e4 });
     }
-    function apply2(hue4, sat, lit) {
-      if (apply_to_page) {
+    function apply2(hue4, sat, lit, skip2 = false) {
+      if (apply_to_page && !skip2) {
+        page.state.replaced_accent = true;
         document.body.style.setProperty("--hue-album", hue4);
         document.body.style.setProperty("--sat-album", sat);
         document.body.style.setProperty("--lit-album", lit);
@@ -38244,10 +38245,16 @@
   // src/components/page/structure.js
   function checkup_page_structure(is_subpage = false, header = null) {
     if (document.body.style.getPropertyValue("--hue-album")) {
-      document.body.style.removeProperty("--hue-album");
-      document.body.style.removeProperty("--sat-album");
-      document.body.style.removeProperty("--lit-album");
-      load_chart_colours();
+      page.state.replaced_accent = false;
+      setTimeout(() => {
+        if (!page.state.replaced_accent) {
+          document.body.style.removeProperty("--hue-album");
+          document.body.style.removeProperty("--sat-album");
+          document.body.style.removeProperty("--lit-album");
+          load_chart_colours();
+          log("removed previous colours as accent hasnt been refreshed", "page structure");
+        }
+      }, 300);
     }
     let params = new URLSearchParams(document.location.search);
     page.requested = {
@@ -40195,12 +40202,12 @@
     if (!stub) {
       return;
     }
-    const listeners2 = stub.listeners;
-    const index3 = listeners2.indexOf(listener);
+    const listeners = stub.listeners;
+    const index3 = listeners.indexOf(listener);
     if (index3 !== -1) {
-      listeners2.splice(index3, 1);
+      listeners.splice(index3, 1);
     }
-    if (listeners2.length > 0) {
+    if (listeners.length > 0) {
       return;
     }
     arrayEvents.forEach((key) => {
@@ -48436,11 +48443,11 @@
       }
     }
     bindUserEvents() {
-      const listeners2 = this._listeners;
+      const listeners = this._listeners;
       const platform = this.platform;
       const _add = (type, listener2) => {
         platform.addEventListener(this, type, listener2);
-        listeners2[type] = listener2;
+        listeners[type] = listener2;
       };
       const listener = (e4, x, y) => {
         e4.offsetX = x;
@@ -48453,16 +48460,16 @@
       if (!this._responsiveListeners) {
         this._responsiveListeners = {};
       }
-      const listeners2 = this._responsiveListeners;
+      const listeners = this._responsiveListeners;
       const platform = this.platform;
       const _add = (type, listener2) => {
         platform.addEventListener(this, type, listener2);
-        listeners2[type] = listener2;
+        listeners[type] = listener2;
       };
       const _remove = (type, listener2) => {
-        if (listeners2[type]) {
+        if (listeners[type]) {
           platform.removeEventListener(this, type, listener2);
-          delete listeners2[type];
+          delete listeners[type];
         }
       };
       const listener = (width, height) => {
@@ -60733,7 +60740,7 @@
   }
 
   // src/components/music/summary.ts
-  function music_summary(listeners2, scrobbles, metascore) {
+  function music_summary(listeners, scrobbles, metascore) {
     let graph_blocks = [];
     page.state.graph_blocks = graph_blocks;
     let title;
@@ -60748,7 +60755,7 @@
                     ` : ""}
                 </h2>
                 <div class="summary-blocks">
-                    ${summary_block2("listeners", listeners2)}
+                    ${summary_block2("listeners", listeners)}
                     ${summary_block2("scrobbles", scrobbles)}
                 </div>
             </div>
@@ -61964,7 +61971,7 @@
     let legacy_container = page.structure.main.querySelector(".about-artist");
     if (!legacy_container) return;
     let image = legacy_container.querySelector(".gallery-preview-image--0 img");
-    let listeners2 = legacy_container.querySelector(".about-artist-listeners");
+    let listeners = legacy_container.querySelector(".about-artist-listeners");
     let tags = legacy_container.querySelector(".about-artist-tags");
     let wiki = legacy_container.querySelector(".wiki-block.visible-lg");
     if (wiki) wiki.classList.remove("visible-lg");
@@ -61983,7 +61990,7 @@
             <div class="about-artist-info">
                 <div class="sub-text">${tl2(trans.about)}</div>
                 <h1 class="about-artist-name">${correct_artist(page.sister)}</h1>
-                ${listeners2} ${tags} ${wiki}
+                ${listeners} ${tags} ${wiki}
             </div>
             <a class="link-block-cover-link" href="${root}music/${redirect()}${sanitise(page.sister)}"
         </div>
@@ -62077,7 +62084,8 @@
             </section>
         `;
       const hoshino_entry = hoshino_return(page.name, page.sister);
-      if (hoshino_entry && ff("ruby")) {
+      if (page.state.oracle_temp && page.name && page.state.oracle_temp.page.name && page.sister && page.state.oracle_temp.page.sister && page.type && page.state.oracle_temp.page.type) {
+      } else if (hoshino_entry && ff("ruby")) {
         create_avatar(
           page.state.avatar_side,
           hoshino_entry,
@@ -62514,7 +62522,9 @@
         url = `https://musicbrainz.org/ws/2/release?query=${encodeURIComponent(`release:"${sanitise(clean_title(page.name), " ")}" AND ${artist_template}`)}`;
       if (page.type == "album") {
         if (page.state.oracle_temp.page && (page.name == page.state.oracle_temp.page.name && page.sister == page.state.oracle_temp.page.sister && page.type == page.state.oracle_temp.page.type)) {
+          log("using temporary storage", "oracle", "info", { temp: page.state.oracle_temp });
           oracle_album(page.state.oracle_temp);
+          return;
         } else if (oracle_albums[artist]?.[item]) {
           const local = oracle_albums[artist]?.[item];
           tries = 3;
@@ -62546,7 +62556,9 @@
         }
       } else if (page.type == "track") {
         if (page.state.oracle_temp.page && (page.name == page.state.oracle_temp.page.name && page.sister == page.state.oracle_temp.page.sister && page.type == page.state.oracle_temp.page.type)) {
+          log("using temporary storage", "oracle", "info", { temp: page.state.oracle_temp });
           oracle_track_releases(page.state.oracle_temp);
+          return;
         } else {
           const local = oracle_cache[artist]?.[item]?.track;
           if (local?.fetch) {
@@ -63304,6 +63316,9 @@
                 if (background_image) {
                   artwork2 = background_image.getAttribute("content").replace("/ar0/", "/300x300/");
                 }
+                const listeners = doc.querySelector(
+                  ".header-new-info-desktop .header-metadata-tnew-display > p > abbr"
+                );
                 create_avatar(
                   page.state.avatar_side,
                   artwork2,
@@ -63313,7 +63328,7 @@
                   artwork2,
                   title,
                   artist2,
-                  clean_number(listeners?.title)
+                  listeners
                 );
               }).catch((err) => {
                 console.error("oracle", err);
@@ -63585,7 +63600,7 @@
                         `
           );
         }
-        const listeners2 = doc.querySelector(
+        const listeners = doc.querySelector(
           ".header-new-info-desktop .header-metadata-tnew-display > p > abbr"
         );
         render(
@@ -63594,7 +63609,7 @@
                         ${type}
                         <span class="oracle-stat plays">
                             <span class="bleh-icon" />
-                            ${listeners2?.title.toLocaleString(lang)}
+                            ${listeners?.title.toLocaleString(lang)}
                         </span>
                     `
         );
@@ -65532,16 +65547,16 @@
   }
   function show_numbers_on_side(header_type) {
     let metadata = document.body.querySelectorAll(".header-metadata-tnew-item");
-    let listeners2 = {};
+    let listeners = {};
     let scrobbles = {};
     let metascore = {};
     metadata.forEach((item, index3) => {
       let text4 = item.querySelector(".header-metadata-tnew-title").textContent.trim();
       let value = item.querySelector(".header-metadata-tnew-display abbr");
       if (index3 == 0) {
-        listeners2.text = text4;
-        listeners2.value = clean_number(value.getAttribute("title"));
-        listeners2.abbr = value.textContent.trim();
+        listeners.text = text4;
+        listeners.value = clean_number(value.getAttribute("title"));
+        listeners.abbr = value.textContent.trim();
       } else if (index3 == 1) {
         scrobbles.text = text4;
         scrobbles.value = clean_number(value.getAttribute("title"));
@@ -65555,7 +65570,7 @@
       }
     });
     page.structure.side.classList.remove("hidden-xs");
-    music_summary(listeners2, scrobbles, metascore);
+    music_summary(listeners, scrobbles, metascore);
     let panel = page.structure.side.querySelector(
       "section.section-with-separator:has(.listener-trend)"
     );
@@ -73925,14 +73940,14 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         ".header-new-chart-position-number"
       );
       const avatar_img = avatar3?.getAttribute("content").replace("/ar0/", "/avatar300s/");
-      const listeners2 = document.body.querySelector(
+      const listeners = document.body.querySelector(
         ".header-new-info-desktop .header-metadata-tnew-display > p > abbr"
       );
       save_hoshino_artwork(
         avatar_img,
         page.name,
         page.sister,
-        clean_number(listeners2?.title)
+        clean_number(listeners?.title)
       );
       let page_avatar;
       let redesigned_album_header = html.node`
@@ -74385,13 +74400,13 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       }
       const listeners_section = page.structure.main.querySelector(".listeners-section");
       if (listeners_section) {
-        const listeners2 = listeners_section.querySelectorAll(
+        const listeners = listeners_section.querySelectorAll(
           ".listeners-section-item"
         );
         listeners_section.classList = "user-list top-listeners-list small";
         listeners_section.setAttribute("data-list-view", "grid");
         render(listeners_section, html``);
-        listeners2.forEach((listener, index3) => {
+        listeners.forEach((listener, index3) => {
           listeners_section.appendChild(
             convert_top_listener(listener, index3, "listeners-section")
           );

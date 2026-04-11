@@ -2,9 +2,10 @@ import { log } from '@/build/log';
 import { chart_reflow, load_chart_colours } from '../music/chart';
 import { clamp_lit, clamp_sat, rgb_to_hsl, rgb_to_oklch } from '@/build/tools';
 import ColorThief from 'color-thief-browser';
+import { page } from '@/build/page';
 
 export function header_colour(source: HTMLImageElement, apply_to_page = false, apply_to_elem?: Element) {
-    apply(0, 0, 0.5);
+    apply(0, 0, 0.5, true);
 
     try {
         const image = new Image();
@@ -34,8 +35,10 @@ export function header_colour(source: HTMLImageElement, apply_to_page = false, a
         log('received error', 'hue from album', 'error', { e });
     }
 
-    function apply(hue: number, sat: number, lit: number) {
-        if (apply_to_page) {
+    function apply(hue: number, sat: number, lit: number, skip = false) {
+        if (apply_to_page && !skip) {
+            page.state.replaced_accent = true;
+
             document.body.style.setProperty('--hue-album', hue);
             document.body.style.setProperty('--sat-album', sat);
             document.body.style.setProperty('--lit-album', lit);
