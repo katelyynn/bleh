@@ -62726,7 +62726,7 @@
         if (!recording.releases || recording.releases.length == 0)
           return false;
         if (recording.video) return false;
-        return recording.releases.every((release) => {
+        return recording.releases.some((release) => {
           const artists = release["artist-credit"] || [];
           const various = artists.some(
             (artist2) => artist2.name == "Various Artists"
@@ -63233,7 +63233,7 @@
             if (digital) return release == digital;
           }
           return index3 == self3.findIndex(
-            (r2) => r2.title == title && r2["artist-credit"]?.[0]?.name == artist2
+            (r2) => r2.title.toLowerCase() == title.toLowerCase() && r2["artist-credit"]?.[0]?.name.toLowerCase() == artist2.toLowerCase()
           );
         });
         releases.sort((a, b) => {
@@ -63270,6 +63270,9 @@
           if (a_date && !b_date) return -1;
           if (!a_date && b_date) return 1;
           return 0;
+        });
+        log("releases in recording after filter", "oracle", "info", {
+          releases
         });
         if (releases[0]) {
           const release = releases[0];
@@ -63346,9 +63349,6 @@
             }
           }
         }
-        log("releases in recording after filter", "oracle", "info", {
-          releases
-        });
         const allow_overflow = false;
         if (page.subpage == "overview") releases = releases.slice(0, 2);
         let source_albums;
@@ -92023,7 +92023,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-02-25"
       }
     },
-    built_on: "2026-04-11T03:07:48.091Z"
+    built_on: "2026-04-11T15:41:03.764Z"
   };
 
   // node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

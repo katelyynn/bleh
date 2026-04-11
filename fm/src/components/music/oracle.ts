@@ -748,7 +748,7 @@ export function oracle_process() {
 
             if (recording.video) return false;
 
-            return recording.releases.every((release) => {
+            return recording.releases.some((release) => {
                 const artists = release['artist-credit'] || [];
                 const various = artists.some(
                     (artist) => artist.name == 'Various Artists'
@@ -1490,8 +1490,8 @@ export function oracle_process() {
                     index ==
                     self.findIndex(
                         (r) =>
-                            r.title == title &&
-                            r['artist-credit']?.[0]?.name == artist
+                            r.title.toLowerCase() == title.toLowerCase() &&
+                            r['artist-credit']?.[0]?.name.toLowerCase() == artist.toLowerCase()
                     )
                 );
             });
@@ -1541,6 +1541,10 @@ export function oracle_process() {
                 if (a_date && !b_date) return -1;
                 if (!a_date && b_date) return 1;
                 return 0;
+            });
+
+            log('releases in recording after filter', 'oracle', 'info', {
+                releases
             });
 
             if (releases[0]) {
@@ -1640,10 +1644,6 @@ export function oracle_process() {
                     }
                 }
             }
-
-            log('releases in recording after filter', 'oracle', 'info', {
-                releases
-            });
 
             const allow_overflow = false;
 
