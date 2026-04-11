@@ -63720,7 +63720,7 @@
         let type = relation.type;
         if (["programming", "producer"].includes(type)) {
           type = "mix";
-        } else if (type == "instrument") {
+        } else if (type.includes("instrument") || type == "orchestrator") {
           type = "recording";
         }
         const name = relation.artist.name;

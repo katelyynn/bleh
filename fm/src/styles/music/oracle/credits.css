@@ -18,7 +18,7 @@
 
 .oracle-credit-list {
     display: flex;
-    gap: 6px;
+    gap: 0 6px;
     flex-wrap: wrap;
 }
 
