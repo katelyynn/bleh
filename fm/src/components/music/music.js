@@ -543,11 +543,12 @@ export async function show_your_scrobbles() {
         ff('credits') &&
         ff('oracle') &&
         settings.oracle_beta &&
-        ['album', 'track'].includes(page.type)
+        page.type == 'track'
     ) {
         interact_container.appendChild(html.node`
             <button class="btn side-action icon-mask" data-type="credits" onclick=${() => oracle_credits()}>
                 ${tl(trans.view_credits)}
+                <span class="new-badge new">${tl(trans.new)}</span>
             </button>
         `);
     }

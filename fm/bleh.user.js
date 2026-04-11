@@ -64919,10 +64919,11 @@
       }
       interact_container.appendChild(scrobble_btn);
     }
-    if (ff("credits") && ff("oracle") && settings.oracle_beta && ["album", "track"].includes(page.type)) {
+    if (ff("credits") && ff("oracle") && settings.oracle_beta && page.type == "track") {
       interact_container.appendChild(html.node`
             <button class="btn side-action icon-mask" data-type="credits" onclick=${() => oracle_credits()}>
                 ${tl2(trans.view_credits)}
+                <span class="new-badge new">${tl2(trans.new)}</span>
             </button>
         `);
     }
@@ -91917,8 +91918,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2025-10-08"
       },
       credits: {
-        default: false,
-        name: "Present album and track credits via oracle",
+        default: true,
+        name: "Present track credits via oracle",
         date: "2025-10-14"
       },
       verified: {
