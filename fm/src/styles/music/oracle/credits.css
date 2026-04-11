@@ -44,7 +44,6 @@
 }
 
 .oracle-attributes {
-    font-size: var(--font-size);
     color: oklch(var(--c3));
 }
 
