@@ -488,7 +488,7 @@ export function oracle_process() {
         if (page.type == 'track')
             url = `https://musicbrainz.org/ws/2/recording?inc=release-events&query=${encodeURIComponent(`recording:"${clean_title(page.name)}" AND ${artist_template} AND status:Official`)}`;
         else if (page.type == 'album')
-            url = `https://musicbrainz.org/ws/2/release?query=${encodeURIComponent(`release:"${clean_title(page.name), ' '}" AND ${artist_template}`)}`;
+            url = `https://musicbrainz.org/ws/2/release?query=${encodeURIComponent(`release:"${clean_title(page.name)}" AND ${artist_template}`)}`;
 
         if (page.type == 'album') {
             if (page.state.oracle_temp.page && (page.name == page.state.oracle_temp.page.name && page.sister == page.state.oracle_temp.page.sister && page.type == page.state.oracle_temp.page.type)) {
