@@ -63734,6 +63734,15 @@
   function oracle_credits() {
     const relations = page.state.oracle?.relations;
     if (!relations) return;
+    const flatten = (relations2) => {
+      return relations2.reduce((acc, rel2) => {
+        acc.push(rel2);
+        if (rel2.work?.relations?.length) {
+          acc.push(...flatten(rel2.work.relations));
+        }
+        return acc;
+      }, []);
+    };
     const list = (relations2) => {
       return relations2.reduce((acc, relation) => {
         if (!relation.artist) return acc;
@@ -63769,9 +63778,10 @@
       "vocal",
       "recording",
       "mix",
-      "engineer"
+      "engineer",
+      "writer"
     ];
-    const grouped = Object.entries(list(relations)).sort(([a], [b]) => {
+    const grouped = Object.entries(list(flatten(relations))).sort(([a], [b]) => {
       const a_index = order2.indexOf(a);
       const b_index = order2.indexOf(b);
       if (a_index == -1) return 1;
@@ -90429,6 +90439,9 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     },
     oracle_editor: {
       en: "Edited by"
+    },
+    oracle_writer: {
+      en: "Written by"
     },
     oracle_no_credits: {
       en: 'nothing here... (\u0E51/////\u0E51 " )'

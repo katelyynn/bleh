@@ -2118,6 +2118,18 @@ export function oracle_credits() {
     const relations = page.state.oracle?.relations;
     if (!relations) return;
 
+    const flatten = relations => {
+        return relations.reduce((acc, rel) => {
+            acc.push(rel);
+
+            if (rel.work?.relations?.length) {
+                acc.push(...flatten(rel.work.relations));
+            }
+
+            return acc;
+        }, []);
+    }
+
     const list = relations => {
         return relations.reduce((acc, relation) => {
             if (!relation.artist) return acc;
@@ -2161,10 +2173,11 @@ export function oracle_credits() {
         'vocal',
         'recording',
         'mix',
-        'engineer'
+        'engineer',
+        'writer'
     ];
 
-    const grouped = Object.entries(list(relations))
+    const grouped = Object.entries(list(flatten(relations)))
         .sort(([a], [b]) => {
             const a_index = order.indexOf(a);
             const b_index = order.indexOf(b);
