@@ -62084,7 +62084,7 @@
             </section>
         `;
       const hoshino_entry = hoshino_return(page.name, page.sister);
-      if (page.state.oracle_temp && page.name && page.state.oracle_temp.page.name && page.sister && page.state.oracle_temp.page.sister && page.type && page.state.oracle_temp.page.type) {
+      if (page.state.oracle_temp && page.name == page.state.oracle_temp.page.name && page.sister == page.state.oracle_temp.page.sister && page.type == page.state.oracle_temp.page.type) {
       } else if (hoshino_entry && ff("ruby")) {
         create_avatar(
           page.state.avatar_side,
