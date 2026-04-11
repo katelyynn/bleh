@@ -709,6 +709,8 @@ export function oracle_process() {
             if (!recording.releases || recording.releases.length == 0)
                 return false;
 
+            if (recording.video) return false;
+
             return recording.releases.some((release) => {
                 const artists = release['artist-credit'] || [];
                 const various = artists.some(
@@ -1283,6 +1285,7 @@ export function oracle_process() {
 
     function oracle_track_releases_process(data) {
         const recording = oracle_pick_recording(data);
+        log('picked recording, proceeding to connect', 'oracle', 'info', { recording });
 
         cache.track = {
             id: recording.id

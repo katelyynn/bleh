@@ -62683,6 +62683,7 @@
       const filtered = data2.recordings.filter((recording) => {
         if (!recording.releases || recording.releases.length == 0)
           return false;
+        if (recording.video) return false;
         return recording.releases.some((release) => {
           const artists = release["artist-credit"] || [];
           const various = artists.some(
@@ -63070,6 +63071,7 @@
     }
     function oracle_track_releases_process(data2) {
       const recording = oracle_pick_recording(data2);
+      log("picked recording, proceeding to connect", "oracle", "info", { recording });
       cache2.track = {
         id: recording.id
       };
@@ -91876,7 +91878,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-02-25"
       }
     },
-    built_on: "2026-04-09T18:25:00.115Z"
+    built_on: "2026-04-11T03:07:48.091Z"
   };
 
   // node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
