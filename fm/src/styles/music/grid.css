@@ -124,6 +124,10 @@
     --extra-trans: 0%;
     --extra-white: 0%;
 
+    --hue-over: 0;
+    --sat-over: 0;
+    --lit-over: 0.5;
+
     &:hover {
         transform: var(--motion, translateY(-1px));
         --grid-cover-image-filter: brightness(105%);
