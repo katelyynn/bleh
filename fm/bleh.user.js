@@ -62697,51 +62697,56 @@
         }
       });
     }
+    function get_earliest_date(recording) {
+      const dates = [];
+      for (const release of recording.releases) {
+        if (release["first-release-date"]) {
+          dates.push(new Date(release["first-release-date"]));
+        } else if (release.date) {
+          dates.push(new Date(release.date));
+        }
+      }
+      if (dates.length == 0) return null;
+      return new Date(Math.min(...dates));
+    }
+    function pick_best(candidates) {
+      return candidates.map((recording) => ({
+        recording,
+        date: get_earliest_date(recording)
+      })).sort((a, b) => {
+        if (!a.date && !b.date) return 0;
+        if (!a.date) return 1;
+        if (!b.date) return -1;
+        return a.date - b.date;
+      })[0]?.recording || null;
+    }
     function oracle_pick_recording(data2) {
       if (!data2 || !data2.recordings) return null;
       const filtered = data2.recordings.filter((recording) => {
         if (!recording.releases || recording.releases.length == 0)
           return false;
         if (recording.video) return false;
-        return recording.releases.some((release) => {
+        return recording.releases.every((release) => {
           const artists = release["artist-credit"] || [];
           const various = artists.some(
             (artist2) => artist2.name == "Various Artists"
           );
           const official = release.status == "Official";
-          return !various && official;
+          const compilation = release["release-group"]["secondary-types"]?.includes("Compilation");
+          return !various && official && !compilation;
         });
       });
       if (filtered.length == 0) return null;
-      let best = filtered.find(
-        (recording) => recording.disambiguation?.toLowerCase() == "explicit"
-      );
-      if (best) return best;
-      best = filtered.find((recording) => !recording.disambiguation);
-      if (best) return best;
-      best = filtered.find(
-        (recording) => recording.disambiguation?.toLowerCase() == "clean"
-      );
-      if (best) return best;
-      best = filtered.find(
-        (recording) => recording.disambiguation?.toLowerCase().includes("explicit")
-      );
-      if (best) return best;
-      best = filtered.find(
-        (recording) => recording.disambiguation?.toLowerCase().includes("clean")
-      );
-      if (best) return best;
-      best = filtered.find((recording) => {
-        const disambiguation = recording.disambiguation?.toLowerCase() || "";
-        const video = recording.video;
-        return !disambiguation.includes("english") && !disambiguation.endsWith("mv") && !video;
-      });
-      if (best) return best;
-      best = filtered.find(
-        (recording) => !recording.disambiguation?.toLowerCase().endsWith("mv")
-      );
-      if (best) return best;
-      return filtered[0];
+      log("following options to choose from", "oracle", "info", { filtered });
+      const try_pick = (filter) => {
+        const matches = filtered.filter(filter);
+        if (matches.length == 0) return null;
+        return pick_best(matches);
+      };
+      return try_pick((recording) => recording.disambiguation?.toLowerCase() == "explicit") || try_pick((recording) => !recording.disambiguation) || try_pick((recording) => recording.disambiguation?.toLowerCase().includes("explicit")) || try_pick((recording) => recording.disambiguation?.toLowerCase() == "clean") || try_pick((recording) => {
+        const disambig = recording.disambiguation?.toLowerCase() || "";
+        return !disambig.includes("english") && !disambig.endsWith("mv") && !recording.video;
+      }) || try_pick((recording) => recording.disambiguation?.toLowerCase().endsWith("mv")) || pick_best(filtered);
     }
     function oracle_pick_release(data2) {
       if (!data2 || !data2.releases) return null;
