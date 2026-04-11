@@ -63712,15 +63712,27 @@
     xhr.send();
   }
   function oracle_credits() {
+    const relations = page.state.oracle?.relations;
+    if (!relations) return;
     dialog({
       id: "oracle_credits",
       title: { html: tl2(trans.credits_for_value, { v: `<i>${correct_item_by_artist(page.name, page.sister)}</i>` }) },
       body: html.node`
             <div class="oracle-credits">
-                <div class="credit">
-                    <h4>${tl2(trans.performed_by)}</h4>
-                    <span>${correct_artist(page.sister)}</span>
-                </div>
+                ${relations.map((relation) => {
+        console.info("relation", relation);
+        if (!relation.artist) return html.node``;
+        const type = relation.type;
+        const name = relation.artist.name;
+        const attributes = relation.attributes;
+        const elem = html.node`
+                        <div class="credit">
+                            <h4>${type}</h4>
+                            <span>${name}${attributes.length > 0 ? ` (${attributes.join(",")})` : ""}</span>
+                        </div>
+                    `;
+        return elem;
+      })}
             </div>
         `
     });
