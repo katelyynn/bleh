@@ -2166,7 +2166,11 @@ export function oracle_credits() {
         title: {html: tl(trans.credits_for_value, {v: `<i>${correct_item_by_artist(page.name, page.sister)}</i>`})},
         body: html.node`
             <div class="oracle-credits">
-                ${grouped.map(([type, artists]) => {
+                ${grouped.length == 0 ? html.node`
+                <div class="loading-data-container">
+                    <div class="loading-data-text failed">${tl(trans.oracle_no_credits)}</div>
+                </div>
+                ` : grouped.map(([type, artists]) => {
                     let text = trans.hasOwnProperty(`oracle_${type}`) ? tl(trans[`oracle_${type}`]) : `${type} (unknown, please report as bug)`;
 
                     return html.node`

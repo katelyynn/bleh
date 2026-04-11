@@ -10388,6 +10388,9 @@ export const trans = {
     },
     oracle_editor: {
         en: 'Edited by'
+    },
+    oracle_no_credits: {
+        en: 'nothing here... (๑/////๑ " )'
     }
 } as const satisfies Record<string, any>;
 

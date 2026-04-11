@@ -63765,7 +63765,11 @@
       title: { html: tl2(trans.credits_for_value, { v: `<i>${correct_item_by_artist(page.name, page.sister)}</i>` }) },
       body: html.node`
             <div class="oracle-credits">
-                ${grouped.map(([type, artists]) => {
+                ${grouped.length == 0 ? html.node`
+                <div class="loading-data-container">
+                    <div class="loading-data-text failed">${tl2(trans.oracle_no_credits)}</div>
+                </div>
+                ` : grouped.map(([type, artists]) => {
         let text4 = trans.hasOwnProperty(`oracle_${type}`) ? tl2(trans[`oracle_${type}`]) : `${type} (unknown, please report as bug)`;
         return html.node`
                         <div class="oracle-credit-group">
@@ -90406,6 +90410,9 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     },
     oracle_editor: {
       en: "Edited by"
+    },
+    oracle_no_credits: {
+      en: 'nothing here... (\u0E51/////\u0E51 " )'
     }
   };
   var translation_fallback = "NO_TRANSLATION_FOUND";
