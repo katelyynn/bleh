@@ -63908,6 +63908,9 @@
       const area_name = area.name;
       const lifespan = data2["life-span"];
       const begin = data2["begin-area"];
+      const end2 = data2["end-area"];
+      const begin_code = begin["iso-3166-2-codes"] ? begin["iso-3166-2-codes"][0]?.split("-")[0] : null;
+      const end_code = end2 && end2["iso-3166-2-codes"] ? end2["iso-3166-2-codes"][0]?.split("-")[0] : null;
       render(metadata, html`
             <div class="metadata-column">
                 <div class="metadata-group">
@@ -63917,12 +63920,24 @@
                         ${area_name}
                     </dd>
                 </div>
+                ${data2.type == "Person" ? html.node`
                 <div class="metadata-group">
                     <dt class="catalogue-metadata-heading">${tl2(trans.born)}</dt>
                     <dd class="catalogue-metadata-description has-age">
                         ${DateTime.fromISO(lifespan.begin).toLocaleString(DateTime.DATE_MED)}
                         <span class="artist-age">(${age(lifespan.begin)})</span>
                     </dd>
+                    ${begin_code ? html.node`
+                    <dd class="catalogue-metadata-description has-flag secondary-info">
+                        ${flag(begin_code)}
+                        ${begin.name}
+                    </dd>
+                    ` : html.node`
+                    <dd class="catalogue-metadata-description has-flag secondary-info">
+                        ${flag(area_code)}
+                        ${begin.name}
+                    </dd>
+                    `}
                 </div>
                 ${lifespan.ended ? html.node`
                 <div class="metadata-group">
@@ -63931,8 +63946,57 @@
                         ${DateTime.fromISO(lifespan.end).toLocaleString(DateTime.DATE_MED)}
                         <span class="artist-age">(${age(lifespan.begin, lifespan.end)})</span>
                     </dd>
+                    ${end_code ? html.node`
+                    <dd class="catalogue-metadata-description has-flag secondary-info">
+                        ${flag(end_code)}
+                        ${end2.name}
+                    </dd>
+                    ` : html.node`
+                    <dd class="catalogue-metadata-description has-flag secondary-info">
+                        ${flag(area_code)}
+                        ${end2.name}
+                    </dd>
+                    `}
                 </div>
                 ` : ""}
+                ` : html.node`
+                <div class="metadata-group">
+                    <dt class="catalogue-metadata-heading">${tl2(trans.formed)}</dt>
+                    <dd class="catalogue-metadata-description has-age">
+                        ${DateTime.fromISO(lifespan.begin).toLocaleString(DateTime.DATE_MED)}
+                    </dd>
+                    ${begin_code ? html.node`
+                    <dd class="catalogue-metadata-description has-flag secondary-info">
+                        ${flag(begin_code)}
+                        ${begin.name}
+                    </dd>
+                    ` : html.node`
+                    <dd class="catalogue-metadata-description has-flag secondary-info">
+                        ${flag(area_code)}
+                        ${begin.name}
+                    </dd>
+                    `}
+                </div>
+                ${lifespan.ended ? html.node`
+                <div class="metadata-group">
+                    <dt class="catalogue-metadata-heading">${tl2(trans.ended)}</dt>
+                    <dd class="catalogue-metadata-description has-age">
+                        ${DateTime.fromISO(lifespan.end).toLocaleString(DateTime.DATE_MED)}
+                    </dd>
+                    ${end_code ? html.node`
+                    <dd class="catalogue-metadata-description has-flag secondary-info">
+                        ${flag(end_code)}
+                        ${end2.name}
+                    </dd>
+                    ` : html.node`
+                    <dd class="catalogue-metadata-description has-flag secondary-info">
+                        ${flag(area_code)}
+                        ${end2.name}
+                    </dd>
+                    `}
+                </div>
+                ` : ""}
+                `}
             </div>
         `);
     }
@@ -90753,6 +90817,13 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     },
     died: {
       en: "Died"
+    },
+    formed: {
+      // like a group, created
+      en: "Formed"
+    },
+    ended: {
+      en: "Ended"
     }
   };
   var translation_fallback = "NO_TRANSLATION_FOUND";

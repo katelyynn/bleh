@@ -10400,6 +10400,13 @@ export const trans = {
     },
     died: {
         en: 'Died'
+    },
+    formed: {
+        // like a group, created
+        en: 'Formed'
+    },
+    ended: {
+        en: 'Ended'
     }
 } as const satisfies Record<string, any>;
 

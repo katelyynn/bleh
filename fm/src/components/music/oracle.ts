@@ -2162,6 +2162,10 @@ export function oracle_process() {
 
         const lifespan = data['life-span'];
         const begin = data['begin-area'];
+        const end = data['end-area'];
+
+        const begin_code = begin['iso-3166-2-codes'] ? begin['iso-3166-2-codes'][0]?.split('-')[0] : null;
+        const end_code = end && end['iso-3166-2-codes'] ? end['iso-3166-2-codes'][0]?.split('-')[0] : null;
 
         render(metadata!, html`
             <div class="metadata-column">
@@ -2172,12 +2176,24 @@ export function oracle_process() {
                         ${area_name}
                     </dd>
                 </div>
+                ${data.type == 'Person' ? html.node`
                 <div class="metadata-group">
                     <dt class="catalogue-metadata-heading">${tl(trans.born)}</dt>
                     <dd class="catalogue-metadata-description has-age">
                         ${DateTime.fromISO(lifespan.begin).toLocaleString(DateTime.DATE_MED)}
                         <span class="artist-age">(${age(lifespan.begin)})</span>
                     </dd>
+                    ${begin_code ? html.node`
+                    <dd class="catalogue-metadata-description has-flag secondary-info">
+                        ${flag(begin_code)}
+                        ${begin.name}
+                    </dd>
+                    ` : html.node`
+                    <dd class="catalogue-metadata-description has-flag secondary-info">
+                        ${flag(area_code)}
+                        ${begin.name}
+                    </dd>
+                    `}
                 </div>
                 ${lifespan.ended ? html.node`
                 <div class="metadata-group">
@@ -2186,8 +2202,57 @@ export function oracle_process() {
                         ${DateTime.fromISO(lifespan.end).toLocaleString(DateTime.DATE_MED)}
                         <span class="artist-age">(${age(lifespan.begin, lifespan.end)})</span>
                     </dd>
+                    ${end_code ? html.node`
+                    <dd class="catalogue-metadata-description has-flag secondary-info">
+                        ${flag(end_code)}
+                        ${end.name}
+                    </dd>
+                    ` : html.node`
+                    <dd class="catalogue-metadata-description has-flag secondary-info">
+                        ${flag(area_code)}
+                        ${end.name}
+                    </dd>
+                    `}
                 </div>
                 ` : ''}
+                ` : html.node`
+                <div class="metadata-group">
+                    <dt class="catalogue-metadata-heading">${tl(trans.formed)}</dt>
+                    <dd class="catalogue-metadata-description has-age">
+                        ${DateTime.fromISO(lifespan.begin).toLocaleString(DateTime.DATE_MED)}
+                    </dd>
+                    ${begin_code ? html.node`
+                    <dd class="catalogue-metadata-description has-flag secondary-info">
+                        ${flag(begin_code)}
+                        ${begin.name}
+                    </dd>
+                    ` : html.node`
+                    <dd class="catalogue-metadata-description has-flag secondary-info">
+                        ${flag(area_code)}
+                        ${begin.name}
+                    </dd>
+                    `}
+                </div>
+                ${lifespan.ended ? html.node`
+                <div class="metadata-group">
+                    <dt class="catalogue-metadata-heading">${tl(trans.ended)}</dt>
+                    <dd class="catalogue-metadata-description has-age">
+                        ${DateTime.fromISO(lifespan.end).toLocaleString(DateTime.DATE_MED)}
+                    </dd>
+                    ${end_code ? html.node`
+                    <dd class="catalogue-metadata-description has-flag secondary-info">
+                        ${flag(end_code)}
+                        ${end.name}
+                    </dd>
+                    ` : html.node`
+                    <dd class="catalogue-metadata-description has-flag secondary-info">
+                        ${flag(area_code)}
+                        ${end.name}
+                    </dd>
+                    `}
+                </div>
+                ` : ''}
+                `}
             </div>
         `);
     }
