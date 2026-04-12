@@ -182,7 +182,12 @@
         gap: 10px var(--card-padding);
 
         .metadata-group {
-            min-width: 150px;
+            min-width: 100px;
+
+            &.has-age {
+                display: flex;
+                gap: 4px;
+            }
         }
     }
     .wiki-column {
@@ -494,4 +499,10 @@
 .wiki-sub-text {
     justify-content: start !important;
     margin-top: 4px;
+}
+
+.artist-age {
+    font-size: 13px;
+    line-height: 0;
+    color: oklch(var(--c3));
 }

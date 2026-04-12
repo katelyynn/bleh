@@ -10394,6 +10394,12 @@ export const trans = {
     },
     oracle_no_credits: {
         en: 'nothing here... (๑/////๑ " )'
+    },
+    born: {
+        en: 'Born'
+    },
+    died: {
+        en: 'Died'
     }
 } as const satisfies Record<string, any>;
 

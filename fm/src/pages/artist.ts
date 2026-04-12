@@ -37,6 +37,7 @@ import tippy from 'tippy.js';
 import { open_starred_friend_window } from '@/pages/profile/profile';
 import { artist_title, page_header_avatar } from '@/components/music/header';
 import { header_colour } from '@/components/page/colour';
+import { oracle_process } from '@/components/music/oracle';
 
 export function bleh_artists() {
     let artist_header = document.body.querySelector('.header-new--artist') as HTMLElement;
@@ -265,7 +266,7 @@ export function bleh_artists() {
             let featured_panel = html.node`
                 <section class="featured-items-panel">
                     ${Array.from(featured_items.querySelectorAll('li')).map(
-                        (item) => {
+                        (item, index) => {
                             item.classList.remove(
                                 'artist-header-featured-items-item-wrap--video-thumbnail'
                             );
@@ -285,6 +286,10 @@ export function bleh_artists() {
                                 )
                                 .textContent.trim();
                             let name;
+
+                            if (index > 0) {
+                                page.state.top_track = original_name;
+                            }
 
                             if (settings.format_guest_features) {
                                 const formatted = name_includes(
@@ -434,6 +439,8 @@ export function bleh_artists() {
         else if (page.subpage == 'albums') bleh_artist_albums();
         else if (page.subpage == 'similar') bleh_artist_similar();
     }
+
+    if (ff('oracle') && settings.oracle_beta) oracle_process();
 
     log('status is', 'page', 'info', page);
     update_page();

@@ -1,0 +1,16 @@
+.country-flag {
+    height: 12px;
+
+    aspect-ratio: 3 / 2;
+    background-size: 100%;
+    border-radius: 2px;
+
+    display: flex;
+    font-size: 0;
+}
+
+.has-flag {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}

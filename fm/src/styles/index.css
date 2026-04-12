@@ -29,6 +29,7 @@
 @import './shared/nag_bar.css';
 @import './shared/rain.css';
 @import './shared/image.css';
+@import './shared/flag.css';
 @import './text/list.css';
 
 @import './dialog/main.css';

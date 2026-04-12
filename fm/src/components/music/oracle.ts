@@ -41,6 +41,9 @@ import { save_setting, setting } from '@/components/settings/settings';
 import { input } from '@/components/settings/input';
 import { icon, icons } from '../shared/icon';
 import { redirect } from './music';
+import JSON5 from 'json5';
+import { flag } from '../shared/flag';
+import { age } from '../shared/age';
 
 export function oracle_process() {
     log('beginning', 'oracle');
@@ -65,7 +68,7 @@ export function oracle_process() {
     }
 
     //if (!ff('oracle_connect') || page.type == 'artist' || (!['overview', 'albums'].includes(page.subpage) && page.type == 'album')) return;
-    if (!ff('oracle_connect') || page.type == 'artist') return;
+    if (!ff('oracle_connect')) return;
 
     let tries = 3;
     const item = page.name.toLowerCase();
@@ -350,6 +353,22 @@ export function oracle_process() {
                     tracklist_own_loaded = true;
                 });
         }
+    } else if (page.type == 'artist' && page.subpage == 'overview') {
+        if (metadata) metadata.remove();
+
+        metadata = html.node`
+            <div class="metadata-column">
+                <div class="metadata-group">
+                    <dt class="catalogue-metadata-heading">${tl(trans.country)}</dt>
+                    <dd class="catalogue-metadata-description placeholder-text">Mars</dd>
+                </div>
+                <div class="metadata-group">
+                    <dt class="catalogue-metadata-heading">${tl(trans.born)}</dt>
+                    <dd class="catalogue-metadata-description placeholder-text">0 Dec 0000</dd>
+                </div>
+            </div>
+        `;
+        meta_and_wiki?.appendChild(metadata);
     }
 
     function track_placeholder() {
@@ -403,6 +422,32 @@ export function oracle_process() {
     oracle_obtain_artist();
 
     function oracle_obtain_artist() {
+        if (page.type == 'artist') {
+            if (oracle_artists.hasOwnProperty(artist)) {
+                const local = oracle_artists[artist];
+
+                log('skipping artist search for id (oracle database)', 'oracle', 'info', { local });
+
+                oracle_artist_fetch({
+                    id: local.id
+                });
+                return;
+            } else if (oracle_cache[artist]?.id) {
+                const local = oracle_cache[artist];
+
+                log('skipping artist search for id (local cache)', 'oracle', 'info', { local });
+                oracle_artist_fetch({
+                    id: local.id
+                });
+
+                return;
+            }
+
+            oracle_get_artist();
+
+            return;
+        }
+
         if (oracle_artists.hasOwnProperty(artist)) {
             artist_data = {
                 type: 'id',
@@ -424,7 +469,24 @@ export function oracle_process() {
         if (tries < 1) return;
         tries--;
 
-        const url = `https://musicbrainz.org/ws/2/artist?query=${sanitise(artist, ' ')}`;
+        let top_track = page.state.top_track;
+        let url;
+
+        let type = 'artist';
+
+        if (top_track) {
+            url = `https://musicbrainz.org/ws/2/recording?query=${encodeURIComponent(`recording:"${clean_title(top_track)}" AND artist:"${page.name}" AND status:Official`)}`;
+            type = 'recording';
+        } else {
+            url = `https://musicbrainz.org/ws/2/artist?query=${encodeURIComponent(page.name)}`;
+        }
+
+        if (page.state.oracle_temp.page && (page.name == page.state.oracle_temp.page.name && page.type == page.state.oracle_temp.page.type)) {
+            log('using temporary storage', 'oracle', 'info', { temp: page.state.oracle_temp });
+            oracle_artist(page.state.oracle_temp);
+
+            return;
+        }
 
         log(
             `using url ${encodeURI(url)} with ${tries} tries available`,
@@ -456,15 +518,37 @@ export function oracle_process() {
 
                 log('received artist data', 'oracle', 'info', { data });
 
-                artist_data = data.artists[0];
-                cache[artist] = artist_data;
+                if (type == 'artist') {
+                    const artists = data.artists;
+                    if (!artists[0]) {
+                        log('no data to use, ending', 'oracle');
 
-                if (Object.keys(cache).length > 100) delete cache[0];
+                        oracle_error('No useable data was found');
 
-                set_storage('oracle_artist_ids', JSON.stringify(cache));
+                        return;
+                    }
 
-                tries = 3;
-                oracle_connect();
+                    setTimeout(() => {
+                        oracle_artist_fetch(artists[0]);
+                    }, mb_delay);
+                } else if (type == 'recording') {
+                    const recordings = data.recordings;
+                    if (!recordings[0]) {
+                        log('no data to use, ending', 'oracle');
+
+                        oracle_error('No useable data was found');
+
+                        return;
+                    }
+
+                    const id = recordings[0]['artist-credit'][0].artist.id;
+
+                    setTimeout(() => {
+                        oracle_artist_fetch({
+                            id
+                        });
+                    }, mb_delay);
+                }
             },
             onerror: function (err) {
                 console.error('oracle', err);
@@ -704,7 +788,7 @@ export function oracle_process() {
 
                 setTimeout(() => {
                     oracle_track_fetch(data);
-                }, 1000);
+                }, mb_delay);
             }
         });
     }
@@ -1004,7 +1088,7 @@ export function oracle_process() {
 
                 setTimeout(() => {
                     oracle_album_fetch(data);
-                }, 1000);
+                }, mb_delay);
             }
         });
     }
@@ -2003,6 +2087,110 @@ export function oracle_process() {
             </section>
         `);
     }
+
+    function oracle_artist_fetch(data) {
+        if (tries < 1) return;
+        tries--;
+
+        const url = `https://musicbrainz.org/ws/2/artist/${data.id}?inc=artist-credits+url-rels+annotation+artist-rels+work-rels+release-groups`;
+
+        log(
+            `using url ${encodeURI(url)} with ${tries} tries available`,
+            'oracle'
+        );
+
+        page.state.oracle_debug.artist_id = data.id;
+
+        GM_xmlhttpRequest({
+            method: 'GET',
+            url,
+            headers: {
+                'User-Agent': `bleh/${version.build} <https://github.com/katelyynn/bleh>`,
+                Accept: 'application/json'
+            },
+            onload: function (response) {
+                if (response.status < 200 || response.status >= 300) {
+                    log('error fetching connect data', 'oracle', 'error', {
+                        response
+                    });
+
+                    oracle_error(response);
+
+                    return;
+                }
+
+                let data;
+                try {
+                    data = JSON.parse(response.responseText);
+                } catch (e) {
+                    log('failed to parse', 'oracle', 'error', { e });
+
+                    oracle_error(e);
+
+                    return;
+                }
+
+                log('received connect artist data', 'oracle', 'info', { data });
+                page.state.oracle = data;
+
+                page.state.oracle_temp = {
+                    page: {
+                        name: page.name,
+                        sister: null,
+                        type: page.type
+                    },
+                    ...data
+                }
+                log('saved temp', 'oracle', 'info', { temp: page.state.oracle_temp });
+
+                oracle_artist(data);
+            },
+            onerror: function (err) {
+                console.error('oracle', err);
+
+                setTimeout(() => {
+                    oracle_artist_fetch(data);
+                }, mb_delay);
+            }
+        });
+    }
+
+    function oracle_artist(data) {
+        const area = data.area;
+        const area_code = data.country;
+        const area_name = area.name;
+
+        const lifespan = data['life-span'];
+        const begin = data['begin-area'];
+
+        render(metadata!, html`
+            <div class="metadata-column">
+                <div class="metadata-group">
+                    <dt class="catalogue-metadata-heading">${tl(trans.country)}</dt>
+                    <dd class="catalogue-metadata-description has-flag">
+                        ${flag(area_code)}
+                        ${area_name}
+                    </dd>
+                </div>
+                <div class="metadata-group">
+                    <dt class="catalogue-metadata-heading">${tl(trans.born)}</dt>
+                    <dd class="catalogue-metadata-description has-age">
+                        ${DateTime.fromISO(lifespan.begin).toLocaleString(DateTime.DATE_MED)}
+                        <span class="artist-age">(${age(lifespan.begin)})</span>
+                    </dd>
+                </div>
+                ${lifespan.ended ? html.node`
+                <div class="metadata-group">
+                    <dt class="catalogue-metadata-heading">${tl(trans.died)}</dt>
+                    <dd class="catalogue-metadata-description has-age">
+                        ${DateTime.fromISO(lifespan.end).toLocaleString(DateTime.DATE_MED)}
+                        <span class="artist-age">(${age(lifespan.begin, lifespan.end)})</span>
+                    </dd>
+                </div>
+                ` : ''}
+            </div>
+        `);
+    }
 }
 
 export function oracle_data(force = false) {
@@ -2030,7 +2218,7 @@ export function oracle_data(force = false) {
         oracle_request('artists', true);
     } else {
         // we prefer to load the current cache before waiting for a new response
-        Object.assign(oracle_artists, JSON.parse(cached_artists));
+        Object.assign(oracle_artists, JSON5.parse(cached_artists));
 
         // is it valid?
         if (cached_artists_expire < current_time && !force) {
@@ -2045,7 +2233,7 @@ export function oracle_data(force = false) {
         oracle_request('albums', true);
     } else {
         // we prefer to load the current cache before waiting for a new response
-        Object.assign(oracle_albums, JSON.parse(cached_albums));
+        Object.assign(oracle_albums, JSON5.parse(cached_albums));
 
         // is it valid?
         if (cached_albums_expire < current_time && !force) {
@@ -2060,7 +2248,7 @@ export function oracle_data(force = false) {
         oracle_request('tracks', true);
     } else {
         // we prefer to load the current cache before waiting for a new response
-        Object.assign(oracle_tracks, JSON.parse(cached_tracks));
+        Object.assign(oracle_tracks, JSON5.parse(cached_tracks));
 
         // is it valid?
         if (cached_tracks_expire < current_time && !force) {
@@ -2302,6 +2490,19 @@ export function oracle_debug() {
                                 <a
                                     class="see-more"
                                     href="https://musicbrainz.org/recording/${val}"
+                                    target="_blank"
+                                    >view</a
+                                >
+                            `
+                        );
+                    } else if (item == 'artist_id') {
+                        render(
+                            va,
+                            html`
+                                <p>${val}</p>
+                                <a
+                                    class="see-more"
+                                    href="https://musicbrainz.org/artist/${val}"
                                     target="_blank"
                                     >view</a
                                 >

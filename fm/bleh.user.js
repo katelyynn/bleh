@@ -1535,11 +1535,11 @@
             return final;
           }
         };
-        var JSON53 = {
+        var JSON54 = {
           parse: parse6,
           stringify
         };
-        var lib = JSON53;
+        var lib = JSON54;
         var es5 = lib;
         return es5;
       });
@@ -33687,15 +33687,15 @@
   };
 
   // src/components/settings/sku.js
-  function ff(flag) {
-    log(`parsing ${flag}`, "flag", "log", {
-      setting: settings.feature_flags[flag],
-      sku: version.feature_flags[flag]
+  function ff(flag2) {
+    log(`parsing ${flag2}`, "flag", "log", {
+      setting: settings.feature_flags[flag2],
+      sku: version.feature_flags[flag2]
     });
-    if (settings.feature_flags[flag] != null)
-      return settings.feature_flags[flag];
-    if (version.feature_flags[flag] != null)
-      return version.feature_flags[flag].default;
+    if (settings.feature_flags[flag2] != null)
+      return settings.feature_flags[flag2];
+    if (version.feature_flags[flag2] != null)
+      return version.feature_flags[flag2].default;
   }
 
   // src/components/sponsor.ts
@@ -62249,6 +62249,35 @@
   }
 
   // src/components/music/oracle.ts
+  var import_json53 = __toESM(require_dist2(), 1);
+
+  // src/components/shared/flag.ts
+  function flag(code) {
+    const url = `https://purecatamphetamine.github.io/country-flag-icons/3x2/${code}.svg`;
+    const elem = html.node`
+        <div class="country-flag" style="background-image: url(${url})">
+            ${code} (flag)
+        </div>
+    `;
+    tippy_esm_default(elem, {
+      content: code
+    });
+    return elem;
+  }
+
+  // src/components/shared/age.ts
+  function age(date, compare2) {
+    const today = compare2 ? new Date(compare2) : /* @__PURE__ */ new Date();
+    const birth = new Date(date);
+    let age2 = today.getFullYear() - birth.getFullYear();
+    const had_birthday = today.getMonth() > birth.getMonth() || today.getMonth() == birth.getMonth() && today.getDate() >= birth.getDate();
+    if (!had_birthday) {
+      age2--;
+    }
+    return age2;
+  }
+
+  // src/components/music/oracle.ts
   function oracle_process() {
     log("beginning", "oracle");
     page.state.oracle_debug = {};
@@ -62267,7 +62296,7 @@
     }
     if (ff("oracle_album_reordering") && page.type == "track") {
     }
-    if (!ff("oracle_connect") || page.type == "artist") return;
+    if (!ff("oracle_connect")) return;
     let tries = 3;
     const item = page.name.toLowerCase();
     const artist = page.sister.toLowerCase();
@@ -62511,6 +62540,21 @@
             </div>
         `;
       info_panel.appendChild(label_panel);
+    } else if (page.type == "artist" && page.subpage == "overview") {
+      if (metadata) metadata.remove();
+      metadata = html.node`
+            <div class="metadata-column">
+                <div class="metadata-group">
+                    <dt class="catalogue-metadata-heading">${tl2(trans.country)}</dt>
+                    <dd class="catalogue-metadata-description placeholder-text">Mars</dd>
+                </div>
+                <div class="metadata-group">
+                    <dt class="catalogue-metadata-heading">${tl2(trans.born)}</dt>
+                    <dd class="catalogue-metadata-description placeholder-text">0 Dec 0000</dd>
+                </div>
+            </div>
+        `;
+      meta_and_wiki?.appendChild(metadata);
     }
     function track_placeholder() {
       return html.node`
@@ -62549,6 +62593,25 @@
     }
     oracle_obtain_artist();
     function oracle_obtain_artist() {
+      if (page.type == "artist") {
+        if (oracle_artists.hasOwnProperty(artist)) {
+          const local = oracle_artists[artist];
+          log("skipping artist search for id (oracle database)", "oracle", "info", { local });
+          oracle_artist_fetch({
+            id: local.id
+          });
+          return;
+        } else if (oracle_cache[artist]?.id) {
+          const local = oracle_cache[artist];
+          log("skipping artist search for id (local cache)", "oracle", "info", { local });
+          oracle_artist_fetch({
+            id: local.id
+          });
+          return;
+        }
+        oracle_get_artist();
+        return;
+      }
       if (oracle_artists.hasOwnProperty(artist)) {
         artist_data = {
           type: "id",
@@ -62567,7 +62630,20 @@
     function oracle_get_artist() {
       if (tries < 1) return;
       tries--;
-      const url = `https://musicbrainz.org/ws/2/artist?query=${sanitise(artist, " ")}`;
+      let top_track = page.state.top_track;
+      let url;
+      let type = "artist";
+      if (top_track) {
+        url = `https://musicbrainz.org/ws/2/recording?query=${encodeURIComponent(`recording:"${clean_title(top_track)}" AND artist:"${page.name}" AND status:Official`)}`;
+        type = "recording";
+      } else {
+        url = `https://musicbrainz.org/ws/2/artist?query=${encodeURIComponent(page.name)}`;
+      }
+      if (page.state.oracle_temp.page && (page.name == page.state.oracle_temp.page.name && page.type == page.state.oracle_temp.page.type)) {
+        log("using temporary storage", "oracle", "info", { temp: page.state.oracle_temp });
+        oracle_artist(page.state.oracle_temp);
+        return;
+      }
       log(
         `using url ${encodeURI(url)} with ${tries} tries available`,
         "oracle"
@@ -62594,12 +62670,30 @@
             return;
           }
           log("received artist data", "oracle", "info", { data: data2 });
-          artist_data = data2.artists[0];
-          cache2[artist] = artist_data;
-          if (Object.keys(cache2).length > 100) delete cache2[0];
-          set_storage("oracle_artist_ids", JSON.stringify(cache2));
-          tries = 3;
-          oracle_connect();
+          if (type == "artist") {
+            const artists = data2.artists;
+            if (!artists[0]) {
+              log("no data to use, ending", "oracle");
+              oracle_error("No useable data was found");
+              return;
+            }
+            setTimeout(() => {
+              oracle_artist_fetch(artists[0]);
+            }, mb_delay);
+          } else if (type == "recording") {
+            const recordings = data2.recordings;
+            if (!recordings[0]) {
+              log("no data to use, ending", "oracle");
+              oracle_error("No useable data was found");
+              return;
+            }
+            const id = recordings[0]["artist-credit"][0].artist.id;
+            setTimeout(() => {
+              oracle_artist_fetch({
+                id
+              });
+            }, mb_delay);
+          }
         },
         onerror: function(err) {
           console.error("oracle", err);
@@ -62792,7 +62886,7 @@
           console.error("oracle", err);
           setTimeout(() => {
             oracle_track_fetch(data2);
-          }, 1e3);
+          }, mb_delay);
         }
       });
     }
@@ -62996,7 +63090,7 @@
           console.error("oracle", err);
           setTimeout(() => {
             oracle_album_fetch(data2);
-          }, 1e3);
+          }, mb_delay);
         }
       });
     }
@@ -63755,6 +63849,93 @@
             </section>
         `);
     }
+    function oracle_artist_fetch(data2) {
+      if (tries < 1) return;
+      tries--;
+      const url = `https://musicbrainz.org/ws/2/artist/${data2.id}?inc=artist-credits+url-rels+annotation+artist-rels+work-rels+release-groups`;
+      log(
+        `using url ${encodeURI(url)} with ${tries} tries available`,
+        "oracle"
+      );
+      page.state.oracle_debug.artist_id = data2.id;
+      GM_xmlhttpRequest({
+        method: "GET",
+        url,
+        headers: {
+          "User-Agent": `bleh/${version.build} <https://github.com/katelyynn/bleh>`,
+          Accept: "application/json"
+        },
+        onload: function(response) {
+          if (response.status < 200 || response.status >= 300) {
+            log("error fetching connect data", "oracle", "error", {
+              response
+            });
+            oracle_error(response);
+            return;
+          }
+          let data3;
+          try {
+            data3 = JSON.parse(response.responseText);
+          } catch (e4) {
+            log("failed to parse", "oracle", "error", { e: e4 });
+            oracle_error(e4);
+            return;
+          }
+          log("received connect artist data", "oracle", "info", { data: data3 });
+          page.state.oracle = data3;
+          page.state.oracle_temp = {
+            page: {
+              name: page.name,
+              sister: null,
+              type: page.type
+            },
+            ...data3
+          };
+          log("saved temp", "oracle", "info", { temp: page.state.oracle_temp });
+          oracle_artist(data3);
+        },
+        onerror: function(err) {
+          console.error("oracle", err);
+          setTimeout(() => {
+            oracle_artist_fetch(data2);
+          }, mb_delay);
+        }
+      });
+    }
+    function oracle_artist(data2) {
+      const area = data2.area;
+      const area_code = data2.country;
+      const area_name = area.name;
+      const lifespan = data2["life-span"];
+      const begin = data2["begin-area"];
+      render(metadata, html`
+            <div class="metadata-column">
+                <div class="metadata-group">
+                    <dt class="catalogue-metadata-heading">${tl2(trans.country)}</dt>
+                    <dd class="catalogue-metadata-description has-flag">
+                        ${flag(area_code)}
+                        ${area_name}
+                    </dd>
+                </div>
+                <div class="metadata-group">
+                    <dt class="catalogue-metadata-heading">${tl2(trans.born)}</dt>
+                    <dd class="catalogue-metadata-description has-age">
+                        ${DateTime.fromISO(lifespan.begin).toLocaleString(DateTime.DATE_MED)}
+                        <span class="artist-age">(${age(lifespan.begin)})</span>
+                    </dd>
+                </div>
+                ${lifespan.ended ? html.node`
+                <div class="metadata-group">
+                    <dt class="catalogue-metadata-heading">${tl2(trans.died)}</dt>
+                    <dd class="catalogue-metadata-description has-age">
+                        ${DateTime.fromISO(lifespan.end).toLocaleString(DateTime.DATE_MED)}
+                        <span class="artist-age">(${age(lifespan.begin, lifespan.end)})</span>
+                    </dd>
+                </div>
+                ` : ""}
+            </div>
+        `);
+    }
   }
   function oracle_data(force = false) {
     if (!(ff("oracle") && settings.oracle_beta)) return;
@@ -63775,7 +63956,7 @@
       log("artists list is not cached, fetching", "oracle");
       oracle_request("artists", true);
     } else {
-      Object.assign(oracle_artists, JSON.parse(cached_artists));
+      Object.assign(oracle_artists, import_json53.default.parse(cached_artists));
       if (cached_artists_expire < current_time && !force) {
         oracle_request();
       } else if (force) {
@@ -63786,7 +63967,7 @@
       log("albums list is not cached, fetching", "oracle");
       oracle_request("albums", true);
     } else {
-      Object.assign(oracle_albums, JSON.parse(cached_albums));
+      Object.assign(oracle_albums, import_json53.default.parse(cached_albums));
       if (cached_albums_expire < current_time && !force) {
         oracle_request();
       } else if (force) {
@@ -63797,7 +63978,7 @@
       log("tracks list is not cached, fetching", "oracle");
       oracle_request("tracks", true);
     } else {
-      Object.assign(oracle_tracks, JSON.parse(cached_tracks));
+      Object.assign(oracle_tracks, import_json53.default.parse(cached_tracks));
       if (cached_tracks_expire < current_time && !force) {
         oracle_request();
       } else if (force) {
@@ -63998,6 +64179,19 @@
                                 <a
                                     class="see-more"
                                     href="https://musicbrainz.org/recording/${val}"
+                                    target="_blank"
+                                    >view</a
+                                >
+                            `
+          );
+        } else if (item == "artist_id") {
+          render(
+            va,
+            html`
+                                <p>${val}</p>
+                                <a
+                                    class="see-more"
+                                    href="https://musicbrainz.org/artist/${val}"
                                     target="_blank"
                                     >view</a
                                 >
@@ -67250,8 +67444,8 @@
       {
         type: "lang",
         regex: /<t:(\d{9,})(?::([FfDdTtR]))?>/g,
-        replace: (_, time2, flag) => {
-          return `<t data-flag="${flag || "F"}">${time2}</t>`;
+        replace: (_, time2, flag2) => {
+          return `<t data-flag="${flag2 || "F"}">${time2}</t>`;
         }
       }
     ];
@@ -67501,28 +67695,28 @@
       }
       body.querySelectorAll("t").forEach((timestamp2) => {
         const time2 = timestamp2.textContent;
-        const flag = timestamp2.getAttribute("data-flag");
+        const flag2 = timestamp2.getAttribute("data-flag");
         const date = DateTime.fromSeconds(parseInt(time2));
         let text5 = "";
-        if (flag == "F") {
+        if (flag2 == "F") {
           text5 = tl2(trans.date_at_time, {
             d: date.toLocaleString(DateTime.DATE_HUGE),
             t: date.toLocaleString(DateTime.TIME_SIMPLE)
           });
-        } else if (flag == "f") {
+        } else if (flag2 == "f") {
           text5 = tl2(trans.date_at_time, {
             d: date.toLocaleString(DateTime.DATE_FULL),
             t: date.toLocaleString(DateTime.TIME_SIMPLE)
           });
-        } else if (flag == "D") {
+        } else if (flag2 == "D") {
           text5 = date.toLocaleString(DateTime.DATE_FULL);
-        } else if (flag == "d") {
+        } else if (flag2 == "d") {
           text5 = date.toLocaleString(DateTime.DATE_SHORT);
-        } else if (flag == "t") {
+        } else if (flag2 == "t") {
           text5 = date.toLocaleString(DateTime.TIME_SIMPLE);
-        } else if (flag == "T") {
+        } else if (flag2 == "T") {
           text5 = date.toLocaleString(DateTime.TIME_WITH_SECONDS);
-        } else if (flag == "R") {
+        } else if (flag2 == "R") {
           text5 = date.toRelative();
         }
         const new_timestamp = html.node`
@@ -72471,8 +72665,8 @@
                     ${tl2(trans.beware_notice)}
                 </div>
                 <div class="setting-group">
-                    ${flags.map(([flag, details]) => {
-        let value = ff(flag);
+                    ${flags.map(([flag2, details]) => {
+        let value = ff(flag2);
         let checkbox;
         let state;
         return html.node`
@@ -72480,9 +72674,9 @@
           let current = checkbox.checked;
           checkbox.checked = !current;
           state.setAttribute("aria-checked", !current);
-          settings.feature_flags[flag] = !current;
+          settings.feature_flags[flag2] = !current;
           document.body.setAttribute(
-            `data-ff--${flag}`,
+            `data-ff--${flag2}`,
             (!current).toString()
           );
           compile_settings();
@@ -72491,7 +72685,7 @@
                                     <h5>${details.name}</h5>
                                     ${details.notice ? html.node`<p>${{ html: details.notice }}</p>` : ""}
                                     <div class="info-row">
-                                        <div class="new-badge flag-${details.default}">${details.default}</div><p class="date">${details.date}</p><p>${flag}</p>
+                                        <div class="new-badge flag-${details.default}">${details.default}</div><p class="date">${details.date}</p><p>${flag2}</p>
                                     </div>
                                 </div>
                                 <div class="toggle-wrap">
@@ -72641,27 +72835,27 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     }
   }
   function load_skus() {
-    for (let flag in version.feature_flags) {
-      let current_state = version.feature_flags[flag].default;
-      if (settings.feature_flags[flag] != null)
-        current_state = settings.feature_flags[flag];
+    for (let flag2 in version.feature_flags) {
+      let current_state = version.feature_flags[flag2].default;
+      if (settings.feature_flags[flag2] != null)
+        current_state = settings.feature_flags[flag2];
       document.body.setAttribute(
-        `data-ff--${flag}`,
+        `data-ff--${flag2}`,
         current_state
       );
     }
   }
-  unsafeWindow._update_flag_toggle = function(flag, container) {
-    update_flag_toggle(flag, container);
+  unsafeWindow._update_flag_toggle = function(flag2, container) {
+    update_flag_toggle(flag2, container);
   };
-  function update_flag_toggle(flag, container) {
+  function update_flag_toggle(flag2, container) {
     let button2 = container.querySelector(".toggle");
     if (!button2) return;
-    let current_state = ff(flag);
+    let current_state = ff(flag2);
     button2.setAttribute("aria-checked", !current_state);
-    settings.feature_flags[flag] = !current_state;
+    settings.feature_flags[flag2] = !current_state;
     document.body.setAttribute(
-      `data-ff--${flag}`,
+      `data-ff--${flag2}`,
       `${!current_state}`
     );
     compile_settings();
@@ -74444,7 +74638,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         let featured_panel = html.node`
                 <section class="featured-items-panel">
                     ${Array.from(featured_items.querySelectorAll("li")).map(
-          (item) => {
+          (item, index3) => {
             item.classList.remove(
               "artist-header-featured-items-item-wrap--video-thumbnail"
             );
@@ -74459,6 +74653,9 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
               ".artist-header-featured-items-item-name"
             ).textContent.trim();
             let name;
+            if (index3 > 0) {
+              page.state.top_track = original_name;
+            }
             if (settings.format_guest_features) {
               const formatted = name_includes(
                 original_name,
@@ -74574,6 +74771,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       else if (page.subpage == "albums") bleh_artist_albums();
       else if (page.subpage == "similar") bleh_artist_similar();
     }
+    if (ff("oracle") && settings.oracle_beta) oracle_process();
     log("status is", "page", "info", page);
     update_page();
   }
@@ -90549,6 +90747,12 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     },
     oracle_no_credits: {
       en: 'nothing here... (\u0E51/////\u0E51 " )'
+    },
+    born: {
+      en: "Born"
+    },
+    died: {
+      en: "Died"
     }
   };
   var translation_fallback = "NO_TRANSLATION_FOUND";
@@ -92122,7 +92326,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-02-25"
       }
     },
-    built_on: "2026-04-12T01:20:27.199Z"
+    built_on: "2026-04-12T03:18:00.842Z"
   };
 
   // node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
