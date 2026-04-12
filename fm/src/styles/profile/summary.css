@@ -58,6 +58,14 @@
     &[aria-describedby] {
         text-decoration: underline dotted oklch(var(--c3) / 60%);
     }
+
+    transition-property: opacity;
+    transition-duration: var(--trans);
+    transition-timing-function: var(--trans-function);
+
+    &.summary-block-hidden {
+        opacity: 0;
+    }
 }
 
 .summary-icon {

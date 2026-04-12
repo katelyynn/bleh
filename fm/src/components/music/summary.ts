@@ -8,6 +8,8 @@ import { Chart } from 'chart.js';
 import { log } from '@/build/log';
 import { DateTime } from 'luxon';
 import { sanitise } from '@/build/tools';
+import { CountUp } from 'countup.js';
+import { Odometer } from 'odometer_countup';
 
 export interface music_stat {
     text?: string,
@@ -89,14 +91,16 @@ function summary_block(type: string, stat: music_stat) {
         icon_name = icons.listeners;
     }
 
+    let value;
+
     const elem = html.node`
-        <div class="summary-block">
+        <div class="summary-block summary-block-hidden">
             <div class="summary-icon">
                 ${icon({ name: icon_name, identifier: 'summary' })}
             </div>
             <div class="summary-info">
                 <h3 class="summary-label">${text}</h3>
-                <p class="summary-value">${stat.abbr || stat.value?.toLocaleString(lang)}</p>
+                <p class="summary-value" ref=${el => value = el}>${stat.abbr || stat.value?.toLocaleString(lang)}</p>
             </div>
         </div>
     `;
@@ -105,6 +109,18 @@ function summary_block(type: string, stat: music_stat) {
         tippy(elem, {
             content: stat.value.toLocaleString(lang)
         });
+    }
+
+    if (typeof stat.value == 'number') {
+        const count = new CountUp(value!, stat.value);
+
+        setTimeout(() => {
+            count.start();
+
+            setTimeout(() => {
+                elem.classList.remove('summary-block-hidden');
+            }, 10);
+        }, 0);
     }
 
     return elem;

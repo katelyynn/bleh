@@ -406,14 +406,14 @@
         var _stringAt = function(TO_STRING) {
           return function(that, pos2) {
             var s2 = String(_defined(that));
-            var i = _toInteger(pos2);
+            var i2 = _toInteger(pos2);
             var l2 = s2.length;
             var a, b;
-            if (i < 0 || i >= l2) {
+            if (i2 < 0 || i2 >= l2) {
               return TO_STRING ? "" : void 0;
             }
-            a = s2.charCodeAt(i);
-            return a < 55296 || a > 56319 || i + 1 === l2 || (b = s2.charCodeAt(i + 1)) < 56320 || b > 57343 ? TO_STRING ? s2.charAt(i) : a : TO_STRING ? s2.slice(i, i + 2) : (a - 55296 << 10) + (b - 56320) + 65536;
+            a = s2.charCodeAt(i2);
+            return a < 55296 || a > 56319 || i2 + 1 === l2 || (b = s2.charCodeAt(i2 + 1)) < 56320 || b > 57343 ? TO_STRING ? s2.charAt(i2) : a : TO_STRING ? s2.slice(i2, i2 + 2) : (a - 55296 << 10) + (b - 56320) + 65536;
           };
         };
         var $at = _stringAt(false);
@@ -438,10 +438,10 @@
             var arguments$1 = arguments;
             var res = [];
             var aLen = arguments.length;
-            var i = 0;
+            var i2 = 0;
             var code;
-            while (aLen > i) {
-              code = +arguments$1[i++];
+            while (aLen > i2) {
+              code = +arguments$1[i2++];
               if (_toAbsoluteIndex(code, 1114111) !== code) {
                 throw RangeError(code + " is not a valid code point");
               }
@@ -510,8 +510,8 @@
           var value = holder[name];
           if (value != null && typeof value === "object") {
             if (Array.isArray(value)) {
-              for (var i = 0; i < value.length; i++) {
-                var key2 = String(i);
+              for (var i2 = 0; i2 < value.length; i2++) {
+                var key2 = String(i2);
                 var replacement = internalize(value, key2, reviver);
                 if (replacement === void 0) {
                   delete value[key2];
@@ -1045,8 +1045,8 @@
           };
         }
         function literal(s2) {
-          for (var i = 0, list = s2; i < list.length; i += 1) {
-            var c3 = list[i];
+          for (var i2 = 0, list = s2; i2 < list.length; i2 += 1) {
+            var c3 = list[i2];
             var p4 = peek();
             if (p4 !== c3) {
               throw invalidChar(read2());
@@ -1335,8 +1335,8 @@
             replacerFunc = replacer;
           } else if (Array.isArray(replacer)) {
             propertyList = [];
-            for (var i = 0, list = replacer; i < list.length; i += 1) {
-              var v = list[i];
+            for (var i2 = 0, list = replacer; i2 < list.length; i2 += 1) {
+              var v = list[i2];
               var item = void 0;
               if (typeof v === "string") {
                 item = v;
@@ -1420,8 +1420,8 @@
               "\u2029": "\\u2029"
             };
             var product = "";
-            for (var i2 = 0; i2 < value2.length; i2++) {
-              var c3 = value2[i2];
+            for (var i3 = 0; i3 < value2.length; i3++) {
+              var c3 = value2[i3];
               switch (c3) {
                 case "'":
                 case '"':
@@ -1429,7 +1429,7 @@
                   product += c3;
                   continue;
                 case "\0":
-                  if (util.isDigit(value2[i2 + 1])) {
+                  if (util.isDigit(value2[i3 + 1])) {
                     product += "\\x00";
                     continue;
                   }
@@ -1460,8 +1460,8 @@
             indent = indent + gap;
             var keys2 = propertyList || Object.keys(value2);
             var partial = [];
-            for (var i2 = 0, list2 = keys2; i2 < list2.length; i2 += 1) {
-              var key2 = list2[i2];
+            for (var i3 = 0, list2 = keys2; i3 < list2.length; i3 += 1) {
+              var key2 = list2[i3];
               var propertyString = serializeProperty(key2, value2);
               if (propertyString !== void 0) {
                 var member = serializeKey(key2) + ":";
@@ -1498,8 +1498,8 @@
             if (!util.isIdStartChar(firstChar)) {
               return quoteString(key2, true);
             }
-            for (var i2 = firstChar.length; i2 < key2.length; i2++) {
-              if (!util.isIdContinueChar(String.fromCodePoint(key2.codePointAt(i2)))) {
+            for (var i3 = firstChar.length; i3 < key2.length; i3++) {
+              if (!util.isIdContinueChar(String.fromCodePoint(key2.codePointAt(i3)))) {
                 return quoteString(key2, true);
               }
             }
@@ -1513,8 +1513,8 @@
             var stepback = indent;
             indent = indent + gap;
             var partial = [];
-            for (var i2 = 0; i2 < value2.length; i2++) {
-              var propertyString = serializeProperty(String(i2), value2);
+            for (var i3 = 0; i3 < value2.length; i3++) {
+              var propertyString = serializeProperty(String(i3), value2);
               partial.push(propertyString !== void 0 ? propertyString : "null");
             }
             var final;
@@ -1570,9 +1570,9 @@
         return d;
       }, ColorThief5.prototype.getPalette = function(a, b, c2) {
         "undefined" == typeof b && (b = 10), ("undefined" == typeof c2 || 1 > c2) && (c2 = 10);
-        for (var d, e4, f3, g, h, i = new CanvasImage(a), j = i.getImageData(), k4 = j.data, l2 = i.getPixelCount(), m = [], n2 = 0; l2 > n2; n2 += c2) d = 4 * n2, e4 = k4[d + 0], f3 = k4[d + 1], g = k4[d + 2], h = k4[d + 3], h >= 125 && (e4 > 250 && f3 > 250 && g > 250 || m.push([e4, f3, g]));
+        for (var d, e4, f3, g, h, i2 = new CanvasImage(a), j = i2.getImageData(), k4 = j.data, l2 = i2.getPixelCount(), m = [], n2 = 0; l2 > n2; n2 += c2) d = 4 * n2, e4 = k4[d + 0], f3 = k4[d + 1], g = k4[d + 2], h = k4[d + 3], h >= 125 && (e4 > 250 && f3 > 250 && g > 250 || m.push([e4, f3, g]));
         var o = MMCQ.quantize(m, b), p4 = o ? o.palette() : null;
-        return i.removeCanvas(), p4;
+        return i2.removeCanvas(), p4;
       }, !pv) var pv = { map: function(a, b) {
         var c2 = {};
         return b ? a.map(function(a2, d) {
@@ -1592,7 +1592,7 @@
       } };
       var MMCQ = function() {
         function a(a2, b2, c3) {
-          return (a2 << 2 * i) + (b2 << i) + c3;
+          return (a2 << 2 * i2) + (b2 << i2) + c3;
         }
         function b(a2) {
           function b2() {
@@ -1623,22 +1623,22 @@
           });
         }
         function e4(b2) {
-          var c3, d2, e5, f4, g2 = 1 << 3 * i, h3 = new Array(g2);
+          var c3, d2, e5, f4, g2 = 1 << 3 * i2, h3 = new Array(g2);
           return b2.forEach(function(b3) {
             d2 = b3[0] >> j, e5 = b3[1] >> j, f4 = b3[2] >> j, c3 = a(d2, e5, f4), h3[c3] = (h3[c3] || 0) + 1;
           }), h3;
         }
         function f3(a2, b2) {
-          var d2, e5, f4, g2 = 1e6, h3 = 0, i2 = 1e6, k5 = 0, l3 = 1e6, m = 0;
+          var d2, e5, f4, g2 = 1e6, h3 = 0, i3 = 1e6, k5 = 0, l3 = 1e6, m = 0;
           return a2.forEach(function(a3) {
-            d2 = a3[0] >> j, e5 = a3[1] >> j, f4 = a3[2] >> j, g2 > d2 ? g2 = d2 : d2 > h3 && (h3 = d2), i2 > e5 ? i2 = e5 : e5 > k5 && (k5 = e5), l3 > f4 ? l3 = f4 : f4 > m && (m = f4);
-          }), new c2(g2, h3, i2, k5, l3, m, b2);
+            d2 = a3[0] >> j, e5 = a3[1] >> j, f4 = a3[2] >> j, g2 > d2 ? g2 = d2 : d2 > h3 && (h3 = d2), i3 > e5 ? i3 = e5 : e5 > k5 && (k5 = e5), l3 > f4 ? l3 = f4 : f4 > m && (m = f4);
+          }), new c2(g2, h3, i3, k5, l3, m, b2);
         }
         function g(b2, c3) {
           function d2(a2) {
             var b3, d3, e6, f5, g3, h4 = a2 + "1", j3 = a2 + "2", k6 = 0;
-            for (i2 = c3[h4]; i2 <= c3[j3]; i2++) if (o[i2] > n2 / 2) {
-              for (e6 = c3.copy(), f5 = c3.copy(), b3 = i2 - c3[h4], d3 = c3[j3] - i2, g3 = d3 >= b3 ? Math.min(c3[j3] - 1, ~~(i2 + d3 / 2)) : Math.max(c3[h4], ~~(i2 - 1 - b3 / 2)); !o[g3]; ) g3++;
+            for (i3 = c3[h4]; i3 <= c3[j3]; i3++) if (o[i3] > n2 / 2) {
+              for (e6 = c3.copy(), f5 = c3.copy(), b3 = i3 - c3[h4], d3 = c3[j3] - i3, g3 = d3 >= b3 ? Math.min(c3[j3] - 1, ~~(i3 + d3 / 2)) : Math.max(c3[h4], ~~(i3 - 1 - b3 / 2)); !o[g3]; ) g3++;
               for (k6 = p4[g3]; !k6 && o[g3 - 1]; ) k6 = p4[--g3];
               return e6[j3] = g3, f5[h4] = e6[j3] + 1, [e6, f5];
             }
@@ -1646,18 +1646,18 @@
           if (c3.count()) {
             var e5 = c3.r2 - c3.r1 + 1, f4 = c3.g2 - c3.g1 + 1, g2 = c3.b2 - c3.b1 + 1, h3 = pv.max([e5, f4, g2]);
             if (1 == c3.count()) return [c3.copy()];
-            var i2, j2, k5, l3, m, n2 = 0, o = [], p4 = [];
-            if (h3 == e5) for (i2 = c3.r1; i2 <= c3.r2; i2++) {
-              for (l3 = 0, j2 = c3.g1; j2 <= c3.g2; j2++) for (k5 = c3.b1; k5 <= c3.b2; k5++) m = a(i2, j2, k5), l3 += b2[m] || 0;
-              n2 += l3, o[i2] = n2;
+            var i3, j2, k5, l3, m, n2 = 0, o = [], p4 = [];
+            if (h3 == e5) for (i3 = c3.r1; i3 <= c3.r2; i3++) {
+              for (l3 = 0, j2 = c3.g1; j2 <= c3.g2; j2++) for (k5 = c3.b1; k5 <= c3.b2; k5++) m = a(i3, j2, k5), l3 += b2[m] || 0;
+              n2 += l3, o[i3] = n2;
             }
-            else if (h3 == f4) for (i2 = c3.g1; i2 <= c3.g2; i2++) {
-              for (l3 = 0, j2 = c3.r1; j2 <= c3.r2; j2++) for (k5 = c3.b1; k5 <= c3.b2; k5++) m = a(j2, i2, k5), l3 += b2[m] || 0;
-              n2 += l3, o[i2] = n2;
+            else if (h3 == f4) for (i3 = c3.g1; i3 <= c3.g2; i3++) {
+              for (l3 = 0, j2 = c3.r1; j2 <= c3.r2; j2++) for (k5 = c3.b1; k5 <= c3.b2; k5++) m = a(j2, i3, k5), l3 += b2[m] || 0;
+              n2 += l3, o[i3] = n2;
             }
-            else for (i2 = c3.b1; i2 <= c3.b2; i2++) {
-              for (l3 = 0, j2 = c3.r1; j2 <= c3.r2; j2++) for (k5 = c3.g1; k5 <= c3.g2; k5++) m = a(j2, k5, i2), l3 += b2[m] || 0;
-              n2 += l3, o[i2] = n2;
+            else for (i3 = c3.b1; i3 <= c3.b2; i3++) {
+              for (l3 = 0, j2 = c3.r1; j2 <= c3.r2; j2++) for (k5 = c3.g1; k5 <= c3.g2; k5++) m = a(j2, k5, i3), l3 += b2[m] || 0;
+              n2 += l3, o[i3] = n2;
             }
             return o.forEach(function(a2, b3) {
               p4[b3] = n2 - a2;
@@ -1667,18 +1667,18 @@
         function h(a2, c3) {
           function h3(a3, b2) {
             for (var c4, d2 = 1, e5 = 0; k4 > e5; ) if (c4 = a3.pop(), c4.count()) {
-              var f4 = g(i2, c4), h4 = f4[0], j3 = f4[1];
+              var f4 = g(i3, c4), h4 = f4[0], j3 = f4[1];
               if (!h4) return;
               if (a3.push(h4), j3 && (a3.push(j3), d2++), d2 >= b2) return;
               if (e5++ > k4) return;
             } else a3.push(c4), e5++;
           }
           if (!a2.length || 2 > c3 || c3 > 256) return false;
-          var i2 = e4(a2), j2 = 0;
-          i2.forEach(function() {
+          var i3 = e4(a2), j2 = 0;
+          i3.forEach(function() {
             j2++;
           });
-          var m = f3(a2, i2), n2 = new b(function(a3, b2) {
+          var m = f3(a2, i3), n2 = new b(function(a3, b2) {
             return pv.naturalOrder(a3.count(), b2.count());
           });
           n2.push(m), h3(n2, l2 * c3);
@@ -1689,7 +1689,7 @@
           for (var p4 = new d(); o.size(); ) p4.push(o.pop());
           return p4;
         }
-        var i = 5, j = 8 - i, k4 = 1e3, l2 = 0.75;
+        var i2 = 5, j = 8 - i2, k4 = 1e3, l2 = 0.75;
         return c2.prototype = { volume: function(a2) {
           var b2 = this;
           return (!b2._volume || a2) && (b2._volume = (b2.r2 - b2.r1 + 1) * (b2.g2 - b2.g1 + 1) * (b2.b2 - b2.b1 + 1)), b2._volume;
@@ -1707,7 +1707,7 @@
         }, avg: function(b2) {
           var c3 = this, d2 = c3.histo;
           if (!c3._avg || b2) {
-            var e5, f4, g2, h3, j2, k5 = 0, l3 = 1 << 8 - i, m = 0, n2 = 0, o = 0;
+            var e5, f4, g2, h3, j2, k5 = 0, l3 = 1 << 8 - i2, m = 0, n2 = 0, o = 0;
             for (f4 = c3.r1; f4 <= c3.r2; f4++) for (g2 = c3.g1; g2 <= c3.g2; g2++) for (h3 = c3.b1; h3 <= c3.b2; h3++) j2 = a(f4, g2, h3), e5 = d2[j2] || 0, k5 += e5, m += e5 * (f4 + 0.5) * l3, n2 += e5 * (g2 + 0.5) * l3, o += e5 * (h3 + 0.5) * l3;
             k5 ? c3._avg = [~~(m / k5), ~~(n2 / k5), ~~(o / k5)] : c3._avg = [~~(l3 * (c3.r1 + c3.r2 + 1) / 2), ~~(l3 * (c3.g1 + c3.g2 + 1) / 2), ~~(l3 * (c3.b1 + c3.b2 + 1) / 2)];
           }
@@ -1769,12 +1769,12 @@
           d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
         }
         var __assign = function() {
-          __assign = Object.assign || function __assign2(t) {
-            for (var s2, i2 = 1, n2 = arguments.length; i2 < n2; i2++) {
-              s2 = arguments[i2];
-              for (var p4 in s2) if (Object.prototype.hasOwnProperty.call(s2, p4)) t[p4] = s2[p4];
+          __assign = Object.assign || function __assign2(t2) {
+            for (var s2, i3 = 1, n2 = arguments.length; i3 < n2; i3++) {
+              s2 = arguments[i3];
+              for (var p4 in s2) if (Object.prototype.hasOwnProperty.call(s2, p4)) t2[p4] = s2[p4];
             }
-            return t;
+            return t2;
           };
           return __assign.apply(this, arguments);
         };
@@ -1807,9 +1807,9 @@
         }
         function __generator(thisArg, body) {
           var _ = { label: 0, sent: function() {
-            if (t[0] & 1) throw t[1];
-            return t[1];
-          }, trys: [], ops: [] }, f4, y, t, g;
+            if (t2[0] & 1) throw t2[1];
+            return t2[1];
+          }, trys: [], ops: [] }, f4, y, t2, g;
           return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() {
             return this;
           }), g;
@@ -1821,12 +1821,12 @@
           function step(op) {
             if (f4) throw new TypeError("Generator is already executing.");
             while (g && (g = 0, op[0] && (_ = 0)), _) try {
-              if (f4 = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-              if (y = 0, t) op = [op[0] & 2, t.value];
+              if (f4 = 1, y && (t2 = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t2 = y["return"]) && t2.call(y), 0) : y.next) && !(t2 = t2.call(y, op[1])).done) return t2;
+              if (y = 0, t2) op = [op[0] & 2, t2.value];
               switch (op[0]) {
                 case 0:
                 case 1:
-                  t = op;
+                  t2 = op;
                   break;
                 case 4:
                   _.label++;
@@ -1841,25 +1841,25 @@
                   _.trys.pop();
                   continue;
                 default:
-                  if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
+                  if (!(t2 = _.trys, t2 = t2.length > 0 && t2[t2.length - 1]) && (op[0] === 6 || op[0] === 2)) {
                     _ = 0;
                     continue;
                   }
-                  if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
+                  if (op[0] === 3 && (!t2 || op[1] > t2[0] && op[1] < t2[3])) {
                     _.label = op[1];
                     break;
                   }
-                  if (op[0] === 6 && _.label < t[1]) {
-                    _.label = t[1];
-                    t = op;
+                  if (op[0] === 6 && _.label < t2[1]) {
+                    _.label = t2[1];
+                    t2 = op;
                     break;
                   }
-                  if (t && _.label < t[2]) {
-                    _.label = t[2];
+                  if (t2 && _.label < t2[2]) {
+                    _.label = t2[2];
                     _.ops.push(op);
                     break;
                   }
-                  if (t[2]) _.ops.pop();
+                  if (t2[2]) _.ops.pop();
                   _.trys.pop();
                   continue;
               }
@@ -1868,17 +1868,17 @@
               op = [6, e5];
               y = 0;
             } finally {
-              f4 = t = 0;
+              f4 = t2 = 0;
             }
             if (op[0] & 5) throw op[1];
             return { value: op[0] ? op[1] : void 0, done: true };
           }
         }
         function __spreadArray(to2, from2, pack2) {
-          if (pack2 || arguments.length === 2) for (var i2 = 0, l2 = from2.length, ar; i2 < l2; i2++) {
-            if (ar || !(i2 in from2)) {
-              if (!ar) ar = Array.prototype.slice.call(from2, 0, i2);
-              ar[i2] = from2[i2];
+          if (pack2 || arguments.length === 2) for (var i3 = 0, l2 = from2.length, ar; i3 < l2; i3++) {
+            if (ar || !(i3 in from2)) {
+              if (!ar) ar = Array.prototype.slice.call(from2, 0, i3);
+              ar[i3] = from2[i3];
             }
           }
           return to2.concat(ar || Array.prototype.slice.call(from2));
@@ -1927,17 +1927,17 @@
         };
         var toCodePoints$1 = function(str) {
           var codePoints = [];
-          var i2 = 0;
+          var i3 = 0;
           var length = str.length;
-          while (i2 < length) {
-            var value = str.charCodeAt(i2++);
-            if (value >= 55296 && value <= 56319 && i2 < length) {
-              var extra = str.charCodeAt(i2++);
+          while (i3 < length) {
+            var value = str.charCodeAt(i3++);
+            if (value >= 55296 && value <= 56319 && i3 < length) {
+              var extra = str.charCodeAt(i3++);
               if ((extra & 64512) === 56320) {
                 codePoints.push(((value & 1023) << 10) + (extra & 1023) + 65536);
               } else {
                 codePoints.push(value);
-                i2--;
+                i3--;
               }
             } else {
               codePoints.push(value);
@@ -1986,7 +1986,7 @@
           lookup$1$1[chars$1$1.charCodeAt(i$1$1)] = i$1$1;
         }
         var decode$1 = function(base642) {
-          var bufferLength = base642.length * 0.75, len = base642.length, i2, p4 = 0, encoded1, encoded2, encoded3, encoded4;
+          var bufferLength = base642.length * 0.75, len = base642.length, i3, p4 = 0, encoded1, encoded2, encoded3, encoded4;
           if (base642[base642.length - 1] === "=") {
             bufferLength--;
             if (base642[base642.length - 2] === "=") {
@@ -1995,11 +1995,11 @@
           }
           var buffer = typeof ArrayBuffer !== "undefined" && typeof Uint8Array !== "undefined" && typeof Uint8Array.prototype.slice !== "undefined" ? new ArrayBuffer(bufferLength) : new Array(bufferLength);
           var bytes = Array.isArray(buffer) ? buffer : new Uint8Array(buffer);
-          for (i2 = 0; i2 < len; i2 += 4) {
-            encoded1 = lookup$1$1[base642.charCodeAt(i2)];
-            encoded2 = lookup$1$1[base642.charCodeAt(i2 + 1)];
-            encoded3 = lookup$1$1[base642.charCodeAt(i2 + 2)];
-            encoded4 = lookup$1$1[base642.charCodeAt(i2 + 3)];
+          for (i3 = 0; i3 < len; i3 += 4) {
+            encoded1 = lookup$1$1[base642.charCodeAt(i3)];
+            encoded2 = lookup$1$1[base642.charCodeAt(i3 + 1)];
+            encoded3 = lookup$1$1[base642.charCodeAt(i3 + 2)];
+            encoded4 = lookup$1$1[base642.charCodeAt(i3 + 3)];
             bytes[p4++] = encoded1 << 2 | encoded2 >> 4;
             bytes[p4++] = (encoded2 & 15) << 4 | encoded3 >> 2;
             bytes[p4++] = (encoded3 & 3) << 6 | encoded4 & 63;
@@ -2009,16 +2009,16 @@
         var polyUint16Array$1 = function(buffer) {
           var length = buffer.length;
           var bytes = [];
-          for (var i2 = 0; i2 < length; i2 += 2) {
-            bytes.push(buffer[i2 + 1] << 8 | buffer[i2]);
+          for (var i3 = 0; i3 < length; i3 += 2) {
+            bytes.push(buffer[i3 + 1] << 8 | buffer[i3]);
           }
           return bytes;
         };
         var polyUint32Array$1 = function(buffer) {
           var length = buffer.length;
           var bytes = [];
-          for (var i2 = 0; i2 < length; i2 += 4) {
-            bytes.push(buffer[i2 + 3] << 24 | buffer[i2 + 2] << 16 | buffer[i2 + 1] << 8 | buffer[i2]);
+          for (var i3 = 0; i3 < length; i3 += 4) {
+            bytes.push(buffer[i3 + 3] << 24 | buffer[i3 + 2] << 16 | buffer[i3 + 1] << 8 | buffer[i3]);
           }
           return bytes;
         };
@@ -2218,10 +2218,10 @@
         var isAdjacentWithSpaceIgnored = function(a2, b, currentIndex, classTypes) {
           var current = classTypes[currentIndex];
           if (Array.isArray(a2) ? a2.indexOf(current) !== -1 : a2 === current) {
-            var i2 = currentIndex;
-            while (i2 <= classTypes.length) {
-              i2++;
-              var next = classTypes[i2];
+            var i3 = currentIndex;
+            while (i3 <= classTypes.length) {
+              i3++;
+              var next = classTypes[i3];
               if (next === b) {
                 return true;
               }
@@ -2231,10 +2231,10 @@
             }
           }
           if (current === SP) {
-            var i2 = currentIndex;
-            while (i2 > 0) {
-              i2--;
-              var prev = classTypes[i2];
+            var i3 = currentIndex;
+            while (i3 > 0) {
+              i3--;
+              var prev = classTypes[i3];
               if (Array.isArray(a2) ? a2.indexOf(prev) !== -1 : a2 === prev) {
                 var n2 = currentIndex;
                 while (n2 <= classTypes.length) {
@@ -2256,11 +2256,11 @@
           return false;
         };
         var previousNonSpaceClassType = function(currentIndex, classTypes) {
-          var i2 = currentIndex;
-          while (i2 >= 0) {
-            var type = classTypes[i2];
+          var i3 = currentIndex;
+          while (i3 >= 0) {
+            var type = classTypes[i3];
             if (type === SP) {
-              i2--;
+              i3--;
             } else {
               return type;
             }
@@ -2405,11 +2405,11 @@
             return BREAK_NOT_ALLOWED$1;
           }
           if (current === RI$1 && next === RI$1) {
-            var i2 = indicies[currentIndex];
+            var i3 = indicies[currentIndex];
             var count = 1;
-            while (i2 > 0) {
-              i2--;
-              if (classTypes[i2] === RI$1) {
+            while (i3 > 0) {
+              i3--;
+              if (classTypes[i3] === RI$1) {
                 count++;
               } else {
                 break;
@@ -2434,8 +2434,8 @@
               return [NU, AL, SA].indexOf(type) !== -1 ? ID : type;
             });
           }
-          var forbiddenBreakpoints = options.wordBreak === "keep-all" ? isLetterNumber.map(function(letterNumber, i2) {
-            return letterNumber && codePoints[i2] >= 19968 && codePoints[i2] <= 40959;
+          var forbiddenBreakpoints = options.wordBreak === "keep-all" ? isLetterNumber.map(function(letterNumber, i3) {
+            return letterNumber && codePoints[i3] >= 19968 && codePoints[i3] <= 40959;
           }) : void 0;
           return [indicies, classTypes, forbiddenBreakpoints];
         };
@@ -3038,32 +3038,32 @@
             };
             Tokenizer2.prototype.consumeStringToken = function(endingCodePoint) {
               var value = "";
-              var i2 = 0;
+              var i3 = 0;
               do {
-                var codePoint = this._value[i2];
+                var codePoint = this._value[i3];
                 if (codePoint === EOF || codePoint === void 0 || codePoint === endingCodePoint) {
-                  value += this.consumeStringSlice(i2);
+                  value += this.consumeStringSlice(i3);
                   return { type: 0, value };
                 }
                 if (codePoint === LINE_FEED) {
-                  this._value.splice(0, i2);
+                  this._value.splice(0, i3);
                   return BAD_STRING_TOKEN;
                 }
                 if (codePoint === REVERSE_SOLIDUS) {
-                  var next = this._value[i2 + 1];
+                  var next = this._value[i3 + 1];
                   if (next !== EOF && next !== void 0) {
                     if (next === LINE_FEED) {
-                      value += this.consumeStringSlice(i2);
-                      i2 = -1;
+                      value += this.consumeStringSlice(i3);
+                      i3 = -1;
                       this._value.shift();
                     } else if (isValidEscape(codePoint, next)) {
-                      value += this.consumeStringSlice(i2);
+                      value += this.consumeStringSlice(i3);
                       value += fromCodePoint$1(this.consumeEscapedCodePoint());
-                      i2 = -1;
+                      i3 = -1;
                     }
                   }
                 }
-                i2++;
+                i3++;
               } while (true);
             };
             Tokenizer2.prototype.consumeNumber = function() {
@@ -3428,13 +3428,13 @@
         var pack = function(r2, g, b, a2) {
           return (r2 << 24 | g << 16 | b << 8 | Math.round(a2 * 255) << 0) >>> 0;
         };
-        var getTokenColorValue = function(token, i2) {
+        var getTokenColorValue = function(token, i3) {
           if (token.type === 17) {
             return token.number;
           }
           if (token.type === 16) {
-            var max2 = i2 === 3 ? 1 : 255;
-            return i2 === 3 ? token.number / 100 * max2 : Math.round(token.number / 100 * max2);
+            var max2 = i3 === 3 ? 1 : 255;
+            return i3 === 3 ? token.number / 100 * max2 : Math.round(token.number / 100 * max2);
           }
           return 0;
         };
@@ -4349,8 +4349,8 @@
           }
           var processStops = [];
           var previous = 0;
-          for (var i2 = 0; i2 < stops.length; i2++) {
-            var stop_1 = stops[i2].stop;
+          for (var i3 = 0; i3 < stops.length; i3++) {
+            var stop_1 = stops[i3].stop;
             if (stop_1 !== null) {
               var absoluteValue = getAbsoluteValue(stop_1, lineLength);
               if (absoluteValue > previous) {
@@ -4364,14 +4364,14 @@
             }
           }
           var gapBegin = null;
-          for (var i2 = 0; i2 < processStops.length; i2++) {
-            var stop_2 = processStops[i2];
+          for (var i3 = 0; i3 < processStops.length; i3++) {
+            var stop_2 = processStops[i3];
             if (stop_2 === null) {
               if (gapBegin === null) {
-                gapBegin = i2;
+                gapBegin = i3;
               }
             } else if (gapBegin !== null) {
-              var gapLength = i2 - gapBegin;
+              var gapLength = i3 - gapBegin;
               var beforeGap = processStops[gapBegin - 1];
               var gapValue = (stop_2 - beforeGap) / (gapLength + 1);
               for (var g = 1; g <= gapLength; g++) {
@@ -4380,9 +4380,9 @@
               gapBegin = null;
             }
           }
-          return stops.map(function(_a2, i3) {
+          return stops.map(function(_a2, i4) {
             var color3 = _a2.color;
-            return { color: color3, stop: Math.max(Math.min(1, processStops[i3] / lineLength), 0) };
+            return { color: color3, stop: Math.max(Math.min(1, processStops[i4] / lineLength), 0) };
           });
         };
         var getAngleFromCorner = function(corner, width, height) {
@@ -4477,8 +4477,8 @@
         var linearGradient = function(context, tokens) {
           var angle$1 = deg(180);
           var stops = [];
-          parseFunctionArgs(tokens).forEach(function(arg, i2) {
-            if (i2 === 0) {
+          parseFunctionArgs(tokens).forEach(function(arg, i3) {
+            if (i3 === 0) {
               var firstToken = arg[0];
               if (firstToken.type === 20 && firstToken.value === "to") {
                 angle$1 = parseNamedSide(arg);
@@ -4501,8 +4501,8 @@
         var prefixLinearGradient = function(context, tokens) {
           var angle$1 = deg(180);
           var stops = [];
-          parseFunctionArgs(tokens).forEach(function(arg, i2) {
-            if (i2 === 0) {
+          parseFunctionArgs(tokens).forEach(function(arg, i3) {
+            if (i3 === 0) {
               var firstToken = arg[0];
               if (firstToken.type === 20 && ["top", "left", "right", "bottom"].indexOf(firstToken.value) !== -1) {
                 angle$1 = parseNamedSide(arg);
@@ -4529,9 +4529,9 @@
           var shape = 0;
           var size = 3;
           var position2 = [];
-          parseFunctionArgs(tokens).forEach(function(arg, i2) {
+          parseFunctionArgs(tokens).forEach(function(arg, i3) {
             var firstToken = arg[0];
-            if (i2 === 0) {
+            if (i3 === 0) {
               if (isIdentToken(firstToken) && firstToken.value === "linear") {
                 type = 1;
                 return;
@@ -4581,9 +4581,9 @@
           var size = 3;
           var stops = [];
           var position2 = [];
-          parseFunctionArgs(tokens).forEach(function(arg, i2) {
+          parseFunctionArgs(tokens).forEach(function(arg, i3) {
             var isColorStop = true;
-            if (i2 === 0) {
+            if (i3 === 0) {
               var isAtPosition_1 = false;
               isColorStop = arg.reduce(function(acc, token) {
                 if (isAtPosition_1) {
@@ -4659,9 +4659,9 @@
           var size = 3;
           var stops = [];
           var position2 = [];
-          parseFunctionArgs(tokens).forEach(function(arg, i2) {
+          parseFunctionArgs(tokens).forEach(function(arg, i3) {
             var isColorStop = true;
-            if (i2 === 0) {
+            if (i3 === 0) {
               isColorStop = arg.reduce(function(acc, token) {
                 if (isIdentToken(token)) {
                   switch (token.value) {
@@ -4683,7 +4683,7 @@
                 }
                 return acc;
               }, isColorStop);
-            } else if (i2 === 1) {
+            } else if (i3 === 1) {
               isColorStop = arg.reduce(function(acc, token) {
                 if (isIdentToken(token)) {
                   switch (token.value) {
@@ -5386,8 +5386,8 @@
                 blur: ZERO_LENGTH
               };
               var c2 = 0;
-              for (var i2 = 0; i2 < values.length; i2++) {
-                var token = values[i2];
+              for (var i3 = 0; i3 < values.length; i3++) {
+                var token = values[i3];
                 if (isLength(token)) {
                   if (c2 === 0) {
                     shadow.offsetX = token;
@@ -5725,9 +5725,9 @@
             }
             var increments = [];
             var filtered = tokens.filter(nonWhiteSpace);
-            for (var i2 = 0; i2 < filtered.length; i2++) {
-              var counter = filtered[i2];
-              var next = filtered[i2 + 1];
+            for (var i3 = 0; i3 < filtered.length; i3++) {
+              var counter = filtered[i3];
+              var next = filtered[i3 + 1];
               if (counter.type === 20) {
                 var increment = next && isNumberToken(next) ? next.number : 1;
                 increments.push({ counter: counter.value, increment });
@@ -5747,9 +5747,9 @@
             }
             var resets = [];
             var filtered = tokens.filter(nonWhiteSpace);
-            for (var i2 = 0; i2 < filtered.length; i2++) {
-              var counter = filtered[i2];
-              var next = filtered[i2 + 1];
+            for (var i3 = 0; i3 < filtered.length; i3++) {
+              var counter = filtered[i3];
+              var next = filtered[i3 + 1];
               if (isIdentToken(counter) && counter.value !== "none") {
                 var reset = next && isNumberToken(next) ? next.number : 0;
                 resets.push({ counter: counter.value, reset });
@@ -5787,9 +5787,9 @@
             if (filtered.length % 2 !== 0) {
               return null;
             }
-            for (var i2 = 0; i2 < filtered.length; i2 += 2) {
-              var open_1 = filtered[i2].value;
-              var close_1 = filtered[i2 + 1].value;
+            for (var i3 = 0; i3 < filtered.length; i3 += 2) {
+              var open_1 = filtered[i3].value;
+              var close_1 = filtered[i3 + 1].value;
               quotes2.push({ open: open_1, close: close_1 });
             }
             return quotes2;
@@ -5824,8 +5824,8 @@
                 inset: false
               };
               var c2 = 0;
-              for (var i2 = 0; i2 < values.length; i2++) {
-                var token = values[i2];
+              for (var i3 = 0; i3 < values.length; i3++) {
+                var token = values[i3];
                 if (isIdentWithValue(token, "inset")) {
                   shadow.inset = true;
                 } else if (isLength(token)) {
@@ -6179,7 +6179,7 @@
           lookup$1[chars$1.charCodeAt(i$1)] = i$1;
         }
         var decode = function(base642) {
-          var bufferLength = base642.length * 0.75, len = base642.length, i2, p4 = 0, encoded1, encoded2, encoded3, encoded4;
+          var bufferLength = base642.length * 0.75, len = base642.length, i3, p4 = 0, encoded1, encoded2, encoded3, encoded4;
           if (base642[base642.length - 1] === "=") {
             bufferLength--;
             if (base642[base642.length - 2] === "=") {
@@ -6188,11 +6188,11 @@
           }
           var buffer = typeof ArrayBuffer !== "undefined" && typeof Uint8Array !== "undefined" && typeof Uint8Array.prototype.slice !== "undefined" ? new ArrayBuffer(bufferLength) : new Array(bufferLength);
           var bytes = Array.isArray(buffer) ? buffer : new Uint8Array(buffer);
-          for (i2 = 0; i2 < len; i2 += 4) {
-            encoded1 = lookup$1[base642.charCodeAt(i2)];
-            encoded2 = lookup$1[base642.charCodeAt(i2 + 1)];
-            encoded3 = lookup$1[base642.charCodeAt(i2 + 2)];
-            encoded4 = lookup$1[base642.charCodeAt(i2 + 3)];
+          for (i3 = 0; i3 < len; i3 += 4) {
+            encoded1 = lookup$1[base642.charCodeAt(i3)];
+            encoded2 = lookup$1[base642.charCodeAt(i3 + 1)];
+            encoded3 = lookup$1[base642.charCodeAt(i3 + 2)];
+            encoded4 = lookup$1[base642.charCodeAt(i3 + 3)];
             bytes[p4++] = encoded1 << 2 | encoded2 >> 4;
             bytes[p4++] = (encoded2 & 15) << 4 | encoded3 >> 2;
             bytes[p4++] = (encoded3 & 3) << 6 | encoded4 & 63;
@@ -6202,16 +6202,16 @@
         var polyUint16Array = function(buffer) {
           var length = buffer.length;
           var bytes = [];
-          for (var i2 = 0; i2 < length; i2 += 2) {
-            bytes.push(buffer[i2 + 1] << 8 | buffer[i2]);
+          for (var i3 = 0; i3 < length; i3 += 2) {
+            bytes.push(buffer[i3 + 1] << 8 | buffer[i3]);
           }
           return bytes;
         };
         var polyUint32Array = function(buffer) {
           var length = buffer.length;
           var bytes = [];
-          for (var i2 = 0; i2 < length; i2 += 4) {
-            bytes.push(buffer[i2 + 3] << 24 | buffer[i2 + 2] << 16 | buffer[i2 + 1] << 8 | buffer[i2]);
+          for (var i3 = 0; i3 < length; i3 += 4) {
+            bytes.push(buffer[i3 + 3] << 24 | buffer[i3 + 2] << 16 | buffer[i3 + 1] << 8 | buffer[i3]);
           }
           return bytes;
         };
@@ -6294,8 +6294,8 @@
         );
         var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
         var lookup = typeof Uint8Array === "undefined" ? [] : new Uint8Array(256);
-        for (var i = 0; i < chars.length; i++) {
-          lookup[chars.charCodeAt(i)] = i;
+        for (var i2 = 0; i2 < chars.length; i2++) {
+          lookup[chars.charCodeAt(i2)] = i2;
         }
         var Prepend = 1;
         var CR = 2;
@@ -6313,17 +6313,17 @@
         var RI = 15;
         var toCodePoints = function(str) {
           var codePoints = [];
-          var i2 = 0;
+          var i3 = 0;
           var length = str.length;
-          while (i2 < length) {
-            var value = str.charCodeAt(i2++);
-            if (value >= 55296 && value <= 56319 && i2 < length) {
-              var extra = str.charCodeAt(i2++);
+          while (i3 < length) {
+            var value = str.charCodeAt(i3++);
+            if (value >= 55296 && value <= 56319 && i3 < length) {
+              var extra = str.charCodeAt(i3++);
               if ((extra & 64512) === 56320) {
                 codePoints.push(((value & 1023) << 10) + (extra & 1023) + 65536);
               } else {
                 codePoints.push(value);
-                i2--;
+                i3--;
               }
             } else {
               codePoints.push(value);
@@ -6484,19 +6484,19 @@
           var range = document2.createRange();
           testElement.innerHTML = typeof "".repeat === "function" ? "&#128104;".repeat(10) : "";
           var node = testElement.firstChild;
-          var textList = toCodePoints$1(node.data).map(function(i2) {
-            return fromCodePoint$1(i2);
+          var textList = toCodePoints$1(node.data).map(function(i3) {
+            return fromCodePoint$1(i3);
           });
           var offset3 = 0;
           var prev = {};
-          var supports = textList.every(function(text4, i2) {
+          var supports = textList.every(function(text4, i3) {
             range.setStart(node, offset3);
             range.setEnd(node, offset3 + text4.length);
             var rect = range.getBoundingClientRect();
             offset3 += text4.length;
             var boundAhead = rect.x > prev.x || rect.y > prev.y;
             prev = rect;
-            if (i2 === 0) {
+            if (i3 === 0) {
               return true;
             }
             return boundAhead;
@@ -7988,8 +7988,8 @@
           // Safari shows pseudoelements if content is set
         ];
         var copyCSSStyles = function(style, target) {
-          for (var i2 = style.length - 1; i2 >= 0; i2--) {
-            var property = style.item(i2);
+          for (var i3 = style.length - 1; i3 >= 0; i3--) {
+            var property = style.item(i3);
             if (ignoredStyleProperties.indexOf(property) === -1) {
               target.style.setProperty(property, style.getPropertyValue(property));
             }
@@ -8242,8 +8242,8 @@
             return Vector2;
           }()
         );
-        var lerp2 = function(a2, b, t) {
-          return new Vector(a2.x + (b.x - a2.x) * t, a2.y + (b.y - a2.y) * t);
+        var lerp2 = function(a2, b, t2) {
+          return new Vector(a2.x + (b.x - a2.x) * t2, a2.y + (b.y - a2.y) * t2);
         };
         var BezierCurve = (
           /** @class */
@@ -8255,13 +8255,13 @@
               this.endControl = endControl;
               this.end = end2;
             }
-            BezierCurve2.prototype.subdivide = function(t, firstHalf) {
-              var ab = lerp2(this.start, this.startControl, t);
-              var bc = lerp2(this.startControl, this.endControl, t);
-              var cd = lerp2(this.endControl, this.end, t);
-              var abbc = lerp2(ab, bc, t);
-              var bccd = lerp2(bc, cd, t);
-              var dest = lerp2(abbc, bccd, t);
+            BezierCurve2.prototype.subdivide = function(t2, firstHalf) {
+              var ab = lerp2(this.start, this.startControl, t2);
+              var bc = lerp2(this.startControl, this.endControl, t2);
+              var cd = lerp2(this.endControl, this.end, t2);
+              var abbc = lerp2(ab, bc, t2);
+              var bccd = lerp2(bc, cd, t2);
+              var dest = lerp2(abbc, bccd, t2);
               return firstHalf ? new BezierCurve2(this.start, ab, abbc, dest) : new BezierCurve2(dest, bccd, cd, this.end);
             };
             BezierCurve2.prototype.add = function(deltaX, deltaY) {
@@ -8432,8 +8432,8 @@
         };
         var equalPath = function(a2, b) {
           if (a2.length === b.length) {
-            return a2.some(function(v, i2) {
-              return v === b[i2];
+            return a2.some(function(v, i3) {
+              return v === b[i3];
             });
           }
           return false;
@@ -8583,9 +8583,9 @@
                 var order_1 = child.styles.zIndex.order;
                 if (order_1 < 0) {
                   var index_1 = 0;
-                  parentStack.negativeZIndex.some(function(current, i2) {
+                  parentStack.negativeZIndex.some(function(current, i3) {
                     if (order_1 > current.element.container.styles.zIndex.order) {
-                      index_1 = i2;
+                      index_1 = i3;
                       return false;
                     } else if (index_1 > 0) {
                       return true;
@@ -8595,9 +8595,9 @@
                   parentStack.negativeZIndex.splice(index_1, 0, stack);
                 } else if (order_1 > 0) {
                   var index_2 = 0;
-                  parentStack.positiveZIndex.some(function(current, i2) {
+                  parentStack.positiveZIndex.some(function(current, i3) {
                     if (order_1 >= current.element.container.styles.zIndex.order) {
-                      index_2 = i2 + 1;
+                      index_2 = i3 + 1;
                       return false;
                     } else if (index_2 > 0) {
                       return true;
@@ -8636,8 +8636,8 @@
         var processListItems = function(owner, elements2) {
           var numbering = owner instanceof OLElementContainer ? owner.start : 1;
           var reversed = owner instanceof OLElementContainer ? owner.reversed : false;
-          for (var i2 = 0; i2 < elements2.length; i2++) {
-            var item = elements2[i2];
+          for (var i3 = 0; i3 < elements2.length; i3++) {
+            var item = elements2[i3];
             if (item.container instanceof LIElementContainer && typeof item.container.value === "number" && item.container.value !== 0) {
               numbering = item.container.value;
             }
@@ -10616,8 +10616,8 @@
           if (!showdown2.helper.isArray(extension)) {
             extension = [extension];
           }
-          for (var i = 0; i < extension.length; ++i) {
-            var baseMsg = errMsg + " sub-extension " + i + ": ", ext = extension[i];
+          for (var i2 = 0; i2 < extension.length; ++i2) {
+            var baseMsg = errMsg + " sub-extension " + i2 + ": ", ext = extension[i2];
             if (typeof ext !== "object") {
               ret.valid = false;
               ret.error = baseMsg + "must be an object, but " + typeof ext + " given";
@@ -10736,8 +10736,8 @@
           if (typeof obj.forEach === "function") {
             obj.forEach(callback2);
           } else if (showdown2.helper.isArray(obj)) {
-            for (var i = 0; i < obj.length; i++) {
-              callback2(obj[i], i, obj);
+            for (var i2 = 0; i2 < obj.length; i2++) {
+              callback2(obj[i2], i2, obj);
             }
           } else if (typeof obj === "object") {
             for (var prop in obj) {
@@ -10775,17 +10775,17 @@
         };
         var rgxFindMatchPos = function(str, left2, right2, flags) {
           "use strict";
-          var f3 = flags || "", g = f3.indexOf("g") > -1, x = new RegExp(left2 + "|" + right2, "g" + f3.replace(/g/g, "")), l2 = new RegExp(left2, f3.replace(/g/g, "")), pos = [], t, s2, m, start2, end2;
+          var f3 = flags || "", g = f3.indexOf("g") > -1, x = new RegExp(left2 + "|" + right2, "g" + f3.replace(/g/g, "")), l2 = new RegExp(left2, f3.replace(/g/g, "")), pos = [], t2, s2, m, start2, end2;
           do {
-            t = 0;
+            t2 = 0;
             while (m = x.exec(str)) {
               if (l2.test(m[0])) {
-                if (!t++) {
+                if (!t2++) {
                   s2 = x.lastIndex;
                   start2 = s2 - m[0].length;
                 }
-              } else if (t) {
-                if (!--t) {
+              } else if (t2) {
+                if (!--t2) {
                   end2 = m.index + m[0].length;
                   var obj = {
                     left: { start: start2, end: s2 },
@@ -10800,18 +10800,18 @@
                 }
               }
             }
-          } while (t && (x.lastIndex = s2));
+          } while (t2 && (x.lastIndex = s2));
           return pos;
         };
         showdown2.helper.matchRecursiveRegExp = function(str, left2, right2, flags) {
           "use strict";
           var matchPos = rgxFindMatchPos(str, left2, right2, flags), results = [];
-          for (var i = 0; i < matchPos.length; ++i) {
+          for (var i2 = 0; i2 < matchPos.length; ++i2) {
             results.push([
-              str.slice(matchPos[i].wholeMatch.start, matchPos[i].wholeMatch.end),
-              str.slice(matchPos[i].match.start, matchPos[i].match.end),
-              str.slice(matchPos[i].left.start, matchPos[i].left.end),
-              str.slice(matchPos[i].right.start, matchPos[i].right.end)
+              str.slice(matchPos[i2].wholeMatch.start, matchPos[i2].wholeMatch.end),
+              str.slice(matchPos[i2].match.start, matchPos[i2].match.end),
+              str.slice(matchPos[i2].left.start, matchPos[i2].left.end),
+              str.slice(matchPos[i2].right.start, matchPos[i2].right.end)
             ]);
           }
           return results;
@@ -10830,17 +10830,17 @@
             if (matchPos[0].wholeMatch.start !== 0) {
               bits.push(str.slice(0, matchPos[0].wholeMatch.start));
             }
-            for (var i = 0; i < lng; ++i) {
+            for (var i2 = 0; i2 < lng; ++i2) {
               bits.push(
                 replacement(
-                  str.slice(matchPos[i].wholeMatch.start, matchPos[i].wholeMatch.end),
-                  str.slice(matchPos[i].match.start, matchPos[i].match.end),
-                  str.slice(matchPos[i].left.start, matchPos[i].left.end),
-                  str.slice(matchPos[i].right.start, matchPos[i].right.end)
+                  str.slice(matchPos[i2].wholeMatch.start, matchPos[i2].wholeMatch.end),
+                  str.slice(matchPos[i2].match.start, matchPos[i2].match.end),
+                  str.slice(matchPos[i2].left.start, matchPos[i2].left.end),
+                  str.slice(matchPos[i2].right.start, matchPos[i2].right.end)
                 )
               );
-              if (i < lng - 1) {
-                bits.push(str.slice(matchPos[i].wholeMatch.end, matchPos[i + 1].wholeMatch.start));
+              if (i2 < lng - 1) {
+                bits.push(str.slice(matchPos[i2].wholeMatch.end, matchPos[i2 + 1].wholeMatch.start));
               }
             }
             if (matchPos[lng - 1].wholeMatch.end < str.length) {
@@ -12156,19 +12156,19 @@
             if (!validExt.valid) {
               throw Error(validExt.error);
             }
-            for (var i = 0; i < ext.length; ++i) {
-              switch (ext[i].type) {
+            for (var i2 = 0; i2 < ext.length; ++i2) {
+              switch (ext[i2].type) {
                 case "lang":
-                  langExtensions.push(ext[i]);
+                  langExtensions.push(ext[i2]);
                   break;
                 case "output":
-                  outputModifiers.push(ext[i]);
+                  outputModifiers.push(ext[i2]);
                   break;
               }
-              if (ext[i].hasOwnProperty("listeners")) {
-                for (var ln in ext[i].listeners) {
-                  if (ext[i].listeners.hasOwnProperty(ln)) {
-                    listen(ln, ext[i].listeners[ln]);
+              if (ext[i2].hasOwnProperty("listeners")) {
+                for (var ln in ext[i2].listeners) {
+                  if (ext[i2].listeners.hasOwnProperty(ln)) {
+                    listen(ln, ext[i2].listeners[ln]);
                   }
                 }
               }
@@ -12185,13 +12185,13 @@
             if (!valid.valid) {
               throw Error(valid.error);
             }
-            for (var i = 0; i < ext.length; ++i) {
-              switch (ext[i].type) {
+            for (var i2 = 0; i2 < ext.length; ++i2) {
+              switch (ext[i2].type) {
                 case "lang":
-                  langExtensions.push(ext[i]);
+                  langExtensions.push(ext[i2]);
                   break;
                 case "output":
-                  outputModifiers.push(ext[i]);
+                  outputModifiers.push(ext[i2]);
                   break;
                 default:
                   throw Error("Extension loader error: Type unrecognized!!!");
@@ -12302,8 +12302,8 @@
             };
             clean2(doc);
             var nodes = doc.childNodes, mdDoc = "";
-            for (var i = 0; i < nodes.length; i++) {
-              mdDoc += showdown2.subParser("makeMarkdown.node")(nodes[i], globals);
+            for (var i2 = 0; i2 < nodes.length; i2++) {
+              mdDoc += showdown2.subParser("makeMarkdown.node")(nodes[i2], globals);
             }
             function clean2(node) {
               for (var n2 = 0; n2 < node.childNodes.length; ++n2) {
@@ -12323,11 +12323,11 @@
             }
             function substitutePreCodeTags(doc2) {
               var pres = doc2.querySelectorAll("pre"), presPH = [];
-              for (var i2 = 0; i2 < pres.length; ++i2) {
-                if (pres[i2].childElementCount === 1 && pres[i2].firstChild.tagName.toLowerCase() === "code") {
-                  var content = pres[i2].firstChild.innerHTML.trim(), language = pres[i2].firstChild.getAttribute("data-language") || "";
+              for (var i3 = 0; i3 < pres.length; ++i3) {
+                if (pres[i3].childElementCount === 1 && pres[i3].firstChild.tagName.toLowerCase() === "code") {
+                  var content = pres[i3].firstChild.innerHTML.trim(), language = pres[i3].firstChild.getAttribute("data-language") || "";
                   if (language === "") {
-                    var classes = pres[i2].firstChild.className.split(" ");
+                    var classes = pres[i3].firstChild.className.split(" ");
                     for (var c2 = 0; c2 < classes.length; ++c2) {
                       var matches = classes[c2].match(/^language-(.+)$/);
                       if (matches !== null) {
@@ -12338,11 +12338,11 @@
                   }
                   content = showdown2.helper.unescapeHTMLEntities(content);
                   presPH.push(content);
-                  pres[i2].outerHTML = '<precode language="' + language + '" precodenum="' + i2.toString() + '"></precode>';
+                  pres[i3].outerHTML = '<precode language="' + language + '" precodenum="' + i3.toString() + '"></precode>';
                 } else {
-                  presPH.push(pres[i2].innerHTML);
-                  pres[i2].innerHTML = "";
-                  pres[i2].setAttribute("prenum", i2.toString());
+                  presPH.push(pres[i3].innerHTML);
+                  pres[i3].innerHTML = "";
+                  pres[i3].setAttribute("prenum", i3.toString());
                 }
               }
               return presPH;
@@ -12386,9 +12386,9 @@
             }
             for (var a = 0; a < extension.length; ++a) {
               var ext = extension[a];
-              for (var i = 0; i < langExtensions.length; ++i) {
-                if (langExtensions[i] === ext) {
-                  langExtensions.splice(i, 1);
+              for (var i2 = 0; i2 < langExtensions.length; ++i2) {
+                if (langExtensions[i2] === ext) {
+                  langExtensions.splice(i2, 1);
                 }
               }
               for (var ii = 0; ii < outputModifiers.length; ++ii) {
@@ -12676,7 +12676,7 @@
           text4 = text4.replace(/\t/g, "\xA8A\xA8B");
           text4 = text4.replace(/¨B(.+?)¨A/g, function(wholeMatch, m1) {
             var leadingText = m1, numSpaces = 4 - leadingText.length % 4;
-            for (var i = 0; i < numSpaces; i++) {
+            for (var i2 = 0; i2 < numSpaces; i2++) {
               leadingText += " ";
             }
             return leadingText;
@@ -12850,8 +12850,8 @@
               return "&lt;" + inside + "&gt;";
             });
           }
-          for (var i = 0; i < blockTags.length; ++i) {
-            var opTagPos, rgx1 = new RegExp("^ {0,3}(<" + blockTags[i] + "\\b[^>]*>)", "im"), patLeft = "<" + blockTags[i] + "\\b[^>]*>", patRight = "</" + blockTags[i] + ">";
+          for (var i2 = 0; i2 < blockTags.length; ++i2) {
+            var opTagPos, rgx1 = new RegExp("^ {0,3}(<" + blockTags[i2] + "\\b[^>]*>)", "im"), patLeft = "<" + blockTags[i2] + "\\b[^>]*>", patRight = "</" + blockTags[i2] + ">";
             while ((opTagPos = showdown2.helper.regexIndexOf(text4, rgx1)) !== -1) {
               var subTexts = showdown2.helper.splitAtIndex(text4, opTagPos), newSubText1 = showdown2.helper.replaceRecursiveRegExp(subTexts[1], repFunc, patLeft, patRight, "im");
               if (newSubText1 === subTexts[1]) {
@@ -12898,8 +12898,8 @@
         showdown2.subParser("unhashHTMLSpans", function(text4, options, globals) {
           "use strict";
           text4 = globals.converter._dispatch("unhashHTMLSpans.before", text4, options, globals);
-          for (var i = 0; i < globals.gHtmlSpans.length; ++i) {
-            var repText = globals.gHtmlSpans[i], limit = 0;
+          for (var i2 = 0; i2 < globals.gHtmlSpans.length; ++i2) {
+            var repText = globals.gHtmlSpans[i2], limit = 0;
             while (/¨C(\d+)C/.test(repText)) {
               var num3 = RegExp.$1;
               repText = repText.replace("\xA8C" + num3 + "C", globals.gHtmlSpans[num3]);
@@ -12909,7 +12909,7 @@
               }
               ++limit;
             }
-            text4 = text4.replace("\xA8C" + i + "C", repText);
+            text4 = text4.replace("\xA8C" + i2 + "C", repText);
           }
           text4 = globals.converter._dispatch("unhashHTMLSpans.after", text4, options, globals);
           return text4;
@@ -13252,8 +13252,8 @@
           text4 = text4.replace(/^\n+/g, "");
           text4 = text4.replace(/\n+$/g, "");
           var grafs = text4.split(/\n{2,}/g), grafsOut = [], end2 = grafs.length;
-          for (var i = 0; i < end2; i++) {
-            var str = grafs[i];
+          for (var i2 = 0; i2 < end2; i2++) {
+            var str = grafs[i2];
             if (str.search(/¨(K|G)(\d+)\1/g) >= 0) {
               grafsOut.push(str);
             } else if (str.search(/\S/) >= 0) {
@@ -13264,8 +13264,8 @@
             }
           }
           end2 = grafsOut.length;
-          for (i = 0; i < end2; i++) {
-            var blockText = "", grafsOutIt = grafsOut[i], codeFlag = false;
+          for (i2 = 0; i2 < end2; i2++) {
+            var blockText = "", grafsOutIt = grafsOut[i2], codeFlag = false;
             while (/¨(K|G)(\d+)\1/.test(grafsOutIt)) {
               var delim = RegExp.$1, num3 = RegExp.$2;
               if (delim === "K") {
@@ -13283,7 +13283,7 @@
                 codeFlag = true;
               }
             }
-            grafsOut[i] = grafsOutIt;
+            grafsOut[i2] = grafsOutIt;
           }
           text4 = grafsOut.join("\n");
           text4 = text4.replace(/^\n+/g, "");
@@ -13413,14 +13413,14 @@
           }
           function buildTable(headers, cells) {
             var tb = "<table>\n<thead>\n<tr>\n", tblLgn = headers.length;
-            for (var i = 0; i < tblLgn; ++i) {
-              tb += headers[i];
+            for (var i2 = 0; i2 < tblLgn; ++i2) {
+              tb += headers[i2];
             }
             tb += "</tr>\n</thead>\n<tbody>\n";
-            for (i = 0; i < cells.length; ++i) {
+            for (i2 = 0; i2 < cells.length; ++i2) {
               tb += "<tr>\n";
               for (var ii = 0; ii < tblLgn; ++ii) {
-                tb += cells[i][ii];
+                tb += cells[i2][ii];
               }
               tb += "</tr>\n";
             }
@@ -13428,15 +13428,15 @@
             return tb;
           }
           function parseTable(rawTable) {
-            var i, tableLines = rawTable.split("\n");
-            for (i = 0; i < tableLines.length; ++i) {
-              if (/^ {0,3}\|/.test(tableLines[i])) {
-                tableLines[i] = tableLines[i].replace(/^ {0,3}\|/, "");
+            var i2, tableLines = rawTable.split("\n");
+            for (i2 = 0; i2 < tableLines.length; ++i2) {
+              if (/^ {0,3}\|/.test(tableLines[i2])) {
+                tableLines[i2] = tableLines[i2].replace(/^ {0,3}\|/, "");
               }
-              if (/\|[ \t]*$/.test(tableLines[i])) {
-                tableLines[i] = tableLines[i].replace(/\|[ \t]*$/, "");
+              if (/\|[ \t]*$/.test(tableLines[i2])) {
+                tableLines[i2] = tableLines[i2].replace(/\|[ \t]*$/, "");
               }
-              tableLines[i] = showdown2.subParser("codeSpans")(tableLines[i], options, globals);
+              tableLines[i2] = showdown2.subParser("codeSpans")(tableLines[i2], options, globals);
             }
             var rawHeaders = tableLines[0].split("|").map(function(s2) {
               return s2.trim();
@@ -13445,12 +13445,12 @@
             }), rawCells = [], headers = [], styles = [], cells = [];
             tableLines.shift();
             tableLines.shift();
-            for (i = 0; i < tableLines.length; ++i) {
-              if (tableLines[i].trim() === "") {
+            for (i2 = 0; i2 < tableLines.length; ++i2) {
+              if (tableLines[i2].trim() === "") {
                 continue;
               }
               rawCells.push(
-                tableLines[i].split("|").map(function(s2) {
+                tableLines[i2].split("|").map(function(s2) {
                   return s2.trim();
                 })
               );
@@ -13458,21 +13458,21 @@
             if (rawHeaders.length < rawStyles.length) {
               return rawTable;
             }
-            for (i = 0; i < rawStyles.length; ++i) {
-              styles.push(parseStyles(rawStyles[i]));
+            for (i2 = 0; i2 < rawStyles.length; ++i2) {
+              styles.push(parseStyles(rawStyles[i2]));
             }
-            for (i = 0; i < rawHeaders.length; ++i) {
-              if (showdown2.helper.isUndefined(styles[i])) {
-                styles[i] = "";
+            for (i2 = 0; i2 < rawHeaders.length; ++i2) {
+              if (showdown2.helper.isUndefined(styles[i2])) {
+                styles[i2] = "";
               }
-              headers.push(parseHeaders(rawHeaders[i], styles[i]));
+              headers.push(parseHeaders(rawHeaders[i2], styles[i2]));
             }
-            for (i = 0; i < rawCells.length; ++i) {
+            for (i2 = 0; i2 < rawCells.length; ++i2) {
               var row = [];
               for (var ii = 0; ii < headers.length; ++ii) {
-                if (showdown2.helper.isUndefined(rawCells[i][ii])) {
+                if (showdown2.helper.isUndefined(rawCells[i2][ii])) {
                 }
-                row.push(parseCells(rawCells[i][ii], styles[ii]));
+                row.push(parseCells(rawCells[i2][ii], styles[ii]));
               }
               cells.push(row);
             }
@@ -13525,8 +13525,8 @@
           var txt = "";
           if (node.hasChildNodes()) {
             var children = node.childNodes, childrenLength = children.length;
-            for (var i = 0; i < childrenLength; ++i) {
-              var innerTxt = showdown2.subParser("makeMarkdown.node")(children[i], globals);
+            for (var i2 = 0; i2 < childrenLength; ++i2) {
+              var innerTxt = showdown2.subParser("makeMarkdown.node")(children[i2], globals);
               if (innerTxt === "") {
                 continue;
               }
@@ -13552,8 +13552,8 @@
           if (node.hasChildNodes()) {
             txt += "*";
             var children = node.childNodes, childrenLength = children.length;
-            for (var i = 0; i < childrenLength; ++i) {
-              txt += showdown2.subParser("makeMarkdown.node")(children[i], globals);
+            for (var i2 = 0; i2 < childrenLength; ++i2) {
+              txt += showdown2.subParser("makeMarkdown.node")(children[i2], globals);
             }
             txt += "*";
           }
@@ -13565,8 +13565,8 @@
           if (node.hasChildNodes()) {
             txt = headerMark + " ";
             var children = node.childNodes, childrenLength = children.length;
-            for (var i = 0; i < childrenLength; ++i) {
-              txt += showdown2.subParser("makeMarkdown.node")(children[i], globals);
+            for (var i2 = 0; i2 < childrenLength; ++i2) {
+              txt += showdown2.subParser("makeMarkdown.node")(children[i2], globals);
             }
           }
           return txt;
@@ -13597,8 +13597,8 @@
           if (node.hasChildNodes() && node.hasAttribute("href")) {
             var children = node.childNodes, childrenLength = children.length;
             txt = "[";
-            for (var i = 0; i < childrenLength; ++i) {
-              txt += showdown2.subParser("makeMarkdown.node")(children[i], globals);
+            for (var i2 = 0; i2 < childrenLength; ++i2) {
+              txt += showdown2.subParser("makeMarkdown.node")(children[i2], globals);
             }
             txt += "](";
             txt += "<" + node.getAttribute("href") + ">";
@@ -13616,8 +13616,8 @@
             return "";
           }
           var listItems = node.childNodes, listItemsLenght = listItems.length, listNum = node.getAttribute("start") || 1;
-          for (var i = 0; i < listItemsLenght; ++i) {
-            if (typeof listItems[i].tagName === "undefined" || listItems[i].tagName.toLowerCase() !== "li") {
+          for (var i2 = 0; i2 < listItemsLenght; ++i2) {
+            if (typeof listItems[i2].tagName === "undefined" || listItems[i2].tagName.toLowerCase() !== "li") {
               continue;
             }
             var bullet = "";
@@ -13626,7 +13626,7 @@
             } else {
               bullet = "- ";
             }
-            txt += bullet + showdown2.subParser("makeMarkdown.listItem")(listItems[i], globals);
+            txt += bullet + showdown2.subParser("makeMarkdown.listItem")(listItems[i2], globals);
             ++listNum;
           }
           txt += "\n<!-- -->\n";
@@ -13636,8 +13636,8 @@
           "use strict";
           var listItemTxt = "";
           var children = node.childNodes, childrenLenght = children.length;
-          for (var i = 0; i < childrenLenght; ++i) {
-            listItemTxt += showdown2.subParser("makeMarkdown.node")(children[i], globals);
+          for (var i2 = 0; i2 < childrenLenght; ++i2) {
+            listItemTxt += showdown2.subParser("makeMarkdown.node")(children[i2], globals);
           }
           if (!/\n$/.test(listItemTxt)) {
             listItemTxt += "\n";
@@ -13767,8 +13767,8 @@
           var txt = "";
           if (node.hasChildNodes()) {
             var children = node.childNodes, childrenLength = children.length;
-            for (var i = 0; i < childrenLength; ++i) {
-              txt += showdown2.subParser("makeMarkdown.node")(children[i], globals);
+            for (var i2 = 0; i2 < childrenLength; ++i2) {
+              txt += showdown2.subParser("makeMarkdown.node")(children[i2], globals);
             }
           }
           txt = txt.trim();
@@ -13785,8 +13785,8 @@
           if (node.hasChildNodes()) {
             txt += "~~";
             var children = node.childNodes, childrenLength = children.length;
-            for (var i = 0; i < childrenLength; ++i) {
-              txt += showdown2.subParser("makeMarkdown.node")(children[i], globals);
+            for (var i2 = 0; i2 < childrenLength; ++i2) {
+              txt += showdown2.subParser("makeMarkdown.node")(children[i2], globals);
             }
             txt += "~~";
           }
@@ -13798,8 +13798,8 @@
           if (node.hasChildNodes()) {
             txt += "**";
             var children = node.childNodes, childrenLength = children.length;
-            for (var i = 0; i < childrenLength; ++i) {
-              txt += showdown2.subParser("makeMarkdown.node")(children[i], globals);
+            for (var i2 = 0; i2 < childrenLength; ++i2) {
+              txt += showdown2.subParser("makeMarkdown.node")(children[i2], globals);
             }
             txt += "**";
           }
@@ -13807,11 +13807,11 @@
         });
         showdown2.subParser("makeMarkdown.table", function(node, globals) {
           "use strict";
-          var txt = "", tableArray = [[], []], headings = node.querySelectorAll("thead>tr>th"), rows = node.querySelectorAll("tbody>tr"), i, ii;
-          for (i = 0; i < headings.length; ++i) {
-            var headContent = showdown2.subParser("makeMarkdown.tableCell")(headings[i], globals), allign = "---";
-            if (headings[i].hasAttribute("style")) {
-              var style = headings[i].getAttribute("style").toLowerCase().replace(/\s/g, "");
+          var txt = "", tableArray = [[], []], headings = node.querySelectorAll("thead>tr>th"), rows = node.querySelectorAll("tbody>tr"), i2, ii;
+          for (i2 = 0; i2 < headings.length; ++i2) {
+            var headContent = showdown2.subParser("makeMarkdown.tableCell")(headings[i2], globals), allign = "---";
+            if (headings[i2].hasAttribute("style")) {
+              var style = headings[i2].getAttribute("style").toLowerCase().replace(/\s/g, "");
               switch (style) {
                 case "text-align:left;":
                   allign = ":---";
@@ -13824,11 +13824,11 @@
                   break;
               }
             }
-            tableArray[0][i] = headContent.trim();
-            tableArray[1][i] = allign;
+            tableArray[0][i2] = headContent.trim();
+            tableArray[1][i2] = allign;
           }
-          for (i = 0; i < rows.length; ++i) {
-            var r2 = tableArray.push([]) - 1, cols = rows[i].getElementsByTagName("td");
+          for (i2 = 0; i2 < rows.length; ++i2) {
+            var r2 = tableArray.push([]) - 1, cols = rows[i2].getElementsByTagName("td");
             for (ii = 0; ii < headings.length; ++ii) {
               var cellContent = " ";
               if (typeof cols[ii] !== "undefined") {
@@ -13838,27 +13838,27 @@
             }
           }
           var cellSpacesCount = 3;
-          for (i = 0; i < tableArray.length; ++i) {
-            for (ii = 0; ii < tableArray[i].length; ++ii) {
-              var strLen = tableArray[i][ii].length;
+          for (i2 = 0; i2 < tableArray.length; ++i2) {
+            for (ii = 0; ii < tableArray[i2].length; ++ii) {
+              var strLen = tableArray[i2][ii].length;
               if (strLen > cellSpacesCount) {
                 cellSpacesCount = strLen;
               }
             }
           }
-          for (i = 0; i < tableArray.length; ++i) {
-            for (ii = 0; ii < tableArray[i].length; ++ii) {
-              if (i === 1) {
-                if (tableArray[i][ii].slice(-1) === ":") {
-                  tableArray[i][ii] = showdown2.helper.padEnd(tableArray[i][ii].slice(-1), cellSpacesCount - 1, "-") + ":";
+          for (i2 = 0; i2 < tableArray.length; ++i2) {
+            for (ii = 0; ii < tableArray[i2].length; ++ii) {
+              if (i2 === 1) {
+                if (tableArray[i2][ii].slice(-1) === ":") {
+                  tableArray[i2][ii] = showdown2.helper.padEnd(tableArray[i2][ii].slice(-1), cellSpacesCount - 1, "-") + ":";
                 } else {
-                  tableArray[i][ii] = showdown2.helper.padEnd(tableArray[i][ii], cellSpacesCount, "-");
+                  tableArray[i2][ii] = showdown2.helper.padEnd(tableArray[i2][ii], cellSpacesCount, "-");
                 }
               } else {
-                tableArray[i][ii] = showdown2.helper.padEnd(tableArray[i][ii], cellSpacesCount);
+                tableArray[i2][ii] = showdown2.helper.padEnd(tableArray[i2][ii], cellSpacesCount);
               }
             }
-            txt += "| " + tableArray[i].join(" | ") + " |\n";
+            txt += "| " + tableArray[i2].join(" | ") + " |\n";
           }
           return txt.trim();
         });
@@ -13869,8 +13869,8 @@
             return "";
           }
           var children = node.childNodes, childrenLength = children.length;
-          for (var i = 0; i < childrenLength; ++i) {
-            txt += showdown2.subParser("makeMarkdown.node")(children[i], globals, true);
+          for (var i2 = 0; i2 < childrenLength; ++i2) {
+            txt += showdown2.subParser("makeMarkdown.node")(children[i2], globals, true);
           }
           return txt.trim();
         });
@@ -13923,9 +13923,9 @@
           return keys2;
         }
         function _objectSpread2(target) {
-          for (var i = 1; i < arguments.length; i++) {
-            var source = null != arguments[i] ? arguments[i] : {};
-            i % 2 ? ownKeys(Object(source), true).forEach(function(key) {
+          for (var i2 = 1; i2 < arguments.length; i2++) {
+            var source = null != arguments[i2] ? arguments[i2] : {};
+            i2 % 2 ? ownKeys(Object(source), true).forEach(function(key) {
               _defineProperty(target, key, source[key]);
             }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function(key) {
               Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
@@ -13947,8 +13947,8 @@
           }
         }
         function _defineProperties(target, props) {
-          for (var i = 0; i < props.length; i++) {
-            var descriptor = props[i];
+          for (var i2 = 0; i2 < props.length; i2++) {
+            var descriptor = props[i2];
             descriptor.enumerable = descriptor.enumerable || false;
             descriptor.configurable = true;
             if ("value" in descriptor) descriptor.writable = true;
@@ -13995,7 +13995,7 @@
         }
         function _arrayLikeToArray(arr, len) {
           if (len == null || len > arr.length) len = arr.length;
-          for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+          for (var i2 = 0, arr2 = new Array(len); i2 < len; i2++) arr2[i2] = arr[i2];
           return arr2;
         }
         function _nonIterableSpread() {
@@ -14570,8 +14570,8 @@
         function getStringFromCharCode(dataView, start2, length) {
           var str = "";
           length += start2;
-          for (var i = start2; i < length; i += 1) {
-            str += fromCharCode(dataView.getUint8(i));
+          for (var i2 = start2; i2 < length; i2 += 1) {
+            str += fromCharCode(dataView.getUint8(i2));
           }
           return str;
         }
@@ -14581,8 +14581,8 @@
           var binary = atob(base64);
           var arrayBuffer = new ArrayBuffer(binary.length);
           var uint8 = new Uint8Array(arrayBuffer);
-          forEach(uint8, function(value, i) {
-            uint8[i] = binary.charCodeAt(i);
+          forEach(uint8, function(value, i2) {
+            uint8[i2] = binary.charCodeAt(i2);
           });
           return arrayBuffer;
         }
@@ -14633,9 +14633,9 @@
             if (ifdStart) {
               var _length = dataView.getUint16(ifdStart, littleEndian);
               var _offset;
-              var i;
-              for (i = 0; i < _length; i += 1) {
-                _offset = ifdStart + i * 12 + 2;
+              var i2;
+              for (i2 = 0; i2 < _length; i2 += 1) {
+                _offset = ifdStart + i2 * 12 + 2;
                 if (dataView.getUint16(_offset, littleEndian) === 274) {
                   _offset += 8;
                   orientation = dataView.getUint16(_offset, littleEndian);
@@ -15195,11 +15195,11 @@
               }
               this.render();
               if (options.restore) {
-                this.setCanvasData(forEach(canvasData, function(n2, i) {
-                  canvasData[i] = n2 * ratio;
+                this.setCanvasData(forEach(canvasData, function(n2, i2) {
+                  canvasData[i2] = n2 * ratio;
                 }));
-                this.setCropBoxData(forEach(cropBoxData, function(n2, i) {
-                  cropBoxData[i] = n2 * ratio;
+                this.setCropBoxData(forEach(cropBoxData, function(n2, i2) {
+                  cropBoxData[i2] = n2 * ratio;
                 }));
               }
             }
@@ -15985,8 +15985,8 @@
                 height: cropBoxData.height
               };
               var ratio = imageData.width / imageData.naturalWidth;
-              forEach(data2, function(n2, i) {
-                data2[i] = n2 / ratio;
+              forEach(data2, function(n2, i2) {
+                data2[i2] = n2 / ratio;
               });
               if (rounded) {
                 var bottom2 = Math.round(data2.y + data2.height);
@@ -16748,9 +16748,9 @@
       lastChild,
       valueOf() {
         if (childNodes.length !== length) {
-          let i = 0;
-          while (i < length)
-            fragment.appendChild(nodes[i++]);
+          let i2 = 0;
+          while (i2 < length)
+            fragment.appendChild(nodes[i2++]);
         }
         return fragment;
       }
@@ -16839,16 +16839,16 @@
       } else {
         if (!map3) {
           map3 = /* @__PURE__ */ new Map();
-          let i = bStart;
-          while (i < bEnd)
-            map3.set(b[i], i++);
+          let i2 = bStart;
+          while (i2 < bEnd)
+            map3.set(b[i2], i2++);
         }
         if (map3.has(a[aStart])) {
           const index3 = map3.get(a[aStart]);
           if (bStart < index3 && index3 < bEnd) {
-            let i = aStart;
+            let i2 = aStart;
             let sequence = 1;
-            while (++i < aEnd && i < bEnd && map3.get(a[i]) === index3 + sequence)
+            while (++i2 < aEnd && i2 < bEnd && map3.get(a[i2]) === index3 + sequence)
               sequence++;
             if (sequence > index3 - bStart) {
               const node = get(a[aStart], 0);
@@ -16878,8 +16878,8 @@
     var content = native ? document2[importNode2](fragment, true) : fragment[cloneNode](true);
     return content.childNodes.length < 2 ? function importNode3(node, deep) {
       var clone6 = node[cloneNode]();
-      for (var childNodes = node.childNodes || [], length = childNodes.length, i = 0; deep && i < length; i++) {
-        clone6[appendChild](importNode3(childNodes[i], deep));
+      for (var childNodes = node.childNodes || [], length = childNodes.length, i2 = 0; deep && i2 < length; i2++) {
+        clone6[appendChild](importNode3(childNodes[i2], deep));
       }
       return clone6;
     } : (
@@ -16915,20 +16915,20 @@
   };
   function find(node, path) {
     var length = path.length;
-    var i = 0;
-    while (i < length)
-      node = node.childNodes[path[i++]];
+    var i2 = 0;
+    while (i2 < length)
+      node = node.childNodes[path[i2++]];
     return node;
   }
   function parse(node, holes, parts, path) {
     var childNodes = node.childNodes;
     var length = childNodes.length;
-    var i = 0;
-    while (i < length) {
-      var child = childNodes[i];
+    var i2 = 0;
+    while (i2 < length) {
+      var child = childNodes[i2];
       switch (child.nodeType) {
         case ELEMENT_NODE:
-          var childPath = path.concat(i);
+          var childPath = path.concat(i2);
           parseAttributes(child, holes, parts, childPath);
           parse(child, holes, parts, childPath);
           break;
@@ -16940,7 +16940,7 @@
               // basicHTML or other non standard engines
               // might end up having comments in nodes
               // where they shouldn't, hence this check.
-              SHOULD_USE_TEXT_CONTENT.test(node.nodeName) ? Text(node, path) : Any(child, path.concat(i))
+              SHOULD_USE_TEXT_CONTENT.test(node.nodeName) ? Text(node, path) : Any(child, path.concat(i2))
             );
           } else {
             switch (textContent.slice(0, 2)) {
@@ -16949,7 +16949,7 @@
                   break;
               case "\u{1F47B}":
                 node.removeChild(child);
-                i--;
+                i2--;
                 length--;
             }
           }
@@ -16961,7 +16961,7 @@
           }
           break;
       }
-      i++;
+      i2++;
     }
   }
   function parseAttributes(node, holes, parts, path) {
@@ -16970,9 +16970,9 @@
     var remove2 = [];
     var array = normalizeAttributes(attributes, parts);
     var length = array.length;
-    var i = 0;
-    while (i < length) {
-      var attribute2 = array[i++];
+    var i2 = 0;
+    while (i2 < length) {
+      var attribute2 = array[i2++];
       var direct = attribute2.value === UID;
       var sparse;
       if (direct || 1 < (sparse = attribute2.value.split(UIDC)).length) {
@@ -17003,10 +17003,10 @@
       }
     }
     length = remove2.length;
-    i = 0;
+    i2 = 0;
     var cleanValue = 0 < length && UID_IE && !("ownerSVGElement" in node);
-    while (i < length) {
-      var attr = remove2[i++];
+    while (i2 < length) {
+      var attr = remove2[i2++];
       if (cleanValue)
         attr.value = "";
       node.removeAttribute(attr.name);
@@ -17015,9 +17015,9 @@
     if (/^script$/i.test(nodeName)) {
       var script = document.createElement(nodeName);
       length = attributes.length;
-      i = 0;
-      while (i < length)
-        script.setAttributeNode(attributes[i++].cloneNode(true));
+      i2 = 0;
+      while (i2 < length)
+        script.setAttributeNode(attributes[i2++].cloneNode(true));
       script.textContent = node.textContent;
       node.parentNode.replaceChild(script, node);
     }
@@ -17063,10 +17063,10 @@
       updates: function(content2) {
         var updates = [];
         var len = holes.length;
-        var i = 0;
+        var i2 = 0;
         var off = 0;
-        while (i < len) {
-          var info = holes[i++];
+        while (i2 < len) {
+          var info = holes[i2++];
           var node = find(content2, info.path);
           switch (info.type) {
             case "any":
@@ -17096,10 +17096,10 @@
               length - 1 + " values instead of " + len + "\n" + template.join("${value}")
             );
           }
-          var i2 = 1;
+          var i3 = 1;
           var off2 = 1;
-          while (i2 < length) {
-            var update = updates[i2 - off2];
+          while (i3 < length) {
+            var update = updates[i3 - off2];
             if (update.sparse) {
               var values = update.values;
               var value = values[0];
@@ -17107,10 +17107,10 @@
               var l2 = values.length;
               off2 += l2 - 2;
               while (j < l2)
-                value += arguments[i2++] + values[j++];
+                value += arguments[i3++] + values[j++];
               update.fn(value);
             } else
-              update.fn(arguments[i2++]);
+              update.fn(arguments[i3++]);
           }
           return content2;
         };
@@ -17133,9 +17133,9 @@
   }
   function cleanContent(fragment) {
     var childNodes = fragment.childNodes;
-    var i = childNodes.length;
-    while (i--) {
-      var child = childNodes[i];
+    var i2 = childNodes.length;
+    while (i2--) {
+      var child = childNodes[i2];
       if (child.nodeType !== 1 && esm_default7.call(child.textContent).length === 0) {
         fragment.removeChild(child);
       }
@@ -17572,23 +17572,23 @@
     return entry.wire;
   };
   var unrollValues = (Tagger2, { stack }, values, length) => {
-    for (let i = 0; i < length; i++) {
-      const hole = values[i];
+    for (let i2 = 0; i2 < length; i2++) {
+      const hole = values[i2];
       if (hole instanceof Hole)
-        values[i] = unroll(
+        values[i2] = unroll(
           Tagger2,
-          stack[i] || (stack[i] = createCache()),
+          stack[i2] || (stack[i2] = createCache()),
           hole
         );
       else if (isArray(hole))
         unrollValues(
           Tagger2,
-          stack[i] || (stack[i] = createCache()),
+          stack[i2] || (stack[i2] = createCache()),
           hole,
           hole.length
         );
       else
-        stack[i] = null;
+        stack[i2] = null;
     }
     if (length < stack.length)
       stack.splice(length);
@@ -17602,9 +17602,9 @@
   var Hole = LighterHole;
   var { render, html, svg } = createRender(Tagger);
   function tta() {
-    let out = [], i = 0, { length } = arguments;
-    while (i < length)
-      out.push(arguments[i++]);
+    let out = [], i2 = 0, { length } = arguments;
+    while (i2 < length)
+      out.push(arguments[i2++]);
     return out;
   }
 
@@ -18509,8 +18509,8 @@
     var checksMap = /* @__PURE__ */ new Map();
     var makeFallbackChecks = true;
     var firstFittingPlacement = placements2[0];
-    for (var i = 0; i < placements2.length; i++) {
-      var placement = placements2[i];
+    for (var i2 = 0; i2 < placements2.length; i2++) {
+      var placement = placements2[i2];
       var _basePlacement = getBasePlacement(placement);
       var isStartVariation = getVariation(placement) === start;
       var isVertical = [top, bottom].indexOf(_basePlacement) >= 0;
@@ -20267,8 +20267,8 @@
       if (popper2.parentNode) {
         popper2.parentNode.removeChild(popper2);
       }
-      mountedInstances = mountedInstances.filter(function(i) {
-        return i !== instance;
+      mountedInstances = mountedInstances.filter(function(i2) {
+        return i2 !== instance;
       });
       instance.state.isMounted = false;
       invokeHook("onHidden", [instance]);
@@ -21911,8 +21911,8 @@
     if (newInputs.length !== lastInputs.length) {
       return false;
     }
-    for (var i = 0; i < newInputs.length; i++) {
-      if (!isEqual(newInputs[i], lastInputs[i])) {
+    for (var i2 = 0; i2 < newInputs.length; i2++) {
+      if (!isEqual(newInputs[i2], lastInputs[i2])) {
         return false;
       }
     }
@@ -22974,8 +22974,8 @@
   function partsOffset(dtf, date) {
     const formatted = dtf.formatToParts(date);
     const filled = [];
-    for (let i = 0; i < formatted.length; i++) {
-      const { type, value } = formatted[i];
+    for (let i2 = 0; i2 < formatted.length; i2++) {
+      const { type, value } = formatted[i2];
       const pos = typeToPos[type];
       if (type === "era") {
         filled[pos] = value;
@@ -23252,16 +23252,16 @@
   }
   function mapMonths(f3) {
     const ms = [];
-    for (let i = 1; i <= 12; i++) {
-      const dt = DateTime.utc(2009, i, 1);
+    for (let i2 = 1; i2 <= 12; i2++) {
+      const dt = DateTime.utc(2009, i2, 1);
       ms.push(f3(dt));
     }
     return ms;
   }
   function mapWeekdays(f3) {
     const ms = [];
-    for (let i = 1; i <= 7; i++) {
-      const dt = DateTime.utc(2016, 11, 13 + i);
+    for (let i2 = 1; i2 <= 7; i2++) {
+      const dt = DateTime.utc(2016, 11, 13 + i2);
       ms.push(f3(dt));
     }
     return ms;
@@ -23294,12 +23294,12 @@
         this.inf = getCachedINF(intl, intlOpts);
       }
     }
-    format(i) {
+    format(i2) {
       if (this.inf) {
-        const fixed = this.floor ? Math.floor(i) : i;
+        const fixed = this.floor ? Math.floor(i2) : i2;
         return this.inf.format(fixed);
       } else {
-        const fixed = this.floor ? Math.floor(i) : roundTo(i, 3);
+        const fixed = this.floor ? Math.floor(i2) : roundTo(i2, 3);
         return padStart(fixed, this.padTo);
       }
     }
@@ -23804,10 +23804,10 @@
     let value = parseInt(str, 10);
     if (isNaN(value)) {
       value = "";
-      for (let i = 0; i < str.length; i++) {
-        const code = str.charCodeAt(i);
-        if (str[i].search(numberingSystems.hanidec) !== -1) {
-          value += hanidecChars.indexOf(str[i]);
+      for (let i2 = 0; i2 < str.length; i2++) {
+        const code = str.charCodeAt(i2);
+        if (str[i2].search(numberingSystems.hanidec) !== -1) {
+          value += hanidecChars.indexOf(str[i2]);
         } else {
           for (const key in numberingSystemsUTF16) {
             const [min2, max2] = numberingSystemsUTF16[key];
@@ -23978,8 +23978,8 @@
      * Set whether Luxon will throw when it encounters invalid DateTimes, Durations, or Intervals
      * @type {boolean}
      */
-    static set throwOnInvalid(t) {
-      throwOnInvalid = t;
+    static set throwOnInvalid(t2) {
+      throwOnInvalid = t2;
     }
     /**
      * Reset Luxon's global caches. Should only be necessary in testing scenarios.
@@ -24029,7 +24029,7 @@
     return day + (isLeapYear(year) ? leapLadder : nonLeapLadder)[month - 1];
   }
   function uncomputeOrdinal(year, ordinal) {
-    const table = isLeapYear(year) ? leapLadder : nonLeapLadder, month0 = table.findIndex((i) => i < ordinal), day = ordinal - table[month0];
+    const table = isLeapYear(year) ? leapLadder : nonLeapLadder, month0 = table.findIndex((i2) => i2 < ordinal), day = ordinal - table[month0];
     return { month: month0 + 1, day };
   }
   function isoWeekdayToLocal(isoWeekday, startOfWeek) {
@@ -24541,8 +24541,8 @@
     static parseFormat(fmt) {
       let current = null, currentFull = "", bracketed = false;
       const splits = [];
-      for (let i = 0; i < fmt.length; i++) {
-        const c2 = fmt.charAt(i);
+      for (let i2 = 0; i2 < fmt.length; i2++) {
+        const c2 = fmt.charAt(i2);
         if (c2 === "'") {
           if (currentFull.length > 0 || bracketed) {
             splits.push({
@@ -24817,7 +24817,7 @@
       }, tokens = _Formatter.parseFormat(fmt), realTokens = tokens.reduce(
         (found, { literal, val }) => literal ? found : found.concat(val),
         []
-      ), collapsed = dur.shiftTo(...realTokens.map(tokenToField).filter((t) => t)), durationInfo = {
+      ), collapsed = dur.shiftTo(...realTokens.map(tokenToField).filter((t2) => t2)), durationInfo = {
         isNegativeDuration: collapsed < 0,
         // this relies on "collapsed" being based on "shiftTo", which builds up the object
         // in order
@@ -24857,11 +24857,11 @@
   function simpleParse(...keys2) {
     return (match3, cursor) => {
       const ret = {};
-      let i;
-      for (i = 0; i < keys2.length; i++) {
-        ret[keys2[i]] = parseInteger(match3[cursor + i]);
+      let i2;
+      for (i2 = 0; i2 < keys2.length; i2++) {
+        ret[keys2[i2]] = parseInteger(match3[cursor + i2]);
       }
-      return [ret, null, cursor + i];
+      return [ret, null, cursor + i2];
     };
   }
   var offsetRegex = /(?:([Zz])|([+-]\d\d)(?::?(\d\d))?)/;
@@ -25716,9 +25716,9 @@
           if (isNumber(vals[k4])) {
             own += vals[k4];
           }
-          const i = Math.trunc(own);
-          built[k4] = i;
-          accumulated[k4] = (own * 1e3 - i * 1e3) / 1e3;
+          const i2 = Math.trunc(own);
+          built[k4] = i2;
+          accumulated[k4] = (own * 1e3 - i2 * 1e3) / 1e3;
         } else if (isNumber(vals[k4])) {
           accumulated[k4] = vals[k4];
         }
@@ -26147,12 +26147,12 @@
     splitAt(...dateTimes) {
       if (!this.isValid) return [];
       const sorted = dateTimes.map(friendlyDateTime).filter((d) => this.contains(d)).sort((a, b) => a.toMillis() - b.toMillis()), results = [];
-      let { s: s2 } = this, i = 0;
+      let { s: s2 } = this, i2 = 0;
       while (s2 < this.e) {
-        const added = sorted[i] || this.e, next = +added > +this.e ? this.e : added;
+        const added = sorted[i2] || this.e, next = +added > +this.e ? this.e : added;
         results.push(_Interval.fromDateTimes(s2, next));
         s2 = next;
-        i += 1;
+        i2 += 1;
       }
       return results;
     }
@@ -26294,17 +26294,17 @@
      */
     static xor(intervals) {
       let start2 = null, currentCount = 0;
-      const results = [], ends = intervals.map((i) => [
-        { time: i.s, type: "s" },
-        { time: i.e, type: "e" }
+      const results = [], ends = intervals.map((i2) => [
+        { time: i2.s, type: "s" },
+        { time: i2.e, type: "e" }
       ]), flattened = Array.prototype.concat(...ends), arr = flattened.sort((a, b) => a.time - b.time);
-      for (const i of arr) {
-        currentCount += i.type === "s" ? 1 : -1;
+      for (const i2 of arr) {
+        currentCount += i2.type === "s" ? 1 : -1;
         if (currentCount === 1) {
-          start2 = i.time;
+          start2 = i2.time;
         } else {
-          if (start2 && +start2 !== +i.time) {
-            results.push(_Interval.fromDateTimes(start2, i.time));
+          if (start2 && +start2 !== +i2.time) {
+            results.push(_Interval.fromDateTimes(start2, i2.time));
           }
           start2 = null;
         }
@@ -26317,7 +26317,7 @@
      * @return {Array}
      */
     difference(...intervals) {
-      return _Interval.xor([this].concat(intervals)).map((i) => this.intersection(i)).filter((i) => i && !i.isEmpty());
+      return _Interval.xor([this].concat(intervals)).map((i2) => this.intersection(i2)).filter((i2) => i2 && !i2.isEmpty());
     }
     /**
      * Returns a string representation of this Interval appropriate for debugging.
@@ -26674,7 +26674,7 @@
 
   // node_modules/luxon/src/impl/tokenParser.js
   var MISSING_FTP = "missing Intl.DateTimeFormat.formatToParts support";
-  function intUnit(regex, post = (i) => i) {
+  function intUnit(regex, post = (i2) => i2) {
     return { regex, deser: ([s2]) => post(parseDigits(s2)) };
   }
   var NBSP = String.fromCharCode(160);
@@ -26692,7 +26692,7 @@
     } else {
       return {
         regex: RegExp(strings.map(fixListRegex).join("|")),
-        deser: ([s2]) => strings.findIndex((i) => stripInsensitivities(s2) === stripInsensitivities(i)) + startIndex
+        deser: ([s2]) => strings.findIndex((i2) => stripInsensitivities(s2) === stripInsensitivities(i2)) + startIndex
       };
     }
   }
@@ -26706,11 +26706,11 @@
     return value.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, "\\$&");
   }
   function unitForToken(token, loc) {
-    const one = digitRegex(loc), two = digitRegex(loc, "{2}"), three = digitRegex(loc, "{3}"), four = digitRegex(loc, "{4}"), six = digitRegex(loc, "{6}"), oneOrTwo = digitRegex(loc, "{1,2}"), oneToThree = digitRegex(loc, "{1,3}"), oneToSix = digitRegex(loc, "{1,6}"), oneToNine = digitRegex(loc, "{1,9}"), twoToFour = digitRegex(loc, "{2,4}"), fourToSix = digitRegex(loc, "{4,6}"), literal = (t) => ({ regex: RegExp(escapeToken(t.val)), deser: ([s2]) => s2, literal: true }), unitate = (t) => {
+    const one = digitRegex(loc), two = digitRegex(loc, "{2}"), three = digitRegex(loc, "{3}"), four = digitRegex(loc, "{4}"), six = digitRegex(loc, "{6}"), oneOrTwo = digitRegex(loc, "{1,2}"), oneToThree = digitRegex(loc, "{1,3}"), oneToSix = digitRegex(loc, "{1,6}"), oneToNine = digitRegex(loc, "{1,9}"), twoToFour = digitRegex(loc, "{2,4}"), fourToSix = digitRegex(loc, "{4,6}"), literal = (t2) => ({ regex: RegExp(escapeToken(t2.val)), deser: ([s2]) => s2, literal: true }), unitate = (t2) => {
       if (token.literal) {
-        return literal(t);
+        return literal(t2);
       }
-      switch (t.val) {
+      switch (t2.val) {
         // era
         case "G":
           return oneOf(loc.eras("short"), 0);
@@ -26825,7 +26825,7 @@
         case " ":
           return simple(/[^\S\n\r]/);
         default:
-          return literal(t);
+          return literal(t2);
       }
     };
     const unit = unitate(token) || {
@@ -26921,9 +26921,9 @@
     if (matches) {
       const all = {};
       let matchIndex = 1;
-      for (const i in handlers) {
-        if (hasOwnProperty2(handlers, i)) {
-          const h = handlers[i], groups = h.groups ? h.groups + 1 : 1;
+      for (const i2 in handlers) {
+        if (hasOwnProperty2(handlers, i2)) {
+          const h = handlers[i2], groups = h.groups ? h.groups + 1 : 1;
           if (!h.literal && h.token) {
             all[h.token.val[0]] = h.deser(matches.slice(matchIndex, matchIndex + groups));
           }
@@ -27024,15 +27024,15 @@
     return tokens;
   }
   function expandMacroTokens(tokens, locale) {
-    return Array.prototype.concat(...tokens.map((t) => maybeExpandMacroToken(t, locale)));
+    return Array.prototype.concat(...tokens.map((t2) => maybeExpandMacroToken(t2, locale)));
   }
   var TokenParser = class {
     constructor(locale, format) {
       this.locale = locale;
       this.format = format;
       this.tokens = expandMacroTokens(Formatter.parseFormat(format), locale);
-      this.units = this.tokens.map((t) => unitForToken(t, locale));
-      this.disqualifyingUnit = this.units.find((t) => t.invalidReason);
+      this.units = this.tokens.map((t2) => unitForToken(t2, locale));
+      this.disqualifyingUnit = this.units.find((t2) => t2.invalidReason);
       if (!this.disqualifyingUnit) {
         const [regexString, handlers] = buildRegex(this.units);
         this.regex = RegExp(regexString, "i");
@@ -27834,7 +27834,7 @@
      */
     static parseFormatForOpts(formatOpts, localeOpts = {}) {
       const tokenList = formatOptsToTokens(formatOpts, Locale.fromObject(localeOpts));
-      return !tokenList ? null : tokenList.map((t) => t ? t.val : null).join("");
+      return !tokenList ? null : tokenList.map((t2) => t2 ? t2.val : null).join("");
     }
     /**
      * Produce the the fully expanded format token for the locale
@@ -27845,7 +27845,7 @@
      */
     static expandFormat(fmt, localeOpts = {}) {
       const expanded = expandMacroTokens(Formatter.parseFormat(fmt), Locale.fromObject(localeOpts));
-      return expanded.map((t) => t.val).join("");
+      return expanded.map((t2) => t2.val).join("");
     }
     static resetCache() {
       zoneOffsetTs = void 0;
@@ -28909,7 +28909,7 @@
       if (!dateTimes.every(_DateTime.isDateTime)) {
         throw new InvalidArgumentError("min requires all arguments be DateTimes");
       }
-      return bestBy(dateTimes, (i) => i.valueOf(), Math.min);
+      return bestBy(dateTimes, (i2) => i2.valueOf(), Math.min);
     }
     /**
      * Return the max of several date times
@@ -28920,7 +28920,7 @@
       if (!dateTimes.every(_DateTime.isDateTime)) {
         throw new InvalidArgumentError("max requires all arguments be DateTimes");
       }
-      return bestBy(dateTimes, (i) => i.valueOf(), Math.max);
+      return bestBy(dateTimes, (i2) => i2.valueOf(), Math.max);
     }
     // MISC
     /**
@@ -30022,10 +30022,10 @@
     const tokens = tokenize(color2);
     const parsed2 = tokens ? parseModernSyntax(tokens, true) : void 0;
     let result = void 0;
-    let i = 0;
+    let i2 = 0;
     let len = parsers.length;
-    while (i < len) {
-      if ((result = parsers[i++](color2, parsed2)) !== void 0) {
+    while (i2 < len) {
+      if ((result = parsers[i2++](color2, parsed2)) !== void 0) {
         return result;
       }
     }
@@ -30070,14 +30070,14 @@
   var parseTransparent_default = parseTransparent;
 
   // node_modules/culori/src/interpolate/lerp.js
-  var lerp = (a, b, t) => a + t * (b - a);
+  var lerp = (a, b, t2) => a + t2 * (b - a);
 
   // node_modules/culori/src/interpolate/piecewise.js
   var get_classes = (arr) => {
     let classes = [];
-    for (let i = 0; i < arr.length - 1; i++) {
-      let a = arr[i];
-      let b = arr[i + 1];
+    for (let i2 = 0; i2 < arr.length - 1; i2++) {
+      let a = arr[i2];
+      let b = arr[i2 + 1];
       if (a === void 0 && b === void 0) {
         classes.push(void 0);
       } else if (a !== void 0 && b !== void 0) {
@@ -30090,9 +30090,9 @@
   };
   var interpolatorPiecewise = (interpolator) => (arr) => {
     let classes = get_classes(arr);
-    return (t) => {
-      let cls = t * classes.length;
-      let idx = t >= 1 ? classes.length - 1 : Math.max(Math.floor(cls), 0);
+    return (t2) => {
+      let cls = t2 * classes.length;
+      let idx = t2 >= 1 ? classes.length - 1 : Math.max(Math.floor(cls), 0);
       let pair = classes[idx];
       return pair === void 0 ? void 0 : interpolator(pair[0], pair[1], cls - idx);
     };
@@ -30654,57 +30654,57 @@
   var definition_default5 = definition5;
 
   // node_modules/culori/src/hsi/convertHsiToRgb.js
-  function convertHsiToRgb({ h, s: s2, i, alpha: alpha2 }) {
+  function convertHsiToRgb({ h, s: s2, i: i2, alpha: alpha2 }) {
     h = normalizeHue_default(h !== void 0 ? h : 0);
     if (s2 === void 0) s2 = 0;
-    if (i === void 0) i = 0;
+    if (i2 === void 0) i2 = 0;
     let f3 = Math.abs(h / 60 % 2 - 1);
     let res;
     switch (Math.floor(h / 60)) {
       case 0:
         res = {
-          r: i * (1 + s2 * (3 / (2 - f3) - 1)),
-          g: i * (1 + s2 * (3 * (1 - f3) / (2 - f3) - 1)),
-          b: i * (1 - s2)
+          r: i2 * (1 + s2 * (3 / (2 - f3) - 1)),
+          g: i2 * (1 + s2 * (3 * (1 - f3) / (2 - f3) - 1)),
+          b: i2 * (1 - s2)
         };
         break;
       case 1:
         res = {
-          r: i * (1 + s2 * (3 * (1 - f3) / (2 - f3) - 1)),
-          g: i * (1 + s2 * (3 / (2 - f3) - 1)),
-          b: i * (1 - s2)
+          r: i2 * (1 + s2 * (3 * (1 - f3) / (2 - f3) - 1)),
+          g: i2 * (1 + s2 * (3 / (2 - f3) - 1)),
+          b: i2 * (1 - s2)
         };
         break;
       case 2:
         res = {
-          r: i * (1 - s2),
-          g: i * (1 + s2 * (3 / (2 - f3) - 1)),
-          b: i * (1 + s2 * (3 * (1 - f3) / (2 - f3) - 1))
+          r: i2 * (1 - s2),
+          g: i2 * (1 + s2 * (3 / (2 - f3) - 1)),
+          b: i2 * (1 + s2 * (3 * (1 - f3) / (2 - f3) - 1))
         };
         break;
       case 3:
         res = {
-          r: i * (1 - s2),
-          g: i * (1 + s2 * (3 * (1 - f3) / (2 - f3) - 1)),
-          b: i * (1 + s2 * (3 / (2 - f3) - 1))
+          r: i2 * (1 - s2),
+          g: i2 * (1 + s2 * (3 * (1 - f3) / (2 - f3) - 1)),
+          b: i2 * (1 + s2 * (3 / (2 - f3) - 1))
         };
         break;
       case 4:
         res = {
-          r: i * (1 + s2 * (3 * (1 - f3) / (2 - f3) - 1)),
-          g: i * (1 - s2),
-          b: i * (1 + s2 * (3 / (2 - f3) - 1))
+          r: i2 * (1 + s2 * (3 * (1 - f3) / (2 - f3) - 1)),
+          g: i2 * (1 - s2),
+          b: i2 * (1 + s2 * (3 / (2 - f3) - 1))
         };
         break;
       case 5:
         res = {
-          r: i * (1 + s2 * (3 / (2 - f3) - 1)),
-          g: i * (1 - s2),
-          b: i * (1 + s2 * (3 * (1 - f3) / (2 - f3) - 1))
+          r: i2 * (1 + s2 * (3 / (2 - f3) - 1)),
+          g: i2 * (1 - s2),
+          b: i2 * (1 + s2 * (3 * (1 - f3) / (2 - f3) - 1))
         };
         break;
       default:
-        res = { r: i * (1 - s2), g: i * (1 - s2), b: i * (1 - s2) };
+        res = { r: i2 * (1 - s2), g: i2 * (1 - s2), b: i2 * (1 - s2) };
     }
     res.mode = "rgb";
     if (alpha2 !== void 0) res.alpha = alpha2;
@@ -31129,18 +31129,18 @@
 
   // node_modules/culori/src/itp/convertItpToXyz65.js
   var toRel = (c2) => Math.max(c2 / YW, 0);
-  var convertItpToXyz65 = ({ i, t, p: p4, alpha: alpha2 }) => {
-    if (i === void 0) i = 0;
-    if (t === void 0) t = 0;
+  var convertItpToXyz65 = ({ i: i2, t: t2, p: p4, alpha: alpha2 }) => {
+    if (i2 === void 0) i2 = 0;
+    if (t2 === void 0) t2 = 0;
     if (p4 === void 0) p4 = 0;
     const l2 = transferPqDecode(
-      i + 0.008609037037932761 * t + 0.11102962500302593 * p4
+      i2 + 0.008609037037932761 * t2 + 0.11102962500302593 * p4
     );
     const m = transferPqDecode(
-      i - 0.00860903703793275 * t - 0.11102962500302599 * p4
+      i2 - 0.00860903703793275 * t2 - 0.11102962500302599 * p4
     );
     const s2 = transferPqDecode(
-      i + 0.5600313357106791 * t - 0.32062717498731885 * p4
+      i2 + 0.5600313357106791 * t2 - 0.32062717498731885 * p4
     );
     const res = {
       mode: "xyz65",
@@ -31176,10 +31176,10 @@
     const s2 = transferPqEncode(
       0.0070797844607477 * absX + 0.0748396662186366 * absY + 0.8433265453898765 * absZ
     );
-    const i = 0.5 * l2 + 0.5 * m;
-    const t = 1.61376953125 * l2 - 3.323486328125 * m + 1.709716796875 * s2;
+    const i2 = 0.5 * l2 + 0.5 * m;
+    const t2 = 1.61376953125 * l2 - 3.323486328125 * m + 1.709716796875 * s2;
     const p4 = 4.378173828125 * l2 - 4.24560546875 * m - 0.132568359375 * s2;
-    const res = { mode: "itp", i, t, p: p4 };
+    const res = { mode: "itp", i: i2, t: t2, p: p4 };
     if (alpha2 !== void 0) {
       res.alpha = alpha2;
     }
@@ -31233,10 +31233,10 @@
     let l2 = jabPqEncode(0.41478972 * xp + 0.579999 * yp + 0.014648 * z);
     let m = jabPqEncode(-0.20151 * xp + 1.120649 * yp + 0.0531008 * z);
     let s2 = jabPqEncode(-0.0166008 * xp + 0.2648 * yp + 0.6684799 * z);
-    let i = (l2 + m) / 2;
+    let i2 = (l2 + m) / 2;
     let res = {
       mode: "jab",
-      j: 0.44 * i / (1 - 0.56 * i) - d0,
+      j: 0.44 * i2 / (1 - 0.56 * i2) - d0,
       a: 3.524 * l2 - 4.066708 * m + 0.542708 * s2,
       b: 0.199076 * l2 + 1.096799 * m - 1.295875 * s2
     };
@@ -31260,10 +31260,10 @@
     if (j === void 0) j = 0;
     if (a === void 0) a = 0;
     if (b === void 0) b = 0;
-    let i = (j + d02) / (0.44 + 0.56 * (j + d02));
-    let l2 = jabPqDecode(i + 0.13860504 * a + 0.058047316 * b);
-    let m = jabPqDecode(i - 0.13860504 * a - 0.058047316 * b);
-    let s2 = jabPqDecode(i - 0.096019242 * a - 0.8118919 * b);
+    let i2 = (j + d02) / (0.44 + 0.56 * (j + d02));
+    let l2 = jabPqDecode(i2 + 0.13860504 * a + 0.058047316 * b);
+    let m = jabPqDecode(i2 - 0.13860504 * a - 0.058047316 * b);
+    let s2 = jabPqDecode(i2 - 0.096019242 * a - 0.8118919 * b);
     let res = {
       mode: "xyz65",
       x: rel(
@@ -31974,11 +31974,11 @@
     if (!cusp) {
       cusp = find_cusp(a, b);
     }
-    let t;
+    let t2;
     if ((L1 - L0) * cusp[1] - (cusp[0] - L0) * C12 <= 0) {
-      t = cusp[1] * L0 / (C12 * cusp[0] + cusp[1] * (L0 - L1));
+      t2 = cusp[1] * L0 / (C12 * cusp[0] + cusp[1] * (L0 - L1));
     } else {
-      t = cusp[1] * (L0 - 1) / (C12 * (cusp[0] - 1) + cusp[1] * (L0 - L1));
+      t2 = cusp[1] * (L0 - 1) / (C12 * (cusp[0] - 1) + cusp[1] * (L0 - L1));
       {
         let dL = L1 - L0;
         let dC = C12;
@@ -31989,8 +31989,8 @@
         let m_dt = dL + dC * k_m;
         let s_dt = dL + dC * k_s;
         {
-          let L = L0 * (1 - t) + t * L1;
-          let C = t * C12;
+          let L = L0 * (1 - t2) + t2 * L1;
+          let C = t2 * C12;
           let l_ = L + C * k_l;
           let m_ = L + C * k_m;
           let s_ = L + C * k_s;
@@ -32021,11 +32021,11 @@
           t_r = u_r >= 0 ? t_r : 1e6;
           t_g = u_g >= 0 ? t_g : 1e6;
           t_b = u_b >= 0 ? t_b : 1e6;
-          t += Math.min(t_r, Math.min(t_g, t_b));
+          t2 += Math.min(t_r, Math.min(t_g, t_b));
         }
       }
     }
-    return t;
+    return t2;
   }
   function get_ST_max(a_, b_, cusp = null) {
     if (!cusp) {
@@ -32075,14 +32075,14 @@
       let k_0 = 0;
       let k_1 = 0.8 * C_0;
       let k_2 = 1 - k_1 / C_mid;
-      let t = (c2 - k_0) / (k_1 + k_2 * (c2 - k_0));
-      s2 = t * 0.8;
+      let t2 = (c2 - k_0) / (k_1 + k_2 * (c2 - k_0));
+      s2 = t2 * 0.8;
     } else {
       let k_0 = C_mid;
       let k_1 = 0.2 * C_mid * C_mid * 1.25 * 1.25 / C_0;
       let k_2 = 1 - k_1 / (C_max - C_mid);
-      let t = (c2 - k_0) / (k_1 + k_2 * (c2 - k_0));
-      s2 = 0.8 + 0.2 * t;
+      let t2 = (c2 - k_0) / (k_1 + k_2 * (c2 - k_0));
+      s2 = 0.8 + 0.2 * t2;
     }
     if (s2) {
       ret.s = s2;
@@ -32107,19 +32107,19 @@
     let a_ = Math.cos(h / 180 * Math.PI);
     let b_ = Math.sin(h / 180 * Math.PI);
     let [C_0, C_mid, C_max] = get_Cs(ret.l, a_, b_);
-    let t, k_0, k_1, k_2;
+    let t2, k_0, k_1, k_2;
     if (s2 < 0.8) {
-      t = 1.25 * s2;
+      t2 = 1.25 * s2;
       k_0 = 0;
       k_1 = 0.8 * C_0;
       k_2 = 1 - k_1 / C_mid;
     } else {
-      t = 5 * (s2 - 0.8);
+      t2 = 5 * (s2 - 0.8);
       k_0 = C_mid;
       k_1 = 0.2 * C_mid * C_mid * 1.25 * 1.25 / C_0;
       k_2 = 1 - k_1 / (C_max - C_mid);
     }
-    let C = k_0 + t * k_1 / (1 - k_2 * t);
+    let C = k_0 + t2 * k_1 / (1 - k_2 * t2);
     ret.a = C * a_;
     ret.b = C * b_;
     return ret;
@@ -32154,9 +32154,9 @@
     let [S_max, T] = get_ST_max(a_, b_);
     let S_0 = 0.5;
     let k4 = 1 - S_0 / S_max;
-    let t = T / (c2 + l2 * T);
-    let L_v = t * l2;
-    let C_v = t * c2;
+    let t2 = T / (c2 + l2 * T);
+    let L_v = t2 * l2;
+    let C_v = t2 * c2;
     let L_vt = toe_inv(L_v);
     let C_vt = C_v * L_vt / L_v;
     let rgb_scale = convertOklabToLrgb_default({ l: L_vt, a: a_ * C_vt, b: b_ * C_vt });
@@ -32734,15 +32734,15 @@
   var convertRgbToYiq_default = convertRgbToYiq;
 
   // node_modules/culori/src/yiq/convertYiqToRgb.js
-  var convertYiqToRgb = ({ y, i, q, alpha: alpha2 }) => {
+  var convertYiqToRgb = ({ y, i: i2, q, alpha: alpha2 }) => {
     if (y === void 0) y = 0;
-    if (i === void 0) i = 0;
+    if (i2 === void 0) i2 = 0;
     if (q === void 0) q = 0;
     const res = {
       mode: "rgb",
-      r: y + 0.95608445 * i + 0.6208885 * q,
-      g: y - 0.27137664 * i - 0.6486059 * q,
-      b: y - 1.10561724 * i + 1.70250126 * q
+      r: y + 0.95608445 * i2 + 0.6208885 * q,
+      g: y - 0.27137664 * i2 - 0.6486059 * q,
+      b: y - 1.10561724 * i2 + 1.70250126 * q
     };
     if (alpha2 !== void 0) res.alpha = alpha2;
     return res;
@@ -34785,14 +34785,14 @@
     const locale = void 0;
     const months2 = Array.from(
       { length: 12 },
-      (_, i) => new Intl.DateTimeFormat(locale, { month: "short" }).format(
-        new Date(2e3, i, 1)
+      (_, i2) => new Intl.DateTimeFormat(locale, { month: "short" }).format(
+        new Date(2e3, i2, 1)
       )
     );
     const raw_weekdays = Array.from(
       { length: 7 },
-      (_, i) => new Intl.DateTimeFormat(locale, { weekday: "short" }).format(
-        new Date(1970, 0, 4 + i)
+      (_, i2) => new Intl.DateTimeFormat(locale, { weekday: "short" }).format(
+        new Date(1970, 0, 4 + i2)
       )
     );
     const weekdays2 = raw_weekdays.slice(1).concat(raw_weekdays[0]);
@@ -35002,11 +35002,11 @@
                 </button>
             </div>
             <div class="months calendar-view" data-last-action=${last_action}>
-                ${months2.map((label, i) => {
-        const month_start = new Date(view.year, i, 1);
+                ${months2.map((label, i2) => {
+        const month_start = new Date(view.year, i2, 1);
         const month_end = new Date(
           view.year,
-          i + 1,
+          i2 + 1,
           0,
           23,
           59,
@@ -35014,8 +35014,8 @@
           999
         );
         return html.node`
-                        <button class="btn month calendar-entry" aria-selected=${view.year === state.year && i + 1 === state.month} disabled=${month_end < min_date || month_start > max_date} onclick=${() => {
-          view.month = i + 1;
+                        <button class="btn month calendar-entry" aria-selected=${view.year === state.year && i2 + 1 === state.month} disabled=${month_end < min_date || month_start > max_date} onclick=${() => {
+          view.month = i2 + 1;
           view.level = "day";
           last_action = "";
           update_display();
@@ -35061,7 +35061,7 @@
                 </button>
             </div>
             <div class="years calendar-view">
-                ${Array.from({ length: 10 }, (_, i) => decade_start + i).map(
+                ${Array.from({ length: 10 }, (_, i2) => decade_start + i2).map(
         (yr) => {
           return html.node`
                         <button class="btn year calendar-entry" aria-selected=${yr === state.year} disabled=${yr < min_date.getFullYear() || yr > max_date.getFullYear()} onclick=${() => {
@@ -35140,7 +35140,7 @@
       const offset3 = (raw_first + 6) % 7;
       const days_in_month = new Date(year, month, 0).getDate();
       const cells = [];
-      for (let i = 0; i < offset3; i++) cells.push({ type: "empty" });
+      for (let i2 = 0; i2 < offset3; i2++) cells.push({ type: "empty" });
       for (let day = 1; day <= days_in_month; day++) {
         cells.push({
           type: "day",
@@ -35150,7 +35150,7 @@
         });
       }
       const rem = (7 - cells.length % 7) % 7;
-      for (let i = 0; i < rem; i++) cells.push({ type: "empty" });
+      for (let i2 = 0; i2 < rem; i2++) cells.push({ type: "empty" });
       console.info("cells", cells, state.month, view.month);
       return cells;
     }
@@ -37703,7 +37703,7 @@
         body: `Missing title and/or body for translation key popup_${key}`,
         type: "error"
       });
-      popup_queue = popup_queue.filter((i) => i.key != key);
+      popup_queue = popup_queue.filter((i2) => i2.key != key);
       check_queue();
       return;
     }
@@ -37719,7 +37719,7 @@
             </div>
             <div class="popup-action">
                 <button class="see-more" onclick=${() => {
-        popup_queue = popup_queue.filter((i) => i.key != key);
+        popup_queue = popup_queue.filter((i2) => i2.key != key);
         tooltip.hide();
         settings.popups_seen.push(key);
         save_setting("popups_seen", settings.popups_seen);
@@ -39307,15 +39307,15 @@
   }
   function hwb2rgbn(h, w, b) {
     const rgb3 = hsl2rgbn(h, 1, 0.5);
-    let i;
+    let i2;
     if (w + b > 1) {
-      i = 1 / (w + b);
-      w *= i;
-      b *= i;
+      i2 = 1 / (w + b);
+      w *= i2;
+      b *= i2;
     }
-    for (i = 0; i < 3; i++) {
-      rgb3[i] *= 1 - w - b;
-      rgb3[i] += w;
+    for (i2 = 0; i2 < 3; i2++) {
+      rgb3[i2] *= 1 - w - b;
+      rgb3[i2] += w;
     }
     return rgb3;
   }
@@ -39588,9 +39588,9 @@
     const unpacked = {};
     const keys2 = Object.keys(names$1);
     const tkeys = Object.keys(map);
-    let i, j, k4, ok, nk;
-    for (i = 0; i < keys2.length; i++) {
-      ok = nk = keys2[i];
+    let i2, j, k4, ok, nk;
+    for (i2 = 0; i2 < keys2.length; i2++) {
+      ok = nk = keys2[i2];
       for (j = 0; j < tkeys.length; j++) {
         k4 = tkeys[j];
         nk = nk.replace(k4, map[k4]);
@@ -39644,21 +39644,21 @@
   }
   var to = (v) => v <= 31308e-7 ? v * 12.92 : Math.pow(v, 1 / 2.4) * 1.055 - 0.055;
   var from = (v) => v <= 0.04045 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
-  function interpolate(rgb1, rgb22, t) {
+  function interpolate(rgb1, rgb22, t2) {
     const r2 = from(b2n(rgb1.r));
     const g = from(b2n(rgb1.g));
     const b = from(b2n(rgb1.b));
     return {
-      r: n2b(to(r2 + t * (from(b2n(rgb22.r)) - r2))),
-      g: n2b(to(g + t * (from(b2n(rgb22.g)) - g))),
-      b: n2b(to(b + t * (from(b2n(rgb22.b)) - b))),
-      a: rgb1.a + t * (rgb22.a - rgb1.a)
+      r: n2b(to(r2 + t2 * (from(b2n(rgb22.r)) - r2))),
+      g: n2b(to(g + t2 * (from(b2n(rgb22.g)) - g))),
+      b: n2b(to(b + t2 * (from(b2n(rgb22.b)) - b))),
+      a: rgb1.a + t2 * (rgb22.a - rgb1.a)
     };
   }
-  function modHSL(v, i, ratio) {
+  function modHSL(v, i2, ratio) {
     if (v) {
       let tmp = rgb2hsl(v);
-      tmp[i] = Math.max(0, Math.min(tmp[i] + tmp[i] * ratio, i === 0 ? 360 : 1));
+      tmp[i2] = Math.max(0, Math.min(tmp[i2] + tmp[i2] * ratio, i2 === 0 ? 360 : 1));
       tmp = hsl2rgb(tmp);
       v.r = tmp[0];
       v.g = tmp[1];
@@ -39744,9 +39744,9 @@
       }
       return this;
     }
-    interpolate(color2, t) {
+    interpolate(color2, t2) {
       if (color2) {
-        this._rgb = interpolate(this._rgb, color2._rgb, t);
+        this._rgb = interpolate(this._rgb, color2._rgb, t2);
       }
       return this;
     }
@@ -39842,34 +39842,34 @@
     }
   }
   function each(loopable, fn6, thisArg, reverse) {
-    let i, len, keys2;
+    let i2, len, keys2;
     if (isArray2(loopable)) {
       len = loopable.length;
       if (reverse) {
-        for (i = len - 1; i >= 0; i--) {
-          fn6.call(thisArg, loopable[i], i);
+        for (i2 = len - 1; i2 >= 0; i2--) {
+          fn6.call(thisArg, loopable[i2], i2);
         }
       } else {
-        for (i = 0; i < len; i++) {
-          fn6.call(thisArg, loopable[i], i);
+        for (i2 = 0; i2 < len; i2++) {
+          fn6.call(thisArg, loopable[i2], i2);
         }
       }
     } else if (isObject(loopable)) {
       keys2 = Object.keys(loopable);
       len = keys2.length;
-      for (i = 0; i < len; i++) {
-        fn6.call(thisArg, loopable[keys2[i]], keys2[i]);
+      for (i2 = 0; i2 < len; i2++) {
+        fn6.call(thisArg, loopable[keys2[i2]], keys2[i2]);
       }
     }
   }
   function _elementsEqual(a0, a1) {
-    let i, ilen, v0, v1;
+    let i2, ilen, v0, v1;
     if (!a0 || !a1 || a0.length !== a1.length) {
       return false;
     }
-    for (i = 0, ilen = a0.length; i < ilen; ++i) {
-      v0 = a0[i];
-      v1 = a1[i];
+    for (i2 = 0, ilen = a0.length; i2 < ilen; ++i2) {
+      v0 = a0[i2];
+      v1 = a1[i2];
       if (v0.datasetIndex !== v1.datasetIndex || v0.index !== v1.index) {
         return false;
       }
@@ -39922,8 +39922,8 @@
     options = options || {};
     const merger = options.merger || _merger;
     let current;
-    for (let i = 0; i < ilen; ++i) {
-      current = sources[i];
+    for (let i2 = 0; i2 < ilen; ++i2) {
+      current = sources[i2];
       if (!isObject(current)) {
         continue;
       }
@@ -40032,11 +40032,11 @@
   function _factorize(value) {
     const result = [];
     const sqrt = Math.sqrt(value);
-    let i;
-    for (i = 1; i < sqrt; i++) {
-      if (value % i === 0) {
-        result.push(i);
-        result.push(value / i);
+    let i2;
+    for (i2 = 1; i2 < sqrt; i2++) {
+      if (value % i2 === 0) {
+        result.push(i2);
+        result.push(value / i2);
       }
     }
     if (sqrt === (sqrt | 0)) {
@@ -40056,9 +40056,9 @@
     return rounded - epsilon <= x && rounded + epsilon >= x;
   }
   function _setMinAndMaxByKey(array, target, property) {
-    let i, ilen, value;
-    for (i = 0, ilen = array.length; i < ilen; i++) {
-      value = array[i][property];
+    let i2, ilen, value;
+    for (i2 = 0, ilen = array.length; i2 < ilen; i2++) {
+      value = array[i2][property];
       if (!isNaN(value)) {
         target.min = Math.min(target.min, value);
         target.max = Math.max(target.max, value);
@@ -40321,70 +40321,70 @@
     Object.assign(_scaleRanges, newRanges);
     return changed;
   }
-  var atEdge = (t) => t === 0 || t === 1;
-  var elasticIn = (t, s2, p4) => -(Math.pow(2, 10 * (t -= 1)) * Math.sin((t - s2) * TAU / p4));
-  var elasticOut = (t, s2, p4) => Math.pow(2, -10 * t) * Math.sin((t - s2) * TAU / p4) + 1;
+  var atEdge = (t2) => t2 === 0 || t2 === 1;
+  var elasticIn = (t2, s2, p4) => -(Math.pow(2, 10 * (t2 -= 1)) * Math.sin((t2 - s2) * TAU / p4));
+  var elasticOut = (t2, s2, p4) => Math.pow(2, -10 * t2) * Math.sin((t2 - s2) * TAU / p4) + 1;
   var effects = {
-    linear: (t) => t,
-    easeInQuad: (t) => t * t,
-    easeOutQuad: (t) => -t * (t - 2),
-    easeInOutQuad: (t) => (t /= 0.5) < 1 ? 0.5 * t * t : -0.5 * (--t * (t - 2) - 1),
-    easeInCubic: (t) => t * t * t,
-    easeOutCubic: (t) => (t -= 1) * t * t + 1,
-    easeInOutCubic: (t) => (t /= 0.5) < 1 ? 0.5 * t * t * t : 0.5 * ((t -= 2) * t * t + 2),
-    easeInQuart: (t) => t * t * t * t,
-    easeOutQuart: (t) => -((t -= 1) * t * t * t - 1),
-    easeInOutQuart: (t) => (t /= 0.5) < 1 ? 0.5 * t * t * t * t : -0.5 * ((t -= 2) * t * t * t - 2),
-    easeInQuint: (t) => t * t * t * t * t,
-    easeOutQuint: (t) => (t -= 1) * t * t * t * t + 1,
-    easeInOutQuint: (t) => (t /= 0.5) < 1 ? 0.5 * t * t * t * t * t : 0.5 * ((t -= 2) * t * t * t * t + 2),
-    easeInSine: (t) => -Math.cos(t * HALF_PI) + 1,
-    easeOutSine: (t) => Math.sin(t * HALF_PI),
-    easeInOutSine: (t) => -0.5 * (Math.cos(PI * t) - 1),
-    easeInExpo: (t) => t === 0 ? 0 : Math.pow(2, 10 * (t - 1)),
-    easeOutExpo: (t) => t === 1 ? 1 : -Math.pow(2, -10 * t) + 1,
-    easeInOutExpo: (t) => atEdge(t) ? t : t < 0.5 ? 0.5 * Math.pow(2, 10 * (t * 2 - 1)) : 0.5 * (-Math.pow(2, -10 * (t * 2 - 1)) + 2),
-    easeInCirc: (t) => t >= 1 ? t : -(Math.sqrt(1 - t * t) - 1),
-    easeOutCirc: (t) => Math.sqrt(1 - (t -= 1) * t),
-    easeInOutCirc: (t) => (t /= 0.5) < 1 ? -0.5 * (Math.sqrt(1 - t * t) - 1) : 0.5 * (Math.sqrt(1 - (t -= 2) * t) + 1),
-    easeInElastic: (t) => atEdge(t) ? t : elasticIn(t, 0.075, 0.3),
-    easeOutElastic: (t) => atEdge(t) ? t : elasticOut(t, 0.075, 0.3),
-    easeInOutElastic(t) {
+    linear: (t2) => t2,
+    easeInQuad: (t2) => t2 * t2,
+    easeOutQuad: (t2) => -t2 * (t2 - 2),
+    easeInOutQuad: (t2) => (t2 /= 0.5) < 1 ? 0.5 * t2 * t2 : -0.5 * (--t2 * (t2 - 2) - 1),
+    easeInCubic: (t2) => t2 * t2 * t2,
+    easeOutCubic: (t2) => (t2 -= 1) * t2 * t2 + 1,
+    easeInOutCubic: (t2) => (t2 /= 0.5) < 1 ? 0.5 * t2 * t2 * t2 : 0.5 * ((t2 -= 2) * t2 * t2 + 2),
+    easeInQuart: (t2) => t2 * t2 * t2 * t2,
+    easeOutQuart: (t2) => -((t2 -= 1) * t2 * t2 * t2 - 1),
+    easeInOutQuart: (t2) => (t2 /= 0.5) < 1 ? 0.5 * t2 * t2 * t2 * t2 : -0.5 * ((t2 -= 2) * t2 * t2 * t2 - 2),
+    easeInQuint: (t2) => t2 * t2 * t2 * t2 * t2,
+    easeOutQuint: (t2) => (t2 -= 1) * t2 * t2 * t2 * t2 + 1,
+    easeInOutQuint: (t2) => (t2 /= 0.5) < 1 ? 0.5 * t2 * t2 * t2 * t2 * t2 : 0.5 * ((t2 -= 2) * t2 * t2 * t2 * t2 + 2),
+    easeInSine: (t2) => -Math.cos(t2 * HALF_PI) + 1,
+    easeOutSine: (t2) => Math.sin(t2 * HALF_PI),
+    easeInOutSine: (t2) => -0.5 * (Math.cos(PI * t2) - 1),
+    easeInExpo: (t2) => t2 === 0 ? 0 : Math.pow(2, 10 * (t2 - 1)),
+    easeOutExpo: (t2) => t2 === 1 ? 1 : -Math.pow(2, -10 * t2) + 1,
+    easeInOutExpo: (t2) => atEdge(t2) ? t2 : t2 < 0.5 ? 0.5 * Math.pow(2, 10 * (t2 * 2 - 1)) : 0.5 * (-Math.pow(2, -10 * (t2 * 2 - 1)) + 2),
+    easeInCirc: (t2) => t2 >= 1 ? t2 : -(Math.sqrt(1 - t2 * t2) - 1),
+    easeOutCirc: (t2) => Math.sqrt(1 - (t2 -= 1) * t2),
+    easeInOutCirc: (t2) => (t2 /= 0.5) < 1 ? -0.5 * (Math.sqrt(1 - t2 * t2) - 1) : 0.5 * (Math.sqrt(1 - (t2 -= 2) * t2) + 1),
+    easeInElastic: (t2) => atEdge(t2) ? t2 : elasticIn(t2, 0.075, 0.3),
+    easeOutElastic: (t2) => atEdge(t2) ? t2 : elasticOut(t2, 0.075, 0.3),
+    easeInOutElastic(t2) {
       const s2 = 0.1125;
       const p4 = 0.45;
-      return atEdge(t) ? t : t < 0.5 ? 0.5 * elasticIn(t * 2, s2, p4) : 0.5 + 0.5 * elasticOut(t * 2 - 1, s2, p4);
+      return atEdge(t2) ? t2 : t2 < 0.5 ? 0.5 * elasticIn(t2 * 2, s2, p4) : 0.5 + 0.5 * elasticOut(t2 * 2 - 1, s2, p4);
     },
-    easeInBack(t) {
+    easeInBack(t2) {
       const s2 = 1.70158;
-      return t * t * ((s2 + 1) * t - s2);
+      return t2 * t2 * ((s2 + 1) * t2 - s2);
     },
-    easeOutBack(t) {
+    easeOutBack(t2) {
       const s2 = 1.70158;
-      return (t -= 1) * t * ((s2 + 1) * t + s2) + 1;
+      return (t2 -= 1) * t2 * ((s2 + 1) * t2 + s2) + 1;
     },
-    easeInOutBack(t) {
+    easeInOutBack(t2) {
       let s2 = 1.70158;
-      if ((t /= 0.5) < 1) {
-        return 0.5 * (t * t * (((s2 *= 1.525) + 1) * t - s2));
+      if ((t2 /= 0.5) < 1) {
+        return 0.5 * (t2 * t2 * (((s2 *= 1.525) + 1) * t2 - s2));
       }
-      return 0.5 * ((t -= 2) * t * (((s2 *= 1.525) + 1) * t + s2) + 2);
+      return 0.5 * ((t2 -= 2) * t2 * (((s2 *= 1.525) + 1) * t2 + s2) + 2);
     },
-    easeInBounce: (t) => 1 - effects.easeOutBounce(1 - t),
-    easeOutBounce(t) {
+    easeInBounce: (t2) => 1 - effects.easeOutBounce(1 - t2),
+    easeOutBounce(t2) {
       const m = 7.5625;
       const d = 2.75;
-      if (t < 1 / d) {
-        return m * t * t;
+      if (t2 < 1 / d) {
+        return m * t2 * t2;
       }
-      if (t < 2 / d) {
-        return m * (t -= 1.5 / d) * t + 0.75;
+      if (t2 < 2 / d) {
+        return m * (t2 -= 1.5 / d) * t2 + 0.75;
       }
-      if (t < 2.5 / d) {
-        return m * (t -= 2.25 / d) * t + 0.9375;
+      if (t2 < 2.5 / d) {
+        return m * (t2 -= 2.25 / d) * t2 + 0.9375;
       }
-      return m * (t -= 2.625 / d) * t + 0.984375;
+      return m * (t2 -= 2.625 / d) * t2 + 0.984375;
     },
-    easeInOutBounce: (t) => t < 0.5 ? effects.easeInBounce(t * 2) * 0.5 : effects.easeOutBounce(t * 2 - 1) * 0.5 + 0.5
+    easeInOutBounce: (t2) => t2 < 0.5 ? effects.easeInBounce(t2 * 2) * 0.5 : effects.easeOutBounce(t2 * 2 - 1) * 0.5 + 0.5
   };
   function isPatternOrGradient(value) {
     if (value && typeof value === "object") {
@@ -40635,8 +40635,8 @@
       return node;
     }
     const keys2 = key.split(".");
-    for (let i = 0, n2 = keys2.length; i < n2; ++i) {
-      const k4 = keys2[i];
+    for (let i2 = 0, n2 = keys2.length; i2 < n2; ++i2) {
+      const k4 = keys2[i2];
       node = node[k4] || (node[k4] = /* @__PURE__ */ Object.create(null));
     }
     return node;
@@ -40779,9 +40779,9 @@
     ctx.font = font;
     let longest = 0;
     const ilen = arrayOfThings.length;
-    let i, j, jlen, thing, nestedThing;
-    for (i = 0; i < ilen; i++) {
-      thing = arrayOfThings[i];
+    let i2, j, jlen, thing, nestedThing;
+    for (i2 = 0; i2 < ilen; i2++) {
+      thing = arrayOfThings[i2];
       if (thing !== void 0 && thing !== null && !isArray2(thing)) {
         longest = _measureText(ctx, data2, gc, longest, thing);
       } else if (isArray2(thing)) {
@@ -40796,8 +40796,8 @@
     ctx.restore();
     const gcLen = gc.length / 2;
     if (gcLen > arrayOfThings.length) {
-      for (i = 0; i < gcLen; i++) {
-        delete data2[gc[i]];
+      for (i2 = 0; i2 < gcLen; i2++) {
+        delete data2[gc[i2]];
       }
       gc.splice(0, gcLen);
     }
@@ -41023,12 +41023,12 @@
       text4
     ];
     const stroke = opts.strokeWidth > 0 && opts.strokeColor !== "";
-    let i, line;
+    let i2, line;
     ctx.save();
     ctx.font = font.string;
     setRenderOpts(ctx, opts);
-    for (i = 0; i < lines.length; ++i) {
-      line = lines[i];
+    for (i2 = 0; i2 < lines.length; ++i2) {
+      line = lines[i2];
       if (opts.backdrop) {
         drawBackdrop(ctx, opts.backdrop);
       }
@@ -41133,9 +41133,9 @@
   }
   function resolve(inputs, context, index3, info) {
     let cacheable = true;
-    let i, ilen, value;
-    for (i = 0, ilen = inputs.length; i < ilen; ++i) {
-      value = inputs[i];
+    let i2, ilen, value;
+    for (i2 = 0, ilen = inputs.length; i2 < ilen; ++i2) {
+      value = inputs[i2];
       if (value === void 0) {
         continue;
       }
@@ -41466,20 +41466,20 @@
     const { iScale } = meta;
     const { key = "r" } = this._parsing;
     const parsed2 = new Array(count);
-    let i, ilen, index3, item;
-    for (i = 0, ilen = count; i < ilen; ++i) {
-      index3 = i + start2;
+    let i2, ilen, index3, item;
+    for (i2 = 0, ilen = count; i2 < ilen; ++i2) {
+      index3 = i2 + start2;
       item = data2[index3];
-      parsed2[i] = {
+      parsed2[i2] = {
         r: iScale.parse(resolveObjectKey(item, key), index3)
       };
     }
     return parsed2;
   }
   var EPSILON = Number.EPSILON || 1e-14;
-  var getPoint = (points, i) => i < points.length && !points[i].skip && points[i];
+  var getPoint = (points, i2) => i2 < points.length && !points[i2].skip && points[i2];
   var getValueAxis = (indexAxis) => indexAxis === "x" ? "y" : "x";
-  function splineCurve(firstPoint, middlePoint, afterPoint, t) {
+  function splineCurve(firstPoint, middlePoint, afterPoint, t2) {
     const previous = firstPoint.skip ? middlePoint : firstPoint;
     const current = middlePoint;
     const next = afterPoint.skip ? middlePoint : afterPoint;
@@ -41489,8 +41489,8 @@
     let s12 = d12 / (d01 + d12);
     s01 = isNaN(s01) ? 0 : s01;
     s12 = isNaN(s12) ? 0 : s12;
-    const fa = t * s01;
-    const fb = t * s12;
+    const fa = t2 * s01;
+    const fb = t2 * s12;
     return {
       previous: {
         x: current.x - fa * (next.x - previous.x),
@@ -41506,25 +41506,25 @@
     const pointsLen = points.length;
     let alphaK, betaK, tauK, squaredMagnitude, pointCurrent;
     let pointAfter = getPoint(points, 0);
-    for (let i = 0; i < pointsLen - 1; ++i) {
+    for (let i2 = 0; i2 < pointsLen - 1; ++i2) {
       pointCurrent = pointAfter;
-      pointAfter = getPoint(points, i + 1);
+      pointAfter = getPoint(points, i2 + 1);
       if (!pointCurrent || !pointAfter) {
         continue;
       }
-      if (almostEquals(deltaK[i], 0, EPSILON)) {
-        mK[i] = mK[i + 1] = 0;
+      if (almostEquals(deltaK[i2], 0, EPSILON)) {
+        mK[i2] = mK[i2 + 1] = 0;
         continue;
       }
-      alphaK = mK[i] / deltaK[i];
-      betaK = mK[i + 1] / deltaK[i];
+      alphaK = mK[i2] / deltaK[i2];
+      betaK = mK[i2 + 1] / deltaK[i2];
       squaredMagnitude = Math.pow(alphaK, 2) + Math.pow(betaK, 2);
       if (squaredMagnitude <= 9) {
         continue;
       }
       tauK = 3 / Math.sqrt(squaredMagnitude);
-      mK[i] = alphaK * tauK * deltaK[i];
-      mK[i + 1] = betaK * tauK * deltaK[i];
+      mK[i2] = alphaK * tauK * deltaK[i2];
+      mK[i2 + 1] = betaK * tauK * deltaK[i2];
     }
   }
   function monotoneCompute(points, mK, indexAxis = "x") {
@@ -41532,10 +41532,10 @@
     const pointsLen = points.length;
     let delta, pointBefore, pointCurrent;
     let pointAfter = getPoint(points, 0);
-    for (let i = 0; i < pointsLen; ++i) {
+    for (let i2 = 0; i2 < pointsLen; ++i2) {
       pointBefore = pointCurrent;
       pointCurrent = pointAfter;
-      pointAfter = getPoint(points, i + 1);
+      pointAfter = getPoint(points, i2 + 1);
       if (!pointCurrent) {
         continue;
       }
@@ -41544,12 +41544,12 @@
       if (pointBefore) {
         delta = (iPixel - pointBefore[indexAxis]) / 3;
         pointCurrent[`cp1${indexAxis}`] = iPixel - delta;
-        pointCurrent[`cp1${valueAxis}`] = vPixel - delta * mK[i];
+        pointCurrent[`cp1${valueAxis}`] = vPixel - delta * mK[i2];
       }
       if (pointAfter) {
         delta = (pointAfter[indexAxis] - iPixel) / 3;
         pointCurrent[`cp2${indexAxis}`] = iPixel + delta;
-        pointCurrent[`cp2${valueAxis}`] = vPixel + delta * mK[i];
+        pointCurrent[`cp2${valueAxis}`] = vPixel + delta * mK[i2];
       }
     }
   }
@@ -41558,20 +41558,20 @@
     const pointsLen = points.length;
     const deltaK = Array(pointsLen).fill(0);
     const mK = Array(pointsLen);
-    let i, pointBefore, pointCurrent;
+    let i2, pointBefore, pointCurrent;
     let pointAfter = getPoint(points, 0);
-    for (i = 0; i < pointsLen; ++i) {
+    for (i2 = 0; i2 < pointsLen; ++i2) {
       pointBefore = pointCurrent;
       pointCurrent = pointAfter;
-      pointAfter = getPoint(points, i + 1);
+      pointAfter = getPoint(points, i2 + 1);
       if (!pointCurrent) {
         continue;
       }
       if (pointAfter) {
         const slopeDelta = pointAfter[indexAxis] - pointCurrent[indexAxis];
-        deltaK[i] = slopeDelta !== 0 ? (pointAfter[valueAxis] - pointCurrent[valueAxis]) / slopeDelta : 0;
+        deltaK[i2] = slopeDelta !== 0 ? (pointAfter[valueAxis] - pointCurrent[valueAxis]) / slopeDelta : 0;
       }
-      mK[i] = !pointBefore ? deltaK[i] : !pointAfter ? deltaK[i - 1] : sign(deltaK[i - 1]) !== sign(deltaK[i]) ? 0 : (deltaK[i - 1] + deltaK[i]) / 2;
+      mK[i2] = !pointBefore ? deltaK[i2] : !pointAfter ? deltaK[i2 - 1] : sign(deltaK[i2 - 1]) !== sign(deltaK[i2]) ? 0 : (deltaK[i2 - 1] + deltaK[i2]) / 2;
     }
     monotoneAdjust(points, deltaK, mK);
     monotoneCompute(points, mK, indexAxis);
@@ -41580,16 +41580,16 @@
     return Math.max(Math.min(pt, max2), min2);
   }
   function capBezierPoints(points, area) {
-    let i, ilen, point, inArea, inAreaPrev;
+    let i2, ilen, point, inArea, inAreaPrev;
     let inAreaNext = _isPointInArea(points[0], area);
-    for (i = 0, ilen = points.length; i < ilen; ++i) {
+    for (i2 = 0, ilen = points.length; i2 < ilen; ++i2) {
       inAreaPrev = inArea;
       inArea = inAreaNext;
-      inAreaNext = i < ilen - 1 && _isPointInArea(points[i + 1], area);
+      inAreaNext = i2 < ilen - 1 && _isPointInArea(points[i2 + 1], area);
       if (!inArea) {
         continue;
       }
-      point = points[i];
+      point = points[i2];
       if (inAreaPrev) {
         point.cp1x = capControlPoint(point.cp1x, area.left, area.right);
         point.cp1y = capControlPoint(point.cp1y, area.top, area.bottom);
@@ -41601,7 +41601,7 @@
     }
   }
   function _updateBezierControlPoints(points, options, area, loop, indexAxis) {
-    let i, ilen, point, controlPoints;
+    let i2, ilen, point, controlPoints;
     if (options.spanGaps) {
       points = points.filter((pt) => !pt.skip);
     }
@@ -41609,9 +41609,9 @@
       splineCurveMonotone(points, indexAxis);
     } else {
       let prev = loop ? points[points.length - 1] : points[0];
-      for (i = 0, ilen = points.length; i < ilen; ++i) {
-        point = points[i];
-        controlPoints = splineCurve(prev, point, points[Math.min(i + 1, ilen - (loop ? 0 : 1)) % ilen], options.tension);
+      for (i2 = 0, ilen = points.length; i2 < ilen; ++i2) {
+        point = points[i2];
+        controlPoints = splineCurve(prev, point, points[Math.min(i2 + 1, ilen - (loop ? 0 : 1)) % ilen], options.tension);
         point.cp1x = controlPoints.previous.x;
         point.cp1y = controlPoints.previous.y;
         point.cp2x = controlPoints.next.x;
@@ -41658,8 +41658,8 @@
   function getPositionedStyle(styles, style, suffix) {
     const result = {};
     suffix = suffix ? "-" + suffix : "";
-    for (let i = 0; i < 4; i++) {
-      const pos = positions[i];
+    for (let i2 = 0; i2 < 4; i2++) {
+      const pos = positions[i2];
       result[pos] = parseFloat(styles[style + "-" + pos + suffix]) || 0;
     }
     result.width = result.left + result.right;
@@ -41808,19 +41808,19 @@
     const matches = value && value.match(/^(\d+)(\.\d+)?px$/);
     return matches ? +matches[1] : void 0;
   }
-  function _pointInLine(p1, p22, t, mode) {
+  function _pointInLine(p1, p22, t2, mode) {
     return {
-      x: p1.x + t * (p22.x - p1.x),
-      y: p1.y + t * (p22.y - p1.y)
+      x: p1.x + t2 * (p22.x - p1.x),
+      y: p1.y + t2 * (p22.y - p1.y)
     };
   }
-  function _steppedInterpolation(p1, p22, t, mode) {
+  function _steppedInterpolation(p1, p22, t2, mode) {
     return {
-      x: p1.x + t * (p22.x - p1.x),
-      y: mode === "middle" ? t < 0.5 ? p1.y : p22.y : mode === "after" ? t < 1 ? p1.y : p22.y : t > 0 ? p22.y : p1.y
+      x: p1.x + t2 * (p22.x - p1.x),
+      y: mode === "middle" ? t2 < 0.5 ? p1.y : p22.y : mode === "after" ? t2 < 1 ? p1.y : p22.y : t2 > 0 ? p22.y : p1.y
     };
   }
-  function _bezierInterpolation(p1, p22, t, mode) {
+  function _bezierInterpolation(p1, p22, t2, mode) {
     const cp1 = {
       x: p1.cp2x,
       y: p1.cp2y
@@ -41829,12 +41829,12 @@
       x: p22.cp1x,
       y: p22.cp1y
     };
-    const a = _pointInLine(p1, cp1, t);
-    const b = _pointInLine(cp1, cp2, t);
-    const c2 = _pointInLine(cp2, p22, t);
-    const d = _pointInLine(a, b, t);
-    const e4 = _pointInLine(b, c2, t);
-    return _pointInLine(d, e4, t);
+    const a = _pointInLine(p1, cp1, t2);
+    const b = _pointInLine(cp1, cp2, t2);
+    const c2 = _pointInLine(cp2, p22, t2);
+    const d = _pointInLine(a, b, t2);
+    const e4 = _pointInLine(b, c2, t2);
+    return _pointInLine(d, e4, t2);
   }
   var getRightToLeftAdapter = function(rectX, width) {
     return {
@@ -41924,11 +41924,11 @@
     const { between, normalize } = propertyFn(property);
     const count = points.length;
     let { start: start2, end: end2, loop } = segment;
-    let i, ilen;
+    let i2, ilen;
     if (loop) {
       start2 += count;
       end2 += count;
-      for (i = 0, ilen = count; i < ilen; ++i) {
+      for (i2 = 0, ilen = count; i2 < ilen; ++i2) {
         if (!between(normalize(points[start2 % count][property]), startBound, endBound)) {
           break;
         }
@@ -41966,8 +41966,8 @@
     const endIsBefore = () => compare2(endBound, value) === 0 || between(endBound, prevValue, value);
     const shouldStart = () => inside || startIsBefore();
     const shouldStop = () => !inside || endIsBefore();
-    for (let i = start2, prev = start2; i <= end2; ++i) {
-      point = points[i % count];
+    for (let i2 = start2, prev = start2; i2 <= end2; ++i2) {
+      point = points[i2 % count];
       if (point.skip) {
         continue;
       }
@@ -41977,19 +41977,19 @@
       }
       inside = between(value, startBound, endBound);
       if (subStart === null && shouldStart()) {
-        subStart = compare2(value, startBound) === 0 ? i : prev;
+        subStart = compare2(value, startBound) === 0 ? i2 : prev;
       }
       if (subStart !== null && shouldStop()) {
         result.push(normalizeSegment({
           start: subStart,
-          end: i,
+          end: i2,
           loop,
           count,
           style
         }));
         subStart = null;
       }
-      prev = i;
+      prev = i2;
       prevValue = value;
     }
     if (subStart !== null) {
@@ -42006,8 +42006,8 @@
   function _boundSegments(line, bounds) {
     const result = [];
     const segments = line.segments;
-    for (let i = 0; i < segments.length; i++) {
-      const sub = _boundSegment(segments[i], line.points, bounds);
+    for (let i2 = 0; i2 < segments.length; i2++) {
+      const sub = _boundSegment(segments[i2], line.points, bounds);
       if (sub.length) {
         result.push(...sub);
       }
@@ -42109,7 +42109,7 @@
     const result = [];
     let prevStyle = baseStyle;
     let start2 = segments[0].start;
-    let i = start2;
+    let i2 = start2;
     function addStyle(s2, e4, l2, st) {
       const dir = spanGaps ? -1 : 1;
       if (s2 === e4) {
@@ -42137,24 +42137,24 @@
       start2 = spanGaps ? start2 : segment.start;
       let prev = points[start2 % count];
       let style;
-      for (i = start2 + 1; i <= segment.end; i++) {
-        const pt = points[i % count];
+      for (i2 = start2 + 1; i2 <= segment.end; i2++) {
+        const pt = points[i2 % count];
         style = readStyle(segmentOptions.setContext(createContext(chartContext, {
           type: "segment",
           p0: prev,
           p1: pt,
-          p0DataIndex: (i - 1) % count,
-          p1DataIndex: i % count,
+          p0DataIndex: (i2 - 1) % count,
+          p1DataIndex: i2 % count,
           datasetIndex
         })));
         if (styleChanged(style, prevStyle)) {
-          addStyle(start2, i - 1, segment.loop, prevStyle);
+          addStyle(start2, i2 - 1, segment.loop, prevStyle);
         }
         prev = pt;
         prevStyle = style;
       }
-      if (start2 < i - 1) {
-        addStyle(start2, i - 1, segment.loop, prevStyle);
+      if (start2 < i2 - 1) {
+        addStyle(start2, i2 - 1, segment.loop, prevStyle);
       }
     }
     return result;
@@ -42253,11 +42253,11 @@
           return;
         }
         const items = anims.items;
-        let i = items.length - 1;
+        let i2 = items.length - 1;
         let draw2 = false;
         let item;
-        for (; i >= 0; --i) {
-          item = items[i];
+        for (; i2 >= 0; --i2) {
+          item = items[i2];
           if (item._active) {
             if (item._total > anims.duration) {
               anims.duration = item._total;
@@ -42265,7 +42265,7 @@
             item.tick(date);
             draw2 = true;
           } else {
-            items[i] = items[items.length - 1];
+            items[i2] = items[items.length - 1];
             items.pop();
           }
         }
@@ -42340,9 +42340,9 @@
         return;
       }
       const items = anims.items;
-      let i = items.length - 1;
-      for (; i >= 0; --i) {
-        items[i].cancel();
+      let i2 = items.length - 1;
+      for (; i2 >= 0; --i2) {
+        items[i2].cancel();
       }
       anims.items = [];
       this._notify(chart, anims, Date.now(), "complete");
@@ -42460,8 +42460,8 @@
     _notify(resolved) {
       const method = resolved ? "res" : "rej";
       const promises = this._promises || [];
-      for (let i = 0; i < promises.length; i++) {
-        promises[i][method]();
+      for (let i2 = 0; i2 < promises.length; i2++) {
+        promises[i2][method]();
       }
     }
   };
@@ -42516,9 +42516,9 @@
       const running = target.$animations || (target.$animations = {});
       const props = Object.keys(values);
       const date = Date.now();
-      let i;
-      for (i = props.length - 1; i >= 0; --i) {
-        const prop = props[i];
+      let i2;
+      for (i2 = props.length - 1; i2 >= 0; --i2) {
+        const prop = props[i2];
         if (prop.charAt(0) === "$") {
           continue;
         }
@@ -42561,8 +42561,8 @@
   function awaitAll(animations, properties) {
     const running = [];
     const keys2 = Object.keys(properties);
-    for (let i = 0; i < keys2.length; i++) {
-      const anim = animations[keys2[i]];
+    for (let i2 = 0; i2 < keys2.length; i2++) {
+      const anim = animations[keys2[i2]];
       if (anim && anim.active()) {
         running.push(anim.wait());
       }
@@ -42610,17 +42610,17 @@
     };
   }
   function toClip(value) {
-    let t, r2, b, l2;
+    let t2, r2, b, l2;
     if (isObject(value)) {
-      t = value.top;
+      t2 = value.top;
       r2 = value.right;
       b = value.bottom;
       l2 = value.left;
     } else {
-      t = r2 = b = l2 = value;
+      t2 = r2 = b = l2 = value;
     }
     return {
-      top: t,
+      top: t2,
       right: r2,
       bottom: b,
       left: l2,
@@ -42630,22 +42630,22 @@
   function getSortedDatasetIndices(chart, filterVisible) {
     const keys2 = [];
     const metasets = chart._getSortedDatasetMetas(filterVisible);
-    let i, ilen;
-    for (i = 0, ilen = metasets.length; i < ilen; ++i) {
-      keys2.push(metasets[i].index);
+    let i2, ilen;
+    for (i2 = 0, ilen = metasets.length; i2 < ilen; ++i2) {
+      keys2.push(metasets[i2].index);
     }
     return keys2;
   }
   function applyStack(stack, value, dsIndex, options = {}) {
     const keys2 = stack.keys;
     const singleMode = options.mode === "single";
-    let i, ilen, datasetIndex, otherValue;
+    let i2, ilen, datasetIndex, otherValue;
     if (value === null) {
       return;
     }
     let found = false;
-    for (i = 0, ilen = keys2.length; i < ilen; ++i) {
-      datasetIndex = +keys2[i];
+    for (i2 = 0, ilen = keys2.length; i2 < ilen; ++i2) {
+      datasetIndex = +keys2[i2];
       if (datasetIndex === dsIndex) {
         found = true;
         if (options.all) {
@@ -42669,10 +42669,10 @@
     const vAxisKey = vScale.axis === "x" ? "x" : "y";
     const keys2 = Object.keys(data2);
     const adata = new Array(keys2.length);
-    let i, ilen, key;
-    for (i = 0, ilen = keys2.length; i < ilen; ++i) {
-      key = keys2[i];
-      adata[i] = {
+    let i2, ilen, key;
+    for (i2 = 0, ilen = keys2.length; i2 < ilen; ++i2) {
+      key = keys2[i2];
+      adata[i2] = {
         [iAxisKey]: key,
         [vAxisKey]: data2[key]
       };
@@ -42715,8 +42715,8 @@
     const key = getStackKey(iScale, vScale, meta);
     const ilen = parsed2.length;
     let stack;
-    for (let i = 0; i < ilen; ++i) {
-      const item = parsed2[i];
+    for (let i2 = 0; i2 < ilen; ++i2) {
+      const item = parsed2[i2];
       const { [iAxis]: index3, [vAxis]: value } = item;
       const itemStacks = item._stacks || (item._stacks = {});
       stack = itemStacks[vAxis] = getOrCreateStack(stacks, key, index3);
@@ -42921,7 +42921,7 @@
       const iAxis = iScale.axis;
       let sorted = start2 === 0 && count === data2.length ? true : meta._sorted;
       let prev = start2 > 0 && meta._parsed[start2 - 1];
-      let i, cur, parsed2;
+      let i2, cur, parsed2;
       if (this._parsing === false) {
         meta._parsed = data2;
         meta._sorted = true;
@@ -42935,8 +42935,8 @@
           parsed2 = this.parsePrimitiveData(meta, data2, start2, count);
         }
         const isNotInOrderComparedToPrev = () => cur[iAxis] === null || prev && cur[iAxis] < prev[iAxis];
-        for (i = 0; i < count; ++i) {
-          meta._parsed[i + start2] = cur = parsed2[i];
+        for (i2 = 0; i2 < count; ++i2) {
+          meta._parsed[i2 + start2] = cur = parsed2[i2];
           if (sorted) {
             if (isNotInOrderComparedToPrev()) {
               sorted = false;
@@ -42957,10 +42957,10 @@
       const labels = iScale.getLabels();
       const singleScale = iScale === vScale;
       const parsed2 = new Array(count);
-      let i, ilen, index3;
-      for (i = 0, ilen = count; i < ilen; ++i) {
-        index3 = i + start2;
-        parsed2[i] = {
+      let i2, ilen, index3;
+      for (i2 = 0, ilen = count; i2 < ilen; ++i2) {
+        index3 = i2 + start2;
+        parsed2[i2] = {
           [iAxis]: singleScale || iScale.parse(labels[index3], index3),
           [vAxis]: vScale.parse(data2[index3], index3)
         };
@@ -42970,11 +42970,11 @@
     parseArrayData(meta, data2, start2, count) {
       const { xScale, yScale } = meta;
       const parsed2 = new Array(count);
-      let i, ilen, index3, item;
-      for (i = 0, ilen = count; i < ilen; ++i) {
-        index3 = i + start2;
+      let i2, ilen, index3, item;
+      for (i2 = 0, ilen = count; i2 < ilen; ++i2) {
+        index3 = i2 + start2;
         item = data2[index3];
-        parsed2[i] = {
+        parsed2[i2] = {
           x: xScale.parse(item[0], index3),
           y: yScale.parse(item[1], index3)
         };
@@ -42985,11 +42985,11 @@
       const { xScale, yScale } = meta;
       const { xAxisKey = "x", yAxisKey = "y" } = this._parsing;
       const parsed2 = new Array(count);
-      let i, ilen, index3, item;
-      for (i = 0, ilen = count; i < ilen; ++i) {
-        index3 = i + start2;
+      let i2, ilen, index3, item;
+      for (i2 = 0, ilen = count; i2 < ilen; ++i2) {
+        index3 = i2 + start2;
         item = data2[index3];
-        parsed2[i] = {
+        parsed2[i2] = {
           x: xScale.parse(resolveObjectKey(item, xAxisKey), index3),
           y: yScale.parse(resolveObjectKey(item, yAxisKey), index3)
         };
@@ -43037,13 +43037,13 @@
         max: Number.NEGATIVE_INFINITY
       };
       const { min: otherMin, max: otherMax } = getUserBounds(otherScale);
-      let i, parsed2;
+      let i2, parsed2;
       function _skip() {
-        parsed2 = _parsed[i];
+        parsed2 = _parsed[i2];
         const otherValue = parsed2[otherScale.axis];
         return !isNumberFinite(parsed2[scale.axis]) || otherMin > otherValue || otherMax < otherValue;
       }
-      for (i = 0; i < ilen; ++i) {
+      for (i2 = 0; i2 < ilen; ++i2) {
         if (_skip()) {
           continue;
         }
@@ -43053,7 +43053,7 @@
         }
       }
       if (sorted) {
-        for (i = ilen - 1; i >= 0; --i) {
+        for (i2 = ilen - 1; i2 >= 0; --i2) {
           if (_skip()) {
             continue;
           }
@@ -43066,9 +43066,9 @@
     getAllParsedValues(scale) {
       const parsed2 = this._cachedMeta._parsed;
       const values = [];
-      let i, ilen, value;
-      for (i = 0, ilen = parsed2.length; i < ilen; ++i) {
-        value = parsed2[i][scale.axis];
+      let i2, ilen, value;
+      for (i2 = 0, ilen = parsed2.length; i2 < ilen; ++i2) {
+        value = parsed2[i2][scale.axis];
         if (isNumberFinite(value)) {
           values.push(value);
         }
@@ -43105,12 +43105,12 @@
       const start2 = this._drawStart || 0;
       const count = this._drawCount || elements2.length - start2;
       const drawActiveElementsOnTop = this.options.drawActiveElementsOnTop;
-      let i;
+      let i2;
       if (meta.dataset) {
         meta.dataset.draw(ctx, area, start2, count);
       }
-      for (i = start2; i < start2 + count; ++i) {
-        const element = elements2[i];
+      for (i2 = start2; i2 < start2 + count; ++i2) {
+        const element = elements2[i2];
         if (element.hidden) {
           continue;
         }
@@ -43120,8 +43120,8 @@
           element.draw(ctx, area);
         }
       }
-      for (i = 0; i < active.length; ++i) {
-        active[i].draw(ctx, area);
+      for (i2 = 0; i2 < active.length; ++i2) {
+        active[i2].draw(ctx, area);
       }
     }
     getStyle(index3, active) {
@@ -43283,16 +43283,16 @@
       const meta = this._cachedMeta;
       const data2 = meta.data;
       const end2 = start2 + count;
-      let i;
+      let i2;
       const move = (arr) => {
         arr.length += count;
-        for (i = arr.length - 1; i >= end2; i--) {
-          arr[i] = arr[i - count];
+        for (i2 = arr.length - 1; i2 >= end2; i2--) {
+          arr[i2] = arr[i2 - count];
         }
       };
       move(data2);
-      for (i = start2; i < end2; ++i) {
-        data2[i] = new this.dataElementType();
+      for (i2 = start2; i2 < end2; ++i2) {
+        data2[i2] = new this.dataElementType();
       }
       if (this._parsing) {
         move(meta._parsed);
@@ -43377,8 +43377,8 @@
     if (!scale._cache.$bar) {
       const visibleMetas = scale.getMatchingVisibleMetas(type);
       let values = [];
-      for (let i = 0, ilen = visibleMetas.length; i < ilen; i++) {
-        values = values.concat(visibleMetas[i].controller.getAllParsedValues(scale));
+      for (let i2 = 0, ilen = visibleMetas.length; i2 < ilen; i2++) {
+        values = values.concat(visibleMetas[i2].controller.getAllParsedValues(scale));
       }
       scale._cache.$bar = _arrayUnique(values.sort((a, b) => a - b));
     }
@@ -43388,7 +43388,7 @@
     const scale = meta.iScale;
     const values = getAllScaleValues(scale, meta.type);
     let min2 = scale._length;
-    let i, ilen, curr, prev;
+    let i2, ilen, curr, prev;
     const updateMinAndPrev = () => {
       if (curr === 32767 || curr === -32768) {
         return;
@@ -43398,13 +43398,13 @@
       }
       prev = curr;
     };
-    for (i = 0, ilen = values.length; i < ilen; ++i) {
-      curr = scale.getPixelForValue(values[i]);
+    for (i2 = 0, ilen = values.length; i2 < ilen; ++i2) {
+      curr = scale.getPixelForValue(values[i2]);
       updateMinAndPrev();
     }
     prev = void 0;
-    for (i = 0, ilen = scale.ticks.length; i < ilen; ++i) {
-      curr = scale.getPixelForTick(i);
+    for (i2 = 0, ilen = scale.ticks.length; i2 < ilen; ++i2) {
+      curr = scale.getPixelForTick(i2);
       updateMinAndPrev();
     }
     return min2;
@@ -43445,9 +43445,9 @@
       start: start2
     };
   }
-  function parseFloatBar(entry, item, vScale, i) {
-    const startValue = vScale.parse(entry[0], i);
-    const endValue = vScale.parse(entry[1], i);
+  function parseFloatBar(entry, item, vScale, i2) {
+    const startValue = vScale.parse(entry[0], i2);
+    const endValue = vScale.parse(entry[1], i2);
     const min2 = Math.min(startValue, endValue);
     const max2 = Math.max(startValue, endValue);
     let barStart = min2;
@@ -43466,11 +43466,11 @@
       max: max2
     };
   }
-  function parseValue(entry, item, vScale, i) {
+  function parseValue(entry, item, vScale, i2) {
     if (isArray2(entry)) {
-      parseFloatBar(entry, item, vScale, i);
+      parseFloatBar(entry, item, vScale, i2);
     } else {
-      item[vScale.axis] = vScale.parse(entry, i);
+      item[vScale.axis] = vScale.parse(entry, i2);
     }
     return item;
   }
@@ -43480,12 +43480,12 @@
     const labels = iScale.getLabels();
     const singleScale = iScale === vScale;
     const parsed2 = [];
-    let i, ilen, item, entry;
-    for (i = start2, ilen = start2 + count; i < ilen; ++i) {
-      entry = data2[i];
+    let i2, ilen, item, entry;
+    for (i2 = start2, ilen = start2 + count; i2 < ilen; ++i2) {
+      entry = data2[i2];
       item = {};
-      item[iScale.axis] = singleScale || iScale.parse(labels[i], i);
-      parsed2.push(parseValue(entry, item, vScale, i));
+      item[iScale.axis] = singleScale || iScale.parse(labels[i2], i2);
+      parsed2.push(parseValue(entry, item, vScale, i2));
     }
     return parsed2;
   }
@@ -43621,12 +43621,12 @@
       const iAxisKey = iScale.axis === "x" ? xAxisKey : yAxisKey;
       const vAxisKey = vScale.axis === "x" ? xAxisKey : yAxisKey;
       const parsed2 = [];
-      let i, ilen, item, obj;
-      for (i = start2, ilen = start2 + count; i < ilen; ++i) {
-        obj = data2[i];
+      let i2, ilen, item, obj;
+      for (i2 = start2, ilen = start2 + count; i2 < ilen; ++i2) {
+        obj = data2[i2];
         item = {};
-        item[iScale.axis] = iScale.parse(resolveObjectKey(obj, iAxisKey), i);
-        parsed2.push(parseValue(resolveObjectKey(obj, vAxisKey), item, vScale, i));
+        item[iScale.axis] = iScale.parse(resolveObjectKey(obj, iAxisKey), i2);
+        parsed2.push(parseValue(resolveObjectKey(obj, vAxisKey), item, vScale, i2));
       }
       return parsed2;
     }
@@ -43669,13 +43669,13 @@
       const horizontal = vScale.isHorizontal();
       const ruler = this._getRuler();
       const { sharedOptions, includeOptions } = this._getSharedOptions(start2, mode);
-      for (let i = start2; i < start2 + count; i++) {
-        const parsed2 = this.getParsed(i);
+      for (let i2 = start2; i2 < start2 + count; i2++) {
+        const parsed2 = this.getParsed(i2);
         const vpixels = reset || isNullOrUndef(parsed2[vScale.axis]) ? {
           base,
           head: base
-        } : this._calculateBarValuePixels(i);
-        const ipixels = this._calculateBarIndexPixels(i, ruler);
+        } : this._calculateBarValuePixels(i2);
+        const ipixels = this._calculateBarIndexPixels(i2, ruler);
         const stack = (parsed2._stacks || {})[vScale.axis];
         const properties = {
           horizontal,
@@ -43687,12 +43687,12 @@
           width: horizontal ? Math.abs(vpixels.size) : ipixels.size
         };
         if (includeOptions) {
-          properties.options = sharedOptions || this.resolveDataElementOptions(i, bars[i].active ? "active" : mode);
+          properties.options = sharedOptions || this.resolveDataElementOptions(i2, bars[i2].active ? "active" : mode);
         }
-        const options = properties.options || bars[i].options;
+        const options = properties.options || bars[i2].options;
         setBorderSkipped(properties, options, stack, index3);
         setInflateAmount(properties, options, ruler.ratio);
-        this.updateElement(bars[i], i, properties, mode);
+        this.updateElement(bars[i2], i2, properties, mode);
       }
     }
     _getStacks(last, dataIndex) {
@@ -43754,9 +43754,9 @@
       const meta = this._cachedMeta;
       const iScale = meta.iScale;
       const pixels = [];
-      let i, ilen;
-      for (i = 0, ilen = meta.data.length; i < ilen; ++i) {
-        pixels.push(iScale.getPixelForValue(this.getParsed(i)[iScale.axis], i));
+      let i2, ilen;
+      for (i2 = 0, ilen = meta.data.length; i2 < ilen; ++i2) {
+        pixels.push(iScale.getPixelForValue(this.getParsed(i2)[iScale.axis], i2));
       }
       const barThickness = opts.barThickness;
       const min2 = barThickness || computeMinSampleSize(meta);
@@ -43859,10 +43859,10 @@
       const vScale = meta.vScale;
       const rects = meta.data;
       const ilen = rects.length;
-      let i = 0;
-      for (; i < ilen; ++i) {
-        if (this.getParsed(i)[vScale.axis] !== null && !rects[i].hidden) {
-          rects[i].draw(this._ctx);
+      let i2 = 0;
+      for (; i2 < ilen; ++i2) {
+        if (this.getParsed(i2)[vScale.axis] !== null && !rects[i2].hidden) {
+          rects[i2].draw(this._ctx);
         }
       }
     }
@@ -43900,32 +43900,32 @@
     }
     parsePrimitiveData(meta, data2, start2, count) {
       const parsed2 = super.parsePrimitiveData(meta, data2, start2, count);
-      for (let i = 0; i < parsed2.length; i++) {
-        parsed2[i]._custom = this.resolveDataElementOptions(i + start2).radius;
+      for (let i2 = 0; i2 < parsed2.length; i2++) {
+        parsed2[i2]._custom = this.resolveDataElementOptions(i2 + start2).radius;
       }
       return parsed2;
     }
     parseArrayData(meta, data2, start2, count) {
       const parsed2 = super.parseArrayData(meta, data2, start2, count);
-      for (let i = 0; i < parsed2.length; i++) {
-        const item = data2[start2 + i];
-        parsed2[i]._custom = valueOrDefault(item[2], this.resolveDataElementOptions(i + start2).radius);
+      for (let i2 = 0; i2 < parsed2.length; i2++) {
+        const item = data2[start2 + i2];
+        parsed2[i2]._custom = valueOrDefault(item[2], this.resolveDataElementOptions(i2 + start2).radius);
       }
       return parsed2;
     }
     parseObjectData(meta, data2, start2, count) {
       const parsed2 = super.parseObjectData(meta, data2, start2, count);
-      for (let i = 0; i < parsed2.length; i++) {
-        const item = data2[start2 + i];
-        parsed2[i]._custom = valueOrDefault(item && item.r && +item.r, this.resolveDataElementOptions(i + start2).radius);
+      for (let i2 = 0; i2 < parsed2.length; i2++) {
+        const item = data2[start2 + i2];
+        parsed2[i2]._custom = valueOrDefault(item && item.r && +item.r, this.resolveDataElementOptions(i2 + start2).radius);
       }
       return parsed2;
     }
     getMaxOverflow() {
       const data2 = this._cachedMeta.data;
       let max2 = 0;
-      for (let i = data2.length - 1; i >= 0; --i) {
-        max2 = Math.max(max2, data2[i].size(this.resolveDataElementOptions(i)) / 2);
+      for (let i2 = data2.length - 1; i2 >= 0; --i2) {
+        max2 = Math.max(max2, data2[i2].size(this.resolveDataElementOptions(i2)) / 2);
       }
       return max2 > 0 && max2;
     }
@@ -43952,20 +43952,20 @@
       const { sharedOptions, includeOptions } = this._getSharedOptions(start2, mode);
       const iAxis = iScale.axis;
       const vAxis = vScale.axis;
-      for (let i = start2; i < start2 + count; i++) {
-        const point = points[i];
-        const parsed2 = !reset && this.getParsed(i);
+      for (let i2 = start2; i2 < start2 + count; i2++) {
+        const point = points[i2];
+        const parsed2 = !reset && this.getParsed(i2);
         const properties = {};
         const iPixel = properties[iAxis] = reset ? iScale.getPixelForDecimal(0.5) : iScale.getPixelForValue(parsed2[iAxis]);
         const vPixel = properties[vAxis] = reset ? vScale.getBasePixel() : vScale.getPixelForValue(parsed2[vAxis]);
         properties.skip = isNaN(iPixel) || isNaN(vPixel);
         if (includeOptions) {
-          properties.options = sharedOptions || this.resolveDataElementOptions(i, point.active ? "active" : mode);
+          properties.options = sharedOptions || this.resolveDataElementOptions(i2, point.active ? "active" : mode);
           if (reset) {
             properties.options.radius = 0;
           }
         }
-        this.updateElement(point, i, properties, mode);
+        this.updateElement(point, i2, properties, mode);
       }
     }
     resolveDataElementOptions(index3, mode) {
@@ -44060,9 +44060,9 @@
               const data2 = chart.data;
               if (data2.labels.length && data2.datasets.length) {
                 const { labels: { pointStyle, color: color2 } } = chart.legend.options;
-                return data2.labels.map((label, i) => {
+                return data2.labels.map((label, i2) => {
                   const meta = chart.getDatasetMeta(0);
-                  const style = meta.controller.getStyle(i);
+                  const style = meta.controller.getStyle(i2);
                   return {
                     text: label,
                     fillStyle: style.backgroundColor,
@@ -44070,8 +44070,8 @@
                     fontColor: color2,
                     lineWidth: style.borderWidth,
                     pointStyle,
-                    hidden: !chart.getDataVisibility(i),
-                    index: i
+                    hidden: !chart.getDataVisibility(i2),
+                    index: i2
                   };
                 });
               }
@@ -44101,14 +44101,14 @@
       if (this._parsing === false) {
         meta._parsed = data2;
       } else {
-        let getter = (i2) => +data2[i2];
+        let getter = (i3) => +data2[i3];
         if (isObject(data2[start2])) {
           const { key = "value" } = this._parsing;
-          getter = (i2) => +resolveObjectKey(data2[i2], key);
+          getter = (i3) => +resolveObjectKey(data2[i3], key);
         }
-        let i, ilen;
-        for (i = start2, ilen = start2 + count; i < ilen; ++i) {
-          meta._parsed[i] = getter(i);
+        let i2, ilen;
+        for (i2 = start2, ilen = start2 + count; i2 < ilen; ++i2) {
+          meta._parsed[i2] = getter(i2);
         }
       }
     }
@@ -44121,9 +44121,9 @@
     _getRotationExtents() {
       let min2 = TAU;
       let max2 = -TAU;
-      for (let i = 0; i < this.chart.data.datasets.length; ++i) {
-        if (this.chart.isDatasetVisible(i) && this.chart.getDatasetMeta(i).type === this._type) {
-          const controller = this.chart.getDatasetMeta(i).controller;
+      for (let i2 = 0; i2 < this.chart.data.datasets.length; ++i2) {
+        if (this.chart.isDatasetVisible(i2) && this.chart.getDatasetMeta(i2).type === this._type) {
+          const controller = this.chart.getDatasetMeta(i2).controller;
           const rotation = controller._getRotation();
           const circumference = controller._getCircumference();
           min2 = Math.min(min2, rotation);
@@ -44159,14 +44159,14 @@
       this.innerRadius = Math.max(this.outerRadius - radiusLength * chartWeight, 0);
       this.updateElements(arcs, 0, arcs.length, mode);
     }
-    _circumference(i, reset) {
+    _circumference(i2, reset) {
       const opts = this.options;
       const meta = this._cachedMeta;
       const circumference = this._getCircumference();
-      if (reset && opts.animation.animateRotate || !this.chart.getDataVisibility(i) || meta._parsed[i] === null || meta.data[i].hidden) {
+      if (reset && opts.animation.animateRotate || !this.chart.getDataVisibility(i2) || meta._parsed[i2] === null || meta.data[i2].hidden) {
         return 0;
       }
-      return this.calculateCircumference(meta._parsed[i] * circumference / TAU);
+      return this.calculateCircumference(meta._parsed[i2] * circumference / TAU);
     }
     updateElements(arcs, start2, count, mode) {
       const reset = mode === "reset";
@@ -44181,13 +44181,13 @@
       const outerRadius = animateScale ? 0 : this.outerRadius;
       const { sharedOptions, includeOptions } = this._getSharedOptions(start2, mode);
       let startAngle = this._getRotation();
-      let i;
-      for (i = 0; i < start2; ++i) {
-        startAngle += this._circumference(i, reset);
+      let i2;
+      for (i2 = 0; i2 < start2; ++i2) {
+        startAngle += this._circumference(i2, reset);
       }
-      for (i = start2; i < start2 + count; ++i) {
-        const circumference = this._circumference(i, reset);
-        const arc = arcs[i];
+      for (i2 = start2; i2 < start2 + count; ++i2) {
+        const circumference = this._circumference(i2, reset);
+        const arc = arcs[i2];
         const properties = {
           x: centerX + this.offsetX,
           y: centerY + this.offsetY,
@@ -44198,20 +44198,20 @@
           innerRadius
         };
         if (includeOptions) {
-          properties.options = sharedOptions || this.resolveDataElementOptions(i, arc.active ? "active" : mode);
+          properties.options = sharedOptions || this.resolveDataElementOptions(i2, arc.active ? "active" : mode);
         }
         startAngle += circumference;
-        this.updateElement(arc, i, properties, mode);
+        this.updateElement(arc, i2, properties, mode);
       }
     }
     calculateTotal() {
       const meta = this._cachedMeta;
       const metaData = meta.data;
       let total = 0;
-      let i;
-      for (i = 0; i < metaData.length; i++) {
-        const value = meta._parsed[i];
-        if (value !== null && !isNaN(value) && this.chart.getDataVisibility(i) && !metaData[i].hidden) {
+      let i2;
+      for (i2 = 0; i2 < metaData.length; i2++) {
+        const value = meta._parsed[i2];
+        if (value !== null && !isNaN(value) && this.chart.getDataVisibility(i2) && !metaData[i2].hidden) {
           total += Math.abs(value);
         }
       }
@@ -44237,11 +44237,11 @@
     getMaxBorderWidth(arcs) {
       let max2 = 0;
       const chart = this.chart;
-      let i, ilen, meta, controller, options;
+      let i2, ilen, meta, controller, options;
       if (!arcs) {
-        for (i = 0, ilen = chart.data.datasets.length; i < ilen; ++i) {
-          if (chart.isDatasetVisible(i)) {
-            meta = chart.getDatasetMeta(i);
+        for (i2 = 0, ilen = chart.data.datasets.length; i2 < ilen; ++i2) {
+          if (chart.isDatasetVisible(i2)) {
+            meta = chart.getDatasetMeta(i2);
             arcs = meta.data;
             controller = meta.controller;
             break;
@@ -44251,8 +44251,8 @@
       if (!arcs) {
         return 0;
       }
-      for (i = 0, ilen = arcs.length; i < ilen; ++i) {
-        options = controller.resolveDataElementOptions(i);
+      for (i2 = 0, ilen = arcs.length; i2 < ilen; ++i2) {
+        options = controller.resolveDataElementOptions(i2);
         if (options.borderAlign !== "inner") {
           max2 = Math.max(max2, options.borderWidth || 0, options.hoverBorderWidth || 0);
         }
@@ -44261,17 +44261,17 @@
     }
     getMaxOffset(arcs) {
       let max2 = 0;
-      for (let i = 0, ilen = arcs.length; i < ilen; ++i) {
-        const options = this.resolveDataElementOptions(i);
+      for (let i2 = 0, ilen = arcs.length; i2 < ilen; ++i2) {
+        const options = this.resolveDataElementOptions(i2);
         max2 = Math.max(max2, options.offset || 0, options.hoverOffset || 0);
       }
       return max2;
     }
     _getRingWeightOffset(datasetIndex) {
       let ringWeightOffset = 0;
-      for (let i = 0; i < datasetIndex; ++i) {
-        if (this.chart.isDatasetVisible(i)) {
-          ringWeightOffset += this._getRingWeight(i);
+      for (let i2 = 0; i2 < datasetIndex; ++i2) {
+        if (this.chart.isDatasetVisible(i2)) {
+          ringWeightOffset += this._getRingWeight(i2);
         }
       }
       return ringWeightOffset;
@@ -44344,28 +44344,28 @@
       const end2 = start2 + count;
       const pointsCount = points.length;
       let prevParsed = start2 > 0 && this.getParsed(start2 - 1);
-      for (let i = 0; i < pointsCount; ++i) {
-        const point = points[i];
+      for (let i2 = 0; i2 < pointsCount; ++i2) {
+        const point = points[i2];
         const properties = directUpdate ? point : {};
-        if (i < start2 || i >= end2) {
+        if (i2 < start2 || i2 >= end2) {
           properties.skip = true;
           continue;
         }
-        const parsed2 = this.getParsed(i);
+        const parsed2 = this.getParsed(i2);
         const nullData = isNullOrUndef(parsed2[vAxis]);
-        const iPixel = properties[iAxis] = iScale.getPixelForValue(parsed2[iAxis], i);
-        const vPixel = properties[vAxis] = reset || nullData ? vScale.getBasePixel() : vScale.getPixelForValue(_stacked ? this.applyStack(vScale, parsed2, _stacked) : parsed2[vAxis], i);
+        const iPixel = properties[iAxis] = iScale.getPixelForValue(parsed2[iAxis], i2);
+        const vPixel = properties[vAxis] = reset || nullData ? vScale.getBasePixel() : vScale.getPixelForValue(_stacked ? this.applyStack(vScale, parsed2, _stacked) : parsed2[vAxis], i2);
         properties.skip = isNaN(iPixel) || isNaN(vPixel) || nullData;
-        properties.stop = i > 0 && Math.abs(parsed2[iAxis] - prevParsed[iAxis]) > maxGapLength;
+        properties.stop = i2 > 0 && Math.abs(parsed2[iAxis] - prevParsed[iAxis]) > maxGapLength;
         if (segment) {
           properties.parsed = parsed2;
-          properties.raw = _dataset.data[i];
+          properties.raw = _dataset.data[i2];
         }
         if (includeOptions) {
-          properties.options = sharedOptions || this.resolveDataElementOptions(i, point.active ? "active" : mode);
+          properties.options = sharedOptions || this.resolveDataElementOptions(i2, point.active ? "active" : mode);
         }
         if (!directUpdate) {
-          this.updateElement(point, i, properties, mode);
+          this.updateElement(point, i2, properties, mode);
         }
         prevParsed = parsed2;
       }
@@ -44421,9 +44421,9 @@
               const data2 = chart.data;
               if (data2.labels.length && data2.datasets.length) {
                 const { labels: { pointStyle, color: color2 } } = chart.legend.options;
-                return data2.labels.map((label, i) => {
+                return data2.labels.map((label, i2) => {
                   const meta = chart.getDatasetMeta(0);
-                  const style = meta.controller.getStyle(i);
+                  const style = meta.controller.getStyle(i2);
                   return {
                     text: label,
                     fillStyle: style.backgroundColor,
@@ -44431,8 +44431,8 @@
                     fontColor: color2,
                     lineWidth: style.borderWidth,
                     pointStyle,
-                    hidden: !chart.getDataVisibility(i),
-                    index: i
+                    hidden: !chart.getDataVisibility(i2),
+                    index: i2
                   };
                 });
               }
@@ -44525,16 +44525,16 @@
       const centerY = scale.yCenter;
       const datasetStartAngle = scale.getIndexAngle(0) - 0.5 * PI;
       let angle = datasetStartAngle;
-      let i;
+      let i2;
       const defaultAngle = 360 / this.countVisibleElements();
-      for (i = 0; i < start2; ++i) {
-        angle += this._computeAngle(i, mode, defaultAngle);
+      for (i2 = 0; i2 < start2; ++i2) {
+        angle += this._computeAngle(i2, mode, defaultAngle);
       }
-      for (i = start2; i < start2 + count; i++) {
-        const arc = arcs[i];
+      for (i2 = start2; i2 < start2 + count; i2++) {
+        const arc = arcs[i2];
         let startAngle = angle;
-        let endAngle = angle + this._computeAngle(i, mode, defaultAngle);
-        let outerRadius = chart.getDataVisibility(i) ? scale.getDistanceFromCenterForValue(this.getParsed(i).r) : 0;
+        let endAngle = angle + this._computeAngle(i2, mode, defaultAngle);
+        let outerRadius = chart.getDataVisibility(i2) ? scale.getDistanceFromCenterForValue(this.getParsed(i2).r) : 0;
         angle = endAngle;
         if (reset) {
           if (animationOpts.animateScale) {
@@ -44551,9 +44551,9 @@
           outerRadius,
           startAngle,
           endAngle,
-          options: this.resolveDataElementOptions(i, arc.active ? "active" : mode)
+          options: this.resolveDataElementOptions(i2, arc.active ? "active" : mode)
         };
-        this.updateElement(arc, i, properties, mode);
+        this.updateElement(arc, i2, properties, mode);
       }
     }
     countVisibleElements() {
@@ -44634,10 +44634,10 @@
     updateElements(points, start2, count, mode) {
       const scale = this._cachedMeta.rScale;
       const reset = mode === "reset";
-      for (let i = start2; i < start2 + count; i++) {
-        const point = points[i];
-        const options = this.resolveDataElementOptions(i, point.active ? "active" : mode);
-        const pointPosition = scale.getPointPositionForValue(i, this.getParsed(i).r);
+      for (let i2 = start2; i2 < start2 + count; i2++) {
+        const point = points[i2];
+        const options = this.resolveDataElementOptions(i2, point.active ? "active" : mode);
+        const pointPosition = scale.getPointPositionForValue(i2, this.getParsed(i2).r);
         const x = reset ? scale.xCenter : pointPosition.x;
         const y = reset ? scale.yCenter : pointPosition.y;
         const properties = {
@@ -44647,7 +44647,7 @@
           skip: isNaN(x) || isNaN(y),
           options
         };
-        this.updateElement(point, i, properties, mode);
+        this.updateElement(point, i2, properties, mode);
       }
     }
   };
@@ -44735,24 +44735,24 @@
       const maxGapLength = isNumber2(spanGaps) ? spanGaps : Number.POSITIVE_INFINITY;
       const directUpdate = this.chart._animationsDisabled || reset || mode === "none";
       let prevParsed = start2 > 0 && this.getParsed(start2 - 1);
-      for (let i = start2; i < start2 + count; ++i) {
-        const point = points[i];
-        const parsed2 = this.getParsed(i);
+      for (let i2 = start2; i2 < start2 + count; ++i2) {
+        const point = points[i2];
+        const parsed2 = this.getParsed(i2);
         const properties = directUpdate ? point : {};
         const nullData = isNullOrUndef(parsed2[vAxis]);
-        const iPixel = properties[iAxis] = iScale.getPixelForValue(parsed2[iAxis], i);
-        const vPixel = properties[vAxis] = reset || nullData ? vScale.getBasePixel() : vScale.getPixelForValue(_stacked ? this.applyStack(vScale, parsed2, _stacked) : parsed2[vAxis], i);
+        const iPixel = properties[iAxis] = iScale.getPixelForValue(parsed2[iAxis], i2);
+        const vPixel = properties[vAxis] = reset || nullData ? vScale.getBasePixel() : vScale.getPixelForValue(_stacked ? this.applyStack(vScale, parsed2, _stacked) : parsed2[vAxis], i2);
         properties.skip = isNaN(iPixel) || isNaN(vPixel) || nullData;
-        properties.stop = i > 0 && Math.abs(parsed2[iAxis] - prevParsed[iAxis]) > maxGapLength;
+        properties.stop = i2 > 0 && Math.abs(parsed2[iAxis] - prevParsed[iAxis]) > maxGapLength;
         if (segment) {
           properties.parsed = parsed2;
-          properties.raw = _dataset.data[i];
+          properties.raw = _dataset.data[i2];
         }
         if (includeOptions) {
-          properties.options = sharedOptions || this.resolveDataElementOptions(i, point.active ? "active" : mode);
+          properties.options = sharedOptions || this.resolveDataElementOptions(i2, point.active ? "active" : mode);
         }
         if (!directUpdate) {
-          this.updateElement(point, i, properties, mode);
+          this.updateElement(point, i2, properties, mode);
         }
         prevParsed = parsed2;
       }
@@ -44763,8 +44763,8 @@
       const data2 = meta.data || [];
       if (!this.options.showLine) {
         let max2 = 0;
-        for (let i = data2.length - 1; i >= 0; --i) {
-          max2 = Math.max(max2, data2[i].size(this.resolveDataElementOptions(i)) / 2);
+        for (let i2 = data2.length - 1; i2 >= 0; --i2) {
+          max2 = Math.max(max2, data2[i2].size(this.resolveDataElementOptions(i2)) / 2);
         }
         return max2 > 0 && max2;
       }
@@ -44876,9 +44876,9 @@
   function evaluateInteractionItems(chart, axis, position, handler, intersect) {
     const metasets = chart.getSortedVisibleDatasetMetas();
     const value = position[axis];
-    for (let i = 0, ilen = metasets.length; i < ilen; ++i) {
-      const { index: index3, data: data2 } = metasets[i];
-      const { lo, hi } = binarySearch(metasets[i], axis, value, intersect);
+    for (let i2 = 0, ilen = metasets.length; i2 < ilen; ++i2) {
+      const { index: index3, data: data2 } = metasets[i2];
+      const { lo, hi } = binarySearch(metasets[i2], axis, value, intersect);
       for (let j = lo; j <= hi; ++j) {
         const element = data2[j];
         if (!element.skip) {
@@ -45032,11 +45032,11 @@
           const datasetIndex = items[0].datasetIndex;
           const data2 = chart.getDatasetMeta(datasetIndex).data;
           items = [];
-          for (let i = 0; i < data2.length; ++i) {
+          for (let i2 = 0; i2 < data2.length; ++i2) {
             items.push({
-              element: data2[i],
+              element: data2[i2],
               datasetIndex,
-              index: i
+              index: i2
             });
           }
         }
@@ -45085,12 +45085,12 @@
   }
   function wrapBoxes(boxes) {
     const layoutBoxes = [];
-    let i, ilen, box, pos, stack, stackWeight;
-    for (i = 0, ilen = (boxes || []).length; i < ilen; ++i) {
-      box = boxes[i];
+    let i2, ilen, box, pos, stack, stackWeight;
+    for (i2 = 0, ilen = (boxes || []).length; i2 < ilen; ++i2) {
+      box = boxes[i2];
       ({ position: pos, options: { stack, stackWeight = 1 } } = box);
       layoutBoxes.push({
-        index: i,
+        index: i2,
         box,
         pos,
         horizontal: box.isHorizontal(),
@@ -45122,9 +45122,9 @@
   function setLayoutDims(layouts2, params) {
     const stacks = buildStacks(layouts2);
     const { vBoxMaxWidth, hBoxMaxHeight } = params;
-    let i, ilen, layout;
-    for (i = 0, ilen = layouts2.length; i < ilen; ++i) {
-      layout = layouts2[i];
+    let i2, ilen, layout;
+    for (i2 = 0, ilen = layouts2.length; i2 < ilen; ++i2) {
+      layout = layouts2[i2];
       const { fullSize } = layout.box;
       const stack = stacks[layout.stack];
       const factor2 = stack && layout.stackWeight / stack.weight;
@@ -45233,9 +45233,9 @@
   }
   function fitBoxes(boxes, chartArea, params, stacks) {
     const refitBoxes = [];
-    let i, ilen, layout, box, refit, changed;
-    for (i = 0, ilen = boxes.length, refit = 0; i < ilen; ++i) {
-      layout = boxes[i];
+    let i2, ilen, layout, box, refit, changed;
+    for (i2 = 0, ilen = boxes.length, refit = 0; i2 < ilen; ++i2) {
+      layout = boxes[i2];
       box = layout.box;
       box.update(layout.width || chartArea.w, layout.height || chartArea.h, getMargins(layout.horizontal, chartArea));
       const { same, other } = updateDims(chartArea, params, layout, stacks);
@@ -45740,11 +45740,11 @@
     }
     const spacing = calculateSpacing(majorIndices, ticks, ticksLimit);
     if (numMajorIndices > 0) {
-      let i, ilen;
+      let i2, ilen;
       const avgMajorSpacing = numMajorIndices > 1 ? Math.round((last - first) / (numMajorIndices - 1)) : null;
       skip(ticks, newTicks, spacing, isNullOrUndef(avgMajorSpacing) ? 0 : first - avgMajorSpacing, first);
-      for (i = 0, ilen = numMajorIndices - 1; i < ilen; i++) {
-        skip(ticks, newTicks, spacing, majorIndices[i], majorIndices[i + 1]);
+      for (i2 = 0, ilen = numMajorIndices - 1; i2 < ilen; i2++) {
+        skip(ticks, newTicks, spacing, majorIndices[i2], majorIndices[i2 + 1]);
       }
       skip(ticks, newTicks, spacing, last, isNullOrUndef(avgMajorSpacing) ? ticks.length : last + avgMajorSpacing);
       return newTicks;
@@ -45766,8 +45766,8 @@
       return Math.max(spacing, 1);
     }
     const factors = _factorize(evenMajorSpacing);
-    for (let i = 0, ilen = factors.length - 1; i < ilen; i++) {
-      const factor2 = factors[i];
+    for (let i2 = 0, ilen = factors.length - 1; i2 < ilen; i2++) {
+      const factor2 = factors[i2];
       if (factor2 > spacing) {
         return factor2;
       }
@@ -45776,10 +45776,10 @@
   }
   function getMajorIndices(ticks) {
     const result = [];
-    let i, ilen;
-    for (i = 0, ilen = ticks.length; i < ilen; i++) {
-      if (ticks[i].major) {
-        result.push(i);
+    let i2, ilen;
+    for (i2 = 0, ilen = ticks.length; i2 < ilen; i2++) {
+      if (ticks[i2].major) {
+        result.push(i2);
       }
     }
     return result;
@@ -45787,11 +45787,11 @@
   function skipMajors(ticks, newTicks, majorIndices, spacing) {
     let count = 0;
     let next = majorIndices[0];
-    let i;
+    let i2;
     spacing = Math.ceil(spacing);
-    for (i = 0; i < ticks.length; i++) {
-      if (i === next) {
-        newTicks.push(ticks[i]);
+    for (i2 = 0; i2 < ticks.length; i2++) {
+      if (i2 === next) {
+        newTicks.push(ticks[i2]);
         count++;
         next = majorIndices[count * spacing];
       }
@@ -45801,7 +45801,7 @@
     const start2 = valueOrDefault(majorStart, 0);
     const end2 = Math.min(valueOrDefault(majorEnd, ticks.length), ticks.length);
     let count = 0;
-    let length, i, next;
+    let length, i2, next;
     spacing = Math.ceil(spacing);
     if (majorEnd) {
       length = majorEnd - majorStart;
@@ -45812,9 +45812,9 @@
       count++;
       next = Math.round(start2 + count * spacing);
     }
-    for (i = Math.max(start2, 0); i < end2; i++) {
-      if (i === next) {
-        newTicks.push(ticks[i]);
+    for (i2 = Math.max(start2, 0); i2 < end2; i2++) {
+      if (i2 === next) {
+        newTicks.push(ticks[i2]);
         count++;
         next = Math.round(start2 + count * spacing);
       }
@@ -45822,12 +45822,12 @@
   }
   function getEvenSpacing(arr) {
     const len = arr.length;
-    let i, diff;
+    let i2, diff;
     if (len < 2) {
       return false;
     }
-    for (diff = arr[0], i = 1; i < len; ++i) {
-      if (arr[i] - arr[i - 1] !== diff) {
+    for (diff = arr[0], i2 = 1; i2 < len; ++i2) {
+      if (arr[i2] - arr[i2 - 1] !== diff) {
         return false;
       }
     }
@@ -45840,9 +45840,9 @@
     const result = [];
     const increment = arr.length / numItems;
     const len = arr.length;
-    let i = 0;
-    for (; i < len; i += increment) {
-      result.push(arr[Math.floor(i)]);
+    let i2 = 0;
+    for (; i2 < len; i2 += increment) {
+      result.push(arr[Math.floor(i2)]);
     }
     return result;
   }
@@ -45873,10 +45873,10 @@
     each(caches, (cache2) => {
       const gc = cache2.gc;
       const gcLen = gc.length / 2;
-      let i;
+      let i2;
       if (gcLen > length) {
-        for (i = 0; i < gcLen; ++i) {
-          delete cache2.data[gc[i]];
+        for (i2 = 0; i2 < gcLen; ++i2) {
+          delete cache2.data[gc[i2]];
         }
         gc.splice(0, gcLen);
       }
@@ -46038,8 +46038,8 @@
         };
       }
       const metas = this.getMatchingVisibleMetas();
-      for (let i = 0, ilen = metas.length; i < ilen; ++i) {
-        range = metas[i].controller.getMinMax(this, canStack);
+      for (let i2 = 0, ilen = metas.length; i2 < ilen; ++i2) {
+        range = metas[i2].controller.getMinMax(this, canStack);
         if (!minDefined) {
           min2 = Math.min(min2, range.min);
         }
@@ -46208,12 +46208,12 @@
     }
     generateTickLabels(ticks) {
       const tickOpts = this.options.ticks;
-      let i, ilen, tick;
-      for (i = 0, ilen = ticks.length; i < ilen; i++) {
-        tick = ticks[i];
+      let i2, ilen, tick;
+      for (i2 = 0, ilen = ticks.length; i2 < ilen; i2++) {
+        tick = ticks[i2];
         tick.label = callback(tickOpts.callback, [
           tick.value,
-          i,
+          i2,
           ticks
         ], this);
       }
@@ -46372,12 +46372,12 @@
     _convertTicksToLabels(ticks) {
       this.beforeTickToLabelConversion();
       this.generateTickLabels(ticks);
-      let i, ilen;
-      for (i = 0, ilen = ticks.length; i < ilen; i++) {
-        if (isNullOrUndef(ticks[i].label)) {
-          ticks.splice(i, 1);
+      let i2, ilen;
+      for (i2 = 0, ilen = ticks.length; i2 < ilen; i2++) {
+        if (isNullOrUndef(ticks[i2].label)) {
+          ticks.splice(i2, 1);
           ilen--;
-          i--;
+          i2--;
         }
       }
       this.afterTickToLabelConversion();
@@ -46401,10 +46401,10 @@
       const increment = Math.floor(length / getTicksLimit(length, maxTicksLimit));
       let widestLabelSize = 0;
       let highestLabelSize = 0;
-      let i, j, jlen, label, tickFont, fontString, cache2, lineHeight, width, height, nestedLabel;
-      for (i = 0; i < length; i += increment) {
-        label = ticks[i].label;
-        tickFont = this._resolveTickFontOptions(i);
+      let i2, j, jlen, label, tickFont, fontString, cache2, lineHeight, width, height, nestedLabel;
+      for (i2 = 0; i2 < length; i2 += increment) {
+        label = ticks[i2].label;
+        tickFont = this._resolveTickFontOptions(i2);
         ctx.font = fontString = tickFont.string;
         cache2 = caches[fontString] = caches[fontString] || {
           data: {},
@@ -46521,7 +46521,7 @@
       const alignBorderValue = function(pixel2) {
         return _alignPixel(chart, pixel2, axisWidth);
       };
-      let borderValue, i, lineValue, alignedLineValue;
+      let borderValue, i2, lineValue, alignedLineValue;
       let tx1, ty1, tx2, ty2, x1, y1, x2, y2;
       if (position === "top") {
         borderValue = alignBorderValue(this.bottom);
@@ -46574,8 +46574,8 @@
       }
       const limit = valueOrDefault(options.ticks.maxTicksLimit, ticksLength);
       const step = Math.max(1, Math.ceil(ticksLength / limit));
-      for (i = 0; i < ticksLength; i += step) {
-        const context = this.getContext(i);
+      for (i2 = 0; i2 < ticksLength; i2 += step) {
+        const context = this.getContext(i2);
         const optsAtIndex = grid.setContext(context);
         const optsAtIndexBorder = border.setContext(context);
         const lineWidth = optsAtIndex.lineWidth;
@@ -46586,7 +46586,7 @@
         const tickColor = optsAtIndex.tickColor;
         const tickBorderDash = optsAtIndex.tickBorderDash || [];
         const tickBorderDashOffset = optsAtIndex.tickBorderDashOffset;
-        lineValue = getPixelForGridLine(this, i, offset3);
+        lineValue = getPixelForGridLine(this, i2, offset3);
         if (lineValue === void 0) {
           continue;
         }
@@ -46631,7 +46631,7 @@
       const hTickAndPadding = mirror ? -padding : tickAndPadding;
       const rotation = -toRadians(this.labelRotation);
       const items = [];
-      let i, ilen, tick, label, x, y, textAlign, pixel2, font, lineHeight, lineCount, textOffset;
+      let i2, ilen, tick, label, x, y, textAlign, pixel2, font, lineHeight, lineCount, textOffset;
       let textBaseline = "middle";
       if (position === "top") {
         y = this.bottom - hTickAndPadding;
@@ -46674,12 +46674,12 @@
         }
       }
       const labelSizes = this._getLabelSizes();
-      for (i = 0, ilen = ticks.length; i < ilen; ++i) {
-        tick = ticks[i];
+      for (i2 = 0, ilen = ticks.length; i2 < ilen; ++i2) {
+        tick = ticks[i2];
         label = tick.label;
-        const optsAtIndex = optionTicks.setContext(this.getContext(i));
-        pixel2 = this.getPixelForTick(i) + optionTicks.labelOffset;
-        font = this._resolveTickFontOptions(i);
+        const optsAtIndex = optionTicks.setContext(this.getContext(i2));
+        pixel2 = this.getPixelForTick(i2) + optionTicks.labelOffset;
+        font = this._resolveTickFontOptions(i2);
         lineHeight = font.lineHeight;
         lineCount = isArray2(label) ? label.length : 1;
         const halfCount = lineCount / 2;
@@ -46690,9 +46690,9 @@
         if (isHorizontal) {
           x = pixel2;
           if (textAlign === "inner") {
-            if (i === ilen - 1) {
+            if (i2 === ilen - 1) {
               tickTextAlign = !this.options.reverse ? "right" : "left";
-            } else if (i === 0) {
+            } else if (i2 === 0) {
               tickTextAlign = !this.options.reverse ? "left" : "right";
             } else {
               tickTextAlign = "center";
@@ -46728,8 +46728,8 @@
         let backdrop;
         if (optsAtIndex.showLabelBackdrop) {
           const labelPadding = toPadding(optsAtIndex.backdropPadding);
-          const height = labelSizes.heights[i];
-          const width = labelSizes.widths[i];
+          const height = labelSizes.heights[i2];
+          const width = labelSizes.widths[i2];
           let top2 = textOffset - labelPadding.top;
           let left2 = 0 - labelPadding.left;
           switch (textBaseline) {
@@ -46748,9 +46748,9 @@
               left2 -= width;
               break;
             case "inner":
-              if (i === ilen - 1) {
+              if (i2 === ilen - 1) {
                 left2 -= width;
-              } else if (i > 0) {
+              } else if (i2 > 0) {
                 left2 -= width / 2;
               }
               break;
@@ -46901,7 +46901,7 @@
         return 0;
       }
       const ticks = this.ticks;
-      const index3 = ticks.findIndex((t) => t.value === value);
+      const index3 = ticks.findIndex((t2) => t2.value === value);
       if (index3 >= 0) {
         const opts = grid.setContext(this.getContext(index3));
         return opts.lineWidth;
@@ -46912,7 +46912,7 @@
       const grid = this.options.grid;
       const ctx = this.ctx;
       const items = this._gridLineItems || (this._gridLineItems = this._computeGridLineItems(chartArea));
-      let i, ilen;
+      let i2, ilen;
       const drawLine = (p1, p22, style) => {
         if (!style.width || !style.color) {
           return;
@@ -46929,8 +46929,8 @@
         ctx.restore();
       };
       if (grid.display) {
-        for (i = 0, ilen = items.length; i < ilen; ++i) {
-          const item = items[i];
+        for (i2 = 0, ilen = items.length; i2 < ilen; ++i2) {
+          const item = items[i2];
           if (grid.drawOnChartArea) {
             drawLine({
               x: item.x1,
@@ -47089,9 +47089,9 @@
       const metas = this.chart.getSortedVisibleDatasetMetas();
       const axisID = this.axis + "AxisID";
       const result = [];
-      let i, ilen;
-      for (i = 0, ilen = metas.length; i < ilen; ++i) {
-        const meta = metas[i];
+      let i2, ilen;
+      for (i2 = 0, ilen = metas.length; i2 < ilen; ++i2) {
+        const meta = metas[i2];
         if (meta[axisID] === this.id && (!type || meta.type === type)) {
           result.push(meta);
         }
@@ -47263,8 +47263,8 @@
       callback(component["after" + camelMethod], [], component);
     }
     _getRegistryForType(type) {
-      for (let i = 0; i < this._typedRegistries.length; i++) {
-        const reg = this._typedRegistries[i];
+      for (let i2 = 0; i2 < this._typedRegistries.length; i2++) {
+        const reg = this._typedRegistries[i2];
         if (reg.isForType(type)) {
           return reg;
         }
@@ -47345,12 +47345,12 @@
     const localIds = {};
     const plugins2 = [];
     const keys2 = Object.keys(registry.plugins.items);
-    for (let i = 0; i < keys2.length; i++) {
-      plugins2.push(registry.getPlugin(keys2[i]));
+    for (let i2 = 0; i2 < keys2.length; i2++) {
+      plugins2.push(registry.getPlugin(keys2[i2]));
     }
     const local = config.plugins || [];
-    for (let i = 0; i < local.length; i++) {
-      const plugin = local[i];
+    for (let i2 = 0; i2 < local.length; i2++) {
+      const plugin = local[i2];
       if (plugins2.indexOf(plugin) === -1) {
         plugins2.push(plugin);
         localIds[plugin.id] = true;
@@ -48020,8 +48020,8 @@
       const numMeta = metasets.length;
       metasets.sort((a, b) => a.index - b.index);
       if (numMeta > numData) {
-        for (let i = numData; i < numMeta; ++i) {
-          this._destroyDatasetMeta(i);
+        for (let i2 = numData; i2 < numMeta; ++i2) {
+          this._destroyDatasetMeta(i2);
         }
         metasets.splice(numData, numMeta - numData);
       }
@@ -48041,24 +48041,24 @@
     buildOrUpdateControllers() {
       const newControllers = [];
       const datasets = this.data.datasets;
-      let i, ilen;
+      let i2, ilen;
       this._removeUnreferencedMetasets();
-      for (i = 0, ilen = datasets.length; i < ilen; i++) {
-        const dataset = datasets[i];
-        let meta = this.getDatasetMeta(i);
+      for (i2 = 0, ilen = datasets.length; i2 < ilen; i2++) {
+        const dataset = datasets[i2];
+        let meta = this.getDatasetMeta(i2);
         const type = dataset.type || this.config.type;
         if (meta.type && meta.type !== type) {
-          this._destroyDatasetMeta(i);
-          meta = this.getDatasetMeta(i);
+          this._destroyDatasetMeta(i2);
+          meta = this.getDatasetMeta(i2);
         }
         meta.type = type;
         meta.indexAxis = dataset.indexAxis || getIndexAxis(type, this.options);
         meta.order = dataset.order || 0;
-        meta.index = i;
+        meta.index = i2;
         meta.label = "" + dataset.label;
-        meta.visible = this.isDatasetVisible(i);
+        meta.visible = this.isDatasetVisible(i2);
         if (meta.controller) {
-          meta.controller.updateIndex(i);
+          meta.controller.updateIndex(i2);
           meta.controller.linkScales();
         } else {
           const ControllerClass = registry.getController(type);
@@ -48067,7 +48067,7 @@
             dataElementType: registry.getElement(dataElementType),
             datasetElementType: datasetElementType && registry.getElement(datasetElementType)
           });
-          meta.controller = new ControllerClass(this, i);
+          meta.controller = new ControllerClass(this, i2);
           newControllers.push(meta.controller);
         }
       }
@@ -48101,8 +48101,8 @@
       const newControllers = this.buildOrUpdateControllers();
       this.notifyPlugins("beforeElementsUpdate");
       let minPadding = 0;
-      for (let i = 0, ilen = this.data.datasets.length; i < ilen; i++) {
-        const { controller } = this.getDatasetMeta(i);
+      for (let i2 = 0, ilen = this.data.datasets.length; i2 < ilen; i2++) {
+        const { controller } = this.getDatasetMeta(i2);
         const reset = !animsDisabled && newControllers.indexOf(controller) === -1;
         controller.buildOrUpdateElements(reset);
         minPadding = Math.max(+controller.getMaxOverflow(), minPadding);
@@ -48158,10 +48158,10 @@
       }
       this._dataChanges = [];
       const datasetCount = this.data.datasets.length;
-      const makeSet = (idx) => new Set(_dataChanges.filter((c2) => c2[0] === idx).map((c2, i) => i + "," + c2.splice(1).join(",")));
+      const makeSet = (idx) => new Set(_dataChanges.filter((c2) => c2[0] === idx).map((c2, i2) => i2 + "," + c2.splice(1).join(",")));
       const changeSet = makeSet(0);
-      for (let i = 1; i < datasetCount; i++) {
-        if (!setsEqual(changeSet, makeSet(i))) {
+      for (let i2 = 1; i2 < datasetCount; i2++) {
+        if (!setsEqual(changeSet, makeSet(i2))) {
           return;
         }
       }
@@ -48202,12 +48202,12 @@
       }) === false) {
         return;
       }
-      for (let i = 0, ilen = this.data.datasets.length; i < ilen; ++i) {
-        this.getDatasetMeta(i).controller.configure();
+      for (let i2 = 0, ilen = this.data.datasets.length; i2 < ilen; ++i2) {
+        this.getDatasetMeta(i2).controller.configure();
       }
-      for (let i = 0, ilen = this.data.datasets.length; i < ilen; ++i) {
-        this._updateDataset(i, isFunction(mode) ? mode({
-          datasetIndex: i
+      for (let i2 = 0, ilen = this.data.datasets.length; i2 < ilen; ++i2) {
+        this._updateDataset(i2, isFunction(mode) ? mode({
+          datasetIndex: i2
         }) : mode);
       }
       this.notifyPlugins("afterDatasetsUpdate", {
@@ -48247,7 +48247,7 @@
       }
     }
     draw() {
-      let i;
+      let i2;
       if (this._resizeBeforeDraw) {
         const { width, height } = this._resizeBeforeDraw;
         this._resizeBeforeDraw = null;
@@ -48263,21 +48263,21 @@
         return;
       }
       const layers = this._layers;
-      for (i = 0; i < layers.length && layers[i].z <= 0; ++i) {
-        layers[i].draw(this.chartArea);
+      for (i2 = 0; i2 < layers.length && layers[i2].z <= 0; ++i2) {
+        layers[i2].draw(this.chartArea);
       }
       this._drawDatasets();
-      for (; i < layers.length; ++i) {
-        layers[i].draw(this.chartArea);
+      for (; i2 < layers.length; ++i2) {
+        layers[i2].draw(this.chartArea);
       }
       this.notifyPlugins("afterDraw");
     }
     _getSortedDatasetMetas(filterVisible) {
       const metasets = this._sortedMetasets;
       const result = [];
-      let i, ilen;
-      for (i = 0, ilen = metasets.length; i < ilen; ++i) {
-        const meta = metasets[i];
+      let i2, ilen;
+      for (i2 = 0, ilen = metasets.length; i2 < ilen; ++i2) {
+        const meta = metasets[i2];
         if (!filterVisible || meta.visible) {
           result.push(meta);
         }
@@ -48294,8 +48294,8 @@
         return;
       }
       const metasets = this.getSortedVisibleDatasetMetas();
-      for (let i = metasets.length - 1; i >= 0; --i) {
-        this._drawDataset(metasets[i]);
+      for (let i2 = metasets.length - 1; i2 >= 0; --i2) {
+        this._drawDataset(metasets[i2]);
       }
       this.notifyPlugins("afterDatasetsDraw");
     }
@@ -48409,11 +48409,11 @@
       delete this._metasets[datasetIndex];
     }
     _stop() {
-      let i, ilen;
+      let i2, ilen;
       this.stop();
       animator.remove(this);
-      for (i = 0, ilen = this.data.datasets.length; i < ilen; ++i) {
-        this._destroyDatasetMeta(i);
+      for (i2 = 0, ilen = this.data.datasets.length; i2 < ilen; ++i2) {
+        this._destroyDatasetMeta(i2);
       }
     }
     destroy() {
@@ -48510,13 +48510,13 @@
     }
     updateHoverStyle(items, mode, enabled) {
       const prefix = enabled ? "set" : "remove";
-      let meta, item, i, ilen;
+      let meta, item, i2, ilen;
       if (mode === "dataset") {
         meta = this.getDatasetMeta(items[0].datasetIndex);
         meta.controller["_" + prefix + "DatasetHoverStyle"]();
       }
-      for (i = 0, ilen = items.length; i < ilen; ++i) {
-        item = items[i];
+      for (i2 = 0, ilen = items.length; i2 < ilen; ++i2) {
+        item = items[i2];
         const controller = item && this.getDatasetMeta(item.datasetIndex).controller;
         if (controller) {
           controller[prefix + "HoverStyle"](item.element, item.datasetIndex, item.index);
@@ -48767,7 +48767,7 @@
     let endAngle = element.endAngle;
     if (fullCircles) {
       pathArc(ctx, element, offset3, spacing, endAngle, circular);
-      for (let i = 0; i < fullCircles; ++i) {
+      for (let i2 = 0; i2 < fullCircles; ++i2) {
         ctx.fill();
       }
       if (!isNaN(circumference)) {
@@ -48797,7 +48797,7 @@
     let endAngle = element.endAngle;
     if (fullCircles) {
       pathArc(ctx, element, offset3, spacing, endAngle, circular);
-      for (let i = 0; i < fullCircles; ++i) {
+      for (let i2 = 0; i2 < fullCircles; ++i2) {
         ctx.stroke();
       }
       if (!isNaN(circumference)) {
@@ -48963,9 +48963,9 @@
     const { count, start: start2, loop, ilen } = pathVars(points, segment, params);
     const lineMethod = getLineMethod(options);
     let { move = true, reverse } = params || {};
-    let i, point, prev;
-    for (i = 0; i <= ilen; ++i) {
-      point = points[(start2 + (reverse ? ilen - i : i)) % count];
+    let i2, point, prev;
+    for (i2 = 0; i2 <= ilen; ++i2) {
+      point = points[(start2 + (reverse ? ilen - i2 : i2)) % count];
       if (point.skip) {
         continue;
       } else if (move) {
@@ -48988,7 +48988,7 @@
     const { move = true, reverse } = params || {};
     let avgX = 0;
     let countX = 0;
-    let i, point, prevX, minY, maxY, lastY;
+    let i2, point, prevX, minY, maxY, lastY;
     const pointIndex = (index3) => (start2 + (reverse ? ilen - index3 : index3)) % count;
     const drawX = () => {
       if (minY !== maxY) {
@@ -49001,8 +49001,8 @@
       point = points[pointIndex(0)];
       ctx.moveTo(point.x, point.y);
     }
-    for (i = 0; i <= ilen; ++i) {
-      point = points[pointIndex(i)];
+    for (i2 = 0; i2 <= ilen; ++i2) {
+      point = points[pointIndex(i2)];
       if (point.skip) {
         continue;
       }
@@ -49161,17 +49161,17 @@
       }
       const result = [];
       const _interpolate = _getInterpolationMethod(options);
-      let i, ilen;
-      for (i = 0, ilen = segments.length; i < ilen; ++i) {
-        const { start: start2, end: end2 } = segments[i];
+      let i2, ilen;
+      for (i2 = 0, ilen = segments.length; i2 < ilen; ++i2) {
+        const { start: start2, end: end2 } = segments[i2];
         const p1 = points[start2];
         const p22 = points[end2];
         if (p1 === p22) {
           result.push(p1);
           continue;
         }
-        const t = Math.abs((value - p1[property]) / (p22[property] - p1[property]));
-        const interpolated = _interpolate(p1, p22, t, options.stepped);
+        const t2 = Math.abs((value - p1[property]) / (p22[property] - p1[property]));
+        const interpolated = _interpolate(p1, p22, t2, options.stepped);
         interpolated[property] = point[property];
         result.push(interpolated);
       }
@@ -49496,35 +49496,35 @@
     // grey
   ];
   var BACKGROUND_COLORS = /* @__PURE__ */ BORDER_COLORS.map((color2) => color2.replace("rgb(", "rgba(").replace(")", ", 0.5)"));
-  function getBorderColor(i) {
-    return BORDER_COLORS[i % BORDER_COLORS.length];
+  function getBorderColor(i2) {
+    return BORDER_COLORS[i2 % BORDER_COLORS.length];
   }
-  function getBackgroundColor(i) {
-    return BACKGROUND_COLORS[i % BACKGROUND_COLORS.length];
+  function getBackgroundColor(i2) {
+    return BACKGROUND_COLORS[i2 % BACKGROUND_COLORS.length];
   }
-  function colorizeDefaultDataset(dataset, i) {
-    dataset.borderColor = getBorderColor(i);
-    dataset.backgroundColor = getBackgroundColor(i);
-    return ++i;
+  function colorizeDefaultDataset(dataset, i2) {
+    dataset.borderColor = getBorderColor(i2);
+    dataset.backgroundColor = getBackgroundColor(i2);
+    return ++i2;
   }
-  function colorizeDoughnutDataset(dataset, i) {
-    dataset.backgroundColor = dataset.data.map(() => getBorderColor(i++));
-    return i;
+  function colorizeDoughnutDataset(dataset, i2) {
+    dataset.backgroundColor = dataset.data.map(() => getBorderColor(i2++));
+    return i2;
   }
-  function colorizePolarAreaDataset(dataset, i) {
-    dataset.backgroundColor = dataset.data.map(() => getBackgroundColor(i++));
-    return i;
+  function colorizePolarAreaDataset(dataset, i2) {
+    dataset.backgroundColor = dataset.data.map(() => getBackgroundColor(i2++));
+    return i2;
   }
   function getColorizer(chart) {
-    let i = 0;
+    let i2 = 0;
     return (dataset, datasetIndex) => {
       const controller = chart.getDatasetMeta(datasetIndex).controller;
       if (controller instanceof DoughnutController) {
-        i = colorizeDoughnutDataset(dataset, i);
+        i2 = colorizeDoughnutDataset(dataset, i2);
       } else if (controller instanceof PolarAreaController) {
-        i = colorizePolarAreaDataset(dataset, i);
+        i2 = colorizePolarAreaDataset(dataset, i2);
       } else if (controller) {
-        i = colorizeDefaultDataset(dataset, i);
+        i2 = colorizeDefaultDataset(dataset, i2);
       }
     };
   }
@@ -49573,14 +49573,14 @@
     let sampledIndex = 0;
     const endIndex = start2 + count - 1;
     let a = start2;
-    let i, maxAreaPoint, maxArea, area, nextA;
+    let i2, maxAreaPoint, maxArea, area, nextA;
     decimated[sampledIndex++] = data2[a];
-    for (i = 0; i < samples - 2; i++) {
+    for (i2 = 0; i2 < samples - 2; i2++) {
       let avgX = 0;
       let avgY = 0;
       let j;
-      const avgRangeStart = Math.floor((i + 1) * bucketWidth) + 1 + start2;
-      const avgRangeEnd = Math.min(Math.floor((i + 2) * bucketWidth) + 1, count) + start2;
+      const avgRangeStart = Math.floor((i2 + 1) * bucketWidth) + 1 + start2;
+      const avgRangeEnd = Math.min(Math.floor((i2 + 2) * bucketWidth) + 1, count) + start2;
       const avgRangeLength = avgRangeEnd - avgRangeStart;
       for (j = avgRangeStart; j < avgRangeEnd; j++) {
         avgX += data2[j].x;
@@ -49588,8 +49588,8 @@
       }
       avgX /= avgRangeLength;
       avgY /= avgRangeLength;
-      const rangeOffs = Math.floor(i * bucketWidth) + 1 + start2;
-      const rangeTo = Math.min(Math.floor((i + 1) * bucketWidth) + 1, count) + start2;
+      const rangeOffs = Math.floor(i2 * bucketWidth) + 1 + start2;
+      const rangeTo = Math.min(Math.floor((i2 + 1) * bucketWidth) + 1, count) + start2;
       const { x: pointAx, y: pointAy } = data2[a];
       maxArea = area = -1;
       for (j = rangeOffs; j < rangeTo; j++) {
@@ -49609,28 +49609,28 @@
   function minMaxDecimation(data2, start2, count, availableWidth) {
     let avgX = 0;
     let countX = 0;
-    let i, point, x, y, prevX, minIndex, maxIndex, startIndex, minY, maxY;
+    let i2, point, x, y, prevX, minIndex, maxIndex, startIndex, minY, maxY;
     const decimated = [];
     const endIndex = start2 + count - 1;
     const xMin = data2[start2].x;
     const xMax = data2[endIndex].x;
     const dx = xMax - xMin;
-    for (i = start2; i < start2 + count; ++i) {
-      point = data2[i];
+    for (i2 = start2; i2 < start2 + count; ++i2) {
+      point = data2[i2];
       x = (point.x - xMin) / dx * availableWidth;
       y = point.y;
       const truncX = x | 0;
       if (truncX === prevX) {
         if (y < minY) {
           minY = y;
-          minIndex = i;
+          minIndex = i2;
         } else if (y > maxY) {
           maxY = y;
-          maxIndex = i;
+          maxIndex = i2;
         }
         avgX = (countX * avgX + point.x) / ++countX;
       } else {
-        const lastIndex = i - 1;
+        const lastIndex = i2 - 1;
         if (!isNullOrUndef(minIndex) && !isNullOrUndef(maxIndex)) {
           const intermediateIndex1 = Math.min(minIndex, maxIndex);
           const intermediateIndex2 = Math.max(minIndex, maxIndex);
@@ -49647,14 +49647,14 @@
             });
           }
         }
-        if (i > 0 && lastIndex !== startIndex) {
+        if (i2 > 0 && lastIndex !== startIndex) {
           decimated.push(data2[lastIndex]);
         }
         decimated.push(point);
         prevX = truncX;
         countX = 0;
         minY = maxY = y;
-        minIndex = maxIndex = startIndex = i;
+        minIndex = maxIndex = startIndex = i2;
       }
     }
     return decimated;
@@ -49989,8 +49989,8 @@
       x: null,
       y: scale.bottom
     }, line));
-    for (let i = 0; i < segments.length; i++) {
-      const segment = segments[i];
+    for (let i2 = 0; i2 < segments.length; i2++) {
+      const segment = segments[i2];
       for (let j = segment.start; j <= segment.end; j++) {
         addPointsBelow(points, sourcePoints[j], linesBelow);
       }
@@ -50003,8 +50003,8 @@
   function getLinesBelow(scale, index3) {
     const below = [];
     const metas = scale.getMatchingVisibleMetas("line");
-    for (let i = 0; i < metas.length; i++) {
-      const meta = metas[i];
+    for (let i2 = 0; i2 < metas.length; i2++) {
+      const meta = metas[i2];
       if (meta.index === index3) {
         break;
       }
@@ -50043,8 +50043,8 @@
     const linePoints = line.points;
     let first = false;
     let last = false;
-    for (let i = 0; i < segments.length; i++) {
-      const segment = segments[i];
+    for (let i2 = 0; i2 < segments.length; i2++) {
+      const segment = segments[i2];
       const firstValue = linePoints[segment.start][property];
       const lastValue = linePoints[segment.end][property];
       if (_isBetween(pointValue, firstValue, lastValue)) {
@@ -50140,8 +50140,8 @@
         radius: scale.getDistanceFromCenterForValue(value)
       });
     }
-    for (let i = 0; i < length; ++i) {
-      target.push(scale.getPointPositionForValue(i, value));
+    for (let i2 = 0; i2 < length; ++i2) {
+      target.push(scale.getPointPositionForValue(i2, value));
     }
     return target;
   }
@@ -50342,16 +50342,16 @@
     afterDatasetsUpdate(chart, _args, options) {
       const count = (chart.data.datasets || []).length;
       const sources = [];
-      let meta, i, line, source;
-      for (i = 0; i < count; ++i) {
-        meta = chart.getDatasetMeta(i);
+      let meta, i2, line, source;
+      for (i2 = 0; i2 < count; ++i2) {
+        meta = chart.getDatasetMeta(i2);
         line = meta.dataset;
         source = null;
         if (line && line.options && line instanceof LineElement) {
           source = {
-            visible: chart.isDatasetVisible(i),
-            index: i,
-            fill: _decodeFill(line, i, count),
+            visible: chart.isDatasetVisible(i2),
+            index: i2,
+            fill: _decodeFill(line, i2, count),
             chart,
             axis: meta.controller.options.indexAxis,
             scale: meta.vScale,
@@ -50361,20 +50361,20 @@
         meta.$filler = source;
         sources.push(source);
       }
-      for (i = 0; i < count; ++i) {
-        source = sources[i];
+      for (i2 = 0; i2 < count; ++i2) {
+        source = sources[i2];
         if (!source || source.fill === false) {
           continue;
         }
-        source.fill = _resolveTarget(sources, i, options.propagate);
+        source.fill = _resolveTarget(sources, i2, options.propagate);
       }
     },
     beforeDraw(chart, _args, options) {
       const draw2 = options.drawTime === "beforeDraw";
       const metasets = chart.getSortedVisibleDatasetMetas();
       const area = chart.chartArea;
-      for (let i = metasets.length - 1; i >= 0; --i) {
-        const source = metasets[i].$filler;
+      for (let i2 = metasets.length - 1; i2 >= 0; --i2) {
+        const source = metasets[i2].$filler;
         if (!source) {
           continue;
         }
@@ -50389,8 +50389,8 @@
         return;
       }
       const metasets = chart.getSortedVisibleDatasetMetas();
-      for (let i = metasets.length - 1; i >= 0; --i) {
-        const source = metasets[i].$filler;
+      for (let i2 = metasets.length - 1; i2 >= 0; --i2) {
+        const source = metasets[i2].$filler;
         if (_shouldApplyFill(source)) {
           _drawfill(chart.ctx, source, chart.chartArea);
         }
@@ -50517,15 +50517,15 @@
       ctx.textBaseline = "middle";
       let row = -1;
       let top2 = -lineHeight;
-      this.legendItems.forEach((legendItem, i) => {
+      this.legendItems.forEach((legendItem, i2) => {
         const itemWidth = boxWidth + fontSize / 2 + ctx.measureText(legendItem.text).width;
-        if (i === 0 || lineWidths[lineWidths.length - 1] + itemWidth + 2 * padding > maxWidth) {
+        if (i2 === 0 || lineWidths[lineWidths.length - 1] + itemWidth + 2 * padding > maxWidth) {
           totalHeight += lineHeight;
-          lineWidths[lineWidths.length - (i > 0 ? 0 : 1)] = 0;
+          lineWidths[lineWidths.length - (i2 > 0 ? 0 : 1)] = 0;
           top2 += lineHeight;
           row++;
         }
-        hitboxes[i] = {
+        hitboxes[i2] = {
           left: 0,
           top: top2,
           row,
@@ -50546,9 +50546,9 @@
       let currentColHeight = 0;
       let left2 = 0;
       let col = 0;
-      this.legendItems.forEach((legendItem, i) => {
+      this.legendItems.forEach((legendItem, i2) => {
         const { itemWidth, itemHeight } = calculateItemSize(boxWidth, labelFont, ctx, legendItem, _itemHeight);
-        if (i > 0 && currentColHeight + itemHeight + 2 * padding > heightLimit) {
+        if (i2 > 0 && currentColHeight + itemHeight + 2 * padding > heightLimit) {
           totalWidth += currentColWidth + padding;
           columnSizes.push({
             width: currentColWidth,
@@ -50558,7 +50558,7 @@
           col++;
           currentColWidth = currentColHeight = 0;
         }
-        hitboxes[i] = {
+        hitboxes[i2] = {
           left: left2,
           top: currentColHeight,
           col,
@@ -50705,7 +50705,7 @@
       }
       overrideTextDirection(this.ctx, opts.textDirection);
       const lineHeight = itemHeight + padding;
-      this.legendItems.forEach((legendItem, i) => {
+      this.legendItems.forEach((legendItem, i2) => {
         ctx.strokeStyle = legendItem.fontColor;
         ctx.fillStyle = legendItem.fontColor;
         const textWidth = ctx.measureText(legendItem.text).width;
@@ -50715,12 +50715,12 @@
         let y = cursor.y;
         rtlHelper.setWidth(this.width);
         if (isHorizontal) {
-          if (i > 0 && x + width + padding > this.right) {
+          if (i2 > 0 && x + width + padding > this.right) {
             y = cursor.y += lineHeight;
             cursor.line++;
             x = cursor.x = _alignStartEnd(align, this.left + padding, this.right - lineWidths[cursor.line]);
           }
-        } else if (i > 0 && y + lineHeight > this.bottom) {
+        } else if (i2 > 0 && y + lineHeight > this.bottom) {
           x = cursor.x = x + columnSizes[cursor.line].width + padding;
           cursor.line++;
           y = cursor.y = _alignStartEnd(align, this.top + titleHeight + padding, this.bottom - columnSizes[cursor.line].height);
@@ -50779,13 +50779,13 @@
       return titleOpts.display ? titleFont.lineHeight + titlePadding.height : 0;
     }
     _getLegendItemAt(x, y) {
-      let i, hitBox, lh;
+      let i2, hitBox, lh;
       if (_isBetween(x, this.left, this.right) && _isBetween(y, this.top, this.bottom)) {
         lh = this.legendHitBoxes;
-        for (i = 0; i < lh.length; ++i) {
-          hitBox = lh[i];
+        for (i2 = 0; i2 < lh.length; ++i2) {
+          hitBox = lh[i2];
           if (_isBetween(x, hitBox.left, hitBox.left + hitBox.width) && _isBetween(y, hitBox.top, hitBox.top + hitBox.height)) {
-            return this.legendItems[i];
+            return this.legendItems[i2];
           }
         }
       }
@@ -51142,12 +51142,12 @@
       if (!items.length) {
         return false;
       }
-      let i, len;
+      let i2, len;
       let xSet = /* @__PURE__ */ new Set();
       let y = 0;
       let count = 0;
-      for (i = 0, len = items.length; i < len; ++i) {
-        const el = items[i].element;
+      for (i2 = 0, len = items.length; i2 < len; ++i2) {
+        const el = items[i2].element;
         if (el && el.hasValue()) {
           const pos = el.tooltipPosition();
           xSet.add(pos.x);
@@ -51173,9 +51173,9 @@
       let x = eventPosition.x;
       let y = eventPosition.y;
       let minDistance = Number.POSITIVE_INFINITY;
-      let i, len, nearestElement;
-      for (i = 0, len = items.length; i < len; ++i) {
-        const el = items[i].element;
+      let i2, len, nearestElement;
+      for (i2 = 0, len = items.length; i2 < len; ++i2) {
+        const el = items[i2].element;
         if (el && el.hasValue()) {
           const center = el.getCenterPoint();
           const d = distanceBetweenPoints(eventPosition, center);
@@ -51557,9 +51557,9 @@
       const labelPointStyles = [];
       const labelTextColors = [];
       let tooltipItems = [];
-      let i, len;
-      for (i = 0, len = active.length; i < len; ++i) {
-        tooltipItems.push(createTooltipItem(this.chart, active[i]));
+      let i2, len;
+      for (i2 = 0, len = active.length; i2 < len; ++i2) {
+        tooltipItems.push(createTooltipItem(this.chart, active[i2]));
       }
       if (options.filter) {
         tooltipItems = tooltipItems.filter((element, index3, array) => options.filter(element, index3, array, data2));
@@ -51687,7 +51687,7 @@
     drawTitle(pt, ctx, options) {
       const title = this.title;
       const length = title.length;
-      let titleFont, titleSpacing, i;
+      let titleFont, titleSpacing, i2;
       if (length) {
         const rtlHelper = getRtlAdapter(options.rtl, this.x, this.width);
         pt.x = getAlignedX(this, options.titleAlign, options);
@@ -51697,18 +51697,18 @@
         titleSpacing = options.titleSpacing;
         ctx.fillStyle = options.titleColor;
         ctx.font = titleFont.string;
-        for (i = 0; i < length; ++i) {
-          ctx.fillText(title[i], rtlHelper.x(pt.x), pt.y + titleFont.lineHeight / 2);
+        for (i2 = 0; i2 < length; ++i2) {
+          ctx.fillText(title[i2], rtlHelper.x(pt.x), pt.y + titleFont.lineHeight / 2);
           pt.y += titleFont.lineHeight + titleSpacing;
-          if (i + 1 === length) {
+          if (i2 + 1 === length) {
             pt.y += options.titleMarginBottom - titleSpacing;
           }
         }
       }
     }
-    _drawColorBox(ctx, pt, i, rtlHelper, options) {
-      const labelColor = this.labelColors[i];
-      const labelPointStyle = this.labelPointStyles[i];
+    _drawColorBox(ctx, pt, i2, rtlHelper, options) {
+      const labelColor = this.labelColors[i2];
+      const labelPointStyle = this.labelPointStyles[i2];
       const { boxHeight, boxWidth } = options;
       const bodyFont = toFont(options.bodyFont);
       const colorX = getAlignedX(this, "left", options);
@@ -51768,7 +51768,7 @@
           ctx.fillRect(innerX, colorY + 1, boxWidth - 2, boxHeight - 2);
         }
       }
-      ctx.fillStyle = this.labelTextColors[i];
+      ctx.fillStyle = this.labelTextColors[i2];
     }
     drawBody(pt, ctx, options) {
       const { body } = this;
@@ -51782,7 +51782,7 @@
         pt.y += bodyLineHeight + bodySpacing;
       };
       const bodyAlignForCalculation = rtlHelper.textAlign(bodyAlign);
-      let bodyItem, textColor, lines, i, j, ilen, jlen;
+      let bodyItem, textColor, lines, i2, j, ilen, jlen;
       ctx.textAlign = bodyAlign;
       ctx.textBaseline = "middle";
       ctx.font = bodyFont.string;
@@ -51790,14 +51790,14 @@
       ctx.fillStyle = options.bodyColor;
       each(this.beforeBody, fillLineOfText);
       xLinePadding = displayColors && bodyAlignForCalculation !== "right" ? bodyAlign === "center" ? boxWidth / 2 + boxPadding : boxWidth + 2 + boxPadding : 0;
-      for (i = 0, ilen = body.length; i < ilen; ++i) {
-        bodyItem = body[i];
-        textColor = this.labelTextColors[i];
+      for (i2 = 0, ilen = body.length; i2 < ilen; ++i2) {
+        bodyItem = body[i2];
+        textColor = this.labelTextColors[i2];
         ctx.fillStyle = textColor;
         each(bodyItem.before, fillLineOfText);
         lines = bodyItem.lines;
         if (displayColors && lines.length) {
-          this._drawColorBox(ctx, pt, i, rtlHelper, options);
+          this._drawColorBox(ctx, pt, i2, rtlHelper, options);
           bodyLineHeight = Math.max(bodyFont.lineHeight, boxHeight);
         }
         for (j = 0, jlen = lines.length; j < jlen; ++j) {
@@ -51814,7 +51814,7 @@
     drawFooter(pt, ctx, options) {
       const footer = this.footer;
       const length = footer.length;
-      let footerFont, i;
+      let footerFont, i2;
       if (length) {
         const rtlHelper = getRtlAdapter(options.rtl, this.x, this.width);
         pt.x = getAlignedX(this, options.footerAlign, options);
@@ -51824,8 +51824,8 @@
         footerFont = toFont(options.footerFont);
         ctx.fillStyle = options.footerColor;
         ctx.font = footerFont.string;
-        for (i = 0; i < length; ++i) {
-          ctx.fillText(footer[i], rtlHelper.x(pt.x), pt.y + footerFont.lineHeight / 2);
+        for (i2 = 0; i2 < length; ++i2) {
+          ctx.fillText(footer[i2], rtlHelper.x(pt.x), pt.y + footerFont.lineHeight / 2);
           pt.y += footerFont.lineHeight + options.footerSpacing;
         }
       }
@@ -51978,7 +51978,7 @@
         return [];
       }
       if (!inChartArea) {
-        return lastActive.filter((i) => this.chart.data.datasets[i.datasetIndex] && this.chart.getDatasetMeta(i.datasetIndex).controller.getParsed(i.index) !== void 0);
+        return lastActive.filter((i2) => this.chart.data.datasets[i2.datasetIndex] && this.chart.getDatasetMeta(i2.datasetIndex).controller.getParsed(i2.index) !== void 0);
       }
       const active = this.chart.getElementsAtEventForMode(e4, options.mode, options, replay);
       if (options.reverse) {
@@ -52714,14 +52714,14 @@
     const valueCount = scale._pointLabels.length;
     const pointLabelOpts = scale.options.pointLabels;
     const additionalAngle = pointLabelOpts.centerPointLabels ? PI / valueCount : 0;
-    for (let i = 0; i < valueCount; i++) {
-      const opts = pointLabelOpts.setContext(scale.getPointLabelContext(i));
-      padding[i] = opts.padding;
-      const pointPosition = scale.getPointPosition(i, scale.drawingArea + padding[i], additionalAngle);
+    for (let i2 = 0; i2 < valueCount; i2++) {
+      const opts = pointLabelOpts.setContext(scale.getPointLabelContext(i2));
+      padding[i2] = opts.padding;
+      const pointPosition = scale.getPointPosition(i2, scale.drawingArea + padding[i2], additionalAngle);
       const plFont = toFont(opts.font);
-      const textSize = measureLabelSize(scale.ctx, plFont, scale._pointLabels[i]);
-      labelSizes[i] = textSize;
-      const angleRadians = _normalizeAngle(scale.getIndexAngle(i) + additionalAngle);
+      const textSize = measureLabelSize(scale.ctx, plFont, scale._pointLabels[i2]);
+      labelSizes[i2] = textSize;
+      const angleRadians = _normalizeAngle(scale.getIndexAngle(i2) + additionalAngle);
       const angle = Math.round(toDegrees(angleRadians));
       const hLimits = determineLimits(angle, pointPosition.x, textSize.w, 0, 180);
       const vLimits = determineLimits(angle, pointPosition.y, textSize.h, 90, 270);
@@ -52799,10 +52799,10 @@
       additionalAngle: centerPointLabels ? PI / valueCount : 0
     };
     let area;
-    for (let i = 0; i < valueCount; i++) {
-      itemOpts.padding = padding[i];
-      itemOpts.size = labelSizes[i];
-      const item = createPointLabelItem(scale, i, itemOpts);
+    for (let i2 = 0; i2 < valueCount; i2++) {
+      itemOpts.padding = padding[i2];
+      itemOpts.size = labelSizes[i2];
+      const item = createPointLabelItem(scale, i2, itemOpts);
       items.push(item);
       if (display === "auto") {
         item.visible = isNotOverlapped(item, area);
@@ -52865,16 +52865,16 @@
   }
   function drawPointLabels(scale, labelCount) {
     const { ctx, options: { pointLabels } } = scale;
-    for (let i = labelCount - 1; i >= 0; i--) {
-      const item = scale._pointLabelItems[i];
+    for (let i2 = labelCount - 1; i2 >= 0; i2--) {
+      const item = scale._pointLabelItems[i2];
       if (!item.visible) {
         continue;
       }
-      const optsAtIndex = pointLabels.setContext(scale.getPointLabelContext(i));
+      const optsAtIndex = pointLabels.setContext(scale.getPointLabelContext(i2));
       drawPointLabelBox(ctx, optsAtIndex, item);
       const plFont = toFont(optsAtIndex.font);
       const { x, y, textAlign } = item;
-      renderText(ctx, scale._pointLabels[i], x, y + plFont.lineHeight / 2, plFont, {
+      renderText(ctx, scale._pointLabels[i2], x, y + plFont.lineHeight / 2, plFont, {
         color: optsAtIndex.color,
         textAlign,
         textBaseline: "middle"
@@ -52888,8 +52888,8 @@
     } else {
       let pointPosition = scale.getPointPosition(0, radius);
       ctx.moveTo(pointPosition.x, pointPosition.y);
-      for (let i = 1; i < labelCount; i++) {
-        pointPosition = scale.getPointPosition(i, radius);
+      for (let i2 = 1; i2 < labelCount; i2++) {
+        pointPosition = scale.getPointPosition(i2, radius);
         ctx.lineTo(pointPosition.x, pointPosition.y);
       }
     }
@@ -52996,7 +52996,7 @@
           index3
         ], this);
         return label || label === 0 ? label : "";
-      }).filter((v, i) => this.chart.getDataVisibility(i));
+      }).filter((v, i2) => this.chart.getDataVisibility(i2));
     }
     fit() {
       const opts = this.options;
@@ -53081,7 +53081,7 @@
       const opts = this.options;
       const { angleLines, grid, border } = opts;
       const labelCount = this._pointLabels.length;
-      let i, offset3, position;
+      let i2, offset3, position;
       if (opts.pointLabels.display) {
         drawPointLabels(this, labelCount);
       }
@@ -53098,8 +53098,8 @@
       }
       if (angleLines.display) {
         ctx.save();
-        for (i = labelCount - 1; i >= 0; i--) {
-          const optsAtIndex = angleLines.setContext(this.getPointLabelContext(i));
+        for (i2 = labelCount - 1; i2 >= 0; i2--) {
+          const optsAtIndex = angleLines.setContext(this.getPointLabelContext(i2));
           const { color: color2, lineWidth } = optsAtIndex;
           if (!lineWidth || !color2) {
             continue;
@@ -53109,7 +53109,7 @@
           ctx.setLineDash(optsAtIndex.borderDash);
           ctx.lineDashOffset = optsAtIndex.borderDashOffset;
           offset3 = this.getDistanceFromCenterForValue(opts.reverse ? this.min : this.max);
-          position = this.getPointPosition(i, offset3);
+          position = this.getPointPosition(i2, offset3);
           ctx.beginPath();
           ctx.moveTo(this.xCenter, this.yCenter);
           ctx.lineTo(position.x, position.y);
@@ -53232,18 +53232,18 @@
   }
   function determineUnitForAutoTicks(minUnit, min2, max2, capacity) {
     const ilen = UNITS.length;
-    for (let i = UNITS.indexOf(minUnit); i < ilen - 1; ++i) {
-      const interval = INTERVALS[UNITS[i]];
+    for (let i2 = UNITS.indexOf(minUnit); i2 < ilen - 1; ++i2) {
+      const interval = INTERVALS[UNITS[i2]];
       const factor2 = interval.steps ? interval.steps : Number.MAX_SAFE_INTEGER;
       if (interval.common && Math.ceil((max2 - min2) / (factor2 * interval.size)) <= capacity) {
-        return UNITS[i];
+        return UNITS[i2];
       }
     }
     return UNITS[ilen - 1];
   }
   function determineUnitForFormatting(scale, numTicks, minUnit, min2, max2) {
-    for (let i = UNITS.length - 1; i >= UNITS.indexOf(minUnit); i--) {
-      const unit = UNITS[i];
+    for (let i2 = UNITS.length - 1; i2 >= UNITS.indexOf(minUnit); i2--) {
+      const unit = UNITS[i2];
       if (INTERVALS[unit].common && scale._adapter.diff(max2, min2, unit) >= numTicks - 1) {
         return unit;
       }
@@ -53251,9 +53251,9 @@
     return UNITS[minUnit ? UNITS.indexOf(minUnit) : 0];
   }
   function determineMajorUnit(unit) {
-    for (let i = UNITS.indexOf(unit) + 1, ilen = UNITS.length; i < ilen; ++i) {
-      if (INTERVALS[UNITS[i]].common) {
-        return UNITS[i];
+    for (let i2 = UNITS.indexOf(unit) + 1, ilen = UNITS.length; i2 < ilen; ++i2) {
+      if (INTERVALS[UNITS[i2]].common) {
+        return UNITS[i2];
       }
     }
   }
@@ -53283,10 +53283,10 @@
     const ticks = [];
     const map3 = {};
     const ilen = values.length;
-    let i, value;
-    for (i = 0; i < ilen; ++i) {
-      value = values[i];
-      map3[value] = i;
+    let i2, value;
+    for (i2 = 0; i2 < ilen; ++i2) {
+      value = values[i2];
+      map3[value] = i2;
       ticks.push({
         value,
         major: false
@@ -53508,10 +53508,10 @@
       return this._adapter.format(time2, format || (major ? majorFormat : minorFormat));
     }
     generateTickLabels(ticks) {
-      let i, ilen, tick;
-      for (i = 0, ilen = ticks.length; i < ilen; ++i) {
-        tick = ticks[i];
-        tick.label = this._tickFormatFunction(tick.value, i, ticks);
+      let i2, ilen, tick;
+      for (i2 = 0, ilen = ticks.length; i2 < ilen; ++i2) {
+        tick = ticks[i2];
+        tick.label = this._tickFormatFunction(tick.value, i2, ticks);
       }
     }
     getDecimalForValue(value) {
@@ -53552,7 +53552,7 @@
     }
     getDataTimestamps() {
       let timestamps = this._cache.data || [];
-      let i, ilen;
+      let i2, ilen;
       if (timestamps.length) {
         return timestamps;
       }
@@ -53560,20 +53560,20 @@
       if (this._normalized && metas.length) {
         return this._cache.data = metas[0].controller.getAllParsedValues(this);
       }
-      for (i = 0, ilen = metas.length; i < ilen; ++i) {
-        timestamps = timestamps.concat(metas[i].controller.getAllParsedValues(this));
+      for (i2 = 0, ilen = metas.length; i2 < ilen; ++i2) {
+        timestamps = timestamps.concat(metas[i2].controller.getAllParsedValues(this));
       }
       return this._cache.data = this.normalize(timestamps);
     }
     getLabelTimestamps() {
       const timestamps = this._cache.labels || [];
-      let i, ilen;
+      let i2, ilen;
       if (timestamps.length) {
         return timestamps;
       }
       const labels = this.getLabels();
-      for (i = 0, ilen = labels.length; i < ilen; ++i) {
-        timestamps.push(parse4(this, labels[i]));
+      for (i2 = 0, ilen = labels.length; i2 < ilen; ++i2) {
+        timestamps.push(parse4(this, labels[i2]));
       }
       return this._cache.labels = this._normalized ? timestamps : this.normalize(timestamps);
     }
@@ -53621,9 +53621,9 @@
       const { min: min2, max: max2 } = this;
       const items = [];
       const table = [];
-      let i, ilen, prev, curr, next;
-      for (i = 0, ilen = timestamps.length; i < ilen; ++i) {
-        curr = timestamps[i];
+      let i2, ilen, prev, curr, next;
+      for (i2 = 0, ilen = timestamps.length; i2 < ilen; ++i2) {
+        curr = timestamps[i2];
         if (curr >= min2 && curr <= max2) {
           items.push(curr);
         }
@@ -53640,14 +53640,14 @@
           }
         ];
       }
-      for (i = 0, ilen = items.length; i < ilen; ++i) {
-        next = items[i + 1];
-        prev = items[i - 1];
-        curr = items[i];
+      for (i2 = 0, ilen = items.length; i2 < ilen; ++i2) {
+        next = items[i2 + 1];
+        prev = items[i2 - 1];
+        curr = items[i2];
         if (Math.round((next + prev) / 2) !== curr) {
           table.push({
             time: curr,
-            pos: i / (ilen - 1)
+            pos: i2 / (ilen - 1)
           });
         }
       }
@@ -53705,6 +53705,96 @@
     scales
   ];
 
+  // node_modules/countup.js/dist/countUp.min.js
+  var t = function() {
+    return t = Object.assign || function(t2) {
+      for (var i2, e4 = 1, s2 = arguments.length; e4 < s2; e4++) for (var n2 in i2 = arguments[e4]) Object.prototype.hasOwnProperty.call(i2, n2) && (t2[n2] = i2[n2]);
+      return t2;
+    }, t.apply(this, arguments);
+  };
+  var i = function() {
+    function i2(i3, e4, s2) {
+      var n2 = this;
+      this.endVal = e4, this.options = s2, this.version = "2.10.0", this.defaults = { startVal: 0, decimalPlaces: 0, duration: 2, useEasing: true, useGrouping: true, useIndianSeparators: false, smartEasingThreshold: 999, smartEasingAmount: 333, separator: ",", decimal: ".", prefix: "", suffix: "", autoAnimate: false, autoAnimateDelay: 200, autoAnimateOnce: false }, this.finalEndVal = null, this.useEasing = true, this.countDown = false, this.error = "", this.startVal = 0, this.paused = true, this.once = false, this.count = function(t2) {
+        n2.startTime || (n2.startTime = t2);
+        var i4 = t2 - n2.startTime;
+        n2.remaining = n2.duration - i4, n2.useEasing ? n2.countDown ? n2.frameVal = n2.startVal - n2.easingFn(i4, 0, n2.startVal - n2.endVal, n2.duration) : n2.frameVal = n2.easingFn(i4, n2.startVal, n2.endVal - n2.startVal, n2.duration) : n2.frameVal = n2.startVal + (n2.endVal - n2.startVal) * (i4 / n2.duration);
+        var e5 = n2.countDown ? n2.frameVal < n2.endVal : n2.frameVal > n2.endVal;
+        n2.frameVal = e5 ? n2.endVal : n2.frameVal, n2.frameVal = Number(n2.frameVal.toFixed(n2.options.decimalPlaces)), n2.printValue(n2.frameVal), i4 < n2.duration ? n2.rAF = requestAnimationFrame(n2.count) : null !== n2.finalEndVal ? n2.update(n2.finalEndVal) : n2.options.onCompleteCallback && n2.options.onCompleteCallback();
+      }, this.formatNumber = function(t2) {
+        var i4, e5, s3, a, o = t2 < 0 ? "-" : "";
+        i4 = Math.abs(t2).toFixed(n2.options.decimalPlaces);
+        var r2 = (i4 += "").split(".");
+        if (e5 = r2[0], s3 = r2.length > 1 ? n2.options.decimal + r2[1] : "", n2.options.useGrouping) {
+          a = "";
+          for (var l2 = 3, u = 0, h = 0, p4 = e5.length; h < p4; ++h) n2.options.useIndianSeparators && 4 === h && (l2 = 2, u = 1), 0 !== h && u % l2 == 0 && (a = n2.options.separator + a), u++, a = e5[p4 - h - 1] + a;
+          e5 = a;
+        }
+        return n2.options.numerals && n2.options.numerals.length && (e5 = e5.replace(/[0-9]/g, function(t3) {
+          return n2.options.numerals[+t3];
+        }), s3 = s3.replace(/[0-9]/g, function(t3) {
+          return n2.options.numerals[+t3];
+        })), o + n2.options.prefix + e5 + s3 + n2.options.suffix;
+      }, this.easeOutExpo = function(t2, i4, e5, s3) {
+        return e5 * (1 - Math.pow(2, -10 * t2 / s3)) * 1024 / 1023 + i4;
+      }, this.options = t(t({}, this.defaults), s2), this.options.enableScrollSpy && (this.options.autoAnimate = true), void 0 !== this.options.scrollSpyDelay && (this.options.autoAnimateDelay = this.options.scrollSpyDelay), this.options.scrollSpyOnce && (this.options.autoAnimateOnce = true), this.formattingFn = this.options.formattingFn ? this.options.formattingFn : this.formatNumber, this.easingFn = this.options.easingFn ? this.options.easingFn : this.easeOutExpo, this.el = "string" == typeof i3 ? document.getElementById(i3) : i3, e4 = null == e4 ? this.parse(this.el.innerHTML) : e4, this.startVal = this.validateValue(this.options.startVal), this.frameVal = this.startVal, this.endVal = this.validateValue(e4), this.options.decimalPlaces = Math.max(this.options.decimalPlaces), this.resetDuration(), this.options.separator = String(this.options.separator), this.useEasing = this.options.useEasing, "" === this.options.separator && (this.options.useGrouping = false), this.el ? this.printValue(this.startVal) : this.error = "[CountUp] target is null or undefined", "undefined" != typeof window && this.options.autoAnimate && (this.error || "undefined" == typeof IntersectionObserver ? this.error ? console.error(this.error, i3) : console.error("IntersectionObserver is not supported by this browser") : this.setupObserver());
+    }
+    return i2.prototype.setupObserver = function() {
+      var t2 = this, e4 = i2.observedElements.get(this.el);
+      e4 && e4.unobserve(), i2.observedElements.set(this.el, this), this.observer = new IntersectionObserver(function(i3) {
+        for (var e5 = 0, s2 = i3; e5 < s2.length; e5++) {
+          var n2 = s2[e5];
+          n2.isIntersecting && t2.paused && !t2.once ? (t2.paused = false, t2.autoAnimateTimeout = setTimeout(function() {
+            return t2.start();
+          }, t2.options.autoAnimateDelay), t2.options.autoAnimateOnce && (t2.once = true, t2.observer.disconnect())) : n2.isIntersecting || t2.paused || (clearTimeout(t2.autoAnimateTimeout), t2.reset());
+        }
+      }, { threshold: 0 }), this.observer.observe(this.el);
+    }, i2.prototype.unobserve = function() {
+      var t2;
+      clearTimeout(this.autoAnimateTimeout), null === (t2 = this.observer) || void 0 === t2 || t2.disconnect(), i2.observedElements.delete(this.el);
+    }, i2.prototype.onDestroy = function() {
+      clearTimeout(this.autoAnimateTimeout), cancelAnimationFrame(this.rAF), this.paused = true, this.unobserve(), this.options.onCompleteCallback = null, this.options.onStartCallback = null;
+    }, i2.prototype.determineDirectionAndSmartEasing = function() {
+      var t2 = this.finalEndVal ? this.finalEndVal : this.endVal;
+      this.countDown = this.startVal > t2;
+      var i3 = t2 - this.startVal;
+      if (Math.abs(i3) > this.options.smartEasingThreshold && this.options.useEasing) {
+        this.finalEndVal = t2;
+        var e4 = this.countDown ? 1 : -1;
+        this.endVal = t2 + e4 * this.options.smartEasingAmount, this.duration = this.duration / 2;
+      } else this.endVal = t2, this.finalEndVal = null;
+      null !== this.finalEndVal ? this.useEasing = false : this.useEasing = this.options.useEasing;
+    }, i2.prototype.start = function(t2) {
+      this.error || (this.options.onStartCallback && this.options.onStartCallback(), t2 && (this.options.onCompleteCallback = t2), this.duration > 0 ? (this.determineDirectionAndSmartEasing(), this.paused = false, this.rAF = requestAnimationFrame(this.count)) : this.printValue(this.endVal));
+    }, i2.prototype.pauseResume = function() {
+      this.paused ? (this.startTime = null, this.duration = this.remaining, this.startVal = this.frameVal, this.determineDirectionAndSmartEasing(), this.rAF = requestAnimationFrame(this.count)) : cancelAnimationFrame(this.rAF), this.paused = !this.paused;
+    }, i2.prototype.reset = function() {
+      clearTimeout(this.autoAnimateTimeout), cancelAnimationFrame(this.rAF), this.paused = true, this.once = false, this.resetDuration(), this.startVal = this.validateValue(this.options.startVal), this.frameVal = this.startVal, this.printValue(this.startVal);
+    }, i2.prototype.update = function(t2) {
+      cancelAnimationFrame(this.rAF), this.startTime = null, this.endVal = this.validateValue(t2), this.endVal !== this.frameVal && (this.startVal = this.frameVal, null == this.finalEndVal && this.resetDuration(), this.finalEndVal = null, this.determineDirectionAndSmartEasing(), this.rAF = requestAnimationFrame(this.count));
+    }, i2.prototype.printValue = function(t2) {
+      var i3;
+      if (this.el) {
+        var e4 = this.formattingFn(t2);
+        if (null === (i3 = this.options.plugin) || void 0 === i3 ? void 0 : i3.render) this.options.plugin.render(this.el, e4);
+        else if ("INPUT" === this.el.tagName) this.el.value = e4;
+        else "text" === this.el.tagName || "tspan" === this.el.tagName ? this.el.textContent = e4 : this.el.innerHTML = e4;
+      }
+    }, i2.prototype.ensureNumber = function(t2) {
+      return "number" == typeof t2 && !isNaN(t2);
+    }, i2.prototype.validateValue = function(t2) {
+      var i3 = Number(t2);
+      return this.ensureNumber(i3) ? i3 : (this.error = "[CountUp] invalid start or end value: ".concat(t2), null);
+    }, i2.prototype.resetDuration = function() {
+      this.startTime = null, this.duration = 1e3 * Number(this.options.duration), this.remaining = this.duration;
+    }, i2.prototype.parse = function(t2) {
+      var i3 = function(t3) {
+        return t3.replace(/([.,'  ])/g, "\\$1");
+      }, e4 = i3(this.options.separator), s2 = i3(this.options.decimal), n2 = t2.replace(new RegExp(e4, "g"), "").replace(new RegExp(s2, "g"), ".");
+      return parseFloat(n2);
+    }, i2.observedElements = /* @__PURE__ */ new WeakMap(), i2;
+  }();
+
   // src/components/profile/summary.ts
   function profile_summary(recent_tracks, top_artists) {
     let graph_blocks = [];
@@ -53725,8 +53815,8 @@
             </div>
             <div class="summary-main">
                 <div class="graph-blocks">
-                    ${Array.from({ length: 30 }).map((_, i) => {
-      const elem = create_graph_block(i + 1);
+                    ${Array.from({ length: 30 }).map((_, i2) => {
+      const elem = create_graph_block(i2 + 1);
       graph_blocks.push(elem);
       return elem;
     })}
@@ -53771,10 +53861,10 @@
           if (!table) throw new Error();
           const values = [];
           const entries2 = table.querySelectorAll("tbody tr");
-          entries2.forEach((entry, i) => {
+          entries2.forEach((entry, i2) => {
             const period = entry.querySelector(".js-period a");
             const value = Number(entry.querySelector(".js-scrobbles")?.textContent.trim());
-            const elem = graph_blocks[i - 1];
+            const elem = graph_blocks[i2 - 1];
             if (!elem) return;
             const link = `${root}user/${page.name}/library${period?.getAttribute("href")}`;
             elem.href = link;
@@ -53788,8 +53878,8 @@
           let sum = 0;
           let max2 = Math.max(...values);
           let avg = values.reduce((sum2, val) => sum2 + val, 0) / values.length;
-          values.forEach((value, i) => {
-            const elem = graph_blocks[i];
+          values.forEach((value, i2) => {
+            const elem = graph_blocks[i2];
             if (!elem) return;
             if (value > 0) {
               elem.classList.remove("empty");
@@ -53829,14 +53919,15 @@
       text4 = tl2(trans.loved);
       icon_name = icons.loved;
     }
+    let value_elem;
     const elem = html.node`
-        <div class="summary-block">
+        <div class="summary-block summary-block-hidden">
             <div class="summary-icon">
                 ${icon({ name: icon_name, identifier: "summary" })}
             </div>
             <div class="summary-info">
                 <h3 class="summary-label">${text4}</h3>
-                <p class="summary-value">${value.toLocaleString(lang)}</p>
+                <p class="summary-value" ref=${(el) => value_elem = el}>${value.toLocaleString(lang)}</p>
             </div>
         </div>
     `;
@@ -53845,6 +53936,13 @@
         content: page.state.average
       });
     }
+    const count = new i(value_elem, value);
+    setTimeout(() => {
+      count.start();
+      setTimeout(() => {
+        elem.classList.remove("summary-block-hidden");
+      }, 10);
+    }, 0);
     return elem;
   }
   function bleh_profile_chart(panel) {
@@ -55631,7 +55729,7 @@
         if (cache2.created) {
           const year = parseInt(year_from_date(cache2.created));
           const current_year2 = (/* @__PURE__ */ new Date()).getFullYear();
-          const years = Array.from({ length: current_year2 - year + 1 }, (_, i) => year + i);
+          const years = Array.from({ length: current_year2 - year + 1 }, (_, i2) => year + i2);
           years.forEach((year2) => {
             options.push({
               value: `from=${year2}-01-01&rangetype=year`,
@@ -56355,20 +56453,20 @@
                     ${tl2(trans.continue)}
                 </button>
             `);
-        let i = 0.1;
+        let i2 = 0.1;
         image_interval = setInterval(() => {
-          pixelation = i;
+          pixelation = i2;
           render_canvas(true);
-          i += 0.1;
-          if (i >= 1) clearInterval(image_interval);
+          i2 += 0.1;
+          if (i2 >= 1) clearInterval(image_interval);
         }, 50);
       }
     }
   }
   function shuffle_array(arr) {
-    for (let i = arr.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [arr[i], arr[j]] = [arr[j], arr[i]];
+    for (let i2 = arr.length - 1; i2 > 0; i2--) {
+      const j = Math.floor(Math.random() * (i2 + 1));
+      [arr[i2], arr[j]] = [arr[j], arr[i2]];
     }
     return arr;
   }
@@ -59745,7 +59843,7 @@
       if (!cache2.created) return;
       const year = parseInt(year_from_date(cache2.created));
       const current_year = (/* @__PURE__ */ new Date()).getFullYear();
-      const years = Array.from({ length: current_year - year + 1 }, (_, i) => year + i);
+      const years = Array.from({ length: current_year - year + 1 }, (_, i2) => year + i2);
       years.forEach((year2, index3) => {
         const selected = page.requested.from == `${year2}-01-01` && (page.requested.to == `${year2}-12-31` || page.requested.rangetype == "year");
         const target = index3 % 2;
@@ -60764,8 +60862,8 @@
                 <div class="summary-sep" />
                 <div class="summary-aside">
                     <div class="graph-blocks">
-                        ${Array.from({ length: 3 * 10 }).map((_, i) => {
-      const elem = create_graph_block2(i + 1);
+                        ${Array.from({ length: 3 * 10 }).map((_, i2) => {
+      const elem = create_graph_block2(i2 + 1);
       graph_blocks.push(elem);
       return elem;
     })}
@@ -60799,14 +60897,15 @@
       text4 = tl2(trans.listeners);
       icon_name = icons.listeners;
     }
+    let value;
     const elem = html.node`
-        <div class="summary-block">
+        <div class="summary-block summary-block-hidden">
             <div class="summary-icon">
                 ${icon({ name: icon_name, identifier: "summary" })}
             </div>
             <div class="summary-info">
                 <h3 class="summary-label">${text4}</h3>
-                <p class="summary-value">${stat.abbr || stat.value?.toLocaleString(lang)}</p>
+                <p class="summary-value" ref=${(el) => value = el}>${stat.abbr || stat.value?.toLocaleString(lang)}</p>
             </div>
         </div>
     `;
@@ -60814,6 +60913,15 @@
       tippy_esm_default(elem, {
         content: stat.value.toLocaleString(lang)
       });
+    }
+    if (typeof stat.value == "number") {
+      const count = new i(value, stat.value);
+      setTimeout(() => {
+        count.start();
+        setTimeout(() => {
+          elem.classList.remove("summary-block-hidden");
+        }, 10);
+      }, 0);
     }
     return elem;
   }
@@ -60899,9 +61007,9 @@
     let sum = 0;
     let max2 = Math.max(...values);
     let avg = values.reduce((sum2, val) => sum2 + val, 0) / values.length;
-    values.forEach((value, i) => {
-      const label = labels[i];
-      const elem = graph_blocks[i];
+    values.forEach((value, i2) => {
+      const label = labels[i2];
+      const elem = graph_blocks[i2];
       if (!elem) return;
       if (value > 0) {
         elem.classList.remove("empty");
@@ -63025,9 +63133,9 @@
           let guests = [];
           let found_feature = false;
           let first_joinphrase;
-          for (let i = 1; i < artists.length; i++) {
-            const artist3 = artists[i];
-            const joinphrase = (artists[i - 1].joinphrase || "").trim().toLowerCase();
+          for (let i2 = 1; i2 < artists.length; i2++) {
+            const artist3 = artists[i2];
+            const joinphrase = (artists[i2 - 1].joinphrase || "").trim().toLowerCase();
             if (!found_feature) {
               if (["feat", "with"].some((phrase) => joinphrase.includes(phrase))) {
                 found_feature = true;
@@ -63809,10 +63917,10 @@
                         <div class="oracle-credit-group">
                             <h4 class="oracle-credit-group-title">${text4}</h4>
                             <div class="oracle-credit-list">
-                                ${artists.map((artist, i) => {
+                                ${artists.map((artist, i2) => {
           const name = artist.name;
           const attributes = artist.attributes;
-          const last = i == artists.length - 1;
+          const last = i2 == artists.length - 1;
           const info_box = html.node`
                                         <div class="oracle-info-box">
                                             ${icon({ name: icons.info })}
@@ -66577,8 +66685,8 @@
           const childNodes = getChildNodes(currentNode) || currentNode.childNodes;
           if (childNodes && parentNode) {
             const childCount = childNodes.length;
-            for (let i = childCount - 1; i >= 0; --i) {
-              const childClone = cloneNode(childNodes[i], true);
+            for (let i2 = childCount - 1; i2 >= 0; --i2) {
+              const childClone = cloneNode(childNodes[i2], true);
               childClone.__removalCount = (currentNode.__removalCount || 0) + 1;
               parentNode.insertBefore(childClone, getNextSibling(currentNode));
             }
@@ -67059,8 +67167,8 @@
         regex: /\[(center|left|right)]\s*([\s\S]*?)\s*\[\/\1]/g,
         replace: (_, align, content, offset3, text5) => {
           let backticks = 0;
-          for (let i = 0; i < offset3; i++)
-            if (text5[i] == "`") backticks++;
+          for (let i2 = 0; i2 < offset3; i2++)
+            if (text5[i2] == "`") backticks++;
           if (backticks % 2 == 1) return _;
           const inner = converter2.makeHtml(content.trim());
           const clean2 = purify.sanitize(inner, {
@@ -73460,9 +73568,9 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     let extras = [];
     if (matches.length > 0) {
       cleaned_title = formatted_title.slice(0, matches[0].index).trim().replace(/[\(\[\{]+$/, "").trim();
-      extras = matches.map((match3, i) => {
+      extras = matches.map((match3, i2) => {
         const start2 = match3.index;
-        const end2 = i + 1 < matches.length ? matches[i + 1].index : formatted_title.length;
+        const end2 = i2 + 1 < matches.length ? matches[i2 + 1].index : formatted_title.length;
         const tag_text = formatted_title.slice(start2, end2).replace(/^[\(\[\{\)\]\}\-\:\s]+|[\(\[\{\)\]\}\-\:\s]+$/g, "").trim();
         return {
           group: match3.group,
@@ -92023,7 +92131,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-02-25"
       }
     },
-    built_on: "2026-04-11T15:41:03.764Z"
+    built_on: "2026-04-12T01:20:27.199Z"
   };
 
   // node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

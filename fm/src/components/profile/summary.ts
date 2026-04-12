@@ -7,6 +7,7 @@ import { prep_chart_colours } from '../music/chart';
 import { Chart } from 'chart.js';
 import { log } from '@/build/log';
 import { DateTime } from 'luxon';
+import { CountUp } from 'countup.js';
 
 export function profile_summary(recent_tracks: Element | undefined, top_artists: Element | undefined) {
     let graph_blocks: HTMLElement[] = [];
@@ -176,14 +177,16 @@ function summary_block(type: string, value: number) {
         icon_name = icons.loved;
     }
 
+    let value_elem;
+
     const elem = html.node`
-        <div class="summary-block">
+        <div class="summary-block summary-block-hidden">
             <div class="summary-icon">
                 ${icon({ name: icon_name, identifier: 'summary' })}
             </div>
             <div class="summary-info">
                 <h3 class="summary-label">${text}</h3>
-                <p class="summary-value">${value.toLocaleString(lang)}</p>
+                <p class="summary-value" ref=${el => value_elem = el}>${value.toLocaleString(lang)}</p>
             </div>
         </div>
     `;
@@ -193,6 +196,16 @@ function summary_block(type: string, value: number) {
             content: page.state.average
         });
     }
+
+    const count = new CountUp(value_elem!, value);
+
+    setTimeout(() => {
+        count.start();
+
+        setTimeout(() => {
+            elem.classList.remove('summary-block-hidden');
+        }, 10);
+    }, 0);
 
     return elem;
 }
