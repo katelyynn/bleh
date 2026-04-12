@@ -94,7 +94,7 @@ function summary_block(type: string, stat: music_stat) {
     let value;
 
     const elem = html.node`
-        <div class="summary-block summary-block-hidden">
+        <div class="summary-block">
             <div class="summary-icon">
                 ${icon({ name: icon_name, identifier: 'summary' })}
             </div>
@@ -111,7 +111,7 @@ function summary_block(type: string, stat: music_stat) {
         });
     }
 
-    if (typeof stat.value == 'number') {
+    /*(if (typeof stat.value == 'number') {
         const count = new CountUp(value!, stat.value);
 
         setTimeout(() => {
@@ -121,7 +121,7 @@ function summary_block(type: string, stat: music_stat) {
                 elem.classList.remove('summary-block-hidden');
             }, 10);
         }, 0);
-    }
+    }*/
 
     return elem;
 }

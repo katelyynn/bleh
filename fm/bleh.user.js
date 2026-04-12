@@ -60899,7 +60899,7 @@
     }
     let value;
     const elem = html.node`
-        <div class="summary-block summary-block-hidden">
+        <div class="summary-block">
             <div class="summary-icon">
                 ${icon({ name: icon_name, identifier: "summary" })}
             </div>
@@ -60913,15 +60913,6 @@
       tippy_esm_default(elem, {
         content: stat.value.toLocaleString(lang)
       });
-    }
-    if (typeof stat.value == "number") {
-      const count = new i(value, stat.value);
-      setTimeout(() => {
-        count.start();
-        setTimeout(() => {
-          elem.classList.remove("summary-block-hidden");
-        }, 10);
-      }, 0);
     }
     return elem;
   }
