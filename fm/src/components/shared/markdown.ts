@@ -617,6 +617,8 @@ export function markdown(
                 document.body.style.setProperty('--sat-album', sat);
                 document.body.style.setProperty('--lit-album', lit);
 
+                page.state.replaced_accent = true;
+
                 load_chart_colours();
             }
 

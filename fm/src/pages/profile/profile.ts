@@ -1720,6 +1720,7 @@ function load_profile_cache(
         if (banner) register_background(banner, 'bio');
 
         if (hue || sat || lit) {
+            page.state.replaced_accent = true;
             load_chart_colours();
         }
 

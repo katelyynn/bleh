@@ -55416,6 +55416,7 @@
       if (lit) document.body.style.setProperty("--lit-album", lit);
       if (banner) register_background(banner, "bio");
       if (hue4 || sat || lit) {
+        page.state.replaced_accent = true;
         load_chart_colours();
       }
       return;
@@ -67818,6 +67819,7 @@
           document.body.style.setProperty("--hue-album", hue4);
           document.body.style.setProperty("--sat-album", sat);
           document.body.style.setProperty("--lit-album", lit);
+          page.state.replaced_accent = true;
           load_chart_colours();
         }
         cache2.hue = hue4;
@@ -92412,7 +92414,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-02-25"
       }
     },
-    built_on: "2026-04-12T03:18:00.842Z"
+    built_on: "2026-04-12T20:40:12.933Z"
   };
 
   // node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
