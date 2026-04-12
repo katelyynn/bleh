@@ -512,3 +512,22 @@
     line-height: var(--line-height);
     margin-top: 2px;
 }
+
+.group-artist-list {
+    display: flex;
+    flex-wrap: wrap;
+
+    cursor: default;
+
+    color: oklch(var(--c2) / 80%);
+}
+
+.group-artist {
+    &:not(:first-child) {
+        margin-left: 6px;
+    }
+
+    &:not(:hover) {
+        color: oklch(var(--c2));
+    }
+}
