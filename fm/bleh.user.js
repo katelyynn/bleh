@@ -62556,6 +62556,12 @@
             </div>
         `;
       meta_and_wiki?.appendChild(metadata);
+      label_panel = html.node`
+            <div class="card-tip copyright">
+                © <span class="placeholder-text">Label</span>
+            </div>
+        `;
+      info_panel.appendChild(label_panel);
     }
     function track_placeholder() {
       return html.node`
@@ -63853,7 +63859,7 @@
     function oracle_artist_fetch(data2) {
       if (tries < 1) return;
       tries--;
-      const url = `https://musicbrainz.org/ws/2/artist/${data2.id}?inc=artist-credits+url-rels+annotation+artist-rels+work-rels+release-groups`;
+      const url = `https://musicbrainz.org/ws/2/artist/${data2.id}?inc=artist-credits+url-rels+annotation+artist-rels+work-rels+label-rels+release-groups`;
       log(
         `using url ${encodeURI(url)} with ${tries} tries available`,
         "oracle"
@@ -63912,13 +63918,22 @@
       const end2 = data2["end-area"];
       const begin_code = begin["iso-3166-2-codes"] ? begin["iso-3166-2-codes"][0]?.split("-")[0] : null;
       const end_code = end2 && end2["iso-3166-2-codes"] ? end2["iso-3166-2-codes"][0]?.split("-")[0] : null;
-      const seen = /* @__PURE__ */ new Set();
+      const artists_seen = /* @__PURE__ */ new Set();
       const artists = data2.relations.filter((relation) => relation.type == "member of band").filter((relation) => {
         const name = relation.artist.name;
-        if (seen.has(name)) return false;
-        seen.add(name);
+        if (artists_seen.has(name)) return false;
+        artists_seen.add(name);
         return true;
       });
+      const labels_seen = /* @__PURE__ */ new Set();
+      const labels = data2.relations.filter((relation) => relation["target-type"] == "label").filter((relation) => {
+        if (!relation.label) return;
+        const name = relation.label.name;
+        if (labels_seen.has(name)) return false;
+        labels_seen.add(name);
+        return true;
+      });
+      console.info("labels", labels, data2.relations.filter((relation) => relation["target-type"] == "label"));
       render(metadata, html`
             <div class="metadata-column">
                 <div class="metadata-group">
@@ -64023,6 +64038,23 @@
                 `}
             </div>
         `);
+      if (labels.length) {
+        render(label_panel, html`
+                ©
+                ${labels.map((label, index3) => {
+          let label_elem;
+          const elem = html.node`
+                        <span class="music-label" ref=${(el) => label_elem = el}>${label.label.name}</span>${index3 < labels.length - 1 ? ", " : ""}
+                    `;
+          if (label.label.disambiguation != "") {
+            tippy_esm_default(label_elem, {
+              content: label.label.disambiguation
+            });
+          }
+          return elem;
+        })}
+        `);
+      }
     }
   }
   function oracle_data(force = false) {

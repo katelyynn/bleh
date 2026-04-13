@@ -369,6 +369,13 @@ export function oracle_process() {
             </div>
         `;
         meta_and_wiki?.appendChild(metadata);
+
+        label_panel = html.node`
+            <div class="card-tip copyright">
+                © <span class="placeholder-text">Label</span>
+            </div>
+        `;
+        info_panel.appendChild(label_panel);
     }
 
     function track_placeholder() {
@@ -2092,7 +2099,7 @@ export function oracle_process() {
         if (tries < 1) return;
         tries--;
 
-        const url = `https://musicbrainz.org/ws/2/artist/${data.id}?inc=artist-credits+url-rels+annotation+artist-rels+work-rels+release-groups`;
+        const url = `https://musicbrainz.org/ws/2/artist/${data.id}?inc=artist-credits+url-rels+annotation+artist-rels+work-rels+label-rels+release-groups`;
 
         log(
             `using url ${encodeURI(url)} with ${tries} tries available`,
@@ -2167,17 +2174,31 @@ export function oracle_process() {
         const begin_code = begin['iso-3166-2-codes'] ? begin['iso-3166-2-codes'][0]?.split('-')[0] : null;
         const end_code = end && end['iso-3166-2-codes'] ? end['iso-3166-2-codes'][0]?.split('-')[0] : null;
 
-        const seen = new Set();
-
+        const artists_seen = new Set();
         const artists = data.relations
             .filter(relation => relation.type == 'member of band')
             .filter(relation => {
                 const name = relation.artist.name;
-                if (seen.has(name)) return false;
+                if (artists_seen.has(name)) return false;
 
-                seen.add(name);
+                artists_seen.add(name);
                 return true;
             });
+
+        const labels_seen = new Set();
+        const labels = data.relations
+            .filter(relation => relation['target-type'] == 'label')
+            .filter(relation => {
+                if (!relation.label) return;
+
+                const name = relation.label.name;
+                if (labels_seen.has(name)) return false;
+
+                labels_seen.add(name);
+                return true;
+            });
+
+        console.info('labels', labels, data.relations.filter(relation => relation['target-type'] == 'label'));
 
         render(metadata!, html`
             <div class="metadata-column">
@@ -2284,6 +2305,26 @@ export function oracle_process() {
                 `}
             </div>
         `);
+
+        if (labels.length) {
+            render(label_panel, html`
+                ©
+                ${labels.map((label, index) => {
+                    let label_elem;
+                    const elem = html.node`
+                        <span class="music-label" ref=${(el) => (label_elem = el)}>${label.label.name}</span>${index < labels.length - 1 ? ', ' : ''}
+                    `;
+
+                    if (label.label.disambiguation != '') {
+                        tippy(label_elem, {
+                            content: label.label.disambiguation
+                        });
+                    }
+
+                    return elem;
+                })}
+        `);
+        }
     }
 }
 
