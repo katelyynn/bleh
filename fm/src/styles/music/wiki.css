@@ -515,6 +515,7 @@
 
 .group-artist-list {
     display: flex;
+    gap: 0 6px;
     flex-wrap: wrap;
 
     cursor: default;
@@ -523,6 +524,10 @@
 }
 
 .group-artist {
+    display: flex;
+}
+
+.group-artist-link {
     &:not(:first-child) {
         margin-left: 6px;
     }

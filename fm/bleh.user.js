@@ -63912,7 +63912,13 @@
       const end2 = data2["end-area"];
       const begin_code = begin["iso-3166-2-codes"] ? begin["iso-3166-2-codes"][0]?.split("-")[0] : null;
       const end_code = end2 && end2["iso-3166-2-codes"] ? end2["iso-3166-2-codes"][0]?.split("-")[0] : null;
-      const artists = data2.relations.filter((relation) => relation.type == "member of band");
+      const seen = /* @__PURE__ */ new Set();
+      const artists = data2.relations.filter((relation) => relation.type == "member of band").filter((relation) => {
+        const name = relation.artist.name;
+        if (seen.has(name)) return false;
+        seen.add(name);
+        return true;
+      });
       render(metadata, html`
             <div class="metadata-column">
                 <div class="metadata-group">
@@ -63934,12 +63940,12 @@
                         ${flag(begin_code)}
                         ${begin.name}
                     </dd>
-                    ` : html.node`
+                    ` : begin ? html.node`
                     <dd class="catalogue-metadata-description has-flag secondary-info">
                         ${flag(area_code)}
                         ${begin.name}
                     </dd>
-                    `}
+                    ` : ""}
                 </div>
                 ${lifespan.ended ? html.node`
                 <div class="metadata-group">
@@ -63953,12 +63959,12 @@
                         ${flag(end_code)}
                         ${end2.name}
                     </dd>
-                    ` : html.node`
+                    ` : end2 ? html.node`
                     <dd class="catalogue-metadata-description has-flag secondary-info">
                         ${flag(area_code)}
                         ${end2.name}
                     </dd>
-                    `}
+                    ` : ""}
                 </div>
                 ` : ""}
                 ` : html.node`
@@ -63972,12 +63978,12 @@
                         ${flag(begin_code)}
                         ${begin.name}
                     </dd>
-                    ` : html.node`
+                    ` : begin ? html.node`
                     <dd class="catalogue-metadata-description has-flag secondary-info">
                         ${flag(area_code)}
                         ${begin.name}
                     </dd>
-                    `}
+                    ` : ""}
                 </div>
                 ${lifespan.ended ? html.node`
                 <div class="metadata-group">
@@ -63990,12 +63996,12 @@
                         ${flag(end_code)}
                         ${end2.name}
                     </dd>
-                    ` : html.node`
+                    ` : end2 ? html.node`
                     <dd class="catalogue-metadata-description has-flag secondary-info">
                         ${flag(area_code)}
                         ${end2.name}
                     </dd>
-                    `}
+                    ` : ""}
                 </div>
                 ` : ""}
                 ${artists.length > 0 ? html.node`
@@ -64006,7 +64012,9 @@
         const last = i2 == artists.length - 1;
         console.info("group artist", artist2);
         return html.node`
-                                <a class="group-artist" href="${root}music/${redirect()}${sanitise(artist2.artist.name)}">${romanise(correct_artist(artist2.artist.name))}</a>${!last ? "," : ""}
+                                <span class="group-artist">
+                                    <a class="group-artist-link" href="${root}music/${redirect()}${sanitise(artist2.artist.name)}">${romanise(correct_artist(artist2.artist.name))}</a>${!last ? "," : ""}
+                                </span>
                             `;
       })}
                     </dd>

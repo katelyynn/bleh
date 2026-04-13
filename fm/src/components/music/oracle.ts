@@ -2167,7 +2167,17 @@ export function oracle_process() {
         const begin_code = begin['iso-3166-2-codes'] ? begin['iso-3166-2-codes'][0]?.split('-')[0] : null;
         const end_code = end && end['iso-3166-2-codes'] ? end['iso-3166-2-codes'][0]?.split('-')[0] : null;
 
-        const artists = data.relations.filter(relation => relation.type == 'member of band');
+        const seen = new Set();
+
+        const artists = data.relations
+            .filter(relation => relation.type == 'member of band')
+            .filter(relation => {
+                const name = relation.artist.name;
+                if (seen.has(name)) return false;
+
+                seen.add(name);
+                return true;
+            });
 
         render(metadata!, html`
             <div class="metadata-column">
@@ -2190,12 +2200,12 @@ export function oracle_process() {
                         ${flag(begin_code)}
                         ${begin.name}
                     </dd>
-                    ` : html.node`
+                    ` : begin ? html.node`
                     <dd class="catalogue-metadata-description has-flag secondary-info">
                         ${flag(area_code)}
                         ${begin.name}
                     </dd>
-                    `}
+                    ` : ''}
                 </div>
                 ${lifespan.ended ? html.node`
                 <div class="metadata-group">
@@ -2209,12 +2219,12 @@ export function oracle_process() {
                         ${flag(end_code)}
                         ${end.name}
                     </dd>
-                    ` : html.node`
+                    ` : end ? html.node`
                     <dd class="catalogue-metadata-description has-flag secondary-info">
                         ${flag(area_code)}
                         ${end.name}
                     </dd>
-                    `}
+                    ` : ''}
                 </div>
                 ` : ''}
                 ` : html.node`
@@ -2228,12 +2238,12 @@ export function oracle_process() {
                         ${flag(begin_code)}
                         ${begin.name}
                     </dd>
-                    ` : html.node`
+                    ` : begin ? html.node`
                     <dd class="catalogue-metadata-description has-flag secondary-info">
                         ${flag(area_code)}
                         ${begin.name}
                     </dd>
-                    `}
+                    ` : ''}
                 </div>
                 ${lifespan.ended ? html.node`
                 <div class="metadata-group">
@@ -2246,12 +2256,12 @@ export function oracle_process() {
                         ${flag(end_code)}
                         ${end.name}
                     </dd>
-                    ` : html.node`
+                    ` : end ? html.node`
                     <dd class="catalogue-metadata-description has-flag secondary-info">
                         ${flag(area_code)}
                         ${end.name}
                     </dd>
-                    `}
+                    ` : ''}
                 </div>
                 ` : ''}
                 ${artists.length > 0 ? html.node`
@@ -2263,7 +2273,9 @@ export function oracle_process() {
                             console.info('group artist', artist);
 
                             return html.node`
-                                <a class="group-artist" href="${root}music/${redirect()}${sanitise(artist.artist.name)}">${romanise(correct_artist(artist.artist.name))}</a>${!last ? ',' : ''}
+                                <span class="group-artist">
+                                    <a class="group-artist-link" href="${root}music/${redirect()}${sanitise(artist.artist.name)}">${romanise(correct_artist(artist.artist.name))}</a>${!last ? ',' : ''}
+                                </span>
                             `;
                         })}
                     </dd>

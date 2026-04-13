@@ -423,7 +423,7 @@
 .music-more-artists-item-aux-text {
     font-size: 13px;
     line-height: var(--line-height);
-    color: oklch(var(--c3));
+    color: oklch(var(--c3)) !important;
     margin-top: 4px;
     margin-bottom: unset;
     cursor: default;
