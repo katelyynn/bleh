@@ -125,12 +125,7 @@
 
 .section-controls {
     position: relative;
-
-    h3 {
-        transition-property: opacity;
-        transition-duration: var(--trans);
-        transition-timing-function: var(--trans-function);
-    }
+    margin-bottom: var(--card-gap) !important;
 }
 .inline-section-control:not(.obsession-history-play-all),
 .section-playlink {

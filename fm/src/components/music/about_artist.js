@@ -43,7 +43,7 @@ export function bleh_about_artist() {
                 <h1 class="about-artist-name">${correct_artist(page.sister)}</h1>
                 ${listeners} ${tags} ${wiki}
             </div>
-            <a class="link-block-cover-link" href="${root}music/${redirect()}${sanitise(page.sister)}"
+            <a class="link-block-cover-link" href="${root}music/${redirect()}${sanitise(page.sister)}" />
         </div>
         ${page.sister_others.length > 0 ? html.node`
         <div class="sep"></div><div class="sub-text">${tl(trans.others_featured)}</div>

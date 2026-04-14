@@ -2163,6 +2163,8 @@ export function oracle_process() {
     }
 
     function oracle_artist(data) {
+        if (page.type != 'overview') return;
+
         const area = data.area;
         const area_code = data.country;
         const area_name = area.name;
