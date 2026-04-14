@@ -32920,7 +32920,7 @@
   }
   function lazy(elem, func, options = {}) {
     const { threshold = 0.1, rootMargin = "50px" } = options;
-    const observer = new IntersectionObserver(
+    const observer2 = new IntersectionObserver(
       (entries2) => {
         entries2.forEach((entry) => {
           if (entry.isIntersecting) {
@@ -32929,13 +32929,13 @@
               options
             });
             func(elem);
-            observer.unobserve(elem);
+            observer2.unobserve(elem);
           }
         });
       },
       { threshold, rootMargin }
     );
-    observer.observe(elem);
+    observer2.observe(elem);
   }
   function copy(text4, silent = false) {
     if (text4.trim().length == 0) return;
@@ -45511,7 +45511,7 @@
   }
   function createAttachObserver(chart, type, listener) {
     const canvas = chart.canvas;
-    const observer = new MutationObserver((entries2) => {
+    const observer2 = new MutationObserver((entries2) => {
       let trigger = false;
       for (const entry of entries2) {
         trigger = trigger || nodeListContains(entry.addedNodes, canvas);
@@ -45521,15 +45521,15 @@
         listener();
       }
     });
-    observer.observe(document, {
+    observer2.observe(document, {
       childList: true,
       subtree: true
     });
-    return observer;
+    return observer2;
   }
   function createDetachObserver(chart, type, listener) {
     const canvas = chart.canvas;
-    const observer = new MutationObserver((entries2) => {
+    const observer2 = new MutationObserver((entries2) => {
       let trigger = false;
       for (const entry of entries2) {
         trigger = trigger || nodeListContains(entry.removedNodes, canvas);
@@ -45539,11 +45539,11 @@
         listener();
       }
     });
-    observer.observe(document, {
+    observer2.observe(document, {
       childList: true,
       subtree: true
     });
-    return observer;
+    return observer2;
   }
   var drpListeningCharts = /* @__PURE__ */ new Map();
   var oldDevicePixelRatio = 0;
@@ -45584,7 +45584,7 @@
         listener();
       }
     }, window);
-    const observer = new ResizeObserver((entries2) => {
+    const observer2 = new ResizeObserver((entries2) => {
       const entry = entries2[0];
       const width = entry.contentRect.width;
       const height = entry.contentRect.height;
@@ -45593,13 +45593,13 @@
       }
       resize(width, height);
     });
-    observer.observe(container);
+    observer2.observe(container);
     listenDevicePixelRatioChanges(chart, resize);
-    return observer;
+    return observer2;
   }
-  function releaseObserver(chart, type, observer) {
-    if (observer) {
-      observer.disconnect();
+  function releaseObserver(chart, type, observer2) {
+    if (observer2) {
+      observer2.disconnect();
     }
     if (type === "resize") {
       unlistenDevicePixelRatioChanges(chart);
@@ -62033,9 +62033,9 @@
     log("status is", "page", "info", page);
     update_page();
   }
-  function bleh_tags_large(observer = page.structure.main) {
+  function bleh_tags_large(observer2 = page.structure.main) {
     const hide_gendered = settings.gendered_tags;
-    const tags = observer.querySelectorAll(".big-tags-item-wrap");
+    const tags = observer2.querySelectorAll(".big-tags-item-wrap");
     tags.forEach((tag) => {
       const text4 = tag.querySelector(".big-tags-item-name").textContent.trim();
       if (hide_gendered && gendered_pattern.test(text4)) {
@@ -62043,9 +62043,9 @@
       }
     });
   }
-  function bleh_tags_mini(observer = page.structure.main) {
+  function bleh_tags_mini(observer2 = page.structure.main) {
     const hide_gendered = settings.gendered_tags;
-    const tags = observer.querySelectorAll(".tag");
+    const tags = observer2.querySelectorAll(".tag");
     tags.forEach((tag) => {
       const elem = tag.firstElementChild;
       elem.classList.add("btn", "tag-item");
@@ -62054,7 +62054,7 @@
         tag.remove();
       }
     });
-    let tag_user_avatar = observer.querySelector(".tags-user-avatar");
+    let tag_user_avatar = observer2.querySelector(".tags-user-avatar");
     if (!tag_user_avatar) return;
     let tags_list = tag_user_avatar.nextElementSibling;
     const user_tags = tags_list.querySelectorAll(".tag a");
@@ -62184,7 +62184,7 @@
             </section>
         `;
       const hoshino_entry = hoshino_return(page.name, page.sister);
-      if (page.state.oracle_temp && page.name == page.state.oracle_temp.page.name && page.sister == page.state.oracle_temp.page.sister && page.type == page.state.oracle_temp.page.type) {
+      if (page.state.oracle_temp && page.state.oracle_temp.page && (page.state.oracle_temp && page.name == page.state.oracle_temp.page.name && page.sister == page.state.oracle_temp.page.sister && page.type == page.state.oracle_temp.page.type)) {
       } else if (hoshino_entry && ff("ruby")) {
         create_avatar(
           page.state.avatar_side,
@@ -62282,7 +62282,7 @@
   function oracle_process() {
     log("beginning", "oracle");
     page.state.oracle_debug = {};
-    if (!page.state.oracle_temp || !page.state.oracle_temp.id) {
+    if (!page.state.oracle_temp || !page.state.oracle_temp.id || !page.state.oracle_temp.page) {
       page.state.oracle_temp = {};
     } else {
       if (page.type == "album" || page.type == "track") {
@@ -68722,7 +68722,7 @@
         "color: unset"
       );
   }
-  var version3 = "2026.0104.2";
+  var version3 = "2026.0414.2";
   var last_page_type = {
     state: void 0
   };
@@ -68740,7 +68740,7 @@
     on_dedicated_page
   }) {
     let abort_loading = false;
-    log2("starting florence", "load", "info", {
+    log2(`starting florence ${version3}`, "load", "info", {
       page: page2,
       on_head_load,
       on_body_load,
@@ -68801,7 +68801,7 @@
       try {
         if (on_body_load) on_body_load();
         flow();
-        const observer = new MutationObserver((mutations) => {
+        const observer2 = new MutationObserver((mutations) => {
           if (!mutations[0]) return;
           const nodes = [
             ...mutations[0].addedNodes,
@@ -68814,9 +68814,9 @@
             return;
           }
           log2("loop", "mutation", "log", { mutations });
-          flow();
+          flow(observer2);
         });
-        observer.observe(document.body, {
+        observer2.observe(document.body, {
           childList: true,
           subtree: true
         });
@@ -68827,16 +68827,28 @@
         );
       } catch (e4) {
         log2(`florence ran into an error`, "load", "error", { e: e4 });
+        if (observer) observer.disconnect();
         if (on_error) on_error(e4);
       }
     }
-    function flow() {
-      let performance_start = performance.now();
-      assign_page();
-      if (page2.state.error) return;
-      if (on_mutation) on_mutation();
-      let performance_end = performance.now();
-      log2(`finished in ${(performance_end - performance_start) / 1e3} seconds`, "loop");
+    let running = false;
+    function flow(observer2) {
+      if (running) return;
+      running = true;
+      try {
+        let performance_start = performance.now();
+        assign_page();
+        if (page2.state.error) return;
+        if (on_mutation) on_mutation();
+        let performance_end = performance.now();
+        log2(`finished in ${(performance_end - performance_start) / 1e3} seconds`, "loop");
+      } catch (e4) {
+        log2("flow error", "loop", "error", { e: e4 });
+        if (observer2) observer2.disconnect();
+        if (on_error) on_error(e4);
+      } finally {
+        running = false;
+      }
     }
     function assign_page() {
       document.documentElement.classList.add("florence-supports-loading");
@@ -71577,7 +71589,7 @@
   }
   function seasonal_timeline_item(season, type) {
     let time2;
-    log2("creating timeline item", "season", "info", { season, type });
+    log("creating timeline item", "season", "info", { season, type });
     if (type == "prev") {
       time2 = season.end.toRelative(page.state.seasons.now);
     } else if (type == "next") {
@@ -80025,66 +80037,70 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     log("halted as root is inaccessible", "load");
   }
   function main_flow() {
-    lookup_lang();
-    patch_masthead();
-    if (page.state.error) return;
-    if (page.type == "artist" || page.type == "album") {
-      bleh_gallery();
-      bleh_gallery_upload_check();
-    }
-    if (page.type == "user" || page.type == "search" || page.type == "tag" || page.type == "events")
-      music_grids();
-    if (page.type == "user" || page.type == "artist" || page.type == "album" || page.type == "track" || page.type == "events" || page.type == "festival" || page.type == "tag") {
-      patch_shouts();
-      if (shout_parse_queue.length > 0) parse_shout_queue();
-    }
-    if (page.type == "user" && page.subpage.startsWith("library") && page.subpage != "library_overview" && !page.subpage.startsWith("library_artist_") && !page.subpage.startsWith("library_album_") && !page.subpage.startsWith("library_track_"))
-      bleh_glacier_library();
-    if (auth.pro && page.type == "user" && page.name == auth.name && page.subpage == "library_artist_overview" || page.subpage == "library_album_overview" || page.subpage == "library_track_overview") {
-      bleh_glacier_library_bulk_edit();
-    }
-    if (page.type == "user" || page.type == "artist" || page.type == "album" || page.type == "events" || page.type == "festival" || page.type == "tag" || page.type == "overview" || page.type == "bookmarks") {
-      patch_titles();
-    }
-    if (settings.corrections) {
-      correct_generic_combo("resource-list--release-list-item");
-      correct_generic_combo("similar-albums-item");
-      correct_generic_combo("track-similar-tracks-item");
-      correct_generic_combo("similar-items-sidebar-item");
-      if (page.type == "bookmarks" || page.type == "releases") {
-        correct_generic_artist("music-bookmarks-artists-item");
-        correct_generic_combo("music-bookmarks-albums-item");
+    try {
+      lookup_lang();
+      patch_masthead();
+      if (page.state.error) return;
+      if (page.type == "artist" || page.type == "album") {
+        bleh_gallery();
+        bleh_gallery_upload_check();
       }
-    }
-    if (page.type == "overview" && page.subpage == "music") {
-      let items = page.structure.main.querySelectorAll(
-        '.music-featured-item:not(.music-featured-tag, [data-passed="true"])'
-      );
-      items.forEach((item) => {
-        item.setAttribute("data-passed", "true");
-        const bg = item.querySelector(".music-featured-item-background");
-        if (!bg) return;
-        let style = bg.style.getPropertyValue("background-image");
-        if (!style) style = bg.style.getPropertyValue("background");
-        let cover_substr = style.indexOf("url");
-        let cover = style.substring(cover_substr);
-        bg.style.setProperty("background", cover);
-      });
-    }
-    if (["artist", "album", "track"].includes(page.type)) {
-      if (page.subpage == "tags_overview") {
-        tag_page();
+      if (page.type == "user" || page.type == "search" || page.type == "tag" || page.type == "events")
+        music_grids();
+      if (page.type == "user" || page.type == "artist" || page.type == "album" || page.type == "track" || page.type == "events" || page.type == "festival" || page.type == "tag") {
+        patch_shouts();
+        if (shout_parse_queue.length > 0) parse_shout_queue();
       }
-    }
-    shout_messages();
-    subscribe_to_events();
-    dialog_extender();
-    see_more();
-    if (["artist", "album", "track", "user", "tag", "events"].includes(page.type)) {
-      if (!["user", "tag"].includes(page.type) && page.subpage.startsWith("shoutbox"))
-        shout_header(page.structure.main.querySelector(".section-controls"));
-      else if (page.subpage == "overview" || page.subpage == "image")
-        shout_header(page.structure.main.querySelector(".shoutbox"));
+      if (page.type == "user" && page.subpage.startsWith("library") && page.subpage != "library_overview" && !page.subpage.startsWith("library_artist_") && !page.subpage.startsWith("library_album_") && !page.subpage.startsWith("library_track_"))
+        bleh_glacier_library();
+      if (auth.pro && page.type == "user" && page.name == auth.name && page.subpage == "library_artist_overview" || page.subpage == "library_album_overview" || page.subpage == "library_track_overview") {
+        bleh_glacier_library_bulk_edit();
+      }
+      if (page.type == "user" || page.type == "artist" || page.type == "album" || page.type == "events" || page.type == "festival" || page.type == "tag" || page.type == "overview" || page.type == "bookmarks") {
+        patch_titles();
+      }
+      if (settings.corrections) {
+        correct_generic_combo("resource-list--release-list-item");
+        correct_generic_combo("similar-albums-item");
+        correct_generic_combo("track-similar-tracks-item");
+        correct_generic_combo("similar-items-sidebar-item");
+        if (page.type == "bookmarks" || page.type == "releases") {
+          correct_generic_artist("music-bookmarks-artists-item");
+          correct_generic_combo("music-bookmarks-albums-item");
+        }
+      }
+      if (page.type == "overview" && page.subpage == "music") {
+        let items = page.structure.main.querySelectorAll(
+          '.music-featured-item:not(.music-featured-tag, [data-passed="true"])'
+        );
+        items.forEach((item) => {
+          item.setAttribute("data-passed", "true");
+          const bg = item.querySelector(".music-featured-item-background");
+          if (!bg) return;
+          let style = bg.style.getPropertyValue("background-image");
+          if (!style) style = bg.style.getPropertyValue("background");
+          let cover_substr = style.indexOf("url");
+          let cover = style.substring(cover_substr);
+          bg.style.setProperty("background", cover);
+        });
+      }
+      if (["artist", "album", "track"].includes(page.type)) {
+        if (page.subpage == "tags_overview") {
+          tag_page();
+        }
+      }
+      shout_messages();
+      subscribe_to_events();
+      dialog_extender();
+      see_more();
+      if (["artist", "album", "track", "user", "tag", "events"].includes(page.type)) {
+        if (!["user", "tag"].includes(page.type) && page.subpage.startsWith("shoutbox"))
+          shout_header(page.structure.main.querySelector(".section-controls"));
+        else if (page.subpage == "overview" || page.subpage == "image")
+          shout_header(page.structure.main.querySelector(".shoutbox"));
+      }
+    } catch (e4) {
+      handle_error(e4);
     }
   }
   function load_page(main_content = null) {
@@ -92454,7 +92470,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-02-25"
       }
     },
-    built_on: "2026-04-12T20:40:12.933Z"
+    built_on: "2026-04-14T17:03:02.702Z"
   };
 
   // node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

@@ -50,7 +50,7 @@ export function oracle_process() {
 
     page.state.oracle_debug = {};
 
-    if (!page.state.oracle_temp || !page.state.oracle_temp.id) {
+    if (!page.state.oracle_temp || !page.state.oracle_temp.id || !page.state.oracle_temp.page) {
         page.state.oracle_temp = {};
     } else {
         if (page.type == 'album' || page.type == 'track') {

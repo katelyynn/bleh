@@ -274,123 +274,127 @@ export function handle_error_500() {
 }
 
 function main_flow() {
-    lookup_lang();
-    patch_masthead();
+    try {
+        lookup_lang();
+        patch_masthead();
 
-    if (page.state.error) return;
+        if (page.state.error) return;
 
-    if (page.type == 'artist' || page.type == 'album') {
-        bleh_gallery();
-        bleh_gallery_upload_check();
-    }
+        if (page.type == 'artist' || page.type == 'album') {
+            bleh_gallery();
+            bleh_gallery_upload_check();
+        }
 
-    if (
-        page.type == 'user' ||
-        page.type == 'search' ||
-        page.type == 'tag' ||
-        page.type == 'events'
-    )
-        music_grids();
+        if (
+            page.type == 'user' ||
+            page.type == 'search' ||
+            page.type == 'tag' ||
+            page.type == 'events'
+        )
+            music_grids();
 
-    if (
-        page.type == 'user' ||
-        page.type == 'artist' ||
-        page.type == 'album' ||
-        page.type == 'track' ||
-        page.type == 'events' ||
-        page.type == 'festival' ||
-        page.type == 'tag'
-    ) {
-        patch_shouts();
+        if (
+            page.type == 'user' ||
+            page.type == 'artist' ||
+            page.type == 'album' ||
+            page.type == 'track' ||
+            page.type == 'events' ||
+            page.type == 'festival' ||
+            page.type == 'tag'
+        ) {
+            patch_shouts();
 
-        if (shout_parse_queue.length > 0) parse_shout_queue();
-    }
+            if (shout_parse_queue.length > 0) parse_shout_queue();
+        }
 
-    if (
-        page.type == 'user' &&
-        page.subpage.startsWith('library') &&
-        page.subpage != 'library_overview' &&
-        !page.subpage.startsWith('library_artist_') &&
-        !page.subpage.startsWith('library_album_') &&
-        !page.subpage.startsWith('library_track_')
-    )
-        bleh_glacier_library();
-
-    // bulk edit check
-    if (
-        (auth.pro &&
+        if (
             page.type == 'user' &&
-            page.name == auth.name &&
-            page.subpage == 'library_artist_overview') ||
-        page.subpage == 'library_album_overview' ||
-        page.subpage == 'library_track_overview'
-    ) {
-        bleh_glacier_library_bulk_edit();
-    }
+            page.subpage.startsWith('library') &&
+            page.subpage != 'library_overview' &&
+            !page.subpage.startsWith('library_artist_') &&
+            !page.subpage.startsWith('library_album_') &&
+            !page.subpage.startsWith('library_track_')
+        )
+            bleh_glacier_library();
 
-    if (
-        page.type == 'user' ||
-        page.type == 'artist' ||
-        page.type == 'album' ||
-        page.type == 'events' ||
-        page.type == 'festival' ||
-        page.type == 'tag' ||
-        page.type == 'overview' ||
-        page.type == 'bookmarks'
-    ) {
-        patch_titles();
-    }
-
-    if (settings.corrections) {
-        correct_generic_combo('resource-list--release-list-item');
-        correct_generic_combo('similar-albums-item');
-        correct_generic_combo('track-similar-tracks-item');
-        correct_generic_combo('similar-items-sidebar-item');
-
-        if (page.type == 'bookmarks' || page.type == 'releases') {
-            correct_generic_artist('music-bookmarks-artists-item');
-            correct_generic_combo('music-bookmarks-albums-item');
+        // bulk edit check
+        if (
+            (auth.pro &&
+                page.type == 'user' &&
+                page.name == auth.name &&
+                page.subpage == 'library_artist_overview') ||
+            page.subpage == 'library_album_overview' ||
+            page.subpage == 'library_track_overview'
+        ) {
+            bleh_glacier_library_bulk_edit();
         }
-    }
 
-    if (page.type == 'overview' && page.subpage == 'music') {
-        let items = page.structure.main.querySelectorAll(
-            '.music-featured-item:not(.music-featured-tag, [data-passed="true"])'
-        );
-        items.forEach((item) => {
-            item.setAttribute('data-passed', 'true');
-
-            const bg = item.querySelector('.music-featured-item-background');
-            if (!bg) return;
-
-            let style = bg.style.getPropertyValue('background-image');
-            if (!style) style = bg.style.getPropertyValue('background');
-            let cover_substr = style.indexOf('url');
-            let cover = style.substring(cover_substr);
-
-            bg.style.setProperty('background', cover);
-        });
-    }
-
-    if (['artist', 'album', 'track'].includes(page.type)) {
-        if (page.subpage == 'tags_overview') {
-            tag_page();
+        if (
+            page.type == 'user' ||
+            page.type == 'artist' ||
+            page.type == 'album' ||
+            page.type == 'events' ||
+            page.type == 'festival' ||
+            page.type == 'tag' ||
+            page.type == 'overview' ||
+            page.type == 'bookmarks'
+        ) {
+            patch_titles();
         }
-    }
 
-    shout_messages();
+        if (settings.corrections) {
+            correct_generic_combo('resource-list--release-list-item');
+            correct_generic_combo('similar-albums-item');
+            correct_generic_combo('track-similar-tracks-item');
+            correct_generic_combo('similar-items-sidebar-item');
 
-    subscribe_to_events();
+            if (page.type == 'bookmarks' || page.type == 'releases') {
+                correct_generic_artist('music-bookmarks-artists-item');
+                correct_generic_combo('music-bookmarks-albums-item');
+            }
+        }
 
-    dialog_extender();
+        if (page.type == 'overview' && page.subpage == 'music') {
+            let items = page.structure.main.querySelectorAll(
+                '.music-featured-item:not(.music-featured-tag, [data-passed="true"])'
+            );
+            items.forEach((item) => {
+                item.setAttribute('data-passed', 'true');
 
-    see_more();
+                const bg = item.querySelector('.music-featured-item-background');
+                if (!bg) return;
 
-    if (['artist', 'album', 'track', 'user', 'tag', 'events'].includes(page.type)) {
-        if (!['user', 'tag'].includes(page.type) && page.subpage.startsWith('shoutbox'))
-            shout_header(page.structure.main.querySelector('.section-controls'));
-        else if (page.subpage == 'overview' || page.subpage == 'image')
-            shout_header(page.structure.main.querySelector('.shoutbox'));
+                let style = bg.style.getPropertyValue('background-image');
+                if (!style) style = bg.style.getPropertyValue('background');
+                let cover_substr = style.indexOf('url');
+                let cover = style.substring(cover_substr);
+
+                bg.style.setProperty('background', cover);
+            });
+        }
+
+        if (['artist', 'album', 'track'].includes(page.type)) {
+            if (page.subpage == 'tags_overview') {
+                tag_page();
+            }
+        }
+
+        shout_messages();
+
+        subscribe_to_events();
+
+        dialog_extender();
+
+        see_more();
+
+        if (['artist', 'album', 'track', 'user', 'tag', 'events'].includes(page.type)) {
+            if (!['user', 'tag'].includes(page.type) && page.subpage.startsWith('shoutbox'))
+                shout_header(page.structure.main.querySelector('.section-controls'));
+            else if (page.subpage == 'overview' || page.subpage == 'image')
+                shout_header(page.structure.main.querySelector('.shoutbox'));
+        }
+    } catch (e) {
+        handle_error(e);
     }
 }
 

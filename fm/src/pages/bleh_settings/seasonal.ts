@@ -7,7 +7,7 @@ import { DateTime } from 'luxon';
 import { setting } from "@/components/settings/settings";
 import { settings } from "@/build/config";
 import { season } from "@/components/seasonal";
-import { log } from "@tealmiku/florence";
+import { log } from '@/build/log';
 
 export function seasonal() {
     register_skip_to([]);
