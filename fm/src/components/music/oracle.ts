@@ -2066,6 +2066,8 @@ export function oracle_process() {
     }
 
     function oracle_error(response: XMLHttpRequestResponseType | Error | string) {
+        if (page.subpage != 'overview') return;
+
         if (typeof response == 'string') {
             info_panel?.after(html.node`
                 <section class="oracle-error">

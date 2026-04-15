@@ -63883,6 +63883,7 @@
       });
     }
     function oracle_error(response) {
+      if (page.subpage != "overview") return;
       if (typeof response == "string") {
         info_panel?.after(html.node`
                 <section class="oracle-error">
