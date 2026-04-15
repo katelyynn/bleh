@@ -70425,9 +70425,6 @@
     links.appendChild(inbox);
     queue_popup("inbox", inbox);
     queue_popup("search", search);
-    let selected_language = document.querySelector(
-      ".footer-language--active strong"
-    )?.textContent;
     let language_options = document.querySelectorAll(".footer-language-form");
     const language_menu = html.node`
         <div class="language-menu">
@@ -70435,7 +70432,7 @@
                 <div class="auth-dropdown-item-row">
                     <span class="auth-dropdown-item-left">
                         ${flag((convert_lang_to_country[lang] || lang).toUpperCase(), "small-flag")}
-                        ${selected_language}
+                        ${get_language_name(lang)}
                     </span>
                     ${lang in lang_info ? html.node`
                             <span class="auth-dropdown-item-right">
@@ -70476,7 +70473,7 @@
                 <div class="auth-dropdown-item-row">
                     <span class="auth-dropdown-item-left">
                         ${flag((convert_lang_to_country[key] || key).toUpperCase(), "small-flag")}
-                        ${button2.textContent}
+                        ${get_language_name(key)}
                     </span>
                     ${key in lang_info ? html.node`
                             <span class="auth-dropdown-item-right">
@@ -80554,47 +80551,47 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       last_updated: "latest"
     },
     de: {
-      name: "Deutsch",
+      name: get_language_name("de"),
       by: ["evangelicgirl", "myraisounds", "clairedoll"],
       last_updated: "2026-01-08"
     },
     es: {
-      name: "Espa\xF1ol",
+      name: get_language_name("es"),
       by: ["soleilth"],
       last_updated: "2026-02-01"
     },
     it: {
-      name: "Italiano",
+      name: get_language_name("it"),
       by: ["cutotopo"],
       last_updated: "2025-11-14"
     },
     ja: {
-      name: "\u65E5\u672C\u8A9E",
+      name: get_language_name("ja"),
       by: ["humansongs"],
       last_updated: "2026-01-23"
     },
     pl: {
-      name: "Polski",
+      name: get_language_name("pl"),
       by: ["zaktusii", "iwas15with100k"],
       last_updated: "2025-12-12"
     },
     pt: {
-      name: "Portugu\xEAs",
+      name: get_language_name("pt"),
       by: ["ArthRMH", "satisfeita", "fr0r", "urwq"],
       last_updated: "2025-11-25"
     },
     sv: {
-      name: "Svenska",
+      name: get_language_name("sv"),
       by: ["Lrexie"],
       last_updated: "2025-11-05"
     },
     ru: {
-      name: "\u0420\u0443\u0441\u0441\u043A\u0438\u0439",
+      name: get_language_name("ru"),
       by: ["crawqxx", "techplayz32"],
       last_updated: "2026-02-07"
     },
     zh: {
-      name: "\u7B80\u4F53\u4E2D\u6587",
+      name: get_language_name("zh"),
       by: ["Dnzzk2"],
       last_updated: "2025-12-29"
     }

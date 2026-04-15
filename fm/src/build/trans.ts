@@ -7,7 +7,7 @@
 import { handle_error_500 } from '@/page';
 import { log } from '@/build/log';
 import { auth, auth_link, page, setRoot } from '@/build/page';
-import { clamp_lit, clamp_sat, rgb_to_hsl, rgb_to_oklch } from '@/build/tools';
+import { clamp_lit, clamp_sat, get_language_name, rgb_to_hsl, rgb_to_oklch } from '@/build/tools';
 import ColorThief from 'color-thief-browser';
 import { Settings } from 'luxon';
 
@@ -22,47 +22,47 @@ export let lang_info = {
         last_updated: 'latest'
     },
     de: {
-        name: 'Deutsch',
+        name: get_language_name('de'),
         by: ['evangelicgirl', 'myraisounds', 'clairedoll'],
         last_updated: '2026-01-08'
     },
     es: {
-        name: 'Español',
+        name: get_language_name('es'),
         by: ['soleilth'],
         last_updated: '2026-02-01'
     },
     it: {
-        name: "Italiano",
+        name: get_language_name('it'),
         by: ['cutotopo'],
         last_updated: '2025-11-14'
     },
     ja: {
-        name: "日本語",
+        name: get_language_name('ja'),
         by: ['humansongs'],
         last_updated: '2026-01-23'
     },
     pl: {
-        name: 'Polski',
+        name: get_language_name('pl'),
         by: ['zaktusii', 'iwas15with100k'],
         last_updated: '2025-12-12'
     },
     pt: {
-        name: 'Português',
+        name: get_language_name('pt'),
         by: ['ArthRMH', 'satisfeita', 'fr0r', 'urwq'],
         last_updated: '2025-11-25'
     },
     sv: {
-        name: 'Svenska',
+        name: get_language_name('sv'),
         by: ['Lrexie'],
         last_updated: '2025-11-05'
     },
     ru: {
-        name: 'Русский',
+        name: get_language_name('ru'),
         by: ['crawqxx', 'techplayz32'],
         last_updated: '2026-02-07'
     },
     zh: {
-        name: '简体中文',
+        name: get_language_name('zh'),
         by: ['Dnzzk2'],
         last_updated: '2025-12-29'
     }

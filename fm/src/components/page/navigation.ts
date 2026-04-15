@@ -32,7 +32,7 @@ import {
 } from '@/pages/profile/profile';
 import { sponsor } from '@/components/sponsor';
 import { generic_link_menu, register_menu } from '@/components/menu';
-import { copy, romanise } from '@/build/tools';
+import { copy, get_language_name, romanise } from '@/build/tools';
 import { submit_scrobble } from '@/components/music/scrobble';
 import { match } from '@/components/settings/dynamic_theming';
 import { DateTime } from 'luxon';
@@ -672,9 +672,6 @@ export function append_nav() {
     queue_popup('search', search);
 
     // language
-    let selected_language = document.querySelector(
-        '.footer-language--active strong'
-    )?.textContent;
     let language_options = document.querySelectorAll('.footer-language-form');
 
     const language_menu = html.node`
@@ -683,7 +680,7 @@ export function append_nav() {
                 <div class="auth-dropdown-item-row">
                     <span class="auth-dropdown-item-left">
                         ${flag((convert_lang_to_country[lang] || lang).toUpperCase(), 'small-flag')}
-                        ${selected_language}
+                        ${get_language_name(lang)}
                     </span>
                     ${
                         lang in lang_info ?
@@ -733,7 +730,7 @@ export function append_nav() {
                 <div class="auth-dropdown-item-row">
                     <span class="auth-dropdown-item-left">
                         ${flag((convert_lang_to_country[key] || key).toUpperCase(), 'small-flag')}
-                        ${button.textContent}
+                        ${get_language_name(key)}
                     </span>
                     ${key in lang_info ?
                         html.node`
