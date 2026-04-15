@@ -497,6 +497,12 @@
     -webkit-text-fill-color: transparent;
 }
 
+.icon-combo[data-season]:not([data-season="none"]) {
+    --hue-over: var(--hue-seasonal);
+    --sat-over: var(--sat-seasonal);
+    --lit-over: var(--lit-seasonal);
+}
+
 .icon-combo,
 [data-label="bleh"] {
     &[data-season="easter"] {

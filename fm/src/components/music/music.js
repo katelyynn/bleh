@@ -1053,12 +1053,22 @@ export async function show_your_scrobbles() {
                     link.classList.add('btn', 'music-link', 'colourful', 'icon');
 
                     let type = link.classList[1];
-                    if (type == 'resource-external-link--homepage')
+
+                    if (type == 'resource-external-link--homepage') {
                         link.textContent = tl(trans.website);
-                    else if (type == 'resource-external-link--twitter')
+                    } else if (type == 'resource-external-link--twitter') {
                         link.textContent = 'Twitter';
-                    else if (type == 'resource-external-link--facebook')
+
+                        if (!settings.music_links.includes('twitter')) return;
+                    } else if (type == 'resource-external-link--facebook') {
                         link.textContent = 'Facebook';
+
+                        if (!settings.music_links.includes('facebook')) return;
+                    } else if (type == 'resource-external-link--instagram') {
+                        if (!settings.music_links.includes('instagram')) return;
+                    } else if (type == 'resource-external-link--soundcloud') {
+                        if (!settings.music_links.includes('soundcloud')) return;
+                    }
 
                     link_container.appendChild(link);
                 });
@@ -1095,8 +1105,9 @@ export async function show_your_scrobbles() {
     }
 
     // no album info
-    const no_info = col_main.querySelector(':scope > .section-with-separator');
+    const no_info = col_main.querySelector(':scope > .section-with-separator:not(.buffer-standard, .masonry-left)');
     if (no_info) {
+        console.info('no info', no_info.classList);
         no_info.classList = 'loading-data-container';
 
         render(no_info, html`

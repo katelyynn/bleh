@@ -65823,12 +65823,19 @@
           externals_links.forEach((link) => {
             link.classList.add("btn", "music-link", "colourful", "icon");
             let type = link.classList[1];
-            if (type == "resource-external-link--homepage")
+            if (type == "resource-external-link--homepage") {
               link.textContent = tl2(trans.website);
-            else if (type == "resource-external-link--twitter")
+            } else if (type == "resource-external-link--twitter") {
               link.textContent = "Twitter";
-            else if (type == "resource-external-link--facebook")
+              if (!settings.music_links.includes("twitter")) return;
+            } else if (type == "resource-external-link--facebook") {
               link.textContent = "Facebook";
+              if (!settings.music_links.includes("facebook")) return;
+            } else if (type == "resource-external-link--instagram") {
+              if (!settings.music_links.includes("instagram")) return;
+            } else if (type == "resource-external-link--soundcloud") {
+              if (!settings.music_links.includes("soundcloud")) return;
+            }
             link_container.appendChild(link);
           });
         }
@@ -65858,8 +65865,9 @@
         });
       }
     }
-    const no_info = col_main.querySelector(":scope > .section-with-separator");
+    const no_info = col_main.querySelector(":scope > .section-with-separator:not(.buffer-standard, .masonry-left)");
     if (no_info) {
+      console.info("no info", no_info.classList);
       no_info.classList = "loading-data-container";
       render(no_info, html`
             <div class="loading-data-text info">
@@ -71563,7 +71571,7 @@
                     </div>
                     <div class="info">
                         <div
-                            class="icon-combo"
+                            class="icon-combo colourful"
                             data-season=${state.current ? state.current.id : "none"}
                         >
                             <div
@@ -91710,56 +91718,49 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       title: trans.shouts,
       body: trans.activity.types.shout,
       type: "checkbox",
-      icon: "icon-16-shoutbox",
-      horizontal: true
+      icon: "icon-16-shoutbox"
     },
     activity_image: {
       default: true,
       title: trans.photos,
       body: trans.activity.types.image,
       type: "checkbox",
-      icon: "icon-16-gallery-vertical",
-      horizontal: true
+      icon: "icon-16-gallery-vertical"
     },
     activity_obsess: {
       default: true,
       title: trans.obsessions,
       body: trans.activity.types.obsess,
       type: "checkbox",
-      icon: "icon-16-obsession",
-      horizontal: true
+      icon: "icon-16-obsession"
     },
     activity_love: {
       default: true,
       title: trans.loved,
       body: trans.activity.types.love,
       type: "checkbox",
-      icon: "icon-16-heart",
-      horizontal: true
+      icon: "icon-16-heart"
     },
     activity_bookmark: {
       default: true,
       title: trans.bookmarks,
       body: trans.activity.types.bookmark,
       type: "checkbox",
-      icon: "icon-16-bookmark",
-      horizontal: true
+      icon: "icon-16-bookmark"
     },
     activity_wiki: {
       default: true,
       title: trans.wiki,
       body: trans.activity.types.wiki,
       type: "checkbox",
-      icon: "icon-16-bio",
-      horizontal: true
+      icon: "icon-16-bio"
     },
     activity_install: {
       default: true,
       title: trans.installation,
       body: trans.activity.types.install,
       type: "checkbox",
-      icon: "icon-16-download",
-      horizontal: true
+      icon: "icon-16-download"
     },
     simulate_scroll: {
       default: true,

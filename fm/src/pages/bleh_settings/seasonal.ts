@@ -33,7 +33,7 @@ export function seasonal() {
                     </div>
                     <div class="info">
                         <div
-                            class="icon-combo"
+                            class="icon-combo colourful"
                             data-season=${state.current ? state.current.id : 'none'}
                         >
                             <div
