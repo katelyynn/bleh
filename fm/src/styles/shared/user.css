@@ -55,9 +55,10 @@
         margin-top: -16px;
     }
 
+    --follow-button-bg: oklch(var(--b4) / 20%);
     --follow-button-bg-hov: oklch(var(--b4) / 40%);
     --follow-button-bg-atv: oklch(var(--b4) / 60%);
-    --follow-button-col: oklch(var(--c3));
+    --follow-button-col: oklch(var(--c2));
 
     &:not(:hover, :focus-within) {
         --follow-button-opacity: 0.3;
@@ -73,7 +74,7 @@
 }
 
 .user-list-follower-btn {
-    --bg: transparent;
+    --bg: var(--follow-button-bg);
     --bg-hov: var(--follow-button-bg-hov);
     --bg-atv: var(--follow-button-bg-atv);
     --shadow: none;
@@ -149,6 +150,7 @@
             &[data-is-followed="true"],
             &[data-position="1"] {
                 background: oklch(var(--h4) / 15%);
+                --follow-button-bg: oklch(var(--h3) / 5%);
                 --follow-button-bg-hov: oklch(var(--h3) / 10%);
                 --follow-button-bg-atv: oklch(var(--h3) / 20%);
                 --follow-button-col: oklch(var(--l3-c));
@@ -240,10 +242,9 @@
                 -webkit-mask-image: var(--mask);
 
                 opacity: 0.2;
-                filter: blur(2px);
                 scale: 1.1;
 
-                transition-property: scale, opacity, blur;
+                transition-property: scale, opacity;
                 transition-duration: 0.4s;
                 transition-timing-function: var(--trans-function-ani);
             }
@@ -252,7 +253,6 @@
                 .user-background {
                     scale: 1.2;
                     opacity: 0.6;
-                    filter: blur(0);
                 }
 
                 .user-list-avatar, .user-follow {
@@ -270,8 +270,9 @@
             &[data-is-followed="true"],
             &[data-position="1"] {
                 background-color: oklch(var(--h4) / 15%);
-                --follow-button-bg-hov: oklch(var(--h3) / 10%);
-                --follow-button-bg-atv: oklch(var(--h3) / 20%);
+                --follow-button-bg: oklch(var(--h3) / 10%);
+                --follow-button-bg-hov: oklch(var(--h3) / 20%);
+                --follow-button-bg-atv: oklch(var(--h3) / 30%);
                 --follow-button-col: oklch(var(--l3-c));
             }
 
