@@ -65311,18 +65311,15 @@
         }
       });
     }
-    create_listen_item(
-      listen_container,
-      {
-        name: "other",
-        listens: -3,
-        link: scrobble_page,
-        button: true,
-        katsune
-      },
-      page.type
-    );
     main2?.appendChild(listen_container);
+    listen_container?.appendChild(html.node`
+        <button class="btn listen-item" data-listens="-3" onclick=${() => other_listener(scrobble_page)}>
+            ${icon({ name: icons.plus, identifier: "listen-item" })}
+            <div class="listen-item-info">
+                <h3 class="listen-item-name not-profile">${tl2(trans.other_user)}</h3>
+            </div>
+        </button>
+    `);
     if (page.type == "artist") {
       let other_container = col_main.querySelector(
         ".personal-stats-item--listeners"
@@ -91000,6 +90997,9 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     },
     move_down: {
       en: "Move down"
+    },
+    other_user: {
+      en: "Other user"
     }
   };
   var translation_fallback = "NO_TRANSLATION_FOUND";

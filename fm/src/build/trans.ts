@@ -10424,6 +10424,9 @@ export const trans = {
     },
     move_down: {
         en: 'Move down'
+    },
+    other_user: {
+        en: 'Other user'
     }
 } as const satisfies Record<string, any>;
 

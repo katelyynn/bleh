@@ -379,21 +379,17 @@ export async function show_your_scrobbles() {
             });
     }
 
-    // other user
-    create_listen_item(
-        listen_container,
-        {
-            name: 'other',
-            listens: -3,
-            link: scrobble_page,
-            button: true,
-            katsune: katsune
-        },
-        page.type
-    );
-
-    // append
     main?.appendChild(listen_container);
+
+    // other user
+    listen_container?.appendChild(html.node`
+        <button class="btn listen-item" data-listens="-3" onclick=${() => other_listener(scrobble_page)}>
+            ${icon({ name: icons.plus, identifier: 'listen-item' })}
+            <div class="listen-item-info">
+                <h3 class="listen-item-name not-profile">${tl(trans.other_user)}</h3>
+            </div>
+        </button>
+    `);
 
     // other listeners
     if (page.type == 'artist') {

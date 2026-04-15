@@ -159,19 +159,8 @@
     }
 
     &[data-listens="-3"] {
-        &:before {
-            --mask: var(--icon-16-plus);
-            --left: calc((32px - var(--icon-size)) / 2);
-
-            --show-icon: block;
-            opacity: 1;
-            animation: unset;
-            background-color: currentColor !important;
-        }
-
-        display: none;
-
         order: 10;
+        text-align: left;
     }
 
     &[data-bleh--scrobble-milestone] > .listen-item-info > .listen-item-text {
@@ -204,4 +193,10 @@
             margin-left: -22px;
         }
     }
+}
+
+
+.bleh-icon-listen-item {
+    width: 22px;
+    margin-right: 8px;
 }
