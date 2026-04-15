@@ -63964,7 +63964,7 @@
       });
     }
     function oracle_artist(data2) {
-      if (page.type != "overview") return;
+      if (page.subpage != "overview") return;
       const area = data2.area;
       const area_code = data2.country;
       const area_name = area.name;
@@ -92543,7 +92543,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-02-25"
       }
     },
-    built_on: "2026-04-15T02:15:35.179Z"
+    built_on: "2026-04-15T15:04:30.072Z"
   };
 
   // node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
