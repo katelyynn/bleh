@@ -50,6 +50,7 @@ import { settings_search } from './search.js';
 import { icon, icons } from '@/components/shared/icon.js';
 import { chartlist_bar } from '@/components/music/bar.js';
 import { avatar } from '@/components/shared/avatar.js';
+import { convert_lang_to_country, flag } from '@/components/shared/flag.js';
 
 export function bleh_settings() {
     page.name = auth.name;
@@ -1245,7 +1246,7 @@ export async function render_setting_page(page_id) {
                     func: translation_view,
                     title_func: (val) => html.node`
                         <span class="language-header">
-                            <span class="flag" style="background-image: url(https://katelyynn.github.io/bleh/fm/flags/${val.value}.svg)" />
+                            ${flag((convert_lang_to_country[val.value] || val.value).toUpperCase())}
                             <p>${val.text}</p>
                         </span>
                     `,

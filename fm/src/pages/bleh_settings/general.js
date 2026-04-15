@@ -13,6 +13,7 @@ import tippy from "tippy.js";
 import { update_check } from "@/components/page/style";
 import { notify } from "@/components/dialog/notify";
 import { sponsor, sponsor_manage, sponsors } from '@/components/sponsor';
+import { convert_lang_to_country, flag } from '@/components/shared/flag';
 
 export function general() {
     if (auth.pro == null) {
@@ -170,9 +171,7 @@ export function general() {
 
                         const row = html.node`
                             <div class="language-row${lang == key ? ' active' : ''}">
-                                <div class="flag-container">
-                                    <img src="https://katelyynn.github.io/bleh/fm/flags/${key}.svg" alt="flag for ${key}">
-                                </div>
+                                ${flag((convert_lang_to_country[key] || key).toUpperCase())}
                                 <div class="name">
                                     <h5>${language.name}</h5>
                                     <p>${{ html: tl(trans.by_user, { u: language.by.map((user) => `<a href="${root}user/${user}">${user}</a>`).join(', ') }) }}</p>

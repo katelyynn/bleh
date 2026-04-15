@@ -14,3 +14,9 @@
     align-items: center;
     gap: 4px;
 }
+
+.small-flag {
+    width: 16px;
+    height: unset;
+    margin: auto 0;
+}

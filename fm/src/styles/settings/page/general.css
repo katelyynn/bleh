@@ -68,14 +68,6 @@
         gap: var(--item-list-gap);
         padding: 8px 0;
 
-        .flag-container {
-            display: block;
-            width: 24px;
-            height: 24px;
-            border-radius: var(--item-med-radius);
-            flex-shrink: 0;
-        }
-
         & > .name {
             flex: 1;
             /*width: 200px;

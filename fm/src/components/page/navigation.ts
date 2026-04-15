@@ -41,6 +41,7 @@ import { bleh_message_list } from '@/components/inbox/messages';
 import { queue_popup } from '@/components/dialog/popup';
 import { icon, icons } from '../shared/icon';
 import { avatar } from '../shared/avatar';
+import { convert_lang_to_country, flag } from '../shared/flag';
 
 export function patch_masthead() {
     let masthead_logo = document.body.querySelector('.masthead-logo');
@@ -681,7 +682,7 @@ export function append_nav() {
             <button class="dropdown-menu-clickable-item v2" aria-selected="true">
                 <div class="auth-dropdown-item-row">
                     <span class="auth-dropdown-item-left">
-                        <span class="flag" style="background-image: url(https://katelyynn.github.io/bleh/fm/flags/${lang}.svg)" />
+                        ${flag((convert_lang_to_country[lang] || lang).toUpperCase(), 'small-flag')}
                         ${selected_language}
                     </span>
                     ${
@@ -731,10 +732,7 @@ export function append_nav() {
             html`
                 <div class="auth-dropdown-item-row">
                     <span class="auth-dropdown-item-left">
-                        <span
-                            class="flag"
-                            style="background-image: url(https://katelyynn.github.io/bleh/fm/flags/${key}.svg)"
-                        />
+                        ${flag((convert_lang_to_country[key] || key).toUpperCase(), 'small-flag')}
                         ${button.textContent}
                     </span>
                     ${key in lang_info ?

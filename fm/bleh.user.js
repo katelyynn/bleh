@@ -62300,10 +62300,10 @@
   var import_json53 = __toESM(require_dist2(), 1);
 
   // src/components/shared/flag.ts
-  function flag(code) {
+  function flag(code, classname) {
     const url = `https://purecatamphetamine.github.io/country-flag-icons/3x2/${code}.svg`;
     const elem = html.node`
-        <div class="country-flag" style="background-image: url(${url})">
+        <div class="country-flag ${classname ? classname : ""}" style="background-image: url(${url})">
             ${code} (flag)
         </div>
     `;
@@ -62312,6 +62312,13 @@
     });
     return elem;
   }
+  var convert_lang_to_country = {
+    en: "gb",
+    sv: "se",
+    zh: "cn",
+    ja: "jp",
+    pt: "br"
+  };
 
   // src/components/shared/age.ts
   function age(date, compare2) {
@@ -70427,7 +70434,7 @@
             <button class="dropdown-menu-clickable-item v2" aria-selected="true">
                 <div class="auth-dropdown-item-row">
                     <span class="auth-dropdown-item-left">
-                        <span class="flag" style="background-image: url(https://katelyynn.github.io/bleh/fm/flags/${lang}.svg)" />
+                        ${flag((convert_lang_to_country[lang] || lang).toUpperCase(), "small-flag")}
                         ${selected_language}
                     </span>
                     ${lang in lang_info ? html.node`
@@ -70468,10 +70475,7 @@
         html`
                 <div class="auth-dropdown-item-row">
                     <span class="auth-dropdown-item-left">
-                        <span
-                            class="flag"
-                            style="background-image: url(https://katelyynn.github.io/bleh/fm/flags/${key}.svg)"
-                        />
+                        ${flag((convert_lang_to_country[key] || key).toUpperCase(), "small-flag")}
                         ${button2.textContent}
                     </span>
                     ${key in lang_info ? html.node`
@@ -71377,9 +71381,7 @@
       let date;
       const row = html.node`
                             <div class="language-row${lang == key ? " active" : ""}">
-                                <div class="flag-container">
-                                    <img src="https://katelyynn.github.io/bleh/fm/flags/${key}.svg" alt="flag for ${key}">
-                                </div>
+                                ${flag((convert_lang_to_country[key] || key).toUpperCase())}
                                 <div class="name">
                                     <h5>${language.name}</h5>
                                     <p>${{ html: tl2(trans.by_user, { u: language.by.map((user) => `<a href="${root}user/${user}">${user}</a>`).join(", ") }) }}</p>
@@ -72932,7 +72934,7 @@
         func: translation_view,
         title_func: (val) => html.node`
                         <span class="language-header">
-                            <span class="flag" style="background-image: url(https://katelyynn.github.io/bleh/fm/flags/${val.value}.svg)" />
+                            ${flag((convert_lang_to_country[val.value] || val.value).toUpperCase())}
                             <p>${val.text}</p>
                         </span>
                     `,
