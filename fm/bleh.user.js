@@ -58983,7 +58983,7 @@
                     ` : ""}
                     <div class="input-container content-form in-settings can-submit" data-has-error="false" ref=${(el) => input_container = el}>
                         <input type="text" maxlength=${max2} value=${value} style="--max: ${max2}px; --min: ${min2}px" ref=${(el) => input2 = el} placeholder=${placeholder} />
-                        <button class="btn chibi icon submit" ref=${(el) => submit = el} onclick=${() => update_text(id, input2, submit, option, input2.value, reset_btn, avatar3)}>${tl2(trans.save)}</button>
+                        <button class="btn primary icon" data-type="save" ref=${(el) => submit = el} onclick=${() => update_text(id, input2, submit, option, input2.value, reset_btn, avatar3)}>${tl2(trans.save)}</button>
                     </div>
                 </div>
             `;
@@ -59295,16 +59295,9 @@
             );
           }
           render(lists, html`
-                    ${current.map((val) => {
-            return html.node`
-                            <button class="btn setting-list-item current" data-host=${list[val]?.host} onclick=${() => {
-              const new_list = current.filter(
-                (item) => item != val
-              );
-              save_setting(id, new_list);
-              render_list_items(new_list);
-              if (func) func(new_list);
-            }}>
+                    ${current.map((val, i2) => {
+            const elem2 = html.node`
+                            <div class="setting-list-item current" data-host=${list[val]?.host}>
                                 ${list[val]?.icon != null ? html.node`
                                 <div class="bleh-icon" data-type=${list[val].icon} />
                                 ` : ""}
@@ -59312,18 +59305,60 @@
                                     ${list[val]?.name || val}
                                     ${list[val]?.new_release ? html.node`<span class="new-badge new">${tl2(trans.new)}</span>` : ""}
                                 </div>
-                                <div class="bleh-icon indicator" data-type="minus" />
-                            </button>
+                                <button class="btn chibi icon setting-list-item-btn" data-type="minus" onclick=${() => {
+              const new_list = current.filter(
+                (item) => item != val
+              );
+              save_setting(id, new_list);
+              render_list_items(new_list);
+              if (func) func(new_list);
+            }}>
+                                    ${tl2(trans.remove)}
+                                </button>
+                            </div>
                         `;
+            const tip = tippy_esm_default(elem2, {
+              content: html.node`
+                                <div class="setting-list-buttons">
+                                    <button class="btn chibi icon setting-list-item-btn big" data-type="prev" disabled=${i2 == 0} onclick=${() => {
+                if (i2 == 0) return;
+                const new_list = [...current];
+                [new_list[i2 - 1], new_list[i2]] = [new_list[i2], new_list[i2 - 1]];
+                save_setting(id, new_list);
+                render_list_items(new_list);
+                if (func) func(new_list);
+                tip.hide();
+              }}>
+                                        ${tl2(trans.move_up)}
+                                    </button>
+                                    <button class="btn chibi icon setting-list-item-btn big" data-type="next" disabled=${i2 == current.length - 1} onclick=${() => {
+                if (i2 == current.length - 1) return;
+                const new_list = [...current];
+                [new_list[i2 + 1], new_list[i2]] = [new_list[i2], new_list[i2 + 1]];
+                save_setting(id, new_list);
+                render_list_items(new_list);
+                if (func) func(new_list);
+                tip.hide();
+              }}>
+                                        ${tl2(trans.move_down)}
+                                    </button>
+                                </div>
+                            `,
+              interactive: true,
+              appendTo: document.body
+            });
+            return elem2;
           })}
                     ${!settings_store[id].predefined ? () => {
             const button2 = html.node`
-                            <button class="btn setting-list-item current">
+                            <div class="setting-list-item current">
                                 <div class="info">
                                     ${tl2(trans.add)}
                                 </div>
-                                <div class="bleh-icon indicator" data-type="add" />
-                            </button>
+                                <button class="btn chibi icon setting-list-item-btn" data-type="plus">
+                                    ${tl2(trans.add)}
+                                </button>
+                            </div>
                         `;
             let input_box;
             const tooltip = tippy_esm_default(button2, {
@@ -59359,12 +59394,7 @@
                     ${settings_store[id].predefined ? html.node`
                         ${Object.entries(available).map(([val, formal]) => {
             return html.node`
-                                <button class="btn setting-list-item" data-host=${formal.host} onclick=${() => {
-              const new_list = [...current, val];
-              save_setting(id, new_list);
-              render_list_items(new_list);
-              if (func) func(new_list);
-            }}>
+                                <div class="setting-list-item" data-host=${formal.host}>
                                     ${formal.icon ? html.node`
                                         <div class="bleh-icon" data-type=${formal.icon} />
                                     ` : ""}
@@ -59372,8 +59402,15 @@
                                         ${formal.name}
                                         ${formal.new_release ? html.node`<span class="new-badge new">${tl2(trans.new)}</span>` : ""}
                                     </div>
-                                    <div class="bleh-icon indicator" data-type="add" />
-                                </button>
+                                    <button class="btn chibi icon setting-list-item-btn" data-type="plus" onclick=${() => {
+              const new_list = [...current, val];
+              save_setting(id, new_list);
+              render_list_items(new_list);
+              if (func) func(new_list);
+            }}>
+                                        ${tl2(trans.add)}
+                                    </button>
+                                </div>
                             `;
           })}
                     ` : ""}
@@ -90919,6 +90956,12 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       body: {
         en: "Add small visual flair to music pages"
       }
+    },
+    move_up: {
+      en: "Move up"
+    },
+    move_down: {
+      en: "Move down"
     }
   };
   var translation_fallback = "NO_TRANSLATION_FOUND";

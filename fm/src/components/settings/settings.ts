@@ -429,7 +429,7 @@ export function setting({
                     }
                     <div class="input-container content-form in-settings can-submit" data-has-error="false" ref=${(el) => (input_container = el)}>
                         <input type="text" maxlength=${max} value=${value} style="--max: ${max}px; --min: ${min}px" ref=${(el) => (input = el)} placeholder=${placeholder} />
-                        <button class="btn chibi icon submit" ref=${(el) => (submit = el)} onclick=${() => update_text(id, input, submit, option, input.value, reset_btn, avatar)}>${tl(trans.save)}</button>
+                        <button class="btn primary icon" data-type="save" ref=${(el) => (submit = el)} onclick=${() => update_text(id, input, submit, option, input.value, reset_btn, avatar)}>${tl(trans.save)}</button>
                     </div>
                 </div>
             ` as setting_element;
@@ -880,41 +880,82 @@ export function setting({
                 }
 
                 render(lists, html`
-                    ${current.map((val) => {
-                        return html.node`
-                            <button class="btn setting-list-item current" data-host=${list[val]?.host} onclick=${() => {
-                                const new_list = current.filter(
-                                    (item) => item != val
-                                );
-
-                                save_setting(id, new_list);
-                                render_list_items(new_list);
-
-                                if (func) func(new_list);
-                            }}>
-                                ${
-                                    list[val]?.icon != null ?
-                                        html.node`
+                    ${current.map((val, i) => {
+                        const elem = html.node`
+                            <div class="setting-list-item current" data-host=${list[val]?.host}>
+                                ${list[val]?.icon != null ? html.node`
                                 <div class="bleh-icon" data-type=${list[val].icon} />
-                                `
-                                    :   ''
-                                }
+                                ` : ''}
                                 <div class="info">
                                     ${list[val]?.name || val}
                                     ${list[val]?.new_release ? html.node`<span class="new-badge new">${tl(trans.new)}</span>` : ''}
                                 </div>
-                                <div class="bleh-icon indicator" data-type="minus" />
-                            </button>
+                                <button class="btn chibi icon setting-list-item-btn" data-type="minus" onclick=${() => {
+                                    const new_list = current.filter(
+                                        (item) => item != val
+                                    );
+
+                                    save_setting(id, new_list);
+                                    render_list_items(new_list);
+
+                                    if (func) func(new_list);
+                                }}>
+                                    ${tl(trans.remove)}
+                                </button>
+                            </div>
                         `;
+
+                        const tip = tippy(elem, {
+                            content: html.node`
+                                <div class="setting-list-buttons">
+                                    <button class="btn chibi icon setting-list-item-btn big" data-type="prev" disabled=${i == 0} onclick=${() => {
+                                        if (i == 0) return;
+
+                                        const new_list = [...current];
+                                        [new_list[i - 1], new_list[i]] = [new_list[i], new_list[i - 1]];
+
+                                        save_setting(id, new_list);
+                                        render_list_items(new_list);
+
+                                        if (func) func(new_list);
+
+                                        tip.hide();
+                                    }}>
+                                        ${tl(trans.move_up)}
+                                    </button>
+                                    <button class="btn chibi icon setting-list-item-btn big" data-type="next" disabled=${i == current.length - 1} onclick=${() => {
+                                        if (i == current.length - 1) return;
+
+                                        const new_list = [...current];
+                                        [new_list[i + 1], new_list[i]] = [new_list[i], new_list[i + 1]];
+
+                                        save_setting(id, new_list);
+                                        render_list_items(new_list);
+
+                                        if (func) func(new_list);
+
+                                        tip.hide();
+                                    }}>
+                                        ${tl(trans.move_down)}
+                                    </button>
+                                </div>
+                            `,
+                            interactive: true,
+                            appendTo: document.body
+                        });
+
+                        return elem;
                     })}
                     ${!settings_store[id].predefined ? () => {
                         const button = html.node`
-                            <button class="btn setting-list-item current">
+                            <div class="setting-list-item current">
                                 <div class="info">
                                     ${tl(trans.add)}
                                 </div>
-                                <div class="bleh-icon indicator" data-type="add" />
-                            </button>
+                                <button class="btn chibi icon setting-list-item-btn" data-type="plus">
+                                    ${tl(trans.add)}
+                                </button>
+                            </div>
                         `;
 
                         let input_box;
@@ -958,14 +999,7 @@ export function setting({
                     ${settings_store[id].predefined ? html.node`
                         ${Object.entries(available).map(([val, formal]) => {
                             return html.node`
-                                <button class="btn setting-list-item" data-host=${formal.host} onclick=${() => {
-                                    const new_list = [...current, val];
-
-                                    save_setting(id, new_list);
-                                    render_list_items(new_list);
-
-                                    if (func) func(new_list);
-                                }}>
+                                <div class="setting-list-item" data-host=${formal.host}>
                                     ${formal.icon ? html.node`
                                         <div class="bleh-icon" data-type=${formal.icon} />
                                     ` : ''}
@@ -973,8 +1007,17 @@ export function setting({
                                         ${formal.name}
                                         ${formal.new_release ? html.node`<span class="new-badge new">${tl(trans.new)}</span>` : ''}
                                     </div>
-                                    <div class="bleh-icon indicator" data-type="add" />
-                                </button>
+                                    <button class="btn chibi icon setting-list-item-btn" data-type="plus" onclick=${() => {
+                                        const new_list = [...current, val];
+
+                                        save_setting(id, new_list);
+                                        render_list_items(new_list);
+
+                                        if (func) func(new_list);
+                                    }}>
+                                        ${tl(trans.add)}
+                                    </button>
+                                </div>
                             `;
                         })}
                     ` : ''}

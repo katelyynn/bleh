@@ -281,9 +281,9 @@ button.navlist-more {
         position: absolute;
         inset: 0 0 -1px 0;
         display: block;
-        background: oklch(var(--b5) / 64%);
-        backdrop-filter: var(--solarium);
-        -webkit-backdrop-filter: var(--solarium);
+        background: oklch(var(--b5) / 34%);
+        backdrop-filter: var(--solarium-compensate);
+        -webkit-backdrop-filter: var(--solarium-compensate);
         border-top-left-radius: inherit;
         border-top-right-radius: inherit;
         z-index: -1;
@@ -396,8 +396,8 @@ button.navlist-more {
     }
 
     :is(.toolbar > .navlist, .library-controls > .navlist) > .navlist-items > .secondary-nav-item > & {
-        --bg-hov: oklch(var(--b4) / 40%) !important;
-        --bg-atv: oklch(var(--b4) / 60%) !important;
+        --bg-hov: oklch(var(--b2) / 20%) !important;
+        --bg-atv: oklch(var(--b2) / 40%) !important;
         --padding: var(--button-verts) var(--button-sides) var(--button-verts) calc(var(--button-sides-icon) + var(--icon-size) + var(--icon-gap)) !important;
         filter: none !important;
 

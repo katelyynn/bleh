@@ -1,7 +1,7 @@
 .setting-lists {
     display: flex;
     flex-wrap: wrap;
-    gap: 6px;
+    gap: var(--card-gap);
 
     .setting-list-item {
         display: flex;
@@ -10,12 +10,7 @@
         text-align: left;
 
         &:not(.current) {
-            --bg: oklch(var(--b4) / 10%);
-            --bg-hov: oklch(var(--b4) / 30%);
-            --bg-atv: oklch(var(--b4) / 50%);
-            --shadow: none;
-            --col: oklch(var(--c3));
-            --mask-colour: oklch(var(--c3) / 80%);
+            color: oklch(var(--c3));
         }
 
         --bg: oklch(var(--b4) / 40%);
@@ -30,6 +25,7 @@
 
         & > .info {
             flex: 1;
+            margin-right: 4px;
         }
 
         & > .bleh-icon {
@@ -51,4 +47,31 @@
         background: oklch(var(--b4) / 60%);
         display: none;
     }
+}
+
+.setting-list-item-btn {
+    --bg: transparent;
+    --bg-hov: oklch(var(--b2) / 30%);
+    --bg-atv: oklch(var(--b2) / 40%);
+    --shadow: none;
+
+    --button-height: 16px;
+    --button-sides: 0;
+    height: var(--button-height);
+    --icon-size: 12px;
+    --radius: 4px;
+
+    &.big {
+        --button-height: 22px;
+        --icon-size: 14px;
+    }
+}
+
+.setting-list-buttons {
+    display: flex;
+    gap: 2px;
+
+    padding: 4px 0;
+
+    margin: -2px -4px;
 }

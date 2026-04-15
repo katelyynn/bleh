@@ -247,17 +247,5 @@
                 var(--button-sides) + var(--button-height)
             ) !important;
         }
-
-        & > .chibi {
-            margin-left: calc(
-                -1 * (var(--button-list-gap) + var(--button-height))
-            ) !important;
-            --bg: transparent;
-            --bg-hov: oklch(var(--h3) / 5%);
-            --bg-atv: oklch(var(--h3) / 10%);
-            --shadow: none;
-            --col: oklch(var(--l3-c));
-            --mask-colour: currentColor;
-        }
     }
 }

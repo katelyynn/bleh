@@ -10418,6 +10418,12 @@ export const trans = {
         body: {
             en: 'Add small visual flair to music pages'
         }
+    },
+    move_up: {
+        en: 'Move up'
+    },
+    move_down: {
+        en: 'Move down'
     }
 } as const satisfies Record<string, any>;
 
