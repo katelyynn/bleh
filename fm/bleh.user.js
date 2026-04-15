@@ -39123,6 +39123,12 @@
     register_menu(elem, menu);
     return elem;
   }
+  function page_header_disc() {
+    if (!settings.show_disc_image) return;
+    return html.node`
+        <div class="page-header-disc" />
+    `;
+  }
   function artist_title(header = document.body) {
     const title = header.querySelector(".header-new-title");
     title.classList.add("page-header-title");
@@ -62245,6 +62251,7 @@
     let page_avatar;
     render(parent, html`
         ${page_avatar = page_header_avatar(src)}
+        ${page_header_disc()}
     `);
     header_colour(page_avatar.image, settings.hue_from_track, page_avatar);
   }
@@ -69547,8 +69554,9 @@
                 </div>
             </div>
             <div class="setting-group">
-                ${setting({ id: "gloss" })}
+                ${setting({ id: "show_disc_image" })}
                 ${setting({ id: "grid_glow" })}
+                ${setting({ id: "gloss" })}
             </div>
             <div class="setting-group">
                 ${setting({ id: "avatar_radius" })}
@@ -74400,6 +74408,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
             <section class="page-header for-album">
                 <div class="page-header-avatar-list">
                     ${page_avatar = page_header_avatar(avatar_img)}
+                    ${page_header_disc()}
                 </div>
                 <div class="page-header-info">
                     <div class="sub-text" ref=${(el) => page.state.header_type = el}>${tl2(trans.album)}</div>
@@ -90898,6 +90907,14 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     },
     ended: {
       en: "Ended"
+    },
+    show_disc_image: {
+      name: {
+        en: "Show accompanying disc for albums and tracks"
+      },
+      body: {
+        en: "Add small visual flair to music pages"
+      }
     }
   };
   var translation_fallback = "NO_TRANSLATION_FOUND";
@@ -92003,6 +92020,11 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       default: true,
       type: "checkbox",
       title: trans.crop_before_uploading
+    },
+    show_disc_image: {
+      default: true,
+      title: trans.show_disc_image.name,
+      body: trans.show_disc_image.body
     }
   };
 

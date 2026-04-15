@@ -1,12 +1,12 @@
 .page-banner {
     position: absolute;
-    inset: calc(-1 * var(--h)) 0 calc(-1 * var(--h)) 50%;
+    inset: 0 0 0 50%;
     z-index: -4;
 
-    --w: calc(var(--cards-width) + (var(--card-padding) * 8));
+    --w: 1300px;
     --h: 325px;
 
-    height: calc(var(--h) * 3);
+    height: var(--h);
     width: var(--w);
     margin-left: calc(-1 * (var(--w) / 2));
 
@@ -24,11 +24,23 @@
         opacity: 0.8;
     }
 
-    --mask: linear-gradient(0deg, transparent 0%, white 70%);
+    --mask: linear-gradient(0deg, rgba(255, 255, 255, 0.6) 0%, white 20%);
     mask-image: var(--mask);
     -webkit-mask-image: var(--mask);
 
     contain: strict;
+
+    &:before {
+        content: '';
+        position: absolute;
+        inset: 0;
+
+        background: oklch(var(--b6));
+
+        --mask: linear-gradient(90deg, transparent 0%, white 40%, white 60%, transparent 100%);
+        mask-image: var(--mask);
+        -webkit-mask-image: var(--mask);
+    }
 }
 .background-inner {
     position: absolute;
@@ -40,6 +52,8 @@
     --mask: linear-gradient(90deg, transparent 0%, white 40%, white 60%, transparent 100%);
     mask-image: var(--mask);
     -webkit-mask-image: var(--mask);
+
+    opacity: 0.6;
 
     &:before {
         content: '';
@@ -61,10 +75,6 @@
 
     opacity: 0.4;
     height: var(--banner-height);
-
-    --mask: linear-gradient(90deg, white 0%, white 20%, transparent 35%, transparent 65%, white 80%, white 100%);
-    mask-image: var(--mask);
-    -webkit-mask-image: var(--mask);
 
     will-change: transform, filter;
     transform: translateZ(0);

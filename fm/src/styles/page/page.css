@@ -180,8 +180,8 @@
             display: block;
             z-index: -1;
             background: var(--solarium-image, none);
-            backdrop-filter: var(--solarium);
-            -webkit-backdrop-filter: var(--solarium);
+            backdrop-filter: var(--solarium-compensate);
+            -webkit-backdrop-filter: var(--solarium-compensate);
 
             border-radius: inherit;
 

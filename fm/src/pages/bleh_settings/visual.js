@@ -249,8 +249,9 @@ export function visual() {
                 </div>
             </div>
             <div class="setting-group">
-                ${setting({ id: 'gloss' })}
+                ${setting({ id: 'show_disc_image' })}
                 ${setting({ id: 'grid_glow' })}
+                ${setting({ id: 'gloss' })}
             </div>
             <div class="setting-group">
                 ${setting({ id: 'avatar_radius' })}

@@ -95,6 +95,14 @@ export function page_header_avatar(url?: string): page_header_avatar {
     return elem;
 }
 
+export function page_header_disc() {
+    if (!settings.show_disc_image) return;
+
+    return html.node`
+        <div class="page-header-disc" />
+    `;
+}
+
 export function artist_title(header = document.body) {
     const title = header.querySelector('.header-new-title') as HTMLElement;
     title.classList.add('page-header-title');

@@ -1046,5 +1046,10 @@ export let settings_store: Record<string, setting_instance> = {
         default: true,
         type: 'checkbox',
         title: trans.crop_before_uploading
+    },
+    show_disc_image: {
+        default: true,
+        title: trans.show_disc_image.name,
+        body: trans.show_disc_image.body
     }
 };

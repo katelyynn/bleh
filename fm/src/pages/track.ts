@@ -25,7 +25,7 @@ import { avatar, expand_avatar } from '@/components/shared/avatar';
 import tippy from 'tippy.js';
 import { oracle_process } from '@/components/music/oracle';
 import { hoshino_return } from '@/components/music/hoshino.js';
-import { page_header_avatar, page_header_title } from '@/components/music/header';
+import { page_header_avatar, page_header_disc, page_header_title } from '@/components/music/header';
 import { header_colour } from '@/components/page/colour';
 
 export function bleh_tracks() {
@@ -200,6 +200,7 @@ export function create_avatar(parent, src, override = 'expand') {
 
     render(parent, html`
         ${page_avatar = page_header_avatar(src)}
+        ${page_header_disc()}
     `);
 
     header_colour(page_avatar.image, settings.hue_from_track, page_avatar);

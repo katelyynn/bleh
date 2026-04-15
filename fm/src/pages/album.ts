@@ -37,7 +37,7 @@ import { setting } from '@/components/settings/settings';
 import tippy from 'tippy.js';
 import { oracle_process } from '@/components/music/oracle';
 import { save_hoshino_artwork } from '@/components/music/hoshino.js';
-import { page_header_avatar, page_header_title } from '@/components/music/header';
+import { page_header_avatar, page_header_disc, page_header_title } from '@/components/music/header';
 import { header_colour } from '@/components/page/colour';
 
 export function bleh_albums() {
@@ -124,6 +124,7 @@ export function bleh_albums() {
             <section class="page-header for-album">
                 <div class="page-header-avatar-list">
                     ${page_avatar = page_header_avatar(avatar_img)}
+                    ${page_header_disc()}
                 </div>
                 <div class="page-header-info">
                     <div class="sub-text" ref=${el => page.state.header_type = el}>${tl(trans.album)}</div>

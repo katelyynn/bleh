@@ -10407,6 +10407,14 @@ export const trans = {
     },
     ended: {
         en: 'Ended'
+    },
+    show_disc_image: {
+        name: {
+            en: 'Show accompanying disc for albums and tracks'
+        },
+        body: {
+            en: 'Add small visual flair to music pages'
+        }
     }
 } as const satisfies Record<string, any>;
 
