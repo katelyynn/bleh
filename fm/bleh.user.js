@@ -63971,7 +63971,7 @@
       const lifespan = data2["life-span"];
       const begin = data2["begin-area"];
       const end2 = data2["end-area"];
-      const begin_code = begin["iso-3166-2-codes"] ? begin["iso-3166-2-codes"][0]?.split("-")[0] : null;
+      const begin_code = begin && begin["iso-3166-2-codes"] ? begin["iso-3166-2-codes"][0]?.split("-")[0] : null;
       const end_code = end2 && end2["iso-3166-2-codes"] ? end2["iso-3166-2-codes"][0]?.split("-")[0] : null;
       const artists_seen = /* @__PURE__ */ new Set();
       const artists = data2.relations.filter((relation) => relation.type == "member of band").filter((relation) => {

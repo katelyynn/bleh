@@ -2173,7 +2173,7 @@ export function oracle_process() {
         const begin = data['begin-area'];
         const end = data['end-area'];
 
-        const begin_code = begin['iso-3166-2-codes'] ? begin['iso-3166-2-codes'][0]?.split('-')[0] : null;
+        const begin_code = begin && begin['iso-3166-2-codes'] ? begin['iso-3166-2-codes'][0]?.split('-')[0] : null;
         const end_code = end && end['iso-3166-2-codes'] ? end['iso-3166-2-codes'][0]?.split('-')[0] : null;
 
         const artists_seen = new Set();
