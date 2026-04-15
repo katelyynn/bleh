@@ -107,6 +107,7 @@ export let page: page = {
     mobile: false,
     platform: 'other',
     suggest: null,
+    restricted: false,
     now: {
         next_fetch: null,
         name: null,
@@ -197,6 +198,7 @@ interface page {
     mobile: boolean,
     platform: string,
     suggest: any,
+    restricted: boolean,
     now: {
         next_fetch: Date | null,
         name: HTMLElement | null,

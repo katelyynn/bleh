@@ -575,6 +575,8 @@ body,
         --card-overlay-filter: invert(0.4);
         --card-overlay-opacity: 0.2;
         --card-overlay-mix-mode: unset;
+
+        --header-disc-filter: brightness(1.2);
     }
     &[data-bleh--theme="ink"] {
         --b2: 0.41 calc(var(--sat) * 0 * var(--sat-bg, 1)) var(--hue);
@@ -632,6 +634,8 @@ body,
         --card-overlay-filter: invert(0.4);
         --card-overlay-opacity: 0.2;
         --card-overlay-mix-mode: unset;
+
+        --header-disc-filter: brightness(0.9);
     }
 }
 

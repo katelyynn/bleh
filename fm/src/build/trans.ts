@@ -8130,6 +8130,9 @@ export const trans = {
         ru: 'Популярно сейчас',
         pt: 'Popular agora'
     },
+    missing_artist_info: {
+        en: 'This artist is missing key details, maybe you can help out?'
+    },
     missing_album_info: {
         en: 'This album is missing key details, maybe you can help out?',
         de: 'Diesem Album fehlen wichtige Details, vielleicht kannst du helfen?',

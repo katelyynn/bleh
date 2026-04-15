@@ -405,6 +405,12 @@ function load_page(main_content = null) {
     page.state.settings_page = '';
     page.state.on_tour = false;
 
+    page.restricted = false;
+
+    if (main_content) {
+        page.restricted = (main_content.getAttribute('data-page-resource-blacklist-level') || '') != '';
+    }
+
     hideAll({ duration: 0 });
     clear_popup_queue();
 

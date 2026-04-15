@@ -112,7 +112,9 @@ export function checkup_page_structure(is_subpage = false, header = null) {
     let other_main = page.structure.row.querySelector(
         '.col-main.hidden-xs:not([data-assigned])'
     );
-    if (other_main) other_main.style.setProperty('display', 'none');
+    if (other_main) {
+        other_main.remove();
+    }
 
     if (!page.structure.side || !document.body.contains(page.structure.side)) {
         log('page missing side', 'page structure');

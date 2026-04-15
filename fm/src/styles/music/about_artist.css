@@ -70,6 +70,10 @@
         justify-content: center;
         align-items: center;
 
+        --mask-size: var(--cover-size-300);
+
+        background: oklch(var(--b3));
+
         & > img {
             object-fit: cover;
             border-radius: unset !important;

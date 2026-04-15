@@ -10,9 +10,9 @@
 
     --page-header-avatar-size: 180px;
     --page-header-avatar-radius: var(--item-big-radius);
-}
 
-.page-header {
+    min-height: var(--page-header-avatar-size);
+
     margin: 30px -40px 20px !important;
     padding: 0 var(--card-padding);
 
@@ -193,7 +193,7 @@
     transition-duration: 0.4s;
     transition-timing-function: var(--trans-function-ani);
 
-    filter: brightness(0.8);
+    filter: var(--header-disc-filter, brightness(0.8));
 
     transform: rotate(var(--disc-rotate, 0deg));
 }

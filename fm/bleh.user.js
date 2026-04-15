@@ -20413,6 +20413,7 @@
     mobile: false,
     platform: "other",
     suggest: null,
+    restricted: false,
     now: {
       next_fetch: null,
       name: null,
@@ -38306,7 +38307,9 @@
     let other_main = page.structure.row.querySelector(
       ".col-main.hidden-xs:not([data-assigned])"
     );
-    if (other_main) other_main.style.setProperty("display", "none");
+    if (other_main) {
+      other_main.remove();
+    }
     if (!page.structure.side || !document.body.contains(page.structure.side)) {
       log("page missing side", "page structure");
       page.structure.side = page.structure.row.querySelector(".col-sidebar");
@@ -65017,12 +65020,7 @@
       console.info(col_main, new_panel);
       col_main = new_panel;
     }
-    let page_is_blocked;
-    if (page.type == "artist") {
-      page_is_blocked = col_main.querySelector(".metadata-and-wiki-row, .cta-copy") == null;
-    } else if (page.type == "album" || page.type == "track") {
-      page_is_blocked = col_main.querySelector(".catalogue-tags") == null;
-    }
+    const page_is_blocked = page.restricted;
     const summary = page.structure.main.querySelector(".music-summary");
     const summary_info = summary?.querySelector(".summary-content");
     summary_info?.appendChild(col_main);
@@ -65823,19 +65821,18 @@
         });
       }
     }
-    const no_info = col_main.querySelector(
-      ":scope > .section-with-separator.buffer-4"
-    );
+    const no_info = col_main.querySelector(":scope > .section-with-separator");
     if (no_info) {
       no_info.classList = "loading-data-container";
-      render(
-        no_info,
-        html`
-                <div class="loading-data-text info">
-                    ${tl2(trans.missing_album_info)}
-                </div>
-            `
-      );
+      render(no_info, html`
+            <div class="loading-data-text info">
+                ${tl2(page.type == "album" ? trans.missing_album_info : trans.missing_artist_info)}
+            </div>
+        `);
+      const extra = no_info.nextElementSibling;
+      if (extra?.classList.contains("section-with-separator")) {
+        extra.remove();
+      }
     }
     if (!settings.corrections) return;
     page.structure.side.appendChild(html.node`
@@ -80118,6 +80115,10 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       clearInterval(page.state.activity_preview_timer);
     page.state.settings_page = "";
     page.state.on_tour = false;
+    page.restricted = false;
+    if (main_content) {
+      page.restricted = (main_content.getAttribute("data-page-resource-blacklist-level") || "") != "";
+    }
     hideAll({ duration: 0 });
     clear_popup_queue();
     if (main_content) {
@@ -88626,6 +88627,9 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       ru: "\u041F\u043E\u043F\u0443\u043B\u044F\u0440\u043D\u043E \u0441\u0435\u0439\u0447\u0430\u0441",
       pt: "Popular agora"
     },
+    missing_artist_info: {
+      en: "This artist is missing key details, maybe you can help out?"
+    },
     missing_album_info: {
       en: "This album is missing key details, maybe you can help out?",
       de: "Diesem Album fehlen wichtige Details, vielleicht kannst du helfen?",
@@ -92493,7 +92497,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-02-25"
       }
     },
-    built_on: "2026-04-14T17:03:02.702Z"
+    built_on: "2026-04-15T02:15:35.179Z"
   };
 
   // node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

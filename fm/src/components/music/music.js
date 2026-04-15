@@ -78,13 +78,7 @@ export async function show_your_scrobbles() {
         col_main = new_panel;
     }
 
-    let page_is_blocked;
-
-    if (page.type == 'artist') {
-        page_is_blocked = col_main.querySelector('.metadata-and-wiki-row, .cta-copy') == null;
-    } else if (page.type == 'album' || page.type == 'track') {
-        page_is_blocked = col_main.querySelector('.catalogue-tags') == null;
-    }
+    const page_is_blocked = page.restricted;
 
     const summary = page.structure.main.querySelector('.music-summary');
     const summary_info = summary?.querySelector('.summary-content');
@@ -1101,20 +1095,20 @@ export async function show_your_scrobbles() {
     }
 
     // no album info
-    const no_info = col_main.querySelector(
-        ':scope > .section-with-separator.buffer-4'
-    );
+    const no_info = col_main.querySelector(':scope > .section-with-separator');
     if (no_info) {
         no_info.classList = 'loading-data-container';
 
-        render(
-            no_info,
-            html`
-                <div class="loading-data-text info">
-                    ${tl(trans.missing_album_info)}
-                </div>
-            `
-        );
+        render(no_info, html`
+            <div class="loading-data-text info">
+                ${tl(page.type == 'album' ? trans.missing_album_info : trans.missing_artist_info)}
+            </div>
+        `);
+
+        const extra = no_info.nextElementSibling;
+        if (extra?.classList.contains('section-with-separator')) {
+            extra.remove();
+        }
     }
 
     // lotus
