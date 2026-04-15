@@ -416,6 +416,8 @@ export function oracle_process() {
             desired_id
         });
 
+        if (!desired_id) return artist.name;
+
         if (
             artist.name.toLowerCase() == desired.toLowerCase() ||
             (artist_data.type == 'id' && artist.artist.id == artist_data.name) ||
@@ -2212,6 +2214,7 @@ export function oracle_process() {
                     </dd>
                 </div>
                 ${data.type == 'Person' ? html.node`
+                ${lifespan.begin ? html.node`
                 <div class="metadata-group">
                     <dt class="catalogue-metadata-heading">${tl(trans.born)}</dt>
                     <dd class="catalogue-metadata-description has-age">
@@ -2230,6 +2233,7 @@ export function oracle_process() {
                     </dd>
                     ` : ''}
                 </div>
+                ` : ''}
                 ${lifespan.ended ? html.node`
                 <div class="metadata-group">
                     <dt class="catalogue-metadata-heading">${tl(trans.died)}</dt>
@@ -2251,6 +2255,7 @@ export function oracle_process() {
                 </div>
                 ` : ''}
                 ` : html.node`
+                ${lifespan.begin ? html.node`
                 <div class="metadata-group">
                     <dt class="catalogue-metadata-heading">${tl(trans.formed)}</dt>
                     <dd class="catalogue-metadata-description has-age">
@@ -2268,6 +2273,7 @@ export function oracle_process() {
                     </dd>
                     ` : ''}
                 </div>
+                ` : ''}
                 ${lifespan.ended ? html.node`
                 <div class="metadata-group">
                     <dt class="catalogue-metadata-heading">${tl(trans.ended)}</dt>

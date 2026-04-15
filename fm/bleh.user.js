@@ -62648,6 +62648,7 @@
         desired,
         desired_id
       });
+      if (!desired_id) return artist2.name;
       if (artist2.name.toLowerCase() == desired.toLowerCase() || artist_data.type == "id" && artist2.artist.id == artist_data.name || artist2.id == desired_id)
         return desired;
       return artist2.name;
@@ -63999,6 +64000,7 @@
                     </dd>
                 </div>
                 ${data2.type == "Person" ? html.node`
+                ${lifespan.begin ? html.node`
                 <div class="metadata-group">
                     <dt class="catalogue-metadata-heading">${tl2(trans.born)}</dt>
                     <dd class="catalogue-metadata-description has-age">
@@ -64017,6 +64019,7 @@
                     </dd>
                     ` : ""}
                 </div>
+                ` : ""}
                 ${lifespan.ended ? html.node`
                 <div class="metadata-group">
                     <dt class="catalogue-metadata-heading">${tl2(trans.died)}</dt>
@@ -64038,6 +64041,7 @@
                 </div>
                 ` : ""}
                 ` : html.node`
+                ${lifespan.begin ? html.node`
                 <div class="metadata-group">
                     <dt class="catalogue-metadata-heading">${tl2(trans.formed)}</dt>
                     <dd class="catalogue-metadata-description has-age">
@@ -64055,6 +64059,7 @@
                     </dd>
                     ` : ""}
                 </div>
+                ` : ""}
                 ${lifespan.ended ? html.node`
                 <div class="metadata-group">
                     <dt class="catalogue-metadata-heading">${tl2(trans.ended)}</dt>
@@ -79936,6 +79941,14 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         link.classList.add("pagination-previous-link");
       }
     });
+    const parents = page.structure.container.querySelectorAll(".more-link-with-action");
+    parents.forEach((parent) => {
+      if (parent.nextElementSibling && parent.nextElementSibling.classList.contains("more-link-with-action")) {
+        parent.remove();
+        return;
+      }
+      parent.classList = "see-more-row";
+    });
     const pagination = page.structure.container.querySelectorAll(".pagination-page:not([data-pagination])");
     pagination.forEach((page2) => {
       page2.setAttribute("data-pagination", "true");
@@ -79943,6 +79956,23 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       const link = page2.querySelector("a, span");
       link.classList.add("btn", "pagination-page-link");
       if (current) link.setAttribute("aria-checked", "true");
+    });
+  }
+
+  // src/components/settings/storage.ts
+  var storage_keys_clean = [
+    "bleh_profile_banners",
+    "bleh_moderation",
+    "bleh_update_paused",
+    "bleh_update_paused_until"
+  ];
+  function clean_storage() {
+    storage_keys_clean.forEach((key) => {
+      const data2 = localStorage.getItem(key);
+      if (data2) {
+        log(`removed ${key}`, "storage", "info", { data: data2 });
+        localStorage.removeItem(key);
+      }
     });
   }
 
@@ -79957,6 +79987,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         document.title = "...";
       },
       on_body_load: () => {
+        clean_storage();
         favi();
         page.state.colour_preview = html.node`
                 <div class="colour-preview" />

@@ -289,3 +289,8 @@ a.inline-add-icon {
         display: none;
     }
 }
+
+.see-more-row {
+    display: flex;
+    gap: var(--card-gap);
+}

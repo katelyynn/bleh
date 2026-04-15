@@ -786,3 +786,32 @@ button.bleh--gallery-bookmark-image-btn {
     align-items: end;
     flex-shrink: 1;
 }
+
+
+
+.sidebar-image-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 10px;
+    margin: unset;
+
+    &:before, &:after {
+        display: none;
+    }
+
+    &:not(:last-child) {
+        margin-bottom: var(--card-gap);
+    }
+}
+
+.sidebar-image-list-item {
+    min-height: unset;
+    margin: unset;
+    padding: unset;
+    width: 100%;
+}
+
+.sidebar-image-list-image {
+    position: static !important;
+}

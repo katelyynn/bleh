@@ -94,6 +94,7 @@ import { verified } from './components/shared/badge';
 import { see_more } from './components/page/see_more';
 import { icon, icons } from './components/shared/icon';
 import { avatar } from './components/shared/avatar';
+import { clean_storage } from './components/settings/storage';
 
 export function bleh() {
     florence({
@@ -105,6 +106,7 @@ export function bleh() {
             document.title = '...';
         },
         on_body_load: () => {
+            clean_storage();
             favi();
 
             page.state.colour_preview = html.node`

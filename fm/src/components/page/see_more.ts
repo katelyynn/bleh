@@ -17,6 +17,16 @@ export function see_more() {
         }
     });
 
+    const parents = page.structure.container.querySelectorAll('.more-link-with-action');
+    parents.forEach((parent: Element) => {
+        if (parent.nextElementSibling && parent.nextElementSibling.classList.contains('more-link-with-action')) {
+            parent.remove();
+            return;
+        }
+
+        parent.classList = 'see-more-row';
+    });
+
     const pagination = page.structure.container.querySelectorAll('.pagination-page:not([data-pagination])');
     pagination.forEach((page: Element) => {
         page.setAttribute('data-pagination', 'true');
