@@ -480,10 +480,6 @@ export function setting({
                 content: tl(trans.reset)
             });
 
-            tippy(submit, {
-                content: tl(trans.save)
-            });
-
             if (focus) input.focus();
 
             error_tooltip = tippy(input, {

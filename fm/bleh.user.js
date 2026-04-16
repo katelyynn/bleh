@@ -59022,9 +59022,6 @@
         tippy_esm_default(reset_btn, {
           content: tl2(trans.reset)
         });
-        tippy_esm_default(submit, {
-          content: tl2(trans.save)
-        });
         if (focus) input2.focus();
         error_tooltip = tippy_esm_default(input2, {
           theme: "error",
