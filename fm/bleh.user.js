@@ -62282,7 +62282,7 @@
   function create_avatar(parent, src, override = "expand") {
     log(`creating avatar for ${src} with override ${override}`, "track");
     let full = avatar(src, "ar0");
-    if (src.endsWith("c6f59c1e5e7240a4c0d427abd71f3dbb.jpg") || src.endsWith("c6f59c1e5e7240a4c0d427abd71f3dbb.jpg") || src == "") {
+    if (!src || (src.endsWith("c6f59c1e5e7240a4c0d427abd71f3dbb.jpg") || src.endsWith("c6f59c1e5e7240a4c0d427abd71f3dbb.jpg") || src == "")) {
       src = "";
       full = "";
     }
@@ -63567,6 +63567,11 @@
                 page.state.avatar_side_override
               );
             } else {
+              create_avatar(
+                page.state.avatar_side,
+                null,
+                page.state.avatar_side_override
+              );
               fetch(`${root}music/${sanitise(artist2)}/${sanitise(title)}/`).then((res) => {
                 if (!res.ok) {
                   log("error fetching cover art", "oracle", "error", { res });

@@ -1688,6 +1688,12 @@ export function oracle_process() {
                             page.state.avatar_side_override
                         );
                     } else {
+                        create_avatar(
+                            page.state.avatar_side,
+                            null,
+                            page.state.avatar_side_override
+                        );
+
                         fetch(`${root}music/${sanitise(artist)}/${sanitise(title)}/`)
                             .then((res) => {
                                 if (!res.ok) {

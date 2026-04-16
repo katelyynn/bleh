@@ -189,7 +189,7 @@ export function create_avatar(parent, src, override = 'expand') {
 
     let full = avatar(src, 'ar0');
 
-    if (src.endsWith('c6f59c1e5e7240a4c0d427abd71f3dbb.jpg') || src.endsWith('c6f59c1e5e7240a4c0d427abd71f3dbb.jpg') || src == '') {
+    if (!src || (src.endsWith('c6f59c1e5e7240a4c0d427abd71f3dbb.jpg') || src.endsWith('c6f59c1e5e7240a4c0d427abd71f3dbb.jpg') || src == '')) {
         src = '';
         full = '';
     }
