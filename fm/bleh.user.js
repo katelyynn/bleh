@@ -62510,11 +62510,11 @@
             <div class="metadata-column">
                 <div class="metadata-group">
                     <dt class="catalogue-metadata-heading">${tl2(trans.length)}</dt>
-                    <dd class="catalogue-metadata-description placeholder-text">15 tracks, 46:01</dd>
+                    <dd class="catalogue-metadata-description placeholder-text">?? ????, ??:??</dd>
                 </div>
                 <div class="metadata-group">
                     <dt class="catalogue-metadata-heading">${tl2(trans.released)}</dt>
-                    <dd class="catalogue-metadata-description placeholder-text">7 June 2024</dd>
+                    <dd class="catalogue-metadata-description placeholder-text">? ??? ????</dd>
                 </div>
             </div>
         `;
@@ -62600,18 +62600,18 @@
             <div class="metadata-column">
                 <div class="metadata-group">
                     <dt class="catalogue-metadata-heading">${tl2(trans.country)}</dt>
-                    <dd class="catalogue-metadata-description placeholder-text">Mars</dd>
+                    <dd class="catalogue-metadata-description placeholder-text">????</dd>
                 </div>
                 <div class="metadata-group">
                     <dt class="catalogue-metadata-heading">${tl2(trans.born)}</dt>
-                    <dd class="catalogue-metadata-description placeholder-text">0 Dec 0000</dd>
+                    <dd class="catalogue-metadata-description placeholder-text">? ??? ????</dd>
                 </div>
             </div>
         `;
       meta_and_wiki?.appendChild(metadata);
       label_panel = html.node`
             <div class="card-tip copyright">
-                © <span class="placeholder-text">Label</span>
+                © <span class="placeholder-text">?????</span>
             </div>
         `;
       info_panel.appendChild(label_panel);
@@ -62793,7 +62793,7 @@
             id: local.id
           });
           return;
-        } else if (oracle_cache[artist]?.[item]?.album) {
+        } else if (oracle_cache[artist]?.[item]?.album?.id) {
           const local = oracle_cache[artist]?.[item]?.album;
           tries = 3;
           log(
