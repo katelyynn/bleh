@@ -116,6 +116,16 @@ body {
         --lit-pro: 0.96;
     }
 
+    --count-bar-align: left;
+    --count-bar-right: none;
+    --count-bar-left: 0;
+
+    &[data-bleh--count_bar_right="true"] {
+        --count-bar-align: right;
+        --count-bar-right: 0;
+        --count-bar-left: none;
+    }
+
     --blank: url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7);
 
     &.increase-btn-contrast {

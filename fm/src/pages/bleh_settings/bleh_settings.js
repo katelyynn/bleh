@@ -461,6 +461,7 @@ export async function render_setting_page(page_id) {
                 </div>
                 <div class="setting-group">
                     ${setting({ id: 'colourful_counts' })}
+                    ${setting({ id: 'count_bar_right' })}
                 </div>
             </section>
             <section class="bleh--panel">

@@ -72152,6 +72152,7 @@
                 </div>
                 <div class="setting-group">
                     ${setting({ id: "colourful_counts" })}
+                    ${setting({ id: "count_bar_right" })}
                 </div>
             </section>
             <section class="bleh--panel">
@@ -91029,6 +91030,14 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     },
     other_user: {
       en: "Other user"
+    },
+    count_bar_right: {
+      name: {
+        en: "Align count to right-side"
+      },
+      body: {
+        en: "Control the direction of the bar progress and text"
+      }
     }
   };
   var translation_fallback = "NO_TRANSLATION_FOUND";
@@ -92132,6 +92141,12 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       default: true,
       title: trans.show_disc_image.name,
       body: trans.show_disc_image.body
+    },
+    count_bar_right: {
+      default: true,
+      title: trans.count_bar_right.name,
+      body: trans.count_bar_right.body,
+      bubble: true
     }
   };
 

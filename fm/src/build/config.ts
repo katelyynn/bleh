@@ -1,6 +1,6 @@
 //
 // bleh, an extension for the music site Last.fm
-// Copyright (c 2025 katelyn and contributors
+// Copyright (c) 2026 katelyn and contributors
 // Licensed under GPLv3
 //
 
@@ -1044,5 +1044,11 @@ export let settings_store: Record<string, setting_instance> = {
         default: true,
         title: trans.show_disc_image.name,
         body: trans.show_disc_image.body
+    },
+    count_bar_right: {
+        default: true,
+        title: trans.count_bar_right.name,
+        body: trans.count_bar_right.body,
+        bubble: true
     }
 };

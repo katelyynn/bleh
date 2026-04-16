@@ -10430,6 +10430,14 @@ export const trans = {
     },
     other_user: {
         en: 'Other user'
+    },
+    count_bar_right: {
+        name: {
+            en: 'Align count to right-side'
+        },
+        body: {
+            en: 'Control the direction of the bar progress and text'
+        }
     }
 } as const satisfies Record<string, any>;
 

@@ -664,8 +664,8 @@
     .chartlist-count-bar-slug {
         background: oklch(var(--h4) / 50%) !important;
         box-shadow: var(--bar-shadow);
-        left: unset;
-        right: 0;
+        left: var(--count-bar-left);
+        right: var(--count-bar-right);
 
         transition-property: background;
         transition-duration: var(--trans);
@@ -738,7 +738,7 @@
     padding: 0 6px !important; /* 14 */
     font-weight: var(--font-weight-bold);
     flex: 1;
-    text-align: right;
+    text-align: var(--count-bar-align);
 }
 
 .chartlist-count-bar-value:after {
