@@ -474,8 +474,7 @@ function bleh_glacier_library_top(static_page = false) {
                 sort_button.classList.add(
                     'btn',
                     'view-item',
-                    'glacier-library-button',
-                    'icon'
+                    'glacier-library-button'
                 );
                 let sort_menu = sort.querySelector('.dropdown-menu-clickable');
 

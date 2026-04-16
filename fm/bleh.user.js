@@ -60070,8 +60070,7 @@
           sort_button.classList.add(
             "btn",
             "view-item",
-            "glacier-library-button",
-            "icon"
+            "glacier-library-button"
           );
           let sort_menu = sort.querySelector(".dropdown-menu-clickable");
           view_buttons.appendChild(sort_button);
