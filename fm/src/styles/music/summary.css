@@ -5,8 +5,10 @@
     --c: 3 !important;
     --g: 4px !important;
 
-    .summary-sep {
-        height: unset !important;
+    @media (min-width: 1250px) {
+        .summary-sep {
+            height: unset !important;
+        }
     }
 
     margin-bottom: unset !important;

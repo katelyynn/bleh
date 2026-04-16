@@ -44,16 +44,18 @@ export function music_summary(listeners: music_stat, scrobbles: music_stat, meta
                 <div class="summary-content" />
                 <div class="summary-sep" />
                 <div class="summary-aside">
-                    <div class="graph-blocks">
-                        ${Array.from({ length: (3 * 10) }).map((_, i) => {
-                            const elem = create_graph_block(i + 1);
+                    <div class="graph-container">
+                        <div class="graph-blocks">
+                            ${Array.from({ length: (3 * 10) }).map((_, i) => {
+                                const elem = create_graph_block(i + 1);
 
-                            graph_blocks.push(elem);
+                                graph_blocks.push(elem);
 
-                            return elem;
-                        })}
+                                return elem;
+                            })}
+                        </div>
+                        <p class="subtle-like" ref=${el => title = el}>${tl(trans.value_scrobbles_recently, { v: 0 })}</p>
                     </div>
-                    <p class="subtle-like" ref=${el => title = el}>${tl(trans.value_scrobbles_recently, { v: 0 })}</p>
                 </div>
             </div>
         </section>

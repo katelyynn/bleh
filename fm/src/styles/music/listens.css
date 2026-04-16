@@ -69,6 +69,13 @@
         margin: calc(-1 * var(--gap)) -20px !important;
 
         height: 38px;
+
+        &:not([data-listens="-3"]) {
+            @media (max-width: 700px) {
+                height: unset;
+                min-height: 38px;
+            }
+        }
     }
 
     & > .listen-badge {
@@ -101,6 +108,10 @@
     .listen-item-info {
         display: flex;
         flex: 1;
+
+        @media (max-width: 700px) {
+            flex-direction: column;
+        }
 
         & > .listen-item-name {
             font-size: var(--font-size);

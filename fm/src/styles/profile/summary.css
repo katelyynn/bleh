@@ -13,7 +13,13 @@
 
     background: linear-gradient(180deg, var(--card-gradient), transparent) !important;
 
-    border-top-left-radius: var(--card-radius) !important;
+    @media (min-width: 1250px) {
+        border-top-left-radius: var(--card-radius) !important;
+    }
+
+    @media (max-width: 600px) {
+        margin-top: calc(-1 * calc(var(--card-padding) + var(--card-gap))) !important;
+    }
 }
 
 .summary-title {
@@ -42,6 +48,20 @@
 .summary-main {
     display: flex;
     gap: 30px;
+
+    @media (max-width: 1250px) {
+        flex-direction: column-reverse;
+        gap: 20px;
+
+        & > .summary-aside {
+            flex-direction: row;
+
+            & > .listen-container {
+                flex: 1;
+                height: fit-content;
+            }
+        }
+    }
 }
 
 .summary-blocks {
@@ -107,6 +127,16 @@
     gap: var(--g);
 
     max-height: calc((var(--w) * var(--c)) + (var(--g) * (var(--c) - 1)));
+}
+
+.graph-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--card-gap);
+
+    @media (max-width: 700px) {
+        display: none;
+    }
 }
 
 .graph-block {
@@ -209,6 +239,12 @@
     background: var(--separator);
 
     flex-shrink: 0;
+
+    @media (max-width: 1250px) {
+        width: unset;
+        height: 1px !important;
+        display: none;
+    }
 }
 
 .month-graph {

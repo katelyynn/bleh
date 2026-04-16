@@ -60907,14 +60907,16 @@
                 <div class="summary-content" />
                 <div class="summary-sep" />
                 <div class="summary-aside">
-                    <div class="graph-blocks">
-                        ${Array.from({ length: 3 * 10 }).map((_, i2) => {
+                    <div class="graph-container">
+                        <div class="graph-blocks">
+                            ${Array.from({ length: 3 * 10 }).map((_, i2) => {
       const elem = create_graph_block2(i2 + 1);
       graph_blocks.push(elem);
       return elem;
     })}
+                        </div>
+                        <p class="subtle-like" ref=${(el) => title = el}>${tl2(trans.value_scrobbles_recently, { v: 0 })}</p>
                     </div>
-                    <p class="subtle-like" ref=${(el) => title = el}>${tl2(trans.value_scrobbles_recently, { v: 0 })}</p>
                 </div>
             </div>
         </section>
@@ -92598,7 +92600,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-02-25"
       }
     },
-    built_on: "2026-04-16T17:55:47.951Z"
+    built_on: "2026-04-16T19:49:28.785Z"
   };
 
   // node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
