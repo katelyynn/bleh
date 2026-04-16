@@ -65879,7 +65879,7 @@
         });
       }
     }
-    const no_info = col_main.querySelector(":scope > .section-with-separator:not(.buffer-standard, .masonry-left)");
+    const no_info = col_main.querySelector(":scope > .section-with-separator:not(.buffer-standard, .masonry-left, .section-with-separator--xs-only)");
     if (no_info) {
       console.info("no info", no_info.classList);
       no_info.classList = "loading-data-container";
