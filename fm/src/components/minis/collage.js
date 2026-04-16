@@ -4,7 +4,7 @@
 // Licensed under GPLv3
 //
 
-import { lang, tl, trans } from '@/build/trans';
+import { lang, tl, trans } from '@/build/trans.ts';
 import { html, render } from 'lighterhtml';
 import { select } from '@/components/settings/select';
 import { setting } from '@/components/settings/settings';

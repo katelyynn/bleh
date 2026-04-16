@@ -7,7 +7,7 @@
 import { expand_avatar } from '@/components/shared/avatar';
 import { log } from '@/build/log';
 import { page, root } from '@/build/page';
-import { tl, trans } from '@/build/trans';
+import { tl, trans } from '@/build/trans.ts';
 import { register_menu } from '@/components/menu';
 import { ff } from '@/components/settings/sku';
 import { html, render } from 'lighterhtml';

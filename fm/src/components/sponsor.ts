@@ -8,7 +8,7 @@ import { html } from 'lighterhtml';
 import { log } from '@/build/log';
 import { auth, page, root } from '@/build/page';
 import { sponsor_list } from '@/build/sponsor';
-import { tl, trans } from '@/build/trans';
+import { tl, trans } from '@/build/trans.ts';
 import { dialog } from '@/components/dialog/dialog';
 import { ff } from '@/components/settings/sku';
 import { status } from '@/components/dialog/status';

@@ -15,7 +15,7 @@ import {
     hex_to_oklch,
     sanitise
 } from '@/build/tools';
-import { tl, trans } from '@/build/trans';
+import { tl, trans } from '@/build/trans.ts';
 import { load_chart_colours } from '@/components/music/chart.js';
 import { bleh_about_artist } from '@/components/music/about_artist.js';
 import { register_menu } from '@/components/menu';
@@ -238,7 +238,7 @@ function album_missing_a_tracklist() {
         `);
     } else if (!ff('oracle') || !settings.oracle_beta) {
         let top_overview = page.structure.main.querySelector(
-            '.top-overview-panel'
+            '.music-summary'
         );
         if (!top_overview) return;
 
@@ -354,6 +354,7 @@ function album_missing_a_tracklist() {
         placement: 'bottom',
         interactive: true,
         interactiveBorder: 10,
-        trigger: 'click'
+        trigger: 'click',
+        appendTo: document.body
     });
 }

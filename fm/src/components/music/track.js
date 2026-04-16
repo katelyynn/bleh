@@ -28,7 +28,7 @@ import {
     smart_title
 } from '@/components/music/lotus';
 import { register_menu } from '@/components/menu';
-import { tl, trans } from '@/build/trans';
+import { tl, trans } from '@/build/trans.ts';
 import { notify } from '@/components/dialog/notify';
 import { redirect } from '@/components/music/music';
 import tippy from 'tippy.js';

@@ -9,7 +9,7 @@ import { settings } from '@/build/config';
 import { log } from '@/build/log';
 import { auth, page, root } from '@/build/page';
 import { desanitise, sanitise, sanitise_text, year_from_date } from '@/build/tools';
-import { tl, trans } from '@/build/trans';
+import { tl, trans } from '@/build/trans.ts';
 import { prep_chart_colours } from '@/components/music/chart';
 import { correct_artist, correct_item_by_artist } from '@/components/music/lotus';
 import { ff } from '@/components/settings/sku';

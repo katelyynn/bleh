@@ -8,7 +8,7 @@ import { auth, root } from '@/build/page';
 import { desanitise } from '@/build/tools';
 import { correct_artist, correct_item_by_artist } from '@/components/music/lotus';
 import { html, render } from 'lighterhtml';
-import { tl, trans } from '@/build/trans';
+import { tl, trans } from '@/build/trans.ts';
 import { patch_avatar } from '@/components/shared/avatar';
 import { icon, icons } from '../shared/icon';
 

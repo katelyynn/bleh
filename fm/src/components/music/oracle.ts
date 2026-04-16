@@ -23,7 +23,7 @@ import {
     smart_artists,
     smart_title
 } from '@/components/music/lotus';
-import { lang, tl, trans } from '@/build/trans';
+import { lang, tl, trans } from '@/build/trans.ts';
 import { clean_title, fix_title } from '@/build/music';
 import { version } from '../../main';
 import { settings } from '@/build/config';

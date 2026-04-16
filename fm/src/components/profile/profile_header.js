@@ -9,7 +9,7 @@ import { log } from '@/build/log';
 import { auth, page, root } from '@/build/page';
 import { sponsor_list } from '@/build/sponsor';
 import { copy, romanise, sanitise } from '@/build/tools';
-import { tl, trans } from '@/build/trans';
+import { tl, trans } from '@/build/trans.ts';
 import { ff } from '@/components/settings/sku';
 import { correct_artist } from '@/components/music/lotus';
 import { html, render } from 'lighterhtml';

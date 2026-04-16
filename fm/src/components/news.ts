@@ -7,7 +7,7 @@
 import { html, render } from 'lighterhtml';
 import { log } from '@/build/log';
 import { page, root } from '@/build/page';
-import { tl, trans } from '@/build/trans';
+import { tl, trans } from '@/build/trans.ts';
 import { dialog, dialog_rm } from '@/components/dialog/dialog';
 import { sponsor_list } from '@/build/sponsor';
 import { markdown } from '@/components/shared/markdown';

@@ -9,7 +9,7 @@ import { page, root } from '@/build/page';
 import { load_chart_colours } from '@/components/music/chart';
 import { ff } from '@/components/settings/sku';
 import { html, render } from 'lighterhtml';
-import { tl, trans } from '@/build/trans';
+import { tl, trans } from '@/build/trans.ts';
 
 export function basic_page_structure() {
     page.structure.container = document.body.querySelector('.page-content');

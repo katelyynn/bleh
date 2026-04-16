@@ -11,7 +11,7 @@ import { redirect } from '@/components/music/music';
 import showdown from 'showdown';
 import DOMPurify from 'dompurify';
 import { expand_avatar } from '@/components/shared/avatar';
-import { tl, trans } from '@/build/trans';
+import { tl, trans } from '@/build/trans.ts';
 import { dialog, dialog_rm } from '@/components/dialog/dialog';
 import { settings, settings_store } from '@/build/config';
 import { log } from '@/build/log.js';

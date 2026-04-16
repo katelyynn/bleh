@@ -74546,7 +74546,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         `);
     } else if (!ff("oracle") || !settings.oracle_beta) {
       let top_overview = page.structure.main.querySelector(
-        ".top-overview-panel"
+        ".music-summary"
       );
       if (!top_overview) return;
       let top2 = html.node`
@@ -74642,7 +74642,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       placement: "bottom",
       interactive: true,
       interactiveBorder: 10,
-      trigger: "click"
+      trigger: "click",
+      appendTo: document.body
     });
   }
 

@@ -6,7 +6,7 @@
 
 import {html, render} from 'lighterhtml';
 import {page} from '@/build/page';
-import {tl, trans} from '@/build/trans';
+import {tl, trans} from '@/build/trans.ts';
 
 export function bleh_radio() {
     let radios = page.structure.side.querySelectorAll('.stationlink');

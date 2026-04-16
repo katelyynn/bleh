@@ -21,7 +21,7 @@ import {
     sponsor_url
 } from '@/build/page';
 import { stored_season } from '@/build/seasonal';
-import { lang, lookup_lang, tl, trans, translation_stats } from '@/build/trans';
+import { lang, lookup_lang, tl, trans, translation_stats } from '@/build/trans.ts';
 import { dialog, load_dialogs } from '@/components/dialog/dialog';
 import {
     correct_artist,

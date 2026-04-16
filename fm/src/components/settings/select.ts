@@ -5,7 +5,7 @@
 //
 
 import { Hole, html, render } from 'lighterhtml';
-import { tl, trans } from '@/build/trans';
+import { tl, trans } from '@/build/trans.ts';
 import tippy from 'tippy.js';
 import { setting_value } from '@/build/config';
 

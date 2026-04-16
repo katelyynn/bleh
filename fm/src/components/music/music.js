@@ -9,7 +9,7 @@ import { settings } from '@/build/config';
 import { log } from '@/build/log';
 import { auth, page, root } from '@/build/page';
 import { clean_number, romanise, sanitise } from '@/build/tools';
-import { lang, tl, trans } from '@/build/trans';
+import { lang, tl, trans } from '@/build/trans.ts';
 import { prep_chart_colours } from '@/components/music/chart';
 import { create_divider } from '@/pages/music/gallery';
 import { ff } from '@/components/settings/sku';

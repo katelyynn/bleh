@@ -10,7 +10,7 @@ import { log } from '@/build/log';
 import { artist_corrections } from '@/build/music';
 import { page, root } from '@/build/page';
 import { clamp_sat, rgb_to_hsl, sanitise } from '@/build/tools';
-import { tl, trans } from '@/build/trans';
+import { tl, trans } from '@/build/trans.ts';
 import { correct_item_by_artist, name_includes, smart_title } from '@/components/music/lotus';
 import { checkup_page_structure } from '@/components/page/structure';
 import { register_background, update_page } from '@/page';

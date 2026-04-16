@@ -12,7 +12,7 @@ import {
 } from '@/build/config';
 import { log } from '@/build/log';
 import { page, reload_pending } from '@/build/page';
-import { tl, trans } from '@/build/trans';
+import { tl, trans } from '@/build/trans.ts';
 import { load_chart_colours } from '@/components/music/chart.js';
 import { notify } from '@/components/dialog/notify';
 import { load_skus } from '@/pages/bleh_settings/bleh_settings.js';

@@ -22,7 +22,7 @@ import {
     sanitise,
     set_storage
 } from '@/build/tools';
-import { tl, trans } from '@/build/trans';
+import { tl, trans } from '@/build/trans.ts';
 import { prepare_corrections_page, render_setting_page } from '@/pages/bleh_settings/bleh_settings.js';
 import { dialog, dialog_rm } from '@/components/dialog/dialog';
 import { html, render } from 'lighterhtml';

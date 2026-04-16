@@ -9,7 +9,7 @@ import { register_background, update_page } from '@/page';
 import { log } from '@/build/log.js';
 import { checkup_page_structure } from '@/components/page/structure.js';
 import { html, render } from 'lighterhtml';
-import { tl, trans } from '@/build/trans';
+import { tl, trans } from '@/build/trans.ts';
 import { load_profile_cache_externally } from '@/pages/profile/profile';
 import { set_storage } from '@/build/tools';
 import { avatar } from '@/components/shared/avatar';

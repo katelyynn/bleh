@@ -5,7 +5,7 @@
 //
 
 import { page, root } from '@/build/page';
-import { tl, trans } from '@/build/trans';
+import { tl, trans } from '@/build/trans.ts';
 import { html, render } from 'lighterhtml';
 import { toggle } from '@/components/settings/toggle';
 import { log } from '@/build/log.js';

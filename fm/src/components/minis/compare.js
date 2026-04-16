@@ -8,7 +8,7 @@ import { html, render } from 'lighterhtml';
 import { log } from '@/build/log';
 import { auth, page, root } from '@/build/page';
 import { clean_number, sanitise } from '@/build/tools';
-import { lang, tl, trans } from '@/build/trans';
+import { lang, tl, trans } from '@/build/trans.ts';
 import { music_grids } from '@/components/music/music_grid';
 import { notify, notify_rm } from '@/components/dialog/notify';
 import { select } from '@/components/settings/select';

@@ -7,7 +7,7 @@
 import { html } from 'lighterhtml';
 import { pad2 } from '@/build/tools';
 import tippy from 'tippy.js';
-import { tl, trans } from '@/build/trans';
+import { tl, trans } from '@/build/trans.ts';
 import { register_menu } from '@/components/menu';
 import { input } from '@/components/settings/input';
 

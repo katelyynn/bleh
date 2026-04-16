@@ -6,7 +6,7 @@
 
 import { html } from 'lighterhtml';
 import tippy from 'tippy.js';
-import { tl, trans } from '@/build/trans';
+import { tl, trans } from '@/build/trans.ts';
 import { ff } from '@/components/settings/sku';
 import { log } from '@/build/log';
 import { copy, paste, redo, undo } from '@/build/tools';

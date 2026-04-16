@@ -7,7 +7,7 @@
 import { html, render } from 'lighterhtml';
 import { page, root } from '@/build/page';
 import { sanitise } from '@/build/tools';
-import { tl, trans } from '@/build/trans';
+import { tl, trans } from '@/build/trans.ts';
 import { avatar, expand_avatar } from '@/components/shared/avatar';
 import { correct_artist } from '@/components/music/lotus';
 import { redirect } from '@/components/music/music';
