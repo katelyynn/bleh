@@ -22,6 +22,8 @@
     --bg-atv: transparent;
     --shadow: none;
 
+    transform: none !important;
+
     &:hover {
         --hover-underline: underline oklch(var(--c3));
     }
