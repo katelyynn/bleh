@@ -332,17 +332,13 @@ button.navlist-more {
     --col: oklch(var(--c2)) !important;
     filter: var(--nav-filter-shadow) !important;
 
-    transition-property: transform !important;
-    transition-duration: 0.2s !important;
-    transition-timing-function: var(--trans-function) !important;
-
     z-index: 1;
     opacity: unset !important;
     margin: unset !important;
     font-weight: var(--font-weight-medium);
     color: oklch(var(--c2));
     cursor: pointer;
-    transition-property: color, transform;
+    transition-property: background-color, color, transform;
     transition-duration: var(--trans);
     transition-timing-function: var(--trans-function);
 
