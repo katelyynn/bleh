@@ -1727,7 +1727,7 @@ export function oracle_process() {
                                     artwork,
                                     title,
                                     artist,
-                                    listeners
+                                    listeners?.textContent.trim()
                                 );
                             })
                             .catch((err) => {

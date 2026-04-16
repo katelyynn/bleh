@@ -63594,7 +63594,7 @@
                   artwork2,
                   title,
                   artist2,
-                  listeners
+                  listeners?.textContent.trim()
                 );
               }).catch((err) => {
                 console.error("oracle", err);
