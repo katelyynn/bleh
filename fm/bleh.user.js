@@ -72036,6 +72036,7 @@
                             class="chartlist-row chartlist-row--with-artist chartlist-row--now-scrobbling"
                             data-has-bar="false"
                             data-show-album-text=${settings.expand_tracks != "never" && settings.track_layout == "column"}
+                            data-album-name-location=${settings.track_album_name_location}
                         >
                             <td class="chartlist-image">
                                 <a class="cover-art">
@@ -72043,7 +72044,7 @@
                                 </a>
                             </td>
                             <td class="kate-placeholder" />
-                            <td class="track-info" data-has-bar="false">
+                            <td class="track-info" data-has-bar="false" data-track-layout=${settings.track_layout} data-album-name-location=${settings.track_album_name_location}>
                                 <span class="chartlist-name">
                                     <a>${tl2(trans.track_name)}</a>
                                 </span>
@@ -72061,6 +72062,7 @@
                             class="chartlist-row chartlist-row--with-artist"
                             data-has-bar="false"
                             data-show-album-text=${settings.expand_tracks == "always" && settings.expand_tracks != "never" && settings.track_layout == "column"}
+                            data-album-name-location=${settings.track_album_name_location}
                         >
                             <td class="chartlist-image">
                                 <a class="cover-art">
@@ -72068,7 +72070,7 @@
                                 </a>
                             </td>
                             <td class="kate-placeholder" />
-                            <td class="track-info" data-has-bar="false">
+                            <td class="track-info" data-has-bar="false" data-track-layout=${settings.track_layout} data-album-name-location=${settings.track_album_name_location}>
                                 <span class="chartlist-name">
                                     <a>${tl2(trans.track_name)}</a>
                                 </span>
@@ -72135,7 +72137,10 @@
         }
       })}
                     ${track_album_name_location = setting({
-        id: "track_album_name_location"
+        id: "track_album_name_location",
+        func: () => {
+          render_track_preview2();
+        }
       })}
                 </div>
             </section>

@@ -129,7 +129,7 @@
 }
 
 .track-info {
-    display: flex;
+    display: flex !important;
     flex-direction: column;
     flex: 1;
     overflow: hidden;
@@ -150,7 +150,7 @@
     }
 
     &[data-track-layout="column"][data-album-name-location="row"]:not([data-has-bar="true"]) {
-        display: grid;
+        display: grid !important;
         grid-template-columns: 60% 40%;
         grid-template-rows: auto auto;
         gap: 0 var(--item-list-gap);
