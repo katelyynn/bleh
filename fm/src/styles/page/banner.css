@@ -81,14 +81,23 @@
     inset: 0;
     z-index: -5;
 
-    opacity: 0.4;
+    opacity: 0;
     height: var(--banner-height);
 
-    will-change: transform, filter;
+    will-change: opacity, transform, filter;
     transform: translateZ(0);
     backface-visibility: hidden;
 
     contain: strict;
+
+    &.ready {
+        opacity: 0.4;
+        animation: banner 0.5s var(--trans-function-ani);
+    }
+
+    transition-property: opacity;
+    transition-duration: 0.5s;
+    transition-timing-function: var(--trans-function-ani);
 
     &:after {
         content: "";
@@ -114,6 +123,15 @@
     &[data-page-type="api"],
     &[data-page-type="error"] {
         height: 450px;
+    }
+}
+
+@keyframes banner {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 0.4;
     }
 }
 

@@ -812,6 +812,32 @@ export async function register_background(url: string | null, origin = null) {
 
     register_banner(url, origin);
 
+    log(`requested register of ${url} from ${origin}`, 'background', 'log');
+    let background = page.structure.background;
+
+    if (!background) {
+        background = html.node`
+            <div class="bleh-background katsune-bleh-background" />
+        `;
+
+        document.body.appendChild(background);
+        page.structure.background = background;
+    } else {
+        const previous_url = background.getAttribute('data-url');
+        if (previous_url && previous_url == url) {
+            log('skipped as url is identical', 'background', 'log');
+            return;
+        }
+
+        background.classList.remove('ready');
+    }
+
+    background.setAttribute('data-url', url);
+    background.setAttribute('data-page-type', page.type);
+    background.setAttribute('data-page-subpage', page.subpage);
+    background.setAttribute('data-background-origin', origin);
+    background.setAttribute('data-background-coloured', settings.hue_from_album);
+
     if (url) {
         url = avatar(url, 'avatar300s');
 
@@ -824,30 +850,20 @@ export async function register_background(url: string | null, origin = null) {
         const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d');
 
-        const scale = 400;
+        const scale = 300;
 
         canvas.width = scale;
         canvas.height = scale;
 
         ctx.imageSmoothingEnabled = true;
         ctx.imageSmoothingQuality = 'high';
-        ctx.filter = 'blur(7px)';
+        ctx.filter = 'blur(4px)';
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
         url = canvas.toDataURL();
     }
 
-    log(`requested register of ${url} from ${origin}`, 'background', 'log');
-    let background = page.structure.background;
-
-    if (!background) {
-        background = html.node`
-            <div class="bleh-background katsune-bleh-background" />
-        `;
-
-        document.body.appendChild(background);
-        page.structure.background = background;
-    }
+    background.classList.add('ready');
 
     /*
     if (settings.static_banners) {
@@ -858,11 +874,6 @@ export async function register_background(url: string | null, origin = null) {
         }
     }
     */
-
-    background.setAttribute('data-page-type', page.type);
-    background.setAttribute('data-page-subpage', page.subpage);
-    background.setAttribute('data-background-origin', origin);
-    background.setAttribute('data-background-coloured', settings.hue_from_album);
 
     render(background, html``);
     if (url) {
@@ -895,8 +906,15 @@ export function register_banner(url: string | null, origin = null) {
         `;
         document.body.appendChild(background);
         page.structure.banner = background;
+    } else {
+        const previous_url = background.getAttribute('data-url');
+        if (previous_url && previous_url == url) {
+            log('skipped as url is identical', 'background', 'log');
+            return;
+        }
     }
 
+    background.setAttribute('data-url', url);
     background.setAttribute('data-page-type', page.type);
     background.setAttribute('data-page-subpage', page.subpage);
     background.setAttribute('data-background-origin', origin);

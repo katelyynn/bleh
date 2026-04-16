@@ -80485,23 +80485,6 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
   async function register_background(url, origin = null) {
     if (url && url.endsWith("c6f59c1e5e7240a4c0d427abd71f3dbb.jpg")) url = "";
     register_banner(url, origin);
-    if (url) {
-      url = avatar(url, "avatar300s");
-      const img = html.node`
-            <img src=${url} crossorigin="anonymous" />
-        `;
-      await img.decode();
-      const canvas = document.createElement("canvas");
-      const ctx = canvas.getContext("2d");
-      const scale = 400;
-      canvas.width = scale;
-      canvas.height = scale;
-      ctx.imageSmoothingEnabled = true;
-      ctx.imageSmoothingQuality = "high";
-      ctx.filter = "blur(7px)";
-      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-      url = canvas.toDataURL();
-    }
     log(`requested register of ${url} from ${origin}`, "background", "log");
     let background = page.structure.background;
     if (!background) {
@@ -80510,11 +80493,37 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         `;
       document.body.appendChild(background);
       page.structure.background = background;
+    } else {
+      const previous_url = background.getAttribute("data-url");
+      if (previous_url && previous_url == url) {
+        log("skipped as url is identical", "background", "log");
+        return;
+      }
+      background.classList.remove("ready");
     }
+    background.setAttribute("data-url", url);
     background.setAttribute("data-page-type", page.type);
     background.setAttribute("data-page-subpage", page.subpage);
     background.setAttribute("data-background-origin", origin);
     background.setAttribute("data-background-coloured", settings.hue_from_album);
+    if (url) {
+      url = avatar(url, "avatar300s");
+      const img = html.node`
+            <img src=${url} crossorigin="anonymous" />
+        `;
+      await img.decode();
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+      const scale = 300;
+      canvas.width = scale;
+      canvas.height = scale;
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = "high";
+      ctx.filter = "blur(4px)";
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      url = canvas.toDataURL();
+    }
+    background.classList.add("ready");
     render(background, html``);
     if (url) {
       render(background, html`
@@ -80541,7 +80550,14 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         `;
       document.body.appendChild(background);
       page.structure.banner = background;
+    } else {
+      const previous_url = background.getAttribute("data-url");
+      if (previous_url && previous_url == url) {
+        log("skipped as url is identical", "background", "log");
+        return;
+      }
     }
+    background.setAttribute("data-url", url);
     background.setAttribute("data-page-type", page.type);
     background.setAttribute("data-page-subpage", page.subpage);
     background.setAttribute("data-background-origin", origin);
@@ -92581,7 +92597,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-02-25"
       }
     },
-    built_on: "2026-04-15T15:04:30.072Z"
+    built_on: "2026-04-16T17:55:47.951Z"
   };
 
   // node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
