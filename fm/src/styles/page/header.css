@@ -11,8 +11,6 @@
     --page-header-avatar-size: 180px;
     --page-header-avatar-radius: var(--item-big-radius);
 
-    min-height: var(--page-header-avatar-size);
-
     margin: 30px -40px 20px !important;
     padding: 0 var(--card-padding);
 
