@@ -74168,8 +74168,9 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     );
     love_track.forEach((form) => {
       form.setAttribute("data-bleh-subscribed", "true");
-      let track = form.querySelector('[name="track"]').getAttribute("value");
-      let artist = form.querySelector('[name="artist"]').getAttribute("value");
+      let track = form.querySelector('[name="track"]')?.getAttribute("value");
+      let artist = form?.querySelector('[name="artist"]')?.getAttribute("value");
+      if (!track || !artist) return;
       artist = correct_artist(artist);
       track = correct_item_by_artist(track, artist);
       let btn = form.querySelector("button");
@@ -74268,7 +74269,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     let save_wiki_form = document.body.querySelector(
       ".wiki-edit-form:not([data-bleh-subscribed])"
     );
-    if (save_wiki_form != null) {
+    if (save_wiki_form) {
       save_wiki_form.setAttribute("data-bleh-subscribed", "true");
       let btn = save_wiki_form.querySelector(".form-submit button");
       btn.addEventListener(

@@ -150,10 +150,12 @@ export function subscribe_to_events() {
     love_track.forEach((form) => {
         form.setAttribute('data-bleh-subscribed', 'true');
 
-        let track = form.querySelector('[name="track"]').getAttribute('value');
+        let track = form.querySelector('[name="track"]')?.getAttribute('value');
         let artist = form
-            .querySelector('[name="artist"]')
-            .getAttribute('value');
+            ?.querySelector('[name="artist"]')
+            ?.getAttribute('value');
+
+        if (!track || !artist) return;
 
         artist = correct_artist(artist);
         track = correct_item_by_artist(track, artist);
@@ -278,7 +280,7 @@ export function subscribe_to_events() {
     let save_wiki_form = document.body.querySelector(
         '.wiki-edit-form:not([data-bleh-subscribed])'
     );
-    if (save_wiki_form != null) {
+    if (save_wiki_form) {
         save_wiki_form.setAttribute('data-bleh-subscribed', 'true');
 
         let btn = save_wiki_form.querySelector('.form-submit button');
