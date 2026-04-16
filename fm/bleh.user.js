@@ -72181,33 +72181,31 @@
             <section class="bleh--panel">
                 <h4>${tl2(trans.shouts)}</h4>
                 <div class="inner-preview pad flex">
-                    <div
-                        class="shout js-shout js-link-block shout-preview"
-                        data-kate-processed="true"
-                    >
-                        ${auth.name ? html.node`
-                    <h3 class="shout-user shout-user-preview">
-                        <a>${auth.name}</a>
-                    </h3>
-                    <span class="avatar shout-user-avatar">
-                        <img src="${auth.avatar.replace("/avatar42s/", "/avatar170s/")}" alt="${tl2(trans.your_avatar)}" loading="lazy">
-                    </span>
-                    ` : html.node`
-                    <h3 class="shout-user shout-user-preview">
-                        <a>${tl2(trans.profile)}</a>
-                    </h3>
-                    <span class="avatar shout-user-avatar">
-                        <img class="missing-avatar" alt="${tl2(trans.your_avatar)}" loading="lazy">
-                    </span>
-                    `}
-                        <a class="shout-permalink shout-timestamp shout-timestamp-preview">
-                            <time
-                                datetime="2024-06-05T02:33:39+01:00"
-                                title="Wednesday 5 Jun 2024, 2:33am"
-                            >
-                                5 Jun 2:33am
-                            </time>
-                        </a>
+                    <div class="shout js-shout js-link-block shout-preview" data-kate-processed="true">
+                        <div class="shout-top">
+                            <div class="shout-basics">
+                                ${auth.name ? html.node`
+                                    <h3 class="shout-user shout-user-preview">
+                                        <a>${auth.name}</a>
+                                    </h3>
+                                    <span class="avatar shout-user-avatar">
+                                        <img src="${auth.avatar.replace("/avatar42s/", "/avatar170s/")}" alt="${tl2(trans.your_avatar)}" loading="lazy">
+                                    </span>
+                                ` : html.node`
+                                    <h3 class="shout-user shout-user-preview">
+                                        <a>${tl2(trans.profile)}</a>
+                                    </h3>
+                                    <span class="avatar shout-user-avatar">
+                                        <img class="missing-avatar" alt="${tl2(trans.your_avatar)}" loading="lazy">
+                                    </span>
+                                `}
+                                <a class="shout-permalink shout-timestamp shout-timestamp-preview">
+                                    <time datetime="2024-06-05T02:33:39+01:00" title="Wednesday 5 Jun 2024, 2:33am">
+                                        5 Jun 2:33am
+                                    </time>
+                                </a>
+                            </div>
+                        </div>
                         <div class="shout-body if-markdown-on">
                             ${markdown(tl2(trans.markdown_shouts.preview))}
                         </div>
