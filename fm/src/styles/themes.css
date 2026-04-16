@@ -78,6 +78,8 @@ body {
     --message-sender-width: 190px;
     --message-width: 800px;
 
+    --avatar-radius: 50%;
+
     @media (max-width: 980px) {
         --button-sides: 9px;
         --button-verts: 7px;
