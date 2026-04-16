@@ -124,7 +124,7 @@ ul {
 
 b,
 strong {
-    font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-bold);
 }
 
 /*     FIRST STAGE     */

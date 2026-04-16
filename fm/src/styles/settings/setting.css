@@ -238,7 +238,7 @@
 
             @media (min-width: 981px) {
                 min-height: var(--button-height);
-                max-height: 40px;
+                height: fit-content;
             }
         }
     }
@@ -268,11 +268,12 @@
 
     .banner-image {
         width: 240px;
-        height: 59px;
         background-position: center;
-        background-size: cover;
-        border-radius: var(--item-big-radius);
+        background-size: 100%;
+        border-radius: var(--item-med-radius);
         cursor: pointer;
+
+        aspect-ratio: 1300 / 325;
     }
 
     &[data-type="toggle"] {

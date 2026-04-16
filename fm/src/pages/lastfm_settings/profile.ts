@@ -397,6 +397,7 @@ function profile_panel() {
                             <div class="heading">
                                 <h5>${tl(trans.profile_banner.name)}</h5>
                                 <p>${tl(trans.profile_banner.body)}</p>
+                                <p>${{html: tl(trans.aspect_ratio_banner, { v: '<strong>1300 / 325</strong>' })}}</p>
                             </div>
                             <div class="info v">
                                 ${input({

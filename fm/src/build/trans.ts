@@ -8517,6 +8517,9 @@ export const trans = {
             es: 'Muestra una imagen de tu elección en tu perfil'
         }
     },
+    aspect_ratio_banner: {
+        en: 'Displayed at an aspect ratio of {v}, if screen size supports such'
+    },
     profile_accent: {
         name: {
             // profile colour

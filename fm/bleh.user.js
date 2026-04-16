@@ -76371,6 +76371,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                             <div class="heading">
                                 <h5>${tl2(trans.profile_banner.name)}</h5>
                                 <p>${tl2(trans.profile_banner.body)}</p>
+                                <p>${{ html: tl2(trans.aspect_ratio_banner, { v: "<strong>1300 / 325</strong>" }) }}</p>
                             </div>
                             <div class="info v">
                                 ${input({
@@ -89090,6 +89091,9 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         ru: "\u041F\u043E\u043A\u0430\u0437\u0430\u0442\u044C \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435, \u0432\u044B\u0431\u0440\u0430\u043D\u043D\u043E\u0435 \u0432\u0430\u043C\u0438, \u0432 \u0432\u0430\u0448\u0435\u043C \u043F\u0440\u043E\u0444\u0438\u043B\u0435",
         es: "Muestra una imagen de tu elecci\xF3n en tu perfil"
       }
+    },
+    aspect_ratio_banner: {
+      en: "Displayed at an aspect ratio of {v}, if screen size supports such"
     },
     profile_accent: {
       name: {
