@@ -160,6 +160,18 @@
         transform: translateY(var(--motion, -2px)) scale(0.98);
     }
 
+    &:before {
+        content: '';
+        position: absolute;
+        display: block;
+        inset: 0;
+        box-shadow: var(--grid-inset);
+        border-radius: inherit;
+        pointer-events: none;
+
+        z-index: 100;
+    }
+
     &:after {
         content: '';
         position: absolute;

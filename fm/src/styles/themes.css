@@ -135,6 +135,10 @@ body {
     --snow: snow;
     --snow-glow: var(--snow);
 
+    --avatar-inset: 0 0 0 1px inset rgba(255, 255, 255, 0.1);
+    --grid-inset: 0 0 0 1px inset rgba(255, 255, 255, 0.08);
+    --item-inset: 0 0 0 1px inset rgba(255, 255, 255, 0.1);
+
     &[data-bleh--theme="light"] {
         --snow: #FFF;
         --snow-glow: #CECECE;

@@ -209,6 +209,16 @@
 
     cursor: pointer;
 
+    &:before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        display: block;
+        box-shadow: var(--avatar-inset);
+        border-radius: inherit;
+        pointer-events: none;
+    }
+
     &:after {
         content: "";
         position: absolute;

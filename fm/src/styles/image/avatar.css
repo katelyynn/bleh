@@ -3,6 +3,16 @@
     border-radius: var(--avatar-radius);
     aspect-ratio: 1 / 1;
 
+    &:before {
+        content: '';
+        position: absolute;
+        display: block;
+        inset: 0;
+        pointer-events: none;
+        box-shadow: var(--avatar-inset);
+        border-radius: inherit;
+    }
+
     & > img {
         position: static;
         border-radius: inherit !important;
@@ -23,6 +33,18 @@
 
 img {
     font: 0 / 0 auto !important;
+}
+
+.cover-art {
+    &:before {
+        content: '';
+        position: absolute;
+        display: block;
+        inset: 0;
+        pointer-events: none;
+        box-shadow: var(--avatar-inset);
+        border-radius: inherit;
+    }
 }
 
 .avatar-can-hoverbox {
