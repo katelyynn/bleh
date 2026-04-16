@@ -984,6 +984,31 @@ export async function render_setting_page(page_id) {
 
         console.info('friends', settings.friends, settings);
 
+        let banner_preview;
+
+        function render_banner_preview() {
+            const own_banners = settings.profile_header_own;
+            const other_banners = settings.profile_header_others;
+            const avatar_replace = settings.profile_avi_background;
+
+            const fallback_url = 'https://lastfm.freetls.fastly.net/i/u/ar0/b9436242d32247cbce3d403581284cd3.jpg';
+            const fallback_avi = 'https://lastfm.freetls.fastly.net/i/u/ar0/818148bf682d429dc215c1705eb27b98.png';
+
+            render(banner_preview, html``);
+            render(banner_preview, html`
+                <div class="banner-previews">
+                    <div class="banner-preview-item">
+                        <strong class="banner-preview-label">${auth.name}</strong>
+                        <div class="banner-preview-img ${!own_banners ? 'hide-banner' : ''}" style="background-image: url(${cache.banner || avatar_replace ? avatar(auth.avatar, 'ar0') : fallback_url})" />
+                    </div>
+                    <div class="banner-preview-item">
+                        <strong class="banner-preview-label">${tl(trans.other_profiles)}</strong>
+                        <div class="banner-preview-img ${!other_banners ? 'hide-banner' : ''}" style="background-image: url(${avatar_replace ? fallback_avi : fallback_url})" />
+                    </div>
+                </div>
+            `);
+        }
+
         render(
             page.structure.main,
             html`
@@ -1017,56 +1042,24 @@ export async function render_setting_page(page_id) {
                 </section>
                 <section class="bleh--panel">
                     <h4>${tl(trans.banners)}</h4>
-                    <div class="inner-preview pad">
-                        <div class="profile-mockup">
-                            <div class="mockup-header">
-                                <img
-                                    class="mockup-avatar"
-                                    src="${auth.avatar}"
-                                />
-                                <div class="mockup-info">
-                                    <div class="mockup-subtext"></div>
-                                    <div class="mockup-name"></div>
-                                </div>
-                            </div>
-                            <div class="mockup-container">
-                                <div class="mockup-col-main">
-                                    <div class="mockup-panel main"></div>
-                                </div>
-                                <div class="mockup-col-sidebar">
-                                    <div
-                                        class="mockup-panel mockup-obsession-panel"
-                                    >
-                                        <img
-                                            class="mockup-obsession-art"
-                                            src="https://lastfm.freetls.fastly.net/i/u/64s/510546e3b6df7504392274c528c77780.jpg"
-                                        />
-                                        <div
-                                            class="mockup-obsession-name"
-                                        ></div>
-                                    </div>
-                                    <div class="mockup-panel main"></div>
-                                </div>
-                            </div>
-                            <div class="profile-mockup-background from-avatar" style="background-image: url(${avatar(auth.avatar, 'avatar300s')})" />
-                            ${cache.banner ? html.node`
-                                <div class="profile-mockup-background from-banner" style="background-image: url(${cache.banner})"></div>
-                            ` : html.node`
-                                <div class="profile-mockup-background from-track" style="background-image: url(https://lastfm.freetls.fastly.net/i/u/avatar300s/df927f4f88034b7f9a651636b965c9d7)"></div>
-                            `}
-                        </div>
-                    </div>
+                    <div class="inner-preview pad" ref=${el => banner_preview = el} />
                     <div class="setting-group">
                         <div class="setting" data-type="options">
                             <div class="heading">
                                 <h5>${tl(trans.view_backgrounds_on)}</h5>
                             </div>
                             <div class="primary-selections">
-                                ${setting({ id: 'profile_header_own', standalone: true })}
-                                ${setting({ id: 'profile_header_others', standalone: true })}
+                                ${setting({ id: 'profile_header_own', standalone: true, func: () => {
+                                    render_banner_preview();
+                                } })}
+                                ${setting({ id: 'profile_header_others', standalone: true, func: () => {
+                                    render_banner_preview();
+                                } })}
                             </div>
                         </div>
-                        ${setting({ id: 'profile_avi_background' })}
+                        ${setting({ id: 'profile_avi_background', func: () => {
+                            render_banner_preview();
+                        } })}
                     </div>
                 </section>
                 <section class="bleh--panel">
@@ -1136,6 +1129,7 @@ export async function render_setting_page(page_id) {
 
         init_profile_notes();
         activity_preview();
+        render_banner_preview();
     } else if (page_id == 'accessibility') {
         register_skip_to([]);
 
