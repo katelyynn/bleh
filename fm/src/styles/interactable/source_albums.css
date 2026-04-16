@@ -91,6 +91,7 @@
             background-image: var(--disc);
             background-size: 54px;
             background-position: right;
+            background-repeat: no-repeat;
             display: block;
 
             opacity: 0.8;

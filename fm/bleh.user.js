@@ -64002,7 +64002,7 @@
                 </div>
                 ${data2.type == "Person" ? html.node`
                 ${lifespan.begin ? html.node`
-                <div class="metadata-group">
+                <div class="metadata-group ${begin_code || begin ? "has-secondary-info" : ""}">
                     <dt class="catalogue-metadata-heading">${tl2(trans.born)}</dt>
                     <dd class="catalogue-metadata-description has-age">
                         ${DateTime.fromISO(lifespan.begin).toLocaleString(DateTime.DATE_MED)}
@@ -64022,7 +64022,7 @@
                 </div>
                 ` : ""}
                 ${lifespan.ended ? html.node`
-                <div class="metadata-group">
+                <div class="metadata-group ${end_code || end2 ? "has-secondary-info" : ""}">
                     <dt class="catalogue-metadata-heading">${tl2(trans.died)}</dt>
                     <dd class="catalogue-metadata-description has-age">
                         ${DateTime.fromISO(lifespan.end).toLocaleString(DateTime.DATE_MED)}
@@ -64043,7 +64043,7 @@
                 ` : ""}
                 ` : html.node`
                 ${lifespan.begin ? html.node`
-                <div class="metadata-group">
+                <div class="metadata-group ${begin_code || begin ? "has-secondary-info" : ""}">
                     <dt class="catalogue-metadata-heading">${tl2(trans.formed)}</dt>
                     <dd class="catalogue-metadata-description has-age">
                         ${DateTime.fromISO(lifespan.begin).toLocaleString(DateTime.DATE_MED)}
@@ -64062,7 +64062,7 @@
                 </div>
                 ` : ""}
                 ${lifespan.ended ? html.node`
-                <div class="metadata-group">
+                <div class="metadata-group ${end_code || end2 ? "has-secondary-info" : ""}">
                     <dt class="catalogue-metadata-heading">${tl2(trans.ended)}</dt>
                     <dd class="catalogue-metadata-description has-age">
                         ${DateTime.fromISO(lifespan.end).toLocaleString(DateTime.DATE_MED)}

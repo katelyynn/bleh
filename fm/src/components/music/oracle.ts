@@ -2217,7 +2217,7 @@ export function oracle_process() {
                 </div>
                 ${data.type == 'Person' ? html.node`
                 ${lifespan.begin ? html.node`
-                <div class="metadata-group">
+                <div class="metadata-group ${begin_code || begin ? 'has-secondary-info' : ''}">
                     <dt class="catalogue-metadata-heading">${tl(trans.born)}</dt>
                     <dd class="catalogue-metadata-description has-age">
                         ${DateTime.fromISO(lifespan.begin).toLocaleString(DateTime.DATE_MED)}
@@ -2237,7 +2237,7 @@ export function oracle_process() {
                 </div>
                 ` : ''}
                 ${lifespan.ended ? html.node`
-                <div class="metadata-group">
+                <div class="metadata-group ${end_code || end ? 'has-secondary-info' : ''}">
                     <dt class="catalogue-metadata-heading">${tl(trans.died)}</dt>
                     <dd class="catalogue-metadata-description has-age">
                         ${DateTime.fromISO(lifespan.end).toLocaleString(DateTime.DATE_MED)}
@@ -2258,7 +2258,7 @@ export function oracle_process() {
                 ` : ''}
                 ` : html.node`
                 ${lifespan.begin ? html.node`
-                <div class="metadata-group">
+                <div class="metadata-group ${begin_code || begin ? 'has-secondary-info' : ''}">
                     <dt class="catalogue-metadata-heading">${tl(trans.formed)}</dt>
                     <dd class="catalogue-metadata-description has-age">
                         ${DateTime.fromISO(lifespan.begin).toLocaleString(DateTime.DATE_MED)}
@@ -2277,7 +2277,7 @@ export function oracle_process() {
                 </div>
                 ` : ''}
                 ${lifespan.ended ? html.node`
-                <div class="metadata-group">
+                <div class="metadata-group ${end_code || end ? 'has-secondary-info' : ''}">
                     <dt class="catalogue-metadata-heading">${tl(trans.ended)}</dt>
                     <dd class="catalogue-metadata-description has-age">
                         ${DateTime.fromISO(lifespan.end).toLocaleString(DateTime.DATE_MED)}

@@ -508,9 +508,33 @@
 }
 
 .secondary-info {
-    font-size: var(--font-size);
-    line-height: var(--line-height);
-    margin-top: 2px;
+    height: 20px;
+    margin-top: -20px;
+    opacity: 0;
+    pointer-events: none;
+
+    transform: translateY(6px);
+}
+
+.catalogue-metadata-description {
+    transition-property: opacity, transform;
+    transition-duration: 0.3s;
+    transition-timing-function: var(--trans-function-ani);
+}
+
+.metadata-group.has-secondary-info {
+    &:hover {
+        & > .catalogue-metadata-description:not(.secondary-info) {
+            transform: translateY(-6px);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        & > .secondary-info {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
 }
 
 .group-artist-list {
