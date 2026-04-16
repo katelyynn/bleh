@@ -48,8 +48,11 @@
         margin: unset;
         flex-shrink: 0;
         width: 64px;
+        margin-right: 14px;
 
         box-shadow: var(--subtle-shadow);
+
+        position: relative;
 
         & > .cover-art {
             border-radius: var(--item-med-radius);
@@ -77,6 +80,18 @@
             --icon: var(--icon-16-spinner);
             --icon-colour: oklch(var(--c3));
             animation: spinner 1.2s linear infinite;
+        }
+
+        &:before {
+            content: '';
+            position: absolute;
+            inset: 5px -14px 5px 0;
+            background-image: var(--disc);
+            background-size: 54px;
+            background-position: right;
+            display: block;
+
+            opacity: 0.8;
         }
     }
     .source-album-details {
