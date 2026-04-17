@@ -93,6 +93,7 @@
     &.ready {
         opacity: 0.4;
         animation: banner 0.5s var(--trans-function-ani);
+        transition: none !important;
     }
 
     transition-property: opacity;
