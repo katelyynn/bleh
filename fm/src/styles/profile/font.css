@@ -184,6 +184,11 @@
     --custom-font-align: -2px;
     --custom-font-spacing: 1.5px;
 }
+[data-font="rakkas"] {
+    --custom-font: 'Rakkas', var(--font);
+    --custom-font-size-multiplier: 1.15;
+    --custom-font-weight: 300 !important;
+}
 
 [data-font-style="pop"] {
     --custom-font-style-shadow: 0 3px 0 oklch(var(--p3));

@@ -1668,7 +1668,8 @@ export function prepare_music() {
         rokkitt: 'Rokkitt',
         code: 'Google Sans Code',
         zpix: 'Zpix',
-        mask: 'Expose'
+        mask: 'Expose',
+        rakkas: 'Rakkas'
     };
 }
 
