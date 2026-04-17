@@ -548,9 +548,7 @@ export function patch_titles(search = page.structure.main) {
                 `);
 
                 setTimeout(() => {
-                    let edit_button = track_legacy_menu.querySelector(
-                        '[data-analytics-action="EditScrobbleOpen"]'
-                    );
+                    let edit_button = track_legacy_menu.querySelector('[data-analytics-action="EditScrobbleOpen"]:not([href$="login?next=/pro"])');
                     let bulk_edit_button = track_legacy_menu.querySelector(
                         '[data-analytics-action="BulkEditScrobblesOpen"]'
                     );
@@ -558,11 +556,12 @@ export function patch_titles(search = page.structure.main) {
                         track_legacy_menu.querySelector('.more-item--delete');
 
                     if (edit_button) {
+                        log('has edit button', 'track', 'info', { edit_button });
                         let form = edit_button.parentElement;
 
                         page.token = form.querySelector(
                             '[name="csrfmiddlewaretoken"]'
-                        ).value;
+                        )?.value;
                         track.setAttribute(
                             'data-action',
                             form.getAttribute('action')
@@ -580,46 +579,46 @@ export function patch_titles(search = page.structure.main) {
                                 'data-artist-name',
                                 correct_artist(
                                     form.querySelector('[name="artist_name"]')
-                                        .value
+                                        ?.value
                                 )
                             );
                             track.setAttribute(
                                 'data-track-name',
                                 correct_item_by_artist(
                                     form.querySelector('[name="track_name"]')
-                                        .value,
+                                        ?.value,
                                     form.querySelector('[name="artist_name"]')
-                                        .value
+                                        ?.value
                                 )
                             );
                             if (album_name)
                                 track.setAttribute(
                                     'data-album-name',
                                     correct_item_by_artist(
-                                        album_name.value,
+                                        album_name?.value,
                                         form.querySelector(
                                             '[name="artist_name"]'
-                                        ).value
+                                        )?.value
                                     )
                                 );
                             if (album_artist_name)
                                 track.setAttribute(
                                     'data-album-artist-name',
-                                    correct_artist(album_artist_name.value)
+                                    correct_artist(album_artist_name?.value)
                                 );
                             track.setAttribute(
                                 'data-timestamp',
-                                form.querySelector('[name="timestamp"]').value
+                                form.querySelector('[name="timestamp"]')?.value
                             );
                         } else {
                             track.setAttribute(
                                 'data-album-name',
                                 correct_item_by_artist(
                                     form.querySelector('[name="album_name"]')
-                                        .value,
+                                        ?.value,
                                     form.querySelector(
                                         '[name="album_artist_name"]'
-                                    ).value
+                                    )?.value
                                 )
                             );
                             track.setAttribute(
@@ -627,7 +626,7 @@ export function patch_titles(search = page.structure.main) {
                                 correct_artist(
                                     form.querySelector(
                                         '[name="album_artist_name"]'
-                                    ).value
+                                    )?.value
                                 )
                             );
                             track.setAttribute(
@@ -635,10 +634,10 @@ export function patch_titles(search = page.structure.main) {
                                 correct_item_by_artist(
                                     form.querySelector(
                                         '[name="album_name_original"]'
-                                    ).value,
+                                    )?.value,
                                     form.querySelector(
                                         '[name="album_artist_name_original"]'
-                                    ).value
+                                    )?.value
                                 )
                             );
                             track.setAttribute(
@@ -646,40 +645,41 @@ export function patch_titles(search = page.structure.main) {
                                 correct_artist(
                                     form.querySelector(
                                         '[name="album_artist_name_original"]'
-                                    ).value
+                                    )?.value
                                 )
                             );
                             track.setAttribute(
                                 'data-album-image',
-                                form.querySelector('[name="album_image"]').value
+                                form.querySelector('[name="album_image"]')?.value
                             );
                             track.setAttribute(
                                 'data-count',
-                                form.querySelector('[name="count"]').value
+                                form.querySelector('[name="count"]')?.value
                             );
                         }
                     } else if (delete_button) {
+                        log('has delete button', 'track', 'info', { delete_button });
                         let form = delete_button.parentElement;
 
                         page.token = form.querySelector(
                             '[name="csrfmiddlewaretoken"]'
-                        ).value;
+                        )?.value;
                         track.setAttribute(
                             'data-artist-name',
                             correct_artist(
-                                form.querySelector('[name="artist_name"]').value
+                                form.querySelector('[name="artist_name"]')?.value
                             )
                         );
                         track.setAttribute(
                             'data-track-name',
                             correct_item_by_artist(
-                                form.querySelector('[name="track_name"]').value,
-                                form.querySelector('[name="artist_name"]').value
+                                form.querySelector('[name="track_name"]')?.value,
+                                form.querySelector('[name="artist_name"]')?.value
                             )
                         );
                         track.setAttribute(
                             'data-timestamp',
-                            form.querySelector('[name="timestamp"]').value
+                            form.querySelector('[name="timestamp"]')?.value
                         );
                     }
 
