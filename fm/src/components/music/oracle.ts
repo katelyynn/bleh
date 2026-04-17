@@ -433,17 +433,17 @@ export function oracle_process() {
 
     function oracle_obtain_artist() {
         if (page.type == 'artist') {
-            if (oracle_artists.hasOwnProperty(artist)) {
-                const local = oracle_artists[artist];
+            if (oracle_artists.hasOwnProperty(item)) {
+                const local = oracle_artists[item];
 
                 log('skipping artist search for id (oracle database)', 'oracle', 'info', { local });
 
                 oracle_artist_fetch({
-                    id: local.id
+                    id: local
                 });
                 return;
-            } else if (oracle_cache[artist]?.id) {
-                const local = oracle_cache[artist];
+            } else if (oracle_cache[item]?.id) {
+                const local = oracle_cache[item];
 
                 log('skipping artist search for id (local cache)', 'oracle', 'info', { local });
                 oracle_artist_fetch({
