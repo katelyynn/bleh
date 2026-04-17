@@ -64011,7 +64011,7 @@
                     <dt class="catalogue-metadata-heading">${tl2(trans.born)}</dt>
                     <dd class="catalogue-metadata-description has-age">
                         ${DateTime.fromISO(lifespan.begin).toLocaleString(DateTime.DATE_MED)}
-                        <span class="artist-age">(${age(lifespan.begin)})</span>
+                        ${!lifespan.end ? html.node`<span class="artist-age">(${age(lifespan.begin)})</span>` : ""}
                     </dd>
                     ${begin_code ? html.node`
                     <dd class="catalogue-metadata-description has-flag secondary-info">
@@ -92653,7 +92653,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-02-25"
       }
     },
-    built_on: "2026-04-16T19:49:28.785Z"
+    built_on: "2026-04-17T16:54:23.063Z"
   };
 
   // node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

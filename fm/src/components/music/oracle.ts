@@ -2228,7 +2228,7 @@ export function oracle_process() {
                     <dt class="catalogue-metadata-heading">${tl(trans.born)}</dt>
                     <dd class="catalogue-metadata-description has-age">
                         ${DateTime.fromISO(lifespan.begin).toLocaleString(DateTime.DATE_MED)}
-                        <span class="artist-age">(${age(lifespan.begin)})</span>
+                        ${!lifespan.end ? html.node`<span class="artist-age">(${age(lifespan.begin)})</span>` : ''}
                     </dd>
                     ${begin_code ? html.node`
                     <dd class="catalogue-metadata-description has-flag secondary-info">
