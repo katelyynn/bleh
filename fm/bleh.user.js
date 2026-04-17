@@ -35593,7 +35593,9 @@
     let count_bar_link = count_bar.querySelector(".chartlist-count-bar-link");
     if (count_bar_link.getAttribute("href").includes("?from=") || count_bar_link.getAttribute("href").includes("?date_preset=") && !count_bar_link.getAttribute("href").endsWith("?date_preset=ALL") && !count_bar_link.getAttribute("href").endsWith("?date_preset=null"))
       return;
-    let count = count_bar.querySelector(".chartlist-count-bar-slug").getAttribute("data-stat-value");
+    const slug = count_bar.querySelector(".chartlist-count-bar-slug");
+    const val = count_bar.querySelector(".chartlist-count-bar-value");
+    let count = slug.getAttribute("data-stat-value");
     if (!count_bar.hasAttribute("data-kate-processed")) {
       count_bar.setAttribute("data-kate-processed", "true");
       let parsed_scrobble_as_rank = parse_scrobbles_as_rank(count);
@@ -35601,6 +35603,10 @@
       count_bar.style.setProperty("--hue-over", parsed_scrobble_as_rank.hue);
       count_bar.style.setProperty("--sat-over", parsed_scrobble_as_rank.sat);
       count_bar.style.setProperty("--lit-over", parsed_scrobble_as_rank.lit);
+      if (parsed_scrobble_as_rank.contrast) {
+        slug.classList.add("bar-contrast");
+        val.classList.add("bar-contrast");
+      }
     }
   }
   function parse_scrobbles_as_rank(scrobbles) {

@@ -19,7 +19,9 @@ export function patch_artist_ranks_in_list_view(track) {
         .includes('?date_preset=') && !count_bar_link.getAttribute('href').endsWith('?date_preset=ALL') && !count_bar_link.getAttribute('href').endsWith('?date_preset=null')))
         return;
 
-    let count = count_bar.querySelector('.chartlist-count-bar-slug').getAttribute('data-stat-value');
+    const slug = count_bar.querySelector('.chartlist-count-bar-slug');
+    const val = count_bar.querySelector('.chartlist-count-bar-value');
+    let count = slug.getAttribute('data-stat-value');
 
     if (!count_bar.hasAttribute('data-kate-processed')) {
         count_bar.setAttribute('data-kate-processed','true');
@@ -30,6 +32,11 @@ export function patch_artist_ranks_in_list_view(track) {
         count_bar.style.setProperty('--hue-over',parsed_scrobble_as_rank.hue);
         count_bar.style.setProperty('--sat-over',parsed_scrobble_as_rank.sat);
         count_bar.style.setProperty('--lit-over',parsed_scrobble_as_rank.lit);
+
+        if (parsed_scrobble_as_rank.contrast) {
+            slug.classList.add('bar-contrast');
+            val.classList.add('bar-contrast');
+        }
     }
 }
 
