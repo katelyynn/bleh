@@ -14,6 +14,10 @@
         --header-size: 58px;
     }
 
+    &[data-page-type="bleh_setup"] {
+        display: none;
+    }
+
     height: var(--h);
     width: var(--w);
     margin-left: calc(-1 * (var(--w) / 2));

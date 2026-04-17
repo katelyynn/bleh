@@ -40,12 +40,12 @@ export function bleh_setup() {
 
     checkup_page_structure(false, content_top);
 
+    page.type = 'bleh_setup';
+    page.subpage = '';
+
     if (auth.avatar)
         register_background(avatar(auth.avatar, 'ar0'));
     else register_background(null);
-
-    page.type = 'bleh_setup';
-    page.subpage = '';
 
     log('status is', 'page', 'info', page);
 
@@ -57,7 +57,7 @@ export function bleh_setup() {
     page.structure.row.removeChild(page.structure.row.firstElementChild);
     page.structure.row.removeChild(page.structure.row.firstElementChild);
 
-    page.structure.container.classList.add('sour');
+    page.structure.container.classList.add('has-cards-view');
     page.structure.content.classList.add('cards-view');
 
     let masthead = document.body.querySelector('.masthead');
@@ -66,7 +66,7 @@ export function bleh_setup() {
     render(
         page.structure.main,
         html`
-            <section class="setup" ref=${(el) => (page.structure.setup = el)}>
+            <section class="setup sour" ref=${(el) => (page.structure.setup = el)}>
                 ${auth.name ?
                     html.node`
             <div class="avatar">
@@ -317,7 +317,7 @@ function setup_accessibility() {
             `
         );
         render(page.structure.setup_footer, html`
-            <button class="see-more cancel left-icon" onclick=${() => setup()}>
+            <button class="see-more cancel left-icon" onclick=${() => bleh_setup_start()}>
                 ${tl(trans.back)}
             </button>
             <div class="fill"></div>
@@ -417,7 +417,7 @@ function setup_layout() {
         let preview;
 
         function render_track_preview() {
-            const avi = avatar(auth.avatar, 'avatar170s');
+            const avi = auth.avatar.replace('/avatar42s/', '/avatar170s/');
 
             render(preview, html`
                 <table class="chartlist chartlist--with-image chartlist--with-loved chartlist--with-artist chartlist--with-more">
@@ -426,6 +426,7 @@ function setup_layout() {
                             class="chartlist-row chartlist-row--with-artist chartlist-row--now-scrobbling"
                             data-has-bar="false"
                             data-show-album-text=${settings.expand_tracks != 'never' && settings.track_layout == 'column'}
+                            data-album-name-location=${settings.track_album_name_location}
                         >
                             <td class="chartlist-image">
                                 <a class="cover-art">
@@ -433,16 +434,16 @@ function setup_layout() {
                                 </a>
                             </td>
                             <td class="kate-placeholder" />
-                            <td class="track-info" data-has-bar="false">
+                            <td class="track-info" data-has-bar="false" data-track-layout=${settings.track_layout} data-album-name-location=${settings.track_album_name_location}>
                                 <span class="chartlist-name">
-                                    <a>Track name</a>
+                                    <a>${tl(trans.track_name)}</a>
                                 </span>
                                 <span class="chartlist-artist">
-                                    <a>Artist name</a>
+                                    <a>${tl(trans.artist_name)}</a>
                                 </span>
                                 ${settings.expand_tracks != 'never' && settings.track_layout == 'column' ? html.node`
                                     <span class="chartlist-album custom-album-text">
-                                        <a>Album name</a>
+                                        <a>${tl(trans.album_name)}</a>
                                     </span>
                                 ` : ''}
                             </td>
@@ -451,6 +452,7 @@ function setup_layout() {
                             class="chartlist-row chartlist-row--with-artist"
                             data-has-bar="false"
                             data-show-album-text=${settings.expand_tracks == 'always' && settings.expand_tracks != 'never' && settings.track_layout == 'column'}
+                            data-album-name-location=${settings.track_album_name_location}
                         >
                             <td class="chartlist-image">
                                 <a class="cover-art">
@@ -458,16 +460,16 @@ function setup_layout() {
                                 </a>
                             </td>
                             <td class="kate-placeholder" />
-                            <td class="track-info" data-has-bar="false">
+                            <td class="track-info" data-has-bar="false" data-track-layout=${settings.track_layout} data-album-name-location=${settings.track_album_name_location}>
                                 <span class="chartlist-name">
-                                    <a>Track name</a>
+                                    <a>${tl(trans.track_name)}</a>
                                 </span>
                                 <span class="chartlist-artist">
-                                    <a>Artist name</a>
+                                    <a>${tl(trans.artist_name)}</a>
                                 </span>
-                                ${settings.expand_tracks == 'always' && settings.expand_tracks != 'never' &&settings.track_layout == 'column' ? html.node`
+                                ${settings.expand_tracks == 'always' && settings.expand_tracks != 'never' && settings.track_layout == 'column' ? html.node`
                                     <span class="chartlist-album custom-album-text">
-                                        <a>Album name</a>
+                                        <a>${tl(trans.album_name)}</a>
                                     </span>
                                 ` : ''}
                             </td>
@@ -497,7 +499,10 @@ function setup_layout() {
                         }
                     }))}
                     ${(track_album_name_location = setting({
-                        id: 'track_album_name_location'
+                        id: 'track_album_name_location',
+                        func: () => {
+                            render_track_preview();
+                        }
                     }))}
                 </div>
             </div>

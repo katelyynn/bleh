@@ -253,7 +253,7 @@
         filter: brightness(110%);
     }
 
-    transition-property: scale, filter;
+    transition-property: scale, filter, box-shadow;
     transition-duration: 0.4s;
     transition-timing-function: var(--trans-function-ani);
 

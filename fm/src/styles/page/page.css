@@ -48,7 +48,7 @@
     display: flex;
     gap: var(--card-gap);
 }
-.container:not(.sour) > .row[data-assigned] {
+.container:not(.has-cards-view) > .row[data-assigned] {
     display: flex;
     flex-direction: column;
     gap: unset;
@@ -149,7 +149,7 @@
     }
 }
 
-.content {
+.content:not(.cards-view) {
     display: flex;
     justify-content: center;
     width: 100%;
@@ -339,7 +339,7 @@
         }
     }
 
-    &[data-beret="true"]:not([style], .sour) {
+    &[data-beret="true"]:not([style], .has-cards-view) {
         --page-sidebar-margin-left: 1px;
 
         & > .row {

@@ -5,6 +5,13 @@
     & > .col-main {
         min-width: unset;
     }
+
+    & > .col-sidebar {
+        display: none;
+    }
+
+    display: flex;
+    justify-content: center;
 }
 
 .has-error,

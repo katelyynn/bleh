@@ -1,6 +1,6 @@
 /*     GLOBAL CARD STYLES     */
 .bleh--panel, .bleh--blank-panel,
-.col-main > section, .col-sidebar > section,
+.col-main > section:not(.sour), .col-sidebar > section:not(.sour),
 .col-main > div.buffer-standard, /* covers weird shoutbox sections, 2026 */
 .col-main > .lazy-shoutbox,
 .your-progress-component,
@@ -20,13 +20,10 @@
 }
 
 .sour {
-    background: var(--card-specific-background, var(--card-background, var(--card-blur-bg)));
+    background: var(--card-specific-background, var(--card-background, oklch(var(--b5))));
     border-radius: var(--card-specific-radius, var(--card-radius));
     box-shadow: var(--card-specific-shadow, var(--card-border), var(--card-shadow));
     padding: var(--card-padding);
-
-    backdrop-filter: var(--solarium);
-    -webkit-backdrop-filter: var(--solarium);
 }
 
 .section-controls {

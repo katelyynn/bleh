@@ -582,6 +582,14 @@ export async function render_setting_page(page_id) {
 
         let tracklist_source;
 
+        let header_preview;
+
+        function render_header_preview() {
+            render(header_preview, html`
+
+            `);
+        }
+
         render(page.structure.main, html`
             <section class="bleh--panel">
                 <h4>${tl(trans.music_corrections)}</h4>
@@ -692,7 +700,7 @@ export async function render_setting_page(page_id) {
             </section>
             <section class="bleh--panel">
                 <h4>${tl(trans.smart_music_titles)}</h4>
-                <div class="inner-preview pad flex">
+                <div class="inner-preview pad flex" ref=${el => header_preview = el}>
                     <section
                         class="redesigned-header mockup redesigned-track-header no-top-margin"
                     >

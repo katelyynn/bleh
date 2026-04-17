@@ -72249,6 +72249,11 @@
       render_track_preview2();
       render_tags();
     } else if (page_id == "playback") {
+      let render_header_preview = function() {
+        render(header_preview, html`
+
+            `);
+      };
       let total_artists = 0;
       let total_album_tracks = 0;
       if (artist_corrections)
@@ -72263,6 +72268,7 @@
       let romanise_jp;
       let romanise_ko;
       let tracklist_source;
+      let header_preview;
       render(page.structure.main, html`
             <section class="bleh--panel">
                 <h4>${tl2(trans.music_corrections)}</h4>
@@ -72366,7 +72372,7 @@
             </section>
             <section class="bleh--panel">
                 <h4>${tl2(trans.smart_music_titles)}</h4>
-                <div class="inner-preview pad flex">
+                <div class="inner-preview pad flex" ref=${(el) => header_preview = el}>
                     <section
                         class="redesigned-header mockup redesigned-track-header no-top-margin"
                     >
@@ -73908,20 +73914,26 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       }
     }
     const lower_title = formatted_title.toLowerCase();
-    const matches = flat_patterns.map(({ group, pattern, regex }) => {
-      let index3 = -1;
+    const matches = flat_patterns.flatMap(({ group, pattern, regex }) => {
       if (regex) {
-        const match3 = lower_title.match(pattern);
-        index3 = match3 ? match3.index : -1;
+        const safe_pattern = pattern.global ? pattern : new RegExp(pattern.source, pattern.flags + "g");
+        return [...lower_title.matchAll(safe_pattern)].map((m) => ({
+          group,
+          pattern,
+          regex,
+          index: m.index,
+          text: m[0]
+        }));
       } else {
-        index3 = lower_title.indexOf(pattern.toLowerCase());
+        const index3 = lower_title.indexOf(pattern.toLowerCase());
+        return index3 >= 0 ? [{
+          group,
+          pattern,
+          regex,
+          index: index3,
+          text: pattern
+        }] : [];
       }
-      return {
-        group,
-        pattern,
-        regex,
-        index: index3
-      };
     }).filter((match3) => {
       if (match3.index < 1) return false;
       return !(match3.group === "remasters" && !lower_title.includes(" remaster") && !lower_title.includes("(remaster"));
@@ -75132,24 +75144,24 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     }
     let content_top = document.body.querySelector(".content-top");
     checkup_page_structure(false, content_top);
+    page.type = "bleh_setup";
+    page.subpage = "";
     if (auth.avatar)
       register_background(avatar(auth.avatar, "ar0"));
     else register_background(null);
-    page.type = "bleh_setup";
-    page.subpage = "";
     log("status is", "page", "info", page);
     update_page();
     page.state.trans = 0;
     page.structure.row.removeChild(page.structure.row.firstElementChild);
     page.structure.row.removeChild(page.structure.row.firstElementChild);
-    page.structure.container.classList.add("sour");
+    page.structure.container.classList.add("has-cards-view");
     page.structure.content.classList.add("cards-view");
     let masthead = document.body.querySelector(".masthead");
     masthead.classList.add("in-setup");
     render(
       page.structure.main,
       html`
-            <section class="setup" ref=${(el) => page.structure.setup = el}>
+            <section class="setup sour" ref=${(el) => page.structure.setup = el}>
                 ${auth.name ? html.node`
             <div class="avatar">
                 <img src=${avatar(auth.avatar, "avatar170s")} alt=${tl2(trans.your_avatar)}>
@@ -75384,7 +75396,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
             `
       );
       render(page.structure.setup_footer, html`
-            <button class="see-more cancel left-icon" onclick=${() => setup()}>
+            <button class="see-more cancel left-icon" onclick=${() => bleh_setup_start()}>
                 ${tl2(trans.back)}
             </button>
             <div class="fill"></div>
@@ -75478,7 +75490,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       let track_album_name_location;
       let preview;
       function render_track_preview2() {
-        const avi = avatar(auth.avatar, "avatar170s");
+        const avi = auth.avatar.replace("/avatar42s/", "/avatar170s/");
         render(preview, html`
                 <table class="chartlist chartlist--with-image chartlist--with-loved chartlist--with-artist chartlist--with-more">
                     <tbody>
@@ -75486,6 +75498,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                             class="chartlist-row chartlist-row--with-artist chartlist-row--now-scrobbling"
                             data-has-bar="false"
                             data-show-album-text=${settings.expand_tracks != "never" && settings.track_layout == "column"}
+                            data-album-name-location=${settings.track_album_name_location}
                         >
                             <td class="chartlist-image">
                                 <a class="cover-art">
@@ -75493,16 +75506,16 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                                 </a>
                             </td>
                             <td class="kate-placeholder" />
-                            <td class="track-info" data-has-bar="false">
+                            <td class="track-info" data-has-bar="false" data-track-layout=${settings.track_layout} data-album-name-location=${settings.track_album_name_location}>
                                 <span class="chartlist-name">
-                                    <a>Track name</a>
+                                    <a>${tl2(trans.track_name)}</a>
                                 </span>
                                 <span class="chartlist-artist">
-                                    <a>Artist name</a>
+                                    <a>${tl2(trans.artist_name)}</a>
                                 </span>
                                 ${settings.expand_tracks != "never" && settings.track_layout == "column" ? html.node`
                                     <span class="chartlist-album custom-album-text">
-                                        <a>Album name</a>
+                                        <a>${tl2(trans.album_name)}</a>
                                     </span>
                                 ` : ""}
                             </td>
@@ -75511,6 +75524,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                             class="chartlist-row chartlist-row--with-artist"
                             data-has-bar="false"
                             data-show-album-text=${settings.expand_tracks == "always" && settings.expand_tracks != "never" && settings.track_layout == "column"}
+                            data-album-name-location=${settings.track_album_name_location}
                         >
                             <td class="chartlist-image">
                                 <a class="cover-art">
@@ -75518,16 +75532,16 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                                 </a>
                             </td>
                             <td class="kate-placeholder" />
-                            <td class="track-info" data-has-bar="false">
+                            <td class="track-info" data-has-bar="false" data-track-layout=${settings.track_layout} data-album-name-location=${settings.track_album_name_location}>
                                 <span class="chartlist-name">
-                                    <a>Track name</a>
+                                    <a>${tl2(trans.track_name)}</a>
                                 </span>
                                 <span class="chartlist-artist">
-                                    <a>Artist name</a>
+                                    <a>${tl2(trans.artist_name)}</a>
                                 </span>
                                 ${settings.expand_tracks == "always" && settings.expand_tracks != "never" && settings.track_layout == "column" ? html.node`
                                     <span class="chartlist-album custom-album-text">
-                                        <a>Album name</a>
+                                        <a>${tl2(trans.album_name)}</a>
                                     </span>
                                 ` : ""}
                             </td>
@@ -75556,7 +75570,10 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         }
       })}
                     ${track_album_name_location = setting({
-        id: "track_album_name_location"
+        id: "track_album_name_location",
+        func: () => {
+          render_track_preview2();
+        }
       })}
                 </div>
             </div>

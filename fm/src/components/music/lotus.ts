@@ -428,22 +428,28 @@ export function name_includes(
     // find all tag‐matches (index ≥ 1), with special remaster logic
     // due to Nirvana nonsense such as 20th Anniversary Remaster etc.
     const matches = flat_patterns
-        .map(({ group, pattern, regex }) => {
-            let index = -1;
-
+        .flatMap(({ group, pattern, regex }) => {
             if (regex) {
-                const match = lower_title.match(pattern);
-                index = match ? match.index : -1;
-            } else {
-                index = lower_title.indexOf(pattern.toLowerCase());
-            }
+                const safe_pattern = pattern.global ? pattern : new RegExp(pattern.source, pattern.flags + 'g');
 
-            return {
-                group,
-                pattern,
-                regex,
-                index
-            };
+                return [ ...lower_title.matchAll(safe_pattern) ].map(m => ({
+                    group,
+                    pattern,
+                    regex,
+                    index: m.index,
+                    text: m[0]
+                }));
+            } else {
+                const index = lower_title.indexOf(pattern.toLowerCase());
+
+                return index >= 0 ? [{
+                    group,
+                    pattern,
+                    regex,
+                    index,
+                    text: pattern
+                }] : [];
+            }
         })
         .filter((match) => {
             if (match.index < 1) return false;
