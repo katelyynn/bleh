@@ -38251,10 +38251,10 @@
           document.body.style.removeProperty("--hue-album");
           document.body.style.removeProperty("--sat-album");
           document.body.style.removeProperty("--lit-album");
-          load_chart_colours();
+          chart_reflow();
           log("removed previous colours as accent hasnt been refreshed", "page structure");
         }
-      }, 300);
+      }, 100);
     }
     let params = new URLSearchParams(document.location.search);
     page.requested = {

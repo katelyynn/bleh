@@ -6,7 +6,7 @@
 
 import { log } from '@/build/log';
 import { page, root } from '@/build/page';
-import { load_chart_colours } from '@/components/music/chart';
+import { chart_reflow, load_chart_colours } from '@/components/music/chart';
 import { ff } from '@/components/settings/sku';
 import { html, render } from 'lighterhtml';
 import { tl, trans } from '@/build/trans.ts';
@@ -38,11 +38,11 @@ export function checkup_page_structure(is_subpage = false, header = null) {
                 document.body.style.removeProperty('--hue-album');
                 document.body.style.removeProperty('--sat-album');
                 document.body.style.removeProperty('--lit-album');
-                load_chart_colours();
+                chart_reflow();
 
                 log('removed previous colours as accent hasnt been refreshed', 'page structure');
             }
-        }, 300);
+        }, 100);
     }
 
     let params = new URLSearchParams(document.location.search);
