@@ -1,0 +1,454 @@
+.music-bookmarks-albums:before,
+.music-bookmarks-albums:after,
+.music-bookmarks-artists:before,
+.music-bookmarks-artists:after {
+    display: none !important;
+}
+
+:is(.music-bookmarks-artists-item-image, .music-bookmarks-albums-item-image) > img {
+    border-radius: unset;
+}
+.music-bookmarks-albums-item-playlink {
+    display: none;
+}
+
+.resource-list--release-list-item-wrap,
+.artist-top-albums-item-wrap,
+.music-bookmarks-tags-item-wrap,
+.music-bookmarks-artists-item-wrap,
+.music-bookmarks-albums-item-wrap {
+    transition-property: transform, opacity;
+    transition-duration: var(--trans);
+    transition-timing-function: var(--trans-function);
+
+    .music-bookmarks-tags-item-toggle,
+    .music-bookmarks-artists-item-toggle,
+    .music-bookmarks-albums-item-toggle {
+        --padding: 0;
+        top: 4px;
+        right: 4px;
+
+        --col: oklch(var(--l3-c));
+        --mask-colour: color-mix(
+            in oklch,
+            oklch(var(--l3-c)),
+            oklch(var(--l4-c)) 30%
+        );
+        --mask: var(--icon-16-bookmark-saved);
+
+        --bg: oklch(var(--b6), 60%);
+        --bg-hov: oklch(var(--b6), 80%);
+        --bg-atv: oklch(var(--b6), 100%);
+        --shadow: none;
+        backdrop-filter: var(--solarium);
+        -webkit-backdrop-filter: var(--solarium);
+
+        --font-size: 0;
+        width: var(--button-height);
+        height: var(--button-height);
+
+        &:before {
+            --left: calc(
+                (var(--button-height) - var(--icon-size)) / 2
+            ) !important;
+            --right: none !important;
+        }
+    }
+
+    .avatar,
+    .cover-art {
+        overflow: unset;
+    }
+
+    &:hover {
+        .music-bookmarks-tags-item-toggle,
+        .music-bookmarks-artists-item-toggle,
+        .music-bookmarks-albums-item-toggle {
+            transition-property: background, transform !important;
+        }
+
+        h3 > a {
+            text-decoration: var(--force-underline, none) !important;
+        }
+    }
+
+    &:active {
+        transform: scale(0.98);
+    }
+
+    .music-bookmarks-albums-item-artist {
+        color: oklch(var(--c2) / 80%);
+
+        & > a {
+            color: inherit;
+        }
+    }
+}
+
+.music-bookmarks-albums-item-wrap,
+.music-bookmarks-artists-item-wrap {
+    padding: unset;
+    margin: unset;
+    width: unset;
+}
+
+
+.music-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--card-gap);
+    margin: unset;
+
+    .music-more-link,
+    .music-more-artists,
+    .music-artists,
+    .music-releases {
+        margin: unset;
+    }
+
+    .music-more-link {
+        display: flex;
+        justify-content: center;
+    }
+
+    .music-artists {
+        display: flex;
+        justify-content: center;
+        gap: var(--card-padding);
+        margin-bottom: var(--card-gap);
+
+        .music-artists-featured {
+            padding: unset;
+            width: 400px;
+
+            .music-featured-item {
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                gap: var(--gap);
+                --size: 300px;
+                --gap: 10px;
+                color: oklch(var(--c2));
+                height: fit-content;
+
+                .music-featured-item-background {
+                    position: relative;
+                    width: var(--size);
+                    height: var(--size);
+                    background-size: cover !important;
+                    border-radius: var(--item-med-radius);
+                    box-shadow: var(--card-shadow);
+                    flex-shrink: 0;
+
+                    &:after {
+                        display: none;
+                    }
+
+                    --show-icon: none;
+                    --mask: var(--icon-artist);
+                    --mask-size: var(--cover-size-300);
+                    --left: 50%;
+                    --margin-left: calc(-1 * (var(--cover-size-300) / 2));
+                    --margin-top: calc(-1 * (var(--cover-size-300) / 2));
+
+                    &[style='background: url("https://lastfm.freetls.fastly.net/i/u/arG/2a96cbd8b46e442fc41c2b86b821562f.jpg");']
+                    {
+                        background: oklch(var(--b4)) !important;
+                        --show-icon: block;
+                    }
+                }
+
+                .music-featured-item-heading-link {
+                    flex: unset;
+                    margin-top: calc(-1 * (var(--size) + var(--gap)));
+                    padding: unset;
+                    padding-top: calc(var(--size) + var(--gap));
+                    width: 100%;
+                    text-align: center;
+
+                    h3 {
+                        font-size: 16px;
+                        line-height: 20px;
+                        color: oklch(var(--c1));
+                        font-weight: var(--font-weight-bold);
+                        margin: unset;
+                        letter-spacing: unset;
+                        position: static;
+                    }
+                }
+
+                .music-featured-item-body {
+                    padding: unset;
+                    text-align: center;
+                    display: flex;
+                    align-items: center;
+                    flex-direction: column;
+                    gap: var(--gap);
+                    width: 300px;
+
+                    .music-featured-artist-similar {
+                        color: oklch(var(--c3));
+                        margin: unset;
+                        opacity: unset;
+                    }
+
+                    .music-featured-artist-tags {
+                        margin: unset;
+                    }
+
+                    .music-featured-item-wiki {
+                        margin: unset;
+
+                        a {
+                            color: oklch(var(--l3-c));
+                        }
+                    }
+
+                    .artist-featured-items {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.music-recommended-artists,
+.music-recommended-albums,
+.catalogue-overview-similar-artists,
+.similar-albums,
+.playlisting-playlists,
+.resource-list--release-list,
+.artist-top-albums,
+.music-bookmarks-albums,
+.music-bookmarks-artists,
+.music-releases,
+.music-more-artists {
+    margin: unset;
+    padding: unset;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: var(--card-padding) var(--card-gap);
+
+    &.music-recommended-artists,
+    &.music-recommended-albums,
+    &.resource-list--release-list,
+    &.similar-albums,
+    &.catalogue-overview-similar-artists,
+    &.artist-top-albums {
+        grid-template-columns: repeat(4, minmax(180px, 1fr));
+    }
+
+    &.resource-list--release-list,
+    &.artist-top-albums {
+        gap: var(--card-padding) var(--item-list-gap);
+    }
+
+    @media (max-width: 980px) {
+        display: flex !important;
+        flex-direction: column;
+    }
+
+    &:before, &:after {
+        display: none;
+    }
+}
+
+.music-recommended-artists-artist,
+.music-recommended-albums-item-wrap,
+.catalogue-overview-similar-artists-item-wrap,
+.similar-albums-item-wrap,
+.playlisting-playlists-item-wrap,
+.resource-list--release-list-item-wrap,
+.artist-top-albums-item-wrap,
+.music-bookmarks-albums-item-wrap,
+.music-bookmarks-artists-item-wrap,
+.music-releases-item-wrap,
+.music-more-artists-item-wrap {
+    padding: unset;
+    margin: unset !important;
+    width: unset;
+
+    animation: var(
+        --motion,
+        grid 0.4s var(--trans-function)
+    ) !important;
+
+    @media (max-width: 980px) {
+        --avatar-size: 100px;
+
+        padding-left: calc(var(--avatar-size) + 10px);
+        min-height: var(--avatar-size);
+
+        & > div > .media-item {
+            position: absolute;
+            top: 0;
+            left: calc(-1 * (var(--avatar-size) + 10px));
+        }
+    }
+
+    .cover-art--placeholder,
+    .avatar--placeholder,
+    .playlist-image,
+    .cover-art,
+    .avatar {
+        background: var(--avatar-generic-background);
+        border-radius: var(--item-med-radius);
+        box-shadow: var(--subtle-shadow);
+        aspect-ratio: 1 / 1;
+        --mask-size: var(--cover-size-200);
+        overflow: hidden;
+        inset: unset !important;
+        height: unset !important;
+
+        transform: var(--cover-transform, translateY(0));
+        filter: var(--cover-filter, none);
+
+        @media (max-width: 980px) {
+            width: var(--avatar-size);
+            height: var(--avatar-size);
+        }
+
+        &:before {
+            content: '';
+            position: absolute;
+            display: block;
+            inset: 0;
+            background-image: var(--cards-overlay-image-subtlest);
+            box-shadow: var(--item-inset);
+            border-radius: inherit;
+            background-repeat: repeat-x;
+            z-index: 30;
+            pointer-events: none;
+        }
+
+        &:after {
+            content: "" !important;
+            display: block !important;
+            position: absolute;
+            inset: 0;
+            background-image: var(--gloss-image) !important;
+            background-size: 100% !important;
+            opacity: var(--gloss);
+            pointer-events: none;
+            padding: unset !important;
+            box-shadow: unset !important;
+            border-radius: inherit;
+        }
+
+        transition-property: transform, filter;
+        transition-duration: 0.15s;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    &.link-block--hover,
+    .link-block--hover {
+        --cover-transform: translateY(-1px);
+        --cover-filter: brightness(110%);
+
+        --hover-underline: underline oklch(var(--c3));
+    }
+
+    .lazy-buylinks,
+    .desktop-playlink,
+    .music-releases-item-playlink {
+        display: none;
+    }
+
+    .link-block-cover-link {
+        width: 100% !important;
+        height: unset !important;
+        left: unset;
+        aspect-ratio: 1 / 1;
+
+        @media (max-width: 980px) {
+            aspect-ratio: unset;
+            padding: unset;
+            left: calc(-1 * (var(--avatar-size) + 10px)) !important;
+            height: var(--avatar-size) !important;
+        }
+    }
+}
+
+.music-recommended-artists-artist-name,
+.music-recommended-albums-item-name,
+.catalogue-overview-similar-artists-item-name,
+.similar-albums-item-name,
+.playlisting-playlists-item-name,
+.resource-list--release-list-item-name,
+.artist-top-albums-item-name,
+.music-bookmarks-artists-item-name,
+.music-bookmarks-albums-item-name,
+.music-releases-item-name,
+.music-more-artists-item-name {
+    color: oklch(var(--c2));
+    font: inherit;
+    font-weight: var(--font-weight-medium);
+    margin-top: 10px;
+    margin-bottom: unset;
+    max-height: 36px;
+
+    text-decoration: var(--hover-underline, none);
+
+    & > a {
+        color: inherit;
+        text-decoration: none !important;
+    }
+}
+.music-recommended-albums-album-artist,
+.similar-albums-item-artist,
+.artist-top-albums-item-artist,
+.music-bookmarks-albums-item-artist,
+.music-releases-item-artist {
+    color: oklch(var(--c2) / 80%);
+    margin-top: 2px;
+    margin-bottom: unset;
+}
+.music-recommended-albums-album-info {
+    margin: unset;
+}
+.music-recommended-albums-album-info > p,
+.music-recommended-artists-artist-stats,
+.factbox-summary,
+.catalogue-overview-similar-artists-item-aux-text,
+.similar-albums-item-aux-text,
+.playlisting-playlists-item-description,
+.playlisting-playlists-item-aux-text,
+.music-more-artists-last-scrobble,
+.resource-list--release-list-item-aux-text,
+.artist-top-albums-item-aux-text,
+.music-bookmarks-albums-item-aux-text,
+.music-bookmarks-artists-item-aux-text,
+.music-releases-item-aux-text,
+.music-more-artists-item-aux-text {
+    font-size: 13px;
+    line-height: var(--line-height);
+    color: oklch(var(--c3)) !important;
+    margin-top: 4px;
+    margin-bottom: unset;
+    cursor: default;
+
+    & + .resource-list--release-list-item-aux-text,
+    & + .artist-top-albums-item-aux-text {
+        margin-top: unset;
+    }
+
+    &:before {
+        display: none;
+    }
+}
+
+.resource-list--release-list-item-context {
+    margin-top: 8px !important;
+}
+
+.music-bookmarks-albums-item-artist,
+.music-bookmarks-artists-item-name,
+.music-bookmarks-albums-item-name {
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-clamp: 1;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}

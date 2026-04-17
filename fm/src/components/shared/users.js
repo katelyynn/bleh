@@ -5,10 +5,10 @@
 //
 
 import { html, render } from 'lighterhtml';
-import { page } from '@/build/page.js';
+import { page } from '@/build/page';
 import { markdown } from '@/components/shared/markdown';
 import { patch_avatar, style_name_from_badge } from '@/components/shared/avatar';
-import { correct_artist } from '@/components/music/lotus.js';
+import { correct_artist } from '@/components/music/lotus';
 import { log } from '@/build/log.js';
 
 export function bleh_users() {
@@ -25,7 +25,7 @@ export function patch_user_list_item(user, index) {
     let avatar = user.querySelector('.user-list-avatar');
     let name = user.querySelector('.user-list-link');
 
-    const badge = patch_avatar(avatar, name.textContent, 'follow');
+    const badge = patch_avatar(avatar, name.textContent.trim(), 'follow');
     style_name_from_badge(name, badge);
 
     let artists = user.querySelectorAll('.user-list-shared-artists a');

@@ -1,0 +1,196 @@
+.async-content-error-message,
+.event-status,
+.alert:not(.big-modal-alert, .form-disclaimer > .alert) {
+    font-size: 13px;
+    line-height: var(--line-height);
+    margin-top: var(--card-gap);
+    padding: 3px 10px 3px calc(10px + var(--icon-size) + var(--icon-gap)) !important;
+    background: var(--background, oklch(var(--k4) / 15%)) !important;
+    color: oklch(var(--l3-c)) !important;
+    font-weight: var(--font-weight-medium) !important;
+    text-align: left;
+    cursor: default;
+    position: relative;
+    --icon-size: 16px;
+    --icon-gap: 4px;
+    --left: 6px;
+    --show-icon: block;
+    border-radius: var(--item-med-radius);
+
+    width: fit-content;
+
+    &:before {
+        color: currentColor;
+    }
+
+    .setting-group > &,
+    &:first-child,
+    &.no-margin {
+        margin: unset;
+    }
+
+    & + form {
+        margin-top: var(--card-gap);
+    }
+}
+
+.async-content-error-message {
+    margin: unset !important;
+}
+.event-status {
+    margin-bottom: var(--card-gap);
+}
+
+.alert-error:before,
+.async-content-error-message {
+    --mask: var(--icon-16-x);
+}
+.alert-danger {
+    --mask: var(--icon-16-warning);
+}
+.alert-warning,
+.alert-info {
+    --mask: var(--icon-16-info);
+}
+.alert-success {
+    --hue-over: var(--hue-pos);
+    --sat-over: var(--sat-pos);
+    --lit-over: var(--lit-pos);
+
+    &:before,
+    &:after {
+        --mask: var(--icon-16-check);
+    }
+}
+.event-status--cancelled {
+    --mask: var(--icon-16-block);
+}
+.alert-update {
+    --mask: var(--icon-16-download);
+    --hue-over: var(--hue-pos);
+    --sat-over: var(--sat-pos);
+    --lit-over: var(--lit-pos);
+}
+
+.alert-info {
+    --background: oklch(var(--b2) / 10%) !important;
+    --l3-c: var(--c3) !important;
+
+    [data-bleh--season="halloween"] & {
+        --hue-seasonal: 255;
+        --sat-seasonal: 1;
+        --lit-seasonal: 1;
+        color: oklch(var(--l3-c)) !important;
+
+        & > a {
+            --hue-seasonal: 12;
+            --sat-seasonal: 2;
+            --lit-seasonal: 1.1;
+        }
+    }
+}
+.alert-warning {
+    --hue-over: 25;
+    --sat-over: 1;
+    --lit-over: 1;
+}
+.alert-danger,
+.alert-error,
+.async-content-error-message,
+.event-status--cancelled {
+    --hue-over: var(--hue-neg);
+    --sat-over: var(--sat-neg);
+    --lit-over: var(--lit-neg);
+}
+
+
+.form-disclaimer > .alert,
+.big-modal-alert,
+.cta {
+    background: var(--card-specific-background) !important;
+    border-radius: var(--item-med-radius) !important;
+    --card-specific-background: linear-gradient(180deg, oklch(var(--f4) / 15%), transparent);
+    padding: 10px 12px !important;
+    box-shadow: unset !important;
+    color: oklch(var(--c2)) !important;
+    order: 10;
+    cursor: default;
+
+    --show-icon: none;
+
+    font-size: var(--font-size) !important;
+    line-height: var(--line-height) !important;
+    font-weight: var(--font-weight-medium);
+
+    &.cta {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        margin: 0 var(--card-padding);
+
+        .bleh-modal-body > & {
+            padding: 15px var(--card-padding) !important;
+            margin-left: unset;
+            margin-right: unset;
+        }
+    }
+
+    strong {
+        color: oklch(var(--c3));
+        font-weight: var(--font-weight-medium);
+    }
+
+    &.first,
+    &.blocked-cta {
+        order: -10;
+    }
+    &.priority {
+        order: -12;
+    }
+
+    /*&.first {
+        margin-top: var(--card-padding) !important;
+    }*/
+
+    &.margin-bottom {
+        margin-bottom: var(--card-gap);
+    }
+
+    &.error {
+        --hue-over: var(--hue-neg);
+        --sat-over: 1;
+        --lit-over: 1;
+
+        strong {
+            color: oklch(var(--l3-c));
+        }
+    }
+
+    &:before {
+        color: oklch(var(--l3-c));
+    }
+}
+.form-disclaimer > .alert,
+.big-modal-alert {
+    max-width: 500px;
+
+    &:before {
+        display: none;
+    }
+}
+
+.cta-label {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    gap: 6px;
+
+    --icon-size: 16px;
+    --icon-colour: oklch(var(--c3));
+}
+
+.cta-actions {
+    display: flex;
+    gap: var(--card-gap);
+    flex-wrap: wrap;
+}

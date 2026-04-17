@@ -6,10 +6,10 @@
 
 import { log } from '@/build/log';
 import { page, root } from '@/build/page';
-import { load_chart_colours } from '@/components/music/chart';
+import { chart_reflow, load_chart_colours } from '@/components/music/chart';
 import { ff } from '@/components/settings/sku';
 import { html, render } from 'lighterhtml';
-import { tl, trans } from '@/build/trans';
+import { tl, trans } from '@/build/trans.ts';
 
 export function basic_page_structure() {
     page.structure.container = document.body.querySelector('.page-content');
@@ -27,14 +27,22 @@ export function basic_page_structure() {
 /**
  * ensures general health of the page structure, fills in the global page object
  * @param {boolean} is_subpage controls if the checker should identify content_top's etc.
- * @param {HTMLObjectElement|null} header legacy header from last.fm to extract data from
+ * @param {Element|null} header legacy header from last.fm to extract data from
  */
 export function checkup_page_structure(is_subpage = false, header = null) {
     if (document.body.style.getPropertyValue('--hue-album')) {
-        document.body.style.removeProperty('--hue-album');
-        document.body.style.removeProperty('--sat-album');
-        document.body.style.removeProperty('--lit-album');
-        load_chart_colours();
+        page.state.replaced_accent = false;
+
+        setTimeout(() => {
+            if (!page.state.replaced_accent) {
+                document.body.style.removeProperty('--hue-album');
+                document.body.style.removeProperty('--sat-album');
+                document.body.style.removeProperty('--lit-album');
+                chart_reflow();
+
+                log('removed previous colours as accent hasnt been refreshed', 'page structure');
+            }
+        }, 100);
     }
 
     let params = new URLSearchParams(document.location.search);
@@ -104,7 +112,9 @@ export function checkup_page_structure(is_subpage = false, header = null) {
     let other_main = page.structure.row.querySelector(
         '.col-main.hidden-xs:not([data-assigned])'
     );
-    if (other_main) other_main.style.setProperty('display', 'none');
+    if (other_main) {
+        other_main.remove();
+    }
 
     if (!page.structure.side || !document.body.contains(page.structure.side)) {
         log('page missing side', 'page structure');
@@ -130,6 +140,8 @@ export function checkup_page_structure(is_subpage = false, header = null) {
             </main>
         `;
         page.structure.row.appendChild(page.structure.content);
+
+        single_column();
     }
 
     log('finished', 'page structure');
@@ -261,7 +273,7 @@ export function checkup_page_structure(is_subpage = false, header = null) {
                         page.structure.side.appendChild(side_actions);
                     else page.structure.main.appendChild(side_actions);
 
-                    btn_add.classList = 'btn side-action';
+                    btn_add.classList = 'btn side-action icon-mask';
                     btn_add.setAttribute('data-type', 'add');
                     btn_add.textContent = tl(trans.add);
 
@@ -282,7 +294,7 @@ export function checkup_page_structure(is_subpage = false, header = null) {
                     else page.structure.main.appendChild(side_actions);
 
                     radio.classList =
-                        'btn stationlink js-playlink-station radio-button';
+                        'btn stationlink js-playlink-station radio-button side-action icon-mask';
 
                     let type = radio.getAttribute('data-analytics-label');
 
@@ -360,4 +372,24 @@ export function convert_to_toolbar() {
         page.structure.row.firstChild
     );
     page.structure.content_top.style.display = 'none';
+}
+
+function single_column() {
+    if ([
+        'following', 'followers', 'neighbours',
+        'obsessions_set', 'obsessions_overview', 'obsessions_obsession',
+        'loved',
+        'subscription_automatic-edits_tracks', 'subscription_automatic-edits_albums',
+        'playlists_playlists',
+        'listeners_overview',
+        'auth'].includes(page.subpage) || [
+            'charts',
+            'inbox',
+            'overview',
+            'releases',
+            'recommended',
+            'bookmarks'
+        ].includes(page.type) || page.subpage.startsWith('event_attendance_')) {
+            page.structure.content.classList.add('single-column');
+        }
 }

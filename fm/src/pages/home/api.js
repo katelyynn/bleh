@@ -6,11 +6,12 @@
 
 import {log} from '@/build/log';
 import {auth, page, root} from '@/build/page';
-import {tl, trans} from '@/build/trans';
+import {tl, trans} from '@/build/trans.ts';
 import {checkup_page_structure} from '@/components/page/structure';
 import {register_background, update_page} from '@/page';
 import {html, render} from "lighterhtml";
 import { load_profile_cache_externally } from '@/pages/profile/profile';
+import { avatar } from '@/components/shared/avatar';
 
 export async function bleh_api() {
     if (page.subpage == 'docs') return;
@@ -34,7 +35,7 @@ export async function bleh_api() {
     if (cache.banner)
         register_background(cache.banner);
     else if (!auth.avatar.endsWith('818148bf682d429dc215c1705eb27b98.png'))
-        register_background(auth.avatar.replace('/avatar42s/', '/ar0/'));
+        register_background(avatar(auth.avatar, 'ar0'));
     else
         register_background(null);
 
@@ -42,8 +43,7 @@ export async function bleh_api() {
     if (page.subpage == 'create_account') return;
 
 
-    page.structure.container.removeAttribute('data-beret');
-    page.structure.container.removeAttribute('data-short');
+    page.structure.container.classList.add('sour');
     page.structure.content.classList.add('cards-view');
 
 
@@ -63,28 +63,26 @@ export async function bleh_api() {
         render(page.structure.main, html`
             <section class="api-connector sour">
                 <div class="avatar">
-                    <img src="${auth.avatar.replace('/avatar42s/', '/avatar170s/')}" alt="${tl(trans.your_avatar)}">
+                    <img src="${avatar(auth.avatar, 'avatar170s')}" alt="${tl(trans.your_avatar)}">
                 </div>
                 <div class="info">
                     <h1>${page.name}</h1>
                     <div class="sub-text no-margin">${tl(trans.app_would_like_to_connect)}</div>
                     <div class="subtle">
-                        ${html.node([
-                            tl(trans.logged_in_as).replace('{user}', `<a class="mention" href="${root}user/${auth.name}">@${auth.name}</a>`)
-                        ])}
+                        ${{ html: tl(trans.logged_in_as, { user: `<a class="mention" href="${root}user/${auth.name}">@${auth.name}</a>` })}}
                     </div>
                 </div>
                 <div class="sep"></div>
                 <div class="description">${description}</div>
-                <div class="small-label with-icon lock">${tl(trans.ensure_you_trust)}</div>
+                <div class="small-label with-icon" data-type="lock">${tl(trans.ensure_you_trust)}</div>
                 <div class="connector-footer">
-                    <a class="see-more cancel" href="${cancel}">
+                    <a class="see-more cancel left-icon" href="${cancel}">
                         ${tl(trans.cancel)}
                     </a>
                     <form method="post" data-no-partial-refresh="">
                         <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
                         <input type="hidden" name="confirmation" value="confirm">
-                        <button class="btn primary icon connect" type="submit" name="confirm">
+                        <button class="btn primary icon" data-type="plus" type="submit" name="confirm">
                             ${tl(trans.connect)}
                         </button>
                     </form>
@@ -97,7 +95,7 @@ export async function bleh_api() {
         render(page.structure.main, html`
             <section class="api-connector sour">
                 <div class="avatar">
-                    <img src="${auth.avatar.replace('/avatar42s/', '/avatar170s/')}" alt="${tl(trans.your_avatar)}">
+                    <img src="${avatar(auth.avatar, 'avatar170s')}" alt="${tl(trans.your_avatar)}">
                 </div>
                 <div class="info">
                     <h1>${page.name}</h1>

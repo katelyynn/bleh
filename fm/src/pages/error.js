@@ -41,7 +41,7 @@ export function bleh_error() {
                         </div>
                         <div class="subtle">${window.location.pathname}</div>
                         <div class="error-footer">
-                            <a class="see-more cancel" href="${back_link.getAttribute('href')}">
+                            <a class="see-more cancel left-icon" href="${back_link.getAttribute('href')}">
                                 ${tl(trans.back)}
                             </a>
                             <a class="btn primary continue" href="${root}user/${auth.name}">

@@ -1,0 +1,1371 @@
+/* ==UserStyle==
+@name           bleh (dev)
+@namespace      github.com/katelyynn/bleh
+@version        2026.0212
+@license        GPL-3.0
+@author         kate
+@updateURL      https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.css
+==/UserStyle== */
+
+@-moz-document domain("www.last.fm") {
+
+
+
+
+    /*     MANAGE CORRECTIONS     */
+    .corrections {
+        display: flex;
+        flex-direction: column;
+        margin: -7px 0;
+
+        .artist-row {
+            padding: 7px 0;
+
+            h5 {
+                text-align: center;
+            }
+
+            /*&:not(:first-child) {
+                border-top: var(--card-border);
+            }*/
+            &:not(:first-child) {
+                margin-top: calc(var(--card-gap) - 7px);
+            }
+        }
+
+        .correction-row {
+            display: flex;
+            align-items: center;
+            gap: var(--card-gap);
+            padding: 7px 0;
+
+            .primary-name {
+                flex: 1;
+                display: -webkit-box;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                line-clamp: 1;
+                -webkit-line-clamp: 1;
+                -webkit-box-orient: vertical;
+
+                &.post-transition h5 {
+                    color: hsl(var(--c2));
+                }
+
+                &.pre-transition h5 {
+                    text-align: right;
+                    color: hsl(var(--c3));
+                }
+            }
+
+            .arrow-divider {
+                position: relative;
+                color: hsl(var(--c3));
+                --mask: var(--icon-16-arrow-right);
+                --left: 0;
+                width: 16px;
+                height: 16px;
+                flex-shrink: 0;
+                display: block;
+            }
+
+            & + .correction-row {
+                border-top: var(--card-border);
+            }
+        }
+    }
+
+    /*     LANGUAGES     */
+
+    /*     ICON     */
+    /* for profiles and media types */
+
+
+    /* old tags */
+    .track-info-panel {
+        & > .row {
+            display: none;
+        }
+    }
+
+    /*     TASTEOMETER     */
+
+
+    /*     SCROBBLE PROGRESS     */
+
+    /*     TEXT     */
+
+    /*     LINK     */
+
+
+
+    /*     ARTIST / ALBUM GRID ON PROFILES / TAGS     */
+
+    /*     COVER ART GLOSS     */
+
+    /*     CHARTLIST     */
+
+    .alert + .chartlist,
+    p + .chartlist {
+        margin-top: var(--card-gap) !important;
+    }
+
+    /*     SHOUTBOX     */
+
+
+
+    /*     BUTTON     */
+
+    .section-with-separator[action*="/create/from-"] button {
+        margin-top: unset;
+    }
+
+    /*     BUTTON HAS ICON     */
+
+
+    /*     ICON MASK     */
+
+    .chartlist-love-button,
+    .chartlist-more-button,
+    .share-button-profile,
+    .header-new-more-button,
+    .gallery-image-buttons:not(.gallery-image-buttons-extra)
+        :is(.gallery-image-report, .gallery-image-delete button),
+    .modal-dismiss,
+    .content-form .table .delete,
+    .masthead-search-submit {
+        --font-size: 0;
+    }
+    .lazy-buylinks-toggle {
+        visibility: hidden;
+    }
+
+    .navlist + .section-with-separator .section-controls {
+        margin-top: var(--card-gap);
+    }
+    /* do not use section-with-control !! that refers to buttons
+    on the bottom of a panel !! */
+    /* 2024.0710.refresh - all track panels have a button now */
+    :is(.section-controls) > :is(h2, h3) {
+        height: var(--button-height);
+        width: fit-content;
+    }
+
+    section:has(.dropdown-menu-clickable-button.section-control) {
+        h2 {
+            height: var(--button-height) !important;
+        }
+    }
+
+    .section-controls {
+        max-height: var(--button-height);
+        display: flex;
+        align-items: start;
+
+        h3 {
+            margin-bottom: unset !important;
+        }
+    }
+
+    /*     DROPDOWN ICONS     */
+    [data-menu-item="profile_mobile"] {
+        --mask: var(--icon-16-user);
+    }
+
+    .expand {
+        &:not(.label) {
+            --mask: var(--icon-16-expand);
+        }
+    }
+
+    .see-more.sponsor {
+        --mask: var(--icon-16-heart);
+    }
+
+    .modal-body .btn-cancel.js-close,
+    .btn-cancel,
+    :is(.pagination-previous > a),
+    .see-more.cancel {
+        --mask: var(--icon-16-arrow-left) !important;
+    }
+
+    .delete-account {
+        --hue-over: var(--hue-neg);
+        --sat-over: 1;
+        --lit-over: 1;
+        --mask: var(--icon-16-trash);
+    }
+
+    .more-items {
+        margin-top: var(--card-gap) !important;
+    }
+
+    .rabbit-hole-item {
+        --mask: var(--icon-16-rabbit);
+    }
+
+    /*     DROPDOWN     */
+
+    .external {
+        --icon: var(--icon-16-external);
+    }
+
+
+
+    /*     PRO     */
+    #pro-header-cta button {
+        --hue-over: var(--pro) !important;
+        --sat-over: 1;
+        --lit-over: 1;
+    }
+
+    /*     DATE PICKER     */
+
+    /*     FORM     */
+
+    .rules-panel {
+        .wiki-style-rules-list,
+        .bulleted-list,
+        h3 {
+            font-size: inherit;
+            line-height: inherit;
+            margin-bottom: var(--card-gap);
+
+            &:last-child {
+                margin-bottom: unset;
+            }
+        }
+    }
+
+    /*input:is([name^="track_name"], [name^="artist_name"], [name^="album_name"], [name^="album_artist_name"])
+    {
+        letter-spacing: 1px !important;
+    }*/
+
+    /*     LIBRARY     */
+    /*     SCROBBLES / ARTISTS / ALBUMS / TRACKS     */
+
+
+    /*     VOTING     */
+
+    /*     NAV     */
+
+
+    /*     TRACK ON ALBUM     */
+
+    /*     ABOUT ARTIST     */
+
+    /*     CHART     */
+
+    /*     NAG BAR     */
+
+
+    /*     GALLERY     */
+
+    /*     ARTIST ALBUMS     */
+    .similar-artists-panel {
+        order: 10;
+    }
+    .similar-items-sidebar {
+        margin-top: unset;
+    }
+    #more-similar-albums,
+    #more-similar-artists,
+    #more-similar-tracks,
+    .similar-items-sidebar-item-wrap {
+        margin-top: 8px;
+    }
+
+    .catalogue-overview-similar-artists {
+        margin-top: unset;
+    }
+
+    .similar-albums-body.visible-xs {
+        display: none !important;
+    }
+
+    .similar-albums + .buffer-standard {
+        margin-top: unset !important;
+    }
+
+    :is(.artist-top-albums-item, .resource-list--release-list-item) a .feat {
+        color: hsl(var(--c3));
+    }
+
+    /*     TRACK ALBUMS TAB TEXT     */
+    /* Showing albums featuring x. */
+    [data-page-subpage="albums"]
+        .col-main
+        > .buffer-standard:first-child:not(section) {
+        display: none;
+    }
+    #track-albums-section {
+        margin-top: unset;
+    }
+
+    /*     TRACK FEATURED ON . . .     */
+    .track-similar-tracks {
+        margin-top: 12px;
+    }
+
+    /*     BIOGRAPHY     */
+
+    /*     LINKS     */
+
+
+    /*     ALERT     */
+
+
+    /*     FOLLOWS/FOLLOWERS     */
+
+    /*     SETTINGS     */
+
+
+
+
+
+
+    /*     OBSESSIONS     */
+
+
+    /*     TAG PAGE     */
+    .recommended-next-page-container {
+        display: none;
+    }
+
+    /*     ADD ARTWORK     */
+    .content-form .form-image-preview {
+        margin-top: unset;
+        position: absolute;
+        left: calc(var(--cards-main-width) + var(--card-gap) - 171px);
+        top: -21px;
+        border-radius: var(--item-big-radius);
+        box-shadow: var(--card-shadow);
+        width: var(--cards-sidebar-width);
+    }
+
+    /*     PRO     */
+
+
+
+
+    /*     EDIT WIKI     */
+
+    /*     OBSESSION     */
+
+
+    /*     API SESSION     */
+
+    /*     LYRICS     */
+
+    /*     FINAL EVENT STUFF     */
+
+    /*     EVENT LINEUP PAGE     */
+
+    /*     EVENTS ON ARTIST/PROFILE     */
+
+    /*     EVENT ATTENDANCE     */
+
+    /*     TRACK FEATURED ON     */
+
+    /*     LOADING     */
+
+    .buffer-3 {
+        margin-top: var(--card-gap);
+    }
+
+    /*     ERROR 500     */
+
+
+    /*     SETTINGS COMPONENTS     */
+    .form-control-description :is(p, li) {
+        color: hsl(var(--c3));
+    }
+
+    /*     BOOKMARKS     */
+
+    /*     ARTIST SIMILAR SIDEBAR     */
+
+
+    /* redundant */
+    .page-content:has(.catalogue-overview-similar-artists-full-width) {
+        display: none;
+    }
+
+    /*     BIG TAGS     */
+
+
+    /*[style="background: rgba(102,102,102,1)"] {
+        background: hsl(var(--b5)) !important;
+    }
+    [src="https://lastfm.freetls.fastly.net/i/u/300x300/dc3c775e076d40cac0124c80b258365c.jpg"] {
+        content: url() !important;
+    }*/
+
+    /*     MAKE A PLAYLIST     */
+
+
+    /*     PLAYLISTS     */
+    .playlisting-playlists-item-toggle {
+        --font-size: 0;
+        --mask: var(--icon-16-dots);
+        --left: var(--icon-half);
+        right: 8px;
+        top: 8px;
+    }
+
+    .playlisting-playlists-item-badge--view-only,
+    .playlisting-playlists-item-badge--publish {
+        display: none !important;
+    }
+
+    .playlisting-playlists-item-name {
+        --show-icon: none;
+        --mask: var(--icon-16-lock);
+        --mask-size: 12px;
+        --top: 10px;
+        --left: none;
+        --right: 0;
+        position: relative;
+
+        &:before {
+            color: hsl(var(--c3));
+        }
+    }
+
+    /*     MENU     */
+    [data-analytics-action="unpublish"]:before {
+        --mask: var(--icon-16-lock);
+    }
+
+    /*     PLAYLIST     */
+    .playlisting-playlist-header {
+        /* under header */
+        margin-top: -70px;
+        background: unset;
+    }
+
+    .playlisting-playlist-header-image {
+        left: 0;
+        bottom: var(--card-gap);
+        width: var(--playlist-cover-size);
+        height: var(--playlist-cover-size);
+        border-radius: var(--item-big-radius);
+        box-shadow: var(--card-shadow);
+    }
+    .playlisting-playlist-header-content {
+        width: var(--cards-width);
+        padding: calc(var(--card-gap) + 70px) 0 var(--card-gap)
+            calc(var(--playlist-cover-size) + var(--card-gap));
+        /* the cover is absolute positioned, so the height has to explicitly include it */
+        min-height: calc(
+            (var(--card-gap) + 70px) + var(--playlist-cover-size) +
+                var(--card-gap)
+        );
+    }
+
+    .playlisting-playlist-header-background {
+        --mask: linear-gradient(0deg, transparent 0%, #000 100%);
+        mask-image: var(--mask);
+        -webkit-mask-image: var(--mask);
+        opacity: 0.7;
+    }
+    .playlisting-playlist-header-background-inner:after {
+        display: none;
+    }
+    .playlisting-playlist-header-background-inner[style="background-image: url(https://lastfm.freetls.fastly.net/i/u/ar0/df27b3c25d608decf720b24afb507863.jpg)"]
+    {
+        display: none;
+    }
+
+    .playlisting-playlist-header-title,
+    .inplace-field--facade-title {
+        font-size: 40px;
+        letter-spacing: unset;
+        line-height: 44px;
+        font-weight: var(--font-weight-bold);
+        width: fit-content;
+        color: hsl(var(--c1));
+    }
+
+    .playlisting-playlist-header-actions {
+        margin-top: var(--card-gap);
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+    }
+
+    .playlisting-playlist-header-more-button {
+        height: 32px;
+        --font-size: 0;
+        width: 32px;
+        --mask: var(--icon-16-dots);
+        --left: var(--icon-half);
+    }
+
+    /* remove breadcrumb */
+    .playlisting-playlist-header-badge--view-only,
+    .playlisting-playlist-header-badge--publish,
+    .playlisting-playlist-header-content .subpage-breadcrumb {
+        display: none;
+    }
+
+    /* content */
+    .playlisting-playlist-header + .page-content {
+        padding-top: unset !important;
+    }
+    .inplace-field--facade {
+        margin: -6px;
+        transition: border var(--trans) var(--trans-function);
+    }
+    [contentEditable="true"]:empty:not(:focus):before {
+        /* this is a lastfm selector */
+        color: hsl(var(--c3));
+    }
+    .inplace-field--facade-description:hover {
+        border: 1px solid hsl(var(--c2));
+    }
+
+    .playlisting-playlist-author {
+        border-top: 1px solid hsl(var(--b4));
+        padding-top: var(--card-gap);
+    }
+    .editable-playlist > .clearfix {
+        margin-bottom: var(--card-gap);
+    }
+
+    .playlisting-playlist-author {
+        min-height: unset;
+        height: calc(var(--card-gap) + var(--playlist-author-avatar-size));
+        gap: 6px;
+        flex-direction: row;
+        justify-content: unset;
+        align-items: center;
+        padding-left: calc(6px + var(--playlist-author-avatar-size));
+    }
+    .playlisting-playlist-author-image {
+        width: var(--playlist-author-avatar-size) !important;
+        height: var(--playlist-author-avatar-size) !important;
+        box-shadow: var(--card-shadow);
+        margin-top: unset !important;
+        top: unset !important;
+    }
+
+    .playlisting-username-link > a {
+        font-weight: var(--font-weight);
+        color: hsl(var(--c2));
+    }
+
+    .playlisting-playlist-author .link-block-cover-link {
+        display: none;
+    }
+
+    /*     NO PLAYLISTS     */
+
+    /*     SET AN OBSESSION     */
+
+
+    /*     API DOCS     */
+    .sidebar {
+        background-color: unset !important;
+        border-right: unset !important;
+        width: 250px !important;
+    }
+    .sidebar-heading,
+    .sidebar-link {
+        color: hsl(var(--c2)) !important;
+        opacity: unset !important;
+
+        &.sidebar-heading:not(.clickable) {
+            color: hsl(var(--l2-c)) !important;
+            font-weight: var(--font-weight-bold) !important;
+        }
+
+        &.sidebar-link {
+            &:hover,
+            &.active {
+                color: hsl(var(--c1)) !important;
+                border-left-color: currentColor !important;
+                font-weight: var(--font-weight-bold) !important;
+            }
+        }
+    }
+
+    .custom-block {
+        background-color: hsl(var(--b5)) !important;
+    }
+
+    /*     BLEH     */
+
+
+
+    .version-link {
+        color: hsl(var(--l3-c));
+    }
+
+
+
+    .preview-img {
+        width: 100%;
+        border-radius: var(--item-med-radius);
+        box-shadow: var(--menu-shadow);
+        max-height: 120px;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        & > img {
+            width: 100%;
+        }
+    }
+
+    .lfm-preview {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .lfm-preview .rows {
+        display: flex;
+        flex-direction: column;
+        gap: 60px;
+    }
+    .lfm-preview .row {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+        gap: 30px;
+    }
+
+    .lfm-preview .row > div {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .lfm-preview .separator {
+        padding-bottom: 50px;
+        border-bottom: 1px solid hsl(var(--b3));
+    }
+
+    /*     MENTION     */
+    :is(
+            .shout-body,
+            .about-me-sidebar,
+            .bleh--about-me-preview,
+            .user-list-about-me
+        )
+        > p
+        a:not([data-link-type], [data-host], .btn) {
+        position: relative;
+        --show-icon: none;
+        --top: 50%;
+        --margin-top: -7px;
+        --left: 0;
+        --mask-size: 14px;
+    }
+
+    [data-bleh--format_guest_features="true"] {
+        .bleh--name-without-features {
+            display: none !important;
+        }
+    }
+    [data-bleh--format_guest_features="false"] {
+        .bleh--name-with-features {
+            display: none !important;
+        }
+    }
+
+    .personal-stats-preview {
+        display: flex;
+        justify-content: space-evenly;
+    }
+    [data-bleh--colourful_counts="true"] {
+        .not-colourful-example {
+            display: none !important;
+        }
+    }
+    [data-bleh--colourful_counts="false"] {
+        .colourful-example {
+            display: none !important;
+        }
+    }
+
+    /*     UNDER CONSTRUCTION     */
+
+
+    /*     FESTIVE     */
+
+    /*     RAIN     */
+
+
+    #update-picture {
+        .form-header,
+        .row {
+            display: none;
+        }
+    }
+
+    /*     BOOKMARK     */
+
+    /*     MIGRATION ALERT     */
+
+
+    /* notifs host */
+
+    /*     SNOW     */
+
+    .refresh {
+        --mask: var(--icon-16-refresh);
+    }
+
+    /* dialogs */
+
+    .container.has-error {
+        .error-page {
+            background-color: hsl(var(--b5));
+            padding: var(--card-padding);
+            border-radius: var(--card-radius);
+            box-shadow: var(--card-shadow);
+            text-align: center;
+
+            h3 {
+                margin: unset;
+                color: hsl(var(--c1));
+                position: relative;
+
+                padding-top: 20px;
+                --top: 0;
+                --margin-top: 0;
+                --left: 50%;
+                --margin-left: -10px;
+                --mask: var(--icon-16-x);
+                --mask-size: 18px;
+
+                &:before {
+                    color: hsl(var(--c3));
+                }
+            }
+
+            .button-footer {
+                margin-top: var(--card-gap);
+                padding-top: var(--card-gap);
+                border-top: var(--card-border);
+
+                display: flex;
+                gap: var(--card-gap);
+            }
+        }
+    }
+
+    .search-genius-btn {
+        --mask: var(--icon-16-search);
+    }
+
+    .modal--corrections {
+        .modal-inner-content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+    }
+
+    .obsession-btn {
+        --mask: var(--icon-16-obsession) !important;
+    }
+    .playlist-home-top-item {
+        &[data-analytics-action="import"] {
+            --mask: var(--icon-16-import);
+        }
+        &[data-analytics-action="create"] {
+            --mask: var(--icon-16-add);
+        }
+    }
+
+    /*     TRACK/ALBUM EDITING (V2)     */
+
+
+    /*.modal-dialog--changelog {
+        width: 700px !important;
+    }*/
+
+
+
+
+
+    /*section > .section-controls .subpage-title {
+        visibility: hidden !important;
+    }*/
+
+    /* artists massive gap */
+    .page-content:not([data-page-type]):has(.content-top-lower-row) {
+        display: none;
+    }
+
+
+
+    /* redesigned profiles */
+    #track-chart-settings,
+    #albums-chart-settings,
+    #recent-tracks-settings,
+    #artist-chart-settings,
+    .section-settings-toggle {
+        display: none;
+    }
+
+    /*     NEW AUTH MENU     */
+
+
+    /*     SIMILAR ARTISTS     */
+
+
+    .event-value-top-header {
+        &:last-child {
+            margin-bottom: unset !important;
+        }
+    }
+
+    .profile-mockup {
+        background-color: hsl(var(--b6));
+        /*background-color: hsl(var(--h4), 4%);*/
+        padding: 10px 30px 0 30px;
+        overflow: hidden;
+        border-radius: 10px;
+
+        /*[data-bleh--theme_type="light"] & {
+            background-color: hsl(var(--h4), 10%);
+        }*/
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        position: relative;
+
+        .mockup-header {
+            display: flex;
+            gap: 10px;
+            width: 500px;
+            position: relative;
+            z-index: 10;
+
+            .mockup-avatar {
+                display: flex;
+                width: 40px;
+                height: 40px;
+                background-color: hsl(var(--b5));
+                border-radius: var(--avatar-radius);
+
+                .artist & {
+                    border-radius: var(--item-big-radius);
+                }
+            }
+
+            .mockup-info {
+                display: flex;
+                flex-direction: column;
+                margin-top: 4px;
+                gap: 4px;
+
+                flex: 1;
+            }
+
+            .mockup-subtext {
+                display: flex;
+                width: 35px;
+                height: 4px;
+                background-color: hsl(var(--c3));
+                border-radius: 10px;
+
+                .artist & {
+                    width: 45px;
+                }
+            }
+
+            .mockup-name {
+                display: flex;
+                width: 90px;
+                height: 6px;
+                background-color: hsl(var(--c1));
+                border-radius: 10px;
+
+                .artist & {
+                    width: 120px;
+                }
+            }
+
+            .mockup-actions {
+                display: flex;
+                flex-direction: column;
+                justify-content: end;
+                width: 140px;
+            }
+
+            .mockup-big-button {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 20px;
+                background-color: hsl(var(--b4));
+                border-radius: var(--item-big-radius);
+
+                .mockup-text {
+                    display: flex;
+                    width: 90px;
+                    height: 4px;
+                    background-color: hsl(var(--c2));
+                    border-radius: 10px;
+                }
+            }
+        }
+
+        .mockup-container {
+            display: flex;
+            gap: 10px;
+            width: 500px;
+            min-height: 90px;
+            position: relative;
+            z-index: 10;
+
+            .mockup-col-main {
+                flex: 1;
+
+                .mockup-panel {
+                    min-height: 60px;
+                }
+            }
+            .mockup-col-sidebar {
+                width: 140px;
+
+                .mockup-panel:not(.mockup-obsession-panel) {
+                    min-height: 70px;
+                }
+            }
+
+            .mockup-col-main,
+            .mockup-col-sidebar {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .mockup-panel {
+                display: flex;
+                gap: 10px;
+                padding: 13px;
+                width: 100%;
+                background-color: hsl(var(--b5));
+                border-radius: var(--item-big-radius);
+
+                &.main {
+                    flex: 1;
+                    border-bottom-left-radius: 0;
+                    border-bottom-right-radius: 0;
+                }
+
+                &.mockup-obsession-panel {
+                    background: linear-gradient(hsl(var(--b5)), hsl(var(--g4)));
+                }
+
+                .mockup-obsession-art {
+                    display: flex;
+                    width: 20px;
+                    height: 20px;
+                    background-color: hsl(var(--b4));
+                    border-radius: 6px;
+                }
+
+                .mockup-obsession-name {
+                    display: flex;
+                    width: 60px;
+                    margin-top: 4px;
+                    height: 4px;
+                    background-color: hsl(var(--c1));
+                    border-radius: 10px;
+                }
+            }
+        }
+
+        .profile-mockup-background {
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            background-position: 0 33%;
+            background-size: cover;
+            height: 70px;
+            z-index: 8;
+
+            transition-property: opacity, filter;
+            transition-duration: var(--trans);
+            transition-timing-function: var(--trans-function);
+
+            &:after {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(
+                    180deg,
+                    hsla(var(--b6), 60%) 0%,
+                    hsl(var(--b6)) 100%
+                ) !important;
+            }
+
+            [data-bleh--profile_header_own="false"]
+                &:is(.from-avatar, .from-track, .from-banner) {
+                opacity: 0;
+                filter: none;
+            }
+
+            &.from-avatar {
+                [data-bleh--profile_avi_background="false"] & {
+                    opacity: 0;
+                    filter: none;
+                }
+            }
+            &.from-track {
+                [data-bleh--profile_avi_background="true"] & {
+                    opacity: 0;
+                    filter: none;
+                }
+            }
+        }
+    }
+
+    .check-artist-hover {
+        .mockup-avatar-wrap,
+        .mockup-big-button {
+            position: relative;
+
+            &:before {
+                content: "";
+                position: absolute;
+                inset: -2px;
+                display: block;
+                border: 2px solid hsl(var(--h4));
+                opacity: 0;
+                border-radius: calc(var(--item-big-radius) + 2px);
+
+                transition: opacity 0.25s;
+            }
+        }
+
+        &:has(.artist-hover-image:hover) {
+            .profile-mockup {
+                .mockup-avatar-wrap {
+                    &:before {
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+
+        &:has(.artist-hover-button:hover) {
+            .profile-mockup {
+                .mockup-big-button {
+                    &:before {
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+    }
+
+    /*     CHARTS     */
+
+
+    .library-overview-header {
+        margin: 0 0 var(--card-gap) 0;
+    }
+
+    .seasonal-inner {
+        display: flex;
+        flex-direction: column;
+
+        .sub-text {
+            width: fit-content;
+        }
+
+        .sep {
+            width: 48px;
+            margin: var(--card-gap) 0;
+        }
+    }
+
+    .card-item-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background-color: hsl(var(--h4), 30%);
+        flex-shrink: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &.medium {
+            width: 40px;
+            height: 40px;
+        }
+        &.small {
+            width: 32px;
+            height: 32px;
+        }
+    }
+
+
+
+    /* fix extra top space - 2024/12 */
+    #artist-albums-section {
+        margin-top: unset;
+    }
+
+    /*     AUTO EDIT MANAGE     */
+
+
+    /*     SEARCH     */
+
+
+
+
+
+
+
+
+    [data-page-type="charts"] .secondary-nav-item--overview > a {
+        --mask: var(--icon-16-clock);
+    }
+    .secondary-nav-item--weekly > a {
+        --mask: var(--icon-16-calendar);
+    }
+
+    /*     DEATH GRIPS     */
+
+
+
+
+
+
+
+
+    .to-consider {
+        display: flex;
+        flex-direction: column;
+        gap: var(--item-list-gap);
+
+        ul {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            margin: unset;
+
+            --sat-over: 1;
+            --lit-over: 1;
+
+            li {
+                background: hsl(var(--h4), 20%);
+                padding: 10px var(--card-padding) 10px
+                    calc(
+                        var(--card-padding) + var(--icon-size) + var(--icon-gap)
+                    );
+                border-radius: var(--item-big-radius);
+                position: relative;
+                --left: var(--card-padding);
+
+                font-weight: var(--font-weight-medium);
+                color: hsl(var(--l3-c));
+                cursor: default;
+            }
+
+            &.to-consider-good {
+                --hue-over: var(--hue-pos);
+                --mask: var(--icon-16-check);
+            }
+            &.to-consider-bad {
+                --hue-over: var(--hue-neg);
+                --mask: var(--icon-16-x);
+            }
+        }
+    }
+
+    .expand-button {
+        --mask: var(--icon-16-arrow-down);
+    }
+
+
+
+    /*     TAGS     */
+
+
+
+    .music-page-placeholder {
+        display: flex;
+        flex-direction: column;
+        gap: var(--card-gap);
+    }
+
+    .music-featured-item--placeholder,
+    .music-more-tags-tag--placeholder {
+        background: var(--avatar-generic-background);
+    }
+
+    .sides {
+        display: flex;
+        gap: var(--card-padding);
+
+        & > div {
+            display: flex;
+            flex-direction: column;
+            gap: var(--card-gap);
+            flex: 1;
+
+            &.main {
+                width: 400px;
+                flex-shrink: 0;
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+    @media (max-width: 980px) {
+        /* wiki editing */
+        .not-a-panel > section > .visible-xs {
+            display: none !important;
+        }
+    }
+
+    .subheader-controls {
+        & > h2 {
+            margin-bottom: unset !important;
+        }
+
+        & + .resource-list--release-list {
+            margin-top: var(--card-gap);
+        }
+
+        #releases-page {
+            left: 0 !important;
+        }
+    }
+
+
+
+    .jumbo {
+        --button-sides: var(--card-gap);
+        --font-size: 16px !important;
+        --button-height: 40px;
+        height: var(--button-height);
+    }
+
+    .current-mini-settings {
+        & > button {
+            margin-top: var(--card-gap);
+            width: 100%;
+            text-align: left;
+        }
+    }
+
+    .join-cta {
+        padding: var(--card-padding);
+        background: hsl(var(--f4), 15%) !important;
+
+        & .join-cta-description {
+            margin-right: var(--card-padding);
+
+            & > h3 {
+                font-size: 16px;
+                line-height: 20px;
+                color: hsl(var(--c1));
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    .data-table {
+        display: flex;
+        flex-direction: column;
+        gap: var(--card-gap);
+        width: 700px;
+    }
+
+    .flexy {
+        display: flex;
+        flex-direction: column;
+        gap: var(--item-list-gap);
+
+        & > h2 {
+            margin: unset !important;
+        }
+
+        &.h {
+            flex-direction: row;
+        }
+    }
+
+    .oracle-credits {
+        display: flex;
+        flex-direction: column;
+        gap: var(--item-list-gap);
+
+        & > h3 {
+            font-size: 16px;
+            line-height: 20px;
+            color: hsl(var(--c1));
+        }
+
+        & > .credit {
+            & > h4 {
+                color: hsl(var(--c3)) !important;
+                font-weight: var(--font-weight) !important;
+            }
+            & > span {
+                cursor: default;
+            }
+        }
+    }
+
+
+
+
+
+    .link-block-cover-link:not(.source-album) {
+        position: absolute;
+        inset: 0;
+    }
+
+    .user-now-empty-state-message {
+        color: hsl(var(--c2));
+    }
+
+
+    /* custom timestamp */
+
+
+    .report-dropdown-menu > .dropdown-menu-clickable-item {
+        --mask: var(--icon-16-library);
+    }
+
+
+
+
+
+    .inbox-button {
+        position: relative;
+    }
+}

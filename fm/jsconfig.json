@@ -4,7 +4,11 @@
         "baseUrl": ".",
         "paths": {
             "@/*": ["./src/*"]
-        }
+        },
+        "lib": ["es2024", "dom"],
+        "target": "es2024",
+        "module": "nodenext",
+        "moduleResolution": "bundler"
     },
     "include": ["**/*.js", "**/*.ts"]
 }

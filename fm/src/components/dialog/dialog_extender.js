@@ -4,12 +4,13 @@
 // Licensed under GPLv3
 //
 
-import { page, root } from '@/build/page.js';
-import { tl, trans } from '@/build/trans';
+import { page, root } from '@/build/page';
+import { tl, trans } from '@/build/trans.ts';
 import { html, render } from 'lighterhtml';
 import { toggle } from '@/components/settings/toggle';
 import { log } from '@/build/log.js';
 import { correct_artist, correct_item_by_artist } from '@/components/music/lotus';
+import { icon, icons } from '../shared/icon';
 
 export function dialog_extender() {
     // data-processed=true is signature of bulk edit
@@ -167,7 +168,7 @@ export function dialog_extender() {
             render(
                 submit,
                 html`
-                    <button class="see-more cancel" type="button" onclick=${() => dismiss.click()}>
+                    <button class="see-more cancel left-icon" type="button" onclick=${() => dismiss.click()}>
                         ${tl(trans.cancel)}
                     </button>
                     <div class="fill" />
@@ -206,7 +207,7 @@ export function dialog_extender() {
                                 check.check();
                             });
                         }} type="button">
-                            <div class="bleh-icon" data-type="select-all" style="--icon: var(--mask)" />
+                            ${icon({ name: icons.select_all })}
                             ${tl(trans.select_all)}
                         </button>
                         <button class="btn flex-button" onclick=${() => {
@@ -214,7 +215,7 @@ export function dialog_extender() {
                                 check.uncheck();
                             });
                         }} type="button">
-                            <div class="bleh-icon" data-type="deselect-all" style="--icon: var(--mask)" />
+                            ${icon({ name: icons.deselect_all })}
                             ${tl(trans.deselect_all)}
                         </button>
                     </div>
@@ -268,7 +269,7 @@ export function dialog_extender() {
             render(
                 footer,
                 html`
-                    <button class="see-more cancel" type="reset">
+                    <button class="see-more cancel left-icon" type="reset">
                         ${tl(trans.cancel)}
                     </button>
                     <div class="fill" />

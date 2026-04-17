@@ -4,14 +4,15 @@
 // Licensed under GPLv3
 //
 
-import { auth, page, root } from '@/build/page.js';
+import { auth, page, root } from '@/build/page';
 import { register_background, update_page } from '@/page';
 import { log } from '@/build/log.js';
 import { checkup_page_structure } from '@/components/page/structure.js';
 import { html, render } from 'lighterhtml';
-import { tl, trans } from '@/build/trans';
-import { load_profile_cache_externally } from '@/pages/profile/profile.js';
+import { tl, trans } from '@/build/trans.ts';
+import { load_profile_cache_externally } from '@/pages/profile/profile';
 import { set_storage } from '@/build/tools';
+import { avatar } from '@/components/shared/avatar';
 
 export async function bleh_auth() {
     page.structure.container = document.body.querySelector('.page-content');
@@ -28,7 +29,7 @@ export async function bleh_auth() {
     const cache = await load_profile_cache_externally(auth.name);
     if (cache.banner) register_background(cache.banner);
     else if (!auth.avatar.endsWith('818148bf682d429dc215c1705eb27b98.png'))
-        register_background(auth.avatar.replace('/avatar42s/', '/ar0/'));
+        register_background(avatar(auth.avatar, 'ar0'));
     else register_background(null);
 
     page.type = 'bleh_auth';
@@ -42,8 +43,7 @@ export async function bleh_auth() {
     page.structure.row.removeChild(page.structure.row.firstElementChild);
     page.structure.row.removeChild(page.structure.row.firstElementChild);
 
-    page.structure.container.removeAttribute('data-beret');
-    page.structure.container.removeAttribute('data-short');
+    page.structure.container.classList.add('sour');
     page.structure.content.classList.add('cards-view');
 
     if (!page.requested.token) {
@@ -114,10 +114,7 @@ export async function bleh_auth() {
             <section class="api-connector sour">
                 <div class="avatar">
                     <img
-                        src="${auth.avatar.replace(
-                            '/avatar42s/',
-                            '/avatar170s/'
-                        )}"
+                        src="${avatar(auth.avatar, 'avatar170s')}"
                         alt="${tl(trans.your_avatar)}"
                     />
                 </div>

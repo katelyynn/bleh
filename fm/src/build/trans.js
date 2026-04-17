@@ -58,20 +58,14 @@ export let lang_info = {
     },
     ru: {
         name: 'Русский',
-        by: ['crawqxx', 'techplayz32', 'triangleprisma'], // fuuuck why do i have to put my pre-transition nickname hereeeeeee -- wun4 
-        last_updated: '2026-03-22'
+        by: ['crawqxx', 'techplayz32'],
+        last_updated: '2026-02-07'
     },
     zh: {
         name: '简体中文',
         by: ['Dnzzk2'],
         last_updated: '2025-12-29'
-    },
- tr: {
-    name: 'Türkçe',
-    by: ['tmasc'],
-    last_updated: '2026-02-09'
-}   
-
+    }
 };
 
 export const trans = {
@@ -88,12 +82,8 @@ export const trans = {
         ru: ', ',
         pl: ', ',
         zh: ', ',
-        ja: '、',
-        tr: ', ',
-
-        
+        ja: '、'
     },
-    
     page_templates: {
         // these are used for browser tab titles
         // {page} is something like "Home" or "Profile"
@@ -255,7 +245,7 @@ export const trans = {
                 ru: 'Выпускник',
                 pt: 'Formado',
                 zh: '往届成员',
-                tr:'Mezun'
+                tr: 'Mezun'
             },
             reason: {
                 en: 'Former member of Last.fm',
@@ -351,8 +341,7 @@ export const trans = {
                 sv: 'Sponsor',
                 ru: 'Спонсор',
                 pl: 'Sponsor',
-                zh: '赞助者',
-                tr: 'Sponsor'            
+                zh: '赞助者'
             },
             reason: {
                 en: 'thank you from kate <3',
@@ -389,8 +378,7 @@ export const trans = {
                 sv: 'Exklusiv',
                 ru: 'Зарезервированный',
                 pl: 'Zarezerwowany',
-                zh: '专属',
-                tr: 'Seçkin'            
+                zh: '专属'
             }
         },
         plaster: {
@@ -506,8 +494,7 @@ export const trans = {
         sv: 'Hojtningar',
         ru: 'Рупор', // i'm not really sure with this one, it's like either comments or shouts, but trnaslated directly as "shouts", but "comments" could be mroe cleare here -- craw // i'd go with the official last.fm translation, commenting through a horn sounds badass -- wun4
         pl: 'Wiadomości',
-        zh: '留言',
-        tr: 'Pano'    
+        zh: '留言'
     },
     send_quickly_with: {
         // send a shout quickly with (keyboard shortcut)
@@ -532,8 +519,7 @@ export const trans = {
         ru: 'Вы не можете оставлять тут комментарии',
         pt: 'Você não pode deixar comentários aqui',
         pl: 'Nie możesz zostawiać tu wiadomości',
-        zh: '此处无法留言哦',
-        tr: 'Buraya yorum yapamazsın'    
+        zh: '此处无法留言哦'
     },
     failed_to_send: {
         en: 'Failed to send',
@@ -557,8 +543,7 @@ export const trans = {
         sv: 'Skickat',
         ru: 'Отправлено',
         pl: 'Wyśli',
-        zh: '已发送',
-        tr: 'Gönderildi'    
+        zh: '已发送'
     },
     single_shout: {
         en: 'viewing a single shout',
@@ -893,8 +878,7 @@ export const trans = {
         sv: 'Tillbaks',
         ru: 'Назад',
         pl: 'Cofnij',
-        zh: '返回',
-        tr: 'Geri'    
+        zh: '返回'
     },
     settings: {
         en: 'Settings',
@@ -938,8 +922,7 @@ export const trans = {
         sv: 'Vänner',
         ru: 'Друзья',
         pl: 'Znajomi',
-        zh: '好友',
-        tr: 'Arkadaşlar'    
+        zh: '好友'
     },
     friends_setting: {
         en: 'Keep up to date on what your friends are listening to',
@@ -1115,7 +1098,7 @@ export const trans = {
         it: 'alias',
         pt: 'vulgo',
         sv: 'också känd som',
-        ru: 'он же', 
+        ru: 'он же',
         pl: 'znani również jako',
         zh: '又名'
     },
@@ -2034,7 +2017,7 @@ export const trans = {
             it: 'Il contatore si sta aggiornando in tempo reale',
             pt: 'O contador está sendo atualizado em tempo real',
             sv: 'Nedräkningen uppdateras live',
-            ru: 'Отсчёт идёт в реальном времени', 
+            ru: 'Открыть счетчик в реальном времени',
             pl: 'Licznik aktualizuje się na żywo',
         },
         presets: {
@@ -10462,10 +10445,8 @@ export const trans = {
         },
         body: {
             en: 'These are sponsor-exclusive perks as a thank you for supporting bleh',
-            de: 'Das hier sind exklusive Vorteile für Unterstützer, als Dankeschön für das fördern von bleh',
-            ru: 'Это эксклюзивные преимущества для спонсоров, как благодарность за поддержку bleh', // don't really know how to translate 'perks' -tech // if we're doing a more casual style, "плюшки" can work too??? - wun4 
-            es: 'Estas son ventajas exclusivas para patrocinadores como agradecimiento por apoyar a bleh',
-            pt: 'Essas são vantagens exclusivas para patrocinadores, como forma de agradecimento por apoiar bleh'
+            ru: 'Это эксклюзивные преимущества для спонсоров, как благодарность за поддержку bleh', // don't really know how to translate 'perks' -tech
+            es: 'Estas son ventajas exclusivas para patrocinadores como agradecimiento por apoyar a bleh'
         }
     },
     popup_markdown: {

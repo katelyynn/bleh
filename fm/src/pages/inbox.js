@@ -4,7 +4,7 @@
 // Licensed under GPLv3
 //
 
-import {patch_avatar, style_name_from_badge} from "@/components/shared/avatar.js";
+import {avatar, patch_avatar, style_name_from_badge} from "@/components/shared/avatar";
 import {log} from "@/build/log";
 import {auth, page, root} from "@/build/page";
 import {copy, sanitise} from "@/build/tools";
@@ -13,10 +13,11 @@ import {register_background, update_page} from "../page";
 import {bleh_notification_list} from "@/components/inbox/notifications";
 import { tl, trans } from "@/build/trans";
 import { html, render } from "lighterhtml";
-import { load_profile_cache_externally } from "./profile/profile.js";
+import { load_profile_cache_externally } from "./profile/profile";
 import { bleh_message_list } from "@/components/inbox/messages";
 import { toggle } from "@/components/settings/toggle.js";
 import tippy from "tippy.js";
+import { icon, icons } from '@/components/shared/icon';
 
 export async function bleh_inbox() {
     page.structure.container = document.body.querySelector('.page-content');
@@ -37,13 +38,13 @@ export async function bleh_inbox() {
     update_page();
 
     page.structure.container.insertBefore(html.node`
-        <section class="redesigned-header search-header no-background">
-            <div class="tag-side">
-                <div class="tag-icon inbox-icon"></div>
+        <section class="page-header">
+            <div class="page-header-icon">
+                ${icon({ name: icons.inbox })}
             </div>
-            <div class="info-side">
+            <div class="page-header-info">
                 <div class="sub-text">${tl(trans.inbox)}</div>
-                <h1>${page.subpage == 'notifications' ? tl(trans.notifications) : tl(trans.messages)}</h1>
+                <h1 class="page-header-title">${page.subpage == 'notifications' ? tl(trans.notifications) : tl(trans.messages)}</h1>
             </div>
         </section>
     `, page.structure.container.firstElementChild);
@@ -54,7 +55,7 @@ export async function bleh_inbox() {
         if (cache.banner)
             register_background(cache.banner);
         else if (auth.avatar && !auth.avatar.endsWith('818148bf682d429dc215c1705eb27b98.png'))
-            register_background(auth.avatar.replace('/avatar42s/', '/ar0/'));
+            register_background(avatar(auth.avatar, 'ar0'));
         else
             register_background(null);
     } else {
@@ -90,13 +91,13 @@ export async function bleh_inbox() {
 
         const message = inbox.querySelector('.inbox-message');
 
-        const sender_avatar = message.querySelector('.inbox-message-sender-avatar');
+        const sender_avatar_cont = message.querySelector('.inbox-message-sender-avatar');
         const sender_name = message.querySelector('.inbox-message-sender-name');
         const sender_time = message.querySelector('.inbox-message-timestamp');
 
-        const avatar = sender_avatar.querySelector('.avatar');
+        const sender_avatar = sender_avatar_cont.querySelector('.avatar');
         const name_text = sender_name.textContent.trim();
-        const badge = patch_avatar(avatar, sanitise(name_text));
+        const badge = patch_avatar(sender_avatar_cont, sanitise(name_text));
 
         const message_subject = message.querySelector('.inbox-message-subject');
         const message_preview = message.querySelector('.inbox-message-preview');
@@ -105,7 +106,7 @@ export async function bleh_inbox() {
         message_buttons.querySelectorAll(':is(button, a)').forEach(link => {
             const type = link.classList[0];
 
-            link.classList.add('btn', 'inbox-button');
+            link.classList.add('btn', 'inbox-button', 'icon');
 
             if (type == 'back-button') {
                 link.textContent = tl(trans.back);
@@ -194,7 +195,7 @@ export async function bleh_inbox() {
             <div class="message-sender colourful" ref=${el => sender_panel_own = el}>
                 <div class="inbox-message-sender-avatar">
                     <span class="avatar" ref=${el => your_avatar = el}>
-                        <img src=${auth.avatar.replace('/avatar42s/', '/avatar70s/')} alt=${auth.name} loading="lazy" />
+                        <img src=${avatar(auth.avatar, 'avatar70s')} alt=${auth.name} loading="lazy" />
                     </span>
                 </div>
                 <a class="inbox-message-sender-name" href="${root}user/${auth.name}">${auth.name}</a>
@@ -297,7 +298,7 @@ export async function bleh_inbox() {
             <div class="message-sender colourful" ref=${el => sender_panel_own = el}>
                 <div class="inbox-message-sender-avatar">
                     <span class="avatar" ref=${el => your_avatar = el}>
-                        <img src=${auth.avatar.replace('/avatar42s/', '/avatar70s/')} alt=${auth.name} loading="lazy" />
+                        <img src=${avatar(auth.avatar, 'avatar70s')} alt=${auth.name} loading="lazy" />
                     </span>
                 </div>
                 <a class="inbox-message-sender-name" href="${root}user/${auth.name}">${auth.name}</a>

@@ -5,7 +5,7 @@
 //
 
 import {html, render} from "lighterhtml";
-import {api_key, auth, page} from "@/build/page.js";
+import {api_key, auth, page} from "@/build/page";
 import {tl, trans} from "@/build/trans";
 import {input} from "@/components/settings/input";
 import tippy from "tippy.js";
@@ -14,7 +14,7 @@ import { notify } from '@/components/dialog/notify';
 import { correct_artist, correct_item_by_artist } from '@/components/music/lotus';
 import { keybind } from '@/components/dialog/rabbit';
 import { log } from '@/build/log.js';
-import { settings } from '@/build/config.js';
+import { settings } from '@/build/config';
 
 export function pixel({
     host,
@@ -52,7 +52,7 @@ export function pixel({
                     }}
                     ${() => {
                         let btn = html.node`
-                            <button class="btn chibi icon" data-type="starred_friend" data-is-shortcut=${settings.starred_friend != ''} onclick=${() => {
+                            <button class="btn chibi icon colourful" data-type="starred_friend" data-is-shortcut=${settings.starred_friend != ''} onclick=${() => {
                                 if (settings.starred_friend == '') return;
 
                                 inputter.value = settings.starred_friend;

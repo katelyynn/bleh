@@ -6,7 +6,7 @@
 
 import { settings } from '@/build/config';
 import { page } from '@/build/page';
-import { tl, trans } from '@/build/trans';
+import { tl, trans } from '@/build/trans.ts';
 import { correct_artist, correct_item_by_artist } from '@/components/music/lotus';
 import { html } from 'lighterhtml';
 import tippy from 'tippy.js';
@@ -28,7 +28,7 @@ export function bleh_charts() {
     let out_now = page.structure.side.querySelector(
         '.more-link-fullwidth-right a'
     );
-    if (out_now) out_now.classList.add('btn', 'out-now-btn');
+    if (out_now) out_now.classList.add('btn', 'out-now-btn', 'icon', 'icon-r');
 
     let header = html.node`
         <div class="charts-header top-header">
@@ -41,7 +41,7 @@ export function bleh_charts() {
             </div>
             <div class="right">
                 <div class="view-buttons">
-                    <button class="btn view-item glacier-configure-button panel-settings-button">
+                    <button class="btn view-item icon glacier-configure-button panel-settings-button">
                         ${tl(trans.settings)}
                     </button>
                 </div>
@@ -128,7 +128,10 @@ export function bleh_charts() {
                                     ${image}
                                 </span>
                                 <div class="charts-list-rank-overlay-wrap">
-                                    <div class="charts-list-rank-overlay">${rank.textContent}</div>
+                                    <div class="charts-list-rank-overlay">
+                                        <span class="rank-overlay-text">${rank.textContent}</span>
+                                        <span class="rank-overlay-back">${rank.textContent}</span>
+                                    </div>
                                 </div>
                             </div>
                             <a class="link-block-cover-link" href=${link}></a>
@@ -160,7 +163,10 @@ export function bleh_charts() {
                                     ${image}
                                 </span>
                                 <div class="charts-list-rank-overlay-wrap">
-                                    <div class="charts-list-rank-overlay">${rank.textContent}</div>
+                                    <div class="charts-list-rank-overlay">
+                                        <span class="rank-overlay-text">${rank.textContent}</span>
+                                        <span class="rank-overlay-back">${rank.textContent}</span>
+                                    </div>
                                 </div>
                             </div>
                             <a class="link-block-cover-link" href=${link}></a>
