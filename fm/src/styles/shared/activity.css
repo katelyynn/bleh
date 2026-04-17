@@ -62,16 +62,16 @@
         justify-content: space-between;
 
         font-weight: var(--font-weight-medium);
+
+        & > .date {
+            color: oklch(var(--c3));
+            font-size: var(--font-size-sm);
+            line-height: var(--line-height-sm);
+        }
     }
 
     & > .name {
         font-weight: var(--font-weight-medium);
-    }
-
-    & > .date {
-        color: oklch(var(--c3));
-        font-size: var(--font-size-sm);
-        line-height: var(--line-height-sm);
     }
 
     & + .activity-item {
