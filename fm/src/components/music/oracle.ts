@@ -515,6 +515,9 @@ export function oracle_process() {
                     log('error fetching artist data', 'oracle', 'error', {
                         response
                     });
+
+                    oracle_error(response);
+
                     return;
                 }
 

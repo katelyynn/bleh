@@ -62730,6 +62730,7 @@
             log("error fetching artist data", "oracle", "error", {
               response
             });
+            oracle_error(response);
             return;
           }
           let data2;
