@@ -90383,7 +90383,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       ru: "\u0412\u0430\u043C \u043D\u0435\u043E\u0431\u0445\u043E\u0434\u0438\u043C\u043E \u0432\u043E\u0439\u0442\u0438 \u0432 \u0441\u0438\u0441\u0442\u0435\u043C\u0443"
     },
     oracle_notice: {
-      en: "You are currently testing \u2018oracle\u2019, a redesigned album and track view",
+      en: "You are testing \u2018oracle\u2019",
       de: "Du testest gerade \u201Eoracle\u201C, eine neu gestaltete Album- und Titelseite",
       es: "Est\xE1s actualmente probando \u2018oracle\u2019, un estilo redise\xF1ado de \xE1lbumes y temas",
       it: "Stai provando \u2018oracle\u2019, una vista di album e brani ridisegnata",
