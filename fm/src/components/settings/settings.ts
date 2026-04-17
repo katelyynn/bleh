@@ -179,7 +179,7 @@ export function setting({
                     }
                     ${setting_incompatible_block(settings_store[id].incompatible)}
                     <div class="toggle-wrap">
-                        <button class="btn toggle colourful" ref=${(el) => (toggle = el)} aria-checked=${value}>
+                        <button class="btn toggle colourful" ref=${(el) => (toggle = el)} aria-checked=${value} type="button">
                             <div class="dot"></div>
                         </button>
                     </div>

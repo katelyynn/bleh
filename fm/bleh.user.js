@@ -36330,14 +36330,14 @@
             </div>
             ${type == "toggle" ? html.node`
             <div class="toggle-wrap">
-                <input type="checkbox" ref=${(el) => checkbox = el} id=${id} name=${name} value=${data2} checked=${value} />
-                <button class="btn toggle" ref=${(el) => state = el} aria-checked=${value}>
+                <input type="checkbox" ref=${(el) => checkbox = el} id=${id} name=${name} checked=${value} />
+                <button class="btn toggle" ref=${(el) => state = el} aria-checked=${value} type="button">
                     <div class="dot" />
                 </button>
             </div>
             ` : html.node`
             <div class="check">
-                <input type="checkbox" ref=${(el) => checkbox = el} id=${id} name=${name} value=${data2} checked=${value} disabled=${disabled} />
+                <input type="checkbox" ref=${(el) => checkbox = el} id=${id} name=${name} checked=${value} disabled=${disabled} />
                 <div class="box" ref=${(el) => state = el} aria-checked=${value} disabled=${disabled}>
                     <div class="bleh-icon" />
                 </div>
@@ -36345,6 +36345,9 @@
             `}
         </div>
     `;
+    if (data2) {
+      checkbox.setAttribute("value", data2);
+    }
     elem.check = () => {
       if (disabled) return;
       if (func) func(true);
@@ -58818,7 +58821,7 @@
                     ` : ""}
                     ${setting_incompatible_block(settings_store[id].incompatible)}
                     <div class="toggle-wrap">
-                        <button class="btn toggle colourful" ref=${(el) => toggle2 = el} aria-checked=${value}>
+                        <button class="btn toggle colourful" ref=${(el) => toggle2 = el} aria-checked=${value} type="button">
                             <div class="dot"></div>
                         </button>
                     </div>
