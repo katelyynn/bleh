@@ -245,7 +245,7 @@ export const trans = {
                 ru: 'Выпускник',
                 pt: 'Formado',
                 zh: '往届成员',
-                tr:'Mezun'
+                tr: 'Mezun'
             },
             reason: {
                 en: 'Former member of Last.fm',
