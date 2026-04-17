@@ -285,8 +285,6 @@ export let has_prompted_for_update = {
     state: false
 };
 
-export const STORAGE_LAST_SEASON_SEEN = 'bleh_last_season_seen';
-
 export const random_list = [
     {
         track: 'DIFFERENT DAY',

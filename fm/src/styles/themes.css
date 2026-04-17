@@ -299,45 +299,47 @@ body {
 
 [data-season="easter"],
 body[data-bleh--season="easter"] {
-    --hue-seasonal: 143;
-    --sat-seasonal: 1;
-    --lit-seasonal: 1.15;
+    --hue-seasonal: 114;
+    --sat-seasonal: 1.16;
+    --lit-seasonal: 0.95;
+}
+[data-season="pride"],
+body[data-bleh--season="pride"] {
+    --hue-seasonal: 276;
+    --sat-seasonal: 1.58;
+    --lit-seasonal: 0.66;
 }
 [data-season="halloween"],
 body[data-bleh--season="halloween"] {
-    --hue-seasonal: 14;
-    --sat-seasonal: 1.6;
-    --lit-seasonal: 1;
+    --hue-seasonal: 35;
+    --sat-seasonal: 1.75;
+    --lit-seasonal: 0.67;
 }
 [data-season="pre_fall"],
 body[data-bleh--season="pre_fall"] {
     --hue-seasonal: 40;
-    --sat-seasonal: 0.9;
-    --lit-seasonal: 1.1;
+    --sat-seasonal: 1.32;
+    --lit-seasonal: 1.06;
 }
 [data-season="fall"],
 body[data-bleh--season="fall"] {
-    --hue-seasonal: 224;
-    --sat-seasonal: 0.85;
-    --lit-seasonal: 1.1;
+    --hue-seasonal: 256;
+    --sat-seasonal: 0.92;
+    --lit-seasonal: 1.06;
 
     --hue-pos: 150;
 }
 [data-season="christmas"],
 body[data-bleh--season="christmas"] {
-    --hue-seasonal: 204;
-    --sat-seasonal: 0.85;
-    --lit-seasonal: 1.17;
-
-    --hue-pos: 150;
+    --hue-seasonal: 19;
+    --sat-seasonal: 2.36;
+    --lit-seasonal: 0.77;
 }
 [data-season="new_years"],
 body[data-bleh--season="new_years"] {
-    --hue-seasonal: 238;
-    --sat-seasonal: 0.925;
-    --lit-seasonal: 1.1;
-
-    --hue-pos: 150;
+    --hue-seasonal: 324;
+    --sat-seasonal: 1.88;
+    --lit-seasonal: 0.88;
 }
 
 .music-more-tags-tag-inner-wrap,

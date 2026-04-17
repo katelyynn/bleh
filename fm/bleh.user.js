@@ -1458,9 +1458,9 @@
             stack2.push(value2);
             var stepback = indent;
             indent = indent + gap;
-            var keys2 = propertyList || Object.keys(value2);
+            var keys3 = propertyList || Object.keys(value2);
             var partial = [];
-            for (var i3 = 0, list2 = keys2; i3 < list2.length; i3 += 1) {
+            for (var i3 = 0, list2 = keys3; i3 < list2.length; i3 += 1) {
               var key2 = list2[i3];
               var propertyString = serializeProperty(key2, value2);
               if (propertyString !== void 0) {
@@ -13913,14 +13913,14 @@
       })(exports, function() {
         "use strict";
         function ownKeys(object, enumerableOnly) {
-          var keys2 = Object.keys(object);
+          var keys3 = Object.keys(object);
           if (Object.getOwnPropertySymbols) {
             var symbols = Object.getOwnPropertySymbols(object);
             enumerableOnly && (symbols = symbols.filter(function(sym) {
               return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-            })), keys2.push.apply(keys2, symbols);
+            })), keys3.push.apply(keys3, symbols);
           }
-          return keys2;
+          return keys3;
         }
         function _objectSpread2(target) {
           for (var i2 = 1; i2 < arguments.length; i2++) {
@@ -17943,8 +17943,8 @@
   }
 
   // node_modules/@popperjs/core/lib/utils/expandToHashMap.js
-  function expandToHashMap(value, keys2) {
-    return keys2.reduce(function(hashMap, key) {
+  function expandToHashMap(value, keys3) {
+    return keys3.reduce(function(hashMap, key) {
       hashMap[key] = value;
       return hashMap;
     }, {});
@@ -19107,9 +19107,9 @@
       }, ms);
     };
   }
-  function removeProperties(obj, keys2) {
+  function removeProperties(obj, keys3) {
     var clone6 = Object.assign({}, obj);
-    keys2.forEach(function(key) {
+    keys3.forEach(function(key) {
       delete clone6[key];
     });
     return clone6;
@@ -19390,8 +19390,8 @@
     if (true) {
       validateProps(partialProps, []);
     }
-    var keys2 = Object.keys(partialProps);
-    keys2.forEach(function(key) {
+    var keys3 = Object.keys(partialProps);
+    keys3.forEach(function(key) {
       defaultProps[key] = partialProps[key];
     });
   };
@@ -19447,8 +19447,8 @@
     if (plugins2 === void 0) {
       plugins2 = [];
     }
-    var keys2 = Object.keys(partialProps);
-    keys2.forEach(function(prop) {
+    var keys3 = Object.keys(partialProps);
+    keys3.forEach(function(prop) {
       var nonPluginProps = removeProperties(defaultProps, Object.keys(pluginProps));
       var didPassUnknownProp = !hasOwnProperty(nonPluginProps, prop);
       if (didPassUnknownProp) {
@@ -20501,7 +20501,6 @@
   var oracle_artists = {};
   var oracle_albums = {};
   var oracle_tracks = {};
-  var STORAGE_LAST_SEASON_SEEN = "bleh_last_season_seen";
   var random_list = [
     {
       track: "DIFFERENT DAY",
@@ -24192,8 +24191,8 @@
       }
     }, null)[1];
   }
-  function pick(obj, keys2) {
-    return keys2.reduce((a, k4) => {
+  function pick(obj, keys3) {
+    return keys3.reduce((a, k4) => {
       a[k4] = obj[k4];
       return a;
     }, {});
@@ -24855,12 +24854,12 @@
     }
     return [null, null];
   }
-  function simpleParse(...keys2) {
+  function simpleParse(...keys3) {
     return (match3, cursor) => {
       const ret = {};
       let i2;
-      for (i2 = 0; i2 < keys2.length; i2++) {
-        ret[keys2[i2]] = parseInteger(match3[cursor + i2]);
+      for (i2 = 0; i2 < keys3.length; i2++) {
+        ret[keys3[i2]] = parseInteger(match3[cursor + i2]);
       }
       return [ret, null, cursor + i2];
     };
@@ -39595,11 +39594,11 @@
   };
   function unpack() {
     const unpacked = {};
-    const keys2 = Object.keys(names$1);
+    const keys3 = Object.keys(names$1);
     const tkeys = Object.keys(map);
     let i2, j, k4, ok, nk;
-    for (i2 = 0; i2 < keys2.length; i2++) {
-      ok = nk = keys2[i2];
+    for (i2 = 0; i2 < keys3.length; i2++) {
+      ok = nk = keys3[i2];
       for (j = 0; j < tkeys.length; j++) {
         k4 = tkeys[j];
         nk = nk.replace(k4, map[k4]);
@@ -39851,7 +39850,7 @@
     }
   }
   function each(loopable, fn6, thisArg, reverse) {
-    let i2, len, keys2;
+    let i2, len, keys3;
     if (isArray2(loopable)) {
       len = loopable.length;
       if (reverse) {
@@ -39864,10 +39863,10 @@
         }
       }
     } else if (isObject(loopable)) {
-      keys2 = Object.keys(loopable);
-      len = keys2.length;
+      keys3 = Object.keys(loopable);
+      len = keys3.length;
       for (i2 = 0; i2 < len; i2++) {
-        fn6.call(thisArg, loopable[keys2[i2]], keys2[i2]);
+        fn6.call(thisArg, loopable[keys3[i2]], keys3[i2]);
       }
     }
   }
@@ -39891,11 +39890,11 @@
     }
     if (isObject(source)) {
       const target = /* @__PURE__ */ Object.create(null);
-      const keys2 = Object.keys(source);
-      const klen = keys2.length;
+      const keys3 = Object.keys(source);
+      const klen = keys3.length;
       let k4 = 0;
       for (; k4 < klen; ++k4) {
-        target[keys2[k4]] = clone4(source[keys2[k4]]);
+        target[keys3[k4]] = clone4(source[keys3[k4]]);
       }
       return target;
     }
@@ -39936,9 +39935,9 @@
       if (!isObject(current)) {
         continue;
       }
-      const keys2 = Object.keys(current);
-      for (let k4 = 0, klen = keys2.length; k4 < klen; ++k4) {
-        merger(keys2[k4], target, current, options);
+      const keys3 = Object.keys(current);
+      for (let k4 = 0, klen = keys3.length; k4 < klen; ++k4) {
+        merger(keys3[k4], target, current, options);
       }
     }
     return target;
@@ -39969,23 +39968,23 @@
   };
   function _splitKey(key) {
     const parts = key.split(".");
-    const keys2 = [];
+    const keys3 = [];
     let tmp = "";
     for (const part of parts) {
       tmp += part;
       if (tmp.endsWith("\\")) {
         tmp = tmp.slice(0, -1) + ".";
       } else {
-        keys2.push(tmp);
+        keys3.push(tmp);
         tmp = "";
       }
     }
-    return keys2;
+    return keys3;
   }
   function _getKeyResolver(key) {
-    const keys2 = _splitKey(key);
+    const keys3 = _splitKey(key);
     return (obj) => {
-      for (const k4 of keys2) {
+      for (const k4 of keys3) {
         if (k4 === "") {
           break;
         }
@@ -40643,9 +40642,9 @@
     if (!key) {
       return node;
     }
-    const keys2 = key.split(".");
-    for (let i2 = 0, n2 = keys2.length; i2 < n2; ++i2) {
-      const k4 = keys2[i2];
+    const keys3 = key.split(".");
+    for (let i2 = 0, n2 = keys3.length; i2 < n2; ++i2) {
+      const k4 = keys3[i2];
       node = node[k4] || (node[k4] = /* @__PURE__ */ Object.create(null));
     }
     return node;
@@ -41088,9 +41087,9 @@
   function _readValueToProps(value, props) {
     const ret = {};
     const objProps = isObject(props);
-    const keys2 = objProps ? Object.keys(props) : props;
+    const keys3 = objProps ? Object.keys(props) : props;
     const read2 = isObject(value) ? objProps ? (prop) => valueOrDefault(value[prop], value[props[prop]]) : (prop) => value[prop] : () => value;
-    for (const prop of keys2) {
+    for (const prop of keys3) {
       ret[prop] = numberOrZero(read2(prop));
     }
     return ret;
@@ -41456,11 +41455,11 @@
     }
   }
   function getKeysFromAllScopes(target) {
-    let keys2 = target._keys;
-    if (!keys2) {
-      keys2 = target._keys = resolveKeysFromAllScopes(target._scopes);
+    let keys3 = target._keys;
+    if (!keys3) {
+      keys3 = target._keys = resolveKeysFromAllScopes(target._scopes);
     }
-    return keys2;
+    return keys3;
   }
   function resolveKeysFromAllScopes(scopes) {
     const set2 = /* @__PURE__ */ new Set();
@@ -42569,9 +42568,9 @@
   };
   function awaitAll(animations, properties) {
     const running = [];
-    const keys2 = Object.keys(properties);
-    for (let i2 = 0; i2 < keys2.length; i2++) {
-      const anim = animations[keys2[i2]];
+    const keys3 = Object.keys(properties);
+    for (let i2 = 0; i2 < keys3.length; i2++) {
+      const anim = animations[keys3[i2]];
       if (anim && anim.active()) {
         running.push(anim.wait());
       }
@@ -42637,24 +42636,24 @@
     };
   }
   function getSortedDatasetIndices(chart, filterVisible) {
-    const keys2 = [];
+    const keys3 = [];
     const metasets = chart._getSortedDatasetMetas(filterVisible);
     let i2, ilen;
     for (i2 = 0, ilen = metasets.length; i2 < ilen; ++i2) {
-      keys2.push(metasets[i2].index);
+      keys3.push(metasets[i2].index);
     }
-    return keys2;
+    return keys3;
   }
   function applyStack(stack, value, dsIndex, options = {}) {
-    const keys2 = stack.keys;
+    const keys3 = stack.keys;
     const singleMode = options.mode === "single";
     let i2, ilen, datasetIndex, otherValue;
     if (value === null) {
       return;
     }
     let found = false;
-    for (i2 = 0, ilen = keys2.length; i2 < ilen; ++i2) {
-      datasetIndex = +keys2[i2];
+    for (i2 = 0, ilen = keys3.length; i2 < ilen; ++i2) {
+      datasetIndex = +keys3[i2];
       if (datasetIndex === dsIndex) {
         found = true;
         if (options.all) {
@@ -42676,11 +42675,11 @@
     const { iScale, vScale } = meta;
     const iAxisKey = iScale.axis === "x" ? "x" : "y";
     const vAxisKey = vScale.axis === "x" ? "x" : "y";
-    const keys2 = Object.keys(data2);
-    const adata = new Array(keys2.length);
+    const keys3 = Object.keys(data2);
+    const adata = new Array(keys3.length);
     let i2, ilen, key;
-    for (i2 = 0, ilen = keys2.length; i2 < ilen; ++i2) {
-      key = keys2[i2];
+    for (i2 = 0, ilen = keys3.length; i2 < ilen; ++i2) {
+      key = keys3[i2];
       adata[i2] = {
         [iAxisKey]: key,
         [vAxisKey]: data2[key]
@@ -47353,9 +47352,9 @@
   function allPlugins(config) {
     const localIds = {};
     const plugins2 = [];
-    const keys2 = Object.keys(registry.plugins.items);
-    for (let i2 = 0; i2 < keys2.length; i2++) {
-      plugins2.push(registry.getPlugin(keys2[i2]));
+    const keys3 = Object.keys(registry.plugins.items);
+    for (let i2 = 0; i2 < keys3.length; i2++) {
+      plugins2.push(registry.getPlugin(keys3[i2]));
     }
     const local = config.plugins || [];
     for (let i2 = 0; i2 < local.length; i2++) {
@@ -47399,8 +47398,8 @@
     return result;
   }
   function pluginOpts(config, { plugin, local }, opts, context) {
-    const keys2 = config.pluginScopeKeys(plugin);
-    const scopes = config.getOptionScopes(opts, keys2);
+    const keys3 = config.pluginScopeKeys(plugin);
+    const scopes = config.getOptionScopes(opts, keys3);
     if (local && plugin.defaults) {
       scopes.push(plugin.defaults);
     }
@@ -47544,13 +47543,13 @@
   var keyCache = /* @__PURE__ */ new Map();
   var keysCached = /* @__PURE__ */ new Set();
   function cachedKeys(cacheKey, generate) {
-    let keys2 = keyCache.get(cacheKey);
-    if (!keys2) {
-      keys2 = generate();
-      keyCache.set(cacheKey, keys2);
-      keysCached.add(keys2);
+    let keys3 = keyCache.get(cacheKey);
+    if (!keys3) {
+      keys3 = generate();
+      keyCache.set(cacheKey, keys3);
+      keysCached.add(keys3);
     }
-    return keys2;
+    return keys3;
   }
   var addIfFound = (set2, obj, key) => {
     const opts = resolveObjectKey(obj, key);
@@ -47654,15 +47653,15 @@
         return cached;
       }
       const scopes = /* @__PURE__ */ new Set();
-      keyLists.forEach((keys2) => {
+      keyLists.forEach((keys3) => {
         if (mainScope) {
           scopes.add(mainScope);
-          keys2.forEach((key) => addIfFound(scopes, mainScope, key));
+          keys3.forEach((key) => addIfFound(scopes, mainScope, key));
         }
-        keys2.forEach((key) => addIfFound(scopes, options, key));
-        keys2.forEach((key) => addIfFound(scopes, overrides[type] || {}, key));
-        keys2.forEach((key) => addIfFound(scopes, defaults, key));
-        keys2.forEach((key) => addIfFound(scopes, descriptors, key));
+        keys3.forEach((key) => addIfFound(scopes, options, key));
+        keys3.forEach((key) => addIfFound(scopes, overrides[type] || {}, key));
+        keys3.forEach((key) => addIfFound(scopes, defaults, key));
+        keys3.forEach((key) => addIfFound(scopes, descriptors, key));
       });
       const array = Array.from(scopes);
       if (array.length === 0) {
@@ -47791,8 +47790,8 @@
     return Object.values(instances).filter((c2) => c2.canvas === canvas).pop();
   };
   function moveNumericKeys(obj, start2, move) {
-    const keys2 = Object.keys(obj);
-    for (const key of keys2) {
+    const keys3 = Object.keys(obj);
+    for (const key of keys3) {
       const intKey = +key;
       if (intKey >= start2) {
         const value = obj[key];
@@ -55323,9 +55322,9 @@
   function save_profile_cache({ avatar: avatar3, banner, banner_orig, hue: hue4, sat, lit, aka, created, font, font_style, username: username2 } = {}, profile_cache = JSON.parse(localStorage.getItem("bleh_profile_cache")) || {}, name = page.name) {
     let profile_cache_o = Object.keys(profile_cache);
     if (profile_cache_o.length > 400) {
-      const keys2 = Reflect.ownKeys(profile_cache);
+      const keys3 = Reflect.ownKeys(profile_cache);
       const protected_users = /* @__PURE__ */ new Set([auth.name, ...settings.friends]);
-      const key_to_delete = keys2.find(
+      const key_to_delete = keys3.find(
         (key) => !protected_users.has(profile_cache[key])
       );
       if (key_to_delete) delete profile_cache[key_to_delete];
@@ -71560,7 +71559,7 @@
     const state = page.state.seasons;
     render(page.structure.main, html`
         <div class="bleh--panel">
-            ${seasonal_timeline(state.current, state.prev, state.next)}
+            ${seasonal_timeline(state.current, state.prev, state.next, state.now)}
             <div class="seasonal-inner">
                 <div class="sub-text">
                     ${tl2(trans.seasonal_timeline)}
@@ -71580,9 +71579,7 @@
                             class="icon-combo colourful"
                             data-season=${state.current ? state.current.id : "none"}
                         >
-                            <div
-                                class="bleh-icon bleh-seasonal-icon"
-                            ></div>
+                            <div class="bleh-icon bleh-seasonal-icon" data-season=${state.current ? state.current.id : "none"} />
                             <p>
                                 ${tl2(trans.seasonal.listing[state.current ? state.current.id : "none"])}
                             </p>
@@ -71595,7 +71592,7 @@
                         <h5>${tl2(trans.started)}</h5>
                     </div>
                     <div class="info">
-                        <p id="current_season_start">${state.current.start.toRelative(state.now)}</p>
+                        <p id="current_season_start">${state.current.start.toRelative({ base: state.now })}</p>
                     </div>
                 </div>
                 <div class="setting" data-type="info">
@@ -71603,7 +71600,7 @@
                         <h5>${tl2(trans.ends_in)}</h5>
                     </div>
                     <div class="info">
-                        <p id="current_season">${state.current.end.toRelative(state.now)}</p>
+                        <p id="current_season">${state.current.end.toRelative({ base: state.now })}</p>
                     </div>
                 </div>
                 ` : settings.seasonal ? html.node`
@@ -71612,7 +71609,7 @@
                         <h5>${tl2(trans.next_in)}</h5>
                     </div>
                     <div class="info">
-                        <p id="next_season_start">${state.next.start.toRelative(state.now)}</p>
+                        <p id="next_season_start">${state.next.start.toRelative({ base: state.now })}</p>
                     </div>
                 </div>
                 ` : ""}
@@ -71626,12 +71623,12 @@
         </div>
     `);
   }
-  function seasonal_timeline(current, prev, next) {
+  function seasonal_timeline(current, prev, next, now2) {
     if (!settings.seasonal) return html.node``;
     return html.node`
         <div class="seasonal-timeline">
-            ${seasonal_timeline_item(prev, "prev")}
-            ${current ? seasonal_timeline_item(current, "current") : html.node`
+            ${seasonal_timeline_item(prev, "prev", now2)}
+            ${current ? seasonal_timeline_item(current, "current", now2) : html.node`
                 <div class="seasonal-timeline-item no-season" data-season-type="current">
                     <div class="seasonal-icon colourful" data-season="none">
                         <div class="bleh-icon" data-season="none" />
@@ -71640,17 +71637,17 @@
                     <p class="seasonal-desc">${tl2(trans.current)}</p>
                 </div>
             `}
-            ${seasonal_timeline_item(next, "next")}
+            ${seasonal_timeline_item(next, "next", now2)}
         </div>
     `;
   }
-  function seasonal_timeline_item(season, type) {
+  function seasonal_timeline_item(season, type, now2) {
     let time2;
     log("creating timeline item", "season", "info", { season, type });
     if (type == "prev") {
-      time2 = season.end.toRelative(page.state.seasons.now);
+      time2 = season.end.toRelative({ base: now2 });
     } else if (type == "next") {
-      time2 = season.start.toRelative(page.state.seasons.now);
+      time2 = season.start.toRelative({ base: now2 });
     } else {
       time2 = tl2(trans.current);
     }
@@ -78892,6 +78889,61 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     if (settings.rain) rain();
   }
 
+  // src/components/settings/storage.ts
+  var keys2 = {
+    settings: "bleh",
+    auth: "bleh_auth",
+    auth_valid: "bleh_auth_valid",
+    bookmarked_images: "bleh_bookmarked_images",
+    cached_style: "bleh_cached_style",
+    cached_style_timeout: "bleh_cached_style_timeout",
+    news: "bleh_changelog",
+    news_expire: "bleh_changelog_expire",
+    hoshino: "bleh_hoshino_cache",
+    last_season_seen: "bleh_last_season_seen",
+    last_version_used: "bleh_last_version_used",
+    notices: "bleh_notices",
+    notices_expire: "bleh_notices_expire",
+    oracle: "bleh_oracle_cache",
+    profile_cache: "bleh_profile_cache",
+    profile_notes: "bleh_profile_notes",
+    update_checked_date: "bleh_update_checked",
+    update_next_check_date: "bleh_update_next_check",
+    update_required: "bleh_update_required",
+    update_to_version: "bleh_update_to",
+    sponsors: "kat_sponsors",
+    sponsors_expire: "kat_sponsors_expire",
+    sponsor_own_cache: "kat_sponsor_cache",
+    lotus_album_track: "lotus_album_track",
+    lotus_album_track_expire: "lotus_album_track_expire",
+    lotus_artist: "lotus_artist",
+    lotus_artist_expire: "lotus_artist_expire",
+    lotus_combined_artists: "lotus_combined_artists",
+    lotus_combined_artists_expire: "lotus_combined_artists_expire",
+    oracle_albums: "oracle_albums",
+    oracle_albums_expire: "oracle_albums_expire",
+    oracle_artists: "oracle_artists",
+    oracle_artists_expire: "oracle_artists_expire",
+    oracle_tracks: "oracle_tracks",
+    oracle_tracks_expire: "oracle_tracks_expire",
+    next_status_cafe_fetch: "next_status_cafe_fetch"
+  };
+  var storage_keys_clean = [
+    "bleh_profile_banners",
+    "bleh_moderation",
+    "bleh_update_paused",
+    "bleh_update_paused_until"
+  ];
+  function clean_storage() {
+    storage_keys_clean.forEach((key) => {
+      const data2 = localStorage.getItem(key);
+      if (data2) {
+        log(`removed ${key}`, "storage", "info", { data: data2 });
+        localStorage.removeItem(key);
+      }
+    });
+  }
+
   // src/components/seasonal.ts
   function set_season() {
     if (!settings.seasonal) {
@@ -78903,7 +78955,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       };
       return;
     }
-    const last_season_seen = localStorage.getItem(STORAGE_LAST_SEASON_SEEN) || "";
+    const last_season_seen = localStorage.getItem(keys2.last_season_seen) || "";
     const state = get_season_state();
     page.state.seasons = state;
     if (!state.current) return;
@@ -78927,7 +78979,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     update_season_nav();
   }
   function new_season(current, now2) {
-    set_storage(STORAGE_LAST_SEASON_SEEN, current.id);
+    set_storage(keys2.last_season_seen, current.id);
     load_chart_colours();
     notify({
       id: "new_season",
@@ -79955,23 +80007,6 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       const link = page2.querySelector("a, span");
       link.classList.add("btn", "pagination-page-link");
       if (current) link.setAttribute("aria-checked", "true");
-    });
-  }
-
-  // src/components/settings/storage.ts
-  var storage_keys_clean = [
-    "bleh_profile_banners",
-    "bleh_moderation",
-    "bleh_update_paused",
-    "bleh_update_paused_until"
-  ];
-  function clean_storage() {
-    storage_keys_clean.forEach((key) => {
-      const data2 = localStorage.getItem(key);
-      if (data2) {
-        log(`removed ${key}`, "storage", "info", { data: data2 });
-        localStorage.removeItem(key);
-      }
     });
   }
 
@@ -91065,11 +91100,11 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     return path.split(".").reduce((acc, part) => acc?.[part], object);
   }
   function translation_stats() {
-    const keys2 = collect_keys(trans);
+    const keys3 = collect_keys(trans);
     for (const lang3 of Object.keys(lang_info)) {
       let translated = 0;
       const missing = [];
-      for (const key of keys2) {
+      for (const key of keys3) {
         const value = get_value_by_path(trans, key);
         if (value && value[lang3]) {
           translated++;
@@ -91077,11 +91112,11 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
           missing.push(key);
         }
       }
-      lang_info[lang3].total = keys2.length;
+      lang_info[lang3].total = keys3.length;
       lang_info[lang3].translated = translated;
       lang_info[lang3].missing = missing.length;
       lang_info[lang3].missing_keys = missing;
-      lang_info[lang3].percent = Math.round(translated / keys2.length * 100);
+      lang_info[lang3].percent = Math.round(translated / keys3.length * 100);
     }
     log("translation stats", "trans", "info", { lang_info });
   }

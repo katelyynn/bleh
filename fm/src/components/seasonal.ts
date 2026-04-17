@@ -6,7 +6,7 @@
 
 import { settings } from '@/build/config';
 import { log } from '@/build/log';
-import { page, root, STORAGE_LAST_SEASON_SEEN } from '@/build/page';
+import { page, root } from '@/build/page';
 import {
     seasonal_events,
     seasonal_timer,
@@ -18,6 +18,7 @@ import { load_chart_colours } from '@/components/music/chart';
 import { notify } from '@/components/dialog/notify';
 import { html, render } from 'lighterhtml';
 import { DateTime, Duration } from 'luxon';
+import { keys } from './settings/storage';
 
 export interface season {
     id: string,
@@ -40,7 +41,7 @@ export function set_season() {
         return;
     }
 
-    const last_season_seen = localStorage.getItem(STORAGE_LAST_SEASON_SEEN) || '';
+    const last_season_seen = localStorage.getItem(keys.last_season_seen) || '';
 
     const state = get_season_state();
     page.state.seasons = state;
@@ -76,7 +77,7 @@ function apply_season(current: season) {
 }
 
 function new_season(current: season, now: DateTime) {
-    set_storage(STORAGE_LAST_SEASON_SEEN, current.id);
+    set_storage(keys.last_season_seen, current.id);
     load_chart_colours();
 
     notify({

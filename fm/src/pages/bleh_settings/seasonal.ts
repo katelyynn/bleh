@@ -16,7 +16,7 @@ export function seasonal() {
 
     render(page.structure.main, html`
         <div class="bleh--panel">
-            ${seasonal_timeline(state.current, state.prev, state.next)}
+            ${seasonal_timeline(state.current, state.prev, state.next, state.now)}
             <div class="seasonal-inner">
                 <div class="sub-text">
                     ${tl(trans.seasonal_timeline)}
@@ -36,9 +36,7 @@ export function seasonal() {
                             class="icon-combo colourful"
                             data-season=${state.current ? state.current.id : 'none'}
                         >
-                            <div
-                                class="bleh-icon bleh-seasonal-icon"
-                            ></div>
+                            <div class="bleh-icon bleh-seasonal-icon" data-season=${state.current ? state.current.id : 'none'} />
                             <p>
                                 ${tl(trans.seasonal.listing[state.current ? state.current.id : 'none'])}
                             </p>
@@ -51,7 +49,7 @@ export function seasonal() {
                         <h5>${tl(trans.started)}</h5>
                     </div>
                     <div class="info">
-                        <p id="current_season_start">${state.current.start.toRelative(state.now)}</p>
+                        <p id="current_season_start">${state.current.start.toRelative({ base: state.now })}</p>
                     </div>
                 </div>
                 <div class="setting" data-type="info">
@@ -59,7 +57,7 @@ export function seasonal() {
                         <h5>${tl(trans.ends_in)}</h5>
                     </div>
                     <div class="info">
-                        <p id="current_season">${state.current.end.toRelative(state.now)}</p>
+                        <p id="current_season">${state.current.end.toRelative({ base: state.now })}</p>
                     </div>
                 </div>
                 ` : settings.seasonal ? html.node`
@@ -68,7 +66,7 @@ export function seasonal() {
                         <h5>${tl(trans.next_in)}</h5>
                     </div>
                     <div class="info">
-                        <p id="next_season_start">${state.next.start.toRelative(state.now)}</p>
+                        <p id="next_season_start">${state.next.start.toRelative({ base: state.now })}</p>
                     </div>
                 </div>
                 ` : ''}
@@ -83,13 +81,13 @@ export function seasonal() {
     `);
 }
 
-export function seasonal_timeline(current: season | null, prev: season, next: season) {
+export function seasonal_timeline(current: season | null, prev: season, next: season, now: DateTime) {
     if (!settings.seasonal) return html.node``;
 
     return html.node`
         <div class="seasonal-timeline">
-            ${seasonal_timeline_item(prev, 'prev')}
-            ${current ? seasonal_timeline_item(current, 'current') : html.node`
+            ${seasonal_timeline_item(prev, 'prev', now)}
+            ${current ? seasonal_timeline_item(current, 'current', now) : html.node`
                 <div class="seasonal-timeline-item no-season" data-season-type="current">
                     <div class="seasonal-icon colourful" data-season="none">
                         <div class="bleh-icon" data-season="none" />
@@ -98,20 +96,20 @@ export function seasonal_timeline(current: season | null, prev: season, next: se
                     <p class="seasonal-desc">${tl(trans.current)}</p>
                 </div>
             `}
-            ${seasonal_timeline_item(next, 'next')}
+            ${seasonal_timeline_item(next, 'next', now)}
         </div>
     `;
 }
 
-export function seasonal_timeline_item(season: season, type: 'current' | 'prev' | 'next') {
+export function seasonal_timeline_item(season: season, type: 'current' | 'prev' | 'next', now: DateTime) {
     let time: string;
 
     log('creating timeline item', 'season', 'info', { season, type });
 
     if (type == 'prev') {
-        time = season.end.toRelative(page.state.seasons.now);
+        time = season.end.toRelative({ base: now });
     } else if (type == 'next') {
-        time = season.start.toRelative(page.state.seasons.now);
+        time = season.start.toRelative({ base: now });
     } else {
         time = tl(trans.current);
     }

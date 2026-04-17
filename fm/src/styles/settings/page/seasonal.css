@@ -84,3 +84,11 @@
         --mask: var(--icon-16-new-years);
     }
 }
+
+.bleh-icon[data-season="pride"] {
+    background-color: unset !important;
+    background-image: var(--pride) !important;
+    background-size: 100% !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+}
