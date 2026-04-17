@@ -14,7 +14,7 @@ import {
     page,
     root
 } from '@/build/page';
-import { clean_number, pad2, romanise, sanitise, set_storage } from '@/build/tools';
+import { clean_number, pad2, parse_object, romanise, sanitise, set_storage } from '@/build/tools';
 import { ff } from '@/components/settings/sku';
 import {
     correct_artist,
@@ -41,9 +41,10 @@ import { save_setting, setting } from '@/components/settings/settings';
 import { input } from '@/components/settings/input';
 import { icon, icons } from '../shared/icon';
 import { redirect } from './music';
-import JSON5 from 'json5';
 import { flag } from '../shared/flag';
 import { age } from '../shared/age';
+import { notify } from '../dialog/notify';
+import { status } from '../dialog/status';
 
 export function oracle_process() {
     log('beginning', 'oracle');
@@ -2369,7 +2370,7 @@ export function oracle_data(force = false) {
         oracle_request('artists', true);
     } else {
         // we prefer to load the current cache before waiting for a new response
-        Object.assign(oracle_artists, JSON5.parse(cached_artists));
+        parse(oracle_artists, cached_artists, 'artists');
 
         // is it valid?
         if (cached_artists_expire < current_time && !force) {
@@ -2384,7 +2385,7 @@ export function oracle_data(force = false) {
         oracle_request('albums', true);
     } else {
         // we prefer to load the current cache before waiting for a new response
-        Object.assign(oracle_albums, JSON5.parse(cached_albums));
+        parse(oracle_albums, cached_albums, 'albums');
 
         // is it valid?
         if (cached_albums_expire < current_time && !force) {
@@ -2399,7 +2400,7 @@ export function oracle_data(force = false) {
         oracle_request('tracks', true);
     } else {
         // we prefer to load the current cache before waiting for a new response
-        Object.assign(oracle_tracks, JSON5.parse(cached_tracks));
+        parse(oracle_tracks, cached_tracks, 'tracks');
 
         // is it valid?
         if (cached_tracks_expire < current_time && !force) {
@@ -2410,7 +2411,20 @@ export function oracle_data(force = false) {
     }
 }
 
-function oracle_request(type = 'albums') {
+function parse(value: {}, key: string, type: string) {
+    try {
+        Object.assign(value, parse_object(type, key));
+    } catch (e) {
+        notify({
+            title: `Loading of oracle ${type} data failed`,
+            body: 'Please report this as a bug',
+            type: 'error',
+            persist: true
+        });
+    }
+}
+
+function oracle_request(type = 'albums', send_notify = false) {
     let xhr = new XMLHttpRequest();
     let url = `https://katelyynn.github.io/oracle/${type}.json?${Math.random()}`;
     xhr.open('GET', url, true);
@@ -2431,12 +2445,20 @@ function oracle_request(type = 'albums') {
 
         if (xhr.status == 200) {
             if (type == 'artists') {
-                Object.assign(oracle_artists, JSON.parse(this.response));
+                parse(oracle_artists, this.response, 'artists');
             } else if (type == 'albums') {
-                Object.assign(oracle_albums, JSON.parse(this.response));
+                parse(oracle_albums, this.response, 'albums');
             } else {
-                Object.assign(oracle_tracks, JSON.parse(this.response));
+                parse(oracle_tracks, this.response, 'tracks');
             }
+
+            if (send_notify)
+                status({
+                    title: tl(trans.downloaded_value).replace(
+                        '{v}',
+                        `oracle ${tl(trans[type])}`
+                    )
+                });
 
             // save to cache for next page load
             set_storage(`oracle_${type}`, this.response);

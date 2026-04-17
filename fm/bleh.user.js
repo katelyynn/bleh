@@ -487,7 +487,7 @@
         var token;
         var key;
         var root4;
-        var parse6 = function parse7(text4, reviver) {
+        var parse7 = function parse8(text4, reviver) {
           source = String(text4);
           parseState = "start";
           stack = [];
@@ -1535,11 +1535,11 @@
             return final;
           }
         };
-        var JSON54 = {
-          parse: parse6,
+        var JSON53 = {
+          parse: parse7,
           stringify
         };
-        var lib = JSON54;
+        var lib = JSON53;
         var es5 = lib;
         return es5;
       });
@@ -5942,74 +5942,74 @@
           function() {
             function CSSParsedDeclaration2(context, declaration) {
               var _a2, _b2;
-              this.animationDuration = parse6(context, duration, declaration.animationDuration);
-              this.backgroundClip = parse6(context, backgroundClip, declaration.backgroundClip);
-              this.backgroundColor = parse6(context, backgroundColor, declaration.backgroundColor);
-              this.backgroundImage = parse6(context, backgroundImage, declaration.backgroundImage);
-              this.backgroundOrigin = parse6(context, backgroundOrigin, declaration.backgroundOrigin);
-              this.backgroundPosition = parse6(context, backgroundPosition, declaration.backgroundPosition);
-              this.backgroundRepeat = parse6(context, backgroundRepeat, declaration.backgroundRepeat);
-              this.backgroundSize = parse6(context, backgroundSize, declaration.backgroundSize);
-              this.borderTopColor = parse6(context, borderTopColor, declaration.borderTopColor);
-              this.borderRightColor = parse6(context, borderRightColor, declaration.borderRightColor);
-              this.borderBottomColor = parse6(context, borderBottomColor, declaration.borderBottomColor);
-              this.borderLeftColor = parse6(context, borderLeftColor, declaration.borderLeftColor);
-              this.borderTopLeftRadius = parse6(context, borderTopLeftRadius, declaration.borderTopLeftRadius);
-              this.borderTopRightRadius = parse6(context, borderTopRightRadius, declaration.borderTopRightRadius);
-              this.borderBottomRightRadius = parse6(context, borderBottomRightRadius, declaration.borderBottomRightRadius);
-              this.borderBottomLeftRadius = parse6(context, borderBottomLeftRadius, declaration.borderBottomLeftRadius);
-              this.borderTopStyle = parse6(context, borderTopStyle, declaration.borderTopStyle);
-              this.borderRightStyle = parse6(context, borderRightStyle, declaration.borderRightStyle);
-              this.borderBottomStyle = parse6(context, borderBottomStyle, declaration.borderBottomStyle);
-              this.borderLeftStyle = parse6(context, borderLeftStyle, declaration.borderLeftStyle);
-              this.borderTopWidth = parse6(context, borderTopWidth, declaration.borderTopWidth);
-              this.borderRightWidth = parse6(context, borderRightWidth, declaration.borderRightWidth);
-              this.borderBottomWidth = parse6(context, borderBottomWidth, declaration.borderBottomWidth);
-              this.borderLeftWidth = parse6(context, borderLeftWidth, declaration.borderLeftWidth);
-              this.boxShadow = parse6(context, boxShadow, declaration.boxShadow);
-              this.color = parse6(context, color2, declaration.color);
-              this.direction = parse6(context, direction, declaration.direction);
-              this.display = parse6(context, display, declaration.display);
-              this.float = parse6(context, float, declaration.cssFloat);
-              this.fontFamily = parse6(context, fontFamily, declaration.fontFamily);
-              this.fontSize = parse6(context, fontSize, declaration.fontSize);
-              this.fontStyle = parse6(context, fontStyle, declaration.fontStyle);
-              this.fontVariant = parse6(context, fontVariant, declaration.fontVariant);
-              this.fontWeight = parse6(context, fontWeight, declaration.fontWeight);
-              this.letterSpacing = parse6(context, letterSpacing, declaration.letterSpacing);
-              this.lineBreak = parse6(context, lineBreak, declaration.lineBreak);
-              this.lineHeight = parse6(context, lineHeight, declaration.lineHeight);
-              this.listStyleImage = parse6(context, listStyleImage, declaration.listStyleImage);
-              this.listStylePosition = parse6(context, listStylePosition, declaration.listStylePosition);
-              this.listStyleType = parse6(context, listStyleType, declaration.listStyleType);
-              this.marginTop = parse6(context, marginTop, declaration.marginTop);
-              this.marginRight = parse6(context, marginRight, declaration.marginRight);
-              this.marginBottom = parse6(context, marginBottom, declaration.marginBottom);
-              this.marginLeft = parse6(context, marginLeft, declaration.marginLeft);
-              this.opacity = parse6(context, opacity, declaration.opacity);
-              var overflowTuple = parse6(context, overflow, declaration.overflow);
+              this.animationDuration = parse7(context, duration, declaration.animationDuration);
+              this.backgroundClip = parse7(context, backgroundClip, declaration.backgroundClip);
+              this.backgroundColor = parse7(context, backgroundColor, declaration.backgroundColor);
+              this.backgroundImage = parse7(context, backgroundImage, declaration.backgroundImage);
+              this.backgroundOrigin = parse7(context, backgroundOrigin, declaration.backgroundOrigin);
+              this.backgroundPosition = parse7(context, backgroundPosition, declaration.backgroundPosition);
+              this.backgroundRepeat = parse7(context, backgroundRepeat, declaration.backgroundRepeat);
+              this.backgroundSize = parse7(context, backgroundSize, declaration.backgroundSize);
+              this.borderTopColor = parse7(context, borderTopColor, declaration.borderTopColor);
+              this.borderRightColor = parse7(context, borderRightColor, declaration.borderRightColor);
+              this.borderBottomColor = parse7(context, borderBottomColor, declaration.borderBottomColor);
+              this.borderLeftColor = parse7(context, borderLeftColor, declaration.borderLeftColor);
+              this.borderTopLeftRadius = parse7(context, borderTopLeftRadius, declaration.borderTopLeftRadius);
+              this.borderTopRightRadius = parse7(context, borderTopRightRadius, declaration.borderTopRightRadius);
+              this.borderBottomRightRadius = parse7(context, borderBottomRightRadius, declaration.borderBottomRightRadius);
+              this.borderBottomLeftRadius = parse7(context, borderBottomLeftRadius, declaration.borderBottomLeftRadius);
+              this.borderTopStyle = parse7(context, borderTopStyle, declaration.borderTopStyle);
+              this.borderRightStyle = parse7(context, borderRightStyle, declaration.borderRightStyle);
+              this.borderBottomStyle = parse7(context, borderBottomStyle, declaration.borderBottomStyle);
+              this.borderLeftStyle = parse7(context, borderLeftStyle, declaration.borderLeftStyle);
+              this.borderTopWidth = parse7(context, borderTopWidth, declaration.borderTopWidth);
+              this.borderRightWidth = parse7(context, borderRightWidth, declaration.borderRightWidth);
+              this.borderBottomWidth = parse7(context, borderBottomWidth, declaration.borderBottomWidth);
+              this.borderLeftWidth = parse7(context, borderLeftWidth, declaration.borderLeftWidth);
+              this.boxShadow = parse7(context, boxShadow, declaration.boxShadow);
+              this.color = parse7(context, color2, declaration.color);
+              this.direction = parse7(context, direction, declaration.direction);
+              this.display = parse7(context, display, declaration.display);
+              this.float = parse7(context, float, declaration.cssFloat);
+              this.fontFamily = parse7(context, fontFamily, declaration.fontFamily);
+              this.fontSize = parse7(context, fontSize, declaration.fontSize);
+              this.fontStyle = parse7(context, fontStyle, declaration.fontStyle);
+              this.fontVariant = parse7(context, fontVariant, declaration.fontVariant);
+              this.fontWeight = parse7(context, fontWeight, declaration.fontWeight);
+              this.letterSpacing = parse7(context, letterSpacing, declaration.letterSpacing);
+              this.lineBreak = parse7(context, lineBreak, declaration.lineBreak);
+              this.lineHeight = parse7(context, lineHeight, declaration.lineHeight);
+              this.listStyleImage = parse7(context, listStyleImage, declaration.listStyleImage);
+              this.listStylePosition = parse7(context, listStylePosition, declaration.listStylePosition);
+              this.listStyleType = parse7(context, listStyleType, declaration.listStyleType);
+              this.marginTop = parse7(context, marginTop, declaration.marginTop);
+              this.marginRight = parse7(context, marginRight, declaration.marginRight);
+              this.marginBottom = parse7(context, marginBottom, declaration.marginBottom);
+              this.marginLeft = parse7(context, marginLeft, declaration.marginLeft);
+              this.opacity = parse7(context, opacity, declaration.opacity);
+              var overflowTuple = parse7(context, overflow, declaration.overflow);
               this.overflowX = overflowTuple[0];
               this.overflowY = overflowTuple[overflowTuple.length > 1 ? 1 : 0];
-              this.overflowWrap = parse6(context, overflowWrap, declaration.overflowWrap);
-              this.paddingTop = parse6(context, paddingTop, declaration.paddingTop);
-              this.paddingRight = parse6(context, paddingRight, declaration.paddingRight);
-              this.paddingBottom = parse6(context, paddingBottom, declaration.paddingBottom);
-              this.paddingLeft = parse6(context, paddingLeft, declaration.paddingLeft);
-              this.paintOrder = parse6(context, paintOrder, declaration.paintOrder);
-              this.position = parse6(context, position, declaration.position);
-              this.textAlign = parse6(context, textAlign, declaration.textAlign);
-              this.textDecorationColor = parse6(context, textDecorationColor, (_a2 = declaration.textDecorationColor) !== null && _a2 !== void 0 ? _a2 : declaration.color);
-              this.textDecorationLine = parse6(context, textDecorationLine, (_b2 = declaration.textDecorationLine) !== null && _b2 !== void 0 ? _b2 : declaration.textDecoration);
-              this.textShadow = parse6(context, textShadow, declaration.textShadow);
-              this.textTransform = parse6(context, textTransform, declaration.textTransform);
-              this.transform = parse6(context, transform$1, declaration.transform);
-              this.transformOrigin = parse6(context, transformOrigin, declaration.transformOrigin);
-              this.visibility = parse6(context, visibility, declaration.visibility);
-              this.webkitTextStrokeColor = parse6(context, webkitTextStrokeColor, declaration.webkitTextStrokeColor);
-              this.webkitTextStrokeWidth = parse6(context, webkitTextStrokeWidth, declaration.webkitTextStrokeWidth);
-              this.wordBreak = parse6(context, wordBreak, declaration.wordBreak);
-              this.zIndex = parse6(context, zIndex, declaration.zIndex);
-              this.objectFit = parse6(context, objectFit, declaration.objectFit);
+              this.overflowWrap = parse7(context, overflowWrap, declaration.overflowWrap);
+              this.paddingTop = parse7(context, paddingTop, declaration.paddingTop);
+              this.paddingRight = parse7(context, paddingRight, declaration.paddingRight);
+              this.paddingBottom = parse7(context, paddingBottom, declaration.paddingBottom);
+              this.paddingLeft = parse7(context, paddingLeft, declaration.paddingLeft);
+              this.paintOrder = parse7(context, paintOrder, declaration.paintOrder);
+              this.position = parse7(context, position, declaration.position);
+              this.textAlign = parse7(context, textAlign, declaration.textAlign);
+              this.textDecorationColor = parse7(context, textDecorationColor, (_a2 = declaration.textDecorationColor) !== null && _a2 !== void 0 ? _a2 : declaration.color);
+              this.textDecorationLine = parse7(context, textDecorationLine, (_b2 = declaration.textDecorationLine) !== null && _b2 !== void 0 ? _b2 : declaration.textDecoration);
+              this.textShadow = parse7(context, textShadow, declaration.textShadow);
+              this.textTransform = parse7(context, textTransform, declaration.textTransform);
+              this.transform = parse7(context, transform$1, declaration.transform);
+              this.transformOrigin = parse7(context, transformOrigin, declaration.transformOrigin);
+              this.visibility = parse7(context, visibility, declaration.visibility);
+              this.webkitTextStrokeColor = parse7(context, webkitTextStrokeColor, declaration.webkitTextStrokeColor);
+              this.webkitTextStrokeWidth = parse7(context, webkitTextStrokeWidth, declaration.webkitTextStrokeWidth);
+              this.wordBreak = parse7(context, wordBreak, declaration.wordBreak);
+              this.zIndex = parse7(context, zIndex, declaration.zIndex);
+              this.objectFit = parse7(context, objectFit, declaration.objectFit);
             }
             CSSParsedDeclaration2.prototype.isVisible = function() {
               return this.display > 0 && this.opacity > 0 && this.visibility === 0;
@@ -6063,8 +6063,8 @@
           /** @class */
           /* @__PURE__ */ function() {
             function CSSParsedPseudoDeclaration2(context, declaration) {
-              this.content = parse6(context, content, declaration.content);
-              this.quotes = parse6(context, quotes, declaration.quotes);
+              this.content = parse7(context, content, declaration.content);
+              this.quotes = parse7(context, quotes, declaration.quotes);
             }
             return CSSParsedPseudoDeclaration2;
           }()
@@ -6073,13 +6073,13 @@
           /** @class */
           /* @__PURE__ */ function() {
             function CSSParsedCounterDeclaration2(context, declaration) {
-              this.counterIncrement = parse6(context, counterIncrement, declaration.counterIncrement);
-              this.counterReset = parse6(context, counterReset, declaration.counterReset);
+              this.counterIncrement = parse7(context, counterIncrement, declaration.counterIncrement);
+              this.counterReset = parse7(context, counterReset, declaration.counterReset);
             }
             return CSSParsedCounterDeclaration2;
           }()
         );
-        var parse6 = function(context, descriptor, style) {
+        var parse7 = function(context, descriptor, style) {
           var tokenizer = new Tokenizer();
           var value = style !== null && typeof style !== "undefined" ? style.toString() : descriptor.initialValue;
           tokenizer.write(value);
@@ -22042,9 +22042,9 @@
     }
     function newChunk(remaining, currentCursor) {
       const firstChar = remaining.charAt(0);
-      return parse6(Object.assign({ "": firstChar }, root4[firstChar]), remaining.slice(1), currentCursor, currentCursor + 1);
+      return parse7(Object.assign({ "": firstChar }, root4[firstChar]), remaining.slice(1), currentCursor, currentCursor + 1);
     }
-    function parse6(tree, remaining, lastCursor, currentCursor) {
+    function parse7(tree, remaining, lastCursor, currentCursor) {
       if (!remaining) {
         if (convertEnding || Object.keys(tree).length === 1) {
           return tree[""] ? [[lastCursor, currentCursor, tree[""]]] : [];
@@ -22058,7 +22058,7 @@
       if (subtree === void 0) {
         return [[lastCursor, currentCursor, tree[""]]].concat(newChunk(remaining, currentCursor));
       }
-      return parse6(subtree, remaining.slice(1), lastCursor, currentCursor + 1);
+      return parse7(subtree, remaining.slice(1), lastCursor, currentCursor + 1);
     }
     return newChunk(string, 0);
   }
@@ -62293,9 +62293,6 @@
     header_colour(page_avatar.image, settings.hue_from_track, page_avatar);
   }
 
-  // src/components/music/oracle.ts
-  var import_json53 = __toESM(require_dist2(), 1);
-
   // src/components/shared/flag.ts
   function flag(code, classname) {
     const url = `https://purecatamphetamine.github.io/country-flag-icons/3x2/${code}.svg`;
@@ -64139,7 +64136,7 @@
       log("artists list is not cached, fetching", "oracle");
       oracle_request("artists", true);
     } else {
-      Object.assign(oracle_artists, import_json53.default.parse(cached_artists));
+      parse5(oracle_artists, cached_artists, "artists");
       if (cached_artists_expire < current_time && !force) {
         oracle_request();
       } else if (force) {
@@ -64150,7 +64147,7 @@
       log("albums list is not cached, fetching", "oracle");
       oracle_request("albums", true);
     } else {
-      Object.assign(oracle_albums, import_json53.default.parse(cached_albums));
+      parse5(oracle_albums, cached_albums, "albums");
       if (cached_albums_expire < current_time && !force) {
         oracle_request();
       } else if (force) {
@@ -64161,7 +64158,7 @@
       log("tracks list is not cached, fetching", "oracle");
       oracle_request("tracks", true);
     } else {
-      Object.assign(oracle_tracks, import_json53.default.parse(cached_tracks));
+      parse5(oracle_tracks, cached_tracks, "tracks");
       if (cached_tracks_expire < current_time && !force) {
         oracle_request();
       } else if (force) {
@@ -64169,7 +64166,19 @@
       }
     }
   }
-  function oracle_request(type = "albums") {
+  function parse5(value, key, type) {
+    try {
+      Object.assign(value, parse_object(type, key));
+    } catch (e4) {
+      notify({
+        title: `Loading of oracle ${type} data failed`,
+        body: "Please report this as a bug",
+        type: "error",
+        persist: true
+      });
+    }
+  }
+  function oracle_request(type = "albums", send_notify = false) {
     let xhr = new XMLHttpRequest();
     let url = `https://katelyynn.github.io/oracle/${type}.json?${Math.random()}`;
     xhr.open("GET", url, true);
@@ -64185,12 +64194,19 @@
       let api_expire = /* @__PURE__ */ new Date();
       if (xhr.status == 200) {
         if (type == "artists") {
-          Object.assign(oracle_artists, JSON.parse(this.response));
+          parse5(oracle_artists, this.response, "artists");
         } else if (type == "albums") {
-          Object.assign(oracle_albums, JSON.parse(this.response));
+          parse5(oracle_albums, this.response, "albums");
         } else {
-          Object.assign(oracle_tracks, JSON.parse(this.response));
+          parse5(oracle_tracks, this.response, "tracks");
         }
+        if (send_notify)
+          status2({
+            title: tl2(trans.downloaded_value).replace(
+              "{v}",
+              `oracle ${tl2(trans[type])}`
+            )
+          });
         set_storage(`oracle_${type}`, this.response);
         api_expire.setHours(api_expire.getHours() + 4);
         log(`${type} list cached until ${api_expire}`, "oracle");
@@ -73667,7 +73683,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       log("artist list is not cached, fetching", "lotus");
       lotus_request("artist", true);
     } else {
-      parse5(artist_corrections, lotus_artist, "artist");
+      parse6(artist_corrections, lotus_artist, "artist");
       if (lotus_artist_expire < current_time && !force) {
         lotus_request();
       } else if (force) {
@@ -73678,7 +73694,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       log("album track list is not cached, fetching", "lotus");
       lotus_request("album_track", true);
     } else {
-      parse5(album_track_corrections, lotus_album_track, "album_track");
+      parse6(album_track_corrections, lotus_album_track, "album_track");
       if (lotus_album_track_expire < current_time && !force) {
         lotus_request("album_track");
       } else if (force) {
@@ -73689,7 +73705,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       log("combined artists list is not cached, fetching", "lotus");
       lotus_request("combined_artists", true);
     } else {
-      parse5(combined_artists, lotus_combined_artists, "combined_artists");
+      parse6(combined_artists, lotus_combined_artists, "combined_artists");
       if (lotus_combined_artists_expire < current_time && !force) {
         lotus_request("combined_artists");
       } else if (force) {
@@ -73697,7 +73713,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       }
     }
   }
-  function parse5(value, key, type) {
+  function parse6(value, key, type) {
     try {
       Object.assign(value, parse_object(type, key));
     } catch (e4) {
@@ -73727,11 +73743,11 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       let api_expire = /* @__PURE__ */ new Date();
       if (xhr.status == 200) {
         if (type == "artist") {
-          parse5(artist_corrections, this.response, "artist");
+          parse6(artist_corrections, this.response, "artist");
         } else if (type == "album_track") {
-          parse5(album_track_corrections, this.response, "album_track");
+          parse6(album_track_corrections, this.response, "album_track");
         } else {
-          parse5(combined_artists, this.response, "combined_artists");
+          parse6(combined_artists, this.response, "combined_artists");
         }
         if (send_notify)
           status2({
@@ -79937,14 +79953,14 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       fetch_notices();
       return;
     }
-    let parse6;
+    let parse7;
     try {
-      parse6 = JSON.parse(res);
+      parse7 = JSON.parse(res);
     } catch (e4) {
       fetch_notices();
       return;
     }
-    load_notices(parse6);
+    load_notices(parse7);
   }
   function fetch_notices() {
     fetch(`https://katelyynn.github.io/bleh/dynamic/notices.json?${Math.random()}`).then((res) => {
