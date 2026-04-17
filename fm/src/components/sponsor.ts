@@ -33,6 +33,13 @@ export function sponsors(force = false, func = null) {
         // we prefer to load the current cache before waiting for a new response
         Object.assign(sponsor_list, parse_object('sponsor_data', sponsor_data));
 
+        if (sponsor_list.badges) {
+            // old version
+            log('detected old sponsor data', 'sponsor');
+            sponsor_request(true, func);
+            return;
+        }
+
         if (auth.name && sponsor_list.version) {
             auth.sponsor = sponsor_list.users.hasOwnProperty(auth.name);
 

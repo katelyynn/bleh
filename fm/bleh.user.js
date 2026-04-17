@@ -33710,6 +33710,11 @@
       sponsor_request(true, func);
     } else {
       Object.assign(sponsor_list, parse_object("sponsor_data", sponsor_data));
+      if (sponsor_list.badges) {
+        log("detected old sponsor data", "sponsor");
+        sponsor_request(true, func);
+        return;
+      }
       if (auth.name && sponsor_list.version) {
         auth.sponsor = sponsor_list.users.hasOwnProperty(auth.name);
         if (sponsor_list.users[auth.name]?.badges) {
@@ -92924,7 +92929,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-02-25"
       }
     },
-    built_on: "2026-04-17T18:15:45.678Z"
+    built_on: "2026-04-17T18:28:59.895Z"
   };
 
   // node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
