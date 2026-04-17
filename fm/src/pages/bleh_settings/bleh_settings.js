@@ -577,6 +577,8 @@ export async function render_setting_page(page_id) {
 
         let corrections;
         let format_guest_features;
+        let show_guest_features;
+        let show_remaster_tags;
         let romanise_jp;
         let romanise_ko;
 
@@ -585,8 +587,36 @@ export async function render_setting_page(page_id) {
         let header_preview;
 
         function render_header_preview() {
-            render(header_preview, html`
+            const format = settings.format_guest_features;
+            const show_artist_tag = settings.show_guest_features;
 
+            render(header_preview, html`
+                <div class="page-header-info">
+                    <div class="title-container">
+                        <h1 class="header-new-title page-header-title" data-kate-processed="true">
+                            <div class="title">
+                                THE END${!format ? ' (feat. will.i.am & Jessica Pratt)' : ''}
+                            </div>
+                            ${format && show_artist_tag ? html.node`<div class="feat" data-tag-group="guests">feat. will.i.am & Jessica Pratt</div>` : ''}
+                        </h1>
+                    </div>
+                    <h2 class="page-header-artist artist-for-track">
+                        <span itemprop="byArtist" style="display: flex">
+                            <a class="header-new-crumb" itemprop="url" href="/music/+noredirect/A%24AP+Rocky">
+                                <span itemprop="name">A$AP Rocky</span>
+                            </a>
+                            ${format ? html.node`
+                            ,
+                            <a class="header-new-crumb" href="/music/+noredirect/will.i.am">
+                                will.i.am
+                            </a>,
+                            <a class="header-new-crumb" href="/music/+noredirect/Jessica+Pratt">
+                                Jessica Pratt
+                            </a>
+                            ` : ''}
+                        </span>
+                    </h2>
+                </div>
             `);
         }
 
@@ -700,69 +730,23 @@ export async function render_setting_page(page_id) {
             </section>
             <section class="bleh--panel">
                 <h4>${tl(trans.smart_music_titles)}</h4>
-                <div class="inner-preview pad flex" ref=${el => header_preview = el}>
-                    <section
-                        class="redesigned-header mockup redesigned-track-header no-top-margin"
-                    >
-                        <div class="avatar-side">
-                            <img
-                                src="https://lastfm.freetls.fastly.net/i/u/avatar170s/8bd696cbd4aa4d4eb6d35393232f55e4.jpg"
-                            />
-                        </div>
-                        <div class="info-side">
-                            <div class="sub-text">${tl(trans.track)}</div>
-                            <div class="title-container">
-                                <h1 class="bleh--name-with-features">
-                                    <div class="title">California Love</div>
-                                    <div
-                                        class="feat"
-                                        data-tag-type="ft."
-                                        data-tag-group="guests"
-                                    >
-                                        ft. Dr. Dre, Roger Troutman
-                                    </div>
-                                    <div
-                                        class="feat"
-                                        data-tag-type="- remix"
-                                        data-tag-group="mixes"
-                                    >
-                                        Remix
-                                    </div>
-                                </h1>
-                                <h1 class="bleh--name-without-features">
-                                    California Love (ft. Dr. Dre, Roger
-                                    Troutman) - Remix
-                                </h1>
-                            </div>
-                            <h2>
-                                <a class="header-new-crumb">2Pac</a
-                                ><span class="bleh--name-with-features"
-                                    >,
-                                </span>
-                                <a
-                                    class="header-new-crumb bleh--name-with-features"
-                                    >Dr. Dre</a
-                                ><span class="bleh--name-with-features"
-                                    >,
-                                </span>
-                                <a
-                                    class="header-new-crumb bleh--name-with-features"
-                                    >Roger Troutman</a
-                                >
-                            </h2>
-                        </div>
-                    </section>
-                </div>
+                <div class="inner-preview pad flex" ref=${el => header_preview = el} />
                 <div class="setting-group">
-                    ${(format_guest_features = setting({
-                id: 'format_guest_features',
-                func: () => {
-                    romanise_jp.compat();
-                    romanise_ko.compat();
-                }
-            }))}
-                    ${setting({ id: 'show_guest_features' })}
-                    ${setting({ id: 'show_remaster_tags' })}
+                    ${format_guest_features = setting({
+                        id: 'format_guest_features',
+                        func: () => {
+                            romanise_jp.compat();
+                            romanise_ko.compat();
+                            render_header_preview();
+
+                            show_guest_features.compat();
+                            show_remaster_tags.compat();
+                        }
+                    })}
+                    ${show_guest_features = setting({ id: 'show_guest_features', func: () => {
+                        render_header_preview();
+                    } })}
+                    ${show_remaster_tags = setting({ id: 'show_remaster_tags' })}
                 </div>
                 <div class="setting-group">
                     <div class="setting" data-type="options">
@@ -832,6 +816,8 @@ export async function render_setting_page(page_id) {
                 </section>
             ` : ''}
         `);
+
+        render_header_preview();
     } else if (page_id == 'performance') {
         register_skip_to([]);
 

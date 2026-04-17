@@ -334,64 +334,57 @@ function setup_music() {
     setTimeout(function () {
         page.structure.setup.setAttribute('data-animating', 'false');
 
+        let header_preview;
+
+        function render_header_preview() {
+            const format = settings.format_guest_features;
+            const show_artist_tag = settings.show_guest_features;
+
+            render(header_preview, html`
+                <div class="page-header-info">
+                    <div class="title-container">
+                        <h1 class="header-new-title page-header-title" data-kate-processed="true">
+                            <div class="title">
+                                THE END${!format ? ' (feat. will.i.am & Jessica Pratt)' : ''}
+                            </div>
+                            ${format && show_artist_tag ? html.node`<div class="feat" data-tag-group="guests">feat. will.i.am & Jessica Pratt</div>` : ''}
+                        </h1>
+                    </div>
+                    <h2 class="page-header-artist artist-for-track">
+                        <span itemprop="byArtist" style="display: flex">
+                            <a class="header-new-crumb" itemprop="url" href="/music/+noredirect/A%24AP+Rocky">
+                                <span itemprop="name">A$AP Rocky</span>
+                            </a>
+                            ${format ? html.node`
+                            ,
+                            <a class="header-new-crumb" href="/music/+noredirect/will.i.am">
+                                will.i.am
+                            </a>,
+                            <a class="header-new-crumb" href="/music/+noredirect/Jessica+Pratt">
+                                Jessica Pratt
+                            </a>
+                            ` : ''}
+                        </span>
+                    </h2>
+                </div>
+            `);
+        }
+
         render(page.structure.setup_content, html`
             <p>${tl(trans.music_explain)}</p>
             <div class="settings">
-                <div class="inner-preview pad flex">
-                    <section class="redesigned-header mockup redesigned-track-header no-top-margin">
-                        <div class="avatar-side">
-                            <img src="https://lastfm.freetls.fastly.net/i/u/avatar170s/8bd696cbd4aa4d4eb6d35393232f55e4.jpg">
-                        </div>
-                        <div class="info-side">
-                            <div class="sub-text">${tl(trans.track)}</div>
-                            <div class="title-container">
-                                <h1 class="bleh--name-with-features">
-                                    <div class="title">California Love</div>
-                                    <div
-                                        class="feat"
-                                        data-tag-type="ft."
-                                        data-tag-group="guests"
-                                    >
-                                        ft. Dr. Dre, Roger Troutman
-                                    </div>
-                                    <div
-                                        class="feat"
-                                        data-tag-type="- remix"
-                                        data-tag-group="mixes"
-                                    >
-                                        Remix
-                                    </div>
-                                </h1>
-                                <h1 class="bleh--name-without-features">
-                                    California Love (ft. Dr. Dre, Roger
-                                    Troutman) - Remix
-                                </h1>
-                            </div>
-                            <h2>
-                                <a class="header-new-crumb">2Pac</a
-                                ><span class="bleh--name-with-features"
-                                    >,
-                                </span>
-                                <a
-                                    class="header-new-crumb bleh--name-with-features"
-                                    >Dr. Dre</a
-                                ><span class="bleh--name-with-features"
-                                    >,
-                                </span>
-                                <a
-                                    class="header-new-crumb bleh--name-with-features"
-                                    >Roger Troutman</a
-                                >
-                            </h2>
-                        </div>
-                    </section>
-                </div>
+                <div class="inner-preview pad flex" ref=${el => header_preview = el} />
                 <div class="setting-group">
                     ${setting({ id: 'corrections' })}
-                    ${setting({ id: 'format_guest_features' })}
+                    ${setting({ id: 'format_guest_features', func: () => {
+                        render_header_preview();
+                    } })}
                 </div>
             </div>
         `);
+
+        render_header_preview();
+
         render(page.structure.setup_footer, html`
             <button class="see-more cancel left-icon" onclick=${() => setup_themes()}>
                 ${tl(trans.back)}

@@ -274,7 +274,8 @@ export let settings_store: Record<string, setting_instance> = {
             'title',
             'tag'
         ],
-        bubble: true
+        bubble: true,
+        incompatible: { format_guest_features: false }
     },
     track_layout: {
         default: 'column',
@@ -355,7 +356,8 @@ export let settings_store: Record<string, setting_instance> = {
         default: true,
         title: trans.show_remaster_tags,
         beta: true,
-        bubble: true
+        bubble: true,
+        incompatible: { format_guest_features: false }
     },
     corrections: {
         default: true,
