@@ -55286,6 +55286,7 @@
                 <div class="sep" />
                 ${setting({ id: "format_guest_features" })}
                 ${setting({ id: "show_guest_features" })}
+                ${setting({ id: "count_bar_right" })}
                 <div class="settings-footer">
                     <button type="submit" class="btn-primary save" onclick=${() => {
         tooltip.hide();
@@ -62565,6 +62566,7 @@
                                         <div class="setting-group blend">
                                             ${setting({ id: "format_guest_features" })}
                                             ${setting({ id: "show_guest_features" })}
+                                            ${setting({ id: "count_bar_right" })}
                                         </div>
                                     </div>
                                 `,
@@ -74653,6 +74655,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                 <div class="setting-group blend">
                     ${setting({ id: "format_guest_features" })}
                     ${setting({ id: "show_guest_features" })}
+                    ${setting({ id: "count_bar_right" })}
                 </div>
             </div>
         `,
@@ -74812,6 +74815,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                         <div class="setting-group blend">
                             ${setting({ id: "format_guest_features" })}
                             ${setting({ id: "show_guest_features" })}
+                            ${setting({ id: "count_bar_right" })}
                         </div>
                     </div>
                 `,

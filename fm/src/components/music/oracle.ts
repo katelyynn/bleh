@@ -287,6 +287,7 @@ export function oracle_process() {
                                         <div class="setting-group blend">
                                             ${setting({ id: 'format_guest_features' })}
                                             ${setting({ id: 'show_guest_features' })}
+                                            ${setting({ id: 'count_bar_right' })}
                                         </div>
                                     </div>
                                 `,
