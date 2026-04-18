@@ -63985,7 +63985,7 @@
       if (page.subpage != "overview") return;
       const area = data2.area;
       const area_code = data2.country;
-      const area_name = area.name;
+      const area_name = area?.name;
       const lifespan = data2["life-span"];
       const begin = data2["begin-area"];
       const end2 = data2["end-area"];
@@ -64009,6 +64009,7 @@
       console.info("labels", labels, data2.relations.filter((relation) => relation["target-type"] == "label"));
       render(metadata, html`
             <div class="metadata-column">
+                ${area ? html.node`
                 <div class="metadata-group">
                     <dt class="catalogue-metadata-heading">${tl2(trans.country)}</dt>
                     <dd class="catalogue-metadata-description has-flag">
@@ -64016,6 +64017,7 @@
                         ${area_name}
                     </dd>
                 </div>
+                ` : ""}
                 ${data2.type == "Person" ? html.node`
                 ${lifespan.begin ? html.node`
                 <div class="metadata-group ${begin_code || begin ? "has-secondary-info" : ""}">

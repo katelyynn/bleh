@@ -2182,7 +2182,7 @@ export function oracle_process() {
 
         const area = data.area;
         const area_code = data.country;
-        const area_name = area.name;
+        const area_name = area?.name;
 
         const lifespan = data['life-span'];
         const begin = data['begin-area'];
@@ -2219,6 +2219,7 @@ export function oracle_process() {
 
         render(metadata!, html`
             <div class="metadata-column">
+                ${area ? html.node`
                 <div class="metadata-group">
                     <dt class="catalogue-metadata-heading">${tl(trans.country)}</dt>
                     <dd class="catalogue-metadata-description has-flag">
@@ -2226,6 +2227,7 @@ export function oracle_process() {
                         ${area_name}
                     </dd>
                 </div>
+                ` : ''}
                 ${data.type == 'Person' ? html.node`
                 ${lifespan.begin ? html.node`
                 <div class="metadata-group ${begin_code || begin ? 'has-secondary-info' : ''}">
