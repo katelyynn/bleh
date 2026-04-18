@@ -6,13 +6,13 @@
 
 import {html, render} from 'lighterhtml';
 import {page} from '@/build/page';
-import {tl, trans} from '@/build/trans';
+import {tl, trans} from '@/build/trans.ts';
 
 export function bleh_radio() {
     let radios = page.structure.side.querySelectorAll('.stationlink');
     radios.forEach((radio) => {
         let type = radio.getAttribute('data-analytics-label');
-        radio.classList.add('radio-button');
+        radio.classList.add('btn', 'radio-button', 'side-action', 'icon-mask');
 
         let text = tl(trans[type]);
 
@@ -38,8 +38,9 @@ export function bleh_radio() {
 
         let promos = promo_v3.querySelectorAll('.listening-report-promo');
         let container = document.createElement('div');
-        container.classList.add('listening-report-promos');
+        container.classList.add('listening-report-promos', 'side-actions');
         promos.forEach((promo) => {
+            promo.classList.add('btn', 'side-action', 'icon-mask');
             container.appendChild(promo);
         });
         promo_v3.appendChild(container);
@@ -47,11 +48,13 @@ export function bleh_radio() {
         if (radios.length == 0) return;
 
         let sep = document.createElement('div');
-        sep.classList.add('sep');
+        sep.classList.add('sep', 'listen-sep');
         promo_v3.appendChild(sep);
 
         let list = page.structure.side.querySelector('.stationlink-list');
-        page.structure.side.removeChild(list.parentElement);
+        list.classList.add('side-actions');
+
+        list.parentElement.remove();
         promo_v3.appendChild(list);
     } else {
         let header = page.structure.side.querySelector('.stationlinks-header');

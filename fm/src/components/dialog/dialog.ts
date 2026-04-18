@@ -7,7 +7,7 @@
 import { html, render } from 'lighterhtml';
 import { log } from '@/build/log';
 import { dialogs, page } from '@/build/page';
-import { tl, trans } from '@/build/trans';
+import { tl, trans } from '@/build/trans.ts';
 
 export function load_dialogs() {
     const dialogs = html.node`
@@ -83,8 +83,7 @@ export function dialog({
         <div
         class=${[
             'bleh-modal',
-            colourful ? 'colorful' : '',
-            colourful_bg ? 'colourful-bg' : ''
+            colourful ? 'colorful' : ''
         ].join(' ')}
         role="dialog"
         data-modal-id=${id}

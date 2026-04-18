@@ -1,0 +1,129 @@
+@import './taste.css';
+
+@import './reports.css';
+
+@import './font.css';
+
+@import './glacier/main.css';
+
+@import './featured_item.css';
+@import './status_cafe.css';
+
+@import './obsession.css';
+@import './playlist/create.css';
+@import './note.css';
+/* @import './badged.css'; */
+
+@import './summary.css';
+
+.header-title-secondary {
+    margin-top: unset !important;
+    font-size: var(--font-size) !important;
+    line-height: var(--line-height) !important;
+
+    display: flex;
+    gap: var(--item-list-gap);
+    align-items: center;
+}
+
+.sub-text-label {
+    display: flex;
+    align-items: center;
+    color: oklch(var(--c2) / 80%);
+    --mask-colour: currentColor;
+
+    .sub-text-label-sr {
+        display: none;
+    }
+}
+
+.sub-text-pair {
+    display: flex;
+    align-items: center;
+    gap: var(--icon-gap);
+    margin: unset;
+
+    &.sub-text-follow {
+        font-weight: var(--font-weight-medium);
+    }
+}
+
+.profile-name {
+    text-decoration: none !important;
+    cursor: default !important;
+}
+
+.about-me-sidebar {
+    display: block;
+    z-index: 10;
+    position: relative;
+
+    & > .sep {
+        margin-top: var(--card-gap);
+    }
+}
+.about-me-title {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--icon-gap);
+}
+.about-me-preview {
+    flex: unset !important;
+}
+
+.profile-items {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin: 6px 0;
+}
+.profile-item {
+    display: flex;
+    gap: var(--icon-gap);
+    text-align: left;
+
+    & > .bleh-icon {
+        --icon-colour: color-mix(
+            in oklch,
+            oklch(var(--c2)),
+            oklch(var(--c3)) 50%
+        );
+    }
+}
+.profile-item-text {
+    margin: unset !important;
+
+    &:not(.subtle) {
+        flex: 1;
+        min-width: 130px;
+    }
+}
+
+.tab-container {
+    width: 100% !important;
+    justify-content: center;
+    height: fit-content;
+
+    & > li {
+        font: inherit;
+        flex: unset;
+    }
+}
+.tab-container .selector {
+    display: none;
+}
+
+.header-avatar-add {
+    width: 100%;
+    padding: unset;
+    border-radius: unset;
+    --mask: var(--icon-16-plus);
+
+    & > .header-avatar-add-label {
+        display: none;
+    }
+}
+
+.share-chart {
+    display: none;
+}

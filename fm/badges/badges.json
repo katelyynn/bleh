@@ -1,5 +1,5 @@
 {
-    "latest": "2026.0406",
+    "latest": "2026.0416",
     "sponsors": [
         "clairedoll", "kateshapedbox", "evangelicgirl",
         "astrablooms", "ItsProyal", "vwvwvwvwvwvwv", "Orofil",
@@ -16,7 +16,8 @@
         "milkdrinker3000", "wiichicken", "duskwitch", "rgoracz",
         "thomasb2k", "ThatJumpyFrog", "nite_", "mitsurin",
         "vamti", "lxjv", "f-ff", "monikapurpl3",
-        "ahntaea", "monikapurpl3", "drainpuppy"
+        "ahntaea", "monikapurpl3", "drainpuppy",
+        "DIVANA4EVER"
     ],
     "sponsors_one_time": [
         "kateshapedbox",
@@ -29,7 +30,8 @@
         "kar1x", "nojonsko", "v4nnen",
         "Angel0Lust", "tainaronian", "wiichicken",
         "rgoracz", "nite_", "vamti", "f-ff",
-        "monikapurpl3", "ahntaea", "monikapurpl3", "drainpuppy"
+        "monikapurpl3", "ahntaea", "monikapurpl3", "drainpuppy",
+        "DIVANA4EVER"
     ],
     "sponsor_count_remove": 3,
     "sponsor_account": "kateshapedbox",
@@ -559,6 +561,11 @@
             }
         ],
         "drainpuppy": [
+            {
+                "type": "sponsor"
+            }
+        ],
+        "DIVANA4EVER": [
             {
                 "type": "sponsor"
             }

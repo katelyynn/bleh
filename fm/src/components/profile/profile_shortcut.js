@@ -7,7 +7,7 @@
 import { html } from 'lighterhtml';
 import { settings } from '@/build/config';
 import { auth, page, root } from '@/build/page';
-import { tl, trans } from '@/build/trans';
+import { tl, trans } from '@/build/trans.ts';
 import { dialog, dialog_rm } from '@/components/dialog/dialog';
 import { notify } from '@/components/dialog/notify';
 import { save_setting, setting } from '@/components/settings/settings';
@@ -42,8 +42,8 @@ export function other_listener(id) {
         body: html.node`
         <div class="setting standalone" data-type="text">
             <div class="avatar-container">
-                <div class="avatar-inner avatar--bleh-missing">
-                    <img>
+                <div class="avatar-inner">
+                    <img class="missing-avatar">
                 </div>
             </div>
             <div class="input-container content-form">
@@ -85,7 +85,7 @@ export function set_profile_as_shortcut() {
                 ${{ html: tl(trans.profile_shortcut.notice).replace('{u}', `<a class="mention" href="${root}user/${settings.profile_shortcut}" target="_blank">@${settings.profile_shortcut}</a>`) }}
             </div>
             <div class="modal-footer">
-                <button class="see-more cancel" onclick=${() => dialog_rm({ id: 'profile_shortcut' })}>
+                <button class="see-more cancel left-icon" onclick=${() => dialog_rm({ id: 'profile_shortcut' })}>
                     ${tl(trans.back)}
                 </button>
                 <div class="fill"></div>

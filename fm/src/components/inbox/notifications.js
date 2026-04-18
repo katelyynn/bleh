@@ -4,12 +4,13 @@
 // Licensed under GPLv3
 //
 
-import { auth, root } from '@/build/page.js';
+import { auth, root } from '@/build/page';
 import { desanitise } from '@/build/tools';
 import { correct_artist, correct_item_by_artist } from '@/components/music/lotus';
 import { html, render } from 'lighterhtml';
-import { tl, trans } from '@/build/trans';
+import { tl, trans } from '@/build/trans.ts';
 import { patch_avatar } from '@/components/shared/avatar';
+import { icon, icons } from '../shared/icon';
 
 export function bleh_notification_list(list, mini = false) {
     list.classList = 'notification-list';
@@ -70,7 +71,7 @@ export function bleh_notification_list(list, mini = false) {
 
             patch_avatar(avatar, involved[0]);
         } else if (href.endsWith('/listening-report/month')) {
-            type = 'listening-report';
+            type = 'listening_report';
             involved.push(strongs[0].textContent);
 
             let img = avatar.querySelector('img');
@@ -168,11 +169,7 @@ export function bleh_notification_list(list, mini = false) {
             notification,
             html`
                 <div class="notification-avatar">${avatar}</div>
-                <div
-                    class="bleh-icon"
-                    data-type=${type}
-                    style="--icon: var(--mask)"
-                />
+                ${icon({ name: icons[type] })}
                 <div class="notification-content">
                     <div class="notification-title">
                         ${type == 'shoutbox' ?
@@ -188,7 +185,7 @@ export function bleh_notification_list(list, mini = false) {
                     }
                     `
                         : type == 'obsession' ? tl(trans.obsession_expired)
-                        : type == 'listening-report' ?
+                        : type == 'listening_report' ?
                             tl(trans.listening_report_available).replace(
                                 '{m}',
                                 involved[0]
@@ -196,10 +193,7 @@ export function bleh_notification_list(list, mini = false) {
                         :   ''}
                     </div>
                     <div class="notification-context">
-                        <span
-                            class="bleh-icon"
-                            style="--icon: var(--icon-16-indent)"
-                        />
+                        ${icon({ name: icons.indent })}
                         <span
                             class="notification-type"
                             data-type=${context.type}

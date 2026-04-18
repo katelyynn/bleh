@@ -7,22 +7,24 @@
 import { register_activity } from '@/components/shared/activity';
 import { log } from '@/build/log';
 import { auth, discord, page, root } from '@/build/page';
-import { tl, trans } from '@/build/trans';
-import { request_changelog } from '@/components/news.js';
+import { tl, trans } from '@/build/trans.ts';
+import { request_changelog } from '@/components/news';
 import { notify } from '@/components/dialog/notify';
 import { checkup_page_structure } from '@/components/page/structure';
 import { update_colour_swatches } from '../config';
 import { version } from '@/main';
 import { register_background, update_page } from '@/page';
-import { display_colour_presets, theme_bubbles } from '@/pages/bleh_settings/bleh_settings';
+import { theme_bubbles } from '@/pages/bleh_settings/bleh_settings';
 import { html, render } from 'lighterhtml';
 import { setting } from '@/components/settings/settings';
 import { ff } from '@/components/settings/sku';
 import { sponsor } from '@/components/sponsor';
-import { settings } from '@/build/config.js';
+import { settings } from '@/build/config';
 import { dialog } from '@/components/dialog/dialog';
 import { match } from '@/components/settings/dynamic_theming';
 import { set_storage } from '@/build/tools';
+import { display_colour_presets } from '@/components/settings/swatch';
+import { avatar } from '@/components/shared/avatar';
 
 export function bleh_setup() {
     page.structure.container = document.body.querySelector('.page-content');
@@ -38,12 +40,12 @@ export function bleh_setup() {
 
     checkup_page_structure(false, content_top);
 
-    if (auth.avatar)
-        register_background(auth.avatar.replace('/avatar42s/', '/ar0/'));
-    else register_background(null);
-
     page.type = 'bleh_setup';
     page.subpage = '';
+
+    if (auth.avatar)
+        register_background(avatar(auth.avatar, 'ar0'));
+    else register_background(null);
 
     log('status is', 'page', 'info', page);
 
@@ -55,8 +57,7 @@ export function bleh_setup() {
     page.structure.row.removeChild(page.structure.row.firstElementChild);
     page.structure.row.removeChild(page.structure.row.firstElementChild);
 
-    page.structure.container.removeAttribute('data-beret');
-    page.structure.container.removeAttribute('data-short');
+    page.structure.container.classList.add('has-cards-view');
     page.structure.content.classList.add('cards-view');
 
     let masthead = document.body.querySelector('.masthead');
@@ -65,11 +66,11 @@ export function bleh_setup() {
     render(
         page.structure.main,
         html`
-            <section class="setup" ref=${(el) => (page.structure.setup = el)}>
+            <section class="setup sour" ref=${(el) => (page.structure.setup = el)}>
                 ${auth.name ?
                     html.node`
             <div class="avatar">
-                <img src=${auth.avatar.replace('/avatar42s/', '/avatar170s/')} alt=${tl(trans.your_avatar)}>
+                <img src=${avatar(auth.avatar, 'avatar170s')} alt=${tl(trans.your_avatar)}>
             </div>
             <div class="info">
                 <h1>${tl(trans.bleh_setup)}</h1>
@@ -115,11 +116,11 @@ function bleh_setup_start() {
         `);
         render(page.structure.setup_footer, html`
             ${auth.name ? html.node`
-            <a class="see-more cancel" href="${root}user/${auth.name}">
+            <a class="see-more cancel left-icon" href="${root}user/${auth.name}">
                 ${tl(trans.skip)}
             </a>
             ` : html.node`
-            <a class="see-more cancel" href="${root}dashboard">
+            <a class="see-more cancel left-icon" href="${root}dashboard">
                 ${tl(trans.skip)}
             </a>
             `}
@@ -276,7 +277,7 @@ function setup_themes() {
             `
         );
         render(page.structure.setup_footer, html`
-            <button class="see-more cancel" onclick=${() => setup_accessibility()}>
+            <button class="see-more cancel left-icon" onclick=${() => setup_accessibility()}>
                 ${tl(trans.back)}
             </button>
             <div class="fill"></div>
@@ -316,7 +317,7 @@ function setup_accessibility() {
             `
         );
         render(page.structure.setup_footer, html`
-            <button class="see-more cancel" onclick=${() => setup()}>
+            <button class="see-more cancel left-icon" onclick=${() => bleh_setup_start()}>
                 ${tl(trans.back)}
             </button>
             <div class="fill"></div>
@@ -333,66 +334,59 @@ function setup_music() {
     setTimeout(function () {
         page.structure.setup.setAttribute('data-animating', 'false');
 
+        let header_preview;
+
+        function render_header_preview() {
+            const format = settings.format_guest_features;
+            const show_artist_tag = settings.show_guest_features;
+
+            render(header_preview, html`
+                <div class="page-header-info">
+                    <div class="title-container">
+                        <h1 class="header-new-title page-header-title" data-kate-processed="true">
+                            <div class="title">
+                                THE END${!format ? ' (feat. will.i.am & Jessica Pratt)' : ''}
+                            </div>
+                            ${format && show_artist_tag ? html.node`<div class="feat" data-tag-group="guests">feat. will.i.am & Jessica Pratt</div>` : ''}
+                        </h1>
+                    </div>
+                    <h2 class="page-header-artist artist-for-track">
+                        <span itemprop="byArtist" style="display: flex">
+                            <a class="header-new-crumb" itemprop="url" href="/music/+noredirect/A%24AP+Rocky">
+                                <span itemprop="name">A$AP Rocky</span>
+                            </a>
+                            ${format ? html.node`
+                            ,
+                            <a class="header-new-crumb" href="/music/+noredirect/will.i.am">
+                                will.i.am
+                            </a>,
+                            <a class="header-new-crumb" href="/music/+noredirect/Jessica+Pratt">
+                                Jessica Pratt
+                            </a>
+                            ` : ''}
+                        </span>
+                    </h2>
+                </div>
+            `);
+        }
+
         render(page.structure.setup_content, html`
             <p>${tl(trans.music_explain)}</p>
             <div class="settings">
-                <div class="inner-preview pad flex">
-                    <section class="redesigned-header mockup redesigned-track-header no-top-margin">
-                        <div class="avatar-side">
-                            <img src="https://lastfm.freetls.fastly.net/i/u/avatar170s/8bd696cbd4aa4d4eb6d35393232f55e4.jpg">
-                        </div>
-                        <div class="info-side">
-                            <div class="sub-text">${tl(trans.track)}</div>
-                            <div class="title-container">
-                                <h1 class="bleh--name-with-features">
-                                    <div class="title">California Love</div>
-                                    <div
-                                        class="feat"
-                                        data-bleh--tag-type="ft."
-                                        data-bleh--tag-group="guests"
-                                    >
-                                        ft. Dr. Dre, Roger Troutman
-                                    </div>
-                                    <div
-                                        class="feat"
-                                        data-bleh--tag-type="- remix"
-                                        data-bleh--tag-group="mixes"
-                                    >
-                                        Remix
-                                    </div>
-                                </h1>
-                                <h1 class="bleh--name-without-features">
-                                    California Love (ft. Dr. Dre, Roger
-                                    Troutman) - Remix
-                                </h1>
-                            </div>
-                            <h2>
-                                <a class="header-new-crumb">2Pac</a
-                                ><span class="bleh--name-with-features"
-                                    >,
-                                </span>
-                                <a
-                                    class="header-new-crumb bleh--name-with-features"
-                                    >Dr. Dre</a
-                                ><span class="bleh--name-with-features"
-                                    >,
-                                </span>
-                                <a
-                                    class="header-new-crumb bleh--name-with-features"
-                                    >Roger Troutman</a
-                                >
-                            </h2>
-                        </div>
-                    </section>
-                </div>
+                <div class="inner-preview pad flex" ref=${el => header_preview = el} />
                 <div class="setting-group">
                     ${setting({ id: 'corrections' })}
-                    ${setting({ id: 'format_guest_features' })}
+                    ${setting({ id: 'format_guest_features', func: () => {
+                        render_header_preview();
+                    } })}
                 </div>
             </div>
         `);
+
+        render_header_preview();
+
         render(page.structure.setup_footer, html`
-            <button class="see-more cancel" onclick=${() => setup_themes()}>
+            <button class="see-more cancel left-icon" onclick=${() => setup_themes()}>
                 ${tl(trans.back)}
             </button>
             <div class="fill"></div>
@@ -425,6 +419,7 @@ function setup_layout() {
                             class="chartlist-row chartlist-row--with-artist chartlist-row--now-scrobbling"
                             data-has-bar="false"
                             data-show-album-text=${settings.expand_tracks != 'never' && settings.track_layout == 'column'}
+                            data-album-name-location=${settings.track_album_name_location}
                         >
                             <td class="chartlist-image">
                                 <a class="cover-art">
@@ -432,16 +427,16 @@ function setup_layout() {
                                 </a>
                             </td>
                             <td class="kate-placeholder" />
-                            <td class="track-info" data-has-bar="false">
+                            <td class="track-info" data-has-bar="false" data-track-layout=${settings.track_layout} data-album-name-location=${settings.track_album_name_location}>
                                 <span class="chartlist-name">
-                                    <a>Track name</a>
+                                    <a>${tl(trans.track_name)}</a>
                                 </span>
                                 <span class="chartlist-artist">
-                                    <a>Artist name</a>
+                                    <a>${tl(trans.artist_name)}</a>
                                 </span>
                                 ${settings.expand_tracks != 'never' && settings.track_layout == 'column' ? html.node`
                                     <span class="chartlist-album custom-album-text">
-                                        <a>Album name</a>
+                                        <a>${tl(trans.album_name)}</a>
                                     </span>
                                 ` : ''}
                             </td>
@@ -450,6 +445,7 @@ function setup_layout() {
                             class="chartlist-row chartlist-row--with-artist"
                             data-has-bar="false"
                             data-show-album-text=${settings.expand_tracks == 'always' && settings.expand_tracks != 'never' && settings.track_layout == 'column'}
+                            data-album-name-location=${settings.track_album_name_location}
                         >
                             <td class="chartlist-image">
                                 <a class="cover-art">
@@ -457,16 +453,16 @@ function setup_layout() {
                                 </a>
                             </td>
                             <td class="kate-placeholder" />
-                            <td class="track-info" data-has-bar="false">
+                            <td class="track-info" data-has-bar="false" data-track-layout=${settings.track_layout} data-album-name-location=${settings.track_album_name_location}>
                                 <span class="chartlist-name">
-                                    <a>Track name</a>
+                                    <a>${tl(trans.track_name)}</a>
                                 </span>
                                 <span class="chartlist-artist">
-                                    <a>Artist name</a>
+                                    <a>${tl(trans.artist_name)}</a>
                                 </span>
-                                ${settings.expand_tracks == 'always' && settings.expand_tracks != 'never' &&settings.track_layout == 'column' ? html.node`
+                                ${settings.expand_tracks == 'always' && settings.expand_tracks != 'never' && settings.track_layout == 'column' ? html.node`
                                     <span class="chartlist-album custom-album-text">
-                                        <a>Album name</a>
+                                        <a>${tl(trans.album_name)}</a>
                                     </span>
                                 ` : ''}
                             </td>
@@ -496,13 +492,16 @@ function setup_layout() {
                         }
                     }))}
                     ${(track_album_name_location = setting({
-                        id: 'track_album_name_location'
+                        id: 'track_album_name_location',
+                        func: () => {
+                            render_track_preview();
+                        }
                     }))}
                 </div>
             </div>
         `);
         render(page.structure.setup_footer, html`
-            <button class="see-more cancel" onclick=${() => setup_music()}>
+            <button class="see-more cancel left-icon" onclick=${() => setup_music()}>
                 ${tl(trans.back)}
             </button>
             <div class="fill"></div>
@@ -546,7 +545,7 @@ function setup_end() {
 
         if (auth.name) {
             render(page.structure.setup_footer, html`
-                <button class="see-more cancel" onclick=${() => setup_layout()}>
+                <button class="see-more cancel left-icon" onclick=${() => setup_layout()}>
                     ${tl(trans.back)}
                 </button>
                 <div class="fill"></div>
@@ -556,7 +555,7 @@ function setup_end() {
             `);
         } else {
             render(page.structure.setup_footer, html`
-                <button class="see-more cancel" onclick=${() => setup_layout()}>
+                <button class="see-more cancel left-icon" onclick=${() => setup_layout()}>
                     ${tl(trans.back)}
                 </button>
                 <div class="fill"></div>

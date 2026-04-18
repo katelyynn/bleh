@@ -1,0 +1,56 @@
+.profile-mobile-featured-track,
+.header-featured-track {
+    display: none !important;
+}
+
+.featured-item-panel {
+    background: unset !important;
+    border: unset !important;
+    padding: unset !important;
+    box-shadow: unset !important;
+    margin: 0 var(--card-padding) !important;
+
+    order: -10;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--card-gap);
+
+    .track-template {
+        display: flex;
+        gap: var(--item-list-gap);
+    }
+
+    .sub-text {
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 0;
+        margin: unset;
+    }
+
+    form {
+        display: flex;
+        justify-content: end;
+
+        .featured-item-manage {
+            color: oklch(var(--c3)) !important;
+            --mask-colour: currentColor !important;
+            text-transform: lowercase !important;
+
+            --mask: var(--icon-16-trash);
+
+            &:hover {
+                color: oklch(var(--l3-c)) !important;
+                --mask-colour: color-mix(
+                    in oklch,
+                    oklch(var(--l3-c)),
+                    oklch(var(--l4-c)) 30%
+                ) !important;
+
+                --hue-over: var(--hue-neg);
+                --sat-over: 1;
+                --lit-over: 1;
+            }
+        }
+    }
+}

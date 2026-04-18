@@ -1,0 +1,158 @@
+@import './compare.css';
+@import './collage.css';
+@import './pixel.css';
+
+.mini-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 12px;
+    background: oklch(var(--b6), 10%);
+    border-radius: var(--item-big-radius);
+    border: 1px solid transparent;
+    box-shadow: var(--group-shadow);
+
+    & + h2 {
+        margin-top: var(--card-gap) !important;
+    }
+
+    & > .mini {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        text-align: left;
+        position: relative;
+
+        --bg: transparent;
+        --bg-hov: oklch(var(--b4) / 20%);
+        --bg-atv: oklch(var(--b4) / 40%);
+        --shadow: none;
+        --padding: 12px;
+        margin: -12px !important;
+        border-radius: 0 !important;
+        transform: none !important;
+
+        &:first-child {
+            border-top-left-radius: var(--item-big-radius) !important;
+            border-top-right-radius: var(--item-big-radius) !important;
+        }
+
+        &:last-child {
+            border-bottom-left-radius: var(--item-big-radius) !important;
+            border-bottom-right-radius: var(--item-big-radius) !important;
+        }
+
+        & + .mini {
+            margin-top: calc(-12px + 1px + 12px) !important;
+
+            &:after {
+                content: "";
+                position: absolute;
+                left: 12px;
+                right: 12px;
+                top: -1px;
+                height: 1px;
+                background: var(--card-border-base);
+                display: block;
+            }
+        }
+
+        & > .mini-icon {
+            width: 34px;
+            height: 34px;
+            background: oklch(var(--h4) / 20%);
+            border-radius: 50px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: oklch(var(--l3-c));
+            --mask-colour: currentColor;
+
+            --icon: var(--mask);
+            --icon-size: 16px;
+        }
+
+        & > .mini-info {
+            flex: 1;
+
+            & > h5 {
+                color: oklch(var(--c2));
+            }
+
+            & > p {
+                color: oklch(var(--c3));
+                font-size: 13px;
+            }
+        }
+
+        &[data-mini="pixel"] {
+            & > .mini-icon {
+                --hue-over: 344;
+                --sat-over: 1.2;
+                --lit-over: 0.9;
+            }
+        }
+
+        &[data-mini="lyrics"] {
+            & > .mini-icon {
+                --hue-over: 120;
+                --sat-over: 1.05;
+                --lit-over: 1.025;
+            }
+        }
+
+        &[data-mini="rainbow"] {
+            & > .mini-icon {
+                --hue-over: 180;
+                --sat-over: 1.05;
+                --lit-over: 1.025;
+            }
+        }
+
+        &[data-mini="receipt"] {
+            & > .mini-icon {
+                --hue-over: 0;
+                --sat-over: 0;
+                --lit-over: 1.2;
+            }
+        }
+    }
+}
+
+.minis-header {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: var(--card-gap);
+
+    &.main {
+        flex-direction: column;
+        align-items: unset;
+    }
+
+    & > .previous {
+        color: oklch(var(--c3));
+        cursor: pointer;
+
+        transition-property: color;
+        transition-duration: var(--trans);
+        transition-timing-function: var(--trans-function);
+
+        &:hover {
+            color: oklch(var(--c1));
+            transition: none;
+        }
+    }
+
+    & > .mini-arrow {
+        --icon-size: 12px;
+    }
+}
+
+.minis-header-text {
+    margin: unset !important;
+}
+.minis-header-body {
+    cursor: default;
+}

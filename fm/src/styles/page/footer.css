@@ -1,0 +1,215 @@
+.footer {
+    background: transparent;
+    color: oklch(var(--c3));
+    padding: 120px 0 120px 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    width: calc(var(--content-width) - (var(--card-padding) * 2));
+    margin: 0 auto;
+
+    .footer-credit {
+        font-weight: var(--font-weight);
+        cursor: default;
+
+        display: flex;
+        align-items: center;
+        gap: var(--card-padding);
+
+        & > .footer-credit-text {
+            margin: unset;
+
+            .b {
+                font-weight: var(--font-weight-medium);
+            }
+        }
+
+        .bleh-icon {
+            display: inline-flex;
+
+            &.heart {
+                --icon: var(--icon-16-heart-solid);
+                --icon-size: 14px;
+                color: oklch(var(--l3-c));
+                vertical-align: middle;
+                margin: 0 2px;
+
+                transition-property: scale;
+                transition-duration: 0.6s;
+                transition-timing-function: var(--trans-function);
+
+                cursor: pointer;
+
+                scale: 1;
+
+                translate: 0 -1px;
+
+                &:hover {
+                    scale: 1.15;
+                }
+            }
+        }
+    }
+    .footer-web {
+        display: flex;
+        gap: 10px;
+        cursor: default;
+
+        .footer-link {
+            cursor: pointer;
+        }
+    }
+
+    .footer-bleh-top {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 4px var(--card-padding);
+    }
+
+    .bleh-logo-footer {
+        font-size: 32px;
+        line-height: 32px;
+        margin-top: -7px;
+        font-family: var(--font-brand);
+        font-weight: 900;
+        color: oklch(var(--c3)) !important;
+        text-decoration: none !important;
+    }
+
+    .footer-extras {
+        padding-top: 40px;
+
+        .container {
+            min-width: calc(
+                var(--cards-width) - (var(--card-padding) * 2)
+            ) !important;
+            max-width: calc(
+                var(--cards-width) - (var(--card-padding) * 2)
+            ) !important;
+            width: calc(
+                var(--cards-width) - (var(--card-padding) * 2)
+            ) !important;
+        }
+
+        .footer-heading {
+            display: none;
+        }
+
+        max-height: 230px;
+        overflow: hidden;
+
+        transition-property: max-height, margin-top;
+        transition-duration: var(--trans);
+        transition-timing-function: var(--trans-function);
+
+        &:not([aria-expanded]) {
+            max-height: 0;
+            margin-top: calc(-1 * (var(--card-gap) + 40px));
+            pointer-events: none;
+        }
+    }
+
+    .more {
+        .bleh-icon {
+            --icon: var(--icon-16-dots);
+            --icon-size: 15px;
+            vertical-align: middle;
+            display: inline-flex;
+        }
+    }
+}
+
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    li {
+        height: fit-content;
+    }
+}
+
+.footer .footer-top-row,
+.footer-bottom .row {
+    margin-left: unset;
+    margin-right: unset;
+    display: flex;
+}
+.footer-bottom .row .col-sm-10 {
+    width: max-content;
+}
+.footer-bottom .row .col-sm-2 {
+    width: 150px;
+}
+
+.footer-bottom,
+.footer-top {
+    margin: unset !important;
+    border: unset !important;
+    padding: unset !important;
+
+    &:before, &:after {
+        display: none !important;
+    }
+}
+.footer-bottom {
+    margin-top: var(--card-gap) !important;
+}
+
+.footer-top-row {
+    justify-content: space-between;
+}
+.footer-links {
+    margin: unset;
+}
+.footer .footer-top-col {
+    padding: unset;
+    width: fit-content;
+}
+
+.footer-bottom .row {
+    display: flex !important;
+}
+.footer-bottom .col-xs-12 {
+    padding: unset;
+}
+.footer-bottom .col-sm-10 {
+    flex: 1;
+}
+
+.footer-legal-item,
+.footer-heading,
+.logo p {
+    cursor: default;
+}
+
+#ot-sdk-btn,
+.footer-links a,
+.footer-links button {
+    --bg: transparent !important;
+    --bg-hov: oklch(var(--b5), 60%) !important;
+    --bg-atv: oklch(var(--b5), 80%) !important;
+    --shadow: none !important;
+    --shadow-hov: none !important;
+}
+#ot-sdk-btn:not(:hover) {
+    opacity: 0;
+}
+
+.ot-sdk-show-settings {
+    @media (max-width: 980px) {
+        bottom: unset !important;
+        top: 10px;
+        --font-size: 0;
+    }
+}
+
+.footer .footer-legal {
+    color: oklch(var(--c3));
+    font-size: var(--font-size);
+    line-height: var(--line-height);
+    margin-top: var(--card-gap);
+}

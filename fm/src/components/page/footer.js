@@ -5,14 +5,15 @@
 //
 
 import { html, render } from 'lighterhtml';
-import { lang, lang_info, tl, trans } from '@/build/trans';
-import { sponsor_list } from '@/build/sponsor.js';
-import { root } from '@/build/page.js';
+import { lang, lang_info, tl, trans } from '@/build/trans.ts';
+import { sponsor_list } from '@/build/sponsor';
+import { root } from '@/build/page';
 import { sponsor } from '@/components/sponsor';
 import { version } from '@/main';
 
 export function bleh_footer() {
     let footer = document.body.querySelector('footer.footer');
+    if (!footer) return;
 
     let extras = html.node`
         <div class="footer-extras">
@@ -24,12 +25,11 @@ export function bleh_footer() {
     let kate = 'katelyn';
     let sponsoring = 0;
 
-    if (sponsor_list) {
-        if (sponsor_list.special)
-            kate = sponsor_list.special[0];
+    if (sponsor_list.version) {
+        if (sponsor_list.related.special.length > 0)
+            kate = sponsor_list.related.special[0];
 
-        if (sponsor_list.sponsors && sponsor_list.sponsor_count_remove)
-            sponsoring = sponsor_list.sponsors.length - sponsor_list.sponsor_count_remove;
+        sponsoring = Object.keys(sponsor_list.users).length - 2;
     }
 
     render(
@@ -42,7 +42,7 @@ export function bleh_footer() {
             </div>
             <div class="footer-bleh-top">
                 <div class="footer-credit">
-                    <p>
+                    <p class="footer-credit-text">
                         ${{
                             html: tl(trans.made_with_love, {
                                 u: `<a class="b" href="${root}user/${kate}">${kate}</a>`,
@@ -52,7 +52,7 @@ export function bleh_footer() {
                             })
                         }}
                     </p>
-                    <p>
+                    <p class="footer-credit-text">
                         <a onclick=${() => sponsor()}>${{ html: tl(trans.supported_by, { c: sponsoring, s: '<span class="b">', '/s': '</span>' }) }}</a>
                     </p>
                 </div>

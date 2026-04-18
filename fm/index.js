@@ -5,10 +5,13 @@
 //
 
 import esbuild from 'esbuild';
-import fs from 'fs';
-import build from './src/build/build.json' with { type: 'json' };
+import * as fs from 'fs';
 
-const banner = `// ==UserScript==
+const build = JSON.parse(fs.readFileSync('./src/build/build.json', 'utf-8'));
+build.built_on = new Date().toISOString();
+fs.writeFileSync('./src/build/build.json', JSON.stringify(build, null, 4));
+
+const js_banner = `// ==UserScript==
 // @name         ${build.brand}
 // @namespace    https://last.fm/
 // @version      ${build.build}
@@ -25,6 +28,26 @@ const banner = `// ==UserScript==
 // @connect      github.com
 // ==/UserScript==`;
 
+const css_banner = `/* ==UserStyle==
+@name           ${build.brand} (re:dev)
+@namespace      github.com/katelyynn/bleh
+@version        ${build.build}
+@license        GPL-3.0
+@author         ${build.author}
+==/UserStyle== */
+
+@-moz-document domain("www.last.fm") {`;
+
+const css_footer = `
+}`;
+
+function normalise_version(version) {
+    return version
+        .split('.')
+        .map((part) => String(parseInt(part, 10)))
+        .join('.');
+}
+
 (async () => {
     const userscript = {
         entryPoints: ['./src/main.js'],
@@ -33,11 +56,12 @@ const banner = `// ==UserScript==
         outfile: 'bleh.user.js',
         minify: false,
         banner: {
-            js: banner
+            js: js_banner
         },
         platform: 'browser',
         loader: {
-            '.css': 'text'
+            '.css': 'text',
+            '.svg': 'text'
         }
     };
 
@@ -48,20 +72,14 @@ const banner = `// ==UserScript==
         outfile: 'ext/bleh.js',
         minify: true,
         banner: {
-            js: banner
+            js: js_banner
         },
         platform: 'browser',
         loader: {
-            '.css': 'text'
+            '.css': 'text',
+            '.svg': 'text'
         }
     };
-
-    function normalise_version(version) {
-        return version
-            .split('.')
-            .map((part) => String(parseInt(part, 10)))
-            .join('.');
-    }
 
     const manifest = {
         manifest_version: 3,
@@ -85,9 +103,29 @@ const banner = `// ==UserScript==
     };
 
     if (process.argv[2] == 'dev') {
-        const context = await esbuild.context(userscript);
-        const serve = await context.serve();
-        await context.watch();
+        const js_context = await esbuild.context(userscript);
+        const css_context = await esbuild.context({
+            entryPoints: ['./src/styles/index.css'],
+            bundle: true,
+            outfile: 'bleh.user.css',
+            banner: {
+                css: css_banner
+            },
+            footer: {
+                css: css_footer
+            },
+            loader: {
+                '.css': 'css'
+            },
+            minify: true
+        });
+
+        const serve = await js_context.serve({
+            servedir: '.'
+        });
+
+        await js_context.watch();
+        await css_context.watch();
 
         console.log('serving on: ');
         for (const host of serve.hosts) {
@@ -95,6 +133,15 @@ const banner = `// ==UserScript==
         }
     } else {
         await esbuild.build(userscript);
+        await esbuild.build({
+            entryPoints: ['./src/styles/index.css'],
+            bundle: true,
+            minify: true,
+            outfile: 'bleh.css',
+            loader: {
+                '.css': 'css'
+            }
+        });
 
         await esbuild.build(extension);
         fs.mkdirSync('ext/', { recursive: true });

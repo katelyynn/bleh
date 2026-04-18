@@ -1,7 +1,7 @@
 {
     "brand": "bleh",
-    "build": "2026.0212",
-    "sku": "kurumi",
+    "build": "2026.0417",
+    "sku": "kaguya",
     "bio": "bleh!!! ^-^",
     "author": "katelyn",
     "url": "https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js",
@@ -135,7 +135,7 @@
         "developer": {
             "default": false,
             "name": "Developer mode",
-            "date": "2025-01-03",
+            "date": "2099-12-01",
             "notice": "Enable developer-specific features used for debugging purposes"
         },
         "api": {
@@ -336,8 +336,8 @@
             "date": "2025-10-08"
         },
         "credits": {
-            "default": false,
-            "name": "Present album and track credits via oracle",
+            "default": true,
+            "name": "Present track credits via oracle",
             "date": "2025-10-14"
         },
         "verified": {
@@ -384,6 +384,17 @@
             "default": false,
             "name": "When 'Join the conversation' is replaced, use the full shoutbox instead of a preview",
             "date": "2026-02-12"
+        },
+        "developer_setting_names": {
+            "default": false,
+            "name": "Show internal setting ids",
+            "date": "2099-11-31"
+        },
+        "music_notes": {
+            "default": false,
+            "name": "Display and write notes for music",
+            "date": "2026-02-25"
         }
-    }
+    },
+    "built_on": "2026-04-17T18:28:59.895Z"
 }

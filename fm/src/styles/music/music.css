@@ -1,0 +1,83 @@
+@import './grid.css';
+@import './track.css';
+
+@import './lotus.css';
+@import './smart_music.css';
+
+@import './listens.css';
+
+@import './video.css';
+
+@import './header.css';
+
+@import './gallery.css';
+
+@import './playlink.css';
+@import './tags.css';
+
+@import './about_artist.css';
+@import './lyrics.css';
+
+@import './chart.css';
+
+@import './similar_artists.css';
+
+@import './summary.css';
+
+.section-with-control > .buffer-standard,
+.grid-items-section > .buffer-standard,
+.grid-items,
+.chartlist {
+    margin-top: 0 !important;
+
+    margin-left: unset !important;
+    margin-right: unset !important;
+}
+
+.music-like {
+    display: flex;
+    flex-direction: column;
+    gap: var(--card-padding);
+
+    & > section {
+        margin: unset;
+        position: relative;
+
+        &:first-child {
+            padding-top: calc(var(--card-padding) + 1px);
+
+            &:before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 1px;
+                display: block;
+                background: var(--separator);
+            }
+        }
+    }
+}
+
+.album-and-lyrics-row {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: var(--card-gap);
+    margin-top: var(--card-gap);
+
+    &:before,
+    &:after {
+        display: none;
+    }
+
+    & > section {
+        width: unset;
+    }
+
+    @media (max-width: 980px) {
+        & > .secondary-album-column {
+            display: none;
+        }
+    }
+}

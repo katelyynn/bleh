@@ -4,7 +4,7 @@
 // Licensed under GPLv3
 //
 
-import { auth, page, root } from '@/build/page.js';
+import { auth, page, root } from '@/build/page';
 
 export function bleh_labs() {
     if (page.subpage != 'overview') return;

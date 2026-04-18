@@ -7,7 +7,7 @@
 import { update_page } from '@/page';
 import { auth, page, root } from '@/build/page';
 import { html, render } from 'lighterhtml';
-import { tl, trans } from '@/build/trans';
+import { tl, trans } from '@/build/trans.ts';
 import { collage } from '@/components/minis/collage';
 import { compare } from '@/components/minis/compare';
 import { pixel } from '@/components/minis/pixel';
@@ -120,8 +120,8 @@ export function bleh_minis(skip = false) {
         html`
             <section class="minis">
                 <div class="minis-header main">
-                    <h2>${tl(trans.minis)}</h2>
-                    <p>${tl(trans.minis_description)}</p>
+                    <h2 class="minis-header-text">${tl(trans.minis)}</h2>
+                    <p class="minis-header-body">${tl(trans.minis_description)}</p>
                 </div>
                 <div class="mini-list">
                     ${Object.entries(valid_minis).map(([id, mini]) => {
@@ -171,12 +171,12 @@ export function bleh_minis(skip = false) {
 function return_to_minis(mini = '') {
     return html.node`
         <div class="minis-header">
-            <h2 class="previous" onclick=${() => {
+            <h2 class="minis-header-text previous" onclick=${() => {
                 window.history.replaceState(null, '', `${root}bleh/minis`);
                 bleh_minis(true);
             }}>${tl(trans.minis)}</h2>
             <div class="bleh-icon mini-arrow" style="--icon: var(--mask)" data-type="arrow-right" />
-            <h2>${mini ? valid_minis[mini].name : tl(trans.error)}</h2>
+            <h2 class="minis-header-text">${mini ? valid_minis[mini].name : tl(trans.error)}</h2>
         </div>
     `;
 }

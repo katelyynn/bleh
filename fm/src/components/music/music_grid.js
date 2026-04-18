@@ -11,19 +11,21 @@ import {
     clamp_sat,
     copy,
     int_from_string,
+    lazy,
     rgb_to_hsl,
     romanise
 } from '@/build/tools';
-import { lang, tl, trans } from '@/build/trans';
+import { lang, tl, trans } from '@/build/trans.ts';
 import { bleh_glacier_insights } from '@/pages/profile/glacier';
 import { parse_scrobbles_as_rank } from '@/components/music/colourful_counts';
-import { correct_artist, correct_item_by_artist, name_includes } from '@/components/music/lotus';
+import { correct_artist, correct_item_by_artist, name_includes, smart_title } from '@/components/music/lotus';
 import { html, render } from 'lighterhtml';
 import ColorThief from 'color-thief-browser';
 import { register_menu } from '@/components/menu';
 import tippy from 'tippy.js';
 import { expand_avatar } from '@/components/shared/avatar';
 import { save_hoshino_artwork } from '@/components/music/hoshino';
+import { header_colour } from '../page/colour';
 
 export function music_grids(search = page.structure.main, use_colour = true) {
     if (!search) return;
@@ -85,8 +87,9 @@ export function music_grids(search = page.structure.main, use_colour = true) {
             is_album = grid.querySelector('.grid-items-item-aux-block') != null;
         }
 
-        let image_wrap = grid.querySelector('.grid-items-cover-image-image');
-        let image = image_wrap.querySelector('img');
+        const cover = grid.querySelector('.grid-items-cover-image');
+        const image_wrap = cover.querySelector('.grid-items-cover-image-image');
+        const image = image_wrap.querySelector('img');
 
         if (grid.classList.contains('grid-items-item--big'))
             image.src = image.src.replace('/avatar300s/', '/500x500/');
@@ -96,36 +99,20 @@ export function music_grids(search = page.structure.main, use_colour = true) {
             !image_wrap.classList.contains('grid-items-cover-default') &&
             use_colour
         ) {
-            let grid_colour = document.createElement('div');
-            grid_colour.classList.add('grid-item-colour-bg');
+            const grid_colour = html.node`
+                <div class="grid-item-colour-bg" />
+            `;
             image_wrap.appendChild(grid_colour);
 
             image.setAttribute('crossorigin', 'anonymous');
-            try {
-                image.addEventListener('load', function () {
-                    let thief = new ColorThief();
-                    let colour = thief.getColor(image);
 
-                    let hsl = rgb_to_hsl(colour[0], colour[1], colour[2]);
+            lazy(grid, () => {
+                console.info('scrolled', grid, 'into view');
 
-                    grid_colour.style.setProperty(
-                        'background',
-                        `rgb(${colour})`
-                    );
-
-                    let hue = hsl.h;
-                    let sat = clamp_sat((hsl.s / 100) * 3);
-                    let lit = clamp_lit(sat, hsl.l / 100 + 0.35);
-
-                    grid.classList.add('grid-items-item-has-colour');
-                    grid.style.setProperty('--hue-over', hue);
-                    grid.style.setProperty('--sat-over', sat);
-                    grid.style.setProperty('--lit-over', lit);
-                });
-            } catch (e) {}
-
-            // TODO: add a timeout to check if the image has had its
-            // colour taken and if not do it manually after a set amount of time
+                header_colour(image, false, grid);
+                cover.classList.add('colourful');
+                grid.classList.add('grid-items-item-has-colour');
+            });
         } else {
             grid.classList.add('generic-cover');
         }
@@ -174,7 +161,7 @@ export function music_grids(search = page.structure.main, use_colour = true) {
             !grid.classList.contains('compare-item')
         ) {
             let plays = int_from_string(plays_elem.textContent.trim());
-            plays_elem.classList.add('grid-item-plays');
+            plays_elem.classList.add('grid-item-plays', 'icon-mask');
             if (is_album) {
                 plays_elem.textContent = plays.toLocaleString(lang);
             } else {
@@ -213,8 +200,13 @@ export function music_grids(search = page.structure.main, use_colour = true) {
                             .getAttribute('href')
                             .endsWith('?date_preset=null'))
                 ) {
-                    let parsed_scrobble_as_rank =
-                        parse_scrobbles_as_rank(plays);
+                    let parsed_scrobble_as_rank = parse_scrobbles_as_rank(plays);
+
+                    plays_elem.classList.add('colourful');
+
+                    if (parsed_scrobble_as_rank.contrast) {
+                        plays_elem.classList.add('plays-contrast');
+                    }
 
                     plays_elem.setAttribute(
                         'data-bleh--scrobble-milestone',
@@ -235,6 +227,12 @@ export function music_grids(search = page.structure.main, use_colour = true) {
                 }
             }
         }
+
+        const details = grid.querySelector('.grid-items-item-details');
+        const links = details.querySelectorAll('a');
+        links.forEach(link => {
+            link.classList.add('grid-item-text');
+        });
 
         let name = grid.querySelector('.grid-items-item-main-text a');
         if (!name) return;
@@ -278,17 +276,7 @@ export function music_grids(search = page.structure.main, use_colour = true) {
                 }
 
                 // combine
-                render(
-                    name_elem,
-                    html.node`
-                    <span class="title">${song_title}</span>
-                    ${song_tags.map(
-                        (tag) => html.node`
-                        <span class="feat" data-bleh--tag-type="${tag.type}" data-bleh--tag-group="${tag.group}">${romanise(tag.text)}</span>
-                    `
-                    )}
-                `
-                );
+                render(name_elem, smart_title(song_title, song_tags));
             } else {
                 artist.textContent = romanise(
                     correct_artist(artist.textContent.trim())

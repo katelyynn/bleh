@@ -1,0 +1,32 @@
+.music-summary {
+    order: -10;
+
+    --w: 30px !important;
+    --c: 3 !important;
+    --g: 4px !important;
+
+    @media (min-width: 1250px) {
+        .summary-sep {
+            height: unset !important;
+        }
+    }
+
+    margin-bottom: unset !important;
+}
+
+.summary-aside {
+    display: flex;
+    flex-direction: column;
+    gap: var(--card-gap);
+
+    flex-shrink: 0;
+}
+
+.summary-content {
+    flex: 1;
+}
+
+.subtle-like {
+    color: oklch(var(--c3));
+    cursor: default;
+}

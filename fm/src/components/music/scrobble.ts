@@ -5,8 +5,8 @@
 //
 
 import { html } from 'lighterhtml';
-import { random_list, root } from '@/build/page.js';
-import { tl, trans } from '@/build/trans';
+import { random_list, root } from '@/build/page';
+import { tl, trans } from '@/build/trans.ts';
 import { dialog, dialog_rm } from '@/components/dialog/dialog';
 import { input } from '@/components/settings/input';
 import { notify } from '@/components/dialog/notify';
@@ -30,7 +30,7 @@ export function submit_scrobble({
         can_api = localStorage.getItem('bleh_auth') && localStorage.getItem('bleh_auth_valid') === 'true';
 
     if (!can_api) {
-        window.location.href = `${root}bleh/general`;
+        window.location.href = `${root}bleh/general?setting=api`;
         return;
     }
 
@@ -85,13 +85,13 @@ export function submit_scrobble({
                         ${() => {
                             const btn = html.node`
                                 <button class="btn chibi icon subtle" data-type="switch" onclick=${() => {
-                                    const track_val = track.value();
-                                    const album_val = album.value();
+                                    const track_val = track.value;
+                                    const album_val = album.value;
 
                                     if (!track_val && !album_val) return;
 
-                                    track.value(album_val);
-                                    album.value(track_val);
+                                    track.value = album_val;
+                                    album.value = track_val;
                                 }}>
                                     ${tl(trans.switch)}
                                 </button>
@@ -125,13 +125,13 @@ export function submit_scrobble({
                         ${() => {
                             const btn = html.node`
                                 <button class="btn chibi icon subtle" data-type="switch" onclick=${() => {
-                                    const artist_val = artist.value();
-                                    const album_artist_val = album_artist.value();
+                                    const artist_val = artist.value;
+                                    const album_artist_val = album_artist.value;
 
                                     if (!artist_val && !album_artist_val) return;
 
-                                    artist.value(album_artist_val);
-                                    album_artist.value(artist_val);
+                                    artist.value = album_artist_val;
+                                    album_artist.value = artist_val;
                                 }}>
                                     ${tl(trans.switch)}
                                 </button>
@@ -165,14 +165,14 @@ export function submit_scrobble({
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="see-more cancel" onclick=${() => dialog_rm({ id: 'submit_scrobble' })}>
+                <button class="see-more cancel left-icon" onclick=${() => dialog_rm({ id: 'submit_scrobble' })}>
                     ${tl(trans.cancel)}
                 </button>
                 <div class="fill" />
                 <div class="button-group extra">
                     ${setting({ id: 'auto_close_scrobble_modal', standalone: true })}
                     <button class="btn primary icon" data-type="add" ref=${(el) => (create_scrobble = el)} onclick=${async () => {
-                        if (track.value() == '' || artist.value() == '') {
+                        if (track.value == '' || artist.value == '') {
                             notify({
                                 id: 'submit_scrobble',
                                 title: tl(trans.new_scrobble),
@@ -190,19 +190,19 @@ export function submit_scrobble({
                         date.disabled(true);
                         create_scrobble.disabled = true;
 
-                        if (album.value() != '' && album_artist.value() == '')
-                            album_artist.value(artist.value());
+                        if (album.value != '' && album_artist.value == '')
+                            album_artist.value = artist.value;
 
                         let params = {
                             sk: localStorage.getItem('bleh_auth'),
-                            artist: artist.value(),
-                            track: track.value(),
-                            timestamp: Math.floor(date.value() / 1000)
+                            artist: artist.value,
+                            track: track.value,
+                            timestamp: Math.floor(date.value / 1000)
                         };
 
-                        if (album.value() != '') params.album = album.value();
-                        if (album_artist.value() != '')
-                            params.albumArtist = album_artist.value();
+                        if (album.value != '') params.album = album.value;
+                        if (album_artist.value != '')
+                            params.albumArtist = album_artist.value;
 
                         const res = await fetch(
                             'https://jufufu.katelyn.moe/api/lastfm',

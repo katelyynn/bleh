@@ -1,0 +1,73 @@
+.status-cafe {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    cursor: pointer;
+
+    &:hover {
+        --hover-underline: underline oklch(var(--c3));
+    }
+
+    .status-cafe-top {
+        display: flex;
+        justify-content: end;
+        font-size: 13px;
+        color: oklch(var(--c3));
+
+        padding: 0 10px;
+
+        .status-cafe-author {
+            flex: 1;
+            flex-shrink: 1;
+        }
+
+        .status-cafe-time {
+            flex-shrink: 0;
+            text-decoration: var(--hover-underline, none);
+        }
+    }
+
+    .status-cafe-content {
+        background: linear-gradient(90deg, oklch(var(--f4) / 20%), transparent);
+        border-radius: 10px;
+        border-bottom-right-radius: unset;
+
+        padding: 6px 10px;
+
+        display: flex;
+        gap: 8px;
+
+        transition-property: background-color;
+        transition-duration: var(--trans);
+        transition-timing-function: var(--trans-function);
+
+        .status-cafe-emoji {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 13px;
+            --icon-size: 16px;
+            width: 16px;
+
+            .status-cafe-loading-spinner {
+                display: flex;
+                align-items: center;
+                --icon: var(--icon-16-spinner);
+                animation: spinner 1s linear infinite;
+            }
+
+            & > .bleh-icon {
+                --icon: var(--icon-16-x);
+            }
+        }
+
+        .status-cafe-text {
+            width: 250px;
+            text-align: left;
+        }
+
+        &.is-loading {
+            color: oklch(var(--c2) / 80%);
+        }
+    }
+}

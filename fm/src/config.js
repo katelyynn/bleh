@@ -6,19 +6,16 @@
 
 import {
     inbuilt_settings,
+    other_setting_types,
     settings,
-    settings_base,
-    settings_store,
-    settings_template
+    settings_store
 } from '@/build/config';
 import { log } from '@/build/log';
 import { page, reload_pending } from '@/build/page';
-import { stored_season } from '@/build/seasonal';
-import { tl, trans } from '@/build/trans';
+import { tl, trans } from '@/build/trans.ts';
 import { load_chart_colours } from '@/components/music/chart.js';
 import { notify } from '@/components/dialog/notify';
 import { load_skus } from '@/pages/bleh_settings/bleh_settings.js';
-import { bleh_glacier_date_graph_generate } from '@/pages/profile/glacier.js';
 import { compile_settings, save_setting } from '@/components/settings/settings';
 
 // load settings
@@ -73,6 +70,14 @@ export function load_settings(skip = false) {
         if (settings.noise == 0.5) settings.noise = settings_store.noise.default;
     }
 
+    if (settings.version < 2026.0220) {
+        if (settings.hue == 255 && settings.sat == 1 && settings.lit == 1) {
+            settings.hue = settings_store.hue.default;
+            settings.sat = settings_store.sat.default;
+            settings.lit = settings_store.lit.default;
+        }
+    }
+
     if (Number.isInteger(settings.list_view)) {
         if (settings.list_view == 0) {
             settings.list_view = 'list';
@@ -91,23 +96,32 @@ export function load_settings(skip = false) {
 
     // save setting into body
     for (let setting in settings) {
+        document.body.classList.toggle('increase-btn-contrast', settings.lit <= 0.3);
+
         if (
             (setting == 'hue' || setting == 'sat' || setting == 'lit') &&
             settings.hue == settings_store.hue.default &&
             settings.sat == settings_store.sat.default &&
             settings.lit == settings_store.lit.default
-        )
+        ) {
+            document.body.classList.remove('increase-btn-contrast');
             continue;
+        }
 
-        if (settings_store[setting] && settings_store[setting].css)
-            document.body.style.setProperty(
-                `--${settings_store[setting].css}`,
-                `${settings[setting]}${settings_store[setting].suffix || ''}`
-            );
-        document.documentElement.setAttribute(
-            `data-bleh--${setting}`,
-            `${settings[setting]}`
-        );
+        if (settings_store[setting]) {
+            const type = settings_store[setting].type || 'toggle';
+
+            if (settings_store[setting].css) {
+                document.body.style.setProperty(
+                    `--${settings_store[setting].css}`,
+                    `${settings[setting]}${settings_store[setting].suffix || ''}`
+                );
+            }
+
+            if (!other_setting_types.includes(type) && settings_store[setting].bubble) {
+                document.body.setAttribute(`data-bleh--${setting}`, settings[setting]);
+            }
+        }
     }
 
     load_skus();
@@ -117,7 +131,7 @@ export function load_settings(skip = false) {
 
     // override theme when browsing listening reports
     if (document.body.classList.contains('user-dashboard-layout')) {
-        document.documentElement.setAttribute('data-bleh--theme', 'oled');
+        document.body.setAttribute('data-bleh--theme', 'oled');
         page.state.settings_reload = true;
     }
 
@@ -128,244 +142,14 @@ export function load_settings(skip = false) {
 export function toggle_theme() {
     if (page.subpage.startsWith('listening-report')) return;
 
-    let current_theme = settings.theme;
+    const themes = ['light', 'ink', 'dark', 'darker', 'oled'];
+    const current = settings.theme;
 
-    if (current_theme == 'dark') current_theme = 'darker';
-    else if (current_theme == 'darker') current_theme = 'oled';
-    else if (current_theme == 'oled' || current_theme == 'classic')
-        current_theme = 'light';
-    else if (current_theme == 'light') current_theme = 'ink';
-    else if (current_theme == 'ink') current_theme = 'dark';
+    const next = themes[(themes.indexOf(current) + 1) % themes.length];
 
     // save value
     save_setting('theme_schedule', false);
-    save_setting('theme', current_theme);
-}
-
-// settings-page specific
-function reset_all() {
-    for (let item in settings_base) reset_item(item);
-}
-
-export function refresh_all(search = document) {
-    for (let item in settings_base)
-        update_item(item, settings[item], false, search);
-}
-
-function reset_item(item) {
-    update_item(item, settings_base[item].value);
-}
-
-export function update_params(params = {}) {
-    for (let item in params) {
-        update_item(item, params[item]);
-    }
-}
-
-unsafeWindow._reset_all = function () {
-    reset_all();
-};
-unsafeWindow._reset_item = function (item) {
-    reset_item(item);
-};
-unsafeWindow._update_params = function (params = {}) {
-    update_params(params);
-};
-unsafeWindow._update_item = function (item, value) {
-    update_item(item, value);
-};
-
-function update_item(item, value, modify = true, search = document) {
-    let container = search.querySelector(`#container-${item}`);
-
-    if (container) console.info(container);
-    else if (
-        settings_base[item].type != 'slider' &&
-        settings_base[item].type != 'options'
-    )
-        return;
-
-    try {
-        // is this a new value?
-        let new_value = false;
-        if (value != settings[item]) new_value = true;
-
-        if (
-            (settings_base[item].require_reload == true ||
-                (settings_base[item].require_reload == 'partial' &&
-                    page.type != 'bleh_settings')) &&
-            new_value
-        )
-            request_reload();
-
-        if (settings_base[item].type == 'slider' && modify)
-            settings[item] = value;
-
-        if (!modify) console.info(item, value, modify);
-
-        if (settings_base[item].type == 'slider') {
-            // text to show current slider value
-            try {
-                let slider = search.querySelector(`#slider-${item}`);
-
-                search.querySelector(`#value-${item}`).textContent =
-                    `${settings[item]}${settings_base[item].unit}`;
-                slider.value = settings[item];
-                search
-                    .querySelector(`#slider-track-${item}`)
-                    .style.setProperty(
-                        '--percent',
-                        `${(settings[item] / slider.getAttribute('max')) * 100}%`
-                    );
-            } catch (e) {}
-
-            // save setting into body
-            document.body.style.setProperty(
-                `--${settings_base[item].css}`,
-                `${value}${settings_base[item].unit}`
-            );
-            document.documentElement.setAttribute(
-                `data-bleh--${item}`,
-                `${value}`
-            );
-
-            if (item == 'hue' || item == 'sat' || item == 'lit') {
-                if (
-                    settings.hue == settings_base.hue.value &&
-                    settings.sat == settings_base.sat.value &&
-                    settings.lit == settings_base.lit.value &&
-                    settings.seasonal &&
-                    stored_season.id != 'none'
-                ) {
-                    document.body.style.removeProperty(
-                        `--${settings_base.hue.css}`
-                    );
-                    document.body.style.removeProperty(
-                        `--${settings_base.sat.css}`
-                    );
-                    document.body.style.removeProperty(
-                        `--${settings_base.lit.css}`
-                    );
-                    document.documentElement.setAttribute(
-                        'data-bleh--hsl-override',
-                        'true'
-                    );
-                } else {
-                    document.documentElement.setAttribute(
-                        'data-bleh--hsl-override',
-                        'false'
-                    );
-                }
-            }
-        } else if (settings_base[item].type == 'toggle') {
-            if (settings[item] == settings_base[item].values[0] && modify) {
-                settings[item] = settings_base[item].values[1];
-                search
-                    .querySelector(`#toggle-${item}`)
-                    .setAttribute('aria-checked', false);
-
-                // save setting into body
-                document.body.style.setProperty(
-                    `--${item}`,
-                    settings_base[item].values[1]
-                );
-                document.documentElement.setAttribute(
-                    `data-bleh--${item}`,
-                    `${settings_base[item].values[1]}`
-                );
-            } else if (modify) {
-                settings[item] = settings_base[item].values[0];
-                console.log(`toggle-${item}`);
-                search
-                    .querySelector(`#toggle-${item}`)
-                    .setAttribute('aria-checked', true);
-
-                // save setting into body
-                document.body.style.setProperty(
-                    `--${item}`,
-                    settings_base[item].values[0]
-                );
-                document.documentElement.setAttribute(
-                    `data-bleh--${item}`,
-                    `${settings_base[item].values[0]}`
-                );
-            } else {
-                // dont modify, just show
-                if (settings[item] == settings_base[item].values[0]) {
-                    search
-                        .querySelector(`#toggle-${item}`)
-                        .setAttribute('aria-checked', true);
-                } else {
-                    search
-                        .querySelector(`#toggle-${item}`)
-                        .setAttribute('aria-checked', false);
-                }
-            }
-        } else if (settings_base[item].type == 'options') {
-            if (modify) {
-                settings[item] = value;
-
-                // save setting into body
-                document.body.style.setProperty(`--${item}`, value);
-                document.documentElement.setAttribute(
-                    `data-bleh--${item}`,
-                    value
-                );
-
-                let toggle = document.getElementById(`toggle-${item}-${value}`);
-                if (toggle) toggle.setAttribute('aria-checked', true);
-
-                let other_toggles = search.querySelectorAll(
-                    `[data-toggle="${item}"]`
-                );
-                other_toggles.forEach((toggle) => {
-                    let other_value = toggle.getAttribute('data-toggle-value');
-                    if (other_value == value) return;
-                    else toggle.setAttribute('aria-checked', false);
-                });
-
-                // re-flow chart
-                if (
-                    (item == 'chart_view' || item == 'chart_bar_axis') &&
-                    page.type == 'user' &&
-                    page.subpage.startsWith('library')
-                )
-                    bleh_glacier_date_graph_generate();
-            } else {
-                // dont modify, just show
-                if (settings[item] == value) {
-                    document
-                        .getElementById(`toggle-${item}-${value}`)
-                        .setAttribute('aria-checked', true);
-                } else {
-                    document
-                        .getElementById(`toggle-${item}-${value}`)
-                        .setAttribute('aria-checked', false);
-                }
-            }
-        }
-
-        if (modify) log(`updated ${item} to ${settings[item]}`, 'settings');
-
-        // save to settings
-        compile_settings();
-    } catch (e) {}
-
-    if (container) {
-        if (settings[item] != settings_base[item].value)
-            container.classList.add('modified');
-        else container.classList.remove('modified');
-    }
-
-    /*if (item.startsWith('seasonal') && modify) {
-        page.structure.main.innerHTML = render_setting_page('customise');
-        refresh_all();
-    }*/
-
-    if (item == 'hue' || item == 'sat' || item == 'lit') {
-        update_colour_swatches();
-        load_chart_colours();
-    }
+    save_setting('theme', next);
 }
 
 export function request_reload() {
@@ -387,9 +171,6 @@ export function request_reload() {
         ]
     });
 }
-unsafeWindow._invoke_reload = function () {
-    invoke_reload();
-};
 export function invoke_reload() {
     window.location.reload();
 }
@@ -412,9 +193,9 @@ export function update_colour_swatches() {
         if (
             (h == settings.hue && s == settings.sat && l == settings.lit) ||
             (swatch.getAttribute('data-swatch-type') == 'default' &&
-                settings.hue == 255 &&
-                settings.sat == 1 &&
-                settings.lit == 1) // default
+                settings.hue == settings_store.hue.default &&
+                settings.sat == settings_store.sat.default &&
+                settings.lit == settings_store.lit.default)
         ) {
             parent.setAttribute('aria-checked', 'true');
 
@@ -480,7 +261,7 @@ export function update_inbuilt_item(
             element
                 .querySelector(`#toggle-${item}`)
                 .setAttribute('aria-checked', false);
-            document.documentElement.setAttribute(
+            document.body.setAttribute(
                 `data-bleh--inbuilt-${item}`,
                 inbuilt_settings[item].values[1]
             );
@@ -491,7 +272,7 @@ export function update_inbuilt_item(
             element
                 .querySelector(`#toggle-${item}`)
                 .setAttribute('aria-checked', true);
-            document.documentElement.setAttribute(
+            document.body.setAttribute(
                 `data-bleh--inbuilt-${item}`,
                 inbuilt_settings[item].values[0]
             );
@@ -513,7 +294,7 @@ export function update_inbuilt_item(
                 element
                     .querySelector(`#toggle-${item}`)
                     .setAttribute('aria-checked', true);
-                document.documentElement.setAttribute(
+                document.body.setAttribute(
                     `data-bleh--inbuilt-${item}`,
                     true
                 );
@@ -525,7 +306,7 @@ export function update_inbuilt_item(
                 element
                     .querySelector(`#toggle-${item}`)
                     .setAttribute('aria-checked', false);
-                document.documentElement.setAttribute(
+                document.body.setAttribute(
                     `data-bleh--inbuilt-${item}`,
                     false
                 );
