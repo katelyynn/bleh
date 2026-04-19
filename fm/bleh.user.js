@@ -36330,14 +36330,14 @@
             </div>
             ${type == "toggle" ? html.node`
             <div class="toggle-wrap">
-                <input type="checkbox" ref=${(el) => checkbox = el} id=${id} name=${name} checked=${value} />
+                <input type="checkbox" ref=${(el) => checkbox = el} id=${id} name=${name} />
                 <button class="btn toggle" ref=${(el) => state = el} aria-checked=${value} type="button">
                     <div class="dot" />
                 </button>
             </div>
             ` : html.node`
             <div class="check">
-                <input type="checkbox" ref=${(el) => checkbox = el} id=${id} name=${name} checked=${value} disabled=${disabled} />
+                <input type="checkbox" ref=${(el) => checkbox = el} id=${id} name=${name} disabled=${disabled} />
                 <div class="box" ref=${(el) => state = el} aria-checked=${value} disabled=${disabled}>
                     <div class="bleh-icon" />
                 </div>
@@ -36345,6 +36345,9 @@
             `}
         </div>
     `;
+    if (value) {
+      checkbox.checked = value;
+    }
     if (data2) {
       checkbox.setAttribute("value", data2);
     }
@@ -77150,7 +77153,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       body: tl2(trans.recent_listening.body),
       standalone: false,
       func: (val) => {
-        render(recent_listening_preview, render_recent_listening(val));
+        render(recent_listening_preview, render_track_preview(val, false, true, true));
       }
     })}
                 <div class="setting" data-type="select">
@@ -77160,6 +77163,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                     ${select({
       values: select_prepare(original_privacy_settings.receiving_msgs),
       initial: original_privacy_settings.receiving_msgs.value,
+      name: original_privacy_settings.receiving_msgs.name,
       in_settings: true
     })}
                 </div>

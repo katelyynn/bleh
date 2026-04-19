@@ -40,14 +40,14 @@ export function toggle({
             </div>
             ${type == 'toggle' ? html.node`
             <div class="toggle-wrap">
-                <input type="checkbox" ref=${(el) => (checkbox = el)} id=${id} name=${name} checked=${value} />
+                <input type="checkbox" ref=${(el) => (checkbox = el)} id=${id} name=${name} />
                 <button class="btn toggle" ref=${(el) => (state = el)} aria-checked=${value} type="button">
                     <div class="dot" />
                 </button>
             </div>
             ` : html.node`
             <div class="check">
-                <input type="checkbox" ref=${(el) => (checkbox = el)} id=${id} name=${name} checked=${value} disabled=${disabled} />
+                <input type="checkbox" ref=${(el) => (checkbox = el)} id=${id} name=${name} disabled=${disabled} />
                 <div class="box" ref=${(el) => (state = el)} aria-checked=${value} disabled=${disabled}>
                     <div class="bleh-icon" />
                 </div>
@@ -55,6 +55,10 @@ export function toggle({
             `}
         </div>
     `;
+
+    if (value) {
+        checkbox.checked = value;
+    }
 
     if (data) {
         checkbox.setAttribute('value', data);
