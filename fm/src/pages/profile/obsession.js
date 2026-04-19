@@ -389,7 +389,7 @@ export function obsession_list() {
     buttons.forEach((button) => {
         if (button.classList.contains('btn-sm')) {
             button.classList = [];
-            button.classList.add('obsession-btn');
+            button.setAttribute('data-type', 'obsession');
 
             tippy(button, {
                 content: button.textContent
@@ -402,7 +402,8 @@ export function obsession_list() {
             'btn',
             'view-item',
             'interact-item',
-            'obsession-top-item'
+            'obsession-top-item',
+            'icon'
         );
 
         button_header.appendChild(button);

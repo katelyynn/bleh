@@ -10860,6 +10860,10 @@ export const trans = {
         body: {
             en: 'Control the direction of the bar progress and text'
         }
+    },
+    recents: {
+        // recent scrobbles
+        en: 'Recents'
     }
 } as const satisfies Record<string, any>;
 

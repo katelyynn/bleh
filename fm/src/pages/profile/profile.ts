@@ -954,54 +954,54 @@ function profile_recents() {
     let link = panel.querySelector('[aria-controls="recent-tracks-settings"]');
     let tooltip;
 
-    let view_buttons = document.createElement('div');
-    view_buttons.classList.add('view-buttons', 'blend', 'blend-v2');
-
-    let header = document.createElement('div');
-    header.classList.add('top-container');
-
-    let header_text = panel.querySelector('h2');
-    header.appendChild(header_text);
-
+    let submit_btn;
+    let settings_btn;
     let refresh_btn;
-    if (ff('submit_scrobble') && page.name == auth.name) {
-        const can_api =
-            localStorage.getItem('bleh_auth') &&
-            localStorage.getItem('bleh_auth_valid') === 'true';
 
-        let submit_btn = html.node`
-            <button class="left-icon blend-v2-btn" data-type="add" onclick=${() =>
-                submit_scrobble({
-                    refresh_btn,
-                    can_api,
-                    func: () => {
-                        setTimeout(() => {
-                            refresh_tracks(refresh_btn, { quiet: true });
-                        }, 200);
-                    }
-                })}>
-                ${tl(trans.new)}
-            </button>
-        `;
-        view_buttons.appendChild(submit_btn);
+    const can_scrobble = ff('submit_scrobble') && page.name == auth.name;
 
-        if (!can_api) {
-            tippy(submit_btn, {
-                content: tl(trans.requires_api_in_settings)
-            });
-        }
+    const head = panel.querySelector(':scope > h2');
+    if (head) head.remove();
+
+    let can_api = localStorage.getItem('bleh_auth') && localStorage.getItem('bleh_auth_valid') === 'true';
+
+    panel.insertBefore(html.node`
+        <div class="top-container">
+            <h2>
+                ${tl(trans.recents)}
+            </h2>
+            <div class="view-buttons blend blend-v2">
+                ${can_scrobble ? html.node`
+                    <button class="left-icon blend-v2-btn" data-type="add" onclick=${() =>
+                        submit_scrobble({
+                            refresh_btn,
+                            can_api,
+                            func: () => {
+                                setTimeout(() => {
+                                    refresh_tracks(refresh_btn, { quiet: true });
+                                }, 200);
+                            }
+                        })}>
+                        ${tl(trans.new)}
+                    </button>
+                ` : ''}
+                <button class="left-icon blend-v2-btn" data-type="refresh" ref=${el => refresh_btn = el} onclick=${() => refresh_tracks(refresh_btn, {})}>
+                    ${tl(trans.refresh)}
+                </button>
+                ${form ? html.node`
+                <button class="left-icon blend-v2-btn" data-type="settings" ref=${(el) => (settings_btn = el)}>
+                    ${tl(trans.settings)}
+                </button>
+                ` : ''}
+            </div>
+        </div>
+    `, panel.firstElementChild);
+
+    if (!can_api) {
+        tippy(submit_btn, {
+            content: tl(trans.requires_api_in_settings)
+        });
     }
-
-    // refresh
-    refresh_btn = html.node`
-        <button class="left-icon blend-v2-btn" data-type="refresh" onclick=${() => refresh_tracks(refresh_btn, {})}>
-            ${tl(trans.refresh)}
-        </button>
-    `;
-    view_buttons.appendChild(refresh_btn);
-
-    header.appendChild(view_buttons);
-    panel.insertBefore(header, panel.firstElementChild);
 
     if (!form) return panel;
 
@@ -1011,12 +1011,6 @@ function profile_recents() {
             .getAttribute('value');
 
     let original_chart_settings = {};
-
-    let settings_btn = html.node`
-        <button class="left-icon blend-v2-btn" data-type="settings">
-            ${tl(trans.settings)}
-        </button>
-    `;
 
     let count = form.querySelector('[name="chart_length_recent_tracks"]');
     original_chart_settings = {
@@ -1081,8 +1075,6 @@ function profile_recents() {
             instance.hide();
         }
     });
-
-    view_buttons.appendChild(settings_btn);
 
     return panel;
 }
