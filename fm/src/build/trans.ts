@@ -29,7 +29,7 @@ export let lang_info = {
     es: {
         name: get_language_name('es'),
         by: ['soleilth'],
-        last_updated: '2026-02-01'
+        last_updated: '2026-04-18'
     },
     it: {
         name: get_language_name('it'),
@@ -1708,31 +1708,39 @@ export const trans = {
         name: {
             // this is followed by options which describe contexts the user
             // may want their colour to be changed
-            en: 'Change my accent colour for'
+            en: 'Change my accent colour for',
+            es: 'Cambiar mi color de acento al'
         },
         body: {
-            en: 'Temporarily override your selected accent to match artwork'
+            en: 'Temporarily override your selected accent to match artwork',
+            es: 'Reemplaza temporalmente tu color de acento seleccionado para coincidir con la portada'
+
         }
     },
     viewing_albums: {
         // a sub-option for change_my_colour_when
-        en: 'Viewing albums'
+        en: 'Viewing albums',
+        es: 'Ver álbumes'
     },
     viewing_tracks: {
         // a sub-option for change_my_colour_when
-        en: 'Viewing artists'
+        en: 'Viewing artists',
+        es: 'Ver artistas'
     },
     viewing_artists: {
         // a sub-option for change_my_colour_when
-        en: 'Viewing tracks'
+        en: 'Viewing tracks',
+        es: 'Ver temas'
     },
     colourful_active: {
         // a sub-option for change_my_colour_when
-        en: 'Scrobbling a track'
+        en: 'Scrobbling a track',
+        es: 'Hacer scrobbling a un tema'
     },
     colourful_all: {
         // a sub-option for change_my_colour_when
-        en: 'All tracklists'
+        en: 'All tracklists',
+        es: 'Ver listas de temas'
     },
     configure: {
         en: 'Configure',
@@ -3825,7 +3833,7 @@ export const trans = {
     sponsor_get_badge: {
         en: 'A monthly sponsorship grants you a custom badge of your choosing',
         de: 'Mit einem monatlichen Sponsoring erhältst du ein individuelles Abzeichen deiner Wahl',
-        es: 'Un patricinio mensual te otorga un emblema personalizado de tu elección',
+        es: 'Un patrocinio mensual te otorga un emblema personalizado de tu elección',
         it: 'Una sponsorizzazione mensile ti permette di ottenere un distintivo personalizzato a tua scelta',
         pt: 'Um apoio mensal lhe dá um emblema personalizado de sua escolha',
         sv: 'Med ett månatligt sponsorskap får du ett emblem du själv kan anpassa',
@@ -6091,30 +6099,38 @@ export const trans = {
     },
     font_choice: {
         name: {
-            en: 'Interface font'
+            en: 'Interface font',
+            es: 'Fuente de interfaz'
         },
         body: {
-            en: 'Choose the font that suits you best'
+            en: 'Choose the font that suits you best',
+            es: 'Elige la fuente que más te guste'
         },
         custom: {
-            en: 'Provide your own font'
+            en: 'Provide your own font',
+            es: 'Proporciona tu propia fuente'
         },
         stylised: {
-            en: 'Stylised'
+            en: 'Stylised',
+            es: 'Estilizada'
         },
         simple: {
-            en: 'Simple'
+            en: 'Simple',
+            es: 'Simple'
         },
         hyperlegible: {
-            en: 'Accessible'
+            en: 'Accessible',
+            es: 'Accesible'
         }
     },
     previewing: {
         // used as subtext for previewing a font
-        en: 'Previewing: {v}'
+        en: 'Previewing: {v}',
+        es: 'Vista previa: {v}'
     },
     no_font_selected: {
-        en: 'No font selected'
+        en: 'No font selected',
+        es: 'Ninguna fuente seleccionada'
     },
     font_style: {
         en: 'Font style',
@@ -6908,7 +6924,7 @@ export const trans = {
         body: {
             en: 'Translations are powered by community contributions from wonderful people like you',
             de: 'Übersetzungen werden durch Beiträge der Community von wunderbaren Menschen wie dir ermöglicht',
-            es: 'Las traducciones son posibles gracias a contribuiciones de la comunidad por gente maravillosa como tú',
+            es: 'Las traducciones son posibles gracias a contribuciones de la comunidad por gente maravillosa como tú',
             it: 'Le traduzioni sono basate sulle contribuzioni di persone fantastiche come te',
             pt: 'As traduções são feitas graças às contribuições da comunidade de pessoas incríveis como você',
             sv: 'Översättningar drivs av bidrag från underbara folk som du',
@@ -6927,7 +6943,8 @@ export const trans = {
     },
     prev: {
         // previous
-        en: 'Prev'
+        en: 'Prev',
+        es: 'Anterior'
     },
     next: {
         en: 'Next',
@@ -7489,7 +7506,8 @@ export const trans = {
         ru: 'Используйте колесо прокрутки для приближения и отдаления, нажмите и перетащите, чтобы переместить изображение.'
     },
     crop_before_uploading: {
-        en: 'Crop image before uploading'
+        en: 'Crop image before uploading',
+        es: 'Cortar imagen antes de subir'
     },
     update_to_version: {
         en: 'Update to {v}',
@@ -8429,7 +8447,8 @@ export const trans = {
         pt: 'Popular agora'
     },
     missing_artist_info: {
-        en: 'This artist is missing key details, maybe you can help out?'
+        en: 'This artist is missing key details, maybe you can help out?',
+        es: 'A este artista le faltan detalles clave, ¿quizás puedes ayudar?'
     },
     missing_album_info: {
         en: 'This album is missing key details, maybe you can help out?',
@@ -8817,7 +8836,8 @@ export const trans = {
         }
     },
     aspect_ratio_banner: {
-        en: 'Displayed at an aspect ratio of {v}, if screen size supports such'
+        en: 'Displayed at an aspect ratio of {v}, if screen size supports such',
+        es: 'Mostrado con una relación de aspecto de {v}, si el tamaño de la pantalla lo permite'
     },
     profile_accent: {
         name: {
@@ -10710,6 +10730,7 @@ export const trans = {
         // like switch places
         en: 'Switch',
         de: 'Tauschen',
+        es: 'Cambiar',
         pt: 'Trocar',
         ru: 'Поменять местами'
     },
@@ -10717,148 +10738,189 @@ export const trans = {
         // auto close dialog after action
         en: 'Auto close',
         de: 'automatisches Schließen',
+        es: 'Cerrar automáticamente',
         pt: 'Auto fechar',
         ru: 'Закрыть автоматически'
     },
     loading_conversations: {
         en: 'Loading conversations',
         de: 'Konversationen werden geladen',
+        es: 'Cargando conversaciones',
         pt: 'Carregando conversas',
         ru: 'Загружаем разговоры'
     },
     shoutbox_failed: {
         en: 'There was an error loading conversations “(ノ _ <,, )',
         de: 'Es gab einen Fehler beim Laden der Konversationen “(ノ _ <,, )',
+        es: 'Hubo un error al cargar las conversaciones “(ノ _ <,, )',
         pt: 'Ocorreu um erro carregando as conversas “(ノ _ <,, )',
         ru: 'Во время загрузки разговоров произошла ошибка “(ノ _ <,, )'
     },
     track_name: {
         en: 'Track name',
         de: 'Titel',
+        es: 'Nombre del tema',
         pt: 'Nome da faixa',
         ru: 'Название трека'
     },
     artist_name: {
         en: 'Artist name',
         de: 'Künstlername',
+        es: 'Nombre del artista',
         pt: 'Nome do artista',
         ru: 'Имя исполнителя'
     },
     album_name: {
-        en: 'Album name'
+        en: 'Album name',
+        es: 'Nombre del álbum'
     },
     search_for_settings: {
-        en: 'Search for settings'
+        en: 'Search for settings',
+        es: 'Buscar opciones'
     },
     found_value_results: {
-        en: 'Found {c} result(s)'
+        en: 'Found {c} result(s)',
+        es: '{c} resultados encontrados'
     },
     translated_from_value: {
-        en: 'Translated from {v}'
+        en: 'Translated from {v}',
+        es: 'Traducido de {v}'
     },
     follow_guidelines: {
-        en: 'Keep in mind the {a}community guidelines{/a}'
+        en: 'Keep in mind the {a}community guidelines{/a}',
+        es: 'Ten en cuenta los {a}lineamientos de la comunidad{/a}'
     },
     link_val: {
         // text 1, text 2
         // text colour
-        en: 'Text {v}'
+        en: 'Text {v}',
+        es: 'Texto {v}'
     },
     bg_val: {
         // fill 1, fill 2
         // the filling of a background colour
-        en: 'Fill {v}'
+        en: 'Fill {v}',
+        es: 'Relleno {v}'
     },
     styled_with_font: {
-        en: 'Styled with {f}.'
+        en: 'Styled with {f}.',
+        es: 'Escrito con {f}'
     },
     change_font: {
-        en: 'Change font'
+        en: 'Change font',
+        es: 'Cambiar fuente'
     },
     and_count_more: {
-        en: 'and {c} more'
+        en: 'and {c} more',
+        es: 'y {c} más'
     },
     scrobbling_now: {
-        en: 'Scrobbling now'
+        en: 'Scrobbling now',
+        es: 'Haciendo scrobbling ahora'
     },
     recent_scrobble: {
-        en: 'Recently scrobbled'
+        en: 'Recently scrobbled',
+        es: 'Scrobbling reciente'
     },
     no_tracks_found_mb: {
-        en: 'No tracks found, possibly a MusicBrainz error'
+        en: 'No tracks found, possibly a MusicBrainz error',
+        es: 'Ningún tema encontrado, posiblemente un error de MusicBrainz'
     },
     value_scrobbles_recently: {
-        en: '{v} scrobbles recently'
+        en: '{v} scrobbles recently',
+        es: '{v} scrobblings recientes'
     },
     on_tour: {
-        en: 'On tour'
+        en: 'On tour',
+        es: 'De gira'
     },
     length: {
-        en: 'Length'
+        en: 'Length',
+        es: 'Duración'
     },
     released: {
-        en: 'Released'
+        en: 'Released',
+        es: 'Lanzado'
     },
     value_tracks_time: {
-        en: '{count} tracks, {length}'
+        en: '{count} tracks, {length}',
+        es: '{count} temas, {length}'
     },
     oracle_vocal: {
-        en: 'Performed by'
+        en: 'Performed by',
+        es: 'Interpretado por'
     },
     oracle_recording: {
-        en: 'Recorded by'
+        en: 'Recorded by',
+        es: 'Grabado por'
     },
     oracle_mix: {
-        en: 'Produced by'
+        en: 'Produced by',
+        es: 'Producido por'
     },
     oracle_engineer: {
-        en: 'Engineered by'
+        en: 'Engineered by',
+        es: 'Diseñado por'
     },
     oracle_editor: {
-        en: 'Edited by'
+        en: 'Edited by',
+        es: 'Editado por'
     },
     oracle_writer: {
-        en: 'Written by'
+        en: 'Written by',
+        es: 'Escrito por'
     },
     oracle_no_credits: {
-        en: 'nothing here... (๑/////๑ " )'
+        en: 'nothing here... (๑/////๑ " )',
+        es: 'Nada aquí... (๑/////๑ " )'
     },
     born: {
-        en: 'Born'
+        en: 'Born',
+        es: 'Nació'
     },
     died: {
-        en: 'Died'
+        en: 'Died',
+        es: 'Murió'
     },
     formed: {
         // like a group, created
-        en: 'Formed'
+        en: 'Formed',
+        es: 'Formado'
     },
     ended: {
-        en: 'Ended'
+        en: 'Ended',
+        es: 'Terminado'
     },
     show_disc_image: {
         name: {
-            en: 'Show accompanying disc for albums and tracks'
+            en: 'Show accompanying disc for albums and tracks',
+            es: 'Mostrar disco adjunto en álbumes y temas'
         },
         body: {
-            en: 'Add small visual flair to music pages'
+            en: 'Add small visual flair to music pages',
+            es: 'Añade un pequeño efecto visual a las páginas de música'
         }
     },
     move_up: {
-        en: 'Move up'
+        en: 'Move up',
+        es: 'Mover arriba'
     },
     move_down: {
-        en: 'Move down'
+        en: 'Move down',
+        es: 'Mover abajo'
     },
     other_user: {
-        en: 'Other user'
+        en: 'Other user',
+        es: 'Otro usuario'
     },
     count_bar_right: {
         name: {
-            en: 'Align count to right-side'
+            en: 'Align count to right-side',
+            es: 'Alinear cuenta al lado derecho'
         },
         body: {
-            en: 'Control the direction of the bar progress and text'
+            en: 'Control the direction of the bar progress and text',
+            es: 'Controla la dirección del texto y progreso de la barra'
         }
     },
     recents: {
