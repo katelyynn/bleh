@@ -122,20 +122,20 @@
 
         &[data-type="error"] {
             --hue-over: var(--hue-neg);
-            --sat-over: 1;
-            --lit-over: 1;
+            --sat-over: var(--sat-neg);
+            --lit-over: var(--lit-neg);
         }
 
         &[data-type="warning"] {
-            --hue-over: 20;
-            --sat-over: 1;
-            --lit-over: 1;
+            --hue-over: var(--hue-orange);
+            --sat-over: var(--sat-orange);
+            --lit-over: var(--lit-orange);
         }
 
         &[data-type="success"] {
             --hue-over: var(--hue-pos);
-            --sat-over: 1;
-            --lit-over: 1;
+            --sat-over: var(--sat-pos);
+            --lit-over: var(--lit-pos);
         }
 
         &.colourful {
