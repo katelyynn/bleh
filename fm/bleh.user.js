@@ -79358,6 +79358,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       if (!modal_dialog) return;
       modal_dialog.setAttribute("data-dialog-extender", "true");
       let body = modal_dialog.querySelector(".modal-body");
+      if (!body) return;
       let title = body.querySelector(".modal-title");
       let contents = body.querySelector(":scope > div");
       let form = contents.querySelector("form");

@@ -27,6 +27,8 @@ export function dialog_extender() {
         modal_dialog.setAttribute('data-dialog-extender', 'true');
 
         let body = modal_dialog.querySelector('.modal-body');
+        if (!body) return;
+
         let title = body.querySelector('.modal-title');
 
         let contents = body.querySelector(':scope > div');
