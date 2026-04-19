@@ -61251,7 +61251,7 @@
           }
         },
         y: {
-          display: false,
+          display: true,
           grid: {
             display: false
           },
