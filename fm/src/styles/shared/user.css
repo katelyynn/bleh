@@ -36,6 +36,11 @@
         --lit-over: 0.825;
     }
 }
+
+.user-list-item-mobile-ad {
+    display: none !important;
+}
+
 .user-list-item {
     width: var(--user-list-item-width, 100%);
     padding: var(--user-list-item-padding, 0 var(--item-list-gap));
