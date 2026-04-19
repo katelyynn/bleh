@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    https://last.fm/
-// @version      2026.0418
+// @version      2026.0419
 // @description  bleh!!! ^-^
 // @author       katelyn
 // @match        https://www.last.fm/*
@@ -80664,7 +80664,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     es: {
       name: get_language_name("es"),
       by: ["soleilth"],
-      last_updated: "2026-02-01"
+      last_updated: "2026-04-18"
     },
     it: {
       name: get_language_name("it"),
@@ -82358,31 +82358,38 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       name: {
         // this is followed by options which describe contexts the user
         // may want their colour to be changed
-        en: "Change my accent colour for"
+        en: "Change my accent colour for",
+        es: "Cambiar mi color de acento al"
       },
       body: {
-        en: "Temporarily override your selected accent to match artwork"
+        en: "Temporarily override your selected accent to match artwork",
+        es: "Reemplaza temporalmente tu color de acento seleccionado para coincidir con la portada"
       }
     },
     viewing_albums: {
       // a sub-option for change_my_colour_when
-      en: "Viewing albums"
+      en: "Viewing albums",
+      es: "Ver \xE1lbumes"
     },
     viewing_tracks: {
       // a sub-option for change_my_colour_when
-      en: "Viewing artists"
+      en: "Viewing artists",
+      es: "Ver artistas"
     },
     viewing_artists: {
       // a sub-option for change_my_colour_when
-      en: "Viewing tracks"
+      en: "Viewing tracks",
+      es: "Ver temas"
     },
     colourful_active: {
       // a sub-option for change_my_colour_when
-      en: "Scrobbling a track"
+      en: "Scrobbling a track",
+      es: "Hacer scrobbling a un tema"
     },
     colourful_all: {
       // a sub-option for change_my_colour_when
-      en: "All tracklists"
+      en: "All tracklists",
+      es: "Ver listas de temas"
     },
     configure: {
       en: "Configure",
@@ -84479,7 +84486,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     sponsor_get_badge: {
       en: "A monthly sponsorship grants you a custom badge of your choosing",
       de: "Mit einem monatlichen Sponsoring erh\xE4ltst du ein individuelles Abzeichen deiner Wahl",
-      es: "Un patricinio mensual te otorga un emblema personalizado de tu elecci\xF3n",
+      es: "Un patrocinio mensual te otorga un emblema personalizado de tu elecci\xF3n",
       it: "Una sponsorizzazione mensile ti permette di ottenere un distintivo personalizzato a tua scelta",
       pt: "Um apoio mensal lhe d\xE1 um emblema personalizado de sua escolha",
       sv: "Med ett m\xE5natligt sponsorskap f\xE5r du ett emblem du sj\xE4lv kan anpassa",
@@ -86748,30 +86755,38 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     },
     font_choice: {
       name: {
-        en: "Interface font"
+        en: "Interface font",
+        es: "Fuente de interfaz"
       },
       body: {
-        en: "Choose the font that suits you best"
+        en: "Choose the font that suits you best",
+        es: "Elige la fuente que m\xE1s te guste"
       },
       custom: {
-        en: "Provide your own font"
+        en: "Provide your own font",
+        es: "Proporciona tu propia fuente"
       },
       stylised: {
-        en: "Stylised"
+        en: "Stylised",
+        es: "Estilizada"
       },
       simple: {
-        en: "Simple"
+        en: "Simple",
+        es: "Simple"
       },
       hyperlegible: {
-        en: "Accessible"
+        en: "Accessible",
+        es: "Accesible"
       }
     },
     previewing: {
       // used as subtext for previewing a font
-      en: "Previewing: {v}"
+      en: "Previewing: {v}",
+      es: "Vista previa: {v}"
     },
     no_font_selected: {
-      en: "No font selected"
+      en: "No font selected",
+      es: "Ninguna fuente seleccionada"
     },
     font_style: {
       en: "Font style",
@@ -87566,7 +87581,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       body: {
         en: "Translations are powered by community contributions from wonderful people like you",
         de: "\xDCbersetzungen werden durch Beitr\xE4ge der Community von wunderbaren Menschen wie dir erm\xF6glicht",
-        es: "Las traducciones son posibles gracias a contribuiciones de la comunidad por gente maravillosa como t\xFA",
+        es: "Las traducciones son posibles gracias a contribuciones de la comunidad por gente maravillosa como t\xFA",
         it: "Le traduzioni sono basate sulle contribuzioni di persone fantastiche come te",
         pt: "As tradu\xE7\xF5es s\xE3o feitas gra\xE7as \xE0s contribui\xE7\xF5es da comunidade de pessoas incr\xEDveis como voc\xEA",
         sv: "\xD6vers\xE4ttningar drivs av bidrag fr\xE5n underbara folk som du",
@@ -87585,7 +87600,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     },
     prev: {
       // previous
-      en: "Prev"
+      en: "Prev",
+      es: "Anterior"
     },
     next: {
       en: "Next",
@@ -88147,7 +88163,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       ru: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0439\u0442\u0435 \u043A\u043E\u043B\u0435\u0441\u043E \u043F\u0440\u043E\u043A\u0440\u0443\u0442\u043A\u0438 \u0434\u043B\u044F \u043F\u0440\u0438\u0431\u043B\u0438\u0436\u0435\u043D\u0438\u044F \u0438 \u043E\u0442\u0434\u0430\u043B\u0435\u043D\u0438\u044F, \u043D\u0430\u0436\u043C\u0438\u0442\u0435 \u0438 \u043F\u0435\u0440\u0435\u0442\u0430\u0449\u0438\u0442\u0435, \u0447\u0442\u043E\u0431\u044B \u043F\u0435\u0440\u0435\u043C\u0435\u0441\u0442\u0438\u0442\u044C \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435."
     },
     crop_before_uploading: {
-      en: "Crop image before uploading"
+      en: "Crop image before uploading",
+      es: "Cortar imagen antes de subir"
     },
     update_to_version: {
       en: "Update to {v}",
@@ -89088,7 +89105,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       pt: "Popular agora"
     },
     missing_artist_info: {
-      en: "This artist is missing key details, maybe you can help out?"
+      en: "This artist is missing key details, maybe you can help out?",
+      es: "A este artista le faltan detalles clave, \xBFquiz\xE1s puedes ayudar?"
     },
     missing_album_info: {
       en: "This album is missing key details, maybe you can help out?",
@@ -89476,7 +89494,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       }
     },
     aspect_ratio_banner: {
-      en: "Displayed at an aspect ratio of {v}, if screen size supports such"
+      en: "Displayed at an aspect ratio of {v}, if screen size supports such",
+      es: "Mostrado con una relaci\xF3n de aspecto de {v}, si el tama\xF1o de la pantalla lo permite"
     },
     profile_accent: {
       name: {
@@ -91381,6 +91400,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       // like switch places
       en: "Switch",
       de: "Tauschen",
+      es: "Cambiar",
       pt: "Trocar",
       ru: "\u041F\u043E\u043C\u0435\u043D\u044F\u0442\u044C \u043C\u0435\u0441\u0442\u0430\u043C\u0438"
     },
@@ -91388,148 +91408,189 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       // auto close dialog after action
       en: "Auto close",
       de: "automatisches Schlie\xDFen",
+      es: "Cerrar autom\xE1ticamente",
       pt: "Auto fechar",
       ru: "\u0417\u0430\u043A\u0440\u044B\u0442\u044C \u0430\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u0435\u0441\u043A\u0438"
     },
     loading_conversations: {
       en: "Loading conversations",
       de: "Konversationen werden geladen",
+      es: "Cargando conversaciones",
       pt: "Carregando conversas",
       ru: "\u0417\u0430\u0433\u0440\u0443\u0436\u0430\u0435\u043C \u0440\u0430\u0437\u0433\u043E\u0432\u043E\u0440\u044B"
     },
     shoutbox_failed: {
       en: "There was an error loading conversations \u201C(\u30CE _ <,, )",
       de: "Es gab einen Fehler beim Laden der Konversationen \u201C(\u30CE _ <,, )",
+      es: "Hubo un error al cargar las conversaciones \u201C(\u30CE _ <,, )",
       pt: "Ocorreu um erro carregando as conversas \u201C(\u30CE _ <,, )",
       ru: "\u0412\u043E \u0432\u0440\u0435\u043C\u044F \u0437\u0430\u0433\u0440\u0443\u0437\u043A\u0438 \u0440\u0430\u0437\u0433\u043E\u0432\u043E\u0440\u043E\u0432 \u043F\u0440\u043E\u0438\u0437\u043E\u0448\u043B\u0430 \u043E\u0448\u0438\u0431\u043A\u0430 \u201C(\u30CE _ <,, )"
     },
     track_name: {
       en: "Track name",
       de: "Titel",
+      es: "Nombre del tema",
       pt: "Nome da faixa",
       ru: "\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0442\u0440\u0435\u043A\u0430"
     },
     artist_name: {
       en: "Artist name",
       de: "K\xFCnstlername",
+      es: "Nombre del artista",
       pt: "Nome do artista",
       ru: "\u0418\u043C\u044F \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044F"
     },
     album_name: {
-      en: "Album name"
+      en: "Album name",
+      es: "Nombre del \xE1lbum"
     },
     search_for_settings: {
-      en: "Search for settings"
+      en: "Search for settings",
+      es: "Buscar opciones"
     },
     found_value_results: {
-      en: "Found {c} result(s)"
+      en: "Found {c} result(s)",
+      es: "{c} resultados encontrados"
     },
     translated_from_value: {
-      en: "Translated from {v}"
+      en: "Translated from {v}",
+      es: "Traducido de {v}"
     },
     follow_guidelines: {
-      en: "Keep in mind the {a}community guidelines{/a}"
+      en: "Keep in mind the {a}community guidelines{/a}",
+      es: "Ten en cuenta los {a}lineamientos de la comunidad{/a}"
     },
     link_val: {
       // text 1, text 2
       // text colour
-      en: "Text {v}"
+      en: "Text {v}",
+      es: "Texto {v}"
     },
     bg_val: {
       // fill 1, fill 2
       // the filling of a background colour
-      en: "Fill {v}"
+      en: "Fill {v}",
+      es: "Relleno {v}"
     },
     styled_with_font: {
-      en: "Styled with {f}."
+      en: "Styled with {f}.",
+      es: "Escrito con {f}"
     },
     change_font: {
-      en: "Change font"
+      en: "Change font",
+      es: "Cambiar fuente"
     },
     and_count_more: {
-      en: "and {c} more"
+      en: "and {c} more",
+      es: "y {c} m\xE1s"
     },
     scrobbling_now: {
-      en: "Scrobbling now"
+      en: "Scrobbling now",
+      es: "Haciendo scrobbling ahora"
     },
     recent_scrobble: {
-      en: "Recently scrobbled"
+      en: "Recently scrobbled",
+      es: "Scrobbling reciente"
     },
     no_tracks_found_mb: {
-      en: "No tracks found, possibly a MusicBrainz error"
+      en: "No tracks found, possibly a MusicBrainz error",
+      es: "Ning\xFAn tema encontrado, posiblemente un error de MusicBrainz"
     },
     value_scrobbles_recently: {
-      en: "{v} scrobbles recently"
+      en: "{v} scrobbles recently",
+      es: "{v} scrobblings recientes"
     },
     on_tour: {
-      en: "On tour"
+      en: "On tour",
+      es: "De gira"
     },
     length: {
-      en: "Length"
+      en: "Length",
+      es: "Duraci\xF3n"
     },
     released: {
-      en: "Released"
+      en: "Released",
+      es: "Lanzado"
     },
     value_tracks_time: {
-      en: "{count} tracks, {length}"
+      en: "{count} tracks, {length}",
+      es: "{count} temas, {length}"
     },
     oracle_vocal: {
-      en: "Performed by"
+      en: "Performed by",
+      es: "Interpretado por"
     },
     oracle_recording: {
-      en: "Recorded by"
+      en: "Recorded by",
+      es: "Grabado por"
     },
     oracle_mix: {
-      en: "Produced by"
+      en: "Produced by",
+      es: "Producido por"
     },
     oracle_engineer: {
-      en: "Engineered by"
+      en: "Engineered by",
+      es: "Dise\xF1ado por"
     },
     oracle_editor: {
-      en: "Edited by"
+      en: "Edited by",
+      es: "Editado por"
     },
     oracle_writer: {
-      en: "Written by"
+      en: "Written by",
+      es: "Escrito por"
     },
     oracle_no_credits: {
-      en: 'nothing here... (\u0E51/////\u0E51 " )'
+      en: 'nothing here... (\u0E51/////\u0E51 " )',
+      es: 'Nada aqu\xED... (\u0E51/////\u0E51 " )'
     },
     born: {
-      en: "Born"
+      en: "Born",
+      es: "Naci\xF3"
     },
     died: {
-      en: "Died"
+      en: "Died",
+      es: "Muri\xF3"
     },
     formed: {
       // like a group, created
-      en: "Formed"
+      en: "Formed",
+      es: "Formado"
     },
     ended: {
-      en: "Ended"
+      en: "Ended",
+      es: "Terminado"
     },
     show_disc_image: {
       name: {
-        en: "Show accompanying disc for albums and tracks"
+        en: "Show accompanying disc for albums and tracks",
+        es: "Mostrar disco adjunto en \xE1lbumes y temas"
       },
       body: {
-        en: "Add small visual flair to music pages"
+        en: "Add small visual flair to music pages",
+        es: "A\xF1ade un peque\xF1o efecto visual a las p\xE1ginas de m\xFAsica"
       }
     },
     move_up: {
-      en: "Move up"
+      en: "Move up",
+      es: "Mover arriba"
     },
     move_down: {
-      en: "Move down"
+      en: "Move down",
+      es: "Mover abajo"
     },
     other_user: {
-      en: "Other user"
+      en: "Other user",
+      es: "Otro usuario"
     },
     count_bar_right: {
       name: {
-        en: "Align count to right-side"
+        en: "Align count to right-side",
+        es: "Alinear cuenta al lado derecho"
       },
       body: {
-        en: "Control the direction of the bar progress and text"
+        en: "Control the direction of the bar progress and text",
+        es: "Controla la direcci\xF3n del texto y progreso de la barra"
       }
     },
     recents: {
@@ -93114,7 +93175,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-02-25"
       }
     },
-    built_on: "2026-04-18T21:14:10.351Z"
+    built_on: "2026-04-19T15:49:31.589Z"
   };
 
   // node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
