@@ -27,7 +27,7 @@ export function append_style() {
     const length = split.length - 1;
 
     // style is neither fetched nor applied in these interfaces
-    if (split[0] == 'labs') {
+    if (split[0] == 'labs' && split[length] != 'labs') {
         log('disabled loading for special interface', 'style');
         return;
     }

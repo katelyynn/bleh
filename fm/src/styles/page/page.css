@@ -32,6 +32,8 @@
 @import '../event/main.css';
 @import './error.css';
 
+@import './labs.css';
+
 .container {
     min-width: var(--cards-width);
     max-width: var(--cards-width);
