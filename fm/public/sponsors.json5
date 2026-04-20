@@ -1,15 +1,15 @@
 {
-    version: "2026.0417",
+    version: "2026.0420",
     related: {
         account_name: "kateshapedbox",
         link: "https://katelyn.moe/sponsor",
         special: [
-            "clairedoll",
+            "dressupdarling",
             "evangelicgirl"
         ]
     },
     users: {
-        "clairedoll": {
+        "dressupdarling": {
             sponsor: false,
             contributor: true,
             badges: [
