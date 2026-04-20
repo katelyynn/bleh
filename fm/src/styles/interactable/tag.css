@@ -43,7 +43,7 @@
     /* last.fm by default sets this to 150px,
     with the padding in bleh this conflicts with eg.
     the underground hip-hop tag */
-    max-width: unset !important;
+    max-width: 400px !important;
 
     &:not([href]) {
         cursor: default;

@@ -24,6 +24,7 @@
 
 .summary-content {
     flex: 1;
+    overflow: hidden;
 }
 
 .subtle-like {
