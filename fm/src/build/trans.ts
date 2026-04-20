@@ -18,12 +18,12 @@ export let lang_browser = 'en';
 export let lang_info = {
     en: {
         name: 'English',
-        by: ['clairedoll'],
+        by: ['dressupdarling'],
         last_updated: 'latest'
     },
     de: {
         name: get_language_name('de'),
-        by: ['evangelicgirl', 'myraisounds', 'clairedoll'],
+        by: ['evangelicgirl', 'myraisounds', 'dressupdarling'],
         last_updated: '2026-04-20'
     },
     es: {
