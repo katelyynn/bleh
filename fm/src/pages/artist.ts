@@ -142,6 +142,7 @@ export function bleh_artists() {
             </section>
         `;
 
+        log('settings hue accent', 'dfbdfb', 'info', { settings: JSON.stringify(settings) });
         header_colour(page_avatar.image, settings.hue_from_artist, page_avatar);
 
         if (multi_info_box) {

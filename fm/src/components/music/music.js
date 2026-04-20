@@ -604,6 +604,8 @@ export async function show_your_scrobbles() {
             '.catalogue-metadata-description:not(.visible-xs)'
         );
         values.forEach((item, index) => {
+            if (!groups[index]) return;
+
             groups[index].value = item;
         });
 

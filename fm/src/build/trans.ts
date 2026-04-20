@@ -1727,15 +1727,15 @@ export const trans = {
     },
     viewing_tracks: {
         // a sub-option for change_my_colour_when
-        en: 'Viewing artists',
-        de: 'Künstleransicht',
-        es: 'Ver artistas'
-    },
-    viewing_artists: {
-        // a sub-option for change_my_colour_when
         en: 'Viewing tracks',
         de: 'Titelansicht',
         es: 'Ver temas'
+    },
+    viewing_artists: {
+        // a sub-option for change_my_colour_when
+        en: 'Viewing artists',
+        de: 'Künstleransicht',
+        es: 'Ver artistas'
     },
     colourful_active: {
         // a sub-option for change_my_colour_when
