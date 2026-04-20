@@ -98,9 +98,11 @@ const bundle_css = {
         },
         platform: 'browser',
         loader: {
-            '.css': 'text',
             '.svg': 'text'
-        }
+        },
+        plugins: [
+            bundle_css
+        ]
     };
 
     const manifest = {
@@ -155,15 +157,6 @@ const bundle_css = {
         }
     } else {
         await esbuild.build(userscript);
-        await esbuild.build({
-            entryPoints: ['./src/styles/index.css'],
-            bundle: true,
-            minify: true,
-            outfile: 'bleh.css',
-            loader: {
-                '.css': 'css'
-            }
-        });
 
         await esbuild.build(extension);
         fs.mkdirSync('ext/', { recursive: true });
