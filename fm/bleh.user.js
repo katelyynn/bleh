@@ -84705,6 +84705,9 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       ru: "\u041F\u043E\u0434\u0435\u043B\u0438\u0442\u044C\u0441\u044F",
       pl: "Udost\u0119pni"
     },
+    share_via_device: {
+      en: "Share via device"
+    },
     copy: {
       en: "Copy",
       de: "Kopieren",
