@@ -1,6 +1,4 @@
 body {
-    --version-build: "2026.0212";
-
     --default-hue: 298;
     --default-sat: 1.28;
     --default-lit: 0.9;
@@ -146,6 +144,10 @@ body {
         --hide-light-pointer: none;
         --hide-light-opacity: 0.4;
     }
+
+    transition-property: background, color, box-shadow;
+    transition-duration: var(--trans);
+    transition-timing-function: var(--trans-function);
 
     &[data-bleh--seasonal_overlays="true"] {
         &[data-bleh--season="halloween"] {

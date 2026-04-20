@@ -49,6 +49,10 @@
 
         background: oklch(var(--b6));
 
+        transition-property: background;
+        transition-duration: var(--trans);
+        transition-timing-function: var(--trans-function);
+
         --mask: linear-gradient(90deg, transparent 0%, white 40%, white 60%, transparent 100%);
         mask-image: var(--mask);
         -webkit-mask-image: var(--mask);
@@ -108,7 +112,15 @@
         content: "";
         position: absolute;
         inset: 0;
-        background: linear-gradient(180deg, transparent 0%, oklch(var(--b6)) 100%) !important;
+
+        background-color: oklch(var(--b6)) !important;
+        --mask: linear-gradient(180deg, transparent, white);
+        mask-image: var(--mask);
+        -webkit-mask: var(--mask);
+
+        transition-property: background-color;
+        transition-duration: var(--trans);
+        transition-timing-function: var(--trans-function);
     }
 
     &[data-page-type="user"] {

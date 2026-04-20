@@ -70,6 +70,10 @@
         border-right: none !important;
     }
 
+    transition-property: border;
+    transition-duration: var(--trans);
+    transition-timing-function: var(--trans-function);
+
     &:after {
         content: "";
         position: absolute;
@@ -165,11 +169,19 @@
 
     & > .col-main {
         background: oklch(var(--b5));
+
+        transition-property: background;
+        transition-duration: var(--trans);
+        transition-timing-function: var(--trans-function);
     }
 
     & > .col-sidebar {
         position: relative;
         background: var(--card-blur-bg);
+
+        transition-property: background;
+        transition-duration: var(--trans);
+        transition-timing-function: var(--trans-function);
 
         &:before {
             content: "";
