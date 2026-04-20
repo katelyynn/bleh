@@ -1184,7 +1184,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
                     <button class="btn icon select-button" data-type="details" ref=${S=>_=S}>${d(c.view_details)}</button>
                     <button class="btn icon primary colourful" data-taste=${i} data-type="valentine" onclick=${()=>{open(`${X}inbox/compose?to=${s.name}&subject=${encodeURIComponent(d(c.valentine,{u:s.name}))}`)}}>${d(c.send_valentine)}</button>
                 </div>
-            `),n.length>1&&de(_,{theme:"context-menu",content:I,trigger:"click",placement:"bottom",interactive:!0,interactiveBorder:10})}else n.length>1&&de(p,{theme:"context-menu",content:I,trigger:"click",placement:"bottom",interactive:!0,interactiveBorder:10})}}function Yn(t,{name:e,link:a,text:i="",type:r,new_release:n=!1,updated:o=!1,action:l="",tooltip:u="",allow_html:A=!1,tooltip_theme:p="",beta:y=!1}){G(`creating top item of ${e}, ${a}, ${i}`,"profile");let I;return l=="button"?I=h.node`
+            `),n.length>1&&de(_,{theme:"context-menu",content:I,trigger:"click",placement:"bottom",interactive:!0,interactiveBorder:10,appendTo:document.body})}else n.length>1&&de(p,{theme:"context-menu",content:I,trigger:"click",placement:"bottom",interactive:!0,interactiveBorder:10,appendTo:document.body})}}function Yn(t,{name:e,link:a,text:i="",type:r,new_release:n=!1,updated:o=!1,action:l="",tooltip:u="",allow_html:A=!1,tooltip_theme:p="",beta:y=!1}){G(`creating top item of ${e}, ${a}, ${i}`,"profile");let I;return l=="button"?I=h.node`
             <button
                 class="btn side-action icon-mask"
                 data-type=${r}

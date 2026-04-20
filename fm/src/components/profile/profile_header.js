@@ -375,7 +375,8 @@ export function redesign_profile_header(is_own_profile, is_following) {
                     trigger: 'click',
                     placement: 'bottom',
                     interactive: true,
-                    interactiveBorder: 10
+                    interactiveBorder: 10,
+                    appendTo: document.body
                 });
             }
         } else {
@@ -386,7 +387,8 @@ export function redesign_profile_header(is_own_profile, is_following) {
                     trigger: 'click',
                     placement: 'bottom',
                     interactive: true,
-                    interactiveBorder: 10
+                    interactiveBorder: 10,
+                    appendTo: document.body
                 });
             }
         }
