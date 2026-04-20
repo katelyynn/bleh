@@ -24,7 +24,7 @@ export let lang_info = {
     de: {
         name: get_language_name('de'),
         by: ['evangelicgirl', 'myraisounds', 'clairedoll'],
-        last_updated: '2026-01-08'
+        last_updated: '2026-04-20'
     },
     es: {
         name: get_language_name('es'),
