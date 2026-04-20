@@ -74,7 +74,7 @@ const bundle_css = {
         bundle: true,
         logLimit: 0,
         outfile: 'bleh.user.js',
-        minify: true,
+        minify: false,
         banner: {
             js: js_banner
         },

@@ -15,7 +15,6 @@ import {
 import { page, root } from '@/build/page';
 import {
     desanitise,
-    get_storage,
     parse_object,
     return_artist_from_generic,
     romanise,
@@ -198,23 +197,64 @@ unsafeWindow._lotus_check = function () {
     lotus(true);
 };
 
-unsafeWindow._open_correction_modal = function () {
+export function lotus_modal() {
     dialog({
-        id: 'corrections',
+        id: 'lotus',
         title: tl(trans.music_corrections),
         body: html.node`
-            <h4>${tl(trans.artists)}</h4>
-            <div class="corrections artist" id="corrections-artist"></div>
-            <h4>${tl(trans.albums_and_tracks)}</h4>
-            <div class="corrections album_tracks" id="corrections-albums_tracks"></div>
+            <table class="responsive-table">
+                <thead>
+                    <tr>
+                        <th>${tl(trans.artist)}</th>
+                        <th>${tl(trans.correction)}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${Object.entries(artist_corrections).map(([key, value]) => {
+                        if (key == 'version') return html.node``;
+
+                        return html.node`
+                            <tr>
+                                <td>
+                                    ${key}
+                                </td>
+                                <td>
+                                    ${value}
+                                </td>
+                            </tr>
+                        `;
+                    })}
+                </tbody>
+            </table>
+            <table class="responsive-table">
+                <thead>
+                    <tr>
+                        <th>${tl(trans.albums_and_tracks)}</th>
+                        <th>${tl(trans.correction)}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${Object.entries(album_track_corrections).flatMap(([artist, items]) => {
+                        if (artist == 'version') return html.node``;
+
+                        return Object.entries(items).map(([key, value]) => html.node`
+                            <tr>
+                                <td>
+                                    ${artist} - ${key}
+                                </td>
+                                <td>
+                                    ${value}
+                                </td>
+                            </tr>
+                        `);
+                    })}
+                </tbody>
+            </table>
         `,
-        has_close: true,
         type: 'corrections',
         allow_scroll: true
     });
-
-    prepare_corrections_page();
-};
+}
 
 /**
  * correct capitalisation of a generic artist name combo

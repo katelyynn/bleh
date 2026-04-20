@@ -50,6 +50,7 @@ import { icon, icons } from '@/components/shared/icon.js';
 import { chartlist_bar } from '@/components/music/bar.js';
 import { avatar } from '@/components/shared/avatar.js';
 import { convert_lang_to_country, flag } from '@/components/shared/flag.js';
+import { lotus_modal } from '@/components/music/lotus.js';
 
 export function bleh_settings() {
     page.name = auth.name;
@@ -681,7 +682,7 @@ export async function render_setting_page(page_id) {
                             </p>
                             <button
                                 class="see-more"
-                                onclick="_open_correction_modal()"
+                                onclick=${() => lotus_modal()}
                             >
                                 ${tl(trans.view_all)}
                             </button>
