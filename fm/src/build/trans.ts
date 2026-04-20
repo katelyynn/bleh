@@ -7056,26 +7056,6 @@ export const trans = {
         sv: 'Var försiktig! Ändra bara dessa inställningar om du vet vad du gör',
         ru: 'Осторожно! Меняйте эти настройки только если вы знаете, что делаете'
     },
-    force_refresh_style: {
-        name: {
-            en: 'Force re-download styles',
-            de: 'Erneutes Herunterladen von Stylesheets erzwingen',
-            es: 'Forzar redescarga de estilos',
-            it: 'Forza il re-download degli stili',
-            pt: 'Forçar o re-download dos estilos',
-            sv: 'Tvinga omladdning av stiler',
-            ru: 'Принудительно перезагрузить стили'
-        },
-        body: {
-            en: 'Deletes your current cache of the bleh stylesheet and retrieves the latest',
-            de: 'Löscht deinen aktuellen Cache des bleh-Stylesheets und lädt die neueste Version herunter',
-            es: 'Elimina tu cache actual de la hoja de estilo de bleh y extrae la versión más reciente',
-            it: 'Elimina la versione dello stylesheet di bleh nella tua cache e scarica la più recente',
-            pt: 'Exclui o cache atual da folha de estilo do bleh e recupera a versão mais recente',
-            sv: 'Tar bort din nuvarande cache av bleh-stil och hämtar hem den senaste',
-            ru: 'Удаляет ваш текущий кэш таблицы стилей bleh и загружает последнюю версию'
-        }
-    },
     intended_for_development: {
         name: {
             en: 'This page is intended for development',

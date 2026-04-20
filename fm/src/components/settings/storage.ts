@@ -5,8 +5,6 @@ export const keys = {
     auth: 'bleh_auth',
     auth_valid: 'bleh_auth_valid',
     bookmarked_images: 'bleh_bookmarked_images',
-    cached_style: 'bleh_cached_style',
-    cached_style_timeout: 'bleh_cached_style_timeout',
     news: 'bleh_changelog',
     news_expire: 'bleh_changelog_expire',
     hoshino: 'bleh_hoshino_cache',
@@ -45,7 +43,9 @@ const storage_keys_clean = [
     'bleh_profile_banners',
     'bleh_moderation',
     'bleh_update_paused',
-    'bleh_update_paused_until'
+    'bleh_update_paused_until',
+    'bleh_cached_style',
+    'bleh_cached_style_timeout'
 ]
 
 export function clean_storage() {

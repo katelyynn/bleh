@@ -30,7 +30,6 @@ import {
     setting
 } from '@/components/settings/settings';
 import { share } from '@/components/dialog/share';
-import { force_refresh_style } from '@/components/page/style';
 import tippy from 'tippy.js';
 import {
     checkup_friend_cache,
@@ -844,20 +843,6 @@ export async function render_setting_page(page_id) {
                     </div>
                     <div class="setting-group">
                         ${setting({ id: 'dev' })} ${setting({ id: 'branch' })}
-                        <div class="setting" data-type="action">
-                            <div class="heading">
-                                <h5>${tl(trans.force_refresh_style.name)}</h5>
-                                <p>${tl(trans.force_refresh_style.body)}</p>
-                            </div>
-                            <div class="toggle-wrap">
-                                <button
-                                    class="see-more update-check left-icon"
-                                    onclick=${() => force_refresh_style()}
-                                >
-                                    ${tl(trans.refresh)}
-                                </button>
-                            </div>
-                        </div>
                     </div>
                     <div class="sep"></div>
                     <h4>Debug information</h4>
@@ -870,16 +855,6 @@ export async function render_setting_page(page_id) {
                             is currently ${settings.corrections}
                         </li>
                         <br />
-                        <li>
-                            Theme will expire at
-                            <span class="time"
-                                >${time(
-                localStorage.getItem(
-                    'bleh_cached_style_timeout'
-                )
-            )}</span
-                            >
-                        </li>
                         <li>
                             <span class="lotus lotus-name lotus-name-small"
                                 >lotus</span
@@ -903,20 +878,6 @@ export async function render_setting_page(page_id) {
                 )
             )}</span
                             >
-                        </li>
-                        <br />
-                        <li>
-                            It is currently
-                            <span class="time">${time()}</span>
-                        </li>
-                        <br />
-                        <li>
-                            Has the timeout expired?
-                            ${new Date(
-                localStorage.getItem(
-                    'bleh_cached_style_timeout'
-                )
-            ) < new Date()}
                         </li>
                     </ul>
                     <div class="sep"></div>
