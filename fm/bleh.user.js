@@ -3581,7 +3581,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
                     `:""}
                 </div>
                 `:""}
-                ${be.ended?h.node`
+                ${be.end?h.node`
                 <div class="metadata-group ${Ee||He?"has-secondary-info":""}">
                     <dt class="catalogue-metadata-heading">${d(c.died)}</dt>
                     <dd class="catalogue-metadata-description has-age">
@@ -3621,7 +3621,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
                     `:""}
                 </div>
                 `:""}
-                ${be.ended?h.node`
+                ${be.end?h.node`
                 <div class="metadata-group ${Ee||He?"has-secondary-info":""}">
                     <dt class="catalogue-metadata-heading">${d(c.ended)}</dt>
                     <dd class="catalogue-metadata-description has-age">

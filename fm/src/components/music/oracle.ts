@@ -2249,7 +2249,7 @@ export function oracle_process() {
                     ` : ''}
                 </div>
                 ` : ''}
-                ${lifespan.ended ? html.node`
+                ${lifespan.end ? html.node`
                 <div class="metadata-group ${end_code || end ? 'has-secondary-info' : ''}">
                     <dt class="catalogue-metadata-heading">${tl(trans.died)}</dt>
                     <dd class="catalogue-metadata-description has-age">
@@ -2289,7 +2289,7 @@ export function oracle_process() {
                     ` : ''}
                 </div>
                 ` : ''}
-                ${lifespan.ended ? html.node`
+                ${lifespan.end ? html.node`
                 <div class="metadata-group ${end_code || end ? 'has-secondary-info' : ''}">
                     <dt class="catalogue-metadata-heading">${tl(trans.ended)}</dt>
                     <dd class="catalogue-metadata-description has-age">
