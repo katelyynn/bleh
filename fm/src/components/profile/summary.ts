@@ -269,6 +269,7 @@ export function bleh_profile_chart_render(
     if (!panel) return;
 
     const table = panel.querySelector('table');
+    if (!table) return;
 
     let entries = table.querySelectorAll('tbody tr');
 
