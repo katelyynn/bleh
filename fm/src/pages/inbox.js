@@ -9,7 +9,7 @@ import {log} from "@/build/log";
 import {auth, page, root} from "@/build/page";
 import {copy, sanitise} from "@/build/tools";
 import {checkup_page_structure} from "@/components/page/structure";
-import {register_background, update_page} from "../page";
+import {is_same_page, register_background, update_page} from "../page";
 import {bleh_notification_list} from "@/components/inbox/notifications";
 import { tl, trans } from "@/build/trans";
 import { html, render } from "lighterhtml";
@@ -37,8 +37,10 @@ export async function bleh_inbox() {
     log('status is', 'page', 'info', page);
     update_page();
 
+    const same_page = is_same_page();
+
     page.structure.container.insertBefore(html.node`
-        <section class="page-header">
+        <section class="page-header ${same_page ? 'same' : ''}">
             <div class="page-header-icon">
                 ${icon({ name: icons.inbox })}
             </div>

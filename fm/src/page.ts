@@ -967,3 +967,9 @@ function favi() {
                 :   light;
         });
 }
+
+export function is_same_page() {
+    if (!page.previous || !page.previous.type || !page.previous.name) return false;
+
+    return page.previous.type == page.type && page.previous.name.toLowerCase() == page.name.toLowerCase();
+}

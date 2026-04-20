@@ -70,10 +70,6 @@
         border-right: none !important;
     }
 
-    transition-property: border;
-    transition-duration: var(--trans);
-    transition-timing-function: var(--trans-function);
-
     &:after {
         content: "";
         position: absolute;

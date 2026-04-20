@@ -39,7 +39,7 @@ import {
     convert_to_toolbar
 } from '@/components/page/structure.js';
 import { update_inbuilt_item } from '@/config';
-import { register_background, update_page } from '@/page';
+import { is_same_page, register_background, update_page } from '@/page';
 import { ff } from '@/components/settings/sku';
 import { bleh_user_library } from '@/pages/profile/glacier';
 import { bleh_obsession, obsession_list } from '@/pages/profile/obsession';
@@ -228,8 +228,10 @@ export function bleh_profiles() {
 
     let page_avatar;
 
+    const same_page = is_same_page();
+
     let redesigned_profile_header = html.node`
-        <section class="page-header for-profile">
+        <section class="page-header for-profile ${same_page ? 'same' : ''}">
             <div class="page-header-avatar-list">
                 ${!new_account ? page_avatar = page_header_avatar((profile_avatar as HTMLImageElement).src) : profile_avatar}
             </div>

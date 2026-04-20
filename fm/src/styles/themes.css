@@ -1160,8 +1160,6 @@ body {
     &[data-bleh--theme="oled"] {
         --card-border: inset 0 0 0 1px oklch(var(--b4) / 0.8);
 
-        --modal-bg: oklch(var(--b2) / 0.5);
-
         --menu-bg: var(--b5);
         --menu-opacity: 80%;
     }

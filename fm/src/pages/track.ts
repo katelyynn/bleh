@@ -16,7 +16,7 @@ import {
     similar_items
 } from '@/components/music/music';
 import { checkup_page_structure } from '@/components/page/structure';
-import { register_background, update_page } from '@/page';
+import { is_same_page, register_background, update_page } from '@/page';
 import { ff } from '@/components/settings/sku';
 import { bleh_tags_mini } from '@/pages/tag';
 import { bleh_wiki, bleh_wiki_editor, bleh_wiki_history } from '@/pages/music/wiki';
@@ -105,8 +105,10 @@ export function bleh_tracks() {
 
         page.state.avatar_side_override = settings.default_avatar_action == 'expand' ? 'expand' : source_album ? source_album.querySelector('.link-block-cover-link').getAttribute('href') : '';
 
+        const same_page = is_same_page();
+
         let redesigned_track_header = html.node`
-            <section class="page-header for-track">
+            <section class="page-header for-track ${same_page ? 'same' : ''}">
                 <div class="page-header-avatar-list" ref=${(el) => (page.state.avatar_side = el)} />
                 <div class="page-header-info">
                     <div class="sub-text">${tl(trans.track)}</div>

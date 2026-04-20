@@ -26,7 +26,7 @@ import {
     similar_items
 } from '@/components/music/music';
 import { checkup_page_structure } from '@/components/page/structure';
-import { register_background, update_page } from '@/page';
+import { is_same_page, register_background, update_page } from '@/page';
 import { ff } from '@/components/settings/sku';
 import { bleh_gallery_list, bleh_gallery_upload } from '@/pages/music/gallery';
 import { bleh_tags_mini } from '@/pages/tag';
@@ -120,8 +120,10 @@ export function bleh_albums() {
 
         let page_avatar;
 
+        const same_page = is_same_page();
+
         let redesigned_album_header = html.node`
-            <section class="page-header for-album">
+            <section class="page-header for-album ${same_page ? 'same' : ''}">
                 <div class="page-header-avatar-list">
                     ${page_avatar = page_header_avatar(avatar_img)}
                     ${page_header_disc()}

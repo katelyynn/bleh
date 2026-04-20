@@ -20,6 +20,10 @@
 
     contain: layout;
 
+    /*&:not(.same) {
+        animation: new_page_header 0.6s var(--trans-function-ani);
+    }*/
+
     &.for-profile {
         --page-header-avatar-radius: var(--avatar-radius);
         --page-header-avatar-gloss: none;
@@ -63,6 +67,17 @@
                 flex-wrap: wrap;
             }
         }
+    }
+}
+
+@keyframes new_page_header {
+    from {
+        translate: 0 10px;
+        opacity: 0;
+    }
+    to {
+        translate: 0 0;
+        opacity: 1;
     }
 }
 
