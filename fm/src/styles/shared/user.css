@@ -266,7 +266,11 @@
                 }
 
                 .user-list-name, .user-list-description {
-                    translate: 0 34px !important;
+                    translate: 0 40px !important;
+                }
+
+                .user-list-about-me {
+                    opacity: 0;
                 }
             }
 
@@ -329,6 +333,8 @@
                     transition-duration: 0.4s;
                     transition-timing-function: var(--trans-function-ani);
                     filter: var(--header-filter-shadow) !important;
+
+                    margin-right: unset;
                 }
 
                 .user-list-description {
@@ -362,6 +368,12 @@
                             white-space: wrap;
                         }
                     }
+                }
+
+                .user-list-about-me {
+                    transition-property: opacity;
+                    transition-duration: 0.4s;
+                    transition-timing-function: var(--trans-function-ani);
                 }
 
                 .user-list-follower-btn {

@@ -16,6 +16,7 @@ import Cropper from 'cropperjs';
 import { ff } from "@/components/settings/sku";
 import { toggle } from "@/components/settings/toggle";
 import { render_chart_preview, render_track_preview } from '@/components/settings/preview';
+import { keys } from '@/components/settings/storage';
 
 let cropper: Cropper;
 
@@ -266,7 +267,7 @@ function profile_panel() {
         </section>
     `);
 
-    let profile_cache = JSON.parse(localStorage.getItem('bleh_profile_cache')) || {};
+    let profile_cache = JSON.parse(localStorage.getItem(keys.profile_cache)) || {};
     let cache = profile_cache[auth.name];
 
     render(update_picture, html`
@@ -548,7 +549,7 @@ function profile_panel() {
 
         render(preview, markdown(value, markdown_settings));
 
-        let profile_cache = JSON.parse(localStorage.getItem('bleh_profile_cache')) || {};
+        let profile_cache = JSON.parse(localStorage.getItem(keys.profile_cache)) || {};
         let cache = profile_cache[auth.name];
 
         console.info('cache', cache);

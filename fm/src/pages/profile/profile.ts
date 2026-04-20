@@ -59,6 +59,7 @@ import { toggle } from '@/components/settings/toggle';
 import { page_header_avatar } from '@/components/music/header';
 import { profile_summary } from '@/components/profile/summary';
 import { header_colour } from '@/components/page/colour';
+import { keys } from '@/components/settings/storage';
 
 export function bleh_profiles() {
     // the obsessions page is a user subpage but works very differently
@@ -99,7 +100,7 @@ export function bleh_profiles() {
     let new_account = false;
 
     let profile_cache =
-        JSON.parse(localStorage.getItem('bleh_profile_cache')) || {};
+        JSON.parse(localStorage.getItem(keys.profile_cache)) || {};
     let cache = profile_cache[page.name] || {};
 
     let about_me_sidebar =
@@ -1572,7 +1573,7 @@ function bio_parse(text, cache = true, take_effect = true) {
 
 export function save_profile_cache(
     { avatar, banner, banner_orig, hue, sat, lit, aka, created, font, font_style, username } = {},
-    profile_cache = JSON.parse(localStorage.getItem('bleh_profile_cache')) ||
+    profile_cache = JSON.parse(localStorage.getItem(keys.profile_cache)) ||
         {},
     name = page.name
 ) {
@@ -1612,7 +1613,7 @@ export function save_profile_cache(
         name,
         cache: profile_cache[name]
     });
-    set_storage('bleh_profile_cache', JSON.stringify(profile_cache));
+    set_storage(keys.profile_cache, JSON.stringify(profile_cache));
 }
 
 export async function checkup_friend_cache(list = settings.friends) {
@@ -1659,7 +1660,7 @@ export async function load_profile_cache_externally(name = page.name) {
     log(`requested profile cache for ${name}`, 'cache');
 
     let profile_cache =
-        JSON.parse(localStorage.getItem('bleh_profile_cache')) || {};
+        JSON.parse(localStorage.getItem(keys.profile_cache)) || {};
     let cache = profile_cache[name];
 
     if (cache) {
@@ -1689,7 +1690,7 @@ function load_profile_cache(
 
     if (!profile_cache)
         profile_cache =
-            JSON.parse(localStorage.getItem('bleh_profile_cache')) || {};
+            JSON.parse(localStorage.getItem(keys.profile_cache)) || {};
     if (!cache) cache = profile_cache[name] || {};
 
     if (cache) {
@@ -1735,8 +1736,7 @@ function request_profile_cache(
     const will_cache = !cache || !profile_cache;
 
     if (!profile_cache)
-        profile_cache =
-            JSON.parse(localStorage.getItem('bleh_profile_cache')) || {};
+        profile_cache = JSON.parse(localStorage.getItem(keys.profile_cache)) || {};
     if (!cache) cache = profile_cache[name] || {};
 
     return new Promise((resolve, reject) => {

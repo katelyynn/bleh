@@ -27,6 +27,7 @@ import { input } from '@/components/settings/input';
 import { queue_popup } from '@/components/dialog/popup';
 import { markdown_options } from '@/types/markdown';
 import { profile_cache_list } from '@/types/profile';
+import { keys } from '../settings/storage';
 
 export function markdown(
     text: string,
@@ -362,7 +363,7 @@ export function markdown(
 
     if (available && will_cache) {
         profile_cache =
-            JSON.parse(localStorage.getItem('bleh_profile_cache')) || {};
+            JSON.parse(localStorage.getItem(keys.profile_cache)) || {};
         cache = profile_cache[name] || {};
     }
 

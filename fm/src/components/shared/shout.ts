@@ -22,6 +22,7 @@ import tippy from 'tippy.js';
 import { keybind } from '@/components/dialog/rabbit';
 import { correct_artist, correct_item_by_artist } from '@/components/music/lotus';
 import { ff } from '../settings/sku';
+import { keys } from '../settings/storage';
 
 export function patch_shouts() {
     if (!page.structure.main) return;
@@ -36,6 +37,8 @@ export function patch_shouts() {
         shout_header(shout_controls);
     }
 
+    const cache = JSON.parse(localStorage.getItem(keys.profile_cache) || '{}');
+
     let shouts = page.structure.main.querySelectorAll('.shout:not([data-kate-processed])') as NodeListOf<HTMLElement>;
 
     shouts.forEach((shout, index) => {
@@ -49,7 +52,19 @@ export function patch_shouts() {
             if (!shout_name) return;
 
             const shout_name_text = shout_name.textContent;
-            shout_name.insertBefore(html.node`<span class="at">@</span>`, shout_name.firstChild);
+
+            if (cache[shout_name_text] && cache[shout_name_text].username) {
+                shout_name.classList.add('username-combo');
+                render(shout_name, html`
+                    <span class="username-custom">${cache[shout_name_text].username}</span>
+                    <span class="username-original">
+                        <span class="at">@</span>
+                        ${shout_name_text}
+                    </span>
+                `);
+            } else {
+                shout_name.insertBefore(html.node`<span class="at">@</span>`, shout_name.firstChild);
+            }
 
             const shout_avatar = shout.querySelector('.shout-user-avatar');
 
