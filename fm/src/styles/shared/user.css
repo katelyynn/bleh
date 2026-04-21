@@ -139,6 +139,7 @@
 
         .user-list-avatar {
             top: var(--item-list-gap);
+            left: var(--item-list-gap);
         }
 
         .username-combo {
@@ -293,7 +294,7 @@
                     translate: 0 40px !important;
                 }
 
-                .user-list-about-me {
+                .user-list-about-me:not(.has-featured-track) {
                     opacity: 0;
                 }
             }
@@ -448,6 +449,12 @@
         display: none;
     }
 
+    & > .top-track {
+        display: inline-flex;
+    }
+}
+
+.has-featured-track {
     & > .top-track {
         display: inline-flex;
     }

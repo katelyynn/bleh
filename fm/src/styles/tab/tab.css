@@ -281,7 +281,7 @@ button.navlist-more {
         position: absolute;
         inset: 0 0 -1px 0;
         display: block;
-        background: oklch(var(--b5) / 34%);
+        background: oklch(var(--b5) / 60%);
         backdrop-filter: var(--solarium-compensate);
         -webkit-backdrop-filter: var(--solarium-compensate);
         border-top-left-radius: inherit;

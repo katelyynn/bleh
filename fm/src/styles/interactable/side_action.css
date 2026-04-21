@@ -20,7 +20,8 @@
     }
 
     & > .sep {
-        margin: calc(var(--card-gap) - var(--button-list-gap)) 0 !important;
+        margin: calc(var(--card-gap) - var(--button-list-gap)) var(--button-sides) !important;
+        width: unset;
     }
 
     li,
