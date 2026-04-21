@@ -2229,102 +2229,102 @@ export function oracle_process() {
                 </div>
                 ` : ''}
                 ${data.type == 'Person' ? html.node`
-                ${lifespan.begin ? html.node`
-                <div class="metadata-group ${begin_code || begin ? 'has-secondary-info' : ''}">
-                    <dt class="catalogue-metadata-heading">${tl(trans.born)}</dt>
-                    <dd class="catalogue-metadata-description has-age">
-                        ${DateTime.fromISO(lifespan.begin).toLocaleString(DateTime.DATE_MED)}
-                        ${!lifespan.end ? html.node`<span class="artist-age">(${age(lifespan.begin)})</span>` : ''}
-                    </dd>
-                    ${begin_code ? html.node`
-                    <dd class="catalogue-metadata-description has-flag secondary-info">
-                        ${flag(begin_code)}
-                        ${begin.name}
-                    </dd>
-                    ` : begin ? html.node`
-                    <dd class="catalogue-metadata-description has-flag secondary-info">
-                        ${flag(area_code)}
-                        ${begin.name}
-                    </dd>
+                    ${lifespan.begin ? html.node`
+                    <div class="metadata-group ${begin_code || begin ? 'has-secondary-info' : ''}">
+                        <dt class="catalogue-metadata-heading">${tl(trans.born)}</dt>
+                        <dd class="catalogue-metadata-description has-age">
+                            ${DateTime.fromISO(lifespan.begin).toLocaleString(DateTime.DATE_MED)}
+                            ${!lifespan.end ? html.node`<span class="artist-age">(${age(lifespan.begin)})</span>` : ''}
+                        </dd>
+                        ${begin_code ? html.node`
+                        <dd class="catalogue-metadata-description has-flag secondary-info">
+                            ${flag(begin_code)}
+                            ${begin.name}
+                        </dd>
+                        ` : begin ? html.node`
+                        <dd class="catalogue-metadata-description has-flag secondary-info">
+                            ${flag(area_code)}
+                            ${begin.name}
+                        </dd>
+                        ` : ''}
+                    </div>
                     ` : ''}
-                </div>
-                ` : ''}
-                ${lifespan.end ? html.node`
-                <div class="metadata-group ${end_code || end ? 'has-secondary-info' : ''}">
-                    <dt class="catalogue-metadata-heading">${tl(trans.died)}</dt>
-                    <dd class="catalogue-metadata-description has-age">
-                        ${DateTime.fromISO(lifespan.end).toLocaleString(DateTime.DATE_MED)}
-                        <span class="artist-age">(${age(lifespan.begin, lifespan.end)})</span>
-                    </dd>
-                    ${end_code ? html.node`
-                    <dd class="catalogue-metadata-description has-flag secondary-info">
-                        ${flag(end_code)}
-                        ${end.name}
-                    </dd>
-                    ` : end ? html.node`
-                    <dd class="catalogue-metadata-description has-flag secondary-info">
-                        ${flag(area_code)}
-                        ${end.name}
-                    </dd>
+                    ${lifespan.end ? html.node`
+                    <div class="metadata-group ${end_code || end ? 'has-secondary-info' : ''}">
+                        <dt class="catalogue-metadata-heading">${tl(trans.died)}</dt>
+                        <dd class="catalogue-metadata-description has-age">
+                            ${DateTime.fromISO(lifespan.end).toLocaleString(DateTime.DATE_MED)}
+                            <span class="artist-age">(${age(lifespan.begin, lifespan.end)})</span>
+                        </dd>
+                        ${end_code ? html.node`
+                        <dd class="catalogue-metadata-description has-flag secondary-info">
+                            ${flag(end_code)}
+                            ${end.name}
+                        </dd>
+                        ` : end ? html.node`
+                        <dd class="catalogue-metadata-description has-flag secondary-info">
+                            ${flag(area_code)}
+                            ${end.name}
+                        </dd>
+                        ` : ''}
+                    </div>
                     ` : ''}
-                </div>
-                ` : ''}
                 ` : html.node`
-                ${lifespan.begin ? html.node`
-                <div class="metadata-group ${begin_code || begin ? 'has-secondary-info' : ''}">
-                    <dt class="catalogue-metadata-heading">${tl(trans.formed)}</dt>
-                    <dd class="catalogue-metadata-description has-age">
-                        ${DateTime.fromISO(lifespan.begin).toLocaleString(DateTime.DATE_MED)}
-                    </dd>
-                    ${begin_code ? html.node`
-                    <dd class="catalogue-metadata-description has-flag secondary-info">
-                        ${flag(begin_code)}
-                        ${begin.name}
-                    </dd>
-                    ` : begin ? html.node`
-                    <dd class="catalogue-metadata-description has-flag secondary-info">
-                        ${flag(area_code)}
-                        ${begin.name}
-                    </dd>
+                    ${lifespan.begin ? html.node`
+                    <div class="metadata-group ${begin_code || begin ? 'has-secondary-info' : ''}">
+                        <dt class="catalogue-metadata-heading">${tl(trans.formed)}</dt>
+                        <dd class="catalogue-metadata-description has-age">
+                            ${DateTime.fromISO(lifespan.begin).toLocaleString(DateTime.DATE_MED)}
+                        </dd>
+                        ${begin_code ? html.node`
+                        <dd class="catalogue-metadata-description has-flag secondary-info">
+                            ${flag(begin_code)}
+                            ${begin.name}
+                        </dd>
+                        ` : begin ? html.node`
+                        <dd class="catalogue-metadata-description has-flag secondary-info">
+                            ${flag(area_code)}
+                            ${begin.name}
+                        </dd>
+                        ` : ''}
+                    </div>
                     ` : ''}
-                </div>
-                ` : ''}
-                ${lifespan.end ? html.node`
-                <div class="metadata-group ${end_code || end ? 'has-secondary-info' : ''}">
-                    <dt class="catalogue-metadata-heading">${tl(trans.ended)}</dt>
-                    <dd class="catalogue-metadata-description has-age">
-                        ${DateTime.fromISO(lifespan.end).toLocaleString(DateTime.DATE_MED)}
-                    </dd>
-                    ${end_code ? html.node`
-                    <dd class="catalogue-metadata-description has-flag secondary-info">
-                        ${flag(end_code)}
-                        ${end.name}
-                    </dd>
-                    ` : end ? html.node`
-                    <dd class="catalogue-metadata-description has-flag secondary-info">
-                        ${flag(area_code)}
-                        ${end.name}
-                    </dd>
+                    ${lifespan.end ? html.node`
+                    <div class="metadata-group ${end_code || end ? 'has-secondary-info' : ''}">
+                        <dt class="catalogue-metadata-heading">${tl(trans.ended)}</dt>
+                        <dd class="catalogue-metadata-description has-age">
+                            ${DateTime.fromISO(lifespan.end).toLocaleString(DateTime.DATE_MED)}
+                        </dd>
+                        ${end_code ? html.node`
+                        <dd class="catalogue-metadata-description has-flag secondary-info">
+                            ${flag(end_code)}
+                            ${end.name}
+                        </dd>
+                        ` : end ? html.node`
+                        <dd class="catalogue-metadata-description has-flag secondary-info">
+                            ${flag(area_code)}
+                            ${end.name}
+                        </dd>
+                        ` : ''}
+                    </div>
                     ` : ''}
-                </div>
-                ` : ''}
-                ${artists.length > 0 ? html.node`
-                <div class="metadata-group">
-                    <dt class="catalogue-metadata-heading">${tl(trans.artists)}</dt>
-                    <dd class="catalogue-metadata-description group-artist-list">
-                        ${artists.map((artist, i) => {
-                            const last = i == artists.length - 1;
-                            console.info('group artist', artist);
+                    ${artists.length > 0 ? html.node`
+                    <div class="metadata-group">
+                        <dt class="catalogue-metadata-heading">${tl(trans.artists)}</dt>
+                        <dd class="catalogue-metadata-description group-artist-list">
+                            ${artists.map((artist, i) => {
+                                const last = i == artists.length - 1;
+                                console.info('group artist', artist);
 
-                            return html.node`
-                                <span class="group-artist">
-                                    <a class="group-artist-link" href="${root}music/${redirect()}${sanitise(artist.artist.name)}">${romanise(correct_artist(artist.artist.name))}</a>${!last ? ',' : ''}
-                                </span>
-                            `;
-                        })}
-                    </dd>
-                </div>
-                ` : ''}
+                                return html.node`
+                                    <span class="group-artist">
+                                        <a class="group-artist-link" href="${root}music/${redirect()}${sanitise(artist.artist.name)}">${romanise(correct_artist(artist.artist.name))}</a>${!last ? ',' : ''}
+                                    </span>
+                                `;
+                            })}
+                        </dd>
+                    </div>
+                    ` : ''}
                 `}
             </div>
         `);
