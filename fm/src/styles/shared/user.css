@@ -265,6 +265,7 @@
                     opacity: 0;
                 }
 
+                .listener-list-position,
                 .user-list-name, .user-list-description {
                     translate: 0 40px !important;
                 }
@@ -337,6 +338,13 @@
                     margin-right: unset;
                 }
 
+                .listener-list-position {
+                    transition-property: translate;
+                    transition-duration: 0.4s;
+                    transition-timing-function: var(--trans-function-ani);
+                    filter: var(--header-filter-shadow) !important;
+                }
+
                 .user-list-description {
                     flex-direction: column;
                     padding: unset;
@@ -377,7 +385,7 @@
                 }
 
                 .user-list-follower-btn {
-                    top: calc(-1 * (40px - var(--item-list-gap)));
+                    top: calc(-1 * (36px - var(--item-list-gap)));
                     right: 0;
                     margin-top: unset;
 
