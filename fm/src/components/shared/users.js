@@ -49,8 +49,7 @@ export function patch_user_list_item(user, index, cache = {}) {
             render(name, html`
                 <span class="username-custom">${cache[name_text].username}</span>
                 <span class="username-original">
-                    <span class="at">@</span>
-                    ${name_text}
+                    <span class="at">@</span>${name_text}
                 </span>
             `);
         } else {

@@ -1,7 +1,7 @@
 .username-combo {
     display: flex;
     gap: 0 6px;
-    flex-wrap: wrap;
+    overflow: hidden;
 
     &.username-combo-vertical {
         flex-direction: column;
@@ -11,6 +11,14 @@
 }
 
 .username-original {
-    display: flex;
     opacity: 0.6;
+}
+
+.username-custom, .username-original {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    max-width: 100%;
 }
