@@ -12,7 +12,8 @@
         }
     }
     &[data-showing="true"] {
-        max-height: var(--height, 2000px);
+        /*max-height: var(--height, 2000px);*/
+        max-height: 1200px;
         overflow: hidden;
     }
 
@@ -121,6 +122,10 @@
 
         br + & {
             margin-top: 5px;
+        }
+
+        @media (max-width: 980px) {
+            max-width: 80vw;
         }
     }
 

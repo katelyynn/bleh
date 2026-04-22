@@ -375,6 +375,11 @@
             & > .navlist-items {
                 width: calc(var(--tabbed-width) + var(--button-sides-icon) + var(--button-sides));
                 max-width: calc(var(--tabbed-width) + var(--button-sides-icon) + var(--button-sides));
+
+                @media (max-width: 980px) {
+                    width: unset;
+                    max-width: unset;
+                }
             }
 
             &:after {
