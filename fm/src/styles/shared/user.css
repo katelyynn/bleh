@@ -107,17 +107,18 @@
     }
 
     .user-follow {
-        width: calc(18px + 2px);
-        height: calc(18px + 2px);
+        --mask-size: 18px;
+        width: calc(18px + 2px) !important;
+        height: calc(18px + 2px) !important;
         padding: 1px !important;
         border-radius: 50px !important;
 
-        background-color: oklch(var(--b6), calc(var(--solarium-opacity) * 80%)) !important;
+        background-color: oklch(var(--b6), calc(var(--solarium-opacity, 1) * 80%)) !important;
 
         min-width: unset;
 
-        --margin-top: -9px;
-        --left: 1px;
+        --margin-top: -9px !important;
+        --left: 1px !important;
     }
 
     .user-list-inner-wrap {
@@ -344,7 +345,7 @@
 
                 .user-follow {
                     position: absolute;
-                    top: 0;
+                    top: 36px;
                     right: 50%;
                     margin-right: calc((-1 * var(--w)) + 25px);
 
