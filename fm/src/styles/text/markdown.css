@@ -1,6 +1,44 @@
-.about-me-sidebar > .markdown-body,
+/*.about-me-sidebar > .markdown-body,
 .bleh--about-me-preview {
     width: 360px;
+}*/
+
+.about-me-content {
+    max-height: var(--height, 2000px);
+    overflow: hidden;
+
+    &[data-showing="false"] {
+        max-height: 100px;
+
+        &:after {
+            opacity: 1;
+        }
+    }
+
+    transition-property: max-height;
+    transition-duration: 0.4s;
+    transition-timing-function: var(--trans-function-ani);
+
+    position: relative;
+
+    &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 50px;
+
+        background: linear-gradient(180deg, transparent, oklch(var(--b5)));
+        pointer-events: none;
+
+        opacity: 0;
+
+        transition-property: opacity;
+        transition-duration: 0.4s;
+        transition-timing-function: var(--trans-function-ani);
+    }
 }
 
 .markdown-body {

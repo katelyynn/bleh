@@ -131,9 +131,46 @@ export function bleh_profiles() {
                 // parse body
                 let about_me_text = about_me_sidebar.querySelector('p');
                 let result = bio_parse(about_me_text, cache);
+                result.classList.add('about-me-content');
 
                 about_me_text.after(result);
                 about_me_text.remove();
+
+                const height = result.offsetHeight;
+                result.style.setProperty('--height', `${height}px`);
+
+                if (page.mobile) {
+                    result.setAttribute('data-showing', 'false');
+                    let showing = false;
+
+                    let show_all_btn;
+                    const show_all = html.node`
+                        <div class="see-more-cont">
+                            <button class="see-more" data-see-more="true" data-type="down" ref=${el => show_all_btn = el} onclick=${() => toggle_show_all()}>
+                                ${tl(trans.read_more)}
+                            </button>
+                        </div>
+                    `;
+
+                    result.after(show_all);
+
+                    function toggle_show_all() {
+                        showing = !showing;
+
+                        show_all_btn.setAttribute('data-showing', showing.toString());
+                        result.setAttribute('data-showing', showing.toString());
+
+                        if (showing) {
+                            show_all_btn.classList.add('left-icon');
+                            show_all_btn.textContent = tl(trans.read_less);
+                            show_all_btn.setAttribute('data-type', 'up');
+                        } else {
+                            show_all_btn.classList.remove('left-icon');
+                            show_all_btn.textContent = tl(trans.read_more);
+                            show_all_btn.setAttribute('data-type', 'down');
+                        }
+                    }
+                }
             }
         }
 
@@ -1755,6 +1792,9 @@ function request_profile_cache(
                     let about_me_text = about_me_sidebar.querySelector('p');
                     bio_parse(about_me_text, cache ? cache : true, false);
                 } else {
+                    delete cache.username;
+                    delete cache.font;
+                    delete cache.font_style;
                     delete cache.banner;
                     delete cache.hue;
                     delete cache.sat;

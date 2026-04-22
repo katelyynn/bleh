@@ -638,6 +638,11 @@ export const trans = {
         zh: '阅读更多',
         tr: 'Devamını oku'
     },
+    read_less: {
+        // if pressing read more extended content
+        // this will do the opposite
+        en: 'Read less'
+    },
     refresh: {
         en: 'Refresh',
         de: 'Aktualisieren',

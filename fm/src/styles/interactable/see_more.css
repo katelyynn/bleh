@@ -293,3 +293,10 @@ a.inline-add-icon {
     display: flex;
     gap: var(--card-gap);
 }
+
+
+.see-more-cont {
+    display: flex;
+    justify-content: center;
+    margin-top: var(--card-gap);
+}
