@@ -10965,6 +10965,9 @@ export const trans = {
     recents: {
         // recent scrobbles
         en: 'Recents'
+    },
+    better_with_friends: {
+        en: 'Music is better with friends, {a}add to your close friends list{/a}'
     }
 } as const satisfies Record<string, any>;
 

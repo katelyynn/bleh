@@ -1,7 +1,7 @@
 .campfire {
-    --w: 320px;
-    --gap: 5px;
-    padding: 60px 0;
+    --w: 260px;
+    --gap: -50px;
+    padding: 80px 0;
     overflow: hidden;
 
     display: flex;
@@ -9,23 +9,12 @@
     align-items: center;
     gap: 40px;
 
-    background: oklch(var(--b6)) !important;
-    border-top-left-radius: var(--card-radius);
-    border-top-right-radius: var(--card-radius);
+    background: oklch(var(--b5)) !important;
+    border-radius: inherit;
+    border-bottom-left-radius: unset;
+    border-bottom-right-radius: unset;
 
     position: relative;
-
-    @media (max-width: 2000px) {
-        --w: 280px;
-    }
-
-    @media (max-width: 900px) {
-        --w: 280px;
-    }
-
-    @media (max-width: 760px) {
-        --w: 260px;
-    }
 
     @media (max-width: 600px) {
         --w: 230px;
@@ -41,13 +30,11 @@
         background-size: cover;
         background-position: center;
 
-        --mask: linear-gradient(180deg, white, transparent);
+        --mask: linear-gradient(180deg, transparent, white, transparent);
         mask-image: var(--mask);
         -webkit-mask-image: var(--mask);
 
         opacity: 0.2;
-
-        scale: 1.05;
     }
 
     & > .campfire-items {
@@ -72,8 +59,8 @@
                 width: var(--w);
                 height: var(--w);
                 border-radius: var(--item-big-radius);
-                background: var(--avatar-generic-background);
-                box-shadow: var(--menu-shadow);
+                background: oklch(var(--b4));
+                box-shadow: var(--card-shadow);
                 overflow: hidden;
 
                 position: relative;
@@ -83,6 +70,7 @@
                     --mask-size: var(--cover-size-400);
                     user-select: none;
                     -webkit-user-drag: none;
+                    pointer-events: none;
                 }
 
                 &:before {
@@ -114,11 +102,14 @@
             }
 
             &[aria-checked="false"] {
-                opacity: 0.8;
-                filter: brightness(20%);
-                transform: var(--offset) scale(0.8);
+                opacity: 0.4;
+                transform: var(--offset) scale(0.7);
 
                 cursor: pointer;
+            }
+
+            &[aria-checked="true"] {
+                z-index: 20;
             }
 
             transition-property: transform, opacity, filter;
@@ -129,6 +120,7 @@
 
     & > .campfire-intro {
         z-index: 11;
+        display: none;
     }
 
     & > .campfire-details {
@@ -183,10 +175,11 @@
         padding: var(--card-padding) 0;
 
         &.content-main {
-            width: var(--cards-main-width);
+            flex: 1;
         }
         &.content-side {
-            width: var(--cards-sidebar-width);
+            flex-shrink: 0;
+            width: 500px;
         }
 
         & > section {
@@ -194,4 +187,11 @@
             margin: unset;
         }
     }
+}
+
+
+.friends-panel {
+    background: oklch(var(--b5));
+    margin: unset;
+    padding: var(--card-padding);
 }
