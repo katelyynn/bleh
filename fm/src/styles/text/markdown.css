@@ -4,15 +4,16 @@
 }*/
 
 .about-me-content {
-    max-height: var(--height, 2000px);
-    overflow: hidden;
-
     &[data-showing="false"] {
         max-height: 100px;
 
         &:after {
             opacity: 1;
         }
+    }
+    &[data-showing="true"] {
+        max-height: var(--height, 2000px);
+        overflow: hidden;
     }
 
     transition-property: max-height;

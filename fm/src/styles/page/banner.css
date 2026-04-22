@@ -33,6 +33,7 @@
 
     @media (max-width: 980px) {
         --w: var(--cards-width);
+        --header-size: 193px;
         opacity: 0.8;
     }
 

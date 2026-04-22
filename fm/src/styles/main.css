@@ -23,6 +23,8 @@ body {
 
     --underline-offset: 3px;
 
+    overflow-x: hidden;
+
     text-underline-offset: var(--underline-offset);
 
     &:before {

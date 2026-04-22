@@ -475,9 +475,11 @@ button.navlist-more {
 }
 
 /* ensure vertical scrollbars dont appear */
-.navlist--more,
-.navlist--more .navlist-items {
-    overflow: visible !important;
+@media (min-width: 981px) {
+    .navlist--more,
+    .navlist--more .navlist-items {
+        overflow: visible !important;
+    }
 }
 
 .secondary-nav-item--more {

@@ -128,7 +128,7 @@ last.fm changes as of 2024-05-20 */
 
         &:before {
             background: oklch(
-                var(--b6),
+                var(--b6) /
                 var(--solarium-opacity, 85%)
             ) !important;
             backdrop-filter: var(--solarium) !important;
