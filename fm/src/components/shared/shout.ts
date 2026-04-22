@@ -58,8 +58,7 @@ export function patch_shouts() {
                 render(shout_name, html`
                     <span class="username-custom">${cache[shout_name_text].username}</span>
                     <span class="username-original">
-                        <span class="at">@</span>
-                        ${shout_name_text}
+                        <span class="at">@</span>${shout_name_text}
                     </span>
                 `);
             } else {

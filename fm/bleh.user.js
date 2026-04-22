@@ -64781,8 +64781,7 @@
           render(shout_name, html`
                     <span class="username-custom">${cache2[shout_name_text].username}</span>
                     <span class="username-original">
-                        <span class="at">@</span>
-                        ${shout_name_text}
+                        <span class="at">@</span>${shout_name_text}
                     </span>
                 `);
         } else {
