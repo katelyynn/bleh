@@ -1717,7 +1717,7 @@ export const trans = {
             en: 'Temporarily override your selected accent to match artwork',
             de: 'Überschreibe vorübergehend deine ausgewählte Akzentfarbe, um mit dem Cover übereinzustimmen',
             es: 'Reemplaza temporalmente tu color de acento seleccionado para coincidir con la portada',
-            it: 'Ignora temporaneamente l’accento selezionato per adattarlo all’immagine'
+            it: 'Sostituisci temporaneamente l’accento selezionato per adattarlo all’immagine'
         }
     },
     viewing_albums: {
@@ -8259,7 +8259,7 @@ export const trans = {
         de: 'Collage erstellen',
         ru: 'Создать коллаж',
         es: 'Crear collage',
-        it: 'Crea un collage'
+        it: 'Crea collage'
     },
     create_a_collage: {
         en: 'Create a collage of your choosing',
