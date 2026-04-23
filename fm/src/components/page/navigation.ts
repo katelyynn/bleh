@@ -1278,39 +1278,23 @@ export function append_nav() {
     // mobile
     masthead.appendChild(html.node`
         <div class="mobile-controls">
-            <a class="btn mobile-control icon" aria-checked=${page.type == 'overview' || page.type == 'recommended' || page.type == 'releases' || page.type == 'bookmarks' || page.type == 'charts'} data-menu-item="home" href="${root}music">
-                ${tl(trans.home)}
-            </a>
             ${() => {
                 const btn = html.node`
-                    <a class="btn mobile-control icon" aria-checked=${page.type == 'search'} data-menu-item="search">
-                        ${tl(trans.search)}
+                    <a class="btn mobile-control icon" aria-checked=${page.type == 'inbox'} data-type="inbox">
+                        ${tl(trans.inbox)}
+                        ${count > 0 ? html.node`<div class="notification-count-badge"></div>` : ''}
                     </a>
                 `;
-
-                let search_input;
 
                 tippy(btn, {
                     theme: 'mobile',
                     content: html.node`
                         <div class="window-header">
-                            <div class="bleh-icon" data-type="search" style="--icon: var(--mask)" />
-                            <div class="window-title">${tl(trans.search)}</div>
+                            <div class="bleh-icon" data-type="inbox" style="--icon: var(--mask)" />
+                            <div class="window-title">${tl(trans.inbox)}</div>
                         </div>
-                        ${() => {
-                            const form = html.node`
-                                <form action="${root}search" method="get">
-                                    ${(search_input = input({
-                                        name: 'q',
-                                        func: () => {
-                                            form.submit();
-                                        }
-                                    }))}
-                                </form>
-                            `;
-
-                            return form;
-                        }}
+                        ${setting({ id: 'inbox_view', func: render_inbox })}
+                        <div class="window-content" />
                     `,
                     placement: 'top',
                     interactive: true,
@@ -1318,8 +1302,16 @@ export function append_nav() {
                     trigger: 'click',
                     appendTo: document.body,
 
-                    onShow() {
-                        search_input.focus();
+                    onShow(instance) {
+                        console.info(
+                            'navigation instance',
+                            instance,
+                            instance.popper
+                        );
+                        page.state.inbox_content =
+                            instance.popper.querySelector('.window-content');
+
+                        render_inbox();
                     }
                 });
 
@@ -1332,6 +1324,7 @@ export function append_nav() {
                             <img src=${auth.avatar} alt=${auth.name}>
                         </span>
                         ${auth.name}
+                        ${update_required === 'true' ? html.node`<div class="notification-count-badge"></div>` : ''}
                     </a>
                 `;
 
@@ -1339,12 +1332,6 @@ export function append_nav() {
                     theme: 'mobile',
                     content: html.node`
                         <div class="window-menu-items">
-                            <form>
-                                <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
-                                <a class="dropdown-menu-clickable-item colourful" ref=${(el) => (button = el)} data-menu-item="logout" href="${root}logout">
-                                    ${tl(trans.logout)}
-                                </a>
-                            </form>
                             <button class="dropdown-menu-clickable-item" data-menu-item="news" onclick=${() => {
                                 news();
                             }}>
@@ -1392,15 +1379,26 @@ export function append_nav() {
 
                                 return elem;
                             })}
-                            ${
-                                settings.starred_friend != '' ?
-                                    html.node`
-                                        <a class="dropdown-menu-clickable-item no-colour colourful" data-type="starred_friend" data-is-shortcut="true" href="${root}user/${settings.starred_friend}">
-                                            ${settings.starred_friend}
-                                        </a>
-                                    `
-                                :   ''
-                            }
+                            <a class="dropdown-menu-clickable-item" aria-checked=${page.type == 'bleh_settings'} data-menu-item="bleh" href="${root}bleh">
+                                ${tl(trans.settings)}
+                            </a>
+                            <a class="dropdown-menu-clickable-item" aria-checked=${page.type == 'settings'} data-menu-item="settings" href="${root}settings">
+                                ${tl(trans.settings)}
+                            </a>
+                            <a class="dropdown-menu-clickable-item" aria-checked=${page.type == 'ipod'} data-type="ipod" href="${root}bleh/now">
+                                ${tl(trans.music)}
+                            </a>
+                            ${settings.starred_friend != '' ? html.node`
+                                <a class="dropdown-menu-clickable-item no-colour colourful" data-type="starred_friend" data-is-shortcut="true" href="${root}user/${settings.starred_friend}">
+                                    ${settings.starred_friend}
+                                </a>
+                            ` : ''}
+                            <form>
+                                <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
+                                <a class="dropdown-menu-clickable-item colourful" ref=${(el) => (button = el)} data-menu-item="logout" href="${root}logout">
+                                    ${tl(trans.logout)}
+                                </a>
+                            </form>
                             <a class="dropdown-menu-clickable-item" data-type="user" href="${root}user/${auth.name}">
                                 ${auth.name}
                             </a>
@@ -1417,21 +1415,34 @@ export function append_nav() {
             }}
             ${() => {
                 const btn = html.node`
-                    <a class="btn mobile-control icon" aria-checked=${page.type == 'inbox'} data-type="inbox">
-                        ${tl(trans.inbox)}
-                        ${count > 0 ? html.node`<div class="notification-count-badge"></div>` : ''}
+                    <a class="btn mobile-control icon" aria-checked=${page.type == 'search'} data-menu-item="search">
+                        ${tl(trans.search)}
                     </a>
                 `;
+
+                let search_input;
 
                 tippy(btn, {
                     theme: 'mobile',
                     content: html.node`
                         <div class="window-header">
-                            <div class="bleh-icon" data-type="inbox" style="--icon: var(--mask)" />
-                            <div class="window-title">${tl(trans.inbox)}</div>
+                            <div class="bleh-icon" data-type="search" style="--icon: var(--mask)" />
+                            <div class="window-title">${tl(trans.search)}</div>
                         </div>
-                        ${setting({ id: 'inbox_view', func: render_inbox })}
-                        <div class="window-content" />
+                        ${() => {
+                            const form = html.node`
+                                <form action="${root}search" method="get">
+                                    ${(search_input = input({
+                                        name: 'q',
+                                        func: () => {
+                                            form.submit();
+                                        }
+                                    }))}
+                                </form>
+                            `;
+
+                            return form;
+                        }}
                     `,
                     placement: 'top',
                     interactive: true,
@@ -1439,25 +1450,13 @@ export function append_nav() {
                     trigger: 'click',
                     appendTo: document.body,
 
-                    onShow(instance) {
-                        console.info(
-                            'navigation instance',
-                            instance,
-                            instance.popper
-                        );
-                        page.state.inbox_content =
-                            instance.popper.querySelector('.window-content');
-
-                        render_inbox();
+                    onShow() {
+                        search_input.focus();
                     }
                 });
 
                 return btn;
             }}
-            <a class="btn mobile-control icon" aria-checked=${page.type == 'settings' || page.type == 'bleh_settings'} data-menu-item="settings" href="${root}bleh">
-                ${tl(trans.settings)}
-                ${update_required === 'true' ? html.node`<div class="notification-count-badge"></div>` : ''}
-            </a>
         </div>
     `);
 }
