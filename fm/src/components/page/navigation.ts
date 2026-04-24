@@ -30,7 +30,7 @@ import {
     load_profile_cache_externally,
     open_starred_friend_window
 } from '@/pages/profile/profile';
-import { sponsor } from '@/components/sponsor';
+import { is_sponsor, sponsor } from '@/components/sponsor';
 import { generic_link_menu, register_menu } from '@/components/menu';
 import { copy, get_language_name, romanise } from '@/build/tools';
 import { submit_scrobble } from '@/components/music/scrobble';
@@ -42,6 +42,7 @@ import { queue_popup } from '@/components/dialog/popup';
 import { icon, icons } from '../shared/icon';
 import { avatar } from '../shared/avatar';
 import { convert_lang_to_country, flag } from '../shared/flag';
+import { keys } from '../settings/storage';
 
 export function patch_masthead() {
     let masthead_logo = document.body.querySelector('.masthead-logo');
@@ -963,7 +964,8 @@ export function append_nav() {
                                             </a>
                                             <div class="button-combo-sep" />
                                             <button class="dropdown-menu-clickable-item chibi" data-type="continue" onclick=${() => {
-                                                const friends = settings.friends.filter(friend => friend != settings.starred_friend);
+                                                const cache = JSON.parse(localStorage.getItem(keys.profile_cache) || '{}');
+                                                const friends = settings.friends.filter((friend: string) => friend != settings.starred_friend);
 
                                                 render(page_2, html``); // fix crash
                                                 render(page_2, html`
@@ -972,19 +974,46 @@ export function append_nav() {
                                                     }}>
                                                         ${tl(trans.back)}
                                                     </button>
-                                                    ${settings.starred_friend ? html.node`
-                                                    <a class="dropdown-menu-clickable-item" data-type="profile" href="${root}user/${settings.starred_friend}">
-                                                        <span><span class="at">@</span>${settings.starred_friend}</span>
-                                                        <span class="star-icon colourful">
-                                                            <span class="bleh-icon" />
-                                                        </span>
-                                                    </a>
-                                                    ` : ''}
-                                                    ${friends.map(friend => html.node`
-                                                    <a class="dropdown-menu-clickable-item" data-type="profile" href="${root}user/${friend}">
-                                                        <span><span class="at">@</span>${friend}</span>
-                                                    </a>
-                                                    `)}
+                                                    ${settings.starred_friend ? () => {
+                                                        const friend = settings.starred_friend as string;
+                                                        const valid = is_sponsor(friend);
+
+                                                        return html.node`
+                                                            <a class="dropdown-menu-clickable-item" data-type="profile" href="${root}user/${friend}">
+                                                                ${cache[friend]?.username && valid ? html.node`
+                                                                    <span class="username-combo">
+                                                                        <span class="username-custom">${cache[friend].username}</span>
+                                                                        <span class="username-original">
+                                                                            <span class="at">@</span>${friend}
+                                                                        </span>
+                                                                    </span>
+                                                                ` : html.node`
+                                                                    <span><span class="at">@</span>${friend}</span>
+                                                                `}
+                                                                <span class="star-icon colourful">
+                                                                    <span class="bleh-icon" />
+                                                                </span>
+                                                            </a>
+                                                        `;
+                                                    } : ''}
+                                                    ${friends.map((friend: string) => {
+                                                        const valid = is_sponsor(friend);
+
+                                                        return html.node`
+                                                            <a class="dropdown-menu-clickable-item" data-type="profile" href="${root}user/${friend}">
+                                                                ${cache[friend]?.username && valid ? html.node`
+                                                                    <span class="username-combo">
+                                                                        <span class="username-custom">${cache[friend].username}</span>
+                                                                        <span class="username-original">
+                                                                            <span class="at">@</span>${friend}
+                                                                        </span>
+                                                                    </span>
+                                                                ` : html.node`
+                                                                    <span><span class="at">@</span>${friend}</span>
+                                                                `}
+                                                            </a>
+                                                        `;
+                                                    })}
                                                     <div class="sep" />
                                                     <button class="dropdown-menu-clickable-item" data-type="edit" onclick=${() => {
                                                         open_starred_friend_window();

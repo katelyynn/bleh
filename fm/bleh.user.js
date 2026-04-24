@@ -70689,6 +70689,7 @@
                                             </a>
                                             <div class="button-combo-sep" />
                                             <button class="dropdown-menu-clickable-item chibi" data-type="continue" onclick=${() => {
+              const cache2 = JSON.parse(localStorage.getItem(keys2.profile_cache) || "{}");
               const friends2 = settings.friends.filter((friend) => friend != settings.starred_friend);
               render(page_2, html``);
               render(page_2, html`
@@ -70697,19 +70698,44 @@
               }}>
                                                         ${tl2(trans.back)}
                                                     </button>
-                                                    ${settings.starred_friend ? html.node`
-                                                    <a class="dropdown-menu-clickable-item" data-type="profile" href="${root}user/${settings.starred_friend}">
-                                                        <span><span class="at">@</span>${settings.starred_friend}</span>
-                                                        <span class="star-icon colourful">
-                                                            <span class="bleh-icon" />
-                                                        </span>
-                                                    </a>
-                                                    ` : ""}
-                                                    ${friends2.map((friend) => html.node`
-                                                    <a class="dropdown-menu-clickable-item" data-type="profile" href="${root}user/${friend}">
-                                                        <span><span class="at">@</span>${friend}</span>
-                                                    </a>
-                                                    `)}
+                                                    ${settings.starred_friend ? () => {
+                const friend = settings.starred_friend;
+                const valid = is_sponsor(friend);
+                return html.node`
+                                                            <a class="dropdown-menu-clickable-item" data-type="profile" href="${root}user/${friend}">
+                                                                ${cache2[friend]?.username && valid ? html.node`
+                                                                    <span class="username-combo">
+                                                                        <span class="username-custom">${cache2[friend].username}</span>
+                                                                        <span class="username-original">
+                                                                            <span class="at">@</span>${friend}
+                                                                        </span>
+                                                                    </span>
+                                                                ` : html.node`
+                                                                    <span><span class="at">@</span>${friend}</span>
+                                                                `}
+                                                                <span class="star-icon colourful">
+                                                                    <span class="bleh-icon" />
+                                                                </span>
+                                                            </a>
+                                                        `;
+              } : ""}
+                                                    ${friends2.map((friend) => {
+                const valid = is_sponsor(friend);
+                return html.node`
+                                                            <a class="dropdown-menu-clickable-item" data-type="profile" href="${root}user/${friend}">
+                                                                ${cache2[friend]?.username && valid ? html.node`
+                                                                    <span class="username-combo">
+                                                                        <span class="username-custom">${cache2[friend].username}</span>
+                                                                        <span class="username-original">
+                                                                            <span class="at">@</span>${friend}
+                                                                        </span>
+                                                                    </span>
+                                                                ` : html.node`
+                                                                    <span><span class="at">@</span>${friend}</span>
+                                                                `}
+                                                            </a>
+                                                        `;
+              })}
                                                     <div class="sep" />
                                                     <button class="dropdown-menu-clickable-item" data-type="edit" onclick=${() => {
                 open_starred_friend_window();
