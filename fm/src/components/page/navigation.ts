@@ -1030,6 +1030,29 @@ export function append_nav() {
                                     `;
                                 }
 
+                                const simple_menu = tippy(elem, {
+                                    theme: 'context-menu',
+                                    content: html.node`
+                                        <a class="dropdown-menu-clickable-item" data-type="quick_access" href="${root}bleh/profile?setting=navigation_items">
+                                            ${tl(trans.edit_quick_access)}
+                                        </a>
+                                    `,
+                                    placement: 'right-start',
+                                    trigger: 'manual',
+                                    interactive: true,
+                                    interactiveBorder: 10,
+                                    offset: [0, 0],
+                                    appendTo: document.body,
+
+                                    onShow(instance) {
+                                        instance.popper.addEventListener('click', (event) => {
+                                            instance.hide();
+                                        });
+                                    }
+                                });
+
+                                register_menu(elem, simple_menu);
+
                                 return elem;
                             })}
                             <div class="button-combo">

@@ -955,10 +955,12 @@ export async function render_setting_page(page_id) {
                 <div class="banner-previews">
                     <div class="banner-preview-item">
                         <strong class="banner-preview-label">${auth.name}</strong>
-                        <div class="banner-preview-img ${!own_banners ? 'hide-banner' : ''}" style="background-image: url(${cache.banner || avatar_replace ? avatar(auth.avatar, 'ar0') : fallback_url})" />
+                        <div class="banner-preview-avatar" style="background-image: url(${avatar(auth.avatar, 'ar0')})" />
+                        <div class="banner-preview-img ${!own_banners ? 'hide-banner' : ''}" style="background-image: url(${cache.banner ? cache.banner : avatar_replace ? avatar(auth.avatar, 'ar0') : fallback_url})" />
                     </div>
                     <div class="banner-preview-item">
                         <strong class="banner-preview-label">${tl(trans.other_profiles)}</strong>
+                        <div class="banner-preview-avatar" style="background-image: url(${fallback_avi})" />
                         <div class="banner-preview-img ${!other_banners ? 'hide-banner' : ''}" style="background-image: url(${avatar_replace ? fallback_avi : fallback_url})" />
                     </div>
                 </div>
