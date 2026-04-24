@@ -133,10 +133,9 @@ export function collage({ host, sidebar } = {}) {
             data-filled="false"
             ref=${(el) => (body = el)}
         >
-            <div class="loading-data-container">
-                <div class="loading-data-text info">
-                    ${tl(trans.choose_a_timeframe_above)}
-                </div>
+            <div class="placeholder-block">
+                <div class="placeholder-head">(๑>◡<๑)</div>
+                <div class="placeholder-summary">${tl(trans.choose_a_timeframe_above)}</div>
             </div>
         </div>
     `);

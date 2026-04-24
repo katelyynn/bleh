@@ -55,14 +55,14 @@
 
     cursor: default;
     color: oklch(var(--c2));
+
+    user-select: none;
 }
 .placeholder-head {
     color: oklch(var(--c3));
     font-size: 18px;
     line-height: 22px;
     font-weight: var(--font-weight-bold);
-
-    user-select: none;
 }
 
 .loading-data-container {

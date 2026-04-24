@@ -430,8 +430,9 @@ export function register_rabbit() {
 
                     return button;
                 }) : html.node`
-                    <div class="loading-data-container">
-                        <div class="loading-data-text failed">${tl(trans.nothing_matches_your_search)}</div>
+                    <div class="placeholder-block">
+                        <div class="placeholder-head">₍ᐢ. .ᐢ₎</div>
+                        <div class="placeholder-summary">${tl(trans.nothing_matches_your_search)}</div>
                     </div>
                 `}
             `);
