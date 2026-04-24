@@ -228,3 +228,21 @@ export function new_badges(badges) {
         type: 'sponsor'
     });
 }
+
+export function is_sponsor(name: string) {
+    if (!sponsor_list.version) return false;
+
+    if (sponsor_list.related.special.includes(name)) return true;
+
+    let entry = sponsor_list.users[name];
+
+    if (entry) {
+        entry = {
+            sponsor: true,
+            contributor: false,
+            ...entry
+        }
+
+        return entry.sponsor;
+    }
+}

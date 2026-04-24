@@ -295,6 +295,7 @@
                     translate: 0 40px !important;
                 }
 
+                .user-list-shared-artists,
                 .user-list-about-me:not(.has-featured-track) {
                     opacity: 0;
                 }
@@ -404,6 +405,7 @@
                     }
                 }
 
+                .user-list-shared-artists,
                 .user-list-about-me {
                     transition-property: opacity;
                     transition-duration: 0.4s;

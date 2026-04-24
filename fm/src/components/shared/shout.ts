@@ -23,6 +23,7 @@ import { keybind } from '@/components/dialog/rabbit';
 import { correct_artist, correct_item_by_artist } from '@/components/music/lotus';
 import { ff } from '../settings/sku';
 import { keys } from '../settings/storage';
+import { is_sponsor } from '../sponsor';
 
 export function patch_shouts() {
     if (!page.structure.main) return;
@@ -53,7 +54,9 @@ export function patch_shouts() {
 
             const shout_name_text = shout_name.textContent;
 
-            if (cache[shout_name_text] && cache[shout_name_text].username) {
+            const valid = is_sponsor(shout_name_text);
+
+            if (cache[shout_name_text]?.username && valid) {
                 shout_name.classList.add('username-combo');
                 render(shout_name, html`
                     <span class="username-custom">${cache[shout_name_text].username}</span>

@@ -168,7 +168,8 @@ export const icons = {
     indent: 'indent',
     lotus: 'lotus',
     oracle: 'oracle',
-    credits: 'credits'
+    credits: 'credits',
+    sparkle: 'sparkle'
 };
 
 interface icon {

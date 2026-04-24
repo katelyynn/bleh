@@ -411,3 +411,13 @@ hr {
         opacity: 1;
     }
 }
+
+
+.header-with-icon {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    --icon-size: 14px;
+    --icon-colour: oklch(var(--l3-c));
+}

@@ -20,6 +20,10 @@
     gap: var(--card-gap);
 
     flex-shrink: 0;
+
+    @media (min-width: 981px) {
+        width: calc((var(--w) * 10) + (var(--g) * 9));
+    }
 }
 
 .summary-content {

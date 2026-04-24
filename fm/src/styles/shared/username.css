@@ -1,5 +1,5 @@
 .username-combo {
-    display: flex;
+    display: flex !important;
     gap: 0 6px;
     overflow: hidden;
 
@@ -12,6 +12,7 @@
 
 .username-original {
     opacity: 0.6;
+    font-size: 13px;
 }
 
 .username-custom, .username-original {
