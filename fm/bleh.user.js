@@ -64750,7 +64750,8 @@
     if (name) {
       name.textContent = name.textContent.trim();
       const name_text = name.textContent;
-      if (cache2[name_text] && cache2[name_text].username) {
+      const valid = is_sponsor(name_text);
+      if (cache2[name_text]?.username && valid) {
         name.classList.add("username-combo", "username-combo-vertical");
         render(name, html`
                 <span class="username-custom">${cache2[name_text].username}</span>
@@ -77780,7 +77781,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
             sister = romanise(correct_artist(item.sister));
             name = romanise(correct_item_by_artist(item.name, item.sister));
           }
-          if (cache2.username) {
+          const valid = is_sponsor(friend);
+          if (cache2.username && valid) {
             render(user_name, html`
                         <strong class="username-combo">
                             <span class="username-custom">${cache2.username}</span>

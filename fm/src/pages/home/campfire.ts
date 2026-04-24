@@ -8,6 +8,7 @@ import { Hole, html, render } from 'lighterhtml';
 import { load_profile_cache_externally, open_starred_friend_window } from '../profile/profile';
 import { load_recent_tracks } from '../home';
 import tippy from 'tippy.js';
+import { is_sponsor } from '@/components/sponsor';
 
 interface album {
     image: string,
@@ -242,7 +243,9 @@ function campfire_friend(friend: string) {
                     name = romanise(correct_item_by_artist(item.name, item.sister));
                 }
 
-                if (cache.username) {
+                const valid = is_sponsor(friend);
+
+                if (cache.username && valid) {
                     render(user_name, html`
                         <strong class="username-combo">
                             <span class="username-custom">${cache.username}</span>

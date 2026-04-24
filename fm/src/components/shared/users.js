@@ -11,6 +11,7 @@ import { patch_avatar, style_name_from_badge } from '@/components/shared/avatar'
 import { correct_artist } from '@/components/music/lotus';
 import { log } from '@/build/log.js';
 import { keys } from '../settings/storage';
+import { is_sponsor } from '../sponsor';
 
 export function bleh_users() {
     const users = page.structure.main?.querySelectorAll('.user-list-item:not(.user-list-item-mobile-ad)');
@@ -43,8 +44,9 @@ export function patch_user_list_item(user, index, cache = {}) {
     if (name) {
         name.textContent = name.textContent.trim();
         const name_text = name.textContent;
+        const valid = is_sponsor(name_text);
 
-        if (cache[name_text] && cache[name_text].username) {
+        if (cache[name_text]?.username && valid) {
             name.classList.add('username-combo', 'username-combo-vertical');
             render(name, html`
                 <span class="username-custom">${cache[name_text].username}</span>
