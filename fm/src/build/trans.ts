@@ -1710,44 +1710,50 @@ export const trans = {
             // may want their colour to be changed
             en: 'Change my accent colour for',
             de: 'Ändere meine Akzentfarbe für',
-            es: 'Cambiar mi color de acento al'
+            es: 'Cambiar mi color de acento al',
+            ru: 'Изменять акцентный цвет для'
         },
         body: {
             en: 'Temporarily override your selected accent to match artwork',
             de: 'Überschreibe vorübergehend deine ausgewählte Akzentfarbe, um mit dem Cover übereinzustimmen',
-            es: 'Reemplaza temporalmente tu color de acento seleccionado para coincidir con la portada'
-
+            es: 'Reemplaza temporalmente tu color de acento seleccionado para coincidir con la portada',
+            ru: 'Временно заменять выбранный акцентный цвет на цвет обложки'
         }
     },
     viewing_albums: {
         // a sub-option for change_my_colour_when
         en: 'Viewing albums',
         de: 'Albumansicht',
-        es: 'Ver álbumes'
+        es: 'Ver álbumes',
+        ru: 'Просмотр альбомов'
     },
     viewing_tracks: {
         // a sub-option for change_my_colour_when
         en: 'Viewing artists',
         de: 'Künstleransicht',
-        es: 'Ver artistas'
+        es: 'Ver artistas',
+        ru: 'Просмотр артистов'
     },
     viewing_artists: {
         // a sub-option for change_my_colour_when
         en: 'Viewing tracks',
         de: 'Titelansicht',
-        es: 'Ver temas'
+        es: 'Ver temas',
+        ru: 'Просмотр треков'
     },
     colourful_active: {
         // a sub-option for change_my_colour_when
         en: 'Scrobbling a track',
         de: 'Scrobbeln eines Titels',
-        es: 'Hacer scrobbling a un tema'
+        es: 'Hacer scrobbling a un tema',
+        ru: 'Скробблинг трека'
     },
     colourful_all: {
         // a sub-option for change_my_colour_when
         en: 'All tracklists',
         de: 'Alle Titellisten',
-        es: 'Ver listas de temas'
+        es: 'Ver listas de temas',
+        ru: 'Все списки треков'
     },
     configure: {
         en: 'Configure',
@@ -6108,44 +6114,52 @@ export const trans = {
         name: {
             en: 'Interface font',
             de: 'Schriftart der Benutzeroberfläche',
-            es: 'Fuente de interfaz'
+            es: 'Fuente de interfaz',
+            ru: 'Шрифт интерфейса'
         },
         body: {
             en: 'Choose the font that suits you best',
             de: 'Wähle die Schriftart, die dir am besten gefällt',
-            es: 'Elige la fuente que más te guste'
+            es: 'Elige la fuente que más te guste',
+            ru: 'Выберите шрифт, который вам больше всего подходит'
         },
         custom: {
             en: 'Provide your own font',
             de: 'Eigene Schriftart bereitstellen',
-            es: 'Proporciona tu propia fuente'
+            es: 'Proporciona tu propia fuente',
+            ru: 'Укажите свой шрифт'
         },
         stylised: {
             en: 'Stylised',
             de: 'Stilisiert',
-            es: 'Estilizada'
+            es: 'Estilizada',
+            ru: 'Стилизованный'
         },
         simple: {
             en: 'Simple',
             de: 'Einfach',
-            es: 'Simple'
+            es: 'Simple',
+            ru: 'Простой'
         },
         hyperlegible: {
             en: 'Accessible',
             de: 'Barrierefrei',
-            es: 'Accesible'
+            es: 'Accesible',
+            ru: 'Доступный'
         }
     },
     previewing: {
         // used as subtext for previewing a font
         en: 'Previewing: {v}',
         de: 'Vorschau: {v}',
-        es: 'Vista previa: {v}'
+        es: 'Vista previa: {v}',
+        ru: 'Предпросмотр: {v}'
     },
     no_font_selected: {
         en: 'No font selected',
         de: 'Keine Schriftart ausgewählt',
-        es: 'Ninguna fuente seleccionada'
+        es: 'Ninguna fuente seleccionada',
+        ru: 'Шрифт не выбран'
     },
     font_style: {
         en: 'Font style',
@@ -6959,7 +6973,8 @@ export const trans = {
     prev: {
         // previous
         en: 'Prev',
-        es: 'Anterior'
+        es: 'Anterior',
+        ru: 'Назад'
     },
     next: {
         en: 'Next',
@@ -7523,7 +7538,8 @@ export const trans = {
     crop_before_uploading: {
         en: 'Crop image before uploading',
         de: 'Bild vor dem Hochladen zuschneiden',
-        es: 'Cortar imagen antes de subir'
+        es: 'Cortar imagen antes de subir',
+        ru: 'Обрезать изображение перед загрузкой',
     },
     update_to_version: {
         en: 'Update to {v}',
@@ -8465,7 +8481,8 @@ export const trans = {
     missing_artist_info: {
         en: 'This artist is missing key details, maybe you can help out?',
         de: 'Diesem Künstler fehlen wichtige Details, vielleicht kannst du helfen?',
-        es: 'A este artista le faltan detalles clave, ¿quizás puedes ayudar?'
+        es: 'A este artista le faltan detalles clave, ¿quizás puedes ayudar?',
+        ru: 'Об этом артисте не хватает ключевой информации, может, вы поможете?'
     },
     missing_album_info: {
         en: 'This album is missing key details, maybe you can help out?',
@@ -8855,7 +8872,8 @@ export const trans = {
     aspect_ratio_banner: {
         en: 'Displayed at an aspect ratio of {v}, if screen size supports such',
         de: 'Angezeigt mit einem Seitenverhältnis von {v}, wenn die Bildschirmgröße dies unterstützt',
-        es: 'Mostrado con una relación de aspecto de {v}, si el tamaño de la pantalla lo permite'
+        es: 'Mostrado con una relación de aspecto de {v}, si el tamaño de la pantalla lo permite',
+        ru: 'Отображается с соотношением сторон {v}, если размер экрана позволяет'
     },
     profile_accent: {
         name: {
@@ -10793,116 +10811,138 @@ export const trans = {
     album_name: {
         en: 'Album name',
         de: 'Albumname',
-        es: 'Nombre del álbum'
+        es: 'Nombre del álbum',
+        ru: 'Название альбома'
     },
     search_for_settings: {
         en: 'Search for settings',
         de: 'Nach Einstellungen suchen',
-        es: 'Buscar opciones'
+        es: 'Buscar opciones',
+        ru: 'Поиск настроек'
     },
     found_value_results: {
         en: 'Found {c} result(s)',
         de: '{c} Ergebnis(se) gefunden',
-        es: '{c} resultados encontrados'
+        es: '{c} resultados encontrados',
+        ru: 'Найдено результатов: {c}'
     },
     translated_from_value: {
         en: 'Translated from {v}',
         de: 'Übersetzt von {v}',
-        es: 'Traducido de {v}'
+        es: 'Traducido de {v}',
+        ru: 'Переведено с {v}'
     },
     follow_guidelines: {
         en: 'Keep in mind the {a}community guidelines{/a}',
         de: 'Denke daran, die {a}Community-Richtlinien{/a} zu befolgen',
-        es: 'Ten en cuenta los {a}lineamientos de la comunidad{/a}'
+        es: 'Ten en cuenta los {a}lineamientos de la comunidad{/a}',
+        ru: 'Учитывайте {a}правила сообщества{/a}'
     },
     link_val: {
         // text 1, text 2
         // text colour
         en: 'Text {v}',
         de: 'Text {v}',
-        es: 'Texto {v}'
+        es: 'Texto {v}',
+        ru: 'Текст {v}'
     },
     bg_val: {
         // fill 1, fill 2
         // the filling of a background colour
         en: 'Fill {v}',
         de: 'Füllfarbe {v}',
-        es: 'Relleno {v}'
+        es: 'Relleno {v}',
+        ru: 'Заливка {v}'
     },
     styled_with_font: {
         en: 'Styled with {f}.',
         de: 'Gestylt mit {f}.',
-        es: 'Escrito con {f}'
+        es: 'Escrito con {f}',
+        ru: 'Стилизовано шрифтом {f}'
     },
     change_font: {
         en: 'Change font',
         de: 'Schriftart ändern',
-        es: 'Cambiar fuente'
+        es: 'Cambiar fuente',
+        ru: 'Изменить шрифт'
     },
     and_count_more: {
         en: 'and {c} more',
         de: 'und {c} weitere',
-        es: 'y {c} más'
+        es: 'y {c} más',
+        ru: 'и ещё {c}'
     },
     scrobbling_now: {
         en: 'Scrobbling now',
         de: 'Wird gerade gescrobbelt',
-        es: 'Haciendo scrobbling ahora'
+        es: 'Haciendo scrobbling ahora',
+        ru: 'Скробблится сейчас'
     },
     recent_scrobble: {
         en: 'Recently scrobbled',
         de: 'Kürzlich gescrobbelt',
-        es: 'Scrobbling reciente'
+        es: 'Scrobbling reciente',
+        ru: 'Недавно скробблено'
     },
     no_tracks_found_mb: {
         en: 'No tracks found, possibly a MusicBrainz error',
         de: 'Keine Titel gefunden, möglicherweise ein MusicBrainz-Fehler',
-        es: 'Ningún tema encontrado, posiblemente un error de MusicBrainz'
+        es: 'Ningún tema encontrado, posiblemente un error de MusicBrainz',
+        ru: 'Треки не найдены, возможно ошибка MusicBrainz'
     },
     value_scrobbles_recently: {
         en: '{v} scrobbles recently',
         de: '{v} kürzliche Scrobbles',
-        es: '{v} scrobblings recientes'
+        es: '{v} scrobblings recientes',
+        ru: 'Недавно скробблено: {v}'
     },
     on_tour: {
         en: 'On tour',
         de: 'Auf Tour',
-        es: 'De gira'
+        es: 'De gira',
+        ru: 'В туре'
     },
     length: {
         en: 'Length',
         de: 'Dauer',
-        es: 'Duración'
+        es: 'Duración',
+        ru: 'Длительность'
     },
     released: {
         en: 'Released',
         de: 'Veröffentlicht am',
-        es: 'Lanzado'
+        es: 'Lanzado',
+        ru: 'Выпущено'
     },
     value_tracks_time: {
         en: '{count} tracks, {length}',
         de: '{count} Titel, {length}',
-        es: '{count} temas, {length}'
+        es: '{count} temas, {length}',
+        ru: '{count} треков, {length}'
     },
     oracle_vocal: {
         en: 'Performed by',
         de: 'Aufgeführt von',
-        es: 'Interpretado por'
+        es: 'Interpretado por',
+        ru: 'Исполнено'
     },
     oracle_recording: {
         en: 'Recorded by',
         de: 'Aufgenommen von',
-        es: 'Grabado por'
+        es: 'Grabado por',
+        ru: 'Записано'
     },
     oracle_mix: {
         en: 'Produced by',
         de: 'Produziert von',
-        es: 'Producido por'
+        es: 'Producido por',
+        ru: 'Спродюсировано'
     },
     oracle_engineer: {
         en: 'Engineered by',
         de: 'Technisch betreut von',
-        es: 'Diseñado por'
+        es: 'Diseñado por',
+        ru: 'Сведено'
     },
     oracle_editor: {
         en: 'Edited by',
@@ -10917,23 +10957,27 @@ export const trans = {
     oracle_no_credits: {
         en: 'nothing here... (๑/////๑ " )',
         de: 'hier gibt’s nichts zu sehen... (๑/////๑ " )',
-        es: 'Nada aquí... (๑/////๑ " )'
+        es: 'Nada aquí... (๑/////๑ " )',
+        ru: 'ничего нет... (๑/////๑ " )'
     },
     born: {
         en: 'Born',
         de: 'Geboren am',
-        es: 'Nació'
+        es: 'Nació',
+        ru: 'Дата рождения' // gender-neutral variant of "born", "died" and "formed" ~tachyon
     },
     died: {
         en: 'Died',
         de: 'Gestorben am',
-        es: 'Murió'
+        es: 'Murió',
+        ru: 'Дата смерти'
     },
     formed: {
         // like a group, created
         en: 'Formed',
         de: 'Gegründet am',
-        es: 'Formado'
+        es: 'Formado',
+        ru: 'Дата основания'
     },
     ended: {
         en: 'Ended',
@@ -10944,39 +10988,46 @@ export const trans = {
         name: {
             en: 'Show accompanying disc for albums and tracks',
             de: 'Schallplatte für Alben und Titel anzeigen',
-            es: 'Mostrar disco adjunto en álbumes y temas'
+            es: 'Mostrar disco adjunto en álbumes y temas',
+            ru: 'Показывать диск для альбомов и треков'
         },
         body: {
             en: 'Add small visual flair to music pages',
             de: 'Fügt kleine visuelle Effekte zu Musikseiten hinzu',
-            es: 'Añade un pequeño efecto visual a las páginas de música'
+            es: 'Añade un pequeño efecto visual a las páginas de música',
+            ru: 'Добавить небольшое визуальное украшение на страницы музыки'
         }
     },
     move_up: {
         en: 'Move up',
         de: 'Nach oben verschieben',
-        es: 'Mover arriba'
+        es: 'Mover arriba',
+        ru: 'Переместить вверх'
     },
     move_down: {
         en: 'Move down',
         de: 'Nach unten verschieben',
-        es: 'Mover abajo'
+        es: 'Mover abajo',
+        ru: 'Переместить вниз'
     },
     other_user: {
         en: 'Other user',
         de: 'Anderer Benutzer',
-        es: 'Otro usuario'
+        es: 'Otro usuario',
+        ru: 'Другой пользователь'
     },
     count_bar_right: {
         name: {
             en: 'Align count to right-side',
             de: 'Zähler auf die rechte Seite ausrichten',
-            es: 'Alinear cuenta al lado derecho'
+            es: 'Alinear cuenta al lado derecho',
+            ru: 'Выравнивать счётчик по правому краю'
         },
         body: {
             en: 'Control the direction of the bar progress and text',
             de: 'Steuerung der Richtung des Balkenfortschritts und des Textes',
-            es: 'Controla la dirección del texto y progreso de la barra'
+            es: 'Controla la dirección del texto y progreso de la barra',
+            ru: 'Управлять направлением прогресс-бара и текста'
         }
     }
 } as const satisfies Record<string, any>;
