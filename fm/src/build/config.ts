@@ -97,7 +97,7 @@ export let inbuilt_settings = {
     }
 };
 
-export const other_setting_types = ['list', 'tabs'];
+export const other_setting_types = ['list'];
 
 export let settings_store: Record<string, setting_instance> = {
     theme: {

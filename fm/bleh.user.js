@@ -91763,7 +91763,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       type: "toggle"
     }
   };
-  var other_setting_types = ["list", "tabs"];
+  var other_setting_types = ["list"];
   var settings_store = {
     theme: {
       default: "darker",
