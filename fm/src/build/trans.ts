@@ -48,7 +48,7 @@ export let lang_info = {
     },
     pt: {
         name: get_language_name('pt'),
-        by: ['ArthRMH', 'satisfeita', 'fr0r', 'urwq'],
+        by: ['ArthRMH', 'satisfeita', 'fr0r', 'urwq', 'foognocchie'],
         last_updated: '2025-11-25'
     },
     sv: {
