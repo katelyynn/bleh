@@ -985,7 +985,6 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
             on_selection(null, null, false);
         },
         func_select: on_selection,
-        submit_on_character: true,
         required,
         maxlength,
         focus: autofocus
@@ -993,6 +992,12 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
     let overlay;
 
     const md_editor = textarea.editor;
+
+    md_editor.addEventListener('input', () => {
+        on_selection(null, null, false);
+        if (func) func(textarea.value);
+        render_overlay();
+    });
 
     let is_bold_selected;
 

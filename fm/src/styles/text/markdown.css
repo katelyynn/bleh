@@ -52,7 +52,7 @@
     .text-left,
     .text-right {
         & + p {
-            margin-top: var(--card-gap) !important;
+            margin-top: 10px !important;
         }
     }
 
@@ -62,7 +62,7 @@
     .text-right,
     blockquote,
     p {
-        margin: var(--card-gap) 0 !important;
+        margin: 10px 0 !important;
     }
 
     blockquote {
