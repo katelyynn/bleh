@@ -35969,10 +35969,12 @@
         }
       }
       const details = grid.querySelector(".grid-items-item-details");
-      const links = details.querySelectorAll("a");
-      links.forEach((link) => {
-        link.classList.add("grid-item-text");
-      });
+      if (details) {
+        const links = details.querySelectorAll("a");
+        links.forEach((link) => {
+          link.classList.add("grid-item-text");
+        });
+      }
       let name = grid.querySelector(".grid-items-item-main-text a");
       if (!name) return;
       let artist;
@@ -55965,10 +55967,11 @@
     }
     function collage_error(e4) {
       render(body, html`
-                    <div class="loading-data-container">
-                        <div class="alert alert-error">${e4 && e4.message ? e4.message : e4}</div>
-                    </div>
-                `);
+            <div class="loading-data-container">
+                <div class="alert alert-error">${e4 && e4.message ? e4.message : e4}</div>
+            </div>
+        `);
+      console.error(e4);
       type.querySelector("button").disabled = false;
       timeframe.querySelector("button").disabled = false;
       collage_settings.forEach((option) => {

@@ -229,10 +229,13 @@ export function music_grids(search = page.structure.main, use_colour = true) {
         }
 
         const details = grid.querySelector('.grid-items-item-details');
-        const links = details.querySelectorAll('a');
-        links.forEach(link => {
-            link.classList.add('grid-item-text');
-        });
+
+        if (details) {
+            const links = details.querySelectorAll('a');
+            links.forEach(link => {
+                link.classList.add('grid-item-text');
+            });
+        }
 
         let name = grid.querySelector('.grid-items-item-main-text a');
         if (!name) return;

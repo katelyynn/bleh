@@ -305,17 +305,19 @@ export function collage({ host, sidebar } = {}) {
 
     function collage_error(e) {
         render(body, html`
-                    <div class="loading-data-container">
-                        <div class="alert alert-error">${e && e.message ? e.message : e}</div>
-                    </div>
-                `);
+            <div class="loading-data-container">
+                <div class="alert alert-error">${e && e.message ? e.message : e}</div>
+            </div>
+        `);
 
-                type.querySelector('button').disabled = false;
-                timeframe.querySelector('button').disabled = false;
-                collage_settings.forEach((option) => {
-                    option.setAttribute('disabled', false);
-                });
-                submit.disabled = false;
+        console.error(e);
+
+        type.querySelector('button').disabled = false;
+        timeframe.querySelector('button').disabled = false;
+        collage_settings.forEach((option) => {
+            option.setAttribute('disabled', false);
+        });
+        submit.disabled = false;
     }
 
     function make_collage(bypass = false) {
