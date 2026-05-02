@@ -80985,57 +80985,6 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
           zh: "\u4E13\u5C5E",
           tr: "Se\xE7kin"
         }
-      },
-      plaster: {
-        name: {
-          en: "band-aid",
-          de: "pflaster",
-          es: "curita",
-          it: "cerotto",
-          sv: "l\xE5ster",
-          ru: "\u043F\u043B\u0430\u0441\u0442\u044B\u0440\u044C",
-          pt: "atadura",
-          pl: "plaster",
-          zh: "\u521B\u53EF\u8D34",
-          tr: "yara band\u0131"
-        },
-        reason: {
-          en: "the sillyness caught up to me",
-          de: "der unfug hat mich eingeholt",
-          es: "la tontera me alcanz\xF3",
-          it: "la stupidit\xE0 mi ha preso",
-          sv: "det roliga kom ikapp mig",
-          ru: "\u043C\u0438\u043B\u043E\u0442\u0430 \u043D\u0430 \u043C\u0435\u043D\u044F \u043D\u0430\u043F\u0430\u043B\u0430",
-          pt: "a bobeira me alcan\xE7ou",
-          zh: "\u7531\u4E8E\u64CD\u4F5C\u8FC7\u4E8E\u5446\u840C\u2026\u2026",
-          tr: "\u015Fap\u015Fall\u0131k beni ele ge\xE7irdi.."
-        }
-      },
-      "bubble-tea": {
-        name: {
-          en: "escoffier :3",
-          de: "escoffier :3",
-          es: "escoffier :3",
-          sv: "escoffier :3",
-          ru: "\u0435\u0441\u043A\u043E\u0444\u0444\u044C\u0435\u0440 :3",
-          pt: "escoffier :3",
-          it: "escoffier :3",
-          pl: "escoffier :3",
-          zh: "escoffier :3",
-          tr: "escoffier :3"
-        },
-        reason: {
-          en: "katelyn\u2019s wife ~",
-          de: "katelyns frau ~",
-          es: "esposa de katelyn ~",
-          pt: "esposa de katelyn ~",
-          it: "moglie di katelyn ~",
-          sv: "katelyn\u2019s fru ~",
-          ru: "\u0436\u0435\u043D\u0430 \u043A\u0435\u0439\u0442\u043B\u0438\u043D ~",
-          pl: "\u017Cona katelyn ~",
-          zh: "katelyn \u7684\u59BB\u5B50 ~",
-          tr: "katelyn\u2019in kar\u0131s\u0131 ~ "
-        }
       }
     },
     requires_higher_bleh_version: {

@@ -388,57 +388,6 @@ export const trans = {
                 tr: 'Seçkin'
             }
         },
-        plaster: {
-            name: {
-                en: 'band-aid',
-                de: 'pflaster',
-                es: 'curita',
-                it: 'cerotto',
-                sv: 'låster',
-                ru: 'пластырь',
-                pt: 'atadura',
-                pl: 'plaster',
-                zh: '创可贴',
-                tr: 'yara bandı'
-            },
-            reason: {
-                en: 'the sillyness caught up to me',
-                de: 'der unfug hat mich eingeholt',
-                es: 'la tontera me alcanzó',
-                it: 'la stupidità mi ha preso',
-                sv: 'det roliga kom ikapp mig',
-                ru: 'милота на меня напала',
-                pt: 'a bobeira me alcançou',
-                zh: '由于操作过于呆萌……',
-                tr: 'şapşallık beni ele geçirdi..',
-        }
-        },
-        'bubble-tea': {
-            name: {
-                en: 'escoffier :3',
-                de: 'escoffier :3',
-                es: 'escoffier :3',
-                sv: 'escoffier :3',
-                ru: 'ескоффьер :3',
-                pt: 'escoffier :3',
-                it: 'escoffier :3',
-                pl: 'escoffier :3',
-                zh: 'escoffier :3',
-                tr: 'escoffier :3'
-            },
-            reason: {
-                en: 'katelyn’s wife ~',
-                de: 'katelyns frau ~',
-                es: 'esposa de katelyn ~',
-                pt: 'esposa de katelyn ~',
-                it: 'moglie di katelyn ~',
-                sv: 'katelyn’s fru ~',
-                ru: 'жена кейтлин ~',
-                pl: 'żona katelyn ~',
-                zh: 'katelyn 的妻子 ~',
-                tr: 'katelyn’in karısı ~ '
-            }
-        },
     },
     requires_higher_bleh_version: {
         en: 'Requires higher bleh version',
