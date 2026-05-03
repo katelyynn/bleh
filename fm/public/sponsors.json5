@@ -1,5 +1,5 @@
 {
-    version: "2026.0424",
+    version: "2026.0503",
     related: {
         account_name: "kateshapedbox",
         link: "https://katelyn.moe/sponsor",
@@ -348,6 +348,8 @@
         "drainpuppy": {},
         "DIVANA4EVER": {},
         "Nullarium": {},
-        "cnamav": {}
+        "cnamav": {},
+        "babypoltergiest": {},
+        "oursinkingship": {}
     }
 }
