@@ -1,5 +1,5 @@
 {
-    version: "2026.0420",
+    version: "2026.0503",
     related: {
         account_name: "kateshapedbox",
         link: "https://katelyn.moe/sponsor",
@@ -333,10 +333,23 @@
         "vamti": {},
         "lxjv": {},
         "f-ff": {},
-        "monikapurpl3": {},
+        "monikapurpl3": {
+            badges: [
+                {
+                    icon: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLWNwdS1vZmYiPjxwYXRoIHN0cm9rZT0ibm9uZSIgZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIgLz48cGF0aCBkPSJNOSA1aDlhMSAxIDAgMCAxIDEgMXY5bS0uMjkyIDMuNzA2YTEgMSAwIDAgMSAtLjcwOCAuMjk0aC0xMmExIDEgMCAwIDEgLTEgLTF2LTEyYzAgLS4yNzIgLjEwOCAtLjUxOCAuMjg0IC0uNjk4IiAvPjxwYXRoIGQ9Ik0xMyA5aDJ2Mm0wIDRoLTZ2LTYiIC8+PHBhdGggZD0iTTMgMTBoMiIgLz48cGF0aCBkPSJNMyAxNGgyIiAvPjxwYXRoIGQ9Ik0xMCAzdjIiIC8+PHBhdGggZD0iTTE0IDN2MiIgLz48cGF0aCBkPSJNMjEgMTBoLTIiIC8+PHBhdGggZD0iTTIxIDE0aC0yIiAvPjxwYXRoIGQ9Ik0xNCAyMXYtMiIgLz48cGF0aCBkPSJNMTAgMjF2LTIiIC8+PHBhdGggZD0iTTMgM2wxOCAxOCIgLz48L3N2Zz4=",
+                    name: "balls",
+                    hue: 357,
+                    sat: 2,
+                    lit: 0.76
+                }
+            ]
+        },
         "ahntaea": {},
         "drainpuppy": {},
         "DIVANA4EVER": {},
-        "Nullarium": {}
+        "Nullarium": {},
+        "cnamav": {},
+        "babypoltergiest": {},
+        "oursinkingship": {}
     }
 }
