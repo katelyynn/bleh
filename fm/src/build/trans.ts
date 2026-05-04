@@ -3576,6 +3576,9 @@ export const trans = {
         ru: 'Предложить исправление',
         pl: 'Zasugeruj poprawe',
     },
+    recents: {
+        en: 'Recents'
+    },
     recent_tracks: {
         en: 'Recent Tracks',
         de: 'Kürzlich gehört',
@@ -6971,7 +6974,7 @@ export const trans = {
         // previous
         en: 'Prev',
         es: 'Anterior',
-        ru: 'Назад'
+        ru: 'Назад',
         it: 'Precedente',
     },
     next: {

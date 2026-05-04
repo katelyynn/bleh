@@ -80631,8 +80631,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     },
     it: {
       name: get_language_name("it"),
-      by: ["cutotopo"],
-      last_updated: "2025-11-14"
+      by: ["cutotopo", "pascal-00"],
+      last_updated: "2026-04-23"
     },
     ja: {
       name: get_language_name("ja"),
@@ -82277,43 +82277,57 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         // may want their colour to be changed
         en: "Change my accent colour for",
         de: "\xC4ndere meine Akzentfarbe f\xFCr",
-        es: "Cambiar mi color de acento al"
+        es: "Cambiar mi color de acento al",
+        ru: "\u0418\u0437\u043C\u0435\u043D\u044F\u0442\u044C \u0430\u043A\u0446\u0435\u043D\u0442\u043D\u044B\u0439 \u0446\u0432\u0435\u0442 \u0434\u043B\u044F",
+        it: "Cambia il colore di evidenziazione per"
       },
       body: {
         en: "Temporarily override your selected accent to match artwork",
         de: "\xDCberschreibe vor\xFCbergehend deine ausgew\xE4hlte Akzentfarbe, um mit dem Cover \xFCbereinzustimmen",
-        es: "Reemplaza temporalmente tu color de acento seleccionado para coincidir con la portada"
+        es: "Reemplaza temporalmente tu color de acento seleccionado para coincidir con la portada",
+        ru: "\u0412\u0440\u0435\u043C\u0435\u043D\u043D\u043E \u0437\u0430\u043C\u0435\u043D\u044F\u0442\u044C \u0432\u044B\u0431\u0440\u0430\u043D\u043D\u044B\u0439 \u0430\u043A\u0446\u0435\u043D\u0442\u043D\u044B\u0439 \u0446\u0432\u0435\u0442 \u043D\u0430 \u0446\u0432\u0435\u0442 \u043E\u0431\u043B\u043E\u0436\u043A\u0438",
+        it: "Sostituisci temporaneamente l\u2019accento selezionato per adattarlo all\u2019immagine"
       }
     },
     viewing_albums: {
       // a sub-option for change_my_colour_when
       en: "Viewing albums",
       de: "Albumansicht",
-      es: "Ver \xE1lbumes"
+      es: "Ver \xE1lbumes",
+      ru: "\u041F\u0440\u043E\u0441\u043C\u043E\u0442\u0440 \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432",
+      it: "Visualizza album"
     },
     viewing_tracks: {
       // a sub-option for change_my_colour_when
-      en: "Viewing tracks",
-      de: "Titelansicht",
-      es: "Ver temas"
+      en: "Viewing artists",
+      de: "K\xFCnstleransicht",
+      es: "Ver artistas",
+      ru: "\u041F\u0440\u043E\u0441\u043C\u043E\u0442\u0440 \u0430\u0440\u0442\u0438\u0441\u0442\u043E\u0432",
+      it: "Visualizza artisti"
     },
     viewing_artists: {
       // a sub-option for change_my_colour_when
-      en: "Viewing artists",
-      de: "K\xFCnstleransicht",
-      es: "Ver artistas"
+      en: "Viewing tracks",
+      de: "Titelansicht",
+      es: "Ver temas",
+      ru: "\u041F\u0440\u043E\u0441\u043C\u043E\u0442\u0440 \u0442\u0440\u0435\u043A\u043E\u0432",
+      it: "Visualizza brani"
     },
     colourful_active: {
       // a sub-option for change_my_colour_when
       en: "Scrobbling a track",
       de: "Scrobbeln eines Titels",
-      es: "Hacer scrobbling a un tema"
+      es: "Hacer scrobbling a un tema",
+      ru: "\u0421\u043A\u0440\u043E\u0431\u0431\u043B\u0438\u043D\u0433 \u0442\u0440\u0435\u043A\u0430",
+      it: "Scrobblare una traccia"
     },
     colourful_all: {
       // a sub-option for change_my_colour_when
       en: "All tracklists",
       de: "Alle Titellisten",
-      es: "Ver listas de temas"
+      es: "Ver listas de temas",
+      ru: "\u0412\u0441\u0435 \u0441\u043F\u0438\u0441\u043A\u0438 \u0442\u0440\u0435\u043A\u043E\u0432",
+      it: "Tutte le tracklist"
     },
     configure: {
       en: "Configure",
@@ -82682,6 +82696,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         en: "Limited time",
         de: "Nur f\xFCr kurze Zeit",
         es: "Tiempo limitado",
+        it: "Tempo limitato",
         pt: "Tempo limitado",
         pl: "Tymczasowe",
         ru: "\u041E\u0433\u0440\u0430\u043D\u0438\u0447\u0435\u043D\u043D\u043E\u0435 \u0432\u0440\u0435\u043C\u044F",
@@ -82860,12 +82875,14 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       en: "Link",
       de: "Link",
       ru: "\u0421\u0441\u044B\u043B\u043A\u0430",
-      es: "V\xEDnculo"
+      es: "V\xEDnculo",
+      it: "Link"
     },
     create_link: {
       en: "Create link",
       de: "Link erstellen",
       es: "Crear v\xEDnculo",
+      it: "Crea link",
       ru: "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u0441\u0441\u044B\u043B\u043A\u0443"
     },
     text: {
@@ -82975,7 +82992,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       // bookmark track/artist/album
       en: "Bookmark {v}",
       ru: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C {v} \u0432 \u0437\u0430\u043A\u043B\u0430\u0434\u043A\u0438",
-      es: "Marcar {v}"
+      es: "Marcar {v}",
+      it: "Segnalibro {v}"
     },
     charts: {
       en: "Charts",
@@ -83307,7 +83325,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       de: "Zeige dich in deinem eigenen Stil auf der Webseite",
       ru: "\u041F\u043E\u043A\u0430\u0436\u0438\u0442\u0435 \u0441\u0432\u043E\u0439 \u0441\u0442\u0438\u043B\u044C \u0432\u0441\u0435\u043C\u0443 \u0441\u0430\u0439\u0442\u0443",
       //just so it doesn't sound that crude but gets the point across. now it's more like "show your style to the whole site" -- wun4
-      es: "Pres\xE9ntate con tu propio estilo por todo el sitio"
+      es: "Pres\xE9ntate con tu propio estilo por todo el sitio",
+      it: "Presentati sul sito con il tuo stile personale"
     },
     customise: {
       en: "Customise",
@@ -83399,7 +83418,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       en: "Use profile accent globally",
       de: "Profil-Akzent global verwenden",
       ru: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C \u0446\u0432\u0435\u0442 \u043F\u0440\u043E\u0444\u0438\u043B\u044F \u0433\u043B\u043E\u0431\u0430\u043B\u044C\u043D\u043E",
-      es: "Usar acento de perfil globalmente"
+      es: "Usar acento de perfil globalmente",
+      it: "Usa l\u2019accento del profilo globalmente"
     },
     apply_global_accent: {
       // global accent: the one set in bleh settings
@@ -83407,7 +83427,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       en: "Copy current accent to profile",
       de: "Aktuellen Akzent zum Profil kopieren",
       ru: "\u0421\u043A\u043E\u043F\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0442\u0435\u043A\u0443\u0449\u0438\u0439 \u0430\u043A\u0446\u0435\u043D\u0442 \u0432 \u043F\u0440\u043E\u0444\u0438\u043B\u044C",
-      es: "Copiar acento actual al perfil"
+      es: "Copiar acento actual al perfil",
+      it: "Copia l\u2019accento corrente nel profilo"
     },
     this_will_replace_your_global_accent: {
       // global accent: the one set in bleh settings
@@ -83415,7 +83436,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       en: "This will replace your global accent (the one in use right now)",
       de: "Dein globaler Akzent (der derzeit verwendete) wird hiermit ersetzt",
       ru: "\u042D\u0442\u043E \u0437\u0430\u043C\u0435\u043D\u0438\u0442 \u0432\u0430\u0448 \u0433\u043B\u043E\u0431\u0430\u043B\u044C\u043D\u044B\u0439 \u0430\u043A\u0446\u0435\u043D\u0442 (\u0442\u043E\u0442, \u043A\u043E\u0442\u043E\u0440\u044B\u0439 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0435\u0442\u0441\u044F \u0441\u0435\u0439\u0447\u0430\u0441)",
-      es: "Esto reemplazar\xE1 tu acento global (el que est\xE1s usando ahora mismo)"
+      es: "Esto reemplazar\xE1 tu acento global (el que est\xE1s usando ahora mismo)",
+      it: "Questo sostituir\xE0 il tuo accento globale (quello attualmente in uso)"
     },
     solarium: {
       name: {
@@ -83814,12 +83836,14 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       en: "Follows you!",
       de: "Folgt dir!",
       es: "\xA1Te sigue!",
+      it: "Ti segue!",
       ru: "\u041F\u043E\u0434\u043F\u0438\u0441\u0430\u043D\u044B \u043D\u0430 \u0432\u0430\u0441!"
     },
     user_follows_you: {
       en: "{u} follows you!",
       de: "{u} folgt dir!",
       es: "\xA1{u} te sigue!",
+      it: "{u} ti segue!",
       ru: "{u} \u043F\u043E\u0434\u043F\u0438\u0441\u0430\u043D\u044B \u043D\u0430 \u0432\u0430\u0441!"
     },
     website: {
@@ -83917,7 +83941,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       en: "More like {n}",
       de: "\xC4hnliches wie {n}",
       ru: "\u041F\u043E\u0445\u043E\u0436\u0438\u0435 \u043D\u0430 {n}",
-      es: "M\xE1s como {n}"
+      es: "M\xE1s como {n}",
+      it: "Pi\xF9 simile a {n}"
     },
     biography: {
       en: "Biography",
@@ -84168,6 +84193,9 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       ru: "\u041F\u0440\u0435\u0434\u043B\u043E\u0436\u0438\u0442\u044C \u0438\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435",
       pl: "Zasugeruj poprawe"
     },
+    recents: {
+      en: "Recents"
+    },
     recent_tracks: {
       en: "Recent Tracks",
       de: "K\xFCrzlich geh\xF6rt",
@@ -84264,7 +84292,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       en: "You and {u} are a {v} match",
       de: "Du und {u} sind {v} kompatibel",
       ru: "\u0412\u044B \u0438 {u} - \u0443 \u0432\u0430\u0441 {v} \u0441\u043E\u0432\u043F\u0430\u0434\u0435\u043D\u0438\u0435",
-      es: "T\xFA y {u} tienen una compatiblidad {v}"
+      es: "T\xFA y {u} tienen una compatiblidad {v}",
+      it: "Tu e {u} siete {v} compatibili"
     },
     taste_similarity: {
       en: "Taste similarity",
@@ -84282,21 +84311,23 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       en: "Your compatibility with {u} is {r}.\nYou both listen to {a}.",
       de: "Deine Kompatibilit\xE4t mit {u} ist {r}.\nIhr h\xF6rt beide {a}.",
       ru: "\u0412\u0430\u0448\u0430 \u0441\u043E\u0432\u043C\u0435\u0441\u0442\u0438\u043C\u043E\u0441\u0442\u044C \u0441 {u} \u0441\u043E\u0441\u0442\u0430\u0432\u043B\u044F\u0435\u0442 {r}.\n\u0412\u044B \u043E\u0431\u0430 \u0441\u043B\u0443\u0448\u0430\u0435\u0442\u0435 {a}.",
-      es: "Tu compatibilidad con {u} es {r}. \nAmbos escuchan a {a}."
+      es: "Tu compatibilidad con {u} es {r}. \nAmbos escuchan a {a}.",
+      it: "La tua compatibilit\xE0 con {u} \xE8 {r}.\nEntrambi ascoltate {a}."
     },
     subject: {
       // as in an email/message subject
       en: "Subject",
       de: "Betreff",
       ru: "\u0422\u0435\u043C\u0430",
-      es: "Asunto"
+      es: "Asunto",
+      it: "Soggetto"
     },
     message: {
       // as in a direct message
       en: "Message",
       de: "Nachricht schreiben",
       es: "Mensaje",
-      it: "Invia messaggio",
+      it: "Messaggio",
       ja: "\u30E1\u30C3\u30BB\u30FC\u30B8",
       pt: "Mensagem",
       sv: "Meddela",
@@ -84307,7 +84338,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       en: "Send message",
       ja: "\u30E1\u30C3\u30BB\u30FC\u30B8\u3092\u9001\u4FE1",
       ru: "\u041E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C \u0441\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u0435",
-      es: "Enviar mensaje"
+      es: "Enviar mensaje",
+      it: "Invia messaggio"
     },
     join_discord: {
       en: "Join Discord",
@@ -84475,7 +84507,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       de: "Aktualisierung auf Version",
       ja: "\u30D0\u30FC\u30B8\u30E7\u30F3\u3092\u66F4\u65B0\u4E2D",
       ru: "\u041E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u0435 \u0434\u043E \u0432\u0435\u0440\u0441\u0438\u0438",
-      es: "Actualizando a versi\xF3n"
+      es: "Actualizando a versi\xF3n",
+      it: "Aggiornamento alla versione"
     },
     manage_data: {
       en: "Manage data",
@@ -85203,7 +85236,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       en: "Cards",
       de: "Kacheln",
       ru: "\u041A\u0430\u0440\u0442\u043E\u0447\u043A\u0438",
-      es: "Tarjetas"
+      es: "Tarjetas",
+      it: "Carte"
     },
     grid: {
       // as in the view mode
@@ -85986,12 +86020,14 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       en: "Profile title",
       de: "Profiltitel",
       es: "T\xEDtulo de perfil",
+      it: "Titolo del profilo",
       ru: "\u0417\u0430\u0433\u043E\u043B\u043E\u0432\u043E\u043A \u043F\u0440\u043E\u0444\u0438\u043B\u044F"
     },
     pronoun_tip: {
       en: "Include pronouns at the start or end of your title to separate them visually",
       de: "F\xFCge Pronomen am Anfang oder am Ende deines Profiltitels ein, um sie optisch hervorzuheben",
       es: "Incluye pronombres al inicio o final de tu t\xEDtulo para separarlos visualmente",
+      it: "Includi i pronomi all\u2019inizio o alla fine del titolo per separarli visivamente",
       ru: "\u0420\u0430\u0437\u043C\u0435\u0441\u0442\u0438\u0442\u0435 \u043C\u0435\u0441\u0442\u043E\u0438\u043C\u0435\u043D\u0438\u044F \u0432 \u043D\u0430\u0447\u0430\u043B\u0435 \u0438\u043B\u0438 \u0432 \u043A\u043E\u043D\u0446\u0435 \u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043A\u0430, \u0447\u0442\u043E\u0431\u044B \u0432\u0438\u0437\u0443\u0430\u043B\u044C\u043D\u043E \u043E\u0442\u0434\u0435\u043B\u0438\u0442\u044C \u0438\u0445"
     },
     block_list: {
@@ -86361,7 +86397,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       en: "Search for anything",
       de: "Nach irgendetwas suchen",
       ru: "\u041D\u0430\u0439\u0442\u0438 \u0447\u0442\u043E \u0443\u0433\u043E\u0434\u043D\u043E",
-      es: "Busca cualquier cosa"
+      es: "Busca cualquier cosa",
+      it: "Cerca qualsiasi cosa"
     },
     search_guest: {
       en: "Search guest appearances",
@@ -86644,18 +86681,21 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       en: "Saved note for {u}",
       de: "Profilnotiz f\xFCr {u} gespeichert",
       es: "Anotaci\xF3n para {u} guardada",
+      it: "Nota salvata per {u}",
       ru: "\u0417\u0430\u043C\u0435\u0442\u043A\u0430 \u0441\u043E\u0445\u0440\u0430\u043D\u0435\u043D\u0430 \u0434\u043B\u044F {u}"
     },
     cleared_note_for_user: {
       en: "Cleared note for {u}",
       de: "Profilnotiz f\xFCr {u} entfernt",
       es: "Anotaci\xF3n para {u} borrada",
+      it: "Nota cancellata per {u}",
       ru: "\u0417\u0430\u043C\u0435\u0442\u043A\u0430 \u0443\u0434\u0430\u043B\u0435\u043D\u0430 \u0434\u043B\u044F {u}"
     },
     manage: {
       en: "Manage",
       de: "Verwalten",
       es: "Gestionar",
+      it: "Gestisci",
       ru: "\u0423\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435"
     },
     font: {
@@ -86684,44 +86724,60 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       name: {
         en: "Interface font",
         de: "Schriftart der Benutzeroberfl\xE4che",
-        es: "Fuente de interfaz"
+        es: "Fuente de interfaz",
+        ru: "\u0428\u0440\u0438\u0444\u0442 \u0438\u043D\u0442\u0435\u0440\u0444\u0435\u0439\u0441\u0430",
+        it: "Interfaccia font"
       },
       body: {
         en: "Choose the font that suits you best",
         de: "W\xE4hle die Schriftart, die dir am besten gef\xE4llt",
-        es: "Elige la fuente que m\xE1s te guste"
+        es: "Elige la fuente que m\xE1s te guste",
+        ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u0448\u0440\u0438\u0444\u0442, \u043A\u043E\u0442\u043E\u0440\u044B\u0439 \u0432\u0430\u043C \u0431\u043E\u043B\u044C\u0448\u0435 \u0432\u0441\u0435\u0433\u043E \u043F\u043E\u0434\u0445\u043E\u0434\u0438\u0442",
+        it: "Scegli il carattere che pi\xF9 ti si addice"
       },
       custom: {
         en: "Provide your own font",
         de: "Eigene Schriftart bereitstellen",
-        es: "Proporciona tu propia fuente"
+        es: "Proporciona tu propia fuente",
+        ru: "\u0423\u043A\u0430\u0436\u0438\u0442\u0435 \u0441\u0432\u043E\u0439 \u0448\u0440\u0438\u0444\u0442",
+        it: "Fornisci il tuo font"
       },
       stylised: {
         en: "Stylised",
         de: "Stilisiert",
-        es: "Estilizada"
+        es: "Estilizada",
+        ru: "\u0421\u0442\u0438\u043B\u0438\u0437\u043E\u0432\u0430\u043D\u043D\u044B\u0439",
+        it: "Stilizzato"
       },
       simple: {
         en: "Simple",
         de: "Einfach",
-        es: "Simple"
+        es: "Simple",
+        ru: "\u041F\u0440\u043E\u0441\u0442\u043E\u0439",
+        it: "Semplice"
       },
       hyperlegible: {
         en: "Accessible",
         de: "Barrierefrei",
-        es: "Accesible"
+        es: "Accesible",
+        ru: "\u0414\u043E\u0441\u0442\u0443\u043F\u043D\u044B\u0439",
+        it: "Accessibile"
       }
     },
     previewing: {
       // used as subtext for previewing a font
       en: "Previewing: {v}",
       de: "Vorschau: {v}",
-      es: "Vista previa: {v}"
+      es: "Vista previa: {v}",
+      ru: "\u041F\u0440\u0435\u0434\u043F\u0440\u043E\u0441\u043C\u043E\u0442\u0440: {v}",
+      it: "Anteprima: {v}"
     },
     no_font_selected: {
       en: "No font selected",
       de: "Keine Schriftart ausgew\xE4hlt",
-      es: "Ninguna fuente seleccionada"
+      es: "Ninguna fuente seleccionada",
+      ru: "\u0428\u0440\u0438\u0444\u0442 \u043D\u0435 \u0432\u044B\u0431\u0440\u0430\u043D",
+      it: "Nessun font selezionato"
     },
     font_style: {
       en: "Font style",
@@ -86755,6 +86811,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       out: {
         en: "Outline",
         de: "Umriss",
+        it: "Contorno",
         ru: "\u041E\u0431\u0432\u043E\u0434\u043A\u0430"
       },
       glow: {
@@ -86871,6 +86928,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       en: "The quick brown fox jumps over the lazy dog \u{1F3F3}\uFE0F\u200D\u26A7\uFE0F",
       de: "Franz jagt im komplett verwahrlosten Taxi quer durch Bayern \u{1F3F3}\uFE0F\u200D\u26A7\uFE0F",
       es: "El veloz murci\xE9lago hind\xFA com\xEDa feliz cardillo y kiwi. La cig\xFCe\xF1a tocaba el saxof\xF3n detr\xE1s del palenque de paja. \u{1F3F3}\uFE0F\u200D\u26A7\uFE0F",
+      it: "La veloce volpe marrone salta sopra il cane pigro \u{1F3F3}\uFE0F\u200D\u26A7\uFE0F",
       sv: "Flygande b\xE4ckasiner s\xF6ka hwila p\xE5 mjuka tuvor qxz \u{1F3F3}\uFE0F\u200D\u26A7\uFE0F",
       ru: "\u0421\u044A\u0435\u0448\u044C \u0435\u0449\u0451 \u044D\u0442\u0438\u0445 \u043C\u044F\u0433\u043A\u0438\u0445 \u0444\u0440\u0430\u043D\u0446\u0443\u0437\u0441\u043A\u0438\u0445 \u0431\u0443\u043B\u043E\u043A, \u0434\u0430 \u0432\u044B\u043F\u0435\u0439 \u0447\u0430\u044E \u{1F3F3}\uFE0F\u200D\u26A7\uFE0F",
       pt: "A r\xE1pida raposa marrom pula sobre o c\xE3o pregui\xE7oso \u{1F3F3}\uFE0F\u200D\u26A7\uFE0F",
@@ -87536,7 +87594,9 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     prev: {
       // previous
       en: "Prev",
-      es: "Anterior"
+      es: "Anterior",
+      ru: "\u041D\u0430\u0437\u0430\u0434",
+      it: "Precedente"
     },
     next: {
       en: "Next",
@@ -88042,12 +88102,14 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       en: "Image",
       de: "Bild",
       es: "Imagen",
+      it: "Immagine",
       ru: "\u0418\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435"
     },
     attach_image: {
       en: "Attach image",
       de: "Bild anh\xE4ngen",
       es: "Adjuntar imagen",
+      it: "Allega immagine",
       ru: "\u041F\u0440\u0438\u043A\u0440\u0435\u043F\u0438\u0442\u044C \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435"
     },
     change_avatar: {
@@ -88080,7 +88142,9 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     crop_before_uploading: {
       en: "Crop image before uploading",
       de: "Bild vor dem Hochladen zuschneiden",
-      es: "Cortar imagen antes de subir"
+      es: "Cortar imagen antes de subir",
+      ru: "\u041E\u0431\u0440\u0435\u0437\u0430\u0442\u044C \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435 \u043F\u0435\u0440\u0435\u0434 \u0437\u0430\u0433\u0440\u0443\u0437\u043A\u043E\u0439",
+      it: "Ritaglia l\u2019immagine prima di caricarla"
     },
     update_to_version: {
       en: "Update to {v}",
@@ -88559,7 +88623,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       de: "{s}{c} unterst\xFCtzen{/s} \u2661",
       ru: "{s}{c} \u0437\u0430\u043C\u0435\u0447\u0430\u0442\u0435\u043B\u044C\u043D\u044B\u0445 \u043B\u044E\u0434\u0435\u0439{/s} \u2661",
       // wonderful people -tech
-      es: "{s}{c} patrocinando{/s} \u2661"
+      es: "{s}{c} patrocinando{/s} \u2661",
+      it: "{s}{c} sostenendo{/s} \u2661"
     },
     love_lower: {
       // replaces the {h} in the above sentence
@@ -88772,7 +88837,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       en: "Create collage",
       de: "Collage erstellen",
       ru: "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u043A\u043E\u043B\u043B\u0430\u0436",
-      es: "Crear collage"
+      es: "Crear collage",
+      it: "Crea collage"
     },
     create_a_collage: {
       en: "Create a collage of your choosing",
@@ -89023,7 +89089,9 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     missing_artist_info: {
       en: "This artist is missing key details, maybe you can help out?",
       de: "Diesem K\xFCnstler fehlen wichtige Details, vielleicht kannst du helfen?",
-      es: "A este artista le faltan detalles clave, \xBFquiz\xE1s puedes ayudar?"
+      es: "A este artista le faltan detalles clave, \xBFquiz\xE1s puedes ayudar?",
+      ru: "\u041E\u0431 \u044D\u0442\u043E\u043C \u0430\u0440\u0442\u0438\u0441\u0442\u0435 \u043D\u0435 \u0445\u0432\u0430\u0442\u0430\u0435\u0442 \u043A\u043B\u044E\u0447\u0435\u0432\u043E\u0439 \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u0438, \u043C\u043E\u0436\u0435\u0442, \u0432\u044B \u043F\u043E\u043C\u043E\u0436\u0435\u0442\u0435?",
+      it: "A quest\u2019artista mancano dettagli fondamentali, forse puoi aiutarci?"
     },
     missing_album_info: {
       en: "This album is missing key details, maybe you can help out?",
@@ -89407,13 +89475,16 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         en: "Showcase an image of your choosing across your profile",
         de: "Zeige ein Bild deiner Wahl auf deinem Profil",
         ru: "\u041F\u043E\u043A\u0430\u0437\u0430\u0442\u044C \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435, \u0432\u044B\u0431\u0440\u0430\u043D\u043D\u043E\u0435 \u0432\u0430\u043C\u0438, \u0432 \u0432\u0430\u0448\u0435\u043C \u043F\u0440\u043E\u0444\u0438\u043B\u0435",
-        es: "Muestra una imagen de tu elecci\xF3n en tu perfil"
+        es: "Muestra una imagen de tu elecci\xF3n en tu perfil",
+        it: "Metti in evidenza un\u2019immagine a tua scelta sul tuo profilo"
       }
     },
     aspect_ratio_banner: {
       en: "Displayed at an aspect ratio of {v}, if screen size supports such",
       de: "Angezeigt mit einem Seitenverh\xE4ltnis von {v}, wenn die Bildschirmgr\xF6\xDFe dies unterst\xFCtzt",
-      es: "Mostrado con una relaci\xF3n de aspecto de {v}, si el tama\xF1o de la pantalla lo permite"
+      es: "Mostrado con una relaci\xF3n de aspecto de {v}, si el tama\xF1o de la pantalla lo permite",
+      ru: "\u041E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u0442\u0441\u044F \u0441 \u0441\u043E\u043E\u0442\u043D\u043E\u0448\u0435\u043D\u0438\u0435\u043C \u0441\u0442\u043E\u0440\u043E\u043D {v}, \u0435\u0441\u043B\u0438 \u0440\u0430\u0437\u043C\u0435\u0440 \u044D\u043A\u0440\u0430\u043D\u0430 \u043F\u043E\u0437\u0432\u043E\u043B\u044F\u0435\u0442",
+      it: "Visualizzato con un rapporto di aspetto di {v}, se le dimensioni dello schermo lo supportano"
     },
     profile_accent: {
       name: {
@@ -89681,7 +89752,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       en: "Explore minis",
       de: "Minis erkunden",
       ru: "\u0418\u0441\u0441\u043B\u0435\u0434\u0443\u0439 \u043C\u0438\u043D\u0438",
-      es: "Explorar minis"
+      es: "Explorar minis",
+      it: "Esplora minis"
     },
     minis_description: {
       en: "Play mini-games, puzzles, and interact with tools all powered by your listening history",
@@ -90032,6 +90104,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       en: "Last.fm failed to load this component",
       de: "Last.fm konnte diese Komponente nicht laden",
       es: "Last.fm fall\xF3 al cargar este componente",
+      it: "Last.fm non \xE8 riuscito a caricare questo componente",
       pt: "Last.fm falhou ao carregar este componente",
       sv: "Last.fm kunde inte ladda denna komponent",
       ru: "Last.fm \u043D\u0435 \u0441\u043C\u043E\u0433 \u0437\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C \u044D\u0442\u043E\u0442 \u043A\u043E\u043C\u043F\u043E\u043D\u0435\u043D\u0442"
@@ -90812,14 +90885,16 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       en: "{v} less",
       de: "{v} weniger",
       ru: "{v} \u043C\u0435\u043D\u044C\u0448\u0435",
-      es: "{v} menos"
+      es: "{v} menos",
+      it: "{v} meno"
     },
     value_more: {
       // 50 more than last month
       en: "{v} more",
       de: "{v} mehr",
       ru: "{v} \u0431\u043E\u043B\u044C\u0448\u0435",
-      es: "{v} m\xE1s"
+      es: "{v} m\xE1s",
+      it: "{v} in pi\xF9"
     },
     menu_replacement: {
       name: {
@@ -90852,6 +90927,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         en: "Show translator tools",
         de: "\xDCbersetzer-Werkzeuge anzeigen",
         es: "Mostrar herramientas de traducci\xF3n",
+        it: "Mostra strumenti di traduzione",
         pt: "Mostrar ferramentas de tradu\xE7\xE3o",
         ru: "\u041F\u043E\u043A\u0430\u0437\u0430\u0442\u044C \u0438\u043D\u0441\u0442\u0440\u0443\u043C\u0435\u043D\u0442\u044B \u043F\u0435\u0440\u0435\u0432\u043E\u0434\u0447\u0438\u043A\u0430"
       },
@@ -90859,6 +90935,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         en: "View expanded details on all languages for use when translating",
         de: "Erweiterte Details zu allen Sprachen ansehen, die bei der \xDCbersetzung verwendet werden k\xF6nnen",
         es: "Ve detalles ampliados de todos los idiomas para usar al traducir",
+        it: "Visualizza dettagli espansi su tutte le lingue da utilizzare durante la traduzione",
         pt: "Veja detalhes expandidos sobre todos os idiomas para uso ao traduzir",
         ru: "\u041F\u0440\u043E\u0441\u043C\u043E\u0442\u0440 \u0440\u0430\u0441\u0448\u0438\u0440\u0435\u043D\u043D\u044B\u0445 \u0441\u0432\u0435\u0434\u0435\u043D\u0438\u0439 \u043E \u0432\u0441\u0435\u0445 \u044F\u0437\u044B\u043A\u0430\u0445 \u0434\u043B\u044F \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u0438\u044F \u043F\u0440\u0438 \u043F\u0435\u0440\u0435\u0432\u043E\u0434\u0435"
       }
@@ -90867,6 +90944,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       en: "Translate",
       de: "\xDCbersetzen",
       es: "Traducir",
+      it: "Traduci",
       pt: "Traduza",
       ru: "\u041F\u0435\u0440\u0435\u0432\u0435\u0441\u0442\u0438"
     },
@@ -90875,6 +90953,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       en: "Translation key",
       de: "\xDCbersetzungsschl\xFCssel",
       es: "Clave de traducci\xF3n",
+      it: "Chiave di traduzione",
       pt: "Chave de tradu\xE7\xE3o",
       ru: "\u041A\u043B\u044E\u0447 \u043F\u0435\u0440\u0435\u0432\u043E\u0434\u0430"
       // this is kinda hard to translate, especially the word 'key', so this is what i came up with -tech
@@ -90883,6 +90962,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       en: "Original",
       de: "Original",
       es: "Original",
+      it: "Originale",
       pt: "Original",
       ru: "\u041E\u0440\u0438\u0433\u0438\u043D\u0430\u043B"
     },
@@ -90892,6 +90972,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       en: "{u} is listening to",
       de: "{u} h\xF6rt gerade",
       es: "{u} est\xE1 escuchando",
+      it: "{u} sta ascoltando",
       pt: "{u} est\xE1 ouvindo",
       ru: "{u} \u0441\u043B\u0443\u0448\u0430\u0435\u0442"
     },
@@ -90901,6 +90982,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       en: "{u} listened {time}",
       de: "{u} h\xF6rte {time}",
       es: "{u} escuch\xF3 {time} a",
+      it: "{u} ha ascoltato {time}",
       pt: "{u} ouviu h\xE1 {time}",
       ru: "{u} \u0441\u043B\u0443\u0448\u0430\u043B\u0438 {time}"
     },
@@ -90908,6 +90990,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       name: {
         en: "This page is not properly supported in bleh, but..",
         es: "Esta p\xE1gina no es compatible con bleh, pero...",
+        it: "Questa pagina non \xE8 compatibile con bleh, ma...",
         pt: "Esta p\xE1gina n\xE3o \xE9 compat\xEDvel com bleh, mas...",
         de: "Diese Seite wird in bleh nicht richtig unterst\xFCtzt, aber...",
         ru: "\u042D\u0442\u043E \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0430 \u043D\u0435 \u043F\u043E\u0434\u0434\u0435\u0440\u0436\u0438\u0432\u0430\u0435\u0442\u0441\u044F \u0432 bleh, \u043D\u043E..."
@@ -90916,6 +90999,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         en: "If you are a Last.fm Pro subscriber, you can view your current active track in your profile menu at all times",
         de: "Wenn du ein Last.fm Pro-Abonnent bist, kannst du deinen aktuell aktiven Titel jederzeit in deinem Profilmen\xFC ansehen",
         es: "Si eres un suscriptor de Last.fm Pro, puedes ver tu tema activo actual en el men\xFA de tu perfil en cualquier momento",
+        it: "Se sei un abbonato a Last.fm Pro, puoi visualizzare la tua traccia attiva corrente nel menu del tuo profilo in qualsiasi momento",
         pt: "Se voc\xEA \xE9 assinante do Last.fm Pro, voc\xEA pode ver sua faixa atual no menu de seu perfil a qualquer momento",
         ru: "\u0415\u0441\u043B\u0438 \u0432\u044B \u044F\u0432\u043B\u044F\u0435\u0442\u0435\u0441\u044C \u043F\u043E\u0434\u043F\u0438\u0441\u0447\u0438\u043A\u043E\u043C Last.fm Pro, \u0432\u044B \u043C\u043E\u0436\u0435\u0442\u0435 \u0432 \u043B\u044E\u0431\u043E\u0435 \u0432\u0440\u0435\u043C\u044F \u043F\u0440\u043E\u0441\u043C\u0430\u0442\u0440\u0438\u0432\u0430\u0442\u044C \u0442\u0435\u043A\u0443\u0449\u0438\u0439 \u0430\u043A\u0442\u0438\u0432\u043D\u044B\u0439 \u0442\u0440\u0435\u043A \u0432 \u043C\u0435\u043D\u044E \u0441\u0432\u043E\u0435\u0433\u043E \u043F\u0440\u043E\u0444\u0438\u043B\u044F"
       }
@@ -90925,6 +91009,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       de: "Aktueller Status",
       ru: "\u0422\u0435\u043A\u0443\u0449\u0438\u0439 \u0441\u0442\u0430\u0442\u0443\u0441",
       es: "Estado actual",
+      it: "Stato corrente",
       pt: "Estado atual"
     },
     status_cafe_too_many_requests: {
@@ -90932,6 +91017,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       de: "Laden vor\xFCbergehend pausiert @w@",
       ru: "\u0437\u0430\u0433\u0440\u0443\u0437\u043A\u0430 \u0441\u0442\u0430\u0442\u0443\u0441\u0430 \u0432\u0440\u0435\u043C\u0435\u043D\u043D\u043E \u043F\u0440\u0438\u043E\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u043D\u0430 @w@",
       es: "carga temporalmente pausada @w@",
+      it: "caricamento in pausa temporaneamente @w@",
       pt: "carregamento pausada temporariamente @w@"
     },
     loading_status: {
@@ -90939,6 +91025,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       de: "Status l\xE4dt",
       ru: "\u0437\u0430\u0433\u0440\u0443\u0437\u043A\u0430 \u0441\u0442\u0430\u0442\u0443\u0441\u0430",
       es: "Estado de carga",
+      it: "Caricamento stato",
       pt: "Carregando status"
     },
     status_cafe: {
@@ -90948,6 +91035,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         de: "F\xFCge deinen aktuellen Status in dein Profil ein, kann durch Bearbeiten deines \u201E\xDCber mich\u201C-Bereichs frei verschoben werden",
         ru: "\u0412\u0441\u0442\u0430\u0432\u044C\u0442\u0435 \u0441\u0432\u043E\u0439 \u0442\u0435\u043A\u0443\u0449\u0438\u0439 \u0441\u0442\u0430\u0442\u0443\u0441 \u0432 \u043F\u0440\u043E\u0444\u0438\u043B\u044C, \u0435\u0433\u043E \u043C\u043E\u0436\u043D\u043E \u043F\u0435\u0440\u0435\u043C\u0435\u0449\u0430\u0442\u044C \u043F\u043E \u0441\u0432\u043E\u0431\u043E\u0434\u043D\u043E\u043C\u0443 \u043F\u0440\u043E\u0441\u0442\u0440\u0430\u043D\u0441\u0442\u0432\u0443, \u0440\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u0443\u044F \u0441\u0432\u043E\u0439 \u043F\u0440\u043E\u0444\u0438\u043B\u044C",
         es: "A\xF1ade tu estado actual a tu perfil, puede ser movido libremente al editar tu sobre m\xED",
+        it: "Incorpora il tuo stato attuale nel tuo profilo, pu\xF2 essere spostato liberamente modificando la sezione su di me",
         pt: "Insira seu status atual em seu perfil, pode ser movido livremente apenas editando seu sobre mim"
       }
     },
@@ -90956,7 +91044,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       en: "{d} at {t}",
       de: "{d} um {t}",
       ru: "{d} \u0432 {t}",
-      es: "{d} a las {t}"
+      es: "{d} a las {t}",
+      it: "{d} alle {t}"
     },
     you_sent_to: {
       // messages in your inbox
@@ -90964,6 +91053,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       de: "Von dir verschickt an",
       ru: "\u0412\u044B \u043E\u0442\u043F\u0440\u0430\u0432\u0438\u043B\u0438",
       es: "Has enviado a",
+      it: "Hai inviato a",
       pt: "Voc\xEA enviou para"
     },
     sent_to_you: {
@@ -90972,6 +91062,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       de: "An dich geschickt",
       ru: "\u041E\u0442\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043E \u0432\u0430\u043C",
       es: "Te han enviado",
+      it: "Ti \xE8 stato inviato",
       pt: "Enviou para voc\xEA"
     },
     shoutbox_placeholder: {
@@ -90981,6 +91072,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       de: "{u}, teile deine Meinung zu {v}...",
       ru: "{u}, \u043F\u043E\u0434\u0435\u043B\u0438\u0442\u0435\u0441\u044C \u0441\u0432\u043E\u0438\u043C\u0438 \u043C\u044B\u0441\u043B\u044F\u043C\u0438 \u043E {v}...",
       es: "{u}, comparte lo que piensas sobre {v}...",
+      it: "{u}, condividi i tuoi pensieri su {v}...",
       pt: "{u}, compartilhe o que voc\xEA pensa sobre {v}..."
     },
     shoutbox_placeholder_user: {
@@ -90988,6 +91080,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       de: "{u}, hinterlasse einen Shout f\xFCr {v}...",
       ru: "{u}, \u043E\u0441\u0442\u0430\u0432\u044C\u0442\u0435 \u043A\u043E\u043C\u043C\u0435\u043D\u0442\u0430\u0440\u0438\u0439 \u0434\u043B\u044F {v}...",
       es: "{u}, deja una nota para {v}...",
+      it: "{u}, lascia un commento per {v}...",
       pt: "{u}, deixe uma nota para {v}"
     },
     mention_user: {
@@ -90995,6 +91088,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       de: "Benutzer erw\xE4hnen",
       ru: "\u0423\u043F\u043E\u043C\u044F\u043D\u0443\u0442\u044C \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F",
       es: "Mencionar usuario",
+      it: "Menziona utente",
       pt: "Mencionar usu\xE1rio"
     },
     quote: {
@@ -91002,6 +91096,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       de: "Zitat",
       ru: "\u0426\u0438\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C",
       es: "Citar",
+      it: "Citare",
       pt: "Citar"
     },
     code_block: {
@@ -91011,6 +91106,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       de: "Code-Block",
       ru: "\u0411\u043B\u043E\u043A \u043A\u043E\u0434\u0430",
       es: "Bloque de c\xF3digo",
+      it: "Blocco di codice",
       pt: "Bloco de c\xF3digo"
     },
     numbered_list: {
@@ -91018,6 +91114,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       de: "Nummerierte Liste",
       ru: "\u041D\u0443\u043C\u0435\u0440\u043E\u0432\u0430\u043D\u043D\u044B\u0439 \u0441\u043F\u0438\u0441\u043E\u043A",
       es: "Lista enumerada",
+      it: "Lista numerata",
       pt: "Lista numerada"
     },
     left_align: {
@@ -91025,6 +91122,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       de: "Linksb\xFCndig",
       ru: "\u0412\u044B\u0440\u043E\u0432\u043D\u044F\u0442\u044C \u043F\u043E \u043B\u0435\u0432\u043E\u043C\u0443 \u043A\u0440\u0430\u044E",
       es: "Alinear a la izquierda",
+      it: "Allineamento a sinistra",
       pt: "Alinhar \xE0 esquerda"
     },
     center_align: {
@@ -91032,6 +91130,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       de: "Zentriert",
       ru: "\u0412\u044B\u0440\u043E\u0432\u043D\u044F\u0442\u044C \u043F\u043E \u0446\u0435\u043D\u0442\u0440\u0443",
       es: "Centrar",
+      it: "Allineamento al centro",
       pt: "Centralizar"
     },
     right_align: {
@@ -91039,6 +91138,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       de: "Rechtsb\xFCndig",
       ru: "\u0412\u044B\u0440\u043E\u0432\u043D\u044F\u0442\u044C \u043F\u043E \u043F\u0440\u0430\u0432\u043E\u043C\u0443 \u043A\u0440\u0430\u044E",
       es: "Alinear a la derecha",
+      it: "Allineamento a destra",
       pt: "Alinhar \xE0 direita"
     },
     header: {
@@ -91046,6 +91146,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       de: "Kopfzeile",
       ru: "\u0417\u0430\u0433\u043E\u043B\u043E\u0432\u043E\u043A",
       es: "Encabezado",
+      it: "Intestazione",
       pt: "Cabe\xE7alho"
     },
     bold: {
@@ -91053,6 +91154,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       de: "Fett",
       ru: "\u041F\u043E\u043B\u0443\u0436\u0438\u0440\u043D\u044B\u0439",
       es: "Negrita",
+      it: "Grassetto",
       pt: "Negrito"
     },
     italic: {
@@ -91060,6 +91162,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       de: "Kursiv",
       ru: "\u041A\u0443\u0440\u0441\u0438\u0432",
       es: "Cursiva",
+      it: "Corsivo",
       pt: "It\xE1lico"
     },
     strikethrough: {
@@ -91067,6 +91170,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       de: "Durchgestrichen",
       ru: "\u0417\u0430\u0447\u0435\u0440\u043A\u043D\u0443\u0442\u044B\u0439",
       es: "Tachado",
+      it: "Barrato",
       pt: "Tachado"
     },
     underline: {
@@ -91074,6 +91178,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       de: "Unterstrichen",
       ru: "\u041F\u043E\u0434\u0447\u0435\u0440\u043A\u043D\u0443\u0442\u044B\u0439",
       es: "Subrayado",
+      it: "Sottolineato",
       pt: "Sublinhado"
     },
     located: {
@@ -91081,6 +91186,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       de: "Veranstaltungsort",
       ru: "\u0420\u0430\u0441\u043F\u043E\u043B\u043E\u0436\u0435\u043D",
       es: "Ubicado",
+      it: "Ubicato",
       pt: "Localizado"
     },
     date: {
@@ -91088,6 +91194,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       de: "Datum",
       ru: "\u0414\u0430\u0442\u0430",
       es: "Fecha",
+      it: "Data",
       pt: "Data"
     },
     contact: {
@@ -91095,6 +91202,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       de: "Kontakt",
       ru: "\u041A\u043E\u043D\u0442\u0430\u043A\u0442",
       es: "Contacto",
+      it: "Contatto",
       pt: "Contato"
     },
     show_on_map: {
@@ -91102,6 +91210,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       de: "Auf Karte anzeigen",
       ru: "\u041F\u043E\u043A\u0430\u0437\u0430\u0442\u044C \u043D\u0430 \u043A\u0430\u0440\u0442\u0435",
       es: "Ver en mapa",
+      it: "Mostra sulla mappa",
       pt: "Ver em mapa"
     },
     added_by: {
@@ -91109,6 +91218,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       de: "Hinzugef\xFCgt von {u}",
       ru: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u043E {u}",
       es: "A\xF1adido por {u}",
+      it: "Aggiunto da {u}",
       pt: "Adicionado por {u}"
     },
     notice: {
@@ -91116,6 +91226,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       de: "Hinweis",
       ru: "\u0423\u0432\u0435\u0434\u043E\u043C\u043B\u0435\u043D\u0438\u0435",
       es: "Noticia",
+      it: "Avviso",
       pt: "Aviso"
     },
     send_valentine: {
@@ -91126,6 +91237,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       // cant think of a way to translate this without gendered pronouns, mb someone else has an idea?
       ru: "\u0414\u0430\u0439\u0442\u0435 \u0438\u043C \u0437\u043D\u0430\u0442\u044C",
       es: "Hazle saber",
+      it: "Faglielo sapere",
       pt: "Deixe ele(a) saber"
       // Kinda hard to make ungendered pronouns -ModuStars
     },
@@ -91137,6 +91249,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       de: "an die Person, die ich am meisten liebe, {u} \u2661",
       ru: "\u0442\u043E\u043C\u0443, \u043A\u043E\u0433\u043E \u044F \u043B\u044E\u0431\u043B\u044E \u0431\u043E\u043B\u044C\u0448\u0435 \u0432\u0441\u0435\u0433\u043E, {u} \u2661",
       es: "a la persona que m\xE1s amo, {u} \u2661",
+      it: "alla persona che amo di pi\xF9, {u} \u2661",
       pt: "para a pessoa que mais amo, {u} \u2661"
     },
     view_details: {
@@ -91144,6 +91257,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       de: "Details anzeigen",
       ru: "\u041F\u0440\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u0434\u0435\u0442\u0430\u043B\u0438",
       es: "Ver detalles",
+      it: "Visualizza dettagli",
       pt: "Ver detalhes"
     },
     valentine_info: {
@@ -91151,6 +91265,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       de: "Du siehst das, weil {u} auf deiner bleh-Liste f\xFCr enge Freunde steht, ihr eine hohe Kompatibilit\xE4t habt, und es Valentinstag ist!",
       ru: "\u0412\u044B \u0432\u0438\u0434\u0438\u0442\u0435 \u044D\u0442\u043E, \u043F\u043E\u0442\u043E\u043C\u0443 \u0447\u0442\u043E {u} \u043D\u0430\u0445\u043E\u0434\u0438\u0442\u0441\u044F \u0432 \u0432\u0430\u0448\u0435\u043C \u0441\u043F\u0438\u0441\u043A\u0435 \u0431\u043B\u0438\u0437\u043A\u0438\u0445 \u0434\u0440\u0443\u0437\u0435\u0439 \u0432 bleh, \u0443 \u0432\u0430\u0441 \u0432\u044B\u0441\u043E\u043A\u0430\u044F \u0441\u043E\u0432\u043C\u0435\u0441\u0442\u0438\u043C\u043E\u0441\u0442\u044C \u0438 \u0441\u0435\u0433\u043E\u0434\u043D\u044F \u0414\u0435\u043D\u044C \u0412\u043B\u044E\u0431\u043B\u0435\u043D\u043D\u044B\u0445!",
       es: "\xA1Est\xE1s viendo esto ya que {u} est\xE1 en tu lista de amigos cercanos de bleh, tienen alta compatibilidad, y es San Valent\xEDn!",
+      it: "Stai vedendo questo perch\xE9 {u} \xE8 nella tua lista di amici stretti di bleh, avete un\u2019alta compatibilit\xE0, e oggi \xE8 San Valentino!",
       pt: "Voc\xEA est\xE1 vendo isso porque {u} est\xE1 na sua lista de amigos pr\xF3ximos, voc\xEAs tem alta compatibilidade, e \xE9 Dia dos Namorados!"
     },
     valentine_message_footer: {
@@ -91159,6 +91274,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       // trying v hard to avoid the gendered pronouns here
       ru: "\u0417\u0430\u0433\u043E\u043B\u043E\u0432\u043E\u043A \u044D\u0442\u043E\u0433\u043E \u0441\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u044F \u0443\u043A\u0430\u0437\u044B\u0432\u0430\u0435\u0442, \u0447\u0442\u043E \u043E\u043D\u043E \u0431\u044B\u043B\u043E \u043E\u0442\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043E \u0447\u0435\u0440\u0435\u0437 bleh \u0438 {u} \u0432\u044B\u0431\u0440\u0430\u043B\u0438 \u0432\u0430\u0441 \u0441\u0432\u043E\u0438\u043C \u0432\u043B\u044E\u0431\u043B\u0435\u043D\u043D\u044B\u043C \u2661",
       es: "El asunto de este mensaje indica que fue enviado a trav\xE9s de bleh y {u} te escogi\xF3 como su San Valent\xEDn \u2661",
+      it: "L\u2019oggetto di questo messaggio indica che \xE8 stato inviato tramite bleh e {u} ti ha scelto come suo San Valentino \u2661",
       pt: "O assunto desta mensagem indica que foi enviada via bleh e {u} escolheu voc\xEA como seu parceiro no Dia dos Namorados \u2661"
       // in portuguese, there isn't a way to say 'valentine' without being partner -modustars
     },
@@ -91168,6 +91284,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       de: "Verstanden",
       ru: "\u041F\u043E\u043D\u044F\u0442\u043D\u043E",
       es: "Entendido",
+      it: "Capito",
       pt: "Entendido"
     },
     tip: {
@@ -91175,6 +91292,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       de: "Tipp",
       ru: "\u041F\u043E\u0434\u0441\u043A\u0430\u0437\u043A\u0430",
       es: "Tip",
+      it: "Suggerimento",
       pt: "Dica"
     },
     popup_navigation_menu: {
@@ -91183,6 +91301,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         de: "Dies ist dein Navigator",
         ru: "\u042D\u0442\u043E \u0432\u0430\u0448 \u043D\u0430\u0432\u0438\u0433\u0430\u0442\u043E\u0440",
         es: "Este es tu navegador",
+        it: "Questo \xE8 il tuo navigatore",
         pt: "Este \xE9 seu navegador"
       },
       body: {
@@ -91190,6 +91309,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         de: "Du kannst mit einem Rechtsklick weitere Optionen anzeigen, um die hier angezeigten Aktionen auszuw\xE4hlen",
         ru: "\u0412\u044B \u043C\u043E\u0436\u0435\u0442\u0435 \u0432\u044B\u0431\u0440\u0430\u0442\u044C, \u043A\u0430\u043A\u0438\u0435 \u0434\u0435\u0439\u0441\u0442\u0432\u0438\u044F \u043F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u0437\u0434\u0435\u0441\u044C: \u0449\u0451\u043B\u043A\u043D\u0438\u0442\u0435 \u043F\u0440\u0430\u0432\u043E\u0439 \u043A\u043D\u043E\u043F\u043A\u043E\u0439 \u043C\u044B\u0448\u0438, \u0447\u0442\u043E\u0431\u044B \u043E\u0442\u043A\u0440\u044B\u0442\u044C \u0434\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0435 \u043F\u0430\u0440\u0430\u043C\u0435\u0442\u0440\u044B",
         es: "Puedes elegir cu\xE1les acciones mostrar aqu\xED haciendo clic derecho para m\xE1s opciones",
+        it: "Puoi scegliere quali azioni mostrare qui facendo clic destro per pi\xF9 opzioni",
         pt: "Voc\xEA pode escolher quais a\xE7\xF5es para mostrar aqui apenas clicando bot\xE3o direito para mais op\xE7\xF5es"
       }
     },
@@ -91199,6 +91319,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         de: "Dein gesamter Posteingang an einem Ort",
         ru: "\u041D\u0430\u0439\u0434\u0438\u0442\u0435 \u0432\u0430\u0448\u0443 \u043F\u043E\u0447\u0442\u0443",
         es: "Encuentra tu buz\xF3n combinado",
+        it: "Trova la tua casella di posta combinata",
         pt: "Encontre sua caixa de entrada combinado"
       },
       body: {
@@ -91206,6 +91327,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         de: "Deine Nachrichten und Benachrichtigungen wurden in diese praktische Schaltfl\xE4che organisiert",
         ru: "\u0412\u0430\u0448\u0438 \u0443\u0432\u0435\u0434\u043E\u043C\u043B\u0435\u043D\u0438\u044F \u0438 \u0441\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u044F \u0431\u044B\u043B\u0438 \u043E\u0431\u044A\u0435\u0434\u0438\u043D\u0435\u043D\u044B \u0432 \u044D\u0442\u0443 \u0443\u0434\u043E\u0431\u043D\u0443\u044E \u043A\u043D\u043E\u043F\u043A\u0443",
         es: "Tus notificaciones y mensajes han sido organizados en este \xFAtil bot\xF3n",
+        it: "Le tue notifiche e messaggi sono stati organizzati in questo comodo pulsante",
         pt: "Suas notifica\xE7\xF5es e mensagens foram organizadas neste bot\xE3o conveniente"
       }
     },
@@ -91215,6 +91337,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         de: "Zu engen Freunden hinzuf\xFCgen",
         ru: "\u0414\u043E\u0431\u0430\u0432\u044C\u0442\u0435 \u0432\u0430\u0448 \u0441\u043F\u0438\u0441\u043E\u043A \u0431\u043B\u0438\u0437\u043A\u0438\u0445 \u0434\u0440\u0443\u0437\u0435\u0439",
         es: "A\xF1adir tu lista de amigos cercanos",
+        it: "Aggiungi la tua lista di amici stretti",
         pt: "Adicionar sua lista de amigos pr\xF3ximos"
       },
       body: {
@@ -91222,6 +91345,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         de: "Sieh jederzeit von diesem Nutzer gescrobbelte K\xFCnstler, Alben oder Titeln",
         ru: "\u041F\u0440\u043E\u0441\u043C\u0430\u0442\u0440\u0438\u0432\u0430\u0439\u0442\u0435 \u0438\u0445 \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u044B \u043D\u0430 \u043B\u044E\u0431\u043E\u043C \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0435, \u0430\u043B\u044C\u0431\u043E\u043C\u0435 \u0438\u043B\u0438 \u0442\u0440\u0435\u043A\u0435 \u0432 \u043B\u044E\u0431\u043E\u0435 \u0432\u0440\u0435\u043C\u044F",
         es: "Mira sus scrobbles en cualquier artista, \xE1lbum, o tema en cualquier momento",
+        it: "Vedi i loro scrobbles su qualsiasi artista, album, o traccia in qualsiasi momento",
         pt: "Veja seus scrobbles em qualquer artista, \xE1lbum, ou faixa a qualquer momento"
       }
     },
@@ -91231,6 +91355,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         de: "W\xE4hle eine benutzerdefinierte Schriftart, Stil und Profilfarbe",
         ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044C\u0441\u043A\u0438\u0439 \u0448\u0440\u0438\u0444\u0442, \u0441\u0442\u0438\u043B\u044C \u0438 \u0446\u0432\u0435\u0442 \u043F\u0440\u043E\u0444\u0438\u043B\u044F",
         es: "Elegir una fuente, estilo, y color de perfil personalizados",
+        it: "Scegli un font, stile, e colore del profilo personalizzati",
         pt: "Escolha uma fonte customizada, e uma cor de perfil"
       },
       body: {
@@ -91238,7 +91363,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         de: "Dies sind exklusive Vorteile f\xFCr Sponsoren als Dankesch\xF6n f\xFCr die Unterst\xFCtzung von bleh",
         ru: "\u042D\u0442\u043E \u044D\u043A\u0441\u043A\u043B\u044E\u0437\u0438\u0432\u043D\u044B\u0435 \u043F\u0440\u0435\u0438\u043C\u0443\u0449\u0435\u0441\u0442\u0432\u0430 \u0434\u043B\u044F \u0441\u043F\u043E\u043D\u0441\u043E\u0440\u043E\u0432, \u043A\u0430\u043A \u0431\u043B\u0430\u0433\u043E\u0434\u0430\u0440\u043D\u043E\u0441\u0442\u044C \u0437\u0430 \u043F\u043E\u0434\u0434\u0435\u0440\u0436\u043A\u0443 bleh",
         // don't really know how to translate 'perks' -tech
-        es: "Estas son ventajas exclusivas para patrocinadores como agradecimiento por apoyar a bleh"
+        es: "Estas son ventajas exclusivas para patrocinadores como agradecimiento por apoyar a bleh",
+        it: "Questi sono vantaggi esclusivi per gli sponsor come ringraziamento per il supporto a bleh"
       }
     },
     popup_markdown: {
@@ -91247,6 +91373,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         de: "Entdecke die Welt des Markdown-Stylings",
         ru: "\u0421\u0442\u0438\u043B\u0438\u0437\u0443\u0439\u0442\u0435 \u0442\u0435\u043A\u0441\u0442 \u0441 Markdown",
         es: "Adoptar estilo con Markdown",
+        it: "Adotta lo stile con Markdown",
         pt: "Adote o estilo com Markdown"
       },
       body: {
@@ -91255,6 +91382,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         ru: "\u0424\u043E\u0440\u043C\u0430\u0442\u0438\u0440\u0443\u0439\u0442\u0435 \u043B\u044E\u0431\u043E\u0439 \u0442\u0435\u043A\u0441\u0442, \u0432\u0441\u0442\u0430\u0432\u043B\u044F\u0439\u0442\u0435 \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u044F \u0438 \u0441\u0441\u044B\u043B\u043A\u0438, \u0443\u043F\u043E\u043C\u0438\u043D\u0430\u0439\u0442\u0435 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u0435\u0439 \u0438 \u043C\u043D\u043E\u0433\u043E\u0435 \u0434\u0440\u0443\u0433\u043E\u0435 \u0432 \u0437\u0430\u0432\u0438\u0441\u0438\u043C\u043E\u0441\u0442\u0438 \u043E\u0442 \u0441\u0438\u0442\u0443\u0430\u0446\u0438\u0438",
         //сценарий is more like a script
         es: "Formatea cualquier texto, a\xF1ade im\xE1genes y v\xEDnculos, menciona usuarios, y mucho m\xE1s basado en el escenario",
+        it: "Formatta qualsiasi testo, incorpora immagini e link, menziona utenti, e molto altro in base allo scenario",
         pt: "Formate qualquer texto, insira imagens, links, mencione usu\xE1rios e muito mais baseado no cen\xE1rio"
       }
     },
@@ -91264,6 +91392,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         de: "Hier her\xFCberfahren, um Musik zu suchen",
         ru: "\u041D\u0430\u0432\u0435\u0434\u0438\u0442\u0435 \u043A\u0443\u0440\u0441\u043E\u0440 \u0441\u044E\u0434\u0430, \u0447\u0442\u043E\u0431\u044B \u043D\u0430\u0439\u0442\u0438 \u043C\u0443\u0437\u044B\u043A\u0443",
         es: "Pasar el cursor por aqu\xED para buscar m\xFAsica",
+        it: "Passa il cursore qui sopra per cercare musica",
         pt: "Passe o cursor por aqui para buscar m\xFAsica"
       },
       body: {
@@ -91271,6 +91400,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         de: "Die Suche zu finden war noch nie einfacher! Und wenn du nach oben gescrollt hast, wird sie wieder ausgeblendet",
         ru: "\u041F\u043E\u0438\u0441\u043A \u043D\u0438\u043A\u043E\u0433\u0434\u0430 \u043D\u0435 \u0431\u044B\u043B \u0442\u0430\u043A\u0438\u043C \u043F\u0440\u043E\u0441\u0442\u044B\u043C! \u041A \u0442\u043E\u043C\u0443 \u0436\u0435, \u043E\u043D \u0441\u043A\u0440\u044B\u0432\u0430\u0435\u0442\u0441\u044F, \u043A\u043E\u0433\u0434\u0430 \u0432\u044B \u043F\u0440\u043E\u043A\u0440\u0443\u0447\u0438\u0432\u0430\u0435\u0442\u0435 \u0432\u0432\u0435\u0440\u0445",
         es: "Buscar nunca ha sido m\xE1s f\xE1cil, adem\xE1s se oculta cuando te desplazas hacia arriba",
+        it: "Cercare non \xE8 mai stato cos\xEC facile, inoltre si nasconde quando scorri verso l\u2019alto",
         pt: "Pesquisar nunca tinha sido mais f\xE1cil, al\xE9m de ficar oculta quando voc\xEA rolar para cima"
       }
     },
@@ -91279,6 +91409,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       de: "Schicke eine Antwort",
       ru: "\u041E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C \u043E\u0442\u0432\u0435\u0442",
       es: "Enviar una respuesta",
+      it: "Invia una risposta",
       pt: "Envie uma resposta"
     },
     are_these_results_accurate: {
@@ -91286,6 +91417,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       de: "Sind diese Ergebnisse korrekt?",
       ru: "\u0422\u043E\u0447\u043D\u044B\u0435 \u043B\u0438 \u044D\u0442\u0438 \u0440\u0435\u0437\u0443\u043B\u044C\u0442\u0430\u0442\u044B?",
       es: "\xBFSon estos resultados correctos?",
+      it: "Questi risultati sono accurati?",
       pt: "Esses s\xE3o os resultados corretos?"
     },
     report_incorrect: {
@@ -91293,6 +91425,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       de: "Als falsch markieren",
       ru: "\u041E\u0442\u043C\u0435\u0442\u0438\u0442\u044C \u043A\u0430\u043A \u043D\u0435\u0432\u0435\u0440\u043D\u044B\u0439",
       es: "Marcar como incorrecto",
+      it: "Segna come errato",
       pt: "Marcar como incorreto"
     },
     what_did_you_expect: {
@@ -91300,6 +91433,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       de: "Was h\xE4ttest du erwartet?",
       ru: "\u0427\u0442\u043E \u0432\u044B \u043E\u0436\u0438\u0434\u0430\u043B\u0438 \u0443\u0432\u0438\u0434\u0435\u0442\u044C?",
       es: "\xBFQu\xE9 esperabas?",
+      it: "Cosa ti aspettavi?",
       pt: "O que voc\xEA esperava?"
     },
     oracle_sources_tip_track: {
@@ -91307,6 +91441,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       de: "Welche verlinkten Alben h\xE4ttest du hier erwartet? z.B. Dawn FM statt After Hours",
       ru: "\u041A\u0430\u043A\u0438\u0435 \u0430\u043B\u044C\u0431\u043E\u043C\u044B \u0432\u044B \u043E\u0436\u0438\u0434\u0430\u043B\u0438 \u0443\u0432\u0438\u0434\u0435\u0442\u044C, \u043D\u0430\u043F\u0440\u0438\u043C\u0435\u0440, Dawn FM \u0432\u043C\u0435\u0441\u0442\u043E After Hours",
       es: "A qu\xE9 \xE1lbumes esperabas ser llevado, p. ej. Dawn FM en vez de After Hours",
+      it: "Quali albumi ti aspettavi fossero collegati, ad es. Dawn FM invece di After Hours",
       pt: "Quais \xE1lbuns voc\xEA espera que esperava ser vinculado, p. ex, Dawn FM ao inv\xE9s de After Hours"
     },
     oracle_sources_tip_album: {
@@ -91314,6 +91449,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       de: "Welche Ausgabe des Albums hast du erwartet? Bitte f\xFCge Links und eine Erl\xE4uterung hinzu",
       ru: "\u041A\u0430\u043A\u0443\u044E \u043A\u043E\u043F\u0438\u044E \u0430\u043B\u044C\u0431\u043E\u043C\u0430 \u0432\u044B \u043E\u0436\u0438\u0434\u0430\u043B\u0438 \u0443\u0432\u0438\u0434\u0435\u0442\u044C? \u0423\u043A\u0430\u0436\u0438\u0442\u0435 \u0441\u0441\u044B\u043B\u043A\u0438 \u0438 \u043D\u0435\u043A\u043E\u0442\u043E\u0440\u044B\u0435 \u043F\u043E\u0434\u0440\u043E\u0431\u043D\u043E\u0441\u0442\u0438 \u043E \u0442\u043E\u043C, \u043F\u043E\u0447\u0435\u043C\u0443",
       es: "\xBFQu\xE9 copia del \xE1lbum esperabas ver? Proporciona v\xEDnculos y algunos detalles sobre el porqu\xE9",
+      it: "Quale copia dell\u2019album ti aspettavi di vedere? Fornisci link e qualche dettaglio sul perch\xE9",
       pt: "Qual c\xF3pia do \xE1lbum voc\xEA esperava ver? Provid\xEAncie links e alguns detalhes do porqu\xEA"
     },
     switch: {
@@ -91321,6 +91457,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       en: "Switch",
       de: "Tauschen",
       es: "Cambiar",
+      it: "Cambia",
       pt: "Trocar",
       ru: "\u041F\u043E\u043C\u0435\u043D\u044F\u0442\u044C \u043C\u0435\u0441\u0442\u0430\u043C\u0438"
     },
@@ -91329,6 +91466,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       en: "Auto close",
       de: "automatisches Schlie\xDFen",
       es: "Cerrar autom\xE1ticamente",
+      it: "Chiusura automatica",
       pt: "Auto fechar",
       ru: "\u0417\u0430\u043A\u0440\u044B\u0442\u044C \u0430\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u0435\u0441\u043A\u0438"
     },
@@ -91336,6 +91474,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       en: "Loading conversations",
       de: "Konversationen werden geladen",
       es: "Cargando conversaciones",
+      it: "Caricamento conversazioni",
       pt: "Carregando conversas",
       ru: "\u0417\u0430\u0433\u0440\u0443\u0436\u0430\u0435\u043C \u0440\u0430\u0437\u0433\u043E\u0432\u043E\u0440\u044B"
     },
@@ -91343,6 +91482,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       en: "There was an error loading conversations \u201C(\u30CE _ <,, )",
       de: "Es gab einen Fehler beim Laden der Konversationen \u201C(\u30CE _ <,, )",
       es: "Hubo un error al cargar las conversaciones \u201C(\u30CE _ <,, )",
+      it: "Si \xE8 verificato un errore durante il caricamento delle conversazioni \u201C(\u30CE _ <,, )",
       pt: "Ocorreu um erro carregando as conversas \u201C(\u30CE _ <,, )",
       ru: "\u0412\u043E \u0432\u0440\u0435\u043C\u044F \u0437\u0430\u0433\u0440\u0443\u0437\u043A\u0438 \u0440\u0430\u0437\u0433\u043E\u0432\u043E\u0440\u043E\u0432 \u043F\u0440\u043E\u0438\u0437\u043E\u0448\u043B\u0430 \u043E\u0448\u0438\u0431\u043A\u0430 \u201C(\u30CE _ <,, )"
     },
@@ -91350,6 +91490,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       en: "Track name",
       de: "Titel",
       es: "Nombre del tema",
+      it: "Nome della traccia",
       pt: "Nome da faixa",
       ru: "\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0442\u0440\u0435\u043A\u0430"
     },
@@ -91357,204 +91498,268 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       en: "Artist name",
       de: "K\xFCnstlername",
       es: "Nombre del artista",
+      it: "Nome dell\u2019artista",
       pt: "Nome do artista",
       ru: "\u0418\u043C\u044F \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044F"
     },
     album_name: {
       en: "Album name",
       de: "Albumname",
-      es: "Nombre del \xE1lbum"
+      es: "Nombre del \xE1lbum",
+      ru: "\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0430\u043B\u044C\u0431\u043E\u043C\u0430",
+      it: "Nome dell\u2019album"
     },
     search_for_settings: {
       en: "Search for settings",
       de: "Nach Einstellungen suchen",
-      es: "Buscar opciones"
+      es: "Buscar opciones",
+      ru: "\u041F\u043E\u0438\u0441\u043A \u043D\u0430\u0441\u0442\u0440\u043E\u0435\u043A",
+      it: "Cerca le impostazioni"
     },
     found_value_results: {
       en: "Found {c} result(s)",
       de: "{c} Ergebnis(se) gefunden",
-      es: "{c} resultados encontrados"
+      es: "{c} resultados encontrados",
+      ru: "\u041D\u0430\u0439\u0434\u0435\u043D\u043E \u0440\u0435\u0437\u0443\u043B\u044C\u0442\u0430\u0442\u043E\u0432: {c}",
+      it: "{c} risultato(i) trovato(i)"
     },
     translated_from_value: {
       en: "Translated from {v}",
       de: "\xDCbersetzt von {v}",
-      es: "Traducido de {v}"
+      es: "Traducido de {v}",
+      ru: "\u041F\u0435\u0440\u0435\u0432\u0435\u0434\u0435\u043D\u043E \u0441 {v}",
+      it: "Tradotto da {v}"
     },
     follow_guidelines: {
       en: "Keep in mind the {a}community guidelines{/a}",
       de: "Denke daran, die {a}Community-Richtlinien{/a} zu befolgen",
-      es: "Ten en cuenta los {a}lineamientos de la comunidad{/a}"
+      es: "Ten en cuenta los {a}lineamientos de la comunidad{/a}",
+      ru: "\u0423\u0447\u0438\u0442\u044B\u0432\u0430\u0439\u0442\u0435 {a}\u043F\u0440\u0430\u0432\u0438\u043B\u0430 \u0441\u043E\u043E\u0431\u0449\u0435\u0441\u0442\u0432\u0430{/a}",
+      it: "Tieni a mente le {a}linee guida della community{/a}"
     },
     link_val: {
       // text 1, text 2
       // text colour
       en: "Text {v}",
       de: "Text {v}",
-      es: "Texto {v}"
+      es: "Texto {v}",
+      ru: "\u0422\u0435\u043A\u0441\u0442 {v}",
+      it: "Testo {v}"
     },
     bg_val: {
       // fill 1, fill 2
       // the filling of a background colour
       en: "Fill {v}",
       de: "F\xFCllfarbe {v}",
-      es: "Relleno {v}"
+      es: "Relleno {v}",
+      ru: "\u0417\u0430\u043B\u0438\u0432\u043A\u0430 {v}",
+      it: "Riempimento {v}"
     },
     styled_with_font: {
       en: "Styled with {f}.",
       de: "Gestylt mit {f}.",
-      es: "Escrito con {f}"
+      es: "Escrito con {f}",
+      ru: "\u0421\u0442\u0438\u043B\u0438\u0437\u043E\u0432\u0430\u043D\u043E \u0448\u0440\u0438\u0444\u0442\u043E\u043C {f}",
+      it: "Stilizzato con {f}."
     },
     change_font: {
       en: "Change font",
       de: "Schriftart \xE4ndern",
-      es: "Cambiar fuente"
+      es: "Cambiar fuente",
+      ru: "\u0418\u0437\u043C\u0435\u043D\u0438\u0442\u044C \u0448\u0440\u0438\u0444\u0442",
+      it: "Cambia font"
     },
     and_count_more: {
       en: "and {c} more",
       de: "und {c} weitere",
-      es: "y {c} m\xE1s"
+      es: "y {c} m\xE1s",
+      ru: "\u0438 \u0435\u0449\u0451 {c}",
+      it: "e {c} altri"
     },
     scrobbling_now: {
       en: "Scrobbling now",
       de: "Wird gerade gescrobbelt",
-      es: "Haciendo scrobbling ahora"
+      es: "Haciendo scrobbling ahora",
+      ru: "\u0421\u043A\u0440\u043E\u0431\u0431\u043B\u0438\u0442\u0441\u044F \u0441\u0435\u0439\u0447\u0430\u0441",
+      it: "Scrobbling in corso"
     },
     recent_scrobble: {
       en: "Recently scrobbled",
       de: "K\xFCrzlich gescrobbelt",
-      es: "Scrobbling reciente"
+      es: "Scrobbling reciente",
+      ru: "\u041D\u0435\u0434\u0430\u0432\u043D\u043E \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u0435\u043D\u043E",
+      it: "Scrobbled di recente"
     },
     no_tracks_found_mb: {
       en: "No tracks found, possibly a MusicBrainz error",
       de: "Keine Titel gefunden, m\xF6glicherweise ein MusicBrainz-Fehler",
-      es: "Ning\xFAn tema encontrado, posiblemente un error de MusicBrainz"
+      es: "Ning\xFAn tema encontrado, posiblemente un error de MusicBrainz",
+      ru: "\u0422\u0440\u0435\u043A\u0438 \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u044B, \u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E \u043E\u0448\u0438\u0431\u043A\u0430 MusicBrainz",
+      it: "Nessuna traccia trovata, possibile errore di MusicBrainz"
     },
     value_scrobbles_recently: {
       en: "{v} scrobbles recently",
       de: "{v} k\xFCrzliche Scrobbles",
-      es: "{v} scrobblings recientes"
+      es: "{v} scrobblings recientes",
+      ru: "\u041D\u0435\u0434\u0430\u0432\u043D\u043E \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u0435\u043D\u043E: {v}",
+      it: "{v} scrobbles di recente"
     },
     on_tour: {
       en: "On tour",
       de: "Auf Tour",
-      es: "De gira"
+      es: "De gira",
+      ru: "\u0412 \u0442\u0443\u0440\u0435",
+      it: "In tour"
     },
     length: {
       en: "Length",
       de: "Dauer",
-      es: "Duraci\xF3n"
+      es: "Duraci\xF3n",
+      ru: "\u0414\u043B\u0438\u0442\u0435\u043B\u044C\u043D\u043E\u0441\u0442\u044C",
+      it: "Durata"
     },
     released: {
       en: "Released",
       de: "Ver\xF6ffentlicht am",
-      es: "Lanzado"
+      es: "Lanzado",
+      ru: "\u0412\u044B\u043F\u0443\u0449\u0435\u043D\u043E",
+      it: "Rilasciato"
     },
     value_tracks_time: {
       en: "{count} tracks, {length}",
       de: "{count} Titel, {length}",
-      es: "{count} temas, {length}"
+      es: "{count} temas, {length}",
+      ru: "{count} \u0442\u0440\u0435\u043A\u043E\u0432, {length}",
+      it: "{count} tracce, {length}"
     },
     oracle_vocal: {
       en: "Performed by",
       de: "Aufgef\xFChrt von",
-      es: "Interpretado por"
+      es: "Interpretado por",
+      ru: "\u0418\u0441\u043F\u043E\u043B\u043D\u0435\u043D\u043E",
+      it: "Eseguito da"
     },
     oracle_recording: {
       en: "Recorded by",
       de: "Aufgenommen von",
-      es: "Grabado por"
+      es: "Grabado por",
+      ru: "\u0417\u0430\u043F\u0438\u0441\u0430\u043D\u043E",
+      it: "Registrato da"
     },
     oracle_mix: {
       en: "Produced by",
       de: "Produziert von",
-      es: "Producido por"
+      es: "Producido por",
+      ru: "\u0421\u043F\u0440\u043E\u0434\u044E\u0441\u0438\u0440\u043E\u0432\u0430\u043D\u043E",
+      it: "Prodotto da"
     },
     oracle_engineer: {
       en: "Engineered by",
       de: "Technisch betreut von",
-      es: "Dise\xF1ado por"
+      es: "Dise\xF1ado por",
+      ru: "\u0421\u0432\u0435\u0434\u0435\u043D\u043E",
+      it: "Progettato da"
     },
     oracle_editor: {
       en: "Edited by",
       de: "Redigiert von",
-      es: "Editado por"
+      es: "Editado por",
+      it: "Editato da"
     },
     oracle_writer: {
       en: "Written by",
       de: "Geschrieben von",
-      es: "Escrito por"
+      es: "Escrito por",
+      it: "Scritto da"
     },
     oracle_no_credits: {
       en: 'nothing here... (\u0E51/////\u0E51 " )',
       de: 'hier gibt\u2019s nichts zu sehen... (\u0E51/////\u0E51 " )',
-      es: 'Nada aqu\xED... (\u0E51/////\u0E51 " )'
+      es: 'Nada aqu\xED... (\u0E51/////\u0E51 " )',
+      ru: '\u043D\u0438\u0447\u0435\u0433\u043E \u043D\u0435\u0442... (\u0E51/////\u0E51 " )',
+      it: 'Niente qui... (\u0E51/////\u0E51 " )'
     },
     born: {
       en: "Born",
       de: "Geboren am",
-      es: "Naci\xF3"
+      es: "Naci\xF3",
+      ru: "\u0414\u0430\u0442\u0430 \u0440\u043E\u0436\u0434\u0435\u043D\u0438\u044F",
+      // gender-neutral variant of "born", "died" and "formed" ~tachyon
+      it: "Nato il"
     },
     died: {
       en: "Died",
       de: "Gestorben am",
-      es: "Muri\xF3"
+      es: "Muri\xF3",
+      ru: "\u0414\u0430\u0442\u0430 \u0441\u043C\u0435\u0440\u0442\u0438",
+      it: "Morto il"
     },
     formed: {
       // like a group, created
       en: "Formed",
       de: "Gegr\xFCndet am",
-      es: "Formado"
+      es: "Formado",
+      ru: "\u0414\u0430\u0442\u0430 \u043E\u0441\u043D\u043E\u0432\u0430\u043D\u0438\u044F",
+      it: "Formato"
     },
     ended: {
       en: "Ended",
       de: "Beendet am",
-      es: "Terminado"
+      es: "Terminado",
+      it: "Terminato"
     },
     show_disc_image: {
       name: {
         en: "Show accompanying disc for albums and tracks",
         de: "Schallplatte f\xFCr Alben und Titel anzeigen",
-        es: "Mostrar disco adjunto en \xE1lbumes y temas"
+        es: "Mostrar disco adjunto en \xE1lbumes y temas",
+        ru: "\u041F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u0434\u0438\u0441\u043A \u0434\u043B\u044F \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432 \u0438 \u0442\u0440\u0435\u043A\u043E\u0432",
+        it: "Mostra il disco allegato per album e tracce"
       },
       body: {
         en: "Add small visual flair to music pages",
         de: "F\xFCgt kleine visuelle Effekte zu Musikseiten hinzu",
-        es: "A\xF1ade un peque\xF1o efecto visual a las p\xE1ginas de m\xFAsica"
+        es: "A\xF1ade un peque\xF1o efecto visual a las p\xE1ginas de m\xFAsica",
+        ru: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u043D\u0435\u0431\u043E\u043B\u044C\u0448\u043E\u0435 \u0432\u0438\u0437\u0443\u0430\u043B\u044C\u043D\u043E\u0435 \u0443\u043A\u0440\u0430\u0448\u0435\u043D\u0438\u0435 \u043D\u0430 \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u044B \u043C\u0443\u0437\u044B\u043A\u0438",
+        it: "Aggiunge un piccolo effetto visivo alle pagine della musica"
       }
     },
     move_up: {
       en: "Move up",
       de: "Nach oben verschieben",
-      es: "Mover arriba"
+      es: "Mover arriba",
+      ru: "\u041F\u0435\u0440\u0435\u043C\u0435\u0441\u0442\u0438\u0442\u044C \u0432\u0432\u0435\u0440\u0445",
+      it: "Sposta in alto"
     },
     move_down: {
       en: "Move down",
       de: "Nach unten verschieben",
-      es: "Mover abajo"
+      es: "Mover abajo",
+      ru: "\u041F\u0435\u0440\u0435\u043C\u0435\u0441\u0442\u0438\u0442\u044C \u0432\u043D\u0438\u0437",
+      it: "Sposta in basso"
     },
     other_user: {
       en: "Other user",
       de: "Anderer Benutzer",
-      es: "Otro usuario"
+      es: "Otro usuario",
+      ru: "\u0414\u0440\u0443\u0433\u043E\u0439 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044C",
+      it: "Altro utente"
     },
     count_bar_right: {
       name: {
         en: "Align count to right-side",
         de: "Z\xE4hler auf die rechte Seite ausrichten",
-        es: "Alinear cuenta al lado derecho"
+        es: "Alinear cuenta al lado derecho",
+        ru: "\u0412\u044B\u0440\u0430\u0432\u043D\u0438\u0432\u0430\u0442\u044C \u0441\u0447\u0451\u0442\u0447\u0438\u043A \u043F\u043E \u043F\u0440\u0430\u0432\u043E\u043C\u0443 \u043A\u0440\u0430\u044E",
+        it: "Allinea il conteggio al lato destro"
       },
       body: {
         en: "Control the direction of the bar progress and text",
         de: "Steuerung der Richtung des Balkenfortschritts und des Textes",
-        es: "Controla la direcci\xF3n del texto y progreso de la barra"
+        es: "Controla la direcci\xF3n del texto y progreso de la barra",
+        ru: "\u0423\u043F\u0440\u0430\u0432\u043B\u044F\u0442\u044C \u043D\u0430\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435\u043C \u043F\u0440\u043E\u0433\u0440\u0435\u0441\u0441-\u0431\u0430\u0440\u0430 \u0438 \u0442\u0435\u043A\u0441\u0442\u0430",
+        it: "Controlla la direzione della barra di avanzamento e del testo"
       }
-    },
-    recents: {
-      // recent scrobbles
-      en: "Recents"
-    },
-    better_with_friends: {
-      en: "Music is better with friends, {a}add to your close friends list{/a}"
     }
   };
   var translation_fallback = "NO_TRANSLATION_FOUND";
@@ -93134,7 +93339,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-02-25"
       }
     },
-    built_on: "2026-05-03T02:11:04.779Z"
+    built_on: "2026-05-04T18:34:36.020Z"
   };
 
   // node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
