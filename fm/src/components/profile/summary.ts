@@ -1,5 +1,5 @@
 import { auth, page, root } from '@/build/page';
-import { lang, tl, trans } from '@/build/trans.ts';
+import { lang, tl, trans } from '@/build/trans';
 import { html, render } from 'lighterhtml';
 import { icon, icons } from '../shared/icon';
 import tippy from 'tippy.js';
@@ -269,6 +269,7 @@ export function bleh_profile_chart_render(
     if (!panel) return;
 
     const table = panel.querySelector('table');
+    if (!table) return;
 
     let entries = table.querySelectorAll('tbody tr');
 

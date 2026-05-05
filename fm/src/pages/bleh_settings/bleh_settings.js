@@ -15,7 +15,7 @@ import {
     root
 } from '@/build/page';
 import { copy, set_storage, time } from '@/build/tools';
-import { get_trans_key, lang_info, tl, trans } from '@/build/trans.ts';
+import { get_trans_key, lang_info, tl, trans } from '@/build/trans';
 import { dialog, dialog_rm } from '@/components/dialog/dialog';
 import { markdown } from '@/components/shared/markdown';
 import { notify } from '@/components/dialog/notify';
@@ -30,7 +30,6 @@ import {
     setting
 } from '@/components/settings/settings';
 import { share } from '@/components/dialog/share';
-import { force_refresh_style } from '@/components/page/style';
 import tippy from 'tippy.js';
 import {
     checkup_friend_cache,
@@ -51,6 +50,7 @@ import { icon, icons } from '@/components/shared/icon.js';
 import { chartlist_bar } from '@/components/music/bar.js';
 import { avatar } from '@/components/shared/avatar.js';
 import { convert_lang_to_country, flag } from '@/components/shared/flag.js';
+import { lotus_modal } from '@/components/music/lotus.js';
 
 export function bleh_settings() {
     page.name = auth.name;
@@ -682,7 +682,7 @@ export async function render_setting_page(page_id) {
                             </p>
                             <button
                                 class="see-more"
-                                onclick="_open_correction_modal()"
+                                onclick=${() => lotus_modal()}
                             >
                                 ${tl(trans.view_all)}
                             </button>
@@ -844,20 +844,6 @@ export async function render_setting_page(page_id) {
                     </div>
                     <div class="setting-group">
                         ${setting({ id: 'dev' })} ${setting({ id: 'branch' })}
-                        <div class="setting" data-type="action">
-                            <div class="heading">
-                                <h5>${tl(trans.force_refresh_style.name)}</h5>
-                                <p>${tl(trans.force_refresh_style.body)}</p>
-                            </div>
-                            <div class="toggle-wrap">
-                                <button
-                                    class="see-more update-check left-icon"
-                                    onclick=${() => force_refresh_style()}
-                                >
-                                    ${tl(trans.refresh)}
-                                </button>
-                            </div>
-                        </div>
                     </div>
                     <div class="sep"></div>
                     <h4>Debug information</h4>
@@ -870,16 +856,6 @@ export async function render_setting_page(page_id) {
                             is currently ${settings.corrections}
                         </li>
                         <br />
-                        <li>
-                            Theme will expire at
-                            <span class="time"
-                                >${time(
-                localStorage.getItem(
-                    'bleh_cached_style_timeout'
-                )
-            )}</span
-                            >
-                        </li>
                         <li>
                             <span class="lotus lotus-name lotus-name-small"
                                 >lotus</span
@@ -903,20 +879,6 @@ export async function render_setting_page(page_id) {
                 )
             )}</span
                             >
-                        </li>
-                        <br />
-                        <li>
-                            It is currently
-                            <span class="time">${time()}</span>
-                        </li>
-                        <br />
-                        <li>
-                            Has the timeout expired?
-                            ${new Date(
-                localStorage.getItem(
-                    'bleh_cached_style_timeout'
-                )
-            ) < new Date()}
                         </li>
                     </ul>
                     <div class="sep"></div>
@@ -993,10 +955,12 @@ export async function render_setting_page(page_id) {
                 <div class="banner-previews">
                     <div class="banner-preview-item">
                         <strong class="banner-preview-label">${auth.name}</strong>
-                        <div class="banner-preview-img ${!own_banners ? 'hide-banner' : ''}" style="background-image: url(${cache.banner || avatar_replace ? avatar(auth.avatar, 'ar0') : fallback_url})" />
+                        <div class="banner-preview-avatar" style="background-image: url(${avatar(auth.avatar, 'ar0')})" />
+                        <div class="banner-preview-img ${!own_banners ? 'hide-banner' : ''}" style="background-image: url(${cache.banner ? cache.banner : avatar_replace ? avatar(auth.avatar, 'ar0') : fallback_url})" />
                     </div>
                     <div class="banner-preview-item">
                         <strong class="banner-preview-label">${tl(trans.other_profiles)}</strong>
+                        <div class="banner-preview-avatar" style="background-image: url(${fallback_avi})" />
                         <div class="banner-preview-img ${!other_banners ? 'hide-banner' : ''}" style="background-image: url(${avatar_replace ? fallback_avi : fallback_url})" />
                     </div>
                 </div>

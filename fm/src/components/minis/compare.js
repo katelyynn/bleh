@@ -8,7 +8,7 @@ import { html, render } from 'lighterhtml';
 import { log } from '@/build/log';
 import { auth, page, root } from '@/build/page';
 import { clean_number, sanitise } from '@/build/tools';
-import { lang, tl, trans } from '@/build/trans.ts';
+import { lang, tl, trans } from '@/build/trans';
 import { music_grids } from '@/components/music/music_grid';
 import { notify, notify_rm } from '@/components/dialog/notify';
 import { select } from '@/components/settings/select';
@@ -198,10 +198,9 @@ export function compare({ host, sidebar } = {}) {
                 data-filled="false"
                 ref=${(el) => (body = el)}
             >
-                <div class="loading-data-container">
-                    <div class="loading-data-text info">
-                        ${tl(trans.choose_a_timeframe_above)}
-                    </div>
+                <div class="placeholder-block">
+                    <div class="placeholder-head">(๑>◡<๑)</div>
+                    <div class="placeholder-summary">${tl(trans.choose_a_timeframe_above)}</div>
                 </div>
             </div>
         `

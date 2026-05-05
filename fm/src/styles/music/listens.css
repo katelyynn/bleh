@@ -107,7 +107,9 @@
 
     .listen-item-info {
         display: flex;
+        gap: 0 10px;
         flex: 1;
+        overflow: hidden;
 
         @media (max-width: 700px) {
             flex-direction: column;
@@ -120,6 +122,13 @@
             font-weight: var(--font-weight);
 
             flex: 1;
+
+            display: -webkit-inline-box;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-clamp: 1;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
         }
         & > .listen-item-text {
             font-size: var(--font-size);

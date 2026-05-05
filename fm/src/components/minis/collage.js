@@ -4,7 +4,7 @@
 // Licensed under GPLv3
 //
 
-import { lang, tl, trans } from '@/build/trans.ts';
+import { lang, tl, trans } from '@/build/trans';
 import { html, render } from 'lighterhtml';
 import { select } from '@/components/settings/select';
 import { setting } from '@/components/settings/settings';
@@ -133,10 +133,9 @@ export function collage({ host, sidebar } = {}) {
             data-filled="false"
             ref=${(el) => (body = el)}
         >
-            <div class="loading-data-container">
-                <div class="loading-data-text info">
-                    ${tl(trans.choose_a_timeframe_above)}
-                </div>
+            <div class="placeholder-block">
+                <div class="placeholder-head">(๑>◡<๑)</div>
+                <div class="placeholder-summary">${tl(trans.choose_a_timeframe_above)}</div>
             </div>
         </div>
     `);
@@ -306,17 +305,19 @@ export function collage({ host, sidebar } = {}) {
 
     function collage_error(e) {
         render(body, html`
-                    <div class="loading-data-container">
-                        <div class="alert alert-error">${e && e.message ? e.message : e}</div>
-                    </div>
-                `);
+            <div class="loading-data-container">
+                <div class="alert alert-error">${e && e.message ? e.message : e}</div>
+            </div>
+        `);
 
-                type.querySelector('button').disabled = false;
-                timeframe.querySelector('button').disabled = false;
-                collage_settings.forEach((option) => {
-                    option.setAttribute('disabled', false);
-                });
-                submit.disabled = false;
+        console.error(e);
+
+        type.querySelector('button').disabled = false;
+        timeframe.querySelector('button').disabled = false;
+        collage_settings.forEach((option) => {
+            option.setAttribute('disabled', false);
+        });
+        submit.disabled = false;
     }
 
     function make_collage(bypass = false) {
@@ -679,7 +680,7 @@ export function collage({ host, sidebar } = {}) {
                     doc.querySelectorAll('*').forEach((el) => {
                         el.style.setProperty(
                             'font-family',
-                            'Funnel Sans, Inter, Ubuntu Sans, Spline Sans, Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Sans TC, Lucida Grande, Verdana, Tahoma, -apple-system, BlinkMacSystemFont, sans-serif'
+                            'Hanken Grotesk, Funnel Sans, Inter, Ubuntu Sans, Spline Sans, Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Sans TC, Lucida Grande, Verdana, Tahoma, -apple-system, BlinkMacSystemFont, sans-serif'
                         );
                     });
                 }

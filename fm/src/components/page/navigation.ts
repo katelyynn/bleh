@@ -7,7 +7,7 @@
 import { settings } from '@/build/config';
 import { auth, discord, page, root } from '@/build/page';
 import { stored_season } from '@/build/seasonal';
-import { lang, lang_info, tl, trans } from '@/build/trans.ts';
+import { lang, lang_info, tl, trans } from '@/build/trans';
 import { create_badge, load_badges } from '@/components/shared/badge';
 import { version } from '@/main';
 import { ff } from '@/components/settings/sku';
@@ -30,7 +30,7 @@ import {
     load_profile_cache_externally,
     open_starred_friend_window
 } from '@/pages/profile/profile';
-import { sponsor } from '@/components/sponsor';
+import { is_sponsor, sponsor } from '@/components/sponsor';
 import { generic_link_menu, register_menu } from '@/components/menu';
 import { copy, get_language_name, romanise } from '@/build/tools';
 import { submit_scrobble } from '@/components/music/scrobble';
@@ -42,6 +42,7 @@ import { queue_popup } from '@/components/dialog/popup';
 import { icon, icons } from '../shared/icon';
 import { avatar } from '../shared/avatar';
 import { convert_lang_to_country, flag } from '../shared/flag';
+import { keys } from '../settings/storage';
 
 export function patch_masthead() {
     let masthead_logo = document.body.querySelector('.masthead-logo');
@@ -195,17 +196,16 @@ export function append_nav() {
 
     if (!page.structure.style_warning) {
         const style_warning = html.node`
-            <div class="style-warning" style="position: fixed; top: 0; left: 0; right: 0; padding: 20px; background: #fff; z-index: 1000000000; display: flex; align-items: center; gap: 30px">
+            <div class="style-warning" style="position: fixed; top: 0; left: 0; right: 0; padding: 20px; background: #fff; z-index: 1000000000; display: flex; justify-content: center; align-items: center; gap: 30px">
                 <strong>${tl(trans.style_warning)}</strong>
-                <button class="btn primary" onclick=${() => {
-                    save_setting('branch', 'uwu');
-                }}>
-                    Reset branch to release (uwu)
-                </button>
                 <button class="btn-primary" onclick=${() => {
+                    save_setting('branch', 'uwu');
                     save_setting('dev', false);
                     window.location.reload();
                 }}>${tl(trans.re_enable_style_loading)}</button>
+                <button class="btn-primary" onclick=${() => {
+                    open(`https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js`);
+                }}>${tl(trans.check_for_updates)}</button>
             </div>
         `;
         document.body.appendChild(style_warning);
@@ -963,7 +963,8 @@ export function append_nav() {
                                             </a>
                                             <div class="button-combo-sep" />
                                             <button class="dropdown-menu-clickable-item chibi" data-type="continue" onclick=${() => {
-                                                const friends = settings.friends.filter(friend => friend != settings.starred_friend);
+                                                const cache = JSON.parse(localStorage.getItem(keys.profile_cache) || '{}');
+                                                const friends = settings.friends.filter((friend: string) => friend != settings.starred_friend);
 
                                                 render(page_2, html``); // fix crash
                                                 render(page_2, html`
@@ -972,19 +973,46 @@ export function append_nav() {
                                                     }}>
                                                         ${tl(trans.back)}
                                                     </button>
-                                                    ${settings.starred_friend ? html.node`
-                                                    <a class="dropdown-menu-clickable-item" data-type="profile" href="${root}user/${settings.starred_friend}">
-                                                        <span><span class="at">@</span>${settings.starred_friend}</span>
-                                                        <span class="star-icon colourful">
-                                                            <span class="bleh-icon" />
-                                                        </span>
-                                                    </a>
-                                                    ` : ''}
-                                                    ${friends.map(friend => html.node`
-                                                    <a class="dropdown-menu-clickable-item" data-type="profile" href="${root}user/${friend}">
-                                                        <span><span class="at">@</span>${friend}</span>
-                                                    </a>
-                                                    `)}
+                                                    ${settings.starred_friend ? () => {
+                                                        const friend = settings.starred_friend as string;
+                                                        const valid = is_sponsor(friend);
+
+                                                        return html.node`
+                                                            <a class="dropdown-menu-clickable-item" data-type="profile" href="${root}user/${friend}">
+                                                                ${cache[friend]?.username && valid ? html.node`
+                                                                    <span class="username-combo">
+                                                                        <span class="username-custom">${cache[friend].username}</span>
+                                                                        <span class="username-original">
+                                                                            <span class="at">@</span>${friend}
+                                                                        </span>
+                                                                    </span>
+                                                                ` : html.node`
+                                                                    <span><span class="at">@</span>${friend}</span>
+                                                                `}
+                                                                <span class="star-icon colourful">
+                                                                    <span class="bleh-icon" />
+                                                                </span>
+                                                            </a>
+                                                        `;
+                                                    } : ''}
+                                                    ${friends.map((friend: string) => {
+                                                        const valid = is_sponsor(friend);
+
+                                                        return html.node`
+                                                            <a class="dropdown-menu-clickable-item" data-type="profile" href="${root}user/${friend}">
+                                                                ${cache[friend]?.username && valid ? html.node`
+                                                                    <span class="username-combo">
+                                                                        <span class="username-custom">${cache[friend].username}</span>
+                                                                        <span class="username-original">
+                                                                            <span class="at">@</span>${friend}
+                                                                        </span>
+                                                                    </span>
+                                                                ` : html.node`
+                                                                    <span><span class="at">@</span>${friend}</span>
+                                                                `}
+                                                            </a>
+                                                        `;
+                                                    })}
                                                     <div class="sep" />
                                                     <button class="dropdown-menu-clickable-item" data-type="edit" onclick=${() => {
                                                         open_starred_friend_window();
@@ -1000,6 +1028,29 @@ export function append_nav() {
                                         </div>
                                     `;
                                 }
+
+                                const simple_menu = tippy(elem, {
+                                    theme: 'context-menu',
+                                    content: html.node`
+                                        <a class="dropdown-menu-clickable-item" data-type="quick_access" href="${root}bleh/profile?setting=navigation_items">
+                                            ${tl(trans.edit_quick_access)}
+                                        </a>
+                                    `,
+                                    placement: 'right-start',
+                                    trigger: 'manual',
+                                    interactive: true,
+                                    interactiveBorder: 10,
+                                    offset: [0, 0],
+                                    appendTo: document.body,
+
+                                    onShow(instance) {
+                                        instance.popper.addEventListener('click', (event) => {
+                                            instance.hide();
+                                        });
+                                    }
+                                });
+
+                                register_menu(elem, simple_menu);
 
                                 return elem;
                             })}
@@ -1278,39 +1329,23 @@ export function append_nav() {
     // mobile
     masthead.appendChild(html.node`
         <div class="mobile-controls">
-            <a class="btn mobile-control icon" aria-checked=${page.type == 'overview' || page.type == 'recommended' || page.type == 'releases' || page.type == 'bookmarks' || page.type == 'charts'} data-menu-item="home" href="${root}music">
-                ${tl(trans.home)}
-            </a>
             ${() => {
                 const btn = html.node`
-                    <a class="btn mobile-control icon" aria-checked=${page.type == 'search'} data-menu-item="search">
-                        ${tl(trans.search)}
+                    <a class="btn mobile-control icon" aria-checked=${page.type == 'inbox'} data-type="inbox">
+                        ${tl(trans.inbox)}
+                        ${count > 0 ? html.node`<div class="notification-count-badge"></div>` : ''}
                     </a>
                 `;
-
-                let search_input;
 
                 tippy(btn, {
                     theme: 'mobile',
                     content: html.node`
                         <div class="window-header">
-                            <div class="bleh-icon" data-type="search" style="--icon: var(--mask)" />
-                            <div class="window-title">${tl(trans.search)}</div>
+                            <div class="bleh-icon" data-type="inbox" style="--icon: var(--mask)" />
+                            <div class="window-title">${tl(trans.inbox)}</div>
                         </div>
-                        ${() => {
-                            const form = html.node`
-                                <form action="${root}search" method="get">
-                                    ${(search_input = input({
-                                        name: 'q',
-                                        func: () => {
-                                            form.submit();
-                                        }
-                                    }))}
-                                </form>
-                            `;
-
-                            return form;
-                        }}
+                        ${setting({ id: 'inbox_view', func: render_inbox })}
+                        <div class="window-content" />
                     `,
                     placement: 'top',
                     interactive: true,
@@ -1318,8 +1353,16 @@ export function append_nav() {
                     trigger: 'click',
                     appendTo: document.body,
 
-                    onShow() {
-                        search_input.focus();
+                    onShow(instance) {
+                        console.info(
+                            'navigation instance',
+                            instance,
+                            instance.popper
+                        );
+                        page.state.inbox_content =
+                            instance.popper.querySelector('.window-content');
+
+                        render_inbox();
                     }
                 });
 
@@ -1332,6 +1375,7 @@ export function append_nav() {
                             <img src=${auth.avatar} alt=${auth.name}>
                         </span>
                         ${auth.name}
+                        ${update_required === 'true' ? html.node`<div class="notification-count-badge"></div>` : ''}
                     </a>
                 `;
 
@@ -1339,12 +1383,6 @@ export function append_nav() {
                     theme: 'mobile',
                     content: html.node`
                         <div class="window-menu-items">
-                            <form>
-                                <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
-                                <a class="dropdown-menu-clickable-item colourful" ref=${(el) => (button = el)} data-menu-item="logout" href="${root}logout">
-                                    ${tl(trans.logout)}
-                                </a>
-                            </form>
                             <button class="dropdown-menu-clickable-item" data-menu-item="news" onclick=${() => {
                                 news();
                             }}>
@@ -1392,15 +1430,26 @@ export function append_nav() {
 
                                 return elem;
                             })}
-                            ${
-                                settings.starred_friend != '' ?
-                                    html.node`
-                                        <a class="dropdown-menu-clickable-item no-colour colourful" data-type="starred_friend" data-is-shortcut="true" href="${root}user/${settings.starred_friend}">
-                                            ${settings.starred_friend}
-                                        </a>
-                                    `
-                                :   ''
-                            }
+                            <a class="dropdown-menu-clickable-item" aria-checked=${page.type == 'bleh_settings'} data-menu-item="bleh" href="${root}bleh">
+                                ${tl(trans.settings)}
+                            </a>
+                            <a class="dropdown-menu-clickable-item" aria-checked=${page.type == 'settings'} data-menu-item="settings" href="${root}settings">
+                                ${tl(trans.settings)}
+                            </a>
+                            <a class="dropdown-menu-clickable-item" aria-checked=${page.type == 'ipod'} data-type="ipod" href="${root}bleh/now">
+                                ${tl(trans.music)}
+                            </a>
+                            ${settings.starred_friend != '' ? html.node`
+                                <a class="dropdown-menu-clickable-item no-colour colourful" data-type="starred_friend" data-is-shortcut="true" href="${root}user/${settings.starred_friend}">
+                                    ${settings.starred_friend}
+                                </a>
+                            ` : ''}
+                            <form>
+                                <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
+                                <a class="dropdown-menu-clickable-item colourful" ref=${(el) => (button = el)} data-menu-item="logout" href="${root}logout">
+                                    ${tl(trans.logout)}
+                                </a>
+                            </form>
                             <a class="dropdown-menu-clickable-item" data-type="user" href="${root}user/${auth.name}">
                                 ${auth.name}
                             </a>
@@ -1417,21 +1466,34 @@ export function append_nav() {
             }}
             ${() => {
                 const btn = html.node`
-                    <a class="btn mobile-control icon" aria-checked=${page.type == 'inbox'} data-type="inbox">
-                        ${tl(trans.inbox)}
-                        ${count > 0 ? html.node`<div class="notification-count-badge"></div>` : ''}
+                    <a class="btn mobile-control icon" aria-checked=${page.type == 'search'} data-menu-item="search">
+                        ${tl(trans.search)}
                     </a>
                 `;
+
+                let search_input;
 
                 tippy(btn, {
                     theme: 'mobile',
                     content: html.node`
                         <div class="window-header">
-                            <div class="bleh-icon" data-type="inbox" style="--icon: var(--mask)" />
-                            <div class="window-title">${tl(trans.inbox)}</div>
+                            <div class="bleh-icon" data-type="search" style="--icon: var(--mask)" />
+                            <div class="window-title">${tl(trans.search)}</div>
                         </div>
-                        ${setting({ id: 'inbox_view', func: render_inbox })}
-                        <div class="window-content" />
+                        ${() => {
+                            const form = html.node`
+                                <form action="${root}search" method="get">
+                                    ${(search_input = input({
+                                        name: 'q',
+                                        func: () => {
+                                            form.submit();
+                                        }
+                                    }))}
+                                </form>
+                            `;
+
+                            return form;
+                        }}
                     `,
                     placement: 'top',
                     interactive: true,
@@ -1439,25 +1501,13 @@ export function append_nav() {
                     trigger: 'click',
                     appendTo: document.body,
 
-                    onShow(instance) {
-                        console.info(
-                            'navigation instance',
-                            instance,
-                            instance.popper
-                        );
-                        page.state.inbox_content =
-                            instance.popper.querySelector('.window-content');
-
-                        render_inbox();
+                    onShow() {
+                        search_input.focus();
                     }
                 });
 
                 return btn;
             }}
-            <a class="btn mobile-control icon" aria-checked=${page.type == 'settings' || page.type == 'bleh_settings'} data-menu-item="settings" href="${root}bleh">
-                ${tl(trans.settings)}
-                ${update_required === 'true' ? html.node`<div class="notification-count-badge"></div>` : ''}
-            </a>
         </div>
     `);
 }

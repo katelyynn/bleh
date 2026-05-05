@@ -21,7 +21,7 @@ import {
     sponsor_url
 } from '@/build/page';
 import { stored_season } from '@/build/seasonal';
-import { lang, lookup_lang, tl, trans, translation_stats } from '@/build/trans.ts';
+import { lang, lookup_lang, tl, trans, translation_stats } from '@/build/trans';
 import { dialog, load_dialogs } from '@/components/dialog/dialog';
 import {
     correct_artist,
@@ -239,12 +239,16 @@ function handle_error(e = null) {
         id: 'error',
         title: 'An error has occurred',
         body: html.node`
-            <div class="modal-vertical-inner error-inner">
-                ${icon({ name: icons.error })}
-                <h1>oops.. something broke</h1>
-                <p>An error prevented ${version.brand} from finishing loading, it's recommended to leave the page and refresh.</p>
+            <div class="error-inner">
+                <div class="error-top">
+                    ${icon({ name: icons.error })}
+                    <div class="error-top-info">
+                        <h1 class="error-head">oops.. something broke</h1>
+                        <p class="error-body">An error prevented ${version.brand} from finishing loading</p>
+                    </div>
+                </div>
                 <pre class="error-info colourful">${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ''}${e.stack ? html.node`<br><span class="error-stack">${e.stack}</span>` : ''}<br>on: ${page.type}/${page.subpage}<br>    ${window.location.pathname}<br>    ${version.build} (${version.sku})</pre>
-                <p>It would be helpful if you could report this bug on Github, including the error message above.</p>
+                <p class="error-summary">It would be helpful if you could report this bug, including the error message above and any steps you took.</p>
             </div>
             <div class="modal-footer">
                 <div class="fill"></div>
@@ -826,17 +830,21 @@ export async function register_background(url: string | null, origin = null) {
         const previous_url = background.getAttribute('data-url');
         if (previous_url && previous_url == url) {
             log('skipped as url is identical', 'background', 'log');
+            background_props();
             return;
         }
 
         background.classList.remove('ready');
     }
 
-    background.setAttribute('data-url', url);
-    background.setAttribute('data-page-type', page.type);
-    background.setAttribute('data-page-subpage', page.subpage);
-    background.setAttribute('data-background-origin', origin);
-    background.setAttribute('data-background-coloured', settings.hue_from_album);
+    background_props();
+
+    function background_props() {
+        background.setAttribute('data-url', url);
+        background.setAttribute('data-page-type', page.type);
+        background.setAttribute('data-page-subpage', page.subpage);
+        background.setAttribute('data-background-origin', origin);
+    }
 
     if (url) {
         url = avatar(url, 'avatar300s');
@@ -910,15 +918,19 @@ export function register_banner(url: string | null, origin = null) {
         const previous_url = background.getAttribute('data-url');
         if (previous_url && previous_url == url) {
             log('skipped as url is identical', 'background', 'log');
+            banner_props();
             return;
         }
     }
 
-    background.setAttribute('data-url', url);
-    background.setAttribute('data-page-type', page.type);
-    background.setAttribute('data-page-subpage', page.subpage);
-    background.setAttribute('data-background-origin', origin);
-    background.setAttribute('data-background-coloured', settings.hue_from_album);
+    banner_props();
+
+    function banner_props() {
+        background.setAttribute('data-url', url);
+        background.setAttribute('data-page-type', page.type);
+        background.setAttribute('data-page-subpage', page.subpage);
+        background.setAttribute('data-background-origin', origin);
+    }
 
     let inner: HTMLSpanElement;
 
@@ -956,7 +968,7 @@ function favi() {
     favicon.href =
         window.matchMedia('(prefers-color-scheme: dark)').matches ?
             dark
-        :   light;
+            : light;
 
     window
         .matchMedia('(prefers-color-scheme: dark)')
@@ -964,6 +976,12 @@ function favi() {
             favicon.href =
                 window.matchMedia('(prefers-color-scheme: dark)').matches ?
                     dark
-                :   light;
+                    : light;
         });
+}
+
+export function is_same_page() {
+    if (!page.previous || !page.previous.type || !page.previous.name) return false;
+
+    return page.previous.type == page.type && page.previous.name.toLowerCase() == page.name.toLowerCase();
 }

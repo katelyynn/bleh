@@ -5,7 +5,7 @@
 //
 
 import { html } from 'lighterhtml';
-import { tl, trans } from '@/build/trans.ts';
+import { tl, trans } from '@/build/trans';
 import { log } from '@/build/log.js';
 import tippy from 'tippy.js';
 import { calendar } from '@/components/dialog/calendar';

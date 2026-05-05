@@ -6,7 +6,7 @@
 
 import {log} from '@/build/log';
 import {auth, page, root} from '@/build/page';
-import {tl, trans} from '@/build/trans.ts';
+import {tl, trans} from '@/build/trans';
 import {checkup_page_structure} from '@/components/page/structure';
 import {register_background, update_page} from '@/page';
 import {html, render} from "lighterhtml";
@@ -43,7 +43,7 @@ export async function bleh_api() {
     if (page.subpage == 'create_account') return;
 
 
-    page.structure.container.classList.add('sour');
+    page.structure.container.classList.add('has-cards-view');
     page.structure.content.classList.add('cards-view');
 
 

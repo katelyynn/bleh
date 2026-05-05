@@ -11,7 +11,7 @@ import { redirect } from '@/components/music/music';
 import showdown from 'showdown';
 import DOMPurify from 'dompurify';
 import { expand_avatar } from '@/components/shared/avatar';
-import { tl, trans } from '@/build/trans.ts';
+import { tl, trans } from '@/build/trans';
 import { dialog, dialog_rm } from '@/components/dialog/dialog';
 import { settings, settings_store } from '@/build/config';
 import { log } from '@/build/log.js';
@@ -27,6 +27,7 @@ import { input } from '@/components/settings/input';
 import { queue_popup } from '@/components/dialog/popup';
 import { markdown_options } from '@/types/markdown';
 import { profile_cache_list } from '@/types/profile';
+import { keys } from '../settings/storage';
 
 export function markdown(
     text: string,
@@ -362,7 +363,7 @@ export function markdown(
 
     if (available && will_cache) {
         profile_cache =
-            JSON.parse(localStorage.getItem('bleh_profile_cache')) || {};
+            JSON.parse(localStorage.getItem(keys.profile_cache)) || {};
         cache = profile_cache[name] || {};
     }
 
@@ -984,7 +985,6 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
             on_selection(null, null, false);
         },
         func_select: on_selection,
-        submit_on_character: true,
         required,
         maxlength,
         focus: autofocus
@@ -992,6 +992,12 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
     let overlay;
 
     const md_editor = textarea.editor;
+
+    md_editor.addEventListener('input', () => {
+        on_selection(null, null, false);
+        if (func) func(textarea.value);
+        render_overlay();
+    });
 
     let is_bold_selected;
 

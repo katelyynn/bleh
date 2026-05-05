@@ -8,7 +8,7 @@ import { settings } from '@/build/config';
 import { log } from '@/build/log';
 import { auth, page, root } from '@/build/page';
 import { romanise, sanitise } from '@/build/tools';
-import { tl, trans } from '@/build/trans.ts';
+import { tl, trans } from '@/build/trans';
 import {
     correct_artist,
     correct_generic_combo_no_artist,
@@ -25,7 +25,7 @@ import {
     similar_items
 } from '@/components/music/music';
 import { checkup_page_structure } from '@/components/page/structure';
-import { register_background, update_page } from '@/page';
+import { is_same_page, register_background, update_page } from '@/page';
 import { ff } from '@/components/settings/sku';
 import { bleh_gallery_list, bleh_gallery_upload } from '@/pages/music/gallery';
 import { bleh_tags_mini } from '@/pages/tag';
@@ -113,9 +113,11 @@ export function bleh_artists() {
 
         let page_avatar;
 
+        const same_page = is_same_page();
+
         let multi_info_box;
         let redesigned_artist_header = html.node`
-            <section class="page-header for-artist">
+            <section class="page-header for-artist ${same_page ? 'same' : ''}">
                 <div class="page-header-avatar-list">
                     ${page_avatar = page_header_avatar(avatar?.getAttribute('content'))}
                 </div>
@@ -140,6 +142,7 @@ export function bleh_artists() {
             </section>
         `;
 
+        log('settings hue accent', 'dfbdfb', 'info', { settings: JSON.stringify(settings) });
         header_colour(page_avatar.image, settings.hue_from_artist, page_avatar);
 
         if (multi_info_box) {
@@ -223,6 +226,7 @@ export function bleh_artists() {
                         <div class="setting-group blend">
                             ${setting({ id: 'format_guest_features' })}
                             ${setting({ id: 'show_guest_features' })}
+                            ${setting({ id: 'count_bar_right' })}
                         </div>
                     </div>
                 `,

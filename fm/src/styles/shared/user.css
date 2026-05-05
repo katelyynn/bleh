@@ -36,6 +36,11 @@
         --lit-over: 0.825;
     }
 }
+
+.user-list-item-mobile-ad {
+    display: none !important;
+}
+
 .user-list-item {
     width: var(--user-list-item-width, 100%);
     padding: var(--user-list-item-padding, 0 var(--item-list-gap));
@@ -102,17 +107,18 @@
     }
 
     .user-follow {
-        width: calc(18px + 2px);
-        height: calc(18px + 2px);
+        --mask-size: 18px;
+        width: calc(18px + 2px) !important;
+        height: calc(18px + 2px) !important;
         padding: 1px !important;
         border-radius: 50px !important;
 
-        background-color: oklch(var(--b6), calc(var(--solarium-opacity) * 80%)) !important;
+        background-color: oklch(var(--b6), calc(var(--solarium-opacity, 1) * 80%)) !important;
 
         min-width: unset;
 
-        --margin-top: -9px;
-        --left: 1px;
+        --margin-top: -9px !important;
+        --left: 1px !important;
     }
 
     .user-list-inner-wrap {
@@ -130,6 +136,20 @@
             &[data-position="1"] {
                 background: linear-gradient(90deg, oklch(var(--h4) / 20%) 0%, transparent 28%);
             }
+        }
+
+        .user-list-avatar {
+            top: var(--item-list-gap);
+            left: var(--item-list-gap);
+        }
+
+        .username-combo {
+            text-align: left;
+            flex-direction: row;
+        }
+
+        .user-list-name {
+            max-width: 200px;
         }
     }
 
@@ -155,6 +175,11 @@
                 --follow-button-bg-atv: oklch(var(--h3) / 20%);
                 --follow-button-col: oklch(var(--l3-c));
             }
+        }
+
+        .username-combo {
+            text-align: left;
+            flex-direction: row;
         }
 
         .user-list-inner-wrap {
@@ -221,6 +246,11 @@
         --user-list-item-radius: var(--item-big-radius);
         --user-list-item-width: 100%;
 
+        .user-list-name {
+            min-width: unset;
+            max-width: 90%;
+        }
+
         .user-list-item {
             display: flex;
             flex-direction: column;
@@ -260,8 +290,14 @@
                     opacity: 0;
                 }
 
+                .listener-list-position,
                 .user-list-name, .user-list-description {
-                    translate: 0 34px !important;
+                    translate: 0 40px !important;
+                }
+
+                .user-list-shared-artists,
+                .user-list-about-me:not(.has-featured-track) {
+                    opacity: 0;
                 }
             }
 
@@ -299,6 +335,7 @@
                     height: var(--w);
                     --mask-size: var(--cover-size-100);
 
+                    top: 36px;
                     left: 50%;
                     margin-left: calc(-1 * (var(--w) / 2));
 
@@ -309,7 +346,7 @@
 
                 .user-follow {
                     position: absolute;
-                    top: 0;
+                    top: 36px;
                     right: 50%;
                     margin-right: calc((-1 * var(--w)) + 25px);
 
@@ -320,6 +357,15 @@
 
                 .user-list-name {
                     translate: 0;
+                    transition-property: translate;
+                    transition-duration: 0.4s;
+                    transition-timing-function: var(--trans-function-ani);
+                    filter: var(--header-filter-shadow) !important;
+
+                    margin-right: unset;
+                }
+
+                .listener-list-position {
                     transition-property: translate;
                     transition-duration: 0.4s;
                     transition-timing-function: var(--trans-function-ani);
@@ -359,9 +405,16 @@
                     }
                 }
 
+                .user-list-shared-artists,
+                .user-list-about-me {
+                    transition-property: opacity;
+                    transition-duration: 0.4s;
+                    transition-timing-function: var(--trans-function-ani);
+                }
+
                 .user-list-follower-btn {
-                    top: calc(-1 * (40px - var(--item-list-gap)));
-                    right: 0;
+                    top: var(--item-list-gap);
+                    right: var(--item-list-gap);
                     margin-top: unset;
 
                     z-index: 3;
@@ -371,10 +424,50 @@
     }
 }
 
+.user-list-about-me {
+    overflow: hidden;
+}
+.user-list-about-me > .markdown-body {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    & > p,
+    & > p > div,
+    & > div,
+    & > p > :is(h1, h2, h3, h4, h5) {
+        display: inline;
+        font-size: var(--font-size);
+        line-height: var(--line-height);
+        margin: unset !important;
+    }
+
+    & > p:not(:last-child) {
+        margin-right: 4px !important;
+    }
+
+    & > p:has(> .markdown-image),
+    br {
+        display: none;
+    }
+
+    & > .top-track {
+        display: inline-flex;
+    }
+}
+
+.has-featured-track {
+    & > .top-track {
+        display: inline-flex;
+    }
+}
+
 .user-list-inner-wrap {
     display: flex !important;
     align-items: center;
     gap: var(--card-gap);
+    position: static;
 }
 
 .user-list-item[data-followed="false"]:not(.listener-list-item) {
@@ -388,7 +481,6 @@
 
     & > a {
         color: oklch(var(--l3-c)) !important;
-        text-decoration: var(--force-underline, none) !important;
     }
 }
 
@@ -434,35 +526,7 @@
     flex-shrink: 0;
     font-weight: var(--font-weight-medium);
 }
-.user-list-about-me {
-    display: inline-block;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
 
-    & > p,
-    & > p > div,
-    & > div,
-    & > p > :is(h1, h2, h3, h4, h5) {
-        display: inline;
-        font-size: var(--font-size);
-        line-height: var(--line-height);
-        margin: unset !important;
-    }
-
-    & > p:not(:last-child) {
-        margin-right: 4px !important;
-    }
-
-    & > p:has(> .markdown-image),
-    br {
-        display: none;
-    }
-
-    & > .top-track {
-        display: inline-flex;
-    }
-}
 
 .user-list-item .class {
     order: 1;

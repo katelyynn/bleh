@@ -48,6 +48,26 @@ function normalise_version(version) {
         .join('.');
 }
 
+const bundle_css = {
+    name: 'bundle_css',
+    setup(build) {
+        build.onLoad({ filter: /\.css$/ }, async (args) => {
+            const result = await esbuild.build({
+                entryPoints: [args.path],
+                bundle: true,
+                minify: true,
+                write: false,
+                loader: { '.css': 'css' }
+            });
+
+            return {
+                contents: `export default ${JSON.stringify(result.outputFiles[0].text)}`,
+                loader: 'js'
+            };
+        });
+    }
+};
+
 (async () => {
     const userscript = {
         entryPoints: ['./src/main.js'],
@@ -60,9 +80,11 @@ function normalise_version(version) {
         },
         platform: 'browser',
         loader: {
-            '.css': 'text',
             '.svg': 'text'
-        }
+        },
+        plugins: [
+            bundle_css
+        ]
     };
 
     const extension = {
@@ -76,9 +98,11 @@ function normalise_version(version) {
         },
         platform: 'browser',
         loader: {
-            '.css': 'text',
             '.svg': 'text'
-        }
+        },
+        plugins: [
+            bundle_css
+        ]
     };
 
     const manifest = {
@@ -133,15 +157,6 @@ function normalise_version(version) {
         }
     } else {
         await esbuild.build(userscript);
-        await esbuild.build({
-            entryPoints: ['./src/styles/index.css'],
-            bundle: true,
-            minify: true,
-            outfile: 'bleh.css',
-            loader: {
-                '.css': 'css'
-            }
-        });
 
         await esbuild.build(extension);
         fs.mkdirSync('ext/', { recursive: true });

@@ -5,6 +5,7 @@ import ColorThief from 'color-thief-browser';
 import { page } from '@/build/page';
 
 export function header_colour(source: HTMLImageElement, apply_to_page = false, apply_to_elem?: Element) {
+    log('applying header colour', 'accent', 'info', { source, apply_to_page, apply_to_elem });
     apply(0, 0, 0.5, true);
 
     try {
@@ -28,11 +29,11 @@ export function header_colour(source: HTMLImageElement, apply_to_page = false, a
 
             log(
                 `sourced rgb of (${colour[0]}, ${colour[1]}, ${colour[2]}), hsl of (${hsl.h}, ${hsl.s}, ${hsl.l}) - using final value of (${hue}, ${sat}, ${lit})`,
-                'hue from album'
+                'accent'
             );
         }
     } catch (e) {
-        log('received error', 'hue from album', 'error', { e });
+        log('received error', 'accent', 'error', { e });
     }
 
     function apply(hue: number, sat: number, lit: number, skip = false) {

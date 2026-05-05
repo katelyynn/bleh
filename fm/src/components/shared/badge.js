@@ -6,7 +6,7 @@
 
 import { log } from '@/build/log';
 import { sponsor_list } from '@/build/sponsor';
-import { lang_info, tl, trans } from '@/build/trans.ts';
+import { lang_info, tl, trans } from '@/build/trans';
 import { html } from 'lighterhtml';
 import { sponsor } from '@/components/sponsor';
 import tippy from 'tippy.js';

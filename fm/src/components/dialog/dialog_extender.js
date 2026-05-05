@@ -5,7 +5,7 @@
 //
 
 import { page, root } from '@/build/page';
-import { tl, trans } from '@/build/trans.ts';
+import { tl, trans } from '@/build/trans';
 import { html, render } from 'lighterhtml';
 import { toggle } from '@/components/settings/toggle';
 import { log } from '@/build/log.js';
@@ -27,6 +27,8 @@ export function dialog_extender() {
         modal_dialog.setAttribute('data-dialog-extender', 'true');
 
         let body = modal_dialog.querySelector('.modal-body');
+        if (!body) return;
+
         let title = body.querySelector('.modal-title');
 
         let contents = body.querySelector(':scope > div');

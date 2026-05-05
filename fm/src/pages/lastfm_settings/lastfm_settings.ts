@@ -5,7 +5,7 @@
 //
 
 import { auth, page, root } from '@/build/page';
-import { tl, trans } from '@/build/trans.ts';
+import { tl, trans } from '@/build/trans';
 import { bleh_auto_edits } from '@/components/dialog/auto_edit';
 import { dialog, dialog_rm } from '@/components/dialog/dialog';
 import {
@@ -286,7 +286,7 @@ function patch_settings_privacy_panel(token, privacy_panel) {
                     body: tl(trans.recent_listening.body),
                     standalone: false,
                     func: (val: boolean) => {
-                        render(recent_listening_preview, render_recent_listening(val));
+                        render(recent_listening_preview, render_track_preview(val, false, true, true));
                     }
                 })}
                 <div class="setting" data-type="select">
@@ -296,6 +296,7 @@ function patch_settings_privacy_panel(token, privacy_panel) {
                     ${select({
                         values: select_prepare(original_privacy_settings.receiving_msgs),
                         initial: original_privacy_settings.receiving_msgs.value,
+                        name: original_privacy_settings.receiving_msgs.name,
                         in_settings: true
                     })}
                 </div>

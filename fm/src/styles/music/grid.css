@@ -37,6 +37,10 @@
         width: var(--grid-item-size);
         height: var(--grid-item-size);
         animation: none !important;
+
+        &:before {
+            display: none !important;
+        }
     }
 
     .grid-items-item-details {

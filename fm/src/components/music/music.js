@@ -9,7 +9,7 @@ import { settings } from '@/build/config';
 import { log } from '@/build/log';
 import { auth, page, root } from '@/build/page';
 import { clean_number, romanise, sanitise } from '@/build/tools';
-import { lang, tl, trans } from '@/build/trans.ts';
+import { lang, tl, trans } from '@/build/trans';
 import { prep_chart_colours } from '@/components/music/chart';
 import { create_divider } from '@/pages/music/gallery';
 import { ff } from '@/components/settings/sku';
@@ -37,6 +37,8 @@ import { patch_user_list_item } from '@/components/shared/users';
 import { join_the_conversation } from '../shared/shout';
 import { music_summary } from './summary';
 import { icon, icons } from '../shared/icon';
+import { keys } from '../settings/storage';
+import { is_sponsor } from '../sponsor';
 
 unsafeWindow._other_listener = function (id) {
     other_listener(id);
@@ -331,28 +333,10 @@ export async function show_your_scrobbles() {
                         first_metadata_item.textContent.trim()
                     );
 
-                let p;
+                let p = listen_item.querySelector('.listen-item-text');
                 listen_item.setAttribute('data-listens', listens);
 
-                render(
-                    listen_item,
-                    html`
-                        <img
-                            class="view-item-avatar"
-                            src=${shortcut_listens.avi}
-                            alt=${shortcut_listens.name}
-                        />
-                        <div class="listen-badge star colourful">
-                            <div class="bleh-icon" />
-                        </div>
-                        <div class="listen-item-info">
-                            <h3 class="listen-item-name"><span class="at">@</span>${shortcut_listens.name}</h3>
-                            <p class="colourful listen-item-text icon-mask" ref=${(el) => (p = el)}>
-                                ${tl(trans.count_plays, { c: listens.toLocaleString(lang) })}
-                            </p>
-                        </div>
-                    `
-                );
+                p.textContent = tl(trans.count_plays, { c: listens.toLocaleString(lang) });
 
                 // colourful counts
                 if (settings.colourful_counts && page.type == 'artist') {
@@ -604,6 +588,8 @@ export async function show_your_scrobbles() {
             '.catalogue-metadata-description:not(.visible-xs)'
         );
         values.forEach((item, index) => {
+            if (!groups[index]) return;
+
             groups[index].value = item;
         });
 
@@ -1161,24 +1147,40 @@ function create_listen_item(
         `${root}user/${name}/library/music/${redirect()}${link}`
     );
     listen_item.setAttribute('data-listens', listens);
-    listen_item.setAttribute('id', `listen-item--${name}`);
 
     let p;
 
     if (listens > -1) {
+        const cache = JSON.parse(localStorage.getItem(keys.profile_cache) || '{}');
+        const entry = cache[name];
+        const valid = is_sponsor(name);
+
         // your listens
-        render(
-            listen_item,
-            html`
-                <img class="view-item-avatar" src=${avi} alt=${name} />
-                <div class="listen-item-info">
-                    <h3 class="listen-item-name"><span class="at">@</span>${name}</h3>
-                    <p class="colourful listen-item-text icon-mask" ref=${(el) => (p = el)}>
-                        ${tl(trans.count_plays, { c: listens.toLocaleString(lang) })}
-                    </p>
-                </div>
-            `
-        );
+        let listen_name;
+
+        render(listen_item, html`
+            <img class="view-item-avatar" src=${avi} alt=${name} />
+            <div class="listen-item-info">
+                <h3 class="listen-item-name" ref=${el => listen_name = el} />
+                <p class="colourful listen-item-text icon-mask" ref=${(el) => (p = el)}>
+                    ${tl(trans.count_plays, { c: listens.toLocaleString(lang) })}
+                </p>
+            </div>
+        `);
+
+        if (entry.username && valid) {
+            listen_name.classList.add('username-combo');
+            render(listen_name, html`
+                <span class="username-custom">${entry.username}</span>
+                <span class="username-original">
+                    <span class="at">@</span>${name}
+                </span>
+            `);
+        } else {
+            render(listen_name, html`
+                <span class="at">@</span>${name}
+            `);
+        }
 
         let menu = tippy(listen_item, {
             theme: 'context-menu',
@@ -1203,22 +1205,39 @@ function create_listen_item(
 
         register_menu(listen_item, menu);
     } else if (listens > -2) {
+        const cache = JSON.parse(localStorage.getItem(keys.profile_cache) || '{}');
+        const entry = cache[name];
+        const valid = is_sponsor(name);
+
         // loading listens
-        render(
-            listen_item,
-            html`
-                <img class="view-item-avatar" src=${avi} alt=${name} />
-                <div class="listen-badge star colourful">
-                    <div class="bleh-icon" />
-                </div>
-                <div class="listen-item-info">
-                    <h3 class="listen-item-name"><span class="at">@</span>${name}</h3>
-                    <p class="colourful listen-item-text icon-mask" ref=${(el) => (p = el)}>
-                        ${tl(trans.count_plays, { c: ' ' })}
-                    </p>
-                </div>
-            `
-        );
+        let listen_name;
+
+        render(listen_item, html`
+            <img class="view-item-avatar" src=${avi} alt=${name} />
+            <div class="listen-badge star colourful">
+                <div class="bleh-icon" />
+            </div>
+            <div class="listen-item-info">
+                <h3 class="listen-item-name" ref=${el => listen_name = el} />
+                <p class="colourful listen-item-text icon-mask" ref=${(el) => (p = el)}>
+                    ${tl(trans.count_plays, { c: ' ' })}
+                </p>
+            </div>
+        `);
+
+        if (entry.username && valid) {
+            listen_name.classList.add('username-combo');
+            render(listen_name, html`
+                <span class="username-custom">${entry.username}</span>
+                <span class="username-original">
+                    <span class="at">@</span>${name}
+                </span>
+            `);
+        } else {
+            render(listen_name, html`
+                <span class="at">@</span>${name}
+            `);
+        }
 
         let menu = tippy(listen_item, {
             theme: 'context-menu',

@@ -7,15 +7,14 @@
 .masthead-popup-text .btn-primary,
 .more-items,
 .see-more {
-    --see-more-pad-v: 3px;
-    --see-more-pad: 6px;
+    --see-more-pad-v: 0px;
+    --see-more-pad: 0px;
 
     display: inline-flex;
     background: var(--bg) !important;
     --bg: transparent;
-    --bg-hov: oklch(var(--h4) / 10%);
-    --bg-atv: oklch(var(--h4) / 20%);
-    --padding: var(--see-more-pad-v) var(--see-more-pad);
+    --bg-hov: transparent;
+    --bg-atv: transparent;
     --radius: var(--item-med-radius);
     border-radius: var(--radius) !important;
     --shadow: none;
@@ -47,8 +46,11 @@
         );
     }
 
+    --underline: underline;
+
     margin: calc(-1 * var(--see-more-pad-v)) calc(-1 * var(--see-more-pad)) !important;
     padding: var(--see-more-pad-v) var(--see-more-pad) !important;
+    --padding: var(--see-more-pad-v) var(--see-more-pad);
     padding-right: calc(var(--see-more-pad) + var(--mask-size) + 4px) !important;
 
     transition-property: transform, color;
@@ -64,13 +66,13 @@
             transition-duration: 0.1s;
         }
 
-        &:focus {
-            text-decoration: var(--underline, none) !important;
+        &:focus:not(:hover, :active) {
+            text-decoration: none !important;
         }
 
         &:active {
             background: var(--bg-atv) !important;
-            transform: scale(0.98);
+            transform: unset !important;
             text-decoration: var(--underline, none) !important;
         }
     }
@@ -292,4 +294,11 @@ a.inline-add-icon {
 .see-more-row {
     display: flex;
     gap: var(--card-gap);
+}
+
+
+.see-more-cont {
+    display: flex;
+    justify-content: center;
+    margin-top: var(--card-gap);
 }

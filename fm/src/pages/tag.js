@@ -9,7 +9,7 @@ import {gendered_pattern, page} from "@/build/page";
 import {desanitise} from "@/build/tools";
 import {tl, trans} from "@/build/trans";
 import {checkup_page_structure} from "@/components/page/structure";
-import {register_background, update_page} from "../page";
+import {is_same_page, register_background, update_page} from "../page";
 import {ff} from "@/components/settings/sku";
 import {bleh_wiki, bleh_wiki_editor, bleh_wiki_history} from "@/pages/music/wiki";
 import tippy from "tippy.js";
@@ -53,8 +53,10 @@ export function bleh_tags() {
         let title = desanitise(split[index]);
         page.name = title;
 
+        const same_page = is_same_page();
+
         const redesigned_tag_header = html.node`
-            <section class="page-header for-generic">
+            <section class="page-header for-generic ${same_page ? 'same' : ''}">
                 <div class="page-header-icon">
                     ${icon({ name: icons.tag })}
                 </div>

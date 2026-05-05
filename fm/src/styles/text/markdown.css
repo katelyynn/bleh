@@ -1,6 +1,46 @@
-.about-me-sidebar > .markdown-body,
+/*.about-me-sidebar > .markdown-body,
 .bleh--about-me-preview {
     width: 360px;
+}*/
+
+.about-me-content {
+    &[data-showing="false"] {
+        max-height: 100px;
+
+        &:after {
+            opacity: 1;
+        }
+    }
+    &[data-showing="true"] {
+        /*max-height: var(--height, 2000px);*/
+        max-height: 1200px;
+        overflow: hidden;
+    }
+
+    transition-property: max-height;
+    transition-duration: 0.4s;
+    transition-timing-function: var(--trans-function-ani);
+
+    position: relative;
+
+    &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 50px;
+
+        background: linear-gradient(180deg, transparent, oklch(var(--b5)));
+        pointer-events: none;
+
+        opacity: 0;
+
+        transition-property: opacity;
+        transition-duration: 0.4s;
+        transition-timing-function: var(--trans-function-ani);
+    }
 }
 
 .markdown-body {
@@ -12,7 +52,7 @@
     .text-left,
     .text-right {
         & + p {
-            margin-top: var(--card-gap) !important;
+            margin-top: 10px !important;
         }
     }
 
@@ -22,7 +62,7 @@
     .text-right,
     blockquote,
     p {
-        margin: var(--card-gap) 0 !important;
+        margin: 10px 0 !important;
     }
 
     blockquote {
@@ -82,6 +122,10 @@
 
         br + & {
             margin-top: 5px;
+        }
+
+        @media (max-width: 980px) {
+            max-width: 80vw;
         }
     }
 

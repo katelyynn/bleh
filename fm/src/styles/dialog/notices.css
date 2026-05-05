@@ -31,6 +31,7 @@
     -webkit-backdrop-filter: var(--solarium);
     padding: 10px 12px;
     border-radius: var(--item-big-radius);
+    overflow: hidden;
 
     .notice-header {
         display: flex;
@@ -56,6 +57,25 @@
         transition-property: max-height;
         transition-duration: 0.3s;
         transition-timing-function: var(--trans-function-ani);
+
+        --l3-c: var(--l2-c);
+    }
+
+    .notice-close {
+        max-height: 18px;
+
+        transition-property: max-height, opacity, margin-top;
+        transition-duration: 0.3s;
+        transition-timing-function: var(--trans-function-ani);
+
+        margin-top: 4px;
+        width: fit-content;
+        margin-left: auto;
+
+        &:hover {
+          text-decoration: underline;
+          color: oklch(var(--l2-c));
+        }
     }
 
     &:not(:hover) {
@@ -64,6 +84,12 @@
             -webkit-line-clamp: 1;
 
             max-height: 18px;
+        }
+
+        .notice-close {
+          opacity: 0;
+          max-height: 0;
+          margin-top: 0;
         }
     }
 }

@@ -10,7 +10,7 @@ import { log } from '@/build/log';
 import { artist_corrections } from '@/build/music';
 import { page, root } from '@/build/page';
 import { clamp_sat, rgb_to_hsl, sanitise } from '@/build/tools';
-import { tl, trans } from '@/build/trans.ts';
+import { tl, trans } from '@/build/trans';
 import { correct_item_by_artist, name_includes, smart_title } from '@/components/music/lotus';
 import { checkup_page_structure } from '@/components/page/structure';
 import { register_background, update_page } from '@/page';
@@ -389,7 +389,7 @@ export function obsession_list() {
     buttons.forEach((button) => {
         if (button.classList.contains('btn-sm')) {
             button.classList = [];
-            button.classList.add('obsession-btn');
+            button.setAttribute('data-type', 'obsession');
 
             tippy(button, {
                 content: button.textContent
@@ -402,7 +402,8 @@ export function obsession_list() {
             'btn',
             'view-item',
             'interact-item',
-            'obsession-top-item'
+            'obsession-top-item',
+            'icon'
         );
 
         button_header.appendChild(button);

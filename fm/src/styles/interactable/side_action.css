@@ -20,7 +20,8 @@
     }
 
     & > .sep {
-        margin: calc(var(--card-gap) - var(--button-list-gap)) 0 !important;
+        margin: calc(var(--card-gap) - var(--button-list-gap)) var(--button-sides) !important;
+        width: unset;
     }
 
     li,
@@ -31,6 +32,11 @@
         button {
             flex: 1;
         }
+    }
+
+    @media (max-width: 980px) {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     }
 }
 
@@ -65,6 +71,10 @@
             font-size: var(--font-size-sm);
             font-style: normal;
             opacity: 0.6;
+        }
+
+        @media (max-width: 980px) {
+          height: fit-content !important;
         }
     }
 

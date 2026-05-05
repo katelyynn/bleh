@@ -16,7 +16,7 @@ import {
     romanise,
     set_storage
 } from '@/build/tools';
-import { lang, tl, trans } from '@/build/trans.ts';
+import { lang, tl, trans } from '@/build/trans';
 import { load_chart_colours, prep_chart_colours } from '@/components/music/chart.js';
 import { create_badge, load_badges } from '@/components/shared/badge';
 import { dialog } from '@/components/dialog/dialog';
@@ -39,7 +39,7 @@ import {
     convert_to_toolbar
 } from '@/components/page/structure.js';
 import { update_inbuilt_item } from '@/config';
-import { register_background, update_page } from '@/page';
+import { is_same_page, register_background, update_page } from '@/page';
 import { ff } from '@/components/settings/sku';
 import { bleh_user_library } from '@/pages/profile/glacier';
 import { bleh_obsession, obsession_list } from '@/pages/profile/obsession';
@@ -59,6 +59,7 @@ import { toggle } from '@/components/settings/toggle';
 import { page_header_avatar } from '@/components/music/header';
 import { profile_summary } from '@/components/profile/summary';
 import { header_colour } from '@/components/page/colour';
+import { keys } from '@/components/settings/storage';
 
 export function bleh_profiles() {
     // the obsessions page is a user subpage but works very differently
@@ -99,7 +100,7 @@ export function bleh_profiles() {
     let new_account = false;
 
     let profile_cache =
-        JSON.parse(localStorage.getItem('bleh_profile_cache')) || {};
+        JSON.parse(localStorage.getItem(keys.profile_cache)) || {};
     let cache = profile_cache[page.name] || {};
 
     let about_me_sidebar =
@@ -130,9 +131,46 @@ export function bleh_profiles() {
                 // parse body
                 let about_me_text = about_me_sidebar.querySelector('p');
                 let result = bio_parse(about_me_text, cache);
+                result.classList.add('about-me-content');
 
                 about_me_text.after(result);
                 about_me_text.remove();
+
+                const height = result.offsetHeight;
+                result.style.setProperty('--height', `${height}px`);
+
+                if (page.mobile) {
+                    result.setAttribute('data-showing', 'false');
+                    let showing = false;
+
+                    let show_all_btn;
+                    const show_all = html.node`
+                        <div class="see-more-cont">
+                            <button class="see-more" data-see-more="true" data-type="down" ref=${el => show_all_btn = el} onclick=${() => toggle_show_all()}>
+                                ${tl(trans.read_more)}
+                            </button>
+                        </div>
+                    `;
+
+                    result.after(show_all);
+
+                    function toggle_show_all() {
+                        showing = !showing;
+
+                        show_all_btn.setAttribute('data-showing', showing.toString());
+                        result.setAttribute('data-showing', showing.toString());
+
+                        if (showing) {
+                            show_all_btn.classList.add('left-icon');
+                            show_all_btn.textContent = tl(trans.read_less);
+                            show_all_btn.setAttribute('data-type', 'up');
+                        } else {
+                            show_all_btn.classList.remove('left-icon');
+                            show_all_btn.textContent = tl(trans.read_more);
+                            show_all_btn.setAttribute('data-type', 'down');
+                        }
+                    }
+                }
             }
         }
 
@@ -228,8 +266,10 @@ export function bleh_profiles() {
 
     let page_avatar;
 
+    const same_page = is_same_page();
+
     let redesigned_profile_header = html.node`
-        <section class="page-header for-profile">
+        <section class="page-header for-profile ${same_page ? 'same' : ''}">
             <div class="page-header-avatar-list">
                 ${!new_account ? page_avatar = page_header_avatar((profile_avatar as HTMLImageElement).src) : profile_avatar}
             </div>
@@ -954,54 +994,54 @@ function profile_recents() {
     let link = panel.querySelector('[aria-controls="recent-tracks-settings"]');
     let tooltip;
 
-    let view_buttons = document.createElement('div');
-    view_buttons.classList.add('view-buttons', 'blend', 'blend-v2');
-
-    let header = document.createElement('div');
-    header.classList.add('top-container');
-
-    let header_text = panel.querySelector('h2');
-    header.appendChild(header_text);
-
+    let submit_btn;
+    let settings_btn;
     let refresh_btn;
-    if (ff('submit_scrobble') && page.name == auth.name) {
-        const can_api =
-            localStorage.getItem('bleh_auth') &&
-            localStorage.getItem('bleh_auth_valid') === 'true';
 
-        let submit_btn = html.node`
-            <button class="left-icon blend-v2-btn" data-type="add" onclick=${() =>
-                submit_scrobble({
-                    refresh_btn,
-                    can_api,
-                    func: () => {
-                        setTimeout(() => {
-                            refresh_tracks(refresh_btn, { quiet: true });
-                        }, 200);
-                    }
-                })}>
-                ${tl(trans.new)}
-            </button>
-        `;
-        view_buttons.appendChild(submit_btn);
+    const can_scrobble = ff('submit_scrobble') && page.name == auth.name;
 
-        if (!can_api) {
-            tippy(submit_btn, {
-                content: tl(trans.requires_api_in_settings)
-            });
-        }
+    const head = panel.querySelector(':scope > h2');
+    if (head) head.remove();
+
+    let can_api = localStorage.getItem('bleh_auth') && localStorage.getItem('bleh_auth_valid') === 'true';
+
+    panel.insertBefore(html.node`
+        <div class="top-container">
+            <h2>
+                ${tl(trans.recents)}
+            </h2>
+            <div class="view-buttons blend blend-v2">
+                ${can_scrobble ? html.node`
+                    <button class="left-icon blend-v2-btn" data-type="add" ref=${el => submit_btn = el} onclick=${() =>
+                        submit_scrobble({
+                            refresh_btn,
+                            can_api,
+                            func: () => {
+                                setTimeout(() => {
+                                    refresh_tracks(refresh_btn, { quiet: true });
+                                }, 200);
+                            }
+                        })}>
+                        ${tl(trans.new)}
+                    </button>
+                ` : ''}
+                <button class="left-icon blend-v2-btn" data-type="refresh" ref=${el => refresh_btn = el} onclick=${() => refresh_tracks(refresh_btn, {})}>
+                    ${tl(trans.refresh)}
+                </button>
+                ${form ? html.node`
+                <button class="left-icon blend-v2-btn" data-type="settings" ref=${(el) => (settings_btn = el)}>
+                    ${tl(trans.settings)}
+                </button>
+                ` : ''}
+            </div>
+        </div>
+    `, panel.firstElementChild);
+
+    if (!can_api) {
+        tippy(submit_btn, {
+            content: tl(trans.requires_api_in_settings)
+        });
     }
-
-    // refresh
-    refresh_btn = html.node`
-        <button class="left-icon blend-v2-btn" data-type="refresh" onclick=${() => refresh_tracks(refresh_btn, {})}>
-            ${tl(trans.refresh)}
-        </button>
-    `;
-    view_buttons.appendChild(refresh_btn);
-
-    header.appendChild(view_buttons);
-    panel.insertBefore(header, panel.firstElementChild);
 
     if (!form) return panel;
 
@@ -1011,12 +1051,6 @@ function profile_recents() {
             .getAttribute('value');
 
     let original_chart_settings = {};
-
-    let settings_btn = html.node`
-        <button class="left-icon blend-v2-btn" data-type="settings">
-            ${tl(trans.settings)}
-        </button>
-    `;
 
     let count = form.querySelector('[name="chart_length_recent_tracks"]');
     original_chart_settings = {
@@ -1081,8 +1115,6 @@ function profile_recents() {
             instance.hide();
         }
     });
-
-    view_buttons.appendChild(settings_btn);
 
     return panel;
 }
@@ -1521,6 +1553,7 @@ function profile_tracks() {
                 <div class="sep" />
                 ${setting({ id: 'format_guest_features' })}
                 ${setting({ id: 'show_guest_features' })}
+                ${setting({ id: 'count_bar_right' })}
                 <div class="settings-footer">
                     <button type="submit" class="btn-primary save" onclick=${() => {
                         tooltip.hide();
@@ -1577,7 +1610,7 @@ function bio_parse(text, cache = true, take_effect = true) {
 
 export function save_profile_cache(
     { avatar, banner, banner_orig, hue, sat, lit, aka, created, font, font_style, username } = {},
-    profile_cache = JSON.parse(localStorage.getItem('bleh_profile_cache')) ||
+    profile_cache = JSON.parse(localStorage.getItem(keys.profile_cache)) ||
         {},
     name = page.name
 ) {
@@ -1617,7 +1650,7 @@ export function save_profile_cache(
         name,
         cache: profile_cache[name]
     });
-    set_storage('bleh_profile_cache', JSON.stringify(profile_cache));
+    set_storage(keys.profile_cache, JSON.stringify(profile_cache));
 }
 
 export async function checkup_friend_cache(list = settings.friends) {
@@ -1664,7 +1697,7 @@ export async function load_profile_cache_externally(name = page.name) {
     log(`requested profile cache for ${name}`, 'cache');
 
     let profile_cache =
-        JSON.parse(localStorage.getItem('bleh_profile_cache')) || {};
+        JSON.parse(localStorage.getItem(keys.profile_cache)) || {};
     let cache = profile_cache[name];
 
     if (cache) {
@@ -1694,7 +1727,7 @@ function load_profile_cache(
 
     if (!profile_cache)
         profile_cache =
-            JSON.parse(localStorage.getItem('bleh_profile_cache')) || {};
+            JSON.parse(localStorage.getItem(keys.profile_cache)) || {};
     if (!cache) cache = profile_cache[name] || {};
 
     if (cache) {
@@ -1740,8 +1773,7 @@ function request_profile_cache(
     const will_cache = !cache || !profile_cache;
 
     if (!profile_cache)
-        profile_cache =
-            JSON.parse(localStorage.getItem('bleh_profile_cache')) || {};
+        profile_cache = JSON.parse(localStorage.getItem(keys.profile_cache)) || {};
     if (!cache) cache = profile_cache[name] || {};
 
     return new Promise((resolve, reject) => {
@@ -1760,6 +1792,9 @@ function request_profile_cache(
                     let about_me_text = about_me_sidebar.querySelector('p');
                     bio_parse(about_me_text, cache ? cache : true, false);
                 } else {
+                    delete cache.username;
+                    delete cache.font;
+                    delete cache.font_style;
                     delete cache.banner;
                     delete cache.hue;
                     delete cache.sat;

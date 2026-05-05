@@ -32,6 +32,8 @@
 @import '../event/main.css';
 @import './error.css';
 
+@import './labs.css';
+
 .container {
     min-width: var(--cards-width);
     max-width: var(--cards-width);
@@ -163,11 +165,19 @@
 
     & > .col-main {
         background: oklch(var(--b5));
+
+        transition-property: background;
+        transition-duration: var(--trans);
+        transition-timing-function: var(--trans-function);
     }
 
     & > .col-sidebar {
         position: relative;
         background: var(--card-blur-bg);
+
+        transition-property: background;
+        transition-duration: var(--trans);
+        transition-timing-function: var(--trans-function);
 
         &:before {
             content: "";
@@ -365,6 +375,11 @@
             & > .navlist-items {
                 width: calc(var(--tabbed-width) + var(--button-sides-icon) + var(--button-sides));
                 max-width: calc(var(--tabbed-width) + var(--button-sides-icon) + var(--button-sides));
+
+                @media (max-width: 980px) {
+                    width: unset;
+                    max-width: unset;
+                }
             }
 
             &:after {

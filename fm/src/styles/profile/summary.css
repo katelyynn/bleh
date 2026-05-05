@@ -20,6 +20,8 @@
     @media (max-width: 600px) {
         margin-top: calc(-1 * calc(var(--card-padding) + var(--card-gap))) !important;
     }
+
+    overflow: hidden;
 }
 
 .summary-title {

@@ -1,6 +1,4 @@
 body {
-    --version-build: "2026.0212";
-
     --default-hue: 298;
     --default-sat: 1.28;
     --default-lit: 0.9;
@@ -146,6 +144,10 @@ body {
         --hide-light-pointer: none;
         --hide-light-opacity: 0.4;
     }
+
+    transition-property: background, color, box-shadow;
+    transition-duration: var(--trans);
+    transition-timing-function: var(--trans-function);
 
     &[data-bleh--seasonal_overlays="true"] {
         &[data-bleh--season="halloween"] {
@@ -833,9 +835,7 @@ u,
 
         --h3-s: var(--hue), 50%, 70%;
 
-        --p3:
-            var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 50%),
-            calc(clamp(min(0.85), var(--lit), max(1.1)) * 90%);
+        --p3: calc(clamp(min(0.85), var(--lit), max(1.1)) * 0.85) calc(clamp(min(0), var(--sat), max(2)) * 0.5) var(--hue);
 
         /* l2-c in dark modes, l4-c in light modes */
         --l2-c-theme-switch: var(--l3-c);
@@ -920,9 +920,7 @@ u,
         --k4: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.6) calc(clamp(min(0), var(--sat), max(2)) * 0.45) var(--hue);
         --g4: 0.92 calc(clamp(min(0), var(--sat), max(2)) * 0.25) var(--hue);
 
-        --p3:
-            var(--hue), calc(clamp(min(0), var(--sat), max(2)) * 50%),
-            calc(clamp(min(0.85), var(--lit), max(1.1)) * 90%);
+        --p3: calc(clamp(min(0.85), var(--lit), max(1.1)) * 90%) calc(clamp(min(0), var(--sat), max(2)) * 50%) var(--hue);
 
         /* l2-c in dark modes, l4-c in light modes */
         --l2-c-theme-switch: var(--l3-c);
@@ -1161,8 +1159,6 @@ body {
 
     &[data-bleh--theme="oled"] {
         --card-border: inset 0 0 0 1px oklch(var(--b4) / 0.8);
-
-        --modal-bg: oklch(var(--b2) / 0.5);
 
         --menu-bg: var(--b5);
         --menu-opacity: 80%;

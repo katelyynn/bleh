@@ -7,7 +7,7 @@
 import { html } from 'lighterhtml';
 import { settings } from '@/build/config';
 import { auth, page, root } from '@/build/page';
-import { tl, trans } from '@/build/trans.ts';
+import { tl, trans } from '@/build/trans';
 import { dialog, dialog_rm } from '@/components/dialog/dialog';
 import { notify } from '@/components/dialog/notify';
 import { save_setting, setting } from '@/components/settings/settings';

@@ -8,7 +8,7 @@ import { patch_avatar, style_name_from_badge } from '@/components/shared/avatar'
 import { settings } from '@/build/config';
 import { log } from '@/build/log.js';
 import { auth, page, root, shout_parse_queue } from '@/build/page';
-import { lang, tl, trans } from '@/build/trans.ts';
+import { lang, tl, trans } from '@/build/trans';
 import { notify } from '@/components/dialog/notify';
 import { html, render } from 'lighterhtml';
 import { setting } from '@/components/settings/settings';
@@ -22,6 +22,8 @@ import tippy from 'tippy.js';
 import { keybind } from '@/components/dialog/rabbit';
 import { correct_artist, correct_item_by_artist } from '@/components/music/lotus';
 import { ff } from '../settings/sku';
+import { keys } from '../settings/storage';
+import { is_sponsor } from '../sponsor';
 
 export function patch_shouts() {
     if (!page.structure.main) return;
@@ -36,6 +38,8 @@ export function patch_shouts() {
         shout_header(shout_controls);
     }
 
+    const cache = JSON.parse(localStorage.getItem(keys.profile_cache) || '{}');
+
     let shouts = page.structure.main.querySelectorAll('.shout:not([data-kate-processed])') as NodeListOf<HTMLElement>;
 
     shouts.forEach((shout, index) => {
@@ -49,7 +53,20 @@ export function patch_shouts() {
             if (!shout_name) return;
 
             const shout_name_text = shout_name.textContent;
-            shout_name.insertBefore(html.node`<span class="at">@</span>`, shout_name.firstChild);
+
+            const valid = is_sponsor(shout_name_text);
+
+            if (cache[shout_name_text]?.username && valid) {
+                shout_name.classList.add('username-combo');
+                render(shout_name, html`
+                    <span class="username-custom">${cache[shout_name_text].username}</span>
+                    <span class="username-original">
+                        <span class="at">@</span>${shout_name_text}
+                    </span>
+                `);
+            } else {
+                shout_name.insertBefore(html.node`<span class="at">@</span>`, shout_name.firstChild);
+            }
 
             const shout_avatar = shout.querySelector('.shout-user-avatar');
 

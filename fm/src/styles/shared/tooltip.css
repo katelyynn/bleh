@@ -175,7 +175,8 @@
 
         .window-menu-items {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 4px;
+            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
         }
     }
 

@@ -9,7 +9,7 @@ import {log} from "@/build/log";
 import {auth, page, root} from "@/build/page";
 import {tl, trans} from "@/build/trans";
 import {checkup_nav, checkup_page_structure} from "@/components/page/structure";
-import {register_background, update_page} from "@/page";
+import {is_same_page, register_background, update_page} from "@/page";
 import {bleh_charts} from "@/pages/home/chart";
 import {bleh_native_settings} from '@/pages/lastfm_settings/lastfm_settings';
 import {html, render} from "lighterhtml";
@@ -70,13 +70,15 @@ export async function bleh_home() {
         time = 'evening';
     log(`hour ${hour} time ${time}`, 'time');
 
+    const same_page = is_same_page();
+
     let welcome;
     if (auth.name) {
         let profile_name;
         let page_avatar;
 
         welcome = html.node`
-            <section class="page-header for-profile">
+            <section class="page-header for-profile ${same_page ? 'same' : ''}">
                 <div class="page-header-avatar-list">
                     ${page_avatar = page_header_avatar(auth.avatar)}
                 </div>

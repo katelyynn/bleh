@@ -8,7 +8,7 @@ import { auth, page, root } from '@/build/page';
 import { dialog, dialog_rm } from '@/components/dialog/dialog';
 import { html, render } from 'lighterhtml';
 import { input } from '@/components/settings/input';
-import { tl, trans } from '@/build/trans.ts';
+import { tl, trans } from '@/build/trans';
 import { save_setting } from '@/components/settings/settings';
 import { sanitise } from '@/build/tools';
 import { compare } from '@/components/minis/compare';
@@ -430,8 +430,9 @@ export function register_rabbit() {
 
                     return button;
                 }) : html.node`
-                    <div class="loading-data-container">
-                        <div class="loading-data-text failed">${tl(trans.nothing_matches_your_search)}</div>
+                    <div class="placeholder-block">
+                        <div class="placeholder-head">₍ᐢ. .ᐢ₎</div>
+                        <div class="placeholder-summary">${tl(trans.nothing_matches_your_search)}</div>
                     </div>
                 `}
             `);

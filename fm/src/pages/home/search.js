@@ -12,7 +12,7 @@ import {correct_artist, correct_item_by_artist} from "@/components/music/lotus";
 import {checkup_page_structure} from "@/components/page/structure";
 import {patch_titles} from "@/components/music/track";
 import {register_background, update_page} from "@/page";
-import { tl, trans } from '@/build/trans.ts';
+import { tl, trans } from '@/build/trans';
 import { load_profile_cache_externally } from '@/pages/profile/profile';
 import { sanitise } from '@/build/tools';
 import tippy from 'tippy.js';

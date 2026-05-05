@@ -69,6 +69,8 @@
             --mask-size: var(--cover-size-50);
         }
 
+        --avatar-generic-background: oklch(var(--b4));
+
         transition-property: filter;
         transition-duration: 0.2s;
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);

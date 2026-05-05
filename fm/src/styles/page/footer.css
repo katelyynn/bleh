@@ -10,6 +10,10 @@
     width: calc(var(--content-width) - (var(--card-padding) * 2));
     margin: 0 auto;
 
+    @media (max-width: 980px) {
+        width: unset;
+    }
+
     .footer-credit {
         font-weight: var(--font-weight);
         cursor: default;

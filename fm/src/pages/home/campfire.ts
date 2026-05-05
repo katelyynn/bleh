@@ -1,21 +1,20 @@
 import { settings } from '@/build/config';
 import { auth, page, root } from '@/build/page';
 import { romanise, sanitise } from '@/build/tools';
-import { tl, trans } from '@/build/trans.ts';
+import { tl, trans } from '@/build/trans';
 import { correct_artist, correct_item_by_artist, name_includes, smart_artists, smart_title } from '@/components/music/lotus';
 import { redirect } from '@/components/music/music';
-import { html, render } from 'lighterhtml';
-import { load_profile_cache_externally } from '../profile/profile';
+import { Hole, html, render } from 'lighterhtml';
+import { load_profile_cache_externally, open_starred_friend_window } from '../profile/profile';
 import { load_recent_tracks } from '../home';
 import tippy from 'tippy.js';
+import { is_sponsor } from '@/components/sponsor';
 
 interface album {
     image: string,
     title: string,
     artist: string,
     plays: string,
-    formatted_title: string | ReturnType<typeof html.node>,
-    formatted_artist: string | ReturnType<typeof html.node>,
     corrected_title: string,
     corrected_artist: string
 }
@@ -67,23 +66,11 @@ export function campfire() {
                 let corrected_title = romanise(correct_item_by_artist(title, artist));
                 let corrected_artist = romanise(correct_artist(artist));
 
-                let formatted_title = corrected_title;
-                let formatted_artist = corrected_artist;
-
-                if (settings.format_guest_features) {
-                    const formatted = name_includes(title, artist);
-
-                    formatted_title = smart_title(formatted[0], formatted[1]);
-                    formatted_artist = smart_artists(formatted[2], formatted[3]);
-                }
-
                 albums.push({
                     image: image.replace('/avatar300s/', '/500x500/'),
                     title,
                     artist,
                     plays,
-                    formatted_title,
-                    formatted_artist,
                     corrected_title,
                     corrected_artist
                 });
@@ -123,7 +110,10 @@ export function campfire() {
                 set_index(selected_index + direction);
             }, { passive: false });
 
-            set_index(selected_index);
+            let try_index = 3;
+            if (try_index > max_index) try_index = 0;
+
+            set_index(try_index);
         });
 
     function set_index(index: number) {
@@ -142,12 +132,25 @@ export function campfire() {
 
         current_bg.style.setProperty('background-image', `url(${album.image})`);
 
+        console.info('album', album);
+
+        let formatted_title: string | Hole = album.corrected_title;
+        let formatted_artist: string | Hole = album.corrected_artist;
+
+        if (settings.format_guest_features) {
+            const formatted = name_includes(album.title, album.artist);
+
+            formatted_title = smart_title(formatted[0], formatted[1]);
+            formatted_artist = smart_artists(formatted[2], formatted[3]);
+        }
+
+        render(item_details, html``);
         render(item_details, html`
             <a class="campfire-title smart-title" href="${root}music/${sanitise(album.artist)}/${sanitise(album.title)}" target="_blank">
-                ${album.formatted_title}
+                ${formatted_title}
             </a>
             <span class="campfire-artist">
-                ${settings.format_guest_features ? album.formatted_artist : html.node`<a class="campfire-artist" href="${root}music/${redirect()}${sanitise(album.artist)}" target="_blank">${album.corrected_artist}</a>`}
+                ${settings.format_guest_features ? formatted_artist : html.node`<a class="campfire-artist" href="${root}music/${redirect()}${sanitise(album.artist)}" target="_blank">${album.corrected_artist}</a>`}
             </span>
             <div class="campfire-plays">
                 ${album.plays}
@@ -159,25 +162,32 @@ export function campfire() {
 function campfire_extended(container: HTMLElement) {
     const friends = settings.friends as string[];
 
-    container.after(html.node`
-        <section class="campfire-extended">
-            <div class="content-panel content-main">
+    let summary;
 
-            </div>
-            <div class="content-panel content-side">
-                <section class="friends-panel">
-                    <h2>${tl(trans.friends)}</h2>
-                    <div class="friends">
-                        ${friends.length > 0 ? html.node`
-                            ${friends.map((friend: string) => campfire_friend(friend))}
-                        ` : html.node`
-                            bleh is better with friends!! add from your following list
-                        `}
-                    </div>
-                </section>
-            </div>
+    container.after(html.node`
+        <section class="friends-panel">
+            <h2>${tl(trans.scrobbling_now)}</h2>
+            ${friends.length > 0 ? html.node`
+                <div class="friends">
+                    ${friends.map((friend: string) => campfire_friend(friend))}
+                </div>
+            ` : html.node`
+                <div class="placeholder-block">
+                    <div class="placeholder-head">ദ്ദി◝ ⩊ ◜.ᐟ</div>
+                    <div class="placeholder-summary" ref=${el => summary = el}>${{html: tl(trans.better_with_friends, { a: `<a>`, '/a': '</a>' }) }}</div>
+                </div>
+            `}
         </section>
     `);
+
+    if (summary) {
+        const link = summary.querySelector('a');
+        if (!link) return;
+
+        link.onclick = () => {
+            open_starred_friend_window();
+        }
+    }
 }
 
 function campfire_friend(friend: string) {
@@ -185,9 +195,10 @@ function campfire_friend(friend: string) {
     let track_info: HTMLElement;
     let user_avatar: HTMLElement;
     let user_name: HTMLElement;
+    let track_time: HTMLElement;
 
     const elem = html.node`
-        <div class="user friend" data-live="false">
+        <div class="user friend hidden-user" data-live="false">
             <div class="user-avatar cover-art" ref=${el => cover_art = el}>
                 <div class="bleh-icon loading-spinner" />
             </div>
@@ -202,6 +213,7 @@ function campfire_friend(friend: string) {
                 <div class="user-about track" ref=${el => track_info = el}>
                     <p>${tl(trans.loading)}</p>
                 </div>
+                <div class="user-time" ref=${el => track_time = el} />
             </div>
         </div>
     `;
@@ -231,16 +243,30 @@ function campfire_friend(friend: string) {
                     name = romanise(correct_item_by_artist(item.name, item.sister));
                 }
 
-                if (item.time) {
+                const valid = is_sponsor(friend);
+
+                if (cache.username && valid) {
                     render(user_name, html`
-                        ${{ html: tl(trans.user_listened_time, { u: `<strong>${cache.username ? cache.username : `@${friend}`}</strong>`, time: item.time }) }}
+                        <strong class="username-combo">
+                            <span class="username-custom">${cache.username}</span>
+                            <span class="username-original">
+                                <span class="at">@</span>${friend}
+                            </span>
+                        </strong>
                     `);
                 } else {
                     render(user_name, html`
-                        ${{ html: tl(trans.user_is_listening_to, { u: `<strong>${cache.username ? cache.username : `@${friend}`}</strong>` }) }}
+                        <strong><span class="at">@</span>${friend}</strong>
                     `);
+                }
 
-                    elem.setAttribute('data-live', true);
+                if (item.time) {
+                    track_time.textContent = item.time;
+                } else {
+                    elem.classList.remove('hidden-user');
+                    track_time.textContent = tl(trans.scrobbling_now);
+
+                    elem.setAttribute('data-live', 'true');
                 }
 
                 render(cover_art, html`

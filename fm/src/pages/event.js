@@ -10,7 +10,7 @@ import {auth, page, root} from "@/build/page";
 import {clean_number} from "@/build/tools";
 import {tl, trans} from "@/build/trans";
 import {checkup_page_structure, convert_to_toolbar} from "@/components/page/structure";
-import {register_background, update_page} from "../page";
+import {is_same_page, register_background, update_page} from "../page";
 import {bleh_home} from '@/pages/home';
 import {html, render} from "lighterhtml";
 import { DateTime } from 'luxon';
@@ -63,8 +63,10 @@ export function bleh_events() {
     page.name = event_header.querySelector('.header-title').textContent.trim();
     page.sister = event_header.querySelector('.header-title').textContent.trim();
 
+    const same_page = is_same_page();
+
     const redesigned_event_header = html.node`
-        <section class="page-header for-generic">
+        <section class="page-header for-generic ${same_page ? 'same' : ''}">
             <div class="page-header-icon">
                 ${icon({ name: icons.events })}
             </div>
