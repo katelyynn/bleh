@@ -35450,7 +35450,10 @@
       delete settings.profile_shortcut;
     }
     for (let setting2 in settings) {
-      document.body.classList.toggle("increase-btn-contrast", settings.lit <= 0.3);
+      document.body.classList.toggle(
+        "increase-btn-contrast",
+        settings.lit <= 0.3
+      );
       if ((setting2 == "hue" || setting2 == "sat" || setting2 == "lit") && settings.hue == settings_store.hue.default && settings.sat == settings_store.sat.default && settings.lit == settings_store.lit.default) {
         document.body.classList.remove("increase-btn-contrast");
         continue;
@@ -35515,12 +35518,10 @@
       let s2 = swatch.style.getPropertyValue("--sat-over");
       let l2 = swatch.style.getPropertyValue("--lit-over");
       let parent = swatch.parentElement;
-      if (swatch.classList[0] == "dropdown-menu-clickable-item")
-        parent = swatch;
+      if (swatch.classList[0] == "dropdown-menu-clickable-item") parent = swatch;
       if (h == settings.hue && s2 == settings.sat && l2 == settings.lit || swatch.getAttribute("data-swatch-type") == "default" && settings.hue == settings_store.hue.default && settings.sat == settings_store.sat.default && settings.lit == settings_store.lit.default) {
         parent.setAttribute("aria-checked", "true");
-        if (swatch.classList[0] != "dropdown-menu-clickable-item")
-          found = true;
+        if (swatch.classList[0] != "dropdown-menu-clickable-item") found = true;
       } else {
         parent.setAttribute("aria-checked", "false");
       }
@@ -35554,18 +35555,14 @@
         log(`updated (inbuilt) ${item} to ${!value}`, "settings");
       }
       if (value == inbuilt_settings[item].values[0] && modify) {
-        element.querySelector(
-          `#inbuilt-companion-checkbox-${item}`
-        ).checked = false;
+        element.querySelector(`#inbuilt-companion-checkbox-${item}`).checked = false;
         element.querySelector(`#toggle-${item}`).setAttribute("aria-checked", false);
         document.body.setAttribute(
           `data-bleh--inbuilt-${item}`,
           inbuilt_settings[item].values[1]
         );
       } else if (modify) {
-        element.querySelector(
-          `#inbuilt-companion-checkbox-${item}`
-        ).checked = true;
+        element.querySelector(`#inbuilt-companion-checkbox-${item}`).checked = true;
         element.querySelector(`#toggle-${item}`).setAttribute("aria-checked", true);
         document.body.setAttribute(
           `data-bleh--inbuilt-${item}`,
@@ -35582,24 +35579,14 @@
         );
         if (value == true) {
           console.warn(item, value, "TRUE");
-          element.querySelector(
-            `#inbuilt-companion-checkbox-${item}`
-          ).checked = true;
+          element.querySelector(`#inbuilt-companion-checkbox-${item}`).checked = true;
           element.querySelector(`#toggle-${item}`).setAttribute("aria-checked", true);
-          document.body.setAttribute(
-            `data-bleh--inbuilt-${item}`,
-            true
-          );
+          document.body.setAttribute(`data-bleh--inbuilt-${item}`, true);
         } else if (value == false) {
           console.warn(item, value, "FALSE");
-          element.querySelector(
-            `#inbuilt-companion-checkbox-${item}`
-          ).checked = false;
+          element.querySelector(`#inbuilt-companion-checkbox-${item}`).checked = false;
           element.querySelector(`#toggle-${item}`).setAttribute("aria-checked", false);
-          document.body.setAttribute(
-            `data-bleh--inbuilt-${item}`,
-            false
-          );
+          document.body.setAttribute(`data-bleh--inbuilt-${item}`, false);
         }
       }
     }
@@ -76032,6 +76019,23 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     }
   }
 
+  // src/components/profile/cache.ts
+  function delete_cache(cache2) {
+    if (typeof cache2 != "object") return;
+    delete cache2.avatar;
+    delete cache2.banner;
+    delete cache2.banner_orig;
+    delete cache2.hue;
+    delete cache2.sat;
+    delete cache2.lit;
+    delete cache2.font;
+    delete cache2.font_style;
+    delete cache2.username;
+    delete cache2.aka;
+    delete cache2.created;
+    return cache2;
+  }
+
   // src/pages/lastfm_settings/profile.ts
   var cropper;
   function lastfm_settings_profile() {
@@ -76233,31 +76237,45 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     let form_website = document.getElementById("id_homepage").value;
     let form_country = document.getElementById("id_country");
     let form_about_me = document.getElementById("id_about_me").textContent;
+    let profile_cache = JSON.parse(localStorage.getItem(keys2.profile_cache)) || {};
+    let cache2 = profile_cache[auth.name];
+    delete_cache(cache2);
     const markdown_settings = {
       allow_headers: true,
       allow_banners: true,
       allow_icons: true,
       allow_hue: true,
       allow_fonts: true,
-      cache: true,
+      cache: cache2,
       take_effect: false,
       allow_socials: true,
       allow_alignment: true,
       allow_lists: true
     };
-    let chars;
+    let chars = html.node`
+        <p class="tip characters colourful">
+            ${tl2(trans.value_characters_max, { v: bio_max_length })}
+        </p>
+    `;
     const about = markdown_field(update_about, markdown_settings, form_about_me, "about_me", 40, 10, tl2(trans.anything_you_can_imagine), null, false, false, false);
     let preview;
-    let accent_setting;
-    let font_setting;
+    let accent_setting = html.node`
+        <div class="setting" data-type="info" disabled=${!auth.sponsor} />
+    `;
+    let font_setting = html.node`
+        <p class="card-tip" />
+    `;
     render(page.structure.side, html`
         <section class="about-me-preview">
             <h2>${tl2(trans.about_me_preview)}</h2>
             <span class="bleh--about-me-preview markdown-body" ref=${(el) => preview = el} />
         </section>
     `);
-    let profile_cache = JSON.parse(localStorage.getItem(keys2.profile_cache)) || {};
-    let cache2 = profile_cache[auth.name];
+    page.structure.main.removeChild(
+      page.structure.main.querySelector("#update-profile")
+    );
+    update_about();
+    save_profile_cache(cache2, profile_cache, auth.name);
     render(update_picture, html`
         <h4>${tl2(trans.profile)}</h4>
         ${alert2}
@@ -76319,7 +76337,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         },
         submit_on_character: true
       })}
-                                <p class="card-tip" ref=${(el) => font_setting = el} />
+                                ${font_setting}
                             </div>
                         </div>
                     `;
@@ -76414,21 +76432,11 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       };
       return elem;
     }}
-                <div
-                    class="setting"
-                    data-type="info"
-                    disabled=${!auth.sponsor}
-                    ref=${(el) => accent_setting = el}
-                />
+                ${accent_setting}
                 <div class="setting" data-type="text">
                     <div class="heading">
                         <h5>${tl2(trans.about)}</h5>
-                        <p class="tip characters colourful" ref=${(el) => chars = el}>
-                            ${tl2(
-      trans.value_characters_max,
-      { v: bio_max_length }
-    )}
-                        </p>
+                        ${chars}
                     </div>
                     <div class="${!ff("cosplay") ? "input-container content-form textarea" : "limitless"}">
                         ${about}
@@ -76487,17 +76495,12 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
             ${setting({ id: "avatar_radius" })}
         </div>
     `);
-    page.structure.main.removeChild(
-      page.structure.main.querySelector("#update-profile")
-    );
-    update_about();
     function len(text4) {
       return text4.replace(/\n/g, "\r\n").length;
       const normalised = text4.replace(/\r\n/g, "\n");
       return new TextEncoder().encode(normalised).length;
     }
     function update_about(value = about.value) {
-      log("re-rendering", "about", "log");
       const length = len(value);
       chars.textContent = tl2(trans.value_characters_max, {
         v: `${length}/${bio_max_length}`
@@ -76507,8 +76510,6 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       let profile_cache2 = JSON.parse(localStorage.getItem(keys2.profile_cache)) || {};
       let cache3 = profile_cache2[auth.name];
       console.info("cache", cache3);
-      const accent_regex = /\[accent=([0-9]{1,3}),([0-9]*\.?[0-9]+),([0-9]*\.?[0-9]+)\]/;
-      const font_regex = /\[font=([^\]]+)\]/;
       console.info(
         "cache update",
         about.value,
@@ -76516,175 +76517,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         cache3.sat,
         cache3.lit
       );
-      let accent_edit;
-      render(accent_setting, html``);
-      render(accent_setting, html`
-            <div class="heading">
-                <h5>${tl2(trans.profile_accent.name)}<span class="new-badge sponsor-related">${tl2(trans.sponsors_only)}</span></h5>
-                <p>${tl2(trans.profile_accent.body)}</p>
-            </div>
-            <div class="info">
-                <div
-                    class="colour-tile colourful"
-                    style="--hue-over: ${cache3.hue}; --sat-over: ${cache3.sat}; --lit-over: ${cache3.lit}"
-                />
-                <div class="swatch-group palette">
-                    <button
-                        class="swatch-container"
-                        ref=${(el) => accent_edit = el}
-                        type="button"
-                        onclick=${() => {
-        let hue_range;
-        let sat_range;
-        let lit_range;
-        const match3 = about.value.match(accent_regex);
-        if (match3) {
-          save_setting(
-            "profile_hue",
-            parseInt(match3[1], 10)
-          );
-          save_setting(
-            "profile_sat",
-            parseFloat(match3[2])
-          );
-          save_setting(
-            "profile_lit",
-            parseFloat(match3[3])
-          );
-        }
-        let colour;
-        let accent_preview;
-        dialog({
-          id: "profile_accent",
-          title: tl2(trans.profile_accent.name),
-          body: html.node`
-                                    <div class="setting-group">
-                                        <div class="setting" data-type="info">
-                                            <div class="heading">
-                                                <h5>${tl2(trans.preview)}</h5>
-                                            </div>
-                                            <div class="info">
-                                                <div class="colour-tile colourful" ref=${(el) => accent_preview = el} style="--hue-over: ${settings.profile_hue}; --sat-over: ${settings.profile_sat}; --lit-over: ${settings.profile_lit}" />
-                                            </div>
-                                        </div>
-                                        ${ff("colour_based_on_hex") ? html.node`
-                                        <div class="setting" data-type="text">
-                                            <div class="heading">
-                                                <h5>${tl2(trans.convert_from_hex)}</h5>
-                                            </div>
-                                            <div class="input-container content-form">
-                                                ${colour = input({
-            type: "colour",
-            value: "#999999",
-            maxlength: 7,
-            warn_if_empty: true
-          })}
-                                                <button class="btn primary icon convert" onclick=${() => {
-            const value2 = colour.value;
-            const hsl3 = hex_to_oklch(value2);
-            const sat = clamp_sat(hsl3.s / 100 * 3);
-            hue_range.value = hsl3.h;
-            sat_range.value = sat;
-            lit_range.value = clamp_lit(sat, hsl3.l / 100 + 0.35);
-          }}>${tl2(trans.convert)}</button>
-                                            </div>
-                                        </div>
-                                        ` : ""}
-                                        ${hue_range = setting({ id: "profile_hue", func: update_colour_preview })}
-                                        ${sat_range = setting({ id: "profile_sat", func: update_colour_preview })}
-                                        ${lit_range = setting({ id: "profile_lit", func: update_colour_preview })}
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button class="see-more cancel left-icon" onclick=${() => dialog_rm({ id: "profile_accent" })}>
-                                            ${tl2(trans.back)}
-                                        </button>
-                                        <div class="fill"></div>
-                                        <div class="button-group">
-                                            ${() => {
-            const btn = html.node`
-                                                    <button class="btn icon select-button" data-type="copy">
-                                                        ${tl2(trans.copy)}
-                                                    </button>
-                                                `;
-            tippy_esm_default(btn, {
-              theme: "context-menu",
-              content: html.node`
-                                                        <button class="dropdown-menu-clickable-item" data-type="profile" onclick=${() => {
-                hue_range.value = settings.hue;
-                sat_range.value = settings.sat;
-                lit_range.value = settings.lit;
-              }}>${tl2(trans.apply_global_accent)}</button>
-                                                        <button class="dropdown-menu-clickable-item" data-type="global" onclick=${() => {
-                const warn = notify({
-                  id: "confirm_accent",
-                  title: tl2(trans.are_you_sure),
-                  body: tl2(trans.this_will_replace_your_global_accent),
-                  type: "warning",
-                  actions: [
-                    {
-                      type: "check",
-                      action: () => {
-                        notify_rm(warn);
-                        save_setting("hue", settings.profile_hue);
-                        save_setting("sat", settings.profile_sat);
-                        save_setting("lit", settings.profile_lit);
-                      },
-                      text: tl2(trans.continue)
-                    }
-                  ],
-                  persist: true
-                });
-              }}>${tl2(trans.apply_profile_accent)}</button>
-                                                    `,
-              trigger: "click",
-              placement: "bottom",
-              interactive: true,
-              interactiveBorder: 10,
-              appendTo: document.body
-            });
-            return btn;
-          }}
-                                            <button class="btn primary continue" onclick=${() => {
-            const new_accent = `[accent=${settings.profile_hue},${settings.profile_sat},${settings.profile_lit}]`;
-            if (match3) {
-              about.value = about.value.replace(accent_regex, new_accent);
-            } else {
-              const trimmed = about.value.trimEnd();
-              if (trimmed.length == 0) {
-                about.value = new_accent;
-              } else {
-                about.value = trimmed + "\n\n" + new_accent;
-              }
-            }
-            dialog_rm({ id: "profile_accent" });
-            status({
-              title: tl2(
-                trans.profile_accent.reminder
-              )
-            });
-          }}>
-                                                ${tl2(trans.change)}
-                                            </button>
-                                        </div>
-                                    </div>
-                                `
-        });
-        function update_colour_preview() {
-          accent_preview.style = `--hue-over: ${settings.profile_hue}; --sat-over: ${settings.profile_sat}; --lit-over: ${settings.profile_lit}`;
-        }
-      }}
-                        >
-                            <div
-                                class="swatch colourful"
-                                data-swatch-type="customise"
-                            />
-                        </button>
-                    </div>
-                </div>
-            `);
-      tippy_esm_default(accent_edit, {
-        content: tl2(trans.edit)
-      });
+      const accent_regex = /\[accent=([0-9]{1,3}),([0-9]*\.?[0-9]+),([0-9]*\.?[0-9]+)\]/;
+      const font_regex = /\[font=([^\]]+)\]/;
       if (font_setting) {
         let font_name = cache3.font;
         let font_style = cache3.font_style;
@@ -76784,6 +76618,177 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
           });
         }}>${tl2(trans.change_font)}</a>
             `);
+      }
+      if (accent_setting) {
+        let accent_edit;
+        render(accent_setting, html``);
+        render(accent_setting, html`
+                <div class="heading">
+                    <h5>${tl2(trans.profile_accent.name)}<span class="new-badge sponsor-related">${tl2(trans.sponsors_only)}</span></h5>
+                    <p>${tl2(trans.profile_accent.body)}</p>
+                </div>
+                <div class="info">
+                    <div
+                        class="colour-tile colourful"
+                        style="--hue-over: ${cache3.hue}; --sat-over: ${cache3.sat}; --lit-over: ${cache3.lit}"
+                    />
+                    <div class="swatch-group palette">
+                        <button
+                            class="swatch-container"
+                            ref=${(el) => accent_edit = el}
+                            type="button"
+                            onclick=${() => {
+          let hue_range;
+          let sat_range;
+          let lit_range;
+          const match3 = about.value.match(accent_regex);
+          if (match3) {
+            save_setting(
+              "profile_hue",
+              parseInt(match3[1], 10)
+            );
+            save_setting(
+              "profile_sat",
+              parseFloat(match3[2])
+            );
+            save_setting(
+              "profile_lit",
+              parseFloat(match3[3])
+            );
+          }
+          let colour;
+          let accent_preview;
+          dialog({
+            id: "profile_accent",
+            title: tl2(trans.profile_accent.name),
+            body: html.node`
+                                        <div class="setting-group">
+                                            <div class="setting" data-type="info">
+                                                <div class="heading">
+                                                    <h5>${tl2(trans.preview)}</h5>
+                                                </div>
+                                                <div class="info">
+                                                    <div class="colour-tile colourful" ref=${(el) => accent_preview = el} style="--hue-over: ${settings.profile_hue}; --sat-over: ${settings.profile_sat}; --lit-over: ${settings.profile_lit}" />
+                                                </div>
+                                            </div>
+                                            ${ff("colour_based_on_hex") ? html.node`
+                                            <div class="setting" data-type="text">
+                                                <div class="heading">
+                                                    <h5>${tl2(trans.convert_from_hex)}</h5>
+                                                </div>
+                                                <div class="input-container content-form">
+                                                    ${colour = input({
+              type: "colour",
+              value: "#999999",
+              maxlength: 7,
+              warn_if_empty: true
+            })}
+                                                    <button class="btn primary icon convert" onclick=${() => {
+              const value2 = colour.value;
+              const hsl3 = hex_to_oklch(value2);
+              const sat = clamp_sat(hsl3.s / 100 * 3);
+              hue_range.value = hsl3.h;
+              sat_range.value = sat;
+              lit_range.value = clamp_lit(sat, hsl3.l / 100 + 0.35);
+            }}>${tl2(trans.convert)}</button>
+                                                </div>
+                                            </div>
+                                            ` : ""}
+                                            ${hue_range = setting({ id: "profile_hue", func: update_colour_preview })}
+                                            ${sat_range = setting({ id: "profile_sat", func: update_colour_preview })}
+                                            ${lit_range = setting({ id: "profile_lit", func: update_colour_preview })}
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="see-more cancel left-icon" onclick=${() => dialog_rm({ id: "profile_accent" })}>
+                                                ${tl2(trans.back)}
+                                            </button>
+                                            <div class="fill"></div>
+                                            <div class="button-group">
+                                                ${() => {
+              const btn = html.node`
+                                                        <button class="btn icon select-button" data-type="copy">
+                                                            ${tl2(trans.copy)}
+                                                        </button>
+                                                    `;
+              tippy_esm_default(btn, {
+                theme: "context-menu",
+                content: html.node`
+                                                            <button class="dropdown-menu-clickable-item" data-type="profile" onclick=${() => {
+                  hue_range.value = settings.hue;
+                  sat_range.value = settings.sat;
+                  lit_range.value = settings.lit;
+                }}>${tl2(trans.apply_global_accent)}</button>
+                                                            <button class="dropdown-menu-clickable-item" data-type="global" onclick=${() => {
+                  const warn = notify({
+                    id: "confirm_accent",
+                    title: tl2(trans.are_you_sure),
+                    body: tl2(trans.this_will_replace_your_global_accent),
+                    type: "warning",
+                    actions: [
+                      {
+                        type: "check",
+                        action: () => {
+                          notify_rm(warn);
+                          save_setting("hue", settings.profile_hue);
+                          save_setting("sat", settings.profile_sat);
+                          save_setting("lit", settings.profile_lit);
+                        },
+                        text: tl2(trans.continue)
+                      }
+                    ],
+                    persist: true
+                  });
+                }}>${tl2(trans.apply_profile_accent)}</button>
+                                                        `,
+                trigger: "click",
+                placement: "bottom",
+                interactive: true,
+                interactiveBorder: 10,
+                appendTo: document.body
+              });
+              return btn;
+            }}
+                                                <button class="btn primary continue" onclick=${() => {
+              const new_accent = `[accent=${settings.profile_hue},${settings.profile_sat},${settings.profile_lit}]`;
+              if (match3) {
+                about.value = about.value.replace(accent_regex, new_accent);
+              } else {
+                const trimmed = about.value.trimEnd();
+                if (trimmed.length == 0) {
+                  about.value = new_accent;
+                } else {
+                  about.value = trimmed + "\n\n" + new_accent;
+                }
+              }
+              dialog_rm({ id: "profile_accent" });
+              status({
+                title: tl2(
+                  trans.profile_accent.reminder
+                )
+              });
+            }}>
+                                                    ${tl2(trans.change)}
+                                                </button>
+                                            </div>
+                                        </div>
+                                    `
+          });
+          function update_colour_preview() {
+            accent_preview.style = `--hue-over: ${settings.profile_hue}; --sat-over: ${settings.profile_sat}; --lit-over: ${settings.profile_lit}`;
+          }
+        }}
+                            >
+                                <div
+                                    class="swatch colourful"
+                                    data-swatch-type="customise"
+                                />
+                            </button>
+                        </div>
+                    </div>
+                `);
+        tippy_esm_default(accent_edit, {
+          content: tl2(trans.edit)
+        });
       }
     }
   }
@@ -93339,7 +93344,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-02-25"
       }
     },
-    built_on: "2026-05-04T18:34:36.020Z"
+    built_on: "2026-05-05T02:52:24.701Z"
   };
 
   // node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
