@@ -12,8 +12,8 @@ export function delete_cache(cache: profile_cache) {
     delete cache.font;
     delete cache.font_style;
     delete cache.username;
-    delete cache.aka;
-    delete cache.created;
+    //delete cache.aka;
+    //delete cache.created;
 
     return cache;
 }

@@ -76031,8 +76031,6 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     delete cache2.font;
     delete cache2.font_style;
     delete cache2.username;
-    delete cache2.aka;
-    delete cache2.created;
     return cache2;
   }
 
