@@ -1012,7 +1012,7 @@ function profile_recents() {
             </h2>
             <div class="view-buttons blend blend-v2">
                 ${can_scrobble ? html.node`
-                    <button class="left-icon blend-v2-btn" data-type="add" onclick=${() =>
+                    <button class="left-icon blend-v2-btn" data-type="add" ref=${el => submit_btn = el} onclick=${() =>
                         submit_scrobble({
                             refresh_btn,
                             can_api,
