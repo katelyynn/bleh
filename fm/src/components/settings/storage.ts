@@ -12,6 +12,7 @@ export const keys = {
     last_version_used: 'bleh_last_version_used',
     notices: 'bleh_notices',
     notices_expire: 'bleh_notices_expire',
+    notices_seen: 'bleh_notices_seen',
     oracle: 'bleh_oracle_cache',
     profile_cache: 'bleh_profile_cache',
     profile_notes: 'bleh_profile_notes',

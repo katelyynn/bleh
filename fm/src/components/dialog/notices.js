@@ -10,6 +10,8 @@ import {
 import { tl, trans } from '@/build/trans';
 import { html } from 'lighterhtml';
 import { DateTime } from 'luxon';
+import { markdown } from '../shared/markdown';
+import { keys } from '../settings/storage';
 
 export function notices() {
     const res = localStorage.getItem('bleh_notices');
@@ -53,23 +55,34 @@ function fetch_notices() {
 }
 
 function load_notices(res) {
-    document.body.appendChild(html.node`
-        <div class="bleh-notices">
-            ${res.map(notice => {
-                const date = DateTime.fromISO(notice.date);
+  const seen = JSON.parse(localStorage.getItem(keys.notices_seen)) || [];
 
-                return html.node`
-                    <div class="bleh-notice colourful">
-                        <div class="notice-header" data-type=${notice.type}>
-                            <span>${tl(trans.notice)}</span>
-                            <span>${date.toRelative()}</span>
-                        </div>
-                        <div class="notice-content">
-                            ${notice.message}
-                        </div>
-                    </div>
-                `;
-            })}
-        </div>
-    `);
+  document.body.appendChild(html.node`
+      <div class="bleh-notices">
+          ${res.map(notice => {
+              const date = DateTime.fromISO(notice.date);
+              const id = `notice-${notice.type}-${notice.date}`;
+
+              if (seen.includes(id)) return html.node``;
+
+              return html.node`
+                  <div class="bleh-notice colourful">
+                      <div class="notice-header" data-type=${notice.type}>
+                          <span>${tl(trans.notice)}</span>
+                          <span>${date.toRelative()}</span>
+                      </div>
+                      <div class="notice-content">
+                          ${markdown(notice.message)}
+                      </div>
+                      <div class="notice-close" onclick=${() => {
+                        seen.push(id);
+                        set_storage(keys.notices_seen, JSON.stringify(seen));
+                      }}>
+                        ${tl(trans.close)}
+                      </div>
+                  </div>
+              `;
+          })}
+      </div>
+  `);
 }
