@@ -14,6 +14,7 @@ import { update_check } from "@/components/page/style";
 import { notify } from "@/components/dialog/notify";
 import { sponsor, sponsor_manage, sponsors } from '@/components/sponsor';
 import { convert_lang_to_country, flag } from '@/components/shared/flag';
+import { start_update } from "@/components/page/style";
 
 export function general() {
     if (auth.pro == null) {

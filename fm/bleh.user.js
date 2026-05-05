@@ -69573,7 +69573,7 @@
             <div class="forms">
                 <div class="form">
                     <div class="form-group proceed">
-                        <button class="btn primary icon" data-type="update" onclick=${() => start_update2()}>${tl2(trans.update_now)}</button>
+                        <button class="btn primary icon" data-type="update" onclick=${() => start_update()}>${tl2(trans.update_now)}</button>
                     </div>
                 </div>
                 <div class="form">
@@ -69593,7 +69593,7 @@
       id: "bleh_update"
     });
   }
-  function start_update2() {
+  function start_update() {
     open(`https://github.com/katelyynn/bleh/raw/refs/heads/uwu/fm/bleh.user.js?${Math.random()}`);
     dialog({
       id: "bleh_update",
@@ -70030,17 +70030,16 @@
     }
     if (!page.structure.style_warning) {
       const style_warning = html.node`
-            <div class="style-warning" style="position: fixed; top: 0; left: 0; right: 0; padding: 20px; background: #fff; z-index: 1000000000; display: flex; align-items: center; gap: 30px">
+            <div class="style-warning" style="position: fixed; top: 0; left: 0; right: 0; padding: 20px; background: #fff; z-index: 1000000000; display: flex; justify-content: center; align-items: center; gap: 30px">
                 <strong>${tl2(trans.style_warning)}</strong>
-                <button class="btn primary" onclick=${() => {
-        save_setting("branch", "uwu");
-      }}>
-                    Reset branch to release (uwu)
-                </button>
                 <button class="btn-primary" onclick=${() => {
+        save_setting("branch", "uwu");
         save_setting("dev", false);
         window.location.reload();
       }}>${tl2(trans.re_enable_style_loading)}</button>
+                <button class="btn-primary" onclick=${() => {
+        open(`https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js`);
+      }}>${tl2(trans.check_for_updates)}</button>
             </div>
         `;
       document.body.appendChild(style_warning);
