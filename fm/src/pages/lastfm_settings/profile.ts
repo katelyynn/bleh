@@ -289,8 +289,6 @@ function profile_panel() {
     // about me
     update_about();
 
-    save_profile_cache(cache, profile_cache, auth.name);
-
     render(update_picture, html`
         <h4>${tl(trans.profile)}</h4>
         ${alert}
@@ -549,10 +547,11 @@ function profile_panel() {
         });
         chars.setAttribute('data-exceeded', length > bio_max_length);
 
+        delete_cache(cache);
+
         render(preview, markdown(value, markdown_settings));
 
-        let profile_cache = JSON.parse(localStorage.getItem(keys.profile_cache)) || {};
-        let cache = profile_cache[auth.name];
+        save_profile_cache(cache, profile_cache, auth.name);
 
         console.info('cache', cache);
 

@@ -76275,7 +76275,6 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       page.structure.main.querySelector("#update-profile")
     );
     update_about();
-    save_profile_cache(cache2, profile_cache, auth.name);
     render(update_picture, html`
         <h4>${tl2(trans.profile)}</h4>
         ${alert2}
@@ -76506,22 +76505,22 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         v: `${length}/${bio_max_length}`
       });
       chars.setAttribute("data-exceeded", length > bio_max_length);
+      delete_cache(cache2);
       render(preview, markdown(value, markdown_settings));
-      let profile_cache2 = JSON.parse(localStorage.getItem(keys2.profile_cache)) || {};
-      let cache3 = profile_cache2[auth.name];
-      console.info("cache", cache3);
+      save_profile_cache(cache2, profile_cache, auth.name);
+      console.info("cache", cache2);
       console.info(
         "cache update",
         about.value,
-        cache3.hue,
-        cache3.sat,
-        cache3.lit
+        cache2.hue,
+        cache2.sat,
+        cache2.lit
       );
       const accent_regex = /\[accent=([0-9]{1,3}),([0-9]*\.?[0-9]+),([0-9]*\.?[0-9]+)\]/;
       const font_regex = /\[font=([^\]]+)\]/;
       if (font_setting) {
-        let font_name = cache3.font;
-        let font_style = cache3.font_style;
+        let font_name = cache2.font;
+        let font_style = cache2.font_style;
         let font_name_preview;
         let font_tile;
         render(font_setting, html``);
@@ -76529,8 +76528,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                 <span ref=${(el) => font_name_preview = el}>${{ html: tl2(trans.styled_with_font, { f: `<span class="font-name-preview-mini" data-font=${font_name}>${font_name && font_name != "none" ? page.state.fonts[font_name] : tl2(trans.none)}</span>` }) }}</span>
                 <a class="card-tip-link" onclick=${() => {
           const match3 = about.value.match(font_regex);
-          font_name = cache3.font;
-          font_style = cache3.font_style;
+          font_name = cache2.font;
+          font_style = cache2.font_style;
           let font_preview;
           let font_buttons = [];
           let font_style_buttons = [];
@@ -76539,7 +76538,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
             title: tl2(trans.profile_font.name),
             body: html.node`
                             <div class="font-name-preview">
-                                <span data-font=${font_name} data-font-style=${font_style} ref=${(el) => font_preview = el}>${cache3.username ? cache3.username : auth.name}</span>
+                                <span data-font=${font_name} data-font-style=${font_style} ref=${(el) => font_preview = el}>${cache2.username ? cache2.username : auth.name}</span>
                             </div>
                             <div class="font-name-options">
                                 <h4 class="font-options-header">${tl2(trans.font.name)}</h4>
@@ -76630,7 +76629,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                 <div class="info">
                     <div
                         class="colour-tile colourful"
-                        style="--hue-over: ${cache3.hue}; --sat-over: ${cache3.sat}; --lit-over: ${cache3.lit}"
+                        style="--hue-over: ${cache2.hue}; --sat-over: ${cache2.sat}; --lit-over: ${cache2.lit}"
                     />
                     <div class="swatch-group palette">
                         <button
