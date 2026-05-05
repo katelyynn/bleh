@@ -52,7 +52,7 @@
         text-align: center;
         gap: 10px !important;
 
-        --page-header-avatar-size: 120px;
+        --page-header-avatar-size: 100px;
         --page-header-avatar-radius: var(--item-big-radius);
 
         & > .page-header-info {
