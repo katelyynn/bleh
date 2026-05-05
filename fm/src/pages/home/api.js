@@ -43,7 +43,7 @@ export async function bleh_api() {
     if (page.subpage == 'create_account') return;
 
 
-    page.structure.container.classList.add('sour');
+    page.structure.container.classList.add('has-cards-view');
     page.structure.content.classList.add('cards-view');
 
 
