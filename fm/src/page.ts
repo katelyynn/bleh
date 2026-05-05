@@ -239,12 +239,16 @@ function handle_error(e = null) {
         id: 'error',
         title: 'An error has occurred',
         body: html.node`
-            <div class="modal-vertical-inner error-inner">
-                ${icon({ name: icons.error })}
-                <h1>oops.. something broke</h1>
-                <p>An error prevented ${version.brand} from finishing loading, it's recommended to leave the page and refresh.</p>
+            <div class="error-inner">
+                <div class="error-top">
+                    ${icon({ name: icons.error })}
+                    <div class="error-top-info">
+                        <h1 class="error-head">oops.. something broke</h1>
+                        <p class="error-body">An error prevented ${version.brand} from finishing loading</p>
+                    </div>
+                </div>
                 <pre class="error-info colourful">${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ''}${e.stack ? html.node`<br><span class="error-stack">${e.stack}</span>` : ''}<br>on: ${page.type}/${page.subpage}<br>    ${window.location.pathname}<br>    ${version.build} (${version.sku})</pre>
-                <p>It would be helpful if you could report this bug on Github, including the error message above.</p>
+                <p class="error-summary">It would be helpful if you could report this bug, including the error message above and any steps you took.</p>
             </div>
             <div class="modal-footer">
                 <div class="fill"></div>

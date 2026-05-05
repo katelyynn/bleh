@@ -169,7 +169,8 @@ export const icons = {
     lotus: 'lotus',
     oracle: 'oracle',
     credits: 'credits',
-    sparkle: 'sparkle'
+    sparkle: 'sparkle',
+    error: 'error'
 };
 
 interface icon {

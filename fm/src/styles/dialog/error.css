@@ -1,38 +1,44 @@
 .error-inner {
-    padding: var(--card-padding) 0;
+  text-align: left;
+  cursor: default;
+}
 
-    .bleh-icon {
-        --icon-size: 48px;
-    }
+.error-info {
+  --hue-over: var(--hue-neg);
+  --sat-over: var(--sat-neg);
+  --lit-over: var(--lit-neg);
+  max-width: 100%;
+  font-family: var(--font);
+}
 
-    h1 {
-        font-size: 16px;
-        line-height: 20px;
-        font-weight: var(--font-weight-medium);
-        letter-spacing: unset;
-        margin: unset !important;
-        cursor: default;
-    }
+.error-type {
+  color: oklch(var(--l3-c));
+}
 
-    p {
-        max-width: 410px;
-        text-align: center;
-        cursor: default;
+.error-info-header {
+  font-weight: var(--font-weight-medium);
+  color: oklch(var(--c3));
+}
 
-        &.error-info-header {
-            font-weight: var(--font-weight-medium);
-            color: oklch(var(--c3));
-        }
-    }
+.error-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 
-    .error-info {
-        --hue-over: var(--hue-neg);
-        --sat-over: 1;
-        --lit-over: 1;
-        max-width: 100%;
-    }
+  --icon-size: 32px;
 
-    .error-type {
-        color: oklch(var(--l3-c));
-    }
+  margin-bottom: var(--card-gap);
+}
+.error-top-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.error-head {
+  color: oklch(var(--c1));
+  font-weight: var(--font-weight-medium);
+  font-size: 16px;
+  line-height: 20px;
+  cursor: default;
 }
