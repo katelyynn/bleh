@@ -826,17 +826,21 @@ export async function register_background(url: string | null, origin = null) {
         const previous_url = background.getAttribute('data-url');
         if (previous_url && previous_url == url) {
             log('skipped as url is identical', 'background', 'log');
+            background_props();
             return;
         }
 
         background.classList.remove('ready');
     }
 
-    background.setAttribute('data-url', url);
-    background.setAttribute('data-page-type', page.type);
-    background.setAttribute('data-page-subpage', page.subpage);
-    background.setAttribute('data-background-origin', origin);
-    background.setAttribute('data-background-coloured', settings.hue_from_album);
+    background_props();
+
+    function background_props() {
+        background.setAttribute('data-url', url);
+        background.setAttribute('data-page-type', page.type);
+        background.setAttribute('data-page-subpage', page.subpage);
+        background.setAttribute('data-background-origin', origin);
+    }
 
     if (url) {
         url = avatar(url, 'avatar300s');
@@ -910,15 +914,19 @@ export function register_banner(url: string | null, origin = null) {
         const previous_url = background.getAttribute('data-url');
         if (previous_url && previous_url == url) {
             log('skipped as url is identical', 'background', 'log');
+            banner_props();
             return;
         }
     }
 
-    background.setAttribute('data-url', url);
-    background.setAttribute('data-page-type', page.type);
-    background.setAttribute('data-page-subpage', page.subpage);
-    background.setAttribute('data-background-origin', origin);
-    background.setAttribute('data-background-coloured', settings.hue_from_album);
+    banner_props();
+
+    function banner_props() {
+        background.setAttribute('data-url', url);
+        background.setAttribute('data-page-type', page.type);
+        background.setAttribute('data-page-subpage', page.subpage);
+        background.setAttribute('data-background-origin', origin);
+    }
 
     let inner: HTMLSpanElement;
 
