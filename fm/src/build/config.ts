@@ -4,7 +4,7 @@
 // Licensed under GPLv3
 //
 
-import { trans, translation } from '@/build/trans.ts';
+import { trans, translation } from '@/build/trans';
 
 export type setting_value = string | boolean | number | [] | string[] | {};
 

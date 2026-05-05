@@ -6,7 +6,7 @@
 
 import { html } from 'lighterhtml';
 import { auth, root } from '@/build/page';
-import { tl, trans } from '@/build/trans.ts';
+import { tl, trans } from '@/build/trans';
 import { create_badge, load_badges, process_badge } from '@/components/shared/badge';
 import { dialog } from '@/components/dialog/dialog';
 import tippy from 'tippy.js';

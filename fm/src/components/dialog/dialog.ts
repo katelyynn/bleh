@@ -7,7 +7,7 @@
 import { html, render } from 'lighterhtml';
 import { log } from '@/build/log';
 import { dialogs, page } from '@/build/page';
-import { tl, trans } from '@/build/trans.ts';
+import { tl, trans } from '@/build/trans';
 
 export function load_dialogs() {
     const dialogs = html.node`

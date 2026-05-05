@@ -15,7 +15,7 @@ import {
     rgb_to_hsl,
     romanise
 } from '@/build/tools';
-import { lang, tl, trans } from '@/build/trans.ts';
+import { lang, tl, trans } from '@/build/trans';
 import { bleh_glacier_insights } from '@/pages/profile/glacier';
 import { parse_scrobbles_as_rank } from '@/components/music/colourful_counts';
 import { correct_artist, correct_item_by_artist, name_includes, smart_title } from '@/components/music/lotus';

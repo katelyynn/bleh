@@ -15,7 +15,7 @@ import {
     root
 } from '@/build/page';
 import { copy, set_storage, time } from '@/build/tools';
-import { get_trans_key, lang_info, tl, trans } from '@/build/trans.ts';
+import { get_trans_key, lang_info, tl, trans } from '@/build/trans';
 import { dialog, dialog_rm } from '@/components/dialog/dialog';
 import { markdown } from '@/components/shared/markdown';
 import { notify } from '@/components/dialog/notify';

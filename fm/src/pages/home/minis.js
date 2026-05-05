@@ -7,7 +7,7 @@
 import { update_page } from '@/page';
 import { auth, page, root } from '@/build/page';
 import { html, render } from 'lighterhtml';
-import { tl, trans } from '@/build/trans.ts';
+import { tl, trans } from '@/build/trans';
 import { collage } from '@/components/minis/collage';
 import { compare } from '@/components/minis/compare';
 import { pixel } from '@/components/minis/pixel';

@@ -6,7 +6,7 @@
 
 import { settings } from '@/build/config';
 import { page } from '@/build/page';
-import { tl, trans } from '@/build/trans.ts';
+import { tl, trans } from '@/build/trans';
 import { correct_artist, correct_item_by_artist } from '@/components/music/lotus';
 import { html } from 'lighterhtml';
 import tippy from 'tippy.js';

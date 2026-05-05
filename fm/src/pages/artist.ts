@@ -8,7 +8,7 @@ import { settings } from '@/build/config';
 import { log } from '@/build/log';
 import { auth, page, root } from '@/build/page';
 import { romanise, sanitise } from '@/build/tools';
-import { tl, trans } from '@/build/trans.ts';
+import { tl, trans } from '@/build/trans';
 import {
     correct_artist,
     correct_generic_combo_no_artist,

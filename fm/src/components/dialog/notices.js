@@ -7,7 +7,7 @@
 import {
     set_storage
 } from '@/build/tools';
-import { tl, trans } from '@/build/trans.ts';
+import { tl, trans } from '@/build/trans';
 import { html } from 'lighterhtml';
 import { DateTime } from 'luxon';
 

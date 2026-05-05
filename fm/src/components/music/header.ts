@@ -5,7 +5,7 @@ import { settings } from '@/build/config';
 import { romanise, sanitise } from '@/build/tools';
 import { redirect } from './music';
 import tippy from 'tippy.js';
-import { tl, trans } from '@/build/trans.ts';
+import { tl, trans } from '@/build/trans';
 import { register_menu } from '../menu';
 import { correct_artist, correct_item_by_artist, name_includes, smart_title } from './lotus';
 import { artist_corrections, combined_artists } from '@/build/music';

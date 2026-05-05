@@ -13,7 +13,7 @@ import {
     stored_season
 } from '@/build/seasonal';
 import { set_storage } from '@/build/tools';
-import { tl, trans } from '@/build/trans.ts';
+import { tl, trans } from '@/build/trans';
 import { load_chart_colours } from '@/components/music/chart';
 import { notify } from '@/components/dialog/notify';
 import { html, render } from 'lighterhtml';

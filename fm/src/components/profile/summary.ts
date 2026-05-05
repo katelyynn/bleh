@@ -1,5 +1,5 @@
 import { auth, page, root } from '@/build/page';
-import { lang, tl, trans } from '@/build/trans.ts';
+import { lang, tl, trans } from '@/build/trans';
 import { html, render } from 'lighterhtml';
 import { icon, icons } from '../shared/icon';
 import tippy from 'tippy.js';

@@ -7,7 +7,7 @@
 import { settings } from '@/build/config';
 import { auth, discord, page, root } from '@/build/page';
 import { stored_season } from '@/build/seasonal';
-import { lang, lang_info, tl, trans } from '@/build/trans.ts';
+import { lang, lang_info, tl, trans } from '@/build/trans';
 import { create_badge, load_badges } from '@/components/shared/badge';
 import { version } from '@/main';
 import { ff } from '@/components/settings/sku';

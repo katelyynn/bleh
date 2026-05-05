@@ -7,7 +7,7 @@
 import { html } from 'lighterhtml';
 import { settings } from '@/build/config';
 import { log } from '@/build/log';
-import { tl, trans } from '@/build/trans.ts';
+import { tl, trans } from '@/build/trans';
 import { chart_reflow } from '@/components/music/chart';
 import { dialog, dialog_rm } from '@/components/dialog/dialog';
 import { invoke_reload } from '@/config';

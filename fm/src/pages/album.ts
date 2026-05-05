@@ -15,7 +15,7 @@ import {
     hex_to_oklch,
     sanitise
 } from '@/build/tools';
-import { tl, trans } from '@/build/trans.ts';
+import { tl, trans } from '@/build/trans';
 import { load_chart_colours } from '@/components/music/chart.js';
 import { bleh_about_artist } from '@/components/music/about_artist.js';
 import { register_menu } from '@/components/menu';

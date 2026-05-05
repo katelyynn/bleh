@@ -21,7 +21,7 @@ import {
     sponsor_url
 } from '@/build/page';
 import { stored_season } from '@/build/seasonal';
-import { lang, lookup_lang, tl, trans, translation_stats } from '@/build/trans.ts';
+import { lang, lookup_lang, tl, trans, translation_stats } from '@/build/trans';
 import { dialog, load_dialogs } from '@/components/dialog/dialog';
 import {
     correct_artist,
@@ -956,7 +956,7 @@ function favi() {
     favicon.href =
         window.matchMedia('(prefers-color-scheme: dark)').matches ?
             dark
-        :   light;
+            : light;
 
     window
         .matchMedia('(prefers-color-scheme: dark)')
@@ -964,7 +964,7 @@ function favi() {
             favicon.href =
                 window.matchMedia('(prefers-color-scheme: dark)').matches ?
                     dark
-                :   light;
+                    : light;
         });
 }
 

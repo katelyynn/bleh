@@ -6,7 +6,7 @@
 
 import { html, render } from 'lighterhtml';
 import { other_setting_types, settings, settings_store } from '@/build/config';
-import { tl, trans } from '@/build/trans.ts';
+import { tl, trans } from '@/build/trans';
 import { notify } from '@/components/dialog/notify';
 import { auth, page } from '@/build/page';
 import { request_reload } from '@/config';

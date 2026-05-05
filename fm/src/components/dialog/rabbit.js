@@ -8,7 +8,7 @@ import { auth, page, root } from '@/build/page';
 import { dialog, dialog_rm } from '@/components/dialog/dialog';
 import { html, render } from 'lighterhtml';
 import { input } from '@/components/settings/input';
-import { tl, trans } from '@/build/trans.ts';
+import { tl, trans } from '@/build/trans';
 import { save_setting } from '@/components/settings/settings';
 import { sanitise } from '@/build/tools';
 import { compare } from '@/components/minis/compare';
