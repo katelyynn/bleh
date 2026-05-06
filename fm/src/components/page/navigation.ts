@@ -1436,9 +1436,6 @@ export function append_nav() {
                             <a class="dropdown-menu-clickable-item" aria-checked=${page.type == 'settings'} data-menu-item="settings" href="${root}settings">
                                 ${tl(trans.settings)}
                             </a>
-                            <a class="dropdown-menu-clickable-item" aria-checked=${page.type == 'ipod'} data-type="ipod" href="${root}bleh/now">
-                                ${tl(trans.music)}
-                            </a>
                             ${settings.starred_friend != '' ? html.node`
                                 <a class="dropdown-menu-clickable-item no-colour colourful" data-type="starred_friend" data-is-shortcut="true" href="${root}user/${settings.starred_friend}">
                                     ${settings.starred_friend}

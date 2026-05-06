@@ -12,6 +12,7 @@
 
     @media (max-width: 980px) {
         width: unset;
+        padding: 120px 10px;
     }
 
     .footer-credit {
