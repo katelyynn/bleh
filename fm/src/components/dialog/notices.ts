@@ -13,6 +13,12 @@ import { DateTime } from 'luxon';
 import { markdown } from '../shared/markdown';
 import { keys } from '../settings/storage';
 
+interface notice {
+    type: string,
+    message: string,
+    date: string
+}
+
 export function notices() {
     const res = localStorage.getItem('bleh_notices');
     const expire = Number(localStorage.getItem('bleh_notices_expire'));
@@ -54,8 +60,8 @@ function fetch_notices() {
         });
 }
 
-function load_notices(res) {
-  const seen = JSON.parse(localStorage.getItem(keys.notices_seen)) || [];
+function load_notices(res: notice[]) {
+  const seen: string[] = JSON.parse(localStorage.getItem(keys.notices_seen)) || [];
 
   document.body.appendChild(html.node`
       <div class="bleh-notices">
@@ -65,7 +71,7 @@ function load_notices(res) {
 
               if (seen.includes(id)) return html.node``;
 
-              return html.node`
+              const elem = html.node`
                   <div class="bleh-notice colourful">
                       <div class="notice-header" data-type=${notice.type}>
                           <span>${tl(trans.notice)}</span>
@@ -77,11 +83,15 @@ function load_notices(res) {
                       <div class="notice-close" onclick=${() => {
                         seen.push(id);
                         set_storage(keys.notices_seen, JSON.stringify(seen));
+
+                        elem.remove();
                       }}>
                         ${tl(trans.close)}
                       </div>
                   </div>
               `;
+
+              return elem;
           })}
       </div>
   `);

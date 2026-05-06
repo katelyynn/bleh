@@ -185,7 +185,7 @@
     }
 
     @media (max-width: 980px) {
-        padding: var(--card-gap);
+        padding: var(--card-gap) var(--card-gap) calc(var(--card-gap) + 60px);
 
         .bleh-modal {
             width: 96vw;
