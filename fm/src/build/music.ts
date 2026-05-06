@@ -276,8 +276,8 @@ export let includes = {
     ],
     mixes_numbers: [
         /[\(\[\{]v[1-9]/i,
-        /[-\(]mixed/i,
-        /[-\(]mix\s/i
+        /(?:-\s?|\(|\[)mixed/i,
+        /(?:-\s?|\(|\[)mix\s/i
     ],
     stems: [
         /(?:-\s?|\(|\[)\s*(?:a\s*cappella|acapella|accapella)/i,
