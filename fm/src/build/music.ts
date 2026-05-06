@@ -197,7 +197,7 @@ export let includes = {
             'dance club|flying lotus|sports bar|doss|pabllo vittar|' +
             'ashnikko|arca|dorian electra|planningtorock|lsdxoxo|' +
             'coucou chloe|george daniel|jacques lu cont|sasha twilo|' +
-            'flying lotus|chris lord-alge|cla|' +
+            'flying lotus|chris lord-alge|cla|4b|sikdope|carnage|' +
             // descriptors
             'club 69 speed|the color|meltdown|underground|ihs|' +
             'classic club|naughty main|' +

@@ -36,8 +36,4 @@
     &[data-tag-group="mixes_numbers"] {
         order: 10;
     }
-
-    &[data-tag-group="mixes_numbers"] {
-        text-transform: uppercase;
-    }
 }

@@ -1,0 +1,6 @@
+[header]
+template = """
+bleh, an extension for the music site Last.fm
+Copyright (c) {year} katelyn and contributors
+Licensed under GPLv3
+"""

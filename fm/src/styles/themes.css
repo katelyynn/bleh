@@ -734,7 +734,7 @@ u,
     );
     --avatar-generic-background: oklch(var(--b4));
 
-    --primary-shadow: inset 0 0 0 transparent;
+    --primary-shadow: inset 0 -1px 0 oklch(var(--h4) / 60%);
     --bar-shadow: inset 0 1px 0 0 oklch(var(--h3) / 25%);
 
     --shout-vote-indicator: linear-gradient(
