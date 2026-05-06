@@ -79898,7 +79898,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
   function load_dismissed() {
   }
 
-  // src/components/dialog/notices.js
+  // src/components/dialog/notices.ts
   function notices() {
     const res = localStorage.getItem("bleh_notices");
     const expire = Number(localStorage.getItem("bleh_notices_expire"));
@@ -79937,7 +79937,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       const date = DateTime.fromISO(notice.date);
       const id = `notice-${notice.type}-${notice.date}`;
       if (seen.includes(id)) return html.node``;
-      return html.node`
+      const elem = html.node`
                   <div class="bleh-notice colourful">
                       <div class="notice-header" data-type=${notice.type}>
                           <span>${tl2(trans.notice)}</span>
@@ -79949,11 +79949,13 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                       <div class="notice-close" onclick=${() => {
         seen.push(id);
         set_storage(keys2.notices_seen, JSON.stringify(seen));
+        elem.remove();
       }}>
                         ${tl2(trans.close)}
                       </div>
                   </div>
               `;
+      return elem;
     })}
       </div>
   `);
@@ -93361,7 +93363,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-02-25"
       }
     },
-    built_on: "2026-05-05T19:35:32.192Z"
+    built_on: "2026-05-06T15:46:23.361Z"
   };
 
   // node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
