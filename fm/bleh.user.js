@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    https://last.fm/
-// @version      2026.0505
+// @version      2026.0506
 // @description  bleh!!! ^-^
 // @author       katelyn
 // @match        https://www.last.fm/*
@@ -92964,7 +92964,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
   // src/build/build.json
   var build_default = {
     brand: "bleh",
-    build: "2026.0505",
+    build: "2026.0506",
     sku: "nanally",
     bio: "bleh!!! ^-^",
     author: "katelyn",
@@ -93360,7 +93360,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-02-25"
       }
     },
-    built_on: "2026-05-06T15:46:23.361Z"
+    built_on: "2026-05-06T16:07:50.471Z"
   };
 
   // node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
