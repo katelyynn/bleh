@@ -50,7 +50,7 @@
             position: absolute;
             top: 0;
 
-            --offset: translateX(calc((var(--index) - var(--selected-index)) * (var(--w) + var(--gap)) - var(--w) / 2));
+            --offset: translateX(calc(var(--loop-index) * (var(--w) + var(--gap)) - var(--w) / 2));
 
             left: 50%;
             transform: var(--offset);
@@ -106,6 +106,10 @@
                 transform: var(--offset) scale(0.7);
 
                 cursor: pointer;
+
+                &:active {
+                  transform: var(--offset) scale(0.65);
+                }
             }
 
             &[aria-checked="true"] {

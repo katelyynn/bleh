@@ -78,6 +78,8 @@ export function campfire() {
 
             max_index = albums.length - 1;
 
+            items_container.style.setProperty('--max-index', max_index.toString());
+
             render(items_container, html`
                 ${albums.map((album, index) => {
                     const elem = html.node`
@@ -110,23 +112,23 @@ export function campfire() {
                 set_index(selected_index + direction);
             }, { passive: false });
 
-            let try_index = 3;
-            if (try_index > max_index) try_index = 0;
-
-            set_index(try_index);
+            set_index(0);
         });
 
     function set_index(index: number) {
         if (index > max_index) index = 0;
         else if (index < 0) index = max_index;
 
-        album_elements.forEach((album, album_index) => {
-            album.setAttribute('aria-checked', (album_index == index).toString());
-        });
-
         previous_index = selected_index;
         selected_index = index;
         items_container.style.setProperty('--selected-index', index.toString());
+
+        album_elements.forEach((album, album_index) => {
+          album.setAttribute('aria-checked', (album_index == index).toString());
+
+          const position = get_loop_index(album_index, selected_index, max_index);
+          album.style.setProperty('--loop-index', position.toString());
+        });
 
         const album = albums[index];
 
@@ -292,4 +294,13 @@ function campfire_friend(friend: string) {
     });
 
     return elem;
+}
+
+function get_loop_index(index: number, selected: number, max: number): number {
+  let diff = index - selected;
+
+  if (diff > (max + 1) / 2) diff -= max + 1;
+  else if (diff < -(max + 1) / 2) diff += max + 1;
+
+  return diff;
 }
