@@ -12,12 +12,21 @@
   overflow: hidden;
 
   max-height: 606px;
+
+  @media (max-width: 980px) {
+    flex-direction: column;
+    max-height: unset;
+  }
 }
 
 .campfire-panel-main {
   width: var(--cards-main-width);
 
   z-index: 3;
+
+  @media (max-width: 980px) {
+    width: unset;
+  }
 }
 
 .campfire-panel-side {
@@ -27,8 +36,12 @@
 
   z-index: 3;
 
-  &:hover {
-    overflow-y: auto;
+  overflow-y: auto;
+  scrollbar-width: thin;
+
+  @media (max-width: 980px) {
+    width: unset;
+    max-height: 500px;
   }
 }
 
@@ -63,7 +76,8 @@
     position: relative;
 
     @media (max-width: 600px) {
-        --w: 230px;
+      padding: 40px 0;
+      --w: 210px;
     }
 
     --mask: linear-gradient(90deg, transparent, white 10%, white 90%, transparent);
