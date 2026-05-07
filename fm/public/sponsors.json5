@@ -52,7 +52,7 @@
             sponsor: false,
             badges: [
                 {
-                    type: "kitty",
+                    icon: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLWNhdCI+PHBhdGggc3Ryb2tlPSJub25lIiBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIiAvPjxwYXRoIGQ9Ik0yMCAzdjEwYTggOCAwIDEgMSAtMTYgMHYtMTBsMy40MzIgMy40MzJhNy45NjMgNy45NjMgMCAwIDEgNC41NjggLTEuNDMyYzEuNzY5IDAgMy40MDMgLjU3NCA0LjcyOCAxLjU0NmwzLjI3MiAtMy41NDYiIC8+PHBhdGggZD0iTTIgMTZoNWwtNCA0IiAvPjxwYXRoIGQ9Ik0yMiAxNmgtNWw0IDQiIC8+PHBhdGggZD0iTTExIDE2YTEgMSAwIDEgMCAyIDBhMSAxIDAgMSAwIC0yIDAiIC8+PHBhdGggZD0iTTkgMTF2LjAxIiAvPjxwYXRoIGQ9Ik0xNSAxMXYuMDEiIC8+PC9zdmc+",
                     name: "its a kitty!!",
                     hue: 0,
                     sat: 0,
@@ -64,7 +64,7 @@
             sponsor: false,
             badges: [
                 {
-                    type: "kitty",
+                    icon: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLWNhdCI+PHBhdGggc3Ryb2tlPSJub25lIiBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIiAvPjxwYXRoIGQ9Ik0yMCAzdjEwYTggOCAwIDEgMSAtMTYgMHYtMTBsMy40MzIgMy40MzJhNy45NjMgNy45NjMgMCAwIDEgNC41NjggLTEuNDMyYzEuNzY5IDAgMy40MDMgLjU3NCA0LjcyOCAxLjU0NmwzLjI3MiAtMy41NDYiIC8+PHBhdGggZD0iTTIgMTZoNWwtNCA0IiAvPjxwYXRoIGQ9Ik0yMiAxNmgtNWw0IDQiIC8+PHBhdGggZD0iTTExIDE2YTEgMSAwIDEgMCAyIDBhMSAxIDAgMSAwIC0yIDAiIC8+PHBhdGggZD0iTTkgMTF2LjAxIiAvPjxwYXRoIGQ9Ik0xNSAxMXYuMDEiIC8+PC9zdmc+",
                     name: "its a kitty!!",
                     hue: 206,
                     sat: 1,
@@ -76,7 +76,7 @@
             contributor: true,
             badges: [
                 {
-                    type: "kitty",
+                    icon: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLWNhdCI+PHBhdGggc3Ryb2tlPSJub25lIiBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIiAvPjxwYXRoIGQ9Ik0yMCAzdjEwYTggOCAwIDEgMSAtMTYgMHYtMTBsMy40MzIgMy40MzJhNy45NjMgNy45NjMgMCAwIDEgNC41NjggLTEuNDMyYzEuNzY5IDAgMy40MDMgLjU3NCA0LjcyOCAxLjU0NmwzLjI3MiAtMy41NDYiIC8+PHBhdGggZD0iTTIgMTZoNWwtNCA0IiAvPjxwYXRoIGQ9Ik0yMiAxNmgtNWw0IDQiIC8+PHBhdGggZD0iTTExIDE2YTEgMSAwIDEgMCAyIDBhMSAxIDAgMSAwIC0yIDAiIC8+PHBhdGggZD0iTTkgMTF2LjAxIiAvPjxwYXRoIGQ9Ik0xNSAxMXYuMDEiIC8+PC9zdmc+",
                     name: "its a kitty!!",
                     hue: 333,
                     sat: 1,
@@ -88,7 +88,7 @@
             sponsor: false,
             badges: [
                 {
-                    type: "kitty",
+                    icon: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLWNhdCI+PHBhdGggc3Ryb2tlPSJub25lIiBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIiAvPjxwYXRoIGQ9Ik0yMCAzdjEwYTggOCAwIDEgMSAtMTYgMHYtMTBsMy40MzIgMy40MzJhNy45NjMgNy45NjMgMCAwIDEgNC41NjggLTEuNDMyYzEuNzY5IDAgMy40MDMgLjU3NCA0LjcyOCAxLjU0NmwzLjI3MiAtMy41NDYiIC8+PHBhdGggZD0iTTIgMTZoNWwtNCA0IiAvPjxwYXRoIGQ9Ik0yMiAxNmgtNWw0IDQiIC8+PHBhdGggZD0iTTExIDE2YTEgMSAwIDEgMCAyIDBhMSAxIDAgMSAwIC0yIDAiIC8+PHBhdGggZD0iTTkgMTF2LjAxIiAvPjxwYXRoIGQ9Ik0xNSAxMXYuMDEiIC8+PC9zdmc+",
                     name: "its a kitty!!",
                     hue: 255,
                     sat: 1,
@@ -100,7 +100,7 @@
             sponsor: false,
             badges: [
                 {
-                    type: "kitty",
+                    icon: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLWNhdCI+PHBhdGggc3Ryb2tlPSJub25lIiBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIiAvPjxwYXRoIGQ9Ik0yMCAzdjEwYTggOCAwIDEgMSAtMTYgMHYtMTBsMy40MzIgMy40MzJhNy45NjMgNy45NjMgMCAwIDEgNC41NjggLTEuNDMyYzEuNzY5IDAgMy40MDMgLjU3NCA0LjcyOCAxLjU0NmwzLjI3MiAtMy41NDYiIC8+PHBhdGggZD0iTTIgMTZoNWwtNCA0IiAvPjxwYXRoIGQ9Ik0yMiAxNmgtNWw0IDQiIC8+PHBhdGggZD0iTTExIDE2YTEgMSAwIDEgMCAyIDBhMSAxIDAgMSAwIC0yIDAiIC8+PHBhdGggZD0iTTkgMTF2LjAxIiAvPjxwYXRoIGQ9Ik0xNSAxMXYuMDEiIC8+PC9zdmc+",
                     name: "its a kitty!!",
                     hue: 245,
                     sat: 1,
