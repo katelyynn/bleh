@@ -8,8 +8,9 @@ import { Hole, html, render } from 'lighterhtml';
 import { load_profile_cache_externally, open_starred_friend_window } from '../profile/profile';
 import { load_recent_tracks } from '../home';
 import tippy from 'tippy.js';
-import { is_sponsor } from '@/components/sponsor';
+import { is_sponsor, sponsor } from '@/components/sponsor';
 import { DateTime } from 'luxon';
+import { icon, icons } from '@/components/shared/icon';
 
 interface album {
     image: string,
@@ -70,6 +71,7 @@ export function campfire() {
   page.structure.row.insertBefore(container, page.structure.content);
 
   campfire_extended(campfire_side);
+  campfire_cta(container);
 
   let albums: album[] = [];
   let album_elements: { elem: HTMLElement, index: number }[] = [];
@@ -367,4 +369,38 @@ function get_loop_index(index: number, selected: number, max: number): number {
   else if (diff < -(max + 1) / 2) diff += max + 1;
 
   return diff;
+}
+
+function campfire_cta(container: Element) {
+  container.after(html.node`
+    <div class="campfire-cta">
+      <a class="btn campfire-cta-btn" href="${root}bleh/minis/collage?type=albums&timeframe=date_preset=LAST_30_DAYS">
+        <div class="campfire-cta-icon colourful">
+          ${icon({ name: icons.collage })}
+        </div>
+        <div class="campfire-cta-text">
+          <strong class="campfire-cta-text-head">${tl(trans.collage_cta.name)}</strong>
+          <p class="campfire-cta-text-sub">${tl(trans.collage_cta.body)}</p>
+        </div>
+      </a>
+      <a class="btn campfire-cta-btn" href="${root}bleh/minis/compare">
+        <div class="campfire-cta-icon colourful">
+          ${icon({ name: icons.compare })}
+        </div>
+        <div class="campfire-cta-text">
+          <strong class="campfire-cta-text-head">${tl(trans.compare_cta.name)}</strong>
+          <p class="campfire-cta-text-sub">${tl(trans.compare_cta.body)}</p>
+        </div>
+      </a>
+      <button class="btn campfire-cta-btn" onclick=${() => sponsor()}>
+        <div class="campfire-cta-icon colourful sponsor">
+          ${icon({ name: icons.sponsor })}
+        </div>
+        <div class="campfire-cta-text">
+          <strong class="campfire-cta-text-head">${tl(trans.sponsor)}</strong>
+          <p class="campfire-cta-text-sub">${tl(trans.sponsor_cta.body)}</p>
+        </div>
+      </button>
+    </div>
+  `);
 }

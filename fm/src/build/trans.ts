@@ -11128,6 +11128,27 @@ export const trans = {
     },
     better_with_friends: {
         en: 'Music is better with friends, {a}add to your close friends list{/a}'
+    },
+    collage_cta: {
+        name: {
+            en: 'Create a collage'
+        },
+        body: {
+            en: 'Featuring your favourite albums in the last month'
+        }
+    },
+    compare_cta: {
+        name: {
+            en: 'Compare with your friends'
+        },
+        body: {
+            en: 'Which music do you have in common?'
+        }
+    },
+    sponsor_cta: {
+        body: {
+            en: 'Help out the future of bleh'
+        }
     }
 } as const satisfies Record<string, any>;
 

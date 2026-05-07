@@ -281,3 +281,40 @@
     margin: unset;
     padding: var(--card-padding) 0;
 }
+
+
+.campfire-cta {
+  padding: var(--card-padding) calc(var(--card-padding) - 12px);
+  background-color: color-mix(in oklch, oklch(var(--b4)) 40%, oklch(var(--b5)));
+
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: var(--card-gap);
+}
+
+.campfire-cta-icon {
+  width: 34px;
+  height: 34px;
+  background: oklch(var(--h4) / 20%);
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: oklch(var(--l3-c));
+  --mask-colour: currentColor;
+  --icon: var(--mask);
+  --icon-size: 16px;
+}
+
+.campfire-cta-btn {
+  display: flex;
+  gap: 10px;
+
+  --bg: transparent;
+  --bg-hov: oklch(var(--b4) / 60%);
+  --bg-atv: oklch(var(--b4) / 80%);
+  --padding: 10px 12px;
+  --shadow: none;
+
+  text-align: left;
+}
