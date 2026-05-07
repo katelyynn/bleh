@@ -52,6 +52,7 @@
 
   position: absolute;
   inset: 0;
+  background-color: oklch(var(--b4));
   background-size: cover;
   background-position: center;
 
@@ -166,12 +167,11 @@
                   transform: scaleY(-1);
                   aspect-ratio: 1 / 1;
 
-                  --mask: linear-gradient(180deg, transparent 30%, white);
+                  --mask: linear-gradient(180deg, transparent 50%, white);
                   mask-image: var(--mask);
                   -webkit-mask-image: var(--mask);
 
-                  opacity: 0.25;
-                  filter: brightness(60%);
+                  opacity: 0.2;
 
                   z-index: -1;
 
