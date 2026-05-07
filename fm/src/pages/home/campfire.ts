@@ -255,7 +255,6 @@ function campfire_extended(container: HTMLElement) {
 }
 
 function campfire_friend(friend: string, own = false) {
-    let cover_art: HTMLElement;
     let track_info: HTMLElement;
     let user_avatar: HTMLElement;
     let user_name: HTMLElement;
@@ -272,7 +271,9 @@ function campfire_friend(friend: string, own = false) {
                     <span class="track-time" ref=${el => track_time = el} />
                 </div>
                 <div class="user-about track" ref=${el => track_info = el}>
-                    <p>${tl(trans.loading)}</p>
+                  <div class="status">
+                      <div class="status-image smaller" />
+                  </div>
                 </div>
             </div>
         </div>
