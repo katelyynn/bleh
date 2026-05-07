@@ -131,6 +131,7 @@ export function campfire() {
             }}>
               <div class="campfire-item-cover">
                 <img src=${album.image} alt=${album.corrected_title} />
+                <div class="campfire-item-cover-reflection" style="background-image: url(${album.image})" />
               </div>
             </div>
           `;

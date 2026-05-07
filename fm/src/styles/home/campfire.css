@@ -109,13 +109,13 @@
                 border-radius: var(--item-big-radius);
                 background: oklch(var(--b4));
                 box-shadow: var(--card-shadow);
-                overflow: hidden;
 
                 position: relative;
 
                 & > img {
                     width: 100%;
                     --mask-size: var(--cover-size-400);
+                    border-radius: inherit;
                     user-select: none;
                     -webkit-user-drag: none;
                     pointer-events: none;
@@ -147,10 +147,29 @@
                     box-shadow: unset !important;
                     border-radius: inherit;
                 }
+
+                .campfire-item-cover-reflection {
+                  position: absolute;
+                  inset: 100% 0 0 0;
+                  background-size: cover;
+                  border-radius: inherit;
+                  transform: scaleY(-1);
+                  aspect-ratio: 1 / 1;
+
+                  --mask: linear-gradient(180deg, transparent 30%, white);
+                  mask-image: var(--mask);
+                  -webkit-mask-image: var(--mask);
+
+                  opacity: 0.3;
+
+                  z-index: -1;
+
+                  pointer-events: none;
+                }
             }
 
             &[aria-checked="false"] {
-                opacity: 0.2;
+                opacity: 0.6;
                 transform: var(--offset) scale(0.65);
 
                 cursor: pointer;
