@@ -70,12 +70,12 @@
             cursor: default;
             position: relative;
 
-            & > p {
+            & > .user-name-inner {
                 flex: 1;
-                color: oklch(var(--c2) / 80%);
+                color: oklch(var(--l3-c) / 80%);
 
                 & > strong {
-                    color: oklch(var(--c2));
+                    color: oklch(var(--l3-c));
                     font-weight: var(--font-weight-medium);
                 }
             }

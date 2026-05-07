@@ -251,9 +251,8 @@ function campfire_friend(friend: string) {
           </div>
             <div class="user-info">
                 <div class="user-name">
-                    <p ref=${el => user_name = el}>@${friend}</p>
+                    <a class="user-name-inner" href="${root}user/${friend}" ref=${el => user_name = el}>@${friend}</a>
                     <span class="track-time" ref=${el => track_time = el} />
-                    <a class="link-block-cover-link" href="${root}user/${friend}" />
                 </div>
                 <div class="user-about track" ref=${el => track_info = el}>
                     <p>${tl(trans.loading)}</p>

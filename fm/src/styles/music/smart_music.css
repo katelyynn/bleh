@@ -1,5 +1,5 @@
 .smart-title {
-    display: flex;
+    display: flex !important;
     flex-wrap: wrap;
     gap: 2px 6px;
 }

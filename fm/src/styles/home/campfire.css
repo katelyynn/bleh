@@ -22,7 +22,7 @@
 
 .campfire-panel-side {
   width: var(--cards-sidebar-width);
-  background: oklch(var(--b5) / 80%);
+  background: oklch(var(--b5) / 60%);
 
   z-index: 3;
 
@@ -65,6 +65,10 @@
         --w: 230px;
     }
 
+    --mask: linear-gradient(90deg, transparent, white 10%, white 90%, transparent);
+    mask-image: var(--mask);
+    -webkit-mask-image: var(--mask);
+
     & > .campfire-items {
         position: relative;
         height: var(--w);
@@ -77,11 +81,11 @@
             gap: var(--card-gap);
 
             position: absolute;
-            top: 50%;
+            top: 0;
+            left: 50%;
 
-            --offset: translateY(calc((var(--index) - var(--selected-index)) * (var(--w) + var(--gap)) - var(--w) / 2));
+            --offset: translateX(calc((var(--index) - var(--selected-index)) * (var(--w) + var(--gap)) - var(--w) / 2));
 
-            left: 0;
             transform: var(--offset);
 
             & > .campfire-item-cover {
@@ -142,7 +146,7 @@
             }
 
             &[aria-checked="true"] {
-                z-index: 20;
+                z-index: 30;
             }
 
             transition-property: transform, opacity, filter;
@@ -152,7 +156,7 @@
     }
 
     & > .campfire-intro {
-        z-index: 11;
+        z-index: 21;
         filter: var(--header-filter-shadow);
     }
 
@@ -161,7 +165,7 @@
         flex-direction: column;
         gap: 5px;
         text-align: center;
-        z-index: 11;
+        z-index: 21;
         filter: var(--header-filter-shadow);
 
         & > .campfire-title {
