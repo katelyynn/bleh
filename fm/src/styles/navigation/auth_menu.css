@@ -202,6 +202,10 @@
 
     flex-shrink: 0;
 
+    &.smaller {
+        --size: 40px;
+    }
+
     & > img {
         width: 100%;
         height: 100%;
@@ -218,6 +222,10 @@
     cursor: default;
     position: relative;
     z-index: 20;
+
+    &.smaller {
+        font-size: 13px;
+    }
 
     & > .artist > a,
     & > a {

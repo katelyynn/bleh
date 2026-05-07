@@ -322,39 +322,41 @@ export function bleh_home_legacy() {
     window.location.href = `${root}music`;
 }
 
-export async function load_recent_tracks(name) {
-    return new Promise((resolve, reject) => {
-        fetch(`${root}user/${name}/partial/recenttracks?ajax=1`)
-            .then(function (response) {
-                console.log('returned', response, response.text);
+export async function load_recent_tracks(name: string) {
+  return new Promise((resolve, reject) => {
+    fetch(`${root}user/${name}/partial/recenttracks?ajax=1`)
+      .then(function (response) {
+        console.log('returned', response, response.text);
 
-                return response.text();
-            })
-            .then(function (dom) {
-                let doc = new DOMParser().parseFromString(dom, 'text/html');
-                console.log('DOC', doc);
+        return response.text();
+      })
+      .then(function (dom) {
+        let doc = new DOMParser().parseFromString(dom, 'text/html');
+        console.log('DOC', doc);
 
-                let tracks = [];
-                const track_list = doc.querySelectorAll('.chartlist-row');
-                if (track_list.length > 0) {
-                    track_list.forEach(track => {
-                        let item = {};
+        let tracks = [];
+        const track_list = doc.querySelectorAll('.chartlist-row');
+        if (track_list.length > 0) {
+          track_list.forEach(track => {
+            let item = {};
 
-                        item.avatar = track.querySelector('.chartlist-image img');
-                        if (item.avatar)
-                            item.avatar = item.avatar.src;
+            item.avatar = track.querySelector('.chartlist-image img');
+            if (item.avatar)
+                item.avatar = item.avatar.src;
 
-                        item.name = track.querySelector('.chartlist-name a').textContent.trim();
-                        item.sister = track.querySelector('.chartlist-artist a').textContent.trim();
+            item.name = track.querySelector('.chartlist-name a').textContent.trim();
+            item.sister = track.querySelector('.chartlist-artist a').textContent.trim();
 
-                        item.time = track.querySelector('.chartlist-timestamp > span:not(.chartlist-now-scrobbling)')?.textContent.trim();
+            item.time = Number(track.getAttribute('data-timestamp'));
 
-                        tracks.push(item);
-                    });
-                }
+            item.live = track.querySelector('.chartlist-timestamp > .chartlist-now-scrobbling') != null;
 
-                resolve(tracks);
-            })
-            .catch(reject);
-    });
+            tracks.push(item);
+          });
+        }
+
+        resolve(tracks);
+      })
+      .catch(reject);
+  });
 }

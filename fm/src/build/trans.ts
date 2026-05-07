@@ -11125,6 +11125,9 @@ export const trans = {
             ru: 'Управлять направлением прогресс-бара и текста',
             it: 'Controlla la direzione della barra di avanzamento e del testo',
         }
+    },
+    better_with_friends: {
+        en: 'Music is better with friends, {a}add to your close friends list{/a}'
     }
 } as const satisfies Record<string, any>;
 

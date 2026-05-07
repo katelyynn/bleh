@@ -1,6 +1,56 @@
+.campfire-panels {
+  display: flex;
+  gap: 1px;
+  position: relative;
+
+  border-radius: inherit;
+  border-bottom-left-radius: unset;
+  border-bottom-right-radius: unset;
+
+  background-color: oklch(var(--b5));
+
+  overflow: hidden;
+
+  max-height: 606px;
+}
+
+.campfire-panel-main {
+  width: var(--cards-main-width);
+
+  z-index: 3;
+}
+
+.campfire-panel-side {
+  width: var(--cards-sidebar-width);
+  background: oklch(var(--b5) / 80%);
+
+  z-index: 3;
+
+  &:hover {
+    overflow-y: auto;
+  }
+}
+
+.campfire-bg {
+  &.previous {
+      display: none;
+  }
+
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+
+  --mask: linear-gradient(180deg, transparent, white, transparent);
+  mask-image: var(--mask);
+  -webkit-mask-image: var(--mask);
+
+  opacity: 0.2;
+}
+
 .campfire {
     --w: 260px;
-    --gap: -50px;
+    --gap: -80px;
     padding: 80px 0;
     overflow: hidden;
 
@@ -9,37 +59,16 @@
     align-items: center;
     gap: 40px;
 
-    background: oklch(var(--b5)) !important;
-    border-radius: inherit;
-    border-bottom-left-radius: unset;
-    border-bottom-right-radius: unset;
-
     position: relative;
 
     @media (max-width: 600px) {
         --w: 230px;
     }
 
-    & > .campfire-bg {
-        &.previous {
-            display: none;
-        }
-
-        position: absolute;
-        inset: 0;
-        background-size: cover;
-        background-position: center;
-
-        --mask: linear-gradient(180deg, transparent, white, transparent);
-        mask-image: var(--mask);
-        -webkit-mask-image: var(--mask);
-
-        opacity: 0.2;
-    }
-
     & > .campfire-items {
         position: relative;
         height: var(--w);
+        width: var(--w);
         z-index: 10;
 
         & > .campfire-item {
@@ -48,11 +77,11 @@
             gap: var(--card-gap);
 
             position: absolute;
-            top: 0;
+            top: 50%;
 
-            --offset: translateX(calc((var(--index) - var(--selected-index)) * (var(--w) + var(--gap)) - var(--w) / 2));
+            --offset: translateY(calc((var(--index) - var(--selected-index)) * (var(--w) + var(--gap)) - var(--w) / 2));
 
-            left: 50%;
+            left: 0;
             transform: var(--offset);
 
             & > .campfire-item-cover {
@@ -102,13 +131,13 @@
             }
 
             &[aria-checked="false"] {
-                opacity: 0.4;
-                transform: var(--offset) scale(0.7);
+                opacity: 0.2;
+                transform: var(--offset) scale(0.65);
 
                 cursor: pointer;
 
                 &:active {
-                  transform: var(--offset) scale(0.65);
+                  transform: var(--offset) scale(0.6);
                 }
             }
 
@@ -124,7 +153,7 @@
 
     & > .campfire-intro {
         z-index: 11;
-        display: none;
+        filter: var(--header-filter-shadow);
     }
 
     & > .campfire-details {
@@ -133,6 +162,7 @@
         gap: 5px;
         text-align: center;
         z-index: 11;
+        filter: var(--header-filter-shadow);
 
         & > .campfire-title {
             font-size: 20px;
@@ -195,7 +225,6 @@
 
 
 .friends-panel {
-    background: oklch(var(--b5));
     margin: unset;
     padding: var(--card-padding);
 }

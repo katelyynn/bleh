@@ -9,6 +9,7 @@ import { load_profile_cache_externally, open_starred_friend_window } from '../pr
 import { load_recent_tracks } from '../home';
 import tippy from 'tippy.js';
 import { is_sponsor } from '@/components/sponsor';
+import { DateTime } from 'luxon';
 
 interface album {
     image: string,
@@ -31,20 +32,31 @@ export function campfire() {
   let real_index = 0;
   let is_wrapping = false;
 
+  let campfire_top;
+  let campfire_main;
+  let campfire_side;
   const container = html.node`
-    <div class="campfire">
-      <div class="campfire-intro">
-        <h2 class="music-section-heading">${tl(trans.your_recent_30_days)}</h2>
-      </div>
-      <div class="campfire-items" ref=${el => items_container = el} />
-      <div class="campfire-details" ref=${el => item_details = el} />
+    <div class="campfire-panels">
       <div class="campfire-bg current" ref=${el => current_bg = el} />
-      <div class="campfire-bg previous" ref=${el => previous_bg = el} />
+      <div class="campfire-panel-main" ref=${el => campfire_main = el}>
+        <div class="campfire" ref=${el => campfire_top = el}>
+          <div class="campfire-intro">
+            <h2 class="music-section-heading">${tl(trans.your_recent_30_days)}</h2>
+          </div>
+          <div class="campfire-items" ref=${el => items_container = el} />
+          <div class="campfire-details" ref=${el => item_details = el} />
+          <div class="campfire-bg previous" ref=${el => previous_bg = el} />
+        </div>
+      </div>
+      <div class="campfire-panel-side" ref=${el => campfire_side = el}>
+
+      </div>
     </div>
   `;
+
   page.structure.row.insertBefore(container, page.structure.content);
 
-  campfire_extended(container);
+  campfire_extended(campfire_side);
 
   let albums: album[] = [];
   let album_elements: { elem: HTMLElement, index: number }[] = [];
@@ -117,7 +129,7 @@ export function campfire() {
       `);
 
       let timeout;
-      container.addEventListener('wheel', e => {
+      campfire_top.addEventListener('wheel', e => {
         e.preventDefault();
         if (timeout) return;
 
@@ -199,7 +211,7 @@ function campfire_extended(container: HTMLElement) {
 
     let summary;
 
-    container.after(html.node`
+    container.appendChild(html.node`
         <section class="friends-panel">
             <h2>${tl(trans.scrobbling_now)}</h2>
             ${friends.length > 0 ? html.node`
@@ -209,7 +221,7 @@ function campfire_extended(container: HTMLElement) {
             ` : html.node`
                 <div class="placeholder-block">
                     <div class="placeholder-head">ദ്ദി◝ ⩊ ◜.ᐟ</div>
-                    <div class="placeholder-summary" ref=${el => summary = el}>${{html: tl(trans.better_with_friends, { a: `<a>`, '/a': '</a>' }) }}</div>
+                  <div class="placeholder-summary" ref=${el => summary = el}>${{html: tl(trans.better_with_friends, { a: `<a>`, '/a': '</a>' }) }}</div>
                 </div>
             `}
         </section>
@@ -234,21 +246,18 @@ function campfire_friend(friend: string) {
 
     const elem = html.node`
         <div class="user friend hidden-user" data-live="false">
-            <div class="user-avatar cover-art" ref=${el => cover_art = el}>
-                <div class="bleh-icon loading-spinner" />
-            </div>
+          <div class="user-avatar avatar" ref=${el => user_avatar = el}>
+              <div class="bleh-icon loading-spinner" />
+          </div>
             <div class="user-info">
                 <div class="user-name">
-                    <div class="avatar" ref=${el => user_avatar = el}>
-                        <div class="bleh-icon loading-spinner" />
-                    </div>
                     <p ref=${el => user_name = el}>@${friend}</p>
+                    <span class="track-time" ref=${el => track_time = el} />
                     <a class="link-block-cover-link" href="${root}user/${friend}" />
                 </div>
                 <div class="user-about track" ref=${el => track_info = el}>
                     <p>${tl(trans.loading)}</p>
                 </div>
-                <div class="user-time" ref=${el => track_time = el} />
             </div>
         </div>
     `;
@@ -295,33 +304,27 @@ function campfire_friend(friend: string) {
                     `);
                 }
 
-                if (item.time) {
-                    track_time.textContent = item.time;
+                if (!item.live) {
+                    track_time.textContent = DateTime.fromSeconds(item.time).toRelative();
                 } else {
                     elem.classList.remove('hidden-user');
                     track_time.textContent = tl(trans.scrobbling_now);
+                    track_time.setAttribute('data-live', 'true');
 
                     elem.setAttribute('data-live', 'true');
                 }
 
-                render(cover_art, html`
-                    <img src=${item.avatar} alt=${name}>
-                    <a class="link-block-cover-link" href="${root}music/${item.sister}/_/${item.name}" />
+                render(track_info, html`
+                  <div class="status">
+                      <div class="status-image smaller">
+                          <img src=${item.avatar} alt=${name}>
+                      </div>
+                      <div class="status-info">
+                          <strong class="status-text status-title smaller"><a class="smart-title" href="${root}music/${redirect()}${sanitise(item.sister)}/_/${sanitise(item.name)}">${name}</a></strong>
+                          <p class="status-text status-artist smaller"><span class="artist">${sister}</span></p>
+                      </div>
+                  </div>
                 `);
-
-                const track_elem = html.node`
-                    <a class="wiki-link icon" data-link-type="track" href="${root}music/${item.sister}/_/${item.name}">${name}</a>
-                `;
-
-                tippy(track_elem, {
-                    theme: 'name-sister-combo',
-                    content: html.node`
-                        <span class="name">${{ html: track_elem.innerHTML }}</span>
-                        <span class="sister">${sister}</span>
-                    `
-                });
-
-                render(track_info, track_elem);
             }
         });
     });
