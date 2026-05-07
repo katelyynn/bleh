@@ -20,147 +20,178 @@ interface album {
 }
 
 export function campfire() {
-    let selected_index = 0;
-    let previous_index = 0;
-    let max_index = 0;
-    let items_container: HTMLElement;
-    let item_details: HTMLElement;
-    let current_bg: HTMLElement;
-    let previous_bg: HTMLElement;
+  let previous_index = 0;
+  let max_index = 0;
+  let items_container: HTMLElement;
+  let item_details: HTMLElement;
+  let current_bg: HTMLElement;
+  let previous_bg: HTMLElement;
 
-    const container = html.node`
-        <div class="campfire">
-            <div class="campfire-intro">
-                <h2 class="music-section-heading">${tl(trans.your_recent_30_days)}</h2>
-            </div>
-            <div class="campfire-items" ref=${el => items_container = el} />
-            <div class="campfire-details" ref=${el => item_details = el} />
-            <div class="campfire-bg current" ref=${el => current_bg = el} />
-            <div class="campfire-bg previous" ref=${el => previous_bg = el} />
-        </div>
-    `;
-    page.structure.row.insertBefore(container, page.structure.content);
+  let visual_index = 0;
+  let real_index = 0;
+  let is_wrapping = false;
 
-    campfire_extended(container);
+  const container = html.node`
+    <div class="campfire">
+      <div class="campfire-intro">
+        <h2 class="music-section-heading">${tl(trans.your_recent_30_days)}</h2>
+      </div>
+      <div class="campfire-items" ref=${el => items_container = el} />
+      <div class="campfire-details" ref=${el => item_details = el} />
+      <div class="campfire-bg current" ref=${el => current_bg = el} />
+      <div class="campfire-bg previous" ref=${el => previous_bg = el} />
+    </div>
+  `;
+  page.structure.row.insertBefore(container, page.structure.content);
 
-    let albums: album[] = [];
-    let album_elements: HTMLElement[] = [];
+  campfire_extended(container);
 
-    fetch(`${root}user/${auth.name}/partial/albums?albums_date_preset=LAST_30_DAYS&ajax=1`)
-        .then(function (response) {
-            console.log('returned', response, response.text);
+  let albums: album[] = [];
+  let album_elements: { elem: HTMLElement, index: number }[] = [];
 
-            return response.text();
-        })
-        .then(function (dom) {
-            let doc = new DOMParser().parseFromString(dom, 'text/html');
-            console.log('DOC', doc);
+  fetch(`${root}user/${auth.name}/partial/albums?albums_date_preset=LAST_30_DAYS&ajax=1`)
+    .then(function (response) {
+      console.log('returned', response, response.text);
 
-            const items = doc.querySelectorAll('.grid-items > .grid-items-item');
-            items.forEach(item => {
-                const image = item.querySelector('.grid-items-cover-image-image img').src;
-                const title = item.querySelector('.grid-items-item-main-text a').textContent;
-                const artist = item.querySelector('.grid-items-item-aux-block').textContent;
-                const plays = item.querySelector('.grid-items-item-aux-text a:last-child').textContent.trim();
+      return response.text();
+    })
+    .then(function (dom) {
+      let doc = new DOMParser().parseFromString(dom, 'text/html');
+      console.log('DOC', doc);
 
-                let corrected_title = romanise(correct_item_by_artist(title, artist));
-                let corrected_artist = romanise(correct_artist(artist));
+      const items = doc.querySelectorAll('.grid-items > .grid-items-item');
+      items.forEach(item => {
+        const image = item.querySelector('.grid-items-cover-image-image img').src;
+        const title = item.querySelector('.grid-items-item-main-text a').textContent;
+        const artist = item.querySelector('.grid-items-item-aux-block').textContent;
+        const plays = item.querySelector('.grid-items-item-aux-text a:last-child').textContent.trim();
 
-                albums.push({
-                    image: image.replace('/avatar300s/', '/500x500/'),
-                    title,
-                    artist,
-                    plays,
-                    corrected_title,
-                    corrected_artist
-                });
-            });
+        let corrected_title = romanise(correct_item_by_artist(title, artist));
+        let corrected_artist = romanise(correct_artist(artist));
 
-            max_index = albums.length - 1;
-
-            items_container.style.setProperty('--max-index', max_index.toString());
-
-            render(items_container, html`
-                ${albums.map((album, index) => {
-                    const elem = html.node`
-                        <div class="campfire-item" style="--index: ${index}" onclick=${() => {
-                            if (selected_index != index) set_index(index);
-                        }}>
-                            <div class="campfire-item-cover">
-                                <img src=${album.image} alt=${album.corrected_title} />
-                            </div>
-                        </div>
-                    `;
-
-                    album_elements.push(elem);
-
-                    return elem;
-                })}
-            `);
-
-            let timeout;
-            container.addEventListener('wheel', e => {
-                e.preventDefault();
-                if (timeout) return;
-
-                timeout = setTimeout(() => {
-                    timeout = null;
-                }, 0.15);
-
-                const direction = Math.sign(e.deltaY);
-                if (direction == 0) return;
-                set_index(selected_index + direction);
-            }, { passive: false });
-
-            set_index(0);
+        albums.push({
+          image: image.replace('/avatar300s/', '/500x500/'),
+          title,
+          artist,
+          plays,
+          corrected_title,
+          corrected_artist
         });
+      });
 
-    function set_index(index: number) {
-        if (index > max_index) index = 0;
-        else if (index < 0) index = max_index;
+      max_index = albums.length - 1;
 
-        previous_index = selected_index;
-        selected_index = index;
-        items_container.style.setProperty('--selected-index', index.toString());
+      visual_index = max_index + 1;
+      real_index = 0;
 
-        album_elements.forEach((album, album_index) => {
-          album.setAttribute('aria-checked', (album_index == index).toString());
+      items_container.style.setProperty('--max-index', max_index.toString());
 
-          const position = get_loop_index(album_index, selected_index, max_index);
-          album.style.setProperty('--loop-index', position.toString());
+      const cloned_albums = [...albums, ...albums, ...albums];
 
-          album.classList.toggle('hide-item', position == -4 || position == 4);
-        });
+      render(items_container, html`
+        ${cloned_albums.map((album, index) => {
+          const item_index = ((index % albums.length) + albums.length) % albums.length;
 
-        const album = albums[index];
+          const elem = html.node`
+            <div class="campfire-item" style="--index: ${index}" onclick=${() => {
+              if (is_wrapping) return;
 
-        current_bg.style.setProperty('background-image', `url(${album.image})`);
+              if (item_index != real_index) {
+                let diff = item_index - real_index;
+                if (diff > (max_index + 1) / 2) diff -= max_index + 1;
+                else if (diff < -(max_index + 1) / 2) diff += max_index + 1;
 
-        console.info('album', album);
-
-        let formatted_title: string | Hole = album.corrected_title;
-        let formatted_artist: string | Hole = album.corrected_artist;
-
-        if (settings.format_guest_features) {
-            const formatted = name_includes(album.title, album.artist);
-
-            formatted_title = smart_title(formatted[0], formatted[1]);
-            formatted_artist = smart_artists(formatted[2], formatted[3]);
-        }
-
-        render(item_details, html``);
-        render(item_details, html`
-            <a class="campfire-title smart-title" href="${root}music/${sanitise(album.artist)}/${sanitise(album.title)}" target="_blank">
-                ${formatted_title}
-            </a>
-            <span class="campfire-artist">
-                ${settings.format_guest_features ? formatted_artist : html.node`<a class="campfire-artist" href="${root}music/${redirect()}${sanitise(album.artist)}" target="_blank">${album.corrected_artist}</a>`}
-            </span>
-            <div class="campfire-plays">
-                ${album.plays}
+                set_index(visual_index + diff);
+              }
+            }}>
+              <div class="campfire-item-cover">
+                <img src=${album.image} alt=${album.corrected_title} />
+              </div>
             </div>
-        `);
+          `;
+
+          album_elements.push({ elem, index: item_index });
+
+          return elem;
+        })}
+      `);
+
+      let timeout;
+      container.addEventListener('wheel', e => {
+        e.preventDefault();
+        if (timeout) return;
+
+        timeout = setTimeout(() => {
+            timeout = null;
+        }, 0.15);
+
+        const direction = Math.sign(e.deltaY);
+        if (direction == 0) return;
+        set_index(visual_index + direction);
+      }, { passive: false });
+
+      set_index(visual_index);
+    });
+
+  function set_index(index: number) {
+    if (is_wrapping) return;
+
+    real_index = ((index % albums.length) + albums.length) % albums.length;
+
+    previous_index = visual_index;
+    visual_index = index;
+
+    items_container.style.setProperty('--selected-index', visual_index.toString());
+
+    album_elements.forEach(({ elem, index: i }) => {
+        elem.setAttribute('aria-checked', (i == real_index).toString());
+    });
+
+    if (visual_index <= max_index || visual_index >= (max_index * 2) + 2) {
+        is_wrapping = true;
+
+        setTimeout(() => {
+            items_container.style.setProperty('--trans-toggle', '0');
+
+            visual_index = real_index + max_index + 1;
+            items_container.style.setProperty('--selected-index', visual_index.toString());
+
+            void items_container.offsetWidth;
+
+            items_container.style.setProperty('--trans-toggle', '1');
+            is_wrapping = false;
+        }, 500);
     }
+
+    const album = albums[real_index];
+
+    current_bg.style.setProperty('background-image', `url(${album.image})`);
+
+    console.info('album', album);
+
+    let formatted_title: string | Hole = album.corrected_title;
+    let formatted_artist: string | Hole = album.corrected_artist;
+
+    if (settings.format_guest_features) {
+      const formatted = name_includes(album.title, album.artist);
+
+      formatted_title = smart_title(formatted[0], formatted[1]);
+      formatted_artist = smart_artists(formatted[2], formatted[3]);
+    }
+
+    render(item_details, html``);
+    render(item_details, html`
+      <a class="campfire-title smart-title" href="${root}music/${sanitise(album.artist)}/${sanitise(album.title)}" target="_blank">
+        ${formatted_title}
+      </a>
+      <span class="campfire-artist">
+        ${settings.format_guest_features ? formatted_artist : html.node`<a class="campfire-artist" href="${root}music/${redirect()}${sanitise(album.artist)}" target="_blank">${album.corrected_artist}</a>`}
+      </span>
+      <div class="campfire-plays">
+        ${album.plays}
+      </div>
+    `);
+  }
 }
 
 function campfire_extended(container: HTMLElement) {

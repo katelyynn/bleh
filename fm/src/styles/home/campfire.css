@@ -50,14 +50,10 @@
             position: absolute;
             top: 0;
 
-            --offset: translateX(calc(var(--loop-index) * (var(--w) + var(--gap)) - var(--w) / 2));
+            --offset: translateX(calc((var(--index) - var(--selected-index)) * (var(--w) + var(--gap)) - var(--w) / 2));
 
             left: 50%;
             transform: var(--offset);
-
-            &.hide-item {
-              opacity: 0 !important;
-            }
 
             & > .campfire-item-cover {
                 width: var(--w);
@@ -121,7 +117,7 @@
             }
 
             transition-property: transform, opacity, filter;
-            transition-duration: 0.5s;
+            transition-duration: calc(var(--trans-toggle, 1) * 0.5s);
             transition-timing-function: var(--trans-function);
         }
     }
