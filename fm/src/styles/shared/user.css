@@ -453,13 +453,13 @@
     }
 
     & > .top-track {
-        display: inline-flex;
+        display: inline-flex !important;
     }
 }
 
 .has-featured-track {
     & > .top-track {
-        display: inline-flex;
+        display: inline-flex !important;
     }
 }
 
