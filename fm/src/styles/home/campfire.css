@@ -64,7 +64,7 @@
 
 .campfire {
     --w: 260px;
-    --gap: -80px;
+    --gap: -60px;
     padding: 80px 0;
     overflow: hidden;
 
@@ -90,6 +90,8 @@
         width: var(--w);
         z-index: 10;
 
+        perspective: 1000px;
+
         & > .campfire-item {
             display: flex;
             flex-direction: column;
@@ -101,16 +103,24 @@
 
             --offset: translateX(calc((var(--index) - var(--selected-index)) * (var(--w) + var(--gap)) - var(--w) / 2));
 
-            transform: var(--offset);
+            transform: var(--offset) var(--rotate);
+            --rotate: rotateY(calc(var(--proximity) * -15deg));
+            transform-style: preserve-3d;
+
+            background-color: oklch(var(--b6));
+            border-radius: var(--item-big-radius);
 
             & > .campfire-item-cover {
                 width: var(--w);
                 height: var(--w);
-                border-radius: var(--item-big-radius);
+                border-radius: inherit;
                 background: oklch(var(--b4));
-                box-shadow: var(--card-shadow);
 
                 position: relative;
+
+                transition-property: box-shadow, opacity;
+                transition-duration: calc(var(--trans-toggle, 1) * 0.5s);
+                transition-timing-function: var(--trans-function);
 
                 & > img {
                     width: 100%;
@@ -160,7 +170,8 @@
                   mask-image: var(--mask);
                   -webkit-mask-image: var(--mask);
 
-                  opacity: 0.3;
+                  opacity: 0.25;
+                  filter: brightness(60%);
 
                   z-index: -1;
 
@@ -169,13 +180,17 @@
             }
 
             &[aria-checked="false"] {
-                opacity: 0.6;
-                transform: var(--offset) scale(0.65);
+                transform: var(--offset) scale(0.65) var(--rotate);
 
                 cursor: pointer;
 
                 &:active {
-                  transform: var(--offset) scale(0.6);
+                  transform: var(--offset) scale(0.6) var(--rotate);
+                }
+
+                & > .campfire-item-cover {
+                  opacity: 0.6;
+                  box-shadow: var(--card-shadow);
                 }
             }
 

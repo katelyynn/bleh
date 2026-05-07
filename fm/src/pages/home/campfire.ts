@@ -170,7 +170,17 @@ export function campfire() {
     items_container.style.setProperty('--selected-index', visual_index.toString());
 
     album_elements.forEach(({ elem, index: i }) => {
-        elem.setAttribute('aria-checked', (i == real_index).toString());
+      elem.setAttribute('aria-checked', (i == real_index).toString());
+
+      let dist = i - real_index;
+
+      if (dist > (max_index + 1) / 2) dist -= max_index + 1;
+      else if (dist < -(max_index + 1) / 2) dist += max_index + 1;
+
+      if (dist > 3) dist = 3;
+      else if (dist < -3) dist = -3;
+
+      elem.style.setProperty('--proximity', dist.toString());
     });
 
     if (visual_index <= max_index || visual_index >= (max_index * 2) + 2) {
