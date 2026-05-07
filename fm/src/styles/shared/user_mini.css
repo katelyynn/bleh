@@ -21,6 +21,9 @@
     &[data-live="true"] {
       order: -1;
     }
+    &[data-own="true"] {
+      order: -2 !important;
+    }
     &[data-live="false"] {
       opacity: 0.6;
 

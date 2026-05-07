@@ -229,11 +229,15 @@ function campfire_extended(container: HTMLElement) {
             <h2>${tl(trans.scrobbling_now)}</h2>
             ${friends.length > 0 ? html.node`
                 <div class="friends">
-                    ${friends.map((friend: string) => campfire_friend(friend))}
+                  ${campfire_friend(auth.name, true)}
+                  ${friends.map((friend: string) => campfire_friend(friend))}
                 </div>
             ` : html.node`
+                <div class="friends">
+                  ${campfire_friend(auth.name, true)}
+                </div>
                 <div class="placeholder-block">
-                    <div class="placeholder-head">ദ്ദി◝ ⩊ ◜.ᐟ</div>
+                  <div class="placeholder-head">ദ്ദി◝ ⩊ ◜.ᐟ</div>
                   <div class="placeholder-summary" ref=${el => summary = el}>${{html: tl(trans.better_with_friends, { a: `<a>`, '/a': '</a>' }) }}</div>
                 </div>
             `}
@@ -250,7 +254,7 @@ function campfire_extended(container: HTMLElement) {
     }
 }
 
-function campfire_friend(friend: string) {
+function campfire_friend(friend: string, own = false) {
     let cover_art: HTMLElement;
     let track_info: HTMLElement;
     let user_avatar: HTMLElement;
@@ -258,7 +262,7 @@ function campfire_friend(friend: string) {
     let track_time: HTMLElement;
 
     const elem = html.node`
-        <div class="user friend hidden-user" data-live="false">
+        <div class="user friend hidden-user" data-live="false" data-own=${own}>
           <div class="user-avatar avatar" ref=${el => user_avatar = el}>
               <div class="bleh-icon loading-spinner" />
           </div>
