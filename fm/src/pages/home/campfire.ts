@@ -49,7 +49,20 @@ export function campfire() {
         </div>
       </div>
       <div class="campfire-panel-side" ref=${el => campfire_side = el}>
-
+        <section class="side-actions">
+          <a class="btn side-action icon-mask" data-type="profile" href="${root}user/${auth.name}">
+            ${tl(trans.profile)}
+          </a>
+          <a class="btn side-action icon-mask" data-type="library" href="${root}user/${auth.name}/library">
+            ${tl(trans.library)}
+          </a>
+          <a class="btn side-action icon-mask" data-type="friends" href="${root}user/${auth.name}/friends">
+            ${tl(trans.friends)}
+          </a>
+          <a class="btn side-action icon-mask" data-type="shouts" href="${root}user/${auth.name}/shoutbox">
+            ${tl(trans.shouts)}
+          </a>
+        </section>
       </div>
     </div>
   `;

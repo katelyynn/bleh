@@ -23,6 +23,7 @@
 .campfire-panel-side {
   width: var(--cards-sidebar-width);
   background: oklch(var(--b5) / 60%);
+  padding: var(--card-padding);
 
   z-index: 3;
 
@@ -230,5 +231,5 @@
 
 .friends-panel {
     margin: unset;
-    padding: var(--card-padding);
+    padding: var(--card-padding) 0;
 }
