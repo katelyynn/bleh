@@ -55,6 +55,10 @@
             left: 50%;
             transform: var(--offset);
 
+            &.hide-item {
+              opacity: 0 !important;
+            }
+
             & > .campfire-item-cover {
                 width: var(--w);
                 height: var(--w);

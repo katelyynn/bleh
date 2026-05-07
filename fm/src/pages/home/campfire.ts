@@ -128,6 +128,8 @@ export function campfire() {
 
           const position = get_loop_index(album_index, selected_index, max_index);
           album.style.setProperty('--loop-index', position.toString());
+
+          album.classList.toggle('hide-item', position == -4 || position == 4);
         });
 
         const album = albums[index];
