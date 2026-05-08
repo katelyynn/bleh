@@ -285,7 +285,7 @@
 
 .campfire-cta {
   padding: var(--card-padding) calc(var(--card-padding) - 12px);
-  background-color: color-mix(in oklch, oklch(var(--b4)) 40%, oklch(var(--b5)));
+  background: linear-gradient(180deg, oklch(var(--b5)), color-mix(in oklch, oklch(var(--b4)) 40%, oklch(var(--b5))));
 
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
@@ -317,4 +317,9 @@
   --shadow: none;
 
   text-align: left;
+}
+
+.campfire-cta-text-sub {
+  font-size: 13px;
+  color: oklch(var(--c3));
 }
