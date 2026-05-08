@@ -7,6 +7,7 @@
     flex-direction: column;
     gap: calc(var(--gap) * 2);
     position: relative;
+    flex-shrink: 0;
 
     background: transparent;
     border-radius: var(--item-med-radius);

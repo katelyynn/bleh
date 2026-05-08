@@ -50,20 +50,23 @@
 .summary-main {
     display: flex;
     gap: 30px;
+}
 
-    @media (max-width: 1250px) {
-        flex-direction: column-reverse;
-        gap: 20px;
+.music-summary > .summary-main {
+  @media (max-width: 1250px) {
+      flex-direction: column-reverse;
+      gap: 20px;
 
-        & > .summary-aside {
-            flex-direction: row;
+      & > .summary-aside {
+          flex-direction: row;
+          width: unset;
 
-            & > .listen-container {
-                flex: 1;
-                height: fit-content;
-            }
-        }
-    }
+          & > .listen-container {
+              flex: 1;
+              height: fit-content;
+          }
+      }
+  }
 }
 
 .summary-blocks {
@@ -155,6 +158,24 @@
 
     cursor: default;
     position: relative;
+
+    @media (min-width: 981px) and (max-width: 1250px) {
+      &:first-child, &:nth-child(2), &:nth-child(3) {
+        display: none;
+      }
+    }
+
+    @media (min-width: 981px) and (max-width: 1150px) {
+      &:nth-child(4), &:nth-child(5), &:nth-child(6) {
+        display: none;
+      }
+    }
+
+    @media (min-width: 981px) and (max-width: 1090px) {
+      &:nth-child(7), &:nth-child(8), &:nth-child(9) {
+        display: none;
+      }
+    }
 
     &:before {
         content: '';
