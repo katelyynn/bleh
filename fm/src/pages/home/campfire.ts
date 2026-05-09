@@ -1,7 +1,7 @@
 import { settings } from '@/build/config';
 import { auth, page, root } from '@/build/page';
 import { romanise, sanitise } from '@/build/tools';
-import { tl, trans } from '@/build/trans';
+import { lang, tl, trans } from '@/build/trans';
 import { correct_artist, correct_item_by_artist, name_includes, smart_artists, smart_title } from '@/components/music/lotus';
 import { redirect } from '@/components/music/music';
 import { Hole, html, render } from 'lighterhtml';
@@ -76,7 +76,7 @@ export function campfire() {
   let albums: album[] = [];
   let album_elements: { elem: HTMLElement, index: number }[] = [];
 
-  fetch(`${root}user/${auth.name}/partial/albums?albums_date_preset=LAST_30_DAYS&ajax=1`)
+  fetch(`${root}user/${auth.name}/library/albums?date_preset=LAST_30_DAYS&page=1&ajax=1`)
     .then(function (response) {
       console.log('returned', response, response.text);
 
@@ -86,18 +86,18 @@ export function campfire() {
       let doc = new DOMParser().parseFromString(dom, 'text/html');
       console.log('DOC', doc);
 
-      const items = doc.querySelectorAll('.grid-items > .grid-items-item');
+      const items = doc.querySelectorAll('.chartlist-row');
       items.forEach(item => {
-        const image = item.querySelector('.grid-items-cover-image-image img').src;
-        const title = item.querySelector('.grid-items-item-main-text a').textContent;
-        const artist = item.querySelector('.grid-items-item-aux-block').textContent;
-        const plays = item.querySelector('.grid-items-item-aux-text a:last-child').textContent.trim();
+        const image = item.querySelector('.cover-art > img').src;
+        const title = item.querySelector('.chartlist-name > a').textContent;
+        const artist = item.querySelector('.chartlist-artist > a').textContent;
+        const plays = item.querySelector('.chartlist-count-bar-slug').getAttribute('data-stat-value');
 
         let corrected_title = romanise(correct_item_by_artist(title, artist));
         let corrected_artist = romanise(correct_artist(artist));
 
         albums.push({
-          image: image.replace('/avatar300s/', '/500x500/'),
+          image: image.replace('/64s/', '/500x500/'),
           title,
           artist,
           plays,
@@ -179,10 +179,11 @@ export function campfire() {
       if (dist > (max_index + 1) / 2) dist -= max_index + 1;
       else if (dist < -(max_index + 1) / 2) dist += max_index + 1;
 
-      if (dist > 3) dist = 3;
-      else if (dist < -3) dist = -3;
+      if (dist > 4) dist = 4;
+      else if (dist < -4) dist = -4;
 
       elem.style.setProperty('--proximity', dist.toString());
+      elem.setAttribute('data-proximity', dist.toString());
     });
 
     if (visual_index <= max_index || visual_index >= (max_index * 2) + 2) {
@@ -226,7 +227,7 @@ export function campfire() {
         ${settings.format_guest_features ? formatted_artist : html.node`<a class="campfire-artist" href="${root}music/${redirect()}${sanitise(album.artist)}" target="_blank">${album.corrected_artist}</a>`}
       </span>
       <div class="campfire-plays">
-        ${album.plays}
+        ${tl(trans.count_plays, { c: album.plays.toLocaleString(lang) })}
       </div>
     `);
   }

@@ -111,6 +111,11 @@
             background-color: oklch(var(--b6));
             border-radius: var(--item-big-radius);
 
+            &[data-proximity="4"],
+            &[data-proximity="-4"] {
+              display: none;
+            }
+
             & > .campfire-item-cover {
                 width: var(--w);
                 height: var(--w);
