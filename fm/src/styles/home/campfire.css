@@ -81,9 +81,7 @@
       --w: 210px;
     }
 
-    --mask: linear-gradient(90deg, transparent, white 10%, white 90%, transparent);
-    mask-image: var(--mask);
-    -webkit-mask-image: var(--mask);
+    background: linear-gradient(90deg, oklch(var(--b5)), transparent 5%, transparent 95%, oklch(var(--b5)));
 
     & > .campfire-items {
         position: relative;
@@ -110,6 +108,11 @@
 
             background-color: oklch(var(--b6));
             border-radius: var(--item-big-radius);
+
+            &[data-proximity="3"],
+            &[data-proximity="-3"] {
+              z-index: -1;
+            }
 
             &[data-proximity="4"],
             &[data-proximity="-4"] {
