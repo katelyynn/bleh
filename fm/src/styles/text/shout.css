@@ -256,7 +256,7 @@
 
 .shout-more-actions {
     --mask: var(--icon-16-settings);
-    width: 24px !important;
+    width: 12px !important;
     --font-size: 0;
 }
 

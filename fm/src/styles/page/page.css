@@ -60,7 +60,7 @@
     background: transparent;
     border: 1px solid var(--card-border-base) !important;
     border-top: 1px solid var(--card-border-base-highlight) !important;
-    border-radius: var(--card-radius) !important;
+    border-radius: calc(var(--card-radius) + 1px) !important;
 
     position: relative;
 
