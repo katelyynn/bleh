@@ -22,6 +22,10 @@
     margin-top: unset !important;
 }
 
+.shoutbox {
+  overflow: hidden;
+}
+
 .shoutbox,
 .shout-form,
 .shouting-unavailable {
@@ -218,6 +222,12 @@
     align-items: center;
     gap: 10px;
     flex: 1;
+
+    @media (max-width: 600px) {
+      align-items: unset;
+      gap: 2px 0;
+      flex-direction: column;
+    }
 }
 
 .shout-actions {

@@ -306,6 +306,7 @@
     padding-bottom: var(--card-gap) !important;
     margin-top: var(--card-gap) !important;
 
+    &.visible-xs,
     &:before,
     &:after {
         display: none !important;
@@ -351,6 +352,10 @@
 
     &[data-beret="true"]:not([style], .has-cards-view) {
         --page-sidebar-margin-left: 1px;
+
+        @media (max-width: 980px) {
+          --page-sidebar-margin-left: 0px;
+        }
 
         & > .row {
             margin-top: unset;
