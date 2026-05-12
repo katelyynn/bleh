@@ -93,8 +93,6 @@
 
     --icon-size: 16px !important;
 
-    transform: unset !important;
-
     &:not(.stationlink, .listening-report-promo) {
         height: var(--side-action-height) !important;
 
