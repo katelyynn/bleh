@@ -14,7 +14,7 @@
     border-radius: calc(var(--item-big-radius) + var(--inner)) !important;*/
 
     margin: 0 !important;
-    background-color: oklch(var(--b2) / 8%) !important;
+    background-color: oklch(var(--h4) / 5%) !important;
     border-radius: var(--item-med-radius) !important;
     padding: 2px 0 !important;
     overflow: hidden;
@@ -41,7 +41,8 @@
         mask-image: var(--mask);
         -webkit-mask-image: var(--mask);
 
-        opacity: 0.06;
+        opacity: 0.4;
+        display: none;
     }
 
     &:is(section) {

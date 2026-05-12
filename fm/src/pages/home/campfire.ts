@@ -179,8 +179,8 @@ export function campfire() {
       if (dist > (max_index + 1) / 2) dist -= max_index + 1;
       else if (dist < -(max_index + 1) / 2) dist += max_index + 1;
 
-      if (dist > 4) dist = 4;
-      else if (dist < -4) dist = -4;
+      if (dist > 5) dist = 5;
+      else if (dist < -5) dist = -5;
 
       elem.style.setProperty('--proximity', dist.toString());
       elem.setAttribute('data-proximity', dist.toString());

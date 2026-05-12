@@ -32,7 +32,7 @@
 .campfire-panel-side {
   width: var(--cards-sidebar-width);
   background: oklch(var(--b5) / 60%);
-  padding: var(--card-padding);
+  padding: var(--card-padding) 0;
 
   z-index: 3;
 
@@ -114,8 +114,8 @@
               z-index: -1;
             }
 
-            &[data-proximity="4"],
-            &[data-proximity="-4"] {
+            &[data-proximity="5"],
+            &[data-proximity="-5"] {
               display: none;
             }
 
@@ -287,7 +287,7 @@
 
 .friends-panel {
     margin: unset;
-    padding: var(--card-padding) 0;
+    padding: var(--card-padding);
 }
 
 
