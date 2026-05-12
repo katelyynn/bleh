@@ -1,5 +1,5 @@
 {
-    version: "2026.0507",
+    version: "2026.0512",
     related: {
         account_name: "kateshapedbox",
         link: "https://katelyn.moe/sponsor",
@@ -317,7 +317,17 @@
         "wiichicken": {},
         "rgoracz": {},
         "thomasb2k": {},
-        "ThatJumpyFrog": {},
+        "ThatJumpyFrog": {
+            badges: [
+                {
+                    icon: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWV5ZS1pY29uIGx1Y2lkZS1leWUiPjxwYXRoIGQ9Ik0yLjA2MiAxMi4zNDhhMSAxIDAgMCAxIDAtLjY5NiAxMC43NSAxMC43NSAwIDAgMSAxOS44NzYgMCAxIDEgMCAwIDEgMCAuNjk2IDEwLjc1IDEwLjc1IDAgMCAxLTE5Ljg3NiAwIi8+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMyIvPjwvc3ZnPg==",
+                    name: "sleepless",
+                    hue: 290,
+                    sat: 3.89,
+                    lit: 0.32
+                }
+            ]
+        },
         "nite_": {},
         "mitsurin": {
             badges: [
@@ -354,6 +364,7 @@
         "susurrine": {},
         "Divine-Light": {},
         "Sukiye": {},
-        "Liam_Winters": {}
+        "Liam_Winters": {},
+        "Noxveld": {}
     }
 }
