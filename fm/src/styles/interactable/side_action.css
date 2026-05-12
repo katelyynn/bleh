@@ -13,7 +13,15 @@
     padding: var(--inner) !important;
     border-radius: calc(var(--item-big-radius) + var(--inner)) !important;*/
 
-    margin: -5px calc(-1 * var(--button-sides)) 0 !important;
+    margin: 0 !important;
+    background-color: oklch(var(--b2) / 10%) !important;
+    border-radius: var(--item-med-radius) !important;
+    padding: 2px 0 !important;
+    overflow: hidden;
+
+    &:is(section) {
+        margin: 0 var(--card-padding) !important;
+    }
 
     & > form {
         margin: unset;
@@ -42,21 +50,24 @@
 
 .side-action {
     --bg: transparent;
-    --bg-hov: var(--side-action-hov);
-    --bg-atv: var(--side-action-atv);
+    --bg-hov: transparent;
+    --bg-atv: transparent;
     --shadow: none;
     --col: oklch(var(--c2));
+    border-radius: unset !important;
     overflow: unset;
     text-overflow: ellipsis;
-    --padding: 5px var(--button-sides) 5px calc(var(--button-sides) + var(--icon-size) + 6px);
+    --padding: 7px var(--button-sides) 7px calc(var(--button-sides) + var(--icon-size) + 6px);
     margin: unset !important;
     width: unset !important;
     position: relative;
     min-height: var(--side-action-height) !important;
     --show-icon: block !important;
-    --side-action-height: 32px;
+    --side-action-height: 36px;
 
     --icon-size: 16px !important;
+
+    transform: unset !important;
 
     &:not(.stationlink, .listening-report-promo) {
         height: var(--side-action-height) !important;
@@ -92,7 +103,24 @@
     }
 
     &:after {
+        content: '';
         display: none !important;
+        position: absolute !important;
+        top: unset !important;
+        left: calc(var(--button-sides) + var(--icon-size) + 6px) !important;
+        right: var(--button-sides) !important;
+        bottom: -1px !important;
+        width: unset !important;
+        height: 1px !important;
+        background: oklch(var(--b2) / 40%) !important;
+    }
+
+    &:not(:last-child, [data-type="follow"]) {
+        margin-bottom: 1px !important;
+
+        &:after {
+            display: block !important;
+        }
     }
 
     &.side-action,
@@ -121,10 +149,34 @@
             transition: unset !important;
         }
     }
+
+    &:hover {
+        --col: oklch(var(--l3-c));
+        --mask-colour: color-mix(in oklch, oklch(var(--l3-c)), oklch(var(--l4-c)) 40%);
+        --force-font-weight: var(--font-weight-medium);
+    }
 }
 
 .stationlink {
     --mask: var(--icon-16-radio);
+}
+
+.follow-combo {
+    position: relative;
+    margin-bottom: 1px;
+
+    &:after {
+        content: '';
+        display: block !important;
+        position: absolute !important;
+        top: none !important;
+        left: calc(var(--button-sides) + var(--icon-size) + 6px) !important;
+        right: var(--button-sides) !important;
+        bottom: -1px !important;
+        width: unset !important;
+        height: 1px !important;
+        background: oklch(var(--b2) / 40%) !important;
+    }
 }
 
 .side-action[data-friends="true"],
@@ -133,15 +185,8 @@
 [data-toggle-button-current-state="bookmarked"] > form > .header-new-bookmark-button,
 .side-action[data-is-shortcut="true"],
 [data-toggle-button-current-state="followed"] > form > .side-action[data-type="follow"] {
-    --bg: oklch(var(--h4) / 15%) !important;
-    --bg-hov: oklch(var(--h4) / 25%) !important;
-    --bg-atv: oklch(var(--h4) / 35%) !important;
     --col: oklch(var(--l3-c));
-    --mask-colour: color-mix(
-        in oklch,
-        oklch(var(--l3-c)),
-        oklch(var(--l4-c)) 40%
-    );
+    --mask-colour: color-mix(in oklch, oklch(var(--l3-c)), oklch(var(--l4-c)) 40%);
     --force-font-weight: var(--font-weight-medium) !important;
 
     &:before {
