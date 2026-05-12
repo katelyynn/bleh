@@ -27,6 +27,8 @@ export function bleh_radio() {
         `);
 
         radio.removeAttribute('title');
+
+        radio.parentElement.replaceWith(radio);
     });
 
     if (page.type == 'user') {

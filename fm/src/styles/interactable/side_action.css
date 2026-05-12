@@ -137,6 +137,7 @@
         width: unset !important;
         height: 1px !important;
         background: oklch(var(--b2) / 30%) !important;
+        border: none !important;
     }
 
     &[data-type="obsession"],
