@@ -27,6 +27,8 @@ import { avatar } from '../shared/avatar';
 export function redesign_profile_header(is_own_profile, is_following) {
     if (!auth.name) return;
 
+    const is_sponsor_host = page.name == sponsor_list.related.account_name;
+
     let base_header = document.body.querySelector('.header-info-secondary');
     if (!base_header) return;
 
@@ -36,7 +38,7 @@ export function redesign_profile_header(is_own_profile, is_following) {
     let taste_artists = [];
     let taste_formal = 'NONE';
 
-    if (!is_own_profile && page.name != sponsor_list.related.account_name) {
+    if (!is_own_profile && !is_sponsor_host) {
         let taste_meter = base_header.querySelector('.tasteometer');
 
         if (taste_meter) {
@@ -118,18 +120,16 @@ export function redesign_profile_header(is_own_profile, is_following) {
                     });
                 }
             } else {
-                create_profile_top_item(profile_header, {
-                    name: page.name,
-                    type: 'sponsor',
-                    link: () => sponsor(),
-                    action: 'button'
-                });
-                create_profile_top_item(profile_header, {
-                    name: page.name,
-                    type: 'message_sponsor',
-                    link: msg_button.getAttribute('href'),
-                    full: true
-                });
+                profile_header.appendChild(html.node`
+                    <button class="btn side-action icon-mask sponsor colourful" onclick=${() => sponsor()} data-type="sponsor">
+                        ${tl(trans.sponsor)}
+                    </button>
+                `);
+                profile_header.appendChild(html.node`
+                    <a class="btn side-action icon-mask sponsor colourful" href=${msg_button.getAttribute('href')} data-type="message_sponsor">
+                        ${tl(trans.message_sponsor)}
+                    </a>
+                `);
             }
         }
 
@@ -185,13 +185,15 @@ export function redesign_profile_header(is_own_profile, is_following) {
         }
     }
 
-    const manage = create_profile_top_item(profile_header, {
-        name: page.name,
-        type: 'manage',
-        beta: true,
-        action: 'button'
-    });
-    manage_user(manage);
+    if (!is_own_profile && !is_sponsor_host) {
+        const manage = create_profile_top_item(profile_header, {
+            name: page.name,
+            type: 'manage',
+            beta: true,
+            action: 'button'
+        });
+        manage_user(manage);
+    }
 
     if (!page.mobile)
         page.structure.side.insertBefore(
