@@ -14,10 +14,35 @@
     border-radius: calc(var(--item-big-radius) + var(--inner)) !important;*/
 
     margin: 0 !important;
-    background-color: oklch(var(--b2) / 10%) !important;
+    background-color: oklch(var(--b2) / 8%) !important;
     border-radius: var(--item-med-radius) !important;
     padding: 2px 0 !important;
     overflow: hidden;
+
+    position: relative;
+
+    &:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 100%;
+        max-height: 60px;
+        pointer-events: none;
+        border-radius: inherit !important;
+        border-top-left-radius: unset;
+        border-top-right-radius: unset;
+
+        border: 1px solid oklch(var(--l3-c));
+        border-top: none;
+
+        --mask: linear-gradient(180deg, transparent, white);
+        mask-image: var(--mask);
+        -webkit-mask-image: var(--mask);
+
+        opacity: 0.06;
+    }
 
     &:is(section) {
         margin: 0 var(--card-padding) !important;
@@ -112,9 +137,10 @@
         bottom: -1px !important;
         width: unset !important;
         height: 1px !important;
-        background: oklch(var(--b2) / 40%) !important;
+        background: oklch(var(--b2) / 30%) !important;
     }
 
+    &[data-type="obsession"],
     &:not(:last-child, [data-type="follow"]) {
         margin-bottom: 1px !important;
 
