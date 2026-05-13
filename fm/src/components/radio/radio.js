@@ -31,6 +31,11 @@ export function bleh_radio() {
         radio.parentElement.replaceWith(radio);
     });
 
+    let list = page.structure.side.querySelector('.stationlink-list');
+    if (list) {
+        list.classList.add('side-actions');
+    }
+
     if (page.type == 'user') {
         let promo_v3 = page.structure.side.querySelector('.promo-v3');
         if (!promo_v3) return;
@@ -53,10 +58,7 @@ export function bleh_radio() {
         sep.classList.add('sep', 'listen-sep');
         promo_v3.appendChild(sep);
 
-        let list = page.structure.side.querySelector('.stationlink-list');
-        list.classList.add('side-actions');
-
-        list.parentElement.remove();
+        if (list) list.parentElement.remove();
         promo_v3.appendChild(list);
     } else {
         let header = page.structure.side.querySelector('.stationlinks-header');

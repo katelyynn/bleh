@@ -237,10 +237,6 @@ export function bleh_events() {
         // edit button
         let edit_button = main_panel.querySelector('.event-metadata + .event-metadata a');
         if (edit_button) {
-            let sep = document.createElement('div');
-            sep.classList.add('sep');
-            side_actions.appendChild(sep);
-
             edit_button.classList.add('btn', 'side-action', 'icon-mask');
             edit_button.setAttribute('data-type', 'edit');
             side_actions.appendChild(edit_button);
@@ -258,11 +254,7 @@ export function bleh_events() {
 
             poster_panel.innerHTML = (`${poster.outerHTML}<a onclick="_expand_avatar('${poster.getAttribute('src')}')" class="bleh--avatar-clickable-link"></a>`);
 
-            let sep2 = document.createElement('div');
-            sep2.classList.add('sep');
-            side_actions.appendChild(sep2);
-
-            side_actions.appendChild(poster_panel);
+            side_actions.after(poster_panel);
         }
 
 

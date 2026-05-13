@@ -635,7 +635,6 @@ function bleh_listeners() {
             })}>
                 ${tl(trans.edit_close_friends)}
             </button>
-            <div class="sep" />
             <button class="btn side-action icon-mask" data-type="add" onclick=${() => other_listener(sanitise(page.name))}>
                 ${tl(trans.custom)}
             </button>

@@ -41,7 +41,7 @@ import { save_setting, setting } from '@/components/settings/settings';
 import { input } from '@/components/settings/input';
 import { icon, icons } from '../shared/icon';
 import { redirect } from './music';
-import { flag } from '../shared/flag';
+import { flag, flag_candidates } from '../shared/flag';
 import { age } from '../shared/age';
 import { notify } from '../dialog/notify';
 import { status } from '../dialog/status';
@@ -2181,7 +2181,7 @@ export function oracle_process() {
         if (page.subpage != 'overview') return;
 
         const area = data.area;
-        const area_code = data.country;
+        const area_code = flag_candidates(data.country, area);
         const area_name = area?.name;
 
         const lifespan = data['life-span'];
