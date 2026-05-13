@@ -13,7 +13,7 @@
 
     background: linear-gradient(180deg, var(--card-gradient), transparent) !important;
 
-    @media (min-width: 1250px) {
+    @media (min-width: 981px) {
         border-top-left-radius: var(--card-radius) !important;
     }
 
