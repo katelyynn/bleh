@@ -5364,6 +5364,11 @@ export const trans = {
         ru: 'Страна',
         pl: 'Kraj',
     },
+    origin: {
+        // used as an alternative to saying someone or something's
+        // country, as its now always a country
+        en: 'Origin',
+    },
     display_name: {
         name: {
             en: 'Display name',

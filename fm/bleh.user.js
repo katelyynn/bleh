@@ -62724,7 +62724,7 @@
       metadata = html.node`
             <div class="metadata-column">
                 <div class="metadata-group">
-                    <dt class="catalogue-metadata-heading">${tl2(trans.country)}</dt>
+                    <dt class="catalogue-metadata-heading">${tl2(trans.origin)}</dt>
                     <dd class="catalogue-metadata-description placeholder-text">????</dd>
                 </div>
                 <div class="metadata-group">
@@ -64125,7 +64125,7 @@
             <div class="metadata-column">
                 ${area ? html.node`
                 <div class="metadata-group">
-                    <dt class="catalogue-metadata-heading">${tl2(trans.country)}</dt>
+                    <dt class="catalogue-metadata-heading">${tl2(trans.origin)}</dt>
                     <dd class="catalogue-metadata-description has-flag">
                         ${flag(area_code)}
                         ${area_name}
@@ -86098,6 +86098,11 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       sv: "Land",
       ru: "\u0421\u0442\u0440\u0430\u043D\u0430",
       pl: "Kraj"
+    },
+    origin: {
+      // used as an alternative to saying someone or something's
+      // country, as its now always a country
+      en: "Origin"
     },
     display_name: {
       name: {

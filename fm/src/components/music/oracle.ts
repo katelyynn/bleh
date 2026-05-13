@@ -361,7 +361,7 @@ export function oracle_process() {
         metadata = html.node`
             <div class="metadata-column">
                 <div class="metadata-group">
-                    <dt class="catalogue-metadata-heading">${tl(trans.country)}</dt>
+                    <dt class="catalogue-metadata-heading">${tl(trans.origin)}</dt>
                     <dd class="catalogue-metadata-description placeholder-text">????</dd>
                 </div>
                 <div class="metadata-group">
@@ -2221,7 +2221,7 @@ export function oracle_process() {
             <div class="metadata-column">
                 ${area ? html.node`
                 <div class="metadata-group">
-                    <dt class="catalogue-metadata-heading">${tl(trans.country)}</dt>
+                    <dt class="catalogue-metadata-heading">${tl(trans.origin)}</dt>
                     <dd class="catalogue-metadata-description has-flag">
                         ${flag(area_code)}
                         ${area_name}
