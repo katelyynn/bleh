@@ -603,18 +603,22 @@ export function bleh_profiles() {
                 `;
 
                 buttons.forEach((button) => {
-                    if (
-                        button.getAttribute('data-analytics-action') == 'create'
-                    ) {
+                    const action = button.getAttribute('data-analytics-action');
+
+                    if (action == 'create') {
+                        button.setAttribute('data-type', 'add');
                         button.classList.add('primary');
                         button.innerHTML = `${tl(trans.new)} <div class="new-badge">${tl(trans.beta)}</div>`; //button.textContent = tl(trans.new);
+                    } else if (action == 'import') {
+                        button.setAttribute('data-type', 'import');
                     }
 
                     button.classList.add(
                         'btn',
                         'view-item',
                         'interact-item',
-                        'playlist-home-top-item'
+                        'playlist-home-top-item',
+                        'icon'
                     );
 
                     button_header.appendChild(button);

@@ -54616,15 +54616,20 @@
                     <div class="view-buttons playlist-home-buttons blend" />
                 `;
           buttons.forEach((button2) => {
-            if (button2.getAttribute("data-analytics-action") == "create") {
+            const action = button2.getAttribute("data-analytics-action");
+            if (action == "create") {
+              button2.setAttribute("data-type", "add");
               button2.classList.add("primary");
               button2.innerHTML = `${tl2(trans.new)} <div class="new-badge">${tl2(trans.beta)}</div>`;
+            } else if (action == "import") {
+              button2.setAttribute("data-type", "import");
             }
             button2.classList.add(
               "btn",
               "view-item",
               "interact-item",
-              "playlist-home-top-item"
+              "playlist-home-top-item",
+              "icon"
             );
             button_header.appendChild(button2);
           });
