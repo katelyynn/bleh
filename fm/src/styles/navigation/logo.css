@@ -75,9 +75,7 @@
     margin-top: -8px;
     font-family: var(--font-brand);
     font-weight: 900;
-    color: oklch(var(--c1));
-
-    text-shadow: 0 2px 0 oklch(var(--k4));
+    color: oklch(var(--l2-c-theme-switch));
 
     [data-bleh--season="pride"] & {
         /* this isnt using https://cesque.com/gaydient/ but shoutout,

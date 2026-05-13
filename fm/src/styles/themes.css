@@ -401,7 +401,7 @@ body,
         inset 0 0 0 1px oklch(var(--h3) / 0.4),
         var(--input-shadow);
 
-    --group-shadow: inset 0 0 0 1px oklch(var(--b2) / 0.3);
+    --group-shadow: inset 0 0 0 1px oklch(var(--b2) / 0.36);
 
     --sidebar-bg: color-mix(in oklch, oklch(var(--b6)) 22%, oklch(var(--b5)));
     --sidebar-border: color-mix(in oklch, oklch(var(--b5)), oklch(var(--b4)) 25%);
@@ -458,7 +458,7 @@ body,
         --menu-item-hov: oklch(var(--b4) / 60%);
         --menu-item-atv: oklch(var(--b4) / 80%);
 
-        --separator-base: oklch(var(--b3) / 0.3);
+        --separator-base: oklch(var(--b3) / 0.4);
 
         --setting-hover: oklch(var(--b4) / 30%);
 
@@ -599,7 +599,7 @@ body,
         --header-disc-filter: brightness(1.2);
     }
     &[data-bleh--theme="ink"] {
-        --b2: 0.41 calc(var(--sat) * 0 * var(--sat-bg, 1)) var(--hue);
+        --b2: 0.6 calc(var(--sat) * 0.12 * var(--sat-bg, 1)) var(--hue);
         --b3: 0.86 calc(var(--sat) * 0.12 * var(--sat-bg, 1)) var(--hue);
         --b4: 0.7 calc(var(--sat) * 0.06 * var(--sat-bg, 1)) var(--hue);
         --b5: 0.83 calc(var(--sat) * 0.10 * var(--sat-bg, 1)) var(--hue);
@@ -1134,6 +1134,8 @@ body {
         --blur-saturate: 130%;
         --blur-brightness: 1;
         --menu-shadow: 0 4px 40px oklch(0 0 0 / 0.2);
+
+        --solarium-compensate: unset;
     }
 
     &[data-bleh--theme_type="light"] {

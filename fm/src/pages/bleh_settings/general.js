@@ -124,42 +124,37 @@ export function general() {
                     </div>
                 </div>
             </div>
+            <div class="setting-group">
+                <div class="setting" data-type="action" id="setting_api">
+                    <div class="heading">
+                        <h5>${tl(trans.api.name)}</h5>
+                        <p>${tl(trans.api.body)}</p>
+                    </div>
+                    <div class="toggle-wrap">
+                        <a class="btn ${auth_key && auth_valid == 'true' ? '' : 'primary'} icon" data-type="plus" href="${root}api/auth?api_key=${api_key}&cb=${root}bleh/api">
+                            ${tl(trans.connect)}
+                        </a>
+                    </div>
+                </div>
+                <div class="setting" data-type="info">
+                    <div class="heading">
+                        <h5>${tl(trans.api_status)}</h5>
+                    </div>
+                    <div class="info">
+                        ${auth_key && auth_valid == 'true' ? html.node`
+                            <p>${tl(trans.connected)}</p>
+                        ` : html.node`
+                            <p>${tl(trans.not_connected)}</p>
+                        `}
+                    </div>
+                </div>
+            </div>
         </section>
         ${!page.mobile ? html.node`
             <section class="bleh--panel">
                 <h4>${tl(trans.branding)}</h4>
                 <div class="setting-group">
                     ${setting({ id: 'branding_type', func: update_branding_type })}
-                </div>
-            </section>
-        ` : ''}
-        ${auth.name ? html.node`
-            <section class="bleh--panel">
-                <h4>API</h4>
-                <div class="setting-group">
-                    <div class="setting" data-type="action" id="setting_api">
-                        <div class="heading">
-                            <h5>${tl(trans.api.name)}</h5>
-                            <p>${tl(trans.api.body)}</p>
-                        </div>
-                        <div class="toggle-wrap">
-                            <a class="btn ${auth_key && auth_valid == 'true' ? '' : 'primary'} icon" data-type="plus" href="${root}api/auth?api_key=${api_key}&cb=${root}bleh/api">
-                                ${tl(trans.connect)}
-                            </a>
-                        </div>
-                    </div>
-                    <div class="setting" data-type="info">
-                        <div class="heading">
-                            <h5>${tl(trans.api_status)}</h5>
-                        </div>
-                        <div class="info">
-                            ${auth_key && auth_valid == 'true' ? html.node`
-                                <p>${tl(trans.connected)}</p>
-                            ` : html.node`
-                                <p>${tl(trans.not_connected)}</p>
-                            `}
-                        </div>
-                    </div>
                 </div>
             </section>
         ` : ''}
