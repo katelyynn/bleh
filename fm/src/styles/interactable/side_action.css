@@ -4,7 +4,7 @@
 .side-actions {
     display: flex;
     flex-direction: column;
-    gap: calc(2px + 1px);
+    gap: 1px;
     /*margin: 0 calc(var(--card-padding) - (var(--inner) + var(--button-sides))) !important;
 
     --inner: 6px;
@@ -81,15 +81,15 @@
 
 .side-action {
     --bg: transparent;
-    --bg-hov: transparent;
-    --bg-atv: transparent;
+    --bg-hov: oklch(var(--h4) / 3%);
+    --bg-atv: oklch(var(--h4) / 6%);
     --shadow: none;
     --col: oklch(var(--c2));
     border-radius: unset !important;
     overflow: unset;
     text-overflow: ellipsis;
-    --padding: 7px var(--button-sides) 7px calc(var(--button-sides) + var(--icon-size) + 6px);
-    margin: unset !important;
+    --padding: 7px calc(var(--button-sides) + 10px) 7px calc(var(--button-sides) + var(--icon-size) + 6px + 10px);
+    margin: 0 -10px !important;
     width: unset !important;
     position: relative;
     min-height: var(--side-action-height) !important;
@@ -121,7 +121,7 @@
     &:before {
         --mask-size: var(--icon-size);
 
-        --left: var(--button-sides) !important;
+        --left: calc(var(--button-sides) + 10px) !important;
         --margin-top: calc(-1 * (var(--mask-size, var(--icon-size)) / 2));
         background: var(--mask-colour) !important;
         border: unset;

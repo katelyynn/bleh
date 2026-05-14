@@ -77,7 +77,7 @@ select,
     text-decoration: var(--force-underline, none) !important;
     transition-property:
         background-color, transform, box-shadow, color, opacity, padding,
-        font-size !important;
+        font-size, font-weight !important;
     transition-duration: var(--trans) !important;
     transition-timing-function: var(--trans-function) !important;
     user-select: none;
