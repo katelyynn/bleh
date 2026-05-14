@@ -410,6 +410,7 @@
 }
 
 .chartlist-now-scrobbling {
+    padding-left: 16px;
     font-weight: var(--font-weight-medium);
 
     &:before {

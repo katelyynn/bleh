@@ -282,7 +282,7 @@ function campfire_friend(friend: string, own = false) {
             <div class="user-info">
                 <div class="user-name">
                     <a class="user-name-inner" href="${root}user/${friend}" ref=${el => user_name = el}>@${friend}</a>
-                    <span class="track-time" ref=${el => track_time = el} />
+                    <span class="track-time icon-mask" ref=${el => track_time = el} />
                 </div>
                 <div class="user-about track" ref=${el => track_info = el}>
                   <div class="status">
@@ -347,7 +347,7 @@ function campfire_friend(friend: string, own = false) {
 
                 render(track_info, html`
                   <div class="status">
-                      <div class="status-image smaller">
+                      <div class="status-image smaller" data-live=${item.live}>
                           <img src=${item.avatar} alt=${name}>
                       </div>
                       <div class="status-info">

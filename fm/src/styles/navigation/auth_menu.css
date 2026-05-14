@@ -222,6 +222,19 @@
         box-shadow: var(--avatar-inset);
         border-radius: inherit;
     }
+
+    &[data-live="true"] {
+        animation: animate_status 2s var(--trans-function-ani) infinite;
+    }
+}
+
+@keyframes animate_status {
+    from, to {
+        scale: 1;
+    }
+    50% {
+        scale: 0.9;
+    }
 }
 
 .status-info {
