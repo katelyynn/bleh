@@ -41,7 +41,7 @@ body {
     --line-height-sm: calc(var(--font-size-sm) + 4px);
 
     --font-size-head: 22px;
-    --line-height-head: 28px;
+    --line-height-head: 17px;
 
     &[data-bleh--font_choice="font_2025"] {
         --font-choice: Funnel Sans;
