@@ -156,9 +156,9 @@
     animation-delay: var(--delay, 0s) !important;
     animation-fill-mode: backwards !important;
 
-    --font-weight: var(--custom_font_weight, 480);
-    --font-weight-medium: var(--custom_font_weight_medium, 650);
-    --font-weight-bold: var(--custom_font_weight_bold, 730);
+    --font-weight: var(--custom_font_weight, 400);
+    --font-weight-medium: var(--custom_font_weight_medium, 500);
+    --font-weight-bold: var(--custom_font_weight_bold, 600);
 
     &:active {
         transform: translateY(var(--motion, -2px)) scale(0.98);

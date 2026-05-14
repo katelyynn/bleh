@@ -348,9 +348,9 @@ body[data-bleh--season="new_years"] {
 .music-featured-item-heading-link,
 .music-featured-item-body,
 body {
-    --font-weight: var(--custom_font_weight, 480);
-    --font-weight-medium: var(--custom_font_weight_medium, 650);
-    --font-weight-bold: var(--custom_font_weight_bold, 730);
+    --font-weight: var(--custom_font_weight, 400);
+    --font-weight-medium: var(--custom_font_weight_medium, 500);
+    --font-weight-bold: var(--custom_font_weight_bold, 600);
 }
 
 /* backgrounds */
