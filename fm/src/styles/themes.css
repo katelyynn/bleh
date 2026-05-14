@@ -603,31 +603,31 @@ body,
         --card-shadow: 0 2px 10px oklch(0.01 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue) / 0.05);
     }
     &[data-bleh--theme="ink"] {
-        --b2: 0.6 calc(var(--sat) * 0.12 * var(--sat-bg, 1)) var(--hue);
-        --b3: 0.86 calc(var(--sat) * 0.12 * var(--sat-bg, 1)) var(--hue);
+        --b2: 0.7 calc(var(--sat) * 0.12 * var(--sat-bg, 1)) var(--hue);
+        --b3: 0.94 calc(var(--sat) * 0.12 * var(--sat-bg, 1)) var(--hue);
         --b4: 0.82 calc(var(--sat) * 0.1 * var(--sat-bg, 1)) var(--hue);
-        --b5: 0.87 calc(var(--sat) * 0.09 * var(--sat-bg, 1)) var(--hue);
-        --b6: 0.8 calc(var(--sat) * 0.12 * var(--sat-bg, 1)) var(--hue);
+        --b5: 0.91 calc(var(--sat) * 0.09 * var(--sat-bg, 1)) var(--hue);
+        --b6: 0.86 calc(var(--sat) * 0.08 * var(--sat-bg, 1)) var(--hue);
         --b8: 0.86 calc(var(--sat) * 0.10 * var(--sat-bg, 1)) var(--hue);
         --b7: 0.17 calc(var(--sat) * 0.26 * var(--sat-bg, 1)) var(--hue);
         --b9: 0.84 0 0;
 
         --separator-base: oklch(var(--b2) / 0.1);
 
-        --card-border-base: oklch(0.76 calc(var(--sat) * 0.12 * var(--sat-bg, 1)) var(--hue)) !important;
-        --card-border-base-highlight: oklch(0.74 calc(var(--sat) * 0.11 * var(--sat-bg, 1)) var(--hue)) !important;
+        --card-border-base: oklch(0.81 calc(var(--sat) * 0.12 * var(--sat-bg, 1)) var(--hue)) !important;
+        --card-border-base-highlight: oklch(0.76 calc(var(--sat) * 0.11 * var(--sat-bg, 1)) var(--hue)) !important;
 
-        --normal-shadow: inset 0 0 0 1px oklch(var(--b2) / 20%);
+        --normal-shadow: inset 0 0 0 1px oklch(var(--b2) / 40%);
         --input-shadow:
             inset 0 0 0 1px oklch(var(--b2) / 20%),
             inset 0 1px 2px 1px oklch(var(--b6) / 0.4);
         --focused-input-shadow:
             inset 0 0 0 1px oklch(var(--h3) / 0.4),
             var(--input-shadow);
-        --group-shadow: inset 0 0 0 1px oklch(var(--b2) / 12%);
+        --group-shadow: inset 0 0 0 1px oklch(var(--b2) / 23%);
 
         --sidebar-bg: color-mix(in oklch, oklch(var(--b6)) 56%, oklch(var(--b5)));
-        --sidebar-border: oklch(0.82 calc(var(--sat) * 0.1 * var(--sat-bg, 1)) var(--hue));
+        --sidebar-border: oklch(0.87 calc(var(--sat) * 0.1 * var(--sat-bg, 1)) var(--hue));
         --toolbar-bg: oklch(var(--b5) / 30%);
         --toolbar-border: 1px solid oklch(var(--b4) / 50%);
         --subtle-border: 1px solid oklch(var(--b4) / 65%);
@@ -641,7 +641,7 @@ body,
         --banner-overlay: oklch(var(--b5) / 20%);
         --banner-mix: lighten;
 
-        --setting-group: oklch(var(--b6) / 14%);
+        --setting-group: oklch(var(--b6) / 8%);
 
         --lastfm-logo-filter: none;
 
@@ -906,32 +906,37 @@ u,
         --l3: calc(var(--lit) * 0.4) calc(var(--sat) * 0.5) var(--hue);
         --l4: calc(var(--lit) * 0.22) calc(var(--sat) * 0.6) var(--hue);
 
-        --l2-c: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.63) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue);
+        --l2-c: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.8) calc(clamp(min(0), var(--sat), max(2)) * 0.7) var(--hue);
         --l3-c: var(--l3-c-lit) var(--l3-c-sat) var(--hue);
-        --l4-c: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.25) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue);
+        --l4-c: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.3) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue);
 
         --l3-c-sat: calc(clamp(min(0), var(--sat), max(2)) * 0.5);
-        --l3-c-lit: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.4);
+        --l3-c-lit: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.36);
 
         --h3: var(--h3-lit) var(--h3-sat) var(--hue);
-        --h3-sat: calc(clamp(min(0), var(--sat), max(2)) * 0.32);
-        --h3-lit: calc(clamp(min(0.85), var(--lit), max(1.1)) * 0.73);
+        --h3-sat: calc(clamp(min(0), var(--sat), max(2)) * 0.42);
+        --h3-lit: calc(clamp(min(0.85), var(--lit), max(1.1)) * 0.78);
 
-        --h4: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.64) calc(clamp(min(0), var(--sat), max(2)) * 0.32) var(--hue);
-        --f4: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.6) calc(clamp(min(0), var(--sat), max(2)) * 0.3) var(--hue);
-        --k4: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.6) calc(clamp(min(0), var(--sat), max(2)) * 0.45) var(--hue);
-        --g4: 0.92 calc(clamp(min(0), var(--sat), max(2)) * 0.25) var(--hue);
+        --h4: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.63) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue);
+        --f4: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.8) calc(clamp(min(0), var(--sat), max(2)) * 0.58) var(--hue);
+        --k4: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.66) calc(clamp(min(0), var(--sat), max(2)) * 0.42) var(--hue);
+        --g4: 0.92 calc(clamp(min(0), var(--sat), max(2)) * 0.7) var(--hue);
 
-        --p3: calc(clamp(min(0.85), var(--lit), max(1.1)) * 90%) calc(clamp(min(0), var(--sat), max(2)) * 50%) var(--hue);
+        --h3-s: var(--hue), 50%, 70%;
+
+        --p3: calc(clamp(min(0.85), var(--lit), max(1.1)) * 0.85) calc(clamp(min(0), var(--sat), max(2)) * 0.5) var(--hue);
 
         /* l2-c in dark modes, l4-c in light modes */
         --l2-c-theme-switch: var(--l3-c);
         --l3-c-theme-switch: var(--l3-c);
         --h3-theme-switch: var(--h4);
 
+        --badge: oklch(var(--f4) / 55%);
+        --badge-hov: oklch(var(--f4) / 65%);
+
         --grid-colour-shadow: var(
             --grid-colour-shadow-override,
-            0 27px 15px oklch(var(--h4) / 18%)
+            0 10px 30px oklch(var(--h4) / 45%)
         );
 
         --opposite-text: var(--c1);
@@ -946,11 +951,30 @@ u,
 
         --glow: oklch(var(--h3) / 60%);
 
-        --badge: oklch(var(--f4) / 55%);
-        --badge-hov: oklch(var(--f4) / 65%);
+        --g-red: oklch(8, 42%, 50%);
+        --g-orange: oklch(24, 66%, 50%);
+        --g-yellow: oklch(44, 80%, 50%);
+        --g-green: oklch(163, 50%, 50%);
+        --g-blue: oklch(199, 69%, 50%);
+        --g-indigo: oklch(254, 26%, 50%);
+
+        --taste-glow: drop-shadow(0 0 15px oklch(var(--h3)));
 
         --menu-item-accent-hov: oklch(var(--h4) / 15%);
         --menu-item-accent-atv: oklch(var(--h4) / 25%);
+
+        --summary-block-0: oklch(calc(var(--lit) * 0.99) calc(clamp(min(0), var(--sat), max(2)) * 0.07) var(--hue));
+        --summary-block-1: oklch(calc(var(--lit) * 0.99) calc(clamp(min(0), var(--sat), max(2)) * 0.2) var(--hue));
+        --summary-block-2: oklch(calc(var(--lit) * 0.93) calc(clamp(min(0), var(--sat), max(2)) * 0.27) var(--hue));
+        --summary-block-3: oklch(calc(var(--lit) * 0.84) calc(clamp(min(0), var(--sat), max(2)) * 0.34) var(--hue));
+        --summary-block-4: oklch(calc(var(--lit) * 0.74) calc(clamp(min(0), var(--sat), max(2)) * 0.42) var(--hue));
+        --summary-block-5: oklch(calc(var(--lit) * 0.65) calc(clamp(min(0), var(--sat), max(2)) * 0.49) var(--hue));
+        --summary-block-6: oklch(calc(var(--lit) * 0.55) calc(clamp(min(0), var(--sat), max(2)) * 0.54) var(--hue));
+        --summary-block-7: oklch(calc(var(--lit) * 0.45) calc(clamp(min(0), var(--sat), max(2)) * 0.57) var(--hue));
+        --summary-block-8: oklch(calc(var(--lit) * 0.3) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue));
+        --summary-block-9: oklch(calc(var(--lit) * 0.2) calc(clamp(min(0), var(--sat), max(2)) * 0.64) var(--hue));
+
+        --card-gradient: oklch(var(--h2) / 8%);
     }
 }
 
