@@ -205,8 +205,9 @@
     h1 {
         margin: unset;
         color: oklch(var(--c1));
-        font-size: 16px;
-        line-height: 20px;
+        font-family: var(--font-head);
+        font-size: var(--font-size-head);
+        line-height: var(--font-line-height-head);
         font-weight: var(--font-weight-medium);
         letter-spacing: unset;
         text-align: left;
