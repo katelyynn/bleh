@@ -81,15 +81,15 @@
 
 .side-action {
     --bg: transparent;
-    --bg-hov: oklch(var(--h4) / 3%);
-    --bg-atv: oklch(var(--h4) / 6%);
+    --bg-hov: transparent;
+    --bg-atv: transparent;
     --shadow: none;
     --col: oklch(var(--c2));
     border-radius: unset !important;
     overflow: unset;
     text-overflow: ellipsis;
-    --padding: 7px calc(var(--button-sides) + 10px) 7px calc(var(--button-sides) + var(--icon-size) + 6px + 10px);
-    margin: 0 -10px !important;
+    --padding: 7px var(--button-sides) 7px calc(var(--button-sides) + var(--icon-size) + 6px);
+    margin: unset !important;
     width: unset !important;
     position: relative;
     min-height: var(--side-action-height) !important;
@@ -121,7 +121,7 @@
     &:before {
         --mask-size: var(--icon-size);
 
-        --left: calc(var(--button-sides) + 10px) !important;
+        --left: var(--button-sides) !important;
         --margin-top: calc(-1 * (var(--mask-size, var(--icon-size)) / 2));
         background: var(--mask-colour) !important;
         border: unset;
@@ -184,8 +184,14 @@
 }
 
 .follow-combo {
+    align-items: center;
+
     position: relative;
+    --last-child-sep: none;
     margin-bottom: 1px;
+    padding-right: var(--button-sides);
+
+    gap: 10px !important;
 
     &:after {
         content: '';
@@ -198,6 +204,25 @@
         width: unset !important;
         height: 1px !important;
         background: oklch(var(--b2) / 40%) !important;
+    }
+}
+
+.side-action-small {
+    --bg-hov: oklch(var(--h4) / 20%);
+    --bg-atv: oklch(var(--h4) / 40%);
+    border-radius: 50px !important;
+
+    --side-action-height: 26px;
+    --font-size: 0;
+
+    width: var(--side-action-height) !important;
+    flex: unset !important;
+    --padding: 6px var(--button-sides) !important;
+    --icon-size: 14px !important;
+
+    &:before {
+        --left: 50% !important;
+        --margin-left: calc(-1 * (var(--icon-size) / 2)) !important;
     }
 }
 
@@ -216,27 +241,10 @@
     }
 }
 
-.side-action[data-type="close_friends"] {
-    --font-size: 0;
-    width: var(--side-action-height) !important;
-    flex: unset !important;
-    --padding: 6px var(--button-sides) !important;
-
-    &:before {
-        --left: 50% !important;
-        --margin-left: calc(-1 * (var(--icon-size) / 2)) !important;
-    }
-}
-
 .side-actions,
 .medium-interactions,
 .mini-interactions {
     order: -11;
-}
-
-
-.follow-combo {
-    gap: 2px !important;
 }
 
 .header-new-love-button {

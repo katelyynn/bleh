@@ -458,7 +458,7 @@ function friends_button(parent) {
     }
 
     const elem = html.node`
-        <button class="btn side-action colourful icon-mask" data-type="close_friends" type="button" onclick=${() => {
+        <button class="btn side-action colourful icon-mask side-action-small" data-type="close_friends" type="button" onclick=${() => {
             if (friend_state) {
                 dialog({
                     id: 'remove_friend',
@@ -469,7 +469,7 @@ function friends_button(parent) {
                             <button class="see-more cancel left-icon" onclick=${() => dialog_rm({ id: 'remove_friend' })}>
                                 ${tl(trans.cancel)}
                             </button>
-                            <div class="fill"></div>
+                            <div class="fill" />
                             <button class="btn primary icon danger" data-type="minus" onclick=${() => {
                                 friend_state = false;
                                 star_state = false;
