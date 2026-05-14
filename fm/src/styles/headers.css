@@ -91,9 +91,6 @@ h2.text-18,
     }
 
     &.music-section-heading {
-        font-size: 20px;
-        line-height: 24px;
-        font-weight: var(--font-weight-medium);
         margin: 0 !important;
         text-align: left;
 
