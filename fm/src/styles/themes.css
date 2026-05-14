@@ -471,14 +471,14 @@ body,
     }
     &[data-bleh--theme="oled"] {
         /* any additional highlights */
-        --b2: 0.34 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue);
-        --b3: 0.23 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue);
+        --b2: 0.3 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue);
+        --b3: 0.2 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue);
 
         /* card border */
-        --b4: 0.19 calc(var(--sat) * 0.01 * var(--sat-bg, 1)) var(--hue);
+        --b4: 0.16 calc(var(--sat) * 0.01 * var(--sat-bg, 1)) var(--hue);
 
         /* card */
-        --b5: 0.13 calc(var(--sat) * 0.01 * var(--sat-bg, 1)) var(--hue);
+        --b5: 0.04 calc(var(--sat) * 0.01 * var(--sat-bg, 1)) var(--hue);
 
         /* root */
         --b6: 0 0 0;
@@ -487,7 +487,7 @@ body,
 
         --separator-base: oklch(var(--b2) / 0.2);
 
-        --card-border-base: oklch(var(--b2) / 0.4);
+        --card-border-base: oklch(var(--b2) / 0.45);
         --card-border-base-highlight: oklch(var(--b2) / 0.6);
 
         --input-shadow:
@@ -496,7 +496,7 @@ body,
         --focused-input-shadow:
             inset 0 0 0 1px oklch(var(--h3) / 0.4),
             var(--input-shadow);
-        --group-shadow: inset 0 0 0 1px oklch(var(--b2) / 32%);
+        --group-shadow: inset 0 0 0 1px oklch(var(--b2) / 52%);
 
         --sidebar-bg: color-mix(in oklch, oklch(var(--b4)) 22%, oklch(var(--b5)));
         --sidebar-border: color-mix(
@@ -510,7 +510,7 @@ body,
 
         --normal-shadow: inset 0 0 0 1px oklch(var(--b2) / 50%);
 
-        --card-blur-bg: oklch(0.16 calc(var(--sat) * 0.05 * var(--sat-bg, 1)) var(--hue) / var(--solarium-opacity, 40%));
+        --card-blur-bg: oklch(0.12 calc(var(--sat) * 0.05 * var(--sat-bg, 1)) var(--hue) / var(--solarium-opacity, 40%));
         --card-blur-bg-alt: oklch(var(--b5) / var(--solarium-opacity, 40%));
 
         --setting-hover: oklch(var(--b4) / 20%);

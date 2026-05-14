@@ -600,6 +600,12 @@ export let settings_store: Record<string, setting_instance> = {
         },
         bubble: true
     },
+    font_serif: {
+        default: true,
+        type: 'checkbox',
+        title: trans.font_serif,
+        bubble: true
+    },
     font_weight: {
         css: 'custom_font_weight',
         default: 400,

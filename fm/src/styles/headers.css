@@ -29,7 +29,8 @@ h2:not(
     .mask-text,
     .sr-only,
     .js-gallery-heading,
-    .top-item-modal-header
+    .top-item-modal-header,
+    .page-header-artist
 ),
 h3.text-18,
 h2.text-18,
@@ -52,7 +53,8 @@ h2.text-18,
 .obsession-search-result-header,
 .inbox-message-view .inbox-message-subject {
     color: oklch(var(--c1));
-    font-size: 16px;
+    font-family: var(--font-head);
+    font-size: var(--font-size-head);
     line-height: 17px; /* matches button on the right */
     /*margin-bottom: 12px;*/
     font-weight: var(--font-weight-medium);

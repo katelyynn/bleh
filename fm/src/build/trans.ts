@@ -6149,6 +6149,9 @@ export const trans = {
             it: 'Accessibile',
         }
     },
+    font_serif: {
+        en: 'Use old-fashioned Serif font for some headings'
+    },
     previewing: {
         // used as subtext for previewing a font
         en: 'Previewing: {v}',

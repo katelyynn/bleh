@@ -14,9 +14,11 @@
         color: oklch(var(--c1));
     }
     h4 {
-        font-size: 16px;
-        line-height: 20px;
         color: oklch(var(--c1));
+
+        font-family: var(--font-head);
+        font-size: var(--font-size-head);
+        line-height: var(--line-height-head);
 
         &.top-header {
             width: fit-content;

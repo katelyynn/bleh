@@ -3,6 +3,7 @@
     display: inline-flex;
     align-items: center;
 
+    font-family: var(--font);
     font-size: 12px;
     background: oklch(var(--f4) / 20%);
     color: oklch(var(--l3-c));

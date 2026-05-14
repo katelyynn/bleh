@@ -421,3 +421,9 @@ hr {
     --icon-size: 14px;
     --icon-colour: oklch(var(--l3-c));
 }
+
+.goth {
+    font-family: var(--font-head);
+    font-size: var(--font-size-head);
+    line-height: var(--line-height-head);
+}

@@ -46,7 +46,11 @@
     }
 
     &:is(section) {
-        margin: calc(-1 * (2px + 7px)) calc(var(--card-padding) - var(--button-sides)) 0 !important;
+        margin: 0 calc(var(--card-padding) - var(--button-sides)) 0 !important;
+
+        &:first-child {
+            margin: calc(-1 * (2px + 7px)) calc(var(--card-padding) - var(--button-sides)) 0 !important;
+        }
     }
 
     & > form {
@@ -85,6 +89,7 @@
     --bg-atv: transparent;
     --shadow: none;
     --col: oklch(var(--c2));
+    --mask-colour: oklch(var(--l2-c-theme-switch));
     border-radius: unset !important;
     overflow: unset;
     text-overflow: ellipsis;

@@ -210,6 +210,7 @@ export function visual() {
                     render_font_preview();
                 } })}
                 ${custom_font = setting({ id: 'font', text: false })}
+                ${setting({ id: 'font_serif' })}
             </div>
             <div class="setting-group">
                 ${setting({ id: 'font_weight' })}

@@ -331,13 +331,14 @@ button.navlist-more {
     --shadow: none !important;
     --shadow-hov: none !important;
     --col: oklch(var(--c2)) !important;
+    --mask-colour: oklch(var(--l2-c-theme-switch)) !important;
     filter: var(--nav-filter-shadow) !important;
 
     z-index: 1;
     opacity: unset !important;
     margin: unset !important;
     font-weight: var(--font-weight-medium);
-    color: oklch(var(--c2));
+    color: var(--col);
     cursor: pointer;
     transition-property: background-color, color, transform;
     transition-duration: var(--trans);
