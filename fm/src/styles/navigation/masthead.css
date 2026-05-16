@@ -302,3 +302,9 @@ last.fm changes as of 2024-05-20 */
 
     margin-right: -10px;
 }
+
+.masthead-search-inner-wrap,
+.masthead-search-field {
+    margin: calc(-1 * var(--button-verts)) 0 !important;
+    height: var(--button-height) !important;
+}
