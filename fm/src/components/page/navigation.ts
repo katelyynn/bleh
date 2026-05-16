@@ -176,13 +176,13 @@ export function append_nav() {
         </a>
         <nav class="navlist navlist--more masthead-nav masthead-nav-top">
             <ul class="navlist-items">
-                <span class="navlist-search" ref=${el => page.state.search = el} />
                 <a class="btn masthead-nav-control icon" data-type="charts" href="${root}charts">
                     ${tl(trans.charts)}
                 </a>
                 <a class="btn masthead-nav-control icon" data-type="minis" href="${root}bleh/minis">
                     ${tl(trans.minis)}
                 </a>
+                <span class="navlist-search" ref=${el => page.state.search = el} />
             </ul>
         </nav>
     `);

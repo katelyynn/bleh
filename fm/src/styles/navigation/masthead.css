@@ -243,7 +243,7 @@ last.fm changes as of 2024-05-20 */
 
 .navlist-search {
     position: relative;
-    --search-width: 300px;
+    --search-width: 400px;
     width: 100%;
     max-width: var(--search-width);
 
@@ -285,8 +285,8 @@ last.fm changes as of 2024-05-20 */
 
 .masthead-search-inner-wrap {
     display: flex;
+    flex-direction: row-reverse;
     align-items: center;
-    gap: 10px;
 }
 
 .masthead-search-submit {
@@ -297,5 +297,8 @@ last.fm changes as of 2024-05-20 */
     opacity: unset !important;
     height: var(--button-height);
 
-    right: calc(-1 * var(--button-sides));
+    left: -8px;
+    right: none !important;
+
+    margin-right: -10px;
 }
