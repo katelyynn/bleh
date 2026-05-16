@@ -110,6 +110,11 @@ export function mualani() {
                         list: page.state.quick_access_items
                     })}
                 </div>
+                <div class="tippy-box" data-theme="context-menu" data-state="visible">
+                    <div class="tippy-content">
+                        ${setting({ id: 'solarium', in_menu: true })}
+                    </div>
+                </div>
             </section>
             <section class="flexy">
                 <h2>Notifications</h2>

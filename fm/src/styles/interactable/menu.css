@@ -330,3 +330,25 @@ li:first-child .more-item--delete {
         height: 100%;
     }
 }
+
+
+.menu-item-body {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+}
+
+.menu-item-head {
+    font-weight: inherit;
+}
+
+.menu-item-text {
+    opacity: 0.8;
+    font-size: 13px;
+    margin-top: -4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-clamp: 2;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
