@@ -39056,7 +39056,9 @@
         const year = split[len] == "year";
         const items = document.body.querySelectorAll(".listening-report-top-item-wrap");
         items.forEach((item) => {
-          const type = item.querySelector(".listening-report-top-item").getAttribute("id").replace("listening-report-top-item-", "");
+          const id = item.querySelector(".listening-report-top-item").getAttribute("id");
+          if (!id) return;
+          const type = id.replace("listening-report-top-item-", "");
           const buttons = item.querySelector(".top-item-buttons");
           const album_grid = buttons.querySelector(".album-grid-button");
           if (album_grid) album_grid.remove();
@@ -93493,7 +93495,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-02-25"
       }
     },
-    built_on: "2026-05-14T18:46:41.124Z"
+    built_on: "2026-05-16T01:55:27.649Z"
   };
 
   // node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

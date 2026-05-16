@@ -38,7 +38,12 @@ export function profile_reports() {
 
             const items = document.body.querySelectorAll('.listening-report-top-item-wrap');
             items.forEach(item => {
-                const type = item.querySelector('.listening-report-top-item').getAttribute('id').replace('listening-report-top-item-', '');
+                // id is null in the case of 'no albums'
+                // being a widget
+                const id = item.querySelector('.listening-report-top-item').getAttribute('id');
+                if (!id) return;
+
+                const type = id.replace('listening-report-top-item-', '');
 
                 const buttons = item.querySelector('.top-item-buttons');
                 const album_grid = buttons.querySelector('.album-grid-button');
