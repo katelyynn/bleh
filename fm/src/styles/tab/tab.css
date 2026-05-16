@@ -222,6 +222,8 @@ button.navlist-more {
 }
 
 .masthead-nav-control {
+    width: unset !important;
+
     /* left padding for icon, otherwise just 12px 16px */
     --padding: var(--button-verts) var(--button-sides) !important;
 

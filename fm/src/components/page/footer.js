@@ -10,6 +10,8 @@ import { sponsor_list } from '@/build/sponsor';
 import { root } from '@/build/page';
 import { sponsor } from '@/components/sponsor';
 import { version } from '@/main';
+import { settings } from '@/build/config';
+import { icon, icons } from '../shared/icon';
 
 export function bleh_footer() {
     let footer = document.body.querySelector('footer.footer');
@@ -39,6 +41,17 @@ export function bleh_footer() {
                 <a class="bleh-logo-footer" href="https://bleh.katelyn.moe" target="_blank">
                     ${version.brand}
                 </a>
+                <span class="footer-version">
+                    ${version.build}
+                </span>
+                <div class="new-badge sku spacing">
+                    ${version.sku}
+                    ${settings.dev ? html.node`
+                        <span class="bleh-icon-container">
+                            ${icon({ name: icons.dev })}
+                        </span>
+                    ` : ''}
+                </div>
             </div>
             <div class="footer-bleh-top">
                 <div class="footer-credit">

@@ -25,12 +25,18 @@
     .home-link {
         width: unset;
         height: unset;
+
+        display: flex;
+        align-items: center;
+        gap: 10px;
     }
 
     .home-version {
         width: fit-content;
         height: fit-content;
         color: oklch(var(--c3));
+        display: flex;
+        align-items: center;
         gap: var(--icon-gap);
 
         & > .new-badge {

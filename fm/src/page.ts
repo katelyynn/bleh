@@ -37,7 +37,7 @@ import { load_notifications, notify } from '@/components/dialog/notify';
 import { patch_titles } from '@/components/music/track.js';
 import { load_settings } from '@/config';
 import { theme_version, version } from '@/main';
-import { append_nav, patch_masthead, update_masthead } from '@/components/page/navigation';
+import { append_nav } from '@/components/page/navigation';
 import { bleh_albums } from '@/pages/album';
 import { bleh_artists } from '@/pages/artist';
 import { bleh_settings } from '@/pages/bleh_settings/bleh_settings.js';
@@ -144,8 +144,7 @@ export function bleh() {
                 .replaceAll("'", '')
                 .replaceAll('"', ''); // remove quotations
 
-            update_check(false, null, update_masthead);
-            patch_masthead();
+            update_check(false, null);
 
             load_notifications();
             load_status();
@@ -282,7 +281,6 @@ export function handle_error_500() {
 function main_flow() {
     try {
         lookup_lang();
-        patch_masthead();
 
         if (page.state.error) return;
 

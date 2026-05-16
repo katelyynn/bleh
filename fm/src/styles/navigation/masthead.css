@@ -240,3 +240,62 @@ last.fm changes as of 2024-05-20 */
         display: none;
     }
 }
+
+.navlist-search {
+    position: relative;
+    --search-width: 300px;
+    width: 100%;
+    max-width: var(--search-width);
+
+    &:hover, &:focus-within {
+        & > .search-prompt-container {
+            opacity: 0;
+            pointer-events: none;
+
+            translate: 0 0;
+        }
+    }
+
+    &:not(:hover, :focus-within) {
+        & > .navlist-search-container {
+            opacity: 0;
+            pointer-events: none;
+
+            translate: 0 0;
+        }
+    }
+
+    transition-property: max-width;
+    transition-duration: var(--trans);
+    transition-timing-function: var(--trans-function-ani);
+}
+
+.search-prompt-container, .navlist-search-container {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    max-width: var(--search-width);
+
+    translate: 0 0;
+
+    transition-property: translate, opacity, max-width;
+    transition-duration: var(--trans);
+    transition-timing-function: var(--trans-function-ani);
+}
+
+.masthead-search-inner-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.masthead-search-submit {
+    --bg: transparent;
+    --bg-hov: transparent;
+    --bg-atv: transparent;
+    --shadow: none;
+    opacity: unset !important;
+    height: var(--button-height);
+
+    right: calc(-1 * var(--button-sides));
+}
