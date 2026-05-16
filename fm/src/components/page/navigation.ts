@@ -266,12 +266,12 @@ export function append_nav() {
             html`
                 ${() => {
                     const elem = html.node`
-                    <li class="masthead-nav-item">
-                        <a class="btn masthead-nav-control chibi" href="${root}bleh" data-label="bleh_no_auth">
-                            ${tl(trans.bleh_settings)}
-                        </a>
-                    </li>
-                `;
+                        <li class="masthead-nav-item">
+                            <a class="btn masthead-nav-control chibi" href="${root}bleh" data-label="bleh_no_auth">
+                                ${tl(trans.bleh_settings)}
+                            </a>
+                        </li>
+                    `;
 
                     tippy(elem, {
                         content: tl(trans.bleh_settings)

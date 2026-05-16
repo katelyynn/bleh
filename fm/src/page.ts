@@ -10,7 +10,6 @@ import { log } from '@/build/log';
 import {
     api_url,
     auth,
-    auth_link,
     bleh_url,
     minis_url,
     mualani_url,
@@ -95,6 +94,7 @@ import { see_more } from './components/page/see_more';
 import { icon, icons } from './components/shared/icon';
 import { avatar } from './components/shared/avatar';
 import { clean_storage } from './components/settings/storage';
+import { register_auth } from './components/profile/auth';
 
 export function bleh() {
     florence({
@@ -114,11 +114,7 @@ export function bleh() {
             `;
             document.body.appendChild(page.state.colour_preview);
 
-            auth_link.state = document.querySelector('a.auth-link');
-            if (auth_link.state)
-                auth.name = auth_link.state
-                    .querySelector('img')
-                    .getAttribute('alt');
+            register_auth();
 
             load_settings();
 
@@ -134,8 +130,6 @@ export function bleh() {
             // messaging
             load_dialogs();
             register_rabbit();
-
-            lookup_lang();
 
             notices();
 
@@ -426,6 +420,7 @@ function load_page(main_content = null) {
 
     page.structure.notifications.setAttribute('data-auth-open', 'false');
 
+    register_auth();
     lookup_lang();
 
     detect_mobile();

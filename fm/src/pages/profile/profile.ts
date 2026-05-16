@@ -1696,7 +1696,7 @@ export function open_starred_friend_window(friend_func = null) {
 }
 
 export async function load_profile_cache_externally(name = page.name) {
-    if (!name) return;
+    if (!name) return {};
 
     log(`requested profile cache for ${name}`, 'cache');
 

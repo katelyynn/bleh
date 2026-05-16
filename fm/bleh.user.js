@@ -20391,9 +20391,6 @@
       lit: 1
     }
   };
-  var auth_link = {
-    state: null
-  };
   var root = "/";
   function setRoot(data2) {
     root = data2;
@@ -55507,7 +55504,7 @@
     });
   }
   async function load_profile_cache_externally(name = page.name) {
-    if (!name) return;
+    if (!name) return {};
     log(`requested profile cache for ${name}`, "cache");
     let profile_cache = JSON.parse(localStorage.getItem(keys2.profile_cache)) || {};
     let cache2 = profile_cache[name];
@@ -70148,21 +70145,21 @@
     let new_auth = masthead.querySelector(".auth-dropdown-menu");
     let links = masthead.querySelector(".masthead-nav:not(.masthead-nav-top) .navlist-items");
     render(links, html``);
-    let auth_link2 = masthead.querySelector(
+    let auth_link = masthead.querySelector(
       ".masthead-nav-wrap > .site-auth .auth-link"
     );
-    if (!auth_link2) {
+    if (!auth_link) {
       render(
         links,
         html`
                 ${() => {
           const elem = html.node`
-                    <li class="masthead-nav-item">
-                        <a class="btn masthead-nav-control chibi" href="${root}bleh" data-label="bleh_no_auth">
-                            ${tl2(trans.bleh_settings)}
-                        </a>
-                    </li>
-                `;
+                        <li class="masthead-nav-item">
+                            <a class="btn masthead-nav-control chibi" href="${root}bleh" data-label="bleh_no_auth">
+                                ${tl2(trans.bleh_settings)}
+                            </a>
+                        </li>
+                    `;
           tippy_esm_default(elem, {
             content: tl2(trans.bleh_settings)
           });
@@ -70185,22 +70182,22 @@
         `);
       return;
     }
-    if (auth_link2.hasAttribute("data-bleh")) return;
-    auth_link2.setAttribute("data-bleh", "true");
-    auth_link2.classList.add("icon-r");
+    if (auth_link.hasAttribute("data-bleh")) return;
+    auth_link.setAttribute("data-bleh", "true");
+    auth_link.classList.add("icon-r");
     const name = html.node`
         <p class="auth-link-name">${auth.name}</p>
     `;
-    auth_link2.appendChild(name);
-    queue_popup("navigation_menu", auth_link2);
+    auth_link.appendChild(name);
+    queue_popup("navigation_menu", auth_link);
     load_profile_cache_externally(auth.name).then((cache2) => {
       if (cache2.username) name.textContent = cache2.username;
     });
     let badges = load_badges(auth.name, true);
     if (badges) {
-      auth_link2.appendChild(create_badge(badges, false, false, true));
+      auth_link.appendChild(create_badge(badges, false, false, true));
     } else if (auth.pro) {
-      auth_link2.appendChild(html.node`
+      auth_link.appendChild(html.node`
             <span class="label user-status-subscriber auth-badge">${tl2(trans.badges["user-status-subscriber"].name)}</span>
         `);
     }
@@ -70554,7 +70551,7 @@
     ];
     const token = new_auth.querySelector('[name="csrfmiddlewaretoken"]').getAttribute("value");
     page.token = token;
-    let auth_menu = tippy_esm_default(auth_link2, {
+    let auth_menu = tippy_esm_default(auth_link, {
       theme: "auth-menu-v2",
       placement: "top",
       interactive: true,
@@ -71007,7 +71004,7 @@
         );
       }
     });
-    const auth_drop_menu = tippy_esm_default(auth_link2, {
+    const auth_drop_menu = tippy_esm_default(auth_link, {
       theme: "context-menu",
       content: html.node`
             <a class="dropdown-menu-clickable-item" data-type="quick_access" href="${root}bleh/profile?setting=navigation_items">
@@ -71031,13 +71028,13 @@
         });
       }
     });
-    register_menu(auth_link2, auth_drop_menu);
+    register_menu(auth_link, auth_drop_menu);
     let container = new_auth.parentElement;
     container.parentElement.removeChild(container);
-    auth_link2.removeAttribute("aria-controls");
-    auth_link2.removeAttribute("data-disclose-hover");
-    auth_link2.removeAttribute("data-disclose-hover--allow-enter-open");
-    auth_link2.addEventListener("click", (e4) => {
+    auth_link.removeAttribute("aria-controls");
+    auth_link.removeAttribute("data-disclose-hover");
+    auth_link.removeAttribute("data-disclose-hover--allow-enter-open");
+    auth_link.addEventListener("click", (e4) => {
       const cmd = e4.getModifierState("Control") || e4.getModifierState("Meta");
       const new_tab = e4.button === 1 || cmd;
       if (!new_tab) e4.preventDefault();
@@ -80130,6 +80127,41 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     });
   }
 
+  // src/components/profile/auth.ts
+  var import_color_thief_browser4 = __toESM(require_color_thief_min(), 1);
+  function register_auth() {
+    const handler = document.body.querySelector(".site-auth > .auth-link");
+    if (handler) {
+      log("found handler", "auth", "info", { handler });
+      const image = handler.querySelector(":scope > .auth-avatar-desktop");
+      if (!image) {
+        log("no image found", "auth", "error", { handler });
+        return;
+      }
+      const previous_avatar = auth.avatar;
+      log("found image", "auth", "info", { image });
+      auth.name = image.alt;
+      auth.avatar = image.src;
+      log(`registered avatar as ${auth.avatar}, name as ${auth.name}`, "auth", "info", { previous_avatar, handler });
+      if (auth.avatar != previous_avatar) {
+        image.setAttribute("crossorigin", "anonymous");
+        try {
+          image.addEventListener("load", () => {
+            let thief = new import_color_thief_browser4.default();
+            let colour = thief.getColor(image);
+            let hsl3 = rgb_to_oklch(colour[0], colour[1], colour[2]);
+            auth.sets.hue = hsl3.h;
+            auth.sets.sat = clamp_sat(hsl3.s / 100 * 3);
+            auth.sets.lit = clamp_lit(auth.sets.sat, hsl3.l / 100 + 0.35, true);
+          });
+        } catch (e4) {
+        }
+      }
+      return;
+    }
+    log("no handler found", "auth", "error");
+  }
+
   // src/page.ts
   function bleh() {
     q({
@@ -80147,9 +80179,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                 <div class="colour-preview" />
             `;
         document.body.appendChild(page.state.colour_preview);
-        auth_link.state = document.querySelector("a.auth-link");
-        if (auth_link.state)
-          auth.name = auth_link.state.querySelector("img").getAttribute("alt");
+        register_auth();
         load_settings();
         dynamic_theming();
         solarium();
@@ -80158,7 +80188,6 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         verified();
         load_dialogs();
         register_rabbit();
-        lookup_lang();
         notices();
         theme_version.state = getComputedStyle(document.body).getPropertyValue("--version-build").replaceAll("'", "").replaceAll('"', "");
         update_check(false, null);
@@ -80358,6 +80387,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       );
     }
     page.structure.notifications.setAttribute("data-auth-open", "false");
+    register_auth();
     lookup_lang();
     detect_mobile();
     page.platform = detect_platform();
@@ -80754,7 +80784,6 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
   }
 
   // src/build/trans.ts
-  var import_color_thief_browser4 = __toESM(require_color_thief_min(), 1);
   var lang = "en";
   var lang_browser = "en";
   var lang_info = {
@@ -92008,27 +92037,6 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       return;
     }
     setRoot(get_lang());
-    const previous_avatar = auth.avatar;
-    if (auth_link.state) {
-      const new_avatar_image = auth_link.state.querySelector("img");
-      const new_avatar = new_avatar_image.getAttribute("src");
-      if (new_avatar != previous_avatar) {
-        auth.avatar = new_avatar;
-        log(`registered avatar as ${auth.avatar}`, "auth", "info", { previous_avatar, auth_link });
-        new_avatar_image.setAttribute("crossorigin", "anonymous");
-        try {
-          new_avatar_image.addEventListener("load", () => {
-            let thief = new import_color_thief_browser4.default();
-            let colour = thief.getColor(new_avatar_image);
-            let hsl3 = rgb_to_oklch(colour[0], colour[1], colour[2]);
-            auth.sets.hue = hsl3.h;
-            auth.sets.sat = clamp_sat(hsl3.s / 100 * 3);
-            auth.sets.lit = clamp_lit(auth.sets.sat, hsl3.l / 100 + 0.35, true);
-          });
-        } catch (e4) {
-        }
-      }
-    }
     lang = document.documentElement.getAttribute("lang");
     lang_browser = navigator.language.replaceAll('"', "");
     if (lang.startsWith("en") && lang_browser.startsWith("en")) {
@@ -93523,7 +93531,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-02-25"
       }
     },
-    built_on: "2026-05-16T15:18:48.293Z"
+    built_on: "2026-05-16T17:24:32.852Z"
   };
 
   // node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

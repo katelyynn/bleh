@@ -6,9 +6,8 @@
 
 import { handle_error_500 } from '@/page';
 import { log } from '@/build/log';
-import { auth, auth_link, page, setRoot } from '@/build/page';
-import { clamp_lit, clamp_sat, get_language_name, rgb_to_hsl, rgb_to_oklch } from '@/build/tools';
-import ColorThief from 'color-thief-browser';
+import { page, setRoot } from '@/build/page';
+import { get_language_name } from '@/build/tools';
 import { Settings } from 'luxon';
 
 // loads your selected language in Last.fm
@@ -11276,30 +11275,6 @@ export function lookup_lang() {
 
     setRoot(get_lang());
 
-    const previous_avatar = auth.avatar;
-    if (auth_link.state) {
-        const new_avatar_image = auth_link.state.querySelector('img');
-        const new_avatar = new_avatar_image.getAttribute('src');
-
-        if (new_avatar != previous_avatar) {
-            auth.avatar = new_avatar;
-            log(`registered avatar as ${auth.avatar}`, 'auth', 'info', { previous_avatar, auth_link });
-            new_avatar_image.setAttribute('crossorigin', 'anonymous');
-
-            try {
-                new_avatar_image.addEventListener('load', () => {
-                    let thief = new ColorThief();
-                    let colour = thief.getColor(new_avatar_image);
-
-                    let hsl = rgb_to_oklch(colour[0], colour[1], colour[2]);
-
-                    auth.sets.hue = hsl.h;
-                    auth.sets.sat = clamp_sat((hsl.s / 100) * 3);
-                    auth.sets.lit = clamp_lit(auth.sets.sat, hsl.l / 100 + 0.35, true);
-                });
-            } catch (e) {}
-        }
-    }
     lang = document.documentElement.getAttribute('lang');
     lang_browser = navigator.language.replaceAll('"', '');
 
