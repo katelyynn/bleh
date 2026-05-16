@@ -94,16 +94,6 @@
     flex: 1 !important;
 }
 
-.masthead-search-wrap {
-    flex: 1;
-    opacity: 0;
-    translate: 0 -4px;
-
-    transition-property: translate, opacity;
-    transition-duration: 0.3s;
-    transition-timing-function: var(--trans-function-ani);
-}
-
 .inbox-item {
     position: relative;
 

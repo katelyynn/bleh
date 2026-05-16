@@ -140,8 +140,6 @@
                     oklch(var(--l3-c)),
                     oklch(var(--l4-c)) 30%
                 );
-                --sat-over: 1;
-                --lit-over: 1;
             }
         }
 

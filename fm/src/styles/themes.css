@@ -13,16 +13,16 @@ body {
     --brand: "bleh";
 
     --hue-pos: 133;
-    --sat-pos: 1.69;
-    --lit-pos: 0.88;
+    --sat-pos: 1.19;
+    --lit-pos: 0.98;
 
     --hue-neg: 23;
     --sat-neg: 1.9;
     --lit-neg: 0.83;
 
-    --hue-fav: 68;
+    --hue-fav: 56;
     --sat-fav: 1.58;
-    --lit-fav: 0.9;
+    --lit-fav: 1.1;
 
     --hue-orange: 37;
     --sat-orange: 2.02;

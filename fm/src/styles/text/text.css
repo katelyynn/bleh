@@ -107,6 +107,7 @@
     .gallery-image-uploaded-by {
         position: relative;
         padding-left: calc(var(--icon-size) + var(--icon-gap));
+        --icon-size: 14px;
         --mask: var(--icon-16-upload);
         --left: 0;
         min-width: unset;
