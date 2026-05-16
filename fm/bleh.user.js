@@ -79723,6 +79723,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
   // src/pages/profile/labs.js
   function bleh_labs() {
     if (page.subpage != "overview") return;
+    register_background("");
     let quilt = document.body.querySelector(
       '[data-analytics-action="LaunchAlbumQuilt"]'
     );
