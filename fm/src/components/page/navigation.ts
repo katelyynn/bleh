@@ -246,11 +246,6 @@ export function append_nav() {
     submit.setAttribute('data-type', 'search');
 
     render(page.state.search, html`
-        <span class="search-prompt-container">
-            <a class="btn masthead-nav-control icon search-prompt" data-type="search" href="${root}search">
-                ${tl(trans.search)}
-            </a>
-        </span>
         <span class="navlist-search-container">
             ${search}
         </span>

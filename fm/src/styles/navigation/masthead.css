@@ -247,30 +247,12 @@ last.fm changes as of 2024-05-20 */
     width: 100%;
     max-width: var(--search-width);
 
-    &:hover, &:focus-within {
-        & > .search-prompt-container {
-            opacity: 0;
-            pointer-events: none;
-
-            translate: 0 0;
-        }
-    }
-
-    &:not(:hover, :focus-within) {
-        & > .navlist-search-container {
-            opacity: 0;
-            pointer-events: none;
-
-            translate: 0 0;
-        }
-    }
-
     transition-property: max-width;
     transition-duration: var(--trans);
     transition-timing-function: var(--trans-function-ani);
 }
 
-.search-prompt-container, .navlist-search-container {
+.navlist-search-container {
     position: absolute;
     inset: 0;
     width: 100%;
