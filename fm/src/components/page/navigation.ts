@@ -43,6 +43,7 @@ import { icon, icons } from '../shared/icon';
 import { avatar } from '../shared/avatar';
 import { convert_lang_to_country, flag } from '../shared/flag';
 import { keys } from '../settings/storage';
+import { notify } from '../dialog/notify';
 
 export function patch_masthead() {
     let masthead_logo = document.body.querySelector('.masthead-logo');
@@ -805,6 +806,17 @@ export function append_nav() {
         appendTo: document.body,
 
         onShow: (instance) => {
+            if (!auth.avatar) {
+                notify({
+                    id: 'auth_broken',
+                    title: 'Could not open navigation menu',
+                    body: 'Authorisation status is invalid'
+                });
+
+                instance.hide();
+                return;
+            }
+
             page.structure.notifications.setAttribute('data-auth-open', 'true');
 
             const update_required = localStorage.getItem('bleh_update_required') || 'false';
