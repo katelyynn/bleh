@@ -70215,7 +70215,7 @@
             <a class="dropdown-menu-clickable-item colourful" data-type="discord" href="https://discord.gg/${discord}" target="_blank">
                 ${tl2(trans.join_discord)}
             </a>
-            <button class="dropdown-menu-clickable-item sponsor colourful" onclick=${() => sponsor()}>
+            <button class="dropdown-menu-clickable-item sponsor colourful" data-type="sponsor" onclick=${() => sponsor()}>
                 ${tl2(trans.sponsor)}
             </button>
             <a class="dropdown-menu-clickable-item lotus colourful" href="https://github.com/katelyynn/lotus/issues/new/choose" target="_blank">
@@ -77895,7 +77895,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     `;
     load_profile_cache_externally(friend).then((cache2) => {
       render(user_avatar, html`
-            <img src=${cache2.avatar} alt=${friend}>
+            <img src=${own ? auth.avatar : cache2.avatar} alt=${friend}>
         `);
       if (cache2.username)
         user_name.textContent = cache2.username;
@@ -91991,16 +91991,18 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       return;
     }
     setRoot(get_lang());
-    let previous_avi = auth.avatar;
+    const previous_avatar = auth.avatar;
     if (auth_link.state) {
-      auth.avatar = auth_link.state.querySelector("img").getAttribute("src");
-      if (auth.avatar != previous_avi) {
-        let avatar3 = auth_link.state.querySelector("img");
-        avatar3.setAttribute("crossorigin", "anonymous");
+      const new_avatar_image = auth_link.state.querySelector("img");
+      const new_avatar = new_avatar_image.getAttribute("src");
+      if (new_avatar != previous_avatar) {
+        auth.avatar = new_avatar;
+        log(`registered avatar as ${auth.avatar}`, "auth", "info", { previous_avatar, auth_link });
+        new_avatar_image.setAttribute("crossorigin", "anonymous");
         try {
-          avatar3.addEventListener("load", () => {
+          new_avatar_image.addEventListener("load", () => {
             let thief = new import_color_thief_browser4.default();
-            let colour = thief.getColor(avatar3);
+            let colour = thief.getColor(new_avatar_image);
             let hsl3 = rgb_to_oklch(colour[0], colour[1], colour[2]);
             auth.sets.hue = hsl3.h;
             auth.sets.sat = clamp_sat(hsl3.s / 100 * 3);

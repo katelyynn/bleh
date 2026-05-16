@@ -11276,18 +11276,20 @@ export function lookup_lang() {
 
     setRoot(get_lang());
 
-    let previous_avi = auth.avatar;
+    const previous_avatar = auth.avatar;
     if (auth_link.state) {
-        auth.avatar = auth_link.state.querySelector('img').getAttribute('src');
+        const new_avatar_image = auth_link.state.querySelector('img');
+        const new_avatar = new_avatar_image.getAttribute('src');
 
-        if (auth.avatar != previous_avi) {
-            let avatar = auth_link.state.querySelector('img');
-            avatar.setAttribute('crossorigin', 'anonymous');
+        if (new_avatar != previous_avatar) {
+            auth.avatar = new_avatar;
+            log(`registered avatar as ${auth.avatar}`, 'auth', 'info', { previous_avatar, auth_link });
+            new_avatar_image.setAttribute('crossorigin', 'anonymous');
 
             try {
-                avatar.addEventListener('load', () => {
+                new_avatar_image.addEventListener('load', () => {
                     let thief = new ColorThief();
-                    let colour = thief.getColor(avatar);
+                    let colour = thief.getColor(new_avatar_image);
 
                     let hsl = rgb_to_oklch(colour[0], colour[1], colour[2]);
 

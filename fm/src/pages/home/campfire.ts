@@ -295,7 +295,7 @@ function campfire_friend(friend: string, own = false) {
 
     load_profile_cache_externally(friend).then(cache => {
         render(user_avatar, html`
-            <img src=${cache.avatar} alt=${friend}>
+            <img src=${own ? auth.avatar : cache.avatar} alt=${friend}>
         `);
 
         if (cache.username)
