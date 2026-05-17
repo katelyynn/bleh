@@ -80,9 +80,17 @@
     }
 }
 
+.dropdown-menu-clickable-item {
+    --selected-icon: var(--icon-16-check);
+
+    &.radio-menu-item {
+        --selected-icon: var(--icon-16-radio-dot);
+    }
+}
+
 .dropdown-menu-clickable-item[aria-checked="true"],
 .dropdown-menu-clickable-item--selected {
-    --mask: var(--icon-16-check) !important;
+    --mask: var(--selected-icon) !important;
     --mask-size: 14px !important;
     /*--btn-left: calc(var(--button-sides) + 12px + 4px) !important;*/
     --margin-top: calc(-1 * (var(--mask-size) / 2)) !important;

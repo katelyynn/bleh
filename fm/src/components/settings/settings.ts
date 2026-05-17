@@ -730,63 +730,121 @@ export function setting({
 
             let reset_btn;
 
-            const elem = html.node`
-                <div class="setting v2" data-type="options" disabled=${disabled} data-hide=${hide_if_incompatible} id="setting_${id}" data-modified=${value != settings_store[id].default}>
-                    ${
-                        icon ?
-                            html.node`
-                    <div class="icon">
-                        <div class="bleh-icon" style="--icon: var(--${icon})" />
+            let elem;
+
+            if (!in_menu) {
+                elem = html.node`
+                    <div class="setting v2" data-type="options" disabled=${disabled} data-hide=${hide_if_incompatible} id="setting_${id}" data-modified=${value != settings_store[id].default}>
+                        ${
+                            icon ?
+                                html.node`
+                        <div class="icon">
+                            <div class="bleh-icon" style="--icon: var(--${icon})" />
+                        </div>
+                        `
+                            :   ''
+                        }
+                        ${
+                            text ?
+                                html.node`
+                        <div class="heading">
+                            <h5>${html_title}<button class="btn reset" ref=${(el) => (reset_btn = el)} onclick=${() => reset_radio()}>${tl(trans.reset)}</button></h5>
+                            ${body ? html.node`<p>${body}</p>` : ''}
+                        </div>
+                        `
+                            :   ''
+                        }
+                        ${
+                            settings_store[id].extensions ?
+                                html.node`
+                        <div class="extensions">
+                            ${settings_store[id].extensions.map(
+                                (extension) => () => {
+                                    let container = html.node`
+                                    <div class="extension">
+                                        <div class="bleh-icon" />
+                                    </div>
+                                `;
+                                    tippy(container, {
+                                        content: tl(
+                                            trans.requires_extension_value
+                                        ).replace('{v}', tl(extension))
+                                    });
+                                    return container;
+                                }
+                            )}
+                        </div>
+                        `
+                            :   ''
+                        }
+                        ${setting_incompatible_block(settings_store[id].incompatible)}
+                        <div class="primary-selections">
+                            ${Object.entries(settings_store[id].values).map(
+                                ([key, val]) => {
+                                    const icon = val.icon;
+
+                                    const button = html.node`
+                                        <div class="setting v2 standalone" data-type="radio" data-value=${key} onclick=${() => {
+                                            update_radio(key);
+                                        }}>
+                                            <div class="radio-cont">
+                                                <div class="radio" aria-checked=${value == key} />
+                                            </div>
+                                            ${
+                                                icon ?
+                                                    html.node`
+                                                        <div class="icon">
+                                                            <div class="bleh-icon" style="--icon: var(--${icon})" />
+                                                        </div>
+                                                    `
+                                                :   ''
+                                            }
+                                            <div class="heading">
+                                                <h5>${typeof val.name == 'object' ? tl(val.name) : val.name}</h5>
+                                            </div>
+                                        </div>
+                                    `;
+
+                                    buttons.push(button);
+                                    return button;
+                                }
+                            )}
+                        </div>
                     </div>
-                    `
-                        :   ''
-                    }
-                    ${
-                        text ?
-                            html.node`
-                    <div class="heading">
-                        <h5>${html_title}<button class="btn reset" ref=${(el) => (reset_btn = el)} onclick=${() => reset_radio()}>${tl(trans.reset)}</button></h5>
-                        ${body ? html.node`<p>${body}</p>` : ''}
-                    </div>
-                    `
-                        :   ''
-                    }
-                    ${
-                        settings_store[id].extensions ?
-                            html.node`
-                    <div class="extensions">
-                        ${settings_store[id].extensions.map(
-                            (extension) => () => {
-                                let container = html.node`
-                                <div class="extension">
-                                    <div class="bleh-icon" />
-                                </div>
-                            `;
-                                tippy(container, {
-                                    content: tl(
-                                        trans.requires_extension_value
-                                    ).replace('{v}', tl(extension))
-                                });
-                                return container;
-                            }
-                        )}
-                    </div>
-                    `
-                        :   ''
-                    }
-                    ${setting_incompatible_block(settings_store[id].incompatible)}
-                    <div class="primary-selections">
+                ` as setting_element;
+            } else {
+                elem = html.node`
+                    <button class="dropdown-menu-clickable-item" data-hide=${hide_if_incompatible}>
+                        ${
+                            icon ?
+                                html.node`
+                        <div class="icon">
+                            <div class="bleh-icon" style="--icon: var(--${icon})" />
+                        </div>
+                        `
+                            :   ''
+                        }
+                        ${text ? html.node`
+                        <span class="menu-item-body">
+                            <strong class="menu-item-head">${html_title}</strong>
+                            ${body ? html.node`<p class="menu-item-text">${body}</p>` : ''}
+                        </span>
+                        ` : ''}
+                        ${setting_incompatible_block(settings_store[id].incompatible)}
+                    </button>
+                ` as setting_element;
+
+                tippy(elem, {
+                    theme: 'context-menu',
+                    content: html.node`
                         ${Object.entries(settings_store[id].values).map(
                             ([key, val]) => {
                                 const icon = val.icon;
 
                                 const button = html.node`
-                                    <div class="setting v2 standalone" data-type="radio" data-value=${key} onclick=${() => {
+                                    <button class="dropdown-menu-clickable-item radio-menu-item" aria-checked=${value == key} data-value=${key} onclick=${() => {
                                         update_radio(key);
                                     }}>
-                                        <div class="radio-cont">
-                                            <div class="radio" aria-checked=${value == key} />
-                                        </div>
                                         ${
                                             icon ?
                                                 html.node`
@@ -796,22 +854,30 @@ export function setting({
                                                 `
                                             :   ''
                                         }
-                                        <div class="heading">
-                                            <h5>${typeof val.name == 'object' ? tl(val.name) : val.name}</h5>
-                                        </div>
-                                    </div>
+                                        ${typeof val.name == 'object' ? tl(val.name) : val.name}
+                                    </button>
                                 `;
 
                                 buttons.push(button);
                                 return button;
                             }
                         )}
-                    </div>
-                </div>
-            ` as setting_element;
+                    `,
+                    placement: 'right',
+                    interactive: true,
+                    interactiveBorder: 10,
+                    appendTo: document.body,
+
+                    onShow(instance) {
+                        instance.popper.addEventListener('click', (event) => {
+                            instance.hide();
+                        });
+                    }
+                })
+            }
 
             elem.compat = () => {
-                elem.setAttribute('disabled', 'false');
+                elem.removeAttribute('disabled');
 
                 if (incompatible_with) {
                     Object.entries(incompatible_with).forEach(([key, val]) => {
@@ -852,7 +918,10 @@ export function setting({
                 elem.setAttribute('data-modified', (val != settings_store[id].default).toString());
 
                 buttons.forEach((btn) => {
-                    btn.querySelector('.radio').setAttribute(
+                    let target = btn.querySelector('.radio');
+                    if (!target) target = btn;
+
+                    target.setAttribute(
                         'aria-checked',
                         btn.getAttribute('data-value') == val
                     );

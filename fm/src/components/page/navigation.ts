@@ -214,7 +214,7 @@ export function append_nav() {
     const link_menu = tippy(home_link, {
         theme: 'context-menu',
         content: html.node`
-            ${setting({ id: 'branding_type', func: update_branding_type, standalone: true })}
+            ${setting({ id: 'branding_type', func: update_branding_type, in_menu: true })}
             <a class="dropdown-menu-clickable-item" data-type="update" href="${root}bleh/general">
                 ${last_checked ? tl(trans.last_checked_date, { d: DateTime.fromJSDate(new Date(last_checked)).toRelative() }) : tl(trans.never_checked)}
             </a>
