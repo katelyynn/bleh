@@ -159,6 +159,10 @@
     cursor: default;
     position: relative;
 
+    &[href] {
+        cursor: pointer;
+    }
+
     @media (min-width: 981px) and (max-width: 1250px) {
       &:first-child, &:nth-child(2), &:nth-child(3) {
         display: none;
