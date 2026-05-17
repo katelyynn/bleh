@@ -55429,7 +55429,7 @@
       allow_alignment: true,
       allow_lists: true
     });
-    if (!body.hasChildNodes()) {
+    if (body.childElementCount == 0) {
       render(body, html`
             <p class="subtle">${tl2(trans.no_about).replace("{u}", page.name)}</p>
         `);

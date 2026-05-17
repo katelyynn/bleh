@@ -1599,7 +1599,7 @@ function bio_parse(text, cache = true, take_effect = true) {
         allow_lists: true
     });
 
-    if (!body.hasChildNodes()) {
+    if (body.childElementCount == 0) {
         render(body, html`
             <p class="subtle">${tl(trans.no_about).replace('{u}', page.name)}</p>
         `);
