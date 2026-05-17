@@ -137,7 +137,7 @@ export function setting({
 
             if (!in_menu) {
                 elem = html.node`
-                    <div class="setting v2 ${standalone ? 'standalone' : ''}" data-type="toggle" disabled=${disabled} data-hide=${hide_if_incompatible} id="setting_${id}" onclick=${() => update_toggle()}>
+                    <div class="setting v2 ${standalone ? 'standalone' : ''}" data-type="toggle" data-hide=${hide_if_incompatible} id="setting_${id}" onclick=${() => update_toggle()}>
                         ${
                             icon ?
                                 html.node`
@@ -192,7 +192,7 @@ export function setting({
                 ` as setting_element;
             } else {
                 elem = html.node`
-                    <button class="dropdown-menu-clickable-item" disabled=${disabled} data-hide=${hide_if_incompatible} aria-checked=${value} onclick=${() => update_toggle()} ref=${(el) => (toggle = el)}>
+                    <button class="dropdown-menu-clickable-item" data-hide=${hide_if_incompatible} aria-checked=${value} onclick=${() => update_toggle()} ref=${(el) => (toggle = el)}>
                         ${
                             icon ?
                                 html.node`
@@ -202,41 +202,12 @@ export function setting({
                         `
                             :   ''
                         }
-                        ${
-                            text ?
-                                html.node`
+                        ${text ? html.node`
                         <span class="menu-item-body">
                             <strong class="menu-item-head">${html_title}</strong>
                             ${body ? html.node`<p class="menu-item-text">${body}</p>` : ''}
                         </span>
-                        `
-                            :   ''
-                        }
-                        ${
-                            settings_store[id].extensions ?
-                                html.node`
-                        <div class="extensions">
-                            ${settings_store[id].extensions.map(
-                                (extension) => () => {
-                                    let container = html.node`
-                                    <div class="extension">
-                                        <div class="bleh-icon" />
-                                    </div>
-                                `;
-
-                                    tippy(container, {
-                                        content: tl(
-                                            trans.requires_extension_value
-                                        ).replace('{v}', tl(extension))
-                                    });
-
-                                    return container;
-                                }
-                            )}
-                        </div>
-                        `
-                            :   ''
-                        }
+                        ` : ''}
                         ${setting_incompatible_block(settings_store[id].incompatible)}
                     </button>
                 ` as setting_element;
@@ -261,7 +232,7 @@ export function setting({
             elem.compat = () => {
                 if (!incompatible_with) return;
 
-                elem.setAttribute('disabled', 'false');
+                elem.removeAttribute('disabled');
 
                 Object.entries(incompatible_with).forEach(([key, val]) => {
                     if (Array.isArray(val)) {
@@ -596,58 +567,83 @@ export function setting({
         } else if (type == 'checkbox') {
             let toggle;
 
-            const elem = html.node`
-                <div class="setting v2 ${settings_store[id].horizontal ? 'horizontal' : ''} ${standalone ? 'standalone' : ''}" data-type="checkbox" disabled=${disabled} id="setting_${id}" data-hide=${hide_if_incompatible} onclick=${() => update_toggle()}>
-                    ${
-                        icon ?
-                            html.node`
-                    <div class="icon">
-                        <div class="bleh-icon" style="--icon: var(--${icon})" />
-                    </div>
-                    `
-                        :   ''
-                    }
-                    ${
-                        text ?
-                            html.node`
-                    <div class="heading">
-                        <h5>${html_title}</h5>
-                        ${body ? html.node`<p>${body}</p>` : ''}
-                    </div>
-                    `
-                        :   ''
-                    }
-                    ${
-                        settings_store[id].extensions ?
-                            html.node`
-                    <div class="extensions">
-                        ${settings_store[id].extensions.map(
-                            (extension) => () => {
-                                let container = html.node`
-                                <div class="extension">
-                                    <div class="bleh-icon" />
-                                </div>
-                            `;
-                                tippy(container, {
-                                    content: tl(
-                                        trans.requires_extension_value
-                                    ).replace('{v}', tl(extension))
-                                });
-                                return container;
-                            }
-                        )}
-                    </div>
-                    `
-                        :   ''
-                    }
-                    ${setting_incompatible_block(settings_store[id].incompatible)}
-                    <div class="check">
-                        <div class="box" ref=${(el) => (toggle = el)} aria-checked=${value}>
-                            <div class="bleh-icon" />
+            let elem;
+
+            if (!in_menu) {
+                elem = html.node`
+                    <div class="setting v2 ${settings_store[id].horizontal ? 'horizontal' : ''} ${standalone ? 'standalone' : ''}" data-type="checkbox" id="setting_${id}" data-hide=${hide_if_incompatible} onclick=${() => update_toggle()}>
+                        ${
+                            icon ?
+                                html.node`
+                        <div class="icon">
+                            <div class="bleh-icon" style="--icon: var(--${icon})" />
+                        </div>
+                        `
+                            :   ''
+                        }
+                        ${
+                            text ?
+                                html.node`
+                        <div class="heading">
+                            <h5>${html_title}</h5>
+                            ${body ? html.node`<p>${body}</p>` : ''}
+                        </div>
+                        `
+                            :   ''
+                        }
+                        ${
+                            settings_store[id].extensions ?
+                                html.node`
+                        <div class="extensions">
+                            ${settings_store[id].extensions.map(
+                                (extension) => () => {
+                                    let container = html.node`
+                                    <div class="extension">
+                                        <div class="bleh-icon" />
+                                    </div>
+                                `;
+                                    tippy(container, {
+                                        content: tl(
+                                            trans.requires_extension_value
+                                        ).replace('{v}', tl(extension))
+                                    });
+                                    return container;
+                                }
+                            )}
+                        </div>
+                        `
+                            :   ''
+                        }
+                        ${setting_incompatible_block(settings_store[id].incompatible)}
+                        <div class="check">
+                            <div class="box" ref=${(el) => (toggle = el)} aria-checked=${value}>
+                                <div class="bleh-icon" />
+                            </div>
                         </div>
                     </div>
-                </div>
-            ` as setting_element;
+                ` as setting_element;
+            } else {
+                elem = html.node`
+                    <button class="dropdown-menu-clickable-item" data-hide=${hide_if_incompatible} aria-checked=${value} onclick=${() => update_toggle()} ref=${(el) => (toggle = el)}>
+                        ${
+                            icon ?
+                                html.node`
+                        <div class="icon">
+                            <div class="bleh-icon" style="--icon: var(--${icon})" />
+                        </div>
+                        `
+                            :   ''
+                        }
+                        ${text ? html.node`
+                        <span class="menu-item-body">
+                            <strong class="menu-item-head">${html_title}</strong>
+                            ${body ? html.node`<p class="menu-item-text">${body}</p>` : ''}
+                        </span>
+                        ` : ''}
+                        ${setting_incompatible_block(settings_store[id].incompatible)}
+                    </button>
+                ` as setting_element;
+            }
 
             function update_toggle() {
                 if (elem.getAttribute('disabled') == 'true') {
@@ -668,7 +664,7 @@ export function setting({
             elem.compat = () => {
                 if (!incompatible_with) return;
 
-                elem.setAttribute('disabled', 'false');
+                elem.removeAttribute('disabled');
 
                 Object.entries(incompatible_with).forEach(([key, val]) => {
                     if (Array.isArray(val)) {

@@ -113,6 +113,8 @@ export function mualani() {
                 <div class="tippy-box" data-theme="context-menu" data-state="visible">
                     <div class="tippy-content">
                         ${setting({ id: 'solarium', in_menu: true })}
+                        ${setting({ id: 'romanise_jp', in_menu: true })}
+                        ${setting({ id: 'expand_tracks', in_menu: true })}
                     </div>
                 </div>
             </section>
