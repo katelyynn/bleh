@@ -54523,13 +54523,9 @@
         about_me_sidebar.firstChild
       );
       tippy_esm_default(settings_btn, {
-        theme: "window",
+        theme: "context-menu",
         content: html.node`
-                <div class="dialog-settings">
-                    <div class="setting-group blend">
-                        ${setting({ id: "bio_markdown" })}
-                    </div>
-                </div>
+                ${setting({ id: "bio_markdown", in_menu: true })}
             `,
         placement: "bottom",
         interactive: true,

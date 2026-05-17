@@ -496,13 +496,9 @@ export function bleh_profiles() {
         );
 
         tippy(settings_btn, {
-            theme: 'window',
+            theme: 'context-menu',
             content: html.node`
-                <div class="dialog-settings">
-                    <div class="setting-group blend">
-                        ${setting({ id: 'bio_markdown' })}
-                    </div>
-                </div>
+                ${setting({ id: 'bio_markdown', in_menu: true })}
             `,
             placement: 'bottom',
             interactive: true,
