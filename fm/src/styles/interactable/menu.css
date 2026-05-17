@@ -105,8 +105,9 @@
 
         .auth-dropdown-item-left {
             display: flex;
+            flex-wrap: wrap;
+            flex: 1;
             gap: var(--icon-gap);
-            max-width: 100px;
             overflow: hidden;
         }
         .auth-dropdown-item-right {

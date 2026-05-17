@@ -11182,7 +11182,7 @@ export type translation = translation_leaf | {
     [key: string]: translation
 }
 
-export function tl(key: translation, replacements = {}) {
+export function tl(key: translation | string, replacements = {}) {
     if (typeof key === 'string') {
         return key;
     }

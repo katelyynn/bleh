@@ -834,7 +834,7 @@ export function setting({
                                 ` : ''}
                             </span>
                             <span class="auth-dropdown-item-right">
-                                <p ref=${el => value_holder = el}>${settings_store[id].values[(value as string)].name}</p>
+                                <p ref=${el => value_holder = el}>${tl(settings_store[id].values[(value as string)].name)}</p>
                             </span>
                         </div>
                         ${setting_incompatible_block(settings_store[id].incompatible)}
@@ -861,7 +861,7 @@ export function setting({
                                                 `
                                             :   ''
                                         }
-                                        ${typeof val.name == 'object' ? tl(val.name) : val.name}
+                                        ${tl(val.name)}
                                     </button>
                                 `;
 
@@ -936,7 +936,7 @@ export function setting({
                 });
 
                 if (value_holder) {
-                    value_holder.textContent = settings_store[id].values[val].name;
+                    value_holder.textContent = tl(settings_store[id].values[val].name);
                 }
 
                 if (func) func(val);
