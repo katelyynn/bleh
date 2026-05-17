@@ -88854,12 +88854,12 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       // lowercase in design
       // ignore the curly brackets, only translate the '{c} wonderful people' thing
       // c: replaced with a number of sponsors
-      en: "{s}{c} sponsoring{/s} \u2661",
-      de: "{s}{c} unterst\xFCtzen{/s} \u2661",
-      ru: "{s}{c} \u0437\u0430\u043C\u0435\u0447\u0430\u0442\u0435\u043B\u044C\u043D\u044B\u0445 \u043B\u044E\u0434\u0435\u0439{/s} \u2661",
+      en: "{s}{c} sponsoring{/s}",
+      de: "{s}{c} unterst\xFCtzen{/s}",
+      ru: "{s}{c} \u0437\u0430\u043C\u0435\u0447\u0430\u0442\u0435\u043B\u044C\u043D\u044B\u0445 \u043B\u044E\u0434\u0435\u0439{/s}",
       // wonderful people -tech
-      es: "{s}{c} patrocinando{/s} \u2661",
-      it: "{s}{c} sostenendo{/s} \u2661"
+      es: "{s}{c} patrocinando{/s}",
+      it: "{s}{c} sostenendo{/s}"
     },
     love_lower: {
       // replaces the {h} in the above sentence

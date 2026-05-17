@@ -8005,11 +8005,11 @@ export const trans = {
         // lowercase in design
         // ignore the curly brackets, only translate the '{c} wonderful people' thing
         // c: replaced with a number of sponsors
-        en: '{s}{c} sponsoring{/s} ♡',
-        de: '{s}{c} unterstützen{/s} ♡',
-        ru: '{s}{c} замечательных людей{/s} ♡', // wonderful people -tech
-        es: '{s}{c} patrocinando{/s} ♡',
-        it: '{s}{c} sostenendo{/s} ♡'
+        en: '{s}{c} sponsoring{/s}',
+        de: '{s}{c} unterstützen{/s}',
+        ru: '{s}{c} замечательных людей{/s}', // wonderful people -tech
+        es: '{s}{c} patrocinando{/s}',
+        it: '{s}{c} sostenendo{/s}'
     },
     love_lower: {
         // replaces the {h} in the above sentence
