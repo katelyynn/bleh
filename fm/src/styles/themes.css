@@ -1033,7 +1033,7 @@ body {
     --calendar-size: 46px;
     --calendar-width: 40px;
     --calendar-height: var(--calendar-size);
-    --calendar-radius: var(--item-med-radius);
+    --calendar-radius: 6px;
 
     --shout-avatar-size: 48px;
     --shout-inset: 48px;
