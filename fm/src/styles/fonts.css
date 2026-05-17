@@ -26,7 +26,7 @@ body {
     --font-head: Instrument Serif, var(--font);
     --font-choice: Hanken Grotesk;
     --font: var(--font-choice), Inter, Ubuntu Sans, Spline Sans,
-        Roboto, Apple Color Emoji, var(--font_emoji_name, ""), Segoe UI Symbol, Apple Symbols, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Sans TC,
+        Roboto, Apple Color Emoji, var(--font_emoji_name, ""), Segoe UI Emoji, Segoe UI Symbol, Apple Symbols, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Sans TC,
         Lucida Grande, Verdana, -apple-system, BlinkMacSystemFont,
         sans-serif, Iosevka Charon, -system-font;
     /* isoevka is used here specifically for symbol backup */
