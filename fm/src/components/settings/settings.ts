@@ -731,6 +731,7 @@ export function setting({
             let reset_btn;
 
             let elem;
+            let value_holder;
 
             if (!in_menu) {
                 elem = html.node`
@@ -814,7 +815,7 @@ export function setting({
                 ` as setting_element;
             } else {
                 elem = html.node`
-                    <button class="dropdown-menu-clickable-item" data-hide=${hide_if_incompatible}>
+                    <button class="dropdown-menu-clickable-item v2 icon-r opens-further" data-hide=${hide_if_incompatible}>
                         ${
                             icon ?
                                 html.node`
@@ -824,12 +825,18 @@ export function setting({
                         `
                             :   ''
                         }
-                        ${text ? html.node`
-                        <span class="menu-item-body">
-                            <strong class="menu-item-head">${html_title}</strong>
-                            ${body ? html.node`<p class="menu-item-text">${body}</p>` : ''}
-                        </span>
-                        ` : ''}
+                        <div class="auth-dropdown-item-row">
+                            <span class="auth-dropdown-item-left">
+                                ${text ? html.node`
+                                <span class="menu-item-body">
+                                    <strong class="menu-item-head">${html_title}</strong>
+                                </span>
+                                ` : ''}
+                            </span>
+                            <span class="auth-dropdown-item-right">
+                                <p ref=${el => value_holder = el}>${settings_store[id].values[(value as string)].name}</p>
+                            </span>
+                        </div>
                         ${setting_incompatible_block(settings_store[id].incompatible)}
                     </button>
                 ` as setting_element;
@@ -862,6 +869,7 @@ export function setting({
                                 return button;
                             }
                         )}
+                        ${body ? html.node`<p class="menu-item-description">${body}</p>` : ''}
                     `,
                     placement: 'right',
                     interactive: true,
@@ -926,6 +934,10 @@ export function setting({
                         btn.getAttribute('data-value') == val
                     );
                 });
+
+                if (value_holder) {
+                    value_holder.textContent = settings_store[id].values[val].name;
+                }
 
                 if (func) func(val);
             }
