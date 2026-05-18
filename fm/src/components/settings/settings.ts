@@ -875,6 +875,16 @@ export function setting({
                     interactive: true,
                     interactiveBorder: 10,
                     appendTo: document.body,
+                    popperOptions: {
+                        modifiers: [
+                            {
+                                name: 'preventOverflow',
+                                options: {
+                                    padding: 20
+                                }
+                            }
+                        ]
+                    },
 
                     onShow(instance) {
                         instance.popper.addEventListener('click', (event) => {

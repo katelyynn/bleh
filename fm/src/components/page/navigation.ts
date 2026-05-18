@@ -48,7 +48,7 @@ import { notify } from '../dialog/notify';
 export function update_branding_type(state = settings.branding_type) {
     if (state == 'bleh') {
         render(page.state.home_link, html`
-            <div class="home-logo bleh-logo">${version.brand}</div>
+            <div class="home-logo bleh-logo" data-refresh=${ff('logo')}>${version.brand}</div>
         `);
     } else if (state == 'lastfm') {
         render(page.state.home_link, html`

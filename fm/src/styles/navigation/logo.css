@@ -102,4 +102,18 @@
         -webkit-text-fill-color: transparent;
         text-shadow: unset;
     }
+
+    &[data-refresh="true"] {
+        background-color: oklch(var(--l2-c-theme-switch));
+        margin-top: unset;
+        aspect-ratio: 617 / 230;
+        height: 18px;
+        font: 0 / 0 auto;
+
+        --mask: var(--logo);
+        mask-image: var(--mask);
+        -webkit-mask-image: var(--mask);
+        mask-size: 100%;
+        -webkit-mask-size: 100%;
+    }
 }
