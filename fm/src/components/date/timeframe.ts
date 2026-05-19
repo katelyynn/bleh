@@ -3,6 +3,7 @@ import { html, render } from "lighterhtml";
 import tippy from "tippy.js";
 import { setting } from "../settings/settings";
 import { settings } from "@/build/config";
+import { input } from "../settings/input";
 
 interface hybrid_timeframe_picker {
     initial?: string
@@ -38,6 +39,8 @@ export function hybrid_timeframe_picker({
     });
 
     let content;
+
+    let timeframe_valid = true;
 
     set_value(value);
 
@@ -78,6 +81,50 @@ export function hybrid_timeframe_picker({
                     ${years.map((year: number) => render_timeframe_preset(`from=${year}-01-01&rangetype=year`))}
                 </div>
             `);
+            return;
+        }
+
+        if (page == 'custom') {
+            const now = new Date();
+            now.setHours(23, 59, 59, 999);
+
+            let from;
+            let to;
+
+            render(content, html`
+                <div class="timeframe-picker-custom">
+                    <div class="timeframe-picker-item">
+                        <label class="timeframe-picker-label">From</label>
+                        ${from = input({
+                            type: 'date',
+                            min: '2003-01-01',
+                            max: now.toISOString(),
+                            show_time: false,
+                            func: () => check_timeframe_valid()
+                        })}
+                    </div>
+                    <div class="timeframe-picker-item">
+                        <label class="timeframe-picker-label">To</label>
+                        ${to = input({
+                            type: 'date',
+                            min: '2003-01-01',
+                            max: now.toISOString(),
+                            value: now.toISOString(),
+                            show_time: false,
+                            func: () => check_timeframe_valid()
+                        })}
+                    </div>
+                </div>
+            `);
+
+            function check_timeframe_valid() {
+                timeframe_valid = true;
+
+                if (new Date(from.value()) > new Date(to.value())) {
+                    timeframe_valid = false;
+                }
+            }
+
             return;
         }
 

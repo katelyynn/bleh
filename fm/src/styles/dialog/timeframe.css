@@ -11,3 +11,22 @@
     padding-top: 10px;
     border-top: 1px solid var(--separator-base);
 }
+
+.timeframe-picker-custom {
+    display: flex;
+    flex-direction: column;
+    gap: var(--item-list-gap);
+    align-items: center;
+    text-align: center;
+}
+
+.timeframe-picker-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.timeframe-picker-label {
+    color: oklch(var(--c3));
+    font-size: 13px;
+}
