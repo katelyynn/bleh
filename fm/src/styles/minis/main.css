@@ -1,6 +1,7 @@
 @import './compare.css';
 @import './collage.css';
 @import './pixel.css';
+@import './plot.css';
 
 .mini-list {
     display: flex;

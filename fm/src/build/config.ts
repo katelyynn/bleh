@@ -1058,5 +1058,17 @@ export let settings_store: Record<string, setting_instance> = {
         title: trans.count_bar_right.name,
         body: trans.count_bar_right.body,
         bubble: true
+    },
+    date_selector: {
+        default: 'preset',
+        type: 'tabs',
+        values: {
+            preset: {
+                name: 'Presets'
+            },
+            custom: {
+                name: trans.custom
+            }
+        }
     }
 };

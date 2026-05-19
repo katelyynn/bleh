@@ -1,0 +1,31 @@
+.plot-header {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.plot-header-side {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    &.plot-header-side-main {
+        flex: 1;
+    }
+}
+
+.plot-header-label {
+    color: oklch(var(--c3));
+    font-size: 13px;
+    cursor: default;
+}
+
+.plot-header-options {
+    display: flex;
+    gap: var(--card-gap);
+}
+
+.plot-body {
+    background: linear-gradient(180deg, oklch(var(--b4) / 20%), oklch(var(--k4) / 40%));
+    border-radius: var(--item-med-radius);
+    padding: 10px;
+}

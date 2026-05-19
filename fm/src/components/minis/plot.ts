@@ -5,6 +5,8 @@ import { tl, trans } from "@/build/trans";
 import { dialog, dialog_rm } from "@/components/dialog/dialog";
 import { input } from "@/components/settings/input";
 import { icon, icons } from "../shared/icon";
+import { select } from "../settings/select";
+import { hybrid_timeframe_picker } from "../date/timeframe";
 
 export function plot({ host, sidebar } = {}) {
     if (!host || !sidebar) return;
@@ -18,15 +20,35 @@ export function plot({ host, sidebar } = {}) {
     let timeframe;
 
     render(host, html`
-        <div
-            class="compare-body"
-            data-filled="false"
-            ref=${el => body = el}
-        >
-            <div class="placeholder-block">
-                <div class="placeholder-head">(๑>◡<๑)</div>
-                <div class="placeholder-summary">${tl(trans.choose_a_timeframe_above)}</div>
+        <div class="plot-header">
+            <div class="plot-header-side plot-header-side-main">
+                <label class="plot-header-label">Add to graph</label>
+                <div class="plot-header-options">
+                    ${select({
+                        values: [
+                            {
+                                text: 'Data source'
+                            },
+                            {
+                                value: '{artist:"glaive",album:"God Save The Three"}',
+                                text: 'glaive - God Save The Three'
+                            }
+                        ]
+                    })}
+                </div>
             </div>
+            <div class="plot-header-side">
+                <label class="plot-header-label">Graph options</label>
+                <div class="plot-header-options">
+                    ${hybrid_timeframe_picker({
+                        initial: 'date_preset=ALL'
+                    })}
+                </div>
+            </div>
+        </div>
+        <div class="plot-body" ref=${el => body = el} />
+        <div class="plot-footer">
+
         </div>
     `);
 
