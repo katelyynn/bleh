@@ -21,7 +21,7 @@ export function hybrid_timeframe_picker({
     let menu = tippy(elem, {
         theme: 'window',
         content: html.node``,
-        placement: 'top',
+        placement: 'bottom',
         interactive: true,
         interactiveBorder: 10,
         trigger: 'click',
@@ -59,6 +59,8 @@ export function hybrid_timeframe_picker({
         if (!['preset', 'custom'].includes(page)) page = 'preset';
 
         if (page == 'preset') {
+            const years = Array.from({ length: new Date().getFullYear() - 2002 }, (_, i) => 2003 + i).reverse();
+
             render(content, html`
                 <div class="date-range-picker-presets-wrap">
                     <ul class="date-range-picker-presets">
@@ -71,6 +73,9 @@ export function hybrid_timeframe_picker({
                         ${render_timeframe_preset('date_preset=LAST_365_DAYS')}
                         ${render_timeframe_preset('date_preset=ALL')}
                     </ul>
+                </div>
+                <div class="date-range-picker-years">
+                    ${years.map((year: number) => render_timeframe_preset(`from=${year}-01-01&rangetype=year`))}
                 </div>
             `);
             return;
@@ -97,5 +102,7 @@ function timeframe_text(value: string) {
         if (value == 'date_preset=ALL') return tl(trans.all_time);
 
         return tl(trans.last_count_days, { c: value.match(/\d+/)[0] });
+    } else if (value.startsWith('from=')) {
+        return value.match(/\d{4}/)[0];
     }
 }

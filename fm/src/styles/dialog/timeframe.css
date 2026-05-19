@@ -1,0 +1,13 @@
+.timeframe-menu-content {
+    width: 300px;
+}
+
+.date-range-picker-years {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+    gap: var(--button-list-gap);
+
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--separator-base);
+}

@@ -126,6 +126,8 @@
 
 .date-picker-preset-item {
     min-width: unset !important;
+    width: 100%;
+    justify-content: center;
 }
 .auth-dropdown-menu-wrap {
     padding-top: unset !important;
