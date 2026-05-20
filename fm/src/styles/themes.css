@@ -775,6 +775,19 @@ u,
 
     --card-gradient: oklch(calc(clamp(min(0.5), var(--lit), max(0.9)) * 0.5) calc(clamp(min(0), var(--sat), max(2)) * 0.55) var(--hue) / 16%);
 
+    --graph-colour-0: oklch(80% 60% 30);
+    --graph-colour-1: oklch(85% 53% 50);
+    --graph-colour-2: oklch(100% 55% 60);
+    --graph-colour-3: oklch(85% 60% 110);
+    --graph-colour-4: oklch(85% 60% 130);
+    --graph-colour-5: oklch(85% 60% 150);
+    --graph-colour-6: oklch(85% 60% 170);
+    --graph-colour-7: oklch(88% 50% 210);
+    --graph-colour-8: oklch(80% 60% 260);
+    --graph-colour-9: oklch(85% 60% 290);
+    --graph-colour-10: oklch(85% 60% 310);
+    --graph-colour-11: oklch(85% 60% 360);
+
     &[data-bleh--theme="oled"],
     body[data-bleh--theme="oled"] &:not(.theme-preview) {
         --c1: 0.98 0 var(--hue);

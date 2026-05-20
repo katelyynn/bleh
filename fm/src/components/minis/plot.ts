@@ -290,8 +290,6 @@ export function plot({ host, sidebar } = {}) {
             media: data_point,
             data: [],
             borderWidth: 2,
-            backgroundColor: gradient,
-            borderColor: page.state.chart_colours.link_col,
             fill: true,
             pointRadius: 0,
             pointHitRadius: 20,
@@ -328,7 +326,24 @@ export function plot({ host, sidebar } = {}) {
         fetch_data_set(user.value, data_source.value);
     }
 
+    page.state.update_plot_chart = update_chart;
+
     function update_chart() {
+        const computed = getComputedStyle(document.body);
+
+        const graph_colours = Array.from({ length: 13 }, (_, i) =>
+            `${computed.getPropertyValue(`--graph-colour-${i}`)}`
+        );
+
+        graph_colours.forEach((colour, index) => {
+            page.structure.side.appendChild(html.node`<div style="background-color: var(--graph-colour-${index}); display: block; width: 40px; height: 40px"></div>`);
+        });
+
+        data_points.forEach((point, index) => {
+            point.backgroundColor = 'transparent';
+            point.borderColor = graph_colours[index % graph_colours.length];
+        });
+
         chart.update();
 
         allow_adding = true;
