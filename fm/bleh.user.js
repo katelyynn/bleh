@@ -56872,6 +56872,83 @@
 
         </div>
     `);
+    prep_chart_colours();
+    let scrobble_canvas_container = document.createElement("div");
+    scrobble_canvas_container.classList.add("scrobble-canvas-container", "icon-mask");
+    let scrobble_canvas = document.createElement("canvas");
+    scrobble_canvas.classList.add("scrobble-canvas");
+    let gradient = scrobble_canvas.getContext("2d").createLinearGradient(0, 0, 0, 160);
+    try {
+      gradient.addColorStop(0, page.state.chart_colours.link_bg_col);
+      gradient.addColorStop(1, page.state.chart_colours.link_bg_col_2);
+    } catch (e4) {
+      gradient = page.state.chart_colours.link_bg_col;
+    }
+    Chart.defaults.color = page.state.chart_colours.text_col;
+    Chart.defaults.font.family = page.state.chart_colours.font;
+    const chart = new Chart(scrobble_canvas.getContext("2d"), {
+      type: "line",
+      data: {
+        datasets: data_points
+      },
+      options: {
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: true
+          },
+          tooltip: {
+            backgroundColor: page.state.chart_colours.root_bg_col,
+            titleColor: page.state.chart_colours.text_primary_col,
+            bodyColor: page.state.chart_colours.text_primary_col,
+            multiKeyBackground: page.state.chart_colours.root_bg_col,
+            boxPadding: 6,
+            padding: 9,
+            cornerRadius: 9,
+            caretSize: 0,
+            callbacks: {
+              title: (context) => {
+                const point = context[0].dataset;
+                return point.user;
+              },
+              afterTitle: (context) => {
+                const point = context[0].dataset;
+                return JSON.stringify(point.media);
+              },
+              label: (context) => {
+                const point = context.raw;
+                return point.y;
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            type: "time",
+            time: {
+              unit: "month",
+              displayFormats: {
+                month: "LLL"
+              },
+              tooltipFormat: "EEEE, LLLL d yyyy"
+            },
+            grid: {
+              color: page.state.chart_colours.axis_col,
+              display: false
+            }
+          },
+          y: {
+            beginAtZero: true,
+            grid: {
+              display: false
+            },
+            suggestedMax: 10
+          }
+        }
+      }
+    });
+    scrobble_canvas_container.appendChild(scrobble_canvas);
+    body.appendChild(scrobble_canvas_container);
     async function fetch_data_set(user2, media) {
       console.info("user", user2, "media", media);
       const data_point = import_json53.default.parse(media);
@@ -56904,7 +56981,14 @@
       const point = {
         user: user2,
         media: data_point,
-        data: []
+        data: [],
+        borderWidth: 2,
+        backgroundColor: gradient,
+        borderColor: page.state.chart_colours.link_col,
+        fill: true,
+        pointRadius: 0,
+        pointHitRadius: 20,
+        tension: 0.1
       };
       entries2.forEach((entry) => {
         const period = entry.querySelector(".js-period > a")?.getAttribute("href");
@@ -56917,12 +57001,19 @@
         });
       });
       console.info("point", point);
+      data_points.push(point);
+      update_chart();
       page.structure.main.appendChild(table);
     }
     function add_data_point() {
       allow_adding = false;
       add_data_point_btn.disabled = true;
       fetch_data_set(user.value, data_source.value);
+    }
+    function update_chart() {
+      chart.update();
+      allow_adding = true;
+      add_data_point_btn.disabled = false;
     }
   }
 
