@@ -31,3 +31,7 @@
     padding: 10px;
     height: 600px;
 }
+
+.plot-canvas-container {
+    height: 100%;
+}
