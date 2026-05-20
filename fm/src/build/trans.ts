@@ -11161,7 +11161,15 @@ export const trans = {
         en: 'Add new data point'
     },
     presets: {
+        // used in reference to timeframe presets
         en: 'Presets'
+    },
+    existing: {
+        // used as a header for existing items
+        en: 'Existing'
+    },
+    history: {
+        en: 'History'
     }
 } as const satisfies Record<string, any>;
 

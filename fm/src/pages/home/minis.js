@@ -110,6 +110,7 @@ export function bleh_minis(skip = false) {
 
     if (mini) {
         page.structure.container.setAttribute('data-mini', mini);
+        page.mini = mini;
 
         valid_minis[mini].func();
         return;
@@ -138,6 +139,7 @@ export function bleh_minis(skip = false) {
                                     'data-mini',
                                     id
                                 );
+                                page.mini = id;
                                 render(page.structure.main, html``);
                                 valid_minis[id].func();
                             }}>

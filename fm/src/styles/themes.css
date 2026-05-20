@@ -901,6 +901,19 @@ u,
         --summary-block-9: oklch(calc(var(--lit) * 0.2) calc(clamp(min(0), var(--sat), max(2)) * 0.64) var(--hue));
 
         --card-gradient: oklch(var(--h2) / 6%);
+
+        --graph-colour-0: oklch(40% 50% 30);
+        --graph-colour-1: oklch(55% 43% 50);
+        --graph-colour-2: oklch(80% 45% 60);
+        --graph-colour-3: oklch(65% 40% 110);
+        --graph-colour-4: oklch(65% 40% 130);
+        --graph-colour-5: oklch(65% 40% 150);
+        --graph-colour-6: oklch(65% 40% 170);
+        --graph-colour-7: oklch(68% 30% 210);
+        --graph-colour-8: oklch(60% 40% 260);
+        --graph-colour-9: oklch(65% 40% 290);
+        --graph-colour-10: oklch(65% 40% 310);
+        --graph-colour-11: oklch(65% 40% 360);
     }
     &[data-bleh--theme="ink"],
     body[data-bleh--theme="ink"]

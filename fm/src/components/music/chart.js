@@ -29,6 +29,9 @@ export function chart_reflow() {
         bleh_glacier_date_graph_generate();
         bleh_glacier_insights();
     }
+
+    if (page.type == 'minis' && page.state.update_plot_chart && page.mini == 'plot')
+        page.state.update_plot_chart();
 }
 
 export function prep_chart_colours() {

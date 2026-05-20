@@ -10,9 +10,10 @@ import { hybrid_timeframe_picker } from "../date/timeframe";
 import { romanise, sanitise } from "@/build/tools";
 import JSON5 from 'json5';
 import { log } from "@/build/log";
-import { prep_chart_colours } from "../music/chart";
+import { load_chart_colours, prep_chart_colours } from "../music/chart";
 import { Chart } from "chart.js";
 import { correct_artist, correct_item_by_artist } from "../music/lotus";
+import { keys } from "../settings/storage";
 
 export function plot({ host, sidebar } = {}) {
     if (!host || !sidebar) return;
@@ -97,12 +98,15 @@ export function plot({ host, sidebar } = {}) {
 
         const media_history = [];
         data_source_history.forEach(point => {
-            const media_string = JSON5.stringify(point);
+            const media = JSON5.parse(point);
+            const media_string = JSON5.stringify(media);
+
+            console.info('media history', media, media_string, plot);
 
             if (!unique_media.includes(media_string)) {
                 media_history.push({
                     value: media_string,
-                    text: plot_media_title(point, true)
+                    text: plot_media_title(media, true)
                 })
             }
         });
@@ -130,9 +134,15 @@ export function plot({ host, sidebar } = {}) {
                     {
                         text: 'sep'
                     },
+                    {
+                        text: tl(trans.existing)
+                    },
                     ...media,
                     {
                         text: 'sep'
+                    },
+                    {
+                        text: tl(trans.history)
                     },
                     ...media_history
                 ],
@@ -221,13 +231,6 @@ export function plot({ host, sidebar } = {}) {
             scales: {
                 x: {
                     type: 'time',
-                    time: {
-                        unit: 'month',
-                        displayFormats: {
-                            month: 'LLL'
-                        },
-                        tooltipFormat: 'EEEE, LLLL d yyyy'
-                    },
                     grid: {
                         color: page.state.chart_colours.axis_col,
                         display: false
@@ -249,6 +252,12 @@ export function plot({ host, sidebar } = {}) {
     body.appendChild(scrobble_canvas_container);
 
     async function fetch_data_set(user: string, media: string) {
+        const data_source_history = JSON5.parse(localStorage.getItem(keys.plot_data_history) || '[]');
+        if (!data_source_history.some(item => JSON5.stringify(item) == JSON5.stringify(media))) {
+            data_source_history.push(media);
+            localStorage.setItem(keys.plot_data_history, JSON5.stringify(data_source_history));
+        }
+
         console.info('user', user, 'media', media);
         const data_point = JSON5.parse(media);
 
@@ -329,6 +338,7 @@ export function plot({ host, sidebar } = {}) {
     page.state.update_plot_chart = update_chart;
 
     function update_chart() {
+        load_chart_colours();
         const computed = getComputedStyle(document.body);
 
         const graph_colours = Array.from({ length: 13 }, (_, i) =>

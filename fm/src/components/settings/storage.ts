@@ -35,7 +35,8 @@ export const keys = {
     oracle_artists_expire: 'oracle_artists_expire',
     oracle_tracks: 'oracle_tracks',
     oracle_tracks_expire: 'oracle_tracks_expire',
-    next_status_cafe_fetch: 'next_status_cafe_fetch'
+    next_status_cafe_fetch: 'next_status_cafe_fetch',
+    plot_data_history: 'bleh_plot_data_history',
 }
 
 // these are keys that were previously used,
