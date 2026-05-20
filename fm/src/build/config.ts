@@ -1064,10 +1064,12 @@ export let settings_store: Record<string, setting_instance> = {
         type: 'tabs',
         values: {
             preset: {
-                name: 'Presets'
+                name: trans.presets,
+                icon: 'calendar'
             },
             custom: {
-                name: trans.custom
+                name: trans.custom,
+                icon: 'edit'
             }
         }
     }

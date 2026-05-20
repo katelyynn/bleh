@@ -240,6 +240,9 @@
 [data-type="reset"] {
     --mask: var(--icon-16-revert);
 }
+[data-type="calendar"] {
+    --mask: var(--icon-16-calendar);
+}
 [data-type="image"],
 .secondary-nav-item--images,
 [data-type="photos"],

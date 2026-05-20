@@ -1,6 +1,7 @@
 .plot-header {
     display: flex;
     flex-wrap: wrap;
+    margin-bottom: var(--card-padding);
 }
 
 .plot-header-side {
@@ -21,11 +22,12 @@
 
 .plot-header-options {
     display: flex;
-    gap: var(--card-gap);
+    gap: var(--button-list-gap);
 }
 
 .plot-body {
-    background: linear-gradient(180deg, oklch(var(--b4) / 20%), oklch(var(--k4) / 40%));
-    border-radius: var(--item-med-radius);
+    box-shadow: inset 0 0 0 1px var(--separator-base);
+    border-radius: var(--item-small-radius);
     padding: 10px;
+    height: 600px;
 }

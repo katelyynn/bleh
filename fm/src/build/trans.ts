@@ -11156,6 +11156,12 @@ export const trans = {
         body: {
             en: 'Help out the future of bleh'
         }
+    },
+    add_new_data_point: {
+        en: 'Add new data point'
+    },
+    presets: {
+        en: 'Presets'
     }
 } as const satisfies Record<string, any>;
 
