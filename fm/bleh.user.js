@@ -56685,9 +56685,9 @@
       console.info("now set value", time_from, time_to);
       update_alert();
     }
-    function render_page(page3) {
-      if (!["preset", "custom"].includes(page3)) page3 = "preset";
-      if (page3 == "preset") {
+    function render_page(page2) {
+      if (!["preset", "custom"].includes(page2)) page2 = "preset";
+      if (page2 == "preset") {
         const years = Array.from({ length: (/* @__PURE__ */ new Date()).getFullYear() - 2002 }, (_, i2) => 2003 + i2).reverse();
         render(content, html`
                 <div class="date-range-picker-presets-wrap">
@@ -56708,7 +56708,7 @@
             `);
         return;
       }
-      if (page3 == "custom") {
+      if (page2 == "custom") {
         let check_timeframe_valid = function() {
           timeframe_valid = true;
           if (new Date(time_from) > new Date(time_to)) {
@@ -56872,7 +56872,7 @@
 
         </div>
     `);
-    function fetch_data_set(user2, media) {
+    async function fetch_data_set(user2, media) {
       console.info("user", user2, "media", media);
       const data_point = import_json53.default.parse(media);
       let media_url;
@@ -56886,6 +56886,38 @@
       }
       const url = `${root}user/${user2}/library/music/${media_url}?${timeframe.value}`;
       console.info("timeframe url", url);
+      const res = await fetch(url);
+      if (!res.ok) {
+        log("failed to fetch", "plot", "error", { res });
+        return;
+      }
+      const dom = await res.text();
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(dom, "text/html");
+      const table = doc.querySelector(".scrobble-table");
+      if (!table) {
+        log("failed to find table", "plot", "error", { table });
+        return;
+      }
+      const entries2 = table.querySelectorAll("tbody tr");
+      console.info("table", table, entries2);
+      const point = {
+        user: user2,
+        media: data_point,
+        data: []
+      };
+      entries2.forEach((entry) => {
+        const period = entry.querySelector(".js-period > a")?.getAttribute("href");
+        const params = new URLSearchParams(period);
+        const from3 = params.get("from");
+        const scrobbles = Number(entry.querySelector(".js-scrobbles").textContent.trim());
+        point.data.push({
+          x: from3,
+          y: scrobbles
+        });
+      });
+      console.info("point", point);
+      page.structure.main.appendChild(table);
     }
     function add_data_point() {
       allow_adding = false;
@@ -73261,8 +73293,8 @@
       setting2.classList.add("highlight");
     }, 200);
   }
-  unsafeWindow._change_settings_page = function(page3, setting2 = null) {
-    change_settings_page(page3, setting2);
+  unsafeWindow._change_settings_page = function(page2, setting2 = null) {
+    change_settings_page(page2, setting2);
   };
   function change_settings_page(page_id, setting2 = null) {
     if (page_id == page.state.settings_page) return;
@@ -80397,10 +80429,10 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       parent.classList = "see-more-row";
     });
     const pagination = page.structure.container.querySelectorAll(".pagination-page:not([data-pagination])");
-    pagination.forEach((page3) => {
-      page3.setAttribute("data-pagination", "true");
-      const current = page3.hasAttribute("aria-current");
-      const link = page3.querySelector("a, span");
+    pagination.forEach((page2) => {
+      page2.setAttribute("data-pagination", "true");
+      const current = page2.hasAttribute("aria-current");
+      const link = page2.querySelector("a, span");
       link.classList.add("btn", "pagination-page-link");
       if (current) link.setAttribute("aria-checked", "true");
     });
@@ -93835,7 +93867,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-05-18"
       }
     },
-    built_on: "2026-05-20T00:09:37.020Z"
+    built_on: "2026-05-20T14:10:41.860Z"
   };
 
   // node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

@@ -9,6 +9,7 @@ import { select } from "../settings/select";
 import { hybrid_timeframe_picker } from "../date/timeframe";
 import { sanitise } from "@/build/tools";
 import JSON5 from 'json5';
+import { log } from "@/build/log";
 
 export function plot({ host, sidebar } = {}) {
     if (!host || !sidebar) return;
@@ -84,7 +85,7 @@ export function plot({ host, sidebar } = {}) {
         </div>
     `);
 
-    function fetch_data_set(user: string, media: string) {
+    async function fetch_data_set(user: string, media: string) {
         console.info('user', user, 'media', media);
         const data_point = JSON5.parse(media);
 
@@ -101,6 +102,49 @@ export function plot({ host, sidebar } = {}) {
 
         const url = `${root}user/${user}/library/music/${media_url}?${timeframe.value}`;
         console.info('timeframe url', url);
+
+        const res = await fetch(url);
+        if (!res.ok) {
+            log('failed to fetch', 'plot', 'error', { res });
+            return;
+        }
+
+        const dom = await res.text();
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(dom, 'text/html');
+
+        const table = doc.querySelector('.scrobble-table');
+        if (!table) {
+            log('failed to find table', 'plot', 'error', { table });
+            return;
+        }
+
+        const entries = table.querySelectorAll('tbody tr');
+        console.info('table', table, entries);
+
+        const point = {
+            user,
+            media: data_point,
+            data: []
+        };
+
+        entries.forEach(entry => {
+            const period = entry.querySelector('.js-period > a')?.getAttribute('href');
+            const params = new URLSearchParams(period);
+
+            const from = params.get('from');
+
+            const scrobbles = Number(entry.querySelector('.js-scrobbles').textContent.trim());
+
+            point.data.push({
+                x: from,
+                y: scrobbles
+            });
+        });
+
+        console.info('point', point);
+
+        page.structure.main.appendChild(table);
     }
 
     function add_data_point() {
