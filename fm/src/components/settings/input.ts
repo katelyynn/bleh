@@ -33,7 +33,8 @@ interface input {
     value_in_iso?: boolean,
     cols?: number,
     rows?: number,
-    required?: boolean
+    required?: boolean,
+    hide_on_change?: boolean
 }
 
 interface input_element extends HTMLElement {
@@ -63,7 +64,8 @@ export function input({
     value_in_iso = false,
     cols,
     rows,
-    required = false
+    required = false,
+    hide_on_change
 }: input): input_element {
     if (type == 'date') {
         return calendar({
@@ -73,7 +75,9 @@ export function input({
             disabled,
             show_time,
             name,
-            value_in_iso
+            value_in_iso,
+            func,
+            hide_on_change
         });
     }
 

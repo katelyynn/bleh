@@ -18,7 +18,9 @@ export function calendar({
     disabled,
     show_time = true,
     name,
-    value_in_iso = false
+    value_in_iso = false,
+    func,
+    hide_on_change = false
 }) {
     let date_button;
     let manual_button;
@@ -514,6 +516,12 @@ export function calendar({
         container.dispatchEvent(new CustomEvent('change'), {
             detail: date_object
         });
+
+        if (hide_on_change) {
+            tooltip.hide();
+        }
+
+        if (func) func(`${state.year}-${pad2(state.month)}-${pad2(state.day)}`);
     }
 
     function format_date({ year, month, day }) {

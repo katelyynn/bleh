@@ -32,6 +32,10 @@
     & + form {
         margin-top: var(--card-gap);
     }
+
+    &[data-hidden="true"] {
+        display: none;
+    }
 }
 
 .async-content-error-message {

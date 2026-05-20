@@ -30,3 +30,8 @@
     color: oklch(var(--c3));
     font-size: 13px;
 }
+
+.timeframe-error {
+    margin-left: auto;
+    margin-right: auto;
+}

@@ -19,6 +19,9 @@ export function plot({ host, sidebar } = {}) {
     let body;
     let timeframe;
 
+    let from;
+    let to;
+
     render(host, html`
         <div class="plot-header">
             <div class="plot-header-side plot-header-side-main">
@@ -41,7 +44,13 @@ export function plot({ host, sidebar } = {}) {
                 <label class="plot-header-label">Graph options</label>
                 <div class="plot-header-options">
                     ${hybrid_timeframe_picker({
-                        initial: 'date_preset=ALL'
+                        initial: 'date_preset=ALL',
+                        time_from: from,
+                        time_to: to,
+                        func: ({ from: new_from, to: new_to }) => {
+                            from = new_from;
+                            to = new_to;
+                        }
                     })}
                 </div>
             </div>

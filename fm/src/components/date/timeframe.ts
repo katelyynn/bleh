@@ -4,6 +4,8 @@ import tippy from "tippy.js";
 import { setting } from "../settings/settings";
 import { settings } from "@/build/config";
 import { input } from "../settings/input";
+import { DateTime } from "luxon";
+import { pad2 } from "@/build/tools";
 
 interface hybrid_timeframe_picker {
     initial?: string
@@ -16,7 +18,9 @@ export function hybrid_timeframe_picker({
     if (initial) value = initial;
 
     const elem = html.node`
-        <button class="select-button" type="button" />
+        <button class="select-button timeframe-picker-button" type="button">
+            ${timeframe_text(value)}
+        </button>
     `;
 
     let menu = tippy(elem, {
@@ -26,7 +30,19 @@ export function hybrid_timeframe_picker({
         interactive: true,
         interactiveBorder: 10,
         trigger: 'click',
-        appendTo: document.body
+        appendTo: document.body,
+
+        onShow() {
+            set_value(value);
+        },
+        hideOnClick: 'toggle',
+
+        onClickOutside(instance, event) {
+            if (instance.popper.querySelector('[aria-expanded="true"]') || event.target.classList.contains('dropdown-menu-clickable-item'))
+                return;
+
+            instance.hide();
+        }
     });
 
     Object.defineProperty(elem, 'value', {
@@ -39,23 +55,42 @@ export function hybrid_timeframe_picker({
     });
 
     let content;
+    let alert;
+
+    let time_from;
+    let time_to;
 
     let timeframe_valid = true;
+    let timeframe_invalid_reason = '';
 
-    set_value(value);
+    function update_alert() {
+        if (timeframe_valid) {
+            alert.setAttribute('data-hidden', 'true');
+        } else {
+            alert.setAttribute('data-hidden', 'false');
+            alert.textContent = timeframe_invalid_reason;
+        }
+    }
 
-    function set_value(val: string) {
+    function set_value(val: string, update = true) {
         value = val;
         elem.textContent = timeframe_text(val);
 
-        menu.setContent(html.node`
-            <div class="timeframe-menu">
-                ${setting({ id: 'date_selector', func: (val: string) => render_page(val) })}
-                <div class="timeframe-menu-content" ref=${el => content = el} />
-            </div>
-        `);
+        if (update) {
+            menu.setContent(html.node`
+                <div class="timeframe-menu">
+                    ${setting({ id: 'date_selector', func: (val: string) => render_page(val) })}
+                    <div class="timeframe-menu-content" ref=${el => content = el} />
+                    <div class="alert alert-error timeframe-error" data-hidden="true" ref=${el => alert = el} />
+                </div>
+            `);
 
-        render_page(settings.date_selector);
+            render_page(settings.date_selector);
+        }
+
+        console.info('now set value', time_from, time_to);
+
+        update_alert();
     }
 
     function render_page(page: string) {
@@ -86,10 +121,12 @@ export function hybrid_timeframe_picker({
 
         if (page == 'custom') {
             const now = new Date();
-            now.setHours(23, 59, 59, 999);
+            const date = date_to_iso(now);
 
             let from;
             let to;
+
+            console.info('timeframe text - now', now, date, time_from, time_to);
 
             render(content, html`
                 <div class="timeframe-picker-custom">
@@ -98,9 +135,16 @@ export function hybrid_timeframe_picker({
                         ${from = input({
                             type: 'date',
                             min: '2003-01-01',
-                            max: now.toISOString(),
+                            max: date,
+                            value: time_from || date,
                             show_time: false,
-                            func: () => check_timeframe_valid()
+                            func: (val: string) => {
+                                time_from = val;
+                                console.info('timeframe from', time_from);
+                                check_timeframe_valid();
+                                update_range();
+                            },
+                            hide_on_change: true
                         })}
                     </div>
                     <div class="timeframe-picker-item">
@@ -108,21 +152,44 @@ export function hybrid_timeframe_picker({
                         ${to = input({
                             type: 'date',
                             min: '2003-01-01',
-                            max: now.toISOString(),
-                            value: now.toISOString(),
+                            max: date,
+                            value: time_to || date,
                             show_time: false,
-                            func: () => check_timeframe_valid()
+                            func: (val: string) => {
+                                time_to = val;
+                                console.info('timeframe to', time_to);
+                                check_timeframe_valid();
+                                update_range();
+                            },
+                            hide_on_change: true
                         })}
                     </div>
                 </div>
             `);
 
+            if (!time_from) time_from = date_to_iso(from.value);
+            if (!time_to) time_to = date_to_iso(to.value);
+
             function check_timeframe_valid() {
                 timeframe_valid = true;
 
-                if (new Date(from.value()) > new Date(to.value())) {
+                if (new Date(time_from) > new Date(time_to)) {
                     timeframe_valid = false;
+
+                    timeframe_invalid_reason = 'Invalid timeframe';
                 }
+
+                update_alert();
+            }
+
+            function update_range() {
+                if (!timeframe_valid) return;
+
+                console.info('timeframe update range', time_from, time_to);
+
+                setTimeout(() => {
+                    set_value(`from=${time_from}&to=${time_to}`);
+                }, 0);
             }
 
             return;
@@ -136,7 +203,12 @@ export function hybrid_timeframe_picker({
 
         return html.node`
             <li class="date-range-picker-preset ${current ? 'date-range-picker-preset--selected' : ''}">
-                <button class="btn date-picker-preset-item" onclick=${() => set_value(type)}>${timeframe_text(type)}</button>
+                <button class="btn date-picker-preset-item" onclick=${() => {
+                    alert.setAttribute('data-hidden', 'true');
+                    timeframe_valid = true;
+
+                    set_value(type);
+                }}>${timeframe_text(type)}</button>
             </li>
         `;
     }
@@ -150,6 +222,20 @@ function timeframe_text(value: string) {
 
         return tl(trans.last_count_days, { c: value.match(/\d+/)[0] });
     } else if (value.startsWith('from=')) {
-        return value.match(/\d{4}/)[0];
+        if (value.endsWith('rangetype=year')) {
+            return value.match(/\d{4}/)[0];
+        }
+
+        const params = new URLSearchParams(value);
+        const from = params.get('from');
+        const to = params.get('to');
+
+        console.info('timeframe text', value, params, from, to);
+
+        return `${DateTime.fromISO(from).toLocaleString(DateTime.DATE_MED)} - ${DateTime.fromISO(to).toLocaleString(DateTime.DATE_MED)}`;
     }
+}
+
+function date_to_iso(date: Date) {
+    return `${date.getFullYear()}-${pad2(date.getMonth() + 1)}-${pad2(date.getDate())}`;
 }
