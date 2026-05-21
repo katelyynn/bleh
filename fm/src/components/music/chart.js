@@ -47,6 +47,7 @@ export function load_chart_colours() {
     let text_col = `oklch(${getComputedStyle(document.body).getPropertyValue('--c3')})`;
     let axis_col = `oklch(${getComputedStyle(document.body).getPropertyValue('--b4')} / 40%)`;
     let text_primary_col = `oklch(${getComputedStyle(document.body).getPropertyValue('--c2')})`;
+    let text_secondary_col = `oklch(${getComputedStyle(document.body).getPropertyValue('--c3')})`;
     let bg_col = `oklch(${getComputedStyle(document.body).getPropertyValue('--b5')})`;
     let root_bg_col = `oklch(${getComputedStyle(document.body).getPropertyValue('--b6')} / 92%)`;
     let hue = getComputedStyle(document.body).getPropertyValue('--hue');
@@ -57,7 +58,8 @@ export function load_chart_colours() {
         link_bg_col_2: link_bg_col_2,
         text_col: text_col,
         axis_col: axis_col,
-        text_primary_col: text_primary_col,
+        text_primary_col,
+        text_secondary_col,
         bg_col: bg_col,
         root_bg_col: root_bg_col,
         hue: hue,

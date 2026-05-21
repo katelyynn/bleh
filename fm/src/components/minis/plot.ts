@@ -18,6 +18,7 @@ import { load_profile_cache_externally } from "@/pages/profile/profile";
 import { is_sponsor } from "../sponsor";
 import { settings } from "@/build/config";
 import tippy from "tippy.js";
+import { DateTime } from "luxon";
 
 export function plot({ host, sidebar } = {}) {
     if (!host || !sidebar) return;
@@ -379,6 +380,7 @@ export function plot({ host, sidebar } = {}) {
                     backgroundColor: page.state.chart_colours.root_bg_col,
                     titleColor: page.state.chart_colours.text_primary_col,
                     bodyColor: page.state.chart_colours.text_primary_col,
+                    footerColor: page.state.chart_colours.text_secondary_col,
                     multiKeyBackground: page.state.chart_colours.root_bg_col,
                     boxPadding: 6,
                     padding: 9,
@@ -396,6 +398,10 @@ export function plot({ host, sidebar } = {}) {
                         label: (context) => {
                             const point = context.raw;
                             return point.y;
+                        },
+                        footer: (context) => {
+                            const point = context[0].raw;
+                            return DateTime.fromISO(point.x).toLocaleString(DateTime.DATE_MED);
                         }
                     }
                 }
@@ -571,6 +577,7 @@ export function plot({ host, sidebar } = {}) {
         chart.options.plugins.tooltip.backgroundColor = page.state.chart_colours.root_bg_col;
         chart.options.plugins.tooltip.titleColor = page.state.chart_colours.text_primary_col;
         chart.options.plugins.tooltip.bodyColor = page.state.chart_colours.text_primary_col;
+        chart.options.plugins.tooltip.footerColor = page.state.chart_colours.text_secondary_col;
         chart.options.plugins.tooltip.multiKeyBackground = page.state.chart_colours.root_bg_col;
 
         chart.options.scales.x.grid.color = page.state.chart_colours.axis_col;
