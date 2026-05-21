@@ -56908,10 +56908,14 @@
         }
       });
       if (Object.keys(temporary_data_source).length > 0) {
-        media.unshift({
-          value: import_json53.default.stringify(temporary_data_source),
-          text: plot_media_title(temporary_data_source, true)
-        });
+        const media_string = import_json53.default.stringify(temporary_data_source);
+        const existing = media.some((item) => item.value == media_string);
+        if (!existing) {
+          media.unshift({
+            value: media_string,
+            text: plot_media_title(temporary_data_source, true)
+          });
+        }
       }
       console.info("media", media, media_history);
       const user_list = [
@@ -56985,9 +56989,11 @@
       })}
             ${user = select({
         values: user_list,
-        func: () => {
+        func: (val) => {
+          selected_user = val;
           check_if_allow();
-        }
+        },
+        initial: selected_user
       })}
             <button class="btn primary icon" data-type="plus" onclick=${() => add_data_point()} ref=${(el) => add_data_point_btn = el}>
                 ${tl2(trans.add)}
@@ -57125,12 +57131,13 @@
       const data_source_history = import_json53.default.parse(localStorage.getItem(keys2.plot_data_history) || "[]");
       if (!data_source_history.some((item) => import_json53.default.stringify(item) == import_json53.default.stringify(media))) {
         data_source_history.push(media);
-        localStorage.setItem(keys2.plot_data_history, import_json53.default.stringify(data_source_history));
       } else {
         data_source_history.splice(data_source_history.indexOf(media), 1);
         data_source_history.push(media);
-        localStorage.setItem(keys2.plot_data_history, import_json53.default.stringify(data_source_history));
       }
+      if (data_source_history.length > 10)
+        data_source_history.shift();
+      localStorage.setItem(keys2.plot_data_history, import_json53.default.stringify(data_source_history));
       console.info("user", user2, "media", media);
       const data_point = import_json53.default.parse(media);
       let media_url;

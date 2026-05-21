@@ -122,10 +122,16 @@ export function plot({ host, sidebar } = {}) {
         });
 
         if (Object.keys(temporary_data_source).length > 0) {
-            media.unshift({
-                value: JSON5.stringify(temporary_data_source),
-                text: plot_media_title(temporary_data_source, true)
-            });
+            const media_string = JSON5.stringify(temporary_data_source);
+
+            const existing = media.some(item => item.value == media_string);
+
+            if (!existing) {
+                media.unshift({
+                    value: media_string,
+                    text: plot_media_title(temporary_data_source, true)
+                });
+            }
         }
 
         console.info('media', media, media_history);
@@ -204,9 +210,11 @@ export function plot({ host, sidebar } = {}) {
             })}
             ${user = select({
                 values: user_list,
-                func: () => {
+                func: (val: string) => {
+                    selected_user = val;
                     check_if_allow();
-                }
+                },
+                initial: selected_user
             })}
             <button class="btn primary icon" data-type="plus" onclick=${() => add_data_point()} ref=${el => add_data_point_btn = el}>
                 ${tl(trans.add)}
@@ -360,12 +368,14 @@ export function plot({ host, sidebar } = {}) {
         const data_source_history = JSON5.parse(localStorage.getItem(keys.plot_data_history) || '[]');
         if (!data_source_history.some(item => JSON5.stringify(item) == JSON5.stringify(media))) {
             data_source_history.push(media);
-            localStorage.setItem(keys.plot_data_history, JSON5.stringify(data_source_history));
         } else {
             data_source_history.splice(data_source_history.indexOf(media), 1);
             data_source_history.push(media);
-            localStorage.setItem(keys.plot_data_history, JSON5.stringify(data_source_history));
         }
+
+        if (data_source_history.length > 10)
+            data_source_history.shift();
+        localStorage.setItem(keys.plot_data_history, JSON5.stringify(data_source_history));
 
         console.info('user', user, 'media', media);
         const data_point = JSON5.parse(media);
