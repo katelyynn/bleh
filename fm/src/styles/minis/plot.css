@@ -72,10 +72,18 @@
             opacity: 1;
             margin-left: unset;
         }
+
+        margin-right: calc(-1 * var(--g));
     }
 
+    --button-height: 24px;
+
     padding-right: var(--g);
-    margin-right: calc(-1 * var(--g));
+    margin-right: calc(-1 * (var(--g) + var(--button-height) + var(--g)));
+
+    transition-property: margin-right;
+    transition-duration: 0.2s;
+    transition-timing-function: var(--trans-function-ani);
 }
 
 .plot-footer-colour {
@@ -109,12 +117,10 @@
 }
 
 .plot-footer-action {
-    --button-height: 24px;
     opacity: 0;
-    margin-left: calc(-1 * calc(var(--button-height) + var(--g)));
 
-    transition-property: opacity, margin-left;
-    transition-duration: 0.4s;
+    transition-property: opacity;
+    transition-duration: 0.2s;
     transition-timing-function: var(--trans-function-ani);
 }
 

@@ -95,6 +95,8 @@ export const icons = {
     tracks: 'track',
     track: 'track',
     user: 'user',
+    users: 'users',
+    star: 'star-fill',
     tags: 'tag',
     tag: 'tag',
     search: 'search',

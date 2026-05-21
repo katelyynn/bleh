@@ -321,6 +321,7 @@
     --mask: var(--icon-16-page);
 }
 .secondary-nav-item--friends,
+[data-type="users"],
 [data-type="friends"] {
     --mask: var(--icon-16-users);
 }
@@ -341,6 +342,9 @@
         --sat-over: var(--sat-fav);
         --lit-over: var(--lit-fav);
     }
+}
+[data-type="star-fill"] {
+    --mask: var(--icon-16-starred-friend);
 }
 .secondary-nav-item--following,
 [data-type="following"] {

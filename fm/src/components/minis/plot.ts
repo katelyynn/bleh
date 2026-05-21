@@ -16,6 +16,7 @@ import { correct_artist, correct_item_by_artist } from "../music/lotus";
 import { keys } from "../settings/storage";
 import { load_profile_cache_externally } from "@/pages/profile/profile";
 import { is_sponsor } from "../sponsor";
+import { settings } from "@/build/config";
 
 export function plot({ host, sidebar } = {}) {
     if (!host || !sidebar) return;
@@ -28,6 +29,7 @@ export function plot({ host, sidebar } = {}) {
     let previous_year = current_year - 1;
 
     let selected_data_source = '';
+    let selected_user = '';
 
     let body;
     let footer;
@@ -106,15 +108,15 @@ export function plot({ host, sidebar } = {}) {
 
         const media_history = [];
         data_source_history.forEach(point => {
-            const media = JSON5.parse(point);
-            const media_string = JSON5.stringify(media);
+            const media_point = JSON5.parse(point);
+            const media_string = JSON5.stringify(media_point);
 
-            console.info('media history', media, media_string, plot);
+            const existing = media.some(item => item.value == media_string);
 
-            if (!unique_media.includes(media_string)) {
+            if (!existing) {
                 media_history.push({
                     value: media_string,
-                    text: plot_media_title(media, true)
+                    text: plot_media_title(media_point, true)
                 })
             }
         });
@@ -127,6 +129,46 @@ export function plot({ host, sidebar } = {}) {
         }
 
         console.info('media', media, media_history);
+
+        const user_list = [
+            {
+                text: 'User'
+            },
+            {
+                value: auth.name,
+                text: generic_user_title(auth.name, 'user', true)
+            }
+        ];
+
+        const starred = settings.starred_friend;
+        if (starred) {
+            user_list.push({
+                text: 'sep'
+            });
+            user_list.push({
+                text: tl(trans.starred_friend.name)
+            });
+            user_list.push({
+                value: starred,
+                text: generic_user_title(starred, 'starred', true)
+            });
+        }
+
+        let friends = settings.friends.filter(f => f != starred);
+        if (friends.length > 0) {
+            user_list.push({
+                text: 'sep'
+            });
+            user_list.push({
+                text: tl(trans.close_friends)
+            });
+            friends.forEach((friend: string) => {
+                user_list.push({
+                    value: friend,
+                    text: generic_user_title(friend, 'friend', true)
+                });
+            });
+        }
 
         render(plot_header_options, html`
             ${data_source = select({
@@ -152,32 +194,26 @@ export function plot({ host, sidebar } = {}) {
                     {
                         text: tl(trans.history)
                     },
-                    ...media_history
+                    ...media_history.toReversed()
                 ],
                 func: (val: string) => {
                     selected_data_source = val;
+                    check_if_allow();
                 },
                 initial: selected_data_source
             })}
             ${user = select({
-                values: [
-                    {
-                        text: 'User'
-                    },
-                    {
-                        value: auth.name,
-                        text: auth.name
-                    },
-                    {
-                        value: 'evangelicgirl',
-                        text: 'evangelicgirl'
-                    }
-                ]
+                values: user_list,
+                func: () => {
+                    check_if_allow();
+                }
             })}
             <button class="btn primary icon" data-type="plus" onclick=${() => add_data_point()} ref=${el => add_data_point_btn = el}>
                 ${tl(trans.add)}
             </button>
         `);
+
+        check_if_allow();
     }
 
     async function plot_footer() {
@@ -231,6 +267,7 @@ export function plot({ host, sidebar } = {}) {
                                     }
                                 }
 
+                                update_plot_options();
                                 plot_footer();
                                 update_chart();
                             }}>
@@ -296,6 +333,9 @@ export function plot({ host, sidebar } = {}) {
             scales: {
                 x: {
                     type: 'time',
+                    time: {
+                        unit: 'month'
+                    },
                     grid: {
                         color: page.state.chart_colours.axis_col,
                         display: false
@@ -319,6 +359,10 @@ export function plot({ host, sidebar } = {}) {
     async function fetch_data_set(user: string, media: string) {
         const data_source_history = JSON5.parse(localStorage.getItem(keys.plot_data_history) || '[]');
         if (!data_source_history.some(item => JSON5.stringify(item) == JSON5.stringify(media))) {
+            data_source_history.push(media);
+            localStorage.setItem(keys.plot_data_history, JSON5.stringify(data_source_history));
+        } else {
+            data_source_history.splice(data_source_history.indexOf(media), 1);
             data_source_history.push(media);
             localStorage.setItem(keys.plot_data_history, JSON5.stringify(data_source_history));
         }
@@ -394,6 +438,7 @@ export function plot({ host, sidebar } = {}) {
         console.info('point', point);
 
         data_points.push(point);
+        update_plot_options();
         plot_footer();
         update_chart();
     }
@@ -407,6 +452,22 @@ export function plot({ host, sidebar } = {}) {
     }
 
     page.state.update_plot_chart = update_chart;
+
+    function check_if_allow() {
+        const media = data_source.value;
+        const user_name = user.value;
+
+        const existing = data_points.find(point => point.user == user_name && JSON5.stringify(point.media) == media);
+
+        if (existing) {
+            allow_adding = false;
+            add_data_point_btn.disabled = true;
+        } else {
+            allow_adding = true;
+            add_data_point_btn.disabled = false;
+        }
+
+    }
 
     function update_chart() {
         load_chart_colours();
@@ -439,9 +500,7 @@ export function plot({ host, sidebar } = {}) {
 
         chart.update();
 
-        allow_adding = true;
-
-        add_data_point_btn.disabled = false;
+        check_if_allow();
     }
 
     function add_new_data_source() {
@@ -512,4 +571,22 @@ function plot_media_title(data: plot_media, fancy = false) {
     }
 
     return text;
+}
+
+function generic_user_title(user: string, type = 'user', fancy = false) {
+    let icon_name;
+
+    if (type == 'user') {
+        icon_name = icons.user;
+    } else if (type == 'starred') {
+        icon_name = icons.star;
+    } else {
+        icon_name = icons.users;
+    }
+
+    if (fancy) {
+        return html`<span class="bleh-icon" data-type=${icon_name} style="--icon: var(--mask)" />${user}`;
+    }
+
+    return user;
 }
