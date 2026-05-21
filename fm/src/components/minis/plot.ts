@@ -66,7 +66,14 @@ export function plot({ host, sidebar } = {}) {
                 </div>
             </div>
         </div>
-        <div class="plot-body" ref=${el => body = el} />
+        <div class="plot-body empty" ref=${el => body = el}>
+            <div class="plot-body-empty-message">
+                <div class="placeholder-block">
+                    <div class="placeholder-head">( ╹ -╹)?</div>
+                    <div class="placeholder-summary">${tl(trans.no_data_to_display)}</div>
+                </div>
+            </div>
+        </div>
         <div class="plot-footer" ref=${el => footer = el} />
     `);
 
@@ -427,6 +434,8 @@ export function plot({ host, sidebar } = {}) {
             point.backgroundColor = 'transparent';
             point.borderColor = graph_colours[index % graph_colours.length];
         });
+
+        body.classList.toggle('empty', data_points.length == 0);
 
         chart.update();
 

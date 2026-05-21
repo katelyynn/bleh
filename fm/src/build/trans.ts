@@ -11170,6 +11170,9 @@ export const trans = {
     },
     history: {
         en: 'History'
+    },
+    no_data_to_display: {
+        en: 'No data to display'
     }
 } as const satisfies Record<string, any>;
 
