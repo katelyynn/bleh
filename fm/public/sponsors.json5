@@ -1,5 +1,5 @@
 {
-    version: "2026.0512",
+    version: "2026.0521",
     related: {
         account_name: "kateshapedbox",
         link: "https://katelyn.moe/sponsor",
@@ -365,6 +365,7 @@
         "Divine-Light": {},
         "Sukiye": {},
         "Liam_Winters": {},
-        "Noxveld": {}
+        "Noxveld": {},
+        "cygnoir": {}
     }
 }
