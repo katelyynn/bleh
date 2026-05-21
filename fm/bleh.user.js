@@ -56658,7 +56658,7 @@
       trigger: "click",
       appendTo: document.body,
       onShow() {
-        set_value(value);
+        set_value(value, true, false);
       },
       hideOnClick: "toggle",
       onClickOutside(instance, event3) {
@@ -56689,7 +56689,7 @@
         alert2.textContent = timeframe_invalid_reason;
       }
     }
-    function set_value(val, update = true) {
+    function set_value(val, update = true, bubble = true) {
       value = val;
       elem.textContent = timeframe_text(val);
       if (update) {
@@ -56702,9 +56702,11 @@
             `);
         render_page(settings.date_selector);
       }
-      console.info("now set value", time_from, time_to);
-      if (func) func(val);
-      update_alert();
+      if (bubble) {
+        console.info("now set value", time_from, time_to);
+        if (func) func(val);
+        update_alert();
+      }
     }
     function render_page(page2) {
       if (!["preset", "custom"].includes(page2)) page2 = "preset";

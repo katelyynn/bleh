@@ -35,7 +35,7 @@ export function hybrid_timeframe_picker({
         appendTo: document.body,
 
         onShow() {
-            set_value(value);
+            set_value(value, true, false);
         },
         hideOnClick: 'toggle',
 
@@ -74,7 +74,7 @@ export function hybrid_timeframe_picker({
         }
     }
 
-    function set_value(val: string, update = true) {
+    function set_value(val: string, update = true, bubble = true) {
         value = val;
         elem.textContent = timeframe_text(val);
 
@@ -90,11 +90,13 @@ export function hybrid_timeframe_picker({
             render_page(settings.date_selector);
         }
 
-        console.info('now set value', time_from, time_to);
+        if (bubble) {
+            console.info('now set value', time_from, time_to);
 
-        if (func) func(val);
+            if (func) func(val);
 
-        update_alert();
+            update_alert();
+        }
     }
 
     function render_page(page: string) {
