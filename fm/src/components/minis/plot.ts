@@ -14,6 +14,8 @@ import { load_chart_colours, prep_chart_colours } from "../music/chart";
 import { Chart } from "chart.js";
 import { correct_artist, correct_item_by_artist } from "../music/lotus";
 import { keys } from "../settings/storage";
+import { load_profile_cache_externally } from "@/pages/profile/profile";
+import { is_sponsor } from "../sponsor";
 
 export function plot({ host, sidebar } = {}) {
     if (!host || !sidebar) return;
@@ -28,6 +30,7 @@ export function plot({ host, sidebar } = {}) {
     let selected_data_source = '';
 
     let body;
+    let footer;
     let timeframe;
 
     let from;
@@ -64,9 +67,7 @@ export function plot({ host, sidebar } = {}) {
             </div>
         </div>
         <div class="plot-body" ref=${el => body = el} />
-        <div class="plot-footer">
-
-        </div>
+        <div class="plot-footer" ref=${el => footer = el} />
     `);
 
     update_plot_options();
@@ -172,6 +173,56 @@ export function plot({ host, sidebar } = {}) {
         `);
     }
 
+    async function plot_footer() {
+        const nodes = await Promise.all(
+            data_points.map(async (point, index) => {
+                const cache = await load_profile_cache_externally(point.user);
+
+                let user_name = html.node`
+                    <a href="${root}user/${point.user}" />
+                `;
+
+                const valid = is_sponsor(point.user);
+
+                if (cache.username && valid) {
+                    render(user_name, html`
+                        <strong class="username-combo">
+                            <span class="username-custom">${cache.username}</span>
+                            <span class="username-original">
+                                <span class="at">@</span>${point.user}
+                            </span>
+                        </strong>
+                    `);
+                } else {
+                    render(user_name, html`
+                        <strong><span class="at">@</span>${point.user}</strong>
+                    `);
+                }
+
+                return html.node`
+                    <div class="plot-footer-item">
+                        <div class="plot-footer-colour" style="background-color: var(--graph-colour-${index % 13})" />
+                        <div class="plot-footer-info">
+                            <div class="plot-footer-header">
+                                <div class="plot-header-avatar avatar">
+                                    <img src=${cache.avatar} alt=${point.user} />
+                                </div>
+                                ${user_name}
+                            </div>
+                            <div class="plot-footer-media">
+                                ${plot_media_title(point.media)}
+                            </div>
+                        </div>
+                    </div>
+                `
+            })
+        );
+
+        render(footer, html`
+            ${nodes}
+        `);
+    }
+
     prep_chart_colours();
 
     let scrobble_canvas_container = document.createElement('div');
@@ -179,16 +230,6 @@ export function plot({ host, sidebar } = {}) {
 
     let scrobble_canvas = document.createElement('canvas');
     scrobble_canvas.classList.add('plot-canvas');
-
-    let gradient = scrobble_canvas
-        .getContext('2d')
-        .createLinearGradient(0, 0, 0, 160);
-    try {
-        gradient.addColorStop(0, page.state.chart_colours.link_bg_col);
-        gradient.addColorStop(1, page.state.chart_colours.link_bg_col_2);
-    } catch (e) {
-        gradient = page.state.chart_colours.link_bg_col;
-    }
 
     Chart.defaults.color = page.state.chart_colours.text_col;
     Chart.defaults.font.family = page.state.chart_colours.font;
@@ -201,7 +242,7 @@ export function plot({ host, sidebar } = {}) {
             maintainAspectRatio: false,
             plugins: {
                 legend: {
-                    display: true
+                    display: false
                 },
                 tooltip: {
                     backgroundColor: page.state.chart_colours.root_bg_col,
@@ -322,9 +363,8 @@ export function plot({ host, sidebar } = {}) {
         console.info('point', point);
 
         data_points.push(point);
+        plot_footer();
         update_chart();
-
-        page.structure.main.appendChild(table);
     }
 
     function add_data_point() {
@@ -345,9 +385,19 @@ export function plot({ host, sidebar } = {}) {
             `${computed.getPropertyValue(`--graph-colour-${i}`)}`
         );
 
+        chart.options.color = page.state.chart_colours.text_col;
+        chart.options.plugins.tooltip.backgroundColor = page.state.chart_colours.root_bg_col;
+        chart.options.plugins.tooltip.titleColor = page.state.chart_colours.text_primary_col;
+        chart.options.plugins.tooltip.bodyColor = page.state.chart_colours.text_primary_col;
+        chart.options.plugins.tooltip.multiKeyBackground = page.state.chart_colours.root_bg_col;
+
+        chart.options.scales.x.grid.color = page.state.chart_colours.axis_col;
+
+        /*
         graph_colours.forEach((colour, index) => {
             page.structure.side.appendChild(html.node`<div style="background-color: var(--graph-colour-${index}); display: block; width: 40px; height: 40px"></div>`);
         });
+        */
 
         data_points.forEach((point, index) => {
             point.backgroundColor = 'transparent';

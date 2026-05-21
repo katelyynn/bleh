@@ -35,3 +35,48 @@
 .plot-canvas-container {
     height: 100%;
 }
+
+.plot-footer {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px 30px;
+    margin-top: var(--card-gap);
+}
+
+
+.plot-footer-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.plot-footer-colour {
+    width: 4px;
+    height: 14px;
+    border-radius: 50px;
+}
+
+.plot-footer-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.plot-footer-header {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 13px;
+}
+
+.plot-header-avatar {
+    --w: 14px;
+    width: var(--w);
+    height: var(--w);
+
+    display: flex;
+}
+
+.plot-footer-media {
+    font-weight: var(--font-weight-medium);
+}
