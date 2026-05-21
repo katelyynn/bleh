@@ -55,7 +55,7 @@ export function plot({ host, sidebar } = {}) {
                 <label class="plot-header-label">Graph options</label>
                 <div class="plot-header-options">
                     ${timeframe = hybrid_timeframe_picker({
-                        initial: 'date_preset=ALL',
+                        initial: 'date_preset=LAST_180_DAYS',
                         time_from: from,
                         time_to: to,
                         func: ({ from: new_from, to: new_to }) => {
@@ -174,6 +174,8 @@ export function plot({ host, sidebar } = {}) {
     }
 
     async function plot_footer() {
+        render(footer, html``);
+
         const nodes = await Promise.all(
             data_points.map(async (point, index) => {
                 const cache = await load_profile_cache_externally(point.user);
@@ -212,6 +214,21 @@ export function plot({ host, sidebar } = {}) {
                             <div class="plot-footer-media">
                                 ${plot_media_title(point.media)}
                             </div>
+                        </div>
+                        <div class="plot-footer-action">
+                            <button class="btn icon-mask chibi plot-footer-action-btn" data-type="x" onclick=${() => {
+                                for (let i = data_points.length - 1; i >= 0; i--) {
+                                    let p = data_points[i];
+                                    if ((p.user == point.user) && (p.media == point.media)) {
+                                        data_points.splice(i, 1);
+                                    }
+                                }
+
+                                plot_footer();
+                                update_chart();
+                            }}>
+                                ${tl(trans.close)}
+                            </button>
                         </div>
                     </div>
                 `
@@ -346,17 +363,24 @@ export function plot({ host, sidebar } = {}) {
             tension: 0.1
         };
 
-        entries.forEach(entry => {
+        let seen_over_0 = false;
+        const length = Array.from(entries).length;
+
+        entries.forEach((entry, index) => {
             const period = entry.querySelector('.js-period > a')?.getAttribute('href');
             const params = new URLSearchParams(period);
 
             const from = params.get('from');
 
             const scrobbles = Number(entry.querySelector('.js-scrobbles').textContent.trim());
+            if (scrobbles > 0 || (index + 1) >= length / 2) seen_over_0 = true;
+
+            //if (!seen_over_0 && scrobbles == 0) return;
 
             point.data.push({
                 x: from,
-                y: scrobbles
+                y: scrobbles,
+                hide: !seen_over_0 && scrobbles == 0
             });
         });
 

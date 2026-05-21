@@ -48,7 +48,19 @@
 .plot-footer-item {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: var(--g);
+
+    --g: 10px;
+
+    &:hover {
+        & > .plot-footer-action {
+            opacity: 1;
+            margin-left: unset;
+        }
+    }
+
+    padding-right: var(--g);
+    margin-right: calc(-1 * var(--g));
 }
 
 .plot-footer-colour {
@@ -79,4 +91,25 @@
 
 .plot-footer-media {
     font-weight: var(--font-weight-medium);
+}
+
+.plot-footer-action {
+    --button-height: 24px;
+    opacity: 0;
+    margin-left: calc(-1 * calc(var(--button-height) + var(--g)));
+
+    transition-property: opacity, margin-left;
+    transition-duration: 0.4s;
+    transition-timing-function: var(--trans-function-ani);
+}
+
+.plot-footer-action-btn {
+    height: var(--button-height);
+
+    --icon-size: 14px;
+
+    --bg: transparent;
+    --bg-hov: oklch(var(--b4) / 20%);
+    --bg-atv: oklch(var(--b4) / 40%);
+    --shadow: none;
 }
