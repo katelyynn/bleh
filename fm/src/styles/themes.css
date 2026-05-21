@@ -384,7 +384,7 @@ body,
     --card-border-base-highlight: oklch(var(--b2) / 0.55);
 
     --separator: var(--separator-base);
-    --separator-base: oklch(var(--b3) / 0.5);
+    --separator-base: oklch(var(--b3) / 0.9);
 
     --textarea: oklch(var(--b6) / 20%);
     --textarea-hov: oklch(var(--b6) / 40%);
@@ -402,6 +402,9 @@ body,
         var(--input-shadow);
 
     --group-shadow: inset 0 0 0 1px oklch(var(--b2) / 0.36);
+
+    --inset-background: oklch(var(--b6) / 20%);
+    --inset-shadow: inset 0 4px 10px oklch(var(--b6) / 50%);
 
     --sidebar-bg: color-mix(in oklch, oklch(var(--b6)) 22%, oklch(var(--b5)));
     --sidebar-border: color-mix(in oklch, oklch(var(--b5)), oklch(var(--b4)) 25%);
@@ -460,7 +463,7 @@ body,
         --menu-item-hov: oklch(var(--b4) / 60%);
         --menu-item-atv: oklch(var(--b4) / 80%);
 
-        --separator-base: oklch(var(--b3) / 0.4);
+        --separator-base: oklch(var(--b3) / 0.7);
 
         --setting-hover: oklch(var(--b4) / 30%);
 
@@ -485,7 +488,7 @@ body,
         --b8: 0.17 0 0;
         --b7: 0 0 0;
 
-        --separator-base: oklch(var(--b2) / 0.2);
+        --separator-base: oklch(var(--b2) / 0.7);
 
         --card-border-base: oklch(var(--b2) / 0.45);
         --card-border-base-highlight: oklch(var(--b2) / 0.6);
@@ -601,6 +604,9 @@ body,
         --header-disc-filter: brightness(1.2);
 
         --card-shadow: 0 2px 10px oklch(0.01 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue) / 0.05);
+
+        --inset-background: oklch(var(--b6) / 3%);
+        --inset-shadow: inset 0 4px 10px oklch(var(--b6) / 50%);
     }
     &[data-bleh--theme="ink"] {
         --b2: 0.7 calc(var(--sat) * 0.12 * var(--sat-bg, 1)) var(--hue);
@@ -902,14 +908,14 @@ u,
 
         --card-gradient: oklch(var(--h2) / 6%);
 
-        --graph-colour-0: oklch(40% 50% 30);
-        --graph-colour-1: oklch(55% 43% 50);
-        --graph-colour-2: oklch(80% 45% 60);
-        --graph-colour-3: oklch(65% 40% 110);
-        --graph-colour-4: oklch(65% 40% 130);
-        --graph-colour-5: oklch(65% 40% 150);
-        --graph-colour-6: oklch(65% 40% 170);
-        --graph-colour-7: oklch(68% 30% 210);
+        --graph-colour-0: oklch(40% 55% 30);
+        --graph-colour-1: oklch(63% 43% 50);
+        --graph-colour-2: oklch(80% 42% 60);
+        --graph-colour-3: oklch(73% 40% 110);
+        --graph-colour-4: oklch(68% 38% 130);
+        --graph-colour-5: oklch(70% 35% 150);
+        --graph-colour-6: oklch(75% 30% 170);
+        --graph-colour-7: oklch(80% 20% 210);
         --graph-colour-8: oklch(60% 40% 260);
         --graph-colour-9: oklch(65% 40% 290);
         --graph-colour-10: oklch(65% 40% 310);
