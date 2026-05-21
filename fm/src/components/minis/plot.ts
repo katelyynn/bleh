@@ -312,7 +312,7 @@ export function plot({ host, sidebar } = {}) {
                     `);
                 }
 
-                return html.node`
+                const elem = html.node`
                     <div class="plot-footer-item">
                         <div class="plot-footer-colour" style="background-color: var(--graph-colour-${index % graph_colour_length})" />
                         <div class="plot-footer-info">
@@ -350,7 +350,17 @@ export function plot({ host, sidebar } = {}) {
                             </button>
                         </div>
                     </div>
-                `
+                `;
+
+                elem.addEventListener('mouseenter', () => {
+                    highlight_data_set(index);
+                });
+
+                elem.addEventListener('mouseleave', () => {
+                    highlight_data_set(null);
+                });
+
+                return elem;
             })
         );
 
@@ -408,6 +418,10 @@ export function plot({ host, sidebar } = {}) {
                             return DateTime.fromISO(point.x).toLocaleString(DateTime.DATE_MED);
                         }
                     }
+                },
+                interaction: {
+                    mode: 'point',
+                    intersect: false
                 }
             },
             scales: {
@@ -568,6 +582,8 @@ export function plot({ host, sidebar } = {}) {
     }
 
     function update_chart() {
+        highlight_data_set(null, false);
+
         load_chart_colours();
         const computed = getComputedStyle(document.body);
 
@@ -678,6 +694,18 @@ export function plot({ host, sidebar } = {}) {
             selected_data_source = JSON5.stringify(temporary_data_source);
             update_plot_options();
         }
+    }
+
+    function highlight_data_set(index: number | null, update = true) {
+        data_points.forEach((point, i) => {
+            if (i == index) {
+                point.borderWidth = 4;
+            } else {
+                point.borderWidth = 2;
+            }
+        });
+
+        if (update) chart.update();
     }
 }
 

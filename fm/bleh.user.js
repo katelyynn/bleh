@@ -57067,7 +57067,7 @@
                         <strong><span class="at">@</span>${point.user}</strong>
                     `);
           }
-          return html.node`
+          const elem = html.node`
                     <div class="plot-footer-item">
                         <div class="plot-footer-colour" style="background-color: var(--graph-colour-${index3 % graph_colour_length})" />
                         <div class="plot-footer-info">
@@ -57104,6 +57104,13 @@
                         </div>
                     </div>
                 `;
+          elem.addEventListener("mouseenter", () => {
+            highlight_data_set(index3);
+          });
+          elem.addEventListener("mouseleave", () => {
+            highlight_data_set(null);
+          });
+          return elem;
         })
       );
       render(footer, html`
@@ -57156,6 +57163,10 @@
                 return DateTime.fromISO(point.x).toLocaleString(DateTime.DATE_MED);
               }
             }
+          },
+          interaction: {
+            mode: "point",
+            intersect: false
           }
         },
         scales: {
@@ -57281,6 +57292,7 @@
       add_data_point_btn.disabled = false;
     }
     function update_chart() {
+      highlight_data_set(null, false);
       load_chart_colours();
       const computed = getComputedStyle(document.body);
       const graph_colours = Array.from(
@@ -57368,6 +57380,16 @@
         selected_data_source = import_json53.default.stringify(temporary_data_source);
         update_plot_options();
       }
+    }
+    function highlight_data_set(index3, update = true) {
+      data_points.forEach((point, i2) => {
+        if (i2 == index3) {
+          point.borderWidth = 4;
+        } else {
+          point.borderWidth = 2;
+        }
+      });
+      if (update) chart.update();
     }
   }
   function plot_media_title(data2, fancy = false) {
