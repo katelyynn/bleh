@@ -23,6 +23,8 @@ export function plot({ host, sidebar } = {}) {
 
     let data_points = [];
 
+    const graph_colour_length = 11;
+
     let temporary_data_source = {};
 
     let current_year = new Date().getFullYear();
@@ -254,7 +256,7 @@ export function plot({ host, sidebar } = {}) {
 
                 return html.node`
                     <div class="plot-footer-item">
-                        <div class="plot-footer-colour" style="background-color: var(--graph-colour-${index % 13})" />
+                        <div class="plot-footer-colour" style="background-color: var(--graph-colour-${index % graph_colour_length})" />
                         <div class="plot-footer-info">
                             <div class="plot-footer-header">
                                 <div class="plot-header-avatar avatar">
@@ -483,8 +485,12 @@ export function plot({ host, sidebar } = {}) {
         load_chart_colours();
         const computed = getComputedStyle(document.body);
 
-        const graph_colours = Array.from({ length: 13 }, (_, i) =>
+        const graph_colours = Array.from({ length: graph_colour_length }, (_, i) =>
             `${computed.getPropertyValue(`--graph-colour-${i}`)}`
+        );
+
+        const graph_colour_gradient = Array.from({ length: graph_colour_length }, (_, i) =>
+            `${computed.getPropertyValue(`--graph-colour-${i}`).slice(0, -1)} / 10%)`
         );
 
         chart.options.color = page.state.chart_colours.text_col;
@@ -502,7 +508,22 @@ export function plot({ host, sidebar } = {}) {
         */
 
         data_points.forEach((point, index) => {
-            point.backgroundColor = 'transparent';
+            point.backgroundColor = (context) => {
+                const chart = context.chart;
+                const { ctx, chartArea } = chart;
+
+                console.info('chart', ctx, chartArea);
+
+                if (!chartArea) return 'transparent';
+
+                const gradient = ctx.createLinearGradient(0, chartArea.top, 0, chartArea.bottom);
+                gradient.addColorStop(0, graph_colour_gradient[index % graph_colour_gradient.length]);
+                gradient.addColorStop(1, 'transparent');
+
+                console.info('chart gradient', gradient);
+
+                return gradient;
+            };
             point.borderColor = graph_colours[index % graph_colours.length];
         });
 
