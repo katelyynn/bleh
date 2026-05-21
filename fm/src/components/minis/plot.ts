@@ -377,7 +377,6 @@ export function plot({ host, sidebar } = {}) {
     let scrobble_canvas = document.createElement('canvas');
     scrobble_canvas.classList.add('plot-canvas');
 
-    Chart.defaults.color = page.state.chart_colours.text_col;
     Chart.defaults.font.family = page.state.chart_colours.font;
     const chart = new Chart(scrobble_canvas.getContext('2d'), {
         type: 'line',
@@ -385,6 +384,7 @@ export function plot({ host, sidebar } = {}) {
             datasets: data_points
         },
         options: {
+            color: page.state.chart_colours.text_col,
             maintainAspectRatio: false,
             plugins: {
                 legend: {
@@ -438,6 +438,7 @@ export function plot({ host, sidebar } = {}) {
                 y: {
                     beginAtZero: true,
                     grid: {
+                        color: page.state.chart_colours.axis_col,
                         display: true
                     },
                     suggestedMax: 10
@@ -603,6 +604,7 @@ export function plot({ host, sidebar } = {}) {
         chart.options.plugins.tooltip.multiKeyBackground = page.state.chart_colours.root_bg_col;
 
         chart.options.scales.x.grid.color = page.state.chart_colours.axis_col;
+        chart.options.scales.y.grid.color = page.state.chart_colours.axis_col;
 
         if (chart_bucket == 'YEARLY') {
             chart.options.scales.x.time = {

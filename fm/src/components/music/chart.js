@@ -45,7 +45,7 @@ export function load_chart_colours() {
     let link_bg_col = `oklch(${getComputedStyle(document.body).getPropertyValue('--h4')} / 30%)`;
     let link_bg_col_2 = `oklch(${getComputedStyle(document.body).getPropertyValue('--h4')} / 2%)`;
     let text_col = `oklch(${getComputedStyle(document.body).getPropertyValue('--c3')})`;
-    let axis_col = `oklch(${getComputedStyle(document.body).getPropertyValue('--b4')} / 40%)`;
+    let axis_col = `${getComputedStyle(document.body).getPropertyValue('--separator-base')}`;
     let text_primary_col = `oklch(${getComputedStyle(document.body).getPropertyValue('--c2')})`;
     let text_secondary_col = `oklch(${getComputedStyle(document.body).getPropertyValue('--c3')})`;
     let bg_col = `oklch(${getComputedStyle(document.body).getPropertyValue('--b5')})`;
