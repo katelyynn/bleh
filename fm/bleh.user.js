@@ -56880,7 +56880,7 @@
         check_if_allow();
       }
     })}
-                    <button class="btn icon" data-type="reload" disabled onclick=${() => match_timeframe()} ref=${(el) => refresh_graph_btn = el}>
+                    <button class="btn primary icon" data-type="reload" disabled onclick=${() => match_timeframe()} ref=${(el) => refresh_graph_btn = el}>
                         ${tl2(trans.refresh)}
                     </button>
                 </div>
