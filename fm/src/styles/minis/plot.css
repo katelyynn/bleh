@@ -86,6 +86,14 @@
     transition-timing-function: var(--trans-function-ani);
 }
 
+.plot-alert {
+    &[data-hidden="true"] {
+        display: none;
+    }
+
+    margin-bottom: var(--card-gap);
+}
+
 .plot-footer-colour {
     width: 4px;
     height: 14px;

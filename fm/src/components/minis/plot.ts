@@ -58,6 +58,8 @@ export function plot({ host, sidebar } = {}) {
 
     let fixing_timeframe = false;
 
+    let alert;
+
     render(host, html`
         <div class="plot-header">
             <div class="plot-header-side plot-header-side-main">
@@ -92,6 +94,7 @@ export function plot({ host, sidebar } = {}) {
                 </div>
             </div>
         </div>
+        <div class="plot-alert" data-hidden="true" ref=${el => alert = el} />
         <div class="plot-body empty" ref=${el => body = el}>
             <div class="plot-body-empty-message">
                 <div class="placeholder-block">
@@ -103,7 +106,7 @@ export function plot({ host, sidebar } = {}) {
         <div class="plot-footer" ref=${el => footer = el} />
     `);
 
-    tippy(refresh_graph_btn, {
+    const refresh_tooltip = tippy(refresh_graph_btn, {
         content: tl(trans.refresh_plot_notice)
     });
 
@@ -122,10 +125,10 @@ export function plot({ host, sidebar } = {}) {
         current_timeframe = proposed_timeframe;
 
         const previous_data_points = [...data_points];
-        data_points = [];
+        data_points.length = 0;
 
         for (const point of previous_data_points) {
-            await fetch_data_set(point.user, JSON5.stringify(point.media));
+            await fetch_data_set(point.user, JSON5.stringify(point.media), false);
         }
 
         timeframe_matches = true;
@@ -423,18 +426,20 @@ export function plot({ host, sidebar } = {}) {
 
     body.appendChild(scrobble_canvas_container);
 
-    async function fetch_data_set(user: string, media: string) {
-        const data_source_history = JSON5.parse(localStorage.getItem(keys.plot_data_history) || '[]');
-        if (!data_source_history.some(item => JSON5.stringify(item) == JSON5.stringify(media))) {
-            data_source_history.push(media);
-        } else {
-            data_source_history.splice(data_source_history.indexOf(media), 1);
-            data_source_history.push(media);
-        }
+    async function fetch_data_set(user: string, media: string, change_history = true) {
+        if (change_history) {
+            const data_source_history = JSON5.parse(localStorage.getItem(keys.plot_data_history) || '[]');
+            if (!data_source_history.some(item => JSON5.stringify(item) == JSON5.stringify(media))) {
+                data_source_history.push(media);
+            } else {
+                data_source_history.splice(data_source_history.indexOf(media), 1);
+                data_source_history.push(media);
+            }
 
-        if (data_source_history.length > 10)
-            data_source_history.shift();
-        localStorage.setItem(keys.plot_data_history, JSON5.stringify(data_source_history));
+            if (data_source_history.length > 10)
+                data_source_history.shift();
+            localStorage.setItem(keys.plot_data_history, JSON5.stringify(data_source_history));
+        }
 
         console.info('user', user, 'media', media);
         const data_point = JSON5.parse(media);
@@ -523,6 +528,8 @@ export function plot({ host, sidebar } = {}) {
     page.state.update_plot_chart = update_chart;
 
     function check_if_allow() {
+        alert.setAttribute('data-hidden', true);
+
         const media = data_source.value;
         const user_name = user.value;
 
@@ -531,6 +538,16 @@ export function plot({ host, sidebar } = {}) {
         if (existing || !timeframe_matches) {
             allow_adding = false;
             add_data_point_btn.disabled = true;
+
+            if (!timeframe_matches) {
+                alert.setAttribute('data-hidden', false);
+                render(alert, html`
+                    <div class="alert alert-warning">
+                        ${tl(trans.refresh_plot_alert)}
+                    </div>
+                `);
+            }
+
             return;
         }
 

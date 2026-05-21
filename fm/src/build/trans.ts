@@ -11181,7 +11181,10 @@ export const trans = {
         en: 'Graph options'
     },
     refresh_plot_notice: {
-        en: 'Changing the graph timeframe requires gathering new data, are you sure?'
+        en: 'This will re-gather all data points'
+    },
+    refresh_plot_alert: {
+        en: 'The timeframe you selected does not match the current graph, you can refresh the data to fix this.'
     }
 } as const satisfies Record<string, any>;
 
