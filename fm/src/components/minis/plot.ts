@@ -17,6 +17,7 @@ import { keys } from "../settings/storage";
 import { load_profile_cache_externally } from "@/pages/profile/profile";
 import { is_sponsor } from "../sponsor";
 import { settings } from "@/build/config";
+import tippy from "tippy.js";
 
 export function plot({ host, sidebar } = {}) {
     if (!host || !sidebar) return;
@@ -49,24 +50,45 @@ export function plot({ host, sidebar } = {}) {
 
     let plot_header_options;
 
+    let refresh_graph_btn;
+
+    let current_timeframe = 'date_preset=LAST_180_DAYS';
+    let proposed_timeframe;
+    let timeframe_matches = true;
+
+    let fixing_timeframe = false;
+
     render(host, html`
         <div class="plot-header">
             <div class="plot-header-side plot-header-side-main">
-                <label class="plot-header-label">Add to graph</label>
+                <label class="plot-header-label">${tl(trans.add_to_graph)}</label>
                 <div class="plot-header-options" ref=${el => plot_header_options = el} />
             </div>
             <div class="plot-header-side">
-                <label class="plot-header-label">Graph options</label>
+                <label class="plot-header-label">${tl(trans.graph_options)}</label>
                 <div class="plot-header-options">
                     ${timeframe = hybrid_timeframe_picker({
                         initial: 'date_preset=LAST_180_DAYS',
-                        time_from: from,
-                        time_to: to,
-                        func: ({ from: new_from, to: new_to }) => {
-                            from = new_from;
-                            to = new_to;
+                        func: (val: string) => {
+                            if (!timeframe_matches && val != current_timeframe) return;
+
+                            if (current_timeframe != val && data_points.length > 0) {
+                                timeframe_matches = false;
+                                timeframe_mismatch();
+                                proposed_timeframe = val;
+                                return;
+                            }
+
+                            current_timeframe = val;
+                            timeframe_matches = true;
+                            refresh_graph_btn.disabled = true;
+                            proposed_timeframe = val;
+                            check_if_allow();
                         }
                     })}
+                    <button class="btn icon" data-type="reload" disabled onclick=${() => match_timeframe()} ref=${el => refresh_graph_btn = el}>
+                        ${tl(trans.refresh)}
+                    </button>
                 </div>
             </div>
         </div>
@@ -81,7 +103,35 @@ export function plot({ host, sidebar } = {}) {
         <div class="plot-footer" ref=${el => footer = el} />
     `);
 
+    tippy(refresh_graph_btn, {
+        content: tl(trans.refresh_plot_notice)
+    });
+
     update_plot_options();
+
+    function timeframe_mismatch() {
+        if (fixing_timeframe) return;
+
+        refresh_graph_btn.removeAttribute('disabled');
+        check_if_allow();
+    }
+
+    async function match_timeframe() {
+        fixing_timeframe = true;
+        refresh_graph_btn.disabled = true;
+        current_timeframe = proposed_timeframe;
+
+        const previous_data_points = [...data_points];
+        data_points = [];
+
+        for (const point of previous_data_points) {
+            await fetch_data_set(point.user, JSON5.stringify(point.media));
+        }
+
+        timeframe_matches = true;
+        fixing_timeframe = false;
+        check_if_allow();
+    }
 
     function update_plot_options() {
         const data_source_history = JSON5.parse(localStorage.getItem('bleh_plot_data_history') || '[]');
@@ -218,8 +268,8 @@ export function plot({ host, sidebar } = {}) {
                 },
                 initial: selected_user
             })}
-            <button class="btn primary icon" data-type="plus" onclick=${() => add_data_point()} ref=${el => add_data_point_btn = el}>
-                ${tl(trans.add)}
+            <button class="btn primary icon" data-type="plot" onclick=${() => add_data_point()} ref=${el => add_data_point_btn = el}>
+                ${tl(trans.plot.name)}
             </button>
         `);
 
@@ -275,6 +325,13 @@ export function plot({ host, sidebar } = {}) {
                                     if ((p.user == point.user) && (p.media == point.media)) {
                                         data_points.splice(i, 1);
                                     }
+                                }
+
+                                if (data_points.length == 0) {
+                                    refresh_graph_btn.disabled = true;
+                                    timeframe_matches = true;
+                                    current_timeframe = proposed_timeframe;
+                                    check_if_allow();
                                 }
 
                                 update_plot_options();
@@ -471,14 +528,14 @@ export function plot({ host, sidebar } = {}) {
 
         const existing = data_points.find(point => point.user == user_name && JSON5.stringify(point.media) == media);
 
-        if (existing) {
+        if (existing || !timeframe_matches) {
             allow_adding = false;
             add_data_point_btn.disabled = true;
-        } else {
-            allow_adding = true;
-            add_data_point_btn.disabled = false;
+            return;
         }
 
+        allow_adding = true;
+        add_data_point_btn.disabled = false;
     }
 
     function update_chart() {

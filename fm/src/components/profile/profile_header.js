@@ -169,7 +169,8 @@ export function redesign_profile_header(is_own_profile, is_following) {
                 name: page.name,
                 type: 'minis',
                 link: `${root}bleh/minis`,
-                text: tl(trans.explore_minis)
+                text: tl(trans.explore_minis),
+                new_release: true
             });
         } else {
             create_profile_top_item(profile_header, {

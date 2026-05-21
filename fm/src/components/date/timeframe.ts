@@ -8,11 +8,13 @@ import { DateTime } from "luxon";
 import { pad2 } from "@/build/tools";
 
 interface hybrid_timeframe_picker {
-    initial?: string
+    initial?: string,
+    func?: (val: string) => void,
 }
 
 export function hybrid_timeframe_picker({
-    initial
+    initial,
+    func,
 }: hybrid_timeframe_picker) {
     let value = 'date_preset=LAST_7_DAYS';
     if (initial) value = initial;
@@ -89,6 +91,8 @@ export function hybrid_timeframe_picker({
         }
 
         console.info('now set value', time_from, time_to);
+
+        if (func) func(val);
 
         update_alert();
     }

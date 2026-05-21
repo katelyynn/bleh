@@ -87,6 +87,14 @@
             }
         }
 
+        &[data-mini="plot"] {
+            & > .mini-icon {
+                --hue-over: 20;
+                --sat-over: 1.4;
+                --lit-over: 0.95;
+            }
+        }
+
         &[data-mini="pixel"] {
             & > .mini-icon {
                 --hue-over: 344;

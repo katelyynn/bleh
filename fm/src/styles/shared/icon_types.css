@@ -674,6 +674,9 @@
         animation: spinner 1.2s linear infinite;
     }
 }
+[data-type="reload"] {
+    --mask: var(--icon-16-refresh);
+}
 
 [data-type="block"],
 .block {

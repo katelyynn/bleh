@@ -42,28 +42,27 @@ export function bleh_minis(skip = false) {
             name: tl(trans.collage),
             body: tl(trans.collage_description),
             func: bleh_minis_collage,
-            by: ['clairedoll']
+            by: ['dressupdarling']
         },
         compare: {
             name: tl(trans.compare),
             body: tl(trans.compare_description),
             func: bleh_minis_compare,
-            by: ['clairedoll']
+            by: ['dressupdarling']
         },
         plot: {
             name: tl(trans.plot.name),
             body: tl(trans.plot.body),
             func: bleh_minis_plot,
-            by: ['clairedoll'],
-            new_release: true,
-            hide_if: !ff('unlock_minis')
+            by: ['dressupdarling'],
+            new_release: true
         },
         pixel: {
             name: tl(trans.pixel?.name),
             body: tl(trans.pixel?.body),
             func: bleh_minis_pixel,
             hide_if: !ff('unlock_minis'),
-            by: ['clairedoll']
+            by: ['dressupdarling']
         },
         lyrics: {
             name: tl(trans.lyrics?.name),

@@ -11173,6 +11173,15 @@ export const trans = {
     },
     no_data_to_display: {
         en: 'No data to display'
+    },
+    add_to_graph: {
+        en: 'Add to graph'
+    },
+    graph_options: {
+        en: 'Graph options'
+    },
+    refresh_plot_notice: {
+        en: 'Changing the graph timeframe requires gathering new data, are you sure?'
     }
 } as const satisfies Record<string, any>;
 
