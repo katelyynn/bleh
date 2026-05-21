@@ -19,6 +19,8 @@ import { is_sponsor } from "../sponsor";
 import { settings } from "@/build/config";
 import tippy from "tippy.js";
 import { DateTime } from "luxon";
+import { chart_bucket } from "@/types/library";
+import { redirect } from "../music/music";
 
 export function plot({ host, sidebar } = {}) {
     if (!host || !sidebar) return;
@@ -60,6 +62,8 @@ export function plot({ host, sidebar } = {}) {
     let fixing_timeframe = false;
 
     let alert;
+
+    let chart_bucket: chart_bucket;
 
     render(host, html`
         <div class="plot-header">
@@ -414,13 +418,13 @@ export function plot({ host, sidebar } = {}) {
                     },
                     grid: {
                         color: page.state.chart_colours.axis_col,
-                        display: false
+                        display: true
                     }
                 },
                 y: {
                     beginAtZero: true,
                     grid: {
-                        display: false
+                        display: true
                     },
                     suggestedMax: 10
                 }
@@ -461,7 +465,7 @@ export function plot({ host, sidebar } = {}) {
             media_url = sanitise(data_point.artist);
         }
 
-        const url = `${root}user/${user}/library/music/${media_url}?${timeframe.value}`;
+        const url = `${root}user/${user}/library/music/${redirect()}${media_url}?${timeframe.value}`;
         console.info('timeframe url', url);
 
         const res = await fetch(url);
@@ -479,6 +483,8 @@ export function plot({ host, sidebar } = {}) {
             log('failed to find table', 'plot', 'error', { table });
             return;
         }
+
+        chart_bucket = table.getAttribute('data-bucket-size') as chart_bucket;
 
         const entries = table.querySelectorAll('tbody tr');
         console.info('table', table, entries);
@@ -581,6 +587,24 @@ export function plot({ host, sidebar } = {}) {
         chart.options.plugins.tooltip.multiKeyBackground = page.state.chart_colours.root_bg_col;
 
         chart.options.scales.x.grid.color = page.state.chart_colours.axis_col;
+
+        if (chart_bucket == 'YEARLY') {
+            chart.options.scales.x.time = {
+                unit: 'year'
+            }
+        } else if (chart_bucket == 'MONTHLY') {
+            chart.options.scales.x.time = {
+                unit: 'month'
+            }
+        } else if (chart_bucket == 'DAILY') {
+            chart.options.scales.x.time = {
+                unit: 'day'
+            }
+        } else if (chart_bucket == 'HOURLY') {
+            chart.options.scales.x.time = {
+                unit: 'hour'
+            }
+        }
 
         /*
         graph_colours.forEach((colour, index) => {

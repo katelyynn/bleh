@@ -345,7 +345,6 @@ export function calendar({
 
                             last_action = '';
                             update_display();
-                            emit();
                             render_popup();
                         }}>
                             ${label}
