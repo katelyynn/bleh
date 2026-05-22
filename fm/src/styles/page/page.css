@@ -213,6 +213,7 @@
             bottom: 0;
             display: block;
             background: var(--sidebar-border);
+            box-shadow: var(--sidebar-shadow);
         }
     }
 

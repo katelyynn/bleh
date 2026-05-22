@@ -408,6 +408,8 @@ body,
 
     --sidebar-bg: color-mix(in oklch, oklch(var(--b6)) 22%, oklch(var(--b5)));
     --sidebar-border: color-mix(in oklch, oklch(var(--b5)), oklch(var(--b2)) 20%);
+    --sidebar-shadow: 4px 0 5px 1px oklch(var(--b6) / 80%);
+
     --toolbar-bg: oklch(var(--b6) / 30%);
     --toolbar-border: 1px solid oklch(var(--b4) / 75%);
     --subtle-border: 1px solid oklch(var(--b4) / 55%);
