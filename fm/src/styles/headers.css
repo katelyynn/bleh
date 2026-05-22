@@ -115,4 +115,8 @@ h2.text-18,
     font-family: var(--font-head) !important;
     font-size: 26px !important;
     line-height: 18px !important;
+
+    .music-section > & {
+        line-height: 36px !important;
+    }
 }

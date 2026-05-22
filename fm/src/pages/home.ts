@@ -217,6 +217,18 @@ export async function bleh_home() {
     if (page.subpage == 'music') {
         let music_sections = document.body.querySelectorAll('.music-section');
         music_sections.forEach((music_section) => {
+            const link = music_section.querySelector('.music-more-link > a');
+            if (link) {
+                const href = link.getAttribute('href');
+                if (href.endsWith('releases/out-now')) {
+                    music_section.classList.add('music-section-out-now');
+                } else if (href.endsWith('releases/out-now/popular')) {
+                    music_section.classList.add('music-section-out-now-popular');
+                } else if (href.endsWith('recommended/albums')) {
+                    music_section.classList.add('music-section-recommended-albums');
+                }
+            }
+
             page.structure.main.appendChild(music_section);
         });
     }
