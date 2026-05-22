@@ -407,7 +407,7 @@ body,
     --inset-shadow: inset 0 4px 10px oklch(var(--b6) / 50%);
 
     --sidebar-bg: color-mix(in oklch, oklch(var(--b6)) 22%, oklch(var(--b5)));
-    --sidebar-border: color-mix(in oklch, oklch(var(--b5)), oklch(var(--b4)) 25%);
+    --sidebar-border: color-mix(in oklch, oklch(var(--b5)), oklch(var(--b2)) 20%);
     --toolbar-bg: oklch(var(--b6) / 30%);
     --toolbar-border: 1px solid oklch(var(--b4) / 75%);
     --subtle-border: 1px solid oklch(var(--b4) / 55%);
@@ -467,6 +467,8 @@ body,
 
         --setting-hover: oklch(var(--b4) / 30%);
 
+        --sidebar-border: color-mix(in oklch, oklch(var(--b5)), oklch(var(--b2)) 25%);
+
         --card-blur-bg: oklch(0.21 calc(var(--sat) * 0.05 * var(--sat-bg, 1)) var(--hue) / var(--solarium-opacity, 50%));
         --card-blur-bg-alt: oklch(var(--b5) / var(--solarium-opacity, 35%));
 
@@ -502,11 +504,7 @@ body,
         --group-shadow: inset 0 0 0 1px oklch(var(--b2) / 52%);
 
         --sidebar-bg: color-mix(in oklch, oklch(var(--b4)) 22%, oklch(var(--b5)));
-        --sidebar-border: color-mix(
-            in oklch,
-            oklch(var(--b5)),
-            oklch(var(--b4)) 75%
-        );
+        --sidebar-border: color-mix(in oklch, oklch(var(--b5)), oklch(var(--b2)) 70%);
         --toolbar-bg: oklch(var(--b4) / 20%);
         --toolbar-border: 1px solid oklch(var(--b2) / 35%);
         --subtle-border: 1px solid oklch(var(--b2) / 35%);
