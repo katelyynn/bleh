@@ -132,10 +132,12 @@
     --sat-over: 0;
     --lit-over: 0.5;
 
+    outline: 2px solid var(--item-hover, transparent);
+
     &:hover {
-        transform: var(--motion, translateY(-1px));
-        --grid-cover-image-filter: brightness(105%);
-        --grid-cover-image-transition: none !important;
+        outline-color: oklch(var(--l3-c) / 60%);
+        --title-colour: oklch(var(--l2-c));
+        --text-colour: color-mix(in oklch, oklch(var(--l2-c)), oklch(var(--l3-c)) 30%);
     }
 
     &.generic-cover {
@@ -148,8 +150,8 @@
         --shadow: color-mix(in oklch, oklch(var(--h4)) 100%, black 50%);
     }
 
-    transition-property: transform, translate, scale, opacity;
-    transition-duration: 0.3s;
+    transition-property: transform, translate, scale, opacity, outline-color;
+    transition-duration: var(--trans);
     transition-timing-function: var(--trans-function-ani);
 
     animation: var(--motion, grid 0.4s var(--trans-function-ani)) !important;
@@ -161,7 +163,7 @@
     --font-weight-bold: var(--custom_font_weight_bold, 600);
 
     &:active {
-        transform: translateY(var(--motion, -2px)) scale(0.98);
+        transform: scale(0.98);
     }
 
     &:before {
@@ -367,10 +369,13 @@
 }
 
 .grid-items-item-main-text {
-    color: oklch(var(--c1));
+    color: var(--title-colour, oklch(var(--c1)));
     font-weight: var(--font-weight-medium);
     margin: 0 0 1px;
-    text-decoration: var(--hover-underline, none);
+
+    transition-property: color;
+    transition-duration: var(--trans);
+    transition-timing-function: var(--trans-function-ani);
 
     & > .link-block-target {
         display: flex;
@@ -397,12 +402,16 @@
     opacity: unset;
     z-index: 21;
     position: relative;
-    color: oklch(var(--c2));
+    color: var(--text-colour, oklch(var(--c2)));
     overflow: visible;
     margin: unset;
 
     display: flex;
     gap: 10px;
+
+    transition-property: color;
+    transition-duration: var(--trans);
+    transition-timing-function: var(--trans-function-ani);
 
     & > a:first-child {
         display: inline-block;
