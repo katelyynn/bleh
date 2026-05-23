@@ -1153,6 +1153,7 @@ export function append_nav() {
                             <div class="button-combo">
                                 <a class="dropdown-menu-clickable-item" data-type="mini" href="${root}bleh/minis" onclick=${() => { instance.hide() }}>
                                     ${tl(trans.minis)}
+                                    ${new_indicator()}
                                 </a>
                                 <div class="button-combo-sep" />
                                 ${() => {

@@ -34,7 +34,7 @@
 
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 6px;
 
     &[aria-checked="true"],
     &[aria-selected="true"],
@@ -97,6 +97,11 @@
 }
 
 .dropdown-menu-clickable-item {
+    & > .new-badge {
+        cursor: inherit;
+        margin-left: unset !important;
+    }
+
     .auth-dropdown-item-row {
         display: flex;
         justify-content: space-between;
