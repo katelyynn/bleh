@@ -72742,6 +72742,7 @@
                 </a>
                 <a class="btn masthead-nav-control icon" data-type="minis" href="${root}bleh/minis">
                     ${tl2(trans.minis)}
+                    ${new_indicator()}
                 </a>
                 <span class="navlist-search" ref=${(el) => page.state.search = el} />
             </ul>

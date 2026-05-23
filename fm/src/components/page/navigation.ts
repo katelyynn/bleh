@@ -44,6 +44,7 @@ import { avatar } from '../shared/avatar';
 import { convert_lang_to_country, flag } from '../shared/flag';
 import { keys } from '../settings/storage';
 import { notify } from '../dialog/notify';
+import { new_indicator } from '../shared/indicator';
 
 export function update_branding_type(state = settings.branding_type) {
     if (state == 'bleh') {
@@ -181,6 +182,7 @@ export function append_nav() {
                 </a>
                 <a class="btn masthead-nav-control icon" data-type="minis" href="${root}bleh/minis">
                     ${tl(trans.minis)}
+                    ${new_indicator()}
                 </a>
                 <span class="navlist-search" ref=${el => page.state.search = el} />
             </ul>
