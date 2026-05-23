@@ -345,7 +345,7 @@ export function bleh_artists() {
                                     <div class="source-album js-link-block link-block" data-type=${type}>
                                         <div class="source-album-art">
                                             <span class="cover-art">
-                                                <img src=${img} alt=${original_name} />
+                                                <img src=${img} alt=${original_name} loading="lazy" />
                                             </span>
                                         </div>
                                         <div class="source-album-details">

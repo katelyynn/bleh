@@ -66999,7 +66999,7 @@
                                             <div class="source-album-art" ref=${(el) => artwork_container = el}>
                                                 ${artwork ? html.node`
                                                     <span class="cover-art">
-                                                        <img src=${artwork} alt=${title}>
+                                                        <img src=${artwork} alt=${title} loading="lazy">
                                                     </span>
                                                 ` : html.node`
                                                     <span class="cover-art">
@@ -78052,7 +78052,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                                     <div class="source-album js-link-block link-block" data-type=${type}>
                                         <div class="source-album-art">
                                             <span class="cover-art">
-                                                <img src=${img} alt=${original_name} />
+                                                <img src=${img} alt=${original_name} loading="lazy" />
                                             </span>
                                         </div>
                                         <div class="source-album-details">

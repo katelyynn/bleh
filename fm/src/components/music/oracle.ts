@@ -1842,7 +1842,7 @@ export function oracle_process() {
                                             <div class="source-album-art" ref=${el => artwork_container = el}>
                                                 ${artwork ? html.node`
                                                     <span class="cover-art">
-                                                        <img src=${artwork} alt=${title}>
+                                                        <img src=${artwork} alt=${title} loading="lazy">
                                                     </span>
                                                 ` : html.node`
                                                     <span class="cover-art">
