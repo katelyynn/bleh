@@ -203,7 +203,7 @@ export let includes = {
             'dance club|flying lotus|sports bar|doss|pabllo vittar|' +
             'ashnikko|arca|dorian electra|planningtorock|lsdxoxo|' +
             'coucou chloe|george daniel|jacques lu cont|sasha twilo|' +
-            'flying lotus|chris lord-alge|cla|autolaser|' +
+            'flying lotus|chris lord-alge|cla|4b|sikdope|carnage|autolaser|' +
             // descriptors
             'club 69 speed|the color|meltdown|underground|ihs|' +
             'classic club|naughty main|' +
@@ -282,8 +282,8 @@ export let includes = {
     ],
     mixes_numbers: [
         /[\(\[\{]v[1-9]/i,
-        /[-\(]mixed/i,
-        /[-\(]mix\s/i
+        /(?:-\s?|\(|\[)mixed/i,
+        /(?:-\s?|\(|\[)mix\s/i
     ],
     stems: [
         /(?:-\s?|\(|\[)\s*(?:a\s*cappella|acapella|accapella)/i,
@@ -398,7 +398,7 @@ export let includes = {
         /[-\(]including/i,
         /(?:-\s?|\(|\[)poem/i,
         /(?:-\s?|\(|\[)hidden/i,
-        /(?:-\s?|\(|\[)music from the spongebob movie sponge out of water/i
+        /(?:-\s?|\(|\[)music from/i
     ],
     form: [/[\(\[]clean/i, /[\(\[]explicit/i, '(spotify)', '🅴']
 };
