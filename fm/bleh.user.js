@@ -38091,10 +38091,13 @@
         document.body.style.setProperty("--lit-album", lit);
         chart_reflow();
       }
-      if (apply_to_elem instanceof HTMLElement) {
-        apply_to_elem.style.setProperty("--hue-over", hue4);
-        apply_to_elem.style.setProperty("--sat-over", sat);
-        apply_to_elem.style.setProperty("--lit-over", lit);
+      if (apply_to_elem.length > 0) {
+        apply_to_elem.forEach((elem) => {
+          if (!(elem instanceof HTMLElement)) return;
+          elem.style.setProperty("--hue-over", hue4);
+          elem.style.setProperty("--sat-over", sat);
+          elem.style.setProperty("--lit-over", lit);
+        });
       }
     }
   }
@@ -38165,7 +38168,7 @@
         image.setAttribute("crossorigin", "anonymous");
         lazy(grid, () => {
           console.info("scrolled", grid, "into view");
-          header_colour(image, false, grid);
+          header_colour(image, false, [grid]);
           cover.classList.add("colourful");
           grid.classList.add("grid-items-item-has-colour");
         });
@@ -56705,7 +56708,7 @@
       }
     }
     if (page_avatar) {
-      header_colour(page_avatar.image, false, page_avatar);
+      header_colour(page_avatar.image, false, [page_avatar]);
     }
     page.structure.container.insertBefore(
       redesigned_profile_header,
@@ -65604,7 +65607,7 @@
         ${page_avatar = page_header_avatar(src)}
         ${page_header_disc()}
     `);
-    header_colour(page_avatar.image, settings.hue_from_track, page_avatar);
+    header_colour(page_avatar.image, settings.hue_from_track, [page_avatar]);
   }
 
   // src/components/shared/flag.ts
@@ -69732,6 +69735,7 @@
                 </div>
             </div>
         `);
+      correct_generic_artist("catalogue-overview-similar-artists-item");
     }
     const albums = page.structure.main.querySelector(".similar-albums")?.parentElement;
     if (albums) {
@@ -76933,7 +76937,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     });
   }
   function correct_generic_artist(parent) {
-    let albums = document.body.querySelectorAll(`.${parent}`);
+    let albums = page.structure.container.querySelectorAll(`.${parent}`);
     if (albums.length == 0) return;
     if (!settings.corrections) return;
     albums.forEach((album) => {
@@ -76950,7 +76954,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     });
   }
   function correct_generic_combo(parent) {
-    let albums = document.body.querySelectorAll(`.${parent}`);
+    let albums = page.structure.container.querySelectorAll(`.${parent}`);
     if (albums.length == 0) return;
     if (!settings.format_guest_features && !settings.corrections) return;
     albums.forEach((album) => {
@@ -76986,7 +76990,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     });
   }
   function correct_generic_combo_no_artist(parent) {
-    let albums = document.body.querySelectorAll(`.${parent}`);
+    let albums = page.structure.container.querySelectorAll(`.${parent}`);
     if (albums.length == 0) return;
     if (!settings.format_guest_features && !settings.corrections) return;
     albums.forEach((album) => {
@@ -77643,7 +77647,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                 </div>
                 ` : ""}
         `;
-      header_colour(page_avatar.image, settings.hue_from_album, page_avatar);
+      header_colour(page_avatar.image, settings.hue_from_album, [page_avatar]);
       if (avatar3) register_background(avatar3.getAttribute("content"));
       else register_background(null);
       page.structure.container.insertBefore(
@@ -77897,7 +77901,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
             </section>
         `;
       log("settings hue accent", "dfbdfb", "info", { settings: JSON.stringify(settings) });
-      header_colour(page_avatar.image, settings.hue_from_artist, page_avatar);
+      header_colour(page_avatar.image, settings.hue_from_artist, [page_avatar]);
       if (multi_info_box) {
         tippy_esm_default(multi_info_box, {
           content: tl2(trans.artists_tooltip)
@@ -81251,7 +81255,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         profile_name.setAttribute("data-font", cache2.font);
         profile_name.setAttribute("data-font-style", cache2.font_style);
       }
-      header_colour(page_avatar.image, false, page_avatar);
+      header_colour(page_avatar.image, false, [page_avatar]);
     } else {
       welcome = html.node`
             <section class="page-header for-profile">
@@ -83530,6 +83534,10 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       }
       if (page.type == "user" || page.type == "artist" || page.type == "album" || page.type == "events" || page.type == "festival" || page.type == "tag" || page.type == "overview" || page.type == "bookmarks") {
         patch_titles();
+      }
+      if (page.type == "overview" && page.subpage == "music") {
+        correct_generic_combo("music-releases-item");
+        correct_generic_artist("music-more-artists-item");
       }
       if (settings.corrections) {
         correct_generic_combo("resource-list--release-list-item");

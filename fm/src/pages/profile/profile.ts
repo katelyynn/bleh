@@ -323,7 +323,7 @@ export function bleh_profiles() {
     }
 
     if (page_avatar) {
-        header_colour(page_avatar.image, false, page_avatar);
+        header_colour(page_avatar.image, false, [page_avatar]);
     }
 
     page.structure.container.insertBefore(

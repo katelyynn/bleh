@@ -109,7 +109,7 @@ export function music_grids(search = page.structure.main, use_colour = true) {
             lazy(grid, () => {
                 console.info('scrolled', grid, 'into view');
 
-                header_colour(image, false, grid);
+                header_colour(image, false, [grid]);
                 cover.classList.add('colourful');
                 grid.classList.add('grid-items-item-has-colour');
             });

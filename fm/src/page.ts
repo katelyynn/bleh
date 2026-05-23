@@ -340,6 +340,11 @@ function main_flow() {
             patch_titles();
         }
 
+        if (page.type == 'overview' && page.subpage == 'music') {
+            correct_generic_combo('music-releases-item');
+            correct_generic_artist('music-more-artists-item');
+        }
+
         if (settings.corrections) {
             correct_generic_combo('resource-list--release-list-item');
             correct_generic_combo('similar-albums-item');

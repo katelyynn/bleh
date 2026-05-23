@@ -16,6 +16,7 @@ import { ff } from '@/components/settings/sku';
 import { parse_scrobbles_as_rank } from '@/components/music/colourful_counts';
 import {
     correct_artist,
+    correct_generic_artist,
     correct_item_by_artist,
     create_correction,
     name_includes,
@@ -1711,6 +1712,8 @@ export function similar_items() {
                 </div>
             </div>
         `);
+
+        correct_generic_artist('catalogue-overview-similar-artists-item');
     }
 
     const albums = page.structure.main.querySelector('.similar-albums')?.parentElement;

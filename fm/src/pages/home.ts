@@ -103,7 +103,7 @@ export async function bleh_home() {
             profile_name!.setAttribute('data-font-style', cache.font_style);
         }
 
-        header_colour(page_avatar.image, false, page_avatar);
+        header_colour(page_avatar.image, false, [page_avatar]);
     } else {
         welcome = html.node`
             <section class="page-header for-profile">

@@ -5,7 +5,7 @@ import ColorThief from 'color-thief-browser';
 import { page } from '@/build/page';
 import { FastAverageColor } from 'fast-average-color';
 
-export async function header_colour(source: HTMLImageElement, apply_to_page = false, apply_to_elem?: Element) {
+export async function header_colour(source: HTMLImageElement, apply_to_page = false, apply_to_elem?: Element[]) {
     log('applying header colour', 'accent', 'info', { source, apply_to_page, apply_to_elem });
     apply(0, 0, 0.5, true);
 
@@ -53,10 +53,14 @@ export async function header_colour(source: HTMLImageElement, apply_to_page = fa
             chart_reflow();
         }
 
-        if (apply_to_elem instanceof HTMLElement) {
-            apply_to_elem.style.setProperty('--hue-over', hue);
-            apply_to_elem.style.setProperty('--sat-over', sat);
-            apply_to_elem.style.setProperty('--lit-over', lit);
+        if (apply_to_elem.length > 0) {
+            apply_to_elem.forEach(elem => {
+                if (!(elem instanceof HTMLElement)) return;
+
+                elem.style.setProperty('--hue-over', hue);
+                elem.style.setProperty('--sat-over', sat);
+                elem.style.setProperty('--lit-over', lit);
+            })
         }
     }
 }

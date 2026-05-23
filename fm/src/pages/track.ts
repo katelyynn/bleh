@@ -205,5 +205,5 @@ export function create_avatar(parent, src, override = 'expand') {
         ${page_header_disc()}
     `);
 
-    header_colour(page_avatar.image, settings.hue_from_track, page_avatar);
+    header_colour(page_avatar.image, settings.hue_from_track, [page_avatar]);
 }
