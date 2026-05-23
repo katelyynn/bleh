@@ -22,6 +22,7 @@ import { status } from '@/components/dialog/status';
 import { chart_reflow } from '@/components/music/chart.js';
 import { set_storage } from '@/build/tools';
 import { ff } from './sku';
+import { new_indicator } from '../shared/indicator';
 
 interface setting {
     id: string,
@@ -126,9 +127,7 @@ export function setting({
                 html.node`<span class="new-badge beta">${tl(trans.beta)}</span>`
             );
         if (settings_store[id].new_release)
-            html_title.appendChild(
-                html.node`<span class="new-badge new">${tl(trans.new)}</span>`
-            );
+            html_title.appendChild(new_indicator());
 
         if (type == 'toggle') {
             let toggle;
@@ -1027,7 +1026,7 @@ export function setting({
                                 ` : ''}
                                 <div class="info">
                                     ${list[val]?.name || val}
-                                    ${list[val]?.new_release ? html.node`<span class="new-badge new">${tl(trans.new)}</span>` : ''}
+                                    ${list[val]?.new_release ? new_indicator() : ''}
                                 </div>
                                 <button class="btn chibi icon setting-list-item-btn" data-type="minus" onclick=${() => {
                                     const new_list = current.filter(
@@ -1144,7 +1143,7 @@ export function setting({
                                     ` : ''}
                                     <div class="info">
                                         ${formal.name}
-                                        ${formal.new_release ? html.node`<span class="new-badge new">${tl(trans.new)}</span>` : ''}
+                                        ${formal.new_release ? new_indicator() : ''}
                                     </div>
                                     <button class="btn chibi icon setting-list-item-btn" data-type="plus" onclick=${() => {
                                         const new_list = [...current, val];

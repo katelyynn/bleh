@@ -237,7 +237,7 @@ export function music_grids(search = page.structure.main, use_colour = true) {
             });
         }
 
-        let name = grid.querySelector('.grid-items-item-main-text a');
+        let name = grid.querySelector('.grid-items-item-main-text > a');
         if (!name) return;
 
         let artist;
@@ -293,6 +293,8 @@ export function music_grids(search = page.structure.main, use_colour = true) {
                 );
             }
         }
+
+        name.removeAttribute('title');
 
         const menu = tippy(grid, {
             theme: 'context-menu',

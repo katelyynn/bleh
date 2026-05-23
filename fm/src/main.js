@@ -11,8 +11,10 @@ import version2 from "./build/build.json" with { type: "json" };
 
 import { Chart, registerables } from "chart.js";
 import "chartjs-adapter-luxon";
+import zoomPlugin from "chartjs-plugin-zoom";
 
 Chart.register(...registerables);
+Chart.register(zoomPlugin);
 
 export { Chart };
 

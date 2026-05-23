@@ -52,6 +52,9 @@
 [data-type="listening-report"] {
     --mask: var(--icon-16-listening-report);
 }
+[data-type="construction"] {
+    --mask: var(--icon-16-construction);
+}
 [data-type="prev"],
 .secondary-nav-item--back,
 [data-type="back"] {

@@ -283,6 +283,7 @@
     }
 }
 
+.music-bookmarks-artists-item-wrap,
 .music-recommended-artists-artist,
 .music-recommended-albums-item-wrap,
 .catalogue-overview-similar-artists-item-wrap,
@@ -491,10 +492,14 @@
     order: -10;
 }
 
-.music-section-out-now-popular {
+.music-section-out-now {
     order: -9;
 }
 
-.music-section-out-now {
+.music-section-coming-soon {
     order: -8;
+}
+
+.music-section-out-now-popular {
+    order: -7;
 }

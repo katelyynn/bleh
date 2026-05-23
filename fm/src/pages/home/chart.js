@@ -12,6 +12,7 @@ import { html } from 'lighterhtml';
 import tippy from 'tippy.js';
 import { DateTime } from 'luxon';
 import { setting } from '@/components/settings/settings';
+import { bind_link_block } from '@/components/shared/link_block';
 
 export function bleh_charts() {
     if (page.subpage != 'overview') return;
@@ -113,6 +114,8 @@ export function bleh_charts() {
                 image.getAttribute('src').replace('/avatar70s/', '/avatar300s/')
             );
 
+            let link_block;
+
             if (index == 1) {
                 name.textContent = correct_artist(name.textContent);
 
@@ -134,7 +137,7 @@ export function bleh_charts() {
                                     </div>
                                 </div>
                             </div>
-                            <a class="link-block-cover-link" href=${link}></a>
+                            <a class="link-block-cover-link" ref=${el => link_block = el} href=${link}></a>
                         </div>
                     </li>
                 `;
@@ -169,11 +172,13 @@ export function bleh_charts() {
                                     </div>
                                 </div>
                             </div>
-                            <a class="link-block-cover-link" href=${link}></a>
+                            <a class="link-block-cover-link" ref=${el => link_block = el} href=${link}></a>
                         </div>
                     </li>
                 `;
             }
+
+            bind_link_block(link_block, list_item);
 
             list.appendChild(list_item);
         });

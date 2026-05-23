@@ -198,3 +198,22 @@
     gap: var(--card-gap);
     flex-wrap: wrap;
 }
+
+.under-construction {
+    --hue-over: 56;
+    --sat-over: 1.8;
+    --lit-over: 1.07;
+
+    padding: var(--card-gap) var(--card-padding);
+    background-color: oklch(var(--h4) / 15%);
+    color: oklch(var(--l3-c));
+
+    display: flex;
+    gap: 10px;
+
+    cursor: default;
+    user-select: none;
+
+    border-top: 1px solid oklch(var(--l4-c) / 10%);
+    border-bottom: 1px solid oklch(var(--l4-c) / 10%);
+}

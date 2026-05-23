@@ -154,10 +154,6 @@
                     order: -1;
                     position: relative;
 
-                    img {
-                        --mask-size: var(--cover-size-200);
-                    }
-
                     .charts-list-rank-overlay-wrap {
                         position: absolute;
                         inset: 0;

@@ -13,6 +13,7 @@ import { compare } from '@/components/minis/compare';
 import { pixel } from '@/components/minis/pixel';
 import { ff } from '@/components/settings/sku';
 import { plot } from '@/components/minis/plot';
+import { new_indicator } from '@/components/shared/indicator';
 
 let valid_minis;
 
@@ -146,7 +147,7 @@ export function bleh_minis(skip = false) {
                                     <div class="bleh-icon" />
                                 </div>
                                 <div class="mini-info">
-                                    <h5>${mini.name}${mini.new_release ? html.node`<div class="new-badge new">${tl(trans.new)}</div>` : ''}</h5>
+                                    <h5>${mini.name}${mini.new_release ? new_indicator() : ''}</h5>
                                     <p>${mini.body}</p>
                                 </div>
                                 <div class="bleh-icon mini-arrow" style="--icon: var(--mask)" data-type="arrow-right" />

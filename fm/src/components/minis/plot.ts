@@ -422,6 +422,24 @@ export function plot({ host, sidebar } = {}) {
                 interaction: {
                     mode: 'point',
                     intersect: false
+                },
+                zoom: {
+                    pan: {
+                        enabled: true
+                    },
+                    zoom: {
+                        wheel: {
+                            enabled: true
+                        },
+                        drag: {
+                            enabled: true
+                        },
+                        mode: 'x'
+                    },
+                    limits: {
+                        x: { min: 'original', max: 'original' },
+                        y: { min: 'original', max: 'original' }
+                    }
                 }
             },
             scales: {
@@ -605,6 +623,25 @@ export function plot({ host, sidebar } = {}) {
 
         chart.options.scales.x.grid.color = page.state.chart_colours.axis_col;
         chart.options.scales.y.grid.color = page.state.chart_colours.axis_col;
+
+        chart.options.plugins.zoom = {
+            pan: {
+                enabled: true
+            },
+            zoom: {
+                wheel: {
+                    enabled: true
+                },
+                drag: {
+                    enabled: true
+                },
+                mode: 'x'
+            },
+            limits: {
+                x: { min: 'original', max: 'original' },
+                y: { min: 'original', max: 'original' }
+            }
+        }
 
         if (chart_bucket == 'YEARLY') {
             chart.options.scales.x.time = {

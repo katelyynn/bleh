@@ -24,7 +24,12 @@
     }
 
     &.new {
-        animation: new 2.5s linear infinite;
+        --hue-over: 317;
+        --sat-over: 1.44;
+        --lit-over: 0.96;
+        animation: new 4s linear infinite;
+
+        box-shadow: 0 0 20px oklch(var(--h4) / 40%);
     }
 
     &.sponsor-related {

@@ -343,10 +343,12 @@
 @keyframes new {
     from,
     to {
-        background: oklch(var(--k4), 40%);
+        background: oklch(var(--f4) / 30%);
+        color: oklch(var(--l3-c));
     }
     50% {
-        background: oklch(var(--k4), 70%);
+        background: oklch(var(--f4) / 60%);
+        color: oklch(var(--l2-c-theme-switch));
     }
 }
 

@@ -730,7 +730,7 @@ u,
 
     --grid-colour-shadow: var(
         --grid-colour-shadow-override,
-        0 10px 30px oklch(var(--h4) / 35%)
+        0 10px 20px oklch(var(--h4) / 25%)
     );
 
     --opposite-text: var(--b6);
@@ -802,8 +802,6 @@ u,
         --l3: calc(var(--lit) * 0.75) calc(var(--sat) * 0.5) var(--hue);
         --l4: calc(var(--lit) * 0.45) calc(var(--sat) * 0.6) var(--hue);
 
-        --h4: calc(var(--lit) * 0.55) calc(clamp(min(0), var(--sat), max(2)) * 0.65) var(--hue);
-
         --f4: calc(var(--lit) * 0.4) calc(clamp(min(0), var(--sat), max(2)) * 0.32) var(--hue);
         --k4: calc(var(--lit) * 0.45) calc(clamp(min(0), var(--sat), max(2)) * 0.32) var(--hue);
         --g4: calc(var(--lit) * 0.1) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue);
@@ -816,7 +814,7 @@ u,
 
         --grid-colour-shadow: var(
             --grid-colour-shadow-override,
-            0 10px 30px oklch(var(--h4) / 35%)
+            0 10px 30px oklch(var(--h4) / 40%)
         );
 
         --card-gradient: oklch(calc(clamp(min(0.5), var(--lit), max(0.9)) * 0.5) calc(clamp(min(0), var(--sat), max(2)) * 0.55) var(--hue) / 16%);
@@ -867,7 +865,7 @@ u,
 
         --grid-colour-shadow: var(
             --grid-colour-shadow-override,
-            0 10px 30px oklch(var(--h4) / 45%)
+            0 10px 30px oklch(var(--h4) / 30%)
         );
 
         --opposite-text: var(--c1);
@@ -966,7 +964,7 @@ u,
 
         --grid-colour-shadow: var(
             --grid-colour-shadow-override,
-            0 10px 30px oklch(var(--h4) / 45%)
+            0 10px 30px oklch(var(--h4) / 30%)
         );
 
         --opposite-text: var(--c1);

@@ -25,6 +25,7 @@ import { page_header_avatar } from '@/components/music/header';
 import { campfire } from './home/campfire';
 import { bleh_suggested } from './home/suggested';
 import { header_colour } from '@/components/page/colour';
+import { new_indicator } from "@/components/shared/indicator";
 
 export async function bleh_home() {
     page.structure.container = document.body.querySelector('.page-content');
@@ -135,6 +136,7 @@ export async function bleh_home() {
                     <li class="navlist-item secondary-nav-item secondary-nav-item--home">
                         <a href="${root}music" class="secondary-nav-item-link ${(page.subpage == 'music' || page.type == 'events') ? 'secondary-nav-item-link--active' : ''}">
                             ${tl(trans.home)}
+                            ${new_indicator()}
                         </a>
                     </li>
                     <li class="navlist-item secondary-nav-item secondary-nav-item--recommendations">
@@ -161,6 +163,7 @@ export async function bleh_home() {
                     <li class="navlist-item secondary-nav-item secondary-nav-item--minis">
                         <a href="${root}bleh/minis" data-type="mini" class="secondary-nav-item-link ${(page.type == 'minis') ? 'secondary-nav-item-link--active' : ''}">
                             ${tl(trans.minis)}
+                            ${new_indicator()}
                         </a>
                     </li>
                     ` : ''}
@@ -226,6 +229,8 @@ export async function bleh_home() {
                     music_section.classList.add('music-section-out-now-popular');
                 } else if (href.endsWith('recommended/albums')) {
                     music_section.classList.add('music-section-recommended-albums');
+                } else if (href.endsWith('releases/coming-soon/popular')) {
+                    music_section.classList.add('music-section-coming-soon');
                 }
             }
 

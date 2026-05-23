@@ -11185,6 +11185,9 @@ export const trans = {
     },
     refresh_plot_alert: {
         en: 'The timeframe you selected does not match the current graph, you can refresh the data to fix this.'
+    },
+    under_construction: {
+        en: 'This page is under construction, please give feedback and suggestions if you have any!'
     }
 } as const satisfies Record<string, any>;
 

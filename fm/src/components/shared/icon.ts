@@ -172,7 +172,8 @@ export const icons = {
     oracle: 'oracle',
     credits: 'credits',
     sparkle: 'sparkle',
-    error: 'error'
+    error: 'error',
+    construction: 'construction'
 };
 
 interface icon {
