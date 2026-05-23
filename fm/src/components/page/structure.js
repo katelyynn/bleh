@@ -266,18 +266,19 @@ export function checkup_page_structure(is_subpage = false, header = null) {
                     );
 
                 if (btn_add) {
-                    let side_actions = document.createElement('section');
-                    side_actions.classList.add('side-actions');
-
-                    if (!page.mobile)
-                        page.structure.side.appendChild(side_actions);
-                    else page.structure.main.appendChild(side_actions);
+                    const side_actions = html.node`
+                        <section class="side-actions">
+                            ${btn_add}
+                        </section>
+                    `;
 
                     btn_add.classList = 'btn side-action icon-mask';
                     btn_add.setAttribute('data-type', 'add');
                     btn_add.textContent = tl(trans.add);
 
-                    side_actions.appendChild(btn_add);
+                    if (!page.mobile)
+                        page.structure.side.insertBefore(side_actions, page.structure.side.firstElementChild);
+                    else page.structure.main.insertBefore(side_actions, page.structure.main.firstElementChild);
                 }
 
                 // is there a playlink?
@@ -286,12 +287,11 @@ export function checkup_page_structure(is_subpage = false, header = null) {
                 );
 
                 if (radio) {
-                    let side_actions = document.createElement('section');
-                    side_actions.classList.add('side-actions');
-
-                    if (!page.mobile)
-                        page.structure.side.appendChild(side_actions);
-                    else page.structure.main.appendChild(side_actions);
+                    const side_actions = html.node`
+                        <section class="side-actions">
+                            ${radio}
+                        </section>
+                    `;
 
                     radio.classList =
                         'btn stationlink js-playlink-station radio-button side-action icon-mask';
@@ -308,7 +308,9 @@ export function checkup_page_structure(is_subpage = false, header = null) {
 
                     radio.removeAttribute('title');
 
-                    side_actions.appendChild(radio);
+                    if (!page.mobile)
+                        page.structure.side.insertBefore(side_actions, page.structure.side.firstElementChild);
+                    else page.structure.main.insertBefore(side_actions, page.structure.main.firstElementChild);
                 }
             }
 

@@ -40762,25 +40762,27 @@
               ":scope > section:first-child .btn-add"
             );
           if (btn_add) {
-            let side_actions = document.createElement("section");
-            side_actions.classList.add("side-actions");
-            if (!page.mobile)
-              page.structure.side.appendChild(side_actions);
-            else page.structure.main.appendChild(side_actions);
+            const side_actions = html.node`
+                        <section class="side-actions">
+                            ${btn_add}
+                        </section>
+                    `;
             btn_add.classList = "btn side-action icon-mask";
             btn_add.setAttribute("data-type", "add");
             btn_add.textContent = tl2(trans.add);
-            side_actions.appendChild(btn_add);
+            if (!page.mobile)
+              page.structure.side.insertBefore(side_actions, page.structure.side.firstElementChild);
+            else page.structure.main.insertBefore(side_actions, page.structure.main.firstElementChild);
           }
           let radio2 = page.structure.main.querySelector(
             ":scope > .section-controls > .section-playlink"
           );
           if (radio2) {
-            let side_actions = document.createElement("section");
-            side_actions.classList.add("side-actions");
-            if (!page.mobile)
-              page.structure.side.appendChild(side_actions);
-            else page.structure.main.appendChild(side_actions);
+            const side_actions = html.node`
+                        <section class="side-actions">
+                            ${radio2}
+                        </section>
+                    `;
             radio2.classList = "btn stationlink js-playlink-station radio-button side-action icon-mask";
             let type = radio2.getAttribute("data-analytics-label");
             render(
@@ -40791,7 +40793,9 @@
                         `
             );
             radio2.removeAttribute("title");
-            side_actions.appendChild(radio2);
+            if (!page.mobile)
+              page.structure.side.insertBefore(side_actions, page.structure.side.firstElementChild);
+            else page.structure.main.insertBefore(side_actions, page.structure.main.firstElementChild);
           }
         }
         let similar_artists = page.structure.side.querySelector(
@@ -64812,10 +64816,9 @@
       ".more-link-fullwidth-right-flush-top"
     );
     if (view_all_container) {
-      let side_actions = document.createElement("section");
-      side_actions.classList.add("side-actions");
-      if (!page.mobile) page.structure.side.appendChild(side_actions);
-      else page.structure.main.appendChild(side_actions);
+      const side_actions = html.node`
+            <section class="side-actions" />
+        `;
       let view_all = view_all_container.querySelector("a");
       view_all.classList.add("btn", "side-action", "icon-mask");
       view_all.setAttribute("data-type", "gallery");
@@ -64832,6 +64835,9 @@
         view_saved.textContent = tl2(trans.view_saved);
         side_actions.appendChild(view_saved);
       }
+      if (!page.mobile)
+        page.structure.side.insertBefore(side_actions, page.structure.side.firstElementChild);
+      else page.structure.main.insertBefore(side_actions, page.structure.main.firstElementChild);
     }
     if (page.type == "artist" || ff("display_album_bookmark"))
       patch_gallery_focused_image(image_sidebar, buttons);
