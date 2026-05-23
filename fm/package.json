@@ -11,6 +11,7 @@
         "culori": "^4.0.2",
         "dompurify": "^3.2.6",
         "esbuild": "^0.25.8",
+        "fast-average-color": "^9.5.2",
         "hangul-js": "^0.2.6",
         "hangul-romanization": "^1.0.1",
         "html2canvas-pro": "^1.5.11",

@@ -1563,12 +1563,12 @@
       }, CanvasImage.prototype.removeCanvas = function() {
         this.canvas.parentNode.removeChild(this.canvas);
       };
-      var ColorThief5 = function() {
+      var ColorThief4 = function() {
       };
-      if (ColorThief5.prototype.getColor = function(a, b) {
+      if (ColorThief4.prototype.getColor = function(a, b) {
         var c2 = this.getPalette(a, 5, b), d = c2[0];
         return d;
-      }, ColorThief5.prototype.getPalette = function(a, b, c2) {
+      }, ColorThief4.prototype.getPalette = function(a, b, c2) {
         "undefined" == typeof b && (b = 10), ("undefined" == typeof c2 || 1 > c2) && (c2 = 10);
         for (var d, e4, f3, g2, h, i2 = new CanvasImage(a), j = i2.getImageData(), k4 = j.data, l2 = i2.getPixelCount(), m = [], n2 = 0; l2 > n2; n2 += c2) d = 4 * n2, e4 = k4[d + 0], f3 = k4[d + 1], g2 = k4[d + 2], h = k4[d + 3], h >= 125 && (e4 > 250 && f3 > 250 && g2 > 250 || m.push([e4, f3, g2]));
         var o = MMCQ.quantize(m, b), p4 = o ? o.palette() : null;
@@ -1740,7 +1740,7 @@
           d2[0] > 251 && d2[1] > 251 && d2[2] > 251 && (a2[c3].color = [255, 255, 255]);
         } }, { quantize: h };
       }();
-      module.exports = ColorThief5;
+      module.exports = ColorThief4;
     }
   });
 
@@ -37464,7 +37464,7 @@
   }
 
   // src/components/music/music_grid.js
-  var import_color_thief_browser2 = __toESM(require_color_thief_min(), 1);
+  var import_color_thief_browser = __toESM(require_color_thief_min(), 1);
 
   // src/components/music/hoshino.js
   function hoshino(artwork, name, sister, link = null) {
@@ -37569,9 +37569,492 @@
     set_storage("bleh_hoshino_cache", JSON.stringify(hoshino_cache));
   }
 
+  // node_modules/fast-average-color/dist/index.esm.js
+  function toHex(num3) {
+    var str = num3.toString(16);
+    return str.length === 1 ? "0" + str : str;
+  }
+  function arrayToHex(arr) {
+    return "#" + arr.map(toHex).join("");
+  }
+  function isDark(color2) {
+    var result = (color2[0] * 299 + color2[1] * 587 + color2[2] * 114) / 1e3;
+    return result < 128;
+  }
+  function prepareIgnoredColor(color2) {
+    if (!color2) {
+      return [];
+    }
+    return isRGBArray(color2) ? color2 : [color2];
+  }
+  function isRGBArray(value) {
+    return Array.isArray(value[0]);
+  }
+  function isIgnoredColor(data2, index3, ignoredColor) {
+    for (var i2 = 0; i2 < ignoredColor.length; i2++) {
+      if (isIgnoredColorAsNumbers(data2, index3, ignoredColor[i2])) {
+        return true;
+      }
+    }
+    return false;
+  }
+  function isIgnoredColorAsNumbers(data2, index3, ignoredColor) {
+    switch (ignoredColor.length) {
+      case 3:
+        if (isIgnoredRGBColor(data2, index3, ignoredColor)) {
+          return true;
+        }
+        break;
+      case 4:
+        if (isIgnoredRGBAColor(data2, index3, ignoredColor)) {
+          return true;
+        }
+        break;
+      case 5:
+        if (isIgnoredRGBAColorWithThreshold(data2, index3, ignoredColor)) {
+          return true;
+        }
+        break;
+      default:
+        return false;
+    }
+  }
+  function isIgnoredRGBColor(data2, index3, ignoredColor) {
+    if (data2[index3 + 3] !== 255) {
+      return true;
+    }
+    if (data2[index3] === ignoredColor[0] && data2[index3 + 1] === ignoredColor[1] && data2[index3 + 2] === ignoredColor[2]) {
+      return true;
+    }
+    return false;
+  }
+  function isIgnoredRGBAColor(data2, index3, ignoredColor) {
+    if (data2[index3 + 3] && ignoredColor[3]) {
+      return data2[index3] === ignoredColor[0] && data2[index3 + 1] === ignoredColor[1] && data2[index3 + 2] === ignoredColor[2] && data2[index3 + 3] === ignoredColor[3];
+    }
+    return data2[index3 + 3] === ignoredColor[3];
+  }
+  function inRange(colorComponent, ignoredColorComponent, value) {
+    return colorComponent >= ignoredColorComponent - value && colorComponent <= ignoredColorComponent + value;
+  }
+  function isIgnoredRGBAColorWithThreshold(data2, index3, ignoredColor) {
+    var redIgnored = ignoredColor[0];
+    var greenIgnored = ignoredColor[1];
+    var blueIgnored = ignoredColor[2];
+    var alphaIgnored = ignoredColor[3];
+    var threshold = ignoredColor[4];
+    var alphaData = data2[index3 + 3];
+    var alphaInRange = inRange(alphaData, alphaIgnored, threshold);
+    if (!alphaIgnored) {
+      return alphaInRange;
+    }
+    if (!alphaData && alphaInRange) {
+      return true;
+    }
+    if (inRange(data2[index3], redIgnored, threshold) && inRange(data2[index3 + 1], greenIgnored, threshold) && inRange(data2[index3 + 2], blueIgnored, threshold) && alphaInRange) {
+      return true;
+    }
+    return false;
+  }
+  var DEFAULT_DOMINANT_DIVIDER = 24;
+  function dominantAlgorithm(arr, len, options) {
+    var colorHash = {};
+    var divider = options.dominantDivider || DEFAULT_DOMINANT_DIVIDER;
+    var ignoredColor = options.ignoredColor;
+    var step = options.step;
+    var max2 = [0, 0, 0, 0, 0];
+    for (var i2 = 0; i2 < len; i2 += step) {
+      var red = arr[i2];
+      var green = arr[i2 + 1];
+      var blue = arr[i2 + 2];
+      var alpha2 = arr[i2 + 3];
+      if (ignoredColor && isIgnoredColor(arr, i2, ignoredColor)) {
+        continue;
+      }
+      var key = Math.round(red / divider) + "," + Math.round(green / divider) + "," + Math.round(blue / divider);
+      if (colorHash[key]) {
+        colorHash[key] = [
+          colorHash[key][0] + red * alpha2,
+          colorHash[key][1] + green * alpha2,
+          colorHash[key][2] + blue * alpha2,
+          colorHash[key][3] + alpha2,
+          colorHash[key][4] + 1
+        ];
+      } else {
+        colorHash[key] = [red * alpha2, green * alpha2, blue * alpha2, alpha2, 1];
+      }
+      if (max2[4] < colorHash[key][4]) {
+        max2 = colorHash[key];
+      }
+    }
+    var redTotal = max2[0];
+    var greenTotal = max2[1];
+    var blueTotal = max2[2];
+    var alphaTotal = max2[3];
+    var count = max2[4];
+    return alphaTotal ? [
+      Math.round(redTotal / alphaTotal),
+      Math.round(greenTotal / alphaTotal),
+      Math.round(blueTotal / alphaTotal),
+      Math.round(alphaTotal / count)
+    ] : options.defaultColor;
+  }
+  function simpleAlgorithm(arr, len, options) {
+    var redTotal = 0;
+    var greenTotal = 0;
+    var blueTotal = 0;
+    var alphaTotal = 0;
+    var count = 0;
+    var ignoredColor = options.ignoredColor;
+    var step = options.step;
+    for (var i2 = 0; i2 < len; i2 += step) {
+      var alpha2 = arr[i2 + 3];
+      var red = arr[i2] * alpha2;
+      var green = arr[i2 + 1] * alpha2;
+      var blue = arr[i2 + 2] * alpha2;
+      if (ignoredColor && isIgnoredColor(arr, i2, ignoredColor)) {
+        continue;
+      }
+      redTotal += red;
+      greenTotal += green;
+      blueTotal += blue;
+      alphaTotal += alpha2;
+      count++;
+    }
+    return alphaTotal ? [
+      Math.round(redTotal / alphaTotal),
+      Math.round(greenTotal / alphaTotal),
+      Math.round(blueTotal / alphaTotal),
+      Math.round(alphaTotal / count)
+    ] : options.defaultColor;
+  }
+  function sqrtAlgorithm(arr, len, options) {
+    var redTotal = 0;
+    var greenTotal = 0;
+    var blueTotal = 0;
+    var alphaTotal = 0;
+    var count = 0;
+    var ignoredColor = options.ignoredColor;
+    var step = options.step;
+    for (var i2 = 0; i2 < len; i2 += step) {
+      var red = arr[i2];
+      var green = arr[i2 + 1];
+      var blue = arr[i2 + 2];
+      var alpha2 = arr[i2 + 3];
+      if (ignoredColor && isIgnoredColor(arr, i2, ignoredColor)) {
+        continue;
+      }
+      redTotal += red * red * alpha2;
+      greenTotal += green * green * alpha2;
+      blueTotal += blue * blue * alpha2;
+      alphaTotal += alpha2;
+      count++;
+    }
+    return alphaTotal ? [
+      Math.round(Math.sqrt(redTotal / alphaTotal)),
+      Math.round(Math.sqrt(greenTotal / alphaTotal)),
+      Math.round(Math.sqrt(blueTotal / alphaTotal)),
+      Math.round(alphaTotal / count)
+    ] : options.defaultColor;
+  }
+  function getDefaultColor(options) {
+    return getOption(options, "defaultColor", [0, 0, 0, 0]);
+  }
+  function getOption(options, name, defaultValue) {
+    return options[name] === void 0 ? defaultValue : options[name];
+  }
+  var MIN_SIZE = 10;
+  var MAX_SIZE = 100;
+  function isSvg(filename) {
+    return filename.search(/\.svg(\?|$)/i) !== -1;
+  }
+  function getOriginalSize(resource) {
+    if (isInstanceOfHTMLImageElement(resource)) {
+      var width = resource.naturalWidth;
+      var height = resource.naturalHeight;
+      if (!resource.naturalWidth && isSvg(resource.src)) {
+        width = height = MAX_SIZE;
+      }
+      return {
+        width,
+        height
+      };
+    }
+    if (isInstanceOfHTMLVideoElement(resource)) {
+      return {
+        width: resource.videoWidth,
+        height: resource.videoHeight
+      };
+    }
+    if (isInstanceOfVideoFrame(resource)) {
+      return {
+        width: resource.codedWidth,
+        height: resource.codedHeight
+      };
+    }
+    return {
+      width: resource.width,
+      height: resource.height
+    };
+  }
+  function getSrc(resource) {
+    if (isInstanceOfHTMLCanvasElement(resource)) {
+      return "canvas";
+    }
+    if (isInstanceOfOffscreenCanvas(resource)) {
+      return "offscreencanvas";
+    }
+    if (isInstanceOfVideoFrame(resource)) {
+      return "videoframe";
+    }
+    if (isInstanceOfImageBitmap(resource)) {
+      return "imagebitmap";
+    }
+    return resource.src;
+  }
+  function isInstanceOfHTMLImageElement(resource) {
+    return typeof HTMLImageElement !== "undefined" && resource instanceof HTMLImageElement;
+  }
+  var hasOffscreenCanvas = typeof OffscreenCanvas !== "undefined";
+  function isInstanceOfOffscreenCanvas(resource) {
+    return hasOffscreenCanvas && resource instanceof OffscreenCanvas;
+  }
+  function isInstanceOfHTMLVideoElement(resource) {
+    return typeof HTMLVideoElement !== "undefined" && resource instanceof HTMLVideoElement;
+  }
+  function isInstanceOfVideoFrame(resource) {
+    return typeof VideoFrame !== "undefined" && resource instanceof VideoFrame;
+  }
+  function isInstanceOfHTMLCanvasElement(resource) {
+    return typeof HTMLCanvasElement !== "undefined" && resource instanceof HTMLCanvasElement;
+  }
+  function isInstanceOfImageBitmap(resource) {
+    return typeof ImageBitmap !== "undefined" && resource instanceof ImageBitmap;
+  }
+  function prepareSizeAndPosition(originalSize, options) {
+    var srcLeft = getOption(options, "left", 0);
+    var srcTop = getOption(options, "top", 0);
+    var srcWidth = getOption(options, "width", originalSize.width);
+    var srcHeight = getOption(options, "height", originalSize.height);
+    var destWidth = srcWidth;
+    var destHeight = srcHeight;
+    if (options.mode === "precision") {
+      return {
+        srcLeft,
+        srcTop,
+        srcWidth,
+        srcHeight,
+        destWidth,
+        destHeight
+      };
+    }
+    var factor2;
+    if (srcWidth > srcHeight) {
+      factor2 = srcWidth / srcHeight;
+      destWidth = MAX_SIZE;
+      destHeight = Math.round(destWidth / factor2);
+    } else {
+      factor2 = srcHeight / srcWidth;
+      destHeight = MAX_SIZE;
+      destWidth = Math.round(destHeight / factor2);
+    }
+    if (destWidth > srcWidth || destHeight > srcHeight || destWidth < MIN_SIZE || destHeight < MIN_SIZE) {
+      destWidth = srcWidth;
+      destHeight = srcHeight;
+    }
+    return {
+      srcLeft,
+      srcTop,
+      srcWidth,
+      srcHeight,
+      destWidth,
+      destHeight
+    };
+  }
+  var isWebWorkers = typeof window === "undefined";
+  function makeCanvas() {
+    if (isWebWorkers) {
+      return hasOffscreenCanvas ? new OffscreenCanvas(1, 1) : null;
+    }
+    return document.createElement("canvas");
+  }
+  var ERROR_PREFIX = "FastAverageColor: ";
+  function getError(message) {
+    return Error(ERROR_PREFIX + message);
+  }
+  function outputError(error, silent) {
+    if (!silent) {
+      console.error(error);
+    }
+  }
+  var FastAverageColor = (
+    /** @class */
+    function() {
+      function FastAverageColor2() {
+        this.canvas = null;
+        this.ctx = null;
+      }
+      FastAverageColor2.prototype.getColorAsync = function(resource, options) {
+        if (!resource) {
+          return Promise.reject(getError("call .getColorAsync() without resource"));
+        }
+        if (typeof resource === "string") {
+          if (typeof Image === "undefined") {
+            return Promise.reject(getError("resource as string is not supported in this environment"));
+          }
+          var img = new Image();
+          img.crossOrigin = options && options.crossOrigin || "";
+          var promise = this.bindImageEvents(img, options);
+          img.src = resource;
+          return promise;
+        } else if (isInstanceOfHTMLImageElement(resource) && !resource.complete) {
+          return this.bindImageEvents(resource, options);
+        } else {
+          var result = this.getColor(resource, options);
+          return result.error ? Promise.reject(result.error) : Promise.resolve(result);
+        }
+      };
+      FastAverageColor2.prototype.getColor = function(resource, options) {
+        options = options || {};
+        var defaultColor = getDefaultColor(options);
+        if (!resource) {
+          var error = getError("call .getColor() without resource");
+          outputError(error, options.silent);
+          return this.prepareResult(defaultColor, error);
+        }
+        var originalSize = getOriginalSize(resource);
+        var size = prepareSizeAndPosition(originalSize, options);
+        if (!size.srcWidth || !size.srcHeight || !size.destWidth || !size.destHeight) {
+          var error = getError('incorrect sizes for resource "'.concat(getSrc(resource), '"'));
+          outputError(error, options.silent);
+          return this.prepareResult(defaultColor, error);
+        }
+        if (!this.canvas) {
+          this.canvas = makeCanvas();
+          if (!this.canvas) {
+            var error = getError("OffscreenCanvas is not supported in this browser");
+            outputError(error, options.silent);
+            return this.prepareResult(defaultColor, error);
+          }
+        }
+        if (!this.ctx) {
+          this.ctx = this.canvas.getContext("2d", { willReadFrequently: true });
+          if (!this.ctx) {
+            var error = getError("Canvas Context 2D is not supported in this browser");
+            outputError(error, options.silent);
+            return this.prepareResult(defaultColor, error);
+          }
+          this.ctx.imageSmoothingEnabled = false;
+        }
+        this.canvas.width = size.destWidth;
+        this.canvas.height = size.destHeight;
+        try {
+          this.ctx.clearRect(0, 0, size.destWidth, size.destHeight);
+          this.ctx.drawImage(resource, size.srcLeft, size.srcTop, size.srcWidth, size.srcHeight, 0, 0, size.destWidth, size.destHeight);
+          var bitmapData = this.ctx.getImageData(0, 0, size.destWidth, size.destHeight).data;
+          return this.prepareResult(this.getColorFromArray4(bitmapData, options));
+        } catch (originalError) {
+          var error = getError("security error (CORS) for resource ".concat(getSrc(resource), ".\nDetails: https://developer.mozilla.org/en/docs/Web/HTML/CORS_enabled_image"));
+          outputError(error, options.silent);
+          if (!options.silent) {
+            console.error(originalError);
+          }
+          return this.prepareResult(defaultColor, error);
+        }
+      };
+      FastAverageColor2.prototype.getColorFromArray4 = function(arr, options) {
+        options = options || {};
+        var bytesPerPixel = 4;
+        var arrLength = arr.length;
+        var defaultColor = getDefaultColor(options);
+        if (arrLength < bytesPerPixel) {
+          return defaultColor;
+        }
+        var len = arrLength - arrLength % bytesPerPixel;
+        var step = (options.step || 1) * bytesPerPixel;
+        var algorithm;
+        switch (options.algorithm || "sqrt") {
+          case "simple":
+            algorithm = simpleAlgorithm;
+            break;
+          case "sqrt":
+            algorithm = sqrtAlgorithm;
+            break;
+          case "dominant":
+            algorithm = dominantAlgorithm;
+            break;
+          default:
+            throw getError("".concat(options.algorithm, " is unknown algorithm"));
+        }
+        return algorithm(arr, len, {
+          defaultColor,
+          ignoredColor: prepareIgnoredColor(options.ignoredColor),
+          step,
+          dominantDivider: options.dominantDivider
+        });
+      };
+      FastAverageColor2.prototype.prepareResult = function(value, error) {
+        var rgb3 = value.slice(0, 3);
+        var rgba = [value[0], value[1], value[2], value[3] / 255];
+        var isDarkColor = isDark(value);
+        return {
+          value: [value[0], value[1], value[2], value[3]],
+          rgb: "rgb(" + rgb3.join(",") + ")",
+          rgba: "rgba(" + rgba.join(",") + ")",
+          hex: arrayToHex(rgb3),
+          hexa: arrayToHex(value),
+          isDark: isDarkColor,
+          isLight: !isDarkColor,
+          error
+        };
+      };
+      FastAverageColor2.prototype.destroy = function() {
+        if (this.canvas) {
+          this.canvas.width = 1;
+          this.canvas.height = 1;
+          this.canvas = null;
+        }
+        this.ctx = null;
+      };
+      FastAverageColor2.prototype.bindImageEvents = function(resource, options) {
+        var _this = this;
+        return new Promise(function(resolve2, reject) {
+          var unbindEvents = function() {
+            resource.removeEventListener("load", onload);
+            resource.removeEventListener("error", onerror);
+            resource.removeEventListener("abort", onabort);
+          };
+          var onload = function() {
+            unbindEvents();
+            var result = _this.getColor(resource, options);
+            if (result.error) {
+              reject(result.error);
+            } else {
+              resolve2(result);
+            }
+          };
+          var onerror = function() {
+            unbindEvents();
+            reject(getError('Error loading image "'.concat(resource.src, '"')));
+          };
+          var onabort = function() {
+            unbindEvents();
+            reject(getError('Image "'.concat(resource.src, '" loading aborted')));
+          };
+          resource.addEventListener("load", onload);
+          resource.addEventListener("error", onerror);
+          resource.addEventListener("abort", onabort);
+          if (resource.src && resource.complete) {
+            onload();
+          }
+        });
+      };
+      return FastAverageColor2;
+    }()
+  );
+
   // src/components/page/colour.ts
-  var import_color_thief_browser = __toESM(require_color_thief_min(), 1);
-  function header_colour(source, apply_to_page = false, apply_to_elem) {
+  async function header_colour(source, apply_to_page = false, apply_to_elem) {
     log("applying header colour", "accent", "info", { source, apply_to_page, apply_to_elem });
     apply2(0, 0, 0.5, true);
     try {
@@ -37581,17 +38064,21 @@
       image.crossOrigin = "anonymous";
       image.src = source.src;
       image.onload = () => {
-        let thief = new import_color_thief_browser.default();
-        let colour = thief.getColor(image);
-        let hsl3 = rgb_to_hsl(colour[0], colour[1], colour[2]);
-        let hue4 = hsl3.h;
-        let sat = clamp_sat(hsl3.s / 100 * 3);
-        let lit = clamp_lit(sat, hsl3.l / 100 + 0.35, true);
-        apply2(hue4, sat, lit);
-        log(
-          `sourced rgb of (${colour[0]}, ${colour[1]}, ${colour[2]}), hsl of (${hsl3.h}, ${hsl3.s}, ${hsl3.l}) - using final value of (${hue4}, ${sat}, ${lit})`,
-          "accent"
-        );
+        const fac = new FastAverageColor();
+        fac.getColorAsync(image).then((colour) => {
+          const values = colour.value;
+          let hsl3 = rgb_to_hsl(values[0], values[1], values[2]);
+          let hue4 = hsl3.h;
+          let sat = clamp_sat(hsl3.s / 100 * 3);
+          let lit = clamp_lit(sat, hsl3.l / 100 + 0.35, true);
+          apply2(hue4, sat, lit);
+          log(
+            `sourced rgb of (${colour[0]}, ${colour[1]}, ${colour[2]}), hsl of (${hsl3.h}, ${hsl3.s}, ${hsl3.l}) - using final value of (${hue4}, ${sat}, ${lit})`,
+            "accent"
+          );
+        }).catch((e4) => {
+          log("received error", "accent", "error", { e: e4 });
+        });
       };
     } catch (e4) {
       log("received error", "accent", "error", { e: e4 });
@@ -38125,7 +38612,7 @@
   };
 
   // src/components/music/track.js
-  var import_color_thief_browser3 = __toESM(require_color_thief_min(), 1);
+  var import_color_thief_browser2 = __toESM(require_color_thief_min(), 1);
 
   // src/components/settings/toggle.js
   function toggle({
@@ -39337,7 +39824,7 @@
           image.setAttribute("crossorigin", "anonymous");
           try {
             image.addEventListener("load", () => {
-              let thief = new import_color_thief_browser3.default();
+              let thief = new import_color_thief_browser2.default();
               let colour = thief.getColor(image);
               let hsl3 = rgb_to_hsl(colour[0], colour[1], colour[2]);
               let hue4 = hsl3.h;
@@ -46804,13 +47291,13 @@
     const distanceMetric = getDistanceMetricForAxis(axis);
     let minDistance = Number.POSITIVE_INFINITY;
     function evaluationFunc(element, datasetIndex, index3) {
-      const inRange2 = element.inRange(position.x, position.y, useFinalPosition);
-      if (intersect && !inRange2) {
+      const inRange3 = element.inRange(position.x, position.y, useFinalPosition);
+      if (intersect && !inRange3) {
         return;
       }
       const center = element.getCenterPoint(useFinalPosition);
       const pointInArea = !!includeInvisible || chart.isPointInArea(center);
-      if (!pointInArea && !inRange2) {
+      if (!pointInArea && !inRange3) {
         return;
       }
       const distance = distanceMetric(position, center);
@@ -51244,7 +51731,7 @@
       }
     };
   }
-  function inRange(bar, x, y, useFinalPosition) {
+  function inRange2(bar, x, y, useFinalPosition) {
     const skipX = x === null;
     const skipY = y === null;
     const skipBoth = skipX && skipY;
@@ -51315,13 +51802,13 @@
       ctx.restore();
     }
     inRange(mouseX, mouseY, useFinalPosition) {
-      return inRange(this, mouseX, mouseY, useFinalPosition);
+      return inRange2(this, mouseX, mouseY, useFinalPosition);
     }
     inXRange(mouseX, useFinalPosition) {
-      return inRange(this, mouseX, null, useFinalPosition);
+      return inRange2(this, mouseX, null, useFinalPosition);
     }
     inYRange(mouseY, useFinalPosition) {
-      return inRange(this, null, mouseY, useFinalPosition);
+      return inRange2(this, null, mouseY, useFinalPosition);
     }
     getCenterPoint(useFinalPosition) {
       const { x, y, base, horizontal } = this.getProps([
@@ -82840,7 +83327,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
   }
 
   // src/components/profile/auth.ts
-  var import_color_thief_browser4 = __toESM(require_color_thief_min(), 1);
+  var import_color_thief_browser3 = __toESM(require_color_thief_min(), 1);
   function register_auth() {
     const handler = document.body.querySelector(".site-auth > .auth-link");
     if (handler) {
@@ -82859,7 +83346,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         image.setAttribute("crossorigin", "anonymous");
         try {
           image.addEventListener("load", () => {
-            let thief = new import_color_thief_browser4.default();
+            let thief = new import_color_thief_browser3.default();
             let colour = thief.getColor(image);
             let hsl3 = rgb_to_oklch(colour[0], colour[1], colour[2]);
             auth.sets.hue = hsl3.h;
@@ -96295,7 +96782,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-05-18"
       }
     },
-    built_on: "2026-05-23T00:56:55.052Z"
+    built_on: "2026-05-23T14:32:16.802Z"
   };
 
   // node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
@@ -97405,6 +97892,9 @@ domsanitizer/esm/index.js:
 @ungap/import-node/esm/index.js:
 hyperhtml-style/esm/index.js:
   (*! (c) Andrea Giammarchi - ISC *)
+
+fast-average-color/dist/index.esm.js:
+  (*! Fast Average Color | © 2026 Denis Seleznev | MIT License | https://github.com/fast-average-color/fast-average-color *)
 
 @kurkle/color/dist/color.esm.js:
   (*!
