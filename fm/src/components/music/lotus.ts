@@ -263,6 +263,8 @@ export function lotus_modal() {
  * @returns if not found
  */
 export function correct_generic_artist(parent) {
+    if (!page.structure.container) return;
+
     let albums = page.structure.container.querySelectorAll(`.${parent}`);
     if (albums.length == 0) return;
 
@@ -289,6 +291,8 @@ export function correct_generic_artist(parent) {
  * @returns if not found
  */
 export function correct_generic_combo(parent) {
+    if (!page.structure.container) return;
+
     let albums = page.structure.container.querySelectorAll(`.${parent}`);
     if (albums.length == 0) return;
 
@@ -338,6 +342,8 @@ export function correct_generic_combo(parent) {
  * @returns if not found
  */
 export function correct_generic_combo_no_artist(parent) {
+    if (!page.structure.container) return;
+
     let albums = page.structure.container.querySelectorAll(`.${parent}`);
     if (albums.length == 0) return;
 

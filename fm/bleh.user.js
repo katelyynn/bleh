@@ -76257,6 +76257,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     });
   }
   function correct_generic_artist(parent) {
+    if (!page.structure.container) return;
     let albums = page.structure.container.querySelectorAll(`.${parent}`);
     if (albums.length == 0) return;
     if (!settings.corrections) return;
@@ -76274,6 +76275,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     });
   }
   function correct_generic_combo(parent) {
+    if (!page.structure.container) return;
     let albums = page.structure.container.querySelectorAll(`.${parent}`);
     if (albums.length == 0) return;
     if (!settings.format_guest_features && !settings.corrections) return;
@@ -76310,6 +76312,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     });
   }
   function correct_generic_combo_no_artist(parent) {
+    if (!page.structure.container) return;
     let albums = page.structure.container.querySelectorAll(`.${parent}`);
     if (albums.length == 0) return;
     if (!settings.format_guest_features && !settings.corrections) return;
