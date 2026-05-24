@@ -1,11 +1,12 @@
 import { log } from '@/build/log';
-import { chart_reflow, load_chart_colours } from '../music/chart';
-import { clamp_lit, clamp_sat, rgb_to_hsl, rgb_to_oklch } from '@/build/tools';
-import ColorThief from 'color-thief-browser';
+import { chart_reflow } from '../music/chart';
+import { clamp_lit, clamp_sat, rgb_to_hsl } from '@/build/tools';
 import { page } from '@/build/page';
-import { FastAverageColor } from 'fast-average-color';
+import { fac } from '@/main';
 
 export async function header_colour(source: HTMLImageElement, apply_to_page = false, apply_to_elem?: Element[]) {
+    if (!apply_to_elem) apply_to_elem = [];
+
     log('applying header colour', 'accent', 'info', { source, apply_to_page, apply_to_elem });
     apply(0, 0, 0.5, true);
 
@@ -14,30 +15,30 @@ export async function header_colour(source: HTMLImageElement, apply_to_page = fa
         image.width = 300;
         image.height = 300;
         image.crossOrigin = 'anonymous';
-        image.src = source.src;
 
-        image.onload = () => {
-            const fac = new FastAverageColor();
-            fac.getColorAsync(image)
-                .then(colour => {
-                    const values = colour.value;
-                    let hsl = rgb_to_hsl(values[0], values[1], values[2]);
+        await new Promise<void>((resolve, reject) => {
+            image.onload = () => resolve();
+            image.onerror = reject;
+            image.src = source.src;
+        });
 
-                    let hue = hsl.h;
-                    let sat = clamp_sat((hsl.s / 100) * 3);
-                    let lit = clamp_lit(sat, hsl.l / 100 + 0.35, true);
+        const colour = await fac.getColorAsync(image);
 
-                    apply(hue, sat, lit);
+        const values = colour.value;
+        let hsl = rgb_to_hsl(values[0], values[1], values[2]);
 
-                    log(
-                        `sourced rgb of (${colour[0]}, ${colour[1]}, ${colour[2]}), hsl of (${hsl.h}, ${hsl.s}, ${hsl.l}) - using final value of (${hue}, ${sat}, ${lit})`,
-                        'accent'
-                    );
-                })
-                .catch(e => {
-                    log('received error', 'accent', 'error', { e });
-                });
-        }
+        let hue = hsl.h;
+        let sat = clamp_sat((hsl.s / 100) * 3);
+        let lit = clamp_lit(sat, hsl.l / 100 + 0.35, true);
+
+        apply(hue, sat, lit);
+
+        log(
+            `sourced rgb of (${colour[0]}, ${colour[1]}, ${colour[2]}), hsl of (${hsl.h}, ${hsl.s}, ${hsl.l}) - using final value of (${hue}, ${sat}, ${lit})`,
+            'accent'
+        );
+
+        return { hue, sat, lit };
     } catch (e) {
         log('received error', 'accent', 'error', { e });
     }

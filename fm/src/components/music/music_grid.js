@@ -7,12 +7,9 @@
 import { settings } from '@/build/config';
 import { page, root } from '@/build/page';
 import {
-    clamp_lit,
-    clamp_sat,
     copy,
     int_from_string,
     lazy,
-    rgb_to_hsl,
     romanise
 } from '@/build/tools';
 import { lang, tl, trans } from '@/build/trans';
@@ -20,7 +17,6 @@ import { bleh_glacier_insights } from '@/pages/profile/glacier';
 import { parse_scrobbles_as_rank } from '@/components/music/colourful_counts';
 import { correct_artist, correct_item_by_artist, name_includes, smart_title } from '@/components/music/lotus';
 import { html, render } from 'lighterhtml';
-import ColorThief from 'color-thief-browser';
 import { register_menu } from '@/components/menu';
 import tippy from 'tippy.js';
 import { expand_avatar } from '@/components/shared/avatar';

@@ -426,9 +426,9 @@
         var codePointAt = _core.String.codePointAt;
         var max2 = Math.max;
         var min2 = Math.min;
-        var _toAbsoluteIndex = function(index3, length) {
-          index3 = _toInteger(index3);
-          return index3 < 0 ? max2(index3 + length, 0) : min2(index3, length);
+        var _toAbsoluteIndex = function(index2, length) {
+          index2 = _toInteger(index2);
+          return index2 < 0 ? max2(index2 + length, 0) : min2(index2, length);
         };
         var fromCharCode = String.fromCharCode;
         var $fromCodePoint = String.fromCodePoint;
@@ -1546,204 +1546,6 @@
     }
   });
 
-  // node_modules/color-thief-browser/dist/color-thief.min.js
-  var require_color_thief_min = __commonJS({
-    "node_modules/color-thief-browser/dist/color-thief.min.js"(exports, module) {
-      var CanvasImage = function(a) {
-        this.canvas = document.createElement("canvas"), this.context = this.canvas.getContext("2d"), document.body.appendChild(this.canvas), this.width = this.canvas.width = a.width, this.height = this.canvas.height = a.height, this.context.drawImage(a, 0, 0, this.width, this.height);
-      };
-      CanvasImage.prototype.clear = function() {
-        this.context.clearRect(0, 0, this.width, this.height);
-      }, CanvasImage.prototype.update = function(a) {
-        this.context.putImageData(a, 0, 0);
-      }, CanvasImage.prototype.getPixelCount = function() {
-        return this.width * this.height;
-      }, CanvasImage.prototype.getImageData = function() {
-        return this.context.getImageData(0, 0, this.width, this.height);
-      }, CanvasImage.prototype.removeCanvas = function() {
-        this.canvas.parentNode.removeChild(this.canvas);
-      };
-      var ColorThief4 = function() {
-      };
-      if (ColorThief4.prototype.getColor = function(a, b) {
-        var c2 = this.getPalette(a, 5, b), d = c2[0];
-        return d;
-      }, ColorThief4.prototype.getPalette = function(a, b, c2) {
-        "undefined" == typeof b && (b = 10), ("undefined" == typeof c2 || 1 > c2) && (c2 = 10);
-        for (var d, e4, f3, g2, h, i2 = new CanvasImage(a), j = i2.getImageData(), k4 = j.data, l2 = i2.getPixelCount(), m = [], n2 = 0; l2 > n2; n2 += c2) d = 4 * n2, e4 = k4[d + 0], f3 = k4[d + 1], g2 = k4[d + 2], h = k4[d + 3], h >= 125 && (e4 > 250 && f3 > 250 && g2 > 250 || m.push([e4, f3, g2]));
-        var o = MMCQ.quantize(m, b), p4 = o ? o.palette() : null;
-        return i2.removeCanvas(), p4;
-      }, !pv) var pv = { map: function(a, b) {
-        var c2 = {};
-        return b ? a.map(function(a2, d) {
-          return c2.index = d, b.call(c2, a2);
-        }) : a.slice();
-      }, naturalOrder: function(a, b) {
-        return b > a ? -1 : a > b ? 1 : 0;
-      }, sum: function(a, b) {
-        var c2 = {};
-        return a.reduce(b ? function(a2, d, e4) {
-          return c2.index = e4, a2 + b.call(c2, d);
-        } : function(a2, b2) {
-          return a2 + b2;
-        }, 0);
-      }, max: function(a, b) {
-        return Math.max.apply(null, b ? pv.map(a, b) : a);
-      } };
-      var MMCQ = function() {
-        function a(a2, b2, c3) {
-          return (a2 << 2 * i2) + (b2 << i2) + c3;
-        }
-        function b(a2) {
-          function b2() {
-            c3.sort(a2), d2 = true;
-          }
-          var c3 = [], d2 = false;
-          return { push: function(a3) {
-            c3.push(a3), d2 = false;
-          }, peek: function(a3) {
-            return d2 || b2(), void 0 === a3 && (a3 = c3.length - 1), c3[a3];
-          }, pop: function() {
-            return d2 || b2(), c3.pop();
-          }, size: function() {
-            return c3.length;
-          }, map: function(a3) {
-            return c3.map(a3);
-          }, debug: function() {
-            return d2 || b2(), c3;
-          } };
-        }
-        function c2(a2, b2, c3, d2, e5, f4, g3) {
-          var h3 = this;
-          h3.r1 = a2, h3.r2 = b2, h3.g1 = c3, h3.g2 = d2, h3.b1 = e5, h3.b2 = f4, h3.histo = g3;
-        }
-        function d() {
-          this.vboxes = new b(function(a2, b2) {
-            return pv.naturalOrder(a2.vbox.count() * a2.vbox.volume(), b2.vbox.count() * b2.vbox.volume());
-          });
-        }
-        function e4(b2) {
-          var c3, d2, e5, f4, g3 = 1 << 3 * i2, h3 = new Array(g3);
-          return b2.forEach(function(b3) {
-            d2 = b3[0] >> j, e5 = b3[1] >> j, f4 = b3[2] >> j, c3 = a(d2, e5, f4), h3[c3] = (h3[c3] || 0) + 1;
-          }), h3;
-        }
-        function f3(a2, b2) {
-          var d2, e5, f4, g3 = 1e6, h3 = 0, i3 = 1e6, k5 = 0, l3 = 1e6, m = 0;
-          return a2.forEach(function(a3) {
-            d2 = a3[0] >> j, e5 = a3[1] >> j, f4 = a3[2] >> j, g3 > d2 ? g3 = d2 : d2 > h3 && (h3 = d2), i3 > e5 ? i3 = e5 : e5 > k5 && (k5 = e5), l3 > f4 ? l3 = f4 : f4 > m && (m = f4);
-          }), new c2(g3, h3, i3, k5, l3, m, b2);
-        }
-        function g2(b2, c3) {
-          function d2(a2) {
-            var b3, d3, e6, f5, g4, h4 = a2 + "1", j3 = a2 + "2", k6 = 0;
-            for (i3 = c3[h4]; i3 <= c3[j3]; i3++) if (o[i3] > n2 / 2) {
-              for (e6 = c3.copy(), f5 = c3.copy(), b3 = i3 - c3[h4], d3 = c3[j3] - i3, g4 = d3 >= b3 ? Math.min(c3[j3] - 1, ~~(i3 + d3 / 2)) : Math.max(c3[h4], ~~(i3 - 1 - b3 / 2)); !o[g4]; ) g4++;
-              for (k6 = p4[g4]; !k6 && o[g4 - 1]; ) k6 = p4[--g4];
-              return e6[j3] = g4, f5[h4] = e6[j3] + 1, [e6, f5];
-            }
-          }
-          if (c3.count()) {
-            var e5 = c3.r2 - c3.r1 + 1, f4 = c3.g2 - c3.g1 + 1, g3 = c3.b2 - c3.b1 + 1, h3 = pv.max([e5, f4, g3]);
-            if (1 == c3.count()) return [c3.copy()];
-            var i3, j2, k5, l3, m, n2 = 0, o = [], p4 = [];
-            if (h3 == e5) for (i3 = c3.r1; i3 <= c3.r2; i3++) {
-              for (l3 = 0, j2 = c3.g1; j2 <= c3.g2; j2++) for (k5 = c3.b1; k5 <= c3.b2; k5++) m = a(i3, j2, k5), l3 += b2[m] || 0;
-              n2 += l3, o[i3] = n2;
-            }
-            else if (h3 == f4) for (i3 = c3.g1; i3 <= c3.g2; i3++) {
-              for (l3 = 0, j2 = c3.r1; j2 <= c3.r2; j2++) for (k5 = c3.b1; k5 <= c3.b2; k5++) m = a(j2, i3, k5), l3 += b2[m] || 0;
-              n2 += l3, o[i3] = n2;
-            }
-            else for (i3 = c3.b1; i3 <= c3.b2; i3++) {
-              for (l3 = 0, j2 = c3.r1; j2 <= c3.r2; j2++) for (k5 = c3.g1; k5 <= c3.g2; k5++) m = a(j2, k5, i3), l3 += b2[m] || 0;
-              n2 += l3, o[i3] = n2;
-            }
-            return o.forEach(function(a2, b3) {
-              p4[b3] = n2 - a2;
-            }), d2(h3 == e5 ? "r" : h3 == f4 ? "g" : "b");
-          }
-        }
-        function h(a2, c3) {
-          function h3(a3, b2) {
-            for (var c4, d2 = 1, e5 = 0; k4 > e5; ) if (c4 = a3.pop(), c4.count()) {
-              var f4 = g2(i3, c4), h4 = f4[0], j3 = f4[1];
-              if (!h4) return;
-              if (a3.push(h4), j3 && (a3.push(j3), d2++), d2 >= b2) return;
-              if (e5++ > k4) return;
-            } else a3.push(c4), e5++;
-          }
-          if (!a2.length || 2 > c3 || c3 > 256) return false;
-          var i3 = e4(a2), j2 = 0;
-          i3.forEach(function() {
-            j2++;
-          });
-          var m = f3(a2, i3), n2 = new b(function(a3, b2) {
-            return pv.naturalOrder(a3.count(), b2.count());
-          });
-          n2.push(m), h3(n2, l2 * c3);
-          for (var o = new b(function(a3, b2) {
-            return pv.naturalOrder(a3.count() * a3.volume(), b2.count() * b2.volume());
-          }); n2.size(); ) o.push(n2.pop());
-          h3(o, c3 - o.size());
-          for (var p4 = new d(); o.size(); ) p4.push(o.pop());
-          return p4;
-        }
-        var i2 = 5, j = 8 - i2, k4 = 1e3, l2 = 0.75;
-        return c2.prototype = { volume: function(a2) {
-          var b2 = this;
-          return (!b2._volume || a2) && (b2._volume = (b2.r2 - b2.r1 + 1) * (b2.g2 - b2.g1 + 1) * (b2.b2 - b2.b1 + 1)), b2._volume;
-        }, count: function(b2) {
-          var c3 = this, d2 = c3.histo;
-          if (!c3._count_set || b2) {
-            var e5, f4, g3, h3 = 0;
-            for (e5 = c3.r1; e5 <= c3.r2; e5++) for (f4 = c3.g1; f4 <= c3.g2; f4++) for (g3 = c3.b1; g3 <= c3.b2; g3++) index = a(e5, f4, g3), h3 += d2[index] || 0;
-            c3._count = h3, c3._count_set = true;
-          }
-          return c3._count;
-        }, copy: function() {
-          var a2 = this;
-          return new c2(a2.r1, a2.r2, a2.g1, a2.g2, a2.b1, a2.b2, a2.histo);
-        }, avg: function(b2) {
-          var c3 = this, d2 = c3.histo;
-          if (!c3._avg || b2) {
-            var e5, f4, g3, h3, j2, k5 = 0, l3 = 1 << 8 - i2, m = 0, n2 = 0, o = 0;
-            for (f4 = c3.r1; f4 <= c3.r2; f4++) for (g3 = c3.g1; g3 <= c3.g2; g3++) for (h3 = c3.b1; h3 <= c3.b2; h3++) j2 = a(f4, g3, h3), e5 = d2[j2] || 0, k5 += e5, m += e5 * (f4 + 0.5) * l3, n2 += e5 * (g3 + 0.5) * l3, o += e5 * (h3 + 0.5) * l3;
-            k5 ? c3._avg = [~~(m / k5), ~~(n2 / k5), ~~(o / k5)] : c3._avg = [~~(l3 * (c3.r1 + c3.r2 + 1) / 2), ~~(l3 * (c3.g1 + c3.g2 + 1) / 2), ~~(l3 * (c3.b1 + c3.b2 + 1) / 2)];
-          }
-          return c3._avg;
-        }, contains: function(a2) {
-          var b2 = this, c3 = a2[0] >> j;
-          return gval = a2[1] >> j, bval = a2[2] >> j, c3 >= b2.r1 && c3 <= b2.r2 && gval >= b2.g1 && gval <= b2.g2 && bval >= b2.b1 && bval <= b2.b2;
-        } }, d.prototype = { push: function(a2) {
-          this.vboxes.push({ vbox: a2, color: a2.avg() });
-        }, palette: function() {
-          return this.vboxes.map(function(a2) {
-            return a2.color;
-          });
-        }, size: function() {
-          return this.vboxes.size();
-        }, map: function(a2) {
-          for (var b2 = this.vboxes, c3 = 0; c3 < b2.size(); c3++) if (b2.peek(c3).vbox.contains(a2)) return b2.peek(c3).color;
-          return this.nearest(a2);
-        }, nearest: function(a2) {
-          for (var b2, c3, d2, e5 = this.vboxes, f4 = 0; f4 < e5.size(); f4++) c3 = Math.sqrt(Math.pow(a2[0] - e5.peek(f4).color[0], 2) + Math.pow(a2[1] - e5.peek(f4).color[1], 2) + Math.pow(a2[2] - e5.peek(f4).color[2], 2)), (b2 > c3 || void 0 === b2) && (b2 = c3, d2 = e5.peek(f4).color);
-          return d2;
-        }, forcebw: function() {
-          var a2 = this.vboxes;
-          a2.sort(function(a3, b3) {
-            return pv.naturalOrder(pv.sum(a3.color), pv.sum(b3.color));
-          });
-          var b2 = a2[0].color;
-          b2[0] < 5 && b2[1] < 5 && b2[2] < 5 && (a2[0].color = [0, 0, 0]);
-          var c3 = a2.length - 1, d2 = a2[c3].color;
-          d2[0] > 251 && d2[1] > 251 && d2[2] > 251 && (a2[c3].color = [255, 255, 255]);
-        } }, { quantize: h };
-      }();
-      module.exports = ColorThief4;
-    }
-  });
-
   // node_modules/html2canvas-pro/dist/html2canvas-pro.js
   var require_html2canvas_pro = __commonJS({
     "node_modules/html2canvas-pro/dist/html2canvas-pro.js"(exports, module) {
@@ -1958,17 +1760,17 @@
             return "";
           }
           var codeUnits = [];
-          var index3 = -1;
+          var index2 = -1;
           var result = "";
-          while (++index3 < length) {
-            var codePoint = codePoints[index3];
+          while (++index2 < length) {
+            var codePoint = codePoints[index2];
             if (codePoint <= 65535) {
               codeUnits.push(codePoint);
             } else {
               codePoint -= 65536;
               codeUnits.push((codePoint >> 10) + 55296, codePoint % 1024 + 56320);
             }
-            if (index3 + 1 === length || codeUnits.length > 16384) {
+            if (index2 + 1 === length || codeUnits.length > 16384) {
               result += String.fromCharCode.apply(String, codeUnits);
               codeUnits.length = 0;
             }
@@ -2054,19 +1856,19 @@
           var view32 = Array.isArray(buffer) ? polyUint32Array$1(buffer) : new Uint32Array(buffer);
           var view16 = Array.isArray(buffer) ? polyUint16Array$1(buffer) : new Uint16Array(buffer);
           var headerLength = 24;
-          var index3 = slice16$1(view16, headerLength / 2, view32[4] / 2);
+          var index2 = slice16$1(view16, headerLength / 2, view32[4] / 2);
           var data2 = view32[5] === 2 ? slice16$1(view16, (headerLength + view32[4]) / 2) : slice32$1(view32, Math.ceil((headerLength + view32[4]) / 4));
-          return new Trie$1(view32[0], view32[1], view32[2], view32[3], index3, data2);
+          return new Trie$1(view32[0], view32[1], view32[2], view32[3], index2, data2);
         };
         var Trie$1 = (
           /** @class */
           function() {
-            function Trie2(initialValue, errorValue, highStart, highValueIndex, index3, data2) {
+            function Trie2(initialValue, errorValue, highStart, highValueIndex, index2, data2) {
               this.initialValue = initialValue;
               this.errorValue = errorValue;
               this.highStart = highStart;
               this.highValueIndex = highValueIndex;
-              this.index = index3;
+              this.index = index2;
               this.data = data2;
             }
             Trie2.prototype.get = function(codePoint) {
@@ -2167,7 +1969,7 @@
           var types = [];
           var indices = [];
           var categories = [];
-          codePoints.forEach(function(codePoint, index3) {
+          codePoints.forEach(function(codePoint, index2) {
             var classType = UnicodeTrie$1.get(codePoint);
             if (classType > LETTER_NUMBER_MODIFIER) {
               categories.push(true);
@@ -2177,24 +1979,24 @@
             }
             if (["normal", "auto", "loose"].indexOf(lineBreak2) !== -1) {
               if ([8208, 8211, 12316, 12448].indexOf(codePoint) !== -1) {
-                indices.push(index3);
+                indices.push(index2);
                 return types.push(CB);
               }
             }
             if (classType === CM || classType === ZWJ$1) {
-              if (index3 === 0) {
-                indices.push(index3);
+              if (index2 === 0) {
+                indices.push(index2);
                 return types.push(AL);
               }
-              var prev = types[index3 - 1];
+              var prev = types[index2 - 1];
               if (LINE_BREAKS.indexOf(prev) === -1) {
-                indices.push(indices[index3 - 1]);
+                indices.push(indices[index2 - 1]);
                 return types.push(prev);
               }
-              indices.push(index3);
+              indices.push(index2);
               return types.push(AL);
             }
-            indices.push(index3);
+            indices.push(index2);
             if (classType === CJ) {
               return types.push(lineBreak2 === "strict" ? NS : ID);
             }
@@ -2267,11 +2069,11 @@
           }
           return 0;
         };
-        var _lineBreakAtIndex = function(codePoints, classTypes, indicies, index3, forbiddenBreaks) {
-          if (indicies[index3] === 0) {
+        var _lineBreakAtIndex = function(codePoints, classTypes, indicies, index2, forbiddenBreaks) {
+          if (indicies[index2] === 0) {
             return BREAK_NOT_ALLOWED$1;
           }
-          var currentIndex = index3 - 1;
+          var currentIndex = index2 - 1;
           if (Array.isArray(forbiddenBreaks) && forbiddenBreaks[currentIndex] === true) {
             return BREAK_NOT_ALLOWED$1;
           }
@@ -6247,19 +6049,19 @@
           var view32 = Array.isArray(buffer) ? polyUint32Array(buffer) : new Uint32Array(buffer);
           var view16 = Array.isArray(buffer) ? polyUint16Array(buffer) : new Uint16Array(buffer);
           var headerLength = 24;
-          var index3 = slice16(view16, headerLength / 2, view32[4] / 2);
+          var index2 = slice16(view16, headerLength / 2, view32[4] / 2);
           var data2 = view32[5] === 2 ? slice16(view16, (headerLength + view32[4]) / 2) : slice32(view32, Math.ceil((headerLength + view32[4]) / 4));
-          return new Trie(view32[0], view32[1], view32[2], view32[3], index3, data2);
+          return new Trie(view32[0], view32[1], view32[2], view32[3], index2, data2);
         };
         var Trie = (
           /** @class */
           function() {
-            function Trie2(initialValue, errorValue, highStart, highValueIndex, index3, data2) {
+            function Trie2(initialValue, errorValue, highStart, highValueIndex, index2, data2) {
               this.initialValue = initialValue;
               this.errorValue = errorValue;
               this.highStart = highStart;
               this.highValueIndex = highValueIndex;
-              this.index = index3;
+              this.index = index2;
               this.data = data2;
             }
             Trie2.prototype.get = function(codePoint) {
@@ -6344,17 +6146,17 @@
             return "";
           }
           var codeUnits = [];
-          var index3 = -1;
+          var index2 = -1;
           var result = "";
-          while (++index3 < length) {
-            var codePoint = codePoints[index3];
+          while (++index2 < length) {
+            var codePoint = codePoints[index2];
             if (codePoint <= 65535) {
               codeUnits.push(codePoint);
             } else {
               codePoint -= 65536;
               codeUnits.push((codePoint >> 10) + 55296, codePoint % 1024 + 56320);
             }
-            if (index3 + 1 === length || codeUnits.length > 16384) {
+            if (index2 + 1 === length || codeUnits.length > 16384) {
               result += String.fromCharCode.apply(String, codeUnits);
               codeUnits.length = 0;
             }
@@ -6367,11 +6169,11 @@
         var codePointToClass = function(codePoint) {
           return UnicodeTrie.get(codePoint);
         };
-        var _graphemeBreakAtIndex = function(_codePoints, classTypes, index3) {
-          var prevIndex = index3 - 2;
+        var _graphemeBreakAtIndex = function(_codePoints, classTypes, index2) {
+          var prevIndex = index2 - 2;
           var prev = classTypes[prevIndex];
-          var current = classTypes[index3 - 1];
-          var next = classTypes[index3];
+          var current = classTypes[index2 - 1];
+          var next = classTypes[index2];
           if (current === CR && next === LF) {
             return BREAK_NOT_ALLOWED;
           }
@@ -6422,20 +6224,20 @@
         var GraphemeBreaker = function(str) {
           var codePoints = toCodePoints(str);
           var length = codePoints.length;
-          var index3 = 0;
+          var index2 = 0;
           var lastEnd = 0;
           var classTypes = codePoints.map(codePointToClass);
           return {
             next: function() {
-              if (index3 >= length) {
+              if (index2 >= length) {
                 return { done: true, value: null };
               }
               var graphemeBreak = BREAK_NOT_ALLOWED;
-              while (index3 < length && (graphemeBreak = _graphemeBreakAtIndex(codePoints, classTypes, ++index3)) === BREAK_NOT_ALLOWED) {
+              while (index2 < length && (graphemeBreak = _graphemeBreakAtIndex(codePoints, classTypes, ++index2)) === BREAK_NOT_ALLOWED) {
               }
-              if (graphemeBreak !== BREAK_NOT_ALLOWED || index3 === length) {
-                var value = fromCodePoint.apply(null, codePoints.slice(lastEnd, index3));
-                lastEnd = index3;
+              if (graphemeBreak !== BREAK_NOT_ALLOWED || index2 === length) {
+                var value = fromCodePoint.apply(null, codePoints.slice(lastEnd, index2));
+                lastEnd = index2;
                 return { value, done: false };
               }
               return { done: true, value: null };
@@ -7410,10 +7212,10 @@
           if (value < min2 || value > max2) {
             return createCounterText(value, fallback, suffix.length > 0);
           }
-          return symbols.integers.reduce(function(string, integer, index3) {
+          return symbols.integers.reduce(function(string, integer, index2) {
             while (value >= integer) {
               value -= integer;
-              string += symbols.values[index3];
+              string += symbols.values[index2];
             }
             return string;
           }, "") + suffix;
@@ -8439,8 +8241,8 @@
           return false;
         };
         var transformPath = function(path, deltaX, deltaY, deltaW, deltaH) {
-          return path.map(function(point, index3) {
-            switch (index3) {
+          return path.map(function(point, index2) {
+            switch (index2) {
               case 0:
                 return point.add(deltaX, deltaY);
               case 1:
@@ -8775,13 +8577,13 @@
           }
           return paddingBox(element);
         };
-        var calculateBackgroundRendering = function(container, index3, intrinsicSize) {
-          var backgroundPositioningArea = calculateBackgroundPositioningArea(getBackgroundValueForIndex(container.styles.backgroundOrigin, index3), container);
-          var backgroundPaintingArea = calculateBackgroundPaintingArea(getBackgroundValueForIndex(container.styles.backgroundClip, index3), container);
-          var backgroundImageSize = calculateBackgroundSize(getBackgroundValueForIndex(container.styles.backgroundSize, index3), intrinsicSize, backgroundPositioningArea);
+        var calculateBackgroundRendering = function(container, index2, intrinsicSize) {
+          var backgroundPositioningArea = calculateBackgroundPositioningArea(getBackgroundValueForIndex(container.styles.backgroundOrigin, index2), container);
+          var backgroundPaintingArea = calculateBackgroundPaintingArea(getBackgroundValueForIndex(container.styles.backgroundClip, index2), container);
+          var backgroundImageSize = calculateBackgroundSize(getBackgroundValueForIndex(container.styles.backgroundSize, index2), intrinsicSize, backgroundPositioningArea);
           var sizeWidth = backgroundImageSize[0], sizeHeight = backgroundImageSize[1];
-          var position2 = getAbsoluteValueForTuple(getBackgroundValueForIndex(container.styles.backgroundPosition, index3), backgroundPositioningArea.width - sizeWidth, backgroundPositioningArea.height - sizeHeight);
-          var path = calculateBackgroundRepeatPath(getBackgroundValueForIndex(container.styles.backgroundRepeat, index3), position2, backgroundImageSize, backgroundPositioningArea, backgroundPaintingArea);
+          var position2 = getAbsoluteValueForTuple(getBackgroundValueForIndex(container.styles.backgroundPosition, index2), backgroundPositioningArea.width - sizeWidth, backgroundPositioningArea.height - sizeHeight);
+          var path = calculateBackgroundRepeatPath(getBackgroundValueForIndex(container.styles.backgroundRepeat, index2), position2, backgroundImageSize, backgroundPositioningArea, backgroundPaintingArea);
           var offsetX = Math.round(backgroundPositioningArea.left + position2[0]);
           var offsetY = Math.round(backgroundPositioningArea.top + position2[1]);
           sizeWidth = Math.max(1, sizeWidth);
@@ -8863,8 +8665,8 @@
           }
           throw new Error("Unable to calculate background-size for element");
         };
-        var getBackgroundValueForIndex = function(values, index3) {
-          var value = values[index3];
+        var getBackgroundValueForIndex = function(values, index2) {
+          var value = values[index2];
           if (typeof value === "undefined") {
             return values[0];
           }
@@ -9560,9 +9362,9 @@
             };
             CanvasRenderer2.prototype.formatPath = function(paths) {
               var _this = this;
-              paths.forEach(function(point, index3) {
+              paths.forEach(function(point, index2) {
                 var start2 = isBezierCurve(point) ? point.start : point;
-                if (index3 === 0) {
+                if (index2 === 0) {
                   _this.ctx.moveTo(start2.x, start2.y);
                 } else {
                   _this.ctx.lineTo(start2.x, start2.y);
@@ -9591,11 +9393,11 @@
             };
             CanvasRenderer2.prototype.renderBackgroundImage = function(container) {
               return __awaiter(this, void 0, void 0, function() {
-                var index3, _loop_1, this_1, _i2, _a2, backgroundImage2;
+                var index2, _loop_1, this_1, _i2, _a2, backgroundImage2;
                 return __generator(this, function(_b2) {
                   switch (_b2.label) {
                     case 0:
-                      index3 = container.styles.backgroundImage.length - 1;
+                      index2 = container.styles.backgroundImage.length - 1;
                       _loop_1 = function(backgroundImage3) {
                         var image2, url, imageWidth, imageHeight, _c, path, x, y, width, height, pattern, _d, path, x, y, width, height, _e, lineLength, x0, x1, y0, y1, canvas, ctx, gradient_1, pattern, _f, path, left2, top_1, width, height, position2, x, y, _g, rx, ry, radialGradient_1, midX, midY, f4, invF;
                         return __generator(this, function(_h) {
@@ -9619,7 +9421,7 @@
                               if (image2) {
                                 imageWidth = isNaN(image2.width) || image2.width === 0 ? 1 : image2.width;
                                 imageHeight = isNaN(image2.height) || image2.height === 0 ? 1 : image2.height;
-                                _c = calculateBackgroundRendering(container, index3, [
+                                _c = calculateBackgroundRendering(container, index2, [
                                   imageWidth,
                                   imageHeight,
                                   imageWidth / imageHeight
@@ -9630,7 +9432,7 @@
                               return [3, 6];
                             case 5:
                               if (isLinearGradient(backgroundImage3)) {
-                                _d = calculateBackgroundRendering(container, index3, [null, null, null]), path = _d[0], x = _d[1], y = _d[2], width = _d[3], height = _d[4];
+                                _d = calculateBackgroundRendering(container, index2, [null, null, null]), path = _d[0], x = _d[1], y = _d[2], width = _d[3], height = _d[4];
                                 _e = calculateGradientDirection(backgroundImage3.angle, width, height), lineLength = _e[0], x0 = _e[1], x1 = _e[2], y0 = _e[3], y1 = _e[4];
                                 canvas = document.createElement("canvas");
                                 canvas.width = width;
@@ -9647,7 +9449,7 @@
                                   this_1.renderRepeat(path, pattern, x, y);
                                 }
                               } else if (isRadialGradient(backgroundImage3)) {
-                                _f = calculateBackgroundRendering(container, index3, [
+                                _f = calculateBackgroundRendering(container, index2, [
                                   null,
                                   null,
                                   null
@@ -9681,7 +9483,7 @@
                               }
                               _h.label = 6;
                             case 6:
-                              index3--;
+                              index2--;
                               return [
                                 2
                                 /*return*/
@@ -10861,12 +10663,12 @@
           var indexOf2 = str.substring(fromIndex || 0).search(regex);
           return indexOf2 >= 0 ? indexOf2 + (fromIndex || 0) : indexOf2;
         };
-        showdown2.helper.splitAtIndex = function(str, index3) {
+        showdown2.helper.splitAtIndex = function(str, index2) {
           "use strict";
           if (!showdown2.helper.isString(str)) {
             throw "InvalidArgumentError: first parameter of showdown.helper.regexIndexOf function must be a string";
           }
-          return [str.substring(0, index3), str.substring(index3)];
+          return [str.substring(0, index2), str.substring(index2)];
         };
         showdown2.helper.encodeEmailAddress = function(mail) {
           "use strict";
@@ -16689,8 +16491,8 @@
               throw new TypeError("Cannot convert undefined or null to object");
             }
             var output = Object(target);
-            for (var index3 = 1; index3 < arguments.length; index3++) {
-              var source = arguments[index3];
+            for (var index2 = 1; index2 < arguments.length; index2++) {
+              var source = arguments[index2];
               if (source !== undefined2 && source !== null) {
                 for (var nextKey in source) {
                   if (source.hasOwnProperty(nextKey)) {
@@ -17550,9 +17352,9 @@
               return this;
             }
             otherRecognizer = getRecognizerByNameIfManager(otherRecognizer, this);
-            var index3 = inArray(this.requireFail, otherRecognizer);
-            if (index3 > -1) {
-              this.requireFail.splice(index3, 1);
+            var index2 = inArray(this.requireFail, otherRecognizer);
+            if (index2 > -1) {
+              this.requireFail.splice(index2, 1);
             }
             return this;
           },
@@ -18257,9 +18059,9 @@
             recognizer = this.get(recognizer);
             if (recognizer) {
               var recognizers = this.recognizers;
-              var index3 = inArray(recognizers, recognizer);
-              if (index3 !== -1) {
-                recognizers.splice(index3, 1);
+              var index2 = inArray(recognizers, recognizer);
+              if (index2 !== -1) {
+                recognizers.splice(index2, 1);
                 this.touchAction.update();
               }
             }
@@ -18640,15 +18442,15 @@
             map3.set(b[i2], i2++);
         }
         if (map3.has(a[aStart])) {
-          const index3 = map3.get(a[aStart]);
-          if (bStart < index3 && index3 < bEnd) {
+          const index2 = map3.get(a[aStart]);
+          if (bStart < index2 && index2 < bEnd) {
             let i2 = aStart;
             let sequence = 1;
-            while (++i2 < aEnd && i2 < bEnd && map3.get(a[i2]) === index3 + sequence)
+            while (++i2 < aEnd && i2 < bEnd && map3.get(a[i2]) === index2 + sequence)
               sequence++;
-            if (sequence > index3 - bStart) {
+            if (sequence > index2 - bStart) {
               const node = get(a[aStart], 0);
-              while (bStart < index3)
+              while (bStart < index2)
                 parentNode.insertBefore(get(b[bStart++], 1), node);
             } else {
               parentNode.replaceChild(
@@ -20791,13 +20593,13 @@
           state.orderedModifiers.forEach(function(modifier) {
             return state.modifiersData[modifier.name] = Object.assign({}, modifier.data);
           });
-          for (var index3 = 0; index3 < state.orderedModifiers.length; index3++) {
+          for (var index2 = 0; index2 < state.orderedModifiers.length; index2++) {
             if (state.reset === true) {
               state.reset = false;
-              index3 = -1;
+              index2 = -1;
               continue;
             }
-            var _state$orderedModifie = state.orderedModifiers[index3], fn6 = _state$orderedModifie.fn, _state$orderedModifie2 = _state$orderedModifie.options, _options = _state$orderedModifie2 === void 0 ? {} : _state$orderedModifie2, name = _state$orderedModifie.name;
+            var _state$orderedModifie = state.orderedModifiers[index2], fn6 = _state$orderedModifie.fn, _state$orderedModifie2 = _state$orderedModifie.options, _options = _state$orderedModifie2 === void 0 ? {} : _state$orderedModifie2, name = _state$orderedModifie.name;
             if (typeof fn6 === "function") {
               state = fn6({
                 state,
@@ -20877,10 +20679,10 @@
   function hasOwnProperty(obj, key) {
     return {}.hasOwnProperty.call(obj, key);
   }
-  function getValueAtIndexOrReturn(value, index3, defaultValue) {
+  function getValueAtIndexOrReturn(value, index2, defaultValue) {
     if (Array.isArray(value)) {
-      var v = value[index3];
-      return v == null ? Array.isArray(defaultValue) ? defaultValue[index3] : defaultValue : v;
+      var v = value[index2];
+      return v == null ? Array.isArray(defaultValue) ? defaultValue[index2] : defaultValue : v;
     }
     return value;
   }
@@ -20922,8 +20724,8 @@
     }
   }
   function unique(arr) {
-    return arr.filter(function(item, index3) {
-      return arr.indexOf(item) === index3;
+    return arr.filter(function(item, index2) {
+      return arr.indexOf(item) === index2;
     });
   }
   function getBasePlacement2(placement) {
@@ -24127,8 +23929,8 @@
       return false;
     return [...input2].every(isCharKatakana);
   }
-  var isCharInitialLongDash = (char, index3) => isCharLongDash(char) && index3 < 1;
-  var isCharInnerLongDash = (char, index3) => isCharLongDash(char) && index3 > 0;
+  var isCharInitialLongDash = (char, index2) => isCharLongDash(char) && index2 < 1;
+  var isCharInnerLongDash = (char, index2) => isCharLongDash(char) && index2 > 0;
   var isKanaAsSymbol = (char) => ["\u30F6", "\u30F5"].includes(char);
   var LONG_VOWELS = {
     a: "\u3042",
@@ -24139,13 +23941,13 @@
   };
   function katakanaToHiragana(input2 = "", toRomaji2, { isDestinationRomaji, convertLongVowelMark } = {}) {
     let previousKana = "";
-    return input2.split("").reduce((hira, char, index3) => {
-      if (isCharSlashDot(char) || isCharInitialLongDash(char, index3) || isKanaAsSymbol(char)) {
+    return input2.split("").reduce((hira, char, index2) => {
+      if (isCharSlashDot(char) || isCharInitialLongDash(char, index2) || isKanaAsSymbol(char)) {
         return hira.concat(char);
       }
-      if (convertLongVowelMark && previousKana && isCharInnerLongDash(char, index3)) {
+      if (convertLongVowelMark && previousKana && isCharInnerLongDash(char, index2)) {
         const romaji = toRomaji2(previousKana).slice(-1);
-        if (isCharKatakana(input2[index3 - 1]) && romaji === "o" && isDestinationRomaji) {
+        if (isCharKatakana(input2[index2 - 1]) && romaji === "o" && isDestinationRomaji) {
           return hira.concat("\u304A");
         }
         return hira.concat(LONG_VOWELS[romaji]);
@@ -37426,9 +37228,9 @@
     let scrobble_milestone = 0;
     let scrobble_proximity = 0;
     let max_rank = ranks.length - 1;
-    ranks.forEach((rank, index3) => {
+    ranks.forEach((rank, index2) => {
       if (scrobbles <= rank.start) {
-        scrobble_milestone = index3;
+        scrobble_milestone = index2;
         return;
       }
     });
@@ -37462,9 +37264,6 @@
       contrast
     };
   }
-
-  // src/components/music/music_grid.js
-  var import_color_thief_browser = __toESM(require_color_thief_min(), 1);
 
   // src/components/music/hoshino.js
   function hoshino(artwork, name, sister, link = null) {
@@ -37569,492 +37368,9 @@
     set_storage("bleh_hoshino_cache", JSON.stringify(hoshino_cache));
   }
 
-  // node_modules/fast-average-color/dist/index.esm.js
-  function toHex(num3) {
-    var str = num3.toString(16);
-    return str.length === 1 ? "0" + str : str;
-  }
-  function arrayToHex(arr) {
-    return "#" + arr.map(toHex).join("");
-  }
-  function isDark(color2) {
-    var result = (color2[0] * 299 + color2[1] * 587 + color2[2] * 114) / 1e3;
-    return result < 128;
-  }
-  function prepareIgnoredColor(color2) {
-    if (!color2) {
-      return [];
-    }
-    return isRGBArray(color2) ? color2 : [color2];
-  }
-  function isRGBArray(value) {
-    return Array.isArray(value[0]);
-  }
-  function isIgnoredColor(data2, index3, ignoredColor) {
-    for (var i2 = 0; i2 < ignoredColor.length; i2++) {
-      if (isIgnoredColorAsNumbers(data2, index3, ignoredColor[i2])) {
-        return true;
-      }
-    }
-    return false;
-  }
-  function isIgnoredColorAsNumbers(data2, index3, ignoredColor) {
-    switch (ignoredColor.length) {
-      case 3:
-        if (isIgnoredRGBColor(data2, index3, ignoredColor)) {
-          return true;
-        }
-        break;
-      case 4:
-        if (isIgnoredRGBAColor(data2, index3, ignoredColor)) {
-          return true;
-        }
-        break;
-      case 5:
-        if (isIgnoredRGBAColorWithThreshold(data2, index3, ignoredColor)) {
-          return true;
-        }
-        break;
-      default:
-        return false;
-    }
-  }
-  function isIgnoredRGBColor(data2, index3, ignoredColor) {
-    if (data2[index3 + 3] !== 255) {
-      return true;
-    }
-    if (data2[index3] === ignoredColor[0] && data2[index3 + 1] === ignoredColor[1] && data2[index3 + 2] === ignoredColor[2]) {
-      return true;
-    }
-    return false;
-  }
-  function isIgnoredRGBAColor(data2, index3, ignoredColor) {
-    if (data2[index3 + 3] && ignoredColor[3]) {
-      return data2[index3] === ignoredColor[0] && data2[index3 + 1] === ignoredColor[1] && data2[index3 + 2] === ignoredColor[2] && data2[index3 + 3] === ignoredColor[3];
-    }
-    return data2[index3 + 3] === ignoredColor[3];
-  }
-  function inRange(colorComponent, ignoredColorComponent, value) {
-    return colorComponent >= ignoredColorComponent - value && colorComponent <= ignoredColorComponent + value;
-  }
-  function isIgnoredRGBAColorWithThreshold(data2, index3, ignoredColor) {
-    var redIgnored = ignoredColor[0];
-    var greenIgnored = ignoredColor[1];
-    var blueIgnored = ignoredColor[2];
-    var alphaIgnored = ignoredColor[3];
-    var threshold = ignoredColor[4];
-    var alphaData = data2[index3 + 3];
-    var alphaInRange = inRange(alphaData, alphaIgnored, threshold);
-    if (!alphaIgnored) {
-      return alphaInRange;
-    }
-    if (!alphaData && alphaInRange) {
-      return true;
-    }
-    if (inRange(data2[index3], redIgnored, threshold) && inRange(data2[index3 + 1], greenIgnored, threshold) && inRange(data2[index3 + 2], blueIgnored, threshold) && alphaInRange) {
-      return true;
-    }
-    return false;
-  }
-  var DEFAULT_DOMINANT_DIVIDER = 24;
-  function dominantAlgorithm(arr, len, options) {
-    var colorHash = {};
-    var divider = options.dominantDivider || DEFAULT_DOMINANT_DIVIDER;
-    var ignoredColor = options.ignoredColor;
-    var step = options.step;
-    var max2 = [0, 0, 0, 0, 0];
-    for (var i2 = 0; i2 < len; i2 += step) {
-      var red = arr[i2];
-      var green = arr[i2 + 1];
-      var blue = arr[i2 + 2];
-      var alpha2 = arr[i2 + 3];
-      if (ignoredColor && isIgnoredColor(arr, i2, ignoredColor)) {
-        continue;
-      }
-      var key = Math.round(red / divider) + "," + Math.round(green / divider) + "," + Math.round(blue / divider);
-      if (colorHash[key]) {
-        colorHash[key] = [
-          colorHash[key][0] + red * alpha2,
-          colorHash[key][1] + green * alpha2,
-          colorHash[key][2] + blue * alpha2,
-          colorHash[key][3] + alpha2,
-          colorHash[key][4] + 1
-        ];
-      } else {
-        colorHash[key] = [red * alpha2, green * alpha2, blue * alpha2, alpha2, 1];
-      }
-      if (max2[4] < colorHash[key][4]) {
-        max2 = colorHash[key];
-      }
-    }
-    var redTotal = max2[0];
-    var greenTotal = max2[1];
-    var blueTotal = max2[2];
-    var alphaTotal = max2[3];
-    var count = max2[4];
-    return alphaTotal ? [
-      Math.round(redTotal / alphaTotal),
-      Math.round(greenTotal / alphaTotal),
-      Math.round(blueTotal / alphaTotal),
-      Math.round(alphaTotal / count)
-    ] : options.defaultColor;
-  }
-  function simpleAlgorithm(arr, len, options) {
-    var redTotal = 0;
-    var greenTotal = 0;
-    var blueTotal = 0;
-    var alphaTotal = 0;
-    var count = 0;
-    var ignoredColor = options.ignoredColor;
-    var step = options.step;
-    for (var i2 = 0; i2 < len; i2 += step) {
-      var alpha2 = arr[i2 + 3];
-      var red = arr[i2] * alpha2;
-      var green = arr[i2 + 1] * alpha2;
-      var blue = arr[i2 + 2] * alpha2;
-      if (ignoredColor && isIgnoredColor(arr, i2, ignoredColor)) {
-        continue;
-      }
-      redTotal += red;
-      greenTotal += green;
-      blueTotal += blue;
-      alphaTotal += alpha2;
-      count++;
-    }
-    return alphaTotal ? [
-      Math.round(redTotal / alphaTotal),
-      Math.round(greenTotal / alphaTotal),
-      Math.round(blueTotal / alphaTotal),
-      Math.round(alphaTotal / count)
-    ] : options.defaultColor;
-  }
-  function sqrtAlgorithm(arr, len, options) {
-    var redTotal = 0;
-    var greenTotal = 0;
-    var blueTotal = 0;
-    var alphaTotal = 0;
-    var count = 0;
-    var ignoredColor = options.ignoredColor;
-    var step = options.step;
-    for (var i2 = 0; i2 < len; i2 += step) {
-      var red = arr[i2];
-      var green = arr[i2 + 1];
-      var blue = arr[i2 + 2];
-      var alpha2 = arr[i2 + 3];
-      if (ignoredColor && isIgnoredColor(arr, i2, ignoredColor)) {
-        continue;
-      }
-      redTotal += red * red * alpha2;
-      greenTotal += green * green * alpha2;
-      blueTotal += blue * blue * alpha2;
-      alphaTotal += alpha2;
-      count++;
-    }
-    return alphaTotal ? [
-      Math.round(Math.sqrt(redTotal / alphaTotal)),
-      Math.round(Math.sqrt(greenTotal / alphaTotal)),
-      Math.round(Math.sqrt(blueTotal / alphaTotal)),
-      Math.round(alphaTotal / count)
-    ] : options.defaultColor;
-  }
-  function getDefaultColor(options) {
-    return getOption(options, "defaultColor", [0, 0, 0, 0]);
-  }
-  function getOption(options, name, defaultValue) {
-    return options[name] === void 0 ? defaultValue : options[name];
-  }
-  var MIN_SIZE = 10;
-  var MAX_SIZE = 100;
-  function isSvg(filename) {
-    return filename.search(/\.svg(\?|$)/i) !== -1;
-  }
-  function getOriginalSize(resource) {
-    if (isInstanceOfHTMLImageElement(resource)) {
-      var width = resource.naturalWidth;
-      var height = resource.naturalHeight;
-      if (!resource.naturalWidth && isSvg(resource.src)) {
-        width = height = MAX_SIZE;
-      }
-      return {
-        width,
-        height
-      };
-    }
-    if (isInstanceOfHTMLVideoElement(resource)) {
-      return {
-        width: resource.videoWidth,
-        height: resource.videoHeight
-      };
-    }
-    if (isInstanceOfVideoFrame(resource)) {
-      return {
-        width: resource.codedWidth,
-        height: resource.codedHeight
-      };
-    }
-    return {
-      width: resource.width,
-      height: resource.height
-    };
-  }
-  function getSrc(resource) {
-    if (isInstanceOfHTMLCanvasElement(resource)) {
-      return "canvas";
-    }
-    if (isInstanceOfOffscreenCanvas(resource)) {
-      return "offscreencanvas";
-    }
-    if (isInstanceOfVideoFrame(resource)) {
-      return "videoframe";
-    }
-    if (isInstanceOfImageBitmap(resource)) {
-      return "imagebitmap";
-    }
-    return resource.src;
-  }
-  function isInstanceOfHTMLImageElement(resource) {
-    return typeof HTMLImageElement !== "undefined" && resource instanceof HTMLImageElement;
-  }
-  var hasOffscreenCanvas = typeof OffscreenCanvas !== "undefined";
-  function isInstanceOfOffscreenCanvas(resource) {
-    return hasOffscreenCanvas && resource instanceof OffscreenCanvas;
-  }
-  function isInstanceOfHTMLVideoElement(resource) {
-    return typeof HTMLVideoElement !== "undefined" && resource instanceof HTMLVideoElement;
-  }
-  function isInstanceOfVideoFrame(resource) {
-    return typeof VideoFrame !== "undefined" && resource instanceof VideoFrame;
-  }
-  function isInstanceOfHTMLCanvasElement(resource) {
-    return typeof HTMLCanvasElement !== "undefined" && resource instanceof HTMLCanvasElement;
-  }
-  function isInstanceOfImageBitmap(resource) {
-    return typeof ImageBitmap !== "undefined" && resource instanceof ImageBitmap;
-  }
-  function prepareSizeAndPosition(originalSize, options) {
-    var srcLeft = getOption(options, "left", 0);
-    var srcTop = getOption(options, "top", 0);
-    var srcWidth = getOption(options, "width", originalSize.width);
-    var srcHeight = getOption(options, "height", originalSize.height);
-    var destWidth = srcWidth;
-    var destHeight = srcHeight;
-    if (options.mode === "precision") {
-      return {
-        srcLeft,
-        srcTop,
-        srcWidth,
-        srcHeight,
-        destWidth,
-        destHeight
-      };
-    }
-    var factor2;
-    if (srcWidth > srcHeight) {
-      factor2 = srcWidth / srcHeight;
-      destWidth = MAX_SIZE;
-      destHeight = Math.round(destWidth / factor2);
-    } else {
-      factor2 = srcHeight / srcWidth;
-      destHeight = MAX_SIZE;
-      destWidth = Math.round(destHeight / factor2);
-    }
-    if (destWidth > srcWidth || destHeight > srcHeight || destWidth < MIN_SIZE || destHeight < MIN_SIZE) {
-      destWidth = srcWidth;
-      destHeight = srcHeight;
-    }
-    return {
-      srcLeft,
-      srcTop,
-      srcWidth,
-      srcHeight,
-      destWidth,
-      destHeight
-    };
-  }
-  var isWebWorkers = typeof window === "undefined";
-  function makeCanvas() {
-    if (isWebWorkers) {
-      return hasOffscreenCanvas ? new OffscreenCanvas(1, 1) : null;
-    }
-    return document.createElement("canvas");
-  }
-  var ERROR_PREFIX = "FastAverageColor: ";
-  function getError(message) {
-    return Error(ERROR_PREFIX + message);
-  }
-  function outputError(error, silent) {
-    if (!silent) {
-      console.error(error);
-    }
-  }
-  var FastAverageColor = (
-    /** @class */
-    function() {
-      function FastAverageColor2() {
-        this.canvas = null;
-        this.ctx = null;
-      }
-      FastAverageColor2.prototype.getColorAsync = function(resource, options) {
-        if (!resource) {
-          return Promise.reject(getError("call .getColorAsync() without resource"));
-        }
-        if (typeof resource === "string") {
-          if (typeof Image === "undefined") {
-            return Promise.reject(getError("resource as string is not supported in this environment"));
-          }
-          var img = new Image();
-          img.crossOrigin = options && options.crossOrigin || "";
-          var promise = this.bindImageEvents(img, options);
-          img.src = resource;
-          return promise;
-        } else if (isInstanceOfHTMLImageElement(resource) && !resource.complete) {
-          return this.bindImageEvents(resource, options);
-        } else {
-          var result = this.getColor(resource, options);
-          return result.error ? Promise.reject(result.error) : Promise.resolve(result);
-        }
-      };
-      FastAverageColor2.prototype.getColor = function(resource, options) {
-        options = options || {};
-        var defaultColor = getDefaultColor(options);
-        if (!resource) {
-          var error = getError("call .getColor() without resource");
-          outputError(error, options.silent);
-          return this.prepareResult(defaultColor, error);
-        }
-        var originalSize = getOriginalSize(resource);
-        var size = prepareSizeAndPosition(originalSize, options);
-        if (!size.srcWidth || !size.srcHeight || !size.destWidth || !size.destHeight) {
-          var error = getError('incorrect sizes for resource "'.concat(getSrc(resource), '"'));
-          outputError(error, options.silent);
-          return this.prepareResult(defaultColor, error);
-        }
-        if (!this.canvas) {
-          this.canvas = makeCanvas();
-          if (!this.canvas) {
-            var error = getError("OffscreenCanvas is not supported in this browser");
-            outputError(error, options.silent);
-            return this.prepareResult(defaultColor, error);
-          }
-        }
-        if (!this.ctx) {
-          this.ctx = this.canvas.getContext("2d", { willReadFrequently: true });
-          if (!this.ctx) {
-            var error = getError("Canvas Context 2D is not supported in this browser");
-            outputError(error, options.silent);
-            return this.prepareResult(defaultColor, error);
-          }
-          this.ctx.imageSmoothingEnabled = false;
-        }
-        this.canvas.width = size.destWidth;
-        this.canvas.height = size.destHeight;
-        try {
-          this.ctx.clearRect(0, 0, size.destWidth, size.destHeight);
-          this.ctx.drawImage(resource, size.srcLeft, size.srcTop, size.srcWidth, size.srcHeight, 0, 0, size.destWidth, size.destHeight);
-          var bitmapData = this.ctx.getImageData(0, 0, size.destWidth, size.destHeight).data;
-          return this.prepareResult(this.getColorFromArray4(bitmapData, options));
-        } catch (originalError) {
-          var error = getError("security error (CORS) for resource ".concat(getSrc(resource), ".\nDetails: https://developer.mozilla.org/en/docs/Web/HTML/CORS_enabled_image"));
-          outputError(error, options.silent);
-          if (!options.silent) {
-            console.error(originalError);
-          }
-          return this.prepareResult(defaultColor, error);
-        }
-      };
-      FastAverageColor2.prototype.getColorFromArray4 = function(arr, options) {
-        options = options || {};
-        var bytesPerPixel = 4;
-        var arrLength = arr.length;
-        var defaultColor = getDefaultColor(options);
-        if (arrLength < bytesPerPixel) {
-          return defaultColor;
-        }
-        var len = arrLength - arrLength % bytesPerPixel;
-        var step = (options.step || 1) * bytesPerPixel;
-        var algorithm;
-        switch (options.algorithm || "sqrt") {
-          case "simple":
-            algorithm = simpleAlgorithm;
-            break;
-          case "sqrt":
-            algorithm = sqrtAlgorithm;
-            break;
-          case "dominant":
-            algorithm = dominantAlgorithm;
-            break;
-          default:
-            throw getError("".concat(options.algorithm, " is unknown algorithm"));
-        }
-        return algorithm(arr, len, {
-          defaultColor,
-          ignoredColor: prepareIgnoredColor(options.ignoredColor),
-          step,
-          dominantDivider: options.dominantDivider
-        });
-      };
-      FastAverageColor2.prototype.prepareResult = function(value, error) {
-        var rgb3 = value.slice(0, 3);
-        var rgba = [value[0], value[1], value[2], value[3] / 255];
-        var isDarkColor = isDark(value);
-        return {
-          value: [value[0], value[1], value[2], value[3]],
-          rgb: "rgb(" + rgb3.join(",") + ")",
-          rgba: "rgba(" + rgba.join(",") + ")",
-          hex: arrayToHex(rgb3),
-          hexa: arrayToHex(value),
-          isDark: isDarkColor,
-          isLight: !isDarkColor,
-          error
-        };
-      };
-      FastAverageColor2.prototype.destroy = function() {
-        if (this.canvas) {
-          this.canvas.width = 1;
-          this.canvas.height = 1;
-          this.canvas = null;
-        }
-        this.ctx = null;
-      };
-      FastAverageColor2.prototype.bindImageEvents = function(resource, options) {
-        var _this = this;
-        return new Promise(function(resolve2, reject) {
-          var unbindEvents = function() {
-            resource.removeEventListener("load", onload);
-            resource.removeEventListener("error", onerror);
-            resource.removeEventListener("abort", onabort);
-          };
-          var onload = function() {
-            unbindEvents();
-            var result = _this.getColor(resource, options);
-            if (result.error) {
-              reject(result.error);
-            } else {
-              resolve2(result);
-            }
-          };
-          var onerror = function() {
-            unbindEvents();
-            reject(getError('Error loading image "'.concat(resource.src, '"')));
-          };
-          var onabort = function() {
-            unbindEvents();
-            reject(getError('Image "'.concat(resource.src, '" loading aborted')));
-          };
-          resource.addEventListener("load", onload);
-          resource.addEventListener("error", onerror);
-          resource.addEventListener("abort", onabort);
-          if (resource.src && resource.complete) {
-            onload();
-          }
-        });
-      };
-      return FastAverageColor2;
-    }()
-  );
-
   // src/components/page/colour.ts
   async function header_colour(source, apply_to_page = false, apply_to_elem) {
+    if (!apply_to_elem) apply_to_elem = [];
     log("applying header colour", "accent", "info", { source, apply_to_page, apply_to_elem });
     apply2(0, 0, 0.5, true);
     try {
@@ -38062,24 +37378,23 @@
       image.width = 300;
       image.height = 300;
       image.crossOrigin = "anonymous";
-      image.src = source.src;
-      image.onload = () => {
-        const fac = new FastAverageColor();
-        fac.getColorAsync(image).then((colour) => {
-          const values = colour.value;
-          let hsl3 = rgb_to_hsl(values[0], values[1], values[2]);
-          let hue4 = hsl3.h;
-          let sat = clamp_sat(hsl3.s / 100 * 3);
-          let lit = clamp_lit(sat, hsl3.l / 100 + 0.35, true);
-          apply2(hue4, sat, lit);
-          log(
-            `sourced rgb of (${colour[0]}, ${colour[1]}, ${colour[2]}), hsl of (${hsl3.h}, ${hsl3.s}, ${hsl3.l}) - using final value of (${hue4}, ${sat}, ${lit})`,
-            "accent"
-          );
-        }).catch((e4) => {
-          log("received error", "accent", "error", { e: e4 });
-        });
-      };
+      await new Promise((resolve2, reject) => {
+        image.onload = () => resolve2();
+        image.onerror = reject;
+        image.src = source.src;
+      });
+      const colour = await fac.getColorAsync(image);
+      const values = colour.value;
+      let hsl3 = rgb_to_hsl(values[0], values[1], values[2]);
+      let hue4 = hsl3.h;
+      let sat = clamp_sat(hsl3.s / 100 * 3);
+      let lit = clamp_lit(sat, hsl3.l / 100 + 0.35, true);
+      apply2(hue4, sat, lit);
+      log(
+        `sourced rgb of (${colour[0]}, ${colour[1]}, ${colour[2]}), hsl of (${hsl3.h}, ${hsl3.s}, ${hsl3.l}) - using final value of (${hue4}, ${sat}, ${lit})`,
+        "accent"
+      );
+      return { hue: hue4, sat, lit };
     } catch (e4) {
       log("received error", "accent", "error", { e: e4 });
     }
@@ -38143,10 +37458,10 @@
     let grids = search.querySelectorAll(
       ".grid-items-item:not([data-bleh-music-grids])"
     );
-    grids.forEach((grid, index3) => {
+    grids.forEach((grid, index2) => {
       let is_loading = grid.querySelector(".grid-items-empty-inner") != null;
       if (is_loading) return;
-      grid.style.setProperty("--delay", index3 * 0.04 + "s");
+      grid.style.setProperty("--delay", index2 * 0.04 + "s");
       grid.classList.add("colourful");
       grid.setAttribute("data-bleh-music-grids", "true");
       let is_album;
@@ -38609,13 +37924,10 @@
       }
     });
   }
-  unsafeWindow._update_inbuilt_selection = function(id, index3) {
-    document.getElementById(id).selectedIndex = index3;
+  unsafeWindow._update_inbuilt_selection = function(id, index2) {
+    document.getElementById(id).selectedIndex = index2;
     update_inbuilt_select(id, document.getElementById(id).value);
   };
-
-  // src/components/music/track.js
-  var import_color_thief_browser2 = __toESM(require_color_thief_min(), 1);
 
   // src/components/settings/toggle.js
   function toggle({
@@ -39003,16 +38315,16 @@
       log("new!", "tracks", "info", { tracklist });
       const wide = tracklist.classList.contains("chartlist--wide-artist-column");
       const tracks = tracklist.querySelectorAll(":scope > tbody > :is(.chartlist-row:not(.chartlist__placeholder-row), .chartlist-row--interlist-ad)");
-      tracks.forEach((track, index3) => {
-        smart_track(track, index3);
+      tracks.forEach((track, index2) => {
+        smart_track(track, index2);
       });
-      function smart_track(track, index3) {
+      function smart_track(track, index2) {
         if (track.getAttribute("data-track-type")) return;
         if (track.classList[0] == "chartlist-row--interlist-ad") {
           track.parentElement.removeChild(track);
           return;
         }
-        track.style.setProperty("--delay", index3 * 0.04 + "s");
+        track.style.setProperty("--delay", index2 * 0.04 + "s");
         track.setAttribute("data-album-name-location", album_name_location);
         track.appendChild(html.node`
                 <div class="kate-placeholder" />
@@ -39826,13 +39138,8 @@
           if (!settings.colourful_tracks_all && !is_active) return;
           image.setAttribute("crossorigin", "anonymous");
           try {
-            image.addEventListener("load", () => {
-              let thief = new import_color_thief_browser2.default();
-              let colour = thief.getColor(image);
-              let hsl3 = rgb_to_hsl(colour[0], colour[1], colour[2]);
-              let hue4 = hsl3.h;
-              let sat = clamp_sat(hsl3.s / 100 * 3);
-              let lit = clamp_lit(sat, hsl3.l / 100 + 0.35, true);
+            image.onload = async () => {
+              const { hue: hue4, sat, lit } = await header_colour(image);
               const to_colour = track.querySelectorAll(
                 ".chartlist-count-bar, .chartlist-loved"
               );
@@ -39849,7 +39156,7 @@
                   elem2.style.setProperty("--lit-over", lit);
                 });
               }
-            });
+            };
           } catch (e4) {
           }
         }
@@ -40821,9 +40128,9 @@
     if (page.structure.nav)
       page.structure.nav.setAttribute("data-assigned", "true");
     let navlists = page.structure.container.querySelectorAll(":scope > .navlist");
-    navlists.forEach((nav, index3) => {
-      console.info(index3);
-      if (index3 < 1) return;
+    navlists.forEach((nav, index2) => {
+      console.info(index2);
+      if (index2 < 1) return;
       if (ff("mualani")) {
         let toolbar = html.node`
                 <div class="toolbar">
@@ -41508,8 +40815,8 @@
         title.textContent = romanise(correct_artist(title_text, true));
         return;
       }
-      split.forEach((artist, index3) => {
-        if (index3 > 0) title.innerHTML += ",";
+      split.forEach((artist, index2) => {
+        if (index2 > 0) title.innerHTML += ",";
         artist = artist.trim();
         let part = document.createElement("a");
         part.classList.add("multi-artist-part");
@@ -42480,7 +41787,7 @@
     return value >= Math.min(start2, end2) - epsilon && value <= Math.max(start2, end2) + epsilon;
   }
   function _lookup(table, value, cmp) {
-    cmp = cmp || ((index3) => table[index3] < value);
+    cmp = cmp || ((index2) => table[index2] < value);
     let hi = table.length - 1;
     let lo = 0;
     let mid;
@@ -42497,11 +41804,11 @@
       hi
     };
   }
-  var _lookupByKey = (table, key, value, last) => _lookup(table, value, last ? (index3) => {
-    const ti = table[index3][key];
-    return ti < value || ti === value && table[index3 + 1][key] === value;
-  } : (index3) => table[index3][key] < value);
-  var _rlookupByKey = (table, key, value) => _lookup(table, value, (index3) => table[index3][key] >= value);
+  var _lookupByKey = (table, key, value, last) => _lookup(table, value, last ? (index2) => {
+    const ti = table[index2][key];
+    return ti < value || ti === value && table[index2 + 1][key] === value;
+  } : (index2) => table[index2][key] < value);
+  var _rlookupByKey = (table, key, value) => _lookup(table, value, (index2) => table[index2][key] >= value);
   function _filterBetween(values, min2, max2) {
     let start2 = 0;
     let end2 = values.length;
@@ -42558,9 +41865,9 @@
       return;
     }
     const listeners = stub.listeners;
-    const index3 = listeners.indexOf(listener);
-    if (index3 !== -1) {
-      listeners.splice(index3, 1);
+    const index2 = listeners.indexOf(listener);
+    if (index2 !== -1) {
+      listeners.splice(index2, 1);
     }
     if (listeners.length > 0) {
       return;
@@ -42860,7 +42167,7 @@
     values(value) {
       return isArray2(value) ? value : "" + value;
     },
-    numeric(tickValue, index3, ticks) {
+    numeric(tickValue, index2, ticks) {
       if (tickValue === 0) {
         return "0";
       }
@@ -42884,11 +42191,11 @@
       Object.assign(options, this.options.ticks.format);
       return formatNumber(tickValue, locale, options);
     },
-    logarithmic(tickValue, index3, ticks) {
+    logarithmic(tickValue, index2, ticks) {
       if (tickValue === 0) {
         return "0";
       }
-      const remain = ticks[index3].significand || tickValue / Math.pow(10, Math.floor(log10(tickValue)));
+      const remain = ticks[index2].significand || tickValue / Math.pow(10, Math.floor(log10(tickValue)));
       if ([
         1,
         2,
@@ -42896,8 +42203,8 @@
         5,
         10,
         15
-      ].includes(remain) || index3 > 0.8 * ticks.length) {
-        return formatters.numeric.call(this, tickValue, index3, ticks);
+      ].includes(remain) || index2 > 0.8 * ticks.length) {
+        return formatters.numeric.call(this, tickValue, index2, ticks);
       }
       return "";
     }
@@ -43486,7 +42793,7 @@
     font.string = toFontString(font);
     return font;
   }
-  function resolve(inputs, context, index3, info) {
+  function resolve(inputs, context, index2, info) {
     let cacheable = true;
     let i2, ilen, value;
     for (i2 = 0, ilen = inputs.length; i2 < ilen; ++i2) {
@@ -43498,8 +42805,8 @@
         value = value(context);
         cacheable = false;
       }
-      if (index3 !== void 0 && isArray2(value)) {
-        value = value[index3 % value.length];
+      if (index2 !== void 0 && isArray2(value)) {
+        value = value[index2 % value.length];
         cacheable = false;
       }
       if (value !== void 0) {
@@ -43821,12 +43128,12 @@
     const { iScale } = meta;
     const { key = "r" } = this._parsing;
     const parsed2 = new Array(count);
-    let i2, ilen, index3, item;
+    let i2, ilen, index2, item;
     for (i2 = 0, ilen = count; i2 < ilen; ++i2) {
-      index3 = i2 + start2;
-      item = data2[index3];
+      index2 = i2 + start2;
+      item = data2[index2];
       parsed2[i2] = {
-        r: iScale.parse(resolveObjectKey(item, key), index3)
+        r: iScale.parse(resolveObjectKey(item, key), index2)
       };
     }
     return parsed2;
@@ -45072,9 +44379,9 @@
     let stack;
     for (let i2 = 0; i2 < ilen; ++i2) {
       const item = parsed2[i2];
-      const { [iAxis]: index3, [vAxis]: value } = item;
+      const { [iAxis]: index2, [vAxis]: value } = item;
       const itemStacks = item._stacks || (item._stacks = {});
-      stack = itemStacks[vAxis] = getOrCreateStack(stacks, key, index3);
+      stack = itemStacks[vAxis] = getOrCreateStack(stacks, key, index2);
       stack[datasetIndex] = value;
       stack._top = getLastIndexInStack(stack, vScale, true, meta.type);
       stack._bottom = getLastIndexInStack(stack, vScale, false, meta.type);
@@ -45086,24 +44393,24 @@
     const scales2 = chart.scales;
     return Object.keys(scales2).filter((key) => scales2[key].axis === axis).shift();
   }
-  function createDatasetContext(parent, index3) {
+  function createDatasetContext(parent, index2) {
     return createContext(parent, {
       active: false,
       dataset: void 0,
-      datasetIndex: index3,
-      index: index3,
+      datasetIndex: index2,
+      index: index2,
       mode: "default",
       type: "dataset"
     });
   }
-  function createDataContext(parent, index3, element) {
+  function createDataContext(parent, index2, element) {
     return createContext(parent, {
       active: false,
-      dataIndex: index3,
+      dataIndex: index2,
       parsed: void 0,
       raw: void 0,
       element,
-      index: index3,
+      index: index2,
       mode: "default",
       type: "data"
     });
@@ -45312,12 +44619,12 @@
       const labels = iScale.getLabels();
       const singleScale = iScale === vScale;
       const parsed2 = new Array(count);
-      let i2, ilen, index3;
+      let i2, ilen, index2;
       for (i2 = 0, ilen = count; i2 < ilen; ++i2) {
-        index3 = i2 + start2;
+        index2 = i2 + start2;
         parsed2[i2] = {
-          [iAxis]: singleScale || iScale.parse(labels[index3], index3),
-          [vAxis]: vScale.parse(data2[index3], index3)
+          [iAxis]: singleScale || iScale.parse(labels[index2], index2),
+          [vAxis]: vScale.parse(data2[index2], index2)
         };
       }
       return parsed2;
@@ -45325,13 +44632,13 @@
     parseArrayData(meta, data2, start2, count) {
       const { xScale, yScale } = meta;
       const parsed2 = new Array(count);
-      let i2, ilen, index3, item;
+      let i2, ilen, index2, item;
       for (i2 = 0, ilen = count; i2 < ilen; ++i2) {
-        index3 = i2 + start2;
-        item = data2[index3];
+        index2 = i2 + start2;
+        item = data2[index2];
         parsed2[i2] = {
-          x: xScale.parse(item[0], index3),
-          y: yScale.parse(item[1], index3)
+          x: xScale.parse(item[0], index2),
+          y: yScale.parse(item[1], index2)
         };
       }
       return parsed2;
@@ -45340,22 +44647,22 @@
       const { xScale, yScale } = meta;
       const { xAxisKey = "x", yAxisKey = "y" } = this._parsing;
       const parsed2 = new Array(count);
-      let i2, ilen, index3, item;
+      let i2, ilen, index2, item;
       for (i2 = 0, ilen = count; i2 < ilen; ++i2) {
-        index3 = i2 + start2;
-        item = data2[index3];
+        index2 = i2 + start2;
+        item = data2[index2];
         parsed2[i2] = {
-          x: xScale.parse(resolveObjectKey(item, xAxisKey), index3),
-          y: yScale.parse(resolveObjectKey(item, yAxisKey), index3)
+          x: xScale.parse(resolveObjectKey(item, xAxisKey), index2),
+          y: yScale.parse(resolveObjectKey(item, yAxisKey), index2)
         };
       }
       return parsed2;
     }
-    getParsed(index3) {
-      return this._cachedMeta._parsed[index3];
+    getParsed(index2) {
+      return this._cachedMeta._parsed[index2];
     }
-    getDataElement(index3) {
-      return this._cachedMeta.data[index3];
+    getDataElement(index2) {
+      return this._cachedMeta.data[index2];
     }
     applyStack(scale, parsed2, mode) {
       const chart = this.chart;
@@ -45433,11 +44740,11 @@
     getMaxOverflow() {
       return false;
     }
-    getLabelAndValue(index3) {
+    getLabelAndValue(index2) {
       const meta = this._cachedMeta;
       const iScale = meta.iScale;
       const vScale = meta.vScale;
-      const parsed2 = this.getParsed(index3);
+      const parsed2 = this.getParsed(index2);
       return {
         label: iScale ? "" + iScale.getLabelForValue(parsed2[iScale.axis]) : "",
         value: vScale ? "" + vScale.getLabelForValue(parsed2[vScale.axis]) : ""
@@ -45479,19 +44786,19 @@
         active[i2].draw(ctx, area);
       }
     }
-    getStyle(index3, active) {
+    getStyle(index2, active) {
       const mode = active ? "active" : "default";
-      return index3 === void 0 && this._cachedMeta.dataset ? this.resolveDatasetElementOptions(mode) : this.resolveDataElementOptions(index3 || 0, mode);
+      return index2 === void 0 && this._cachedMeta.dataset ? this.resolveDatasetElementOptions(mode) : this.resolveDataElementOptions(index2 || 0, mode);
     }
-    getContext(index3, active, mode) {
+    getContext(index2, active, mode) {
       const dataset = this.getDataset();
       let context;
-      if (index3 >= 0 && index3 < this._cachedMeta.data.length) {
-        const element = this._cachedMeta.data[index3];
-        context = element.$context || (element.$context = createDataContext(this.getContext(), index3, element));
-        context.parsed = this.getParsed(index3);
-        context.raw = dataset.data[index3];
-        context.index = context.dataIndex = index3;
+      if (index2 >= 0 && index2 < this._cachedMeta.data.length) {
+        const element = this._cachedMeta.data[index2];
+        context = element.$context || (element.$context = createDataContext(this.getContext(), index2, element));
+        context.parsed = this.getParsed(index2);
+        context.raw = dataset.data[index2];
+        context.index = context.dataIndex = index2;
       } else {
         context = this.$context || (this.$context = createDatasetContext(this.chart.getContext(), this.index));
         context.dataset = dataset;
@@ -45504,15 +44811,15 @@
     resolveDatasetElementOptions(mode) {
       return this._resolveElementOptions(this.datasetElementType.id, mode);
     }
-    resolveDataElementOptions(index3, mode) {
-      return this._resolveElementOptions(this.dataElementType.id, mode, index3);
+    resolveDataElementOptions(index2, mode) {
+      return this._resolveElementOptions(this.dataElementType.id, mode, index2);
     }
-    _resolveElementOptions(elementType, mode = "default", index3) {
+    _resolveElementOptions(elementType, mode = "default", index2) {
       const active = mode === "active";
       const cache2 = this._cachedDataOpts;
       const cacheKey = elementType + "-" + mode;
       const cached = cache2[cacheKey];
-      const sharing = this.enableOptionSharing && defined(index3);
+      const sharing = this.enableOptionSharing && defined(index2);
       if (cached) {
         return cloneIfNotShared(cached, sharing);
       }
@@ -45529,7 +44836,7 @@
       ];
       const scopes = config.getOptionScopes(this.getDataset(), scopeKeys);
       const names2 = Object.keys(defaults.elements[elementType]);
-      const context = () => this.getContext(index3, active, mode);
+      const context = () => this.getContext(index2, active, mode);
       const values = config.resolveNamedOptions(scopes, names2, context, prefixes);
       if (values.$shared) {
         values.$shared = sharing;
@@ -45537,7 +44844,7 @@
       }
       return values;
     }
-    _resolveAnimations(index3, transition, active) {
+    _resolveAnimations(index2, transition, active) {
       const chart = this.chart;
       const cache2 = this._cachedDataOpts;
       const cacheKey = `animation-${transition}`;
@@ -45550,7 +44857,7 @@
         const config = this.chart.config;
         const scopeKeys = config.datasetAnimationScopeKeys(this._type, transition);
         const scopes = config.getOptionScopes(this.getDataset(), scopeKeys);
-        options = config.createResolver(scopes, this.getContext(index3, active, transition));
+        options = config.createResolver(scopes, this.getContext(index2, active, transition));
       }
       const animations = new Animations(chart, options && options.animations);
       if (options && options._cacheable) {
@@ -45578,11 +44885,11 @@
         includeOptions
       };
     }
-    updateElement(element, index3, properties, mode) {
+    updateElement(element, index2, properties, mode) {
       if (isDirectUpdateMode(mode)) {
         Object.assign(element, properties);
       } else {
-        this._resolveAnimations(index3, mode).update(element, properties);
+        this._resolveAnimations(index2, mode).update(element, properties);
       }
     }
     updateSharedOptions(sharedOptions, mode, newOptions) {
@@ -45590,18 +44897,18 @@
         this._resolveAnimations(void 0, mode).update(sharedOptions, newOptions);
       }
     }
-    _setStyle(element, index3, mode, active) {
+    _setStyle(element, index2, mode, active) {
       element.active = active;
-      const options = this.getStyle(index3, active);
-      this._resolveAnimations(index3, mode, active).update(element, {
+      const options = this.getStyle(index2, active);
+      this._resolveAnimations(index2, mode, active).update(element, {
         options: !active && this.getSharedOptions(options) || options
       });
     }
-    removeHoverStyle(element, datasetIndex, index3) {
-      this._setStyle(element, index3, "active", false);
+    removeHoverStyle(element, datasetIndex, index2) {
+      this._setStyle(element, index2, "active", false);
     }
-    setHoverStyle(element, datasetIndex, index3) {
-      this._setStyle(element, index3, "active", true);
+    setHoverStyle(element, datasetIndex, index2) {
+      this._setStyle(element, index2, "active", true);
     }
     _removeDatasetHoverStyle() {
       const element = this._cachedMeta.dataset;
@@ -45764,7 +45071,7 @@
     }
     return min2;
   }
-  function computeFitCategoryTraits(index3, ruler, options, stackCount) {
+  function computeFitCategoryTraits(index2, ruler, options, stackCount) {
     const thickness = options.barThickness;
     let size, ratio;
     if (isNullOrUndef(thickness)) {
@@ -45777,14 +45084,14 @@
     return {
       chunk: size / stackCount,
       ratio,
-      start: ruler.pixels[index3] - size / 2
+      start: ruler.pixels[index2] - size / 2
     };
   }
-  function computeFlexCategoryTraits(index3, ruler, options, stackCount) {
+  function computeFlexCategoryTraits(index2, ruler, options, stackCount) {
     const pixels = ruler.pixels;
-    const curr = pixels[index3];
-    let prev = index3 > 0 ? pixels[index3 - 1] : null;
-    let next = index3 < pixels.length - 1 ? pixels[index3 + 1] : null;
+    const curr = pixels[index2];
+    let prev = index2 > 0 ? pixels[index2 - 1] : null;
+    let next = index2 < pixels.length - 1 ? pixels[index2 + 1] : null;
     const percent = options.categoryPercentage;
     if (prev === null) {
       prev = curr - (next === null ? ruler.end - ruler.start : next - curr);
@@ -45879,7 +45186,7 @@
       bottom: bottom2
     };
   }
-  function setBorderSkipped(properties, options, stack, index3) {
+  function setBorderSkipped(properties, options, stack, index2) {
     let edge = options.borderSkipped;
     const res = {};
     if (!edge) {
@@ -45898,9 +45205,9 @@
     const { start: start2, end: end2, reverse, top: top2, bottom: bottom2 } = borderProps(properties);
     if (edge === "middle" && stack) {
       properties.enableBorderRadius = true;
-      if ((stack._top || 0) === index3) {
+      if ((stack._top || 0) === index2) {
         edge = top2;
-      } else if ((stack._bottom || 0) === index3) {
+      } else if ((stack._bottom || 0) === index2) {
         edge = bottom2;
       } else {
         res[parseEdge(bottom2, start2, end2, reverse)] = true;
@@ -45996,10 +45303,10 @@
     getMaxOverflow() {
       return 0;
     }
-    getLabelAndValue(index3) {
+    getLabelAndValue(index2) {
       const meta = this._cachedMeta;
       const { iScale, vScale } = meta;
-      const parsed2 = this.getParsed(index3);
+      const parsed2 = this.getParsed(index2);
       const custom = parsed2._custom;
       const value = isFloatBar(custom) ? "[" + custom.start + ", " + custom.end + "]" : "" + vScale.getLabelForValue(parsed2[vScale.axis]);
       return {
@@ -46019,7 +45326,7 @@
     }
     updateElements(bars, start2, count, mode) {
       const reset = mode === "reset";
-      const { index: index3, _cachedMeta: { vScale } } = this;
+      const { index: index2, _cachedMeta: { vScale } } = this;
       const base = vScale.getBasePixel();
       const horizontal = vScale.isHorizontal();
       const ruler = this._getRuler();
@@ -46035,7 +45342,7 @@
         const properties = {
           horizontal,
           base: vpixels.base,
-          enableBorderRadius: !stack || isFloatBar(parsed2._custom) || index3 === stack._top || index3 === stack._bottom,
+          enableBorderRadius: !stack || isFloatBar(parsed2._custom) || index2 === stack._top || index2 === stack._bottom,
           x: horizontal ? vpixels.head : ipixels.center,
           y: horizontal ? ipixels.center : vpixels.head,
           height: horizontal ? ipixels.size : Math.abs(vpixels.size),
@@ -46045,7 +45352,7 @@
           properties.options = sharedOptions || this.resolveDataElementOptions(i2, bars[i2].active ? "active" : mode);
         }
         const options = properties.options || bars[i2].options;
-        setBorderSkipped(properties, options, stack, index3);
+        setBorderSkipped(properties, options, stack, index2);
         setInflateAmount(properties, options, ruler.ratio);
         this.updateElement(bars[i2], i2, properties, mode);
       }
@@ -46080,8 +45387,8 @@
       }
       return stacks;
     }
-    _getStackCount(index3) {
-      return this._getStacks(void 0, index3).length;
+    _getStackCount(index2) {
+      return this._getStacks(void 0, index2).length;
     }
     _getAxisCount() {
       return this._getAxis().length;
@@ -46101,8 +45408,8 @@
     }
     _getStackIndex(datasetIndex, name, dataIndex) {
       const stacks = this._getStacks(datasetIndex, dataIndex);
-      const index3 = name !== void 0 ? stacks.indexOf(name) : -1;
-      return index3 === -1 ? stacks.length - 1 : index3;
+      const index2 = name !== void 0 ? stacks.indexOf(name) : -1;
+      return index2 === -1 ? stacks.length - 1 : index2;
     }
     _getRuler() {
       const opts = this.options;
@@ -46126,10 +45433,10 @@
         ratio: barThickness ? 1 : opts.categoryPercentage * opts.barPercentage
       };
     }
-    _calculateBarValuePixels(index3) {
+    _calculateBarValuePixels(index2) {
       const { _cachedMeta: { vScale, _stacked, index: datasetIndex }, options: { base: baseValue, minBarLength } } = this;
       const actualBase = baseValue || 0;
-      const parsed2 = this.getParsed(index3);
+      const parsed2 = this.getParsed(index2);
       const custom = parsed2._custom;
       const floating = isFloatBar(custom);
       let value = parsed2[vScale.axis];
@@ -46150,7 +45457,7 @@
       }
       const startValue = !isNullOrUndef(baseValue) && !floating ? baseValue : start2;
       let base = vScale.getPixelForValue(startValue);
-      if (this.chart.getDataVisibility(index3)) {
+      if (this.chart.getDataVisibility(index2)) {
         head = vScale.getPixelForValue(start2 + length);
       } else {
         head = base;
@@ -46183,7 +45490,7 @@
         center: head + size / 2
       };
     }
-    _calculateBarIndexPixels(index3, ruler) {
+    _calculateBarIndexPixels(index2, ruler) {
       const scale = ruler.scale;
       const options = this.options;
       const skipNull = options.skipNull;
@@ -46191,15 +45498,15 @@
       let center, size;
       const axisCount = this._getAxisCount();
       if (ruler.grouped) {
-        const stackCount = skipNull ? this._getStackCount(index3) : ruler.stackCount;
-        const range = options.barThickness === "flex" ? computeFlexCategoryTraits(index3, ruler, options, stackCount * axisCount) : computeFitCategoryTraits(index3, ruler, options, stackCount * axisCount);
+        const stackCount = skipNull ? this._getStackCount(index2) : ruler.stackCount;
+        const range = options.barThickness === "flex" ? computeFlexCategoryTraits(index2, ruler, options, stackCount * axisCount) : computeFitCategoryTraits(index2, ruler, options, stackCount * axisCount);
         const axisID = this.chart.options.indexAxis === "x" ? this.getDataset().xAxisID : this.getDataset().yAxisID;
         const axisNumber = this._getAxis().indexOf(valueOrDefault(axisID, this.getFirstScaleIdForIndexAxis()));
-        const stackIndex = this._getStackIndex(this.index, this._cachedMeta.stack, skipNull ? index3 : void 0) + axisNumber;
+        const stackIndex = this._getStackIndex(this.index, this._cachedMeta.stack, skipNull ? index2 : void 0) + axisNumber;
         center = range.start + range.chunk * stackIndex + range.chunk / 2;
         size = Math.min(maxBarThickness, range.chunk * range.ratio);
       } else {
-        center = scale.getPixelForValue(this.getParsed(index3)[scale.axis], index3);
+        center = scale.getPixelForValue(this.getParsed(index2)[scale.axis], index2);
         size = Math.min(maxBarThickness, ruler.min * ruler.ratio);
       }
       return {
@@ -46284,16 +45591,16 @@
       }
       return max2 > 0 && max2;
     }
-    getLabelAndValue(index3) {
+    getLabelAndValue(index2) {
       const meta = this._cachedMeta;
       const labels = this.chart.data.labels || [];
       const { xScale, yScale } = meta;
-      const parsed2 = this.getParsed(index3);
+      const parsed2 = this.getParsed(index2);
       const x = xScale.getLabelForValue(parsed2.x);
       const y = yScale.getLabelForValue(parsed2.y);
       const r3 = parsed2._custom;
       return {
-        label: labels[index3] || "",
+        label: labels[index2] || "",
         value: "(" + x + ", " + y + (r3 ? ", " + r3 : "") + ")"
       };
     }
@@ -46323,9 +45630,9 @@
         this.updateElement(point, i2, properties, mode);
       }
     }
-    resolveDataElementOptions(index3, mode) {
-      const parsed2 = this.getParsed(index3);
-      let values = super.resolveDataElementOptions(index3, mode);
+    resolveDataElementOptions(index2, mode) {
+      const parsed2 = this.getParsed(index2);
+      let values = super.resolveDataElementOptions(index2, mode);
       if (values.$shared) {
         values = Object.assign({}, values, {
           $shared: false
@@ -46579,13 +45886,13 @@
       }
       return 0;
     }
-    getLabelAndValue(index3) {
+    getLabelAndValue(index2) {
       const meta = this._cachedMeta;
       const chart = this.chart;
       const labels = chart.data.labels || [];
-      const value = formatNumber(meta._parsed[index3], chart.options.locale);
+      const value = formatNumber(meta._parsed[index2], chart.options.locale);
       return {
-        label: labels[index3] || "",
+        label: labels[index2] || "",
         value
       };
     }
@@ -46822,13 +46129,13 @@
       this.innerRadius = void 0;
       this.outerRadius = void 0;
     }
-    getLabelAndValue(index3) {
+    getLabelAndValue(index2) {
       const meta = this._cachedMeta;
       const chart = this.chart;
       const labels = chart.data.labels || [];
-      const value = formatNumber(meta._parsed[index3].r, chart.options.locale);
+      const value = formatNumber(meta._parsed[index2].r, chart.options.locale);
       return {
-        label: labels[index3] || "",
+        label: labels[index2] || "",
         value
       };
     }
@@ -46846,9 +46153,9 @@
         min: Number.POSITIVE_INFINITY,
         max: Number.NEGATIVE_INFINITY
       };
-      meta.data.forEach((element, index3) => {
-        const parsed2 = this.getParsed(index3).r;
-        if (!isNaN(parsed2) && this.chart.getDataVisibility(index3)) {
+      meta.data.forEach((element, index2) => {
+        const parsed2 = this.getParsed(index2).r;
+        if (!isNaN(parsed2) && this.chart.getDataVisibility(index2)) {
           if (parsed2 < range.min) {
             range.min = parsed2;
           }
@@ -46914,15 +46221,15 @@
     countVisibleElements() {
       const meta = this._cachedMeta;
       let count = 0;
-      meta.data.forEach((element, index3) => {
-        if (!isNaN(this.getParsed(index3).r) && this.chart.getDataVisibility(index3)) {
+      meta.data.forEach((element, index2) => {
+        if (!isNaN(this.getParsed(index2).r) && this.chart.getDataVisibility(index2)) {
           count++;
         }
       });
       return count;
     }
-    _computeAngle(index3, mode, defaultAngle) {
-      return this.chart.getDataVisibility(index3) ? toRadians(this.resolveDataElementOptions(index3, mode).angle || defaultAngle) : 0;
+    _computeAngle(index2, mode, defaultAngle) {
+      return this.chart.getDataVisibility(index2) ? toRadians(this.resolveDataElementOptions(index2, mode).angle || defaultAngle) : 0;
     }
   };
   var PieController = class extends DoughnutController {
@@ -46955,11 +46262,11 @@
         }
       }
     };
-    getLabelAndValue(index3) {
+    getLabelAndValue(index2) {
       const vScale = this._cachedMeta.vScale;
-      const parsed2 = this.getParsed(index3);
+      const parsed2 = this.getParsed(index2);
       return {
-        label: vScale.getLabels()[index3],
+        label: vScale.getLabels()[index2],
         value: "" + vScale.getLabelForValue(parsed2[vScale.axis])
       };
     }
@@ -47027,15 +46334,15 @@
         }
       }
     };
-    getLabelAndValue(index3) {
+    getLabelAndValue(index2) {
       const meta = this._cachedMeta;
       const labels = this.chart.data.labels || [];
       const { xScale, yScale } = meta;
-      const parsed2 = this.getParsed(index3);
+      const parsed2 = this.getParsed(index2);
       const x = xScale.getLabelForValue(parsed2.x);
       const y = yScale.getLabelForValue(parsed2.y);
       return {
-        label: labels[index3] || "",
+        label: labels[index2] || "",
         value: "(" + x + ", " + y + ")"
       };
     }
@@ -47232,12 +46539,12 @@
     const metasets = chart.getSortedVisibleDatasetMetas();
     const value = position[axis];
     for (let i2 = 0, ilen = metasets.length; i2 < ilen; ++i2) {
-      const { index: index3, data: data2 } = metasets[i2];
+      const { index: index2, data: data2 } = metasets[i2];
       const { lo, hi } = binarySearch(metasets[i2], axis, value, intersect);
       for (let j = lo; j <= hi; ++j) {
         const element = data2[j];
         if (!element.skip) {
-          handler(element, index3, j);
+          handler(element, index2, j);
         }
       }
     }
@@ -47256,7 +46563,7 @@
     if (!includeInvisible && !chart.isPointInArea(position)) {
       return items;
     }
-    const evaluationFunc = function(element, datasetIndex, index3) {
+    const evaluationFunc = function(element, datasetIndex, index2) {
       if (!includeInvisible && !_isPointInArea(element, chart.chartArea, 0)) {
         return;
       }
@@ -47264,7 +46571,7 @@
         items.push({
           element,
           datasetIndex,
-          index: index3
+          index: index2
         });
       }
     };
@@ -47273,7 +46580,7 @@
   }
   function getNearestRadialItems(chart, position, axis, useFinalPosition) {
     let items = [];
-    function evaluationFunc(element, datasetIndex, index3) {
+    function evaluationFunc(element, datasetIndex, index2) {
       const { startAngle, endAngle } = element.getProps([
         "startAngle",
         "endAngle"
@@ -47286,7 +46593,7 @@
         items.push({
           element,
           datasetIndex,
-          index: index3
+          index: index2
         });
       }
     }
@@ -47297,7 +46604,7 @@
     let items = [];
     const distanceMetric = getDistanceMetricForAxis(axis);
     let minDistance = Number.POSITIVE_INFINITY;
-    function evaluationFunc(element, datasetIndex, index3) {
+    function evaluationFunc(element, datasetIndex, index2) {
       const inRange3 = element.inRange(position.x, position.y, useFinalPosition);
       if (intersect && !inRange3) {
         return;
@@ -47313,7 +46620,7 @@
           {
             element,
             datasetIndex,
-            index: index3
+            index: index2
           }
         ];
         minDistance = distance;
@@ -47321,7 +46628,7 @@
         items.push({
           element,
           datasetIndex,
-          index: index3
+          index: index2
         });
       }
     }
@@ -47338,12 +46645,12 @@
     const items = [];
     const rangeMethod = axis === "x" ? "inXRange" : "inYRange";
     let intersectsItem = false;
-    evaluateInteractionItems(chart, axis, position, (element, datasetIndex, index3) => {
+    evaluateInteractionItems(chart, axis, position, (element, datasetIndex, index2) => {
       if (element[rangeMethod] && element[rangeMethod](position[axis], useFinalPosition)) {
         items.push({
           element,
           datasetIndex,
-          index: index3
+          index: index2
         });
         intersectsItem = intersectsItem || element.inRange(position.x, position.y, useFinalPosition);
       }
@@ -47366,13 +46673,13 @@
           return [];
         }
         chart.getSortedVisibleDatasetMetas().forEach((meta) => {
-          const index3 = items[0].index;
-          const element = meta.data[index3];
+          const index2 = items[0].index;
+          const element = meta.data[index2];
           if (element && !element.skip) {
             elements2.push({
               element,
               datasetIndex: meta.index,
-              index: index3
+              index: index2
             });
           }
         });
@@ -47675,9 +46982,9 @@
       chart.boxes.push(item);
     },
     removeBox(chart, layoutItem) {
-      const index3 = chart.boxes ? chart.boxes.indexOf(layoutItem) : -1;
-      if (index3 !== -1) {
-        chart.boxes.splice(index3, 1);
+      const index2 = chart.boxes ? chart.boxes.indexOf(layoutItem) : -1;
+      if (index2 !== -1) {
+        chart.boxes.splice(index2, 1);
       }
     },
     configure(chart, item, options) {
@@ -48201,9 +47508,9 @@
     }
     return result;
   }
-  function getPixelForGridLine(scale, index3, offsetGridLines) {
+  function getPixelForGridLine(scale, index2, offsetGridLines) {
     const length = scale.ticks.length;
-    const validIndex2 = Math.min(index3, length - 1);
+    const validIndex2 = Math.min(index2, length - 1);
     const start2 = scale._startPixel;
     const end2 = scale._endPixel;
     const epsilon = 1e-6;
@@ -48212,12 +47519,12 @@
     if (offsetGridLines) {
       if (length === 1) {
         offset3 = Math.max(lineValue - start2, end2 - lineValue);
-      } else if (index3 === 0) {
+      } else if (index2 === 0) {
         offset3 = (scale.getPixelForTick(1) - lineValue) / 2;
       } else {
         offset3 = (lineValue - scale.getPixelForTick(validIndex2 - 1)) / 2;
       }
-      lineValue += validIndex2 < index3 ? offset3 : -offset3;
+      lineValue += validIndex2 < index2 ? offset3 : -offset3;
       if (lineValue < start2 - epsilon || lineValue > end2 + epsilon) {
         return;
       }
@@ -48255,10 +47562,10 @@
       type: "scale"
     });
   }
-  function createTickContext(parent, index3, tick) {
+  function createTickContext(parent, index2, tick) {
     return createContext(parent, {
       tick,
-      index: index3,
+      index: index2,
       type: "tick"
     });
   }
@@ -48367,7 +47674,7 @@
       this._suggestedMin = this.parse(options.suggestedMin);
       this._suggestedMax = this.parse(options.suggestedMax);
     }
-    parse(raw, index3) {
+    parse(raw, index2) {
       return raw;
     }
     getUserBounds() {
@@ -48803,17 +48110,17 @@
     getLabelForValue(value) {
       return value;
     }
-    getPixelForValue(value, index3) {
+    getPixelForValue(value, index2) {
       return NaN;
     }
     getValueForPixel(pixel2) {
     }
-    getPixelForTick(index3) {
+    getPixelForTick(index2) {
       const ticks = this.ticks;
-      if (index3 < 0 || index3 > ticks.length - 1) {
+      if (index2 < 0 || index2 > ticks.length - 1) {
         return null;
       }
-      return this.getPixelForValue(ticks[index3].value);
+      return this.getPixelForValue(ticks[index2].value);
     }
     getPixelForDecimal(decimal) {
       if (this._reversePixels) {
@@ -48833,11 +48140,11 @@
       const { min: min2, max: max2 } = this;
       return min2 < 0 && max2 < 0 ? max2 : min2 > 0 && max2 > 0 ? min2 : 0;
     }
-    getContext(index3) {
+    getContext(index2) {
       const ticks = this.ticks || [];
-      if (index3 >= 0 && index3 < ticks.length) {
-        const tick = ticks[index3];
-        return tick.$context || (tick.$context = createTickContext(this.getContext(), index3, tick));
+      if (index2 >= 0 && index2 < ticks.length) {
+        const tick = ticks[index2];
+        return tick.$context || (tick.$context = createTickContext(this.getContext(), index2, tick));
       }
       return this.$context || (this.$context = createScaleContext(this.chart.getContext(), this));
     }
@@ -49256,9 +48563,9 @@
         return 0;
       }
       const ticks = this.ticks;
-      const index3 = ticks.findIndex((t2) => t2.value === value);
-      if (index3 >= 0) {
-        const opts = grid.setContext(this.getContext(index3));
+      const index2 = ticks.findIndex((t2) => t2.value === value);
+      if (index2 >= 0) {
+        const opts = grid.setContext(this.getContext(index2));
         return opts.lineWidth;
       }
       return 0;
@@ -49453,8 +48760,8 @@
       }
       return result;
     }
-    _resolveTickFontOptions(index3) {
-      const opts = this.options.ticks.setContext(this.getContext(index3));
+    _resolveTickFontOptions(index2) {
+      const opts = this.options.ticks.setContext(this.getContext(index2));
       return toFont(opts.font);
     }
     _maxDigits() {
@@ -50387,9 +49694,9 @@
       if (metasets.length > datasets.length) {
         delete this._stacks;
       }
-      metasets.forEach((meta, index3) => {
+      metasets.forEach((meta, index2) => {
         if (datasets.filter((x) => x === meta._dataset).length === 0) {
-          this._destroyDatasetMeta(index3);
+          this._destroyDatasetMeta(index2);
         }
       });
     }
@@ -50545,8 +49852,8 @@
         }
         this._layers.push(...box._layers());
       }, this);
-      this._layers.forEach((item, index3) => {
-        item._idx = index3;
+      this._layers.forEach((item, index2) => {
+        item._idx = index2;
       });
       this.notifyPlugins("afterLayout");
     }
@@ -50569,11 +49876,11 @@
         mode
       });
     }
-    _updateDataset(index3, mode) {
-      const meta = this.getDatasetMeta(index3);
+    _updateDataset(index2, mode) {
+      const meta = this.getDatasetMeta(index2);
       const args = {
         meta,
-        index: index3,
+        index: index2,
         mode,
         cancelable: true
       };
@@ -50729,11 +50036,11 @@
       const meta = this.getDatasetMeta(datasetIndex);
       meta.hidden = !visible;
     }
-    toggleDataVisibility(index3) {
-      this._hiddenIndices[index3] = !this._hiddenIndices[index3];
+    toggleDataVisibility(index2) {
+      this._hiddenIndices[index2] = !this._hiddenIndices[index2];
     }
-    getDataVisibility(index3) {
-      return !this._hiddenIndices[index3];
+    getDataVisibility(index2) {
+      return !this._hiddenIndices[index2];
     }
     _updateVisibility(datasetIndex, dataIndex, visible) {
       const mode = visible ? "show" : "hide";
@@ -50883,15 +50190,15 @@
     }
     setActiveElements(activeElements) {
       const lastActive = this._active || [];
-      const active = activeElements.map(({ datasetIndex, index: index3 }) => {
+      const active = activeElements.map(({ datasetIndex, index: index2 }) => {
         const meta = this.getDatasetMeta(datasetIndex);
         if (!meta) {
           throw new Error("No dataset found at index " + datasetIndex);
         }
         return {
           datasetIndex,
-          element: meta.data[index3],
-          index: index3
+          element: meta.data[index2],
+          index: index2
         };
       });
       const changed = !_elementsEqual(active, lastActive);
@@ -51344,7 +50651,7 @@
     let avgX = 0;
     let countX = 0;
     let i2, point, prevX, minY, maxY, lastY;
-    const pointIndex = (index3) => (start2 + (reverse ? ilen - index3 : index3)) % count;
+    const pointIndex = (index2) => (start2 + (reverse ? ilen - index2 : index2)) % count;
     const drawX = () => {
       if (minY !== maxY) {
         ctx.lineTo(avgX, maxY);
@@ -51738,7 +51045,7 @@
       }
     };
   }
-  function inRange2(bar, x, y, useFinalPosition) {
+  function inRange(bar, x, y, useFinalPosition) {
     const skipX = x === null;
     const skipY = y === null;
     const skipBoth = skipX && skipY;
@@ -51809,13 +51116,13 @@
       ctx.restore();
     }
     inRange(mouseX, mouseY, useFinalPosition) {
-      return inRange2(this, mouseX, mouseY, useFinalPosition);
+      return inRange(this, mouseX, mouseY, useFinalPosition);
     }
     inXRange(mouseX, useFinalPosition) {
-      return inRange2(this, mouseX, null, useFinalPosition);
+      return inRange(this, mouseX, null, useFinalPosition);
     }
     inYRange(mouseY, useFinalPosition) {
-      return inRange2(this, null, mouseY, useFinalPosition);
+      return inRange(this, null, mouseY, useFinalPosition);
     }
     getCenterPoint(useFinalPosition) {
       const { x, y, base, horizontal } = this.getProps([
@@ -52241,11 +51548,11 @@
   function _shouldApplyFill(source) {
     return source && source.fill !== false;
   }
-  function _resolveTarget(sources, index3, propagate) {
-    const source = sources[index3];
+  function _resolveTarget(sources, index2, propagate) {
+    const source = sources[index2];
     let fill2 = source.fill;
     const visited = [
-      index3
+      index2
     ];
     let target;
     if (!propagate) {
@@ -52267,14 +51574,14 @@
     }
     return false;
   }
-  function _decodeFill(line, index3, count) {
+  function _decodeFill(line, index2, count) {
     const fill2 = parseFillOption(line);
     if (isObject(fill2)) {
       return isNaN(fill2.value) ? false : fill2;
     }
     let target = parseFloat(fill2);
     if (isNumberFinite(target) && Math.floor(target) === target) {
-      return decodeTargetIndex(fill2[0], index3, target, count);
+      return decodeTargetIndex(fill2[0], index2, target, count);
     }
     return [
       "origin",
@@ -52284,11 +51591,11 @@
       "shape"
     ].indexOf(fill2) >= 0 && fill2;
   }
-  function decodeTargetIndex(firstCh, index3, target, count) {
+  function decodeTargetIndex(firstCh, index2, target, count) {
     if (firstCh === "-" || firstCh === "+") {
-      target = index3 + target;
+      target = index2 + target;
     }
-    if (target === index3 || target < 0 || target >= count) {
+    if (target === index2 || target < 0 || target >= count) {
       return false;
     }
     return target;
@@ -52335,11 +51642,11 @@
     return fill2;
   }
   function _buildStackLine(source) {
-    const { scale, index: index3, line } = source;
+    const { scale, index: index2, line } = source;
     const points = [];
     const segments = line.segments;
     const sourcePoints = line.points;
-    const linesBelow = getLinesBelow(scale, index3);
+    const linesBelow = getLinesBelow(scale, index2);
     linesBelow.push(_createBoundaryLine({
       x: null,
       y: scale.bottom
@@ -52355,12 +51662,12 @@
       options: {}
     });
   }
-  function getLinesBelow(scale, index3) {
+  function getLinesBelow(scale, index2) {
     const below = [];
     const metas = scale.getMatchingVisibleMetas("line");
     for (let i2 = 0; i2 < metas.length; i2++) {
       const meta = metas[i2];
-      if (meta.index === index3) {
+      if (meta.index === index2) {
         break;
       }
       if (!meta.hidden) {
@@ -52456,9 +51763,9 @@
     }
     return _createBoundaryLine(boundary, line);
   }
-  function getLineByIndex(chart, index3) {
-    const meta = chart.getDatasetMeta(index3);
-    const visible = meta && chart.isDatasetVisible(index3);
+  function getLineByIndex(chart, index2) {
+    const meta = chart.getDatasetMeta(index2);
+    const visible = meta && chart.isDatasetVisible(index2);
     return visible ? meta.dataset : null;
   }
   function computeBoundary(source) {
@@ -52502,12 +51809,12 @@
   }
   function _drawfill(ctx, source, area) {
     const target = _getTarget(source);
-    const { chart, index: index3, line, scale, axis } = source;
+    const { chart, index: index2, line, scale, axis } = source;
     const lineOpts = line.options;
     const fillOption = lineOpts.fill;
     const color2 = lineOpts.backgroundColor;
     const { above = color2, below = color2 } = fillOption || {};
-    const meta = chart.getDatasetMeta(index3);
+    const meta = chart.getDatasetMeta(index2);
     const clip = getDatasetClipArea(chart, meta);
     if (target && line.points.length) {
       clipArea(ctx, area);
@@ -52692,7 +51999,7 @@
       ctx.lineTo(interpolatedPoint.x, interpolatedPoint.y);
     }
   }
-  var index2 = {
+  var index = {
     id: "filler",
     afterDatasetsUpdate(chart, _args, options) {
       const count = (chart.data.datasets || []).length;
@@ -53253,13 +52560,13 @@
       reverse: false,
       weight: 1e3,
       onClick(e4, legendItem, legend) {
-        const index3 = legendItem.datasetIndex;
+        const index2 = legendItem.datasetIndex;
         const ci = legend.chart;
-        if (ci.isDatasetVisible(index3)) {
-          ci.hide(index3);
+        if (ci.isDatasetVisible(index2)) {
+          ci.hide(index2);
           legendItem.hidden = true;
         } else {
-          ci.show(index3);
+          ci.show(index2);
           legendItem.hidden = false;
         }
       },
@@ -53568,17 +52875,17 @@
     return str;
   }
   function createTooltipItem(chart, item) {
-    const { element, datasetIndex, index: index3 } = item;
+    const { element, datasetIndex, index: index2 } = item;
     const controller = chart.getDatasetMeta(datasetIndex).controller;
-    const { label, value } = controller.getLabelAndValue(index3);
+    const { label, value } = controller.getLabelAndValue(index2);
     return {
       chart,
       label,
-      parsed: controller.getParsed(index3),
-      raw: chart.data.datasets[datasetIndex].data[index3],
+      parsed: controller.getParsed(index2),
+      raw: chart.data.datasets[datasetIndex].data[index2],
       formattedValue: value,
       dataset: controller.getDataset(),
-      dataIndex: index3,
+      dataIndex: index2,
       datasetIndex,
       element
     };
@@ -53917,7 +53224,7 @@
         tooltipItems.push(createTooltipItem(this.chart, active[i2]));
       }
       if (options.filter) {
-        tooltipItems = tooltipItems.filter((element, index3, array) => options.filter(element, index3, array, data2));
+        tooltipItems = tooltipItems.filter((element, index2, array) => options.filter(element, index2, array, data2));
       }
       if (options.itemSort) {
         tooltipItems = tooltipItems.sort((a, b) => options.itemSort(a, b, data2));
@@ -54285,15 +53592,15 @@
     }
     setActiveElements(activeElements, eventPosition) {
       const lastActive = this._active;
-      const active = activeElements.map(({ datasetIndex, index: index3 }) => {
+      const active = activeElements.map(({ datasetIndex, index: index2 }) => {
         const meta = this.chart.getDatasetMeta(datasetIndex);
         if (!meta) {
           throw new Error("Cannot find a dataset at index " + datasetIndex);
         }
         return {
           datasetIndex,
-          element: meta.data[index3],
-          index: index3
+          element: meta.data[index2],
+          index: index2
         };
       });
       const changed = !_elementsEqual(lastActive, active);
@@ -54477,33 +53784,33 @@
     __proto__: null,
     Colors: plugin_colors,
     Decimation: plugin_decimation,
-    Filler: index2,
+    Filler: index,
     Legend: plugin_legend,
     SubTitle: plugin_subtitle,
     Title: plugin_title,
     Tooltip: plugin_tooltip
   });
-  var addIfString = (labels, raw, index3, addedLabels) => {
+  var addIfString = (labels, raw, index2, addedLabels) => {
     if (typeof raw === "string") {
-      index3 = labels.push(raw) - 1;
+      index2 = labels.push(raw) - 1;
       addedLabels.unshift({
-        index: index3,
+        index: index2,
         label: raw
       });
     } else if (isNaN(raw)) {
-      index3 = null;
+      index2 = null;
     }
-    return index3;
+    return index2;
   };
-  function findOrAddLabel(labels, raw, index3, addedLabels) {
+  function findOrAddLabel(labels, raw, index2, addedLabels) {
     const first = labels.indexOf(raw);
     if (first === -1) {
-      return addIfString(labels, raw, index3, addedLabels);
+      return addIfString(labels, raw, index2, addedLabels);
     }
     const last = labels.lastIndexOf(raw);
-    return first !== last ? index3 : first;
+    return first !== last ? index2 : first;
   }
-  var validIndex = (index3, max2) => index3 === null ? null : _limitValue(Math.round(index3), 0, max2);
+  var validIndex = (index2, max2) => index2 === null ? null : _limitValue(Math.round(index2), 0, max2);
   function _getLabelForValue(value) {
     const labels = this.getLabels();
     if (value >= 0 && value < labels.length) {
@@ -54528,22 +53835,22 @@
       const added = this._addedLabels;
       if (added.length) {
         const labels = this.getLabels();
-        for (const { index: index3, label } of added) {
-          if (labels[index3] === label) {
-            labels.splice(index3, 1);
+        for (const { index: index2, label } of added) {
+          if (labels[index2] === label) {
+            labels.splice(index2, 1);
           }
         }
         this._addedLabels = [];
       }
       super.init(scaleOptions);
     }
-    parse(raw, index3) {
+    parse(raw, index2) {
       if (isNullOrUndef(raw)) {
         return null;
       }
       const labels = this.getLabels();
-      index3 = isFinite(index3) && labels[index3] === raw ? index3 : findOrAddLabel(labels, raw, valueOrDefault(index3, raw), this._addedLabels);
-      return validIndex(index3, labels.length - 1);
+      index2 = isFinite(index2) && labels[index2] === raw ? index2 : findOrAddLabel(labels, raw, valueOrDefault(index2, raw), this._addedLabels);
+      return validIndex(index2, labels.length - 1);
     }
     determineDataLimits() {
       const { minDefined, maxDefined } = this.getUserBounds();
@@ -54590,12 +53897,12 @@
       }
       return value === null ? NaN : this.getPixelForDecimal((value - this._startValue) / this._valueRange);
     }
-    getPixelForTick(index3) {
+    getPixelForTick(index2) {
       const ticks = this.ticks;
-      if (index3 < 0 || index3 > ticks.length - 1) {
+      if (index2 < 0 || index2 > ticks.length - 1) {
         return null;
       }
-      return this.getPixelForValue(ticks[index3].value);
+      return this.getPixelForValue(ticks[index2].value);
     }
     getValueForPixel(pixel2) {
       return Math.round(this._startValue + this.getDecimalForPixel(pixel2) * this._valueRange);
@@ -54719,7 +54026,7 @@
       this._endValue = void 0;
       this._valueRange = 0;
     }
-    parse(raw, index3) {
+    parse(raw, index2) {
       if (isNullOrUndef(raw)) {
         return null;
       }
@@ -54932,10 +54239,10 @@
       this._startValue = void 0;
       this._valueRange = 0;
     }
-    parse(raw, index3) {
+    parse(raw, index2) {
       const value = LinearScaleBase.prototype.parse.apply(this, [
         raw,
-        index3
+        index2
       ]);
       if (value === 0) {
         this._zero = true;
@@ -55105,10 +54412,10 @@
       limits.b = Math.max(limits.b, orig.b + y);
     }
   }
-  function createPointLabelItem(scale, index3, itemOpts) {
+  function createPointLabelItem(scale, index2, itemOpts) {
     const outerDistance = scale.drawingArea;
     const { extra, additionalAngle, padding, size } = itemOpts;
-    const pointLabelPosition = scale.getPointPosition(index3, outerDistance + extra + padding, additionalAngle);
+    const pointLabelPosition = scale.getPointPosition(index2, outerDistance + extra + padding, additionalAngle);
     const angle = Math.round(toDegrees(_normalizeAngle(pointLabelPosition.angle + HALF_PI)));
     const y = yForAngle(pointLabelPosition.y, size.h, angle);
     const textAlign = getTextAlignForAngle(angle);
@@ -55267,10 +54574,10 @@
     ctx.stroke();
     ctx.restore();
   }
-  function createPointLabelContext(parent, index3, label) {
+  function createPointLabelContext(parent, index2, label) {
     return createContext(parent, {
       label,
-      index: index3,
+      index: index2,
       type: "pointLabel"
     });
   }
@@ -55345,10 +54652,10 @@
     }
     generateTickLabels(ticks) {
       LinearScaleBase.prototype.generateTickLabels.call(this, ticks);
-      this._pointLabels = this.getLabels().map((value, index3) => {
+      this._pointLabels = this.getLabels().map((value, index2) => {
         const label = callback(this.options.pointLabels.callback, [
           value,
-          index3
+          index2
         ], this);
         return label || label === 0 ? label : "";
       }).filter((v, i2) => this.chart.getDataVisibility(i2));
@@ -55366,10 +54673,10 @@
       this.yCenter += Math.floor((topMovement - bottomMovement) / 2);
       this.drawingArea -= Math.min(this.drawingArea / 2, Math.max(leftMovement, rightMovement, topMovement, bottomMovement));
     }
-    getIndexAngle(index3) {
+    getIndexAngle(index2) {
       const angleMultiplier = TAU / (this._pointLabels.length || 1);
       const startAngle = this.options.startAngle || 0;
-      return _normalizeAngle(index3 * angleMultiplier + toRadians(startAngle));
+      return _normalizeAngle(index2 * angleMultiplier + toRadians(startAngle));
     }
     getDistanceFromCenterForValue(value) {
       if (isNullOrUndef(value)) {
@@ -55388,29 +54695,29 @@
       const scaledDistance = distance / (this.drawingArea / (this.max - this.min));
       return this.options.reverse ? this.max - scaledDistance : this.min + scaledDistance;
     }
-    getPointLabelContext(index3) {
+    getPointLabelContext(index2) {
       const pointLabels = this._pointLabels || [];
-      if (index3 >= 0 && index3 < pointLabels.length) {
-        const pointLabel = pointLabels[index3];
-        return createPointLabelContext(this.getContext(), index3, pointLabel);
+      if (index2 >= 0 && index2 < pointLabels.length) {
+        const pointLabel = pointLabels[index2];
+        return createPointLabelContext(this.getContext(), index2, pointLabel);
       }
     }
-    getPointPosition(index3, distanceFromCenter, additionalAngle = 0) {
-      const angle = this.getIndexAngle(index3) - HALF_PI + additionalAngle;
+    getPointPosition(index2, distanceFromCenter, additionalAngle = 0) {
+      const angle = this.getIndexAngle(index2) - HALF_PI + additionalAngle;
       return {
         x: Math.cos(angle) * distanceFromCenter + this.xCenter,
         y: Math.sin(angle) * distanceFromCenter + this.yCenter,
         angle
       };
     }
-    getPointPositionForValue(index3, value) {
-      return this.getPointPosition(index3, this.getDistanceFromCenterForValue(value));
+    getPointPositionForValue(index2, value) {
+      return this.getPointPosition(index2, this.getDistanceFromCenterForValue(value));
     }
-    getBasePosition(index3) {
-      return this.getPointPositionForValue(index3 || 0, this.getBaseValue());
+    getBasePosition(index2) {
+      return this.getPointPositionForValue(index2 || 0, this.getBaseValue());
     }
-    getPointLabelPosition(index3) {
-      const { left: left2, top: top2, right: right2, bottom: bottom2 } = this._pointLabelItems[index3];
+    getPointLabelPosition(index2) {
+      const { left: left2, top: top2, right: right2, bottom: bottom2 } = this._pointLabelItems[index2];
       return {
         left: left2,
         top: top2,
@@ -55441,10 +54748,10 @@
         drawPointLabels(this, labelCount);
       }
       if (grid.display) {
-        this.ticks.forEach((tick, index3) => {
-          if (index3 !== 0 || index3 === 0 && this.min < 0) {
+        this.ticks.forEach((tick, index2) => {
+          if (index2 !== 0 || index2 === 0 && this.min < 0) {
             offset3 = this.getDistanceFromCenterForValue(tick.value);
-            const context = this.getContext(index3);
+            const context = this.getContext(index2);
             const optsAtIndex = grid.setContext(context);
             const optsAtIndexBorder = border.setContext(context);
             drawRadiusLine(this, optsAtIndex, offset3, labelCount, optsAtIndexBorder);
@@ -55489,13 +54796,13 @@
       ctx.rotate(startAngle);
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
-      this.ticks.forEach((tick, index3) => {
-        if (index3 === 0 && this.min >= 0 && !opts.reverse) {
+      this.ticks.forEach((tick, index2) => {
+        if (index2 === 0 && this.min >= 0 && !opts.reverse) {
           return;
         }
-        const optsAtIndex = tickOpts.setContext(this.getContext(index3));
+        const optsAtIndex = tickOpts.setContext(this.getContext(index2));
         const tickFont = toFont(optsAtIndex.font);
-        offset3 = this.getDistanceFromCenterForValue(this.ticks[index3].value);
+        offset3 = this.getDistanceFromCenterForValue(this.ticks[index2].value);
         if (optsAtIndex.showLabelBackdrop) {
           ctx.font = tickFont.string;
           width = ctx.measureText(tick.label).width;
@@ -55625,11 +54932,11 @@
     const adapter = scale._adapter;
     const first = +adapter.startOf(ticks[0].value, majorUnit);
     const last = ticks[ticks.length - 1].value;
-    let major, index3;
+    let major, index2;
     for (major = first; major <= last; major = +adapter.add(major, 1, majorUnit)) {
-      index3 = map3[major];
-      if (index3 >= 0) {
-        ticks[index3].major = true;
+      index2 = map3[major];
+      if (index2 >= 0) {
+        ticks[index2].major = true;
       }
     }
     return ticks;
@@ -55696,7 +55003,7 @@
       super.init(scaleOpts);
       this._normalized = opts.normalized;
     }
-    parse(raw, index3) {
+    parse(raw, index2) {
       if (raw === void 0) {
         return null;
       }
@@ -55843,13 +55150,13 @@
       const fmt = format || formats[unit];
       return this._adapter.format(value, fmt);
     }
-    _tickFormatFunction(time2, index3, ticks, format) {
+    _tickFormatFunction(time2, index2, ticks, format) {
       const options = this.options;
       const formatter = options.ticks.callback;
       if (formatter) {
         return callback(formatter, [
           time2,
-          index3,
+          index2,
           ticks
         ], this);
       }
@@ -55858,7 +55165,7 @@
       const majorUnit = this._majorUnit;
       const minorFormat = unit && formats[unit];
       const majorFormat = majorUnit && formats[majorUnit];
-      const tick = ticks[index3];
+      const tick = ticks[index2];
       const major = majorUnit && majorFormat && tick && tick.major;
       return this._adapter.format(time2, format || (major ? majorFormat : minorFormat));
     }
@@ -56251,9 +55558,9 @@
     }
     if (page.state.scrobbles > 0 && auth.name) bleh_profile_chart(graph_container);
   }
-  function create_graph_block(index3) {
+  function create_graph_block(index2) {
     return html.node`
-        <a class="graph-block empty" style="--delay: ${index3 * 0.04 + "s"}" />
+        <a class="graph-block empty" style="--delay: ${index2 * 0.04 + "s"}" />
     `;
   }
   function graph_block_level(value, max2, avg) {
@@ -56776,14 +56083,14 @@
       let artists = 0;
       let loved = 0;
       let metadata = profile_header.querySelectorAll(".header-metadata-display");
-      metadata.forEach((item, index3) => {
-        if (index3 == 0) {
+      metadata.forEach((item, index2) => {
+        if (index2 == 0) {
           let para = item.querySelector("p");
           scrobbles = clean_number(para.textContent.trim());
           average = para.getAttribute("title");
-        } else if (index3 == 1) {
+        } else if (index2 == 1) {
           artists = clean_number(item.textContent.trim());
-        } else if (index3 == 2) {
+        } else if (index2 == 2) {
           loved = clean_number(item.textContent.trim());
         }
       });
@@ -57984,8 +57291,8 @@
       const tabs = page.structure.toolbar.querySelectorAll(
         ".secondary-nav-item-link"
       );
-      tabs.forEach((tab, index3) => {
-        if (index3 < 1) return;
+      tabs.forEach((tab, index2) => {
+        if (index2 < 1) return;
         tab.classList.add("has-tab-num");
         const num3 = tab.firstChild.textContent.trim().slice(-2);
         tab.appendChild(html.node`
@@ -57999,9 +57306,9 @@
     let value_header = html.node`
         <div class="glacier-library-metadata" />
     `;
-    values.forEach((value, index3) => {
+    values.forEach((value, index2) => {
       let text4 = tl2(trans.going);
-      if (index3 == 1) text4 = tl2(trans.interested);
+      if (index2 == 1) text4 = tl2(trans.interested);
       value_header.appendChild(html.node`
             <div class="glacier-library-metadata-item">
                 <div class="sub-text">${text4}</div>
@@ -58441,8 +57748,8 @@
           "--highest",
           Math.max(+width.value, +height.value).toString()
         );
-        page.state.collage.some((data2, index3) => {
-          if (index3 > total) return false;
+        page.state.collage.some((data2, index2) => {
+          if (index2 > total) return false;
           let template;
           if (type.value == "artists") template = sanitise(data2.name);
           else template = `${sanitise(data2.sister)}/${sanitise(data2.name)}`;
@@ -59341,7 +58648,7 @@
     async function plot_footer() {
       render(footer, html``);
       const nodes = await Promise.all(
-        data_points.map(async (point, index3) => {
+        data_points.map(async (point, index2) => {
           const cache2 = await load_profile_cache_externally(point.user);
           let user_name = html.node`
                     <a href="${root}user/${point.user}" />
@@ -59363,7 +58670,7 @@
           }
           const elem = html.node`
                     <div class="plot-footer-item">
-                        <div class="plot-footer-colour" style="background-color: var(--graph-colour-${index3 % graph_colour_length})" />
+                        <div class="plot-footer-colour" style="background-color: var(--graph-colour-${index2 % graph_colour_length})" />
                         <div class="plot-footer-info">
                             <div class="plot-footer-header">
                                 <div class="plot-header-avatar avatar">
@@ -59399,7 +58706,7 @@
                     </div>
                 `;
           elem.addEventListener("mouseenter", () => {
-            highlight_data_set(index3);
+            highlight_data_set(index2);
           });
           elem.addEventListener("mouseleave", () => {
             highlight_data_set(null);
@@ -59559,12 +58866,12 @@
       };
       let seen_over_0 = false;
       const length = Array.from(entries2).length;
-      entries2.forEach((entry, index3) => {
+      entries2.forEach((entry, index2) => {
         const period = entry.querySelector(".js-period > a")?.getAttribute("href");
         const params = new URLSearchParams(period);
         const from3 = params.get("from");
         const scrobbles = Number(entry.querySelector(".js-scrobbles").textContent.trim());
-        if (scrobbles > 0 || index3 + 1 >= length / 2) seen_over_0 = true;
+        if (scrobbles > 0 || index2 + 1 >= length / 2) seen_over_0 = true;
         point.data.push({
           x: from3,
           y: scrobbles,
@@ -59659,19 +58966,19 @@
           unit: "hour"
         };
       }
-      data_points.forEach((point, index3) => {
+      data_points.forEach((point, index2) => {
         point.backgroundColor = (context) => {
           const chart2 = context.chart;
           const { ctx, chartArea } = chart2;
           console.info("chart", ctx, chartArea);
           if (!chartArea) return "transparent";
           const gradient = ctx.createLinearGradient(0, chartArea.top, 0, chartArea.bottom);
-          gradient.addColorStop(0, graph_colour_gradient[index3 % graph_colour_gradient.length]);
+          gradient.addColorStop(0, graph_colour_gradient[index2 % graph_colour_gradient.length]);
           gradient.addColorStop(1, "transparent");
           console.info("chart gradient", gradient);
           return gradient;
         };
-        point.borderColor = graph_colours[index3 % graph_colours.length];
+        point.borderColor = graph_colours[index2 % graph_colours.length];
       });
       body.classList.toggle("empty", data_points.length == 0);
       chart.update();
@@ -59713,9 +59020,9 @@
         update_plot_options();
       }
     }
-    function highlight_data_set(index3, update = true) {
+    function highlight_data_set(index2, update = true) {
       data_points.forEach((point, i2) => {
-        if (i2 == index3) {
+        if (i2 == index2) {
           point.borderWidth = 4;
         } else {
           point.borderWidth = 2;
@@ -60573,11 +59880,11 @@
           if (item.plays.you > max2) max2 = item.plays.you;
           if (item.plays.other > max2) max2 = item.plays.other;
         });
-        page.state.compare.shared.forEach((data2, index3) => {
+        page.state.compare.shared.forEach((data2, index2) => {
           let template = `${sanitise(data2.sister)}/_/${sanitise(data2.name)}`;
           tbody.appendChild(html.node`
                     <tr class="chartlist-row chartlist-row--with-artist compare-item">
-                        <td class="chartlist-index">${index3 + 1}</td>
+                        <td class="chartlist-index">${index2 + 1}</td>
                         <td class="chartlist-image">
                             <a class="cover-art" href="${root}music/${redirect()}${template}">
                                 <img src="${data2.avatar}" alt="${data2.name}" loading="lazy">
@@ -61095,7 +60402,7 @@
           if (match3) matches.push(item);
         });
         render(rabbit_hole, html`
-                ${matches.length > 0 ? matches.map((item, index3) => () => {
+                ${matches.length > 0 ? matches.map((item, index2) => () => {
           let button2 = html.node`
                         <button class="dropdown-menu-clickable-item rabbit-hole-item" data-type=${item.type} onclick=${item.action} disabled=${item.disabled}>
                             <div class="info">
@@ -61106,7 +60413,7 @@
                     `;
           if (!item.disabled) {
             button2.addEventListener("mouseover", () => {
-              selected = index3;
+              selected = index2;
               rabbit_select(false, true);
             });
           }
@@ -61135,8 +60442,8 @@
         return;
       }
       let buttons = rabbit_hole.querySelectorAll("button");
-      buttons.forEach((button2, index3) => {
-        if (index3 == selected) {
+      buttons.forEach((button2, index2) => {
+        if (index2 == selected) {
           button2.setAttribute("aria-selected", "true");
           if (!with_mouse) {
             button2.scrollIntoView({
@@ -61148,7 +60455,7 @@
             input_box.querySelector("input").value = "";
             button2.click();
           }
-          rabbit_tip(matches[index3].body);
+          rabbit_tip(matches[index2].body);
         } else {
           button2.setAttribute("aria-selected", "false");
         }
@@ -61869,11 +61176,11 @@
     };
     return html.node`
         <div class="keybind">
-            ${list.map((key, index3) => {
+            ${list.map((key, index2) => {
       const label = darwin ? key : keymap[key] || key;
       return html.node`
                     <kbd>${label}</kbd>
-                    ${!darwin && index3 < list.length - 1 ? html.node`<kbd class="kbd-sep">+</kbd>` : ""}
+                    ${!darwin && index2 < list.length - 1 ? html.node`<kbd class="kbd-sep">+</kbd>` : ""}
                 `;
     })}
         </div>
@@ -63035,10 +62342,10 @@
     let date_panel = html.node`
         <section class="date-panel" data-glacier-graphs=${settings.glacier_library_graphs} />
     `;
-    date_items.forEach((item, index3) => {
+    date_items.forEach((item, index2) => {
       date_panel.appendChild(item);
       if (item.classList.contains("row")) item.classList = "date-selector";
-      if (index3 == 0) page.structure.glacier.selector = item;
+      if (index2 == 0) page.structure.glacier.selector = item;
     });
     if (date_items.length > 0) {
       if (!page.mobile) page.structure.side.appendChild(date_panel);
@@ -63196,9 +62503,9 @@
       const year = parseInt(year_from_date(cache2.created));
       const current_year = (/* @__PURE__ */ new Date()).getFullYear();
       const years = Array.from({ length: current_year - year + 1 }, (_, i2) => year + i2);
-      years.forEach((year2, index3) => {
+      years.forEach((year2, index2) => {
         const selected = page.requested.from == `${year2}-01-01` && (page.requested.to == `${year2}-12-31` || page.requested.rangetype == "year");
-        const target = index3 % 2;
+        const target = index2 % 2;
         picker_presets[target].appendChild(html.node`
                 <li class="date-range-picker-preset ${selected ? "date-range-picker-preset--selected" : ""}">
                     <a class="btn date-picker-preset-item" href="${window.location.href.replace(window.location.search, "")}?from=${year2}-01-01&rangetype=year" data-analytics-action="DateSelector" onclick=${() => {
@@ -63331,13 +62638,13 @@
       );
       glacier_meta.innerHTML = "";
     }
-    metadata.forEach((meta, index3) => {
+    metadata.forEach((meta, index2) => {
       let text4 = meta.querySelector(".metadata-title");
       let value = meta.querySelector(".metadata-display").textContent;
       if (text4) {
         text4 = text4.textContent;
         if (page.subpage == "library_overview") {
-          if (index3 == 1) text4 = tl2(trans.average);
+          if (index2 == 1) text4 = tl2(trans.average);
         } else if (page.subpage == "library_artists") {
           text4 = tl2(trans.artists);
         } else if (page.subpage == "library_albums") {
@@ -63738,8 +63045,8 @@
     scrobble_insights_panel.appendChild(scrobble_canvas_container);
     if (new_run) page.structure.side.appendChild(scrobble_insights_panel);
   }
-  function bleh_glacier_library_open_index(index3) {
-    const link = page.state.glacier.links[index3];
+  function bleh_glacier_library_open_index(index2) {
+    const link = page.state.glacier.links[index2];
     log(`opening link ${link}`, "glacier library");
     window.location.href = link;
   }
@@ -63991,8 +63298,8 @@
       if (state == "loved") state = 0;
       else state = 1;
       let love_form_items = love_form.querySelectorAll(":scope > div > div");
-      love_form_items.forEach((item, index3) => {
-        if (state != index3) item.classList.add("hide");
+      love_form_items.forEach((item, index2) => {
+        if (state != index2) item.classList.add("hide");
         cta.appendChild(item);
       });
     }
@@ -64230,9 +63537,9 @@
     page.structure.main.insertBefore(panel, page.structure.main.firstChild);
     bleh_music_chart();
   }
-  function create_graph_block2(index3) {
+  function create_graph_block2(index2) {
     return html.node`
-        <div class="graph-block empty" style="--delay: ${index3 * 0.04 + "s"}" />
+        <div class="graph-block empty" style="--delay: ${index2 * 0.04 + "s"}" />
     `;
   }
   function graph_block_level2(value, max2, avg) {
@@ -64278,14 +63585,14 @@
     let labels = [];
     let values = [];
     let has_seen_more_than_0 = false;
-    days.forEach((day, index3) => {
+    days.forEach((day, index2) => {
       if (!day) return;
       let label = DateTime.fromISO(day.querySelector("time").getAttribute("datetime"));
       let value = day.querySelector(".js-value");
-      console.log("day", index3, label, day, day.innerHTML);
+      console.log("day", index2, label, day, day.innerHTML);
       if (!value.getAttribute("data-value")) value = 0;
       else value = Number(value.getAttribute("data-value"));
-      if (value == 0 && index3 < 120 && !has_seen_more_than_0) return;
+      if (value == 0 && index2 < 120 && !has_seen_more_than_0) return;
       has_seen_more_than_0 = true;
       labels.push(label);
       values.push(value);
@@ -65326,10 +64633,10 @@
     checkup_page_structure(is_subpage, tag_header);
     if (ff("refreshed_music_nav")) {
       let split = window.location.href.split("/");
-      let index3 = 4;
+      let index2 = 4;
       if (split[3] != "tag")
-        index3 = 5;
-      let title = desanitise(split[index3]);
+        index2 = 5;
+      let title = desanitise(split[index2]);
       page.name = title;
       const same_page = is_same_page();
       const redesigned_tag_header = html.node`
@@ -66340,7 +65647,7 @@
         if (title == name) return 1;
         const longer = title.length > name.length ? title : name;
         const shorter = title.length > name.length ? name : title;
-        const same = [...shorter].filter((character, index3) => longer[index3] == character).length;
+        const same = [...shorter].filter((character, index2) => longer[index2] == character).length;
         return same / longer.length;
       };
       filtered.sort((a, b) => {
@@ -66513,10 +65820,10 @@
         });
         render(label_panel, html`
                 ©
-                ${labels.map((label, index3) => {
+                ${labels.map((label, index2) => {
           let label_elem;
           const elem = html.node`
-                        <span class="music-label" ref=${(el) => label_elem = el}>${label.label.name}</span>${index3 < labels.length - 1 ? ", " : ""}
+                        <span class="music-label" ref=${(el) => label_elem = el}>${label.label.name}</span>${index2 < labels.length - 1 ? ", " : ""}
                     `;
           if (label.label.disambiguation != "") {
             tippy_esm_default(label_elem, {
@@ -66625,12 +65932,12 @@
             title = track_entry;
           } else if (oracle_entry.guests_in_title && guests.length > 0) {
             title += ` ${oracle_entry.guest_brackets != "none" ? "(" : ""}${first_joinphrase} `;
-            guests.forEach((artist3, index3) => {
-              log(`guest ${index3}`, "oracle", "info", {
+            guests.forEach((artist3, index2) => {
+              log(`guest ${index2}`, "oracle", "info", {
                 artist: artist3
               });
               let joinphrase = artist3.joinphrase || "";
-              if (index3 == guests.length - 2 && oracle_entry.final_guest_separator)
+              if (index2 == guests.length - 2 && oracle_entry.final_guest_separator)
                 joinphrase = oracle_entry.final_guest_separator;
               title += `${fix_title(artist3.name)}${joinphrase}`;
             });
@@ -66792,7 +66099,7 @@
           }
           release.title = title;
         });
-        releases = releases.filter((release, index3, self3) => {
+        releases = releases.filter((release, index2, self3) => {
           const artist2 = release["artist-credit"]?.[0]?.name;
           const title = release.title;
           const duplicates = self3.filter(
@@ -66808,7 +66115,7 @@
             );
             if (digital) return release == digital;
           }
-          return index3 == self3.findIndex(
+          return index2 == self3.findIndex(
             (r3) => r3.title.toLowerCase() == title.toLowerCase() && r3["artist-credit"]?.[0]?.name.toLowerCase() == artist2.toLowerCase()
           );
         });
@@ -66950,7 +66257,7 @@
                     </div>
                     <div class="${page.subpage == "overview" ? "source-albums-container" : "resource-list-container"}">
                         <div class="${page.subpage == "overview" ? "source-albums" : "resource-list--release-list"}">
-                            ${releases.map((release, index3) => {
+                            ${releases.map((release, index2) => {
             log("release", "oracle", "log", {
               release
             });
@@ -67066,14 +66373,14 @@
                                         </div>
                                     `;
             }
-            if (!artwork && index3 < 2)
+            if (!artwork && index2 < 2)
               load_cover_art(
                 artwork_container,
                 title,
                 artist2,
                 stats,
                 type,
-                index3
+                index2
               );
             return elem;
           })}
@@ -67107,7 +66414,7 @@
         }
       }
     }
-    function load_cover_art(parent, title, artist2, stats = null, type = null, index3 = 1) {
+    function load_cover_art(parent, title, artist2, stats = null, type = null, index2 = 1) {
       const entry = load_hoshino_artwork(title, artist2);
       if (entry && entry.artwork && entry.listeners) {
         render(
@@ -67118,7 +66425,7 @@
                     </span>
                 `
         );
-        if (index3 == 0) {
+        if (index2 == 0) {
           create_avatar(
             page.state.avatar_side,
             entry.artwork,
@@ -67149,7 +66456,7 @@
             `
       );
       if (!ff("oracle_fetch_artwork")) return;
-      log(`loading cover art for index ${index3}`, "oracle");
+      log(`loading cover art for index ${index2}`, "oracle");
       fetch(`${root}music/${sanitise(artist2)}/${sanitise(title)}/`).then((res) => {
         if (!res.ok) {
           log("error fetching cover art", "oracle", "error", { res });
@@ -67430,10 +66737,10 @@
       if (labels.length) {
         render(label_panel, html`
                 ©
-                ${labels.map((label, index3) => {
+                ${labels.map((label, index2) => {
           let label_elem;
           const elem = html.node`
-                        <span class="music-label" ref=${(el) => label_elem = el}>${label.label.name}</span>${index3 < labels.length - 1 ? ", " : ""}
+                        <span class="music-label" ref=${(el) => label_elem = el}>${label.label.name}</span>${index2 < labels.length - 1 ? ", " : ""}
                     `;
           if (label.label.disambiguation != "") {
             tippy_esm_default(label_elem, {
@@ -67929,12 +67236,12 @@
   function bleh_users() {
     const users = page.structure.main?.querySelectorAll(".user-list-item:not(.user-list-item-mobile-ad)");
     const cache2 = JSON.parse(localStorage.getItem(keys2.profile_cache) || "{}");
-    users.forEach((user, index3) => {
-      patch_user_list_item(user, index3, cache2);
+    users.forEach((user, index2) => {
+      patch_user_list_item(user, index2, cache2);
     });
   }
-  function patch_user_list_item(user, index3, cache2 = {}) {
-    user.style.setProperty("--delay", index3 * 0.04 + "s");
+  function patch_user_list_item(user, index2, cache2 = {}) {
+    user.style.setProperty("--delay", index2 * 0.04 + "s");
     let avatar3 = user.querySelector(".user-list-avatar");
     let name = user.querySelector(".user-list-link");
     const badge = patch_avatar(avatar3, name.textContent.trim(), "follow");
@@ -68004,7 +67311,7 @@
     }
     const cache2 = JSON.parse(localStorage.getItem(keys2.profile_cache) || "{}");
     let shouts = page.structure.main.querySelectorAll(".shout:not([data-kate-processed])");
-    shouts.forEach((shout, index3) => {
+    shouts.forEach((shout, index2) => {
       try {
         let vote_button = function() {
           setTimeout(() => {
@@ -68017,7 +67324,7 @@
           }, 0);
         };
         shout.setAttribute("data-kate-processed", "true");
-        shout.style.setProperty("--delay", index3 * 0.04 + "s");
+        shout.style.setProperty("--delay", index2 * 0.04 + "s");
         shout.classList.add("icon-mask");
         const shout_name = shout.querySelector(".shout-user > a");
         if (!shout_name) return;
@@ -68817,17 +68124,17 @@
       let headers = metadata.querySelectorAll(
         ".catalogue-metadata-heading:not(.visible-xs)"
       );
-      headers.forEach((item, index3) => {
-        groups[index3] = {
+      headers.forEach((item, index2) => {
+        groups[index2] = {
           header: item
         };
       });
       let values = metadata.querySelectorAll(
         ".catalogue-metadata-description:not(.visible-xs)"
       );
-      values.forEach((item, index3) => {
-        if (!groups[index3]) return;
-        groups[index3].value = item;
+      values.forEach((item, index2) => {
+        if (!groups[index2]) return;
+        groups[index2].value = item;
       });
       render(
         metadata,
@@ -69424,18 +68731,18 @@
     let listeners = {};
     let scrobbles = {};
     let metascore = {};
-    metadata.forEach((item, index3) => {
+    metadata.forEach((item, index2) => {
       let text4 = item.querySelector(".header-metadata-tnew-title").textContent.trim();
       let value = item.querySelector(".header-metadata-tnew-display abbr");
-      if (index3 == 0) {
+      if (index2 == 0) {
         listeners.text = text4;
         listeners.value = clean_number(value.getAttribute("title"));
         listeners.abbr = value.textContent.trim();
-      } else if (index3 == 1) {
+      } else if (index2 == 1) {
         scrobbles.text = text4;
         scrobbles.value = clean_number(value.getAttribute("title"));
         scrobbles.abbr = value.textContent.trim();
-      } else if (index3 == 2) {
+      } else if (index2 == 2) {
         let link = item.querySelector("a");
         if (!link) return;
         metascore.text = text4;
@@ -69546,13 +68853,13 @@
     const user_list = html.node`
         <ul class="user-list top-listeners-list" data-list-view=${settings.list_view} />
     `;
-    legacy_top_listeners.forEach((listener, index3) => {
-      user_list.appendChild(convert_top_listener(listener, index3));
+    legacy_top_listeners.forEach((listener, index2) => {
+      user_list.appendChild(convert_top_listener(listener, index2));
     });
     legacy_top_listeners_container.replaceWith(user_list);
   }
-  function convert_top_listener(listener, index3, key = "top-listeners") {
-    let position = index3 + 1;
+  function convert_top_listener(listener, index2, key = "top-listeners") {
+    let position = index2 + 1;
     if (page.requested.page != null && page.requested.page != "1" && key == "top-listeners")
       position += (parseInt(page.requested.page) - 1) * 30;
     let avatar3 = listener.querySelector(`.${key}-item-image`);
@@ -69607,7 +68914,7 @@
         );
       }
     }
-    patch_user_list_item(new_listener, index3);
+    patch_user_list_item(new_listener, index2);
     return new_listener;
   }
   function redirect() {
@@ -69854,10 +69161,10 @@
     return set2;
   }
   function cleanArray(array) {
-    for (let index3 = 0; index3 < array.length; index3++) {
-      const isPropertyExist = objectHasOwnProperty(array, index3);
+    for (let index2 = 0; index2 < array.length; index2++) {
+      const isPropertyExist = objectHasOwnProperty(array, index2);
       if (!isPropertyExist) {
-        array[index3] = null;
+        array[index2] = null;
       }
     }
     return array;
@@ -70727,8 +70034,8 @@
     };
     DOMPurify.removeHook = function(entryPoint, hookFunction) {
       if (hookFunction !== void 0) {
-        const index3 = arrayLastIndexOf(hooks[entryPoint], hookFunction);
-        return index3 === -1 ? void 0 : arraySplice(hooks[entryPoint], index3, 1)[0];
+        const index2 = arrayLastIndexOf(hooks[entryPoint], hookFunction);
+        return index2 === -1 ? void 0 : arraySplice(hooks[entryPoint], index2, 1)[0];
       }
       return arrayPop(hooks[entryPoint]);
     };
@@ -71737,7 +71044,7 @@
     ];
     const actions = html.node`
         <div class="markdown-actions">
-            ${action_list.map((group, index3) => {
+            ${action_list.map((group, index2) => {
       const elem = html.node`
                     <div class="group">
                         ${group.map((item) => {
@@ -71808,7 +71115,7 @@
         return html.node``;
       return html.node`
                     ${elem}
-                    ${index3 < action_list.length - 1 ? html.node`
+                    ${index2 < action_list.length - 1 ? html.node`
                         <div class="group-sep" />
                     ` : ""}
                 `;
@@ -72850,8 +72157,8 @@
     list.classList = "notification-list";
     if (mini) list.classList.add("mini");
     let notifications = list.querySelectorAll(".inbox-notifications__item");
-    notifications.forEach((notification, index3) => {
-      if (mini && index3 > 4) notification.style.display = "none";
+    notifications.forEach((notification, index2) => {
+      if (mini && index2 > 4) notification.style.display = "none";
       const link = notification.querySelector(
         ".inbox-notifications__item-link"
       );
@@ -72905,14 +72212,14 @@
       } else if (href.startsWith(`${root}user/`)) {
         context.type = "profile";
         context.name = split[1];
-        strongs.forEach((strong, index4) => {
-          if (index4 == strongs.length - 1 && strongs.length > 1) {
+        strongs.forEach((strong, index3) => {
+          if (index3 == strongs.length - 1 && strongs.length > 1) {
             obtain_additional_info(
               strong.previousSibling.textContent,
               strong.nextSibling.textContent
             );
             return;
-          } else if (index4 == strongs.length - 1 && strongs.length == 1) {
+          } else if (index3 == strongs.length - 1 && strongs.length == 1) {
             obtain_additional_info(strong.nextSibling.textContent);
           }
           involved.push(strong.textContent);
@@ -72937,8 +72244,8 @@
             context.sister
           );
         }
-        strongs.forEach((strong, index4) => {
-          if (index4 == strongs.length - 1) {
+        strongs.forEach((strong, index3) => {
+          if (index3 == strongs.length - 1) {
             obtain_additional_info(
               strong.previousSibling.textContent,
               strong.nextSibling.textContent
@@ -72951,8 +72258,8 @@
       } else if (href.startsWith(`${root}tag/`)) {
         context.type = "tag";
         context.name = split[1];
-        strongs.forEach((strong, index4) => {
-          if (index4 == strongs.length - 1) {
+        strongs.forEach((strong, index3) => {
+          if (index3 == strongs.length - 1) {
             obtain_additional_info(
               strong.previousSibling.textContent,
               strong.nextSibling.textContent
@@ -73022,8 +72329,8 @@
     const sent_to = page.subpage == "sent_overview";
     let selected_messages = [];
     const messages = list.querySelectorAll(".inbox-message");
-    messages.forEach((message, index3) => {
-      if (mini && index3 > 4) message.style.display = "none";
+    messages.forEach((message, index2) => {
+      if (mini && index2 > 4) message.style.display = "none";
       const link = message.querySelector(".inbox-message-preview > a");
       const href = link.getAttribute("href");
       const active = message.classList.contains("inbox-message--unviewed");
@@ -77092,12 +76399,12 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
           text: m[0]
         }));
       } else {
-        const index3 = lower_title.indexOf(pattern.toLowerCase());
-        return index3 >= 0 ? [{
+        const index2 = lower_title.indexOf(pattern.toLowerCase());
+        return index2 >= 0 ? [{
           group,
           pattern,
           regex,
-          index: index3,
+          index: index2,
           text: pattern
         }] : [];
       }
@@ -78006,7 +77313,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         let featured_panel = html.node`
                 <section class="featured-items-panel">
                     ${Array.from(featured_items.querySelectorAll("li")).map(
-          (item, index3) => {
+          (item, index2) => {
             item.classList.remove(
               "artist-header-featured-items-item-wrap--video-thumbnail"
             );
@@ -78021,7 +77328,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
               ".artist-header-featured-items-item-name"
             ).textContent.trim();
             let name;
-            if (index3 > 0) {
+            if (index2 > 0) {
               page.state.top_track = original_name;
             }
             if (settings.format_guest_features) {
@@ -78089,9 +77396,9 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         listeners_section.classList = "user-list top-listeners-list small";
         listeners_section.setAttribute("data-list-view", "grid");
         render(listeners_section, html``);
-        listeners.forEach((listener, index3) => {
+        listeners.forEach((listener, index2) => {
           listeners_section.appendChild(
-            convert_top_listener(listener, index3, "listeners-section")
+            convert_top_listener(listener, index2, "listeners-section")
           );
         });
       }
@@ -78119,8 +77426,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         const tabs = page.structure.row.querySelectorAll(
           ":scope > .toolbar .secondary-nav-item-link"
         );
-        tabs.forEach((tab, index3) => {
-          if (index3 < 1) return;
+        tabs.forEach((tab, index2) => {
+          if (index2 < 1) return;
           tab.classList.add("has-tab-num");
           const num3 = tab.firstChild.textContent.trim().slice(-2);
           tab.appendChild(html.node`
@@ -78926,9 +78233,9 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       interactiveBorder: 10,
       trigger: "click"
     });
-    chart_rows.forEach((row, index3) => {
+    chart_rows.forEach((row, index2) => {
       let chart_row = html.node`
-            <div class="charts-new-row" data-index=${index3}>
+            <div class="charts-new-row" data-index=${index2}>
                 ${row.querySelector("h2")}
             </div>
         `;
@@ -78965,7 +78272,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
           image.getAttribute("src").replace("/avatar70s/", "/avatar300s/")
         );
         let link_block;
-        if (index3 == 1) {
+        if (index2 == 1) {
           name.textContent = correct_artist(name.textContent);
           list_item = html.node`
                     <li class="music-bookmarks-artists-item-wrap charts-list-item">
@@ -80142,14 +79449,14 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       if (more_link_wrap) {
         more_link_wrap.classList = "";
         let edit_buttons = more_link_wrap.querySelectorAll("a");
-        edit_buttons.forEach((edit_button, index3) => {
+        edit_buttons.forEach((edit_button, index2) => {
           edit_button.classList.add(
             "btn",
             "edit-lead-button",
             "icon",
             "primary"
           );
-          if (index3 == 0) edit_button.classList.add("edit-album");
+          if (index2 == 0) edit_button.classList.add("edit-album");
           else edit_button.classList.add("edit-track");
         });
       }
@@ -80186,7 +79493,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     let exceeded = false;
     let exceed_amount = 10;
     let amount = 0;
-    Array.from(list).reverse().forEach((item, index3) => {
+    Array.from(list).reverse().forEach((item, index2) => {
       let name = item.querySelector("td").textContent.trim();
       let form2 = item.querySelector("form");
       let button2 = form2.querySelector("button");
@@ -80210,7 +79517,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                 </div>
             </div>
         `;
-      if (index3 > exceed_amount && !exceeded) exceeded = true;
+      if (index2 > exceed_amount && !exceeded) exceeded = true;
       if (exceeded) entry.classList.add("entry-is-exceeded");
       new_list.appendChild(entry);
       amount += 1;
@@ -80930,10 +80237,10 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       items_container.style.setProperty("--max-index", max_index.toString());
       const cloned_albums = [...albums, ...albums, ...albums];
       render(items_container, html`
-        ${cloned_albums.map((album, index3) => {
-        const item_index = (index3 % albums.length + albums.length) % albums.length;
+        ${cloned_albums.map((album, index2) => {
+        const item_index = (index2 % albums.length + albums.length) % albums.length;
         const elem = html.node`
-            <div class="campfire-item" style="--index: ${index3}" onclick=${() => {
+            <div class="campfire-item" style="--index: ${index2}" onclick=${() => {
           if (is_wrapping) return;
           if (item_index != real_index) {
             let diff = item_index - real_index;
@@ -80965,11 +80272,11 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       }, { passive: false });
       set_index(visual_index);
     });
-    function set_index(index3) {
+    function set_index(index2) {
       if (is_wrapping) return;
-      real_index = (index3 % albums.length + albums.length) % albums.length;
+      real_index = (index2 % albums.length + albums.length) % albums.length;
       previous_index = visual_index;
-      visual_index = index3;
+      visual_index = index2;
       items_container.style.setProperty("--selected-index", visual_index.toString());
       album_elements.forEach(({ elem, index: i2 }) => {
         elem.setAttribute("aria-checked", (i2 == real_index).toString());
@@ -81554,11 +80861,11 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       let metadata = header_meta.querySelectorAll(".header-metadata-display");
       let going = 0;
       let maybe = 0;
-      metadata.forEach((item, index3) => {
+      metadata.forEach((item, index2) => {
         let para = item.querySelector("p");
-        if (index3 == 0) {
+        if (index2 == 0) {
           going = clean_number(para.textContent.trim());
-        } else if (index3 == 1) {
+        } else if (index2 == 1) {
           maybe = clean_number(item.textContent.trim());
         }
       });
@@ -82279,9 +81586,9 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     let prev = null;
     let next = null;
     if (current) {
-      const index3 = seasons.findIndex((season) => season.id == current.id);
-      prev = seasons[index3 - 1] || null;
-      next = seasons[index3 + 1] || null;
+      const index2 = seasons.findIndex((season) => season.id == current.id);
+      prev = seasons[index2 - 1] || null;
+      next = seasons[index2 + 1] || null;
       if (!prev) {
         const last = seasons[seasons.length - 1];
         prev = {
@@ -82308,8 +81615,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
           end: process_date(first.end, "end", year + 1)
         };
       }
-      const index3 = seasons.findIndex((season) => season.id == next.id);
-      prev = seasons[index3 - 1] || seasons[seasons.length - 1];
+      const index2 = seasons.findIndex((season) => season.id == next.id);
+      prev = seasons[index2 - 1] || seasons[seasons.length - 1];
     }
     return {
       now: now2,
@@ -83337,8 +82644,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
   }
 
   // src/components/profile/auth.ts
-  var import_color_thief_browser3 = __toESM(require_color_thief_min(), 1);
-  function register_auth() {
+  async function register_auth() {
     const handler = document.body.querySelector(".site-auth > .auth-link");
     if (handler) {
       log("found handler", "auth", "info", { handler });
@@ -83354,17 +82660,12 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       log(`registered avatar as ${auth.avatar}, name as ${auth.name}`, "auth", "info", { previous_avatar, handler });
       if (auth.avatar != previous_avatar) {
         image.setAttribute("crossorigin", "anonymous");
-        try {
-          image.addEventListener("load", () => {
-            let thief = new import_color_thief_browser3.default();
-            let colour = thief.getColor(image);
-            let hsl3 = rgb_to_oklch(colour[0], colour[1], colour[2]);
-            auth.sets.hue = hsl3.h;
-            auth.sets.sat = clamp_sat(hsl3.s / 100 * 3);
-            auth.sets.lit = clamp_lit(auth.sets.sat, hsl3.l / 100 + 0.35, true);
-          });
-        } catch (e4) {
-        }
+        image.onload = async () => {
+          const { hue: hue4, sat, lit } = await header_colour(image);
+          auth.sets.hue = hue4;
+          auth.sets.sat = sat;
+          auth.sets.lit = lit;
+        };
       }
       return;
     }
@@ -96796,7 +96097,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-05-18"
       }
     },
-    built_on: "2026-05-23T14:32:16.802Z"
+    built_on: "2026-05-24T02:53:07.096Z"
   };
 
   // node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
@@ -97825,9 +97126,494 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     zoomRectFunctions
   };
 
+  // node_modules/fast-average-color/dist/index.esm.js
+  function toHex(num3) {
+    var str = num3.toString(16);
+    return str.length === 1 ? "0" + str : str;
+  }
+  function arrayToHex(arr) {
+    return "#" + arr.map(toHex).join("");
+  }
+  function isDark(color2) {
+    var result = (color2[0] * 299 + color2[1] * 587 + color2[2] * 114) / 1e3;
+    return result < 128;
+  }
+  function prepareIgnoredColor(color2) {
+    if (!color2) {
+      return [];
+    }
+    return isRGBArray(color2) ? color2 : [color2];
+  }
+  function isRGBArray(value) {
+    return Array.isArray(value[0]);
+  }
+  function isIgnoredColor(data2, index2, ignoredColor) {
+    for (var i2 = 0; i2 < ignoredColor.length; i2++) {
+      if (isIgnoredColorAsNumbers(data2, index2, ignoredColor[i2])) {
+        return true;
+      }
+    }
+    return false;
+  }
+  function isIgnoredColorAsNumbers(data2, index2, ignoredColor) {
+    switch (ignoredColor.length) {
+      case 3:
+        if (isIgnoredRGBColor(data2, index2, ignoredColor)) {
+          return true;
+        }
+        break;
+      case 4:
+        if (isIgnoredRGBAColor(data2, index2, ignoredColor)) {
+          return true;
+        }
+        break;
+      case 5:
+        if (isIgnoredRGBAColorWithThreshold(data2, index2, ignoredColor)) {
+          return true;
+        }
+        break;
+      default:
+        return false;
+    }
+  }
+  function isIgnoredRGBColor(data2, index2, ignoredColor) {
+    if (data2[index2 + 3] !== 255) {
+      return true;
+    }
+    if (data2[index2] === ignoredColor[0] && data2[index2 + 1] === ignoredColor[1] && data2[index2 + 2] === ignoredColor[2]) {
+      return true;
+    }
+    return false;
+  }
+  function isIgnoredRGBAColor(data2, index2, ignoredColor) {
+    if (data2[index2 + 3] && ignoredColor[3]) {
+      return data2[index2] === ignoredColor[0] && data2[index2 + 1] === ignoredColor[1] && data2[index2 + 2] === ignoredColor[2] && data2[index2 + 3] === ignoredColor[3];
+    }
+    return data2[index2 + 3] === ignoredColor[3];
+  }
+  function inRange2(colorComponent, ignoredColorComponent, value) {
+    return colorComponent >= ignoredColorComponent - value && colorComponent <= ignoredColorComponent + value;
+  }
+  function isIgnoredRGBAColorWithThreshold(data2, index2, ignoredColor) {
+    var redIgnored = ignoredColor[0];
+    var greenIgnored = ignoredColor[1];
+    var blueIgnored = ignoredColor[2];
+    var alphaIgnored = ignoredColor[3];
+    var threshold = ignoredColor[4];
+    var alphaData = data2[index2 + 3];
+    var alphaInRange = inRange2(alphaData, alphaIgnored, threshold);
+    if (!alphaIgnored) {
+      return alphaInRange;
+    }
+    if (!alphaData && alphaInRange) {
+      return true;
+    }
+    if (inRange2(data2[index2], redIgnored, threshold) && inRange2(data2[index2 + 1], greenIgnored, threshold) && inRange2(data2[index2 + 2], blueIgnored, threshold) && alphaInRange) {
+      return true;
+    }
+    return false;
+  }
+  var DEFAULT_DOMINANT_DIVIDER = 24;
+  function dominantAlgorithm(arr, len, options) {
+    var colorHash = {};
+    var divider = options.dominantDivider || DEFAULT_DOMINANT_DIVIDER;
+    var ignoredColor = options.ignoredColor;
+    var step = options.step;
+    var max2 = [0, 0, 0, 0, 0];
+    for (var i2 = 0; i2 < len; i2 += step) {
+      var red = arr[i2];
+      var green = arr[i2 + 1];
+      var blue = arr[i2 + 2];
+      var alpha2 = arr[i2 + 3];
+      if (ignoredColor && isIgnoredColor(arr, i2, ignoredColor)) {
+        continue;
+      }
+      var key = Math.round(red / divider) + "," + Math.round(green / divider) + "," + Math.round(blue / divider);
+      if (colorHash[key]) {
+        colorHash[key] = [
+          colorHash[key][0] + red * alpha2,
+          colorHash[key][1] + green * alpha2,
+          colorHash[key][2] + blue * alpha2,
+          colorHash[key][3] + alpha2,
+          colorHash[key][4] + 1
+        ];
+      } else {
+        colorHash[key] = [red * alpha2, green * alpha2, blue * alpha2, alpha2, 1];
+      }
+      if (max2[4] < colorHash[key][4]) {
+        max2 = colorHash[key];
+      }
+    }
+    var redTotal = max2[0];
+    var greenTotal = max2[1];
+    var blueTotal = max2[2];
+    var alphaTotal = max2[3];
+    var count = max2[4];
+    return alphaTotal ? [
+      Math.round(redTotal / alphaTotal),
+      Math.round(greenTotal / alphaTotal),
+      Math.round(blueTotal / alphaTotal),
+      Math.round(alphaTotal / count)
+    ] : options.defaultColor;
+  }
+  function simpleAlgorithm(arr, len, options) {
+    var redTotal = 0;
+    var greenTotal = 0;
+    var blueTotal = 0;
+    var alphaTotal = 0;
+    var count = 0;
+    var ignoredColor = options.ignoredColor;
+    var step = options.step;
+    for (var i2 = 0; i2 < len; i2 += step) {
+      var alpha2 = arr[i2 + 3];
+      var red = arr[i2] * alpha2;
+      var green = arr[i2 + 1] * alpha2;
+      var blue = arr[i2 + 2] * alpha2;
+      if (ignoredColor && isIgnoredColor(arr, i2, ignoredColor)) {
+        continue;
+      }
+      redTotal += red;
+      greenTotal += green;
+      blueTotal += blue;
+      alphaTotal += alpha2;
+      count++;
+    }
+    return alphaTotal ? [
+      Math.round(redTotal / alphaTotal),
+      Math.round(greenTotal / alphaTotal),
+      Math.round(blueTotal / alphaTotal),
+      Math.round(alphaTotal / count)
+    ] : options.defaultColor;
+  }
+  function sqrtAlgorithm(arr, len, options) {
+    var redTotal = 0;
+    var greenTotal = 0;
+    var blueTotal = 0;
+    var alphaTotal = 0;
+    var count = 0;
+    var ignoredColor = options.ignoredColor;
+    var step = options.step;
+    for (var i2 = 0; i2 < len; i2 += step) {
+      var red = arr[i2];
+      var green = arr[i2 + 1];
+      var blue = arr[i2 + 2];
+      var alpha2 = arr[i2 + 3];
+      if (ignoredColor && isIgnoredColor(arr, i2, ignoredColor)) {
+        continue;
+      }
+      redTotal += red * red * alpha2;
+      greenTotal += green * green * alpha2;
+      blueTotal += blue * blue * alpha2;
+      alphaTotal += alpha2;
+      count++;
+    }
+    return alphaTotal ? [
+      Math.round(Math.sqrt(redTotal / alphaTotal)),
+      Math.round(Math.sqrt(greenTotal / alphaTotal)),
+      Math.round(Math.sqrt(blueTotal / alphaTotal)),
+      Math.round(alphaTotal / count)
+    ] : options.defaultColor;
+  }
+  function getDefaultColor(options) {
+    return getOption(options, "defaultColor", [0, 0, 0, 0]);
+  }
+  function getOption(options, name, defaultValue) {
+    return options[name] === void 0 ? defaultValue : options[name];
+  }
+  var MIN_SIZE = 10;
+  var MAX_SIZE = 100;
+  function isSvg(filename) {
+    return filename.search(/\.svg(\?|$)/i) !== -1;
+  }
+  function getOriginalSize(resource) {
+    if (isInstanceOfHTMLImageElement(resource)) {
+      var width = resource.naturalWidth;
+      var height = resource.naturalHeight;
+      if (!resource.naturalWidth && isSvg(resource.src)) {
+        width = height = MAX_SIZE;
+      }
+      return {
+        width,
+        height
+      };
+    }
+    if (isInstanceOfHTMLVideoElement(resource)) {
+      return {
+        width: resource.videoWidth,
+        height: resource.videoHeight
+      };
+    }
+    if (isInstanceOfVideoFrame(resource)) {
+      return {
+        width: resource.codedWidth,
+        height: resource.codedHeight
+      };
+    }
+    return {
+      width: resource.width,
+      height: resource.height
+    };
+  }
+  function getSrc(resource) {
+    if (isInstanceOfHTMLCanvasElement(resource)) {
+      return "canvas";
+    }
+    if (isInstanceOfOffscreenCanvas(resource)) {
+      return "offscreencanvas";
+    }
+    if (isInstanceOfVideoFrame(resource)) {
+      return "videoframe";
+    }
+    if (isInstanceOfImageBitmap(resource)) {
+      return "imagebitmap";
+    }
+    return resource.src;
+  }
+  function isInstanceOfHTMLImageElement(resource) {
+    return typeof HTMLImageElement !== "undefined" && resource instanceof HTMLImageElement;
+  }
+  var hasOffscreenCanvas = typeof OffscreenCanvas !== "undefined";
+  function isInstanceOfOffscreenCanvas(resource) {
+    return hasOffscreenCanvas && resource instanceof OffscreenCanvas;
+  }
+  function isInstanceOfHTMLVideoElement(resource) {
+    return typeof HTMLVideoElement !== "undefined" && resource instanceof HTMLVideoElement;
+  }
+  function isInstanceOfVideoFrame(resource) {
+    return typeof VideoFrame !== "undefined" && resource instanceof VideoFrame;
+  }
+  function isInstanceOfHTMLCanvasElement(resource) {
+    return typeof HTMLCanvasElement !== "undefined" && resource instanceof HTMLCanvasElement;
+  }
+  function isInstanceOfImageBitmap(resource) {
+    return typeof ImageBitmap !== "undefined" && resource instanceof ImageBitmap;
+  }
+  function prepareSizeAndPosition(originalSize, options) {
+    var srcLeft = getOption(options, "left", 0);
+    var srcTop = getOption(options, "top", 0);
+    var srcWidth = getOption(options, "width", originalSize.width);
+    var srcHeight = getOption(options, "height", originalSize.height);
+    var destWidth = srcWidth;
+    var destHeight = srcHeight;
+    if (options.mode === "precision") {
+      return {
+        srcLeft,
+        srcTop,
+        srcWidth,
+        srcHeight,
+        destWidth,
+        destHeight
+      };
+    }
+    var factor2;
+    if (srcWidth > srcHeight) {
+      factor2 = srcWidth / srcHeight;
+      destWidth = MAX_SIZE;
+      destHeight = Math.round(destWidth / factor2);
+    } else {
+      factor2 = srcHeight / srcWidth;
+      destHeight = MAX_SIZE;
+      destWidth = Math.round(destHeight / factor2);
+    }
+    if (destWidth > srcWidth || destHeight > srcHeight || destWidth < MIN_SIZE || destHeight < MIN_SIZE) {
+      destWidth = srcWidth;
+      destHeight = srcHeight;
+    }
+    return {
+      srcLeft,
+      srcTop,
+      srcWidth,
+      srcHeight,
+      destWidth,
+      destHeight
+    };
+  }
+  var isWebWorkers = typeof window === "undefined";
+  function makeCanvas() {
+    if (isWebWorkers) {
+      return hasOffscreenCanvas ? new OffscreenCanvas(1, 1) : null;
+    }
+    return document.createElement("canvas");
+  }
+  var ERROR_PREFIX = "FastAverageColor: ";
+  function getError(message) {
+    return Error(ERROR_PREFIX + message);
+  }
+  function outputError(error, silent) {
+    if (!silent) {
+      console.error(error);
+    }
+  }
+  var FastAverageColor = (
+    /** @class */
+    function() {
+      function FastAverageColor2() {
+        this.canvas = null;
+        this.ctx = null;
+      }
+      FastAverageColor2.prototype.getColorAsync = function(resource, options) {
+        if (!resource) {
+          return Promise.reject(getError("call .getColorAsync() without resource"));
+        }
+        if (typeof resource === "string") {
+          if (typeof Image === "undefined") {
+            return Promise.reject(getError("resource as string is not supported in this environment"));
+          }
+          var img = new Image();
+          img.crossOrigin = options && options.crossOrigin || "";
+          var promise = this.bindImageEvents(img, options);
+          img.src = resource;
+          return promise;
+        } else if (isInstanceOfHTMLImageElement(resource) && !resource.complete) {
+          return this.bindImageEvents(resource, options);
+        } else {
+          var result = this.getColor(resource, options);
+          return result.error ? Promise.reject(result.error) : Promise.resolve(result);
+        }
+      };
+      FastAverageColor2.prototype.getColor = function(resource, options) {
+        options = options || {};
+        var defaultColor = getDefaultColor(options);
+        if (!resource) {
+          var error = getError("call .getColor() without resource");
+          outputError(error, options.silent);
+          return this.prepareResult(defaultColor, error);
+        }
+        var originalSize = getOriginalSize(resource);
+        var size = prepareSizeAndPosition(originalSize, options);
+        if (!size.srcWidth || !size.srcHeight || !size.destWidth || !size.destHeight) {
+          var error = getError('incorrect sizes for resource "'.concat(getSrc(resource), '"'));
+          outputError(error, options.silent);
+          return this.prepareResult(defaultColor, error);
+        }
+        if (!this.canvas) {
+          this.canvas = makeCanvas();
+          if (!this.canvas) {
+            var error = getError("OffscreenCanvas is not supported in this browser");
+            outputError(error, options.silent);
+            return this.prepareResult(defaultColor, error);
+          }
+        }
+        if (!this.ctx) {
+          this.ctx = this.canvas.getContext("2d", { willReadFrequently: true });
+          if (!this.ctx) {
+            var error = getError("Canvas Context 2D is not supported in this browser");
+            outputError(error, options.silent);
+            return this.prepareResult(defaultColor, error);
+          }
+          this.ctx.imageSmoothingEnabled = false;
+        }
+        this.canvas.width = size.destWidth;
+        this.canvas.height = size.destHeight;
+        try {
+          this.ctx.clearRect(0, 0, size.destWidth, size.destHeight);
+          this.ctx.drawImage(resource, size.srcLeft, size.srcTop, size.srcWidth, size.srcHeight, 0, 0, size.destWidth, size.destHeight);
+          var bitmapData = this.ctx.getImageData(0, 0, size.destWidth, size.destHeight).data;
+          return this.prepareResult(this.getColorFromArray4(bitmapData, options));
+        } catch (originalError) {
+          var error = getError("security error (CORS) for resource ".concat(getSrc(resource), ".\nDetails: https://developer.mozilla.org/en/docs/Web/HTML/CORS_enabled_image"));
+          outputError(error, options.silent);
+          if (!options.silent) {
+            console.error(originalError);
+          }
+          return this.prepareResult(defaultColor, error);
+        }
+      };
+      FastAverageColor2.prototype.getColorFromArray4 = function(arr, options) {
+        options = options || {};
+        var bytesPerPixel = 4;
+        var arrLength = arr.length;
+        var defaultColor = getDefaultColor(options);
+        if (arrLength < bytesPerPixel) {
+          return defaultColor;
+        }
+        var len = arrLength - arrLength % bytesPerPixel;
+        var step = (options.step || 1) * bytesPerPixel;
+        var algorithm;
+        switch (options.algorithm || "sqrt") {
+          case "simple":
+            algorithm = simpleAlgorithm;
+            break;
+          case "sqrt":
+            algorithm = sqrtAlgorithm;
+            break;
+          case "dominant":
+            algorithm = dominantAlgorithm;
+            break;
+          default:
+            throw getError("".concat(options.algorithm, " is unknown algorithm"));
+        }
+        return algorithm(arr, len, {
+          defaultColor,
+          ignoredColor: prepareIgnoredColor(options.ignoredColor),
+          step,
+          dominantDivider: options.dominantDivider
+        });
+      };
+      FastAverageColor2.prototype.prepareResult = function(value, error) {
+        var rgb3 = value.slice(0, 3);
+        var rgba = [value[0], value[1], value[2], value[3] / 255];
+        var isDarkColor = isDark(value);
+        return {
+          value: [value[0], value[1], value[2], value[3]],
+          rgb: "rgb(" + rgb3.join(",") + ")",
+          rgba: "rgba(" + rgba.join(",") + ")",
+          hex: arrayToHex(rgb3),
+          hexa: arrayToHex(value),
+          isDark: isDarkColor,
+          isLight: !isDarkColor,
+          error
+        };
+      };
+      FastAverageColor2.prototype.destroy = function() {
+        if (this.canvas) {
+          this.canvas.width = 1;
+          this.canvas.height = 1;
+          this.canvas = null;
+        }
+        this.ctx = null;
+      };
+      FastAverageColor2.prototype.bindImageEvents = function(resource, options) {
+        var _this = this;
+        return new Promise(function(resolve2, reject) {
+          var unbindEvents = function() {
+            resource.removeEventListener("load", onload);
+            resource.removeEventListener("error", onerror);
+            resource.removeEventListener("abort", onabort);
+          };
+          var onload = function() {
+            unbindEvents();
+            var result = _this.getColor(resource, options);
+            if (result.error) {
+              reject(result.error);
+            } else {
+              resolve2(result);
+            }
+          };
+          var onerror = function() {
+            unbindEvents();
+            reject(getError('Error loading image "'.concat(resource.src, '"')));
+          };
+          var onabort = function() {
+            unbindEvents();
+            reject(getError('Image "'.concat(resource.src, '" loading aborted')));
+          };
+          resource.addEventListener("load", onload);
+          resource.addEventListener("error", onerror);
+          resource.addEventListener("abort", onabort);
+          if (resource.src && resource.complete) {
+            onload();
+          }
+        });
+      };
+      return FastAverageColor2;
+    }()
+  );
+
   // src/main.js
   Chart.register(...registerables);
   Chart.register(plugin);
+  var fac = new FastAverageColor();
   var version = build_default;
   var theme_version = {
     state: ""
@@ -97841,34 +97627,6 @@ hangul-romanization/dist/conversionSystems/revisedRomanizationOfKorean.js:
 hangul-romanization/dist/index.js:
   (**
    * @license MIT Copyright 2016 Daniel Imms (http://www.growingwiththeweb.com)
-   *)
-
-color-thief-browser/dist/color-thief.min.js:
-  (*!
-   * Color Thief v2.0
-   * by Lokesh Dhakar - http://www.lokeshdhakar.com
-   *
-   * Thanks
-   * ------
-   * Nick Rabinowitz - For creating quantize.js.
-   * John Schulz - For clean up and optimization. @JFSIII
-   * Nathan Spady - For adding drag and drop support to the demo page.
-   *
-   * License
-   * -------
-   * Copyright 2011, 2015 Lokesh Dhakar
-   * Released under the MIT license
-   * https://raw.githubusercontent.com/lokesh/color-thief/master/LICENSE
-   *
-   *)
-  (*!
-  * quantize.js Copyright 2008 Nick Rabinowitz.
-  * Licensed under the MIT license: http://www.opensource.org/licenses/mit-license.php
-  *)
-  (*!
-   * Block below copied from Protovis: http://mbostock.github.com/protovis/
-   * Copyright 2010 Stanford Visualization Group
-   * Licensed under the BSD License: http://www.opensource.org/licenses/bsd-license.php
    *)
 
 html2canvas-pro/dist/html2canvas-pro.js:
@@ -97907,9 +97665,6 @@ domsanitizer/esm/index.js:
 hyperhtml-style/esm/index.js:
   (*! (c) Andrea Giammarchi - ISC *)
 
-fast-average-color/dist/index.esm.js:
-  (*! Fast Average Color | © 2026 Denis Seleznev | MIT License | https://github.com/fast-average-color/fast-average-color *)
-
 @kurkle/color/dist/color.esm.js:
   (*!
    * @kurkle/color v0.3.4
@@ -97946,4 +97701,7 @@ chartjs-plugin-zoom/dist/chartjs-plugin-zoom.esm.js:
    * (c) 2016-2024 chartjs-plugin-zoom Contributors
    * Released under the MIT License
    *)
+
+fast-average-color/dist/index.esm.js:
+  (*! Fast Average Color | © 2026 Denis Seleznev | MIT License | https://github.com/fast-average-color/fast-average-color *)
 */
