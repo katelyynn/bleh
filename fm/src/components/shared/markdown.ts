@@ -617,7 +617,8 @@ export function markdown(
 
         body.querySelectorAll('.hazelfae').forEach(hazel => {
             tippy(hazel, {
-                content: ':hazelfae:'
+                content: ':hazelfae:',
+                delay: [500, 0]
             });
         });
     }

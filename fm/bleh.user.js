@@ -70611,7 +70611,8 @@
       });
       body.querySelectorAll(".hazelfae").forEach((hazel) => {
         tippy_esm_default(hazel, {
-          content: ":hazelfae:"
+          content: ":hazelfae:",
+          delay: [500, 0]
         });
       });
     }
