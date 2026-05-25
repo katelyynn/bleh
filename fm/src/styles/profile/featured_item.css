@@ -10,7 +10,7 @@
     box-shadow: unset !important;
     margin: 0 var(--card-padding) !important;
 
-    order: -10;
+    order: -9;
 
     display: flex;
     flex-direction: column;
