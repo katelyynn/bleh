@@ -23,6 +23,7 @@ import { save_setting } from '@/components/settings/settings';
 import { manage_user } from '@/components/profile/manage_user';
 import { queue_popup } from '@/components/dialog/popup';
 import { avatar } from '../shared/avatar';
+import { taste_artist } from './taste';
 
 export function redesign_profile_header(is_own_profile, is_following) {
     if (!auth.name) return;
@@ -224,27 +225,35 @@ export function redesign_profile_header(is_own_profile, is_following) {
             return;
         }
 
+        let details_btn;
+
         let taste_wrap = html.node`
-            <div class="btn listen-item ${taste != 'super' && taste != 'very_low' ? 'icon' : ''} taste">
-                <div class="taste-icon colourful" data-taste=${taste}>
-                    <div class="bleh-icon" />
+            <div class="taste ${taste != 'super' && taste != 'very_low' ? 'icon' : ''}">
+                <div class="taste-pics">
+                    <div class="taste-avatar avatar">
+                        <img src=${avatar(auth.avatar, 'avatar300s')} alt=${auth.name}>
+                    </div>
+                    <div class="taste-avatar avatar">
+                        <img src=${page.avatar} alt=${page.name}>
+                    </div>
                 </div>
                 <div class="span">
-                    <img class="view-item-avatar" src=${auth.avatar} alt=${auth.name}>
-                    <img class="view-item-avatar" src=${page.avatar} alt=${page.name}>
                     <div class="listen-item-info">
                         <h3 class="listen-item-name">
                             ${{html: tl(trans.you_share_count_with, { c: `<span class="colourful" data-taste=${taste}>${taste_percentage}</span>` })}}
                         </h3>
                         <p class="listen-item-text">
-                            ${taste_artists.length == 1 ? taste_artists[0] : ''}
-                            ${taste_artists.length == 2 ? tl(trans.you_share_count_with.two, { artist1: taste_artists[0], artist2: taste_artists[1] }) : ''}
-                            ${taste_artists.length == 3 ? tl(trans.you_share_count_with.three, { artist1: taste_artists[0], artist2: taste_artists[1], artist3: taste_artists[2] }) : ''}
+                            ${taste_artists.length == 1 ? taste_artist(taste_artists[0]) : ''}
+                            ${taste_artists.length == 2 ? { html: tl(trans.you_share_count_with.two, { artist1: taste_artist(taste_artists[0]), artist2: taste_artist(taste_artists[1]) }) } : ''}
+                            ${taste_artists.length == 3 ? { html: tl(trans.you_share_count_with.three, { artist1: taste_artist(taste_artists[0]), artist2: taste_artist(taste_artists[1]), artist3: taste_artist(taste_artists[2]) }) } : ''}
                         </p>
                     </div>
                 </div>
-                <div class="taste-hover-icon">
-                    <div class="bleh-icon" />
+                <div class="taste-bar">
+                    <div class="taste-bar-fill colourful" data-taste=${taste} style="width: ${taste_percentage}" />
+                </div>
+                <div class="taste-interactions">
+                    <button class="btn icon select-button taste-details" data-type="details" ref=${el => details_btn = el}>${tl(trans.view_details)}</button>
                 </div>
             </div>
         `;
@@ -322,7 +331,7 @@ export function redesign_profile_header(is_own_profile, is_following) {
             taste_wrap.classList.add('valentine');
 
             render(taste_wrap, html`
-                <div class="valentine-pics">
+                <div class="taste-pics valentine-pics">
                     <div class="taste-avatar avatar">
                         <img src=${avatar(auth.avatar, 'avatar300s')} alt=${auth.name}>
                     </div>
@@ -334,66 +343,52 @@ export function redesign_profile_header(is_own_profile, is_following) {
                     </div>
                 </div>
                 <div class="span">
-                    <div class="info">
-                        <h3>
+                    <div class="listen-item-info">
+                        <h3 class="listen-item-name">
                             ${{html: tl(trans.you_are_a_value_match, { u: page.name, v: `<span class="colourful" data-taste=${taste}>${taste_formal}</span>` })}}
                         </h3>
-                        <p>
-                            ${taste_artists.length == 1 ? taste_artists[0] : ''}
-                            ${taste_artists.length == 2 ? tl(trans.you_share_count_with.two, { artist1: taste_artists[0], artist2: taste_artists[1] }) : ''}
-                            ${taste_artists.length == 3 ? tl(trans.you_share_count_with.three, { artist1: taste_artists[0], artist2: taste_artists[1], artist3: taste_artists[2] }) : ''}
+                        <p class="listen-item-text">
+                            ${taste_artists.length == 1 ? taste_artist(taste_artists[0]) : ''}
+                            ${taste_artists.length == 2 ? { html: tl(trans.you_share_count_with.two, { artist1: taste_artist(taste_artists[0]), artist2: taste_artist(taste_artists[1]) }) } : ''}
+                            ${taste_artists.length == 3 ? { html: tl(trans.you_share_count_with.three, { artist1: taste_artist(taste_artists[0]), artist2: taste_artist(taste_artists[1]), artist3: taste_artist(taste_artists[2]) }) } : ''}
                         </p>
                     </div>
+                    ${() => {
+                        const info_btn = html.node`
+                            <div class="taste-hover-icon-mini">
+                                <div class="bleh-icon" />
+                            </div>
+                        `;
+
+                        tippy(info_btn, {
+                            content: tl(trans.valentine_info, { u: page.name })
+                        });
+
+                        return info_btn;
+                    }}
                 </div>
-                ${() => {
-                    const info_btn = html.node`
-                        <div class="taste-hover-icon-mini">
-                            <div class="bleh-icon" />
-                        </div>
-                    `;
-
-                    tippy(info_btn, {
-                        content: tl(trans.valentine_info, { u: page.name })
-                    });
-
-                    return info_btn;
-                }}
-            `);
-
-            let details_btn;
-
-            taste_wrap.after(html.node`
-                <div class="valentines">
-                    <button class="btn icon select-button" data-type="details" ref=${el => details_btn = el}>${tl(trans.view_details)}</button>
+                <div class="taste-bar">
+                    <div class="taste-bar-fill colourful" data-taste=${taste} style="width: ${taste_percentage}" />
+                </div>
+                <div class="taste-interactions">
+                    <button class="btn icon select-button taste-details" data-type="details" ref=${el => details_btn = el}>${tl(trans.view_details)}</button>
                     <button class="btn icon primary colourful" data-taste=${taste} data-type="valentine" onclick=${() => {
                         open(`${root}inbox/compose?to=${page.name}&subject=${encodeURIComponent(tl(trans.valentine, { u: page.name }))}`)
                     }}>${tl(trans.send_valentine)}</button>
                 </div>
             `);
+        }
 
-            if (taste_artists.length > 1) {
-                tippy(details_btn, {
-                    theme: 'context-menu',
-                    content: taste_menu,
-                    trigger: 'click',
-                    placement: 'bottom',
-                    interactive: true,
-                    interactiveBorder: 10,
-                    appendTo: document.body
-                });
-            }
-        } else {
-            if (taste_artists.length > 1) {
-                tippy(taste_wrap, {
-                    theme: 'context-menu',
-                    content: taste_menu,
-                    trigger: 'click',
-                    placement: 'bottom',
-                    interactive: true,
-                    interactiveBorder: 10,
-                    appendTo: document.body
-                });
-            }
+        if (taste_artists.length > 1) {
+            tippy(details_btn, {
+                theme: 'context-menu',
+                content: taste_menu,
+                trigger: 'click',
+                placement: 'bottom',
+                interactive: true,
+                interactiveBorder: 10,
+                appendTo: document.body
+            });
         }
     }
 }

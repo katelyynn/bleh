@@ -11234,13 +11234,15 @@ export function tl(key: translation | string, replacements = {}) {
 
     let translation = (key[lang] || key.en) as string;
 
+    if (page.state.april && translation.includes('Last.fm Pro'))
+        translation = translation.replaceAll('Last.fm Pro', 'Verified');
+
+    if (Object.keys(replacements).length == 0) return translation;
+
     for (const [placeholder, value] of Object.entries(replacements)) {
         const regex = new RegExp(`{${placeholder}}`, 'g');
         translation = translation.replace(regex, value as string);
     }
-
-    if (page.state.april && translation.includes('Last.fm Pro'))
-        translation = translation.replaceAll('Last.fm Pro', 'Verified');
 
     return translation;
 }

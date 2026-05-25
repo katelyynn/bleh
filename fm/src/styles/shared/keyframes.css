@@ -375,12 +375,12 @@
 
 @keyframes valentine {
     from, to {
-        color: oklch(var(--l3-c));
+        color: oklch(var(--l4-c));
         scale: 1;
     }
     40% {
-        color: color-mix(in oklch, oklch(var(--l2-c)) 40%, oklch(var(--l3-c)));
-        scale: 1.1;
+        color: color-mix(in oklch, oklch(var(--l2-c)) 80%, oklch(var(--l3-c)));
+        scale: 1.3;
     }
 }
 

@@ -842,6 +842,7 @@ u,
         --l3-c-sat: calc(clamp(min(0), var(--sat), max(2)) * 0.5);
         --l3-c-lit: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.36);
 
+        --h2: calc(clamp(min(0.7), var(--lit), max(1.1)) * 1.1) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue);
         --h3: var(--h3-lit) var(--h3-sat) var(--hue);
         --h3-sat: calc(clamp(min(0), var(--sat), max(2)) * 0.42);
         --h3-lit: calc(clamp(min(0.85), var(--lit), max(1.1)) * 0.78);
