@@ -96169,7 +96169,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-05-18"
       }
     },
-    built_on: "2026-05-25T03:11:03.860Z"
+    built_on: "2026-05-25T18:27:33.236Z"
   };
 
   // node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
