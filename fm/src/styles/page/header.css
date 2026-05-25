@@ -292,6 +292,7 @@
 }
 
 .page-header-info {
+    & > .main-info > .sub-text,
     & > .sub-text {
         justify-content: unset;
         align-items: center;

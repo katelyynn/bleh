@@ -14,6 +14,7 @@ import { pixel } from '@/components/minis/pixel';
 import { ff } from '@/components/settings/sku';
 import { plot } from '@/components/minis/plot';
 import { new_indicator } from '@/components/shared/indicator';
+import { card } from '@/components/minis/card';
 
 let valid_minis;
 
@@ -57,6 +58,14 @@ export function bleh_minis(skip = false) {
             func: bleh_minis_plot,
             by: ['dressupdarling'],
             new_release: true
+        },
+        card: {
+            name: tl(trans.card.name),
+            body: tl(trans.card.body),
+            func: bleh_minis_card,
+            by: ['dressupdarling'],
+            new_release: true,
+            hide_if: !ff('unlock_minis')
         },
         pixel: {
             name: tl(trans.pixel?.name),
@@ -292,6 +301,44 @@ function bleh_minis_plot() {
     );
 
     plot({
+        host: content,
+        sidebar: mini_settings
+    });
+}
+
+function bleh_minis_card() {
+    let content;
+    let mini_settings;
+
+    render(
+        page.structure.main,
+        html`
+            <section class="minis">
+                ${return_to_minis('card')}
+                <div class="minis-content" ref=${(el) => (content = el)} />
+            </section>
+        `
+    );
+
+    render(
+        page.structure.side,
+        html`
+            <section
+                class="current-mini-settings"
+                ref=${(el) => (mini_settings = el)}
+            />
+            <section class="mini-faq">
+                <p class="card-tip">
+                    ${tl(trans.value_by_user, {
+                        v: valid_minis.card.name,
+                        u: valid_minis.card.by.join(',')
+                    })}
+                </p>
+            </section>
+        `
+    );
+
+    card({
         host: content,
         sidebar: mini_settings
     });

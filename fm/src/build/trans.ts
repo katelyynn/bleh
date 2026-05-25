@@ -10243,6 +10243,14 @@ export const trans = {
             ru: 'Создать графики из пользовательских библиотек',
         },
     },
+    card: {
+        name: {
+            en: 'Card'
+        },
+        body: {
+            en: 'Get an overview of your last year, month, or week'
+        }
+    },
     your_recent_30_days: {
         en: 'Your recent 30 days',
         de: 'Deine letzten 30 Tage',
