@@ -71260,51 +71260,51 @@
 
   // node_modules/@tealmiku/florence/dist/florence.js
   function r2(e4, c2, i2 = "info", a = {}) {
-    let t2;
+    let o;
     switch (c2) {
       case "load":
-        t2 = "#8CB9D9";
+        o = "#8CB9D9";
         break;
       case "lotus":
-        t2 = "#8CD9A6";
+        o = "#8CD9A6";
         break;
       case "season":
-        t2 = "#65B6D8";
+        o = "#65B6D8";
         break;
       case "page":
-        t2 = "#E4B381";
+        o = "#E4B381";
         break;
       case "page structure":
-        t2 = "#D88A69";
+        o = "#D88A69";
         break;
       case "style":
-        t2 = "#C9C678";
+        o = "#C9C678";
         break;
       case "profile":
-        t2 = "#D56854";
+        o = "#D56854";
         break;
       case "settings":
-        t2 = "#6D6977";
+        o = "#6D6977";
         break;
       case "sponsor":
-        t2 = "#CE4E88";
+        o = "#CE4E88";
         break;
       default:
-        t2 = "#C8DD88";
+        o = "#C8DD88";
         break;
     }
-    Object.keys(a).length > 0 ? console[i2](`%c${c2}%c ${e4}`, `background: ${t2}; display: block; width: fit-content; font-weight: bold; color: #000; padding: 0 4px; border-radius: 4px`, "color: unset", a) : console[i2](`%c${c2}%c ${e4}`, `background: ${t2}; display: block; width: fit-content; font-weight: bold; color: #000; padding: 0 4px; border-radius: 4px`, "color: unset");
+    Object.keys(a).length > 0 ? console[i2](`%c${c2}%c ${e4}`, `background: ${o}; display: block; width: fit-content; font-weight: bold; color: #000; padding: 0 4px; border-radius: 4px`, "color: unset", a) : console[i2](`%c${c2}%c ${e4}`, `background: ${o}; display: block; width: fit-content; font-weight: bold; color: #000; padding: 0 4px; border-radius: 4px`, "color: unset");
   }
-  var S = "2026.0420";
+  var S = "2026.0527";
   var g = { state: void 0 };
   var L = { state: void 0 };
-  function q({ page: e4, on_head_load: c2, on_body_load: i2, on_mutation: a, on_page_change: t2, on_subpage_change: u, on_error: l2, on_dedicated_page: f3 }) {
+  function q({ page: e4, on_head_load: c2, on_body_load: i2, on_mutation: a, on_page_change: o, on_subpage_change: u, on_error: l2, on_dedicated_page: f3 }) {
     let w = false;
-    r2(`starting florence ${S}`, "load", "info", { page: e4, on_head_load: c2, on_body_load: i2, on_mutation: a, on_page_change: t2, on_subpage_change: u, on_error: l2, on_dedicated_page: f3 });
+    r2(`starting florence ${S}`, "load", "info", { page: e4, on_head_load: c2, on_body_load: i2, on_mutation: a, on_page_change: o, on_subpage_change: u, on_error: l2, on_dedicated_page: f3 });
     let p4 = new MutationObserver(() => {
       if (document.head) {
-        let n2 = window.location.pathname.split("/"), o = n2.length - 1;
-        if (n2[o] == "playback" && n2[o - 3] == "listening-report") {
+        let t2 = window.location.pathname.split("/"), n2 = t2.length - 1;
+        if (t2[n2] == "playback" && t2[n2 - 3] == "listening-report" || t2[0] == "pro" || t2[1] == "pro") {
           p4.disconnect(), w = true;
           return;
         }
@@ -71312,47 +71312,47 @@
       }
     });
     p4.observe(document.documentElement, { childList: true });
-    let b = new MutationObserver((n2) => {
+    let b = new MutationObserver((t2) => {
       if (w) {
         b.disconnect();
         return;
       }
-      r2("pre", "load", "info", { mutations: n2 }), document.body && (r2(`${JSON.stringify(document.body.classList)}`, "load"), document.body.classList.add("florence")), document.body && document.body.querySelector(".adaptive-skin-container") && document.body.querySelector(".footer") ? ($(), b.disconnect()) : document.body && (document.body.querySelector(":scope > .container") || document.body.classList.contains("namespace--user_now")) && (document.body.classList.add("florence-loaded"), document.body.querySelector(":scope > .container") ? f3("503") : document.body.classList.contains("namespace--user_now") && f3("now"));
+      r2("pre", "load", "info", { mutations: t2 }), document.body && (r2(`${JSON.stringify(document.body.classList)}`, "load"), document.body.classList.add("florence")), document.body && document.body.querySelector(".adaptive-skin-container") && document.body.querySelector(".footer") ? ($(), b.disconnect()) : document.body && (document.body.querySelector(":scope > .container") || document.body.classList.contains("namespace--user_now")) && (document.body.classList.add("florence-loaded"), document.body.querySelector(":scope > .container") ? f3("503") : document.body.classList.contains("namespace--user_now") && f3("now"));
     });
     b.observe(document.documentElement, { childList: true });
     function $() {
       r2("main thread starting", "page", "log", { document, body: document.body });
-      let n2 = performance.now();
+      let t2 = performance.now();
       try {
         i2 && i2(), h();
-        let o = new MutationObserver((s2) => {
+        let n2 = new MutationObserver((s2) => {
           if (!s2[0]) return;
           let v = [...s2[0].addedNodes, ...s2[0].removedNodes];
           if (v.length && v.every((y) => y.nodeType == 1 && (y.hasAttribute("data-tippy-root") || (y.id || "").startsWith("tippy-")))) {
             r2("ignored", "mutation", "log", { mutations: s2 });
             return;
           }
-          r2("loop", "mutation", "log", { mutations: s2 }), h(o);
+          r2("loop", "mutation", "log", { mutations: s2 }), h(n2);
         });
-        o.observe(document.body, { childList: true, subtree: true });
+        n2.observe(document.body, { childList: true, subtree: true });
         let d = performance.now();
-        r2(`finished in ${(d - n2) / 1e3} seconds`, "load");
-      } catch (o) {
-        r2("florence ran into an error", "load", "error", { e: o }), observer && observer.disconnect(), l2 && l2(o);
+        r2(`finished in ${(d - t2) / 1e3} seconds`, "load");
+      } catch (n2) {
+        r2("florence ran into an error", "load", "error", { e: n2 }), observer && observer.disconnect(), l2 && l2(n2);
       }
     }
     let m = false;
-    function h(n2) {
+    function h(t2) {
       if (!m) {
         m = true;
         try {
-          let o = performance.now();
+          let n2 = performance.now();
           if (D(), e4.state.error) return;
           a && a();
           let d = performance.now();
-          r2(`finished in ${(d - o) / 1e3} seconds`, "loop");
-        } catch (o) {
-          r2("flow error", "loop", "error", { e: o }), n2 && n2.disconnect(), l2 && l2(o);
+          r2(`finished in ${(d - n2) / 1e3} seconds`, "loop");
+        } catch (n2) {
+          r2("flow error", "loop", "error", { e: n2 }), t2 && t2.disconnect(), l2 && l2(n2);
         } finally {
           m = false;
         }
@@ -71360,13 +71360,13 @@
     }
     function D() {
       document.documentElement.classList.add("florence-supports-loading"), e4.structure.wrapper || (e4.structure.wrapper = document.body.querySelector(".main-content"));
-      let n2 = e4.structure.wrapper.querySelector(":scope > :last-child:not([data-florence])");
-      n2 ? (E(), t2 && t2(n2), n2.setAttribute("data-florence", "true")) : k4(), document.body.classList.add("florence-loaded");
+      let t2 = e4.structure.wrapper.querySelector(":scope > :last-child:not([data-florence])");
+      t2 ? (E(), o && o(t2), t2.setAttribute("data-florence", "true")) : k4(), document.body.classList.add("florence-loaded");
     }
     function E() {
-      e4.previous = { type: e4.type, name: e4.name }, document.body.classList.forEach((o, d) => {
-        if (o.startsWith("namespace")) {
-          e4.initial = o.replace("namespace--", "");
+      e4.previous = { type: e4.type, name: e4.name }, document.body.classList.forEach((n2, d) => {
+        if (n2.startsWith("namespace")) {
+          e4.initial = n2.replace("namespace--", "");
           let s2 = e4.initial.split("_");
           e4.type = s2[0], e4.type == "music" && (e4.type = s2[1]), e4.type != g.state && (g.state = e4.type, r2(e4.type, "page")), k4();
           return;
@@ -96185,7 +96185,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-05-18"
       }
     },
-    built_on: "2026-05-25T21:33:51.808Z"
+    built_on: "2026-05-27T19:15:15.117Z"
   };
 
   // node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
