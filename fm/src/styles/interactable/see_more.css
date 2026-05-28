@@ -15,7 +15,7 @@
     --bg: transparent;
     --bg-hov: transparent;
     --bg-atv: transparent;
-    --radius: var(--item-med-radius);
+    --radius: 0;
     border-radius: var(--radius) !important;
     --shadow: none;
     --col: oklch(var(--l3-c));
