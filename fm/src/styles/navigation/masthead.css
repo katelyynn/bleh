@@ -43,22 +43,14 @@ last.fm changes as of 2024-05-20 */
 
         background: linear-gradient(180deg, oklch(var(--b6)), transparent);
 
-        opacity: 0;
-        translate: 0 -4px;
+        opacity: 0.7;
+        translate: 0;
 
         pointer-events: none;
 
         transition-property: translate, opacity;
         transition-duration: 0.3s;
         transition-timing-function: var(--trans-function-ani);
-    }
-
-    &.scrolled,
-    &:hover, &:focus-within {
-        &:before {
-            opacity: 0.7;
-            translate: 0 0;
-        }
     }
 
     &:after {

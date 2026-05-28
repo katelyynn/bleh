@@ -73,6 +73,10 @@
         background-color: var(--bg-atv) !important;
     }
 
+    &[disabled]:not([disabled="false"]) {
+        opacity: 0.7 !important;
+    }
+
     &[disabled]:not([disabled="false"]),
     &::placeholder {
         color: oklch(var(--c3)) !important;

@@ -11199,6 +11199,12 @@ export const trans = {
     },
     under_construction: {
         en: 'This page is under construction, please give feedback and suggestions if you have any!'
+    },
+    data_source: {
+        en: 'Data source'
+    },
+    data_source_explain: {
+        en: 'Here you can add media to your graph, for example an artist or an album/track. Listing an album or track is optional, as you can instead add an entire artist.'
     }
 } as const satisfies Record<string, any>;
 

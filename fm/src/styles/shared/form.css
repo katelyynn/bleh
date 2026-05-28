@@ -319,3 +319,10 @@
     line-height: var(--line-height);
     font-weight: var(--font-weight-medium);
 }
+
+
+.modal-explain {
+    max-width: 500px !important;
+    cursor: default;
+    margin-bottom: var(--card-gap);
+}

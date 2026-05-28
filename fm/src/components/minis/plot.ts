@@ -1,5 +1,5 @@
 import { html, render } from "lighterhtml";
-import { auth, dialogs, page, root } from "@/build/page";
+import { auth, dialogs, page, random_list, root } from "@/build/page";
 import { render_user } from "@/pages/home/minis";
 import { tl, trans } from "@/build/trans";
 import { dialog, dialog_rm } from "@/components/dialog/dialog";
@@ -142,7 +142,7 @@ export function plot({ host, sidebar } = {}) {
     }
 
     function update_plot_options() {
-        const data_source_history = JSON5.parse(localStorage.getItem('bleh_plot_data_history') || '[]');
+        const data_source_history = JSON5.parse(localStorage.getItem(keys.plot_data_history) || '[]');
 
         const unique_users = [...new Set(data_points.map(item => item.user))];
 
@@ -169,6 +169,9 @@ export function plot({ host, sidebar } = {}) {
         const media_history = [];
         data_source_history.forEach(point => {
             const media_point = JSON5.parse(point);
+
+            if (media_point.artist == '' || (media_point.artist != '' && (media_point.album == '' || media_point.track == ''))) return;
+
             const media_string = JSON5.stringify(media_point);
 
             const existing = media.some(item => item.value == media_string);
@@ -177,7 +180,7 @@ export function plot({ host, sidebar } = {}) {
                 media_history.push({
                     value: media_string,
                     text: plot_media_title(media_point, true)
-                })
+                });
             }
         });
 
@@ -198,7 +201,7 @@ export function plot({ host, sidebar } = {}) {
 
         const user_list = [
             {
-                text: 'User'
+                text: tl(trans.profile)
             },
             {
                 value: auth.name,
@@ -240,7 +243,7 @@ export function plot({ host, sidebar } = {}) {
             ${data_source = select({
                 values: [
                     {
-                        text: 'Data source'
+                        text: tl(trans.data_source)
                     },
                     {
                         type: 'plus',
@@ -580,7 +583,7 @@ export function plot({ host, sidebar } = {}) {
 
         const existing = data_points.find(point => point.user == user_name && JSON5.stringify(point.media) == media);
 
-        if (existing || !timeframe_matches) {
+        if (existing || !timeframe_matches || selected_data_source == '' || selected_user == '') {
             allow_adding = false;
             add_data_point_btn.disabled = true;
 
@@ -699,26 +702,103 @@ export function plot({ host, sidebar } = {}) {
         let album;
         let track;
 
+        const random = random_list[Math.floor(Math.random() * random_list.length)];
+
         dialog({
             id: 'add_new_data_source',
-            title: 'Add new data source',
+            title: tl(trans.data_source),
             body: html.node`
-                ${artist = input({
-                    warn_if_empty: true
-                })}
-                ${album = input({
-                    placeholder: 'album'
-                })}
-                ${track = input({
-                    placeholder: 'track'
-                })}
-                <button class="btn primary icon" data-type="plus" onclick=${complete_add}>
-                    ${tl(trans.add)}
-                </button>
+                <p class="modal-explain">${tl(trans.data_source_explain)}</p>
+                <div class="new-scrobble-form">
+                    <div class="form-combo">
+                        <div class="form-inner">
+                            <p class="generic-label">${tl(trans.track)}</p>
+                            ${track = input({
+                                type: 'text',
+                                placeholder: tl(trans.example, { v: random.track }),
+                                func: check_if_matching,
+                                submit_on_character: true
+                            })}
+                            <p class="generic-label">${tl(trans.album)}</p>
+                            ${album = input({
+                                type: 'text',
+                                placeholder: tl(trans.example, { v: random.album }),
+                                func: check_if_matching,
+                                submit_on_character: true
+                            })}
+                        </div>
+                        <div class="form-actions">
+                            ${() => {
+                                const btn = html.node`
+                                    <button class="btn chibi icon subtle" data-type="switch" onclick=${() => {
+                                        const track_val = track.value;
+                                        const album_val = album.value;
+
+                                        if (!track_val && !album_val) return;
+
+                                        track.value = album_val;
+                                        album.value = track_val;
+                                    }}>
+                                        ${tl(trans.switch)}
+                                    </button>
+                                `;
+
+                                tippy(btn, {
+                                    content: btn.textContent
+                                });
+
+                                return btn;
+                            }}
+                        </div>
+                    </div>
+                    <div class="form-inner">
+                        <p class="generic-label">${tl(trans.artist)}</p>
+                        ${artist = input({
+                            type: 'text',
+                            placeholder: tl(trans.example, { v: random.artist }),
+                            warn_if_empty: true
+                        })}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="see-more cancel left-icon" onclick=${() => dialog_rm({ id: 'add_new_data_source' })}>
+                        ${tl(trans.cancel)}
+                    </button>
+                    <div class="fill" />
+                    <button class="btn primary icon" data-type="plus" onclick=${complete_add}>
+                        ${tl(trans.add)}
+                    </button>
+                </div>
             `
         });
 
+        function check_if_matching() {
+            const track_val = track.value;
+            const album_val = album.value;
+
+            if (track_val && !album_val) {
+                album.disabled(true);
+                track.disabled(false);
+                return;
+            }
+
+            if (album_val && !track_val) {
+                album.disabled(false);
+                track.disabled(true);
+                return;
+            }
+
+            album.disabled(false);
+            track.disabled(false);
+        }
+
         function complete_add() {
+            if (!artist.value) return;
+
+            if (!album.value || !track.value) return;
+
+            if (album.value && track.value) return;
+
             temporary_data_source = {
                 artist: artist.value
             }

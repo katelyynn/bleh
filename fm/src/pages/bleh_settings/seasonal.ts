@@ -8,6 +8,7 @@ import { setting } from "@/components/settings/settings";
 import { settings } from "@/build/config";
 import { season } from "@/components/seasonal";
 import { log } from '@/build/log';
+import { time_tooltip } from "@/components/date/time";
 
 export function seasonal() {
     register_skip_to([]);
@@ -49,7 +50,7 @@ export function seasonal() {
                         <h5>${tl(trans.started)}</h5>
                     </div>
                     <div class="info">
-                        <p id="current_season_start">${state.current.start.toRelative({ base: state.now })}</p>
+                        ${time_tooltip(html.node`<p>${state.current.start.toRelative({ base: state.now })}</p>`, state.current.start)}
                     </div>
                 </div>
                 <div class="setting" data-type="info">
@@ -57,7 +58,7 @@ export function seasonal() {
                         <h5>${tl(trans.ends_in)}</h5>
                     </div>
                     <div class="info">
-                        <p id="current_season">${state.current.end.toRelative({ base: state.now })}</p>
+                        ${time_tooltip(html.node`<p>${state.current.end.toRelative({ base: state.now })}</p>`, state.current.end)}
                     </div>
                 </div>
                 ` : settings.seasonal ? html.node`
@@ -66,7 +67,7 @@ export function seasonal() {
                         <h5>${tl(trans.next_in)}</h5>
                     </div>
                     <div class="info">
-                        <p id="next_season_start">${state.next.start.toRelative({ base: state.now })}</p>
+                        ${time_tooltip(html.node`<p>${state.next.start.toRelative({ base: state.now })}</p>`, state.next.start)}
                     </div>
                 </div>
                 ` : ''}
@@ -102,16 +103,16 @@ export function seasonal_timeline(current: season | null, prev: season, next: se
 }
 
 export function seasonal_timeline_item(season: season, type: 'current' | 'prev' | 'next', now: DateTime) {
-    let time: string;
+    let time;
 
     log('creating timeline item', 'season', 'info', { season, type });
 
     if (type == 'prev') {
-        time = season.end.toRelative({ base: now });
+        time = time_tooltip(html.node`<p class="seasonal-desc">${season.end.toRelative({ base: now })}</p>`, season.end);
     } else if (type == 'next') {
-        time = season.start.toRelative({ base: now });
+        time = time_tooltip(html.node`<p class="seasonal-desc">${season.start.toRelative({ base: now })}</p>`, season.start);
     } else {
-        time = tl(trans.current);
+        time = html.node`<p class="seasonal-desc">${tl(trans.current)}</p>`;
     }
 
     return html.node`
@@ -120,7 +121,7 @@ export function seasonal_timeline_item(season: season, type: 'current' | 'prev' 
                 <div class="bleh-icon" data-season=${season.id} />
             </div>
             <strong class="seasonal-name colourful" data-season=${season.id}>${tl(trans.seasonal.listing[season.id])}</strong>
-            <p class="seasonal-desc">${time}</p>
+            ${time}
         </div>
     `;
 }
