@@ -269,10 +269,14 @@ button.navlist-more {
     position: relative;
     padding: 10px 0;
     background: var(--toolbar-bg);
-    border-bottom: var(--toolbar-border);
+    margin-bottom: 1px;
 
     /* temporary chrome fix */
     order: -1;
+
+    --button-verts: 5px;
+    --button-sides: 11px;
+    --button-sides-icon: calc(var(--button-sides) - 2px);
 
     @media (min-width: 981px) {
         border-top-left-radius: var(--card-radius);
@@ -297,6 +301,16 @@ button.navlist-more {
             background: color-mix(in oklch, oklch(var(--b6)) 20%, oklch(var(--b5)));
         }
     }
+
+    &:after {
+        content: '';
+        position: absolute;
+        left: var(--card-padding);
+        right: var(--card-padding);
+        bottom: -1px;
+        background: var(--toolbar-border);
+        height: 1px;
+    }
 }
 
 .library-controls > .secondary-nav,
@@ -304,10 +318,6 @@ button.navlist-more {
     margin: unset !important;
     padding-bottom: unset !important;
     padding-left: calc(var(--card-padding) - var(--button-sides-icon));
-
-    --button-verts: 5px;
-    --button-sides: 11px;
-    --button-sides-icon: calc(var(--button-sides) - 2px);
 
     &:before,
     &:after {

@@ -245,9 +245,6 @@
 
     --sat-over: 0;
     --lit-over: 1;
-
-    backdrop-filter: var(--solarium-dark);
-    -webkit-backdrop-filter: var(--solarium-dark);
 }
 .header-new-on-tour {
     --mask: var(--icon-tour);

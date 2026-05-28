@@ -19,6 +19,8 @@ export function hybrid_timeframe_picker({
     let value = 'date_preset=LAST_7_DAYS';
     if (initial) value = initial;
 
+    let disabled = false;
+
     const elem = html.node`
         <button class="select-button timeframe-picker-button" type="button">
             ${timeframe_text(value)}
@@ -53,6 +55,18 @@ export function hybrid_timeframe_picker({
         },
         set(val: string) {
             set_value(val);
+        }
+    });
+
+    Object.defineProperty(elem, 'disabled', {
+        get() {
+            return disabled;
+        },
+        set(val: boolean) {
+            disabled = val;
+
+            elem.removeAttribute('disabled');
+            if (val) elem.setAttribute('disabled', '');
         }
     });
 

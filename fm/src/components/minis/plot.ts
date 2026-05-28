@@ -90,11 +90,12 @@ export function plot({ host, sidebar } = {}) {
                             current_timeframe = val;
                             timeframe_matches = true;
                             refresh_graph_btn.disabled = true;
+                            refresh_graph_btn.classList.remove('primary');
                             proposed_timeframe = val;
                             check_if_allow();
                         }
                     })}
-                    <button class="btn primary icon" data-type="reload" disabled onclick=${() => match_timeframe()} ref=${el => refresh_graph_btn = el}>
+                    <button class="btn icon" data-type="reload" disabled onclick=${() => match_timeframe()} ref=${el => refresh_graph_btn = el}>
                         ${tl(trans.refresh)}
                     </button>
                 </div>
@@ -121,13 +122,17 @@ export function plot({ host, sidebar } = {}) {
     function timeframe_mismatch() {
         if (fixing_timeframe) return;
 
+        timeframe.disabled = false;
         refresh_graph_btn.removeAttribute('disabled');
+        refresh_graph_btn.classList.add('primary');
         check_if_allow();
     }
 
     async function match_timeframe() {
         fixing_timeframe = true;
         refresh_graph_btn.disabled = true;
+        timeframe.disabled = true;
+        refresh_graph_btn.classList.remove('primary');
         current_timeframe = proposed_timeframe;
 
         const previous_data_points = [...data_points];
@@ -137,6 +142,7 @@ export function plot({ host, sidebar } = {}) {
             await fetch_data_set(point.user, JSON5.stringify(point.media), false);
         }
 
+        timeframe.disabled = false;
         timeframe_matches = true;
         fixing_timeframe = false;
         check_if_allow();
@@ -340,7 +346,9 @@ export function plot({ host, sidebar } = {}) {
                                 }
 
                                 if (data_points.length == 0) {
+                                    timeframe.disabled = false;
                                     refresh_graph_btn.disabled = true;
+                                    refresh_graph_btn.classList.remove('primary');
                                     timeframe_matches = true;
                                     current_timeframe = proposed_timeframe;
                                     check_if_allow();
@@ -488,7 +496,6 @@ export function plot({ host, sidebar } = {}) {
             localStorage.setItem(keys.plot_data_history, JSON5.stringify(data_source_history));
         }
 
-        console.info('user', user, 'media', media);
         const data_point = JSON5.parse(media);
 
         let media_url;
@@ -558,8 +565,6 @@ export function plot({ host, sidebar } = {}) {
             });
         });
 
-        console.info('point', point);
-
         data_points.push(point);
         update_plot_options();
         plot_footer();
@@ -602,6 +607,7 @@ export function plot({ host, sidebar } = {}) {
 
         allow_adding = true;
         add_data_point_btn.disabled = false;
+        timeframe.disabled = false;
     }
 
     function update_chart() {
@@ -676,15 +682,11 @@ export function plot({ host, sidebar } = {}) {
                 const chart = context.chart;
                 const { ctx, chartArea } = chart;
 
-                console.info('chart', ctx, chartArea);
-
                 if (!chartArea) return 'transparent';
 
                 const gradient = ctx.createLinearGradient(0, chartArea.top, 0, chartArea.bottom);
                 gradient.addColorStop(0, graph_colour_gradient[index % graph_colour_gradient.length]);
                 gradient.addColorStop(1, 'transparent');
-
-                console.info('chart gradient', gradient);
 
                 return gradient;
             };
