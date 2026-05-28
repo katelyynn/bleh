@@ -11205,7 +11205,16 @@ export const trans = {
     },
     data_source_explain: {
         en: 'Here you can add media to your graph, for example an artist or an album/track. Listing an album or track is optional, as you can instead add an entire artist.'
-    }
+    },
+    artist_required: {
+        en: 'Artist name required'
+    },
+    choose_either_an_album_or_track: {
+        en: 'Choose either an album or track only'
+    },
+    already_exists: {
+        en: 'This data source already exists'
+    },
 } as const satisfies Record<string, any>;
 
 export const translation_fallback = 'NO_TRANSLATION_FOUND';

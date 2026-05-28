@@ -116,6 +116,7 @@
     --w: 14px;
     width: var(--w);
     height: var(--w);
+    --mask-size: 12px;
 
     display: flex;
 }

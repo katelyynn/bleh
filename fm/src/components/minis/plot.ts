@@ -21,6 +21,7 @@ import tippy from "tippy.js";
 import { DateTime } from "luxon";
 import { chart_bucket } from "@/types/library";
 import { redirect } from "../music/music";
+import { notify } from "../dialog/notify";
 
 export function plot({ host, sidebar } = {}) {
     if (!host || !sidebar) return;
@@ -321,7 +322,7 @@ export function plot({ host, sidebar } = {}) {
                         <div class="plot-footer-info">
                             <div class="plot-footer-header">
                                 <div class="plot-header-avatar avatar">
-                                    <img src=${cache.avatar} alt=${point.user} />
+                                    <img src=${auth.name == point.user ? auth.avatar : cache.avatar} alt=${point.user} />
                                 </div>
                                 ${user_name}
                             </div>
@@ -583,7 +584,7 @@ export function plot({ host, sidebar } = {}) {
 
         const existing = data_points.find(point => point.user == user_name && JSON5.stringify(point.media) == media);
 
-        if (existing || !timeframe_matches || selected_data_source == '' || selected_user == '') {
+        if (existing || !timeframe_matches || data_source.value == '' || user.value == '') {
             allow_adding = false;
             add_data_point_btn.disabled = true;
 
@@ -793,11 +794,23 @@ export function plot({ host, sidebar } = {}) {
         }
 
         function complete_add() {
-            if (!artist.value) return;
+            if (!artist.value) {
+                notify({
+                    type: 'error',
+                    title: tl(trans.data_source),
+                    body: tl(trans.artist_required)
+                });
+                return;
+            }
 
-            if (!album.value || !track.value) return;
-
-            if (album.value && track.value) return;
+            if (album.value && track.value) {
+                notify({
+                    type: 'error',
+                    title: tl(trans.data_source),
+                    body: tl(trans.choose_either_an_album_or_track)
+                });
+                return;
+            }
 
             temporary_data_source = {
                 artist: artist.value
@@ -807,6 +820,18 @@ export function plot({ host, sidebar } = {}) {
                 temporary_data_source.album = album.value;
             } else if (track.value) {
                 temporary_data_source.track = track.value;
+            }
+
+            const data_source_history = JSON5.parse(localStorage.getItem(keys.plot_data_history) || '[]');
+
+            const existing = data_source_history.find(point => point == JSON5.stringify(temporary_data_source));
+            if (existing) {
+                notify({
+                    type: 'error',
+                    title: tl(trans.data_source),
+                    body: tl(trans.already_exists)
+                });
+                return;
             }
 
             dialog_rm({ id: 'add_new_data_source' });
