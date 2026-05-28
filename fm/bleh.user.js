@@ -58455,6 +58455,7 @@
     let data_points = [];
     const graph_colour_length = 11;
     let temporary_data_source = {};
+    let temporary_user = "";
     let current_year = (/* @__PURE__ */ new Date()).getFullYear();
     let previous_year = current_year - 1;
     let selected_data_source = "";
@@ -58552,6 +58553,16 @@
       const unique_users = [...new Set(data_points.map((item) => item.user))];
       const seen_media = /* @__PURE__ */ new Set();
       const unique_media = [];
+      const media_list = [
+        {
+          text: tl2(trans.data_source)
+        },
+        {
+          type: "plus",
+          text: tl2(trans.add),
+          action: add_new_data_source
+        }
+      ];
       data_points.forEach((point) => {
         const media_string = import_json53.default.stringify(point.media);
         if (!seen_media.has(media_string)) {
@@ -58589,7 +58600,24 @@
           });
         }
       }
-      console.info("media", media, media_history);
+      if (media.length > 0) {
+        media_list.push({
+          text: "sep"
+        });
+        media_list.push({
+          text: tl2(trans.existing)
+        });
+        media_list.push(...media);
+      }
+      if (media_history.length > 0) {
+        media_list.push({
+          text: "sep"
+        });
+        media_list.push({
+          text: tl2(trans.history)
+        });
+        media_list.push(...media_history.toReversed());
+      }
       const user_list = [
         {
           text: tl2(trans.profile)
@@ -58597,29 +58625,55 @@
         {
           value: auth.name,
           text: generic_user_title(auth.name, "user", true)
+        },
+        {
+          type: "plus",
+          text: tl2(trans.add),
+          action: add_new_user
         }
       ];
-      const starred2 = settings.starred_friend;
-      if (starred2) {
+      const unique_users_not_self = unique_users.filter((user2) => user2 != auth.name && !settings.friends.includes(user2));
+      console.info("unique", unique_users, unique_users_not_self);
+      if (temporary_user == auth.name || settings.friends.includes(temporary_user) || unique_users_not_self.includes(temporary_user)) {
+        temporary_user = "";
+      }
+      if (unique_users_not_self.length > 0 || temporary_user != "") {
         user_list.push({
           text: "sep"
         });
         user_list.push({
-          text: tl2(trans.starred_friend.name)
+          text: tl2(trans.existing)
         });
-        user_list.push({
-          value: starred2,
-          text: generic_user_title(starred2, "starred", true)
-        });
+        if (temporary_user != "") {
+          user_list.push({
+            value: temporary_user,
+            text: generic_user_title(temporary_user, "user", true)
+          });
+        }
+        if (unique_users_not_self.length > 0) {
+          unique_users_not_self.forEach((user2) => {
+            user_list.push({
+              value: user2,
+              text: generic_user_title(user2, "user", true)
+            });
+          });
+        }
       }
+      const starred2 = settings.starred_friend || "";
       let friends2 = settings.friends.filter((f3) => f3 != starred2);
-      if (friends2.length > 0) {
+      if (starred2 || friends2.length > 0) {
         user_list.push({
           text: "sep"
         });
         user_list.push({
           text: tl2(trans.close_friends)
         });
+        if (starred2) {
+          user_list.push({
+            value: starred2,
+            text: generic_user_title(starred2, "starred", true)
+          });
+        }
         friends2.forEach((friend) => {
           user_list.push({
             value: friend,
@@ -58629,30 +58683,7 @@
       }
       render(plot_header_options, html`
             ${data_source = select({
-        values: [
-          {
-            text: tl2(trans.data_source)
-          },
-          {
-            type: "plus",
-            text: tl2(trans.add),
-            action: add_new_data_source
-          },
-          {
-            text: "sep"
-          },
-          {
-            text: tl2(trans.existing)
-          },
-          ...media,
-          {
-            text: "sep"
-          },
-          {
-            text: tl2(trans.history)
-          },
-          ...media_history.toReversed()
-        ],
+        values: media_list,
         func: (val) => {
           selected_data_source = val;
           check_if_allow();
@@ -58665,7 +58696,7 @@
           selected_user = val;
           check_if_allow();
         },
-        initial: selected_user
+        initial: user_list.find((user2) => user2.value && user2.value == selected_user) ? selected_user : ""
       })}
             <button class="btn primary icon" data-type="plot" onclick=${() => add_data_point()} ref=${(el) => add_data_point_btn = el}>
                 ${tl2(trans.plot.name)}
@@ -59132,6 +59163,67 @@
         }
         dialog_rm({ id: "add_new_data_source" });
         selected_data_source = import_json53.default.stringify(temporary_data_source);
+        update_plot_options();
+      }
+    }
+    function add_new_user() {
+      let user_name;
+      let add_as_close_friend;
+      dialog({
+        id: "add_new_user",
+        title: tl2(trans.profile),
+        body: html.node`
+                <div class="new-scrobble-form">
+                    <div class="form-inner">
+                        <p class="generic-label">${tl2(trans.username.name)}</p>
+                        ${user_name = input({
+          type: "text",
+          submit_on_character: true
+        })}
+                    </div>
+                    <div class="form-inner">
+                        ${add_as_close_friend = toggle({
+          type: "checkbox",
+          title: tl2(trans.add_as_friend)
+        })}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="see-more cancel left-icon" onclick=${() => dialog_rm({ id: "add_new_user" })}>
+                        ${tl2(trans.cancel)}
+                    </button>
+                    <div class="fill" />
+                    <button class="btn primary icon" data-type="plus" onclick=${complete_add}>
+                        ${tl2(trans.add)}
+                    </button>
+                </div>
+            `
+      });
+      function complete_add() {
+        if (!user_name.value) {
+          notify({
+            type: "error",
+            title: tl2(trans.profile),
+            body: tl2(trans.username_required)
+          });
+          return;
+        }
+        if (add_as_close_friend.checked()) {
+          const existing = settings.friends.find((user2) => user2.toLowerCase() == user_name.value.toLowerCase());
+          if (existing) {
+            notify({
+              type: "error",
+              title: tl2(trans.profile),
+              body: tl2(trans.already_a_close_friend)
+            });
+          } else {
+            settings.friends.push(user_name.value);
+            save_setting("friends", settings.friends);
+          }
+        }
+        dialog_rm({ id: "add_new_user" });
+        temporary_user = user_name.value;
+        selected_user = user_name.value;
         update_plot_options();
       }
     }
@@ -74665,7 +74757,7 @@
             `}
         </div>
         <section class="side-actions">
-            <button class="btn side-action icon-mask" data-type="import" onclick=${() => import_settings30()}>
+            <button class="btn side-action icon-mask" data-type="import" onclick=${() => import_settings31()}>
                 ${tl2(trans.import)}
             </button>
             <button class="btn side-action icon-mask" data-type="export" onclick=${() => export_settings()}>
@@ -75788,7 +75880,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     set_storage("bleh_profile_notes", JSON.stringify(profile_notes));
     dialog_rm({ id: "edit_profile_note" });
   }
-  function import_settings30() {
+  function import_settings31() {
     let text4;
     const modal = dialog({
       id: "import_settings",
@@ -94742,6 +94834,12 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     },
     already_exists: {
       en: "This data source already exists"
+    },
+    username_required: {
+      en: "Username required"
+    },
+    already_a_close_friend: {
+      en: "Already added to close friends"
     }
   };
   var translation_fallback = "NO_TRANSLATION_FOUND";

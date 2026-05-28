@@ -22,6 +22,8 @@ import { DateTime } from "luxon";
 import { chart_bucket } from "@/types/library";
 import { redirect } from "../music/music";
 import { notify } from "../dialog/notify";
+import { toggle } from "../settings/toggle";
+import { save_setting } from "../settings/settings";
 
 export function plot({ host, sidebar } = {}) {
     if (!host || !sidebar) return;
@@ -31,6 +33,7 @@ export function plot({ host, sidebar } = {}) {
     const graph_colour_length = 11;
 
     let temporary_data_source = {};
+    let temporary_user = '';
 
     let current_year = new Date().getFullYear();
     let previous_year = current_year - 1;
@@ -156,6 +159,17 @@ export function plot({ host, sidebar } = {}) {
         const seen_media = new Set();
         const unique_media = [];
 
+        const media_list = [
+            {
+                text: tl(trans.data_source)
+            },
+            {
+                type: 'plus',
+                text: tl(trans.add),
+                action: add_new_data_source
+            }
+        ];
+
         data_points.forEach(point => {
             const media_string = JSON5.stringify(point.media);
 
@@ -204,7 +218,25 @@ export function plot({ host, sidebar } = {}) {
             }
         }
 
-        console.info('media', media, media_history);
+        if (media.length > 0) {
+            media_list.push({
+                text: 'sep'
+            });
+            media_list.push({
+                text: tl(trans.existing)
+            });
+            media_list.push(...media);
+        }
+
+        if (media_history.length > 0) {
+            media_list.push({
+                text: 'sep'
+            });
+            media_list.push({
+                text: tl(trans.history)
+            });
+            media_list.push(...media_history.toReversed());
+        }
 
         const user_list = [
             {
@@ -213,31 +245,65 @@ export function plot({ host, sidebar } = {}) {
             {
                 value: auth.name,
                 text: generic_user_title(auth.name, 'user', true)
+            },
+            {
+                type: 'plus',
+                text: tl(trans.add),
+                action: add_new_user
             }
         ];
 
-        const starred = settings.starred_friend;
-        if (starred) {
+        const unique_users_not_self = unique_users.filter(user => user != auth.name && !settings.friends.includes(user));
+
+        console.info('unique', unique_users, unique_users_not_self);
+
+        if (temporary_user == auth.name || settings.friends.includes(temporary_user) || unique_users_not_self.includes(temporary_user)) {
+            temporary_user = '';
+        }
+
+        if (unique_users_not_self.length > 0 || temporary_user != '') {
             user_list.push({
                 text: 'sep'
             });
             user_list.push({
-                text: tl(trans.starred_friend.name)
+                text: tl(trans.existing)
             });
-            user_list.push({
-                value: starred,
-                text: generic_user_title(starred, 'starred', true)
-            });
+
+            if (temporary_user != '') {
+                user_list.push({
+                    value: temporary_user,
+                    text: generic_user_title(temporary_user, 'user', true)
+                });
+            }
+
+            if (unique_users_not_self.length > 0) {
+                unique_users_not_self.forEach(user => {
+                    user_list.push({
+                        value: user,
+                        text: generic_user_title(user, 'user', true)
+                    });
+                });
+            }
         }
 
+        const starred = settings.starred_friend || '';
         let friends = settings.friends.filter(f => f != starred);
-        if (friends.length > 0) {
+
+        if (starred || friends.length > 0) {
             user_list.push({
                 text: 'sep'
             });
             user_list.push({
                 text: tl(trans.close_friends)
             });
+
+            if (starred) {
+                user_list.push({
+                    value: starred,
+                    text: generic_user_title(starred, 'starred', true)
+                });
+            }
+
             friends.forEach((friend: string) => {
                 user_list.push({
                     value: friend,
@@ -248,30 +314,7 @@ export function plot({ host, sidebar } = {}) {
 
         render(plot_header_options, html`
             ${data_source = select({
-                values: [
-                    {
-                        text: tl(trans.data_source)
-                    },
-                    {
-                        type: 'plus',
-                        text: tl(trans.add),
-                        action: add_new_data_source
-                    },
-                    {
-                        text: 'sep'
-                    },
-                    {
-                        text: tl(trans.existing)
-                    },
-                    ...media,
-                    {
-                        text: 'sep'
-                    },
-                    {
-                        text: tl(trans.history)
-                    },
-                    ...media_history.toReversed()
-                ],
+                values: media_list,
                 func: (val: string) => {
                     selected_data_source = val;
                     check_if_allow();
@@ -284,7 +327,7 @@ export function plot({ host, sidebar } = {}) {
                     selected_user = val;
                     check_if_allow();
                 },
-                initial: selected_user
+                initial: user_list.find(user => user.value && user.value == selected_user) ? selected_user : ''
             })}
             <button class="btn primary icon" data-type="plot" onclick=${() => add_data_point()} ref=${el => add_data_point_btn = el}>
                 ${tl(trans.plot.name)}
@@ -838,6 +881,72 @@ export function plot({ host, sidebar } = {}) {
 
             dialog_rm({ id: 'add_new_data_source' });
             selected_data_source = JSON5.stringify(temporary_data_source);
+            update_plot_options();
+        }
+    }
+
+    function add_new_user() {
+        let user_name;
+        let add_as_close_friend;
+
+        dialog({
+            id: 'add_new_user',
+            title: tl(trans.profile),
+            body: html.node`
+                <div class="new-scrobble-form">
+                    <div class="form-inner">
+                        <p class="generic-label">${tl(trans.username.name)}</p>
+                        ${user_name = input({
+                            type: 'text',
+                            submit_on_character: true
+                        })}
+                    </div>
+                    <div class="form-inner">
+                        ${add_as_close_friend = toggle({
+                            type: 'checkbox',
+                            title: tl(trans.add_as_friend)
+                        })}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="see-more cancel left-icon" onclick=${() => dialog_rm({ id: 'add_new_user' })}>
+                        ${tl(trans.cancel)}
+                    </button>
+                    <div class="fill" />
+                    <button class="btn primary icon" data-type="plus" onclick=${complete_add}>
+                        ${tl(trans.add)}
+                    </button>
+                </div>
+            `
+        });
+
+        function complete_add() {
+            if (!user_name.value) {
+                notify({
+                    type: 'error',
+                    title: tl(trans.profile),
+                    body: tl(trans.username_required)
+                });
+                return;
+            }
+
+            if (add_as_close_friend.checked()) {
+                const existing = settings.friends.find(user => user.toLowerCase() == user_name.value.toLowerCase());
+                if (existing) {
+                    notify({
+                        type: 'error',
+                        title: tl(trans.profile),
+                        body: tl(trans.already_a_close_friend)
+                    });
+                } else {
+                    settings.friends.push(user_name.value);
+                    save_setting('friends', settings.friends);
+                }
+            }
+
+            dialog_rm({ id: 'add_new_user' });
+            temporary_user = user_name.value;
+            selected_user = user_name.value;
             update_plot_options();
         }
     }

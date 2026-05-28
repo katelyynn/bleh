@@ -11215,6 +11215,12 @@ export const trans = {
     already_exists: {
         en: 'This data source already exists'
     },
+    username_required: {
+        en: 'Username required'
+    },
+    already_a_close_friend: {
+        en: 'Already added to close friends'
+    }
 } as const satisfies Record<string, any>;
 
 export const translation_fallback = 'NO_TRANSLATION_FOUND';
