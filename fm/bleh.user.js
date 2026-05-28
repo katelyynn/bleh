@@ -70172,6 +70172,13 @@
   }
   var purify = createDOMPurify();
 
+  // src/components/shared/text_decode.ts
+  function text_decode(text4) {
+    const textarea = document.createElement("textarea");
+    textarea.innerHTML = text4;
+    return textarea.value;
+  }
+
   // src/components/profile/statuscafe.js
   async function fetch_status(username2) {
     const current = /* @__PURE__ */ new Date();
@@ -70226,7 +70233,7 @@
       }}>
                     <div class="status-cafe-content">
                         <span class="status-cafe-emoji">${data2.face}</span>
-                        <span class="status-cafe-text">${data2.content}</span>
+                        <span class="status-cafe-text">${text_decode(data2.content)}</span>
                     </div>
                     <div class="status-cafe-top">
                         <span class="status-cafe-time">${data2.timeAgo}</span>
@@ -96266,7 +96273,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-05-18"
       }
     },
-    built_on: "2026-05-28T03:47:40.086Z"
+    built_on: "2026-05-28T14:29:12.667Z"
   };
 
   // node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
