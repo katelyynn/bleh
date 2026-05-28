@@ -182,3 +182,33 @@ table.table tr:nth-child(2n) td {
         color: oklch(var(--c2));
     }
 }
+
+
+.step-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.step {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: default;
+}
+
+.step-number {
+    --w: 24px;
+    width: var(--w);
+    height: var(--w);
+
+    background-color: oklch(var(--h4) / 20%);
+    color: oklch(var(--l3-c));
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+
+    flex-shrink: 0;
+}

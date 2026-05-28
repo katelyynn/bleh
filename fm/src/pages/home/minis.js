@@ -15,6 +15,7 @@ import { ff } from '@/components/settings/sku';
 import { plot } from '@/components/minis/plot';
 import { new_indicator } from '@/components/shared/indicator';
 import { card } from '@/components/minis/card';
+import { markdown } from '@/components/shared/markdown';
 
 let valid_minis;
 
@@ -285,6 +286,19 @@ function bleh_minis_plot() {
     render(
         page.structure.side,
         html`
+            <section class="summary">
+                <h2>${tl(trans.how_to_plot)}</h2>
+                <div class="step-list">
+                    ${Array.from({ length: 4 }, (_, i) => {
+                        return html.node`
+                            <div class="step">
+                                <div class="step-number">${i + 1}</div>
+                                <div class="step-text">${tl(trans.plot_explain[i])}</div>
+                            </div>
+                        `;
+                    })}
+                </div>
+            </section>
             <section
                 class="current-mini-settings"
                 ref=${(el) => (mini_settings = el)}

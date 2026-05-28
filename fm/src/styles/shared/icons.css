@@ -197,3 +197,19 @@ span.bleh-icon {
         font-weight: var(--font-weight-medium);
     }
 }
+
+.bleh-icon-animated-dots {
+    --icon: var(--icon-16-dots) !important;
+    background: linear-gradient(
+        90deg,
+        oklch(var(--b4)),
+        oklch(var(--c1)),
+        oklch(var(--b4)),
+        oklch(var(--c1)),
+        oklch(var(--b4))
+    );
+    background-size: 200% 100%;
+    animation: gradient 1.3s linear infinite;
+
+    margin: 0 4px;
+}

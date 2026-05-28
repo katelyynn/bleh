@@ -173,7 +173,8 @@ export const icons = {
     credits: 'credits',
     sparkle: 'sparkle',
     error: 'error',
-    construction: 'construction'
+    construction: 'construction',
+    animated_dots: 'animated-dots'
 };
 
 interface icon {
@@ -184,7 +185,7 @@ interface icon {
 
 export function icon({ name, identifier, use_mask = true }: icon) {
     const elem = html.node`
-        <span class="bleh-icon" style="${icon_mask({ name })}">
+        <span class="bleh-icon bleh-icon-${name}" style="${icon_mask({ name })}">
             ${name} (icon)
         </span>
     `;

@@ -110,6 +110,9 @@ export function plot({ host, sidebar } = {}) {
                 <div class="placeholder-block">
                     <div class="placeholder-head">( ╹ -╹)?</div>
                     <div class="placeholder-summary">${tl(trans.no_data_to_display)}</div>
+                    <button class="see-more left-icon" data-type="plus" onclick=${() => data_source.open()}>
+                        ${tl(trans.add_to_graph)}
+                    </button>
                 </div>
             </div>
         </div>
@@ -245,11 +248,6 @@ export function plot({ host, sidebar } = {}) {
             {
                 value: auth.name,
                 text: generic_user_title(auth.name, 'user', true)
-            },
-            {
-                type: 'plus',
-                text: tl(trans.add),
-                action: add_new_user
             }
         ];
 
@@ -261,29 +259,32 @@ export function plot({ host, sidebar } = {}) {
             temporary_user = '';
         }
 
-        if (unique_users_not_self.length > 0 || temporary_user != '') {
-            user_list.push({
-                text: 'sep'
-            });
-            user_list.push({
-                text: tl(trans.existing)
-            });
+        user_list.push({
+            text: 'sep'
+        });
+        user_list.push({
+            text: tl(trans.existing)
+        });
+        user_list.push({
+            type: 'plus',
+            text: tl(trans.add),
+            action: add_new_user
+        });
 
-            if (temporary_user != '') {
+        if (temporary_user != '') {
+            user_list.push({
+                value: temporary_user,
+                text: generic_user_title(temporary_user, 'user', true)
+            });
+        }
+
+        if (unique_users_not_self.length > 0) {
+            unique_users_not_self.forEach(user => {
                 user_list.push({
-                    value: temporary_user,
-                    text: generic_user_title(temporary_user, 'user', true)
+                    value: user,
+                    text: generic_user_title(user, 'user', true)
                 });
-            }
-
-            if (unique_users_not_self.length > 0) {
-                unique_users_not_self.forEach(user => {
-                    user_list.push({
-                        value: user,
-                        text: generic_user_title(user, 'user', true)
-                    });
-                });
-            }
+            });
         }
 
         const starred = settings.starred_friend || '';
@@ -329,6 +330,7 @@ export function plot({ host, sidebar } = {}) {
                 },
                 initial: user_list.find(user => user.value && user.value == selected_user) ? selected_user : ''
             })}
+            ${icon({ name: icons.animated_dots })}
             <button class="btn primary icon" data-type="plot" onclick=${() => add_data_point()} ref=${el => add_data_point_btn = el}>
                 ${tl(trans.plot.name)}
             </button>

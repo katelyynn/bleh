@@ -111,6 +111,10 @@ export function select({
         }
     });
 
+    container.open = () => {
+        menu.show();
+    }
+
     return container;
 
     function set_select(selected, bubble = true) {

@@ -11220,6 +11220,23 @@ export const trans = {
     },
     already_a_close_friend: {
         en: 'Already added to close friends'
+    },
+    plot_explain: {
+        0: {
+            en: 'Choose a timeframe for your graph'
+        },
+        1: {
+            en: 'Choose a data source (an artist, album, or track)'
+        },
+        2: {
+            en: 'Choose a user to add'
+        },
+        3: {
+            en: 'Add to your graph'
+        }
+    },
+    how_to_plot: {
+        en: 'Explaining Plot'
     }
 } as const satisfies Record<string, any>;
 
