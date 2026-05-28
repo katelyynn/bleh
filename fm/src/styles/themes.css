@@ -613,8 +613,8 @@ body,
         --b3: 0.94 calc(var(--sat) * 0.12 * var(--sat-bg, 1)) var(--hue);
         --b4: 0.82 calc(var(--sat) * 0.1 * var(--sat-bg, 1)) var(--hue);
         --b5: 0.91 calc(var(--sat) * 0.09 * var(--sat-bg, 1)) var(--hue);
-        --b6: 0.86 calc(var(--sat) * 0.08 * var(--sat-bg, 1)) var(--hue);
-        --b8: 0.86 calc(var(--sat) * 0.10 * var(--sat-bg, 1)) var(--hue);
+        --b6: 0.86 calc(var(--sat) * 0.1 * var(--sat-bg, 1)) var(--hue);
+        --b8: 0.86 calc(var(--sat) * 0.1 * var(--sat-bg, 1)) var(--hue);
         --b7: 0.17 calc(var(--sat) * 0.26 * var(--sat-bg, 1)) var(--hue);
         --b9: 0.84 0 0;
 
@@ -641,7 +641,7 @@ body,
         --nav-filter-shadow: drop-shadow(0 0 2px oklch(var(--b5)));
         --header-filter-shadow: drop-shadow(0 0 10px oklch(var(--b5)));
 
-        --card-blur-bg: oklch(var(--b5) / var(--solarium-opacity, 72%));
+        --card-blur-bg: oklch(0.91 calc(var(--sat) * 0.11 * var(--sat-bg, 1)) var(--hue) / var(--solarium-opacity, 72%));
         --card-blur-bg-alt: oklch(var(--b5) / var(--solarium-opacity, 22%));
 
         --banner-overlay: oklch(var(--b5) / 20%);
@@ -664,6 +664,10 @@ body,
         --header-disc-filter: brightness(0.9);
 
         --card-shadow: 0 2px 10px oklch(0.3 calc(var(--sat) * 0.72 * var(--sat-bg, 1)) var(--hue) / 0.08);
+
+        --view-buttons: oklch(var(--b6) / 10%);
+        --view-buttons-hov: oklch(var(--b4) / 40%);
+        --view-buttons-atv: oklch(var(--b4) / 60%);
     }
 }
 

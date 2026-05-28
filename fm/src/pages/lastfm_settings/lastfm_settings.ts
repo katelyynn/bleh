@@ -34,59 +34,70 @@ import { render_shoutbox_preview, render_track_preview } from '@/components/sett
 
 // patch last.fm settings
 export function bleh_native_settings() {
-    const no_data = page.structure.container.querySelector(':scope > .no-data-message');
-    if (no_data) page.structure.main.appendChild(no_data);
+    try {
+        const no_data = page.structure.container.querySelector(':scope > .no-data-message');
+        if (no_data) page.structure.main.appendChild(no_data);
 
-    if (page.subpage == 'overview') {
-        lastfm_settings_profile();
-    } else if (page.subpage == 'privacy') {
-        patch_settings_privacy_tab();
-    } else if (page.subpage == 'subscription_overview') {
-        let panel = page.structure.container.querySelector('.row + div');
+        if (page.subpage == 'overview') {
+            lastfm_settings_profile();
+        } else if (page.subpage == 'privacy') {
+            patch_settings_privacy_tab();
+        } else if (page.subpage == 'subscription_overview') {
+            let panel = page.structure.container.querySelector('.row + div');
 
-        let subscription = panel.querySelector('#current-subscription');
-        let edits = panel.querySelector('#automatic-edits');
-        let merch_h = panel.querySelector(':scope > h2');
-        let merch = panel.querySelector('#mechandise-discount');
-        let history = panel.querySelector('#pro-history');
+            let subscription = panel.querySelector('#current-subscription');
+            let edits = panel.querySelector('#automatic-edits');
+            let merch_h = panel.querySelector(':scope > h2');
+            let merch = panel.querySelector('#mechandise-discount');
+            let history = panel.querySelector('#pro-history');
 
-        merch.insertBefore(merch_h, merch.firstElementChild);
+            merch.insertBefore(merch_h, merch.firstElementChild);
 
-        page.structure.main.appendChild(subscription);
-        page.structure.main.appendChild(edits);
-        page.structure.main.appendChild(merch);
-        page.structure.main.appendChild(history);
+            page.structure.main.appendChild(subscription);
+            page.structure.main.appendChild(edits);
+            page.structure.main.appendChild(merch);
+            page.structure.main.appendChild(history);
 
-        let button = subscription.querySelector('.btn-primary');
-        if (button)
-            button.classList.add('subscription-button', 'icon', 'primary');
+            let button = subscription.querySelector('.btn-primary');
+            if (button)
+                button.classList.add('subscription-button', 'icon', 'primary');
 
-        let more_link_wrap = edits.querySelector('.more-link');
-        if (more_link_wrap) {
-            more_link_wrap.classList = '';
-            let edit_buttons = more_link_wrap.querySelectorAll('a');
-            edit_buttons.forEach((edit_button, index) => {
-                edit_button.classList.add(
-                    'btn',
-                    'edit-lead-button',
-                    'icon',
-                    'primary'
-                );
+            let more_link_wrap = edits.querySelector('.more-link');
+            if (more_link_wrap) {
+                more_link_wrap.classList = '';
+                let edit_buttons = more_link_wrap.querySelectorAll('a');
+                edit_buttons.forEach((edit_button, index) => {
+                    edit_button.classList.add(
+                        'btn',
+                        'edit-lead-button',
+                        'icon',
+                        'primary'
+                    );
 
-                if (index == 0) edit_button.classList.add('edit-album');
-                else edit_button.classList.add('edit-track');
-            });
+                    if (index == 0) edit_button.classList.add('edit-album');
+                    else edit_button.classList.add('edit-track');
+                });
+            }
+        } else if (page.subpage.startsWith('subscription_automatic-edits')) {
+            bleh_auto_edits();
+        } else if (page.subpage == 'account_overview') {
+            bleh_accounts();
+        } else if (page.subpage == 'website') {
+            bleh_website();
+        } else if (page.subpage == 'change-username_overview') {
+            bleh_name_change();
+        } else if (page.subpage == 'applications_overview') {
+            bleh_applications();
         }
-    } else if (page.subpage.startsWith('subscription_automatic-edits')) {
-        bleh_auto_edits();
-    } else if (page.subpage == 'account_overview') {
-        bleh_accounts();
-    } else if (page.subpage == 'website') {
-        bleh_website();
-    } else if (page.subpage == 'change-username_overview') {
-        bleh_name_change();
-    } else if (page.subpage == 'applications_overview') {
-        bleh_applications();
+    } catch (e) {
+        page.structure.main.insertBefore(html.node`
+            <div class="bleh--panel">
+                <div class="loading-data-container">
+                    <div class="alert alert-error">${e && e.message ? e.message : e}</div>
+                </div>
+            </div>
+        `, page.structure.main.firstElementChild);
+        console.error(e);
     }
 }
 
