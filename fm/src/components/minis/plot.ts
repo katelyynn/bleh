@@ -59,7 +59,7 @@ export function plot({ host, sidebar } = {}) {
 
     let refresh_graph_btn;
 
-    let current_timeframe = 'date_preset=LAST_180_DAYS';
+    let current_timeframe = 'date_preset=LAST_365_DAYS';
     let proposed_timeframe;
     let timeframe_matches = true;
 
@@ -79,7 +79,7 @@ export function plot({ host, sidebar } = {}) {
                 <label class="plot-header-label">${tl(trans.graph_options)}</label>
                 <div class="plot-header-options">
                     ${timeframe = hybrid_timeframe_picker({
-                        initial: 'date_preset=LAST_180_DAYS',
+                        initial: 'date_preset=LAST_365_DAYS',
                         func: (val: string) => {
                             if (!timeframe_matches && val != current_timeframe) return;
 
@@ -546,7 +546,7 @@ export function plot({ host, sidebar } = {}) {
                 data_source_history.push(media);
             }
 
-            if (data_source_history.length > 10)
+            if (data_source_history.length > 30)
                 data_source_history.shift();
             localStorage.setItem(keys.plot_data_history, JSON5.stringify(data_source_history));
         }

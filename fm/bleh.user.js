@@ -58475,7 +58475,7 @@
     let allow_adding = true;
     let plot_header_options;
     let refresh_graph_btn;
-    let current_timeframe = "date_preset=LAST_180_DAYS";
+    let current_timeframe = "date_preset=LAST_365_DAYS";
     let proposed_timeframe;
     let timeframe_matches = true;
     let fixing_timeframe = false;
@@ -58491,7 +58491,7 @@
                 <label class="plot-header-label">${tl2(trans.graph_options)}</label>
                 <div class="plot-header-options">
                     ${timeframe = hybrid_timeframe_picker({
-      initial: "date_preset=LAST_180_DAYS",
+      initial: "date_preset=LAST_365_DAYS",
       func: (val) => {
         if (!timeframe_matches && val != current_timeframe) return;
         if (current_timeframe != val && data_points.length > 0) {
@@ -58896,7 +58896,7 @@
           data_source_history.splice(data_source_history.indexOf(media), 1);
           data_source_history.push(media);
         }
-        if (data_source_history.length > 10)
+        if (data_source_history.length > 30)
           data_source_history.shift();
         localStorage.setItem(keys2.plot_data_history, import_json53.default.stringify(data_source_history));
       }
