@@ -31,10 +31,23 @@
     border-radius: var(--item-small-radius);
     padding: 10px;
     height: 600px;
+    overflow: hidden;
 
     &.empty {
         --plot-body-empty: flex;
         --plot-body-canvas: none;
+    }
+
+    &.loading {
+        --plot-body-loading: flex;
+
+        &:after {
+            display: none !important;
+        }
+
+        & > .plot-canvas-container {
+            opacity: 0.6;
+        }
     }
 }
 
@@ -46,9 +59,23 @@
     height: 100%;
 }
 
+.plot-body-loading-message {
+    display: var(--plot-body-loading, none);
+
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
 .plot-canvas-container {
     height: 100%;
     display: var(--plot-body-canvas, block);
+
+    transition-property: opacity;
+    transition-duration: 0.4s;
+    transition-timing-function: var(--trans-function-ani);
 }
 
 .plot-footer {

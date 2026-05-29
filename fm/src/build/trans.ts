@@ -11145,99 +11145,103 @@ export const trans = {
         }
     },
     better_with_friends: {
-        en: 'Music is better with friends, {a}add to your close friends list{/a}'
+        en: 'Music is better with friends, {a}add to your close friends list{/a}',
     },
     collage_cta: {
         name: {
-            en: 'Create a collage'
+            en: 'Create a collage',
         },
         body: {
-            en: 'Featuring your favourite albums in the last month'
-        }
+            en: 'Featuring your favourite albums in the last month',
+        },
     },
     compare_cta: {
         name: {
-            en: 'Compare with your friends'
+            en: 'Compare with your friends',
         },
         body: {
-            en: 'Which music do you have in common?'
-        }
+            en: 'Which music do you have in common?',
+        },
     },
     sponsor_cta: {
         body: {
-            en: 'Help out the future of bleh'
-        }
+            en: 'Help out the future of bleh',
+        },
     },
     add_new_data_point: {
-        en: 'Add new data point'
+        en: 'Add new data point',
     },
     presets: {
         // used in reference to timeframe presets
-        en: 'Presets'
+        en: 'Presets',
     },
     existing: {
         // used as a header for existing items
-        en: 'Existing'
+        en: 'Existing',
     },
     history: {
-        en: 'History'
+        en: 'History',
     },
     no_data_to_display: {
-        en: 'No data to display'
+        en: 'No data to display',
     },
     add_to_graph: {
-        en: 'Add to graph'
+        en: 'Add to graph',
     },
     graph_options: {
-        en: 'Graph options'
+        en: 'Graph options',
     },
     refresh_plot_notice: {
-        en: 'This will re-gather all data points'
+        en: 'This will re-gather all data points',
     },
     refresh_plot_alert: {
-        en: 'The timeframe you selected does not match the current graph, you can refresh the data to fix this.'
+        en: 'The timeframe you selected does not match the current graph, you can refresh the data to fix this.',
     },
     under_construction: {
-        en: 'This page is under construction, please give feedback and suggestions if you have any!'
+        en: 'This page is under construction, please give feedback and suggestions if you have any!',
     },
     data_source: {
-        en: 'Data source'
+        en: 'Data source',
     },
     data_source_explain: {
-        en: 'Here you can add media to your graph, for example an artist or an album/track. Listing an album or track is optional, as you can instead add an entire artist.'
+        en: 'Here you can add media to your graph, for example an artist or an album/track. Listing an album or track is optional, as you can instead add an entire artist.',
     },
     artist_required: {
-        en: 'Artist name required'
+        en: 'Artist name required',
     },
     choose_either_an_album_or_track: {
-        en: 'Choose either an album or track only'
+        en: 'Choose either an album or track only',
     },
     already_exists: {
-        en: 'This data source already exists'
+        en: 'This data source already exists',
     },
     username_required: {
-        en: 'Username required'
+        en: 'Username required',
     },
     already_a_close_friend: {
-        en: 'Already added to close friends'
+        en: 'Already added to close friends',
     },
     plot_explain: {
         0: {
-            en: 'Choose a timeframe for your graph'
+            en: 'Choose a timeframe for your graph',
         },
         1: {
-            en: 'Choose a data source (an artist, album, or track)'
+            en: 'Choose a data source (an artist, album, or track)',
         },
         2: {
-            en: 'Choose a user to add'
+            en: 'Choose a user to add',
         },
         3: {
-            en: 'Add to your graph'
-        }
+            en: 'Add to your graph',
+        },
     },
     how_to_plot: {
-        en: 'Explaining Plot'
-    }
+        en: 'Explaining Plot',
+    },
+    plotting_your_data: {
+        // loading message
+        en: 'Plotting your data',
+    },
 } as const satisfies Record<string, any>;
 
 export const translation_fallback = 'NO_TRANSLATION_FOUND';

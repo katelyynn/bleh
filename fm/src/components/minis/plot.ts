@@ -115,6 +115,11 @@ export function plot({ host, sidebar } = {}) {
                     </button>
                 </div>
             </div>
+            <div class="plot-body-loading-message">
+                <div class="loading-data-container">
+                    <div class="loading-data-text">${tl(trans.plotting_your_data)}</div>
+                </div>
+            </div>
         </div>
         <div class="plot-footer" ref=${el => footer = el} />
     `);
@@ -144,9 +149,14 @@ export function plot({ host, sidebar } = {}) {
         const previous_data_points = [...data_points];
         data_points.length = 0;
 
+        body.classList.add('loading');
+        body.classList.remove('empty');
+
         for (const point of previous_data_points) {
             await fetch_data_set(point.user, JSON5.stringify(point.media), false);
         }
+
+        body.classList.remove('loading');
 
         timeframe.disabled = false;
         timeframe_matches = true;
@@ -613,13 +623,15 @@ export function plot({ host, sidebar } = {}) {
         data_points.push(point);
         update_plot_options();
         plot_footer();
-        update_chart();
+        update_chart(change_history);
     }
 
     function add_data_point() {
         allow_adding = false;
 
         add_data_point_btn.disabled = true;
+        body.classList.add('loading');
+        body.classList.remove('empty');
 
         fetch_data_set(user.value, data_source.value);
     }
@@ -655,7 +667,7 @@ export function plot({ host, sidebar } = {}) {
         timeframe.disabled = false;
     }
 
-    function update_chart() {
+    function update_chart(update_body = true) {
         highlight_data_set(null, false);
 
         load_chart_colours();
@@ -738,7 +750,10 @@ export function plot({ host, sidebar } = {}) {
             point.borderColor = graph_colours[index % graph_colours.length];
         });
 
-        body.classList.toggle('empty', data_points.length == 0);
+        if (update_body) {
+            body.classList.toggle('empty', data_points.length == 0);
+            body.classList.remove('loading');
+        }
 
         chart.update();
 
