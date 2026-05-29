@@ -38183,7 +38183,7 @@
           sk: localStorage.getItem("bleh_auth"),
           artist: artist.value,
           track: track.value,
-          timestamp: Math.floor(date.value / 1e3)
+          timestamp: use_current.checked() ? DateTime.now().toUnixInteger() : Math.floor(date.value / 1e3)
         };
         if (album.value != "") params.album = album.value;
         if (album_artist.value != "")
