@@ -123,14 +123,6 @@
 
         form {
             margin: unset;
-
-            .obsession-delete-button {
-                --hue-over: var(--hue-neg);
-                --sat-over: 1;
-                --lit-over: 1;
-                --mask: var(--icon-16-trash) !important;
-                opacity: unset;
-            }
         }
 
         z-index: 20;
@@ -185,7 +177,6 @@
             .fellow-obsessor-avatar > .avatar {
                 box-shadow: var(--interact-shadow);
                 z-index: 0;
-                --mask-size: var(--cover-size-100);
 
                 .avatar-status-dot {
                     width: 24px;
@@ -214,6 +205,12 @@
     @media (max-width: 980px) {
         width: calc(var(--cards-width) - (var(--card-padding) * 2));
     }
+
+    position: relative;
+}
+
+.fellow-obsessor-avatar {
+    --mask-size: var(--cover-size-100);
 }
 
 /* missing cover */
@@ -478,4 +475,8 @@
 }
 .obsession-candidate-artist {
     flex: 1;
+}
+
+.obsession-delete-button {
+    opacity: unset;
 }

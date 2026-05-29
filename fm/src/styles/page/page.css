@@ -45,6 +45,10 @@
 .row {
     margin: unset;
     /*animation: modal 0.35s var(--trans-function);*/
+
+    &:before, &:after {
+        display: none !important;
+    }
 }
 .container > .row {
     display: flex;

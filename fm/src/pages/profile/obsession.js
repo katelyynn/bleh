@@ -4,7 +4,7 @@
 // Licensed under GPLv3
 //
 
-import { patch_avatar } from '@/components/shared/avatar';
+import { avatar, patch_avatar } from '@/components/shared/avatar';
 import { settings } from '@/build/config';
 import { log } from '@/build/log';
 import { artist_corrections } from '@/build/music';
@@ -18,6 +18,7 @@ import { html, render } from 'lighterhtml';
 import { redirect } from '@/components/music/music';
 import tippy from 'tippy.js';
 import { hoshino } from '@/components/music/hoshino';
+import { header_colour } from '@/components/page/colour';
 
 export function bleh_obsession() {
     let obsession_container = document.querySelector('.obsession-container');
@@ -41,7 +42,7 @@ export function bleh_obsession() {
     update_page();
 
     page.structure.container.classList.add('has-cards-view');
-    page.structure.content.classList.add('cards-view');
+    page.structure.content.classList.add('cards-view', 'obsession-view');
 
     let background = obsession_container.querySelector(
         '.obsession-background-inner'
@@ -54,32 +55,7 @@ export function bleh_obsession() {
     if (!background.endsWith('/4128a6eb29f94943c9d206c08e625904.jpg')) {
         register_background(background);
 
-        try {
-            let bg = obsession_container.style
-                .getPropertyValue('background')
-                .replace('rgb(', '')
-                .replace(')', '')
-                .split(', ');
-            let hsl = rgb_to_hsl(
-                parseInt(bg[0]),
-                parseInt(bg[1]),
-                parseInt(bg[2])
-            );
-            document.body.style.setProperty('--hue-album', hsl.h);
-            document.body.style.setProperty(
-                '--sat-album',
-                clamp_sat((hsl.s / 100) * 3)
-            );
-            document.body.style.setProperty('--lit-album', hsl.l / 100 + 0.35);
-
-            log(
-                `sourced hsl of (${hsl.h}, ${hsl.s}, ${hsl.l}) - using final value of (${hsl.h}, ${clamp_sat((hsl.s / 100) * 3)}, ${hsl.l / 100 + 0.35})`,
-                'hue from album'
-            );
-        } catch (e) {
-            console.error(e);
-            log('no cover present', 'hue from album');
-        }
+        header_colour(html.node`<img src=${avatar(background, 'avatar300s')} />`, true);
     } else {
         register_background('');
     }
@@ -250,7 +226,8 @@ export function bleh_obsession() {
         quote.appendChild(manage);
 
         const trash = quote.querySelector('button');
-        trash.classList.add('btn');
+        trash.classList.add('see-more', 'left-icon', 'danger-subtle', 'colourful');
+        trash.setAttribute('data-type', 'delete');
         trash.textContent = tl(trans.delete);
     }
 
