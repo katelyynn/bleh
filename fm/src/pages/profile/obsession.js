@@ -40,7 +40,7 @@ export function bleh_obsession() {
     log('status is', 'page', 'info', page);
     update_page();
 
-    page.structure.container.classList.add('sour');
+    page.structure.container.classList.add('has-cards-view');
     page.structure.content.classList.add('cards-view');
 
     let background = obsession_container.querySelector(
@@ -164,13 +164,13 @@ export function bleh_obsession() {
     track_title.classList.remove('obsession-meta-track');
 
     let track_header = html.node`
-        <section class="redesigned-header redesigned-track-header no-background obsession-track-header">
-            <div class="info-side">
+        <section class="page-header for-track for-obsession">
+            <div class="page-header-info">
                 <div class="sub-text">${tl(trans.obsession)}</div>
                 <div class="title-container">
-                    <h1><a href="${link}">${track_title}</a></h1>
+                    <h1 class="header-new-title page-header-title"><a href="${link}">${track_title}</a></h1>
                 </div>
-                <h2>${html.node([track_artist.innerHTML])}</h2>
+                <h2 class="page-header-artist artist-for-track">${html.node([track_artist.innerHTML])}</h2>
             </div>
         </section>
     `;

@@ -40217,7 +40217,7 @@
     checkup_page_structure(false, content_top);
     log("status is", "page", "info", page);
     update_page();
-    page.structure.container.classList.add("sour");
+    page.structure.container.classList.add("has-cards-view");
     page.structure.content.classList.add("cards-view");
     let background = obsession_container.querySelector(
       ".obsession-background-inner"
@@ -40311,13 +40311,13 @@
     }
     track_title.classList.remove("obsession-meta-track");
     let track_header = html.node`
-        <section class="redesigned-header redesigned-track-header no-background obsession-track-header">
-            <div class="info-side">
+        <section class="page-header for-track for-obsession">
+            <div class="page-header-info">
                 <div class="sub-text">${tl2(trans.obsession)}</div>
                 <div class="title-container">
-                    <h1><a href="${link}">${track_title}</a></h1>
+                    <h1 class="header-new-title page-header-title"><a href="${link}">${track_title}</a></h1>
                 </div>
-                <h2>${html.node([track_artist.innerHTML])}</h2>
+                <h2 class="page-header-artist artist-for-track">${html.node([track_artist.innerHTML])}</h2>
             </div>
         </section>
     `;
@@ -82494,7 +82494,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     update_page();
     page.structure.row.removeChild(page.structure.row.firstElementChild);
     page.structure.row.removeChild(page.structure.row.firstElementChild);
-    page.structure.container.classList.add("sour");
+    page.structure.container.classList.add("has-cards-view");
     page.structure.content.classList.add("cards-view");
     if (!page.requested.token) {
       render(
@@ -96484,7 +96484,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-05-18"
       }
     },
-    built_on: "2026-05-29T00:57:05.659Z"
+    built_on: "2026-05-29T17:49:29.336Z"
   };
 
   // node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
