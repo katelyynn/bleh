@@ -211,4 +211,5 @@ table.table tr:nth-child(2n) td {
     border-radius: 5px;
 
     flex-shrink: 0;
+    user-select: none;
 }

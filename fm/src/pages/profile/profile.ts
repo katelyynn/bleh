@@ -374,7 +374,7 @@ export function bleh_profiles() {
                 const elem = html.node`
                     <section class="recent-tracks-section">
                         <h2>
-                            <a class="text-colour-link" href="${window.location.href}/library">${tl(trans.recent_tracks)}</a>
+                            <a class="text-colour-link" href="${window.location.href}/library">${tl(trans.recents)}</a>
                         </h2>
                         <div class="loading-data-container">
                             <div class="loading-data-text private">
@@ -854,7 +854,7 @@ function refresh_tracks(button, { quiet = false }) {
             if (!tracklist_panel) {
                 if (!quiet) {
                     status({
-                        title: tl(trans.recent_tracks),
+                        title: tl(trans.recents),
                         body: tl(trans.value_failed_to_load).replace(
                             '{v}',
                             tl(trans.library)
@@ -867,7 +867,7 @@ function refresh_tracks(button, { quiet = false }) {
 
             if (!quiet) {
                 status({
-                    title: tl(trans.recent_tracks),
+                    title: tl(trans.recents),
                     body: tl(trans.refreshed)
                 });
             }

@@ -225,8 +225,8 @@
 
 .modal-close-button {
     --bg: transparent;
-    --bg-hov: oklch(var(--b4) / 40%);
-    --bg-atv: oklch(var(--b4) / 60%);
+    --bg-hov: var(--modal-button-hov);
+    --bg-atv: var(--modal-button-atv);
     --shadow: none;
     --col: oklch(var(--c3));
     --mask-colour: currentColor;

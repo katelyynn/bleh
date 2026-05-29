@@ -446,6 +446,16 @@ body,
 
     --card-shadow: 0 8px 35px oklch(0.01 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue) / 0.3);
 
+    --modal-bg: oklch(var(--b6) / 0.6);
+
+    --menu-bg: var(--b6);
+    --menu-opacity: 92%;
+
+    --tracklist-hover: oklch(var(--b4) / 30%);
+
+    --modal-button-hov: oklch(var(--b4) / 40%);
+    --modal-button-atv: oklch(var(--b4) / 60%);
+
     &[data-bleh--theme="darker"] {
         /* any additional highlights */
         --b2: 0.41 calc(var(--sat) * 0.04 * var(--sat-bg, 1)) var(--hue);
@@ -494,8 +504,8 @@ body,
 
         --separator-base: oklch(var(--b2) / 0.7);
 
-        --card-border-base: oklch(var(--b2) / 0.45);
-        --card-border-base-highlight: oklch(var(--b2) / 0.6);
+        --card-border-base: oklch(var(--b2) / 0.72);
+        --card-border-base-highlight: oklch(var(--b2) / 0.8);
 
         --input-shadow:
             inset 0 0 0 1px oklch(var(--b3)),
@@ -506,7 +516,7 @@ body,
         --group-shadow: inset 0 0 0 1px oklch(var(--b2) / 52%);
 
         --sidebar-bg: color-mix(in oklch, oklch(var(--b4)) 22%, oklch(var(--b5)));
-        --sidebar-border: color-mix(in oklch, oklch(var(--b5)), oklch(var(--b2)) 70%);
+        --sidebar-border: color-mix(in oklch, oklch(var(--b5)), oklch(var(--b2)) 60%);
         --toolbar-bg: oklch(var(--b4) / 20%);
         --toolbar-border: oklch(var(--b2) / 35%);
         --subtle-border: 1px solid oklch(var(--b2) / 35%);
@@ -516,7 +526,7 @@ body,
         --card-blur-bg: oklch(0.12 calc(var(--sat) * 0.05 * var(--sat-bg, 1)) var(--hue) / var(--solarium-opacity, 40%));
         --card-blur-bg-alt: oklch(var(--b5) / var(--solarium-opacity, 40%));
 
-        --setting-hover: oklch(var(--b4) / 20%);
+        --setting-hover: oklch(var(--b2) / 20%);
 
         --setting-group: oklch(var(--b4) / 18%);
 
@@ -528,6 +538,14 @@ body,
 
         --menu-item-hov: oklch(var(--b2) / 20%);
         --menu-item-atv: oklch(var(--b2) / 40%);
+
+        --menu-bg: 0.16 calc(var(--sat) * 0.01 * var(--sat-bg, 1)) var(--hue);
+        --menu-opacity: 90%;
+
+        --tracklist-hover: oklch(var(--b2) / 30%);
+
+        --modal-button-hov: oklch(var(--b2) / 40%);
+        --modal-button-atv: oklch(var(--b2) / 60%);
     }
     &[data-bleh--theme="light"] {
         /* any additional highlights */
@@ -607,6 +625,9 @@ body,
 
         --inset-background: oklch(var(--b6) / 3%);
         --inset-shadow: inset 0 4px 10px oklch(var(--b6) / 50%);
+
+        --menu-bg: var(--b5);
+        --menu-opacity: 94%;
     }
     &[data-bleh--theme="ink"] {
         --b2: 0.7 calc(var(--sat) * 0.12 * var(--sat-bg, 1)) var(--hue);
@@ -668,6 +689,9 @@ body,
         --view-buttons: oklch(var(--b6) / 10%);
         --view-buttons-hov: oklch(var(--b4) / 40%);
         --view-buttons-atv: oklch(var(--b4) / 60%);
+
+        --menu-bg: var(--b5);
+        --menu-opacity: 94%;
     }
 }
 
@@ -1131,11 +1155,6 @@ body {
     --blur-brightness: 0.7;
     --blur-contrast: 1;
 
-    --modal-bg: oklch(var(--b6) / 0.6);
-
-    --menu-bg: var(--b6);
-    --menu-opacity: 92%;
-
     --shout-actions-opacity: 0.45;
 
     --rain: 0, 0%, 100%;
@@ -1185,9 +1204,6 @@ body {
     }
 
     &[data-bleh--theme="light"] {
-        --menu-bg: var(--b5);
-        --menu-opacity: 94%;
-
         --menu-shadow: 0 3px 15px 9px oklch(0 0 0 / 0.07);
 
         --blur-saturate: 130%;
@@ -1198,9 +1214,6 @@ body {
     }
 
     &[data-bleh--theme="ink"] {
-        --menu-bg: var(--b5);
-        --menu-opacity: 94%;
-
         --blur-saturate: 130%;
         --blur-brightness: 1;
         --menu-shadow: 0 4px 40px oklch(0 0 0 / 0.2);
@@ -1228,8 +1241,5 @@ body {
 
     &[data-bleh--theme="oled"] {
         --card-border: inset 0 0 0 1px oklch(var(--b4) / 0.8);
-
-        --menu-bg: var(--b5);
-        --menu-opacity: 80%;
     }
 }

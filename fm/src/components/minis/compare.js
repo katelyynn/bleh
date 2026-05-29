@@ -72,27 +72,27 @@ export function compare({ host, sidebar } = {}) {
                             },
                             {
                                 value: '1',
-                                text: 50
+                                text: '50 (1x)'
                             },
                             {
                                 value: '2',
-                                text: 100
+                                text: '100 (2x)'
                             },
                             {
                                 value: '3',
-                                text: 150
+                                text: '150 (3x)'
                             },
                             {
                                 value: '4',
-                                text: 200
+                                text: '200 (4x)'
                             },
                             {
                                 value: '5',
-                                text: 250
+                                text: '250 (5x)'
                             },
                             {
                                 value: '6',
-                                text: 300
+                                text: '300 (6x)'
                             }
                         ],
                         initial: '3'

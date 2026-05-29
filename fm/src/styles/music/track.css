@@ -34,7 +34,7 @@
 .obsession-candidate,
 .chartlist-row {
     --bg: transparent;
-    --bg-hov: oklch(var(--b4) / 30%);
+    --bg-hov: var(--tracklist-hover);
     --shadow: none !important;
     color: oklch(var(--c2));
     background-color: var(--bg);
@@ -57,7 +57,7 @@
 
     contain: layout;
 
-    --chart-cover-radius: var(--item-small-radius);
+    --chart-cover-radius: 5px;
 
     --chart-button-hov: oklch(var(--b4) / 60%);
     --chart-button-atv: oklch(var(--b4) / 80%);

@@ -30,7 +30,7 @@ body {
         Lucida Grande, Verdana, -apple-system, BlinkMacSystemFont,
         Segoe UI Emoji, sans-serif, -system-font;
 
-    --font-symbols: Apple Color Emoji, var(--font_emoji_name, ""), Apple Symbols, Sawarabi Gothic;
+    --font-symbols: Apple Color Emoji, var(--font_emoji_name, ""), Apple Symbols, Iosevka Charon;
     --font-i18n: Noto Sans, Noto Sans JP, Noto Sans KR, Noto Sans TC;
 
     --font-code:

@@ -82,7 +82,7 @@ function charts_panel() {
     }
 
     render(charts_panel, html`
-        <h4>${tl(trans.recent_tracks)}</h4>
+        <h4>${tl(trans.recents)}</h4>
         ${alert}
         <form action="${root}settings#update-chart" name="chart-form" method="post">
             <input type="hidden" name="csrfmiddlewaretoken" value=${page.token}>

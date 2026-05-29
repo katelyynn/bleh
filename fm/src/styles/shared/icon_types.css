@@ -477,34 +477,10 @@
 
 .bleh-seasonal-icon[data-season="pride"],
 [data-season="pride"]:before {
-    --g-red: oklch(8, 62%, 80%);
-    --g-orange: oklch(24, 86%, 80%);
-    --g-yellow: oklch(44, 100%, 80%);
-    --g-green: oklch(163, 100%, 80%);
-    --g-blue: oklch(199, 79%, 80%);
-    --g-indigo: oklch(254, 46%, 80%);
-    background: linear-gradient(
-        180deg,
-        var(--g-red) 16.6666%,
-        var(--g-orange) 33.333%,
-        var(--g-yellow) 50%,
-        var(--g-green) 66.6666%,
-        var(--g-blue) 83.3333%,
-        var(--g-indigo) 100%
-    ) !important;
-
-    [data-bleh--theme_type="light"] & {
-        --g-red: oklch(8, 42%, 50%);
-        --g-orange: oklch(24, 66%, 50%);
-        --g-yellow: oklch(44, 80%, 50%);
-        --g-green: oklch(163, 50%, 50%);
-        --g-blue: oklch(199, 69%, 50%);
-        --g-indigo: oklch(254, 26%, 50%);
-    }
-
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    background-image: var(--pride) !important;
+    background-size: 100% !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
 }
 
 .icon-combo[data-season]:not([data-season="none"]) {
