@@ -44,6 +44,7 @@
     }
 
     .grid-items-item-details {
+        padding: 6px 10px;
         background: rgb(0, 0, 0, 50%);
         text-shadow: none;
         filter: none;
