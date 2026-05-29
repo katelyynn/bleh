@@ -150,6 +150,22 @@
     }
 }
 
+.for-obsession {
+    justify-content: center;
+    text-align: center;
+
+    & > .page-header-info {
+        & > .sub-text {
+            width: fit-content;
+            margin: 0 auto;
+        }
+
+        & > .title-container {
+            justify-content: center;
+        }
+    }
+}
+
 .obsession-track-header {
     justify-content: center;
     text-align: center;
@@ -313,6 +329,10 @@
 
         color: oklch(var(--c1));
         position: relative;
+
+        & > a {
+            color: inherit !important;
+        }
     }
 
     & > .page-header-artist {

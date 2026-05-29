@@ -123,6 +123,7 @@ export function bleh_obsession() {
         page.corrected = formatted_title[4];
 
         // combine
+        track_title.classList.add('smart-title');
         render(track_title, smart_title(song_title, song_tags));
 
         let song_guests = formatted_title[3];

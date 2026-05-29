@@ -200,3 +200,9 @@ body > canvas {
     opacity: 0;
     pointer-events: none;
 }
+
+.ot-floating-button {
+    &:not(:hover) {
+        opacity: 0 !important;
+    }
+}
