@@ -549,7 +549,7 @@ export function plot({ host, sidebar } = {}) {
         if (data_point.album && data_point.artist) {
             media_url = `${sanitise(data_point.artist)}/${sanitise(data_point.album)}`;
         } else if (data_point.track && data_point.artist) {
-            media_url = `${sanitise(data_point.artist)}/${sanitise(data_point.track)}`;
+            media_url = `${sanitise(data_point.artist)}/_/${sanitise(data_point.track)}`;
         } else {
             media_url = sanitise(data_point.artist);
         }

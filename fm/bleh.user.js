@@ -58898,7 +58898,7 @@
       if (data_point.album && data_point.artist) {
         media_url = `${sanitise(data_point.artist)}/${sanitise(data_point.album)}`;
       } else if (data_point.track && data_point.artist) {
-        media_url = `${sanitise(data_point.artist)}/${sanitise(data_point.track)}`;
+        media_url = `${sanitise(data_point.artist)}/_/${sanitise(data_point.track)}`;
       } else {
         media_url = sanitise(data_point.artist);
       }
@@ -96466,7 +96466,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-05-18"
       }
     },
-    built_on: "2026-05-28T18:38:44.945Z"
+    built_on: "2026-05-29T00:53:24.876Z"
   };
 
   // node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
