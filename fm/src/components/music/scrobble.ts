@@ -271,6 +271,7 @@ export function submit_scrobble({
                         if (settings.auto_close_scrobble_modal) {
                             dialog_rm({ id: 'submit_scrobble' });
                         } else {
+                            dialog_rm({ id: 'submit_scrobble' });
                             submit_scrobble({
                                 pre_track,
                                 pre_album,
