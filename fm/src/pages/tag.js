@@ -148,6 +148,7 @@ export function bleh_tags_large(observer = page.structure.main) {
 }
 
 export function bleh_tags_mini(observer = page.structure.main) {
+    if (!observer) return;
     const hide_gendered = settings.gendered_tags;
 
     const tags = observer.querySelectorAll('.tag');

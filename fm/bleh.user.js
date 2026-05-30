@@ -64991,6 +64991,7 @@
     });
   }
   function bleh_tags_mini(observer2 = page.structure.main) {
+    if (!observer2) return;
     const hide_gendered = settings.gendered_tags;
     const tags = observer2.querySelectorAll(".tag");
     tags.forEach((tag) => {
