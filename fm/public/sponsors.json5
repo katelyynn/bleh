@@ -1,5 +1,5 @@
 {
-    version: "2026.0529",
+    version: "2026.0530",
     related: {
         account_name: "kateshapedbox",
         link: "https://katelyn.moe/sponsor",
@@ -369,6 +369,7 @@
         "cygnoir": {},
         "skeletocat": {},
         "SPlKES": {},
-        "CazmoV": {}
+        "CazmoV": {},
+        "morphine": {}
     }
 }
