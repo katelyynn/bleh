@@ -411,7 +411,8 @@ function load_page(main_content = null) {
     page.restricted = false;
 
     if (main_content) {
-        page.restricted = (main_content.getAttribute('data-page-resource-blacklist-level') || '') != '';
+        const blacklist_level = Number(main_content.getAttribute('data-page-resource-blacklist-level') || '0');
+        page.restricted = blacklist_level == 1;
     }
 
     hideAll({ duration: 0 });

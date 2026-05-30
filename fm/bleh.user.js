@@ -83215,7 +83215,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     page.state.on_tour = false;
     page.restricted = false;
     if (main_content) {
-      page.restricted = (main_content.getAttribute("data-page-resource-blacklist-level") || "") != "";
+      const blacklist_level = Number(main_content.getAttribute("data-page-resource-blacklist-level") || "0");
+      page.restricted = blacklist_level == 1;
     }
     hideAll({ duration: 0 });
     clear_popup_queue();
