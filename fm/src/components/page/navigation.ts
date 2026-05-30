@@ -163,6 +163,7 @@ export function append_nav() {
     };
 
     const masthead = document.body.querySelector('.masthead');
+    if (!masthead) return;
     const inner = masthead.querySelector('.masthead-inner-wrap');
 
     const masthead_logo = inner.querySelector('.masthead-logo');
