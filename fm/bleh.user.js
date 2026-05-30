@@ -38339,6 +38339,7 @@
         smart_track(track, index2);
       });
       function smart_track(track, index2) {
+        if (!track) return;
         if (track.getAttribute("data-track-type")) return;
         if (track.classList[0] == "chartlist-row--interlist-ad") {
           track.parentElement.removeChild(track);
