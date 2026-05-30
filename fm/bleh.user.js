@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    https://last.fm/
-// @version      2026.0507
+// @version      2026.0530
 // @description  bleh!!! ^-^
 // @author       katelyn
 // @match        https://www.last.fm/*
@@ -83655,8 +83655,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     },
     pt: {
       name: get_language_name("pt"),
-      by: ["ArthRMH", "satisfeita", "fr0r", "urwq", "foognocchie"],
-      last_updated: "2025-11-25"
+      by: ["ArthRMH", "satisfeita", "fr0r", "urwq", "anjoskron", "foognocchie"],
+      last_updated: "2026-02-22"
     },
     sv: {
       name: get_language_name("sv"),
@@ -94074,7 +94074,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       de: "{d} um {t}",
       ru: "{d} \u0432 {t}",
       es: "{d} a las {t}",
-      it: "{d} alle {t}"
+      it: "{d} alle {t}",
+      pt: "{d} as {t}"
     },
     you_sent_to: {
       // messages in your inbox
@@ -94536,7 +94537,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       de: "Albumname",
       es: "Nombre del \xE1lbum",
       ru: "\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0430\u043B\u044C\u0431\u043E\u043C\u0430",
-      it: "Nome dell\u2019album"
+      it: "Nome dell\u2019album",
+      pt: "Nome do \xE1lbum"
     },
     search_for_settings: {
       en: "Search for settings",
@@ -96076,8 +96078,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
   // src/build/build.json
   var build_default = {
     brand: "bleh",
-    build: "2026.0507",
-    sku: "next",
+    build: "2026.0530",
+    sku: "saki",
     bio: "bleh!!! ^-^",
     author: "katelyn",
     url: "https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js",
@@ -96477,7 +96479,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-05-18"
       }
     },
-    built_on: "2026-05-29T17:49:29.336Z"
+    built_on: "2026-05-30T02:28:24.461Z"
   };
 
   // node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

@@ -24,7 +24,7 @@
         "wanakana": "^5.3.1"
     },
     "scripts": {
-        "build": "node index.js && node minify.js",
+        "build": "node index.js",
         "dev": "node index.js dev"
     },
     "type": "module"
