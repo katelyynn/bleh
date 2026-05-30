@@ -83640,7 +83640,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     },
     it: {
       name: get_language_name("it"),
-      by: ["cutotopo", "pascal-00", "nikilite"],
+      by: ["cutotopo", "pascal-00", "Nikilite"],
       last_updated: "2026-05-20"
     },
     ja: {
@@ -96479,7 +96479,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-05-18"
       }
     },
-    built_on: "2026-05-30T02:28:24.461Z"
+    built_on: "2026-05-30T02:30:12.656Z"
   };
 
   // node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

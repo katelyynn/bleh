@@ -32,7 +32,7 @@ export let lang_info = {
     },
     it: {
         name: get_language_name('it'),
-        by: ['cutotopo', 'pascal-00', 'nikilite'],
+        by: ['cutotopo', 'pascal-00', 'Nikilite'],
         last_updated: '2026-05-20',
     },
     ja: {
