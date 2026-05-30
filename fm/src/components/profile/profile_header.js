@@ -238,6 +238,7 @@ export function redesign_profile_header(is_own_profile, is_following) {
                     </div>
                 </div>
                 <div class="span">
+                    <label class="taste-badge colourful" data-taste=${taste}>${taste_formal}</label>
                     <div class="listen-item-info">
                         <h3 class="listen-item-name">
                             ${{html: tl(trans.you_share_count_with, { c: `<span class="colourful" data-taste=${taste}>${taste_percentage}</span>` })}}
