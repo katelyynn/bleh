@@ -9,12 +9,8 @@ import { settings } from '@/build/config';
 import { log } from '@/build/log.js';
 import { auth, page, root } from '@/build/page';
 import {
-    clamp_lit,
-    clamp_sat,
     copy,
-    lazy,
     return_artist_from_track,
-    rgb_to_hsl,
     romanise,
     sanitise
 } from '@/build/tools';
@@ -32,9 +28,9 @@ import { tl, trans } from '@/build/trans';
 import { notify } from '@/components/dialog/notify';
 import { redirect } from '@/components/music/music';
 import tippy from 'tippy.js';
-import ColorThief from 'color-thief-browser';
 import { hoshino } from '@/components/music/hoshino';
 import { submit_scrobble } from '@/components/music/scrobble';
+import { header_colour } from '../page/colour';
 
 export function patch_titles(search = page.structure.main) {
     if (page.subpage == 'tags_overview') return;
@@ -1120,15 +1116,8 @@ export function patch_titles(search = page.structure.main) {
 
                 image.setAttribute('crossorigin', 'anonymous');
                 try {
-                    image.addEventListener('load', () => {
-                        let thief = new ColorThief();
-                        let colour = thief.getColor(image);
-
-                        let hsl = rgb_to_hsl(colour[0], colour[1], colour[2]);
-
-                        let hue = hsl.h;
-                        let sat = clamp_sat((hsl.s / 100) * 3);
-                        let lit = clamp_lit(sat, hsl.l / 100 + 0.35, true);
+                    image.onload = async () => {
+                        const { hue, sat, lit } = await header_colour(image);
 
                         const to_colour = track.querySelectorAll(
                             '.chartlist-count-bar, .chartlist-loved'
@@ -1140,15 +1129,14 @@ export function patch_titles(search = page.structure.main) {
                             track.style.setProperty('--hue-over', hue);
                             track.style.setProperty('--sat-over', sat);
                             track.style.setProperty('--lit-over', lit);
-                        } else {
-                            to_colour.forEach((elem) => {
+                        } else {to_colour.forEach((elem) => {
                                 elem.classList.add('colourful');
                                 elem.style.setProperty('--hue-over', hue);
                                 elem.style.setProperty('--sat-over', sat);
                                 elem.style.setProperty('--lit-over', lit);
                             });
                         }
-                    });
+                    }
                 } catch (e) {}
             }
         }

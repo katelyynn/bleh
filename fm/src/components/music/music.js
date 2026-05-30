@@ -16,6 +16,7 @@ import { ff } from '@/components/settings/sku';
 import { parse_scrobbles_as_rank } from '@/components/music/colourful_counts';
 import {
     correct_artist,
+    correct_generic_artist,
     correct_item_by_artist,
     create_correction,
     name_includes,
@@ -39,6 +40,7 @@ import { music_summary } from './summary';
 import { icon, icons } from '../shared/icon';
 import { keys } from '../settings/storage';
 import { is_sponsor } from '../sponsor';
+import { new_indicator } from '../shared/indicator';
 
 unsafeWindow._other_listener = function (id) {
     other_listener(id);
@@ -522,7 +524,7 @@ export async function show_your_scrobbles() {
         interact_container.appendChild(html.node`
             <button class="btn side-action icon-mask" data-type="credits" onclick=${() => oracle_credits()}>
                 ${tl(trans.view_credits)}
-                <span class="new-badge new">${tl(trans.new)}</span>
+                ${new_indicator()}
             </button>
         `);
     }
@@ -1710,6 +1712,8 @@ export function similar_items() {
                 </div>
             </div>
         `);
+
+        correct_generic_artist('catalogue-overview-similar-artists-item');
     }
 
     const albums = page.structure.main.querySelector('.similar-albums')?.parentElement;

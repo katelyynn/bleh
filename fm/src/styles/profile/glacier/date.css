@@ -99,12 +99,17 @@
 
 .date-range-picker-presets-wrap {
     display: flex;
-    gap: var(--item-list-gap);
+    gap: var(--button-list-gap);
     margin: unset;
 
     .date-range-picker-presets {
         width: unset;
         flex: 1;
+        margin: unset;
+
+        display: flex;
+        flex-direction: column;
+        gap: var(--button-list-gap);
     }
 
     .date-range-picker-presets-2 {
@@ -129,6 +134,10 @@
             }
         }
     }
+}
+
+.date-range-picker-preset {
+    display: flex;
 }
 
 .user-sidebar-header {

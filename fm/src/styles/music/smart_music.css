@@ -1,5 +1,5 @@
 .smart-title {
-    display: flex;
+    display: flex !important;
     flex-wrap: wrap;
     gap: 2px 6px;
 }
@@ -35,9 +35,5 @@
 
     &[data-tag-group="mixes_numbers"] {
         order: 10;
-    }
-
-    &[data-tag-group="mixes_numbers"] {
-        text-transform: uppercase;
     }
 }

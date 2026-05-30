@@ -41,7 +41,7 @@ import { save_setting, setting } from '@/components/settings/settings';
 import { input } from '@/components/settings/input';
 import { icon, icons } from '../shared/icon';
 import { redirect } from './music';
-import { flag } from '../shared/flag';
+import { flag, flag_candidates } from '../shared/flag';
 import { age } from '../shared/age';
 import { notify } from '../dialog/notify';
 import { status } from '../dialog/status';
@@ -361,7 +361,7 @@ export function oracle_process() {
         metadata = html.node`
             <div class="metadata-column">
                 <div class="metadata-group">
-                    <dt class="catalogue-metadata-heading">${tl(trans.country)}</dt>
+                    <dt class="catalogue-metadata-heading">${tl(trans.origin)}</dt>
                     <dd class="catalogue-metadata-description placeholder-text">????</dd>
                 </div>
                 <div class="metadata-group">
@@ -1842,7 +1842,7 @@ export function oracle_process() {
                                             <div class="source-album-art" ref=${el => artwork_container = el}>
                                                 ${artwork ? html.node`
                                                     <span class="cover-art">
-                                                        <img src=${artwork} alt=${title}>
+                                                        <img src=${artwork} alt=${title} loading="lazy">
                                                     </span>
                                                 ` : html.node`
                                                     <span class="cover-art">
@@ -2181,7 +2181,7 @@ export function oracle_process() {
         if (page.subpage != 'overview') return;
 
         const area = data.area;
-        const area_code = data.country;
+        const area_code = flag_candidates(data.country, area);
         const area_name = area?.name;
 
         const lifespan = data['life-span'];
@@ -2221,7 +2221,7 @@ export function oracle_process() {
             <div class="metadata-column">
                 ${area ? html.node`
                 <div class="metadata-group">
-                    <dt class="catalogue-metadata-heading">${tl(trans.country)}</dt>
+                    <dt class="catalogue-metadata-heading">${tl(trans.origin)}</dt>
                     <dd class="catalogue-metadata-description has-flag">
                         ${flag(area_code)}
                         ${area_name}

@@ -30,6 +30,7 @@ import { status } from '@/components/dialog/status';
 import { input } from '@/components/settings/input';
 import JSON5 from 'json5';
 import { notify } from '../dialog/notify';
+import { header_colour } from '../page/colour';
 
 const flat_patterns: flat_pattern[] = [];
 
@@ -262,7 +263,9 @@ export function lotus_modal() {
  * @returns if not found
  */
 export function correct_generic_artist(parent) {
-    let albums = document.body.querySelectorAll(`.${parent}`);
+    if (!page.structure.container) return;
+
+    let albums = page.structure.container.querySelectorAll(`.${parent}`);
     if (albums.length == 0) return;
 
     if (!settings.corrections) return;
@@ -288,7 +291,9 @@ export function correct_generic_artist(parent) {
  * @returns if not found
  */
 export function correct_generic_combo(parent) {
-    let albums = document.body.querySelectorAll(`.${parent}`);
+    if (!page.structure.container) return;
+
+    let albums = page.structure.container.querySelectorAll(`.${parent}`);
     if (albums.length == 0) return;
 
     if (!settings.format_guest_features && !settings.corrections) return;
@@ -337,7 +342,9 @@ export function correct_generic_combo(parent) {
  * @returns if not found
  */
 export function correct_generic_combo_no_artist(parent) {
-    let albums = document.body.querySelectorAll(`.${parent}`);
+    if (!page.structure.container) return;
+
+    let albums = page.structure.container.querySelectorAll(`.${parent}`);
     if (albums.length == 0) return;
 
     if (!settings.format_guest_features && !settings.corrections) return;

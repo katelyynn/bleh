@@ -54,6 +54,7 @@
     --mask: var(--icon-16-user);
 }
 
+[data-type="charts"],
 .secondary-nav-item--charts > a,
 [data-analytics-label="charts"] {
     --mask: var(--icon-16-charts);

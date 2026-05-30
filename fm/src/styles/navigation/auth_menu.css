@@ -197,14 +197,43 @@
     width: var(--size);
     height: var(--size);
     background-color: var(--avatar-generic-background);
-    border-radius: var(--item-med-radius);
+    border-radius: var(--item-small-radius);
     overflow: hidden;
+    position: relative;
 
     flex-shrink: 0;
+
+    &.smaller {
+        --size: 40px;
+        --mask-size: 20px;
+    }
 
     & > img {
         width: 100%;
         height: 100%;
+    }
+
+    &:before {
+        content: '';
+        position: absolute;
+        display: block;
+        inset: 0;
+        pointer-events: none;
+        box-shadow: var(--avatar-inset);
+        border-radius: inherit;
+    }
+
+    &[data-live="true"] {
+        animation: animate_status 2s var(--trans-function-ani) infinite;
+    }
+}
+
+@keyframes animate_status {
+    from, to {
+        scale: 1;
+    }
+    50% {
+        scale: 0.9;
     }
 }
 
@@ -218,6 +247,10 @@
     cursor: default;
     position: relative;
     z-index: 20;
+
+    &.smaller {
+        font-size: 13px;
+    }
 
     & > .artist > a,
     & > a {

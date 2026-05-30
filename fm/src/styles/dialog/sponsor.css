@@ -50,11 +50,6 @@
     --hue-over: var(--hue-sponsor);
     --sat-over: var(--sat-sponsor);
     --lit-over: var(--lit-sponsor);
-
-    &:before,
-    &:after {
-        --mask: var(--icon-16-sponsor);
-    }
 }
 .sponsor-related {
     --hue-over: var(--hue-sponsor);

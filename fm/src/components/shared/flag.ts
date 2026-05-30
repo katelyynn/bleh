@@ -24,3 +24,18 @@ export const convert_lang_to_country = {
     ja: 'jp',
     pt: 'br'
 }
+
+interface flag_candidate_data {
+    'iso-3166-1-codes'?: string[],
+    'iso-3166-2-codes'?: string[],
+}
+
+export function flag_candidates(country: string, data: flag_candidate_data) {
+    if (data['iso-3166-1-codes']) {
+        return data['iso-3166-1-codes'][0];
+    } else if (data['iso-3166-2-codes']) {
+        return data['iso-3166-2-codes'][0];
+    }
+
+    return country;
+}

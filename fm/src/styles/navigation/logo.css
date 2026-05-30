@@ -25,12 +25,18 @@
     .home-link {
         width: unset;
         height: unset;
+
+        display: flex;
+        align-items: center;
+        gap: 10px;
     }
 
     .home-version {
         width: fit-content;
         height: fit-content;
         color: oklch(var(--c3));
+        display: flex;
+        align-items: center;
         gap: var(--icon-gap);
 
         & > .new-badge {
@@ -57,27 +63,10 @@
     display: none;
 }
 
-.lastfm-logo {
-    background-image: url("https://www.last.fm/static/images/logo_static.png");
-    background-position: 0 50%;
-    background-repeat: no-repeat;
-    background-size: contain;
-    aspect-ratio: 9 / 4;
-    height: 28px;
+.bleh-logo, .lastfm-logo {
     font: 0 / 0 auto;
-
-    filter: var(--lastfm-logo-filter, none);
-}
-
-.bleh-logo {
-    font-size: 24px;
-    line-height: 24px;
-    margin-top: -8px;
-    font-family: var(--font-brand);
-    font-weight: 900;
-    color: oklch(var(--c1));
-
-    text-shadow: 0 2px 0 oklch(var(--k4));
+    margin-top: unset;
+    background-color: oklch(var(--l2-c-theme-switch));
 
     [data-bleh--season="pride"] & {
         /* this isnt using https://cesque.com/gaydient/ but shoutout,
@@ -85,17 +74,29 @@
 
         background-image: linear-gradient(
             90deg,
-            var(--g-red) 16.6666%,
-            var(--g-orange) 33.333%,
-            var(--g-yellow) 50%,
-            var(--g-green) 66.6666%,
-            var(--g-blue) 83.3333%,
-            var(--g-indigo) 100%
+            var(--graph-colour-0) 10%,
+            var(--graph-colour-1) 23%,
+            var(--graph-colour-2) 38%,
+            var(--graph-colour-5) 55%,
+            var(--graph-colour-7) 67%,
+            var(--graph-colour-9) 100%
         );
-
-        background-clip: text;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        text-shadow: unset;
     }
+
+    mask-image: var(--mask);
+    -webkit-mask-image: var(--mask);
+    mask-size: 100%;
+    -webkit-mask-size: 100%;
+}
+
+.bleh-logo {
+    height: 18px;
+    --mask: var(--logo);
+    aspect-ratio: 13 / 5;
+}
+
+.lastfm-logo {
+    height: 16px;
+    --mask: var(--logo-lastfm);
+    aspect-ratio: 4 / 1;
 }

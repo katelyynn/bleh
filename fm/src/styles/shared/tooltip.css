@@ -1,6 +1,6 @@
 .tippy-box,
 .tooltip-dark {
-    background: oklch(var(--b8) / var(--solarium-opacity, 80%));
+    background-color: oklch(var(--b8) / var(--solarium-opacity, 80%));
     backdrop-filter: var(--solarium);
     -webkit-backdrop-filter: var(--solarium);
     border-radius: var(--item-med-radius);
@@ -54,7 +54,7 @@
     &[data-theme="language-menu"],
     &[data-theme="menu"] {
         padding: 4px !important;
-        background: oklch(var(--menu-bg) / var(--solarium-opacity, var(--menu-opacity))) !important;
+        background-color: oklch(var(--menu-bg) / var(--solarium-opacity, var(--menu-opacity))) !important;
         border-radius: calc(var(--item-med-radius) + 4px) !important;
         box-shadow: var(
             --override-full-shadow,
@@ -182,7 +182,7 @@
 
     &[data-theme="window"] {
         padding: var(--card-gap) !important;
-        background: oklch(var(--b5) / var(--solarium-opacity, var(--menu-opacity))) !important;
+        background-color: oklch(var(--menu-bg) / var(--solarium-opacity, var(--menu-opacity))) !important;
         border-radius: var(--item-big-radius) !important;
         box-shadow: var(
             --override-full-shadow,
@@ -197,10 +197,6 @@
         text-align: left;
 
         font-size: var(--font-size);
-
-        [data-bleh--solarium="false"] & {
-            background: oklch(var(--b5)) !important;
-        }
 
         background-image:
             var(--cards-overlay-image-subtle, unset),

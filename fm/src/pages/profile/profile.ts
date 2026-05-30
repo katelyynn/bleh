@@ -323,7 +323,7 @@ export function bleh_profiles() {
     }
 
     if (page_avatar) {
-        header_colour(page_avatar.image, false, page_avatar);
+        header_colour(page_avatar.image, false, [page_avatar]);
     }
 
     page.structure.container.insertBefore(
@@ -374,7 +374,7 @@ export function bleh_profiles() {
                 const elem = html.node`
                     <section class="recent-tracks-section">
                         <h2>
-                            <a class="text-colour-link" href="${window.location.href}/library">${tl(trans.recent_tracks)}</a>
+                            <a class="text-colour-link" href="${window.location.href}/library">${tl(trans.recents)}</a>
                         </h2>
                         <div class="loading-data-container">
                             <div class="loading-data-text private">
@@ -496,13 +496,9 @@ export function bleh_profiles() {
         );
 
         tippy(settings_btn, {
-            theme: 'window',
+            theme: 'context-menu',
             content: html.node`
-                <div class="dialog-settings">
-                    <div class="setting-group blend">
-                        ${setting({ id: 'bio_markdown' })}
-                    </div>
-                </div>
+                ${setting({ id: 'bio_markdown', in_menu: true })}
             `,
             placement: 'bottom',
             interactive: true,
@@ -603,18 +599,22 @@ export function bleh_profiles() {
                 `;
 
                 buttons.forEach((button) => {
-                    if (
-                        button.getAttribute('data-analytics-action') == 'create'
-                    ) {
+                    const action = button.getAttribute('data-analytics-action');
+
+                    if (action == 'create') {
+                        button.setAttribute('data-type', 'add');
                         button.classList.add('primary');
                         button.innerHTML = `${tl(trans.new)} <div class="new-badge">${tl(trans.beta)}</div>`; //button.textContent = tl(trans.new);
+                    } else if (action == 'import') {
+                        button.setAttribute('data-type', 'import');
                     }
 
                     button.classList.add(
                         'btn',
                         'view-item',
                         'interact-item',
-                        'playlist-home-top-item'
+                        'playlist-home-top-item',
+                        'icon'
                     );
 
                     button_header.appendChild(button);
@@ -854,7 +854,7 @@ function refresh_tracks(button, { quiet = false }) {
             if (!tracklist_panel) {
                 if (!quiet) {
                     status({
-                        title: tl(trans.recent_tracks),
+                        title: tl(trans.recents),
                         body: tl(trans.value_failed_to_load).replace(
                             '{v}',
                             tl(trans.library)
@@ -867,7 +867,7 @@ function refresh_tracks(button, { quiet = false }) {
 
             if (!quiet) {
                 status({
-                    title: tl(trans.recent_tracks),
+                    title: tl(trans.recents),
                     body: tl(trans.refreshed)
                 });
             }
@@ -1599,7 +1599,7 @@ function bio_parse(text, cache = true, take_effect = true) {
         allow_lists: true
     });
 
-    if (!body.hasChildNodes()) {
+    if (body.childElementCount == 0) {
         render(body, html`
             <p class="subtle">${tl(trans.no_about).replace('{u}', page.name)}</p>
         `);
@@ -1692,7 +1692,7 @@ export function open_starred_friend_window(friend_func = null) {
 }
 
 export async function load_profile_cache_externally(name = page.name) {
-    if (!name) return;
+    if (!name) return {};
 
     log(`requested profile cache for ${name}`, 'cache');
 

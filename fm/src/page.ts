@@ -10,7 +10,6 @@ import { log } from '@/build/log';
 import {
     api_url,
     auth,
-    auth_link,
     bleh_url,
     minis_url,
     mualani_url,
@@ -37,7 +36,7 @@ import { load_notifications, notify } from '@/components/dialog/notify';
 import { patch_titles } from '@/components/music/track.js';
 import { load_settings } from '@/config';
 import { theme_version, version } from '@/main';
-import { append_nav, patch_masthead, update_masthead } from '@/components/page/navigation';
+import { append_nav } from '@/components/page/navigation';
 import { bleh_albums } from '@/pages/album';
 import { bleh_artists } from '@/pages/artist';
 import { bleh_settings } from '@/pages/bleh_settings/bleh_settings.js';
@@ -95,6 +94,7 @@ import { see_more } from './components/page/see_more';
 import { icon, icons } from './components/shared/icon';
 import { avatar } from './components/shared/avatar';
 import { clean_storage } from './components/settings/storage';
+import { register_auth } from './components/profile/auth';
 
 export function bleh() {
     florence({
@@ -114,11 +114,7 @@ export function bleh() {
             `;
             document.body.appendChild(page.state.colour_preview);
 
-            auth_link.state = document.querySelector('a.auth-link');
-            if (auth_link.state)
-                auth.name = auth_link.state
-                    .querySelector('img')
-                    .getAttribute('alt');
+            register_auth();
 
             load_settings();
 
@@ -135,8 +131,6 @@ export function bleh() {
             load_dialogs();
             register_rabbit();
 
-            lookup_lang();
-
             notices();
 
             theme_version.state = getComputedStyle(document.body)
@@ -144,8 +138,7 @@ export function bleh() {
                 .replaceAll("'", '')
                 .replaceAll('"', ''); // remove quotations
 
-            update_check(false, null, update_masthead);
-            patch_masthead();
+            update_check(false, null);
 
             load_notifications();
             load_status();
@@ -282,7 +275,6 @@ export function handle_error_500() {
 function main_flow() {
     try {
         lookup_lang();
-        patch_masthead();
 
         if (page.state.error) return;
 
@@ -346,6 +338,11 @@ function main_flow() {
             page.type == 'bookmarks'
         ) {
             patch_titles();
+        }
+
+        if (page.type == 'overview' && page.subpage == 'music') {
+            correct_generic_combo('music-releases-item');
+            correct_generic_artist('music-more-artists-item');
         }
 
         if (settings.corrections) {
@@ -428,6 +425,7 @@ function load_page(main_content = null) {
 
     page.structure.notifications.setAttribute('data-auth-open', 'false');
 
+    register_auth();
     lookup_lang();
 
     detect_mobile();

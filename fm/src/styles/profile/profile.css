@@ -61,6 +61,19 @@
     & > .sep {
         margin-top: var(--card-gap);
     }
+
+    padding-bottom: calc(var(--card-padding) + 1px) !important;
+
+    &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        left: var(--card-padding);
+        right: var(--card-padding);
+        bottom: 0;
+        height: 1px;
+        background: var(--separator);
+    }
 }
 .about-me-title {
     display: flex;

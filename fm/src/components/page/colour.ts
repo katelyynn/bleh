@@ -1,10 +1,12 @@
 import { log } from '@/build/log';
-import { chart_reflow, load_chart_colours } from '../music/chart';
-import { clamp_lit, clamp_sat, rgb_to_hsl, rgb_to_oklch } from '@/build/tools';
-import ColorThief from 'color-thief-browser';
+import { chart_reflow } from '../music/chart';
+import { clamp_lit, clamp_sat, rgb_to_hsl } from '@/build/tools';
 import { page } from '@/build/page';
+import { fac } from '@/main';
 
-export function header_colour(source: HTMLImageElement, apply_to_page = false, apply_to_elem?: Element) {
+export async function header_colour(source: HTMLImageElement, apply_to_page = false, apply_to_elem?: Element[]) {
+    if (!apply_to_elem) apply_to_elem = [];
+
     log('applying header colour', 'accent', 'info', { source, apply_to_page, apply_to_elem });
     apply(0, 0, 0.5, true);
 
@@ -13,25 +15,30 @@ export function header_colour(source: HTMLImageElement, apply_to_page = false, a
         image.width = 300;
         image.height = 300;
         image.crossOrigin = 'anonymous';
-        image.src = source.src;
 
-        image.onload = () => {
-            let thief = new ColorThief();
-            let colour = thief.getColor(image);
+        await new Promise<void>((resolve, reject) => {
+            image.onload = () => resolve();
+            image.onerror = reject;
+            image.src = source.src;
+        });
 
-            let hsl = rgb_to_hsl(colour[0], colour[1], colour[2]);
+        const colour = await fac.getColorAsync(image);
 
-            let hue = hsl.h;
-            let sat = clamp_sat((hsl.s / 100) * 3);
-            let lit = clamp_lit(sat, hsl.l / 100 + 0.35, true);
+        const values = colour.value;
+        let hsl = rgb_to_hsl(values[0], values[1], values[2]);
 
-            apply(hue, sat, lit);
+        let hue = hsl.h;
+        let sat = clamp_sat((hsl.s / 100) * 3);
+        let lit = clamp_lit(sat, hsl.l / 100 + 0.35, true);
 
-            log(
-                `sourced rgb of (${colour[0]}, ${colour[1]}, ${colour[2]}), hsl of (${hsl.h}, ${hsl.s}, ${hsl.l}) - using final value of (${hue}, ${sat}, ${lit})`,
-                'accent'
-            );
-        }
+        apply(hue, sat, lit);
+
+        log(
+            `sourced rgb of (${colour[0]}, ${colour[1]}, ${colour[2]}), hsl of (${hsl.h}, ${hsl.s}, ${hsl.l}) - using final value of (${hue}, ${sat}, ${lit})`,
+            'accent'
+        );
+
+        return { hue, sat, lit };
     } catch (e) {
         log('received error', 'accent', 'error', { e });
     }
@@ -47,10 +54,14 @@ export function header_colour(source: HTMLImageElement, apply_to_page = false, a
             chart_reflow();
         }
 
-        if (apply_to_elem instanceof HTMLElement) {
-            apply_to_elem.style.setProperty('--hue-over', hue);
-            apply_to_elem.style.setProperty('--sat-over', sat);
-            apply_to_elem.style.setProperty('--lit-over', lit);
+        if (apply_to_elem.length > 0) {
+            apply_to_elem.forEach(elem => {
+                if (!(elem instanceof HTMLElement)) return;
+
+                elem.style.setProperty('--hue-over', hue);
+                elem.style.setProperty('--sat-over', sat);
+                elem.style.setProperty('--lit-over', lit);
+            })
         }
     }
 }

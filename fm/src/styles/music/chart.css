@@ -154,10 +154,6 @@
                     order: -1;
                     position: relative;
 
-                    img {
-                        --mask-size: var(--cover-size-200);
-                    }
-
                     .charts-list-rank-overlay-wrap {
                         position: absolute;
                         inset: 0;
@@ -168,10 +164,12 @@
                         position: absolute;
                         bottom: 0;
                         left: 8px;
+                        font-family: var(--font-head);
                         font-size: 60px;
                         line-height: 36px;
                         font-weight: 1000;
                         letter-spacing: -2px;
+                        filter: grayscale(1);
 
                         color: oklch(var(--b6));
 
@@ -192,13 +190,6 @@
                         inset: 0;
                         color: transparent;
                         text-shadow: 0 1px 0 oklch(var(--c1)), 1px 1px 0 oklch(var(--c1)), -1px -1px 0 oklch(var(--c1)), 1px -1px 0 oklch(var(--c1)), -1px 1px 0 oklch(var(--c1)), 0 -1px 0 oklch(var(--c1)), 1px 0 0 oklch(var(--c1)), -1px 0 0 oklch(var(--c1));
-                    }
-                }
-
-                &:hover {
-                    .charts-list-rank-overlay {
-                        transform: translateY(20px);
-                        opacity: 0;
                     }
                 }
 

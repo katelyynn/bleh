@@ -243,11 +243,9 @@ export function bleh_gallery() {
         '.more-link-fullwidth-right-flush-top'
     );
     if (view_all_container) {
-        let side_actions = document.createElement('section');
-        side_actions.classList.add('side-actions');
-
-        if (!page.mobile) page.structure.side.appendChild(side_actions);
-        else page.structure.main.appendChild(side_actions);
+        const side_actions = html.node`
+            <section class="side-actions" />
+        `;
 
         let view_all = view_all_container.querySelector('a');
         view_all.classList.add('btn', 'side-action', 'icon-mask');
@@ -270,6 +268,10 @@ export function bleh_gallery() {
 
             side_actions.appendChild(view_saved);
         }
+
+        if (!page.mobile)
+            page.structure.side.insertBefore(side_actions, page.structure.side.firstElementChild);
+        else page.structure.main.insertBefore(side_actions, page.structure.main.firstElementChild);
     }
 
     // bookmark-related info

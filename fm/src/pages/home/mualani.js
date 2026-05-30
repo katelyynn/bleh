@@ -110,6 +110,13 @@ export function mualani() {
                         list: page.state.quick_access_items
                     })}
                 </div>
+                <div class="tippy-box" data-theme="context-menu" data-state="visible">
+                    <div class="tippy-content">
+                        ${setting({ id: 'solarium', in_menu: true })}
+                        ${setting({ id: 'romanise_jp', in_menu: true })}
+                        ${setting({ id: 'expand_tracks', in_menu: true })}
+                    </div>
+                </div>
             </section>
             <section class="flexy">
                 <h2>Notifications</h2>
@@ -203,6 +210,19 @@ export function mualani() {
                 })}
                 <div class="sep" />
                 <div class="markdown-body" ref=${el => md_body_default = el} />
+            </section>
+            <section class="flexy">
+                <h2>Graph colours</h2>
+                <div style="display: flex; flex-wrap: wrap; gap: 8px">
+                    ${Array.from({ length: 13 }, (_, i) => {
+                        return html.node`
+                            <div style="display: flex; flex-direction: column; gap: 10px">
+                                <div style="width: 40px; height: 40px; background-color: var(--graph-colour-${i})" />
+                                <div style="width: 40px; height: 3px; background-color: var(--graph-colour-${i})" />
+                            </div>
+                        `;
+                    })}
+                </div>
             </section>
             <section class="flexy">
                 <div class="inner-preview pad">

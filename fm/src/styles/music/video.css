@@ -56,12 +56,13 @@
         position: absolute;
         inset: 0;
     }
-}
-.video-preview {
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
-    box-shadow: none;
-    position: static !important;
+
+    .video-preview {
+        aspect-ratio: 16 / 9;
+        object-fit: cover;
+        box-shadow: none;
+        position: static !important;
+    }
 }
 .video-actions {
     gap: var(--card-gap) !important;

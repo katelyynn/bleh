@@ -34,7 +34,7 @@
 
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 6px;
 
     &[aria-checked="true"],
     &[aria-selected="true"],
@@ -80,15 +80,28 @@
     }
 }
 
+.dropdown-menu-clickable-item {
+    --selected-icon: var(--icon-16-check);
+
+    &.radio-menu-item {
+        --selected-icon: var(--icon-16-radio-dot);
+    }
+}
+
 .dropdown-menu-clickable-item[aria-checked="true"],
 .dropdown-menu-clickable-item--selected {
-    --mask: var(--icon-16-check) !important;
+    --mask: var(--selected-icon) !important;
     --mask-size: 14px !important;
     /*--btn-left: calc(var(--button-sides) + 12px + 4px) !important;*/
     --margin-top: calc(-1 * (var(--mask-size) / 2)) !important;
 }
 
 .dropdown-menu-clickable-item {
+    & > .new-badge {
+        cursor: inherit;
+        margin-left: unset !important;
+    }
+
     .auth-dropdown-item-row {
         display: flex;
         justify-content: space-between;
@@ -97,8 +110,9 @@
 
         .auth-dropdown-item-left {
             display: flex;
+            flex-wrap: wrap;
+            flex: 1;
             gap: var(--icon-gap);
-            max-width: 100px;
             overflow: hidden;
         }
         .auth-dropdown-item-right {
@@ -117,6 +131,8 @@
 
 .date-picker-preset-item {
     min-width: unset !important;
+    width: 100%;
+    justify-content: center;
 }
 .auth-dropdown-menu-wrap {
     padding-top: unset !important;
@@ -329,4 +345,42 @@ li:first-child .more-item--delete {
         width: 100%;
         height: 100%;
     }
+}
+
+
+.menu-item-body {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+}
+
+.menu-item-head {
+    font-weight: inherit;
+}
+
+.menu-item-text {
+    opacity: 0.8;
+    font-size: 13px;
+    margin-top: -4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-clamp: 2;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.menu-item-description {
+    color: oklch(var(--c3));
+    cursor: default;
+    font-size: 13px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-clamp: 2;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    padding: 3px var(--button-sides) 4px;
+
+    max-width: 250px;
+
+    margin-top: 4px;
 }

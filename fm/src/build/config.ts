@@ -600,6 +600,13 @@ export let settings_store: Record<string, setting_instance> = {
         },
         bubble: true
     },
+    font_serif: {
+        default: true,
+        type: 'checkbox',
+        title: trans.font_serif,
+        bubble: true,
+        new_release: true
+    },
     font_weight: {
         css: 'custom_font_weight',
         default: 400,
@@ -1052,5 +1059,19 @@ export let settings_store: Record<string, setting_instance> = {
         title: trans.count_bar_right.name,
         body: trans.count_bar_right.body,
         bubble: true
+    },
+    date_selector: {
+        default: 'preset',
+        type: 'tabs',
+        values: {
+            preset: {
+                name: trans.presets,
+                icon: 'calendar'
+            },
+            custom: {
+                name: trans.custom,
+                icon: 'edit'
+            }
+        }
     }
 };

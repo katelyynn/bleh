@@ -19,6 +19,7 @@ import { render_chart_preview, render_track_preview } from '@/components/setting
 import { keys } from '@/components/settings/storage';
 import { save_profile_cache } from "../profile/profile";
 import { delete_cache } from "@/components/profile/cache";
+import { new_indicator } from '@/components/shared/indicator';
 
 let cropper: Cropper;
 
@@ -81,7 +82,7 @@ function charts_panel() {
     }
 
     render(charts_panel, html`
-        <h4>${tl(trans.recent_tracks)}</h4>
+        <h4>${tl(trans.recents)}</h4>
         ${alert}
         <form action="${root}settings#update-chart" name="chart-form" method="post">
             <input type="hidden" name="csrfmiddlewaretoken" value=${page.token}>
@@ -479,7 +480,7 @@ function profile_panel() {
                     const elem = html.node`
                         <div class="setting" data-type="text">
                             <div class="heading">
-                                <h5><a href="https://status.cafe" target="_blank">status.cafe</a><span class="new-badge new">${tl(trans.new)}</span></h5>
+                                <h5><a href="https://status.cafe" target="_blank">status.cafe</a>${new_indicator()}</h5>
                                 <p>${tl(trans.status_cafe.body)}</p>
                             </div>
                             ${input({

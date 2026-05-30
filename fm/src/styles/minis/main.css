@@ -1,6 +1,7 @@
 @import './compare.css';
 @import './collage.css';
 @import './pixel.css';
+@import './plot.css';
 
 .mini-list {
     display: flex;
@@ -83,6 +84,14 @@
             & > p {
                 color: oklch(var(--c3));
                 font-size: 13px;
+            }
+        }
+
+        &[data-mini="plot"] {
+            & > .mini-icon {
+                --hue-over: 20;
+                --sat-over: 1.4;
+                --lit-over: 0.95;
             }
         }
 

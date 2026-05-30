@@ -257,6 +257,8 @@
             .gallery-image-delete button,
             .gallery-image-report {
                 --hue-over: var(--hue-neg);
+                --sat-over: var(--sat-neg);
+                --lit-over: var(--lit-neg);
             }
             .image-open-button {
                 --mask: var(--icon-16-expand);
@@ -617,8 +619,8 @@ a.gallery-image-preferred-off {
 .gallery-image-delete button,
 .gallery-image-report {
     --hue-over: var(--hue-neg);
-    --sat-over: 1;
-    --lit-over: 1;
+    --sat-over: var(--sat-neg);
+    --lit-over: var(--lit-neg);
     --col: oklch(var(--l3-c));
 }
 

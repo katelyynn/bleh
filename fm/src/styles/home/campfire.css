@@ -1,6 +1,71 @@
+.campfire-panels {
+  display: flex;
+  gap: 1px;
+  position: relative;
+
+  border-radius: inherit;
+  border-bottom-left-radius: unset;
+  border-bottom-right-radius: unset;
+
+  background-color: oklch(var(--b5));
+
+  overflow: hidden;
+
+  max-height: 606px;
+
+  @media (max-width: 980px) {
+    flex-direction: column;
+    max-height: unset;
+  }
+}
+
+.campfire-panel-main {
+  width: var(--cards-main-width);
+
+  z-index: 3;
+
+  @media (max-width: 980px) {
+    width: unset;
+  }
+}
+
+.campfire-panel-side {
+  width: var(--cards-sidebar-width);
+  background: oklch(var(--b5) / 60%);
+  padding: var(--card-padding) 0;
+
+  z-index: 3;
+
+  overflow-y: auto;
+  scrollbar-width: thin;
+
+  @media (max-width: 980px) {
+    width: unset;
+    max-height: 500px;
+  }
+}
+
+.campfire-bg {
+  &.previous {
+      display: none;
+  }
+
+  position: absolute;
+  inset: 0;
+  background-color: oklch(var(--b4));
+  background-size: cover;
+  background-position: center;
+
+  --mask: linear-gradient(180deg, transparent, white, transparent);
+  mask-image: var(--mask);
+  -webkit-mask-image: var(--mask);
+
+  opacity: 0.2;
+}
+
 .campfire {
     --w: 260px;
-    --gap: -50px;
+    --gap: -60px;
     padding: 80px 0;
     overflow: hidden;
 
@@ -9,38 +74,22 @@
     align-items: center;
     gap: 40px;
 
-    background: oklch(var(--b5)) !important;
-    border-radius: inherit;
-    border-bottom-left-radius: unset;
-    border-bottom-right-radius: unset;
-
     position: relative;
 
     @media (max-width: 600px) {
-        --w: 230px;
+      padding: 40px 0;
+      --w: 210px;
     }
 
-    & > .campfire-bg {
-        &.previous {
-            display: none;
-        }
-
-        position: absolute;
-        inset: 0;
-        background-size: cover;
-        background-position: center;
-
-        --mask: linear-gradient(180deg, transparent, white, transparent);
-        mask-image: var(--mask);
-        -webkit-mask-image: var(--mask);
-
-        opacity: 0.2;
-    }
+    background: linear-gradient(90deg, oklch(var(--b5)), transparent 5%, transparent 95%, oklch(var(--b5)));
 
     & > .campfire-items {
         position: relative;
         height: var(--w);
+        width: var(--w);
         z-index: 10;
+
+        perspective: 1000px;
 
         & > .campfire-item {
             display: flex;
@@ -49,25 +98,43 @@
 
             position: absolute;
             top: 0;
+            left: 50%;
 
             --offset: translateX(calc((var(--index) - var(--selected-index)) * (var(--w) + var(--gap)) - var(--w) / 2));
 
-            left: 50%;
-            transform: var(--offset);
+            transform: var(--offset) var(--rotate);
+            --rotate: rotateY(calc(var(--proximity) * -15deg));
+            transform-style: preserve-3d;
+
+            background-color: oklch(var(--b6));
+            border-radius: var(--item-big-radius);
+
+            &[data-proximity="3"],
+            &[data-proximity="-3"] {
+              z-index: -1;
+            }
+
+            &[data-proximity="5"],
+            &[data-proximity="-5"] {
+              display: none;
+            }
 
             & > .campfire-item-cover {
                 width: var(--w);
                 height: var(--w);
-                border-radius: var(--item-big-radius);
+                border-radius: inherit;
                 background: oklch(var(--b4));
-                box-shadow: var(--card-shadow);
-                overflow: hidden;
 
                 position: relative;
+
+                transition-property: box-shadow, opacity;
+                transition-duration: calc(var(--trans-toggle, 1) * 0.5s);
+                transition-timing-function: var(--trans-function);
 
                 & > img {
                     width: 100%;
                     --mask-size: var(--cover-size-400);
+                    border-radius: inherit;
                     user-select: none;
                     -webkit-user-drag: none;
                     pointer-events: none;
@@ -99,28 +166,55 @@
                     box-shadow: unset !important;
                     border-radius: inherit;
                 }
+
+                .campfire-item-cover-reflection {
+                  position: absolute;
+                  inset: 100% 0 0 0;
+                  background-size: cover;
+                  border-radius: inherit;
+                  transform: scaleY(-1);
+                  aspect-ratio: 1 / 1;
+
+                  --mask: linear-gradient(180deg, transparent 50%, white);
+                  mask-image: var(--mask);
+                  -webkit-mask-image: var(--mask);
+
+                  opacity: 0.2;
+
+                  z-index: -1;
+
+                  pointer-events: none;
+                }
             }
 
             &[aria-checked="false"] {
-                opacity: 0.4;
-                transform: var(--offset) scale(0.7);
+                transform: var(--offset) scale(0.65) var(--rotate);
 
                 cursor: pointer;
+
+                &:active {
+                  transform: var(--offset) scale(0.6) var(--rotate);
+                }
+
+                & > .campfire-item-cover {
+                  opacity: 0.6;
+                  box-shadow: var(--card-shadow);
+                }
             }
 
             &[aria-checked="true"] {
-                z-index: 20;
+                z-index: 30;
             }
 
             transition-property: transform, opacity, filter;
-            transition-duration: 0.5s;
+            transition-duration: calc(var(--trans-toggle, 1) * 0.5s);
             transition-timing-function: var(--trans-function);
         }
     }
 
     & > .campfire-intro {
-        z-index: 11;
-        display: none;
+        z-index: 21;
+        filter: var(--header-filter-shadow);
     }
 
     & > .campfire-details {
@@ -128,7 +222,8 @@
         flex-direction: column;
         gap: 5px;
         text-align: center;
-        z-index: 11;
+        z-index: 21;
+        filter: var(--header-filter-shadow);
 
         & > .campfire-title {
             font-size: 20px;
@@ -191,7 +286,48 @@
 
 
 .friends-panel {
-    background: oklch(var(--b5));
     margin: unset;
     padding: var(--card-padding);
+}
+
+
+.campfire-cta {
+  padding: var(--card-padding) calc(var(--card-padding) - 12px);
+  background: linear-gradient(180deg, oklch(var(--b5)), color-mix(in oklch, oklch(var(--b4)) 40%, oklch(var(--b5))));
+
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: var(--card-gap);
+}
+
+.campfire-cta-icon {
+  width: 34px;
+  height: 34px;
+  background: oklch(var(--h4) / 20%);
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: oklch(var(--l3-c));
+  --mask-colour: currentColor;
+  --icon: var(--mask);
+  --icon-size: 16px;
+}
+
+.campfire-cta-btn {
+  display: flex;
+  gap: 10px;
+
+  --bg: transparent;
+  --bg-hov: oklch(var(--b4) / 60%);
+  --bg-atv: oklch(var(--b4) / 80%);
+  --padding: 10px 12px;
+  --shadow: none;
+
+  text-align: left;
+}
+
+.campfire-cta-text-sub {
+  font-size: 13px;
+  color: oklch(var(--c3));
 }

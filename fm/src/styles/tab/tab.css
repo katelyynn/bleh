@@ -222,6 +222,8 @@ button.navlist-more {
 }
 
 .masthead-nav-control {
+    width: unset !important;
+
     /* left padding for icon, otherwise just 12px 16px */
     --padding: var(--button-verts) var(--button-sides) !important;
 
@@ -267,10 +269,14 @@ button.navlist-more {
     position: relative;
     padding: 10px 0;
     background: var(--toolbar-bg);
-    border-bottom: var(--toolbar-border);
+    margin-bottom: 1px;
 
     /* temporary chrome fix */
     order: -1;
+
+    --button-verts: 5px;
+    --button-sides: 11px;
+    --button-sides-icon: calc(var(--button-sides) - 2px);
 
     @media (min-width: 981px) {
         border-top-left-radius: var(--card-radius);
@@ -295,6 +301,16 @@ button.navlist-more {
             background: color-mix(in oklch, oklch(var(--b6)) 20%, oklch(var(--b5)));
         }
     }
+
+    &:after {
+        content: '';
+        position: absolute;
+        left: var(--card-padding);
+        right: var(--card-padding);
+        bottom: -1px;
+        background: var(--toolbar-border);
+        height: 1px;
+    }
 }
 
 .library-controls > .secondary-nav,
@@ -302,10 +318,6 @@ button.navlist-more {
     margin: unset !important;
     padding-bottom: unset !important;
     padding-left: calc(var(--card-padding) - var(--button-sides-icon));
-
-    --button-verts: 5px;
-    --button-sides: 11px;
-    --button-sides-icon: calc(var(--button-sides) - 2px);
 
     &:before,
     &:after {
@@ -331,13 +343,14 @@ button.navlist-more {
     --shadow: none !important;
     --shadow-hov: none !important;
     --col: oklch(var(--c2)) !important;
+    --mask-colour: oklch(var(--l2-c-theme-switch)) !important;
     filter: var(--nav-filter-shadow) !important;
 
     z-index: 1;
     opacity: unset !important;
     margin: unset !important;
     font-weight: var(--font-weight-medium);
-    color: oklch(var(--c2));
+    color: var(--col);
     cursor: pointer;
     transition-property: background-color, color, transform;
     transition-duration: var(--trans);
@@ -364,31 +377,28 @@ button.navlist-more {
         left: var(--button-sides-icon) !important;
         right: var(--button-sides) !important;
         border-radius: var(--item-big-radius) !important;
-        opacity: 0.6;
+        opacity: 0;
 
         display: block !important;
         width: unset !important;
         height: 3px !important;
         margin: unset !important;
-        transform: scaleY(0);
+        transform: translateY(2px);
         transform-origin: bottom;
 
         background: oklch(var(--l3-c-theme-switch)) !important;
         box-shadow: 0 -4px 20px 2px oklch(var(--l4-c) / 60%) !important;
 
-        transition-property: transform !important;
-        transition-duration: 0.2s !important;
+        transition-property: transform, opacity !important;
+        transition-duration: var(--trans) !important;
         transition-timing-function: var(--trans-function) !important;
     }
 
     &:focus,
     &:hover {
-        transform: translateY(-1px);
-        transition: none !important;
-
         &:after {
-            transform: translateY(1px) scaleY(1);
-            transition: none !important;
+            transform: translateY(0);
+            opacity: 0.6;
         }
     }
 
@@ -445,12 +455,11 @@ button.navlist-more {
 [data-bleh--gallery-tab="saved"] .secondary-nav-item--gallery-bookmarks .secondary-nav-item-link,
 .secondary-nav-item-link.active,
 .secondary-nav-item-link--active {
-    transform: translateY(0);
     --force-font-weight: var(--font-weight-medium) !important;
 
     &:after {
         opacity: 1;
-        transform: scaleY(1);
+        transform: translateY(0);
         transition: none !important;
     }
 

@@ -10,6 +10,7 @@ import { set_storage } from "@/build/tools";
 import { tl, trans } from "@/build/trans";
 import { external_url_prompt } from "@/components/shared/markdown";
 import { can_trust_link } from "@/pages/music/wiki";
+import { text_decode } from "../shared/text_decode";
 
 export async function fetch_status(username) {
     const current = new Date();
@@ -75,7 +76,7 @@ async function fetch_status_api(username) {
                 }}>
                     <div class="status-cafe-content">
                         <span class="status-cafe-emoji">${data.face}</span>
-                        <span class="status-cafe-text">${data.content}</span>
+                        <span class="status-cafe-text">${text_decode(data.content)}</span>
                     </div>
                     <div class="status-cafe-top">
                         <span class="status-cafe-time">${data.timeAgo}</span>

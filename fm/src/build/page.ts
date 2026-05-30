@@ -234,6 +234,7 @@ interface page {
     },
     header: any,
     state: {
+        replaced_accent?: boolean,
         settings_reload: boolean,
         glacier: {
             insights: {

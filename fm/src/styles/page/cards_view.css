@@ -2,6 +2,10 @@
     margin-top: 100px;
     margin-bottom: 600px !important;
 
+    &.obsession-view {
+        margin-top: unset;
+    }
+
     & > .col-main {
         min-width: unset;
     }

@@ -43,134 +43,19 @@ import { icon, icons } from '../shared/icon';
 import { avatar } from '../shared/avatar';
 import { convert_lang_to_country, flag } from '../shared/flag';
 import { keys } from '../settings/storage';
-
-export function patch_masthead() {
-    let masthead_logo = document.body.querySelector('.masthead-logo');
-    if (!masthead_logo) return;
-
-    if (!masthead_logo.hasAttribute('data-kate-processed')) {
-        masthead_logo.setAttribute('data-kate-processed', 'true');
-
-        update_masthead(masthead_logo);
-    }
-}
+import { notify } from '../dialog/notify';
+import { new_indicator } from '../shared/indicator';
 
 export function update_branding_type(state = settings.branding_type) {
     if (state == 'bleh') {
         render(page.state.home_link, html`
-            <div class="home-logo bleh-logo">${version.brand}</div>
+            <div class="home-logo bleh-logo" data-refresh=${ff('logo')}>${version.brand}</div>
         `);
     } else if (state == 'lastfm') {
         render(page.state.home_link, html`
             <div class="home-logo lastfm-logo">Last.fm</div>
         `);
     }
-}
-
-export function update_masthead(
-    masthead_logo = document.body.querySelector('.masthead-logo')
-) {
-    const update_required = localStorage.getItem('bleh_update_required') || 'false';
-
-    let home_link;
-
-    render(masthead_logo, html``);
-    render(masthead_logo, html`
-        <a class="hidden-link" style="display: none !important" href="/">Last.fm</a>
-        <a class="btn navigation-item home-link" href="${root}music" ref=${el => home_link = el} />
-    `);
-
-    page.state.home_link = home_link;
-
-    update_branding_type();
-
-    const head_menu = tippy(home_link, {
-        theme: 'window',
-        content: html.node`
-            <div class="setting-group blend">
-                ${setting({ id: 'branding_type', func: update_branding_type })}
-            </div>
-        `,
-        placement: 'right-start',
-        trigger: 'manual',
-        interactive: true,
-        interactiveBorder: 10,
-        offset: [0, 0],
-        appendTo: document.body,
-
-        onShow(instance) {
-            instance.popper.addEventListener('click', (event) => {
-                instance.hide();
-            });
-        }
-    });
-
-    register_menu(home_link, head_menu);
-
-    let link;
-    if (update_required === 'false') {
-        link = html.node`
-            <a class="btn navigation-item home-version" href="${root}bleh">
-                ${version.build}
-                <div class="new-badge sku spacing">
-                    ${version.sku}
-                    ${settings.dev ? html.node`
-                        <span class="bleh-icon-container">
-                            ${icon({ name: icons.dev })}
-                        </span>
-                    ` : ''}
-                </div>
-            </a>
-        `;
-    } else {
-        link = html.node`
-            <a class="btn navigation-item home-version" onclick=${() => prompt_for_update()}>
-                <div class="update-container">
-                    <div class="bleh-icon" style="--icon: var(--icon-16-update)" />
-                </div>
-                ${version.build}
-                <div class="new-badge sku spacing">
-                    ${version.sku}
-                    ${settings.dev ? html.node`
-                        <span class="bleh-icon-container">
-                            ${icon({ name: icons.dev })}
-                        </span>
-                    ` : ''}
-                </div>
-            </a>
-        `;
-
-        tippy(link, {
-            content: tl(trans.update_available_to_install)
-        });
-    }
-
-    const last_checked = localStorage.getItem('bleh_update_checked') || null;
-
-    const link_menu = tippy(link, {
-        theme: 'context-menu',
-        content: html.node`
-            <a class="dropdown-menu-clickable-item" data-type="update" href="${root}bleh/general">
-                ${last_checked ? tl(trans.last_checked_date, { d: DateTime.fromJSDate(new Date(last_checked)).toRelative() }) : tl(trans.never_checked)}
-            </a>
-        `,
-        placement: 'right-start',
-        trigger: 'manual',
-        interactive: true,
-        interactiveBorder: 10,
-        offset: [0, 0],
-        appendTo: document.body,
-
-        onShow(instance) {
-            instance.popper.addEventListener('click', (event) => {
-                instance.hide();
-            });
-        }
-    });
-
-    register_menu(link, link_menu);
-
-    masthead_logo.appendChild(link);
 }
 
 export function append_nav() {
@@ -280,24 +165,98 @@ export function append_nav() {
     const masthead = document.body.querySelector('.masthead');
     const inner = masthead.querySelector('.masthead-inner-wrap');
 
+    const masthead_logo = inner.querySelector('.masthead-logo');
+
+    let home_link;
+    let home_link_container;
+
+    render(masthead_logo, html`
+        <a class="hidden-link" style="display: none !important" href="/">Last.fm</a>
+        <a class="btn navigation-item home-link" href="${root}music" ref=${el => home_link = el}>
+            <span class="home-logo-container" ref=${el => home_link_container = el} />
+        </a>
+        <nav class="navlist navlist--more masthead-nav masthead-nav-top">
+            <ul class="navlist-items">
+                <a class="btn masthead-nav-control icon" data-type="charts" href="${root}charts">
+                    ${tl(trans.charts)}
+                </a>
+                <a class="btn masthead-nav-control icon" data-type="minis" href="${root}bleh/minis">
+                    ${tl(trans.minis)}
+                    ${new_indicator()}
+                </a>
+                <span class="navlist-search" ref=${el => page.state.search = el} />
+            </ul>
+        </nav>
+    `);
+
+    page.state.home_link = home_link_container;
+
+    update_branding_type();
+
+    if (update_required === 'true') {
+        masthead_logo.onclick = prompt_for_update;
+
+        home_link.appendChild(html.node`
+            <span class="home-version">
+                <div class="update-container">
+                    <div class="bleh-icon" style="--icon: var(--icon-16-update)" />
+                </div>
+            </span>
+        `);
+
+        tippy(home_link, {
+            content: tl(trans.update_available_to_install)
+        });
+    } else {
+        masthead_logo.onclick = null;
+    }
+
+    const last_checked = localStorage.getItem('bleh_update_checked') || null;
+
+    const link_menu = tippy(home_link, {
+        theme: 'context-menu',
+        content: html.node`
+            ${setting({ id: 'branding_type', func: update_branding_type, in_menu: true })}
+            <a class="dropdown-menu-clickable-item" data-type="update" href="${root}bleh/general">
+                ${last_checked ? tl(trans.last_checked_date, { d: DateTime.fromJSDate(new Date(last_checked)).toRelative() }) : tl(trans.never_checked)}
+            </a>
+        `,
+        placement: 'right-start',
+        trigger: 'manual',
+        interactive: true,
+        interactiveBorder: 10,
+        offset: [0, 0],
+        appendTo: document.body,
+
+        onShow(instance) {
+            instance.popper.addEventListener('click', (event) => {
+                instance.hide();
+            });
+        }
+    });
+
+    register_menu(home_link, link_menu);
+
     const navs = inner.querySelector('.masthead-nav-wrap');
 
     const search = inner.querySelector('.masthead-search-form');
     const form = search.querySelector('.masthead-search-field');
-    form.placeholder = tl(trans.search_for_anything);
-    inner.insertBefore(
-        html.node`
-        <div class="masthead-search-wrap">
+    form.placeholder = tl(trans.search);
+
+    const submit = search.querySelector('.masthead-search-submit');
+    submit.classList.add('btn', 'chibi', 'icon-mask');
+    submit.setAttribute('data-type', 'search');
+
+    render(page.state.search, html`
+        <span class="navlist-search-container">
             ${search}
-        </div>
-    `,
-        navs
-    );
+        </span>
+    `);
 
     // 2025-04-14
     let new_auth = masthead.querySelector('.auth-dropdown-menu');
 
-    let links = masthead.querySelector('.masthead-nav .navlist-items');
+    let links = masthead.querySelector('.masthead-nav:not(.masthead-nav-top) .navlist-items');
     render(links, html``);
 
     let auth_link = masthead.querySelector(
@@ -309,12 +268,12 @@ export function append_nav() {
             html`
                 ${() => {
                     const elem = html.node`
-                    <li class="masthead-nav-item">
-                        <a class="btn masthead-nav-control chibi" href="${root}bleh" data-label="bleh_no_auth">
-                            ${tl(trans.bleh_settings)}
-                        </a>
-                    </li>
-                `;
+                        <li class="masthead-nav-item">
+                            <a class="btn masthead-nav-control chibi" href="${root}bleh" data-label="bleh_no_auth">
+                                ${tl(trans.bleh_settings)}
+                            </a>
+                        </li>
+                    `;
 
                     tippy(elem, {
                         content: tl(trans.bleh_settings)
@@ -397,7 +356,7 @@ export function append_nav() {
             <a class="dropdown-menu-clickable-item colourful" data-type="discord" href="https://discord.gg/${discord}" target="_blank">
                 ${tl(trans.join_discord)}
             </a>
-            <button class="dropdown-menu-clickable-item sponsor colourful" onclick=${() => sponsor()}>
+            <button class="dropdown-menu-clickable-item sponsor colourful" data-type="sponsor" onclick=${() => sponsor()}>
                 ${tl(trans.sponsor)}
             </button>
             <a class="dropdown-menu-clickable-item lotus colourful" href="https://github.com/katelyynn/lotus/issues/new/choose" target="_blank">
@@ -805,6 +764,17 @@ export function append_nav() {
         appendTo: document.body,
 
         onShow: (instance) => {
+            if (!auth.avatar) {
+                notify({
+                    id: 'auth_broken',
+                    title: 'Could not open navigation menu',
+                    body: 'Authorisation status is invalid'
+                });
+
+                instance.hide();
+                return;
+            }
+
             page.structure.notifications.setAttribute('data-auth-open', 'true');
 
             const update_required = localStorage.getItem('bleh_update_required') || 'false';
@@ -1183,6 +1153,7 @@ export function append_nav() {
                             <div class="button-combo">
                                 <a class="dropdown-menu-clickable-item" data-type="mini" href="${root}bleh/minis" onclick=${() => { instance.hide() }}>
                                     ${tl(trans.minis)}
+                                    ${new_indicator()}
                                 </a>
                                 <div class="button-combo-sep" />
                                 ${() => {

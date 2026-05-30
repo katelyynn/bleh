@@ -14,6 +14,7 @@
         --header-size: 58px;
     }
 
+    &[data-page-subpage="obsessions_obsession"],
     &[data-page-type="api"],
     &[data-page-type="bleh_setup"] {
         display: none;

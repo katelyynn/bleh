@@ -81,13 +81,13 @@ export function notify({
         progress: progress
     });
 
-    if (type === 'error') {
+    if (type == 'error') {
         if (!icon) icon = 'icon-16-x';
         colourful = true;
-    } else if (type === 'warning') {
+    } else if (type == 'warning') {
         if (!icon) icon = 'icon-16-warning';
         colourful = true;
-    } else if (type === 'success') {
+    } else if (type == 'success') {
         if (!icon) icon = 'icon-16-check';
         colourful = true;
     }

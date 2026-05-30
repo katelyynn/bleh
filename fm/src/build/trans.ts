@@ -6,9 +6,8 @@
 
 import { handle_error_500 } from '@/page';
 import { log } from '@/build/log';
-import { auth, auth_link, page, setRoot } from '@/build/page';
-import { clamp_lit, clamp_sat, get_language_name, rgb_to_hsl, rgb_to_oklch } from '@/build/tools';
-import ColorThief from 'color-thief-browser';
+import { page, setRoot } from '@/build/page';
+import { get_language_name } from '@/build/tools';
 import { Settings } from 'luxon';
 
 // loads your selected language in Last.fm
@@ -33,7 +32,7 @@ export let lang_info = {
     },
     it: {
         name: get_language_name('it'),
-        by: ['cutotopo', 'pascal-00', 'nikilite'],
+        by: ['cutotopo', 'pascal-00', 'Nikilite'],
         last_updated: '2026-05-20',
     },
     ja: {
@@ -5367,6 +5366,11 @@ export const trans = {
         ru: 'Страна',
         pl: 'Kraj',
     },
+    origin: {
+        // used as an alternative to saying someone or something's
+        // country, as its now always a country
+        en: 'Origin',
+    },
     display_name: {
         name: {
             en: 'Display name',
@@ -6146,6 +6150,9 @@ export const trans = {
             ru: 'Доступный',
             it: 'Accessibile',
         },
+    },
+    font_serif: {
+        en: 'Use old-fashioned Serif font for some headings'
     },
     previewing: {
         // used as subtext for previewing a font
@@ -8001,11 +8008,11 @@ export const trans = {
         // lowercase in design
         // ignore the curly brackets, only translate the '{c} wonderful people' thing
         // c: replaced with a number of sponsors
-        en: '{s}{c} sponsoring{/s} ♡',
-        de: '{s}{c} unterstützen{/s} ♡',
-        ru: '{s}{c} замечательных людей{/s} ♡', // wonderful people -tech
-        es: '{s}{c} patrocinando{/s} ♡',
-        it: '{s}{c} sostenendo{/s} ♡',
+        en: '{s}{c} sponsoring{/s}',
+        de: '{s}{c} unterstützen{/s}',
+        ru: '{s}{c} замечательных людей{/s}', // wonderful people -tech
+        es: '{s}{c} patrocinando{/s}',
+        it: '{s}{c} sostenendo{/s}'
     },
     love_lower: {
         // replaces the {h} in the above sentence
@@ -10239,6 +10246,14 @@ export const trans = {
             ru: 'Создать графики из пользовательских библиотек',
         },
     },
+    card: {
+        name: {
+            en: 'Card'
+        },
+        body: {
+            en: 'Get an overview of your last year, month, or week'
+        }
+    },
     your_recent_30_days: {
         en: 'Your recent 30 days',
         de: 'Deine letzten 30 Tage',
@@ -11129,34 +11144,132 @@ export const trans = {
             es: 'Controla la dirección del texto y progreso de la barra',
             ru: 'Управлять направлением прогресс-бара и текста',
             it: 'Controlla la direzione della barra di avanzamento e del testo',
+        }
+    },
+    better_with_friends: {
+        en: 'Music is better with friends, {a}add to your close friends list{/a}',
+    },
+    collage_cta: {
+        name: {
+            en: 'Create a collage',
         },
+        body: {
+            en: 'Featuring your favourite albums in the last month',
+        },
+    },
+    compare_cta: {
+        name: {
+            en: 'Compare with your friends',
+        },
+        body: {
+            en: 'Which music do you have in common?',
+        },
+    },
+    sponsor_cta: {
+        body: {
+            en: 'Help out the future of bleh',
+        },
+    },
+    add_new_data_point: {
+        en: 'Add new data point',
+    },
+    presets: {
+        // used in reference to timeframe presets
+        en: 'Presets',
+    },
+    existing: {
+        // used as a header for existing items
+        en: 'Existing',
+    },
+    history: {
+        en: 'History',
+    },
+    no_data_to_display: {
+        en: 'No data to display',
+    },
+    add_to_graph: {
+        en: 'Add to graph',
+    },
+    graph_options: {
+        en: 'Graph options',
+    },
+    refresh_plot_notice: {
+        en: 'This will re-gather all data points',
+    },
+    refresh_plot_alert: {
+        en: 'The timeframe you selected does not match the current graph, you can refresh the data to fix this.',
+    },
+    under_construction: {
+        en: 'This page is under construction, please give feedback and suggestions if you have any!',
+    },
+    data_source: {
+        en: 'Data source',
+    },
+    data_source_explain: {
+        en: 'Here you can add media to your graph, for example an artist or an album/track. Listing an album or track is optional, as you can instead add an entire artist.',
+    },
+    artist_required: {
+        en: 'Artist name required',
+    },
+    choose_either_an_album_or_track: {
+        en: 'Choose either an album or track only',
+    },
+    already_exists: {
+        en: 'This data source already exists',
+    },
+    username_required: {
+        en: 'Username required',
+    },
+    already_a_close_friend: {
+        en: 'Already added to close friends',
+    },
+    plot_explain: {
+        0: {
+            en: 'Choose a timeframe for your graph',
+        },
+        1: {
+            en: 'Choose a data source (an artist, album, or track)',
+        },
+        2: {
+            en: 'Choose a user to add',
+        },
+        3: {
+            en: 'Add to your graph',
+        },
+    },
+    how_to_plot: {
+        en: 'Explaining Plot',
+    },
+    plotting_your_data: {
+        // loading message
+        en: 'Plotting your data',
     },
 } as const satisfies Record<string, any>;
 
 export const translation_fallback = 'NO_TRANSLATION_FOUND';
 
 interface translations {
-    [key: string]: translation;
+    [key: string]: translation
 }
 
 interface translation_leaf {
-    en?: string;
-    de?: string;
-    es?: string;
-    it?: string;
-    ja?: string;
-    pl?: string;
-    pt?: string;
-    sv?: string;
-    ru?: string;
-    zh?: string;
+    en?: string,
+    de?: string,
+    es?: string,
+    it?: string,
+    ja?: string,
+    pl?: string,
+    pt?: string,
+    sv?: string,
+    ru?: string,
+    zh?: string
 }
 
 export type translation = translation_leaf | {
     [key: string]: translation
 }
 
-export function tl(key: translation, replacements = {}) {
+export function tl(key: translation | string, replacements = {}) {
     if (typeof key === 'string') {
         return key;
     }
@@ -11168,13 +11281,15 @@ export function tl(key: translation, replacements = {}) {
 
     let translation = (key[lang] || key.en) as string;
 
+    if (page.state.april && translation.includes('Last.fm Pro'))
+        translation = translation.replaceAll('Last.fm Pro', 'Verified');
+
+    if (Object.keys(replacements).length == 0) return translation;
+
     for (const [placeholder, value] of Object.entries(replacements)) {
         const regex = new RegExp(`{${placeholder}}`, 'g');
         translation = translation.replace(regex, value as string);
     }
-
-    if (page.state.april && translation.includes('Last.fm Pro'))
-        translation = translation.replaceAll('Last.fm Pro', 'Verified');
 
     return translation;
 }
@@ -11249,28 +11364,6 @@ export function lookup_lang() {
 
     setRoot(get_lang());
 
-    let previous_avi = auth.avatar;
-    if (auth_link.state) {
-        auth.avatar = auth_link.state.querySelector('img').getAttribute('src');
-
-        if (auth.avatar != previous_avi) {
-            let avatar = auth_link.state.querySelector('img');
-            avatar.setAttribute('crossorigin', 'anonymous');
-
-            try {
-                avatar.addEventListener('load', () => {
-                    let thief = new ColorThief();
-                    let colour = thief.getColor(avatar);
-
-                    let hsl = rgb_to_oklch(colour[0], colour[1], colour[2]);
-
-                    auth.sets.hue = hsl.h;
-                    auth.sets.sat = clamp_sat((hsl.s / 100) * 3);
-                    auth.sets.lit = clamp_lit(auth.sets.sat, hsl.l / 100 + 0.35, true);
-                });
-            } catch (e) { }
-        }
-    }
     lang = document.documentElement.getAttribute('lang');
     lang_browser = navigator.language.replaceAll('"', '');
 

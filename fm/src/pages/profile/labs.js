@@ -5,9 +5,12 @@
 //
 
 import { auth, page, root } from '@/build/page';
+import { register_background } from '@/page';
 
 export function bleh_labs() {
     if (page.subpage != 'overview') return;
+
+    register_background('');
 
     let quilt = document.body.querySelector(
         '[data-analytics-action="LaunchAlbumQuilt"]'

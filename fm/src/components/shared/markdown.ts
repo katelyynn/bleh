@@ -171,6 +171,13 @@ export function markdown(
             replace: () => {
                 return `<span class="overdose"><span class="bless"></span><span>BLESS</span><span class="bless"></span></span>`;
             }
+        },
+        {
+            type: 'lang',
+            regex: /\s*:hazelfae:\s*/gi,
+            replace: () => {
+                return `<a class="hazelfae" href="${root}user/evangelicgirl"></a>`;
+            }
         }
     ];
 
@@ -607,6 +614,13 @@ export function markdown(
 
             timestamp.replaceWith(new_timestamp);
         });
+
+        body.querySelectorAll('.hazelfae').forEach(hazel => {
+            tippy(hazel, {
+                content: ':hazelfae:',
+                delay: [500, 0]
+            });
+        });
     }
 
     if (allow_hue) {
@@ -796,7 +810,7 @@ export function markdown_preview(
         allow_links = true,
         line_breaks = true,
         allow_banners = false,
-        allow_icons = false,
+        allow_icons = true,
         allow_hue = false,
         allow_socials = false,
         allow_lists = true,

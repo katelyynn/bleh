@@ -79,7 +79,7 @@
 
     & > .grid-items {
         .grid-item-plays:before {
-            --top: 2px;
+            --top: 4px;
             --mask: unset;
             --icon-16-placeholder: unset;
             background: url("data:image/svg+xml;base64,PHN2ZyAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiAgd2lkdGg9IjI0IiAgaGVpZ2h0PSIyNCIgIHZpZXdCb3g9IjAgMCAyNCAyNCIgIGZpbGw9IiNmZmZmZmYiICBjbGFzcz0iaWNvbiBpY29uLXRhYmxlciBpY29ucy10YWJsZXItZmlsbGVkIGljb24tdGFibGVyLXBsYXllci1wbGF5Ij48cGF0aCBzdHJva2U9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNNiA0djE2YTEgMSAwIDAgMCAxLjUyNCAuODUybDEzIC04YTEgMSAwIDAgMCAwIC0xLjcwNGwtMTMgLThhMSAxIDAgMCAwIC0xLjUyNCAuODUyeiIgLz48L3N2Zz4=") !important;
@@ -106,8 +106,9 @@
             }
         }
         .brand {
-            height: 20px;
-            margin-left: calc(-1 * var(--item-list-gap));
+            height: 18px;
+            margin-right: var(--item-list-gap);
+            fill: #fff;
         }
 
         .type {

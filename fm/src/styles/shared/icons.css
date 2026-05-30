@@ -13,7 +13,7 @@
 .tip.preview:before,
 .obsession-pagination-link:before,
 .library-search-results.async-content-loading:after,
-.listening-report-promo:after, .listening-report-promo-date:after,
+.listening-report-promo-date:after,
 .metadata-column .cta-link-wrap > a:before, .lyrics-snippet-more-link > a:before,
 .see-more:before,
 .modal-body .js-close:not(.btn-primary):before,
@@ -42,7 +42,7 @@
 .continue:before, .external:before, .done:before, .cancel:before, .btn-cancel:before, .download:before, .upload:before, .save:before, .open:before, .btn-secondary.js-close:not(.modal-action-button):before, .form-group button[type="submit"]:before, .modal-button button[type="submit"]:before,
 .badge:before,
 .gallery-placeholder:before,
-.image-list-item-bookmarked:after, .image-list-item-preferred:after, .obsessions-item:after,
+.image-list-item-bookmarked:after, .image-list-item-preferred:after,
 .data-loading:after, .lazy-shoutbox.async-content-loading:after, .loading:not(.library-fetch, .library-date-picker):after,
 .nag-bar-message:before,
 /*     BLEH     */
@@ -196,4 +196,20 @@ span.bleh-icon {
         color: oklch(var(--l3-c));
         font-weight: var(--font-weight-medium);
     }
+}
+
+.bleh-icon-animated-dots {
+    --icon: var(--icon-16-dots) !important;
+    background: linear-gradient(
+        90deg,
+        oklch(var(--b4)),
+        oklch(var(--c1)),
+        oklch(var(--b4)),
+        oklch(var(--c1)),
+        oklch(var(--b4))
+    );
+    background-size: 200% 100%;
+    animation: gradient 1.3s linear infinite;
+
+    margin: 0 4px;
 }

@@ -22,6 +22,7 @@ import { status } from '@/components/dialog/status';
 import { chart_reflow } from '@/components/music/chart.js';
 import { set_storage } from '@/build/tools';
 import { ff } from './sku';
+import { new_indicator } from '../shared/indicator';
 
 interface setting {
     id: string,
@@ -30,7 +31,8 @@ interface setting {
     standalone?: boolean,
     func?: Function,
     list?: [],
-    center?: boolean
+    center?: boolean,
+    in_menu?: boolean
 }
 
 interface setting_element extends HTMLElement {
@@ -46,7 +48,8 @@ export function setting({
     standalone = false,
     func,
     list,
-    center = true
+    center = true,
+    in_menu = false
 }: setting): setting_element {
     try {
         let value = settings[id];
@@ -124,67 +127,90 @@ export function setting({
                 html.node`<span class="new-badge beta">${tl(trans.beta)}</span>`
             );
         if (settings_store[id].new_release)
-            html_title.appendChild(
-                html.node`<span class="new-badge new">${tl(trans.new)}</span>`
-            );
+            html_title.appendChild(new_indicator());
 
         if (type == 'toggle') {
             let toggle;
 
-            const elem = html.node`
-                <div class="setting v2 ${standalone ? 'standalone' : ''}" data-type="toggle" disabled=${disabled} data-hide=${hide_if_incompatible} id="setting_${id}" onclick=${() => update_toggle()}>
-                    ${
-                        icon ?
-                            html.node`
-                    <div class="icon">
-                        <div class="bleh-icon" style="--icon: var(--${icon})" />
-                    </div>
-                    `
-                        :   ''
-                    }
-                    ${
-                        text ?
-                            html.node`
-                    <div class="heading">
-                        <h5>${html_title}</h5>
-                        ${body ? html.node`<p>${body}</p>` : ''}
-                    </div>
-                    `
-                        :   ''
-                    }
-                    ${
-                        settings_store[id].extensions ?
-                            html.node`
-                    <div class="extensions">
-                        ${settings_store[id].extensions.map(
-                            (extension) => () => {
-                                let container = html.node`
-                                <div class="extension">
-                                    <div class="bleh-icon" />
-                                </div>
-                            `;
+            let elem;
 
-                                tippy(container, {
-                                    content: tl(
-                                        trans.requires_extension_value
-                                    ).replace('{v}', tl(extension))
-                                });
+            if (!in_menu) {
+                elem = html.node`
+                    <div class="setting v2 ${standalone ? 'standalone' : ''}" data-type="toggle" data-hide=${hide_if_incompatible} id="setting_${id}" onclick=${() => update_toggle()}>
+                        ${
+                            icon ?
+                                html.node`
+                        <div class="icon">
+                            <div class="bleh-icon" style="--icon: var(--${icon})" />
+                        </div>
+                        `
+                            :   ''
+                        }
+                        ${
+                            text ?
+                                html.node`
+                        <div class="heading">
+                            <h5>${html_title}</h5>
+                            ${body ? html.node`<p>${body}</p>` : ''}
+                        </div>
+                        `
+                            :   ''
+                        }
+                        ${
+                            settings_store[id].extensions ?
+                                html.node`
+                        <div class="extensions">
+                            ${settings_store[id].extensions.map(
+                                (extension) => () => {
+                                    let container = html.node`
+                                    <div class="extension">
+                                        <div class="bleh-icon" />
+                                    </div>
+                                `;
 
-                                return container;
-                            }
-                        )}
+                                    tippy(container, {
+                                        content: tl(
+                                            trans.requires_extension_value
+                                        ).replace('{v}', tl(extension))
+                                    });
+
+                                    return container;
+                                }
+                            )}
+                        </div>
+                        `
+                            :   ''
+                        }
+                        ${setting_incompatible_block(settings_store[id].incompatible)}
+                        <div class="toggle-wrap">
+                            <button class="btn toggle colourful" ref=${(el) => (toggle = el)} aria-checked=${value} type="button">
+                                <div class="dot"></div>
+                            </button>
+                        </div>
                     </div>
-                    `
-                        :   ''
-                    }
-                    ${setting_incompatible_block(settings_store[id].incompatible)}
-                    <div class="toggle-wrap">
-                        <button class="btn toggle colourful" ref=${(el) => (toggle = el)} aria-checked=${value} type="button">
-                            <div class="dot"></div>
-                        </button>
-                    </div>
-                </div>
-            ` as setting_element;
+                ` as setting_element;
+            } else {
+                elem = html.node`
+                    <button class="dropdown-menu-clickable-item" data-hide=${hide_if_incompatible} aria-checked=${value} onclick=${() => update_toggle()} ref=${(el) => (toggle = el)}>
+                        ${
+                            icon ?
+                                html.node`
+                        <div class="icon">
+                            <div class="bleh-icon" style="--icon: var(--${icon})" />
+                        </div>
+                        `
+                            :   ''
+                        }
+                        ${text ? html.node`
+                        <span class="menu-item-body">
+                            <strong class="menu-item-head">${html_title}</strong>
+                            ${body ? html.node`<p class="menu-item-text">${body}</p>` : ''}
+                        </span>
+                        ` : ''}
+                        ${setting_incompatible_block(settings_store[id].incompatible)}
+                    </button>
+                ` as setting_element;
+            }
 
             function update_toggle() {
                 if (elem.getAttribute('disabled') == 'true') {
@@ -205,7 +231,7 @@ export function setting({
             elem.compat = () => {
                 if (!incompatible_with) return;
 
-                elem.setAttribute('disabled', 'false');
+                elem.removeAttribute('disabled');
 
                 Object.entries(incompatible_with).forEach(([key, val]) => {
                     if (Array.isArray(val)) {
@@ -540,58 +566,83 @@ export function setting({
         } else if (type == 'checkbox') {
             let toggle;
 
-            const elem = html.node`
-                <div class="setting v2 ${settings_store[id].horizontal ? 'horizontal' : ''} ${standalone ? 'standalone' : ''}" data-type="checkbox" disabled=${disabled} id="setting_${id}" data-hide=${hide_if_incompatible} onclick=${() => update_toggle()}>
-                    ${
-                        icon ?
-                            html.node`
-                    <div class="icon">
-                        <div class="bleh-icon" style="--icon: var(--${icon})" />
-                    </div>
-                    `
-                        :   ''
-                    }
-                    ${
-                        text ?
-                            html.node`
-                    <div class="heading">
-                        <h5>${html_title}</h5>
-                        ${body ? html.node`<p>${body}</p>` : ''}
-                    </div>
-                    `
-                        :   ''
-                    }
-                    ${
-                        settings_store[id].extensions ?
-                            html.node`
-                    <div class="extensions">
-                        ${settings_store[id].extensions.map(
-                            (extension) => () => {
-                                let container = html.node`
-                                <div class="extension">
-                                    <div class="bleh-icon" />
-                                </div>
-                            `;
-                                tippy(container, {
-                                    content: tl(
-                                        trans.requires_extension_value
-                                    ).replace('{v}', tl(extension))
-                                });
-                                return container;
-                            }
-                        )}
-                    </div>
-                    `
-                        :   ''
-                    }
-                    ${setting_incompatible_block(settings_store[id].incompatible)}
-                    <div class="check">
-                        <div class="box" ref=${(el) => (toggle = el)} aria-checked=${value}>
-                            <div class="bleh-icon" />
+            let elem;
+
+            if (!in_menu) {
+                elem = html.node`
+                    <div class="setting v2 ${settings_store[id].horizontal ? 'horizontal' : ''} ${standalone ? 'standalone' : ''}" data-type="checkbox" id="setting_${id}" data-hide=${hide_if_incompatible} onclick=${() => update_toggle()}>
+                        ${
+                            icon ?
+                                html.node`
+                        <div class="icon">
+                            <div class="bleh-icon" style="--icon: var(--${icon})" />
+                        </div>
+                        `
+                            :   ''
+                        }
+                        ${
+                            text ?
+                                html.node`
+                        <div class="heading">
+                            <h5>${html_title}</h5>
+                            ${body ? html.node`<p>${body}</p>` : ''}
+                        </div>
+                        `
+                            :   ''
+                        }
+                        ${
+                            settings_store[id].extensions ?
+                                html.node`
+                        <div class="extensions">
+                            ${settings_store[id].extensions.map(
+                                (extension) => () => {
+                                    let container = html.node`
+                                    <div class="extension">
+                                        <div class="bleh-icon" />
+                                    </div>
+                                `;
+                                    tippy(container, {
+                                        content: tl(
+                                            trans.requires_extension_value
+                                        ).replace('{v}', tl(extension))
+                                    });
+                                    return container;
+                                }
+                            )}
+                        </div>
+                        `
+                            :   ''
+                        }
+                        ${setting_incompatible_block(settings_store[id].incompatible)}
+                        <div class="check">
+                            <div class="box" ref=${(el) => (toggle = el)} aria-checked=${value}>
+                                <div class="bleh-icon" />
+                            </div>
                         </div>
                     </div>
-                </div>
-            ` as setting_element;
+                ` as setting_element;
+            } else {
+                elem = html.node`
+                    <button class="dropdown-menu-clickable-item" data-hide=${hide_if_incompatible} aria-checked=${value} onclick=${() => update_toggle()} ref=${(el) => (toggle = el)}>
+                        ${
+                            icon ?
+                                html.node`
+                        <div class="icon">
+                            <div class="bleh-icon" style="--icon: var(--${icon})" />
+                        </div>
+                        `
+                            :   ''
+                        }
+                        ${text ? html.node`
+                        <span class="menu-item-body">
+                            <strong class="menu-item-head">${html_title}</strong>
+                            ${body ? html.node`<p class="menu-item-text">${body}</p>` : ''}
+                        </span>
+                        ` : ''}
+                        ${setting_incompatible_block(settings_store[id].incompatible)}
+                    </button>
+                ` as setting_element;
+            }
 
             function update_toggle() {
                 if (elem.getAttribute('disabled') == 'true') {
@@ -612,7 +663,7 @@ export function setting({
             elem.compat = () => {
                 if (!incompatible_with) return;
 
-                elem.setAttribute('disabled', 'false');
+                elem.removeAttribute('disabled');
 
                 Object.entries(incompatible_with).forEach(([key, val]) => {
                     if (Array.isArray(val)) {
@@ -678,63 +729,128 @@ export function setting({
 
             let reset_btn;
 
-            const elem = html.node`
-                <div class="setting v2" data-type="options" disabled=${disabled} data-hide=${hide_if_incompatible} id="setting_${id}" data-modified=${value != settings_store[id].default}>
-                    ${
-                        icon ?
-                            html.node`
-                    <div class="icon">
-                        <div class="bleh-icon" style="--icon: var(--${icon})" />
+            let elem;
+            let value_holder;
+
+            if (!in_menu) {
+                elem = html.node`
+                    <div class="setting v2" data-type="options" disabled=${disabled} data-hide=${hide_if_incompatible} id="setting_${id}" data-modified=${value != settings_store[id].default}>
+                        ${
+                            icon ?
+                                html.node`
+                        <div class="icon">
+                            <div class="bleh-icon" style="--icon: var(--${icon})" />
+                        </div>
+                        `
+                            :   ''
+                        }
+                        ${
+                            text ?
+                                html.node`
+                        <div class="heading">
+                            <h5>${html_title}<button class="btn reset" ref=${(el) => (reset_btn = el)} onclick=${() => reset_radio()}>${tl(trans.reset)}</button></h5>
+                            ${body ? html.node`<p>${body}</p>` : ''}
+                        </div>
+                        `
+                            :   ''
+                        }
+                        ${
+                            settings_store[id].extensions ?
+                                html.node`
+                        <div class="extensions">
+                            ${settings_store[id].extensions.map(
+                                (extension) => () => {
+                                    let container = html.node`
+                                    <div class="extension">
+                                        <div class="bleh-icon" />
+                                    </div>
+                                `;
+                                    tippy(container, {
+                                        content: tl(
+                                            trans.requires_extension_value
+                                        ).replace('{v}', tl(extension))
+                                    });
+                                    return container;
+                                }
+                            )}
+                        </div>
+                        `
+                            :   ''
+                        }
+                        ${setting_incompatible_block(settings_store[id].incompatible)}
+                        <div class="primary-selections">
+                            ${Object.entries(settings_store[id].values).map(
+                                ([key, val]) => {
+                                    const icon = val.icon;
+
+                                    const button = html.node`
+                                        <div class="setting v2 standalone" data-type="radio" data-value=${key} onclick=${() => {
+                                            update_radio(key);
+                                        }}>
+                                            <div class="radio-cont">
+                                                <div class="radio" aria-checked=${value == key} />
+                                            </div>
+                                            ${
+                                                icon ?
+                                                    html.node`
+                                                        <div class="icon">
+                                                            <div class="bleh-icon" style="--icon: var(--${icon})" />
+                                                        </div>
+                                                    `
+                                                :   ''
+                                            }
+                                            <div class="heading">
+                                                <h5>${typeof val.name == 'object' ? tl(val.name) : val.name}</h5>
+                                            </div>
+                                        </div>
+                                    `;
+
+                                    buttons.push(button);
+                                    return button;
+                                }
+                            )}
+                        </div>
                     </div>
-                    `
-                        :   ''
-                    }
-                    ${
-                        text ?
-                            html.node`
-                    <div class="heading">
-                        <h5>${html_title}<button class="btn reset" ref=${(el) => (reset_btn = el)} onclick=${() => reset_radio()}>${tl(trans.reset)}</button></h5>
-                        ${body ? html.node`<p>${body}</p>` : ''}
-                    </div>
-                    `
-                        :   ''
-                    }
-                    ${
-                        settings_store[id].extensions ?
-                            html.node`
-                    <div class="extensions">
-                        ${settings_store[id].extensions.map(
-                            (extension) => () => {
-                                let container = html.node`
-                                <div class="extension">
-                                    <div class="bleh-icon" />
-                                </div>
-                            `;
-                                tippy(container, {
-                                    content: tl(
-                                        trans.requires_extension_value
-                                    ).replace('{v}', tl(extension))
-                                });
-                                return container;
-                            }
-                        )}
-                    </div>
-                    `
-                        :   ''
-                    }
-                    ${setting_incompatible_block(settings_store[id].incompatible)}
-                    <div class="primary-selections">
+                ` as setting_element;
+            } else {
+                elem = html.node`
+                    <button class="dropdown-menu-clickable-item v2 icon-r opens-further" data-hide=${hide_if_incompatible}>
+                        ${
+                            icon ?
+                                html.node`
+                        <div class="icon">
+                            <div class="bleh-icon" style="--icon: var(--${icon})" />
+                        </div>
+                        `
+                            :   ''
+                        }
+                        <div class="auth-dropdown-item-row">
+                            <span class="auth-dropdown-item-left">
+                                ${text ? html.node`
+                                <span class="menu-item-body">
+                                    <strong class="menu-item-head">${html_title}</strong>
+                                </span>
+                                ` : ''}
+                            </span>
+                            <span class="auth-dropdown-item-right">
+                                <p ref=${el => value_holder = el}>${tl(settings_store[id].values[(value as string)].name)}</p>
+                            </span>
+                        </div>
+                        ${setting_incompatible_block(settings_store[id].incompatible)}
+                    </button>
+                ` as setting_element;
+
+                tippy(elem, {
+                    theme: 'context-menu',
+                    content: html.node`
                         ${Object.entries(settings_store[id].values).map(
                             ([key, val]) => {
                                 const icon = val.icon;
 
                                 const button = html.node`
-                                    <div class="setting v2 standalone" data-type="radio" data-value=${key} onclick=${() => {
+                                    <button class="dropdown-menu-clickable-item radio-menu-item" aria-checked=${value == key} data-value=${key} onclick=${() => {
                                         update_radio(key);
                                     }}>
-                                        <div class="radio-cont">
-                                            <div class="radio" aria-checked=${value == key} />
-                                        </div>
                                         ${
                                             icon ?
                                                 html.node`
@@ -744,22 +860,41 @@ export function setting({
                                                 `
                                             :   ''
                                         }
-                                        <div class="heading">
-                                            <h5>${typeof val.name == 'object' ? tl(val.name) : val.name}</h5>
-                                        </div>
-                                    </div>
+                                        ${tl(val.name)}
+                                    </button>
                                 `;
 
                                 buttons.push(button);
                                 return button;
                             }
                         )}
-                    </div>
-                </div>
-            ` as setting_element;
+                        ${body ? html.node`<p class="menu-item-description">${body}</p>` : ''}
+                    `,
+                    placement: 'right',
+                    interactive: true,
+                    interactiveBorder: 10,
+                    appendTo: document.body,
+                    popperOptions: {
+                        modifiers: [
+                            {
+                                name: 'preventOverflow',
+                                options: {
+                                    padding: 20
+                                }
+                            }
+                        ]
+                    },
+
+                    onShow(instance) {
+                        instance.popper.addEventListener('click', (event) => {
+                            instance.hide();
+                        });
+                    }
+                })
+            }
 
             elem.compat = () => {
-                elem.setAttribute('disabled', 'false');
+                elem.removeAttribute('disabled');
 
                 if (incompatible_with) {
                     Object.entries(incompatible_with).forEach(([key, val]) => {
@@ -800,11 +935,18 @@ export function setting({
                 elem.setAttribute('data-modified', (val != settings_store[id].default).toString());
 
                 buttons.forEach((btn) => {
-                    btn.querySelector('.radio').setAttribute(
+                    let target = btn.querySelector('.radio');
+                    if (!target) target = btn;
+
+                    target.setAttribute(
                         'aria-checked',
                         btn.getAttribute('data-value') == val
                     );
                 });
+
+                if (value_holder) {
+                    value_holder.textContent = tl(settings_store[id].values[val].name);
+                }
 
                 if (func) func(val);
             }
@@ -884,7 +1026,7 @@ export function setting({
                                 ` : ''}
                                 <div class="info">
                                     ${list[val]?.name || val}
-                                    ${list[val]?.new_release ? html.node`<span class="new-badge new">${tl(trans.new)}</span>` : ''}
+                                    ${list[val]?.new_release ? new_indicator() : ''}
                                 </div>
                                 <button class="btn chibi icon setting-list-item-btn" data-type="minus" onclick=${() => {
                                     const new_list = current.filter(
@@ -1001,7 +1143,7 @@ export function setting({
                                     ` : ''}
                                     <div class="info">
                                         ${formal.name}
-                                        ${formal.new_release ? html.node`<span class="new-badge new">${tl(trans.new)}</span>` : ''}
+                                        ${formal.new_release ? new_indicator() : ''}
                                     </div>
                                     <button class="btn chibi icon setting-list-item-btn" data-type="plus" onclick=${() => {
                                         const new_list = [...current, val];

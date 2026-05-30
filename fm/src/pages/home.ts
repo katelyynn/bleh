@@ -25,6 +25,7 @@ import { page_header_avatar } from '@/components/music/header';
 import { campfire } from './home/campfire';
 import { bleh_suggested } from './home/suggested';
 import { header_colour } from '@/components/page/colour';
+import { new_indicator } from "@/components/shared/indicator";
 
 export async function bleh_home() {
     page.structure.container = document.body.querySelector('.page-content');
@@ -102,7 +103,7 @@ export async function bleh_home() {
             profile_name!.setAttribute('data-font-style', cache.font_style);
         }
 
-        header_colour(page_avatar.image, false, page_avatar);
+        header_colour(page_avatar.image, false, [page_avatar]);
     } else {
         welcome = html.node`
             <section class="page-header for-profile">
@@ -135,6 +136,7 @@ export async function bleh_home() {
                     <li class="navlist-item secondary-nav-item secondary-nav-item--home">
                         <a href="${root}music" class="secondary-nav-item-link ${(page.subpage == 'music' || page.type == 'events') ? 'secondary-nav-item-link--active' : ''}">
                             ${tl(trans.home)}
+                            ${new_indicator()}
                         </a>
                     </li>
                     <li class="navlist-item secondary-nav-item secondary-nav-item--recommendations">
@@ -161,6 +163,7 @@ export async function bleh_home() {
                     <li class="navlist-item secondary-nav-item secondary-nav-item--minis">
                         <a href="${root}bleh/minis" data-type="mini" class="secondary-nav-item-link ${(page.type == 'minis') ? 'secondary-nav-item-link--active' : ''}">
                             ${tl(trans.minis)}
+                            ${new_indicator()}
                         </a>
                     </li>
                     ` : ''}
@@ -217,6 +220,20 @@ export async function bleh_home() {
     if (page.subpage == 'music') {
         let music_sections = document.body.querySelectorAll('.music-section');
         music_sections.forEach((music_section) => {
+            const link = music_section.querySelector('.music-more-link > a');
+            if (link) {
+                const href = link.getAttribute('href');
+                if (href.endsWith('releases/out-now')) {
+                    music_section.classList.add('music-section-out-now');
+                } else if (href.endsWith('releases/out-now/popular')) {
+                    music_section.classList.add('music-section-out-now-popular');
+                } else if (href.endsWith('recommended/albums')) {
+                    music_section.classList.add('music-section-recommended-albums');
+                } else if (href.endsWith('releases/coming-soon/popular')) {
+                    music_section.classList.add('music-section-coming-soon');
+                }
+            }
+
             page.structure.main.appendChild(music_section);
         });
     }
@@ -322,39 +339,41 @@ export function bleh_home_legacy() {
     window.location.href = `${root}music`;
 }
 
-export async function load_recent_tracks(name) {
-    return new Promise((resolve, reject) => {
-        fetch(`${root}user/${name}/partial/recenttracks?ajax=1`)
-            .then(function (response) {
-                console.log('returned', response, response.text);
+export async function load_recent_tracks(name: string) {
+  return new Promise((resolve, reject) => {
+    fetch(`${root}user/${name}/partial/recenttracks?ajax=1`)
+      .then(function (response) {
+        console.log('returned', response, response.text);
 
-                return response.text();
-            })
-            .then(function (dom) {
-                let doc = new DOMParser().parseFromString(dom, 'text/html');
-                console.log('DOC', doc);
+        return response.text();
+      })
+      .then(function (dom) {
+        let doc = new DOMParser().parseFromString(dom, 'text/html');
+        console.log('DOC', doc);
 
-                let tracks = [];
-                const track_list = doc.querySelectorAll('.chartlist-row');
-                if (track_list.length > 0) {
-                    track_list.forEach(track => {
-                        let item = {};
+        let tracks = [];
+        const track_list = doc.querySelectorAll('.chartlist-row');
+        if (track_list.length > 0) {
+          track_list.forEach(track => {
+            let item = {};
 
-                        item.avatar = track.querySelector('.chartlist-image img');
-                        if (item.avatar)
-                            item.avatar = item.avatar.src;
+            item.avatar = track.querySelector('.chartlist-image img');
+            if (item.avatar)
+                item.avatar = item.avatar.src;
 
-                        item.name = track.querySelector('.chartlist-name a').textContent.trim();
-                        item.sister = track.querySelector('.chartlist-artist a').textContent.trim();
+            item.name = track.querySelector('.chartlist-name a').textContent.trim();
+            item.sister = track.querySelector('.chartlist-artist a').textContent.trim();
 
-                        item.time = track.querySelector('.chartlist-timestamp > span:not(.chartlist-now-scrobbling)')?.textContent.trim();
+            item.time = Number(track.getAttribute('data-timestamp'));
 
-                        tracks.push(item);
-                    });
-                }
+            item.live = track.querySelector('.chartlist-timestamp > .chartlist-now-scrobbling') != null;
 
-                resolve(tracks);
-            })
-            .catch(reject);
-    });
+            tracks.push(item);
+          });
+        }
+
+        resolve(tracks);
+      })
+      .catch(reject);
+  });
 }

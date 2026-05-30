@@ -45,6 +45,10 @@
 .row {
     margin: unset;
     /*animation: modal 0.35s var(--trans-function);*/
+
+    &:before, &:after {
+        display: none !important;
+    }
 }
 .container > .row {
     display: flex;
@@ -60,7 +64,7 @@
     background: transparent;
     border: 1px solid var(--card-border-base) !important;
     border-top: 1px solid var(--card-border-base-highlight) !important;
-    border-radius: var(--card-radius) !important;
+    border-radius: calc(var(--card-radius) + 1px) !important;
 
     position: relative;
 
@@ -213,6 +217,7 @@
             bottom: 0;
             display: block;
             background: var(--sidebar-border);
+            box-shadow: var(--sidebar-shadow);
         }
     }
 
@@ -306,6 +311,7 @@
     padding-bottom: var(--card-gap) !important;
     margin-top: var(--card-gap) !important;
 
+    &.visible-xs,
     &:before,
     &:after {
         display: none !important;
@@ -351,6 +357,10 @@
 
     &[data-beret="true"]:not([style], .has-cards-view) {
         --page-sidebar-margin-left: 1px;
+
+        @media (max-width: 980px) {
+          --page-sidebar-margin-left: 0px;
+        }
 
         & > .row {
             margin-top: unset;
@@ -431,7 +441,7 @@
 
 .bleh--profile-note-panel,
 .about-me-sidebar {
-    order: -9;
+    order: -10;
 }
 .user-events-sidebar {
     order: 9;

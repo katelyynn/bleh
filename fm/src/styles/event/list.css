@@ -1,6 +1,6 @@
 .events-list-item-date-icon,
 .calendar-icon {
-    background: oklch(var(--b4) / 40%) !important;
+    background: linear-gradient(180deg, oklch(var(--k4) / 30%), oklch(var(--b4) / 40%) 60%) !important;
     box-shadow: var(--group-shadow) !important;
     color: oklch(var(--c2));
     width: var(--calendar-width) !important;
@@ -21,7 +21,7 @@
     font-weight: var(--font-weight-medium) !important;
     text-transform: initial !important;
     width: 100% !important;
-    color: oklch(var(--b7)) !important;
+    color: oklch(var(--l3-c)) !important;
     margin: unset !important;
 
     /* calendar-icon specific */
@@ -29,17 +29,15 @@
 
     &.calendar-icon-month,
     &.events-list-item-date-icon-month {
-        background: oklch(var(--h3)) !important;
-        box-shadow:
-            var(--primary-shadow),
-            0 3px 12px oklch(var(--h4) / 32%),
-            var(--interactable-outer) !important;
+        background: unset !important;
+        box-shadow: unset !important;
         padding: 0 !important;
         font-size: 12px !important;
+        padding-top: 4px !important;
+        margin-bottom: -4px !important;
 
-        border-top-left-radius: var(--calendar-radius);
-        border-top-right-radius: var(--calendar-radius);
         font-weight: var(--font-weight-bold) !important;
+        letter-spacing: unset !important;
     }
 
     &.calendar-icon-day,
@@ -53,6 +51,7 @@
         justify-content: center !important;
         align-items: center !important;
         flex: 1 !important;
+        letter-spacing: unset !important;
     }
 }
 

@@ -44,10 +44,11 @@
     }
 
     .grid-items-item-details {
+        padding: 6px 10px;
         background: rgb(0, 0, 0, 50%);
         text-shadow: none;
         filter: none;
-        border-radius: var(--item-med-radius);
+        border-radius: var(--item-small-radius);
         border-top-left-radius: 0;
         border-top-right-radius: 0;
 
@@ -117,7 +118,7 @@
     width: auto !important;
     height: auto !important;
     aspect-ratio: 1 / 1;
-    border-radius: var(--item-med-radius);
+    border-radius: var(--item-small-radius);
     /*overflow: hidden;*/
     box-shadow: var(--grid-colour-shadow, none), var(--interact-shadow);
     position: relative;
@@ -132,10 +133,13 @@
     --sat-over: 0;
     --lit-over: 0.5;
 
+    outline: 2px solid transparent;
+
     &:hover {
-        transform: var(--motion, translateY(-1px));
-        --grid-cover-image-filter: brightness(105%);
-        --grid-cover-image-transition: none !important;
+        outline-color: oklch(var(--l3-c) / 60%);
+        transition-property: transform, translate, scale, opacity;
+        transition-duration: var(--trans);
+        transition-timing-function: var(--trans-function-ani);
     }
 
     &.generic-cover {
@@ -148,20 +152,20 @@
         --shadow: color-mix(in oklch, oklch(var(--h4)) 100%, black 50%);
     }
 
-    transition-property: transform, translate, scale, opacity;
-    transition-duration: 0.3s;
+    transition-property: transform, translate, scale, opacity, outline-color;
+    transition-duration: var(--trans);
     transition-timing-function: var(--trans-function-ani);
 
     animation: var(--motion, grid 0.4s var(--trans-function-ani)) !important;
     animation-delay: var(--delay, 0s) !important;
     animation-fill-mode: backwards !important;
 
-    --font-weight: var(--custom_font_weight, 480);
-    --font-weight-medium: var(--custom_font_weight_medium, 650);
-    --font-weight-bold: var(--custom_font_weight_bold, 730);
+    --font-weight: var(--custom_font_weight, 400);
+    --font-weight-medium: var(--custom_font_weight_medium, 500);
+    --font-weight-bold: var(--custom_font_weight_bold, 600);
 
     &:active {
-        transform: translateY(var(--motion, -2px)) scale(0.98);
+        transform: scale(0.98);
     }
 
     &:before {
@@ -207,7 +211,7 @@
 .grid-items-cover-image-image {
     height: 100%;
     background: var(--avatar-generic-background);
-    border-radius: var(--item-med-radius);
+    border-radius: var(--item-small-radius);
     overflow: hidden;
     z-index: 30;
     pointer-events: none;
@@ -353,7 +357,7 @@
     background: oklch(var(--b4) / 60%);
     width: 100%;
     height: 100%;
-    border-radius: var(--item-med-radius);
+    border-radius: var(--item-small-radius);
 }
 .grid-items__placeholder .grid-items-item--loading {
     background-image: linear-gradient(
@@ -367,10 +371,13 @@
 }
 
 .grid-items-item-main-text {
-    color: oklch(var(--c1));
+    color: var(--title-colour, oklch(var(--c1)));
     font-weight: var(--font-weight-medium);
     margin: 0 0 1px;
-    text-decoration: var(--hover-underline, none);
+
+    transition-property: color;
+    transition-duration: var(--trans);
+    transition-timing-function: var(--trans-function-ani);
 
     & > .link-block-target {
         display: flex;
@@ -397,12 +404,16 @@
     opacity: unset;
     z-index: 21;
     position: relative;
-    color: oklch(var(--c2));
+    color: var(--text-colour, oklch(var(--c2)));
     overflow: visible;
     margin: unset;
 
     display: flex;
     gap: 10px;
+
+    transition-property: color;
+    transition-duration: var(--trans);
+    transition-timing-function: var(--trans-function-ani);
 
     & > a:first-child {
         display: inline-block;

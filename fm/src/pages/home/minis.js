@@ -13,6 +13,9 @@ import { compare } from '@/components/minis/compare';
 import { pixel } from '@/components/minis/pixel';
 import { ff } from '@/components/settings/sku';
 import { plot } from '@/components/minis/plot';
+import { new_indicator } from '@/components/shared/indicator';
+import { card } from '@/components/minis/card';
+import { markdown } from '@/components/shared/markdown';
 
 let valid_minis;
 
@@ -42,19 +45,26 @@ export function bleh_minis(skip = false) {
             name: tl(trans.collage),
             body: tl(trans.collage_description),
             func: bleh_minis_collage,
-            by: ['clairedoll']
+            by: ['dressupdarling']
         },
         compare: {
             name: tl(trans.compare),
             body: tl(trans.compare_description),
             func: bleh_minis_compare,
-            by: ['clairedoll']
+            by: ['dressupdarling']
         },
         plot: {
             name: tl(trans.plot.name),
             body: tl(trans.plot.body),
             func: bleh_minis_plot,
-            by: ['clairedoll'],
+            by: ['dressupdarling'],
+            new_release: true
+        },
+        card: {
+            name: tl(trans.card.name),
+            body: tl(trans.card.body),
+            func: bleh_minis_card,
+            by: ['dressupdarling'],
             new_release: true,
             hide_if: !ff('unlock_minis')
         },
@@ -63,7 +73,7 @@ export function bleh_minis(skip = false) {
             body: tl(trans.pixel?.body),
             func: bleh_minis_pixel,
             hide_if: !ff('unlock_minis'),
-            by: ['clairedoll']
+            by: ['dressupdarling']
         },
         lyrics: {
             name: tl(trans.lyrics?.name),
@@ -110,6 +120,7 @@ export function bleh_minis(skip = false) {
 
     if (mini) {
         page.structure.container.setAttribute('data-mini', mini);
+        page.mini = mini;
 
         valid_minis[mini].func();
         return;
@@ -138,6 +149,7 @@ export function bleh_minis(skip = false) {
                                     'data-mini',
                                     id
                                 );
+                                page.mini = id;
                                 render(page.structure.main, html``);
                                 valid_minis[id].func();
                             }}>
@@ -145,7 +157,7 @@ export function bleh_minis(skip = false) {
                                     <div class="bleh-icon" />
                                 </div>
                                 <div class="mini-info">
-                                    <h5>${mini.name}${mini.new_release ? html.node`<div class="new-badge new">${tl(trans.new)}</div>` : ''}</h5>
+                                    <h5>${mini.name}${mini.new_release ? new_indicator() : ''}</h5>
                                     <p>${mini.body}</p>
                                 </div>
                                 <div class="bleh-icon mini-arrow" style="--icon: var(--mask)" data-type="arrow-right" />
@@ -274,6 +286,19 @@ function bleh_minis_plot() {
     render(
         page.structure.side,
         html`
+            <section class="summary">
+                <h2>${tl(trans.how_to_plot)}</h2>
+                <div class="step-list">
+                    ${Array.from({ length: 4 }, (_, i) => {
+                        return html.node`
+                            <div class="step">
+                                <div class="step-number">${i + 1}</div>
+                                <div class="step-text">${tl(trans.plot_explain[i])}</div>
+                            </div>
+                        `;
+                    })}
+                </div>
+            </section>
             <section
                 class="current-mini-settings"
                 ref=${(el) => (mini_settings = el)}
@@ -290,6 +315,44 @@ function bleh_minis_plot() {
     );
 
     plot({
+        host: content,
+        sidebar: mini_settings
+    });
+}
+
+function bleh_minis_card() {
+    let content;
+    let mini_settings;
+
+    render(
+        page.structure.main,
+        html`
+            <section class="minis">
+                ${return_to_minis('card')}
+                <div class="minis-content" ref=${(el) => (content = el)} />
+            </section>
+        `
+    );
+
+    render(
+        page.structure.side,
+        html`
+            <section
+                class="current-mini-settings"
+                ref=${(el) => (mini_settings = el)}
+            />
+            <section class="mini-faq">
+                <p class="card-tip">
+                    ${tl(trans.value_by_user, {
+                        v: valid_minis.card.name,
+                        u: valid_minis.card.by.join(',')
+                    })}
+                </p>
+            </section>
+        `
+    );
+
+    card({
         host: content,
         sidebar: mini_settings
     });

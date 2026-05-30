@@ -53,6 +53,7 @@ export function manage_user(button) {
         placement: 'bottom',
         interactive: true,
         interactiveBorder: 10,
+        appendTo: document.body,
 
         onMount(instance) {
             instance.popper.addEventListener('click', (event) => {

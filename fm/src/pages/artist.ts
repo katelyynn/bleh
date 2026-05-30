@@ -143,7 +143,7 @@ export function bleh_artists() {
         `;
 
         log('settings hue accent', 'dfbdfb', 'info', { settings: JSON.stringify(settings) });
-        header_colour(page_avatar.image, settings.hue_from_artist, page_avatar);
+        header_colour(page_avatar.image, settings.hue_from_artist, [page_avatar]);
 
         if (multi_info_box) {
             tippy(multi_info_box, {
@@ -345,7 +345,7 @@ export function bleh_artists() {
                                     <div class="source-album js-link-block link-block" data-type=${type}>
                                         <div class="source-album-art">
                                             <span class="cover-art">
-                                                <img src=${img} alt=${original_name} />
+                                                <img src=${img} alt=${original_name} loading="lazy" />
                                             </span>
                                         </div>
                                         <div class="source-album-details">
@@ -635,7 +635,6 @@ function bleh_listeners() {
             })}>
                 ${tl(trans.edit_close_friends)}
             </button>
-            <div class="sep" />
             <button class="btn side-action icon-mask" data-type="add" onclick=${() => other_listener(sanitise(page.name))}>
                 ${tl(trans.custom)}
             </button>

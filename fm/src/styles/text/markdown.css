@@ -129,6 +129,10 @@
         }
     }
 
+    ul {
+        margin-left: 12px;
+    }
+
     li {
         list-style-type: disc;
 
@@ -195,6 +199,16 @@
             display: block;
             margin-left: auto;
             margin-right: auto;
+        }
+
+        h5 {
+            font-family: var(--font-head);
+            font-size: var(--font-size-head);
+            line-height: var(--line-height-head);
+
+            &:not(:first-child) {
+                margin-top: 20px !important;
+            }
         }
     }
 

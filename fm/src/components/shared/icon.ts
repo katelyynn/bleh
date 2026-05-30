@@ -95,6 +95,9 @@ export const icons = {
     tracks: 'track',
     track: 'track',
     user: 'user',
+    users: 'users',
+    starred_friend: 'star-fill',
+    star: 'star',
     tags: 'tag',
     tag: 'tag',
     search: 'search',
@@ -170,7 +173,9 @@ export const icons = {
     oracle: 'oracle',
     credits: 'credits',
     sparkle: 'sparkle',
-    error: 'error'
+    error: 'error',
+    construction: 'construction',
+    animated_dots: 'animated-dots'
 };
 
 interface icon {
@@ -181,7 +186,7 @@ interface icon {
 
 export function icon({ name, identifier, use_mask = true }: icon) {
     const elem = html.node`
-        <span class="bleh-icon" style="${icon_mask({ name })}">
+        <span class="bleh-icon bleh-icon-${name}" style="${icon_mask({ name })}">
             ${name} (icon)
         </span>
     `;

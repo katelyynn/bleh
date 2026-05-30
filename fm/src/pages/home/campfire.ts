@@ -1,14 +1,17 @@
 import { settings } from '@/build/config';
 import { auth, page, root } from '@/build/page';
 import { romanise, sanitise } from '@/build/tools';
-import { tl, trans } from '@/build/trans';
+import { lang, tl, trans } from '@/build/trans';
 import { correct_artist, correct_item_by_artist, name_includes, smart_artists, smart_title } from '@/components/music/lotus';
 import { redirect } from '@/components/music/music';
 import { Hole, html, render } from 'lighterhtml';
 import { load_profile_cache_externally, open_starred_friend_window } from '../profile/profile';
 import { load_recent_tracks } from '../home';
 import tippy from 'tippy.js';
-import { is_sponsor } from '@/components/sponsor';
+import { is_sponsor, sponsor } from '@/components/sponsor';
+import { DateTime } from 'luxon';
+import { icon, icons } from '@/components/shared/icon';
+import { under_construction } from '@/components/shared/construction';
 
 interface album {
     image: string,
@@ -20,143 +23,215 @@ interface album {
 }
 
 export function campfire() {
-    let selected_index = 0;
-    let previous_index = 0;
-    let max_index = 0;
-    let items_container: HTMLElement;
-    let item_details: HTMLElement;
-    let current_bg: HTMLElement;
-    let previous_bg: HTMLElement;
+  let previous_index = 0;
+  let max_index = 0;
+  let items_container: HTMLElement;
+  let item_details: HTMLElement;
+  let current_bg: HTMLElement;
+  let previous_bg: HTMLElement;
 
-    const container = html.node`
-        <div class="campfire">
-            <div class="campfire-intro">
-                <h2 class="music-section-heading">${tl(trans.your_recent_30_days)}</h2>
-            </div>
-            <div class="campfire-items" ref=${el => items_container = el} />
-            <div class="campfire-details" ref=${el => item_details = el} />
-            <div class="campfire-bg current" ref=${el => current_bg = el} />
-            <div class="campfire-bg previous" ref=${el => previous_bg = el} />
+  let visual_index = 0;
+  let real_index = 0;
+  let is_wrapping = false;
+
+  let campfire_top;
+  let campfire_main;
+  let campfire_side;
+  const container = html.node`
+    <div class="campfire-panels">
+      <div class="campfire-bg current" ref=${el => current_bg = el} />
+      <div class="campfire-panel-main" ref=${el => campfire_main = el}>
+        <div class="campfire" ref=${el => campfire_top = el}>
+          <div class="campfire-intro">
+            <h2 class="music-section-heading">${tl(trans.your_recent_30_days)}</h2>
+          </div>
+          <div class="campfire-items" ref=${el => items_container = el} />
+          <div class="campfire-details" ref=${el => item_details = el} />
+          <div class="campfire-bg previous" ref=${el => previous_bg = el} />
         </div>
-    `;
-    page.structure.row.insertBefore(container, page.structure.content);
+      </div>
+      <div class="campfire-panel-side" ref=${el => campfire_side = el}>
+        <section class="side-actions">
+          <a class="btn side-action icon-mask" data-type="profile" href="${root}user/${auth.name}">
+            ${tl(trans.profile)}
+          </a>
+          <a class="btn side-action icon-mask" data-type="library" href="${root}user/${auth.name}/library">
+            ${tl(trans.library)}
+          </a>
+          <a class="btn side-action icon-mask" data-type="friends" href="${root}user/${auth.name}/friends">
+            ${tl(trans.friends)}
+          </a>
+          <a class="btn side-action icon-mask" data-type="shouts" href="${root}user/${auth.name}/shoutbox">
+            ${tl(trans.shouts)}
+          </a>
+        </section>
+      </div>
+    </div>
+  `;
 
-    campfire_extended(container);
+  page.structure.row.insertBefore(container, page.structure.content);
 
-    let albums: album[] = [];
-    let album_elements: HTMLElement[] = [];
+  campfire_extended(campfire_side);
+  campfire_cta(container);
 
-    fetch(`${root}user/${auth.name}/partial/albums?albums_date_preset=LAST_30_DAYS&ajax=1`)
-        .then(function (response) {
-            console.log('returned', response, response.text);
+  let albums: album[] = [];
+  let album_elements: { elem: HTMLElement, index: number }[] = [];
 
-            return response.text();
-        })
-        .then(function (dom) {
-            let doc = new DOMParser().parseFromString(dom, 'text/html');
-            console.log('DOC', doc);
+  fetch(`${root}user/${auth.name}/library/albums?date_preset=LAST_30_DAYS&page=1&ajax=1`)
+    .then(function (response) {
+      console.log('returned', response, response.text);
 
-            const items = doc.querySelectorAll('.grid-items > .grid-items-item');
-            items.forEach(item => {
-                const image = item.querySelector('.grid-items-cover-image-image img').src;
-                const title = item.querySelector('.grid-items-item-main-text a').textContent;
-                const artist = item.querySelector('.grid-items-item-aux-block').textContent;
-                const plays = item.querySelector('.grid-items-item-aux-text a:last-child').textContent.trim();
+      return response.text();
+    })
+    .then(function (dom) {
+      let doc = new DOMParser().parseFromString(dom, 'text/html');
+      console.log('DOC', doc);
 
-                let corrected_title = romanise(correct_item_by_artist(title, artist));
-                let corrected_artist = romanise(correct_artist(artist));
+      const items = doc.querySelectorAll('.chartlist-row');
+      items.forEach(item => {
+        const image = item.querySelector('.cover-art > img').src;
+        const title = item.querySelector('.chartlist-name > a').textContent;
+        const artist = item.querySelector('.chartlist-artist > a').textContent;
+        const plays = item.querySelector('.chartlist-count-bar-slug').getAttribute('data-stat-value');
 
-                albums.push({
-                    image: image.replace('/avatar300s/', '/500x500/'),
-                    title,
-                    artist,
-                    plays,
-                    corrected_title,
-                    corrected_artist
-                });
-            });
+        let corrected_title = romanise(correct_item_by_artist(title, artist));
+        let corrected_artist = romanise(correct_artist(artist));
 
-            max_index = albums.length - 1;
-
-            render(items_container, html`
-                ${albums.map((album, index) => {
-                    const elem = html.node`
-                        <div class="campfire-item" style="--index: ${index}" onclick=${() => {
-                            if (selected_index != index) set_index(index);
-                        }}>
-                            <div class="campfire-item-cover">
-                                <img src=${album.image} alt=${album.corrected_title} />
-                            </div>
-                        </div>
-                    `;
-
-                    album_elements.push(elem);
-
-                    return elem;
-                })}
-            `);
-
-            let timeout;
-            container.addEventListener('wheel', e => {
-                e.preventDefault();
-                if (timeout) return;
-
-                timeout = setTimeout(() => {
-                    timeout = null;
-                }, 0.15);
-
-                const direction = Math.sign(e.deltaY);
-                if (direction == 0) return;
-                set_index(selected_index + direction);
-            }, { passive: false });
-
-            let try_index = 3;
-            if (try_index > max_index) try_index = 0;
-
-            set_index(try_index);
+        albums.push({
+          image: image.replace('/64s/', '/500x500/'),
+          title,
+          artist,
+          plays,
+          corrected_title,
+          corrected_artist
         });
+      });
 
-    function set_index(index: number) {
-        if (index > max_index) index = 0;
-        else if (index < 0) index = max_index;
+      max_index = albums.length - 1;
 
-        album_elements.forEach((album, album_index) => {
-            album.setAttribute('aria-checked', (album_index == index).toString());
-        });
+      visual_index = max_index + 1;
+      real_index = 0;
 
-        previous_index = selected_index;
-        selected_index = index;
-        items_container.style.setProperty('--selected-index', index.toString());
+      items_container.style.setProperty('--max-index', max_index.toString());
 
-        const album = albums[index];
+      const cloned_albums = [...albums, ...albums, ...albums];
 
-        current_bg.style.setProperty('background-image', `url(${album.image})`);
+      render(items_container, html`
+        ${cloned_albums.map((album, index) => {
+          const item_index = ((index % albums.length) + albums.length) % albums.length;
 
-        console.info('album', album);
+          const elem = html.node`
+            <div class="campfire-item" style="--index: ${index}" onclick=${() => {
+              if (is_wrapping) return;
 
-        let formatted_title: string | Hole = album.corrected_title;
-        let formatted_artist: string | Hole = album.corrected_artist;
+              if (item_index != real_index) {
+                let diff = item_index - real_index;
+                if (diff > (max_index + 1) / 2) diff -= max_index + 1;
+                else if (diff < -(max_index + 1) / 2) diff += max_index + 1;
 
-        if (settings.format_guest_features) {
-            const formatted = name_includes(album.title, album.artist);
-
-            formatted_title = smart_title(formatted[0], formatted[1]);
-            formatted_artist = smart_artists(formatted[2], formatted[3]);
-        }
-
-        render(item_details, html``);
-        render(item_details, html`
-            <a class="campfire-title smart-title" href="${root}music/${sanitise(album.artist)}/${sanitise(album.title)}" target="_blank">
-                ${formatted_title}
-            </a>
-            <span class="campfire-artist">
-                ${settings.format_guest_features ? formatted_artist : html.node`<a class="campfire-artist" href="${root}music/${redirect()}${sanitise(album.artist)}" target="_blank">${album.corrected_artist}</a>`}
-            </span>
-            <div class="campfire-plays">
-                ${album.plays}
+                set_index(visual_index + diff);
+              }
+            }}>
+              <div class="campfire-item-cover">
+                <img src=${album.image} alt=${album.corrected_title} />
+                <div class="campfire-item-cover-reflection" style="background-image: url(${album.image})" />
+              </div>
             </div>
-        `);
+          `;
+
+          album_elements.push({ elem, index: item_index });
+
+          return elem;
+        })}
+      `);
+
+      let timeout;
+      campfire_top.addEventListener('wheel', e => {
+        e.preventDefault();
+        if (timeout) return;
+
+        timeout = setTimeout(() => {
+            timeout = null;
+        }, 0.15);
+
+        const direction = Math.sign(e.deltaY);
+        if (direction == 0) return;
+        set_index(visual_index + direction);
+      }, { passive: false });
+
+      set_index(visual_index);
+    });
+
+  function set_index(index: number) {
+    if (is_wrapping) return;
+
+    real_index = ((index % albums.length) + albums.length) % albums.length;
+
+    previous_index = visual_index;
+    visual_index = index;
+
+    items_container.style.setProperty('--selected-index', visual_index.toString());
+
+    album_elements.forEach(({ elem, index: i }) => {
+      elem.setAttribute('aria-checked', (i == real_index).toString());
+
+      let dist = i - real_index;
+
+      if (dist > (max_index + 1) / 2) dist -= max_index + 1;
+      else if (dist < -(max_index + 1) / 2) dist += max_index + 1;
+
+      if (dist > 5) dist = 5;
+      else if (dist < -5) dist = -5;
+
+      elem.style.setProperty('--proximity', dist.toString());
+      elem.setAttribute('data-proximity', dist.toString());
+    });
+
+    if (visual_index <= max_index || visual_index >= (max_index * 2) + 2) {
+        is_wrapping = true;
+
+        setTimeout(() => {
+            items_container.style.setProperty('--trans-toggle', '0');
+
+            visual_index = real_index + max_index + 1;
+            items_container.style.setProperty('--selected-index', visual_index.toString());
+
+            void items_container.offsetWidth;
+
+            items_container.style.setProperty('--trans-toggle', '1');
+            is_wrapping = false;
+        }, 500);
     }
+
+    const album = albums[real_index];
+
+    current_bg.style.setProperty('background-image', `url(${album.image})`);
+
+    console.info('album', album);
+
+    let formatted_title: string | Hole = album.corrected_title;
+    let formatted_artist: string | Hole = album.corrected_artist;
+
+    if (settings.format_guest_features) {
+      const formatted = name_includes(album.title, album.artist);
+
+      formatted_title = smart_title(formatted[0], formatted[1]);
+      formatted_artist = smart_artists(formatted[2], formatted[3]);
+    }
+
+    render(item_details, html``);
+    render(item_details, html`
+      <a class="campfire-title smart-title" href="${root}music/${sanitise(album.artist)}/${sanitise(album.title)}" target="_blank">
+        ${formatted_title}
+      </a>
+      <span class="campfire-artist">
+        ${settings.format_guest_features ? formatted_artist : html.node`<a class="campfire-artist" href="${root}music/${redirect()}${sanitise(album.artist)}" target="_blank">${album.corrected_artist}</a>`}
+      </span>
+      <div class="campfire-plays">
+        ${tl(trans.count_plays, { c: album.plays.toLocaleString(lang) })}
+      </div>
+    `);
+  }
 }
 
 function campfire_extended(container: HTMLElement) {
@@ -164,17 +239,21 @@ function campfire_extended(container: HTMLElement) {
 
     let summary;
 
-    container.after(html.node`
+    container.appendChild(html.node`
         <section class="friends-panel">
             <h2>${tl(trans.scrobbling_now)}</h2>
             ${friends.length > 0 ? html.node`
                 <div class="friends">
-                    ${friends.map((friend: string) => campfire_friend(friend))}
+                  ${campfire_friend(auth.name, true)}
+                  ${friends.map((friend: string) => campfire_friend(friend))}
                 </div>
             ` : html.node`
+                <div class="friends">
+                  ${campfire_friend(auth.name, true)}
+                </div>
                 <div class="placeholder-block">
-                    <div class="placeholder-head">ദ്ദി◝ ⩊ ◜.ᐟ</div>
-                    <div class="placeholder-summary" ref=${el => summary = el}>${{html: tl(trans.better_with_friends, { a: `<a>`, '/a': '</a>' }) }}</div>
+                  <div class="placeholder-head">ദ്ദി◝ ⩊ ◜.ᐟ</div>
+                  <div class="placeholder-summary" ref=${el => summary = el}>${{html: tl(trans.better_with_friends, { a: `<a>`, '/a': '</a>' }) }}</div>
                 </div>
             `}
         </section>
@@ -190,37 +269,34 @@ function campfire_extended(container: HTMLElement) {
     }
 }
 
-function campfire_friend(friend: string) {
-    let cover_art: HTMLElement;
+function campfire_friend(friend: string, own = false) {
     let track_info: HTMLElement;
     let user_avatar: HTMLElement;
     let user_name: HTMLElement;
     let track_time: HTMLElement;
 
     const elem = html.node`
-        <div class="user friend hidden-user" data-live="false">
-            <div class="user-avatar cover-art" ref=${el => cover_art = el}>
-                <div class="bleh-icon loading-spinner" />
-            </div>
+        <div class="user friend hidden-user" data-live="false" data-own=${own}>
+          <div class="user-avatar avatar" ref=${el => user_avatar = el}>
+              <div class="bleh-icon loading-spinner" />
+          </div>
             <div class="user-info">
                 <div class="user-name">
-                    <div class="avatar" ref=${el => user_avatar = el}>
-                        <div class="bleh-icon loading-spinner" />
-                    </div>
-                    <p ref=${el => user_name = el}>@${friend}</p>
-                    <a class="link-block-cover-link" href="${root}user/${friend}" />
+                    <a class="user-name-inner" href="${root}user/${friend}" ref=${el => user_name = el}>@${friend}</a>
+                    <span class="track-time icon-mask" ref=${el => track_time = el} />
                 </div>
                 <div class="user-about track" ref=${el => track_info = el}>
-                    <p>${tl(trans.loading)}</p>
+                  <div class="status">
+                      <div class="status-image smaller" />
+                  </div>
                 </div>
-                <div class="user-time" ref=${el => track_time = el} />
             </div>
         </div>
     `;
 
     load_profile_cache_externally(friend).then(cache => {
         render(user_avatar, html`
-            <img src=${cache.avatar} alt=${friend}>
+            <img src=${own ? auth.avatar : cache.avatar} alt=${friend}>
         `);
 
         if (cache.username)
@@ -260,36 +336,76 @@ function campfire_friend(friend: string) {
                     `);
                 }
 
-                if (item.time) {
-                    track_time.textContent = item.time;
+                if (!item.live) {
+                    track_time.textContent = DateTime.fromSeconds(item.time).toRelative();
                 } else {
                     elem.classList.remove('hidden-user');
                     track_time.textContent = tl(trans.scrobbling_now);
+                    track_time.setAttribute('data-live', 'true');
 
                     elem.setAttribute('data-live', 'true');
                 }
 
-                render(cover_art, html`
-                    <img src=${item.avatar} alt=${name}>
-                    <a class="link-block-cover-link" href="${root}music/${item.sister}/_/${item.name}" />
+                render(track_info, html`
+                  <div class="status">
+                      <div class="status-image smaller" data-live=${item.live}>
+                          <img src=${item.avatar} alt=${name}>
+                      </div>
+                      <div class="status-info">
+                          <strong class="status-text status-title smaller"><a class="smart-title" href="${root}music/${redirect()}${sanitise(item.sister)}/_/${sanitise(item.name)}">${name}</a></strong>
+                          <p class="status-text status-artist smaller"><span class="artist">${sister}</span></p>
+                      </div>
+                  </div>
                 `);
-
-                const track_elem = html.node`
-                    <a class="wiki-link icon" data-link-type="track" href="${root}music/${item.sister}/_/${item.name}">${name}</a>
-                `;
-
-                tippy(track_elem, {
-                    theme: 'name-sister-combo',
-                    content: html.node`
-                        <span class="name">${{ html: track_elem.innerHTML }}</span>
-                        <span class="sister">${sister}</span>
-                    `
-                });
-
-                render(track_info, track_elem);
             }
         });
     });
 
     return elem;
+}
+
+function get_loop_index(index: number, selected: number, max: number): number {
+  let diff = index - selected;
+
+  if (diff > (max + 1) / 2) diff -= max + 1;
+  else if (diff < -(max + 1) / 2) diff += max + 1;
+
+  return diff;
+}
+
+function campfire_cta(container: Element) {
+    const cta = html.node`
+        <div class="campfire-cta">
+            <a class="btn campfire-cta-btn" href="${root}bleh/minis/collage?type=albums&timeframe=date_preset=LAST_30_DAYS">
+                <div class="campfire-cta-icon colourful">
+                    ${icon({ name: icons.collage })}
+                </div>
+                <div class="campfire-cta-text">
+                    <strong class="campfire-cta-text-head">${tl(trans.collage_cta.name)}</strong>
+                    <p class="campfire-cta-text-sub">${tl(trans.collage_cta.body)}</p>
+                </div>
+            </a>
+            <a class="btn campfire-cta-btn" href="${root}bleh/minis/compare">
+                <div class="campfire-cta-icon colourful">
+                    ${icon({ name: icons.compare })}
+                </div>
+                <div class="campfire-cta-text">
+                    <strong class="campfire-cta-text-head">${tl(trans.compare_cta.name)}</strong>
+                    <p class="campfire-cta-text-sub">${tl(trans.compare_cta.body)}</p>
+                </div>
+            </a>
+            <button class="btn campfire-cta-btn" onclick=${() => sponsor()}>
+                <div class="campfire-cta-icon colourful sponsor">
+                    ${icon({ name: icons.sponsor })}
+                </div>
+                <div class="campfire-cta-text">
+                    <strong class="campfire-cta-text-head">${tl(trans.sponsor)}</strong>
+                    <p class="campfire-cta-text-sub">${tl(trans.sponsor_cta.body)}</p>
+                </div>
+            </button>
+        </div>
+    `;
+    container.after(cta);
+
+    cta.after(under_construction());
 }

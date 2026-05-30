@@ -31,7 +31,7 @@ export function bleh_wiki() {
     side_actions.classList.add('side-actions');
 
     if (!page.mobile)
-        page.structure.side.appendChild(side_actions);
+        page.structure.side.insertBefore(side_actions, page.structure.side.firstElementChild);
     else
         page.structure.main.appendChild(side_actions);
 

@@ -23,9 +23,12 @@ import { save_setting } from '@/components/settings/settings';
 import { manage_user } from '@/components/profile/manage_user';
 import { queue_popup } from '@/components/dialog/popup';
 import { avatar } from '../shared/avatar';
+import { taste_artist } from './taste';
 
 export function redesign_profile_header(is_own_profile, is_following) {
     if (!auth.name) return;
+
+    const is_sponsor_host = page.name == sponsor_list.related.account_name;
 
     let base_header = document.body.querySelector('.header-info-secondary');
     if (!base_header) return;
@@ -36,7 +39,7 @@ export function redesign_profile_header(is_own_profile, is_following) {
     let taste_artists = [];
     let taste_formal = 'NONE';
 
-    if (!is_own_profile && page.name != sponsor_list.related.account_name) {
+    if (!is_own_profile && !is_sponsor_host) {
         let taste_meter = base_header.querySelector('.tasteometer');
 
         if (taste_meter) {
@@ -118,18 +121,16 @@ export function redesign_profile_header(is_own_profile, is_following) {
                     });
                 }
             } else {
-                create_profile_top_item(profile_header, {
-                    name: page.name,
-                    type: 'sponsor',
-                    link: () => sponsor(),
-                    action: 'button'
-                });
-                create_profile_top_item(profile_header, {
-                    name: page.name,
-                    type: 'message_sponsor',
-                    link: msg_button.getAttribute('href'),
-                    full: true
-                });
+                profile_header.appendChild(html.node`
+                    <button class="btn side-action icon-mask sponsor colourful" onclick=${() => sponsor()} data-type="sponsor">
+                        ${tl(trans.sponsor)}
+                    </button>
+                `);
+                profile_header.appendChild(html.node`
+                    <a class="btn side-action icon-mask sponsor colourful" href=${msg_button.getAttribute('href')} data-type="message_sponsor">
+                        ${tl(trans.message_sponsor)}
+                    </a>
+                `);
             }
         }
 
@@ -169,7 +170,8 @@ export function redesign_profile_header(is_own_profile, is_following) {
                 name: page.name,
                 type: 'minis',
                 link: `${root}bleh/minis`,
-                text: tl(trans.explore_minis)
+                text: tl(trans.explore_minis),
+                new_release: true
             });
         } else {
             create_profile_top_item(profile_header, {
@@ -185,13 +187,15 @@ export function redesign_profile_header(is_own_profile, is_following) {
         }
     }
 
-    const manage = create_profile_top_item(profile_header, {
-        name: page.name,
-        type: 'manage',
-        beta: true,
-        action: 'button'
-    });
-    manage_user(manage);
+    if (!is_own_profile && !is_sponsor_host) {
+        const manage = create_profile_top_item(profile_header, {
+            name: page.name,
+            type: 'manage',
+            beta: true,
+            action: 'button'
+        });
+        manage_user(manage);
+    }
 
     if (!page.mobile)
         page.structure.side.insertBefore(
@@ -221,27 +225,36 @@ export function redesign_profile_header(is_own_profile, is_following) {
             return;
         }
 
+        let details_btn;
+
         let taste_wrap = html.node`
-            <div class="btn listen-item ${taste != 'super' && taste != 'very_low' ? 'icon' : ''} taste">
-                <div class="taste-icon colourful" data-taste=${taste}>
-                    <div class="bleh-icon" />
+            <div class="taste ${taste != 'super' && taste != 'very_low' ? 'icon' : ''}">
+                <div class="taste-pics">
+                    <div class="taste-avatar avatar">
+                        <img src=${avatar(auth.avatar, 'avatar300s')} alt=${auth.name}>
+                    </div>
+                    <div class="taste-avatar avatar">
+                        <img src=${page.avatar} alt=${page.name}>
+                    </div>
                 </div>
                 <div class="span">
-                    <img class="view-item-avatar" src=${auth.avatar} alt=${auth.name}>
-                    <img class="view-item-avatar" src=${page.avatar} alt=${page.name}>
+                    <label class="taste-badge colourful" data-taste=${taste}>${taste_formal}</label>
                     <div class="listen-item-info">
                         <h3 class="listen-item-name">
                             ${{html: tl(trans.you_share_count_with, { c: `<span class="colourful" data-taste=${taste}>${taste_percentage}</span>` })}}
                         </h3>
                         <p class="listen-item-text">
-                            ${taste_artists.length == 1 ? taste_artists[0] : ''}
-                            ${taste_artists.length == 2 ? tl(trans.you_share_count_with.two, { artist1: taste_artists[0], artist2: taste_artists[1] }) : ''}
-                            ${taste_artists.length == 3 ? tl(trans.you_share_count_with.three, { artist1: taste_artists[0], artist2: taste_artists[1], artist3: taste_artists[2] }) : ''}
+                            ${taste_artists.length == 1 ? taste_artist(taste_artists[0]) : ''}
+                            ${taste_artists.length == 2 ? { html: tl(trans.you_share_count_with.two, { artist1: taste_artist(taste_artists[0]), artist2: taste_artist(taste_artists[1]) }) } : ''}
+                            ${taste_artists.length == 3 ? { html: tl(trans.you_share_count_with.three, { artist1: taste_artist(taste_artists[0]), artist2: taste_artist(taste_artists[1]), artist3: taste_artist(taste_artists[2]) }) } : ''}
                         </p>
                     </div>
                 </div>
-                <div class="taste-hover-icon">
-                    <div class="bleh-icon" />
+                <div class="taste-bar">
+                    <div class="taste-bar-fill colourful" data-taste=${taste} style="width: ${taste_percentage}" />
+                </div>
+                <div class="taste-interactions">
+                    <button class="btn icon select-button taste-details outline-btn" data-type="details" ref=${el => details_btn = el}>${tl(trans.view_details)}</button>
                 </div>
             </div>
         `;
@@ -319,7 +332,7 @@ export function redesign_profile_header(is_own_profile, is_following) {
             taste_wrap.classList.add('valentine');
 
             render(taste_wrap, html`
-                <div class="valentine-pics">
+                <div class="taste-pics valentine-pics">
                     <div class="taste-avatar avatar">
                         <img src=${avatar(auth.avatar, 'avatar300s')} alt=${auth.name}>
                     </div>
@@ -331,66 +344,52 @@ export function redesign_profile_header(is_own_profile, is_following) {
                     </div>
                 </div>
                 <div class="span">
-                    <div class="info">
-                        <h3>
+                    <div class="listen-item-info">
+                        <h3 class="listen-item-name">
                             ${{html: tl(trans.you_are_a_value_match, { u: page.name, v: `<span class="colourful" data-taste=${taste}>${taste_formal}</span>` })}}
                         </h3>
-                        <p>
-                            ${taste_artists.length == 1 ? taste_artists[0] : ''}
-                            ${taste_artists.length == 2 ? tl(trans.you_share_count_with.two, { artist1: taste_artists[0], artist2: taste_artists[1] }) : ''}
-                            ${taste_artists.length == 3 ? tl(trans.you_share_count_with.three, { artist1: taste_artists[0], artist2: taste_artists[1], artist3: taste_artists[2] }) : ''}
+                        <p class="listen-item-text">
+                            ${taste_artists.length == 1 ? taste_artist(taste_artists[0]) : ''}
+                            ${taste_artists.length == 2 ? { html: tl(trans.you_share_count_with.two, { artist1: taste_artist(taste_artists[0]), artist2: taste_artist(taste_artists[1]) }) } : ''}
+                            ${taste_artists.length == 3 ? { html: tl(trans.you_share_count_with.three, { artist1: taste_artist(taste_artists[0]), artist2: taste_artist(taste_artists[1]), artist3: taste_artist(taste_artists[2]) }) } : ''}
                         </p>
                     </div>
+                    ${() => {
+                        const info_btn = html.node`
+                            <div class="taste-hover-icon-mini">
+                                <div class="bleh-icon" />
+                            </div>
+                        `;
+
+                        tippy(info_btn, {
+                            content: tl(trans.valentine_info, { u: page.name })
+                        });
+
+                        return info_btn;
+                    }}
                 </div>
-                ${() => {
-                    const info_btn = html.node`
-                        <div class="taste-hover-icon-mini">
-                            <div class="bleh-icon" />
-                        </div>
-                    `;
-
-                    tippy(info_btn, {
-                        content: tl(trans.valentine_info, { u: page.name })
-                    });
-
-                    return info_btn;
-                }}
-            `);
-
-            let details_btn;
-
-            taste_wrap.after(html.node`
-                <div class="valentines">
-                    <button class="btn icon select-button" data-type="details" ref=${el => details_btn = el}>${tl(trans.view_details)}</button>
+                <div class="taste-bar">
+                    <div class="taste-bar-fill colourful" data-taste=${taste} style="width: ${taste_percentage}" />
+                </div>
+                <div class="taste-interactions">
+                    <button class="btn icon select-button taste-details outline-btn" data-type="details" ref=${el => details_btn = el}>${tl(trans.view_details)}</button>
                     <button class="btn icon primary colourful" data-taste=${taste} data-type="valentine" onclick=${() => {
                         open(`${root}inbox/compose?to=${page.name}&subject=${encodeURIComponent(tl(trans.valentine, { u: page.name }))}`)
                     }}>${tl(trans.send_valentine)}</button>
                 </div>
             `);
+        }
 
-            if (taste_artists.length > 1) {
-                tippy(details_btn, {
-                    theme: 'context-menu',
-                    content: taste_menu,
-                    trigger: 'click',
-                    placement: 'bottom',
-                    interactive: true,
-                    interactiveBorder: 10,
-                    appendTo: document.body
-                });
-            }
-        } else {
-            if (taste_artists.length > 1) {
-                tippy(taste_wrap, {
-                    theme: 'context-menu',
-                    content: taste_menu,
-                    trigger: 'click',
-                    placement: 'bottom',
-                    interactive: true,
-                    interactiveBorder: 10,
-                    appendTo: document.body
-                });
-            }
+        if (taste_artists.length > 1) {
+            tippy(details_btn, {
+                theme: 'context-menu',
+                content: taste_menu,
+                trigger: 'click',
+                placement: 'bottom',
+                interactive: true,
+                interactiveBorder: 10,
+                appendTo: document.body
+            });
         }
     }
 }
@@ -456,7 +455,7 @@ function friends_button(parent) {
     }
 
     const elem = html.node`
-        <button class="btn side-action colourful icon-mask" data-type="close_friends" type="button" onclick=${() => {
+        <button class="btn side-action colourful icon-mask side-action-small" data-type="close_friends" type="button" onclick=${() => {
             if (friend_state) {
                 dialog({
                     id: 'remove_friend',
@@ -467,7 +466,7 @@ function friends_button(parent) {
                             <button class="see-more cancel left-icon" onclick=${() => dialog_rm({ id: 'remove_friend' })}>
                                 ${tl(trans.cancel)}
                             </button>
-                            <div class="fill"></div>
+                            <div class="fill" />
                             <button class="btn primary icon danger" data-type="minus" onclick=${() => {
                                 friend_state = false;
                                 star_state = false;

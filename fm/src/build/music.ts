@@ -112,6 +112,7 @@ export let includes = {
         /(?:-\s?|\(|\[)versão/i,
         /(?:-\s?|\(|\[)without dialogue/i,
         /(?:-\s?|\(|\[)no dialogue/i,
+        /(?:-\s?|\(|\[)new version/i,
         /(?:-\s?|\(|\[)pop version/i,
         /(?:-\s?|\(|\[)rock version/i,
         /(?:-\s?|\(|\[)pop mix/i,
@@ -122,6 +123,8 @@ export let includes = {
         /[-\(]vocoded/i,
         /(?:-\s?|\(|\[)pa version/i,
         /(?:-\s?|\(|\[)u\.s\. pa version/i,
+        /(?:-\s?|\(|\[)jam-along version/i,
+        /(?:-\s?|\(|\[)non-lp version/i,
         /(?:-\s?|\(|\[)main/i
     ],
     remasters: [
@@ -178,6 +181,9 @@ export let includes = {
         '- coucou chloe remix', // https://www.last.fm/music/+noredirect/lady+gaga/dawn+of+chromatica
         '(george daniel & charli xcx remix',
         '- george daniel & charli xcx remix',
+        /(?:-\s?|\(|\[)trippie mix/i,
+        /(?:-\s?|\(|\[)single mix/i,
+        /(?:-\s?|\(|\[)bunnsington mix/i, // MCR5 fan mix
 
         // simple remixes
         new RegExp(
@@ -197,7 +203,7 @@ export let includes = {
             'dance club|flying lotus|sports bar|doss|pabllo vittar|' +
             'ashnikko|arca|dorian electra|planningtorock|lsdxoxo|' +
             'coucou chloe|george daniel|jacques lu cont|sasha twilo|' +
-            'flying lotus|chris lord-alge|cla|' +
+            'flying lotus|chris lord-alge|cla|4b|sikdope|carnage|autolaser|' +
             // descriptors
             'club 69 speed|the color|meltdown|underground|ihs|' +
             'classic club|naughty main|' +
@@ -270,14 +276,14 @@ export let includes = {
         /[\(\[]12"/i, // 12 inch versions, mixes of songs
         /[\(\[][""]new[""] mix/i,
         '[over now', // billie eilish l'amour de ma vie
-        /(?:-\s?|\(|\[)unfinished original recordings of de-loused in the comatorium/i, // landscape tantrums
+        /(?:-\s?|\(|\[)unfinished original recordings of de-loused in the comatorium/i, // the mars volta - landscape tantrums
         '(holiday ', // illit holiday party/night
         /(?:-\s?|\(|\[)mr\. dupri no rap radio mix/i
     ],
     mixes_numbers: [
         /[\(\[\{]v[1-9]/i,
-        /[-\(]mixed/i,
-        /[-\(]mix\s/i
+        /(?:-\s?|\(|\[)mixed/i,
+        /(?:-\s?|\(|\[)mix\s/i
     ],
     stems: [
         /(?:-\s?|\(|\[)\s*(?:a\s*cappella|acapella|accapella)/i,
@@ -322,6 +328,7 @@ export let includes = {
         /\s(?:super\s)?deluxe (?:edition|version)/i,
         /(?:super\s)?deluxe (?:edition|version)$/i,
         /(?:-\s?|\(|\[)complete edition/i,
+        /(?:-\s?|\(|\[)nouvelle edition/i,
         /[-:\(\[]edi[cç][ãi]o/i,
         /[-\(]edicion/i,
         /[-\(]edición/i,
@@ -390,7 +397,8 @@ export let includes = {
         /(?:-\s?|\(|\[)so punk on the internet ver/i, // taylor swift showgirl variants :(
         /[-\(]including/i,
         /(?:-\s?|\(|\[)poem/i,
-        /(?:-\s?|\(|\[)hidden/i
+        /(?:-\s?|\(|\[)hidden/i,
+        /(?:-\s?|\(|\[)music from/i
     ],
     form: [/[\(\[]clean/i, /[\(\[]explicit/i, '(spotify)', '🅴']
 };

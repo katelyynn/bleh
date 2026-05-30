@@ -1,13 +1,12 @@
 .friends {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-    gap: var(--card-gap);
+  display: flex;
+  flex-direction: column;
+  gap: var(--card-gap);
 }
 
 .user {
     display: flex;
-    align-items: center;
-    gap: var(--card-gap);
+    gap: 10px;
 
     animation: activity 0.35s var(--trans-function);
 
@@ -19,12 +18,23 @@
         transition: none;
     }
 
-    &.hidden-user {
-        display: none;
+    &[data-live="true"] {
+      order: -1;
+    }
+    &[data-own="true"] {
+      order: -2 !important;
+    }
+    &[data-live="false"] {
+      opacity: 0.6;
+
+      &:hover {
+        opacity: unset;
+        transition: none;
+      }
     }
 
     & > .user-avatar {
-        --w: 56px;
+        --w: 40px;
         width: var(--w);
         height: var(--w);
         flex-shrink: 0;
@@ -63,11 +73,12 @@
             cursor: default;
             position: relative;
 
-            & > p {
-                color: oklch(var(--c2) / 80%);
+            & > .user-name-inner {
+                flex: 1;
+                color: oklch(var(--l3-c) / 80%);
 
                 & > strong {
-                    color: oklch(var(--c2));
+                    color: oklch(var(--l3-c));
                     font-weight: var(--font-weight-medium);
                 }
             }
@@ -78,6 +89,8 @@
                 height: var(--w);
                 overflow: hidden;
             }
+
+            margin-bottom: 4px;
         }
 
         & > .user-about {
@@ -95,6 +108,27 @@
     }
 }
 
-.user-time {
-    display: none;
+.track-time {
+    font-size: 13px;
+    color: oklch(var(--c3));
+    cursor: default;
+    flex-shrink: 0;
+
+    --show-icon: none;
+    position: relative;
+
+    &[data-live="true"] {
+        font-weight: var(--font-weight-medium);
+
+        --show-icon: block;
+        padding-left: 16px;
+
+        &:before {
+            --mask: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtbG9hZGVyLWNpcmNsZSI+PHBhdGggZD0iTTIxIDEyYTkgOSAwIDEgMS02LjIxOS04LjU2Ii8+PC9zdmc+");
+            --mask-size: 12px;
+            --margin-top: -6px;
+            --left: 0;
+            animation: spinner 1s linear infinite;
+        }
+    }
 }

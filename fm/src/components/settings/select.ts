@@ -18,7 +18,9 @@ export function update_inbuilt_select(id, value) {
 
 export interface select_option {
     value?: string,
-    text: string | Hole | number
+    text: string | Hole | number,
+    action?: () => void,
+    type?: string
 }
 
 interface select {
@@ -109,10 +111,16 @@ export function select({
         }
     });
 
+    container.open = () => {
+        menu.show();
+    }
+
     return container;
 
     function set_select(selected, bubble = true) {
-        render(button, html`${tl(trans.unavailable)}`);
+        console.info('button values', values, selected);
+
+        render(button, html`${structuredClone(values[0]?.text) || tl(trans.unavailable)}`);
 
         values.some((value) => {
             if (value.value == selected) {
@@ -122,7 +130,7 @@ export function select({
                     render(button, title_func(value));
                 }
 
-                return false;
+                return true;
             }
         });
 
@@ -144,6 +152,23 @@ export function select({
             menu.setContent(html.node`
                 ${values.map((value) => {
                     if (value.value == null) {
+                        if (value.action) {
+                            return html.node`
+                                <button class="btn dropdown-menu-clickable-item icon-mask" data-type=${value.type} onclick=${() => {
+                                    menu.hide();
+                                    value.action();
+                                }}>
+                                    ${value.text}
+                                </button>
+                            `;
+                        }
+
+                        if (value.text == 'sep') {
+                            return html.node`
+                                <div class="sep" />
+                            `;
+                        }
+
                         return html.node`
                             <div class="select-header">
                                 ${value.text}

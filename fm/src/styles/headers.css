@@ -29,7 +29,8 @@ h2:not(
     .mask-text,
     .sr-only,
     .js-gallery-heading,
-    .top-item-modal-header
+    .top-item-modal-header,
+    .page-header-artist
 ),
 h3.text-18,
 h2.text-18,
@@ -52,6 +53,7 @@ h2.text-18,
 .obsession-search-result-header,
 .inbox-message-view .inbox-message-subject {
     color: oklch(var(--c1));
+    font-family: var(--font);
     font-size: 16px;
     line-height: 17px; /* matches button on the right */
     /*margin-bottom: 12px;*/
@@ -89,9 +91,6 @@ h2.text-18,
     }
 
     &.music-section-heading {
-        font-size: 20px;
-        line-height: 24px;
-        font-weight: var(--font-weight-medium);
         margin: 0 !important;
         text-align: left;
 
@@ -109,4 +108,15 @@ h2.text-18,
 }
 .user-dashboard-section-header:after {
     display: none;
+}
+
+
+.music-section-heading {
+    font-family: var(--font-head) !important;
+    font-size: 26px !important;
+    line-height: 18px !important;
+
+    .music-section > & {
+        line-height: 36px !important;
+    }
 }

@@ -4,7 +4,7 @@
 // Licensed under GPLv3
 //
 
-import { patch_avatar } from '@/components/shared/avatar';
+import { avatar, patch_avatar } from '@/components/shared/avatar';
 import { settings } from '@/build/config';
 import { log } from '@/build/log';
 import { artist_corrections } from '@/build/music';
@@ -18,6 +18,8 @@ import { html, render } from 'lighterhtml';
 import { redirect } from '@/components/music/music';
 import tippy from 'tippy.js';
 import { hoshino } from '@/components/music/hoshino';
+import { header_colour } from '@/components/page/colour';
+import { icon, icons } from '@/components/shared/icon';
 
 export function bleh_obsession() {
     let obsession_container = document.querySelector('.obsession-container');
@@ -40,8 +42,8 @@ export function bleh_obsession() {
     log('status is', 'page', 'info', page);
     update_page();
 
-    page.structure.container.classList.add('sour');
-    page.structure.content.classList.add('cards-view');
+    page.structure.container.classList.add('has-cards-view');
+    page.structure.content.classList.add('cards-view', 'obsession-view');
 
     let background = obsession_container.querySelector(
         '.obsession-background-inner'
@@ -54,32 +56,7 @@ export function bleh_obsession() {
     if (!background.endsWith('/4128a6eb29f94943c9d206c08e625904.jpg')) {
         register_background(background);
 
-        try {
-            let bg = obsession_container.style
-                .getPropertyValue('background')
-                .replace('rgb(', '')
-                .replace(')', '')
-                .split(', ');
-            let hsl = rgb_to_hsl(
-                parseInt(bg[0]),
-                parseInt(bg[1]),
-                parseInt(bg[2])
-            );
-            document.body.style.setProperty('--hue-album', hsl.h);
-            document.body.style.setProperty(
-                '--sat-album',
-                clamp_sat((hsl.s / 100) * 3)
-            );
-            document.body.style.setProperty('--lit-album', hsl.l / 100 + 0.35);
-
-            log(
-                `sourced hsl of (${hsl.h}, ${hsl.s}, ${hsl.l}) - using final value of (${hsl.h}, ${clamp_sat((hsl.s / 100) * 3)}, ${hsl.l / 100 + 0.35})`,
-                'hue from album'
-            );
-        } catch (e) {
-            console.error(e);
-            log('no cover present', 'hue from album');
-        }
+        header_colour(html.node`<img src=${avatar(background, 'avatar300s')} />`, true);
     } else {
         register_background('');
     }
@@ -123,6 +100,7 @@ export function bleh_obsession() {
         page.corrected = formatted_title[4];
 
         // combine
+        track_title.classList.add('smart-title');
         render(track_title, smart_title(song_title, song_tags));
 
         let song_guests = formatted_title[3];
@@ -164,13 +142,13 @@ export function bleh_obsession() {
     track_title.classList.remove('obsession-meta-track');
 
     let track_header = html.node`
-        <section class="redesigned-header redesigned-track-header no-background obsession-track-header">
-            <div class="info-side">
+        <section class="page-header for-track for-obsession">
+            <div class="page-header-info">
                 <div class="sub-text">${tl(trans.obsession)}</div>
                 <div class="title-container">
-                    <h1><a href="${link}">${track_title}</a></h1>
+                    <h1 class="header-new-title page-header-title"><a href="${link}">${track_title}</a></h1>
                 </div>
-                <h2>${html.node([track_artist.innerHTML])}</h2>
+                <h2 class="page-header-artist artist-for-track">${html.node([track_artist.innerHTML])}</h2>
             </div>
         </section>
     `;
@@ -249,7 +227,8 @@ export function bleh_obsession() {
         quote.appendChild(manage);
 
         const trash = quote.querySelector('button');
-        trash.classList.add('btn');
+        trash.classList.add('see-more', 'left-icon', 'danger-subtle', 'colourful');
+        trash.setAttribute('data-type', 'delete');
         trash.textContent = tl(trans.delete);
     }
 
@@ -464,6 +443,11 @@ export function obsession_list() {
 
         const grid_item = html.node`
             <li class="grid-items-item obsessions-item ${obsession_is_first ? 'first' : ''}">
+                ${obsession_is_first ? html.node`
+                    <div class="grid-item-icon grid-item-icon-first colourful">
+                        ${icon({ name: icons.star })}
+                    </div>
+                ` : ''}
                 <div class="grid-items-cover-image">
                     <div class="grid-items-cover-image-image ${cover.src.endsWith('4128a6eb29f94943c9d206c08e625904.jpg') ? 'grid-items-cover-default' : ''}">
                         ${cover}

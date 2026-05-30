@@ -45,8 +45,8 @@ export let seasonal_events = [
     {
         id: 'pride',
         start: {
-            month: 5,
-            day: 31
+            month: 6,
+            day: 1
         },
         end: {
             month: 7,

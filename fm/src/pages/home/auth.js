@@ -43,7 +43,7 @@ export async function bleh_auth() {
     page.structure.row.removeChild(page.structure.row.firstElementChild);
     page.structure.row.removeChild(page.structure.row.firstElementChild);
 
-    page.structure.container.classList.add('sour');
+    page.structure.container.classList.add('has-cards-view');
     page.structure.content.classList.add('cards-view');
 
     if (!page.requested.token) {
