@@ -463,13 +463,15 @@
 }
 
 .taste-details {
-    --bg: transparent;
-    --bg-hov: oklch(var(--b3) / 40%);
-    --bg-atv: oklch(var(--b3) / 60%);
-    --shadow: var(--normal-shadow);
-
     &:not(:hover, [aria-expanded="true"]) {
         --col: oklch(var(--c3));
         --mask-colour: oklch(var(--c3) / 80%);
     }
+}
+
+.outline-btn {
+    --bg: transparent;
+    --bg-hov: oklch(var(--b3) / 40%);
+    --bg-atv: oklch(var(--b3) / 60%);
+    --shadow: var(--button-outline);
 }

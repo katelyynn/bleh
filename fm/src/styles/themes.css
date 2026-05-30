@@ -365,10 +365,10 @@ body,
 
     /* any additional highlights */
     --b2: 0.52 calc(var(--sat) * 0.04 * var(--sat-bg, 1)) var(--hue);
-    --b3: 0.36 calc(var(--sat) * 0.04 * var(--sat-bg, 1)) var(--hue);
+    --b3: 0.38 calc(var(--sat) * 0.04 * var(--sat-bg, 1)) var(--hue);
 
     /* card border */
-    --b4: 0.38 calc(var(--sat) * 0.03 * var(--sat-bg, 1)) var(--hue);
+    --b4: 0.33 calc(var(--sat) * 0.03 * var(--sat-bg, 1)) var(--hue);
 
     /* card */
     --b5: 0.3 calc(var(--sat) * 0.03 * var(--sat-bg, 1)) var(--hue);
@@ -392,7 +392,7 @@ body,
     --banner-overlay: transparent;
     --banner-mix: none;
 
-    --normal-shadow: inset 0 0 0 1px oklch(var(--b2) / 20%);
+    --normal-shadow: none;
 
     --input-shadow:
         inset 0 0 0 1px oklch(var(--b3) / 70%),
@@ -456,13 +456,15 @@ body,
     --modal-button-hov: oklch(var(--b4) / 40%);
     --modal-button-atv: oklch(var(--b4) / 60%);
 
+    --button-outline: inset 0 0 1px 0 oklch(var(--b2) / 80%);
+
     &[data-bleh--theme="darker"] {
         /* any additional highlights */
         --b2: 0.41 calc(var(--sat) * 0.04 * var(--sat-bg, 1)) var(--hue);
         --b3: 0.31 calc(var(--sat) * 0.04 * var(--sat-bg, 1)) var(--hue);
 
         /* card border */
-        --b4: 0.26 calc(var(--sat) * 0.03 * var(--sat-bg, 1)) var(--hue);
+        --b4: 0.28 calc(var(--sat) * 0.03 * var(--sat-bg, 1)) var(--hue);
 
         /* card */
         --b5: 0.21 calc(var(--sat) * 0.03 * var(--sat-bg, 1)) var(--hue);
@@ -484,12 +486,12 @@ body,
         --card-blur-bg: oklch(0.21 calc(var(--sat) * 0.05 * var(--sat-bg, 1)) var(--hue) / var(--solarium-opacity, 50%));
         --card-blur-bg-alt: oklch(var(--b5) / var(--solarium-opacity, 35%));
 
-        --normal-shadow: inset 0 0 0 1px oklch(var(--b2) / 40%);
+        --normal-shadow: none;
     }
     &[data-bleh--theme="oled"] {
         /* any additional highlights */
         --b2: 0.3 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue);
-        --b3: 0.2 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue);
+        --b3: 0.25 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue);
 
         /* card border */
         --b4: 0.16 calc(var(--sat) * 0.01 * var(--sat-bg, 1)) var(--hue);
@@ -513,15 +515,15 @@ body,
         --focused-input-shadow:
             inset 0 0 0 1px oklch(var(--h3) / 0.4),
             var(--input-shadow);
-        --group-shadow: inset 0 0 0 1px oklch(var(--b2) / 52%);
+        --group-shadow: inset 0 0 0 1px oklch(var(--b2) / 72%);
 
         --sidebar-bg: color-mix(in oklch, oklch(var(--b4)) 22%, oklch(var(--b5)));
         --sidebar-border: color-mix(in oklch, oklch(var(--b5)), oklch(var(--b2)) 60%);
         --toolbar-bg: oklch(var(--b4) / 20%);
-        --toolbar-border: oklch(var(--b2) / 35%);
+        --toolbar-border: oklch(var(--b2) / 45%);
         --subtle-border: 1px solid oklch(var(--b2) / 35%);
 
-        --normal-shadow: inset 0 0 0 1px oklch(var(--b2) / 50%);
+        --normal-shadow: none;
 
         --card-blur-bg: oklch(0.12 calc(var(--sat) * 0.05 * var(--sat-bg, 1)) var(--hue) / var(--solarium-opacity, 40%));
         --card-blur-bg-alt: oklch(var(--b5) / var(--solarium-opacity, 40%));
@@ -546,11 +548,13 @@ body,
 
         --modal-button-hov: oklch(var(--b2) / 40%);
         --modal-button-atv: oklch(var(--b2) / 60%);
+
+        --button-outline: inset 0 0 1px 0 oklch(0.6 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue));
     }
     &[data-bleh--theme="light"] {
         /* any additional highlights */
         --b2: 0.82 0 0;
-        --b3: 1 0 0;
+        --b3: 0.94 0 0;
 
         /* card border */
         --b4: 0.91 0 0;
@@ -569,8 +573,7 @@ body,
         --card-border-base: oklch(0.87 0 0) !important;
         --card-border-base-highlight: oklch(0.89 0 0);
 
-        --normal-shadow:
-            inset 0 0 0 1px oklch(var(--b2) / 50%);
+        --normal-shadow: none;
         --input-shadow:
             inset 0 0 0 1px oklch(var(--b2) / 30%),
             inset 0 1px 3px oklch(0 0 0 / 5%);
@@ -628,6 +631,8 @@ body,
 
         --menu-bg: var(--b5);
         --menu-opacity: 94%;
+
+        --button-outline: inset 0 0 1px 0 oklch(var(--b2));
     }
     &[data-bleh--theme="ink"] {
         --b2: 0.7 calc(var(--sat) * 0.12 * var(--sat-bg, 1)) var(--hue);
@@ -644,7 +649,7 @@ body,
         --card-border-base: oklch(0.81 calc(var(--sat) * 0.12 * var(--sat-bg, 1)) var(--hue)) !important;
         --card-border-base-highlight: oklch(0.76 calc(var(--sat) * 0.11 * var(--sat-bg, 1)) var(--hue)) !important;
 
-        --normal-shadow: inset 0 0 0 1px oklch(var(--b2) / 40%);
+        --normal-shadow: none;
         --input-shadow:
             inset 0 0 0 1px oklch(var(--b2) / 20%),
             inset 0 1px 2px 1px oklch(var(--b6) / 0.4);
@@ -770,8 +775,8 @@ u,
     );
     --avatar-generic-background: oklch(var(--b4));
 
-    --primary-shadow: inset 0 -1px 0 oklch(var(--h4) / 60%);
-    --bar-shadow: inset 0 1px 0 0 oklch(var(--h3) / 25%);
+    --primary-shadow: none;
+    --bar-shadow: none;
 
     --shout-vote-indicator: linear-gradient(
         90deg,
@@ -899,8 +904,6 @@ u,
 
         --opposite-text: var(--c1);
 
-        --bar-shadow: inset 0 -1px 0 0 oklch(var(--h4) / 40%);
-
         --shout-vote-indicator: linear-gradient(
             90deg,
             transparent 20%,
@@ -997,8 +1000,6 @@ u,
         );
 
         --opposite-text: var(--c1);
-
-        --bar-shadow: inset 0 -1px 0 0 oklch(var(--h4) / 40%);
 
         --shout-vote-indicator: linear-gradient(
             90deg,

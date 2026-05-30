@@ -253,7 +253,7 @@ export function redesign_profile_header(is_own_profile, is_following) {
                     <div class="taste-bar-fill colourful" data-taste=${taste} style="width: ${taste_percentage}" />
                 </div>
                 <div class="taste-interactions">
-                    <button class="btn icon select-button taste-details" data-type="details" ref=${el => details_btn = el}>${tl(trans.view_details)}</button>
+                    <button class="btn icon select-button taste-details outline-btn" data-type="details" ref=${el => details_btn = el}>${tl(trans.view_details)}</button>
                 </div>
             </div>
         `;
@@ -371,7 +371,7 @@ export function redesign_profile_header(is_own_profile, is_following) {
                     <div class="taste-bar-fill colourful" data-taste=${taste} style="width: ${taste_percentage}" />
                 </div>
                 <div class="taste-interactions">
-                    <button class="btn icon select-button taste-details" data-type="details" ref=${el => details_btn = el}>${tl(trans.view_details)}</button>
+                    <button class="btn icon select-button taste-details outline-btn" data-type="details" ref=${el => details_btn = el}>${tl(trans.view_details)}</button>
                     <button class="btn icon primary colourful" data-taste=${taste} data-type="valentine" onclick=${() => {
                         open(`${root}inbox/compose?to=${page.name}&subject=${encodeURIComponent(tl(trans.valentine, { u: page.name }))}`)
                     }}>${tl(trans.send_valentine)}</button>
