@@ -47,8 +47,8 @@ export let lang_info = {
     },
     pt: {
         name: get_language_name('pt'),
-        by: ['ArthRMH', 'satisfeita', 'fr0r', 'urwq', 'foognocchie'],
-        last_updated: '2025-11-25',
+        by: ['ArthRMH', 'satisfeita', 'fr0r', 'urwq', 'anjoskron', 'foognocchie'],
+        last_updated: '2026-02-22',
     },
     sv: {
         name: get_language_name('sv'),
@@ -10436,6 +10436,7 @@ export const trans = {
         ru: '{d} в {t}',
         es: '{d} a las {t}',
         it: '{d} alle {t}',
+        pt: '{d} as {t}',
     },
     you_sent_to: {
         // messages in your inbox
@@ -10892,6 +10893,7 @@ export const trans = {
         es: 'Nombre del álbum',
         ru: 'Название альбома',
         it: 'Nome dell’album',
+        pt: 'Nome do álbum',
     },
     search_for_settings: {
         en: 'Search for settings',
