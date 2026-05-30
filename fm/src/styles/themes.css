@@ -576,7 +576,7 @@ body,
         --normal-shadow: none;
         --input-shadow:
             inset 0 0 0 1px oklch(var(--b2) / 30%),
-            inset 0 1px 3px oklch(0 0 0 / 5%);
+            inset 0 1px 3px oklch(0 0 0 / 2%);
         --focused-input-shadow:
             inset 0 0 0 1px oklch(var(--l3-c) / 30%),
             var(--input-shadow);
