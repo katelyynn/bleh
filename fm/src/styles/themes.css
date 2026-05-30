@@ -563,7 +563,7 @@ body,
         --b5: 1 0 0;
 
         /* root */
-        --b6: 0.94 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue);
+        --b6: 0.95 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue);
         --b8: 1 0 0;
         --b7: 0 0 0;
         --b9: 1 0 0;
@@ -601,7 +601,7 @@ body,
         --nav-filter-shadow: drop-shadow(0 0 2px oklch(var(--b5)));
         --header-filter-shadow: drop-shadow(0 0 10px oklch(var(--b5)));
 
-        --banner-overlay: oklch(var(--b5) / 50%);
+        --banner-overlay: oklch(var(--b5) / 30%);
         --banner-mix: lighten;
 
         --setting-group: oklch(var(--b6) / 5%);
@@ -615,7 +615,7 @@ body,
         --view-buttons-hov: oklch(var(--b4) / 60%);
         --view-buttons-atv: oklch(var(--b4) / 80%);
 
-        --background-overlay: oklch(var(--b5) / 50%);
+        --background-overlay: oklch(var(--b5) / 70%);
         --background-mix-mode: lighten;
 
         --card-overlay-filter: invert(0.4);
@@ -826,6 +826,8 @@ u,
     --graph-colour-9: oklch(80% 65% 310);
     --graph-colour-10: oklch(80% 65% 360);
 
+    --badge-shadow: 0 3px 15px 1px oklch(var(--h4) / 10%), 0 -4px 10px 0 oklch(var(--h4) / 20%) inset;
+
     &[data-bleh--theme="oled"],
     body[data-bleh--theme="oled"] &:not(.theme-preview) {
         --c1: 0.98 0 var(--hue);
@@ -894,8 +896,9 @@ u,
         --l3-c-theme-switch: var(--l3-c);
         --h3-theme-switch: var(--h4);
 
-        --badge: oklch(var(--f4) / 55%);
-        --badge-hov: oklch(var(--f4) / 65%);
+        --badge: oklch(var(--f4) / 40%);
+        --badge-hov: oklch(var(--f4) / 60%);
+        --badge-shadow: 0 3px 15px 1px oklch(var(--h4) / 10%), 0 -4px 10px 0 oklch(calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.95) calc(clamp(min(0), var(--sat), max(2)) * 0.58) var(--hue) / 60%) inset;
 
         --grid-colour-shadow: var(
             --grid-colour-shadow-override,
@@ -991,8 +994,9 @@ u,
         --l3-c-theme-switch: var(--l3-c);
         --h3-theme-switch: var(--h4);
 
-        --badge: oklch(var(--f4) / 55%);
-        --badge-hov: oklch(var(--f4) / 65%);
+        --badge: oklch(var(--f4) / 40%);
+        --badge-hov: oklch(var(--f4) / 60%);
+        --badge-shadow: 0 3px 15px 1px oklch(var(--h4) / 10%), 0 -4px 10px 0 oklch(calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.9) calc(clamp(min(0), var(--sat), max(2)) * 0.58) var(--hue) / 40%) inset;
 
         --grid-colour-shadow: var(
             --grid-colour-shadow-override,
