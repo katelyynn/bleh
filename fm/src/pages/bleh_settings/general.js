@@ -1,7 +1,7 @@
 import { html, render } from "lighterhtml";
 import { page_loading, register_skip_to, render_setting_page } from "./bleh_settings";
 import { api_key, auth, page, root } from "@/build/page";
-import { load_badges } from "@/components/shared/badge";
+import { create_badge, load_badges } from "@/components/shared/badge";
 import { dialog } from "@/components/dialog/dialog";
 import { lang, lang_info, tl, trans } from "@/build/trans";
 import { setting } from "@/components/settings/settings";
@@ -12,6 +12,9 @@ import { update_branding_type } from "@/components/page/navigation";
 import tippy from "tippy.js";
 import { update_check } from "@/components/page/style";
 import { notify } from "@/components/dialog/notify";
+import { sponsor, sponsor_manage, sponsors } from '@/components/sponsor';
+import { convert_lang_to_country, flag } from '@/components/shared/flag';
+import { start_update } from "@/components/page/style";
 
 export function general() {
     if (auth.pro == null) {
@@ -28,7 +31,7 @@ export function general() {
 
     let badges = load_badges(auth.name);
     if (badges) badge_count = badges.length;
-    if (auth.pro) badge_count++;
+    //if (auth.pro) badge_count++;
 
     const auth_key = localStorage.getItem('bleh_auth');
     const auth_valid = localStorage.getItem('bleh_auth_valid');
@@ -63,26 +66,10 @@ export function general() {
                                         body: html.node`
                                             <div class="generic-table-list badge-list">
                                                 ${badges ? badges.map(badge => {
-                                                    let style;
-                                                    let classname = '';
-                                                    if (
-                                                        badge.icon &&
-                                                        badge.hue &&
-                                                        badge.sat &&
-                                                        badge.lit
-                                                    ) {
-                                                        style = `--mask: url(${badge.icon}); --hue: ${badge.hue}; --sat: ${badge.sat}; --lit: ${badge.lit}`;
-                                                    } else {
-                                                        classname = `user-status--bleh-${badge.type} user-status--bleh-user-${auth.name}`;
-                                                    }
-
                                                     return html.node`
                                                         <div class="generic-table-list-entry badge-list-entry">
-                                                            <div class="icon-container colourful ${classname}" style=${style}>
-                                                                <div class="bleh-icon" style="--icon: var(--mask)" />
-                                                            </div>
-                                                            <div class="name colourful ${classname}" style=${style}>
-                                                                ${badge.name}
+                                                            <div class="name">
+                                                                ${create_badge(badge, false, true, true)}
                                                             </div>
                                                             <div class="text">
                                                                 ${badge.reason}
@@ -90,19 +77,6 @@ export function general() {
                                                         </div>
                                                     `;
                                                 }) : ''}
-                                                ${auth.pro ? html.node`
-                                                    <div class="generic-table-list-entry badge-list-entry">
-                                                        <div class="icon-container colourful user-status-subscriber">
-                                                            <div class="bleh-icon" style="--icon: var(--mask)" />
-                                                        </div>
-                                                        <div class="name colourful user-status-subscriber">
-                                                            ${tl(trans.badges['user-status-subscriber'].name)}
-                                                        </div>
-                                                        <div class="text">
-                                                            ${tl(trans.badges['user-status-subscriber'].reason)}
-                                                        </div>
-                                                    </div>
-                                                ` : ''}
                                             </div>
                                         `
                                     });
@@ -118,7 +92,7 @@ export function general() {
                             <p>${tl(trans.sponsor_get_badge)}</p>
                         </div>
                         <div class="toggle-wrap">
-                            <button class="btn primary icon sponsor" data-type="sponsor" onclick=${() => sponsor_manage()}>
+                            <button class="btn primary icon sponsor colourful" data-type="sponsor" onclick=${() => sponsor_manage()}>
                                 ${tl(trans.manage_sponsor)}
                             </button>
                         </div>
@@ -130,7 +104,7 @@ export function general() {
                             <p>${tl(trans.sponsor_get_badge)}</p>
                         </div>
                         <div class="toggle-wrap">
-                            <button class="btn primary icon sponsor" data-type="sponsor" onclick=${() => sponsor()}>
+                            <button class="btn primary icon sponsor colourful" data-type="sponsor" onclick=${() => sponsor()}>
                                 ${tl(trans.sponsor)}
                             </button>
                         </div>
@@ -141,8 +115,8 @@ export function general() {
                         <h5>${tl(trans.current_version)}</h5>
                     </div>
                     <div class="info">
-                        <p>${sponsor_list.latest}</p>
-                        <button class="see-more update-check sponsor-related" onclick=${() => sponsors(true, () => {
+                        <p>${sponsor_list.version}</p>
+                        <button class="see-more update-check sponsor-related left-icon" onclick=${() => sponsors(true, () => {
                             render_setting_page('general');
                         })}>
                             ${tl(trans.update_check)}
@@ -163,13 +137,13 @@ export function general() {
             <section class="bleh--panel">
                 <h4>API</h4>
                 <div class="setting-group">
-                    <div class="setting" data-type="action">
+                    <div class="setting" data-type="action" id="setting_api">
                         <div class="heading">
                             <h5>${tl(trans.api.name)}</h5>
                             <p>${tl(trans.api.body)}</p>
                         </div>
                         <div class="toggle-wrap">
-                            <a class="btn ${auth_key && auth_valid == 'true' ? '' : 'primary'} icon connect" href="${root}api/auth?api_key=${api_key}&cb=${root}bleh/api">
+                            <a class="btn ${auth_key && auth_valid == 'true' ? '' : 'primary'} icon" data-type="plus" href="${root}api/auth?api_key=${api_key}&cb=${root}bleh/api">
                                 ${tl(trans.connect)}
                             </a>
                         </div>
@@ -198,9 +172,7 @@ export function general() {
 
                         const row = html.node`
                             <div class="language-row${lang == key ? ' active' : ''}">
-                                <div class="flag-container">
-                                    <img src="https://katelyynn.github.io/bleh/fm/flags/${key}.svg" alt="flag for ${key}">
-                                </div>
+                                ${flag((convert_lang_to_country[key] || key).toUpperCase())}
                                 <div class="name">
                                     <h5>${language.name}</h5>
                                     <p>${{ html: tl(trans.by_user, { u: language.by.map((user) => `<a href="${root}user/${user}">${user}</a>`).join(', ') }) }}</p>

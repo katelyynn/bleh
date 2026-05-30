@@ -3,10 +3,12 @@ import { auth, page } from "@/build/page";
 import { tl, trans } from "@/build/trans";
 import { setting } from "@/components/settings/settings";
 import { update_colour_swatches } from "@/config";
-import { display_colour_presets, page_loading, register_skip_to, render_setting_page, theme_bubbles } from "./bleh_settings";
+import { page_loading, register_skip_to, render_setting_page, theme_bubbles } from "./bleh_settings";
 import { ff } from "@/components/settings/sku";
-import { settings } from "@/build/config";
+import { settings, settings_store } from "@/build/config";
 import { match } from "@/components/settings/dynamic_theming";
+import { dialog } from "@/components/dialog/dialog";
+import { display_colour_presets } from "@/components/settings/swatch";
 
 export function visual() {
     if (
@@ -31,6 +33,9 @@ export function visual() {
     let adaptive_tip;
     let bubbles;
 
+    let theme_day;
+    let theme_night;
+
     function render_tip() {
         adaptive_tip.setAttribute('aria-hidden', !settings.theme_schedule);
 
@@ -39,13 +44,13 @@ export function visual() {
                 day: tl(trans.themes[settings.theme_day]),
                 night: tl(trans.themes[settings.theme_night])
             })}
-            <a onclick=${() => {
+            <a class="card-tip-link" onclick=${() => {
                 dialog({
                     id: 'auto_theme',
                     title: tl(trans.themes.name),
                     body: html.node`
                         <div class="setting-group">
-                            ${(theme_day = setting({
+                            ${theme_day = setting({
                                 id: 'theme_day',
                                 list: [
                                     {
@@ -74,8 +79,8 @@ export function visual() {
                                     bubbles.re_render();
                                     match();
                                 }
-                            }))}
-                            ${(theme_night = setting({
+                            })}
+                            ${theme_night = setting({
                                 id: 'theme_night',
                                 list: [
                                     {
@@ -104,22 +109,24 @@ export function visual() {
                                     bubbles.re_render();
                                     match();
                                 }
-                            }))}
+                            })}
                         </div>
                         <p class="card-tip">${tl(trans.theme_schedule)}</p>
                     `
                 });
-            }}>
-                ${tl(trans.change_schedule)}
-            </a>
+            }}>${tl(trans.change_schedule)}</a>
         `);
     }
+
+    let font_choice;
+    let custom_font;
+    let font_preview;
 
     render(page.structure.main, html`
         <section class="bleh--panel">
             <h4>${tl(trans.appearance)}</h4>
             <div class="setting-group">
-                <div class="setting" data-type="action">
+                <div class="setting" data-type="action" id="setting_theme">
                     <div class="heading">
                         <h5>${tl(trans.themes.name)}</h5>
                     </div>
@@ -135,7 +142,10 @@ export function visual() {
                 </div>
                 ${setting({ id: 'solarium' })}
                 ${ff('high_contrast') ? setting({ id: 'high_contrast' }) : ''}
-                <div class="setting" data-type="action">
+                ${setting({ id: 'noise' })}
+            </div>
+            <div class="setting-group">
+                <div class="setting" data-type="action" id="setting_hue">
                     <div class="heading">
                         <h5>${tl(trans.hue)}</h5>
                     </div>
@@ -158,9 +168,18 @@ export function visual() {
                     </div>
                     <div class="primary-selections">
                         ${setting({
+                            id: 'hue_from_artist',
+                            standalone: true
+                        })}
+                        ${setting({
                             id: 'hue_from_album',
                             standalone: true
                         })}
+                        ${setting({
+                            id: 'hue_from_track',
+                            standalone: true
+                        })}
+                        <div class="primary-selection-sep" />
                         ${colourful_active = setting({
                             id: 'colourful_tracks',
                             standalone: true,
@@ -180,16 +199,19 @@ export function visual() {
                 ${ff('card_saturation') ? html.node`
                     ${(sat_bg = setting({ id: 'sat_bg' }))}
                 ` : ''}
-                ${setting({ id: 'noise' })}
             </div>
         </section>
         <section class="bleh--panel">
             <h4>${tl(trans.fonts)}</h4>
-            <div class="inner-preview pad">
-                <h1 class="font-preview">${tl(trans.font_example)}</h1>
+            <div class="inner-preview pad" ref=${el => font_preview = el} />
+            <div class="setting-group">
+                ${font_choice = setting({ id: 'font_choice', func: () => {
+                    custom_font.compat();
+                    render_font_preview();
+                } })}
+                ${custom_font = setting({ id: 'font', text: false })}
             </div>
             <div class="setting-group">
-                ${setting({ id: 'font' })}
                 ${setting({ id: 'font_weight' })}
                 ${setting({ id: 'font_weight_medium' })}
                 ${setting({ id: 'font_weight_bold' })}
@@ -227,8 +249,9 @@ export function visual() {
                 </div>
             </div>
             <div class="setting-group">
-                ${setting({ id: 'gloss' })}
+                ${setting({ id: 'show_disc_image' })}
                 ${setting({ id: 'grid_glow' })}
+                ${setting({ id: 'gloss' })}
             </div>
             <div class="setting-group">
                 ${setting({ id: 'avatar_radius' })}
@@ -244,4 +267,18 @@ export function visual() {
 
     display_colour_presets();
     update_colour_swatches();
+
+    render_font_preview();
+
+    function render_font_preview() {
+        let font = window.getComputedStyle(document.body).getPropertyValue('--font-choice');
+        if (font == `""`) font = tl(trans.no_font_selected);
+
+        render(font_preview, html`
+            <div class="font-preview-stack">
+                <h1 class="font-preview">${tl(trans.font_example)}</h1>
+                <span class="font-preview-label">${tl(trans.previewing, { v: font })}</span>
+            </div>
+        `);
+    }
 }

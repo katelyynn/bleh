@@ -14,11 +14,12 @@ import { notify, notify_rm } from '@/components/dialog/notify';
 import { select } from '@/components/settings/select';
 import { patch_titles } from '@/components/music/track';
 import { render_user } from '@/pages/home/minis.js';
-import { settings } from '@/build/config.js';
+import { settings } from '@/build/config';
 import { redirect } from '@/components/music/music';
 import tippy from 'tippy.js';
 import { ff } from '@/components/settings/sku';
 import { setting } from '@/components/settings/settings';
+import { avatar } from '../shared/avatar';
 
 export function compare({ host, sidebar } = {}) {
     if (!host || !sidebar) return;
@@ -52,10 +53,7 @@ export function compare({ host, sidebar } = {}) {
                     <div class="compare-user">
                         <div class="avatar">
                             <img
-                                src="${auth.avatar.replace(
-                                    '/avatar42s/',
-                                    '/avatar170s/'
-                                )}"
+                                src="${avatar(auth.avatar, 'avatar170s')}"
                                 alt="${tl(trans.your_avatar)}"
                             />
                         </div>
@@ -67,8 +65,8 @@ export function compare({ host, sidebar } = {}) {
                     </div>
                 </div>
                 <div class="compare-selection">
-                    ${(pages = select(
-                        [
+                    ${pages = select({
+                        values: [
                             {
                                 text: tl(trans.page_count)
                             },
@@ -97,10 +95,10 @@ export function compare({ host, sidebar } = {}) {
                                 text: 300
                             }
                         ],
-                        '3'
-                    ))}
-                    ${(type = select(
-                        [
+                        initial: '3'
+                    })}
+                    ${type = select({
+                        values: [
                             {
                                 text: tl(trans.item_type)
                             },
@@ -129,10 +127,10 @@ export function compare({ host, sidebar } = {}) {
                                     ${tl(trans.tracks)}`
                             }
                         ],
-                        default_type
-                    ))}
-                    ${(timeframe = select(
-                        [
+                        initial: default_type
+                    })}
+                    ${timeframe = select({
+                        values: [
                             {
                                 text: tl(trans.timeframe)
                             },
@@ -184,8 +182,8 @@ export function compare({ host, sidebar } = {}) {
                                 text: previous_year
                             }
                         ],
-                        default_timeframe
-                    ))}
+                        initial: default_timeframe
+                    })}
                     <button
                         class="btn icon primary compare"
                         ref=${(el) => (submit = el)}
@@ -200,10 +198,9 @@ export function compare({ host, sidebar } = {}) {
                 data-filled="false"
                 ref=${(el) => (body = el)}
             >
-                <div class="loading-data-container">
-                    <div class="loading-data-text info">
-                        ${tl(trans.choose_a_timeframe_above)}
-                    </div>
+                <div class="placeholder-block">
+                    <div class="placeholder-head">(๑>◡<๑)</div>
+                    <div class="placeholder-summary">${tl(trans.choose_a_timeframe_above)}</div>
                 </div>
             </div>
         `
@@ -250,7 +247,7 @@ export function compare({ host, sidebar } = {}) {
                         />
                         ${() => {
                             let btn = html.node`
-                            <button class="btn chibi icon" data-type="starred_friend" data-starred=${settings.starred_friend != ''} onclick=${() => {
+                            <button class="btn chibi icon colourful" data-type="starred_friend" data-starred=${settings.starred_friend != ''} onclick=${() => {
                                 if (settings.starred_friend == '') return;
 
                                 inputter.value = settings.starred_friend;
@@ -279,13 +276,13 @@ export function compare({ host, sidebar } = {}) {
     function begin_comparing(bypass = false) {
         if (page.name == '') return;
 
-        if (parseInt(pages.value()) > 3 && !bypass) {
+        if (parseInt(pages.value) > 3 && !bypass) {
             let warn = notify({
                 id: 'compare_warning',
                 title: tl(trans.are_you_sure),
                 body: tl(trans.this_will_require_loading_count_pages).replace(
                     '{c}',
-                    parseInt(pages.value()) * 2
+                    parseInt(pages.value) * 2
                 ),
                 type: 'warning',
                 actions: [
@@ -329,7 +326,7 @@ export function compare({ host, sidebar } = {}) {
             other: [],
             shared: []
         };
-        get_grid(auth.name, 1, parseInt(pages.value()), page.name);
+        get_grid(auth.name, 1, parseInt(pages.value), page.name);
     }
 
     function get_grid(user, current_page, page_count, next_user = null) {
@@ -348,7 +345,7 @@ export function compare({ host, sidebar } = {}) {
         );
 
         fetch(
-            `${root}user/${user}/library/${type.value()}?format=list&${timeframe.value()}&page=${current_page}&ajax=1`
+            `${root}user/${user}/library/${type.value}?format=list&${timeframe.value}&page=${current_page}&ajax=1`
         )
             .then(function (response) {
                 console.log('returned', response, response.text);
@@ -371,7 +368,7 @@ export function compare({ host, sidebar } = {}) {
                             item.avatar = item.avatar.getAttribute('src');
 
                         item.name = track.querySelector('.chartlist-name a').textContent.trim();
-                        if (type.value() != 'artists')
+                        if (type.value != 'artists')
                             item.sister = track.querySelector('.chartlist-artist a').textContent.trim();
                         item.plays = clean_number(track.querySelector('.chartlist-count-bar-slug').getAttribute('data-stat-value'));
 
@@ -411,7 +408,7 @@ export function compare({ host, sidebar } = {}) {
 
         page.state.compare.you.forEach((your_item) => {
             let other_item;
-            if (type.value() == 'albums')
+            if (type.value == 'albums')
                 other_item = page.state.compare.other.find(
                     (other) =>
                         your_item.name === other.name &&
@@ -459,7 +456,7 @@ export function compare({ host, sidebar } = {}) {
             return;
         }
 
-        if (type.value() != 'tracks') {
+        if (type.value != 'tracks') {
             let grid = document.createElement('ol');
             grid.classList.add(
                 'grid-items',
@@ -469,7 +466,7 @@ export function compare({ host, sidebar } = {}) {
 
             page.state.compare.shared.forEach((data) => {
                 let template;
-                if (type.value() == 'artists') template = sanitise(data.name);
+                if (type.value == 'artists') template = sanitise(data.name);
                 else
                     template = `${sanitise(data.sister)}/${sanitise(data.name)}`;
 
@@ -486,7 +483,7 @@ export function compare({ host, sidebar } = {}) {
                                     </a>
                                 </p>
                                 ${
-                                    type.value() == 'albums' ?
+                                    type.value == 'albums' ?
                                         html.node`
                                 <p class="grid-items-item-aux-text">
                                     <a class="grid-items-item-aux-block" href="${root}music/${redirect()}${data.sister}">
@@ -497,14 +494,14 @@ export function compare({ host, sidebar } = {}) {
                                     :   ''
                                 }
                                 <p class="grid-items-item-aux-text">
-                                    <a class="grid-item-plays with-avatar" href="${root}user/${auth.name}/library/music/${redirect()}${template}?${timeframe.value()}" target="_blank">
-                                        <span class="avatar">
+                                    <a class="grid-item-plays with-avatar icon-mask" href="${root}user/${auth.name}/library/music/${redirect()}${template}?${timeframe.value}" target="_blank">
+                                        <span class="avatar grid-item-avatar">
                                             <img src="${auth.avatar}" alt="${tl(trans.your_avatar)}">
                                         </span>
                                         ${data.plays.you.toLocaleString(lang)}
                                     </a>
-                                    <a class="grid-item-plays with-avatar" href="${root}user/${page.name}/library/music/${redirect()}${template}?${timeframe.value()}" target="_blank">
-                                        <span class="avatar">
+                                    <a class="grid-item-plays with-avatar icon-mask" href="${root}user/${page.name}/library/music/${redirect()}${template}?${timeframe.value}" target="_blank">
+                                        <span class="avatar grid-item-avatar">
                                             <img src="${page.avatar}" alt="${tl(trans.avatar_for_user).replace('{u}', page.name)}">
                                         </span>
                                         ${data.plays.other.toLocaleString(lang)}
@@ -564,7 +561,7 @@ export function compare({ host, sidebar } = {}) {
                         </td>
                         <td class="chartlist-bar with-multiple">
                             <span class="chartlist-count-bar">
-                                <a class="chartlist-count-bar-link" href="${root}user/${auth.name}/library/music/${redirect()}${template}?${timeframe.value()}" target="_blank">
+                                <a class="chartlist-count-bar-link" href="${root}user/${auth.name}/library/music/${redirect()}${template}?${timeframe.value}" target="_blank">
                                     <span class="chartlist-count-bar-slug" data-max-stat-value="${max}" data-stat-value="${data.plays.you}" style="width: ${(data.plays.you / max) * 100}%;"></span>
                                     <span class="chartlist-count-bar-value">${data.plays.you}</span>
                                 </a>
@@ -573,7 +570,7 @@ export function compare({ host, sidebar } = {}) {
                                 </span>
                             </span>
                             <span class="chartlist-count-bar">
-                                <a class="chartlist-count-bar-link" href="${root}user/${page.name}/library/music/${redirect()}${template}?${timeframe.value()}" target="_blank">
+                                <a class="chartlist-count-bar-link" href="${root}user/${page.name}/library/music/${redirect()}${template}?${timeframe.value}" target="_blank">
                                     <span class="chartlist-count-bar-slug" data-max-stat-value="${max}" data-stat-value="${data.plays.other}" style="width: ${(data.plays.other / max) * 100}%;"></span>
                                     <span class="chartlist-count-bar-value">${data.plays.other}</span>
                                 </a>

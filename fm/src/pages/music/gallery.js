@@ -13,13 +13,15 @@ import { ff } from '@/components/settings/sku';
 import { html, render } from 'lighterhtml';
 import { share } from '@/components/dialog/share';
 import tippy from 'tippy.js';
-import { correct_artist, correct_item_by_artist } from '@/components/music/lotus.js';
+import { correct_artist, correct_item_by_artist } from '@/components/music/lotus';
 import { set_storage } from '@/build/tools';
 
 export function bleh_gallery() {
     if (page.subpage != 'image') return;
 
     log('focusing on image', 'gallery');
+
+    gallery_arrows();
 
     let image_sidebar = page.structure.side.querySelector(
         '.js-gallery-image-details > div'
@@ -28,14 +30,6 @@ export function bleh_gallery() {
 
     if (image_sidebar.hasAttribute('data-bleh-gallery')) return;
     image_sidebar.setAttribute('data-bleh-gallery', 'true');
-
-    if (!ff('new_gallery_experience')) {
-        patch_gallery_focused_image(
-            image_sidebar,
-            page.structure.container.querySelector('.gallery-image-buttons')
-        );
-        return;
-    }
 
     // move image to its own spot above
     let image_details;
@@ -97,7 +91,7 @@ export function bleh_gallery() {
         </div>
         <div class="title-layer">
             ${image_title.outerHTML}
-            <div class="vote-number" data-side="pos">+0</div>
+            <div class="vote-number colourful" data-side="pos">+0</div>
         </div>
     `;
 
@@ -127,7 +121,7 @@ export function bleh_gallery() {
     let buttons = image_details.querySelector('.gallery-image-buttons');
 
     buttons.querySelectorAll('button').forEach(btn => {
-        btn.classList.add('btn');
+        btn.classList.add('btn', 'colourful');
         btn.removeAttribute('title');
     });
 
@@ -188,7 +182,7 @@ export function bleh_gallery() {
 
     // open in a new tab button
     let open_button = html.node`
-        <button class="btn image-open-button" onclick=${() => expand_gallery_image()}>
+        <button class="btn image-open-button icon" onclick=${() => expand_gallery_image()}>
             ${tl(trans.expand)}
         </button>
     `;
@@ -200,7 +194,7 @@ export function bleh_gallery() {
 
     // share button
     let share_button = html.node`
-        <button class="btn image-share-button" onclick=${() => share(window.location.href)}>
+        <button class="btn image-share-button icon" onclick=${() => share(window.location.href)}>
             ${tl(trans.share)}
         </button>
     `;
@@ -211,7 +205,7 @@ export function bleh_gallery() {
     // delete
     let delete_button = image_details.querySelector('.gallery-image-delete');
     if (delete_button) {
-        delete_button.querySelector('button').classList = 'btn';
+        delete_button.querySelector('button').classList = 'btn icon colourful';
         buttons_extra.appendChild(delete_button);
     }
 
@@ -219,14 +213,14 @@ export function bleh_gallery() {
     const report_form = image_details.querySelector('.gallery-image-report-form');
 
     const report = report_form.querySelector('button');
-    report.classList.add('btn');
+    report.classList.add('btn', 'icon', 'colourful');
     tippy(report, {
         content: report.textContent
     });
     report.textContent = tl(trans.report);
 
     const reported = report_form.querySelector('.gallery-image-report--reported');
-    reported.classList.add('btn');
+    reported.classList.add('btn', 'icon', 'colourful');
 
     buttons_extra.appendChild(report_form);
 
@@ -256,7 +250,7 @@ export function bleh_gallery() {
         else page.structure.main.appendChild(side_actions);
 
         let view_all = view_all_container.querySelector('a');
-        view_all.classList.add('btn', 'side-action');
+        view_all.classList.add('btn', 'side-action', 'icon-mask');
         view_all.setAttribute('data-type', 'gallery');
 
         side_actions.appendChild(view_all);
@@ -266,7 +260,7 @@ export function bleh_gallery() {
         // saved button
         if (page.type == 'artist' || ff('display_album_bookmark')) {
             let view_saved = document.createElement('a');
-            view_saved.classList.add('btn', 'side-action');
+            view_saved.classList.add('btn', 'side-action', 'icon-mask');
             view_saved.setAttribute(
                 'href',
                 `${view_all.getAttribute('href')}?tab=saved`
@@ -278,26 +272,26 @@ export function bleh_gallery() {
         }
     }
 
-    // extra thumbnails for clarity
-    // doesnt work :(
-    /*let gallery_thumbnail_panel = document.createElement('section');
-    gallery_thumbnail_panel.classList.add('gallery-thumbnail-panel');
-    gallery_thumbnail_panel.innerHTML = page.structure.container.querySelector('.gallery-thumbnail-container').innerHTML;
-
-    view_all_panel.after(gallery_thumbnail_panel);*/
-
     // bookmark-related info
     if (page.type == 'artist' || ff('display_album_bookmark'))
         patch_gallery_focused_image(image_sidebar, buttons);
+}
 
-    /*let gallery_slides = gallery_section.querySelectorAll('.gallery-slide');
-    gallery_slides.forEach((slide) => {
-        console.info(slide);
-        let left = parseInt(slide.style.getPropertyValue('left').replace('%', ''));
-        console.info(left);
+function gallery_arrows() {
+    const container = page.structure.row.querySelector('.gallery-image-container');
+    const next = container.querySelector('.gallery-next');
+    const prev = container.querySelector('.gallery-previous');
 
-        slide.style.setProperty('left', `${left / 10}%`)
-    });*/
+    render(next, html`
+        <button class="btn gallery-pagination icon-r" data-type="next">
+            ${tl(trans.next)}
+        </button>
+    `);
+    render(prev, html`
+        <button class="btn gallery-pagination icon" data-type="prev">
+            ${tl(trans.prev)}
+        </button>
+    `);
 }
 
 function expand_gallery_image() {

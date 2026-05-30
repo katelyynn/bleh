@@ -4,6 +4,7 @@ import { render_user } from "@/pages/home/minis";
 import { tl, trans } from "@/build/trans";
 import { dialog, dialog_rm } from "@/components/dialog/dialog";
 import { input } from "@/components/settings/input";
+import { icon, icons } from "../shared/icon";
 
 export function plot({ host, sidebar } = {}) {
     if (!host || !sidebar) return;
@@ -22,10 +23,9 @@ export function plot({ host, sidebar } = {}) {
             data-filled="false"
             ref=${el => body = el}
         >
-            <div class="loading-data-container">
-                <div class="loading-data-text info">
-                    ${tl(trans.choose_a_timeframe_above)}
-                </div>
+            <div class="placeholder-block">
+                <div class="placeholder-head">(๑>◡<๑)</div>
+                <div class="placeholder-summary">${tl(trans.choose_a_timeframe_above)}</div>
             </div>
         </div>
     `);
@@ -38,7 +38,7 @@ export function plot({ host, sidebar } = {}) {
                     render_users();
                 }}>
                     ${user_placeholder(user)}
-                    <div class="bleh-icon" data-type="minus" />
+                    ${icon({ name: icons.minus })}
                 </button>
             `)}
             <button class="compare-user-btn add-user" onclick=${() => {
@@ -54,11 +54,11 @@ export function plot({ host, sidebar } = {}) {
                             warn_if_empty: true
                         }))}
                         <div class="modal-footer">
-                            <button class="see-more cancel" onclick=${() => dialog_rm({ id: 'add_user' })}>
+                            <button class="see-more cancel left-icon" onclick=${() => dialog_rm({ id: 'add_user' })}>
                                 ${tl(trans.cancel)}
                             </button>
                             <div class="fill"></div>
-                            <button class="btn primary icon" data-type="add" onclick=${() => complete_add(input_box.value())}>
+                            <button class="btn primary icon" data-type="add" onclick=${() => complete_add(input_box.value)}>
                                 ${tl(trans.add)}
                             </button>
                         </div>
@@ -78,7 +78,7 @@ export function plot({ host, sidebar } = {}) {
                     render_users();
                 }
             }}>
-                <div class="bleh-icon" data-type="plus" />
+                ${icon({ name: icons.plus })}
             </button>
         `);
     }

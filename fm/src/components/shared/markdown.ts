@@ -13,13 +13,13 @@ import DOMPurify from 'dompurify';
 import { expand_avatar } from '@/components/shared/avatar';
 import { tl, trans } from '@/build/trans';
 import { dialog, dialog_rm } from '@/components/dialog/dialog';
-import { settings, settings_store } from '@/build/config.js';
+import { settings, settings_store } from '@/build/config';
 import { log } from '@/build/log.js';
 import { save_profile_cache } from '@/pages/profile/profile';
 import { toggle } from '@/components/settings/toggle';
 import { save_setting } from '@/components/settings/settings';
 import { load_chart_colours } from '@/components/music/chart.js';
-import { sponsor_list } from '@/build/sponsor.js';
+import { sponsor_list } from '@/build/sponsor';
 import { fetch_status } from '@/components/profile/statuscafe';
 import tippy from 'tippy.js';
 import { DateTime } from 'luxon';
@@ -27,6 +27,7 @@ import { input } from '@/components/settings/input';
 import { queue_popup } from '@/components/dialog/popup';
 import { markdown_options } from '@/types/markdown';
 import { profile_cache_list } from '@/types/profile';
+import { keys } from '../settings/storage';
 
 export function markdown(
     text: string,
@@ -206,7 +207,7 @@ export function markdown(
                 delete cache.font;
                 delete cache.font_style;
 
-                if (sponsor_list && sponsor_list.sponsors.includes(name)) {
+                if (sponsor_list.version && sponsor_list.users.hasOwnProperty(name)) {
                     const split = family.split(',');
 
                     cache.font = split[0];
@@ -226,7 +227,7 @@ export function markdown(
             replace: (_, username) => {
                 delete cache.username;
 
-                if (sponsor_list && sponsor_list.sponsors.includes(name)) {
+                if (sponsor_list.version && sponsor_list.users.hasOwnProperty(name)) {
                     cache.username = username;
                 }
 
@@ -345,7 +346,7 @@ export function markdown(
     if (!line_breaks) allow_alignment = false;
 
     if (allow_alignment) extensions.push(aligner());
-    if (line_breaks) extensions.push(blockquotes());
+    if (!line_breaks) extensions.push(blockquotes());
     if (allow_banners) extensions.push(banner());
     if (allow_icons) extensions.push(icons());
     if (allow_hue) extensions.push(accent(), display_name(), status());
@@ -362,7 +363,7 @@ export function markdown(
 
     if (available && will_cache) {
         profile_cache =
-            JSON.parse(localStorage.getItem('bleh_profile_cache')) || {};
+            JSON.parse(localStorage.getItem(keys.profile_cache)) || {};
         cache = profile_cache[name] || {};
     }
 
@@ -416,7 +417,12 @@ export function markdown(
         ALLOWED_ATTR
     });
 
-    const body = html.node([parsed]);
+    const body = html.node`
+        <div class="parsed-markdown markdown-body">
+            ${{ html: parsed }}
+        </div>
+    `;
+
     log('rendered', 'markdown', 'info', { body });
 
     const link_strings = {
@@ -464,7 +470,7 @@ export function markdown(
                         }
 
                         return html.node`
-                            <a class="music-link social-link" href=${link.url} target="_blank" data-host=${link.host} data-host-unknown=${!link_strings.hasOwnProperty(link.host)} data-path=${link.path} style="--favi: url(https://icons.duckduckgo.com/ip3/${link.host}.ico)">
+                            <a class="btn music-link social-link colourful icon" href=${link.url} target="_blank" data-host=${link.host} data-host-unknown=${!link_strings.hasOwnProperty(link.host)} data-path=${link.path} style="--favi: url(https://icons.duckduckgo.com/ip3/${link.host}.ico)">
                                 ${label}
                             </a>
                         `;
@@ -477,7 +483,7 @@ export function markdown(
     if (body.nodeName != '#text') patch_wiki_contents(body);
 
     // funny local restriction message
-    if (line_breaks && body.nodeName != '#text') {
+    if (line_breaks) {
         local_restriction(body);
         body.querySelectorAll('p').forEach((text) => {
             local_restriction(text);
@@ -487,10 +493,7 @@ export function markdown(
     // this looks like a mess, but essentially profile colours are
     // a nice 'thank you' vanity reward for sponsors <3
     if (allow_hue) {
-        if (
-            !sponsor_list ||
-            (sponsor_list && !sponsor_list.sponsors.includes(name))
-        )
+        if (!sponsor_list.users.hasOwnProperty(name))
             allow_hue = false;
     }
 
@@ -541,10 +544,6 @@ export function markdown(
 
             render(status_cafe_host, html`
                 <div class="status-cafe">
-                    <div class="status-cafe-top">
-                        <span class="status-cafe-author">${tl(trans.current_status)}</span>
-                        <span class="status-cafe-time">...</span>
-                    </div>
                     <div class="status-cafe-content is-loading">
                         <span class="status-cafe-emoji">
                             <span class="status-cafe-loading-spinner">
@@ -552,6 +551,9 @@ export function markdown(
                             </span>
                         </span>
                         <span class="status-cafe-text">${tl(trans.loading_status, { u: status_cafe_user })}</span>
+                    </div>
+                    <div class="status-cafe-top">
+                        <span class="status-cafe-time">...</span>
                     </div>
                 </div>
             `);
@@ -615,6 +617,8 @@ export function markdown(
                 document.body.style.setProperty('--hue-album', hue);
                 document.body.style.setProperty('--sat-album', sat);
                 document.body.style.setProperty('--lit-album', lit);
+
+                page.state.replaced_accent = true;
 
                 load_chart_colours();
             }
@@ -917,7 +921,7 @@ export function external_url_prompt(url, dangerous = false) {
                 }
             </div>
             <div class="modal-footer">
-                <button class="see-more cancel" onclick=${() => dialog_rm({ id: 'external_url' })}>
+                <button class="see-more cancel left-icon" onclick=${() => dialog_rm({ id: 'external_url' })}>
                     ${tl(trans.back)}
                 </button>
                 <div class="fill"></div>
@@ -940,7 +944,13 @@ export function external_url_prompt(url, dangerous = false) {
     });
 }
 
-export function markdown_field(func, options, value, name, cols, rows, placeholder, maxlength, mini = false, autofocus = false) {
+interface markdown_field_element extends HTMLElement {
+    editor: HTMLTextAreaElement | HTMLInputElement,
+    range: [start: number, end: number],
+    value: string
+}
+
+export function markdown_field(func, options, value, name, cols, rows, placeholder, maxlength, mini = false, autofocus = false, required = true): markdown_field_element {
     const use_md = mini ? settings.shout_markdown : settings.bio_markdown;
 
     options = {
@@ -968,25 +978,32 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
         placeholder,
         func: () => {
             on_selection(null, null, false);
-            if (func) func(textarea.value());
+            if (func) func(textarea.value);
             render_overlay();
         },
         func_mouseup: () => {
             on_selection(null, null, false);
         },
         func_select: on_selection,
-        submit_on_character: true,
-        required: true,
+        required,
         maxlength,
         focus: autofocus
     });
     let overlay;
 
-    const editor = textarea.editor();
+    const md_editor = textarea.editor;
+
+    md_editor.addEventListener('input', () => {
+        on_selection(null, null, false);
+        if (func) func(textarea.value);
+        render_overlay();
+    });
 
     let is_bold_selected;
 
     function on_selection(editor, val, has_selection = true) {
+        overlay.scrollTop = md_editor.scrollTop;
+
         let sel_start;
         let sel_end;
         let selected = '';
@@ -1076,7 +1093,7 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
                                     })}
                                 </div>
                                 <div class="modal-footer">
-                                <button class="see-more cancel" onclick=${() => {
+                                <button class="see-more cancel left-icon" onclick=${() => {
                                     dialog_rm({ id: 'link' });
                                     resolve(null);
                                 }}>
@@ -1093,8 +1110,8 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
                         });
 
                         function submit_link() {
-                            let alt_text = alt.value();
-                            let link_text = link.value();
+                            let alt_text = alt.value;
+                            let link_text = link.value;
 
                             if (!link_text) return;
 
@@ -1165,7 +1182,7 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
                                     })}
                                 </div>
                                 <div class="modal-footer">
-                                <button class="see-more cancel" onclick=${() => {
+                                <button class="see-more cancel left-icon" onclick=${() => {
                                     dialog_rm({ id: 'link' });
                                     resolve(null);
                                 }}>
@@ -1182,8 +1199,8 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
                         });
 
                         function submit_link() {
-                            let alt_text = alt.value();
-                            let link_text = link.value();
+                            let alt_text = alt.value;
+                            let link_text = link.value;
 
                             if (!link_text) return;
 
@@ -1254,22 +1271,22 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
                             if (item.hide) return html.node``;
 
                             const button = html.node`
-                                <button class="btn markdown-action" data-type=${item.type} aria-checked="false" type="button" onclick=${() => {
-                                    const sel_start = editor.selectionStart;
-                                    const sel_end = editor.selectionEnd;
+                                <button class="btn markdown-action chibi icon" data-type=${item.type} aria-checked="false" type="button" onclick=${() => {
+                                    const sel_start = md_editor.selectionStart;
+                                    const sel_end = md_editor.selectionEnd;
 
-                                    const val = textarea.value();
+                                    const val = textarea.value;
 
                                     if (item.func) {
                                         item.func().then(replacement => {
                                             if (!replacement) return;
 
-                                            textarea.value(val.slice(0, sel_start) + replacement + val.slice(sel_end));
+                                            textarea.value = val.slice(0, sel_start) + replacement + val.slice(sel_end);
 
                                             textarea.focus();
-                                            textarea.range(sel_start, sel_start + replacement.length);
+                                            textarea.range = [sel_start, sel_start + replacement.length];
 
-                                            if (func) func(textarea.value());
+                                            if (func) func(textarea.value);
 
                                             render_overlay();
                                         });
@@ -1295,12 +1312,12 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
                                             replacement = `${item.start}${selected}${item.end}`;
                                         }
 
-                                        textarea.value(val.slice(0, sel_start) + replacement + val.slice(sel_end));
+                                        textarea.value = val.slice(0, sel_start) + replacement + val.slice(sel_end);
 
                                         textarea.focus();
-                                        textarea.range(sel_start, sel_start + replacement.length);
+                                        textarea.range = [sel_start, sel_start + replacement.length];
 
-                                        if (func) func(textarea.value());
+                                        if (func) func(textarea.value);
 
                                         render_overlay();
 
@@ -1360,20 +1377,23 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
 
     render_overlay();
 
-    editor.addEventListener('scroll', () => {
-        overlay.scrollTop = editor.scrollTop;
+    md_editor.addEventListener('scroll', () => {
+        overlay.scrollTop = md_editor.scrollTop;
     });
 
-    field.value = (val) => {
-        if (!val) return textarea.value();
+    Object.defineProperty(field, 'value', {
+        get() {
+            return textarea.value;
+        },
+        set(val: string) {
+            textarea.value = val;
+            if (func) func(val);
 
-        textarea.value(val);
-        if (func) func(val);
+            render_overlay(val);
+        }
+    });
 
-        render_overlay(val);
-    }
-
-    function render_overlay(val = textarea.value()) {
+    function render_overlay(val = textarea.value) {
         val = val.replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
         if (use_md) {

@@ -4,7 +4,7 @@
 // Licensed under GPLv3
 //
 
-import { auth, page, root } from '@/build/page.js';
+import { auth, page, root } from '@/build/page';
 import { dialog, dialog_rm } from '@/components/dialog/dialog';
 import { html, render } from 'lighterhtml';
 import { input } from '@/components/settings/input';
@@ -13,7 +13,7 @@ import { save_setting } from '@/components/settings/settings';
 import { sanitise } from '@/build/tools';
 import { compare } from '@/components/minis/compare';
 import { collage } from '@/components/minis/collage';
-import { settings } from '@/build/config.js';
+import { settings } from '@/build/config';
 import { news } from '@/components/news';
 import { ff } from '@/components/settings/sku';
 import { redirect } from '@/components/music/music';
@@ -395,8 +395,7 @@ export function register_rabbit() {
             matches = [];
 
             feed.forEach((item) => {
-                let extended =
-                    `${item.text} ${item.body} ${item.keywords.join(' ')} ${item.keybind ? item.keybind.join(' ').replace('⌘', 'Ctrl').replace('⇧', 'Shift') : ''}`.toLowerCase();
+                let extended = `${item.text} ${item.body} ${item.keywords.join(' ')} ${item.keybind ? item.keybind.join(' ').replace('⌘', 'Ctrl').replace('⇧', 'Shift') : ''}`.toLowerCase();
 
                 let words = value.split(' ');
                 let match = false;
@@ -411,12 +410,9 @@ export function register_rabbit() {
                 if (match) matches.push(item);
             });
 
-            render(
-                rabbit_hole,
-                html`
-                    ${matches.length > 0 ?
-                        matches.map((item, index) => () => {
-                            let button = html.node`
+            render(rabbit_hole, html`
+                ${matches.length > 0 ? matches.map((item, index) => () => {
+                    let button = html.node`
                         <button class="dropdown-menu-clickable-item rabbit-hole-item" data-type=${item.type} onclick=${item.action} disabled=${item.disabled}>
                             <div class="info">
                                 <div class="text">${item.text}</div>
@@ -425,22 +421,21 @@ export function register_rabbit() {
                         </button>
                     `;
 
-                            if (!item.disabled) {
-                                button.addEventListener('mouseover', () => {
-                                    selected = index;
-                                    rabbit_select(false, true);
-                                });
-                            }
+                    if (!item.disabled) {
+                        button.addEventListener('mouseover', () => {
+                            selected = index;
+                            rabbit_select(false, true);
+                        });
+                    }
 
-                            return button;
-                        })
-                    :   html.node`
-                    <div class="loading-data-container">
-                        <div class="loading-data-text failed">${tl(trans.nothing_matches_your_search)}</div>
+                    return button;
+                }) : html.node`
+                    <div class="placeholder-block">
+                        <div class="placeholder-head">₍ᐢ. .ᐢ₎</div>
+                        <div class="placeholder-summary">${tl(trans.nothing_matches_your_search)}</div>
                     </div>
                 `}
-                `
-            );
+            `);
 
             rabbit_select();
         } else {
@@ -570,7 +565,7 @@ export function register_rabbit() {
                 }
             },
             {
-                type: 'theme_ash',
+                type: 'theme_dark',
                 text: tl(trans.themes.dark),
                 body: tl(trans.changes_your_theme),
                 keywords: ['dark', 'night', 'grey', 'gray'],
@@ -580,7 +575,7 @@ export function register_rabbit() {
                 }
             },
             {
-                type: 'theme_dark',
+                type: 'theme_darker',
                 text: tl(trans.themes.darker),
                 body: tl(trans.changes_your_theme),
                 keywords: ['dark', 'night', 'grey', 'gray'],
@@ -590,7 +585,7 @@ export function register_rabbit() {
                 }
             },
             {
-                type: 'theme_void',
+                type: 'theme_oled',
                 text: tl(trans.themes.oled),
                 body: tl(trans.changes_your_theme),
                 keywords: ['dark', 'night', 'black'],
@@ -1143,22 +1138,22 @@ export function register_rabbit() {
             render(
                 fake,
                 html`
-                    <label>${searching.primary.type}:</label>
-                    <p>${searching.primary.name}</p>
+                    <label class="rabbit-label">${searching.primary.type}:</label>
+                    <p class="rabbit-text">${searching.primary.name}</p>
                     <label>${searching.secondary.type}:</label>
-                    <p>${searching.secondary.name}</p>
+                    <p class="rabbit-text">${searching.secondary.name}</p>
                 `
             );
         } else if (searching.primary.type) {
             render(
                 fake,
                 html`
-                    <label>${searching.primary.type}:</label>
-                    <p>${searching.primary.name}</p>
+                    <label class="rabbit-label">${searching.primary.type}:</label>
+                    <p class="rabbit-text">${searching.primary.name}</p>
                 `
             );
         } else {
-            render(fake, html` <i>${tl(trans.choose_a_search_type)}</i> `);
+            render(fake, html` <i class="rabbit-hint">${tl(trans.choose_a_search_type)}</i> `);
         }
 
         if (searching.primary.type == 'artist') {

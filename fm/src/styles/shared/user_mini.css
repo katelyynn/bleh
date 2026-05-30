@@ -1,0 +1,100 @@
+.friends {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: var(--card-gap);
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    gap: var(--card-gap);
+
+    animation: activity 0.35s var(--trans-function);
+
+    transition-property: opacity;
+    transition-duration: var(--trans);
+    transition-timing-function: var(--trans-function);
+
+    &:hover {
+        transition: none;
+    }
+
+    &.hidden-user {
+        display: none;
+    }
+
+    & > .user-avatar {
+        --w: 56px;
+        width: var(--w);
+        height: var(--w);
+        flex-shrink: 0;
+
+        background: var(--avatar-generic-background);
+        border-radius: var(--avatar-radius);
+        overflow: hidden;
+        position: relative;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &.cover-art {
+            border-radius: var(--item-med-radius);
+        }
+
+        & > img {
+            width: var(--w);
+            height: var(--w);
+        }
+    }
+
+    & > .user-info {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        flex: 1;
+        overflow: hidden;
+
+        & > .user-name {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            --w: 18px;
+            cursor: default;
+            position: relative;
+
+            & > p {
+                color: oklch(var(--c2) / 80%);
+
+                & > strong {
+                    color: oklch(var(--c2));
+                    font-weight: var(--font-weight-medium);
+                }
+            }
+
+            & > .avatar {
+                display: flex;
+                width: var(--w);
+                height: var(--w);
+                overflow: hidden;
+            }
+        }
+
+        & > .user-about {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            color: oklch(var(--c2) / 80%);
+            cursor: default;
+            font-weight: var(--font-weight-medium);
+
+            & > .bleh-icon {
+                --icon-size: 14px;
+            }
+        }
+    }
+}
+
+.user-time {
+    display: none;
+}

@@ -5,27 +5,31 @@
 //
 
 import { html, render } from 'lighterhtml';
-import { page } from '@/build/page.js';
+import { page } from '@/build/page';
 import { markdown } from '@/components/shared/markdown';
 import { patch_avatar, style_name_from_badge } from '@/components/shared/avatar';
-import { correct_artist } from '@/components/music/lotus.js';
+import { correct_artist } from '@/components/music/lotus';
 import { log } from '@/build/log.js';
+import { keys } from '../settings/storage';
+import { is_sponsor } from '../sponsor';
 
 export function bleh_users() {
     const users = page.structure.main?.querySelectorAll('.user-list-item:not(.user-list-item-mobile-ad)');
 
+    const cache = JSON.parse(localStorage.getItem(keys.profile_cache) || '{}');
+
     users.forEach((user, index) => {
-        patch_user_list_item(user, index);
+        patch_user_list_item(user, index, cache);
     });
 }
 
-export function patch_user_list_item(user, index) {
+export function patch_user_list_item(user, index, cache = {}) {
     user.style.setProperty('--delay', index * 0.04 + 's');
 
     let avatar = user.querySelector('.user-list-avatar');
     let name = user.querySelector('.user-list-link');
 
-    const badge = patch_avatar(avatar, name.textContent, 'follow');
+    const badge = patch_avatar(avatar, name.textContent.trim(), 'follow');
     style_name_from_badge(name, badge);
 
     let artists = user.querySelectorAll('.user-list-shared-artists a');
@@ -39,7 +43,20 @@ export function patch_user_list_item(user, index) {
 
     if (name) {
         name.textContent = name.textContent.trim();
-        name.insertBefore(html.node`<span class="at">@</span>`, name.firstChild);
+        const name_text = name.textContent;
+        const valid = is_sponsor(name_text);
+
+        if (cache[name_text]?.username && valid) {
+            name.classList.add('username-combo', 'username-combo-vertical');
+            render(name, html`
+                <span class="username-custom">${cache[name_text].username}</span>
+                <span class="username-original">
+                    <span class="at">@</span>${name_text}
+                </span>
+            `);
+        } else {
+            name.insertBefore(html.node`<span class="at">@</span>`, name.firstChild);
+        }
     }
 
     if (md) {

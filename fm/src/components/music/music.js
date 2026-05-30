@@ -30,11 +30,15 @@ import { DateTime } from 'luxon';
 import {
     load_profile_cache_externally,
     open_starred_friend_window
-} from '@/pages/profile/profile.js';
+} from '@/pages/profile/profile';
 import { oracle_credits } from '@/components/music/oracle';
 import { setting } from '@/components/settings/settings';
 import { patch_user_list_item } from '@/components/shared/users';
-import { join_the_conversation } from '../shared/shout.js';
+import { join_the_conversation } from '../shared/shout';
+import { music_summary } from './summary';
+import { icon, icons } from '../shared/icon';
+import { keys } from '../settings/storage';
+import { is_sponsor } from '../sponsor';
 
 unsafeWindow._other_listener = function (id) {
     other_listener(id);
@@ -57,7 +61,7 @@ export async function show_your_scrobbles() {
     if (!col_main) col_main = document.body.querySelector('.col-main');
 
     if (page.type == 'track') {
-        let new_panel = document.createElement('section');
+        let new_panel = document.createElement('div');
         new_panel.classList.add('track-info-panel');
         new_panel.innerHTML = col_main.innerHTML;
 
@@ -76,13 +80,12 @@ export async function show_your_scrobbles() {
         col_main = new_panel;
     }
 
-    let page_is_blocked;
+    const page_is_blocked = page.restricted;
 
-    if (page.type == 'artist') {
-        page_is_blocked = col_main.querySelector('.metadata-and-wiki-row, .cta-copy') == null;
-    } else if (page.type == 'album' || page.type == 'track') {
-        page_is_blocked = col_main.querySelector('.catalogue-tags') == null;
-    }
+    const summary = page.structure.main.querySelector('.music-summary');
+    const summary_info = summary?.querySelector('.summary-content');
+
+    summary_info?.appendChild(col_main);
 
     log(
         `${page_is_blocked ? 'page is blocked' : 'page is not blocked'}`,
@@ -239,11 +242,9 @@ export async function show_your_scrobbles() {
         page.structure.tabs = tabs;
     }
 
-    // create container
-    let top_container = document.createElement('div');
-    top_container.classList.add('top-container');
-    if (katsune) top_container.classList.add('katsune-button-row');
+    const main = summary?.querySelector('.summary-aside');
 
+    // create container
     let listen_container = document.createElement('div');
     listen_container.classList.add('listen-container');
 
@@ -332,28 +333,10 @@ export async function show_your_scrobbles() {
                         first_metadata_item.textContent.trim()
                     );
 
-                let p;
+                let p = listen_item.querySelector('.listen-item-text');
                 listen_item.setAttribute('data-listens', listens);
 
-                render(
-                    listen_item,
-                    html`
-                        <img
-                            class="view-item-avatar"
-                            src=${shortcut_listens.avi}
-                            alt=${shortcut_listens.name}
-                        />
-                        <div class="listen-badge star colourful">
-                            <div class="bleh-icon" />
-                        </div>
-                        <div class="info">
-                            <h3>${shortcut_listens.name}</h3>
-                            <p class="colourful" ref=${(el) => (p = el)}>
-                                ${tl(trans.count_plays, { c: listens.toLocaleString(lang) })}
-                            </p>
-                        </div>
-                    `
-                );
+                p.textContent = tl(trans.count_plays, { c: listens.toLocaleString(lang) });
 
                 // colourful counts
                 if (settings.colourful_counts && page.type == 'artist') {
@@ -380,27 +363,17 @@ export async function show_your_scrobbles() {
             });
     }
 
+    main?.appendChild(listen_container);
+
     // other user
-    if (page.type != 'artist') listen_container.appendChild(create_divider());
-    create_listen_item(
-        listen_container,
-        {
-            name: 'other',
-            listens: -3,
-            link: scrobble_page,
-            button: true,
-            katsune: katsune
-        },
-        page.type
-    );
-
-    // append
-    col_main.insertBefore(listen_container, col_main.firstElementChild);
-
-    if (!katsune)
-        col_main.insertBefore(top_container, col_main.firstElementChild);
-    else
-        page.structure.container.insertBefore(top_container, page.structure.container.firstElementChild);
+    listen_container?.appendChild(html.node`
+        <button class="btn listen-item" data-listens="-3" onclick=${() => other_listener(scrobble_page)}>
+            ${icon({ name: icons.plus, identifier: 'listen-item' })}
+            <div class="listen-item-info">
+                <h3 class="listen-item-name not-profile">${tl(trans.other_user)}</h3>
+            </div>
+        </button>
+    `);
 
     // other listeners
     if (page.type == 'artist') {
@@ -409,11 +382,6 @@ export async function show_your_scrobbles() {
             '.personal-stats-item--listeners'
         );
         if (other_container) {
-            let listen_divider = document.createElement('div');
-            listen_divider.classList.add('listen-divider');
-
-            listen_container.appendChild(listen_divider);
-
             let avatars = other_container.querySelectorAll(
                 '.personal-stats-listener-avatar img'
             );
@@ -456,7 +424,7 @@ export async function show_your_scrobbles() {
     let buttons = interact_container.querySelectorAll('button');
     buttons.forEach((button) => {
         if (button.classList[0] != 'header-new-playlink')
-            button.classList.add('btn', 'side-action');
+            button.classList.add('btn', 'side-action', 'icon-mask');
         else button.classList.add('dropdown-menu-clickable-item');
 
         if (button.classList[0] == 'header-new-more-button')
@@ -473,7 +441,7 @@ export async function show_your_scrobbles() {
     let links = interact_container.querySelectorAll('a');
     links.forEach((button) => {
         if (button.classList[0] != 'header-new-playlink')
-            button.classList.add('btn', 'side-action');
+            button.classList.add('btn', 'side-action', 'icon-mask');
         else button.classList.add('dropdown-menu-clickable-item');
     });
 
@@ -483,7 +451,7 @@ export async function show_your_scrobbles() {
     );
     if (obsession_form) {
         let obsession_btn = obsession_form.querySelector('button');
-        obsession_btn.classList = 'btn side-action';
+        obsession_btn.classList = 'btn side-action icon-mask';
         obsession_btn.setAttribute('data-type', 'obsession');
         obsession_btn.textContent = tl(trans.set_obsession);
 
@@ -531,7 +499,7 @@ export async function show_your_scrobbles() {
             };
 
         const scrobble_btn = html.node`
-            <button class="btn side-action" data-type="add" onclick=${() => submit_scrobble(props)}>
+            <button class="btn side-action icon-mask" data-type="add" onclick=${() => submit_scrobble(props)}>
                 ${tl(trans.scrobble_value, {v: tl(trans[`${page.type}_lower`])})}
             </button>
         `;
@@ -549,11 +517,12 @@ export async function show_your_scrobbles() {
         ff('credits') &&
         ff('oracle') &&
         settings.oracle_beta &&
-        ['album', 'track'].includes(page.type)
+        page.type == 'track'
     ) {
         interact_container.appendChild(html.node`
-            <button class="btn side-action" data-type="credits" onclick=${() => oracle_credits()}>
+            <button class="btn side-action icon-mask" data-type="credits" onclick=${() => oracle_credits()}>
                 ${tl(trans.view_credits)}
+                <span class="new-badge new">${tl(trans.new)}</span>
             </button>
         `);
     }
@@ -594,7 +563,7 @@ export async function show_your_scrobbles() {
         header.remove();
 
         let playlist_button = new_playlist.querySelector('button');
-        playlist_button.classList = 'btn side-action';
+        playlist_button.classList = 'btn side-action icon-mask';
         playlist_button.setAttribute('data-type', 'playlist');
         playlist_button.textContent = tl(trans.create_playlist);
 
@@ -619,6 +588,8 @@ export async function show_your_scrobbles() {
             '.catalogue-metadata-description:not(.visible-xs)'
         );
         values.forEach((item, index) => {
+            if (!groups[index]) return;
+
             groups[index].value = item;
         });
 
@@ -635,30 +606,6 @@ export async function show_your_scrobbles() {
                 )}
             `
         );
-
-        if (groups.length > 2) {
-            if (settings.simulate_scroll) {
-                metadata.addEventListener('wheel', (e) => {
-                    e.preventDefault();
-
-                    if (e.deltaY > 0) {
-                        metadata.scrollBy({
-                            top: 0,
-                            left: +200,
-                            behavior: 'smooth'
-                        });
-                    } else {
-                        metadata.scrollBy({
-                            top: 0,
-                            left: -200,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            } else {
-                metadata.classList.add('no-scroll-simulation');
-            }
-        }
     }
 
     if (page_is_blocked) {
@@ -700,7 +647,7 @@ export async function show_your_scrobbles() {
             );
 
             link.classList.remove('play-this-track-playlink');
-            link.classList.add('music-link');
+            link.classList.add('btn', 'music-link', 'colourful', 'icon');
 
             const replace = item.querySelector('.replace-playlink');
 
@@ -758,7 +705,7 @@ export async function show_your_scrobbles() {
                 ${
                     settings.music_links.includes('genius') ?
                         html.node`
-                    <a class="music-link play-this-track-playlink--genius" href="https://genius.com/search?q=${sanitise(page.sister)}+${sanitise(page.name)}" target="_blank">
+                    <a class="btn music-link play-this-track-playlink--genius colourful icon" href="https://genius.com/search?q=${sanitise(page.sister)}+${sanitise(page.name)}" target="_blank">
                         Genius
                     </a>
                 `
@@ -767,7 +714,7 @@ export async function show_your_scrobbles() {
                 ${
                     settings.music_links.includes('tidal') ?
                         html.node`
-                    <a class="music-link play-this-track-playlink--tidal" href="https://listen.tidal.com/search?q=${sanitise(page.sister, ' ')} ${sanitise(page.name, ' ')}" target="_blank">
+                    <a class="btn music-link play-this-track-playlink--tidal colourful icon" href="https://listen.tidal.com/search?q=${sanitise(page.sister, ' ')} ${sanitise(page.name, ' ')}" target="_blank">
                         Tidal
                     </a>
                 `
@@ -776,7 +723,7 @@ export async function show_your_scrobbles() {
                 ${
                     settings.music_links.includes('deezer') ?
                         html.node`
-                    <a class="music-link play-this-track-playlink--deezer" href="https://www.deezer.com/search/${sanitise(page.sister, ' ')} ${sanitise(page.name, ' ')}" target="_blank">
+                    <a class="btn music-link play-this-track-playlink--deezer colourful icon" href="https://www.deezer.com/search/${sanitise(page.sister, ' ')} ${sanitise(page.name, ' ')}" target="_blank">
                         Deezer
                     </a>
                 `
@@ -785,7 +732,7 @@ export async function show_your_scrobbles() {
                 ${
                     settings.music_links.includes('qobuz') ?
                         html.node`
-                    <a class="music-link play-this-track-playlink--qobuz" href="https://www.qobuz.com/gb-en/search/tracks/${sanitise(page.name, ' ')}?ssf[s]=main_catalog&ssf[f][an]=${sanitise(page.sister, ' ')}" target="_blank">
+                    <a class="btn music-link play-this-track-playlink--qobuz colourful icon" href="https://www.qobuz.com/gb-en/search/tracks/${sanitise(page.name, ' ')}?ssf[s]=main_catalog&ssf[f][an]=${sanitise(page.sister, ' ')}" target="_blank">
                         Qobuz
                     </a>
                 `
@@ -801,7 +748,7 @@ export async function show_your_scrobbles() {
                     ${settings.music_links.includes('spotify') ?
                         html.node`
                             <a
-                                class="music-link play-this-track-playlink--spotify"
+                                class="btn music-link play-this-track-playlink--spotify colourful icon"
                                 href="https://open.spotify.com/search/${sanitise(
                                     page.sister,
                                     ' '
@@ -815,7 +762,7 @@ export async function show_your_scrobbles() {
                     ${settings.music_links.includes('itunes') ?
                         html.node`
                             <a
-                                class="music-link play-this-track-playlink--itunes"
+                                class="btn music-link play-this-track-playlink--itunes colourful icon"
                                 href="https://music.apple.com/gb/search?term=${sanitise(
                                     page.sister,
                                     ' '
@@ -829,7 +776,7 @@ export async function show_your_scrobbles() {
                     ${settings.music_links.includes('youtube') ?
                         html.node`
                             <a
-                                class="music-link play-this-track-playlink--youtube-music"
+                                class="btn music-link play-this-track-playlink--youtube-music colourful icon"
                                 href="https://music.youtube.com/search?q=${sanitise(
                                     page.sister
                                 )}+${sanitise(page.name)}"
@@ -842,7 +789,7 @@ export async function show_your_scrobbles() {
                     ${settings.music_links.includes('tidal') ?
                         html.node`
                             <a
-                                class="music-link play-this-track-playlink--tidal"
+                                class="btn music-link play-this-track-playlink--tidal colourful icon"
                                 href="https://listen.tidal.com/search?q=${sanitise(
                                     page.sister,
                                     ' '
@@ -856,7 +803,7 @@ export async function show_your_scrobbles() {
                     ${settings.music_links.includes('deezer') ?
                         html.node`
                             <a
-                                class="music-link play-this-track-playlink--deezer"
+                                class="btn music-link play-this-track-playlink--deezer colourful icon"
                                 href="https://www.deezer.com/search/${sanitise(
                                     page.sister,
                                     ' '
@@ -870,7 +817,7 @@ export async function show_your_scrobbles() {
                     ${settings.music_links.includes('discogs') ?
                         html.node`
                             <a
-                                class="music-link play-this-track-playlink--discogs"
+                                class="btn music-link play-this-track-playlink--discogs colourful icon"
                                 href="https://www.discogs.com/search?q=${sanitise(
                                     page.sister
                                 )}+${sanitise(page.name)}&type=all"
@@ -883,7 +830,7 @@ export async function show_your_scrobbles() {
                     ${settings.music_links.includes('qobuz') ?
                         html.node`
                             <a
-                                class="music-link play-this-track-playlink--qobuz"
+                                class="btn music-link play-this-track-playlink--qobuz colourful icon"
                                 href="https://www.qobuz.com/gb-en/search/albums/${sanitise(page.name, ' ')}?ssf[s]=main_catalog&ssf[f][an]=${sanitise(page.sister, ' ')}"
                                 target="_blank"
                             >
@@ -894,7 +841,7 @@ export async function show_your_scrobbles() {
                     ${settings.music_links.includes('aoty') ?
                         html.node`
                             <a
-                                class="music-link play-this-track-playlink--aoty"
+                                class="btn music-link play-this-track-playlink--aoty colourful icon"
                                 href="https://www.albumoftheyear.org/search/?q=${sanitise(
                                     page.sister
                                 )}+${sanitise(page.name)}"
@@ -907,7 +854,7 @@ export async function show_your_scrobbles() {
                     ${settings.music_links.includes('rym') ?
                         html.node`
                             <a
-                                class="music-link play-this-track-playlink--rym"
+                                class="btn music-link play-this-track-playlink--rym colourful icon"
                                 href="https://rateyourmusic.com/search?searchterm=${sanitise(
                                     page.sister,
                                     ' '
@@ -921,7 +868,7 @@ export async function show_your_scrobbles() {
                     ${settings.music_links.includes('genius') ?
                         html.node`
                             <a
-                                class="music-link play-this-track-playlink--genius"
+                                class="btn music-link play-this-track-playlink--genius colourful icon"
                                 href="https://genius.com/search?q=${sanitise(
                                     page.sister
                                 )}+${sanitise(page.name)}"
@@ -940,7 +887,7 @@ export async function show_your_scrobbles() {
                     ${settings.music_links.includes('spotify') ?
                         html.node`
                             <a
-                                class="music-link play-this-track-playlink--spotify"
+                                class="btn music-link play-this-track-playlink--spotify colourful icon"
                                 href="https://open.spotify.com/search/${sanitise(
                                     page.name,
                                     ' '
@@ -954,7 +901,7 @@ export async function show_your_scrobbles() {
                     ${settings.music_links.includes('itunes') ?
                         html.node`
                             <a
-                                class="music-link play-this-track-playlink--itunes"
+                                class="btn music-link play-this-track-playlink--itunes colourful icon"
                                 href="https://music.apple.com/gb/search?term=${sanitise(
                                     page.name,
                                     ' '
@@ -968,7 +915,7 @@ export async function show_your_scrobbles() {
                     ${settings.music_links.includes('youtube') ?
                         html.node`
                             <a
-                                class="music-link play-this-track-playlink--youtube-music"
+                                class="btn music-link play-this-track-playlink--youtube-music colourful icon"
                                 href="https://music.youtube.com/search?q=${sanitise(
                                     page.name
                                 )}"
@@ -981,7 +928,7 @@ export async function show_your_scrobbles() {
                     ${settings.music_links.includes('tidal') ?
                         html.node`
                             <a
-                                class="music-link play-this-track-playlink--tidal"
+                                class="btn music-link play-this-track-playlink--tidal colourful icon"
                                 href="https://listen.tidal.com/search?q=${sanitise(
                                     page.name,
                                     ' '
@@ -995,7 +942,7 @@ export async function show_your_scrobbles() {
                     ${settings.music_links.includes('deezer') ?
                         html.node`
                             <a
-                                class="music-link play-this-track-playlink--deezer"
+                                class="btn music-link play-this-track-playlink--deezer colourful icon"
                                 href="https://www.deezer.com/search/${sanitise(
                                     page.name,
                                     ' '
@@ -1009,7 +956,7 @@ export async function show_your_scrobbles() {
                     ${settings.music_links.includes('discogs') ?
                         html.node`
                             <a
-                                class="music-link play-this-track-playlink--discogs"
+                                class="btn music-link play-this-track-playlink--discogs colourful icon"
                                 href="https://www.discogs.com/search?q=${sanitise(
                                     page.name
                                 )}&type=artist"
@@ -1022,7 +969,7 @@ export async function show_your_scrobbles() {
                     ${settings.music_links.includes('qobuz') ?
                         html.node`
                             <a
-                                class="music-link play-this-track-playlink--qobuz"
+                                class="btn music-link play-this-track-playlink--qobuz colourful icon"
                                 href="https://www.qobuz.com/gb-en/search/artists/${sanitise(
                                     page.name,
                                     ' '
@@ -1036,7 +983,7 @@ export async function show_your_scrobbles() {
                     ${settings.music_links.includes('aoty') ?
                         html.node`
                             <a
-                                class="music-link play-this-track-playlink--aoty"
+                                class="btn music-link play-this-track-playlink--aoty colourful icon"
                                 href="https://www.albumoftheyear.org/search/?q=${sanitise(
                                     page.name
                                 )}"
@@ -1049,7 +996,7 @@ export async function show_your_scrobbles() {
                     ${settings.music_links.includes('rym') ?
                         html.node`
                             <a
-                                class="music-link play-this-track-playlink--rym"
+                                class="btn music-link play-this-track-playlink--rym colourful icon"
                                 href="https://rateyourmusic.com/search?searchterm=${sanitise(
                                     page.name,
                                     ' '
@@ -1063,7 +1010,7 @@ export async function show_your_scrobbles() {
                     ${settings.music_links.includes('genius') ?
                         html.node`
                             <a
-                                class="music-link play-this-track-playlink--genius"
+                                class="btn music-link play-this-track-playlink--genius colourful icon"
                                 href="https://genius.com/search?q=${sanitise(
                                     page.name
                                 )}"
@@ -1085,15 +1032,25 @@ export async function show_your_scrobbles() {
                     '.resource-external-link'
                 );
                 externals_links.forEach((link) => {
-                    link.classList.add('music-link');
+                    link.classList.add('btn', 'music-link', 'colourful', 'icon');
 
                     let type = link.classList[1];
-                    if (type == 'resource-external-link--homepage')
+
+                    if (type == 'resource-external-link--homepage') {
                         link.textContent = tl(trans.website);
-                    else if (type == 'resource-external-link--twitter')
+                    } else if (type == 'resource-external-link--twitter') {
                         link.textContent = 'Twitter';
-                    else if (type == 'resource-external-link--facebook')
+
+                        if (!settings.music_links.includes('twitter')) return;
+                    } else if (type == 'resource-external-link--facebook') {
                         link.textContent = 'Facebook';
+
+                        if (!settings.music_links.includes('facebook')) return;
+                    } else if (type == 'resource-external-link--instagram') {
+                        if (!settings.music_links.includes('instagram')) return;
+                    } else if (type == 'resource-external-link--soundcloud') {
+                        if (!settings.music_links.includes('soundcloud')) return;
+                    }
 
                     link_container.appendChild(link);
                 });
@@ -1130,37 +1087,37 @@ export async function show_your_scrobbles() {
     }
 
     // no album info
-    const no_info = col_main.querySelector(
-        ':scope > .section-with-separator.buffer-4'
-    );
+    const no_info = col_main.querySelector(':scope > .section-with-separator:not(.buffer-standard, .masonry-left, .section-with-separator--xs-only)');
     if (no_info) {
+        console.info('no info', no_info.classList);
         no_info.classList = 'loading-data-container';
 
-        render(
-            no_info,
-            html`
-                <div class="loading-data-text info">
-                    ${tl(trans.missing_album_info)}
-                </div>
-            `
-        );
+        render(no_info, html`
+            <div class="loading-data-text info">
+                ${tl(page.type == 'album' ? trans.missing_album_info : trans.missing_artist_info)}
+            </div>
+        `);
+
+        const extra = no_info.nextElementSibling;
+        if (extra?.classList.contains('section-with-separator')) {
+            extra.remove();
+        }
     }
 
     // lotus
     if (!settings.corrections) return;
 
     page.structure.side.appendChild(html.node`
-        <section class="lotus cta">
-            <strong>${tl(trans.lotus_cta[page.corrected]).replace('{t}', tl(trans[`${page.type}_lower`]))}</strong>
-            ${
-                ff('refreshed_lotus') ?
-                    html.node`
+        <section class="lotus cta colourful">
+            <label class="cta-label">
+                ${icon({ name: icons.lotus })}
+                <strong>${tl(trans.lotus_cta[page.corrected], { t: tl(trans[`${page.type}_lower`]) })}</strong>
+            </label>
+            ${ff('refreshed_lotus') ? html.node`
                 <button class="see-more" onclick=${() => create_correction(page.type)}>${tl(trans.suggest_correction)}</button>
-            `
-                :   html.node`
+            ` : html.node`
                 <a class="see-more" href="https://github.com/katelyynn/lotus/issues/new/choose" target="_blank">${tl(trans.suggest_correction)}</a>
-            `
-            }
+            `}
         </section>
     `);
 }
@@ -1190,24 +1147,40 @@ function create_listen_item(
         `${root}user/${name}/library/music/${redirect()}${link}`
     );
     listen_item.setAttribute('data-listens', listens);
-    listen_item.setAttribute('id', `listen-item--${name}`);
 
     let p;
 
     if (listens > -1) {
+        const cache = JSON.parse(localStorage.getItem(keys.profile_cache) || '{}');
+        const entry = cache[name];
+        const valid = is_sponsor(name);
+
         // your listens
-        render(
-            listen_item,
-            html`
-                <img class="view-item-avatar" src=${avi} alt=${name} />
-                <div class="info">
-                    <h3>${name}</h3>
-                    <p class="colourful" ref=${(el) => (p = el)}>
-                        ${tl(trans.count_plays, { c: listens.toLocaleString(lang) })}
-                    </p>
-                </div>
-            `
-        );
+        let listen_name;
+
+        render(listen_item, html`
+            <img class="view-item-avatar" src=${avi} alt=${name} />
+            <div class="listen-item-info">
+                <h3 class="listen-item-name" ref=${el => listen_name = el} />
+                <p class="colourful listen-item-text icon-mask" ref=${(el) => (p = el)}>
+                    ${tl(trans.count_plays, { c: listens.toLocaleString(lang) })}
+                </p>
+            </div>
+        `);
+
+        if (entry.username && valid) {
+            listen_name.classList.add('username-combo');
+            render(listen_name, html`
+                <span class="username-custom">${entry.username}</span>
+                <span class="username-original">
+                    <span class="at">@</span>${name}
+                </span>
+            `);
+        } else {
+            render(listen_name, html`
+                <span class="at">@</span>${name}
+            `);
+        }
 
         let menu = tippy(listen_item, {
             theme: 'context-menu',
@@ -1221,6 +1194,7 @@ function create_listen_item(
             interactive: true,
             interactiveBorder: 10,
             offset: [0, 0],
+            appendTo: document.body,
 
             onShow(instance) {
                 instance.popper.addEventListener('click', (event) => {
@@ -1231,22 +1205,39 @@ function create_listen_item(
 
         register_menu(listen_item, menu);
     } else if (listens > -2) {
+        const cache = JSON.parse(localStorage.getItem(keys.profile_cache) || '{}');
+        const entry = cache[name];
+        const valid = is_sponsor(name);
+
         // loading listens
-        render(
-            listen_item,
-            html`
-                <img class="view-item-avatar" src=${avi} alt=${name} />
-                <div class="listen-badge star colourful">
-                    <div class="bleh-icon" />
-                </div>
-                <div class="info">
-                    <h3>${name}</h3>
-                    <p class="colourful" ref=${(el) => (p = el)}>
-                        ${tl(trans.count_plays, { c: ' ' })}
-                    </p>
-                </div>
-            `
-        );
+        let listen_name;
+
+        render(listen_item, html`
+            <img class="view-item-avatar" src=${avi} alt=${name} />
+            <div class="listen-badge star colourful">
+                <div class="bleh-icon" />
+            </div>
+            <div class="listen-item-info">
+                <h3 class="listen-item-name" ref=${el => listen_name = el} />
+                <p class="colourful listen-item-text icon-mask" ref=${(el) => (p = el)}>
+                    ${tl(trans.count_plays, { c: ' ' })}
+                </p>
+            </div>
+        `);
+
+        if (entry.username && valid) {
+            listen_name.classList.add('username-combo');
+            render(listen_name, html`
+                <span class="username-custom">${entry.username}</span>
+                <span class="username-original">
+                    <span class="at">@</span>${name}
+                </span>
+            `);
+        } else {
+            render(listen_name, html`
+                <span class="at">@</span>${name}
+            `);
+        }
 
         let menu = tippy(listen_item, {
             theme: 'context-menu',
@@ -1264,6 +1255,7 @@ function create_listen_item(
             interactive: true,
             interactiveBorder: 10,
             offset: [0, 0],
+            appendTo: document.body,
 
             onShow(instance) {
                 instance.popper.addEventListener('click', (event) => {
@@ -1296,9 +1288,9 @@ function create_listen_item(
                 ${avi[2] ?
                     html.node`<img class="view-item-avatar" src=${avi[2].getAttribute('src')} alt="">`
                 :   ''}
-                <div class="info">
-                    <h3>${tl(trans.following)}</h3>
-                    <p class="colourful" ref=${(el) => (p = el)}>
+                <div class="listen-item-info">
+                    <h3 class="listen-item-name">${tl(trans.following)}</h3>
+                    <p class="colourful listen-item-text icon-mask" ref=${(el) => (p = el)}>
                         ${tl(trans.others_count).replace('{c}', count)}
                     </p>
                 </div>
@@ -1318,9 +1310,9 @@ function create_listen_item(
             'data-bleh--scrobble-milestone',
             parsed_scrobble_as_rank.milestone
         );
-        p.style.setProperty('--hue-user', parsed_scrobble_as_rank.hue);
-        p.style.setProperty('--sat-user', parsed_scrobble_as_rank.sat);
-        p.style.setProperty('--lit-user', parsed_scrobble_as_rank.lit);
+        p.style.setProperty('--hue-over', parsed_scrobble_as_rank.hue);
+        p.style.setProperty('--sat-over', parsed_scrobble_as_rank.sat);
+        p.style.setProperty('--lit-over', parsed_scrobble_as_rank.lit);
     }
 
     if (katsune) listen_item.classList.add('icon');
@@ -1363,73 +1355,14 @@ function show_numbers_on_side(header_type) {
 
     page.structure.side.classList.remove('hidden-xs');
 
+    music_summary(listeners, scrobbles, metascore);
+
     // get panel
     let panel = page.structure.side.querySelector(
         'section.section-with-separator:has(.listener-trend)'
     );
 
-    if (!panel) {
-        panel = document.createElement('section');
-        panel.classList.add('section-with-separator');
-
-        if (!page.mobile)
-            page.structure.side.insertBefore(
-                panel,
-                page.structure.side.firstElementChild
-            );
-        else
-            page.structure.main.insertBefore(
-                panel,
-                page.structure.main.firstElementChild
-            );
-    }
-
-    panel.classList.add('listen-panel');
-    panel.setAttribute('data-auth-name', auth.name);
-
-    let row = html.node`
-        <div class="listener-row">
-            <div class="listener-side">
-                <h3>${listeners.text}</h3>
-                <p>${listeners.abbr}</p>
-            </div>
-            <div class="scrobble-side">
-                <h3>${scrobbles.text}</h3>
-                <p>${scrobbles.abbr}</p>
-            </div>
-            ${
-                metascore.text ?
-                    html.node`
-            <div class="metascore-side">
-                <h3>${metascore.text}</h3>
-                <p><a href="${metascore.link}" target="_blank">${metascore.abbr}</a></p>
-            </div>
-            `
-                :   ''
-            }
-        </div>
-    `;
-
-    panel.insertBefore(row, panel.firstElementChild);
-
-    if (page.mobile)
-        page.structure.main.insertBefore(
-            panel,
-            page.structure.main.firstElementChild
-        );
-
-    tippy(row.querySelector('.listener-side p'), {
-        content: tl(trans.count_listeners).replace(
-            '{c}',
-            listeners.value.toLocaleString(lang)
-        )
-    });
-    tippy(row.querySelector('.scrobble-side p'), {
-        content: tl(trans.count_scrobbles).replace(
-            '{c}',
-            scrobbles.value.toLocaleString(lang)
-        )
-    });
+    if (panel) panel.remove();
 
     // is there album artwork?
     if (page.type == 'album') {
@@ -1458,7 +1391,7 @@ function show_numbers_on_side(header_type) {
         // make last-child
         page.structure.row.appendChild(upper);
 
-        let new_upper = document.createElement('section');
+        let new_upper = document.createElement('div');
         new_upper.classList.add('top-overview-panel');
         new_upper.setAttribute('data-page-type', page.type);
         new_upper.innerHTML = upper.innerHTML;
@@ -1507,7 +1440,7 @@ function show_numbers_on_side(header_type) {
         `);
 
         playlink.classList = 'see-more';
-        replace.classList = 'see-more add';
+        replace.classList = 'see-more add left-icon';
 
         video.after(html.node`
             <div class="video-actions sub-text">
@@ -1541,93 +1474,7 @@ function video_unavailable(video_col = null) {
 }
 
 export function bleh_music_page_charts() {
-    if (!ff('music_page_charts')) return;
 
-    log('beginning replacement', 'music charts');
-
-    let panel = page.structure.container.querySelector('.listen-panel'); // page.structure.side fails without pro
-    let trend = panel.querySelector('.listener-trend');
-
-    if (!trend) return;
-
-    // is this a chart reflow due to style loading?
-    let previous_chart = panel.querySelector('.scrobble-canvas-container');
-    if (previous_chart) panel.removeChild(previous_chart);
-
-    let table = trend.querySelector('tbody');
-    let days = table.querySelectorAll('tr');
-
-    let labels = [];
-    let values = [];
-
-    let has_seen_more_than_0 = false;
-    days.forEach((day, index) => {
-        if (!day) return;
-
-        //let label = day.querySelector('time').textContent.trim();
-        let label = DateTime.fromISO(
-            day.querySelector('time').getAttribute('datetime')
-        );
-        let value = day.querySelector('.js-value');
-
-        console.log('day', index, label, day, day.innerHTML);
-
-        if (!value.getAttribute('data-value')) value = 0;
-        else value = value.getAttribute('data-value');
-
-        if (value == '0' && index < 120 && !has_seen_more_than_0) return;
-        has_seen_more_than_0 = true;
-
-        labels.push(label);
-        values.push(value);
-    });
-
-    prep_chart_colours();
-
-    let scrobble_canvas_container = document.createElement('div');
-    scrobble_canvas_container.classList.add('scrobble-canvas-container');
-
-    let scrobble_canvas = document.createElement('canvas');
-    scrobble_canvas.classList.add('scrobble-canvas');
-
-    let gradient = scrobble_canvas
-        .getContext('2d')
-        .createLinearGradient(0, 0, 0, 160);
-    try {
-        gradient.addColorStop(0, page.state.chart_colours.link_bg_col);
-        gradient.addColorStop(1, page.state.chart_colours.link_bg_col_2);
-    } catch (e) {
-        gradient = page.state.chart_colours.link_bg_col;
-    }
-
-    Chart.defaults.color = page.state.chart_colours.text_col;
-    Chart.defaults.font.family = page.state.chart_colours.font;
-    let scrobble_chart = new Chart(scrobble_canvas.getContext('2d'), {
-        type: 'line',
-        data: {
-            labels: labels,
-            datasets: [
-                {
-                    data: values,
-                    borderWidth: 2,
-                    backgroundColor: gradient,
-                    borderColor: page.state.chart_colours.link_col,
-                    fill: true,
-                    pointRadius: 0,
-                    pointHitRadius: 20,
-                    tension: 0.1
-                }
-            ]
-        },
-        options: page.state.chart_line_options
-    });
-
-    scrobble_canvas_container.appendChild(scrobble_canvas);
-    panel.appendChild(scrobble_canvas_container);
-
-    trend.style.setProperty('display', 'none');
-
-    log('finished', 'music charts');
 }
 
 export function bleh_top_listeners() {
@@ -1839,12 +1686,14 @@ export function prepare_music() {
         crimson: 'Crimson Text',
         rokkitt: 'Rokkitt',
         code: 'Google Sans Code',
-        zpix: 'Zpix'
+        zpix: 'Zpix',
+        mask: 'Expose',
+        rakkas: 'Rakkas'
     };
 }
 
 export function similar_items() {
-    const artists = page.type == 'artist' ? page.structure.main.querySelector('.catalogue-overview-similar-artists-full-width')?.parentElement : page.structure.main.querySelector('.catalogue-overview-similar-artists')?.parentElement;
+    const artists = page.structure.main.querySelector('.catalogue-overview-similar-artists')?.parentElement;
 
     if (artists) {
         artists.classList = 'artists-like';

@@ -22,6 +22,7 @@ import { dialog, dialog_rm } from '@/components/dialog/dialog';
 import { save_setting } from '@/components/settings/settings';
 import { manage_user } from '@/components/profile/manage_user';
 import { queue_popup } from '@/components/dialog/popup';
+import { avatar } from '../shared/avatar';
 
 export function redesign_profile_header(is_own_profile, is_following) {
     if (!auth.name) return;
@@ -35,7 +36,7 @@ export function redesign_profile_header(is_own_profile, is_following) {
     let taste_artists = [];
     let taste_formal = 'NONE';
 
-    if (!is_own_profile && page.name != sponsor_list.sponsor_account) {
+    if (!is_own_profile && page.name != sponsor_list.related.account_name) {
         let taste_meter = base_header.querySelector('.tasteometer');
 
         if (taste_meter) {
@@ -64,7 +65,7 @@ export function redesign_profile_header(is_own_profile, is_following) {
 
     if (
         !is_own_profile &&
-        page.name != sponsor_list.sponsor_account &&
+        page.name != sponsor_list.related.account_name &&
         auth.name
     ) {
         // follow
@@ -72,7 +73,7 @@ export function redesign_profile_header(is_own_profile, is_following) {
 
         if (follow_wrap) {
             let follow_btn = follow_wrap.querySelector('button');
-            follow_btn.classList.add('btn', 'side-action');
+            follow_btn.classList.add('btn', 'side-action', 'icon-mask');
             follow_btn.classList.remove('toggle-button', 'header-follower-btn');
             follow_btn.setAttribute('data-type', 'follow');
             profile_header.appendChild(follow_wrap);
@@ -89,7 +90,7 @@ export function redesign_profile_header(is_own_profile, is_following) {
         } else {
             // ignore list
             profile_header.appendChild(html.node`
-                <button class="btn side-action" data-type="follow" disabled="true" data-ignored="true">
+                <button class="btn side-action icon-mask" data-type="follow" disabled="true" data-ignored="true">
                     ${tl(trans.blocked)}
                 </button>
             `);
@@ -100,7 +101,7 @@ export function redesign_profile_header(is_own_profile, is_following) {
         // message
         let msg_button = document.body.querySelector('.header-message-user');
         if (msg_button) {
-            if (page.name != sponsor_list.sponsor_account) {
+            if (page.name != sponsor_list.related.account_name) {
                 create_profile_top_item(profile_header, {
                     name: page.name,
                     type: 'message',
@@ -108,7 +109,7 @@ export function redesign_profile_header(is_own_profile, is_following) {
                     text: tl(trans.send_message)
                 });
 
-                if (page.name == sponsor_list.special[0]) {
+                if (sponsor_list.related.special.length > 0 && page.name == sponsor_list.related.special[0]) {
                     create_profile_top_item(profile_header, {
                         name: page.name,
                         type: 'sponsor',
@@ -132,7 +133,7 @@ export function redesign_profile_header(is_own_profile, is_following) {
             }
         }
 
-        if (page.name != sponsor_list.sponsor_account) {
+        if (page.name != sponsor_list.related.account_name) {
             if (ff('compare')) {
                 create_profile_top_item(profile_header, {
                     name: page.name,
@@ -203,15 +204,15 @@ export function redesign_profile_header(is_own_profile, is_following) {
             page.structure.main.firstElementChild
         );
 
-    let listen_container = page.structure.row.querySelector('.listen-panel');
+    const summary = page.structure.main.querySelector('.profile-summary');
 
     if (
         !is_own_profile &&
-        page.name != sponsor_list.sponsor_account &&
+        page.name != sponsor_list.related.account_name &&
         auth.name
     ) {
         if (taste == '') {
-            listen_container.appendChild(html.node`
+            summary.appendChild(html.node`
                 <div class="loading-data-container">
                     <div class="loading-data-text error">${tl(trans.missing_component)}</div>
                 </div>
@@ -228,11 +229,11 @@ export function redesign_profile_header(is_own_profile, is_following) {
                 <div class="span">
                     <img class="view-item-avatar" src=${auth.avatar} alt=${auth.name}>
                     <img class="view-item-avatar" src=${page.avatar} alt=${page.name}>
-                    <div class="info">
-                        <h3>
+                    <div class="listen-item-info">
+                        <h3 class="listen-item-name">
                             ${{html: tl(trans.you_share_count_with, { c: `<span class="colourful" data-taste=${taste}>${taste_percentage}</span>` })}}
                         </h3>
-                        <p>
+                        <p class="listen-item-text">
                             ${taste_artists.length == 1 ? taste_artists[0] : ''}
                             ${taste_artists.length == 2 ? tl(trans.you_share_count_with.two, { artist1: taste_artists[0], artist2: taste_artists[1] }) : ''}
                             ${taste_artists.length == 3 ? tl(trans.you_share_count_with.three, { artist1: taste_artists[0], artist2: taste_artists[1], artist3: taste_artists[2] }) : ''}
@@ -309,8 +310,7 @@ export function redesign_profile_header(is_own_profile, is_following) {
             `;
         }
 
-        const row = listen_container.querySelector('.listener-row');
-        row.after(taste_wrap);
+        summary.appendChild(taste_wrap);
 
         const today = new Date();
         const february = today.getMonth() == 1 && today.getDate() == 14;
@@ -321,7 +321,7 @@ export function redesign_profile_header(is_own_profile, is_following) {
             render(taste_wrap, html`
                 <div class="valentine-pics">
                     <div class="taste-avatar avatar">
-                        <img src=${auth.avatar.replace('/avatar42s/', '/avatar300s/')} alt=${auth.name}>
+                        <img src=${avatar(auth.avatar, 'avatar300s')} alt=${auth.name}>
                     </div>
                     <div class="taste-icon colourful valentine" data-taste=${taste}>
                         <div class="bleh-icon" />
@@ -375,7 +375,8 @@ export function redesign_profile_header(is_own_profile, is_following) {
                     trigger: 'click',
                     placement: 'bottom',
                     interactive: true,
-                    interactiveBorder: 10
+                    interactiveBorder: 10,
+                    appendTo: document.body
                 });
             }
         } else {
@@ -386,7 +387,8 @@ export function redesign_profile_header(is_own_profile, is_following) {
                     trigger: 'click',
                     placement: 'bottom',
                     interactive: true,
-                    interactiveBorder: 10
+                    interactiveBorder: 10,
+                    appendTo: document.body
                 });
             }
         }
@@ -415,7 +417,7 @@ export function create_profile_top_item(
     if (action == 'button') {
         side_action = html.node`
             <button
-                class="btn side-action"
+                class="btn side-action icon-mask"
                 data-type=${type}
                 onclick=${link}
             >
@@ -428,7 +430,7 @@ export function create_profile_top_item(
     } else {
         side_action = html.node`
             <a
-                class="btn side-action"
+                class="btn side-action icon-mask"
                 data-type=${type}
                 href=${link}
             >
@@ -454,7 +456,7 @@ function friends_button(parent) {
     }
 
     const elem = html.node`
-        <button class="btn side-action" data-type="close_friends" type="button" onclick=${() => {
+        <button class="btn side-action colourful icon-mask" data-type="close_friends" type="button" onclick=${() => {
             if (friend_state) {
                 dialog({
                     id: 'remove_friend',
@@ -462,7 +464,7 @@ function friends_button(parent) {
                     body: html.node`
                         <p>${{ html: tl(trans.remove_friend.body, { u: `<strong>${page.name}</strong>` }) }}</p>
                         <div class="modal-footer">
-                            <button class="see-more cancel" onclick=${() => dialog_rm({ id: 'remove_friend' })}>
+                            <button class="see-more cancel left-icon" onclick=${() => dialog_rm({ id: 'remove_friend' })}>
                                 ${tl(trans.cancel)}
                             </button>
                             <div class="fill"></div>
@@ -536,7 +538,7 @@ function friends_button(parent) {
             });
 
             instance.setContent(html.node`
-                <button class="dropdown-menu-clickable-item" data-type="starred_friend" data-starred="true" onclick=${() => {
+                <button class="dropdown-menu-clickable-item colourful" data-type="starred_friend" data-starred="true" onclick=${() => {
                     if (star_state) {
                         star_state = false;
                         save_setting('starred_friend', '');

@@ -20,15 +20,14 @@ export async function fetch_status(username) {
     } else {
         return html.node`
             <div class="status-cafe">
-                <div class="status-cafe-top">
-                    <span class="status-cafe-author">${tl(trans.current_status)}</span>
-                    <span class="status-cafe-time">...</span>
-                </div>
                 <div class="status-cafe-content is-loading">
                     <span class="status-cafe-emoji">
                         <span class="bleh-icon" />
                     </span>
                     <span class="status-cafe-text">${tl(trans.status_cafe_too_many_requests)}</span>
+                </div>
+                <div class="status-cafe-top">
+                    <span class="status-cafe-time">...</span>
                 </div>
             </div>
         `;
@@ -74,13 +73,12 @@ async function fetch_status_api(username) {
 
                     external_url_prompt(status_link);
                 }}>
-                    <div class="status-cafe-top">
-                        <span class="status-cafe-author">${tl(trans.current_status)}</span>
-                        <span class="status-cafe-time">${data.timeAgo}</span>
-                    </div>
                     <div class="status-cafe-content">
                         <span class="status-cafe-emoji">${data.face}</span>
                         <span class="status-cafe-text">${data.content}</span>
+                    </div>
+                    <div class="status-cafe-top">
+                        <span class="status-cafe-time">${data.timeAgo}</span>
                     </div>
                 </div>
             `;
@@ -96,15 +94,14 @@ async function fetch_status_api(username) {
 
             return html.node`
                 <div class="status-cafe">
-                    <div class="status-cafe-top">
-                        <span class="status-cafe-author">${tl(trans.current_status)}</span>
-                        <span class="status-cafe-time">...</span>
-                    </div>
                     <div class="status-cafe-content is-loading">
                         <span class="status-cafe-emoji">
                             <span class="bleh-icon" />
                         </span>
                         <span class="status-cafe-text">${error}</span>
+                    </div>
+                    <div class="status-cafe-top">
+                        <span class="status-cafe-time">...</span>
                     </div>
                 </div>
             `;

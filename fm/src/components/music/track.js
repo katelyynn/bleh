@@ -5,13 +5,14 @@
 //
 
 import { html, render } from 'lighterhtml';
-import { settings } from '@/build/config.js';
+import { settings } from '@/build/config';
 import { log } from '@/build/log.js';
-import { auth, page, root } from '@/build/page.js';
+import { auth, page, root } from '@/build/page';
 import {
     clamp_lit,
     clamp_sat,
     copy,
+    lazy,
     return_artist_from_track,
     rgb_to_hsl,
     romanise,
@@ -86,6 +87,10 @@ export function patch_titles(search = page.structure.main) {
         }
     };
 
+    const track_layout = settings.track_layout;
+    const album_name_location = settings.track_album_name_location;
+    const season = page.state.seasons.current?.id || 'none';
+
     tracklists.forEach((tracklist) => {
         if (!tracklist) return;
 
@@ -101,20 +106,15 @@ export function patch_titles(search = page.structure.main) {
 
         log('new!', 'tracks', 'info', { tracklist });
 
-        const wide = tracklist.classList.contains(
-            'chartlist--wide-artist-column'
-        );
+        const wide = tracklist.classList.contains('chartlist--wide-artist-column');
 
-        const tracks = tracklist.querySelectorAll(
-            ':is(.chartlist-row:not(.chartlist__placeholder-row), .chartlist-row--interlist-ad)'
-        );
+        const tracks = tracklist.querySelectorAll(':scope > tbody > :is(.chartlist-row:not(.chartlist__placeholder-row), .chartlist-row--interlist-ad)');
 
         tracks.forEach((track, index) => {
             smart_track(track, index);
         });
 
         function smart_track(track, index) {
-            console.log('track', track);
             if (track.getAttribute('data-track-type')) return;
 
             // ads slowly move up the tree until eventually causing a crash
@@ -124,9 +124,15 @@ export function patch_titles(search = page.structure.main) {
             }
 
             track.style.setProperty('--delay', index * 0.04 + 's');
+            track.setAttribute('data-album-name-location', album_name_location);
             track.appendChild(html.node`
                 <div class="kate-placeholder" />
             `);
+
+            const elem = track;
+            track = track.cloneNode(true);
+
+            elem.replaceWith(track);
 
             let track_title = track.querySelector('.chartlist-name a:not(.offset-section-anchor)');
             if (!track_title) return;
@@ -148,6 +154,8 @@ export function patch_titles(search = page.structure.main) {
                 `;
                 track.appendChild(track_info);
             }
+            track_info.setAttribute('data-track-layout', track_layout);
+            track_info.setAttribute('data-album-name-location', album_name_location);
             track.setAttribute(
                 'data-has-bar',
                 tracklist.classList.contains('chartlist--with-bar')
@@ -267,6 +275,11 @@ export function patch_titles(search = page.structure.main) {
 
             const is_active = track.classList.contains('chartlist-row--now-scrobbling');
             const has_bar = track.querySelector(':scope > .chartlist-bar');
+
+            if (has_bar) {
+                const count_bar = has_bar.querySelector(':scope > .chartlist-count-bar');
+                count_bar.setAttribute('data-season', season);
+            }
 
             // menu
             let track_legacy_menu = track.querySelector('.chartlist-more-menu');
@@ -401,7 +414,7 @@ export function patch_titles(search = page.structure.main) {
                 if (track.getAttribute('data-disambig') == 'explicit') {
                     song_artist_element.insertBefore(
                         html.node`
-                        <span class="track-explicit">${tl(trans.explicit)}</span>
+                        <span class="track-explicit icon">${tl(trans.explicit)}</span>
                     `,
                         song_artist_element.firstChild
                     );
@@ -410,24 +423,24 @@ export function patch_titles(search = page.structure.main) {
                 if (track_legacy_menu) {
                     track.preview = html.node`
                         <div class="track-preview">
-                            <div class="image">
+                            <div class="track-preview-image">
                                 <div class="inner-image">
                                     ${image ? html.node`<img src=${image.src} alt=${song_title}>` : html.node`<img class="missing-track" alt="">`}
                                 </div>
                             </div>
-                            <div class="info">
-                                <h5 class="title">${song_title}</h5>
-                                <p class="artist">${song_artist_element.firstElementChild.textContent}</p>
-                                <div class="tags">
+                            <div class="track-preview-info">
+                                <h5 class="track-preview-text track-preview-title">${song_title}</h5>
+                                <p class="track-preview-text track-preview-artist">${song_artist_element.querySelector('a').textContent}</p>
+                                <div class="track-preview-tags">
                                     ${song_tags.map(
                                         (tag) => html.node`
-                                        <div class="feat" data-bleh--tag-type="${tag.type}" data-bleh--tag-group="${tag.group}">${tag.text}</div>
+                                        <div class="feat" data-tag-type="${tag.type}" data-tag-group="${tag.group}">${tag.text}</div>
                                     `
                                     )}
                                 </div>
                                 ${
                                     is_album ? '' : (
-                                        html.node`<p class="album">${
+                                        html.node`<p class="track-preview-text track-preview-album">${
                                             image && album_link ?
                                                 correct_item_by_artist(
                                                     image.getAttribute('alt'),
@@ -438,7 +451,7 @@ export function patch_titles(search = page.structure.main) {
                                         }</p>`
                                     )
                                 }
-                                ${track_timestamp && track_timestamp_contents ? html.node`<p class="timestamp">${track_timestamp_contents}</p>` : ''}
+                                ${track_timestamp && track_timestamp_contents ? html.node`<p class="track-preview-text track-preview-timestamp">${track_timestamp_contents}</p>` : ''}
                                 ${
                                     image?.getAttribute('data-hoshino') ?
                                         html.node`
@@ -501,10 +514,10 @@ export function patch_titles(search = page.structure.main) {
 
                 const can_copy_scrobble = !is_album && !has_bar && !is_active && ['user', 'overview'].includes(page.type);
 
-                const timestamp = parseInt(track.getAttribute('data-timestamp')) || track_timestamp_contents?.replace(/^[A-Za-z]+\s+/, '').replace(',', '').replace(/\s?(am|pm)$/i, '');
+                const timestamp = parseInt(track.getAttribute('data-timestamp')) || Math.floor(new Date(track_timestamp_contents?.replace(/^[A-Za-z]+\s+/, '').replace(',', '').trim()).getTime() / 1000);
 
                 let more_button = html.node`
-                    <button class="track-more-button icon chibi" data-type="more" onclick=${() => {
+                    <button class="btn track-more-button icon chibi" data-type="more" onclick=${() => {
                         log('requested track in-built', 'menu', 'info', {
                             menu
                         });
@@ -535,9 +548,7 @@ export function patch_titles(search = page.structure.main) {
                 `);
 
                 setTimeout(() => {
-                    let edit_button = track_legacy_menu.querySelector(
-                        '[data-analytics-action="EditScrobbleOpen"]'
-                    );
+                    let edit_button = track_legacy_menu.querySelector('[data-analytics-action="EditScrobbleOpen"]:not([href$="login?next=/pro"])');
                     let bulk_edit_button = track_legacy_menu.querySelector(
                         '[data-analytics-action="BulkEditScrobblesOpen"]'
                     );
@@ -545,11 +556,12 @@ export function patch_titles(search = page.structure.main) {
                         track_legacy_menu.querySelector('.more-item--delete');
 
                     if (edit_button) {
+                        log('has edit button', 'track', 'info', { edit_button });
                         let form = edit_button.parentElement;
 
                         page.token = form.querySelector(
                             '[name="csrfmiddlewaretoken"]'
-                        ).value;
+                        )?.value;
                         track.setAttribute(
                             'data-action',
                             form.getAttribute('action')
@@ -567,46 +579,46 @@ export function patch_titles(search = page.structure.main) {
                                 'data-artist-name',
                                 correct_artist(
                                     form.querySelector('[name="artist_name"]')
-                                        .value
+                                        ?.value
                                 )
                             );
                             track.setAttribute(
                                 'data-track-name',
                                 correct_item_by_artist(
                                     form.querySelector('[name="track_name"]')
-                                        .value,
+                                        ?.value,
                                     form.querySelector('[name="artist_name"]')
-                                        .value
+                                        ?.value
                                 )
                             );
                             if (album_name)
                                 track.setAttribute(
                                     'data-album-name',
                                     correct_item_by_artist(
-                                        album_name.value,
+                                        album_name?.value,
                                         form.querySelector(
                                             '[name="artist_name"]'
-                                        ).value
+                                        )?.value
                                     )
                                 );
                             if (album_artist_name)
                                 track.setAttribute(
                                     'data-album-artist-name',
-                                    correct_artist(album_artist_name.value)
+                                    correct_artist(album_artist_name?.value)
                                 );
                             track.setAttribute(
                                 'data-timestamp',
-                                form.querySelector('[name="timestamp"]').value
+                                form.querySelector('[name="timestamp"]')?.value
                             );
                         } else {
                             track.setAttribute(
                                 'data-album-name',
                                 correct_item_by_artist(
                                     form.querySelector('[name="album_name"]')
-                                        .value,
+                                        ?.value,
                                     form.querySelector(
                                         '[name="album_artist_name"]'
-                                    ).value
+                                    )?.value
                                 )
                             );
                             track.setAttribute(
@@ -614,7 +626,7 @@ export function patch_titles(search = page.structure.main) {
                                 correct_artist(
                                     form.querySelector(
                                         '[name="album_artist_name"]'
-                                    ).value
+                                    )?.value
                                 )
                             );
                             track.setAttribute(
@@ -622,10 +634,10 @@ export function patch_titles(search = page.structure.main) {
                                 correct_item_by_artist(
                                     form.querySelector(
                                         '[name="album_name_original"]'
-                                    ).value,
+                                    )?.value,
                                     form.querySelector(
                                         '[name="album_artist_name_original"]'
-                                    ).value
+                                    )?.value
                                 )
                             );
                             track.setAttribute(
@@ -633,40 +645,41 @@ export function patch_titles(search = page.structure.main) {
                                 correct_artist(
                                     form.querySelector(
                                         '[name="album_artist_name_original"]'
-                                    ).value
+                                    )?.value
                                 )
                             );
                             track.setAttribute(
                                 'data-album-image',
-                                form.querySelector('[name="album_image"]').value
+                                form.querySelector('[name="album_image"]')?.value
                             );
                             track.setAttribute(
                                 'data-count',
-                                form.querySelector('[name="count"]').value
+                                form.querySelector('[name="count"]')?.value
                             );
                         }
                     } else if (delete_button) {
+                        log('has delete button', 'track', 'info', { delete_button });
                         let form = delete_button.parentElement;
 
                         page.token = form.querySelector(
                             '[name="csrfmiddlewaretoken"]'
-                        ).value;
+                        )?.value;
                         track.setAttribute(
                             'data-artist-name',
                             correct_artist(
-                                form.querySelector('[name="artist_name"]').value
+                                form.querySelector('[name="artist_name"]')?.value
                             )
                         );
                         track.setAttribute(
                             'data-track-name',
                             correct_item_by_artist(
-                                form.querySelector('[name="track_name"]').value,
-                                form.querySelector('[name="artist_name"]').value
+                                form.querySelector('[name="track_name"]')?.value,
+                                form.querySelector('[name="artist_name"]')?.value
                             )
                         );
                         track.setAttribute(
                             'data-timestamp',
-                            form.querySelector('[name="timestamp"]').value
+                            form.querySelector('[name="timestamp"]')?.value
                         );
                     }
 
@@ -955,7 +968,7 @@ export function patch_titles(search = page.structure.main) {
                                 if (!is_own_profile || !can_delete) return;
 
                                 let button = html.node`
-                                    <button class="dropdown-menu-clickable-item more-item--delete" data-type="delete">
+                                    <button class="dropdown-menu-clickable-item more-item--delete colourful" data-type="delete">
                                         ${tl(trans.delete)}
                                     </button>
                                 `;
@@ -1071,9 +1084,14 @@ export function patch_titles(search = page.structure.main) {
                 );
             }
 
-            const love = track.querySelector('.chartlist-love-button');
-            if (love) {
-                love.classList.add('btn');
+            const loved = track.querySelector('.chartlist-loved');
+            if (loved) {
+                loved.classList.add('colourful');
+                loved.setAttribute('data-season', season);
+
+                const love = loved.querySelector('.chartlist-love-button');
+
+                love.classList.add('btn', 'icon-mask');
                 tippy(love, {
                     content: tl(trans.love_track)
                 });
@@ -1110,7 +1128,7 @@ export function patch_titles(search = page.structure.main) {
 
                         let hue = hsl.h;
                         let sat = clamp_sat((hsl.s / 100) * 3);
-                        let lit = clamp_lit(sat, hsl.l / 100 + 0.35);
+                        let lit = clamp_lit(sat, hsl.l / 100 + 0.35, true);
 
                         const to_colour = track.querySelectorAll(
                             '.chartlist-count-bar, .chartlist-loved'

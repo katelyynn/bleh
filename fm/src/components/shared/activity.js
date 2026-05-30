@@ -47,7 +47,7 @@ export function render_activity(activity) {
     // date: string
 
     const activity_item = html.node`
-        <a class="activity-item activity--${activity.type}" href=${activity.context} />
+        <a class="activity-item activity--${activity.type} icon" href=${activity.context} />
     `;
 
     let involved_text = '';
@@ -114,9 +114,9 @@ export function render_activity(activity) {
         }
 
         if (involved_text != '')
-            involved_text = html.node`${involved_text}, <a class="involved--${involved.type}" href="${involved_link}">${name}</a>`;
+            involved_text = html.node`${involved_text}, <a class="wiki-link icon wiki-link-smart-title" data-link-type=${involved.type} href="${involved_link}">${name}</a>`;
         else
-            involved_text = html.node`${involved_text}<a class="involved--${involved.type}" href="${involved_link}">${name}</a>`;
+            involved_text = html.node`${involved_text}<a class="wiki-link icon wiki-link-smart-title" data-link-type=${involved.type} href="${involved_link}">${name}</a>`;
     });
 
     render(activity_item, html`
@@ -150,10 +150,12 @@ export function subscribe_to_events() {
     love_track.forEach((form) => {
         form.setAttribute('data-bleh-subscribed', 'true');
 
-        let track = form.querySelector('[name="track"]').getAttribute('value');
+        let track = form.querySelector('[name="track"]')?.getAttribute('value');
         let artist = form
-            .querySelector('[name="artist"]')
-            .getAttribute('value');
+            ?.querySelector('[name="artist"]')
+            ?.getAttribute('value');
+
+        if (!track || !artist) return;
 
         artist = correct_artist(artist);
         track = correct_item_by_artist(track, artist);
@@ -278,7 +280,7 @@ export function subscribe_to_events() {
     let save_wiki_form = document.body.querySelector(
         '.wiki-edit-form:not([data-bleh-subscribed])'
     );
-    if (save_wiki_form != null) {
+    if (save_wiki_form) {
         save_wiki_form.setAttribute('data-bleh-subscribed', 'true');
 
         let btn = save_wiki_form.querySelector('.form-submit button');

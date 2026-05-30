@@ -4,30 +4,24 @@
 // Licensed under GPLv3
 //
 
-import { settings } from '@/build/config.js';
-import { album_track_corrections, artist_corrections } from '@/build/music.js';
+import { settings } from '@/build/config';
+import { album_track_corrections, artist_corrections } from '@/build/music';
 import {
-    api_key,
     auth,
     oracle_albums,
     oracle_artists,
     oracle_tracks,
     page,
-    root,
-    theme_preview
-} from '@/build/page.js';
-import { stored_season } from '@/build/seasonal.js';
-import { sponsor_list } from '@/build/sponsor.js';
-import { clamp_sat, copy, hex_to_hsl, set_storage, time } from '@/build/tools';
-import { get_trans_key, lang, lang_browser, lang_info, tl, trans } from '@/build/trans';
-import { load_badges } from '@/components/shared/badge';
+    root
+} from '@/build/page';
+import { copy, set_storage, time } from '@/build/tools';
+import { get_trans_key, lang_info, tl, trans } from '@/build/trans';
 import { dialog, dialog_rm } from '@/components/dialog/dialog';
 import { markdown } from '@/components/shared/markdown';
 import { notify } from '@/components/dialog/notify';
-import { load_settings, refresh_all, update_colour_swatches } from '../../config.js';
+import { load_settings } from '../../config.js';
 import { version } from '@/main';
-import { update_page } from '@/page.js';
-import { seasonal_timer_end, seasonal_timer_start } from '@/components/seasonal.js';
+import { update_page } from '@/page';
 import { ff } from '@/components/settings/sku.js';
 import { html, render } from 'lighterhtml';
 import {
@@ -35,10 +29,7 @@ import {
     save_setting,
     setting
 } from '@/components/settings/settings';
-import { parse_scrobbles_as_rank } from '@/components/music/colourful_counts';
-import { input } from '@/components/settings/input';
 import { share } from '@/components/dialog/share';
-import { force_refresh_style, start_update, update_check } from '@/components/page/style';
 import tippy from 'tippy.js';
 import {
     checkup_friend_cache,
@@ -53,6 +44,13 @@ import { version as florence_version } from '@tealmiku/florence';
 import { queue_popup } from '@/components/dialog/popup';
 import { visual } from '@/pages/bleh_settings/visual';
 import { general } from '@/pages/bleh_settings/general';
+import { seasonal } from './seasonal';
+import { settings_search } from './search.js';
+import { icon, icons } from '@/components/shared/icon.js';
+import { chartlist_bar } from '@/components/music/bar.js';
+import { avatar } from '@/components/shared/avatar.js';
+import { convert_lang_to_country, flag } from '@/components/shared/flag.js';
+import { lotus_modal } from '@/components/music/lotus.js';
 
 export function bleh_settings() {
     page.name = auth.name;
@@ -78,29 +76,107 @@ export function bleh_settings() {
     const tabs = {
         general: {
             name: tl(trans.general),
-            icon: 'general'
+            icon: 'general',
+            settings: [
+                'branding_type',
+                'translator'
+            ]
         },
         visual: {
             name: tl(trans.visual),
-            icon: 'visual'
+            icon: 'visual',
+            settings: [
+                'theme',
+                'theme_day',
+                'theme_night',
+                'solarium',
+                'hue',
+                'sat',
+                'lit',
+                'hue_from_album',
+                'hue_from_track',
+                'hue_from_artist',
+                'colourful_tracks',
+                'colourful_tracks_all',
+                'sat_bg',
+                'noise',
+                'font',
+                'font_weight',
+                'font_weight_medium',
+                'font_weight_bold',
+                'font_emoji',
+                'gloss',
+                'grid_glow',
+                'avatar_radius',
+                'rain'
+            ]
         },
         interface: {
             name: tl(trans.interface),
-            icon: 'layout'
+            icon: 'layout',
+            settings: [
+                'track_layout',
+                'expand_tracks',
+                'track_album_name_location',
+                'colourful_counts',
+                'music_links',
+                'default_avatar_action',
+                'simulate_scroll',
+                'gendered_tags',
+                'shout_markdown',
+                'rabbit'
+            ]
         },
         profile: {
             name: tl(trans.profile),
-            icon: 'user'
+            icon: 'user',
+            settings: [
+                'friends',
+                'starred_friend',
+                'navigation_items',
+                'navigation_language',
+                'profile_header_own',
+                'profile_header_others',
+                'profile_avi_background',
+                'bio_markdown',
+                'show_your_progress',
+                'activities'
+            ]
         },
         playback: {
             name: tl(trans.playback),
-            icon: 'album'
+            icon: 'album',
+            settings: [
+                'corrections',
+                'prefer_no_redirect',
+                'travis',
+                'format_guest_features',
+                'show_guest_features',
+                'show_remaster_tags',
+                'romanise_jp',
+                'romanise_ko',
+                'glacier_library_graphs',
+                'oracle_beta',
+                'tracklist_source'
+            ]
         },
         seasonal: {
-            name: tl(trans.seasonal.name)
+            name: tl(trans.seasonal.name),
+            settings: [
+                'seasonal',
+                'seasonal_particles',
+                'seasonal_particles_fps',
+                'seasonal_overlays'
+            ]
         },
         accessibility: {
-            name: tl(trans.accessibility)
+            name: tl(trans.accessibility),
+            settings: [
+                'reduced_motion',
+                'underline_links',
+                'display_name_styles',
+                'accessible_name_colours'
+            ]
         },
         fill: {
             type: 'fill'
@@ -112,7 +188,11 @@ export function bleh_settings() {
         },
         performance: {
             name: tl(trans.troubleshooting),
-            icon: 'advanced'
+            icon: 'advanced',
+            settings: [
+                'dev',
+                'branch'
+            ]
         },
         sku: {
             name: tl(trans.flags),
@@ -148,6 +228,7 @@ export function bleh_settings() {
     `;
 
     render(page.structure.side, html`
+        ${settings_search(tabs)}
         <div class="cta first priority sponsor colourful">
             ${auth.sponsor ? html.node`
                 <strong>${tl(trans.you_are_a_sponsor)}</strong>
@@ -158,13 +239,13 @@ export function bleh_settings() {
             `}
         </div>
         <section class="side-actions">
-            <button class="btn side-action" data-type="import" onclick=${() => import_settings()}>
+            <button class="btn side-action icon-mask" data-type="import" onclick=${() => import_settings()}>
                 ${tl(trans.import)}
             </button>
-            <button class="btn side-action" data-type="export" onclick=${() => export_settings()}>
+            <button class="btn side-action icon-mask" data-type="export" onclick=${() => export_settings()}>
                 ${tl(trans.export)}
             </button>
-            <button class="btn side-action" data-type="reset" onclick=${() => reset_settings()}>
+            <button class="btn side-action icon-mask" data-type="reset" onclick=${() => reset_settings()}>
                 ${tl(trans.reset)}
             </button>
         </section>
@@ -181,6 +262,9 @@ export function bleh_settings() {
             <p class="card-tip">
                 florence ${florence_version}
             </p>
+            <p class="card-tip">
+                ${DateTime.fromISO(version.built_on).toLocaleString(DateTime.DATETIME_MED)}
+            </p>
         </div>
     `);
 
@@ -189,7 +273,11 @@ export function bleh_settings() {
     if (!tab) change_settings_page('general');
     else change_settings_page(tab);
 
-    if (page.requested.setting) scroll_to_setting(page.requested.setting);
+    if (page.requested.setting) {
+        setTimeout(() => {
+            scroll_to_setting(page.requested.setting);
+        }, 100);
+    }
 
     const profile_tab = nav.querySelector('[data-bleh-page="profile"]');
     if (profile_tab) {
@@ -227,44 +315,14 @@ export async function render_setting_page(page_id) {
             general();
         else if (page_id == 'visual')
             visual();
+        else if (page_id == 'seasonal')
+            seasonal();
     } catch (e) {
         page_error(e);
     }
 
     if (page_id == 'interface') {
         register_skip_to([]);
-
-        function chartlist_bar(value, max) {
-            let count_bar = html.node`
-                <div class="chartlist-count-bar">
-                    <a class="chartlist-count-bar-link">
-                        <span class="chartlist-count-bar-slug" data-max-stat-value="${max}" data-stat-value="${value}" style="width: ${(max / max) * 100}%" />
-                        <span class="chartlist-count-bar-value">${value.toLocaleString(DateTime.DATE_MED)}</span>
-                    </a>
-                </div>
-            `;
-
-            let parsed_scrobble_as_rank = parse_scrobbles_as_rank(value);
-
-            count_bar.setAttribute(
-                'data-bleh--scrobble-milestone',
-                parsed_scrobble_as_rank.milestone
-            );
-            count_bar.style.setProperty(
-                '--hue-over',
-                parsed_scrobble_as_rank.hue
-            );
-            count_bar.style.setProperty(
-                '--sat-over',
-                parsed_scrobble_as_rank.sat
-            );
-            count_bar.style.setProperty(
-                '--lit-over',
-                parsed_scrobble_as_rank.lit
-            );
-
-            return count_bar;
-        }
 
         let bars;
 
@@ -284,6 +342,7 @@ export async function render_setting_page(page_id) {
                             class="chartlist-row chartlist-row--with-artist chartlist-row--now-scrobbling"
                             data-has-bar="false"
                             data-show-album-text=${settings.expand_tracks != 'never' && settings.track_layout == 'column'}
+                            data-album-name-location=${settings.track_album_name_location}
                         >
                             <td class="chartlist-image">
                                 <a class="cover-art">
@@ -291,7 +350,7 @@ export async function render_setting_page(page_id) {
                                 </a>
                             </td>
                             <td class="kate-placeholder" />
-                            <td class="track-info" data-has-bar="false">
+                            <td class="track-info" data-has-bar="false" data-track-layout=${settings.track_layout} data-album-name-location=${settings.track_album_name_location}>
                                 <span class="chartlist-name">
                                     <a>${tl(trans.track_name)}</a>
                                 </span>
@@ -309,6 +368,7 @@ export async function render_setting_page(page_id) {
                             class="chartlist-row chartlist-row--with-artist"
                             data-has-bar="false"
                             data-show-album-text=${settings.expand_tracks == 'always' && settings.expand_tracks != 'never' && settings.track_layout == 'column'}
+                            data-album-name-location=${settings.track_album_name_location}
                         >
                             <td class="chartlist-image">
                                 <a class="cover-art">
@@ -316,14 +376,14 @@ export async function render_setting_page(page_id) {
                                 </a>
                             </td>
                             <td class="kate-placeholder" />
-                            <td class="track-info" data-has-bar="false">
+                            <td class="track-info" data-has-bar="false" data-track-layout=${settings.track_layout} data-album-name-location=${settings.track_album_name_location}>
                                 <span class="chartlist-name">
                                     <a>${tl(trans.track_name)}</a>
                                 </span>
                                 <span class="chartlist-artist">
                                     <a>${tl(trans.artist_name)}</a>
                                 </span>
-                                ${settings.expand_tracks == 'always' && settings.expand_tracks != 'never' &&settings.track_layout == 'column' ? html.node`
+                                ${settings.expand_tracks == 'always' && settings.expand_tracks != 'never' && settings.track_layout == 'column' ? html.node`
                                     <span class="chartlist-album custom-album-text">
                                         <a>${tl(trans.album_name)}</a>
                                     </span>
@@ -332,6 +392,32 @@ export async function render_setting_page(page_id) {
                         </tr>
                     </tbody>
                 </table>
+            `);
+        }
+
+        let tag_preview;
+
+        function render_tags(hide = settings.gendered_tags) {
+            render(tag_preview, html`
+                <ul class="tags-list tags-list--global">
+                    <li class="tag">
+                        <a class="btn tag-item">pop</a>
+                    </li>
+                    <li class="tag">
+                        <a class="btn tag-item">country</a>
+                    </li>
+                    <li class="tag">
+                        <a class="btn tag-item">singer-songwriter</a>
+                    </li>
+                    ${!hide ? html.node`
+                        <li class="tag">
+                            <a class="btn tag-item">female vocalists</a>
+                        </li>
+                    ` : ''}
+                    <li class="tag">
+                        <a class="btn tag-item">synthpop</a>
+                    </li>
+                </ul>
             `);
         }
 
@@ -355,7 +441,10 @@ export async function render_setting_page(page_id) {
                         }
                     }))}
                     ${(track_album_name_location = setting({
-                        id: 'track_album_name_location'
+                        id: 'track_album_name_location',
+                        func: () => {
+                            render_track_preview();
+                        }
                     }))}
                 </div>
             </section>
@@ -363,10 +452,10 @@ export async function render_setting_page(page_id) {
                 <div class="inner-preview pad">
                     <div class="bars" ref=${(el) => (bars = el)}>
                         ${() => {
-                            let max = 30_000;
+                            let max = 20_000;
 
                             for (
-                                let value = 1_000;
+                                let value = 0;
                                 value <= max;
                                 value += page.mobile ? 3_000 : 1_000
                             ) {
@@ -377,6 +466,7 @@ export async function render_setting_page(page_id) {
                 </div>
                 <div class="setting-group">
                     ${setting({ id: 'colourful_counts' })}
+                    ${setting({ id: 'count_bar_right' })}
                 </div>
             </section>
             <section class="bleh--panel">
@@ -391,66 +481,40 @@ export async function render_setting_page(page_id) {
                     ${ff('menus') ? setting({ id: 'menu_replacement' }) : ''}
                 </div>
                 <div class="inner-preview pad flex">
-                    <section class="catalogue-tags">
-                        <ul class="tags-list tags-list--global">
-                            <li class="tag">
-                                <a href="/tag/pop">pop</a>
-                            </li>
-                            <li class="tag">
-                                <a href="/tag/country">country</a>
-                            </li>
-                            <li class="tag">
-                                <a href="/tag/singer-songwriter"
-                                    >singer-songwriter</a
-                                >
-                            </li>
-                            <li class="tag">
-                                <a href="/tag/female+vocalists"
-                                    >female vocalists</a
-                                >
-                            </li>
-                            <li class="tag">
-                                <a href="/tag/synthpop">synthpop</a>
-                            </li>
-                        </ul>
-                    </section>
+                    <section class="catalogue-tags" ref=${el => tag_preview = el} />
                 </div>
                 <div class="setting-group">
-                    ${setting({ id: 'gendered_tags' })}
+                    ${setting({ id: 'gendered_tags', func: (val) => render_tags(val) })}
                 </div>
             </section>
             <section class="bleh--panel">
                 <h4>${tl(trans.shouts)}</h4>
                 <div class="inner-preview pad flex">
-                    <div
-                        class="shout js-shout js-link-block"
-                        data-kate-processed="true"
-                    >
-                        ${auth.name
-                ? html.node`
-                    <h3 class="shout-user">
-                        <a>${auth.name}</a>
-                    </h3>
-                    <span class="avatar shout-user-avatar">
-                        <img src="${auth.avatar.replace('/avatar42s/', '/avatar170s/')}" alt="${tl(trans.your_avatar)}" loading="lazy">
-                    </span>
-                    `
-                : html.node`
-                    <h3 class="shout-user">
-                        <a>${tl(trans.profile)}</a>
-                    </h3>
-                    <span class="avatar shout-user-avatar">
-                        <img class="missing-avatar" alt="${tl(trans.your_avatar)}" loading="lazy">
-                    </span>
-                    `}
-                        <a class="shout-permalink shout-timestamp">
-                            <time
-                                datetime="2024-06-05T02:33:39+01:00"
-                                title="Wednesday 5 Jun 2024, 2:33am"
-                            >
-                                5 Jun 2:33am
-                            </time>
-                        </a>
+                    <div class="shout js-shout js-link-block shout-preview" data-kate-processed="true">
+                        <div class="shout-top">
+                            <div class="shout-basics">
+                                ${auth.name ? html.node`
+                                    <h3 class="shout-user shout-user-preview">
+                                        <a>${auth.name}</a>
+                                    </h3>
+                                    <span class="avatar shout-user-avatar">
+                                        <img src="${auth.avatar.replace('/avatar42s/', '/avatar170s/')}" alt="${tl(trans.your_avatar)}" loading="lazy">
+                                    </span>
+                                ` : html.node`
+                                    <h3 class="shout-user shout-user-preview">
+                                        <a>${tl(trans.profile)}</a>
+                                    </h3>
+                                    <span class="avatar shout-user-avatar">
+                                        <img class="missing-avatar" alt="${tl(trans.your_avatar)}" loading="lazy">
+                                    </span>
+                                `}
+                                <a class="shout-permalink shout-timestamp shout-timestamp-preview">
+                                    <time datetime="2024-06-05T02:33:39+01:00" title="Wednesday 5 Jun 2024, 2:33am">
+                                        5 Jun 2:33am
+                                    </time>
+                                </a>
+                            </div>
+                        </div>
                         <div class="shout-body if-markdown-on">
                             ${markdown(tl(trans.markdown_shouts.preview))}
                         </div>
@@ -498,6 +562,7 @@ export async function render_setting_page(page_id) {
         `);
 
         render_track_preview();
+        render_tags();
     } else if (page_id == 'playback') {
         let total_artists = 0;
         let total_album_tracks = 0;
@@ -512,34 +577,94 @@ export async function render_setting_page(page_id) {
 
         let corrections;
         let format_guest_features;
+        let show_guest_features;
+        let show_remaster_tags;
         let romanise_jp;
         let romanise_ko;
 
         let tracklist_source;
+
+        let header_preview;
+
+        function render_header_preview() {
+            const format = settings.format_guest_features;
+            const show_artist_tag = settings.show_guest_features;
+
+            render(header_preview, html`
+                <div class="page-header-info">
+                    <div class="title-container">
+                        <h1 class="header-new-title page-header-title" data-kate-processed="true">
+                            <div class="title">
+                                THE END${!format ? ' (feat. will.i.am & Jessica Pratt)' : ''}
+                            </div>
+                            ${format && show_artist_tag ? html.node`<div class="feat" data-tag-group="guests">feat. will.i.am & Jessica Pratt</div>` : ''}
+                        </h1>
+                    </div>
+                    <h2 class="page-header-artist artist-for-track">
+                        <span itemprop="byArtist" style="display: flex">
+                            <a class="header-new-crumb" itemprop="url" href="/music/+noredirect/A%24AP+Rocky">
+                                <span itemprop="name">A$AP Rocky</span>
+                            </a>
+                            ${format ? html.node`
+                            ,
+                            <a class="header-new-crumb" href="/music/+noredirect/will.i.am">
+                                will.i.am
+                            </a>,
+                            <a class="header-new-crumb" href="/music/+noredirect/Jessica+Pratt">
+                                Jessica Pratt
+                            </a>
+                            ` : ''}
+                        </span>
+                    </h2>
+                </div>
+            `);
+        }
 
         render(page.structure.main, html`
             <section class="bleh--panel">
                 <h4>${tl(trans.music_corrections)}</h4>
                 <div class="inner-preview pad">
                     <div class="lotus-preview">
-                        <div class="before">
-                            <h1>mY aNtI-aIrCrAfT fRiEnD</h1>
-                            <h2>jUlIe</h2>
+                        <div class="lotus-preview-inner before icon-mask">
+                            <h1 class="lotus-preview-header">mY aNtI-aIrCrAfT fRiEnD</h1>
+                            <h2 class="lotus-preview-sub">jUlIe</h2>
                         </div>
-                        <div class="after">
-                            <h1>my anti-aircraft friend</h1>
-                            <h2>julie</h2>
+                        <div class="lotus-preview-inner after">
+                            <h1 class="lotus-preview-header">my anti-aircraft friend</h1>
+                            <h2 class="lotus-preview-sub">julie</h2>
                         </div>
                     </div>
                 </div>
                 <div class="setting-group">
-                    ${(corrections = setting({
-            id: 'corrections',
-            func: () => {
-                romanise_jp.compat();
-                romanise_ko.compat();
-            }
-        }))}
+                    ${corrections = setting({
+                        id: 'corrections',
+                        func: () => {
+                            romanise_jp.compat();
+                            romanise_ko.compat();
+                        }
+                    })}
+                    <div
+                        class="setting"
+                        data-type="info"
+                    >
+                        <div class="heading">
+                            <h5>${tl(trans.current_version)}</h5>
+                        </div>
+                        <div class="info">
+                            <p>
+                                ${artist_corrections.version ==
+                album_track_corrections.version
+                ? artist_corrections.version
+                : `${artist_corrections.version}, ${album_track_corrections.version}`}
+                            </p>
+                            <button
+                                class="see-more update-check left-icon"
+                                onclick="_lotus_check()"
+                            >
+                                ${tl(trans.update_check)}
+                            </button>
+                        </div>
+                    </div>
                     <div
                         class="setting"
                         data-type="info"
@@ -557,33 +682,9 @@ export async function render_setting_page(page_id) {
                             </p>
                             <button
                                 class="see-more"
-                                onclick="_open_correction_modal()"
+                                onclick=${() => lotus_modal()}
                             >
                                 ${tl(trans.view_all)}
-                            </button>
-                        </div>
-                    </div>
-                    <div
-                        class="setting"
-                        data-type="info"
-                        disabled=${!artist_corrections.version ||
-            !album_track_corrections.version}
-                    >
-                        <div class="heading">
-                            <h5>${tl(trans.current_version)}</h5>
-                        </div>
-                        <div class="info">
-                            <p>
-                                ${artist_corrections.version ==
-                album_track_corrections.version
-                ? artist_corrections.version
-                : `${artist_corrections.version}, ${album_track_corrections.version}`}
-                            </p>
-                            <button
-                                class="see-more update-check"
-                                onclick="_lotus_check()"
-                            >
-                                ${tl(trans.update_check)}
                             </button>
                         </div>
                     </div>
@@ -629,69 +730,23 @@ export async function render_setting_page(page_id) {
             </section>
             <section class="bleh--panel">
                 <h4>${tl(trans.smart_music_titles)}</h4>
-                <div class="inner-preview pad flex">
-                    <section
-                        class="redesigned-header mockup redesigned-track-header no-top-margin"
-                    >
-                        <div class="avatar-side">
-                            <img
-                                src="https://lastfm.freetls.fastly.net/i/u/avatar170s/8bd696cbd4aa4d4eb6d35393232f55e4.jpg"
-                            />
-                        </div>
-                        <div class="info-side">
-                            <div class="sub-text">${tl(trans.track)}</div>
-                            <div class="title-container">
-                                <h1 class="bleh--name-with-features">
-                                    <div class="title">California Love</div>
-                                    <div
-                                        class="feat"
-                                        data-bleh--tag-type="ft."
-                                        data-bleh--tag-group="guests"
-                                    >
-                                        ft. Dr. Dre, Roger Troutman
-                                    </div>
-                                    <div
-                                        class="feat"
-                                        data-bleh--tag-type="- remix"
-                                        data-bleh--tag-group="mixes"
-                                    >
-                                        Remix
-                                    </div>
-                                </h1>
-                                <h1 class="bleh--name-without-features">
-                                    California Love (ft. Dr. Dre, Roger
-                                    Troutman) - Remix
-                                </h1>
-                            </div>
-                            <h2>
-                                <a class="header-new-crumb">2Pac</a
-                                ><span class="bleh--name-with-features"
-                                    >,
-                                </span>
-                                <a
-                                    class="header-new-crumb bleh--name-with-features"
-                                    >Dr. Dre</a
-                                ><span class="bleh--name-with-features"
-                                    >,
-                                </span>
-                                <a
-                                    class="header-new-crumb bleh--name-with-features"
-                                    >Roger Troutman</a
-                                >
-                            </h2>
-                        </div>
-                    </section>
-                </div>
+                <div class="inner-preview pad flex" ref=${el => header_preview = el} />
                 <div class="setting-group">
-                    ${(format_guest_features = setting({
-                id: 'format_guest_features',
-                func: () => {
-                    romanise_jp.compat();
-                    romanise_ko.compat();
-                }
-            }))}
-                    ${setting({ id: 'show_guest_features' })}
-                    ${setting({ id: 'show_remaster_tags' })}
+                    ${format_guest_features = setting({
+                        id: 'format_guest_features',
+                        func: () => {
+                            romanise_jp.compat();
+                            romanise_ko.compat();
+                            render_header_preview();
+
+                            show_guest_features.compat();
+                            show_remaster_tags.compat();
+                        }
+                    })}
+                    ${show_guest_features = setting({ id: 'show_guest_features', func: () => {
+                        render_header_preview();
+                    } })}
+                    ${show_remaster_tags = setting({ id: 'show_remaster_tags' })}
                 </div>
                 <div class="setting-group">
                     <div class="setting" data-type="options">
@@ -736,7 +791,7 @@ export async function render_setting_page(page_id) {
                                     ${oracle_artists.version}, ${oracle_albums.version}, ${oracle_tracks.version}
                                 </p>
                                 <button
-                                    class="see-more update-check"
+                                    class="see-more update-check left-icon"
                                     onclick=${() => oracle_data(true)}
                                 >
                                     ${tl(trans.update_check)}
@@ -761,102 +816,8 @@ export async function render_setting_page(page_id) {
                 </section>
             ` : ''}
         `);
-    } else if (page_id == 'seasonal') {
-        register_skip_to([]);
 
-        render(
-            page.structure.main,
-            html`
-                <div class="bleh--panel">
-                    <div class="seasonal-inner">
-                        <div class="sub-text">
-                            ${tl(trans.seasonal_timeline)}
-                        </div>
-                        <h4>
-                            ${DateTime.fromJSDate(
-                new Date(stored_season.now)
-            ).toLocaleString(DateTime.DATE_FULL)}
-                        </h4>
-                    </div>
-                    <div class="setting-group">
-                        ${setting({ id: 'seasonal' })}
-                        <div class="setting" data-type="info">
-                            <div class="heading">
-                                <h5>${tl(trans.current_season)}</h5>
-                            </div>
-                            <div class="info">
-                                <div
-                                    class="icon-combo"
-                                    data-season=${stored_season.id}
-                                >
-                                    <div
-                                        class="bleh-icon bleh-seasonal-icon"
-                                    ></div>
-                                    <p>
-                                        ${tl(
-                trans.seasonal.listing[
-                stored_season.id
-                ]
-            )}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        ${stored_season.id != 'none' &&
-                    stored_season.start &&
-                    stored_season.end
-                    ? html.node`
-                    <div class="setting" data-type="info">
-                        <div class="heading">
-                            <h5>${tl(trans.started)}</h5>
-                        </div>
-                        <div class="info">
-                            <p id="current_season_start">${DateTime.fromISO(stored_season.start.replace('y0', stored_season.year).replace('{offset}', stored_season.offset)).toRelative(DateTime.fromISO(stored_season.now))}</p>
-                        </div>
-                    </div>
-                    <div class="setting" data-type="info">
-                        <div class="heading">
-                            <h5>${tl(trans.ends_in)}</h5>
-                        </div>
-                        <div class="info">
-                            <p id="current_season">${DateTime.fromISO(stored_season.end.replace('y0', stored_season.year).replace('{offset}', stored_season.offset)).toRelative(DateTime.fromISO(stored_season.now))}</p>
-                        </div>
-                    </div>
-                    `
-                    : settings.seasonal
-                        ? html.node`
-                    <div class="setting" data-type="info">
-                        <div class="heading">
-                            <h5>${tl(trans.next_in)}</h5>
-                        </div>
-                        <div class="info">
-                            <p id="next_season_start">${DateTime.fromISO(stored_season.next_start.replace('y0', stored_season.next_is_new_year ? stored_season.year + 1 : stored_season.year).replace('{offset}', stored_season.offset)).toRelative(DateTime.fromISO(stored_season.now))}</p>
-                        </div>
-                    </div>
-                    `
-                        : ''}
-                        ${settings.seasonal
-                    ? html.node`
-                    <div class="setting" data-type="info">
-                        <div class="heading">
-                            <h5>${tl(trans.calculated_offset)}</h5>
-                        </div>
-                        <div class="info">
-                            <p>${stored_season.offset}</p>
-                        </div>
-                    </div>
-                    `
-                    : ''}
-                    </div>
-                    <h4>${tl(trans.settings)}</h4>
-                    <div class="setting-group">
-                        ${setting({ id: 'seasonal_particles' })}
-                        ${setting({ id: 'seasonal_particles_fps' })}
-                        ${setting({ id: 'seasonal_overlays' })}
-                    </div>
-                </div>
-            `
-        );
+        render_header_preview();
     } else if (page_id == 'performance') {
         register_skip_to([]);
 
@@ -883,20 +844,6 @@ export async function render_setting_page(page_id) {
                     </div>
                     <div class="setting-group">
                         ${setting({ id: 'dev' })} ${setting({ id: 'branch' })}
-                        <div class="setting" data-type="action">
-                            <div class="heading">
-                                <h5>${tl(trans.force_refresh_style.name)}</h5>
-                                <p>${tl(trans.force_refresh_style.body)}</p>
-                            </div>
-                            <div class="toggle-wrap">
-                                <button
-                                    class="btn see-more update-check"
-                                    onclick=${() => force_refresh_style()}
-                                >
-                                    ${tl(trans.refresh)}
-                                </button>
-                            </div>
-                        </div>
                     </div>
                     <div class="sep"></div>
                     <h4>Debug information</h4>
@@ -909,16 +856,6 @@ export async function render_setting_page(page_id) {
                             is currently ${settings.corrections}
                         </li>
                         <br />
-                        <li>
-                            Theme will expire at
-                            <span class="time"
-                                >${time(
-                localStorage.getItem(
-                    'bleh_cached_style_timeout'
-                )
-            )}</span
-                            >
-                        </li>
                         <li>
                             <span class="lotus lotus-name lotus-name-small"
                                 >lotus</span
@@ -942,20 +879,6 @@ export async function render_setting_page(page_id) {
                 )
             )}</span
                             >
-                        </li>
-                        <br />
-                        <li>
-                            It is currently
-                            <span class="time">${time()}</span>
-                        </li>
-                        <br />
-                        <li>
-                            Has the timeout expired?
-                            ${new Date(
-                localStorage.getItem(
-                    'bleh_cached_style_timeout'
-                )
-            ) < new Date()}
                         </li>
                     </ul>
                     <div class="sep"></div>
@@ -1017,6 +940,33 @@ export async function render_setting_page(page_id) {
 
         console.info('friends', settings.friends, settings);
 
+        let banner_preview;
+
+        function render_banner_preview() {
+            const own_banners = settings.profile_header_own;
+            const other_banners = settings.profile_header_others;
+            const avatar_replace = settings.profile_avi_background;
+
+            const fallback_url = 'https://lastfm.freetls.fastly.net/i/u/ar0/b9436242d32247cbce3d403581284cd3.jpg';
+            const fallback_avi = 'https://lastfm.freetls.fastly.net/i/u/ar0/818148bf682d429dc215c1705eb27b98.png';
+
+            render(banner_preview, html``);
+            render(banner_preview, html`
+                <div class="banner-previews">
+                    <div class="banner-preview-item">
+                        <strong class="banner-preview-label">${auth.name}</strong>
+                        <div class="banner-preview-avatar" style="background-image: url(${avatar(auth.avatar, 'ar0')})" />
+                        <div class="banner-preview-img ${!own_banners ? 'hide-banner' : ''}" style="background-image: url(${cache.banner ? cache.banner : avatar_replace ? avatar(auth.avatar, 'ar0') : fallback_url})" />
+                    </div>
+                    <div class="banner-preview-item">
+                        <strong class="banner-preview-label">${tl(trans.other_profiles)}</strong>
+                        <div class="banner-preview-avatar" style="background-image: url(${fallback_avi})" />
+                        <div class="banner-preview-img ${!other_banners ? 'hide-banner' : ''}" style="background-image: url(${avatar_replace ? fallback_avi : fallback_url})" />
+                    </div>
+                </div>
+            `);
+        }
+
         render(
             page.structure.main,
             html`
@@ -1050,56 +1000,24 @@ export async function render_setting_page(page_id) {
                 </section>
                 <section class="bleh--panel">
                     <h4>${tl(trans.banners)}</h4>
-                    <div class="inner-preview pad">
-                        <div class="profile-mockup">
-                            <div class="mockup-header">
-                                <img
-                                    class="mockup-avatar"
-                                    src="${auth.avatar}"
-                                />
-                                <div class="mockup-info">
-                                    <div class="mockup-subtext"></div>
-                                    <div class="mockup-name"></div>
-                                </div>
-                            </div>
-                            <div class="mockup-container">
-                                <div class="mockup-col-main">
-                                    <div class="mockup-panel main"></div>
-                                </div>
-                                <div class="mockup-col-sidebar">
-                                    <div
-                                        class="mockup-panel mockup-obsession-panel"
-                                    >
-                                        <img
-                                            class="mockup-obsession-art"
-                                            src="https://lastfm.freetls.fastly.net/i/u/64s/510546e3b6df7504392274c528c77780.jpg"
-                                        />
-                                        <div
-                                            class="mockup-obsession-name"
-                                        ></div>
-                                    </div>
-                                    <div class="mockup-panel main"></div>
-                                </div>
-                            </div>
-                            <div class="profile-mockup-background from-avatar" style="background-image: url(${auth.avatar.replace('/avatar42s/','/avatar300s/')})" />
-                            ${cache.banner ? html.node`
-                                <div class="profile-mockup-background from-banner" style="background-image: url(${cache.banner})"></div>
-                            ` : html.node`
-                                <div class="profile-mockup-background from-track" style="background-image: url(https://lastfm.freetls.fastly.net/i/u/avatar300s/df927f4f88034b7f9a651636b965c9d7)"></div>
-                            `}
-                        </div>
-                    </div>
+                    <div class="inner-preview pad" ref=${el => banner_preview = el} />
                     <div class="setting-group">
                         <div class="setting" data-type="options">
                             <div class="heading">
                                 <h5>${tl(trans.view_backgrounds_on)}</h5>
                             </div>
                             <div class="primary-selections">
-                                ${setting({ id: 'profile_header_own', standalone: true })}
-                                ${setting({ id: 'profile_header_others', standalone: true })}
+                                ${setting({ id: 'profile_header_own', standalone: true, func: () => {
+                                    render_banner_preview();
+                                } })}
+                                ${setting({ id: 'profile_header_others', standalone: true, func: () => {
+                                    render_banner_preview();
+                                } })}
                             </div>
                         </div>
-                        ${setting({ id: 'profile_avi_background' })}
+                        ${setting({ id: 'profile_avi_background', func: () => {
+                            render_banner_preview();
+                        } })}
                     </div>
                 </section>
                 <section class="bleh--panel">
@@ -1169,6 +1087,7 @@ export async function render_setting_page(page_id) {
 
         init_profile_notes();
         activity_preview();
+        render_banner_preview();
     } else if (page_id == 'accessibility') {
         register_skip_to([]);
 
@@ -1209,6 +1128,14 @@ export async function render_setting_page(page_id) {
     } else if (page_id == 'sku') {
         register_skip_to([]);
 
+        const flags = Object.entries(version.feature_flags)
+            .sort((a, b) => {
+                const a_date = new Date(a[1].date);
+                const b_date = new Date(b[1].date);
+
+                return b_date - a_date;
+            });
+
         render(page.structure.main, html`
             <div class="bleh--panel">
                 <div class="panel-intro">
@@ -1223,7 +1150,7 @@ export async function render_setting_page(page_id) {
                     ${tl(trans.beware_notice)}
                 </div>
                 <div class="setting-group">
-                    ${Object.entries(version.feature_flags).reverse().map(([flag, details]) => {
+                    ${flags.map(([flag, details]) => {
                         let value = ff(flag);
 
                         let checkbox;
@@ -1237,7 +1164,7 @@ export async function render_setting_page(page_id) {
                                 state.setAttribute('aria-checked', !current);
 
                                 settings.feature_flags[flag] = !current;
-                                document.documentElement.setAttribute(
+                                document.body.setAttribute(
                                     `data-ff--${flag}`,
                                     (!current).toString()
                                 );
@@ -1252,7 +1179,7 @@ export async function render_setting_page(page_id) {
                                 </div>
                                 <div class="toggle-wrap">
                                     <input type="checkbox" ref=${(el) => (checkbox = el)} value=${value} checked=${value} />
-                                    <button class="btn toggle" aria-checked=${value} ref=${(el) => (state = el)}>
+                                    <button class="btn toggle colourful" aria-checked=${value} ref=${(el) => (state = el)}>
                                         <div class="dot" />
                                     </button>
                                 </div>
@@ -1267,12 +1194,18 @@ export async function render_setting_page(page_id) {
 
         render(page.structure.main, html`
             <section class="bleh--panel">
-                ${select(select_prepare_convert_from_setting(lang_info), settings.translator_view, '', translation_view, false, (val) => html.node`
-                    <span class="language-header">
-                        <span class="flag" style="background-image: url(https://katelyynn.github.io/bleh/fm/flags/${val.value}.svg)" />
-                        <p>${val.text}</p>
-                    </span>
-                `, true)}
+                ${select({
+                    values: select_prepare_convert_from_setting(lang_info),
+                    initial: settings.translator_view,
+                    func: translation_view,
+                    title_func: (val) => html.node`
+                        <span class="language-header">
+                            ${flag((convert_lang_to_country[val.value] || val.value).toUpperCase())}
+                            <p>${val.text}</p>
+                        </span>
+                    `,
+                    hide: true
+                })}
                 <div class="translation-view" ref=${el => translation_view_container = el} />
             </section>
         `);
@@ -1344,20 +1277,18 @@ export function register_skip_to(list = null) {
     });
 }
 
-unsafeWindow._scroll_to_setting = function (id) {
-    scroll_to_setting(id);
-};
+export function scroll_to_setting(id) {
+    const setting = page.structure.main.querySelector(`#setting_${id}`);
+    if (!setting) return;
 
-function scroll_to_setting(id) {
-    let setting = document.body.querySelector(`#container-${id}`);
+    setting.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+    });
 
-    if (setting != null) {
-        let y = setting.getBoundingClientRect().top + window.scrollY - 300;
-        window.scroll({
-            top: y,
-            behavior: 'smooth'
-        });
-    }
+    setTimeout(() => {
+        setting.classList.add('highlight');
+    }, 200);
 }
 
 unsafeWindow._change_settings_page = function (page, setting = null) {
@@ -1381,9 +1312,6 @@ export function change_settings_page(page_id, setting = null) {
         btn.classList.toggle('secondary-nav-item-link--active', page_id == id);
     });
 
-    if (page_id == 'seasonal') seasonal_timer_start();
-    else seasonal_timer_end();
-
     try {
         render_setting_page(page_id);
     } catch (e) {
@@ -1398,7 +1326,7 @@ export function change_settings_page(page_id, setting = null) {
                 tl(trans.settings)
             )}
                         </div>
-                        <pre class="error-info">
+                        <pre class="error-info colourful">
 ${e
                     ? html.node`<span class="error-type">${e.name}</span>: ${e.message}`
                     : ''}</pre
@@ -1407,45 +1335,6 @@ ${e
                 </div>
             `
         );
-    }
-
-    if (page_id == 'seasonal') {
-        refresh_all();
-    }
-
-    if (
-        page_id == 'seasonal' &&
-        settings.seasonal &&
-        stored_season.id != 'none' &&
-        stored_season.start &&
-        stored_season.end
-    ) {
-        tippy(document.getElementById('current_season'), {
-            content: new Date(
-                stored_season.end
-                    .replace('y0', stored_season.year)
-                    .replace('{offset}', stored_season.offset)
-            ).toLocaleString(DateTime.DATE_MED)
-        });
-        tippy(document.getElementById('current_season_start'), {
-            content: new Date(
-                stored_season.start
-                    .replace('y0', stored_season.year)
-                    .replace('{offset}', stored_season.offset)
-            ).toLocaleString(DateTime.DATE_MED)
-        });
-        tippy(document.getElementById('next_season_start'), {
-            content: new Date(
-                stored_season.next_start
-                    .replace(
-                        'y0',
-                        stored_season.next_is_new_year
-                            ? stored_season.year + 1
-                            : stored_season.year
-                    )
-                    .replace('{offset}', stored_season.offset)
-            ).toLocaleString(DateTime.DATE_MED)
-        });
     }
 
     if (setting != null) {
@@ -1473,7 +1362,7 @@ export function load_skus() {
         if (settings.feature_flags[flag] != null)
             current_state = settings.feature_flags[flag];
 
-        document.documentElement.setAttribute(
+        document.body.setAttribute(
             `data-ff--${flag}`,
             current_state
         );
@@ -1491,312 +1380,13 @@ function update_flag_toggle(flag, container) {
 
     button.setAttribute('aria-checked', !current_state);
     settings.feature_flags[flag] = !current_state;
-    document.documentElement.setAttribute(
+    document.body.setAttribute(
         `data-ff--${flag}`,
         `${!current_state}`
     );
 
     // save to settings
     compile_settings();
-}
-
-export function display_colour_presets() {
-    let colours = {
-        custom: [
-            {
-                type: 'default',
-                sets: {
-                    hue: 255,
-                    sat: 1,
-                    lit: 1
-                },
-                displays: {
-                    hue: 'var(--hue-seasonal, 255)',
-                    sat: 'var(--sat-seasonal, 1)',
-                    lit: 'var(--lit-seasonal, 1)'
-                }
-            },
-            {
-                type: 'avatar',
-                sets: {
-                    hue: auth.sets.hue,
-                    sat: auth.sets.sat,
-                    lit: auth.sets.lit
-                },
-                requires_flag: 'colour_based_on_avatar'
-            },
-            {
-                type: 'adaptive',
-                requires_flag: 'adaptive_colours'
-            },
-            {
-                type: 'customise'
-            }
-        ],
-        palette: [
-            {
-                sets: {
-                    hue: 0,
-                    sat: 1.2,
-                    lit: 0.9
-                },
-                label: trans.red
-            },
-            {
-                sets: {
-                    hue: 19,
-                    sat: 1.275,
-                    lit: 0.95
-                },
-                label: trans.orange
-            },
-            {
-                sets: {
-                    hue: 48,
-                    sat: 1.5,
-                    lit: 1
-                },
-                label: trans.yellow
-            },
-            {
-                sets: {
-                    hue: 98,
-                    sat: 1.05,
-                    lit: 1.025
-                },
-                label: trans.lime
-            },
-            {
-                sets: {
-                    hue: 131,
-                    sat: 1,
-                    lit: 0.925
-                },
-                label: trans.green
-            },
-            {
-                sets: {
-                    hue: 188,
-                    sat: 1,
-                    lit: 1.1
-                },
-                label: trans.aqua
-            },
-            {
-                sets: {
-                    hue: 228,
-                    sat: 1.3,
-                    lit: 0.9
-                },
-                label: trans.blue
-            },
-            {
-                sets: {
-                    hue: 254,
-                    sat: 1.07,
-                    lit: 1
-                },
-                label: trans.purple
-            },
-            {
-                sets: {
-                    hue: 317,
-                    sat: 1.1,
-                    lit: 1
-                },
-                label: trans.pink
-            },
-            {
-                sets: {
-                    hue: 0,
-                    sat: 0,
-                    lit: 1
-                },
-                label: trans.grey
-            }
-        ]
-    };
-    let exclusives = {
-        christmas: [
-            {
-                type: 'season',
-                label: trans.seasonal.presets.nonsense,
-                sets: {
-                    hue: 352,
-                    sat: 1.8,
-                    lit: 0.925
-                }
-            },
-            {
-                type: 'season',
-                label: trans.seasonal.presets.fruitcake,
-                sets: {
-                    hue: 24,
-                    sat: 0.93,
-                    lit: 1
-                }
-            },
-            {
-                type: 'season',
-                label: trans.seasonal.presets.mistletoe,
-                sets: {
-                    hue: 130,
-                    sat: 0.45,
-                    lit: 0.75
-                }
-            },
-            {
-                type: 'season',
-                label: trans.seasonal.presets.festival,
-                sets: {
-                    hue: 240,
-                    sat: 1.4,
-                    lit: 0.875
-                }
-            }
-        ]
-    };
-    exclusives.new_years = exclusives.christmas;
-
-    let hue_range;
-    let sat_range;
-    let lit_range;
-
-    for (let type in colours) {
-        const swatch_group = page.structure.main.querySelector(`#colour_${type}`);
-        if (!swatch_group) return;
-
-        colours[type].forEach(colour => {
-            if (colour.type == 'default' && stored_season.id != 'none' && exclusives[stored_season.id]) {
-                swatch_group.appendChild(create_swatch(type, colour));
-
-                exclusives[stored_season.id].forEach(exclusive => {
-                    swatch_group.appendChild(create_swatch(type, exclusive, true));
-                });
-
-                return;
-            }
-
-            swatch_group.appendChild(create_swatch(type, colour));
-        });
-    }
-
-    function create_swatch(type, colour, exclusive = false) {
-        if (
-            colour.requires_flag &&
-            version.feature_flags.hasOwnProperty(colour.requires_flag)
-        ) {
-            if (!ff(colour.requires_flag)) return html.node``;
-        }
-
-        if (colour.type == 'avatar' && !auth.name) return html.node``;
-
-        let text;
-        let label;
-        if (colour.label) text = tl(colour.label);
-
-        if (exclusive) label = tl(trans.seasonal.exclusive);
-
-        if (!colour.type) colour.type = 'colour';
-
-        if (!colour.displays && colour.sets) colour.displays = colour.sets;
-
-        let blob;
-        let text_elem;
-        const swatch = html.node`
-            <button class="swatch-container" onclick=${() => {
-                if (!colour.sets) return;
-
-                hue_range.set(colour.sets.hue);
-                sat_range.set(colour.sets.sat);
-                lit_range.set(colour.sets.lit);
-            }}>
-                <div class="swatch colourful" ref=${(el) => (blob = el)} data-swatch-type=${colour.type} />
-                <strong ref=${(el) => (text_elem = el)} />
-            </button>
-        `;
-
-        if (type == 'custom' && !colour.label) text = tl(trans[colour.type]);
-
-        if (colour.type == 'customise') {
-            text = tl(trans.edit);
-
-            let colour;
-
-            tippy(swatch, {
-                theme: 'window',
-                content: html.node`
-                    <div class="dialog-settings">
-                        <div class="setting-group blend">
-                            ${ff('colour_based_on_hex') ? html.node`
-                            <div class="setting" data-type="text">
-                                <div class="heading">
-                                    <h5>${tl(trans.convert_from_hex)}</h5>
-                                </div>
-                                <div class="input-container content-form">
-                                    ${(colour = input({
-                                        type: 'colour',
-                                        value: '#999999',
-                                        maxlength: 7,
-                                        warn_if_empty: true
-                                    }))}
-                                    <button class="btn primary icon convert" onclick=${() => {
-                                        const value = colour.value();
-                                        const hsl = hex_to_hsl(value);
-
-                                        hue_range.set(hsl.h);
-                                        sat_range.set(
-                                            clamp_sat((hsl.s / 100) * 3)
-                                        );
-                                        lit_range.set(hsl.l / 100 + 0.35);
-                                    }}>${tl(trans.convert)}</button>
-                                </div>
-                            </div>
-                            ` : ''}
-                            ${hue_range = setting({ id: 'hue', func: update_colour_swatches })}
-                            ${sat_range = setting({ id: 'sat', func: update_colour_swatches })}
-                            ${lit_range = setting({ id: 'lit', func: update_colour_swatches })}
-                        </div>
-                    </div>
-                `,
-                placement: 'bottom',
-                interactive: true,
-                interactiveBorder: 10,
-                trigger: 'click',
-                appendTo: document.body
-            });
-        }
-
-        if (colour.sets) {
-            colour.sets.accent_type = colour.type;
-
-            blob.style.setProperty('--hue-over', colour.displays.hue);
-            blob.style.setProperty('--sat-over', colour.displays.sat);
-            blob.style.setProperty('--lit-over', colour.displays.lit);
-        }
-
-        if (colour.type == 'default' && stored_season.id != 'none') {
-            text = tl(trans.seasonal.name);
-        }
-
-        text_elem.textContent = text;
-
-        if (!label) {
-            tippy(swatch, {
-                content: text
-            });
-        } else {
-            tippy(swatch, {
-                theme: 'generic',
-                content: html.node`
-                    <span>${text}</span>
-                    <small>${label}</small>
-                `
-            });
-        }
-
-        return swatch;
-    }
 }
 
 function init_profile_notes() {
@@ -1876,7 +1466,7 @@ function edit_profile_note(user) {
         body: html.node`
             <textarea class="modal-text" id="bleh--profile-note" placeholder=${tl(trans.anything_you_can_imagine)}>${profile_notes[user]}</textarea>
             <div class="modal-footer">
-                <button class="see-more cancel" onclick=${() => dialog_rm({ id: 'edit_profile_note' })}>
+                <button class="see-more cancel left-icon" onclick=${() => dialog_rm({ id: 'edit_profile_note' })}>
                     ${tl(trans.cancel)}
                 </button>
                 <div class="fill"></div>
@@ -1919,7 +1509,7 @@ export function prepare_corrections_page() {
                 <div class="primary-name pre-transition">
                     <h5>${artist}</h5>
                 </div>
-                <div class="arrow-divider"></div>
+                <div class="arrow-divider icon-mask"></div>
                 <div class="primary-name post-transition">
                     <h5>${artist_corrections[artist]}</h5>
                 </div>
@@ -1947,7 +1537,7 @@ export function prepare_corrections_page() {
                     <div class="primary-name pre-transition">
                         <h5>${media}</h5>
                     </div>
-                    <div class="arrow-divider"></div>
+                    <div class="arrow-divider icon-mask"></div>
                     <div class="primary-name post-transition">
                         <h5>${album_track_corrections[artist][media]}</h5>
                     </div>
@@ -1968,7 +1558,7 @@ function import_settings() {
             <br>
             <textarea class="modal-text" ref=${(el) => (text = el)} />
             <div class="modal-footer">
-                <button class="see-more cancel" onclick=${() => {
+                <button class="see-more cancel left-icon" onclick=${() => {
                     dialog_rm({ id: 'import_settings' });
                 }}>
                     ${tl(trans.cancel)}
@@ -2028,7 +1618,7 @@ function reset_settings() {
                 <a class="see-more" onclick=${() => export_settings()}>${tl(trans.make_a_backup)}</a>
             </div>
             <div class="modal-footer">
-                <button class="see-more cancel" onclick=${() => dialog_rm({id: 'reset_settings'})}>
+                <button class="see-more cancel left-icon" onclick=${() => dialog_rm({id: 'reset_settings'})}>
                     ${tl(trans.cancel)}
                 </button>
                 <div class="fill"></div>
@@ -2296,6 +1886,28 @@ function activity_preview_new(parent, activity) {
 }
 
 export function theme_bubbles(func = null) {
+    const theme_preview = () => html.node`
+        <div class="preview-inner">
+            <div class="preview-image" style="background-image: url(${avatar(auth.avatar, 'avatar70s')})" />
+            <div class="preview-card">
+                <div class="preview-card-main">
+                    <div class="preview-header">Aa</div>
+                    <div class="preview-text"></div>
+                    <div class="preview-text row-2"></div>
+                    <div class="preview-text row-3"></div>
+                    <div class="preview-buttons">
+                        <div class="preview-button preview-button-primary"></div>
+                        <div class="preview-button"></div>
+                        <div class="preview-button preview-track"></div>
+                    </div>
+                </div>
+                <div class="preview-card-side">
+
+                </div>
+            </div>
+        </div>
+    `;
+
     const themes = [
         {
             id: 'adaptive',
@@ -2350,47 +1962,48 @@ export function theme_bubbles(func = null) {
 
     const bubbles = html.node`
         <div class="theme-bubbles">
-            ${themes.map((theme) => {
-        if (theme.hide) return html.node``;
+            ${themes.map(theme => {
+                if (theme.hide) return html.node``;
 
-        if (theme.type == 'sep') {
-            return html.node`
+                if (theme.type == 'sep') {
+                    return html.node`
                         <div class="sep theme-bubble-sep" />
                     `;
-        }
+                }
 
-        if (!theme.formal) theme.formal = theme.id;
+                if (!theme.formal) theme.formal = theme.id;
 
-        const bubble = html.node`
-                    <button class="theme-bubble" data-theme-id=${theme.id} onclick=${() => update_theme_bubble(theme.id)}>
+                const bubble = html.node`
+                    <button class="btn theme-bubble" data-theme-id=${theme.id} onclick=${() => update_theme_bubble(theme.id)}>
                         <div class="bubble">
-                            ${theme.id == 'adaptive'
-                ? html.node`
-                            <div class="inner theme-preview" data-bleh--theme=${settings.theme_day} data-bleh--theme_type=${['light', 'ink'].includes(settings.theme_day) ? 'light' : 'dark'}>
-                                ${theme_preview()}
-                            </div>
-                            <div class="inner theme-preview" data-bleh--theme=${settings.theme_night} data-bleh--theme_type=${['light', 'ink'].includes(settings.theme_night) ? 'light' : 'dark'}>
-                                ${theme_preview()}
-                            </div>
+                            ${theme.id == 'adaptive' ? html.node`
+                                <div class="inner theme-preview" data-bleh--theme=${settings.theme_day} data-bleh--theme_type=${['light', 'ink'].includes(settings.theme_day) ? 'light' : 'dark'}>
+                                    ${theme_preview()}
+                                </div>
+                                <div class="inner theme-preview" data-bleh--theme=${settings.theme_night} data-bleh--theme_type=${['light', 'ink'].includes(settings.theme_night) ? 'light' : 'dark'}>
+                                    ${theme_preview()}
+                                </div>
+                            ` : html.node`
+                                <div class="inner theme-preview" data-bleh--theme=${theme.id} data-bleh--theme_type=${theme.type}>
+                                    ${theme_preview()}
+                                </div>
                             `
-                : html.node`
-                            <div class="inner theme-preview" data-bleh--theme=${theme.id} data-bleh--theme_type=${theme.type}>
-                                ${theme_preview()}
-                            </div>
-                            `
-            }
+                            }
                         </div>
                         <strong>
-                            ${theme.name}
+                            <span class="theme-name">
+                                ${icon({ name: icons[`theme_${theme.id}`], identifier: 'theme' })}
+                                ${theme.name}
+                            </span>
                             ${theme.new_release ? html.node`<div class="new-badge">${tl(trans.new)}</div>` : ''}
                         </strong>
                     </button>
                 `;
 
-        buttons.push(bubble);
+                buttons.push(bubble);
 
-        return bubble;
-    })}
+                return bubble;
+            })}
         </div>
     `;
 
@@ -2401,33 +2014,14 @@ export function theme_bubbles(func = null) {
 
         const bubble = adaptive.querySelector(':scope > .bubble');
 
-        render(
-            bubble,
-            html`
-                <div
-                    class="inner theme-preview"
-                    data-bleh--theme=${settings.theme_day}
-                    data-bleh--theme_type=${['light', 'ink'].includes(
-                settings.theme_day
-            )
-                    ? 'light'
-                    : 'dark'}
-                >
-                    ${theme_preview()}
-                </div>
-                <div
-                    class="inner theme-preview"
-                    data-bleh--theme=${settings.theme_night}
-                    data-bleh--theme_type=${['light', 'ink'].includes(
-                        settings.theme_night
-                    )
-                    ? 'light'
-                    : 'dark'}
-                >
-                    ${theme_preview()}
-                </div>
-            `
-        );
+        render(bubble, html`
+            <div class="inner theme-preview" data-bleh--theme=${settings.theme_day} data-bleh--theme_type=${['light', 'ink'].includes(settings.theme_day) ? 'light' : 'dark'}>
+                ${theme_preview()}
+            </div>
+            <div class="inner theme-preview" data-bleh--theme=${settings.theme_night} data-bleh--theme_type=${['light', 'ink'].includes(settings.theme_night) ? 'light' : 'dark'}>
+                ${theme_preview()}
+            </div>
+        `);
     };
 
     update_theme_bubble();

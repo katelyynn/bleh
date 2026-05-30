@@ -37,7 +37,7 @@ export function bleh_wiki() {
 
     if (original_edit_button) {
         let side_edit = document.createElement('a');
-        side_edit.classList.add('btn', 'side-action');
+        side_edit.classList.add('btn', 'side-action', 'icon-mask');
         side_edit.setAttribute('href', original_edit_button.getAttribute('href'));
         side_edit.setAttribute('data-type', 'edit');
         side_edit.textContent = tl(trans.edit);
@@ -46,7 +46,7 @@ export function bleh_wiki() {
 
     if (original_version_history) {
         let side_history = document.createElement('a');
-        side_history.classList.add('btn', 'side-action');
+        side_history.classList.add('btn', 'side-action', 'icon-mask');
         side_history.setAttribute('href', original_version_history.getAttribute('href'));
         side_history.setAttribute('data-type', 'history');
         side_history.textContent = tl(trans.timeline);
@@ -147,7 +147,7 @@ export function bleh_wiki_history() {
     // latest
     let side_actions = html.node`
         <section class="side-actions">
-            <a class="btn side-action" data-type="latest-wiki" href="${sub_text.querySelector('a').getAttribute('href')}">
+            <a class="btn side-action icon-mask" data-type="latest-wiki" href="${sub_text.querySelector('a').getAttribute('href')}">
                 ${tl(trans.view_latest)}
             </a>
         </section>
@@ -185,6 +185,14 @@ export function bleh_wiki_history() {
 }
 
 export function bleh_wiki_editor() {
+    const editor = page.structure.main.querySelector('.wiki-edit-container');
+    if (editor) {
+        const form = editor.querySelector(':scope > form');
+
+        const body = form?.querySelector('#id_body');
+        body?.classList.add('wiki-editor-body');
+    }
+
     // make a new panel
     let wiki_edit_panel = document.createElement('section');
     wiki_edit_panel.classList.add('wiki-edit-panel');
@@ -232,7 +240,7 @@ export function bleh_wiki_editor() {
     // latest
     const side_actions = html.node`
         <section class="side-actions">
-            <a class="btn side-action" data-type="latest-wiki" href="${sub_text.querySelector('a').getAttribute('href')}">
+            <a class="btn side-action icon-mask" data-type="latest-wiki" href="${sub_text.querySelector('a').getAttribute('href')}">
                 ${tl(trans.view_latest)}
             </a>
         </section>
@@ -351,19 +359,18 @@ export function patch_wiki() {
 
         let read_more = wiki_block.querySelector('a:last-child');
         if (read_more) {
-            read_more.classList.add('read-more');
+            read_more.classList.add('read-more', 'icon');
             read_more.textContent = tl(trans.read_more).toLowerCase();
         }
 
-        wiki_col.insertBefore(html.node`
-            <div class="sub-text">
-                <p>${tl(trans.about)}</p>
+        wiki_col.appendChild(html.node`
+            <div class="sub-text wiki-sub-text">
                 <span class="right-links">
-                    <p><a class="wiki-edit-small" href="${document.location.href}/+wiki/edit">${tl(trans.edit_wiki).toLowerCase()}</a></p>
+                    <p><a class="wiki-edit-small icon" href="${document.location.href}/+wiki/edit">${tl(trans.edit_wiki).toLowerCase()}</a></p>
                     ${(!wiki_empty && read_more) ? html.node`<p>${read_more}</p>` : ''}
                 </span>
             </div>
-        `, wiki_col.firstElementChild);
+        `);
 
         if (!wiki_empty)
             patch_wiki_contents(wiki_block);
@@ -481,6 +488,9 @@ export function patch_wiki_contents(wiki_block) {
                 `
             });
 
-        if (type) link.setAttribute('data-link-type', type);
+        if (type) {
+            link.classList.add('wiki-link', 'icon');
+            link.setAttribute('data-link-type', type);
+        }
     });
 }

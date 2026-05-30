@@ -1,0 +1,11 @@
+.alt-text {
+    padding: 2px 6px;
+    border-radius: var(--item-med-radius);
+    background: oklch(var(--b6), 40%);
+    font-size: 12px;
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+    color: oklch(var(--c3));
+    backdrop-filter: var(--solarium-bright);
+    -webkit-backdrop-filter: var(--solarium-bright);
+}

@@ -1,7 +1,7 @@
 {
-    "latest": "2026.0217",
+    "latest": "2026.0420",
     "sponsors": [
-        "clairedoll", "kateshapedbox", "evangelicgirl",
+        "dressupdarling", "kateshapedbox", "evangelicgirl",
         "astrablooms", "ItsProyal", "vwvwvwvwvwvwv", "Orofil",
         "EliteHimself", "iwas15with100k", "keepsweet", "fucksophie",
         "carbon1k", "mousey-toy", "scidal",
@@ -10,11 +10,14 @@
         "noapop", "celebrating", "myraisounds", "riskyrizey",
         "fourohclok", "HuxP", "K40M0J1",
         "goldenstuffed", "satisfeita", "kar1x", "nojonsko",
-        "urwq", "driftpsalm", "popcorniscrazy", "s0540a",
+        "urwq", "driftpsalm", "popcorniscrazy", "v4nnen",
         "dylandotat", "Angel0Lust", "liminelle", "quikwise",
         "BosozokuGF", "tainaronian", "NozomiBear", "nin0dev",
         "milkdrinker3000", "wiichicken", "duskwitch", "rgoracz",
-        "thomasb2k", "ThatJumpyFrog", "nite_", "mitsurin"
+        "thomasb2k", "ThatJumpyFrog", "nite_", "mitsurin",
+        "vamti", "lxjv", "f-ff", "monikapurpl3",
+        "ahntaea", "monikapurpl3", "drainpuppy",
+        "DIVANA4EVER"
     ],
     "sponsors_one_time": [
         "kateshapedbox",
@@ -24,30 +27,32 @@
         "saettbyeol", "lyeule", "noapop",
         "celebrating", "riskyrizey",
         "fourohclok", "K40M0J1", "goldenstuffed",
-        "kar1x", "nojonsko", "s0540a",
+        "kar1x", "nojonsko", "v4nnen",
         "Angel0Lust", "tainaronian", "wiichicken",
-        "rgoracz", "nite_"
+        "rgoracz", "nite_", "vamti", "f-ff",
+        "monikapurpl3", "ahntaea", "monikapurpl3", "drainpuppy",
+        "DIVANA4EVER"
     ],
     "sponsor_count_remove": 3,
     "sponsor_account": "kateshapedbox",
     "sponsor_link": "https://github.com/sponsors/katelyynn",
-    "special": ["clairedoll", "evangelicgirl"],
+    "special": ["dressupdarling", "evangelicgirl"],
     "badges": {
-        "clairedoll": [
+        "dressupdarling": [
             {
                 "type": "contributor"
             },
             {
                 "type": "cute",
-                "name": "cute"
+                "name": "the bleh herself"
             },
             {
-                "name": "刻々帝",
-                "reason": "the angel of time ♡",
-                "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJjdXJyZW50Q29sb3IiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1maWxsZWQgaWNvbi10YWJsZXItY2xvY2staG91ci0zIj48cGF0aCBzdHJva2U9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNMTcgMy4zNGExMCAxMCAwIDEgMSAtMTUgOC42NmwuMDA1IC0uMzI0YTEwIDEwIDAgMCAxIDE0Ljk5NSAtOC4zMzZtLTUgMi42NmExIDEgMCAwIDAgLTEgMXY1YTEgMSAwIDAgMCAxIDFoMy41YTEgMSAwIDAgMCAwIC0yaC0yLjV2LTRhMSAxIDAgMCAwIC0uODgzIC0uOTkzeiIgLz48L3N2Zz4=",
-                "hue": 31,
-                "sat": 2,
-                "lit": 0.96
+                "name": "i bite",
+                "reason": "in service to my darling",
+                "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLW1pbmltaXplIj48cGF0aCBzdHJva2U9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNMTUgMTl2LTJhMiAyIDAgMCAxIDIgLTJoMiIgLz48cGF0aCBkPSJNMTUgNXYyYTIgMiAwIDAgMCAyIDJoMiIgLz48cGF0aCBkPSJNNSAxNWgyYTIgMiAwIDAgMSAyIDJ2MiIgLz48cGF0aCBkPSJNNSA5aDJhMiAyIDAgMCAwIDIgLTJ2LTIiIC8+PC9zdmc+",
+                "hue": 19,
+                "sat": 2.62,
+                "lit": 0.84
             }
         ],
         "evangelicgirl": [
@@ -58,10 +63,6 @@
                 "type": "sponsor"
             },
             {
-                "type": "cute",
-                "name": "cute"
-            },
-            {
                 "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLWdyYXZlLTIiPjxwYXRoIHN0cm9rZT0ibm9uZSIgZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPjxwYXRoIGQ9Ik03IDE2LjE3di05LjE3YTMgMyAwIDAgMSAzIC0zaDRhMyAzIDAgMCAxIDMgM3Y5LjE3MSIgLz48cGF0aCBkPSJNMTIgN3Y1IiAvPjxwYXRoIGQ9Ik0xMCA5aDQiIC8+PHBhdGggZD0iTTUgMjF2LTJhMyAzIDAgMCAxIDMgLTNoOGEzIDMgMCAwIDEgMyAzdjJoLTE0eiIgLz48L3N2Zz4=",
                 "name": "zombie girl :3",
                 "reason": "cute dead girl",
@@ -70,14 +71,16 @@
                 "lit": 1.18
             }
         ],
-        "bIeak": {
-            "type": "kitty",
-            "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIyLjI1IiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1jYXQiIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTEyIDVjLjY3IDAgMS4zNS4wOSAyIC4yNiAxLjc4LTIgNS4wMy0yLjg0IDYuNDItMi4yNiAxLjQuNTgtLjQyIDctLjQyIDcgLjU3IDEuMDcgMSAyLjI0IDEgMy40NEMyMSAxNy45IDE2Ljk3IDIxIDEyIDIxcy05LTMtOS03LjU2YzAtMS4yNS41LTIuNCAxLTMuNDQgMCAwLTEuODktNi40Mi0uNS03czQuNzIuMjMgNi41IDIuMjNBOSA5IDAgMCAxIDEyIDVNOCAxNHYuNU0xNiAxNHYuNSIvPjxwYXRoIGQ9Ik0xMS4yNSAxNi4yNWgxLjVMMTIgMTd6Ii8+PC9zdmc+",
-            "name": "its a kitty!!",
-            "hue": 0.0001,
-            "sat": 0.0001,
-            "lit": 1.5
-        },
+        "bIeak": [
+            {
+                "type": "kitty",
+                "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLWNhdCI+PHBhdGggc3Ryb2tlPSJub25lIiBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTIwIDN2MTBhOCA4IDAgMSAxIC0xNiAwdi0xMGwzLjQzMiAzLjQzMmE3Ljk2MyA3Ljk2MyAwIDAgMSA0LjU2OCAtMS40MzJjMS43NjkgMCAzLjQwMyAuNTc0IDQuNzI4IDEuNTQ2bDMuMjcyIC0zLjU0NiIgLz48cGF0aCBkPSJNMiAxNmg1bC00IDQiIC8+PHBhdGggZD0iTTIyIDE2aC01bDQgNCIgLz48cGF0aCBkPSJNMTEgMTZhMSAxIDAgMSAwIDIgMGExIDEgMCAxIDAgLTIgMCIgLz48cGF0aCBkPSJNOSAxMXYuMDEiIC8+PHBhdGggZD0iTTE1IDExdi4wMSIgLz48L3N2Zz4=",
+                "name": "its a kitty!!",
+                "hue": 0.0001,
+                "sat": 0.0001,
+                "lit": 1.5
+            }
+        ],
         "kateshapedbox": [
             {
                 "type": "contributor"
@@ -237,7 +240,7 @@
         ],
         "I3xi": {
             "type": "kitty",
-            "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIyLjI1IiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1jYXQiIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTEyIDVjLjY3IDAgMS4zNS4wOSAyIC4yNiAxLjc4LTIgNS4wMy0yLjg0IDYuNDItMi4yNiAxLjQuNTgtLjQyIDctLjQyIDcgLjU3IDEuMDcgMSAyLjI0IDEgMy40NEMyMSAxNy45IDE2Ljk3IDIxIDEyIDIxcy05LTMtOS03LjU2YzAtMS4yNS41LTIuNCAxLTMuNDQgMCAwLTEuODktNi40Mi0uNS03czQuNzIuMjMgNi41IDIuMjNBOSA5IDAgMCAxIDEyIDVNOCAxNHYuNU0xNiAxNHYuNSIvPjxwYXRoIGQ9Ik0xMS4yNSAxNi4yNWgxLjVMMTIgMTd6Ii8+PC9zdmc+",
+            "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLWNhdCI+PHBhdGggc3Ryb2tlPSJub25lIiBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTIwIDN2MTBhOCA4IDAgMSAxIC0xNiAwdi0xMGwzLjQzMiAzLjQzMmE3Ljk2MyA3Ljk2MyAwIDAgMSA0LjU2OCAtMS40MzJjMS43NjkgMCAzLjQwMyAuNTc0IDQuNzI4IDEuNTQ2bDMuMjcyIC0zLjU0NiIgLz48cGF0aCBkPSJNMiAxNmg1bC00IDQiIC8+PHBhdGggZD0iTTIyIDE2aC01bDQgNCIgLz48cGF0aCBkPSJNMTEgMTZhMSAxIDAgMSAwIDIgMGExIDEgMCAxIDAgLTIgMCIgLz48cGF0aCBkPSJNOSAxMXYuMDEiIC8+PHBhdGggZD0iTTE1IDExdi4wMSIgLz48L3N2Zz4=",
             "name": "its a kitty!!",
             "hue": 228,
             "sat": 1.3,
@@ -367,9 +370,11 @@
                 "lit": 0.94
             }
         ],
-        "s0540a": {
-            "type": "sponsor"
-        },
+        "v4nnen": [
+            {
+                "type": "sponsor"
+            }
+        ],
         "popcorniscrazy": [
             {
                 "type": "sponsor"
@@ -523,6 +528,46 @@
                 "hue": 300,
                 "sat": 1.5,
                 "lit": 1.24
+            }
+        ],
+        "vamti": [
+            {
+                "type": "sponsor"
+            }
+        ],
+        "lxjv": [
+            {
+                "type": "sponsor"
+            }
+        ],
+        "f-ff": [
+            {
+                "type": "sponsor"
+            }
+        ],
+        "monikapurpl3": [
+            {
+                "type": "sponsor"
+            }
+        ],
+        "ahntaea": [
+            {
+                "type": "sponsor"
+            }
+        ],
+        "monikapurpl3": [
+            {
+                "type": "sponsor"
+            }
+        ],
+        "drainpuppy": [
+            {
+                "type": "sponsor"
+            }
+        ],
+        "DIVANA4EVER": [
+            {
+                "type": "sponsor"
             }
         ]
     }

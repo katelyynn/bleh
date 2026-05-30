@@ -12,14 +12,13 @@ import { desanitise, sanitise, sanitise_text, year_from_date } from '@/build/too
 import { tl, trans } from '@/build/trans';
 import { prep_chart_colours } from '@/components/music/chart';
 import { correct_artist, correct_item_by_artist } from '@/components/music/lotus';
-import { refresh_all } from '@/config';
 import { ff } from '@/components/settings/sku';
 import { input } from '@/components/settings/input';
 import { setting } from '@/components/settings/settings';
 import { redirect } from '@/components/music/music';
 import tippy from 'tippy.js';
 import { Chart } from '@/main';
-import { load_profile_cache_externally } from '@/pages/profile/profile.js';
+import { load_profile_cache_externally } from '@/pages/profile/profile';
 
 export function bleh_user_library() {
     // date sidebar into its own panel
@@ -113,8 +112,6 @@ export function bleh_user_library() {
                 ${setting({ id: 'chart_bar_axis', standalone: true, func: bleh_glacier_date_graph_generate })}
             </div>
         `);
-
-        refresh_all(page.structure.glacier.date_panel);
     }
 
     //let picker_content = date_button_panel.querySelector('.date-range-picker-content');
@@ -230,6 +227,14 @@ function bleh_glacier_library_date() {
     page.requested.rangetype = params.get('rangetype');
 
     const picker_presets = picker_content.querySelectorAll('.date-range-picker-presets-wrap > .date-range-picker-presets');
+
+    const items = picker_content.querySelectorAll('.date-range-picker-preset');
+    items.forEach(item => {
+        const link = item.firstElementChild;
+
+        link.classList.add('btn', 'date-picker-preset-item');
+    });
+
     load_profile_cache_externally(page.name).then(cache => {
         if (!cache.created) return;
 
@@ -244,7 +249,7 @@ function bleh_glacier_library_date() {
 
             picker_presets[target].appendChild(html.node`
                 <li class="date-range-picker-preset ${selected ? 'date-range-picker-preset--selected' : ''}">
-                    <a href="${window.location.href.replace(window.location.search, '')}?from=${year}-01-01&rangetype=year" onclick=${() => {
+                    <a class="btn date-picker-preset-item" href="${window.location.href.replace(window.location.search, '')}?from=${year}-01-01&rangetype=year" data-analytics-action="DateSelector" onclick=${() => {
                         modal.hide();
                     }}>
                         ${year}
@@ -480,15 +485,22 @@ function bleh_glacier_library_top(static_page = false) {
     }
 
     if (!static_page && page.subpage != 'library_tracks') {
-        let format_button = document.createElement('button');
-        format_button.classList.add(
-            'btn',
-            'view-item',
-            'glacier-library-button',
-            'glacier-view-button'
-        );
-        format_button.setAttribute('onclick', '_update_glacier_view()');
-        page.structure.glacier.format = format_button;
+        const format_button = html.node`
+            <button class="btn view-item icon glacier-library-button glacier-view-button" onclick=${() => {
+                const format = page.structure.main.querySelector('.library-view-button');
+                if (!format) return;
+
+                format.click();
+
+                if (format.getAttribute('href') && format.getAttribute('href').endsWith('reset')) {
+                    format_button.setAttribute('data-glacier-view', 'list');
+                    format_button.textContent = tl(trans.list);
+                } else {
+                    format_button.setAttribute('data-glacier-view', 'grid');
+                    format_button.textContent = tl(trans.grid);
+                }
+            }} />
+        `;
         add_divider = true;
 
         if (top_wrap.getAttribute('data-current-format') == 'grid') {
@@ -503,15 +515,16 @@ function bleh_glacier_library_top(static_page = false) {
     }
 
     if (!static_page && add_divider) {
-        let listen_divider = document.createElement('div');
-        listen_divider.classList.add('listen-divider');
-        view_buttons.appendChild(listen_divider);
+        view_buttons.appendChild(html.node`
+            <div class="listen-divider" />
+        `);
     }
 
     let configure_button = document.createElement('button');
     configure_button.classList.add(
         'btn',
         'view-item',
+        'icon',
         'glacier-library-button',
         'glacier-configure-button',
         'panel-settings-button'
@@ -576,24 +589,6 @@ function bleh_glacier_library_top(static_page = false) {
         page.structure.main.firstElementChild
     );
 }
-
-unsafeWindow._update_glacier_view = function () {
-    let format = page.structure.main.querySelector('.library-view-button');
-    if (format == null) return;
-
-    format.click();
-
-    if (
-        format.getAttribute('href') &&
-        format.getAttribute('href').endsWith('reset')
-    ) {
-        page.structure.glacier.format.setAttribute('data-glacier-view', 'list');
-        page.structure.glacier.format.textContent = tl(trans.list);
-    } else {
-        page.structure.glacier.format.setAttribute('data-glacier-view', 'grid');
-        page.structure.glacier.format.textContent = tl(trans.grid);
-    }
-};
 
 function bleh_glacier_date_graph(static_page = false, own_table = null) {
     if (!page.structure.glacier.refresh) return;
@@ -1038,7 +1033,7 @@ export function bleh_glacier_date_graph_generate() {
     let scrobble_canvas_container = page.structure.glacier.date_panel.querySelector('.scrobble-canvas-container');
     if (scrobble_canvas_container == null) {
         scrobble_canvas_container = document.createElement('div');
-        scrobble_canvas_container.classList.add('scrobble-canvas-container');
+        scrobble_canvas_container.classList.add('scrobble-canvas-container', 'icon-mask');
         new_run = true;
     } else {
         scrobble_canvas_container.innerHTML = '';
@@ -1282,7 +1277,7 @@ function bleh_glacier_library_focused() {
 
             if (!button) return;
 
-            button.classList.add('btn', 'view-item', 'glacier-library-button');
+            button.classList.add('btn', 'view-item', 'icon', 'glacier-library-button');
 
             let tooltips = wrapper.querySelectorAll(
                 '.user-library-controls-tooltip'
@@ -1308,12 +1303,14 @@ function bleh_glacier_library_focused() {
                         button.classList.add(
                             'btn',
                             'view-item',
+                            'icon',
                             'glacier-library-button'
                         );
                 }
             } else {
                 // have to read classlist
                 if (button.classList.contains('delete-icon')) {
+                    button.classList.add('colourful');
                     button.textContent = tl(trans.delete);
                 }
             }
@@ -1331,6 +1328,7 @@ function bleh_glacier_library_focused() {
         search.classList.add(
             'btn',
             'view-item',
+            'icon',
             'glacier-library-button',
             'glacier-search-button'
         );
@@ -1352,6 +1350,7 @@ function bleh_glacier_library_focused() {
     configure_button.classList.add(
         'btn',
         'view-item',
+        'icon',
         'glacier-library-button',
         'glacier-configure-button',
         'panel-settings-button'
@@ -1491,6 +1490,7 @@ export function bleh_glacier_library_bulk_edit() {
     bulk_edit.classList.add(
         'btn',
         'view-item',
+        'icon',
         'glacier-library-button',
         'bulk-edit-button'
     );

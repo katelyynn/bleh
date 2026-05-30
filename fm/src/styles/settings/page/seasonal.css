@@ -1,0 +1,94 @@
+.seasonal-timeline {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    cursor: default;
+
+    padding: 0 100px;
+
+    @media (max-width: 1200px) {
+        padding: 0 30px;
+    }
+
+    margin: 30px 0;
+}
+
+.seasonal-timeline-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    width: 130px;
+    flex: 1;
+
+    &:not([data-season-type="current"]) {
+        opacity: 0.6;
+    }
+}
+
+.seasonal-icon {
+    --icon-size: 28px;
+    margin-bottom: 10px;
+
+    background-color: oklch(var(--b2), 20%);
+    padding: 12px;
+    border-radius: 50%;
+
+    &:not([data-season="none"]) {
+        background-color: oklch(var(--f4), 20%);
+        --mask-colour: oklch(var(--l3-c));
+
+        --hue-over: var(--hue-seasonal);
+        --sat-over: var(--sat-seasonal);
+        --lit-over: var(--lit-seasonal);
+    }
+}
+
+.seasonal-name {
+    font-size: 16px;
+    line-height: 20px;
+
+    &:not([data-season="none"]) {
+        color: oklch(var(--l3-c));
+
+        --hue-over: var(--hue-seasonal);
+        --sat-over: var(--sat-seasonal);
+        --lit-over: var(--lit-seasonal);
+    }
+}
+
+.seasonal-icon > .bleh-icon,
+.bleh-seasonal-icon {
+    --icon: var(--mask, var(--icon-16-season));
+
+    &[data-season="easter"] {
+        --mask: var(--icon-16-egg);
+    }
+    &[data-season="pride"] {
+        --mask: var(--icon-16-pride);
+    }
+    &[data-season="halloween"] {
+        --mask: var(--icon-16-pumpkin);
+    }
+    &[data-season="pre_fall"] {
+        --mask: var(--icon-16-fall);
+    }
+    &[data-season="fall"] {
+        --mask: var(--icon-16-fall);
+    }
+    &[data-season="christmas"] {
+        --mask: var(--icon-16-snow);
+    }
+    &[data-season="new_years"] {
+        --mask: var(--icon-16-new-years);
+    }
+}
+
+.bleh-icon[data-season="pride"] {
+    background-color: unset !important;
+    background-image: var(--pride) !important;
+    background-size: 100% !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+}

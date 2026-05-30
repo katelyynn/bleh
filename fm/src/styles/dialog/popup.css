@@ -1,0 +1,23 @@
+.popup-sub {
+    display: block;
+    font-size: 11px;
+    color: oklch(var(--c3));
+    cursor: default;
+    user-select: none;
+}
+
+.popup-title {
+    cursor: default;
+}
+
+.popup-body {
+    max-width: 280px;
+    cursor: default;
+}
+
+.popup-action {
+    display: flex;
+    justify-content: end;
+
+    --font-size: 13px;
+}

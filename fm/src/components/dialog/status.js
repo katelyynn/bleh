@@ -6,6 +6,7 @@
 
 import { html } from 'lighterhtml';
 import { page } from '@/build/page';
+import { icon, icons } from '../shared/icon';
 
 export function load_status() {
     if (!page.structure.status) {
@@ -18,18 +19,18 @@ export function load_status() {
 }
 
 export function status({ title, body, type }) {
-    let icon = 'icon-16-info';
+    let status_icon = icons.info;
 
     if (type == 'error') {
-        icon = 'icon-16-x';
+        status_icon = icons.x;
     }
 
     const alert = html.node`
-        <div class="status-alert colourful colourful-bg" onclick=${() => status_remove()}>
-            <div class="status-icon">
-                <div class="bleh-icon" style="--icon: var(--${icon})" />
+        <div class="status-alert colourful" onclick=${() => status_remove()}>
+            <div class="status-title">
+                ${icon({ name: status_icon })}
+                ${title}
             </div>
-            <div class="status-title">${title}</div>
             ${body ? html.node`<div class="status-body">${body}</div>` : ''}
         </div>
     `;

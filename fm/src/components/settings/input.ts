@@ -9,9 +9,9 @@ import { tl, trans } from '@/build/trans';
 import { log } from '@/build/log.js';
 import tippy from 'tippy.js';
 import { calendar } from '@/components/dialog/calendar';
-import { auth } from '@/build/page.js';
+import { auth } from '@/build/page';
 
-type input = {
+interface input {
     type?: string,
     value?: string | number,
     placeholder?: string,
@@ -34,6 +34,11 @@ type input = {
     cols?: number,
     rows?: number,
     required?: boolean
+}
+
+interface input_element extends HTMLElement {
+    range: [start: number, end: number],
+    value: string
 }
 
 export function input({
@@ -59,7 +64,7 @@ export function input({
     cols,
     rows,
     required = false
-}: input) {
+}: input): input_element {
     if (type == 'date') {
         return calendar({
             value,
@@ -126,6 +131,10 @@ export function input({
         }
     });
 
+    input_box.addEventListener('paste', () => {
+        if (func) func(input_box.value);
+    });
+
     input_box.addEventListener('select', () => {
         if (func_select) func_select(input_box, input_box.value);
     });
@@ -138,9 +147,11 @@ export function input({
         if (func_mouseup) func_mouseup(input_box, input_box.value);
     });
 
-    container.editor = () => {
-        return input_box;
-    };
+    Object.defineProperty(container, 'editor', {
+        get() {
+            return input_box;
+        }
+    });
 
     container.submit = () => {
         if (func) func(input_box.value);
@@ -152,13 +163,15 @@ export function input({
         }, 5);
     };
 
-    container.value = (val = null) => {
-        if (val == null) return input_box.value;
-
-        input_box.value = val;
-        update_input();
-        return val;
-    };
+    Object.defineProperty(container, 'value', {
+        get() {
+            return input_box.value;
+        },
+        set(val: string | number) {
+            input_box.value = val;
+            update_input();
+        }
+    });
 
     container.disabled = (state = null) => {
         if (state === null) return input_box.getAttribute('disabled') || false;
@@ -169,9 +182,11 @@ export function input({
         return state;
     };
 
-    container.range = (start, end) => {
-        input_box.setSelectionRange(start, end);
-    };
+    Object.defineProperty(container, 'range', {
+        set([start, end]: [start: number, end: number]) {
+            input_box.setSelectionRange(start, end);
+        }
+    });
 
     return container;
 
@@ -182,7 +197,7 @@ export function input({
         if (type != 'number' && !skip_most) {
             if (input_box.value == '' && warn_if_empty) {
                 error_input(tl(trans.this_field_is_required));
-            } else if (input_box.value.length > maxlength) {
+            } else if (maxlength && input_box.value.length > maxlength) {
                 error_input(tl(trans.keep_within_the_range));
             } else if (warn_if_matches_auth && input_box.value == auth.name) {
                 error_input(tl(trans.please_dont_clone_yourself));

@@ -5,15 +5,18 @@
 //
 
 import {log} from "@/build/log";
-import {page} from "@/build/page";
+import {gendered_pattern, page} from "@/build/page";
 import {desanitise} from "@/build/tools";
 import {tl, trans} from "@/build/trans";
-import {patch_header_title} from "@/components/music/lotus";
 import {checkup_page_structure} from "@/components/page/structure";
-import {register_background, update_page} from "../page";
+import {is_same_page, register_background, update_page} from "../page";
 import {ff} from "@/components/settings/sku";
 import {bleh_wiki, bleh_wiki_editor, bleh_wiki_history} from "@/pages/music/wiki";
 import tippy from "tippy.js";
+import { settings } from "@/build/config";
+import { page_header_title } from '@/components/music/header';
+import { html } from 'lighterhtml';
+import { icon, icons } from '@/components/shared/icon';
 
 export function bleh_tags() {
     let tag_header = document.body.querySelector('.header--tag');
@@ -23,7 +26,7 @@ export function bleh_tags() {
         return;
     tag_header.setAttribute('data-bwaa', 'true');
 
-    patch_header_title();
+    page_header_title(tag_header);
 
     let is_subpage = tag_header.classList.contains('header--sub-page');
 
@@ -50,17 +53,19 @@ export function bleh_tags() {
         let title = desanitise(split[index]);
         page.name = title;
 
-        let redesigned_tag_header = document.createElement('section');
-        redesigned_tag_header.classList.add('redesigned-header', 'redesigned-tag-header', 'no-background');
-        redesigned_tag_header.innerHTML = (`
-            <div class="tag-side">
-                <div class="tag-icon"></div>
-            </div>
-            <div class="info-side">
-                <div class="sub-text">${tl(trans.tag)}</div>
-                <h1>${title}</h1>
-            </div>
-        `);
+        const same_page = is_same_page();
+
+        const redesigned_tag_header = html.node`
+            <section class="page-header for-generic ${same_page ? 'same' : ''}">
+                <div class="page-header-icon">
+                    ${icon({ name: icons.tag })}
+                </div>
+                <div class="page-header-info">
+                    <div class="sub-text">${tl(trans.tag)}</div>
+                    <h1 class="page-header-title">${title}</h1>
+                </div>
+            </section>
+        `;
 
         let background = document.body.querySelector('.header-background--has-image');
         if (background)
@@ -89,6 +94,8 @@ export function bleh_tags() {
             col_main.appendChild(header_tags);
 
             col_main.appendChild(tags);
+
+            bleh_tags_mini(tags);
         }
 
 
@@ -97,7 +104,7 @@ export function bleh_tags() {
         view_all_panel.classList.add('side-actions');
 
         let button = bookmark_form.querySelector('button');
-        button.classList = 'btn side-action';
+        button.classList = 'btn side-action icon-mask';
         button.setAttribute('data-type', 'bookmark');
 
         view_all_panel.appendChild(bookmark_form);
@@ -110,7 +117,7 @@ export function bleh_tags() {
         new_playlist.removeChild(header);
 
         let playlist_button = new_playlist.querySelector('button');
-        playlist_button.classList = 'btn side-action';
+        playlist_button.classList = 'btn side-action icon-mask';
         playlist_button.setAttribute('data-type', 'playlist');
 
         view_all_panel.appendChild(new_playlist);
@@ -127,14 +134,40 @@ export function bleh_tags() {
     update_page();
 }
 
+export function bleh_tags_large(observer = page.structure.main) {
+    const hide_gendered = settings.gendered_tags;
 
-export function bleh_tags_mini() {
-    let tag_user_avatar = page.structure.main.querySelector('.tags-user-avatar');
+    const tags = observer.querySelectorAll('.big-tags-item-wrap');
+    tags.forEach(tag => {
+        const text = tag.querySelector('.big-tags-item-name').textContent.trim();
+
+        if (hide_gendered && gendered_pattern.test(text)) {
+            tag.remove();
+        }
+    });
+}
+
+export function bleh_tags_mini(observer = page.structure.main) {
+    const hide_gendered = settings.gendered_tags;
+
+    const tags = observer.querySelectorAll('.tag');
+    tags.forEach(tag => {
+        const elem = tag.firstElementChild;
+        elem.classList.add('btn', 'tag-item');
+
+        const text = elem.textContent.trim();
+
+        if (hide_gendered && gendered_pattern.test(text)) {
+            tag.remove();
+        }
+    });
+
+    let tag_user_avatar = observer.querySelector('.tags-user-avatar');
     if (!tag_user_avatar) return;
 
     let tags_list = tag_user_avatar.nextElementSibling;
-    let tags = tags_list.querySelectorAll('.tag a');
-    tags.forEach((tag) => {
+    const user_tags = tags_list.querySelectorAll('.tag a');
+    user_tags.forEach((tag) => {
         tag.classList.add('user-created-tag');
 
         tippy(tag, {

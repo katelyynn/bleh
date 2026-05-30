@@ -1,0 +1,119 @@
+.update-center-icon {
+    position: relative;
+    width: fit-content;
+
+    & > .update-container {
+        &.spin {
+            animation: staggered_spinner 3s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+        }
+
+        & > .bleh-icon {
+            background: conic-gradient(
+                from 270deg,
+                oklch(var(--l2-c)),
+                oklch(var(--l4-c))
+            );
+            --icon-size: 40px;
+            --icon: var(--mask);
+        }
+    }
+
+    .check-circle {
+        background: oklch(var(--h3) / var(--solarium-opacity, 40%));
+        box-shadow: 0px 0px 9px 0px oklch(var(--l2-c) / 60%) inset;
+        color: oklch(var(--b7));
+        outline: 4px solid oklch(var(--b5));
+        border-radius: 50px;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+
+        backdrop-filter: var(--solarium);
+        -webkit-backdrop-filter: var(--solarium);
+
+        padding: 3px;
+
+        & > .bleh-icon {
+            --icon-size: 10px;
+            --icon: var(--mask);
+        }
+
+        --hue-over: var(--hue-pos);
+        --sat-over: 1;
+        --lit-over: 1;
+
+        &.paused {
+            --hue-over: 25;
+        }
+    }
+}
+
+.update-minor-details {
+    color: oklch(var(--c3));
+    cursor: default;
+
+    display: flex;
+    gap: var(--icon-gap);
+}
+
+
+.languages {
+    display: flex;
+    flex-direction: column;
+    margin: -8px 0;
+
+    .language-row {
+        display: flex;
+        align-items: center;
+        gap: var(--item-list-gap);
+        padding: 8px 0;
+
+        & > .name {
+            flex: 1;
+            /*width: 200px;
+            display: -webkit-box;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-clamp: 1;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;*/
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0 4px;
+
+            & > h5 {
+                color: oklch(var(--c2));
+            }
+            & > p {
+                color: oklch(var(--c2) / 80%);
+                cursor: default;
+            }
+        }
+
+        & > .date {
+            flex-shrink: 0;
+            color: oklch(var(--c3));
+            font-size: 13px;
+            cursor: default;
+            width: 130px;
+            display: flex;
+            justify-content: end;
+
+            & > p {
+                width: fit-content;
+            }
+        }
+
+        & > .percent {
+            width: fit-content;
+            text-align: right;
+            cursor: default;
+            color: oklch(var(--l3-c));
+            font-weight: var(--font-weight-medium);
+        }
+
+        .badges {
+            width: 40px;
+        }
+    }
+}

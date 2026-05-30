@@ -10,9 +10,11 @@ import { lang_info, tl, trans } from '@/build/trans';
 import { html } from 'lighterhtml';
 import { sponsor } from '@/components/sponsor';
 import tippy from 'tippy.js';
+import { page } from '@/build/page';
+import { style_name_from_badge } from './avatar';
 
 export function load_badges(user, solo = false) {
-    if (!sponsor_list || !sponsor_list.badges) return;
+    if (!sponsor_list.version) return;
 
     let badges = [];
 
@@ -29,27 +31,37 @@ export function load_badges(user, solo = false) {
         });
     }
 
-    if (sponsor_list.badges.hasOwnProperty(user)) {
-        if (!Array.isArray(sponsor_list.badges[user])) {
-            log('1 badge found', 'sponsor', 'info', sponsor_list.badges[user]);
-            badges.push(sponsor_list.badges[user]);
-        } else {
+    let entry = sponsor_list.users[user];
+
+    if (entry) {
+        entry = {
+            sponsor: true,
+            contributor: false,
+            ...entry
+        }
+
+        if (entry.contributor) {
+            badges.push({
+                type: 'contributor'
+            });
+        }
+
+        if (entry.sponsor) {
+            badges.push({
+                type: 'sponsor'
+            });
+        }
+
+        if (entry.badges) {
             log(
                 'multiple badges found',
                 'sponsor',
                 'info',
-                sponsor_list.badges[user]
+                sponsor_list.users[user].badges
             );
 
-            badges = [...badges, ...sponsor_list.badges[user]];
+            badges = [...badges, ...sponsor_list.users[user].badges];
         }
-
-        // remove old translation badges
-        badges = badges.filter(badge => {
-            if (badge.type != 'translation') return true;
-
-            return 'translation_code' in badge;
-        });
     }
 
     // now we run thru to add missing metadata
@@ -57,7 +69,7 @@ export function load_badges(user, solo = false) {
         badge = process_badge(badge, user);
     });
 
-    log('final badge list', 'sponsor', 'info', badges);
+    log(`final badge list for @${user}`, 'sponsor', 'info', { badges });
 
     if (solo) return badges[badges.length - 1];
 
@@ -132,12 +144,19 @@ export function create_badge(
         </span>
     `;
 
+    if (small) {
+        elem.appendChild(html.node`
+            <span class="badge-back" />
+        `);
+    }
+
     if (badge.translation_code) {
         elem.classList.add('translation-lang');
         elem.style.setProperty('--flag', `url(https://katelyynn.github.io/bleh/fm/flags/${badge.translation_code}.svg)`);
     }
 
     if (long) elem.classList.add('expand');
+    if (small) elem.classList.add('small');
 
     if (
         badge.icon != '' &&
@@ -161,16 +180,28 @@ export function create_badge(
 
     if (on_avatar || small) return elem;
 
+    let badge_name;
     tippy(elem, {
         theme: 'badge',
         placement: 'bottom',
         content: html.node`
-            <div class="badge-name">${badge.name}</div>
+            <div class="badge-name colourful" ref=${el => badge_name = el}>${badge.name}</div>
             <div class="badge-reason">${badge.reason}</div>
         `
     });
 
+    style_name_from_badge(badge_name, badge);
+
     if (badge.type == 'sponsor') elem.onclick = sponsor;
 
     return elem;
+}
+
+export function verified() {
+    const today = new Date();
+    const april = today.getMonth() == 3 && today.getDate() == 1;
+
+    page.state.april = april;
+
+    if (april) document.body.setAttribute('data-verified-check', 'true');
 }

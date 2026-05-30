@@ -1,0 +1,321 @@
+.form-submit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--card-gap);
+    margin-left: unset !important;
+
+    button {
+        margin: unset !important;
+    }
+
+    .btn-secondary.js-close {
+        order: -1;
+    }
+
+    &.form-submit--align-right {
+        justify-content: space-between;
+    }
+}
+
+.content-form .form-horizontal .form-group {
+    margin: 4px 0 0 0;
+    padding-top: 11px;
+}
+.form-group--submit,
+.form-group:has(> .form-submit) {
+    margin-top: var(--override-margin-top, var(--card-gap)) !important;
+}
+
+.lfm-recaptcha {
+    display: flex;
+    justify-content: end;
+    width: unset;
+}
+
+.form-disclaimer {
+    margin-bottom: var(--card-gap);
+}
+
+.content-form {
+    margin: unset;
+}
+
+
+.bleh-modal-body textarea,
+.modal-body textarea {
+    width: 100%;
+    height: 150px;
+    max-height: 150px;
+    resize: none;
+}
+
+.toggle-and-time {
+    display: flex;
+    flex-wrap: wrap;
+
+    @media (max-width: 980px) {
+        flex-direction: column;
+    }
+
+    & > .setting {
+        min-height: var(--button-height);
+        flex: 1;
+
+        & > .check {
+            height: var(--button-height) !important;
+        }
+
+        & > .heading {
+            min-width: 200px;
+        }
+    }
+}
+
+.bleh--panel form {
+    margin: unset !important;
+}
+.bleh--panel > form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--card-gap);
+}
+.settings-footer {
+    display: flex;
+    justify-content: center;
+    gap: var(--button-list-gap);
+
+    &.end {
+        justify-content: end;
+    }
+
+    &.gap {
+        margin-top: var(--card-gap);
+    }
+}
+
+
+.modal-body .modal-buttons {
+    align-items: center;
+
+    & > .modal-button {
+        flex: 1;
+
+        &:has(.js-close) {
+            display: flex;
+            justify-content: start;
+        }
+
+        & + .modal-button {
+            justify-content: end !important;
+        }
+    }
+}
+.modal-body .modal-buttons,
+.modal-footer {
+    display: flex;
+    gap: var(--button-list-gap);
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: var(--card-padding) 0 0 0;
+
+    /* native modal footer */
+    .modal-button {
+        margin: unset;
+    }
+
+    &.center {
+        justify-content: center !important;
+    }
+}
+.modal-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.modal-body .form-group--submit {
+    padding-top: var(--card-gap) !important;
+    border-top: 1px solid var(--card-border-base);
+}
+
+@media (max-width: 980px) {
+    .connector-footer,
+    .settings-footer,
+    .modal-footer,
+    .setup-footer {
+        flex-direction: column;
+        align-items: stretch !important;
+        gap: 10px;
+        text-align: center;
+
+        & > form {
+            display: flex;
+
+            & > button {
+                flex: 1;
+            }
+        }
+    }
+}
+
+
+/* we can't use display: none as 'Last.fm Artwork Upload Helper' uses offsetParent, which doesnt find hidden elements - weird choice */
+.hidden-file-input {
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
+
+
+.content-top-header {
+    color: oklch(var(--c1));
+}
+
+.form-section .form-horizontal .form-group-controls {
+    width: 400px;
+}
+
+.form-group--create_automatic_edit_rule .form-group-controls {
+    flex-direction: column;
+    align-items: unset !important;
+    justify-content: center;
+}
+
+
+.content-form .control-label,
+.events-filter-location-dropdown .control-label {
+    color: oklch(var(--c2));
+    font-size: var(--font-size);
+    line-height: var(--line-height);
+    font-weight: var(--font-weight-medium);
+    text-transform: unset !important;
+}
+.content-form .form-horizontal .control-label,
+.modal-body .content-form .form-horizontal .control-label {
+    width: 150px;
+    padding-left: unset;
+    padding-right: unset;
+    justify-content: right;
+    min-height: 32px !important;
+}
+.content-form
+    .form-horizontal
+    .form-group-controls:not(:has(.btn-file-label)) {
+    width: 350px;
+    padding-left: var(--card-gap);
+    padding-right: unset;
+    display: flex;
+    align-items: center;
+}
+
+.content-form .form-group-controls {
+    margin-top: 6px;
+}
+
+.form-group--name .form-group-controls,
+#manage_data .form-group-controls,
+[action$="/+tags/add"] .form-group-controls,
+.form-section .form-group-controls.form-control-description {
+    /* this should be vertical, otherwise settings is broken */
+    display: block !important;
+    /* align with control-label */
+    padding-top: 7px;
+}
+.form-group--start_time .form-group-controls,
+:is(
+        .form-group--timezone,
+        .form-group--current_username,
+        .form-group--password,
+        #playback > .form-horizontal,
+        #email-settings > .form-horizontal
+    )
+    .form-group-controls {
+    display: block !important;
+}
+
+.content-form .form-horizontal .form-control-description label + select {
+    margin-top: 8px !important;
+}
+
+.modal-body .content-form .form-horizontal .form-group-controls {
+    width: 478px;
+}
+
+.content-form .form-horizontal .form-group-controls {
+    margin-left: 150px;
+}
+
+.footnotes,
+.content-form .form-row-help-text {
+    color: oklch(var(--c3));
+    font-size: 13px;
+    line-height: var(--line-height);
+    cursor: default;
+}
+.content-form .form-row-help-text {
+    margin-top: var(--button-list-gap);
+}
+
+
+.btn-file {
+    --mask: var(--icon-16-upload);
+    margin: unset;
+}
+.btn-file-label,
+.btn-sm {
+    min-height: var(--button-height);
+    line-height: var(--line-height);
+    padding: var(--button-verts) var(--button-sides);
+}
+.btn-file-label {
+    color: oklch(var(--c3));
+    cursor: default;
+}
+
+.content-form .form-group,
+.content-form form {
+    margin-top: var(--card-gap);
+}
+.form-header + form {
+    margin-top: unset;
+}
+.form-header + form input + .form-group {
+    margin: unset !important;
+    padding: unset !important;
+}
+
+.content-form .form-horizontal .btn-file-label,
+.content-form .form-horizontal .btn-sm,
+.content-form .form-horizontal button,
+.content-form .form-horizontal input[type="date"],
+.content-form .form-horizontal input[type="email"],
+.content-form .form-horizontal input[type="password"],
+.content-form .form-horizontal input[type="text"],
+.content-form .form-horizontal input[type="url"],
+.content-form .form-horizontal select,
+.content-form .form-horizontal textarea {
+    margin-top: unset !important;
+}
+.control-label {
+    display: flex !important;
+    /*justify-content: right;*/
+    align-items: center;
+}
+
+.content-form .form-horizontal .form-group-controls {
+    min-height: 32px !important;
+}
+
+.content-form .form-horizontal .form-group {
+    padding-top: unset;
+}
+
+.content-form legend {
+    color: oklch(var(--c1));
+    font-size: var(--font-size);
+    line-height: var(--line-height);
+    font-weight: var(--font-weight-medium);
+}
