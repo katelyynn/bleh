@@ -19,6 +19,7 @@ import { redirect } from '@/components/music/music';
 import tippy from 'tippy.js';
 import { hoshino } from '@/components/music/hoshino';
 import { header_colour } from '@/components/page/colour';
+import { icon, icons } from '@/components/shared/icon';
 
 export function bleh_obsession() {
     let obsession_container = document.querySelector('.obsession-container');
@@ -442,6 +443,11 @@ export function obsession_list() {
 
         const grid_item = html.node`
             <li class="grid-items-item obsessions-item ${obsession_is_first ? 'first' : ''}">
+                ${obsession_is_first ? html.node`
+                    <div class="grid-item-icon grid-item-icon-first colourful">
+                        ${icon({ name: icons.star })}
+                    </div>
+                ` : ''}
                 <div class="grid-items-cover-image">
                     <div class="grid-items-cover-image-image ${cover.src.endsWith('4128a6eb29f94943c9d206c08e625904.jpg') ? 'grid-items-cover-default' : ''}">
                         ${cover}

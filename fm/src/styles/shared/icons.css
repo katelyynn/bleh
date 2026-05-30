@@ -42,7 +42,7 @@
 .continue:before, .external:before, .done:before, .cancel:before, .btn-cancel:before, .download:before, .upload:before, .save:before, .open:before, .btn-secondary.js-close:not(.modal-action-button):before, .form-group button[type="submit"]:before, .modal-button button[type="submit"]:before,
 .badge:before,
 .gallery-placeholder:before,
-.image-list-item-bookmarked:after, .image-list-item-preferred:after, .obsessions-item:after,
+.image-list-item-bookmarked:after, .image-list-item-preferred:after,
 .data-loading:after, .lazy-shoutbox.async-content-loading:after, .loading:not(.library-fetch, .library-date-picker):after,
 .nag-bar-message:before,
 /*     BLEH     */

@@ -377,31 +377,28 @@ button.navlist-more {
         left: var(--button-sides-icon) !important;
         right: var(--button-sides) !important;
         border-radius: var(--item-big-radius) !important;
-        opacity: 0.6;
+        opacity: 0;
 
         display: block !important;
         width: unset !important;
         height: 3px !important;
         margin: unset !important;
-        transform: scaleY(0);
+        transform: translateY(2px);
         transform-origin: bottom;
 
         background: oklch(var(--l3-c-theme-switch)) !important;
         box-shadow: 0 -4px 20px 2px oklch(var(--l4-c) / 60%) !important;
 
-        transition-property: transform !important;
-        transition-duration: 0.2s !important;
+        transition-property: transform, opacity !important;
+        transition-duration: var(--trans) !important;
         transition-timing-function: var(--trans-function) !important;
     }
 
     &:focus,
     &:hover {
-        transform: translateY(-1px);
-        transition: none !important;
-
         &:after {
-            transform: translateY(1px) scaleY(1);
-            transition: none !important;
+            transform: translateY(0);
+            opacity: 0.6;
         }
     }
 
@@ -458,12 +455,11 @@ button.navlist-more {
 [data-bleh--gallery-tab="saved"] .secondary-nav-item--gallery-bookmarks .secondary-nav-item-link,
 .secondary-nav-item-link.active,
 .secondary-nav-item-link--active {
-    transform: translateY(0);
     --force-font-weight: var(--font-weight-medium) !important;
 
     &:after {
         opacity: 1;
-        transform: scaleY(1);
+        transform: translateY(0);
         transition: none !important;
     }
 

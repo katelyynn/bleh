@@ -1015,7 +1015,7 @@ function generic_user_title(user: string, type = 'user', fancy = false) {
     if (type == 'user') {
         icon_name = icons.user;
     } else if (type == 'starred') {
-        icon_name = icons.star;
+        icon_name = icons.starred_friend;
     } else {
         icon_name = icons.users;
     }
