@@ -817,3 +817,37 @@ button.bleh--gallery-bookmark-image-btn {
 .sidebar-image-list-image {
     position: static !important;
 }
+
+
+.vote-button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.vote-bar {
+    display: flex;
+    height: 2px;
+    border-radius: 4px;
+    overflow: hidden;
+
+    margin: 0 var(--button-sides);
+}
+
+.vote-bar-fill {
+    display: block;
+    background-color: oklch(var(--h3));
+    height: 100%;
+}
+
+.upvoted {
+    --hue-over: var(--hue-pos);
+    --sat-over: var(--sat-pos);
+    --lit-over: var(--lit-pos);
+}
+
+.downvoted {
+    --hue-over: var(--hue-neg);
+    --sat-over: var(--sat-neg);
+    --lit-over: var(--lit-neg);
+}

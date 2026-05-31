@@ -133,7 +133,15 @@ export function bleh_gallery() {
 
     // divider after vote btns
     let vote_buttons = buttons.querySelector('.gallery-image-vote-buttons');
+
     vote_buttons.after(create_divider());
+
+    const vote_button_container = html.node`
+        <div class="vote-button-container">
+            ${vote_buttons}
+        </div>
+    `;
+    buttons.insertBefore(vote_button_container, buttons.firstChild);
 
     // determine current vote number
     const positive_btn = vote_buttons
@@ -158,7 +166,7 @@ export function bleh_gallery() {
             .lastChild.textContent.trim()
     );
 
-    const number = positive - negative;
+    const number = positive + negative;
     const is_negative = number < 0;
 
     let vote_badge = image_title_container.querySelector('.vote-number');
@@ -168,6 +176,17 @@ export function bleh_gallery() {
     tippy(vote_badge, {
         content: tl(trans.gallery_sum)
     });
+
+    const upvote_percent = Math.round(positive / number * 100);
+    const downvote_percent = Math.round(negative / number * 100);
+
+    const vote_bar = html.node`
+        <div class="vote-bar">
+            <div class="vote-bar-fill colourful upvoted" style="width: ${upvote_percent}%" />
+            <div class="vote-bar-fill colourful downvoted" style="width: ${downvote_percent}%" />
+        </div>
+    `;
+    vote_button_container.appendChild(vote_bar);
 
     // 2nd side
     let buttons_extra = document.createElement('div');
