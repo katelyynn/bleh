@@ -186,7 +186,9 @@ select,
         .primary,
         .btn-subscribe,
         .view-item[aria-checked="true"],
-        .user-now-empty-state-button
+        .user-now-empty-state-button,
+        .gallery-image-preferred-on,
+        .gallery-image-vote-up-on, .gallery-image-vote-down-on
     ):not([data-has-file], .see-more) {
         --bg:
             var(--cards-overlay-image-subtlest, none), oklch(var(--h3)) !important;
