@@ -66,6 +66,9 @@ body {
     --icon-half: 9px;
     --icon-gap: 4px;
 
+    --side-action-height: 36px;
+    --side-action-side: 10px;
+
     --follow-button-size: 36px;
 
     --modal-close-size: 26px;
