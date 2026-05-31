@@ -63,6 +63,7 @@
     display: none;
 }
 
+.brand-demo,
 .bleh-logo, .lastfm-logo {
     font: 0 / 0 auto;
     margin-top: unset;
@@ -87,6 +88,8 @@
     -webkit-mask-image: var(--mask);
     mask-size: 100%;
     -webkit-mask-size: 100%;
+    mask-repeat: no-repeat;
+    -webkit-mask-repeat: no-repeat;
 }
 
 .bleh-logo {
@@ -99,4 +102,24 @@
     height: 16px;
     --mask: var(--logo-lastfm);
     aspect-ratio: 4 / 1;
+}
+
+.brand-container-demo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 200px;
+    background: black;
+}
+
+.brand-demo {
+    height: 300px;
+    --mask: var(--logo);
+    aspect-ratio: 13 / 5;
+}
+
+.brand-demo-mask {
+    background-image: unset !important;
+    background-color: white;
 }
