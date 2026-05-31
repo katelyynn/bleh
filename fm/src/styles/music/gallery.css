@@ -384,11 +384,16 @@
 .gallery-image-votes {
     --left: 0;
 }
-.gallery-image-preferred-states {
+
+.gallery-image-preferred-on, .gallery-image-preferred-off {
     --mask: var(--icon-16-star);
     --hue-over: var(--hue-fav);
     --sat-over: var(--sat-fav);
     --lit-over: var(--lit-fav);
+}
+
+.gallery-image-preferred-on {
+    --mask: var(--icon-16-star-fill);
 }
 
 /* no pro :c */
@@ -704,10 +709,13 @@ a.gallery-image-preferred-off {
 }
 
 
-button.bleh--gallery-bookmark-image-btn {
+.bleh--gallery-bookmark-image-btn {
     position: relative;
     --mask: var(--icon-16-bookmark);
-    margin-left: var(--button-list-gap) !important;
+
+    &.primary {
+        --mask: var(--icon-16-bookmark-fill);
+    }
 }
 
 .bleh--no-image-bookmarks {
