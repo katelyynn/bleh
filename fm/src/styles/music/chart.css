@@ -162,7 +162,7 @@
 
                     .charts-list-rank-overlay {
                         position: absolute;
-                        bottom: 0;
+                        bottom: 8px;
                         left: 8px;
                         font-family: var(--font-head);
                         font-size: 60px;
