@@ -83119,6 +83119,9 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                 <a class="see-more" href="https://github.com/katelyynn/bleh/issues/new/choose" target="_blank">
                     Report bug now
                 </a>
+                <a class="see-more" href="https://discord.gg/${discord}" target="_blank">
+                    Join Discord
+                </a>
                 <div class="fill"></div>
             </div>
         `,
@@ -96483,7 +96486,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-05-18"
       }
     },
-    built_on: "2026-05-30T19:40:34.037Z"
+    built_on: "2026-05-30T23:56:42.446Z"
   };
 
   // node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

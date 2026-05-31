@@ -11,6 +11,7 @@ import {
     api_url,
     auth,
     bleh_url,
+    discord,
     minis_url,
     mualani_url,
     page,
@@ -247,6 +248,9 @@ function handle_error(e = null) {
                 <div class="fill"></div>
                 <a class="see-more" href="https://github.com/katelyynn/bleh/issues/new/choose" target="_blank">
                     Report bug now
+                </a>
+                <a class="see-more" href="https://discord.gg/${discord}" target="_blank">
+                    Join Discord
                 </a>
                 <div class="fill"></div>
             </div>
