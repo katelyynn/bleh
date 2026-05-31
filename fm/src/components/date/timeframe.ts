@@ -236,7 +236,7 @@ export function hybrid_timeframe_picker({
     return elem;
 }
 
-function timeframe_text(value: string) {
+export function timeframe_text(value: string) {
     if (value.startsWith('date_preset=')) {
         if (value == 'date_preset=ALL') return tl(trans.all_time);
 
