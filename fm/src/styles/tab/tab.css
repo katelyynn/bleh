@@ -9,6 +9,17 @@
 
     --button-sides: 9px;
 
+    &:before {
+        content: '';
+        position: absolute;
+        background: linear-gradient(0deg, oklch(var(--b6) / 50%), transparent 60%);
+        inset: 0 var(--card-padding);
+
+        --mask: linear-gradient(90deg, transparent, white 10%, white 90%, transparent);
+        mask-image: var(--mask);
+        -webkit-mask-image: var(--mask);
+    }
+
     &:after {
         content: "";
         position: absolute;
@@ -344,7 +355,6 @@ button.navlist-more {
     --shadow-hov: none !important;
     --col: oklch(var(--c2)) !important;
     --mask-colour: oklch(var(--l2-c-theme-switch)) !important;
-    filter: var(--nav-filter-shadow) !important;
 
     z-index: 1;
     opacity: unset !important;
