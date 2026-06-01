@@ -91,7 +91,6 @@ export function bleh_gallery() {
         </div>
         <div class="title-layer">
             ${image_title.outerHTML}
-            <div class="vote-number colourful" data-side="pos">+0</div>
         </div>
     `;
 
@@ -102,7 +101,6 @@ export function bleh_gallery() {
         image_details,
         page.structure.main.firstElementChild
     );
-    if (first) image_details.after(html.node`<div class="sep" />`);
 
     let description = image_details.querySelector('.gallery-image-description');
     if (!description) {
@@ -121,7 +119,7 @@ export function bleh_gallery() {
     let buttons = image_details.querySelector('.gallery-image-buttons');
 
     buttons.querySelectorAll('button').forEach(btn => {
-        btn.classList.add('btn', 'colourful');
+        btn.classList.add('btn', 'colourful', 'gallery-btn');
         btn.removeAttribute('title');
     });
 
@@ -133,7 +131,15 @@ export function bleh_gallery() {
 
     // divider after vote btns
     let vote_buttons = buttons.querySelector('.gallery-image-vote-buttons');
+
     vote_buttons.after(create_divider());
+
+    const vote_button_container = html.node`
+        <div class="vote-button-container">
+            ${vote_buttons}
+        </div>
+    `;
+    buttons.insertBefore(vote_button_container, buttons.firstChild);
 
     // determine current vote number
     const positive_btn = vote_buttons
@@ -158,16 +164,23 @@ export function bleh_gallery() {
             .lastChild.textContent.trim()
     );
 
-    const number = positive - negative;
-    const is_negative = number < 0;
+    const number = positive + negative;
+    const is_negative = (positive - negative) < 0;
 
-    let vote_badge = image_title_container.querySelector('.vote-number');
-    vote_badge.textContent = `${is_negative ? '' : '+'}${number}`;
-    vote_badge.setAttribute('data-side', is_negative ? 'neg' : 'pos');
+    const upvote_percent = Math.round(positive / number * 100);
+    const downvote_percent = Math.round(negative / number * 100);
 
-    tippy(vote_badge, {
-        content: tl(trans.gallery_sum)
-    });
+    const vote_bar = html.node`
+        <div class="vote-bar">
+            <div class="vote-bar-fill colourful upvoted ${!is_negative ? 'primary-bar' : ''}" style="width: ${upvote_percent}%" />
+            <div class="vote-bar-fill colourful downvoted ${is_negative ? 'primary-bar' : ''}" style="width: ${downvote_percent}%" />
+        </div>
+    `;
+    vote_button_container.appendChild(vote_bar);
+
+    vote_bar.after(html.node`
+        <label class="vote-bar-number colourful ${is_negative ? 'downvoted' : 'upvoted'}">${is_negative ? '' : '+'}${positive - negative}</label>
+    `);
 
     // 2nd side
     let buttons_extra = document.createElement('div');
@@ -182,7 +195,7 @@ export function bleh_gallery() {
 
     // open in a new tab button
     let open_button = html.node`
-        <button class="btn image-open-button icon" onclick=${() => expand_gallery_image()}>
+        <button class="btn image-open-button icon gallery-btn gallery-btn-bland" onclick=${() => expand_gallery_image()}>
             ${tl(trans.expand)}
         </button>
     `;
@@ -194,7 +207,7 @@ export function bleh_gallery() {
 
     // share button
     let share_button = html.node`
-        <button class="btn image-share-button icon" onclick=${() => share(window.location.href)}>
+        <button class="btn image-share-button icon gallery-btn gallery-btn-bland" onclick=${() => share(window.location.href)}>
             ${tl(trans.share)}
         </button>
     `;
@@ -205,7 +218,7 @@ export function bleh_gallery() {
     // delete
     let delete_button = image_details.querySelector('.gallery-image-delete');
     if (delete_button) {
-        delete_button.querySelector('button').classList = 'btn icon colourful';
+        delete_button.querySelector('button').classList = 'btn icon colourful gallery-btn';
         buttons_extra.appendChild(delete_button);
     }
 
@@ -213,14 +226,14 @@ export function bleh_gallery() {
     const report_form = image_details.querySelector('.gallery-image-report-form');
 
     const report = report_form.querySelector('button');
-    report.classList.add('btn', 'icon', 'colourful');
+    report.classList.add('btn', 'icon', 'colourful', 'gallery-btn');
     tippy(report, {
         content: report.textContent
     });
     report.textContent = tl(trans.report);
 
     const reported = report_form.querySelector('.gallery-image-report--reported');
-    reported.classList.add('btn', 'icon', 'colourful');
+    reported.classList.add('btn', 'icon', 'colourful', 'gallery-btn');
 
     buttons_extra.appendChild(report_form);
 
@@ -716,7 +729,7 @@ function patch_gallery_focused_image(
 
     // append a bookmark button
     const save_btn = html.node`
-        <button class="btn bleh--gallery-bookmark-image-btn btn--has-icon" data-bleh--image-is-bookmarked=${image_is_bookmarked} onclick=${() => update_image_bookmark(save_btn, focused_image_id)}>
+        <button class="btn bleh--gallery-bookmark-image-btn icon gallery-btn ${image_is_bookmarked ? 'primary' : ''}" onclick=${() => update_image_bookmark(save_btn, focused_image_id)}>
             ${tl(trans.save)}
         </button>
     `;
@@ -727,8 +740,8 @@ function patch_gallery_focused_image(
 function update_image_bookmark(button, id) {
     let bookmarked_images =
         JSON.parse(localStorage.getItem('bleh_bookmarked_images')) || {};
-    let is_bookmarked =
-        button.getAttribute('data-bleh--image-is-bookmarked') == 'true';
+
+    let is_bookmarked = button.classList.contains('primary');
 
     if (!bookmarked_images.hasOwnProperty(page.name))
         bookmarked_images[page.name] = [];
@@ -736,7 +749,7 @@ function update_image_bookmark(button, id) {
     if (is_bookmarked) {
         // remove from bookmarks
 
-        button.setAttribute('data-bleh--image-is-bookmarked', 'false');
+        button.classList.remove('primary');
 
         let new_artist_bookmarks = [];
         for (let image in bookmarked_images[page.name]) {
@@ -750,7 +763,7 @@ function update_image_bookmark(button, id) {
     } else {
         // add to bookmarks
 
-        button.setAttribute('data-bleh--image-is-bookmarked', 'true');
+        button.classList.add('primary');
         bookmarked_images[page.name].push(id);
         log(`image ${id} from ${page.name} added to bookmarks`, 'gallery');
     }

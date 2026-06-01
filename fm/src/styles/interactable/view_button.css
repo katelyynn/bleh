@@ -13,7 +13,6 @@
         }
     }
 }
-.gallery-image-buttons,
 .tab-container,
 .view-buttons {
     display: flex;
@@ -91,14 +90,6 @@
             position: relative;
         }
 
-        &.gallery-image-buttons
-            :is(button, a):not(
-                .gallery-image-vote-up-on,
-                .gallery-image-vote-down-on,
-                .gallery-image-preferred-on,
-                .gallery-image-report--reported,
-                [data-bleh--image-is-bookmarked="true"]
-            ),
         &.tab-container button:not(.tab--selected),
         .footer-language .mimic-link,
         .btn:not(
@@ -110,12 +101,7 @@
             [data-toggle-button-current-state="bookmarked"] > form > .btn,
             [data-analytics-action="UnfollowUser"],
             [data-is-shortcut="true"],
-            .attendance-btn--turn-off,
-            .gallery-image-preferred-on,
-            [data-bleh--image-is-bookmarked="true"],
-            .gallery-image-vote-up-on,
-            .gallery-image-vote-down-on,
-            .gallery-image-report--reported
+            .attendance-btn--turn-off
         ) {
             --bg: transparent;
             --bg-hov: var(--view-buttons-hov);
@@ -129,8 +115,6 @@
             );
             --force-font-weight: var(--font-weight);
 
-            .gallery-image-buttons
-                &:not(.image-open-button, .image-share-button),
             &.delete-icon {
                 --bg-hov: oklch(var(--h4) / 15%);
                 --bg-atv: oklch(var(--h4) / 25%);

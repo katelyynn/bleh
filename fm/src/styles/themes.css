@@ -66,6 +66,9 @@ body {
     --icon-half: 9px;
     --icon-gap: 4px;
 
+    --side-action-height: 36px;
+    --side-action-side: 10px;
+
     --follow-button-size: 36px;
 
     --modal-close-size: 26px;
@@ -563,7 +566,7 @@ body,
         --b5: 1 0 0;
 
         /* root */
-        --b6: 0.94 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue);
+        --b6: 0.95 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue);
         --b8: 1 0 0;
         --b7: 0 0 0;
         --b9: 1 0 0;
@@ -576,7 +579,7 @@ body,
         --normal-shadow: none;
         --input-shadow:
             inset 0 0 0 1px oklch(var(--b2) / 30%),
-            inset 0 1px 3px oklch(0 0 0 / 5%);
+            inset 0 1px 3px oklch(0 0 0 / 2%);
         --focused-input-shadow:
             inset 0 0 0 1px oklch(var(--l3-c) / 30%),
             var(--input-shadow);
@@ -601,7 +604,7 @@ body,
         --nav-filter-shadow: drop-shadow(0 0 2px oklch(var(--b5)));
         --header-filter-shadow: drop-shadow(0 0 10px oklch(var(--b5)));
 
-        --banner-overlay: oklch(var(--b5) / 50%);
+        --banner-overlay: oklch(var(--b5) / 30%);
         --banner-mix: lighten;
 
         --setting-group: oklch(var(--b6) / 5%);
@@ -615,7 +618,7 @@ body,
         --view-buttons-hov: oklch(var(--b4) / 60%);
         --view-buttons-atv: oklch(var(--b4) / 80%);
 
-        --background-overlay: oklch(var(--b5) / 50%);
+        --background-overlay: oklch(var(--b5) / 70%);
         --background-mix-mode: lighten;
 
         --card-overlay-filter: invert(0.4);
@@ -826,6 +829,8 @@ u,
     --graph-colour-9: oklch(80% 65% 310);
     --graph-colour-10: oklch(80% 65% 360);
 
+    --badge-shadow: 0 3px 15px 1px oklch(var(--h4) / 10%), 0 -4px 10px 0 oklch(var(--h4) / 20%) inset;
+
     &[data-bleh--theme="oled"],
     body[data-bleh--theme="oled"] &:not(.theme-preview) {
         --c1: 0.98 0 var(--hue);
@@ -894,8 +899,9 @@ u,
         --l3-c-theme-switch: var(--l3-c);
         --h3-theme-switch: var(--h4);
 
-        --badge: oklch(var(--f4) / 55%);
-        --badge-hov: oklch(var(--f4) / 65%);
+        --badge: oklch(var(--f4) / 40%);
+        --badge-hov: oklch(var(--f4) / 60%);
+        --badge-shadow: 0 3px 15px 1px oklch(var(--h4) / 10%), 0 -4px 10px 0 oklch(calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.95) calc(clamp(min(0), var(--sat), max(2)) * 0.58) var(--hue) / 60%) inset;
 
         --grid-colour-shadow: var(
             --grid-colour-shadow-override,
@@ -939,11 +945,11 @@ u,
 
         --graph-colour-0: oklch(55% 60% 30);
         --graph-colour-1: oklch(70% 50% 45);
-        --graph-colour-2: oklch(100% 55% 60);
-        --graph-colour-3: oklch(75% 50% 135);
-        --graph-colour-4: oklch(80% 50% 150);
-        --graph-colour-5: oklch(80% 77% 180);
-        --graph-colour-6: oklch(74% 50% 210);
+        --graph-colour-2: oklch(90% 55% 60);
+        --graph-colour-3: oklch(65% 60% 135);
+        --graph-colour-4: oklch(75% 50% 150);
+        --graph-colour-5: oklch(71% 72% 185);
+        --graph-colour-6: oklch(70% 70% 210);
         --graph-colour-7: oklch(50% 65% 260);
         --graph-colour-8: oklch(70% 60% 290);
         --graph-colour-9: oklch(75% 65% 310);
@@ -991,8 +997,9 @@ u,
         --l3-c-theme-switch: var(--l3-c);
         --h3-theme-switch: var(--h4);
 
-        --badge: oklch(var(--f4) / 55%);
-        --badge-hov: oklch(var(--f4) / 65%);
+        --badge: oklch(var(--f4) / 40%);
+        --badge-hov: oklch(var(--f4) / 60%);
+        --badge-shadow: 0 3px 15px 1px oklch(var(--h4) / 10%), 0 -4px 10px 0 oklch(calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.9) calc(clamp(min(0), var(--sat), max(2)) * 0.58) var(--hue) / 40%) inset;
 
         --grid-colour-shadow: var(
             --grid-colour-shadow-override,

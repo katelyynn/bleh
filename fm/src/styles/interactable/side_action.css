@@ -46,10 +46,10 @@
     }
 
     &:is(section) {
-        margin: 0 calc(var(--card-padding) - var(--button-sides)) 0 !important;
+        margin: 0 calc(var(--card-padding) - var(--side-action-side)) 0 !important;
 
         &:first-child {
-            margin: calc(-1 * (2px + 7px)) calc(var(--card-padding) - var(--button-sides)) 0 !important;
+            margin: calc(-1 * (2px + 7px)) calc(var(--card-padding) - var(--side-action-side)) 0 !important;
         }
     }
 
@@ -58,7 +58,7 @@
     }
 
     & > .sep {
-        margin: calc(var(--card-gap) - var(--button-list-gap)) var(--button-sides) !important;
+        margin: calc(var(--card-gap) - var(--button-list-gap)) var(--side-action-side) !important;
         width: unset;
         display: none;
     }
@@ -93,13 +93,12 @@
     border-radius: unset !important;
     overflow: unset;
     text-overflow: ellipsis;
-    --padding: 7px var(--button-sides) 7px calc(var(--button-sides) + var(--icon-size) + 6px);
+    --padding: 7px var(--side-action-side) 7px calc(var(--side-action-side) + var(--icon-size) + 6px);
     margin: unset !important;
     width: unset !important;
     position: relative;
     min-height: var(--side-action-height) !important;
     --show-icon: block !important;
-    --side-action-height: 36px;
 
     --icon-size: 16px !important;
 

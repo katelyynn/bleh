@@ -111,6 +111,8 @@ export function patch_titles(search = page.structure.main) {
         });
 
         function smart_track(track, index) {
+            if (!track) return;
+
             if (track.getAttribute('data-track-type')) return;
 
             // ads slowly move up the tree until eventually causing a crash

@@ -230,7 +230,7 @@ export function input({
             colour_block.style.backgroundColor = input_box.value;
         }
 
-        if (func && !skip_most) func(input_box.value);
+        if (func && !skip_most && submit_on_character) func(input_box.value);
     }
 
     function error_input(reason) {

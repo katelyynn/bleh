@@ -95,6 +95,14 @@
             }
         }
 
+        &[data-mini="atlas"] {
+            & > .mini-icon {
+                --hue-over: 157;
+                --sat-over: 1.6;
+                --lit-over: 1.07;
+            }
+        }
+
         &[data-mini="pixel"] {
             & > .mini-icon {
                 --hue-over: 344;

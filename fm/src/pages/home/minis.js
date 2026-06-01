@@ -68,6 +68,13 @@ export function bleh_minis(skip = false) {
             new_release: true,
             hide_if: !ff('unlock_minis')
         },
+        atlas: {
+            name: tl(trans.atlas?.name),
+            body: tl(trans.atlas?.body),
+            func: bleh_minis_atlas,
+            hide_if: !ff('unlock_minis'),
+            new_release: true
+        },
         pixel: {
             name: tl(trans.pixel?.name),
             body: tl(trans.pixel?.body),
@@ -410,6 +417,13 @@ function bleh_minis_rainbow() {
     render(
         page.structure.main,
         html` <section class="minis">${return_to_minis('rainbow')}</section> `
+    );
+}
+
+function bleh_minis_atlas() {
+    render(
+        page.structure.main,
+        html` <section class="minis">${return_to_minis('atlas')}</section> `
     );
 }
 

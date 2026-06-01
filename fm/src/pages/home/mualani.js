@@ -296,6 +296,19 @@ export function mualani() {
                     }) : ''}
                 </div>
             </section>
+            <section class="flexy">
+                <h2>Brand</h2>
+                <div class="brand-container-demo">
+                    <div class="brand-demo" />
+                </div>
+                <div class="brand-container-demo">
+                    <div class="brand-demo brand-demo-mask" />
+                </div>
+                <div class="brand-container-demo empty">
+                    <div class="brand-demo" />
+                    <div class="brand-demo brand-demo-small" />
+                </div>
+            </section>
         `
     );
 }

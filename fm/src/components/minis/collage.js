@@ -23,6 +23,7 @@ import tippy from 'tippy.js';
 import html2canvas from 'html2canvas-pro';
 import { load_profile_cache_externally } from '@/pages/profile/profile';
 import { icon, icons } from '../shared/icon';
+import { hybrid_timeframe_picker, timeframe_text } from '../date/timeframe';
 
 export function collage({ host, sidebar } = {}) {
     if (!host || !sidebar) return;
@@ -45,7 +46,7 @@ export function collage({ host, sidebar } = {}) {
     let previous_year = current_year - 1;
 
     const default_type = page.requested.type || 'albums';
-    let default_timeframe = page.requested.timeframe || 'date_preset=LAST_7_DAYS';
+    let default_timeframe = page.requested.timeframe || 'date_preset=LAST_30_DAYS';
 
     if (page.requested.redirect) {
         setTimeout(() => {
@@ -117,7 +118,9 @@ export function collage({ host, sidebar } = {}) {
                     ],
                     initial: default_type
                 })}
-                <div class="timeframe-container" ref=${el => timeframe_container = el} />
+                ${timeframe = hybrid_timeframe_picker({
+                    initial: default_timeframe
+                })}
                 <button
                     class="btn primary icon"
                     data-type="collage"
@@ -139,78 +142,6 @@ export function collage({ host, sidebar } = {}) {
             </div>
         </div>
     `);
-
-    load_timeframe_selection(page.name);
-
-    function load_timeframe_selection(name) {
-        let options = [
-            {
-                text: tl(trans.timeframe)
-            },
-            {
-                value: 'date_preset=LAST_7_DAYS',
-                text: tl(trans.last_count_days, { c: '7' })
-            },
-            {
-                value: 'date_preset=LAST_30_DAYS',
-                text: tl(trans.last_count_days, { c: '30' })
-            },
-            {
-                value: 'date_preset=LAST_90_DAYS',
-                text: tl(trans.last_count_days, { c: '90' })
-            },
-            {
-                value: 'date_preset=LAST_180_DAYS',
-                text: tl(trans.last_count_days, { c: '180' })
-            },
-            {
-                value: 'date_preset=LAST_365_DAYS',
-                text: tl(trans.last_count_days, { c: '365' })
-            },
-            {
-                value: 'date_preset=ALL',
-                text: tl(trans.all_time)
-            }
-        ];
-
-        timeframe = select({
-            values: options,
-            initial: default_timeframe,
-            func: update_timeframe_selection
-        });
-
-        render(timeframe_container, timeframe);
-
-        load_profile_cache_externally(name).then(cache => {
-            if (cache.created) {
-                const year = parseInt(year_from_date(cache.created));
-                const current_year = new Date().getFullYear();
-
-                const years = Array.from({ length: current_year - year + 1 }, (_, i) => year + i);
-
-                years.forEach(year => {
-                    options.push({
-                        value: `from=${year}-01-01&rangetype=year`,
-                        text: year
-                    });
-                });
-            }
-
-            timeframe = select({
-                values: options,
-                initial: default_timeframe,
-                func: update_timeframe_selection
-            });
-
-            render(timeframe_container, timeframe);
-        });
-    }
-
-    function update_timeframe_selection(value) {
-        if (!value.startsWith('date_preset=')) return;
-
-        default_timeframe = value;
-    }
 
     let setting_group;
     let inputter;
@@ -237,8 +168,6 @@ export function collage({ host, sidebar } = {}) {
                                 page.avatar = '';
                                 if (page.name == auth.name)
                                     page.avatar = auth.avatar;
-
-                                load_timeframe_selection(page.name);
 
                                 render(
                                     user,
@@ -313,7 +242,7 @@ export function collage({ host, sidebar } = {}) {
         console.error(e);
 
         type.querySelector('button').disabled = false;
-        timeframe.querySelector('button').disabled = false;
+        timeframe.disabled = false;
         collage_settings.forEach((option) => {
             option.setAttribute('disabled', false);
         });
@@ -382,7 +311,7 @@ export function collage({ host, sidebar } = {}) {
         }
 
         type.querySelector('button').disabled = true;
-        timeframe.querySelector('button').disabled = true;
+        timeframe.disabled = true;
         collage_settings.forEach((option) => {
             option.setAttribute('disabled', true);
         });
@@ -484,7 +413,7 @@ export function collage({ host, sidebar } = {}) {
                 );
 
                 type.querySelector('button').disabled = false;
-                timeframe.querySelector('button').disabled = false;
+                timeframe.disabled = false;
                 collage_settings.forEach((option) => {
                     option.setAttribute('disabled', false);
                 });
@@ -601,7 +530,7 @@ export function collage({ host, sidebar } = {}) {
                         <div class="type" data-type=${type.value}>
                             <div class="bleh-icon" />
                             <svg class="brand" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 92.328 35.064"><path d="M8.845.086c-.443.15-.91-.136-1.348.086-1.06-.216-2.146 0-3.203.025-.617-.03-1.358-.016-1.862.3-.471.752-.694 1.59-.827 2.462-.162.653-.598 1.207-.432 1.896-.183.59-.64 1.07-.526 1.733-.037.928.034 1.916-.349 2.775-.055 1.148.052 2.344-.147 3.462.2 1.582.008 3.197.098 4.784-.45 1.182-.07 2.422-.12 3.633-.321.737.223 1.476-.035 2.23-.034.618-.25 1.224.116 1.789.179.472-.333 1.07.265 1.363.592.691.374 1.735 1.034 2.392.254.654.387 1.355.959 1.826.28.555.559 1.104 1.035 1.534.792.806 1.918 1.201 2.975 1.546.339-.011.642.474 1.07.327.544-.174.94.384 1.504.284.55.165 1.074.497 1.646.207.698-.094 1.392.667 2.018.131.634-.339 1.402-.52 1.842-1.13.844.516 1.713-.256 2.496-.557.498-.389.594-1.149 1.227-1.424.522-.493.986-1.023 1.605-1.392.417-.365.83-.769.824-1.349.276-.426 1.02-.419.924-1.045.143-1.093 1.033-2.128.66-3.255-.337-.413.293-.89.076-1.397.146-.837-.098-1.707-.038-2.52.765-.93.005-2.104-.454-2.99-.114-.652-.683-.834-1.066-1.264-.392-.608-.982-1.014-1.567-1.407a2.27 2.27 0 0 0-1.821-1.321c-1.409-.496-2.8-1.23-4.333-1.172-.467.042-.96-.128-1.384-.11-.67.506-1.477.765-2.276.987-.213.46-.462.916-.842 1.26.152-.759.32-1.529.406-2.289.506-.5.322-1.251.463-1.893.081-1.152.013-2.324.149-3.462-.374-1.17.39-2.358-.04-3.526-.324-.962.47-1.974-.051-2.884-.133-.438-.059-.934-.671-.645m66.45-.018c-.822-.108-1.283 1-2.094.671-.377-.308-.774-.496-1.235-.229-.54.176-1.252.255-1.33.925-.193.505-.142 1.044-.294 1.56.253 1.015-.198 2.059-.007 3.099-.028.668-.097 1.353-.038 2.041-.005.638.047 1.255.004 1.886-.007.613-.073 1.25.097 1.838-.282.64.036 1.343-.043 2.018.193.473.09.914-.038 1.394-.237.705.114 1.427-.054 2.131.135.799-.112 1.689.092 2.443.438.262.602.723.132 1.055-.424.573-.36 1.361-.404 2.022.367 1.027-.1 2.163.194 3.227.238.658.07 1.31-.044 1.97.049.776.016 1.558.145 2.324-.209.547-.13 1.076.084 1.602.171.89.303 1.978 1.078 2.533.613.212 1.263.684 1.9.371.503-.558 1.268-.842 1.992-.967.955-.245 2.253.293 2.901-.683.411-1.105.053-2.332 0-3.47.107-1.002.54-1.995.49-3.035-.026-1.019.402-2.031.085-3.052a44 44 0 0 0-.198-1.914c.657-.198 1.087-.881 1.821-.823.51-.267.643.075.903.448.146.466.877.336.933.9.374.838 1.46 1.353 1.277 2.385.087 1.485.112 3.041.816 4.393.12.532-.245 1.104-.071 1.673.113.43.276.835.025 1.26-.189.998.845 1.69 1.587 2.092.464-.077.85.019 1.262.24.807.345 1.823.13 2.298-.632.333-.464.857-.205 1.284-.17.777.025.887-.798.968-1.382.132-.887.327-1.765.218-2.665.18-.82.024-1.656.14-2.485-.067-.682-.099-1.38.157-2.033-.208-1.246-.18-2.55-.412-3.795-.006-.72-.439-1.37-.633-2.057-.186-.78-.383-1.636-1.123-2.107-.74-.91-1.72-1.616-2.327-2.633-.49-.52-1.229-.65-1.788-1.075-.37-.227-.883-.065-1.215-.096-.304-.664-1.165-.588-1.723-.844-.814-.014-1.651.131-2.464-.088-.518-.099-1.181.092-1.436-.509-.778-.683-.64-1.78-.514-2.704.152-.973.03-1.963.026-2.928.17-.515-.325-1.128.208-1.513.402-.701-.297-1.379-.431-2.069-.256-.54-.385-1.269-.84-1.638-.86.012-1.463-.709-2.237-.905l-.062-.007zM29.669 3.012c-.75-.07-1.347.538-1.472 1.244-.18.612-.951 1.067-.837 1.747.307.448-.25.959-.236 1.453-.113.673.115 1.342-.073 2.012-.127 1.25.063 2.524-.253 3.755.078 1.532-.202 3.06-.059 4.591-.138.767-.112 1.662-.712 2.237-.375.613.496 1.01.125 1.637-.056.575-.246 1.213-.186 1.751.538.33.136.954.58 1.332.437.428-.045 1.062.207 1.59.156.576.558 1.015.578 1.633.273.905.828 1.693 1.277 2.508.518.72 1.347 1.15 1.858 1.855.78.355 1.512.934 2.324 1.145 1.061-.268 2.129.215 3.205.17 1.088.22 2.28.32 3.34-.072.598-.378.695-1.128.612-1.786.09-.513-.47-1.169.15-1.504.554-.563.404-1.458-.213-1.904-.39-.364-.754-.76-.953-1.25-.239-.437-.786-.511-1.23-.61-.646.13-1.28-.215-1.888-.38-.59-.37-.5-1.222-1.055-1.653-.318-.522-.296-1.187-.06-1.747-.284-.593-.657-1.173-.414-1.856.111-.83-.04-1.65-.117-2.467.18-.773.338-1.559.717-2.265-.196-1.668.167-3.356.272-5.023.377-1.784.49-3.604.633-5.416.205-.591-.005-1.283-.616-1.528-.128-.387-.952-.063-1.354-.153-.723.035-1.37-.341-2.085-.294-.67-.304-1.285-.866-2.065-.752m25.2 4.392c-.555.372-1.18.567-1.819.705-.59.439-1.33.45-2.027.479-.66.269-1.103.905-1.745 1.233-.54.411-1.096.974-1.257 1.622-.219.397-.522.817-.903 1.123-.312.507-1.173.416-1.232 1.11-.464 1.071-1.356 1.954-1.435 3.175-.133.662-.299 1.32-.151 1.99-.338 1.079-.676 2.203-.375 3.335-.09.958.236 1.896.033 2.855.663 1.176.815 2.56 1.39 3.76.442.495.991.92 1.09 1.625 1.042.773 2.47.979 3.262 2.082.752.532 1.674.791 2.498 1.205.76.333 1.61.16 2.38.408.748.1 1.497.186 2.251.174.533.053 1.048-.196 1.57-.253.532-.29 1.087-.482 1.698-.48 1.042-.215 1.751-1.09 2.652-1.59.367-.363.942-.594.899-1.222.37-.717-.343-1.262-.585-1.859-.344-1.213-1.319-2.1-1.98-3.139-.815-.242-1.79-.313-2.456.31-.593.324-1.356.235-2.015.318-.577-.242-1.174-.22-1.78-.173-.752-.15-1.61-.105-2.146-.765-.57-.415-.487-1.244-.916-1.792-.277-.29.478-.268.702-.244.339-.046.658.013.96-.048.6-.007 1.192-.187 1.813-.114 1.903.05 3.805-.07 5.705-.043 1.443.231 2.898-.167 4.198-.761.478-.298.986-.905.658-1.479.172-.472.664-.854.677-1.424.125-1.125.155-2.26.284-3.388.18-.569-.093-1.098-.254-1.608.097-1.013-.642-1.82-1.33-2.481-.363-.604-.672-1.297-1.328-1.663-.848-.647-1.624-1.383-2.424-2.08-.862.15-1.506-.881-2.391-.613-.727.287-1.463-.31-2.232-.157a3.3 3.3 0 0 1-1.74-.24zm2.927 6.092c.727-.088.322 1.023.94 1.031.53.089.081.866.511 1.192.141.371.044 1.009.05 1.478-1.188.316-2.38-.19-3.5-.458-.648.179-1.287.088-1.93.019-.552.129-1.104.337-1.643.026-.466-.041-.716-.217-.321-.608.434-.725.978-1.482 1.737-1.897 1.176.033 2.254-.462 3.397-.662.254-.029.51-.227.76-.121M12.071 21.42c.616.261 1.296.19 1.927.144.14.462.553.78.758 1.17-.1.813-.058 1.655-.152 2.451-.304.43-.604.951-1.055 1.202-.548.163-1.18.096-1.633.527-.448.184-.96.275-1.383.475-.497-.276-.29-1.007-.691-1.391-.398-.305-.455-.82-.816-1.154-.4-.823-.431-1.975.41-2.54.433-.516 1.014-.825 1.703-.802.31-.019.622-.101.932-.082"/></svg>
-                            <strong>${timeframe.querySelector('button').textContent}</strong>
+                            <strong>${timeframe_text(timeframe.value)}</strong>
                             <strong>${tl(trans.top_type).replace('{type}', tl(trans[type.value]))}</strong>
                             <strong>${width.value}×${height.value}</strong>
                         </div>
@@ -690,19 +619,14 @@ export function collage({ host, sidebar } = {}) {
 
                     const date = new Date();
 
-                    const filename = tl(trans.chart_template_filename)
-                        .replace(
-                            '{timeframe}',
-                            timeframe.querySelector('button').textContent
-                        )
-                        .replace('{user}', page.name)
-                        .replace('{type}', tl(trans[type.value]))
-                        .replace('{size}', `${width.value}×${height.value}`)
-                        .replace('{brand}', version.brand)
-                        .replace(
-                            '{date}',
-                            `${date.getFullYear()}-${pad2(date.getMonth() + 1)}-${pad2(date.getDate())}`
-                        );
+                    const filename = tl(trans.chart_template_filename, {
+                        timeframe: timeframe_text(timeframe.value),
+                        user: page.name,
+                        type: tl(trans[type.value]),
+                        size: `${width.value}×${height.value}`,
+                        brand: version.brand,
+                        date: `${date.getFullYear()}-${pad2(date.getMonth() + 1)}-${pad2(date.getDate())}`,
+                    });
 
                     render(
                         body,
@@ -731,7 +655,7 @@ export function collage({ host, sidebar } = {}) {
                     );
 
                     type.querySelector('button').disabled = false;
-                    timeframe.querySelector('button').disabled = false;
+                    timeframe.disabled = false;
                     collage_settings.forEach((option) => {
                         option.setAttribute('disabled', false);
                     });

@@ -427,17 +427,17 @@ export function calendar({
 
         let elem = html.node`
             <div class="calendar-header">
-                <button class="btn month-year" ref=${(el) => (date_button = el)} onclick=${on_month_year_click}>
+                <button class="btn month-year calendar-top-button" ref=${(el) => (date_button = el)} onclick=${on_month_year_click}>
                     ${tl(trans.manual)}
                 </button>
                 <div class="fill" />
-                <button class="btn chibi icon" data-type="manual" ref=${(el) => (manual_button = el)} type="button" disabled>
+                <button class="btn chibi icon calendar-top-button" data-type="manual" ref=${(el) => (manual_button = el)} type="button" disabled>
                     ${tl(trans.manual)}
                 </button>
-                <button class="btn chibi icon" data-type="up" ref=${(el) => (up_button = el)} disabled>
+                <button class="btn chibi icon calendar-top-button" data-type="up" ref=${(el) => (up_button = el)} disabled>
                     ${tl(trans.back)}
                 </button>
-                <button class="btn chibi icon" data-type="down" ref=${(el) => (down_button = el)} disabled>
+                <button class="btn chibi icon calendar-top-button" data-type="down" ref=${(el) => (down_button = el)} disabled>
                     ${tl(trans.next)}
                 </button>
             </div>

@@ -11,6 +11,7 @@ import {
     api_url,
     auth,
     bleh_url,
+    discord,
     minis_url,
     mualani_url,
     page,
@@ -248,6 +249,9 @@ function handle_error(e = null) {
                 <a class="see-more" href="https://github.com/katelyynn/bleh/issues/new/choose" target="_blank">
                     Report bug now
                 </a>
+                <a class="see-more" href="https://discord.gg/${discord}" target="_blank">
+                    Join Discord
+                </a>
                 <div class="fill"></div>
             </div>
         `,
@@ -411,7 +415,8 @@ function load_page(main_content = null) {
     page.restricted = false;
 
     if (main_content) {
-        page.restricted = (main_content.getAttribute('data-page-resource-blacklist-level') || '') != '';
+        const blacklist_level = Number(main_content.getAttribute('data-page-resource-blacklist-level') || '0');
+        page.restricted = blacklist_level == 1;
     }
 
     hideAll({ duration: 0 });

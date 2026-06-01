@@ -9200,6 +9200,14 @@ export const trans = {
             pt: 'Organize seu histórico de reprodução em um redemoinho de cores',
         },
     },
+    atlas: {
+        name: {
+            en: 'Atlas'
+        },
+        body: {
+            en: 'Explore where the artists you love are based in the world'
+        }
+    },
     receipt: {
         name: {
             en: 'Receipt',
