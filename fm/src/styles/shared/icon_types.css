@@ -309,6 +309,9 @@
 [data-type="plot"] {
     --mask: var(--icon-16-plot);
 }
+[data-type="atlas"] {
+    --mask: var(--icon-16-world);
+}
 [data-type="continue"] {
     --mask: var(--icon-16-arrow-right);
 
