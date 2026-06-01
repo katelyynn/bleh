@@ -39595,7 +39595,7 @@
                             ${{ html: tl2(trans.you_share_count_with, { c: `<span class="colourful" data-taste=${taste}>${taste_percentage}</span>` }) }}
                         </h3>
                         <p class="listen-item-text">
-                            ${taste_artists.length == 1 ? html.node`${taste_artist(taste_artists[0])}` : ""}
+                            ${taste_artists.length == 1 ? { html: taste_artist(taste_artists[0]) } : ""}
                             ${taste_artists.length == 2 ? { html: tl2(trans.you_share_count_with.two, { artist1: taste_artist(taste_artists[0]), artist2: taste_artist(taste_artists[1]) }) } : ""}
                             ${taste_artists.length == 3 ? { html: tl2(trans.you_share_count_with.three, { artist1: taste_artist(taste_artists[0]), artist2: taste_artist(taste_artists[1]), artist3: taste_artist(taste_artists[2]) }) } : ""}
                         </p>
@@ -39694,7 +39694,7 @@
                             ${{ html: tl2(trans.you_are_a_value_match, { u: page.name, v: `<span class="colourful" data-taste=${taste}>${taste_formal}</span>` }) }}
                         </h3>
                         <p class="listen-item-text">
-                            ${taste_artists.length == 1 ? html.node`${taste_artist(taste_artists[0])}` : ""}
+                            ${taste_artists.length == 1 ? { html: taste_artist(taste_artists[0]) } : ""}
                             ${taste_artists.length == 2 ? { html: tl2(trans.you_share_count_with.two, { artist1: taste_artist(taste_artists[0]), artist2: taste_artist(taste_artists[1]) }) } : ""}
                             ${taste_artists.length == 3 ? { html: tl2(trans.you_share_count_with.three, { artist1: taste_artist(taste_artists[0]), artist2: taste_artist(taste_artists[1]), artist3: taste_artist(taste_artists[2]) }) } : ""}
                         </p>
