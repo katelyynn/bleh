@@ -77843,7 +77843,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         <section class="side-actions" />
     `;
     render_friends();
-    page.structure.side.appendChild(friends_panel);
+    page.structure.side.insertBefore(friends_panel, page.structure.side.firstElementChild);
     function render_friends() {
       const friends2 = settings.friends.filter((friend) => friend != settings.starred_friend);
       render(friends_panel, html`

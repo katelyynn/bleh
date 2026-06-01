@@ -608,7 +608,7 @@ function bleh_listeners() {
 
     render_friends();
 
-    page.structure.side.appendChild(friends_panel);
+    page.structure.side.insertBefore(friends_panel, page.structure.side.firstElementChild);
 
     function render_friends() {
         const friends = settings.friends.filter(friend => friend != settings.starred_friend);
