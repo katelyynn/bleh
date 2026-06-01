@@ -106,17 +106,27 @@
 
 .brand-container-demo {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 
     padding: 200px;
     background: black;
+
+    &.empty {
+        background: transparent;
+    }
 }
 
 .brand-demo {
     height: 300px;
     --mask: var(--logo);
     aspect-ratio: 13 / 5;
+
+    &.brand-demo-small {
+        height: 50px;
+        margin-top: 100px;
+    }
 }
 
 .brand-demo-mask {

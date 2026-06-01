@@ -304,6 +304,10 @@ export function mualani() {
                 <div class="brand-container-demo">
                     <div class="brand-demo brand-demo-mask" />
                 </div>
+                <div class="brand-container-demo empty">
+                    <div class="brand-demo" />
+                    <div class="brand-demo brand-demo-small" />
+                </div>
             </section>
         `
     );
