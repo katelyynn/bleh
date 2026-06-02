@@ -16,6 +16,8 @@ import { download_with_progress, set_storage } from '@/build/tools';
 import cropper_css from 'cropperjs/dist/cropper.min.css';
 import css from '@/styles/index.css';
 import { root } from '@/build/page';
+import { keys } from '../settings/storage';
+import { reset_update_status } from './update';
 
 export function append_style() {
     document.documentElement.classList.add('florence-supports-loading');
@@ -117,14 +119,14 @@ export function update_check(force = false, btn = null, func = null) {
             console.log(data);
 
             let update_required = update_comparison(version.build, data.build);
-            set_storage('bleh_update_required', update_required.toString());
-            set_storage('bleh_update_to', data.build);
-            set_storage('bleh_update_checked', new Date().toString());
+            set_storage(keys.update_required, update_required.toString());
+            set_storage(keys.update_to_version, data.build);
+            set_storage(keys.update_checked_date, new Date().toString());
 
             let next = new Date();
             next.setHours(next.getHours() + 2);
 
-            set_storage('bleh_update_next_check', next.toString());
+            set_storage(keys.update_next_check_date, next.toString());
             log('update check finished', 'update', 'info', {
                 next_in: next,
                 current_time: new Date()
@@ -211,8 +213,7 @@ function finish_update() {
     });
 
     // reset update status
-    set_storage('bleh_update_required', 'false');
-    set_storage('bleh_update_checked', new Date().toString());
+    reset_update_status();
 
     invoke_reload();
 }

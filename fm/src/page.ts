@@ -41,7 +41,7 @@ import { append_nav } from '@/components/page/navigation';
 import { bleh_albums } from '@/pages/album';
 import { bleh_artists } from '@/pages/artist';
 import { bleh_settings } from '@/pages/bleh_settings/bleh_settings.js';
-import { bleh_setup, notify_if_new_update } from '@/pages/bleh_setup';
+import { bleh_setup } from '@/pages/bleh_setup';
 import { bleh_error } from '@/pages/error';
 import { bleh_events } from '@/pages/event';
 import { bleh_gallery, bleh_gallery_upload_check } from '@/pages/music/gallery';
@@ -96,6 +96,7 @@ import { icon, icons } from './components/shared/icon';
 import { avatar } from './components/shared/avatar';
 import { clean_storage } from './components/settings/storage';
 import { register_auth } from './components/profile/auth';
+import { notify_if_new_update } from './components/page/update';
 
 export function bleh() {
     florence({
