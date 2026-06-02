@@ -35440,7 +35440,7 @@
             </div>
             <div class="modal-footer">
                 <div class="fill"></div>
-                <a class="btn primary sponsor icon colourful" href="${root}user/${sponsor_list.related.account_name}" target="_blank">
+                <a class="btn primary sponsor icon colourful" data-type="sponsor" href="${root}user/${sponsor_list.related.account_name}" target="_blank">
                     ${tl2(trans.manage_sponsor)}
                 </a>
                 <div class="fill"></div>
