@@ -2380,7 +2380,7 @@ export function oracle_data(force = false) {
 
         // is it valid?
         if (cached_artists_expire < current_time && !force) {
-            oracle_request();
+            oracle_request('artists');
         } else if (force) {
             oracle_request('artists', true);
         }
@@ -2410,7 +2410,7 @@ export function oracle_data(force = false) {
 
         // is it valid?
         if (cached_tracks_expire < current_time && !force) {
-            oracle_request();
+            oracle_request('tracks');
         } else if (force) {
             oracle_request('tracks', true);
         }

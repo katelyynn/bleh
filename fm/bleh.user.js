@@ -22085,12 +22085,15 @@
     }
   };
   var shout_parse_queue = [];
-  var bleh_url = "{root}bleh";
-  var setup_url = "{root}bleh/setup";
-  var sponsor_url = "{root}bleh/sponsor";
-  var api_url = "{root}bleh/api";
-  var minis_url = "{root}bleh/minis";
-  var mualani_url = "{root}bleh/mualani";
+  var urls = {
+    settings: "bleh",
+    setup: "bleh/setup",
+    sponsor: "bleh/sponsor",
+    api: "bleh/api",
+    minis: "bleh/minis",
+    mualani: "bleh/mualani",
+    now: "bleh/now"
+  };
   var api_key = "85c118b69b1437844fe75fcd2bf27261";
   var discord = "xU9KxGQpVw";
   var oracle_artists = {};
@@ -39191,7 +39194,7 @@
 
   // src/components/dialog/share.js
   function share(url) {
-    let is_url = false;
+    let is_url2 = false;
     let share_object = {
       text: url
     };
@@ -39200,7 +39203,7 @@
     let path;
     try {
       const link = new URL(url);
-      is_url = true;
+      is_url2 = true;
       share_object = {
         url
       };
@@ -39214,7 +39217,7 @@
       id: "share",
       title: tl2(trans.share),
       body: html.node`
-            ${is_url ? html.node`
+            ${is_url2 ? html.node`
                 <div class="external-warn-input">
                     <span class="scheme">
                         ${scheme}//
@@ -39248,7 +39251,7 @@
                 <button class="btn primary icon copy" onclick=${() => {
         copy(url);
       }}
-                >${tl2(is_url ? trans.copy_link : trans.copy_text)}</button>
+                >${tl2(is_url2 ? trans.copy_link : trans.copy_text)}</button>
             </div>
         `,
       replace_if_possible: true
@@ -67023,7 +67026,7 @@
     } else {
       parse5(oracle_artists, cached_artists, "artists");
       if (cached_artists_expire < current_time && !force) {
-        oracle_request();
+        oracle_request("artists");
       } else if (force) {
         oracle_request("artists", true);
       }
@@ -67045,7 +67048,7 @@
     } else {
       parse5(oracle_tracks, cached_tracks, "tracks");
       if (cached_tracks_expire < current_time && !force) {
-        oracle_request();
+        oracle_request("tracks");
       } else if (force) {
         oracle_request("tracks", true);
       }
@@ -82963,6 +82966,63 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     log("no handler found", "auth", "error");
   }
 
+  // src/pages/now/now.ts
+  function bleh_now() {
+    page.structure.container = document.body.querySelector(".page-content");
+    try {
+      page.structure.row = page.structure.container.querySelector(".row");
+      page.structure.main = page.structure.row.querySelector(".col-main");
+      page.structure.side = page.structure.row.querySelector(".col-sidebar");
+    } catch (e4) {
+      log("unable to find elements", "page structure");
+    }
+    let content_top = document.body.querySelector(".content-top");
+    checkup_page_structure(false, content_top);
+    page.type = "bleh_now";
+    page.subpage = "";
+    log("status is", "page", "info", page);
+    update_page();
+    page.structure.row.removeChild(page.structure.row.firstElementChild);
+    page.structure.row.removeChild(page.structure.row.firstElementChild);
+    page.structure.container.classList.add("has-cards-view");
+    page.structure.content.classList.add("cards-view");
+    page.state.bleh_now = {
+      name: null,
+      artist: null
+    };
+    get_recents(auth.name);
+    const timer = setInterval(() => {
+      if (!is_url(urls.now)) {
+        clearInterval(timer);
+        return;
+      }
+      get_recents(auth.name);
+    }, 1e4);
+  }
+  function get_recents(user) {
+    fetch(`${root}user/${user}/partial/recenttracks?ajax=1`).then((res) => res.text()).then((dom) => {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(dom, "text/html");
+      const list = doc.querySelector(".chartlist");
+      if (!list) return;
+      const items = list.querySelectorAll(".chartlist-row:not(.chartlist-row--interlist-ad)");
+      if (!items) return;
+      const most_recent = items[0];
+      const name = most_recent.querySelector(".chartlist-name").textContent.trim().toLowerCase();
+      const artist = most_recent.querySelector(".chartlist-artist").textContent.trim().toLowerCase();
+      const previous_now = page.state.bleh_now;
+      page.state.bleh_now = {
+        name,
+        artist
+      };
+      if (previous_now.name == name && previous_now.artist == artist) return;
+      new_poll();
+    });
+  }
+  function new_poll() {
+    console.info("new poll", page.state.bleh_now);
+  }
+
   // src/page.ts
   function bleh() {
     q({
@@ -83178,6 +83238,9 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       handle_error(e4);
     }
   }
+  function is_url(url) {
+    return window.location.pathname.startsWith(`${root}${url}`);
+  }
   function load_page(main_content = null) {
     if (page.state.activity_preview_timer)
       clearInterval(page.state.activity_preview_timer);
@@ -83208,19 +83271,21 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       masthead.classList.toggle("scrolled", !entry.isIntersecting);
     }).observe(loading_indicator);
     prepare_music();
-    if (window.location.pathname.startsWith(setup_url.replace("{root}", root))) {
+    if (is_url(urls.setup)) {
       bleh_setup();
-    } else if (window.location.pathname.startsWith(sponsor_url.replace("{root}", root))) {
+    } else if (is_url(urls.sponsor)) {
       bleh_sponsor_page();
-    } else if (window.location.pathname.startsWith(api_url.replace("{root}", root))) {
+    } else if (is_url(urls.api)) {
       bleh_auth();
-    } else if (window.location.pathname.startsWith(mualani_url.replace("{root}", root))) {
+    } else if (is_url(urls.mualani)) {
       mualani();
-    } else if (window.location.pathname.startsWith(minis_url.replace("{root}", root))) {
+    } else if (is_url(urls.now)) {
+      bleh_now();
+    } else if (is_url(urls.minis)) {
       page.type = "minis";
       bleh_home();
       bleh_minis();
-    } else if (window.location.pathname.startsWith(bleh_url.replace("{root}", root))) {
+    } else if (is_url(urls.settings)) {
       page.type = "bleh_settings";
       bleh_home();
       bleh_settings();
@@ -96460,7 +96525,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-05-18"
       }
     },
-    built_on: "2026-06-02T00:31:52.817Z"
+    built_on: "2026-06-02T01:19:44.315Z"
   };
 
   // node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
