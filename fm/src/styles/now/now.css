@@ -8,6 +8,16 @@
 
 .now-header-image-container {
     position: relative;
+    animation: animate_now 4.5s linear infinite;
+}
+
+@keyframes animate_now {
+    from, to {
+        translate: 0 0;
+    }
+    50% {
+        translate: 0 -10px;
+    }
 }
 
 .now-header-image {
