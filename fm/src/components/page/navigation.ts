@@ -32,7 +32,7 @@ import {
 } from '@/pages/profile/profile';
 import { is_sponsor, sponsor } from '@/components/sponsor';
 import { generic_link_menu, register_menu } from '@/components/menu';
-import { copy, get_language_name, romanise } from '@/build/tools';
+import { bool, copy, get_language_name, romanise } from '@/build/tools';
 import { submit_scrobble } from '@/components/music/scrobble';
 import { match } from '@/components/settings/dynamic_theming';
 import { DateTime } from 'luxon';
@@ -97,7 +97,7 @@ export function append_nav() {
         page.structure.style_warning = style_warning;
     }
 
-    const update_required = localStorage.getItem('bleh_update_required') || 'false';
+    const update_required = bool(localStorage.getItem(keys.update_required) || 'false');
 
     page.state.quick_access_items = {
         home: {
@@ -194,8 +194,8 @@ export function append_nav() {
 
     update_branding_type();
 
-    if (update_required === 'true') {
-        masthead_logo.onclick = prompt_for_update;
+    if (update_required) {
+        home_link.onclick = prompt_for_update;
 
         home_link.appendChild(html.node`
             <span class="home-version">
@@ -209,10 +209,10 @@ export function append_nav() {
             content: tl(trans.update_available_to_install)
         });
     } else {
-        masthead_logo.onclick = null;
+        home_link.onclick = null;
     }
 
-    const last_checked = localStorage.getItem('bleh_update_checked') || null;
+    const last_checked = localStorage.getItem(keys.update_checked_date) || null;
 
     const link_menu = tippy(home_link, {
         theme: 'context-menu',

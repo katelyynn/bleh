@@ -547,3 +547,7 @@ export function get_language_name(code) {
         return code;
     }
 }
+
+export function bool(value: string) {
+    return value.toLowerCase().trim() === 'true';
+}

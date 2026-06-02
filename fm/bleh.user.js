@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    https://last.fm/
-// @version      2026.0601
+// @version      2026.0602
 // @description  bleh!!! ^-^
 // @author       katelyn
 // @match        https://www.last.fm/*
@@ -34769,6 +34769,9 @@
     } catch (e4) {
       return code;
     }
+  }
+  function bool(value) {
+    return value.toLowerCase().trim() === "true";
   }
 
   // src/build/music.ts
@@ -72732,7 +72735,7 @@
       document.body.appendChild(style_warning);
       page.structure.style_warning = style_warning;
     }
-    const update_required = localStorage.getItem("bleh_update_required") || "false";
+    const update_required = bool(localStorage.getItem(keys2.update_required) || "false");
     page.state.quick_access_items = {
       home: {
         name: tl2(trans.home),
@@ -72821,8 +72824,8 @@
     `);
     page.state.home_link = home_link_container;
     update_branding_type();
-    if (update_required === "true") {
-      masthead_logo.onclick = prompt_for_update;
+    if (update_required) {
+      home_link.onclick = prompt_for_update;
       home_link.appendChild(html.node`
             <span class="home-version">
                 <div class="update-container">
@@ -72834,9 +72837,9 @@
         content: tl2(trans.update_available_to_install)
       });
     } else {
-      masthead_logo.onclick = null;
+      home_link.onclick = null;
     }
-    const last_checked = localStorage.getItem("bleh_update_checked") || null;
+    const last_checked = localStorage.getItem(keys2.update_checked_date) || null;
     const link_menu = tippy_esm_default(home_link, {
       theme: "context-menu",
       content: html.node`
@@ -74235,33 +74238,13 @@
   function update_setting() {
     let update_btn;
     let pause_btn;
-    const update_required = localStorage.getItem("bleh_update_required") || "false";
-    const last_checked = localStorage.getItem("bleh_update_checked") || null;
-    const version_to_install = localStorage.getItem("bleh_update_to") || null;
-    let paused = localStorage.getItem("bleh_update_paused") || "false";
-    let paused_until = localStorage.getItem("bleh_update_paused_until") || null;
+    const update_required = bool(localStorage.getItem(keys2.update_required) || "false");
+    const last_checked = localStorage.getItem(keys2.update_checked_date) || null;
+    const version_to_install = localStorage.getItem(keys2.update_to_version) || null;
     const cont = html.node`
         <div class="setting" data-type="action" />
     `;
-    if (paused === "true") {
-      render(cont, html`
-            <div class="setting-v2-icon update-center-icon">
-                <div class="update-container">
-                    <div class="bleh-icon" data-type="update" />
-                </div>
-                <div class="check-circle paused colourful">
-                    <div class="bleh-icon" data-type="paused" />
-                </div>
-            </div>
-            <div class="heading">
-                <h5>${tl2(trans.updates_paused)}</h5>
-                <p class="last-checked">${tl2(trans.paused_until_date).replace("{d}", DateTime.fromJSDate(new Date(paused_until)).toRelative())}</p>
-            </div>
-            <div class="toggle-wrap">
-                <button class="btn primary icon" data-type="update" ref=${(el) => update_btn = el} disabled>${tl2(trans.check)}</button>
-            </div>
-        `);
-    } else if (update_required === "false") {
+    if (!update_required) {
       render(cont, html`
             <div class="setting-v2-icon update-center-icon">
                 <div class="update-container">
@@ -74328,7 +74311,7 @@
     return html.node`
         ${cont}
         <div class="setting" data-type="info">
-            ${last_checked && paused === "false" && update_required === "true" ? html.node`
+            ${last_checked && update_required ? html.node`
                 <div class="heading">
                     <h5>${tl2(trans.updating_to_version)}</h5>
                 </div>
@@ -96070,8 +96053,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
   // src/build/build.json
   var build_default = {
     brand: "bleh",
-    build: "2026.0601",
-    sku: "saki",
+    build: "2026.0602",
+    sku: "rizu",
     bio: "bleh!!! ^-^",
     author: "katelyn",
     url: "https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js",
@@ -96471,7 +96454,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         date: "2026-05-18"
       }
     },
-    built_on: "2026-06-01T14:13:31.393Z"
+    built_on: "2026-06-02T00:31:52.817Z"
   };
 
   // node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
