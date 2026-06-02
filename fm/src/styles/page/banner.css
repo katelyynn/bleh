@@ -14,6 +14,7 @@
         --header-size: 58px;
     }
 
+    &[data-page-type="bleh_now"],
     &[data-page-subpage="obsessions_obsession"],
     &[data-page-type="api"],
     &[data-page-type="bleh_setup"] {
@@ -109,6 +110,10 @@
         opacity: 0.4;
         animation: banner 0.5s var(--trans-function-ani);
         transition: none !important;
+
+        &[data-page-type="bleh_now"] {
+            opacity: 0.6;
+        }
     }
 
     transition-property: opacity;
