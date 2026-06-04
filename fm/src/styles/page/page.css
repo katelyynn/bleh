@@ -255,7 +255,7 @@
 
     & > form > section,
     & > div,
-    & > section:not(.side-actions, .profile-summary) {
+    & > section:not(.side-actions, .profile-summary, .featured-item-panel) {
         margin-top: unset !important;
     }
 

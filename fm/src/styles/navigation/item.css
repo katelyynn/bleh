@@ -89,8 +89,7 @@
     }
 }
 
-.masthead-logo,
-.masthead-nav-wrap {
+.masthead-logo {
     flex: 1 !important;
 }
 
@@ -152,7 +151,6 @@
 
 .masthead-nav-wrap {
     display: flex;
-    justify-content: end;
     gap: var(--button-list-gap);
 
     .site-auth,

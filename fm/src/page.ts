@@ -18,7 +18,8 @@ import {
     root,
     setup_url,
     shout_parse_queue,
-    sponsor_url
+    sponsor_url,
+    urls
 } from '@/build/page';
 import { stored_season } from '@/build/seasonal';
 import { lang, lookup_lang, tl, trans, translation_stats } from '@/build/trans';
@@ -41,7 +42,7 @@ import { append_nav } from '@/components/page/navigation';
 import { bleh_albums } from '@/pages/album';
 import { bleh_artists } from '@/pages/artist';
 import { bleh_settings } from '@/pages/bleh_settings/bleh_settings.js';
-import { bleh_setup, notify_if_new_update } from '@/pages/bleh_setup';
+import { bleh_setup } from '@/pages/bleh_setup';
 import { bleh_error } from '@/pages/error';
 import { bleh_events } from '@/pages/event';
 import { bleh_gallery, bleh_gallery_upload_check } from '@/pages/music/gallery';
@@ -96,6 +97,8 @@ import { icon, icons } from './components/shared/icon';
 import { avatar } from './components/shared/avatar';
 import { clean_storage } from './components/settings/storage';
 import { register_auth } from './components/profile/auth';
+import { notify_if_new_update } from './components/page/update';
+import { bleh_now } from './pages/now/now';
 
 export function bleh() {
     florence({
@@ -405,6 +408,10 @@ function main_flow() {
     }
 }
 
+export function is_url(url: string) {
+    return window.location.pathname.startsWith(`${root}${url}`);
+}
+
 function load_page(main_content = null) {
     if (page.state.activity_preview_timer)
         clearInterval(page.state.activity_preview_timer);
@@ -449,31 +456,21 @@ function load_page(main_content = null) {
 
     prepare_music();
 
-    if (
-        window.location.pathname.startsWith(setup_url.replace('{root}', root))
-    ) {
+    if (is_url(urls.setup)) {
         bleh_setup();
-    } else if (
-        window.location.pathname.startsWith(sponsor_url.replace('{root}', root))
-    ) {
+    } else if (is_url(urls.sponsor)) {
         bleh_sponsor_page();
-    } else if (
-        window.location.pathname.startsWith(api_url.replace('{root}', root))
-    ) {
+    } else if (is_url(urls.api)) {
         bleh_auth();
-    } else if (
-        window.location.pathname.startsWith(mualani_url.replace('{root}', root))
-    ) {
+    } else if (is_url(urls.mualani)) {
         mualani();
-    } else if (
-        window.location.pathname.startsWith(minis_url.replace('{root}', root))
-    ) {
+    } else if (is_url(urls.now)) {
+        bleh_now();
+    } else if (is_url(urls.minis)) {
         page.type = 'minis';
         bleh_home();
         bleh_minis();
-    } else if (
-        window.location.pathname.startsWith(bleh_url.replace('{root}', root))
-    ) {
+    } else if (is_url(urls.settings)) {
         page.type = 'bleh_settings';
         bleh_home();
         bleh_settings();

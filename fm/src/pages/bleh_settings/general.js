@@ -15,6 +15,8 @@ import { notify } from "@/components/dialog/notify";
 import { sponsor, sponsor_manage, sponsors } from '@/components/sponsor';
 import { convert_lang_to_country, flag } from '@/components/shared/flag';
 import { start_update } from "@/components/page/style";
+import { bool } from "@/build/tools";
+import { keys } from "@/components/settings/storage";
 
 export function general() {
     if (auth.pro == null) {
@@ -230,36 +232,15 @@ function update_setting() {
     let update_btn;
     let pause_btn;
 
-    const update_required = localStorage.getItem('bleh_update_required') || 'false';
-    const last_checked = localStorage.getItem('bleh_update_checked') || null;
-    const version_to_install = localStorage.getItem('bleh_update_to') || null;
-
-    let paused = localStorage.getItem('bleh_update_paused') || 'false';
-    let paused_until = localStorage.getItem('bleh_update_paused_until') || null;
+    const update_required = bool(localStorage.getItem(keys.update_required) || 'false');
+    const last_checked = localStorage.getItem(keys.update_checked_date) || null;
+    const version_to_install = localStorage.getItem(keys.update_to_version) || null;
 
     const cont = html.node`
         <div class="setting" data-type="action" />
     `;
 
-    if (paused === 'true') {
-        render(cont, html`
-            <div class="setting-v2-icon update-center-icon">
-                <div class="update-container">
-                    <div class="bleh-icon" data-type="update" />
-                </div>
-                <div class="check-circle paused colourful">
-                    <div class="bleh-icon" data-type="paused" />
-                </div>
-            </div>
-            <div class="heading">
-                <h5>${tl(trans.updates_paused)}</h5>
-                <p class="last-checked">${tl(trans.paused_until_date).replace('{d}', DateTime.fromJSDate(new Date(paused_until)).toRelative())}</p>
-            </div>
-            <div class="toggle-wrap">
-                <button class="btn primary icon" data-type="update" ref=${el => update_btn = el} disabled>${tl(trans.check)}</button>
-            </div>
-        `);
-    } else if (update_required === 'false') {
+    if (!update_required) {
         render(cont, html`
             <div class="setting-v2-icon update-center-icon">
                 <div class="update-container">
@@ -327,7 +308,7 @@ function update_setting() {
     return html.node`
         ${cont}
         <div class="setting" data-type="info">
-            ${last_checked && paused === 'false' && update_required === 'true' ? html.node`
+            ${last_checked && update_required ? html.node`
                 <div class="heading">
                     <h5>${tl(trans.updating_to_version)}</h5>
                 </div>

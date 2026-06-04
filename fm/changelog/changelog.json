@@ -1,4 +1,10 @@
 {
+    "2026.0604": {
+        "type": "minor",
+        "force": false,
+        "bio": "# Profile\n- __Fixed follow buttons showing *Blocked*__\n    - Last.fm has begun their rollout of changes related to following and profiles, the first being a new follow button - which was not compatible with the previous bleh implementation.\n- Fixed potential crash related to loading account creation date\n- Changed design of featured tracks slightly\n\n# Updater\n- __Refreshing early will no longer get you in a stale update state__\n    - Previously if you missed hitting *Finish*, bleh would finalise the update but not have made that known to the in-built updater (which still thought it was out of date).\n\n# Design\n- Changed the search bar to span the full width\n    - Helps with muscle memory if you were used to the previous centered design, also allows for more text input.\n\n# Other\n- Fixed a missing icon for managing sponsorship\n- Fixed *oracle* not downloading artist and track data correctly\n- Fixed *Deleted user*’s breaking user lists",
+        "name": "rizu"
+    },
     "2026.0601": {
         "type": "minor",
         "force": false,

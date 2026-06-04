@@ -228,21 +228,18 @@ last.fm changes as of 2024-05-20 */
     }
 }
 
+.masthead-nav-top {
+    flex: 1;
+}
+
 .navlist-search {
     position: relative;
-    --search-width: 400px;
-    width: 100%;
-    max-width: var(--search-width);
-
-    transition-property: max-width;
-    transition-duration: var(--trans);
-    transition-timing-function: var(--trans-function-ani);
+    --search-width: 200px;
+    flex: 1;
 }
 
 .navlist-search-container {
-    position: absolute;
-    inset: 0;
-    width: 100%;
+    width: var(--search-width);
     max-width: var(--search-width);
 
     translate: 0 0;

@@ -72,24 +72,25 @@ export function redesign_profile_header(is_own_profile, is_following) {
         auth.name
     ) {
         // follow
-        let follow_wrap = document.body.querySelector('.header-avatar .class > div');
+        const follow_button = document.body.querySelector('.header-follower-btn');
 
-        if (follow_wrap) {
-            let follow_btn = follow_wrap.querySelector('button');
-            follow_btn.classList.add('btn', 'side-action', 'icon-mask');
-            follow_btn.classList.remove('toggle-button', 'header-follower-btn');
-            follow_btn.setAttribute('data-type', 'follow');
-            profile_header.appendChild(follow_wrap);
+        if (follow_button) {
+            const follow_wrap = follow_button.parentElement;
 
-            if (is_following) follow_btn.setAttribute('data-followed', 'true');
+            follow_button.classList.add('btn', 'side-action', 'icon-mask');
+            //follow_button.classList.remove('toggle-button', 'header-follower-btn');
+            follow_button.setAttribute('data-type', 'follow');
+            profile_header.appendChild(follow_wrap.parentElement);
 
-            follow_btn.appendChild(html.node`
+            if (is_following) follow_button.setAttribute('data-followed', 'true');
+
+            follow_button.appendChild(html.node`
                 <i>${tl(trans.following_mutuals)}</i>
             `);
 
-            follow_btn.parentElement.classList.add('follow-combo');
+            follow_wrap.classList.add('follow-combo');
 
-            friends_button(follow_btn.parentElement);
+            friends_button(follow_wrap);
         } else {
             // ignore list
             profile_header.appendChild(html.node`
