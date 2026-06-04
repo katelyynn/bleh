@@ -241,6 +241,7 @@ select,
     }
 
     &.btn--loading,
+    &[data-disabled="true"], /* used for new last.fm follow button */
     &[disabled]:not([disabled="false"]) {
         opacity: 0.65 !important;
         --col: oklch(var(--c3)) !important;
