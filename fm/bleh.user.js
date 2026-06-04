@@ -57229,9 +57229,11 @@
     delete cache2.created;
     const display_name = profile_sub_text.querySelector(".header-title-display-name");
     const scrobble_since = profile_sub_text.querySelector(".header-scrobble-since");
-    scrobble_since.textContent = scrobble_since.textContent.slice(2).replace(tl2(trans.account_scrobbling_since_replace), "");
     if (display_name) cache2.aka = display_name.textContent.trim();
-    cache2.created = scrobble_since.textContent.trim();
+    if (scrobble_since) {
+      scrobble_since.textContent = scrobble_since.textContent.slice(2).replace(tl2(trans.account_scrobbling_since_replace), "");
+      cache2.created = scrobble_since.textContent.trim();
+    }
     render_sub_text(profile_sub_text, cache2.aka, cache2.created, cache2.username);
   }
   function render_sub_text(parent, aka, created, display_name) {

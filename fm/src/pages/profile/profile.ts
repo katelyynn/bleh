@@ -1822,12 +1822,14 @@ function parse_sub_text(profile_sub_text, name = page.name, cache) {
     const display_name = profile_sub_text.querySelector('.header-title-display-name');
     const scrobble_since = profile_sub_text.querySelector('.header-scrobble-since');
 
-    scrobble_since.textContent = scrobble_since.textContent
-        .slice(2)
-        .replace(tl(trans.account_scrobbling_since_replace), '');
-
     if (display_name) cache.aka = display_name.textContent.trim();
-    cache.created = scrobble_since.textContent.trim();
+
+    if (scrobble_since) {
+        scrobble_since.textContent = scrobble_since.textContent
+            .slice(2)
+            .replace(tl(trans.account_scrobbling_since_replace), '');
+        cache.created = scrobble_since.textContent.trim();
+    }
 
     render_sub_text(profile_sub_text, cache.aka, cache.created, cache.username);
 }
