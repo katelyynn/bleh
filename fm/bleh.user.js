@@ -35254,7 +35254,6 @@
     if (replace || !replace && dialogs.hasOwnProperty(replace_id)) {
       log(`window set to replace ${replace_id}`, "window");
       dialog_rm({ id: replace_id });
-      delete dialogs[replace_id];
     }
     page.structure.dialogs.appendChild(modal);
     page.structure.dialogs.classList.add("has-dialog");
@@ -67497,8 +67496,8 @@
     user.style.setProperty("--delay", index2 * 0.04 + "s");
     let avatar3 = user.querySelector(".user-list-avatar");
     let name = user.querySelector(".user-list-link");
-    const badge = patch_avatar(avatar3, name.textContent.trim(), "follow");
-    style_name_from_badge(name, badge);
+    const badge = patch_avatar(avatar3, name?.textContent.trim(), "follow");
+    if (name) style_name_from_badge(name, badge);
     let artists = user.querySelectorAll(".user-list-shared-artists a");
     artists.forEach((artist) => {
       artist.textContent = correct_artist(artist.textContent);

@@ -141,7 +141,6 @@ export function dialog({
         log(`window set to replace ${replace_id}`, 'window');
 
         dialog_rm({ id: replace_id });
-        delete dialogs[replace_id];
     }
 
     page.structure.dialogs.appendChild(modal);
