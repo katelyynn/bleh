@@ -339,9 +339,9 @@
         width: 10px;
         height: 10px;
         top: 50%;
-        right: 15px;
+        right: 14px;
         margin-top: -6px;
-        background: oklch(var(--h3) / 50%);
+        background: transparent !important;
         border-radius: 50px;
         box-shadow: 0 0 30px 1px oklch(var(--h4));
         transition-property: opacity;
