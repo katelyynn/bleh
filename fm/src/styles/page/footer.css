@@ -25,10 +25,6 @@
 
         & > .footer-credit-text {
             margin: unset;
-
-            .b {
-                font-weight: var(--font-weight-medium);
-            }
         }
 
         .bleh-icon {
@@ -59,7 +55,7 @@
     }
     .footer-web {
         display: flex;
-        gap: 10px;
+        gap: 6px;
         cursor: default;
 
         .footer-link {
@@ -70,7 +66,7 @@
     .footer-bleh {
         display: flex;
         align-items: end;
-        gap: 10px;
+        gap: 6px;
         cursor: default;
     }
 
@@ -82,17 +78,7 @@
     }
 
     .bleh-logo-footer {
-        height: 18px;
-        --mask: var(--logo);
-        aspect-ratio: 13 / 5;
-        background-color: oklch(var(--c3));
-
-        mask-image: var(--mask);
-        -webkit-mask-image: var(--mask);
-        mask-size: 100%;
-        -webkit-mask-size: 100%;
-
-        margin-right: 4px;
+        font-weight: var(--font-weight-bold);
     }
 
     .footer-extras {
@@ -113,19 +99,6 @@
         .footer-heading {
             display: none;
         }
-
-        max-height: 230px;
-        overflow: hidden;
-
-        transition-property: max-height, margin-top;
-        transition-duration: var(--trans);
-        transition-timing-function: var(--trans-function);
-
-        &:not([aria-expanded]) {
-            max-height: 0;
-            margin-top: calc(-1 * (var(--card-gap) + 40px));
-            pointer-events: none;
-        }
     }
 
     .more {
@@ -136,6 +109,11 @@
             display: inline-flex;
         }
     }
+}
+
+.b {
+    color: oklch(var(--c2)) !important;
+    font-weight: var(--font-weight-medium) !important;
 }
 
 .footer-links {
@@ -228,4 +206,14 @@
     font-size: var(--font-size);
     line-height: var(--line-height);
     margin-top: var(--card-gap);
+}
+
+
+.footer-dot {
+    display: inline-flex;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    background-color: oklch(var(--c3));
+    margin: auto 4px;
 }
