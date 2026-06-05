@@ -195,7 +195,10 @@ export function append_nav() {
     update_branding_type();
 
     if (update_required) {
-        home_link.onclick = prompt_for_update;
+        home_link.onclick = (e) => {
+            e.preventDefault();
+            prompt_for_update();
+        }
 
         home_link.appendChild(html.node`
             <span class="home-version">
@@ -802,7 +805,7 @@ export function append_nav() {
 
             instance.setContent(html.node`
                 ${update_required == 'true' ? html.node`
-                <div class="update-available-banner">
+                <div class="update-available-banner" onclick=${() => { prompt_for_update(); }}>
                     <div class="update-container">
                         ${icon({ name: icons.update })}
                     </div>
