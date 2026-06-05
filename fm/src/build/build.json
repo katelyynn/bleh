@@ -395,11 +395,6 @@
             "name": "Display and write notes for music",
             "date": "2026-02-25"
         },
-        "logo": {
-            "default": false,
-            "name": "Refreshed logo",
-            "date": "2026-05-18"
-        },
         "lacrimosa": {
             "default": false,
             "name": "Latest June idea board",

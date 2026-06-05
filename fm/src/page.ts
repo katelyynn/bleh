@@ -809,6 +809,9 @@ export function update_page() {
     page.structure.container.setAttribute('data-page-subpage', page.subpage);
     page.structure.container.setAttribute('data-beret', ff('beret'));
     page.structure.container.setAttribute('data-short', ff('short'));
+    page.structure.container.setAttribute('data-lacrimosa', ff('lacrimosa'));
+
+    page.structure.row?.setAttribute('data-lacrimosa', ff('lacrimosa'));
 }
 
 export async function register_background(url: string | null, origin = null) {

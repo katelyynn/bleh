@@ -86,8 +86,9 @@ export function checkup_page_structure(is_subpage = false, header = null) {
 
     if (!page.structure.row || !document.body.contains(page.structure.row)) {
         log('page missing row, creating', 'page structure');
-        page.structure.row = document.createElement('div');
-        page.structure.row.classList.add('row');
+        page.structure.row = html.node`
+            <div class="row" />
+        `;
 
         page.structure.container.insertBefore(
             page.structure.row,
@@ -101,8 +102,9 @@ export function checkup_page_structure(is_subpage = false, header = null) {
 
     if (!page.structure.main || !document.body.contains(page.structure.main)) {
         log('page missing main, creating', 'page structure');
-        page.structure.main = document.createElement('div');
-        page.structure.main.classList.add('col-main');
+        page.structure.main = html.node`
+            <div class="col-main" />
+        `;
 
         page.structure.row.appendChild(page.structure.main);
     }
@@ -125,8 +127,9 @@ export function checkup_page_structure(is_subpage = false, header = null) {
             log('page missing side, creating', 'page structure');
 
             // otherwise, make anew
-            page.structure.side = document.createElement('div');
-            page.structure.side.classList.add('col-sidebar');
+            page.structure.side = html.node`
+                <div class="col-sidebar" />
+            `;
 
             page.structure.row.appendChild(page.structure.side);
         }
@@ -134,12 +137,23 @@ export function checkup_page_structure(is_subpage = false, header = null) {
 
     if (ff('short')) {
         page.structure.content = html.node`
-            <main class="content">
-                ${page.structure.main}
-                ${page.structure.side}
+            <main class="content" data-lacrimosa=${ff('lacrimosa')}>
+                <div class="content-main">
+                    ${page.structure.main}
+                </div>
+                <div class="content-side">
+                    ${page.structure.side}
+                </div>
             </main>
         `;
         page.structure.row.appendChild(page.structure.content);
+
+        page.structure.main?.classList.add('in-content-view');
+        page.structure.side?.classList.add('in-content-view');
+
+        page.structure.main?.setAttribute('data-lacrimosa', ff('lacrimosa'));
+        page.structure.side?.setAttribute('data-lacrimosa', ff('lacrimosa'));
+
 
         single_column();
     }
