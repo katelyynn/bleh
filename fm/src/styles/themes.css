@@ -1060,7 +1060,7 @@ u,
 body {
     --card-padding: 20px;
     --card-padding-v: 40px;
-    --card-radius: var(--item-big-radius);
+    --card-radius: 8px;
     --card-gap: 15px;
 
     --cards-main-width: 902px;

@@ -316,8 +316,8 @@ button.navlist-more {
     &:after {
         content: '';
         position: absolute;
-        left: var(--card-padding);
-        right: var(--card-padding);
+        left: 0;
+        right: 0;
         bottom: -1px;
         background: var(--toolbar-border);
         height: 1px;
