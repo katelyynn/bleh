@@ -77,10 +77,6 @@
         gap: 4px var(--card-padding);
     }
 
-    .bleh-logo-footer {
-        font-weight: var(--font-weight-bold);
-    }
-
     .footer-extras {
         padding-top: 40px;
 
