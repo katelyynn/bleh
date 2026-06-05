@@ -71028,7 +71028,7 @@
                 </button>
                 <div class="fill"></div>
                 <button class="btn primary continue" onclick=${() => {
-        if (trust_site.checked()) {
+        if (trust_site?.checked()) {
           save_setting("trusted_sites", [
             ...settings.trusted_sites,
             hostname
