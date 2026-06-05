@@ -425,6 +425,7 @@
 }
 
 .user-list-about-me {
+    color: inherit;
     overflow: hidden;
 }
 .user-list-about-me > .markdown-body {
