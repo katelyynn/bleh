@@ -5,7 +5,7 @@
 //
 
 import { html, render } from 'lighterhtml';
-import { other_setting_types, settings, settings_store } from '@/build/config';
+import { other_setting_types, setting_value, settings, settings_store } from '@/build/config';
 import { tl, trans } from '@/build/trans';
 import { notify } from '@/components/dialog/notify';
 import { auth, page } from '@/build/page';
@@ -1413,7 +1413,7 @@ function reset_text(id, input, submit, option, reset_btn, avatar) {
     });
 }
 
-export function save_setting(id: string, value: string | number | boolean | []) {
+export function save_setting(id: string, value: setting_value) {
     const store = settings_store[id] || {};
     const type = store.type || 'toggle';
 
