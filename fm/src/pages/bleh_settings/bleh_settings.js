@@ -1128,13 +1128,20 @@ export async function render_setting_page(page_id) {
     } else if (page_id == 'sku') {
         register_skip_to([]);
 
-        const flags = Object.entries(version.feature_flags)
-            .sort((a, b) => {
-                const a_date = new Date(a[1].date);
-                const b_date = new Date(b[1].date);
+        const grouped = Object.entries(version.feature_flags)
+            .sort((a, b) => b[1].date.localeCompare(a[1].date))
+            .reduce((groups, entry) => {
+                const date = entry[1].date;
+                let key = date.slice(0, 7);
 
-                return b_date - a_date;
-            });
+                if (key.startsWith('2099')) key = '2099';
+
+                if (!groups[key]) groups[key] = [];
+
+                groups[key].push(entry);
+
+                return groups;
+            }, {});
 
         render(page.structure.main, html`
             <div class="bleh--panel">
@@ -1149,44 +1156,57 @@ export async function render_setting_page(page_id) {
                 <div class="alert alert-danger">
                     ${tl(trans.beware_notice)}
                 </div>
-                <div class="setting-group">
-                    ${flags.map(([flag, details]) => {
-                        let value = ff(flag);
+                    ${Object.entries(grouped).map(([month, flags]) => {
+                        let label = new Date(`${month}-01`).toLocaleString(undefined, {
+                            month: 'long',
+                            year: 'numeric'
+                        });
+                        if (month.startsWith('2099')) label = tl(trans.general);
 
-                        let checkbox;
-                        let state;
+                        console.error(month, label, flags);
 
                         return html.node`
-                            <div class="setting" data-type="toggle" onclick=${() => {
-                                let current = checkbox.checked;
+                            <h4>${label}</h4>
+                            <div class="setting-group">
+                                ${flags.map(([flag, details]) => {
+                                    let value = ff(flag);
 
-                                checkbox.checked = !current;
-                                state.setAttribute('aria-checked', !current);
+                                    let checkbox;
+                                    let state;
 
-                                settings.feature_flags[flag] = !current;
-                                document.body.setAttribute(
-                                    `data-ff--${flag}`,
-                                    (!current).toString()
-                                );
-                                compile_settings();
-                            }}>
-                                <div class="heading">
-                                    <h5>${details.name}</h5>
-                                    ${details.notice ? html.node`<p>${{ html: details.notice }}</p>` : ''}
-                                    <div class="info-row">
-                                        <div class="new-badge flag-${details.default}">${details.default}</div><p class="date">${details.date}</p><p>${flag}</p>
-                                    </div>
-                                </div>
-                                <div class="toggle-wrap">
-                                    <input type="checkbox" ref=${(el) => (checkbox = el)} value=${value} checked=${value} />
-                                    <button class="btn toggle colourful" aria-checked=${value} ref=${(el) => (state = el)}>
-                                        <div class="dot" />
-                                    </button>
-                                </div>
+                                    return html.node`
+                                        <div class="setting" data-type="toggle" onclick=${() => {
+                                            let current = checkbox.checked;
+
+                                            checkbox.checked = !current;
+                                            state.setAttribute('aria-checked', !current);
+
+                                            settings.feature_flags[flag] = !current;
+                                            document.body.setAttribute(
+                                                `data-ff--${flag}`,
+                                                (!current).toString()
+                                            );
+                                            compile_settings();
+                                        }}>
+                                            <div class="heading">
+                                                <h5>${details.name}</h5>
+                                                ${details.notice ? html.node`<p>${{ html: details.notice }}</p>` : ''}
+                                                <div class="info-row">
+                                                    <div class="new-badge flag-${details.default}">${details.default}</div><p class="date">${details.date}</p><p>${flag}</p>
+                                                </div>
+                                            </div>
+                                            <div class="toggle-wrap">
+                                                <input type="checkbox" ref=${(el) => (checkbox = el)} value=${value} checked=${value} />
+                                                <button class="btn toggle colourful" aria-checked=${value} ref=${(el) => (state = el)}>
+                                                    <div class="dot" />
+                                                </button>
+                                            </div>
+                                        </div>
+                                    `;
+                                })}
                             </div>
                         `;
                     })}
-                </div>
             </div>
         `);
     } else if (page_id == 'translate') {

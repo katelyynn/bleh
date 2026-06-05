@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    https://last.fm/
-// @version      2026.0604
+// @version      2026.0605
 // @description  bleh!!! ^-^
 // @author       katelyn
 // @match        https://www.last.fm/*
@@ -75600,11 +75600,14 @@
         `);
     } else if (page_id == "sku") {
       register_skip_to([]);
-      const flags = Object.entries(version.feature_flags).sort((a, b) => {
-        const a_date = new Date(a[1].date);
-        const b_date = new Date(b[1].date);
-        return b_date - a_date;
-      });
+      const grouped = Object.entries(version.feature_flags).sort((a, b) => b[1].date.localeCompare(a[1].date)).reduce((groups, entry) => {
+        const date = entry[1].date;
+        let key = date.slice(0, 7);
+        if (key.startsWith("2099")) key = "2099";
+        if (!groups[key]) groups[key] = [];
+        groups[key].push(entry);
+        return groups;
+      }, {});
       render(page.structure.main, html`
             <div class="bleh--panel">
                 <div class="panel-intro">
@@ -75618,40 +75621,51 @@
                 <div class="alert alert-danger">
                     ${tl2(trans.beware_notice)}
                 </div>
-                <div class="setting-group">
-                    ${flags.map(([flag2, details]) => {
-        let value = ff(flag2);
-        let checkbox;
-        let state;
+                    ${Object.entries(grouped).map(([month, flags]) => {
+        let label = (/* @__PURE__ */ new Date(`${month}-01`)).toLocaleString(void 0, {
+          month: "long",
+          year: "numeric"
+        });
+        if (month.startsWith("2099")) label = tl2(trans.general);
+        console.error(month, label, flags);
         return html.node`
-                            <div class="setting" data-type="toggle" onclick=${() => {
-          let current = checkbox.checked;
-          checkbox.checked = !current;
-          state.setAttribute("aria-checked", !current);
-          settings.feature_flags[flag2] = !current;
-          document.body.setAttribute(
-            `data-ff--${flag2}`,
-            (!current).toString()
-          );
-          compile_settings();
-        }}>
-                                <div class="heading">
-                                    <h5>${details.name}</h5>
-                                    ${details.notice ? html.node`<p>${{ html: details.notice }}</p>` : ""}
-                                    <div class="info-row">
-                                        <div class="new-badge flag-${details.default}">${details.default}</div><p class="date">${details.date}</p><p>${flag2}</p>
-                                    </div>
-                                </div>
-                                <div class="toggle-wrap">
-                                    <input type="checkbox" ref=${(el) => checkbox = el} value=${value} checked=${value} />
-                                    <button class="btn toggle colourful" aria-checked=${value} ref=${(el) => state = el}>
-                                        <div class="dot" />
-                                    </button>
-                                </div>
+                            <h4>${label}</h4>
+                            <div class="setting-group">
+                                ${flags.map(([flag2, details]) => {
+          let value = ff(flag2);
+          let checkbox;
+          let state;
+          return html.node`
+                                        <div class="setting" data-type="toggle" onclick=${() => {
+            let current = checkbox.checked;
+            checkbox.checked = !current;
+            state.setAttribute("aria-checked", !current);
+            settings.feature_flags[flag2] = !current;
+            document.body.setAttribute(
+              `data-ff--${flag2}`,
+              (!current).toString()
+            );
+            compile_settings();
+          }}>
+                                            <div class="heading">
+                                                <h5>${details.name}</h5>
+                                                ${details.notice ? html.node`<p>${{ html: details.notice }}</p>` : ""}
+                                                <div class="info-row">
+                                                    <div class="new-badge flag-${details.default}">${details.default}</div><p class="date">${details.date}</p><p>${flag2}</p>
+                                                </div>
+                                            </div>
+                                            <div class="toggle-wrap">
+                                                <input type="checkbox" ref=${(el) => checkbox = el} value=${value} checked=${value} />
+                                                <button class="btn toggle colourful" aria-checked=${value} ref=${(el) => state = el}>
+                                                    <div class="dot" />
+                                                </button>
+                                            </div>
+                                        </div>
+                                    `;
+        })}
                             </div>
                         `;
       })}
-                </div>
             </div>
         `);
     } else if (page_id == "translate") {
@@ -96172,8 +96186,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
   // src/build/build.json
   var build_default = {
     brand: "bleh",
-    build: "2026.0604",
-    sku: "rizu",
+    build: "2026.0605",
+    sku: "lacrimosa",
     bio: "bleh!!! ^-^",
     author: "katelyn",
     url: "https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js",
@@ -96571,9 +96585,15 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         default: false,
         name: "Refreshed logo",
         date: "2026-05-18"
+      },
+      lacrimosa: {
+        default: false,
+        name: "Latest June idea board",
+        date: "2026-06-05",
+        notice: "This is an attempt at bringing bleh closer to Last.fm's layout, in terms of a less floating page in the middle and more of a wide content style (no borders). THIS IS NOT FINAL!!! feedback is welcome"
       }
     },
-    built_on: "2026-06-04T19:53:46.371Z"
+    built_on: "2026-06-05T02:44:00.666Z"
   };
 
   // node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
