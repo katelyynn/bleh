@@ -505,19 +505,23 @@
 
 /* no need for a sidebar */
 .single-column:not(.override) {
-    & > .col-main {
+    & > .content-main {
         width: calc(var(--cards-width) - 2px);
         display: block;
         margin-left: calc(-1 * var(--card-padding)) !important;
         margin-right: calc(-1 * var(--card-padding)) !important;
         border-bottom-right-radius: var(--card-radius);
+
+        & > .col-main {
+            width: 100%;
+        }
     }
-    & > .col-sidebar {
+    & > .content-side {
         display: none !important;
     }
 
     &:first-child {
-        & > .col-main {
+        & > .content-main {
             border-top-right-radius: var(--card-radius);
         }
     }
