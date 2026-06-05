@@ -57925,7 +57925,7 @@
                     <li class="compare-item grid-items-item">
                         <div class="grid-items-cover-image">
                             <div class="grid-items-cover-image-image ${data2.avatar.endsWith("/c6f59c1e5e7240a4c0d427abd71f3dbb.jpg") || data2.avatar.endsWith("/2a96cbd8b46e442fc41c2b86b821562f.jpg") ? "grid-items-cover-default" : ""}">
-                                <img src="${data2.avatar.replace("/avatar70s/", "/avatar300s/").replace("/64s/", "/avatar300s/")}" alt="${data2.name}" loading="lazy">
+                                <img src="${avatar(data2.avatar, "500x500")}" alt=${data2.name} loading="lazy">
                             </div>
                             ${settings.collage_grid_text || settings.collage_grid_plays ? html.node`
                             <div class="grid-items-item-details">
@@ -96606,7 +96606,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         notice: "This is an attempt at bringing bleh closer to Last.fm's layout, in terms of a less floating page in the middle and more of a wide content style (no borders). THIS IS NOT FINAL!!! feedback is welcome"
       }
     },
-    built_on: "2026-06-05T02:44:00.666Z"
+    built_on: "2026-06-05T15:50:28.973Z"
   };
 
   // node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

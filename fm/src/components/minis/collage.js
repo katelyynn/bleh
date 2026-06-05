@@ -24,6 +24,7 @@ import html2canvas from 'html2canvas-pro';
 import { load_profile_cache_externally } from '@/pages/profile/profile';
 import { icon, icons } from '../shared/icon';
 import { hybrid_timeframe_picker, timeframe_text } from '../date/timeframe';
+import { avatar } from '../shared/avatar';
 
 export function collage({ host, sidebar } = {}) {
     if (!host || !sidebar) return;
@@ -448,7 +449,7 @@ export function collage({ host, sidebar } = {}) {
                     <li class="compare-item grid-items-item">
                         <div class="grid-items-cover-image">
                             <div class="grid-items-cover-image-image ${data.avatar.endsWith('/c6f59c1e5e7240a4c0d427abd71f3dbb.jpg') || data.avatar.endsWith('/2a96cbd8b46e442fc41c2b86b821562f.jpg') ? 'grid-items-cover-default' : ''}">
-                                <img src="${data.avatar.replace('/avatar70s/', '/avatar300s/').replace('/64s/', '/avatar300s/')}" alt="${data.name}" loading="lazy">
+                                <img src="${avatar(data.avatar, '500x500')}" alt=${data.name} loading="lazy">
                             </div>
                             ${
                                 (
