@@ -1,5 +1,5 @@
 {
-    version: "2026.0531",
+    version: "2026.0605",
     related: {
         account_name: "kateshapedbox",
         link: "https://katelyn.moe/sponsor",
@@ -372,6 +372,7 @@
         "CazmoV": {},
         "morphine": {},
         "okiseme": {},
-        "eveisinsane": {}
+        "eveisinsane": {},
+        "luishey": {}
     }
 }
