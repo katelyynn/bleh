@@ -26,6 +26,10 @@
   overflow: hidden;
 }
 
+.shoutbox > .shout-list {
+    gap: var(--shout-outer-padding) !important;
+}
+
 .shoutbox,
 .shout-form,
 .shouting-unavailable {
@@ -42,6 +46,29 @@
         --show-icon: none;
     }
 }
+
+.shout {
+    --comment-bg: color-mix(in oklch, oklch(var(--b5)), oklch(var(--k4)) 20%);
+    --comment-bg: transparent;
+    background-color: var(--comment-bg) !important;
+    border-radius: var(--item-small-radius) !important;
+
+    &:after {
+        content: '';
+        display: block;
+        position: absolute;
+
+        top: 0;
+        left: -6px;
+        width: 0;
+        height: 0;
+        border: 6px solid var(--comment-bg);
+        border-left-color: transparent;
+        border-bottom-color: transparent;
+        pointer-events: none;
+    }
+}
+
 .shout-form {
     border: unset;
     padding-top: unset !important;
@@ -144,11 +171,46 @@
     }
 }
 
+.shout-list {
+    overflow: hidden;
+}
+.shout-list > .shout-list-item {
+    --shout-stem-width: 10px;
+
+    &:before {
+        content: '';
+        position: absolute;
+        left: calc(-1 * ((var(--shout-avatar-size) / 2)) + 2px);
+        top: calc(6px + var(--shout-avatar-top) + (var(--shout-avatar-size) / 2) - (var(--shout-tree-size) / 2 ));
+        width: var(--shout-stem-width);
+        height: var(--shout-tree-size);
+        background: var(--shout-tree);
+        display: block;
+    }
+
+    &:not(:last-child) {
+        &:after {
+            display: none;
+        }
+    }
+
+    &:after {
+        content: '';
+        position: absolute;
+        display: block;
+        left: calc(-1 * ((var(--shout-avatar-size) / 2)));
+        top: calc((6px + var(--shout-avatar-top) + (var(--shout-avatar-size) / 2) - (var(--shout-tree-size) / 2 )) + var(--shout-tree-size));
+        bottom: 0;
+        width: var(--shout-stem-width);
+        background: oklch(var(--b5));
+    }
+}
+
 .shout {
     border: unset;
     min-height: 52px;
-    padding: 6px 8px;
-    margin: -6px -8px;
+    padding: 6px 10px 8px;
+    margin: -2px -10px;
     border-radius: var(--item-med-radius);
 
     &.shout--deleted {
@@ -381,7 +443,7 @@
     display: flex !important;
 }
 .shout-user-avatar {
-    top: 0 !important;
+    top: var(--shout-avatar-top) !important;
     z-index: 20;
 }
 

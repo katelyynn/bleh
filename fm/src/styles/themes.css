@@ -1113,11 +1113,13 @@ body {
     --calendar-radius: 6px;
 
     --shout-avatar-size: 48px;
+    --shout-avatar-top: 4px;
     --shout-inset: 48px;
-    --shout-padding: 10px;
+    --shout-padding: 2px;
+    --shout-outer-padding: 6px;
     --shout-tree: oklch(var(--b4) / 70%);
     --shout-tree-size: 2px;
-    --shout-margin-left: var(--shout-avatar-size) + 8px;
+    --shout-margin-left: var(--shout-avatar-size) + 4px;
 
     @media (max-width: 980px) {
         --shout-avatar-size: 40px;
