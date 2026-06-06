@@ -253,10 +253,9 @@
     --lit-over: 0.93;
 }
 
-/* hides cancelled label on event pages */
 .label[itemprop="eventStatus"],
-/* hides empty label unless user page has override */ .user-status-None {
-    display: var(--override-none-status, none) !important;
+.user-status-None {
+    display: none !important;
 }
 
 .avatar-status-dot {
@@ -304,9 +303,9 @@
 }
 
 .shout-user-avatar .avatar-status-dot {
-    width: 18px;
-    height: 18px;
-    --mask-size: 18px;
+    width: 16px;
+    height: 16px;
+    --mask-size: 16px;
 }
 
 .obsession-details-intro-avatar-wrap .avatar-status-dot {
@@ -320,19 +319,6 @@
     width: 14px;
     height: 14px;
     --mask-size: 14px;
-    /* remove the heavy bottom shadow */
-    filter: drop-shadow(2px 0px 0 oklch(var(--b5)))
-        drop-shadow(0px 2px 0 oklch(var(--b5)))
-        drop-shadow(-2px -0px 0 oklch(var(--b5)))
-        drop-shadow(-0px -2px 0 oklch(var(--b5)));
-}
-
-.obsession-details-intro-avatar-wrap .avatar-status-dot {
-    /* remove the heavy bottom shadow */
-    filter: drop-shadow(2px 0px 0 oklch(var(--b5)))
-        drop-shadow(0px 2px 0 oklch(var(--b5)))
-        drop-shadow(-2px -0px 0 oklch(var(--b5)))
-        drop-shadow(-0px -2px 0 oklch(var(--b5)));
 }
 
 .shout-user-avatar:before,
