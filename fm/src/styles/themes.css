@@ -461,6 +461,8 @@ body,
 
     --button-outline: inset 0 0 1px 0 oklch(var(--b2) / 80%);
 
+    --shout-tree: oklch(var(--b2) / 15%);
+
     &[data-bleh--theme="darker"] {
         /* any additional highlights */
         --b2: 0.41 calc(var(--sat) * 0.04 * var(--sat-bg, 1)) var(--hue);
@@ -553,6 +555,8 @@ body,
         --modal-button-atv: oklch(var(--b2) / 60%);
 
         --button-outline: inset 0 0 1px 0 oklch(0.6 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue));
+
+        --shout-tree: oklch(var(--b2) / 35%);
     }
     &[data-bleh--theme="light"] {
         /* any additional highlights */
@@ -636,6 +640,8 @@ body,
         --menu-opacity: 94%;
 
         --button-outline: inset 0 0 1px 0 oklch(var(--b2));
+
+        --shout-tree: oklch(var(--b2) / 25%);
     }
     &[data-bleh--theme="ink"] {
         --b2: 0.7 calc(var(--sat) * 0.12 * var(--sat-bg, 1)) var(--hue);
@@ -1117,7 +1123,6 @@ body {
     --shout-inset: 48px;
     --shout-padding: 2px;
     --shout-outer-padding: 6px;
-    --shout-tree: oklch(var(--b4) / 70%);
     --shout-tree-size: 2px;
     --shout-margin-left: var(--shout-avatar-size) + 4px;
 
