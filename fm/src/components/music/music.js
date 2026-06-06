@@ -425,9 +425,7 @@ export async function show_your_scrobbles() {
 
     let buttons = interact_container.querySelectorAll('button');
     buttons.forEach((button) => {
-        if (button.classList[0] != 'header-new-playlink')
-            button.classList.add('btn', 'side-action', 'icon-mask');
-        else button.classList.add('dropdown-menu-clickable-item');
+        button.classList.add('btn', 'side-action', 'icon-mask');
 
         if (button.classList[0] == 'header-new-more-button')
             interact_container.removeChild(button.parentElement);
@@ -442,9 +440,7 @@ export async function show_your_scrobbles() {
     });
     let links = interact_container.querySelectorAll('a');
     links.forEach((button) => {
-        if (button.classList[0] != 'header-new-playlink')
-            button.classList.add('btn', 'side-action', 'icon-mask');
-        else button.classList.add('dropdown-menu-clickable-item');
+        button.classList.add('btn', 'side-action', 'icon-mask');
     });
 
     // obsession
@@ -459,6 +455,10 @@ export async function show_your_scrobbles() {
 
         interact_container.appendChild(obsession_form);
     }
+
+    // move it above the scrobble button
+    const play_btn = interact_container.querySelector('.header-new-playlink');
+    interact_container.appendChild(play_btn);
 
     if (ff('submit_scrobble')) {
         const can_api =
@@ -541,9 +541,6 @@ export async function show_your_scrobbles() {
     });
 
     interact_container.appendChild(search_btn);*/
-
-    const play_btn = interact_container.querySelector('.header-new-playlink');
-    if (play_btn) interact_container.removeChild(play_btn);
 
     if (auth.name) {
         if (!page.mobile)
