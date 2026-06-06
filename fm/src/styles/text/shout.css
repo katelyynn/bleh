@@ -168,41 +168,35 @@
 
     .shout-list-item > .shout-list > & {
         margin-left: var(--shout-inset) !important;
-    }
-}
+        --shout-stem-width: 10px;
 
-.shout-list {
-    overflow: hidden;
-}
-.shout-list > .shout-list-item {
-    --shout-stem-width: 10px;
-
-    &:before {
-        content: '';
-        position: absolute;
-        left: calc(-1 * ((var(--shout-avatar-size) / 2)) + 2px);
-        top: calc(6px + var(--shout-avatar-top) + (var(--shout-avatar-size) / 2) - (var(--shout-tree-size) / 2 ));
-        width: var(--shout-stem-width);
-        height: var(--shout-tree-size);
-        background: var(--shout-tree);
-        display: block;
-    }
-
-    &:not(:last-child) {
-        &:after {
-            display: none;
+        &:before {
+            content: '';
+            position: absolute;
+            left: calc(-1 * ((var(--shout-avatar-size) / 2)) + 2px);
+            top: calc(6px + var(--shout-avatar-top) + (var(--shout-avatar-size) / 2) - (var(--shout-tree-size) / 2 ));
+            width: var(--shout-stem-width);
+            height: var(--shout-tree-size);
+            background: var(--shout-tree);
+            display: block;
         }
-    }
 
-    &:after {
-        content: '';
-        position: absolute;
-        display: block;
-        left: calc(-1 * ((var(--shout-avatar-size) / 2)));
-        top: calc((6px + var(--shout-avatar-top) + (var(--shout-avatar-size) / 2) - (var(--shout-tree-size) / 2 )) + var(--shout-tree-size));
-        bottom: 0;
-        width: var(--shout-stem-width);
-        background: oklch(var(--b5));
+        &:not(:last-child) {
+            &:after {
+                display: none;
+            }
+        }
+
+        &:after {
+            content: '';
+            position: absolute;
+            display: block;
+            left: calc(-1 * ((var(--shout-avatar-size) / 2)));
+            top: calc((6px + var(--shout-avatar-top) + (var(--shout-avatar-size) / 2) - (var(--shout-tree-size) / 2 )) + var(--shout-tree-size));
+            bottom: 0;
+            width: var(--shout-stem-width);
+            background: oklch(var(--b5));
+        }
     }
 }
 
