@@ -173,8 +173,10 @@ export function patch_shouts() {
                 const type = button.classList[1];
                 if (type == 'more-item--delete') {
                     button.textContent = tl(trans.delete);
+                    button.classList.add('colourful', 'danger-subtle');
                 } else if (type == 'more-item--report') {
                     button.textContent = tl(trans.report);
+                    button.classList.add('colourful', 'danger-subtle');
                 }
             });
 

@@ -67668,8 +67668,10 @@
           const type = button2.classList[1];
           if (type == "more-item--delete") {
             button2.textContent = tl2(trans.delete);
+            button2.classList.add("colourful", "danger-subtle");
           } else if (type == "more-item--report") {
             button2.textContent = tl2(trans.report);
+            button2.classList.add("colourful", "danger-subtle");
           }
         });
         menu.insertBefore(html.node`
