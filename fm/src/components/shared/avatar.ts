@@ -193,13 +193,15 @@ export function style_name_from_badge(name, badge) {
     }
 }
 
+export type avatar_dimensions = 'avatar42s' | '64s' | 'avatar70s' | 'avatar170s' | 'avatar300s' | '300x300' | '370x208' | '500x500' | '1170x658' | 'arG' | 'ar0';
+
 /**
  * builds an avatar or cover art url with the specified sizing
  * @param url full original image url or filename
  * @param requested requested sizing
  * @returns
  */
-export function avatar(url: string | null, requested: 'avatar42s' | '64s' | 'avatar70s' | 'avatar170s' | 'avatar300s' | '300x300' | '500x500' | 'arG' | 'ar0') {
+export function avatar(url: string | null, requested: avatar_dimensions) {
     if (url == null) return url;
 
     let image: string;
