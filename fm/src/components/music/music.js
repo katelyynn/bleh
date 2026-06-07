@@ -458,7 +458,7 @@ export async function show_your_scrobbles() {
 
     // move it above the scrobble button
     const play_btn = interact_container.querySelector('.header-new-playlink');
-    interact_container.appendChild(play_btn);
+    if (play_btn) interact_container.appendChild(play_btn);
 
     if (ff('submit_scrobble')) {
         const can_api =
