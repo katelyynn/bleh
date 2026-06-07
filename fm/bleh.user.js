@@ -39616,7 +39616,7 @@
         `;
       const other_avi = page.avatar.replace("/avatar300s/", "/avatar42s/");
       let taste_menu;
-      if (taste_artists.length > 1) {
+      if (taste_artists.length > 0) {
         taste_menu = html.node`
                 <div class="taste-menu-header colourful" data-taste=${taste}>
                     ${taste_formal} (${taste_percentage})
@@ -39727,7 +39727,7 @@
                 </div>
             `);
       }
-      if (taste_artists.length > 1) {
+      if (taste_artists.length > 0) {
         tippy_esm_default(details_btn, {
           theme: "context-menu",
           content: taste_menu,
