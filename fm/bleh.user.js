@@ -73118,69 +73118,154 @@
       });
       links.appendChild(music);
     }
-    let notif_count = new_auth.querySelector(
-      '[data-analytics-label="notifications"] + .auth-avatar-notification-count-badge'
-    );
-    if (!notif_count) notif_count = "0";
-    else notif_count = notif_count.textContent;
-    let inbox_count = new_auth.querySelector(
-      '[data-analytics-label="inbox"] + .auth-avatar-notification-count-badge'
-    );
-    if (!inbox_count) inbox_count = "0";
-    else inbox_count = inbox_count.textContent;
-    const count = parseInt(notif_count) + parseInt(inbox_count);
-    const inbox = html.node`
-        <a class="btn masthead-nav-control icon chibi inbox-item" data-type="inbox" href="${root}inbox/notifications">
-            <div class="counter" data-count=${count}>${count}</div>
-        </a>
-    `;
-    tippy_esm_default(inbox, {
-      theme: "stack",
-      content: html.node`
-            <strong>${tl2(trans.inbox)}</strong>
-            <div class="inbox-info">
-                <div class="inbox-info-item">
-                    ${icon({ name: icons.notifications, identifier: "inbox-tooltip" })}
-                    ${notif_count}
+    const notif_count = Number(new_auth.querySelector('[data-analytics-label="notifications"] + .auth-avatar-notification-count-badge')?.textContent || "0");
+    const messages_count = Number(new_auth.querySelector('[data-analytics-label="inbox"] + .auth-avatar-notification-count-badge')?.textContent || "0");
+    const count = notif_count + messages_count;
+    if (settings.hybrid_inbox) {
+      const inbox = html.node`
+            <a class="btn masthead-nav-control icon chibi inbox-item" data-type="inbox" href="${root}inbox/notifications">
+                <div class="counter" data-count=${count}>${count}</div>
+            </a>
+        `;
+      tippy_esm_default(inbox, {
+        theme: "stack",
+        content: html.node`
+                <strong>${tl2(trans.inbox)}</strong>
+                <div class="inbox-info">
+                    <div class="inbox-info-item">
+                        ${icon({ name: icons.notifications, identifier: "inbox-tooltip" })}
+                        ${notif_count}
+                    </div>
+                    <div class="inbox-sep" />
+                    <div class="inbox-info-item">
+                        ${icon({ name: icons.messages, identifier: "inbox-tooltip" })}
+                        ${messages_count}
+                    </div>
                 </div>
-                <div class="inbox-sep" />
-                <div class="inbox-info-item">
-                    ${icon({ name: icons.messages, identifier: "inbox-tooltip" })}
-                    ${inbox_count}
+            `
+      });
+      inbox.addEventListener("click", (e4) => {
+        const cmd = e4.getModifierState("Control") || e4.getModifierState("Meta");
+        const new_tab = e4.button === 1 || cmd;
+        if (!new_tab) e4.preventDefault();
+      });
+      tippy_esm_default(inbox, {
+        content: html.node`
+                <div class="window-header">
+                    ${icon({ name: icons.inbox, identifier: "window_header" })}
+                    <div class="window-title">${tl2(trans.inbox)}</div>
                 </div>
-            </div>
-        `
-    });
-    inbox.addEventListener("click", (e4) => {
-      const cmd = e4.getModifierState("Control") || e4.getModifierState("Meta");
-      const new_tab = e4.button === 1 || cmd;
-      if (!new_tab) e4.preventDefault();
-    });
-    tippy_esm_default(inbox, {
-      content: html.node`
-            <div class="window-header">
-                ${icon({ name: icons.inbox, identifier: "window_header" })}
-                <div class="window-title">${tl2(trans.inbox)}</div>
-            </div>
-            ${setting({ id: "inbox_view", func: render_inbox })}
-            <div class="window-content" />
-        `,
-      theme: "nav-window",
-      placement: "top",
-      interactive: true,
-      interactiveBorder: 10,
-      trigger: "click",
-      appendTo: document.body,
-      onShow(instance) {
-        page.state.inbox_content = instance.popper.querySelector(".window-content");
-        render_inbox();
-      }
-    });
-    function render_notifications(notifications) {
-      if (settings.inbox_view != "notifications") return;
+                ${setting({ id: "inbox_view", func: render_inbox })}
+                <div class="window-content" />
+            `,
+        theme: "nav-window",
+        placement: "top",
+        interactive: true,
+        interactiveBorder: 10,
+        trigger: "click",
+        appendTo: document.body,
+        onShow(instance) {
+          page.state.inbox_content = instance.popper.querySelector(".window-content");
+          page.state.notifications_content = page.state.inbox_content;
+          page.state.messages_content = page.state.inbox_content;
+          render_inbox();
+        }
+      });
+      links.appendChild(inbox);
+      queue_popup("inbox", inbox);
+    } else {
+      const notifications = html.node`
+            <a class="btn masthead-nav-control icon chibi inbox-item" data-type="notifications" href="${root}inbox/notifications">
+                <div class="counter" data-count=${notif_count}>${notif_count}</div>
+            </a>
+        `;
+      notifications.addEventListener("click", (e4) => {
+        const cmd = e4.getModifierState("Control") || e4.getModifierState("Meta");
+        const new_tab = e4.button === 1 || cmd;
+        if (!new_tab) e4.preventDefault();
+      });
+      tippy_esm_default(notifications, {
+        content: html.node`
+                <div class="window-header">
+                    ${icon({ name: icons.notifications, identifier: "window_header" })}
+                    <div class="window-title">${tl2(trans.notifications)}</div>
+                </div>
+                <div class="window-content" />
+            `,
+        theme: "nav-window",
+        placement: "top",
+        interactive: true,
+        interactiveBorder: 10,
+        trigger: "click",
+        appendTo: document.body,
+        onShow(instance) {
+          page.state.notifications_content = instance.popper.querySelector(".window-content");
+          render(
+            page.state.notifications_content,
+            html`
+                        <div class="mini-notifications content-loading">
+                            <div class="loading-data-container">
+                                <div class="loading-data-text">
+                                    ${tl2(trans.loading)}
+                                </div>
+                            </div>
+                        </div>
+                    `
+          );
+          if (page.notifications.list) render_notifications(page.notifications.list, true);
+          fetch_notifications().then((notifications2) => render_notifications(notifications2, true));
+        }
+      });
+      links.appendChild(notifications);
+      const messages = html.node`
+            <a class="btn masthead-nav-control icon chibi inbox-item" data-type="messages" href="${root}inbox">
+                <div class="counter" data-count=${messages_count}>${messages_count}</div>
+            </a>
+        `;
+      messages.addEventListener("click", (e4) => {
+        const cmd = e4.getModifierState("Control") || e4.getModifierState("Meta");
+        const new_tab = e4.button === 1 || cmd;
+        if (!new_tab) e4.preventDefault();
+      });
+      tippy_esm_default(messages, {
+        content: html.node`
+                <div class="window-header">
+                    ${icon({ name: icons.messages, identifier: "window_header" })}
+                    <div class="window-title">${tl2(trans.messages)}</div>
+                </div>
+                <div class="window-content" />
+            `,
+        theme: "nav-window",
+        placement: "top",
+        interactive: true,
+        interactiveBorder: 10,
+        trigger: "click",
+        appendTo: document.body,
+        onShow(instance) {
+          page.state.messages_content = instance.popper.querySelector(".window-content");
+          render(
+            page.state.messages_content,
+            html`
+                        <div class="mini-notifications content-loading">
+                            <div class="loading-data-container">
+                                <div class="loading-data-text">
+                                    ${tl2(trans.loading)}
+                                </div>
+                            </div>
+                        </div>
+                    `
+          );
+          if (page.messages.list) render_messages(page.messages.list, true);
+          fetch_messages().then((messages2) => render_messages(messages2, true));
+        }
+      });
+      links.appendChild(messages);
+    }
+    function render_notifications(notifications, bypass = false) {
+      if (settings.inbox_view != "notifications" && !bypass) return;
       bleh_notification_list(notifications, true);
       render(
-        page.state.inbox_content,
+        page.state.notifications_content,
         html`
                 <div class="mini-notifications">
                     ${notifications}
@@ -73191,11 +73276,11 @@
             `
       );
     }
-    function render_messages(messages) {
-      if (settings.inbox_view != "messages") return;
+    function render_messages(messages, bypass = false) {
+      if (settings.inbox_view != "messages" && !bypass) return;
       bleh_message_list(messages, true);
       render(
-        page.state.inbox_content,
+        page.state.messages_content,
         html`
                 <div class="mini-notifications">
                     ${messages}
@@ -73224,18 +73309,13 @@
             `
       );
       if (view == "notifications") {
-        if (page.notifications.list)
-          render_notifications(page.notifications.list);
-        fetch_notifications().then(
-          (notifications) => render_notifications(notifications)
-        );
+        if (page.notifications.list) render_notifications(page.notifications.list);
+        fetch_notifications().then((notifications) => render_notifications(notifications));
       } else {
         if (page.messages.list) render_messages(page.messages.list);
         fetch_messages().then((messages) => render_messages(messages));
       }
     }
-    links.appendChild(inbox);
-    queue_popup("inbox", inbox);
     queue_popup("search", search);
     let language_options = document.querySelectorAll(".footer-language-form");
     const language_menu = html.node`
@@ -73480,7 +73560,7 @@
           elem.textContent = formal.name;
           let count2 = 0;
           if (val == "notifications") count2 = notif_count;
-          else if (val == "messages") count2 = inbox_count;
+          else if (val == "messages") count2 = messages_count;
           if (count2) {
             render(elem, html`
                                         <div class="auth-dropdown-item-row">
@@ -73900,7 +73980,7 @@
           elem.textContent = formal.name;
           let count2 = 0;
           if (val == "notifications") count2 = notif_count;
-          else if (val == "messages") count2 = inbox_count;
+          else if (val == "messages") count2 = messages_count;
           if (count2) {
             render(
               elem,
@@ -75543,6 +75623,9 @@
                     <div class="setting-group">
                         ${setting({ id: "navigation_items", list: page.state.quick_access_items })}
                         ${!page.mobile ? setting({ id: "navigation_language" }) : ""}
+                    </div>
+                    <div class="setting-group">
+                        ${setting({ id: "hybrid_inbox" })}
                     </div>
                 </section>
                 <section class="bleh--panel">
@@ -95071,6 +95154,14 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     issues_updating: {
       // then after that theres a join discord button
       en: "Having issues updating or need support in general? {disc}"
+    },
+    hybrid_inbox: {
+      name: {
+        en: "Use a hybrid inbox"
+      },
+      body: {
+        en: "Group your messages and notifications into a single counter"
+      }
     }
   };
   var translation_fallback = "NO_TRANSLATION_FOUND";
@@ -96188,6 +96279,13 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
           icon: "edit"
         }
       }
+    },
+    hybrid_inbox: {
+      default: true,
+      type: "checkbox",
+      title: trans.hybrid_inbox.name,
+      body: trans.hybrid_inbox.body,
+      require_reload: true
     }
   };
 

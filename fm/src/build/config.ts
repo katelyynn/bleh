@@ -1073,5 +1073,12 @@ export let settings_store: Record<string, setting_instance> = {
                 icon: 'edit'
             }
         }
+    },
+    hybrid_inbox: {
+        default: true,
+        type: 'checkbox',
+        title: trans.hybrid_inbox.name,
+        body: trans.hybrid_inbox.body,
+        require_reload: true
     }
 };

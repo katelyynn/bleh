@@ -998,6 +998,9 @@ export async function render_setting_page(page_id) {
                         ${setting({ id: 'navigation_items', list: page.state.quick_access_items })}
                         ${!page.mobile ? setting({ id: 'navigation_language' }) : ''}
                     </div>
+                    <div class="setting-group">
+                        ${setting({ id: 'hybrid_inbox' })}
+                    </div>
                 </section>
                 <section class="bleh--panel">
                     <h4>${tl(trans.banners)}</h4>

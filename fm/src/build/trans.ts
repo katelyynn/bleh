@@ -11259,6 +11259,14 @@ export const trans = {
         // then after that theres a join discord button
         en: 'Having issues updating or need support in general? {disc}',
     },
+    hybrid_inbox: {
+        name: {
+            en: 'Use a hybrid inbox'
+        },
+        body: {
+            en: 'Group your messages and notifications into a single counter'
+        }
+    }
 } as const satisfies Record<string, any>;
 
 export const translation_fallback = 'NO_TRANSLATION_FOUND';
