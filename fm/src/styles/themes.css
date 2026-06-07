@@ -383,7 +383,7 @@ body,
     --b9: var(--b6);
 
     --card-border: inset 0 0 0 1px oklch(var(--b4) / 0.6);
-    --card-border-base: oklch(var(--b3) / 0.7);
+    --card-border-base: oklch(var(--b3) / 0.6);
     --card-border-base-highlight: oklch(var(--b2) / 0.55);
 
     --separator: var(--separator-base);
@@ -492,6 +492,9 @@ body,
         --card-blur-bg-alt: oklch(var(--b5) / var(--solarium-opacity, 35%));
 
         --normal-shadow: none;
+
+        --card-border-base: oklch(var(--b3) / 0.5);
+        --card-border-base-highlight: oklch(var(--b2) / 0.55);
     }
     &[data-bleh--theme="oled"] {
         /* any additional highlights */
@@ -511,8 +514,8 @@ body,
 
         --separator-base: oklch(var(--b2) / 0.7);
 
-        --card-border-base: oklch(var(--b2) / 0.72);
-        --card-border-base-highlight: oklch(var(--b2) / 0.8);
+        --card-border-base: oklch(var(--b2) / 0.4);
+        --card-border-base-highlight: oklch(var(--b2) / 0.7);
 
         --input-shadow:
             inset 0 0 0 1px oklch(var(--b3)),

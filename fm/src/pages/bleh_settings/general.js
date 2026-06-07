@@ -17,6 +17,9 @@ import { convert_lang_to_country, flag } from '@/components/shared/flag';
 import { start_update } from "@/components/page/style";
 import { bool } from "@/build/tools";
 import { keys } from "@/components/settings/storage";
+import { new_indicator } from "@/components/shared/indicator";
+import { discord } from "@/build/page";
+import { icon, icons } from "@/components/shared/icon";
 
 export function general() {
     if (auth.pro == null) {
@@ -44,6 +47,7 @@ export function general() {
             <div class="setting-group">
                 ${update_setting()}
             </div>
+            <p class="card-tip">${{ html: tl(trans.issues_updating, { disc: `<a href="https://discord.gg/${discord}">${tl(trans.join_discord)}</a>` }) }}</p>
         </section>
         <section class="bleh--panel">
             <h4>${tl(trans.profile)}</h4>
@@ -176,7 +180,7 @@ export function general() {
                                 </div>
                                 ${language.new ? html.node`
                                     <div class="badges">
-                                        <div class="new-badge">${tl(trans.new)}</div>
+                                        ${new_indicator()}
                                     </div>
                                 ` : html.node`
                                     <div class="badges"></div>
@@ -262,7 +266,12 @@ function update_setting() {
                 `}
             </div>
             <div class="toggle-wrap">
-                <button class="btn icon" data-type="update" ref=${(el) => (update_btn = el)} onclick=${() => update_check(true, update_btn, () => {
+                <button class="btn icon" data-type="update" ref=${(el) => (update_btn = el)} onclick=${() => update_check(true, update_btn, (success, error) => {
+                    if (!success) {
+                        update_check_failed(error);
+                        return;
+                    }
+
                     notify({
                         id: 'update',
                         title: tl(trans.updates),
@@ -290,7 +299,12 @@ function update_setting() {
             </div>
             <div class="toggle-wrap">
                 <div class="button-group">
-                    <button class="btn icon" data-type="update" ref=${(el) => (update_btn = el)} onclick=${() => update_check(true, update_btn, () => {
+                    <button class="btn icon" data-type="update" ref=${(el) => (update_btn = el)} onclick=${() => update_check(true, update_btn, (success, error) => {
+                        if (!success) {
+                            update_check_failed(error);
+                            return;
+                        }
+
                         notify({
                             id: 'update',
                             title: tl(trans.updates),
@@ -325,4 +339,42 @@ function update_setting() {
             `}
         </div>
     `;
+}
+
+function update_check_failed(e) {
+    notify({
+        id: 'update',
+        title: tl(trans.updates),
+        body: tl(trans.failed_to_check_for_updates),
+        icon: 'icon-16-update',
+        type: 'error'
+    });
+
+    dialog({
+        id: 'error',
+        title: tl(trans.failed_to_check_for_updates),
+        body: html.node`
+            <div class="error-inner">
+                <div class="error-top">
+                    ${icon({ name: icons.error })}
+                    <div class="error-top-info">
+                        <h1 class="error-head">${tl(trans.failed_to_check_for_updates)}</h1>
+                        <p class="error-body">Either the update files could not be found or there was an error in parsing them.</p>
+                    </div>
+                </div>
+                <pre class="error-info colourful">${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ''}${e.stack ? html.node`<br><span class="error-stack">${e.stack}</span>` : ''}<br>on: ${page.type}/${page.subpage}<br>    ${window.location.pathname}<br>    ${version.build} (${version.sku})</pre>
+            </div>
+            <div class="modal-footer">
+                <div class="fill"></div>
+                <a class="see-more" href=${version.url} target="_blank">
+                    Try update manually
+                </a>
+                <a class="see-more" href="https://discord.gg/${discord}" target="_blank">
+                    Join Discord
+                </a>
+                <div class="fill"></div>
+            </div>
+        `,
+        type: 'error'
+    });
 }

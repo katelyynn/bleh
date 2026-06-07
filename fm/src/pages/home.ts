@@ -25,7 +25,7 @@ import { page_header_avatar } from '@/components/music/header';
 import { campfire } from './home/campfire';
 import { bleh_suggested } from './home/suggested';
 import { header_colour } from '@/components/page/colour';
-import { new_indicator } from "@/components/shared/indicator";
+import { beta_indicator, new_indicator } from "@/components/shared/indicator";
 
 export async function bleh_home() {
     page.structure.container = document.body.querySelector('.page-content');
@@ -136,7 +136,7 @@ export async function bleh_home() {
                     <li class="navlist-item secondary-nav-item secondary-nav-item--home">
                         <a href="${root}music" class="secondary-nav-item-link ${(page.subpage == 'music' || page.type == 'events') ? 'secondary-nav-item-link--active' : ''}">
                             ${tl(trans.home)}
-                            ${new_indicator()}
+                            ${beta_indicator()}
                         </a>
                     </li>
                     <li class="navlist-item secondary-nav-item secondary-nav-item--recommendations">

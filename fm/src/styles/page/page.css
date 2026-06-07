@@ -62,8 +62,8 @@
     width: var(--cards-width);
 
     background: transparent;
-    border: 1px solid transparent !important;
-    border-top: 1px solid var(--card-border-base) !important;
+    border: 1px solid var(--card-border-base) !important;
+    border-top: 1px solid var(--card-border-base-highlight) !important;
     border-radius: calc(var(--card-radius) + 1px) !important;
 
     &[data-lacrimosa="true"] {

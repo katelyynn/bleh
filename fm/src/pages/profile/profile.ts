@@ -60,6 +60,7 @@ import { page_header_avatar } from '@/components/music/header';
 import { profile_summary } from '@/components/profile/summary';
 import { header_colour } from '@/components/page/colour';
 import { keys } from '@/components/settings/storage';
+import { beta_indicator } from '@/components/shared/indicator';
 
 export function bleh_profiles() {
     // the obsessions page is a user subpage but works very differently
@@ -604,7 +605,9 @@ export function bleh_profiles() {
                     if (action == 'create') {
                         button.setAttribute('data-type', 'add');
                         button.classList.add('primary');
-                        button.innerHTML = `${tl(trans.new)} <div class="new-badge">${tl(trans.beta)}</div>`; //button.textContent = tl(trans.new);
+                        render(button, html`
+                            ${tl(trans.new)}${beta_indicator()}
+                        `);
                     } else if (action == 'import') {
                         button.setAttribute('data-type', 'import');
                     }

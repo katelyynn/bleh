@@ -8679,6 +8679,9 @@ export const trans = {
         sv: 'Kolla efter uppdateringar',
         ru: 'Проверено на наличие обновлений',
     },
+    failed_to_check_for_updates: {
+        en: 'Checking for updates failed',
+    },
     select_all: {
         en: 'Select all',
         de: 'Alle auswählen',
@@ -11251,6 +11254,10 @@ export const trans = {
     plotting_your_data: {
         // loading message
         en: 'Plotting your data',
+    },
+    issues_updating: {
+        // then after that theres a join discord button
+        en: 'Having issues updating or need support in general? {disc}',
     },
 } as const satisfies Record<string, any>;
 

@@ -109,34 +109,43 @@ export function update_check(force = false, btn = null, func = null) {
     download_with_progress(url, (percent) => {
         //notification.set_body(`Downloading update information ${percent}%`);
         //notification.set(percent);
-    }).then(async (blob) => {
-        const text = await blob.text();
+    })
+        .then(async (blob) => {
+            const text = await blob.text();
 
-        if (btn) btn.removeAttribute('disabled');
+            if (btn) btn.removeAttribute('disabled');
 
-        try {
-            let data = JSON.parse(text);
-            console.log(data);
+            try {
+                let data = JSON.parse(text);
+                console.log(data);
 
-            let update_required = update_comparison(version.build, data.build);
-            set_storage(keys.update_required, update_required.toString());
-            set_storage(keys.update_to_version, data.build);
-            set_storage(keys.update_checked_date, new Date().toString());
+                let update_required = update_comparison(version.build, data.build);
+                set_storage(keys.update_required, update_required.toString());
+                set_storage(keys.update_to_version, data.build);
+                set_storage(keys.update_checked_date, new Date().toString());
 
-            let next = new Date();
-            next.setHours(next.getHours() + 2);
+                let next = new Date();
+                next.setHours(next.getHours() + 2);
 
-            set_storage(keys.update_next_check_date, next.toString());
-            log('update check finished', 'update', 'info', {
-                next_in: next,
-                current_time: new Date()
-            });
+                set_storage(keys.update_next_check_date, next.toString());
+                log('update check finished', 'update', 'info', {
+                    next_in: next,
+                    current_time: new Date()
+                });
 
-            if (func) func();
-        } catch (e) {
-            log('error parsing', 'update', 'error', { error: e });
-        }
-    });
+                if (func) func(true);
+            } catch (e) {
+                log('error parsing', 'update', 'error', { error: e });
+                if (func) func(false, e);
+            }
+        })
+        .catch(e => {
+            log('error downloading', 'update', 'error', { error: e });
+
+            if (btn) btn.removeAttribute('disabled');
+
+            if (func) func(false, e);
+        });
 }
 
 export function prompt_for_update() {

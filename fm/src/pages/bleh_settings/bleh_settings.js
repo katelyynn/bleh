@@ -51,6 +51,7 @@ import { chartlist_bar } from '@/components/music/bar.js';
 import { avatar } from '@/components/shared/avatar.js';
 import { convert_lang_to_country, flag } from '@/components/shared/flag.js';
 import { lotus_modal } from '@/components/music/lotus.js';
+import { new_indicator } from '@/components/shared/indicator.js';
 
 export function bleh_settings() {
     page.name = auth.name;
@@ -1113,7 +1114,7 @@ export async function render_setting_page(page_id) {
                     ${setting({ id: 'static_gifs' })}
                     <div class="setting" data-type="options">
                         <div class="heading">
-                            <h5>${tl(trans.apply_to)}<div class="new-badge">${tl(trans.new)}</div></h5>
+                            <h5>${tl(trans.apply_to)}${new_indicator()}</h5>
                         </div>
                         <div class="primary-selections">
                             ${setting({ id: 'static_avatars', standalone: true })}
@@ -2015,7 +2016,7 @@ export function theme_bubbles(func = null) {
                                 ${icon({ name: icons[`theme_${theme.id}`], identifier: 'theme' })}
                                 ${theme.name}
                             </span>
-                            ${theme.new_release ? html.node`<div class="new-badge">${tl(trans.new)}</div>` : ''}
+                            ${theme.new_release ? new_indicator() : ''}
                         </strong>
                     </button>
                 `;
