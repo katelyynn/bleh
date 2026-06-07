@@ -96285,7 +96285,8 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       type: "checkbox",
       title: trans.hybrid_inbox.name,
       body: trans.hybrid_inbox.body,
-      require_reload: true
+      require_reload: true,
+      new_release: true
     }
   };
 

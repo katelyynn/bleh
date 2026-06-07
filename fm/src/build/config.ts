@@ -1079,6 +1079,7 @@ export let settings_store: Record<string, setting_instance> = {
         type: 'checkbox',
         title: trans.hybrid_inbox.name,
         body: trans.hybrid_inbox.body,
-        require_reload: true
+        require_reload: true,
+        new_release: true
     }
 };
