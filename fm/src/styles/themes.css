@@ -421,7 +421,7 @@ body,
     --card-blur-bg-alt: oklch(var(--b5) / var(--solarium-opacity, 35%));
 
     --nav-filter-shadow: drop-shadow(0 0 4px oklch(var(--b6))) drop-shadow(0 0 10px oklch(var(--b6) / 90%));
-    --header-filter-shadow: drop-shadow(0 0 3px oklch(var(--b6))) drop-shadow(0 0 10px oklch(var(--b6)));
+    --header-filter-shadow: drop-shadow(0 1px 3px oklch(var(--b6) / 80%)) drop-shadow(0 3px 10px oklch(var(--b6) / 60%));
 
     --menu-item-hov: oklch(var(--b4) / 40%);
     --menu-item-atv: oklch(var(--b4) / 60%);
@@ -573,7 +573,7 @@ body,
         --b5: 1 0 0;
 
         /* root */
-        --b6: 0.95 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue);
+        --b6: 0.96 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue);
         --b8: 1 0 0;
         --b7: 0 0 0;
         --b9: 1 0 0;
@@ -609,7 +609,7 @@ body,
         --menu-item-atv: oklch(var(--b4) / 80%);
 
         --nav-filter-shadow: drop-shadow(0 0 2px oklch(var(--b5)));
-        --header-filter-shadow: drop-shadow(0 0 10px oklch(var(--b5)));
+        --header-filter-shadow: drop-shadow(0 3px 7px oklch(var(--b5)));
 
         --banner-overlay: oklch(var(--b5) / 30%);
         --banner-mix: lighten;
