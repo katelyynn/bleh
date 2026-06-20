@@ -533,8 +533,8 @@ body,
 
         --normal-shadow: none;
 
-        --card-blur-bg: oklch(0.12 calc(var(--sat) * 0.05 * var(--sat-bg, 1)) var(--hue) / var(--solarium-opacity, 40%));
-        --card-blur-bg-alt: oklch(var(--b5) / var(--solarium-opacity, 40%));
+        --card-blur-bg: oklch(0.12 calc(var(--sat) * 0.05 * var(--sat-bg, 1)) var(--hue) / var(--solarium-opacity, 10%));
+        --card-blur-bg-alt: oklch(var(--b5) / var(--solarium-opacity, 20%));
 
         --setting-hover: oklch(var(--b2) / 20%);
 
@@ -838,7 +838,8 @@ u,
     --graph-colour-9: oklch(80% 65% 310);
     --graph-colour-10: oklch(80% 65% 360);
 
-    --badge-shadow: 0 3px 15px 1px oklch(var(--h4) / 10%), 0 -4px 10px 0 oklch(var(--h4) / 20%) inset;
+    --badge-shadow: 0 3px 15px 1px oklch(var(--h4) / 10%), 0 -4px 10px 0 oklch(var(--h4) / 40%) inset;
+    --glass-inset: 0 0 5px 2px oklch(var(--h3) / 60%) inset;
 
     &[data-bleh--theme="oled"],
     body[data-bleh--theme="oled"] &:not(.theme-preview) {
@@ -935,6 +936,7 @@ u,
         --g-indigo: oklch(254, 26%, 50%);
 
         --taste-glow: drop-shadow(0 0 15px oklch(var(--h3)));
+        --glass-inset: 0 0 5px 2px oklch(var(--h4) / 60%) inset;
 
         --menu-item-accent-hov: oklch(var(--h4) / 15%);
         --menu-item-accent-atv: oklch(var(--h4) / 25%);
@@ -989,8 +991,8 @@ u,
         --l3-c-lit: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.36);
 
         --h3: var(--h3-lit) var(--h3-sat) var(--hue);
-        --h3-sat: calc(clamp(min(0), var(--sat), max(2)) * 0.42);
-        --h3-lit: calc(clamp(min(0.85), var(--lit), max(1.1)) * 0.78);
+        --h3-sat: calc(clamp(min(0), var(--sat), max(2)) * 0.39);
+        --h3-lit: calc(clamp(min(0.85), var(--lit), max(1.1)) * 0.76);
 
         --h4: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.63) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue);
         --f4: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.8) calc(clamp(min(0), var(--sat), max(2)) * 0.58) var(--hue);
@@ -1033,6 +1035,7 @@ u,
         --g-indigo: oklch(254, 26%, 50%);
 
         --taste-glow: drop-shadow(0 0 15px oklch(var(--h3)));
+        --glass-inset: 0 0 5px 2px oklch(var(--h4) / 40%) inset;
 
         --menu-item-accent-hov: oklch(var(--h4) / 15%);
         --menu-item-accent-atv: oklch(var(--h4) / 25%);
@@ -1259,5 +1262,6 @@ body {
 
     &[data-bleh--theme="oled"] {
         --card-border: inset 0 0 0 1px oklch(var(--b4) / 0.8);
+        --solarium-compensate: brightness(75%);
     }
 }

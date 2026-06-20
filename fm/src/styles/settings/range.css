@@ -30,7 +30,7 @@ input[type="range"] {
             .track {
                 .nub {
                     background-color: transparent;
-                    box-shadow: var(--primary-shadow);
+                    box-shadow: var(--glass-inset);
                     backdrop-filter: blur(2px)
                         saturate(var(--blur-saturate))
                         brightness(var(--blur-brightness))
