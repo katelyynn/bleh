@@ -625,8 +625,8 @@ body,
         --view-buttons-hov: oklch(var(--b4) / 60%);
         --view-buttons-atv: oklch(var(--b4) / 80%);
 
-        --background-overlay: oklch(var(--b5) / 70%);
-        --background-mix-mode: lighten;
+        --background-overlay: oklch(var(--b5));
+        --background-mix-mode: overlay;
 
         --card-overlay-filter: invert(0.4);
         --card-overlay-opacity: 0.2;
