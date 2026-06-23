@@ -3455,32 +3455,17 @@ export const trans = {
         pl: 'utwór',
     },
     lotus_cta: {
-        // {t} is replaced by one of the 3 above
         // capitalisation here refers to the lotus system, which corrects
         // titles that are capitalised wrongly eg. 'eSpReSsO' -> 'Espresso'
-
-        // DE: a gender-neutral mention of 'this artist' would be 'dieses Künstlers/dieser Künstlerin', which doesn't work with this formatting
-        // we can either move the words article to the upper string or only use the masculine form ('dieses Künstlers') ~Myrai
         true: {
-            en: 'This {t} is being re-capitalised, is it correct?',
-            de: 'Die Groß-/Kleinschreibung dieses {t} wird korrigiert, ist das korrekt?',
-            es: 'La capitalización de este {t} está siendo modificada, ¿es correcta?',
-            it: 'L’uso delle maiuscole per questo {t} sta venendo modificato, è corretto?',
-            pt: '{t} teve a capitalização ajustada, está correto?',
-            sv: 'Nuvarande {t} har ändrad kapitalisering, stämmer det här?',
-            ru: 'В этом {t} исправляется регистр, является ли он правильным?',
-            pl: '{t} został innaczej skapitalizowany, czy tak jest poprawnie?',
+            en: 'Actively correcting this title',
         },
         false: {
-            en: 'Is this {t} capitalised correctly?',
-            de: 'Ist die Groß-/Kleinschreibung dieses {t} richtig?',
-            es: '¿Está este {t} capitalizado correctamente?',
-            it: 'L’uso delle maiuscole per questo {t} è corretto?',
-            pt: 'Esse(a) {t} está capitalizado(a) corretamente?',
-            sv: 'Stämmer kapitaliseringen på {t}?',
-            ru: 'Правильно ли написан регистр этого {t}?',
-            pl: 'Czy {t} jest poprawnie skapitalizowany?',
+            en: 'Is this capitalised correctly?',
         },
+    },
+    alert_of_correction: {
+        en: 'This title is already being corrected to \'{t}\', are you sure you want to continue?',
     },
     current: {
         en: 'Current',

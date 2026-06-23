@@ -83,6 +83,10 @@
 .new-scrobble-form {
     width: 530px;
     max-width: 100%;
+
+    .alert + & {
+        margin-top: var(--card-gap);
+    }
 }
 
 .new-scrobble-form, .form-inner {

@@ -661,7 +661,8 @@ export function smart_artists(song_artist, song_guests) {
 export function create_correction(
     type,
     name = page.name,
-    sister = page.sister
+    sister = page.sister,
+    existing = false
 ) {
     let title;
     let current = name;
@@ -680,10 +681,22 @@ export function create_correction(
         template = '2-album_track.yml';
     }
 
+    let capitalised = name;
+    if (type == 'artist') {
+        capitalised = correct_artist(name);
+    } else {
+        capitalised = correct_item_by_artist(name, sister);
+    }
+
     dialog({
         id: 'lotus_correction',
         title: tl(trans.suggest_correction),
         body: html.node`
+            ${existing ? html.node`
+                <div class="alert alert-warning">
+                    <p>${tl(trans.alert_of_correction, { t: capitalised })}</p>
+                </div>
+            ` : ''}
             <div class="new-scrobble-form">
                 <p class="generic-label">${tl(trans.current)}</p>
                 ${input({

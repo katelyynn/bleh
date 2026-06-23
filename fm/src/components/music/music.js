@@ -1110,10 +1110,10 @@ export async function show_your_scrobbles() {
         <section class="lotus cta colourful">
             <label class="cta-label">
                 ${icon({ name: icons.lotus })}
-                <strong>${tl(trans.lotus_cta[page.corrected], { t: tl(trans[`${page.type}_lower`]) })}</strong>
+                <strong>${tl(trans.lotus_cta[page.corrected])}</strong>
             </label>
             ${ff('refreshed_lotus') ? html.node`
-                <button class="see-more" onclick=${() => create_correction(page.type)}>${tl(trans.suggest_correction)}</button>
+                <button class="see-more" onclick=${() => create_correction(page.type, page.name, page.sister, page.corrected)}>${tl(trans.suggest_correction)}</button>
             ` : html.node`
                 <a class="see-more" href="https://github.com/katelyynn/lotus/issues/new/choose" target="_blank">${tl(trans.suggest_correction)}</a>
             `}
