@@ -120,3 +120,11 @@ h2.text-18,
         line-height: 36px !important;
     }
 }
+
+
+.chart-heading {
+    font-family: var(--font-head) !important;
+    font-size: 40px !important;
+    line-height: 50px !important;
+    margin-bottom: unset !important;
+}

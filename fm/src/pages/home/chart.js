@@ -8,13 +8,25 @@ import { settings } from '@/build/config';
 import { page } from '@/build/page';
 import { tl, trans } from '@/build/trans';
 import { correct_artist, correct_item_by_artist } from '@/components/music/lotus';
-import { html } from 'lighterhtml';
+import { html, render } from 'lighterhtml';
 import tippy from 'tippy.js';
 import { DateTime } from 'luxon';
 import { setting } from '@/components/settings/settings';
 import { bind_link_block } from '@/components/shared/link_block';
 
 export function bleh_charts() {
+    if (page.subpage == 'weekly') {
+        const items = page.structure.main.querySelectorAll('.weeklychart-item');
+        items.forEach((item) => {
+            const change = item.querySelector('.weeklychart-change');
+            if (!change) return;
+
+            change.classList.add('colourful');
+
+            render(change, html.node`<span class="bleh-icon" />`);
+        });
+    }
+
     if (page.subpage != 'overview') return;
 
     let charts = page.structure.main.querySelector('.charts');
@@ -31,18 +43,20 @@ export function bleh_charts() {
     );
     if (out_now) out_now.classList.add('btn', 'out-now-btn', 'icon', 'icon-r');
 
+    let settings_btn;
+
     let header = html.node`
         <div class="charts-header top-header">
             <div class="left">
 
             </div>
             <div class="middle">
-                <div class="sub-text">${DateTime.now().toLocaleString(DateTime.DATE_FULL)}</div>
-                <h2>${tl(trans.charts)}</h2>
+                <div class="sub-text">${tl(trans.charts_for)}</div>
+                <h2 class="chart-heading">${DateTime.now().toLocaleString(DateTime.DATE_FULL)}</h2>
             </div>
             <div class="right">
-                <div class="view-buttons">
-                    <button class="btn view-item icon glacier-configure-button panel-settings-button">
+                <div class="view-buttons blend blend-v2">
+                    <button class="left-icon blend-v2-btn" data-type="settings" ref=${el => settings_btn = el}>
                         ${tl(trans.settings)}
                     </button>
                 </div>
@@ -51,16 +65,10 @@ export function bleh_charts() {
     `;
     new_panel.appendChild(header);
 
-    let settings_btn = header.querySelector('.panel-settings-button');
-
     tippy(settings_btn, {
-        theme: 'window',
+        theme: 'context-menu',
         content: html.node`
-            <div class="dialog-settings">
-                <div class="setting-group blend">
-                    ${setting({ id: 'simulate_scroll' })}
-                </div>
-            </div>
+            ${setting({ id: 'simulate_scroll', in_menu: true })}
         `,
         placement: 'bottom',
         interactive: true,

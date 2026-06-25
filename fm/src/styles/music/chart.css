@@ -3,31 +3,71 @@
 }
 .weeklychart {
     display: flex;
+    flex-direction: column;
     padding: unset;
     margin: unset;
     line-height: var(--line-height);
 
-    thead {
-        display: none;
+    --icon-size: 16px;
+    --item-width: calc(120px + var(--icon-size) + var(--icon-gap));
+
+    & > thead {
+        display: flex;
+        justify-content: end;
+        margin-bottom: 10px;
+
+        & > tr {
+            display: flex;
+            gap: var(--item-list-gap);
+        }
+
+        & > tr > th {
+            font-size: var(--font-size);
+            line-height: var(--line-height);
+            color: oklch(var(--c3));
+            font-family: var(--font);
+            padding: unset;
+            text-transform: unset;
+            cursor: default;
+            width: var(--item-width);
+            text-align: right;
+        }
     }
     tbody {
         display: flex;
         flex-direction: column;
-        gap: var(--item-list-gap);
+        gap: 2px;
         flex: 1;
     }
 }
+
+.weeklychart-image-header {
+    display: none;
+}
+
 .weeklychart-item {
     display: flex;
     align-items: center;
     gap: var(--item-list-gap);
 
-    --bg: oklch(var(--b4) / 40%);
-    --bg-hov: oklch(var(--b4) / 80%);
-    --bg-atv: oklch(var(--b4));
+    --bg: transparent;
+    --bg-hov: var(--tracklist-hover);
+    --bg-atv: var(--bg-hov);
     --shadow: none;
+    --padding: 8px 12px;
+    margin: 0 -12px;
 
-    td {
+    --avatar-size: 40px;
+
+    &:first-child {
+        --padding: 12px 12px;
+        --avatar-size: 64px;
+
+        --bg: oklch(var(--h4) / 10%) !important;
+        --bg-hov: oklch(var(--h4) / 17%) !important;
+    }
+
+    & > td {
         padding: unset !important;
     }
 
@@ -37,14 +77,13 @@
 
     .weeklychart-image {
         width: fit-content;
-        box-shadow: var(--card-shadow);
-        border-radius: var(--item-med-radius);
+        border-radius: var(--item-small-radius);
 
         .avatar {
             margin: unset;
-            width: 36px;
-            height: 36px;
-            border-radius: var(--item-med-radius);
+            width: var(--avatar-size);
+            height: var(--avatar-size);
+            border-radius: inherit;
         }
     }
 
@@ -59,16 +98,19 @@
     }
 
     .weeklychart-listeners {
-        --mask: var(--icon-16-user);
+        --mask: var(--icon-16-users);
+        order: 1;
+        font-weight: var(--font-weight-medium);
     }
     .weeklychart-scrobblers {
         --mask: var(--icon-16-play);
+        opacity: 0.8;
     }
 
     .weeklychart-listeners,
     .weeklychart-scrobblers {
         position: relative;
-        min-width: calc(90px + var(--icon-size) + var(--icon-gap));
+        min-width: var(--item-width);
         padding-right: calc(var(--icon-size) + var(--icon-gap)) !important;
         text-align: right;
 
@@ -77,23 +119,37 @@
     }
 
     .weeklychart-change {
-        min-width: 18px;
-        --left: 0;
-        color: oklch(var(--c3));
-        position: relative;
-        --mask: var(--icon-16-dot);
+        --icon-size: 16px;
 
-        --sat-over: 1;
-        --lit-over: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: var(--icon-size);
+        width: var(--icon-size);
+        min-width: unset;
+
+        color: oklch(var(--c3));
+        --mask-colour: currentColor;
+        --icon: var(--icon-16-dot);
+
+        &:before {
+            display: none !important;
+        }
 
         &.weeklychart-change--up {
             --hue-over: var(--hue-pos);
-            --mask: var(--icon-16-arrow-up);
+            --sat-over: var(--sat-pos);
+            --lit-over: var(--lit-pos);
+            --icon: var(--icon-16-arrow-up);
             color: oklch(var(--l3-c));
+
+            filter: drop-shadow(0 0 10px oklch(var(--l3-c))) drop-shadow(0 0 10px oklch(var(--l3-c)));
         }
         &.weeklychart-change--down {
             --hue-over: var(--hue-neg);
-            --mask: var(--icon-16-arrow-down);
+            --sat-over: var(--sat-neg);
+            --lit-over: var(--lit-neg);
+            --icon: var(--icon-16-arrow-down);
             color: oklch(var(--l3-c));
         }
     }

@@ -2393,6 +2393,10 @@ export const trans = {
         ru: 'Чарты',
         zh: '榜单',
     },
+    charts_for: {
+        // date will be directly below this text
+        en: 'Charts for'
+    },
     view_the_charts: {
         en: 'View the charts',
         de: 'Charts ansehen',
