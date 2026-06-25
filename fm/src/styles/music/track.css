@@ -144,9 +144,18 @@
         flex: unset !important;
     }
 
+    & > .chartlist-name {
+        order: 1;
+    }
+
+    & > .chartlist-artist {
+        order: 2;
+    }
+
     & > .chartlist-album {
         color: oklch(var(--c3));
         font-size: calc(var(--font-size) - 1px);
+        order: 3;
     }
 
     &[data-track-layout="column"][data-album-name-location="row"]:not([data-has-bar="true"]) {
