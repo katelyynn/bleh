@@ -61,6 +61,7 @@ export function bleh_charts() {
                     </button>
                 </div>
             </div>
+            <div class="charts-header-bg" />
         </div>
     `;
     new_panel.appendChild(header);
