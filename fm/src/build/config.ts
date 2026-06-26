@@ -1081,5 +1081,11 @@ export let settings_store: Record<string, setting_instance> = {
         body: trans.hybrid_inbox.body,
         require_reload: true,
         new_release: true
+    },
+    skip_patching_lastfm_settings: {
+        default: false,
+        type: 'checkbox',
+        title: trans.skip_patching_lastfm_settings,
+        require_reload: 'partial'
     }
 };

@@ -161,6 +161,11 @@
     }
 }
 
+.user-status-staff,
+.user-status-mod {
+    order: 1;
+}
+
 .header-new-on-tour {
     top: unset;
     text-align: unset;
@@ -184,15 +189,15 @@
 }
 .user-status-staff {
     --mask: var(--icon-staff);
-    --hue-over: 19;
+    --hue-over: 16;
     --sat-over: 2.68;
     --lit-over: 0.77;
 }
 .user-status-mod {
-    --mask: var(--icon-mod);
+    --mask: var(--icon-staff);
     --hue-over: 36;
-    --sat-over: 2.16;
-    --lit-over: 0.85;
+    --sat-over: 2.26;
+    --lit-over: 0.9;
 }
 .user-status-alum {
     --mask: var(--icon-alum);

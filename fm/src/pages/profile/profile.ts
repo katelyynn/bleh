@@ -209,8 +209,10 @@ export function bleh_profiles() {
                 return;
             }
 
-            if (type == 'user-status-subscriber')
-                badge.textContent = tl(trans.badges['user-status-subscriber'].name);
+            const trans_instance = trans.badges[type];
+
+            if (trans_instance && trans_instance.name)
+                badge.textContent = tl(trans_instance.name);
 
             let badge_name;
             tippy(badge, {

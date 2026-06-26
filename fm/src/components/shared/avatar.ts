@@ -62,7 +62,11 @@ export function patch_avatar(
             inbuilt: true
         }, name);
 
-        badges = [new_pre_existing, ...badges];
+        if (pre_existing_badge_type == 'user-status-subscriber') {
+            badges = [new_pre_existing, ...badges];
+        } else {
+            badges = [...badges, new_pre_existing];
+        }
     }
 
     if (badges.length > 0)

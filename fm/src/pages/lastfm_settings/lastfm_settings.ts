@@ -34,6 +34,16 @@ import { render_shoutbox_preview, render_track_preview } from '@/components/sett
 
 // patch last.fm settings
 export function bleh_native_settings() {
+    if (settings.skip_patching_lastfm_settings) {
+        page.structure.main.insertBefore(html.node`
+            <section class="loading-disabled">
+                <div class="alert alert-warning">${tl(trans.you_have_disabled_bleh_visuals_for_settings)}</div>
+            </section>
+        `, page.structure.main.firstElementChild);
+        skip_patch();
+        return;
+    }
+
     try {
         const no_data = page.structure.container.querySelector(':scope > .no-data-message');
         if (no_data) page.structure.main.appendChild(no_data);
@@ -99,6 +109,18 @@ export function bleh_native_settings() {
         `, page.structure.main.firstElementChild);
         console.error(e);
     }
+
+    skip_patch();
+}
+
+function skip_patch() {
+    page.structure.side.appendChild(html.node`
+        <section>
+            <div class="setting-group">
+                ${setting({ id: 'skip_patching_lastfm_settings' })}
+            </div>
+        </section>
+    `);
 }
 
 // privacy

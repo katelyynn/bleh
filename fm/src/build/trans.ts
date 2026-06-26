@@ -214,7 +214,7 @@ export const trans = {
         },
         'user-status-mod': {
             name: {
-                en: 'Mod',
+                en: 'Moderator',
                 de: 'Moderator',
                 es: 'Moderador',
                 it: 'Moderatore',
@@ -11250,12 +11250,18 @@ export const trans = {
     },
     hybrid_inbox: {
         name: {
-            en: 'Use a hybrid inbox'
+            en: 'Use a hybrid inbox',
         },
         body: {
-            en: 'Group your messages and notifications into a single counter'
-        }
-    }
+            en: 'Group your messages and notifications into a single counter',
+        },
+    },
+    skip_patching_lastfm_settings: {
+        en: 'Disable bleh visuals here',
+    },
+    you_have_disabled_bleh_visuals_for_settings: {
+        en: 'You have disabled bleh visuals for Last.fm settings, don\'t expect this to look pretty',
+    },
 } as const satisfies Record<string, any>;
 
 export const translation_fallback = 'NO_TRANSLATION_FOUND';
