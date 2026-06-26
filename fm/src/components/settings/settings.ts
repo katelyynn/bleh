@@ -204,7 +204,6 @@ export function setting({
                         ${text ? html.node`
                         <span class="menu-item-body">
                             <strong class="menu-item-head">${html_title}</strong>
-                            ${body ? html.node`<p class="menu-item-text">${body}</p>` : ''}
                         </span>
                         ` : ''}
                         ${setting_incompatible_block(settings_store[id].incompatible)}
@@ -636,7 +635,6 @@ export function setting({
                         ${text ? html.node`
                         <span class="menu-item-body">
                             <strong class="menu-item-head">${html_title}</strong>
-                            ${body ? html.node`<p class="menu-item-text">${body}</p>` : ''}
                         </span>
                         ` : ''}
                         ${setting_incompatible_block(settings_store[id].incompatible)}

@@ -1161,6 +1161,8 @@ body {
     --chartlist-inner-gap: 8px;
     --item-list-gap: 10px;
 
+    --menu-gap: 1px;
+
     /* cover masks */
     --cover-size-20: 14px;
     --cover-size-32: 20px;

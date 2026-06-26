@@ -5,6 +5,10 @@
 .navlist-hidden-list-wrap .navlist-hidden-list {
     padding: 4px !important;
     animation: solarium_menu 0.25s var(--trans-function);
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--menu-gap);
 }
 .dropdown-menu-item-dark,
 .dropdown-menu-clickable-item,

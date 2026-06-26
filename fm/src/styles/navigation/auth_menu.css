@@ -70,6 +70,10 @@
             transition-duration: 0.25s;
             transition-timing-function: var(--trans-function-ani);
 
+            display: flex;
+            flex-direction: column;
+            gap: var(--menu-gap);
+
             &:hover {
                 overflow-y: auto;
             }

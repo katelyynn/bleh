@@ -894,9 +894,10 @@ export function append_nav() {
             if (length < 2) length = 2;
 
             const show_language = settings.navigation_language == true ? 1 : 0;
+            const gap = 1;
 
             // user defined + themes + language + minis + settings
-            const height = (length + 3 + show_language) * 28;
+            const height = (length + 3 + show_language) * (28 + gap) - gap;
 
             // you cant change your theme when viewing
             // a listening report or on a page with theme settings

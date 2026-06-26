@@ -12,6 +12,7 @@ import { sponsor_list } from '@/build/sponsor';
 import {
     clean_number,
     control_gif_pause,
+    copy,
     lazy,
     romanise,
     set_storage
@@ -107,6 +108,8 @@ export function bleh_profiles() {
     let about_me_sidebar =
         page.structure.row.querySelector('.about-me-sidebar');
 
+    let about_me_text = about_me_sidebar?.querySelector('p');
+
     if (page.subpage == 'overview') {
         delete cache.banner;
         delete cache.hue;
@@ -130,7 +133,6 @@ export function bleh_profiles() {
         } else {
             if (settings.bio_markdown) {
                 // parse body
-                let about_me_text = about_me_sidebar.querySelector('p');
                 let result = bio_parse(about_me_text, cache);
                 result.classList.add('about-me-content');
 
@@ -502,6 +504,11 @@ export function bleh_profiles() {
             theme: 'context-menu',
             content: html.node`
                 ${setting({ id: 'bio_markdown', in_menu: true })}
+                <button class="dropdown-menu-clickable-item" data-type="copy" onclick=${() => {
+                    copy(about_me_text.textContent.trim());
+                }}>
+                    ${tl(trans.copy_text)}
+                </button>
             `,
             placement: 'bottom',
             interactive: true,
