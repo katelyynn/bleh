@@ -15,7 +15,34 @@ import { setting } from '@/components/settings/settings';
 import { bind_link_block } from '@/components/shared/link_block';
 
 export function bleh_charts() {
+    let charts = page.structure.main.querySelector('.charts');
+
+    const daily_tab = page.structure.container.querySelector('.secondary-nav-item--overview');
+    if (daily_tab) {
+        daily_tab.classList.remove('secondary-nav-item--overview');
+        daily_tab.classList.add('secondary-nav-item--daily');
+    }
+
     if (page.subpage == 'weekly') {
+        const head = charts.querySelector(':scope > h3');
+        if (!head) return;
+
+        head.replaceWith(html.node`
+            <div class="charts-header top-header">
+                <div class="left">
+
+                </div>
+                <div class="middle">
+                    <div class="sub-text">${tl(trans.weekly_charts)}</div>
+                    <h2 class="chart-heading">${head.textContent.trim()}</h2>
+                </div>
+                <div class="right">
+
+                </div>
+                <div class="charts-header-bg" />
+            </div>
+        `);
+
         const items = page.structure.main.querySelectorAll('.weeklychart-item');
         items.forEach((item) => {
             const change = item.querySelector('.weeklychart-change');
@@ -29,7 +56,6 @@ export function bleh_charts() {
 
     if (page.subpage != 'overview') return;
 
-    let charts = page.structure.main.querySelector('.charts');
     charts.classList.add('legacy-charts');
     let chart_rows = charts.querySelectorAll(
         '.charts-col:not(.charts-col--mobile-ad)'
@@ -45,7 +71,7 @@ export function bleh_charts() {
 
     let settings_btn;
 
-    let header = html.node`
+    new_panel.appendChild(html.node`
         <div class="charts-header top-header">
             <div class="left">
 
@@ -63,8 +89,7 @@ export function bleh_charts() {
             </div>
             <div class="charts-header-bg" />
         </div>
-    `;
-    new_panel.appendChild(header);
+    `);
 
     tippy(settings_btn, {
         theme: 'context-menu',

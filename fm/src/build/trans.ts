@@ -2397,6 +2397,10 @@ export const trans = {
         // date will be directly below this text
         en: 'Charts for'
     },
+    weekly_charts: {
+        // dates will be directly below this text
+        en: 'Weekly charts',
+    },
     view_the_charts: {
         en: 'View the charts',
         de: 'Charts ansehen',

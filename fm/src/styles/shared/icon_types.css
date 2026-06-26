@@ -30,9 +30,6 @@
 [data-type="share"] {
     --mask: var(--icon-16-share);
 }
-[data-type="overview"] {
-    --mask: var(--icon-16-home);
-}
 [data-type="mention"] {
     --mask: var(--icon-16-mention);
 }
@@ -117,6 +114,7 @@
 [data-type="shift"] {
     --mask: var(--icon-16-shift);
 }
+[data-type="overview"],
 [data-menu-item="home"],
 .secondary-nav-item--overview,
 [data-type="home"] {
@@ -842,4 +840,12 @@
 
 [data-type="credits"] {
     --mask: var(--icon-16-credits);
+}
+
+.secondary-nav-item--daily {
+    --mask: var(--icon-16-daily);
+}
+
+.secondary-nav-item--weekly {
+    --mask: var(--icon-16-weekly);
 }

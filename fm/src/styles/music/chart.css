@@ -164,19 +164,19 @@
 }
 
 
+.charts-header {
+    order: -1;
+    margin: unset !important;
+
+    .sub-text {
+        justify-content: center;
+    }
+}
+
 .charts-panel {
     display: flex;
     flex-direction: column;
     gap: 50px;
-
-    .charts-header {
-        order: -1;
-        margin: unset !important;
-
-        .sub-text {
-            justify-content: center;
-        }
-    }
 
     .charts-new-row {
         &[data-index="1"] {
