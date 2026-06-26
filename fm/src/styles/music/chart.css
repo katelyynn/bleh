@@ -198,6 +198,10 @@
 
             .charts-list-item {
                 width: 200px;
+
+                &:first-child {
+                    width: 248px;
+                }
             }
 
             [data-bleh--simulate_scroll="false"] & {
@@ -222,24 +226,41 @@
                         position: absolute;
                         inset: 0;
                         overflow: hidden;
+
+                        display: flex;
+                        justify-content: center;
+                        align-items: end;
+
+                        background: linear-gradient(180deg, transparent 70%, oklch(var(--h3) / 15%));
+                        border-radius: var(--item-small-radius);
+                        overflow: hidden;
+                        mix-blend-mode: luminosity;
+
+                        &:before {
+                            content: '';
+                            position: absolute;
+                            left: 10px;
+                            right: 10px;
+                            bottom: 0;
+                            height: 2px;
+                            display: block;
+                            background: linear-gradient(90deg, oklch(var(--h4) / 20%), oklch(var(--h3)), oklch(var(--h4) / 20%));
+                            border-top-left-radius: 4px;
+                            border-top-right-radius: 4px;
+                        }
                     }
 
                     .charts-list-rank-overlay {
-                        position: absolute;
-                        bottom: 8px;
-                        left: 8px;
-                        font-family: var(--font-head);
-                        font-size: 60px;
-                        line-height: 36px;
-                        font-weight: 1000;
-                        letter-spacing: -2px;
-                        filter: grayscale(1);
-
-                        color: oklch(var(--b6));
-
-                        transition-property: transform, opacity;
-                        transition-duration: var(--trans);
-                        transition-timing-function: var(--trans-function);
+                        font-size: 13px;
+                        line-height: 13px;
+                        background-color: oklch(var(--h3) / 95%);
+                        padding: 2px 7px;
+                        border-radius: 4px;
+                        border-bottom-left-radius: 0;
+                        border-bottom-right-radius: 0;
+                        color: oklch(var(--b7));
+                        font-weight: var(--font-weight-bold);
+                        box-shadow: 0 -1px 10px oklch(var(--h4) / 40%);
                     }
 
                     .rank-overlay-text {
@@ -249,6 +270,7 @@
 
                     .rank-overlay-back {
                         opacity: 0.8;
+                        display: none;
 
                         position: absolute;
                         inset: 0;
