@@ -2496,6 +2496,13 @@ export const trans = {
         pl: 'Instalacja',
         zh: '初始化',
     },
+    welcome: {
+        // user = username
+        en: 'Hello {u}!',
+    },
+    bleh_setup_guide: {
+        en: 'It’s nice to see you here'
+    },
     import: {
         en: 'Import',
         de: 'Importieren',
@@ -2845,15 +2852,15 @@ export const trans = {
             zh: '开启毛玻璃特效',
         },
         body: {
-            en: 'Apply a see-through glassy material to many surfaces, which may degrade performance on some devices',
-            de: 'Fügt vielen Oberflächen ein durchsichtiges, glasartiges Material hinzu – kann die Leistung auf einigen Geräten beeinträchtigen',
-            es: 'Aplica un material vidrioso y translúcido a varias superficies, que puede reducir el rendimiento en algunos dispositivos',
-            it: 'Applica un materiale vetrato traslucido a molte superfici, che potrebbe degradare le prestazioni su alcuni dispositivi',
-            pt: 'Aplicar um material translúcido e vidrado a várias superfícies, o que pode reduzir o desempenho em alguns dispositivos',
-            sv: 'Läg till ett genomskinligt glasliknande material till många ytor, som kan degradera prestanda på vissa enheter',
-            ru: 'Применяет полупрозрачный стеклянный материал ко многим поверхностям, что может снизить производительность на некоторых устройствах',
-            pl: 'Włącz przezroczyste szkło na wielu powierzchniach, które może mieć wpływ na wydajność na niektórych urządzeniach',
-            zh: '为多个界面层级披上一层半透明玻璃质感。这能提升视觉深度，但在部分设备上可能会增加性能开销',
+            en: 'Apply a see-through glassy material to many surfaces',
+            de: 'Fügt vielen Oberflächen ein durchsichtiges, glasartiges Material hinzu',
+            es: 'Aplica un material vidrioso y translúcido a varias superficies',
+            it: 'Applica un materiale vetrato traslucido a molte superfici',
+            pt: 'Aplicar um material translúcido e vidrado a várias superfícies',
+            sv: 'Läg till ett genomskinligt glasliknande material till många ytor',
+            ru: 'Применяет полупрозрачный стеклянный материал ко многим поверхностям',
+            pl: 'Włącz przezroczyste szkło na wielu powierzchniach',
+            zh: '为多个界面层级披上一层半透明玻璃质感。这能提升视觉深度',
         },
     },
     seasonal_warning: {
@@ -3728,6 +3735,9 @@ export const trans = {
         ru: 'Присоединиться к Discord',
         pt: 'Junte-se ao Discord',
         pl: 'Dołącz na Discord',
+    },
+    follow_user: {
+        en: 'Follow {u}',
     },
     sponsor_details: {
         en: 'Sponsor and badge details',

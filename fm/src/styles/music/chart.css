@@ -260,7 +260,7 @@
                         border-bottom-right-radius: 0;
                         color: oklch(var(--b7));
                         font-weight: var(--font-weight-bold);
-                        box-shadow: 0 -1px 10px oklch(var(--h4) / 40%);
+                        box-shadow: 0 -1px 10px oklch(var(--h4) / 40%), inset 0 1px 0 oklch(var(--h2) / 20%);
                     }
 
                     .rank-overlay-text {
@@ -309,11 +309,21 @@
     overflow: hidden;
 
     z-index: 0;
-    opacity: 0.25;
+    opacity: 0.23;
 
     background: radial-gradient(at center top, oklch(var(--k4)), transparent 60%);
+    animation: chart_bg 8s var(--trans-function-ani) infinite;
 }
 .charts-header-svg {
     position: absolute;
     inset: -120px 0 0 0;
+}
+
+@keyframes chart_bg {
+    from, to {
+        opacity: 0.23;
+    }
+    50% {
+        opacity: 0.35;
+    }
 }
