@@ -490,6 +490,7 @@
     cursor: default;
     font-family: var(--font-head);
     font-weight: var(--font-weight-head);
+    font-style: var(--font-style-head);
 }
 
 

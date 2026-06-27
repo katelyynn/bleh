@@ -47,11 +47,13 @@ body {
 
     --font-weight-head: 300;
 
-    --font-size-head-2: 26px;
-    --line-height-head-2: 30px;
+    --font-size-head-2: 24px;
+    --line-height-head-2: 28px;
 
     --font-size-head-3: 26px;
     --line-height-head-3: 34px;
+
+    --font-style-head: italic;
 
     &[data-bleh--font_choice="font_2025"] {
         --font-choice: Funnel Sans;
@@ -74,6 +76,7 @@ body {
         --font-weight-head: var(--font-weight-medium);
         --font-size-head-3: 18px;
         --line-height-head-3: 22px;
+        --font-style-head: normal;
     }
 }
 
