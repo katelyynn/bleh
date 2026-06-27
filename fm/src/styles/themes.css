@@ -896,7 +896,7 @@ u,
 
         --h4: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.63) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue);
         --f4: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.8) calc(clamp(min(0), var(--sat), max(2)) * 0.58) var(--hue);
-        --k4: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.66) calc(clamp(min(0), var(--sat), max(2)) * 0.62) var(--hue);
+        --k4: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.8) calc(clamp(min(0), var(--sat), max(2)) * 0.62) var(--hue);
         --g4: 0.92 calc(clamp(min(0), var(--sat), max(2)) * 0.7) var(--hue);
 
         --h3-s: var(--hue), 50%, 70%;

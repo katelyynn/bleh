@@ -138,8 +138,11 @@ export function bleh_minis(skip = false) {
         html`
             <section class="minis">
                 <div class="minis-header main">
-                    <h2 class="minis-header-text">${tl(trans.minis)}</h2>
-                    <p class="minis-header-body">${tl(trans.minis_description)}</p>
+                    <div class="minis-header-vertical">
+                        <h2 class="minis-header-text">${tl(trans.minis)}</h2>
+                        <p class="minis-header-body">${tl(trans.minis_description)}</p>
+                    </div>
+                    <div class="minis-header-bg" />
                 </div>
                 <div class="mini-list">
                     ${Object.entries(valid_minis).map(([id, mini]) => {
@@ -190,12 +193,17 @@ export function bleh_minis(skip = false) {
 function return_to_minis(mini = '') {
     return html.node`
         <div class="minis-header">
-            <h2 class="minis-header-text previous" onclick=${() => {
+            <button class="btn news-update-action chibi icon-mask" data-type="prev" onclick=${() => {
                 window.history.replaceState(null, '', `${root}bleh/minis`);
                 bleh_minis(true);
-            }}>${tl(trans.minis)}</h2>
-            <div class="bleh-icon mini-arrow" style="--icon: var(--mask)" data-type="arrow-right" />
-            <h2 class="minis-header-text">${mini ? valid_minis[mini].name : tl(trans.error)}</h2>
+            }}>
+                ${tl(trans.prev)}
+            </button>
+            <div class="minis-header-vertical">
+                <h2 class="minis-header-text previous">${tl(trans.minis)}</h2>
+                <h2 class="minis-header-text">${mini ? valid_minis[mini].name : tl(trans.error)}</h2>
+            </div>
+            <div class="minis-header-bg colourful" data-mini=${mini} />
         </div>
     `;
 }
