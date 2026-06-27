@@ -46,7 +46,7 @@ export async function bleh_inbox() {
             </div>
             <div class="page-header-info">
                 <div class="sub-text">${tl(trans.inbox)}</div>
-                <h1 class="page-header-title">${page.subpage == 'notifications' ? tl(trans.notifications) : tl(trans.messages)}</h1>
+                <h1 class="page-header-title generic-page-title">${page.subpage == 'notifications' ? tl(trans.notifications) : tl(trans.messages)}</h1>
             </div>
         </section>
     `, page.structure.container.firstElementChild);

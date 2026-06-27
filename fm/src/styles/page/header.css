@@ -333,6 +333,12 @@
         & > a {
             color: inherit !important;
         }
+
+        /*&.generic-page-title {
+            font-family: var(--font-head);
+            font-style: var(--font-style-head);
+            font-weight: var(--font-weight-head, var(--font-weight-bold));
+            }*/
     }
 
     & > .page-header-artist {

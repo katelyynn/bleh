@@ -62,7 +62,7 @@ export function bleh_tags() {
                 </div>
                 <div class="page-header-info">
                     <div class="sub-text">${tl(trans.tag)}</div>
-                    <h1 class="page-header-title">${title}</h1>
+                    <h1 class="page-header-title generic-page-title">${title}</h1>
                 </div>
             </section>
         `;

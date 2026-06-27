@@ -104,7 +104,7 @@ export async function bleh_search() {
             </div>
             <div class="page-header-info">
                 <div class="sub-text">${tl(trans.search)}</div>
-                <h1 class="page-header-title">${value}</h1>
+                <h1 class="page-header-title generic-page-title">${value}</h1>
             </div>
         </section>
     `, page.structure.container.firstElementChild);
