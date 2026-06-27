@@ -31,7 +31,7 @@
 
 .campfire-panel-side {
   width: var(--cards-sidebar-width);
-  background: oklch(var(--b5) / 60%);
+  background: linear-gradient(180deg, oklch(var(--b6) / 80%), oklch(var(--b5) / 60%));
   padding: var(--card-padding) 0;
 
   z-index: 3;
@@ -53,14 +53,14 @@
   position: absolute;
   inset: 0;
   background-color: oklch(var(--b4));
-  background-size: cover;
-  background-position: center;
+  background-size: 120%;
+  background-position: right center;
 
   --mask: linear-gradient(180deg, transparent, white, transparent);
   mask-image: var(--mask);
   -webkit-mask-image: var(--mask);
 
-  opacity: 0.2;
+  opacity: 0.1;
 }
 
 .campfire {

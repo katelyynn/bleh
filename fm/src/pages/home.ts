@@ -163,7 +163,6 @@ export async function bleh_home() {
                     <li class="navlist-item secondary-nav-item secondary-nav-item--minis">
                         <a href="${root}bleh/minis" data-type="mini" class="secondary-nav-item-link ${(page.type == 'minis') ? 'secondary-nav-item-link--active' : ''}">
                             ${tl(trans.minis)}
-                            ${new_indicator()}
                         </a>
                     </li>
                     ` : ''}

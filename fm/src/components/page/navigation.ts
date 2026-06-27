@@ -183,7 +183,6 @@ export function append_nav() {
                 </a>
                 <a class="btn masthead-nav-control icon" data-type="minis" href="${root}bleh/minis">
                     ${tl(trans.minis)}
-                    ${new_indicator()}
                 </a>
                 <span class="navlist-search" ref=${el => page.state.search = el} />
             </ul>
@@ -1260,7 +1259,6 @@ export function append_nav() {
                             <div class="button-combo">
                                 <a class="dropdown-menu-clickable-item" data-type="mini" href="${root}bleh/minis" onclick=${() => { instance.hide() }}>
                                     ${tl(trans.minis)}
-                                    ${new_indicator()}
                                 </a>
                                 <div class="button-combo-sep" />
                                 ${() => {

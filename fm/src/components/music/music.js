@@ -40,7 +40,7 @@ import { music_summary } from './summary';
 import { icon, icons } from '../shared/icon';
 import { keys } from '../settings/storage';
 import { is_sponsor } from '../sponsor';
-import { new_indicator } from '../shared/indicator';
+import { beta_indicator, new_indicator } from '../shared/indicator';
 
 unsafeWindow._other_listener = function (id) {
     other_listener(id);
@@ -524,7 +524,7 @@ export async function show_your_scrobbles() {
         interact_container.appendChild(html.node`
             <button class="btn side-action icon-mask" data-type="credits" onclick=${() => oracle_credits()}>
                 ${tl(trans.view_credits)}
-                ${new_indicator()}
+                ${beta_indicator()}
             </button>
         `);
     }
