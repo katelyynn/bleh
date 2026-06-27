@@ -484,10 +484,12 @@
 }
 
 .greeting {
-    font-size: 16px;
-    line-height: 20px;
+    color: oklch(var(--c2));
+    font-size: var(--font-size-head-2);
+    line-height: var(--line-height-head-2);
     cursor: default;
-    font-weight: var(--font-weight-medium);
+    font-family: var(--font-head);
+    font-weight: var(--font-weight-head);
 }
 
 

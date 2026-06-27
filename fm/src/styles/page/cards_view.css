@@ -179,7 +179,7 @@
 .setup-head {
     font-size: 32px !important;
     line-height: 40px !important;
-    font-weight: 100 !important;
+    font-weight: var(--font-weight-head) !important;
     font-family: var(--font-head);
 }
 

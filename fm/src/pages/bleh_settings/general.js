@@ -43,11 +43,20 @@ export function general() {
 
     render(page.structure.main, html`
         <section class="bleh--panel">
-            <h4>${tl(trans.updates)}</h4>
+            <div class="section-intro less">
+                <div class="sub-text">${tl(trans.current_version)}</div>
+                <h1 class="setting-head"><i>${version.brand}</i> <i class="highlight">${version.build}</i></h1>
+            </div>
             <div class="setting-group">
                 ${update_setting()}
             </div>
-            <p class="card-tip">${{ html: tl(trans.issues_updating, { disc: `<a href="https://discord.gg/${discord}">${tl(trans.join_discord)}</a>` }) }}</p>
+            <div class="section-intro less">
+                <p class="sub-text">${tl(trans.issues_updating)}</p>
+                <div class="see-more-row">
+                    <a class="see-more" href="https://github.com/katelyynn/bleh/issues/new/choose" target="_blank">${tl(trans.report_issue)}</a>
+                    <a class="see-more" href="https://discord.gg/${discord}" target="_blank">${tl(trans.join_discord)}</a>
+                </div>
+            </div>
         </section>
         <section class="bleh--panel">
             <h4>${tl(trans.profile)}</h4>

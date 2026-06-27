@@ -89,9 +89,9 @@ export async function bleh_home() {
                             ${tl(trans[`good_${time}_user`])}
                         </div>
                         <div class="title-container">
-                            <h1 class="page-header-title profile-name" ref=${el => profile_name = el}>
+                            <span class="page-header-title profile-name" ref=${el => profile_name = el}>
                                 ${cache.username || auth.name}
-                            </h1>
+                            </span>
                         </div>
                     </div>
                 </div>

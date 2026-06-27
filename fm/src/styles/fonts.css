@@ -45,6 +45,14 @@ body {
     --font-size-head: 22px;
     --line-height-head: 17px;
 
+    --font-weight-head: 300;
+
+    --font-size-head-2: 26px;
+    --line-height-head-2: 30px;
+
+    --font-size-head-3: 26px;
+    --line-height-head-3: 34px;
+
     &[data-bleh--font_choice="font_2025"] {
         --font-choice: Funnel Sans;
     }
@@ -61,5 +69,22 @@ body {
         --font-head: var(--font);
         --font-size-head: 16px;
         --line-height-head: 20px;
+        --font-size-head-2: 16px;
+        --line-height-head-2: 20px;
+        --font-weight-head: var(--font-weight-medium);
+        --font-size-head-3: 18px;
+        --line-height-head-3: 22px;
     }
+}
+
+.setting-head {
+    font-family: var(--font-head);
+    font-size: var(--font-size-head-3) !important;
+    line-height: var(--line-height-head-3) !important;
+    font-weight: var(--font-weight-head) !important;
+}
+
+.highlight {
+    color: oklch(var(--l3-c));
+    font-style: normal;
 }

@@ -80,7 +80,7 @@ export function bleh_setup() {
                         <img src=${avatar(auth.avatar, 'avatar170s')} alt=${tl(trans.your_avatar)}>
                     </div>
                     <div class="info">
-                        <h1 class="setup-head">${{html: tl(trans.welcome, { u: `<a class="mention" href="${root}user/${auth.name}">@${auth.name}</a>` })}}</h1>
+                        <h1 class="setup-head">${{html: tl(trans.welcome, { u: `<a class="mention" href="${root}user/${auth.name}"><span class="at">@</span>${auth.name}</a>` })}}</h1>
                         <h2 class="setup-head-sub">${tl(trans.bleh_setup_guide)}</h2>
                     </div>
                 </div>
@@ -285,6 +285,7 @@ function setup_themes() {
                         custom_font.compat();
                     } })}
                     ${custom_font = setting({ id: 'font', text: false })}
+                    ${setting({ id: 'font_serif' })}
                 </div>
             `
         );

@@ -11259,8 +11259,7 @@ export const trans = {
         en: 'Plotting your data',
     },
     issues_updating: {
-        // then after that theres a join discord button
-        en: 'Having issues updating or need support in general? {disc}',
+        en: 'Having issues updating or need support in general?',
     },
     hybrid_inbox: {
         name: {

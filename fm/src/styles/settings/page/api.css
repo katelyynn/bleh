@@ -3,6 +3,10 @@
     flex-direction: column;
     padding-bottom: var(--card-padding);
 
+    &.less {
+        padding-bottom: unset;
+    }
+
     & > h3 {
         color: oklch(var(--c1));
         font-size: 16px;
