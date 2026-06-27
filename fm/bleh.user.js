@@ -74440,6 +74440,9 @@
         });
         render_setting_page("general");
       })}>${tl2(trans.check)}</button>
+                <button class="btn primary icon" data-type="news" onclick=${() => news()}>
+                    ${tl2(trans.news)}
+                </button>
             </div>
         `);
     } else {
@@ -96872,7 +96875,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         notice: "This is an attempt at bringing bleh closer to Last.fm's layout, in terms of a less floating page in the middle and more of a wide content style (no borders). THIS IS NOT FINAL!!! feedback is welcome"
       }
     },
-    built_on: "2026-06-26T19:44:19.848Z"
+    built_on: "2026-06-27T18:51:48.995Z"
   };
 
   // node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

@@ -20,6 +20,7 @@ import { keys } from "@/components/settings/storage";
 import { new_indicator } from "@/components/shared/indicator";
 import { discord } from "@/build/page";
 import { icon, icons } from "@/components/shared/icon";
+import { news } from "@/components/news";
 
 export function general() {
     if (auth.pro == null) {
@@ -289,6 +290,9 @@ function update_setting() {
                     });
                     render_setting_page('general');
                 })}>${tl(trans.check)}</button>
+                <button class="btn primary icon" data-type="news" onclick=${() => news()}>
+                    ${tl(trans.news)}
+                </button>
             </div>
         `);
     } else {
