@@ -498,6 +498,9 @@
     &[data-season="pride"] {
         --mask: var(--icon-16-pride);
     }
+    &[data-season="summer"] {
+        --mask: var(--icon-16-summer);
+    }
     &[data-season="halloween"] {
         --mask: var(--icon-16-pumpkin);
     }

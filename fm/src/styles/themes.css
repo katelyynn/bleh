@@ -314,6 +314,12 @@ body[data-bleh--season="pride"] {
     --sat-seasonal: 1.58;
     --lit-seasonal: 0.66;
 }
+[data-season="summer"],
+body[data-bleh--season="summer"] {
+    --hue-seasonal: 43;
+    --sat-seasonal: 2.39;
+    --lit-seasonal: 0.89;
+}
 [data-season="halloween"],
 body[data-bleh--season="halloween"] {
     --hue-seasonal: 35;
@@ -322,9 +328,9 @@ body[data-bleh--season="halloween"] {
 }
 [data-season="pre_fall"],
 body[data-bleh--season="pre_fall"] {
-    --hue-seasonal: 40;
-    --sat-seasonal: 1.32;
-    --lit-seasonal: 1.06;
+    --hue-seasonal: 43;
+    --sat-seasonal: 1.65;
+    --lit-seasonal: 0.98;
 }
 [data-season="fall"],
 body[data-bleh--season="fall"] {

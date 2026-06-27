@@ -36,6 +36,7 @@
     position: absolute;
     inset: -60px -240px;
     background-color: oklch(var(--k4));
+    pointer-events: none;
 
     &:not([data-season-type="current"]),
     &[data-season="none"] {
@@ -119,6 +120,9 @@
     }
     &[data-season="pride"] {
         --mask: var(--icon-16-pride);
+    }
+    &[data-season="summer"] {
+        --mask: var(--icon-16-summer);
     }
     &[data-season="halloween"] {
         --mask: var(--icon-16-pumpkin);

@@ -1947,6 +1947,9 @@ export const trans = {
                 pl: 'Duma',
                 zh: '彩虹月',
             },
+            summer: {
+                en: 'Summer',
+            },
             halloween: {
                 en: 'Halloween',
                 de: 'Halloween',
