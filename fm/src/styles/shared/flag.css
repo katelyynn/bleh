@@ -9,6 +9,8 @@
     font-size: 0;
 
     box-shadow: 0 0 0 1px inset rgba(255, 255, 255, 0.13);
+
+    filter: brightness(130%) saturate(95%);
 }
 
 .has-flag {

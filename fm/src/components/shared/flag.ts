@@ -11,7 +11,8 @@ export function flag(code: string, classname?: string) {
     `;
 
     tippy(elem, {
-        content: code
+        content: code,
+        delay: [1000, 0]
     });
 
     return elem;

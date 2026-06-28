@@ -310,7 +310,6 @@ export function correct_generic_combo(parent) {
             let artist_name = album.querySelector(
                 `.${parent.replace('-details', '')}-artist a`
             );
-
             if (!artist_name) return;
 
             if (settings.format_guest_features) {
