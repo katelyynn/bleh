@@ -853,3 +853,8 @@
 .secondary-nav-item--weekly {
     --mask: var(--icon-16-weekly);
 }
+
+/* this is a joke */
+[data-type="ai"] {
+    --mask: var(--icon-16-sparkle);
+}

@@ -319,6 +319,13 @@ function shout_send(send_button) {
     button.textContent = tl(trans.send);
     button.removeAttribute('disabled');
 
+    /* this is a joke */
+    /*button.parentElement.insertBefore(html.node`
+        <button class="btn icon primary" data-type="ai">
+            Write<span class="new-badge">PRO</span>
+        </button>
+    `, button);*/
+
     if (page.mobile) return;
 
     tippy(button, {
