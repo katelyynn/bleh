@@ -509,10 +509,10 @@
         --mask: var(--icon-16-fall);
     }
     &[data-season="fall"] {
-        --mask: var(--icon-16-fall);
+        --mask: var(--icon-16-snow);
     }
     &[data-season="christmas"] {
-        --mask: var(--icon-16-snow);
+        --mask: var(--icon-16-christmas);
     }
     &[data-season="new_years"] {
         --mask: var(--icon-16-new-years);

@@ -174,15 +174,17 @@ export function display_colour_presets() {
     let sat_range;
     let lit_range;
 
+    const season = page.state.seasons.current.id;
+
     for (let type in colours) {
         const swatch_group = page.structure.main.querySelector(`#colour_${type}`);
         if (!swatch_group) return;
 
         colours[type].forEach(colour => {
-            if (colour.type == 'default' && stored_season.id != 'none' && exclusives[stored_season.id]) {
+            if (colour.type == 'default' && season != 'none' && exclusives[season]) {
                 swatch_group.appendChild(create_swatch(type, colour));
 
-                exclusives[stored_season.id].forEach(exclusive => {
+                exclusives[season].forEach(exclusive => {
                     swatch_group.appendChild(create_swatch(type, exclusive, true));
                 });
 
@@ -215,6 +217,7 @@ export function display_colour_presets() {
 
         let blob;
         let text_elem;
+        let desc_elem;
         const swatch = html.node`
             <button class="swatch-container" onclick=${() => {
                 if (!colour.sets) return;
@@ -224,9 +227,26 @@ export function display_colour_presets() {
                 lit_range.value = colour.sets.lit;
             }}>
                 <div class="swatch colourful" ref=${(el) => (blob = el)} data-swatch-type=${colour.type} />
-                <strong ref=${(el) => (text_elem = el)} />
+                <div class="swatch-inner">
+                    <strong class="swatch-name colourful" ref=${(el) => (text_elem = el)} />
+                    ${label ? html.node`<p class="swatch-desc" ref=${el => desc_elem = el}>${label}</p>` : ''}
+                </div>
             </button>
         `;
+
+        swatch.addEventListener('mouseenter', () => {
+            const parent = swatch.parentElement?.parentElement;
+            if (!parent) return;
+
+            parent.classList.add('has-hover');
+        });
+
+        swatch.addEventListener('mouseleave', () => {
+            const parent = swatch.parentElement?.parentElement;
+            if (!parent) return;
+
+            parent.classList.remove('has-hover');
+        });
 
         if (type == 'custom' && !colour.label) text = tl(trans[colour.type]);
 
@@ -244,6 +264,10 @@ export function display_colour_presets() {
             blob.style.setProperty('--hue-over', colour.displays.hue);
             blob.style.setProperty('--sat-over', colour.displays.sat);
             blob.style.setProperty('--lit-over', colour.displays.lit);
+
+            text_elem.style.setProperty('--hue-over', colour.displays.hue);
+            text_elem.style.setProperty('--sat-over', colour.displays.sat);
+            text_elem.style.setProperty('--lit-over', colour.displays.lit);
         }
 
         if (colour.type == 'default' && stored_season.id != 'none') {
@@ -251,20 +275,6 @@ export function display_colour_presets() {
         }
 
         text_elem.textContent = text;
-
-        if (!label) {
-            tippy(swatch, {
-                content: text
-            });
-        } else {
-            tippy(swatch, {
-                theme: 'generic',
-                content: html.node`
-                    <span>${text}</span>
-                    <small>${label}</small>
-                `
-            });
-        }
 
         return swatch;
     }

@@ -315,3 +315,16 @@
     display: flex;
     gap: 4px;
 }
+
+
+
+.font-preview {
+    font-size: 24px !important;
+    line-height: 30px !important;
+
+    &[data-serif="true"] {
+        font-family: var(--font-head);
+        font-weight: var(--font-weight-head) !important;
+        font-size: 30px !important;
+    }
+}

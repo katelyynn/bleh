@@ -122,6 +122,8 @@ export function visual() {
     let custom_font;
     let font_preview;
 
+    let hovering_serif = false;
+
     render(page.structure.main, html`
         <section class="bleh--panel">
             <h4>${tl(trans.appearance)}</h4>
@@ -210,7 +212,14 @@ export function visual() {
                     render_font_preview();
                 } })}
                 ${custom_font = setting({ id: 'font', text: false })}
-                ${setting({ id: 'font_serif' })}
+                ${setting({ id: 'font_serif', mouseenter: () => {
+                        hovering_serif = true;
+                        render_font_preview();
+                    }, mouseleave: () => {
+                        hovering_serif = false;
+                        render_font_preview();
+                    }
+                })}
             </div>
             <div class="setting-group">
                 ${setting({ id: 'font_weight' })}
@@ -272,12 +281,16 @@ export function visual() {
     render_font_preview();
 
     function render_font_preview() {
+        if (!settings.font_serif) hovering_serif = false;
+
         let font = window.getComputedStyle(document.body).getPropertyValue('--font-choice');
         if (font == `""`) font = tl(trans.no_font_selected);
 
+        if (hovering_serif) font = tl(trans.font_serif);
+
         render(font_preview, html`
             <div class="font-preview-stack">
-                <h1 class="font-preview">${tl(trans.font_example)}</h1>
+                <h1 class="font-preview" data-serif=${hovering_serif}>${tl(trans.font_example)}</h1>
                 <span class="font-preview-label">${tl(trans.previewing, { v: font })}</span>
             </div>
         `);

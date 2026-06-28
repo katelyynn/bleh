@@ -84,6 +84,28 @@
         );
     }
 
+    [data-bleh--season="fall"] & {
+        background-image: linear-gradient(
+            180deg,
+            var(--graph-colour-6) 0%,
+            oklch(var(--white)) 100%
+        );
+    }
+
+    [data-bleh--season="christmas"] & {
+        background-image: linear-gradient(
+            90deg,
+            var(--graph-colour-0) 10%,
+            var(--graph-colour-0) 23%,
+            var(--graph-colour-4) 28%,
+            var(--graph-colour-4) 36%,
+            var(--graph-colour-0) 51%,
+            var(--graph-colour-0) 69%,
+            var(--graph-colour-4) 77%,
+            var(--graph-colour-4) 100%
+        );
+    }
+
     mask-image: var(--mask);
     -webkit-mask-image: var(--mask);
     mask-size: 100%;

@@ -32,7 +32,9 @@ interface setting {
     func?: Function,
     list?: [],
     center?: boolean,
-    in_menu?: boolean
+    in_menu?: boolean,
+    mouseenter?: () => void,
+    mouseleave?: () => void,
 }
 
 interface setting_element extends HTMLElement {
@@ -49,7 +51,9 @@ export function setting({
     func,
     list,
     center = true,
-    in_menu = false
+    in_menu = false,
+    mouseenter,
+    mouseleave,
 }: setting): setting_element {
     try {
         let value = settings[id];
@@ -211,6 +215,9 @@ export function setting({
                 ` as setting_element;
             }
 
+            if (mouseenter) elem.addEventListener('mouseenter', mouseenter);
+            if (mouseleave) elem.addEventListener('mouseleave', mouseleave);
+
             function update_toggle() {
                 if (elem.getAttribute('disabled') == 'true') {
                     status({
@@ -225,6 +232,8 @@ export function setting({
 
                 save_setting(id, !val);
                 if (func) func(!val);
+
+                if (mouseenter) mouseenter();
             }
 
             elem.compat = () => {
@@ -315,6 +324,9 @@ export function setting({
                     </div>
                 </div>
             ` as setting_element;
+
+            if (mouseenter) elem.addEventListener('mouseenter', mouseenter);
+            if (mouseleave) elem.addEventListener('mouseleave', mouseleave);
 
             elem.compat = () => {
                 if (!incompatible_with) return;
@@ -458,6 +470,9 @@ export function setting({
                     </div>
                 </div>
             ` as setting_element;
+
+            if (mouseenter) container.addEventListener('mouseenter', mouseenter);
+            if (mouseleave) container.addEventListener('mouseleave', mouseleave);
 
             container.compat = () => {
                 container.setAttribute('disabled', 'false');
@@ -642,6 +657,9 @@ export function setting({
                 ` as setting_element;
             }
 
+            if (mouseenter) elem.addEventListener('mouseenter', mouseenter);
+            if (mouseleave) elem.addEventListener('mouseleave', mouseleave);
+
             function update_toggle() {
                 if (elem.getAttribute('disabled') == 'true') {
                     status({
@@ -656,6 +674,8 @@ export function setting({
 
                 save_setting(id, !val);
                 if (func) func(val);
+
+                if (mouseenter) mouseenter();
             }
 
             elem.compat = () => {
