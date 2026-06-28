@@ -81196,13 +81196,13 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                     </li>
                     ` : ""}
                     <li class="fill"></li>
-                    <li class="navlist-item secondary-nav-item secondary-nav-item--settings">
-                        <a href="${root}settings" class="secondary-nav-item-link ${page.type == "settings" ? "secondary-nav-item-link--active" : ""}">
-                            ${tl2(trans.settings)}
-                        </a>
-                    </li>
                     <li class="navlist-item secondary-nav-item secondary-nav-item--bleh">
                         <a href="${root}bleh" class="secondary-nav-item-link ${page.type == "bleh_settings" ? "secondary-nav-item-link--active" : ""}">
+                            ${version.brand}
+                        </a>
+                    </li>
+                    <li class="navlist-item secondary-nav-item secondary-nav-item--settings">
+                        <a href="${root}settings" class="secondary-nav-item-link ${page.type == "settings" ? "secondary-nav-item-link--active" : ""}">
                             ${tl2(trans.settings)}
                         </a>
                     </li>

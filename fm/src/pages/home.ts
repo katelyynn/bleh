@@ -26,6 +26,7 @@ import { campfire } from './home/campfire';
 import { bleh_suggested } from './home/suggested';
 import { header_colour } from '@/components/page/colour';
 import { beta_indicator, new_indicator } from "@/components/shared/indicator";
+import { version } from "@/main";
 
 export async function bleh_home() {
     page.structure.container = document.body.querySelector('.page-content');
@@ -167,13 +168,13 @@ export async function bleh_home() {
                     </li>
                     ` : ''}
                     <li class="fill"></li>
-                    <li class="navlist-item secondary-nav-item secondary-nav-item--settings">
-                        <a href="${root}settings" class="secondary-nav-item-link ${(page.type == 'settings') ? 'secondary-nav-item-link--active' : ''}">
-                            ${tl(trans.settings)}
-                        </a>
-                    </li>
                     <li class="navlist-item secondary-nav-item secondary-nav-item--bleh">
                         <a href="${root}bleh" class="secondary-nav-item-link ${(page.type == 'bleh_settings') ? 'secondary-nav-item-link--active' : ''}">
+                            ${version.brand}
+                        </a>
+                    </li>
+                    <li class="navlist-item secondary-nav-item secondary-nav-item--settings">
+                        <a href="${root}settings" class="secondary-nav-item-link ${(page.type == 'settings') ? 'secondary-nav-item-link--active' : ''}">
                             ${tl(trans.settings)}
                         </a>
                     </li>
