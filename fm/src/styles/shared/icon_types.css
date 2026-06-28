@@ -452,6 +452,7 @@
 [data-analytics-label="settings"] {
     --mask: var(--icon-16-settings);
 }
+[data-type="logout"],
 [data-menu-item="logout"],
 [data-analytics-label="logout"] {
     --mask: var(--icon-16-logout);

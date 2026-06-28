@@ -1,3 +1,5 @@
+/* most of these should not be used anymore, they are only used by last.fm themselves */
+
 .form-submit {
     display: flex;
     justify-content: center;
@@ -174,10 +176,6 @@
     color: oklch(var(--c1));
 }
 
-.form-section .form-horizontal .form-group-controls {
-    width: 400px;
-}
-
 .form-group--create_automatic_edit_rule .form-group-controls {
     flex-direction: column;
     align-items: unset !important;
@@ -193,60 +191,6 @@
     font-weight: var(--font-weight-medium);
     text-transform: unset !important;
 }
-.content-form .form-horizontal .control-label,
-.modal-body .content-form .form-horizontal .control-label {
-    width: 150px;
-    padding-left: unset;
-    padding-right: unset;
-    justify-content: right;
-    min-height: 32px !important;
-}
-.content-form
-    .form-horizontal
-    .form-group-controls:not(:has(.btn-file-label)) {
-    width: 350px;
-    padding-left: var(--card-gap);
-    padding-right: unset;
-    display: flex;
-    align-items: center;
-}
-
-.content-form .form-group-controls {
-    margin-top: 6px;
-}
-
-.form-group--name .form-group-controls,
-#manage_data .form-group-controls,
-[action$="/+tags/add"] .form-group-controls,
-.form-section .form-group-controls.form-control-description {
-    /* this should be vertical, otherwise settings is broken */
-    display: block !important;
-    /* align with control-label */
-    padding-top: 7px;
-}
-.form-group--start_time .form-group-controls,
-:is(
-        .form-group--timezone,
-        .form-group--current_username,
-        .form-group--password,
-        #playback > .form-horizontal,
-        #email-settings > .form-horizontal
-    )
-    .form-group-controls {
-    display: block !important;
-}
-
-.content-form .form-horizontal .form-control-description label + select {
-    margin-top: 8px !important;
-}
-
-.modal-body .content-form .form-horizontal .form-group-controls {
-    width: 478px;
-}
-
-.content-form .form-horizontal .form-group-controls {
-    margin-left: 150px;
-}
 
 .footnotes,
 .content-form .form-row-help-text {
@@ -260,57 +204,21 @@
 }
 
 
+/* this is used in the bleh avatar uploader modal still */
 .btn-file {
     --mask: var(--icon-16-upload);
     margin: unset;
 }
-.btn-file-label,
+
 .btn-sm {
     min-height: var(--button-height);
     line-height: var(--line-height);
     padding: var(--button-verts) var(--button-sides);
 }
-.btn-file-label {
-    color: oklch(var(--c3));
-    cursor: default;
-}
 
 .content-form .form-group,
 .content-form form {
     margin-top: var(--card-gap);
-}
-.form-header + form {
-    margin-top: unset;
-}
-.form-header + form input + .form-group {
-    margin: unset !important;
-    padding: unset !important;
-}
-
-.content-form .form-horizontal .btn-file-label,
-.content-form .form-horizontal .btn-sm,
-.content-form .form-horizontal button,
-.content-form .form-horizontal input[type="date"],
-.content-form .form-horizontal input[type="email"],
-.content-form .form-horizontal input[type="password"],
-.content-form .form-horizontal input[type="text"],
-.content-form .form-horizontal input[type="url"],
-.content-form .form-horizontal select,
-.content-form .form-horizontal textarea {
-    margin-top: unset !important;
-}
-.control-label {
-    display: flex !important;
-    /*justify-content: right;*/
-    align-items: center;
-}
-
-.content-form .form-horizontal .form-group-controls {
-    min-height: 32px !important;
-}
-
-.content-form .form-horizontal .form-group {
-    padding-top: unset;
 }
 
 .content-form legend {

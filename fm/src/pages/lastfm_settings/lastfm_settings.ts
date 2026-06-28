@@ -585,8 +585,9 @@ function bleh_accounts() {
                             </div>
                             <div class="toggle-wrap">
                                 <a
-                                    class="see-more danger logout left-icon"
+                                    class="see-more danger left-icon colourful"
                                     href="${root}settings/account/logout-everywhere"
+                                    data-type="logout"
                                 >
                                     ${tl(trans.logout)}
                                 </a>
@@ -599,8 +600,9 @@ function bleh_accounts() {
                             </div>
                             <div class="toggle-wrap">
                                 <a
-                                    class="see-more danger delete-account left-icon"
+                                    class="see-more danger left-icon colourful"
                                     href="${root}settings/account/delete"
+                                    data-type="delete"
                                 >
                                     ${tl(
                                         trans.delete_account_permanently

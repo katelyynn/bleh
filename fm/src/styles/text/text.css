@@ -311,14 +311,6 @@ pre {
     font-weight: var(--font-weight);
 }
 
-/* what even...............
-on followers/following pages, lastfm returns
-.no-data-message followed by a blank <p></p>,
-leading to a gap from their own css */
-.no-data-message + p:empty {
-    display: none;
-}
-
 
 .dual-tip {
     display: flex;
