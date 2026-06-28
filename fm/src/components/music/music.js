@@ -8,7 +8,7 @@ import { html, render } from 'lighterhtml';
 import { settings } from '@/build/config';
 import { log } from '@/build/log';
 import { auth, page, root } from '@/build/page';
-import { clean_number, romanise, sanitise } from '@/build/tools';
+import { clean_number, romanise, sanitise, sanitise_text } from '@/build/tools';
 import { lang, tl, trans } from '@/build/trans';
 import { prep_chart_colours } from '@/components/music/chart';
 import { create_divider } from '@/pages/music/gallery';
@@ -1703,7 +1703,9 @@ export function similar_items() {
 
         controls.replaceWith(html.node`
             <div class="top-container">
-                <h2>${tl(trans.more_like_name, { n: page.type == 'artist' ? romanise(correct_artist(page.name)) : romanise(correct_artist(page.sister)) })}</h2>
+                <h2>${{
+                    html: tl(trans.more_like_name, { n: page.type == 'artist' ? `<i>${sanitise_text(romanise(correct_artist(page.name)))}<i>` : `<i>${sanitise_text(romanise(correct_artist(page.sister)))}<i>` })
+                }}</h2>
                 <div class="view-buttons blend blend-v2">
                     ${station}
                 </div>

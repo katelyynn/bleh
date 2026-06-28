@@ -14,7 +14,7 @@ import {
     page,
     root
 } from '@/build/page';
-import { clean_number, pad2, parse_object, romanise, sanitise, set_storage } from '@/build/tools';
+import { clean_number, pad2, parse_object, romanise, sanitise, sanitise_text, set_storage } from '@/build/tools';
 import { ff } from '@/components/settings/sku';
 import {
     correct_artist,
@@ -2556,7 +2556,7 @@ export function oracle_credits() {
 
     dialog({
         id: 'oracle_credits',
-        title: {html: tl(trans.credits_for_value, {v: `<i>${correct_item_by_artist(page.name, page.sister)}</i>`})},
+        title: {html: tl(trans.credits_for_value, {v: `<i>${sanitise_text(romanise(correct_item_by_artist(page.name, page.sister)))}</i>`})},
         body: html.node`
             <div class="oracle-credits">
                 ${grouped.length == 0 ? html.node`

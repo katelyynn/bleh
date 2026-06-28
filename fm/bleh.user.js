@@ -67209,7 +67209,7 @@
     console.info("oracle list", grouped, relations);
     dialog({
       id: "oracle_credits",
-      title: { html: tl2(trans.credits_for_value, { v: `<i>${correct_item_by_artist(page.name, page.sister)}</i>` }) },
+      title: { html: tl2(trans.credits_for_value, { v: `<i>${sanitise_text(romanise(correct_item_by_artist(page.name, page.sister)))}</i>` }) },
       body: html.node`
             <div class="oracle-credits">
                 ${grouped.length == 0 ? html.node`
@@ -69332,7 +69332,9 @@
       station.classList = "left-icon blend-v2-btn play-radio";
       controls.replaceWith(html.node`
             <div class="top-container">
-                <h2>${tl2(trans.more_like_name, { n: page.type == "artist" ? romanise(correct_artist(page.name)) : romanise(correct_artist(page.sister)) })}</h2>
+                <h2>${{
+        html: tl2(trans.more_like_name, { n: page.type == "artist" ? `<i>${sanitise_text(romanise(correct_artist(page.name)))}<i>` : `<i>${sanitise_text(romanise(correct_artist(page.sister)))}<i>` })
+      }}</h2>
                 <div class="view-buttons blend blend-v2">
                     ${station}
                 </div>
@@ -78073,16 +78075,20 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     );
     if (!similar) return;
     const artists = similar.querySelectorAll(".similar-artists-item-wrap");
+    const pagination = page.structure.main.querySelector(".pagination");
     render(
       page.structure.main,
       html`
             <section class="similar-panel">
                 <h2 class="text-18">
-                    ${tl2(trans.artists_similar_to_name, {
-        n: romanise(correct_artist(page.name))
-      })}
+                    ${{
+        html: tl2(trans.artists_similar_to_name, {
+          n: `<i>${sanitise_text(romanise(correct_artist(page.name)))}</i>`
+        })
+      }}
                 </h2>
                 ${similar}
+                ${pagination}
             </section>
         `
     );
@@ -96929,7 +96935,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         notice: "This is an attempt at bringing bleh closer to Last.fm's layout, in terms of a less floating page in the middle and more of a wide content style (no borders). THIS IS NOT FINAL!!! feedback is welcome"
       }
     },
-    built_on: "2026-06-27T18:51:48.995Z"
+    built_on: "2026-06-28T18:59:19.805Z"
   };
 
   // node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
