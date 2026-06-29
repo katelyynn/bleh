@@ -11278,6 +11278,9 @@ export const trans = {
     you_have_disabled_bleh_visuals_for_settings: {
         en: 'You have disabled bleh visuals for Last.fm settings, don\'t expect this to look pretty',
     },
+    hide_unused_settings: {
+        en: 'Hide settings that have no effect',
+    },
 } as const satisfies Record<string, any>;
 
 export const translation_fallback = 'NO_TRANSLATION_FOUND';

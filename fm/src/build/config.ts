@@ -1086,5 +1086,10 @@ export let settings_store: Record<string, setting_instance> = {
         type: 'checkbox',
         title: trans.skip_patching_lastfm_settings,
         require_reload: 'partial'
+    },
+    hide_unused_settings: {
+        default: true,
+        type: 'checkbox',
+        title: trans.hide_unused_settings
     }
 };

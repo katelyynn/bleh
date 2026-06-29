@@ -673,7 +673,7 @@ export function setting({
                 toggle.setAttribute('aria-checked', !val);
 
                 save_setting(id, !val);
-                if (func) func(val);
+                if (func) func(!val);
 
                 if (mouseenter) mouseenter();
             }

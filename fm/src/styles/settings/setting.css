@@ -77,6 +77,10 @@
         }
     }
 
+    &[data-hidden="true"] {
+        display: none;
+    }
+
     &:not(.standalone) {
         padding: var(--setting-group-padding);
         margin: calc(-1 * var(--setting-group-padding)) !important;

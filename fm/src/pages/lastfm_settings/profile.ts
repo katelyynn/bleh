@@ -291,6 +291,9 @@ function profile_panel() {
     // about me
     update_about();
 
+    let country_elem;
+    let website_elem;
+
     render(update_picture, html`
         <h4>${tl(trans.profile)}</h4>
         ${alert}
@@ -380,7 +383,7 @@ function profile_panel() {
                         />
                     </div>
                 </div>
-                <div class="setting" data-type="text">
+                <div class="setting" data-type="text" ref=${el => website_elem = el} data-hidden=${settings.hide_unused_settings}>
                     <div class="heading">
                         <h5>${tl(trans.website)}</h5>
                     </div>
@@ -394,7 +397,7 @@ function profile_panel() {
                         />
                     </div>
                 </div>
-                <div class="setting" data-type="select">
+                <div class="setting" data-type="select" ref=${el => country_elem = el} data-hidden=${settings.hide_unused_settings}>
                     <div class="heading">
                         <h5>${tl(trans.country)}</h5>
                     </div>
@@ -529,6 +532,10 @@ function profile_panel() {
             </div>
         </form>
         <div class="setting-group">
+            ${setting({ id: 'hide_unused_settings', func: (val: boolean) => {
+                website_elem.setAttribute('data-hidden', val);
+                country_elem.setAttribute('data-hidden', val);
+            } })}
             ${setting({ id: 'avatar_radius' })}
         </div>
     `);
