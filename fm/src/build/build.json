@@ -1,7 +1,7 @@
 {
     "brand": "bleh",
-    "build": "2026.0605",
-    "sku": "lacrimosa",
+    "build": "2026.0629",
+    "sku": "aihara",
     "bio": "bleh!!! ^-^",
     "author": "katelyn",
     "url": "https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js",
@@ -402,5 +402,5 @@
             "notice": "This is an attempt at bringing bleh closer to Last.fm's layout, in terms of a less floating page in the middle and more of a wide content style (no borders). THIS IS NOT FINAL!!! feedback is welcome"
         }
     },
-    "built_on": "2026-06-29T17:12:39.645Z"
+    "built_on": "2026-06-29T17:57:53.474Z"
 }
