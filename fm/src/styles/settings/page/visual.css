@@ -280,11 +280,11 @@
 
 .colour-tile {
     display: block;
-    width: 64px;
-    height: 36px;
+    width: 20px;
+    height: 20px;
     background: oklch(var(--h3));
     box-shadow: var(--primary-shadow);
-    border-radius: var(--item-med-radius);
+    border-radius: 50px;
 
     &.l3 {
         background: oklch(var(--l3-c));
@@ -297,8 +297,16 @@
     }
 
     &.mini {
+        width: 64px;
         height: 24px;
+        border-radius: var(--item-med-radius);
     }
+}
+
+.colour-tile-and-button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .colour-tile-wrap {

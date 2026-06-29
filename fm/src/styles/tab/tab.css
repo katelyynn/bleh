@@ -338,10 +338,6 @@ button.navlist-more {
     & > .navlist-items {
         width: calc(var(--tabbed-width) + var(--button-sides-icon) + var(--button-sides));
         max-width: calc(var(--tabbed-width) + var(--button-sides-icon) + var(--button-sides));
-
-        & > .secondary-nav-item > .secondary-nav-item-link--active {
-            animation: var(--ina);
-        }
     }
 }
 .navlist-more,

@@ -356,7 +356,7 @@ export function display_colour_presets() {
     }
 }
 
-export function colour_tile(type) {
+export function colour_tile(type, style = '') {
     let text;
     const number = type.slice(-1);
 
@@ -368,7 +368,7 @@ export function colour_tile(type) {
 
     return html.node`
         <div class="colour-tile-wrap">
-            <div class="colour-tile mini ${type}" />
+            <div class="colour-tile mini colourful ${type}" style=${style} />
             <div class="colour-tile-type">${text}</div>
         </div>
     `;

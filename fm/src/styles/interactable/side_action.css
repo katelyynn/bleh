@@ -14,7 +14,7 @@
     border-radius: calc(var(--item-big-radius) + var(--inner)) !important;*/
 
     margin: 0 calc(-1 * var(--button-sides)) !important;
-    background-color: oklch(var(--h4) / 5%) !important;
+    background-color: var(--side-action-bg) !important;
     border-radius: var(--item-med-radius) !important;
     padding: 2px 0 !important;
     overflow: hidden;

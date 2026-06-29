@@ -848,6 +848,8 @@ u,
     --badge-shadow: 0 3px 15px 1px oklch(var(--h4) / 10%), 0 -4px 10px 0 oklch(var(--h4) / 40%) inset;
     --glass-inset: 0 0 5px 2px oklch(var(--h3) / 60%) inset;
 
+    --side-action-bg: oklch(var(--h4) / 5%);
+
     &[data-bleh--theme="oled"],
     body[data-bleh--theme="oled"] &:not(.theme-preview) {
         --c1: 0.98 0 var(--hue);
@@ -873,6 +875,8 @@ u,
         );
 
         --card-gradient: oklch(calc(clamp(min(0.5), var(--lit), max(0.9)) * 0.5) calc(clamp(min(0), var(--sat), max(2)) * 0.55) var(--hue) / 16%);
+
+        --side-action-bg: oklch(var(--h4) / 8%);
     }
     &[data-bleh--theme="light"],
     body[data-bleh--theme="light"]
@@ -974,6 +978,8 @@ u,
         --graph-colour-10: oklch(70% 60% 360);
 
         --white: 84% 0 0;
+
+        --side-action-bg: oklch(var(--k4) / 12%);
     }
     &[data-bleh--theme="ink"],
     body[data-bleh--theme="ink"]
@@ -1005,7 +1011,7 @@ u,
 
         --h4: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.63) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue);
         --f4: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.8) calc(clamp(min(0), var(--sat), max(2)) * 0.58) var(--hue);
-        --k4: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.66) calc(clamp(min(0), var(--sat), max(2)) * 0.42) var(--hue);
+        --k4: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.69) calc(clamp(min(0), var(--sat), max(2)) * 0.52) var(--hue);
         --g4: 0.92 calc(clamp(min(0), var(--sat), max(2)) * 0.7) var(--hue);
 
         --h3-s: var(--hue), 50%, 70%;
@@ -1075,6 +1081,8 @@ u,
         --graph-colour-10: oklch(70% 50% 360);
 
         --white: 89% 0 0;
+
+        --side-action-bg: oklch(var(--k4) / 12%);
     }
 }
 
