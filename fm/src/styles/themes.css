@@ -314,6 +314,12 @@ body[data-bleh--season="pride"] {
     --sat-seasonal: 1.58;
     --lit-seasonal: 0.66;
 }
+[data-season="summer"],
+body[data-bleh--season="summer"] {
+    --hue-seasonal: 43;
+    --sat-seasonal: 2.39;
+    --lit-seasonal: 0.89;
+}
 [data-season="halloween"],
 body[data-bleh--season="halloween"] {
     --hue-seasonal: 35;
@@ -322,9 +328,9 @@ body[data-bleh--season="halloween"] {
 }
 [data-season="pre_fall"],
 body[data-bleh--season="pre_fall"] {
-    --hue-seasonal: 40;
-    --sat-seasonal: 1.32;
-    --lit-seasonal: 1.06;
+    --hue-seasonal: 43;
+    --sat-seasonal: 1.65;
+    --lit-seasonal: 0.98;
 }
 [data-season="fall"],
 body[data-bleh--season="fall"] {
@@ -383,7 +389,7 @@ body,
     --b9: var(--b6);
 
     --card-border: inset 0 0 0 1px oklch(var(--b4) / 0.6);
-    --card-border-base: oklch(var(--b3) / 0.7);
+    --card-border-base: oklch(var(--b3) / 0.6);
     --card-border-base-highlight: oklch(var(--b2) / 0.55);
 
     --separator: var(--separator-base);
@@ -421,7 +427,7 @@ body,
     --card-blur-bg-alt: oklch(var(--b5) / var(--solarium-opacity, 35%));
 
     --nav-filter-shadow: drop-shadow(0 0 4px oklch(var(--b6))) drop-shadow(0 0 10px oklch(var(--b6) / 90%));
-    --header-filter-shadow: drop-shadow(0 0 3px oklch(var(--b6))) drop-shadow(0 0 10px oklch(var(--b6)));
+    --header-filter-shadow: drop-shadow(0 1px 3px oklch(var(--b6) / 80%)) drop-shadow(0 3px 10px oklch(var(--b6) / 60%));
 
     --menu-item-hov: oklch(var(--b4) / 40%);
     --menu-item-atv: oklch(var(--b4) / 60%);
@@ -461,6 +467,8 @@ body,
 
     --button-outline: inset 0 0 1px 0 oklch(var(--b2) / 80%);
 
+    --shout-tree: oklch(var(--b2) / 20%);
+
     &[data-bleh--theme="darker"] {
         /* any additional highlights */
         --b2: 0.41 calc(var(--sat) * 0.04 * var(--sat-bg, 1)) var(--hue);
@@ -490,6 +498,11 @@ body,
         --card-blur-bg-alt: oklch(var(--b5) / var(--solarium-opacity, 35%));
 
         --normal-shadow: none;
+
+        --card-border-base: oklch(var(--b3) / 0.5);
+        --card-border-base-highlight: oklch(var(--b2) / 0.55);
+
+        --shout-tree: oklch(var(--b2) / 30%);
     }
     &[data-bleh--theme="oled"] {
         /* any additional highlights */
@@ -509,8 +522,8 @@ body,
 
         --separator-base: oklch(var(--b2) / 0.7);
 
-        --card-border-base: oklch(var(--b2) / 0.72);
-        --card-border-base-highlight: oklch(var(--b2) / 0.8);
+        --card-border-base: oklch(var(--b2) / 0.4);
+        --card-border-base-highlight: oklch(var(--b2) / 0.7);
 
         --input-shadow:
             inset 0 0 0 1px oklch(var(--b3)),
@@ -528,8 +541,8 @@ body,
 
         --normal-shadow: none;
 
-        --card-blur-bg: oklch(0.12 calc(var(--sat) * 0.05 * var(--sat-bg, 1)) var(--hue) / var(--solarium-opacity, 40%));
-        --card-blur-bg-alt: oklch(var(--b5) / var(--solarium-opacity, 40%));
+        --card-blur-bg: oklch(0.12 calc(var(--sat) * 0.05 * var(--sat-bg, 1)) var(--hue) / var(--solarium-opacity, 10%));
+        --card-blur-bg-alt: oklch(var(--b5) / var(--solarium-opacity, 20%));
 
         --setting-hover: oklch(var(--b2) / 20%);
 
@@ -553,6 +566,8 @@ body,
         --modal-button-atv: oklch(var(--b2) / 60%);
 
         --button-outline: inset 0 0 1px 0 oklch(0.6 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue));
+
+        --shout-tree: oklch(var(--b2) / 55%);
     }
     &[data-bleh--theme="light"] {
         /* any additional highlights */
@@ -566,7 +581,7 @@ body,
         --b5: 1 0 0;
 
         /* root */
-        --b6: 0.95 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue);
+        --b6: 0.96 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue);
         --b8: 1 0 0;
         --b7: 0 0 0;
         --b9: 1 0 0;
@@ -602,7 +617,7 @@ body,
         --menu-item-atv: oklch(var(--b4) / 80%);
 
         --nav-filter-shadow: drop-shadow(0 0 2px oklch(var(--b5)));
-        --header-filter-shadow: drop-shadow(0 0 10px oklch(var(--b5)));
+        --header-filter-shadow: drop-shadow(0 3px 7px oklch(var(--b5)));
 
         --banner-overlay: oklch(var(--b5) / 30%);
         --banner-mix: lighten;
@@ -618,8 +633,8 @@ body,
         --view-buttons-hov: oklch(var(--b4) / 60%);
         --view-buttons-atv: oklch(var(--b4) / 80%);
 
-        --background-overlay: oklch(var(--b5) / 70%);
-        --background-mix-mode: lighten;
+        --background-overlay: oklch(var(--b5));
+        --background-mix-mode: overlay;
 
         --card-overlay-filter: invert(0.4);
         --card-overlay-opacity: 0.2;
@@ -636,6 +651,8 @@ body,
         --menu-opacity: 94%;
 
         --button-outline: inset 0 0 1px 0 oklch(var(--b2));
+
+        --shout-tree: oklch(var(--b2) / 30%);
     }
     &[data-bleh--theme="ink"] {
         --b2: 0.7 calc(var(--sat) * 0.12 * var(--sat-bg, 1)) var(--hue);
@@ -714,7 +731,6 @@ body,
 .theme-preview,
 .badge,
 u,
-.weeklychart-change,
 .new-badge,
 .colourful,
 .events-list-item-attendees,
@@ -817,19 +833,24 @@ u,
 
     --card-gradient: oklch(calc(clamp(min(0.5), var(--lit), max(0.9)) * 0.5) calc(clamp(min(0), var(--sat), max(2)) * 0.55) var(--hue) / 16%);
 
-    --graph-colour-0: oklch(75% 65% 30);
-    --graph-colour-1: oklch(80% 53% 45);
-    --graph-colour-2: oklch(100% 55% 60);
+    --graph-colour-0: oklch(75% 61% 30);
+    --graph-colour-1: oklch(80% 50% 45);
+    --graph-colour-2: oklch(100% 54% 60);
     --graph-colour-3: oklch(80% 50% 135);
     --graph-colour-4: oklch(85% 60% 150);
     --graph-colour-5: oklch(80% 77% 180);
-    --graph-colour-6: oklch(94% 50% 210);
-    --graph-colour-7: oklch(70% 65% 260);
+    --graph-colour-6: oklch(94% 31% 210);
+    --graph-colour-7: oklch(70% 61% 260);
     --graph-colour-8: oklch(80% 60% 290);
     --graph-colour-9: oklch(80% 65% 310);
     --graph-colour-10: oklch(80% 65% 360);
 
-    --badge-shadow: 0 3px 15px 1px oklch(var(--h4) / 10%), 0 -4px 10px 0 oklch(var(--h4) / 20%) inset;
+    --white: 100% 0 0;
+
+    --badge-shadow: 0 3px 15px 1px oklch(var(--h4) / 10%), 0 -4px 10px 0 oklch(var(--h4) / 40%) inset;
+    --glass-inset: 0 0 5px 2px oklch(var(--h3) / 60%) inset;
+
+    --side-action-bg: oklch(var(--h4) / 5%);
 
     &[data-bleh--theme="oled"],
     body[data-bleh--theme="oled"] &:not(.theme-preview) {
@@ -856,6 +877,8 @@ u,
         );
 
         --card-gradient: oklch(calc(clamp(min(0.5), var(--lit), max(0.9)) * 0.5) calc(clamp(min(0), var(--sat), max(2)) * 0.55) var(--hue) / 16%);
+
+        --side-action-bg: oklch(var(--h4) / 8%);
     }
     &[data-bleh--theme="light"],
     body[data-bleh--theme="light"]
@@ -887,7 +910,7 @@ u,
 
         --h4: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.63) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue);
         --f4: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.8) calc(clamp(min(0), var(--sat), max(2)) * 0.58) var(--hue);
-        --k4: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.66) calc(clamp(min(0), var(--sat), max(2)) * 0.42) var(--hue);
+        --k4: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.8) calc(clamp(min(0), var(--sat), max(2)) * 0.62) var(--hue);
         --g4: 0.92 calc(clamp(min(0), var(--sat), max(2)) * 0.7) var(--hue);
 
         --h3-s: var(--hue), 50%, 70%;
@@ -926,6 +949,7 @@ u,
         --g-indigo: oklch(254, 26%, 50%);
 
         --taste-glow: drop-shadow(0 0 15px oklch(var(--h3)));
+        --glass-inset: 0 0 5px 2px oklch(var(--h4) / 60%) inset;
 
         --menu-item-accent-hov: oklch(var(--h4) / 15%);
         --menu-item-accent-atv: oklch(var(--h4) / 25%);
@@ -943,17 +967,21 @@ u,
 
         --card-gradient: oklch(var(--h2) / 6%);
 
-        --graph-colour-0: oklch(55% 60% 30);
-        --graph-colour-1: oklch(70% 50% 45);
-        --graph-colour-2: oklch(90% 55% 60);
-        --graph-colour-3: oklch(65% 60% 135);
-        --graph-colour-4: oklch(75% 50% 150);
-        --graph-colour-5: oklch(71% 72% 185);
-        --graph-colour-6: oklch(70% 70% 210);
-        --graph-colour-7: oklch(50% 65% 260);
+        --graph-colour-0: oklch(62% 51% 30);
+        --graph-colour-1: oklch(76% 47% 45);
+        --graph-colour-2: oklch(90% 51% 60);
+        --graph-colour-3: oklch(74% 56% 135);
+        --graph-colour-4: oklch(70% 50% 150);
+        --graph-colour-5: oklch(65% 62% 185);
+        --graph-colour-6: oklch(83% 30% 210);
+        --graph-colour-7: oklch(52% 55% 260);
         --graph-colour-8: oklch(70% 60% 290);
         --graph-colour-9: oklch(75% 65% 310);
         --graph-colour-10: oklch(70% 60% 360);
+
+        --white: 84% 0 0;
+
+        --side-action-bg: oklch(var(--k4) / 12%);
     }
     &[data-bleh--theme="ink"],
     body[data-bleh--theme="ink"]
@@ -980,12 +1008,12 @@ u,
         --l3-c-lit: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.36);
 
         --h3: var(--h3-lit) var(--h3-sat) var(--hue);
-        --h3-sat: calc(clamp(min(0), var(--sat), max(2)) * 0.42);
-        --h3-lit: calc(clamp(min(0.85), var(--lit), max(1.1)) * 0.78);
+        --h3-sat: calc(clamp(min(0), var(--sat), max(2)) * 0.39);
+        --h3-lit: calc(clamp(min(0.85), var(--lit), max(1.1)) * 0.76);
 
         --h4: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.63) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue);
         --f4: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.8) calc(clamp(min(0), var(--sat), max(2)) * 0.58) var(--hue);
-        --k4: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.66) calc(clamp(min(0), var(--sat), max(2)) * 0.42) var(--hue);
+        --k4: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.69) calc(clamp(min(0), var(--sat), max(2)) * 0.52) var(--hue);
         --g4: 0.92 calc(clamp(min(0), var(--sat), max(2)) * 0.7) var(--hue);
 
         --h3-s: var(--hue), 50%, 70%;
@@ -1024,6 +1052,7 @@ u,
         --g-indigo: oklch(254, 26%, 50%);
 
         --taste-glow: drop-shadow(0 0 15px oklch(var(--h3)));
+        --glass-inset: 0 0 5px 2px oklch(var(--h4) / 40%) inset;
 
         --menu-item-accent-hov: oklch(var(--h4) / 15%);
         --menu-item-accent-atv: oklch(var(--h4) / 25%);
@@ -1043,15 +1072,19 @@ u,
 
         --graph-colour-0: oklch(55% 40% 30);
         --graph-colour-1: oklch(70% 40% 45);
-        --graph-colour-2: oklch(95% 45% 60);
-        --graph-colour-3: oklch(75% 40% 135);
-        --graph-colour-4: oklch(80% 40% 150);
-        --graph-colour-5: oklch(80% 57% 180);
-        --graph-colour-6: oklch(74% 40% 210);
-        --graph-colour-7: oklch(50% 55% 260);
+        --graph-colour-2: oklch(90% 45% 60);
+        --graph-colour-3: oklch(73% 45% 135);
+        --graph-colour-4: oklch(76% 40% 150);
+        --graph-colour-5: oklch(70% 57% 180);
+        --graph-colour-6: oklch(62% 40% 210);
+        --graph-colour-7: oklch(50% 58% 260);
         --graph-colour-8: oklch(70% 50% 290);
         --graph-colour-9: oklch(75% 55% 310);
         --graph-colour-10: oklch(70% 50% 360);
+
+        --white: 89% 0 0;
+
+        --side-action-bg: oklch(var(--k4) / 12%);
     }
 }
 
@@ -1060,7 +1093,7 @@ u,
 body {
     --card-padding: 20px;
     --card-padding-v: 40px;
-    --card-radius: var(--item-big-radius);
+    --card-radius: 8px;
     --card-gap: 15px;
 
     --cards-main-width: 902px;
@@ -1113,11 +1146,12 @@ body {
     --calendar-radius: 6px;
 
     --shout-avatar-size: 48px;
+    --shout-avatar-top: 4px;
     --shout-inset: 48px;
-    --shout-padding: 10px;
-    --shout-tree: oklch(var(--b4) / 70%);
+    --shout-padding: 2px;
+    --shout-outer-padding: 6px;
     --shout-tree-size: 2px;
-    --shout-margin-left: var(--shout-avatar-size) + 8px;
+    --shout-margin-left: var(--shout-avatar-size) + 4px;
 
     @media (max-width: 980px) {
         --shout-avatar-size: 40px;
@@ -1148,6 +1182,8 @@ body {
     --button-list-gap: 6px;
     --chartlist-inner-gap: 8px;
     --item-list-gap: 10px;
+
+    --menu-gap: 1px;
 
     /* cover masks */
     --cover-size-20: 14px;
@@ -1249,5 +1285,6 @@ body {
 
     &[data-bleh--theme="oled"] {
         --card-border: inset 0 0 0 1px oklch(var(--b4) / 0.8);
+        --solarium-compensate: brightness(75%);
     }
 }

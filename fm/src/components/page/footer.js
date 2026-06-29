@@ -37,8 +37,9 @@ export function bleh_footer() {
     render(
         footer,
         html`
+            ${extras}
             <div class="footer-bleh">
-                <a class="bleh-logo-footer" href="https://bleh.katelyn.moe" target="_blank">
+                <a class="bleh-logo-footer b" href="https://bleh.katelyn.moe" target="_blank">
                     ${version.brand}
                 </a>
                 <span class="footer-version">
@@ -52,8 +53,7 @@ export function bleh_footer() {
                         </span>
                     ` : ''}
                 </div>
-            </div>
-            <div class="footer-bleh-top">
+                <div class="footer-dot" />
                 <div class="footer-credit">
                     <p class="footer-credit-text">
                         ${{
@@ -65,10 +65,8 @@ export function bleh_footer() {
                             })
                         }}
                     </p>
-                    <p class="footer-credit-text">
-                        <a onclick=${() => sponsor()}>${{ html: tl(trans.supported_by, { c: sponsoring, s: '<span class="b">', '/s': '</span>' }) }}</a>
-                    </p>
                 </div>
+                <div class="footer-dot" />
                 <div class="footer-web">
                     <a
                         class="footer-link"
@@ -77,6 +75,7 @@ export function bleh_footer() {
                         target="_blank"
                         >${tl(trans.view_source)}</a
                     >
+                    <div class="footer-dot" />
                     <a
                         class="footer-link"
                         data-type="issue"
@@ -84,11 +83,6 @@ export function bleh_footer() {
                         target="_blank"
                         >${tl(trans.report_issue)}</a
                     >
-                    <a
-                        class="more"
-                        onclick=${() => extras.toggleAttribute('aria-expanded')}
-                        ><span class="bleh-icon"
-                    /></a>
                 </div>
             </div>
             ${lang != 'en' && lang in lang_info ? html.node`
@@ -105,7 +99,6 @@ export function bleh_footer() {
                     </div>
                 </div>
             ` : ''}
-            ${extras}
         `
     );
 

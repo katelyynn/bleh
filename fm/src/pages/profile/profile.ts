@@ -12,6 +12,7 @@ import { sponsor_list } from '@/build/sponsor';
 import {
     clean_number,
     control_gif_pause,
+    copy,
     lazy,
     romanise,
     set_storage
@@ -60,6 +61,7 @@ import { page_header_avatar } from '@/components/music/header';
 import { profile_summary } from '@/components/profile/summary';
 import { header_colour } from '@/components/page/colour';
 import { keys } from '@/components/settings/storage';
+import { beta_indicator } from '@/components/shared/indicator';
 
 export function bleh_profiles() {
     // the obsessions page is a user subpage but works very differently
@@ -106,6 +108,8 @@ export function bleh_profiles() {
     let about_me_sidebar =
         page.structure.row.querySelector('.about-me-sidebar');
 
+    let about_me_text = about_me_sidebar?.querySelector('p');
+
     if (page.subpage == 'overview') {
         delete cache.banner;
         delete cache.hue;
@@ -129,7 +133,6 @@ export function bleh_profiles() {
         } else {
             if (settings.bio_markdown) {
                 // parse body
-                let about_me_text = about_me_sidebar.querySelector('p');
                 let result = bio_parse(about_me_text, cache);
                 result.classList.add('about-me-content');
 
@@ -208,8 +211,10 @@ export function bleh_profiles() {
                 return;
             }
 
-            if (type == 'user-status-subscriber')
-                badge.textContent = tl(trans.badges['user-status-subscriber'].name);
+            const trans_instance = trans.badges[type];
+
+            if (trans_instance && trans_instance.name)
+                badge.textContent = tl(trans_instance.name);
 
             let badge_name;
             tippy(badge, {
@@ -499,6 +504,11 @@ export function bleh_profiles() {
             theme: 'context-menu',
             content: html.node`
                 ${setting({ id: 'bio_markdown', in_menu: true })}
+                <button class="dropdown-menu-clickable-item" data-type="copy" onclick=${() => {
+                    copy(about_me_text.textContent.trim());
+                }}>
+                    ${tl(trans.copy_text)}
+                </button>
             `,
             placement: 'bottom',
             interactive: true,
@@ -604,7 +614,9 @@ export function bleh_profiles() {
                     if (action == 'create') {
                         button.setAttribute('data-type', 'add');
                         button.classList.add('primary');
-                        button.innerHTML = `${tl(trans.new)} <div class="new-badge">${tl(trans.beta)}</div>`; //button.textContent = tl(trans.new);
+                        render(button, html`
+                            ${tl(trans.new)}${beta_indicator()}
+                        `);
                     } else if (action == 'import') {
                         button.setAttribute('data-type', 'import');
                     }

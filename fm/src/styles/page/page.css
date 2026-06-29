@@ -66,6 +66,14 @@
     border-top: 1px solid var(--card-border-base-highlight) !important;
     border-radius: calc(var(--card-radius) + 1px) !important;
 
+    &[data-lacrimosa="true"] {
+        border: 1px solid transparent !important;
+        border-radius: unset !important;
+        --card-radius: 0px;
+        width: 100%;
+        box-shadow: unset;
+    }
+
     position: relative;
 
     @media (max-width: 980px) {
@@ -167,77 +175,103 @@
         flex-direction: column;
     }
 
-    & > .col-main {
-        background: oklch(var(--b5));
-
-        transition-property: background;
-        transition-duration: var(--trans);
-        transition-timing-function: var(--trans-function);
-    }
-
-    & > .col-sidebar {
-        position: relative;
-        background: var(--card-blur-bg);
-
-        transition-property: background;
-        transition-duration: var(--trans);
-        transition-timing-function: var(--trans-function);
-
-        &:before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 100%;
-            max-height: 505px;
-            display: block;
-            z-index: -1;
-            background: var(--solarium-image, none);
-            backdrop-filter: var(--solarium-compensate);
-            -webkit-backdrop-filter: var(--solarium-compensate);
-
-            border-radius: inherit;
-
-            --mask: linear-gradient(
-                180deg,
-                white 86%,
-                transparent
-            );
-            mask-image: var(--mask);
-            -webkit-mask-image: var(--mask);
-        }
-
-        &:after {
-            content: "";
-            position: absolute;
-            width: 1px;
-            top: 0;
-            left: -1px;
-            bottom: 0;
-            display: block;
-            background: var(--sidebar-border);
-            box-shadow: var(--sidebar-shadow);
-        }
-    }
-
     @media (min-width: 981px) {
         &:first-child {
-            & > .col-main {
+            & > .content-main {
                 border-top-left-radius: var(--card-radius);
             }
-            & > .col-sidebar {
+            & > .content-side {
                 border-top-right-radius: var(--card-radius);
             }
         }
 
-        & > .col-main {
+        & > .content-main {
             border-bottom-left-radius: var(--card-radius);
         }
-        & > .col-sidebar {
+        & > .content-side {
             border-bottom-right-radius: var(--card-radius);
         }
     }
+
+    &[data-lacrimosa="true"] {
+        &:before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: auto;
+            right: auto;
+            width: var(--cards-width);
+            display: block;
+            height: 1px;
+            background: var(--card-border-base-highlight);
+        }
+    }
+}
+
+.content-main {
+    background: oklch(var(--b5));
+
+    transition-property: background;
+    transition-duration: var(--trans);
+    transition-timing-function: var(--trans-function);
+
+    display: flex;
+    justify-content: end;
+    width: calc(((100vw - var(--cards-width)) / 2) + var(--cards-main-width));
+}
+
+.content-side {
+    position: relative;
+    background: var(--card-blur-bg);
+
+    transition-property: background;
+    transition-duration: var(--trans);
+    transition-timing-function: var(--trans-function);
+
+    display: flex;
+    justify-content: start;
+    width: calc(((100vw - var(--cards-width)) / 2) + var(--cards-sidebar-width));
+
+    &:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 100%;
+        max-height: 505px;
+        display: block;
+        z-index: -1;
+        background: var(--solarium-image, none);
+        backdrop-filter: var(--solarium-compensate);
+        -webkit-backdrop-filter: var(--solarium-compensate);
+
+        border-radius: inherit;
+
+        --mask: linear-gradient(
+            180deg,
+            white 86%,
+            transparent
+        );
+        mask-image: var(--mask);
+        -webkit-mask-image: var(--mask);
+    }
+
+    &:after {
+        content: "";
+        position: absolute;
+        width: 1px;
+        top: 0;
+        left: -1px;
+        bottom: 0;
+        display: block;
+        background: var(--sidebar-border);
+        box-shadow: var(--sidebar-shadow);
+    }
+}
+
+.col-sidebar.in-content-view {
+    background: unset !important;
 }
 
 .col-main,
@@ -471,19 +505,23 @@
 
 /* no need for a sidebar */
 .single-column:not(.override) {
-    & > .col-main {
+    & > .content-main {
         width: calc(var(--cards-width) - 2px);
         display: block;
         margin-left: calc(-1 * var(--card-padding)) !important;
         margin-right: calc(-1 * var(--card-padding)) !important;
         border-bottom-right-radius: var(--card-radius);
+
+        & > .col-main {
+            width: 100%;
+        }
     }
-    & > .col-sidebar {
+    & > .content-side {
         display: none !important;
     }
 
     &:first-child {
-        & > .col-main {
+        & > .content-main {
             border-top-right-radius: var(--card-radius);
         }
     }

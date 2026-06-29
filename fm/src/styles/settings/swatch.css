@@ -25,18 +25,19 @@
     flex-wrap: wrap;
     gap: var(--item-list-gap) !important;
 
-    /*&:has(> .swatch-group > .swatch-container:is(:hover, [aria-expanded="true"])) {
+    &.has-hover {
         & > .swatch-group > .swatch-container:not(:hover, [aria-expanded="true"]) {
-            & > strong {
+            & > .swatch-inner {
                 opacity: 0 !important;
+                translate: 0 2px !important;
             }
         }
-    }*/
+    }
 }
 .swatch-sep {
     width: 2px !important;
     height: 12px !important;
-    margin-bottom: calc(52px - 24px);
+    margin-bottom: calc(66px - 24px);
     border-radius: 10px;
 }
 .theme-bubble-sep {
@@ -62,24 +63,21 @@
     align-items: center;
     gap: var(--item-list-gap);
 
-    & > strong,
+    min-height: 66px;
+
+    & > .swatch-inner,
     & > .swatch[data-swatch-type="colour"]:before {
         opacity: 0;
     }
 
     &[aria-checked="true"] {
-        & > strong,
         & > .swatch:before {
             opacity: 1;
         }
 
-        & > strong {
+        & > .swatch-inner {
             translate: 0 0 !important;
             opacity: 1 !important;
-
-            transition-property: translate, opacity;
-            transition-duration: 0.3s;
-            transition-timing-function: var(--trans-function-ani);
         }
 
         & > .swatch {
@@ -92,24 +90,17 @@
         }
     }
 
-    & > strong {
-        color: oklch(var(--l3-c)) !important;
-        margin: 0 -150px;
-
-        translate: 0 2px;
-        opacity: 0;
+    &[aria-expanded="true"],
+    &:hover {
+        & > .swatch-inner {
+            color: oklch(var(--c3));
+            translate: 0 0 !important;
+            opacity: 1 !important;
+        }
     }
 
-    /*&[aria-expanded="true"],
-    &:hover {
-        & > strong {
-            opacity: 1;
-            color: oklch(var(--c3));
-        }
-    }*/
-
     &:not([aria-checked="true"], :hover) {
-        & > strong {
+        & > .swatch-inner {
             pointer-events: none;
         }
     }
@@ -120,6 +111,28 @@
         }
     }
 }
+
+.swatch-inner {
+    margin: 0 -150px;
+
+    translate: 0 2px;
+    opacity: 0;
+
+    transition-property: translate, opacity;
+    transition-duration: 0.3s;
+    transition-timing-function: var(--trans-function-ani);
+}
+
+.swatch-name {
+    color: oklch(var(--l3-c)) !important;
+}
+
+.swatch-desc {
+    color: oklch(var(--c3));
+    font-size: 13px;
+    margin-top: -2px;
+}
+
 .swatch.colourful {
     background: oklch(var(--h3));
     box-shadow:

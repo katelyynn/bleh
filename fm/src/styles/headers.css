@@ -113,10 +113,20 @@ h2.text-18,
 
 .music-section-heading {
     font-family: var(--font-head) !important;
-    font-size: 26px !important;
+    font-size: var(--font-size-head-3) !important;
     line-height: 18px !important;
+    font-style: var(--font-style-head);
 
     .music-section > & {
-        line-height: 36px !important;
+        line-height: var(--line-height-head-3) !important;
     }
+}
+
+
+.chart-heading {
+    font-family: var(--font-head) !important;
+    font-size: 40px !important;
+    line-height: 50px !important;
+    margin-bottom: unset !important;
+    text-shadow: 0 7px 20px oklch(var(--f4));
 }

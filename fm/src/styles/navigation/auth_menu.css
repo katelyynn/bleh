@@ -70,6 +70,10 @@
             transition-duration: 0.25s;
             transition-timing-function: var(--trans-function-ani);
 
+            display: flex;
+            flex-direction: column;
+            gap: var(--menu-gap);
+
             &:hover {
                 overflow-y: auto;
             }
@@ -224,16 +228,16 @@
     }
 
     &[data-live="true"] {
-        animation: animate_status 2s var(--trans-function-ani) infinite;
+        animation: animate_status 3s linear infinite;
     }
 }
 
 @keyframes animate_status {
     from, to {
-        scale: 1;
+        filter: brightness(1);
     }
     50% {
-        scale: 0.9;
+        filter: brightness(1.4);
     }
 }
 

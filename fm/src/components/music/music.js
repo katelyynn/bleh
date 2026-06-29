@@ -8,7 +8,7 @@ import { html, render } from 'lighterhtml';
 import { settings } from '@/build/config';
 import { log } from '@/build/log';
 import { auth, page, root } from '@/build/page';
-import { clean_number, romanise, sanitise } from '@/build/tools';
+import { clean_number, romanise, sanitise, sanitise_text } from '@/build/tools';
 import { lang, tl, trans } from '@/build/trans';
 import { prep_chart_colours } from '@/components/music/chart';
 import { create_divider } from '@/pages/music/gallery';
@@ -40,7 +40,7 @@ import { music_summary } from './summary';
 import { icon, icons } from '../shared/icon';
 import { keys } from '../settings/storage';
 import { is_sponsor } from '../sponsor';
-import { new_indicator } from '../shared/indicator';
+import { beta_indicator, new_indicator } from '../shared/indicator';
 
 unsafeWindow._other_listener = function (id) {
     other_listener(id);
@@ -425,9 +425,7 @@ export async function show_your_scrobbles() {
 
     let buttons = interact_container.querySelectorAll('button');
     buttons.forEach((button) => {
-        if (button.classList[0] != 'header-new-playlink')
-            button.classList.add('btn', 'side-action', 'icon-mask');
-        else button.classList.add('dropdown-menu-clickable-item');
+        button.classList.add('btn', 'side-action', 'icon-mask');
 
         if (button.classList[0] == 'header-new-more-button')
             interact_container.removeChild(button.parentElement);
@@ -442,9 +440,7 @@ export async function show_your_scrobbles() {
     });
     let links = interact_container.querySelectorAll('a');
     links.forEach((button) => {
-        if (button.classList[0] != 'header-new-playlink')
-            button.classList.add('btn', 'side-action', 'icon-mask');
-        else button.classList.add('dropdown-menu-clickable-item');
+        button.classList.add('btn', 'side-action', 'icon-mask');
     });
 
     // obsession
@@ -459,6 +455,10 @@ export async function show_your_scrobbles() {
 
         interact_container.appendChild(obsession_form);
     }
+
+    // move it above the scrobble button
+    const play_btn = interact_container.querySelector('.header-new-playlink');
+    if (play_btn) interact_container.appendChild(play_btn);
 
     if (ff('submit_scrobble')) {
         const can_api =
@@ -524,7 +524,7 @@ export async function show_your_scrobbles() {
         interact_container.appendChild(html.node`
             <button class="btn side-action icon-mask" data-type="credits" onclick=${() => oracle_credits()}>
                 ${tl(trans.view_credits)}
-                ${new_indicator()}
+                ${beta_indicator()}
             </button>
         `);
     }
@@ -541,9 +541,6 @@ export async function show_your_scrobbles() {
     });
 
     interact_container.appendChild(search_btn);*/
-
-    const play_btn = interact_container.querySelector('.header-new-playlink');
-    if (play_btn) interact_container.removeChild(play_btn);
 
     if (auth.name) {
         if (!page.mobile)
@@ -629,6 +626,9 @@ export async function show_your_scrobbles() {
             <div class="metadata-group">
                 <div class="sub-text music-small-header">
                     ${tl(trans.find_on)}
+                    <a class="wiki-edit-small icon" href="${root}bleh/interface?setting=music_links">
+                        ${tl(trans.edit_links)}
+                    </a>
                 </div>
                 <div class="music-links" ref=${(el) => (link_container = el)} />
             </div>
@@ -1113,10 +1113,10 @@ export async function show_your_scrobbles() {
         <section class="lotus cta colourful">
             <label class="cta-label">
                 ${icon({ name: icons.lotus })}
-                <strong>${tl(trans.lotus_cta[page.corrected], { t: tl(trans[`${page.type}_lower`]) })}</strong>
+                <strong>${tl(trans.lotus_cta[page.corrected])}</strong>
             </label>
             ${ff('refreshed_lotus') ? html.node`
-                <button class="see-more" onclick=${() => create_correction(page.type)}>${tl(trans.suggest_correction)}</button>
+                <button class="see-more" onclick=${() => create_correction(page.type, page.name, page.sister, page.corrected)}>${tl(trans.suggest_correction)}</button>
             ` : html.node`
                 <a class="see-more" href="https://github.com/katelyynn/lotus/issues/new/choose" target="_blank">${tl(trans.suggest_correction)}</a>
             `}
@@ -1706,7 +1706,9 @@ export function similar_items() {
 
         controls.replaceWith(html.node`
             <div class="top-container">
-                <h2>${tl(trans.more_like_name, { n: page.type == 'artist' ? romanise(correct_artist(page.name)) : romanise(correct_artist(page.sister)) })}</h2>
+                <h2>${{
+                    html: tl(trans.more_like_name, { n: page.type == 'artist' ? `<i>${sanitise_text(romanise(correct_artist(page.name)))}<i>` : `<i>${sanitise_text(romanise(correct_artist(page.sister)))}<i>` })
+                }}</h2>
                 <div class="view-buttons blend blend-v2">
                     ${station}
                 </div>

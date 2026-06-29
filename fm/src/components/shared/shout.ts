@@ -173,8 +173,10 @@ export function patch_shouts() {
                 const type = button.classList[1];
                 if (type == 'more-item--delete') {
                     button.textContent = tl(trans.delete);
+                    button.classList.add('colourful', 'danger-subtle');
                 } else if (type == 'more-item--report') {
                     button.textContent = tl(trans.report);
+                    button.classList.add('colourful', 'danger-subtle');
                 }
             });
 
@@ -316,6 +318,13 @@ function shout_send(send_button) {
     button.classList.add('btn', 'btn-send-shout-generic', 'icon');
     button.textContent = tl(trans.send);
     button.removeAttribute('disabled');
+
+    /* this is a joke */
+    /*button.parentElement.insertBefore(html.node`
+        <button class="btn icon primary" data-type="ai">
+            Write<span class="new-badge">PRO</span>
+        </button>
+    `, button);*/
 
     if (page.mobile) return;
 

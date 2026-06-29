@@ -211,7 +211,7 @@
 .grid-items-cover-image-image {
     height: 100%;
     background: var(--avatar-generic-background);
-    border-radius: var(--item-small-radius);
+    border-radius: inherit;
     overflow: hidden;
     z-index: 30;
     pointer-events: none;

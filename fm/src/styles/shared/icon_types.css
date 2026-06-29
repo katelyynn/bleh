@@ -30,9 +30,6 @@
 [data-type="share"] {
     --mask: var(--icon-16-share);
 }
-[data-type="overview"] {
-    --mask: var(--icon-16-home);
-}
 [data-type="mention"] {
     --mask: var(--icon-16-mention);
 }
@@ -117,6 +114,7 @@
 [data-type="shift"] {
     --mask: var(--icon-16-shift);
 }
+[data-type="overview"],
 [data-menu-item="home"],
 .secondary-nav-item--overview,
 [data-type="home"] {
@@ -454,6 +452,7 @@
 [data-analytics-label="settings"] {
     --mask: var(--icon-16-settings);
 }
+[data-type="logout"],
 [data-menu-item="logout"],
 [data-analytics-label="logout"] {
     --mask: var(--icon-16-logout);
@@ -500,6 +499,9 @@
     &[data-season="pride"] {
         --mask: var(--icon-16-pride);
     }
+    &[data-season="summer"] {
+        --mask: var(--icon-16-summer);
+    }
     &[data-season="halloween"] {
         --mask: var(--icon-16-pumpkin);
     }
@@ -507,10 +509,10 @@
         --mask: var(--icon-16-fall);
     }
     &[data-season="fall"] {
-        --mask: var(--icon-16-fall);
+        --mask: var(--icon-16-snow);
     }
     &[data-season="christmas"] {
-        --mask: var(--icon-16-snow);
+        --mask: var(--icon-16-christmas);
     }
     &[data-season="new_years"] {
         --mask: var(--icon-16-new-years);
@@ -842,4 +844,17 @@
 
 [data-type="credits"] {
     --mask: var(--icon-16-credits);
+}
+
+.secondary-nav-item--daily {
+    --mask: var(--icon-16-daily);
+}
+
+.secondary-nav-item--weekly {
+    --mask: var(--icon-16-weekly);
+}
+
+/* this is a joke */
+[data-type="ai"] {
+    --mask: var(--icon-16-sparkle);
 }

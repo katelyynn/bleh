@@ -25,8 +25,14 @@ import { match } from '@/components/settings/dynamic_theming';
 import { set_storage } from '@/build/tools';
 import { display_colour_presets } from '@/components/settings/swatch';
 import { avatar } from '@/components/shared/avatar';
+import { sponsor_list } from '@/build/sponsor';
 
 export function bleh_setup() {
+    if (!auth.name) {
+        window.location.href = `${root}login?next=bleh/setup`;
+        return;
+    }
+
     page.structure.container = document.body.querySelector('.page-content');
     try {
         page.structure.row = page.structure.container.querySelector('.row');
@@ -63,34 +69,21 @@ export function bleh_setup() {
     let masthead = document.body.querySelector('.masthead');
     masthead.classList.add('in-setup');
 
+    page.state.setup_pages = 5;
+
     render(
         page.structure.main,
         html`
             <section class="setup sour" ref=${(el) => (page.structure.setup = el)}>
-                ${auth.name ?
-                    html.node`
-            <div class="avatar">
-                <img src=${avatar(auth.avatar, 'avatar170s')} alt=${tl(trans.your_avatar)}>
-            </div>
-            <div class="info">
-                <h1>${tl(trans.bleh_setup)}</h1>
-                <div class="subtle">
-                    ${{ html: tl(trans.logged_in_as).replace('{user}', `<a class="mention" href="${root}user/${auth.name}">@${auth.name}</a>`) }}
+                <div class="setup-top">
+                    <div class="avatar">
+                        <img src=${avatar(auth.avatar, 'avatar170s')} alt=${tl(trans.your_avatar)}>
+                    </div>
+                    <div class="info">
+                        <h1 class="setup-head">${{html: tl(trans.welcome, { u: `<a class="mention" href="${root}user/${auth.name}"><span class="at">@</span>${auth.name}</a>` })}}</h1>
+                        <h2 class="setup-head-sub">${tl(trans.bleh_setup_guide)}</h2>
+                    </div>
                 </div>
-            </div>
-            `
-                :   html.node`
-            <div class="avatar">
-                <img class="missing-avatar" alt=${tl(trans.your_avatar)}>
-            </div>
-            <div class="info">
-                <h1>${tl(trans.bleh_setup)}</h1>
-                <div class="subtle">
-                    ${tl(trans.not_logged_in)}
-                </div>
-            </div>
-            `}
-                <div class="sep"></div>
                 <div
                     class="setup-content"
                     ref=${(el) => (page.structure.setup_content = el)}
@@ -106,7 +99,15 @@ export function bleh_setup() {
     bleh_setup_start();
 }
 
+function show_page_count() {
+    return html.node`
+        <span class="new-badge count-badge">${page.state.setup_page - 1}/${page.state.setup_pages}</span>
+    `;
+}
+
 function bleh_setup_start() {
+    page.state.setup_page = 1;
+
     page.structure.setup.setAttribute('data-page', 'start');
     page.structure.setup.setAttribute('data-animating', 'true');
     setTimeout(function () {
@@ -126,7 +127,7 @@ function bleh_setup_start() {
             `}
             <div class="fill"></div>
             <button class="btn primary continue" onclick=${() => setup_accessibility()}>
-                ${tl(trans.next)}
+                ${tl(trans.next)}${show_page_count()}
             </button>
         `);
     }, page.state.trans);
@@ -135,11 +136,16 @@ function bleh_setup_start() {
 }
 
 function setup_themes() {
+    page.state.setup_page = 3;
+
     page.structure.setup.setAttribute('data-page', 'themes');
     page.structure.setup.setAttribute('data-animating', 'true');
 
     let adaptive_tip;
     let bubbles;
+
+    let font_choice;
+    let custom_font;
 
     function render_tip() {
         adaptive_tip.setAttribute('aria-hidden', !settings.theme_schedule);
@@ -274,6 +280,13 @@ function setup_themes() {
                 `
                     :   ''}
                 </div>
+                <div class="setting-group">
+                    ${font_choice = setting({ id: 'font_choice', func: () => {
+                        custom_font.compat();
+                    } })}
+                    ${custom_font = setting({ id: 'font', text: false })}
+                    ${setting({ id: 'font_serif' })}
+                </div>
             `
         );
         render(page.structure.setup_footer, html`
@@ -282,7 +295,7 @@ function setup_themes() {
             </button>
             <div class="fill"></div>
             <button class="btn primary continue" onclick=${() => setup_music()}>
-                ${tl(trans.next)}
+                ${tl(trans.next)}${show_page_count()}
             </button>
         `);
 
@@ -294,6 +307,8 @@ function setup_themes() {
 };
 
 function setup_accessibility() {
+    page.state.setup_page = 2;
+
     page.structure.setup.setAttribute('data-page', 'accessibility');
     page.structure.setup.setAttribute('data-animating', 'true');
     setTimeout(function () {
@@ -322,13 +337,15 @@ function setup_accessibility() {
             </button>
             <div class="fill"></div>
             <button class="btn primary continue" onclick=${() => setup_themes()}>
-                ${tl(trans.next)}
+                ${tl(trans.next)}${show_page_count()}
             </button>
         `);
     }, page.state.trans);
 };
 
 function setup_music() {
+    page.state.setup_page = 4;
+
     page.structure.setup.setAttribute('data-page', 'music');
     page.structure.setup.setAttribute('data-animating', 'true');
     setTimeout(function () {
@@ -391,13 +408,15 @@ function setup_music() {
             </button>
             <div class="fill"></div>
             <button class="btn primary continue" onclick=${() => setup_layout()}>
-                ${tl(trans.next)}
+                ${tl(trans.next)}${show_page_count()}
             </button>
         `);
     }, page.state.trans);
 };
 
 function setup_layout() {
+    page.state.setup_page = 5;
+
     page.structure.setup.setAttribute('data-page', 'music');
     page.structure.setup.setAttribute('data-animating', 'true');
     setTimeout(function () {
@@ -506,7 +525,7 @@ function setup_layout() {
             </button>
             <div class="fill"></div>
             <button class="btn primary continue" onclick=${() => setup_end()}>
-                ${tl(trans.next)}
+                ${tl(trans.next)}${show_page_count()}
             </button>
         `);
 
@@ -515,6 +534,10 @@ function setup_layout() {
 };
 
 function setup_end() {
+    page.state.setup_page = 6;
+
+    const katelyn = sponsor_list.related.special[0] || 'dressupdarlin3434g';
+
     page.structure.setup.setAttribute('data-page', 'end');
     page.structure.setup.setAttribute('data-animating', 'true');
     setTimeout(() => {
@@ -540,6 +563,15 @@ function setup_end() {
                     </div>
                     <div class="bleh-icon mini-arrow" style="--icon: var(--mask)" data-type="arrow-right" />
                 </button>
+                <a class="btn mini" href="${root}user/${katelyn}" target="_blank">
+                    <div class="mini-icon colourful" data-type="follow">
+                        <div class="bleh-icon" />
+                    </div>
+                    <div class="mini-info">
+                        <h5>${{ html: tl(trans.follow_user, { u: `<a class="mention">@${katelyn}</a>` }) }}</h5>
+                    </div>
+                    <div class="bleh-icon mini-arrow" style="--icon: var(--mask)" data-type="arrow-right" />
+                </a>
             </div>
         `);
 
@@ -550,7 +582,7 @@ function setup_end() {
                 </button>
                 <div class="fill"></div>
                 <a class="btn primary continue" href="${root}user/${auth.name}">
-                    ${tl(trans.finish)}
+                    ${tl(trans.finish)}${show_page_count()}
                 </a>
             `);
         } else {

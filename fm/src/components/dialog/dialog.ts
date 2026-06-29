@@ -20,7 +20,7 @@ export function load_dialogs() {
 
 type dialog = {
     id: string,
-    title: string,
+    title?: string,
     subtitle?: string,
     body: HTMLElement,
     dismiss?: boolean,

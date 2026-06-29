@@ -25,7 +25,8 @@ import { page_header_avatar } from '@/components/music/header';
 import { campfire } from './home/campfire';
 import { bleh_suggested } from './home/suggested';
 import { header_colour } from '@/components/page/colour';
-import { new_indicator } from "@/components/shared/indicator";
+import { beta_indicator, new_indicator } from "@/components/shared/indicator";
+import { version } from "@/main";
 
 export async function bleh_home() {
     page.structure.container = document.body.querySelector('.page-content');
@@ -89,9 +90,9 @@ export async function bleh_home() {
                             ${tl(trans[`good_${time}_user`])}
                         </div>
                         <div class="title-container">
-                            <h1 class="page-header-title profile-name" ref=${el => profile_name = el}>
+                            <span class="page-header-title profile-name" ref=${el => profile_name = el}>
                                 ${cache.username || auth.name}
-                            </h1>
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -136,7 +137,7 @@ export async function bleh_home() {
                     <li class="navlist-item secondary-nav-item secondary-nav-item--home">
                         <a href="${root}music" class="secondary-nav-item-link ${(page.subpage == 'music' || page.type == 'events') ? 'secondary-nav-item-link--active' : ''}">
                             ${tl(trans.home)}
-                            ${new_indicator()}
+                            ${beta_indicator()}
                         </a>
                     </li>
                     <li class="navlist-item secondary-nav-item secondary-nav-item--recommendations">
@@ -163,18 +164,17 @@ export async function bleh_home() {
                     <li class="navlist-item secondary-nav-item secondary-nav-item--minis">
                         <a href="${root}bleh/minis" data-type="mini" class="secondary-nav-item-link ${(page.type == 'minis') ? 'secondary-nav-item-link--active' : ''}">
                             ${tl(trans.minis)}
-                            ${new_indicator()}
                         </a>
                     </li>
                     ` : ''}
                     <li class="fill"></li>
-                    <li class="navlist-item secondary-nav-item secondary-nav-item--settings">
-                        <a href="${root}settings" class="secondary-nav-item-link ${(page.type == 'settings') ? 'secondary-nav-item-link--active' : ''}">
-                            ${tl(trans.settings)}
-                        </a>
-                    </li>
                     <li class="navlist-item secondary-nav-item secondary-nav-item--bleh">
                         <a href="${root}bleh" class="secondary-nav-item-link ${(page.type == 'bleh_settings') ? 'secondary-nav-item-link--active' : ''}">
+                            ${version.brand}
+                        </a>
+                    </li>
+                    <li class="navlist-item secondary-nav-item secondary-nav-item--settings">
+                        <a href="${root}settings" class="secondary-nav-item-link ${(page.type == 'settings') ? 'secondary-nav-item-link--active' : ''}">
                             ${tl(trans.settings)}
                         </a>
                     </li>

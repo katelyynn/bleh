@@ -7,7 +7,7 @@
 import { settings } from '@/build/config';
 import { log } from '@/build/log';
 import { auth, page, root } from '@/build/page';
-import { romanise, sanitise } from '@/build/tools';
+import { romanise, sanitise, sanitise_text } from '@/build/tools';
 import { tl, trans } from '@/build/trans';
 import {
     correct_artist,
@@ -542,16 +542,21 @@ function bleh_artist_similar() {
 
     const artists = similar.querySelectorAll('.similar-artists-item-wrap');
 
+    const pagination = page.structure.main.querySelector('.pagination');
+
     render(
         page.structure.main,
         html`
             <section class="similar-panel">
                 <h2 class="text-18">
-                    ${tl(trans.artists_similar_to_name, {
-                        n: romanise(correct_artist(page.name))
-                    })}
+                    ${{
+                        html: tl(trans.artists_similar_to_name, {
+                            n: `<i>${sanitise_text(romanise(correct_artist(page.name)))}</i>`
+                        })
+                    }}
                 </h2>
                 ${similar}
+                ${pagination}
             </section>
         `
     );

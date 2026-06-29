@@ -49,8 +49,22 @@ export let seasonal_events = [
             day: 1
         },
         end: {
+            month: 6,
+            day: 30
+        },
+        snowflakes: {
+            state: false
+        }
+    },
+    {
+        id: 'summer',
+        start: {
             month: 7,
-            day: 7
+            day: 1
+        },
+        end: {
+            month: 9,
+            day: 27
         },
         snowflakes: {
             state: false
@@ -60,7 +74,7 @@ export let seasonal_events = [
         id: 'halloween',
         start: {
             month: 9,
-            day: 22
+            day: 28
         },
         end: {
             month: 11,

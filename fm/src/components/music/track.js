@@ -811,8 +811,8 @@ export function patch_titles(search = page.structure.main) {
                                 );
                                 if (!button) return;
 
-                                button.classList =
-                                    'dropdown-menu-clickable-item';
+                                button.classList.add('dropdown-menu-clickable-item');
+                                button.classList.remove('chartlist-play-button');
                                 button.textContent = tl(trans.play);
                                 button.setAttribute('data-type', 'play');
 

@@ -333,6 +333,12 @@
         & > a {
             color: inherit !important;
         }
+
+        /*&.generic-page-title {
+            font-family: var(--font-head);
+            font-style: var(--font-style-head);
+            font-weight: var(--font-weight-head, var(--font-weight-bold));
+            }*/
     }
 
     & > .page-header-artist {
@@ -484,10 +490,13 @@
 }
 
 .greeting {
-    font-size: 16px;
-    line-height: 20px;
+    color: oklch(var(--c2));
+    font-size: var(--font-size-head-2);
+    line-height: var(--line-height-head-2);
     cursor: default;
-    font-weight: var(--font-weight-medium);
+    font-family: var(--font-head);
+    font-weight: var(--font-weight-head);
+    font-style: var(--font-style-head);
 }
 
 

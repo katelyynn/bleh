@@ -5,6 +5,10 @@
 .navlist-hidden-list-wrap .navlist-hidden-list {
     padding: 4px !important;
     animation: solarium_menu 0.25s var(--trans-function);
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--menu-gap);
 }
 .dropdown-menu-item-dark,
 .dropdown-menu-clickable-item,
@@ -233,7 +237,7 @@ li:first-child .more-item--delete {
 .track-preview-badges {
     flex-direction: row !important;
     justify-content: start;
-    align-items: center;
+    align-items: end;
     margin-top: 4px;
 
     gap: 8px;
@@ -242,7 +246,8 @@ li:first-child .more-item--delete {
     color: oklch(var(--c3));
     cursor: default;
     font-size: 12px;
-    line-height: 12px;
+    line-height: 16px;
+    order: 100;
 }
 
 .track-preview-text {

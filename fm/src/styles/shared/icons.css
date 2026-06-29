@@ -16,14 +16,12 @@
 .listening-report-promo-date:after,
 .metadata-column .cta-link-wrap > a:before, .lyrics-snippet-more-link > a:before,
 .see-more:before,
-.modal-body .js-close:not(.btn-primary):before,
 .music-featured-item-background:before,
 .gallery-image-preferred-states:before, .gallery-image-votes:before,
 .user-list-follower-btn:before,
 .icon:before, .icon-r:before,
 .chartlist-now-scrobbling:before,
 .tags-view-all:before,
-.weeklychart-change:before,
 .weeklychart-listeners:before, .weeklychart-scrobblers:before,
 .music-bookmarks-tags-item-toggle:before,
 .music-bookmarks-artists-item-toggle:before,
@@ -82,7 +80,6 @@
 .playlisting-playlists-item-name:before,
 .playlisting-create-option-icon:before,
 /*     PLAYER BAR     */
-.player-bar-btn:before,
 .dropdown-menu-item-dark:before,
 /*     UPLOAD CTA     */
 .cta-link:before,

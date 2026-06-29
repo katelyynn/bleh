@@ -940,7 +940,7 @@ export function external_url_prompt(url, dangerous = false) {
                 </button>
                 <div class="fill"></div>
                 <button class="btn primary continue" onclick=${() => {
-                    if (trust_site.checked()) {
+                    if (trust_site?.checked()) {
                         save_setting('trusted_sites', [
                             ...settings.trusted_sites,
                             hostname

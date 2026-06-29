@@ -122,6 +122,7 @@ export function seasonal_timeline_item(season: season, type: 'current' | 'prev' 
             </div>
             <strong class="seasonal-name colourful" data-season=${season.id}>${tl(trans.seasonal.listing[season.id])}</strong>
             ${time}
+            <div class="seasonal-timeline-bg colourful" data-season=${season.id} data-season-type=${type} />
         </div>
     `;
 }

@@ -13,6 +13,7 @@
     background-color: var(--inset-background);
     box-shadow: inset 0 0 0 1px var(--separator-base), var(--inset-shadow);
     border-radius: var(--item-small-radius);
+    overflow: hidden;
 }
 
 .seasonal-timeline-item {
@@ -27,6 +28,40 @@
     &:not([data-season-type="current"]) {
         opacity: 0.7;
     }
+
+    position: relative;
+}
+
+.seasonal-timeline-bg {
+    position: absolute;
+    inset: -60px -240px;
+    background-color: oklch(var(--k4));
+    pointer-events: none;
+
+    &:not([data-season-type="current"]),
+    &[data-season="none"] {
+        display: none;
+    }
+
+    --hue-over: var(--hue-seasonal);
+    --sat-over: var(--sat-seasonal);
+    --lit-over: var(--lit-seasonal);
+
+    &[data-season="pride"] {
+        background-image: linear-gradient(180deg, var(--graph-colour-0) 10%, var(--graph-colour-1) 23%, var(--graph-colour-2) 38%, var(--graph-colour-5) 55%, var(--graph-colour-7) 67%, var(--graph-colour-9) 100%);
+    }
+
+    &[data-season="fall"] {
+        background-image: linear-gradient(180deg, oklch(var(--k4)) 30%, oklch(var(--white)));
+    }
+
+    z-index: 0;
+
+    --mask: radial-gradient(at top center, #FFFFFF, transparent 65%);
+    mask-image: var(--mask);
+    -webkit-mask-image: var(--mask);
+
+    opacity: 0.25;
 }
 
 .seasonal-icon {
@@ -39,6 +74,8 @@
     --mask-colour: linear-gradient(180deg, oklch(var(--c1)), oklch(var(--c3)));
     filter: drop-shadow(0 4px 7px oklch(var(--c3) / 60%));
 
+    z-index: 3;
+
     &:not([data-season="none"]) {
         --mask-colour: linear-gradient(180deg, oklch(var(--l2-c)), oklch(var(--l4-c)));
         filter: drop-shadow(0 4px 7px oklch(var(--l4-c) / 60%));
@@ -50,8 +87,13 @@
 }
 
 .seasonal-name {
-    font-size: 16px;
-    line-height: 20px;
+    font-family: var(--font-head);
+    font-size: var(--font-size-head-2);
+    line-height: var(--line-height-head-2);
+    font-style: var(--font-style-head);
+    font-weight: var(--font-weight-head);
+
+    z-index: 3;
 
     &:not([data-season="none"]) {
         color: oklch(var(--l3-c));
@@ -60,6 +102,17 @@
         --sat-over: var(--sat-seasonal);
         --lit-over: var(--lit-seasonal);
     }
+
+    &[data-season="pride"] {
+        background-image: linear-gradient(90deg, var(--graph-colour-0) 10%, var(--graph-colour-1) 23%, var(--graph-colour-2) 38%, var(--graph-colour-5) 55%, var(--graph-colour-7) 67%, var(--graph-colour-9) 100%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+}
+
+.seasonal-desc {
+    z-index: 3;
 }
 
 .seasonal-icon > .bleh-icon,
@@ -72,6 +125,9 @@
     &[data-season="pride"] {
         --mask: var(--icon-16-pride);
     }
+    &[data-season="summer"] {
+        --mask: var(--icon-16-summer);
+    }
     &[data-season="halloween"] {
         --mask: var(--icon-16-pumpkin);
     }
@@ -79,10 +135,10 @@
         --mask: var(--icon-16-fall);
     }
     &[data-season="fall"] {
-        --mask: var(--icon-16-fall);
+        --mask: var(--icon-16-snow);
     }
     &[data-season="christmas"] {
-        --mask: var(--icon-16-snow);
+        --mask: var(--icon-16-christmas);
     }
     &[data-season="new_years"] {
         --mask: var(--icon-16-new-years);

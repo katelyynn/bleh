@@ -604,8 +604,7 @@ export let settings_store: Record<string, setting_instance> = {
         default: true,
         type: 'checkbox',
         title: trans.font_serif,
-        bubble: true,
-        new_release: true
+        bubble: true
     },
     font_weight: {
         css: 'custom_font_weight',
@@ -1073,5 +1072,24 @@ export let settings_store: Record<string, setting_instance> = {
                 icon: 'edit'
             }
         }
+    },
+    hybrid_inbox: {
+        default: true,
+        type: 'checkbox',
+        title: trans.hybrid_inbox.name,
+        body: trans.hybrid_inbox.body,
+        require_reload: true,
+        new_release: true
+    },
+    skip_patching_lastfm_settings: {
+        default: false,
+        type: 'checkbox',
+        title: trans.skip_patching_lastfm_settings,
+        require_reload: 'partial'
+    },
+    hide_unused_settings: {
+        default: true,
+        type: 'checkbox',
+        title: trans.hide_unused_settings
     }
 };

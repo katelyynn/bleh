@@ -183,7 +183,6 @@ export function append_nav() {
                 </a>
                 <a class="btn masthead-nav-control icon" data-type="minis" href="${root}bleh/minis">
                     ${tl(trans.minis)}
-                    ${new_indicator()}
                 </a>
                 <span class="navlist-search" ref=${el => page.state.search = el} />
             </ul>
@@ -195,7 +194,10 @@ export function append_nav() {
     update_branding_type();
 
     if (update_required) {
-        home_link.onclick = prompt_for_update;
+        home_link.onclick = (e) => {
+            e.preventDefault();
+            prompt_for_update();
+        }
 
         home_link.appendChild(html.node`
             <span class="home-version">
@@ -487,81 +489,197 @@ export function append_nav() {
         links.appendChild(music);
     }
 
-    let notif_count = new_auth.querySelector(
-        '[data-analytics-label="notifications"] + .auth-avatar-notification-count-badge'
-    );
-    if (!notif_count) notif_count = '0';
-    else notif_count = notif_count.textContent;
-    let inbox_count = new_auth.querySelector(
-        '[data-analytics-label="inbox"] + .auth-avatar-notification-count-badge'
-    );
-    if (!inbox_count) inbox_count = '0';
-    else inbox_count = inbox_count.textContent;
+    const notif_count = Number(new_auth.querySelector('[data-analytics-label="notifications"] + .auth-avatar-notification-count-badge')?.textContent || '0');
+    const messages_count = Number(new_auth.querySelector('[data-analytics-label="inbox"] + .auth-avatar-notification-count-badge')?.textContent || '0');
 
-    const count = parseInt(notif_count) + parseInt(inbox_count);
+    const count = notif_count + messages_count;
 
-    const inbox = html.node`
-        <a class="btn masthead-nav-control icon chibi inbox-item" data-type="inbox" href="${root}inbox/notifications">
-            <div class="counter" data-count=${count}>${count}</div>
-        </a>
-    `;
+    if (settings.hybrid_inbox) {
+        const inbox = html.node`
+            <a class="btn masthead-nav-control icon chibi inbox-item" data-type="inbox" href="${root}inbox/notifications">
+                <div class="counter" data-count=${count}>${count}</div>
+            </a>
+        `;
 
-    tippy(inbox, {
-        theme: 'stack',
-        content: html.node`
-            <strong>${tl(trans.inbox)}</strong>
-            <div class="inbox-info">
-                <div class="inbox-info-item">
-                    ${icon({ name: icons.notifications, identifier: 'inbox-tooltip' })}
-                    ${notif_count}
+        tippy(inbox, {
+            theme: 'stack',
+            content: html.node`
+                <strong>${tl(trans.inbox)}</strong>
+                <div class="inbox-info">
+                    <div class="inbox-info-item">
+                        ${icon({ name: icons.notifications, identifier: 'inbox-tooltip' })}
+                        ${notif_count}
+                    </div>
+                    <div class="inbox-sep" />
+                    <div class="inbox-info-item">
+                        ${icon({ name: icons.messages, identifier: 'inbox-tooltip' })}
+                        ${messages_count}
+                    </div>
                 </div>
-                <div class="inbox-sep" />
-                <div class="inbox-info-item">
-                    ${icon({ name: icons.messages, identifier: 'inbox-tooltip' })}
-                    ${inbox_count}
+            `
+        });
+
+        inbox.addEventListener('click', (e) => {
+            const cmd = e.getModifierState('Control') || e.getModifierState('Meta');
+            const new_tab = e.button === 1 || cmd;
+
+            // only allow clicking link if new tab action
+            if (!new_tab) e.preventDefault();
+        });
+
+        tippy(inbox, {
+            content: html.node`
+                <div class="window-header">
+                    ${icon({ name: icons.inbox, identifier: 'window_header' })}
+                    <div class="window-title">${tl(trans.inbox)}</div>
                 </div>
-            </div>
-        `
-    });
+                ${setting({ id: 'inbox_view', func: render_inbox })}
+                <div class="window-content" />
+            `,
+            theme: 'nav-window',
+            placement: 'top',
+            interactive: true,
+            interactiveBorder: 10,
+            trigger: 'click',
+            appendTo: document.body,
 
-    inbox.addEventListener('click', (e) => {
-        const cmd = e.getModifierState('Control') || e.getModifierState('Meta');
-        const new_tab = e.button === 1 || cmd;
+            onShow(instance) {
+                page.state.inbox_content = instance.popper.querySelector('.window-content');
+                page.state.notifications_content = page.state.inbox_content;
+                page.state.messages_content = page.state.inbox_content;
 
-        // only allow clicking link if new tab action
-        if (!new_tab) e.preventDefault();
-    });
+                render_inbox();
+            }
+        });
 
-    tippy(inbox, {
-        content: html.node`
-            <div class="window-header">
-                ${icon({ name: icons.inbox, identifier: 'window_header' })}
-                <div class="window-title">${tl(trans.inbox)}</div>
-            </div>
-            ${setting({ id: 'inbox_view', func: render_inbox })}
-            <div class="window-content" />
-        `,
-        theme: 'nav-window',
-        placement: 'top',
-        interactive: true,
-        interactiveBorder: 10,
-        trigger: 'click',
-        appendTo: document.body,
+        links.appendChild(inbox);
 
-        onShow(instance) {
-            page.state.inbox_content = instance.popper.querySelector('.window-content');
+        queue_popup('inbox', inbox);
+    } else {
+        const notifications = html.node`
+            <a class="btn masthead-nav-control icon chibi inbox-item" data-type="notifications" href="${root}inbox/notifications">
+                <div class="counter" data-count=${notif_count}>${notif_count}</div>
+            </a>
+        `;
 
-            render_inbox();
-        }
-    });
+        notifications.addEventListener('click', (e) => {
+            const cmd = e.getModifierState('Control') || e.getModifierState('Meta');
+            const new_tab = e.button === 1 || cmd;
 
-    function render_notifications(notifications) {
-        if (settings.inbox_view != 'notifications') return;
+            // only allow clicking link if new tab action
+            if (!new_tab) e.preventDefault();
+        });
+
+        tippy(notifications, {
+            content: tl(trans.notifications)
+        });
+
+        tippy(notifications, {
+            content: html.node`
+                <div class="window-header">
+                    ${icon({ name: icons.notifications, identifier: 'window_header' })}
+                    <div class="window-title">${tl(trans.notifications)}</div>
+                </div>
+                <div class="window-content" />
+            `,
+            theme: 'nav-window',
+            placement: 'top',
+            interactive: true,
+            interactiveBorder: 10,
+            trigger: 'click',
+            appendTo: document.body,
+
+            onShow(instance) {
+                page.state.notifications_content = instance.popper.querySelector('.window-content');
+
+                render(
+                    page.state.notifications_content,
+                    html`
+                        <div class="mini-notifications content-loading">
+                            <div class="loading-data-container">
+                                <div class="loading-data-text">
+                                    ${tl(trans.loading)}
+                                </div>
+                            </div>
+                        </div>
+                    `
+                );
+
+                if (page.notifications.list) render_notifications(page.notifications.list, true);
+
+                fetch_notifications().then((notifications) => render_notifications(notifications, true));
+            }
+        });
+
+        links.appendChild(notifications);
+
+        //
+
+        const messages = html.node`
+            <a class="btn masthead-nav-control icon chibi inbox-item" data-type="messages" href="${root}inbox">
+                <div class="counter" data-count=${messages_count}>${messages_count}</div>
+            </a>
+        `;
+
+        messages.addEventListener('click', (e) => {
+            const cmd = e.getModifierState('Control') || e.getModifierState('Meta');
+            const new_tab = e.button === 1 || cmd;
+
+            // only allow clicking link if new tab action
+            if (!new_tab) e.preventDefault();
+        });
+
+        tippy(messages, {
+            content: tl(trans.messages)
+        });
+
+        tippy(messages, {
+            content: html.node`
+                <div class="window-header">
+                    ${icon({ name: icons.messages, identifier: 'window_header' })}
+                    <div class="window-title">${tl(trans.messages)}</div>
+                </div>
+                <div class="window-content" />
+            `,
+            theme: 'nav-window',
+            placement: 'top',
+            interactive: true,
+            interactiveBorder: 10,
+            trigger: 'click',
+            appendTo: document.body,
+
+            onShow(instance) {
+                page.state.messages_content = instance.popper.querySelector('.window-content');
+
+                render(
+                    page.state.messages_content,
+                    html`
+                        <div class="mini-notifications content-loading">
+                            <div class="loading-data-container">
+                                <div class="loading-data-text">
+                                    ${tl(trans.loading)}
+                                </div>
+                            </div>
+                        </div>
+                    `
+                );
+
+                if (page.messages.list) render_messages(page.messages.list, true);
+
+                fetch_messages().then((messages) => render_messages(messages, true));
+            }
+        });
+
+        links.appendChild(messages);
+    }
+
+    function render_notifications(notifications, bypass = false) {
+        if (settings.inbox_view != 'notifications' && !bypass) return;
 
         bleh_notification_list(notifications, true);
 
         render(
-            page.state.inbox_content,
+            page.state.notifications_content,
             html`
                 <div class="mini-notifications">
                     ${notifications}
@@ -573,13 +691,13 @@ export function append_nav() {
         );
     }
 
-    function render_messages(messages) {
-        if (settings.inbox_view != 'messages') return;
+    function render_messages(messages, bypass = false) {
+        if (settings.inbox_view != 'messages' && !bypass) return;
 
         bleh_message_list(messages, true);
 
         render(
-            page.state.inbox_content,
+            page.state.messages_content,
             html`
                 <div class="mini-notifications">
                     ${messages}
@@ -613,12 +731,9 @@ export function append_nav() {
         );
 
         if (view == 'notifications') {
-            if (page.notifications.list)
-                render_notifications(page.notifications.list);
+            if (page.notifications.list) render_notifications(page.notifications.list);
 
-            fetch_notifications().then((notifications) =>
-                render_notifications(notifications)
-            );
+            fetch_notifications().then((notifications) => render_notifications(notifications));
         } else {
             if (page.messages.list) render_messages(page.messages.list);
 
@@ -626,9 +741,6 @@ export function append_nav() {
         }
     }
 
-    links.appendChild(inbox);
-
-    queue_popup('inbox', inbox);
     queue_popup('search', search);
 
     // language
@@ -789,9 +901,10 @@ export function append_nav() {
             if (length < 2) length = 2;
 
             const show_language = settings.navigation_language == true ? 1 : 0;
+            const gap = 1;
 
             // user defined + themes + language + minis + settings
-            const height = (length + 3 + show_language) * 28;
+            const height = (length + 3 + show_language) * (28 + gap) - gap;
 
             // you cant change your theme when viewing
             // a listening report or on a page with theme settings
@@ -802,7 +915,7 @@ export function append_nav() {
 
             instance.setContent(html.node`
                 ${update_required == 'true' ? html.node`
-                <div class="update-available-banner">
+                <div class="update-available-banner" onclick=${() => { prompt_for_update(); }}>
                     <div class="update-container">
                         ${icon({ name: icons.update })}
                     </div>
@@ -911,7 +1024,7 @@ export function append_nav() {
                                 let count = 0;
 
                                 if (val == 'notifications') count = notif_count;
-                                else if (val == 'messages') count = inbox_count;
+                                else if (val == 'messages') count = messages_count;
 
                                 if (count) {
                                     render(elem, html`
@@ -1154,7 +1267,6 @@ export function append_nav() {
                             <div class="button-combo">
                                 <a class="dropdown-menu-clickable-item" data-type="mini" href="${root}bleh/minis" onclick=${() => { instance.hide() }}>
                                     ${tl(trans.minis)}
-                                    ${new_indicator()}
                                 </a>
                                 <div class="button-combo-sep" />
                                 ${() => {
@@ -1378,7 +1490,7 @@ export function append_nav() {
                                 let count = 0;
 
                                 if (val == 'notifications') count = notif_count;
-                                else if (val == 'messages') count = inbox_count;
+                                else if (val == 'messages') count = messages_count;
 
                                 if (count) {
                                     render(

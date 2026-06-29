@@ -5,7 +5,7 @@
 //
 
 import { html, render } from 'lighterhtml';
-import { other_setting_types, settings, settings_store } from '@/build/config';
+import { other_setting_types, setting_value, settings, settings_store } from '@/build/config';
 import { tl, trans } from '@/build/trans';
 import { notify } from '@/components/dialog/notify';
 import { auth, page } from '@/build/page';
@@ -32,7 +32,9 @@ interface setting {
     func?: Function,
     list?: [],
     center?: boolean,
-    in_menu?: boolean
+    in_menu?: boolean,
+    mouseenter?: () => void,
+    mouseleave?: () => void,
 }
 
 interface setting_element extends HTMLElement {
@@ -49,7 +51,9 @@ export function setting({
     func,
     list,
     center = true,
-    in_menu = false
+    in_menu = false,
+    mouseenter,
+    mouseleave,
 }: setting): setting_element {
     try {
         let value = settings[id];
@@ -204,13 +208,15 @@ export function setting({
                         ${text ? html.node`
                         <span class="menu-item-body">
                             <strong class="menu-item-head">${html_title}</strong>
-                            ${body ? html.node`<p class="menu-item-text">${body}</p>` : ''}
                         </span>
                         ` : ''}
                         ${setting_incompatible_block(settings_store[id].incompatible)}
                     </button>
                 ` as setting_element;
             }
+
+            if (mouseenter) elem.addEventListener('mouseenter', mouseenter);
+            if (mouseleave) elem.addEventListener('mouseleave', mouseleave);
 
             function update_toggle() {
                 if (elem.getAttribute('disabled') == 'true') {
@@ -226,6 +232,8 @@ export function setting({
 
                 save_setting(id, !val);
                 if (func) func(!val);
+
+                if (mouseenter) mouseenter();
             }
 
             elem.compat = () => {
@@ -316,6 +324,9 @@ export function setting({
                     </div>
                 </div>
             ` as setting_element;
+
+            if (mouseenter) elem.addEventListener('mouseenter', mouseenter);
+            if (mouseleave) elem.addEventListener('mouseleave', mouseleave);
 
             elem.compat = () => {
                 if (!incompatible_with) return;
@@ -459,6 +470,9 @@ export function setting({
                     </div>
                 </div>
             ` as setting_element;
+
+            if (mouseenter) container.addEventListener('mouseenter', mouseenter);
+            if (mouseleave) container.addEventListener('mouseleave', mouseleave);
 
             container.compat = () => {
                 container.setAttribute('disabled', 'false');
@@ -636,13 +650,15 @@ export function setting({
                         ${text ? html.node`
                         <span class="menu-item-body">
                             <strong class="menu-item-head">${html_title}</strong>
-                            ${body ? html.node`<p class="menu-item-text">${body}</p>` : ''}
                         </span>
                         ` : ''}
                         ${setting_incompatible_block(settings_store[id].incompatible)}
                     </button>
                 ` as setting_element;
             }
+
+            if (mouseenter) elem.addEventListener('mouseenter', mouseenter);
+            if (mouseleave) elem.addEventListener('mouseleave', mouseleave);
 
             function update_toggle() {
                 if (elem.getAttribute('disabled') == 'true') {
@@ -657,7 +673,9 @@ export function setting({
                 toggle.setAttribute('aria-checked', !val);
 
                 save_setting(id, !val);
-                if (func) func(val);
+                if (func) func(!val);
+
+                if (mouseenter) mouseenter();
             }
 
             elem.compat = () => {
@@ -1413,7 +1431,7 @@ function reset_text(id, input, submit, option, reset_btn, avatar) {
     });
 }
 
-export function save_setting(id: string, value: string | number | boolean | []) {
+export function save_setting(id: string, value: setting_value) {
     const store = settings_store[id] || {};
     const type = store.type || 'toggle';
 

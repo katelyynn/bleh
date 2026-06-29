@@ -32,8 +32,6 @@
 
     /* see .this-month */
     & > .see-more {
-        --bg-hov: oklch(var(--b4) / 40%) !important;
-        --bg-atv: oklch(var(--b4) / 60%) !important;
         --col: oklch(var(--c3));
         --mask-colour: oklch(var(--c3) / 80%);
     }
@@ -56,6 +54,7 @@
 
     .wiki-edit-small {
         --mask: var(--icon-16-edit-mini);
+        text-transform: lowercase;
     }
     .read-more {
         --mask: var(--icon-16-arrow-right);
@@ -311,14 +310,6 @@ pre {
     font-size: var(--font-size);
     line-height: var(--line-height);
     font-weight: var(--font-weight);
-}
-
-/* what even...............
-on followers/following pages, lastfm returns
-.no-data-message followed by a blank <p></p>,
-leading to a gap from their own css */
-.no-data-message + p:empty {
-    display: none;
 }
 
 

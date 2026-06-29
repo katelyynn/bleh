@@ -24,6 +24,7 @@ import { manage_user } from '@/components/profile/manage_user';
 import { queue_popup } from '@/components/dialog/popup';
 import { avatar } from '../shared/avatar';
 import { taste_artist } from './taste';
+import { beta_indicator, new_indicator } from '../shared/indicator';
 
 export function redesign_profile_header(is_own_profile, is_following) {
     if (!auth.name) return;
@@ -171,8 +172,7 @@ export function redesign_profile_header(is_own_profile, is_following) {
                 name: page.name,
                 type: 'minis',
                 link: `${root}bleh/minis`,
-                text: tl(trans.explore_minis),
-                new_release: true
+                text: tl(trans.explore_minis)
             });
         } else {
             create_profile_top_item(profile_header, {
@@ -263,7 +263,7 @@ export function redesign_profile_header(is_own_profile, is_following) {
         const other_avi = page.avatar.replace('/avatar300s/', '/avatar42s/');
         let taste_menu;
 
-        if (taste_artists.length > 1) {
+        if (taste_artists.length > 0) {
             taste_menu = html.node`
                 <div class="taste-menu-header colourful" data-taste=${taste}>
                     ${taste_formal} (${taste_percentage})
@@ -381,7 +381,7 @@ export function redesign_profile_header(is_own_profile, is_following) {
             `);
         }
 
-        if (taste_artists.length > 1) {
+        if (taste_artists.length > 0) {
             tippy(details_btn, {
                 theme: 'context-menu',
                 content: taste_menu,
@@ -422,9 +422,9 @@ export function create_profile_top_item(
                 onclick=${link}
             >
                 ${text || tl(trans[type])}
-                ${new_release ? html.node`<div class="new-badge">${tl(trans.new)}</div>` : ''}
+                ${new_release ? new_indicator() : ''}
                 ${updated ? html.node`<div class="new-badge">${tl(trans.updated)}</div>` : ''}
-                ${beta ? html.node`<div class="new-badge">${tl(trans.beta)}</div>` : ''}
+                ${beta ? beta_indicator() : ''}
             </button>
         `;
     } else {
@@ -435,9 +435,9 @@ export function create_profile_top_item(
                 href=${link}
             >
                 ${text || tl(trans[type])}
-                ${new_release ? html.node`<div class="new-badge">${tl(trans.new)}</div>` : ''}
+                ${new_release ? new_indicator() : ''}
                 ${updated ? html.node`<div class="new-badge">${tl(trans.updated)}</div>` : ''}
-                ${beta ? html.node`<div class="new-badge">${tl(trans.beta)}</div>` : ''}
+                ${beta ? beta_indicator() : ''}
             </a>
         `;
     }

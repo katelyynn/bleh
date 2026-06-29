@@ -12,10 +12,10 @@
     cursor: default;
     position: relative;
     --icon-size: 16px;
-    --icon-gap: 4px;
-    --left: 6px;
+    --icon-gap: 2px;
+    --left: 8px;
     --show-icon: block;
-    border-radius: var(--item-med-radius);
+    border-radius: var(--item-small-radius);
 
     width: fit-content;
 
@@ -94,8 +94,8 @@
     }
 }
 .alert-warning {
-    --hue-over: 25;
-    --sat-over: 1;
+    --hue-over: 50;
+    --sat-over: 1.5;
     --lit-over: 1;
 }
 .alert-danger,
@@ -269,4 +269,10 @@
             opacity: 0.9;
         }
     }
+}
+
+
+
+.loading-disabled {
+    order: -100;
 }

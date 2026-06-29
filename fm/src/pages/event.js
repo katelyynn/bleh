@@ -72,7 +72,7 @@ export function bleh_events() {
             </div>
             <div class="page-header-info">
                 <div class="sub-text">${tl(trans.event)}</div>
-                <h1 class="page-header-title">${page.name}</h1>
+                <h1 class="page-header-title generic-page-title">${page.name}</h1>
             </div>
         </section>
     `;

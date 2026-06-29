@@ -23,6 +23,15 @@
         --mask-colour: currentColor;
     }
 
+    &.beta {
+        background: unset;
+        padding: unset;
+        border-radius: unset;
+        color: oklch(var(--c3));
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
     &.new {
         --hue-over: 317;
         --sat-over: 1.44;

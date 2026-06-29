@@ -161,6 +161,11 @@
     }
 }
 
+.user-status-staff,
+.user-status-mod {
+    order: 1;
+}
+
 .header-new-on-tour {
     top: unset;
     text-align: unset;
@@ -184,15 +189,15 @@
 }
 .user-status-staff {
     --mask: var(--icon-staff);
-    --hue-over: 19;
+    --hue-over: 16;
     --sat-over: 2.68;
     --lit-over: 0.77;
 }
 .user-status-mod {
-    --mask: var(--icon-mod);
+    --mask: var(--icon-staff);
     --hue-over: 36;
-    --sat-over: 2.16;
-    --lit-over: 0.85;
+    --sat-over: 2.26;
+    --lit-over: 0.9;
 }
 .user-status-alum {
     --mask: var(--icon-alum);
@@ -253,10 +258,9 @@
     --lit-over: 0.93;
 }
 
-/* hides cancelled label on event pages */
 .label[itemprop="eventStatus"],
-/* hides empty label unless user page has override */ .user-status-None {
-    display: var(--override-none-status, none) !important;
+.user-status-None {
+    display: none !important;
 }
 
 .avatar-status-dot {
@@ -304,9 +308,9 @@
 }
 
 .shout-user-avatar .avatar-status-dot {
-    width: 18px;
-    height: 18px;
-    --mask-size: 18px;
+    width: 16px;
+    height: 16px;
+    --mask-size: 16px;
 }
 
 .obsession-details-intro-avatar-wrap .avatar-status-dot {
@@ -320,19 +324,6 @@
     width: 14px;
     height: 14px;
     --mask-size: 14px;
-    /* remove the heavy bottom shadow */
-    filter: drop-shadow(2px 0px 0 oklch(var(--b5)))
-        drop-shadow(0px 2px 0 oklch(var(--b5)))
-        drop-shadow(-2px -0px 0 oklch(var(--b5)))
-        drop-shadow(-0px -2px 0 oklch(var(--b5)));
-}
-
-.obsession-details-intro-avatar-wrap .avatar-status-dot {
-    /* remove the heavy bottom shadow */
-    filter: drop-shadow(2px 0px 0 oklch(var(--b5)))
-        drop-shadow(0px 2px 0 oklch(var(--b5)))
-        drop-shadow(-2px -0px 0 oklch(var(--b5)))
-        drop-shadow(-0px -2px 0 oklch(var(--b5)));
 }
 
 .shout-user-avatar:before,

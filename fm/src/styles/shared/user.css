@@ -243,7 +243,7 @@
         }
 
         --user-list-item-padding: var(--item-list-gap);
-        --user-list-item-radius: var(--item-big-radius);
+        --user-list-item-radius: var(--item-med-radius);
         --user-list-item-width: 100%;
 
         .user-list-name {
@@ -255,7 +255,7 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            height: 270px;
+            height: 280px;
             overflow: hidden;
 
             .user-background {
@@ -263,7 +263,7 @@
                 inset: 0;
                 display: block;
                 z-index: 0;
-                border-radius: var(--item-big-radius);
+                border-radius: var(--user-list-item-radius);
                 background-size: cover;
                 background-position: center;
 
@@ -271,7 +271,7 @@
                 mask-image: var(--mask);
                 -webkit-mask-image: var(--mask);
 
-                opacity: 0.2;
+                opacity: 0.1;
                 scale: 1.1;
 
                 transition-property: scale, opacity;
@@ -305,7 +305,7 @@
 
             &[data-is-followed="true"],
             &[data-position="1"] {
-                background-color: oklch(var(--h4) / 15%);
+                background-color: oklch(var(--h4) / 20%);
                 --follow-button-bg: oklch(var(--h3) / 10%);
                 --follow-button-bg-hov: oklch(var(--h3) / 20%);
                 --follow-button-bg-atv: oklch(var(--h3) / 30%);
@@ -318,7 +318,7 @@
                 text-align: center;
                 padding: calc(var(--w) + var(--g)) 0 0 0;
                 margin: unset;
-                --w: 72px;
+                --w: 80px;
                 --g: 10px;
                 z-index: 1;
                 gap: 4px;
@@ -425,6 +425,7 @@
 }
 
 .user-list-about-me {
+    color: inherit;
     overflow: hidden;
 }
 .user-list-about-me > .markdown-body {

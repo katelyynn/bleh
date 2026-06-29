@@ -214,7 +214,7 @@ export const trans = {
         },
         'user-status-mod': {
             name: {
-                en: 'Mod',
+                en: 'Moderator',
                 de: 'Moderator',
                 es: 'Moderador',
                 it: 'Moderatore',
@@ -1947,6 +1947,9 @@ export const trans = {
                 pl: 'Duma',
                 zh: '彩虹月',
             },
+            summer: {
+                en: 'Summer',
+            },
             halloween: {
                 en: 'Halloween',
                 de: 'Halloween',
@@ -2393,6 +2396,14 @@ export const trans = {
         ru: 'Чарты',
         zh: '榜单',
     },
+    charts_for: {
+        // date will be directly below this text
+        en: 'Charts for'
+    },
+    weekly_charts: {
+        // dates will be directly below this text
+        en: 'Weekly charts',
+    },
     view_the_charts: {
         en: 'View the charts',
         de: 'Charts ansehen',
@@ -2487,6 +2498,13 @@ export const trans = {
         ru: 'Настройка',
         pl: 'Instalacja',
         zh: '初始化',
+    },
+    welcome: {
+        // user = username
+        en: 'Hello {u}!',
+    },
+    bleh_setup_guide: {
+        en: 'It’s nice to see you here'
     },
     import: {
         en: 'Import',
@@ -2837,15 +2855,15 @@ export const trans = {
             zh: '开启毛玻璃特效',
         },
         body: {
-            en: 'Apply a see-through glassy material to many surfaces, which may degrade performance on some devices',
-            de: 'Fügt vielen Oberflächen ein durchsichtiges, glasartiges Material hinzu – kann die Leistung auf einigen Geräten beeinträchtigen',
-            es: 'Aplica un material vidrioso y translúcido a varias superficies, que puede reducir el rendimiento en algunos dispositivos',
-            it: 'Applica un materiale vetrato traslucido a molte superfici, che potrebbe degradare le prestazioni su alcuni dispositivi',
-            pt: 'Aplicar um material translúcido e vidrado a várias superfícies, o que pode reduzir o desempenho em alguns dispositivos',
-            sv: 'Läg till ett genomskinligt glasliknande material till många ytor, som kan degradera prestanda på vissa enheter',
-            ru: 'Применяет полупрозрачный стеклянный материал ко многим поверхностям, что может снизить производительность на некоторых устройствах',
-            pl: 'Włącz przezroczyste szkło na wielu powierzchniach, które może mieć wpływ na wydajność na niektórych urządzeniach',
-            zh: '为多个界面层级披上一层半透明玻璃质感。这能提升视觉深度，但在部分设备上可能会增加性能开销',
+            en: 'Apply a see-through glassy material to many surfaces',
+            de: 'Fügt vielen Oberflächen ein durchsichtiges, glasartiges Material hinzu',
+            es: 'Aplica un material vidrioso y translúcido a varias superficies',
+            it: 'Applica un materiale vetrato traslucido a molte superfici',
+            pt: 'Aplicar um material translúcido e vidrado a várias superfícies',
+            sv: 'Läg till ett genomskinligt glasliknande material till många ytor',
+            ru: 'Применяет полупрозрачный стеклянный материал ко многим поверхностям',
+            pl: 'Włącz przezroczyste szkło na wielu powierzchniach',
+            zh: '为多个界面层级披上一层半透明玻璃质感。这能提升视觉深度',
         },
     },
     seasonal_warning: {
@@ -3455,32 +3473,17 @@ export const trans = {
         pl: 'utwór',
     },
     lotus_cta: {
-        // {t} is replaced by one of the 3 above
         // capitalisation here refers to the lotus system, which corrects
         // titles that are capitalised wrongly eg. 'eSpReSsO' -> 'Espresso'
-
-        // DE: a gender-neutral mention of 'this artist' would be 'dieses Künstlers/dieser Künstlerin', which doesn't work with this formatting
-        // we can either move the words article to the upper string or only use the masculine form ('dieses Künstlers') ~Myrai
         true: {
-            en: 'This {t} is being re-capitalised, is it correct?',
-            de: 'Die Groß-/Kleinschreibung dieses {t} wird korrigiert, ist das korrekt?',
-            es: 'La capitalización de este {t} está siendo modificada, ¿es correcta?',
-            it: 'L’uso delle maiuscole per questo {t} sta venendo modificato, è corretto?',
-            pt: '{t} teve a capitalização ajustada, está correto?',
-            sv: 'Nuvarande {t} har ändrad kapitalisering, stämmer det här?',
-            ru: 'В этом {t} исправляется регистр, является ли он правильным?',
-            pl: '{t} został innaczej skapitalizowany, czy tak jest poprawnie?',
+            en: 'Actively correcting this title',
         },
         false: {
-            en: 'Is this {t} capitalised correctly?',
-            de: 'Ist die Groß-/Kleinschreibung dieses {t} richtig?',
-            es: '¿Está este {t} capitalizado correctamente?',
-            it: 'L’uso delle maiuscole per questo {t} è corretto?',
-            pt: 'Esse(a) {t} está capitalizado(a) corretamente?',
-            sv: 'Stämmer kapitaliseringen på {t}?',
-            ru: 'Правильно ли написан регистр этого {t}?',
-            pl: 'Czy {t} jest poprawnie skapitalizowany?',
+            en: 'Is this capitalised correctly?',
         },
+    },
+    alert_of_correction: {
+        en: 'This title is already being corrected to \'{t}\', are you sure you want to continue?',
     },
     current: {
         en: 'Current',
@@ -3735,6 +3738,9 @@ export const trans = {
         ru: 'Присоединиться к Discord',
         pt: 'Junte-se ao Discord',
         pl: 'Dołącz na Discord',
+    },
+    follow_user: {
+        en: 'Follow {u}',
     },
     sponsor_details: {
         en: 'Sponsor and badge details',
@@ -8679,6 +8685,9 @@ export const trans = {
         sv: 'Kolla efter uppdateringar',
         ru: 'Проверено на наличие обновлений',
     },
+    failed_to_check_for_updates: {
+        en: 'Checking for updates failed',
+    },
     select_all: {
         en: 'Select all',
         de: 'Alle auswählen',
@@ -11252,6 +11261,29 @@ export const trans = {
         // loading message
         en: 'Plotting your data',
     },
+    issues_updating: {
+        en: 'Having issues updating or need support in general?',
+    },
+    hybrid_inbox: {
+        name: {
+            en: 'Use a hybrid inbox',
+        },
+        body: {
+            en: 'Group your messages and notifications into a single counter',
+        },
+    },
+    skip_patching_lastfm_settings: {
+        en: 'Disable bleh visuals here',
+    },
+    you_have_disabled_bleh_visuals_for_settings: {
+        en: 'You have disabled bleh visuals for Last.fm settings, don\'t expect this to look pretty',
+    },
+    hide_unused_settings: {
+        en: 'Hide settings that have no effect',
+    },
+    edit_links: {
+        en: 'Edit links',
+    }
 } as const satisfies Record<string, any>;
 
 export const translation_fallback = 'NO_TRANSLATION_FOUND';

@@ -79,6 +79,12 @@
         background-repeat: repeat-x !important;
         background-position: 0 0 !important;
 
+        & > .tippy-content {
+            display: flex;
+            flex-direction: column;
+            gap: var(--menu-gap);
+        }
+
         &[data-theme="select-menu"] {
             max-height: 500px;
             overflow-x: hidden;
