@@ -626,6 +626,9 @@ export async function show_your_scrobbles() {
             <div class="metadata-group">
                 <div class="sub-text music-small-header">
                     ${tl(trans.find_on)}
+                    <a class="wiki-edit-small icon" href="${root}bleh/interface?setting=music_links">
+                        ${tl(trans.edit_links)}
+                    </a>
                 </div>
                 <div class="music-links" ref=${(el) => (link_container = el)} />
             </div>

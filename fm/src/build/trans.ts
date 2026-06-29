@@ -11281,6 +11281,9 @@ export const trans = {
     hide_unused_settings: {
         en: 'Hide settings that have no effect',
     },
+    edit_links: {
+        en: 'Edit links',
+    }
 } as const satisfies Record<string, any>;
 
 export const translation_fallback = 'NO_TRANSLATION_FOUND';

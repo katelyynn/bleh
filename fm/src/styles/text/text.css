@@ -54,6 +54,7 @@
 
     .wiki-edit-small {
         --mask: var(--icon-16-edit-mini);
+        text-transform: lowercase;
     }
     .read-more {
         --mask: var(--icon-16-arrow-right);
