@@ -32,10 +32,17 @@ interface flag_candidate_data {
 }
 
 export function flag_candidates(country: string, data: flag_candidate_data) {
+    let candidate = '';
+
     if (data['iso-3166-1-codes']) {
-        return data['iso-3166-1-codes'][0];
+        candidate = data['iso-3166-1-codes'][0];
     } else if (data['iso-3166-2-codes']) {
-        return data['iso-3166-2-codes'][0];
+        candidate = data['iso-3166-2-codes'][0];
+    }
+
+    // supports scotland, wales, northern ireland
+    if (candidate.startsWith('GB-')) {
+        return candidate;
     }
 
     return country;

@@ -467,7 +467,7 @@ body,
 
     --button-outline: inset 0 0 1px 0 oklch(var(--b2) / 80%);
 
-    --shout-tree: oklch(var(--b2) / 15%);
+    --shout-tree: oklch(var(--b2) / 20%);
 
     &[data-bleh--theme="darker"] {
         /* any additional highlights */
@@ -501,6 +501,8 @@ body,
 
         --card-border-base: oklch(var(--b3) / 0.5);
         --card-border-base-highlight: oklch(var(--b2) / 0.55);
+
+        --shout-tree: oklch(var(--b2) / 30%);
     }
     &[data-bleh--theme="oled"] {
         /* any additional highlights */
@@ -565,7 +567,7 @@ body,
 
         --button-outline: inset 0 0 1px 0 oklch(0.6 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue));
 
-        --shout-tree: oklch(var(--b2) / 35%);
+        --shout-tree: oklch(var(--b2) / 55%);
     }
     &[data-bleh--theme="light"] {
         /* any additional highlights */
@@ -650,7 +652,7 @@ body,
 
         --button-outline: inset 0 0 1px 0 oklch(var(--b2));
 
-        --shout-tree: oklch(var(--b2) / 25%);
+        --shout-tree: oklch(var(--b2) / 30%);
     }
     &[data-bleh--theme="ink"] {
         --b2: 0.7 calc(var(--sat) * 0.12 * var(--sat-bg, 1)) var(--hue);

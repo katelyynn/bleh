@@ -814,6 +814,10 @@ a.gallery-image-preferred-off {
     display: flex;
     height: 2px;
     border-radius: 20px;
+
+    background-color: oklch(var(--b2) / 60%);
+
+    animation: vote_bar_bg 2s var(--trans-function-ani);
 }
 
 .vote-bar-fill {
@@ -822,9 +826,35 @@ a.gallery-image-preferred-off {
     box-shadow: 0 0 10px 1px oklch(var(--h4) / 60%);
     height: 100%;
 
+    animation: vote_bar 2s var(--trans-function-ani);
+
     &:not(.primary-bar) {
-        background-color: oklch(var(--b2) / 60%);
+        background-color: transparent;
         box-shadow: unset;
+    }
+
+    transform-origin: left;
+
+    &.downvoted {
+        transform-origin: right;
+    }
+}
+
+@keyframes vote_bar_bg {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes vote_bar {
+    from {
+        transform: scaleX(0);
+    }
+    to {
+        transform: scaleX(1);
     }
 }
 
@@ -848,6 +878,8 @@ a.gallery-image-preferred-off {
     font-size: 12px;
     color: oklch(var(--l3-c));
     font-weight: var(--font-weight-medium);
+
+    animation: vote_bar_bg 2s var(--trans-function-ani);
 }
 
 

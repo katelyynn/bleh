@@ -571,6 +571,10 @@ export function append_nav() {
         });
 
         tippy(notifications, {
+            content: tl(trans.notifications)
+        });
+
+        tippy(notifications, {
             content: html.node`
                 <div class="window-header">
                     ${icon({ name: icons.notifications, identifier: 'window_header' })}
@@ -623,6 +627,10 @@ export function append_nav() {
 
             // only allow clicking link if new tab action
             if (!new_tab) e.preventDefault();
+        });
+
+        tippy(messages, {
+            content: tl(trans.messages)
         });
 
         tippy(messages, {
