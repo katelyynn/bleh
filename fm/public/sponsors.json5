@@ -1,5 +1,5 @@
 {
-    version: "2026.0629",
+    version: "2026.0630",
     related: {
         account_name: "kateshapedbox",
         link: "https://katelyn.moe/sponsor",
@@ -379,6 +379,7 @@
         "seventy7dy": {},
         "parapass": {},
         "mywayout": {},
-        "DoodleJumpFan": {}
+        "DoodleJumpFan": {},
+        "kohakudoori": {}
     }
 }
