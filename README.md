@@ -6,7 +6,7 @@ bleh is my passion project and a take on a full [Last.fm](https://last.fm) redes
 
 ## Support
 
-If you feel my work on this and my other Last.fm projects is worthy of donations, you are welcome to sponsor me on GitHub. This is, of course, optional, and bleh will forever be open-source and free. Sponsors get a sweet profile badge.
+If you feel my work on this and my other Last.fm projects is worthy of donations, you are welcome to sponsor me on GitHub. This is, of course, optional, and bleh will forever be open-source and free. Sponsors get a sweet profile badge and access to a wider range of profile customisation.
 
 ## Development
 
@@ -20,9 +20,17 @@ Script files can be found in `src`. To combine all the separate files into a loa
 
 Please see [the wiki entry for more details](https://github.com/katelyynn/bleh/wiki/Translations)
 
-## Licenses
+## Connecting
 
-This project includes the 'Overpass' font as woff2 files which is licensed under the SIL Open Font License 1.1. See fonts/LICENSE for details.
+bleh accesses multiple community repositories for storing capitalisations and MusicBrainz ids, see the following:
+- [lotus](https://github.com/katelyynn/lotus)
+- [oracle](https://github.com/katelyynn/oracle)
+
+If you choose to connect your account with the Last.fm API, bleh makes a request to my server (this is needed due to API secrets):
+- [jufufu](https://github.com/katelyynn/jufufu)
+
+bleh is built using a core package I created:
+- [florence](https://github.com/katelyynn/florence)
 
 ---
 
