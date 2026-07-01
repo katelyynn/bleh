@@ -18,7 +18,7 @@ import {
     set_storage
 } from '@/build/tools';
 import { lang, tl, trans } from '@/build/trans';
-import { load_chart_colours, prep_chart_colours } from '@/components/music/chart.js';
+import { load_chart_colours, prep_chart_colours } from '@/components/music/chart';
 import { create_badge, load_badges } from '@/components/shared/badge';
 import { dialog } from '@/components/dialog/dialog';
 import {

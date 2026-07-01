@@ -474,6 +474,9 @@ function load_page(main_content = null) {
         page.type = 'bleh_settings';
         bleh_home();
         bleh_settings();
+    } else if (is_url(urls.explore_charts) || is_url(urls.geo_charts)) {
+        page.type = 'charts';
+        bleh_home();
     } else {
         bleh_error();
 

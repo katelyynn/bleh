@@ -18,7 +18,7 @@ import { log } from '@/build/log.js';
 import { save_profile_cache } from '@/pages/profile/profile';
 import { toggle } from '@/components/settings/toggle';
 import { save_setting } from '@/components/settings/settings';
-import { load_chart_colours } from '@/components/music/chart.js';
+import { load_chart_colours } from '@/components/music/chart';
 import { sponsor_list } from '@/build/sponsor';
 import { fetch_status } from '@/components/profile/statuscafe';
 import tippy from 'tippy.js';

@@ -180,6 +180,7 @@ export function append_nav() {
             <ul class="navlist-items">
                 <a class="btn masthead-nav-control icon" data-type="charts" href="${root}charts">
                     ${tl(trans.charts)}
+                    ${ff('aihara') ? new_indicator() : ''}
                 </a>
                 <a class="btn masthead-nav-control icon" data-type="minis" href="${root}bleh/minis">
                     ${tl(trans.minis)}

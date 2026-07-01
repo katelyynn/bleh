@@ -5,7 +5,7 @@
 //
 
 import { settings } from '@/build/config';
-import { page } from '@/build/page';
+import { page, root } from '@/build/page';
 import { tl, trans } from '@/build/trans';
 import { correct_artist, correct_item_by_artist } from '@/components/music/lotus';
 import { html, render } from 'lighterhtml';
@@ -13,14 +13,62 @@ import tippy from 'tippy.js';
 import { DateTime } from 'luxon';
 import { setting } from '@/components/settings/settings';
 import { bind_link_block } from '@/components/shared/link_block';
+import { ff } from '@/components/settings/sku';
+import { new_indicator } from '@/components/shared/indicator';
 
 export function bleh_charts() {
+    if (page.type == 'explore_charts') {
+        bleh_explore_charts();
+    } else if (page.type == 'geo_charts') {
+        bleh_geo_charts();
+    }
+
     let charts = page.structure.main.querySelector('.charts');
 
-    const daily_tab = page.structure.container.querySelector('.secondary-nav-item--overview');
-    if (daily_tab) {
-        daily_tab.classList.remove('secondary-nav-item--overview');
-        daily_tab.classList.add('secondary-nav-item--daily');
+    if (ff('aihara')) {
+        const new_nav = html.node`
+            <div class="toolbar">
+                <nav class="navlist secondary-nav navlist--more redesigned-navigation">
+                    <ul class="navlist-items">
+                        <li class="navlist-item secondary-nav-item secondary-nav-item--daily">
+                            <a href="${root}charts" class="secondary-nav-item-link ${page.subpage == 'overview' ? 'secondary-nav-item-link--active' : ''}">
+                                ${tl(trans.daily)}
+                            </a>
+                        </li>
+                        <li class="navlist-item secondary-nav-item secondary-nav-item--weekly">
+                            <a href="${root}charts/weekly" class="secondary-nav-item-link ${page.subpage == 'weekly' ? 'secondary-nav-item-link--active' : ''}">
+                                ${tl(trans.weekly)}
+                            </a>
+                        </li>
+                        <li class="navlist-item secondary-nav-item secondary-nav-item--explore">
+                            <a href="${root}charts/explore" class="secondary-nav-item-link ${page.type == 'explore_charts' ? 'secondary-nav-item-link--active' : ''}">
+                                ${tl(trans.explore)}
+                                ${new_indicator()}
+                            </a>
+                        </li>
+                        <li class="navlist-item secondary-nav-item secondary-nav-item--geo">
+                            <a href="${root}charts/geo" class="secondary-nav-item-link ${page.type == 'geo_charts' ? 'secondary-nav-item-link--active' : ''}">
+                                ${tl(trans.country)}
+                                ${new_indicator()}
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        `;
+
+        if (page.structure.toolbar) {
+            page.structure.toolbar.remove();
+            page.structure.toolbar = new_nav;
+        }
+
+        page.structure.row.insertBefore(new_nav, page.structure.content);
+    } else {
+        const daily_tab = page.structure.container.querySelector('.secondary-nav-item--overview');
+        if (daily_tab) {
+            daily_tab.classList.remove('secondary-nav-item--overview');
+            daily_tab.classList.add('secondary-nav-item--daily');
+        }
     }
 
     if (page.subpage == 'weekly') {
@@ -226,4 +274,12 @@ export function bleh_charts() {
         new_panel,
         page.structure.main.firstElementChild
     );
+}
+
+function bleh_explore_charts() {
+    page.structure.main.appendChild(html.node`explore`);
+}
+
+function bleh_geo_charts() {
+    page.structure.main.appendChild(html.node`geo`);
 }

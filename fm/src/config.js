@@ -13,7 +13,7 @@ import {
 import { log } from "@/build/log";
 import { page, reload_pending } from "@/build/page";
 import { tl, trans } from "@/build/trans.ts";
-import { load_chart_colours } from "@/components/music/chart.js";
+import { load_chart_colours } from "@/components/music/chart";
 import { notify } from "@/components/dialog/notify";
 import { load_skus } from "@/pages/bleh_settings/bleh_settings.js";
 import { compile_settings, save_setting } from "@/components/settings/settings";

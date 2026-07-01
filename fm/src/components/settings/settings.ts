@@ -19,7 +19,7 @@ import { version } from '@/main';
 import { select } from '@/components/settings/select';
 import { input } from '@/components/settings/input';
 import { status } from '@/components/dialog/status';
-import { chart_reflow } from '@/components/music/chart.js';
+import { chart_reflow } from '@/components/music/chart';
 import { set_storage } from '@/build/tools';
 import { ff } from './sku';
 import { new_indicator } from '../shared/indicator';

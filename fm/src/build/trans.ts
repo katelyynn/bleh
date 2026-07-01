@@ -11283,7 +11283,16 @@ export const trans = {
     },
     edit_links: {
         en: 'Edit links',
-    }
+    },
+    daily: {
+        en: 'Daily',
+    },
+    weekly: {
+        en: 'Weekly',
+    },
+    explore: {
+        en: 'Explore',
+    },
 } as const satisfies Record<string, any>;
 
 export const translation_fallback = 'NO_TRANSLATION_FOUND';

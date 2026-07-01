@@ -273,7 +273,9 @@ export const urls = {
     api: 'bleh/api',
     minis: 'bleh/minis',
     mualani: 'bleh/mualani',
-    now: 'bleh/now'
+    now: 'bleh/now',
+    explore_charts: 'charts/explore',
+    geo_charts: 'charts/geo',
 }
 
 // WARN: please provide your own if hosting a fork

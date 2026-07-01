@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    https://last.fm/
-// @version      2026.0629
+// @version      2026.0701
 // @description  bleh!!! ^-^
 // @author       katelyn
 // @match        https://www.last.fm/*
@@ -22092,7 +22092,9 @@
     api: "bleh/api",
     minis: "bleh/minis",
     mualani: "bleh/mualani",
-    now: "bleh/now"
+    now: "bleh/now",
+    explore_charts: "charts/explore",
+    geo_charts: "charts/geo"
   };
   var api_key = "85c118b69b1437844fe75fcd2bf27261";
   var discord = "xU9KxGQpVw";
@@ -40191,6 +40193,7 @@
                 </div>
             `;
         page.structure.row.insertBefore(toolbar, page.structure.content);
+        page.structure.toolbar = toolbar;
       } else {
         page.structure.row.insertBefore(nav, page.structure.content);
       }
@@ -72935,6 +72938,7 @@
             <ul class="navlist-items">
                 <a class="btn masthead-nav-control icon" data-type="charts" href="${root}charts">
                     ${tl2(trans.charts)}
+                    ${ff("aihara") ? new_indicator() : ""}
                 </a>
                 <a class="btn masthead-nav-control icon" data-type="minis" href="${root}bleh/minis">
                     ${tl2(trans.minis)}
@@ -78744,13 +78748,56 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     });
   }
 
-  // src/pages/home/chart.js
+  // src/pages/home/chart.ts
   function bleh_charts() {
+    if (page.type == "explore_charts") {
+      bleh_explore_charts();
+    } else if (page.type == "geo_charts") {
+      bleh_geo_charts();
+    }
     let charts = page.structure.main.querySelector(".charts");
-    const daily_tab = page.structure.container.querySelector(".secondary-nav-item--overview");
-    if (daily_tab) {
-      daily_tab.classList.remove("secondary-nav-item--overview");
-      daily_tab.classList.add("secondary-nav-item--daily");
+    if (ff("aihara")) {
+      const new_nav = html.node`
+            <div class="toolbar">
+                <nav class="navlist secondary-nav navlist--more redesigned-navigation">
+                    <ul class="navlist-items">
+                        <li class="navlist-item secondary-nav-item secondary-nav-item--daily">
+                            <a href="${root}charts" class="secondary-nav-item-link ${page.subpage == "overview" ? "secondary-nav-item-link--active" : ""}">
+                                ${tl2(trans.daily)}
+                            </a>
+                        </li>
+                        <li class="navlist-item secondary-nav-item secondary-nav-item--weekly">
+                            <a href="${root}charts/weekly" class="secondary-nav-item-link ${page.subpage == "weekly" ? "secondary-nav-item-link--active" : ""}">
+                                ${tl2(trans.weekly)}
+                            </a>
+                        </li>
+                        <li class="navlist-item secondary-nav-item secondary-nav-item--explore">
+                            <a href="${root}charts/explore" class="secondary-nav-item-link ${page.type == "explore_charts" ? "secondary-nav-item-link--active" : ""}">
+                                ${tl2(trans.explore)}
+                                ${new_indicator()}
+                            </a>
+                        </li>
+                        <li class="navlist-item secondary-nav-item secondary-nav-item--geo">
+                            <a href="${root}charts/geo" class="secondary-nav-item-link ${page.type == "geo_charts" ? "secondary-nav-item-link--active" : ""}">
+                                ${tl2(trans.country)}
+                                ${new_indicator()}
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        `;
+      if (page.structure.toolbar) {
+        page.structure.toolbar.remove();
+        page.structure.toolbar = new_nav;
+      }
+      page.structure.row.insertBefore(new_nav, page.structure.content);
+    } else {
+      const daily_tab = page.structure.container.querySelector(".secondary-nav-item--overview");
+      if (daily_tab) {
+        daily_tab.classList.remove("secondary-nav-item--overview");
+        daily_tab.classList.add("secondary-nav-item--daily");
+      }
     }
     if (page.subpage == "weekly") {
       const head = charts.querySelector(":scope > h3");
@@ -78927,6 +78974,12 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       new_panel,
       page.structure.main.firstElementChild
     );
+  }
+  function bleh_explore_charts() {
+    page.structure.main.appendChild(html.node`explore`);
+  }
+  function bleh_geo_charts() {
+    page.structure.main.appendChild(html.node`geo`);
   }
 
   // src/components/dialog/auto_edit.js
@@ -81239,6 +81292,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
                     <li class="navlist-item secondary-nav-item secondary-nav-item--charts">
                         <a href="${root}charts" class="secondary-nav-item-link ${page.type == "charts" ? "secondary-nav-item-link--active" : ""}">
                             ${tl2(trans.charts)}
+                            ${ff("aihara") ? new_indicator() : ""}
                         </a>
                     </li>
                     ${ff("minis") ? html.node`
@@ -81289,10 +81343,17 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     page.structure.nav = nav;
     welcome.after(nav);
     checkup_nav();
-    if (page.type == "charts")
+    if (page.type == "charts") {
+      if (is_url(urls.explore_charts)) {
+        page.type = "explore_charts";
+      } else if (is_url(urls.geo_charts)) {
+        page.type = "geo_charts";
+      }
       bleh_charts();
+      return;
+    }
     if (page.type == "settings")
-      bleh_native_settings();
+      return bleh_native_settings();
     if (page.subpage == "music") {
       let music_sections = document.body.querySelectorAll(".music-section");
       music_sections.forEach((music_section) => {
@@ -83673,6 +83734,9 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
       page.type = "bleh_settings";
       bleh_home();
       bleh_settings();
+    } else if (is_url(urls.explore_charts) || is_url(urls.geo_charts)) {
+      page.type = "charts";
+      bleh_home();
     } else {
       bleh_error();
       if (page.state.error) {
@@ -95354,6 +95418,15 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     },
     edit_links: {
       en: "Edit links"
+    },
+    daily: {
+      en: "Daily"
+    },
+    weekly: {
+      en: "Weekly"
+    },
+    explore: {
+      en: "Explore"
     }
   };
   var translation_fallback = "NO_TRANSLATION_FOUND";
@@ -96561,7 +96634,7 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
   // src/build/build.json
   var build_default = {
     brand: "bleh",
-    build: "2026.0629",
+    build: "2026.0701",
     sku: "aihara",
     bio: "bleh!!! ^-^",
     author: "katelyn",
@@ -96961,9 +97034,14 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
         name: "Latest June idea board",
         date: "2026-06-05",
         notice: "This is an attempt at bringing bleh closer to Last.fm's layout, in terms of a less floating page in the middle and more of a wide content style (no borders). THIS IS NOT FINAL!!! feedback is welcome"
+      },
+      aihara: {
+        default: false,
+        name: "Utilise Last.fm API to create new charts",
+        date: "2026-07-01"
       }
     },
-    built_on: "2026-07-01T01:19:08.986Z"
+    built_on: "2026-07-01T03:07:39.567Z"
   };
 
   // node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
