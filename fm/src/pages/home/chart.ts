@@ -5,8 +5,8 @@
 //
 
 import { settings } from '@/build/config';
-import { page, root } from '@/build/page';
-import { tl, trans } from '@/build/trans';
+import { api_key, page, root } from '@/build/page';
+import { lang, tl, trans } from '@/build/trans';
 import { correct_artist, correct_item_by_artist } from '@/components/music/lotus';
 import { html, render } from 'lighterhtml';
 import tippy from 'tippy.js';
@@ -18,6 +18,9 @@ import { beta_indicator, new_indicator } from '@/components/shared/indicator';
 import { select } from '@/components/settings/select';
 import { flag } from '@/components/shared/flag';
 import { header_colour } from '@/components/page/colour';
+import { chart_top_tracks, chart_track } from '@/types/chart';
+import { error } from '@/types/api';
+import { romanise } from '@/build/tools';
 
 export function bleh_charts() {
     if (page.type == 'explore_charts') {
@@ -287,6 +290,8 @@ function bleh_explore_charts() {
         <section class="explore-charts" />
     `;
 
+    let content;
+
     new_panel.appendChild(html.node`
         <div class="charts-header top-header">
             <div class="left">
@@ -301,9 +306,71 @@ function bleh_explore_charts() {
             </div>
             <div class="charts-header-bg" />
         </div>
+        <div class="charts-content charts-row" ref=${el => content = el} />
     `);
 
     page.structure.main.appendChild(new_panel);
+
+    const url = `http://ws.audioscrobbler.com/2.0/?method=chart.gettoptracks&api_key=${api_key}&format=json&limit=100`;
+
+    render(content, html`
+        <div class="loading-data-container">
+            <div class="loading-data-text">${tl(trans.gathering_plays)}</div>
+        </div>
+    `);
+
+    fetch(url)
+        .then(response => response.json())
+        .then((data: chart_top_tracks | error) => {
+            if ((data as error).error) {
+                data = data as error;
+
+                render(content, html`
+                    <div class="loading-data-container">
+                        <div class="alert alert-error">
+                            ${data.message}
+                        </div>
+                    </div>
+                `);
+                return;
+            }
+
+            data = data as chart_top_tracks;
+
+            render(content, html`
+                <table class="weeklychart">
+                    <thead>
+                        <tr>
+                            <th />
+                            <th class="weeklychart-image-header" />
+                            <th>${tl(trans.listeners)}</th>
+                            <th>${tl(trans.scrobbles)}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${data.tracks.track.map((track, index) => chart_item(track, index))}
+                    </tbody>
+                </table>
+            `);
+        });
+
+    function chart_item(track: chart_track, index: number) {
+        return html.node`
+            <tr class="weeklychart-item">
+                <td class="weeklychart-rank weeklychart-rank-bigger">${index + 1}</td>
+                <td class="weeklychart-track-info">
+                    <div class="weeklychart-track-name">
+                        <a href=${track.url}>${romanise(correct_item_by_artist(track.name, track.artist.name))}</a>
+                    </div>
+                    <div class="weeklychart-track-artist">
+                        <a href=${track.artist.url}>${romanise(correct_artist(track.artist.name))}</a>
+                    </div>
+                </td>
+                <td class="weeklychart-listeners">${Number(track.listeners).toLocaleString(lang)}</td>
+                <td class="weeklychart-scrobblers">${Number(track.playcount).toLocaleString(lang)}</td>
+            </tr>
+        `;
+    }
 }
 
 function bleh_geo_charts() {

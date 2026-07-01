@@ -307,6 +307,7 @@
 [data-type="plot"] {
     --mask: var(--icon-16-plot);
 }
+.secondary-nav-item--geo,
 [data-type="atlas"] {
     --mask: var(--icon-16-world);
 }
@@ -405,6 +406,7 @@
 [data-type="tag"] {
     --mask: var(--icon-16-tag);
 }
+.secondary-nav-item--explore,
 [data-menu-item="search"],
 [data-type="search"] {
     --mask: var(--icon-16-search);

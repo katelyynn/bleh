@@ -1345,16 +1345,11 @@ export function change_settings_page(page_id, setting = null) {
                 <div class="bleh--panel">
                     <div class="loading-data-container">
                         <div class="loading-data-text failed">
-                            ${tl(trans.value_failed_to_load).replace(
-                '{v}',
-                tl(trans.settings)
-            )}
+                            ${tl(trans.value_failed_to_load, { v: tl(trans.settings) })}
                         </div>
                         <pre class="error-info colourful">
-${e
-                    ? html.node`<span class="error-type">${e.name}</span>: ${e.message}`
-                    : ''}</pre
-                        >
+                            ${e ? html.node`<span class="error-type">${e.name}</span>: ${e.message}` : ''}
+                        </pre>
                     </div>
                 </div>
             `

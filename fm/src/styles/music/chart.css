@@ -26,6 +26,7 @@
             line-height: var(--line-height);
             color: oklch(var(--c3));
             font-family: var(--font);
+            font-weight: var(--font-weight);
             padding: unset;
             text-transform: unset;
             cursor: default;
@@ -80,7 +81,8 @@
     }
 
     .weeklychart-rank {
-        width: 24px;
+        min-width: 24px;
+        color: oklch(var(--c2) / 80%);
     }
 
     .weeklychart-image {
@@ -296,6 +298,22 @@
     }
 }
 
+.weeklychart-track-info {
+    width: 100%;
+}
+
+.weeklychart-track-artist {
+    color: oklch(var(--c2) / 80%);
+}
+
+.weeklychart-track-name,
+.weeklychart-track-artist {
+    & > a {
+        color: inherit;
+        font-weight: var(--font-weight);
+    }
+}
+
 .charts-header {
     position: relative;
 
@@ -313,6 +331,7 @@
 
     background: radial-gradient(at center top, oklch(var(--k4)), transparent 60%);
     animation: chart_bg 8s var(--trans-function-ani) infinite;
+    pointer-events: none;
 }
 .charts-header-svg {
     position: absolute;
