@@ -9,6 +9,8 @@ import { settings, settings_store } from "@/build/config";
 import { match } from "@/components/settings/dynamic_theming";
 import { dialog } from "@/components/dialog/dialog";
 import { display_colour_presets } from "@/components/settings/swatch";
+import { header_colour } from "@/components/page/colour";
+import { avatar } from "@/components/shared/avatar";
 
 export function visual() {
     if (
@@ -231,39 +233,21 @@ export function visual() {
         <section class="bleh--panel">
             <h4>${tl(trans.artwork)}</h4>
             <div class="inner-preview pad">
-                <div class="palette albums" style="height: fit-content">
-                    <div
-                        class="album-cover swatch"
-                        style="background-image: url('https://lastfm.freetls.fastly.net/i/u/770x0/1569198c4cf0a3b2ff8728975e8359fa.jpg')"
-                    ></div>
-                    <div
-                        class="album-cover swatch"
-                        style="background-image: url('https://lastfm.freetls.fastly.net/i/u/770x0/b897255bf422baa93a42536af293f9f8.jpg')"
-                    ></div>
-                    <div
-                        class="album-cover swatch"
-                        style="background-image: url('https://lastfm.freetls.fastly.net/i/u/770x0/def68d94aae8e52ef2d1c0c9d3e16ff4.jpg')"
-                    ></div>
-                    <div
-                        class="album-cover swatch"
-                        style="background-image: url('https://lastfm.freetls.fastly.net/i/u/770x0/510546e3b6df7504392274c528c77780.jpg')"
-                    ></div>
-                    <div
-                        class="album-cover swatch"
-                        style="background-image: url('https://lastfm.freetls.fastly.net/i/u/770x0/49cc807f69d59746b6b04be3434e6637.jpg')"
-                    ></div>
-                    <div
-                        class="album-cover swatch"
-                        style="background-image: url('https://lastfm.freetls.fastly.net/i/u/770x0/dd76702cea38c838a3090dd9496d92d9.jpg')"
-                    ></div>
+                <div class="album-cover-examples">
+                    ${album_cover_example('https://lastfm.freetls.fastly.net/i/u/ar0/b9436242d32247cbce3d403581284cd3.jpg')}
+                    ${album_cover_example('https://lastfm.freetls.fastly.net/i/u/ar0/6180e2f14ff339d02aab62895e258cc1.jpg')}
+                    ${album_cover_example('https://lastfm.freetls.fastly.net/i/u/ar0/0ee08bda639c3df913e1a4a37508a841.jpg')}
+                    ${album_cover_example('https://lastfm.freetls.fastly.net/i/u/ar0/94bc3ddb27c99cbdbe4779614e50c426.jpg')}
+                    ${album_cover_example('https://lastfm.freetls.fastly.net/i/u/ar0/b00527c6ae0cd1d4c9bf3706b130ad56.jpg')}
+                    ${album_cover_example('https://lastfm.freetls.fastly.net/i/u/ar0/703293187fdb99b70e9cdb30cb4b2420.jpg')}
                 </div>
             </div>
             <div class="setting-group">
-                ${setting({ id: 'show_disc_image' })}
                 ${setting({ id: 'grid_glow' })}
                 ${setting({ id: 'gloss' })}
             </div>
             <div class="setting-group">
+                ${setting({ id: 'show_disc_image' })}
                 ${setting({ id: 'avatar_radius' })}
             </div>
         </section>
@@ -295,4 +279,22 @@ export function visual() {
             </div>
         `);
     }
+}
+
+function album_cover_example(url) {
+    url = avatar(url, '300x300');
+
+    const elem = html.node`
+        <div class="album-cover-example colourful">
+            <div class="cover-art album-cover-example-art">
+                <img src=${url} />
+            </div>
+        </div>
+    `;
+
+    const colour = header_colour(html.node`
+        <img src=${url} />
+    `, false, [ elem ]);
+
+    return elem;
 }
