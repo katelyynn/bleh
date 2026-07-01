@@ -277,9 +277,15 @@ export function bleh_charts() {
 }
 
 function bleh_explore_charts() {
+    page.structure.row.removeChild(page.structure.row.firstElementChild);
+    page.structure.row.removeChild(page.structure.row.firstElementChild);
+
     page.structure.main.appendChild(html.node`explore`);
 }
 
 function bleh_geo_charts() {
+    page.structure.row.removeChild(page.structure.row.firstElementChild);
+    page.structure.row.removeChild(page.structure.row.firstElementChild);
+
     page.structure.main.appendChild(html.node`geo`);
 }

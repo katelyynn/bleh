@@ -78976,9 +78976,13 @@ ${e4 ? html.node`<span class="error-type">${e4.name}</span>: ${e4.message}` : ""
     );
   }
   function bleh_explore_charts() {
+    page.structure.row.removeChild(page.structure.row.firstElementChild);
+    page.structure.row.removeChild(page.structure.row.firstElementChild);
     page.structure.main.appendChild(html.node`explore`);
   }
   function bleh_geo_charts() {
+    page.structure.row.removeChild(page.structure.row.firstElementChild);
+    page.structure.row.removeChild(page.structure.row.firstElementChild);
     page.structure.main.appendChild(html.node`geo`);
   }
 
