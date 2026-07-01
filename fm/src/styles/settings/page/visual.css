@@ -329,6 +329,7 @@
 .font-preview {
     font-size: 24px !important;
     line-height: 30px !important;
+    text-align: center;
 
     &[data-serif="true"] {
         font-family: var(--font-head);
