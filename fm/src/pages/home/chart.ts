@@ -14,7 +14,10 @@ import { DateTime } from 'luxon';
 import { setting } from '@/components/settings/settings';
 import { bind_link_block } from '@/components/shared/link_block';
 import { ff } from '@/components/settings/sku';
-import { new_indicator } from '@/components/shared/indicator';
+import { beta_indicator, new_indicator } from '@/components/shared/indicator';
+import { select } from '@/components/settings/select';
+import { flag } from '@/components/shared/flag';
+import { header_colour } from '@/components/page/colour';
 
 export function bleh_charts() {
     if (page.type == 'explore_charts') {
@@ -280,12 +283,116 @@ function bleh_explore_charts() {
     page.structure.row.removeChild(page.structure.row.firstElementChild);
     page.structure.row.removeChild(page.structure.row.firstElementChild);
 
-    page.structure.main.appendChild(html.node`explore`);
+    const new_panel = html.node`
+        <section class="explore-charts" />
+    `;
+
+    new_panel.appendChild(html.node`
+        <div class="charts-header top-header">
+            <div class="left">
+
+            </div>
+            <div class="middle">
+                <div class="sub-text">${tl(trans.charts_for)}</div>
+                <h2 class="chart-heading">${{html: tl(trans.hot_100, { b: '<i>bleh</i>' })}}${beta_indicator()}</h2>
+            </div>
+            <div class="right">
+
+            </div>
+            <div class="charts-header-bg" />
+        </div>
+    `);
+
+    page.structure.main.appendChild(new_panel);
 }
 
 function bleh_geo_charts() {
     page.structure.row.removeChild(page.structure.row.firstElementChild);
     page.structure.row.removeChild(page.structure.row.firstElementChild);
 
-    page.structure.main.appendChild(html.node`geo`);
+    const new_panel = html.node`
+        <section class="explore-charts" />
+    `;
+
+    const geos = [
+        {
+            value: 'Brazil',
+            text: 'Brazil',
+            flag: 'BR',
+        },
+        {
+            value: 'United Kingdom',
+            text: 'United Kingdom',
+            flag: 'GB',
+        },
+        {
+            value: 'Germany',
+            text: 'Germany',
+            flag: 'DE',
+        },
+        {
+            value: 'France',
+            text: 'France',
+            flag: 'FR',
+        },
+        {
+            value: 'Cape Verde',
+            text: 'Cape Verde',
+            flag: 'CV',
+        },
+        {
+            value: 'Palestine',
+            text: 'Palestine',
+            flag: 'PS',
+        }
+    ];
+
+    let content;
+    let selector;
+    let bg;
+
+    new_panel.appendChild(html.node`
+        <div class="charts-header top-header colourful" ref=${el => bg = el}>
+            <div class="left">
+
+            </div>
+            <div class="middle">
+                <div class="sub-text">${tl(trans.charts_for)}</div>
+                <h2 class="chart-heading chart-heading-geo">
+                    ${selector = select({
+                        values: geos,
+                        func: render_geo,
+                        title_func: (val) => html.node`
+                            <span class="language-header-chart chart-heading">
+                                ${flag(val.flag, 'geo-chart-flag')}
+                                <p>${val.text}</p>
+                            </span>
+                        `,
+                        hide: true
+                    })}
+                </h2>
+            </div>
+            <div class="right">
+
+            </div>
+            <div class="charts-header-bg" />
+        </div>
+        <div class="charts-content" ref=${el => content = el} />
+    `);
+
+    function render_geo(val: string) {
+        const flag_code = geos.find(g => g.value == val).flag;
+
+        header_colour(html.node`
+            <img src="https://purecatamphetamine.github.io/country-flag-icons/3x2/${flag_code}.svg" />
+        ` as HTMLImageElement, false, [ bg ]);
+
+        render(content, html`
+            ${val}
+        `);
+    }
+
+    render_geo(selector.value);
+
+    page.structure.main.appendChild(new_panel);
 }

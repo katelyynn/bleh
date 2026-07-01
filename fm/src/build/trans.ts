@@ -11293,6 +11293,10 @@ export const trans = {
     explore: {
         en: 'Explore',
     },
+    hot_100: {
+        // b = bleh
+        en: 'The {b} Hot 100',
+    },
 } as const satisfies Record<string, any>;
 
 export const translation_fallback = 'NO_TRANSLATION_FOUND';

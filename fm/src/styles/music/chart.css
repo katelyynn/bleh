@@ -327,3 +327,18 @@
         opacity: 0.35;
     }
 }
+
+.chart-heading-geo {
+    display: flex;
+    justify-content: center;
+}
+.language-header-chart {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: oklch(var(--c1));
+}
+
+.geo-chart-flag {
+    height: 24px !important;
+}

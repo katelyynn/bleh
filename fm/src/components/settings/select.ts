@@ -29,7 +29,7 @@ interface select {
     name?: string,
     func?: (selected: string) => void,
     blend?: boolean,
-    title_func?: (value: string) => void,
+    title_func?: (value: select_option) => void,
     hide?: boolean,
     in_settings?: boolean
 }
