@@ -1,5 +1,5 @@
 {
-    version: "2026.0630",
+    version: "2026.0702",
     related: {
         account_name: "kateshapedbox",
         link: "https://katelyn.moe/sponsor",
@@ -19,7 +19,7 @@
                 },
                 {
                     name: "i bite",
-                    reason: "in service to my darling",
+                    reason: "what if someone sees us!!",
                     icon: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLW1pbmltaXplIj48cGF0aCBzdHJva2U9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNMTUgMTl2LTJhMiAyIDAgMCAxIDIgLTJoMiIgLz48cGF0aCBkPSJNMTUgNXYyYTIgMiAwIDAgMCAyIDJoMiIgLz48cGF0aCBkPSJNNSAxNWgyYTIgMiAwIDAgMSAyIDJ2MiIgLz48cGF0aCBkPSJNNSA5aDJhMiAyIDAgMCAwIDIgLTJ2LTIiIC8+PC9zdmc+",
                     hue: 19,
                     sat: 2.62,
