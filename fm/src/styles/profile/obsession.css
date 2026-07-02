@@ -452,3 +452,8 @@
 .obsession-delete-button {
     opacity: unset;
 }
+
+.obsession-first-icon {
+    position: static !important;
+    display: inline-flex;
+}

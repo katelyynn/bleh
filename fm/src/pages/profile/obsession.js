@@ -185,21 +185,32 @@ export function bleh_obsession() {
         '.obsession-details-date-short'
     );
 
+    const first = obsession_container.querySelector('.obsession-first');
+
     let quote = html.node`
         <section class="obsession-quote sour">
-            ${
-                obsession_reason ?
-                    html.node`
+            ${first ? () => {
+                const elem = html.node`
+                    <div class="grid-item-icon grid-item-icon-first colourful obsession-first-icon">
+                        ${icon({ name: icons.star })}
+                    </div>
+                    `;
+
+                tippy(elem, {
+                    content: tl(trans.obsession_first)
+                });
+
+                return elem;
+            } : ''}
+            ${obsession_reason ? html.node`
             <div class="quote">
-                ${obsession_reason.textContent}
+                ${obsession_reason.textContent.trim()}
             </div>
-            `
-                :   html.node`
+            ` : html.node`
             <div class="quote no-quote">
                 ...
             </div>
-            `
-            }
+            `}
             <div class="sub-text">
                 <div class="obsession-author">
                     ${obsession_avatar}
