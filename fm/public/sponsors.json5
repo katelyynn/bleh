@@ -1,5 +1,5 @@
 {
-    version: "2026.0703",
+    version: "2026.0708",
     related: {
         account_name: "kateshapedbox",
         link: "https://katelyn.moe/sponsor",
@@ -380,6 +380,17 @@
         "parapass": {},
         "mywayout": {},
         "DoodleJumpFan": {},
-        "kohakudoori": {}
+        "kohakudoori": {},
+        "stargloam": {
+            badges: [
+                {
+                    icon: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLXJpcHBsZSI+PHBhdGggc3Ryb2tlPSJub25lIiBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIiAvPjxwYXRoIGQ9Ik0zIDdjMyAtMiA2IC0yIDkgMHM2IDIgOSAwIiAvPjxwYXRoIGQ9Ik0zIDE3YzMgLTIgNiAtMiA5IDBzNiAyIDkgMCIgLz48cGF0aCBkPSJNMyAxMmMzIC0yIDYgLTIgOSAwczYgMiA5IDAiIC8+PC9zdmc+",
+                    name: "Abyssal Resonance",
+                    hue: 266,
+                    sat: 0.47,
+                    lit: 0.33
+                }
+            ]
+        }
     }
 }
