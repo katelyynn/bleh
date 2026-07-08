@@ -1,5 +1,5 @@
 {
-    version: "2026.0708",
+    version: "2026.0708.1",
     related: {
         account_name: "kateshapedbox",
         link: "https://katelyn.moe/sponsor",
@@ -390,6 +390,7 @@
                     lit: 0.33
                 }
             ]
-        }
+        },
+        "last_aezi": {}
     }
 }
