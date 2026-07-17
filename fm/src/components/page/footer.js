@@ -17,13 +17,6 @@ export function bleh_footer() {
     let footer = document.body.querySelector('footer.footer');
     if (!footer) return;
 
-    let extras = html.node`
-        <div class="footer-extras">
-            ${footer.querySelector('.footer-top')}
-            ${footer.querySelector('.footer-bottom')}
-        </div>
-    `;
-
     let kate = 'katelyn';
     let sponsoring = 0;
 
@@ -34,74 +27,70 @@ export function bleh_footer() {
         sponsoring = Object.keys(sponsor_list.users).length - 2;
     }
 
-    render(
-        footer,
-        html`
-            ${extras}
-            <div class="footer-bleh">
-                <a class="bleh-logo-footer b" href="https://bleh.katelyn.moe" target="_blank">
-                    ${version.brand}
-                </a>
-                <span class="footer-version">
-                    ${version.build}
-                </span>
-                <div class="new-badge sku spacing">
-                    ${version.sku}
-                    ${settings.dev ? html.node`
-                        <span class="bleh-icon-container">
-                            ${icon({ name: icons.dev })}
-                        </span>
-                    ` : ''}
-                </div>
+    footer.appendChild(html.node`
+        <div class="footer-bleh">
+            <a class="bleh-logo-footer b" href="https://bleh.katelyn.moe" target="_blank">
+                ${version.brand}
+            </a>
+            <span class="footer-version">
+                ${version.build}
+            </span>
+            <div class="new-badge sku spacing">
+                ${version.sku}
+                ${settings.dev ? html.node`
+                    <span class="bleh-icon-container">
+                        ${icon({ name: icons.dev })}
+                    </span>
+                ` : ''}
+            </div>
+            <div class="footer-dot" />
+            <div class="footer-credit">
+                <p class="footer-credit-text">
+                    ${{
+                        html: tl(trans.made_with_love, {
+                            u: `<a class="b" href="${root}user/${kate}">${kate}</a>`,
+                            c: '<a class="b" href="https://github.com/katelyynn/bleh/graphs/contributors" target="_blank">',
+                            '/c': '</a>',
+                            h: `<span class="bleh-icon heart sponsor-related colourful">${tl(trans.love_lower)}</span>`
+                        })
+                    }}
+                </p>
+            </div>
+            <div class="footer-dot" />
+            <div class="footer-web">
+                <a
+                    class="footer-link"
+                    data-type="source"
+                    href="https://github.com/katelyynn/bleh"
+                    target="_blank"
+                    >${tl(trans.view_source)}</a
+                >
                 <div class="footer-dot" />
+                <a
+                    class="footer-link"
+                    data-type="issue"
+                    href="https://github.com/katelyynn/bleh/issues/new/choose"
+                    target="_blank"
+                    >${tl(trans.report_issue)}</a
+                >
+            </div>
+        </div>
+        ${lang != 'en' && lang in lang_info ? html.node`
+            <div class="footer-bleh-top">
                 <div class="footer-credit">
-                    <p class="footer-credit-text">
+                    <p>
                         ${{
-                            html: tl(trans.made_with_love, {
-                                u: `<a class="b" href="${root}user/${kate}">${kate}</a>`,
-                                c: '<a class="b" href="https://github.com/katelyynn/bleh/graphs/contributors" target="_blank">',
-                                '/c': '</a>',
-                                h: `<span class="bleh-icon heart sponsor-related colourful">${tl(trans.love_lower)}</span>`
+                            html: tl(trans.translations, {
+                                l: lang_info[lang].name,
+                                u: `<span class="b">${lang_info[lang].by.map(user => `<a href="${root}user/${user}">${user}</a>`).join(', ')}</span>`
                             })
                         }}
                     </p>
                 </div>
-                <div class="footer-dot" />
-                <div class="footer-web">
-                    <a
-                        class="footer-link"
-                        data-type="source"
-                        href="https://github.com/katelyynn/bleh"
-                        target="_blank"
-                        >${tl(trans.view_source)}</a
-                    >
-                    <div class="footer-dot" />
-                    <a
-                        class="footer-link"
-                        data-type="issue"
-                        href="https://github.com/katelyynn/bleh/issues/new/choose"
-                        target="_blank"
-                        >${tl(trans.report_issue)}</a
-                    >
-                </div>
             </div>
-            ${lang != 'en' && lang in lang_info ? html.node`
-                <div class="footer-bleh-top">
-                    <div class="footer-credit">
-                        <p>
-                            ${{
-                                html: tl(trans.translations, {
-                                    l: lang_info[lang].name,
-                                    u: `<span class="b">${lang_info[lang].by.map(user => `<a href="${root}user/${user}">${user}</a>`).join(', ')}</span>`
-                                })
-                            }}
-                        </p>
-                    </div>
-                </div>
-            ` : ''}
-        `
-    );
+        ` : ''}
+    `);
 
     let heart = footer.querySelector('.heart');
-    heart.addEventListener('click', () => sponsor());
+    if (heart) heart.addEventListener('click', () => sponsor());
 }
