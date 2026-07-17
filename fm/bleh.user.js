@@ -82715,21 +82715,13 @@
             </div>
             <div class="footer-dot" />
             <div class="footer-web">
-                <a
-                    class="footer-link"
-                    data-type="source"
-                    href="https://github.com/katelyynn/bleh"
-                    target="_blank"
-                    >${tl2(trans.view_source)}</a
-                >
+                <a class="footer-link" data-type="source" href="https://github.com/katelyynn/bleh" target="_blank">
+                    ${tl2(trans.view_source)}
+                </a>
                 <div class="footer-dot" />
-                <a
-                    class="footer-link"
-                    data-type="issue"
-                    href="https://github.com/katelyynn/bleh/issues/new/choose"
-                    target="_blank"
-                    >${tl2(trans.report_issue)}</a
-                >
+                <a class="footer-link" data-type="issue" href="https://github.com/katelyynn/bleh/issues/new/choose" target="_blank">
+                    ${tl2(trans.report_issue)}
+                </a>
             </div>
         </div>
         ${lang != "en" && lang in lang_info ? html.node`
