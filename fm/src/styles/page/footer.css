@@ -78,6 +78,15 @@
     }
 }
 
+.footer-top,
+.footer-bottom {
+    & > .container {
+        min-width: calc(var(--cards-width) - (var(--card-padding) * 2)) !important;
+        max-width: calc(var(--cards-width) - (var(--card-padding) * 2)) !important;
+        width: calc(var(--cards-width) - (var(--card-padding) * 2)) !important;
+    }
+}
+
 .footer-heading {
     color: oklch(var(--c3)) !important;
     text-transform: unset !important;
