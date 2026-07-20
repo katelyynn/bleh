@@ -28,7 +28,7 @@ export let lang_info = {
     es: {
         name: get_language_name('es'),
         by: ['soleilth'],
-        last_updated: '2026-04-18',
+        last_updated: '2026-07-20',
     },
     it: {
         name: get_language_name('it'),
@@ -590,6 +590,7 @@ export const trans = {
         // if pressing read more extended content
         // this will do the opposite
         en: 'Read less',
+        es: 'Leer menos',
         it: 'Leggi meno',
     },
     refresh: {
@@ -1950,6 +1951,7 @@ export const trans = {
             },
             summer: {
                 en: 'Summer',
+                es: 'Verano',
             },
             halloween: {
                 en: 'Halloween',
@@ -2399,11 +2401,13 @@ export const trans = {
     },
     charts_for: {
         // date will be directly below this text
-        en: 'Charts for'
+        en: 'Charts for',
+        es: 'Listas del',
     },
     weekly_charts: {
         // dates will be directly below this text
         en: 'Weekly charts',
+        es: 'Listas semanales',
     },
     view_the_charts: {
         en: 'View the charts',
@@ -2503,9 +2507,11 @@ export const trans = {
     welcome: {
         // user = username
         en: 'Hello {u}!',
+        es: '¡Hola {u}!',
     },
     bleh_setup_guide: {
-        en: 'It’s nice to see you here'
+        en: 'It’s nice to see you here',
+        es: 'Es bueno verte aquí',
     },
     import: {
         en: 'Import',
@@ -3478,13 +3484,16 @@ export const trans = {
         // titles that are capitalised wrongly eg. 'eSpReSsO' -> 'Espresso'
         true: {
             en: 'Actively correcting this title',
+            es: 'Corrigiendo este título',
         },
         false: {
             en: 'Is this capitalised correctly?',
+            es: '¿Son estas mayúsculas correctas?'
         },
     },
     alert_of_correction: {
         en: 'This title is already being corrected to \'{t}\', are you sure you want to continue?',
+        es: 'Este título ya está siendo corregido a \'{t}\', ¿seguro que quieres continuar?'
     },
     current: {
         en: 'Current',
@@ -3500,7 +3509,7 @@ export const trans = {
     current_tip: {
         en: 'This is the original capitalisation present on Last.fm',
         de: 'Dies ist die originale Groß-/Kleinschreibung auf Last.fm',
-        es: 'Esta es la capitalización original presente en Last.fm',
+        es: 'Estas son las mayúsculas originales presentes en Last.fm',
         it: 'Questo è l’uso delle maiuscole originale presente su Last.fm',
         sv: 'Det här är den originella kapitaliseringen som finns på Last.fm',
         ru: 'Это исходный регистр, предоставленный на Last.fm',
@@ -3520,7 +3529,7 @@ export const trans = {
     correction_tip: {
         en: 'This is the correct capitalisation, as decided by the artist',
         de: 'Dies ist die korrekte Groß-/Kleinschreibung, wie sie von den Künstler:innen festgelegt wurde',
-        es: 'Esta es la capitalización correcta, decidida por el artista',
+        es: 'Estas son las mayúsculas correctas, decididas por el artista',
         it: 'Questo è l’uso delle maiuscole corretto, come deciso dall’artista',
         sv: 'Det här är rätt kapitalisering, som bestämd av artisten',
         ru: 'Это правильный регистр, определённый исполнителем',
@@ -3541,7 +3550,7 @@ export const trans = {
     sources_tip: {
         en: 'Provide reputable sources where this capitalisation is present, excluding sites like Wikipedia, RYM, AOTY, and MusicBrainz',
         de: 'Gebe seriöse Quellen an, auf denen diese Schreibweise zu finden ist, ausgenommen sind Seiten wie Wikipedia, RYM, AOTY und MusicBrainz',
-        es: 'Proporciona fuentes fiables donde la capitalización esté presente, excluyendo sitios como Wikipedia, RYM, AOTY y MusicBrainz',
+        es: 'Proporciona fuentes fiables donde las mayúsculas correctas estén presentes, excluyendo sitios como Wikipedia, RYM, AOTY y MusicBrainz',
         it: 'Fornisci sorgenti attendibili dove questo uso delle maiuscole è presente, esclusi siti come Wikipedia, RYM, AOTY o MusicBrainz',
         sv: 'Visa pålitliga källor där man kan se att denna kapitalisering stämmer, förutom sidor som Wikipedia, RYM, AOTY och MusicBrainz',
         ru: 'Укажите авторитетные источники, где присутствует этот регистр, исключая такие сайты, как Wikipedia, RYM, AOTY и MusicBrainz',
@@ -3562,7 +3571,7 @@ export const trans = {
     please_match_the_format: {
         en: 'Only capitalisation changes are allowed',
         de: 'Nur Änderungen der Groß-/Kleinschreibung sind erlaubt',
-        es: 'Solo se permiten cambios a la capitalización',
+        es: 'Solo se permiten cambios a las mayúsculas',
         it: 'Sono consentiti solo i cambi relativi all’uso delle maiuscole',
         ja: '大文字と小文字のみ変更できます',
         sv: 'Endast ändringar på kapitalisering är tillåtet',
@@ -3584,6 +3593,7 @@ export const trans = {
     },
     recents: {
         en: 'Recents',
+        es: 'Recientes',
         it: 'Recenti',
         ja: '最近',
     },
@@ -3745,6 +3755,7 @@ export const trans = {
     },
     follow_user: {
         en: 'Follow {u}',
+        es: 'Seguir a {u}',
     },
     sponsor_details: {
         en: 'Sponsor and badge details',
@@ -4169,6 +4180,7 @@ export const trans = {
     },
     share_via_device: {
         en: 'Share via device',
+        es: 'Compartir mediante dispositivo',
         it: 'Condividi tramite dispositivo',
     },
     copy: {
@@ -5447,6 +5459,7 @@ export const trans = {
         // used as an alternative to saying someone or something's
         // country, as its now always a country
         en: 'Origin',
+        es: 'Origen',
         ja: '出身国',
     },
     display_name: {
@@ -5809,7 +5822,7 @@ export const trans = {
         body: {
             en: 'Re-capitalise artists, albums, and tracks based on community contributions',
             de: 'Korrigiert die Schreibweise von Künstler:innen, Alben und Titeln basierend auf Community-Beiträgen',
-            es: 'Recapitaliza artista, álbumes y temas con base en contribuciones de la comunidad',
+            es: 'Corrige mayúsculas del artista, álbumes y temas según contribuciones de la comunidad',
             it: 'Corregge l’uso delle maiuscole in artisti, album e brani in base alle contribuzioni della comunità',
             ja: 'コミュニティの投稿をもとに、アーティスト、アルバム、トラック名の大文字、小文字を修正します',
             pt: 'Recapitalize artistas, álbuns e faixas com base nas contribuições da comunidade',
@@ -6270,7 +6283,8 @@ export const trans = {
         },
     },
     font_serif: {
-        en: 'Use old-fashioned Serif font for some headings'
+        en: 'Use old-fashioned Serif font for some headings',
+        es: 'Usar fuente Serif clásica para algunos encabezados',
     },
     previewing: {
         // used as subtext for previewing a font
@@ -8800,6 +8814,7 @@ export const trans = {
     },
     failed_to_check_for_updates: {
         en: 'Checking for updates failed',
+        es: 'Error al comprobar actualizaciones',
     },
     select_all: {
         en: 'Select all',
@@ -9324,10 +9339,12 @@ export const trans = {
     },
     atlas: {
         name: {
-            en: 'Atlas'
+            en: 'Atlas',
+            es: 'Atlas',
         },
         body: {
-            en: 'Explore where the artists you love are based in the world'
+            en: 'Explore where the artists you love are based in the world',
+            es: 'Explora de dónde en el mundo vienen los artistas que más amas',
         }
     },
     receipt: {
@@ -10378,10 +10395,12 @@ export const trans = {
     },
     card: {
         name: {
-            en: 'Card'
+            en: 'Card',
+            es: 'Tarjeta',
         },
         body: {
-            en: 'Get an overview of your last year, month, or week'
+            en: 'Get an overview of your last year, month, or week',
+            es: 'Obtén un resumen de tu último año, mes, o semana',
         }
     },
     your_recent_30_days: {
@@ -11278,124 +11297,160 @@ export const trans = {
     },
     better_with_friends: {
         en: 'Music is better with friends, {a}add to your close friends list{/a}',
+        es: 'La música es mejor con amigos, {a}añade a tu lista de amigos cercanos{/a}',
     },
     collage_cta: {
         name: {
             en: 'Create a collage',
+            es: 'Crear un collage',
         },
         body: {
             en: 'Featuring your favourite albums in the last month',
+            es: 'Con tus álbumes favoritos en el último mes',
         },
     },
     compare_cta: {
         name: {
             en: 'Compare with your friends',
+            es: 'Comparar con tus amigos',
         },
         body: {
             en: 'Which music do you have in common?',
+            es: '¿Qué música tienen en común?',
         },
     },
     sponsor_cta: {
         body: {
             en: 'Help out the future of bleh',
+            es: 'Ayuda al futuro de bleh',
         },
     },
     add_new_data_point: {
         en: 'Add new data point',
+        es: 'Añadir nuevo dato',
     },
     presets: {
         // used in reference to timeframe presets
         en: 'Presets',
+        es: 'Preajustes',
     },
     existing: {
         // used as a header for existing items
         en: 'Existing',
+        es: 'Actuales',
     },
     history: {
         en: 'History',
+        es: 'Historial',
     },
     no_data_to_display: {
         en: 'No data to display',
+        es: 'No hay datos para mostrar',
     },
     add_to_graph: {
         en: 'Add to graph',
+        es: 'Añadir al gráfico',
     },
     graph_options: {
         en: 'Graph options',
+        es: 'Opciones del gráfico',
     },
     refresh_plot_notice: {
         en: 'This will re-gather all data points',
+        es: 'Esto volverá a recopilar todos los datos',
     },
     refresh_plot_alert: {
         en: 'The timeframe you selected does not match the current graph, you can refresh the data to fix this.',
+        es: 'El periodo que seleccionaste no coincide con el gráfico actual, puedes recargar los datos para solucionarlo',
     },
     under_construction: {
         en: 'This page is under construction, please give feedback and suggestions if you have any!',
+        es: 'Esta página está en construcción, ¡por favor da feedback y sugerencias si tienes alguna!',
     },
     data_source: {
         en: 'Data source',
+        es: 'Fuente de datos',
     },
     data_source_explain: {
         en: 'Here you can add media to your graph, for example an artist or an album/track. Listing an album or track is optional, as you can instead add an entire artist.',
+        es: 'Aquí puedes añadir multimedia a tu gráfico, por ejemplo un artista o un álbum/tema. Añadir un álbum o tema es opcional, ya que puedes añadir un artista entero.',
     },
     artist_required: {
         en: 'Artist name required',
+        es: 'Nombre del artista requerido',
     },
     choose_either_an_album_or_track: {
         en: 'Choose either an album or track only',
+        es: 'Elige solo un álbum o un tema',
     },
     already_exists: {
         en: 'This data source already exists',
+        es: 'Esta fuente de datos ya existe',
     },
     username_required: {
         en: 'Username required',
+        es: 'Nombre de usuario requerido',
     },
     already_a_close_friend: {
         en: 'Already added to close friends',
+        es: 'Ya está en tus amigos cercanos',
     },
     plot_explain: {
         0: {
             en: 'Choose a timeframe for your graph',
+            es: 'Elige un periodo para tu gráfico',
         },
         1: {
             en: 'Choose a data source (an artist, album, or track)',
+            es: 'Elige una fuente de datos (un artista, álbum, o tema)',
         },
         2: {
             en: 'Choose a user to add',
+            es: 'Elige un usuario a añadir',
         },
         3: {
             en: 'Add to your graph',
+            es: 'Añade a tu gráfico',
         },
     },
     how_to_plot: {
         en: 'Explaining Plot',
+        es: 'Explicando Plot',
     },
     plotting_your_data: {
         // loading message
         en: 'Plotting your data',
+        es: 'Graficando tus datos',
     },
     issues_updating: {
         en: 'Having issues updating or need support in general?',
+        es: '¿Tienes problemas al actualizar o necesitas soporte en general?',
     },
     hybrid_inbox: {
         name: {
             en: 'Use a hybrid inbox',
+            es: 'Usar un buzón híbrido',
         },
         body: {
             en: 'Group your messages and notifications into a single counter',
+            es: 'Agrupa tus mensajes y notificaciones en un solo contador',
         },
     },
     skip_patching_lastfm_settings: {
         en: 'Disable bleh visuals here',
+        es: 'Desactiva los elementos visuales de bleh aquí',
     },
     you_have_disabled_bleh_visuals_for_settings: {
         en: 'You have disabled bleh visuals for Last.fm settings, don\'t expect this to look pretty',
+        es: 'Has desactivado los elementos visuales de bleh en la configuración de Last.fm, no esperes que se vea bonito'
     },
     hide_unused_settings: {
         en: 'Hide settings that have no effect',
+        es: 'Ocultar opciones que no tienen efecto',
     },
     edit_links: {
         en: 'Edit links',
+        es: 'Editar vínculos',
     }
 } as const satisfies Record<string, any>;
 
