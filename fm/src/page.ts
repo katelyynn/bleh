@@ -495,7 +495,7 @@ function load_page(main_content = null) {
             nag_bar();
         }
 
-        if (settings.corrections) {
+        if (settings.corrections || settings.format_guest_features) {
             if (page.type == 'artist') {
                 correct_generic_combo_no_artist('artist-top-albums-item');
             } else if (page.type == 'track') {

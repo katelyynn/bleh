@@ -302,36 +302,40 @@ export function correct_generic_combo(parent) {
         if (!album.hasAttribute('data-kate-processed')) {
             album.setAttribute('data-kate-processed', 'true');
 
-            let album_name = album.querySelector(
-                `.${parent.replace('-details', '')}-name a`
-            );
-            if (!album_name) return;
-
-            let artist_name = album.querySelector(
-                `.${parent.replace('-details', '')}-artist a`
-            );
-            if (!artist_name) return;
-
-            if (settings.format_guest_features) {
-                const formatted = name_includes(
-                    album_name.textContent,
-                    artist_name.textContent
+            try {
+                let album_name = album.querySelector(
+                    `.${parent.replace('-details', '')}-name a`
                 );
+                if (!album_name) return;
 
-                album_name.classList.add('smart-title');
-                render(album_name, smart_title(formatted[0], formatted[1]));
-            } else if (settings.corrections) {
-                album_name.textContent = romanise(
-                    correct_item_by_artist(
+                let artist_name = album.querySelector(
+                    `.${parent.replace('-details', '')}-artist a`
+                );
+                if (!artist_name) return;
+
+                if (settings.format_guest_features) {
+                    const formatted = name_includes(
                         album_name.textContent,
                         artist_name.textContent
-                    )
-                );
-            }
+                    );
 
-            artist_name.textContent = romanise(
-                correct_artist(artist_name.textContent)
-            );
+                    album_name.classList.add('smart-title');
+                    render(album_name, smart_title(formatted[0], formatted[1]));
+                } else if (settings.corrections) {
+                    album_name.textContent = romanise(
+                        correct_item_by_artist(
+                            album_name.textContent,
+                            artist_name.textContent
+                        )
+                    );
+                }
+
+                artist_name.textContent = romanise(
+                    correct_artist(artist_name.textContent)
+                );
+            } catch (e) {
+                log('unable to correct generic combo', 'lotus', 'error', { e, album, html: album.innerHTML, format_guest_features: settings.format_guest_features, lotus: settings.corrections });
+            }
         }
     });
 }

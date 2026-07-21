@@ -76827,32 +76827,36 @@
     albums.forEach((album) => {
       if (!album.hasAttribute("data-kate-processed")) {
         album.setAttribute("data-kate-processed", "true");
-        let album_name = album.querySelector(
-          `.${parent.replace("-details", "")}-name a`
-        );
-        if (!album_name) return;
-        let artist_name = album.querySelector(
-          `.${parent.replace("-details", "")}-artist a`
-        );
-        if (!artist_name) return;
-        if (settings.format_guest_features) {
-          const formatted = name_includes(
-            album_name.textContent,
-            artist_name.textContent
+        try {
+          let album_name = album.querySelector(
+            `.${parent.replace("-details", "")}-name a`
           );
-          album_name.classList.add("smart-title");
-          render(album_name, smart_title(formatted[0], formatted[1]));
-        } else if (settings.corrections) {
-          album_name.textContent = romanise(
-            correct_item_by_artist(
+          if (!album_name) return;
+          let artist_name = album.querySelector(
+            `.${parent.replace("-details", "")}-artist a`
+          );
+          if (!artist_name) return;
+          if (settings.format_guest_features) {
+            const formatted = name_includes(
               album_name.textContent,
               artist_name.textContent
-            )
+            );
+            album_name.classList.add("smart-title");
+            render(album_name, smart_title(formatted[0], formatted[1]));
+          } else if (settings.corrections) {
+            album_name.textContent = romanise(
+              correct_item_by_artist(
+                album_name.textContent,
+                artist_name.textContent
+              )
+            );
+          }
+          artist_name.textContent = romanise(
+            correct_artist(artist_name.textContent)
           );
+        } catch (e4) {
+          log("unable to correct generic combo", "lotus", "error", { e: e4, album, html: album.innerHTML, format_guest_features: settings.format_guest_features, lotus: settings.corrections });
         }
-        artist_name.textContent = romanise(
-          correct_artist(artist_name.textContent)
-        );
       }
     });
   }
@@ -83890,7 +83894,7 @@
       if (page.type == "user" || page.type == "artist" || page.type == "album" || page.type == "track") {
         nag_bar();
       }
-      if (settings.corrections) {
+      if (settings.corrections || settings.format_guest_features) {
         if (page.type == "artist") {
           correct_generic_combo_no_artist("artist-top-albums-item");
         } else if (page.type == "track") {
@@ -97188,7 +97192,7 @@
         date: "2026-07-01"
       }
     },
-    built_on: "2026-07-17T19:00:55.012Z"
+    built_on: "2026-07-21T16:17:15.881Z"
   };
 
   // node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
