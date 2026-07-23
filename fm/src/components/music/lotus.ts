@@ -634,7 +634,7 @@ export function fancy_title(song_title: string, in_header: boolean) {
 
 
     const elem = html.node`
-        <span>${song_title}</span>
+        <span class="fancy-title">${song_title}</span>
     `;
 
     console.info('fancy title', elem);
@@ -649,7 +649,7 @@ export function fancy_title(song_title: string, in_header: boolean) {
         `);
     }
 
-    return html.node`${{html: elem.innerHTML }}`;
+    return elem;
 }
 
 export function smart_artists(song_artist, song_guests) {

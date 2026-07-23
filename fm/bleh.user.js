@@ -77040,7 +77040,7 @@
     const dollar = page.name == "WOR$T GIRL IN AMERICA" && page.sister == "Slayyyter";
     const brat = page.name.toLowerCase().startsWith("brat") && page.sister.toLowerCase() == "charli xcx";
     const elem = html.node`
-        <span>${song_title}</span>
+        <span class="fancy-title">${song_title}</span>
     `;
     console.info("fancy title", elem);
     if (dollar) {
@@ -77051,7 +77051,7 @@
             <span class="brat">${song_title}</span>
         `);
     }
-    return html.node`${{ html: elem.innerHTML }}`;
+    return elem;
   }
   function smart_artists(song_artist, song_guests) {
     return html`
@@ -97192,7 +97192,7 @@
         date: "2026-07-01"
       }
     },
-    built_on: "2026-07-21T16:17:15.881Z"
+    built_on: "2026-07-23T19:35:36.966Z"
   };
 
   // node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
