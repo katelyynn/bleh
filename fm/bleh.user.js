@@ -26985,7 +26985,7 @@
       }
     }
     badges.forEach((badge) => {
-      if (entry.sponsor && !badge.type) badge.type = "sponsor";
+      if (entry && entry.sponsor && !badge.type) badge.type = "sponsor";
       badge = process_badge(badge, user);
     });
     log(`final badge list for @${user}`, "sponsor", "info", { badges });
@@ -97378,7 +97378,7 @@
         date: "2026-07-01"
       }
     },
-    built_on: "2026-07-24T20:07:50.570Z"
+    built_on: "2026-07-24T23:13:13.962Z"
   };
 
   // node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
