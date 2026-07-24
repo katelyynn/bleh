@@ -1,3 +1,5 @@
+@import './mobile.css';
+
 .tippy-box[data-theme="nav-window"],
 .tippy-box[data-theme="auth-menu-v2"] {
     background: oklch(var(--menu-bg) / var(--solarium-opacity, var(--menu-opacity))) !important;
