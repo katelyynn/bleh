@@ -71,7 +71,6 @@ export function music_grids(search = page.structure.main, use_colour = true) {
 
         grid.style.setProperty('--delay', index * 0.04 + 's');
 
-        grid.classList.add('colourful');
         grid.setAttribute('data-bleh-music-grids', 'true');
 
         const is_obsession = grid.classList.contains('obsessions-item');
@@ -98,6 +97,8 @@ export function music_grids(search = page.structure.main, use_colour = true) {
             !image_wrap.classList.contains('grid-items-cover-default') &&
             use_colour
         ) {
+            grid.classList.add('colourful');
+
             const grid_colour = html.node`
                 <div class="grid-item-colour-bg" />
             `;
