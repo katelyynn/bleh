@@ -96888,8 +96888,7 @@
       type: "checkbox",
       title: trans.hybrid_inbox.name,
       body: trans.hybrid_inbox.body,
-      require_reload: true,
-      new_release: true
+      require_reload: true
     },
     skip_patching_lastfm_settings: {
       default: false,
