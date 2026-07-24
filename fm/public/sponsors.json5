@@ -1,5 +1,5 @@
 {
-    version: "2026.0708.1",
+    version: "2026.0724",
     related: {
         account_name: "kateshapedbox",
         link: "https://katelyn.moe/sponsor",
@@ -312,7 +312,17 @@
                 }
             ]
         },
-        "nin0dev": {},
+        "nin0dev": {
+            badges: [
+                {
+                    icon: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWJydXNoLWljb24gbHVjaWRlLWJydXNoIj48cGF0aCBkPSJtMTEgMTAgMyAzIi8+PHBhdGggZD0iTTYuNSAyMUEzLjUgMy41IDAgMSAwIDMgMTcuNWEyLjYyIDIuNjIgMCAwIDEtLjcwOCAxLjc5MkExIDEgMCAwIDAgMyAyMXoiLz48cGF0aCBkPSJNOS45NjkgMTcuMDMxIDIxLjM3OCA1LjYyNGExIDEgMCAwIDAtMy4wMDItMy4wMDJMNi45NjcgMTQuMDMxIi8+PC9zdmc+",
+                    name: "Where’s Katelyn Bleh?",
+                    hue: 86,
+                    sat: 1.41,
+                    lit: 1.02
+                }
+            ]
+        },
         "milkdrinker3000": {},
         "wiichicken": {},
         "rgoracz": {},
