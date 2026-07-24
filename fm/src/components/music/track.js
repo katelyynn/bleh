@@ -352,30 +352,17 @@ export function patch_titles(search = page.structure.main) {
             }
 
             if (settings.format_guest_features) {
-                let formatted_title = name_includes(
+                const formatted = name_includes(
                     track_title.getAttribute('data-name'),
                     track_artist,
                     track_title.getAttribute('data-inherit-artists')
                 );
-                console.log('formatted', formatted_title);
-                let song_title = track_title.getAttribute('data-name');
-                let song_tags = {};
+                console.log('formatted', formatted);
 
-                if (formatted_title) {
-                    song_title = formatted_title[0];
-                    song_tags = formatted_title[1];
-                }
-
-                track_title.setAttribute(
-                    'data-name',
-                    correct_item_by_artist(
-                        track_title.getAttribute('data-name'),
-                        track_artist
-                    )
-                );
+                track_title.setAttribute('data-name', formatted.corrected_title);
 
                 // parse tags into text
-                render(track_title, smart_title(song_title, song_tags));
+                render(track_title, smart_title(formatted.song_title, formatted.song_tags));
 
                 if (!song_artist_element && !is_user) {
                     song_artist_element = document.createElement('td');
@@ -383,17 +370,6 @@ export function patch_titles(search = page.structure.main) {
                     track_info.appendChild(song_artist_element);
                 }
 
-                // if artist matches OR artist is blank
-                console.log(
-                    'artist matches',
-                    song_artist_element.textContent
-                        .replaceAll('+', ' ')
-                        .trim() === track_artist,
-                    'artist is blank',
-                    song_artist_element.textContent.trim() === '',
-                    song_artist_element.textContent.trim(),
-                    formatted_title[2]
-                );
                 if (
                     song_artist_element.textContent
                         .replaceAll('+', ' ')
@@ -406,7 +382,7 @@ export function patch_titles(search = page.structure.main) {
                         'log'
                     );
                     // replaces with corrected artist if applicable
-                    render(song_artist_element, smart_artists(formatted_title[2], formatted_title[3]));
+                    render(song_artist_element, smart_artists(formatted.song_artist, formatted.song_guests));
                 }
 
                 if (track.getAttribute('data-disambig') == 'explicit') {
@@ -423,14 +399,14 @@ export function patch_titles(search = page.structure.main) {
                         <div class="track-preview">
                             <div class="track-preview-image">
                                 <div class="inner-image">
-                                    ${image ? html.node`<img src=${image.src} alt=${song_title}>` : html.node`<img class="missing-track" alt="">`}
+                                    ${image ? html.node`<img src=${image.src} alt=${formatted.corrected_title}>` : html.node`<img class="missing-track" alt="">`}
                                 </div>
                             </div>
                             <div class="track-preview-info">
-                                <h5 class="track-preview-text track-preview-title">${song_title}</h5>
+                                <h5 class="track-preview-text track-preview-title">${formatted.song_title}</h5>
                                 <p class="track-preview-text track-preview-artist">${song_artist_element.querySelector('a').textContent}</p>
                                 <div class="track-preview-tags">
-                                    ${song_tags.map(
+                                    ${formatted.song_tags.map(
                                         (tag) => html.node`
                                         <div class="feat" data-tag-type="${tag.type}" data-tag-group="${tag.group}">${tag.text}</div>
                                     `

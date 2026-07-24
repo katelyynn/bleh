@@ -90,21 +90,19 @@ export function bleh_obsession() {
     artist_name.classList.add('header-new-crumb');
 
     if (settings.format_guest_features) {
-        let formatted_title = name_includes(
+        const formatted = name_includes(
             track_title.textContent.trim(),
             artist_name.textContent
         );
-        let song_title = formatted_title[0];
-        let song_tags = formatted_title[1];
 
-        page.corrected = formatted_title[4];
+        page.corrected = formatted.corrected_title;
 
         // combine
         track_title.classList.add('smart-title');
-        render(track_title, smart_title(song_title, song_tags));
+        render(track_title, smart_title(formatted.song_title, formatted.song_tags));
 
-        let song_guests = formatted_title[3];
-        page.sister_others = formatted_title[3];
+        let song_guests = formatted.song_guests;
+        page.sister_others = song_guests;
         for (let guest in song_guests) {
             // &
             track_artist.innerHTML = `${track_artist.innerHTML},`;

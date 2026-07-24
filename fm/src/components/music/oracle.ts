@@ -1820,8 +1820,8 @@ export function oracle_process() {
                                         artist
                                     );
 
-                                    title_elem = html.node`<a class="smart-title">${smart_title(formatted[0], formatted[1])}</a>`;
-                                    artist_elem = html.node`${smart_artists(formatted[2], formatted[3])}`;
+                                    title_elem = html.node`<a class="smart-title">${smart_title(formatted.song_title, formatted.song_tags)}</a>`;
+                                    artist_elem = html.node`${smart_artists(formatted.song_artist, formatted.song_guests)}`;
                                 } else {
                                     title_elem = romanise(
                                         correct_item_by_artist(

@@ -320,7 +320,7 @@ export function correct_generic_combo(parent) {
                     );
 
                     album_name.classList.add('smart-title');
-                    render(album_name, smart_title(formatted[0], formatted[1]));
+                    render(album_name, smart_title(formatted.song_title, formatted.song_tags));
                 } else if (settings.corrections) {
                     album_name.textContent = romanise(
                         correct_item_by_artist(
@@ -372,7 +372,7 @@ export function correct_generic_combo_no_artist(parent) {
                 );
 
                 album_name.classList.add('smart-title');
-                render(album_name, smart_title(formatted[0], formatted[1]));
+                render(album_name, smart_title(formatted.song_title, formatted.song_tags));
             } else if (settings.corrections) {
                 album_name.textContent = romanise(
                     correct_item_by_artist(album_name.textContent, artist_name)
@@ -605,13 +605,13 @@ export function name_includes(
         song_guests.push(...guests);
     });
 
-    const result = [
-        cleaned_title,
-        extras,
-        original_artist,
-        song_guests,
-        original_title_corrected
-    ];
+    const result = {
+        song_title: cleaned_title,
+        song_tags: extras,
+        song_artist: original_artist,
+        song_guests: song_guests,
+        corrected_title: original_title_corrected
+    };
 
     log('finalised', 'lotus', 'log', { result });
     return result;

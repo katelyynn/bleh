@@ -113,9 +113,9 @@ export function bleh_now() {
             const formatted = name_includes(now.name, now.artist);
 
             song_link.classList.add('smart-title');
-            render(song_link, smart_title(formatted[0], formatted[1]));
+            render(song_link, smart_title(formatted.song_title, formatted.song_tags));
 
-            artist_link = html.node`${smart_artists(formatted[2], formatted[3])}`;
+            artist_link = html.node`${smart_artists(formatted.song_artist, formatted.song_guests)}`;
         } else {
             song_link.textContent = name;
         }

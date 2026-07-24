@@ -1651,8 +1651,8 @@ export async function live_status() {
             );
 
             track.classList.add('smart-title');
-            render(track, smart_title(formatted[0], formatted[1]));
-            artist = html.node`<span class="artist">${smart_artists(formatted[2], formatted[3])}</span>`;
+            render(track, smart_title(formatted.song_title, formatted.song_tags));
+            artist = html.node`<span class="artist">${smart_artists(formatted.song_artist, formatted.song_guests)}</span>`;
         } else if (settings.corrections) {
             album.textContent = romanise(correct_item_by_artist(album.textContent, artist.textContent));
             track.textContent = romanise(

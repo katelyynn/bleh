@@ -406,7 +406,7 @@ export let includes = {
 // converts titles like 'something [explicit]' to 'something'
 // additionally removes featured artists from title
 export function clean_title(title) {
-    return name_includes(title)[0];
+    return name_includes(title).song_title;
 }
 
 export function fix_title(title) {

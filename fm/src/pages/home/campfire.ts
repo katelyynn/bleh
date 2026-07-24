@@ -215,8 +215,8 @@ export function campfire() {
     if (settings.format_guest_features) {
       const formatted = name_includes(album.title, album.artist);
 
-      formatted_title = smart_title(formatted[0], formatted[1]);
-      formatted_artist = smart_artists(formatted[2], formatted[3]);
+      formatted_title = smart_title(formatted.song_title, formatted.song_tags);
+      formatted_artist = smart_artists(formatted.song_artist, formatted.song_guests);
     }
 
     render(item_details, html``);
@@ -312,8 +312,8 @@ function campfire_friend(friend: string, own = false) {
                 if (settings.format_guest_features) {
                     const formatted = name_includes(name, sister);
 
-                    name = html.node`${smart_title(formatted[0], formatted[1])}`;
-                    sister = html.node`${smart_artists(formatted[2], formatted[3])}`;
+                    name = html.node`${smart_title(formatted.song_title, formatted.song_tags)}`;
+                    sister = html.node`${smart_artists(formatted.song_artist, formatted.song_guests)}`;
                 } else if (settings.corrections) {
                     sister = romanise(correct_artist(item.sister));
                     name = romanise(correct_item_by_artist(item.name, item.sister));

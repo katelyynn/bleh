@@ -15,7 +15,7 @@ import {
 import { lang, tl, trans } from '@/build/trans';
 import { bleh_glacier_insights } from '@/pages/profile/glacier';
 import { parse_scrobbles_as_rank } from '@/components/music/colourful_counts';
-import { correct_artist, correct_item_by_artist, name_includes, smart_title } from '@/components/music/lotus';
+import { correct_artist, correct_item_by_artist, name_includes, smart_artists, smart_title } from '@/components/music/lotus';
 import { html, render } from 'lighterhtml';
 import { register_menu } from '@/components/menu';
 import tippy from 'tippy.js';
@@ -264,21 +264,15 @@ export function music_grids(search = page.structure.main, use_colour = true) {
 
                 let song_title = name_elem.getAttribute('title');
 
-                let formatted_title = name_includes(
+                const formatted = name_includes(
                     song_title,
                     artist_elem.textContent.trim()
                 );
-                let song_tags = {};
 
-                if (formatted_title) {
-                    song_title = romanise(formatted_title[0].trim());
-                    insights.album.labels.push(song_title);
-                    song_tags = formatted_title[1];
-                    artist.textContent = romanise(formatted_title[2]);
-                }
+                render(name_elem, smart_title(formatted.song_title, formatted.song_tags));
+                render(artist_elem, smart_artists(formatted.song_artist, formatted.song_guests));
 
-                // combine
-                render(name_elem, smart_title(song_title, song_tags));
+                insights.album.labels.push(formatted.corrected_title);
             } else {
                 artist.textContent = romanise(
                     correct_artist(artist.textContent.trim())

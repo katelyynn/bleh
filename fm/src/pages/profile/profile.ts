@@ -917,24 +917,18 @@ function bleh_featured_profile_track(object) {
     if (settings.format_guest_features) {
         let song_title = name_elem.textContent;
 
-        let formatted_title = name_includes(
+        const formatted = name_includes(
             song_title,
             artist_elem.textContent
         );
-        let song_tags = {};
-
-        if (formatted_title) {
-            song_title = formatted_title[0];
-            song_tags = formatted_title[1];
-        }
 
         // combine
         name_elem.classList.add('smart-title');
-        render(name_elem, smart_title(song_title, song_tags));
+        render(name_elem, smart_title(formatted.song_title, formatted.song_tags));
 
         artist_elem_full = html.node`
             <div class="source-album-artist">
-                ${smart_artists(formatted_title[2], formatted_title[3])}
+                ${smart_artists(formatted.song_artist, formatted.song_guests)}
             </div>
         `;
     } else if (settings.corrections) {

@@ -1563,7 +1563,7 @@ export function convert_top_listener(listener, index, key = 'top-listeners') {
             );
 
             track_link.classList.add('smart-title');
-            render(track_link, smart_title(formatted[0], formatted[1]));
+            render(track_link, smart_title(formatted.song_title, formatted.song_tags));
         } else if (settings.corrections) {
             track_link.textContent = romanise(
                 correct_item_by_artist(

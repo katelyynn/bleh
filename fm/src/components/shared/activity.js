@@ -87,20 +87,13 @@ export function render_activity(activity) {
         }
 
         if (involved.type == 'track' && settings.format_guest_features) {
-            let formatted_title = name_includes(name, sister);
+            const formatted = name_includes(name, sister);
 
-            let song_title;
-            let song_tags;
-            if (formatted_title) {
-                song_title = formatted_title[0];
-                song_tags = formatted_title[1];
-                tooltip_name = song_title;
-                tooltip_sister = sister;
-            }
+            name = html.node`${smart_title(formatted.song_title, formatted.song_tags)}`;
+            sister = html.node`${smart_artists(formatted.song_artist, formatted.song_guests)}`;
 
-            // combine
-            name = html.node`${smart_title(song_title, song_tags)}`;
-            sister = html.node`${smart_artists(formatted_title[2], formatted_title[3])}`;
+            tooltip_name = formatted.corrected_title;
+            tooltip_sister = formatted.song_artist;
         } else if (
             (involved.type == 'album' || involved.type == 'track') &&
             settings.corrections
