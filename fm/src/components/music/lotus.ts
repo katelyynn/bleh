@@ -663,10 +663,9 @@ export function fancy_title(song_title: string, in_header: boolean) {
 }
 
 export function smart_artists(song_artist, song_guests) {
+    // scuffed but if its on one line the comma wont be fucked up
     return html`
-        <a href="${root}music/${redirect()}${sanitise(song_artist)}">${romanise(song_artist)}</a>
-        ${song_guests.map((guest) => html.node`
-            ,<a href="${root}music/${redirect()}${sanitise(guest)}">${romanise(guest)}</a>
+        <a href="${root}music/${redirect()}${sanitise(song_artist)}">${romanise(song_artist)}</a>${song_guests.map((guest) => html.node`,<a href="${root}music/${redirect()}${sanitise(guest)}">${romanise(guest)}</a>
         `)}
     `;
 }

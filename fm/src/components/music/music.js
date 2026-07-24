@@ -1723,7 +1723,9 @@ export function similar_items() {
     if (albums) {
         albums.classList = 'albums-like';
         const head = albums.querySelector('h3');
-        head.textContent = tl(trans.more_like_name, { n: romanise(correct_item_by_artist(page.name, page.sister)) });
+        render(head, html`
+            ${{ html: tl(trans.more_like_name, { n: `<i>${romanise(correct_item_by_artist(page.name, page.sister))}</i>` }) }}
+        `);
     }
 
     const tracks = page.structure.main.querySelector('.track-similar-tracks')?.parentElement;
@@ -1731,7 +1733,9 @@ export function similar_items() {
     if (tracks) {
         tracks.classList = 'tracks-like';
         const head = tracks.querySelector('h3');
-        head.textContent = tl(trans.more_like_name, { n: romanise(correct_item_by_artist(page.name, page.sister)) });
+        render(head, html`
+            ${{ html: tl(trans.more_like_name, { n: `<i>${romanise(correct_item_by_artist(page.name, page.sister))}</i>` }) }}
+        `);
     }
 
     if (!artists && !tracks && !albums) return;
