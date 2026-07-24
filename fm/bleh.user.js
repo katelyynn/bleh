@@ -40566,7 +40566,7 @@
             track_title.textContent,
             track_artist.textContent
           );
-          page.corrected = formatted.corrected_title;
+          page.corrected = formatted.corrected_title != track_title.textContent;
           render(track_title, smart_title(formatted.song_title, formatted.song_tags, true));
           if (formatted.song_tags.some((tag) => tag.group == "form"))
             page.suggest = sanitise(formatted.song_title.trim());
@@ -77198,7 +77198,7 @@
       song_tags: extras,
       song_artist: original_artist,
       song_guests,
-      corrected_title: original_title_corrected
+      corrected_title: formatted_title
     };
     log("finalised", "lotus", "log", { result });
     return result;

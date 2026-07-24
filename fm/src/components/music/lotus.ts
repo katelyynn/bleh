@@ -610,7 +610,7 @@ export function name_includes(
         song_tags: extras,
         song_artist: original_artist,
         song_guests: song_guests,
-        corrected_title: original_title_corrected
+        corrected_title: formatted_title
     };
 
     log('finalised', 'lotus', 'log', { result });

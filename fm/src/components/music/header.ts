@@ -223,7 +223,7 @@ export function page_header_title(header = document.body) {
                     track_artist.textContent
                 );
 
-                page.corrected = formatted.corrected_title;
+                page.corrected = formatted.corrected_title != track_title.textContent;
 
                 // combine
                 render(track_title, smart_title(formatted.song_title, formatted.song_tags, true));
