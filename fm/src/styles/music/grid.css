@@ -148,8 +148,8 @@
 
     --shadow: rgba(0, 0, 0, 0.2);
 
-    &.grid-items-item-has-colour {
-        --shadow: color-mix(in oklch, oklch(var(--h4)) 100%, black 50%);
+    &.colourful {
+        --shadow: color-mix(in oklch, oklch(var(--h4)) 100%, black 40%);
     }
 
     transition-property: transform, translate, scale, opacity, outline-color;
@@ -317,7 +317,8 @@
     font-size: var(--font-size);
     font-weight: var(--font-weight);
 
-    & > a {
+    & > a,
+    & > .grid-item-text {
         color: inherit;
     }
 }
@@ -415,7 +416,7 @@
     transition-duration: var(--trans);
     transition-timing-function: var(--trans-function-ani);
 
-    & > a:first-child {
+    & > .grid-item-text:first-child {
         display: inline-block;
         overflow: hidden;
         text-overflow: ellipsis;

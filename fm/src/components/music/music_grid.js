@@ -248,8 +248,7 @@ export function music_grids(search = page.structure.main, use_colour = true) {
             insights.artist.labels.push(name.textContent);
         } else {
             artist = grid.querySelector('.grid-items-item-aux-block');
-            if (!artist)
-                artist = grid.querySelector('.grid-items-item-aux-text');
+            if (!artist) artist = grid.querySelector('.grid-items-item-aux-text');
             if (!artist) return;
 
             save_hoshino_artwork(
@@ -269,8 +268,14 @@ export function music_grids(search = page.structure.main, use_colour = true) {
                     artist_elem.textContent.trim()
                 );
 
+                name_elem.classList.add('smart-title');
                 render(name_elem, smart_title(formatted.song_title, formatted.song_tags));
-                render(artist_elem, smart_artists(formatted.song_artist, formatted.song_guests));
+
+                artist_elem.replaceWith(html.node`
+                    <span class="grid-items-item-aux-block grid-item-text grid-item-artist-no-link smart-artist">
+                        ${smart_artists(formatted.song_artist, formatted.song_guests)}
+                    </span>
+                `);
 
                 insights.album.labels.push(formatted.corrected_title);
             } else {

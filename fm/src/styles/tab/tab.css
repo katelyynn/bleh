@@ -124,6 +124,11 @@ input::placeholder {
         display: flex !important;
     }
 
+    /* last.fm regression */
+    &:not([style]) {
+        display: none !important;
+    }
+
     flex-direction: column;
     justify-content: center;
 

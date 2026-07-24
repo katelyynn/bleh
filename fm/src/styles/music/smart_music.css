@@ -3,6 +3,14 @@
     flex-wrap: wrap;
     gap: 2px 6px;
 }
+.smart-artist {
+    display: flex !important;
+    cursor: default;
+
+    & > a + a {
+        margin-left: 4px;
+    }
+}
 
 .title {
     min-width: 0;

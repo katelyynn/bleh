@@ -622,7 +622,7 @@ export function smart_title(song_title: string, song_tags, in_header = false) {
     const show_remaster = settings.show_remaster_tags;
 
     return html`
-        <div class="title">${fancy_title(romanise(song_title.trim()), in_header)}</div>
+        <span class="title">${fancy_title(romanise(song_title.trim()), in_header)}</span>
         ${song_tags.map((tag) => {
             if (
                 (!show_features && tag.group == 'guests') ||
@@ -632,7 +632,7 @@ export function smart_title(song_title: string, song_tags, in_header = false) {
             }
 
             return html.node`
-                <div class="feat" data-tag-type=${tag.type} data-tag-group=${tag.group}>${romanise(tag.text)}</div>
+                <span class="feat" data-tag-type=${tag.type} data-tag-group=${tag.group}>${romanise(tag.text)}</span>
             `;
         })}
     `;
