@@ -448,10 +448,18 @@ export function correct_artist(artist, broadcast = false) {
     }
 }
 
+interface pattern_match {
+    group: string,
+    pattern: string | RegExp,
+    regex: boolean,
+    index: number,
+    text: string | RegExp
+}
+
 // feat.
 export function name_includes(
-    original_title,
-    original_artist,
+    original_title: string,
+    original_artist: string,
     inherit_guests = ''
 ) {
     // track if we applied an album/track correction
@@ -477,9 +485,10 @@ export function name_includes(
     const lower_title = formatted_title.toLowerCase();
     // find all tag‐matches (index ≥ 1), with special remaster logic
     // due to Nirvana nonsense such as 20th Anniversary Remaster etc.
-    const matches = flat_patterns
+    const matches: pattern_match[] = flat_patterns
         .flatMap(({ group, pattern, regex }) => {
             if (regex) {
+                pattern = pattern as RegExp;
                 const safe_pattern = pattern.global ? pattern : new RegExp(pattern.source, pattern.flags + 'g');
 
                 return [ ...lower_title.matchAll(safe_pattern) ].map(m => ({
@@ -490,6 +499,7 @@ export function name_includes(
                     text: m[0]
                 }));
             } else {
+                pattern = pattern as string;
                 const index = lower_title.indexOf(pattern.toLowerCase());
 
                 return index >= 0 ? [{
@@ -501,7 +511,7 @@ export function name_includes(
                 }] : [];
             }
         })
-        .filter((match) => {
+        .filter((match: pattern_match) => {
             if (match.index < 1) return false;
 
             return !(
@@ -510,7 +520,7 @@ export function name_includes(
                 !lower_title.includes('(remaster')
             );
         })
-        .sort((a, b) => a.index - b.index);
+        .sort((a: pattern_match, b: pattern_match) => a.index - b.index);
 
     log('found tag matches', 'lotus', 'info', { lower_title, matches });
 
