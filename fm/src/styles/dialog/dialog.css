@@ -276,7 +276,6 @@
 
     &:hover {
         overflow-y: auto;
-        scrollbar-width: thin;
     }
 
     --bg-mask: linear-gradient(0deg, white 96%, transparent);

@@ -37,7 +37,6 @@
   z-index: 3;
 
   overflow-y: auto;
-  scrollbar-width: thin;
 
   @media (max-width: 980px) {
     width: unset;

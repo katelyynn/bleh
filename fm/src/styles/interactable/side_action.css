@@ -102,6 +102,10 @@
 
     --icon-size: 16px !important;
 
+    @media (max-width: 980px) {
+        --last-child-sep: none !important;
+    }
+
     &:not(.stationlink, .listening-report-promo) {
         height: var(--side-action-height) !important;
 

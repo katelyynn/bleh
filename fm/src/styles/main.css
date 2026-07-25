@@ -6,9 +6,13 @@
     display: none !important;
 }
 
-:root {
-    scrollbar-width: thin;
+* {
+    scrollbar-width: none;
+    scrollbar-gutter: stable both-edges;
     scroll-behavior: smooth;
+}
+
+:root {
     scroll-padding-top: calc(52px + 15px);
 }
 body {
