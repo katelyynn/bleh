@@ -462,6 +462,7 @@ body,
     --menu-bg: var(--b6);
     --menu-opacity: 92%;
 
+    --tracklist-odd: oklch(var(--b4) / 15%);
     --tracklist-hover: oklch(var(--b4) / 30%);
 
     --modal-button-hov: oklch(var(--b4) / 40%);
@@ -562,6 +563,7 @@ body,
         --menu-bg: 0.16 calc(var(--sat) * 0.01 * var(--sat-bg, 1)) var(--hue);
         --menu-opacity: 90%;
 
+        --tracklist-odd: oklch(var(--b2) / 10%);
         --tracklist-hover: oklch(var(--b2) / 30%);
 
         --modal-button-hov: oklch(var(--b2) / 40%);

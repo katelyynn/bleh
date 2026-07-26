@@ -62,6 +62,10 @@
     --chart-button-hov: oklch(var(--b4) / 60%);
     --chart-button-atv: oklch(var(--b4) / 80%);
 
+    /*&:nth-child(even) {
+        --bg: var(--tracklist-odd);
+    }*/
+
     &:hover {
         background-color: var(--bg-hov);
         transition: none !important;
