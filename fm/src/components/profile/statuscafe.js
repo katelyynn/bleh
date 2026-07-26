@@ -25,10 +25,9 @@ export async function fetch_status(username) {
                     <span class="status-cafe-emoji">
                         <span class="bleh-icon" />
                     </span>
-                    <span class="status-cafe-text">${tl(trans.status_cafe_too_many_requests)}</span>
-                </div>
-                <div class="status-cafe-top">
-                    <span class="status-cafe-time">...</span>
+                    <span class="status-cafe-text">
+                        ${tl(trans.status_cafe_too_many_requests)}
+                    </span>
                 </div>
             </div>
         `;
@@ -76,10 +75,10 @@ async function fetch_status_api(username) {
                 }}>
                     <div class="status-cafe-content">
                         <span class="status-cafe-emoji">${data.face}</span>
-                        <span class="status-cafe-text">${text_decode(data.content)}</span>
-                    </div>
-                    <div class="status-cafe-top">
-                        <span class="status-cafe-time">${data.timeAgo}</span>
+                        <span class="status-cafe-text">
+                            ${text_decode(data.content)}
+                            <span class="status-cafe-time">${data.timeAgo}</span>
+                        </span>
                     </div>
                 </div>
             `;
@@ -99,10 +98,9 @@ async function fetch_status_api(username) {
                         <span class="status-cafe-emoji">
                             <span class="bleh-icon" />
                         </span>
-                        <span class="status-cafe-text">${error}</span>
-                    </div>
-                    <div class="status-cafe-top">
-                        <span class="status-cafe-time">...</span>
+                        <span class="status-cafe-text">
+                            ${error}
+                        </span>
                     </div>
                 </div>
             `;

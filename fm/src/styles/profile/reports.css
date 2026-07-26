@@ -312,11 +312,14 @@ text:has(> .your-progress-label-position) {
 
 .your-progress {
     .description {
-        color: oklch(var(--c2));
-        margin-top: 12px;
+        font-size: 13px;
+        color: oklch(var(--c3));
+        margin-top: var(--side-action-side);
         line-height: var(--line-height);
+        cursor: default;
 
-        span {
+        & > span {
+            color: oklch(var(--c2));
             font-weight: var(--font-weight-medium);
         }
     }

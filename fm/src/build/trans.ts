@@ -3122,7 +3122,7 @@ export const trans = {
         pl: 'Beta',
     },
     more: {
-        en: 'More',
+        en: 'More...',
         de: 'Mehr',
         es: 'Más',
         it: 'Altro',

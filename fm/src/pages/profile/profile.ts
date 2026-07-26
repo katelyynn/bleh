@@ -491,8 +491,8 @@ export function bleh_profiles() {
                     `
                         :   ''
                     }
-                    <button class="left-icon blend-v2-btn" data-type="settings" ref=${(el) => (settings_btn = el)}>
-                        ${tl(trans.settings)}
+                    <button class="left-icon blend-v2-btn" data-type="more" ref=${(el) => (settings_btn = el)}>
+                        ${tl(trans.more)}
                     </button>
                 </div>
             </div>

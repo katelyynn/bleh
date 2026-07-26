@@ -62,18 +62,7 @@
         margin-top: var(--card-gap);
     }
 
-    padding-bottom: calc(var(--card-padding) + 1px) !important;
-
-    &:after {
-        content: '';
-        display: block;
-        position: absolute;
-        left: var(--card-padding);
-        right: var(--card-padding);
-        bottom: 0;
-        height: 1px;
-        background: var(--separator);
-    }
+    margin-bottom: var(--card-gap);
 }
 .about-me-title {
     display: flex;
@@ -113,9 +102,14 @@
 }
 
 .tab-container {
+    background: unset !important;
+    box-shadow: unset !important;
+    padding: unset !important;
+    border-radius: unset !important;
     width: 100% !important;
     justify-content: center;
     height: fit-content;
+    margin: unset !important;
 
     & > li {
         font: inherit;
@@ -138,5 +132,26 @@
 }
 
 .share-chart {
+    display: none;
+}
+
+
+
+.your-progress-component {
+    padding: var(--side-action-side);
+    margin: 0 calc(var(--card-padding) - var(--side-action-side));
+
+    background-color: oklch(var(--f4) / 8%);
+    border-radius: var(--card-radius);
+}
+.your-progress {
+    margin: var(--side-action-side) 0 0 0;
+}
+.buffer-3 > h4 {
+    color: oklch(var(--c3));
+    text-align: center;
+    font-size: 13px;
+    line-height: var(--line-height);
+    font-weight: var(--font-weight);
     display: none;
 }

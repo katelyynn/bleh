@@ -513,12 +513,16 @@ export function markdown(
             }
 
             // for counter-like sites
+            // did they really have to call their counter site loli
             const proxy_free = [
                 'count.getloli.com',
                 'i.imgur.com',
                 'media1.tenor.com',
                 'katelyynn.github.io',
-                'i.pinimg.com'
+                'i.pinimg.com',
+                'i.ibb.co',
+                'static.klipy.com',
+                'static2.klipy.com'
             ];
 
             try {

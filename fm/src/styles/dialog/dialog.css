@@ -153,7 +153,7 @@
                         z-index: 20;
 
                         background: rgb(255, 255, 255, 40%);
-                        box-shadow: 0 2px 20px rgb(0, 0, 0, 10%);
+                        box-shadow: 0 0 0 1px inset rgb(255, 255, 255, 10%), 0 2px 20px rgb(0, 0, 0, 10%);
                         color: #000;
 
                         -webkit-box-orient: vertical;
@@ -163,9 +163,18 @@
 
                         max-width: 300px;
 
+                        transition-property: background;
+                        transition-duration: var(--trans);
+                        transition-timing-function: var(--trans-function);
+
                         & > .identifier {
                             color: #333;
                             margin-right: 6px;
+                        }
+
+                        &:hover {
+                            background: rgb(255, 255, 255, 80%);
+                            transition: none;
                         }
                     }
                 }
