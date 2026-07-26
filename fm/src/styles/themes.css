@@ -467,7 +467,7 @@ body,
     --modal-button-hov: oklch(var(--b4) / 40%);
     --modal-button-atv: oklch(var(--b4) / 60%);
 
-    --button-outline: inset 0 0 1px 0 oklch(var(--b2) / 80%);
+    --button-outline: inset 0 0 0 1px oklch(var(--b2) / 40%);
 
     --shout-tree: oklch(var(--b2) / 20%);
 
@@ -567,7 +567,7 @@ body,
         --modal-button-hov: oklch(var(--b2) / 40%);
         --modal-button-atv: oklch(var(--b2) / 60%);
 
-        --button-outline: inset 0 0 1px 0 oklch(0.6 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue));
+        --button-outline: inset 0 0 0 1px oklch(0.27 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue));
 
         --shout-tree: oklch(var(--b2) / 55%);
     }
@@ -652,7 +652,7 @@ body,
         --menu-bg: var(--b5);
         --menu-opacity: 94%;
 
-        --button-outline: inset 0 0 1px 0 oklch(var(--b2));
+        --button-outline: inset 0 0 0 1px oklch(var(--b2) / 50%);
 
         --shout-tree: oklch(var(--b2) / 30%);
     }
