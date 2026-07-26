@@ -142,7 +142,7 @@ export function bleh_profiles() {
                 const height = result.offsetHeight;
                 result.style.setProperty('--height', `${height}px`);
 
-                if (page.mobile) {
+                if (page.mobile && height > 100) {
                     result.setAttribute('data-showing', 'false');
                     let showing = false;
 

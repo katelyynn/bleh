@@ -36,8 +36,12 @@
 
     @media (max-width: 980px) {
         --w: var(--cards-width);
-        --header-size: 270px;
+        --header-size: 80px;
         opacity: 0.8;
+
+        --mask: linear-gradient(180deg, white, transparent) !important;
+        mask-image: var(--mask);
+        -webkit-mask-image: var(--mask);
     }
 
     --mask: linear-gradient(0deg, rgba(255, 255, 255, 0.6) 0%, white 20%);

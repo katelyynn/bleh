@@ -365,6 +365,15 @@
 
         position: relative;
 
+        @media (max-width: 980px) {
+            flex-direction: column;
+
+            & > .span {
+                flex-direction: column;
+                gap: 4px 10px !important;
+            }
+        }
+
         .listen-item-info {
             flex-direction: column;
 

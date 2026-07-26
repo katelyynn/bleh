@@ -22,7 +22,7 @@
     line-height: var(--line-height) !important;
 
     display: flex;
-    gap: var(--item-list-gap);
+    gap: 2px var(--item-list-gap);
     align-items: center;
 }
 

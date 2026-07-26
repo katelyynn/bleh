@@ -73,11 +73,6 @@
         }
     }
 
-    @media (max-width: 980px) {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    }
-
     & > :last-child {
         --last-child-sep: none;
     }
@@ -101,10 +96,6 @@
     --show-icon: block !important;
 
     --icon-size: 16px !important;
-
-    @media (max-width: 980px) {
-        --last-child-sep: none !important;
-    }
 
     &:not(.stationlink, .listening-report-promo) {
         height: var(--side-action-height) !important;

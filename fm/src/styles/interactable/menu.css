@@ -76,12 +76,6 @@
             --right: 10px;
         }
     }
-
-    @media (max-width: 980px) {
-        --button-height: 36px;
-        --btn-top: 9px;
-        --btn-bottom: 9px;
-    }
 }
 
 .dropdown-menu-clickable-item {

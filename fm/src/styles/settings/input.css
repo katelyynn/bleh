@@ -28,7 +28,7 @@
     font-size: var(--font-size) !important;
     font-weight: var(--font-weight) !important;
     letter-spacing: unset !important;
-    border-radius: var(--radius, var(--button-radius)) !important;
+    border-radius: var(--radius, var(--input-radius)) !important;
     box-shadow: var(--shadow, var(--interact-shadow)) !important;
     border: unset !important;
     height: var(--button-height);
@@ -127,7 +127,7 @@
         content: "";
         position: absolute;
         inset: 0;
-        border-radius: var(--button-radius);
+        border-radius: var(--input-radius);
         background: linear-gradient(
             180deg,
             transparent,

@@ -413,11 +413,34 @@ button.navlist-more {
         }
     }
 
+    @media (max-width: 980px) {
+        --button-sides-icon: var(--button-sides);
+        --padding: calc(10px + var(--icon-size) + var(--icon-gap)) var(--button-sides) 10px !important;
+        --font-size: 13px;
+        justify-content: center;
+
+        --top: 10px;
+        --left: 50%;
+        --margin-left: calc(-1 * var(--icon-size) / 2);
+        --margin-top: 0;
+
+        min-width: 60px !important;
+
+        & > .new-badge {
+            font-size: 10px;
+        }
+    }
+
     :is(.toolbar > .navlist, .library-controls > .navlist) > .navlist-items > .secondary-nav-item > & {
         --bg-hov: oklch(var(--b2) / 20%) !important;
         --bg-atv: oklch(var(--b2) / 40%) !important;
         --padding: var(--button-verts) var(--button-sides) var(--button-verts) calc(var(--button-sides-icon) + var(--icon-size) + var(--icon-gap)) !important;
         filter: none !important;
+
+        --top: 50%;
+        --margin-top: calc(-1 * var(--icon-size) / 2);
+        --left: var(--button-sides-icon);
+        --margin-left: 0;
 
         transform: none !important;
         transform-origin: center !important;

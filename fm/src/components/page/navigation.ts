@@ -1470,7 +1470,7 @@ export function append_nav() {
                         <div class="window-menu-items">
                             <a class="btn window-menu-item icon-r window-menu-item-big" href="${root}user/${auth.name}">
                                 <span class="avatar window-menu-avatar">
-                                    <img src=${auth.avatar} alt=${auth.name}>
+                                    <img src=${avatar(auth.avatar, 'avatar170s')} alt=${auth.name}>
                                 </span>
                                 ${auth.name}
                             </a>
