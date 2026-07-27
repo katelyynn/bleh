@@ -67,7 +67,7 @@
     display: flex;
     align-items: center;
     gap: var(--item-list-gap);
-    padding: 6px var(--setting-group-padding);
+    padding: 6px calc(var(--setting-group-padding) + 2px);
     cursor: default;
     position: relative;
 
