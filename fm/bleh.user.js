@@ -95395,6 +95395,7 @@
       pt: "Entendido"
     },
     tip: {
+      // used as a label for each tip
       en: "Tip",
       de: "Tipp",
       ru: "\u041F\u043E\u0434\u0441\u043A\u0430\u0437\u043A\u0430",
@@ -95403,6 +95404,7 @@
       pt: "Dica"
     },
     popup_navigation_menu: {
+      // its pointing to your user menu in the top right
       title: {
         en: "This is your navigator",
         de: "Dies ist dein Navigator",
@@ -95678,6 +95680,8 @@
       it: "Cambia font"
     },
     and_count_more: {
+      // [top badge] and 3 more...
+      // for a user
       en: "and {c} more",
       de: "und {c} weitere",
       es: "y {c} m\xE1s",
@@ -95847,6 +95851,7 @@
       it: "Sposta in basso"
     },
     other_user: {
+      // for example, in a list of users - maybe you want to add someone not listed
       en: "Other user",
       de: "Anderer Benutzer",
       es: "Otro usuario",
@@ -95873,6 +95878,7 @@
       en: "Music is better with friends, {a}add to your close friends list{/a}"
     },
     collage_cta: {
+      // used to 'advertise' collages
       name: {
         en: "Create a collage"
       },
@@ -95881,6 +95887,7 @@
       }
     },
     compare_cta: {
+      // used to 'advertise' the comparison mini
       name: {
         en: "Compare with your friends"
       },
@@ -95889,6 +95896,7 @@
       }
     },
     sponsor_cta: {
+      // used to 'advertise' sponsoring
       body: {
         en: "Help out the future of bleh"
       }
@@ -95917,9 +95925,11 @@
       en: "Graph options"
     },
     refresh_plot_notice: {
+      // once you edit the graph, it will display this tooltip as a warning
       en: "This will re-gather all data points"
     },
     refresh_plot_alert: {
+      // this is linked to the above
       en: "The timeframe you selected does not match the current graph, you can refresh the data to fix this."
     },
     under_construction: {
@@ -95929,6 +95939,7 @@
       en: "Data source"
     },
     data_source_explain: {
+      // used in the dialog for adding a data source
       en: "Here you can add media to your graph, for example an artist or an album/track. Listing an album or track is optional, as you can instead add an entire artist."
     },
     artist_required: {
@@ -95944,9 +95955,11 @@
       en: "Username required"
     },
     already_a_close_friend: {
+      // user is already a friend
       en: "Already added to close friends"
     },
     plot_explain: {
+      // these are steps in order
       0: {
         en: "Choose a timeframe for your graph"
       },
@@ -95961,6 +95974,7 @@
       }
     },
     how_to_plot: {
+      // used to label the above steps
       en: "Explaining Plot"
     },
     plotting_your_data: {
@@ -95968,6 +95982,7 @@
       en: "Plotting your data"
     },
     issues_updating: {
+      // there are then links after this
       en: "Having issues updating or need support in general?"
     },
     hybrid_inbox: {
@@ -96001,6 +96016,8 @@
     },
     hot_100: {
       // b = bleh
+      // idk how well this translates but like 'hot 100' is a thing
+      // this is referencing, like the top 100 tracks at the moment
       en: "The {b} Hot 100"
     }
   };
