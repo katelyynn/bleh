@@ -144,6 +144,11 @@
         transition-timing-function: var(--trans-function-ani);
     }
 
+    /* 3 rows of text */
+    &.compare-item {
+        --extra-white: 30%;
+    }
+
     &.generic-cover {
         --grid-colour-shadow-override: 0 10px 30px oklch(var(--b2) / 25%);
     }
@@ -316,6 +321,7 @@
     }
 }
 
+.grid-item-artist-no-link,
 .grid-items-item-main-text,
 .grid-items-item-aux-text {
     pointer-events: auto;
