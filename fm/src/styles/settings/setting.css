@@ -236,6 +236,13 @@
         }
     }
 
+    &[data-type="options"],
+    &[data-type="list"] {
+        & > .heading {
+            flex: unset;
+        }
+    }
+
     &[data-type="text"]:not(.v) {
         & > .heading {
             justify-content: center;

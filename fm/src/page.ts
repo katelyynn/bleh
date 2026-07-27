@@ -474,6 +474,9 @@ function load_page(main_content = null) {
         page.type = 'bleh_settings';
         bleh_home();
         bleh_settings();
+    } else if (is_url(urls.explore_charts) || is_url(urls.geo_charts)) {
+        page.type = 'charts';
+        bleh_home();
     } else {
         bleh_error();
 
@@ -492,7 +495,7 @@ function load_page(main_content = null) {
             nag_bar();
         }
 
-        if (settings.corrections) {
+        if (settings.corrections || settings.format_guest_features) {
             if (page.type == 'artist') {
                 correct_generic_combo_no_artist('artist-top-albums-item');
             } else if (page.type == 'track') {

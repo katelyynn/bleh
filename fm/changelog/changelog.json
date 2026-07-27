@@ -1,4 +1,10 @@
 {
+    "2026.0727": {
+        "type": "major",
+        "force": false,
+        "bio": "# Music\n- Fixed regression with how album/artist grids were coloured\n- Adjusted rendering of grid text\n\n# Profiles\n- Fixed rendering of images in certain conditions where they would usually center align, but due to a wrapping link it wouldn’t\n- Adjusted rendering of status.cafe’s to be more inline with usual text\n- Added extra margin below about me’s for more differentiation\n- Improved design of the Last.fm Pro ‘weekly summary’ chart thing\n- Fixed obsession pages not actually showing the #1 badge\n- Adjusted the ordering of profile sidebar elements\n\n# Navigation\n- Introduced a new work-in-progress mobile navigation menu\n- Improved mobile support in a few areas\n- Hidden the scrollbar by default to reduce page movement\n\n# Sponsors\n- Fixed some sponsor-related badges being defaulted to ‘reserved’\n\n# Other\n- Refactored the internal code for patching music titles and detecting features to be more maintainable\n- Adjusted list of proxy-free image links\n- Fixed rendering of outline buttons\n- Updated list of random songs used when creating a scrobble and previewing activities\n- Updated dependencies\n- Adjusted how the footer was being patched to hopefully fix weird crashing issues\n- Centered the font preview in settings as some languages overflow to multiple lines\n- Improved the album cover examples in the Visual settings\n- Fixed some visibility issues in the Midnight theme\n- Changed *Avatar shape* to a list of pre-defined radio options rather than a pre-defined range slider\n- Fixed many glaring visibility issues when using *Compare*\n- Redesigned the look of the language overview in settings\n- Redesigned the look of colour swatches in settings\n- Fixed a crash related to seasons being disabled\n- Fixed a Last.fm regression where the library search box would open by default",
+        "name": "aihara"
+    },
     "2026.0629": {
         "type": "major",
         "force": false,

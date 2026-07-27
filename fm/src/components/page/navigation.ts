@@ -102,62 +102,62 @@ export function append_nav() {
     page.state.quick_access_items = {
         home: {
             name: tl(trans.home),
-            icon: 'home',
+            icon: icons.home,
             url: `${root}music`
         },
         reports: {
             name: tl(trans.reports),
-            icon: 'reports',
+            icon: icons.listening_report,
             url: `${root}user/${auth.name}/listening-report`
         },
         library: {
             name: tl(trans.library),
-            icon: 'library',
+            icon: icons.library,
             url: `${root}user/${auth.name}/library`
         },
         shouts: {
             name: tl(trans.shouts),
-            icon: 'shouts',
+            icon: icons.shoutbox,
             url: `${root}user/${auth.name}/shoutbox`
         },
         obsessions: {
             name: tl(trans.obsessions),
-            icon: 'obsessions',
+            icon: icons.obsessions,
             url: `${root}user/${auth.name}/obsessions`
         },
         bookmarks: {
             name: tl(trans.bookmarks),
-            icon: 'bookmark',
+            icon: icons.bookmark,
             url: `${root}music/+bookmarks`
         },
         friends: {
             name: tl(trans.friends),
-            icon: 'friends',
+            icon: icons.friends,
             url: `${root}user/${auth.name}/friends`
         },
         notifications: {
             name: tl(trans.notifications),
-            icon: 'notifications',
+            icon: icons.notifications,
             url: `${root}inbox/notifications`
         },
         messages: {
             name: tl(trans.messages),
-            icon: 'messages',
+            icon: icons.messages,
             url: `${root}inbox`
         },
         collage: {
             name: tl(trans.collage),
-            icon: 'collage',
+            icon: icons.collage,
             url: `${root}bleh/minis/collage`
         },
         compare: {
             name: tl(trans.compare),
-            icon: 'compare',
+            icon: icons.compare,
             url: `${root}bleh/minis/compare`
         },
         scrobble: {
             name: tl(trans.scrobble),
-            icon: 'add',
+            icon: icons.plus,
             action: () => submit_scrobble()
         }
     };
@@ -180,6 +180,7 @@ export function append_nav() {
             <ul class="navlist-items">
                 <a class="btn masthead-nav-control icon" data-type="charts" href="${root}charts">
                     ${tl(trans.charts)}
+                    ${ff('aihara') ? new_indicator() : ''}
                 </a>
                 <a class="btn masthead-nav-control icon" data-type="minis" href="${root}bleh/minis">
                     ${tl(trans.minis)}
@@ -1467,9 +1468,22 @@ export function append_nav() {
                     theme: 'mobile',
                     content: html.node`
                         <div class="window-menu-items">
-                            <button class="dropdown-menu-clickable-item" data-menu-item="news" onclick=${() => {
+                            <a class="btn window-menu-item icon-r window-menu-item-big" href="${root}user/${auth.name}">
+                                <span class="avatar window-menu-avatar">
+                                    <img src=${avatar(auth.avatar, 'avatar170s')} alt=${auth.name}>
+                                </span>
+                                ${auth.name}
+                            </a>
+                            ${settings.starred_friend != '' ? html.node`
+                                <a class="btn window-menu-item icon-r colourful" data-type="starred_friend" data-starred="true" href="${root}user/${settings.starred_friend}">
+                                    ${icon({ name: 'inherit' })}
+                                    ${settings.starred_friend}
+                                </a>
+                            ` : ''}
+                            <button class="btn window-menu-item icon-r" onclick=${() => {
                                 news();
                             }}>
+                                ${icon({ name: icons.news })}
                                 ${tl(trans.news)}
                             </button>
                             ${settings.navigation_items.map((val) => {
@@ -1483,9 +1497,12 @@ export function append_nav() {
                                 else
                                     elem = html.node`<button onclick=${formal.action} />`;
 
-                                elem.classList = 'dropdown-menu-clickable-item';
-                                elem.setAttribute('data-type', formal.icon);
-                                elem.textContent = formal.name;
+                                elem.classList = 'btn window-menu-item icon-r';
+
+                                render(elem, html`
+                                    ${icon({ name: formal.icon })}
+                                    ${formal.name}
+                                `);
 
                                 let count = 0;
 
@@ -1493,47 +1510,40 @@ export function append_nav() {
                                 else if (val == 'messages') count = messages_count;
 
                                 if (count) {
-                                    render(
-                                        elem,
-                                        html`
-                                            <div class="auth-dropdown-item-row">
-                                                <span
-                                                    class="auth-dropdown-item-left"
-                                                >
-                                                    ${formal.name}
-                                                </span>
-                                                <span
-                                                    class="auth-dropdown-item-right"
-                                                >
-                                                    ${count}
-                                                </span>
-                                            </div>
-                                        `
-                                    );
+                                    render(elem, html`
+                                        ${icon({ name: formal.icon })}
+                                        <div class="auth-dropdown-item-row">
+                                            <span
+                                                class="auth-dropdown-item-left"
+                                            >
+                                                ${formal.name}
+                                            </span>
+                                            <span
+                                                class="auth-dropdown-item-right"
+                                            >
+                                                ${count}
+                                            </span>
+                                        </div>
+                                    `);
                                 }
 
                                 return elem;
                             })}
-                            <a class="dropdown-menu-clickable-item" aria-checked=${page.type == 'bleh_settings'} data-menu-item="bleh" href="${root}bleh">
+                            <a class="btn window-menu-item icon-r" aria-checked=${page.type == 'bleh_settings'} href="${root}bleh">
+                                ${icon({ name: icons.bleh_settings })}
+                                ${version.brand}
+                            </a>
+                            <a class="btn window-menu-item icon-r" aria-checked=${page.type == 'settings'} href="${root}settings">
+                                ${icon({ name: icons.settings })}
                                 ${tl(trans.settings)}
                             </a>
-                            <a class="dropdown-menu-clickable-item" aria-checked=${page.type == 'settings'} data-menu-item="settings" href="${root}settings">
-                                ${tl(trans.settings)}
-                            </a>
-                            ${settings.starred_friend != '' ? html.node`
-                                <a class="dropdown-menu-clickable-item no-colour colourful" data-type="starred_friend" data-is-shortcut="true" href="${root}user/${settings.starred_friend}">
-                                    ${settings.starred_friend}
-                                </a>
-                            ` : ''}
                             <form>
                                 <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
-                                <a class="dropdown-menu-clickable-item colourful" ref=${(el) => (button = el)} data-menu-item="logout" href="${root}logout">
+                                <a class="btn window-menu-item icon-r colourful" ref=${(el) => (button = el)} data-menu-item="logout" href="${root}logout">
+                                    ${icon({ name: icons.logout })}
                                     ${tl(trans.logout)}
                                 </a>
                             </form>
-                            <a class="dropdown-menu-clickable-item" data-type="user" href="${root}user/${auth.name}">
-                                ${auth.name}
-                            </a>
                         </div>
                     `,
                     placement: 'top',
@@ -1650,8 +1660,8 @@ export async function live_status() {
             );
 
             track.classList.add('smart-title');
-            render(track, smart_title(formatted[0], formatted[1]));
-            artist = html.node`<span class="artist">${smart_artists(formatted[2], formatted[3])}</span>`;
+            render(track, smart_title(formatted.song_title, formatted.song_tags));
+            artist = html.node`<span class="artist">${smart_artists(formatted.song_artist, formatted.song_guests)}</span>`;
         } else if (settings.corrections) {
             album.textContent = romanise(correct_item_by_artist(album.textContent, artist.textContent));
             track.textContent = romanise(

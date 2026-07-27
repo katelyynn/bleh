@@ -301,7 +301,7 @@ export function bleh_artists() {
                                     page.name
                                 );
 
-                                name = html.node`${smart_title(formatted[0], formatted[1])}`;
+                                name = html.node`${smart_title(formatted.song_title, formatted.song_tags)}`;
                             } else if (settings.corrections) {
                                 name = correct_item_by_artist(
                                     original_name,

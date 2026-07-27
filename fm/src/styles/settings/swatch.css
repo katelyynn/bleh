@@ -26,7 +26,7 @@
     gap: var(--item-list-gap) !important;
 
     &.has-hover {
-        & > .swatch-group > .swatch-container:not(:hover, [aria-expanded="true"]) {
+        & > .swatch-group > .swatch-container:not(:hover) {
             & > .swatch-inner {
                 opacity: 0 !important;
                 translate: 0 2px !important;
@@ -90,7 +90,7 @@
         }
     }
 
-    &[aria-expanded="true"],
+
     &:hover {
         & > .swatch-inner {
             color: oklch(var(--c3));

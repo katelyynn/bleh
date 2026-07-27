@@ -218,29 +218,26 @@ export function page_header_title(header = document.body) {
             if (!track_title.hasAttribute('data-kate-processed')) {
                 track_title.setAttribute('data-kate-processed', 'true');
 
-                let formatted_title = name_includes(
+                const formatted = name_includes(
                     track_title.textContent,
                     track_artist.textContent
                 );
-                let song_title = formatted_title[0];
-                let song_tags = formatted_title[1];
 
-                page.corrected = formatted_title[4];
+                page.corrected = formatted.corrected_title != track_title.textContent;
 
                 // combine
-                render(track_title, smart_title(song_title, song_tags, true));
+                render(track_title, smart_title(formatted.song_title, formatted.song_tags, true));
 
                 // (spotify) / (explicit) / (clean) in title
-                if (song_tags.some((tag) => tag.group == 'form'))
-                    page.suggest = sanitise(song_title.trim());
+                if (formatted.song_tags.some((tag) => tag.group == 'form'))
+                    page.suggest = sanitise(formatted.song_title.trim());
 
                 let song_artist_element = document.body.querySelector(
                     'span[itemprop="byArtist"]'
                 );
-                let song_guests = formatted_title[3];
-                page.sister_others = formatted_title[3];
-                song_artist_element.innerHTML =
-                    song_artist_element.innerHTML.trim();
+                let song_guests = formatted.song_guests;
+                page.sister_others = song_guests;
+                song_artist_element.innerHTML = song_artist_element.innerHTML.trim();
                 for (let guest in song_guests) {
                     // &
                     song_artist_element.innerHTML = `${song_artist_element.innerHTML},`;

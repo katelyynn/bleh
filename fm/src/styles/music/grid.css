@@ -38,6 +38,7 @@
         height: var(--grid-item-size);
         animation: none !important;
 
+        &:after,
         &:before {
             display: none !important;
         }
@@ -57,6 +58,7 @@
         }
 
         .grid-items-item-aux-text {
+            --l3-c: #fff;
             color: #fff;
             opacity: 0.8;
         }
@@ -120,7 +122,7 @@
     aspect-ratio: 1 / 1;
     border-radius: var(--item-small-radius);
     /*overflow: hidden;*/
-    box-shadow: var(--grid-colour-shadow, none), var(--interact-shadow);
+    box-shadow: var(--grid-colour-shadow-override, var(--grid-colour-shadow, none)), var(--interact-shadow);
     position: relative;
 
     contain: content;
@@ -142,13 +144,18 @@
         transition-timing-function: var(--trans-function-ani);
     }
 
-    &.generic-cover {
-        --grid-colour-shadow-override: 0 10px 30px oklch(var(--b2) / 20%);
+    /* 3 rows of text */
+    &.compare-item {
+        --extra-white: 30%;
     }
 
-    --shadow: rgba(0, 0, 0, 0.2);
+    &.generic-cover {
+        --grid-colour-shadow-override: 0 10px 30px oklch(var(--b2) / 25%);
+    }
 
-    &.grid-items-item-has-colour {
+    --shadow: rgba(0, 0, 0, 0.0);
+
+    &.colourful {
         --shadow: color-mix(in oklch, oklch(var(--h4)) 100%, black 50%);
     }
 
@@ -229,6 +236,8 @@
     & > img {
         height: 100%;
         object-fit: cover;
+        /* for some reason i have to hardcode this for html2canvas */
+        border-radius: var(--item-small-radius);
     }
 
     &:after {
@@ -257,7 +266,7 @@
             --mask: linear-gradient(
                 0deg,
                 transparent calc(0% + var(--extra-trans)),
-                white calc(38% + var(--extra-white))
+                white calc(24% + var(--extra-white))
             );
             mask-image: var(--collage-mask-override, var(--mask));
             -webkit-mask-image: var(--collage-mask-override, var(--mask));
@@ -269,6 +278,7 @@
         z-index: 20;
     }
 
+    /* make ur classes better please this isnt very good */
     & > div > .lfmmaf-missing-artwork-button {
         top: 10px;
         right: 10px;
@@ -311,13 +321,15 @@
     }
 }
 
+.grid-item-artist-no-link,
 .grid-items-item-main-text,
 .grid-items-item-aux-text {
     pointer-events: auto;
     font-size: var(--font-size);
     font-weight: var(--font-weight);
 
-    & > a {
+    & > a,
+    & > .grid-item-text {
         color: inherit;
     }
 }
@@ -415,7 +427,7 @@
     transition-duration: var(--trans);
     transition-timing-function: var(--trans-function-ani);
 
-    & > a:first-child {
+    & > .grid-item-text:first-child {
         display: inline-block;
         overflow: hidden;
         text-overflow: ellipsis;

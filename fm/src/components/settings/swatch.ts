@@ -174,7 +174,7 @@ export function display_colour_presets() {
     let sat_range;
     let lit_range;
 
-    const season = page.state.seasons.current.id;
+    const season = page.state.seasons.current?.id;
 
     for (let type in colours) {
         const swatch_group = page.structure.main.querySelector(`#colour_${type}`);

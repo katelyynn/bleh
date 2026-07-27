@@ -37,7 +37,6 @@
   z-index: 3;
 
   overflow-y: auto;
-  scrollbar-width: thin;
 
   @media (max-width: 980px) {
     width: unset;
@@ -161,6 +160,7 @@
                     background-image: var(--gloss-image) !important;
                     background-size: 100% !important;
                     opacity: var(--gloss);
+                    mix-blend-mode: var(--gloss-mix);
                     pointer-events: none;
                     padding: unset !important;
                     box-shadow: unset !important;

@@ -39,7 +39,7 @@
     }
 
     position: relative;
-    border-radius: var(--button-radius);
+    border-radius: var(--input-radius);
 
     textarea {
         height: 250px !important;

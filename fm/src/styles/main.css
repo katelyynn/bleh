@@ -6,9 +6,17 @@
     display: none !important;
 }
 
-:root {
-    scrollbar-width: thin;
+* {
+    scrollbar-width: none;
+    scrollbar-gutter: stable both-edges;
     scroll-behavior: smooth;
+}
+
+body {
+    -webkit-text-size-adjust: 100%;
+}
+
+:root {
     scroll-padding-top: calc(52px + 15px);
 }
 body {
@@ -26,6 +34,8 @@ body {
     overflow-x: hidden;
 
     text-underline-offset: var(--underline-offset);
+
+    margin: unset !important;
 
     &:before {
         content: "";
@@ -122,6 +132,8 @@ p,
 pre,
 ul {
     margin-top: unset;
+    padding-inline: unset !important;
+    margin-block: unset !important;
 }
 
 b,

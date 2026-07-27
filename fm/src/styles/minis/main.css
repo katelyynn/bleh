@@ -25,8 +25,8 @@
         position: relative;
 
         --bg: transparent;
-        --bg-hov: oklch(var(--b4) / 20%);
-        --bg-atv: oklch(var(--b4) / 40%);
+        --bg-hov: var(--setting-hover);
+        --bg-atv: var(--setting-active);
         --shadow: none;
         --padding: 12px;
         margin: -12px !important;

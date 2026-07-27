@@ -65,9 +65,11 @@
 
     .footer-bleh {
         display: flex;
+        flex-wrap: wrap;
         align-items: end;
         gap: 6px;
         cursor: default;
+        margin-top: 10px;
     }
 
     .footer-bleh-top {
@@ -76,35 +78,27 @@
         flex-wrap: wrap;
         gap: 4px var(--card-padding);
     }
+}
 
-    .footer-extras {
-        padding-top: 40px;
-
-        .container {
-            min-width: calc(
-                var(--cards-width) - (var(--card-padding) * 2)
-            ) !important;
-            max-width: calc(
-                var(--cards-width) - (var(--card-padding) * 2)
-            ) !important;
-            width: calc(
-                var(--cards-width) - (var(--card-padding) * 2)
-            ) !important;
-        }
-
-        .footer-heading {
-            display: none;
-        }
+.footer-top,
+.footer-bottom {
+    & > .container {
+        min-width: calc(var(--cards-width) - (var(--card-padding) * 2)) !important;
+        max-width: calc(var(--cards-width) - (var(--card-padding) * 2)) !important;
+        width: calc(var(--cards-width) - (var(--card-padding) * 2)) !important;
     }
+}
 
-    .more {
-        .bleh-icon {
-            --icon: var(--icon-16-dots);
-            --icon-size: 15px;
-            vertical-align: middle;
-            display: inline-flex;
-        }
-    }
+.footer-heading {
+    color: oklch(var(--c3)) !important;
+    text-transform: unset !important;
+    font-size: 13px !important;
+    line-height: var(--line-height) !important;
+    font-weight: var(--font-weight) !important;
+    padding-bottom: 2px !important;
+    margin-bottom: 6px !important;
+    border-bottom: 1px solid var(--separator-base) !important;
+    width: fit-content !important;
 }
 
 .b {
@@ -116,6 +110,7 @@
     display: flex;
     flex-direction: column;
     gap: 6px;
+    color: oklch(var(--c2) / 80%);
 
     li {
         height: fit-content;
@@ -127,6 +122,7 @@
     margin-left: unset;
     margin-right: unset;
     display: flex;
+    flex-wrap: wrap;
 }
 .footer-bottom .row .col-sm-10 {
     width: max-content;
@@ -151,6 +147,7 @@
 
 .footer-top-row {
     justify-content: space-between;
+    gap: 10px 30px;
 }
 .footer-links {
     margin: unset;
@@ -158,6 +155,7 @@
 .footer .footer-top-col {
     padding: unset;
     width: fit-content;
+    margin: unset !important;
 }
 
 .footer-bottom .row {
@@ -174,19 +172,6 @@
 .footer-heading,
 .logo p {
     cursor: default;
-}
-
-#ot-sdk-btn,
-.footer-links a,
-.footer-links button {
-    --bg: transparent !important;
-    --bg-hov: oklch(var(--b5), 60%) !important;
-    --bg-atv: oklch(var(--b5), 80%) !important;
-    --shadow: none !important;
-    --shadow-hov: none !important;
-}
-#ot-sdk-btn:not(:hover) {
-    opacity: 0;
 }
 
 .ot-sdk-show-settings {

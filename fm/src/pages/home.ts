@@ -6,10 +6,10 @@
 
 import {render_activity_list} from "@/components/shared/activity";
 import {log} from "@/build/log";
-import {auth, page, root} from "@/build/page";
+import {auth, page, root, urls} from "@/build/page";
 import {tl, trans} from "@/build/trans";
 import {checkup_nav, checkup_page_structure} from "@/components/page/structure";
-import {is_same_page, register_background, update_page} from "@/page";
+import {is_same_page, is_url, register_background, update_page} from "@/page";
 import {bleh_charts} from "@/pages/home/chart";
 import {bleh_native_settings} from '@/pages/lastfm_settings/lastfm_settings';
 import {html, render} from "lighterhtml";
@@ -158,6 +158,7 @@ export async function bleh_home() {
                     <li class="navlist-item secondary-nav-item secondary-nav-item--charts">
                         <a href="${root}charts" class="secondary-nav-item-link ${(page.type == 'charts') ? 'secondary-nav-item-link--active' : ''}">
                             ${tl(trans.charts)}
+                            ${ff('aihara') ? new_indicator() : ''}
                         </a>
                     </li>
                     ${ff('minis') ? html.node`
@@ -210,11 +211,20 @@ export async function bleh_home() {
     welcome.after(nav);
     checkup_nav();
 
-    if (page.type == 'charts')
+    if (page.type == 'charts') {
+        if (is_url(urls.explore_charts)) {
+            page.type = 'explore_charts';
+        } else if (is_url(urls.geo_charts)) {
+            page.type = 'geo_charts';
+        }
+
         bleh_charts();
 
+        return;
+    }
+
     if (page.type == 'settings')
-        bleh_native_settings();
+        return bleh_native_settings();
 
 
     if (page.subpage == 'music') {

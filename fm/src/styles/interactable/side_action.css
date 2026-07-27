@@ -73,11 +73,6 @@
         }
     }
 
-    @media (max-width: 980px) {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    }
-
     & > :last-child {
         --last-child-sep: none;
     }

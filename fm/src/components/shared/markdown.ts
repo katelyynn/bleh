@@ -18,7 +18,7 @@ import { log } from '@/build/log.js';
 import { save_profile_cache } from '@/pages/profile/profile';
 import { toggle } from '@/components/settings/toggle';
 import { save_setting } from '@/components/settings/settings';
-import { load_chart_colours } from '@/components/music/chart.js';
+import { load_chart_colours } from '@/components/music/chart';
 import { sponsor_list } from '@/build/sponsor';
 import { fetch_status } from '@/components/profile/statuscafe';
 import tippy from 'tippy.js';
@@ -513,12 +513,16 @@ export function markdown(
             }
 
             // for counter-like sites
+            // did they really have to call their counter site loli
             const proxy_free = [
                 'count.getloli.com',
                 'i.imgur.com',
                 'media1.tenor.com',
                 'katelyynn.github.io',
-                'i.pinimg.com'
+                'i.pinimg.com',
+                'i.ibb.co',
+                'static.klipy.com',
+                'static2.klipy.com'
             ];
 
             try {

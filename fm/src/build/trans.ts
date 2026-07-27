@@ -46,7 +46,7 @@ export let lang_info = {
         last_updated: '2025-12-12',
     },
     pt: {
-        name: get_language_name('pt'),
+        name: 'português brasileiro',
         by: ['ArthRMH', 'satisfeita', 'fr0r', 'urwq', 'anjoskron', 'foognocchie'],
         last_updated: '2026-02-22',
     },
@@ -61,7 +61,7 @@ export let lang_info = {
         last_updated: '2026-02-07',
     },
     zh: {
-        name: get_language_name('zh'),
+        name: '简体中文',
         by: ['Dnzzk2'],
         last_updated: '2025-12-29',
     },
@@ -3129,7 +3129,7 @@ export const trans = {
         pl: 'Beta',
     },
     more: {
-        en: 'More',
+        en: 'More...',
         de: 'Mehr',
         es: 'Más',
         it: 'Altro',
@@ -3492,8 +3492,8 @@ export const trans = {
         },
     },
     alert_of_correction: {
-        en: 'This title is already being corrected to \'{t}\', are you sure you want to continue?',
-        es: 'Este título ya está siendo corregido a \'{t}\', ¿seguro que quieres continuar?'
+        en: 'This title is already being corrected to ’{t}’, are you sure you want to continue?',
+        es: 'Este título ya está siendo corregido a \'{t}\', ¿seguro que quieres continuar?',
     },
     current: {
         en: 'Current',
@@ -6163,6 +6163,15 @@ export const trans = {
             pt: 'Aplica-se a todos os perfis, visível apenas para você',
             pl: 'Dotyczy wszystkich profili, widoczne tylko dla ciebie',
         },
+    },
+    circle: {
+        en: 'Circular',
+    },
+    squircle: {
+        en: 'Rounded',
+    },
+    square: {
+        en: 'Square',
     },
     notes: {
         // profile notes
@@ -10824,6 +10833,7 @@ export const trans = {
         pt: 'Entendido',
     },
     tip: {
+        // used as a label for each tip
         en: 'Tip',
         de: 'Tipp',
         ru: 'Подсказка',
@@ -10832,6 +10842,7 @@ export const trans = {
         pt: 'Dica',
     },
     popup_navigation_menu: {
+        // its pointing to your user menu in the top right
         title: {
             en: 'This is your navigator',
             de: 'Dies ist dein Navigator',
@@ -11105,6 +11116,8 @@ export const trans = {
         it: 'Cambia font',
     },
     and_count_more: {
+        // [top badge] and 3 more...
+        // for a user
         en: 'and {c} more',
         de: 'und {c} weitere',
         es: 'y {c} más',
@@ -11273,6 +11286,7 @@ export const trans = {
         it: 'Sposta in basso',
     },
     other_user: {
+        // for example, in a list of users - maybe you want to add someone not listed
         en: 'Other user',
         de: 'Anderer Benutzer',
         es: 'Otro usuario',
@@ -11300,6 +11314,7 @@ export const trans = {
         es: 'La música es mejor con amigos, {a}añade a tu lista de amigos cercanos{/a}',
     },
     collage_cta: {
+        // used to 'advertise' collages
         name: {
             en: 'Create a collage',
             es: 'Crear un collage',
@@ -11310,6 +11325,7 @@ export const trans = {
         },
     },
     compare_cta: {
+        // used to 'advertise' the comparison mini
         name: {
             en: 'Compare with your friends',
             es: 'Comparar con tus amigos',
@@ -11320,6 +11336,7 @@ export const trans = {
         },
     },
     sponsor_cta: {
+        // used to 'advertise' sponsoring
         body: {
             en: 'Help out the future of bleh',
             es: 'Ayuda al futuro de bleh',
@@ -11356,10 +11373,12 @@ export const trans = {
         es: 'Opciones del gráfico',
     },
     refresh_plot_notice: {
+        // once you edit the graph, it will display this tooltip as a warning
         en: 'This will re-gather all data points',
         es: 'Esto volverá a recopilar todos los datos',
     },
     refresh_plot_alert: {
+        // this is linked to the above
         en: 'The timeframe you selected does not match the current graph, you can refresh the data to fix this.',
         es: 'El periodo que seleccionaste no coincide con el gráfico actual, puedes recargar los datos para solucionarlo',
     },
@@ -11372,6 +11391,7 @@ export const trans = {
         es: 'Fuente de datos',
     },
     data_source_explain: {
+        // used in the dialog for adding a data source
         en: 'Here you can add media to your graph, for example an artist or an album/track. Listing an album or track is optional, as you can instead add an entire artist.',
         es: 'Aquí puedes añadir multimedia a tu gráfico, por ejemplo un artista o un álbum/tema. Añadir un álbum o tema es opcional, ya que puedes añadir un artista entero.',
     },
@@ -11392,10 +11412,12 @@ export const trans = {
         es: 'Nombre de usuario requerido',
     },
     already_a_close_friend: {
+        // user is already a friend
         en: 'Already added to close friends',
         es: 'Ya está en tus amigos cercanos',
     },
     plot_explain: {
+        // these are steps in order
         0: {
             en: 'Choose a timeframe for your graph',
             es: 'Elige un periodo para tu gráfico',
@@ -11414,6 +11436,7 @@ export const trans = {
         },
     },
     how_to_plot: {
+        // used to label the above steps
         en: 'Explaining Plot',
         es: 'Explicando Plot',
     },
@@ -11423,6 +11446,7 @@ export const trans = {
         es: 'Graficando tus datos',
     },
     issues_updating: {
+        // there are then links after this
         en: 'Having issues updating or need support in general?',
         es: '¿Tienes problemas al actualizar o necesitas soporte en general?',
     },
@@ -11441,8 +11465,8 @@ export const trans = {
         es: 'Desactiva los elementos visuales de bleh aquí',
     },
     you_have_disabled_bleh_visuals_for_settings: {
-        en: 'You have disabled bleh visuals for Last.fm settings, don\'t expect this to look pretty',
-        es: 'Has desactivado los elementos visuales de bleh en la configuración de Last.fm, no esperes que se vea bonito'
+        en: 'You have disabled bleh visuals for Last.fm settings, don’t expect this to look pretty',
+        es: 'Has desactivado los elementos visuales de bleh en la configuración de Last.fm, no esperes que se vea bonito',
     },
     hide_unused_settings: {
         en: 'Hide settings that have no effect',
@@ -11451,7 +11475,22 @@ export const trans = {
     edit_links: {
         en: 'Edit links',
         es: 'Editar vínculos',
-    }
+    },
+    daily: {
+        en: 'Daily',
+    },
+    weekly: {
+        en: 'Weekly',
+    },
+    explore: {
+        en: 'Explore',
+    },
+    hot_100: {
+        // b = bleh
+        // idk how well this translates but like 'hot 100' is a thing
+        // this is referencing, like the top 100 tracks at the moment
+        en: 'The {b} Hot 100',
+    },
 } as const satisfies Record<string, any>;
 
 export const translation_fallback = 'NO_TRANSLATION_FOUND';

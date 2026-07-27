@@ -302,36 +302,40 @@ export function correct_generic_combo(parent) {
         if (!album.hasAttribute('data-kate-processed')) {
             album.setAttribute('data-kate-processed', 'true');
 
-            let album_name = album.querySelector(
-                `.${parent.replace('-details', '')}-name a`
-            );
-            if (!album_name) return;
-
-            let artist_name = album.querySelector(
-                `.${parent.replace('-details', '')}-artist a`
-            );
-            if (!artist_name) return;
-
-            if (settings.format_guest_features) {
-                const formatted = name_includes(
-                    album_name.textContent,
-                    artist_name.textContent
+            try {
+                let album_name = album.querySelector(
+                    `.${parent.replace('-details', '')}-name a`
                 );
+                if (!album_name) return;
 
-                album_name.classList.add('smart-title');
-                render(album_name, smart_title(formatted[0], formatted[1]));
-            } else if (settings.corrections) {
-                album_name.textContent = romanise(
-                    correct_item_by_artist(
+                let artist_name = album.querySelector(
+                    `.${parent.replace('-details', '')}-artist a`
+                );
+                if (!artist_name) return;
+
+                if (settings.format_guest_features) {
+                    const formatted = name_includes(
                         album_name.textContent,
                         artist_name.textContent
-                    )
-                );
-            }
+                    );
 
-            artist_name.textContent = romanise(
-                correct_artist(artist_name.textContent)
-            );
+                    album_name.classList.add('smart-title');
+                    render(album_name, smart_title(formatted.song_title, formatted.song_tags));
+                } else if (settings.corrections) {
+                    album_name.textContent = romanise(
+                        correct_item_by_artist(
+                            album_name.textContent,
+                            artist_name.textContent
+                        )
+                    );
+                }
+
+                artist_name.textContent = romanise(
+                    correct_artist(artist_name.textContent)
+                );
+            } catch (e) {
+                log('unable to correct generic combo', 'lotus', 'error', { e, album, html: album.innerHTML, format_guest_features: settings.format_guest_features, lotus: settings.corrections });
+            }
         }
     });
 }
@@ -368,7 +372,7 @@ export function correct_generic_combo_no_artist(parent) {
                 );
 
                 album_name.classList.add('smart-title');
-                render(album_name, smart_title(formatted[0], formatted[1]));
+                render(album_name, smart_title(formatted.song_title, formatted.song_tags));
             } else if (settings.corrections) {
                 album_name.textContent = romanise(
                     correct_item_by_artist(album_name.textContent, artist_name)
@@ -444,10 +448,18 @@ export function correct_artist(artist, broadcast = false) {
     }
 }
 
+interface pattern_match {
+    group: string,
+    pattern: string | RegExp,
+    regex: boolean,
+    index: number,
+    text: string | RegExp
+}
+
 // feat.
 export function name_includes(
-    original_title,
-    original_artist,
+    original_title: string,
+    original_artist: string,
     inherit_guests = ''
 ) {
     // track if we applied an album/track correction
@@ -473,9 +485,10 @@ export function name_includes(
     const lower_title = formatted_title.toLowerCase();
     // find all tag‐matches (index ≥ 1), with special remaster logic
     // due to Nirvana nonsense such as 20th Anniversary Remaster etc.
-    const matches = flat_patterns
+    const matches: pattern_match[] = flat_patterns
         .flatMap(({ group, pattern, regex }) => {
             if (regex) {
+                pattern = pattern as RegExp;
                 const safe_pattern = pattern.global ? pattern : new RegExp(pattern.source, pattern.flags + 'g');
 
                 return [ ...lower_title.matchAll(safe_pattern) ].map(m => ({
@@ -486,6 +499,7 @@ export function name_includes(
                     text: m[0]
                 }));
             } else {
+                pattern = pattern as string;
                 const index = lower_title.indexOf(pattern.toLowerCase());
 
                 return index >= 0 ? [{
@@ -497,7 +511,7 @@ export function name_includes(
                 }] : [];
             }
         })
-        .filter((match) => {
+        .filter((match: pattern_match) => {
             if (match.index < 1) return false;
 
             return !(
@@ -506,7 +520,7 @@ export function name_includes(
                 !lower_title.includes('(remaster')
             );
         })
-        .sort((a, b) => a.index - b.index);
+        .sort((a: pattern_match, b: pattern_match) => a.index - b.index);
 
     log('found tag matches', 'lotus', 'info', { lower_title, matches });
 
@@ -591,13 +605,13 @@ export function name_includes(
         song_guests.push(...guests);
     });
 
-    const result = [
-        cleaned_title,
-        extras,
-        original_artist,
-        song_guests,
-        original_title_corrected
-    ];
+    const result = {
+        song_title: cleaned_title,
+        song_tags: extras,
+        song_artist: original_artist,
+        song_guests: song_guests,
+        corrected_title: formatted_title
+    };
 
     log('finalised', 'lotus', 'log', { result });
     return result;
@@ -608,7 +622,7 @@ export function smart_title(song_title: string, song_tags, in_header = false) {
     const show_remaster = settings.show_remaster_tags;
 
     return html`
-        <div class="title">${fancy_title(romanise(song_title.trim()), in_header)}</div>
+        <span class="title">${fancy_title(romanise(song_title.trim()), in_header)}</span>
         ${song_tags.map((tag) => {
             if (
                 (!show_features && tag.group == 'guests') ||
@@ -618,7 +632,7 @@ export function smart_title(song_title: string, song_tags, in_header = false) {
             }
 
             return html.node`
-                <div class="feat" data-tag-type=${tag.type} data-tag-group=${tag.group}>${romanise(tag.text)}</div>
+                <span class="feat" data-tag-type=${tag.type} data-tag-group=${tag.group}>${romanise(tag.text)}</span>
             `;
         })}
     `;
@@ -630,7 +644,7 @@ export function fancy_title(song_title: string, in_header: boolean) {
 
 
     const elem = html.node`
-        <span>${song_title}</span>
+        <span class="fancy-title">${song_title}</span>
     `;
 
     console.info('fancy title', elem);
@@ -645,14 +659,13 @@ export function fancy_title(song_title: string, in_header: boolean) {
         `);
     }
 
-    return html.node`${{html: elem.innerHTML }}`;
+    return elem;
 }
 
 export function smart_artists(song_artist, song_guests) {
+    // scuffed but if its on one line the comma wont be fucked up
     return html`
-        <a href="${root}music/${redirect()}${sanitise(song_artist)}">${romanise(song_artist)}</a>
-        ${song_guests.map((guest) => html.node`
-            ,<a href="${root}music/${redirect()}${sanitise(guest)}">${romanise(guest)}</a>
+        <a href="${root}music/${redirect()}${sanitise(song_artist)}">${romanise(song_artist)}</a>${song_guests.map((guest) => html.node`,<a href="${root}music/${redirect()}${sanitise(guest)}">${romanise(guest)}</a>
         `)}
     `;
 }

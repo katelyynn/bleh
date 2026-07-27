@@ -3,6 +3,25 @@
     flex-wrap: wrap;
     gap: 2px 6px;
 }
+.smart-artist {
+    display: flow-root;
+    cursor: default;
+
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex-shrink: 1;
+
+    & > a {
+        cursor: pointer;
+        overflow: hidden;
+    }
+
+    & > a + a {
+        margin-left: 4px;
+    }
+}
 
 .title {
     min-width: 0;

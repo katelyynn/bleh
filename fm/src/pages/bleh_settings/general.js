@@ -182,35 +182,29 @@ export function general() {
                         let date;
 
                         const row = html.node`
-                            <div class="language-row${lang == key ? ' active' : ''}">
-                                ${flag((convert_lang_to_country[key] || key).toUpperCase())}
-                                <div class="name">
-                                    <h5>${language.name}</h5>
-                                    <p>${{ html: tl(trans.by_user, { u: language.by.map((user) => `<a href="${root}user/${user}">${user}</a>`).join(', ') }) }}</p>
+                            <div class="language-row">
+                                ${flag((convert_lang_to_country[key] || key).toUpperCase(), 'language-row-flag')}
+                                <div class="language-row-content">
+                                    <strong class="language-row-name">${language.name}${language.new ? new_indicator() : ''}</strong>
+                                    <p class="language-row-by">${{ html: tl(trans.by_user, { u: language.by.map((user) => `<a href="${root}user/${user}">${user}</a>`).join(', ') }) }}</p>
                                 </div>
-                                ${language.new ? html.node`
-                                    <div class="badges">
-                                        ${new_indicator()}
-                                    </div>
-                                ` : html.node`
-                                    <div class="badges"></div>
-                                `}
-                                ${language.percent ? () => {
-                                    const elem = html.node`
-                                        <div class="percent colourful" style="--hue-over: ${language.percent * 1.2}; --sat-over: 1.2; --lit-over: 1;" data-percent=${language.percent}>
-                                            ${language.percent}%
-                                        </div>
-                                    `;
+                                <div class="language-row-sub">
+                                    ${language.percent ? () => {
+                                        const elem = html.node`
+                                            <p class="language-row-percent percent colourful" style="--hue-over: ${language.percent * 1.2}; --sat-over: 1.4; --lit-over: 0.9;" data-percent=${language.percent}>
+                                                ${language.percent}%
+                                            </p>
+                                        `;
 
-                                    tippy(elem, {
-                                        content: `${tl(trans.amount_translated, { c: language.translated })}, ${tl(trans.missing_translated, { c: language.missing })}`
-                                    });
+                                        tippy(elem, {
+                                            content: `${tl(trans.amount_translated, { c: language.translated })}, ${tl(trans.missing_translated, { c: language.missing })}`
+                                        });
 
-                                    return elem;
-                                } : ''}
-                                <div class="date">
-                                    <p ref=${(el) => (date = el)}>${language.last_updated != 'latest' ? DateTime.fromISO(language.last_updated).toRelative() : language.last_updated}</p>
+                                        return elem;
+                                    } : ''}
+                                    <p class="language-row-time" ref=${el => date = el}>${language.last_updated != 'latest' ? DateTime.fromISO(language.last_updated).toRelative({ style: "short" }) : language.last_updated}</p>
                                 </div>
+                                <div class="language-row-progress colourful" style="--hue-over: ${language.percent * 1.2}; --sat-over: 1.4; --lit-over: 0.9; width: ${language.percent}%" data-percent=${language.percent} />
                             </div>
                         `;
 

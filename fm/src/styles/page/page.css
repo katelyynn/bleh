@@ -480,6 +480,9 @@
 .user-events-sidebar {
     order: 9;
 }
+.recent-activity-section {
+    order: 9;
+}
 .promo-v3 {
     order: 10;
 }

@@ -62,6 +62,7 @@ body {
     --button-verts: 5px;
     --button-height: 28px;
     --button-radius: 9px;
+    --input-radius: 9px;
     --icon-size: 18px;
     --icon-half: 9px;
     --icon-gap: 4px;
@@ -81,11 +82,12 @@ body {
 
     --avatar-radius: 50%;
 
-    @media (max-width: 980px) {
-        --button-sides: 9px;
-        --button-verts: 7px;
-        --button-height: 32px;
-    }
+    /*@media (max-width: 980px) {
+        --button-sides: 12px;
+        --button-verts: 5px;
+        --button-height: 28px;
+        --button-radius: 50px;
+    }*/
 
     --banner-height: 280px;
     --banner-offset: 240px;
@@ -127,6 +129,15 @@ body {
         --count-bar-left: none;
     }
 
+    --avatar-radius: 50%;
+
+    &[data-bleh--avatar_radius="squircle"] {
+        --avatar-radius: 33%;
+    }
+    &[data-bleh--avatar_radius="square"] {
+        --avatar-radius: 0%;
+    }
+
     --blank: url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7);
 
     &.increase-btn-contrast {
@@ -139,6 +150,8 @@ body {
     --avatar-inset: 0 0 0 1px inset rgba(255, 255, 255, 0.1);
     --grid-inset: 0 0 0 1px inset rgba(255, 255, 255, 0.08);
     --item-inset: 0 0 0 1px inset rgba(255, 255, 255, 0.1);
+
+    --tab-size: 46px;
 
     &[data-bleh--theme="light"] {
         --snow: #FFF;
@@ -433,6 +446,7 @@ body,
     --menu-item-atv: oklch(var(--b4) / 60%);
 
     --setting-hover: oklch(var(--b4) / 20%);
+    --setting-active: oklch(var(--b4) / 30%);
 
     --setting-group: oklch(var(--b4) / 10%);
 
@@ -460,14 +474,18 @@ body,
     --menu-bg: var(--b6);
     --menu-opacity: 92%;
 
+    --tracklist-odd: oklch(var(--b4) / 15%);
     --tracklist-hover: oklch(var(--b4) / 30%);
 
     --modal-button-hov: oklch(var(--b4) / 40%);
     --modal-button-atv: oklch(var(--b4) / 60%);
 
-    --button-outline: inset 0 0 1px 0 oklch(var(--b2) / 80%);
+    --button-outline: inset 0 0 0 1px oklch(var(--b2) / 40%);
 
     --shout-tree: oklch(var(--b2) / 20%);
+
+    --chart-button-hov: oklch(var(--b4) / 60%);
+    --chart-button-atv: oklch(var(--b4) / 80%);
 
     &[data-bleh--theme="darker"] {
         /* any additional highlights */
@@ -491,6 +509,7 @@ body,
         --separator-base: oklch(var(--b3) / 0.7);
 
         --setting-hover: oklch(var(--b4) / 30%);
+        --setting-active: oklch(var(--b4) / 40%);
 
         --sidebar-border: color-mix(in oklch, oklch(var(--b5)), oklch(var(--b2)) 25%);
 
@@ -545,6 +564,7 @@ body,
         --card-blur-bg-alt: oklch(var(--b5) / var(--solarium-opacity, 20%));
 
         --setting-hover: oklch(var(--b2) / 20%);
+        --setting-active: oklch(var(--b2) / 30%);
 
         --setting-group: oklch(var(--b4) / 18%);
 
@@ -560,14 +580,21 @@ body,
         --menu-bg: 0.16 calc(var(--sat) * 0.01 * var(--sat-bg, 1)) var(--hue);
         --menu-opacity: 90%;
 
+        --tracklist-odd: oklch(var(--b2) / 10%);
         --tracklist-hover: oklch(var(--b2) / 30%);
 
         --modal-button-hov: oklch(var(--b2) / 40%);
         --modal-button-atv: oklch(var(--b2) / 60%);
 
-        --button-outline: inset 0 0 1px 0 oklch(0.6 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue));
+        --button-outline: inset 0 0 0 1px oklch(0.27 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue));
 
         --shout-tree: oklch(var(--b2) / 55%);
+
+        --view-buttons-hov: oklch(var(--b2) / 40%);
+        --view-buttons-atv: oklch(var(--b2) / 60%);
+
+        --chart-button-hov: oklch(var(--b2) / 40%);
+        --chart-button-atv: oklch(var(--b2) / 60%);
     }
     &[data-bleh--theme="light"] {
         /* any additional highlights */
@@ -650,7 +677,7 @@ body,
         --menu-bg: var(--b5);
         --menu-opacity: 94%;
 
-        --button-outline: inset 0 0 1px 0 oklch(var(--b2));
+        --button-outline: inset 0 0 0 1px oklch(var(--b2) / 50%);
 
         --shout-tree: oklch(var(--b2) / 30%);
     }
@@ -1169,6 +1196,7 @@ body {
     --noise: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbG5zOnN2Z2pzPSJodHRwOi8vc3ZnanMuZGV2L3N2Z2pzIiB2aWV3Qm94PSIwIDAgNzAwIDcwMCIgd2lkdGg9IjcwMCIgaGVpZ2h0PSI3MDAiPjxkZWZzPjxmaWx0ZXIgaWQ9Im5ubm9pc2UtZmlsdGVyIiB4PSItMjAlIiB5PSItMjAlIiB3aWR0aD0iMTQwJSIgaGVpZ2h0PSIxNDAlIiBmaWx0ZXJVbml0cz0ib2JqZWN0Qm91bmRpbmdCb3giIHByaW1pdGl2ZVVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY29sb3ItaW50ZXJwb2xhdGlvbi1maWx0ZXJzPSJsaW5lYXJSR0IiPg0KCTxmZVR1cmJ1bGVuY2UgdHlwZT0idHVyYnVsZW5jZSIgYmFzZUZyZXF1ZW5jeT0iMC4xMDIiIG51bU9jdGF2ZXM9IjQiIHNlZWQ9IjE1IiBzdGl0Y2hUaWxlcz0ic3RpdGNoIiB4PSIwJSIgeT0iMCUiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHJlc3VsdD0idHVyYnVsZW5jZSI+PC9mZVR1cmJ1bGVuY2U+DQoJPGZlU3BlY3VsYXJMaWdodGluZyBzdXJmYWNlU2NhbGU9IjE1IiBzcGVjdWxhckNvbnN0YW50PSIwLjc1IiBzcGVjdWxhckV4cG9uZW50PSIyMCIgbGlnaHRpbmctY29sb3I9IiM2ZTZlNmUiIHg9IjAlIiB5PSIwJSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgaW49InR1cmJ1bGVuY2UiIHJlc3VsdD0ic3BlY3VsYXJMaWdodGluZyI+DQogICAgCQk8ZmVEaXN0YW50TGlnaHQgYXppbXV0aD0iMyIgZWxldmF0aW9uPSIxMDAiPjwvZmVEaXN0YW50TGlnaHQ+DQogIAk8L2ZlU3BlY3VsYXJMaWdodGluZz4NCiAgDQo8L2ZpbHRlcj48L2RlZnM+PHJlY3Qgd2lkdGg9IjcwMCIgaGVpZ2h0PSI3MDAiIGZpbGw9InRyYW5zcGFyZW50Ij48L3JlY3Q+PHJlY3Qgd2lkdGg9IjcwMCIgaGVpZ2h0PSI3MDAiIGZpbGw9IiM2ZTZlNmUiIGZpbHRlcj0idXJsKCNubm5vaXNlLWZpbHRlcikiPjwvcmVjdD48L3N2Zz4=");
     --gloss-image: url("https://katelyynn.github.io/bleh/fm/gloss.svg");
     --gloss: 0;
+    --gloss-mix: plus-lighter;
 
     --interactable-inset: inset oklch(var(--b3)) 0 -1px 0;
     --interactable-outer: 0 2px 4px oklch(0 0 0 / 0.15);

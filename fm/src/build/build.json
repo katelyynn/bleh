@@ -1,6 +1,6 @@
 {
     "brand": "bleh",
-    "build": "2026.0629",
+    "build": "2026.0727",
     "sku": "aihara",
     "bio": "bleh!!! ^-^",
     "author": "katelyn",
@@ -400,7 +400,12 @@
             "name": "Latest June idea board",
             "date": "2026-06-05",
             "notice": "This is an attempt at bringing bleh closer to Last.fm's layout, in terms of a less floating page in the middle and more of a wide content style (no borders). THIS IS NOT FINAL!!! feedback is welcome"
+        },
+        "aihara": {
+            "default": false,
+            "name": "Utilise Last.fm API to create new charts",
+            "date": "2026-07-01"
         }
     },
-    "built_on": "2026-06-29T17:57:53.474Z"
+    "built_on": "2026-07-27T14:56:50.810Z"
 }

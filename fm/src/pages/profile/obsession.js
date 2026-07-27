@@ -90,21 +90,19 @@ export function bleh_obsession() {
     artist_name.classList.add('header-new-crumb');
 
     if (settings.format_guest_features) {
-        let formatted_title = name_includes(
+        const formatted = name_includes(
             track_title.textContent.trim(),
             artist_name.textContent
         );
-        let song_title = formatted_title[0];
-        let song_tags = formatted_title[1];
 
-        page.corrected = formatted_title[4];
+        page.corrected = formatted.corrected_title;
 
         // combine
         track_title.classList.add('smart-title');
-        render(track_title, smart_title(song_title, song_tags));
+        render(track_title, smart_title(formatted.song_title, formatted.song_tags));
 
-        let song_guests = formatted_title[3];
-        page.sister_others = formatted_title[3];
+        let song_guests = formatted.song_guests;
+        page.sister_others = song_guests;
         for (let guest in song_guests) {
             // &
             track_artist.innerHTML = `${track_artist.innerHTML},`;
@@ -185,21 +183,32 @@ export function bleh_obsession() {
         '.obsession-details-date-short'
     );
 
+    const first = obsession_container.querySelector('.obsession-first');
+
     let quote = html.node`
         <section class="obsession-quote sour">
-            ${
-                obsession_reason ?
-                    html.node`
+            ${first ? () => {
+                const elem = html.node`
+                    <div class="grid-item-icon grid-item-icon-first colourful obsession-first-icon">
+                        ${icon({ name: icons.star })}
+                    </div>
+                    `;
+
+                tippy(elem, {
+                    content: tl(trans.obsession_first)
+                });
+
+                return elem;
+            } : ''}
+            ${obsession_reason ? html.node`
             <div class="quote">
-                ${obsession_reason.textContent}
+                ${obsession_reason.textContent.trim()}
             </div>
-            `
-                :   html.node`
+            ` : html.node`
             <div class="quote no-quote">
                 ...
             </div>
-            `
-            }
+            `}
             <div class="sub-text">
                 <div class="obsession-author">
                     ${obsession_avatar}

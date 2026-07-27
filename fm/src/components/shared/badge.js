@@ -66,6 +66,7 @@ export function load_badges(user, solo = false) {
 
     // now we run thru to add missing metadata
     badges.forEach((badge) => {
+        if (entry && entry.sponsor && !badge.type) badge.type = 'sponsor';
         badge = process_badge(badge, user);
     });
 

@@ -365,6 +365,7 @@ export function checkup_nav() {
             `;
 
             page.structure.row.insertBefore(toolbar, page.structure.content);
+            page.structure.toolbar = toolbar;
         } else {
             page.structure.row.insertBefore(nav, page.structure.content);
         }

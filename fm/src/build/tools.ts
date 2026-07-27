@@ -537,6 +537,9 @@ export async function translate(text, lang = 'en') {
 }
 
 export function get_language_name(code) {
+    if (code == 'pt') return 'português brasileiro';
+    if (code == 'zh') return '简体中文';
+
     try {
         const display = new Intl.DisplayNames([code], {
             type: 'language'

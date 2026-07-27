@@ -175,7 +175,8 @@ export const icons = {
     sparkle: 'sparkle',
     error: 'error',
     construction: 'construction',
-    animated_dots: 'animated-dots'
+    animated_dots: 'animated-dots',
+    logout: 'logout'
 };
 
 interface icon {
@@ -198,5 +199,7 @@ export function icon({ name, identifier, use_mask = true }: icon) {
 }
 
 export function icon_mask({ name }: { name?: string }) {
+    if (name == 'inherit') return '';
+
     return `--icon: var(--icon-16-${name})`;
 }

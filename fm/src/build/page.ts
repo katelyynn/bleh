@@ -273,7 +273,9 @@ export const urls = {
     api: 'bleh/api',
     minis: 'bleh/minis',
     mualani: 'bleh/mualani',
-    now: 'bleh/now'
+    now: 'bleh/now',
+    explore_charts: 'charts/explore',
+    geo_charts: 'charts/geo',
 }
 
 // WARN: please provide your own if hosting a fork
@@ -381,7 +383,7 @@ export const random_list = [
         album_artist: 'Juice WRLD'
     },
     {
-        track: "Wouldn't Leave",
+        track: 'Wouldn\'t Leave',
         album: 'ye',
         artist: 'Kanye West',
         album_artist: 'Kanye West'
@@ -419,8 +421,8 @@ export const random_list = [
     {
         track: 'love hurts',
         album: 'agony',
-        artist: 'Ilykimchi',
-        album_artist: 'Ilykimchi'
+        artist: 'ilykimchi',
+        album_artist: 'ilykimchi'
     },
     {
         track: 'M3 N MIN3',
@@ -490,13 +492,13 @@ export const random_list = [
     },
     {
         track: 'Don’t Smile',
-        album: "Short n' Sweet (Deluxe)",
+        album: 'Short n\' Sweet (Deluxe)',
         artist: 'Sabrina Carpenter',
         album_artist: 'Sabrina Carpenter'
     },
     {
         track: 'Espresso',
-        album: "Short n' Sweet (Deluxe)",
+        album: 'Short n\' Sweet (Deluxe)',
         artist: 'Sabrina Carpenter',
         album_artist: 'Sabrina Carpenter'
     },
@@ -550,7 +552,7 @@ export const random_list = [
     },
     {
         track: 'Lie To Girls',
-        album: "Short n' Sweet (Deluxe)",
+        album: 'Short n\' Sweet (Deluxe)',
         artist: 'Sabrina Carpenter',
         album_artist: 'Sabrina Carpenter'
     },
@@ -579,7 +581,7 @@ export const random_list = [
         album_artist: 'Have A Nice Life'
     },
     {
-        track: 'Psychoboost feat danny brown',
+        track: 'Psychoboost',
         album: 'Revengeseekerz',
         artist: 'Jane Remover',
         album_artist: 'Jane Remover'
@@ -760,13 +762,13 @@ export const random_list = [
     },
     {
         track: 'Peppers (feat. Tommy Genesis)',
-        album: "Did you know that there's a tunnel under Ocean Blvd",
+        album: 'Did you know that there\'s a tunnel under Ocean Blvd',
         artist: 'Lana Del Rey',
         album_artist: 'Lana Del Rey'
     },
     {
-        track: 'Make You Mine',
-        album: 'Make You Mine',
+        track: 'make you mine',
+        album: 'make you mine',
         artist: 'Madison Beer',
         album_artist: 'Madison Beer'
     },
@@ -851,8 +853,8 @@ export const random_list = [
     {
         track: '(March 19th 1983) It Was Probably Green',
         album: 'Songs About Leaving',
-        artist: "Carissa's Wierd",
-        album_artist: "Carissa's Wierd"
+        artist: 'Carissa\'s Wierd',
+        album_artist: 'Carissa\'s Wierd'
     },
     {
         track: 'clairbourne practice',
@@ -963,7 +965,7 @@ export const random_list = [
         album_artist: 'Kahlil Blu'
     },
     {
-        track: "01'beigecamry",
+        track: '01\'beigecamry',
         album: 'Farley',
         artist: 'Sideshow',
         album_artist: 'Sideshow'
@@ -1018,7 +1020,7 @@ export const random_list = [
     },
     {
         track: 'Never Catch Me',
-        album: "You're Dead!",
+        album: 'You\'re Dead!',
         artist: 'Flying Lotus',
         album_artist: 'Flying Lotus'
     },
@@ -1053,7 +1055,7 @@ export const random_list = [
         album_artist: 'Bladee'
     },
     {
-        track: "Wesley's Theory",
+        track: 'Wesley\'s Theory',
         album: 'To Pimp A Butterfly',
         artist: 'Kendrick Lamar',
         album_artist: 'Kendrick Lamar'
@@ -1149,13 +1151,13 @@ export const random_list = [
         album_artist: 'The Roots'
     },
     {
-        track: "Gotta Touch 'Em - (Pt. 2)",
+        track: 'Gotta Touch \'Em - (Pt. 2)',
         album: 'Mystic Stylez',
         artist: 'Three 6 Mafia',
         album_artist: 'Three 6 Mafia'
     },
     {
-        track: "J'OUVERT",
+        track: 'J\'OUVERT',
         album: 'iridescence',
         artist: 'BROCKHAMPTON',
         album_artist: 'BROCKHAMPTON'
@@ -1410,8 +1412,7 @@ export const random_list = [
         track: 'オレンジ',
         album: 'オレンジ',
         artist: '逢坂大河・櫛枝実乃梨・川嶋亜美(釘宮理恵、堀江由衣、喜多村英梨)',
-        album_artist:
-            '逢坂大河・櫛枝実乃梨・川嶋亜美（CV：釘宮理恵・堀江由衣・喜多村英梨）'
+        album_artist: '逢坂大河・櫛枝実乃梨・川嶋亜美（CV：釘宮理恵・堀江由衣・喜多村英梨）'
     },
     {
         track: 'Just Wanna Rock',
@@ -1454,6 +1455,234 @@ export const random_list = [
         album: 'Positions',
         artist: 'Ariana Grande',
         album_artist: 'Ariana Grande'
+    },
+    {
+        track: 'bugging!',
+        album: 'hypochondriac',
+        artist: 'brakence',
+        album_artist: 'brakence'
+    },
+    {
+        track: 'Dancing With Our Hands Tied',
+        album: 'reputation',
+        artist: 'Taylor Swift',
+        album_artist: 'Taylor Swift'
+    },
+    {
+        track: 'Sexy to Someone',
+        album: 'Charm',
+        artist: 'Clairo',
+        album_artist: 'Clairo'
+    },
+    {
+        track: 'WAY TOO MANY FRIENDS',
+        album: 'SCRAPYARD',
+        artist: 'Quadeca',
+        album_artist: 'Quadeca'
+    },
+    {
+        track: 'Thunder',
+        album: 'Evolve',
+        artist: 'Imagine Dragons',
+        album_artist: 'Imagine Dragons'
+    },
+    {
+        track: 'Pagan Poetry',
+        album: 'Vespertine',
+        artist: 'Björk',
+        album_artist: 'Björk'
+    },
+    {
+        track: 'Guide light',
+        album: 'If Not Winter',
+        artist: 'Wisp',
+        album_artist: 'Wisp'
+    },
+    {
+        track: 'Mesmerized',
+        album: 'If Not Winter',
+        artist: 'Wisp',
+        album_artist: 'Wisp'
+    },
+    {
+        track: 'Serpentine',
+        album: 'If Not Winter',
+        artist: 'Wisp',
+        album_artist: 'Wisp'
+    },
+    {
+        track: 'WHERE WAS YOU',
+        album: 'JACKBOYS 2',
+        artist: 'Travis Scott',
+        album_artist: 'JACKBOYS'
+    },
+    {
+        track: 'SHYNE',
+        album: 'JACKBOYS 2',
+        artist: 'Travis Scott',
+        album_artist: 'JACKBOYS'
+    },
+    {
+        track: 'Terrapin',
+        album: 'Charm',
+        artist: 'Clairo',
+        album_artist: 'Clairo'
+    },
+    {
+        track: 'Juna',
+        album: 'Charm',
+        artist: 'Clairo',
+        album_artist: 'Clairo'
+    },
+    {
+        track: 'Pier 4',
+        album: 'Charm',
+        artist: 'Clairo',
+        album_artist: 'Clairo'
+    },
+    {
+        track: 'EVERYTHING I\'VE EVER WANTED',
+        album: 'HALO',
+        artist: 'Tiffany Day',
+        album_artist: 'Tiffany Day'
+    },
+    {
+        track: 'PRETTY4U',
+        album: 'HALO',
+        artist: 'Tiffany Day',
+        album_artist: 'Tiffany Day'
+    },
+    {
+        track: 'LOOK UP',
+        album: 'HALO',
+        artist: 'Tiffany Day',
+        album_artist: 'Tiffany Day'
+    },
+    {
+        track: 'AMERICAN GIRL',
+        album: 'HALO',
+        artist: 'Tiffany Day',
+        album_artist: 'Tiffany Day'
+    },
+    {
+        track: 'São Paulo (feat. Anitta)',
+        album: 'Hurry Up Tomorrow',
+        artist: 'The Weeknd',
+        album_artist: 'The Weeknd'
+    },
+    {
+        track: 'The Abyss (feat. Lana Del Rey)',
+        album: 'Hurry Up Tomorrow',
+        artist: 'The Weeknd',
+        album_artist: 'The Weeknd'
+    },
+    {
+        track: 'switch my swag',
+        album: 'AVANT NOVA',
+        artist: 'slayr',
+        album_artist: 'slayr'
+    },
+    {
+        track: 'CONSTANTLY',
+        album: 'CONSTANTLY',
+        artist: 'Tiffany Day',
+        album_artist: 'Tiffany Day'
+    },
+    {
+        track: 'Sloppy Joe',
+        album: 'Half Blood',
+        artist: 'slayr',
+        album_artist: 'slayr'
+    },
+    {
+        track: 'Power 4',
+        album: 'Half Blood',
+        artist: 'slayr',
+        album_artist: 'slayr'
+    },
+    {
+        track: 'Asheville',
+        album: 'Y’all',
+        artist: 'glaive',
+        album_artist: 'glaive'
+    },
+    {
+        track: 'Modafinil',
+        album: 'Y’all',
+        artist: 'glaive',
+        album_artist: 'glaive'
+    },
+    {
+        track: 'Nouveau Riche',
+        album: 'Y’all',
+        artist: 'glaive',
+        album_artist: 'glaive'
+    },
+    {
+        track: 'Let\'s Link Up and Die',
+        album: 'God Save The Three',
+        artist: 'glaive',
+        album_artist: 'glaive'
+    },
+    {
+        track: 'The Troubles',
+        album: 'God Save The Three',
+        artist: 'glaive',
+        album_artist: 'glaive'
+    },
+    {
+        track: 'UNCA / Composure',
+        album: 'God Save The Three',
+        artist: 'glaive',
+        album_artist: 'glaive'
+    },
+    {
+        track: 'Yaya Touré',
+        album: 'God Save The Three',
+        artist: 'glaive',
+        album_artist: 'glaive'
+    },
+    {
+        track: '505',
+        album: 'Favourite Worst Nightmare',
+        artist: 'Arctic Monkeys',
+        album_artist: 'Arctic Monkeys'
+    },
+    {
+        track: 'Only Ones Who Know',
+        album: 'Favourite Worst Nightmare',
+        artist: 'Arctic Monkeys',
+        album_artist: 'Arctic Monkeys'
+    },
+    {
+        track: 'Balaclava',
+        album: 'Favourite Worst Nightmare',
+        artist: 'Arctic Monkeys',
+        album_artist: 'Arctic Monkeys'
+    },
+    {
+        track: 'Innuendo (I Get U)',
+        album: 'U',
+        artist: 'underscores',
+        album_artist: 'underscores'
+    },
+    {
+        track: 'Hollywood Forever',
+        album: 'U',
+        artist: 'underscores',
+        album_artist: 'underscores'
+    },
+    {
+        track: 'when you sleep',
+        album: 'loveless',
+        artist: 'my bloody valentine',
+        album_artist: 'my bloody valentine'
+    },
+    {
+        track: 'i only said',
+        album: 'loveless',
+        artist: 'my bloody valentine',
+        album_artist: 'my bloody valentine'
     }
 ];
 
