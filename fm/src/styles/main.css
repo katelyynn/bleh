@@ -10,10 +10,7 @@
     scrollbar-width: none;
     scrollbar-gutter: stable both-edges;
     scroll-behavior: smooth;
-}
-
-body {
-    -webkit-text-size-adjust: 100%;
+    -webkit-text-size-adjust: none;
 }
 
 :root {

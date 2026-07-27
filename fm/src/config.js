@@ -80,8 +80,7 @@ export function load_settings(skip = false) {
         }
     }
 
-    console.info('number', settings.avatar_radius);
-    if (Number.isInteger(settings.avatar_radius)) {
+    if (!['circle', 'squircle', 'square'].includes(settings.avatar_radius)) {
         if (settings.avatar_radius == 0) {
             settings.avatar_radius = 'square';
         } else if (settings.avatar_radius == 25) {
