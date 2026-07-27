@@ -74854,7 +74854,7 @@
                                 <div class="language-row-sub">
                                     ${language.percent ? () => {
         const elem = html.node`
-                                            <p class="language-row-percent percent colourful" style="--hue-over: ${language.percent * 1.2}; --sat-over: 1.2; --lit-over: 1;" data-percent=${language.percent}>
+                                            <p class="language-row-percent percent colourful" style="--hue-over: ${language.percent * 1.2}; --sat-over: 1.4; --lit-over: 0.9;" data-percent=${language.percent}>
                                                 ${language.percent}%
                                             </p>
                                         `;
@@ -74865,7 +74865,7 @@
       } : ""}
                                     <p class="language-row-time" ref=${(el) => date = el}>${language.last_updated != "latest" ? DateTime.fromISO(language.last_updated).toRelative({ style: "short" }) : language.last_updated}</p>
                                 </div>
-                                <div class="language-row-progress colourful" style="--hue-over: ${language.percent * 1.2}; --sat-over: 1.2; --lit-over: 1; width: ${language.percent}%" data-percent=${language.percent} />
+                                <div class="language-row-progress colourful" style="--hue-over: ${language.percent * 1.2}; --sat-over: 1.4; --lit-over: 0.9; width: ${language.percent}%" data-percent=${language.percent} />
                             </div>
                         `;
       if (language.last_updated != "latest") {
