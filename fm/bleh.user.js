@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    https://last.fm/
-// @version      2026.0701
+// @version      2026.0727
 // @description  bleh!!! ^-^
 // @author       katelyn
 // @match        https://www.last.fm/*
@@ -97641,7 +97641,7 @@
         date: "2026-07-01"
       }
     },
-    built_on: "2026-07-27T14:14:41.657Z"
+    built_on: "2026-07-27T14:55:06.275Z"
   };
 
   // node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
