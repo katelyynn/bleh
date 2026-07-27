@@ -97608,7 +97608,7 @@
         date: "2026-07-01"
       }
     },
-    built_on: "2026-07-27T00:44:49.096Z"
+    built_on: "2026-07-27T01:55:32.990Z"
   };
 
   // node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
