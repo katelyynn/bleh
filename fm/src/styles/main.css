@@ -132,6 +132,9 @@ p,
 pre,
 ul {
     margin-top: unset;
+}
+
+ul {
     padding-inline: unset !important;
     margin-block: unset !important;
 }
