@@ -61,7 +61,7 @@ export let lang_info = {
         last_updated: '2026-02-07',
     },
     zh: {
-        name: get_language_name('zh'),
+        name: '简体中文',
         by: ['Dnzzk2'],
         last_updated: '2025-12-29',
     },

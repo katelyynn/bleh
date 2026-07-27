@@ -84719,7 +84719,7 @@
       last_updated: "2026-02-07"
     },
     zh: {
-      name: get_language_name("zh"),
+      name: "\u7B80\u4F53\u4E2D\u6587",
       by: ["Dnzzk2"],
       last_updated: "2025-12-29"
     },
