@@ -26436,6 +26436,8 @@
     };
   }
   function get_language_name(code) {
+    if (code == "pt") return "portugu\xEAs brasileiro";
+    if (code == "zh") return "\u7B80\u4F53\u4E2D\u6587";
     try {
       const display2 = new Intl.DisplayNames([code], {
         type: "language"
@@ -97639,7 +97641,7 @@
         date: "2026-07-01"
       }
     },
-    built_on: "2026-07-27T03:25:22.654Z"
+    built_on: "2026-07-27T14:14:41.657Z"
   };
 
   // node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
