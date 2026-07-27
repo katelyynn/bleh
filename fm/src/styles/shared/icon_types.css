@@ -150,6 +150,7 @@
 [data-type="labs"] {
     --mask: var(--icon-16-labs);
 }
+[data-type="arrows"],
 [data-type="compare"] {
     --mask: var(--icon-16-arrows);
 }
@@ -437,6 +438,7 @@
 [data-analytics-label="notifications"] {
     --mask: var(--icon-16-notifications);
 }
+[data-type="mail"],
 [data-type="messages"],
 [data-label="inbox"],
 [data-analytics-label="inbox"] {

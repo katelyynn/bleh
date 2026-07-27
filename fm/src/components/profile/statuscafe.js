@@ -22,9 +22,6 @@ export async function fetch_status(username) {
         return html.node`
             <div class="status-cafe">
                 <div class="status-cafe-content is-loading">
-                    <span class="status-cafe-emoji">
-                        <span class="bleh-icon" />
-                    </span>
                     <span class="status-cafe-text">
                         ${tl(trans.status_cafe_too_many_requests)}
                     </span>
@@ -95,9 +92,6 @@ async function fetch_status_api(username) {
             return html.node`
                 <div class="status-cafe">
                     <div class="status-cafe-content is-loading">
-                        <span class="status-cafe-emoji">
-                            <span class="bleh-icon" />
-                        </span>
                         <span class="status-cafe-text">
                             ${error}
                         </span>

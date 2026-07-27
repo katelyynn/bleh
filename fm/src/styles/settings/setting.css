@@ -88,7 +88,7 @@
 
     border-radius: var(--setting-item-radius, none);
 
-    &.highlight {
+    &.setting-highlight {
         animation: highlight_setting 4s var(--trans-function-ani);
     }
 
@@ -272,6 +272,7 @@
         }
     }
 
+    &[data-type="select"],
     &[data-type="list"],
     &[data-type="options"] {
         gap: 6px var(--item-list-gap);

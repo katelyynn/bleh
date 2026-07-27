@@ -1311,7 +1311,7 @@ export function scroll_to_setting(id) {
     });
 
     setTimeout(() => {
-        setting.classList.add('highlight');
+        setting.classList.add('setting-highlight');
     }, 200);
 }
 
