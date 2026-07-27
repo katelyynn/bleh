@@ -31,6 +31,8 @@ body {
 
     text-underline-offset: var(--underline-offset);
 
+    margin: unset !important;
+
     &:before {
         content: "";
         display: block;
@@ -126,6 +128,8 @@ p,
 pre,
 ul {
     margin-top: unset;
+    padding-inline: unset !important;
+    margin-block: unset !important;
 }
 
 b,
