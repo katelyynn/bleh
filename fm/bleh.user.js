@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    https://last.fm/
-// @version      2026.0727.1
+// @version      2026.0727.2
 // @description  bleh!!! ^-^
 // @author       katelyn
 // @match        https://www.last.fm/*
@@ -97394,7 +97394,7 @@
   // src/build/build.json
   var build_default = {
     brand: "bleh",
-    build: "2026.0727.1",
+    build: "2026.0727.2",
     sku: "aihara",
     bio: "bleh!!! ^-^",
     author: "katelyn",
@@ -97801,7 +97801,7 @@
         date: "2026-07-01"
       }
     },
-    built_on: "2026-07-27T22:36:18.605Z"
+    built_on: "2026-07-27T22:46:40.591Z"
   };
 
   // node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
