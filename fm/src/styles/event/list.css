@@ -263,8 +263,10 @@
     }
 }
 .events-list-item-venue {
+    --font-size: 13px !important;
     color: oklch(var(--c2) / 80%);
     margin-top: unset !important;
+    cursor: default;
 
     .events-list-sidebar & {
         -webkit-line-clamp: 1;

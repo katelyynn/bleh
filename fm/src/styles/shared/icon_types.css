@@ -655,6 +655,7 @@
 [data-type="refresh"] {
     --mask: var(--icon-16-refresh);
 
+    /* CHORE: why when hitting refresh on tracks does it go back so jittery */
     &[disabled]:not([disabled="false"]):before {
         --mask: var(--icon-16-spinner);
         animation: spinner 1.2s linear infinite;

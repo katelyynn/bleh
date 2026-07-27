@@ -348,7 +348,7 @@ button.navlist-more {
 .navlist-more,
 .secondary-nav-item-link {
     /* left padding for icon, otherwise just 12px 16px */
-    --padding: 14px var(--button-sides) 14px calc(var(--button-sides-icon) + var(--icon-size) + var(--icon-gap)) !important;
+    --padding: 0 var(--button-sides) 0 calc(var(--button-sides-icon) + var(--icon-size) + var(--icon-gap)) !important;
     --bg: transparent !important;
     --bg-hov: transparent !important;
     --bg-atv: transparent !important;
@@ -356,6 +356,8 @@ button.navlist-more {
     --shadow-hov: none !important;
     --col: oklch(var(--c2)) !important;
     --mask-colour: oklch(var(--l2-c-theme-switch)) !important;
+
+    height: var(--tab-size) !important;
 
     z-index: 1;
     opacity: unset !important;
@@ -426,6 +428,8 @@ button.navlist-more {
 
         min-width: 60px !important;
 
+        height: unset !important;
+
         & > .new-badge {
             font-size: 10px;
         }
@@ -445,6 +449,8 @@ button.navlist-more {
         transform: none !important;
         transform-origin: center !important;
         /*min-width: 65px !important;*/
+
+        height: unset !important;
 
         &:after {
             display: none !important;

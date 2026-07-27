@@ -142,6 +142,8 @@ body {
     --grid-inset: 0 0 0 1px inset rgba(255, 255, 255, 0.08);
     --item-inset: 0 0 0 1px inset rgba(255, 255, 255, 0.1);
 
+    --tab-size: 46px;
+
     &[data-bleh--theme="light"] {
         --snow: #FFF;
         --snow-glow: #CECECE;
@@ -435,6 +437,7 @@ body,
     --menu-item-atv: oklch(var(--b4) / 60%);
 
     --setting-hover: oklch(var(--b4) / 20%);
+    --setting-active: oklch(var(--b4) / 30%);
 
     --setting-group: oklch(var(--b4) / 10%);
 
@@ -472,6 +475,9 @@ body,
 
     --shout-tree: oklch(var(--b2) / 20%);
 
+    --chart-button-hov: oklch(var(--b4) / 60%);
+    --chart-button-atv: oklch(var(--b4) / 80%);
+
     &[data-bleh--theme="darker"] {
         /* any additional highlights */
         --b2: 0.41 calc(var(--sat) * 0.04 * var(--sat-bg, 1)) var(--hue);
@@ -494,6 +500,7 @@ body,
         --separator-base: oklch(var(--b3) / 0.7);
 
         --setting-hover: oklch(var(--b4) / 30%);
+        --setting-active: oklch(var(--b4) / 40%);
 
         --sidebar-border: color-mix(in oklch, oklch(var(--b5)), oklch(var(--b2)) 25%);
 
@@ -548,6 +555,7 @@ body,
         --card-blur-bg-alt: oklch(var(--b5) / var(--solarium-opacity, 20%));
 
         --setting-hover: oklch(var(--b2) / 20%);
+        --setting-active: oklch(var(--b2) / 30%);
 
         --setting-group: oklch(var(--b4) / 18%);
 
@@ -572,6 +580,12 @@ body,
         --button-outline: inset 0 0 0 1px oklch(0.27 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue));
 
         --shout-tree: oklch(var(--b2) / 55%);
+
+        --view-buttons-hov: oklch(var(--b2) / 40%);
+        --view-buttons-atv: oklch(var(--b2) / 60%);
+
+        --chart-button-hov: oklch(var(--b2) / 40%);
+        --chart-button-atv: oklch(var(--b2) / 60%);
     }
     &[data-bleh--theme="light"] {
         /* any additional highlights */

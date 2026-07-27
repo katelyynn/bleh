@@ -6,7 +6,7 @@
     --header-size: 180px;
 
     --w: 1300px;
-    --h: calc(145px + var(--header-size));
+    --h: calc(99px + var(--tab-size) + var(--header-size));
 
     &[data-page-type="events"], &[data-page-type="festival"],
     &[data-page-type="tag"],
