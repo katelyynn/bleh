@@ -46,7 +46,7 @@ export let lang_info = {
         last_updated: '2025-12-12',
     },
     pt: {
-        name: get_language_name('pt'),
+        name: 'português brasileiro',
         by: ['ArthRMH', 'satisfeita', 'fr0r', 'urwq', 'anjoskron', 'foognocchie'],
         last_updated: '2026-02-22',
     },
