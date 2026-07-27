@@ -84688,7 +84688,7 @@
     es: {
       name: get_language_name("es"),
       by: ["soleilth"],
-      last_updated: "2026-04-18"
+      last_updated: "2026-07-20"
     },
     it: {
       name: get_language_name("it"),
@@ -84698,7 +84698,7 @@
     ja: {
       name: get_language_name("ja"),
       by: ["humansongs", "lych3389"],
-      last_updated: "2026-04-18"
+      last_updated: "2026-07-03"
     },
     pl: {
       name: get_language_name("pl"),
@@ -85257,6 +85257,7 @@
       // if pressing read more extended content
       // this will do the opposite
       en: "Read less",
+      es: "Leer menos",
       it: "Leggi meno"
     },
     refresh: {
@@ -85278,7 +85279,7 @@
       de: "Aktualisiert",
       es: "Recargado",
       it: "Aggiornato",
-      ja: "\u30EA\u30D5\u30EC\u30C3\u30B7\u30E5\u3055\u308C\u305F",
+      ja: "\u30EA\u30D5\u30EC\u30C3\u30B7\u30E5\u3055\u308C\u307E\u3057\u305F",
       pt: "Atualizado",
       sv: "Laddats om",
       ru: "\u041E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u043E",
@@ -85291,6 +85292,7 @@
       de: "Titel aktualisieren",
       es: "Recargar temas",
       it: "Aggiorna brani",
+      ja: "\u30C8\u30E9\u30C3\u30AF\u3092\u30EA\u30D5\u30EC\u30C3\u30B7\u30E5",
       pt: "Atualizar faixas",
       sv: "Ladda om l\xE5tar",
       ru: "\u041E\u0431\u043D\u043E\u0432\u0438\u0442\u044C \u0442\u0440\u0435\u043A\u0438",
@@ -86624,7 +86626,8 @@
           zh: "\u5F69\u8679\u6708"
         },
         summer: {
-          en: "Summer"
+          en: "Summer",
+          es: "Verano"
         },
         halloween: {
           en: "Halloween",
@@ -87074,11 +87077,13 @@
     },
     charts_for: {
       // date will be directly below this text
-      en: "Charts for"
+      en: "Charts for",
+      es: "Listas del"
     },
     weekly_charts: {
       // dates will be directly below this text
-      en: "Weekly charts"
+      en: "Weekly charts",
+      es: "Listas semanales"
     },
     view_the_charts: {
       en: "View the charts",
@@ -87177,10 +87182,12 @@
     },
     welcome: {
       // user = username
-      en: "Hello {u}!"
+      en: "Hello {u}!",
+      es: "\xA1Hola {u}!"
     },
     bleh_setup_guide: {
-      en: "It\u2019s nice to see you here"
+      en: "It\u2019s nice to see you here",
+      es: "Es bueno verte aqu\xED"
     },
     import: {
       en: "Import",
@@ -88157,14 +88164,17 @@
       // capitalisation here refers to the lotus system, which corrects
       // titles that are capitalised wrongly eg. 'eSpReSsO' -> 'Espresso'
       true: {
-        en: "Actively correcting this title"
+        en: "Actively correcting this title",
+        es: "Corrigiendo este t\xEDtulo"
       },
       false: {
-        en: "Is this capitalised correctly?"
+        en: "Is this capitalised correctly?",
+        es: "\xBFSon estas may\xFAsculas correctas?"
       }
     },
     alert_of_correction: {
-      en: "This title is already being corrected to \u2019{t}\u2019, are you sure you want to continue?"
+      en: "This title is already being corrected to \u2019{t}\u2019, are you sure you want to continue?",
+      es: "Este t\xEDtulo ya est\xE1 siendo corregido a '{t}', \xBFseguro que quieres continuar?"
     },
     current: {
       en: "Current",
@@ -88180,7 +88190,7 @@
     current_tip: {
       en: "This is the original capitalisation present on Last.fm",
       de: "Dies ist die originale Gro\xDF-/Kleinschreibung auf Last.fm",
-      es: "Esta es la capitalizaci\xF3n original presente en Last.fm",
+      es: "Estas son las may\xFAsculas originales presentes en Last.fm",
       it: "Questo \xE8 l\u2019uso delle maiuscole originale presente su Last.fm",
       sv: "Det h\xE4r \xE4r den originella kapitaliseringen som finns p\xE5 Last.fm",
       ru: "\u042D\u0442\u043E \u0438\u0441\u0445\u043E\u0434\u043D\u044B\u0439 \u0440\u0435\u0433\u0438\u0441\u0442\u0440, \u043F\u0440\u0435\u0434\u043E\u0441\u0442\u0430\u0432\u043B\u0435\u043D\u043D\u044B\u0439 \u043D\u0430 Last.fm",
@@ -88200,7 +88210,7 @@
     correction_tip: {
       en: "This is the correct capitalisation, as decided by the artist",
       de: "Dies ist die korrekte Gro\xDF-/Kleinschreibung, wie sie von den K\xFCnstler:innen festgelegt wurde",
-      es: "Esta es la capitalizaci\xF3n correcta, decidida por el artista",
+      es: "Estas son las may\xFAsculas correctas, decididas por el artista",
       it: "Questo \xE8 l\u2019uso delle maiuscole corretto, come deciso dall\u2019artista",
       sv: "Det h\xE4r \xE4r r\xE4tt kapitalisering, som best\xE4md av artisten",
       ru: "\u042D\u0442\u043E \u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u044B\u0439 \u0440\u0435\u0433\u0438\u0441\u0442\u0440, \u043E\u043F\u0440\u0435\u0434\u0435\u043B\u0451\u043D\u043D\u044B\u0439 \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0435\u043C",
@@ -88221,7 +88231,7 @@
     sources_tip: {
       en: "Provide reputable sources where this capitalisation is present, excluding sites like Wikipedia, RYM, AOTY, and MusicBrainz",
       de: "Gebe seri\xF6se Quellen an, auf denen diese Schreibweise zu finden ist, ausgenommen sind Seiten wie Wikipedia, RYM, AOTY und MusicBrainz",
-      es: "Proporciona fuentes fiables donde la capitalizaci\xF3n est\xE9 presente, excluyendo sitios como Wikipedia, RYM, AOTY y MusicBrainz",
+      es: "Proporciona fuentes fiables donde las may\xFAsculas correctas est\xE9n presentes, excluyendo sitios como Wikipedia, RYM, AOTY y MusicBrainz",
       it: "Fornisci sorgenti attendibili dove questo uso delle maiuscole \xE8 presente, esclusi siti come Wikipedia, RYM, AOTY o MusicBrainz",
       sv: "Visa p\xE5litliga k\xE4llor d\xE4r man kan se att denna kapitalisering st\xE4mmer, f\xF6rutom sidor som Wikipedia, RYM, AOTY och MusicBrainz",
       ru: "\u0423\u043A\u0430\u0436\u0438\u0442\u0435 \u0430\u0432\u0442\u043E\u0440\u0438\u0442\u0435\u0442\u043D\u044B\u0435 \u0438\u0441\u0442\u043E\u0447\u043D\u0438\u043A\u0438, \u0433\u0434\u0435 \u043F\u0440\u0438\u0441\u0443\u0442\u0441\u0442\u0432\u0443\u0435\u0442 \u044D\u0442\u043E\u0442 \u0440\u0435\u0433\u0438\u0441\u0442\u0440, \u0438\u0441\u043A\u043B\u044E\u0447\u0430\u044F \u0442\u0430\u043A\u0438\u0435 \u0441\u0430\u0439\u0442\u044B, \u043A\u0430\u043A Wikipedia, RYM, AOTY \u0438 MusicBrainz",
@@ -88242,8 +88252,9 @@
     please_match_the_format: {
       en: "Only capitalisation changes are allowed",
       de: "Nur \xC4nderungen der Gro\xDF-/Kleinschreibung sind erlaubt",
-      es: "Solo se permiten cambios a la capitalizaci\xF3n",
+      es: "Solo se permiten cambios a las may\xFAsculas",
       it: "Sono consentiti solo i cambi relativi all\u2019uso delle maiuscole",
+      ja: "\u5927\u6587\u5B57\u3068\u5C0F\u6587\u5B57\u306E\u307F\u5909\u66F4\u3067\u304D\u307E\u3059",
       sv: "Endast \xE4ndringar p\xE5 kapitalisering \xE4r till\xE5tet",
       ru: "\u0414\u043E\u043F\u0443\u0441\u043A\u0430\u044E\u0442\u0441\u044F \u0442\u043E\u043B\u044C\u043A\u043E \u0438\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u044F \u0440\u0435\u0433\u0438\u0441\u0442\u0440\u0430",
       pt: "Apenas mudan\xE7as de capitaliza\xE7\xE3o s\xE3o permitidas",
@@ -88255,6 +88266,7 @@
       de: "Korrektur vorschlagen",
       es: "Sugiere una correcci\xF3n",
       it: "Suggerisci una correzione",
+      ja: "\u4FEE\u6B63\u3092\u63D0\u6848",
       pt: "Sugira uma corre\xE7\xE3o",
       sv: "F\xF6resl\xE5 en \xE4ndring",
       ru: "\u041F\u0440\u0435\u0434\u043B\u043E\u0436\u0438\u0442\u044C \u0438\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435",
@@ -88262,7 +88274,9 @@
     },
     recents: {
       en: "Recents",
-      it: "Recenti"
+      es: "Recientes",
+      it: "Recenti",
+      ja: "\u6700\u8FD1"
     },
     recent_tracks: {
       en: "Recent Tracks",
@@ -88421,7 +88435,8 @@
       pl: "Do\u0142\u0105cz na Discord"
     },
     follow_user: {
-      en: "Follow {u}"
+      en: "Follow {u}",
+      es: "Seguir a {u}"
     },
     sponsor_details: {
       en: "Sponsor and badge details",
@@ -88847,6 +88862,7 @@
     },
     share_via_device: {
       en: "Share via device",
+      es: "Compartir mediante dispositivo",
       it: "Condividi tramite dispositivo"
     },
     copy: {
@@ -89267,6 +89283,7 @@
       de: "Verlauf l\xF6schen",
       es: "Limpiar historial",
       it: "Cancella cronologia",
+      ja: "\u5C65\u6B74\u3092\u6D88\u53BB",
       pt: "Limpar hist\xF3rico",
       sv: "T\xF6m historia",
       ru: "\u041E\u0447\u0438\u0441\u0442\u0438\u0442\u044C \u0438\u0441\u0442\u043E\u0440\u0438\u044E",
@@ -89277,6 +89294,7 @@
       de: "Dein Aktivit\xE4tsverlauf wurde gel\xF6scht",
       es: "Historial de actividades limpiado",
       it: "Cronologia delle attivit\xE0 cancellata",
+      ja: "\u30A2\u30AF\u30C6\u30A3\u30D3\u30C6\u30A3\u5C65\u6B74\u3092\u6D88\u53BB\u3057\u307E\u3057\u305F",
       pt: "Hist\xF3rico de atividades limpo",
       sv: "T\xF6mde din aktivitetshistoria",
       ru: "\u0418\u0441\u0442\u043E\u0440\u0438\u044F \u0432\u0430\u0448\u0435\u0439 \u0430\u043A\u0442\u0438\u0432\u043D\u043E\u0441\u0442\u0438 \u043E\u0447\u0438\u0449\u0435\u043D\u0430",
@@ -89298,6 +89316,7 @@
       de: "Installation",
       es: "Instalaci\xF3n",
       it: "Installazione",
+      ja: "\u30A4\u30F3\u30B9\u30C8\u30FC\u30EB",
       pt: "Instala\xE7\xE3o",
       sv: "Installation",
       ru: "\u0423\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0430",
@@ -89309,7 +89328,8 @@
       de: "Kacheln",
       ru: "\u041A\u0430\u0440\u0442\u043E\u0447\u043A\u0438",
       es: "Tarjetas",
-      it: "Carte"
+      it: "Carte",
+      ja: "\u30AB\u30FC\u30C9"
     },
     grid: {
       // as in the view mode
@@ -89317,6 +89337,7 @@
       de: "Raster",
       es: "Cuadr\xEDcula",
       it: "Griglia",
+      ja: "\u30B0\u30EA\u30C3\u30C9",
       pt: "Grade",
       sv: "Bildruta",
       ru: "\u0421\u0435\u0442\u043A\u0430",
@@ -89328,6 +89349,7 @@
       de: "Liste",
       es: "Lista",
       it: "Lista",
+      ja: "\u30EA\u30B9\u30C8",
       pt: "Linha",
       sv: "Lista",
       ru: "\u0421\u043F\u0438\u0441\u043E\u043A",
@@ -89339,6 +89361,7 @@
       de: "Linien",
       es: "L\xEDnea",
       it: "Linea",
+      ja: "\u30E9\u30A4\u30F3",
       pt: "Lista",
       sv: "Linjediagram",
       ru: "\u041B\u0438\u043D\u0435\u0439\u043D\u0430\u044F",
@@ -89350,6 +89373,7 @@
       de: "Kreis",
       es: "Pastel",
       it: "Torta",
+      ja: "\u5186",
       pt: "Pizza",
       sv: "Cirkeldiagram",
       ru: "\u041A\u0440\u0443\u0433\u043E\u0432\u0430\u044F",
@@ -89361,6 +89385,7 @@
       de: "Balken",
       es: "Barra",
       it: "Barre",
+      ja: "\u30D0\u30FC",
       pt: "Coluna",
       sv: "Stapeldiagram",
       ru: "\u0421\u0442\u043E\u043B\u0431\u0447\u0430\u0442\u0430\u044F",
@@ -89371,6 +89396,7 @@
       de: "Horizontal",
       es: "Horizontal",
       it: "Orizzontale",
+      ja: "\u6C34\u5E73",
       sv: "V\xE5gr\xE4tt",
       ru: "\u0413\u043E\u0440\u0438\u0437\u043E\u043D\u0442\u0430\u043B\u044C\u043D\u044B\u0439",
       pt: "Horizontal",
@@ -89381,6 +89407,7 @@
       de: "Vertikal",
       es: "Vertical",
       it: "Verticale",
+      ja: "\u5782\u76F4",
       sv: "Lodr\xE4tt",
       ru: "\u0412\u0435\u0440\u0442\u0438\u043A\u0430\u043B\u044C\u043D\u044B\u0439",
       pt: "Vertical",
@@ -89414,6 +89441,7 @@
       de: "Markieren",
       es: "Favorito",
       it: "Preferito",
+      ja: "\u304A\u6C17\u306B\u5165\u308A",
       pt: "Favoritas",
       sv: "\xC4lska",
       ru: "\u041F\u043E\u043D\u0440\u0430\u0432\u0438\u043B\u043E\u0441\u044C",
@@ -89424,6 +89452,7 @@
       de: "Als Lieblingssong markieren",
       es: "A\xF1adir a favoritos",
       it: "Imposta come preferito",
+      ja: "\u30C8\u30E9\u30C3\u30AF\u3092\u304A\u6C17\u306B\u5165\u308A",
       ru: "\u041E\u0442\u043C\u0435\u0442\u0438\u0442\u044C \u0442\u0440\u0435\u043A \u043A\u0430\u043A \u043B\u044E\u0431\u0438\u043C\u044B\u0439",
       pt: "Marcar como favorito",
       pl: "Polub utw\xF3r"
@@ -89435,6 +89464,7 @@
       de: "Lieblingssongs",
       es: "Favoritos",
       it: "Preferiti",
+      ja: "\u304A\u6C17\u306B\u5165\u308A\u6E08\u307F",
       pt: "Favoritadas",
       sv: "\xC4lskade l\xE5tar",
       ru: "\u041F\u043E\u043D\u0440\u0430\u0432\u0438\u0432\u0448\u0438\u0435\u0441\u044F",
@@ -89446,6 +89476,7 @@
       de: "Dynamik",
       es: "Velocity",
       it: "Velocity",
+      ja: "\u30F4\u30A7\u30ED\u30B7\u30C6\u30A3",
       pt: "Rapidez",
       // velocity is often mistakenly translated to 'velocidade' in portuguese
       sv: "Velocitet",
@@ -89480,6 +89511,7 @@
       de: "Eigene Plays abgerufen, da die offizielle Titelliste nicht verf\xFCgbar ist",
       es: "Reproducciones personales usadas, debido a que la lista de temas oficial no est\xE1 disponible",
       it: "Il recupero dei propri ascolti come elenco ufficiale dei brani non \xE8 disponibile",
+      ja: "\u516C\u5F0F\u30C8\u30E9\u30C3\u30AF\u30EA\u30B9\u30C8\u304C\u5229\u7528\u3067\u304D\u306A\u3044\u305F\u3081\u3001\u518D\u751F\u5C65\u6B74\u304B\u3089\u53D6\u5F97\u3057\u307E\u3057\u305F",
       pt: "Reprodu\xE7\xF5es pr\xF3prias recuperadas, pois a lista de faixas oficial n\xE3o est\xE1 dispon\xEDvel",
       sv: "H\xE4mtade dina spelningar f\xF6r en officiell spellista finns inte tillg\xE4nglig",
       ru: "\u041F\u043E\u043B\u0443\u0447\u0435\u043D\u044B \u0432\u0430\u0448\u0438 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u044F, \u0442\u0430\u043A \u043A\u0430\u043A \u043E\u0444\u0438\u0446\u0438\u0430\u043B\u044C\u043D\u044B\u0439 \u0441\u043F\u0438\u0441\u043E\u043A \u0442\u0440\u0435\u043A\u043E\u0432 \u043D\u0435\u0434\u043E\u0441\u0442\u0443\u043F\u0435\u043D",
@@ -89490,6 +89522,7 @@
       de: "Auf {album}",
       es: "De {album}",
       it: "Da {album}",
+      ja: "{album} \u304B\u3089",
       pt: "Do {album}",
       sv: "Fr\xE5n {album}",
       ru: "\u0421 {album}",
@@ -89501,6 +89534,7 @@
       de: "{c} weitere",
       es: "{c} otros",
       it: "{c} altri",
+      ja: "\u4ED6{c}\u4EBA ",
       pt: "{c} outros",
       sv: "{c} andra",
       ru: "{c} \u0434\u0440\u0443\u0433\u0438\u0445",
@@ -89511,6 +89545,7 @@
       de: "Sammeln deiner Albumwiedergaben",
       es: "Recopilando tus reproducciones de \xE1lbumes",
       it: "Raccogliendo le tue riproduzioni di album",
+      ja: "\u30A2\u30EB\u30D0\u30E0\u306E\u518D\u751F\u56DE\u6570\u3092\u53CE\u96C6\u4E2D",
       pt: "Coletando suas reprodu\xE7\xF5es de \xE1lbuns",
       sv: "Samlar ihop dina albumspelningar",
       ru: "\u0421\u043E\u0431\u0438\u0440\u0430\u0435\u043C \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u044F \u0432\u0430\u0448\u0438\u0445 \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432",
@@ -89521,6 +89556,7 @@
       de: "Es konnten keine Plays gefunden werden",
       es: "No se pudieron encontrar reproducciones",
       it: "Non sono state trovate riproduzioni",
+      ja: "\u518D\u751F\u5C65\u6B74\u304C\u898B\u3064\u304B\u308A\u307E\u305B\u3093\u3067\u3057\u305F",
       pt: "Nenhuma reprodu\xE7\xE3o p\xF4de ser encontrada",
       sv: "Kunde inte hitta p\xE5 albumspelningar",
       ru: "\u041F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u044F \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u044B",
@@ -89531,6 +89567,7 @@
       de: "Albumtitel als Song \xF6ffnen",
       es: "Abrir t\xEDtulo del \xE1lbum como tema",
       it: "Apri il titolo dell\u2019album come brano",
+      ja: "\u30A2\u30EB\u30D0\u30E0\u540D\u3092\u30C8\u30E9\u30C3\u30AF\u3068\u3057\u3066\u958B\u304F",
       pt: "Abrir t\xEDtulo do \xE1lbum como faixa",
       sv: "\xD6ppna albumtitel som egen l\xE5t",
       ru: "\u041E\u0442\u043A\u0440\u044B\u0442\u044C \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0430\u043B\u044C\u0431\u043E\u043C\u0430 \u043A\u0430\u043A \u0442\u0440\u0435\u043A",
@@ -89541,6 +89578,7 @@
       de: "Ignoriert",
       es: "Ignorado",
       it: "Ignorato",
+      ja: "\u7121\u8996",
       pt: "Ignorados",
       sv: "Ignorerad",
       ru: "\u0418\u0433\u043D\u043E\u0440\u0438\u0440\u0443\u0435\u043C\u044B\u0435",
@@ -89551,6 +89589,7 @@
       de: "{c} insgesamt",
       es: "{c} en total",
       it: "{c} in totale",
+      ja: "\u5408\u8A08 {c}",
       sv: "{c} totalt",
       ru: "{c} \u0432\u0441\u0435\u0433\u043E",
       pt: "{c} no total",
@@ -89561,6 +89600,7 @@
       de: "Video von Last.fm entfernt",
       es: "Video removido por Last.fm",
       it: "Video rimosso da Last.fm",
+      ja: "\u52D5\u753B\u306FLast.fm\u306B\u3088\u3063\u3066\u524A\u9664\u3055\u308C\u307E\u3057\u305F",
       pt: "V\xEDdeo removido pela Last.fm",
       sv: "Video borttagen av Last.fm",
       ru: "\u0412\u0438\u0434\u0435\u043E \u0443\u0434\u0430\u043B\u0435\u043D\u043E Last.fm",
@@ -89571,6 +89611,7 @@
       de: "Diese Seite wurde von Last.fm eingeschr\xE4nkt",
       es: "Esta p\xE1gina ha sido limitada por Last.fm",
       it: "Questa pagina \xE8 stata limitata da Last.fm",
+      ja: "\u3053\u306E\u30DA\u30FC\u30B8\u306FLast.fm\u306B\u3088\u3063\u3066\u5236\u9650\u3055\u308C\u3066\u3044\u307E\u3059",
       pt: "Esta p\xE1gina foi limitada pela Last.fm",
       sv: "Denna sida har begr\xE4nsats av Last.fm",
       ru: "\u042D\u0442\u0430 \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0430 \u043E\u0433\u0440\u0430\u043D\u0438\u0447\u0435\u043D\u0430 Last.fm",
@@ -89584,6 +89625,7 @@
       de: "Ergebnisse f\xFCr",
       es: "Resultados para",
       it: "Risultati per",
+      ja: "\u691C\u7D22\u7D50\u679C",
       pt: "Resultados para",
       sv: "S\xF6kresultat f\xF6r",
       ru: "\u0420\u0435\u0437\u0443\u043B\u044C\u0442\u0430\u0442\u044B \u0434\u043B\u044F",
@@ -89594,6 +89636,7 @@
       de: "Neues Event hinzuf\xFCgen",
       es: "Crear nuevo evento",
       it: "Crea nuovo evento",
+      ja: "\u65B0\u3057\u3044\u30A4\u30D9\u30F3\u30C8\u3092\u4F5C\u6210",
       pt: "Criar novo evento",
       sv: "Skapa ett nytt evenemang",
       ru: "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u043D\u043E\u0432\u043E\u0435 \u0441\u043E\u0431\u044B\u0442\u0438\u0435",
@@ -89605,6 +89648,7 @@
       de: "Verwandte Tags",
       es: "Relacionado a",
       it: "Correlato a",
+      ja: "\u95A2\u9023\u30BF\u30B0",
       pt: "Relacionado a",
       sv: "F\xF6rknippad med",
       ru: "\u0421\u0432\u044F\u0437\u0430\u043D\u043D\u044B\u0435 \u0441",
@@ -89615,6 +89659,7 @@
       de: "Pers\xF6nliches Tag",
       es: "Tag personal",
       it: "Tag personale",
+      ja: "\u500B\u4EBA\u30BF\u30B0",
       pt: "Marcador pessoal",
       sv: "Din tagg",
       ru: "\u041B\u0438\u0447\u043D\u044B\u0439 \u0442\u0435\u0433",
@@ -89625,6 +89670,7 @@
       de: "Dein Profilbild",
       es: "Tu avatar",
       it: "La tua foto profilo",
+      ja: "\u3042\u306A\u305F\u306E\u30A2\u30D0\u30BF\u30FC",
       pt: "Sua foto de perfil",
       sv: "Din profilbild",
       ru: "\u0412\u0430\u0448 \u0430\u0432\u0430\u0442\u0430\u0440",
@@ -89650,6 +89696,7 @@
       de: "von",
       es: "por",
       it: "di",
+      ja: "\u4F5C\u6210",
       pt: "por",
       sv: "av",
       ru: "\u043E\u0442",
@@ -89660,6 +89707,7 @@
       de: "von {u}",
       es: "por {u}",
       it: "di {u}",
+      ja: "{u} \u306B\u3088\u308B",
       pt: "por {u}",
       sv: "av {u}",
       ru: "\u043E\u0442 {u}",
@@ -89671,6 +89719,7 @@
       de: " von {a}",
       es: " por {a}",
       it: " di {a}",
+      ja: " by {a}",
       pt: " por {a}",
       sv: " av {a}",
       ru: " \u043E\u0442 {a}",
@@ -89681,6 +89730,7 @@
       de: "{v} von {u}",
       es: "{v} por {v}",
       it: "{v} di {u}",
+      ja: "{u} \u306B\u3088\u308B {v}",
       pt: "{v} por {u}",
       ru: "{v} \u043E\u0442 {u}",
       pl: "{v} od {u}"
@@ -89690,6 +89740,7 @@
       de: "Von {u}",
       es: "de {u}",
       it: "da {u}",
+      ja: "{u} \u304B\u3089",
       pt: "de {u}",
       sv: "fr\xE5n {u}",
       ru: "\u043E\u0442 {u}",
@@ -89700,6 +89751,7 @@
       de: "\xD6ffnen",
       es: "Abrir",
       it: "Apri",
+      ja: "\u958B\u304F",
       pt: "Abrir",
       sv: "\xD6ppen",
       ru: "\u041E\u0442\u043A\u0440\u044B\u0442\u044C",
@@ -89710,6 +89762,7 @@
       de: "In neuem Tab \xF6ffnen",
       es: "Abrir en nueva pesta\xF1a",
       it: "Apri in una nuova scheda",
+      ja: "\u65B0\u3057\u3044\u30BF\u30D6\u3067\u958B\u304F",
       pt: "Abrir em nova aba",
       sv: "\xD6ppna i ny flik",
       ru: "\u041E\u0442\u043A\u0440\u044B\u0442\u044C \u0432 \u043D\u043E\u0432\u043E\u0439 \u0432\u043A\u043B\u0430\u0434\u043A\u0435",
@@ -89721,6 +89774,7 @@
       pt: "Visualizar imagem",
       es: "Ver imagen",
       it: "Visualizza immagine",
+      ja: "\u753B\u50CF\u3092\u8868\u793A",
       sv: "Visa bild",
       ru: "\u041F\u0440\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435",
       pl: "Wy\u015Bwietl zdj\u0119cie"
@@ -89730,6 +89784,7 @@
       de: "Unangemessenes Bild ansehen",
       es: "Ver imagen no segura",
       it: "Mostra immagine non sicura",
+      ja: "\u5B89\u5168\u3067\u306A\u3044\u753B\u50CF\u3092\u8868\u793A",
       pt: "Visualizar imagem n\xE3o segura",
       pl: "Wy\u015Bwietl nieodpowiednie zdj\u0119cie",
       ru: "\u041F\u0440\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u043D\u0435\u0431\u0435\u0437\u043E\u043F\u0430\u0441\u043D\u043E\u0435 \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435"
@@ -89739,6 +89794,7 @@
       de: "Link \xF6ffnen",
       es: "Abrir v\xEDnculo",
       it: "Apri link",
+      ja: "\u30EA\u30F3\u30AF\u3092\u958B\u304F",
       pt: "Abrir link",
       pl: "Otw\xF3rz link",
       ru: "\u041E\u0442\u043A\u0440\u044B\u0442\u044C \u0441\u0441\u044B\u043B\u043A\u0443"
@@ -89753,6 +89809,7 @@
       de: "Dieses Event wurde abgesagt (\u2565\uFE4F\u2565)",
       es: "Este evento ha sido cancelado (\u2565\uFE4F\u2565)",
       it: "Questo evento \xE8 stato annullato (\u2565\uFE4F\u2565)",
+      ja: "\u3053\u306E\u30A4\u30D9\u30F3\u30C8\u306F\u4E2D\u6B62\u3055\u308C\u307E\u3057\u305F (\u2565\uFE4F\u2565)",
       pt: "Este evento foi cancelado (\u2565\uFE4F\u2565)",
       sv: "Detta evenemang har avbrutits (\u2565\uFE4F\u2565)",
       ru: "\u042D\u0442\u043E \u0441\u043E\u0431\u044B\u0442\u0438\u0435 \u0431\u044B\u043B\u043E \u043E\u0442\u043C\u0435\u043D\u0435\u043D\u043E (\u2565\uFE4F\u2565)",
@@ -89764,6 +89821,7 @@
         de: "Intelligente K\xFCnstler- und Song-Tags",
         es: "Tags inteligentes de artistas y temas",
         it: "Tag intelligenti per artisti e brani",
+        ja: "\u53C2\u52A0\u30A2\u30FC\u30C6\u30A3\u30B9\u30C8\u3068\u697D\u66F2\u30BF\u30B0\u306E\u30B9\u30DE\u30FC\u30C8\u30D5\u30A9\u30FC\u30DE\u30C3\u30C8",
         pt: "Tags inteligentes de artistas e m\xFAsicas",
         sv: "Smartformat f\xF6r g\xE4startister och l\xE5ttaggar",
         ru: "\u0423\u043C\u043D\u043E\u0435 \u0444\u043E\u0440\u043C\u0430\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435 \u043F\u0440\u0438\u0433\u043B\u0430\u0448\u0451\u043D\u043D\u044B\u0445 \u0430\u0440\u0442\u0438\u0441\u0442\u043E\u0432 \u0438 \u0442\u0435\u0433\u043E\u0432 \u043F\u0435\u0441\u0435\u043D",
@@ -89774,6 +89832,7 @@
         de: "Analysiert Album- und Songtitel hinsichtlich ihrer Versionen, Remixe usw.",
         es: "Analiza t\xEDtulos de \xE1lbumes y temas y separa sus colaboradores, versiones, remixes, etc.",
         it: "Analizza i titoli di album e brani ed estrae artisti partecipanti, versioni, remix, ecc.",
+        ja: "\u30A2\u30EB\u30D0\u30E0\u540D\u3084\u66F2\u540D\u3092\u89E3\u6790\u3057\u3001\u53C2\u52A0\u30A2\u30FC\u30C6\u30A3\u30B9\u30C8\u3001\u30D0\u30FC\u30B8\u30E7\u30F3\u3001\u30EA\u30DF\u30C3\u30AF\u30B9\u306A\u3069\u3092\u8B58\u5225\u3057\u307E\u3059",
         pt: "Analisa t\xEDtulos de \xE1lbuns e faixas e os separa em seus convidados, vers\xF5es, remixes etc.",
         sv: "Analyserar album och l\xE5ttitlar till g\xE4startister, olika versioner, remixar osv.",
         ru: "\u0410\u043D\u0430\u043B\u0438\u0437\u0438\u0440\u0443\u0435\u0442 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432 \u0438 \u0442\u0440\u0435\u043A\u043E\u0432 \u043D\u0430 \u043F\u0440\u0435\u0434\u043C\u0435\u0442 \u043F\u0440\u0438\u0433\u043B\u0430\u0448\u0451\u043D\u043D\u044B\u0445 \u0430\u0440\u0442\u0438\u0441\u0442\u043E\u0432, \u0432\u0435\u0440\u0441\u0438\u0439, \u0440\u0435\u043C\u0438\u043A\u0441\u043E\u0432 \u0438 \u0442.\u0434.",
@@ -89786,6 +89845,7 @@
         de: "Doppelte Nennung der K\xFCnstler:innen im Titel",
         es: "Duplicar artistas con cr\xE9ditos en el t\xEDtulo",
         it: "Duplica gli artisti partecipanti nel titolo",
+        ja: "\u53C2\u52A0\u30A2\u30FC\u30C6\u30A3\u30B9\u30C8\u3092\u30BF\u30A4\u30C8\u30EB\u5185\u306B\u3082\u8868\u793A",
         pt: "Artistas creditados duplicados no t\xEDtulo",
         sv: "Duplicera artistnamn i l\xE5ttitel",
         ru: "\u0414\u0443\u0431\u043B\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u043F\u0440\u0438\u0433\u043B\u0430\u0448\u0451\u043D\u043D\u044B\u0445 \u0430\u0440\u0442\u0438\u0441\u0442\u043E\u0432 \u0432 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0438",
@@ -89796,6 +89856,7 @@
         de: "Ansonsten werden gefeaturete K\xFCnstler:innen neben dem/der Hauptk\xFCnstler:in platziert",
         es: "De lo contrario, los colaboradores son organizados limpiamente al lado del artista principal",
         it: "Altrimenti gli artisti partecipanti sono disposti in modo pulito vicino all\u2019artista principale",
+        ja: "\u7121\u52B9\u306E\u5834\u5408\u3001\u53C2\u52A0\u30A2\u30FC\u30C6\u30A3\u30B9\u30C8\u306F\u30E1\u30A4\u30F3\u30A2\u30FC\u30C6\u30A3\u30B9\u30C8\u306E\u6A2A\u306B\u306E\u307F\u8868\u793A\u3055\u308C\u307E\u3059",
         pt: "Caso contr\xE1rio os convidados s\xE3o organizados de forma elegante ao lado do artista principal",
         sv: "Annars placeras g\xE4startister fint bredvid huvudartisten",
         ru: "\u0412 \u043F\u0440\u043E\u0442\u0438\u0432\u043D\u043E\u043C \u0441\u043B\u0443\u0447\u0430\u0435 \u043F\u0440\u0438\u0433\u043B\u0430\u0448\u0451\u043D\u043D\u044B\u0435 \u0430\u0440\u0442\u0438\u0441\u0442\u044B \u0430\u043A\u043A\u0443\u0440\u0430\u0442\u043D\u043E \u0440\u0430\u0437\u043C\u0435\u0449\u0430\u044E\u0442\u0441\u044F \u0440\u044F\u0434\u043E\u043C \u0441 \u043E\u0441\u043D\u043E\u0432\u043D\u044B\u043C \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0435\u043C",
@@ -89808,6 +89869,7 @@
         de: "Titellayout",
         es: "Dise\xF1o de tema",
         it: "Layout dei brani",
+        ja: "\u30C8\u30E9\u30C3\u30AF\u30EC\u30A4\u30A2\u30A6\u30C8",
         sv: "L\xE5tlayout",
         ru: "\u0420\u0430\u0441\u043F\u043E\u043B\u043E\u0436\u0435\u043D\u0438\u0435 \u0442\u0440\u0435\u043A\u0430",
         pt: "Layout da faixa",
@@ -89818,6 +89880,7 @@
         de: "W\xE4hle, auf welcher Achse Titelinformationen angezeigt werden sollen",
         es: "Elige en qu\xE9 eje mostrar la informaci\xF3n del tema",
         it: "Seleziona su quale asse mostrare le informazioni dei brani",
+        ja: "\u30C8\u30E9\u30C3\u30AF\u60C5\u5831\u3092\u8868\u793A\u3059\u308B\u8EF8\u3092\u9078\u629E\u3057\u307E\u3059",
         sv: "V\xE4lj vilken axis att visa l\xE5tinformation p\xE5",
         ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u043E\u0441\u044C, \u043D\u0430 \u043A\u043E\u0442\u043E\u0440\u043E\u0439 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0442\u044C \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044E \u043E \u0442\u0440\u0435\u043A\u0435",
         pt: "Escolha em qual eixo exibir as informa\xE7\xF5es da faixa",
@@ -89828,6 +89891,7 @@
         de: "Titel und K\xFCnstler:in vertikal anordnen",
         es: "Colocar t\xEDtulo y artista verticalmente",
         it: "Disponi titolo e artista verticalmente",
+        ja: "\u30BF\u30A4\u30C8\u30EB\u3068\u30A2\u30FC\u30C6\u30A3\u30B9\u30C8\u3092\u7E26\u306B\u914D\u7F6E",
         sv: "Placera titel och artist lodr\xE4tt",
         ru: "\u0420\u0430\u0437\u043C\u0435\u0441\u0442\u0438\u0442\u044C \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0438 \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044F \u0432\u0435\u0440\u0442\u0438\u043A\u0430\u043B\u044C\u043D\u043E",
         pt: "Colocar t\xEDtulo e artista verticalmente",
@@ -89838,6 +89902,7 @@
         de: "Titel und K\xFCnstler:in horizontal anordnen",
         es: "Colocar t\xEDtulo y artista horizontalmente",
         it: "Disponi titolo e artista orizzontalmente",
+        ja: "\u30BF\u30A4\u30C8\u30EB\u3068\u30A2\u30FC\u30C6\u30A3\u30B9\u30C8\u3092\u6A2A\u306B\u914D\u7F6E",
         sv: "Placera titel och artist v\xE5gr\xE4tt",
         ru: "\u0420\u0430\u0437\u043C\u0435\u0441\u0442\u0438\u0442\u044C \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0438 \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044F \u0433\u043E\u0440\u0438\u0437\u043E\u043D\u0442\u0430\u043B\u044C\u043D\u043E",
         pt: "Colocar t\xEDtulo e artista horizontalmente",
@@ -89850,6 +89915,7 @@
         de: "Position des Albumtitels",
         es: "Ubicaci\xF3n del nombre del \xE1lbum",
         it: "Posizione del nome dell\u2019album",
+        ja: "\u30A2\u30EB\u30D0\u30E0\u540D\u306E\u8868\u793A\u4F4D\u7F6E",
         sv: "Albumtitelsplats",
         ru: "\u0420\u0430\u0441\u043F\u043E\u043B\u043E\u0436\u0435\u043D\u0438\u0435 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F \u0430\u043B\u044C\u0431\u043E\u043C\u0430",
         pt: "Localiza\xE7\xE3o do nome do \xE1lbum",
@@ -89860,6 +89926,7 @@
         de: "W\xE4hle, auf welcher Achse der Albumtitel angezeigt werden soll",
         es: "Elige en qu\xE9 eje mostrar el nombre del \xE1lbum",
         it: "Seleziona su quale asse mostrare il nome dell\u2019album",
+        ja: "\u30A2\u30EB\u30D0\u30E0\u540D\u3092\u8868\u793A\u3059\u308B\u8EF8\u3092\u9078\u629E\u3057\u307E\u3059",
         sv: "V\xE4lj vilken axis att visa albumtitel p\xE5",
         ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u043E\u0441\u044C, \u043D\u0430 \u043A\u043E\u0442\u043E\u0440\u043E\u0439 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0442\u044C \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0430\u043B\u044C\u0431\u043E\u043C\u0430",
         pt: "Escolha em qual eixo exibir o nome do \xE1lbum",
@@ -89870,6 +89937,7 @@
         de: "Unter Titel und K\xFCnstler:in anordnen",
         es: "Colocar debajo del t\xEDtulo y artista",
         it: "Disponi sotto titolo e artista",
+        ja: "\u30BF\u30A4\u30C8\u30EB\u3068\u30A2\u30FC\u30C6\u30A3\u30B9\u30C8\u306E\u4E0B\u306B\u914D\u7F6E",
         sv: "Placera under l\xE5ttitel och artist",
         ru: "\u0420\u0430\u0437\u043C\u0435\u0441\u0442\u0438\u0442\u044C \u043F\u043E\u0434 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435\u043C \u0438 \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0435\u043C",
         pt: "Colocar abaixo do t\xEDtulo e artista",
@@ -89880,6 +89948,7 @@
         de: "Neben Titel und K\xFCnstler:in anordnen",
         es: "Colocar al lado del t\xEDtulo y artista",
         it: "Disponi a fianco di titolo e artista",
+        ja: "\u30BF\u30A4\u30C8\u30EB\u3068\u30A2\u30FC\u30C6\u30A3\u30B9\u30C8\u306E\u6A2A\u306B\u914D\u7F6E",
         sv: "Placera bredvid l\xE5ttitel och artist",
         ru: "\u0420\u0430\u0437\u043C\u0435\u0441\u0442\u0438\u0442\u044C \u0440\u044F\u0434\u043E\u043C \u0441 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435\u043C \u0438 \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0435\u043C",
         pt: "Colocar ao lado do t\xEDtulo e artista",
@@ -89892,6 +89961,7 @@
         de: "Zugeh\xF6riges Album f\xFCr Titel anzeigen",
         es: "Mostrar \xE1lbum asociado al tema",
         it: "Mostra album associato per i brani",
+        ja: "\u30C8\u30E9\u30C3\u30AF\u306B\u95A2\u9023\u30A2\u30EB\u30D0\u30E0\u3092\u8868\u793A",
         sv: "Visa associerade album f\xF6r l\xE5tar",
         ru: "\u041F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u0441\u0432\u044F\u0437\u0430\u043D\u043D\u044B\u0439 \u0430\u043B\u044C\u0431\u043E\u043C (\u0434\u043B\u044F \u0442\u0440\u0435\u043A\u043E\u0432)",
         pt: "Mostrar \xE1lbum associado para faixas",
@@ -89902,6 +89972,7 @@
         de: "Zeigt den Namen des zugeh\xF6rigen Albums des Titels an, wenn genug Platz vorhanden ist",
         es: "Coloca el nombre del \xE1lbum asociado al tema si hay espacio",
         it: "Inserisce il nome dell\u2019album associato ai brani se c\u2019\xE8 spazio",
+        ja: "\u30B9\u30DA\u30FC\u30B9\u304C\u3042\u308B\u5834\u5408\u3001\u95A2\u9023\u3059\u308B\u30A2\u30EB\u30D0\u30E0\u540D\u3092\u8868\u793A\u3057\u307E\u3059",
         sv: "Placerar l\xE5tens associerade album om det finns plats",
         ru: "\u041E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u0442 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0441\u0432\u044F\u0437\u0430\u043D\u043D\u043E\u0433\u043E \u0441 \u0442\u0440\u0435\u043A\u043E\u043C \u0430\u043B\u044C\u0431\u043E\u043C\u0430, \u0435\u0441\u043B\u0438 \u0435\u0441\u0442\u044C \u043C\u0435\u0441\u0442\u043E",
         pt: "Coloca o nome do \xE1lbum associado \xE0 faixa, se houver espa\xE7o",
@@ -89913,6 +89984,7 @@
       de: "Nur beim aktiven Scrobbeln",
       es: "Solo activo cuando se hace scrobbling",
       it: "Solo quando si sta effettuando lo scrobbling",
+      ja: "Scrobble\u4E2D\u306E\u307F",
       sv: "Endast n\xE4r du skrobblar",
       ru: "\u0422\u043E\u043B\u044C\u043A\u043E \u043F\u0440\u0438 \u0430\u043A\u0442\u0438\u0432\u043D\u043E\u043C \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u0438\u043D\u0433\u0435",
       pt: "Apenas quando estiver ativamente scrobblando",
@@ -89923,6 +89995,7 @@
       de: "Immer, wenn m\xF6glich",
       es: "Siempre cuando sea posible",
       it: "Sempre quando possibile",
+      ja: "\u53EF\u80FD\u306A\u5834\u5408\u306F\u5E38\u306B\u8868\u793A",
       sv: "Alltid, n\xE4r det \xE4r m\xF6jligt",
       ru: "\u0412\u0441\u0435\u0433\u0434\u0430, \u043A\u043E\u0433\u0434\u0430 \u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E",
       pt: "Sempre que poss\xEDvel",
@@ -89933,6 +90006,7 @@
       de: "Remaster-Tags anzeigen",
       es: "Mostrar tags de remasters",
       it: "Mostra tag dei remaster",
+      ja: "\u30EA\u30DE\u30B9\u30BF\u30FC\u30BF\u30B0\u3092\u8868\u793A",
       pt: "Mostrar as tags de remaster",
       sv: "Visa remaster-taggar",
       ru: "\u041F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u0442\u0435\u0433\u0438 \u0440\u0435\u043C\u0430\u0441\u0442\u0435\u0440\u0438\u043D\u0433\u0430",
@@ -89944,6 +90018,7 @@
         de: "Titel automatisch aktualisieren",
         es: "Recargar temas autom\xE1ticamente",
         it: "Aggiorna brani automaticamente",
+        ja: "\u30C8\u30E9\u30C3\u30AF\u3092\u81EA\u52D5\u66F4\u65B0",
         pt: "Atualizar faixas automaticamente",
         sv: "Automatiskt uppdatera l\xE5tar",
         ru: "\u0410\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u0435\u0441\u043A\u0438 \u043E\u0431\u043D\u043E\u0432\u043B\u044F\u0442\u044C \u0442\u0440\u0435\u043A\u0438",
@@ -89954,6 +90029,7 @@
         de: "Sehe deinen H\xF6rverlauf in Echtzeit an",
         es: "Ve tu historial de reproducciones en tiempo real",
         it: "Visualizza la tua cronologia di ascolto in tempo reale",
+        ja: "\u518D\u751F\u5C65\u6B74\u3092\u30EA\u30A2\u30EB\u30BF\u30A4\u30E0\u3067\u8868\u793A\u3057\u307E\u3059",
         pt: "Veja seu hist\xF3rico de scrobbles em tempo real",
         sv: "Visa din lyssningshistorik i realtid",
         ru: "\u041F\u0440\u043E\u0441\u043C\u043E\u0442\u0440 \u0438\u0441\u0442\u043E\u0440\u0438\u0438 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u044F \u0432 \u0440\u0435\u0430\u043B\u044C\u043D\u043E\u043C \u0432\u0440\u0435\u043C\u0435\u043D\u0438",
@@ -89966,6 +90042,7 @@
       de: "Anzahl der anzuzeigenden Titel",
       es: "Cantidad de temas para mostrar",
       it: "Quantit\xE0 di brani da mostrare",
+      ja: "\u8868\u793A\u3059\u308B\u30C8\u30E9\u30C3\u30AF\u6570",
       pt: "Quantidade a ser exibida",
       sv: "M\xE4ngd att visa",
       ru: "\u041A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u043C\u044B\u0445 \u0442\u0440\u0435\u043A\u043E\u0432",
@@ -89976,6 +90053,7 @@
       de: "Titel mit Albumcover anzeigen",
       es: "Acompa\xF1ar temas con la c\xE1ratula",
       it: "Accompagna i brani con le copertine",
+      ja: "\u30C8\u30E9\u30C3\u30AF\u3068\u4E00\u7DD2\u306B\u30A2\u30FC\u30C8\u30EF\u30FC\u30AF\u3092\u8868\u793A",
       pt: "Mostrar as faixas juntamente a capa",
       sv: "Visa skivomslag vid l\xE5t",
       ru: "\u0421\u043E\u043F\u0440\u043E\u0432\u043E\u0436\u0434\u0430\u0442\u044C \u0442\u0440\u0435\u043A\u0438 \u043E\u0431\u043B\u043E\u0436\u043A\u043E\u0439",
@@ -89987,7 +90065,7 @@
       es: "Duraci\xF3n predeterminada",
       it: "Periodo di tempo predefinito",
       pt: "Per\xEDodo padr\xE3o",
-      ja: "\u30C7\u30D5\u30A9\u30EB\u30C8\u671F\u9593",
+      ja: "\u65E2\u5B9A\u306E\u671F\u9593",
       sv: "Standardtidsram",
       ru: "\u041F\u0435\u0440\u0438\u043E\u0434 \u043F\u043E \u0443\u043C\u043E\u043B\u0447\u0430\u043D\u0438\u044E",
       pl: "Domy\u015Blna rama czasowa"
@@ -89997,6 +90075,7 @@
       de: "Zeitraum",
       es: "Duraci\xF3n",
       it: "Durata",
+      ja: "\u671F\u9593",
       pt: "Per\xEDodo",
       sv: "Tidsram",
       ru: "\u041F\u0435\u0440\u0438\u043E\u0434",
@@ -90008,6 +90087,7 @@
       de: "Objekttyp",
       es: "Tipo de \xEDtem",
       it: "Tipo di oggetto",
+      ja: "\u7A2E\u985E",
       pt: "Tipo de item",
       sv: "Objekttyp",
       ru: "\u0422\u0438\u043F \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u0430",
@@ -90018,6 +90098,7 @@
       de: "Seitenanzahl",
       es: "Total de p\xE1ginas",
       it: "Numero di pagine",
+      ja: "\u30DA\u30FC\u30B8\u6570",
       pt: "Total de p\xE1ginas",
       sv: "M\xE4ngd sidor",
       ru: "\u041A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E \u0441\u0442\u0440\u0430\u043D\u0438\u0446",
@@ -90030,7 +90111,7 @@
       es: "Estilo de lista",
       it: "Stile della vista",
       pt: "Estilo da tabela",
-      ja: "\u30C1\u30E3\u30FC\u30C8\u30B9\u30BF\u30A4\u30EB",
+      ja: "\u8868\u793A\u5F62\u5F0F",
       sv: "Liststil",
       ru: "\u0421\u0442\u0438\u043B\u044C \u0433\u0440\u0430\u0444\u0438\u043A\u0430",
       pl: "Styl wykresu"
@@ -90041,6 +90122,7 @@
       de: "Diagrammgr\xF6\xDFe",
       es: "Tama\xF1o de lista",
       it: "Dimensione della vista",
+      ja: "\u8868\u793A\u4EF6\u6570",
       pt: "Tamanho da tabela",
       sv: "Liststorlek",
       ru: "\u0420\u0430\u0437\u043C\u0435\u0440 \u0433\u0440\u0430\u0444\u0438\u043A\u0430",
@@ -90051,6 +90133,7 @@
       de: "Land",
       es: "Pa\xEDs",
       it: "Paese",
+      ja: "\u56FD",
       pt: "Pa\xEDs",
       sv: "Land",
       ru: "\u0421\u0442\u0440\u0430\u043D\u0430",
@@ -90059,7 +90142,9 @@
     origin: {
       // used as an alternative to saying someone or something's
       // country, as its now always a country
-      en: "Origin"
+      en: "Origin",
+      es: "Origen",
+      ja: "\u51FA\u8EAB\u56FD"
     },
     display_name: {
       name: {
@@ -90067,6 +90152,7 @@
         de: "Anzeigename",
         es: "Nombre para mostrar",
         it: "Nome visualizzato",
+        ja: "\u8868\u793A\u540D",
         sv: "Visningsnamn",
         ru: "\u041E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u043C\u043E\u0435 \u0438\u043C\u044F",
         pt: "Nome de exibi\xE7\xE3o",
@@ -90077,6 +90163,7 @@
         de: "\xC4ndert deinen Namen in deinem Profil, mit deinem echten @Benutzernamen darunter",
         es: "Cambia tu nombre en tu perfil, con tu nombre de usuario mostrado debajo",
         it: "Cambia il tuo nome sul tuo profilo, con il tuo @username visualizzato sotto",
+        ja: "\u30D7\u30ED\u30D5\u30A3\u30FC\u30EB\u4E0A\u306E\u540D\u524D\u3092\u5909\u66F4\u3057\u307E\u3059\u3002\u5B9F\u969B\u306E @\u30E6\u30FC\u30B6\u30FC\u540D\u306F\u305D\u306E\u4E0B\u306B\u8868\u793A\u3055\u308C\u307E\u3059",
         sv: "\xC4ndrar namnet p\xE5 din profil och l\xE4gger ditt riktiga @anv\xE4ndarnamn under\xE5t",
         ru: "\u0418\u0437\u043C\u0435\u043D\u044F\u0435\u0442 \u0432\u0430\u0448\u0435 \u0438\u043C\u044F \u0432 \u043F\u0440\u043E\u0444\u0438\u043B\u0435, \u043F\u0440\u0438 \u044D\u0442\u043E\u043C \u0432\u0430\u0448 \u0440\u0435\u0430\u043B\u044C\u043D\u044B\u0439 @\u043D\u0438\u043A\u043D\u0435\u0439\u043C \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u0442\u0441\u044F \u043D\u0438\u0436\u0435",
         pt: "Altera seu nome em seu perfil, com seu @nome de usu\xE1rio real mostrado abaixo",
@@ -90088,6 +90175,7 @@
       de: "Untertitel",
       es: "Subt\xEDtulo",
       it: "Sottotitolo",
+      ja: "\u30B5\u30D6\u30BF\u30A4\u30C8\u30EB",
       pt: "Legenda",
       sv: "Undertext",
       ru: "\u041F\u043E\u0434\u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043E\u043A",
@@ -90098,6 +90186,7 @@
       de: "Profiltitel",
       es: "T\xEDtulo de perfil",
       it: "Titolo del profilo",
+      ja: "\u30D7\u30ED\u30D5\u30A3\u30FC\u30EB\u30BF\u30A4\u30C8\u30EB",
       ru: "\u0417\u0430\u0433\u043E\u043B\u043E\u0432\u043E\u043A \u043F\u0440\u043E\u0444\u0438\u043B\u044F"
     },
     pronoun_tip: {
@@ -90105,6 +90194,7 @@
       de: "F\xFCge Pronomen am Anfang oder am Ende deines Profiltitels ein, um sie optisch hervorzuheben",
       es: "Incluye pronombres al inicio o final de tu t\xEDtulo para separarlos visualmente",
       it: "Includi i pronomi all\u2019inizio o alla fine del titolo per separarli visivamente",
+      ja: "\u4EE3\u540D\u8A5E\u306F\u30BF\u30A4\u30C8\u30EB\u306E\u5148\u982D\u307E\u305F\u306F\u672B\u5C3E\u306B\u914D\u7F6E\u3059\u308B\u3068\u898B\u3084\u3059\u304F\u306A\u308A\u307E\u3059",
       ru: "\u0420\u0430\u0437\u043C\u0435\u0441\u0442\u0438\u0442\u0435 \u043C\u0435\u0441\u0442\u043E\u0438\u043C\u0435\u043D\u0438\u044F \u0432 \u043D\u0430\u0447\u0430\u043B\u0435 \u0438\u043B\u0438 \u0432 \u043A\u043E\u043D\u0446\u0435 \u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043A\u0430, \u0447\u0442\u043E\u0431\u044B \u0432\u0438\u0437\u0443\u0430\u043B\u044C\u043D\u043E \u043E\u0442\u0434\u0435\u043B\u0438\u0442\u044C \u0438\u0445"
     },
     block_list: {
@@ -90112,6 +90202,7 @@
       de: "Blockierliste",
       es: "Lista de bloqueados",
       it: "Lista di utenti bloccati",
+      ja: "\u30D6\u30ED\u30C3\u30AF\u30EA\u30B9\u30C8",
       pt: "Lista de bloqueados",
       sv: "Blocklista",
       ru: "\u0427\u0451\u0440\u043D\u044B\u0439 \u0441\u043F\u0438\u0441\u043E\u043A",
@@ -90122,6 +90213,7 @@
       de: "Was passiert mit blockierten Benutzern?",
       es: "\xBFQu\xE9 pasa con los usuarios bloqueados?",
       it: "Cosa succede agli utenti bloccati?",
+      ja: "\u30D6\u30ED\u30C3\u30AF\u3057\u305F\u30E6\u30FC\u30B6\u30FC\u306B\u306F\u4F55\u304C\u8D77\u3053\u308A\u307E\u3059\u304B\uFF1F",
       pt: "O que acontece com os usu\xE1rios bloqueados?",
       sv: "Vad h\xE4nder med blockerade anv\xE4ndare?",
       ru: "\u0427\u0442\u043E \u043F\u0440\u043E\u0438\u0441\u0445\u043E\u0434\u0438\u0442 \u0441 \u0437\u0430\u0431\u043B\u043E\u043A\u0438\u0440\u043E\u0432\u0430\u043D\u043D\u044B\u043C\u0438 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F\u043C\u0438?",
@@ -90132,6 +90224,7 @@
       de: "Du hast {c} Benutzer blockiert",
       es: "Has bloqueado {c} perfiles",
       it: "Hai bloccato {c} profili",
+      ja: "{c} \u4EF6\u306E\u30D7\u30ED\u30D5\u30A3\u30FC\u30EB\u3092\u30D6\u30ED\u30C3\u30AF\u3057\u3066\u3044\u307E\u3059",
       pt: "Voc\xEA bloqueou {c} perfis",
       sv: "Du har blockerat {c} profiler",
       ru: "\u0412\u044B \u0437\u0430\u0431\u043B\u043E\u043A\u0438\u0440\u043E\u0432\u0430\u043B\u0438 {c} \u043F\u0440\u043E\u0444\u0438\u043B\u0435\u0439",
@@ -90142,6 +90235,7 @@
       de: "Benutzername eingeben",
       es: "Ingresa el nombre de usuario",
       it: "Inserisci nome utente",
+      ja: "\u30E6\u30FC\u30B6\u30FC\u540D\u3092\u5165\u529B",
       pt: "Insira o nome de usu\xE1rio",
       sv: "Skriv anv\xE4ndarnamn",
       ru: "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0438\u043C\u044F \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F",
@@ -90152,6 +90246,7 @@
       de: "Blockieren",
       es: "Bloquear",
       it: "Blocca",
+      ja: "\u30D6\u30ED\u30C3\u30AF",
       pt: "Bloquear",
       sv: "Blockera",
       ru: "\u0417\u0430\u0431\u043B\u043E\u043A\u0438\u0440\u043E\u0432\u0430\u0442\u044C",
@@ -90162,6 +90257,7 @@
       de: "Blockiert",
       es: "Bloqueado",
       it: "Bloccato",
+      ja: "\u30D6\u30ED\u30C3\u30AF\u6E08\u307F",
       pt: "Bloqueado",
       sv: "Blockerad",
       ru: "\u0417\u0430\u0431\u043B\u043E\u043A\u0438\u0440\u043E\u0432\u0430\u043D\u043E",
@@ -90172,6 +90268,7 @@
       de: "Kann Shouts hinterlassen, diese sind aber nicht f\xFCr dich sichtbar",
       es: "Pueden dejar notas pero no son visibles para ti",
       it: "Pu\xF2 lasciare note, ma non saranno visibili a te",
+      ja: "\u30B7\u30E3\u30A6\u30C8\u306F\u6295\u7A3F\u3067\u304D\u307E\u3059\u304C\u3001\u3042\u306A\u305F\u306B\u306F\u8868\u793A\u3055\u308C\u307E\u305B\u3093",
       pt: "Podem deixar mensagens, mas elas n\xE3o s\xE3o vis\xEDveis para voc\xEA",
       sv: "Hojtningar p\xE5 allm\xE4na profiler syns inte f\xF6r dig",
       ru: "\u041C\u043E\u0433\u0443\u0442 \u043E\u0441\u0442\u0430\u0432\u043B\u044F\u0442\u044C \u0441\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u044F, \u043D\u043E \u0432\u044B \u0438\u0445 \u043D\u0435 \u0443\u0432\u0438\u0434\u0438\u0442\u0435",
@@ -90182,6 +90279,7 @@
       de: "Kann dir keine Direktnachrichten senden",
       es: "No pueden enviarte mensajes directos",
       it: "Non pu\xF2 inviarti messaggi privati",
+      ja: "\u30C0\u30A4\u30EC\u30AF\u30C8\u30E1\u30C3\u30BB\u30FC\u30B8\u3092\u9001\u4FE1\u3067\u304D\u307E\u305B\u3093",
       pt: "N\xE3o podem lhe enviar mensagens diretas",
       sv: "Kan inte skicka privat meddelande till dig",
       ru: "\u041D\u0435 \u043C\u043E\u0433\u0443\u0442 \u043E\u0442\u043F\u0440\u0430\u0432\u043B\u044F\u0442\u044C \u0432\u0430\u043C \u043B\u0438\u0447\u043D\u044B\u0435 \u0441\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u044F",
@@ -90192,6 +90290,7 @@
       de: "Kann keine Shouts hinterlassen oder dir antworten",
       es: "No pueden dejarte notas o responderte",
       it: "Non pu\xF2 lasciare note o risponderti",
+      ja: "\u30B7\u30E3\u30A6\u30C8\u306E\u6295\u7A3F\u3084\u8FD4\u4FE1\u304C\u3067\u304D\u307E\u305B\u3093",
       pt: "N\xE3o podem deixar mensagens na sua caixa de mensagens ou lhe responder",
       sv: "Kan inte l\xE4mna hojtningar p\xE5 din profil eller svara p\xE5 dina hojtningar",
       ru: "\u041D\u0435 \u043C\u043E\u0433\u0443\u0442 \u043E\u0441\u0442\u0430\u0432\u043B\u044F\u0442\u044C \u0441\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u044F \u0438\u043B\u0438 \u043E\u0442\u0432\u0435\u0447\u0430\u0442\u044C \u0432\u0430\u043C",
@@ -90202,6 +90301,7 @@
       de: "Bereits vorhandene Shouts auf deinem Profil werden nicht gel\xF6scht",
       es: "No puedes eliminar notas ya existentes en tu perfil",
       it: "Non puoi eliminare note gi\xE0 esistenti sul tuo profilo",
+      ja: "\u30D7\u30ED\u30D5\u30A3\u30FC\u30EB\u4E0A\u306E\u65E2\u5B58\u306E\u30B7\u30E3\u30A6\u30C8\u306F\u524A\u9664\u3055\u308C\u307E\u305B\u3093",
       pt: "Voc\xEA n\xE3o pode deletar mensagens j\xE1 existentes em seu perfil",
       sv: "Du kan inte ta bort deras tidigare hojtningar fr\xE5n din profil",
       ru: "\u0412\u044B \u043D\u0435 \u043C\u043E\u0436\u0435\u0442\u0435 \u0443\u0434\u0430\u043B\u0438\u0442\u044C \u0440\u0430\u043D\u0435\u0435 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u043E\u0432\u0430\u0432\u0448\u0438\u0435 \u0441\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u044F \u0432 \u0432\u0430\u0448\u0435\u043C \u043F\u0440\u043E\u0444\u0438\u043B\u0435",
@@ -90212,6 +90312,7 @@
       de: "Die Person kann weiterhin dein Profil ansehen",
       es: "Todav\xEDa pueden ver tu perfil",
       it: "Possono ancora vedere il tuo profilo",
+      ja: "\u3042\u306A\u305F\u306E\u30D7\u30ED\u30D5\u30A3\u30FC\u30EB\u306F\u5F15\u304D\u7D9A\u304D\u95B2\u89A7\u3067\u304D\u307E\u3059",
       pt: "Eles ainda podem ver seu perfil",
       sv: "Dem kan fortfarande se din profil",
       ru: "\u041E\u043D\u0438 \u043F\u043E-\u043F\u0440\u0435\u0436\u043D\u0435\u043C\u0443 \u043C\u043E\u0433\u0443\u0442 \u043F\u0440\u043E\u0441\u043C\u0430\u0442\u0440\u0438\u0432\u0430\u0442\u044C \u0432\u0430\u0448 \u043F\u0440\u043E\u0444\u0438\u043B\u044C",
@@ -90222,6 +90323,7 @@
       de: "Mit anderen geteilt",
       es: "Compartido con otros",
       it: "Condiviso con altri",
+      ja: "\u4ED6\u306E\u30E6\u30FC\u30B6\u30FC\u3068\u5171\u6709",
       pt: "Compartilhado com outros",
       sv: "Delades med andra",
       ru: "\u041F\u043E\u0434\u0435\u043B\u0438\u043B\u0438\u0441\u044C \u0441 \u0434\u0440\u0443\u0433\u0438\u043C\u0438",
@@ -90232,6 +90334,7 @@
       de: "Mehr von {user}",
       es: "M\xE1s de {user}",
       it: "Altro da {user}",
+      ja: "{user} \u306E\u305D\u306E\u4ED6\u306E\u6295\u7A3F",
       pt: "Mais de {user}",
       sv: "Mer fr\xE5n {user}",
       ru: "\u0411\u043E\u043B\u044C\u0448\u0435 \u043E\u0442 {user}",
@@ -90262,6 +90365,7 @@
       de: "Deine Titel werden gesucht",
       es: "Encontrando tus temas",
       it: "Cercando i tuoi brani",
+      ja: "\u30C8\u30E9\u30C3\u30AF\u3092\u691C\u7D22\u4E2D",
       pt: "Encontrando suas faixas",
       sv: "Hittar p\xE5 dinna l\xE5tar",
       ru: "\u041F\u043E\u0438\u0441\u043A \u0432\u0430\u0448\u0438\u0445 \u0442\u0440\u0435\u043A\u043E\u0432",
@@ -90272,6 +90376,7 @@
       de: "Nach Updates suchen",
       es: "Comprobar si hay actualizaciones",
       it: "Controlla aggiornamenti",
+      ja: "\u30A2\u30C3\u30D7\u30C7\u30FC\u30C8\u3092\u78BA\u8A8D",
       pt: "Procurar atualiza\xE7\xF5es",
       sv: "Kolla efter uppdateringar",
       ru: "\u041F\u0440\u043E\u0432\u0435\u0440\u0438\u0442\u044C \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u044F",
@@ -90283,6 +90388,7 @@
       de: "Weitergeleitet von",
       es: "Redireccionado de",
       it: "Reindirizzato da",
+      ja: "\u30EA\u30C0\u30A4\u30EC\u30AF\u30C8\u5143",
       sv: "Omdirigerades fr\xE5n",
       ru: "\u041F\u0435\u0440\u0435\u043D\u0430\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043E \u0441",
       pt: "Redirecionado de",
@@ -90293,6 +90399,7 @@
       de: "Musik-Korrekturen",
       es: "Correcciones de m\xFAsica",
       it: "Correzioni della musica",
+      ja: "\u97F3\u697D\u60C5\u5831\u306E\u4FEE\u6B63",
       pt: "Corre\xE7\xF5es de m\xFAsica",
       sv: "Musikredigeringar",
       ru: "\u041C\u0443\u0437\u044B\u043A\u0430\u043B\u044C\u043D\u044B\u0435 \u0438\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F",
@@ -90303,6 +90410,7 @@
       de: "Korrekturen wurden geladen",
       es: "Correcciones cargadas",
       it: "Correzioni caricate",
+      ja: "\u4FEE\u6B63\u3092\u8AAD\u307F\u8FBC\u307F\u307E\u3057\u305F",
       sv: "Dina redigeringar har laddat",
       ru: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F \u0437\u0430\u0433\u0440\u0443\u0436\u0435\u043D\u044B",
       pt: "Corre\xE7\xF5es carregadas",
@@ -90313,6 +90421,7 @@
       de: "{c1} K\xFCnstler:innen, {c2} Alben und Titel",
       es: "{c1} artistas, {c2} \xE1lbumes y temas",
       it: "{c1} artisti, {c2} album e brani",
+      ja: "\u30A2\u30FC\u30C6\u30A3\u30B9\u30C8 {c1} \u4EF6\u3001\u30A2\u30EB\u30D0\u30E0\u3001\u30C8\u30E9\u30C3\u30AF {c2} \u4EF6",
       sv: "{c1} artister, {c2} album och l\xE5tar",
       ru: "{c1} \u0438\u0441\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u0435\u0439, {c2} \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432 \u0438 \u0442\u0440\u0435\u043A\u043E\u0432",
       pt: "{c1} artistas, {c2} \xE1lbuns e faixas",
@@ -90326,6 +90435,7 @@
       de: "{brand}-Version",
       es: "{brand} versi\xF3n",
       it: "versione di {brand}",
+      ja: "{brand} \u30D0\u30FC\u30B8\u30E7\u30F3",
       pt: "{brand} vers\xE3o",
       sv: "{brand} version",
       ru: "{brand} \u0432\u0435\u0440\u0441\u0438\u0438",
@@ -90340,6 +90450,7 @@
       de: "{brand}-Version {number}",
       es: "{brand} versi\xF3n {number}",
       it: "{brand} versione {number}",
+      ja: "{brand} \u30D0\u30FC\u30B8\u30E7\u30F3 {number}",
       pt: "{brand} vers\xE3o {number}",
       sv: "{brand} version {number}",
       ru: "{brand} \u0432\u0435\u0440\u0441\u0438\u0438 {number}",
@@ -90351,6 +90462,7 @@
         de: "K\xFCnstler:innen-Korrekturen",
         es: "Correcciones de artista",
         it: "Correzioni degli artisti",
+        ja: "\u30A2\u30FC\u30C6\u30A3\u30B9\u30C8\u306E\u4FEE\u6B63",
         sv: "Artistredigeringar",
         ru: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F \u0430\u0440\u0442\u0438\u0441\u0442\u043E\u0432",
         pt: "Corre\xE7\xF5es de artista",
@@ -90361,6 +90473,7 @@
         de: "Album- und Titel-Korrekturen",
         es: "Correcciones de \xE1lbum y tema",
         it: "Correzioni di album e brani",
+        ja: "\u30A2\u30EB\u30D0\u30E0\u3068\u30C8\u30E9\u30C3\u30AF\u306E\u4FEE\u6B63",
         sv: "Album och sp\xE5rredigeringar",
         ru: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432 \u0438 \u0442\u0440\u0435\u043A\u043E\u0432",
         pt: "Corre\xE7\xF5es de \xE1lbuns e faixas",
@@ -90371,6 +90484,7 @@
         de: "Kombinierte K\xFCnstler:innen-Profile",
         es: "Perfiles de artista combinados",
         it: "Profili combinati degli artisti",
+        ja: "\u7D71\u5408\u3055\u308C\u305F\u30A2\u30FC\u30C6\u30A3\u30B9\u30C8\u30D7\u30ED\u30D5\u30A3\u30FC\u30EB",
         sv: "Kombinerade artistprofiler",
         ru: "\u041E\u0431\u044A\u0435\u0434\u0438\u043D\u0451\u043D\u043D\u044B\u0435 \u043F\u0440\u043E\u0444\u0438\u043B\u0438 \u0430\u0440\u0442\u0438\u0441\u0442\u043E\u0432",
         pt: "Perfis de artista combinados",
@@ -90383,6 +90497,7 @@
         de: "Titel korrigieren mit lotus",
         es: "Corregir t\xEDtulos con lotus",
         it: "Correggi titoli con lotus",
+        ja: "lotus\u3067\u30BF\u30A4\u30C8\u30EB\u3092\u4FEE\u6B63",
         pt: "Corrigir t\xEDtulos com lotus",
         sv: "Redigera titlar med lotus",
         ru: "\u0418\u0441\u043F\u0440\u0430\u0432\u0438\u0442\u044C \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F \u0441 \u043F\u043E\u043C\u043E\u0449\u044C\u044E lotus",
@@ -90391,8 +90506,9 @@
       body: {
         en: "Re-capitalise artists, albums, and tracks based on community contributions",
         de: "Korrigiert die Schreibweise von K\xFCnstler:innen, Alben und Titeln basierend auf Community-Beitr\xE4gen",
-        es: "Recapitaliza artista, \xE1lbumes y temas con base en contribuciones de la comunidad",
+        es: "Corrige may\xFAsculas del artista, \xE1lbumes y temas seg\xFAn contribuciones de la comunidad",
         it: "Corregge l\u2019uso delle maiuscole in artisti, album e brani in base alle contribuzioni della comunit\xE0",
+        ja: "\u30B3\u30DF\u30E5\u30CB\u30C6\u30A3\u306E\u6295\u7A3F\u3092\u3082\u3068\u306B\u3001\u30A2\u30FC\u30C6\u30A3\u30B9\u30C8\u3001\u30A2\u30EB\u30D0\u30E0\u3001\u30C8\u30E9\u30C3\u30AF\u540D\u306E\u5927\u6587\u5B57\u3001\u5C0F\u6587\u5B57\u3092\u4FEE\u6B63\u3057\u307E\u3059",
         pt: "Recapitalize artistas, \xE1lbuns e faixas com base nas contribui\xE7\xF5es da comunidade",
         sv: "\xC4ndra kapitalisering p\xE5 artister, album, och l\xE5tar fr\xE5n gemenskapsbidrag",
         ru: "\u0418\u0437\u043C\u0435\u043D\u0438\u0442\u044C \u043D\u0430\u043F\u0438\u0441\u0430\u043D\u0438\u0435 \u0430\u0440\u0442\u0438\u0441\u0442\u043E\u0432, \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432 \u0438 \u0442\u0440\u0435\u043A\u043E\u0432 \u043D\u0430 \u043E\u0441\u043D\u043E\u0432\u0435 \u0432\u043A\u043B\u0430\u0434\u0430 \u0441\u043E\u043E\u0431\u0449\u0435\u0441\u0442\u0432\u0430",
@@ -90405,6 +90521,7 @@
         de: "Vermeide K\xFCnstler-Weiterleitungen beim Navigieren",
         es: "Evitar redirecciones de artistas al navegar",
         it: "Evita i reindirizzamenti degli artisti durante la navigazione",
+        ja: "\u30A2\u30FC\u30C6\u30A3\u30B9\u30C8\u30DA\u30FC\u30B8\u3078\u306E\u30EA\u30C0\u30A4\u30EC\u30AF\u30C8\u3092\u907F\u3051\u308B",
         pt: "Evitar redirecionamentos de artistas ao navegar",
         sv: "Undvik artistomdirigeringar n\xE4r du surfar",
         ru: "\u0418\u0437\u0431\u0435\u0433\u0430\u0442\u044C \u043F\u0435\u0440\u0435\u043D\u0430\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0439 \u0430\u0440\u0442\u0438\u0441\u0442\u043E\u0432 \u043F\u0440\u0438 \u043D\u0430\u0432\u0438\u0433\u0430\u0446\u0438\u0438",
@@ -90415,6 +90532,7 @@
         de: "F\xFCgt automatisch +noredirect zu K\xFCnstler-Links hinzu, um zu vermeiden, dass du zu Seiten wie \u201ETravi$ Scott\u201C weitergeleitet wirst",
         es: "A\xF1ade autom\xE1ticamente +noredirect a v\xEDnculos de artistas para evitar ser redireccionado a p\xE1ginas como Travi$ Scott",
         it: "Aggiunge automaticamente +noredirect ai link degli artisti per evitare di essere inviato a pagine come Travi$ Scott",
+        ja: "\u30A2\u30FC\u30C6\u30A3\u30B9\u30C8\u30EA\u30F3\u30AF\u306B\u81EA\u52D5\u3067 +noredirect \u3092\u8FFD\u52A0\u3057\u3001Travi$ Scott\u306E\u3088\u3046\u306A\u30DA\u30FC\u30B8\u3078\u306E\u30EA\u30C0\u30A4\u30EC\u30AF\u30C8\u3092\u9632\u304E\u307E\u3059",
         pt: "Adiciona automaticamente +noredirect em links de artistas para evitar ser redirecionado para p\xE1ginas como Travi$ Scott",
         sv: "L\xE4gger automatiskt +noredirect p\xE5 artistl\xE4nkar f\xF6r att undvika att bli skickad till sidor som t.ex. Travi$ Scott",
         ru: "\u0410\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u0435\u0441\u043A\u0438 \u0434\u043E\u0431\u0430\u0432\u043B\u044F\u0435\u0442 +noredirect \u043A \u0441\u0441\u044B\u043B\u043A\u0430\u043C \u0430\u0440\u0442\u0438\u0441\u0442\u043E\u0432, \u0447\u0442\u043E\u0431\u044B \u0438\u0437\u0431\u0435\u0436\u0430\u0442\u044C \u043F\u0435\u0440\u0435\u043D\u0430\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F \u043D\u0430 \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u044B \u0442\u0438\u043F\u0430 Travi$ Scott",
@@ -90426,6 +90544,7 @@
       de: "Alle ansehen",
       es: "Ver todo",
       it: "Visualizza tutto",
+      ja: "\u3059\u3079\u3066\u8868\u793A",
       pt: "Ver tudo",
       sv: "Visa alla",
       ru: "\u041F\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u0432\u0441\u0435",
@@ -90436,6 +90555,7 @@
       de: "Helfe mit",
       es: "Ayuda a contribuir",
       it: "Aiuta a contribuire",
+      ja: "\u8CA2\u732E\u3059\u308B",
       pt: "Ajude a contribuir",
       sv: "Bidra",
       ru: "\u0412\u043D\u0435\u0441\u0442\u0438 \u0432\u043A\u043B\u0430\u0434",
@@ -90446,6 +90566,7 @@
       de: "L\xF6schen",
       es: "Eliminar",
       it: "Elimina",
+      ja: "\u524A\u9664",
       pt: "Deletar",
       sv: "Ta bort",
       ru: "\u0423\u0434\u0430\u043B\u0438\u0442\u044C"
@@ -90456,6 +90577,7 @@
       de: "Gel\xF6scht",
       es: "Eliminado",
       it: "Eliminato",
+      ja: "\u524A\u9664\u6E08\u307F",
       pt: "Deletado",
       sv: "Borttagen",
       ru: "\u0423\u0434\u0430\u043B\u0435\u043D\u043E"
@@ -90465,6 +90587,7 @@
       de: "Suchen",
       es: "Buscar",
       it: "Cerca",
+      ja: "\u691C\u7D22",
       pt: "Pesquisar",
       sv: "S\xF6k",
       ru: "\u041F\u043E\u0438\u0441\u043A"
@@ -90475,13 +90598,15 @@
       de: "Nach irgendetwas suchen",
       ru: "\u041D\u0430\u0439\u0442\u0438 \u0447\u0442\u043E \u0443\u0433\u043E\u0434\u043D\u043E",
       es: "Busca cualquier cosa",
-      it: "Cerca qualsiasi cosa"
+      it: "Cerca qualsiasi cosa",
+      ja: "\u4F55\u3067\u3082\u691C\u7D22"
     },
     search_guest: {
       en: "Search guest appearances",
       de: "Suche nach Features",
       es: "Buscar apariciones especiales",
       it: "Cerca partecipazioni come ospite",
+      ja: "\u30B2\u30B9\u30C8\u53C2\u52A0\u4F5C\u54C1\u3092\u691C\u7D22",
       pt: "Pesquisar participa\xE7\xF5es especiais",
       sv: "S\xF6k g\xE4startister",
       ru: "\u041F\u043E\u0438\u0441\u043A \u0433\u043E\u0441\u0442\u0435\u0432\u044B\u0445 \u0443\u0447\u0430\u0441\u0442\u0438\u0439"
@@ -90851,7 +90976,8 @@
       }
     },
     font_serif: {
-      en: "Use old-fashioned Serif font for some headings"
+      en: "Use old-fashioned Serif font for some headings",
+      es: "Usar fuente Serif cl\xE1sica para algunos encabezados"
     },
     previewing: {
       // used as subtext for previewing a font
@@ -91646,6 +91772,7 @@
       de: "Diese Liste basiert auf deinen eigenen Plays, da keine offizielle Titelliste verf\xFCgbar ist",
       es: "Extra\xEDdo de tus reproducciones personales, debido a que la lista de temas oficial no est\xE1 disponible",
       it: "Estratto dalle tue riproduzioni, dato che non \xE8 disponibile un elenco dei brani ufficiale",
+      ja: "\u516C\u5F0F\u30C8\u30E9\u30C3\u30AF\u30EA\u30B9\u30C8\u304C\u5229\u7528\u3067\u304D\u306A\u3044\u305F\u3081\u3001\u518D\u751F\u5C65\u6B74\u304B\u3089\u53D6\u5F97\u3057\u307E\u3057\u305F",
       pt: "Baseado nas suas pr\xF3prias reprodu\xE7\xF5es, pois a tracklist oficial n\xE3o est\xE1 dispon\xEDvel",
       sv: "H\xE4mtas fr\xE5n dina egna spelningar f\xF6r en officiell spellista finns inte",
       ru: "\u041F\u043E\u043B\u0443\u0447\u0435\u043D\u043E \u0438\u0437 \u0432\u0430\u0448\u0438\u0445 \u0441\u043E\u0431\u0441\u0442\u0432\u0435\u043D\u043D\u044B\u0445 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439, \u0442\u0430\u043A \u043A\u0430\u043A \u043E\u0444\u0438\u0446\u0438\u0430\u043B\u044C\u043D\u044B\u0439 \u0442\u0440\u0435\u043A\u043B\u0438\u0441\u0442 \u043D\u0435\u0434\u043E\u0441\u0442\u0443\u043F\u0435\u043D"
@@ -93381,7 +93508,8 @@
       ru: "\u041F\u0440\u043E\u0432\u0435\u0440\u0435\u043D\u043E \u043D\u0430 \u043D\u0430\u043B\u0438\u0447\u0438\u0435 \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u0439"
     },
     failed_to_check_for_updates: {
-      en: "Checking for updates failed"
+      en: "Checking for updates failed",
+      es: "Error al comprobar actualizaciones"
     },
     select_all: {
       en: "Select all",
@@ -93907,10 +94035,12 @@
     },
     atlas: {
       name: {
-        en: "Atlas"
+        en: "Atlas",
+        es: "Atlas"
       },
       body: {
-        en: "Explore where the artists you love are based in the world"
+        en: "Explore where the artists you love are based in the world",
+        es: "Explora de d\xF3nde en el mundo vienen los artistas que m\xE1s amas"
       }
     },
     receipt: {
@@ -94965,10 +95095,12 @@
     },
     card: {
       name: {
-        en: "Card"
+        en: "Card",
+        es: "Tarjeta"
       },
       body: {
-        en: "Get an overview of your last year, month, or week"
+        en: "Get an overview of your last year, month, or week",
+        es: "Obt\xE9n un resumen de tu \xFAltimo a\xF1o, mes, o semana"
       }
     },
     your_recent_30_days: {
@@ -95877,135 +96009,171 @@
       }
     },
     better_with_friends: {
-      en: "Music is better with friends, {a}add to your close friends list{/a}"
+      en: "Music is better with friends, {a}add to your close friends list{/a}",
+      es: "La m\xFAsica es mejor con amigos, {a}a\xF1ade a tu lista de amigos cercanos{/a}"
     },
     collage_cta: {
       // used to 'advertise' collages
       name: {
-        en: "Create a collage"
+        en: "Create a collage",
+        es: "Crear un collage"
       },
       body: {
-        en: "Featuring your favourite albums in the last month"
+        en: "Featuring your favourite albums in the last month",
+        es: "Con tus \xE1lbumes favoritos en el \xFAltimo mes"
       }
     },
     compare_cta: {
       // used to 'advertise' the comparison mini
       name: {
-        en: "Compare with your friends"
+        en: "Compare with your friends",
+        es: "Comparar con tus amigos"
       },
       body: {
-        en: "Which music do you have in common?"
+        en: "Which music do you have in common?",
+        es: "\xBFQu\xE9 m\xFAsica tienen en com\xFAn?"
       }
     },
     sponsor_cta: {
       // used to 'advertise' sponsoring
       body: {
-        en: "Help out the future of bleh"
+        en: "Help out the future of bleh",
+        es: "Ayuda al futuro de bleh"
       }
     },
     add_new_data_point: {
-      en: "Add new data point"
+      en: "Add new data point",
+      es: "A\xF1adir nuevo dato"
     },
     presets: {
       // used in reference to timeframe presets
-      en: "Presets"
+      en: "Presets",
+      es: "Preajustes"
     },
     existing: {
       // used as a header for existing items
-      en: "Existing"
+      en: "Existing",
+      es: "Actuales"
     },
     history: {
-      en: "History"
+      en: "History",
+      es: "Historial"
     },
     no_data_to_display: {
-      en: "No data to display"
+      en: "No data to display",
+      es: "No hay datos para mostrar"
     },
     add_to_graph: {
-      en: "Add to graph"
+      en: "Add to graph",
+      es: "A\xF1adir al gr\xE1fico"
     },
     graph_options: {
-      en: "Graph options"
+      en: "Graph options",
+      es: "Opciones del gr\xE1fico"
     },
     refresh_plot_notice: {
       // once you edit the graph, it will display this tooltip as a warning
-      en: "This will re-gather all data points"
+      en: "This will re-gather all data points",
+      es: "Esto volver\xE1 a recopilar todos los datos"
     },
     refresh_plot_alert: {
       // this is linked to the above
-      en: "The timeframe you selected does not match the current graph, you can refresh the data to fix this."
+      en: "The timeframe you selected does not match the current graph, you can refresh the data to fix this.",
+      es: "El periodo que seleccionaste no coincide con el gr\xE1fico actual, puedes recargar los datos para solucionarlo"
     },
     under_construction: {
-      en: "This page is under construction, please give feedback and suggestions if you have any!"
+      en: "This page is under construction, please give feedback and suggestions if you have any!",
+      es: "Esta p\xE1gina est\xE1 en construcci\xF3n, \xA1por favor da feedback y sugerencias si tienes alguna!"
     },
     data_source: {
-      en: "Data source"
+      en: "Data source",
+      es: "Fuente de datos"
     },
     data_source_explain: {
       // used in the dialog for adding a data source
-      en: "Here you can add media to your graph, for example an artist or an album/track. Listing an album or track is optional, as you can instead add an entire artist."
+      en: "Here you can add media to your graph, for example an artist or an album/track. Listing an album or track is optional, as you can instead add an entire artist.",
+      es: "Aqu\xED puedes a\xF1adir multimedia a tu gr\xE1fico, por ejemplo un artista o un \xE1lbum/tema. A\xF1adir un \xE1lbum o tema es opcional, ya que puedes a\xF1adir un artista entero."
     },
     artist_required: {
-      en: "Artist name required"
+      en: "Artist name required",
+      es: "Nombre del artista requerido"
     },
     choose_either_an_album_or_track: {
-      en: "Choose either an album or track only"
+      en: "Choose either an album or track only",
+      es: "Elige solo un \xE1lbum o un tema"
     },
     already_exists: {
-      en: "This data source already exists"
+      en: "This data source already exists",
+      es: "Esta fuente de datos ya existe"
     },
     username_required: {
-      en: "Username required"
+      en: "Username required",
+      es: "Nombre de usuario requerido"
     },
     already_a_close_friend: {
       // user is already a friend
-      en: "Already added to close friends"
+      en: "Already added to close friends",
+      es: "Ya est\xE1 en tus amigos cercanos"
     },
     plot_explain: {
       // these are steps in order
       0: {
-        en: "Choose a timeframe for your graph"
+        en: "Choose a timeframe for your graph",
+        es: "Elige un periodo para tu gr\xE1fico"
       },
       1: {
-        en: "Choose a data source (an artist, album, or track)"
+        en: "Choose a data source (an artist, album, or track)",
+        es: "Elige una fuente de datos (un artista, \xE1lbum, o tema)"
       },
       2: {
-        en: "Choose a user to add"
+        en: "Choose a user to add",
+        es: "Elige un usuario a a\xF1adir"
       },
       3: {
-        en: "Add to your graph"
+        en: "Add to your graph",
+        es: "A\xF1ade a tu gr\xE1fico"
       }
     },
     how_to_plot: {
       // used to label the above steps
-      en: "Explaining Plot"
+      en: "Explaining Plot",
+      es: "Explicando Plot"
     },
     plotting_your_data: {
       // loading message
-      en: "Plotting your data"
+      en: "Plotting your data",
+      es: "Graficando tus datos"
     },
     issues_updating: {
       // there are then links after this
-      en: "Having issues updating or need support in general?"
+      en: "Having issues updating or need support in general?",
+      es: "\xBFTienes problemas al actualizar o necesitas soporte en general?"
     },
     hybrid_inbox: {
       name: {
-        en: "Use a hybrid inbox"
+        en: "Use a hybrid inbox",
+        es: "Usar un buz\xF3n h\xEDbrido"
       },
       body: {
-        en: "Group your messages and notifications into a single counter"
+        en: "Group your messages and notifications into a single counter",
+        es: "Agrupa tus mensajes y notificaciones en un solo contador"
       }
     },
     skip_patching_lastfm_settings: {
-      en: "Disable bleh visuals here"
+      en: "Disable bleh visuals here",
+      es: "Desactiva los elementos visuales de bleh aqu\xED"
     },
     you_have_disabled_bleh_visuals_for_settings: {
-      en: "You have disabled bleh visuals for Last.fm settings, don\u2019t expect this to look pretty"
+      en: "You have disabled bleh visuals for Last.fm settings, don\u2019t expect this to look pretty",
+      es: "Has desactivado los elementos visuales de bleh en la configuraci\xF3n de Last.fm, no esperes que se vea bonito"
     },
     hide_unused_settings: {
-      en: "Hide settings that have no effect"
+      en: "Hide settings that have no effect",
+      es: "Ocultar opciones que no tienen efecto"
     },
     edit_links: {
-      en: "Edit links"
+      en: "Edit links",
+      es: "Editar v\xEDnculos"
     },
     daily: {
       en: "Daily"
@@ -97641,7 +97809,7 @@
         date: "2026-07-01"
       }
     },
-    built_on: "2026-07-27T14:55:06.275Z"
+    built_on: "2026-07-27T14:56:50.810Z"
   };
 
   // node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
