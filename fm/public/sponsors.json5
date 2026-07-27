@@ -1,5 +1,5 @@
 {
-    version: "2026.0630",
+    version: "2026.0724",
     related: {
         account_name: "kateshapedbox",
         link: "https://katelyn.moe/sponsor",
@@ -19,7 +19,7 @@
                 },
                 {
                     name: "i bite",
-                    reason: "in service to my darling",
+                    reason: "what if someone sees us!!",
                     icon: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLW1pbmltaXplIj48cGF0aCBzdHJva2U9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNMTUgMTl2LTJhMiAyIDAgMCAxIDIgLTJoMiIgLz48cGF0aCBkPSJNMTUgNXYyYTIgMiAwIDAgMCAyIDJoMiIgLz48cGF0aCBkPSJNNSAxNWgyYTIgMiAwIDAgMSAyIDJ2MiIgLz48cGF0aCBkPSJNNSA5aDJhMiAyIDAgMCAwIDIgLTJ2LTIiIC8+PC9zdmc+",
                     hue: 19,
                     sat: 2.62,
@@ -176,7 +176,7 @@
             sponsor: false,
             contributor: true
         },
-        "sewagebipolar": {
+        "idcrisisangels": {
             badges: [
                 {
                     icon: "data:image/svg+xml;base64,PHN2ZyAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiAgd2lkdGg9IjI0IiAgaGVpZ2h0PSIyNCIgIHZpZXdCb3g9IjAgMCAyNCAyNCIgIGZpbGw9Im5vbmUiICBzdHJva2U9ImN1cnJlbnRDb2xvciIgIHN0cm9rZS13aWR0aD0iMiIgIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgIHN0cm9rZS1saW5lam9pbj0icm91bmQiICBjbGFzcz0iaWNvbiBpY29uLXRhYmxlciBpY29ucy10YWJsZXItb3V0bGluZSBpY29uLXRhYmxlci1zbGljZSI+PHBhdGggc3Ryb2tlPSJub25lIiBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTMgMTlsMTUgLTE1bDMgM2wtNiA2bDIgMmExNCAxNCAwIDAgMSAtMTQgNCIgLz48L3N2Zz4=",
@@ -312,7 +312,17 @@
                 }
             ]
         },
-        "nin0dev": {},
+        "nin0dev": {
+            badges: [
+                {
+                    icon: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWJydXNoLWljb24gbHVjaWRlLWJydXNoIj48cGF0aCBkPSJtMTEgMTAgMyAzIi8+PHBhdGggZD0iTTYuNSAyMUEzLjUgMy41IDAgMSAwIDMgMTcuNWEyLjYyIDIuNjIgMCAwIDEtLjcwOCAxLjc5MkExIDEgMCAwIDAgMyAyMXoiLz48cGF0aCBkPSJNOS45NjkgMTcuMDMxIDIxLjM3OCA1LjYyNGExIDEgMCAwIDAtMy4wMDItMy4wMDJMNi45NjcgMTQuMDMxIi8+PC9zdmc+",
+                    name: "Where’s Katelyn Bleh?",
+                    hue: 86,
+                    sat: 1.41,
+                    lit: 1.02
+                }
+            ]
+        },
         "milkdrinker3000": {},
         "wiichicken": {},
         "rgoracz": {},
@@ -361,7 +371,6 @@
         "cnamav": {},
         "babypoltergiest": {},
         "oursinkingship": {},
-        "voxlimen": {},
         "Divine-Light": {},
         "Sukiye": {},
         "Liam_Winters": {},
@@ -380,6 +389,19 @@
         "parapass": {},
         "mywayout": {},
         "DoodleJumpFan": {},
-        "kohakudoori": {}
+        "kohakudoori": {},
+        "stargloam": {
+            badges: [
+                {
+                    icon: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLXJpcHBsZSI+PHBhdGggc3Ryb2tlPSJub25lIiBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIiAvPjxwYXRoIGQ9Ik0zIDdjMyAtMiA2IC0yIDkgMHM2IDIgOSAwIiAvPjxwYXRoIGQ9Ik0zIDE3YzMgLTIgNiAtMiA5IDBzNiAyIDkgMCIgLz48cGF0aCBkPSJNMyAxMmMzIC0yIDYgLTIgOSAwczYgMiA5IDAiIC8+PC9zdmc+",
+                    name: "Abyssal Resonance",
+                    hue: 266,
+                    sat: 0.47,
+                    lit: 0.33
+                }
+            ]
+        },
+        "last_aezi": {},
+        "qwqkami": {}
     }
 }
