@@ -6039,6 +6039,15 @@ export const trans = {
             pl: 'Dotyczy wszystkich profili, widoczne tylko dla ciebie',
         },
     },
+    circle: {
+        en: 'Circular',
+    },
+    squircle: {
+        en: 'Rounded',
+    },
+    square: {
+        en: 'Square',
+    },
     notes: {
         // profile notes
         en: 'Notes',

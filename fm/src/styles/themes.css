@@ -129,6 +129,15 @@ body {
         --count-bar-left: none;
     }
 
+    --avatar-radius: 50%;
+
+    &[data-bleh--avatar_radius="squircle"] {
+        --avatar-radius: 33%;
+    }
+    &[data-bleh--avatar_radius="square"] {
+        --avatar-radius: 0%;
+    }
+
     --blank: url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7);
 
     &.increase-btn-contrast {

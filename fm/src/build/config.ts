@@ -463,15 +463,22 @@ export let settings_store: Record<string, setting_instance> = {
         bubble: true
     },
     avatar_radius: {
-        default: 50,
-        min: 0,
-        max: 50,
-        step: 25,
-        type: 'range',
-        css: 'avatar-radius',
-        suffix: '%',
+        default: 'circle',
+        type: 'radio',
         title: trans.avatar_radius.name,
-        body: trans.avatar_radius.body
+        body: trans.avatar_radius.body,
+        values: {
+            circle: {
+                name: trans.circle
+            },
+            squircle: {
+                name: trans.squircle
+            },
+            square: {
+                name: trans.square
+            }
+        },
+        bubble: true
     },
     hue_from_album: {
         default: true,
