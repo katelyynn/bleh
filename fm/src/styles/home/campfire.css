@@ -160,6 +160,7 @@
                     background-image: var(--gloss-image) !important;
                     background-size: 100% !important;
                     opacity: var(--gloss);
+                    mix-blend-mode: var(--gloss-mix);
                     pointer-events: none;
                     padding: unset !important;
                     box-shadow: unset !important;
