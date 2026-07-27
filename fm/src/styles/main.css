@@ -12,6 +12,10 @@
     scroll-behavior: smooth;
 }
 
+body {
+    -webkit-text-size-adjust: 100%;
+}
+
 :root {
     scroll-padding-top: calc(52px + 15px);
 }
