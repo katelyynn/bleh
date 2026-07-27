@@ -88162,7 +88162,7 @@
       }
     },
     alert_of_correction: {
-      en: "This title is already being corrected to '{t}', are you sure you want to continue?"
+      en: "This title is already being corrected to \u2019{t}\u2019, are you sure you want to continue?"
     },
     current: {
       en: "Current",
@@ -95997,7 +95997,7 @@
       en: "Disable bleh visuals here"
     },
     you_have_disabled_bleh_visuals_for_settings: {
-      en: "You have disabled bleh visuals for Last.fm settings, don't expect this to look pretty"
+      en: "You have disabled bleh visuals for Last.fm settings, don\u2019t expect this to look pretty"
     },
     hide_unused_settings: {
       en: "Hide settings that have no effect"
