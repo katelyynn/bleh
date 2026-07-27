@@ -21,6 +21,8 @@ export { Chart };
 
 export const fac = new FastAverageColor();
 
+export const symbol = Symbol('generic');
+
 export const version = version2;
 export const theme_version = {
   state: "",

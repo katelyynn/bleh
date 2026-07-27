@@ -15549,8 +15549,8 @@
         subtreeOf(consonant + roma)[""] = yKana + kana;
       });
     });
-    Object.entries(SPECIAL_SYMBOLS$1).forEach(([symbol, jsymbol]) => {
-      subtreeOf(symbol)[""] = jsymbol;
+    Object.entries(SPECIAL_SYMBOLS$1).forEach(([symbol2, jsymbol]) => {
+      subtreeOf(symbol2)[""] = jsymbol;
     });
     Object.entries(AIUEO_CONSTRUCTIONS).forEach(([consonant, aiueoKana]) => {
       Object.entries(SMALL_VOWELS).forEach(([vowel, kana]) => {
@@ -15865,8 +15865,8 @@
     const setTrans = (string, transliteration) => {
       subtreeOf(string)[""] = transliteration;
     };
-    Object.entries(SPECIAL_SYMBOLS).forEach(([jsymbol, symbol]) => {
-      subtreeOf(jsymbol)[""] = symbol;
+    Object.entries(SPECIAL_SYMBOLS).forEach(([jsymbol, symbol2]) => {
+      subtreeOf(jsymbol)[""] = symbol2;
     });
     [...Object.entries(SMALL_Y), ...Object.entries(SMALL_AIUEO)].forEach(([roma, kana]) => {
       setTrans(roma, kana);
@@ -30033,12 +30033,11 @@
         }
         track.style.setProperty("--delay", index2 * 0.04 + "s");
         track.setAttribute("data-album-name-location", album_name_location);
-        track.appendChild(html.node`
-                <div class="kate-placeholder" />
-            `);
-        const elem = track;
-        track = track.cloneNode(true);
-        elem.replaceWith(track);
+        if (track[symbol]) {
+          log("returning as track has patched data", "tracks");
+          return;
+        }
+        track[symbol] = true;
         let track_title = track.querySelector(".chartlist-name a:not(.offset-section-anchor)");
         if (!track_title) return;
         if (track_title.hasAttribute("title")) {
@@ -30293,12 +30292,12 @@
             track_title.setAttribute("data-name", corrected_title);
           }
         }
+        let previous = track.querySelectorAll(":scope > .more-button-wrapper");
+        previous.forEach((elem) => {
+          elem.remove();
+        });
         if (track_legacy_menu) {
           let menu;
-          let previous = track.querySelector(
-            ":scope > .more-button-wrapper"
-          );
-          if (previous) previous.style.display = "none";
           const user = ["user", "overview"].includes(page.type) ? page.name : auth.name;
           const is_own_profile = user == auth.name;
           const can_edit = is_own_profile && !is_active && (!is_album ? !has_bar : true) && auth.pro && ["user", "overview"].includes(page.type);
@@ -30837,11 +30836,11 @@
                 track.style.setProperty("--sat-over", sat);
                 track.style.setProperty("--lit-over", lit);
               } else {
-                to_colour.forEach((elem2) => {
-                  elem2.classList.add("colourful");
-                  elem2.style.setProperty("--hue-over", hue4);
-                  elem2.style.setProperty("--sat-over", sat);
-                  elem2.style.setProperty("--lit-over", lit);
+                to_colour.forEach((elem) => {
+                  elem.classList.add("colourful");
+                  elem.style.setProperty("--hue-over", hue4);
+                  elem.style.setProperty("--sat-over", sat);
+                  elem.style.setProperty("--lit-over", lit);
                 });
               }
             };
@@ -97808,7 +97807,7 @@
         date: "2026-07-01"
       }
     },
-    built_on: "2026-07-27T19:35:16.093Z"
+    built_on: "2026-07-27T22:23:08.026Z"
   };
 
   // node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
@@ -99325,6 +99324,7 @@
   Chart.register(...registerables);
   Chart.register(plugin);
   var fac = new FastAverageColor();
+  var symbol = Symbol("generic");
   var version = build_default;
   var theme_version = {
     state: ""

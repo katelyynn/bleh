@@ -31,6 +31,7 @@ import tippy from 'tippy.js';
 import { hoshino } from '@/components/music/hoshino';
 import { submit_scrobble } from '@/components/music/scrobble';
 import { header_colour } from '../page/colour';
+import { symbol } from '@/main';
 
 export function patch_titles(search = page.structure.main) {
     if (page.subpage == 'tags_overview') return;
@@ -123,14 +124,12 @@ export function patch_titles(search = page.structure.main) {
 
             track.style.setProperty('--delay', index * 0.04 + 's');
             track.setAttribute('data-album-name-location', album_name_location);
-            track.appendChild(html.node`
-                <div class="kate-placeholder" />
-            `);
 
-            const elem = track;
-            track = track.cloneNode(true);
-
-            elem.replaceWith(track);
+            if (track[symbol]) {
+                log('returning as track has patched data', 'tracks');
+                return;
+            }
+            track[symbol] = true;
 
             let track_title = track.querySelector('.chartlist-name a:not(.offset-section-anchor)');
             if (!track_title) return;
@@ -468,15 +467,15 @@ export function patch_titles(search = page.structure.main) {
                 }
             }
 
+            // due to the library refreshing and destroying the html references
+            // we need to remove the previous more button
+            let previous = track.querySelectorAll(':scope > .more-button-wrapper');
+            previous.forEach((elem) => {
+                elem.remove();
+            });
+
             if (track_legacy_menu) {
                 let menu;
-
-                // due to the library refreshing and destroying the html references
-                // we need to remove the previous more button
-                let previous = track.querySelector(
-                    ':scope > .more-button-wrapper'
-                );
-                if (previous) previous.style.display = 'none';
 
                 const user = ['user', 'overview'].includes(page.type) ? page.name : auth.name;
 
