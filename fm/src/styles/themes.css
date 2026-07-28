@@ -800,7 +800,7 @@ u,
     --s3: calc(clamp(min(0.5), var(--lit), max(1.2)) * 0.6) calc(clamp(min(0), var(--sat), max(2)) * 0.55) var(--hue);
     --s4: calc(clamp(min(0.5), var(--lit), max(1.2)) * 0.5) calc(clamp(min(0), var(--sat), max(2)) * 0.55) var(--hue);
 
-    --p3: var(--s3);
+    --p3: var(--s4);
 
     /* l2-c in dark modes, l4-c in light modes */
     --l2-c-theme-switch: var(--l2-c);

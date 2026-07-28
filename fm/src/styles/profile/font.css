@@ -191,7 +191,7 @@
 }
 
 [data-font-style="pop"] {
-    --custom-font-style-shadow: 0 3px 0 oklch(var(--p3));
+    --custom-font-style-shadow: 0 1px 0 oklch(var(--p3)), 0 2px 0 oklch(var(--p3)), 0 3px 0 oklch(var(--p3));
     --custom-font-style-shadow-mini: 0 2px 0 oklch(var(--p3));
 }
 [data-font-style="out"] {
