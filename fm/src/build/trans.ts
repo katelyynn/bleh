@@ -47,8 +47,8 @@ export let lang_info = {
     },
     pt: {
         name: 'português brasileiro',
-        by: ['ArthRMH', 'satisfeita', 'fr0r', 'urwq', 'anjoskron', 'foognocchie'],
-        last_updated: '2026-02-22',
+        by: ['ArthRMH', 'satisfeita', 'fr0r', 'urwq', 'anjoskron', 'foognocchie', 'Suburbanno'],
+        last_updated: '2026-07-27',
     },
     sv: {
         name: get_language_name('sv'),
