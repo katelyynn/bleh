@@ -27329,11 +27329,11 @@
         badge.reason = tl2(trans.requires_higher_bleh_version);
       }
     }
+    if (badge.reason) return badge;
     if (trans.badges[badge.type] && trans.badges[badge.type].reason)
       badge.reason = tl2(trans.badges[badge.type].reason);
     else if (badge.reason && trans.badges[badge.reason] && trans.badges[badge.reason].reason)
       badge.reason = tl2(trans.badges[badge.reason].reason);
-    if (badge.reason) return badge;
     if (badge.type == "sponsor" || badge.type == "contributor")
       badge.reason = badge.type;
     else if (badge.type == "cute" || badge.type == "queen")

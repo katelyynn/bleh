@@ -100,6 +100,9 @@ export function process_badge(badge, user) {
         }
     }
 
+
+    if (badge.reason) return badge;
+
     if (trans.badges[badge.type] && trans.badges[badge.type].reason)
         badge.reason = tl(trans.badges[badge.type].reason);
     else if (
@@ -109,7 +112,6 @@ export function process_badge(badge, user) {
     )
         badge.reason = tl(trans.badges[badge.reason].reason);
 
-    if (badge.reason) return badge;
 
     if (badge.type == 'sponsor' || badge.type == 'contributor')
         badge.reason = badge.type;
