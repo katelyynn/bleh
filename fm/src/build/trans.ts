@@ -388,6 +388,23 @@ export const trans = {
             },
         },
     },
+    badge_types: {
+        reserved: {
+            en: 'This badge is specially reserved for {u}',
+        },
+        cute: {
+            en: 'The creator of bleh',
+        },
+        sponsor: {
+            en: '{u} sponsors the development of bleh',
+        },
+        contributor: {
+            en: '{u} contributed to the development of bleh',
+        },
+        translation: {
+            en: '{u} helped in translating bleh',
+        },
+    },
     requires_higher_bleh_version: {
         en: 'Requires higher bleh version',
         de: 'Erfordert eine neuere bleh-Version',

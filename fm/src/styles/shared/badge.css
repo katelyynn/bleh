@@ -82,12 +82,16 @@
             content: '';
             position: absolute;
             background: var(--flag);
+            aspect-ratio: 3 / 2;
 
-            --flag-size: 8px;
-            width: var(--flag-size);
+            --flag-size: 7px;
+            --flag-width: calc(var(--flag-size) * 1.5);
+            width: var(--flag-width);
             height: var(--flag-size);
+            border-radius: 2px;
+            outline: 1px solid oklch(var(--b5) / 50%);
 
-            left: calc(var(--sides) + var(--icon-size) - var(--flag-size));
+            left: calc(var(--sides) + var(--icon-size) - var(--flag-width));
             top: calc(50% + var(--icon-size) / 2 - var(--flag-size));
         }
     }
@@ -225,6 +229,11 @@
 .user-status--bleh-translation {
     --mask: var(--icon-translation);
 
+    --hue-over: 124;
+    --sat-over: 1.34;
+    --lit-over: 0.94;
+}
+.translate.colourful {
     --hue-over: 124;
     --sat-over: 1.34;
     --lit-over: 0.94;

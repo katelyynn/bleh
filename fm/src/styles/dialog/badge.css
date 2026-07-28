@@ -1,0 +1,75 @@
+.present-badge-window {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    cursor: default;
+
+    min-width: 320px;
+    padding: calc(40px + var(--card-padding)) var(--card-padding);
+    margin: calc(-1 * var(--card-padding)) !important;
+    overflow: hidden;
+}
+
+.present-badge-top {
+    margin-bottom: 40px;
+}
+
+.present-badge {
+    --icon-size: 64px;
+    filter: drop-shadow(0 6px 4px oklch(var(--f4) / 60%));
+    padding: 140px;
+    margin: -140px;
+    pointer-events: none;
+    position: relative;
+
+    &:before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background: radial-gradient(at center 40%, oklch(var(--f4) / 40%), transparent 80%);
+        animation: chart_bg 8s var(--trans-function-ani) infinite;
+    }
+}
+
+.present-badge-icon {
+    --icon: var(--mask);
+    background: linear-gradient(180deg, oklch(var(--l3-c)), oklch(var(--l4-c)));
+}
+
+.present-badge-name {
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: var(--font-weight-medium);
+    color: oklch(var(--l3-c));
+}
+.present-badge-reason {
+    margin-top: 4px;
+    color: oklch(var(--c3));
+}
+
+.present-badge-bottom {
+    margin-top: 30px;
+    border-top: 1px solid var(--separator-base);
+    padding-top: 10px;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+}
+.present-badge-type {
+    font-size: 13px;
+    color: oklch(var(--c3));
+    max-width: 250px;
+}
+
+.bleh-modal[data-modal-type="badge"] {
+    & > .bleh-modal-title {
+        display: none;
+    }
+}
+
+.present-badge-actions {
+    margin-top: 30px;
+}

@@ -225,7 +225,7 @@ export function general() {
                         <p>${tl(trans.submit_language.body)}</p>
                     </div>
                     <div class="toggle-wrap">
-                        <a class="see-more" href="https://github.com/katelyynn/bleh/wiki" target="_blank">
+                        <a class="see-more" href="https://github.com/katelyynn/bleh/wiki/Translations" target="_blank">
                             ${tl(trans.help_contribute)}
                         </a>
                     </div>

@@ -26,6 +26,12 @@ export const convert_lang_to_country = {
     pt: 'br'
 }
 
+export function flag_url(code: string) {
+    if (convert_lang_to_country[code]) code = convert_lang_to_country[code];
+
+    return `https://purecatamphetamine.github.io/country-flag-icons/3x2/${code.toUpperCase()}.svg`;
+}
+
 interface flag_candidate_data {
     'iso-3166-1-codes'?: string[],
     'iso-3166-2-codes'?: string[],

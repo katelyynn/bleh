@@ -12,6 +12,8 @@ import { sponsor } from '@/components/sponsor';
 import tippy from 'tippy.js';
 import { page } from '@/build/page';
 import { style_name_from_badge } from './avatar';
+import { flag_url } from './flag';
+import { present_badge } from '../dialog/badge';
 
 export function load_badges(user, solo = false) {
     if (!sponsor_list.version) return;
@@ -140,7 +142,11 @@ export function create_badge(
     const classlist = on_avatar ? 'avatar-status-dot' : 'label no-hover';
 
     let elem = html.node`
-        <span class=${classlist}>
+        <span class=${classlist} onclick=${() => {
+            if (!small && !on_avatar) {
+                present_badge(badge);
+            }
+        }}>
             ${badge.name}
         </span>
     `;
@@ -153,7 +159,7 @@ export function create_badge(
 
     if (badge.translation_code) {
         elem.classList.add('translation-lang');
-        elem.style.setProperty('--flag', `url(https://katelyynn.github.io/bleh/fm/flags/${badge.translation_code}.svg)`);
+        elem.style.setProperty('--flag', `url(${flag_url(badge.translation_code)})`);
     }
 
     if (long) elem.classList.add('expand');
@@ -192,8 +198,6 @@ export function create_badge(
     });
 
     style_name_from_badge(badge_name, badge);
-
-    if (badge.type == 'sponsor') elem.onclick = sponsor;
 
     return elem;
 }
