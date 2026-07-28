@@ -32,21 +32,21 @@
             contributor: true,
             badges: [
                 {
-                    name: "zombie girl :3",
-                    reason: "cute dead girl",
-                    icon: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLWdyYXZlLTIiPjxwYXRoIHN0cm9rZT0ibm9uZSIgZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPjxwYXRoIGQ9Ik03IDE2LjE3di05LjE3YTMgMyAwIDAgMSAzIC0zaDRhMyAzIDAgMCAxIDMgM3Y5LjE3MSIgLz48cGF0aCBkPSJNMTIgN3Y1IiAvPjxwYXRoIGQ9Ik0xMCA5aDQiIC8+PHBhdGggZD0iTTUgMjF2LTJhMyAzIDAgMCAxIDMgLTNoOGEzIDMgMCAwIDEgMyAzdjJoLTE0eiIgLz48L3N2Zz4=",
-                    hue: 2,
-                    sat: 1.5,
-                    lit: 1.18,
-                    type: "reserved"
-                },
-                {
                     name: "sisters",
                     reason: "the comet of love",
                     icon: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLWNvbWV0Ij48cGF0aCBzdHJva2U9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiIC8+PHBhdGggZD0iTTE1LjUgMTguNWwtMyAxLjVsLjUgLTMuNWwtMiAtMmwzIC0uNWwxLjUgLTNsMS41IDNsMyAuNWwtMiAybC41IDMuNWwtMyAtMS41IiAvPjxwYXRoIGQ9Ik00IDRsNyA3IiAvPjxwYXRoIGQ9Ik05IDRsMy41IDMuNSIgLz48cGF0aCBkPSJNNCA5bDMuNSAzLjUiIC8+PC9zdmc+",
                     hue: 262,
                     sat: 2.91,
                     lit: 1,
+                    type: "reserved"
+                },
+                {
+                    name: "zombie girl :3",
+                    reason: "cute dead girl",
+                    icon: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLWdyYXZlLTIiPjxwYXRoIHN0cm9rZT0ibm9uZSIgZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPjxwYXRoIGQ9Ik03IDE2LjE3di05LjE3YTMgMyAwIDAgMSAzIC0zaDRhMyAzIDAgMCAxIDMgM3Y5LjE3MSIgLz48cGF0aCBkPSJNMTIgN3Y1IiAvPjxwYXRoIGQ9Ik0xMCA5aDQiIC8+PHBhdGggZD0iTTUgMjF2LTJhMyAzIDAgMCAxIDMgLTNoOGEzIDMgMCAwIDEgMyAzdjJoLTE0eiIgLz48L3N2Zz4=",
+                    hue: 2,
+                    sat: 1.5,
+                    lit: 1.18,
                     type: "reserved"
                 }
             ]
