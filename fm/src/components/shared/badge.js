@@ -89,11 +89,13 @@ function get_trans_contributions(user) {
 }
 
 export function process_badge(badge, user) {
+    const translation = trans.badges[badge.type];
+
     badge.user = user;
 
     if (!badge.name) {
-        if (trans.badges[badge.type]) {
-            badge.name = tl(trans.badges[badge.type].name);
+        if (translation?.name) {
+            badge.name = tl(translation.name);
         } else {
             badge.name = tl(trans.unavailable);
             badge.reason = tl(trans.requires_higher_bleh_version);
@@ -103,19 +105,13 @@ export function process_badge(badge, user) {
 
     if (badge.reason) return badge;
 
-    if (trans.badges[badge.type] && trans.badges[badge.type].reason)
-        badge.reason = tl(trans.badges[badge.type].reason);
-    else if (
-        badge.reason &&
-        trans.badges[badge.reason] &&
-        trans.badges[badge.reason].reason
-    )
-        badge.reason = tl(trans.badges[badge.reason].reason);
+    if (translation?.reason) {
+        badge.reason = tl(translation.reason);
+        return badge;
+    }
 
 
-    if (badge.type == 'sponsor' || badge.type == 'contributor')
-        badge.reason = badge.type;
-    else if (badge.type == 'cute' || badge.type == 'queen')
+    if (badge.type == 'cute' || badge.type == 'queen')
         badge.reason = tl(trans.badges.cute.reason);
     else badge.reason = tl(trans.badges.reserved.reason);
 

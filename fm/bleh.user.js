@@ -27320,23 +27320,22 @@
     }));
   }
   function process_badge(badge, user) {
+    const translation2 = trans.badges[badge.type];
     badge.user = user;
     if (!badge.name) {
-      if (trans.badges[badge.type]) {
-        badge.name = tl2(trans.badges[badge.type].name);
+      if (translation2?.name) {
+        badge.name = tl2(translation2.name);
       } else {
         badge.name = tl2(trans.unavailable);
         badge.reason = tl2(trans.requires_higher_bleh_version);
       }
     }
     if (badge.reason) return badge;
-    if (trans.badges[badge.type] && trans.badges[badge.type].reason)
-      badge.reason = tl2(trans.badges[badge.type].reason);
-    else if (badge.reason && trans.badges[badge.reason] && trans.badges[badge.reason].reason)
-      badge.reason = tl2(trans.badges[badge.reason].reason);
-    if (badge.type == "sponsor" || badge.type == "contributor")
-      badge.reason = badge.type;
-    else if (badge.type == "cute" || badge.type == "queen")
+    if (translation2?.reason) {
+      badge.reason = tl2(translation2.reason);
+      return badge;
+    }
+    if (badge.type == "cute" || badge.type == "queen")
       badge.reason = tl2(trans.badges.cute.reason);
     else badge.reason = tl2(trans.badges.reserved.reason);
     return badge;
@@ -97878,7 +97877,7 @@
         date: "2026-07-01"
       }
     },
-    built_on: "2026-07-28T01:35:06.406Z"
+    built_on: "2026-07-28T03:09:45.728Z"
   };
 
   // node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
