@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         bleh
 // @namespace    https://last.fm/
-// @version      2026.0727.2
+// @version      2026.0729
 // @description  bleh!!! ^-^
 // @author       katelyn
 // @match        https://www.last.fm/*
@@ -84902,8 +84902,8 @@
     },
     pt: {
       name: "portugu\xEAs brasileiro",
-      by: ["ArthRMH", "satisfeita", "fr0r", "urwq", "anjoskron", "foognocchie"],
-      last_updated: "2026-02-22"
+      by: ["ArthRMH", "satisfeita", "fr0r", "urwq", "anjoskron", "foognocchie", "Suburbanno"],
+      last_updated: "2026-07-27"
     },
     sv: {
       name: get_language_name("sv"),
@@ -85469,6 +85469,7 @@
       // if pressing read more extended content
       // this will do the opposite
       en: "Read less",
+      pt: "Ler menos",
       es: "Leer menos",
       it: "Leggi meno"
     },
@@ -85771,6 +85772,7 @@
     },
     close_friends: {
       en: "Close friends",
+      pt: "Amigos pr\xF3ximos",
       de: "Engen Freunde",
       ru: "\u0411\u043B\u0438\u0437\u043A\u0438\u0435 \u0434\u0440\u0443\u0437\u044C\u044F",
       es: "Amigos cercanos",
@@ -85804,6 +85806,7 @@
     },
     add_friends: {
       en: "Add close friends",
+      pt: "Adicionar amigos pr\xF3ximos",
       de: "Enge Freunde hinzuf\xFCgen",
       ru: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0431\u043B\u0438\u0437\u043A\u0438\u0445 \u0434\u0440\u0443\u0437\u0435\u0439",
       es: "A\xF1adir amigos cercanos",
@@ -85812,6 +85815,7 @@
     },
     edit_close_friends: {
       en: "Edit close friends",
+      pt: "Editar amigos pr\xF3ximos",
       de: "Enge Freunde bearbeiten",
       ru: "\u0420\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0431\u043B\u0438\u0437\u043A\u0438\u0445 \u0434\u0440\u0443\u0437\u0435\u0439",
       es: "Editar amigos cercanos",
@@ -85859,6 +85863,7 @@
     },
     friend_difference: {
       en: "Close friends is a bleh system that allows you to keep up to date on your friend\u2019s listening history, it does not influence your following list.",
+      pt: "Amigos pr\xF3ximos \xE9 um sistema do bleh que permite acompanhar o hist\xF3rico de reprodu\xE7\xE3o dos seus amigos; ele n\xE3o influencia sua lista de pessoas seguidas.",
       de: "Enge Freunde ist ein bleh-Feature, dass es erm\xF6glicht, mit dem H\xF6rverlauf deiner Freunde auf dem Laufenden zu bleiben. Es hat keine Auswirkungen auf deine gefolgten Benutzer.",
       ru: "\u0411\u043B\u0438\u0437\u043A\u0438\u0435 \u0434\u0440\u0443\u0437\u044C\u044F - \u044D\u0442\u043E \u0444\u0443\u043D\u043A\u0446\u0438\u044F bleh, \u043A\u043E\u0442\u043E\u0440\u0430\u044F \u043F\u043E\u0437\u0432\u043E\u043B\u044F\u0435\u0442 \u0441\u043B\u0435\u0434\u0438\u0442\u044C \u0437\u0430 \u0438\u0441\u0442\u043E\u0440\u0438\u0435\u0439 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439 \u0432\u0430\u0448\u0438\u0445 \u0434\u0440\u0443\u0437\u0435\u0439 \u0438 \u043D\u0435 \u0432\u043B\u0438\u044F\u0435\u0442 \u043D\u0430 \u0441\u043F\u0438\u0441\u043E\u043A \u0432\u0430\u0448\u0438\u0445 \u043F\u043E\u0434\u043F\u0438\u0441\u043E\u043A.",
       es: "Amigos cercanos es un sistema de bleh que te permite estar al d\xEDa con el historial de escucha de tus amigos, no afecta tu lista de seguidos.",
@@ -85867,6 +85872,7 @@
     },
     friend_difference_min: {
       en: "bleh-only",
+      pt: "exclusivo do bleh",
       de: "bleh-spezifisch",
       ru: "\u0442\u043E\u043B\u044C\u043A\u043E \u0432 bleh",
       es: "Solo en bleh",
@@ -85875,6 +85881,7 @@
     },
     add_as_friend: {
       en: "Add as close friend",
+      pt: "Adicionar como amigo pr\xF3ximo",
       de: "Als engen Freund hinzuf\xFCgen",
       ru: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0432 \u0441\u043F\u0438\u0441\u043E\u043A \u0431\u043B\u0438\u0437\u043A\u0438\u0445 \u0434\u0440\u0443\u0437\u0435\u0439",
       es: "A\xF1adir como amigo cercano",
@@ -85884,6 +85891,7 @@
     remove_friend: {
       name: {
         en: "Remove close friend",
+        pt: "Remover amigo pr\xF3ximo",
         de: "Engen Freund entfernen",
         ru: "\u0423\u0434\u0430\u043B\u0438\u0442\u044C \u0438\u0437 \u0441\u043F\u0438\u0441\u043A\u0430 \u0431\u043B\u0438\u0437\u043A\u0438\u0445 \u0434\u0440\u0443\u0437\u0435\u0439",
         es: "Remover amigo cercano",
@@ -85892,6 +85900,7 @@
       },
       body: {
         en: "Continue removing {u} as a close friend? (bleh-only)",
+        pt: "Continuar removendo {u} dos amigos pr\xF3ximos? (exclusivo do bleh)",
         de: "M\xF6chtest du {u} weiterhin als engen Freund entfernen? (bleh-spezifisch)",
         ru: "\u041F\u0440\u043E\u0434\u043E\u043B\u0436\u0438\u0442\u044C \u0443\u0434\u0430\u043B\u0435\u043D\u0438\u0435 {u} \u0438\u0437 \u0441\u043F\u0438\u0441\u043A\u0430 \u0431\u043B\u0438\u0437\u043A\u0438\u0445 \u0434\u0440\u0443\u0437\u0435\u0439? (\u0442\u043E\u043B\u044C\u043A\u043E \u0432 bleh)",
         es: "\xBFContinuar y remover a {u} como amigo cercano? (Solo en bleh)",
@@ -85900,6 +85909,7 @@
     },
     added_as_friend: {
       en: "Added close friend",
+      pt: "Amigo pr\xF3ximo adicionado",
       de: "Engen Freund hinzugef\xFCgt",
       ru: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u044B \u0432 \u0441\u043F\u0438\u0441\u043E\u043A \u0431\u043B\u0438\u0437\u043A\u0438\u0445 \u0434\u0440\u0443\u0437\u0435\u0439",
       es: "Amigo cercano a\xF1adido",
@@ -85908,6 +85918,7 @@
     },
     removed_friend: {
       en: "Removed close friend",
+      pt: "Amigo pr\xF3ximo removido",
       de: "Engen Freund entfernt",
       ru: "\u0423\u0434\u0430\u043B\u0435\u043D\u044B \u0438\u0437 \u0441\u043F\u0438\u0441\u043A\u0430 \u0431\u043B\u0438\u0437\u043A\u0438\u0445 \u0434\u0440\u0443\u0437\u0435\u0439",
       es: "Amigo cercano removido",
@@ -85984,6 +85995,7 @@
     account_creation: {
       // dont translate to 'scrobbling since'
       en: "Account creation date",
+      pt: "Data de cria\xE7\xE3o da conta",
       de: "Datum der Kontoerstellung",
       ru: "\u0414\u0430\u0442\u0430 \u0441\u043E\u0437\u0434\u0430\u043D\u0438\u044F \u0430\u043A\u043A\u0430\u0443\u043D\u0442\u0430",
       es: "Fecha de creaci\xF3n de cuenta",
@@ -86092,6 +86104,7 @@
     count_tracks: {
       // tracks on an album
       en: "{c} tracks",
+      pt: "{c} faixas",
       de: "{c} Titel",
       ru: "{c} \u0442\u0440\u0435\u043A\u043E\u0432",
       es: "{c} temas",
@@ -86553,6 +86566,7 @@
         // this is followed by options which describe contexts the user
         // may want their colour to be changed
         en: "Change my accent colour for",
+        pt: "Alterar minha cor de destaque ao",
         de: "\xC4ndere meine Akzentfarbe f\xFCr",
         es: "Cambiar mi color de acento al",
         ru: "\u0418\u0437\u043C\u0435\u043D\u044F\u0442\u044C \u0430\u043A\u0446\u0435\u043D\u0442\u043D\u044B\u0439 \u0446\u0432\u0435\u0442 \u0434\u043B\u044F",
@@ -86560,6 +86574,7 @@
       },
       body: {
         en: "Temporarily override your selected accent to match artwork",
+        pt: "Substituir temporariamente a cor de destaque selecionada para combinar com a arte de capa",
         de: "\xDCberschreibe vor\xFCbergehend deine ausgew\xE4hlte Akzentfarbe, um mit dem Cover \xFCbereinzustimmen",
         es: "Reemplaza temporalmente tu color de acento seleccionado para coincidir con la portada",
         ru: "\u0412\u0440\u0435\u043C\u0435\u043D\u043D\u043E \u0437\u0430\u043C\u0435\u043D\u044F\u0442\u044C \u0432\u044B\u0431\u0440\u0430\u043D\u043D\u044B\u0439 \u0430\u043A\u0446\u0435\u043D\u0442\u043D\u044B\u0439 \u0446\u0432\u0435\u0442 \u043D\u0430 \u0446\u0432\u0435\u0442 \u043E\u0431\u043B\u043E\u0436\u043A\u0438",
@@ -86569,6 +86584,7 @@
     viewing_albums: {
       // a sub-option for change_my_colour_when
       en: "Viewing albums",
+      pt: "Visualizar \xE1lbuns",
       de: "Albumansicht",
       es: "Ver \xE1lbumes",
       ru: "\u041F\u0440\u043E\u0441\u043C\u043E\u0442\u0440 \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432",
@@ -86577,6 +86593,7 @@
     viewing_tracks: {
       // a sub-option for change_my_colour_when
       en: "Viewing artists",
+      pt: "Visualizar artistas",
       de: "K\xFCnstleransicht",
       es: "Ver artistas",
       ru: "\u041F\u0440\u043E\u0441\u043C\u043E\u0442\u0440 \u0430\u0440\u0442\u0438\u0441\u0442\u043E\u0432",
@@ -86585,6 +86602,7 @@
     viewing_artists: {
       // a sub-option for change_my_colour_when
       en: "Viewing tracks",
+      pt: "Visualizar faixas",
       de: "Titelansicht",
       es: "Ver temas",
       ru: "\u041F\u0440\u043E\u0441\u043C\u043E\u0442\u0440 \u0442\u0440\u0435\u043A\u043E\u0432",
@@ -86593,6 +86611,7 @@
     colourful_active: {
       // a sub-option for change_my_colour_when
       en: "Scrobbling a track",
+      pt: "Fazer scrobble de uma faixa",
       de: "Scrobbeln eines Titels",
       es: "Hacer scrobbling a un tema",
       ru: "\u0421\u043A\u0440\u043E\u0431\u0431\u043B\u0438\u043D\u0433 \u0442\u0440\u0435\u043A\u0430",
@@ -86601,6 +86620,7 @@
     colourful_all: {
       // a sub-option for change_my_colour_when
       en: "All tracklists",
+      pt: "Todas as listas de faixas",
       de: "Alle Titellisten",
       es: "Ver listas de temas",
       ru: "\u0412\u0441\u0435 \u0441\u043F\u0438\u0441\u043A\u0438 \u0442\u0440\u0435\u043A\u043E\u0432",
@@ -86839,6 +86859,7 @@
         },
         summer: {
           en: "Summer",
+          pt: "Ver\xE3o",
           es: "Verano"
         },
         halloween: {
@@ -87154,6 +87175,7 @@
     },
     link: {
       en: "Link",
+      pt: "Link",
       de: "Link",
       ru: "\u0421\u0441\u044B\u043B\u043A\u0430",
       es: "V\xEDnculo",
@@ -87161,6 +87183,7 @@
     },
     create_link: {
       en: "Create link",
+      pt: "Criar link",
       de: "Link erstellen",
       es: "Crear v\xEDnculo",
       it: "Crea link",
@@ -87272,6 +87295,7 @@
     bookmark_item: {
       // bookmark track/artist/album
       en: "Bookmark {v}",
+      pt: "Adicionar {v} aos marcadores",
       ru: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C {v} \u0432 \u0437\u0430\u043A\u043B\u0430\u0434\u043A\u0438",
       es: "Marcar {v}",
       it: "Segnalibro {v}"
@@ -87290,11 +87314,13 @@
     charts_for: {
       // date will be directly below this text
       en: "Charts for",
+      pt: "Paradas de",
       es: "Listas del"
     },
     weekly_charts: {
       // dates will be directly below this text
       en: "Weekly charts",
+      pt: "Paradas semanais",
       es: "Listas semanales"
     },
     view_the_charts: {
@@ -87395,10 +87421,12 @@
     welcome: {
       // user = username
       en: "Hello {u}!",
+      pt: "Ol\xE1 {u}!",
       es: "\xA1Hola {u}!"
     },
     bleh_setup_guide: {
       en: "It\u2019s nice to see you here",
+      pt: "\xC9 bom ver voc\xEA por aqui",
       es: "Es bueno verte aqu\xED"
     },
     import: {
@@ -87622,6 +87650,7 @@
     avatar_desc: {
       // shown as a description when setting your avatar
       en: "Present yourself site-wide in your own style",
+      pt: "Apresente-se em todo o site com seu pr\xF3prio estilo",
       de: "Zeige dich in deinem eigenen Stil auf der Webseite",
       ru: "\u041F\u043E\u043A\u0430\u0436\u0438\u0442\u0435 \u0441\u0432\u043E\u0439 \u0441\u0442\u0438\u043B\u044C \u0432\u0441\u0435\u043C\u0443 \u0441\u0430\u0439\u0442\u0443",
       //just so it doesn't sound that crude but gets the point across. now it's more like 'show your style to the whole site' -- wun4
@@ -87716,6 +87745,7 @@
       // global accent: the one set in bleh settings
       // profile accent: the sponsor-exclusive colour in account settings
       en: "Use profile accent globally",
+      pt: "Usar a cor de destaque do perfil globalmente",
       de: "Profil-Akzent global verwenden",
       ru: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C \u0446\u0432\u0435\u0442 \u043F\u0440\u043E\u0444\u0438\u043B\u044F \u0433\u043B\u043E\u0431\u0430\u043B\u044C\u043D\u043E",
       es: "Usar acento de perfil globalmente",
@@ -87725,6 +87755,7 @@
       // global accent: the one set in bleh settings
       // profile accent: the sponsor-exclusive colour in account settings
       en: "Copy current accent to profile",
+      pt: "Copiar a cor de destaque atual para o perfil",
       de: "Aktuellen Akzent zum Profil kopieren",
       ru: "\u0421\u043A\u043E\u043F\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0442\u0435\u043A\u0443\u0449\u0438\u0439 \u0430\u043A\u0446\u0435\u043D\u0442 \u0432 \u043F\u0440\u043E\u0444\u0438\u043B\u044C",
       es: "Copiar acento actual al perfil",
@@ -87734,6 +87765,7 @@
       // global accent: the one set in bleh settings
       // profile accent: the sponsor-exclusive colour in account settings
       en: "This will replace your global accent (the one in use right now)",
+      pt: "Isso substituir\xE1 sua cor de destaque global (a que est\xE1 em uso agora)",
       de: "Dein globaler Akzent (der derzeit verwendete) wird hiermit ersetzt",
       ru: "\u042D\u0442\u043E \u0437\u0430\u043C\u0435\u043D\u0438\u0442 \u0432\u0430\u0448 \u0433\u043B\u043E\u0431\u0430\u043B\u044C\u043D\u044B\u0439 \u0430\u043A\u0446\u0435\u043D\u0442 (\u0442\u043E\u0442, \u043A\u043E\u0442\u043E\u0440\u044B\u0439 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0435\u0442\u0441\u044F \u0441\u0435\u0439\u0447\u0430\u0441)",
       es: "Esto reemplazar\xE1 tu acento global (el que est\xE1s usando ahora mismo)",
@@ -88134,6 +88166,7 @@
     },
     follows_you: {
       en: "Follows you!",
+      pt: "Segue voc\xEA!",
       de: "Folgt dir!",
       es: "\xA1Te sigue!",
       it: "Ti segue!",
@@ -88141,6 +88174,7 @@
     },
     user_follows_you: {
       en: "{u} follows you!",
+      pt: "{u} segue voc\xEA!",
       de: "{u} folgt dir!",
       es: "\xA1{u} te sigue!",
       it: "{u} ti segue!",
@@ -88239,6 +88273,7 @@
       // more artists like kitagawa
       // more albums like etc.
       en: "More like {n}",
+      pt: "Mais como {n}",
       de: "\xC4hnliches wie {n}",
       ru: "\u041F\u043E\u0445\u043E\u0436\u0438\u0435 \u043D\u0430 {n}",
       es: "M\xE1s como {n}",
@@ -88377,15 +88412,18 @@
       // titles that are capitalised wrongly eg. 'eSpReSsO' -> 'Espresso'
       true: {
         en: "Actively correcting this title",
+        pt: "Corrigindo este t\xEDtulo ativamente",
         es: "Corrigiendo este t\xEDtulo"
       },
       false: {
         en: "Is this capitalised correctly?",
+        pt: "A capitaliza\xE7\xE3o est\xE1 correta?",
         es: "\xBFSon estas may\xFAsculas correctas?"
       }
     },
     alert_of_correction: {
       en: "This title is already being corrected to \u2019{t}\u2019, are you sure you want to continue?",
+      pt: "Este t\xEDtulo j\xE1 est\xE1 sendo corrigido para \u2019{t}\u2019, tem certeza de que deseja continuar?",
       es: "Este t\xEDtulo ya est\xE1 siendo corregido a '{t}', \xBFseguro que quieres continuar?"
     },
     current: {
@@ -88486,6 +88524,7 @@
     },
     recents: {
       en: "Recents",
+      pt: "Recentes",
       es: "Recientes",
       it: "Recenti",
       ja: "\u6700\u8FD1"
@@ -88584,6 +88623,7 @@
       // u: username
       // v: Super / Low / Very Low etc.
       en: "You and {u} are a {v} match",
+      pt: "Voc\xEA e {u} t\xEAm uma compatibilidade {v}",
       de: "Du und {u} sind {v} kompatibel",
       ru: "\u0412\u044B \u0438 {u} - \u0443 \u0432\u0430\u0441 {v} \u0441\u043E\u0432\u043F\u0430\u0434\u0435\u043D\u0438\u0435",
       es: "T\xFA y {u} tienen una compatiblidad {v}",
@@ -88603,6 +88643,7 @@
       // based on the default message last.fm shows
       // \n is a new line
       en: "Your compatibility with {u} is {r}.\nYou both listen to {a}.",
+      pt: "Sua compatibilidade com {u} \xE9 {r}.\nVoc\xEAs dois ouvem {a}.",
       de: "Deine Kompatibilit\xE4t mit {u} ist {r}.\nIhr h\xF6rt beide {a}.",
       ru: "\u0412\u0430\u0448\u0430 \u0441\u043E\u0432\u043C\u0435\u0441\u0442\u0438\u043C\u043E\u0441\u0442\u044C \u0441 {u} \u0441\u043E\u0441\u0442\u0430\u0432\u043B\u044F\u0435\u0442 {r}.\n\u0412\u044B \u043E\u0431\u0430 \u0441\u043B\u0443\u0448\u0430\u0435\u0442\u0435 {a}.",
       es: "Tu compatibilidad con {u} es {r}. \nAmbos escuchan a {a}.",
@@ -88611,6 +88652,7 @@
     subject: {
       // as in an email/message subject
       en: "Subject",
+      pt: "Assunto",
       de: "Betreff",
       ru: "\u0422\u0435\u043C\u0430",
       es: "Asunto",
@@ -88630,6 +88672,7 @@
     },
     send_message: {
       en: "Send message",
+      pt: "Enviar mensagem",
       ja: "\u30E1\u30C3\u30BB\u30FC\u30B8\u3092\u9001\u4FE1",
       ru: "\u041E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C \u0441\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u0435",
       es: "Enviar mensaje",
@@ -88648,6 +88691,7 @@
     },
     follow_user: {
       en: "Follow {u}",
+      pt: "Seguir {u}",
       es: "Seguir a {u}"
     },
     sponsor_details: {
@@ -88802,6 +88846,7 @@
     },
     updating_to_version: {
       en: "Updating to version",
+      pt: "Atualizando para a vers\xE3o",
       de: "Aktualisierung auf Version",
       ja: "\u30D0\u30FC\u30B8\u30E7\u30F3\u3092\u66F4\u65B0\u4E2D",
       ru: "\u041E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u0435 \u0434\u043E \u0432\u0435\u0440\u0441\u0438\u0438",
@@ -89074,6 +89119,7 @@
     },
     share_via_device: {
       en: "Share via device",
+      pt: "Compartilhar pelo dispositivo",
       es: "Compartir mediante dispositivo",
       it: "Condividi tramite dispositivo"
     },
@@ -89144,6 +89190,7 @@
     },
     cut: {
       en: "Cut",
+      pt: "Recortar",
       de: "Ausschneiden",
       ru: "\u0412\u044B\u0440\u0435\u0437\u0430\u0442\u044C",
       es: "Cortar",
@@ -89537,6 +89584,7 @@
     cards: {
       // as in the view mode
       en: "Cards",
+      pt: "Cart\xF5es",
       de: "Kacheln",
       ru: "\u041A\u0430\u0440\u0442\u043E\u0447\u043A\u0438",
       es: "Tarjetas",
@@ -90355,6 +90403,7 @@
       // used as an alternative to saying someone or something's
       // country, as its now always a country
       en: "Origin",
+      pt: "Origem",
       es: "Origen",
       ja: "\u51FA\u8EAB\u56FD"
     },
@@ -90395,6 +90444,7 @@
     },
     profile_title: {
       en: "Profile title",
+      pt: "T\xEDtulo do perfil",
       de: "Profiltitel",
       es: "T\xEDtulo de perfil",
       it: "Titolo del profilo",
@@ -90403,6 +90453,7 @@
     },
     pronoun_tip: {
       en: "Include pronouns at the start or end of your title to separate them visually",
+      pt: "Inclua pronomes no in\xEDcio ou no final do seu t\xEDtulo para separ\xE1-los visualmente",
       de: "F\xFCge Pronomen am Anfang oder am Ende deines Profiltitels ein, um sie optisch hervorzuheben",
       es: "Incluye pronombres al inicio o final de tu t\xEDtulo para separarlos visualmente",
       it: "Includi i pronomi all\u2019inizio o alla fine del titolo per separarli visivamente",
@@ -90807,6 +90858,7 @@
     search_for_anything: {
       // used as a placeholder for the global search bar
       en: "Search for anything",
+      pt: "Pesquisar qualquer coisa",
       de: "Nach irgendetwas suchen",
       ru: "\u041D\u0430\u0439\u0442\u0438 \u0447\u0442\u043E \u0443\u0433\u043E\u0434\u043D\u043E",
       es: "Busca cualquier cosa",
@@ -90848,6 +90900,7 @@
       header: {
         name: {
           en: "Header",
+          pt: "Cabe\xE7alho",
           de: "\xDCberschrift",
           es: "Encabezado",
           it: "Intestazione",
@@ -90857,6 +90910,7 @@
         },
         string: {
           en: "# hi!!",
+          pt: "# oi!!",
           de: "# hallo!!",
           es: "# \xA1\xA1hola!!",
           it: "# ciao!!",
@@ -91061,13 +91115,16 @@
       }
     },
     circle: {
-      en: "Circular"
+      en: "Circular",
+      pt: "Circular"
     },
     squircle: {
-      en: "Rounded"
+      en: "Rounded",
+      pt: "Arredondado"
     },
     square: {
-      en: "Square"
+      en: "Square",
+      pt: "Quadrado"
     },
     notes: {
       // profile notes
@@ -91102,6 +91159,7 @@
     },
     saved_note_for_user: {
       en: "Saved note for {u}",
+      pt: "Nota salva para {u}",
       de: "Profilnotiz f\xFCr {u} gespeichert",
       es: "Anotaci\xF3n para {u} guardada",
       it: "Nota salvata per {u}",
@@ -91109,6 +91167,7 @@
     },
     cleared_note_for_user: {
       en: "Cleared note for {u}",
+      pt: "Nota apagada para {u}",
       de: "Profilnotiz f\xFCr {u} entfernt",
       es: "Anotaci\xF3n para {u} borrada",
       it: "Nota cancellata per {u}",
@@ -91116,6 +91175,7 @@
     },
     manage: {
       en: "Manage",
+      pt: "Gerenciar",
       de: "Verwalten",
       es: "Gestionar",
       it: "Gestisci",
@@ -91146,6 +91206,7 @@
     font_choice: {
       name: {
         en: "Interface font",
+        pt: "Fonte da interface",
         de: "Schriftart der Benutzeroberfl\xE4che",
         es: "Fuente de interfaz",
         ru: "\u0428\u0440\u0438\u0444\u0442 \u0438\u043D\u0442\u0435\u0440\u0444\u0435\u0439\u0441\u0430",
@@ -91153,6 +91214,7 @@
       },
       body: {
         en: "Choose the font that suits you best",
+        pt: "Escolha a fonte que mais combina com voc\xEA",
         de: "W\xE4hle die Schriftart, die dir am besten gef\xE4llt",
         es: "Elige la fuente que m\xE1s te guste",
         ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u0448\u0440\u0438\u0444\u0442, \u043A\u043E\u0442\u043E\u0440\u044B\u0439 \u0432\u0430\u043C \u0431\u043E\u043B\u044C\u0448\u0435 \u0432\u0441\u0435\u0433\u043E \u043F\u043E\u0434\u0445\u043E\u0434\u0438\u0442",
@@ -91160,6 +91222,7 @@
       },
       custom: {
         en: "Provide your own font",
+        pt: "Forne\xE7a sua pr\xF3pria fonte",
         de: "Eigene Schriftart bereitstellen",
         es: "Proporciona tu propia fuente",
         ru: "\u0423\u043A\u0430\u0436\u0438\u0442\u0435 \u0441\u0432\u043E\u0439 \u0448\u0440\u0438\u0444\u0442",
@@ -91167,6 +91230,7 @@
       },
       stylised: {
         en: "Stylised",
+        pt: "Estilizada",
         de: "Stilisiert",
         es: "Estilizada",
         ru: "\u0421\u0442\u0438\u043B\u0438\u0437\u043E\u0432\u0430\u043D\u043D\u044B\u0439",
@@ -91174,6 +91238,7 @@
       },
       simple: {
         en: "Simple",
+        pt: "Simples",
         de: "Einfach",
         es: "Simple",
         ru: "\u041F\u0440\u043E\u0441\u0442\u043E\u0439",
@@ -91181,6 +91246,7 @@
       },
       hyperlegible: {
         en: "Accessible",
+        pt: "Acess\xEDvel",
         de: "Barrierefrei",
         es: "Accesible",
         ru: "\u0414\u043E\u0441\u0442\u0443\u043F\u043D\u044B\u0439",
@@ -91189,11 +91255,13 @@
     },
     font_serif: {
       en: "Use old-fashioned Serif font for some headings",
+      pt: "Usar uma fonte serifada cl\xE1ssica em alguns cabe\xE7alhos",
       es: "Usar fuente Serif cl\xE1sica para algunos encabezados"
     },
     previewing: {
       // used as subtext for previewing a font
       en: "Previewing: {v}",
+      pt: "Pr\xE9-visualizando: {v}",
       de: "Vorschau: {v}",
       es: "Vista previa: {v}",
       ru: "\u041F\u0440\u0435\u0434\u043F\u0440\u043E\u0441\u043C\u043E\u0442\u0440: {v}",
@@ -91201,6 +91269,7 @@
     },
     no_font_selected: {
       en: "No font selected",
+      pt: "Nenhuma fonte selecionada",
       de: "Keine Schriftart ausgew\xE4hlt",
       es: "Ninguna fuente seleccionada",
       ru: "\u0428\u0440\u0438\u0444\u0442 \u043D\u0435 \u0432\u044B\u0431\u0440\u0430\u043D",
@@ -91237,6 +91306,7 @@
       },
       out: {
         en: "Outline",
+        pt: "Contorno",
         de: "Umriss",
         it: "Contorno",
         ru: "\u041E\u0431\u0432\u043E\u0434\u043A\u0430"
@@ -92022,6 +92092,7 @@
     prev: {
       // previous
       en: "Prev",
+      pt: "Anterior",
       es: "Anterior",
       ru: "\u041D\u0430\u0437\u0430\u0434",
       it: "Precedente"
@@ -92528,6 +92599,7 @@
     },
     image: {
       en: "Image",
+      pt: "Imagem",
       de: "Bild",
       es: "Imagen",
       it: "Immagine",
@@ -92535,6 +92607,7 @@
     },
     attach_image: {
       en: "Attach image",
+      pt: "Anexar imagem",
       de: "Bild anh\xE4ngen",
       es: "Adjuntar imagen",
       it: "Allega immagine",
@@ -92569,6 +92642,7 @@
     },
     crop_before_uploading: {
       en: "Crop image before uploading",
+      pt: "Recortar imagem antes de enviar",
       de: "Bild vor dem Hochladen zuschneiden",
       es: "Cortar imagen antes de subir",
       ru: "\u041E\u0431\u0440\u0435\u0437\u0430\u0442\u044C \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435 \u043F\u0435\u0440\u0435\u0434 \u0437\u0430\u0433\u0440\u0443\u0437\u043A\u043E\u0439",
@@ -93048,6 +93122,7 @@
       // ignore the curly brackets, only translate the '{c} wonderful people' thing
       // c: replaced with a number of sponsors
       en: "{s}{c} sponsoring{/s}",
+      pt: "{s}{c} apoiando{/s}",
       de: "{s}{c} unterst\xFCtzen{/s}",
       ru: "{s}{c} \u0437\u0430\u043C\u0435\u0447\u0430\u0442\u0435\u043B\u044C\u043D\u044B\u0445 \u043B\u044E\u0434\u0435\u0439{/s}",
       // wonderful people -tech
@@ -93263,6 +93338,7 @@
     },
     create_collage: {
       en: "Create collage",
+      pt: "Criar colagem",
       de: "Collage erstellen",
       ru: "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u043A\u043E\u043B\u043B\u0430\u0436",
       es: "Crear collage",
@@ -93516,6 +93592,7 @@
     },
     missing_artist_info: {
       en: "This artist is missing key details, maybe you can help out?",
+      pt: "Faltam detalhes importantes sobre este artista, talvez voc\xEA possa ajudar?",
       de: "Diesem K\xFCnstler fehlen wichtige Details, vielleicht kannst du helfen?",
       es: "A este artista le faltan detalles clave, \xBFquiz\xE1s puedes ayudar?",
       ru: "\u041E\u0431 \u044D\u0442\u043E\u043C \u0430\u0440\u0442\u0438\u0441\u0442\u0435 \u043D\u0435 \u0445\u0432\u0430\u0442\u0430\u0435\u0442 \u043A\u043B\u044E\u0447\u0435\u0432\u043E\u0439 \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u0438, \u043C\u043E\u0436\u0435\u0442, \u0432\u044B \u043F\u043E\u043C\u043E\u0436\u0435\u0442\u0435?",
@@ -93549,6 +93626,7 @@
       ru: "\u041E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u043E",
       notification: {
         en: "Updated to version {v}",
+        pt: "Atualizado para a vers\xE3o {v}",
         es: "Actualizado a la versi\xF3n {v}",
         it: "Aggiornato alla versione {v}",
         ru: "\u041E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u043E \u0434\u043E \u0432\u0435\u0440\u0441\u0438\u0438 {v}"
@@ -93721,6 +93799,7 @@
     },
     failed_to_check_for_updates: {
       en: "Checking for updates failed",
+      pt: "Falha ao verificar atualiza\xE7\xF5es",
       es: "Error al comprobar actualizaciones"
     },
     select_all: {
@@ -93905,6 +93984,7 @@
       },
       body: {
         en: "Showcase an image of your choosing across your profile",
+        pt: "Exiba uma imagem de sua escolha em todo o seu perfil",
         de: "Zeige ein Bild deiner Wahl auf deinem Profil",
         ru: "\u041F\u043E\u043A\u0430\u0437\u0430\u0442\u044C \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435, \u0432\u044B\u0431\u0440\u0430\u043D\u043D\u043E\u0435 \u0432\u0430\u043C\u0438, \u0432 \u0432\u0430\u0448\u0435\u043C \u043F\u0440\u043E\u0444\u0438\u043B\u0435",
         es: "Muestra una imagen de tu elecci\xF3n en tu perfil",
@@ -93913,6 +93993,7 @@
     },
     aspect_ratio_banner: {
       en: "Displayed at an aspect ratio of {v}, if screen size supports such",
+      pt: "Exibido na propor\xE7\xE3o de {v}, se o tamanho da tela permitir",
       de: "Angezeigt mit einem Seitenverh\xE4ltnis von {v}, wenn die Bildschirmgr\xF6\xDFe dies unterst\xFCtzt",
       es: "Mostrado con una relaci\xF3n de aspecto de {v}, si el tama\xF1o de la pantalla lo permite",
       ru: "\u041E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u0442\u0441\u044F \u0441 \u0441\u043E\u043E\u0442\u043D\u043E\u0448\u0435\u043D\u0438\u0435\u043C \u0441\u0442\u043E\u0440\u043E\u043D {v}, \u0435\u0441\u043B\u0438 \u0440\u0430\u0437\u043C\u0435\u0440 \u044D\u043A\u0440\u0430\u043D\u0430 \u043F\u043E\u0437\u0432\u043E\u043B\u044F\u0435\u0442",
@@ -94182,6 +94263,7 @@
     },
     explore_minis: {
       en: "Explore minis",
+      pt: "Explorar minis",
       de: "Minis erkunden",
       ru: "\u0418\u0441\u0441\u043B\u0435\u0434\u0443\u0439 \u043C\u0438\u043D\u0438",
       es: "Explorar minis",
@@ -94248,10 +94330,12 @@
     atlas: {
       name: {
         en: "Atlas",
+        pt: "Atlas",
         es: "Atlas"
       },
       body: {
         en: "Explore where the artists you love are based in the world",
+        pt: "Explore onde os artistas que voc\xEA ama est\xE3o pelo mundo",
         es: "Explora de d\xF3nde en el mundo vienen los artistas que m\xE1s amas"
       }
     },
@@ -95308,10 +95392,12 @@
     card: {
       name: {
         en: "Card",
+        pt: "Cart\xE3o",
         es: "Tarjeta"
       },
       body: {
         en: "Get an overview of your last year, month, or week",
+        pt: "Veja um resumo do seu \xFAltimo ano, m\xEAs ou semana",
         es: "Obt\xE9n un resumen de tu \xFAltimo a\xF1o, mes, o semana"
       }
     },
@@ -95335,6 +95421,7 @@
     value_less: {
       // 50 less than last month
       en: "{v} less",
+      pt: "{v} a menos",
       de: "{v} weniger",
       ru: "{v} \u043C\u0435\u043D\u044C\u0448\u0435",
       es: "{v} menos",
@@ -95343,6 +95430,7 @@
     value_more: {
       // 50 more than last month
       en: "{v} more",
+      pt: "{v} a mais",
       de: "{v} mehr",
       ru: "{v} \u0431\u043E\u043B\u044C\u0448\u0435",
       es: "{v} m\xE1s",
@@ -95815,6 +95903,7 @@
       },
       body: {
         en: "These are sponsor-exclusive perks as a thank you for supporting bleh",
+        pt: "Estes s\xE3o benef\xEDcios exclusivos para apoiadores como agradecimento por apoiar o bleh",
         de: "Dies sind exklusive Vorteile f\xFCr Sponsoren als Dankesch\xF6n f\xFCr die Unterst\xFCtzung von bleh",
         ru: "\u042D\u0442\u043E \u044D\u043A\u0441\u043A\u043B\u044E\u0437\u0438\u0432\u043D\u044B\u0435 \u043F\u0440\u0435\u0438\u043C\u0443\u0449\u0435\u0441\u0442\u0432\u0430 \u0434\u043B\u044F \u0441\u043F\u043E\u043D\u0441\u043E\u0440\u043E\u0432, \u043A\u0430\u043A \u0431\u043B\u0430\u0433\u043E\u0434\u0430\u0440\u043D\u043E\u0441\u0442\u044C \u0437\u0430 \u043F\u043E\u0434\u0434\u0435\u0440\u0436\u043A\u0443 bleh",
         // don't really know how to translate 'perks' -tech
@@ -95967,6 +96056,7 @@
     },
     search_for_settings: {
       en: "Search for settings",
+      pt: "Pesquisar configura\xE7\xF5es",
       de: "Nach Einstellungen suchen",
       es: "Buscar opciones",
       ru: "\u041F\u043E\u0438\u0441\u043A \u043D\u0430\u0441\u0442\u0440\u043E\u0435\u043A",
@@ -95974,6 +96064,7 @@
     },
     found_value_results: {
       en: "Found {c} result(s)",
+      pt: "{c} resultado(s) encontrado(s)",
       de: "{c} Ergebnis(se) gefunden",
       es: "{c} resultados encontrados",
       ru: "\u041D\u0430\u0439\u0434\u0435\u043D\u043E \u0440\u0435\u0437\u0443\u043B\u044C\u0442\u0430\u0442\u043E\u0432: {c}",
@@ -95981,6 +96072,7 @@
     },
     translated_from_value: {
       en: "Translated from {v}",
+      pt: "Traduzido de {v}",
       de: "\xDCbersetzt von {v}",
       es: "Traducido de {v}",
       ru: "\u041F\u0435\u0440\u0435\u0432\u0435\u0434\u0435\u043D\u043E \u0441 {v}",
@@ -95988,6 +96080,7 @@
     },
     follow_guidelines: {
       en: "Keep in mind the {a}community guidelines{/a}",
+      pt: "Tenha em mente as {a}diretrizes da comunidade{/a}",
       de: "Denke daran, die {a}Community-Richtlinien{/a} zu befolgen",
       es: "Ten en cuenta los {a}lineamientos de la comunidad{/a}",
       ru: "\u0423\u0447\u0438\u0442\u044B\u0432\u0430\u0439\u0442\u0435 {a}\u043F\u0440\u0430\u0432\u0438\u043B\u0430 \u0441\u043E\u043E\u0431\u0449\u0435\u0441\u0442\u0432\u0430{/a}",
@@ -95997,6 +96090,7 @@
       // text 1, text 2
       // text colour
       en: "Text {v}",
+      pt: "Texto {v}",
       de: "Text {v}",
       es: "Texto {v}",
       ru: "\u0422\u0435\u043A\u0441\u0442 {v}",
@@ -96006,6 +96100,7 @@
       // fill 1, fill 2
       // the filling of a background colour
       en: "Fill {v}",
+      pt: "Preenchimento {v}",
       de: "F\xFCllfarbe {v}",
       es: "Relleno {v}",
       ru: "\u0417\u0430\u043B\u0438\u0432\u043A\u0430 {v}",
@@ -96013,6 +96108,7 @@
     },
     styled_with_font: {
       en: "Styled with {f}.",
+      pt: "Estilizado com {f}.",
       de: "Gestylt mit {f}.",
       es: "Escrito con {f}",
       ru: "\u0421\u0442\u0438\u043B\u0438\u0437\u043E\u0432\u0430\u043D\u043E \u0448\u0440\u0438\u0444\u0442\u043E\u043C {f}",
@@ -96020,6 +96116,7 @@
     },
     change_font: {
       en: "Change font",
+      pt: "Alterar fonte",
       de: "Schriftart \xE4ndern",
       es: "Cambiar fuente",
       ru: "\u0418\u0437\u043C\u0435\u043D\u0438\u0442\u044C \u0448\u0440\u0438\u0444\u0442",
@@ -96029,6 +96126,7 @@
       // [top badge] and 3 more...
       // for a user
       en: "and {c} more",
+      pt: "e mais {c}",
       de: "und {c} weitere",
       es: "y {c} m\xE1s",
       ru: "\u0438 \u0435\u0449\u0451 {c}",
@@ -96036,6 +96134,7 @@
     },
     scrobbling_now: {
       en: "Scrobbling now",
+      pt: "Fazendo scrobble agora",
       de: "Wird gerade gescrobbelt",
       es: "Haciendo scrobbling ahora",
       ru: "\u0421\u043A\u0440\u043E\u0431\u0431\u043B\u0438\u0442\u0441\u044F \u0441\u0435\u0439\u0447\u0430\u0441",
@@ -96043,6 +96142,7 @@
     },
     recent_scrobble: {
       en: "Recently scrobbled",
+      pt: "Scrobble recente",
       de: "K\xFCrzlich gescrobbelt",
       es: "Scrobbling reciente",
       ru: "\u041D\u0435\u0434\u0430\u0432\u043D\u043E \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u0435\u043D\u043E",
@@ -96050,6 +96150,7 @@
     },
     no_tracks_found_mb: {
       en: "No tracks found, possibly a MusicBrainz error",
+      pt: "Nenhuma faixa encontrada, possivelmente um erro do MusicBrainz",
       de: "Keine Titel gefunden, m\xF6glicherweise ein MusicBrainz-Fehler",
       es: "Ning\xFAn tema encontrado, posiblemente un error de MusicBrainz",
       ru: "\u0422\u0440\u0435\u043A\u0438 \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u044B, \u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E \u043E\u0448\u0438\u0431\u043A\u0430 MusicBrainz",
@@ -96057,6 +96158,7 @@
     },
     value_scrobbles_recently: {
       en: "{v} scrobbles recently",
+      pt: "{v} scrobbles recentes",
       de: "{v} k\xFCrzliche Scrobbles",
       es: "{v} scrobblings recientes",
       ru: "\u041D\u0435\u0434\u0430\u0432\u043D\u043E \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u0435\u043D\u043E: {v}",
@@ -96064,6 +96166,7 @@
     },
     on_tour: {
       en: "On tour",
+      pt: "Em turn\xEA",
       de: "Auf Tour",
       es: "De gira",
       ru: "\u0412 \u0442\u0443\u0440\u0435",
@@ -96071,6 +96174,7 @@
     },
     length: {
       en: "Length",
+      pt: "Dura\xE7\xE3o",
       de: "Dauer",
       es: "Duraci\xF3n",
       ru: "\u0414\u043B\u0438\u0442\u0435\u043B\u044C\u043D\u043E\u0441\u0442\u044C",
@@ -96078,6 +96182,7 @@
     },
     released: {
       en: "Released",
+      pt: "Lan\xE7ado",
       de: "Ver\xF6ffentlicht am",
       es: "Lanzado",
       ru: "\u0412\u044B\u043F\u0443\u0449\u0435\u043D\u043E",
@@ -96085,6 +96190,7 @@
     },
     value_tracks_time: {
       en: "{count} tracks, {length}",
+      pt: "{count} faixas, {length}",
       de: "{count} Titel, {length}",
       es: "{count} temas, {length}",
       ru: "{count} \u0442\u0440\u0435\u043A\u043E\u0432, {length}",
@@ -96092,6 +96198,7 @@
     },
     oracle_vocal: {
       en: "Performed by",
+      pt: "Interpretado por",
       de: "Aufgef\xFChrt von",
       es: "Interpretado por",
       ru: "\u0418\u0441\u043F\u043E\u043B\u043D\u0435\u043D\u043E",
@@ -96099,6 +96206,7 @@
     },
     oracle_recording: {
       en: "Recorded by",
+      pt: "Gravado por",
       de: "Aufgenommen von",
       es: "Grabado por",
       ru: "\u0417\u0430\u043F\u0438\u0441\u0430\u043D\u043E",
@@ -96106,6 +96214,7 @@
     },
     oracle_mix: {
       en: "Produced by",
+      pt: "Produzido por",
       de: "Produziert von",
       es: "Producido por",
       ru: "\u0421\u043F\u0440\u043E\u0434\u044E\u0441\u0438\u0440\u043E\u0432\u0430\u043D\u043E",
@@ -96113,6 +96222,7 @@
     },
     oracle_engineer: {
       en: "Engineered by",
+      pt: "Engenharia por",
       de: "Technisch betreut von",
       es: "Dise\xF1ado por",
       ru: "\u0421\u0432\u0435\u0434\u0435\u043D\u043E",
@@ -96120,18 +96230,21 @@
     },
     oracle_editor: {
       en: "Edited by",
+      pt: "Editado por",
       de: "Redigiert von",
       es: "Editado por",
       it: "Editato da"
     },
     oracle_writer: {
       en: "Written by",
+      pt: "Escrito por",
       de: "Geschrieben von",
       es: "Escrito por",
       it: "Scritto da"
     },
     oracle_no_credits: {
       en: 'nothing here... (\u0E51/////\u0E51 " )',
+      pt: 'nada aqui... (\u0E51/////\u0E51 " )',
       de: 'hier gibt\u2019s nichts zu sehen... (\u0E51/////\u0E51 " )',
       es: 'Nada aqu\xED... (\u0E51/////\u0E51 " )',
       ru: '\u043D\u0438\u0447\u0435\u0433\u043E \u043D\u0435\u0442... (\u0E51/////\u0E51 " )',
@@ -96139,6 +96252,7 @@
     },
     born: {
       en: "Born",
+      pt: "Nascimento",
       de: "Geboren am",
       es: "Naci\xF3",
       ru: "\u0414\u0430\u0442\u0430 \u0440\u043E\u0436\u0434\u0435\u043D\u0438\u044F",
@@ -96147,6 +96261,7 @@
     },
     died: {
       en: "Died",
+      pt: "Falecimento",
       de: "Gestorben am",
       es: "Muri\xF3",
       ru: "\u0414\u0430\u0442\u0430 \u0441\u043C\u0435\u0440\u0442\u0438",
@@ -96155,6 +96270,7 @@
     formed: {
       // like a group, created
       en: "Formed",
+      pt: "Forma\xE7\xE3o",
       de: "Gegr\xFCndet am",
       es: "Formado",
       ru: "\u0414\u0430\u0442\u0430 \u043E\u0441\u043D\u043E\u0432\u0430\u043D\u0438\u044F",
@@ -96162,6 +96278,7 @@
     },
     ended: {
       en: "Ended",
+      pt: "Encerramento",
       de: "Beendet am",
       es: "Terminado",
       it: "Terminato"
@@ -96169,6 +96286,7 @@
     show_disc_image: {
       name: {
         en: "Show accompanying disc for albums and tracks",
+        pt: "Exibir disco correspondente para \xE1lbuns e faixas",
         de: "Schallplatte f\xFCr Alben und Titel anzeigen",
         es: "Mostrar disco adjunto en \xE1lbumes y temas",
         ru: "\u041F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u0434\u0438\u0441\u043A \u0434\u043B\u044F \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432 \u0438 \u0442\u0440\u0435\u043A\u043E\u0432",
@@ -96176,6 +96294,7 @@
       },
       body: {
         en: "Add small visual flair to music pages",
+        pt: "Adicionar um pequeno toque visual \xE0s p\xE1ginas de m\xFAsica",
         de: "F\xFCgt kleine visuelle Effekte zu Musikseiten hinzu",
         es: "A\xF1ade un peque\xF1o efecto visual a las p\xE1ginas de m\xFAsica",
         ru: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u043D\u0435\u0431\u043E\u043B\u044C\u0448\u043E\u0435 \u0432\u0438\u0437\u0443\u0430\u043B\u044C\u043D\u043E\u0435 \u0443\u043A\u0440\u0430\u0448\u0435\u043D\u0438\u0435 \u043D\u0430 \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u044B \u043C\u0443\u0437\u044B\u043A\u0438",
@@ -96184,6 +96303,7 @@
     },
     move_up: {
       en: "Move up",
+      pt: "Mover para cima",
       de: "Nach oben verschieben",
       es: "Mover arriba",
       ru: "\u041F\u0435\u0440\u0435\u043C\u0435\u0441\u0442\u0438\u0442\u044C \u0432\u0432\u0435\u0440\u0445",
@@ -96191,6 +96311,7 @@
     },
     move_down: {
       en: "Move down",
+      pt: "Mover para baixo",
       de: "Nach unten verschieben",
       es: "Mover abajo",
       ru: "\u041F\u0435\u0440\u0435\u043C\u0435\u0441\u0442\u0438\u0442\u044C \u0432\u043D\u0438\u0437",
@@ -96199,6 +96320,7 @@
     other_user: {
       // for example, in a list of users - maybe you want to add someone not listed
       en: "Other user",
+      pt: "Outro usu\xE1rio",
       de: "Anderer Benutzer",
       es: "Otro usuario",
       ru: "\u0414\u0440\u0443\u0433\u043E\u0439 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044C",
@@ -96207,6 +96329,7 @@
     count_bar_right: {
       name: {
         en: "Align count to right-side",
+        pt: "Alinhar contagem \xE0 direita",
         de: "Z\xE4hler auf die rechte Seite ausrichten",
         es: "Alinear cuenta al lado derecho",
         ru: "\u0412\u044B\u0440\u0430\u0432\u043D\u0438\u0432\u0430\u0442\u044C \u0441\u0447\u0451\u0442\u0447\u0438\u043A \u043F\u043E \u043F\u0440\u0430\u0432\u043E\u043C\u0443 \u043A\u0440\u0430\u044E",
@@ -96214,6 +96337,7 @@
       },
       body: {
         en: "Control the direction of the bar progress and text",
+        pt: "Controlar a dire\xE7\xE3o do progresso da barra e do texto",
         de: "Steuerung der Richtung des Balkenfortschritts und des Textes",
         es: "Controla la direcci\xF3n del texto y progreso de la barra",
         ru: "\u0423\u043F\u0440\u0430\u0432\u043B\u044F\u0442\u044C \u043D\u0430\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435\u043C \u043F\u0440\u043E\u0433\u0440\u0435\u0441\u0441-\u0431\u0430\u0440\u0430 \u0438 \u0442\u0435\u043A\u0441\u0442\u0430",
@@ -96222,16 +96346,19 @@
     },
     better_with_friends: {
       en: "Music is better with friends, {a}add to your close friends list{/a}",
+      pt: "M\xFAsica \xE9 melhor com amigos, {a}adicione \xE0 sua lista de amigos pr\xF3ximos{/a}",
       es: "La m\xFAsica es mejor con amigos, {a}a\xF1ade a tu lista de amigos cercanos{/a}"
     },
     collage_cta: {
       // used to 'advertise' collages
       name: {
         en: "Create a collage",
+        pt: "Criar uma colagem",
         es: "Crear un collage"
       },
       body: {
         en: "Featuring your favourite albums in the last month",
+        pt: "Com seus \xE1lbuns favoritos do \xFAltimo m\xEAs",
         es: "Con tus \xE1lbumes favoritos en el \xFAltimo mes"
       }
     },
@@ -96239,10 +96366,12 @@
       // used to 'advertise' the comparison mini
       name: {
         en: "Compare with your friends",
+        pt: "Comparar com seus amigos",
         es: "Comparar con tus amigos"
       },
       body: {
         en: "Which music do you have in common?",
+        pt: "Quais m\xFAsicas voc\xEAs t\xEAm em comum?",
         es: "\xBFQu\xE9 m\xFAsica tienen en com\xFAn?"
       }
     },
@@ -96250,157 +96379,192 @@
       // used to 'advertise' sponsoring
       body: {
         en: "Help out the future of bleh",
+        pt: "Ajude o futuro do bleh",
         es: "Ayuda al futuro de bleh"
       }
     },
     add_new_data_point: {
       en: "Add new data point",
+      pt: "Adicionar novo ponto de dados",
       es: "A\xF1adir nuevo dato"
     },
     presets: {
       // used in reference to timeframe presets
       en: "Presets",
+      pt: "Predefini\xE7\xF5es",
       es: "Preajustes"
     },
     existing: {
       // used as a header for existing items
       en: "Existing",
+      pt: "Existentes",
       es: "Actuales"
     },
     history: {
       en: "History",
+      pt: "Hist\xF3rico",
       es: "Historial"
     },
     no_data_to_display: {
       en: "No data to display",
+      pt: "Nenhum dado para exibir",
       es: "No hay datos para mostrar"
     },
     add_to_graph: {
       en: "Add to graph",
+      pt: "Adicionar ao gr\xE1fico",
       es: "A\xF1adir al gr\xE1fico"
     },
     graph_options: {
       en: "Graph options",
+      pt: "Op\xE7\xF5es do gr\xE1fico",
       es: "Opciones del gr\xE1fico"
     },
     refresh_plot_notice: {
       // once you edit the graph, it will display this tooltip as a warning
       en: "This will re-gather all data points",
+      pt: "Isso coletar\xE1 novamente todos os pontos de dados",
       es: "Esto volver\xE1 a recopilar todos los datos"
     },
     refresh_plot_alert: {
       // this is linked to the above
       en: "The timeframe you selected does not match the current graph, you can refresh the data to fix this.",
+      pt: "O per\xEDodo selecionado n\xE3o corresponde ao gr\xE1fico atual; voc\xEA pode atualizar os dados para corrigir isso.",
       es: "El periodo que seleccionaste no coincide con el gr\xE1fico actual, puedes recargar los datos para solucionarlo"
     },
     under_construction: {
       en: "This page is under construction, please give feedback and suggestions if you have any!",
+      pt: "Esta p\xE1gina est\xE1 em constru\xE7\xE3o; envie coment\xE1rios e sugest\xF5es se tiver algum!",
       es: "Esta p\xE1gina est\xE1 en construcci\xF3n, \xA1por favor da feedback y sugerencias si tienes alguna!"
     },
     data_source: {
       en: "Data source",
+      pt: "Fonte de dados",
       es: "Fuente de datos"
     },
     data_source_explain: {
       // used in the dialog for adding a data source
       en: "Here you can add media to your graph, for example an artist or an album/track. Listing an album or track is optional, as you can instead add an entire artist.",
+      pt: "Aqui voc\xEA pode adicionar m\xFAsica ao seu gr\xE1fico, por exemplo, um artista ou um \xE1lbum/faixa. Informar um \xE1lbum ou uma faixa \xE9 opcional, pois voc\xEA pode adicionar o artista inteiro.",
       es: "Aqu\xED puedes a\xF1adir multimedia a tu gr\xE1fico, por ejemplo un artista o un \xE1lbum/tema. A\xF1adir un \xE1lbum o tema es opcional, ya que puedes a\xF1adir un artista entero."
     },
     artist_required: {
       en: "Artist name required",
+      pt: "Nome do artista obrigat\xF3rio",
       es: "Nombre del artista requerido"
     },
     choose_either_an_album_or_track: {
       en: "Choose either an album or track only",
+      pt: "Escolha apenas um \xE1lbum ou uma faixa",
       es: "Elige solo un \xE1lbum o un tema"
     },
     already_exists: {
       en: "This data source already exists",
+      pt: "Esta fonte de dados j\xE1 existe",
       es: "Esta fuente de datos ya existe"
     },
     username_required: {
       en: "Username required",
+      pt: "Nome de usu\xE1rio obrigat\xF3rio",
       es: "Nombre de usuario requerido"
     },
     already_a_close_friend: {
       // user is already a friend
       en: "Already added to close friends",
+      pt: "J\xE1 adicionado aos amigos pr\xF3ximos",
       es: "Ya est\xE1 en tus amigos cercanos"
     },
     plot_explain: {
       // these are steps in order
       0: {
         en: "Choose a timeframe for your graph",
+        pt: "Escolha um per\xEDodo para o seu gr\xE1fico",
         es: "Elige un periodo para tu gr\xE1fico"
       },
       1: {
         en: "Choose a data source (an artist, album, or track)",
+        pt: "Escolha uma fonte de dados (um artista, \xE1lbum ou faixa)",
         es: "Elige una fuente de datos (un artista, \xE1lbum, o tema)"
       },
       2: {
         en: "Choose a user to add",
+        pt: "Escolha um usu\xE1rio para adicionar",
         es: "Elige un usuario a a\xF1adir"
       },
       3: {
         en: "Add to your graph",
+        pt: "Adicione ao seu gr\xE1fico",
         es: "A\xF1ade a tu gr\xE1fico"
       }
     },
     how_to_plot: {
       // used to label the above steps
       en: "Explaining Plot",
+      pt: "Entendendo o Gr\xE1fico",
       es: "Explicando Plot"
     },
     plotting_your_data: {
       // loading message
       en: "Plotting your data",
+      pt: "Gerando o gr\xE1fico dos seus dados",
       es: "Graficando tus datos"
     },
     issues_updating: {
       // there are then links after this
       en: "Having issues updating or need support in general?",
+      pt: "Est\xE1 com problemas para atualizar ou precisa de suporte em geral?",
       es: "\xBFTienes problemas al actualizar o necesitas soporte en general?"
     },
     hybrid_inbox: {
       name: {
         en: "Use a hybrid inbox",
+        pt: "Usar uma caixa de entrada h\xEDbrida",
         es: "Usar un buz\xF3n h\xEDbrido"
       },
       body: {
         en: "Group your messages and notifications into a single counter",
+        pt: "Agrupar suas mensagens e notifica\xE7\xF5es em um \xFAnico contador",
         es: "Agrupa tus mensajes y notificaciones en un solo contador"
       }
     },
     skip_patching_lastfm_settings: {
       en: "Disable bleh visuals here",
+      pt: "Desativar os elementos visuais do bleh aqui",
       es: "Desactiva los elementos visuales de bleh aqu\xED"
     },
     you_have_disabled_bleh_visuals_for_settings: {
       en: "You have disabled bleh visuals for Last.fm settings, don\u2019t expect this to look pretty",
+      pt: "Voc\xEA desativou os elementos visuais do bleh nas configura\xE7\xF5es do Last.fm; n\xE3o espere que isto fique bonito",
       es: "Has desactivado los elementos visuales de bleh en la configuraci\xF3n de Last.fm, no esperes que se vea bonito"
     },
     hide_unused_settings: {
       en: "Hide settings that have no effect",
+      pt: "Ocultar configura\xE7\xF5es que n\xE3o t\xEAm efeito",
       es: "Ocultar opciones que no tienen efecto"
     },
     edit_links: {
       en: "Edit links",
+      pt: "Editar links",
       es: "Editar v\xEDnculos"
     },
     daily: {
-      en: "Daily"
+      en: "Daily",
+      pt: "Diariamente"
     },
     weekly: {
-      en: "Weekly"
+      en: "Weekly",
+      pt: "Semanalmente"
     },
     explore: {
-      en: "Explore"
+      en: "Explore",
+      pt: "Explorar"
     },
     hot_100: {
       // b = bleh
       // idk how well this translates but like 'hot 100' is a thing
       // this is referencing, like the top 100 tracks at the moment
-      en: "The {b} Hot 100"
+      en: "The {b} Hot 100",
+      pt: "As 100 mais populares do {b}"
     },
     developer_mode: {
       name: {
@@ -97647,7 +97811,7 @@
   // src/build/build.json
   var build_default = {
     brand: "bleh",
-    build: "2026.0727.2",
+    build: "2026.0729",
     sku: "aihara",
     bio: "bleh!!! ^-^",
     author: "katelyn",
@@ -98043,7 +98207,7 @@
         date: "2026-07-01"
       }
     },
-    built_on: "2026-07-29T15:06:55.506Z"
+    built_on: "2026-07-29T17:33:39.503Z"
   };
 
   // node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
