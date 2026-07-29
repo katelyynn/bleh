@@ -145,9 +145,5 @@
     --hypercard-glow-opacity: 0.1;
     --hypercard-scale: 1.04;
 
-    &:active {
-        --hypercard-scale: 1.08;
-    }
-
     user-select: none;
 }
