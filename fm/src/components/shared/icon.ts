@@ -176,7 +176,8 @@ export const icons = {
     error: 'error',
     construction: 'construction',
     animated_dots: 'animated-dots',
-    logout: 'logout'
+    logout: 'logout',
+    mouse: 'mouse'
 };
 
 interface icon {
