@@ -69,7 +69,7 @@ export function input({
     required = false,
     hide_on_change,
     icon
-}: input): input_element {
+}: input) {
     if (type == 'date') {
         return calendar({
             value,
@@ -81,7 +81,7 @@ export function input({
             value_in_iso,
             func,
             hide_on_change
-        });
+        }) as input_element;
     }
 
     let input_box;
@@ -107,7 +107,7 @@ export function input({
                 </div>
             ` : ''}
         </div>
-    `;
+    ` as input_element;
 
     if (focus) {
         setTimeout(() => {
