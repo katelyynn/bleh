@@ -26825,11 +26825,17 @@
 
   // src/components/dialog/dialog.ts
   function load_dialogs() {
-    const dialogs3 = html.node`
-        <div class="bleh-modals" />
+    const elem = html.node`
+        <div class="bleh-modals" onclick=${() => {
+      const latest = Object.keys(dialogs).at(-1);
+      if (!latest) return;
+      if (dialogs[latest].dismiss) {
+        dialog_rm({ id: latest, modal_bg: true });
+      }
+    }} />
     `;
-    document.body.appendChild(dialogs3);
-    page.structure.dialogs = dialogs3;
+    document.body.appendChild(elem);
+    page.structure.dialogs = elem;
   }
   function dialog({
     id = "",
@@ -26840,7 +26846,7 @@
     type = "",
     has_overlays = true,
     replace = false,
-    replace_if_possible = true,
+    replace_if_possible = false,
     replace_id = "",
     allow_scroll = false,
     colourful = false,
@@ -26900,9 +26906,6 @@
                 ${tl2(trans.close)}
             </button>
         `);
-      page.structure.dialogs.onclick = () => {
-        dialog_rm({ all: true, modal_bg: true });
-      };
     } else {
       page.structure.dialogs.removeAttribute("onclick");
     }
@@ -26919,7 +26922,8 @@
         </div>
     `);
     dialogs[id] = {
-      instance: modal
+      instance: modal,
+      dismiss
     };
     if (replace || !replace && dialogs.hasOwnProperty(replace_id)) {
       log(`window set to replace ${replace_id}`, "window");
@@ -26934,10 +26938,10 @@
     all = false,
     modal_bg = false
   }) {
+    if (modal_bg) {
+      if (event.target.classList[0] != "bleh-modals") return;
+    }
     if (all) {
-      if (modal_bg) {
-        if (event.target.classList[0] != "bleh-modals") return;
-      }
       log("requested kill all", "window", "info", { dialogs });
       for (let dialog3 in dialogs) {
         dialog_rm({
@@ -29188,8 +29192,7 @@
       }}
                 >${tl2(is_url2 ? trans.copy_link : trans.copy_text)}</button>
             </div>
-        `,
-      replace_if_possible: true
+        `
     });
   }
   function download(url, filename = null) {
@@ -61907,8 +61910,7 @@
                     ${markdown(version4.bio, {
         allow_lists: true,
         allow_headers: true,
-        starting_header: 5,
-        in_dialog: true
+        starting_header: 5
       })}
                 </div>
             </div>

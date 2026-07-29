@@ -168,8 +168,7 @@ function open_changelog(changelog) {
                     ${markdown(version.bio, {
                         allow_lists: true,
                         allow_headers: true,
-                        starting_header: 5,
-                        in_dialog: true
+                        starting_header: 5
                     })}
                 </div>
             </div>
