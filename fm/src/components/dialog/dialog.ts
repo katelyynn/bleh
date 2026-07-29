@@ -83,7 +83,8 @@ export function dialog({
         <div
         class=${[
             'bleh-modal',
-            colourful ? 'colorful' : ''
+            colourful ? 'colourful' : '',
+            colourful_bg ? 'colourful-bg' : ''
         ].join(' ')}
         role="dialog"
         data-modal-id=${id}

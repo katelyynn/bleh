@@ -1,41 +1,61 @@
 import { badge } from "@/types/badge";
 import { dialog } from "./dialog";
 import { tl, trans } from "@/build/trans";
-import { html } from "lighterhtml";
-import { style_name_from_badge } from "../shared/avatar";
+import { html, render } from "lighterhtml";
+import { avatar, style_name_from_badge } from "../shared/avatar";
 import { sponsor } from "../sponsor";
+import "@zachleat/hypercard";
+import { load_profile_cache_externally } from "@/pages/profile/profile";
 
-export function present_badge(badge: badge) {
-    let elem;
-    let badge_name;
+export async function present_badge(badge: badge) {
+    let head;
 
     const window = html.node`
-        <div class="present-badge-window">
-            <div class="present-badge-top">
-                <div class="present-badge colourful" ref=${el => elem = el}>
-                    <div class="bleh-icon present-badge-icon" />
+        <hyper-card class="present-badge-hyper-card">
+            <div class="present-badge-window">
+                <div class="present-badge-head" ref=${el => head = el}>
+                    <div class="present-badge-avatar avatar">
+                        <img class="missing-avatar">
+                    </div>
+                    <span class="present-badge-username">${badge.user}</span>
                 </div>
+                <div class="present-badge-inner">
+                    <div class="present-badge-top">
+                        <div class="present-badge colourful">
+                            <div class="bleh-icon present-badge-icon" />
+                        </div>
+                    </div>
+                    <strong class="present-badge-name">${badge.name}</strong>
+                    <p class="present-badge-reason">${badge.reason}</p>
+                </div>
+                <div class="present-badge-bottom">
+                    <p class="present-badge-type">${tl(trans.badge_types[badge.type || 'reserved'], { u: badge.user })}</p>
+                </div>
+                ${badge.type == 'sponsor' ? html.node`
+                    <div class="present-badge-actions">
+                        <button class="btn primary icon sponsor colourful" data-type="sponsor" onclick=${() => sponsor()}>
+                            ${tl(trans.sponsor)}
+                        </button>
+                    </div>
+                ` : badge.type == 'translation' ? html.node`
+                    <div class="present-badge-actions">
+                        <a class="btn primary icon translate colourful" data-type="translate" href="https://github.com/katelyynn/bleh/wiki/Translations" target="_blank">
+                            ${tl(trans.translate)}
+                        </a>
+                    </div>
+                ` : ''}
             </div>
-            <strong class="present-badge-name" ref=${el => badge_name = el}>${badge.name}</strong>
-            <p class="present-badge-reason">${badge.reason}</p>
-            <div class="present-badge-bottom">
-                <p class="present-badge-type">${tl(trans.badge_types[badge.type || 'reserved'], { u: badge.user })}</p>
-            </div>
-            ${badge.type == 'sponsor' ? html.node`
-                <div class="present-badge-actions">
-                    <button class="btn primary icon sponsor colourful" data-type="sponsor" onclick=${() => sponsor()}>
-                        ${tl(trans.sponsor)}
-                    </button>
-                </div>
-            ` : badge.type == 'translation' ? html.node`
-                <div class="present-badge-actions">
-                    <a class="btn primary icon translate colourful" data-type="translate" href="https://github.com/katelyynn/bleh/wiki/Translations" target="_blank">
-                        ${tl(trans.translate)}
-                    </a>
-                </div>
-            ` : ''}
-        </div>
+        </hyper-card>
     `;
+
+    const elem = dialog({
+        id: 'badge',
+        title: badge.name,
+        body: window,
+        type: 'badge',
+        colourful: true,
+        colourful_bg: true
+    });
 
     if (
         badge.icon != '' &&
@@ -57,12 +77,12 @@ export function present_badge(badge: badge) {
         );
     }
 
-    style_name_from_badge(badge_name, badge);
+    const cache = await load_profile_cache_externally(badge.user);
 
-    dialog({
-        id: 'badge',
-        title: badge.name,
-        body: window,
-        type: 'badge'
-    });
+    render(head, html`
+        <div class="present-badge-avatar avatar">
+            <img src=${avatar(cache.avatar, 'avatar170s')} />
+        </div>
+        <span class="present-badge-username">${badge.user}</span>
+    `);
 }

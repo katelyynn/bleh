@@ -1,26 +1,13 @@
 .present-badge-window {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
     cursor: default;
 
     min-width: 320px;
-    padding: calc(40px + var(--card-padding)) var(--card-padding);
-    margin: calc(-1 * var(--card-padding)) !important;
+    padding: var(--card-padding) 40px;
     overflow: hidden;
-}
+    background: oklch(var(--b5));
+    border-radius: var(--item-big-radius);
+    border: 1px solid var(--card-border-base);
 
-.present-badge-top {
-    margin-bottom: 40px;
-}
-
-.present-badge {
-    --icon-size: 64px;
-    filter: drop-shadow(0 6px 4px oklch(var(--f4) / 60%));
-    padding: 140px;
-    margin: -140px;
-    pointer-events: none;
     position: relative;
 
     &:before {
@@ -28,25 +15,76 @@
         position: absolute;
         inset: 0;
         pointer-events: none;
-        background: radial-gradient(at center 40%, oklch(var(--f4) / 40%), transparent 80%);
-        animation: chart_bg 8s var(--trans-function-ani) infinite;
+        background: radial-gradient(at center top, oklch(var(--f4) / 50%), transparent 90%);
     }
+}
+
+.present-badge-head {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    z-index: 10;
+    position: relative;
+}
+.present-badge-avatar {
+    width: 24px;
+    height: 24px;
+    background: var(--avatar-generic-background);
+    --mask-size: 14px;
+}
+
+.present-badge-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 60px 0;
+}
+
+.present-badge-top {
+    margin-bottom: 20px;
+}
+
+.present-badge {
+    --icon-size: 128px;
+    filter: drop-shadow(0 6px 4px oklch(var(--f4) / 60%));
 }
 
 .present-badge-icon {
     --icon: var(--mask);
-    background: linear-gradient(180deg, oklch(var(--l3-c)), oklch(var(--l4-c)));
+    background: radial-gradient(at center, oklch(var(--l3-c)) 40%, oklch(var(--l4-c)));
 }
 
 .present-badge-name {
-    font-size: 16px;
-    line-height: 20px;
+    font-size: 18px;
+    line-height: 22px;
     font-weight: var(--font-weight-medium);
     color: oklch(var(--l3-c));
+    position: relative;
+    max-width: 240px;
+
+    /*&:before {
+        content: var(--name);
+        position: absolute;
+        inset: -100px;
+        font-family: var(--font-head);
+        font-size: 32px;
+        line-height: 32px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: -20px;
+
+        opacity: 0.2;
+
+        transform: scaleY(4);
+        }*/
 }
 .present-badge-reason {
     margin-top: 4px;
-    color: oklch(var(--c3));
+    color: oklch(var(--c2));
 }
 
 .present-badge-bottom {
@@ -57,14 +95,24 @@
 
     display: flex;
     justify-content: center;
+    text-align: center;
 }
 .present-badge-type {
     font-size: 13px;
     color: oklch(var(--c3));
-    max-width: 250px;
+    max-width: 240px;
 }
 
 .bleh-modal[data-modal-type="badge"] {
+    background: unset;
+    backdrop-filter: unset;
+    -webkit-backdrop-filter: unset;
+    padding: unset;
+    outline: unset;
+    border: unset;
+    box-shadow: unset !important;
+
+    & > .modal-close-button,
     & > .bleh-modal-title {
         display: none;
     }
@@ -72,4 +120,16 @@
 
 .present-badge-actions {
     margin-top: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.present-badge-hyper-card {
+    position: static;
+    display: block;
+    border-radius: var(--card-radius) !important;
+    box-shadow: var(--override-full-shadow, var(--overlay-shadow));
+
+    --hypercard-glow-opacity: 0.07;
+    --hypercard-scale: 1.04;
 }

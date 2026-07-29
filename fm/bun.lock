@@ -5,6 +5,7 @@
     "": {
       "dependencies": {
         "@tealmiku/florence": "^2026.527.0",
+        "@zachleat/hypercard": "^2.0.2",
         "chart.js": "^4.5.1",
         "chartjs-adapter-luxon": "^1.3.1",
         "chartjs-plugin-zoom": "^2.2.0",
@@ -101,6 +102,8 @@
     "@ungap/trim": ["@ungap/trim@0.2.0", "", {}, "sha512-CfsUxeZ2R/O3EGCOe+IkAU32yHOdO+mCRmtavSIQ4HZN3Jiq/ynGzq8/asyamd28U26UJmpSV/TC7+p7qELKrg=="],
 
     "@ungap/weakmap": ["@ungap/weakmap@0.2.1", "", {}, "sha512-GmVAWB+JuFKqSbzlofYK4qxk955gEv4Kd9/aj2hLOxneXMAm/J7OXcl5DlElS9tmkqwCcxGysSZGOrjzNvmjFQ=="],
+
+    "@zachleat/hypercard": ["@zachleat/hypercard@2.0.2", "", {}, "sha512-dWoy+my56GcjjOJMmJ7cQuf6rdtHw8JfO7ixDuEOqXnKme2MoeBF8xQ4u7e7WB49X4ReqsWVVjWrMS5PFcxNzg=="],
 
     "base64-arraybuffer": ["base64-arraybuffer@1.0.2", "", {}, "sha512-I3yl4r9QB5ZRY3XuJVEPfc2XhZO6YweFPI+UovAzn+8/hb3oJ6lnysaFcjVpkCPfVWFUDvoZ8kmVDP7WyRtYtQ=="],
 
