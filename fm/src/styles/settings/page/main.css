@@ -14,10 +14,10 @@
 @import './test.css';
 
 .inner-preview {
-    background: oklch(var(--b6) / 70%);
+    background-color: var(--inset-background);
+    box-shadow: inset 0 0 0 1px var(--separator-base), var(--inset-shadow);
+    border-radius: var(--item-small-radius);
     padding: var(--card-gap);
-    border-radius: var(--item-med-radius);
-    border: 1px solid transparent;
     overflow: hidden;
 
     &.gap-top {

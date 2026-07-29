@@ -425,7 +425,7 @@ body,
 
     --group-shadow: inset 0 0 0 1px oklch(var(--b2) / 0.36);
 
-    --inset-background: oklch(var(--b6) / 20%);
+    --inset-background: oklch(var(--b6) / 23%);
     --inset-shadow: inset 0 4px 10px oklch(var(--b6) / 50%);
 
     --sidebar-bg: color-mix(in oklch, oklch(var(--b6)) 22%, oklch(var(--b5)));
@@ -522,6 +522,8 @@ body,
         --card-border-base-highlight: oklch(var(--b2) / 0.55);
 
         --shout-tree: oklch(var(--b2) / 30%);
+
+        --inset-background: oklch(var(--b6) / 25%);
     }
     &[data-bleh--theme="oled"] {
         /* any additional highlights */
@@ -595,6 +597,8 @@ body,
 
         --chart-button-hov: oklch(var(--b2) / 40%);
         --chart-button-atv: oklch(var(--b2) / 60%);
+
+        --inset-background: oklch(var(--b2) / 10%);
     }
     &[data-bleh--theme="light"] {
         /* any additional highlights */
