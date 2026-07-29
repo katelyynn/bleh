@@ -6,23 +6,24 @@
     overflow: hidden;
     background: oklch(var(--b5));
     border-radius: var(--item-big-radius);
-    border: 1px solid var(--card-border-base);
 
     position: relative;
+
+    text-shadow: 0 2px 5px oklch(var(--b6) / 40%);
 
     &:before {
         content: '';
         position: absolute;
         inset: 0;
         pointer-events: none;
-        background: radial-gradient(at center top, oklch(var(--f4) / 70%), oklch(var(--f4) / 10%) 90%);
+        background: radial-gradient(at center top, oklch(var(--f4) / 70%), oklch(var(--f5) / 10%) 90%);
     }
 
     &:after {
         content: '';
         position: absolute;
         inset: 3px;
-        box-shadow: inset 0 0 0 2px oklch(var(--c1) / 15%);
+        box-shadow: inset 0 0 0 2px oklch(var(--l3-c) / 15%);
         border-radius: calc(var(--item-big-radius) - 5px);
 
         --mask: linear-gradient(180deg, transparent 10%, white);
@@ -142,8 +143,34 @@
     border-radius: var(--card-radius) !important;
     box-shadow: 0 20px 60px oklch(var(--h4) / 20%), var(--override-full-shadow, var(--overlay-shadow));
 
-    --hypercard-glow-opacity: 0.1;
+    --hypercard-glow-opacity: 0.06;
     --hypercard-scale: 1.04;
 
     user-select: none;
+}
+
+.present-badge-corner {
+    --corner: 15px;
+    --size: 15px;
+    --w: 3px;
+    --r: 8px;
+    --c: oklch(var(--l3-c) / 20%);
+
+    position: absolute;
+    top: var(--corner);
+    width: var(--size);
+    height: var(--size);
+    border-top: var(--w) solid var(--c);
+
+    &.corner-left {
+        left: var(--corner);
+        border-left: var(--w) solid var(--c);
+        border-top-left-radius: var(--r);
+    }
+
+    &.corner-right {
+        right: var(--corner);
+        border-right: var(--w) solid var(--c);
+        border-top-right-radius: var(--r);
+    }
 }

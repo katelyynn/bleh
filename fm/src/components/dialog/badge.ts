@@ -21,6 +21,8 @@ export async function present_badge(badge: badge) {
     const window = html.node`
         <hyper-card class="present-badge-hyper-card">
             <div class="present-badge-window">
+                <div class="present-badge-corner corner-left" />
+                <div class="present-badge-corner corner-right" />
                 <div class="present-badge-head" ref=${el => head = el}>
                     <div class="present-badge-avatar avatar">
                         <img class="missing-avatar">
