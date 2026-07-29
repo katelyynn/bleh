@@ -10,6 +10,14 @@ import { load_profile_cache_externally } from "@/pages/profile/profile";
 export async function present_badge(badge: badge) {
     let head;
 
+    let type;
+
+    if (badge.inbuilt) {
+        type = badge.reason;
+    } else {
+        type = tl(trans.badge_types[badge.type || 'reserved'], { u: badge.user });
+    }
+
     const window = html.node`
         <hyper-card class="present-badge-hyper-card">
             <div class="present-badge-window">
@@ -29,7 +37,7 @@ export async function present_badge(badge: badge) {
                     <p class="present-badge-reason">${badge.reason}</p>
                 </div>
                 <div class="present-badge-bottom">
-                    <p class="present-badge-type">${tl(trans.badge_types[badge.type || 'reserved'], { u: badge.user })}</p>
+                    <p class="present-badge-type">${type}</p>
                 </div>
                 ${badge.type == 'sponsor' ? html.node`
                     <div class="present-badge-actions">

@@ -62,6 +62,7 @@ import { profile_summary } from '@/components/profile/summary';
 import { header_colour } from '@/components/page/colour';
 import { keys } from '@/components/settings/storage';
 import { beta_indicator } from '@/components/shared/indicator';
+import { present_badge } from '@/components/dialog/badge';
 
 export function bleh_profiles() {
     // the obsessions page is a user subpage but works very differently
@@ -229,6 +230,16 @@ export function bleh_profiles() {
             style_name_from_badge(badge_name, {
                 type,
                 inbuilt: true
+            });
+
+            badge.addEventListener('click', () => {
+                present_badge({
+                    name: tl(trans_instance.name),
+                    reason: tl(trans.badges[type].reason),
+                    user: page.name,
+                    type,
+                    inbuilt: true
+                });
             });
         });
     }
