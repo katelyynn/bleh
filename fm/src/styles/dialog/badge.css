@@ -39,7 +39,7 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: 60px 0;
+    padding: 50px 0;
 }
 
 .present-badge-top {
@@ -47,7 +47,7 @@
 }
 
 .present-badge {
-    --icon-size: 128px;
+    --icon-size: 100px;
     filter: drop-shadow(0 6px 4px oklch(var(--f4) / 60%));
 }
 
