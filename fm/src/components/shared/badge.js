@@ -12,6 +12,8 @@ import { sponsor } from '@/components/sponsor';
 import tippy from 'tippy.js';
 import { page } from '@/build/page';
 import { style_name_from_badge } from './avatar';
+import { flag_url } from './flag';
+import { present_badge } from '../dialog/badge';
 
 export function load_badges(user, solo = false) {
     if (!sponsor_list.version) return;
@@ -87,35 +89,36 @@ function get_trans_contributions(user) {
 }
 
 export function process_badge(badge, user) {
+    const translation = trans.badges[badge.type];
+
     badge.user = user;
 
     if (!badge.name) {
-        if (trans.badges[badge.type]) {
-            badge.name = tl(trans.badges[badge.type].name);
+        if (translation?.name) {
+            badge.name = tl(translation.name);
         } else {
             badge.name = tl(trans.unavailable);
             badge.reason = tl(trans.requires_higher_bleh_version);
         }
     }
 
-    if (trans.badges[badge.type] && trans.badges[badge.type].reason)
-        badge.reason = tl(trans.badges[badge.type].reason);
-    else if (
-        badge.reason &&
-        trans.badges[badge.reason] &&
-        trans.badges[badge.reason].reason
-    )
-        badge.reason = tl(trans.badges[badge.reason].reason);
 
     if (badge.reason) return badge;
 
-    if (badge.type == 'sponsor' || badge.type == 'contributor')
-        badge.reason = badge.type;
-    else if (badge.type == 'cute' || badge.type == 'queen')
+    if (translation?.reason) {
+        badge.reason = tl(translation.reason);
+        return badge;
+    }
+
+
+    if (badge.type == 'cute' || badge.type == 'queen')
         badge.reason = tl(trans.badges.cute.reason);
     else badge.reason = tl(trans.badges.reserved.reason);
 
-    return badge;
+    return {
+        mask: true,
+        ...badge
+    };
 }
 
 export function create_badge(
@@ -140,7 +143,11 @@ export function create_badge(
     const classlist = on_avatar ? 'avatar-status-dot' : 'label no-hover';
 
     let elem = html.node`
-        <span class=${classlist}>
+        <span class=${classlist} onclick=${() => {
+            if (!small && !on_avatar) {
+                present_badge(badge);
+            }
+        }}>
             ${badge.name}
         </span>
     `;
@@ -153,7 +160,7 @@ export function create_badge(
 
     if (badge.translation_code) {
         elem.classList.add('translation-lang');
-        elem.style.setProperty('--flag', `url(https://katelyynn.github.io/bleh/fm/flags/${badge.translation_code}.svg)`);
+        elem.style.setProperty('--flag', `url(${flag_url(badge.translation_code)})`);
     }
 
     if (long) elem.classList.add('expand');
@@ -192,8 +199,6 @@ export function create_badge(
     });
 
     style_name_from_badge(badge_name, badge);
-
-    if (badge.type == 'sponsor') elem.onclick = sponsor;
 
     return elem;
 }

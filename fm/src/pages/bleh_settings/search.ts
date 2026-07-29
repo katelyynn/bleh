@@ -4,6 +4,7 @@ import { input } from "@/components/settings/input";
 import { html, render } from "lighterhtml";
 import { change_settings_page, scroll_to_setting } from "./bleh_settings";
 import { page } from "@/build/page";
+import { icons } from "@/components/shared/icon";
 
 export function settings_search(tabs) {
     return html.node`
@@ -14,7 +15,8 @@ export function settings_search(tabs) {
                     const results = make_search(tabs, query);
                     change_settings_page('search');
                     search_results(tabs, query, results);
-                }
+                },
+                icon: icons.search
             })}
         </section>
     `;
@@ -81,8 +83,11 @@ function search_results(tabs, query: string, results: search_result[]) {
                             <div class="bleh-icon" style="--icon: var(--mask)" data-bleh-page=${result.tab} data-type=${tab.icon} />
                             <div class="setting-search-result-info">
                                 <strong class="setting-search-result-header">${tl(formal.title)}</strong>
-                                <p class="setting-search-result-context">${tab.name}</p>
+                                ${formal.body ? html.node`
+                                    <p class="setting-search-result-body">${tl(formal.body)}</p>
+                                ` : ''}
                             </div>
+                            <p class="setting-search-result-context">${tab.name}</p>
                         </button>
                     `;
                 })}

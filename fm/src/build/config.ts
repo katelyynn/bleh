@@ -227,6 +227,17 @@ export let settings_store: Record<string, setting_instance> = {
         title: trans.theme_loading.name,
         body: trans.theme_loading.body
     },
+    developer: {
+        default: false,
+        title: trans.developer_mode.name,
+        body: trans.developer_mode.body,
+        require_reload: true
+    },
+    developer_setting_names: {
+        default: false,
+        title: trans.developer_setting_names,
+        require_reload: true
+    },
     accessible_name_colours: {
         default: false,
         title: trans.accessible_name_colours.name,
@@ -581,9 +592,6 @@ export let settings_store: Record<string, setting_instance> = {
         title: trans.font.name,
         body: trans.font.body,
         placeholder: trans.enter_font_names,
-        tags: [
-            trans.text
-        ],
         requires: { font_choice: 'custom' }
     },
     font_choice: {
@@ -605,13 +613,19 @@ export let settings_store: Record<string, setting_instance> = {
                 name: trans.font_choice.custom
             }
         },
-        bubble: true
+        bubble: true,
+        tags: [
+            trans.text
+        ]
     },
     font_serif: {
         default: true,
         type: 'checkbox',
         title: trans.font_serif,
-        bubble: true
+        bubble: true,
+        tags: [
+            trans.text
+        ]
     },
     font_weight: {
         css: 'custom_font_weight',
@@ -1097,5 +1111,10 @@ export let settings_store: Record<string, setting_instance> = {
         default: true,
         type: 'checkbox',
         title: trans.hide_unused_settings
+    },
+    show_scroller: {
+        default: false,
+        title: trans.show_scroller,
+        bubble: true
     }
 };

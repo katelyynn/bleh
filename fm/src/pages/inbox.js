@@ -124,7 +124,7 @@ export async function bleh_inbox() {
 
         render(message, html`
             <div class="message-sender colourful" ref=${el => sender_panel = el}>
-                ${sender_avatar}
+                ${sender_avatar_cont}
                 ${sender_name}
                 ${sender_time}
                 <div class="message-sender-actions">

@@ -75,8 +75,7 @@ export function share(url) {
                 }}
                 >${tl(is_url ? trans.copy_link : trans.copy_text)}</button>
             </div>
-        `,
-        replace_if_possible: true
+        `
     });
 }
 

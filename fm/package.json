@@ -1,6 +1,7 @@
 {
     "dependencies": {
         "@tealmiku/florence": "^2026.527.0",
+        "@zachleat/hypercard": "^2.0.2",
         "chart.js": "^4.5.1",
         "chartjs-adapter-luxon": "^1.3.1",
         "chartjs-plugin-zoom": "^2.2.0",

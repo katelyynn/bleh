@@ -13,6 +13,12 @@
     -webkit-text-size-adjust: none;
 }
 
+/* wow this is a bad selector */
+html:has(> body[data-bleh--show_scroller="true"]) {
+    scrollbar-width: thin;
+    scrollbar-gutter: unset;
+}
+
 :root {
     scroll-padding-top: calc(52px + 15px);
 }

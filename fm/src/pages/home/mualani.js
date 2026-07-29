@@ -20,6 +20,8 @@ import { create_badge, load_badges } from '@/components/shared/badge';
 import { rgb_to_oklch, clamp_sat, clamp_lit } from '@/build/tools';
 import { chartlist_bar } from '@/components/music/bar';
 import { avatar } from '@/components/shared/avatar';
+import { tl, trans } from '@/build/trans';
+import { click_indicator } from '@/components/shared/indicator';
 
 export function mualani() {
     page.structure.container = document.body.querySelector('.page-content');
@@ -97,6 +99,9 @@ export function mualani() {
                     <button class="btn primary danger">Button</button>
                     <button class="btn danger-subtle" disabled>Button</button>
                     <button class="btn primary danger" disabled>Button</button>
+                </div>
+                <div class="flexy h">
+                    ${click_indicator()}
                 </div>
             </section>
             <section class="flexy">
@@ -275,7 +280,7 @@ export function mualani() {
 
                         return html.node`
                             ${badges.map(badge => {
-                                if (badge.type == 'sponsor') return html.node``;
+                                if (badge.type == 'sponsor' && !badge.icon) return html.node``;
 
                                 return create_badge(badge, false, true);
                             })}
@@ -288,7 +293,7 @@ export function mualani() {
 
                         return html.node`
                             ${badges.map(badge => {
-                                if (badge.type == 'sponsor') return html.node``;
+                                if (badge.type == 'sponsor' && !badge.icon) return html.node``;
 
                                 return create_badge(badge, false, true, true);
                             })}

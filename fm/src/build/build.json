@@ -1,6 +1,6 @@
 {
     "brand": "bleh",
-    "build": "2026.0727.2",
+    "build": "2026.0729",
     "sku": "aihara",
     "bio": "bleh!!! ^-^",
     "author": "katelyn",
@@ -131,12 +131,6 @@
             "name": "astrablooms font",
             "date": "2025-01-01",
             "notice": "This is a test of a new 'default' font for bleh, it most likely will never take effect as changing a font takes a lot of getting used to, but yeah.<br>You should set your text settings to the following: 470, 540, 610"
-        },
-        "developer": {
-            "default": false,
-            "name": "Developer mode",
-            "date": "2099-12-01",
-            "notice": "Enable developer-specific features used for debugging purposes"
         },
         "api": {
             "default": false,
@@ -385,11 +379,6 @@
             "name": "When 'Join the conversation' is replaced, use the full shoutbox instead of a preview",
             "date": "2026-02-12"
         },
-        "developer_setting_names": {
-            "default": false,
-            "name": "Show internal setting ids",
-            "date": "2099-11-31"
-        },
         "music_notes": {
             "default": false,
             "name": "Display and write notes for music",
@@ -407,5 +396,5 @@
             "date": "2026-07-01"
         }
     },
-    "built_on": "2026-07-27T22:46:40.591Z"
+    "built_on": "2026-07-29T17:33:39.503Z"
 }

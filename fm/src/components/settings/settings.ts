@@ -68,7 +68,7 @@ export function setting({
             });
 
         const type = settings_store[id].type || 'toggle';
-        const title = settings_store[id].title && !ff('developer_setting_names') ? tl(settings_store[id].title) : id;
+        const title = (settings_store[id].title && !settings.developer_setting_names) ? tl(settings_store[id].title) : id;
         let body = settings_store[id].body ? tl(settings_store[id].body) : null;
         const icon = settings_store[id].icon;
 

@@ -388,6 +388,23 @@ export const trans = {
             },
         },
     },
+    badge_types: {
+        reserved: {
+            en: 'This badge is specially reserved for {u}',
+        },
+        cute: {
+            en: 'The creator of bleh',
+        },
+        sponsor: {
+            en: '{u} sponsors the development of bleh',
+        },
+        contributor: {
+            en: '{u} contributed to the development of bleh',
+        },
+        translation: {
+            en: '{u} helped in translating bleh',
+        },
+    },
     requires_higher_bleh_version: {
         en: 'Requires higher bleh version',
         de: 'Erfordert eine neuere bleh-Version',
@@ -11654,6 +11671,20 @@ export const trans = {
         // this is referencing, like the top 100 tracks at the moment
         en: 'The {b} Hot 100',
         pt: 'As 100 mais populares do {b}',
+    },
+    developer_mode: {
+        name: {
+            en: 'Developer mode',
+        },
+        body: {
+            en: 'Enable developer-specific features used for debugging purposes',
+        },
+    },
+    developer_setting_names: {
+        en: 'Show internal setting ids',
+    },
+    show_scroller: {
+        en: 'Show page scrollbar',
     },
 } as const satisfies Record<string, any>;
 

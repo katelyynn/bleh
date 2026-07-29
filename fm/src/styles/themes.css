@@ -425,7 +425,7 @@ body,
 
     --group-shadow: inset 0 0 0 1px oklch(var(--b2) / 0.36);
 
-    --inset-background: oklch(var(--b6) / 20%);
+    --inset-background: oklch(var(--b6) / 23%);
     --inset-shadow: inset 0 4px 10px oklch(var(--b6) / 50%);
 
     --sidebar-bg: color-mix(in oklch, oklch(var(--b6)) 22%, oklch(var(--b5)));
@@ -522,6 +522,8 @@ body,
         --card-border-base-highlight: oklch(var(--b2) / 0.55);
 
         --shout-tree: oklch(var(--b2) / 30%);
+
+        --inset-background: oklch(var(--b6) / 25%);
     }
     &[data-bleh--theme="oled"] {
         /* any additional highlights */
@@ -595,6 +597,8 @@ body,
 
         --chart-button-hov: oklch(var(--b2) / 40%);
         --chart-button-atv: oklch(var(--b2) / 60%);
+
+        --inset-background: oklch(var(--b2) / 10%);
     }
     &[data-bleh--theme="light"] {
         /* any additional highlights */
@@ -794,13 +798,14 @@ u,
     --h4: var(--l4-c);
 
     --f4: calc(var(--lit) * 0.42) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue);
+    --f5: calc(var(--lit) * 0.36) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue);
     --k4: var(--f4);
     --g4: calc(var(--lit) * 0.15) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue);
 
     --s3: calc(clamp(min(0.5), var(--lit), max(1.2)) * 0.6) calc(clamp(min(0), var(--sat), max(2)) * 0.55) var(--hue);
     --s4: calc(clamp(min(0.5), var(--lit), max(1.2)) * 0.5) calc(clamp(min(0), var(--sat), max(2)) * 0.55) var(--hue);
 
-    --p3: var(--s3);
+    --p3: var(--s4);
 
     /* l2-c in dark modes, l4-c in light modes */
     --l2-c-theme-switch: var(--l2-c);
@@ -890,6 +895,7 @@ u,
 
         --f4: calc(var(--lit) * 0.4) calc(clamp(min(0), var(--sat), max(2)) * 0.32) var(--hue);
         --k4: calc(var(--lit) * 0.45) calc(clamp(min(0), var(--sat), max(2)) * 0.32) var(--hue);
+        --f5: calc(var(--lit) * 0.36) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue);
         --g4: calc(var(--lit) * 0.1) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue);
 
         --shout-vote-indicator: linear-gradient(
@@ -936,7 +942,8 @@ u,
         --h3-lit: calc(clamp(min(0.85), var(--lit), max(1.1)) * 0.78);
 
         --h4: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.63) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue);
-        --f4: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.8) calc(clamp(min(0), var(--sat), max(2)) * 0.58) var(--hue);
+        --f4: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.85) calc(clamp(min(0), var(--sat), max(2)) * 0.42) var(--hue);
+        --f5: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.63) calc(clamp(min(0), var(--sat), max(2)) * 0.72) var(--hue);
         --k4: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.8) calc(clamp(min(0), var(--sat), max(2)) * 0.62) var(--hue);
         --g4: 0.92 calc(clamp(min(0), var(--sat), max(2)) * 0.7) var(--hue);
 
@@ -1040,6 +1047,7 @@ u,
 
         --h4: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.63) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue);
         --f4: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.8) calc(clamp(min(0), var(--sat), max(2)) * 0.58) var(--hue);
+        --f5: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.6) calc(clamp(min(0), var(--sat), max(2)) * 0.68) var(--hue);
         --k4: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.69) calc(clamp(min(0), var(--sat), max(2)) * 0.52) var(--hue);
         --g4: 0.92 calc(clamp(min(0), var(--sat), max(2)) * 0.7) var(--hue);
 

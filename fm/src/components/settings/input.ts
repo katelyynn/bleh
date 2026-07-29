@@ -10,6 +10,7 @@ import { log } from '@/build/log.js';
 import tippy from 'tippy.js';
 import { calendar } from '@/components/dialog/calendar';
 import { auth } from '@/build/page';
+import { icon as icon_elem } from '../shared/icon';
 
 interface input {
     type?: string,
@@ -34,7 +35,8 @@ interface input {
     cols?: number,
     rows?: number,
     required?: boolean,
-    hide_on_change?: boolean
+    hide_on_change?: boolean,
+    icon?: string
 }
 
 interface input_element extends HTMLElement {
@@ -65,7 +67,8 @@ export function input({
     cols,
     rows,
     required = false,
-    hide_on_change
+    hide_on_change,
+    icon
 }: input): input_element {
     if (type == 'date') {
         return calendar({
@@ -87,7 +90,7 @@ export function input({
     let colour_block;
 
     let container = html.node`
-        <div class="content-form input-container colourful ${type == 'textarea' ? 'textarea' : ''}" data-type=${type} data-has-error="false">
+        <div class="content-form input-container colourful ${type == 'textarea' ? 'textarea' : ''} ${icon ? 'input-has-icon' : ''}" data-type=${type} data-has-error="false">
             ${type == 'colour' ? html.node`<span class="colour-block" ref=${(el) => (colour_block = el)} />` : ''}
             ${
                 type == 'textarea' ?
@@ -98,6 +101,11 @@ export function input({
                 <input class="modern-input" name=${name} disabled=${disabled} autofocus=${focus} type=${type} value=${value} placeholder=${placeholder} min=${min} max=${max} maxlength=${maxlength} required=${required} ref=${(el) => (input_box = el)} />
             `
             }
+            ${icon ? html.node`
+                <div class="input-icons">
+                    ${icon_elem({ name: icon })}
+                </div>
+            ` : ''}
         </div>
     `;
 

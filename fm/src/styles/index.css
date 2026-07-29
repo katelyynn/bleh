@@ -32,6 +32,7 @@
 @import './shared/flag.css';
 @import './text/list.css';
 @import './shared/username.css';
+@import './shared/indicator.css';
 
 @import './dialog/main.css';
 

@@ -10,12 +10,19 @@ import { dialogs, page } from '@/build/page';
 import { tl, trans } from '@/build/trans';
 
 export function load_dialogs() {
-    const dialogs = html.node`
-        <div class="bleh-modals" />
+    const elem = html.node`
+        <div class="bleh-modals" onclick=${() => {
+            const latest = Object.keys(dialogs).at(-1);
+            if (!latest) return;
+
+            if (dialogs[latest].dismiss) {
+                dialog_rm({ id: latest, modal_bg: true });
+            }
+        }} />
     `;
 
-    document.body.appendChild(dialogs);
-    page.structure.dialogs = dialogs;
+    document.body.appendChild(elem);
+    page.structure.dialogs = elem;
 }
 
 type dialog = {
@@ -45,7 +52,7 @@ export function dialog({
     type = '',
     has_overlays = true,
     replace = false,
-    replace_if_possible = true,
+    replace_if_possible = false,
     replace_id = '',
     allow_scroll = false,
     colourful = false,
@@ -83,7 +90,8 @@ export function dialog({
         <div
         class=${[
             'bleh-modal',
-            colourful ? 'colorful' : ''
+            colourful ? 'colourful' : '',
+            colourful_bg ? 'colourful-bg' : ''
         ].join(' ')}
         role="dialog"
         data-modal-id=${id}
@@ -110,11 +118,6 @@ export function dialog({
                 ${tl(trans.close)}
             </button>
         `);
-
-        // allow clicking out of the modal to close
-        page.structure.dialogs.onclick = () => {
-            dialog_rm({ all: true, modal_bg: true });
-        }
     } else {
         page.structure.dialogs.removeAttribute('onclick');
     }
@@ -134,7 +137,8 @@ export function dialog({
     `);
 
     dialogs[id] = {
-        instance: modal
+        instance: modal,
+        dismiss
     };
 
     if (replace || (!replace && dialogs.hasOwnProperty(replace_id))) {
@@ -154,13 +158,13 @@ export function dialog_rm({
     all = false,
     modal_bg = false
 }) {
-    if (all) {
-        // prevents clicks inside modal being broken
-        if (modal_bg) {
-            // @ts-ignore
-            if (event.target.classList[0] != 'bleh-modals') return;
-        }
+    // prevents clicks inside modal being broken
+    if (modal_bg) {
+        // @ts-ignore
+        if (event.target.classList[0] != 'bleh-modals') return;
+    }
 
+    if (all) {
         log('requested kill all', 'window', 'info', { dialogs });
 
         for (let dialog in dialogs) {
