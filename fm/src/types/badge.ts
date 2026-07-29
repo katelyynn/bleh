@@ -8,5 +8,6 @@ export interface badge {
     lit?: number,
     icon?: string,
     inbuilt?: boolean,
-    translation_code?: string
+    translation_code?: string,
+    mask?: boolean
 }

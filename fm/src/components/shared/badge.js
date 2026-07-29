@@ -115,7 +115,10 @@ export function process_badge(badge, user) {
         badge.reason = tl(trans.badges.cute.reason);
     else badge.reason = tl(trans.badges.reserved.reason);
 
-    return badge;
+    return {
+        mask: true,
+        ...badge
+    };
 }
 
 export function create_badge(

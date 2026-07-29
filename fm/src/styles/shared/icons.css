@@ -173,6 +173,15 @@
     &.use-mask {
         --icon: var(--mask);
     }
+
+    &[data-mask="false"] {
+        background: var(--icon, var(--icon-16-placeholder));
+        mask-image: unset;
+        -webkit-mask-image: unset;
+        background-size: var(--icon-size, 18px);
+        background-position: center;
+        background-repeat: no-repeat;
+    }
 }
 span.bleh-icon {
     display: inline-block;

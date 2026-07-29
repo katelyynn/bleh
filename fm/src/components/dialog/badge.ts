@@ -22,7 +22,7 @@ export async function present_badge(badge: badge) {
                 <div class="present-badge-inner">
                     <div class="present-badge-top">
                         <div class="present-badge colourful">
-                            <div class="bleh-icon present-badge-icon" />
+                            <div class="bleh-icon present-badge-icon" data-mask=${badge.mask} />
                         </div>
                     </div>
                     <strong class="present-badge-name">${badge.name}</strong>
