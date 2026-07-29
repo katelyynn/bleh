@@ -75182,21 +75182,12 @@
     return html.node`
         ${cont}
         <div class="setting" data-type="info">
-            ${last_checked && update_required ? html.node`
-                <div class="heading">
-                    <h5>${tl2(trans.updating_to_version)}</h5>
-                </div>
-                <div class="info">
-                    <p>${version_to_install}</p>
-                </div>
-            ` : html.node`
-                <div class="heading">
-                    <h5>${tl2(trans.current_version)}</h5>
-                </div>
-                <div class="info">
-                    <p>${version.build}</p>
-                </div>
-            `}
+            <div class="heading">
+                <h5>${tl2(trans.updating_to_version)}</h5>
+            </div>
+            <div class="info">
+                <p>${version_to_install}</p>
+            </div>
         </div>
     `;
   }
