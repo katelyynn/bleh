@@ -5,14 +5,14 @@
 .setting-search-results {
     display: flex;
     flex-direction: column;
-    gap: var(--button-list-gap);
+    gap: 2px;
 
     margin: 0 calc(-1 * var(--button-sides));
 }
 .setting-search-result {
     --bg: transparent;
-    --bg-hov: oklch(var(--b4) / 40%);
-    --bg-atv: oklch(var(--b4) / 60%);
+    --bg-hov: oklch(var(--b2) / 40%);
+    --bg-atv: oklch(var(--b2) / 60%);
     --shadow: none;
 
     --button-verts: 10px;
@@ -24,9 +24,23 @@
     gap: 10px;
 }
 
+.setting-search-result-info {
+    flex: 1;
+}
+
+.setting-search-result-header {
+    font-weight: var(--font-weight);
+    flex: 1;
+}
+.setting-search-result-body {
+    font-size: 13px;
+    color: oklch(var(--c2) / 80%);
+}
+
 .setting-search-result-context {
     color: oklch(var(--c3));
     font-size: 13px;
+    flex-shrink: 0;
 }
 
 .setting-search-results-count {

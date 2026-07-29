@@ -59,7 +59,7 @@ export function update_branding_type(state = settings.branding_type) {
 }
 
 export function append_nav() {
-    if (ff('developer') && !page.structure.indicator) {
+    if (settings.developer && !page.structure.indicator) {
         let page_indicator = document.createElement('div');
         page_indicator.classList.add('page-indicator');
         document.documentElement.appendChild(page_indicator);

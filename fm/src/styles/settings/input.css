@@ -122,6 +122,7 @@
 
 .input-container {
     position: relative;
+    --icon-size: 14px;
 
     &:before {
         content: "";
@@ -252,4 +253,18 @@
             ) !important;
         }
     }
+
+    &.input-has-icon {
+        & > .modern-input {
+            padding-right: calc(var(--button-sides) + var(--icon-size) + var(--button-sides)) !important;
+        }
+    }
+}
+
+.input-icons {
+    position: absolute;
+    top: 0;
+    right: var(--button-sides);
+    bottom: 0;
+    pointer-events: none;
 }

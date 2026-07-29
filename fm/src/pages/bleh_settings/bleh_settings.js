@@ -844,46 +844,13 @@ export async function render_setting_page(page_id) {
                         ${tl(trans.beware_notice)}
                     </div>
                     <div class="setting-group">
-                        ${setting({ id: 'dev' })} ${setting({ id: 'branch' })}
+                        ${setting({ id: 'dev' })}
+                    </div>
+                    <div class="setting-group">
+                        ${setting({ id: 'developer' })}
+                        ${setting({ id: 'developer_setting_names' })}
                     </div>
                     <div class="sep"></div>
-                    <h4>Debug information</h4>
-                    <ul>
-                        <li>Theme loading is currently ${!settings.dev}</li>
-                        <li>
-                            <span class="lotus lotus-name lotus-name-small"
-                                >lotus</span
-                            >
-                            is currently ${settings.corrections}
-                        </li>
-                        <br />
-                        <li>
-                            <span class="lotus lotus-name lotus-name-small"
-                                >lotus</span
-                            >
-                            (artist) will expire at
-                            <span class="time"
-                                >${time(
-                localStorage.getItem('lotus_artist_expire')
-            )}</span
-                            >
-                        </li>
-                        <li>
-                            <span class="lotus lotus-name lotus-name-small"
-                                >lotus</span
-                            >
-                            (album_track) will expire at
-                            <span class="time"
-                                >${time(
-                localStorage.getItem(
-                    'lotus_album_track_expire'
-                )
-            )}</span
-                            >
-                        </li>
-                    </ul>
-                    <div class="sep"></div>
-                    <h4>${tl(trans.development)}</h4>
                     <button class="see-more" onclick=${() => {
                         if (settings.hu_tao == 'develop') {
                             change_settings_page('sku');

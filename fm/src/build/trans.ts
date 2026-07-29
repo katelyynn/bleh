@@ -11508,6 +11508,17 @@ export const trans = {
         // this is referencing, like the top 100 tracks at the moment
         en: 'The {b} Hot 100',
     },
+    developer_mode: {
+        name: {
+            en: 'Developer mode',
+        },
+        body: {
+            en: 'Enable developer-specific features used for debugging purposes',
+        },
+    },
+    developer_setting_names: {
+        en: 'Show internal setting ids',
+    },
 } as const satisfies Record<string, any>;
 
 export const translation_fallback = 'NO_TRANSLATION_FOUND';
