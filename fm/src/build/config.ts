@@ -1111,5 +1111,10 @@ export let settings_store: Record<string, setting_instance> = {
         default: true,
         type: 'checkbox',
         title: trans.hide_unused_settings
+    },
+    show_scroller: {
+        default: false,
+        title: trans.show_scroller,
+        bubble: true
     }
 };

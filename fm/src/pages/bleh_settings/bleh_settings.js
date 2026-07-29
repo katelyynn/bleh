@@ -1069,6 +1069,9 @@ export async function render_setting_page(page_id) {
                     ${setting({ id: 'reduced_motion' })}
                     ${setting({ id: 'underline_links' })}
                 </div>
+                <div class="setting-group">
+                    ${setting({ id: 'show_scroller' })}
+                </div>
             </section>
             <section class="bleh--panel">
                 <h4>${tl(trans.display_name.name)}</h4>

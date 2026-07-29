@@ -11519,6 +11519,9 @@ export const trans = {
     developer_setting_names: {
         en: 'Show internal setting ids',
     },
+    show_scroller: {
+        en: 'Show page scrollbar',
+    },
 } as const satisfies Record<string, any>;
 
 export const translation_fallback = 'NO_TRANSLATION_FOUND';
