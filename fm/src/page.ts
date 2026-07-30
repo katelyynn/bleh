@@ -67,7 +67,7 @@ import {
 } from '@/components/shared/shout';
 import { ff } from '@/components/settings/sku';
 import { bleh_sponsor_page, sponsors } from '@/components/sponsor';
-import { append_style, update_check } from '@/components/page/style';
+import { append_style, remove_lastfm_styles, update_check } from '@/components/page/style';
 import { bleh_radio } from '@/components/radio/radio';
 import { bleh_api } from '@/pages/home/api';
 import { bleh_users } from '@/components/shared/users';
@@ -136,6 +136,8 @@ export function bleh() {
             register_rabbit();
 
             notices();
+
+            remove_lastfm_styles();
 
             theme_version.state = getComputedStyle(document.body)
                 .getPropertyValue('--version-build')
@@ -446,6 +448,8 @@ function load_page(main_content = null) {
     set_season();
 
     bleh_footer();
+
+    remove_lastfm_styles();
 
     const masthead = document.body.querySelector('.masthead');
     const loading_indicator = document.body.querySelector(':scope > #initial-tealium-data');

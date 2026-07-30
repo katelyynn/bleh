@@ -73205,6 +73205,17 @@
     reset_update_status();
     invoke_reload();
   }
+  function remove_lastfm_styles() {
+    if (!ff("hutao")) return;
+    if (!document.head) return;
+    const styles = document.head.querySelectorAll('link[rel="stylesheet"]');
+    styles.forEach((style) => {
+      const name = style.getAttribute("data-stylesheet-name");
+      if (!name) return;
+      log("removed style entry", "style", "log", { name, style });
+      style.remove();
+    });
+  }
 
   // src/components/inbox/notifications.js
   function bleh_notification_list(list, mini = false) {
@@ -84254,6 +84265,7 @@
         load_dialogs();
         register_rabbit();
         notices();
+        remove_lastfm_styles();
         theme_version.state = getComputedStyle(document.body).getPropertyValue("--version-build").replaceAll("'", "").replaceAll('"', "");
         update_check(false, null);
         load_notifications();
@@ -84469,6 +84481,7 @@
     page.platform = detect_platform();
     set_season();
     bleh_footer();
+    remove_lastfm_styles();
     const masthead = document.body.querySelector(".masthead");
     const loading_indicator = document.body.querySelector(":scope > #initial-tealium-data");
     new IntersectionObserver(([entry]) => {
@@ -98205,6 +98218,11 @@
         default: false,
         name: "Utilise Last.fm API to create new charts",
         date: "2026-07-01"
+      },
+      hutao: {
+        default: false,
+        name: "Remove Last.fm-provided stylesheets for performance",
+        date: "2026-07-30"
       }
     },
     built_on: "2026-07-29T23:42:55.577Z"

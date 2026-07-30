@@ -394,6 +394,11 @@
             "default": false,
             "name": "Utilise Last.fm API to create new charts",
             "date": "2026-07-01"
+        },
+        "hutao": {
+            "default": false,
+            "name": "Remove Last.fm-provided stylesheets for performance",
+            "date": "2026-07-30"
         }
     },
     "built_on": "2026-07-29T23:42:55.577Z"

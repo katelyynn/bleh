@@ -18,6 +18,7 @@ import css from '@/styles/index.css';
 import { root } from '@/build/page';
 import { keys } from '../settings/storage';
 import { reset_update_status } from './update';
+import { ff } from '../settings/sku';
 
 export function append_style() {
     document.documentElement.classList.add('florence-supports-loading');
@@ -225,4 +226,20 @@ function finish_update() {
     reset_update_status();
 
     invoke_reload();
+}
+
+
+export function remove_lastfm_styles() {
+    if (!ff('hutao')) return;
+
+    if (!document.head) return;
+
+    const styles = document.head.querySelectorAll('link[rel="stylesheet"]');
+    styles.forEach(style => {
+        const name = style.getAttribute('data-stylesheet-name');
+        if (!name) return; // assume its not last.fm-provided
+
+        log('removed style entry', 'style', 'log', { name, style });
+        style.remove();
+    });
 }
