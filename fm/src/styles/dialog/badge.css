@@ -64,6 +64,8 @@
 
 .present-badge-top {
     margin-bottom: 20px;
+
+    z-index: 10;
 }
 
 .present-badge {
@@ -109,7 +111,7 @@
 
 .present-badge-bottom {
     margin-top: 30px;
-    border-top: 1px solid var(--separator-base);
+    border-top: 2px solid var(--separator-base);
     padding-top: 10px;
     width: 100%;
 
@@ -120,6 +122,12 @@
     z-index: 3;
 }
 .present-badge-type {
+    font-size: 13px;
+    color: oklch(var(--c3));
+    max-width: 240px;
+    text-align: center;
+}
+.present-badge-count {
     font-size: 13px;
     color: oklch(var(--c3));
     max-width: 240px;

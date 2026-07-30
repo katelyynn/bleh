@@ -390,7 +390,7 @@ export const trans = {
     },
     badge_types: {
         reserved: {
-            en: 'This badge is specially reserved for {u}',
+            en: 'This badge is specially reserved',
         },
         cute: {
             en: 'The creator of bleh',
@@ -11685,6 +11685,12 @@ export const trans = {
     },
     show_scroller: {
         en: 'Show page scrollbar',
+    },
+    badge_only_user: {
+        en: 'Owned by 1 person',
+    },
+    badge_multiple_users: {
+        en: 'Owned by {c} people',
     },
 } as const satisfies Record<string, any>;
 

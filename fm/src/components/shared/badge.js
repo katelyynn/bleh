@@ -79,6 +79,21 @@ export function load_badges(user, solo = false) {
     return badges;
 }
 
+export function get_amount_of_badge(badge) {
+    const users = {};
+
+    for (let user in sponsor_list.users) {
+        users[user] = load_badges(user);
+    }
+
+    console.info('badges loaded', users, Object.values(users));
+
+    return Object.values(users)
+        .flat()
+        .filter(b => b.type == badge.type && b.name == badge.name && b.reason == badge.reason)
+        .length;
+}
+
 function get_trans_contributions(user) {
     return Object.entries(lang_info)
         .filter(([code, info]) => info.by.includes(user) && code != 'en')

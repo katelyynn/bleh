@@ -6,6 +6,7 @@ import { avatar, style_name_from_badge } from "../shared/avatar";
 import { sponsor } from "../sponsor";
 import "@zachleat/hypercard";
 import { load_profile_cache_externally } from "@/pages/profile/profile";
+import { get_amount_of_badge } from "../shared/badge";
 
 export async function present_badge(badge: badge) {
     let head;
@@ -18,6 +19,8 @@ export async function present_badge(badge: badge) {
     } else {
         type = tl(trans.badge_types[badge.type || 'reserved'], { u: badge.user });
     }
+
+    const count = get_amount_of_badge(badge);
 
     const window = html.node`
         <hyper-card class="present-badge-hyper-card">
@@ -39,25 +42,28 @@ export async function present_badge(badge: badge) {
                     </div>
                     <strong class="present-badge-name">${badge.name}</strong>
                     <p class="present-badge-reason">${badge.reason}</p>
-                </div>
-                <div class="present-badge-bottom">
                     <p class="present-badge-type">${type}</p>
                 </div>
-                ${badge.type == 'sponsor' ? html.node`
-                    <div class="present-badge-actions">
-                        <button class="btn primary icon sponsor colourful" data-type="sponsor" onclick=${() => sponsor()}>
-                            ${tl(trans.sponsor)}
-                        </button>
-                    </div>
-                ` : badge.type == 'translation' ? html.node`
-                    <div class="present-badge-actions">
-                        <a class="btn primary icon translate colourful" data-type="translate" href="https://github.com/katelyynn/bleh/wiki/Translations" target="_blank">
-                            ${tl(trans.translate)}
-                        </a>
+                ${count > 0 ? html.node`
+                    <div class="present-badge-bottom">
+                        <p class="present-badge-count">${count == 1 ? tl(trans.badge_only_user, { u: badge.user }) : tl(trans.badge_multiple_users, { u: badge.user, c: count })}</p>
                     </div>
                 ` : ''}
             </div>
         </hyper-card>
+        ${badge.type == 'sponsor' ? html.node`
+            <div class="present-badge-actions">
+                <button class="btn primary icon sponsor colourful" data-type="sponsor" onclick=${() => sponsor()}>
+                    ${tl(trans.sponsor)}
+                </button>
+            </div>
+        ` : badge.type == 'translation' ? html.node`
+            <div class="present-badge-actions">
+                <a class="btn primary icon translate colourful" data-type="translate" href="https://github.com/katelyynn/bleh/wiki/Translations" target="_blank">
+                    ${tl(trans.translate)}
+                </a>
+            </div>
+        ` : ''}
     `;
 
     const elem = dialog({
