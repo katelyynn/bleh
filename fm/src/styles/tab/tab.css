@@ -551,3 +551,9 @@ button.navlist-more {
         }
     }
 }
+
+
+.auth-avatar-mobile,
+.navlist-more-wrap {
+    display: none;
+}

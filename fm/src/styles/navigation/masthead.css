@@ -5,6 +5,7 @@
 /* a lot of these have to be !important due to new
 last.fm changes as of 2024-05-20 */
 .masthead {
+    position: fixed;
     left: 0;
     right: 0;
     top: 0 !important;

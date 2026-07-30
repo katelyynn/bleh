@@ -3,6 +3,9 @@
     border-radius: var(--avatar-radius);
     aspect-ratio: 1 / 1;
 
+    display: block;
+    position: relative;
+
     &:before {
         content: '';
         position: absolute;
@@ -17,6 +20,8 @@
         position: static;
         border-radius: inherit !important;
         font-size: 0 !important;
+        width: 100%;
+        height: 100%;
     }
 
     &:after {
@@ -36,6 +41,14 @@ img {
 }
 
 .cover-art {
+    display: block;
+    position: relative;
+
+    & > img {
+        width: 100%;
+        height: 100%;
+    }
+
     &:before {
         content: '';
         position: absolute;

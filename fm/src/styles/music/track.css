@@ -1,4 +1,5 @@
 .chartlist {
+    display: block;
     --side-left: 12px;
     --image-offset: 2px;
     line-height: var(--line-height) !important;
@@ -85,6 +86,8 @@
     }
 
     & > td {
+        display: block;
+        position: relative;
         margin: unset !important;
     }
 
@@ -365,6 +368,7 @@
 
 .chartlist-timestamp {
     z-index: 4;
+    text-align: right;
     line-height: var(--line-height);
     margin-top: unset;
 }

@@ -2,6 +2,7 @@
 @import './themes.css';
 @import './icons.css';
 
+.sr-only,
 .style-warning {
     display: none !important;
 }
@@ -11,6 +12,10 @@
     scrollbar-gutter: stable both-edges;
     scroll-behavior: smooth;
     -webkit-text-size-adjust: none;
+}
+
+.disclose-hide {
+    display: none !important;
 }
 
 /* wow this is a bad selector */

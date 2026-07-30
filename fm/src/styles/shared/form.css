@@ -219,6 +219,10 @@
 .content-form .form-group,
 .content-form form {
     margin-top: var(--card-gap);
+
+    &:first-child {
+        margin-top: unset;
+    }
 }
 
 .content-form legend {

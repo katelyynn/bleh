@@ -1,3 +1,15 @@
+.masthead-search-field {
+    appearance: none;
+    background: none;
+    border: none;
+    color: inherit;
+}
+
+input {
+    font: inherit;
+    color: inherit;
+}
+
 .modern-input,
 .fake-input,
 .modal-body textarea,
