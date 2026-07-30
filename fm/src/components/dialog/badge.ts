@@ -9,6 +9,7 @@ import { load_profile_cache_externally } from "@/pages/profile/profile";
 
 export async function present_badge(badge: badge) {
     let head;
+    let bg_avatar;
 
     let type;
 
@@ -23,6 +24,7 @@ export async function present_badge(badge: badge) {
             <div class="present-badge-window">
                 <div class="present-badge-corner corner-left" />
                 <div class="present-badge-corner corner-right" />
+                <div class="present-badge-avatar-back" ref=${el => bg_avatar = el} />
                 <div class="present-badge-head" ref=${el => head = el}>
                     <div class="present-badge-avatar avatar">
                         <img class="missing-avatar">
@@ -91,8 +93,12 @@ export async function present_badge(badge: badge) {
 
     render(head, html`
         <div class="present-badge-avatar avatar">
-            <img src=${avatar(cache.avatar, 'avatar170s')} />
+            <img src=${avatar(cache.avatar, 'avatar300s')} />
         </div>
         <span class="present-badge-username">${badge.user}</span>
+    `);
+
+    render(bg_avatar, html`
+        <img src=${avatar(cache.avatar, 'avatar300s')} />
     `);
 }

@@ -71,6 +71,7 @@ select,
     font-family: var(--font) !important;
     font-size: var(--font-size) !important;
     font-weight: var(--force-font-weight, var(--font-weight)) !important;
+    text-shadow: none;
     border-radius: var(--radius, var(--button-radius)) !important;
     box-shadow: var(--shadow) !important;
     border: unset !important;

@@ -14,9 +14,11 @@
     &:before {
         content: '';
         position: absolute;
-        inset: 0;
+        inset: 0 -100px;
         pointer-events: none;
-        background: radial-gradient(at center top, oklch(var(--f4) / 70%), oklch(var(--f5) / 10%) 90%);
+        background: radial-gradient(at center top, oklch(var(--f4) / 70%), oklch(var(--f5) / 10%) 67%);
+
+        z-index: 1;
     }
 
     &:after {
@@ -29,6 +31,8 @@
         --mask: linear-gradient(180deg, transparent 10%, white);
         mask-image: var(--mask);
         -webkit-mask-image: var(--mask);
+
+        z-index: 2;
     }
 }
 
@@ -39,6 +43,8 @@
     gap: 10px;
     z-index: 10;
     position: relative;
+
+    z-index: 3;
 }
 .present-badge-avatar {
     width: 24px;
@@ -61,7 +67,7 @@
 
 .present-badge {
     --icon-size: 100px;
-    filter: drop-shadow(0 6px 4px oklch(var(--f4) / 60%));
+    filter: drop-shadow(0 6px 2px oklch(var(--f4) / 60%));
 }
 
 .present-badge-icon {
@@ -109,6 +115,8 @@
     display: flex;
     justify-content: center;
     text-align: center;
+
+    z-index: 3;
 }
 .present-badge-type {
     font-size: 13px;
@@ -135,18 +143,21 @@
     margin-top: 30px;
     display: flex;
     justify-content: center;
+
+    z-index: 3;
 }
 
 .present-badge-hyper-card {
     position: static;
     display: block;
     border-radius: var(--card-radius) !important;
-    box-shadow: 0 20px 60px oklch(var(--h4) / 20%), var(--override-full-shadow, var(--overlay-shadow));
+    box-shadow: 0 20px 60px oklch(var(--f5) / 15%), var(--override-full-shadow, var(--overlay-shadow));
 
     --hypercard-glow-opacity: 0.06;
     --hypercard-scale: 1.04;
 
     user-select: none;
+    scale: 1;
 }
 
 .present-badge-corner {
@@ -155,6 +166,7 @@
     --w: 3px;
     --r: 8px;
     --c: oklch(var(--l3-c) / 20%);
+    z-index: 4;
 
     position: absolute;
     top: var(--corner);
@@ -172,5 +184,28 @@
         right: var(--corner);
         border-right: var(--w) solid var(--c);
         border-top-right-radius: var(--r);
+    }
+}
+
+.present-badge-avatar-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 0;
+
+    height: 200px;
+    overflow: hidden;
+
+    mix-blend-mode: multiply;
+
+    --mask: linear-gradient(180deg, white, transparent);
+    mask-image: var(--mask);
+    -webkit-mask-image: var(--mask);
+
+    & > img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
     }
 }
