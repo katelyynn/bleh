@@ -433,6 +433,7 @@
     display: flex !important;
 }
 .shout-user-avatar {
+    position: absolute;
     top: var(--shout-avatar-top) !important;
     z-index: 20;
 }
