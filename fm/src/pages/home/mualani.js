@@ -60,6 +60,8 @@ export function mualani() {
         allow_lists: true
     };
 
+    let md_body_links;
+
     let colours = [
         [0, 0, 0],
         [64, 64, 64],
@@ -314,8 +316,49 @@ export function mualani() {
                     <div class="brand-demo brand-demo-small" />
                 </div>
             </section>
+            <section class="flexy">
+                <h2>Links</h2>
+                <div class="markdown-body" ref=${el => md_body_links = el} />
+            </section>
         `
     );
+
+    const link_text = `
+        [links]
+        https://x.com/ZZZ_EN
+        https://twitter.com/ZZZ_EN
+        https://open.spotify.com/album/4T7qu6MdxoGjzZPErRWgsO
+        https://youtube.com
+        https://github.com
+        https://discord.com
+        https://bandcamp.com
+        https://soundcloud.com
+        https://tiktok.com
+        https://ko-fi.com
+        https://patreon.com
+        https://twitch.tv
+        https://linktr.ee
+        https://carrd.co
+        https://music.apple.com
+        https://music.youtube.com
+        https://facebook.com
+        https://discogs.com
+        https://tidal.com
+        https://record.club
+        https://rateyourmusic.com
+        https://albumoftheyear.org
+        https://kyu.re
+        https://katelyn.moe
+        https://google.com
+        https://mastodon.social
+        https://bsky.app
+        https://reddit.com
+        [/links]
+    `;
+
+    render(md_body_links, markdown(link_text, {
+        allow_socials: true
+    }));
 }
 
 function dialog_loop() {

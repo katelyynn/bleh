@@ -436,7 +436,7 @@ export function markdown(
         'open.spotify.com': 'Spotify',
         'spotify.com': 'Spotify',
         'youtube.com': 'YouTube',
-        'x.com': 'X',
+        'x.com': 'Twitter (latterly X)',
         'twitter.com': 'Twitter',
         'github.com': 'GitHub',
         'discord.com': 'Discord',
@@ -457,8 +457,19 @@ export function markdown(
         'facebook.com': 'Facebook',
         'www.discogs.com': 'Discogs',
         'discogs.com': 'Discogs',
-        'tidal.com': 'Tidal'
+        'tidal.com': 'Tidal',
+        'record.club': 'Record Club',
+        'rateyourmusic.com': 'RYM',
+        'albumoftheyear.org': 'AOTY',
+        'mastodon.social': 'Mastodon',
+        'bsky.app': 'Bluesky',
+        'reddit.com': 'Reddit'
     };
+
+    const icons_not_supported = [
+        'record.club',
+        'reddit.com'
+    ];
 
     if (links.length > 0) {
         body.appendChild(html.node`
@@ -477,7 +488,7 @@ export function markdown(
                         }
 
                         return html.node`
-                            <a class="btn music-link social-link colourful icon" href=${link.url} target="_blank" data-host=${link.host} data-host-unknown=${!link_strings.hasOwnProperty(link.host)} data-path=${link.path} style="--favi: url(https://icons.duckduckgo.com/ip3/${link.host}.ico)">
+                            <a class="btn music-link social-link colourful icon" href=${link.url} target="_blank" data-host=${link.host} data-host-unknown=${!link_strings.hasOwnProperty(link.host) || icons_not_supported.includes(link.host)} data-path=${link.path} style="--favi: url(https://icons.duckduckgo.com/ip3/${link.host}.ico)">
                                 ${label}
                             </a>
                         `;

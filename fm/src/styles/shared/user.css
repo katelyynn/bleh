@@ -498,6 +498,7 @@
 }
 
 .user-list-avatar {
+    position: absolute;
     --show-icon: none;
 
     .avatar-status-dot {
