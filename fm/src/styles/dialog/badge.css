@@ -220,3 +220,16 @@
         object-fit: cover;
     }
 }
+
+.present-badge-type-indicator {
+    margin-bottom: 20px;
+    font-size: 16px;
+    line-height: 20px;
+    text-align: center;
+    font-weight: var(--font-weight-bold);
+    color: oklch(var(--l3-c));
+    text-shadow: 0 2px 6px oklch(var(--l4-c) / 50%);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0 20px;
+}

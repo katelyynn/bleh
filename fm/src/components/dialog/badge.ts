@@ -23,6 +23,11 @@ export async function present_badge(badge: badge) {
     const count = get_amount_of_badge(badge);
 
     const window = html.node`
+        ${badge.type == 'reserved' ? html.node`
+            <div class="present-badge-type-indicator">
+                ${tl(trans.badges.reserved.reason)}
+            </div>
+        ` : ''}
         <hyper-card class="present-badge-hyper-card">
             <div class="present-badge-window">
                 <div class="present-badge-corner corner-left" />
