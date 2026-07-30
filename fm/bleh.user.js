@@ -27985,11 +27985,7 @@
     }
     function format_date({ year, month, day }) {
       const date_object = new Date(year, month - 1, day);
-      return date_object.toLocaleDateString(void 0, {
-        year: "numeric",
-        month: "short",
-        day: "numeric"
-      });
+      return DateTime.fromJSDate(date_object).toLocaleString(DateTime.DATE_MED);
     }
     Object.defineProperty(container, "value", {
       get() {

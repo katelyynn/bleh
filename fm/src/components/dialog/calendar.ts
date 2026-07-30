@@ -10,6 +10,7 @@ import tippy from 'tippy.js';
 import { lang, tl, trans } from '@/build/trans';
 import { register_menu } from '@/components/menu';
 import { input } from '@/components/settings/input';
+import { DateTime } from 'luxon';
 
 export function calendar({
     value,
@@ -525,11 +526,7 @@ export function calendar({
 
     function format_date({ year, month, day }) {
         const date_object = new Date(year, month - 1, day);
-        return date_object.toLocaleDateString(undefined, {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric'
-        });
+        return DateTime.fromJSDate(date_object).toLocaleString(DateTime.DATE_MED);
     }
 
     Object.defineProperty(container, 'value', {
