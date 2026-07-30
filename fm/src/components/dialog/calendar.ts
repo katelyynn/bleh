@@ -7,7 +7,7 @@
 import { html } from 'lighterhtml';
 import { pad2 } from '@/build/tools';
 import tippy from 'tippy.js';
-import { tl, trans } from '@/build/trans';
+import { lang, tl, trans } from '@/build/trans';
 import { register_menu } from '@/components/menu';
 import { input } from '@/components/settings/input';
 
@@ -63,7 +63,7 @@ export function calendar({
     let time_input;
     let popup_inner = html.node`<div class="calendar" />`;
 
-    const locale = undefined;
+    const locale = lang;
     const months = Array.from({ length: 12 }, (_, i) =>
         new Intl.DateTimeFormat(locale, { month: 'short' }).format(
             new Date(2000, i, 1)

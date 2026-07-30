@@ -27591,7 +27591,7 @@
     let date_display;
     let time_input;
     let popup_inner = html.node`<div class="calendar" />`;
-    const locale = void 0;
+    const locale = lang;
     const months2 = Array.from(
       { length: 12 },
       (_, i2) => new Intl.DateTimeFormat(locale, { month: "short" }).format(
