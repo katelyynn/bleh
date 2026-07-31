@@ -211,7 +211,7 @@ export function avatar(url: string | null, requested: avatar_dimensions) {
     let image: string;
 
     if (url.startsWith('https')) {
-        if (!url.startsWith('https://lastfm.freetls.fastly.net/i/u/')) return url;
+        if (!/^https:\/\/lastfm(?:-img)?\.freetls\.fastly\.net\/i\/u\//.test(url)) return url;
 
         const built = new URL(url);
 

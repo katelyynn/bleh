@@ -69142,7 +69142,7 @@
     if (url == null) return url;
     let image2;
     if (url.startsWith("https")) {
-      if (!url.startsWith("https://lastfm.freetls.fastly.net/i/u/")) return url;
+      if (!/^https:\/\/lastfm(?:-img)?\.freetls\.fastly\.net\/i\/u\//.test(url)) return url;
       const built = new URL(url);
       const split = built.pathname.split("/");
       image2 = split[split.length - 1];
@@ -98299,7 +98299,7 @@
         date: "2026-07-30"
       }
     },
-    built_on: "2026-07-30T19:16:12.700Z"
+    built_on: "2026-07-31T17:06:51.056Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
