@@ -1,5 +1,4 @@
 gen/
 node_modules
-*.bun
 .idea
 .DS_Store
