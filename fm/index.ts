@@ -4,7 +4,9 @@
 // Licensed under GPLv3
 //
 
+import { denoPlugin } from '@deno/esbuild-plugin';
 import { serveDir } from '@std/http/file-server';
+import esbuild from 'esbuild';
 
 type BuildSchema = {
 	brand: string;
@@ -14,59 +16,24 @@ type BuildSchema = {
 	url: string;
 	built_on: string;
 };
-type BundleOptions = Deno.bundle.Options & {
+type BundleOptions = esbuild.BuildOptions & {
 	name: string;
-	banners: { js: string; css: string };
 };
 
-function print_message(
-	message: Deno.bundle.Message,
-	severity: 'warning' | 'error',
-) {
-	const { text, location } = message;
-	let output = `%c${severity}%c: ${text}`;
-	if (location != null) {
-		output +=
-			`\n\tat file://${location.file}:${location.line}:${location.column}`;
-	}
-	if (severity == 'warning') {
-		console.warn(output, 'color:yellow;font-weight:bold', 'color:white');
-	} else if (severity == 'error') {
-		console.error(output, 'color:red;font-weight:bold', 'color:white');
-	}
-}
-
-async function bundle({ name, banners, ...options }: BundleOptions) {
+async function bundle({ name, ...options }: BundleOptions) {
+	const start = Date.now();
 	console.log(
-		`\n%c📦 building %c${name}%c`,
+		`%c📦 building %c${name}%c`,
 		'color:grey',
 		'color:grey;font-weight:bold',
 		'font-weight:regular;color:white',
 	);
-	const result = await Deno.bundle(options);
-	result.warnings.map((w) => print_message(w, 'warning'));
-	if (result.success) {
-		for (const file of result.outputFiles!) {
-			const path = file.path;
-			const extension = path.split('.').pop();
-			if (extension == 'js') {
-				await Deno.writeTextFile(path, banners.js + '\n' + file.text());
-			} else if (extension == 'css') {
-				await Deno.writeTextFile(
-					path,
-					banners.css + '\n\n' + file.text(),
-				);
-			}
-		}
-	} else {
-		result.errors.map((e) => print_message(e, 'error'));
-		console.error(
-			`%c🚫 build failed%c\n`,
-			'color:grey',
-			'color:white',
-		);
-		Deno.exit(1);
-	}
+	await esbuild.build(options);
+	console.log(
+		`%c📦 build finished in %c${Date.now() - start}ms`,
+		'color:grey',
+		'color:grey;font-weight:bold;',
+	);
 }
 
 const build: BuildSchema = JSON.parse(
@@ -105,27 +72,51 @@ const CSS_BANNER = `/* ==UserStyle==
 
 @-moz-document domain("www.last.fm") {`;
 
+const bundle_css: esbuild.Plugin = {
+	name: 'bundle_css',
+	setup(build) {
+		build.onLoad({ filter: /\.css$/ }, async (args) => {
+			const result = await esbuild.build({
+				entryPoints: [args.path],
+				bundle: true,
+				minify: true,
+				write: false,
+				loader: { '.css': 'css' },
+			});
+
+			return {
+				contents: `export default ${
+					JSON.stringify(result.outputFiles[0].text)
+				}`,
+				loader: 'js',
+			};
+		});
+	},
+};
+
 const shared_opts: Omit<BundleOptions, 'name'> = {
-	entrypoints: ['./src/main.js'],
-	banners: { js: JS_BANNER, css: CSS_BANNER },
+	entryPoints: ['./src/main.js'],
+	banner: { js: JS_BANNER, css: CSS_BANNER },
+	bundle: true,
 	minify: false,
-	write: false,
-	inlineImports: true,
+	write: true,
 	packages: 'bundle',
 	platform: 'browser',
 	format: 'iife',
+	loader: { '.svg': 'text' },
+	plugins: [bundle_css, denoPlugin()],
 };
 
 const userscript: BundleOptions = {
 	...shared_opts,
 	name: 'userscript',
-	outputPath: 'bleh.user.js',
+	outfile: 'bleh.user.js',
 };
 
 const extension: BundleOptions = {
 	...shared_opts,
 	name: 'extension',
-	outputPath: 'ext/bleh.js',
+	outfile: 'ext/bleh.js',
 	minify: true,
 };
 
