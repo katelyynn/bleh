@@ -9,23 +9,23 @@ import { page } from '@/build/page';
 import { icon, icons } from '../shared/icon';
 
 export function load_status() {
-    if (!page.structure.status) {
-        let notification_host = html.node`
+	if (!page.structure.status) {
+		let notification_host = html.node`
             <div class="status-alerts" />
         `;
-        page.structure.status = notification_host;
-        document.body.appendChild(notification_host);
-    }
+		page.structure.status = notification_host;
+		document.body.appendChild(notification_host);
+	}
 }
 
 export function status({ title, body, type }) {
-    let status_icon = icons.info;
+	let status_icon = icons.info;
 
-    if (type == 'error') {
-        status_icon = icons.x;
-    }
+	if (type == 'error') {
+		status_icon = icons.x;
+	}
 
-    const alert = html.node`
+	const alert = html.node`
         <div class="status-alert colourful" onclick=${() => status_remove()}>
             <div class="status-title">
                 ${icon({ name: status_icon })}
@@ -35,19 +35,19 @@ export function status({ title, body, type }) {
         </div>
     `;
 
-    setTimeout(() => {
-        status_remove();
-    }, 3000);
+	setTimeout(() => {
+		status_remove();
+	}, 3000);
 
-    page.structure.status.appendChild(alert);
+	page.structure.status.appendChild(alert);
 
-    return alert;
+	return alert;
 
-    function status_remove() {
-        alert.classList.add('hiding');
+	function status_remove() {
+		alert.classList.add('hiding');
 
-        setTimeout(() => {
-            alert.remove();
-        }, 150);
-    }
+		setTimeout(() => {
+			alert.remove();
+		}, 150);
+	}
 }

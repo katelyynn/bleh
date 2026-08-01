@@ -2,5 +2,4 @@
 // once bwaa is updated, this file can be safely removed
 
 function begin_snowflakes() {
-
 }

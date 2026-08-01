@@ -1,43 +1,32 @@
 h1 {
-    font-weight: var(--font-weight-bold);
+	font-weight: var(--font-weight-bold);
 }
 
 .content-top-header {
-    font-size: 24px !important;
-    line-height: 30px !important;
-    font-weight: var(--font-weight-medium) !important;
-    letter-spacing: unset !important;
-    text-transform: unset !important;
+	font-size: 24px !important;
+	line-height: 30px !important;
+	font-weight: var(--font-weight-medium) !important;
+	letter-spacing: unset !important;
+	text-transform: unset !important;
 
-    margin-left: var(--card-padding);
-    cursor: default;
+	margin-left: var(--card-padding);
+	cursor: default;
 
-    display: none;
+	display: none;
 }
 
 h4,
 h3 {
-    font-weight: var(--font-weight-medium);
-    margin: unset;
-    cursor: default;
+	font-weight: var(--font-weight-medium);
+	margin: unset;
+	cursor: default;
 }
 
 /*     CARD HEAD     */
-h2:not(
-    .count,
-    .mask-multi-text,
-    .mask-text,
-    .sr-only,
-    .js-gallery-heading,
-    .top-item-modal-header,
-    .page-header-artist
-),
+h2:not(.count, .mask-multi-text, .mask-text, .sr-only, .js-gallery-heading, .top-item-modal-header, .page-header-artist),
 h3.text-18,
 h2.text-18,
-.subpage-title:not(
-    .subpage-breadcrumb + .subpage-title,
-    .js-gallery-heading
-),
+.subpage-title:not(.subpage-breadcrumb + .subpage-title, .js-gallery-heading),
 .stationlinks-header,
 .library-artist-section-header,
 .date-heading,
@@ -52,81 +41,79 @@ h2.text-18,
 .bookmarks-header-text,
 .obsession-search-result-header,
 .inbox-message-view .inbox-message-subject {
-    color: oklch(var(--c1));
-    font-family: var(--font);
-    font-size: 16px;
-    line-height: 17px; /* matches button on the right */
-    /*margin-bottom: 12px;*/
-    font-weight: var(--font-weight-medium);
-    letter-spacing: unset;
-    text-transform: unset;
-    /* undo hiding text */
-    clip: unset;
-    border: unset;
-    height: unset;
-    margin: 0 0 var(--card-gap) 0;
-    overflow: unset;
-    padding: unset;
-    position: static;
-    width: unset;
-    cursor: default;
+	color: oklch(var(--c1));
+	font-family: var(--font);
+	font-size: 16px;
+	line-height: 17px; /* matches button on the right */
+	/*margin-bottom: 12px;*/
+	font-weight: var(--font-weight-medium);
+	letter-spacing: unset;
+	text-transform: unset;
+	/* undo hiding text */
+	clip: unset;
+	border: unset;
+	height: unset;
+	margin: 0 0 var(--card-gap) 0;
+	overflow: unset;
+	padding: unset;
+	position: static;
+	width: unset;
+	cursor: default;
 
-    /*font-size: 24px !important;
-    line-height: 30px !important;*/
+	/*font-size: 24px !important;
+	line-height: 30px !important;*/
 
-    &.subtle-header {
-        font-size: var(--font-size);
-        line-height: var(--line-height);
-        color: oklch(var(--c3));
-        margin: 0 0 2px 0 !important;
-        cursor: default;
-    }
+	&.subtle-header {
+		font-size: var(--font-size);
+		line-height: var(--line-height);
+		color: oklch(var(--c3));
+		margin: 0 0 2px 0 !important;
+		cursor: default;
+	}
 
-    &.library-artist-section-header {
-        margin: unset !important;
-    }
+	&.library-artist-section-header {
+		margin: unset !important;
+	}
 
-    &.metadata-title {
-        font: inherit;
-    }
+	&.metadata-title {
+		font: inherit;
+	}
 
-    &.music-section-heading {
-        margin: 0 !important;
-        text-align: left;
+	&.music-section-heading {
+		margin: 0 !important;
+		text-align: left;
 
-        &:after {
-            display: none;
-        }
-    }
+		&:after {
+			display: none;
+		}
+	}
 
-    & > .new-badge {
-        margin-left: 6px;
-    }
+	& > .new-badge {
+		margin-left: 6px;
+	}
 }
 .user-sidebar-header {
-    min-width: 150px;
+	min-width: 150px;
 }
 .user-dashboard-section-header:after {
-    display: none;
+	display: none;
 }
-
 
 .music-section-heading {
-    font-family: var(--font-head) !important;
-    font-size: var(--font-size-head-3) !important;
-    line-height: 18px !important;
-    font-style: var(--font-style-head);
+	font-family: var(--font-head) !important;
+	font-size: var(--font-size-head-3) !important;
+	line-height: 18px !important;
+	font-style: var(--font-style-head);
 
-    .music-section > & {
-        line-height: var(--line-height-head-3) !important;
-    }
+	.music-section > & {
+		line-height: var(--line-height-head-3) !important;
+	}
 }
 
-
 .chart-heading {
-    font-family: var(--font-head) !important;
-    font-size: 40px !important;
-    line-height: 50px !important;
-    margin-bottom: unset !important;
-    text-shadow: 0 7px 20px oklch(var(--f4));
+	font-family: var(--font-head) !important;
+	font-size: 40px !important;
+	line-height: 50px !important;
+	margin-bottom: unset !important;
+	text-shadow: 0 7px 20px oklch(var(--f4));
 }

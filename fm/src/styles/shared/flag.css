@@ -1,24 +1,24 @@
 .country-flag {
-    height: 12px;
+	height: 12px;
 
-    aspect-ratio: 3 / 2;
-    background-size: 100%;
-    border-radius: 2px;
+	aspect-ratio: 3 / 2;
+	background-size: 100%;
+	border-radius: 2px;
 
-    display: flex;
-    font-size: 0;
+	display: flex;
+	font-size: 0;
 
-    box-shadow: 0 0 0 1px inset rgba(255, 255, 255, 0.13);
+	box-shadow: 0 0 0 1px inset rgba(255, 255, 255, 0.13);
 
-    filter: brightness(130%) saturate(95%);
+	filter: brightness(130%) saturate(95%);
 }
 
 .has-flag {
-    display: flex;
-    align-items: center;
-    gap: 4px;
+	display: flex;
+	align-items: center;
+	gap: 4px;
 }
 
 .small-flag {
-    margin: auto 0;
+	margin: auto 0;
 }

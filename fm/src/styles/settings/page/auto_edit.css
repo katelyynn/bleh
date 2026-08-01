@@ -1,124 +1,124 @@
 .chart-table {
-    table-layout: fixed !important; /* fix bulk edit extension being broken */
+	table-layout: fixed !important; /* fix bulk edit extension being broken */
 
-    margin-top: var(--card-gap);
+	margin-top: var(--card-gap);
 
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 
-    thead {
-        tr {
-            display: flex;
-        }
+	thead {
+		tr {
+			display: flex;
+		}
 
-        th {
-            font: inherit;
-            font-weight: var(--font-weight-medium);
-            color: oklch(var(--c3));
-            cursor: default;
+		th {
+			font: inherit;
+			font-weight: var(--font-weight-medium);
+			color: oklch(var(--c3));
+			cursor: default;
 
-            a {
-                color: inherit;
-            }
+			a {
+				color: inherit;
+			}
 
-            padding: 7px var(--button-sides);
-            flex: 1;
+			padding: 7px var(--button-sides);
+			flex: 1;
 
-            &:last-child {
-                flex: unset;
-                width: 100px;
-            }
-        }
-    }
-    tbody {
-        display: flex;
-        flex-direction: column;
-        gap: var(--button-list-gap);
-        width: 100%;
+			&:last-child {
+				flex: unset;
+				width: 100px;
+			}
+		}
+	}
+	tbody {
+		display: flex;
+		flex-direction: column;
+		gap: var(--button-list-gap);
+		width: 100%;
 
-        tr {
-            --bg: oklch(var(--b4) / 30%);
-            --bg-hov: oklch(var(--b4) / 50%);
+		tr {
+			--bg: oklch(var(--b4) / 30%);
+			--bg-hov: oklch(var(--b4) / 50%);
 
-            border: unset;
-            border-radius: var(--item-big-radius);
-            display: flex;
-            align-items: center;
+			border: unset;
+			border-radius: var(--item-big-radius);
+			display: flex;
+			align-items: center;
 
-            td {
-                padding: 7px var(--button-sides);
-                flex: 1;
+			td {
+				padding: 7px var(--button-sides);
+				flex: 1;
 
-                &.chart-table--buttons {
-                    flex: unset;
-                    width: 100px;
+				&.chart-table--buttons {
+					flex: unset;
+					width: 100px;
 
-                    display: flex;
-                    justify-content: end;
-                    gap: var(--button-list-gap);
+					display: flex;
+					justify-content: end;
+					gap: var(--button-list-gap);
 
-                    & > form {
-                        margin: unset;
+					& > form {
+						margin: unset;
 
-                        & > button {
-                            --btn-left: var(--button-sides);
-                            --btn-right: var(--button-sides);
-                            width: var(--button-height);
-                            height: var(--button-height);
-                            position: relative;
-                            --mask: var(--icon-16-edit);
-                            --left: calc(
+						& > button {
+							--btn-left: var(--button-sides);
+							--btn-right: var(--button-sides);
+							width: var(--button-height);
+							height: var(--button-height);
+							position: relative;
+							--mask: var(--icon-16-edit);
+							--left: calc(
                                 (var(--button-height) - var(--icon-size)) /
                                     2
                             );
 
-                            --bg: transparent !important;
-                            --bg-hov: oklch(var(--b4) / 60%) !important;
-                            --bg-atv: oklch(var(--b4) / 80%) !important;
-                            --shadow: none !important;
-                            --shadow-hov: none !important;
+							--bg: transparent !important;
+							--bg-hov: oklch(var(--b4) / 60%) !important;
+							--bg-atv: oklch(var(--b4) / 80%) !important;
+							--shadow: none !important;
+							--shadow-hov: none !important;
 
-                            img {
-                                display: none;
-                            }
-                        }
+							img {
+								display: none;
+							}
+						}
 
-                        [value="delete"] ~ button {
-                            --col: oklch(var(--l3-c));
-                            --mask-colour: color-mix(
+						[value="delete"] ~ button {
+							--col: oklch(var(--l3-c));
+							--mask-colour: color-mix(
                                 in oklch,
                                 oklch(var(--l3-c)),
                                 oklch(var(--l4-c)) 30%
                             );
-                            --hue-over: var(--hue-neg);
-                            --sat-over: 1;
-                            --lit-over: 1;
-                            --mask: var(--icon-16-trash);
-                        }
-                    }
-                }
+							--hue-over: var(--hue-neg);
+							--sat-over: 1;
+							--lit-over: 1;
+							--mask: var(--icon-16-trash);
+						}
+					}
+				}
 
-                small {
-                    font-size: var(--font-size-sm);
-                    line-height: var(--line-height) !important;
-                    color: oklch(var(--c3));
-                }
-            }
+				small {
+					font-size: var(--font-size-sm);
+					line-height: var(--line-height) !important;
+					color: oklch(var(--c3));
+				}
+			}
 
-            background: var(--bg);
-            transition-property: background;
-            transition-duration: var(--trans);
-            transition-timing-function: var(--trans-function);
+			background: var(--bg);
+			transition-property: background;
+			transition-duration: var(--trans);
+			transition-timing-function: var(--trans-function);
 
-            &:hover {
-                background: var(--bg-hov);
-                transition: none;
+			&:hover {
+				background: var(--bg-hov);
+				transition: none;
 
-                & > .chart-table--buttons > form > button {
-                    transition-property:
-                        background-color, transform !important;
-                }
-            }
-        }
-    }
+				& > .chart-table--buttons > form > button {
+					transition-property:
+						background-color, transform !important;
+				}
+			}
+		}
+	}
 }

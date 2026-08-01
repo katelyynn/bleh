@@ -1,45 +1,45 @@
 .lyrics-container {
-    margin: unset;
+	margin: unset;
 }
 .lyrics-body {
-    & > span {
-        display: flex;
-        flex-direction: column;
-        gap: 30px;
-    }
+	& > span {
+		display: flex;
+		flex-direction: column;
+		gap: 30px;
+	}
 
-    .lyrics-paragraph {
-        font-size: 18px;
-        line-height: 28px;
-        transition-property: background-color;
-        transition-duration: var(--trans);
-        transition-timing-function: var(--trans-function);
+	.lyrics-paragraph {
+		font-size: 18px;
+		line-height: 28px;
+		transition-property: background-color;
+		transition-duration: var(--trans);
+		transition-timing-function: var(--trans-function);
 
-        padding: 6px 10px;
-        margin: -6px -10px !important;
-        border-radius: var(--item-big-radius);
+		padding: 6px 10px;
+		margin: -6px -10px !important;
+		border-radius: var(--item-big-radius);
 
-        &:hover {
-            transition: none;
-            background-color: oklch(var(--b4) / 40%);
-        }
+		&:hover {
+			transition: none;
+			background-color: oklch(var(--b4) / 40%);
+		}
 
-        &:nth-child(even) {
-            color: oklch(var(--c2), 90%);
-        }
-    }
+		&:nth-child(even) {
+			color: oklch(var(--c2), 90%);
+		}
+	}
 }
 
 .lyrics-attribution {
-    margin-top: var(--card-gap);
-    padding-top: var(--card-gap);
-    border-top: 1px solid oklch(var(--b4));
-    color: oklch(var(--c3));
-    font-size: var(--font-size);
-    line-height: var(--line-height);
+	margin-top: var(--card-gap);
+	padding-top: var(--card-gap);
+	border-top: 1px solid oklch(var(--b4));
+	color: oklch(var(--c3));
+	font-size: var(--font-size);
+	line-height: var(--line-height);
 }
 
 /* empty lyrics container on pro pages */
 .catalogue-metadata-lyrics {
-    display: none !important;
+	display: none !important;
 }

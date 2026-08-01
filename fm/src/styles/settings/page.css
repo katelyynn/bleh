@@ -1,56 +1,56 @@
 .bleh--panel:not(.bleh--profile-note-panel) {
-    display: flex;
-    flex-direction: column;
-    gap: var(--card-gap);
-    flex: unset;
+	display: flex;
+	flex-direction: column;
+	gap: var(--card-gap);
+	flex: unset;
 
-    h1 {
-        font-size: 24px;
-        line-height: 30px;
-        font-weight: var(--font-weight-bold);
-        letter-spacing: unset;
-        margin: unset;
-        cursor: default;
-        color: oklch(var(--c1));
-    }
-    h4 {
-        color: oklch(var(--c1));
+	h1 {
+		font-size: 24px;
+		line-height: 30px;
+		font-weight: var(--font-weight-bold);
+		letter-spacing: unset;
+		margin: unset;
+		cursor: default;
+		color: oklch(var(--c1));
+	}
+	h4 {
+		color: oklch(var(--c1));
 
-        font-size: 16px;
-        line-height: 20px;
+		font-size: 16px;
+		line-height: 20px;
 
-        &.top-header {
-            width: fit-content;
-            padding-bottom: calc(var(--card-gap) + 1px);
-            position: relative;
+		&.top-header {
+			width: fit-content;
+			padding-bottom: calc(var(--card-gap) + 1px);
+			position: relative;
 
-            display: none;
+			display: none;
 
-            &:after {
-                content: "";
-                position: absolute;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                height: 1px;
-                background-color: var(--card-border-base);
-            }
-        }
-    }
-    h5 {
-        margin: unset;
-        color: oklch(var(--c1));
-        font-weight: var(--font-weight-medium);
-    }
+			&:after {
+				content: "";
+				position: absolute;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				height: 1px;
+				background-color: var(--card-border-base);
+			}
+		}
+	}
+	h5 {
+		margin: unset;
+		color: oklch(var(--c1));
+		font-weight: var(--font-weight-medium);
+	}
 
-    & > .alert {
-        margin: unset !important;
-    }
+	& > .alert {
+		margin: unset !important;
+	}
 
-    .subtext {
-        color: oklch(var(--c3));
-        font-size: var(--font-size-sm);
-        line-height: var(--line-height-sm);
-        margin-top: -5px;
-    }
+	.subtext {
+		color: oklch(var(--c3));
+		font-size: var(--font-size-sm);
+		line-height: var(--line-height-sm);
+		margin-top: -5px;
+	}
 }

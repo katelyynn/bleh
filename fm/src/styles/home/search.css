@@ -1,37 +1,37 @@
 .album-results,
 .artist-results {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-    gap: var(--card-gap);
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+	gap: var(--card-gap);
 
-    margin: unset;
+	margin: unset;
 
-    .album-result,
-    .artist-result {
-        margin: unset;
-        padding: unset;
+	.album-result,
+	.artist-result {
+		margin: unset;
+		padding: unset;
 
-        .album-result-heading,
-        .artist-result-heading {
-            font-size: var(--font-size);
-            line-height: var(--line-height);
-            font-weight: var(--font-weight-medium);
-            color: oklch(var(--c2));
-        }
-        .album-result-artist,
-        .artist-result-listeners {
-            color: oklch(var(--c3));
-            margin: unset;
-        }
+		.album-result-heading,
+		.artist-result-heading {
+			font-size: var(--font-size);
+			line-height: var(--line-height);
+			font-weight: var(--font-weight-medium);
+			color: oklch(var(--c2));
+		}
+		.album-result-artist,
+		.artist-result-listeners {
+			color: oklch(var(--c3));
+			margin: unset;
+		}
 
-        .album-result-image,
-        .artist-result-image {
-            border-radius: var(--item-med-radius);
-            background: var(--avatar-generic-background);
+		.album-result-image,
+		.artist-result-image {
+			border-radius: var(--item-med-radius);
+			background: var(--avatar-generic-background);
 
-            img {
-                border-radius: inherit;
-            }
-        }
-    }
+			img {
+				border-radius: inherit;
+			}
+		}
+	}
 }

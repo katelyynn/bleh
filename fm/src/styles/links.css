@@ -1,62 +1,61 @@
 .hide-link {
-    text-decoration: var(--force-underline, none) !important;
+	text-decoration: var(--force-underline, none) !important;
 
-    & > a:hover {
-        text-decoration: underline !important;
-    }
+	& > a:hover {
+		text-decoration: underline !important;
+	}
 }
 
 .metadata-column .cta-link-wrap a,
 .lyrics-snippet-more-link > a {
-    position: relative;
-    padding-right: calc(12px + 4px);
-    --left: none;
-    --right: 0;
-    --mask: var(--icon-16-external);
-    --mask-size: 12px;
-    --margin-top: -7px;
+	position: relative;
+	padding-right: calc(12px + 4px);
+	--left: none;
+	--right: 0;
+	--mask: var(--icon-16-external);
+	--mask-size: 12px;
+	--margin-top: -7px;
 
-    &:hover,
-    &:focus-visible {
-        text-decoration: underline !important;
-    }
+	&:hover,
+	&:focus-visible {
+		text-decoration: underline !important;
+	}
 }
 
 a {
-    color: oklch(var(--l3-c));
-    text-underline-offset: var(--underline-offset);
-    cursor: pointer;
+	color: oklch(var(--l3-c));
+	text-underline-offset: var(--underline-offset);
+	cursor: pointer;
 
-    [data-bleh--underline_links="true"] & {
-        text-decoration: underline !important;
-    }
+	[data-bleh--underline_links="true"] & {
+		text-decoration: underline !important;
+	}
 }
 
-
 .bottom-card-links {
-    display: flex;
-    justify-content: space-between;
-    margin-top: var(--card-gap);
-    gap: var(--card-gap);
+	display: flex;
+	justify-content: space-between;
+	margin-top: var(--card-gap);
+	gap: var(--card-gap);
 }
 
 .wiki-link {
-    position: relative;
-    padding-left: calc(12px + 2px);
-    --left: 0;
-    --mask-size: 12px;
-    --margin-top: -6px;
+	position: relative;
+	padding-left: calc(12px + 2px);
+	--left: 0;
+	--mask-size: 12px;
+	--margin-top: -6px;
 
-    &[data-link-type="tag"] {
-        --mask: var(--icon-16-tag);
-    }
-    &[data-link-type="artist"] {
-        --mask: var(--icon-16-artist);
-    }
-    &[data-link-type="album"] {
-        --mask: var(--icon-16-album);
-    }
-    &[data-link-type="track"] {
-        --mask: var(--icon-16-track);
-    }
+	&[data-link-type="tag"] {
+		--mask: var(--icon-16-tag);
+	}
+	&[data-link-type="artist"] {
+		--mask: var(--icon-16-artist);
+	}
+	&[data-link-type="album"] {
+		--mask: var(--icon-16-album);
+	}
+	&[data-link-type="track"] {
+		--mask: var(--icon-16-track);
+	}
 }

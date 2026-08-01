@@ -4,22 +4,23 @@
 // Licensed under GPLv3
 //
 
-import { html } from "lighterhtml";
-import { log } from "@/build/log";
-import { set_storage } from "@/build/tools";
-import { tl, trans } from "@/build/trans";
-import { external_url_prompt } from "@/components/shared/markdown";
-import { can_trust_link } from "@/pages/music/wiki";
-import { text_decode } from "../shared/text_decode";
+import { html } from 'lighterhtml';
+import { log } from '@/build/log';
+import { set_storage } from '@/build/tools';
+import { tl, trans } from '@/build/trans';
+import { external_url_prompt } from '@/components/shared/markdown';
+import { can_trust_link } from '@/pages/music/wiki';
+import { text_decode } from '../shared/text_decode';
 
 export async function fetch_status(username) {
-    const current = new Date();
-    const next_fetch = new Date(localStorage.getItem('next_status_cafe_fetch')) || current;
+	const current = new Date();
+	const next_fetch =
+		new Date(localStorage.getItem('next_status_cafe_fetch')) || current;
 
-    if (current >= next_fetch) {
-        return await fetch_status_api(username);
-    } else {
-        return html.node`
+	if (current >= next_fetch) {
+		return await fetch_status_api(username);
+	} else {
+		return html.node`
             <div class="status-cafe">
                 <div class="status-cafe-content is-loading">
                     <span class="status-cafe-text">
@@ -28,48 +29,50 @@ export async function fetch_status(username) {
                 </div>
             </div>
         `;
-    }
+	}
 }
 
 async function fetch_status_api(username) {
-    log(`fetching for ${username}`, 'status.cafe');
+	log(`fetching for ${username}`, 'status.cafe');
 
-    const new_date = new Date();
-    new_date.setSeconds(new_date.getSeconds() + 2.3);
-    set_storage('next_status_cafe_fetch', new_date.toString());
+	const new_date = new Date();
+	new_date.setSeconds(new_date.getSeconds() + 2.3);
+	set_storage('next_status_cafe_fetch', new_date.toString());
 
-    return fetch(`https://status.cafe/users/${username}/status.json`)
-        .then(res => {
-            if (!res.ok) {
-                log(`error fetching for ${username}`, 'status.cafe', 'error', { res });
-                return {
-                    author: username,
-                    content: 'status.cafe is unavailable right now..',
-                    face: '',
-                    timeAgo: ''
-                };
-            }
+	return fetch(`https://status.cafe/users/${username}/status.json`)
+		.then((res) => {
+			if (!res.ok) {
+				log(`error fetching for ${username}`, 'status.cafe', 'error', {
+					res,
+				});
+				return {
+					author: username,
+					content: 'status.cafe is unavailable right now..',
+					face: '',
+					timeAgo: '',
+				};
+			}
 
-            return res.json();
-        })
-        .then(data => {
-            if (data.face == null) data.face = '';
-            if (data.content == null) data.content = '...';
-            if (data.timeAgo == null) data.timeAgo = '...';
+			return res.json();
+		})
+		.then((data) => {
+			if (data.face == null) data.face = '';
+			if (data.content == null) data.content = '...';
+			if (data.timeAgo == null) data.timeAgo = '...';
 
-            const status_link = `https://status.cafe/users/${username}`;
+			const status_link = `https://status.cafe/users/${username}`;
 
-            const { trusted, dangerous } = can_trust_link(status_link);
+			const { trusted, dangerous } = can_trust_link(status_link);
 
-            return html.node`
+			return html.node`
                 <div class="status-cafe has-hover" onclick=${() => {
-                    if (trusted) {
-                        open(status_link);
-                        return;
-                    }
+				if (trusted) {
+					open(status_link);
+					return;
+				}
 
-                    external_url_prompt(status_link);
-                }}>
+				external_url_prompt(status_link);
+			}}>
                     <div class="status-cafe-content">
                         <span class="status-cafe-emoji">${data.face}</span>
                         <span class="status-cafe-text">
@@ -79,17 +82,19 @@ async function fetch_status_api(username) {
                     </div>
                 </div>
             `;
-        })
-        .catch(e => {
-            log(`error processing for ${username}`, 'status.cafe', 'error', { e });
+		})
+		.catch((e) => {
+			log(`error processing for ${username}`, 'status.cafe', 'error', {
+				e,
+			});
 
-            let error = e && e.message ? e.message : '';
+			let error = e && e.message ? e.message : '';
 
-            if (e instanceof TypeError) {
-                error = `${username} was not found on status.cafe`;
-            }
+			if (e instanceof TypeError) {
+				error = `${username} was not found on status.cafe`;
+			}
 
-            return html.node`
+			return html.node`
                 <div class="status-cafe">
                     <div class="status-cafe-content is-loading">
                         <span class="status-cafe-text">
@@ -98,5 +103,5 @@ async function fetch_status_api(username) {
                     </div>
                 </div>
             `;
-        });
+		});
 }

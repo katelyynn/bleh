@@ -1,109 +1,109 @@
 .tags-list,
 .catalogue-tags {
-    display: flex !important;
-    align-items: center;
-    gap: 4px;
-    margin: unset;
-    /* todo: work on this better, it only occurs if
-    user tags are too long next to global tags */
-    flex-wrap: wrap;
+	display: flex !important;
+	align-items: center;
+	gap: 4px;
+	margin: unset;
+	/* todo: work on this better, it only occurs if
+	user tags are too long next to global tags */
+	flex-wrap: wrap;
 }
 .tags-user-avatar {
-    display: none !important;
+	display: none !important;
 }
 
 .music-featured-artist-tags .tag,
 .catalogue-tags .tag {
-    display: flex;
-    margin: unset;
-    max-width: unset;
+	display: flex;
+	margin: unset;
+	max-width: unset;
 }
 /* apply tag styling to everything tag-related */
 .tag-item,
 .tags-add-cta,
 .tags-add,
 .tags-view-all {
-    --bg: transparent;
-    --bg-hov: oklch(var(--b4) / 40%);
-    --bg-atv: oklch(var(--b4) / 60%);
-    --col: oklch(var(--c3));
-    --shadow: inset 0 0 0 1px var(--card-border-base);
-    --padding: 5px 9px;
-    --radius: var(--item-med-radius);
-    min-width: 28px !important;
-    width: fit-content;
+	--bg: transparent;
+	--bg-hov: oklch(var(--b4) / 40%);
+	--bg-atv: oklch(var(--b4) / 60%);
+	--col: oklch(var(--c3));
+	--shadow: inset 0 0 0 1px var(--card-border-base);
+	--padding: 5px 9px;
+	--radius: var(--item-med-radius);
+	min-width: 28px !important;
+	width: fit-content;
 
-    --left: calc((28px - var(--icon-size)) / 2);
+	--left: calc((28px - var(--icon-size)) / 2);
 
-    min-height: unset;
-    margin-bottom: unset !important;
-    letter-spacing: unset !important;
-    margin: unset !important;
-    position: relative;
-    /* last.fm by default sets this to 150px,
-    with the padding in bleh this conflicts with eg.
-    the underground hip-hop tag */
-    max-width: 400px !important;
+	min-height: unset;
+	margin-bottom: unset !important;
+	letter-spacing: unset !important;
+	margin: unset !important;
+	position: relative;
+	/* last.fm by default sets this to 150px,
+	with the padding in bleh this conflicts with eg.
+	the underground hip-hop tag */
+	max-width: 400px !important;
 
-    &:not([href]) {
-        cursor: default;
-    }
+	&:not([href]) {
+		cursor: default;
+	}
 
-    &.user-created-tag {
-        --bg: oklch(var(--h3) / 5%);
-        --bg-hov: oklch(var(--h3) / 10%);
-        --bg-atv: oklch(var(--h3) / 15%);
-        color: oklch(var(--l2-c-theme-switch)) !important;
-        /*box-shadow: 0 0 0 2px oklch(var(--h4), 30%) inset, var(--interact-shadow) !important;*/
-    }
+	&.user-created-tag {
+		--bg: oklch(var(--h3) / 5%);
+		--bg-hov: oklch(var(--h3) / 10%);
+		--bg-atv: oklch(var(--h3) / 15%);
+		color: oklch(var(--l2-c-theme-switch)) !important;
+		/*box-shadow: 0 0 0 2px oklch(var(--h4), 30%) inset, var(--interact-shadow) !important;*/
+	}
 
-    &:not(.music-label) {
-        text-transform: lowercase !important;
-    }
+	&:not(.music-label) {
+		text-transform: lowercase !important;
+	}
 }
 
 .music-label {
-    transition-property: color;
-    transition-duration: var(--trans);
-    transition-timing-function: var(--trans-function);
+	transition-property: color;
+	transition-duration: var(--trans);
+	transition-timing-function: var(--trans-function);
 
-    &[aria-describedby] {
-        color: oklch(var(--l3-c));
-        transition: none;
-    }
+	&[aria-describedby] {
+		color: oklch(var(--l3-c));
+		transition: none;
+	}
 }
 
 .tag > a {
-    &:before {
-        content: '#' !important;
-        opacity: var(--tag-opacity);
-    }
+	&:before {
+		content: '#' !important;
+		opacity: var(--tag-opacity);
+	}
 }
 
 .tags-add-cta:before {
-    display: none;
+	display: none;
 }
 .catalogue-tags .tags-view-all {
-    --font-size: 0;
-    --mask: var(--icon-16-tag);
+	--font-size: 0;
+	--mask: var(--icon-16-tag);
 }
 
 .col-sm-8 {
-    padding: unset !important;
+	padding: unset !important;
 }
 
 /* user personal tags */
 .catalogue-tags .tags-separator {
-    display: block;
-    width: 100%;
-    margin: unset;
-    display: none;
+	display: block;
+	width: 100%;
+	margin: unset;
+	display: none;
 }
 
 /* add a tag */
 .tags-add {
-    --font-size: 0;
-    --mask: var(--icon-16-plus);
-    width: unset !important;
-    height: unset !important;
+	--font-size: 0;
+	--mask: var(--icon-16-plus);
+	width: unset !important;
+	height: unset !important;
 }

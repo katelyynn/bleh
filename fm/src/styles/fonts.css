@@ -7,87 +7,89 @@
 @import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&family=Flow+Circular&family=Funnel+Sans:ital,wght@0,300..800;1,300..800&family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&family=Iosevka+Charon:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&family=Instrument+Serif:ital@0;1&family=Sawarabi+Gothic&display=swap');
 
 @font-face {
-    font-family: 'Zpix';
-    src: url('https://katelyynn.github.io/needy-streamer-overdose-font/fonts/DinkieBitmap9px.woff') format('woff');
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
+	font-family: 'Zpix';
+	src: url('https://katelyynn.github.io/needy-streamer-overdose-font/fonts/DinkieBitmap9px.woff')
+		format('woff');
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap;
 }
 
 @font-face {
-    font-family: 'Expose';
-    src: url('https://katelyynn.github.io/mask/Expose-Regular.woff2') format('woff2');
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
+	font-family: 'Expose';
+	src: url('https://katelyynn.github.io/mask/Expose-Regular.woff2')
+		format('woff2');
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap;
 }
 
 body {
-    --font-head: Instrument Serif, var(--font);
-    --font-choice: Hanken Grotesk;
-    --font: var(--font-choice), Inter, Ubuntu Sans, Spline Sans, Roboto,
+	--font-head: Instrument Serif, var(--font);
+	--font-choice: Hanken Grotesk;
+	--font: var(--font-choice), Inter, Ubuntu Sans, Spline Sans, Roboto,
         var(--font-symbols), var(--font-i18n),
         Lucida Grande, Verdana, -apple-system, BlinkMacSystemFont,
         Segoe UI Emoji, sans-serif, -system-font;
 
-    --font-symbols: Apple Color Emoji, var(--font_emoji_name, ""), Apple Symbols, Iosevka Charon;
-    --font-i18n: Noto Sans, Noto Sans JP, Noto Sans KR, Noto Sans TC;
+	--font-symbols: Apple Color Emoji, var(--font_emoji_name, ""), Apple Symbols, Iosevka Charon;
+	--font-i18n: Noto Sans, Noto Sans JP, Noto Sans KR, Noto Sans TC;
 
-    --font-code:
-        Inconsolata, JetBrains Mono, Roboto Mono, monospace,
+	--font-code:
+		Inconsolata, JetBrains Mono, Roboto Mono, monospace,
         var(--font);
-    --font-brand: Darumadrop One, var(--font);
-    --font-size: 14px;
-    --line-height: calc(var(--font-size) + 4px);
-    --font-size-sm: 12px;
-    --line-height-sm: calc(var(--font-size-sm) + 4px);
+	--font-brand: Darumadrop One, var(--font);
+	--font-size: 14px;
+	--line-height: calc(var(--font-size) + 4px);
+	--font-size-sm: 12px;
+	--line-height-sm: calc(var(--font-size-sm) + 4px);
 
-    --font-size-head: 22px;
-    --line-height-head: 17px;
+	--font-size-head: 22px;
+	--line-height-head: 17px;
 
-    --font-weight-head: 300;
+	--font-weight-head: 300;
 
-    --font-size-head-2: 24px;
-    --line-height-head-2: 28px;
+	--font-size-head-2: 24px;
+	--line-height-head-2: 28px;
 
-    --font-size-head-3: 26px;
-    --line-height-head-3: 34px;
+	--font-size-head-3: 26px;
+	--line-height-head-3: 34px;
 
-    --font-style-head: italic;
+	--font-style-head: italic;
 
-    &[data-bleh--font_choice="font_2025"] {
-        --font-choice: Funnel Sans;
-    }
+	&[data-bleh--font_choice="font_2025"] {
+		--font-choice: Funnel Sans;
+	}
 
-    &[data-bleh--font_choice="hyperlegible"] {
-        --font-choice: Atkinson Hyperlegible Next;
-    }
+	&[data-bleh--font_choice="hyperlegible"] {
+		--font-choice: Atkinson Hyperlegible Next;
+	}
 
-    &[data-bleh--font_choice="custom"] {
-        --font-choice: var(--custom_font, "");
-    }
+	&[data-bleh--font_choice="custom"] {
+		--font-choice: var(--custom_font, "");
+	}
 
-    &[data-bleh--font_serif="false"] {
-        --font-head: var(--font);
-        --font-size-head: 16px;
-        --line-height-head: 20px;
-        --font-size-head-2: 16px;
-        --line-height-head-2: 20px;
-        --font-weight-head: var(--font-weight-medium);
-        --font-size-head-3: 18px;
-        --line-height-head-3: 22px;
-        --font-style-head: normal;
-    }
+	&[data-bleh--font_serif="false"] {
+		--font-head: var(--font);
+		--font-size-head: 16px;
+		--line-height-head: 20px;
+		--font-size-head-2: 16px;
+		--line-height-head-2: 20px;
+		--font-weight-head: var(--font-weight-medium);
+		--font-size-head-3: 18px;
+		--line-height-head-3: 22px;
+		--font-style-head: normal;
+	}
 }
 
 .setting-head {
-    font-family: var(--font-head);
-    font-size: var(--font-size-head-3) !important;
-    line-height: var(--line-height-head-3) !important;
-    font-weight: var(--font-weight-head) !important;
+	font-family: var(--font-head);
+	font-size: var(--font-size-head-3) !important;
+	line-height: var(--line-height-head-3) !important;
+	font-weight: var(--font-weight-head) !important;
 }
 
 .highlight {
-    color: oklch(var(--l3-c));
-    font-style: normal;
+	color: oklch(var(--l3-c));
+	font-style: normal;
 }

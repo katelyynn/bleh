@@ -1,44 +1,44 @@
 .error-inner {
-  text-align: left;
-  cursor: default;
+	text-align: left;
+	cursor: default;
 }
 
 .error-info {
-  --hue-over: var(--hue-neg);
-  --sat-over: var(--sat-neg);
-  --lit-over: var(--lit-neg);
-  max-width: 100%;
-  font-family: var(--font);
+	--hue-over: var(--hue-neg);
+	--sat-over: var(--sat-neg);
+	--lit-over: var(--lit-neg);
+	max-width: 100%;
+	font-family: var(--font);
 }
 
 .error-type {
-  color: oklch(var(--l3-c));
+	color: oklch(var(--l3-c));
 }
 
 .error-info-header {
-  font-weight: var(--font-weight-medium);
-  color: oklch(var(--c3));
+	font-weight: var(--font-weight-medium);
+	color: oklch(var(--c3));
 }
 
 .error-top {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+	display: flex;
+	align-items: center;
+	gap: 10px;
 
-  --icon-size: 32px;
+	--icon-size: 32px;
 
-  margin-bottom: var(--card-gap);
+	margin-bottom: var(--card-gap);
 }
 .error-top-info {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
 }
 
 .error-head {
-  color: oklch(var(--c1));
-  font-weight: var(--font-weight-medium);
-  font-size: 16px;
-  line-height: 20px;
-  cursor: default;
+	color: oklch(var(--c1));
+	font-weight: var(--font-weight-medium);
+	font-size: 16px;
+	line-height: 20px;
+	cursor: default;
 }

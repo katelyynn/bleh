@@ -9,19 +9,19 @@ import { settings } from '@/build/config';
 import { log } from '@/build/log.js';
 import { auth, page, root } from '@/build/page';
 import {
-    copy,
-    return_artist_from_track,
-    romanise,
-    sanitise
+	copy,
+	return_artist_from_track,
+	romanise,
+	sanitise,
 } from '@/build/tools';
 import { bleh_glacier_insights } from '@/pages/profile/glacier.js';
 import { patch_artist_ranks_in_list_view } from '@/components/music/colourful_counts';
 import {
-    correct_artist,
-    correct_item_by_artist,
-    name_includes,
-    smart_artists,
-    smart_title
+	correct_artist,
+	correct_item_by_artist,
+	name_includes,
+	smart_artists,
+	smart_title,
 } from '@/components/music/lotus';
 import { register_menu } from '@/components/menu';
 import { tl, trans } from '@/build/trans';
@@ -34,894 +34,1072 @@ import { header_colour } from '../page/colour';
 import { symbol } from '@/main';
 
 export function patch_titles(search = page.structure.main) {
-    if (page.subpage == 'tags_overview') return;
+	if (page.subpage == 'tags_overview') return;
 
-    if (!search) {
-        log(
-            'tracks could not be searched as search was undefined',
-            'tracks',
-            'log',
-            { search }
-        );
-        return;
-    }
+	if (!search) {
+		log(
+			'tracks could not be searched as search was undefined',
+			'tracks',
+			'log',
+			{ search },
+		);
+		return;
+	}
 
-    const tracklists = search.querySelectorAll('.chartlist:not(.chartlist__placeholder)');
+	const tracklists = search.querySelectorAll(
+		'.chartlist:not(.chartlist__placeholder)',
+	);
 
-    let insights = {
-        artist: {
-            display: false,
-            values: [],
-            labels: [],
-            highest: {
-                value: 0,
-                label: '',
-                link: '',
-                img: ''
-            }
-        },
-        album: {
-            display: false,
-            values: [],
-            labels: [],
-            highest: {
-                value: 0,
-                label: '',
-                link: '',
-                img: ''
-            }
-        },
-        track: {
-            display: false,
-            values: [],
-            labels: [],
-            highest: {
-                value: 0,
-                label: '',
-                link: '',
-                img: ''
-            }
-        }
-    };
+	let insights = {
+		artist: {
+			display: false,
+			values: [],
+			labels: [],
+			highest: {
+				value: 0,
+				label: '',
+				link: '',
+				img: '',
+			},
+		},
+		album: {
+			display: false,
+			values: [],
+			labels: [],
+			highest: {
+				value: 0,
+				label: '',
+				link: '',
+				img: '',
+			},
+		},
+		track: {
+			display: false,
+			values: [],
+			labels: [],
+			highest: {
+				value: 0,
+				label: '',
+				link: '',
+				img: '',
+			},
+		},
+	};
 
-    const track_layout = settings.track_layout;
-    const album_name_location = settings.track_album_name_location;
-    const season = page.state.seasons.current?.id || 'none';
+	const track_layout = settings.track_layout;
+	const album_name_location = settings.track_album_name_location;
+	const season = page.state.seasons.current?.id || 'none';
 
-    tracklists.forEach((tracklist) => {
-        if (!tracklist) return;
+	tracklists.forEach((tracklist) => {
+		if (!tracklist) return;
 
-        log('found, checking', 'tracks', 'log', { tracklist, search });
+		log('found, checking', 'tracks', 'log', { tracklist, search });
 
-        // used to ensure this hasnt been run thru
-        if (
-            tracklist.querySelector(
-                'tbody > .chartlist-row:first-child > .kate-placeholder'
-            )
-        )
-            return;
+		// used to ensure this hasnt been run thru
+		if (
+			tracklist.querySelector(
+				'tbody > .chartlist-row:first-child > .kate-placeholder',
+			)
+		) {
+			return;
+		}
 
-        log('new!', 'tracks', 'info', { tracklist });
+		log('new!', 'tracks', 'info', { tracklist });
 
-        const wide = tracklist.classList.contains('chartlist--wide-artist-column');
+		const wide = tracklist.classList.contains(
+			'chartlist--wide-artist-column',
+		);
 
-        const tracks = tracklist.querySelectorAll(':scope > tbody > :is(.chartlist-row:not(.chartlist__placeholder-row), .chartlist-row--interlist-ad)');
+		const tracks = tracklist.querySelectorAll(
+			':scope > tbody > :is(.chartlist-row:not(.chartlist__placeholder-row), .chartlist-row--interlist-ad)',
+		);
 
-        tracks.forEach((track, index) => {
-            smart_track(track, index);
-        });
+		tracks.forEach((track, index) => {
+			smart_track(track, index);
+		});
 
-        function smart_track(track, index) {
-            if (!track) return;
+		function smart_track(track, index) {
+			if (!track) return;
 
-            if (track.getAttribute('data-track-type')) return;
+			if (track.getAttribute('data-track-type')) return;
 
-            // ads slowly move up the tree until eventually causing a crash
-            if (track.classList[0] == 'chartlist-row--interlist-ad') {
-                track.parentElement.removeChild(track);
-                return;
-            }
+			// ads slowly move up the tree until eventually causing a crash
+			if (track.classList[0] == 'chartlist-row--interlist-ad') {
+				track.parentElement.removeChild(track);
+				return;
+			}
 
-            track.style.setProperty('--delay', index * 0.04 + 's');
-            track.setAttribute('data-album-name-location', album_name_location);
+			track.style.setProperty('--delay', index * 0.04 + 's');
+			track.setAttribute('data-album-name-location', album_name_location);
 
-            if (track[symbol]) {
-                log('returning as track has patched data', 'tracks');
-                return;
-            }
-            track[symbol] = true;
+			if (track[symbol]) {
+				log('returning as track has patched data', 'tracks');
+				return;
+			}
+			track[symbol] = true;
 
-            let track_title = track.querySelector('.chartlist-name a:not(.offset-section-anchor)');
-            if (!track_title) return;
+			let track_title = track.querySelector(
+				'.chartlist-name a:not(.offset-section-anchor)',
+			);
+			if (!track_title) return;
 
-            if (track_title.hasAttribute('title')) {
-                track_title.setAttribute(
-                    'data-name',
-                    track_title.getAttribute('title')
-                );
-                track_title.removeAttribute('title');
-            }
+			if (track_title.hasAttribute('title')) {
+				track_title.setAttribute(
+					'data-name',
+					track_title.getAttribute('title'),
+				);
+				track_title.removeAttribute('title');
+			}
 
-            let track_info = track.querySelector(':scope > .track-info');
-            if (!track_info) {
-                track_info = html.node`
-                    <div class="track-info" data-has-bar=${tracklist.classList.contains('chartlist--with-bar')}>
+			let track_info = track.querySelector(':scope > .track-info');
+			if (!track_info) {
+				track_info = html.node`
+                    <div class="track-info" data-has-bar=${
+					tracklist.classList.contains('chartlist--with-bar')
+				}>
                         ${track_title.parentElement}
                     </div>
                 `;
-                track.appendChild(track_info);
-            }
-            track_info.setAttribute('data-track-layout', track_layout);
-            track_info.setAttribute('data-album-name-location', album_name_location);
-            track.setAttribute(
-                'data-has-bar',
-                tracklist.classList.contains('chartlist--with-bar')
-            );
+				track.appendChild(track_info);
+			}
+			track_info.setAttribute('data-track-layout', track_layout);
+			track_info.setAttribute(
+				'data-album-name-location',
+				album_name_location,
+			);
+			track.setAttribute(
+				'data-has-bar',
+				tracklist.classList.contains('chartlist--with-bar'),
+			);
 
-            // for albums and tracks 'avatar' is replaced with 'cover-art'
-            // we can use this to detect if the item is either a user or an artist
-            let is_user = track.querySelector('.chartlist-image .avatar');
-            let is_artist = false;
+			// for albums and tracks 'avatar' is replaced with 'cover-art'
+			// we can use this to detect if the item is either a user or an artist
+			let is_user = track.querySelector('.chartlist-image .avatar');
+			let is_artist = false;
 
-            // now lets check if we have a user or an artist
-            if (is_user) {
-                let link = track_title.getAttribute('href');
-                if (link.startsWith(`${root}music/`)) {
-                    // this is an artist
-                    is_user = false;
-                    is_artist = true;
-                }
-            }
+			// now lets check if we have a user or an artist
+			if (is_user) {
+				let link = track_title.getAttribute('href');
+				if (link.startsWith(`${root}music/`)) {
+					// this is an artist
+					is_user = false;
+					is_artist = true;
+				}
+			}
 
-            const track_type = track.querySelector(':scope > .chartlist-type');
-            if (
-                track_type &&
-                track_type.classList[1] == 'chartlist-type--artist'
-            ) {
-                is_user = false;
-                is_artist = true;
-            }
+			const track_type = track.querySelector(':scope > .chartlist-type');
+			if (
+				track_type &&
+				track_type.classList[1] == 'chartlist-type--artist'
+			) {
+				is_user = false;
+				is_artist = true;
+			}
 
-            log(
-                `is user: ${is_user}, is artist: ${is_artist}`,
-                'tracks',
-                'log'
-            );
+			log(
+				`is user: ${is_user}, is artist: ${is_artist}`,
+				'tracks',
+				'log',
+			);
 
-            if (is_user) {
-                track.setAttribute('data-track-type', 'user');
+			if (is_user) {
+				track.setAttribute('data-track-type', 'user');
 
-                if (settings.colourful_counts)
-                    patch_artist_ranks_in_list_view(track);
+				if (settings.colourful_counts) {
+					patch_artist_ranks_in_list_view(track);
+				}
 
-                render(track_title, html`
-                    <span><span class="at">@</span>${track_title.textContent}</span>
-                `);
+				render(
+					track_title,
+					html`
+						<span><span class="at">@</span>${track_title
+							.textContent}</span>
+					`,
+				);
 
-                log('finished user stuff, returning', 'tracks', 'log');
-                return;
-            }
+				log('finished user stuff, returning', 'tracks', 'log');
+				return;
+			}
 
-            if (is_artist) {
-                track.classList.remove('chartlist-row--with-artist');
-                track.setAttribute('data-track-type', 'artist');
+			if (is_artist) {
+				track.classList.remove('chartlist-row--with-artist');
+				track.setAttribute('data-track-type', 'artist');
 
-                if (settings.corrections)
-                    track_title.textContent = correct_artist(
-                        track_title.getAttribute('data-name')
-                    );
+				if (settings.corrections) {
+					track_title.textContent = correct_artist(
+						track_title.getAttribute('data-name'),
+					);
+				}
 
-                let bar = track.querySelector('.chartlist-count-bar-slug');
-                if (bar) {
-                    if (settings.colourful_counts)
-                        patch_artist_ranks_in_list_view(track);
+				let bar = track.querySelector('.chartlist-count-bar-slug');
+				if (bar) {
+					if (settings.colourful_counts) {
+						patch_artist_ranks_in_list_view(track);
+					}
 
-                    insights.artist.display = true;
+					insights.artist.display = true;
 
-                    let value = parseInt(bar.getAttribute('data-stat-value'));
-                    insights.artist.values.push(value);
+					let value = parseInt(bar.getAttribute('data-stat-value'));
+					insights.artist.values.push(value);
 
-                    if (value > insights.artist.highest.value)
-                        insights.artist.highest.value = value;
+					if (value > insights.artist.highest.value) {
+						insights.artist.highest.value = value;
+					}
 
-                    log(
-                        `pushed insight artist label of ${track_title.textContent}`,
-                        'glacier library',
-                        'log'
-                    );
-                    insights.artist.labels.push(track_title.textContent);
+					log(
+						`pushed insight artist label of ${track_title.textContent}`,
+						'glacier library',
+						'log',
+					);
+					insights.artist.labels.push(track_title.textContent);
 
-                    log('finished artist stuff, returning', 'tracks', 'log');
-                }
+					log('finished artist stuff, returning', 'tracks', 'log');
+				}
 
-                return;
-            }
+				return;
+			}
 
-            let is_album = track.hasAttribute('data-album-row');
-            if (is_album) track.classList.add('bleh--is-album');
+			let is_album = track.hasAttribute('data-album-row');
+			if (is_album) track.classList.add('bleh--is-album');
 
-            let track_artist = return_artist_from_track(
-                track_title.getAttribute('href'),
-                is_album
-            );
-            log(
-                `returned ${track_artist} from url ${track_title.getAttribute('href')}`,
-                'track'
-            );
-            // when focused on a track in a library, an artist field is redundant
-            if (!wide) track.classList.add('chartlist-row--with-artist');
+			let track_artist = return_artist_from_track(
+				track_title.getAttribute('href'),
+				is_album,
+			);
+			log(
+				`returned ${track_artist} from url ${
+					track_title.getAttribute('href')
+				}`,
+				'track',
+			);
+			// when focused on a track in a library, an artist field is redundant
+			if (!wide) track.classList.add('chartlist-row--with-artist');
 
-            const bar = track.querySelector('.chartlist-count-bar-slug');
-            if (bar) {
-                let value = parseInt(bar.getAttribute('data-stat-value'));
+			const bar = track.querySelector('.chartlist-count-bar-slug');
+			if (bar) {
+				let value = parseInt(bar.getAttribute('data-stat-value'));
 
-                if (is_album) {
-                    insights.album.display = true;
-                    insights.album.values.push(value);
+				if (is_album) {
+					insights.album.display = true;
+					insights.album.values.push(value);
 
-                    if (value > insights.album.highest.value)
-                        insights.album.highest.value = value;
-                } else {
-                    insights.track.display = true;
-                    insights.track.values.push(value);
+					if (value > insights.album.highest.value) {
+						insights.album.highest.value = value;
+					}
+				} else {
+					insights.track.display = true;
+					insights.track.values.push(value);
 
-                    if (value > insights.track.highest.value)
-                        insights.track.highest.value = value;
-                }
-            }
+					if (value > insights.track.highest.value) {
+						insights.track.highest.value = value;
+					}
+				}
+			}
 
-            const is_active = track.classList.contains('chartlist-row--now-scrobbling');
-            const has_bar = track.querySelector(':scope > .chartlist-bar');
+			const is_active = track.classList.contains(
+				'chartlist-row--now-scrobbling',
+			);
+			const has_bar = track.querySelector(':scope > .chartlist-bar');
 
-            if (has_bar) {
-                const count_bar = has_bar.querySelector(':scope > .chartlist-count-bar');
-                count_bar.setAttribute('data-season', season);
-            }
+			if (has_bar) {
+				const count_bar = has_bar.querySelector(
+					':scope > .chartlist-count-bar',
+				);
+				count_bar.setAttribute('data-season', season);
+			}
 
-            // menu
-            let track_legacy_menu = track.querySelector('.chartlist-more-menu');
+			// menu
+			let track_legacy_menu = track.querySelector('.chartlist-more-menu');
 
-            let track_timestamp = track.querySelector('.chartlist-timestamp span');
-            let track_timestamp_contents;
-            if (track_timestamp && !is_active) {
-                track_timestamp_contents = track_timestamp.getAttribute('title');
+			let track_timestamp = track.querySelector(
+				'.chartlist-timestamp span',
+			);
+			let track_timestamp_contents;
+			if (track_timestamp && !is_active) {
+				track_timestamp_contents = track_timestamp.getAttribute(
+					'title',
+				);
 
-                if (!track_timestamp_contents) track_timestamp_contents = track_timestamp.getAttribute('data-title');
+				if (!track_timestamp_contents) {
+					track_timestamp_contents = track_timestamp.getAttribute(
+						'data-title',
+					);
+				}
 
-                if (track_timestamp_contents) {
-                    track_timestamp.removeAttribute('title');
-                    track_timestamp.setAttribute('data-title', track_timestamp_contents);
+				if (track_timestamp_contents) {
+					track_timestamp.removeAttribute('title');
+					track_timestamp.setAttribute(
+						'data-title',
+						track_timestamp_contents,
+					);
 
-                    tippy(track_timestamp, {
-                        content: track_timestamp_contents
-                    });
-                }
-            }
+					tippy(track_timestamp, {
+						content: track_timestamp_contents,
+					});
+				}
+			}
 
-            let album = track.querySelector('.chartlist-album a');
-            if (!is_album && album)
-                album.textContent = correct_item_by_artist(
-                    album.textContent,
-                    track_artist
-                );
+			let album = track.querySelector('.chartlist-album a');
+			if (!is_album && album) {
+				album.textContent = correct_item_by_artist(
+					album.textContent,
+					track_artist,
+				);
+			}
 
-            const album_link = track.querySelector('.chartlist-image a');
+			const album_link = track.querySelector('.chartlist-image a');
 
-            const show_album_text =
-                (is_active || settings.expand_tracks == 'always') &&
-                settings.expand_tracks != 'never' &&
-                settings.track_layout == 'column';
-            track.setAttribute('data-show-album-text', show_album_text);
+			const show_album_text =
+				(is_active || settings.expand_tracks == 'always') &&
+				settings.expand_tracks != 'never' &&
+				settings.track_layout == 'column';
+			track.setAttribute('data-show-album-text', show_album_text);
 
-            const image_wrap = track.querySelector('.chartlist-image');
-            let link;
-            let image;
-            let alt;
-            let album_artist;
-            if (image_wrap) {
-                link = image_wrap.querySelector('.cover-art');
-                image = link.querySelector('img');
+			const image_wrap = track.querySelector('.chartlist-image');
+			let link;
+			let image;
+			let alt;
+			let album_artist;
+			if (image_wrap) {
+				link = image_wrap.querySelector('.cover-art');
+				image = link.querySelector('img');
 
-                if (link.href) album_artist = return_artist_from_track(link.href, true);
+				if (link.href) {
+					album_artist = return_artist_from_track(link.href, true);
+				}
 
-                alt = romanise(
-                    correct_item_by_artist(
-                        image.getAttribute('alt'),
-                        track_artist
-                    )
-                );
+				alt = romanise(
+					correct_item_by_artist(
+						image.getAttribute('alt'),
+						track_artist,
+					),
+				);
 
-                tippy(image_wrap, {
-                    content: alt
-                });
+				tippy(image_wrap, {
+					content: alt,
+				});
 
-                if (!is_album && has_bar) {
-                    hoshino(
-                        image,
-                        track_title.getAttribute('data-name'),
-                        track_artist,
-                        link
-                    );
-                }
-            }
+				if (!is_album && has_bar) {
+					hoshino(
+						image,
+						track_title.getAttribute('data-name'),
+						track_artist,
+						link,
+					);
+				}
+			}
 
-            let song_artist_element = track.querySelector('.chartlist-artist');
-            if (song_artist_element) {
-                track_info.appendChild(song_artist_element);
-            }
+			let song_artist_element = track.querySelector('.chartlist-artist');
+			if (song_artist_element) {
+				track_info.appendChild(song_artist_element);
+			}
 
-            if (settings.format_guest_features) {
-                const formatted = name_includes(
-                    track_title.getAttribute('data-name'),
-                    track_artist,
-                    track_title.getAttribute('data-inherit-artists')
-                );
-                console.log('formatted', formatted);
+			if (settings.format_guest_features) {
+				const formatted = name_includes(
+					track_title.getAttribute('data-name'),
+					track_artist,
+					track_title.getAttribute('data-inherit-artists'),
+				);
+				console.log('formatted', formatted);
 
-                track_title.setAttribute('data-name', formatted.corrected_title);
+				track_title.setAttribute(
+					'data-name',
+					formatted.corrected_title,
+				);
 
-                // parse tags into text
-                render(track_title, smart_title(formatted.song_title, formatted.song_tags));
+				// parse tags into text
+				render(
+					track_title,
+					smart_title(formatted.song_title, formatted.song_tags),
+				);
 
-                if (!song_artist_element && !is_user) {
-                    song_artist_element = document.createElement('td');
-                    song_artist_element.classList.add('chartlist-artist');
-                    track_info.appendChild(song_artist_element);
-                }
+				if (!song_artist_element && !is_user) {
+					song_artist_element = document.createElement('td');
+					song_artist_element.classList.add('chartlist-artist');
+					track_info.appendChild(song_artist_element);
+				}
 
-                if (
-                    song_artist_element.textContent
-                        .replaceAll('+', ' ')
-                        .trim() === track_artist ||
-                    song_artist_element.textContent.trim() === ''
-                ) {
-                    log(
-                        'artist either matches or is blank, replacing',
-                        'tracks',
-                        'log'
-                    );
-                    // replaces with corrected artist if applicable
-                    render(song_artist_element, smart_artists(formatted.song_artist, formatted.song_guests));
-                }
+				if (
+					song_artist_element.textContent
+							.replaceAll('+', ' ')
+							.trim() === track_artist ||
+					song_artist_element.textContent.trim() === ''
+				) {
+					log(
+						'artist either matches or is blank, replacing',
+						'tracks',
+						'log',
+					);
+					// replaces with corrected artist if applicable
+					render(
+						song_artist_element,
+						smart_artists(
+							formatted.song_artist,
+							formatted.song_guests,
+						),
+					);
+				}
 
-                if (track.getAttribute('data-disambig') == 'explicit') {
-                    song_artist_element.insertBefore(
-                        html.node`
-                        <span class="track-explicit icon">${tl(trans.explicit)}</span>
+				if (track.getAttribute('data-disambig') == 'explicit') {
+					song_artist_element.insertBefore(
+						html.node`
+                        <span class="track-explicit icon">${
+							tl(trans.explicit)
+						}</span>
                     `,
-                        song_artist_element.firstChild
-                    );
-                }
+						song_artist_element.firstChild,
+					);
+				}
 
-                if (track_legacy_menu) {
-                    track.preview = html.node`
+				if (track_legacy_menu) {
+					track.preview = html.node`
                         <div class="track-preview">
                             <div class="track-preview-image">
                                 <div class="inner-image">
-                                    ${image ? html.node`<img src=${image.src} alt=${formatted.corrected_title}>` : html.node`<img class="missing-track" alt="">`}
+                                    ${
+						image
+							? html
+								.node`<img src=${image.src} alt=${formatted.corrected_title}>`
+							: html.node`<img class="missing-track" alt="">`
+					}
                                 </div>
                             </div>
                             <div class="track-preview-info">
                                 <h5 class="track-preview-text track-preview-title">${formatted.song_title}</h5>
-                                <p class="track-preview-text track-preview-artist">${song_artist_element.querySelector('a').textContent}</p>
+                                <p class="track-preview-text track-preview-artist">${
+						song_artist_element.querySelector('a').textContent
+					}</p>
                                 <div class="track-preview-tags">
-                                    ${formatted.song_tags.map(
-                                        (tag) => html.node`
+                                    ${
+						formatted.song_tags.map(
+							(tag) =>
+								html.node`
                                         <div class="feat" data-tag-type="${tag.type}" data-tag-group="${tag.group}">${tag.text}</div>
-                                    `
-                                    )}
+                                    `,
+						)
+					}
                                 </div>
                                 ${
-                                    is_album ? '' : (
-                                        html.node`<p class="track-preview-text track-preview-album">${
-                                            image && album_link ?
-                                                correct_item_by_artist(
-                                                    image.getAttribute('alt'),
-                                                    track_artist
-                                                )
-                                            : album ? album.textContent
-                                            : ''
-                                        }</p>`
-                                    )
-                                }
-                                ${track_timestamp && track_timestamp_contents ? html.node`<p class="track-preview-text track-preview-timestamp">${track_timestamp_contents}</p>` : ''}
+						is_album ? '' : (
+							html.node`<p class="track-preview-text track-preview-album">${
+								image && album_link
+									? correct_item_by_artist(
+										image.getAttribute('alt'),
+										track_artist,
+									)
+									: album
+									? album.textContent
+									: ''
+							}</p>`
+						)
+					}
                                 ${
-                                    image?.getAttribute('data-hoshino') ?
-                                        html.node`
+						track_timestamp && track_timestamp_contents
+							? html
+								.node`<p class="track-preview-text track-preview-timestamp">${track_timestamp_contents}</p>`
+							: ''
+					}
+                                ${
+						image?.getAttribute('data-hoshino')
+							? html.node`
                                             <div class="hoshino-marker">
                                                 <div class="bleh-icon" />
                                             </div>
                                         `
-                                    :   ''
-                                }
+							: ''
+					}
                             </div>
                         </div>
                     `;
-                }
-            } else if (settings.corrections) {
-                let song_artist_element = track.querySelector(
-                    '.chartlist-artist a'
-                );
-                if (song_artist_element) {
-                    let corrected_title = romanise(
-                        correct_item_by_artist(
-                            track_title.textContent,
-                            song_artist_element.textContent
-                        )
-                    );
-                    track_title.textContent = corrected_title;
-                    track_title.setAttribute('data-name', corrected_title);
+				}
+			} else if (settings.corrections) {
+				let song_artist_element = track.querySelector(
+					'.chartlist-artist a',
+				);
+				if (song_artist_element) {
+					let corrected_title = romanise(
+						correct_item_by_artist(
+							track_title.textContent,
+							song_artist_element.textContent,
+						),
+					);
+					track_title.textContent = corrected_title;
+					track_title.setAttribute('data-name', corrected_title);
 
-                    let corrected_artist = romanise(
-                        correct_artist(song_artist_element.textContent)
-                    );
-                    song_artist_element.textContent = corrected_artist;
-                    song_artist_element.setAttribute('title', corrected_artist);
-                } else {
-                    let corrected_title = correct_item_by_artist(
-                        track_title.textContent,
-                        track_artist
-                    );
-                    track_title.textContent = corrected_title;
-                    track_title.setAttribute('data-name', corrected_title);
-                }
-            }
+					let corrected_artist = romanise(
+						correct_artist(song_artist_element.textContent),
+					);
+					song_artist_element.textContent = corrected_artist;
+					song_artist_element.setAttribute('title', corrected_artist);
+				} else {
+					let corrected_title = correct_item_by_artist(
+						track_title.textContent,
+						track_artist,
+					);
+					track_title.textContent = corrected_title;
+					track_title.setAttribute('data-name', corrected_title);
+				}
+			}
 
-            // due to the library refreshing and destroying the html references
-            // we need to remove the previous more button
-            let previous = track.querySelectorAll(':scope > .more-button-wrapper');
-            previous.forEach((elem) => {
-                elem.remove();
-            });
+			// due to the library refreshing and destroying the html references
+			// we need to remove the previous more button
+			let previous = track.querySelectorAll(
+				':scope > .more-button-wrapper',
+			);
+			previous.forEach((elem) => {
+				elem.remove();
+			});
 
-            if (track_legacy_menu) {
-                let menu;
+			if (track_legacy_menu) {
+				let menu;
 
-                const user = ['user', 'overview'].includes(page.type) ? page.name : auth.name;
+				const user = ['user', 'overview'].includes(page.type)
+					? page.name
+					: auth.name;
 
-                // then we need to decide for ourselves whether u can delete or obsess
-                // since we cant rely on the elements existing anymore
-                const is_own_profile = user == auth.name;
-                const can_edit = is_own_profile && !is_active && (!is_album ? !has_bar : true) && auth.pro && ['user', 'overview'].includes(page.type);
-                const can_delete = is_own_profile && !is_active && !has_bar && !is_album && ['user', 'overview'].includes(page.type);
+				// then we need to decide for ourselves whether u can delete or obsess
+				// since we cant rely on the elements existing anymore
+				const is_own_profile = user == auth.name;
+				const can_edit = is_own_profile && !is_active &&
+					(!is_album ? !has_bar : true) && auth.pro &&
+					['user', 'overview'].includes(page.type);
+				const can_delete = is_own_profile && !is_active && !has_bar &&
+					!is_album && ['user', 'overview'].includes(page.type);
 
-                const can_copy_scrobble = !is_album && !has_bar && !is_active && ['user', 'overview'].includes(page.type);
+				const can_copy_scrobble = !is_album && !has_bar && !is_active &&
+					['user', 'overview'].includes(page.type);
 
-                const timestamp = parseInt(track.getAttribute('data-timestamp')) || Math.floor(new Date(track_timestamp_contents?.replace(/^[A-Za-z]+\s+/, '').replace(',', '').trim()).getTime() / 1000);
+				const timestamp =
+					parseInt(track.getAttribute('data-timestamp')) ||
+					Math.floor(
+						new Date(
+							track_timestamp_contents?.replace(
+								/^[A-Za-z]+\s+/,
+								'',
+							).replace(',', '').trim(),
+						).getTime() / 1000,
+					);
 
-                let more_button = html.node`
+				let more_button = html.node`
                     <button class="btn track-more-button icon chibi" data-type="more" onclick=${() => {
-                        log('requested track in-built', 'menu', 'info', {
-                            menu
-                        });
-                        menu.setProps({
-                            placement: 'bottom',
-                            offset: [],
-                            getReferenceClientRect: null
-                        });
+					log('requested track in-built', 'menu', 'info', {
+						menu,
+					});
+					menu.setProps({
+						placement: 'bottom',
+						offset: [],
+						getReferenceClientRect: null,
+					});
 
-                        if (menu.state.isShown) {
-                            menu.hide();
-                        } else {
-                            menu.show();
-                        }
-                    }}>
+					if (menu.state.isShown) {
+						menu.hide();
+					} else {
+						menu.show();
+					}
+				}}>
                         ${tl(trans.more)}
                     </button>
                 `;
 
-                tippy(more_button, {
-                    content: tl(trans.more)
-                });
+				tippy(more_button, {
+					content: tl(trans.more),
+				});
 
-                track.appendChild(html.node`
+				track.appendChild(html.node`
                     <td class="more-button-wrapper">
                         ${more_button}
                     </td>
                 `);
 
-                setTimeout(() => {
-                    let edit_button = track_legacy_menu.querySelector('[data-analytics-action="EditScrobbleOpen"]:not([href$="login?next=/pro"])');
-                    let bulk_edit_button = track_legacy_menu.querySelector(
-                        '[data-analytics-action="BulkEditScrobblesOpen"]'
-                    );
-                    let delete_button =
-                        track_legacy_menu.querySelector('.more-item--delete');
+				setTimeout(() => {
+					let edit_button = track_legacy_menu.querySelector(
+						'[data-analytics-action="EditScrobbleOpen"]:not([href$="login?next=/pro"])',
+					);
+					let bulk_edit_button = track_legacy_menu.querySelector(
+						'[data-analytics-action="BulkEditScrobblesOpen"]',
+					);
+					let delete_button = track_legacy_menu.querySelector(
+						'.more-item--delete',
+					);
 
-                    if (edit_button) {
-                        log('has edit button', 'track', 'info', { edit_button });
-                        let form = edit_button.parentElement;
+					if (edit_button) {
+						log('has edit button', 'track', 'info', {
+							edit_button,
+						});
+						let form = edit_button.parentElement;
 
-                        page.token = form.querySelector(
-                            '[name="csrfmiddlewaretoken"]'
-                        )?.value;
-                        track.setAttribute(
-                            'data-action',
-                            form.getAttribute('action')
-                        );
+						page.token = form.querySelector(
+							'[name="csrfmiddlewaretoken"]',
+						)?.value;
+						track.setAttribute(
+							'data-action',
+							form.getAttribute('action'),
+						);
 
-                        if (!is_album) {
-                            let album_name = form.querySelector(
-                                '[name="album_name"]'
-                            );
-                            let album_artist_name = form.querySelector(
-                                '[name="album_artist_name"]'
-                            );
+						if (!is_album) {
+							let album_name = form.querySelector(
+								'[name="album_name"]',
+							);
+							let album_artist_name = form.querySelector(
+								'[name="album_artist_name"]',
+							);
 
-                            track.setAttribute(
-                                'data-artist-name',
-                                correct_artist(
-                                    form.querySelector('[name="artist_name"]')
-                                        ?.value
-                                )
-                            );
-                            track.setAttribute(
-                                'data-track-name',
-                                correct_item_by_artist(
-                                    form.querySelector('[name="track_name"]')
-                                        ?.value,
-                                    form.querySelector('[name="artist_name"]')
-                                        ?.value
-                                )
-                            );
-                            if (album_name)
-                                track.setAttribute(
-                                    'data-album-name',
-                                    correct_item_by_artist(
-                                        album_name?.value,
-                                        form.querySelector(
-                                            '[name="artist_name"]'
-                                        )?.value
-                                    )
-                                );
-                            if (album_artist_name)
-                                track.setAttribute(
-                                    'data-album-artist-name',
-                                    correct_artist(album_artist_name?.value)
-                                );
-                            track.setAttribute(
-                                'data-timestamp',
-                                form.querySelector('[name="timestamp"]')?.value
-                            );
-                        } else {
-                            track.setAttribute(
-                                'data-album-name',
-                                correct_item_by_artist(
-                                    form.querySelector('[name="album_name"]')
-                                        ?.value,
-                                    form.querySelector(
-                                        '[name="album_artist_name"]'
-                                    )?.value
-                                )
-                            );
-                            track.setAttribute(
-                                'data-album-artist-name',
-                                correct_artist(
-                                    form.querySelector(
-                                        '[name="album_artist_name"]'
-                                    )?.value
-                                )
-                            );
-                            track.setAttribute(
-                                'data-album-name-original',
-                                correct_item_by_artist(
-                                    form.querySelector(
-                                        '[name="album_name_original"]'
-                                    )?.value,
-                                    form.querySelector(
-                                        '[name="album_artist_name_original"]'
-                                    )?.value
-                                )
-                            );
-                            track.setAttribute(
-                                'data-album-artist-name-original',
-                                correct_artist(
-                                    form.querySelector(
-                                        '[name="album_artist_name_original"]'
-                                    )?.value
-                                )
-                            );
-                            track.setAttribute(
-                                'data-album-image',
-                                form.querySelector('[name="album_image"]')?.value
-                            );
-                            track.setAttribute(
-                                'data-count',
-                                form.querySelector('[name="count"]')?.value
-                            );
-                        }
-                    } else if (delete_button) {
-                        log('has delete button', 'track', 'info', { delete_button });
-                        let form = delete_button.parentElement;
+							track.setAttribute(
+								'data-artist-name',
+								correct_artist(
+									form.querySelector('[name="artist_name"]')
+										?.value,
+								),
+							);
+							track.setAttribute(
+								'data-track-name',
+								correct_item_by_artist(
+									form.querySelector('[name="track_name"]')
+										?.value,
+									form.querySelector('[name="artist_name"]')
+										?.value,
+								),
+							);
+							if (album_name) {
+								track.setAttribute(
+									'data-album-name',
+									correct_item_by_artist(
+										album_name?.value,
+										form.querySelector(
+											'[name="artist_name"]',
+										)?.value,
+									),
+								);
+							}
+							if (album_artist_name) {
+								track.setAttribute(
+									'data-album-artist-name',
+									correct_artist(album_artist_name?.value),
+								);
+							}
+							track.setAttribute(
+								'data-timestamp',
+								form.querySelector('[name="timestamp"]')?.value,
+							);
+						} else {
+							track.setAttribute(
+								'data-album-name',
+								correct_item_by_artist(
+									form.querySelector('[name="album_name"]')
+										?.value,
+									form.querySelector(
+										'[name="album_artist_name"]',
+									)?.value,
+								),
+							);
+							track.setAttribute(
+								'data-album-artist-name',
+								correct_artist(
+									form.querySelector(
+										'[name="album_artist_name"]',
+									)?.value,
+								),
+							);
+							track.setAttribute(
+								'data-album-name-original',
+								correct_item_by_artist(
+									form.querySelector(
+										'[name="album_name_original"]',
+									)?.value,
+									form.querySelector(
+										'[name="album_artist_name_original"]',
+									)?.value,
+								),
+							);
+							track.setAttribute(
+								'data-album-artist-name-original',
+								correct_artist(
+									form.querySelector(
+										'[name="album_artist_name_original"]',
+									)?.value,
+								),
+							);
+							track.setAttribute(
+								'data-album-image',
+								form.querySelector('[name="album_image"]')
+									?.value,
+							);
+							track.setAttribute(
+								'data-count',
+								form.querySelector('[name="count"]')?.value,
+							);
+						}
+					} else if (delete_button) {
+						log('has delete button', 'track', 'info', {
+							delete_button,
+						});
+						let form = delete_button.parentElement;
 
-                        page.token = form.querySelector(
-                            '[name="csrfmiddlewaretoken"]'
-                        )?.value;
-                        track.setAttribute(
-                            'data-artist-name',
-                            correct_artist(
-                                form.querySelector('[name="artist_name"]')?.value
-                            )
-                        );
-                        track.setAttribute(
-                            'data-track-name',
-                            correct_item_by_artist(
-                                form.querySelector('[name="track_name"]')?.value,
-                                form.querySelector('[name="artist_name"]')?.value
-                            )
-                        );
-                        track.setAttribute(
-                            'data-timestamp',
-                            form.querySelector('[name="timestamp"]')?.value
-                        );
-                    }
+						page.token = form.querySelector(
+							'[name="csrfmiddlewaretoken"]',
+						)?.value;
+						track.setAttribute(
+							'data-artist-name',
+							correct_artist(
+								form.querySelector('[name="artist_name"]')
+									?.value,
+							),
+						);
+						track.setAttribute(
+							'data-track-name',
+							correct_item_by_artist(
+								form.querySelector('[name="track_name"]')
+									?.value,
+								form.querySelector('[name="artist_name"]')
+									?.value,
+							),
+						);
+						track.setAttribute(
+							'data-timestamp',
+							form.querySelector('[name="timestamp"]')?.value,
+						);
+					}
 
-                    console.info('more button', bulk_edit_button);
+					console.info('more button', bulk_edit_button);
 
-                    let album_name = sanitise(
-                        image ?
-                            correct_item_by_artist(
-                                image.getAttribute('alt'),
-                                track_artist
-                            )
-                        : album ? album.textContent
-                        : ''
-                    );
+					let album_name = sanitise(
+						image
+							? correct_item_by_artist(
+								image.getAttribute('alt'),
+								track_artist,
+							)
+							: album
+							? album.textContent
+							: '',
+					);
 
-                    menu = tippy(more_button, {
-                        theme: 'context-menu',
-                        content: html.node`
+					menu = tippy(more_button, {
+						theme: 'context-menu',
+						content: html.node`
                             ${track.preview}
-                            ${can_edit ? html.node`
+                            ${
+							can_edit
+								? html.node`
                                 <div class="button-combo">
                                     ${() => {
-                                        if (is_album) {
-                                            return html.node`
-                                                <form style="margin: 0" method="POST" action=${track.getAttribute('data-action')} data-edit-scrobble="">
+									if (is_album) {
+										return html.node`
+                                                <form style="margin: 0" method="POST" action=${
+											track.getAttribute('data-action')
+										} data-edit-scrobble="">
                                                     <input type="hidden" name="csrfmiddlewaretoken" value=${page.token}>
-                                                    <input type="hidden" name="album_name" value=${track.getAttribute('data-album-name')}>
-                                                    <input type="hidden" name="album_artist_name" value=${track.getAttribute('data-album-artist-name')}>
-                                                    <input type="hidden" name="album_image" value=${track.getAttribute('data-album-image')}>
-                                                    <input type="hidden" name="album_name_original" value=${track.getAttribute('data-album-name-original')}>
-                                                    <input type="hidden" name="album_artist_name_original" value=${track.getAttribute('data-album-artist-name-original')}>
-                                                    <input type="hidden" name="count" value=${track.getAttribute('data-count')}>
+                                                    <input type="hidden" name="album_name" value=${
+											track.getAttribute(
+												'data-album-name',
+											)
+										}>
+                                                    <input type="hidden" name="album_artist_name" value=${
+											track.getAttribute(
+												'data-album-artist-name',
+											)
+										}>
+                                                    <input type="hidden" name="album_image" value=${
+											track.getAttribute(
+												'data-album-image',
+											)
+										}>
+                                                    <input type="hidden" name="album_name_original" value=${
+											track.getAttribute(
+												'data-album-name-original',
+											)
+										}>
+                                                    <input type="hidden" name="album_artist_name_original" value=${
+											track.getAttribute(
+												'data-album-artist-name-original',
+											)
+										}>
+                                                    <input type="hidden" name="count" value=${
+											track.getAttribute('data-count')
+										}>
                                                     <button class="dropdown-menu-clickable-item" data-type="edit">
                                                         ${tl(trans.edit)}
                                                     </button>
                                                 </form>
                                             `;
-                                        }
+									}
 
-                                        return html.node`
-                                            <form style="margin: 0" method="POST" action=${track.getAttribute('data-action')} data-edit-scrobble="">
+									return html.node`
+                                            <form style="margin: 0" method="POST" action=${
+										track.getAttribute('data-action')
+									} data-edit-scrobble="">
                                                 <input type="hidden" name="csrfmiddlewaretoken" value=${page.token}>
-                                                <input type="hidden" name="artist_name" value=${track.getAttribute('data-artist-name')}>
-                                                <input type="hidden" name="track_name" value=${track.getAttribute('data-track-name')}>
-                                                <input type="hidden" name="album_name" value=${track.getAttribute('data-album-name')}>
-                                                <input type="hidden" name="album_artist_name" value=${track.getAttribute('data-album-artist-name')}>
-                                                <input type="hidden" name="timestamp" value=${track.getAttribute('data-timestamp')}>
+                                                <input type="hidden" name="artist_name" value=${
+										track.getAttribute('data-artist-name')
+									}>
+                                                <input type="hidden" name="track_name" value=${
+										track.getAttribute('data-track-name')
+									}>
+                                                <input type="hidden" name="album_name" value=${
+										track.getAttribute('data-album-name')
+									}>
+                                                <input type="hidden" name="album_artist_name" value=${
+										track.getAttribute(
+											'data-album-artist-name',
+										)
+									}>
+                                                <input type="hidden" name="timestamp" value=${
+										track.getAttribute('data-timestamp')
+									}>
                                                 <button class="dropdown-menu-clickable-item" data-type="edit">
                                                     ${tl(trans.edit)}
                                                 </button>
                                             </form>
                                         `;
-                                    }}
-                                    ${bulk_edit_button ? html.node`
+								}}
+                                    ${
+									bulk_edit_button
+										? html.node`
                                         <div class="button-combo-sep" />
                                         ${() => {
-                                            let button =
-                                                track_legacy_menu.querySelector(
-                                                    '[data-analytics-action="BulkEditScrobblesOpen"]'
-                                                ).cloneNode();
-                                            button.classList =
-                                                'dropdown-menu-clickable-item chibi';
-                                            button.textContent = tl(
-                                                trans.bulk_edit
-                                            );
-                                            button.setAttribute(
-                                                'data-type',
-                                                'bulk-edit'
-                                            );
+											let button = track_legacy_menu
+												.querySelector(
+													'[data-analytics-action="BulkEditScrobblesOpen"]',
+												).cloneNode();
+											button.classList =
+												'dropdown-menu-clickable-item chibi';
+											button.textContent = tl(
+												trans.bulk_edit,
+											);
+											button.setAttribute(
+												'data-type',
+												'bulk-edit',
+											);
 
-                                            tippy(button, {
-                                                content: tl(trans.bulk_edit)
-                                            });
+											tippy(button, {
+												content: tl(trans.bulk_edit),
+											});
 
-                                            return button;
-                                        }}
-                                    ` : ''}
+											return button;
+										}}
+                                    `
+										: ''
+								}
                                 </div>
-                                ${can_copy_scrobble ? html.node`
+                                ${
+									can_copy_scrobble
+										? html.node`
                                     <button class="dropdown-menu-clickable-item" data-type="copy_scrobble" onclick=${() => {
-                                        submit_scrobble({
-                                            pre_track: track_title.getAttribute('data-name'),
-                                            pre_artist: track_artist,
-                                            pre_album: alt,
-                                            pre_album_artist: album_artist,
-                                            pre_timestamp: timestamp
-                                        });
-                                    }}>
+											submit_scrobble({
+												pre_track: track_title
+													.getAttribute('data-name'),
+												pre_artist: track_artist,
+												pre_album: alt,
+												pre_album_artist: album_artist,
+												pre_timestamp: timestamp,
+											});
+										}}>
                                         ${tl(trans.copy)}
                                     </button>
-                                ` : ''}
+                                `
+										: ''
+								}
                                 <div class="sep" />
-                            ` : can_copy_scrobble ? html.node`
+                            `
+								: can_copy_scrobble
+								? html.node`
                                 <button class="dropdown-menu-clickable-item" data-type="copy_scrobble" onclick=${() => {
-                                    submit_scrobble({
-                                        pre_track: track_title.getAttribute('data-name'),
-                                        pre_artist: track_artist,
-                                        pre_album: alt,
-                                        pre_album_artist: album_artist,
-                                        pre_timestamp: timestamp
-                                    });
-                                }}>
+									submit_scrobble({
+										pre_track: track_title.getAttribute(
+											'data-name',
+										),
+										pre_artist: track_artist,
+										pre_album: alt,
+										pre_album_artist: album_artist,
+										pre_timestamp: timestamp,
+									});
+								}}>
                                     ${tl(trans.copy)}
                                 </button>
                                 <div class="sep" />
-                            ` : bulk_edit_button ? html.node`
+                            `
+								: bulk_edit_button
+								? html.node`
                                 ${() => {
-                                    let button =
-                                        track_legacy_menu.querySelector(
-                                            '[data-analytics-action="BulkEditScrobblesOpen"]'
-                                        );
-                                    button.textContent = tl(
-                                        trans.bulk_edit
-                                    );
-                                    button.setAttribute(
-                                        'data-type',
-                                        'bulk-edit'
-                                    );
+									let button = track_legacy_menu
+										.querySelector(
+											'[data-analytics-action="BulkEditScrobblesOpen"]',
+										);
+									button.textContent = tl(
+										trans.bulk_edit,
+									);
+									button.setAttribute(
+										'data-type',
+										'bulk-edit',
+									);
 
-                                    return button;
-                                }}
+									return button;
+								}}
                                 <div class="sep" />
-                            ` : ''}
+                            `
+								: ''
+						}
                             ${() => {
-                                let container =
-                                    track.querySelector('.chartlist-play');
-                                if (!container) return;
+							let container = track.querySelector(
+								'.chartlist-play',
+							);
+							if (!container) return;
 
-                                let button = container.querySelector(
-                                    '.chartlist-play-button'
-                                );
-                                if (!button) return;
+							let button = container.querySelector(
+								'.chartlist-play-button',
+							);
+							if (!button) return;
 
-                                button.classList.add('dropdown-menu-clickable-item');
-                                button.classList.remove('chartlist-play-button');
-                                button.textContent = tl(trans.play);
-                                button.setAttribute('data-type', 'play');
+							button.classList.add(
+								'dropdown-menu-clickable-item',
+							);
+							button.classList.remove('chartlist-play-button');
+							button.textContent = tl(trans.play);
+							button.setAttribute('data-type', 'play');
 
-                                track.removeChild(container);
+							track.removeChild(container);
 
-                                return button;
-                            }}
+							return button;
+						}}
                             ${
-                                !is_album ?
-                                    html.node`
+							!is_album
+								? html.node`
                             <div class="button-combo">
                                 ${() => {
-                                    return html.node`
-                                        <a class="dropdown-menu-clickable-item" data-type="track" href=${track_title.getAttribute('href')}>
+									return html.node`
+                                        <a class="dropdown-menu-clickable-item" data-type="track" href=${
+										track_title.getAttribute('href')
+									}>
                                             ${tl(trans.track)}
                                         </a>
                                     `;
-                                }}
+								}}
                                 <div class="button-combo-sep"/>
                                 ${() => {
-                                    let button = html.node`
-                                        <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${user}/library${track_title.getAttribute('href')}">
+									let button = html.node`
+                                        <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${user}/library${
+										track_title.getAttribute('href')
+									}">
                                             ${tl(trans.explore_in_library)}
                                         </a>
                                     `;
 
-                                    tippy(button, {
-                                        content: tl(trans.explore_in_library),
-                                        delay: [500, 0]
-                                    });
+									tippy(button, {
+										content: tl(trans.explore_in_library),
+										delay: [500, 0],
+									});
 
-                                    return button;
-                                }}
+									return button;
+								}}
                             </div>
                             `
-                                :   ''
-                            }
+								: ''
+						}
                             ${
-                                album_name && album_link ?
-                                    html.node`
+							album_name && album_link
+								? html.node`
                             <div class="button-combo">
                                 ${() => {
-                                    return html.node`
-                                        <a class="dropdown-menu-clickable-item" data-type="album" href=${album_link.getAttribute('href')}>
+									return html.node`
+                                        <a class="dropdown-menu-clickable-item" data-type="album" href=${
+										album_link.getAttribute('href')
+									}>
                                             ${tl(trans.album)}
                                         </a>
                                     `;
-                                }}
+								}}
                                 <div class="button-combo-sep"/>
                                 ${() => {
-                                    let button = html.node`
-                                        <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${user}/library${album_link.getAttribute('href')}">
+									let button = html.node`
+                                        <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${user}/library${
+										album_link.getAttribute('href')
+									}">
                                             ${tl(trans.explore_in_library)}
                                         </a>
                                     `;
 
-                                    tippy(button, {
-                                        content: tl(trans.explore_in_library),
-                                        delay: [500, 0]
-                                    });
+									tippy(button, {
+										content: tl(trans.explore_in_library),
+										delay: [500, 0],
+									});
 
-                                    return button;
-                                }}
+									return button;
+								}}
                             </div>
                             `
-                                : is_album ?
-                                    html.node`
+								: is_album
+								? html.node`
                             <div class="button-combo">
                                 ${() => {
-                                    return html.node`
-                                        <a class="dropdown-menu-clickable-item" data-type="album" href=${track_title.getAttribute('href')}>
+									return html.node`
+                                        <a class="dropdown-menu-clickable-item" data-type="album" href=${
+										track_title.getAttribute('href')
+									}>
                                             ${tl(trans.album)}
                                         </a>
                                     `;
-                                }}
+								}}
                                 <div class="button-combo-sep"/>
                                 ${() => {
-                                    let button = html.node`
-                                        <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${user}/library${track_title.getAttribute('href')})}">
+									let button = html.node`
+                                        <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${user}/library${
+										track_title.getAttribute('href')
+									})}">
                                             ${tl(trans.explore_in_library)}
                                         </a>
                                     `;
 
-                                    tippy(button, {
-                                        content: tl(trans.explore_in_library),
-                                        delay: [500, 0]
-                                    });
+									tippy(button, {
+										content: tl(trans.explore_in_library),
+										delay: [500, 0],
+									});
 
-                                    return button;
-                                }}
+									return button;
+								}}
                             </div>
                             `
-                                :   ''
-                            }
+								: ''
+						}
                             <div class="button-combo">
                                 ${() => {
-                                    return html.node`
-                                        <a class="dropdown-menu-clickable-item" data-type="artist" href="${root}music/${redirect()}${sanitise(track_artist)}">
+							return html.node`
+                                        <a class="dropdown-menu-clickable-item" data-type="artist" href="${root}music/${redirect()}${
+								sanitise(track_artist)
+							}">
                                             ${tl(trans.artist)}
                                         </a>
                                     `;
-                                }}
+						}}
                                 <div class="button-combo-sep"/>
                                 ${() => {
-                                    let button = html.node`
-                                        <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${user}/library/music/${redirect()}${sanitise(track_artist)}">
+							let button = html.node`
+                                        <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${user}/library/music/${redirect()}${
+								sanitise(track_artist)
+							}">
                                             ${tl(trans.explore_in_library)}
                                         </a>
                                     `;
 
-                                    tippy(button, {
-                                        content: tl(trans.explore_in_library),
-                                        delay: [500, 0]
-                                    });
+							tippy(button, {
+								content: tl(trans.explore_in_library),
+								delay: [500, 0],
+							});
 
-                                    return button;
-                                }}
+							return button;
+						}}
                             </div>
                             ${() => {
-                                if (!is_own_profile || is_album) return;
+							if (!is_own_profile || is_album) return;
 
-                                let name =
-                                    track.getAttribute('data-track-name');
-                                let artist =
-                                    track.getAttribute('data-artist-name');
+							let name = track.getAttribute('data-track-name');
+							let artist = track.getAttribute('data-artist-name');
 
-                                if (!name) {
-                                    // now playing
-                                    name =
-                                        track_title.getAttribute('data-name');
-                                    artist = track_artist;
-                                }
+							if (!name) {
+								// now playing
+								name = track_title.getAttribute('data-name');
+								artist = track_artist;
+							}
 
-                                return html.node`
+							return html.node`
                                     <form style="margin: 0" method="POST" action="${root}user/${auth.name}/obsessions" data-submit-to-modal="">
                                         <input type="hidden" name="csrfmiddlewaretoken" value=${page.token}>
                                         <input type="hidden" name="name" value=${name}>
@@ -931,193 +1109,209 @@ export function patch_titles(search = page.structure.main) {
                                         </button>
                                     </form>
                                 `;
-                            }}
+						}}
                             <button class="dropdown-menu-clickable-item" data-type="link" onclick=${() => {
-                                copy(track_title.href);
-                            }}>
+							copy(track_title.href);
+						}}>
                                 ${tl(trans.copy_link)}
                             </button>
                             ${() => {
-                                if (!is_own_profile || !can_delete) return;
+							if (!is_own_profile || !can_delete) return;
 
-                                let button = html.node`
+							let button = html.node`
                                     <button class="dropdown-menu-clickable-item more-item--delete colourful" data-type="delete">
                                         ${tl(trans.delete)}
                                     </button>
                                 `;
 
-                                let form;
+							let form;
 
-                                return html.node`
+							return html.node`
                                     <div class="sep" />
-                                    <form ref=${(el) => (form = el)} style="margin: 0" method="POST" action="${root}user/${auth.name}/library/delete" onsubmit=${async (
-                                        e
-                                    ) => {
-                                        e.preventDefault();
+                                    <form ref=${(
+								el,
+							) => (form =
+								el)} style="margin: 0" method="POST" action="${root}user/${auth.name}/library/delete" onsubmit=${async (
+								e,
+							) => {
+								e.preventDefault();
 
-                                        let url = `${root}user/${auth.name}/library/delete`;
-                                        let form_data = new FormData(form);
+								let url =
+									`${root}user/${auth.name}/library/delete`;
+								let form_data = new FormData(form);
 
-                                        console.info(form_data);
+								console.info(form_data);
 
-                                        try {
-                                            track.setAttribute(
-                                                'data-ajax-form-state',
-                                                'deleted'
-                                            );
+								try {
+									track.setAttribute(
+										'data-ajax-form-state',
+										'deleted',
+									);
 
-                                            await fetch(url, {
-                                                method: 'POST',
-                                                body: form_data
-                                            }).then((res) => {
-                                                if (!res.ok) {
-                                                    log(
-                                                        'failed to delete',
-                                                        'form',
-                                                        'error',
-                                                        { res: res }
-                                                    );
-                                                    track.removeAttribute(
-                                                        'data-ajax-form-state'
-                                                    );
-                                                    return;
-                                                }
+									await fetch(url, {
+										method: 'POST',
+										body: form_data,
+									}).then((res) => {
+										if (!res.ok) {
+											log(
+												'failed to delete',
+												'form',
+												'error',
+												{ res: res },
+											);
+											track.removeAttribute(
+												'data-ajax-form-state',
+											);
+											return;
+										}
 
-                                                log(
-                                                    'received response',
-                                                    'form',
-                                                    'info',
-                                                    { res: res }
-                                                );
+										log(
+											'received response',
+											'form',
+											'info',
+											{ res: res },
+										);
 
-                                                notify({
-                                                    id: 'delete',
-                                                    title: tl(trans.deleted),
-                                                    body: track_title.getAttribute('data-name'),
-                                                    icon: 'icon-16-trash',
-                                                    type: 'error'
-                                                });
-                                            });
-                                        } catch (e) {
-                                            console.error(e);
-                                            track.removeAttribute(
-                                                'data-ajax-form-state'
-                                            );
-                                        }
-                                    }}>
+										notify({
+											id: 'delete',
+											title: tl(trans.deleted),
+											body: track_title.getAttribute(
+												'data-name',
+											),
+											icon: 'icon-16-trash',
+											type: 'error',
+										});
+									});
+								} catch (e) {
+									console.error(e);
+									track.removeAttribute(
+										'data-ajax-form-state',
+									);
+								}
+							}}>
                                         <input type="hidden" name="csrfmiddlewaretoken" value=${page.token}>
-                                        <input type="hidden" name="artist_name" value=${track.getAttribute('data-artist-name')}>
-                                        <input type="hidden" name="track_name" value=${track.getAttribute('data-track-name')}>
-                                        <input type="hidden" name="timestamp" value=${track.getAttribute('data-timestamp')}>
+                                        <input type="hidden" name="artist_name" value=${
+								track.getAttribute('data-artist-name')
+							}>
+                                        <input type="hidden" name="track_name" value=${
+								track.getAttribute('data-track-name')
+							}>
+                                        <input type="hidden" name="timestamp" value=${
+								track.getAttribute('data-timestamp')
+							}>
                                         ${button}
                                     </form>
                                 `;
-                            }}
+						}}
                         `,
-                        placement: 'right-start',
-                        trigger: 'manual',
-                        interactive: true,
-                        interactiveBorder: 10,
-                        offset: [0, 0],
-                        hideOnClick: false,
-                        appendTo: document.body,
+						placement: 'right-start',
+						trigger: 'manual',
+						interactive: true,
+						interactiveBorder: 10,
+						offset: [0, 0],
+						hideOnClick: false,
+						appendTo: document.body,
 
-                        onCreate(instance) {
-                            instance.popper.addEventListener('click', () => {
-                                instance.hide();
-                            });
-                        },
+						onCreate(instance) {
+							instance.popper.addEventListener('click', () => {
+								instance.hide();
+							});
+						},
 
-                        onClickOutside(instance) {
-                            instance.hide();
-                        }
-                    });
+						onClickOutside(instance) {
+							instance.hide();
+						},
+					});
 
-                    register_menu(track, menu);
-                }, 100);
-            }
+					register_menu(track, menu);
+				}, 100);
+			}
 
-            if (is_album) {
-                log(
-                    `pushed insight album label of ${track_title.getAttribute('data-name')}`,
-                    'glacier library',
-                    'log'
-                );
-                insights.album.labels.push(
-                    track_title.getAttribute('data-name')
-                );
-            } else {
-                log(
-                    `pushed insight track label of ${track_title.getAttribute('data-name')}`,
-                    'glacier library',
-                    'log'
-                );
-                insights.track.labels.push(
-                    track_title.getAttribute('data-name')
-                );
-            }
+			if (is_album) {
+				log(
+					`pushed insight album label of ${
+						track_title.getAttribute('data-name')
+					}`,
+					'glacier library',
+					'log',
+				);
+				insights.album.labels.push(
+					track_title.getAttribute('data-name'),
+				);
+			} else {
+				log(
+					`pushed insight track label of ${
+						track_title.getAttribute('data-name')
+					}`,
+					'glacier library',
+					'log',
+				);
+				insights.track.labels.push(
+					track_title.getAttribute('data-name'),
+				);
+			}
 
-            const loved = track.querySelector('.chartlist-loved');
-            if (loved) {
-                loved.classList.add('colourful');
-                loved.setAttribute('data-season', season);
+			const loved = track.querySelector('.chartlist-loved');
+			if (loved) {
+				loved.classList.add('colourful');
+				loved.setAttribute('data-season', season);
 
-                const love = loved.querySelector('.chartlist-love-button');
+				const love = loved.querySelector('.chartlist-love-button');
 
-                love.classList.add('btn', 'icon-mask');
-                tippy(love, {
-                    content: tl(trans.love_track)
-                });
-            }
+				love.classList.add('btn', 'icon-mask');
+				tippy(love, {
+					content: tl(trans.love_track),
+				});
+			}
 
-            let album_text = track.querySelector(
-                '.chartlist-album.custom-album-text'
-            );
+			let album_text = track.querySelector(
+				'.chartlist-album.custom-album-text',
+			);
 
-            if (image_wrap) {
-                if (!is_album && show_album_text && !has_bar && !album_text) {
-                    track_info.appendChild(html.node`
+			if (image_wrap) {
+				if (!is_album && show_album_text && !has_bar && !album_text) {
+					track_info.appendChild(html.node`
                         <td class="chartlist-album custom-album-text">
                             <a href="${link.getAttribute('href')}">${alt}</a>
                         </td>
                     `);
-                }
+				}
 
-                if (
-                    !settings.colourful_tracks &&
-                    !settings.colourful_tracks_all
-                )
-                    return;
+				if (
+					!settings.colourful_tracks &&
+					!settings.colourful_tracks_all
+				) {
+					return;
+				}
 
-                if (!settings.colourful_tracks_all && !is_active) return;
+				if (!settings.colourful_tracks_all && !is_active) return;
 
-                image.setAttribute('crossorigin', 'anonymous');
-                try {
-                    image.onload = async () => {
-                        const { hue, sat, lit } = await header_colour(image);
+				image.setAttribute('crossorigin', 'anonymous');
+				try {
+					image.onload = async () => {
+						const { hue, sat, lit } = await header_colour(image);
 
-                        const to_colour = track.querySelectorAll(
-                            '.chartlist-count-bar, .chartlist-loved'
-                        );
+						const to_colour = track.querySelectorAll(
+							'.chartlist-count-bar, .chartlist-loved',
+						);
 
-                        track.classList.add('colourful');
+						track.classList.add('colourful');
 
-                        if (is_active) {
-                            track.style.setProperty('--hue-over', hue);
-                            track.style.setProperty('--sat-over', sat);
-                            track.style.setProperty('--lit-over', lit);
-                        } else {to_colour.forEach((elem) => {
-                                elem.classList.add('colourful');
-                                elem.style.setProperty('--hue-over', hue);
-                                elem.style.setProperty('--sat-over', sat);
-                                elem.style.setProperty('--lit-over', lit);
-                            });
-                        }
-                    }
-                } catch (e) {}
-            }
-        }
-    });
+						if (is_active) {
+							track.style.setProperty('--hue-over', hue);
+							track.style.setProperty('--sat-over', sat);
+							track.style.setProperty('--lit-over', lit);
+						} else {to_colour.forEach((elem) => {
+								elem.classList.add('colourful');
+								elem.style.setProperty('--hue-over', hue);
+								elem.style.setProperty('--sat-over', sat);
+								elem.style.setProperty('--lit-over', lit);
+							});}
+					};
+				} catch (e) {}
+			}
+		}
+	});
 
-    if (page.subpage.startsWith('library')) bleh_glacier_insights(insights);
+	if (page.subpage.startsWith('library')) bleh_glacier_insights(insights);
 }

@@ -1,54 +1,54 @@
 .leaving-site-inner {
-    align-items: start !important;
+	align-items: start !important;
 
-    h1 {
-        font-size: 18px;
-        line-height: 22px;
-        font-weight: var(--font-weight-medium);
-        letter-spacing: unset;
-        margin: unset;
-        cursor: default;
+	h1 {
+		font-size: 18px;
+		line-height: 22px;
+		font-weight: var(--font-weight-medium);
+		letter-spacing: unset;
+		margin: unset;
+		cursor: default;
 
-        color: oklch(var(--c1));
-    }
+		color: oklch(var(--c1));
+	}
 
-    p {
-        max-width: 360px;
-        text-align: center;
-        cursor: default;
-    }
+	p {
+		max-width: 360px;
+		text-align: center;
+		cursor: default;
+	}
 }
 
 .external-warn-input {
-    padding: 12px 24px;
-    background: oklch(var(--b6), 60%);
-    border-radius: var(--item-med-radius);
-    box-shadow: var(--input-shadow);
+	padding: 12px 24px;
+	background: oklch(var(--b6), 60%);
+	border-radius: var(--item-med-radius);
+	box-shadow: var(--input-shadow);
 
-    font-size: 16px;
-    line-height: 20px;
+	font-size: 16px;
+	line-height: 20px;
 
-    min-width: 420px;
-    cursor: default;
+	min-width: 420px;
+	cursor: default;
 
-    margin-top: 10px;
+	margin-top: 10px;
 
-    & + .setting {
-        width: 100%;
-    }
+	& + .setting {
+		width: 100%;
+	}
 }
 
 .hostname {
-    overflow: hidden;
+	overflow: hidden;
 }
 
 .external-warn-input,
 .link {
-    display: flex;
-    align-items: center;
-    color: oklch(var(--c3));
+	display: flex;
+	align-items: center;
+	color: oklch(var(--c3));
 
-    & > .hostname {
-        color: oklch(var(--c2));
-    }
+	& > .hostname {
+		color: oklch(var(--c2));
+	}
 }

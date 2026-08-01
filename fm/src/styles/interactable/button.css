@@ -1,28 +1,42 @@
 .btn,
-.btn-primary, .btn-cancel, .btn-secondary,
+.btn-primary,
+.btn-cancel,
+.btn-secondary,
 select,
-.dropdown-menu-clickable-item, .display-options-clickable-item, .select-button, .dropdown-menu-item-dark,
-.dropdown-menu-clickable-button, .dropdown-menu-clickable-button-js-only,
+.dropdown-menu-clickable-item,
+.display-options-clickable-item,
+.select-button,
+.dropdown-menu-item-dark,
+.dropdown-menu-clickable-button,
+.dropdown-menu-clickable-button-js-only,
 .inbox-compose-button,
-.btn-add, .btn-file,
+.btn-add,
+.btn-file,
 .video-preview-upload-cta,
 .listening-report-library-link,
 #ot-sdk-btn,
 .library-search-results li,
-.shout-more-replies-after, .shout-more-replies-before,
+.shout-more-replies-after,
+.shout-more-replies-before,
 .coloured-cta,
 .back-button,
 .no-data-message-button,
 .playlisting-create-option,
-.masthead-nav-control, .secondary-nav-item-link, .auth-link,
-.source-album, .big-tags-item, .music-bookmarks-tags-item,
+.masthead-nav-control,
+.secondary-nav-item-link,
+.auth-link,
+.source-album,
+.big-tags-item,
+.music-bookmarks-tags-item,
 .wiki-history-entry,
 .attendee-summary-user,
 .weeklychart-item,
 .btn-subscribe,
 .masthead-search-form,
 /* log in */ .site-auth-control,
-.tags-add-cta, .tags-add, .tags-view-all,
+.tags-add-cta,
+.tags-add,
+.tags-view-all,
 .masthead-popup-close,
 .check > .box,
 .radio-cont > .radio,
@@ -30,271 +44,273 @@ select,
 .notification,
 .user-now-empty-state-button,
 .report-dropdown-button,
-.see-more, .music-bookmarks-artists-item-toggle, .music-bookmarks-albums-item-toggle, .music-bookmarks-tags-item-toggle, .playlisting-playlists-item-toggle,
+.see-more,
+.music-bookmarks-artists-item-toggle,
+.music-bookmarks-albums-item-toggle,
+.music-bookmarks-tags-item-toggle,
+.playlisting-playlists-item-toggle,
 .modal-action-button,
 .js-shout-reply-cancel,
 .more-items,
-.modal-close-button, .modal-action-button,
+.modal-close-button,
+.modal-action-button,
 .tab-container > li > button,
-.user-list-follower-btn
-{
-    --bg: var(--cards-overlay-image-subtlest, none), oklch(var(--b3));
-    --bg-hov:
-        var(--cards-overlay-image-subtlest, none),
+.user-list-follower-btn {
+	--bg: var(--cards-overlay-image-subtlest, none), oklch(var(--b3));
+	--bg-hov:
+		var(--cards-overlay-image-subtlest, none),
         color-mix(in oklch, oklch(var(--b6)), oklch(var(--b3)) 90%);
-    --bg-atv:
-        var(--cards-overlay-image-subtlest, none),
+	--bg-atv:
+		var(--cards-overlay-image-subtlest, none),
         color-mix(in oklch, oklch(var(--b6)), oklch(var(--b3)) 80%);
-    --col: oklch(var(--c2));
-    --mask-colour: color-mix(in oklch, oklch(var(--c2)), oklch(var(--c3)) 50%);
-    --shadow: var(--normal-shadow), var(--interact-shadow);
-    --shadow-hov: var(--active-shadow);
-    --btn-top: var(--button-verts);
-    --btn-right: var(--button-sides);
-    --btn-bottom: var(--button-verts);
-    --btn-left: var(--button-sides);
-    background: var(--bg) !important;
-    color: var(--col) !important;
-    padding: var(
-        --padding,
-        var(
-            --button-padding,
-            var(--btn-top) var(--btn-right) var(--btn-bottom)
-                var(--btn-left)
-        )
-    ) !important;
-    min-height: unset !important;
-    min-width: unset !important;
-    line-height: var(--line-height) !important;
-    text-transform: unset !important;
-    letter-spacing: unset !important;
-    font-family: var(--font) !important;
-    font-size: var(--font-size) !important;
-    font-weight: var(--force-font-weight, var(--font-weight)) !important;
-    text-shadow: none;
-    border-radius: var(--radius, var(--button-radius)) !important;
-    box-shadow: var(--shadow) !important;
-    border: unset !important;
-    text-decoration: var(--force-underline, none) !important;
-    transition-property:
-        background-color, transform, box-shadow, color, opacity, padding,
-        font-size, font-weight !important;
-    transition-duration: var(--trans) !important;
-    transition-timing-function: var(--trans-function) !important;
-    user-select: none;
-    cursor: pointer;
+	--col: oklch(var(--c2));
+	--mask-colour: color-mix(in oklch, oklch(var(--c2)), oklch(var(--c3)) 50%);
+	--shadow: var(--normal-shadow), var(--interact-shadow);
+	--shadow-hov: var(--active-shadow);
+	--btn-top: var(--button-verts);
+	--btn-right: var(--button-sides);
+	--btn-bottom: var(--button-verts);
+	--btn-left: var(--button-sides);
+	background: var(--bg) !important;
+	color: var(--col) !important;
+	padding: var(
+		--padding,
+		var(
+			--button-padding,
+			var(--btn-top) var(--btn-right) var(--btn-bottom)
+			var(--btn-left)
+		)
+	) !important;
+	min-height: unset !important;
+	min-width: unset !important;
+	line-height: var(--line-height) !important;
+	text-transform: unset !important;
+	letter-spacing: unset !important;
+	font-family: var(--font) !important;
+	font-size: var(--font-size) !important;
+	font-weight: var(--force-font-weight, var(--font-weight)) !important;
+	text-shadow: none;
+	border-radius: var(--radius, var(--button-radius)) !important;
+	box-shadow: var(--shadow) !important;
+	border: unset !important;
+	text-decoration: var(--force-underline, none) !important;
+	transition-property:
+		background-color, transform, box-shadow, color, opacity, padding,
+		font-size, font-weight !important;
+	transition-duration: var(--trans) !important;
+	transition-timing-function: var(--trans-function) !important;
+	user-select: none;
+	cursor: pointer;
 
-    backdrop-filter: var(--filter);
-    -webkit-backdrop-filter: var(--filter);
+	backdrop-filter: var(--filter);
+	-webkit-backdrop-filter: var(--filter);
 
-    --icon-size: 16px;
+	--icon-size: 16px;
 
-    background-repeat: repeat-x !important;
-    background-position: unset !important;
+	background-repeat: repeat-x !important;
+	background-position: unset !important;
 
-    position: relative;
+	position: relative;
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    p {
-        cursor: pointer;
-    }
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	p {
+		cursor: pointer;
+	}
 
-    .listening-report-promo-title,
-    .sub-text {
-        font-size: var(--font-size-sm);
-        line-height: var(--line-height-sm);
-        color: inherit;
-        opacity: 0.7;
-        margin: unset;
-    }
-    .listening-report-promo-date,
-    h4 {
-        font: inherit;
-        color: inherit;
-    }
+	.listening-report-promo-title,
+	.sub-text {
+		font-size: var(--font-size-sm);
+		line-height: var(--line-height-sm);
+		color: inherit;
+		opacity: 0.7;
+		margin: unset;
+	}
+	.listening-report-promo-date,
+	h4 {
+		font: inherit;
+		color: inherit;
+	}
 
-    &[aria-expanded="true"]:not(
-            .delete-icon,
-            .header-expand-button,
-            .glacier-library-button
-        ),
-    &:is(.gallery-next, .gallery-previous):hover .arrow,
-    &:hover {
-        background: var(--bg-hov) !important;
-        transition-property: padding, transform, filter !important;
-        transition-duration: var(--trans) !important;
-        transition-timing-function: var(--trans-function) !important;
-        --transition-property: opacity, left, transform;
-        /*box-shadow: var(--shadow-hov) !important;*/
+	&[aria-expanded="true"]:not(.delete-icon, .header-expand-button, .glacier-library-button),
+	&:is(.gallery-next, .gallery-previous):hover .arrow,
+	&:hover {
+		background: var(--bg-hov) !important;
+		transition-property: padding, transform, filter !important;
+		transition-duration: var(--trans) !important;
+		transition-timing-function: var(--trans-function) !important;
+		--transition-property: opacity, left, transform;
+		/*box-shadow: var(--shadow-hov) !important;*/
 
-        background-repeat: repeat-x !important;
-        background-position: unset !important;
-    }
+		background-repeat: repeat-x !important;
+		background-position: unset !important;
+	}
 
-    &:is(.gallery-next, .gallery-previous):active .arrow,
-    &:active {
-        background: var(--bg-atv) !important;
-        transform: scale(0.98);
+	&:is(.gallery-next, .gallery-previous):active .arrow,
+	&:active {
+		background: var(--bg-atv) !important;
+		transform: scale(0.98);
 
-        background-repeat: repeat-x !important;
-        background-position: unset !important;
-    }
+		background-repeat: repeat-x !important;
+		background-position: unset !important;
+	}
 
-    kbd,
-    .new-badge {
-        margin-left: 6px;
-    }
+	kbd,
+	.new-badge {
+		margin-left: 6px;
+	}
 
-    kbd {
-        font-size: var(--font-size-sm);
-    }
+	kbd {
+		font-size: var(--font-size-sm);
+	}
 
-    &.flex-button {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-    }
+	&.flex-button {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+	}
 
-    /*     LOADING     */
-    /*&.btn--loading {
-        background-image: unset;
-        position: relative;
+	/*     LOADING     */
+	/*&.btn--loading {
+	    background-image: unset;
+	    position: relative;
 
-        &:after {
-            --left: 50%;
-            --margin-left: -8px;
-            --mask: var(--icon-16-spinner);
-            --show-icon: block;
-            animation: spinner 1.2s linear infinite;
-        }
-    }*/
-    &.btn--loading {
-        background-image: unset;
-    }
+	    &:after {
+	        --left: 50%;
+	        --margin-left: -8px;
+	        --mask: var(--icon-16-spinner);
+	        --show-icon: block;
+	        animation: spinner 1.2s linear infinite;
+	    }
+	}*/
+	&.btn--loading {
+		background-image: unset;
+	}
 
-    /*     STYLES     */
+	/*     STYLES     */
 
-    /*     PRIMARY     */
-    &:is(
-        .danger,
-        .btn-primary:is([type="submit"], .js-close),
-        .inbox-delete-button:not([disabled]),
-        #manage_data .btn-primary,
-        .primary,
-        .btn-subscribe,
-        .view-item[aria-checked="true"],
-        .user-now-empty-state-button,
-        .gallery-image-preferred-on,
-        .gallery-image-vote-up-on, .gallery-image-vote-down-on
-    ):not([data-has-file], .see-more) {
-        --bg:
-            var(--cards-overlay-image-subtlest, none), oklch(var(--h3)) !important;
-        --bg-hov:
-            var(--cards-overlay-image-subtlest, none),
+	/*     PRIMARY     */
+	&:is(.danger, .btn-primary:is([type="submit"], .js-close), .inbox-delete-button:not([disabled]), #manage_data .btn-primary, .primary, .btn-subscribe, .view-item[aria-checked="true"], .user-now-empty-state-button, .gallery-image-preferred-on, .gallery-image-vote-up-on, .gallery-image-vote-down-on):not([data-has-file], .see-more) {
+		--bg:
+			var(--cards-overlay-image-subtlest, none), oklch(var(--h3)) !important;
+		--bg-hov:
+			var(--cards-overlay-image-subtlest, none),
             color-mix(in oklch, oklch(var(--h4)), oklch(var(--h3)) 80%) !important;
-        --bg-atv:
-            var(--cards-overlay-image-subtlest, none),
+		--bg-atv:
+			var(--cards-overlay-image-subtlest, none),
             color-mix(in oklch, oklch(var(--h4)), oklch(var(--h3)) 60%) !important;
-        --col: oklch(var(--b7)) !important;
-        --force-font-weight: var(--font-weight-bold) !important;
-        &:not(.chibi) {
-            --mask-colour: oklch(var(--b7) / 0.8) !important;
-        }
-        --shadow:
-            var(--primary-shadow), 0 3px 12px oklch(var(--h4) / 32%),
+		--col: oklch(var(--b7)) !important;
+		--force-font-weight: var(--font-weight-bold) !important;
+		&:not(.chibi) {
+			--mask-colour: oklch(var(--b7) / 0.8) !important;
+		}
+		--shadow:
+			var(--primary-shadow), 0 3px 12px oklch(var(--h4) / 32%),
             var(--interactable-outer);
-        --shadow-hov:
-            var(--interactable-outer), var(--interactable-active-outer);
+		--shadow-hov:
+			var(--interactable-outer), var(--interactable-active-outer);
 
-        [data-bleh--season="christmas"] & {
-            --hue-seasonal: 130;
-            --sat-seasonal: 0.45;
-            --lit-seasonal: 0.75;
-        }
+		[data-bleh--season="christmas"] & {
+			--hue-seasonal: 130;
+			--sat-seasonal: 0.45;
+			--lit-seasonal: 0.75;
+		}
 
-        [data-bleh--season="new_years"] & {
-            --hue-seasonal: 333;
-            --sat-seasonal: 1.1;
-            --lit-seasonal: 1;
-        }
+		[data-bleh--season="new_years"] & {
+			--hue-seasonal: 333;
+			--sat-seasonal: 1.1;
+			--lit-seasonal: 1;
+		}
 
-        .new-badge {
-            color: var(--mask-colour);
-        }
+		.new-badge {
+			color: var(--mask-colour);
+		}
 
-        &.select-button:not(.link-select):after {
-            color: inherit;
-            opacity: 0.6;
-        }
-    }
+		&.select-button:not(.link-select):after {
+			color: inherit;
+			opacity: 0.6;
+		}
+	}
 
-    /*     COVER LINK     */
-    &.link-block-cover-link {
-        --bg: transparent;
-        --bg-hov: transparent;
-        --bg-atv: transparent;
-        --shadow: none !important;
-        --shadow-hov: none !important;
-    }
+	/*     COVER LINK     */
+	&.link-block-cover-link {
+		--bg: transparent;
+		--bg-hov: transparent;
+		--bg-atv: transparent;
+		--shadow: none !important;
+		--shadow-hov: none !important;
+	}
 
-    &.btn--loading,
-    &[data-disabled="true"], /* used for new last.fm follow button */
-    &[disabled]:not([disabled="false"]) {
-        opacity: 0.65 !important;
-        --col: oklch(var(--c3)) !important;
-        --mask-colour: oklch(var(--c3)) !important;
-        transform: unset !important;
-        --bg-hov: var(--bg) !important;
-        --bg-atv: var(--bg) !important;
-    }
+	&.btn--loading,
+	&[data-disabled="true"],
+	/* used for new last.fm follow button */ &[disabled]:not([disabled="false"]) {
+		opacity: 0.65 !important;
+		--col: oklch(var(--c3)) !important;
+		--mask-colour: oklch(var(--c3)) !important;
+		transform: unset !important;
+		--bg-hov: var(--bg) !important;
+		--bg-atv: var(--bg) !important;
+	}
 
-    &.btn-primary.js-close {
-        --hue-over: var(--hue-neg);
-        --sat-over: 1;
-        --lit-over: 1;
-    }
+	&.btn-primary.js-close {
+		--hue-over: var(--hue-neg);
+		--sat-over: 1;
+		--lit-over: 1;
+	}
 
-    &.lfmmaf-missing-artwork-button,
-    &.chibi {
-        --btn-left: var(--button-sides) !important;
-        --btn-right: var(--button-sides) !important;
-        --font-size: 0 !important;
-        --mask-colour: currentColor !important;
-        min-width: var(--button-height) !important;
-        width: var(--button-height) !important;
-        position: relative;
+	&.lfmmaf-missing-artwork-button,
+	&.chibi {
+		--btn-left: var(--button-sides) !important;
+		--btn-right: var(--button-sides) !important;
+		--font-size: 0 !important;
+		--mask-colour: currentColor !important;
+		min-width: var(--button-height) !important;
+		width: var(--button-height) !important;
+		position: relative;
 
-        &:before {
-            --left: calc((var(--button-height) - var(--icon-size)) / 2) !important;
-            --right: none !important;
-        }
-    }
+		&:before {
+			--left: calc((var(--button-height) - var(--icon-size)) / 2) !important;
+			--right: none !important;
+		}
+	}
 }
 
 .js-shout-reply-cancel,
 .inbox-compose-button,
-.sponsor, .icon,
+.sponsor,
+.icon,
 .lastfm-bulk-edit-form-group-controls button,
-.search-similar-btn, .obsession-btn, .playlist-home-top-item,
+.search-similar-btn,
+.obsession-btn,
+.playlist-home-top-item,
 .image-details :is(.bleh--gallery-bookmark-image-btn, .gallery-image-report, .gallery-image-delete button),
 .btn.back,
 .btn--has-icon-left,
 .dropdown-menu-clickable-item:not(.v2),
 .header-new-playlink,
-.btn-add, .btn-file,
+.btn-add,
+.btn-file,
 .header-message-user,
 .coloured-cta,
 .gallery-previous .arrow,
 .section-playlink,
-.back-button, .delete-button,
+.back-button,
+.delete-button,
 #manage_data .btn-primary,
 .obsession-history-play-all,
-.done, .cancel, .btn-cancel, .download, .upload, .save, .btn-secondary.js-close:not(.modal-action-button), .form-group button[type="submit"]:not(.btn-post-shout, .image-upload-remove), .modal-button button[type="submit"] {
-    --btn-left: calc(
+.done,
+.cancel,
+.btn-cancel,
+.download,
+.upload,
+.save,
+.btn-secondary.js-close:not(.modal-action-button),
+.form-group button[type="submit"]:not(.btn-post-shout, .image-upload-remove),
+.modal-button button[type="submit"] {
+	--btn-left: calc(
         var(--button-sides-icon) + var(--icon-size) + var(--icon-gap)
     ) !important;
 }
@@ -308,92 +324,89 @@ select,
 .gallery-next .arrow,
 .date-range-picker-button,
 .icon-r {
-    --btn-right: calc(
+	--btn-right: calc(
         var(--button-sides-icon) + var(--icon-size) + var(--icon-gap)
     ) !important;
 }
 
-
 .input-group,
 .button-group {
-    display: flex;
-    align-items: center;
-    gap: var(--button-list-gap);
-    flex-wrap: wrap;
+	display: flex;
+	align-items: center;
+	gap: var(--button-list-gap);
+	flex-wrap: wrap;
 
-    & > .bleh-icon {
-        --icon-size: 14px;
-        --icon-colour: oklch(var(--c3));
-    }
+	& > .bleh-icon {
+		--icon-size: 14px;
+		--icon-colour: oklch(var(--c3));
+	}
 
-    &.extra {
-        gap: var(--card-gap);
-    }
+	&.extra {
+		gap: var(--card-gap);
+	}
 }
 
 .button-combo {
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
 
-    a,
-    button {
-        min-width: 32px !important;
-        width: unset;
+	a,
+	button {
+		min-width: 32px !important;
+		width: unset;
 
-        &:not(.chibi) {
-            flex: 1;
-            /*border-top-right-radius: 0 !important;
-            border-bottom-right-radius: 0 !important;*/
-        }
-        /*&.chibi {
-            border-top-left-radius: 0 !important;
-            border-bottom-left-radius: 0 !important;
-        }*/
+		&:not(.chibi) {
+			flex: 1;
+			/*border-top-right-radius: 0 !important;
+			border-bottom-right-radius: 0 !important;*/
+		}
+		/*&.chibi {
+		    border-top-left-radius: 0 !important;
+		    border-bottom-left-radius: 0 !important;
+		}*/
 
-        flex-shrink: 0;
-    }
+		flex-shrink: 0;
+	}
 
-    .button-combo-sep {
-        display: block;
-        width: 1px;
-        height: 10px;
-        margin: 0 4px;
-        background: var(--card-border-base);
-    }
+	.button-combo-sep {
+		display: block;
+		width: 1px;
+		height: 10px;
+		margin: 0 4px;
+		background: var(--card-border-base);
+	}
 
-    & > form:not(.chibi) {
-        display: flex;
-        flex: 1;
+	& > form:not(.chibi) {
+		display: flex;
+		flex: 1;
 
-        & > button {
-            flex: 1;
-        }
-    }
+		& > button {
+			flex: 1;
+		}
+	}
 }
-
 
 .subtle {
-    --bg: transparent;
-    --bg-hov: oklch(var(--b4) / 40%);
-    --bg-atv: oklch(var(--b4) / 60%);
-    --shadow: none;
-    --col: oklch(var(--c2) / 80%);
-    --mask-colour: currentColor;
+	--bg: transparent;
+	--bg-hov: oklch(var(--b4) / 40%);
+	--bg-atv: oklch(var(--b4) / 60%);
+	--shadow: none;
+	--col: oklch(var(--c2) / 80%);
+	--mask-colour: currentColor;
 }
 
-
 .continue {
-    --btn-right: calc(var(--button-sides-icon) + var(--mask-size) + 4px);
-    --mask: var(--icon-16-arrow-right);
-    --mask-size: 12px;
-    --right: var(--button-sides-icon);
-    --left: none;
-    --margin-top: -6px;
+	--btn-right: calc(var(--button-sides-icon) + var(--mask-size) + 4px);
+	--mask: var(--icon-16-arrow-right);
+	--mask-size: 12px;
+	--right: var(--button-sides-icon);
+	--left: none;
+	--margin-top: -6px;
 }
 
 .accented {
-    --col: oklch(var(--l3-c));
-    --mask-colour: color-mix(
+	--col: oklch(var(--l3-c));
+	--mask-colour: color-mix(
         in oklch,
         oklch(var(--l3-c)),
         oklch(var(--l4-c)) 30%
@@ -403,41 +416,39 @@ select,
 .danger-subtle,
 .block,
 .danger {
-    --hue-over: var(--hue-neg);
-    --sat-over: var(--sat-neg);
-    --lit-over: var(--lit-neg);
+	--hue-over: var(--hue-neg);
+	--sat-over: var(--sat-neg);
+	--lit-over: var(--lit-neg);
 
-    &:not(.primary, .btn-primary) {
-        --col: oklch(var(--l3-c));
-        --mask-colour: color-mix(
+	&:not(.primary, .btn-primary) {
+		--col: oklch(var(--l3-c));
+		--mask-colour: color-mix(
             in oklch,
             oklch(var(--l3-c)),
             oklch(var(--l4-c)) 30%
         );
-    }
+	}
 }
-
 
 .danger,
 .danger-subtle {
-    --hue-over: var(--hue-neg);
-    --sat-over: var(--sat-neg);
-    --lit-over: var(--lit-neg);
+	--hue-over: var(--hue-neg);
+	--sat-over: var(--sat-neg);
+	--lit-over: var(--lit-neg);
 }
 
-
 .btn-lg {
-    --mask-size: 24px;
-    --btn-left: var(--button-sides) !important;
-    --button-verts: 12px;
-    width: 130px;
-    height: 130px;
+	--mask-size: 24px;
+	--btn-left: var(--button-sides) !important;
+	--button-verts: 12px;
+	width: 130px;
+	height: 130px;
 
-    display: flex;
-    justify-content: center;
-    align-items: end;
+	display: flex;
+	justify-content: center;
+	align-items: end;
 
-    --left: 50%;
-    --margin-left: -12px;
-    --margin-top: calc(-12px - 7px);
+	--left: 50%;
+	--margin-left: -12px;
+	--margin-top: calc(-12px - 7px);
 }

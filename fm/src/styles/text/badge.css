@@ -1,69 +1,69 @@
 .taste-badge,
 .new-badge {
-    display: inline-flex;
-    align-items: center;
+	display: inline-flex;
+	align-items: center;
 
-    font-family: var(--font);
-    font-size: 12px;
-    background: oklch(var(--f4) / 20%);
-    color: oklch(var(--l3-c));
-    padding: 0 6px;
-    border-radius: 4px;
+	font-family: var(--font);
+	font-size: 12px;
+	background: oklch(var(--f4) / 20%);
+	color: oklch(var(--l3-c));
+	padding: 0 6px;
+	border-radius: 4px;
 
-    font-weight: var(--font-weight-medium);
+	font-weight: var(--font-weight-medium);
 
-    &.spacing {
-        gap: 4px;
-    }
+	&.spacing {
+		gap: 4px;
+	}
 
-    & > .bleh-icon-container,
-    & > .bleh-icon {
-        --icon-size: 12px;
-        height: var(--icon-size);
-        --mask-colour: currentColor;
-    }
+	& > .bleh-icon-container,
+	& > .bleh-icon {
+		--icon-size: 12px;
+		height: var(--icon-size);
+		--mask-colour: currentColor;
+	}
 
-    &.beta {
-        background: unset;
-        padding: unset;
-        border-radius: unset;
-        color: oklch(var(--c3));
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-    }
+	&.beta {
+		background: unset;
+		padding: unset;
+		border-radius: unset;
+		color: oklch(var(--c3));
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+	}
 
-    &.new {
-        --hue-over: 317;
-        --sat-over: 1.44;
-        --lit-over: 0.96;
-        animation: new 4s linear infinite;
+	&.new {
+		--hue-over: 317;
+		--sat-over: 1.44;
+		--lit-over: 0.96;
+		animation: new 4s linear infinite;
 
-        box-shadow: 0 0 20px oklch(var(--h4) / 40%);
-    }
+		box-shadow: 0 0 20px oklch(var(--h4) / 40%);
+	}
 
-    &.sponsor-related {
-        background: unset;
-        border-radius: unset;
-    }
+	&.sponsor-related {
+		background: unset;
+		border-radius: unset;
+	}
 
-    .side-action > & {
-        margin: unset !important;
-    }
+	.side-action > & {
+		margin: unset !important;
+	}
 }
 
 .taste-badge {
-    text-transform: uppercase;
-    font-weight: var(--font-weight-bold) !important;
-    letter-spacing: 0.5px;
-    padding: 2px 6px;
+	text-transform: uppercase;
+	font-weight: var(--font-weight-bold) !important;
+	letter-spacing: 0.5px;
+	padding: 2px 6px;
 }
 
 .bleh-icon-container {
-    display: flex;
-    align-items: center;
-    height: var(--icon-size);
+	display: flex;
+	align-items: center;
+	height: var(--icon-size);
 }
 .sku > .bleh-icon-container {
-    animation: staggered_spinner 3s cubic-bezier(0.34, 1.56, 0.64, 1)
-        infinite;
+	animation: staggered_spinner 3s cubic-bezier(0.34, 1.56, 0.64, 1)
+		infinite;
 }

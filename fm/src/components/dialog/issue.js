@@ -10,18 +10,18 @@ import { tl, trans } from '@/build/trans';
 import { input } from '../settings/input';
 
 export function report_issue() {
-    let summary;
+	let summary;
 
-    dialog({
-        id: 'report_issue',
-        title: tl(trans.report_issue),
-        body: html.node`
+	dialog({
+		id: 'report_issue',
+		title: tl(trans.report_issue),
+		body: html.node`
             <div class="new-scrobble-form">
                 <p class="generic-label">${tl(trans.title)}</p>
                 ${summary = input({
-                    type: 'text'
-                })}
+			type: 'text',
+		})}
             </div>
-        `
-    });
+        `,
+	});
 }

@@ -14,20 +14,21 @@ import { settings } from '@/build/config';
 import { icon, icons } from '../shared/icon';
 
 export function bleh_footer() {
-    let footer = document.body.querySelector('footer.footer');
-    if (!footer) return;
+	let footer = document.body.querySelector('footer.footer');
+	if (!footer) return;
 
-    let kate = 'katelyn';
-    let sponsoring = 0;
+	let kate = 'katelyn';
+	let sponsoring = 0;
 
-    if (sponsor_list.version) {
-        if (sponsor_list.related.special.length > 0)
-            kate = sponsor_list.related.special[0];
+	if (sponsor_list.version) {
+		if (sponsor_list.related.special.length > 0) {
+			kate = sponsor_list.related.special[0];
+		}
 
-        sponsoring = Object.keys(sponsor_list.users).length - 2;
-    }
+		sponsoring = Object.keys(sponsor_list.users).length - 2;
+	}
 
-    footer.appendChild(html.node`
+	footer.appendChild(html.node`
         <div class="footer-bleh">
             <a class="bleh-logo-footer b" href="https://bleh.katelyn.moe" target="_blank">
                 ${version.brand}
@@ -37,23 +38,29 @@ export function bleh_footer() {
             </span>
             <div class="new-badge sku spacing">
                 ${version.sku}
-                ${settings.dev ? html.node`
+                ${
+		settings.dev
+			? html.node`
                     <span class="bleh-icon-container">
                         ${icon({ name: icons.dev })}
                     </span>
-                ` : ''}
+                `
+			: ''
+	}
             </div>
             <div class="footer-dot" />
             <div class="footer-credit">
                 <p class="footer-credit-text">
                     ${{
-                        html: tl(trans.made_with_love, {
-                            u: `<a class="b" href="${root}user/${kate}">${kate}</a>`,
-                            c: '<a class="b" href="https://github.com/katelyynn/bleh/graphs/contributors" target="_blank">',
-                            '/c': '</a>',
-                            h: `<span class="bleh-icon heart sponsor-related colourful">${tl(trans.love_lower)}</span>`
-                        })
-                    }}
+		html: tl(trans.made_with_love, {
+			u: `<a class="b" href="${root}user/${kate}">${kate}</a>`,
+			c: '<a class="b" href="https://github.com/katelyynn/bleh/graphs/contributors" target="_blank">',
+			'/c': '</a>',
+			h: `<span class="bleh-icon heart sponsor-related colourful">${
+				tl(trans.love_lower)
+			}</span>`,
+		}),
+	}}
                 </p>
             </div>
             <div class="footer-dot" />
@@ -67,22 +74,30 @@ export function bleh_footer() {
                 </a>
             </div>
         </div>
-        ${lang != 'en' && lang in lang_info ? html.node`
-            <div class="footer-bleh-top">
-                <div class="footer-credit">
-                    <p>
-                        ${{
-                            html: tl(trans.translations, {
-                                l: lang_info[lang].name,
-                                u: `<span class="b">${lang_info[lang].by.map(user => `<a href="${root}user/${user}">${user}</a>`).join(', ')}</span>`
-                            })
-                        }}
-                    </p>
-                </div>
-            </div>
-        ` : ''}
+        ${
+		lang != 'en' && lang in lang_info
+			? html.node`
+	            <div class="footer-bleh-top">
+	                <div class="footer-credit">
+	                    <p>
+	                        ${{
+				html: tl(trans.translations, {
+					l: lang_info[lang].name,
+					u: `<span class="b">${
+						lang_info[lang].by.map((user) =>
+							`<a href="${root}user/${user}">${user}</a>`
+						).join(', ')
+					}</span>`,
+				}),
+			}}
+	                    </p>
+	                </div>
+	            </div>
+	        `
+			: ''
+	}
     `);
 
-    let heart = footer.querySelector('.heart');
-    if (heart) heart.addEventListener('click', () => sponsor());
+	let heart = footer.querySelector('.heart');
+	if (heart) heart.addEventListener('click', () => sponsor());
 }

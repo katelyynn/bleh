@@ -2,60 +2,60 @@
 @import './notifications.css';
 
 .inbox .inbox-buttons {
-    padding-top: unset;
-    padding-left: 12px;
-    padding-bottom: var(--card-gap);
+	padding-top: unset;
+	padding-left: 12px;
+	padding-bottom: var(--card-gap);
 
-    display: flex;
-    align-items: center;
-    gap: 12px;
+	display: flex;
+	align-items: center;
+	gap: 12px;
 
-    position: relative;
+	position: relative;
 
-    & > .setting {
-        width: 16px;
+	& > .setting {
+		width: 16px;
 
-        & > .heading {
-            display: none;
-        }
-    }
+		& > .heading {
+			display: none;
+		}
+	}
 
-    .inbox-compose-button {
-        position: relative;
-        --mask: var(--icon-16-compose);
+	.inbox-compose-button {
+		position: relative;
+		--mask: var(--icon-16-compose);
 
-        position: absolute;
-        top: 0;
-        right: 0;
-    }
+		position: absolute;
+		top: 0;
+		right: 0;
+	}
 }
 
 .inbox-delete-button {
-    --hue-over: var(--hue-neg);
-    --sat-over: 1;
-    --lit-over: 1;
+	--hue-over: var(--hue-neg);
+	--sat-over: 1;
+	--lit-over: 1;
 }
 
 .inbox-message-status,
 .inbox-message-status:after {
-    display: none !important;
+	display: none !important;
 }
 
 .inbox-message-select {
-    width: 14px !important;
+	width: 14px !important;
 }
 
 .back-button,
 .delete-button {
-    display: flex;
-    margin: unset !important;
+	display: flex;
+	margin: unset !important;
 }
 .back-button {
-    --mask: var(--icon-16-arrow-left);
+	--mask: var(--icon-16-arrow-left);
 }
 .delete-button {
-    --mask: var(--icon-16-trash);
-    --hue-over: var(--hue-neg);
-    --sat-over: 1;
-    --lit-over: 1;
+	--mask: var(--icon-16-trash);
+	--hue-over: var(--hue-neg);
+	--sat-over: 1;
+	--lit-over: 1;
 }

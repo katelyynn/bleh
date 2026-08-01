@@ -3,11 +3,12 @@
 @import './top.css';
 @import './jumpto.css';
 
-.library-fetch > div > .top-container, /* vue is duplicating it lol (it sucks) */
-.user-library-search-back-link,
+.library-fetch > div > .top-container,
+/* vue is duplicating it lol (it sucks) */ .user-library-search-back-link,
 .library-header + .metadata-list,
-.library-header, .library-track-metadata,
+.library-header,
+.library-track-metadata,
 .library-top-wrap /* while loading */,
 .glacier-legacy-top-header {
-    display: none !important;
+	display: none !important;
 }

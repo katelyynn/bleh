@@ -1,60 +1,61 @@
 .profile-mobile-featured-track,
 .header-featured-track {
-    display: none !important;
+	display: none !important;
 }
 
 .featured-item-panel {
-    background: radial-gradient(at left center, oklch(var(--k4) / 10%), transparent 90%) !important;
-    border: unset !important;
-    padding: calc(var(--card-gap) + 20px) var(--card-padding) !important;
-    box-shadow: unset !important;
-    margin: -20px 0 !important;
+	background: radial-gradient(at left center, oklch(var(--k4) / 10%),
+		transparent 90%) !important;
+	border: unset !important;
+	padding: calc(var(--card-gap) + 20px) var(--card-padding) !important;
+	box-shadow: unset !important;
+	margin: -20px 0 !important;
 
-    --mask: linear-gradient(180deg, transparent, white 20%, white 80%, transparent);
-    mask-image: var(--mask);
-    -webkit-mask-image: var(--mask);
+	--mask: linear-gradient(180deg, transparent, white 20%, white 80%, transparent);
+	mask-image: var(--mask);
+	-webkit-mask-image: var(--mask);
 
-    order: -9;
+	order: -9;
 
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
 
-    .track-template {
-        display: flex;
-        gap: var(--item-list-gap);
-    }
+	.track-template {
+		display: flex;
+		gap: var(--item-list-gap);
+	}
 
-    .sub-text {
-        flex-direction: row;
-        justify-content: space-between;
-        gap: 0;
-        margin: unset;
-    }
+	.sub-text {
+		flex-direction: row;
+		justify-content: space-between;
+		gap: 0;
+		margin: unset;
+	}
 
-    form {
-        display: flex;
-        justify-content: end;
+	form {
+		display: flex;
+		justify-content: end;
 
-        .featured-item-manage {
-            color: oklch(var(--c3)) !important;
-            --mask-colour: currentColor !important;
-            text-transform: lowercase !important;
+		.featured-item-manage {
+			color: oklch(var(--c3)) !important;
+			--mask-colour: currentColor !important;
+			text-transform: lowercase !important;
 
-            --mask: var(--icon-16-trash);
+			--mask: var(--icon-16-trash);
 
-            &:hover {
-                color: oklch(var(--l3-c)) !important;
-                --mask-colour: color-mix(
+			&:hover {
+				color: oklch(var(--l3-c)) !important;
+				--mask-colour: color-mix(
                     in oklch,
                     oklch(var(--l3-c)),
                     oklch(var(--l4-c)) 30%
                 ) !important;
 
-                --hue-over: var(--hue-neg);
-                --sat-over: 1;
-                --lit-over: 1;
-            }
-        }
-    }
+				--hue-over: var(--hue-neg);
+				--sat-over: 1;
+				--lit-over: 1;
+			}
+		}
+	}
 }

@@ -5,37 +5,37 @@
 //
 
 export let sponsor_list: sponsor_list = {
-    version: "",
-    related: {
-        account_name: "",
-        link: "",
-        special: []
-    },
-    users: {}
+	version: '',
+	related: {
+		account_name: '',
+		link: '',
+		special: [],
+	},
+	users: {},
 };
 
 interface sponsor_list {
-    version: string,
-    related: {
-        account_name: string,
-        link: string,
-        special: string[]
-    },
-    users: Record<string, sponsor_user>
+	version: string;
+	related: {
+		account_name: string;
+		link: string;
+		special: string[];
+	};
+	users: Record<string, sponsor_user>;
 }
 
 interface sponsor_user {
-    sponsor?: boolean,
-    contributor?: boolean,
-    badges?: badge[]
+	sponsor?: boolean;
+	contributor?: boolean;
+	badges?: badge[];
 }
 
 interface badge {
-    type?: string,
-    name: string,
-    reason?: string,
-    icon?: string,
-    hue?: number,
-    sat?: number,
-    lit?: number
+	type?: string;
+	name: string;
+	reason?: string;
+	icon?: string;
+	hue?: number;
+	sat?: number;
+	lit?: number;
 }

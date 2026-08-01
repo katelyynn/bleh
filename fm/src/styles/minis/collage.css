@@ -1,142 +1,144 @@
 .collage-canvas {
-    position: relative;
+	position: relative;
 
-    canvas {
-        max-width: 100% !important;
-        max-height: 900px !important;
-        border-radius: var(--item-med-radius);
-        box-shadow: var(--interact-shadow);
+	canvas {
+		max-width: 100% !important;
+		max-height: 900px !important;
+		border-radius: var(--item-med-radius);
+		box-shadow: var(--interact-shadow);
 
-        transition-property: opacity;
-        transition-duration: 0.3s;
-        transition-timing-function: var(--trans-function-ani);
-    }
+		transition-property: opacity;
+		transition-duration: 0.3s;
+		transition-timing-function: var(--trans-function-ani);
+	}
 
-    .collage-canvas-actions {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: var(--button-list-gap);
-        position: absolute;
-        inset: 0;
+	.collage-canvas-actions {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: var(--button-list-gap);
+		position: absolute;
+		inset: 0;
 
-        opacity: 0;
-        scale: 0.95;
+		opacity: 0;
+		scale: 0.95;
 
-        transition-property: opacity, scale;
-        transition-duration: 0.3s;
-        transition-timing-function: var(--trans-function-ani);
-    }
+		transition-property: opacity, scale;
+		transition-duration: 0.3s;
+		transition-timing-function: var(--trans-function-ani);
+	}
 
-    width: fit-content;
-    margin: 0 auto;
+	width: fit-content;
+	margin: 0 auto;
 
-    &:hover {
-        canvas {
-            opacity: 0.3;
-        }
+	&:hover {
+		canvas {
+			opacity: 0.3;
+		}
 
-        .collage-canvas-actions {
-            opacity: 1;
-            scale: 1;
-        }
-    }
+		.collage-canvas-actions {
+			opacity: 1;
+			scale: 1;
+		}
+	}
 }
 
 .collage-finished {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--card-gap);
-    margin-bottom: var(--card-gap);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--card-gap);
+	margin-bottom: var(--card-gap);
 
-    strong {
-        font-size: 16px;
-        line-height: 20px;
-        color: oklch(var(--c1));
-        cursor: default;
-    }
+	strong {
+		font-size: 16px;
+		line-height: 20px;
+		color: oklch(var(--c1));
+		cursor: default;
+	}
 }
 
 .collage {
-    width: 1500px;
-    height: 1547px;
-    background: #000;
-    padding: var(--card-gap);
-    overflow: hidden;
+	width: 1500px;
+	height: 1547px;
+	background: #000;
+	padding: var(--card-gap);
+	overflow: hidden;
 
-    position: fixed;
-    left: 5000px;
+	position: fixed;
+	left: 5000px;
 
-    display: flex;
-    flex-direction: column;
-    gap: var(--card-gap);
+	display: flex;
+	flex-direction: column;
+	gap: var(--card-gap);
 
-    --font-weight: 400;
-    --font-size: 16px;
-    --line-height: 20px;
-    text-shadow: unset !important;
+	--font-weight: 400;
+	--font-size: 16px;
+	--line-height: 20px;
+	text-shadow: unset !important;
 
-    & > .grid-items {
-        .grid-item-plays:before {
-            --top: 4px;
-            --mask: unset;
-            --icon-16-placeholder: unset;
-            background: url("data:image/svg+xml;base64,PHN2ZyAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiAgd2lkdGg9IjI0IiAgaGVpZ2h0PSIyNCIgIHZpZXdCb3g9IjAgMCAyNCAyNCIgIGZpbGw9IiNmZmZmZmYiICBjbGFzcz0iaWNvbiBpY29uLXRhYmxlciBpY29ucy10YWJsZXItZmlsbGVkIGljb24tdGFibGVyLXBsYXllci1wbGF5Ij48cGF0aCBzdHJva2U9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNNiA0djE2YTEgMSAwIDAgMCAxLjUyNCAuODUybDEzIC04YTEgMSAwIDAgMCAwIC0xLjcwNGwtMTMgLThhMSAxIDAgMCAwIC0xLjUyNCAuODUyeiIgLz48L3N2Zz4=") !important;
-            background-size: 100% !important;
-            opacity: 0.8 !important;
-        }
-    }
+	& > .grid-items {
+		.grid-item-plays:before {
+			--top: 4px;
+			--mask: unset;
+			--icon-16-placeholder: unset;
+			background: url("data:image/svg+xml;base64,PHN2ZyAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiAgd2lkdGg9IjI0IiAgaGVpZ2h0PSIyNCIgIHZpZXdCb3g9IjAgMCAyNCAyNCIgIGZpbGw9IiNmZmZmZmYiICBjbGFzcz0iaWNvbiBpY29uLXRhYmxlciBpY29ucy10YWJsZXItZmlsbGVkIGljb24tdGFibGVyLXBsYXllci1wbGF5Ij48cGF0aCBzdHJva2U9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNNiA0djE2YTEgMSAwIDAgMCAxLjUyNCAuODUybDEzIC04YTEgMSAwIDAgMCAwIC0xLjcwNGwtMTMgLThhMSAxIDAgMCAwIC0xLjUyNCAuODUyeiIgLz48L3N2Zz4=")
+				!important;
+			background-size: 100% !important;
+			opacity: 0.8 !important;
+		}
+	}
 
-    .header {
-        display: flex;
-        color: #fff;
-        height: 32px;
-        cursor: pointer;
+	.header {
+		display: flex;
+		color: #fff;
+		height: 32px;
+		cursor: pointer;
 
-        &.header {
-            justify-content: space-between;
+		&.header {
+			justify-content: space-between;
 
-            .bleh-icon {
-                mask-image: none !important;
-                -webkit-mask-image: none !important;
-                background: url("data:image/svg+xml;base64,PHN2ZyAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiAgd2lkdGg9IjI0IiAgaGVpZ2h0PSIyNCIgIHZpZXdCb3g9IjAgMCAyNCAyNCIgIGZpbGw9IiNmZmZmZmYiICBjbGFzcz0iaWNvbiBpY29uLXRhYmxlciBpY29ucy10YWJsZXItZmlsbGVkIGljb24tdGFibGVyLWxheW91dC0yIj48cGF0aCBzdHJva2U9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNOCAzYTMgMyAwIDAgMSAzIDN2MWEzIDMgMCAwIDEgLTMgM2gtMmEzIDMgMCAwIDEgLTMgLTN2LTFhMyAzIDAgMCAxIDMgLTN6IiAvPjxwYXRoIGQ9Ik04IDEyYTMgMyAwIDAgMSAzIDN2M2EzIDMgMCAwIDEgLTMgM2gtMmEzIDMgMCAwIDEgLTMgLTN2LTNhMyAzIDAgMCAxIDMgLTN6IiAvPjxwYXRoIGQ9Ik0xOCAzYTMgMyAwIDAgMSAzIDN2M2EzIDMgMCAwIDEgLTMgM2gtMmEzIDMgMCAwIDEgLTMgLTN2LTNhMyAzIDAgMCAxIDMgLTN6IiAvPjxwYXRoIGQ9Ik0xOCAxNGEzIDMgMCAwIDEgMyAzdjFhMyAzIDAgMCAxIC0zIDNoLTJhMyAzIDAgMCAxIC0zIC0zdi0xYTMgMyAwIDAgMSAzIC0zeiIgLz48L3N2Zz4=") !important;
-                background-size: 100% !important;
-                --icon-size: 24px;
-            }
-        }
-        .brand {
-            height: 18px;
-            margin-right: var(--item-list-gap);
-            fill: #fff;
-        }
+			.bleh-icon {
+				mask-image: none !important;
+				-webkit-mask-image: none !important;
+				background: url("data:image/svg+xml;base64,PHN2ZyAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiAgd2lkdGg9IjI0IiAgaGVpZ2h0PSIyNCIgIHZpZXdCb3g9IjAgMCAyNCAyNCIgIGZpbGw9IiNmZmZmZmYiICBjbGFzcz0iaWNvbiBpY29uLXRhYmxlciBpY29ucy10YWJsZXItZmlsbGVkIGljb24tdGFibGVyLWxheW91dC0yIj48cGF0aCBzdHJva2U9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNOCAzYTMgMyAwIDAgMSAzIDN2MWEzIDMgMCAwIDEgLTMgM2gtMmEzIDMgMCAwIDEgLTMgLTN2LTFhMyAzIDAgMCAxIDMgLTN6IiAvPjxwYXRoIGQ9Ik04IDEyYTMgMyAwIDAgMSAzIDN2M2EzIDMgMCAwIDEgLTMgM2gtMmEzIDMgMCAwIDEgLTMgLTN2LTNhMyAzIDAgMCAxIDMgLTN6IiAvPjxwYXRoIGQ9Ik0xOCAzYTMgMyAwIDAgMSAzIDN2M2EzIDMgMCAwIDEgLTMgM2gtMmEzIDMgMCAwIDEgLTMgLTN2LTNhMyAzIDAgMCAxIDMgLTN6IiAvPjxwYXRoIGQ9Ik0xOCAxNGEzIDMgMCAwIDEgMyAzdjFhMyAzIDAgMCAxIC0zIDNoLTJhMyAzIDAgMCAxIC0zIC0zdi0xYTMgMyAwIDAgMSAzIC0zeiIgLz48L3N2Zz4=")
+					!important;
+				background-size: 100% !important;
+				--icon-size: 24px;
+			}
+		}
+		.brand {
+			height: 18px;
+			margin-right: var(--item-list-gap);
+			fill: #fff;
+		}
 
-        .type {
-            display: flex;
-            align-items: center;
-            gap: var(--card-gap);
-            cursor: default;
+		.type {
+			display: flex;
+			align-items: center;
+			gap: var(--card-gap);
+			cursor: default;
 
-            strong {
-                font-size: 16px;
-                line-height: 20px;
-            }
-        }
+			strong {
+				font-size: 16px;
+				line-height: 20px;
+			}
+		}
 
-        .user {
-            display: flex;
-            flex-direction: row-reverse;
-            align-items: center;
-            gap: var(--item-list-gap);
-            cursor: default;
-            font-size: 16px;
-            line-height: 20px;
+		.user {
+			display: flex;
+			flex-direction: row-reverse;
+			align-items: center;
+			gap: var(--item-list-gap);
+			cursor: default;
+			font-size: 16px;
+			line-height: 20px;
 
-            .avatar {
-                width: 32px;
-                height: 32px;
-                --mask-size: 18px;
-            }
-        }
-    }
+			.avatar {
+				width: 32px;
+				height: 32px;
+				--mask-size: 18px;
+			}
+		}
+	}
 }

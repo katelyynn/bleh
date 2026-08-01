@@ -1,8 +1,8 @@
 [
-    {
-        "name": "Manual update necessary",
-        "body": "In the current version you are running the auto-updater is broken, to continue receiving proper updates please manually check for updates in the settings.",
-        "versions": ["2025.0729"],
-        "date": "2025-07-29T20:58+01:00"
-    }
+	{
+		"name": "Manual update necessary",
+		"body": "In the current version you are running the auto-updater is broken, to continue receiving proper updates please manually check for updates in the settings.",
+		"versions": ["2025.0729"],
+		"date": "2025-07-29T20:58+01:00"
+	}
 ]

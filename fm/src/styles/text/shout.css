@@ -1,503 +1,502 @@
 #shoutbox.shoutbox--with-header {
-    min-height: unset;
+	min-height: unset;
 }
 .shouting-unavailable {
-    margin: unset;
-    padding: 0 0 var(--card-gap) 0;
-    border-bottom: 1px solid var(--card-border-base);
+	margin: unset;
+	padding: 0 0 var(--card-gap) 0;
+	border-bottom: 1px solid var(--card-border-base);
 }
 .shout-form + .shout-list,
 .shout-list {
-    margin-top: var(--card-gap);
+	margin-top: var(--card-gap);
 }
 
 .shoutbox-sort-toggle {
-    position: relative;
-    inset: unset !important;
+	position: relative;
+	inset: unset !important;
 }
 
 /* override card-gap */
 /* this was a last.fm default but bleh changes it from 18px to card-gap, gaining priority */
 .shout-form .form-group-controls {
-    margin-top: unset !important;
+	margin-top: unset !important;
 }
 
 .shoutbox > .shout-list {
-    gap: var(--shout-outer-padding) !important;
+	gap: var(--shout-outer-padding) !important;
 }
 
 .shoutbox,
 .shout-form,
 .shouting-unavailable {
-    margin-top: unset;
+	margin-top: unset;
 }
 .shout,
 .shout-form {
-    border-bottom: 1px solid oklch(var(--b4));
-    padding-bottom: 6px;
-    min-height: unset;
-    margin-left: calc(var(--shout-margin-left)) !important;
+	border-bottom: 1px solid oklch(var(--b4));
+	padding-bottom: 6px;
+	min-height: unset;
+	margin-left: calc(var(--shout-margin-left)) !important;
 
-    &:before {
-        --show-icon: none;
-    }
+	&:before {
+		--show-icon: none;
+	}
 }
 
 .shout {
-    --comment-bg: color-mix(in oklch, oklch(var(--b5)), oklch(var(--k4)) 20%);
-    --comment-bg: transparent;
-    background-color: var(--comment-bg) !important;
-    border-radius: var(--item-small-radius) !important;
+	--comment-bg: color-mix(in oklch, oklch(var(--b5)), oklch(var(--k4)) 20%);
+	--comment-bg: transparent;
+	background-color: var(--comment-bg) !important;
+	border-radius: var(--item-small-radius) !important;
 
-    &:after {
-        content: '';
-        display: block;
-        position: absolute;
+	&:after {
+		content: '';
+		display: block;
+		position: absolute;
 
-        top: 0;
-        left: -6px;
-        width: 0;
-        height: 0;
-        border: 6px solid var(--comment-bg);
-        border-left-color: transparent;
-        border-bottom-color: transparent;
-        pointer-events: none;
-    }
+		top: 0;
+		left: -6px;
+		width: 0;
+		height: 0;
+		border: 6px solid var(--comment-bg);
+		border-left-color: transparent;
+		border-bottom-color: transparent;
+		pointer-events: none;
+	}
 }
 
 .shout-form {
-    border: unset;
-    padding-top: unset !important;
-    padding-bottom: unset;
-    /* shout-form's get margin-top of 24px if on a subpage,
-    most noteably the "shouts" tab */
-    margin-top: unset !important;
+	border: unset;
+	padding-top: unset !important;
+	padding-bottom: unset;
+	/* shout-form's get margin-top of 24px if on a subpage,
+	most noteably the "shouts" tab */
+	margin-top: unset !important;
 
-    .content-form {
-        margin-left: 10px;
-    }
+	.content-form {
+		margin-left: 10px;
+	}
 
-    .form-submit {
-        gap: var(--button-list-gap);
-    }
+	.form-submit {
+		gap: var(--button-list-gap);
+	}
 
-    .form-group--submit {
-        --override-margin-top: 8px !important;
-    }
+	.form-group--submit {
+		--override-margin-top: 8px !important;
+	}
 }
 .js-shout-reply-cancel {
-    position: relative;
-    --show-icon: block;
-    --mask: var(--icon-16-x);
+	position: relative;
+	--show-icon: block;
+	--mask: var(--icon-16-x);
 }
 .btn-post-shout {
-    position: relative;
-    --mask: var(--icon-16-send) !important;
+	position: relative;
+	--mask: var(--icon-16-send) !important;
 
-    --btn-left: var(--button-sides) !important;
-    --btn-right: calc(
+	--btn-left: var(--button-sides) !important;
+	--btn-right: calc(
         var(--button-sides-icon) + var(--icon-size) + var(--icon-gap)
     ) !important;
-    --left: none;
-    --right: var(--button-sides-icon);
+	--left: none;
+	--right: var(--button-sides-icon);
 
-    /*&[data-analytics-action="PostShoutReply"] {
-        --mask: var(--icon-16-reply) !important;
-    }*/
+	/*&[data-analytics-action="PostShoutReply"] {
+	    --mask: var(--icon-16-reply) !important;
+	}*/
 
-    &:before {
-        --show-icon: block !important;
-    }
+	&:before {
+		--show-icon: block !important;
+	}
 }
 
 .shout-reply-ui {
-    margin-top: 10px;
-    margin-left: var(--shout-inset);
-    animation: fade_popup_reduced var(--trans) var(--trans-function);
+	margin-top: 10px;
+	margin-left: var(--shout-inset);
+	animation: fade_popup_reduced var(--trans) var(--trans-function);
 }
 
 .shout-container {
-    padding: 6px 0 !important;
+	padding: 6px 0 !important;
 }
 .shout-list {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: var(--shout-padding);
-    padding-top: var(--shout-padding);
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	gap: var(--shout-padding);
+	padding-top: var(--shout-padding);
 
-    .shout-form + & {
-        padding-top: unset;
-    }
+	.shout-form + & {
+		padding-top: unset;
+	}
 
-    .shout-list-item > & {
-        &:before {
-            content: "";
-            position: absolute;
-            left: calc(
-                (var(--shout-avatar-size) + (var(--shout-tree-size) / 2)) /
-                    2
-            );
-            top: var(--shout-padding);
-            bottom: var(--shout-padding);
+	.shout-list-item > & {
+		&:before {
+			content: "";
+			position: absolute;
+			left: calc(
+				(var(--shout-avatar-size) + (var(--shout-tree-size) / 2)) /
+				2
+			);
+			top: var(--shout-padding);
+			bottom: var(--shout-padding);
 
-            width: var(--shout-tree-size);
-            background: var(--shout-tree);
-            display: block;
-        }
-    }
+			width: var(--shout-tree-size);
+			background: var(--shout-tree);
+			display: block;
+		}
+	}
 
-    @media (max-width: 980px) {
-        &:before {
-            display: none !important;
-        }
-    }
+	@media (max-width: 980px) {
+		&:before {
+			display: none !important;
+		}
+	}
 
-    &:first-child {
-        padding-top: unset;
-    }
+	&:first-child {
+		padding-top: unset;
+	}
 }
 .shout-list-item {
-    position: relative;
+	position: relative;
 
-    margin: unset !important;
+	margin: unset !important;
 
-    .shout-list-item > .shout-list > & {
-        margin-left: var(--shout-inset) !important;
-        --shout-stem-width: 10px;
+	.shout-list-item > .shout-list > & {
+		margin-left: var(--shout-inset) !important;
+		--shout-stem-width: 10px;
 
-        &:before {
-            content: '';
-            position: absolute;
-            left: calc(-1 * ((var(--shout-avatar-size) / 2)) + 2px);
-            top: calc(6px + var(--shout-avatar-top) + (var(--shout-avatar-size) / 2) - (var(--shout-tree-size) / 2 ));
-            width: var(--shout-stem-width);
-            height: var(--shout-tree-size);
-            background: var(--shout-tree);
-            display: block;
-        }
+		&:before {
+			content: '';
+			position: absolute;
+			left: calc(-1 * ((var(--shout-avatar-size) / 2)) + 2px);
+			top: calc(6px + var(--shout-avatar-top) + (var(--shout-avatar-size)
+				/ 2) - (var(--shout-tree-size) / 2));
+			width: var(--shout-stem-width);
+			height: var(--shout-tree-size);
+			background: var(--shout-tree);
+			display: block;
+		}
 
-        &:not(:last-child) {
-            &:after {
-                display: none;
-            }
-        }
+		&:not(:last-child) {
+			&:after {
+				display: none;
+			}
+		}
 
-        &:after {
-            content: '';
-            position: absolute;
-            display: block;
-            left: calc(-1 * ((var(--shout-avatar-size) / 2)));
-            top: calc((6px + var(--shout-avatar-top) + (var(--shout-avatar-size) / 2) - (var(--shout-tree-size) / 2 )) + var(--shout-tree-size));
-            bottom: 0;
-            width: var(--shout-stem-width);
-            background: oklch(var(--b5));
-        }
-    }
+		&:after {
+			content: '';
+			position: absolute;
+			display: block;
+			left: calc(-1 * ((var(--shout-avatar-size) / 2)));
+			top: calc((6px + var(--shout-avatar-top) + (var(--shout-avatar-size)
+				/ 2) - (var(--shout-tree-size) / 2)) + var(--shout-tree-size));
+			bottom: 0;
+			width: var(--shout-stem-width);
+			background: oklch(var(--b5));
+		}
+	}
 }
 
 .shout {
-    border: unset;
-    min-height: 52px;
-    padding: 6px 10px 8px;
-    margin: -2px -10px;
-    border-radius: var(--item-med-radius);
+	border: unset;
+	min-height: 52px;
+	padding: 6px 10px 8px;
+	margin: -2px -10px;
+	border-radius: var(--item-med-radius);
 
-    &.shout--deleted {
-        min-height: 18px;
-    }
+	&.shout--deleted {
+		min-height: 18px;
+	}
 
-    .shout-container--active > & {
-        background: oklch(var(--h4) / 20%);
-    }
+	.shout-container--active > & {
+		background: oklch(var(--h4) / 20%);
+	}
 
-    animation: var(
-        --motion,
-        chartlist 0.4s var(--trans-function)
-    ) !important;
-    animation-delay: var(--delay, 0s) !important;
-    animation-fill-mode: backwards !important;
+	animation: var(
+		--motion,
+		chartlist 0.4s var(--trans-function)
+	) !important;
+	animation-delay: var(--delay, 0s) !important;
+	animation-fill-mode: backwards !important;
 
-    .shout-user-avatar-link {
-        display: none;
-    }
+	.shout-user-avatar-link {
+		display: none;
+	}
 
-    & > .shout-user {
-        text-decoration: none !important;
-    }
+	& > .shout-user {
+		text-decoration: none !important;
+	}
 
-    &.link-block--hover {
-        & > .shout-user > a {
-            text-decoration: underline !important;
-        }
-    }
+	&.link-block--hover {
+		& > .shout-user > a {
+			text-decoration: underline !important;
+		}
+	}
 
-    &:before {
-        --left: -41px;
-        --margin-top: -17px;
-    }
+	&:before {
+		--left: -41px;
+		--margin-top: -17px;
+	}
 }
 
 .shout-vote-indicator {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: 500px;
-    background: var(--shout-vote-indicator);
-    opacity: 0;
-    transform: scaleX(0.5);
-    transform-origin: right;
-    pointer-events: none;
-    border-radius: var(--item-big-radius);
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	width: 500px;
+	background: var(--shout-vote-indicator);
+	opacity: 0;
+	transform: scaleX(0.5);
+	transform-origin: right;
+	pointer-events: none;
+	border-radius: var(--item-big-radius);
 
-    transition-property: opacity, transform;
-    transition-duration: 0.6s;
-    transition-timing-function: var(--trans-function);
+	transition-property: opacity, transform;
+	transition-duration: 0.6s;
+	transition-timing-function: var(--trans-function);
 
-    --hue-over: var(--hue-pos);
-    --sat-over: var(--sat-pos);
-    --lit-over: var(--lit-pos);
+	--hue-over: var(--hue-pos);
+	--sat-over: var(--sat-pos);
+	--lit-over: var(--lit-pos);
 
-    &[aria-checked="true"] {
-        opacity: 1;
-        transform: scaleX(1);
-    }
+	&[aria-checked="true"] {
+		opacity: 1;
+		transform: scaleX(1);
+	}
 }
 
 .shout-top {
-    display: flex;
+	display: flex;
 }
 
 .shout-basics {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex: 1;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	flex: 1;
 
-    @media (max-width: 600px) {
-      align-items: unset;
-      gap: 2px 0;
-      flex-direction: column;
-    }
+	@media (max-width: 600px) {
+		align-items: unset;
+		gap: 2px 0;
+		flex-direction: column;
+	}
 }
 
 .shout-actions {
-    margin: unset;
-    position: static;
-    flex-shrink: 0;
+	margin: unset;
+	position: static;
+	flex-shrink: 0;
 
-    opacity: var(--shout-actions-opacity);
-    transition-property: opacity;
-    transition-duration: var(--trans);
-    transition-timing-function: var(--trans-function);
+	opacity: var(--shout-actions-opacity);
+	transition-property: opacity;
+	transition-duration: var(--trans);
+	transition-timing-function: var(--trans-function);
 
-    display: flex;
-    flex-direction: row-reverse;
-    gap: var(--card-gap);
+	display: flex;
+	flex-direction: row-reverse;
+	gap: var(--card-gap);
 
-    & > .shout-action-more,
-    & > .shout-action {
-        margin: unset;
-    }
+	& > .shout-action-more,
+	& > .shout-action {
+		margin: unset;
+	}
 
-    & > .shout-action-more {
-        order: -1;
-    }
+	& > .shout-action-more {
+		order: -1;
+	}
 
-    &:before,
-    &:after {
-        display: none;
-    }
+	&:before,
+	&:after {
+		display: none;
+	}
 }
 
 .shout:is(:hover, :focus-within) > .shout-top > .shout-actions {
-    opacity: 1;
-    transition: none;
+	opacity: 1;
+	transition: none;
 }
 
 .shout-more-actions {
-    --mask: var(--icon-16-settings);
-    width: 12px !important;
-    --font-size: 0;
+	--mask: var(--icon-16-settings);
+	width: 12px !important;
+	--font-size: 0;
 }
 
 .shout-action-button {
-    height: fit-content !important;
+	height: fit-content !important;
 
-    &:not(:hover, :focus-visible, .vote-button--voted, .shout-reply--open) {
-        --col: oklch(var(--c3));
-        --mask-colour: oklch(var(--c3) / 80%);
-    }
+	&:not(:hover, :focus-visible, .vote-button--voted, .shout-reply--open) {
+		--col: oklch(var(--c3));
+		--mask-colour: oklch(var(--c3) / 80%);
+	}
 }
 
 .shout-action {
-    margin-left: 6px;
-    text-transform: lowercase;
+	margin-left: 6px;
+	text-transform: lowercase;
 }
 
 .vote-button--voted {
-    --col: oklch(var(--l3-c)) !important;
-    --mask-colour: color-mix(
+	--col: oklch(var(--l3-c)) !important;
+	--mask-colour: color-mix(
         in oklch,
         oklch(var(--l3-c)),
         oklch(var(--l4-c)) 30%
     );
-    --force-font-weight: var(--font-weight-medium) !important;
+	--force-font-weight: var(--font-weight-medium) !important;
 }
 
 .shout-user,
 .user-list-name,
 .listeners-section-item-name,
 .top-listeners-item-name {
-    line-height: var(--line-height) !important;
+	line-height: var(--line-height) !important;
 }
 .shout-user > a,
 .user-list-name,
 .listeners-section-item-name,
 .top-listeners-item-name {
-    color: var(--name-colour, oklch(var(--l3-c)));
-    font-weight: var(--font-weight-medium);
+	color: var(--name-colour, oklch(var(--l3-c)));
+	font-weight: var(--font-weight-medium);
 }
 
 .shout-body {
-    font-size: var(--font-size) !important;
-    line-height: var(--line-height) !important;
+	font-size: var(--font-size) !important;
+	line-height: var(--line-height) !important;
 
-    margin-top: 2px;
-    margin-right: 90px;
+	margin-top: 2px;
+	margin-right: 90px;
 
-    @media (max-width: 980px) {
-        margin-top: 4px;
-        margin-right: unset;
-    }
+	@media (max-width: 980px) {
+		margin-top: 4px;
+		margin-right: unset;
+	}
 
-    & > .markdown-body {
-        max-height: 700px;
-        overflow: hidden;
-        text-overflow: ellipsis;
+	& > .markdown-body {
+		max-height: 700px;
+		overflow: hidden;
+		text-overflow: ellipsis;
 
-        img {
-            width: unset;
-            max-height: 320px;
-        }
-    }
+		img {
+			width: unset;
+			max-height: 320px;
+		}
+	}
 
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 .translated-notice {
-    margin-top: 6px;
+	margin-top: 6px;
 
-    display: flex;
-    align-items: center;
-    gap: 4px;
+	display: flex;
+	align-items: center;
+	gap: 4px;
 
-    font-size: 13px;
-    color: oklch(var(--c3));
-    cursor: default;
+	font-size: 13px;
+	color: oklch(var(--c3));
+	cursor: default;
 }
 .translated-notice-icon {
-    --icon-size: 14px;
+	--icon-size: 14px;
 }
 
 .shout-user {
-    width: fit-content;
-    display: inline-flex;
-    margin: unset;
-    font-weight: var(--font-weight-medium);
+	width: fit-content;
+	display: inline-flex;
+	margin: unset;
+	font-weight: var(--font-weight-medium);
 }
 .shout-timestamp {
-    height: fit-content;
-    color: oklch(var(--c3) / 85%) !important;
-    font-size: 12px;
-    line-height: 12px;
-    display: inline-flex;
-    align-items: center;
-    right: unset;
-    top: unset;
-    text-transform: lowercase;
-    cursor: pointer;
-    position: relative;
-    margin: unset;
+	height: fit-content;
+	color: oklch(var(--c3) / 85%) !important;
+	font-size: 12px;
+	line-height: 12px;
+	display: inline-flex;
+	align-items: center;
+	right: unset;
+	top: unset;
+	text-transform: lowercase;
+	cursor: pointer;
+	position: relative;
+	margin: unset;
 }
 
 .shout-user-avatar,
 .shout-user-avatar-link {
-    width: var(--shout-avatar-size);
-    height: var(--shout-avatar-size);
-    left: calc(-1 * (var(--shout-margin-left))) !important;
-    box-shadow: var(--interact-shadow);
-    border-radius: var(--avatar-radius);
-    display: flex !important;
+	width: var(--shout-avatar-size);
+	height: var(--shout-avatar-size);
+	left: calc(-1 * (var(--shout-margin-left))) !important;
+	box-shadow: var(--interact-shadow);
+	border-radius: var(--avatar-radius);
+	display: flex !important;
 }
 .shout-user-avatar {
-    position: absolute;
-    top: var(--shout-avatar-top) !important;
-    z-index: 20;
+	position: absolute;
+	top: var(--shout-avatar-top) !important;
+	z-index: 20;
 }
 
 .shout--deleted,
 .shout--reported {
-    padding: 0 !important;
-    background: unset;
-    color: oklch(var(--c3) / 40%);
-    margin-bottom: 0;
-    position: relative;
+	padding: 0 !important;
+	background: unset;
+	color: oklch(var(--c3) / 40%);
+	margin-bottom: 0;
+	position: relative;
 
-    & > p {
-        margin-left: 8px;
-    }
+	& > p {
+		margin-left: 8px;
+	}
 
-    &:before {
-        --show-icon: block;
-        --margin-top: -9px;
-    }
+	&:before {
+		--show-icon: block;
+		--margin-top: -9px;
+	}
 }
 
 .shout:not(.shout--deleted, .shout--reported):before {
-    --mask: var(--icon-16-warning);
-    color: oklch(var(--c3) / 40%);
+	--mask: var(--icon-16-warning);
+	color: oklch(var(--c3) / 40%);
 }
 .shout--deleted {
-    --mask: var(--icon-16-trash);
+	--mask: var(--icon-16-trash);
 }
 .shout--reported {
-    --mask: var(--icon-16-report);
+	--mask: var(--icon-16-report);
 }
 
 /*     ACTIVE     */
 .shout-container--active {
-    background: unset;
-    margin: unset;
-    padding: unset;
+	background: unset;
+	margin: unset;
+	padding: unset;
 }
 
 .shout-more-replies-after,
 .shout-more-replies-before {
-    &:not(:hover, :focus) {
-        --col: oklch(var(--c3)) !important;
-        --mask-colour: currentColor !important;
-    }
+	&:not(:hover, :focus) {
+		--col: oklch(var(--c3)) !important;
+		--mask-colour: currentColor !important;
+	}
 }
-
 
 .shout-more-actions {
-    padding-left: var(--see-more-pad) !important;
-    padding-right: var(--see-more-pad) !important;
+	padding-left: var(--see-more-pad) !important;
+	padding-right: var(--see-more-pad) !important;
 }
 
-
-
 .shout-help-text {
-    align-items: center;
+	align-items: center;
 
-    clip: unset !important;
-    width: unset !important;
-    height: var(--button-height) !important;
-    inset: unset !important;
-    margin: unset !important;
+	clip: unset !important;
+	width: unset !important;
+	height: var(--button-height) !important;
+	inset: unset !important;
+	margin: unset !important;
 
-    bottom: 0 !important;
+	bottom: 0 !important;
 }

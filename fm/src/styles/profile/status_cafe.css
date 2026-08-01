@@ -1,48 +1,48 @@
 .status-cafe {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    cursor: pointer;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	cursor: pointer;
 
-    &:hover {
-        --hover-underline: underline oklch(var(--c3));
-    }
+	&:hover {
+		--hover-underline: underline oklch(var(--c3));
+	}
 }
 
 .status-cafe-content {
-    &.is-loading {
-        color: oklch(var(--c2) / 80%);
-    }
+	&.is-loading {
+		color: oklch(var(--c2) / 80%);
+	}
 }
 
 .status-cafe-emoji {
-    display: inline-flex;
-    justify-content: center;
-    font-size: 13px;
-    --icon-size: 16px;
-    width: 16px;
-    margin-right: 4px;
+	display: inline-flex;
+	justify-content: center;
+	font-size: 13px;
+	--icon-size: 16px;
+	width: 16px;
+	margin-right: 4px;
 
-    .status-cafe-loading-spinner {
-        display: flex;
-        align-items: center;
-        --icon: var(--icon-16-spinner);
-        animation: spinner 1s linear infinite;
-    }
+	.status-cafe-loading-spinner {
+		display: flex;
+		align-items: center;
+		--icon: var(--icon-16-spinner);
+		animation: spinner 1s linear infinite;
+	}
 
-    & > .bleh-icon {
-        --icon: var(--icon-16-x);
-    }
+	& > .bleh-icon {
+		--icon: var(--icon-16-x);
+	}
 }
 
 .status-cafe-text {
-    text-align: left;
+	text-align: left;
 }
 
 .status-cafe-time {
-    font-size: 13px;
-    color: oklch(var(--c3));
-    flex-shrink: 0;
-    text-decoration: var(--hover-underline, none);
-    margin-left: 2px;
+	font-size: 13px;
+	color: oklch(var(--c3));
+	flex-shrink: 0;
+	text-decoration: var(--hover-underline, none);
+	margin-left: 2px;
 }

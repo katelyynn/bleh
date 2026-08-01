@@ -1,175 +1,174 @@
 .popup_background {
-    opacity: 1 !important;
-    background: transparent !important;
-    animation: fade_popup_reduced var(--trans-short) var(--trans-function);
+	opacity: 1 !important;
+	background: transparent !important;
+	animation: fade_popup_reduced var(--trans-short) var(--trans-function);
 
-    &[style^="opacity: 0.8;"] {
-        background: var(--modal-bg) !important;
-    }
+	&[style^="opacity: 0.8;"] {
+		background: var(--modal-bg) !important;
+	}
 
-    &.window-removing {
-        background: transparent !important;
-        backdrop-filter: unset !important;
-        -webkit-backdrop-filter: unset !important;
-    }
+	&.window-removing {
+		background: transparent !important;
+		backdrop-filter: unset !important;
+		-webkit-backdrop-filter: unset !important;
+	}
 }
 .popup_wrapper {
-    backdrop-filter: unset !important;
-    -webkit-backdrop-filter: unset !important;
-    transform-origin: top;
+	backdrop-filter: unset !important;
+	-webkit-backdrop-filter: unset !important;
+	transform-origin: top;
 
-    transition-property: transform, opacity;
-    transition-duration: var(--trans-short);
-    transition-timing-function: var(--trans-function);
+	transition-property: transform, opacity;
+	transition-duration: var(--trans-short);
+	transition-timing-function: var(--trans-function);
 
-    &.window-removing {
-        opacity: 0 !important;
-    }
+	&.window-removing {
+		opacity: 0 !important;
+	}
 }
 
 .modal-processing {
-    pointer-events: none;
+	pointer-events: none;
 }
 
 .modal-content {
-    animation: var(
-        --motion,
-        solarium 0.24s var(--trans-function)
-    ) !important;
+	animation: var(
+		--motion,
+		solarium 0.24s var(--trans-function)
+	) !important;
 }
 .date-range-picker-content:before,
 .dropdown-menu-clickable::before,
 .navlist-hidden-list::before {
-    display: none;
+	display: none;
 }
 .date-range-picker-content,
 .dropdown-menu-clickable--padded,
 .navlist-hidden-list,
 .events-filter-location-dropdown {
-    padding: var(--card-gap) !important;
+	padding: var(--card-gap) !important;
 }
 .modal-body {
-    padding: var(--card-padding) !important;
+	padding: var(--card-padding) !important;
 
-    &[data-modal-type="narrow,left-aligned"] {
-        padding-top: calc(var(--card-padding) + 26px) !important;
-    }
+	&[data-modal-type="narrow,left-aligned"] {
+		padding-top: calc(var(--card-padding) + 26px) !important;
+	}
 }
 
 .modal-dialog:not(.automatic-edit-modal) {
-    width: fit-content;
-    min-width: 400px;
+	width: fit-content;
+	min-width: 400px;
 }
 /* modal dialog v3 */
 .modal-actions {
-    position: absolute;
-    top: calc(var(--card-padding) - ((var(--modal-close-size) - 20px) / 2));
-    right: calc(var(--card-padding) - ((var(--modal-close-size) - 20px) / 2));
+	position: absolute;
+	top: calc(var(--card-padding) - ((var(--modal-close-size) - 20px) / 2));
+	right: calc(var(--card-padding) - ((var(--modal-close-size) - 20px) / 2));
 }
 .modal-actions .modal-buttons {
-    width: fit-content;
-    margin-right: 0 !important;
-    z-index: 100000000000000;
+	width: fit-content;
+	margin-right: 0 !important;
+	z-index: 100000000000000;
 
-    gap: var(--button-list-gap);
+	gap: var(--button-list-gap);
 }
 .modal-actions,
 .modal-actions .modal-buttons {
-    display: flex;
-    height: var(--modal-close-size);
-    margin: unset;
+	display: flex;
+	height: var(--modal-close-size);
+	margin: unset;
 }
 .modal-action-button {
-    --bg: transparent;
-    --bg-hov: oklch(var(--b4) / 40%);
-    --bg-atv: oklch(var(--b4) / 60%);
-    --shadow: none;
-    --col: oklch(var(--c3));
-    --mask-colour: currentColor;
+	--bg: transparent;
+	--bg-hov: oklch(var(--b4) / 40%);
+	--bg-atv: oklch(var(--b4) / 60%);
+	--shadow: none;
+	--col: oklch(var(--c3));
+	--mask-colour: currentColor;
 
-    --left: calc((var(--modal-close-size) - var(--icon-size)) / 2);
-    --icon-size: 16px;
-    --font-size: 0;
+	--left: calc((var(--modal-close-size) - var(--icon-size)) / 2);
+	--icon-size: 16px;
+	--font-size: 0;
 
-    width: var(--modal-close-size) !important;
-    height: var(--modal-close-size) !important;
-    margin: unset !important;
+	width: var(--modal-close-size) !important;
+	height: var(--modal-close-size) !important;
+	margin: unset !important;
 
-    &.modal-download {
-        --mask: var(--icon-16-download);
-    }
-    &.modal-dismiss {
-        --mask: var(--icon-16-x);
-        clip: unset !important;
-        margin: unset !important;
-        display: flex !important;
-        visibility: visible !important;
-    }
+	&.modal-download {
+		--mask: var(--icon-16-download);
+	}
+	&.modal-dismiss {
+		--mask: var(--icon-16-x);
+		clip: unset !important;
+		margin: unset !important;
+		display: flex !important;
+		visibility: visible !important;
+	}
 
-    &:before {
-        filter: unset !important;
-    }
+	&:before {
+		filter: unset !important;
+	}
 }
 .report-share-modal,
 .top-item-modal,
 .modal-share-content {
-    margin-top: 0;
+	margin-top: 0;
 }
 
 .modal-body .content-form .form-horizontal .form-submit {
-    width: 100%;
+	width: 100%;
 }
 
 .date-range-picker-content {
-    width: 320px;
+	width: 320px;
 }
 
 .modal-body > .modal-title {
-    padding-bottom: unset;
-    font-size: 16px;
-    line-height: 20px;
-    font-weight: var(--font-weight-medium);
-    letter-spacing: unset;
-    text-align: left;
-    margin-right: calc(var(--modal-close-size) + 10px) !important;
-    margin-bottom: var(--card-gap);
+	padding-bottom: unset;
+	font-size: 16px;
+	line-height: 20px;
+	font-weight: var(--font-weight-medium);
+	letter-spacing: unset;
+	text-align: left;
+	margin-right: calc(var(--modal-close-size) + 10px) !important;
+	margin-bottom: var(--card-gap);
 
-    & + .modal-inner-content {
-        margin: unset;
-    }
+	& + .modal-inner-content {
+		margin: unset;
+	}
 
-    img {
-        padding-bottom: var(--card-gap);
-    }
+	img {
+		padding-bottom: var(--card-gap);
+	}
 }
 
 .modal-dialog {
-    @media (max-width: 980px) {
-        max-width: var(--cards-width) !important;
-    }
+	@media (max-width: 980px) {
+		max-width: var(--cards-width) !important;
+	}
 }
 
 .big-modal-alert {
-    text-align: left;
+	text-align: left;
 }
-
 
 /* this allows tooltips */
 .modal-background,
 .modal-dialog,
 .popup_background,
 .popup_wrapper {
-    z-index: 9998;
+	z-index: 9998;
 }
 
 .popup_wrapper {
-    pointer-events: none;
+	pointer-events: none;
 
-    .modal-dialog {
-        pointer-events: auto;
-    }
+	.modal-dialog {
+		pointer-events: auto;
+	}
 }
 
 .modal-inner-content {
-    text-align: left;
+	text-align: left;
 }

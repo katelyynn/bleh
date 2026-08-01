@@ -10,89 +10,91 @@ import { dialogs, page } from '@/build/page';
 import { tl, trans } from '@/build/trans';
 
 export function load_dialogs() {
-    const elem = html.node`
+	const elem = html.node`
         <div class="bleh-modals" onclick=${() => {
-            const latest = Object.keys(dialogs).at(-1);
-            if (!latest) return;
+		const latest = Object.keys(dialogs).at(-1);
+		if (!latest) return;
 
-            if (dialogs[latest].dismiss) {
-                dialog_rm({ id: latest, modal_bg: true });
-            }
-        }} />
+		if (dialogs[latest].dismiss) {
+			dialog_rm({ id: latest, modal_bg: true });
+		}
+	}} />
     `;
 
-    document.body.appendChild(elem);
-    page.structure.dialogs = elem;
+	document.body.appendChild(elem);
+	page.structure.dialogs = elem;
 }
 
 type dialog = {
-    id: string,
-    title?: string,
-    subtitle?: string,
-    body: HTMLElement,
-    dismiss?: boolean,
-    type?: string,
-    has_overlays?: boolean,
-    replace?: boolean,
-    replace_if_possible?: boolean,
-    replace_id?: string,
-    allow_scroll?: boolean,
-    colourful?: boolean,
-    colourful_bg?: boolean,
-    handle_escape_manually?: boolean
-}
+	id: string;
+	title?: string;
+	subtitle?: string;
+	body: HTMLElement;
+	dismiss?: boolean;
+	type?: string;
+	has_overlays?: boolean;
+	replace?: boolean;
+	replace_if_possible?: boolean;
+	replace_id?: string;
+	allow_scroll?: boolean;
+	colourful?: boolean;
+	colourful_bg?: boolean;
+	handle_escape_manually?: boolean;
+};
 
 // Present a fullscreen dialog to the user
 export function dialog({
-    id = '',
-    title,
-    subtitle,
-    body = html.node``,
-    dismiss = true,
-    type = '',
-    has_overlays = true,
-    replace = false,
-    replace_if_possible = false,
-    replace_id = '',
-    allow_scroll = false,
-    colourful = false,
-    colourful_bg = false,
-    handle_escape_manually = false
+	id = '',
+	title,
+	subtitle,
+	body = html.node``,
+	dismiss = true,
+	type = '',
+	has_overlays = true,
+	replace = false,
+	replace_if_possible = false,
+	replace_id = '',
+	allow_scroll = false,
+	colourful = false,
+	colourful_bg = false,
+	handle_escape_manually = false,
 }: dialog): HTMLElement {
-    log(`creating ${id}`, 'window', 'info', {
-        id: id,
-        title: title,
-        subtitle: subtitle,
-        body: body,
-        dismiss: dismiss,
-        type: type,
-        has_overlays: has_overlays,
-        replace: replace,
-        replace_id: replace_id,
-        allow_scroll: allow_scroll,
-        colourful: colourful,
-        colourful_bg: colourful_bg,
-        handle_escape_manually: handle_escape_manually
-    });
+	log(`creating ${id}`, 'window', 'info', {
+		id: id,
+		title: title,
+		subtitle: subtitle,
+		body: body,
+		dismiss: dismiss,
+		type: type,
+		has_overlays: has_overlays,
+		replace: replace,
+		replace_id: replace_id,
+		allow_scroll: allow_scroll,
+		colourful: colourful,
+		colourful_bg: colourful_bg,
+		handle_escape_manually: handle_escape_manually,
+	});
 
-    if (replace && replace_if_possible) replace_if_possible = false;
+	if (replace && replace_if_possible) replace_if_possible = false;
 
-    if (replace_if_possible && Object.keys(dialogs).length > 0) {
-        replace = true;
+	if (replace_if_possible && Object.keys(dialogs).length > 0) {
+		replace = true;
 
-        for (let dialog in dialogs) {
-            replace_id = dialog;
-            break;
-        }
-    }
+		for (let dialog in dialogs) {
+			replace_id = dialog;
+			break;
+		}
+	}
 
-    let modal = html.node`
+	let modal = html.node`
         <div
-        class=${[
-            'bleh-modal',
-            colourful ? 'colourful' : '',
-            colourful_bg ? 'colourful-bg' : ''
-        ].join(' ')}
+        class=${
+		[
+			'bleh-modal',
+			colourful ? 'colourful' : '',
+			colourful_bg ? 'colourful-bg' : '',
+		].join(' ')
+	}
         role="dialog"
         data-modal-id=${id}
         data-modal-has-overlays=${has_overlays}
@@ -100,103 +102,107 @@ export function dialog({
         />
     `;
 
-    if (title) {
-        modal.setAttribute('aria-labelledby', 'modal_title');
-        modal.appendChild(html.node`
+	if (title) {
+		modal.setAttribute('aria-labelledby', 'modal_title');
+		modal.appendChild(html.node`
             <div class="bleh-modal-title" id="modal_title">
                 <h1>${title}</h1>
-                ${subtitle ? html.node`<p class="bleh-modal-subtitle">${subtitle}</p>` : ''}
+                ${
+			subtitle
+				? html.node`<p class="bleh-modal-subtitle">${subtitle}</p>`
+				: ''
+		}
             </div>
         `);
-    }
+	}
 
-    if (dismiss) {
-        modal.appendChild(html.node`
+	if (dismiss) {
+		modal.appendChild(html.node`
             <button class="modal-close-button" onclick=${() => {
-                dialog_rm({ id });
-            }}>
+			dialog_rm({ id });
+		}}>
                 ${tl(trans.close)}
             </button>
         `);
-    } else {
-        page.structure.dialogs.removeAttribute('onclick');
-    }
+	} else {
+		page.structure.dialogs.removeAttribute('onclick');
+	}
 
-    if (dismiss && !handle_escape_manually) {
-        document.addEventListener('keydown', (e) => {
-            if (e.key == 'Escape') {
-                dialog_rm({ id: id });
-            }
-        });
-    }
+	if (dismiss && !handle_escape_manually) {
+		document.addEventListener('keydown', (e) => {
+			if (e.key == 'Escape') {
+				dialog_rm({ id: id });
+			}
+		});
+	}
 
-    modal.appendChild(html.node`
+	modal.appendChild(html.node`
         <div class="bleh-modal-body" data-allow-scroll=${allow_scroll}>
             ${body}
         </div>
     `);
 
-    dialogs[id] = {
-        instance: modal,
-        dismiss
-    };
+	dialogs[id] = {
+		instance: modal,
+		dismiss,
+	};
 
-    if (replace || (!replace && dialogs.hasOwnProperty(replace_id))) {
-        log(`window set to replace ${replace_id}`, 'window');
+	if (replace || (!replace && dialogs.hasOwnProperty(replace_id))) {
+		log(`window set to replace ${replace_id}`, 'window');
 
-        dialog_rm({ id: replace_id });
-    }
+		dialog_rm({ id: replace_id });
+	}
 
-    page.structure.dialogs.appendChild(modal);
-    page.structure.dialogs.classList.add('has-dialog');
+	page.structure.dialogs.appendChild(modal);
+	page.structure.dialogs.classList.add('has-dialog');
 
-    return modal;
+	return modal;
 }
 
 export function dialog_rm({
-    id = '',
-    all = false,
-    modal_bg = false
+	id = '',
+	all = false,
+	modal_bg = false,
 }) {
-    // prevents clicks inside modal being broken
-    if (modal_bg) {
-        // @ts-ignore
-        if (event.target.classList[0] != 'bleh-modals') return;
-    }
+	// prevents clicks inside modal being broken
+	if (modal_bg) {
+		// @ts-ignore
+		if (event.target.classList[0] != 'bleh-modals') return;
+	}
 
-    if (all) {
-        log('requested kill all', 'window', 'info', { dialogs });
+	if (all) {
+		log('requested kill all', 'window', 'info', { dialogs });
 
-        for (let dialog in dialogs) {
-            dialog_rm({
-                id: dialog
-            });
-        }
+		for (let dialog in dialogs) {
+			dialog_rm({
+				id: dialog,
+			});
+		}
 
-        return;
-    }
+		return;
+	}
 
-    if (!id) return;
+	if (!id) return;
 
-    if (!page.structure.dialogs) return;
+	if (!page.structure.dialogs) return;
 
-    if (dialogs.hasOwnProperty(id)) {
-        let dialog = dialogs[id];
+	if (dialogs.hasOwnProperty(id)) {
+		let dialog = dialogs[id];
 
-        if (!page.structure.dialogs.contains(dialog.instance)) return;
+		if (!page.structure.dialogs.contains(dialog.instance)) return;
 
-        log(`queuing ${id} to kill`, 'window');
+		log(`queuing ${id} to kill`, 'window');
 
-        dialog.instance.classList.add('to-remove');
+		dialog.instance.classList.add('to-remove');
 
-        setTimeout(function () {
-            page.structure.dialogs.removeChild(dialog.instance);
-        }, 400);
+		setTimeout(function () {
+			page.structure.dialogs.removeChild(dialog.instance);
+		}, 400);
 
-        delete dialogs[id];
+		delete dialogs[id];
 
-        if (JSON.stringify(dialogs) == '{}') {
-            page.structure.dialogs.classList.remove('has-dialog');
-        }
-    }
+		if (JSON.stringify(dialogs) == '{}') {
+			page.structure.dialogs.classList.remove('has-dialog');
+		}
+	}
 }

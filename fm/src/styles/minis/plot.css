@@ -1,173 +1,172 @@
 .plot-header {
-    display: flex;
-    flex-wrap: wrap;
-    margin-bottom: var(--card-padding);
+	display: flex;
+	flex-wrap: wrap;
+	margin-bottom: var(--card-padding);
 }
 
 .plot-header-side {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
 
-    &.plot-header-side-main {
-        flex: 1;
-    }
+	&.plot-header-side-main {
+		flex: 1;
+	}
 }
 
 .plot-header-label {
-    color: oklch(var(--c3));
-    font-size: 13px;
-    cursor: default;
+	color: oklch(var(--c3));
+	font-size: 13px;
+	cursor: default;
 }
 
 .plot-header-options {
-    display: flex;
-    gap: var(--button-list-gap);
+	display: flex;
+	gap: var(--button-list-gap);
 }
 
 .plot-body {
-    background-color: var(--inset-background);
-    box-shadow: inset 0 0 0 1px var(--separator-base), var(--inset-shadow);
-    border-radius: var(--item-small-radius);
-    padding: 10px;
-    height: 600px;
-    overflow: hidden;
+	background-color: var(--inset-background);
+	box-shadow: inset 0 0 0 1px var(--separator-base), var(--inset-shadow);
+	border-radius: var(--item-small-radius);
+	padding: 10px;
+	height: 600px;
+	overflow: hidden;
 
-    &.empty {
-        --plot-body-empty: flex;
-        --plot-body-canvas: none;
-    }
+	&.empty {
+		--plot-body-empty: flex;
+		--plot-body-canvas: none;
+	}
 
-    &.loading {
-        --plot-body-loading: flex;
+	&.loading {
+		--plot-body-loading: flex;
 
-        &:after {
-            display: none !important;
-        }
+		&:after {
+			display: none !important;
+		}
 
-        & > .plot-canvas-container {
-            opacity: 0.6;
-        }
-    }
+		& > .plot-canvas-container {
+			opacity: 0.6;
+		}
+	}
 }
 
 .plot-body-empty-message {
-    display: var(--plot-body-empty, none);
+	display: var(--plot-body-empty, none);
 
-    justify-content: center;
-    align-items: center;
-    height: 100%;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
 }
 
 .plot-body-loading-message {
-    display: var(--plot-body-loading, none);
+	display: var(--plot-body-loading, none);
 
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
 }
 
 .plot-canvas-container {
-    height: 100%;
-    display: var(--plot-body-canvas, block);
+	height: 100%;
+	display: var(--plot-body-canvas, block);
 
-    transition-property: opacity;
-    transition-duration: 0.4s;
-    transition-timing-function: var(--trans-function-ani);
+	transition-property: opacity;
+	transition-duration: 0.4s;
+	transition-timing-function: var(--trans-function-ani);
 }
 
 .plot-footer {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 10px 30px;
-    margin-top: var(--card-gap);
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 10px 30px;
+	margin-top: var(--card-gap);
 }
 
-
 .plot-footer-item {
-    display: flex;
-    align-items: center;
-    gap: var(--g);
+	display: flex;
+	align-items: center;
+	gap: var(--g);
 
-    --g: 10px;
+	--g: 10px;
 
-    &:hover {
-        & > .plot-footer-action {
-            opacity: 1;
-            margin-left: unset;
-        }
+	&:hover {
+		& > .plot-footer-action {
+			opacity: 1;
+			margin-left: unset;
+		}
 
-        margin-right: calc(-1 * var(--g));
-    }
+		margin-right: calc(-1 * var(--g));
+	}
 
-    --button-height: 24px;
+	--button-height: 24px;
 
-    padding-right: var(--g);
-    margin-right: calc(-1 * (var(--g) + var(--button-height) + var(--g)));
+	padding-right: var(--g);
+	margin-right: calc(-1 * (var(--g) + var(--button-height) + var(--g)));
 
-    transition-property: margin-right;
-    transition-duration: 0.2s;
-    transition-timing-function: var(--trans-function-ani);
+	transition-property: margin-right;
+	transition-duration: 0.2s;
+	transition-timing-function: var(--trans-function-ani);
 }
 
 .plot-alert {
-    &[data-hidden="true"] {
-        display: none;
-    }
+	&[data-hidden="true"] {
+		display: none;
+	}
 
-    margin-bottom: var(--card-gap);
+	margin-bottom: var(--card-gap);
 }
 
 .plot-footer-colour {
-    width: 5px;
-    height: 14px;
-    border-radius: 50px;
+	width: 5px;
+	height: 14px;
+	border-radius: 50px;
 }
 
 .plot-footer-info {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 .plot-footer-header {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 13px;
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	font-size: 13px;
 }
 
 .plot-header-avatar {
-    --w: 14px;
-    width: var(--w);
-    height: var(--w);
-    --mask-size: 12px;
+	--w: 14px;
+	width: var(--w);
+	height: var(--w);
+	--mask-size: 12px;
 
-    display: flex;
+	display: flex;
 }
 
 .plot-footer-media {
-    font-weight: var(--font-weight-medium);
-    cursor: default;
+	font-weight: var(--font-weight-medium);
+	cursor: default;
 }
 
 .plot-footer-action {
-    opacity: 0;
+	opacity: 0;
 
-    transition-property: opacity;
-    transition-duration: 0.2s;
-    transition-timing-function: var(--trans-function-ani);
+	transition-property: opacity;
+	transition-duration: 0.2s;
+	transition-timing-function: var(--trans-function-ani);
 }
 
 .plot-footer-action-btn {
-    height: var(--button-height);
+	height: var(--button-height);
 
-    --icon-size: 14px;
+	--icon-size: 14px;
 
-    --bg: transparent;
-    --bg-hov: oklch(var(--b4) / 20%);
-    --bg-atv: oklch(var(--b4) / 40%);
-    --shadow: none;
+	--bg: transparent;
+	--bg-hov: oklch(var(--b4) / 20%);
+	--bg-atv: oklch(var(--b4) / 40%);
+	--shadow: none;
 }

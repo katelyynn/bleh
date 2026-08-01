@@ -17,141 +17,139 @@
 @import './summary.css';
 
 .header-title-secondary {
-    margin-top: unset !important;
-    font-size: var(--font-size) !important;
-    line-height: var(--line-height) !important;
+	margin-top: unset !important;
+	font-size: var(--font-size) !important;
+	line-height: var(--line-height) !important;
 
-    display: flex;
-    gap: 2px var(--item-list-gap);
-    align-items: center;
+	display: flex;
+	gap: 2px var(--item-list-gap);
+	align-items: center;
 }
 
 .sub-text-label {
-    display: flex;
-    align-items: center;
-    color: oklch(var(--c2) / 80%);
-    --mask-colour: currentColor;
+	display: flex;
+	align-items: center;
+	color: oklch(var(--c2) / 80%);
+	--mask-colour: currentColor;
 
-    .sub-text-label-sr {
-        display: none;
-    }
+	.sub-text-label-sr {
+		display: none;
+	}
 }
 
 .sub-text-pair {
-    display: flex;
-    align-items: center;
-    gap: var(--icon-gap);
-    margin: unset;
+	display: flex;
+	align-items: center;
+	gap: var(--icon-gap);
+	margin: unset;
 
-    &.sub-text-follow {
-        font-weight: var(--font-weight-medium);
-    }
+	&.sub-text-follow {
+		font-weight: var(--font-weight-medium);
+	}
 }
 
 .profile-name {
-    text-decoration: none !important;
-    cursor: default !important;
+	text-decoration: none !important;
+	cursor: default !important;
 }
 
 .about-me-sidebar {
-    display: block;
-    z-index: 10;
-    position: relative;
+	display: block;
+	z-index: 10;
+	position: relative;
 
-    & > .sep {
-        margin-top: var(--card-gap);
-    }
+	& > .sep {
+		margin-top: var(--card-gap);
+	}
 
-    margin-bottom: var(--card-gap);
+	margin-bottom: var(--card-gap);
 }
 .about-me-title {
-    display: flex;
-    justify-content: space-between;
-    gap: var(--icon-gap);
+	display: flex;
+	justify-content: space-between;
+	gap: var(--icon-gap);
 }
 .about-me-preview {
-    flex: unset !important;
+	flex: unset !important;
 }
 
 .profile-items {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    margin: 6px 0;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	margin: 6px 0;
 }
 .profile-item {
-    display: flex;
-    gap: var(--icon-gap);
-    text-align: left;
+	display: flex;
+	gap: var(--icon-gap);
+	text-align: left;
 
-    & > .bleh-icon {
-        --icon-colour: color-mix(
+	& > .bleh-icon {
+		--icon-colour: color-mix(
             in oklch,
             oklch(var(--c2)),
             oklch(var(--c3)) 50%
         );
-    }
+	}
 }
 .profile-item-text {
-    margin: unset !important;
+	margin: unset !important;
 
-    &:not(.subtle) {
-        flex: 1;
-        min-width: 130px;
-    }
+	&:not(.subtle) {
+		flex: 1;
+		min-width: 130px;
+	}
 }
 
 .tab-container {
-    background: unset !important;
-    box-shadow: unset !important;
-    padding: unset !important;
-    border-radius: unset !important;
-    width: 100% !important;
-    justify-content: center;
-    height: fit-content;
-    margin: unset !important;
+	background: unset !important;
+	box-shadow: unset !important;
+	padding: unset !important;
+	border-radius: unset !important;
+	width: 100% !important;
+	justify-content: center;
+	height: fit-content;
+	margin: unset !important;
 
-    & > li {
-        font: inherit;
-        flex: unset;
-    }
+	& > li {
+		font: inherit;
+		flex: unset;
+	}
 }
 .tab-container .selector {
-    display: none;
+	display: none;
 }
 
 .header-avatar-add {
-    width: 100%;
-    padding: unset;
-    border-radius: unset;
-    --mask: var(--icon-16-plus);
+	width: 100%;
+	padding: unset;
+	border-radius: unset;
+	--mask: var(--icon-16-plus);
 
-    & > .header-avatar-add-label {
-        display: none;
-    }
+	& > .header-avatar-add-label {
+		display: none;
+	}
 }
 
 .share-chart {
-    display: none;
+	display: none;
 }
-
-
 
 .your-progress-component {
-    padding: var(--side-action-side);
-    margin: 0 calc(var(--card-padding) - var(--side-action-side));
+	padding: var(--side-action-side);
+	margin: 0 calc(var(--card-padding) - var(--side-action-side));
 
-    background-color: oklch(var(--f4) / 8%);
-    border-radius: var(--card-radius);
+	background-color: oklch(var(--f4) / 8%);
+	border-radius: var(--card-radius);
 }
 .your-progress {
-    margin: var(--side-action-side) 0 0 0;
+	margin: var(--side-action-side) 0 0 0;
 }
 .buffer-3 > h4 {
-    color: oklch(var(--c3));
-    text-align: center;
-    font-size: 13px;
-    line-height: var(--line-height);
-    font-weight: var(--font-weight);
-    display: none;
+	color: oklch(var(--c3));
+	text-align: center;
+	font-size: 13px;
+	line-height: var(--line-height);
+	font-weight: var(--font-weight);
+	display: none;
 }

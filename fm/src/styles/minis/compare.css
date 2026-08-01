@@ -1,134 +1,134 @@
 .compare-header {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    padding-bottom: var(--card-gap);
-    margin-bottom: var(--card-gap);
-    border-bottom: 1px solid var(--card-border-base);
-    gap: var(--card-gap);
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	padding-bottom: var(--card-gap);
+	margin-bottom: var(--card-gap);
+	border-bottom: 1px solid var(--card-border-base);
+	gap: var(--card-gap);
 
-    .alert + & {
-        margin-top: var(--card-gap);
-    }
+	.alert + & {
+		margin-top: var(--card-gap);
+	}
 
-    .compare-users {
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: var(--card-gap);
-        flex: 1;
+	.compare-users {
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: var(--card-gap);
+		flex: 1;
 
-        & > .bleh-icon {
-            --icon: var(--icon-16-dots);
-            background-image: linear-gradient(
-                90deg,
-                oklch(var(--b4)),
-                oklch(var(--c1)),
-                oklch(var(--b4)),
-                oklch(var(--c1)),
-                oklch(var(--b4))
-            );
-            background-size: 200% 100%;
-            animation: gradient 1.3s linear infinite;
+		& > .bleh-icon {
+			--icon: var(--icon-16-dots);
+			background-image: linear-gradient(
+				90deg,
+				oklch(var(--b4)),
+				oklch(var(--c1)),
+				oklch(var(--b4)),
+				oklch(var(--c1)),
+				oklch(var(--b4))
+			);
+			background-size: 200% 100%;
+			animation: gradient 1.3s linear infinite;
 
-            [data-bleh--theme_type="light"] & {
-                background-image: linear-gradient(
-                    90deg,
-                    oklch(var(--c3)),
-                    oklch(var(--b5)),
-                    oklch(var(--c3)),
-                    oklch(var(--b5)),
-                    oklch(var(--c3))
-                );
-            }
-        }
-    }
+			[data-bleh--theme_type="light"] & {
+				background-image: linear-gradient(
+					90deg,
+					oklch(var(--c3)),
+					oklch(var(--b5)),
+					oklch(var(--c3)),
+					oklch(var(--b5)),
+					oklch(var(--c3))
+				);
+			}
+		}
+	}
 
-    .compare-selection {
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: var(--button-list-gap);
+	.compare-selection {
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: var(--button-list-gap);
 
-        & > .bleh-icon {
-            --icon: var(--icon-16-info);
-            color: oklch(var(--c3));
-            cursor: pointer;
-        }
-    }
+		& > .bleh-icon {
+			--icon: var(--icon-16-info);
+			color: oklch(var(--c3));
+			cursor: pointer;
+		}
+	}
 
-    .compare-user {
-        display: flex;
-        align-items: center;
-        gap: var(--item-list-gap);
-        cursor: default;
+	.compare-user {
+		display: flex;
+		align-items: center;
+		gap: var(--item-list-gap);
+		cursor: default;
 
-        & > .avatar {
-            width: var(--button-height);
-            height: var(--button-height);
-            --mask-size: 18px;
+		& > .avatar {
+			width: var(--button-height);
+			height: var(--button-height);
+			--mask-size: 18px;
 
-            &:after {
-                padding-top: unset;
-                --left: 50%;
-                --margin-left: calc(-1 * (var(--mask-size) / 2));
-                --mask: var(--icon-16-spinner);
-                animation: spinner 1.2s linear infinite;
-            }
-        }
-    }
+			&:after {
+				padding-top: unset;
+				--left: 50%;
+				--margin-left: calc(-1 * (var(--mask-size) / 2));
+				--mask: var(--icon-16-spinner);
+				animation: spinner 1.2s linear infinite;
+			}
+		}
+	}
 }
 
 .compare-body {
-    overflow-y: auto;
+	overflow-y: auto;
 
-    padding: var(--card-padding);
-    margin: calc(-1 * var(--card-padding));
+	padding: var(--card-padding);
+	margin: calc(-1 * var(--card-padding));
 }
 
 .compare-users.for-plot {
-    --plot-user-pad: 0;
-    margin: calc(-1 * var(--plot-user-pad));
+	--plot-user-pad: 0;
+	margin: calc(-1 * var(--plot-user-pad));
 }
 .compare-user-btn {
-    --bg: transparent;
-    --bg-hov: transparent;
-    --bg-atv: transparent;
-    --shadow: none;
-    --padding: var(--plot-user-pad);
+	--bg: transparent;
+	--bg-hov: transparent;
+	--bg-atv: transparent;
+	--shadow: none;
+	--padding: var(--plot-user-pad);
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: var(--icon-gap);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: var(--icon-gap);
 
-    min-width: 30px !important;
-    min-height: 30px !important;
+	min-width: 30px !important;
+	min-height: 30px !important;
 
-    & > .compare-user {
-        cursor: pointer;
-        background: oklch(var(--b5));
-    }
+	& > .compare-user {
+		cursor: pointer;
+		background: oklch(var(--b5));
+	}
 
-    & > .bleh-icon {
-        --icon: var(--mask);
-        transform-origin: left;
+	& > .bleh-icon {
+		--icon: var(--mask);
+		transform-origin: left;
 
-        transition-property: margin-left, opacity;
-        transition-duration: 0.2s;
-        transition-timing-function: var(--trans-function);
-    }
+		transition-property: margin-left, opacity;
+		transition-duration: 0.2s;
+		transition-timing-function: var(--trans-function);
+	}
 
-    &:not(.add-user) {
-        & > .bleh-icon {
-            --icon-size: 14px;
-        }
+	&:not(.add-user) {
+		& > .bleh-icon {
+			--icon-size: 14px;
+		}
 
-        &:not(:hover) {
-            & > .bleh-icon {
-                opacity: 0;
-                margin-left: calc(-1 * (var(--icon-size) + var(--icon-gap)));
-            }
-        }
-    }
+		&:not(:hover) {
+			& > .bleh-icon {
+				opacity: 0;
+				margin-left: calc(-1 * (var(--icon-size) + var(--icon-gap)));
+			}
+		}
+	}
 }

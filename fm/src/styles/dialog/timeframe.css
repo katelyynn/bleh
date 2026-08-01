@@ -1,37 +1,37 @@
 .timeframe-menu-content {
-    width: 300px;
+	width: 300px;
 }
 
 .date-range-picker-years {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
-    gap: var(--button-list-gap);
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+	gap: var(--button-list-gap);
 
-    margin-top: 10px;
-    padding-top: 10px;
-    border-top: 1px solid var(--separator-base);
+	margin-top: 10px;
+	padding-top: 10px;
+	border-top: 1px solid var(--separator-base);
 }
 
 .timeframe-picker-custom {
-    display: flex;
-    flex-direction: column;
-    gap: var(--item-list-gap);
-    align-items: center;
-    text-align: center;
+	display: flex;
+	flex-direction: column;
+	gap: var(--item-list-gap);
+	align-items: center;
+	text-align: center;
 }
 
 .timeframe-picker-item {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
 }
 
 .timeframe-picker-label {
-    color: oklch(var(--c3));
-    font-size: 13px;
+	color: oklch(var(--c3));
+	font-size: 13px;
 }
 
 .timeframe-error {
-    margin-left: auto;
-    margin-right: auto;
+	margin-left: auto;
+	margin-right: auto;
 }

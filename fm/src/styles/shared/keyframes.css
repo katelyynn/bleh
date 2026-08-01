@@ -1,469 +1,473 @@
 @keyframes staggered_spinner {
-    from {
-        transform: rotateZ(0);
-    }
-    to {
-        transform: rotateZ(360deg);
-    }
+	from {
+		transform: rotateZ(0);
+	}
+	to {
+		transform: rotateZ(360deg);
+	}
 }
 
 @keyframes staggered_spinner_inverted {
-    from {
-        transform: rotateZ(0);
-    }
-    to {
-        transform: rotateZ(-360deg);
-    }
+	from {
+		transform: rotateZ(0);
+	}
+	to {
+		transform: rotateZ(-360deg);
+	}
 }
 
 @keyframes bubble {
-    from {
-        transform: scale(0.9);
-        opacity: 0;
-    }
-    to {
-        transform: unset;
-        opacity: unset;
-    }
+	from {
+		transform: scale(0.9);
+		opacity: 0;
+	}
+	to {
+		transform: unset;
+		opacity: unset;
+	}
 }
 
 @keyframes grid {
-    from {
-        translate: 0 10px;
-        scale: 0.98;
-        opacity: 0;
-    }
-    to {
-        translate: 0 0;
-        scale: 1;
-        opacity: 1;
-    }
+	from {
+		translate: 0 10px;
+		scale: 0.98;
+		opacity: 0;
+	}
+	to {
+		translate: 0 0;
+		scale: 1;
+		opacity: 1;
+	}
 }
 
 @keyframes fade {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
 }
 
 @keyframes chartlist {
-    from {
-        opacity: 0;
-        transform: translateY(8px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+	from {
+		opacity: 0;
+		transform: translateY(8px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }
 
 @keyframes slide_down {
-    from {
-        transform: scaleY(0.85);
-        opacity: 0;
-    }
-    to {
-        transform: scaleY(1);
-        opacity: 1;
-    }
+	from {
+		transform: scaleY(0.85);
+		opacity: 0;
+	}
+	to {
+		transform: scaleY(1);
+		opacity: 1;
+	}
 }
 
 @keyframes bleh-chartlist-flash {
-    from {
-        --bg: oklch(var(--h4) / 15%) !important;
-    }
-    to {
-        --bg: transparent !important;
-    }
+	from {
+		--bg: oklch(var(--h4) / 15%) !important;
+	}
+	to {
+		--bg: transparent !important;
+	}
 }
 @keyframes bleh-chartlist-flash-odd {
-    from {
-        --bg: oklch(var(--h4) / 15%) !important;
-    }
-    to {
-        --bg: oklch(var(--b4) / 40%) !important;
-    }
+	from {
+		--bg: oklch(var(--h4) / 15%) !important;
+	}
+	to {
+		--bg: oklch(var(--b4) / 40%) !important;
+	}
 }
 
 @keyframes slide_left {
-    from {
-        transform: translateX(-10px);
-        opacity: 0;
-    }
-    to {
-        transform: unset;
-        opacity: unset;
-    }
+	from {
+		transform: translateX(-10px);
+		opacity: 0;
+	}
+	to {
+		transform: unset;
+		opacity: unset;
+	}
 }
 
 @keyframes spinner {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
 }
 
 @keyframes blur_in {
-    from, to {
-        scale: 1;
-        filter: blur(0) !important;
-        -webkit-filter: blur(0) !important;
-        opacity: 1 !important;
-    }
-    60% {
-        scale: 1.05;
-        filter: blur(4px) !important;
-        -webkit-filter: blur(0) !important;
-        opacity: 0 !important;
-    }
+	from,
+	to {
+		scale: 1;
+		filter: blur(0) !important;
+		-webkit-filter: blur(0) !important;
+		opacity: 1 !important;
+	}
+	60% {
+		scale: 1.05;
+		filter: blur(4px) !important;
+		-webkit-filter: blur(0) !important;
+		opacity: 0 !important;
+	}
 }
 
 @keyframes fade_popup_reduced {
-    from {
-        opacity: 0 !important;
-    }
-    to {
-        opacity: 1 !important;
-    }
+	from {
+		opacity: 0 !important;
+	}
+	to {
+		opacity: 1 !important;
+	}
 }
 @keyframes fade_popup_reverse_reduced {
-    to {
-        visibility: visible !important;
-        opacity: 0;
-    }
-    from {
-        visibility: visible !important;
-        opacity: 1;
-    }
+	to {
+		visibility: visible !important;
+		opacity: 0;
+	}
+	from {
+		visibility: visible !important;
+		opacity: 1;
+	}
 }
 
 @keyframes dropdown {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
 }
 @keyframes dropdown_reverse {
-    to {
-        visibility: visible !important;
-        opacity: 0;
-    }
-    from {
-        visibility: visible !important;
-        opacity: 1;
-    }
+	to {
+		visibility: visible !important;
+		opacity: 0;
+	}
+	from {
+		visibility: visible !important;
+		opacity: 1;
+	}
 }
 @keyframes dropdown_side {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
 }
 
 @keyframes oracle {
-    from,
-    to {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0.5;
-    }
+	from,
+	to {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0.5;
+	}
 }
 
 @keyframes solarium {
-    from {
-        filter: blur(calc(var(--solarium-percent) * 3px));
-        transform: scale(0.98);
-    }
-    to {
-        filter: blur(0);
-        transform: scale(1);
-    }
+	from {
+		filter: blur(calc(var(--solarium-percent) * 3px));
+		transform: scale(0.98);
+	}
+	to {
+		filter: blur(0);
+		transform: scale(1);
+	}
 }
 
 @keyframes solarium_menu {
-    from {
-        filter: blur(calc(var(--solarium-percent) * 3px));
-        transform-origin: top;
-        transform: scaleY(0.95);
-    }
-    to {
-        filter: blur(0);
-        transform-origin: top;
-        transform: scale(1);
-    }
+	from {
+		filter: blur(calc(var(--solarium-percent) * 3px));
+		transform-origin: top;
+		transform: scaleY(0.95);
+	}
+	to {
+		filter: blur(0);
+		transform-origin: top;
+		transform: scale(1);
+	}
 }
 
 @keyframes highlight_setting {
-    from, to {
-        background: transparent;
-    }
-    40% {
-        background: oklch(var(--f4) / 20%);
-    }
+	from,
+	to {
+		background: transparent;
+	}
+	40% {
+		background: oklch(var(--f4) / 20%);
+	}
 }
 
 @keyframes track_in {
-    from {
-        transform: translateY(5px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
+	from {
+		transform: translateY(5px);
+		opacity: 0;
+	}
+	to {
+		transform: translateY(0);
+		opacity: 1;
+	}
 }
 @keyframes grid_primary {
-    from {
-        transform: translateX(10px);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
+	from {
+		transform: translateX(10px);
+		opacity: 0;
+	}
+	to {
+		transform: translateX(0);
+		opacity: 1;
+	}
 }
 @keyframes grid_item {
-    from {
-        transform: translateX(-5px);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
+	from {
+		transform: translateX(-5px);
+		opacity: 0;
+	}
+	to {
+		transform: translateX(0);
+		opacity: 1;
+	}
 }
 
 @keyframes drop {
-    from {
-        transform: translateY(0);
-    }
-    75%,
-    to {
-        transform: translateY(90vh);
-    }
+	from {
+		transform: translateY(0);
+	}
+	75%,
+	to {
+		transform: translateY(90vh);
+	}
 }
 @keyframes stem {
-    from,
-    65% {
-        opacity: 1;
-    }
-    75%,
-    to {
-        opacity: 0;
-    }
+	from,
+	65% {
+		opacity: 1;
+	}
+	75%,
+	to {
+		opacity: 0;
+	}
 }
 @keyframes splat {
-    from,
-    80% {
-        opacity: 1;
-        transform: scale(0);
-    }
-    90% {
-        opacity: 0.5;
-        transform: scale(1);
-    }
-    to {
-        opacity: 0;
-        transform: scale(1.5);
-    }
+	from,
+	80% {
+		opacity: 1;
+		transform: scale(0);
+	}
+	90% {
+		opacity: 0.5;
+		transform: scale(1);
+	}
+	to {
+		opacity: 0;
+		transform: scale(1.5);
+	}
 }
 
 @keyframes notif {
-    from {
-        transform: translateX(var(--card-gap));
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
+	from {
+		transform: translateX(var(--card-gap));
+		opacity: 0;
+	}
+	to {
+		transform: translateY(0);
+		opacity: 1;
+	}
 }
 @keyframes notif_out {
-    to {
-        transform: translateX(var(--card-gap));
-        opacity: 0;
-    }
-    from {
-        transform: translateY(0);
-        opacity: 1;
-    }
+	to {
+		transform: translateX(var(--card-gap));
+		opacity: 0;
+	}
+	from {
+		transform: translateY(0);
+		opacity: 1;
+	}
 }
 
 @keyframes snow-fall {
-    from {
-        transform: translate(var(--x), -10px);
-    }
-    to {
-        transform: translate(var(--x-end), 105vh);
-    }
+	from {
+		transform: translate(var(--x), -10px);
+	}
+	to {
+		transform: translate(var(--x-end), 105vh);
+	}
 }
 
 @keyframes modal {
-    from {
-        transform: translateY(-6px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
+	from {
+		transform: translateY(-6px);
+		opacity: 0;
+	}
+	to {
+		transform: translateY(0);
+		opacity: 1;
+	}
 }
 
 @keyframes modal_out {
-    from {
-        transform: translateY(0);
-        opacity: 1;
-    }
-    to {
-        transform: translateY(-6px);
-        opacity: 0;
-    }
+	from {
+		transform: translateY(0);
+		opacity: 1;
+	}
+	to {
+		transform: translateY(-6px);
+		opacity: 0;
+	}
 }
 
 @keyframes requested {
-    from,
-    to {
-        transform: scale(1);
-    }
-    70% {
-        transform: scale(1.1);
-    }
+	from,
+	to {
+		transform: scale(1);
+	}
+	70% {
+		transform: scale(1.1);
+	}
 }
 
 @keyframes new {
-    from,
-    to {
-        background: oklch(var(--f4) / 30%);
-        color: oklch(var(--l3-c));
-    }
-    50% {
-        background: oklch(var(--f4) / 60%);
-        color: oklch(var(--l2-c-theme-switch));
-    }
+	from,
+	to {
+		background: oklch(var(--f4) / 30%);
+		color: oklch(var(--l3-c));
+	}
+	50% {
+		background: oklch(var(--f4) / 60%);
+		color: oklch(var(--l2-c-theme-switch));
+	}
 }
 
 @keyframes activity {
-    from {
-        transform: translateY(-5px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
+	from {
+		transform: translateY(-5px);
+		opacity: 0;
+	}
+	to {
+		transform: translateY(0);
+		opacity: 1;
+	}
 }
 
 @keyframes progress {
-    from,
-    to {
-        background-color: oklch(var(--h3));
-    }
-    50% {
-        background-color: oklch(var(--h2));
-    }
+	from,
+	to {
+		background-color: oklch(var(--h3));
+	}
+	50% {
+		background-color: oklch(var(--h2));
+	}
 }
 
 @keyframes valentine {
-    from, to {
-        color: oklch(var(--l4-c));
-        scale: 1;
-    }
-    40% {
-        color: color-mix(in oklch, oklch(var(--l2-c)) 80%, oklch(var(--l3-c)));
-        scale: 1.3;
-    }
+	from,
+	to {
+		color: oklch(var(--l4-c));
+		scale: 1;
+	}
+	40% {
+		color: color-mix(in oklch, oklch(var(--l2-c)) 80%, oklch(var(--l3-c)));
+		scale: 1.3;
+	}
 }
 
 @keyframes gradient {
-    from {
-        background-position: 0% 0%;
-    }
-    to {
-        background-position: -100% 0%;
-    }
+	from {
+		background-position: 0% 0%;
+	}
+	to {
+		background-position: -100% 0%;
+	}
 }
 
 @keyframes up {
-    from {
-        transform: translateY(10px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
+	from {
+		transform: translateY(10px);
+		opacity: 0;
+	}
+	to {
+		transform: translateY(0);
+		opacity: 1;
+	}
 }
 @keyframes down {
-    from {
-        transform: translateY(-10px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
+	from {
+		transform: translateY(-10px);
+		opacity: 0;
+	}
+	to {
+		transform: translateY(0);
+		opacity: 1;
+	}
 }
 
 @keyframes status {
-    from {
-        opacity: 0;
-        transform: scale(1.1);
-        filter: blur(2px);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-        filter: blur(0);
-    }
+	from {
+		opacity: 0;
+		transform: scale(1.1);
+		filter: blur(2px);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1);
+		filter: blur(0);
+	}
 }
 
 @keyframes status_cafe {
-    from {
-        translate: 0 2px;
-        scale: 0.99;
-        opacity: 0;
-    }
-    to {
-        translate: 0 0;
-        scale: 1;
-        opacity: 1;
-    }
+	from {
+		translate: 0 2px;
+		scale: 0.99;
+		opacity: 0;
+	}
+	to {
+		translate: 0 0;
+		scale: 1;
+		opacity: 1;
+	}
 }
 
 @keyframes follow_notice {
-    from, to {
-        color: oklch(var(--l3-c));
-    }
-    50% {
-        color: color-mix(in oklch, oklch(var(--l2-c)) 70%, oklch(var(--l3-c)));
-    }
+	from,
+	to {
+		color: oklch(var(--l3-c));
+	}
+	50% {
+		color: color-mix(in oklch, oklch(var(--l2-c)) 70%, oklch(var(--l3-c)));
+	}
 }
 
-
 @keyframes ina {
-    from, to {
-        scale: 1 1;
-    }
-    30% {
-        scale: 1.03 1;
-    }
+	from,
+	to {
+		scale: 1 1;
+	}
+	30% {
+		scale: 1.03 1;
+	}
 }
 
 @keyframes loading {
-    from {
-        width: 0;
-    }
-    to {
-        width: 100%;
-    }
+	from {
+		width: 0;
+	}
+	to {
+		width: 100%;
+	}
 }

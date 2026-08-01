@@ -1,333 +1,334 @@
 .campfire-panels {
-  display: flex;
-  gap: 1px;
-  position: relative;
+	display: flex;
+	gap: 1px;
+	position: relative;
 
-  border-radius: inherit;
-  border-bottom-left-radius: unset;
-  border-bottom-right-radius: unset;
+	border-radius: inherit;
+	border-bottom-left-radius: unset;
+	border-bottom-right-radius: unset;
 
-  background-color: oklch(var(--b5));
+	background-color: oklch(var(--b5));
 
-  overflow: hidden;
+	overflow: hidden;
 
-  max-height: 606px;
+	max-height: 606px;
 
-  @media (max-width: 980px) {
-    flex-direction: column;
-    max-height: unset;
-  }
+	@media (max-width: 980px) {
+		flex-direction: column;
+		max-height: unset;
+	}
 }
 
 .campfire-panel-main {
-  width: var(--cards-main-width);
+	width: var(--cards-main-width);
 
-  z-index: 3;
+	z-index: 3;
 
-  @media (max-width: 980px) {
-    width: unset;
-  }
+	@media (max-width: 980px) {
+		width: unset;
+	}
 }
 
 .campfire-panel-side {
-  width: var(--cards-sidebar-width);
-  background: linear-gradient(180deg, oklch(var(--b6) / 80%), oklch(var(--b5) / 60%));
-  padding: var(--card-padding) 0;
+	width: var(--cards-sidebar-width);
+	background: linear-gradient(180deg, oklch(var(--b6) / 80%), oklch(var(--b5)
+		/ 60%));
+	padding: var(--card-padding) 0;
 
-  z-index: 3;
+	z-index: 3;
 
-  overflow-y: auto;
+	overflow-y: auto;
 
-  @media (max-width: 980px) {
-    width: unset;
-    max-height: 500px;
-  }
+	@media (max-width: 980px) {
+		width: unset;
+		max-height: 500px;
+	}
 }
 
 .campfire-bg {
-  &.previous {
-      display: none;
-  }
+	&.previous {
+		display: none;
+	}
 
-  position: absolute;
-  inset: 0;
-  background-color: oklch(var(--b4));
-  background-size: 120%;
-  background-position: right center;
+	position: absolute;
+	inset: 0;
+	background-color: oklch(var(--b4));
+	background-size: 120%;
+	background-position: right center;
 
-  --mask: linear-gradient(180deg, transparent, white, transparent);
-  mask-image: var(--mask);
-  -webkit-mask-image: var(--mask);
+	--mask: linear-gradient(180deg, transparent, white, transparent);
+	mask-image: var(--mask);
+	-webkit-mask-image: var(--mask);
 
-  opacity: 0.1;
+	opacity: 0.1;
 }
 
 .campfire {
-    --w: 260px;
-    --gap: -60px;
-    padding: 80px 0;
-    overflow: hidden;
+	--w: 260px;
+	--gap: -60px;
+	padding: 80px 0;
+	overflow: hidden;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 40px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 40px;
 
-    position: relative;
+	position: relative;
 
-    @media (max-width: 600px) {
-      padding: 40px 0;
-      --w: 210px;
-    }
+	@media (max-width: 600px) {
+		padding: 40px 0;
+		--w: 210px;
+	}
 
-    background: linear-gradient(90deg, oklch(var(--b5)), transparent 5%, transparent 95%, oklch(var(--b5)));
+	background: linear-gradient(90deg, oklch(var(--b5)), transparent 5%,
+		transparent 95%, oklch(var(--b5)));
 
-    & > .campfire-items {
-        position: relative;
-        height: var(--w);
-        width: var(--w);
-        z-index: 10;
+	& > .campfire-items {
+		position: relative;
+		height: var(--w);
+		width: var(--w);
+		z-index: 10;
 
-        perspective: 1000px;
+		perspective: 1000px;
 
-        & > .campfire-item {
-            display: flex;
-            flex-direction: column;
-            gap: var(--card-gap);
+		& > .campfire-item {
+			display: flex;
+			flex-direction: column;
+			gap: var(--card-gap);
 
-            position: absolute;
-            top: 0;
-            left: 50%;
+			position: absolute;
+			top: 0;
+			left: 50%;
 
-            --offset: translateX(calc((var(--index) - var(--selected-index)) * (var(--w) + var(--gap)) - var(--w) / 2));
+			--offset: translateX(calc((var(--index) - var(--selected-index)) * (var(--w) + var(--gap)) - var(--w) / 2));
 
-            transform: var(--offset) var(--rotate);
-            --rotate: rotateY(calc(var(--proximity) * -15deg));
-            transform-style: preserve-3d;
+			transform: var(--offset) var(--rotate);
+			--rotate: rotateY(calc(var(--proximity) * -15deg));
+			transform-style: preserve-3d;
 
-            background-color: oklch(var(--b6));
-            border-radius: var(--item-big-radius);
+			background-color: oklch(var(--b6));
+			border-radius: var(--item-big-radius);
 
-            &[data-proximity="3"],
-            &[data-proximity="-3"] {
-              z-index: -1;
-            }
+			&[data-proximity="3"],
+			&[data-proximity="-3"] {
+				z-index: -1;
+			}
 
-            &[data-proximity="5"],
-            &[data-proximity="-5"] {
-              display: none;
-            }
+			&[data-proximity="5"],
+			&[data-proximity="-5"] {
+				display: none;
+			}
 
-            & > .campfire-item-cover {
-                width: var(--w);
-                height: var(--w);
-                border-radius: inherit;
-                background: oklch(var(--b4));
+			& > .campfire-item-cover {
+				width: var(--w);
+				height: var(--w);
+				border-radius: inherit;
+				background: oklch(var(--b4));
 
-                position: relative;
+				position: relative;
 
-                transition-property: box-shadow, opacity;
-                transition-duration: calc(var(--trans-toggle, 1) * 0.5s);
-                transition-timing-function: var(--trans-function);
+				transition-property: box-shadow, opacity;
+				transition-duration: calc(var(--trans-toggle, 1) * 0.5s);
+				transition-timing-function: var(--trans-function);
 
-                & > img {
-                    width: 100%;
-                    --mask-size: var(--cover-size-400);
-                    border-radius: inherit;
-                    user-select: none;
-                    -webkit-user-drag: none;
-                    pointer-events: none;
-                }
+				& > img {
+					width: 100%;
+					--mask-size: var(--cover-size-400);
+					border-radius: inherit;
+					user-select: none;
+					-webkit-user-drag: none;
+					pointer-events: none;
+				}
 
-                &:before {
-                    content: '';
-                    position: absolute;
-                    display: block;
-                    inset: 0;
-                    background-image: var(--cards-overlay-image-subtlest);
-                    border-top-left-radius: inherit;
-                    border-top-right-radius: inherit;
-                    background-repeat: repeat-x;
-                    z-index: 30;
-                    pointer-events: none;
-                }
+				&:before {
+					content: '';
+					position: absolute;
+					display: block;
+					inset: 0;
+					background-image: var(--cards-overlay-image-subtlest);
+					border-top-left-radius: inherit;
+					border-top-right-radius: inherit;
+					background-repeat: repeat-x;
+					z-index: 30;
+					pointer-events: none;
+				}
 
-                &:after {
-                    content: "" !important;
-                    display: block !important;
-                    position: absolute;
-                    inset: 0;
-                    background-image: var(--gloss-image) !important;
-                    background-size: 100% !important;
-                    opacity: var(--gloss);
-                    mix-blend-mode: var(--gloss-mix);
-                    pointer-events: none;
-                    padding: unset !important;
-                    box-shadow: unset !important;
-                    border-radius: inherit;
-                }
+				&:after {
+					content: "" !important;
+					display: block !important;
+					position: absolute;
+					inset: 0;
+					background-image: var(--gloss-image) !important;
+					background-size: 100% !important;
+					opacity: var(--gloss);
+					mix-blend-mode: var(--gloss-mix);
+					pointer-events: none;
+					padding: unset !important;
+					box-shadow: unset !important;
+					border-radius: inherit;
+				}
 
-                .campfire-item-cover-reflection {
-                  position: absolute;
-                  inset: 100% 0 0 0;
-                  background-size: cover;
-                  border-radius: inherit;
-                  transform: scaleY(-1);
-                  aspect-ratio: 1 / 1;
+				.campfire-item-cover-reflection {
+					position: absolute;
+					inset: 100% 0 0 0;
+					background-size: cover;
+					border-radius: inherit;
+					transform: scaleY(-1);
+					aspect-ratio: 1 / 1;
 
-                  --mask: linear-gradient(180deg, transparent 50%, white);
-                  mask-image: var(--mask);
-                  -webkit-mask-image: var(--mask);
+					--mask: linear-gradient(180deg, transparent 50%, white);
+					mask-image: var(--mask);
+					-webkit-mask-image: var(--mask);
 
-                  opacity: 0.2;
+					opacity: 0.2;
 
-                  z-index: -1;
+					z-index: -1;
 
-                  pointer-events: none;
-                }
-            }
+					pointer-events: none;
+				}
+			}
 
-            &[aria-checked="false"] {
-                transform: var(--offset) scale(0.65) var(--rotate);
+			&[aria-checked="false"] {
+				transform: var(--offset) scale(0.65) var(--rotate);
 
-                cursor: pointer;
+				cursor: pointer;
 
-                &:active {
-                  transform: var(--offset) scale(0.6) var(--rotate);
-                }
+				&:active {
+					transform: var(--offset) scale(0.6) var(--rotate);
+				}
 
-                & > .campfire-item-cover {
-                  opacity: 0.6;
-                  box-shadow: var(--card-shadow);
-                }
-            }
+				& > .campfire-item-cover {
+					opacity: 0.6;
+					box-shadow: var(--card-shadow);
+				}
+			}
 
-            &[aria-checked="true"] {
-                z-index: 30;
-            }
+			&[aria-checked="true"] {
+				z-index: 30;
+			}
 
-            transition-property: transform, opacity, filter;
-            transition-duration: calc(var(--trans-toggle, 1) * 0.5s);
-            transition-timing-function: var(--trans-function);
-        }
-    }
+			transition-property: transform, opacity, filter;
+			transition-duration: calc(var(--trans-toggle, 1) * 0.5s);
+			transition-timing-function: var(--trans-function);
+		}
+	}
 
-    & > .campfire-intro {
-        z-index: 21;
-        filter: var(--header-filter-shadow);
-    }
+	& > .campfire-intro {
+		z-index: 21;
+		filter: var(--header-filter-shadow);
+	}
 
-    & > .campfire-details {
-        display: flex;
-        flex-direction: column;
-        gap: 5px;
-        text-align: center;
-        z-index: 21;
-        filter: var(--header-filter-shadow);
+	& > .campfire-details {
+		display: flex;
+		flex-direction: column;
+		gap: 5px;
+		text-align: center;
+		z-index: 21;
+		filter: var(--header-filter-shadow);
 
-        & > .campfire-title {
-            font-size: 20px;
-            line-height: 24px;
-            color: oklch(var(--c1));
-            font-weight: var(--font-weight-medium);
-            justify-content: center;
-        }
-        & > .campfire-artist {
-            font-size: 16px;
-            line-height: 20px;
-            font-weight: var(--font-weight-medium);
-            margin-bottom: 10px;
+		& > .campfire-title {
+			font-size: 20px;
+			line-height: 24px;
+			color: oklch(var(--c1));
+			font-weight: var(--font-weight-medium);
+			justify-content: center;
+		}
+		& > .campfire-artist {
+			font-size: 16px;
+			line-height: 20px;
+			font-weight: var(--font-weight-medium);
+			margin-bottom: 10px;
 
-            display: flex;
-            justify-content: center;
-            color: oklch(var(--c3));
-            cursor: default;
+			display: flex;
+			justify-content: center;
+			color: oklch(var(--c3));
+			cursor: default;
 
-            & > a {
-                color: oklch(var(--c2) / 80%);
-            }
+			& > a {
+				color: oklch(var(--c2) / 80%);
+			}
 
-            & > a + a {
-                margin-left: 4px;
-            }
-        }
-        & > .campfire-plays {
-            color: oklch(var(--c3));
-            cursor: default;
-        }
-    }
+			& > a + a {
+				margin-left: 4px;
+			}
+		}
+		& > .campfire-plays {
+			color: oklch(var(--c3));
+			cursor: default;
+		}
+	}
 }
 
 .campfire-extended {
-    display: flex;
-    gap: 1px;
-    margin: unset;
+	display: flex;
+	gap: 1px;
+	margin: unset;
 
-    & > .content-panel {
-        display: flex;
-        flex-direction: column;
-        gap: var(--card-padding);
-        padding: var(--card-padding) 0;
+	& > .content-panel {
+		display: flex;
+		flex-direction: column;
+		gap: var(--card-padding);
+		padding: var(--card-padding) 0;
 
-        &.content-main {
-            flex: 1;
-        }
-        &.content-side {
-            flex-shrink: 0;
-            width: 500px;
-        }
+		&.content-main {
+			flex: 1;
+		}
+		&.content-side {
+			flex-shrink: 0;
+			width: 500px;
+		}
 
-        & > section {
-            padding: 0 var(--card-padding);
-            margin: unset;
-        }
-    }
+		& > section {
+			padding: 0 var(--card-padding);
+			margin: unset;
+		}
+	}
 }
-
 
 .friends-panel {
-    margin: unset;
-    padding: var(--card-padding);
+	margin: unset;
+	padding: var(--card-padding);
 }
 
-
 .campfire-cta {
-  padding: var(--card-padding) calc(var(--card-padding) - 12px);
-  background: linear-gradient(180deg, oklch(var(--b5)), color-mix(in oklch, oklch(var(--b4)) 40%, oklch(var(--b5))));
+	padding: var(--card-padding) calc(var(--card-padding) - 12px);
+	background: linear-gradient(180deg, oklch(var(--b5)), color-mix(in oklch,
+		oklch(var(--b4)) 40%, oklch(var(--b5))));
 
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-  gap: var(--card-gap);
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+	gap: var(--card-gap);
 }
 
 .campfire-cta-icon {
-  width: 34px;
-  height: 34px;
-  background: oklch(var(--h4) / 20%);
-  border-radius: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: oklch(var(--l3-c));
-  --mask-colour: currentColor;
-  --icon: var(--mask);
-  --icon-size: 16px;
+	width: 34px;
+	height: 34px;
+	background: oklch(var(--h4) / 20%);
+	border-radius: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: oklch(var(--l3-c));
+	--mask-colour: currentColor;
+	--icon: var(--mask);
+	--icon-size: 16px;
 }
 
 .campfire-cta-btn {
-  display: flex;
-  gap: 10px;
+	display: flex;
+	gap: 10px;
 
-  --bg: transparent;
-  --bg-hov: oklch(var(--b4) / 60%);
-  --bg-atv: oklch(var(--b4) / 80%);
-  --padding: 10px 12px;
-  --shadow: none;
+	--bg: transparent;
+	--bg-hov: oklch(var(--b4) / 60%);
+	--bg-atv: oklch(var(--b4) / 80%);
+	--padding: 10px 12px;
+	--shadow: none;
 
-  text-align: left;
+	text-align: left;
 }
 
 .campfire-cta-text-sub {
-  font-size: 13px;
-  color: oklch(var(--c3));
+	font-size: 13px;
+	color: oklch(var(--c3));
 }

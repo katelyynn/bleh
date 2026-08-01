@@ -1,8 +1,8 @@
 .btn-labs-homepage:not(:hover),
 .jumbotron {
-    color: oklch(var(--c2)) !important;
+	color: oklch(var(--c2)) !important;
 }
 
 .btn-lab-title {
-    color: inherit !important;
+	color: inherit !important;
 }

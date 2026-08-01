@@ -1,56 +1,56 @@
 .big-artist-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-    gap: var(--item-list-gap);
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+	gap: var(--item-list-gap);
 
-    &:before,
-    &:after {
-        display: none;
-    }
+	&:before,
+	&:after {
+		display: none;
+	}
 }
 .big-artist-list-wrap {
-    padding: unset;
-    width: 100%;
+	padding: unset;
+	width: 100%;
 }
 
 .big-artist-list-item {
-    padding-top: unset;
-    display: flex;
-    flex-direction: column;
+	padding-top: unset;
+	display: flex;
+	flex-direction: column;
 }
 .big-artist-list-avatar-desktop {
-    position: static;
-    order: -1;
-    --mask-size: var(--cover-size-200);
-    aspect-ratio: 1.3 / 1;
+	position: static;
+	order: -1;
+	--mask-size: var(--cover-size-200);
+	aspect-ratio: 1.3 / 1;
 
-    img {
-        position: static;
-    }
+	img {
+		position: static;
+	}
 }
 
 .big-artist-list-title a {
-    text-decoration: var(--force-underline, none) !important;
+	text-decoration: var(--force-underline, none) !important;
 }
 
 /* matches artist pages */
 .big-artist-list-listeners {
-    margin-top: 3px !important;
+	margin-top: 3px !important;
 }
 
 .big-artist-list-tags {
-    font-weight: var(--font-weight-medium);
+	font-weight: var(--font-weight-medium);
 }
 .big-artist-list-tags .tag:before {
-    display: none;
+	display: none;
 }
 .big-artist-list-bio {
-    margin-top: 6px !important;
+	margin-top: 6px !important;
 
-    p {
-        -webkit-box-orient: vertical;
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        overflow: hidden;
-    }
+	p {
+		-webkit-box-orient: vertical;
+		display: -webkit-box;
+		-webkit-line-clamp: 3;
+		overflow: hidden;
+	}
 }

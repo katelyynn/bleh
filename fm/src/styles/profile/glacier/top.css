@@ -1,151 +1,151 @@
 .glacier-library-top {
-    display: flex;
-    justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
 
-    @media (max-width: 980px) {
-        flex-direction: column;
-        gap: var(--card-gap);
-        justify-content: unset;
-    }
+	@media (max-width: 980px) {
+		flex-direction: column;
+		gap: var(--card-gap);
+		justify-content: unset;
+	}
 
-    .glacier-library-buttons {
-        .glacier-view-button {
-            &[data-glacier-view="list"] {
-                --mask: var(--icon-16-list);
-            }
-            &[data-glacier-view="grid"] {
-                --mask: var(--icon-16-grid);
-            }
-        }
+	.glacier-library-buttons {
+		.glacier-view-button {
+			&[data-glacier-view="list"] {
+				--mask: var(--icon-16-list);
+			}
+			&[data-glacier-view="grid"] {
+				--mask: var(--icon-16-grid);
+			}
+		}
 
-        .glacier-library-button {
-            &.bulk-edit-button {
-                --mask: var(--icon-16-edit-bulk);
-            }
-            &.edit-icon {
-                --mask: var(--icon-16-edit);
-            }
-            &.delete-icon {
-                --mask: var(--icon-16-trash);
-                --bg-hov: oklch(var(--h4) / 10%);
-                --bg-atv: oklch(var(--h4) / 20%);
-                --hue-over: var(--hue-neg);
-                --sat-over: var(--sat-neg) !important;
-                --lit-over: var(--lit-neg) !important;
-            }
-            &.love-button {
-                --mask: var(--icon-16-heart);
-                --font-size: 0;
-                --left: calc(
+		.glacier-library-button {
+			&.bulk-edit-button {
+				--mask: var(--icon-16-edit-bulk);
+			}
+			&.edit-icon {
+				--mask: var(--icon-16-edit);
+			}
+			&.delete-icon {
+				--mask: var(--icon-16-trash);
+				--bg-hov: oklch(var(--h4) / 10%);
+				--bg-atv: oklch(var(--h4) / 20%);
+				--hue-over: var(--hue-neg);
+				--sat-over: var(--sat-neg) !important;
+				--lit-over: var(--lit-neg) !important;
+			}
+			&.love-button {
+				--mask: var(--icon-16-heart);
+				--font-size: 0;
+				--left: calc(
                     (var(--button-height) - var(--icon-size)) / 2
                 ) !important;
-                --btn-left: 12px !important;
+				--btn-left: 12px !important;
 
-                &.love-button--loved {
-                    --mask: var(--icon-16-heart-solid);
-                }
-            }
-            &.glacier-configure-button {
-                --font-size: 0;
-                --left: calc(
+				&.love-button--loved {
+					--mask: var(--icon-16-heart-solid);
+				}
+			}
+			&.glacier-configure-button {
+				--font-size: 0;
+				--left: calc(
                     (var(--button-height) - var(--icon-size)) / 2
                 ) !important;
-                --btn-left: var(--button-sides) !important;
-            }
-            &.glacier-search-button {
-                --mask: var(--icon-16-search);
-            }
-        }
-    }
+				--btn-left: var(--button-sides) !important;
+			}
+			&.glacier-search-button {
+				--mask: var(--icon-16-search);
+			}
+		}
+	}
 }
 .glacier-library-metadata {
-    display: flex;
-    gap: var(--card-gap);
+	display: flex;
+	gap: var(--card-gap);
 
-    .glacier-library-metadata-item {
-        display: flex;
-        flex-direction: column;
-        overflow: hidden;
+	.glacier-library-metadata-item {
+		display: flex;
+		flex-direction: column;
+		overflow: hidden;
 
-        .glacier-library-metadata-item-value {
-            font-size: 16px;
-            line-height: 18px;
-            font-weight: var(--font-weight-medium);
-            cursor: default;
+		.glacier-library-metadata-item-value {
+			font-size: 16px;
+			line-height: 18px;
+			font-weight: var(--font-weight-medium);
+			cursor: default;
 
-            &.glacier-library-metadata-focus:not([data-type="artist"]) {
-                font-size: var(--font-size);
-                line-height: 17px;
-                max-width: 400px;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
+			&.glacier-library-metadata-focus:not([data-type="artist"]) {
+				font-size: var(--font-size);
+				line-height: 17px;
+				max-width: 400px;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
 
-                a:last-child:not(:hover) {
-                    color: inherit;
-                }
-            }
+				a:last-child:not(:hover) {
+					color: inherit;
+				}
+			}
 
-            .glacier-library-track-duration {
-                margin-left: 4px;
-            }
+			.glacier-library-track-duration {
+				margin-left: 4px;
+			}
 
-            a:first-child {
-                font-size: 16px;
-            }
+			a:first-child {
+				font-size: 16px;
+			}
 
-            a:not(:hover) {
-                color: oklch(var(--c1));
-            }
-        }
-    }
+			a:not(:hover) {
+				color: oklch(var(--c1));
+			}
+		}
+	}
 
-    .glacier-library-metadata-avatar {
-        position: relative;
-        width: 36px;
-        height: 36px;
-        background: var(--avatar-generic-background);
-        border-radius: var(--item-small-radius);
-        box-shadow: var(--interact-shadow);
-        overflow: hidden;
-        flex-shrink: 0;
+	.glacier-library-metadata-avatar {
+		position: relative;
+		width: 36px;
+		height: 36px;
+		background: var(--avatar-generic-background);
+		border-radius: var(--item-small-radius);
+		box-shadow: var(--interact-shadow);
+		overflow: hidden;
+		flex-shrink: 0;
 
-        & > img {
-            width: 36px;
-            height: 36px;
-        }
-    }
+		& > img {
+			width: 36px;
+			height: 36px;
+		}
+	}
 }
 .glacier-library-focused-header {
-    display: flex;
-    flex-direction: column;
-    gap: var(--card-gap);
+	display: flex;
+	flex-direction: column;
+	gap: var(--card-gap);
 
-    .glacier-library-top-upper {
-        display: flex;
-        justify-content: space-between;
+	.glacier-library-top-upper {
+		display: flex;
+		justify-content: space-between;
 
-        @media (max-width: 980px) {
-            justify-content: unset;
-            flex-direction: column;
-            gap: var(--card-gap);
-        }
-    }
+		@media (max-width: 980px) {
+			justify-content: unset;
+			flex-direction: column;
+			gap: var(--card-gap);
+		}
+	}
 }
 
 .value-panel {
-    .glacier-library-metadata + h2 {
-        margin-top: var(--card-gap) !important;
-    }
+	.glacier-library-metadata + h2 {
+		margin-top: var(--card-gap) !important;
+	}
 }
 
 .library-sort {
-    display: flex;
-    justify-content: right;
+	display: flex;
+	justify-content: right;
 }
 
 /* user did not scrobble album in date range */
 .library-header + .message {
-    color: oklch(var(--c3));
-    cursor: default;
+	color: oklch(var(--c3));
+	cursor: default;
 }

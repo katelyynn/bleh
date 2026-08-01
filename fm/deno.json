@@ -59,7 +59,13 @@
 	"fmt": {
 		"singleQuote": true,
 		"indentWidth": 4,
-		"useTabs": true
+		"useTabs": true,
+		"exclude": [
+			"bleh.user.js",
+			"bleh.user.css",
+			"ext/*",
+			"**/*.md"
+		]
 	},
 	"lint": {
 		"rules": {

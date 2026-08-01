@@ -1,67 +1,67 @@
 .logs {
-    font-family: Funnel Sans, system-ui;
-    font-size: 14px;
-    line-height: 18px;
+	font-family: Funnel Sans, system-ui;
+	font-size: 14px;
+	line-height: 18px;
 
-    display: var(--log, none);
-    flex-direction: column;
+	display: var(--log, none);
+	flex-direction: column;
 
-    position: fixed;
-    bottom: 2px;
-    left: 2px;
-    z-index: 10000000000;
-    max-width: 480px;
-    max-height: 72px;
-    overflow: hidden;
-    opacity: 0.3;
-    transition-property: opacity, max-width, max-height;
-    transition-duration: 0.2s;
-    transition-delay: 0.2s;
+	position: fixed;
+	bottom: 2px;
+	left: 2px;
+	z-index: 10000000000;
+	max-width: 480px;
+	max-height: 72px;
+	overflow: hidden;
+	opacity: 0.3;
+	transition-property: opacity, max-width, max-height;
+	transition-duration: 0.2s;
+	transition-delay: 0.2s;
 
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
 
-    background: rgba(0, 0, 0, 75%);
-    padding: 2px;
-    border-radius: 4px;
+	background: rgba(0, 0, 0, 75%);
+	padding: 2px;
+	border-radius: 4px;
 
-    @media (max-width: 980px) {
-        bottom: 100px;
-    }
+	@media (max-width: 980px) {
+		bottom: 100px;
+	}
 
-    &:hover {
-        overflow-y: scroll;
-        opacity: 1;
-        max-height: 700px;
-    }
+	&:hover {
+		overflow-y: scroll;
+		opacity: 1;
+		max-height: 700px;
+	}
 
-    .log {
-        color: #fff;
+	.log {
+		color: #fff;
 
-        &[data-type="log"] {
-            display: var(--log-show, none);
-        }
+		&[data-type="log"] {
+			display: var(--log-show, none);
+		}
 
-        .system {
-            color: rgba(0, 0, 0, 80%);
-            font-weight: 600;
-            padding: 0 4px;
-            border-radius: 4px;
-        }
+		.system {
+			color: rgba(0, 0, 0, 80%);
+			font-weight: 600;
+			padding: 0 4px;
+			border-radius: 4px;
+		}
 
-        cursor: default;
-    }
+		cursor: default;
+	}
 }
 
 .log-copy {
-    cursor: pointer;
-    color: lightgray;
-    font-weight: 500;
+	cursor: pointer;
+	color: lightgray;
+	font-weight: 500;
 
-    margin-left: 10px;
+	margin-left: 10px;
 
-    &:hover {
-        color: #fff;
-    }
+	&:hover {
+		color: #fff;
+	}
 }

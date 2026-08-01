@@ -1,574 +1,637 @@
 {
-    "latest": "2026.0420",
-    "sponsors": [
-        "dressupdarling", "kateshapedbox", "evangelicgirl",
-        "astrablooms", "ItsProyal", "vwvwvwvwvwvwv", "Orofil",
-        "EliteHimself", "iwas15with100k", "keepsweet", "fucksophie",
-        "carbon1k", "mousey-toy", "scidal",
-        "Carbonzer", "chrysalisrot", "FenrirXXII",
-        "saettbyeol", "lyeule", "sewagebipolar", "unstablerate",
-        "noapop", "celebrating", "myraisounds", "riskyrizey",
-        "fourohclok", "HuxP", "K40M0J1",
-        "goldenstuffed", "satisfeita", "kar1x", "nojonsko",
-        "urwq", "driftpsalm", "popcorniscrazy", "v4nnen",
-        "dylandotat", "Angel0Lust", "liminelle", "quikwise",
-        "BosozokuGF", "tainaronian", "NozomiBear", "nin0dev",
-        "milkdrinker3000", "wiichicken", "duskwitch", "rgoracz",
-        "thomasb2k", "ThatJumpyFrog", "nite_", "mitsurin",
-        "vamti", "lxjv", "f-ff", "monikapurpl3",
-        "ahntaea", "monikapurpl3", "drainpuppy",
-        "DIVANA4EVER"
-    ],
-    "sponsors_one_time": [
-        "kateshapedbox",
-        "vwvwvwvwvwvwv", "EliteHimself", "fucksophie",
-        "carbon1k", "mousey-toy", "scidal",
-        "Carbonzer", "FenrirXXII",
-        "saettbyeol", "lyeule", "noapop",
-        "celebrating", "riskyrizey",
-        "fourohclok", "K40M0J1", "goldenstuffed",
-        "kar1x", "nojonsko", "v4nnen",
-        "Angel0Lust", "tainaronian", "wiichicken",
-        "rgoracz", "nite_", "vamti", "f-ff",
-        "monikapurpl3", "ahntaea", "monikapurpl3", "drainpuppy",
-        "DIVANA4EVER"
-    ],
-    "sponsor_count_remove": 3,
-    "sponsor_account": "kateshapedbox",
-    "sponsor_link": "https://github.com/sponsors/katelyynn",
-    "special": ["dressupdarling", "evangelicgirl"],
-    "badges": {
-        "dressupdarling": [
-            {
-                "type": "contributor"
-            },
-            {
-                "type": "cute",
-                "name": "the bleh herself"
-            },
-            {
-                "name": "i bite",
-                "reason": "in service to my darling",
-                "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLW1pbmltaXplIj48cGF0aCBzdHJva2U9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNMTUgMTl2LTJhMiAyIDAgMCAxIDIgLTJoMiIgLz48cGF0aCBkPSJNMTUgNXYyYTIgMiAwIDAgMCAyIDJoMiIgLz48cGF0aCBkPSJNNSAxNWgyYTIgMiAwIDAgMSAyIDJ2MiIgLz48cGF0aCBkPSJNNSA5aDJhMiAyIDAgMCAwIDIgLTJ2LTIiIC8+PC9zdmc+",
-                "hue": 19,
-                "sat": 2.62,
-                "lit": 0.84
-            }
-        ],
-        "evangelicgirl": [
-            {
-                "type": "contributor"
-            },
-            {
-                "type": "sponsor"
-            },
-            {
-                "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLWdyYXZlLTIiPjxwYXRoIHN0cm9rZT0ibm9uZSIgZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPjxwYXRoIGQ9Ik03IDE2LjE3di05LjE3YTMgMyAwIDAgMSAzIC0zaDRhMyAzIDAgMCAxIDMgM3Y5LjE3MSIgLz48cGF0aCBkPSJNMTIgN3Y1IiAvPjxwYXRoIGQ9Ik0xMCA5aDQiIC8+PHBhdGggZD0iTTUgMjF2LTJhMyAzIDAgMCAxIDMgLTNoOGEzIDMgMCAwIDEgMyAzdjJoLTE0eiIgLz48L3N2Zz4=",
-                "name": "zombie girl :3",
-                "reason": "cute dead girl",
-                "hue": 2,
-                "sat": 1.5,
-                "lit": 1.18
-            }
-        ],
-        "bIeak": [
-            {
-                "type": "kitty",
-                "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLWNhdCI+PHBhdGggc3Ryb2tlPSJub25lIiBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTIwIDN2MTBhOCA4IDAgMSAxIC0xNiAwdi0xMGwzLjQzMiAzLjQzMmE3Ljk2MyA3Ljk2MyAwIDAgMSA0LjU2OCAtMS40MzJjMS43NjkgMCAzLjQwMyAuNTc0IDQuNzI4IDEuNTQ2bDMuMjcyIC0zLjU0NiIgLz48cGF0aCBkPSJNMiAxNmg1bC00IDQiIC8+PHBhdGggZD0iTTIyIDE2aC01bDQgNCIgLz48cGF0aCBkPSJNMTEgMTZhMSAxIDAgMSAwIDIgMGExIDEgMCAxIDAgLTIgMCIgLz48cGF0aCBkPSJNOSAxMXYuMDEiIC8+PHBhdGggZD0iTTE1IDExdi4wMSIgLz48L3N2Zz4=",
-                "name": "its a kitty!!",
-                "hue": 0.0001,
-                "sat": 0.0001,
-                "lit": 1.5
-            }
-        ],
-        "kateshapedbox": [
-            {
-                "type": "contributor"
-            },
-            {
-                "type": "queen",
-                "name": "blehhhhhhhhhh!!"
-            },
-            {
-                "type": "cute",
-                "name": "cute"
-            },
-            {
-                "type": "sponsor"
-            }
-        ],
-        "boba2814": {
-            "type": "cat"
-        },
-        "iwas15with100k": [
-            {
-                "type": "cat"
-            },
-            {
-                "type": "contributor"
-            },
-            {
-                "type": "sponsor"
-            }
-        ],
-        "aoivee": {
-            "type": "cat"
-        },
-        "Serprety": {
-            "type": "cat"
-        },
-        "RazzBX": {
-            "type": "cat"
-        },
-        "ivyshandle": {
-            "type": "cat"
-        },
-        "KuroinHeroin": {
-            "type": "mask",
-            "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjI1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXZlbmV0aWFuLW1hc2siPjxwYXRoIGQ9Ik0yIDEyYTUgNSAwIDAgMCA1IDUgOCA4IDAgMCAxIDUgMiA4IDggMCAwIDEgNS0yIDUgNSAwIDAgMCA1LTVWN2gtNWE4IDggMCAwIDAtNSAyIDggOCAwIDAgMC01LTJIMloiLz48cGF0aCBkPSJNNiAxMWMxLjUgMCAzIC41IDMgMi0yIDAtMyAwLTMtMloiLz48cGF0aCBkPSJNMTggMTFjLTEuNSAwLTMgLjUtMyAyIDIgMCAzIDAgMy0yWiIvPjwvc3ZnPg==",
-            "name": "kimchi lover"
-        },
-        "u5c": {
-            "type": "paw",
-            "name": "silly creature"
-        },
-        "destons": {
-            "type": "colon-three",
-            "name": ":3²"
-        },
-        "astrablooms": [
-            {
-                "type": "sponsor",
-                "reason": "sponsor"
-            },
-            {
-                "type": "cosmic",
-                "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjI1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLW1vb24tc3RhciI+PHBhdGggZD0iTTEyIDNhNiA2IDAgMCAwIDkgOSA5IDkgMCAxIDEtOS05Ii8+PHBhdGggZD0iTTIwIDN2NCIvPjxwYXRoIGQ9Ik0yMiA1aC00Ii8+PC9zdmc+",
-                "name": "cosmic regent",
-                "reason": "sponsor",
-                "hue": 46,
-                "sat": 1.2,
-                "lit": 0.98
-            }
-        ],
-        "ItsProyal": {
-            "type": "sponsor"
-        },
-        "vwvwvwvwvwvwv": {
-            "type": "sponsor"
-        },
-        "Orofil": [
-            {
-                "type": "sponsor"
-            },
-            {
-                "type": "loader",
-                "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjI1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWxvYWRlciI+PHBhdGggZD0iTTEyIDJ2NCIvPjxwYXRoIGQ9Im0xNi4yIDcuOCAyLjktMi45Ii8+PHBhdGggZD0iTTE4IDEyaDQiLz48cGF0aCBkPSJtMTYuMiAxNi4yIDIuOSAyLjkiLz48cGF0aCBkPSJNMTIgMTh2NCIvPjxwYXRoIGQ9Im00LjkgMTkuMSAyLjktMi45Ii8+PHBhdGggZD0iTTIgMTJoNCIvPjxwYXRoIGQ9Im00LjkgNC45IDIuOSAyLjkiLz48L3N2Zz4=",
-                "name": "( ᵔ ⩊ ᵔ )",
-                "reason": "sponsor",
-                "hue": 90,
-                "sat": 1.15,
-                "lit": 0.8
-            }
-        ],
-        "EliteHimself": {
-            "type": "sponsor"
-        },
-        "Poligoner": {
-            "type": "contributor"
-        },
-        "keepsweet": [
-            {
-                "type": "sponsor"
-            },
-            {
-                "type": "grapes",
-                "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjI1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWdyYXBlLWljb24gbHVjaWRlLWdyYXBlIj48cGF0aCBkPSJNMjIgNVYybC01Ljg5IDUuODkiLz48Y2lyY2xlIGN4PSIxNi42IiBjeT0iMTUuODkiIHI9IjMiLz48Y2lyY2xlIGN4PSI4LjExIiBjeT0iNy40IiByPSIzIi8+PGNpcmNsZSBjeD0iMTIuMzUiIGN5PSIxMS42NSIgcj0iMyIvPjxjaXJjbGUgY3g9IjEzLjkxIiBjeT0iNS44NSIgcj0iMyIvPjxjaXJjbGUgY3g9IjE4LjE1IiBjeT0iMTAuMDkiIHI9IjMiLz48Y2lyY2xlIGN4PSI2LjU2IiBjeT0iMTMuMiIgcj0iMyIvPjxjaXJjbGUgY3g9IjEwLjgiIGN5PSIxNy40NCIgcj0iMyIvPjxjaXJjbGUgY3g9IjUiIGN5PSIxOSIgcj0iMyIvPjwvc3ZnPg==",
-                "name": "maenad",
-                "reason": "sponsor",
-                "hue": 332,
-                "sat": 1.2,
-                "lit": 0.3
-            }
-        ],
-        "fucksophie": [
-            {
-                "type": "contributor"
-            },
-            {
-                "type": "sponsor"
-            },
-            {
-                "type": "paw",
-                "name": "Kitty :3 meowmeowmeow",
-                "reason": "sponsor"
-            }
-        ],
-        "carbon1k": {
-            "type": "sponsor"
-        },
-        "uix-uix": {
-            "type": "sponsor"
-        },
-        "scidal": {
-            "type": "sponsor"
-        },
-        "Carbonzer": {
-            "type": "sponsor"
-        },
-        "chrysalisrot": [
-            {
-                "type": "sponsor"
-            },
-            {
-                "icon": "data:image/svg+xml;base64,PHN2ZyAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiAgd2lkdGg9IjI0IiAgaGVpZ2h0PSIyNCIgIHZpZXdCb3g9IjAgMCAyNCAyNCIgIGZpbGw9Im5vbmUiICBzdHJva2U9ImN1cnJlbnRDb2xvciIgIHN0cm9rZS13aWR0aD0iMiIgIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgIHN0cm9rZS1saW5lam9pbj0icm91bmQiICBjbGFzcz0iaWNvbiBpY29uLXRhYmxlciBpY29ucy10YWJsZXItb3V0bGluZSBpY29uLXRhYmxlci1idXR0ZXJmbHkiPjxwYXRoIHN0cm9rZT0ibm9uZSIgZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPjxwYXRoIGQ9Ik0xMiAxOC4xNzZhMyAzIDAgMSAxIC00Ljk1MyAtMi40NDlsLS4wMjUgLjAyM2E0LjUwMiA0LjUwMiAwIDAgMSAxLjQ4MyAtOC43NWMxLjQxNCAwIDIuNjc1IC42NTIgMy41IDEuNjcxYTQuNSA0LjUgMCAxIDEgNC45ODMgNy4wNzlhMyAzIDAgMSAxIC00Ljk4MyAyLjI1eiIgLz48cGF0aCBkPSJNMTIgMTl2LTEwIiAvPjxwYXRoIGQ9Ik05IDNsMyAybDMgLTIiIC8+PC9zdmc+",
-                "name": "lantern of moths",
-                "reason": "sponsor",
-                "hue": 313,
-                "sat": 0.42,
-                "lit": 0.9
-            },
-            {
-                "type": "syrup",
-                "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWNpcmNsZS1pY29uIGx1Y2lkZS1jaXJjbGUiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIi8+PC9zdmc+",
-                "name": "woundhalo",
-                "reason": "sponsor",
-                "hue": 13,
-                "sat": 0.93,
-                "lit": 0.85
-            }
-        ],
-        "I3xi": {
-            "type": "kitty",
-            "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLWNhdCI+PHBhdGggc3Ryb2tlPSJub25lIiBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTIwIDN2MTBhOCA4IDAgMSAxIC0xNiAwdi0xMGwzLjQzMiAzLjQzMmE3Ljk2MyA3Ljk2MyAwIDAgMSA0LjU2OCAtMS40MzJjMS43NjkgMCAzLjQwMyAuNTc0IDQuNzI4IDEuNTQ2bDMuMjcyIC0zLjU0NiIgLz48cGF0aCBkPSJNMiAxNmg1bC00IDQiIC8+PHBhdGggZD0iTTIyIDE2aC01bDQgNCIgLz48cGF0aCBkPSJNMTEgMTZhMSAxIDAgMSAwIDIgMGExIDEgMCAxIDAgLTIgMCIgLz48cGF0aCBkPSJNOSAxMXYuMDEiIC8+PHBhdGggZD0iTTE1IDExdi4wMSIgLz48L3N2Zz4=",
-            "name": "its a kitty!!",
-            "hue": 228,
-            "sat": 1.3,
-            "lit": 0.9
-        },
-        "FenrirXXII": {
-            "type": "sponsor"
-        },
-        "fr0r": [
-            {
-                "type": "contributor"
-            }
-        ],
-        "saettbyeol": {
-            "type": "sponsor"
-        },
-        "lyeule": {
-            "type": "sponsor"
-        },
-        "swiffyjk": {
-            "type": "contributor"
-        },
-        "sewagebipolar": [
-            {
-                "type": "sponsor"
-            },
-            {
-                "icon": "data:image/svg+xml;base64,PHN2ZyAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiAgd2lkdGg9IjI0IiAgaGVpZ2h0PSIyNCIgIHZpZXdCb3g9IjAgMCAyNCAyNCIgIGZpbGw9Im5vbmUiICBzdHJva2U9ImN1cnJlbnRDb2xvciIgIHN0cm9rZS13aWR0aD0iMiIgIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgIHN0cm9rZS1saW5lam9pbj0icm91bmQiICBjbGFzcz0iaWNvbiBpY29uLXRhYmxlciBpY29ucy10YWJsZXItb3V0bGluZSBpY29uLXRhYmxlci1zbGljZSI+PHBhdGggc3Ryb2tlPSJub25lIiBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTMgMTlsMTUgLTE1bDMgM2wtNiA2bDIgMmExNCAxNCAwIDAgMSAtMTQgNCIgLz48L3N2Zz4=",
-                "reason": "sponsor",
-                "name": "Yandere Complex",
-                "hue": 279,
-                "sat": 1.58,
-                "lit": 1.02
-            }
-        ],
-        "unstablerate": [
-            {
-                "type": "sponsor"
-            },
-            {
-                "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJjdXJyZW50Q29sb3IiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1maWxsZWQgaWNvbi10YWJsZXItcGF3Ij48cGF0aCBzdHJva2U9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNMTIgMTBjLTEuMzIgMCAtMS45ODMgLjQyMSAtMi45MzEgMS45MjRsLS4yNDQgLjM5OGwtLjM5NSAuNjg4YTUwLjg5IDUwLjg5IDAgMCAwIC0uMTQxIC4yNTRjLS4yNCAuNDM0IC0uNTcxIC43NTMgLTEuMTM5IDEuMTQybC0uNTUgLjM2NWMtLjk0IC42MjcgLTEuNDMyIDEuMTE4IC0xLjcwNyAxLjk1NWMtLjEyNCAuMzM4IC0uMTk2IC44NTMgLS4xOTMgMS4yOGMwIDEuNjg3IDEuMTk4IDIuOTk0IDIuOCAyLjk5NGwuMjQyIC0uMDA2Yy4xMTkgLS4wMDYgLjIzNCAtLjAxNyAuMzU0IC0uMDM0bC4yNDggLS4wNDNsLjEzMiAtLjAyOGwuMjkxIC0uMDczbC4xNjIgLS4wNDVsLjU3IC0uMTdsLjc2MyAtLjI0M2wuNDU1IC0uMTM2Yy41MyAtLjE1IC45NCAtLjIyMiAxLjI4MyAtLjIyMmMuMzQ0IDAgLjc1MyAuMDczIDEuMjgzIC4yMjJsLjQ1NSAuMTM2bC43NjQgLjI0MmwuNTY5IC4xNzFsLjMxMiAuMDg0Yy4wOTcgLjAyNCAuMTg3IC4wNDUgLjI3MyAuMDYybC4yNDggLjA0M2MuMTIgLjAxNyAuMjM1IC4wMjggLjM1NCAuMDM0bC4yNDIgLjAwNmMxLjYwMiAwIDIuOCAtMS4zMDcgMi44IC0zYzAgLS40MjcgLS4wNzMgLS45MzkgLS4yMDcgLTEuMzA2Yy0uMjM2IC0uNzI0IC0uNjc3IC0xLjIyMyAtMS40OCAtMS44M2wtLjI1NyAtLjE5bC0uNTI4IC0uMzhjLS42NDIgLS40NyAtMS4wMDMgLS44MjYgLTEuMjUzIC0xLjI3OGwtLjI3IC0uNDg1bC0uMjUyIC0uNDMyYy0xLjAxMSAtMS42OTYgLTEuNjE4IC0yLjA5OSAtMy4wNTMgLTIuMDk5eiIgLz48cGF0aCBkPSJNMTkuNzggN2gtLjAzYy0xLjIxOSAuMDIgLTIuMzUgMS4wNjYgLTIuOTA4IDIuNTA0Yy0uNjkgMS43NzUgLS4zNDggMy43MiAxLjA3NSA0LjMzM2MuMjU2IC4xMDkgLjUyNyAuMTYzIC44MDEgLjE2M2MxLjIzMSAwIDIuMzggLTEuMDUzIDIuOTQzIC0yLjUwNGMuNjg2IC0xLjc3NCAuMzQgLTMuNzIgLTEuMDc2IC00LjMzMmEyLjA1IDIuMDUgMCAwIDAgLS44MDQgLS4xNjR6IiAvPjxwYXRoIGQ9Ik05LjAyNSAzYy0uMTEyIDAgLS4xODUgLjAwMiAtLjI3IC4wMTVsLS4wOTMgLjAxNmMtMS41MzIgLjIwNiAtMi4zOTcgMS45ODkgLTIuMTA4IDMuODU1Yy4yNzIgMS43MjUgMS40NjIgMy4xMTQgMi45MiAzLjExNGwuMTg3IC0uMDA1YTEuMjYgMS4yNiAwIDAgMCAuMDg0IC0uMDFsLjA5MiAtLjAxNmMxLjUzMyAtLjIwNiAyLjM5NyAtMS45ODkgMi4xMDggLTMuODU1Yy0uMjcgLTEuNzI3IC0xLjQ2IC0zLjExNCAtMi45MiAtMy4xMTR6IiAvPjxwYXRoIGQ9Ik0xNC45NzIgM2MtMS40NTkgMCAtMi42NDcgMS4zODggLTIuOTE2IDMuMTEzYy0uMjkgMS44NjcgLjU3NCAzLjY1IDIuMTc0IDMuODY3Yy4xMDMgLjAxMyAuMiAuMDIgLjI5NiAuMDJjMS4zOSAwIDIuNTQzIC0xLjI2NSAyLjg3NyAtMi44ODNsLjA0MSAtLjIzYy4yOSAtMS44NjcgLS41NzQgLTMuNjUgLTIuMTc0IC0zLjg2N2EyLjE1NCAyLjE1NCAwIDAgMCAtLjI5OCAtLjAyeiIgLz48cGF0aCBkPSJNNC4yMTcgN2MtLjI3NCAwIC0uNTQ0IC4wNTQgLS43OTcgLjE2MWMtMS40MjYgLjYxNSAtMS43NjcgMi41NjIgLTEuMDc4IDQuMzM1Yy41NjMgMS40NTEgMS43MSAyLjUwNCAyLjk0MSAyLjUwNGMuMjc0IDAgLjU0NCAtLjA1NCAuNzk3IC0uMTYxYzEuNDI2IC0uNjE1IDEuNzY3IC0yLjU2MiAxLjA3OCAtNC4zMzVjLS41NjMgLTEuNDUxIC0xLjcxIC0yLjUwNCAtMi45NDEgLTIuNTA0eiIgLz48L3N2Zz4=",
-                "reason": "sponsor",
-                "name": "puppy",
-                "hue": 333,
-                "sat": 1,
-                "lit": 1
-            }
-        ],
-        "myraisounds": [
-            {
-                "type": "sponsor"
-            }
-        ],
-        "noapop": {
-            "type": "sponsor"
-        },
-        "celebrating": {
-            "type": "sponsor"
-        },
-        "riskyrizey": {
-            "type": "sponsor"
-        },
-        "fourohclok": {
-            "type": "sponsor"
-        },
-        "satisfeita": [
-            {
-                "type": "sponsor"
-            },
-            {
-                "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWNoZXNzLXF1ZWVuLWljb24gbHVjaWRlLWNoZXNzLXF1ZWVuIj48cGF0aCBkPSJNNCAyMGEyIDIgMCAwIDEgMi0yaDEyYTIgMiAwIDAgMSAyIDJ2MWExIDEgMCAwIDEtMSAxSDVhMSAxIDAgMCAxLTEtMXoiLz48cGF0aCBkPSJtMTIuNDc0IDUuOTQzIDEuNTY3IDUuMzRhMSAxIDAgMCAwIDEuNzUuMzI4bDIuNjE2LTMuNDAyIi8+PHBhdGggZD0ibTIwIDktMyA5Ii8+PHBhdGggZD0ibTUuNTk0IDguMjA5IDIuNjE1IDMuNDAzYTEgMSAwIDAgMCAxLjc1LS4zMjlsMS41NjctNS4zNCIvPjxwYXRoIGQ9Ik03IDE4IDQgOSIvPjxjaXJjbGUgY3g9IjEyIiBjeT0iNCIgcj0iMiIvPjxjaXJjbGUgY3g9IjIwIiBjeT0iNyIgcj0iMiIvPjxjaXJjbGUgY3g9IjQiIGN5PSI3IiByPSIyIi8+PC9zdmc+",
-                "reason": "sponsor",
-                "name": "princess",
-                "hue": 245,
-                "sat": 0.8,
-                "lit": 0.9
-            }
-        ],
-        "HuxP": [
-            {
-                "type": "sponsor"
-            },
-            {
-                "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXBhdy1wcmludC1pY29uIGx1Y2lkZS1wYXctcHJpbnQiPjxjaXJjbGUgY3g9IjExIiBjeT0iNCIgcj0iMiIvPjxjaXJjbGUgY3g9IjE4IiBjeT0iOCIgcj0iMiIvPjxjaXJjbGUgY3g9IjIwIiBjeT0iMTYiIHI9IjIiLz48cGF0aCBkPSJNOSAxMGE1IDUgMCAwIDEgNSA1djMuNWEzLjUgMy41IDAgMCAxLTYuODQgMS4wNDVRNi41MiAxNy40OCA0LjQ2IDE2Ljg0QTMuNSAzLjUgMCAwIDEgNS41IDEwWiIvPjwvc3ZnPg==",
-                "reason": "sponsor",
-                "name": "式大元",
-                "hue": 235,
-                "sat": 1.15,
-                "lit": 1.01
-            }
-        ],
-        "K40M0J1": {
-            "type": "sponsor"
-        },
-        "goldenstuffed": {
-            "type": "sponsor"
-        },
-        "kar1x": {
-            "type": "sponsor"
-        },
-        "nojonsko": {
-            "type": "sponsor"
-        },
-        "urwq": [
-            {
-                "type": "sponsor"
-            },
-            {
-                "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLWZpc2gtYm9uZSI+PHBhdGggc3Ryb2tlPSJub25lIiBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTE2LjY5IDcuNDRhNi45NzMgNi45NzMgMCAwIDAgLTEuNjkgNC41NmE2Ljk3IDYuOTcgMCAwIDAgMS42OTkgNC41NzFjMS45MTQgLS42ODQgMy42OTEgLTIuMTgzIDUuMzAxIC00LjU2NWMtMS42MTMgLTIuMzg0IC0zLjM5NCAtMy44ODMgLTUuMzEyIC00LjU2NSIgLz48cGF0aCBkPSJNMiA5LjUwNGE0MC43MyA0MC43MyAwIDAgMCAyLjQyMiAyLjUwNGEzOS42NzkgMzkuNjc5IDAgMCAwIC0yLjQyMiAyLjQ5OCIgLz48cGF0aCBkPSJNMTggMTF2LjAxIiAvPjxwYXRoIGQ9Ik00LjQyMiAxMmgxMC41NzgiIC8+PHBhdGggZD0iTTcgMTB2NCIgLz48cGF0aCBkPSJNMTEgOHY4IiAvPjwvc3ZnPg==",
-                "reason": "sponsor",
-                "name": "no fish remaining",
-                "hue": 165,
-                "sat": 1.2,
-                "lit": 0.95
-            }
-        ],
-        "driftpsalm": [
-            {
-                "type": "sponsor"
-            },
-            {
-                "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLWFkanVzdG1lbnRzIj48cGF0aCBzdHJva2U9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNNCAxMGEyIDIgMCAxIDAgNCAwYTIgMiAwIDAgMCAtNCAwIiAvPjxwYXRoIGQ9Ik02IDR2NCIgLz48cGF0aCBkPSJNNiAxMnY4IiAvPjxwYXRoIGQ9Ik0xMCAxNmEyIDIgMCAxIDAgNCAwYTIgMiAwIDAgMCAtNCAwIiAvPjxwYXRoIGQ9Ik0xMiA0djEwIiAvPjxwYXRoIGQ9Ik0xMiAxOHYyIiAvPjxwYXRoIGQ9Ik0xNiA3YTIgMiAwIDEgMCA0IDBhMiAyIDAgMCAwIC00IDAiIC8+PHBhdGggZD0iTTE4IDR2MSIgLz48cGF0aCBkPSJNMTggOXYxMSIgLz48L3N2Zz4=",
-                "reason": "sponsor",
-                "name": "softstatic.wav",
-                "hue": 22,
-                "sat": 0.93,
-                "lit": 0.94
-            }
-        ],
-        "v4nnen": [
-            {
-                "type": "sponsor"
-            }
-        ],
-        "popcorniscrazy": [
-            {
-                "type": "sponsor"
-            },
-            {
-                "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLXNub3dmbGFrZSI+PHBhdGggc3Ryb2tlPSJub25lIiBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTEwIDRsMiAxbDIgLTEiIC8+PHBhdGggZD0iTTEyIDJ2Ni41bDMgMS43MiIgLz48cGF0aCBkPSJNMTcuOTI4IDYuMjY4bC4xMzQgMi4yMzJsMS44NjYgMS4yMzIiIC8+PHBhdGggZD0iTTIwLjY2IDdsLTUuNjI5IDMuMjVsLjAxIDMuNDU4IiAvPjxwYXRoIGQ9Ik0xOS45MjggMTQuMjY4bC0xLjg2NiAxLjIzMmwtLjEzNCAyLjIzMiIgLz48cGF0aCBkPSJNMjAuNjYgMTdsLTUuNjI5IC0zLjI1bC0yLjk5IDEuNzM4IiAvPjxwYXRoIGQ9Ik0xNCAyMGwtMiAtMWwtMiAxIiAvPjxwYXRoIGQ9Ik0xMiAyMnYtNi41bC0zIC0xLjcyIiAvPjxwYXRoIGQ9Ik02LjA3MiAxNy43MzJsLS4xMzQgLTIuMjMybC0xLjg2NiAtMS4yMzIiIC8+PHBhdGggZD0iTTMuMzQgMTdsNS42MjkgLTMuMjVsLS4wMSAtMy40NTgiIC8+PHBhdGggZD0iTTQuMDcyIDkuNzMybDEuODY2IC0xLjIzMmwuMTM0IC0yLjIzMiIgLz48cGF0aCBkPSJNMy4zNCA3bDUuNjI5IDMuMjVsMi45OSAtMS43MzgiIC8+PC9zdmc+",
-                "reason": "sponsor",
-                "name": "Snow Fairy",
-                "hue": 239,
-                "sat": 1.35,
-                "lit": 0.81
-            },
-            {
-                "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWRydW0taWNvbiBsdWNpZGUtZHJ1bSI+PHBhdGggZD0ibTIgMiA4IDgiLz48cGF0aCBkPSJtMjIgMi04IDgiLz48ZWxsaXBzZSBjeD0iMTIiIGN5PSI5IiByeD0iMTAiIHJ5PSI1Ii8+PHBhdGggZD0iTTcgMTMuNHY3LjkiLz48cGF0aCBkPSJNMTIgMTR2OCIvPjxwYXRoIGQ9Ik0xNyAxMy40djcuOSIvPjxwYXRoIGQ9Ik0yIDl2OGExMCA1IDAgMCAwIDIwIDBWOSIvPjwvc3ZnPg==",
-                "reason": "sponsor",
-                "name": "loves songs that have this shit in it… lowkey…",
-                "hue": 131,
-                "sat": 1.35,
-                "lit": 0.81
-            }
-        ],
-        "dylandotat": [
-            {
-                "type": "sponsor"
-            },
-            {
-                "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXBhaW50YnJ1c2gtaWNvbiBsdWNpZGUtcGFpbnRicnVzaCI+PHBhdGggZD0ibTE0LjYyMiAxNy44OTctMTAuNjgtMi45MTMiLz48cGF0aCBkPSJNMTguMzc2IDIuNjIyYTEgMSAwIDEgMSAzLjAwMiAzLjAwMkwxNy4zNiA5LjY0M2EuNS41IDAgMCAwIDAgLjcwN2wuOTQ0Ljk0NGEyLjQxIDIuNDEgMCAwIDEgMCAzLjQwOGwtLjk0NC45NDRhLjUuNSAwIDAgMS0uNzA3IDBMOC4zNTQgNy4zNDhhLjUuNSAwIDAgMSAwLS43MDdsLjk0NC0uOTQ0YTIuNDEgMi40MSAwIDAgMSAzLjQwOCAwbC45NDQuOTQ0YS41LjUgMCAwIDAgLjcwNyAweiIvPjxwYXRoIGQ9Ik05IDhjLTEuODA0IDIuNzEtMy45NyAzLjQ2LTYuNTgzIDMuOTQ4YS41MDcuNTA3IDAgMCAwLS4zMDIuODE5bDcuMzIgOC44ODNhMSAxIDAgMCAwIDEuMTg1LjIwNEMxMi43MzUgMjAuNDA1IDE2IDE2Ljc5MiAxNiAxNSIvPjwvc3ZnPg==",
-                "reason": "sponsor",
-                "name": "Orange Fan",
-                "hue": 24,
-                "sat": 2,
-                "lit": 1
-            }
-        ],
-        "Angel0Lust": {
-            "type": "sponsor"
-        },
-        "liminelle": [
-            {
-                "type": "sponsor"
-            },
-            {
-                "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXRyZWVzLWljb24gbHVjaWRlLXRyZWVzIj48cGF0aCBkPSJNMTAgMTB2LjJBMyAzIDAgMCAxIDguOSAxNkg1YTMgMyAwIDAgMS0xLTUuOFYxMGEzIDMgMCAwIDEgNiAwWiIvPjxwYXRoIGQ9Ik03IDE2djYiLz48cGF0aCBkPSJNMTMgMTl2MyIvPjxwYXRoIGQ9Ik0xMiAxOWg4LjNhMSAxIDAgMCAwIC43LTEuN0wxOCAxNGguM2ExIDEgMCAwIDAgLjctMS43TDE2IDloLjJhMSAxIDAgMCAwIC44LTEuN0wxMyAzbC0xLjQgMS41Ii8+PC9zdmc+",
-                "reason": "sponsor",
-                "name": "fogbound witch",
-                "hue": 147,
-                "sat": 0.57,
-                "lit": 0.65
-            },
-            {
-                "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXdhdmVzLWljb24gbHVjaWRlLXdhdmVzIj48cGF0aCBkPSJNMiA2Yy42LjUgMS4yIDEgMi41IDFDNyA3IDcgNSA5LjUgNWMyLjYgMCAyLjQgMiA1IDIgMi41IDAgMi41LTIgNS0yIDEuMyAwIDEuOS41IDIuNSAxIi8+PHBhdGggZD0iTTIgMTJjLjYuNSAxLjIgMSAyLjUgMSAyLjUgMCAyLjUtMiA1LTIgMi42IDAgMi40IDIgNSAyIDIuNSAwIDIuNS0yIDUtMiAxLjMgMCAxLjkuNSAyLjUgMSIvPjxwYXRoIGQ9Ik0yIDE4Yy42LjUgMS4yIDEgMi41IDEgMi41IDAgMi41LTIgNS0yIDIuNiAwIDIuNCAyIDUgMiAyLjUgMCAyLjUtMiA1LTIgMS4zIDAgMS45LjUgMi41IDEiLz48L3N2Zz4=",
-                "reason": "sponsor",
-                "name": "liminal signal",
-                "hue": 250,
-                "sat": 1.5,
-                "lit": 1.12
-            }
-        ],
-        "quikwise": [
-            {
-                "type": "sponsor"
-            },
-            {
-                "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLWxhbmd1YWdlLWhpcmFnYW5hIj48cGF0aCBzdHJva2U9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNNCA1aDciIC8+PHBhdGggZD0iTTcgNGMwIDQuODQ2IDAgNyAuNSA4IiAvPjxwYXRoIGQ9Ik0xMCA4LjVjMCAyLjI4NiAtMiA0LjUgLTMuNSA0LjVzLTIuNSAtMS4xMzUgLTIuNSAtMmMwIC0yIDEgLTMgMyAtM3M1IC41NyA1IDIuODU3YzAgMS41MjQgLS42NjcgMi41NzEgLTIgMy4xNDMiIC8+PHBhdGggZD0iTTEyIDIwbDQgLTlsNCA5IiAvPjxwYXRoIGQ9Ik0xOS4xIDE4aC02LjIiIC8+PC9zdmc+",
-                "reason": "sponsor",
-                "name": "音速",
-                "hue": 197,
-                "sat": 1.5,
-                "lit": 1.08
-            }
-        ],
-        "BosozokuGF": [
-            {
-                "type": "sponsor"
-            },
-            {
-                "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLWNwdSI+PHBhdGggc3Ryb2tlPSJub25lIiBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTUgNW0wIDFhMSAxIDAgMCAxIDEgLTFoMTJhMSAxIDAgMCAxIDEgMXYxMmExIDEgMCAwIDEgLTEgMWgtMTJhMSAxIDAgMCAxIC0xIC0xeiIgLz48cGF0aCBkPSJNOSA5aDZ2NmgtNnoiIC8+PHBhdGggZD0iTTMgMTBoMiIgLz48cGF0aCBkPSJNMyAxNGgyIiAvPjxwYXRoIGQ9Ik0xMCAzdjIiIC8+PHBhdGggZD0iTTE0IDN2MiIgLz48cGF0aCBkPSJNMjEgMTBoLTIiIC8+PHBhdGggZD0iTTIxIDE0aC0yIiAvPjxwYXRoIGQ9Ik0xNCAyMXYtMiIgLz48cGF0aCBkPSJNMTAgMjF2LTIiIC8+PC9zdmc+",
-                "reason": "sponsor",
-                "name": "blast-processed",
-                "hue": 297,
-                "sat": 1.66,
-                "lit": 0.8
-            }
-        ],
-        "tainaronian": {
-            "type": "sponsor"
-        },
-        "NozomiBear": [
-            {
-                "type": "sponsor"
-            },
-            {
-                "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLWFwcGxlIj48cGF0aCBzdHJva2U9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNNCAxMS4zMTljMCAzLjEwMiAuNDQ0IDUuMzE5IDIuMjIyIDcuOTc4YzEuMzUxIDEuNzk3IDMuMTU2IDIuMjQ3IDUuMDggLjk4OGMuNDI2IC0uMjY4IC45NyAtLjI2OCAxLjM5NyAwYzEuOTIzIDEuMjYgMy43MjggLjgwOSA1LjA3OSAtLjk4OGMxLjc3OCAtMi42NiAyLjIyMiAtNC44NzYgMi4yMjIgLTcuOTc3YzAgLTIuNjYxIC0xLjk5IC01LjMyIC00LjQ0NCAtNS4zMmMtMS4yNjcgMCAtMi40MSAuNjkzIC0zLjIyIDEuNDRhLjUgLjUgMCAwIDEgLS42NzIgMGMtLjgwOSAtLjc0NiAtMS45NTMgLTEuNDQgLTMuMjIgLTEuNDRjLTIuNDU0IDAgLTQuNDQ0IDIuNjYgLTQuNDQ0IDUuMzE5IiAvPjxwYXRoIGQ9Ik03IDEyYzAgLTEuNDcgLjQ1NCAtMi4zNCAxLjUgLTMiIC8+PHBhdGggZD0iTTEyIDdjMCAtMS4yIC44NjcgLTQgMyAtNCIgLz48L3N2Zz4=",
-                "reason": "sponsor",
-                "name": "pipsqueak :3",
-                "hue": 343,
-                "sat": 1.05,
-                "lit": 0.9
-            },
-            {
-                "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWNhdC1pY29uIGx1Y2lkZS1jYXQiPjxwYXRoIGQ9Ik0xMiA1Yy42NyAwIDEuMzUuMDkgMiAuMjYgMS43OC0yIDUuMDMtMi44NCA2LjQyLTIuMjYgMS40LjU4LS40MiA3LS40MiA3IC41NyAxLjA3IDEgMi4yNCAxIDMuNDRDMjEgMTcuOSAxNi45NyAyMSAxMiAyMXMtOS0zLTktNy41NmMwLTEuMjUuNS0yLjQgMS0zLjQ0IDAgMC0xLjg5LTYuNDItLjUtNyAxLjM5LS41OCA0LjcyLjIzIDYuNSAyLjIzQTkuMDQgOS4wNCAwIDAgMSAxMiA1WiIvPjxwYXRoIGQ9Ik04IDE0di41Ii8+PHBhdGggZD0iTTE2IDE0di41Ii8+PHBhdGggZD0iTTExLjI1IDE2LjI1aDEuNUwxMiAxN2wtLjc1LS43NVoiLz48L3N2Zz4=",
-                "reason": "sponsor",
-                "name": "hello kitty ฅ^•ﻌ•^ฅ !!",
-                "hue": 268,
-                "sat": 0.63,
-                "lit": 0.92
-            }
-        ],
-        "nin0dev": {
-            "type": "sponsor"
-        },
-        "milkdrinker3000": {
-            "type": "sponsor"
-        },
-        "wiichicken": {
-            "type": "sponsor"
-        },
-        "duskwitch": [
-            {
-                "type": "sponsor"
-            },
-            {
-                "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLW1hcCI+PHBhdGggc3Ryb2tlPSJub25lIiBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTMgN2w2IC0zbDYgM2w2IC0zdjEzbC02IDNsLTYgLTNsLTYgM3YtMTMiIC8+PHBhdGggZD0iTTkgNHYxMyIgLz48cGF0aCBkPSJNMTUgN3YxMyIgLz48L3N2Zz4=",
-                "reason": "sponsor",
-                "name": "Twilight Cartographer",
-                "hue": 217,
-                "sat": 0.87,
-                "lit": 0.86
-            }
-        ],
-        "rgoracz": {
-            "type": "sponsor"
-        },
-        "thomasb2k": {
-            "type": "sponsor"
-        },
-        "ThatJumpyFrog": {
-            "type": "sponsor"
-        },
-        "nite_": {
-            "type": "sponsor"
-        },
-        "mitsurin": [
-            {
-                "type": "sponsor"
-            },
-            {
-                "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLXNsaWNlIj48cGF0aCBzdHJva2U9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNMyAxOWwxNSAtMTVsMyAzbC02IDZsMiAyYTE0IDE0IDAgMCAxIC0xNCA0IiAvPjwvc3ZnPg==",
-                "reason": "sponsor",
-                "name": "mother",
-                "hue": 300,
-                "sat": 1.5,
-                "lit": 1.24
-            }
-        ],
-        "vamti": [
-            {
-                "type": "sponsor"
-            }
-        ],
-        "lxjv": [
-            {
-                "type": "sponsor"
-            }
-        ],
-        "f-ff": [
-            {
-                "type": "sponsor"
-            }
-        ],
-        "monikapurpl3": [
-            {
-                "type": "sponsor"
-            }
-        ],
-        "ahntaea": [
-            {
-                "type": "sponsor"
-            }
-        ],
-        "monikapurpl3": [
-            {
-                "type": "sponsor"
-            }
-        ],
-        "drainpuppy": [
-            {
-                "type": "sponsor"
-            }
-        ],
-        "DIVANA4EVER": [
-            {
-                "type": "sponsor"
-            }
-        ]
-    }
+	"latest": "2026.0420",
+	"sponsors": [
+		"dressupdarling",
+		"kateshapedbox",
+		"evangelicgirl",
+		"astrablooms",
+		"ItsProyal",
+		"vwvwvwvwvwvwv",
+		"Orofil",
+		"EliteHimself",
+		"iwas15with100k",
+		"keepsweet",
+		"fucksophie",
+		"carbon1k",
+		"mousey-toy",
+		"scidal",
+		"Carbonzer",
+		"chrysalisrot",
+		"FenrirXXII",
+		"saettbyeol",
+		"lyeule",
+		"sewagebipolar",
+		"unstablerate",
+		"noapop",
+		"celebrating",
+		"myraisounds",
+		"riskyrizey",
+		"fourohclok",
+		"HuxP",
+		"K40M0J1",
+		"goldenstuffed",
+		"satisfeita",
+		"kar1x",
+		"nojonsko",
+		"urwq",
+		"driftpsalm",
+		"popcorniscrazy",
+		"v4nnen",
+		"dylandotat",
+		"Angel0Lust",
+		"liminelle",
+		"quikwise",
+		"BosozokuGF",
+		"tainaronian",
+		"NozomiBear",
+		"nin0dev",
+		"milkdrinker3000",
+		"wiichicken",
+		"duskwitch",
+		"rgoracz",
+		"thomasb2k",
+		"ThatJumpyFrog",
+		"nite_",
+		"mitsurin",
+		"vamti",
+		"lxjv",
+		"f-ff",
+		"monikapurpl3",
+		"ahntaea",
+		"monikapurpl3",
+		"drainpuppy",
+		"DIVANA4EVER"
+	],
+	"sponsors_one_time": [
+		"kateshapedbox",
+		"vwvwvwvwvwvwv",
+		"EliteHimself",
+		"fucksophie",
+		"carbon1k",
+		"mousey-toy",
+		"scidal",
+		"Carbonzer",
+		"FenrirXXII",
+		"saettbyeol",
+		"lyeule",
+		"noapop",
+		"celebrating",
+		"riskyrizey",
+		"fourohclok",
+		"K40M0J1",
+		"goldenstuffed",
+		"kar1x",
+		"nojonsko",
+		"v4nnen",
+		"Angel0Lust",
+		"tainaronian",
+		"wiichicken",
+		"rgoracz",
+		"nite_",
+		"vamti",
+		"f-ff",
+		"monikapurpl3",
+		"ahntaea",
+		"monikapurpl3",
+		"drainpuppy",
+		"DIVANA4EVER"
+	],
+	"sponsor_count_remove": 3,
+	"sponsor_account": "kateshapedbox",
+	"sponsor_link": "https://github.com/sponsors/katelyynn",
+	"special": ["dressupdarling", "evangelicgirl"],
+	"badges": {
+		"dressupdarling": [
+			{
+				"type": "contributor"
+			},
+			{
+				"type": "cute",
+				"name": "the bleh herself"
+			},
+			{
+				"name": "i bite",
+				"reason": "in service to my darling",
+				"icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLW1pbmltaXplIj48cGF0aCBzdHJva2U9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNMTUgMTl2LTJhMiAyIDAgMCAxIDIgLTJoMiIgLz48cGF0aCBkPSJNMTUgNXYyYTIgMiAwIDAgMCAyIDJoMiIgLz48cGF0aCBkPSJNNSAxNWgyYTIgMiAwIDAgMSAyIDJ2MiIgLz48cGF0aCBkPSJNNSA5aDJhMiAyIDAgMCAwIDIgLTJ2LTIiIC8+PC9zdmc+",
+				"hue": 19,
+				"sat": 2.62,
+				"lit": 0.84
+			}
+		],
+		"evangelicgirl": [
+			{
+				"type": "contributor"
+			},
+			{
+				"type": "sponsor"
+			},
+			{
+				"icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLWdyYXZlLTIiPjxwYXRoIHN0cm9rZT0ibm9uZSIgZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPjxwYXRoIGQ9Ik03IDE2LjE3di05LjE3YTMgMyAwIDAgMSAzIC0zaDRhMyAzIDAgMCAxIDMgM3Y5LjE3MSIgLz48cGF0aCBkPSJNMTIgN3Y1IiAvPjxwYXRoIGQ9Ik0xMCA5aDQiIC8+PHBhdGggZD0iTTUgMjF2LTJhMyAzIDAgMCAxIDMgLTNoOGEzIDMgMCAwIDEgMyAzdjJoLTE0eiIgLz48L3N2Zz4=",
+				"name": "zombie girl :3",
+				"reason": "cute dead girl",
+				"hue": 2,
+				"sat": 1.5,
+				"lit": 1.18
+			}
+		],
+		"bIeak": [
+			{
+				"type": "kitty",
+				"icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLWNhdCI+PHBhdGggc3Ryb2tlPSJub25lIiBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTIwIDN2MTBhOCA4IDAgMSAxIC0xNiAwdi0xMGwzLjQzMiAzLjQzMmE3Ljk2MyA3Ljk2MyAwIDAgMSA0LjU2OCAtMS40MzJjMS43NjkgMCAzLjQwMyAuNTc0IDQuNzI4IDEuNTQ2bDMuMjcyIC0zLjU0NiIgLz48cGF0aCBkPSJNMiAxNmg1bC00IDQiIC8+PHBhdGggZD0iTTIyIDE2aC01bDQgNCIgLz48cGF0aCBkPSJNMTEgMTZhMSAxIDAgMSAwIDIgMGExIDEgMCAxIDAgLTIgMCIgLz48cGF0aCBkPSJNOSAxMXYuMDEiIC8+PHBhdGggZD0iTTE1IDExdi4wMSIgLz48L3N2Zz4=",
+				"name": "its a kitty!!",
+				"hue": 0.0001,
+				"sat": 0.0001,
+				"lit": 1.5
+			}
+		],
+		"kateshapedbox": [
+			{
+				"type": "contributor"
+			},
+			{
+				"type": "queen",
+				"name": "blehhhhhhhhhh!!"
+			},
+			{
+				"type": "cute",
+				"name": "cute"
+			},
+			{
+				"type": "sponsor"
+			}
+		],
+		"boba2814": {
+			"type": "cat"
+		},
+		"iwas15with100k": [
+			{
+				"type": "cat"
+			},
+			{
+				"type": "contributor"
+			},
+			{
+				"type": "sponsor"
+			}
+		],
+		"aoivee": {
+			"type": "cat"
+		},
+		"Serprety": {
+			"type": "cat"
+		},
+		"RazzBX": {
+			"type": "cat"
+		},
+		"ivyshandle": {
+			"type": "cat"
+		},
+		"KuroinHeroin": {
+			"type": "mask",
+			"icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjI1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXZlbmV0aWFuLW1hc2siPjxwYXRoIGQ9Ik0yIDEyYTUgNSAwIDAgMCA1IDUgOCA4IDAgMCAxIDUgMiA4IDggMCAwIDEgNS0yIDUgNSAwIDAgMCA1LTVWN2gtNWE4IDggMCAwIDAtNSAyIDggOCAwIDAgMC01LTJIMloiLz48cGF0aCBkPSJNNiAxMWMxLjUgMCAzIC41IDMgMi0yIDAtMyAwLTMtMloiLz48cGF0aCBkPSJNMTggMTFjLTEuNSAwLTMgLjUtMyAyIDIgMCAzIDAgMy0yWiIvPjwvc3ZnPg==",
+			"name": "kimchi lover"
+		},
+		"u5c": {
+			"type": "paw",
+			"name": "silly creature"
+		},
+		"destons": {
+			"type": "colon-three",
+			"name": ":3²"
+		},
+		"astrablooms": [
+			{
+				"type": "sponsor",
+				"reason": "sponsor"
+			},
+			{
+				"type": "cosmic",
+				"icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjI1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLW1vb24tc3RhciI+PHBhdGggZD0iTTEyIDNhNiA2IDAgMCAwIDkgOSA5IDkgMCAxIDEtOS05Ii8+PHBhdGggZD0iTTIwIDN2NCIvPjxwYXRoIGQ9Ik0yMiA1aC00Ii8+PC9zdmc+",
+				"name": "cosmic regent",
+				"reason": "sponsor",
+				"hue": 46,
+				"sat": 1.2,
+				"lit": 0.98
+			}
+		],
+		"ItsProyal": {
+			"type": "sponsor"
+		},
+		"vwvwvwvwvwvwv": {
+			"type": "sponsor"
+		},
+		"Orofil": [
+			{
+				"type": "sponsor"
+			},
+			{
+				"type": "loader",
+				"icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjI1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWxvYWRlciI+PHBhdGggZD0iTTEyIDJ2NCIvPjxwYXRoIGQ9Im0xNi4yIDcuOCAyLjktMi45Ii8+PHBhdGggZD0iTTE4IDEyaDQiLz48cGF0aCBkPSJtMTYuMiAxNi4yIDIuOSAyLjkiLz48cGF0aCBkPSJNMTIgMTh2NCIvPjxwYXRoIGQ9Im00LjkgMTkuMSAyLjktMi45Ii8+PHBhdGggZD0iTTIgMTJoNCIvPjxwYXRoIGQ9Im00LjkgNC45IDIuOSAyLjkiLz48L3N2Zz4=",
+				"name": "( ᵔ ⩊ ᵔ )",
+				"reason": "sponsor",
+				"hue": 90,
+				"sat": 1.15,
+				"lit": 0.8
+			}
+		],
+		"EliteHimself": {
+			"type": "sponsor"
+		},
+		"Poligoner": {
+			"type": "contributor"
+		},
+		"keepsweet": [
+			{
+				"type": "sponsor"
+			},
+			{
+				"type": "grapes",
+				"icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjI1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWdyYXBlLWljb24gbHVjaWRlLWdyYXBlIj48cGF0aCBkPSJNMjIgNVYybC01Ljg5IDUuODkiLz48Y2lyY2xlIGN4PSIxNi42IiBjeT0iMTUuODkiIHI9IjMiLz48Y2lyY2xlIGN4PSI4LjExIiBjeT0iNy40IiByPSIzIi8+PGNpcmNsZSBjeD0iMTIuMzUiIGN5PSIxMS42NSIgcj0iMyIvPjxjaXJjbGUgY3g9IjEzLjkxIiBjeT0iNS44NSIgcj0iMyIvPjxjaXJjbGUgY3g9IjE4LjE1IiBjeT0iMTAuMDkiIHI9IjMiLz48Y2lyY2xlIGN4PSI2LjU2IiBjeT0iMTMuMiIgcj0iMyIvPjxjaXJjbGUgY3g9IjEwLjgiIGN5PSIxNy40NCIgcj0iMyIvPjxjaXJjbGUgY3g9IjUiIGN5PSIxOSIgcj0iMyIvPjwvc3ZnPg==",
+				"name": "maenad",
+				"reason": "sponsor",
+				"hue": 332,
+				"sat": 1.2,
+				"lit": 0.3
+			}
+		],
+		"fucksophie": [
+			{
+				"type": "contributor"
+			},
+			{
+				"type": "sponsor"
+			},
+			{
+				"type": "paw",
+				"name": "Kitty :3 meowmeowmeow",
+				"reason": "sponsor"
+			}
+		],
+		"carbon1k": {
+			"type": "sponsor"
+		},
+		"uix-uix": {
+			"type": "sponsor"
+		},
+		"scidal": {
+			"type": "sponsor"
+		},
+		"Carbonzer": {
+			"type": "sponsor"
+		},
+		"chrysalisrot": [
+			{
+				"type": "sponsor"
+			},
+			{
+				"icon": "data:image/svg+xml;base64,PHN2ZyAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiAgd2lkdGg9IjI0IiAgaGVpZ2h0PSIyNCIgIHZpZXdCb3g9IjAgMCAyNCAyNCIgIGZpbGw9Im5vbmUiICBzdHJva2U9ImN1cnJlbnRDb2xvciIgIHN0cm9rZS13aWR0aD0iMiIgIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgIHN0cm9rZS1saW5lam9pbj0icm91bmQiICBjbGFzcz0iaWNvbiBpY29uLXRhYmxlciBpY29ucy10YWJsZXItb3V0bGluZSBpY29uLXRhYmxlci1idXR0ZXJmbHkiPjxwYXRoIHN0cm9rZT0ibm9uZSIgZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPjxwYXRoIGQ9Ik0xMiAxOC4xNzZhMyAzIDAgMSAxIC00Ljk1MyAtMi40NDlsLS4wMjUgLjAyM2E0LjUwMiA0LjUwMiAwIDAgMSAxLjQ4MyAtOC43NWMxLjQxNCAwIDIuNjc1IC42NTIgMy41IDEuNjcxYTQuNSA0LjUgMCAxIDEgNC45ODMgNy4wNzlhMyAzIDAgMSAxIC00Ljk4MyAyLjI1eiIgLz48cGF0aCBkPSJNMTIgMTl2LTEwIiAvPjxwYXRoIGQ9Ik05IDNsMyAybDMgLTIiIC8+PC9zdmc+",
+				"name": "lantern of moths",
+				"reason": "sponsor",
+				"hue": 313,
+				"sat": 0.42,
+				"lit": 0.9
+			},
+			{
+				"type": "syrup",
+				"icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWNpcmNsZS1pY29uIGx1Y2lkZS1jaXJjbGUiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIi8+PC9zdmc+",
+				"name": "woundhalo",
+				"reason": "sponsor",
+				"hue": 13,
+				"sat": 0.93,
+				"lit": 0.85
+			}
+		],
+		"I3xi": {
+			"type": "kitty",
+			"icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLWNhdCI+PHBhdGggc3Ryb2tlPSJub25lIiBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTIwIDN2MTBhOCA4IDAgMSAxIC0xNiAwdi0xMGwzLjQzMiAzLjQzMmE3Ljk2MyA3Ljk2MyAwIDAgMSA0LjU2OCAtMS40MzJjMS43NjkgMCAzLjQwMyAuNTc0IDQuNzI4IDEuNTQ2bDMuMjcyIC0zLjU0NiIgLz48cGF0aCBkPSJNMiAxNmg1bC00IDQiIC8+PHBhdGggZD0iTTIyIDE2aC01bDQgNCIgLz48cGF0aCBkPSJNMTEgMTZhMSAxIDAgMSAwIDIgMGExIDEgMCAxIDAgLTIgMCIgLz48cGF0aCBkPSJNOSAxMXYuMDEiIC8+PHBhdGggZD0iTTE1IDExdi4wMSIgLz48L3N2Zz4=",
+			"name": "its a kitty!!",
+			"hue": 228,
+			"sat": 1.3,
+			"lit": 0.9
+		},
+		"FenrirXXII": {
+			"type": "sponsor"
+		},
+		"fr0r": [
+			{
+				"type": "contributor"
+			}
+		],
+		"saettbyeol": {
+			"type": "sponsor"
+		},
+		"lyeule": {
+			"type": "sponsor"
+		},
+		"swiffyjk": {
+			"type": "contributor"
+		},
+		"sewagebipolar": [
+			{
+				"type": "sponsor"
+			},
+			{
+				"icon": "data:image/svg+xml;base64,PHN2ZyAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiAgd2lkdGg9IjI0IiAgaGVpZ2h0PSIyNCIgIHZpZXdCb3g9IjAgMCAyNCAyNCIgIGZpbGw9Im5vbmUiICBzdHJva2U9ImN1cnJlbnRDb2xvciIgIHN0cm9rZS13aWR0aD0iMiIgIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgIHN0cm9rZS1saW5lam9pbj0icm91bmQiICBjbGFzcz0iaWNvbiBpY29uLXRhYmxlciBpY29ucy10YWJsZXItb3V0bGluZSBpY29uLXRhYmxlci1zbGljZSI+PHBhdGggc3Ryb2tlPSJub25lIiBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTMgMTlsMTUgLTE1bDMgM2wtNiA2bDIgMmExNCAxNCAwIDAgMSAtMTQgNCIgLz48L3N2Zz4=",
+				"reason": "sponsor",
+				"name": "Yandere Complex",
+				"hue": 279,
+				"sat": 1.58,
+				"lit": 1.02
+			}
+		],
+		"unstablerate": [
+			{
+				"type": "sponsor"
+			},
+			{
+				"icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJjdXJyZW50Q29sb3IiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1maWxsZWQgaWNvbi10YWJsZXItcGF3Ij48cGF0aCBzdHJva2U9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNMTIgMTBjLTEuMzIgMCAtMS45ODMgLjQyMSAtMi45MzEgMS45MjRsLS4yNDQgLjM5OGwtLjM5NSAuNjg4YTUwLjg5IDUwLjg5IDAgMCAwIC0uMTQxIC4yNTRjLS4yNCAuNDM0IC0uNTcxIC43NTMgLTEuMTM5IDEuMTQybC0uNTUgLjM2NWMtLjk0IC42MjcgLTEuNDMyIDEuMTE4IC0xLjcwNyAxLjk1NWMtLjEyNCAuMzM4IC0uMTk2IC44NTMgLS4xOTMgMS4yOGMwIDEuNjg3IDEuMTk4IDIuOTk0IDIuOCAyLjk5NGwuMjQyIC0uMDA2Yy4xMTkgLS4wMDYgLjIzNCAtLjAxNyAuMzU0IC0uMDM0bC4yNDggLS4wNDNsLjEzMiAtLjAyOGwuMjkxIC0uMDczbC4xNjIgLS4wNDVsLjU3IC0uMTdsLjc2MyAtLjI0M2wuNDU1IC0uMTM2Yy41MyAtLjE1IC45NCAtLjIyMiAxLjI4MyAtLjIyMmMuMzQ0IDAgLjc1MyAuMDczIDEuMjgzIC4yMjJsLjQ1NSAuMTM2bC43NjQgLjI0MmwuNTY5IC4xNzFsLjMxMiAuMDg0Yy4wOTcgLjAyNCAuMTg3IC4wNDUgLjI3MyAuMDYybC4yNDggLjA0M2MuMTIgLjAxNyAuMjM1IC4wMjggLjM1NCAuMDM0bC4yNDIgLjAwNmMxLjYwMiAwIDIuOCAtMS4zMDcgMi44IC0zYzAgLS40MjcgLS4wNzMgLS45MzkgLS4yMDcgLTEuMzA2Yy0uMjM2IC0uNzI0IC0uNjc3IC0xLjIyMyAtMS40OCAtMS44M2wtLjI1NyAtLjE5bC0uNTI4IC0uMzhjLS42NDIgLS40NyAtMS4wMDMgLS44MjYgLTEuMjUzIC0xLjI3OGwtLjI3IC0uNDg1bC0uMjUyIC0uNDMyYy0xLjAxMSAtMS42OTYgLTEuNjE4IC0yLjA5OSAtMy4wNTMgLTIuMDk5eiIgLz48cGF0aCBkPSJNMTkuNzggN2gtLjAzYy0xLjIxOSAuMDIgLTIuMzUgMS4wNjYgLTIuOTA4IDIuNTA0Yy0uNjkgMS43NzUgLS4zNDggMy43MiAxLjA3NSA0LjMzM2MuMjU2IC4xMDkgLjUyNyAuMTYzIC44MDEgLjE2M2MxLjIzMSAwIDIuMzggLTEuMDUzIDIuOTQzIC0yLjUwNGMuNjg2IC0xLjc3NCAuMzQgLTMuNzIgLTEuMDc2IC00LjMzMmEyLjA1IDIuMDUgMCAwIDAgLS44MDQgLS4xNjR6IiAvPjxwYXRoIGQ9Ik05LjAyNSAzYy0uMTEyIDAgLS4xODUgLjAwMiAtLjI3IC4wMTVsLS4wOTMgLjAxNmMtMS41MzIgLjIwNiAtMi4zOTcgMS45ODkgLTIuMTA4IDMuODU1Yy4yNzIgMS43MjUgMS40NjIgMy4xMTQgMi45MiAzLjExNGwuMTg3IC0uMDA1YTEuMjYgMS4yNiAwIDAgMCAuMDg0IC0uMDFsLjA5MiAtLjAxNmMxLjUzMyAtLjIwNiAyLjM5NyAtMS45ODkgMi4xMDggLTMuODU1Yy0uMjcgLTEuNzI3IC0xLjQ2IC0zLjExNCAtMi45MiAtMy4xMTR6IiAvPjxwYXRoIGQ9Ik0xNC45NzIgM2MtMS40NTkgMCAtMi42NDcgMS4zODggLTIuOTE2IDMuMTEzYy0uMjkgMS44NjcgLjU3NCAzLjY1IDIuMTc0IDMuODY3Yy4xMDMgLjAxMyAuMiAuMDIgLjI5NiAuMDJjMS4zOSAwIDIuNTQzIC0xLjI2NSAyLjg3NyAtMi44ODNsLjA0MSAtLjIzYy4yOSAtMS44NjcgLS41NzQgLTMuNjUgLTIuMTc0IC0zLjg2N2EyLjE1NCAyLjE1NCAwIDAgMCAtLjI5OCAtLjAyeiIgLz48cGF0aCBkPSJNNC4yMTcgN2MtLjI3NCAwIC0uNTQ0IC4wNTQgLS43OTcgLjE2MWMtMS40MjYgLjYxNSAtMS43NjcgMi41NjIgLTEuMDc4IDQuMzM1Yy41NjMgMS40NTEgMS43MSAyLjUwNCAyLjk0MSAyLjUwNGMuMjc0IDAgLjU0NCAtLjA1NCAuNzk3IC0uMTYxYzEuNDI2IC0uNjE1IDEuNzY3IC0yLjU2MiAxLjA3OCAtNC4zMzVjLS41NjMgLTEuNDUxIC0xLjcxIC0yLjUwNCAtMi45NDEgLTIuNTA0eiIgLz48L3N2Zz4=",
+				"reason": "sponsor",
+				"name": "puppy",
+				"hue": 333,
+				"sat": 1,
+				"lit": 1
+			}
+		],
+		"myraisounds": [
+			{
+				"type": "sponsor"
+			}
+		],
+		"noapop": {
+			"type": "sponsor"
+		},
+		"celebrating": {
+			"type": "sponsor"
+		},
+		"riskyrizey": {
+			"type": "sponsor"
+		},
+		"fourohclok": {
+			"type": "sponsor"
+		},
+		"satisfeita": [
+			{
+				"type": "sponsor"
+			},
+			{
+				"icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWNoZXNzLXF1ZWVuLWljb24gbHVjaWRlLWNoZXNzLXF1ZWVuIj48cGF0aCBkPSJNNCAyMGEyIDIgMCAwIDEgMi0yaDEyYTIgMiAwIDAgMSAyIDJ2MWExIDEgMCAwIDEtMSAxSDVhMSAxIDAgMCAxLTEtMXoiLz48cGF0aCBkPSJtMTIuNDc0IDUuOTQzIDEuNTY3IDUuMzRhMSAxIDAgMCAwIDEuNzUuMzI4bDIuNjE2LTMuNDAyIi8+PHBhdGggZD0ibTIwIDktMyA5Ii8+PHBhdGggZD0ibTUuNTk0IDguMjA5IDIuNjE1IDMuNDAzYTEgMSAwIDAgMCAxLjc1LS4zMjlsMS41NjctNS4zNCIvPjxwYXRoIGQ9Ik03IDE4IDQgOSIvPjxjaXJjbGUgY3g9IjEyIiBjeT0iNCIgcj0iMiIvPjxjaXJjbGUgY3g9IjIwIiBjeT0iNyIgcj0iMiIvPjxjaXJjbGUgY3g9IjQiIGN5PSI3IiByPSIyIi8+PC9zdmc+",
+				"reason": "sponsor",
+				"name": "princess",
+				"hue": 245,
+				"sat": 0.8,
+				"lit": 0.9
+			}
+		],
+		"HuxP": [
+			{
+				"type": "sponsor"
+			},
+			{
+				"icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXBhdy1wcmludC1pY29uIGx1Y2lkZS1wYXctcHJpbnQiPjxjaXJjbGUgY3g9IjExIiBjeT0iNCIgcj0iMiIvPjxjaXJjbGUgY3g9IjE4IiBjeT0iOCIgcj0iMiIvPjxjaXJjbGUgY3g9IjIwIiBjeT0iMTYiIHI9IjIiLz48cGF0aCBkPSJNOSAxMGE1IDUgMCAwIDEgNSA1djMuNWEzLjUgMy41IDAgMCAxLTYuODQgMS4wNDVRNi41MiAxNy40OCA0LjQ2IDE2Ljg0QTMuNSAzLjUgMCAwIDEgNS41IDEwWiIvPjwvc3ZnPg==",
+				"reason": "sponsor",
+				"name": "式大元",
+				"hue": 235,
+				"sat": 1.15,
+				"lit": 1.01
+			}
+		],
+		"K40M0J1": {
+			"type": "sponsor"
+		},
+		"goldenstuffed": {
+			"type": "sponsor"
+		},
+		"kar1x": {
+			"type": "sponsor"
+		},
+		"nojonsko": {
+			"type": "sponsor"
+		},
+		"urwq": [
+			{
+				"type": "sponsor"
+			},
+			{
+				"icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLWZpc2gtYm9uZSI+PHBhdGggc3Ryb2tlPSJub25lIiBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTE2LjY5IDcuNDRhNi45NzMgNi45NzMgMCAwIDAgLTEuNjkgNC41NmE2Ljk3IDYuOTcgMCAwIDAgMS42OTkgNC41NzFjMS45MTQgLS42ODQgMy42OTEgLTIuMTgzIDUuMzAxIC00LjU2NWMtMS42MTMgLTIuMzg0IC0zLjM5NCAtMy44ODMgLTUuMzEyIC00LjU2NSIgLz48cGF0aCBkPSJNMiA5LjUwNGE0MC43MyA0MC43MyAwIDAgMCAyLjQyMiAyLjUwNGEzOS42NzkgMzkuNjc5IDAgMCAwIC0yLjQyMiAyLjQ5OCIgLz48cGF0aCBkPSJNMTggMTF2LjAxIiAvPjxwYXRoIGQ9Ik00LjQyMiAxMmgxMC41NzgiIC8+PHBhdGggZD0iTTcgMTB2NCIgLz48cGF0aCBkPSJNMTEgOHY4IiAvPjwvc3ZnPg==",
+				"reason": "sponsor",
+				"name": "no fish remaining",
+				"hue": 165,
+				"sat": 1.2,
+				"lit": 0.95
+			}
+		],
+		"driftpsalm": [
+			{
+				"type": "sponsor"
+			},
+			{
+				"icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLWFkanVzdG1lbnRzIj48cGF0aCBzdHJva2U9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNNCAxMGEyIDIgMCAxIDAgNCAwYTIgMiAwIDAgMCAtNCAwIiAvPjxwYXRoIGQ9Ik02IDR2NCIgLz48cGF0aCBkPSJNNiAxMnY4IiAvPjxwYXRoIGQ9Ik0xMCAxNmEyIDIgMCAxIDAgNCAwYTIgMiAwIDAgMCAtNCAwIiAvPjxwYXRoIGQ9Ik0xMiA0djEwIiAvPjxwYXRoIGQ9Ik0xMiAxOHYyIiAvPjxwYXRoIGQ9Ik0xNiA3YTIgMiAwIDEgMCA0IDBhMiAyIDAgMCAwIC00IDAiIC8+PHBhdGggZD0iTTE4IDR2MSIgLz48cGF0aCBkPSJNMTggOXYxMSIgLz48L3N2Zz4=",
+				"reason": "sponsor",
+				"name": "softstatic.wav",
+				"hue": 22,
+				"sat": 0.93,
+				"lit": 0.94
+			}
+		],
+		"v4nnen": [
+			{
+				"type": "sponsor"
+			}
+		],
+		"popcorniscrazy": [
+			{
+				"type": "sponsor"
+			},
+			{
+				"icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLXNub3dmbGFrZSI+PHBhdGggc3Ryb2tlPSJub25lIiBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTEwIDRsMiAxbDIgLTEiIC8+PHBhdGggZD0iTTEyIDJ2Ni41bDMgMS43MiIgLz48cGF0aCBkPSJNMTcuOTI4IDYuMjY4bC4xMzQgMi4yMzJsMS44NjYgMS4yMzIiIC8+PHBhdGggZD0iTTIwLjY2IDdsLTUuNjI5IDMuMjVsLjAxIDMuNDU4IiAvPjxwYXRoIGQ9Ik0xOS45MjggMTQuMjY4bC0xLjg2NiAxLjIzMmwtLjEzNCAyLjIzMiIgLz48cGF0aCBkPSJNMjAuNjYgMTdsLTUuNjI5IC0zLjI1bC0yLjk5IDEuNzM4IiAvPjxwYXRoIGQ9Ik0xNCAyMGwtMiAtMWwtMiAxIiAvPjxwYXRoIGQ9Ik0xMiAyMnYtNi41bC0zIC0xLjcyIiAvPjxwYXRoIGQ9Ik02LjA3MiAxNy43MzJsLS4xMzQgLTIuMjMybC0xLjg2NiAtMS4yMzIiIC8+PHBhdGggZD0iTTMuMzQgMTdsNS42MjkgLTMuMjVsLS4wMSAtMy40NTgiIC8+PHBhdGggZD0iTTQuMDcyIDkuNzMybDEuODY2IC0xLjIzMmwuMTM0IC0yLjIzMiIgLz48cGF0aCBkPSJNMy4zNCA3bDUuNjI5IDMuMjVsMi45OSAtMS43MzgiIC8+PC9zdmc+",
+				"reason": "sponsor",
+				"name": "Snow Fairy",
+				"hue": 239,
+				"sat": 1.35,
+				"lit": 0.81
+			},
+			{
+				"icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWRydW0taWNvbiBsdWNpZGUtZHJ1bSI+PHBhdGggZD0ibTIgMiA4IDgiLz48cGF0aCBkPSJtMjIgMi04IDgiLz48ZWxsaXBzZSBjeD0iMTIiIGN5PSI5IiByeD0iMTAiIHJ5PSI1Ii8+PHBhdGggZD0iTTcgMTMuNHY3LjkiLz48cGF0aCBkPSJNMTIgMTR2OCIvPjxwYXRoIGQ9Ik0xNyAxMy40djcuOSIvPjxwYXRoIGQ9Ik0yIDl2OGExMCA1IDAgMCAwIDIwIDBWOSIvPjwvc3ZnPg==",
+				"reason": "sponsor",
+				"name": "loves songs that have this shit in it… lowkey…",
+				"hue": 131,
+				"sat": 1.35,
+				"lit": 0.81
+			}
+		],
+		"dylandotat": [
+			{
+				"type": "sponsor"
+			},
+			{
+				"icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXBhaW50YnJ1c2gtaWNvbiBsdWNpZGUtcGFpbnRicnVzaCI+PHBhdGggZD0ibTE0LjYyMiAxNy44OTctMTAuNjgtMi45MTMiLz48cGF0aCBkPSJNMTguMzc2IDIuNjIyYTEgMSAwIDEgMSAzLjAwMiAzLjAwMkwxNy4zNiA5LjY0M2EuNS41IDAgMCAwIDAgLjcwN2wuOTQ0Ljk0NGEyLjQxIDIuNDEgMCAwIDEgMCAzLjQwOGwtLjk0NC45NDRhLjUuNSAwIDAgMS0uNzA3IDBMOC4zNTQgNy4zNDhhLjUuNSAwIDAgMSAwLS43MDdsLjk0NC0uOTQ0YTIuNDEgMi40MSAwIDAgMSAzLjQwOCAwbC45NDQuOTQ0YS41LjUgMCAwIDAgLjcwNyAweiIvPjxwYXRoIGQ9Ik05IDhjLTEuODA0IDIuNzEtMy45NyAzLjQ2LTYuNTgzIDMuOTQ4YS41MDcuNTA3IDAgMCAwLS4zMDIuODE5bDcuMzIgOC44ODNhMSAxIDAgMCAwIDEuMTg1LjIwNEMxMi43MzUgMjAuNDA1IDE2IDE2Ljc5MiAxNiAxNSIvPjwvc3ZnPg==",
+				"reason": "sponsor",
+				"name": "Orange Fan",
+				"hue": 24,
+				"sat": 2,
+				"lit": 1
+			}
+		],
+		"Angel0Lust": {
+			"type": "sponsor"
+		},
+		"liminelle": [
+			{
+				"type": "sponsor"
+			},
+			{
+				"icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXRyZWVzLWljb24gbHVjaWRlLXRyZWVzIj48cGF0aCBkPSJNMTAgMTB2LjJBMyAzIDAgMCAxIDguOSAxNkg1YTMgMyAwIDAgMS0xLTUuOFYxMGEzIDMgMCAwIDEgNiAwWiIvPjxwYXRoIGQ9Ik03IDE2djYiLz48cGF0aCBkPSJNMTMgMTl2MyIvPjxwYXRoIGQ9Ik0xMiAxOWg4LjNhMSAxIDAgMCAwIC43LTEuN0wxOCAxNGguM2ExIDEgMCAwIDAgLjctMS43TDE2IDloLjJhMSAxIDAgMCAwIC44LTEuN0wxMyAzbC0xLjQgMS41Ii8+PC9zdmc+",
+				"reason": "sponsor",
+				"name": "fogbound witch",
+				"hue": 147,
+				"sat": 0.57,
+				"lit": 0.65
+			},
+			{
+				"icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXdhdmVzLWljb24gbHVjaWRlLXdhdmVzIj48cGF0aCBkPSJNMiA2Yy42LjUgMS4yIDEgMi41IDFDNyA3IDcgNSA5LjUgNWMyLjYgMCAyLjQgMiA1IDIgMi41IDAgMi41LTIgNS0yIDEuMyAwIDEuOS41IDIuNSAxIi8+PHBhdGggZD0iTTIgMTJjLjYuNSAxLjIgMSAyLjUgMSAyLjUgMCAyLjUtMiA1LTIgMi42IDAgMi40IDIgNSAyIDIuNSAwIDIuNS0yIDUtMiAxLjMgMCAxLjkuNSAyLjUgMSIvPjxwYXRoIGQ9Ik0yIDE4Yy42LjUgMS4yIDEgMi41IDEgMi41IDAgMi41LTIgNS0yIDIuNiAwIDIuNCAyIDUgMiAyLjUgMCAyLjUtMiA1LTIgMS4zIDAgMS45LjUgMi41IDEiLz48L3N2Zz4=",
+				"reason": "sponsor",
+				"name": "liminal signal",
+				"hue": 250,
+				"sat": 1.5,
+				"lit": 1.12
+			}
+		],
+		"quikwise": [
+			{
+				"type": "sponsor"
+			},
+			{
+				"icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLWxhbmd1YWdlLWhpcmFnYW5hIj48cGF0aCBzdHJva2U9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNNCA1aDciIC8+PHBhdGggZD0iTTcgNGMwIDQuODQ2IDAgNyAuNSA4IiAvPjxwYXRoIGQ9Ik0xMCA4LjVjMCAyLjI4NiAtMiA0LjUgLTMuNSA0LjVzLTIuNSAtMS4xMzUgLTIuNSAtMmMwIC0yIDEgLTMgMyAtM3M1IC41NyA1IDIuODU3YzAgMS41MjQgLS42NjcgMi41NzEgLTIgMy4xNDMiIC8+PHBhdGggZD0iTTEyIDIwbDQgLTlsNCA5IiAvPjxwYXRoIGQ9Ik0xOS4xIDE4aC02LjIiIC8+PC9zdmc+",
+				"reason": "sponsor",
+				"name": "音速",
+				"hue": 197,
+				"sat": 1.5,
+				"lit": 1.08
+			}
+		],
+		"BosozokuGF": [
+			{
+				"type": "sponsor"
+			},
+			{
+				"icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLWNwdSI+PHBhdGggc3Ryb2tlPSJub25lIiBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTUgNW0wIDFhMSAxIDAgMCAxIDEgLTFoMTJhMSAxIDAgMCAxIDEgMXYxMmExIDEgMCAwIDEgLTEgMWgtMTJhMSAxIDAgMCAxIC0xIC0xeiIgLz48cGF0aCBkPSJNOSA5aDZ2NmgtNnoiIC8+PHBhdGggZD0iTTMgMTBoMiIgLz48cGF0aCBkPSJNMyAxNGgyIiAvPjxwYXRoIGQ9Ik0xMCAzdjIiIC8+PHBhdGggZD0iTTE0IDN2MiIgLz48cGF0aCBkPSJNMjEgMTBoLTIiIC8+PHBhdGggZD0iTTIxIDE0aC0yIiAvPjxwYXRoIGQ9Ik0xNCAyMXYtMiIgLz48cGF0aCBkPSJNMTAgMjF2LTIiIC8+PC9zdmc+",
+				"reason": "sponsor",
+				"name": "blast-processed",
+				"hue": 297,
+				"sat": 1.66,
+				"lit": 0.8
+			}
+		],
+		"tainaronian": {
+			"type": "sponsor"
+		},
+		"NozomiBear": [
+			{
+				"type": "sponsor"
+			},
+			{
+				"icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLWFwcGxlIj48cGF0aCBzdHJva2U9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNNCAxMS4zMTljMCAzLjEwMiAuNDQ0IDUuMzE5IDIuMjIyIDcuOTc4YzEuMzUxIDEuNzk3IDMuMTU2IDIuMjQ3IDUuMDggLjk4OGMuNDI2IC0uMjY4IC45NyAtLjI2OCAxLjM5NyAwYzEuOTIzIDEuMjYgMy43MjggLjgwOSA1LjA3OSAtLjk4OGMxLjc3OCAtMi42NiAyLjIyMiAtNC44NzYgMi4yMjIgLTcuOTc3YzAgLTIuNjYxIC0xLjk5IC01LjMyIC00LjQ0NCAtNS4zMmMtMS4yNjcgMCAtMi40MSAuNjkzIC0zLjIyIDEuNDRhLjUgLjUgMCAwIDEgLS42NzIgMGMtLjgwOSAtLjc0NiAtMS45NTMgLTEuNDQgLTMuMjIgLTEuNDRjLTIuNDU0IDAgLTQuNDQ0IDIuNjYgLTQuNDQ0IDUuMzE5IiAvPjxwYXRoIGQ9Ik03IDEyYzAgLTEuNDcgLjQ1NCAtMi4zNCAxLjUgLTMiIC8+PHBhdGggZD0iTTEyIDdjMCAtMS4yIC44NjcgLTQgMyAtNCIgLz48L3N2Zz4=",
+				"reason": "sponsor",
+				"name": "pipsqueak :3",
+				"hue": 343,
+				"sat": 1.05,
+				"lit": 0.9
+			},
+			{
+				"icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWNhdC1pY29uIGx1Y2lkZS1jYXQiPjxwYXRoIGQ9Ik0xMiA1Yy42NyAwIDEuMzUuMDkgMiAuMjYgMS43OC0yIDUuMDMtMi44NCA2LjQyLTIuMjYgMS40LjU4LS40MiA3LS40MiA3IC41NyAxLjA3IDEgMi4yNCAxIDMuNDRDMjEgMTcuOSAxNi45NyAyMSAxMiAyMXMtOS0zLTktNy41NmMwLTEuMjUuNS0yLjQgMS0zLjQ0IDAgMC0xLjg5LTYuNDItLjUtNyAxLjM5LS41OCA0LjcyLjIzIDYuNSAyLjIzQTkuMDQgOS4wNCAwIDAgMSAxMiA1WiIvPjxwYXRoIGQ9Ik04IDE0di41Ii8+PHBhdGggZD0iTTE2IDE0di41Ii8+PHBhdGggZD0iTTExLjI1IDE2LjI1aDEuNUwxMiAxN2wtLjc1LS43NVoiLz48L3N2Zz4=",
+				"reason": "sponsor",
+				"name": "hello kitty ฅ^•ﻌ•^ฅ !!",
+				"hue": 268,
+				"sat": 0.63,
+				"lit": 0.92
+			}
+		],
+		"nin0dev": {
+			"type": "sponsor"
+		},
+		"milkdrinker3000": {
+			"type": "sponsor"
+		},
+		"wiichicken": {
+			"type": "sponsor"
+		},
+		"duskwitch": [
+			{
+				"type": "sponsor"
+			},
+			{
+				"icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLW1hcCI+PHBhdGggc3Ryb2tlPSJub25lIiBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTMgN2w2IC0zbDYgM2w2IC0zdjEzbC02IDNsLTYgLTNsLTYgM3YtMTMiIC8+PHBhdGggZD0iTTkgNHYxMyIgLz48cGF0aCBkPSJNMTUgN3YxMyIgLz48L3N2Zz4=",
+				"reason": "sponsor",
+				"name": "Twilight Cartographer",
+				"hue": 217,
+				"sat": 0.87,
+				"lit": 0.86
+			}
+		],
+		"rgoracz": {
+			"type": "sponsor"
+		},
+		"thomasb2k": {
+			"type": "sponsor"
+		},
+		"ThatJumpyFrog": {
+			"type": "sponsor"
+		},
+		"nite_": {
+			"type": "sponsor"
+		},
+		"mitsurin": [
+			{
+				"type": "sponsor"
+			},
+			{
+				"icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLXNsaWNlIj48cGF0aCBzdHJva2U9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNMyAxOWwxNSAtMTVsMyAzbC02IDZsMiAyYTE0IDE0IDAgMCAxIC0xNCA0IiAvPjwvc3ZnPg==",
+				"reason": "sponsor",
+				"name": "mother",
+				"hue": 300,
+				"sat": 1.5,
+				"lit": 1.24
+			}
+		],
+		"vamti": [
+			{
+				"type": "sponsor"
+			}
+		],
+		"lxjv": [
+			{
+				"type": "sponsor"
+			}
+		],
+		"f-ff": [
+			{
+				"type": "sponsor"
+			}
+		],
+		"monikapurpl3": [
+			{
+				"type": "sponsor"
+			}
+		],
+		"ahntaea": [
+			{
+				"type": "sponsor"
+			}
+		],
+		"monikapurpl3": [
+			{
+				"type": "sponsor"
+			}
+		],
+		"drainpuppy": [
+			{
+				"type": "sponsor"
+			}
+		],
+		"DIVANA4EVER": [
+			{
+				"type": "sponsor"
+			}
+		]
+	}
 }

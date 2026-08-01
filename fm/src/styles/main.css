@@ -4,132 +4,132 @@
 
 .sr-only,
 .style-warning {
-    display: none !important;
+	display: none !important;
 }
 
 * {
-    scrollbar-width: none;
-    scrollbar-gutter: stable both-edges;
-    scroll-behavior: smooth;
-    -webkit-text-size-adjust: none;
+	scrollbar-width: none;
+	scrollbar-gutter: stable both-edges;
+	scroll-behavior: smooth;
+	-webkit-text-size-adjust: none;
 }
 
 .disclose-hide {
-    display: none !important;
+	display: none !important;
 }
 
 /* wow this is a bad selector */
 html:has(> body[data-bleh--show_scroller="true"]) {
-    scrollbar-width: thin;
-    scrollbar-gutter: unset;
+	scrollbar-width: thin;
+	scrollbar-gutter: unset;
 }
 
 :root {
-    scroll-padding-top: calc(52px + 15px);
+	scroll-padding-top: calc(52px + 15px);
 }
 body {
-    color: oklch(var(--c2));
-    font-family: var(--font);
-    font-size: var(--font-size);
-    line-height: var(--line-height);
-    font-weight: var(--font-weight);
-    letter-spacing: unset !important;
-    color-scheme: dark;
-    accent-color: oklch(var(--l3-c));
+	color: oklch(var(--c2));
+	font-family: var(--font);
+	font-size: var(--font-size);
+	line-height: var(--line-height);
+	font-weight: var(--font-weight);
+	letter-spacing: unset !important;
+	color-scheme: dark;
+	accent-color: oklch(var(--l3-c));
 
-    --underline-offset: 3px;
+	--underline-offset: 3px;
 
-    overflow-x: hidden;
+	overflow-x: hidden;
 
-    text-underline-offset: var(--underline-offset);
+	text-underline-offset: var(--underline-offset);
 
-    margin: unset !important;
+	margin: unset !important;
 
-    &:before {
-        content: "";
-        display: block;
-        position: fixed;
-        inset: 0;
-        z-index: 9997;
-        pointer-events: none;
-    }
+	&:before {
+		content: "";
+		display: block;
+		position: fixed;
+		inset: 0;
+		z-index: 9997;
+		pointer-events: none;
+	}
 
-    .florence-supports-loading > &:not(.florence-loaded, .labs-section, [style="zoom: 1;"]) {
-        &:before {
-            background-color: oklch(var(--b6));
-        }
-    }
+	.florence-supports-loading > &:not(.florence-loaded, .labs-section, [style="zoom: 1;"]) {
+		&:before {
+			background-color: oklch(var(--b6));
+		}
+	}
 
-    &[style="zoom: 1;"] {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        padding: 100px 0;
+	&[style="zoom: 1;"] {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		padding: 100px 0;
 
-        & > p {
-            font-size: 20px;
-        }
-    }
+		& > p {
+			font-size: 20px;
+		}
+	}
 
-    &:after {
-        content: "";
-        display: block;
-        position: fixed;
-        inset: 0;
-        z-index: 9999999999999999999;
-        pointer-events: none;
-        opacity: var(--noise-opacity, 0);
-        mix-blend-mode: soft-light;
-        background-image: var(--noise);
-        background-repeat: repeat;
-        background-size: 128px;
-    }
+	&:after {
+		content: "";
+		display: block;
+		position: fixed;
+		inset: 0;
+		z-index: 9999999999999999999;
+		pointer-events: none;
+		opacity: var(--noise-opacity, 0);
+		mix-blend-mode: soft-light;
+		background-image: var(--noise);
+		background-repeat: repeat;
+		background-size: 128px;
+	}
 
-    & > .loader {
-        position: fixed;
-        inset: 0;
-        /*background: oklch(var(--b6), 20%);*/
-        z-index: 1000000;
+	& > .loader {
+		position: fixed;
+		inset: 0;
+		/*background: oklch(var(--b6), 20%);*/
+		z-index: 1000000;
 
-        opacity: 0;
-        pointer-events: none;
+		opacity: 0;
+		pointer-events: none;
 
-        display: flex;
-        justify-content: center;
-        align-items: center;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 
-        transition-property: opacity;
-        transition-duration: 0.4s;
-        transition-timing-function: var(--trans-function);
+		transition-property: opacity;
+		transition-duration: 0.4s;
+		transition-timing-function: var(--trans-function);
 
-        & > .loader-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            padding: 2px;
+		& > .loader-bar {
+			position: fixed;
+			top: 0;
+			left: 0;
+			right: 0;
+			padding: 2px;
 
-            & > .loader-bar-fill {
-                background-color: oklch(var(--h3));
-                box-shadow: 0 6px 20px oklch(var(--h4));
-                border-radius: var(--item-big-radius);
-                height: 4px;
-                width: 100%;
-            }
-        }
-    }
+			& > .loader-bar-fill {
+				background-color: oklch(var(--h3));
+				box-shadow: 0 6px 20px oklch(var(--h4));
+				border-radius: var(--item-big-radius);
+				height: 4px;
+				width: 100%;
+			}
+		}
+	}
 
-    &.loading-indicator-loading {
-        & > .loader {
-            opacity: 1;
-            pointer-events: auto;
+	&.loading-indicator-loading {
+		& > .loader {
+			opacity: 1;
+			pointer-events: auto;
 
-            & > .loader-bar-fill {
-                animation: loading 3.5s var(--trans-function);
-            }
-        }
-    }
+			& > .loader-bar-fill {
+				animation: loading 3.5s var(--trans-function);
+			}
+		}
+	}
 }
 
 address,
@@ -139,71 +139,75 @@ ol,
 p,
 pre,
 ul {
-    margin-top: unset;
+	margin-top: unset;
 }
 
 ul {
-    padding-inline: unset !important;
-    margin-block: unset !important;
+	padding-inline: unset !important;
+	margin-block: unset !important;
 }
 
 b,
 strong {
-    font-weight: var(--font-weight-bold);
+	font-weight: var(--font-weight-bold);
 }
 
 /*     FIRST STAGE     */
 /* remove white backgrounds */
-.main-content, .header--overview, .container,
-.content-top-has-nav .content-top, .two-column-layout .content-top /* lfm tag */,
-.two-column-layout .container, .two-column-layout .main-content /* for some reason lfm bundles a 1x1 white pixel tiled across the entire half of the screen? */ {
-    background: var(--override-background, transparent) !important;
-    color: unset; /* for header--overview, this is set to #fff */
+.main-content,
+.header--overview,
+.container,
+.content-top-has-nav .content-top,
+.two-column-layout .content-top /* lfm tag */,
+.two-column-layout .container,
+.two-column-layout .main-content /* for some reason lfm bundles a 1x1 white pixel tiled across the entire half of the screen? */ {
+	background: var(--override-background, transparent) !important;
+	color: unset; /* for header--overview, this is set to #fff */
 }
 .content-top-has-nav .content-top::after,
 .two-column-layout .content-top::after {
-    display: none;
+	display: none;
 }
 /* replace the very backing layer with b6 */
 html body {
-    /* html body is used cus last.fm decided so */
-    /* !important fixes bulk edit extension when managing
-    auto edits as of 2024/12 */
-    background-color: oklch(var(--b6)) !important;
+	/* html body is used cus last.fm decided so */
+	/* !important fixes bulk edit extension when managing
+	auto edits as of 2024/12 */
+	background-color: oklch(var(--b6)) !important;
 }
 
 .main-content {
-    padding-top: calc(5px + var(--button-height)) !important;
+	padding-top: calc(5px + var(--button-height)) !important;
 
-    @media (max-width: 980px) {
-        padding-top: unset !important;
+	@media (max-width: 980px) {
+		padding-top: unset !important;
 
-        &:before {
-            display: none;
-        }
-    }
+		&:before {
+			display: none;
+		}
+	}
 }
 
 ::selection {
-    background: oklch(var(--h4) / 30%);
-    color: oklch(var(--l3-c));
+	background: oklch(var(--h4) / 30%);
+	color: oklch(var(--l3-c));
 }
 ::-moz-selection {
-    background: oklch(var(--h4) / 30%);
-    color: oklch(var(--l3-c));
+	background: oklch(var(--h4) / 30%);
+	color: oklch(var(--l3-c));
 }
 
 /* applies focus outline to everything except
 masthead search, as it looks too ugly and focus can be
 inferred by it being opened in the first place */
 :not(#masthead-search-field):focus-visible {
-    /* should only be overrided if a better solution can be given */
-    outline: var(--focus-outline, 2px solid oklch(var(--l3-c))) !important;
+	/* should only be overrided if a better solution can be given */
+	outline: var(--focus-outline, 2px solid oklch(var(--l3-c))) !important;
 }
 
 /* no clue why */
 body > canvas {
-    display: none;
+	display: none;
 }
 
 .section-settings-toggle,
@@ -211,21 +215,20 @@ body > canvas {
 #language-selector,
 .video-preview-replace,
 .header-new-info-desktop {
-    display: none;
+	display: none;
 }
 
-
 .colour-preview {
-    background-color: oklch(var(--h3));
-    visibility: hidden;
-    position: fixed;
-    inset: 0;
-    opacity: 0;
-    pointer-events: none;
+	background-color: oklch(var(--h3));
+	visibility: hidden;
+	position: fixed;
+	inset: 0;
+	opacity: 0;
+	pointer-events: none;
 }
 
 .ot-floating-button {
-    &:not(:hover) {
-        opacity: 0 !important;
-    }
+	&:not(:hover) {
+		opacity: 0 !important;
+	}
 }

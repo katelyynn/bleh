@@ -1,130 +1,130 @@
 .secondary-nav-item--overview {
-    order: 1;
+	order: 1;
 }
 .secondary-nav-item--listening-report {
-    order: 2;
+	order: 2;
 }
 .secondary-nav-item--library {
-    order: 3;
+	order: 3;
 }
 .secondary-nav-item--playlists {
-    order: 10;
+	order: 10;
 }
 .secondary-nav-item--friends {
-    order: 4;
+	order: 4;
 }
 .secondary-nav-item--loved {
-    order: 7;
+	order: 7;
 }
 .secondary-nav-item--obsessions {
-    order: 8;
+	order: 8;
 }
 .secondary-nav-item--events {
-    &:not(.dont-rearrange) {
-        order: 9;
-    }
+	&:not(.dont-rearrange) {
+		order: 9;
+	}
 }
 .secondary-nav-item--tags {
-    order: 11;
+	order: 11;
 }
 .secondary-nav-item--shoutbox {
-    order: 6;
+	order: 6;
 }
 .secondary-nav-item--back {
-    order: -5;
+	order: -5;
 }
 .secondary-nav-item--similar > a {
-    --mask: var(--icon-16-arrows);
+	--mask: var(--icon-16-arrows);
 }
 .secondary-nav-item--compare {
-    --mask: var(--icon-16-arrows);
+	--mask: var(--icon-16-arrows);
 }
 
 /* library scrobbles tab */
 .secondary-nav-item--recommendations a,
 .secondary-nav-item--scrobbles {
-    --mask: var(--icon-16-scrobble);
+	--mask: var(--icon-16-scrobble);
 }
 
 /* artist listeners tabs */
 .secondary-nav-item--global {
-    --mask: var(--icon-16-globe);
+	--mask: var(--icon-16-globe);
 }
 .secondary-nav-item--you-know {
-    --mask: var(--icon-16-user);
+	--mask: var(--icon-16-user);
 }
 
 [data-type="charts"],
 .secondary-nav-item--charts > a,
 [data-analytics-label="charts"] {
-    --mask: var(--icon-16-charts);
+	--mask: var(--icon-16-charts);
 }
 
 /* events */
 .secondary-nav-item:first-child > a[href$="events"] {
-    --mask: var(--icon-16-calendar);
+	--mask: var(--icon-16-calendar);
 }
 
 .secondary-nav-item-link[href*="events/1"],
 .secondary-nav-item-link[href*="events/2"] {
-    padding-left: var(--button-sides) !important;
+	padding-left: var(--button-sides) !important;
 }
 
 .has-tab-num {
-    --show-icon: none !important;
+	--show-icon: none !important;
 
-    & > .tab-num {
-        display: none;
-    }
+	& > .tab-num {
+		display: none;
+	}
 }
 
 .secondary-nav-item--venue > a {
-    --mask: var(--icon-16-location);
+	--mask: var(--icon-16-location);
 }
 .secondary-nav-item--lineup > a {
-    --mask: var(--icon-16-artist);
+	--mask: var(--icon-16-artist);
 }
 .secondary-nav-item--attendance > a {
-    --mask: var(--icon-16-user);
+	--mask: var(--icon-16-user);
 }
 .secondary-nav-item--info > a {
-    --mask: var(--icon-16-bio);
+	--mask: var(--icon-16-bio);
 }
 
 .secondary-nav-item--going {
-    --mask: var(--icon-16-check);
+	--mask: var(--icon-16-check);
 }
 .secondary-nav-item--interested {
-    --mask: var(--icon-16-question);
+	--mask: var(--icon-16-question);
 }
 
 .navlist-more-wrap {
-    z-index: 10;
+	z-index: 10;
 }
 
 /* settings */
 .secondary-nav-item--overview > a[href*="/settings"] {
-    --mask: var(--icon-16-profile);
+	--mask: var(--icon-16-profile);
 }
 .secondary-nav-item--settings,
 [data-menu-item="settings"],
 .secondary-nav-item--website {
-    --mask: var(--icon-16-settings);
+	--mask: var(--icon-16-settings);
 }
 .secondary-nav-item--privacy {
-    --mask: var(--icon-16-lock);
+	--mask: var(--icon-16-lock);
 }
 .secondary-nav-item--account {
-    --mask: var(--icon-16-user);
+	--mask: var(--icon-16-user);
 }
 .secondary-nav-item--subscription {
-    --mask: var(--icon-16-pro);
+	--mask: var(--icon-16-pro);
 }
 .secondary-nav-item--social {
-    --mask: var(--icon-16-share);
+	--mask: var(--icon-16-share);
 }
 .secondary-nav-item--applications {
-    --mask: var(--icon-16-extension);
+	--mask: var(--icon-16-extension);
 }
 
 /* this re-orders the settings tab to:
@@ -133,62 +133,62 @@
 - account
 */
 .secondary-nav-item--overview {
-    order: -1;
+	order: -1;
 }
 .secondary-nav-item--privacy {
-    order: -1;
+	order: -1;
 }
 .secondary-nav-item--account {
-    order: -1;
+	order: -1;
 }
 
 /* notifications */
 [data-menu-item="notifications"],
 .secondary-nav-item--notifications {
-    --mask: var(--icon-16-notifications);
+	--mask: var(--icon-16-notifications);
 }
 [data-menu-item="inbox"],
 .secondary-nav-item--messages {
-    --mask: var(--icon-16-mail);
+	--mask: var(--icon-16-mail);
 }
 .secondary-nav-item--sent {
-    --mask: var(--icon-16-sent-mail);
+	--mask: var(--icon-16-sent-mail);
 }
 .secondary-nav-item--compose {
-    --mask: var(--icon-16-compose);
+	--mask: var(--icon-16-compose);
 }
 
 /* listening reports */
 .secondary-nav-item--week {
-    --mask: var(--icon-16-listening-report-weekly);
+	--mask: var(--icon-16-listening-report-weekly);
 }
 .secondary-nav-item--month {
-    --mask: var(--icon-16-listening-report-monthly);
+	--mask: var(--icon-16-listening-report-monthly);
 }
 .secondary-nav-item--year {
-    --mask: var(--icon-16-listening-report-yearly);
+	--mask: var(--icon-16-listening-report-yearly);
 }
 
 .secondary-nav-item--home {
-    --mask: var(--icon-16-home);
+	--mask: var(--icon-16-home);
 }
 .secondary-nav-item--releases {
-    --mask: var(--icon-16-compass);
+	--mask: var(--icon-16-compass);
 }
 .secondary-nav-item--out-now {
-    --mask: var(--icon-16-compass);
+	--mask: var(--icon-16-compass);
 }
 .secondary-nav-item--coming-soon {
-    --mask: var(--icon-16-calendar);
+	--mask: var(--icon-16-calendar);
 }
 .secondary-nav-item--bookmarks {
-    --mask: var(--icon-16-bookmark);
+	--mask: var(--icon-16-bookmark);
 }
 .secondary-nav-item--bleh {
-    --mask: var(--icon-16-bleh);
-    --mask-size: var(--icon-size);
-    --col: oklch(var(--l3-c)) !important;
-    --mask-colour: color-mix(
+	--mask: var(--icon-16-bleh);
+	--mask-size: var(--icon-size);
+	--col: oklch(var(--l3-c)) !important;
+	--mask-colour: color-mix(
         in oklch,
         oklch(var(--l3-c)),
         oklch(var(--l4-c)) 30%

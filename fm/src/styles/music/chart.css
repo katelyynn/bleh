@@ -1,363 +1,375 @@
 .charts-row {
-    margin: var(--card-gap) 0 0 0;
+	margin: var(--card-gap) 0 0 0;
 }
 .weeklychart {
-    display: flex;
-    flex-direction: column;
-    padding: unset;
-    margin: unset;
-    line-height: var(--line-height);
+	display: flex;
+	flex-direction: column;
+	padding: unset;
+	margin: unset;
+	line-height: var(--line-height);
 
-    --icon-size: 16px;
-    --item-width: calc(120px + var(--icon-size) + var(--icon-gap));
+	--icon-size: 16px;
+	--item-width: calc(120px + var(--icon-size) + var(--icon-gap));
 
-    & > thead {
-        display: flex;
-        justify-content: end;
-        margin-bottom: 10px;
+	& > thead {
+		display: flex;
+		justify-content: end;
+		margin-bottom: 10px;
 
-        & > tr {
-            display: flex;
-            gap: var(--item-list-gap);
-        }
+		& > tr {
+			display: flex;
+			gap: var(--item-list-gap);
+		}
 
-        & > tr > th {
-            font-size: var(--font-size);
-            line-height: var(--line-height);
-            color: oklch(var(--c3));
-            font-family: var(--font);
-            font-weight: var(--font-weight);
-            padding: unset;
-            text-transform: unset;
-            cursor: default;
-            width: var(--item-width);
-            text-align: right;
+		& > tr > th {
+			font-size: var(--font-size);
+			line-height: var(--line-height);
+			color: oklch(var(--c3));
+			font-family: var(--font);
+			font-weight: var(--font-weight);
+			padding: unset;
+			text-transform: unset;
+			cursor: default;
+			width: var(--item-width);
+			text-align: right;
 
-            &:first-child {
-                display: none;
-            }
+			&:first-child {
+				display: none;
+			}
 
-            &:last-child {
-                order: -1;
-            }
-        }
-    }
-    tbody {
-        display: flex;
-        flex-direction: column;
-        gap: 2px;
-        flex: 1;
-    }
+			&:last-child {
+				order: -1;
+			}
+		}
+	}
+	tbody {
+		display: flex;
+		flex-direction: column;
+		gap: 2px;
+		flex: 1;
+	}
 }
 
 .weeklychart-image-header {
-    display: none;
+	display: none;
 }
 
 .weeklychart-item {
-    display: flex;
-    align-items: center;
-    gap: var(--item-list-gap);
+	display: flex;
+	align-items: center;
+	gap: var(--item-list-gap);
 
-    --bg: transparent;
-    --bg-hov: var(--tracklist-hover);
-    --bg-atv: var(--bg-hov);
-    --shadow: none;
-    --padding: 8px 12px;
-    margin: 0 -12px;
+	--bg: transparent;
+	--bg-hov: var(--tracklist-hover);
+	--bg-atv: var(--bg-hov);
+	--shadow: none;
+	--padding: 8px 12px;
+	margin: 0 -12px;
 
-    --avatar-size: 40px;
+	--avatar-size: 40px;
 
-    &:first-child {
-        --padding: 12px 12px;
-        --avatar-size: 64px;
+	&:first-child {
+		--padding: 12px 12px;
+		--avatar-size: 64px;
 
-        --bg: oklch(var(--h4) / 10%) !important;
-        --bg-hov: oklch(var(--h4) / 17%) !important;
-    }
+		--bg: oklch(var(--h4) / 10%) !important;
+		--bg-hov: oklch(var(--h4) / 17%) !important;
+	}
 
-    & > td {
-        padding: unset !important;
-    }
+	& > td {
+		padding: unset !important;
+	}
 
-    .weeklychart-rank {
-        min-width: 24px;
-        color: oklch(var(--c2) / 80%);
-    }
+	.weeklychart-rank {
+		min-width: 24px;
+		color: oklch(var(--c2) / 80%);
+	}
 
-    .weeklychart-image {
-        width: fit-content;
-        border-radius: var(--item-small-radius);
+	.weeklychart-image {
+		width: fit-content;
+		border-radius: var(--item-small-radius);
 
-        .avatar {
-            margin: unset;
-            width: var(--avatar-size);
-            height: var(--avatar-size);
-            border-radius: inherit;
-        }
-    }
+		.avatar {
+			margin: unset;
+			width: var(--avatar-size);
+			height: var(--avatar-size);
+			border-radius: inherit;
+		}
+	}
 
-    .weeklychart-name {
-        display: flex;
+	.weeklychart-name {
+		display: flex;
 
-        .link-block-target {
-            text-decoration: none;
-            flex: 1;
-            font-weight: var(--font-weight-medium);
-        }
-    }
+		.link-block-target {
+			text-decoration: none;
+			flex: 1;
+			font-weight: var(--font-weight-medium);
+		}
+	}
 
-    .weeklychart-listeners {
-        --mask: var(--icon-16-users);
-        order: 1;
-        font-weight: var(--font-weight-medium);
-    }
-    .weeklychart-scrobblers {
-        --mask: var(--icon-16-play);
-        opacity: 0.8;
-    }
+	.weeklychart-listeners {
+		--mask: var(--icon-16-users);
+		order: 1;
+		font-weight: var(--font-weight-medium);
+	}
+	.weeklychart-scrobblers {
+		--mask: var(--icon-16-play);
+		opacity: 0.8;
+	}
 
-    .weeklychart-listeners,
-    .weeklychart-scrobblers {
-        position: relative;
-        min-width: var(--item-width);
-        padding-right: calc(var(--icon-size) + var(--icon-gap)) !important;
-        text-align: right;
+	.weeklychart-listeners,
+	.weeklychart-scrobblers {
+		position: relative;
+		min-width: var(--item-width);
+		padding-right: calc(var(--icon-size) + var(--icon-gap)) !important;
+		text-align: right;
 
-        --left: none;
-        --right: 0;
-    }
+		--left: none;
+		--right: 0;
+	}
 
-    .weeklychart-change {
-        --icon-size: 16px;
+	.weeklychart-change {
+		--icon-size: 16px;
 
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: var(--icon-size);
-        width: var(--icon-size);
-        min-width: unset;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: var(--icon-size);
+		width: var(--icon-size);
+		min-width: unset;
 
-        color: oklch(var(--c3));
-        --mask-colour: currentColor;
-        --icon: var(--icon-16-dot);
+		color: oklch(var(--c3));
+		--mask-colour: currentColor;
+		--icon: var(--icon-16-dot);
 
-        &:before {
-            display: none !important;
-        }
+		&:before {
+			display: none !important;
+		}
 
-        &.weeklychart-change--up {
-            --hue-over: var(--hue-pos);
-            --sat-over: var(--sat-pos);
-            --lit-over: var(--lit-pos);
-            --icon: var(--icon-16-arrow-up);
-            color: oklch(var(--l3-c));
+		&.weeklychart-change--up {
+			--hue-over: var(--hue-pos);
+			--sat-over: var(--sat-pos);
+			--lit-over: var(--lit-pos);
+			--icon: var(--icon-16-arrow-up);
+			color: oklch(var(--l3-c));
 
-            filter: drop-shadow(0 0 10px oklch(var(--l3-c))) drop-shadow(0 0 10px oklch(var(--l3-c)));
-        }
-        &.weeklychart-change--down {
-            --hue-over: var(--hue-neg);
-            --sat-over: var(--sat-neg);
-            --lit-over: var(--lit-neg);
-            --icon: var(--icon-16-arrow-down);
-            color: oklch(var(--l3-c));
-        }
-    }
+			filter: drop-shadow(0 0 10px oklch(var(--l3-c))) drop-shadow(0 0
+				10px oklch(var(--l3-c)));
+		}
+		&.weeklychart-change--down {
+			--hue-over: var(--hue-neg);
+			--sat-over: var(--sat-neg);
+			--lit-over: var(--lit-neg);
+			--icon: var(--icon-16-arrow-down);
+			color: oklch(var(--l3-c));
+		}
+	}
 }
 
-
 .charts-header {
-    order: -1;
-    margin: unset !important;
+	order: -1;
+	margin: unset !important;
 
-    .sub-text {
-        justify-content: center;
-    }
+	.sub-text {
+		justify-content: center;
+	}
 }
 
 .charts-panel {
-    display: flex;
-    flex-direction: column;
-    gap: 50px;
+	display: flex;
+	flex-direction: column;
+	gap: 50px;
 
-    .charts-new-row {
-        &[data-index="1"] {
-            order: -1;
-        }
-        &[data-index="2"] {
-            order: 1;
-        }
+	.charts-new-row {
+		&[data-index="1"] {
+			order: -1;
+		}
+		&[data-index="2"] {
+			order: 1;
+		}
 
-        .charts-list {
-            overflow: hidden;
-            padding: 35px var(--card-padding) 10px var(--card-padding);
-            margin: -35px calc(-1 * var(--card-padding)) -10px
-                calc(-1 * var(--card-padding));
-            grid-template-columns: unset;
-            grid-auto-flow: column;
-            /*width: fit-content;
-            max-width: 100%;*/
+		.charts-list {
+			overflow: hidden;
+			padding: 35px var(--card-padding) 10px var(--card-padding);
+			margin: -35px calc(-1 * var(--card-padding)) -10px
+				calc(-1 * var(--card-padding));
+			grid-template-columns: unset;
+			grid-auto-flow: column;
+			/*width: fit-content;
+			max-width: 100%;*/
 
-            .charts-list-item {
-                width: 200px;
+			.charts-list-item {
+				width: 200px;
 
-                &:first-child {
-                    width: 248px;
-                }
-            }
+				&:first-child {
+					width: 248px;
+				}
+			}
 
-            [data-bleh--simulate_scroll="false"] & {
-                &:hover {
-                    overflow-x: scroll;
-                    overflow-y: unset;
-                }
-            }
-        }
+			[data-bleh--simulate_scroll="false"] & {
+				&:hover {
+					overflow-x: scroll;
+					overflow-y: unset;
+				}
+			}
+		}
 
-        .charts-list-item {
-            .charts-list-item-inner {
-                display: flex;
-                flex-direction: column;
-                position: relative;
+		.charts-list-item {
+			.charts-list-item-inner {
+				display: flex;
+				flex-direction: column;
+				position: relative;
 
-                .media-item {
-                    order: -1;
-                    position: relative;
+				.media-item {
+					order: -1;
+					position: relative;
 
-                    .charts-list-rank-overlay-wrap {
-                        position: absolute;
-                        inset: 0;
-                        overflow: hidden;
+					.charts-list-rank-overlay-wrap {
+						position: absolute;
+						inset: 0;
+						overflow: hidden;
 
-                        display: flex;
-                        justify-content: center;
-                        align-items: end;
+						display: flex;
+						justify-content: center;
+						align-items: end;
 
-                        background: linear-gradient(180deg, transparent 70%, oklch(var(--h3) / 15%));
-                        border-radius: var(--item-small-radius);
-                        overflow: hidden;
-                        mix-blend-mode: luminosity;
+						background: linear-gradient(180deg, transparent 70%,
+							oklch(var(--h3) / 15%));
+						border-radius: var(--item-small-radius);
+						overflow: hidden;
+						mix-blend-mode: luminosity;
 
-                        &:before {
-                            content: '';
-                            position: absolute;
-                            left: 10px;
-                            right: 10px;
-                            bottom: 0;
-                            height: 2px;
-                            display: block;
-                            background: linear-gradient(90deg, oklch(var(--h4) / 20%), oklch(var(--h3)), oklch(var(--h4) / 20%));
-                            border-top-left-radius: 4px;
-                            border-top-right-radius: 4px;
-                        }
-                    }
+						&:before {
+							content: '';
+							position: absolute;
+							left: 10px;
+							right: 10px;
+							bottom: 0;
+							height: 2px;
+							display: block;
+							background: linear-gradient(90deg, oklch(var(--h4) /
+								20%), oklch(var(--h3)), oklch(var(--h4) / 20%));
+							border-top-left-radius: 4px;
+							border-top-right-radius: 4px;
+						}
+					}
 
-                    .charts-list-rank-overlay {
-                        font-size: 13px;
-                        line-height: 13px;
-                        background-color: oklch(var(--h3) / 95%);
-                        padding: 2px 7px;
-                        border-radius: 4px;
-                        border-bottom-left-radius: 0;
-                        border-bottom-right-radius: 0;
-                        color: oklch(var(--b7));
-                        font-weight: var(--font-weight-bold);
-                        box-shadow: 0 -1px 10px oklch(var(--h4) / 40%), inset 0 1px 0 oklch(var(--h2) / 20%);
-                    }
+					.charts-list-rank-overlay {
+						font-size: 13px;
+						line-height: 13px;
+						background-color: oklch(var(--h3) / 95%);
+						padding: 2px 7px;
+						border-radius: 4px;
+						border-bottom-left-radius: 0;
+						border-bottom-right-radius: 0;
+						color: oklch(var(--b7));
+						font-weight: var(--font-weight-bold);
+						box-shadow: 0 -1px 10px oklch(var(--h4) / 40%), inset 0
+							1px 0 oklch(var(--h2) / 20%);
+					}
 
-                    .rank-overlay-text {
-                        position: relative;
-                        z-index: 2;
-                    }
+					.rank-overlay-text {
+						position: relative;
+						z-index: 2;
+					}
 
-                    .rank-overlay-back {
-                        opacity: 0.8;
-                        display: none;
+					.rank-overlay-back {
+						opacity: 0.8;
+						display: none;
 
-                        position: absolute;
-                        inset: 0;
-                        color: transparent;
-                        text-shadow: 0 1px 0 oklch(var(--c1)), 1px 1px 0 oklch(var(--c1)), -1px -1px 0 oklch(var(--c1)), 1px -1px 0 oklch(var(--c1)), -1px 1px 0 oklch(var(--c1)), 0 -1px 0 oklch(var(--c1)), 1px 0 0 oklch(var(--c1)), -1px 0 0 oklch(var(--c1));
-                    }
-                }
+						position: absolute;
+						inset: 0;
+						color: transparent;
+						text-shadow: 0 1px 0 oklch(var(--c1)), 1px 1px 0
+							oklch(var(--c1)), -1px -1px 0 oklch(var(--c1)), 1px
+							-1px 0 oklch(var(--c1)), -1px 1px 0
+							oklch(var(--c1)), 0 -1px 0 oklch(var(--c1)), 1px 0 0
+							oklch(var(--c1)), -1px 0 0 oklch(var(--c1));
+					}
+				}
 
-                .link-block-cover-link {
-                    position: absolute;
-                    inset: 0;
-                    width: unset;
-                    height: unset;
-                }
+				.link-block-cover-link {
+					position: absolute;
+					inset: 0;
+					width: unset;
+					height: unset;
+				}
 
-                .charts-list-rank {
-                    margin-top: 10px;
-                    font-weight: var(--font-weight-medium);
-                    display: none;
-                }
-            }
-        }
-    }
+				.charts-list-rank {
+					margin-top: 10px;
+					font-weight: var(--font-weight-medium);
+					display: none;
+				}
+			}
+		}
+	}
 }
 
 .weeklychart-track-info {
-    width: 100%;
+	width: 100%;
 }
 
 .weeklychart-track-artist {
-    color: oklch(var(--c2) / 80%);
+	color: oklch(var(--c2) / 80%);
 }
 
 .weeklychart-track-name,
 .weeklychart-track-artist {
-    & > a {
-        color: inherit;
-        font-weight: var(--font-weight);
-    }
+	& > a {
+		color: inherit;
+		font-weight: var(--font-weight);
+	}
 }
 
 .charts-header {
-    position: relative;
+	position: relative;
 
-    & > .left, & > .middle, & > .right {
-        z-index: 2;
-    }
+	& > .left,
+	& > .middle,
+	& > .right {
+		z-index: 2;
+	}
 }
 .charts-header-bg {
-    position: absolute;
-    inset: calc(-1 * var(--card-padding)) calc(-1 * var(--card-padding)) calc(-1 * (var(--card-padding) + 200px)) calc(-1 * var(--card-padding));
-    overflow: hidden;
+	position: absolute;
+	inset: calc(-1 * var(--card-padding)) calc(-1 * var(--card-padding)) calc(-1
+		* (var(--card-padding) + 200px)) calc(-1 * var(--card-padding));
+	overflow: hidden;
 
-    z-index: 0;
-    opacity: 0.23;
+	z-index: 0;
+	opacity: 0.23;
 
-    background: radial-gradient(at center top, oklch(var(--k4)), transparent 60%);
-    animation: chart_bg 8s var(--trans-function-ani) infinite;
-    pointer-events: none;
+	background: radial-gradient(at center top, oklch(var(--k4)), transparent
+		60%);
+	animation: chart_bg 8s var(--trans-function-ani) infinite;
+	pointer-events: none;
 }
 .charts-header-svg {
-    position: absolute;
-    inset: -120px 0 0 0;
+	position: absolute;
+	inset: -120px 0 0 0;
 }
 
 @keyframes chart_bg {
-    from, to {
-        opacity: 0.23;
-    }
-    50% {
-        opacity: 0.35;
-    }
+	from,
+	to {
+		opacity: 0.23;
+	}
+	50% {
+		opacity: 0.35;
+	}
 }
 
 .chart-heading-geo {
-    display: flex;
-    justify-content: center;
+	display: flex;
+	justify-content: center;
 }
 .language-header-chart {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: oklch(var(--c1));
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	color: oklch(var(--c1));
 }
 
 .geo-chart-flag {
-    height: 24px !important;
+	height: 24px !important;
 }

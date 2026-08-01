@@ -1,148 +1,148 @@
 [data-modal-type="rabbit"] {
-    padding: var(--card-gap) !important;
+	padding: var(--card-gap) !important;
 
-    .modal-close-button,
-    .bleh-modal-title {
-        display: none !important;
-    }
+	.modal-close-button,
+	.bleh-modal-title {
+		display: none !important;
+	}
 
-    .rabbit-search {
-        margin-bottom: var(--card-gap);
-        /*box-shadow: 0 20px 60px 15px oklch(var(--h4), 7%);
-        border-radius: var(--item-big-radius);*/
+	.rabbit-search {
+		margin-bottom: var(--card-gap);
+		/*box-shadow: 0 20px 60px 15px oklch(var(--h4), 7%);
+		border-radius: var(--item-big-radius);*/
 
-        &:after {
-            --show-icon: block;
-            --mask: var(--icon-16-rabbit);
-            --mask-colour: oklch(var(--c3));
-        }
+		&:after {
+			--show-icon: block;
+			--mask: var(--icon-16-rabbit);
+			--mask-colour: oklch(var(--c3));
+		}
 
-        &[data-showing-fake="true"] {
-            &:after {
-                --mask: var(--icon-16-search);
-            }
-        }
-    }
+		&[data-showing-fake="true"] {
+			&:after {
+				--mask: var(--icon-16-search);
+			}
+		}
+	}
 
-    .fake-input,
-    .modern-input {
-        width: 400px;
-        height: 36px;
-        --padding: var(--card-gap) var(--button-sides) var(--card-gap)
+	.fake-input,
+	.modern-input {
+		width: 400px;
+		height: 36px;
+		--padding: var(--card-gap) var(--button-sides) var(--card-gap)
             calc(
                 var(--button-sides-icon) + var(--icon-size) +
                     var(--icon-gap)
             );
-        --radius: var(--card-radius);
-    }
+		--radius: var(--card-radius);
+	}
 
-    .fake-input {
-        display: flex;
-        align-items: center;
+	.fake-input {
+		display: flex;
+		align-items: center;
 
-        .rabbit-label {
-            margin-right: 4px;
-            color: oklch(var(--c3));
-            font-weight: var(--font-weight);
+		.rabbit-label {
+			margin-right: 4px;
+			color: oklch(var(--c3));
+			font-weight: var(--font-weight);
 
-            cursor: default;
-        }
+			cursor: default;
+		}
 
-        .rabbit-text {
-            margin-right: 8px;
+		.rabbit-text {
+			margin-right: 8px;
 
-            overflow: hidden;
-            text-overflow: ellipsis;
-            -webkit-box-orient: vertical;
-            display: -webkit-box;
-            -webkit-line-clamp: 1;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			-webkit-box-orient: vertical;
+			display: -webkit-box;
+			-webkit-line-clamp: 1;
 
-            cursor: default;
-        }
+			cursor: default;
+		}
 
-        .rabbit-hint {
-            font-style: normal;
-            color: oklch(var(--c3));
+		.rabbit-hint {
+			font-style: normal;
+			color: oklch(var(--c3));
 
-            cursor: default;
-        }
-    }
+			cursor: default;
+		}
+	}
 
-    .rabbit-hole {
-        max-height: calc(34px * 8 + var(--overflow));
-        overflow-y: auto;
-        padding: var(--overflow) var(--card-gap) 0;
-        margin: calc(-1 * var(--overflow)) calc(-1 * var(--card-gap)) 0;
+	.rabbit-hole {
+		max-height: calc(34px * 8 + var(--overflow));
+		overflow-y: auto;
+		padding: var(--overflow) var(--card-gap) 0;
+		margin: calc(-1 * var(--overflow)) calc(-1 * var(--card-gap)) 0;
 
-        --overflow: calc(36px + var(--card-gap));
+		--overflow: calc(36px + var(--card-gap));
 
-        --mask: linear-gradient(180deg, transparent 11%, white 16%);
-        mask-image: var(--mask);
-        -webkit-mask-image: var(--mask);
-    }
-    .rabbit-hole-item {
-        --button-verts: 8px;
-        --btn-top: var(--button-verts);
-        --btn-bottom: var(--button-verts);
-        display: flex;
+		--mask: linear-gradient(180deg, transparent 11%, white 16%);
+		mask-image: var(--mask);
+		-webkit-mask-image: var(--mask);
+	}
+	.rabbit-hole-item {
+		--button-verts: 8px;
+		--btn-top: var(--button-verts);
+		--btn-bottom: var(--button-verts);
+		display: flex;
 
-        .info {
-            flex: 1;
-        }
+		.info {
+			flex: 1;
+		}
 
-        transition: none !important;
+		transition: none !important;
 
-        --bg-hov: var(--bg) !important;
-        --bg-atv: var(--bg) !important;
+		--bg-hov: var(--bg) !important;
+		--bg-atv: var(--bg) !important;
 
-        &[aria-selected="true"] {
-            --bg-hov: var(--bg) !important;
-            --bg-atv: var(--bg) !important;
+		&[aria-selected="true"] {
+			--bg-hov: var(--bg) !important;
+			--bg-atv: var(--bg) !important;
 
-            kbd {
-                color: inherit;
-                opacity: 0.7;
-            }
-        }
-    }
+			kbd {
+				color: inherit;
+				opacity: 0.7;
+			}
+		}
+	}
 
-    .tip {
-        margin-top: var(--card-gap);
-        font-size: var(--font-size-sm);
-        color: oklch(var(--c3));
+	.tip {
+		margin-top: var(--card-gap);
+		font-size: var(--font-size-sm);
+		color: oklch(var(--c3));
 
-        display: flex;
-        justify-content: space-between;
-        padding: 0 var(--button-sides);
-        gap: var(--card-gap);
-        width: unset;
+		display: flex;
+		justify-content: space-between;
+		padding: 0 var(--button-sides);
+		gap: var(--card-gap);
+		width: unset;
 
-        .left {
-            display: flex;
-            gap: 8px;
+		.left {
+			display: flex;
+			gap: 8px;
 
-            & > kbd {
-                position: relative;
-                font-family: inherit !important;
-                font-size: inherit;
-                line-height: inherit;
-                padding: unset;
-                background: unset;
-                padding-right: 9px;
-                border-radius: unset;
+			& > kbd {
+				position: relative;
+				font-family: inherit !important;
+				font-size: inherit;
+				line-height: inherit;
+				padding: unset;
+				background: unset;
+				padding-right: 9px;
+				border-radius: unset;
 
-                &:after {
-                    content: "";
-                    position: absolute;
-                    width: 1px;
-                    height: 10px;
-                    display: block;
-                    background: var(--card-border-base);
-                    top: 50%;
-                    margin-top: -5px;
-                    right: 0;
-                }
-            }
-        }
-    }
+				&:after {
+					content: "";
+					position: absolute;
+					width: 1px;
+					height: 10px;
+					display: block;
+					background: var(--card-border-base);
+					top: 50%;
+					margin-top: -5px;
+					right: 0;
+				}
+			}
+		}
+	}
 }

@@ -1,50 +1,63 @@
 import { html } from 'lighterhtml';
 
-export function render_track_preview(val: boolean, bar = false, art = true, has_realtime = false) {
-    let bar_width = 100;
+export function render_track_preview(
+	val: boolean,
+	bar = false,
+	art = true,
+	has_realtime = false,
+) {
+	let bar_width = 100;
 
-    return html.node`
+	return html.node`
         <div class="tracks recent_listening ${val ? 'blur' : ''}">
             ${track_preview(has_realtime)}
             ${Array.from({ length: 4 }).map(() => track_preview())}
         </div>
     `;
 
-    function track_preview(realtime = false) {
-        return html.node`
+	function track_preview(realtime = false) {
+		return html.node`
             <div class="track ${realtime ? 'realtime' : ''}">
-                ${art ? html.node`
+                ${
+			art
+				? html.node`
                     <div class="cover" />
-                ` : ''}
+                `
+				: ''
+		}
                 <div class="title" />
                 <div class="artist" />
-                ${!bar ? html.node`
+                ${
+			!bar
+				? html.node`
                     <div class="time" />
-                ` : () => {
-                    const elem = html.node`
+                `
+				: () => {
+					const elem = html.node`
                         <div class="bar">
                             <div class="fill" style="width: ${bar_width}%" />
                         </div>
                     `;
 
-                    bar_width *= 0.75;
+					bar_width *= 0.75;
 
-                    return elem;
-                }}
+					return elem;
+				}
+		}
             </div>
         `;
-    }
+	}
 }
 
 export function render_shoutbox_preview(val: boolean) {
-    return html.node`
+	return html.node`
         <div class="shouts ${val ? 'blur' : ''}">
             ${Array.from({ length: 3 }).map(() => shout_preview())}
         </div>
     `;
 
-    function shout_preview() {
-        return html.node`
+	function shout_preview() {
+		return html.node`
             <div class="shout-preview">
                 <div class="shout-preview-avatar">
                     <div class="shout-avatar-placeholder"></div>
@@ -59,12 +72,16 @@ export function render_shoutbox_preview(val: boolean) {
                 </div>
             </div>
         `;
-    }
+	}
 }
 
-export function render_chart_preview(type: 'album' | 'artist', second_row = true, primary = false) {
-    if (primary) {
-        return html.node`
+export function render_chart_preview(
+	type: 'album' | 'artist',
+	second_row = true,
+	primary = false,
+) {
+	if (primary) {
+		return html.node`
             <div class="grid-items-preview">
                 <div class="grid-primary">
                     ${grid_preview()}
@@ -73,34 +90,44 @@ export function render_chart_preview(type: 'album' | 'artist', second_row = true
                     <div class="grid-main">
                         ${Array.from({ length: 2 }).map(() => grid_preview())}
                     </div>
-                    ${second_row ? html.node`
+                    ${
+			second_row
+				? html.node`
                         <div class="grid-main">
-                            ${Array.from({ length: 2 }).map(() => grid_preview())}
+                            ${
+					Array.from({ length: 2 }).map(() => grid_preview())
+				}
                         </div>
-                    ` : ''}
+                    `
+				: ''
+		}
                 </div>
             </div>
         `;
-    }
+	}
 
-    return html.node`
+	return html.node`
         <div class="grid-items-preview">
             <div class="grid-mains">
                 <div class="grid-main">
                     ${Array.from({ length: 4 }).map(() => grid_preview())}
                 </div>
-                ${second_row ? html.node`
+                ${
+		second_row
+			? html.node`
                     <div class="grid-main">
                         ${Array.from({ length: 4 }).map(() => grid_preview())}
                     </div>
-                ` : ''}
+                `
+			: ''
+	}
             </div>
         </div>
     `;
 
-    function grid_preview(primary = false) {
-        return html.node`
+	function grid_preview(primary = false) {
+		return html.node`
             <div class="grid-item-preview grid-item-${type} icon-mask" />
         `;
-    }
+	}
 }

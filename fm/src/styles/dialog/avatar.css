@@ -1,11 +1,11 @@
 .alt-text {
-    padding: 1px 8px;
-    border-radius: var(--item-small-radius);
-    background: oklch(var(--b6), 40%);
-    font-size: 12px;
-    font-weight: var(--font-weight-bold);
-    cursor: pointer;
-    color: oklch(var(--c3));
-    backdrop-filter: var(--solarium-bright);
-    -webkit-backdrop-filter: var(--solarium-bright);
+	padding: 1px 8px;
+	border-radius: var(--item-small-radius);
+	background: oklch(var(--b6), 40%);
+	font-size: 12px;
+	font-weight: var(--font-weight-bold);
+	cursor: pointer;
+	color: oklch(var(--c3));
+	backdrop-filter: var(--solarium-bright);
+	-webkit-backdrop-filter: var(--solarium-bright);
 }

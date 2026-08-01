@@ -4,51 +4,51 @@
 @import './poster.css';
 
 .event-summary-with-poster .event-details {
-    padding: unset;
-    width: unset;
-    flex: 1;
+	padding: unset;
+	width: unset;
+	flex: 1;
 }
 .event-summary-with-poster {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 .event-summary-with-poster:before,
 .event-summary-with-poster:after {
-    display: none;
+	display: none;
 }
 
 .expanded-image,
 .event-poster-inner-wrap {
-    border-radius: var(--item-big-radius);
-    box-shadow: var(--card-shadow);
-    overflow: hidden;
+	border-radius: var(--item-big-radius);
+	box-shadow: var(--card-shadow);
+	overflow: hidden;
 }
 
 /*     EXTERNAL LINK     */
 .external-link {
-    --left: none !important;
-    --right: 0 !important;
-    --mask-size: 12px;
-    --margin-top: -6px;
-    --mask: var(--icon-16-external);
-    padding-right: calc(12px + 4px);
-    --show-icon: block;
-    position: relative;
+	--left: none !important;
+	--right: 0 !important;
+	--mask-size: 12px;
+	--margin-top: -6px;
+	--mask: var(--icon-16-external);
+	padding-right: calc(12px + 4px);
+	--show-icon: block;
+	position: relative;
 
-    &:after {
-        display: none;
-    }
+	&:after {
+		display: none;
+	}
 }
 .event-detail-long-link {
-    overflow: hidden;
-    word-wrap: unset;
-    text-overflow: ellipsis;
-    -webkit-box-orient: vertical;
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    width: fit-content;
+	overflow: hidden;
+	word-wrap: unset;
+	text-overflow: ellipsis;
+	-webkit-box-orient: vertical;
+	display: -webkit-box;
+	-webkit-line-clamp: 1;
+	width: fit-content;
 }
 
 .qa-event-description {
-    margin-bottom: var(--card-gap);
+	margin-bottom: var(--card-gap);
 }

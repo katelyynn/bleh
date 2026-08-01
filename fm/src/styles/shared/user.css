@@ -1,569 +1,572 @@
 .user-list .link-block-cover-link {
-    width: 32px;
-    height: 32px;
+	width: 32px;
+	height: 32px;
 }
 
 .listeners-section-item-image,
 .top-listeners-item-image,
 .user-list-avatar {
-    box-shadow: var(--card-shadow);
-    border-radius: var(--avatar-radius);
-    width: 32px;
-    height: 32px;
-    --mask-size: var(--cover-size-32);
-    margin-top: unset;
-    background: var(--avatar-generic-background);
+	box-shadow: var(--card-shadow);
+	border-radius: var(--avatar-radius);
+	width: 32px;
+	height: 32px;
+	--mask-size: var(--cover-size-32);
+	margin-top: unset;
+	background: var(--avatar-generic-background);
 }
 
 .col-main-is-primary > .col-main > .pagination {
-    margin-top: var(--card-gap);
+	margin-top: var(--card-gap);
 }
 
 .user-list-inner-wrap {
-    padding-left: calc(32px + var(--card-gap));
-    padding-right: unset;
-    margin: var(--item-list-gap) 0;
-    min-height: unset;
-    height: 32px;
+	padding-left: calc(32px + var(--card-gap));
+	padding-right: unset;
+	margin: var(--item-list-gap) 0;
+	min-height: unset;
+	height: 32px;
 
-    .link-block-cover-link {
-        display: none;
-    }
+	.link-block-cover-link {
+		display: none;
+	}
 
-    &.staff-user {
-        --hue-over: 360;
-        --sat-over: 1.325;
-        --lit-over: 0.825;
-    }
+	&.staff-user {
+		--hue-over: 360;
+		--sat-over: 1.325;
+		--lit-over: 0.825;
+	}
 }
 
 .user-list-item-mobile-ad {
-    display: none !important;
+	display: none !important;
 }
 
 .user-list-item {
-    width: var(--user-list-item-width, 100%);
-    padding: var(--user-list-item-padding, 0 var(--item-list-gap));
-    border-radius: var(--user-list-item-radius, unset);
-    margin: unset;
+	width: var(--user-list-item-width, 100%);
+	padding: var(--user-list-item-padding, 0 var(--item-list-gap));
+	border-radius: var(--user-list-item-radius, unset);
+	margin: unset;
 
-    &.listener-list-item {
-        .listener-list-position {
-            font-size: 13px;
-            color: oklch(var(--c3));
-            cursor: pointer;
-        }
-    }
+	&.listener-list-item {
+		.listener-list-position {
+			font-size: 13px;
+			color: oklch(var(--c3));
+			cursor: pointer;
+		}
+	}
 
-    .user-list-follower-btn {
-        top: 50%;
-        margin-top: -16px;
-    }
+	.user-list-follower-btn {
+		top: 50%;
+		margin-top: -16px;
+	}
 
-    --follow-button-bg: oklch(var(--b4) / 20%);
-    --follow-button-bg-hov: oklch(var(--b4) / 40%);
-    --follow-button-bg-atv: oklch(var(--b4) / 60%);
-    --follow-button-col: oklch(var(--c2));
+	--follow-button-bg: oklch(var(--b4) / 20%);
+	--follow-button-bg-hov: oklch(var(--b4) / 40%);
+	--follow-button-bg-atv: oklch(var(--b4) / 60%);
+	--follow-button-col: oklch(var(--c2));
 
-    &:not(:hover, :focus-within) {
-        --follow-button-opacity: 0.3;
-    }
+	&:not(:hover, :focus-within) {
+		--follow-button-opacity: 0.3;
+	}
 
-    animation: var(--motion, chartlist 0.4s var(--trans-function-ani)) !important;
-    animation-delay: var(--delay, 0s) !important;
-    animation-fill-mode: backwards !important;
+	animation: var(--motion, chartlist 0.4s var(--trans-function-ani))
+		!important;
+	animation-delay: var(--delay, 0s) !important;
+	animation-fill-mode: backwards !important;
 }
 
 .user-background {
-    display: none;
+	display: none;
 }
 
 .user-list-follower-btn {
-    --bg: var(--follow-button-bg);
-    --bg-hov: var(--follow-button-bg-hov);
-    --bg-atv: var(--follow-button-bg-atv);
-    --shadow: none;
-    --shadow-hov: none;
-    --col: var(--follow-button-col);
-    --button-height: var(--follow-button-size);
-    --left: 50%;
-    --margin-left: calc(-1 * (var(--icon-size) / 2));
-    --radius: 50%;
+	--bg: var(--follow-button-bg);
+	--bg-hov: var(--follow-button-bg-hov);
+	--bg-atv: var(--follow-button-bg-atv);
+	--shadow: none;
+	--shadow-hov: none;
+	--col: var(--follow-button-col);
+	--button-height: var(--follow-button-size);
+	--left: 50%;
+	--margin-left: calc(-1 * (var(--icon-size) / 2));
+	--radius: 50%;
 
-    width: var(--button-height) !important;
-    height: var(--button-height) !important;
+	width: var(--button-height) !important;
+	height: var(--button-height) !important;
 
-    opacity: var(--follow-button-opacity, 1);
+	opacity: var(--follow-button-opacity, 1);
 }
 
 .user-list {
-    display: flex;
-    flex-direction: column;
-    margin: unset;
+	display: flex;
+	flex-direction: column;
+	margin: unset;
 
-    &:before,
-    &:after {
-        display: none;
-    }
+	&:before,
+	&:after {
+		display: none;
+	}
 
-    .user-follow {
-        --mask-size: 18px;
-        width: calc(18px + 2px) !important;
-        height: calc(18px + 2px) !important;
-        padding: 1px !important;
-        border-radius: 50px !important;
+	.user-follow {
+		--mask-size: 18px;
+		width: calc(18px + 2px) !important;
+		height: calc(18px + 2px) !important;
+		padding: 1px !important;
+		border-radius: 50px !important;
 
-        background-color: oklch(var(--b6), calc(var(--solarium-opacity, 1) * 80%)) !important;
+		background-color: oklch(var(--b6), calc(var(--solarium-opacity, 1) *
+			80%)) !important;
 
-        min-width: unset;
+		min-width: unset;
 
-        --margin-top: -9px !important;
-        --left: 1px !important;
-    }
+		--margin-top: -9px !important;
+		--left: 1px !important;
+	}
 
-    .user-list-inner-wrap {
-        &:before,
-        &:after {
-            display: none;
-        }
-    }
+	.user-list-inner-wrap {
+		&:before,
+		&:after {
+			display: none;
+		}
+	}
 
-    &[data-list-view="list"] {
-        .user-list-item {
-            border-bottom: 1px solid var(--separator-base);
+	&[data-list-view="list"] {
+		.user-list-item {
+			border-bottom: 1px solid var(--separator-base);
 
-            &[data-is-followed="true"],
-            &[data-position="1"] {
-                background: linear-gradient(90deg, oklch(var(--h4) / 20%) 0%, transparent 28%);
-            }
-        }
+			&[data-is-followed="true"],
+			&[data-position="1"] {
+				background: linear-gradient(90deg, oklch(var(--h4) / 20%) 0%,
+					transparent 28%);
+			}
+		}
 
-        .user-list-avatar {
-            top: var(--item-list-gap);
-            left: var(--item-list-gap);
-        }
+		.user-list-avatar {
+			top: var(--item-list-gap);
+			left: var(--item-list-gap);
+		}
 
-        .username-combo {
-            text-align: left;
-            flex-direction: row;
-        }
+		.username-combo {
+			text-align: left;
+			flex-direction: row;
+		}
 
-        .user-list-name {
-            max-width: 200px;
-        }
-    }
+		.user-list-name {
+			max-width: 200px;
+		}
+	}
 
-    &[data-list-view="grid"] {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-        gap: var(--item-list-gap);
-        margin: 0 calc(-1 * var(--item-list-gap));
+	&[data-list-view="grid"] {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+		gap: var(--item-list-gap);
+		margin: 0 calc(-1 * var(--item-list-gap));
 
-        @media (max-width: 980px) {
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-        }
+		@media (max-width: 980px) {
+			grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+		}
 
-        --user-list-item-padding: var(--item-list-gap);
-        --user-list-item-radius: var(--item-big-radius);
+		--user-list-item-padding: var(--item-list-gap);
+		--user-list-item-radius: var(--item-big-radius);
 
-        .user-list-item {
-            &[data-is-followed="true"],
-            &[data-position="1"] {
-                background: oklch(var(--h4) / 15%);
-                --follow-button-bg: oklch(var(--h3) / 5%);
-                --follow-button-bg-hov: oklch(var(--h3) / 10%);
-                --follow-button-bg-atv: oklch(var(--h3) / 20%);
-                --follow-button-col: oklch(var(--l3-c));
-            }
-        }
+		.user-list-item {
+			&[data-is-followed="true"],
+			&[data-position="1"] {
+				background: oklch(var(--h4) / 15%);
+				--follow-button-bg: oklch(var(--h3) / 5%);
+				--follow-button-bg-hov: oklch(var(--h3) / 10%);
+				--follow-button-bg-atv: oklch(var(--h3) / 20%);
+				--follow-button-col: oklch(var(--l3-c));
+			}
+		}
 
-        .username-combo {
-            text-align: left;
-            flex-direction: row;
-        }
+		.username-combo {
+			text-align: left;
+			flex-direction: row;
+		}
 
-        .user-list-inner-wrap {
-            flex-direction: column;
-            align-items: unset;
-            gap: 0;
-            margin: unset;
-            height: 56px;
-            padding-left: calc(56px + 10px);
-            padding-right: calc(var(--follow-button-size) + 10px);
-            position: relative;
+		.user-list-inner-wrap {
+			flex-direction: column;
+			align-items: unset;
+			gap: 0;
+			margin: unset;
+			height: 56px;
+			padding-left: calc(56px + 10px);
+			padding-right: calc(var(--follow-button-size) + 10px);
+			position: relative;
 
-            .user-list-avatar {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 56px;
-                height: 56px;
-                --mask-size: var(--cover-size-50);
+			.user-list-avatar {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 56px;
+				height: 56px;
+				--mask-size: var(--cover-size-50);
 
-                .avatar-status-dot {
-                    width: 18px;
-                    height: 18px;
-                    --mask-size: 18px;
-                }
-            }
+				.avatar-status-dot {
+					width: 18px;
+					height: 18px;
+					--mask-size: 18px;
+				}
+			}
 
-            .top-listeners-item-name,
-            .user-list-name {
-                margin: unset !important;
-            }
-            .top-listeners-track,
-            .user-list-description {
-                overflow: visible;
-                padding-right: unset;
-                flex-direction: column;
-                gap: 0;
-            }
+			.top-listeners-item-name,
+			.user-list-name {
+				margin: unset !important;
+			}
+			.top-listeners-track,
+			.user-list-description {
+				overflow: visible;
+				padding-right: unset;
+				flex-direction: column;
+				gap: 0;
+			}
 
-            .user-follow {
-                position: absolute;
-                bottom: calc(56px - 18px);
-                left: calc(56px - 18px);
-                z-index: 12;
-            }
+			.user-follow {
+				position: absolute;
+				bottom: calc(56px - 18px);
+				left: calc(56px - 18px);
+				z-index: 12;
+			}
 
-            .user-list-follower-btn {
-                top: 50%;
-                margin-top: calc(-1 * (var(--button-height) / 2));
-            }
-        }
-    }
+			.user-list-follower-btn {
+				top: 50%;
+				margin-top: calc(-1 * (var(--button-height) / 2));
+			}
+		}
+	}
 
-    &[data-list-view="cards"] {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        gap: var(--item-list-gap);
+	&[data-list-view="cards"] {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+		gap: var(--item-list-gap);
 
-        @media (max-width: 439px) {
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-        }
+		@media (max-width: 439px) {
+			grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+		}
 
-        --user-list-item-padding: var(--item-list-gap);
-        --user-list-item-radius: var(--item-med-radius);
-        --user-list-item-width: 100%;
+		--user-list-item-padding: var(--item-list-gap);
+		--user-list-item-radius: var(--item-med-radius);
+		--user-list-item-width: 100%;
 
-        .user-list-name {
-            min-width: unset;
-            max-width: 90%;
-        }
+		.user-list-name {
+			min-width: unset;
+			max-width: 90%;
+		}
 
-        .user-list-item {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            height: 280px;
-            overflow: hidden;
+		.user-list-item {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			height: 280px;
+			overflow: hidden;
 
-            .user-background {
-                position: absolute;
-                inset: 0;
-                display: block;
-                z-index: 0;
-                border-radius: var(--user-list-item-radius);
-                background-size: cover;
-                background-position: center;
+			.user-background {
+				position: absolute;
+				inset: 0;
+				display: block;
+				z-index: 0;
+				border-radius: var(--user-list-item-radius);
+				background-size: cover;
+				background-position: center;
 
-                --mask: linear-gradient(0deg, transparent, white);
-                mask-image: var(--mask);
-                -webkit-mask-image: var(--mask);
+				--mask: linear-gradient(0deg, transparent, white);
+				mask-image: var(--mask);
+				-webkit-mask-image: var(--mask);
 
-                opacity: 0.1;
-                scale: 1.1;
+				opacity: 0.1;
+				scale: 1.1;
 
-                transition-property: scale, opacity;
-                transition-duration: 0.4s;
-                transition-timing-function: var(--trans-function-ani);
-            }
+				transition-property: scale, opacity;
+				transition-duration: 0.4s;
+				transition-timing-function: var(--trans-function-ani);
+			}
 
-            &:hover {
-                .user-background {
-                    scale: 1.2;
-                    opacity: 0.6;
-                }
+			&:hover {
+				.user-background {
+					scale: 1.2;
+					opacity: 0.6;
+				}
 
-                .user-list-avatar, .user-follow {
-                    scale: 0.9;
-                    opacity: 0;
-                }
+				.user-list-avatar,
+				.user-follow {
+					scale: 0.9;
+					opacity: 0;
+				}
 
-                .listener-list-position,
-                .user-list-name, .user-list-description {
-                    translate: 0 40px !important;
-                }
+				.listener-list-position,
+				.user-list-name,
+				.user-list-description {
+					translate: 0 40px !important;
+				}
 
-                .user-list-shared-artists,
-                .user-list-about-me:not(.has-featured-track) {
-                    opacity: 0;
-                }
-            }
+				.user-list-shared-artists,
+				.user-list-about-me:not(.has-featured-track) {
+					opacity: 0;
+				}
+			}
 
-            background-color: oklch(var(--b4) / 40%);
+			background-color: oklch(var(--b4) / 40%);
 
-            &[data-is-followed="true"],
-            &[data-position="1"] {
-                background-color: oklch(var(--h4) / 20%);
-                --follow-button-bg: oklch(var(--h3) / 10%);
-                --follow-button-bg-hov: oklch(var(--h3) / 20%);
-                --follow-button-bg-atv: oklch(var(--h3) / 30%);
-                --follow-button-col: oklch(var(--l3-c));
-            }
+			&[data-is-followed="true"],
+			&[data-position="1"] {
+				background-color: oklch(var(--h4) / 20%);
+				--follow-button-bg: oklch(var(--h3) / 10%);
+				--follow-button-bg-hov: oklch(var(--h3) / 20%);
+				--follow-button-bg-atv: oklch(var(--h3) / 30%);
+				--follow-button-col: oklch(var(--l3-c));
+			}
 
-            .user-list-inner-wrap {
-                flex-direction: column;
-                height: unset;
-                text-align: center;
-                padding: calc(var(--w) + var(--g)) 0 0 0;
-                margin: unset;
-                --w: 80px;
-                --g: 10px;
-                z-index: 1;
-                gap: 4px;
+			.user-list-inner-wrap {
+				flex-direction: column;
+				height: unset;
+				text-align: center;
+				padding: calc(var(--w) + var(--g)) 0 0 0;
+				margin: unset;
+				--w: 80px;
+				--g: 10px;
+				z-index: 1;
+				gap: 4px;
 
-                .link-block-cover-link {
-                    display: block;
-                    width: unset;
-                    height: unset;
-                    inset: -50px calc(-1 * var(--item-list-gap));
-                }
+				.link-block-cover-link {
+					display: block;
+					width: unset;
+					height: unset;
+					inset: -50px calc(-1 * var(--item-list-gap));
+				}
 
-                .user-list-avatar {
-                    width: var(--w);
-                    height: var(--w);
-                    --mask-size: var(--cover-size-100);
+				.user-list-avatar {
+					width: var(--w);
+					height: var(--w);
+					--mask-size: var(--cover-size-100);
 
-                    top: 36px;
-                    left: 50%;
-                    margin-left: calc(-1 * (var(--w) / 2));
+					top: 36px;
+					left: 50%;
+					margin-left: calc(-1 * (var(--w) / 2));
 
-                    transition-property: scale, opacity;
-                    transition-duration: 0.4s;
-                    transition-timing-function: var(--trans-function-ani);
-                }
+					transition-property: scale, opacity;
+					transition-duration: 0.4s;
+					transition-timing-function: var(--trans-function-ani);
+				}
 
-                .user-follow {
-                    position: absolute;
-                    top: 36px;
-                    right: 50%;
-                    margin-right: calc((-1 * var(--w)) + 25px);
+				.user-follow {
+					position: absolute;
+					top: 36px;
+					right: 50%;
+					margin-right: calc((-1 * var(--w)) + 25px);
 
-                    transition-property: scale, opacity;
-                    transition-duration: 0.4s;
-                    transition-timing-function: var(--trans-function-ani);
-                }
+					transition-property: scale, opacity;
+					transition-duration: 0.4s;
+					transition-timing-function: var(--trans-function-ani);
+				}
 
-                .user-list-name {
-                    translate: 0;
-                    transition-property: translate;
-                    transition-duration: 0.4s;
-                    transition-timing-function: var(--trans-function-ani);
-                    filter: var(--header-filter-shadow) !important;
+				.user-list-name {
+					translate: 0;
+					transition-property: translate;
+					transition-duration: 0.4s;
+					transition-timing-function: var(--trans-function-ani);
+					filter: var(--header-filter-shadow) !important;
 
-                    margin-right: unset;
-                }
+					margin-right: unset;
+				}
 
-                .listener-list-position {
-                    transition-property: translate;
-                    transition-duration: 0.4s;
-                    transition-timing-function: var(--trans-function-ani);
-                    filter: var(--header-filter-shadow) !important;
-                }
+				.listener-list-position {
+					transition-property: translate;
+					transition-duration: 0.4s;
+					transition-timing-function: var(--trans-function-ani);
+					filter: var(--header-filter-shadow) !important;
+				}
 
-                .user-list-description {
-                    flex-direction: column;
-                    padding: unset;
-                    align-items: center;
-                    gap: 0;
-                    max-width: 100%;
-                    height: 72px;
+				.user-list-description {
+					flex-direction: column;
+					padding: unset;
+					align-items: center;
+					gap: 0;
+					max-width: 100%;
+					height: 72px;
 
-                    translate: 0;
-                    transition-property: translate;
-                    transition-duration: 0.4s;
-                    transition-timing-function: var(--trans-function-ani);
-                    filter: var(--header-filter-shadow) !important;
+					translate: 0;
+					transition-property: translate;
+					transition-duration: 0.4s;
+					transition-timing-function: var(--trans-function-ani);
+					filter: var(--header-filter-shadow) !important;
 
-                    z-index: 3;
+					z-index: 3;
 
-                    & > p {
-                        max-width: 100%;
-                        overflow: hidden;
+					& > p {
+						max-width: 100%;
+						overflow: hidden;
 
-                        text-overflow: ellipsis;
-                        -webkit-box-orient: vertical;
-                        display: -webkit-box;
-                        -webkit-line-clamp: 3;
-                        white-space: wrap;
+						text-overflow: ellipsis;
+						-webkit-box-orient: vertical;
+						display: -webkit-box;
+						-webkit-line-clamp: 3;
+						white-space: wrap;
 
-                        /* i have to override last.fm's :first-child thing :( */
-                        p {
-                            white-space: wrap;
-                        }
-                    }
-                }
+						/* i have to override last.fm's :first-child thing :( */
+						p {
+							white-space: wrap;
+						}
+					}
+				}
 
-                .user-list-shared-artists,
-                .user-list-about-me {
-                    transition-property: opacity;
-                    transition-duration: 0.4s;
-                    transition-timing-function: var(--trans-function-ani);
-                }
+				.user-list-shared-artists,
+				.user-list-about-me {
+					transition-property: opacity;
+					transition-duration: 0.4s;
+					transition-timing-function: var(--trans-function-ani);
+				}
 
-                .user-list-follower-btn {
-                    top: var(--item-list-gap);
-                    right: var(--item-list-gap);
-                    margin-top: unset;
+				.user-list-follower-btn {
+					top: var(--item-list-gap);
+					right: var(--item-list-gap);
+					margin-top: unset;
 
-                    z-index: 3;
-                }
-            }
-        }
-    }
+					z-index: 3;
+				}
+			}
+		}
+	}
 }
 
 .user-list-about-me {
-    color: inherit;
-    overflow: hidden;
+	color: inherit;
+	overflow: hidden;
 }
 .user-list-about-me > .markdown-body {
-    display: inline-block;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+	display: inline-block;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 
-    & > p,
-    & > p > div,
-    & > div,
-    & > p > :is(h1, h2, h3, h4, h5) {
-        display: inline;
-        font-size: var(--font-size);
-        line-height: var(--line-height);
-        margin: unset !important;
-    }
+	& > p,
+	& > p > div,
+	& > div,
+	& > p > :is(h1, h2, h3, h4, h5) {
+		display: inline;
+		font-size: var(--font-size);
+		line-height: var(--line-height);
+		margin: unset !important;
+	}
 
-    & > p:not(:last-child) {
-        margin-right: 4px !important;
-    }
+	& > p:not(:last-child) {
+		margin-right: 4px !important;
+	}
 
-    & > p:has(> .markdown-image),
-    br {
-        display: none;
-    }
+	& > p:has(> .markdown-image),
+	br {
+		display: none;
+	}
 
-    & > .top-track {
-        display: inline-flex !important;
-    }
+	& > .top-track {
+		display: inline-flex !important;
+	}
 }
 
 .has-featured-track {
-    & > .top-track {
-        display: inline-flex !important;
-    }
+	& > .top-track {
+		display: inline-flex !important;
+	}
 }
 
 .user-list-inner-wrap {
-    display: flex !important;
-    align-items: center;
-    gap: var(--card-gap);
-    position: static;
+	display: flex !important;
+	align-items: center;
+	gap: var(--card-gap);
+	position: static;
 }
 
 .user-list-item[data-followed="false"]:not(.listener-list-item) {
-    .user-list-name {
-        margin-left: calc(16px + var(--card-gap));
-    }
+	.user-list-name {
+		margin-left: calc(16px + var(--card-gap));
+	}
 }
 
 .user-list-name {
-    min-width: 200px;
+	min-width: 200px;
 
-    & > a {
-        color: oklch(var(--l3-c)) !important;
-    }
+	& > a {
+		color: oklch(var(--l3-c)) !important;
+	}
 }
 
 .user-list-inner-wrap > .label {
-    order: -1;
-    width: 18px;
-    text-align: center;
-    font-size: 0;
-    padding: 0;
-    position: relative;
-    --mask: var(--icon-16-followers);
-    --left: 0;
-    color: oklch(var(--c3)) !important;
+	order: -1;
+	width: 18px;
+	text-align: center;
+	font-size: 0;
+	padding: 0;
+	position: relative;
+	--mask: var(--icon-16-followers);
+	--left: 0;
+	color: oklch(var(--c3)) !important;
 }
 
 .user-list-avatar {
-    position: absolute;
-    --show-icon: none;
+	position: absolute;
+	--show-icon: none;
 
-    .avatar-status-dot {
-        width: 18px;
-        height: 18px;
-        --mask-size: 18px;
-    }
+	.avatar-status-dot {
+		width: 18px;
+		height: 18px;
+		--mask-size: 18px;
+	}
 }
 
 .user-list-follower-btn {
-    top: 0;
-    left: unset;
-    right: 0;
+	top: 0;
+	left: unset;
+	right: 0;
 }
 /*.user-list-item:hover .user-list-follower-btn {
     transition-property: none !important;
 }*/
 
 .user-list-description {
-    max-width: fit-content;
-    overflow: hidden;
-    display: flex;
-    gap: var(--card-gap);
-    padding-right: var(--card-gap);
+	max-width: fit-content;
+	overflow: hidden;
+	display: flex;
+	gap: var(--card-gap);
+	padding-right: var(--card-gap);
 }
 .user-list-description .text-light {
-    flex-shrink: 0;
-    font-weight: var(--font-weight-medium);
+	flex-shrink: 0;
+	font-weight: var(--font-weight-medium);
 }
 
-
 .user-list-item .class {
-    order: 1;
+	order: 1;
 }
 
 .user-list-shared-artists {
-    padding-top: unset;
-    margin-top: unset !important;
-    border: unset;
-    color: oklch(var(--c3));
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    white-space: wrap !important;
-    flex-shrink: 0;
+	padding-top: unset;
+	margin-top: unset !important;
+	border: unset;
+	color: oklch(var(--c3));
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	white-space: wrap !important;
+	flex-shrink: 0;
 }
 .neighbours-items-section .user-list-about-me {
-    display: none;
+	display: none;
 }
 
 /*     TOP ARTIST LISTENERS     */
 .top-listeners {
-    margin: unset;
+	margin: unset;
 }
 
-
 .user-list-follower-btn {
-    --font-size: 0;
-    --mask: var(--icon-16-plus);
+	--font-size: 0;
+	--mask: var(--icon-16-plus);
 
-    &:before {
-        background-color: currentColor !important;
-    }
+	&:before {
+		background-color: currentColor !important;
+	}
 
-    div[data-toggle-button-current-state="followed"] > form > & {
-        --mask: var(--icon-16-check);
-    }
+	div[data-toggle-button-current-state="followed"] > form > & {
+		--mask: var(--icon-16-check);
+	}
 }

@@ -1,210 +1,211 @@
 .bleh-notifications {
-    position: fixed;
-    display: flex;
-    flex-direction: column;
-    gap: var(--button-list-gap);
-    align-items: end;
-    inset: 0;
-    pointer-events: none;
-    padding: calc(var(--auth-space, 0px) + 52px + var(--card-gap))
-        var(--card-gap);
-    z-index: 99999999999;
+	position: fixed;
+	display: flex;
+	flex-direction: column;
+	gap: var(--button-list-gap);
+	align-items: end;
+	inset: 0;
+	pointer-events: none;
+	padding: calc(var(--auth-space, 0px) + 52px + var(--card-gap))
+		var(--card-gap);
+	z-index: 99999999999;
 
-    transition-property: right, opacity;
-    transition-duration: 0.25s;
-    transition-timing-function: var(--trans-function);
+	transition-property: right, opacity;
+	transition-duration: 0.25s;
+	transition-timing-function: var(--trans-function);
 
-    &[data-auth-open="true"] {
-        /*--auth-space: 244px;*/
-        right: -300px;
-        opacity: 0;
-    }
+	&[data-auth-open="true"] {
+		/*--auth-space: 244px;*/
+		right: -300px;
+		opacity: 0;
+	}
 
-    .bleh-notification {
-        animation: notif var(--trans) var(--trans-function);
-        pointer-events: auto;
-        position: relative;
+	.bleh-notification {
+		animation: notif var(--trans) var(--trans-function);
+		pointer-events: auto;
+		position: relative;
 
-        overflow: hidden;
+		overflow: hidden;
 
-        background: oklch(var(--b5) / var(--solarium-opacity, var(--menu-opacity)));
-        box-shadow: var(--card-shadow);
-        padding: 12px var(--button-sides);
-        border: 1px solid var(--card-border-base);
-        border-radius: var(--button-radius);
-        --mask-colour: color-mix(
+		background: oklch(var(--b5) / var(--solarium-opacity,
+			var(--menu-opacity)));
+		box-shadow: var(--card-shadow);
+		padding: 12px var(--button-sides);
+		border: 1px solid var(--card-border-base);
+		border-radius: var(--button-radius);
+		--mask-colour: color-mix(
             in oklch,
             oklch(var(--c2)),
             oklch(var(--c3)) 50%
         );
 
-        backdrop-filter: var(--solarium);
-        -webkit-backdrop-filter: var(--solarium);
+		backdrop-filter: var(--solarium);
+		-webkit-backdrop-filter: var(--solarium);
 
-        display: flex;
-        gap: var(--card-gap);
+		display: flex;
+		gap: var(--card-gap);
 
-        background-image: var(
-            --cards-overlay-image-subtle,
-            unset
-        ) !important;
-        background-repeat: repeat-x !important;
-        background-position: 0 1px !important;
+		background-image: var(
+			--cards-overlay-image-subtle,
+			unset
+		) !important;
+		background-repeat: repeat-x !important;
+		background-position: 0 1px !important;
 
-        &:after {
-            content: "";
-            position: absolute;
-            left: 0;
-            top: 0;
-            right: 0;
-            height: var(--cards-overlay-height);
-            max-height: 100%;
-            display: var(--cards-overlay-display);
-            background: var(--cards-overlay);
-            border-top-left-radius: var(--card-radius);
-            border-top-right-radius: var(--card-radius);
-            pointer-events: none;
+		&:after {
+			content: "";
+			position: absolute;
+			left: 0;
+			top: 0;
+			right: 0;
+			height: var(--cards-overlay-height);
+			max-height: 100%;
+			display: var(--cards-overlay-display);
+			background: var(--cards-overlay);
+			border-top-left-radius: var(--card-radius);
+			border-top-right-radius: var(--card-radius);
+			pointer-events: none;
 
-            /* fix for no-data-message overriding and stuff */
-            margin: unset;
-            width: unset;
-        }
+			/* fix for no-data-message overriding and stuff */
+			margin: unset;
+			width: unset;
+		}
 
-        .notification-actions {
-            display: flex;
+		.notification-actions {
+			display: flex;
 
-            margin: -12px calc(-1 * var(--button-sides)) -12px 0;
+			margin: -12px calc(-1 * var(--button-sides)) -12px 0;
 
-            .notification-action {
-                position: relative;
-                --bg: transparent;
-                --bg-hov: oklch(var(--b4) / 40%);
-                --bg-atv: oklch(var(--b4) / 60%);
-                --mask-colour: oklch(var(--c3));
-                --shadow: none;
-                --font-size: 0;
-                width: 38px;
-                --btn-top: 0;
-                --btn-bottom: 0;
+			.notification-action {
+				position: relative;
+				--bg: transparent;
+				--bg-hov: oklch(var(--b4) / 40%);
+				--bg-atv: oklch(var(--b4) / 60%);
+				--mask-colour: oklch(var(--c3));
+				--shadow: none;
+				--font-size: 0;
+				width: 38px;
+				--btn-top: 0;
+				--btn-bottom: 0;
 
-                --top: 50%;
-                --margin-top: calc(-1 * var(--icon-half));
+				--top: 50%;
+				--margin-top: calc(-1 * var(--icon-half));
 
-                --left: 50%;
-                --margin-left: calc(-1 * var(--icon-half));
-            }
-        }
+				--left: 50%;
+				--margin-left: calc(-1 * var(--icon-half));
+			}
+		}
 
-        &.with-icon {
-            padding-left: calc(
-                var(--button-sides-icon) + var(--icon-size) + 8px
-            );
-            --top: 12px;
-            --margin-top: 0;
-        }
+		&.with-icon {
+			padding-left: calc(
+				var(--button-sides-icon) + var(--icon-size) + 8px
+			);
+			--top: 12px;
+			--margin-top: 0;
+		}
 
-        text-align: left;
+		text-align: left;
 
-        .notification-title {
-            color: oklch(var(--c1));
-            font-weight: var(--font-weight-medium);
-            cursor: default;
-        }
-        .notification-body {
-            cursor: default;
-            max-width: 400px;
-        }
+		.notification-title {
+			color: oklch(var(--c1));
+			font-weight: var(--font-weight-medium);
+			cursor: default;
+		}
+		.notification-body {
+			cursor: default;
+			max-width: 400px;
+		}
 
-        &.fade-out {
-            opacity: 0;
-            animation: notif_out var(--trans) var(--trans-function);
-        }
+		&.fade-out {
+			opacity: 0;
+			animation: notif_out var(--trans) var(--trans-function);
+		}
 
-        &[data-type="error"] {
-            --hue-over: var(--hue-neg);
-            --sat-over: var(--sat-neg);
-            --lit-over: var(--lit-neg);
-        }
+		&[data-type="error"] {
+			--hue-over: var(--hue-neg);
+			--sat-over: var(--sat-neg);
+			--lit-over: var(--lit-neg);
+		}
 
-        &[data-type="warning"] {
-            --hue-over: var(--hue-orange);
-            --sat-over: var(--sat-orange);
-            --lit-over: var(--lit-orange);
-        }
+		&[data-type="warning"] {
+			--hue-over: var(--hue-orange);
+			--sat-over: var(--sat-orange);
+			--lit-over: var(--lit-orange);
+		}
 
-        &[data-type="success"] {
-            --hue-over: var(--hue-pos);
-            --sat-over: var(--sat-pos);
-            --lit-over: var(--lit-pos);
-        }
+		&[data-type="success"] {
+			--hue-over: var(--hue-pos);
+			--sat-over: var(--sat-pos);
+			--lit-over: var(--lit-pos);
+		}
 
-        &.colourful {
-            --mask-colour: color-mix(
+		&.colourful {
+			--mask-colour: color-mix(
                 in oklch,
                 oklch(var(--l3-c)),
                 oklch(var(--l4-c)) 30%
             );
-        }
+		}
 
-        .notification-progress {
-            position: absolute;
-            left: var(--button-sides);
-            right: var(--button-sides);
-            bottom: 0;
-            pointer-events: none;
+		.notification-progress {
+			position: absolute;
+			left: var(--button-sides);
+			right: var(--button-sides);
+			bottom: 0;
+			pointer-events: none;
 
-            display: flex;
-            justify-content: end;
+			display: flex;
+			justify-content: end;
 
-            .fill {
-                width: 100%;
-                background-color: oklch(var(--l3-c) / 60%);
-                height: 3px;
+			.fill {
+				width: 100%;
+				background-color: oklch(var(--l3-c) / 60%);
+				height: 3px;
 
-                border-radius: var(--button-radius);
+				border-radius: var(--button-radius);
 
-                transition: width 0.1s linear;
-            }
-        }
-    }
+				transition: width 0.1s linear;
+			}
+		}
+	}
 }
 .masthead-popup {
-    top: calc(52px + var(--card-gap));
-    right: var(--card-gap);
+	top: calc(52px + var(--card-gap));
+	right: var(--card-gap);
 
-    .masthead-popup-inner {
-        animation: notif var(--trans) var(--trans-function);
-        background: oklch(var(--b5));
-        border-radius: var(--item-big-radius);
-        box-shadow: var(--menu-shadow);
-        padding: var(--card-gap);
-        color: oklch(var(--c2));
+	.masthead-popup-inner {
+		animation: notif var(--trans) var(--trans-function);
+		background: oklch(var(--b5));
+		border-radius: var(--item-big-radius);
+		box-shadow: var(--menu-shadow);
+		padding: var(--card-gap);
+		color: oklch(var(--c2));
 
-        &:before {
-            display: none;
-        }
+		&:before {
+			display: none;
+		}
 
-        .masthead-popup-title {
-            font: inherit;
-            font-weight: var(--font-weight-medium);
-            color: oklch(var(--c1));
-        }
+		.masthead-popup-title {
+			font: inherit;
+			font-weight: var(--font-weight-medium);
+			color: oklch(var(--c1));
+		}
 
-        p + p,
-        .masthead-popup-text + .masthead-popup-text {
-            margin-top: var(--card-gap);
-        }
+		p + p,
+		.masthead-popup-text + .masthead-popup-text {
+			margin-top: var(--card-gap);
+		}
 
-        .masthead-popup-close {
-            --bg: transparent;
-            --bg-hov: oklch(var(--b3) / 40%);
-            --bg-hov: oklch(var(--b3) / 60%);
-            --left: var(--icon-half);
-            --font-size: 0;
-            --mask: var(--icon-16-x);
-            opacity: unset !important;
-            top: calc(var(--card-gap) - 7px);
-            right: calc(var(--card-gap) - 7px);
-        }
-    }
+		.masthead-popup-close {
+			--bg: transparent;
+			--bg-hov: oklch(var(--b3) / 40%);
+			--bg-hov: oklch(var(--b3) / 60%);
+			--left: var(--icon-half);
+			--font-size: 0;
+			--mask: var(--icon-16-x);
+			opacity: unset !important;
+			top: calc(var(--card-gap) - 7px);
+			right: calc(var(--card-gap) - 7px);
+		}
+	}
 }

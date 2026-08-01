@@ -1,3 +1,3 @@
 export function card({ host, sidebar } = {}) {
-    if (!host || !sidebar) return;
+	if (!host || !sidebar) return;
 }

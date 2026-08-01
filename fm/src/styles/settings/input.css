@@ -1,13 +1,13 @@
 .masthead-search-field {
-    appearance: none;
-    background: none;
-    border: none;
-    color: inherit;
+	appearance: none;
+	background: none;
+	border: none;
+	color: inherit;
 }
 
 input {
-    font: inherit;
-    color: inherit;
+	font: inherit;
+	color: inherit;
 }
 
 .modern-input,
@@ -23,260 +23,254 @@ input {
 .content-form input[type="url"],
 .content-form select,
 .content-form textarea {
-    --bg: oklch(var(--b4));
-    --bg-hov: var(--bg);
-    --bg-atv: var(--bg);
-    /* ^ on firefox (at least) transparent backgrounds get
-    overlayed over white, which is not readable at all */
-    --col: oklch(var(--c2));
-    --mask-colour: color-mix(in oklch, oklch(var(--c2)), oklch(var(--c3)) 50%);
-    background-color: var(--bg) !important;
-    color: var(--col) !important;
-    padding: var(
-        --padding,
-        var(--button-verts) var(--button-sides)
-    ) !important;
-    line-height: var(--line-height);
-    font-size: var(--font-size) !important;
-    font-weight: var(--font-weight) !important;
-    letter-spacing: unset !important;
-    border-radius: var(--radius, var(--input-radius)) !important;
-    box-shadow: var(--shadow, var(--interact-shadow)) !important;
-    border: unset !important;
-    height: var(--button-height);
-    transition-property: background-color, transform, box-shadow, color, border, filter;
-    transition-duration: var(--trans);
-    transition-timing-function: var(--trans-function);
+	--bg: oklch(var(--b4));
+	--bg-hov: var(--bg);
+	--bg-atv: var(--bg);
+	/* ^ on firefox (at least) transparent backgrounds get
+	overlayed over white, which is not readable at all */
+	--col: oklch(var(--c2));
+	--mask-colour: color-mix(in oklch, oklch(var(--c2)), oklch(var(--c3)) 50%);
+	background-color: var(--bg) !important;
+	color: var(--col) !important;
+	padding: var(
+		--padding,
+		var(--button-verts) var(--button-sides)
+	) !important;
+	line-height: var(--line-height);
+	font-size: var(--font-size) !important;
+	font-weight: var(--font-weight) !important;
+	letter-spacing: unset !important;
+	border-radius: var(--radius, var(--input-radius)) !important;
+	box-shadow: var(--shadow, var(--interact-shadow)) !important;
+	border: unset !important;
+	height: var(--button-height);
+	transition-property: background-color, transform, box-shadow, color, border,
+		filter;
+	transition-duration: var(--trans);
+	transition-timing-function: var(--trans-function);
 
-    &:not(select) {
-        --bg: var(--textarea);
-        --bg-hov: var(--textarea-hov);
-        --bg-atv: var(--textarea-hov);
-        --shadow: var(--input-shadow) !important;
-        outline: none !important;
+	&:not(select) {
+		--bg: var(--textarea);
+		--bg-hov: var(--textarea-hov);
+		--bg-atv: var(--textarea-hov);
+		--shadow: var(--input-shadow) !important;
+		outline: none !important;
 
-        &[aria-expanded="true"],
-        &:focus-visible:not([readonly]) {
-            --focus-outline: none !important;
-            --shadow: var(--focused-input-shadow) !important;
-        }
+		&[aria-expanded="true"],
+		&:focus-visible:not([readonly]) {
+			--focus-outline: none !important;
+			--shadow: var(--focused-input-shadow) !important;
+		}
 
-        &[disabled]:not([disabled="false"]),
-        &[readonly] {
-            --bg-hov: var(--bg) !important;
-            --bg-atv: var(--bg) !important;
-            --focus-outline: none !important;
-            pointer-events: none;
-            --col: oklch(var(--c3));
-        }
-    }
+		&[disabled]:not([disabled="false"]),
+		&[readonly] {
+			--bg-hov: var(--bg) !important;
+			--bg-atv: var(--bg) !important;
+			--focus-outline: none !important;
+			pointer-events: none;
+			--col: oklch(var(--c3));
+		}
+	}
 
-    &#id_email:not(:hover, :focus-visible) {
-        --col: transparent;
-    }
+	&#id_email:not(:hover, :focus-visible) {
+		--col: transparent;
+	}
 
-    &:hover,
-    &:focus-visible {
-        background-color: var(--bg-hov) !important;
-        transition: none !important;
-    }
-    &[aria-expanded="true"],
-    &:active {
-        background-color: var(--bg-atv) !important;
-    }
+	&:hover,
+	&:focus-visible {
+		background-color: var(--bg-hov) !important;
+		transition: none !important;
+	}
+	&[aria-expanded="true"],
+	&:active {
+		background-color: var(--bg-atv) !important;
+	}
 
-    &[disabled]:not([disabled="false"]) {
-        opacity: 0.7 !important;
-    }
+	&[disabled]:not([disabled="false"]) {
+		opacity: 0.7 !important;
+	}
 
-    &[disabled]:not([disabled="false"]),
-    &::placeholder {
-        color: oklch(var(--c3)) !important;
-    }
+	&[disabled]:not([disabled="false"]),
+	&::placeholder {
+		color: oklch(var(--c3)) !important;
+	}
 }
 .content-form textarea {
-    height: unset;
+	height: unset;
 }
 
 .wiki-editor-body {
-    --font-size: 16px !important;
-    --line-height: 20px !important;
+	--font-size: 16px !important;
+	--line-height: 20px !important;
 
-    min-height: 500px !important;
+	min-height: 500px !important;
 }
 
 .modal-text {
-    width: 500px !important;
+	width: 500px !important;
 }
 
 .content-form .checkbox label,
 .content-form .form-group .form-group-controls--checkbox label,
 .content-form .form-group .form-group-controls--radio label,
-.content-form
-    .form-group
-    ul:not(.bulleted-list):not(.redactor-toolbar)
-    li
-    label,
+.content-form .form-group ul:not(.bulleted-list):not(.redactor-toolbar) li label,
 .content-form .radio label {
-    font-weight: var(--font-weight);
-    padding-left: var(--card-gap);
+	font-weight: var(--font-weight);
+	padding-left: var(--card-gap);
 }
 
 .content-form .checkbox input,
 .content-form .form-group .form-group-controls--checkbox input,
-.content-form
-    .form-group
-    ul:not(.bulleted-list):not(.redactor-toolbar)
-    li
-    input {
-    margin: 0 0 0 -20px !important;
+.content-form .form-group ul:not(.bulleted-list):not(.redactor-toolbar) li input {
+	margin: 0 0 0 -20px !important;
 }
 
 .input-container {
-    position: relative;
-    --icon-size: 14px;
+	position: relative;
+	--icon-size: 14px;
 
-    &:before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        border-radius: var(--input-radius);
-        background: linear-gradient(
-            180deg,
-            transparent,
-            oklch(var(--h4) / 20%)
-        );
-        box-shadow: inset 0 0 0 1px oklch(var(--l3-c), 40%);
-        opacity: 0;
-        pointer-events: none;
+	&:before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		border-radius: var(--input-radius);
+		background: linear-gradient(
+			180deg,
+			transparent,
+			oklch(var(--h4) / 20%)
+		);
+		box-shadow: inset 0 0 0 1px oklch(var(--l3-c), 40%);
+		opacity: 0;
+		pointer-events: none;
 
-        transition-property: opacity;
-        transition-duration: var(--trans);
-        transition-timing-function: var(--trans-function);
-    }
+		transition-property: opacity;
+		transition-duration: var(--trans);
+		transition-timing-function: var(--trans-function);
+	}
 
-    &:after {
-        --show-icon: none;
-        pointer-events: none;
-    }
+	&:after {
+		--show-icon: none;
+		pointer-events: none;
+	}
 
-    --mask-colour: color-mix(in oklch, oklch(var(--c2)), oklch(var(--c3)) 50%);
+	--mask-colour: color-mix(in oklch, oklch(var(--c2)), oklch(var(--c3)) 50%);
 
-    &:has(> .modern-input[disabled]) {
-        --mask-colour: oklch(var(--c3));
-    }
+	&:has(> .modern-input[disabled]) {
+		--mask-colour: oklch(var(--c3));
+	}
 
-    &.in-settings {
-        &:before {
-            right: calc(32px + var(--button-list-gap));
-        }
-    }
+	&.in-settings {
+		&:before {
+			right: calc(32px + var(--button-list-gap));
+		}
+	}
 
-    &[data-has-error="true"] {
-        --hue-over: var(--hue-neg);
-        --sat-over: var(--sat-neg);
-        --lit-over: var(--lit-neg);
+	&[data-has-error="true"] {
+		--hue-over: var(--hue-neg);
+		--sat-over: var(--sat-neg);
+		--lit-over: var(--lit-neg);
 
-        &:before {
-            opacity: 1;
-            transition: none;
-        }
-    }
+		&:before {
+			opacity: 1;
+			transition: none;
+		}
+	}
 
-    &[data-type="colour"] {
-        --size: 14px;
+	&[data-type="colour"] {
+		--size: 14px;
 
-        & > .modern-input {
-            padding-left: calc(
-                var(--button-sides) + var(--size) + var(--icon-gap)
-            ) !important;
-            width: 110px;
-        }
+		& > .modern-input {
+			padding-left: calc(
+				var(--button-sides) + var(--size) + var(--icon-gap)
+			) !important;
+			width: 110px;
+		}
 
-        .colour-block {
-            position: absolute;
-            top: 50%;
-            margin-top: calc(-1 * var(--size) / 2);
-            left: var(--button-sides);
-            width: var(--size);
-            height: var(--size);
-            border-radius: var(--item-small-radius);
-            box-shadow: var(--interact-shadow);
-            pointer-events: none;
-        }
-    }
+		.colour-block {
+			position: absolute;
+			top: 50%;
+			margin-top: calc(-1 * var(--size) / 2);
+			left: var(--button-sides);
+			width: var(--size);
+			height: var(--size);
+			border-radius: var(--item-small-radius);
+			box-shadow: var(--interact-shadow);
+			pointer-events: none;
+		}
+	}
 
-    &[data-type="date"] {
-        &:after {
-            --mask: var(--icon-16-calendar);
-            --icon-size: 14px;
-        }
+	&[data-type="date"] {
+		&:after {
+			--mask: var(--icon-16-calendar);
+			--icon-size: 14px;
+		}
 
-        & > .modern-input {
-            cursor: pointer;
-            padding-left: calc(
-                var(--button-sides-icon) + var(--icon-size) +
-                    var(--icon-gap)
-            ) !important;
-            user-select: none;
-        }
+		& > .modern-input {
+			cursor: pointer;
+			padding-left: calc(
+				var(--button-sides-icon) + var(--icon-size) +
+				var(--icon-gap)
+			) !important;
+			user-select: none;
+		}
 
-        &:after {
-            --show-icon: block;
-        }
+		&:after {
+			--show-icon: block;
+		}
 
-        & > .legacy-input {
-            display: none;
-        }
-    }
+		& > .legacy-input {
+			display: none;
+		}
+	}
 
-    &[data-type="time"] {
-        --mask: var(--icon-16-clock);
-        --icon-size: 14px;
+	&[data-type="time"] {
+		--mask: var(--icon-16-clock);
+		--icon-size: 14px;
 
-        & > .modern-input {
-            padding-left: calc(
-                var(--button-sides-icon) + var(--icon-size) +
-                    var(--icon-gap)
-            ) !important;
+		& > .modern-input {
+			padding-left: calc(
+				var(--button-sides-icon) + var(--icon-size) +
+				var(--icon-gap)
+			) !important;
 
-            &::-webkit-calendar-picker-indicator {
-                display: none;
-            }
-        }
+			&::-webkit-calendar-picker-indicator {
+				display: none;
+			}
+		}
 
-        &:after {
-            --show-icon: block;
-        }
+		&:after {
+			--show-icon: block;
+		}
 
-        &[data-visible="false"] {
-            display: none;
-        }
-    }
+		&[data-visible="false"] {
+			display: none;
+		}
+	}
 
-    & > .modern-input {
-        width: 100% !important;
-    }
+	& > .modern-input {
+		width: 100% !important;
+	}
 
-    &.can-submit {
-        & > input {
-            padding-right: calc(
-                var(--button-sides) + var(--button-height)
-            ) !important;
-        }
-    }
+	&.can-submit {
+		& > input {
+			padding-right: calc(
+				var(--button-sides) + var(--button-height)
+			) !important;
+		}
+	}
 
-    &.input-has-icon {
-        & > .modern-input {
-            padding-right: calc(var(--button-sides) + var(--icon-size) + var(--button-sides)) !important;
-        }
-    }
+	&.input-has-icon {
+		& > .modern-input {
+			padding-right: calc(var(--button-sides) + var(--icon-size) +
+				var(--button-sides)) !important;
+		}
+	}
 }
 
 .input-icons {
-    position: absolute;
-    top: 0;
-    right: var(--button-sides);
-    bottom: 0;
-    pointer-events: none;
+	position: absolute;
+	top: 0;
+	right: var(--button-sides);
+	bottom: 0;
+	pointer-events: none;
 }

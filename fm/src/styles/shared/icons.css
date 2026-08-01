@@ -14,125 +14,135 @@
 .obsession-pagination-link:before,
 .library-search-results.async-content-loading:after,
 .listening-report-promo-date:after,
-.metadata-column .cta-link-wrap > a:before, .lyrics-snippet-more-link > a:before,
+.metadata-column .cta-link-wrap > a:before,
+.lyrics-snippet-more-link > a:before,
 .see-more:before,
 .music-featured-item-background:before,
-.gallery-image-preferred-states:before, .gallery-image-votes:before,
+.gallery-image-preferred-states:before,
+.gallery-image-votes:before,
 .user-list-follower-btn:before,
-.icon:before, .icon-r:before,
+.icon:before,
+.icon-r:before,
 .chartlist-now-scrobbling:before,
 .tags-view-all:before,
-.weeklychart-listeners:before, .weeklychart-scrobblers:before,
+.weeklychart-listeners:before,
+.weeklychart-scrobblers:before,
 .music-bookmarks-tags-item-toggle:before,
 .music-bookmarks-artists-item-toggle:before,
 .music-bookmarks-albums-item-toggle:before,
 .lastfm-bulk-edit-form-group-controls button:before,
 .lastfm-bulk-edit-progress:before,
 .tag-icon:before,
-.breadcrumb :is(a, .breadcrumb-origin):before, .gallery-image-uploaded-by:before,
+.breadcrumb :is(a, .breadcrumb-origin):before,
+.gallery-image-uploaded-by:before,
 .select-button:after,
 .modal-action-button:before,
 .big-btn:before,
 .requesting:before,
 .modal-processing:before,
 .btn.back:before,
-.modal-close-button:before, .masthead-popup-close:before,
-.continue:before, .external:before, .done:before, .cancel:before, .btn-cancel:before, .download:before, .upload:before, .save:before, .open:before, .btn-secondary.js-close:not(.modal-action-button):before, .form-group button[type="submit"]:before, .modal-button button[type="submit"]:before,
+.modal-close-button:before,
+.masthead-popup-close:before,
+.continue:before,
+.external:before,
+.done:before,
+.cancel:before,
+.btn-cancel:before,
+.download:before,
+.upload:before,
+.save:before,
+.open:before,
+.btn-secondary.js-close:not(.modal-action-button):before,
+.form-group button[type="submit"]:before,
+.modal-button button[type="submit"]:before,
 .badge:before,
 .gallery-placeholder:before,
-.image-list-item-bookmarked:after, .image-list-item-preferred:after,
-.data-loading:after, .lazy-shoutbox.async-content-loading:after, .loading:not(.library-fetch, .library-date-picker):after,
+.image-list-item-bookmarked:after,
+.image-list-item-preferred:after,
+.data-loading:after,
+.lazy-shoutbox.async-content-loading:after,
+.loading:not(.library-fetch, .library-date-picker):after,
 .nag-bar-message:before,
-/*     BLEH     */
-.loading-data-text:before,
+/*     BLEH     */ .loading-data-text:before,
 .btn--has-icon:before,
-/*     DROPDOWNS     */
-.dropdown-menu-clickable-item:not(.v2):before,
-.dropdown-menu-list-button::after, .dropdown-menu-clickable-button:not(.link-select, .report-dropdown-button)::after, .dropdown-menu-clickable-button-js-only::after, .display-options-clickable-button:after,
-/*     MORE LINK >     */
-.external-link:before,
-/*     NAV     */
-.secondary-nav-item-link:before, .navlist-more:before,
-/*     PLAYLINKS & MEDIA LINKS     */
-.section-playlink:before, .inline-section-control:before,
+/*     DROPDOWNS     */ .dropdown-menu-clickable-item:not(.v2):before,
+.dropdown-menu-list-button::after,
+.dropdown-menu-clickable-button:not(.link-select, .report-dropdown-button)::after,
+.dropdown-menu-clickable-button-js-only::after,
+.display-options-clickable-button:after,
+/*     MORE LINK >     */ .external-link:before,
+/*     NAV     */ .secondary-nav-item-link:before,
+.navlist-more:before,
+/*     PLAYLINKS & MEDIA LINKS     */ .section-playlink:before,
+.inline-section-control:before,
 .header-new-playlink:before,
-/*     SHOUT     */
-.shout-more-replies-after:before, .shout-more-replies-before:before,
-/*     EVENTS     */
-.event-detail:before, .event-metadata:not(:last-child):before,
-/*     HEADER     */
-.masthead-search-submit:before,
-/*     ALERT/INFO     */
-.alert:before, .event-status:before, .async-content-error-message:before,
-/*     USER NAME LABELS     */
-.label:before,
-/*     CUSTOM AVATAR ICONS WITHOUT PRO     */
-.avatar-status-dot:after,
-/*     TAGS     */
-.tags-add:before,
-/*     CHARTLIST     */
-.chartlist-type:before,
-/*     GALLERY     */
-.btn-add:before, .btn-file:before,
-/*     PLAYLISTS     */
-.playlisting-playlist-header-more-button:before,
+/*     SHOUT     */ .shout-more-replies-after:before,
+.shout-more-replies-before:before,
+/*     EVENTS     */ .event-detail:before,
+.event-metadata:not(:last-child):before,
+/*     HEADER     */ .masthead-search-submit:before,
+/*     ALERT/INFO     */ .alert:before,
+.event-status:before,
+.async-content-error-message:before,
+/*     USER NAME LABELS     */ .label:before,
+/*     CUSTOM AVATAR ICONS WITHOUT PRO     */ .avatar-status-dot:after,
+/*     TAGS     */ .tags-add:before,
+/*     CHARTLIST     */ .chartlist-type:before,
+/*     GALLERY     */ .btn-add:before,
+.btn-file:before,
+/*     PLAYLISTS     */ .playlisting-playlist-header-more-button:before,
 .playlisting-playlists-item-toggle:before,
 .playlisting-playlists-item-name:before,
 .playlisting-create-option-icon:before,
-/*     PLAYER BAR     */
-.dropdown-menu-item-dark:before,
-/*     UPLOAD CTA     */
-.cta-link:before,
+/*     PLAYER BAR     */ .dropdown-menu-item-dark:before,
+/*     UPLOAD CTA     */ .cta-link:before,
 .shout-more-actions:before,
 .coloured-cta:before,
-/*     LIBRARY     */
-.all-results-list li:before,
+/*     LIBRARY     */ .all-results-list li:before,
 .library-search-submit::before,
 .date-range-picker-button:after,
-/*     WIKI     */
-.wiki-history-action:before,
-/*     SEARCH     */
-.search-submit:before, .search-reset:before,
-/*     SET AN OBSESSION     */
-.obsession-candidate-inner .btn-sm:before,
-/*     GENERIC     */
-.music-link:after,
-.btn--loading:after, .more-items:before {
-    content: "";
-    display: var(--show-icon, block) !important;
-    mask-position: 0 0 !important;
-    left: var(--left, var(--button-sides-icon)) !important;
-    margin-top: var(
-        --margin-top,
-        calc(-1 * (var(--mask-size, var(--icon-size)) / 2))
-    ) !important;
-    margin-left: var(--margin-left, unset) !important;
-    margin-right: var(--margin-right, unset) !important;
-    width: var(--mask-size, var(--icon-size)) !important;
-    height: var(--mask-size, var(--icon-size)) !important;
-    box-shadow: unset !important;
-    position: absolute;
-    right: var(--right, auto) !important;
-    top: var(--top, 50%) !important;
-    bottom: var(--bottom, unset) !important;
-    background-repeat: no-repeat;
-    background-image: var(--flag-url, unset) !important;
-    background-color: var(--mask-colour, currentColor);
-    border-radius: unset;
-    mask-image: var(--mask, var(--icon-16-placeholder));
-    -webkit-mask-image: var(--mask, var(--icon-16-placeholder));
-    mask-size: var(--mask-size, var(--icon-size));
-    -webkit-mask-size: var(--mask-size, var(--icon-size));
-    transition-property: var(
-        --transition-property,
-        opacity,
-        left,
-        background,
-        transform
-    ) !important;
-    transition-duration: var(--trans) !important;
-    transition-timing-function: var(--trans-function) !important;
-    contain: strict;
+/*     WIKI     */ .wiki-history-action:before,
+/*     SEARCH     */ .search-submit:before,
+.search-reset:before,
+/*     SET AN OBSESSION     */ .obsession-candidate-inner .btn-sm:before,
+/*     GENERIC     */ .music-link:after,
+.btn--loading:after,
+.more-items:before {
+	content: "";
+	display: var(--show-icon, block) !important;
+	mask-position: 0 0 !important;
+	left: var(--left, var(--button-sides-icon)) !important;
+	margin-top: var(
+		--margin-top,
+		calc(-1 * (var(--mask-size, var(--icon-size)) / 2))
+	) !important;
+	margin-left: var(--margin-left, unset) !important;
+	margin-right: var(--margin-right, unset) !important;
+	width: var(--mask-size, var(--icon-size)) !important;
+	height: var(--mask-size, var(--icon-size)) !important;
+	box-shadow: unset !important;
+	position: absolute;
+	right: var(--right, auto) !important;
+	top: var(--top, 50%) !important;
+	bottom: var(--bottom, unset) !important;
+	background-repeat: no-repeat;
+	background-image: var(--flag-url, unset) !important;
+	background-color: var(--mask-colour, currentColor);
+	border-radius: unset;
+	mask-image: var(--mask, var(--icon-16-placeholder));
+	-webkit-mask-image: var(--mask, var(--icon-16-placeholder));
+	mask-size: var(--mask-size, var(--icon-size));
+	-webkit-mask-size: var(--mask-size, var(--icon-size));
+	transition-property: var(
+		--transition-property,
+		opacity,
+		left,
+		background,
+		transform
+	) !important;
+	transition-duration: var(--trans) !important;
+	transition-timing-function: var(--trans-function) !important;
+	contain: strict;
 }
 .icon-r:before,
 .select-button:not(.link-select):after,
@@ -145,77 +155,77 @@
 .display-options-clickable-button:after,
 .all-results-list li:before,
 .auth-link {
-    --left: none !important;
-    --right: var(--button-sides-icon) !important;
+	--left: none !important;
+	--right: var(--button-sides-icon) !important;
 }
 
 .bleh-icon {
-    background: var(--icon-colour, var(--mask-colour, currentColor));
-    mask-image: var(--icon, var(--icon-16-placeholder));
-    -webkit-mask-image: var(--icon, var(--icon-16-placeholder));
-    mask-size: var(--icon-size, 18px);
-    -webkit-mask-size: var(--icon-size, 18px);
-    mask-position: center;
-    -webkit-mask-position: center;
-    mask-repeat: no-repeat;
-    -webkit-mask-repeat: no-repeat;
-    width: var(--icon-size, 18px);
-    height: var(--icon-size, 18px);
-    contain: strict;
+	background: var(--icon-colour, var(--mask-colour, currentColor));
+	mask-image: var(--icon, var(--icon-16-placeholder));
+	-webkit-mask-image: var(--icon, var(--icon-16-placeholder));
+	mask-size: var(--icon-size, 18px);
+	-webkit-mask-size: var(--icon-size, 18px);
+	mask-position: center;
+	-webkit-mask-position: center;
+	mask-repeat: no-repeat;
+	-webkit-mask-repeat: no-repeat;
+	width: var(--icon-size, 18px);
+	height: var(--icon-size, 18px);
+	contain: strict;
 
-    font-size: 0 !important;
-    flex-shrink: 0;
+	font-size: 0 !important;
+	flex-shrink: 0;
 
-    &.in-markdown {
-        --icon-size: 14px;
-    }
+	&.in-markdown {
+		--icon-size: 14px;
+	}
 
-    &.use-mask {
-        --icon: var(--mask);
-    }
+	&.use-mask {
+		--icon: var(--mask);
+	}
 
-    &[data-mask="false"] {
-        background: var(--icon, var(--icon-16-placeholder));
-        mask-image: unset;
-        -webkit-mask-image: unset;
-        background-size: var(--icon-size, 18px);
-        background-position: center;
-        background-repeat: no-repeat;
-    }
+	&[data-mask="false"] {
+		background: var(--icon, var(--icon-16-placeholder));
+		mask-image: unset;
+		-webkit-mask-image: unset;
+		background-size: var(--icon-size, 18px);
+		background-position: center;
+		background-repeat: no-repeat;
+	}
 }
 span.bleh-icon {
-    display: inline-block;
-    height: 100%;
-    min-height: var(--icon-size);
+	display: inline-block;
+	height: 100%;
+	min-height: var(--icon-size);
 }
 
 .icon-combo {
-    display: flex;
-    align-items: center;
-    gap: var(--icon-gap);
+	display: flex;
+	align-items: center;
+	gap: var(--icon-gap);
 
-    & > .bleh-icon {
-        flex-shrink: 0;
-    }
+	& > .bleh-icon {
+		flex-shrink: 0;
+	}
 
-    &[data-season]:not([data-season="none"]) {
-        color: oklch(var(--l3-c));
-        font-weight: var(--font-weight-medium);
-    }
+	&[data-season]:not([data-season="none"]) {
+		color: oklch(var(--l3-c));
+		font-weight: var(--font-weight-medium);
+	}
 }
 
 .bleh-icon-animated-dots {
-    --icon: var(--icon-16-dots) !important;
-    background: linear-gradient(
-        90deg,
-        oklch(var(--b4)),
-        oklch(var(--c1)),
-        oklch(var(--b4)),
-        oklch(var(--c1)),
-        oklch(var(--b4))
-    );
-    background-size: 200% 100%;
-    animation: gradient 1.3s linear infinite;
+	--icon: var(--icon-16-dots) !important;
+	background: linear-gradient(
+		90deg,
+		oklch(var(--b4)),
+		oklch(var(--c1)),
+		oklch(var(--b4)),
+		oklch(var(--c1)),
+		oklch(var(--b4))
+	);
+	background-size: 200% 100%;
+	animation: gradient 1.3s linear infinite;
 
-    margin: 0 4px;
+	margin: 0 4px;
 }

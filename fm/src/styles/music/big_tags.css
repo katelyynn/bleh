@@ -1,141 +1,141 @@
 .music-bookmarks-tags-item,
 .big-tags-item {
-    --bg: transparent;
-    --bg-hov: oklch(var(--b4) / 40%);
-    --bg-atv: oklch(var(--b4) / 60%);
-    --col: oklch(var(--c2));
-    --shadow: inset 0 0 0 1px var(--separator-base);
-    --padding: 15px 20px;
+	--bg: transparent;
+	--bg-hov: oklch(var(--b4) / 40%);
+	--bg-atv: oklch(var(--b4) / 60%);
+	--col: oklch(var(--c2));
+	--shadow: inset 0 0 0 1px var(--separator-base);
+	--padding: 15px 20px;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	overflow: hidden;
 
-    height: 102px;
+	height: 102px;
 
-    .media-item {
-        position: absolute;
-        inset: 0;
-        scale: 1.1;
+	.media-item {
+		position: absolute;
+		inset: 0;
+		scale: 1.1;
 
-        transition-property: scale;
-        transition-duration: 0.4s;
-        transition-timing-function: var(--trans-function-ani);
+		transition-property: scale;
+		transition-duration: 0.4s;
+		transition-timing-function: var(--trans-function-ani);
 
-        & > .overlay-image {
-            width: 100%;
-            height: 100%;
-            background: unset !important;
-            opacity: 0.4;
-            filter: blur(4px) saturate(150%) brightness(120%);
+		& > .overlay-image {
+			width: 100%;
+			height: 100%;
+			background: unset !important;
+			opacity: 0.4;
+			filter: blur(4px) saturate(150%) brightness(120%);
 
-            & > img {
-                object-fit: cover;
-            }
+			& > img {
+				object-fit: cover;
+			}
 
-            &:after {
-                display: none;
-            }
-        }
-    }
+			&:after {
+				display: none;
+			}
+		}
+	}
 
-    &.link-block--hover {
-        .media-item {
-            scale: 1.05;
-        }
-    }
+	&.link-block--hover {
+		.media-item {
+			scale: 1.05;
+		}
+	}
 
-    .music-bookmarks-tags-item-name,
-    .big-tags-item-name {
-        position: static;
-        color: inherit;
-        font: inherit;
-        width: unset;
-        height: 32px;
-        -webkit-line-clamp: 1;
+	.music-bookmarks-tags-item-name,
+	.big-tags-item-name {
+		position: static;
+		color: inherit;
+		font: inherit;
+		width: unset;
+		height: 32px;
+		-webkit-line-clamp: 1;
 
-        & > a {
-            display: block;
-            font: inherit;
-            text-decoration: var(--force-underline, none) !important;
+		& > a {
+			display: block;
+			font: inherit;
+			text-decoration: var(--force-underline, none) !important;
 
-            -webkit-line-clamp: 1;
-            letter-spacing: unset;
-            padding: unset;
+			-webkit-line-clamp: 1;
+			letter-spacing: unset;
+			padding: unset;
 
-            font-size: 16px;
-            line-height: 20px;
+			font-size: 16px;
+			line-height: 20px;
 
-            &:before {
-                content: '#';
-                color: oklch(var(--c3));
-            }
-        }
-    }
+			&:before {
+				content: '#';
+				color: oklch(var(--c3));
+			}
+		}
+	}
 
-    .music-bookmarks-tags-item-aux-text {
-        line-height: 16px;
-        margin-top: unset;
-    }
+	.music-bookmarks-tags-item-aux-text {
+		line-height: 16px;
+		margin-top: unset;
+	}
 
-    .link-block-cover-link {
-        height: unset;
-        padding-top: unset;
-        inset: 0;
-    }
+	.link-block-cover-link {
+		height: unset;
+		padding-top: unset;
+		inset: 0;
+	}
 }
 
 .music-bookmarks-tags,
 .big-tags {
-    margin: unset !important;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: var(--item-list-gap);
+	margin: unset !important;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+	gap: var(--item-list-gap);
 
-    &:before,
-    &:after {
-        display: none;
-    }
+	&:before,
+	&:after {
+		display: none;
+	}
 }
 .music-bookmarks-tags-item-wrap,
 .big-tags-item-wrap {
-    margin: unset !important;
-    padding: unset !important;
-    width: unset !important;
+	margin: unset !important;
+	padding: unset !important;
+	width: unset !important;
 }
 
 .big-tags-item-context {
-    line-height: 16px;
-    margin-top: unset;
-    text-align: center;
+	line-height: 16px;
+	margin-top: unset;
+	text-align: center;
 
-    display: -webkit-box;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    line-clamp: 1;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
+	display: -webkit-box;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	line-clamp: 1;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
 
-    pointer-events: none;
+	pointer-events: none;
 
-    opacity: 0;
-    margin-top: -16px;
+	opacity: 0;
+	margin-top: -16px;
 
-    transition-property: opacity, margin-top;
-    transition-duration: 0.3s;
-    transition-timing-function: var(--trans-function-ani);
+	transition-property: opacity, margin-top;
+	transition-duration: 0.3s;
+	transition-timing-function: var(--trans-function-ani);
 
-    scale: 1;
+	scale: 1;
 }
 
 .big-tags-item {
-    &:hover {
-        & > .big-tags-item-context {
-            opacity: 0.7;
-            margin-top: -4px;
-        }
-    }
+	&:hover {
+		& > .big-tags-item-context {
+			opacity: 0.7;
+			margin-top: -4px;
+		}
+	}
 }

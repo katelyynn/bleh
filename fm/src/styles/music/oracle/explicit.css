@@ -1,38 +1,38 @@
 .track-explicit {
-    position: relative;
+	position: relative;
 
-    --mask: url("data:image/svg+xml;base64,PHN2ZyAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiAgd2lkdGg9IjI0IiAgaGVpZ2h0PSIyNCIgIHZpZXdCb3g9IjAgMCAyNCAyNCIgIGZpbGw9Im5vbmUiICBzdHJva2U9ImN1cnJlbnRDb2xvciIgIHN0cm9rZS13aWR0aD0iMiIgIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgIHN0cm9rZS1saW5lam9pbj0icm91bmQiICBjbGFzcz0iaWNvbiBpY29uLXRhYmxlciBpY29ucy10YWJsZXItb3V0bGluZSBpY29uLXRhYmxlci1sZXR0ZXItZS1zbWFsbCI+PHBhdGggc3Ryb2tlPSJub25lIiBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTE0IDhoLTR2OGg0IiAvPjxwYXRoIGQ9Ik0xMCAxMmgyLjUiIC8+PC9zdmc+");
-    --mask-size: 16px;
+	--mask: url("data:image/svg+xml;base64,PHN2ZyAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiAgd2lkdGg9IjI0IiAgaGVpZ2h0PSIyNCIgIHZpZXdCb3g9IjAgMCAyNCAyNCIgIGZpbGw9Im5vbmUiICBzdHJva2U9ImN1cnJlbnRDb2xvciIgIHN0cm9rZS13aWR0aD0iMiIgIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgIHN0cm9rZS1saW5lam9pbj0icm91bmQiICBjbGFzcz0iaWNvbiBpY29uLXRhYmxlciBpY29ucy10YWJsZXItb3V0bGluZSBpY29uLXRhYmxlci1sZXR0ZXItZS1zbWFsbCI+PHBhdGggc3Ryb2tlPSJub25lIiBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTE0IDhoLTR2OGg0IiAvPjxwYXRoIGQ9Ik0xMCAxMmgyLjUiIC8+PC9zdmc+");
+	--mask-size: 16px;
 
-    --left: 50%;
-    --margin-left: calc(-1 * (var(--mask-size) / 2));
+	--left: 50%;
+	--margin-left: calc(-1 * (var(--mask-size) / 2));
 
-    width: 12px;
-    height: 12px;
-    font: 0 / 0 auto;
-    display: inline-flex;
+	width: 12px;
+	height: 12px;
+	font: 0 / 0 auto;
+	display: inline-flex;
 
-    background: oklch(var(--b4));
-    border-radius: 3px;
-    color: oklch(var(--c3));
+	background: oklch(var(--b4));
+	border-radius: 3px;
+	color: oklch(var(--c3));
 
-    .chartlist-artist > & {
-        margin: 3px 4px 3px 0;
-    }
+	.chartlist-artist > & {
+		margin: 3px 4px 3px 0;
+	}
 
-    h2 > & {
-        width: 20px;
-        height: 20px;
-        border-radius: 6px;
-        --mask-size: 22px;
+	h2 > & {
+		width: 20px;
+		height: 20px;
+		border-radius: 6px;
+		--mask-size: 22px;
 
-        position: absolute;
-        top: calc((28px - 20px) / 2);
-        left: 0;
-    }
+		position: absolute;
+		top: calc((28px - 20px) / 2);
+		left: 0;
+	}
 
-    h2:has(> &) {
-        position: relative;
-        padding-left: calc(20px + 6px);
-    }
+	h2:has(> &) {
+		position: relative;
+		padding-left: calc(20px + 6px);
+	}
 }

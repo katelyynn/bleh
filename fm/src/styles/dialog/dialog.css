@@ -1,293 +1,297 @@
 @import './dialog_lfm.css';
 
 .bleh-modals {
-    position: fixed;
-    inset: 0;
-    z-index: 9998;
-    pointer-events: none;
+	position: fixed;
+	inset: 0;
+	z-index: 9998;
+	pointer-events: none;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 
-    transition-property: background;
-    transition-duration: var(--trans-short);
-    transition-timing-function: var(--trans-function);
+	transition-property: background;
+	transition-duration: var(--trans-short);
+	transition-timing-function: var(--trans-function);
 
-    &.has-dialog {
-        pointer-events: auto;
-        background: var(--modal-bg);
-    }
+	&.has-dialog {
+		pointer-events: auto;
+		background: var(--modal-bg);
+	}
 
-    .bleh-modal {
-        background: oklch(var(--b5) / var(--solarium-opacity, 90%));
-        border-radius: var(--item-big-radius);
-        box-shadow: var(--override-full-shadow, var(--overlay-shadow));
-        border: 1px solid var(--card-border-base);
-        color: oklch(var(--c2));
-        padding: var(--card-padding);
-        max-width: 800px;
-        position: relative;
-        z-index: 9999;
+	.bleh-modal {
+		background: oklch(var(--b5) / var(--solarium-opacity, 90%));
+		border-radius: var(--item-big-radius);
+		box-shadow: var(--override-full-shadow, var(--overlay-shadow));
+		border: 1px solid var(--card-border-base);
+		color: oklch(var(--c2));
+		padding: var(--card-padding);
+		max-width: 800px;
+		position: relative;
+		z-index: 9999;
 
-        backdrop-filter: var(--solarium);
-        -webkit-backdrop-filter: var(--solarium);
+		backdrop-filter: var(--solarium);
+		-webkit-backdrop-filter: var(--solarium);
 
-        display: flex;
-        flex-direction: column;
-        gap: var(--card-padding);
+		display: flex;
+		flex-direction: column;
+		gap: var(--card-padding);
 
-        animation: var(--motion, solarium 0.24s var(--trans-function));
+		animation: var(--motion, solarium 0.24s var(--trans-function));
 
-        transition-property: transform, filter, opacity;
-        transition-duration: 0.24s;
-        transition-timing-function: var(--trans-function);
+		transition-property: transform, filter, opacity;
+		transition-duration: 0.24s;
+		transition-timing-function: var(--trans-function);
 
-        max-height: 80vh;
+		max-height: 80vh;
 
-        [data-bleh--reduced_motion="true"] & {
-            transition-duration: var(--trans);
-            filter: none !important;
-            transform: unset !important;
-        }
+		[data-bleh--reduced_motion="true"] & {
+			transition-duration: var(--trans);
+			filter: none !important;
+			transform: unset !important;
+		}
 
-        &.to-remove {
-            filter: blur(calc(var(--solarium-percent) * 3px));
-            transform: scale(0.98);
-            opacity: 0;
-        }
+		&.to-remove {
+			filter: blur(calc(var(--solarium-percent) * 3px));
+			transform: scale(0.98);
+			opacity: 0;
+		}
 
-        &:not(:last-child) {
-            display: none;
-        }
+		&:not(:last-child) {
+			display: none;
+		}
 
-        &[data-modal-type="setup"] {
-            width: 1000px;
-            max-width: 80vw;
-        }
+		&[data-modal-type="setup"] {
+			width: 1000px;
+			max-width: 80vw;
+		}
 
-        &[data-modal-type="changelog"] {
-            max-width: 660px;
-            width: 100%;
-            height: 100%;
-        }
+		&[data-modal-type="changelog"] {
+			max-width: 660px;
+			width: 100%;
+			height: 100%;
+		}
 
-        &[data-modal-type="error"],
-        &[data-modal-type="sponsor"] {
-            .bleh-modal-title {
-                display: none;
-            }
-        }
+		&[data-modal-type="error"],
+		&[data-modal-type="sponsor"] {
+			.bleh-modal-title {
+				display: none;
+			}
+		}
 
-        &[data-modal-has-overlays="true"] {
-            &:before {
-                content: "";
-                position: absolute;
-                left: 0;
-                top: 0;
-                right: 0;
-                height: var(--cards-overlay-height);
-                max-height: 100%;
-                display: var(--cards-overlay-display);
+		&[data-modal-has-overlays="true"] {
+			&:before {
+				content: "";
+				position: absolute;
+				left: 0;
+				top: 0;
+				right: 0;
+				height: var(--cards-overlay-height);
+				max-height: 100%;
+				display: var(--cards-overlay-display);
 
-                background-image: var(
-                    --cards-overlay-image,
-                    unset
-                ), var(--cards-overlay) !important;
-                background-size: 100px;
-                background-repeat: repeat-x !important;
-                background-position: 0 -60px !important;
-                opacity: 0.9;
-                border-top-left-radius: var(--card-radius);
-                border-top-right-radius: var(--card-radius);
-                pointer-events: none;
+				background-image: var(
+					--cards-overlay-image,
+					unset
+				), var(--cards-overlay) !important;
+				background-size: 100px;
+				background-repeat: repeat-x !important;
+				background-position: 0 -60px !important;
+				opacity: 0.9;
+				border-top-left-radius: var(--card-radius);
+				border-top-right-radius: var(--card-radius);
+				pointer-events: none;
 
-                /* fix for no-data-message overriding and stuff */
-                margin: unset;
-                width: unset;
-            }
-        }
+				/* fix for no-data-message overriding and stuff */
+				margin: unset;
+				width: unset;
+			}
+		}
 
-        &[data-modal-type="avatar"] {
-            background: unset;
-            backdrop-filter: unset;
-            -webkit-backdrop-filter: unset;
-            padding: unset;
-            outline: unset;
-            border: unset;
-            --override-full-shadow: none;
+		&[data-modal-type="avatar"] {
+			background: unset;
+			backdrop-filter: unset;
+			-webkit-backdrop-filter: unset;
+			padding: unset;
+			outline: unset;
+			border: unset;
+			--override-full-shadow: none;
 
-            .full-avatar-wrapper {
-                display: flex;
-                flex-direction: column;
+			.full-avatar-wrapper {
+				display: flex;
+				flex-direction: column;
 
-                .full-avatar {
-                    display: inline-block;
-                    background: oklch(var(--b5));
-                    border-radius: var(--card-radius);
-                    box-shadow: var(--overlay-shadow);
-                    overflow: hidden;
-                    position: relative;
+				.full-avatar {
+					display: inline-block;
+					background: oklch(var(--b5));
+					border-radius: var(--card-radius);
+					box-shadow: var(--overlay-shadow);
+					overflow: hidden;
+					position: relative;
 
-                    max-width: 100%;
-                    max-height: 100%;
+					max-width: 100%;
+					max-height: 100%;
 
-                    & > img {
-                        display: block;
+					& > img {
+						display: block;
 
-                        max-width: 100%;
-                        max-height: 70vh;
+						max-width: 100%;
+						max-height: 70vh;
 
-                        width: auto;
-                        height: auto;
+						width: auto;
+						height: auto;
 
-                        object-fit: contain;
+						object-fit: contain;
 
-                        --mask-size: var(--cover-size-300);
-                    }
+						--mask-size: var(--cover-size-300);
+					}
 
-                    & > .alt-text {
-                        position: absolute;
-                        top: 10px;
-                        right: 10px;
-                        z-index: 20;
+					& > .alt-text {
+						position: absolute;
+						top: 10px;
+						right: 10px;
+						z-index: 20;
 
-                        background: rgb(255, 255, 255, 40%);
-                        box-shadow: 0 0 0 1px inset rgb(255, 255, 255, 10%), 0 2px 20px rgb(0, 0, 0, 10%);
-                        color: #000;
+						background: rgb(255, 255, 255, 40%);
+						box-shadow: 0 0 0 1px inset rgb(255, 255, 255, 10%), 0
+							2px 20px rgb(0, 0, 0, 10%);
+						color: #000;
 
-                        -webkit-box-orient: vertical;
-                        display: -webkit-box;
-                        -webkit-line-clamp: 1;
-                        overflow: hidden;
+						-webkit-box-orient: vertical;
+						display: -webkit-box;
+						-webkit-line-clamp: 1;
+						overflow: hidden;
 
-                        max-width: 300px;
+						max-width: 300px;
 
-                        transition-property: background;
-                        transition-duration: var(--trans);
-                        transition-timing-function: var(--trans-function);
+						transition-property: background;
+						transition-duration: var(--trans);
+						transition-timing-function: var(--trans-function);
 
-                        & > .identifier {
-                            color: #333;
-                            margin-right: 6px;
-                        }
+						& > .identifier {
+							color: #333;
+							margin-right: 6px;
+						}
 
-                        &:hover {
-                            background: rgb(255, 255, 255, 80%);
-                            transition: none;
-                        }
-                    }
-                }
+						&:hover {
+							background: rgb(255, 255, 255, 80%);
+							transition: none;
+						}
+					}
+				}
 
-                .modal-footer {
-                    background: unset;
-                    padding: unset;
-                    border: unset;
-                }
-            }
+				.modal-footer {
+					background: unset;
+					padding: unset;
+					border: unset;
+				}
+			}
 
-            .modal-close-button {
-                display: none;
-                --filter: blur(20px) contrast(40%);
-            }
-        }
-    }
+			.modal-close-button {
+				display: none;
+				--filter: blur(20px) contrast(40%);
+			}
+		}
+	}
 
-    @media (max-width: 980px) {
-        padding: var(--card-gap) var(--card-gap) calc(var(--card-gap) + 60px);
+	@media (max-width: 980px) {
+		padding: var(--card-gap) var(--card-gap) calc(var(--card-gap) + 60px);
 
-        .bleh-modal {
-            width: 96vw;
-            max-width: 96vw;
-        }
-    }
+		.bleh-modal {
+			width: 96vw;
+			max-width: 96vw;
+		}
+	}
 }
 
 .bleh-modal-title {
-    display: flex;
-    gap: var(--item-list-gap);
-    cursor: default;
-    margin-right: calc(var(--modal-close-size) + 10px);
-    z-index: 100;
-    position: relative;
+	display: flex;
+	gap: var(--item-list-gap);
+	cursor: default;
+	margin-right: calc(var(--modal-close-size) + 10px);
+	z-index: 100;
+	position: relative;
 
-    h1 {
-        margin: unset;
-        color: oklch(var(--c1));
-        font-size: 16px;
-        line-height: 20px;
-        font-weight: var(--font-weight-medium);
-        letter-spacing: unset;
-        text-align: left;
-    }
+	h1 {
+		margin: unset;
+		color: oklch(var(--c1));
+		font-size: 16px;
+		line-height: 20px;
+		font-weight: var(--font-weight-medium);
+		letter-spacing: unset;
+		text-align: left;
+	}
 
-    .bleh-modal-subtitle {
-        color: oklch(var(--c3));
-        line-height: 20px;
-    }
+	.bleh-modal-subtitle {
+		color: oklch(var(--c3));
+		line-height: 20px;
+	}
 
-    @media (max-width: 980px) {
-        margin-left: calc(var(--modal-close-size) + 10px);
-        justify-content: center;
-    }
+	@media (max-width: 980px) {
+		margin-left: calc(var(--modal-close-size) + 10px);
+		justify-content: center;
+	}
 }
 
 .modal-close-button {
-    --bg: transparent;
-    --bg-hov: var(--modal-button-hov);
-    --bg-atv: var(--modal-button-atv);
-    --shadow: none;
-    --col: oklch(var(--c3));
-    --mask-colour: currentColor;
-    --font-size: 0;
-    position: absolute;
-    top: calc(var(--card-padding) - ((var(--modal-close-size) - 20px) / 2));
-    right: calc(var(--card-padding) - ((var(--modal-close-size) - 20px) / 2));
-    --icon-size: 16px;
-    --left: calc((var(--modal-close-size) - var(--icon-size)) / 2);
-    width: var(--modal-close-size);
-    height: var(--modal-close-size);
-    z-index: 100;
+	--bg: transparent;
+	--bg-hov: var(--modal-button-hov);
+	--bg-atv: var(--modal-button-atv);
+	--shadow: none;
+	--col: oklch(var(--c3));
+	--mask-colour: currentColor;
+	--font-size: 0;
+	position: absolute;
+	top: calc(var(--card-padding) - ((var(--modal-close-size) - 20px) / 2));
+	right: calc(var(--card-padding) - ((var(--modal-close-size) - 20px) / 2));
+	--icon-size: 16px;
+	--left: calc((var(--modal-close-size) - var(--icon-size)) / 2);
+	width: var(--modal-close-size);
+	height: var(--modal-close-size);
+	z-index: 100;
 }
 
 .bleh-modal-body {
-    & > :first-child {
-        margin-top: unset;
-    }
+	& > :first-child {
+		margin-top: unset;
+	}
 
-    & > img {
-        width: 100%;
-        border-radius: var(--item-big-radius);
-        box-shadow: var(--card-shadow);
-        max-width: 560px;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-    }
+	& > img {
+		width: 100%;
+		border-radius: var(--item-big-radius);
+		box-shadow: var(--card-shadow);
+		max-width: 560px;
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+	}
 
-    & > .sep {
-        margin: var(--card-gap) 0;
-    }
+	& > .sep {
+		margin: var(--card-gap) 0;
+	}
 
-    & > p:not(.big-modal-alert, .card-tip) {
-        max-width: 430px;
-    }
+	& > p:not(.big-modal-alert, .card-tip) {
+		max-width: 430px;
+	}
 }
 
 .bleh-modal-body[data-allow-scroll="true"],
 .modal-inner-content.allow-scroll {
-    max-height: 80vh;
-    padding: calc(var(--card-padding) * 2) var(--card-padding) var(--card-padding) var(--card-padding);
-    margin: calc(-1 * (var(--card-padding) * 2)) calc(-1 * var(--card-padding)) calc(-1 * var(--card-padding)) calc(-1 * var(--card-padding)) !important;
-    overflow-y: hidden;
+	max-height: 80vh;
+	padding: calc(var(--card-padding) * 2) var(--card-padding)
+		var(--card-padding) var(--card-padding);
+	margin: calc(-1 * (var(--card-padding) * 2)) calc(-1 * var(--card-padding))
+		calc(-1 * var(--card-padding)) calc(-1 * var(--card-padding))
+		!important;
+	overflow-y: hidden;
 
-    border-radius: var(--item-big-radius);
+	border-radius: var(--item-big-radius);
 
-    &:hover {
-        overflow-y: auto;
-    }
+	&:hover {
+		overflow-y: auto;
+	}
 
-    --bg-mask: linear-gradient(0deg, white 96%, transparent);
-    mask-image: var(--bg-mask);
-    -webkit-mask-image: var(--bg-mask);
+	--bg-mask: linear-gradient(0deg, white 96%, transparent);
+	mask-image: var(--bg-mask);
+	-webkit-mask-image: var(--bg-mask);
 }

@@ -1,72 +1,87 @@
-import { html } from "lighterhtml";
-import tippy from "tippy.js";
-import { tl, trans, translation_fallback } from "@/build/trans";
-import { notify } from "./notify";
-import { log } from "@/build/log";
-import { save_setting } from "@/components/settings/settings";
-import { settings } from "@/build/config";
+import { html } from 'lighterhtml';
+import tippy from 'tippy.js';
+import { tl, trans, translation_fallback } from '@/build/trans';
+import { notify } from './notify';
+import { log } from '@/build/log';
+import { save_setting } from '@/components/settings/settings';
+import { settings } from '@/build/config';
 
 export let popup_queue = [];
 
 export function queue_popup(key, host, prefer = 'top') {
-    if (!host || !host.offsetParent) {
-        log(`skipped adding ${key} as the host is not accessible (probably intentional)`, 'popup', 'info', { key, host });
-        return;
-    }
+	if (!host || !host.offsetParent) {
+		log(
+			`skipped adding ${key} as the host is not accessible (probably intentional)`,
+			'popup',
+			'info',
+			{ key, host },
+		);
+		return;
+	}
 
-    if (settings.popups_seen.includes(key)) {
-        log(`skipped adding ${key} as popup has previously been dismissed`, 'popup', 'info', { key, host });
-        return;
-    }
+	if (settings.popups_seen.includes(key)) {
+		log(
+			`skipped adding ${key} as popup has previously been dismissed`,
+			'popup',
+			'info',
+			{ key, host },
+		);
+		return;
+	}
 
-    popup_queue.push({ key, host, prefer });
+	popup_queue.push({ key, host, prefer });
 
-    check_queue();
+	check_queue();
 }
 
 export function clear_popup_queue() {
-    popup_queue = [];
+	popup_queue = [];
 }
 
 function check_queue() {
-    const first = popup_queue[0];
-    if (!first) return;
+	const first = popup_queue[0];
+	if (!first) return;
 
-    if (first.visible) return;
+	if (first.visible) return;
 
-    popup(first);
+	popup(first);
 }
 
 function popup(instance) {
-    const key = instance.key;
-    const host = instance.host;
-    const prefer = instance.prefer;
+	const key = instance.key;
+	const host = instance.host;
+	const prefer = instance.prefer;
 
-    const title = tl(trans[`popup_${key}`]?.title);
-    const body = tl(trans[`popup_${key}`]?.body);
+	const title = tl(trans[`popup_${key}`]?.title);
+	const body = tl(trans[`popup_${key}`]?.body);
 
-    if ([title, body].includes(translation_fallback)) {
-        log(`popup_${key} not found in translations`, 'popup', 'error', { title, body, key, host });
+	if ([title, body].includes(translation_fallback)) {
+		log(`popup_${key} not found in translations`, 'popup', 'error', {
+			title,
+			body,
+			key,
+			host,
+		});
 
-        notify({
-            id: 'popup_not_found',
-            title: tl(trans.value_failed_to_load, { v: `${key} (popup)` }),
-            body: `Missing title and/or body for translation key popup_${key}`,
-            type: 'error'
-        });
-        popup_queue = popup_queue.filter(i => i.key != key);
-        check_queue();
+		notify({
+			id: 'popup_not_found',
+			title: tl(trans.value_failed_to_load, { v: `${key} (popup)` }),
+			body: `Missing title and/or body for translation key popup_${key}`,
+			type: 'error',
+		});
+		popup_queue = popup_queue.filter((i) => i.key != key);
+		check_queue();
 
-        return;
-    }
+		return;
+	}
 
-    log(`registered for ${key}`, 'popup', 'info', { title, body, key, host });
+	log(`registered for ${key}`, 'popup', 'info', { title, body, key, host });
 
-    instance.visible = true;
+	instance.visible = true;
 
-    const tooltip = tippy(host, {
-        theme: 'popup',
-        content: html.node`
+	const tooltip = tippy(host, {
+		theme: 'popup',
+		content: html.node`
             <div class="popup-content">
                 <small class="popup-sub">${tl(trans.tip)}</small>
                 <strong class="popup-title">${title}</strong>
@@ -74,36 +89,36 @@ function popup(instance) {
             </div>
             <div class="popup-action">
                 <button class="see-more" onclick=${() => {
-                    popup_queue = popup_queue.filter(i => i.key != key);
-                    tooltip.hide();
+			popup_queue = popup_queue.filter((i) => i.key != key);
+			tooltip.hide();
 
-                    settings.popups_seen.push(key);
-                    save_setting('popups_seen', settings.popups_seen);
+			settings.popups_seen.push(key);
+			save_setting('popups_seen', settings.popups_seen);
 
-                    setTimeout(() => {
-                        tooltip.destroy();
-                    }, 500);
+			setTimeout(() => {
+				tooltip.destroy();
+			}, 500);
 
-                    check_queue();
-                }}>
+			check_queue();
+		}}>
                     ${tl(trans.got_it)}
                 </button>
             </div>
         `,
-        interactive: true,
-        hideOnClick: false,
-        appendTo: document.body,
-        aria: {
-            expanded: false
-        },
-        trigger: 'manual',
-        zIndex: 998,
-        placement: prefer
-    });
+		interactive: true,
+		hideOnClick: false,
+		appendTo: document.body,
+		aria: {
+			expanded: false,
+		},
+		trigger: 'manual',
+		zIndex: 998,
+		placement: prefer,
+	});
 
-    tooltip.show();
+	tooltip.show();
 
-    host.scrollIntoView({
-        block: 'center'
-    });
+	host.scrollIntoView({
+		block: 'center',
+	});
 }

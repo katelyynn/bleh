@@ -1,6 +1,6 @@
 .grid-items-cover-image-image img {
-    --mask-size: var(--cover-size-200);
-    font: 0/0 auto;
+	--mask-size: var(--cover-size-200);
+	font: 0/0 auto;
 }
 
 .glacier-library-metadata-avatar,
@@ -12,31 +12,30 @@
 .similar-items-sidebar-item-image,
 .artist-similar-artists-sidebar-item-image,
 .column-tracks-item-image {
-    &:after {
-        content: "" !important;
-        display: block !important;
-        position: absolute;
-        inset: 0;
-        background-image: var(--gloss-image) !important;
-        background-size: 100% !important;
-        opacity: var(--gloss);
-        mix-blend-mode: var(--gloss-mix);
-        pointer-events: none;
-        padding: unset !important;
-        box-shadow: unset !important;
-        border-radius: inherit;
-    }
+	&:after {
+		content: "" !important;
+		display: block !important;
+		position: absolute;
+		inset: 0;
+		background-image: var(--gloss-image) !important;
+		background-size: 100% !important;
+		opacity: var(--gloss);
+		mix-blend-mode: var(--gloss-mix);
+		pointer-events: none;
+		padding: unset !important;
+		box-shadow: unset !important;
+		border-radius: inherit;
+	}
 }
 .catalogue-overview-similar-artists-item-image img,
 .artist-similar-artists-sidebar-item-image img,
 .cover-art > img,
 .similar-items-sidebar-item-image img,
-:is(.music-bookmarks-artists-item-image, .music-bookmarks-albums-item-image)
-    img {
-    position: static;
-    aspect-ratio: 1 / 1;
-    display: block; /* requires when image fails to load */
-    color: oklch(var(--c3));
+:is(.music-bookmarks-artists-item-image, .music-bookmarks-albums-item-image) img {
+	position: static;
+	aspect-ratio: 1 / 1;
+	display: block; /* requires when image fails to load */
+	color: oklch(var(--c3));
 }
 
 .big-artist-list-avatar-desktop,
@@ -44,30 +43,29 @@
 .source-album-art > .cover-art,
 .track-similar-tracks-item-image,
 .similar-items-sidebar-item-image {
-    border-radius: var(--item-big-radius);
-    box-shadow: var(--subtle-shadow);
-    overflow: hidden;
-    background: var(--avatar-generic-background);
+	border-radius: var(--item-big-radius);
+	box-shadow: var(--subtle-shadow);
+	overflow: hidden;
+	background: var(--avatar-generic-background);
 }
 .artist-similar-artists-sidebar-item-image > img {
-    border-radius: unset;
+	border-radius: unset;
 }
 
 .artist-similar-artists-sidebar-item-image {
-    --mask-size: var(--cover-size-100);
+	--mask-size: var(--cover-size-100);
 }
-
 
 /* more specific selector to override */
 button.lfmmaf-missing-artwork-button {
-    position: relative;
-    --bg: transparent;
-    --bg-hov: oklch(var(--b6), 20%);
-    --bg-atv: oklch(var(--b6), 40%);
-    --shadow: none;
-    --mask: var(--icon-16-plus);
+	position: relative;
+	--bg: transparent;
+	--bg-hov: oklch(var(--b6), 20%);
+	--bg-atv: oklch(var(--b6), 40%);
+	--shadow: none;
+	--mask: var(--icon-16-plus);
 
-    & > img {
-        display: none !important;
-    }
+	& > img {
+		display: none !important;
+	}
 }

@@ -1,12 +1,12 @@
 .oracle-tracklist-view {
-    & > .oracle-tracklist {
-        display: none;
-    }
+	& > .oracle-tracklist {
+		display: none;
+	}
 
-    &[data-view="oracle"] > .oracle-tracklist[data-type="oracle"],
-    &[data-view="own"] > .oracle-tracklist[data-type="own"],
-    &[data-view="lastfm"] > .oracle-tracklist[data-type="lfm"] {
-        display: flex !important;
-        flex-direction: column;
-    }
+	&[data-view="oracle"] > .oracle-tracklist[data-type="oracle"],
+	&[data-view="own"] > .oracle-tracklist[data-type="own"],
+	&[data-view="lastfm"] > .oracle-tracklist[data-type="lfm"] {
+		display: flex !important;
+		flex-direction: column;
+	}
 }

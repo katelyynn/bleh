@@ -1,235 +1,238 @@
 .present-badge-window {
-    cursor: default;
+	cursor: default;
 
-    min-width: 320px;
-    padding: var(--card-padding) 40px;
-    overflow: hidden;
-    background: oklch(var(--b5));
-    border-radius: var(--item-big-radius);
+	min-width: 320px;
+	padding: var(--card-padding) 40px;
+	overflow: hidden;
+	background: oklch(var(--b5));
+	border-radius: var(--item-big-radius);
 
-    position: relative;
+	position: relative;
 
-    text-shadow: 0 2px 5px oklch(var(--b6) / 40%);
+	text-shadow: 0 2px 5px oklch(var(--b6) / 40%);
 
-    &:before {
-        content: '';
-        position: absolute;
-        inset: 0 -100px;
-        pointer-events: none;
-        background: radial-gradient(at center top, oklch(var(--f4) / 70%), oklch(var(--f5) / 10%) 67%);
-        border-radius: inherit;
+	&:before {
+		content: '';
+		position: absolute;
+		inset: 0 -100px;
+		pointer-events: none;
+		background: radial-gradient(at center top, oklch(var(--f4) / 70%),
+			oklch(var(--f5) / 10%) 67%);
+		border-radius: inherit;
 
-        z-index: 1;
-    }
+		z-index: 1;
+	}
 
-    &:after {
-        content: '';
-        position: absolute;
-        inset: 3px;
-        box-shadow: inset 0 0 0 2px oklch(var(--l3-c) / 15%);
-        border-radius: calc(var(--item-big-radius) - 5px);
+	&:after {
+		content: '';
+		position: absolute;
+		inset: 3px;
+		box-shadow: inset 0 0 0 2px oklch(var(--l3-c) / 15%);
+		border-radius: calc(var(--item-big-radius) - 5px);
 
-        --mask: linear-gradient(180deg, transparent 10%, white);
-        mask-image: var(--mask);
-        -webkit-mask-image: var(--mask);
+		--mask: linear-gradient(180deg, transparent 10%, white);
+		mask-image: var(--mask);
+		-webkit-mask-image: var(--mask);
 
-        z-index: 2;
-    }
+		z-index: 2;
+	}
 }
 
 .present-badge-head {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    z-index: 10;
-    position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	z-index: 10;
+	position: relative;
 
-    z-index: 3;
+	z-index: 3;
 }
 .present-badge-avatar {
-    width: 24px;
-    height: 24px;
-    background: var(--avatar-generic-background);
-    --mask-size: 14px;
+	width: 24px;
+	height: 24px;
+	background: var(--avatar-generic-background);
+	--mask-size: 14px;
 }
 
 .present-badge-inner {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 50px 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	padding: 50px 0;
 }
 
 .present-badge-top {
-    margin-bottom: 20px;
+	margin-bottom: 20px;
 
-    z-index: 10;
+	z-index: 10;
 }
 
 .present-badge {
-    --icon-size: 100px;
-    filter: drop-shadow(0 6px 2px oklch(var(--f4) / 60%));
+	--icon-size: 100px;
+	filter: drop-shadow(0 6px 2px oklch(var(--f4) / 60%));
 }
 
 .present-badge-icon {
-    --icon: var(--mask);
-    background: radial-gradient(at center, oklch(var(--l3-c)) 40%, oklch(var(--l4-c)));
+	--icon: var(--mask);
+	background: radial-gradient(at center, oklch(var(--l3-c)) 40%,
+		oklch(var(--l4-c)));
 }
 
 .present-badge-name {
-    font-size: 18px;
-    line-height: 22px;
-    font-weight: var(--font-weight-medium);
-    color: oklch(var(--l3-c));
-    position: relative;
-    max-width: 240px;
+	font-size: 18px;
+	line-height: 22px;
+	font-weight: var(--font-weight-medium);
+	color: oklch(var(--l3-c));
+	position: relative;
+	max-width: 240px;
 
-    /*&:before {
-        content: var(--name);
-        position: absolute;
-        inset: -100px;
-        font-family: var(--font-head);
-        font-size: 32px;
-        line-height: 32px;
+	/*&:before {
+	    content: var(--name);
+	    position: absolute;
+	    inset: -100px;
+	    font-family: var(--font-head);
+	    font-size: 32px;
+	    line-height: 32px;
 
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: -20px;
+	    display: flex;
+	    justify-content: center;
+	    align-items: center;
+	    margin-top: -20px;
 
-        opacity: 0.2;
+	    opacity: 0.2;
 
-        transform: scaleY(4);
-        }*/
+	    transform: scaleY(4);
+	    }*/
 }
 .present-badge-reason {
-    margin-top: 4px;
-    color: oklch(var(--c2));
+	margin-top: 4px;
+	color: oklch(var(--c2));
 }
 
 .present-badge-bottom {
-    margin-top: 30px;
-    border-top: 2px solid var(--separator-base);
-    padding-top: 10px;
-    width: 100%;
+	margin-top: 30px;
+	border-top: 2px solid var(--separator-base);
+	padding-top: 10px;
+	width: 100%;
 
-    display: flex;
-    justify-content: center;
-    text-align: center;
+	display: flex;
+	justify-content: center;
+	text-align: center;
 
-    z-index: 3;
+	z-index: 3;
 }
 .present-badge-type {
-    font-size: 13px;
-    color: oklch(var(--c3));
-    max-width: 240px;
-    text-align: center;
+	font-size: 13px;
+	color: oklch(var(--c3));
+	max-width: 240px;
+	text-align: center;
 }
 .present-badge-count {
-    font-size: 13px;
-    color: oklch(var(--c3));
-    max-width: 240px;
+	font-size: 13px;
+	color: oklch(var(--c3));
+	max-width: 240px;
 }
 
 .bleh-modal[data-modal-type="badge"] {
-    background: unset;
-    backdrop-filter: unset;
-    -webkit-backdrop-filter: unset;
-    padding: unset;
-    outline: unset;
-    border: unset;
-    box-shadow: unset !important;
+	background: unset;
+	backdrop-filter: unset;
+	-webkit-backdrop-filter: unset;
+	padding: unset;
+	outline: unset;
+	border: unset;
+	box-shadow: unset !important;
 
-    & > .modal-close-button,
-    & > .bleh-modal-title {
-        display: none;
-    }
+	& > .modal-close-button,
+	& > .bleh-modal-title {
+		display: none;
+	}
 }
 
 .present-badge-actions {
-    margin-top: 30px;
-    display: flex;
-    justify-content: center;
+	margin-top: 30px;
+	display: flex;
+	justify-content: center;
 
-    z-index: 3;
+	z-index: 3;
 }
 
 .present-badge-hyper-card {
-    position: static;
-    display: block;
-    border-radius: var(--card-radius) !important;
-    box-shadow: 0 20px 60px oklch(var(--f5) / 15%), var(--override-full-shadow, var(--overlay-shadow));
+	position: static;
+	display: block;
+	border-radius: var(--card-radius) !important;
+	box-shadow: 0 20px 60px oklch(var(--f5) / 15%), var(--override-full-shadow,
+		var(--overlay-shadow));
 
-    --hypercard-glow-opacity: 0.06;
-    --hypercard-scale: 1.04;
+	--hypercard-glow-opacity: 0.06;
+	--hypercard-scale: 1.04;
 
-    user-select: none;
-    scale: 1;
+	user-select: none;
+	scale: 1;
 }
 
 .present-badge-corner {
-    --corner: 15px;
-    --size: 15px;
-    --w: 3px;
-    --r: 8px;
-    --c: oklch(var(--l3-c) / 20%);
-    z-index: 4;
+	--corner: 15px;
+	--size: 15px;
+	--w: 3px;
+	--r: 8px;
+	--c: oklch(var(--l3-c) / 20%);
+	z-index: 4;
 
-    position: absolute;
-    top: var(--corner);
-    width: var(--size);
-    height: var(--size);
-    border-top: var(--w) solid var(--c);
+	position: absolute;
+	top: var(--corner);
+	width: var(--size);
+	height: var(--size);
+	border-top: var(--w) solid var(--c);
 
-    &.corner-left {
-        left: var(--corner);
-        border-left: var(--w) solid var(--c);
-        border-top-left-radius: var(--r);
-    }
+	&.corner-left {
+		left: var(--corner);
+		border-left: var(--w) solid var(--c);
+		border-top-left-radius: var(--r);
+	}
 
-    &.corner-right {
-        right: var(--corner);
-        border-right: var(--w) solid var(--c);
-        border-top-right-radius: var(--r);
-    }
+	&.corner-right {
+		right: var(--corner);
+		border-right: var(--w) solid var(--c);
+		border-top-right-radius: var(--r);
+	}
 }
 
 .present-badge-avatar-back {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 0;
 
-    height: 200px;
-    overflow: hidden;
+	height: 200px;
+	overflow: hidden;
 
-    border-radius: inherit;
+	border-radius: inherit;
 
-    mix-blend-mode: multiply;
+	mix-blend-mode: multiply;
 
-    --mask: linear-gradient(180deg, white, transparent);
-    mask-image: var(--mask);
-    -webkit-mask-image: var(--mask);
+	--mask: linear-gradient(180deg, white, transparent);
+	mask-image: var(--mask);
+	-webkit-mask-image: var(--mask);
 
-    & > img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
+	& > img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
 }
 
 .present-badge-type-indicator {
-    margin-bottom: 20px;
-    font-size: 16px;
-    line-height: 20px;
-    text-align: center;
-    font-weight: var(--font-weight-bold);
-    color: oklch(var(--l3-c));
-    text-shadow: 0 2px 6px oklch(var(--l4-c) / 50%);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    padding: 0 20px;
+	margin-bottom: 20px;
+	font-size: 16px;
+	line-height: 20px;
+	text-align: center;
+	font-weight: var(--font-weight-bold);
+	color: oklch(var(--l3-c));
+	text-shadow: 0 2px 6px oklch(var(--l4-c) / 50%);
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	padding: 0 20px;
 }

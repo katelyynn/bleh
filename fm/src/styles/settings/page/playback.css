@@ -1,25 +1,25 @@
 .lotus-preview {
-    display: flex;
-    gap: calc(20px + 24px);
-    justify-content: center;
+	display: flex;
+	gap: calc(20px + 24px);
+	justify-content: center;
 
-    .lotus-preview-inner {
-        &.before {
-            position: relative;
-            --left: none;
-            --right: -34px;
-            --margin-top: -12px;
-            --mask-size: 24px;
-            --mask: var(--icon-16-arrow-right);
+	.lotus-preview-inner {
+		&.before {
+			position: relative;
+			--left: none;
+			--right: -34px;
+			--margin-top: -12px;
+			--mask-size: 24px;
+			--mask: var(--icon-16-arrow-right);
 
-            .lotus-preview-header,
-            .lotus-preview-sub {
-                opacity: 0.8;
-            }
-        }
+			.lotus-preview-header,
+			.lotus-preview-sub {
+				opacity: 0.8;
+			}
+		}
 
-        .lotus-preview-sub {
-            margin: unset !important;
-        }
-    }
+		.lotus-preview-sub {
+			margin: unset !important;
+		}
+	}
 }

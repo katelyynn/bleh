@@ -1,191 +1,192 @@
 .page-banner {
-    position: absolute;
-    inset: 0 0 0 50%;
-    z-index: -4;
+	position: absolute;
+	inset: 0 0 0 50%;
+	z-index: -4;
 
-    --header-size: 180px;
+	--header-size: 180px;
 
-    --w: 1300px;
-    --h: calc(99px + var(--tab-size) + var(--header-size));
+	--w: 1300px;
+	--h: calc(99px + var(--tab-size) + var(--header-size));
 
-    &[data-page-type="events"], &[data-page-type="festival"],
-    &[data-page-type="tag"],
-    &[data-page-type="search"] {
-        --header-size: 58px;
-    }
+	&[data-page-type="events"],
+	&[data-page-type="festival"],
+	&[data-page-type="tag"],
+	&[data-page-type="search"] {
+		--header-size: 58px;
+	}
 
-    &[data-page-type="bleh_now"],
-    &[data-page-subpage="obsessions_obsession"],
-    &[data-page-type="api"],
-    &[data-page-type="bleh_setup"] {
-        display: none;
-    }
+	&[data-page-type="bleh_now"],
+	&[data-page-subpage="obsessions_obsession"],
+	&[data-page-type="api"],
+	&[data-page-type="bleh_setup"] {
+		display: none;
+	}
 
-    height: var(--h);
-    width: var(--w);
-    margin-left: calc(-1 * (var(--w) / 2));
+	height: var(--h);
+	width: var(--w);
+	margin-left: calc(-1 * (var(--w) / 2));
 
-    border-bottom-left-radius: var(--card-radius);
-    border-bottom-right-radius: var(--card-radius);
+	border-bottom-left-radius: var(--card-radius);
+	border-bottom-right-radius: var(--card-radius);
 
-    overflow: hidden;
+	overflow: hidden;
 
-    will-change: transform;
-    transform: translateZ(0);
-    backface-visibility: hidden;
+	will-change: transform;
+	transform: translateZ(0);
+	backface-visibility: hidden;
 
-    @media (max-width: 980px) {
-        --w: var(--cards-width);
-        --header-size: 80px;
-        opacity: 0.8;
+	@media (max-width: 980px) {
+		--w: var(--cards-width);
+		--header-size: 80px;
+		opacity: 0.8;
 
-        --mask: linear-gradient(180deg, white, transparent) !important;
-        mask-image: var(--mask);
-        -webkit-mask-image: var(--mask);
-    }
+		--mask: linear-gradient(180deg, white, transparent) !important;
+		mask-image: var(--mask);
+		-webkit-mask-image: var(--mask);
+	}
 
-    --mask: linear-gradient(0deg, rgba(255, 255, 255, 0.6) 0%, white 20%);
-    mask-image: var(--mask);
-    -webkit-mask-image: var(--mask);
+	--mask: linear-gradient(0deg, rgba(255, 255, 255, 0.6) 0%, white 20%);
+	mask-image: var(--mask);
+	-webkit-mask-image: var(--mask);
 
-    contain: strict;
+	contain: strict;
 
-    &:before {
-        content: '';
-        position: absolute;
-        inset: 0;
+	&:before {
+		content: '';
+		position: absolute;
+		inset: 0;
 
-        background: oklch(var(--b6));
+		background: oklch(var(--b6));
 
-        transition-property: background;
-        transition-duration: var(--trans);
-        transition-timing-function: var(--trans-function);
+		transition-property: background;
+		transition-duration: var(--trans);
+		transition-timing-function: var(--trans-function);
 
-        --mask: linear-gradient(90deg, transparent 0%, white 40%, white 60%, transparent 100%);
-        mask-image: var(--mask);
-        -webkit-mask-image: var(--mask);
-    }
+		--mask: linear-gradient(90deg, transparent 0%, white 40%, white 60%, transparent 100%);
+		mask-image: var(--mask);
+		-webkit-mask-image: var(--mask);
+	}
 }
 .background-inner {
-    position: absolute;
-    inset: 0;
-    background-position: center;
-    background-size: 100%;
-    background-repeat: no-repeat;
+	position: absolute;
+	inset: 0;
+	background-position: center;
+	background-size: 100%;
+	background-repeat: no-repeat;
 
-    --mask: linear-gradient(90deg, transparent 0%, white 40%, white 60%, transparent 100%);
-    mask-image: var(--mask);
-    -webkit-mask-image: var(--mask);
+	--mask: linear-gradient(90deg, transparent 0%, white 40%, white 60%, transparent 100%);
+	mask-image: var(--mask);
+	-webkit-mask-image: var(--mask);
 
-    opacity: 0.8;
+	opacity: 0.8;
 
-    &:before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: var(--banner-overlay);
-        mix-blend-mode: var(--banner-mix);
-    }
+	&:before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: var(--banner-overlay);
+		mix-blend-mode: var(--banner-mix);
+	}
 
-    @media (max-width: 980px) {
-        --mask: none !important;
-    }
+	@media (max-width: 980px) {
+		--mask: none !important;
+	}
 
-    @media (max-width: 980px) {
-      background-size: cover;
-    }
+	@media (max-width: 980px) {
+		background-size: cover;
+	}
 }
 
 .bleh-background {
-    position: absolute;
-    inset: 0;
-    z-index: -5;
+	position: absolute;
+	inset: 0;
+	z-index: -5;
 
-    opacity: 0;
-    height: var(--banner-height);
+	opacity: 0;
+	height: var(--banner-height);
 
-    will-change: opacity, transform, filter;
-    transform: translateZ(0);
-    backface-visibility: hidden;
+	will-change: opacity, transform, filter;
+	transform: translateZ(0);
+	backface-visibility: hidden;
 
-    contain: strict;
+	contain: strict;
 
-    &.ready {
-        opacity: 0.4;
-        animation: banner 0.5s var(--trans-function-ani);
-        transition: none !important;
+	&.ready {
+		opacity: 0.4;
+		animation: banner 0.5s var(--trans-function-ani);
+		transition: none !important;
 
-        &[data-page-type="bleh_now"] {
-            opacity: 0.6;
-        }
-    }
+		&[data-page-type="bleh_now"] {
+			opacity: 0.6;
+		}
+	}
 
-    transition-property: opacity;
-    transition-duration: 0.5s;
-    transition-timing-function: var(--trans-function-ani);
+	transition-property: opacity;
+	transition-duration: 0.5s;
+	transition-timing-function: var(--trans-function-ani);
 
-    &:after {
-        content: "";
-        position: absolute;
-        inset: 0;
+	&:after {
+		content: "";
+		position: absolute;
+		inset: 0;
 
-        background-color: oklch(var(--b6)) !important;
-        --mask: linear-gradient(180deg, transparent, white);
-        mask-image: var(--mask);
-        -webkit-mask: var(--mask);
+		background-color: oklch(var(--b6)) !important;
+		--mask: linear-gradient(180deg, transparent, white);
+		mask-image: var(--mask);
+		-webkit-mask: var(--mask);
 
-        transition-property: background-color;
-        transition-duration: var(--trans);
-        transition-timing-function: var(--trans-function);
+		transition-property: background-color;
+		transition-duration: var(--trans);
+		transition-timing-function: var(--trans-function);
 
-        z-index: 20;
-    }
+		z-index: 20;
+	}
 
-    &[data-page-type="user"] {
-        &[data-page-subpage="obsessions_obsession"] {
-            height: 700px;
-        }
-    }
+	&[data-page-type="user"] {
+		&[data-page-subpage="obsessions_obsession"] {
+			height: 700px;
+		}
+	}
 
-    &:before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: var(--background-overlay);
-        mix-blend-mode: var(--background-mix-mode);
+	&:before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		background: var(--background-overlay);
+		mix-blend-mode: var(--background-mix-mode);
 
-        z-index: 10;
-    }
+		z-index: 10;
+	}
 
-    &[data-page-type="api"],
-    &[data-page-type="error"] {
-        height: 450px;
-    }
+	&[data-page-type="api"],
+	&[data-page-type="error"] {
+		height: 450px;
+	}
 }
 
 @keyframes banner {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 0.4;
-    }
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 0.4;
+	}
 }
 
 .page-background-image {
-    position: absolute;
-    inset: 0;
+	position: absolute;
+	inset: 0;
 }
 
 .page-background-image-inner {
-    position: absolute;
-    inset: 0;
-    background-position: center 60%;
-    background-size: cover;
+	position: absolute;
+	inset: 0;
+	background-position: center 60%;
+	background-size: cover;
 
-    scale: 1.2;
+	scale: 1.2;
 }
 
 .katsune-bleh-background-border {
-    display: none;
+	display: none;
 }

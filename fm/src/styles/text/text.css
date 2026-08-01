@@ -1,184 +1,184 @@
 .sub-text {
-    color: oklch(var(--c3));
-    font-size: var(--font-size);
-    line-height: var(--line-height);
-    font-weight: var(--font-weight);
-    cursor: default;
+	color: oklch(var(--c3));
+	font-size: var(--font-size);
+	line-height: var(--line-height);
+	font-weight: var(--font-weight);
+	cursor: default;
 
-    &.no-margin {
-        margin: unset;
-    }
+	&.no-margin {
+		margin: unset;
+	}
 
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
 
-    &.normal {
-        flex-direction: row !important;
-        justify-content: unset !important;
-        align-items: center;
-        gap: 4px !important;
+	&.normal {
+		flex-direction: row !important;
+		justify-content: unset !important;
+		align-items: center;
+		gap: 4px !important;
 
-        --icon-size: 14px;
-    }
+		--icon-size: 14px;
+	}
 
-    .has-icon {
-        display: flex;
-        align-items: center;
-        gap: 4px !important;
+	.has-icon {
+		display: flex;
+		align-items: center;
+		gap: 4px !important;
 
-        --icon-size: 14px;
-    }
+		--icon-size: 14px;
+	}
 
-    /* see .this-month */
-    & > .see-more {
-        --col: oklch(var(--c3));
-        --mask-colour: oklch(var(--c3) / 80%);
-    }
+	/* see .this-month */
+	& > .see-more {
+		--col: oklch(var(--c3));
+		--mask-colour: oklch(var(--c3) / 80%);
+	}
 
-    @media (max-width: 980px) {
-        flex-direction: column;
-        justify-content: unset;
-    }
+	@media (max-width: 980px) {
+		flex-direction: column;
+		justify-content: unset;
+	}
 
-    &.space-below {
-        margin-bottom: var(--card-gap);
-    }
+	&.space-below {
+		margin-bottom: var(--card-gap);
+	}
 
-    .prominent {
-        color: oklch(var(--c1));
-        font-size: 16px;
-        line-height: 17px;
-        font-weight: var(--font-weight-medium);
-    }
+	.prominent {
+		color: oklch(var(--c1));
+		font-size: 16px;
+		line-height: 17px;
+		font-weight: var(--font-weight-medium);
+	}
 
-    .wiki-edit-small {
-        --mask: var(--icon-16-edit-mini);
-        text-transform: lowercase;
-    }
-    .read-more {
-        --mask: var(--icon-16-arrow-right);
-    }
+	.wiki-edit-small {
+		--mask: var(--icon-16-edit-mini);
+		text-transform: lowercase;
+	}
+	.read-more {
+		--mask: var(--icon-16-arrow-right);
+	}
 
-    .wiki-edit-small,
-    .read-more {
-        position: relative;
-        --mask-size: 12px;
-        --margin-top: -6px;
-        padding-right: calc(12px + 4px);
-        --left: none;
-        --right: 0;
+	.wiki-edit-small,
+	.read-more {
+		position: relative;
+		--mask-size: 12px;
+		--margin-top: -6px;
+		padding-right: calc(12px + 4px);
+		--left: none;
+		--right: 0;
 
-        &:not(:hover) {
-            color: inherit;
-        }
-    }
+		&:not(:hover) {
+			color: inherit;
+		}
+	}
 
-    .wiki-edit-small:not(:hover),
-    .read-more:not(:hover) {
-        color: inherit;
-    }
+	.wiki-edit-small:not(:hover),
+	.read-more:not(:hover) {
+		color: inherit;
+	}
 
-    .right-links {
-        display: flex;
-        gap: var(--card-gap);
-    }
+	.right-links {
+		display: flex;
+		gap: var(--card-gap);
+	}
 
-    p {
-        margin: unset;
-    }
+	p {
+		margin: unset;
+	}
 
-    .breadcrumb {
-        display: flex;
-        gap: 0 16px;
+	.breadcrumb {
+		display: flex;
+		gap: 0 16px;
 
-        .breadcrumb-origin,
-        a {
-            position: relative;
-            --left: none;
-            --right: -16px;
-            --mask: var(--icon-16-dot);
-            --mask-size: 16px;
-            color: inherit;
-        }
-    }
+		.breadcrumb-origin,
+		a {
+			position: relative;
+			--left: none;
+			--right: -16px;
+			--mask: var(--icon-16-dot);
+			--mask-size: 16px;
+			color: inherit;
+		}
+	}
 
-    .gallery-image-uploaded-by {
-        position: relative;
-        padding-left: calc(var(--icon-size) + var(--icon-gap));
-        --icon-size: 14px;
-        --mask: var(--icon-16-upload);
-        --left: 0;
-        min-width: unset;
-    }
+	.gallery-image-uploaded-by {
+		position: relative;
+		padding-left: calc(var(--icon-size) + var(--icon-gap));
+		--icon-size: 14px;
+		--mask: var(--icon-16-upload);
+		--left: 0;
+		min-width: unset;
+	}
 
-    &.header-style {
-        .breadcrumb {
-            flex-direction: column;
+	&.header-style {
+		.breadcrumb {
+			flex-direction: column;
 
-            a {
-                &:before {
-                    display: none !important;
-                }
-            }
-        }
-    }
+			a {
+				&:before {
+					display: none !important;
+				}
+			}
+		}
+	}
 }
 
 .sub-text.normal.disc-header {
-    --mask: var(--icon-16-album);
-    gap: 12px !important;
-    margin-bottom: 4px !important;
+	--mask: var(--icon-16-album);
+	gap: 12px !important;
+	margin-bottom: 4px !important;
 
-    & > .bleh-icon {
-        display: none;
-    }
+	& > .bleh-icon {
+		display: none;
+	}
 
-    .chartlist + & {
-        margin-top: 10px;
-    }
+	.chartlist + & {
+		margin-top: 10px;
+	}
 }
 
 h4 {
-    &:not(.source-album-name, .top-header, .factbox-heading) {
-        & + p {
-            margin-top: -5px;
-        }
-    }
+	&:not(.source-album-name, .top-header, .factbox-heading) {
+		& + p {
+			margin-top: -5px;
+		}
+	}
 }
 
 h5 {
-    margin: unset;
-    color: oklch(var(--c1));
-    font-weight: var(--font-weight-medium);
-    cursor: default;
+	margin: unset;
+	color: oklch(var(--c1));
+	font-weight: var(--font-weight-medium);
+	cursor: default;
 }
 h4 {
-    color: oklch(var(--c1));
+	color: oklch(var(--c1));
 }
 
 i {
-    font-style: italic;
+	font-style: italic;
 }
 
 .subtle {
-    color: oklch(var(--c3));
+	color: oklch(var(--c3));
 
-    &:not(.btn) {
-        font-size: 13px;
-        cursor: default;
-    }
+	&:not(.btn) {
+		font-size: 13px;
+		cursor: default;
+	}
 }
 .text-light {
-    color: oklch(var(--c3));
+	color: oklch(var(--c3));
 }
 
 h6 {
-    margin: unset !important;
-    font-size: var(--font-size);
-    line-height: var(--line-height);
-    color: oklch(var(--c1));
-    font-weight: var(--font-weight-medium);
+	margin: unset !important;
+	font-size: var(--font-size);
+	line-height: var(--line-height);
+	color: oklch(var(--c1));
+	font-weight: var(--font-weight-medium);
 }
 
 .time,
@@ -186,240 +186,239 @@ pre,
 code,
 kbd,
 samp {
-    color: oklch(var(--c3));
-    background-color: oklch(var(--b6));
-    padding: 0 4px;
-    font-size: calc(var(--font-size) - 1px);
-    line-height: var(--line-height);
-    font-family: var(--font-code);
-    border-radius: var(--item-small-radius);
+	color: oklch(var(--c3));
+	background-color: oklch(var(--b6));
+	padding: 0 4px;
+	font-size: calc(var(--font-size) - 1px);
+	line-height: var(--line-height);
+	font-family: var(--font-code);
+	border-radius: var(--item-small-radius);
 }
 
 pre {
-    padding: 4px 8px;
-    border-radius: var(--item-med-radius);
+	padding: 4px 8px;
+	border-radius: var(--item-med-radius);
 }
 
 .keybind {
-    display: inline-flex;
-    gap: 2px;
-    opacity: 0.9;
+	display: inline-flex;
+	gap: 2px;
+	opacity: 0.9;
 
-    & > kbd {
-        margin: unset !important;
-        font-family:
-            Funnel Sans,
-            Overpass,
-            -apple-system,
-            BlinkMacSystemFont,
-            "Segoe UI",
-            "Noto Sans",
-            Helvetica,
-            Arial,
-            sans-serif,
-            "Apple Color Emoji",
-            "Segoe UI Emoji" !important;
-        font-weight: var(--font-weight) !important;
-        background: unset;
-        padding: unset;
+	& > kbd {
+		margin: unset !important;
+		font-family:
+			Funnel Sans,
+			Overpass,
+			-apple-system,
+			BlinkMacSystemFont,
+			"Segoe UI",
+			"Noto Sans",
+			Helvetica,
+			Arial,
+			sans-serif,
+			"Apple Color Emoji",
+			"Segoe UI Emoji" !important;
+		font-weight: var(--font-weight) !important;
+		background: unset;
+		padding: unset;
 
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
 }
 
 .not-text {
-    cursor: default !important;
+	cursor: default !important;
 }
 
 .card-tip {
-    margin-top: var(--card-gap);
-    font-size: 13px;
-    color: oklch(var(--c3));
-    cursor: default;
+	margin-top: var(--card-gap);
+	font-size: 13px;
+	color: oklch(var(--c3));
+	cursor: default;
 
-    &[aria-hidden="true"] {
-        display: none;
-    }
+	&[aria-hidden="true"] {
+		display: none;
+	}
 
-    .bleh--panel > &,
-    .setting > .info > & {
-        margin-top: unset;
-    }
+	.bleh--panel > &,
+	.setting > .info > & {
+		margin-top: unset;
+	}
 
-    &.copyright {
-        order: 1;
-        margin: unset !important;
-    }
+	&.copyright {
+		order: 1;
+		margin: unset !important;
+	}
 
-    .setting-group + & {
-        margin-top: 5px;
-        padding: 0 12px;
-    }
+	.setting-group + & {
+		margin-top: 5px;
+		padding: 0 12px;
+	}
 
-    .bleh--panel > .setting-group + & {
-        margin-top: -10px;
-    }
+	.bleh--panel > .setting-group + & {
+		margin-top: -10px;
+	}
 }
 .card-tip-link {
-    margin-left: 8px;
+	margin-left: 8px;
 }
 
 .no-data-message {
-    color: oklch(var(--c3));
-    font-weight: var(--font-weight);
-    cursor: default;
-    width: unset !important;
-    margin-top: unset !important;
+	color: oklch(var(--c3));
+	font-weight: var(--font-weight);
+	cursor: default;
+	width: unset !important;
+	margin-top: unset !important;
 
-    &:not(.no-data-message--album) {
-        padding: unset;
-    }
+	&:not(.no-data-message--album) {
+		padding: unset;
+	}
 
-    /* any icons or whatever */
-    &:before {
-        display: none;
-    }
+	/* any icons or whatever */
+	&:before {
+		display: none;
+	}
 
-    /* some have special styling */
-    p {
-        margin-top: var(--card-gap);
-    }
+	/* some have special styling */
+	p {
+		margin-top: var(--card-gap);
+	}
 
-    /* in shoutboxes */
-    .shoutbox & {
-        margin-top: 48px !important;
-        padding-bottom: 24px;
-    }
+	/* in shoutboxes */
+	.shoutbox & {
+		margin-top: 48px !important;
+		padding-bottom: 24px;
+	}
 
-    /* what even...............
-    on followers/following pages, lastfm returns
-    .no-data-message followed by a blank <p></p>,
-    leading to a gap from their own css */
-    & + p:empty {
-        display: none;
-    }
+	/* what even...............
+	on followers/following pages, lastfm returns
+	.no-data-message followed by a blank <p></p>,
+	leading to a gap from their own css */
+	& + p:empty {
+		display: none;
+	}
 
-    .no-data-message-heading {
-        font: inherit;
-        color: inherit;
-    }
+	.no-data-message-heading {
+		font: inherit;
+		color: inherit;
+	}
 }
 .no-data-message--obsession-history {
-    padding: unset;
+	padding: unset;
 }
 
 .no-data-message-heading {
-    font-size: var(--font-size);
-    line-height: var(--line-height);
-    font-weight: var(--font-weight);
+	font-size: var(--font-size);
+	line-height: var(--line-height);
+	font-weight: var(--font-weight);
 }
 
-
 .dual-tip {
-    display: flex;
-    justify-content: space-between;
-    gap: var(--card-gap);
+	display: flex;
+	justify-content: space-between;
+	gap: var(--card-gap);
 }
 
 .tip {
-    color: oklch(var(--c3));
-    font-size: 13px;
-    width: fit-content;
-    cursor: default;
+	color: oklch(var(--c3));
+	font-size: 13px;
+	width: fit-content;
+	cursor: default;
 
-    &[data-exceeded="true"] {
-        color: oklch(var(--l3-c)) !important;
-        --hue-over: var(--hue-neg);
-        --sat-over: 1;
-        --lit-over: 1;
-    }
+	&[data-exceeded="true"] {
+		color: oklch(var(--l3-c)) !important;
+		--hue-over: var(--hue-neg);
+		--sat-over: 1;
+		--lit-over: 1;
+	}
 
-    &[disabled="true"] {
-        opacity: 0.8;
-        pointer-events: none;
-    }
+	&[disabled="true"] {
+		opacity: 0.8;
+		pointer-events: none;
+	}
 }
 .tip.preview {
-    position: relative;
-    padding-left: calc(var(--mask-size) + 4px);
-    --mask-size: 16px;
-    --left: 0;
-    --margin-top: calc(-1 * (var(--mask-size) / 2));
-    --mask: var(--icon-16-preview);
+	position: relative;
+	padding-left: calc(var(--mask-size) + 4px);
+	--mask-size: 16px;
+	--left: 0;
+	--margin-top: calc(-1 * (var(--mask-size) / 2));
+	--mask: var(--icon-16-preview);
 
-    cursor: pointer !important;
+	cursor: pointer !important;
 
-    &:hover {
-        text-decoration: underline;
-    }
+	&:hover {
+		text-decoration: underline;
+	}
 }
 
 .small-label {
-    color: oklch(var(--c3));
-    font-weight: var(--font-weight-medium);
-    cursor: default;
-    --left: 0;
-    --mask-size: 12px;
-    --margin-top: -6px;
+	color: oklch(var(--c3));
+	font-weight: var(--font-weight-medium);
+	cursor: default;
+	--left: 0;
+	--mask-size: 12px;
+	--margin-top: -6px;
 
-    &.with-icon {
-        position: relative;
-        padding-left: calc(12px + 4px);
-    }
+	&.with-icon {
+		position: relative;
+		padding-left: calc(12px + 4px);
+	}
 }
 
 hr {
-    display: none;
+	display: none;
 }
 
-
 .info-box {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    color: oklch(var(--c3));
-    cursor: default;
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	color: oklch(var(--c3));
+	cursor: default;
 
-    .bleh-icon {
-        --icon-size: 14px;
-    }
+	.bleh-icon {
+		--icon-size: 14px;
+	}
 }
 
 .bleh-info-icon {
-    --icon: var(--icon-16-info);
+	--icon: var(--icon-16-info);
 }
 
 .placeholder-text {
-    cursor: default !important;
-    font-family: Flow Circular, var(--font) !important;
-    user-select: none !important;
+	cursor: default !important;
+	font-family: Flow Circular, var(--font) !important;
+	user-select: none !important;
 
-    animation: placeholder-text 4s var(--trans-function-ani) infinite !important;
+	animation: placeholder-text 4s var(--trans-function-ani) infinite
+		!important;
 }
 
 @keyframes placeholder-text {
-    from, to {
-        opacity: 0.2;
-    }
-    50% {
-        opacity: 1;
-    }
+	from,
+	to {
+		opacity: 0.2;
+	}
+	50% {
+		opacity: 1;
+	}
 }
 
-
 .header-with-icon {
-    display: flex;
-    align-items: center;
-    gap: 4px;
+	display: flex;
+	align-items: center;
+	gap: 4px;
 
-    --icon-size: 14px;
-    --icon-colour: oklch(var(--l3-c));
+	--icon-size: 14px;
+	--icon-colour: oklch(var(--l3-c));
 }
 
 .goth {
-    font-family: var(--font-head);
-    font-size: var(--font-size-head);
-    line-height: var(--line-height-head);
+	font-family: var(--font-head);
+	font-size: var(--font-size-head);
+	line-height: var(--line-height-head);
 }

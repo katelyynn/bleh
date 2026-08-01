@@ -1,20 +1,20 @@
 .window-header {
-    font-size: var(--font-size);
-    line-height: var(--line-height);
-    margin-top: calc(var(--card-gap) - var(--item-list-gap));
-    margin-bottom: var(--card-gap);
+	font-size: var(--font-size);
+	line-height: var(--line-height);
+	margin-top: calc(var(--card-gap) - var(--item-list-gap));
+	margin-bottom: var(--card-gap);
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 4px;
-    color: oklch(var(--c1));
-    --mask-colour: oklch(var(--c1) / 80%);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 4px;
+	color: oklch(var(--c1));
+	--mask-colour: oklch(var(--c1) / 80%);
 
-    --icon-size: 16px;
+	--icon-size: 16px;
 }
 
 .window-title {
-    font-weight: var(--font-weight-medium);
-    cursor: default;
+	font-weight: var(--font-weight-medium);
+	cursor: default;
 }

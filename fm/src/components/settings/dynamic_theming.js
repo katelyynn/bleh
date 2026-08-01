@@ -10,24 +10,24 @@ import { page } from '@/build/page';
 import { save_setting } from '@/components/settings/settings';
 
 export function dynamic_theming() {
-    const media = window.matchMedia('(prefers-color-scheme: dark)');
-    page.state.media = media;
+	const media = window.matchMedia('(prefers-color-scheme: dark)');
+	page.state.media = media;
 
-    match(media);
+	match(media);
 
-    media.addEventListener('change', match);
+	media.addEventListener('change', match);
 }
 
 export function match(media = page.state.media) {
-    if (!settings.theme_schedule) return;
+	if (!settings.theme_schedule) return;
 
-    if (media.matches) apply_theme('night');
-    else apply_theme('day');
+	if (media.matches) apply_theme('night');
+	else apply_theme('day');
 }
 
 function apply_theme(time) {
-    if (settings.theme == settings[`theme_${time}`]) return;
+	if (settings.theme == settings[`theme_${time}`]) return;
 
-    log(`applying theme for time ${time}`, 'dynamic theming');
-    save_setting('theme', settings[`theme_${time}`]);
+	log(`applying theme for time ${time}`, 'dynamic theming');
+	save_setting('theme', settings[`theme_${time}`]);
 }
