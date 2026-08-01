@@ -46,9 +46,9 @@ export let lang_info = {
         last_updated: '2025-12-12',
     },
     pt: {
-        name: 'português brasileiro',
-        by: ['ArthRMH', 'satisfeita', 'fr0r', 'urwq', 'anjoskron', 'foognocchie', 'Suburbanno'],
-        last_updated: '2026-07-27',
+        name: get_language_name('pt'),
+        by: ['ArthRMH', 'satisfeita', 'fr0r', 'urwq', 'anjoskron', 'foognocchie', 'suburbanno'],
+        last_updated: '2026-08-01',
     },
     sv: {
         name: get_language_name('sv'),
@@ -391,18 +391,23 @@ export const trans = {
     badge_types: {
         reserved: {
             en: 'This badge is specially reserved for {u}',
+            pt: 'Este emblema é especialmente reservado para {u}',
         },
         cute: {
             en: 'The creator of bleh',
+            pt: 'O(A) criador(a) do bleh',
         },
         sponsor: {
             en: '{u} sponsors the development of bleh',
+            pt: '{u} apoia o desenvolvimento do bleh',
         },
         contributor: {
             en: '{u} contributed to the development of bleh',
+            pt: '{u} contribuiu para o desenvolvimento do bleh',
         },
         translation: {
             en: '{u} helped in translating bleh',
+            pt: '{u} ajudou na tradução do bleh',
         },
     },
     requires_higher_bleh_version: {
@@ -3834,7 +3839,7 @@ export const trans = {
         de: 'Sponsoren- und Abzeichendaten-Version {v}',
         es: 'Versión de datos de patrocinio y emblemas',
         it: 'Versione dei dati di sponsor e distintivi {v}',
-        pt: 'Versão da data de apoiador e emblemas',
+        pt: 'Versão da data de apoiador e emblemas {v}',
         sv: 'Sponsor-och-emblemdata, version {v}',
         ru: 'Данные о спонсорах и значках, версия {v}',
         pl: 'Dane sponsora i odznaki, wersja {v}',
@@ -11675,16 +11680,20 @@ export const trans = {
     developer_mode: {
         name: {
             en: 'Developer mode',
+            pt: 'Modo de desenvolvedor',
         },
         body: {
             en: 'Enable developer-specific features used for debugging purposes',
+            pt: 'Ative recursos específicos de desenvolvedor usados para fins de depuração',
         },
     },
     developer_setting_names: {
         en: 'Show internal setting ids',
+        pt: 'Mostrar IDs internos das configurações',
     },
     show_scroller: {
         en: 'Show page scrollbar',
+        pt: 'Mostrar barra de rolagem da página',
     },
 } as const satisfies Record<string, any>;
 
