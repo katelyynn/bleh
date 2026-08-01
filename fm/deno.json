@@ -23,7 +23,7 @@
 		"lighterhtml": "npm:lighterhtml@^4.2.0",
 		"luxon": "npm:luxon@^3.7.2",
 		"odometer_countup": "npm:odometer_countup@^1.0.4",
-		"postcss": "npm:postcss@^8.5.22",
+		"postcss": "npm:postcss@^8.5.25",
 		"showdown": "npm:showdown@^2.1.0",
 		"tippy.js": "npm:tippy.js@^6.3.7",
 		"wanakana": "npm:wanakana@^5.3.1"

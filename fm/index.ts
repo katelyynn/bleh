@@ -105,6 +105,10 @@ const shared_opts: Omit<BundleOptions, 'name'> = {
 	format: 'iife',
 	loader: { '.svg': 'text' },
 	plugins: [bundle_css, denoPlugin()],
+	minifyWhitespace: true,
+	minifyIdentifiers: false,
+	minifySyntax: false,
+	globalName: 'bleh',
 };
 
 const userscript: BundleOptions = {
@@ -122,7 +126,9 @@ const extension: BundleOptions = {
 
 if (Deno.args[0] == 'serve') {
 	await bundle(userscript);
-	Deno.serve((req) => serveDir(req));
+	Deno.serve((req) => serveDir(req, {
+		showDirListing: true
+	}));
 } else {
 	await bundle(userscript);
 	const manifest = JSON.parse(
