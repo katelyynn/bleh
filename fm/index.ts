@@ -28,12 +28,29 @@ async function bundle({ name, ...options }: BundleOptions) {
 		'color:grey;font-weight:bold',
 		'font-weight:regular;color:white',
 	);
+
 	await esbuild.build(options);
+
+	if (options.outfile) {
+		await sanitise(options.outfile);
+	}
+
 	console.log(
 		`%c📦 build finished in %c${Date.now() - start}ms`,
 		'color:grey',
 		'color:grey;font-weight:bold;',
 	);
+}
+
+async function sanitise(path: string) {
+	let text = await Deno.readTextFile(path);
+
+	text = text.replace(
+		/[A-Za-z]:\/Users\/[^/\\]+\/AppData\/Local\/deno\//g,
+		'deno/',
+	);
+
+	await Deno.writeTextFile(path, text);
 }
 
 const build: BuildSchema = JSON.parse(
@@ -126,9 +143,11 @@ const extension: BundleOptions = {
 
 if (Deno.args[0] == 'serve') {
 	await bundle(userscript);
-	Deno.serve((req) => serveDir(req, {
-		showDirListing: true
-	}));
+	Deno.serve((req) =>
+		serveDir(req, {
+			showDirListing: true,
+		})
+	);
 } else {
 	await bundle(userscript);
 	const manifest = JSON.parse(
