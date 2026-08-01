@@ -6,7 +6,6 @@
 - Format your code using `deno fmt`
 - Include a screenshot for UI changes
 - Use [conventional commits](https://conventionalcommits.org/)
-- Use [conventional branch names](https://conventional-branch.github.io/)
 
 ### Prerequisites
 
