@@ -38,7 +38,9 @@
 			"write": true,
 			"run": true,
 			"env": true,
-			"net": ["0.0.0.0"]
+			"net": [
+				"0.0.0.0"
+			]
 		}
 	},
 	"compilerOptions": {
@@ -60,6 +62,11 @@
 		"useTabs": true
 	},
 	"lint": {
-		"rules": { "exclude": ["no-sloppy-imports"] }
-	}
+		"rules": {
+			"exclude": [
+				"no-sloppy-imports"
+			]
+		}
+	},
+	"nodeModulesDir": "auto"
 }

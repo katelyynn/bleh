@@ -31,9 +31,9 @@ async function bundle({ name, ...options }: BundleOptions) {
 
 	await esbuild.build(options);
 
-	if (options.outfile) {
-		await sanitise(options.outfile);
-	}
+	//	if (options.outfile) {
+	//		await sanitise(options.outfile);
+	//	}
 
 	console.log(
 		`%c📦 build finished in %c${Date.now() - start}ms`,
