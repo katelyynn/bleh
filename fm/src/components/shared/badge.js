@@ -104,7 +104,11 @@ export function get_amount_of_badge(badge) {
 
 function get_trans_contributions(user) {
 	return Object.entries(lang_info)
-		.filter(([code, info]) => info.by.includes(user) && code != 'en')
+		.filter(([code, info]) =>
+			info.by.map((name) => name.toLowerCase()).includes(
+				user.toLowerCase(),
+			) && code != 'en'
+		)
 		.map(([code, info]) => ({
 			code,
 			name: info.name,
