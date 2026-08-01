@@ -72,7 +72,13 @@
 			"exclude": [
 				"no-sloppy-imports"
 			]
-		}
+		},
+		"exclude": [
+			"bleh.user.js",
+			"bleh.user.css",
+			"ext/*",
+			"**/*.md"
+		]
 	},
 	"nodeModulesDir": "auto"
 }
