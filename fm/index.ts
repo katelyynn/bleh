@@ -89,6 +89,9 @@ const CSS_BANNER = `/* ==UserStyle==
 
 @-moz-document domain("www.last.fm") {`;
 
+const CSS_FOOTER = `
+}`;
+
 const bundle_css: esbuild.Plugin = {
 	name: 'bundle_css',
 	setup(build) {
@@ -134,6 +137,21 @@ const userscript: BundleOptions = {
 	outfile: 'bleh.user.js',
 };
 
+const usercss: BundleOptions = {
+	entryPoints: ['./src/styles/index.css'],
+	banner: {
+		css: CSS_BANNER,
+	},
+	footer: {
+		css: CSS_FOOTER,
+	},
+	bundle: true,
+	name: 'usercss',
+	outfile: 'bleh.user.css',
+	loader: { '.css': 'css' },
+	minify: true,
+};
+
 const extension: BundleOptions = {
 	...shared_opts,
 	name: 'extension',
@@ -143,6 +161,7 @@ const extension: BundleOptions = {
 
 if (Deno.args[0] == 'serve') {
 	await bundle(userscript);
+	await bundle(usercss);
 	Deno.serve((req) =>
 		serveDir(req, {
 			showDirListing: true,
