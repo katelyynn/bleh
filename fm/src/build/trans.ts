@@ -395,7 +395,7 @@ export const trans = {
         },
         cute: {
             en: 'The creator of bleh',
-            pt: 'O(A) criador(a) do bleh',
+            pt: 'A criadora do bleh',
         },
         sponsor: {
             en: '{u} sponsors the development of bleh',
