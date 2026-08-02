@@ -20,19 +20,19 @@ export async function fetch_status(username) {
 	if (current >= next_fetch) {
 		return await fetch_status_api(username);
 	} else {
-		return html.node`
-            <div class="status-cafe">
-                <div class="status-cafe-content is-loading">
-                    <span class="status-cafe-text">
-                        ${tl(trans.status_cafe_too_many_requests)}
-                    </span>
-                </div>
-            </div>
-        `;
+		return (
+			<div className="status-cafe">
+				<div className="status-cafe-content is-loading">
+					<span className="status-cafe-text">
+						{tl(trans.status_cafe_too_many_requests)}
+					</span>
+				</div>
+			</div>
+		);
 	}
 }
 
-async function fetch_status_api(username) {
+async function fetch_status_api(username: string) {
 	log(`fetching for ${username}`, 'status.cafe');
 
 	const new_date = new Date();
@@ -64,24 +64,24 @@ async function fetch_status_api(username) {
 
 			const { trusted, dangerous } = can_trust_link(status_link);
 
-			return html.node`
-                <div class="status-cafe has-hover" onclick=${() => {
-				if (trusted) {
-					open(status_link);
-					return;
-				}
+			return (
+				<div className="status-cafe has-hover" onClick={() => {
+					if (trusted) {
+						open(status_link);
+						return;
+					}
 
-				external_url_prompt(status_link);
-			}}>
-                    <div class="status-cafe-content">
-                        <span class="status-cafe-emoji">${data.face}</span>
-                        <span class="status-cafe-text">
-                            ${text_decode(data.content)}
-                            <span class="status-cafe-time">${data.timeAgo}</span>
-                        </span>
-                    </div>
-                </div>
-            `;
+					external_url_prompt(status_link);
+				}}>
+					<div className="status-cafe-content">
+						<span className="status-cafe-emoji">{data.face}</span>
+						<span className="status-cafe-text">
+							{text_decode(data.content)}
+							<span className="status-cafe-time">{data.timeAgo}</span>
+						</span>
+					</div>
+				</div>
+			);
 		})
 		.catch((e) => {
 			log(`error processing for ${username}`, 'status.cafe', 'error', {
@@ -94,14 +94,14 @@ async function fetch_status_api(username) {
 				error = `${username} was not found on status.cafe`;
 			}
 
-			return html.node`
-                <div class="status-cafe">
-                    <div class="status-cafe-content is-loading">
-                        <span class="status-cafe-text">
-                            ${error}
-                        </span>
-                    </div>
-                </div>
-            `;
+			return (
+				<div className="status-cafe">
+					<div className="status-cafe-content is-loading">
+						<span className="status-cafe-text">
+							{error}
+						</span>
+					</div>
+				</div>
+			);
 		});
 }

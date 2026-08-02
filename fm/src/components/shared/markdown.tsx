@@ -117,9 +117,8 @@ export function markdown(
 					const safe = new URL(url);
 					if (!['http:', 'https:'].includes(safe.protocol)) return '';
 
-					cache.banner = `https://images.weserv.nl/?url=${
-						encodeURIComponent(url)
-					}&output=webp&n=-1`;
+					cache.banner = `https://images.weserv.nl/?url=${encodeURIComponent(url)
+						}&output=webp&n=-1`;
 					if (name == auth.name) cache.banner_orig = url;
 				} catch {
 					cache.banner = 'accent';
@@ -410,8 +409,7 @@ export function markdown(
 		.replace(
 			/\[artist\]([^[\]]+)\[\/artist\]/g,
 			(match, artist: string) =>
-				`[${artist}](${root}music/${redirect()}${
-					encodeURIComponent(artist)
+				`[${artist}](${root}music/${redirect()}${encodeURIComponent(artist)
 				})`,
 		)
 		.replace(
@@ -443,11 +441,9 @@ export function markdown(
 		ALLOWED_ATTR,
 	});
 
-	const body = html.node`
-        <div class="parsed-markdown markdown-body">
-            ${{ html: parsed }}
-        </div>
-    `;
+	const body = (
+		<div className="parsed-markdown markdown-body" dangerouslySetInnerHTML={{ __html: parsed }} />
+	);
 
 	log('rendered', 'markdown', 'info', { body });
 
@@ -491,38 +487,33 @@ export function markdown(
 	];
 
 	if (links.length > 0) {
-		body.appendChild(html.node`
-            <div class="social-links-container">
-                <div class="sub-text music-small-header">
-                    ${tl(trans.links)}
-                </div>
-                <div class="music-links social-links">
-                    ${
-			links.map((link) => {
-				let label = link.host;
+		body.appendChild(
+			<div className="social-links-container">
+				<div className="sub-text music-small-header">
+					{tl(trans.links)}
+				</div>
+				<div className="music-links social-links">
+					{links.map((link) => {
+						let label = link.host;
 
-				if (link.name) {
-					label = link.name;
-				} else if (link_strings.hasOwnProperty(link.host)) {
-					label = link_strings[link.host];
-				}
+						if (link.name) {
+							label = link.name;
+						} else if (link_strings.hasOwnProperty(link.host)) {
+							label = link_strings[link.host];
+						}
 
-				return html.node`
-                            <a class="btn music-link social-link colourful icon" href=${link.url} target="_blank" data-host=${link.host} data-host-unknown=${
-					!link_strings.hasOwnProperty(link.host) ||
-					icons_not_supported.includes(link.host)
-				} data-path=${link.path} style="--favi: url(https://icons.duckduckgo.com/ip3/${link.host}.ico)">
-                                ${label}
-                            </a>
-                        `;
-			})
-		}
-                </div>
-            </div>
-        `);
+						return (
+							<a className="btn music-link social-link colourful icon" href={link.url} target="_blank" data-host={link.host} data-host-unknown={!link_strings.hasOwnProperty(link.host) || icons_not_supported.includes(link.host)} data-path={link.path} style="--favi: url(https://icons.duckduckgo.com/ip3/${link.host}.ico)">
+								{label}
+							</a>
+						);
+					})}
+				</div>
+			</div>
+		);
 	}
 
-	if (body.nodeName != '#text') patch_wiki_contents(body);
+	patch_wiki_contents(body);
 
 	// funny local restriction message
 	if (line_breaks) {
@@ -569,15 +560,13 @@ export function markdown(
 						'data-unsafe-href',
 						encodeURI(image.src),
 					);
-					image.src = `https://images.weserv.nl/?url=${
-						encodeURIComponent(image.src)
-					}&output=webp&n=-1`;
+					image.src = `https://images.weserv.nl/?url=${encodeURIComponent(image.src)
+						}&output=webp&n=-1`;
 				}
 			} catch (e) {
 				image.setAttribute('data-unsafe-href', encodeURI(image.src));
-				image.src = `https://images.weserv.nl/?url=${
-					encodeURIComponent(image.src)
-				}&output=webp&n=-1`;
+				image.src = `https://images.weserv.nl/?url=${encodeURIComponent(image.src)
+					}&output=webp&n=-1`;
 			}
 
 			image.setAttribute('loading', 'lazy');
@@ -585,9 +574,9 @@ export function markdown(
 			let func = () => expand_avatar(image.src, image.alt);
 			if (in_dialog) func = () => open(image.src);
 
-			const container = html.node`
-                <div class="markdown-image" onclick=${func} />
-            `;
+			const container = (
+				<div className="markdown-image" onClick={func} />
+			);
 
 			image.after(container);
 			container.appendChild(image);
@@ -595,31 +584,24 @@ export function markdown(
 
 		if (status_cafe_user) {
 			const status_cafe_host = body.querySelector('.status-cafe-host');
-
-			render(
-				status_cafe_host,
-				html`
-					<div class="status-cafe">
-						<div class="status-cafe-content is-loading">
-							<span class="status-cafe-emoji">
-								<span class="status-cafe-loading-spinner">
-									<span class="bleh-icon" />
-								</span>
+			status_cafe_host!.replaceChildren(
+				<div className="status-cafe">
+					<div className="status-cafe-content is-loading">
+						<span className="status-cafe-emoji">
+							<span className="status-cafe-loading-spinner">
+								<span className="bleh-icon" />
 							</span>
-							<span class="status-cafe-text">${tl(
-								trans.loading_status,
-								{ u: status_cafe_user },
-							)}</span>
-						</div>
-						<div class="status-cafe-top">
-							<span class="status-cafe-time">...</span>
-						</div>
+						</span>
+						<span className="status-cafe-text">${tl(trans.loading_status, { u: status_cafe_user },)}</span>
 					</div>
-				`,
+					<div className="status-cafe-top">
+						<span className="status-cafe-time">...</span>
+					</div>
+				</div>
 			);
 
 			fetch_status(status_cafe_user).then((status_cafe) => {
-				render(status_cafe_host, status_cafe);
+				status_cafe_host!.replaceChildren(status_cafe);
 			});
 		}
 
@@ -653,9 +635,9 @@ export function markdown(
 				text = date.toRelative();
 			}
 
-			const new_timestamp = html.node`
-                <t>${text}</t>
-            `;
+			const new_timestamp = (
+				<span>${text}</span>
+			);
 
 			tippy(new_timestamp, {
 				theme: 'generic',
@@ -810,21 +792,18 @@ export function markdown_prompt({
                     </tr>
                 </thead>
                 <tbody>
-                    ${
-			examples.map((example) => {
-				if (example.hide_if) return html.node``;
+                    ${examples.map((example) => {
+			if (example.hide_if) return html.node``;
 
-				return html.node`
+			return html.node`
                             <tr>
                                 <td>${example.name}</td>
-                                <td class="subtle">${
-					example.string_display
-						? example.string_display
-						: example.string
+                                <td class="subtle">${example.string_display
+					? example.string_display
+					: example.string
 				}</td>
-                                ${
-					example.explain
-						? html.node`
+                                ${example.explain
+					? html.node`
                                     <td>
                                         <div class="icon-combo">
                                             <div class="bleh-icon" data-type="info" style="--icon: var(--mask)" />
@@ -832,31 +811,30 @@ export function markdown_prompt({
                                         </div>
                                     </td>
                                 `
-						: html.node`
-                                    <td class="markdown-body">${
-							markdown(
-								example.string,
-								{
-									allow_headers,
-									starting_header,
-									allow_links,
-									line_breaks,
-									allow_banners,
-									allow_icons,
-									allow_hue,
-									allow_socials,
-									allow_lists,
-									allow_alignment,
-									in_dialog: true,
-								},
-							)
+					: html.node`
+                                    <td class="markdown-body">${markdown(
+						example.string,
+						{
+							allow_headers,
+							starting_header,
+							allow_links,
+							line_breaks,
+							allow_banners,
+							allow_icons,
+							allow_hue,
+							allow_socials,
+							allow_lists,
+							allow_alignment,
+							in_dialog: true,
+						},
+					)
 						}</td>
                                 `
 				}
                             </tr>
                         `;
-			})
-		}
+		})
+			}
                 </tbody>
             </table>
         `,
@@ -890,15 +868,13 @@ export function markdown_preview(
                         <a href="${root}user/${auth.name}">${auth.name}</a>
                     </h3>
                     <span class="avatar shout-user-avatar">
-                        <img src=${auth.avatar} alt=${
-			tl(trans.your_avatar)
-		} loading="lazy">
+                        <img src=${auth.avatar} alt=${tl(trans.your_avatar)
+			} loading="lazy">
                     </span>
                     <a class="shout-user-avatar-link js-link-block-cover-link" href="${root}user/${auth.name}" tabindex="-1" />
                     <div class="shout-body">
                         <p class="markdown-body">
-                            ${
-			markdown(text, {
+                            ${markdown(text, {
 				allow_headers,
 				starting_header,
 				allow_links,
@@ -911,7 +887,7 @@ export function markdown_preview(
 				allow_alignment,
 				in_dialog: true,
 			})
-		}
+			}
                         </p>
                     </div>
                 </div>
@@ -948,8 +924,7 @@ export function external_url_prompt(url, dangerous = false) {
 		type: 'leaving_site',
 		body: html.node`
             <div class="modal-vertical-inner leaving-site-inner">
-                ${
-			!dangerous
+                ${!dangerous
 				? html.node`
                 <h1>${tl(trans.leaving_site.name)}</h1>
                 <p>${tl(trans.leaving_site.body)}</p>
@@ -958,13 +933,12 @@ export function external_url_prompt(url, dangerous = false) {
                 <h1>${tl(trans.leaving_site_dangerous.name)}</h1>
                 <p>${tl(trans.leaving_site_dangerous.body)}</p>
                 `
-		}
+			}
                 <div class="external-warn-input" data-dangerous=${dangerous}>
                     <span class="scheme">
                         ${scheme}//
                     </span>
-                    ${
-			hostname
+                    ${hostname
 				? html.node`
                     <span class="hostname">
                         ${hostname}
@@ -975,19 +949,17 @@ export function external_url_prompt(url, dangerous = false) {
                         ${path}
                     </span>
                     `
-		}
-                    ${
-			path != '/' && hostname
+			}
+                    ${path != '/' && hostname
 				? html.node`
                     <span class="path">
                         ${path}
                     </span>
                     `
 				: ''
-		}
+			}
                 </div>
-                ${
-			hostname != ''
+                ${hostname != ''
 				? html.node`
                 ${(trust_site = toggle({
 					type: 'checkbox',
@@ -998,26 +970,26 @@ export function external_url_prompt(url, dangerous = false) {
 				}))}
                 `
 				: ''
-		}
+			}
             </div>
             <div class="modal-footer">
                 <button class="see-more cancel left-icon" onclick=${() =>
-			dialog_rm({ id: 'external_url' })}>
+				dialog_rm({ id: 'external_url' })}>
                     ${tl(trans.back)}
                 </button>
                 <div class="fill"></div>
                 <button class="btn primary continue" onclick=${() => {
-			if (trust_site?.checked()) {
-				save_setting('trusted_sites', [
-					...settings.trusted_sites,
-					hostname,
-				]);
-				log(`added ${hostname} to trusted sites`, 'markdown');
-			}
+				if (trust_site?.checked()) {
+					save_setting('trusted_sites', [
+						...settings.trusted_sites,
+						hostname,
+					]);
+					log(`added ${hostname} to trusted sites`, 'markdown');
+				}
 
-			open(url, '_blank');
-			dialog_rm({ id: 'external_url' });
-		}}>
+				open(url, '_blank');
+				dialog_rm({ id: 'external_url' });
+			}}>
                     ${!dangerous ? tl(trans.visit) : tl(trans.open)}
                 </button>
             </div>
@@ -1170,40 +1142,38 @@ export function markdown_field(
 							title: tl(trans.create_link),
 							body: html.node`
                                 <div class="new-scrobble-form">
-                                    <p class="generic-label">${
-								tl(trans.link)
-							}</p>
+                                    <p class="generic-label">${tl(trans.link)
+								}</p>
                                     ${link = input({
-								type: 'text',
-								placeholder: tl(trans.example, {
-									v: 'https://katelyn.moe',
-								}),
-								func: () => {
-									submit_link();
-								},
-								focus: true,
-							})}
-                                    <p class="generic-label">${
-								tl(trans.text)
-							}</p>
+									type: 'text',
+									placeholder: tl(trans.example, {
+										v: 'https://katelyn.moe',
+									}),
+									func: () => {
+										submit_link();
+									},
+									focus: true,
+								})}
+                                    <p class="generic-label">${tl(trans.text)
+								}</p>
                                     ${alt = input({
-								type: 'text',
-								func: () => {
-									submit_link();
-								},
-							})}
+									type: 'text',
+									func: () => {
+										submit_link();
+									},
+								})}
                                 </div>
                                 <div class="modal-footer">
                                 <button class="see-more cancel left-icon" onclick=${() => {
-								dialog_rm({ id: 'link' });
-								resolve(null);
-							}}>
+									dialog_rm({ id: 'link' });
+									resolve(null);
+								}}>
                                     ${tl(trans.cancel)}
                                 </button>
                                 <div class="fill" />
                                 <button class="btn primary continue" onclick=${() => {
-								submit_link();
-							}}>
+									submit_link();
+								}}>
                                     ${tl(trans.finish)}
                                 </button>
                                 </div>
@@ -1265,40 +1235,38 @@ export function markdown_field(
 							title: tl(trans.attach_image),
 							body: html.node`
                                 <div class="new-scrobble-form">
-                                    <p class="generic-label">${
-								tl(trans.link)
-							}</p>
+                                    <p class="generic-label">${tl(trans.link)
+								}</p>
                                     ${link = input({
-								type: 'text',
-								placeholder: tl(trans.example, {
-									v: 'https://link.to/an_image_here',
-								}),
-								func: () => {
-									submit_link();
-								},
-								focus: true,
-							})}
-                                    <p class="generic-label">${
-								tl(trans.text)
-							}</p>
+									type: 'text',
+									placeholder: tl(trans.example, {
+										v: 'https://link.to/an_image_here',
+									}),
+									func: () => {
+										submit_link();
+									},
+									focus: true,
+								})}
+                                    <p class="generic-label">${tl(trans.text)
+								}</p>
                                     ${alt = input({
-								type: 'text',
-								func: () => {
-									submit_link();
-								},
-							})}
+									type: 'text',
+									func: () => {
+										submit_link();
+									},
+								})}
                                 </div>
                                 <div class="modal-footer">
                                 <button class="see-more cancel left-icon" onclick=${() => {
-								dialog_rm({ id: 'link' });
-								resolve(null);
-							}}>
+									dialog_rm({ id: 'link' });
+									resolve(null);
+								}}>
                                     ${tl(trans.cancel)}
                                 </button>
                                 <div class="fill" />
                                 <button class="btn primary continue" onclick=${() => {
-								submit_link();
-							}}>
+									submit_link();
+								}}>
                                     ${tl(trans.finish)}
                                 </button>
                                 </div>
@@ -1371,70 +1339,22 @@ export function markdown_field(
 
 	const actions = html.node`
         <div class="markdown-actions">
-            ${
-		action_list.map((group, index) => {
-			const elem = html.node`
+            ${action_list.map((group, index) => {
+		const elem = html.node`
                     <div class="group">
-                        ${
-				group.map((item) => {
-					if (item.hide) return html.node``;
+                        ${group.map((item) => {
+			if (item.hide) return html.node``;
 
-					const button = html.node`
+			const button = html.node`
                                 <button class="btn markdown-action chibi icon" data-type=${item.type} aria-checked="false" type="button" onclick=${() => {
-						const sel_start = md_editor.selectionStart;
-						const sel_end = md_editor.selectionEnd;
+					const sel_start = md_editor.selectionStart;
+					const sel_end = md_editor.selectionEnd;
 
-						const val = textarea.value;
+					const val = textarea.value;
 
-						if (item.func) {
-							item.func().then((replacement) => {
-								if (!replacement) return;
-
-								textarea.value = val.slice(0, sel_start) +
-									replacement + val.slice(sel_end);
-
-								textarea.focus();
-								textarea.range = [
-									sel_start,
-									sel_start + replacement.length,
-								];
-
-								if (func) func(textarea.value);
-
-								render_overlay();
-							});
-
-							return;
-						}
-
-						if (item.end == null && item.start != null) {
-							item.end = item.start;
-						}
-
-						if (item.start != null && item.end != null) {
-							const selected = val.slice(sel_start, sel_end);
-							let replacement;
-
-							if (
-								selected.startsWith(item.start) &&
-								selected.endsWith(item.end)
-							) {
-								let replace_end = -1 * item.end.length;
-
-								if (replace_end != 0) {
-									replacement = selected.slice(
-										item.start.length,
-										replace_end,
-									);
-								} else {
-									replacement = selected.slice(
-										item.start.length,
-									);
-								}
-							} else {
-								replacement =
-									`${item.start}${selected}${item.end}`;
-							}
+					if (item.func) {
+						item.func().then((replacement) => {
+							if (!replacement) return;
 
 							textarea.value = val.slice(0, sel_start) +
 								replacement + val.slice(sel_end);
@@ -1448,59 +1368,104 @@ export function markdown_field(
 							if (func) func(textarea.value);
 
 							render_overlay();
+						});
 
-							log('action', 'markdown', 'info', {
-								sel_start,
-								sel_end,
-								selected,
-								val,
-								item,
-								replacement,
-							});
+						return;
+					}
+
+					if (item.end == null && item.start != null) {
+						item.end = item.start;
+					}
+
+					if (item.start != null && item.end != null) {
+						const selected = val.slice(sel_start, sel_end);
+						let replacement;
+
+						if (
+							selected.startsWith(item.start) &&
+							selected.endsWith(item.end)
+						) {
+							let replace_end = -1 * item.end.length;
+
+							if (replace_end != 0) {
+								replacement = selected.slice(
+									item.start.length,
+									replace_end,
+								);
+							} else {
+								replacement = selected.slice(
+									item.start.length,
+								);
+							}
+						} else {
+							replacement =
+								`${item.start}${selected}${item.end}`;
 						}
-					}}>
+
+						textarea.value = val.slice(0, sel_start) +
+							replacement + val.slice(sel_end);
+
+						textarea.focus();
+						textarea.range = [
+							sel_start,
+							sel_start + replacement.length,
+						];
+
+						if (func) func(textarea.value);
+
+						render_overlay();
+
+						log('action', 'markdown', 'info', {
+							sel_start,
+							sel_end,
+							selected,
+							val,
+							item,
+							replacement,
+						});
+					}
+				}}>
                                     ${item.name}
                                 </button>
                             `;
 
-					action_lookup[item.type] = {
-						type: item.type,
-						button,
-						start: item.start,
-						end: item.end,
-					};
-					console.info(
-						'markdown added to lookup',
-						action_lookup,
-						action_lookup[item.type],
-					);
+			action_lookup[item.type] = {
+				type: item.type,
+				button,
+				start: item.start,
+				end: item.end,
+			};
+			console.info(
+				'markdown added to lookup',
+				action_lookup,
+				action_lookup[item.type],
+			);
 
-					tippy(button, {
-						content: item.name,
-					});
+			tippy(button, {
+				content: item.name,
+			});
 
-					return button;
-				})
+			return button;
+		})
 			}
                     </div>
                 `;
 
-			if (elem.childElementCount == 0) {
-				return html.node``;
-			}
+		if (elem.childElementCount == 0) {
+			return html.node``;
+		}
 
-			return html.node`
+		return html.node`
                     ${elem}
-                    ${
-				index < action_list.length - 1
-					? html.node`
+                    ${index < action_list.length - 1
+				? html.node`
                         <div class="group-sep" />
                     `
-					: ''
+				: ''
 			}
                 `;
-		})
-	}
+	})
+		}
         </div>
     `;
 
@@ -1509,7 +1474,7 @@ export function markdown_field(
             ${use_md ? actions : ''}
             <div class="markdown-field-text">
                 <div class="markdown-field-overlay" ref=${(el) =>
-		overlay = el} />
+			overlay = el} />
                 ${textarea}
             </div>
         </div>
@@ -1565,11 +1530,9 @@ export function markdown_field(
 						split.length == 3 && parseFloat(split[0]) >= 0 &&
 						parseFloat(split[1]) >= 0 && parseFloat(split[2]) >= 0
 					) {
-						return `<span class="md-tag">[${tag}=<span class="md-val md-accent colourful" style="--hue-over: ${
-							parseFloat(split[0])
-						}; --sat-over: ${parseFloat(split[1])}; --lit-over: ${
-							parseFloat(split[2])
-						}">${val}</span>]</span>`;
+						return `<span class="md-tag">[${tag}=<span class="md-val md-accent colourful" style="--hue-over: ${parseFloat(split[0])
+							}; --sat-over: ${parseFloat(split[1])}; --lit-over: ${parseFloat(split[2])
+							}">${val}</span>]</span>`;
 					} else {
 						return match;
 					}

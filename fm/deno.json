@@ -3,7 +3,6 @@
 	"imports": {
 		"@/": "./src/",
 		"@deno/esbuild-plugin": "jsr:@deno/esbuild-plugin@^1.2.1",
-		"@reububble/jsx": "jsr:@reububble/jsx@^0.0.12",
 		"@std/http": "jsr:@std/http@^1.1.2",
 		"@tealmiku/florence": "npm:@tealmiku/florence@^2026.527.0",
 		"@types/react": "npm:@types/react@^19.2.18",
@@ -22,6 +21,7 @@
 		"hangul-romanization": "npm:hangul-romanization@^1.0.1",
 		"html2canvas-pro": "npm:html2canvas-pro@^1.6.7",
 		"json5": "npm:json5@^2.2.3",
+		"jsx-dom": "npm:jsx-dom@^8.1.6",
 		"lighterhtml": "npm:lighterhtml@^4.2.0",
 		"luxon": "npm:luxon@^3.7.2",
 		"odometer_countup": "npm:odometer_countup@^1.0.4",
@@ -60,10 +60,7 @@
 		"module": "nodenext",
 		"moduleResolution": "bundler",
 		"jsx": "react-jsx",
-		"jsxImportSource": "@reububble/jsx",
-		"types": [
-			"react"
-		]
+		"jsxImportSource": "jsx-dom"
 	},
 	"fmt": {
 		"singleQuote": true,
