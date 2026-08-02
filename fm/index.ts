@@ -31,26 +31,11 @@ async function bundle({ name, ...options }: BundleOptions) {
 
 	await esbuild.build(options);
 
-	//	if (options.outfile) {
-	//		await sanitise(options.outfile);
-	//	}
-
 	console.log(
 		`%c📦 build finished in %c${Date.now() - start}ms`,
 		'color:grey',
 		'color:grey;font-weight:bold;',
 	);
-}
-
-async function sanitise(path: string) {
-	let text = await Deno.readTextFile(path);
-
-	text = text.replace(
-		/[A-Za-z]:\/Users\/[^/\\]+\/AppData\/Local\/deno\//g,
-		'deno/',
-	);
-
-	await Deno.writeTextFile(path, text);
 }
 
 const build: BuildSchema = JSON.parse(
