@@ -11,7 +11,7 @@ const cfg = {
 		return `SPDX-License-Identifier: ${this.license}`;
 	},
 	yearRange: `2024-${new Date().getFullYear()}`,
-	preferredStyle: 'slash' as 'jsdoc' | 'slash',
+	preferredStyle: 'jsdoc' as 'jsdoc' | 'slash',
 	description: 'an extension for the music site Last.fm',
 	extensions: ['.ts', '.tsx', '.js'],
 	skip: [
@@ -19,6 +19,8 @@ const cfg = {
 		/\.git/,
 		/copyright\.ts$/,
 		/(static|assets)\//,
+		/bleh.user\.js$/,
+		/bleh\.js$/,
 	],
 };
 

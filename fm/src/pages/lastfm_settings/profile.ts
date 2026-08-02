@@ -1,3 +1,9 @@
+/**
+ * bleh, an extension for the music site Last.fm
+ * Copyright (c) 2024-2026 katelyn and contributors
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 import { settings } from '@/build/config';
 import { auth, page, root } from '@/build/page';
 import { clamp_lit, clamp_sat, hex_to_oklch } from '@/build/tools';

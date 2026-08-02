@@ -1,8 +1,8 @@
-//
-// bleh, an extension for the music site Last.fm
-// Copyright (c) 2026 katelyn and contributors
-// Licensed under GPLv3
-//
+/**
+ * bleh, an extension for the music site Last.fm
+ * Copyright (c) 2024-2026 katelyn and contributors
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 
 import { denoPlugin } from '@deno/esbuild-plugin';
 import { serveDir } from '@std/http/file-server';

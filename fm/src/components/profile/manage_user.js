@@ -1,3 +1,9 @@
+/**
+ * bleh, an extension for the music site Last.fm
+ * Copyright (c) 2024-2026 katelyn and contributors
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 import tippy from 'tippy.js';
 import { auth, page } from '@/build/page';
 import { html } from 'lighterhtml';

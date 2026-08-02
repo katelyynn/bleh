@@ -1,5 +1,8 @@
-// this is a stub file to fix bwaa crashing in the meantime
-// once bwaa is updated, this file can be safely removed
+/**
+ * bleh, an extension for the music site Last.fm
+ * Copyright (c) 2024-2026 katelyn and contributors
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 
 function begin_snowflakes() {
 }
