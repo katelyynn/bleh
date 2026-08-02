@@ -33,11 +33,11 @@ export async function header_colour(
 		const colour = await fac.getColorAsync(image);
 
 		const values = colour.value;
-		let hsl = rgb_to_hsl(values[0], values[1], values[2]);
+		const hsl = rgb_to_hsl(values[0], values[1], values[2]);
 
-		let hue = hsl.h;
-		let sat = clamp_sat((hsl.s / 100) * 3);
-		let lit = clamp_lit(sat, hsl.l / 100 + 0.35, true);
+		const hue = hsl.h;
+		const sat = clamp_sat((hsl.s / 100) * 3);
+		const lit = clamp_lit(sat, hsl.l / 100 + 0.35, true);
 
 		apply(hue, sat, lit);
 

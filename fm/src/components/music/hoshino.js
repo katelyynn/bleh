@@ -6,7 +6,8 @@ import { set_storage } from '@/build/tools';
 export function hoshino(artwork, name, sister, link = null) {
 	if (!ff('hoshino')) return;
 
-	let oracle_cache = JSON.parse(localStorage.getItem('bleh_oracle_cache')) ||
+	const oracle_cache =
+		JSON.parse(localStorage.getItem('bleh_oracle_cache')) ||
 		{};
 
 	const name_lower = name.toLowerCase();
@@ -63,7 +64,8 @@ export function hoshino(artwork, name, sister, link = null) {
 export function hoshino_return(name, sister) {
 	if (!ff('hoshino')) return;
 
-	let oracle_cache = JSON.parse(localStorage.getItem('bleh_oracle_cache')) ||
+	const oracle_cache =
+		JSON.parse(localStorage.getItem('bleh_oracle_cache')) ||
 		{};
 
 	const name_lower = name.toLowerCase();
@@ -91,7 +93,7 @@ export function hoshino_return(name, sister) {
 }
 
 export function load_hoshino_artwork(name, sister) {
-	let hoshino_cache =
+	const hoshino_cache =
 		JSON.parse(localStorage.getItem('bleh_hoshino_cache')) || {};
 
 	const name_lower = name.toLowerCase();
@@ -108,7 +110,7 @@ export function load_hoshino_artwork(name, sister) {
 }
 
 export function save_hoshino_artwork(artwork, name, sister, listeners = null) {
-	let hoshino_cache =
+	const hoshino_cache =
 		JSON.parse(localStorage.getItem('bleh_hoshino_cache')) || {};
 
 	const name_lower = name.toLowerCase();

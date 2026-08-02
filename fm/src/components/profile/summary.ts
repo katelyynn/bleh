@@ -154,8 +154,8 @@ export function profile_summary(
 					});
 
 					let sum = 0;
-					let max = Math.max(...values);
-					let avg = values.reduce((sum, val) => sum + val, 0) /
+					const max = Math.max(...values);
+					const avg = values.reduce((sum, val) => sum + val, 0) /
 						values.length;
 
 					values.forEach((value, i) => {
@@ -274,7 +274,7 @@ function bleh_profile_chart(panel: HTMLElement) {
 			return response.text();
 		})
 		.then(function (html) {
-			let doc = new DOMParser().parseFromString(
+			const doc = new DOMParser().parseFromString(
 				html,
 				'text/html',
 			);
@@ -313,18 +313,18 @@ export function bleh_profile_chart_render(
 	const table = panel.querySelector('table');
 	if (!table) return;
 
-	let entries = table.querySelectorAll('tbody tr');
+	const entries = table.querySelectorAll('tbody tr');
 
 	if (entries.length == 0) return;
 
 	let labels = [];
-	let links = [];
+	const links = [];
 	let values = [];
 
 	page.state.glacier.links = [];
 	entries.forEach((entry) => {
-		let period = entry.querySelector('.js-period a');
-		let value = entry.querySelector('.js-scrobbles').textContent.trim();
+		const period = entry.querySelector('.js-period a');
+		const value = entry.querySelector('.js-scrobbles').textContent.trim();
 
 		labels.push(period.textContent.trim());
 		links.push(period.getAttribute('href'));
@@ -359,12 +359,12 @@ export function bleh_profile_chart_render(
 
 	prep_chart_colours();
 
-	let scrobble_canvas_container = panel.querySelector(
+	const scrobble_canvas_container = panel.querySelector(
 		'.scrobble-canvas-container',
 	);
 	scrobble_canvas_container.innerHTML = '';
 
-	let scrobble_canvas = document.createElement('canvas');
+	const scrobble_canvas = document.createElement('canvas');
 	scrobble_canvas.classList.add('scrobble-canvas', 'monthly-canvas');
 
 	let gradient = scrobble_canvas.getContext('2d').createLinearGradient(
@@ -410,7 +410,7 @@ export function bleh_profile_chart_render(
 
 	//
 
-	let scrobble_canvas_2 = document.createElement('canvas');
+	const scrobble_canvas_2 = document.createElement('canvas');
 	scrobble_canvas_2.classList.add('scrobble-canvas', 'monthly-canvas-pie');
 
 	let scrobble_chart_2 = new Chart(scrobble_canvas_2.getContext('2d'), {

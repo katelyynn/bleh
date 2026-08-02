@@ -52,7 +52,7 @@ export function calendar({
 		mins: now.getMinutes(),
 		secs: now.getSeconds(),
 	};
-	let view = {
+	const view = {
 		level: 'day',
 		year: state.year,
 		month: state.month,
@@ -174,7 +174,7 @@ export function calendar({
 		);
 	}
 
-	let tooltip = tippy(date_display, {
+	const tooltip = tippy(date_display, {
 		theme: 'window',
 		content: '',
 		placement: 'top',
@@ -189,7 +189,7 @@ export function calendar({
 		},
 	});
 
-	let menu = tippy(date_display, {
+	const menu = tippy(date_display, {
 		theme: 'context-menu',
 		content: html.node`
             <button class="dropdown-menu-clickable-item" data-type="manual" onclick=${() => {
@@ -502,7 +502,7 @@ export function calendar({
 	function render_manual_view() {
 		let manual_date;
 
-		let elem = html.node`
+		const elem = html.node`
             <div class="calendar-header">
                 <button class="btn month-year calendar-top-button" ref=${(
 			el,

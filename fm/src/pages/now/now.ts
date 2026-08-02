@@ -25,7 +25,7 @@ export function bleh_now() {
 		log('unable to find elements', 'page structure');
 	}
 
-	let content_top = document.body.querySelector('.content-top');
+	const content_top = document.body.querySelector('.content-top');
 
 	checkup_page_structure(false, content_top);
 

@@ -8,7 +8,6 @@ import { log } from '@/build/log';
 import { sponsor_list } from '@/build/sponsor';
 import { lang_info, tl, trans } from '@/build/trans';
 import { html } from 'lighterhtml';
-import { sponsor } from '@/components/sponsor';
 import tippy from 'tippy.js';
 import { page } from '@/build/page';
 import { style_name_from_badge } from './avatar';
@@ -87,7 +86,7 @@ export function load_badges(user, solo = false) {
 export function get_amount_of_badge(badge) {
 	const users = {};
 
-	for (let user in sponsor_list.users) {
+	for (const user in sponsor_list.users) {
 		users[user] = load_badges(user);
 	}
 
@@ -172,7 +171,7 @@ export function create_badge(
 
 	const classlist = on_avatar ? 'avatar-status-dot' : 'label no-hover';
 
-	let elem = html.node`
+	const elem = html.node`
         <span class=${classlist} onclick=${() => {
 		if (!small && !on_avatar) {
 			present_badge(badge);

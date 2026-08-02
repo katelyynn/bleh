@@ -2,7 +2,7 @@ import { log } from '@/build/log';
 import { auth } from '@/build/page';
 import { header_colour } from '../page/colour';
 
-export async function register_auth() {
+export function register_auth() {
 	const handler = document.body.querySelector('.site-auth > .auth-link');
 	if (handler) {
 		log('found handler', 'auth', 'info', { handler });

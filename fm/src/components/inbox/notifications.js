@@ -20,7 +20,7 @@ export function bleh_notification_list(list, mini = false) {
 
 	if (mini) list.classList.add('mini');
 
-	let notifications = list.querySelectorAll('.inbox-notifications__item');
+	const notifications = list.querySelectorAll('.inbox-notifications__item');
 	notifications.forEach((notification, index) => {
 		if (mini && index > 4) notification.style.display = 'none';
 
@@ -40,7 +40,7 @@ export function bleh_notification_list(list, mini = false) {
 		if (mini) notification.classList.add('mini');
 
 		let type = 'shoutbox';
-		let context = {
+		const context = {
 			name: null,
 			sister: null,
 		};
@@ -77,12 +77,12 @@ export function bleh_notification_list(list, mini = false) {
 			type = 'listening_report';
 			involved.push(strongs[0].textContent);
 
-			let img = avatar.querySelector('img');
+			const img = avatar.querySelector('img');
 			img.src = auth.avatar;
 			img.alt = auth.name;
 
 			// remove the staff badge lol
-			let label = avatar.querySelector('.avatar-status-dot');
+			const label = avatar.querySelector('.avatar-status-dot');
 			if (auth.pro) {
 				label.classList =
 					'avatar-status-dot avatar-status-dot--subscriber';

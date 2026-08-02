@@ -84,12 +84,13 @@ export function input({
 		}) as input_element;
 	}
 
-	let input_box;
-	let error_tooltip;
+	let input_box: HTMLInputElement;
+	// deno-lint-ignore prefer-const
+	let error_tooltip: tippy.Instance;
 
-	let colour_block;
+	let colour_block: HTMLElement;
 
-	let container = html.node`
+	const container = html.node`
         <div class="content-form input-container colourful ${
 		type == 'textarea' ? 'textarea' : ''
 	} ${icon ? 'input-has-icon' : ''}" data-type=${type} data-has-error="false">

@@ -18,7 +18,7 @@ export function nag_bar() {
             return;
     }*/
 
-	let nags = page.structure.wrapper.querySelectorAll('.nag-bar');
+	const nags = page.structure.wrapper.querySelectorAll('.nag-bar');
 	nags.forEach((active_nag) => {
 		let type = active_nag.classList[1];
 

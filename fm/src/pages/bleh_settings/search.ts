@@ -40,7 +40,7 @@ function make_search(tabs, query: string) {
 			const name: string = tl(formal.title).toLowerCase() || '';
 			const body: string = tl(formal.body).toLowerCase() || '';
 
-			let tags = formal.tags;
+			const tags = formal.tags;
 			if (tags) {
 				tags.forEach((tag) => {
 					if (typeof tag == 'string') {

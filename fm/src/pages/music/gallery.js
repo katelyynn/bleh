@@ -69,19 +69,21 @@ export function bleh_gallery() {
 	image_details.appendChild(image_sidebar);
 
 	// top title
-	let image_title = image_details.querySelector('.gallery-image-title');
-	let image_date = image_details.querySelector('.gallery-image-uploaded-by');
+	const image_title = image_details.querySelector('.gallery-image-title');
+	const image_date = image_details.querySelector(
+		'.gallery-image-uploaded-by',
+	);
 
 	if (image_title.textContent.trim() == '') {
 		image_title.classList.add('gallery-image-title-empty');
 		image_title.textContent = tl(trans.no_title);
 	}
 
-	let breadcrumbs = document.body.querySelector('.content-top-lower-row');
-	let breadcrumb_root = breadcrumbs.querySelector('a');
-	let breadcrumb_name = breadcrumbs.querySelector('.subpage-title');
+	const breadcrumbs = document.body.querySelector('.content-top-lower-row');
+	const breadcrumb_root = breadcrumbs.querySelector('a');
+	const breadcrumb_name = breadcrumbs.querySelector('.subpage-title');
 
-	let image_title_container = document.createElement('div');
+	const image_title_container = document.createElement('div');
 	image_title_container.classList.add('image-title-container');
 	image_title_container.innerHTML = `
         <div class="sub-text">
@@ -120,7 +122,7 @@ export function bleh_gallery() {
 			.appendChild(description);
 	}
 
-	let buttons = image_details.querySelector('.gallery-image-buttons');
+	const buttons = image_details.querySelector('.gallery-image-buttons');
 
 	buttons.querySelectorAll('button').forEach((btn) => {
 		btn.classList.add('btn', 'colourful', 'gallery-btn');
@@ -128,13 +130,13 @@ export function bleh_gallery() {
 	});
 
 	// button container, to split into two
-	let button_container = document.createElement('div');
+	const button_container = document.createElement('div');
 	button_container.classList.add('button-container-wrapper');
 
 	button_container.appendChild(buttons);
 
 	// divider after vote btns
-	let vote_buttons = buttons.querySelector('.gallery-image-vote-buttons');
+	const vote_buttons = buttons.querySelector('.gallery-image-vote-buttons');
 
 	vote_buttons.after(create_divider());
 
@@ -204,7 +206,7 @@ export function bleh_gallery() {
 	image_details.appendChild(button_container);
 
 	// open in a new tab button
-	let open_button = html.node`
+	const open_button = html.node`
         <button class="btn image-open-button icon gallery-btn gallery-btn-bland" onclick=${() =>
 		expand_gallery_image()}>
             ${tl(trans.expand)}
@@ -217,7 +219,7 @@ export function bleh_gallery() {
 	buttons_extra.appendChild(open_button);
 
 	// share button
-	let share_button = html.node`
+	const share_button = html.node`
         <button class="btn image-share-button icon gallery-btn gallery-btn-bland" onclick=${() =>
 		share(window.location.href)}>
             ${tl(trans.share)}
@@ -228,7 +230,7 @@ export function bleh_gallery() {
 	share_button.after(create_divider());
 
 	// delete
-	let delete_button = image_details.querySelector('.gallery-image-delete');
+	const delete_button = image_details.querySelector('.gallery-image-delete');
 	if (delete_button) {
 		delete_button.querySelector('button').classList =
 			'btn icon colourful gallery-btn';
@@ -255,7 +257,7 @@ export function bleh_gallery() {
 	buttons_extra.appendChild(report_form);
 
 	// star
-	let star_buttons = image_details.querySelectorAll(
+	const star_buttons = image_details.querySelectorAll(
 		'.gallery-image-preferred-button :is(button, a)',
 	);
 	star_buttons.forEach((star_button) => {
@@ -273,7 +275,7 @@ export function bleh_gallery() {
 	});
 
 	// view all artwork
-	let view_all_container = page.structure.main.querySelector(
+	const view_all_container = page.structure.main.querySelector(
 		'.more-link-fullwidth-right-flush-top',
 	);
 	if (view_all_container) {
@@ -281,7 +283,7 @@ export function bleh_gallery() {
             <section class="side-actions" />
         `;
 
-		let view_all = view_all_container.querySelector('a');
+		const view_all = view_all_container.querySelector('a');
 		view_all.classList.add('btn', 'side-action', 'icon-mask');
 		view_all.setAttribute('data-type', 'gallery');
 
@@ -291,7 +293,7 @@ export function bleh_gallery() {
 
 		// saved button
 		if (page.type == 'artist' || ff('display_album_bookmark')) {
-			let view_saved = document.createElement('a');
+			const view_saved = document.createElement('a');
 			view_saved.classList.add('btn', 'side-action', 'icon-mask');
 			view_saved.setAttribute(
 				'href',
@@ -346,7 +348,7 @@ function gallery_arrows() {
 }
 
 function expand_gallery_image() {
-	let image_src = page.structure.container
+	const image_src = page.structure.container
 		.querySelector('.active-slide .js-gallery-image')
 		.getAttribute('src')
 		.replace('770x0', 'ar0');
@@ -354,7 +356,7 @@ function expand_gallery_image() {
 }
 
 export function create_divider() {
-	let divider = document.createElement('div');
+	const divider = document.createElement('div');
 	divider.classList.add('listen-divider');
 
 	return divider;
@@ -362,7 +364,7 @@ export function create_divider() {
 
 export function bleh_gallery_upload() {
 	// remove content top
-	let content_top = document.body.querySelector('.page-content');
+	const content_top = document.body.querySelector('.page-content');
 	content_top.innerHTML = '';
 
 	if (!ff('mesmerizer')) {
@@ -384,16 +386,16 @@ export function bleh_gallery_upload() {
 		);
 
 		// apply card style to form
-		let form = page.structure.main.querySelector('.form-horizontal');
+		const form = page.structure.main.querySelector('.form-horizontal');
 		form.classList.add('panel-form');
 
 		// upload rules
-		let upload_rules_group = form.querySelector(
+		const upload_rules_group = form.querySelector(
 			'.form-group--description + .form-group',
 		);
-		let rules = upload_rules_group.querySelector('.gallery-upload-rules');
+		const rules = upload_rules_group.querySelector('.gallery-upload-rules');
 
-		let rules_panel = document.createElement('section');
+		const rules_panel = document.createElement('section');
 		rules_panel.classList.add('rules-panel');
 		rules_panel.innerHTML = rules.innerHTML;
 
@@ -610,11 +612,11 @@ export function bleh_gallery_upload_check() {
 }
 
 export function bleh_gallery_list() {
-	let upload_btn = page.structure.main.querySelector('.btn-add');
+	const upload_btn = page.structure.main.querySelector('.btn-add');
 	if (upload_btn) {
 		upload_btn.classList = 'btn view-all-button back upload-button';
 
-		let upload_panel = document.createElement('section');
+		const upload_panel = document.createElement('section');
 		upload_panel.classList.add('view-all-panel', 'upload-panel');
 
 		upload_panel.appendChild(upload_btn);
@@ -631,7 +633,7 @@ export function bleh_gallery_list() {
 
 // gallery main page
 function patch_gallery_image_listing() {
-	let bookmarked_images =
+	const bookmarked_images =
 		JSON.parse(localStorage.getItem('bleh_bookmarked_images')) || {};
 
 	if (page.requested.tab != 'saved' || page.requested.page != null) {
@@ -644,7 +646,7 @@ function patch_gallery_image_listing() {
 	}
 
 	// create nav
-	let nav = html.node`
+	const nav = html.node`
         <div class="toolbar">
             <nav class="navlist secondary-nav navlist--more redesigned-navigation">
                 <ul class="navlist-items">
@@ -682,7 +684,7 @@ function patch_gallery_image_listing() {
 	// append images
 	if (bookmarked_images.hasOwnProperty(page.name)) {
 		bookmarked_images[page.name].forEach((image) => {
-			let image_element = document.createElement('li');
+			const image_element = document.createElement('li');
 			image_element.classList.add('image-list-item-wrapper');
 			image_element.setAttribute('data-image-id', image);
 			image_element.innerHTML = `
@@ -696,7 +698,7 @@ function patch_gallery_image_listing() {
 				.appendChild(image_element);
 
 			if (ff('remove_bookmark')) {
-				let menu = tippy(image_element, {
+				const menu = tippy(image_element, {
 					theme: 'context-menu',
 					content: html.node`
                         <button class="dropdown-menu-clickable-item" onclick=${() =>
@@ -726,15 +728,15 @@ function patch_gallery_image_listing() {
 		});
 
 		// mark images as bookmarked
-		let image_list = page.structure.main.querySelectorAll(
+		const image_list = page.structure.main.querySelectorAll(
 			'.image-list-item',
 		);
 		image_list.forEach((image_list_item) => {
-			let image_id_split = image_list_item
+			const image_id_split = image_list_item
 				.getAttribute('href')
 				.split('/');
-			let image_id_length = image_id_split.length;
-			let image_id = image_id_split[image_id_length - 1];
+			const image_id_length = image_id_split.length;
+			const image_id = image_id_split[image_id_length - 1];
 
 			if (bookmarked_images[page.name].includes(image_id)) {
 				image_list_item.classList.add('image-list-item-bookmarked');
@@ -772,14 +774,14 @@ function patch_gallery_focused_image(
 	focused_image_details,
 	gallery_interactions,
 ) {
-	let focused_image_id_split = focused_image_details
+	const focused_image_id_split = focused_image_details
 		.getAttribute('data-image-url')
 		.split('/');
-	let focused_image_id_length = focused_image_id_split.length - 1;
+	const focused_image_id_length = focused_image_id_split.length - 1;
 
-	let focused_image_id = focused_image_id_split[focused_image_id_length];
+	const focused_image_id = focused_image_id_split[focused_image_id_length];
 
-	let bookmarked_images =
+	const bookmarked_images =
 		JSON.parse(localStorage.getItem('bleh_bookmarked_images')) || {};
 	let image_is_bookmarked = false;
 	if (bookmarked_images.hasOwnProperty(page.name)) {
@@ -802,10 +804,10 @@ function patch_gallery_focused_image(
 }
 
 function update_image_bookmark(button, id) {
-	let bookmarked_images =
+	const bookmarked_images =
 		JSON.parse(localStorage.getItem('bleh_bookmarked_images')) || {};
 
-	let is_bookmarked = button.classList.contains('primary');
+	const is_bookmarked = button.classList.contains('primary');
 
 	if (!bookmarked_images.hasOwnProperty(page.name)) {
 		bookmarked_images[page.name] = [];
@@ -816,8 +818,8 @@ function update_image_bookmark(button, id) {
 
 		button.classList.remove('primary');
 
-		let new_artist_bookmarks = [];
-		for (let image in bookmarked_images[page.name]) {
+		const new_artist_bookmarks = [];
+		for (const image in bookmarked_images[page.name]) {
 			if (bookmarked_images[page.name][image] != id) {
 				new_artist_bookmarks.push(bookmarked_images[page.name][image]);
 			}

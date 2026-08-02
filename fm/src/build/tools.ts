@@ -58,8 +58,8 @@ export function rgb_to_oklch(r, g, b) {
  * @param {number} b
  * @returns {{h: number, s: number, l: number}}
  */
-export function rgb_to_hsl(r, g, b) {
-	let hex = rgb_to_hex(r, g, b);
+export function rgb_to_hsl(r: number, g: number, b: number) {
+	const hex = rgb_to_hex(r, g, b);
 	return hex_to_oklch(hex);
 }
 
@@ -70,12 +70,12 @@ export function rgb_to_hsl(r, g, b) {
  * @param {number} b
  * @returns {string}
  */
-export function rgb_to_hex(r, g, b) {
+export function rgb_to_hex(r: number, g: number, b: number) {
 	return '#' + comp_to_hex(r) + comp_to_hex(g) + comp_to_hex(b);
 }
 // https://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb#5624139
-function comp_to_hex(comp) {
-	let hex = comp.toString(16);
+function comp_to_hex(comp: number) {
+	const hex = comp.toString(16);
 	return hex.length == 1 ? '0' + hex : hex;
 }
 
@@ -84,13 +84,13 @@ function comp_to_hex(comp) {
  * @param {number} sat
  * @returns {number}
  */
-export function clamp_sat(sat) {
+export function clamp_sat(sat: number) {
 	if (sat > 4) return 4;
 
 	return round_two(sat);
 }
 
-export function clamp_lit(sat, lit, raise_minimum = false) {
+export function clamp_lit(sat: number, lit: number, raise_minimum = false) {
 	if (raise_minimum && lit < 0.7) {
 		lit = 0.7;
 	}
@@ -98,7 +98,7 @@ export function clamp_lit(sat, lit, raise_minimum = false) {
 	return round_two(lit);
 }
 
-export function round_two(num) {
+export function round_two(num: number) {
 	return Math.round((num + Number.EPSILON) * 100) / 100;
 }
 
@@ -107,7 +107,7 @@ export function round_two(num) {
  * @param {string} string
  * @returns {number}
  */
-export function clean_number(string) {
+export function clean_number(string: string) {
 	if (!string) return 0;
 
 	return int(string.replaceAll(',', '').replaceAll('.', ''));
@@ -131,7 +131,7 @@ export function sanitise(text, method = '+') {
  * @param {string} text - Text to sanitise
  * @returns {string}
  */
-export function sanitise_text(text) {
+export function sanitise_text(text: string) {
 	return text
 		.replace(/&/g, '&amp;')
 		.replace(/</g, '&lt;')
@@ -147,7 +147,7 @@ export function sanitise_text(text) {
  * @returns {string}
  * @see sanitise
  */
-export function desanitise(text, method = '+') {
+export function desanitise(text: string, method = '+') {
 	return decodeURIComponent(text.replaceAll(method, '%20')).replaceAll(
 		'%252B',
 		'+',
@@ -217,7 +217,7 @@ export function interpolate_hue(
 		diff += 360;
 	}
 
-	let interpolated = current + diff * proximity;
+	const interpolated = current + diff * proximity;
 
 	// normalise once more
 	return ((interpolated % 360) + 360) % 360;
@@ -405,7 +405,7 @@ export function convert_gif_to_png(url) {
 export function control_gif_pause(image, override = false) {
 	if (!image) return;
 
-	let processed = image.getAttribute('data-gif-pause');
+	const processed = image.getAttribute('data-gif-pause');
 	if (processed) return;
 	image.setAttribute('data-gif-pause', 'true');
 

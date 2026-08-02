@@ -1,6 +1,5 @@
 import { html, render } from 'lighterhtml';
-import { auth, dialogs, page, random_list, root } from '@/build/page';
-import { render_user } from '@/pages/home/minis';
+import { auth, page, random_list, root } from '@/build/page';
 import { tl, trans } from '@/build/trans';
 import { dialog, dialog_rm } from '@/components/dialog/dialog';
 import { input } from '@/components/settings/input';
@@ -35,8 +34,8 @@ export function plot({ host, sidebar } = {}) {
 	let temporary_data_source = {};
 	let temporary_user = '';
 
-	let current_year = new Date().getFullYear();
-	let previous_year = current_year - 1;
+	const current_year = new Date().getFullYear();
+	const previous_year = current_year - 1;
 
 	let selected_data_source = '';
 	let selected_user = '';

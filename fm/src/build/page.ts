@@ -4,22 +4,16 @@
 // Licensed under GPLv3
 //
 
-import { html } from 'lighterhtml';
 import tippy from 'tippy.js';
-import { version } from '@/main';
 import { season } from '@/components/seasonal';
 import { DateTime } from 'luxon';
 // require page reload
-export let reload_pending = {
+export const reload_pending = {
 	state: false,
 };
 
-// lookup
-export let last_lookup;
-export let next_lookup;
-
-export let dialogs = {};
-export let notifications = {};
+export const dialogs = {};
+export const notifications = {};
 
 tippy.setDefaultProps({
 	arrow: false,
@@ -38,7 +32,14 @@ tippy.setDefaultProps({
  * @param {string|null} avatar - Profile avatar if present
  * @param {{hue: number, sat: number, lit: number}} sets - Set of colours based on avatar
  */
-export let auth = {
+export const auth: {
+	name: string | null;
+	pro: boolean | null;
+	sponsor: boolean;
+	sponsor_full: boolean;
+	avatar: string | null;
+	sets: { hue: number; sat: number; lit: number };
+} = {
 	name: null,
 	pro: null,
 	sponsor: false,
@@ -50,7 +51,7 @@ export let auth = {
 		lit: 1,
 	},
 };
-export let auth_link = {
+export const auth_link = {
 	state: null,
 };
 
@@ -63,12 +64,12 @@ export let auth_link = {
  * {root}user = /user or /jp/user
  * @type {string}
  */
-export let root = '/';
-export function setRoot(data) {
+export let root: string = '/';
+export function setRoot(data: string) {
 	root = data;
 }
 // recent activity
-export let recent_activity_list = [];
+export const recent_activity_list = [];
 
 /**
  * Represents the current page state, structure, and any elements
@@ -91,7 +92,7 @@ export let recent_activity_list = [];
  * @property {Object} state - Dynamic variables
  * @property {boolean} state.settings_reload - Whether the page is pending a reload due to user settings
  */
-export let page: page = {
+export const page: page = {
 	initial: '',
 	type: '',
 	name: '',
@@ -262,7 +263,7 @@ interface glacier_insight {
 	};
 }
 
-export let shout_parse_queue = [];
+export const shout_parse_queue: { element: HTMLParagraphElement | null }[] = [];
 
 export const urls = {
 	settings: 'bleh',
@@ -281,11 +282,11 @@ export const api_key = '85c118b69b1437844fe75fcd2bf27261';
 
 export const discord = 'xU9KxGQpVw';
 
-export let oracle_artists = {};
-export let oracle_albums = {};
-export let oracle_tracks = {};
+export const oracle_artists = {};
+export const oracle_albums = {};
+export const oracle_tracks = {};
 
-export let has_prompted_for_update = {
+export const has_prompted_for_update = {
 	state: false,
 };
 

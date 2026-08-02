@@ -21,10 +21,12 @@ import JSON5 from 'json5';
 export function sponsors(force = false, func = null) {
 	if (!ff('sponsor')) return;
 
-	let sponsor_data = localStorage.getItem('kat_sponsors');
-	let sponsor_expire = new Date(localStorage.getItem('kat_sponsors_expire'));
+	const sponsor_data = localStorage.getItem('kat_sponsors');
+	const sponsor_expire = new Date(
+		localStorage.getItem('kat_sponsors_expire'),
+	);
 
-	let current_time = new Date();
+	const current_time = new Date();
 
 	if (!sponsor_data) {
 		log('not cached, fetching', 'sponsor');
@@ -83,11 +85,11 @@ export function sponsors(force = false, func = null) {
 function sponsor_request(should_notify = false, func = null) {
 	log(`initiating request with notify ${should_notify}`, 'sponsor');
 
-	let button = document.body.querySelector('[onclick="_sponsor_check()"]');
+	const button = document.body.querySelector('[onclick="_sponsor_check()"]');
 	if (button) button.setAttribute('disabled', '');
 
-	let xhr = new XMLHttpRequest();
-	let url =
+	const xhr = new XMLHttpRequest();
+	const url =
 		`https://katelyynn.github.io/bleh/fm/public/sponsors.json5?${Math.random()}`;
 	xhr.open('GET', url, true);
 
@@ -95,7 +97,7 @@ function sponsor_request(should_notify = false, func = null) {
 		log(`list responded with ${xhr.status}`, 'sponsor');
 
 		// set expire date
-		let api_expire = new Date();
+		const api_expire = new Date();
 
 		if (xhr.status != 200) {
 			log(
@@ -236,7 +238,7 @@ export function bleh_sponsor_page() {
 	document.body.style.removeProperty('--sat-album');
 	document.body.style.removeProperty('--lit-album');
 
-	let adaptive_skin_container = document.querySelector(
+	const adaptive_skin_container = document.querySelector(
 		'.adaptive-skin-container:not([data-bleh])',
 	);
 

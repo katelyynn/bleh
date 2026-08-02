@@ -36,9 +36,8 @@ import { clean_title, fix_title } from '@/build/music';
 import { version } from '../../main';
 import { settings } from '@/build/config';
 import { dialog, dialog_rm } from '@/components/dialog/dialog';
-import tippy, { followCursor } from 'tippy.js';
+import tippy from 'tippy.js';
 import {
-	hoshino_return,
 	load_hoshino_artwork,
 	save_hoshino_artwork,
 } from '@/components/music/hoshino';

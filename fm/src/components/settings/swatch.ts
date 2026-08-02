@@ -7,13 +7,13 @@ import { html } from 'lighterhtml';
 import { ff } from './sku';
 import tippy from 'tippy.js';
 import { input } from './input';
-import { clamp_lit, clamp_sat, hex_to_oklch, rgb_to_hex } from '@/build/tools';
+import { clamp_lit, clamp_sat, hex_to_oklch } from '@/build/tools';
 import { setting } from './settings';
 import { update_colour_swatches } from '@/config';
 import { formatHex } from 'culori';
 
 export function display_colour_presets() {
-	let colours = {
+	const colours = {
 		custom: [
 			{
 				type: 'default',
@@ -128,7 +128,7 @@ export function display_colour_presets() {
 			},
 		],
 	};
-	let exclusives = {
+	const exclusives = {
 		christmas: [
 			{
 				type: 'season',
@@ -176,7 +176,7 @@ export function display_colour_presets() {
 
 	const season = page.state.seasons.current?.id;
 
-	for (let type in colours) {
+	for (const type in colours) {
 		const swatch_group = page.structure.main.querySelector(
 			`#colour_${type}`,
 		);

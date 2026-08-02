@@ -11,7 +11,7 @@ import { copy } from './tools';
 
 export function log(text, system, type = 'info', append = {}) {
 	if (!page.structure.logs) {
-		let logs = html.node`
+		const logs = html.node`
             <div class="logs" />
         `;
 

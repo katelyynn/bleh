@@ -48,7 +48,7 @@ export function submit_scrobble({
 
 	let create_scrobble;
 
-	let max_date = new Date();
+	const max_date = new Date();
 	max_date.setDate(max_date.getDate() + 1);
 
 	const pre_existing_date = pre_timestamp != 0;
@@ -204,7 +204,7 @@ export function submit_scrobble({
 				album_artist.value = artist.value;
 			}
 
-			let params = {
+			const params = {
 				sk: localStorage.getItem('bleh_auth'),
 				artist: artist.value,
 				track: track.value,

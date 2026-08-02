@@ -44,7 +44,7 @@ import { header_colour } from '@/components/page/colour';
 import { oracle_process } from '@/components/music/oracle';
 
 export function bleh_artists() {
-	let artist_header = document.body.querySelector(
+	const artist_header = document.body.querySelector(
 		'.header-new--artist',
 	) as HTMLElement;
 
@@ -53,7 +53,7 @@ export function bleh_artists() {
 
 	artist_title(artist_header);
 
-	let is_subpage = page.subpage != 'overview';
+	const is_subpage = page.subpage != 'overview';
 
 	// without pro theres two containers
 	if (auth.pro) {
@@ -84,22 +84,24 @@ export function bleh_artists() {
 		}
 	}
 	try {
-		page.structure.row = page.structure.container.querySelector('.row');
+		page.structure.row = page.structure.container!.querySelector('.row');
 
 		if (!is_subpage) {
-			page.structure.main = page.structure.row.querySelector(
+			page.structure.main = page.structure.row!.querySelector(
 				'.col-main.buffer-standard',
 			);
 		} else {
-			page.structure.main = page.structure.row.querySelector('.col-main');
+			page.structure.main = page.structure.row!.querySelector(
+				'.col-main',
+			);
 		}
 
 		if (auth.pro) {
-			page.structure.side = page.structure.row.querySelector(
+			page.structure.side = page.structure.row!.querySelector(
 				'.col-sidebar:not(.masonry-right)',
 			);
 		} else {
-			page.structure.side = page.structure.row.querySelector(
+			page.structure.side = page.structure.row!.querySelector(
 				'.col-sidebar:not(.section-with-separator--col)',
 			);
 		}
@@ -109,18 +111,18 @@ export function bleh_artists() {
 
 	checkup_page_structure(is_subpage, artist_header);
 
-	let katsune = ff('katsune');
-	let featured_items = artist_header.querySelector(
+	const katsune = ff('katsune');
+	const featured_items = artist_header.querySelector(
 		'.artist-header-featured-items',
 	);
 
 	if (ff('refreshed_music_nav')) {
-		let avatar = artist_header.querySelector(
+		const avatar = artist_header.querySelector(
 			'.header-new-background-image',
 		) as HTMLElement;
-		let title = artist_header.querySelector('.header-new-title');
-		let on_tour = artist_header.querySelector('.header-new-on-tour');
-		let position = artist_header.querySelector(
+		const title = artist_header.querySelector('.header-new-title');
+		const on_tour = artist_header.querySelector('.header-new-on-tour');
+		const position = artist_header.querySelector(
 			'.header-new-chart-position-number',
 		);
 
@@ -131,7 +133,7 @@ export function bleh_artists() {
 		const same_page = is_same_page();
 
 		let multi_info_box;
-		let redesigned_artist_header = html.node`
+		const redesigned_artist_header = html.node`
             <section class="page-header for-artist ${same_page ? 'same' : ''}">
                 <div class="page-header-avatar-list">
                     ${page_avatar = page_header_avatar(
@@ -187,9 +189,9 @@ export function bleh_artists() {
 		if (avatar) register_background(avatar.getAttribute('content'));
 		else register_background(null);
 
-		page.structure.container.insertBefore(
+		page.structure.container!.insertBefore(
 			redesigned_artist_header,
-			page.structure.container.firstElementChild,
+			page.structure.container!.firstElementChild,
 		);
 		artist_header.classList.add('legacy-header');
 	}
@@ -203,16 +205,16 @@ export function bleh_artists() {
 
 		similar_items();
 
-		let top_tracks = page.structure.main.querySelector('#top-tracks');
+		const top_tracks = page.structure.main.querySelector('#top-tracks');
 		if (top_tracks) {
 			let settings_btn;
 
-			let top = top_tracks.querySelector('.section-controls');
+			const top = top_tracks.querySelector('.section-controls');
 			top.classList = 'top-container';
 
-			let header = top.querySelector('h3');
+			const header = top.querySelector('h3');
 
-			let select_btn = top.querySelector(
+			const select_btn = top.querySelector(
 				'.dropdown-menu-clickable-button',
 			);
 			if (select_btn) {
@@ -224,7 +226,7 @@ export function bleh_artists() {
 				select_btn.classList.remove('dropdown-menu-clickable-button');
 			}
 
-			let play = top.querySelector('.section-playlink');
+			const play = top.querySelector('.section-playlink');
 			if (play) {
 				play.classList.add('blend-v2-btn', 'radio', 'left-icon');
 				play.classList.remove(
@@ -267,14 +269,14 @@ export function bleh_artists() {
 			});
 		}
 
-		let top_albums = page.structure.main.querySelector('#top-albums');
+		const top_albums = page.structure.main.querySelector('#top-albums');
 		if (top_albums) {
-			let top = top_albums.querySelector('.section-controls');
+			const top = top_albums.querySelector('.section-controls');
 			top.classList = 'top-container';
 
-			let header = top.querySelector('h3');
+			const header = top.querySelector('h3');
 
-			let select_btn = top.querySelector(
+			const select_btn = top.querySelector(
 				'.dropdown-menu-clickable-button',
 			);
 
@@ -296,7 +298,7 @@ export function bleh_artists() {
 		}
 
 		if (katsune && featured_items) {
-			let featured_panel = html.node`
+			const featured_panel = html.node`
                 <section class="featured-items-panel">
                     ${
 				Array.from(featured_items.querySelectorAll('li')).map(
@@ -429,15 +431,15 @@ export function bleh_artists() {
 			});
 		}
 	} else {
-		let btn_add = page.structure.side.querySelector('.add-button');
+		const btn_add = page.structure.side.querySelector('.add-button');
 		if (btn_add) btn_add.setAttribute('data-page-subpage', page.subpage);
 
 		if (page.subpage.startsWith('listeners_')) {
-			let toolbar = page.structure.row.querySelector(
+			const toolbar = page.structure.row.querySelector(
 				':scope > .toolbar > .navlist > .navlist-items',
 			);
 
-			let overview = toolbar.querySelector(
+			const overview = toolbar.querySelector(
 				'.secondary-nav-item--overview',
 			);
 			overview.classList.remove('secondary-nav-item--overview');
@@ -488,17 +490,17 @@ export function bleh_artists() {
 }
 
 function bleh_artist_tracks() {
-	let top_tracks = page.structure.main.querySelector('section');
+	const top_tracks = page.structure.main.querySelector('section');
 	if (top_tracks) {
 		let settings_btn;
 
-		let top = top_tracks.querySelector('.section-controls');
+		const top = top_tracks.querySelector('.section-controls');
 		top.classList = 'top-container';
 
-		let header = top.querySelector('h2');
+		const header = top.querySelector('h2');
 		header.classList.remove('subpage-title');
 
-		let select_btn = top.querySelector('.dropdown-menu-clickable-button');
+		const select_btn = top.querySelector('.dropdown-menu-clickable-button');
 
 		if (select_btn) {
 			select_btn.classList.add(
@@ -542,16 +544,16 @@ function bleh_artist_tracks() {
 }
 
 function bleh_artist_albums() {
-	let top_albums = page.structure.main.querySelector(
+	const top_albums = page.structure.main.querySelector(
 		'#artist-albums-section',
 	);
 	if (top_albums) {
-		let top = top_albums.querySelector('.section-controls');
+		const top = top_albums.querySelector('.section-controls');
 		top.classList = 'top-container';
 
-		let header = top.querySelector('h3');
+		const header = top.querySelector('h3');
 
-		let select_btn = top.querySelector('.dropdown-menu-clickable-button');
+		const select_btn = top.querySelector('.dropdown-menu-clickable-button');
 
 		if (select_btn) {
 			select_btn.classList.add(
@@ -573,7 +575,7 @@ function bleh_artist_albums() {
 }
 
 function bleh_artist_similar() {
-	const similar = page.structure.main.querySelector(
+	const similar = page.structure.main!.querySelector(
 		':scope > .similar-artists',
 	);
 
@@ -581,10 +583,10 @@ function bleh_artist_similar() {
 
 	const artists = similar.querySelectorAll('.similar-artists-item-wrap');
 
-	const pagination = page.structure.main.querySelector('.pagination');
+	const pagination = page.structure.main!.querySelector('.pagination');
 
 	render(
-		page.structure.main,
+		page.structure.main!,
 		html`
 			<section class="similar-panel">
 			    <h2 class="text-18">
@@ -611,7 +613,7 @@ function bleh_artist_similar() {
 }
 
 function bleh_listeners() {
-	const buffer = page.structure.main.querySelector(
+	const buffer = page.structure.main!.querySelector(
 		':scope > .buffer-standard',
 	);
 
@@ -659,9 +661,9 @@ function bleh_listeners() {
 
 	render_friends();
 
-	page.structure.side.insertBefore(
+	page.structure.side!.insertBefore(
 		friends_panel,
-		page.structure.side.firstElementChild,
+		page.structure.side!.firstElementChild,
 	);
 
 	function render_friends() {

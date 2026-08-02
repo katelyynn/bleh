@@ -125,7 +125,7 @@ export function render_chart_preview(
         </div>
     `;
 
-	function grid_preview(primary = false) {
+	function grid_preview() {
 		return html.node`
             <div class="grid-item-preview grid-item-${type} icon-mask" />
         `;

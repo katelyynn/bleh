@@ -62,10 +62,13 @@ export function patch_avatar(
 	}
 
 	if (pre_existing_badge) {
-		const new_pre_existing = process_badge({
-			type: pre_existing_badge_type,
-			inbuilt: true,
-		}, name);
+		const new_pre_existing = process_badge(
+			{
+				type: pre_existing_badge_type,
+				inbuilt: true,
+			},
+			name,
+		);
 
 		if (pre_existing_badge_type == 'user-status-subscriber') {
 			badges = [new_pre_existing, ...badges];
@@ -78,56 +81,75 @@ export function patch_avatar(
 		avatar.appendChild(create_badge(badges[badges.length - 1], true));
 	}
 
-	let image_header;
 	const popup = tippy(parent ? parent : avatar, {
 		theme: 'context-menu',
-		content: html.node`
-            <div class="track-preview user-preview">
-                <div class="track-preview-image">
-                    <div class="inner-image">
-                        <img src=${
-			avatar_img.getAttribute('src').replace(
-				'/avatar42s/',
-				'/avatar170s/',
-			)
-		} alt=${name}>
-                    </div>
-                </div>
-                <div class="track-preview-info">
-                    <h5 class="track-preview-text track-preview-title"><span class="at">@</span>${name}</h5>
-                    ${
-			badges.length > 0
-				? html.node`
-                        <div class="badges track-preview-badges">
-                            ${
-					create_badge(badges[badges.length - 1], false, true, true)
-				}
-                            ${
-					badges.length > 1
-						? html.node`<div class="extra-badges-text">${
-							tl(trans.and_count_more, { c: badges.length - 1 })
-						}</div>`
-						: ''
-				}
-                        </div>
-                    `
-				: ''
-		}
-                </div>
-            </div>
-            <a class="dropdown-menu-clickable-item" data-type="profile" href="${root}user/${name}">
-                ${tl(trans.profile)}
-            </a>
-            <a class="dropdown-menu-clickable-item" data-type="library" href="${root}user/${name}/library">
-                ${tl(trans.library)}
-            </a>
-            <a class="dropdown-menu-clickable-item" data-type="friends" href="${root}user/${name}/friends">
-                ${tl(trans.friends)}
-            </a>
-            <a class="dropdown-menu-clickable-item" data-type="shouts" href="${root}user/${name}/shoutbox">
-                ${tl(trans.shouts)}
-            </a>
-        `,
+		content: (
+			<>
+				<div class='track-preview user-preview'>
+					<div class='track-preview-image'>
+						<div class='inner-image'>
+							<img
+								src={avatar_img
+									.getAttribute('src')
+									.replace('/avatar42s/', '/avatar170s/')}
+								alt={name}
+							/>
+						</div>
+					</div>
+					<div class='track-preview-info'>
+						<h5 class='track-preview-text track-preview-title'>
+							<span class='at'>@</span>
+							{name}
+						</h5>
+						{badges.length > 0 && (
+							<div class='badges track-preview-badges'>
+								{create_badge(
+									badges[badges.length - 1],
+									false,
+									true,
+									true,
+								)}
+								{badges.length > 1 && (
+									<div class='extra-badges-text'>
+										{tl(trans.and_count_more, {
+											c: badges.length - 1,
+										})}
+									</div>
+								)}
+							</div>
+						)}
+					</div>
+				</div>
+				<a
+					class='dropdown-menu-clickable-item'
+					data-type='profile'
+					href={`${root}user/${name}`}
+				>
+					{tl(trans.profile)}
+				</a>
+				<a
+					class='dropdown-menu-clickable-item'
+					data-type='library'
+					href={`${root}user/${name}/library`}
+				>
+					{tl(trans.library)}
+				</a>
+				<a
+					class='dropdown-menu-clickable-item'
+					data-type='friends'
+					href={`${root}user/${name}/friends`}
+				>
+					{tl(trans.friends)}
+				</a>
+				<a
+					class='dropdown-menu-clickable-item'
+					data-type='shouts'
+					href={`${root}user/${name}/shoutbox`}
+				>
+					{tl(trans.shouts)}
+				</a>
+			</>
+		),
 		placement: side,
 		interactive: true,
 		trigger: 'click',
@@ -159,42 +181,32 @@ unsafeWindow._expand_avatar = function (src) {
 	expand_avatar(src);
 };
 export function expand_avatar(src, alt = '') {
+	const alt_text = <div class='alt-text'>ALT</div>;
 	dialog({
 		id: 'avatar',
-		body: html.node`
-            <div class="full-avatar-wrapper">
-                <div class="full-avatar">
-                    <img src=${src} alt=${alt}>
-                    ${
-			alt != ''
-				? () => {
-					const elem = html.node`
-                            <div class="alt-text">
-                                ALT
-                            </div>
-                        `;
-
-					tippy(elem, {
-						content: alt,
-					});
-
-					return elem;
-				}
-				: ''
-		}
-                </div>
-                <div class="modal-footer">
-                    <div class="fill"></div>
-                    <a class="btn primary open" href=${src} target="_blank">
-                        ${tl(trans.open_new_tab)}
-                    </a>
-                    <div class="fill"></div>
-                </div>
-            </div>
-        `,
+		body: (
+			<div class='full-avatar-wrapper'>
+				<div class='full-avatar'>
+					<img src={src} alt={alt} />
+					{alt != '' && alt_text}
+				</div>
+				<div class='modal-footer'>
+					<div class='fill'></div>
+					<a class='btn primary open' href={src} target='_blank'>
+						{tl(trans.open_new_tab)}
+					</a>
+					<div class='fill'></div>
+				</div>
+			</div>
+		),
 		type: 'avatar',
 		has_overlays: false,
 	});
+	if (alt != '') {
+		tippy(alt_text, {
+			content: alt,
+		});
+	}
 }
 
 export function style_name_from_badge(name, badge) {
@@ -249,7 +261,9 @@ export function avatar(url: string | null, requested: avatar_dimensions) {
 			!/^https:\/\/lastfm(?:-img)?\.freetls\.fastly\.net\/i\/u\//.test(
 				url,
 			)
-		) return url;
+		) {
+			return url;
+		}
 
 		const built = new URL(url);
 

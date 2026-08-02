@@ -32,11 +32,11 @@ export async function bleh_search() {
 		log('unable to find elements', 'page structure');
 	}
 
-	let content_top = document.body.querySelector('.content-top');
+	const content_top = document.body.querySelector('.content-top');
 
-	let search_form = page.structure.main.querySelector('.search-form');
-	let search = search_form.querySelector('#site-search');
-	let value = search.getAttribute('value');
+	const search_form = page.structure.main.querySelector('.search-form');
+	const search = search_form.querySelector('#site-search');
+	const value = search.getAttribute('value');
 
 	if (!page.mobile) {
 		let site_search = document.body.querySelector('#masthead-search-field');
@@ -52,10 +52,10 @@ export async function bleh_search() {
 	update_page();
 
 	if (page.subpage != 'overview') {
-		let new_panel = document.createElement('section');
+		const new_panel = document.createElement('section');
 		new_panel.classList.add('search-results-panel');
 
-		let elements = page.structure.main.querySelectorAll(
+		const elements = page.structure.main.querySelectorAll(
 			':scope > *:not(form)',
 		);
 		elements.forEach((element) => {
@@ -70,7 +70,7 @@ export async function bleh_search() {
 	}
 
 	if (page.subpage == 'artists' && settings.corrections) {
-		let artists = page.structure.main.querySelectorAll(
+		const artists = page.structure.main.querySelectorAll(
 			'.artist-result-heading a',
 		);
 		artists.forEach((artist) => {
@@ -83,9 +83,9 @@ export async function bleh_search() {
 			'.album-result-inner',
 		);
 		results.forEach((result) => {
-			let heading = result.querySelector('.album-result-heading a');
-			let artist_parent = result.querySelector('.album-result-artist');
-			let artist = artist_parent.querySelector('a');
+			const heading = result.querySelector('.album-result-heading a');
+			const artist_parent = result.querySelector('.album-result-artist');
+			const artist = artist_parent.querySelector('a');
 
 			artist.textContent = correct_artist(artist.textContent);
 
@@ -95,8 +95,8 @@ export async function bleh_search() {
 			);
 
 			// match artists
-			let image = result.querySelector('.album-result-image');
-			let image_parent = document.createElement('span');
+			const image = result.querySelector('.album-result-image');
+			const image_parent = document.createElement('span');
 			image_parent.classList.add('avatar', 'album-result-image');
 			image_parent.appendChild(image);
 

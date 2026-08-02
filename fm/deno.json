@@ -5,7 +5,6 @@
 		"@deno/esbuild-plugin": "jsr:@deno/esbuild-plugin@^1.2.1",
 		"@std/http": "jsr:@std/http@^1.1.2",
 		"@tealmiku/florence": "npm:@tealmiku/florence@^2026.527.0",
-		"@types/react": "npm:@types/react@^19.2.18",
 		"@zachleat/hypercard": "npm:@zachleat/hypercard@^2.0.2",
 		"chart.js": "npm:chart.js@^4.5.1",
 		"chartjs-adapter-luxon": "npm:chartjs-adapter-luxon@^1.3.1",
@@ -26,7 +25,6 @@
 		"luxon": "npm:luxon@^3.7.2",
 		"odometer_countup": "npm:odometer_countup@^1.0.4",
 		"postcss": "npm:postcss@^8.5.25",
-		"react": "npm:react@^19.2.8",
 		"showdown": "npm:showdown@^2.1.0",
 		"tippy.js": "npm:tippy.js@^6.3.7",
 		"wanakana": "npm:wanakana@^5.3.1"
@@ -41,9 +39,7 @@
 			"write": true,
 			"run": true,
 			"env": true,
-			"net": [
-				"0.0.0.0"
-			]
+			"net": ["0.0.0.0"]
 		}
 	},
 	"compilerOptions": {
@@ -60,34 +56,19 @@
 		"module": "nodenext",
 		"moduleResolution": "bundler",
 		"jsx": "react-jsx",
-		"jsxImportSource": "jsx-dom",
-		"types": [
-			"jsx-dom"
-		]
+		"jsxImportSource": "jsx-dom"
 	},
 	"fmt": {
 		"singleQuote": true,
 		"indentWidth": 4,
 		"useTabs": true,
-		"exclude": [
-			"bleh.user.js",
-			"bleh.user.css",
-			"ext/*",
-			"**/*.md"
-		]
+		"exclude": ["bleh.user.js", "bleh.user.css", "ext/*", "**/*.md"]
 	},
 	"lint": {
 		"rules": {
-			"exclude": [
-				"no-sloppy-imports"
-			]
+			"exclude": ["no-sloppy-imports", "no-window"]
 		},
-		"exclude": [
-			"bleh.user.js",
-			"bleh.user.css",
-			"ext/*",
-			"**/*.md"
-		]
+		"exclude": ["bleh.user.js", "bleh.user.css", "ext/*", "**/*.md"]
 	},
 	"nodeModulesDir": "auto"
 }

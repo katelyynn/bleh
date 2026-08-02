@@ -400,7 +400,7 @@ export function register_rabbit() {
 			matches = [];
 
 			feed.forEach((item) => {
-				let extended = `${item.text} ${item.body} ${
+				const extended = `${item.text} ${item.body} ${
 					item.keywords.join(' ')
 				} ${
 					item.keybind
@@ -411,7 +411,7 @@ export function register_rabbit() {
 						: ''
 				}`.toLowerCase();
 
-				let words = value.split(' ');
+				const words = value.split(' ');
 				let match = false;
 				words.forEach((word) => {
 					if (extended.includes(word)) {
@@ -429,7 +429,7 @@ export function register_rabbit() {
 				html`
 					${matches.length > 0
 						? matches.map((item, index) => () => {
-							let button = html.node`
+							const button = html.node`
                         <button class="dropdown-menu-clickable-item rabbit-hole-item" data-type=${item.type} onclick=${item.action} disabled=${item.disabled}>
                             <div class="info">
                                 <div class="text">${item.text}</div>
@@ -480,7 +480,7 @@ export function register_rabbit() {
 			return;
 		}
 
-		let buttons = rabbit_hole.querySelectorAll('button');
+		const buttons = rabbit_hole.querySelectorAll('button');
 		buttons.forEach((button, index) => {
 			if (index == selected) {
 				button.setAttribute('aria-selected', 'true');

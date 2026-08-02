@@ -6,10 +6,10 @@ import { version } from '@/main';
 import { html } from 'lighterhtml';
 
 export function profile_reports() {
-	page.structure.content_top.classList.add(
+	page.structure.content_top!.classList.add(
 		'listening-report-navlist',
 	);
-	page.structure.row.classList.add('listening-report');
+	page.structure.row!.classList.add('listening-report');
 
 	convert_to_toolbar();
 
@@ -27,7 +27,7 @@ export function profile_reports() {
 			'dark',
 		);
 
-		page.structure.row.after(report_box_container);
+		page.structure.row!.after(report_box_container);
 
 		// 2025
 		const share_row = document.body.querySelector('.share-button-row');
@@ -68,7 +68,7 @@ export function profile_reports() {
 			});
 		}
 	} else {
-		const dashboard = page.structure.container.querySelector(
+		const dashboard = page.structure.container!.querySelector(
 			'.user-dashboard',
 		);
 		if (dashboard) {

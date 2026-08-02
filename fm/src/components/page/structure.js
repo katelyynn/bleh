@@ -6,7 +6,7 @@
 
 import { log } from '@/build/log';
 import { page, root } from '@/build/page';
-import { chart_reflow, load_chart_colours } from '@/components/music/chart';
+import { chart_reflow } from '@/components/music/chart';
 import { ff } from '@/components/settings/sku';
 import { html, render } from 'lighterhtml';
 import { tl, trans } from '@/build/trans';
@@ -48,7 +48,7 @@ export function checkup_page_structure(is_subpage = false, header = null) {
 		}, 100);
 	}
 
-	let params = new URLSearchParams(document.location.search);
+	const params = new URLSearchParams(document.location.search);
 	page.requested = {
 		tab: params.get('tab'),
 		page: params.get('page'),
@@ -66,7 +66,7 @@ export function checkup_page_structure(is_subpage = false, header = null) {
 		page.structure.container.classList.add('page-content', 'container');
 
 		// listening report error
-		let container_full_width = document.body.querySelector(
+		const container_full_width = document.body.querySelector(
 			'.container--full-width',
 		);
 		if (container_full_width) {
@@ -83,7 +83,7 @@ export function checkup_page_structure(is_subpage = false, header = null) {
 
 	page.structure.container.setAttribute('data-assigned', 'true');
 
-	let other_container = document.body.querySelector(
+	const other_container = document.body.querySelector(
 		'.page-content.container:not([data-assigned])',
 	);
 	if (other_container) other_container.style.setProperty('display', 'none');
@@ -116,7 +116,7 @@ export function checkup_page_structure(is_subpage = false, header = null) {
 
 	page.structure.main.setAttribute('data-assigned', 'true');
 
-	let other_main = page.structure.row.querySelector(
+	const other_main = page.structure.row.querySelector(
 		'.col-main.hidden-xs:not([data-assigned])',
 	);
 	if (other_main) {
@@ -204,7 +204,7 @@ export function checkup_page_structure(is_subpage = false, header = null) {
 					content_top.style.setProperty('display', 'none');
 				}
 
-				let content_top_nav = content_top.querySelector('.navlist');
+				const content_top_nav = content_top.querySelector('.navlist');
 				if (!content_top_nav && ff('beret')) {
 					content_top.style.setProperty('display', 'none');
 				}
@@ -313,7 +313,7 @@ export function checkup_page_structure(is_subpage = false, header = null) {
 				}
 
 				// is there a playlink?
-				let radio = page.structure.main.querySelector(
+				const radio = page.structure.main.querySelector(
 					':scope > .section-controls > .section-playlink',
 				);
 
@@ -327,7 +327,7 @@ export function checkup_page_structure(is_subpage = false, header = null) {
 					radio.classList =
 						'btn stationlink js-playlink-station radio-button side-action icon-mask';
 
-					let type = radio.getAttribute('data-analytics-label');
+					const type = radio.getAttribute('data-analytics-label');
 
 					render(
 						radio,
@@ -351,7 +351,7 @@ export function checkup_page_structure(is_subpage = false, header = null) {
 				}
 			}
 
-			let similar_artists = page.structure.side.querySelector(
+			const similar_artists = page.structure.side.querySelector(
 				'.similar-items-sidebar',
 			);
 			if (similar_artists) {
@@ -361,7 +361,7 @@ export function checkup_page_structure(is_subpage = false, header = null) {
 				page.structure.side.removeChild(similar_artists.parentElement);
 			}
 		} else {
-			let content_top = document.body.querySelector('.content-top');
+			const content_top = document.body.querySelector('.content-top');
 
 			if (content_top) content_top.classList.add('legacy-content-top');
 		}
@@ -375,7 +375,7 @@ export function checkup_nav() {
 		page.structure.nav.setAttribute('data-assigned', 'true');
 	}
 
-	let navlists = page.structure.container.querySelectorAll(
+	const navlists = page.structure.container.querySelectorAll(
 		':scope > .navlist',
 	);
 	navlists.forEach((nav, index) => {
@@ -383,7 +383,7 @@ export function checkup_nav() {
 		if (index < 1) return;
 
 		if (ff('mualani')) {
-			let toolbar = html.node`
+			const toolbar = html.node`
                 <div class="toolbar">
                     ${nav}
                 </div>

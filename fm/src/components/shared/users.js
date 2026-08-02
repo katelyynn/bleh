@@ -31,13 +31,13 @@ export function bleh_users() {
 export function patch_user_list_item(user, index, cache = {}) {
 	user.style.setProperty('--delay', index * 0.04 + 's');
 
-	let avatar = user.querySelector('.user-list-avatar');
-	let name = user.querySelector('.user-list-link');
+	const avatar = user.querySelector('.user-list-avatar');
+	const name = user.querySelector('.user-list-link');
 
 	const badge = patch_avatar(avatar, name?.textContent.trim(), 'follow');
 	if (name) style_name_from_badge(name, badge);
 
-	let artists = user.querySelectorAll('.user-list-shared-artists a');
+	const artists = user.querySelectorAll('.user-list-shared-artists a');
 	artists.forEach((artist) => {
 		artist.textContent = correct_artist(artist.textContent);
 	});

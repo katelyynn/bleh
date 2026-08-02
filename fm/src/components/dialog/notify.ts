@@ -12,7 +12,7 @@ import tippy from 'tippy.js';
 
 export function load_notifications() {
 	if (!page.structure.notifications) {
-		let notification_host = html.node`
+		const notification_host = html.node`
             <div class="bleh-notifications" />
         `;
 		page.structure.notifications = notification_host;
@@ -137,7 +137,7 @@ export function notify({
                 ${
 		(actions.length > 0)
 			? actions.map((action) => () => {
-				let button = html.node`
+				const button = html.node`
                         <button class="btn notification-action icon-mask" data-type=${action.type} onclick=${action.action}>${action.text}</button>
                     `;
 
@@ -188,11 +188,11 @@ export function notify({
 		return notif;
 	}
 
-	let ms = long ? 7000 : 3000;
+	const ms = long ? 7000 : 3000;
 	let counter = 100;
-	let step = ms / 100;
+	const step = ms / 100;
 
-	let timer = setInterval(() => {
+	const timer = setInterval(() => {
 		if (notif.matches(':hover')) {
 			return;
 		}

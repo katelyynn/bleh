@@ -15,7 +15,6 @@ import { ff } from '@/components/settings/sku';
 import { plot } from '@/components/minis/plot';
 import { new_indicator } from '@/components/shared/indicator';
 import { card } from '@/components/minis/card';
-import { markdown } from '@/components/shared/markdown';
 
 let valid_minis;
 
@@ -28,14 +27,14 @@ export function bleh_minis(skip = false) {
 		page.structure.row.removeChild(page.structure.row.firstElementChild);
 	}
 
-	let params = new URLSearchParams(document.location.search);
+	const params = new URLSearchParams(document.location.search);
 	page.requested.profile = params.get('profile') || auth.name;
 	page.requested.secondary = params.get('secondary');
 	page.requested.redirect = params.get('redirect');
 	page.requested.type = params.get('type');
 	page.requested.timeframe = params.get('timeframe');
 
-	let path = window.location.pathname.split('/');
+	const path = window.location.pathname.split('/');
 	let mini = path[path.length - 1];
 
 	if (mini == 'minis') mini = null;

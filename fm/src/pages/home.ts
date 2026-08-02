@@ -18,18 +18,8 @@ import { bleh_native_settings } from '@/pages/lastfm_settings/lastfm_settings';
 import { html, render } from 'lighterhtml';
 import { ff } from '@/components/settings/sku';
 import { load_profile_cache_externally } from '@/pages/profile/profile';
-import {
-	correct_artist,
-	correct_item_by_artist,
-	name_includes,
-	smart_artists,
-	smart_title,
-} from '@/components/music/lotus';
-import { romanise, sanitise } from '@/build/tools';
-import { redirect } from '@/components/music/music';
 import { settings } from '@/build/config';
-import { avatar, expand_avatar } from '@/components/shared/avatar';
-import tippy from 'tippy.js';
+import { avatar } from '@/components/shared/avatar';
 import { page_header_avatar } from '@/components/music/header';
 import { campfire } from './home/campfire';
 import { bleh_suggested } from './home/suggested';
@@ -40,14 +30,14 @@ import { version } from '@/main';
 export async function bleh_home() {
 	page.structure.container = document.body.querySelector('.page-content');
 	try {
-		page.structure.row = page.structure.container.querySelector('.row');
-		page.structure.main = page.structure.row.querySelector('.col-main');
-		page.structure.side = page.structure.row.querySelector('.col-sidebar');
-	} catch (e) {
+		page.structure.row = page.structure.container!.querySelector('.row');
+		page.structure.main = page.structure.row!.querySelector('.col-main');
+		page.structure.side = page.structure.row!.querySelector('.col-sidebar');
+	} catch (_e) {
 		log('unable to find elements', 'page structure');
 	}
 
-	let content_top = document.body.querySelector('.content-top');
+	const content_top = document.body.querySelector('.content-top');
 
 	page.name = auth.name;
 
@@ -72,7 +62,7 @@ export async function bleh_home() {
 		register_background(null);
 	}
 
-	let hour = new Date().getHours();
+	const hour = new Date().getHours();
 	let time;
 	if (hour >= 22 || hour <= 6) {
 		time = 'night';
@@ -95,7 +85,7 @@ export async function bleh_home() {
 		welcome = html.node`
             <section class="page-header for-profile ${same_page ? 'same' : ''}">
                 <div class="page-header-avatar-list">
-                    ${page_avatar = page_header_avatar(auth.avatar)}
+                    ${page_avatar = page_header_avatar(auth.avatar!)}
                 </div>
                 <div class="page-header-info has-main-info">
                     <div class="main-info">
@@ -144,9 +134,9 @@ export async function bleh_home() {
         `;
 	}
 
-	page.structure.container.insertBefore(
+	page.structure.container!.insertBefore(
 		welcome,
-		page.structure.container.firstElementChild,
+		page.structure.container!.firstElementChild,
 	);
 
 	let nav;
@@ -286,11 +276,11 @@ export async function bleh_home() {
 	}
 
 	if (page.subpage == 'music') {
-		let music_sections = document.body.querySelectorAll('.music-section');
+		const music_sections = document.body.querySelectorAll('.music-section');
 		music_sections.forEach((music_section) => {
 			const link = music_section.querySelector('.music-more-link > a');
 			if (link) {
-				const href = link.getAttribute('href');
+				const href = link.getAttribute('href')!;
 				if (href.endsWith('releases/out-now')) {
 					music_section.classList.add('music-section-out-now');
 				} else if (href.endsWith('releases/out-now/popular')) {
@@ -306,7 +296,7 @@ export async function bleh_home() {
 				}
 			}
 
-			page.structure.main.appendChild(music_section);
+			page.structure.main!.appendChild(music_section);
 		});
 	}
 
@@ -314,7 +304,7 @@ export async function bleh_home() {
 		if (ff('campfire')) {
 			campfire();
 		} else {
-			let toolbar = html.node`
+			const toolbar = html.node`
                 <div class="toolbar">
                     <nav class="navlist secondary-nav navlist--more redesigned-navigation">
                         <ul class="navlist-items">
@@ -343,10 +333,10 @@ export async function bleh_home() {
                 </div>
             `;
 
-			page.structure.row.insertBefore(toolbar, page.structure.content);
+			page.structure.row!.insertBefore(toolbar, page.structure.content);
 
 			let track_list;
-			page.structure.row.insertBefore(
+			page.structure.row!.insertBefore(
 				html.node`
                 <div class="content override">
                     <div class="col-main" ref=${(el) =>
@@ -388,13 +378,13 @@ export async function bleh_home() {
 					return response.text();
 				})
 				.then(function (html) {
-					let doc = new DOMParser().parseFromString(
+					const doc = new DOMParser().parseFromString(
 						html,
 						'text/html',
 					);
 					console.log('DOC', doc);
 
-					let tracklist_panel = doc.querySelector('.chartlist');
+					const tracklist_panel = doc.querySelector('.chartlist');
 
 					if (tracklist_panel) {
 						track_list.outerHTML = tracklist_panel.outerHTML;
@@ -402,8 +392,8 @@ export async function bleh_home() {
 				});
 		}
 	} else if (page.type == 'releases') {
-		let content = page.structure.main.querySelectorAll(':scope > *');
-		let panel = html.node`
+		const content = page.structure.main!.querySelectorAll(':scope > *');
+		const panel = html.node`
             <section class="releases-panel" />
         `;
 
@@ -411,7 +401,7 @@ export async function bleh_home() {
 			panel.appendChild(element);
 		});
 
-		render(page.structure.main, panel);
+		render(page.structure.main!, panel);
 	} else if (page.type == 'recommended') {
 		bleh_suggested();
 	}
@@ -428,7 +418,7 @@ export function bleh_home_legacy() {
 	window.location.href = `${root}music`;
 }
 
-export async function load_recent_tracks(name: string) {
+export function load_recent_tracks(name: string) {
 	return new Promise((resolve, reject) => {
 		fetch(`${root}user/${name}/partial/recenttracks?ajax=1`)
 			.then(function (response) {
@@ -437,14 +427,14 @@ export async function load_recent_tracks(name: string) {
 				return response.text();
 			})
 			.then(function (dom) {
-				let doc = new DOMParser().parseFromString(dom, 'text/html');
+				const doc = new DOMParser().parseFromString(dom, 'text/html');
 				console.log('DOC', doc);
 
-				let tracks = [];
+				const tracks = [];
 				const track_list = doc.querySelectorAll('.chartlist-row');
 				if (track_list.length > 0) {
 					track_list.forEach((track) => {
-						let item = {};
+						const item = {};
 
 						item.avatar = track.querySelector(
 							'.chartlist-image img',

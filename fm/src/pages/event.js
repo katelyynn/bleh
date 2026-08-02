@@ -31,7 +31,7 @@ export function bleh_events() {
 		return;
 	}
 
-	let is_subpage = page.subpage != 'event_overview';
+	const is_subpage = page.subpage != 'event_overview';
 
 	// without pro theres two containers
 	if (auth.pro) {
@@ -59,7 +59,7 @@ export function bleh_events() {
 		log('unable to find elements', 'page structure');
 	}
 
-	let event_header = document.body.querySelector('header');
+	const event_header = document.body.querySelector('header');
 
 	checkup_page_structure(is_subpage, event_header);
 

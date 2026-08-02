@@ -1,17 +1,11 @@
 import { settings } from '@/build/config';
-import { log } from '@/build/log';
 import { auth, page, root } from '@/build/page';
 import { clamp_lit, clamp_sat, hex_to_oklch } from '@/build/tools';
 import { tl, trans } from '@/build/trans';
 import { dialog, dialog_rm } from '@/components/dialog/dialog';
 import { notify, notify_rm } from '@/components/dialog/notify';
 import { input } from '@/components/settings/input';
-import {
-	custom_select,
-	select,
-	select_prepare,
-	update_inbuilt_select,
-} from '@/components/settings/select';
+import { select, select_prepare } from '@/components/settings/select';
 import { save_setting, setting } from '@/components/settings/settings';
 import { expand_avatar } from '@/components/shared/avatar';
 import { markdown, markdown_field } from '@/components/shared/markdown';
@@ -50,7 +44,7 @@ function charts_panel() {
 
 	const form = charts_panel.querySelector('form');
 
-	let original_chart_settings = {
+	const original_chart_settings = {
 		recent: {
 			recent_artwork: form.querySelector(
 				'#id_show_recent_tracks_artwork',
@@ -293,20 +287,21 @@ function profile_panel() {
 	const update_profile = page.structure.main.querySelector('#update-profile');
 	const alert = update_profile.querySelector('.alert');
 
-	let form_display_name =
+	const form_display_name =
 		(document.getElementById('id_full_name') as HTMLInputElement).value;
-	let form_website =
+	const form_website =
 		(document.getElementById('id_homepage') as HTMLInputElement).value;
-	let form_country = document.getElementById(
+	const form_country = document.getElementById(
 		'id_country',
 	) as HTMLSelectElement;
-	let form_about_me =
+	const form_about_me =
 		(document.getElementById('id_about_me') as HTMLTextAreaElement)
 			.textContent;
 
-	let profile_cache = JSON.parse(localStorage.getItem(keys.profile_cache)) ||
+	const profile_cache =
+		JSON.parse(localStorage.getItem(keys.profile_cache)) ||
 		{};
-	let cache = profile_cache[auth.name];
+	const cache = profile_cache[auth.name];
 
 	delete_cache(cache);
 
@@ -343,10 +338,10 @@ function profile_panel() {
 	);
 	let preview;
 
-	let accent_setting = html.node`
+	const accent_setting = html.node`
         <div class="setting" data-type="info" disabled=${!auth.sponsor} />
     `;
-	let font_setting = html.node`
+	const font_setting = html.node`
         <p class="card-tip" />
     `;
 
@@ -668,7 +663,7 @@ function profile_panel() {
 		`,
 	);
 
-	function len(text) {
+	function len(text: string) {
 		return text.replace(/\n/g, '\r\n').length;
 
 		// utf-8 or something i dont know
@@ -1263,7 +1258,7 @@ function avatar() {
 			return;
 		}
 
-		let reader = new FileReader();
+		const reader = new FileReader();
 		reader.onload = function () {
 			crop(reader.result);
 			save_button.removeAttribute('disabled');

@@ -50,35 +50,37 @@ export function prep_chart_colours() {
 }
 
 export function load_chart_colours() {
-	let link_col = `oklch(${
+	const link_col = `oklch(${
 		getComputedStyle(document.body).getPropertyValue('--l3-c')
 	})`;
-	let link_h_col = getComputedStyle(document.body).getPropertyValue('--h3-s');
-	let link_bg_col = `oklch(${
+	const link_h_col = getComputedStyle(document.body).getPropertyValue(
+		'--h3-s',
+	);
+	const link_bg_col = `oklch(${
 		getComputedStyle(document.body).getPropertyValue('--h4')
 	} / 30%)`;
-	let link_bg_col_2 = `oklch(${
+	const link_bg_col_2 = `oklch(${
 		getComputedStyle(document.body).getPropertyValue('--h4')
 	} / 2%)`;
-	let text_col = `oklch(${
+	const text_col = `oklch(${
 		getComputedStyle(document.body).getPropertyValue('--c3')
 	})`;
-	let axis_col = `${
+	const axis_col = `${
 		getComputedStyle(document.body).getPropertyValue('--separator-base')
 	}`;
-	let text_primary_col = `oklch(${
+	const text_primary_col = `oklch(${
 		getComputedStyle(document.body).getPropertyValue('--c2')
 	})`;
-	let text_secondary_col = `oklch(${
+	const text_secondary_col = `oklch(${
 		getComputedStyle(document.body).getPropertyValue('--c3')
 	})`;
-	let bg_col = `oklch(${
+	const bg_col = `oklch(${
 		getComputedStyle(document.body).getPropertyValue('--b5')
 	})`;
-	let root_bg_col = `oklch(${
+	const root_bg_col = `oklch(${
 		getComputedStyle(document.body).getPropertyValue('--b6')
 	} / 92%)`;
-	let hue = getComputedStyle(document.body).getPropertyValue('--hue');
+	const hue = getComputedStyle(document.body).getPropertyValue('--hue');
 	page.state.chart_colours = {
 		link_col: link_col,
 		link_h_col: link_h_col,

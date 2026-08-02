@@ -6,18 +6,18 @@
 
 import { name_includes } from '@/components/music/lotus';
 
-export let artist_corrections: Record<string, string> = {};
-export let album_track_corrections: album_track_corrections = {
+export const artist_corrections: Record<string, string> = {};
+export const album_track_corrections: album_track_corrections = {
 	version: '',
 };
-export let combined_artists: Record<string, string> = {};
+export const combined_artists: Record<string, string> = {};
 
 type album_track_corrections = {
 	version: string;
 	[k: string]: string | Record<string, string>;
 };
 
-export let ranks = [
+export const ranks = [
 	{
 		start: 100_000,
 		hue: 261,
@@ -405,11 +405,11 @@ export let includes = {
 
 // converts titles like 'something [explicit]' to 'something'
 // additionally removes featured artists from title
-export function clean_title(title) {
+export function clean_title(title: string) {
 	return name_includes(title).song_title;
 }
 
-export function fix_title(title) {
+export function fix_title(title: string) {
 	return title
 		.replace(/[\u2010\u2011\u2012\u2013]/g, '-')
 		.replace(/\u2026/g, '...');

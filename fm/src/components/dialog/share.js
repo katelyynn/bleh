@@ -97,7 +97,7 @@ export function share(url) {
 export function download(url, filename = null) {
 	log(`downloading ${filename}`, 'download');
 
-	let link = html.node`
+	const link = html.node`
         <a href=${url} download />
     `;
 

@@ -4,7 +4,7 @@
 // Licensed under GPLv3
 //
 
-import { html, render } from 'lighterhtml';
+import { html } from 'lighterhtml';
 import { lang, lang_info, tl, trans } from '@/build/trans';
 import { sponsor_list } from '@/build/sponsor';
 import { root } from '@/build/page';
@@ -14,7 +14,7 @@ import { settings } from '@/build/config';
 import { icon, icons } from '../shared/icon';
 
 export function bleh_footer() {
-	let footer = document.body.querySelector('footer.footer');
+	const footer = document.body.querySelector('footer.footer');
 	if (!footer) return;
 
 	let kate = 'katelyn';
@@ -98,6 +98,6 @@ export function bleh_footer() {
 	}
     `);
 
-	let heart = footer.querySelector('.heart');
+	const heart = footer.querySelector('.heart');
 	if (heart) heart.addEventListener('click', () => sponsor());
 }

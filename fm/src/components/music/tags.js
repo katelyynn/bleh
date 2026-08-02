@@ -9,7 +9,7 @@ export function tag_page() {
 		'.big-tags-item:not([data-tagged])',
 	);
 	tags.forEach((tag) => {
-		tag.setAttribute('data-tagged', true);
+		tag.setAttribute('data-tagged', 'true');
 		const ctx = tag.querySelector('.big-tags-item-context');
 
 		if (ctx) {

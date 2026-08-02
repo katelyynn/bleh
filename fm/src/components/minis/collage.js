@@ -11,7 +11,7 @@ import { setting } from '@/components/settings/settings';
 import { input } from '@/components/settings/input';
 import { auth, page, root } from '@/build/page';
 import { notify, notify_rm } from '@/components/dialog/notify';
-import { clean_number, pad2, sanitise, year_from_date } from '@/build/tools';
+import { clean_number, pad2, sanitise } from '@/build/tools';
 import { log } from '@/build/log.js';
 import { music_grids } from '@/components/music/music_grid';
 import { settings } from '@/build/config';
@@ -21,7 +21,6 @@ import { render_user } from '@/pages/home/minis.js';
 import { redirect } from '@/components/music/music';
 import tippy from 'tippy.js';
 import html2canvas from 'html2canvas-pro';
-import { load_profile_cache_externally } from '@/pages/profile/profile';
 import { icon, icons } from '../shared/icon';
 import { hybrid_timeframe_picker, timeframe_text } from '../date/timeframe';
 import { avatar } from '../shared/avatar';
@@ -39,15 +38,15 @@ export function collage({ host, sidebar } = {}) {
 	let submit;
 	let body;
 
-	let value = 3;
-	let min = 1;
-	let max = 20;
+	const value = 3;
+	const min = 1;
+	const max = 20;
 
-	let current_year = new Date().getFullYear();
-	let previous_year = current_year - 1;
+	const current_year = new Date().getFullYear();
+	const previous_year = current_year - 1;
 
 	const default_type = page.requested.type || 'albums';
-	let default_timeframe = page.requested.timeframe ||
+	const default_timeframe = page.requested.timeframe ||
 		'date_preset=LAST_30_DAYS';
 
 	if (page.requested.redirect) {

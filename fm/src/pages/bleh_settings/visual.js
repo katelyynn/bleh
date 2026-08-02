@@ -10,7 +10,7 @@ import {
 	theme_bubbles,
 } from './bleh_settings';
 import { ff } from '@/components/settings/sku';
-import { settings, settings_store } from '@/build/config';
+import { settings } from '@/build/config';
 import { match } from '@/components/settings/dynamic_theming';
 import { dialog } from '@/components/dialog/dialog';
 import { display_colour_presets } from '@/components/settings/swatch';

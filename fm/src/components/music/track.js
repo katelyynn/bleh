@@ -50,7 +50,7 @@ export function patch_titles(search = page.structure.main) {
 		'.chartlist:not(.chartlist__placeholder)',
 	);
 
-	let insights = {
+	const insights = {
 		artist: {
 			display: false,
 			values: [],
@@ -138,7 +138,7 @@ export function patch_titles(search = page.structure.main) {
 			}
 			track[symbol] = true;
 
-			let track_title = track.querySelector(
+			const track_title = track.querySelector(
 				'.chartlist-name a:not(.offset-section-anchor)',
 			);
 			if (!track_title) return;
@@ -179,7 +179,7 @@ export function patch_titles(search = page.structure.main) {
 
 			// now lets check if we have a user or an artist
 			if (is_user) {
-				let link = track_title.getAttribute('href');
+				const link = track_title.getAttribute('href');
 				if (link.startsWith(`${root}music/`)) {
 					// this is an artist
 					is_user = false;
@@ -231,7 +231,7 @@ export function patch_titles(search = page.structure.main) {
 					);
 				}
 
-				let bar = track.querySelector('.chartlist-count-bar-slug');
+				const bar = track.querySelector('.chartlist-count-bar-slug');
 				if (bar) {
 					if (settings.colourful_counts) {
 						patch_artist_ranks_in_list_view(track);
@@ -239,7 +239,7 @@ export function patch_titles(search = page.structure.main) {
 
 					insights.artist.display = true;
 
-					let value = parseInt(bar.getAttribute('data-stat-value'));
+					const value = parseInt(bar.getAttribute('data-stat-value'));
 					insights.artist.values.push(value);
 
 					if (value > insights.artist.highest.value) {
@@ -259,10 +259,10 @@ export function patch_titles(search = page.structure.main) {
 				return;
 			}
 
-			let is_album = track.hasAttribute('data-album-row');
+			const is_album = track.hasAttribute('data-album-row');
 			if (is_album) track.classList.add('bleh--is-album');
 
-			let track_artist = return_artist_from_track(
+			const track_artist = return_artist_from_track(
 				track_title.getAttribute('href'),
 				is_album,
 			);
@@ -277,7 +277,7 @@ export function patch_titles(search = page.structure.main) {
 
 			const bar = track.querySelector('.chartlist-count-bar-slug');
 			if (bar) {
-				let value = parseInt(bar.getAttribute('data-stat-value'));
+				const value = parseInt(bar.getAttribute('data-stat-value'));
 
 				if (is_album) {
 					insights.album.display = true;
@@ -309,9 +309,11 @@ export function patch_titles(search = page.structure.main) {
 			}
 
 			// menu
-			let track_legacy_menu = track.querySelector('.chartlist-more-menu');
+			const track_legacy_menu = track.querySelector(
+				'.chartlist-more-menu',
+			);
 
-			let track_timestamp = track.querySelector(
+			const track_timestamp = track.querySelector(
 				'.chartlist-timestamp span',
 			);
 			let track_timestamp_contents;
@@ -339,7 +341,7 @@ export function patch_titles(search = page.structure.main) {
 				}
 			}
 
-			let album = track.querySelector('.chartlist-album a');
+			const album = track.querySelector('.chartlist-album a');
 			if (!is_album && album) {
 				album.textContent = correct_item_by_artist(
 					album.textContent,
@@ -513,11 +515,11 @@ export function patch_titles(search = page.structure.main) {
                     `;
 				}
 			} else if (settings.corrections) {
-				let song_artist_element = track.querySelector(
+				const song_artist_element = track.querySelector(
 					'.chartlist-artist a',
 				);
 				if (song_artist_element) {
-					let corrected_title = romanise(
+					const corrected_title = romanise(
 						correct_item_by_artist(
 							track_title.textContent,
 							song_artist_element.textContent,
@@ -526,13 +528,13 @@ export function patch_titles(search = page.structure.main) {
 					track_title.textContent = corrected_title;
 					track_title.setAttribute('data-name', corrected_title);
 
-					let corrected_artist = romanise(
+					const corrected_artist = romanise(
 						correct_artist(song_artist_element.textContent),
 					);
 					song_artist_element.textContent = corrected_artist;
 					song_artist_element.setAttribute('title', corrected_artist);
 				} else {
-					let corrected_title = correct_item_by_artist(
+					const corrected_title = correct_item_by_artist(
 						track_title.textContent,
 						track_artist,
 					);
@@ -543,7 +545,7 @@ export function patch_titles(search = page.structure.main) {
 
 			// due to the library refreshing and destroying the html references
 			// we need to remove the previous more button
-			let previous = track.querySelectorAll(
+			const previous = track.querySelectorAll(
 				':scope > .more-button-wrapper',
 			);
 			previous.forEach((elem) => {
@@ -580,7 +582,7 @@ export function patch_titles(search = page.structure.main) {
 						).getTime() / 1000,
 					);
 
-				let more_button = html.node`
+				const more_button = html.node`
                     <button class="btn track-more-button icon chibi" data-type="more" onclick=${() => {
 					log('requested track in-built', 'menu', 'info', {
 						menu,
@@ -612,13 +614,13 @@ export function patch_titles(search = page.structure.main) {
                 `);
 
 				setTimeout(() => {
-					let edit_button = track_legacy_menu.querySelector(
+					const edit_button = track_legacy_menu.querySelector(
 						'[data-analytics-action="EditScrobbleOpen"]:not([href$="login?next=/pro"])',
 					);
-					let bulk_edit_button = track_legacy_menu.querySelector(
+					const bulk_edit_button = track_legacy_menu.querySelector(
 						'[data-analytics-action="BulkEditScrobblesOpen"]',
 					);
-					let delete_button = track_legacy_menu.querySelector(
+					const delete_button = track_legacy_menu.querySelector(
 						'.more-item--delete',
 					);
 
@@ -626,7 +628,7 @@ export function patch_titles(search = page.structure.main) {
 						log('has edit button', 'track', 'info', {
 							edit_button,
 						});
-						let form = edit_button.parentElement;
+						const form = edit_button.parentElement;
 
 						page.token = form.querySelector(
 							'[name="csrfmiddlewaretoken"]',
@@ -637,10 +639,10 @@ export function patch_titles(search = page.structure.main) {
 						);
 
 						if (!is_album) {
-							let album_name = form.querySelector(
+							const album_name = form.querySelector(
 								'[name="album_name"]',
 							);
-							let album_artist_name = form.querySelector(
+							const album_artist_name = form.querySelector(
 								'[name="album_artist_name"]',
 							);
 
@@ -762,7 +764,7 @@ export function patch_titles(search = page.structure.main) {
 
 					console.info('more button', bulk_edit_button);
 
-					let album_name = sanitise(
+					const album_name = sanitise(
 						image
 							? correct_item_by_artist(
 								image.getAttribute('alt'),
@@ -920,7 +922,7 @@ export function patch_titles(search = page.structure.main) {
 								: bulk_edit_button
 								? html.node`
                                 ${() => {
-									let button = track_legacy_menu
+									const button = track_legacy_menu
 										.querySelector(
 											'[data-analytics-action="BulkEditScrobblesOpen"]',
 										);
@@ -939,12 +941,12 @@ export function patch_titles(search = page.structure.main) {
 								: ''
 						}
                             ${() => {
-							let container = track.querySelector(
+							const container = track.querySelector(
 								'.chartlist-play',
 							);
 							if (!container) return;
 
-							let button = container.querySelector(
+							const button = container.querySelector(
 								'.chartlist-play-button',
 							);
 							if (!button) return;
@@ -975,7 +977,7 @@ export function patch_titles(search = page.structure.main) {
 								}}
                                 <div class="button-combo-sep"/>
                                 ${() => {
-									let button = html.node`
+									const button = html.node`
                                         <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${user}/library${
 										track_title.getAttribute('href')
 									}">
@@ -1040,7 +1042,7 @@ export function patch_titles(search = page.structure.main) {
 								}}
                                 <div class="button-combo-sep"/>
                                 ${() => {
-									let button = html.node`
+									const button = html.node`
                                         <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${user}/library${
 										track_title.getAttribute('href')
 									})}">
@@ -1071,7 +1073,7 @@ export function patch_titles(search = page.structure.main) {
 						}}
                                 <div class="button-combo-sep"/>
                                 ${() => {
-							let button = html.node`
+							const button = html.node`
                                         <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${user}/library/music/${redirect()}${
 								sanitise(track_artist)
 							}">
@@ -1118,7 +1120,7 @@ export function patch_titles(search = page.structure.main) {
                             ${() => {
 							if (!is_own_profile || !can_delete) return;
 
-							let button = html.node`
+							const button = html.node`
                                     <button class="dropdown-menu-clickable-item more-item--delete colourful" data-type="delete">
                                         ${tl(trans.delete)}
                                     </button>
@@ -1136,9 +1138,9 @@ export function patch_titles(search = page.structure.main) {
 							) => {
 								e.preventDefault();
 
-								let url =
+								const url =
 									`${root}user/${auth.name}/library/delete`;
-								let form_data = new FormData(form);
+								const form_data = new FormData(form);
 
 								console.info(form_data);
 
@@ -1264,7 +1266,7 @@ export function patch_titles(search = page.structure.main) {
 				});
 			}
 
-			let album_text = track.querySelector(
+			const album_text = track.querySelector(
 				'.chartlist-album.custom-album-text',
 			);
 

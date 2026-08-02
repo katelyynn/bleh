@@ -25,6 +25,9 @@ export function match(media = page.state.media) {
 	else apply_theme('day');
 }
 
+/**
+ * @param {string} time
+ */
 function apply_theme(time) {
 	if (settings.theme == settings[`theme_${time}`]) return;
 

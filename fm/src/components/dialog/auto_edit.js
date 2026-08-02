@@ -9,13 +9,13 @@ import { tl, trans } from '@/build/trans';
 import { html } from 'lighterhtml';
 
 export function bleh_auto_edits() {
-	let corrections_panel = document.body.querySelector(
+	const corrections_panel = document.body.querySelector(
 		'#subscription-corrections',
 	);
 	page.structure.main.appendChild(corrections_panel);
 
 	// we want the other navigation
-	let nav = page.structure.container.querySelector(
+	const nav = page.structure.container.querySelector(
 		'nav[data-more-string] .navlist-items',
 	);
 
