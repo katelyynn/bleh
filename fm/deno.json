@@ -25,6 +25,7 @@
 		"luxon": "npm:luxon@^3.7.2",
 		"odometer_countup": "npm:odometer_countup@^1.0.4",
 		"postcss": "npm:postcss@^8.5.25",
+		"react": "npm:react@^19.2.8",
 		"showdown": "npm:showdown@^2.1.0",
 		"tippy.js": "npm:tippy.js@^6.3.7",
 		"wanakana": "npm:wanakana@^5.3.1"
@@ -58,7 +59,10 @@
 		"module": "nodenext",
 		"moduleResolution": "bundler",
 		"jsx": "react-jsx",
-		"jsxImportSource": "@reububble/jsx"
+		"jsxImportSource": "@reububble/jsx",
+		"types": [
+			"react"
+		]
 	},
 	"fmt": {
 		"singleQuote": true,

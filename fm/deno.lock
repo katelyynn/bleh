@@ -38,6 +38,7 @@
     "npm:luxon@^3.7.2": "3.7.2",
     "npm:odometer_countup@^1.0.4": "1.0.4",
     "npm:postcss@^8.5.25": "8.5.25",
+    "npm:react@^19.2.8": "19.2.8",
     "npm:showdown@^2.1.0": "2.1.0",
     "npm:tippy.js@^6.3.7": "6.3.7",
     "npm:wanakana@^5.3.1": "5.3.1"
@@ -997,6 +998,9 @@
         "source-map-js"
       ]
     },
+    "react@19.2.8": {
+      "integrity": "sha512-PWaYA1L/q9u2u7xYQi+Y3L3Yfnie7XyLeaJICV1MGD6LprsBxcAqGjYyr0eY3p+QdsA+x/Irkt4Qif8D63+Sbw=="
+    },
     "sax@1.6.1": {
       "integrity": "sha512-42tBVwLWnaQvW5zc4HbZrTuWccECCZfBi92FDuwtqxasH+JbPB3/FOKb1m222K42R4WxuxzzMsTswfzgtSu64Q=="
     },
@@ -1111,6 +1115,7 @@
       "npm:luxon@^3.7.2",
       "npm:odometer_countup@^1.0.4",
       "npm:postcss@^8.5.25",
+      "npm:react@^19.2.8",
       "npm:showdown@^2.1.0",
       "npm:tippy.js@^6.3.7",
       "npm:wanakana@^5.3.1"
