@@ -340,6 +340,12 @@ export function mualani() {
 		`,
 	);
 
+	page.structure.main.appendChild(
+		<section>
+			<p>jsx test</p>
+		</section>
+	);
+
 	const link_text = `
         [links]
         https://x.com/ZZZ_EN

@@ -3,6 +3,7 @@
 	"imports": {
 		"@/": "./src/",
 		"@deno/esbuild-plugin": "jsr:@deno/esbuild-plugin@^1.2.1",
+		"@reububble/jsx": "jsr:@reububble/jsx@^0.0.12",
 		"@std/http": "jsr:@std/http@^1.1.2",
 		"@tealmiku/florence": "npm:@tealmiku/florence@^2026.527.0",
 		"@zachleat/hypercard": "npm:@zachleat/hypercard@^2.0.2",
@@ -51,10 +52,13 @@
 			"deno.ns",
 			"dom",
 			"node",
-			"es2024"
+			"esnext",
+			"dom.iterable"
 		],
 		"module": "nodenext",
-		"moduleResolution": "bundler"
+		"moduleResolution": "bundler",
+		"jsx": "react-jsx",
+		"jsxImportSource": "@reububble/jsx"
 	},
 	"fmt": {
 		"singleQuote": true,

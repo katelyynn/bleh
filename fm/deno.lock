@@ -3,6 +3,7 @@
   "specifiers": {
     "jsr:@deno/esbuild-plugin@^1.2.1": "1.2.1",
     "jsr:@deno/loader@~0.3.10": "0.3.14",
+    "jsr:@reububble/jsx@^0.0.12": "0.0.12",
     "jsr:@std/cli@^1.0.31": "1.0.32",
     "jsr:@std/encoding@^1.0.11": "1.0.11",
     "jsr:@std/fmt@^1.0.10": "1.0.10",
@@ -52,6 +53,9 @@
     },
     "@deno/loader@0.3.14": {
       "integrity": "97bc63a6cc2d27a60bcdc953f588c5213331d866d44212eebb24cebfb9b011ca"
+    },
+    "@reububble/jsx@0.0.12": {
+      "integrity": "11a3240168242695df02f141ef413a958cf5605821080527137aa9095eaf9758"
     },
     "@std/cli@1.0.32": {
       "integrity": "188b3a100d6202d64e3f5bd3d799c7fa4f6d77f92cc65eb7f641c1fa0aa92a66"
@@ -1085,6 +1089,7 @@
   "workspace": {
     "dependencies": [
       "jsr:@deno/esbuild-plugin@^1.2.1",
+      "jsr:@reububble/jsx@^0.0.12",
       "jsr:@std/http@^1.1.2",
       "npm:@tealmiku/florence@^2026.527.0",
       "npm:@zachleat/hypercard@^2.0.2",
