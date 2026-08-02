@@ -18,6 +18,7 @@
     "jsr:@std/path@^1.1.6": "1.1.6",
     "jsr:@std/streams@^1.1.1": "1.1.1",
     "npm:@tealmiku/florence@^2026.527.0": "2026.527.0",
+    "npm:@types/react@^19.2.18": "19.2.18",
     "npm:@zachleat/hypercard@^2.0.2": "2.0.2",
     "npm:chart.js@^4.5.1": "4.5.1",
     "npm:chartjs-adapter-luxon@^1.3.1": "1.3.1_chart.js@4.5.1_luxon@3.7.2",
@@ -382,6 +383,12 @@
     "@types/hammerjs@2.0.46": {
       "integrity": "sha512-ynRvcq6wvqexJ9brDMS4BnBLzmr0e14d6ZJTEShTBWKymQiHwlAyGu0ZPEFI2Fh1U53F7tN9ufClWM5KvqkKOw=="
     },
+    "@types/react@19.2.18": {
+      "integrity": "sha512-AnzbBERsrLKtk2XSfTbYRLjQPdy116Sty4q+T+Bp3IC4l6jNBvreVPAHmpq9qhXQM7CXZPjLVmGMw9sy+hxQ3w==",
+      "dependencies": [
+        "csstype"
+      ]
+    },
     "@types/trusted-types@2.0.7": {
       "integrity": "sha512-ScaPdn1dQczgbl0QFTeTOmVHFULt394XJgOQNoyVhZ6r2vLnMLJfBPd53SB52T/3G36VI1/g2MZaX0cwDuXsfw=="
     },
@@ -564,6 +571,9 @@
       "dependencies": [
         "css-tree@2.2.1"
       ]
+    },
+    "csstype@3.2.3": {
+      "integrity": "sha512-z1HGKcYy2xA8AGQfwrn0PAy+PB7X/GSj3UVJW9qKyn43xWa+gl5nXmU4qqLMRzWVLFC8KusUX8T/0kCiOYpAIQ=="
     },
     "culori@4.0.2": {
       "integrity": "sha512-1+BhOB8ahCn4O0cep0Sh2l9KCOfOdY+BXJnKMHFFzDEouSr/el18QwXEMRlOj9UY5nCeA8UN3a/82rUWRBeyBw=="
@@ -1096,6 +1106,7 @@
       "jsr:@reububble/jsx@^0.0.12",
       "jsr:@std/http@^1.1.2",
       "npm:@tealmiku/florence@^2026.527.0",
+      "npm:@types/react@^19.2.18",
       "npm:@zachleat/hypercard@^2.0.2",
       "npm:chart.js@^4.5.1",
       "npm:chartjs-adapter-luxon@^1.3.1",

@@ -6,6 +6,7 @@
 		"@reububble/jsx": "jsr:@reububble/jsx@^0.0.12",
 		"@std/http": "jsr:@std/http@^1.1.2",
 		"@tealmiku/florence": "npm:@tealmiku/florence@^2026.527.0",
+		"@types/react": "npm:@types/react@^19.2.18",
 		"@zachleat/hypercard": "npm:@zachleat/hypercard@^2.0.2",
 		"chart.js": "npm:chart.js@^4.5.1",
 		"chartjs-adapter-luxon": "npm:chartjs-adapter-luxon@^1.3.1",
