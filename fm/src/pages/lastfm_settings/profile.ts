@@ -600,7 +600,7 @@ function profile_panel() {
 				const elem = html.node`
                         <div class="setting" data-type="text">
                             <div class="heading">
-                                <h5><a href="https://status.cafe" target="_blank">status.cafe</a>${new_indicator()}</h5>
+                                <h5><a href="https://status.cafe" target="_blank">status.cafe</a></h5>
                                 <p>${tl(trans.status_cafe.body)}</p>
                             </div>
                             ${

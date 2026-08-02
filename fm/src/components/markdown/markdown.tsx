@@ -420,7 +420,7 @@ export function markdown(
 
 	// this looks like a mess, but essentially profile colours are
 	// a nice 'thank you' vanity reward for sponsors <3
-	if (allow_hue && is_sponsor(name)) {
+	if (allow_hue && !is_sponsor(name)) {
 		allow_hue = false;
 	}
 

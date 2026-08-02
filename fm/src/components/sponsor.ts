@@ -43,7 +43,7 @@ export function sponsors(force = false, func = null) {
 		}
 
 		if (auth.name && sponsor_list.version) {
-			auth.sponsor = sponsor_list.users.hasOwnProperty(auth.name);
+			auth.sponsor = is_sponsor(auth.name);
 
 			if (sponsor_list.users[auth.name]?.badges) {
 				const old_badges = parse_object(
@@ -115,7 +115,7 @@ function sponsor_request(should_notify = false, func = null) {
 				);
 
 				if (auth.name && sponsor_list.version) {
-					auth.sponsor = sponsor_list.users.hasOwnProperty(auth.name);
+					auth.sponsor = is_sponsor(auth.name);
 
 					if (sponsor_list.users[auth.name]?.badges) {
 						const old_badges = parse_object(
@@ -298,4 +298,6 @@ export function is_sponsor(name: string) {
 
 		return entry.sponsor;
 	}
+
+	return false;
 }
