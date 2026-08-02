@@ -10,16 +10,19 @@ import { dialogs, page } from '@/build/page';
 import { tl, trans } from '@/build/trans';
 
 export function load_dialogs() {
-	const elem = html.node`
-        <div class="bleh-modals" onclick=${() => {
-		const latest = Object.keys(dialogs).at(-1);
-		if (!latest) return;
+	const elem = (
+		<div
+			class='bleh-modals'
+			onClick={() => {
+				const latest = Object.keys(dialogs).at(-1);
+				if (!latest) return;
 
-		if (dialogs[latest].dismiss) {
-			dialog_rm({ id: latest, modal_bg: true });
-		}
-	}} />
-    `;
+				if (dialogs[latest].dismiss) {
+					dialog_rm({ id: latest, modal_bg: true });
+				}
+			}}
+		/>
+	);
 
 	document.body.appendChild(elem);
 	page.structure.dialogs = elem;
@@ -86,46 +89,40 @@ export function dialog({
 		}
 	}
 
-	let modal = html.node`
-        <div
-        class=${
-		[
-			'bleh-modal',
-			colourful ? 'colourful' : '',
-			colourful_bg ? 'colourful-bg' : '',
-		].join(' ')
-	}
-        role="dialog"
-        data-modal-id=${id}
-        data-modal-has-overlays=${has_overlays}
-        data-modal-type=${type}
-        />
-    `;
+	const modal = (
+		<div
+			class={[
+				'bleh-modal',
+				colourful && 'colourful',
+				colourful_bg && 'colourful-bg',
+			]}
+			role='dialog'
+			data-modal-id={id}
+			data-modal-has-overlays={has_overlays}
+			data-modal-type={type}
+		/>
+	);
 
 	if (title) {
 		modal.setAttribute('aria-labelledby', 'modal_title');
-		modal.appendChild(html.node`
-            <div class="bleh-modal-title" id="modal_title">
-                <h1>${title}</h1>
-                ${
-			subtitle
-				? html.node`<p class="bleh-modal-subtitle">${subtitle}</p>`
-				: ''
-		}
-            </div>
-        `);
+		modal.appendChild(
+			<div class='bleh-modal-title' id='modal_title'>
+				<h1>{title}</h1>
+				{subtitle && <p class='bleh-modal-subtitle'>{subtitle}</p>}
+			</div>,
+		);
 	}
 
 	if (dismiss) {
-		modal.appendChild(html.node`
-            <button class="modal-close-button" onclick=${() => {
-			dialog_rm({ id });
-		}}>
-                ${tl(trans.close)}
-            </button>
-        `);
-	} else {
-		page.structure.dialogs.removeAttribute('onclick');
+		modal.appendChild(
+			<button
+				type='button'
+				class='modal-close-button'
+				onClick={() => dialog_rm({ id })}
+			>
+				{tl(trans.close)}
+			</button>,
+		);
 	}
 
 	if (dismiss && !handle_escape_manually) {
@@ -136,11 +133,11 @@ export function dialog({
 		});
 	}
 
-	modal.appendChild(html.node`
-        <div class="bleh-modal-body" data-allow-scroll=${allow_scroll}>
-            ${body}
-        </div>
-    `);
+	modal.appendChild(
+		<div class='bleh-modal-body' data-allow-scroll={String(allow_scroll)}>
+			{body}
+		</div>,
+	);
 
 	dialogs[id] = {
 		instance: modal,
