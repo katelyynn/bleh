@@ -1340,6 +1340,7 @@ function avatar() {
 			}} ref=${(el) => (save = el)} disabled>${tl(trans.save)}</button>
                 </div>
             `,
+			replace_if_possible: true,
 		});
 		page.state.avatar_changer = crop_dialog;
 
