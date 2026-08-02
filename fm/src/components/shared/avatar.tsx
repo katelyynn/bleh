@@ -252,7 +252,7 @@ export type avatar_dimensions =
  * @returns
  */
 export function avatar(url: string | null, requested: avatar_dimensions) {
-	if (url == null) return url;
+	if (url == null) return '';
 
 	let image: string;
 

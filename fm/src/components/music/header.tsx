@@ -42,31 +42,36 @@ export function page_header_avatar(url?: string): page_header_avatar {
 
 	let image: HTMLImageElement;
 
-	const elem = html.node`
-        <div class="page-header-avatar colourful" onclick=${() => {
-		if (!url) return;
+	const elem = (
+		<div
+			class={['page-header-avatar', 'colourful']}
+			onClick={() => {
+				if (!url) return;
 
-		if (action == 'expand') {
-			expand_avatar(avatar(url, 'ar0'));
-		} else if (action == 'gallery') {
-			open(`${root}music/${redirect()}${link}/+images`);
-		}
-	}}>
-            ${
-		url
-			? html.node`
-                <img src=${
-				avatar(url, 'avatar300s')
-			} crossorigin="anonymous" ref=${(el) => image = el}>
-            `
-			: html.node`
-                <img class="missing-${page.type}" crossorigin="anonymous" ref=${(
-				el,
-			) => image = el}>
-            `
-	}
-        </div>
-    `;
+				if (action == 'expand') {
+					expand_avatar(avatar(url, 'ar0'));
+				} else if (action == 'gallery') {
+					open(`${root}music/${redirect()}${link}/+images`);
+				}
+			}}
+		>
+			{url
+				? (
+					<img
+						src={avatar(url, 'avatar300s')}
+						crossOrigin='anonymous'
+						ref={(el) => image = el}
+					/>
+				)
+				: (
+					<img
+						class={`missing-${page.type}`}
+						crossOrigin='anonymous'
+						ref={(el) => image = el}
+					/>
+				)}
+		</div>
+	);
 
 	Object.defineProperty(elem, 'image', {
 		get() {
@@ -82,31 +87,43 @@ export function page_header_avatar(url?: string): page_header_avatar {
 
 	const menu = tippy(elem, {
 		theme: 'context-menu',
-		content: html.node`
-            ${
-			url
-				? html.node`
-                <button class="dropdown-menu-clickable-item" data-type="expand" onclick=${() =>
-					expand_avatar(avatar(url, 'ar0'))}>
-                    ${tl(trans.expand)}
-                </button>
-            `
-				: ''
-		}
-            ${
-			supports_gallery
-				? html.node`
-                <a class="dropdown-menu-clickable-item" data-type="gallery" href="${root}music/${redirect()}${link}/+images">
-                    ${tl(trans.photos)}
-                </a>
-                <div class="sep"></div>
-                <a class="dropdown-menu-clickable-item" href="${root}bleh/customise" data-menu-item="settings">
-                    ${tl(trans.settings)}
-                </a>
-            `
-				: ''
-		}
-        `,
+		content: (
+			<>
+				{url
+					? (
+						<button
+							type='button'
+							class='dropdown-menu-clickable-item'
+							data-type='expand'
+							onClick={() => expand_avatar(avatar(url, 'ar0'))}
+						>
+							{tl(trans.expand)}
+						</button>
+					)
+					: ''}
+				{supports_gallery
+					? (
+						<>
+							<a
+								class='dropdown-menu-clickable-item'
+								data-type='gallery'
+								href={`${root}music/${redirect()}${link}/+images`}
+							>
+								{tl(trans.photos)}
+							</a>
+							<div class='sep' />
+							<a
+								class='dropdown-menu-clickable-item'
+								href={`${root}bleh/customise`}
+								data-menu-item='settings'
+							>
+								{tl(trans.settings)}
+							</a>
+						</>
+					)
+					: ''}
+			</>
+		),
 		placement: 'right-start',
 		trigger: 'manual',
 		interactive: true,
@@ -129,9 +146,7 @@ export function page_header_avatar(url?: string): page_header_avatar {
 export function page_header_disc() {
 	if (!settings.show_disc_image) return;
 
-	return html.node`
-        <div class="page-header-disc" />
-    `;
+	return <div class='page-header-disc' />;
 }
 
 export function artist_title(header = document.body) {
@@ -189,18 +204,14 @@ export function artist_title(header = document.body) {
 
 			artist = artist.trim();
 
-			const part = document.createElement('a');
-			part.classList.add('multi-artist-part');
-			part.setAttribute(
-				'href',
-				`${root}music/${redirect()}${sanitise(artist)}`,
+			title.appendChild(
+				<a
+					class='multi-artist-part'
+					href={`${root}music/${redirect()}${sanitise(artist)}`}
+				>
+					{romanise(correct_artist(artist))}
+				</a>,
 			);
-
-			if (settings.corrections) {
-				part.textContent = romanise(correct_artist(artist));
-			} else part.textContent = romanise(artist);
-
-			title.appendChild(part);
 		});
 	}
 }

@@ -37,14 +37,12 @@ export function append_style() {
 
 	document.documentElement.setAttribute('data-bleh--theme', settings.theme);
 	document.documentElement.appendChild(
-		html.node`<style>${cropper_css}</style>`,
+		<style>{cropper_css}</style>,
 	);
 
 	if (settings.dev) return;
 
-	const style = html.node`
-        <style id="bleh--cached-style">${css}</style>
-    `;
+	const style = <style id='bleh--cached-style'>{css}</style>;
 	document.documentElement.appendChild(style);
 
 	style.onload = () => {
@@ -53,10 +51,7 @@ export function append_style() {
 	};
 }
 
-/**
- * @param {string} v
- */
-function parse_version(v) {
+function parse_version(v: string) {
 	const parts = v.split('.').map(Number);
 
 	// ensure [major, minor, patch]
@@ -64,11 +59,7 @@ function parse_version(v) {
 	return parts.slice(0, 3);
 }
 
-/**
- * @param {string} a
- * @param {string} b
- */
-function compare_versions(a, b) {
+function compare_versions(a: string, b: string) {
 	const [a_maj, a_min, a_patch] = parse_version(a);
 	const [b_maj, b_min, b_patch] = parse_version(b);
 
@@ -79,15 +70,11 @@ function compare_versions(a, b) {
 	return 0;
 }
 
-/**
- * @param {string} current
- * @param {string} latest
- */
-export function update_comparison(current, latest) {
+export function update_comparison(current: string, latest: string) {
 	return compare_versions(latest, current) === 1;
 }
 
-export function update_check(force = false, btn = null, func = null) {
+export function update_check(force = false, btn, func) {
 	if (!force) {
 		const last_checked = localStorage.getItem('bleh_update_checked') ||
 			null;
