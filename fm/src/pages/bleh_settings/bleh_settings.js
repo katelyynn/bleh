@@ -17,7 +17,7 @@ import {
 import { copy, set_storage, time } from '@/build/tools';
 import { get_trans_key, lang_info, tl, trans } from '@/build/trans';
 import { dialog, dialog_rm } from '@/components/dialog/dialog';
-import { markdown } from '@/components/shared/markdown';
+import { markdown } from '@/components/markdown/markdown';
 import { notify } from '@/components/dialog/notify';
 import { load_settings } from '../../config.js';
 import { version } from '@/main';

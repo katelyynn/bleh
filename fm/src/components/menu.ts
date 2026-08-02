@@ -11,7 +11,7 @@ import { ff } from '@/components/settings/sku';
 import { log } from '@/build/log';
 import { copy, paste, redo, undo } from '@/build/tools';
 import { settings } from '@/build/config';
-import { external_url_prompt } from '@/components/shared/markdown';
+import { external_url_prompt } from '@/components/dialog/external_link.tsx';
 
 export function register_menu(element, menu) {
 	element.setAttribute('data-has-bleh-menu', true);

@@ -6,7 +6,7 @@
 
 import { html, render } from 'lighterhtml';
 import { page } from '@/build/page';
-import { markdown } from '@/components/shared/markdown';
+import { markdown } from '@/components/markdown/markdown';
 import {
 	patch_avatar,
 	style_name_from_badge,

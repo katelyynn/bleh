@@ -17,3 +17,10 @@ export type markdown_options = {
 	allow_alignment?: boolean;
 	name?: string;
 };
+
+export interface social_link {
+	host: string;
+	path: string;
+	url: string;
+	name?: string;
+}

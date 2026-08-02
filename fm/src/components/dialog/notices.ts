@@ -8,7 +8,7 @@ import { set_storage } from '@/build/tools';
 import { tl, trans } from '@/build/trans';
 import { html } from 'lighterhtml';
 import { DateTime } from 'luxon';
-import { markdown } from '../shared/markdown';
+import { markdown } from '../markdown/markdown';
 import { keys } from '../settings/storage';
 
 interface notice {

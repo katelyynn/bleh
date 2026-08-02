@@ -8,7 +8,7 @@ import { input } from '@/components/settings/input';
 import { select, select_prepare } from '@/components/settings/select';
 import { save_setting, setting } from '@/components/settings/settings';
 import { expand_avatar } from '@/components/shared/avatar';
-import { markdown, markdown_field } from '@/components/shared/markdown';
+import { markdown, markdown_field } from '@/components/markdown/markdown';
 import { html, render } from 'lighterhtml';
 import tippy from 'tippy.js';
 import Cropper from 'cropperjs';

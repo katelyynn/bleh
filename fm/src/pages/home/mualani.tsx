@@ -14,7 +14,7 @@ import { download_with_progress } from '@/build/tools';
 import { status } from '@/components/dialog/status.js';
 import { dialog } from '@/components/dialog/dialog';
 import { setting } from '@/components/settings/settings';
-import { markdown, markdown_field } from '@/components/shared/markdown';
+import { markdown, markdown_field } from '@/components/markdown/markdown';
 import { sponsor_list } from '@/build/sponsor';
 import { create_badge, load_badges } from '@/components/shared/badge';
 import { clamp_lit, clamp_sat, rgb_to_oklch } from '@/build/tools';

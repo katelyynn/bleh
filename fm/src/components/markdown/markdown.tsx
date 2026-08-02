@@ -25,9 +25,17 @@ import tippy from 'tippy.js';
 import { DateTime } from 'luxon';
 import { input } from '@/components/settings/input';
 import { queue_popup } from '@/components/dialog/popup';
-import { markdown_options } from '@/types/markdown';
+import { markdown_options, social_link } from '@/types/markdown';
 import { profile_cache_list } from '@/types/profile';
 import { keys } from '../settings/storage';
+import { is_sponsor } from '@/components/sponsor';
+import { proxy_images } from '@/components/markdown/proxy.tsx';
+import { status_cafe } from '@/components/markdown/statuscafe.tsx';
+import { time } from '@/components/markdown/time.tsx';
+import {
+	social_links,
+	social_links_extension,
+} from '@/components/markdown/links.tsx';
 
 export function markdown(
 	text: string,
@@ -101,7 +109,7 @@ export function markdown(
 	let sat: number | undefined;
 	let lit: number | undefined;
 
-	let links = [];
+	const links: social_link[] = [];
 
 	let status_cafe_user: string | undefined;
 
@@ -281,64 +289,6 @@ export function markdown(
 		},
 	];
 
-	// retrieves social links if a user supplies them
-	const social_links = () => [
-		{
-			type: 'lang',
-			regex: /\[links\]([\s\S]*?)\[\/links\]/g,
-			replace: (_: string, content: string) => {
-				const lines = content.trim().split(/\n+/);
-
-				lines.forEach((line) => {
-					line = line.trim();
-					if (!line) return;
-					console.info('line', line, line.trim());
-
-					const markdown_regex = line.match(/^\[(.+?)\]\((.+?)\)$/);
-
-					let url;
-					let name;
-
-					if (markdown_regex) {
-						url = markdown_regex[2].trim();
-						name = markdown_regex[1].trim();
-					} else {
-						url = line;
-					}
-
-					try {
-						const link = new URL(url, `https://www.last.fm${root}`);
-						const host = link.hostname;
-						const protocol = link.protocol;
-						const path = link.pathname;
-
-						console.info('proto', protocol, link);
-
-						if (protocol != 'http:' && protocol != 'https:') return;
-
-						let final = {
-							host,
-							path,
-							url: link.href,
-						};
-
-						if (name) {
-							final.name = DOMPurify.sanitize(name, {
-								ALLOWED_TAGS: [],
-							});
-						}
-
-						links.push(final);
-					} catch (e) {
-						return;
-					}
-				});
-
-				return '';
-			},
-		},
-	];
-
 	const header_minify = () => [
 		{
 			type: 'output',
@@ -365,7 +315,7 @@ export function markdown(
 		},
 	];
 
-	let extensions = [];
+	const extensions = [];
 
 	if (!line_breaks) allow_alignment = false;
 
@@ -375,7 +325,7 @@ export function markdown(
 	if (allow_icons) extensions.push(icons());
 	if (allow_hue) extensions.push(accent(), display_name(), status());
 	if (allow_fonts) extensions.push(font());
-	if (allow_socials) extensions.push(social_links());
+	if (allow_socials) extensions.push(social_links_extension(links));
 	if (!allow_headers) extensions.push(header_minify());
 	extensions.push(mentions(), timestamp());
 
@@ -451,88 +401,12 @@ export function markdown(
 
 	const body = (
 		<div
-			className='parsed-markdown markdown-body'
+			class={['parsed-markdown', 'markdown-body']}
 			dangerouslySetInnerHTML={{ __html: parsed }}
 		/>
 	);
 
 	log('rendered', 'markdown', 'info', { body });
-
-	const link_strings = {
-		'open.spotify.com': 'Spotify',
-		'spotify.com': 'Spotify',
-		'youtube.com': 'YouTube',
-		'x.com': 'Twitter (latterly X)',
-		'twitter.com': 'Twitter',
-		'github.com': 'GitHub',
-		'discord.com': 'Discord',
-		'discord.gg': 'Discord',
-		'bandcamp.com': 'Bandcamp',
-		'soundcloud.com': 'Soundcloud',
-		'tiktok.com': 'TikTok',
-		'www.tiktok.com': 'TikTok',
-		'ko-fi.com': 'Ko-fi',
-		'patreon.com': 'Patreon',
-		'www.patreon.com': 'Patreon',
-		'twitch.tv': 'Twitch',
-		'www.twitch.tv': 'Twitch',
-		'linktr.ee': 'Linktree',
-		'carrd.co': 'Carrd',
-		'music.apple.com': 'Apple Music',
-		'music.youtube.com': 'YouTube Music',
-		'facebook.com': 'Facebook',
-		'www.discogs.com': 'Discogs',
-		'discogs.com': 'Discogs',
-		'tidal.com': 'Tidal',
-		'record.club': 'Record Club',
-		'rateyourmusic.com': 'RYM',
-		'albumoftheyear.org': 'AOTY',
-		'mastodon.social': 'Mastodon',
-		'bsky.app': 'Bluesky',
-		'reddit.com': 'Reddit',
-	};
-
-	const icons_not_supported = [
-		'record.club',
-		'reddit.com',
-	];
-
-	if (links.length > 0) {
-		body.appendChild(
-			<div className='social-links-container'>
-				<div className='sub-text music-small-header'>
-					{tl(trans.links)}
-				</div>
-				<div className='music-links social-links'>
-					{links.map((link) => {
-						let label = link.host;
-
-						if (link.name) {
-							label = link.name;
-						} else if (link_strings.hasOwnProperty(link.host)) {
-							label = link_strings[link.host];
-						}
-
-						return (
-							<a
-								className='btn music-link social-link colourful icon'
-								href={link.url}
-								target='_blank'
-								data-host={link.host}
-								data-host-unknown={!link_strings.hasOwnProperty(
-									link.host,
-								) || icons_not_supported.includes(link.host)}
-								data-path={link.path}
-								style='--favi: url(https://icons.duckduckgo.com/ip3/${link.host}.ico)'
-							>
-								{label}
-							</a>
-						);
-					})}
-				</div>
-			</div>,
-		);
-	}
 
 	patch_wiki_contents(body);
 
@@ -546,138 +420,25 @@ export function markdown(
 
 	// this looks like a mess, but essentially profile colours are
 	// a nice 'thank you' vanity reward for sponsors <3
-	if (allow_hue) {
-		if (!sponsor_list.users.hasOwnProperty(name)) {
-			allow_hue = false;
-		}
+	if (allow_hue && is_sponsor(name)) {
+		allow_hue = false;
 	}
 
-	if (body.nodeName != '#text') {
-		// add lazy-loading to images
-		body.querySelectorAll('img').forEach((image) => {
-			if (!line_breaks) {
-				image.remove();
-				return;
-			}
+	// add lazy-loading to images
+	proxy_images(body, line_breaks, in_dialog);
 
-			// for counter-like sites
-			// did they really have to call their counter site loli
-			const proxy_free = [
-				'count.getloli.com',
-				'i.imgur.com',
-				'media1.tenor.com',
-				'katelyynn.github.io',
-				'i.pinimg.com',
-				'i.ibb.co',
-				'static.klipy.com',
-				'static2.klipy.com',
-			];
+	status_cafe(body, status_cafe_user);
 
-			try {
-				const url = new URL(image.src);
+	time(body);
 
-				if (!proxy_free.includes(url.hostname)) {
-					image.setAttribute(
-						'data-unsafe-href',
-						encodeURI(image.src),
-					);
-					image.src = `https://images.weserv.nl/?url=${
-						encodeURIComponent(image.src)
-					}&output=webp&n=-1`;
-				}
-			} catch (e) {
-				image.setAttribute('data-unsafe-href', encodeURI(image.src));
-				image.src = `https://images.weserv.nl/?url=${
-					encodeURIComponent(image.src)
-				}&output=webp&n=-1`;
-			}
+	social_links(body, links);
 
-			image.setAttribute('loading', 'lazy');
-
-			let func = () => expand_avatar(image.src, image.alt);
-			if (in_dialog) func = () => open(image.src);
-
-			const container = <div className='markdown-image' onClick={func} />;
-
-			image.after(container);
-			container.appendChild(image);
+	body.querySelectorAll('.hazelfae').forEach((hazel) => {
+		tippy(hazel, {
+			content: ':hazelfae:',
+			delay: [500, 0],
 		});
-
-		if (status_cafe_user) {
-			const status_cafe_host = body.querySelector('.status-cafe-host');
-			status_cafe_host!.replaceChildren(
-				<div className='status-cafe'>
-					<div className='status-cafe-content is-loading'>
-						<span className='status-cafe-emoji'>
-							<span className='status-cafe-loading-spinner'>
-								<span className='bleh-icon' />
-							</span>
-						</span>
-						<span className='status-cafe-text'>
-							${tl(trans.loading_status, { u: status_cafe_user })}
-						</span>
-					</div>
-					<div className='status-cafe-top'>
-						<span className='status-cafe-time'>...</span>
-					</div>
-				</div>,
-			);
-
-			fetch_status(status_cafe_user).then((status_cafe) => {
-				status_cafe_host!.replaceChildren(status_cafe);
-			});
-		}
-
-		body.querySelectorAll('t').forEach((timestamp) => {
-			const time = timestamp.textContent;
-			const flag = timestamp.getAttribute('data-flag');
-
-			const date = DateTime.fromSeconds(parseInt(time));
-
-			let text = '';
-
-			if (flag == 'F') {
-				text = tl(trans.date_at_time, {
-					d: date.toLocaleString(DateTime.DATE_HUGE),
-					t: date.toLocaleString(DateTime.TIME_SIMPLE),
-				});
-			} else if (flag == 'f') {
-				text = tl(trans.date_at_time, {
-					d: date.toLocaleString(DateTime.DATE_FULL),
-					t: date.toLocaleString(DateTime.TIME_SIMPLE),
-				});
-			} else if (flag == 'D') {
-				text = date.toLocaleString(DateTime.DATE_FULL);
-			} else if (flag == 'd') {
-				text = date.toLocaleString(DateTime.DATE_SHORT);
-			} else if (flag == 't') {
-				text = date.toLocaleString(DateTime.TIME_SIMPLE);
-			} else if (flag == 'T') {
-				text = date.toLocaleString(DateTime.TIME_WITH_SECONDS);
-			} else if (flag == 'R') {
-				text = date.toRelative();
-			}
-
-			const new_timestamp = <span>${text}</span>;
-
-			tippy(new_timestamp, {
-				theme: 'generic',
-				content: html.node`
-                    <span>${date.toLocaleString(DateTime.DATE_FULL)}</span>
-                    <small>${date.toLocaleString(DateTime.TIME_SIMPLE)}</small>
-                `,
-			});
-
-			timestamp.replaceWith(new_timestamp);
-		});
-
-		body.querySelectorAll('.hazelfae').forEach((hazel) => {
-			tippy(hazel, {
-				content: ':hazelfae:',
-				delay: [500, 0],
-			});
-		});
-	}
+	});
 
 	if (allow_hue) {
 		console.info(hue, sat, lit);
@@ -719,151 +480,6 @@ export function markdown(
 	}
 
 	return body;
-}
-
-export function markdown_prompt({
-	allow_headers = false,
-	starting_header = 3,
-	allow_links = true,
-	line_breaks = true,
-	allow_banners = false,
-	allow_icons = false,
-	allow_hue = false,
-	allow_socials = false,
-	allow_lists = true,
-	allow_alignment = false,
-} = {}) {
-	if (!line_breaks) allow_alignment = false;
-
-	const examples = [
-		{
-			name: tl(trans.supports_markdown.header.name),
-			string: tl(trans.supports_markdown.header.string),
-			hide_if: !allow_headers,
-		},
-		{
-			name: tl(trans.supports_markdown.bold.name),
-			string: tl(trans.supports_markdown.bold.string),
-		},
-		{
-			name: tl(trans.supports_markdown.italics.name),
-			string: tl(trans.supports_markdown.italics.string),
-		},
-		{
-			name: tl(trans.supports_markdown.bold_italics.name),
-			string: tl(trans.supports_markdown.bold_italics.string),
-		},
-		{
-			name: tl(trans.supports_markdown.underlined.name),
-			string: tl(trans.supports_markdown.underlined.string),
-		},
-		{
-			name: 'Fancy link',
-			string: '[example >~<](https://katelyn.moe)',
-			hide_if: !allow_links,
-		},
-		{
-			name: 'Simple link',
-			string: `https://last.fm${root}user/${auth.name}`,
-			hide_if: !allow_links,
-		},
-		{
-			name: 'Mentioned user',
-			string: `@${auth.name}`,
-		},
-		{
-			name: 'Image',
-			string: `![alt text](${auth.avatar})`,
-			string_display: '![alt text](image url here)',
-			hide_if: !line_breaks,
-		},
-		{
-			name: 'Left-alignment',
-			string: '[left]text[/left]',
-			hide_if: !allow_alignment,
-		},
-		{
-			name: 'Center-alignment',
-			string: '[center]text[/center]',
-			hide_if: !allow_alignment,
-		},
-		{
-			name: 'Right-alignment',
-			string: '[right]text[/right]',
-			hide_if: !allow_alignment,
-		},
-		{
-			name: 'Divider line',
-			string: '---',
-			hide_if: !allow_alignment,
-		},
-	];
-
-	dialog({
-		id: 'markdown',
-		title: tl(trans.supports_markdown),
-		body: html.node`
-            <p>You can write fancy text here using Markdown, which lets you make your words pretty with simple shortcuts.</p>
-            <table class="fancy-table">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>How</th>
-                        <th>Result</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    ${
-			examples.map((example) => {
-				if (example.hide_if) return html.node``;
-
-				return html.node`
-                            <tr>
-                                <td>${example.name}</td>
-                                <td class="subtle">${
-					example.string_display
-						? example.string_display
-						: example.string
-				}</td>
-                                ${
-					example.explain
-						? html.node`
-                                    <td>
-                                        <div class="icon-combo">
-                                            <div class="bleh-icon" data-type="info" style="--icon: var(--mask)" />
-                                            ${example.explain}
-                                        </div>
-                                    </td>
-                                `
-						: html.node`
-                                    <td class="markdown-body">${
-							markdown(
-								example.string,
-								{
-									allow_headers,
-									starting_header,
-									allow_links,
-									line_breaks,
-									allow_banners,
-									allow_icons,
-									allow_hue,
-									allow_socials,
-									allow_lists,
-									allow_alignment,
-									in_dialog: true,
-								},
-							)
-						}</td>
-                                `
-				}
-                            </tr>
-                        `;
-			})
-		}
-                </tbody>
-            </table>
-        `,
-	});
 }
 
 export function markdown_preview(
@@ -931,101 +547,6 @@ function local_restriction(text) {
 	) {
 		text.classList.add('local-restriction');
 	}
-}
-
-export function external_url_prompt(url: string, dangerous = false) {
-	log(
-		`prompted warning for url ${url}, dangerous is ${dangerous}`,
-		'markdown',
-	);
-
-	const link = new URL(url);
-	const scheme = link.protocol;
-	const hostname = link.hostname;
-	const path = link.pathname + link.search + link.hash;
-
-	let trust_site: HTMLElement;
-
-	dialog({
-		id: 'external_url',
-		type: 'leaving_site',
-		body: html.node`
-            <div class="modal-vertical-inner leaving-site-inner">
-                ${
-			!dangerous
-				? html.node`
-                <h1>${tl(trans.leaving_site.name)}</h1>
-                <p>${tl(trans.leaving_site.body)}</p>
-                `
-				: html.node`
-                <h1>${tl(trans.leaving_site_dangerous.name)}</h1>
-                <p>${tl(trans.leaving_site_dangerous.body)}</p>
-                `
-		}
-                <div class="external-warn-input" data-dangerous=${dangerous}>
-                    <span class="scheme">
-                        ${scheme}//
-                    </span>
-                    ${
-			hostname
-				? html.node`
-                    <span class="hostname">
-                        ${hostname}
-                    </span>
-                    `
-				: html.node`
-                    <span class="hostname">
-                        ${path}
-                    </span>
-                    `
-		}
-                    ${
-			path != '/' && hostname
-				? html.node`
-                    <span class="path">
-                        ${path}
-                    </span>
-                    `
-				: ''
-		}
-                </div>
-                ${
-			hostname != ''
-				? html.node`
-                ${(trust_site = toggle({
-					type: 'checkbox',
-					title: tl(trans.leaving_site_checkbox).replace(
-						'{v}',
-						hostname,
-					),
-				}))}
-                `
-				: ''
-		}
-            </div>
-            <div class="modal-footer">
-                <button class="see-more cancel left-icon" onclick=${() =>
-			dialog_rm({ id: 'external_url' })}>
-                    ${tl(trans.back)}
-                </button>
-                <div class="fill"></div>
-                <button class="btn primary continue" onclick=${() => {
-			if (trust_site?.checked()) {
-				save_setting('trusted_sites', [
-					...settings.trusted_sites,
-					hostname,
-				]);
-				log(`added ${hostname} to trusted sites`, 'markdown');
-			}
-
-			open(url, '_blank');
-			dialog_rm({ id: 'external_url' });
-		}}>
-                    ${!dangerous ? tl(trans.visit) : tl(trans.open)}
-                </button>
-            </div>
-        `,
-	});
 }
 
 interface markdown_field_element extends HTMLElement {

@@ -30,7 +30,7 @@ import {
 	markdown,
 	markdown_field,
 	markdown_preview,
-} from '@/components/shared/markdown';
+} from '@/components/markdown/markdown';
 import tippy from 'tippy.js';
 import { ff } from '../settings/sku';
 import { keys } from '../settings/storage';

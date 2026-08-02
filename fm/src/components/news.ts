@@ -10,7 +10,7 @@ import { page, root } from '@/build/page';
 import { tl, trans } from '@/build/trans';
 import { dialog, dialog_rm } from '@/components/dialog/dialog';
 import { sponsor_list } from '@/build/sponsor';
-import { markdown } from '@/components/shared/markdown';
+import { markdown } from '@/components/markdown/markdown';
 import { set_storage } from '@/build/tools';
 import { sponsor } from '@/components/sponsor';
 import tippy from 'tippy.js';

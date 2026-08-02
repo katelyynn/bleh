@@ -11,8 +11,9 @@ import { tl, trans } from '@/build/trans';
 import { ff } from '@/components/settings/sku';
 import { html } from 'lighterhtml';
 import tippy from 'tippy.js';
-import { external_url_prompt } from '@/components/shared/markdown';
 import { settings } from '@/build/config';
+import { ReactElement } from 'jsx-dom';
+import { external_url_prompt } from '@/components/dialog/external_link.tsx';
 
 export function bleh_wiki() {
 	// make a new panel
@@ -487,10 +488,12 @@ export function can_trust_link(href) {
 	return { trusted: false, dangerous };
 }
 
-export function patch_wiki_contents(wiki_block: HTMLElement) {
-	let links = wiki_block.querySelectorAll('a');
+export function patch_wiki_contents(wiki_block: ReactElement) {
+	const links = wiki_block.querySelectorAll('a');
 	links.forEach((link) => {
 		let href = link.getAttribute('href');
+		if (!href) return;
+
 		let type;
 		let name = link.textContent.trim();
 		let sister;
