@@ -47,7 +47,7 @@ import { sponsor, sponsor_manage, sponsors } from '@/components/sponsor';
 import { version as florence_version } from '@tealmiku/florence';
 import { queue_popup } from '@/components/dialog/popup';
 import { visual } from '@/pages/bleh_settings/visual';
-import { general } from '@/pages/bleh_settings/general';
+import { general } from '@/pages/bleh_settings/general.tsx';
 import { seasonal } from './seasonal';
 import { settings_search } from './search.js';
 import { icon, icons } from '@/components/shared/icon.js';

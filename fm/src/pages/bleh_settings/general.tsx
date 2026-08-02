@@ -31,6 +31,11 @@ import { new_indicator } from '@/components/shared/indicator';
 import { discord } from '@/build/page';
 import { icon, icons } from '@/components/shared/icon';
 import { news } from '@/components/news';
+import { SubText } from '@/components/text/sub.tsx';
+import { SettingGroup } from '@/components/settings/group.tsx';
+import { SeeMore, SeeMoreGroup } from '@/components/text/see_more.tsx';
+import { badge } from '@/types/badge.ts';
+import { SettingAction } from '@/components/settings/provider/action.tsx';
 
 export function general() {
 	if (auth.pro == null) {
@@ -51,6 +56,114 @@ export function general() {
 
 	const auth_key = localStorage.getItem('bleh_auth');
 	const auth_valid = localStorage.getItem('bleh_auth_valid');
+
+	page.structure.main!.replaceChildren(
+		<>
+			<section class='bleh--panel'>
+				<div class={['section-intro', 'less']}>
+					<SubText>{tl(trans.current_version)}</SubText>
+					<h1 class='setting-head'>
+						<i>{version.brand}</i>{' '}
+						<i class='highlight'>{version.build}</i>
+					</h1>
+				</div>
+				<SettingGroup>
+					{update_setting()}
+				</SettingGroup>
+				<div class={['section-intro', 'less']}>
+					<SubText>{tl(trans.issues_updating)}</SubText>
+					<SeeMoreGroup>
+						<SeeMore
+							href='https://github.com/katelyynn/bleh/issues/new/choose'
+							external
+						>
+							{tl(trans.report_issue)}
+						</SeeMore>
+						<SeeMore
+							href={`https://discord.gg/${discord}`}
+							external
+						>
+							{tl(trans.join_discord)}
+						</SeeMore>
+					</SeeMoreGroup>
+				</div>
+			</section>
+			<section class='bleh--panel'>
+				<h4>{tl(trans.profile)}</h4>
+				<SettingGroup>
+					{auth.name
+						? (
+							<div class='setting' data-type='info'>
+								<div class='avatar-container'>
+									<div class='avatar-inner'>
+										<img
+											src={auth.avatar!}
+											alt={auth.name}
+										/>
+									</div>
+								</div>
+								<div class='heading'>
+									<h5>@{auth.name}</h5>
+								</div>
+								<div class='info'>
+									<p>
+										{tl(trans.profile_and_badges, {
+											c: badge_count.toString(),
+										})}
+									</p>
+									{(badge_count > 0 && badges)
+										? (
+											<SeeMore
+												onClick={() => {
+													badge_prompt(badges);
+												}}
+											>
+												{tl(trans.view)}
+											</SeeMore>
+										)
+										: ''}
+								</div>
+							</div>
+						)
+						: ''}
+					{auth.sponsor
+						? (
+							<SettingAction
+								name={tl(trans.you_are_a_sponsor)}
+								body={tl(trans.sponsor_get_badge)}
+							>
+								<button
+									type='button'
+									class='btn primary icon sponsor colourful'
+									data-type='sponsor'
+									onClick={sponsor_manage}
+								>
+									{tl(trans.manage_sponsor)}
+								</button>
+							</SettingAction>
+						)
+						: (
+							<SettingAction
+								name={tl(trans.news_sponsor_cta)}
+								body={tl(trans.sponsor_get_badge)}
+							>
+								<button
+									type='button'
+									class='btn primary icon sponsor colourful'
+									data-type='sponsor'
+									onClick={() => sponsor()}
+								>
+									{tl(trans.sponsor)}
+								</button>
+							</SettingAction>
+						)}
+				</SettingGroup>
+			</section>
+		</>,
+	);
+
+	// early return but without the ide knowing
+	if (!setting.dbdfbdf) return;
 
 	render(
 		page.structure.main,
@@ -518,5 +631,31 @@ function update_check_failed(e) {
             </div>
         `,
 		type: 'error',
+	});
+}
+
+function badge_prompt(badges: badge[]) {
+	dialog({
+		id: 'badges',
+		title: auth.name!,
+		body: (
+			<div class='generic-table-list badge-list'>
+				{badges.map((badge: badge) => (
+					<div class='generic-table-list-entry badge-list-entry'>
+						<div class='name'>
+							{create_badge(
+								badge,
+								false,
+								true,
+								true,
+							)}
+						</div>
+						<div class='text'>
+							{badge.reason}
+						</div>
+					</div>
+				))}
+			</div>
+		),
 	});
 }

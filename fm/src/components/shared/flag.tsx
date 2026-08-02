@@ -27,6 +27,35 @@ export function flag(code: string, classname?: string) {
 	return elem;
 }
 
+interface FlagProps {
+	code: string;
+	className?: string;
+}
+
+export function Flag({
+	code,
+	className,
+}: FlagProps) {
+	const url =
+		`https://purecatamphetamine.github.io/country-flag-icons/3x2/${code}.svg`;
+
+	const elem = (
+		<div
+			class={['country-flag', className && className]}
+			style={{ backgroundImage: `url(${url})` }}
+		>
+			{code} (flag)
+		</div>
+	);
+
+	tippy(elem, {
+		content: code,
+		delay: [1000, 0],
+	});
+
+	return elem;
+}
+
 export const convert_lang_to_country = {
 	en: 'gb',
 	sv: 'se',
