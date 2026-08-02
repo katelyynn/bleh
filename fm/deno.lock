@@ -14,6 +14,7 @@
     "jsr:@std/media-types@^1.1.0": "1.1.0",
     "jsr:@std/net@^1.0.6": "1.0.6",
     "jsr:@std/path@^1.1.1": "1.1.6",
+    "jsr:@std/path@^1.1.5": "1.1.6",
     "jsr:@std/path@^1.1.6": "1.1.6",
     "jsr:@std/streams@^1.1.1": "1.1.1",
     "npm:@tealmiku/florence@^2026.527.0": "2026.527.0",
@@ -65,7 +66,11 @@
       "integrity": "90dfba288802ac6de82fb31d0917eb9e4450b9925b954d5e51fc29ac07419db5"
     },
     "@std/fs@1.0.24": {
-      "integrity": "f3061b45b81673a2bece689da041df32d174be064c89eb6397fb5718d3fb7877"
+      "integrity": "f3061b45b81673a2bece689da041df32d174be064c89eb6397fb5718d3fb7877",
+      "dependencies": [
+        "jsr:@std/internal",
+        "jsr:@std/path@^1.1.5"
+      ]
     },
     "@std/html@1.0.7": {
       "integrity": "175c818905a6e75743c69c251395e273d82698e58cfe7dd76268d70e28b8d8fe"
@@ -1099,6 +1104,8 @@
   "workspace": {
     "dependencies": [
       "jsr:@deno/esbuild-plugin@^1.2.1",
+      "jsr:@std/fmt@^1.0.10",
+      "jsr:@std/fs@^1.0.24",
       "jsr:@std/http@^1.1.2",
       "npm:@tealmiku/florence@^2026.527.0",
       "npm:@types/luxon@^3.7.3",

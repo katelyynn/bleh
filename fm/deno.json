@@ -3,6 +3,8 @@
 	"imports": {
 		"@/": "./src/",
 		"@deno/esbuild-plugin": "jsr:@deno/esbuild-plugin@^1.2.1",
+		"@std/fmt": "jsr:@std/fmt@^1.0.10",
+		"@std/fs": "jsr:@std/fs@^1.0.24",
 		"@std/http": "jsr:@std/http@^1.1.2",
 		"@tealmiku/florence": "npm:@tealmiku/florence@^2026.527.0",
 		"@types/luxon": "npm:@types/luxon@^3.7.3",
@@ -32,7 +34,8 @@
 	},
 	"tasks": {
 		"build": "deno run -P index.ts",
-		"dev": "deno run -P --watch=./src/ --watch-exclude=./src/build/build.json index.ts serve"
+		"dev": "deno run -P --watch=./src/ --watch-exclude=./src/build/build.json index.ts serve",
+		"license": "deno fmt && deno run --allow-read --allow-write scripts/copyright.ts"
 	},
 	"permissions": {
 		"default": {
@@ -40,7 +43,9 @@
 			"write": true,
 			"run": true,
 			"env": true,
-			"net": ["0.0.0.0"]
+			"net": [
+				"0.0.0.0"
+			]
 		}
 	},
 	"compilerOptions": {
@@ -63,13 +68,26 @@
 		"singleQuote": true,
 		"indentWidth": 4,
 		"useTabs": true,
-		"exclude": ["bleh.user.js", "bleh.user.css", "ext/*", "**/*.md"]
+		"exclude": [
+			"bleh.user.js",
+			"bleh.user.css",
+			"ext/*",
+			"**/*.md"
+		]
 	},
 	"lint": {
 		"rules": {
-			"exclude": ["no-sloppy-imports", "no-window"]
+			"exclude": [
+				"no-sloppy-imports",
+				"no-window"
+			]
 		},
-		"exclude": ["bleh.user.js", "bleh.user.css", "ext/*", "**/*.md"]
+		"exclude": [
+			"bleh.user.js",
+			"bleh.user.css",
+			"ext/*",
+			"**/*.md"
+		]
 	},
 	"nodeModulesDir": "auto"
 }
