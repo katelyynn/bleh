@@ -210,12 +210,13 @@
 	right: 0;
 	z-index: 0;
 
-	height: 200px;
+	height: 250px;
 	overflow: hidden;
 
 	border-radius: inherit;
 
 	mix-blend-mode: hard-light;
+	opacity: 0.2;
 
 	--mask: linear-gradient(180deg, white, transparent);
 	mask-image: var(--mask);
