@@ -6,7 +6,8 @@ import { set_storage } from '@/build/tools';
 export function hoshino(artwork, name, sister, link = null) {
 	if (!ff('hoshino')) return;
 
-	const oracle_cache = JSON.parse(localStorage.getItem('bleh_oracle_cache')) ||
+	const oracle_cache =
+		JSON.parse(localStorage.getItem('bleh_oracle_cache')) ||
 		{};
 
 	const name_lower = name.toLowerCase();
@@ -63,7 +64,8 @@ export function hoshino(artwork, name, sister, link = null) {
 export function hoshino_return(name, sister) {
 	if (!ff('hoshino')) return;
 
-	const oracle_cache = JSON.parse(localStorage.getItem('bleh_oracle_cache')) ||
+	const oracle_cache =
+		JSON.parse(localStorage.getItem('bleh_oracle_cache')) ||
 		{};
 
 	const name_lower = name.toLowerCase();

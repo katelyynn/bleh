@@ -7,10 +7,7 @@
 import { auth, page, root } from '@/build/page';
 import { tl, trans } from '@/build/trans';
 import { bleh_auto_edits } from '@/components/dialog/auto_edit';
-import {
-	select,
-	select_prepare,
-} from '@/components/settings/select';
+import { select, select_prepare } from '@/components/settings/select';
 import { update_inbuilt_item } from '../../config';
 import { html, render } from 'lighterhtml';
 import tippy from 'tippy.js';

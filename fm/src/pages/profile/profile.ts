@@ -9,16 +9,9 @@ import { settings } from '@/build/config';
 import { log } from '@/build/log.js';
 import { auth, page, root } from '@/build/page';
 import { sponsor_list } from '@/build/sponsor';
-import {
-	clean_number,
-	copy,
-	romanise,
-	set_storage,
-} from '@/build/tools';
+import { clean_number, copy, romanise, set_storage } from '@/build/tools';
 import { tl, trans } from '@/build/trans';
-import {
-	load_chart_colours,
-} from '@/components/music/chart';
+import { load_chart_colours } from '@/components/music/chart';
 import { create_badge, load_badges } from '@/components/shared/badge';
 import { dialog } from '@/components/dialog/dialog';
 import {
@@ -47,10 +40,7 @@ import { html, render } from 'lighterhtml';
 import { save_setting, setting } from '@/components/settings/settings';
 import { submit_scrobble } from '@/components/music/scrobble';
 import tippy from 'tippy.js';
-import {
-	avatar,
-	style_name_from_badge,
-} from '@/components/shared/avatar';
+import { avatar, style_name_from_badge } from '@/components/shared/avatar';
 import { status } from '@/components/dialog/status.js';
 import { hoshino } from '@/components/music/hoshino.js';
 import { find_pronouns } from '@/components/profile/pronouns';
@@ -108,7 +98,8 @@ export function bleh_profiles() {
 
 	let new_account = false;
 
-	const profile_cache = JSON.parse(localStorage.getItem(keys.profile_cache)) ||
+	const profile_cache =
+		JSON.parse(localStorage.getItem(keys.profile_cache)) ||
 		{};
 	const cache = profile_cache[page.name] || {};
 
@@ -816,7 +807,9 @@ function patch_profile_following() {
 	const navlist = page.structure.nav.querySelector('.navlist-items');
 
 	let following_tab = navlist.querySelector('.secondary-nav-item--following');
-	const followers_tab = navlist.querySelector('.secondary-nav-item--followers');
+	const followers_tab = navlist.querySelector(
+		'.secondary-nav-item--followers',
+	);
 	const neighbours_tab = navlist.querySelector(
 		'.secondary-nav-item--neighbours',
 	);
@@ -1331,7 +1324,9 @@ function profile_artists() {
 
 	const timeframe = form.querySelector('[name="chart_range_top_artists"]');
 	const style = form.querySelector('[name="chart_style_top_artists"]');
-	const grid_length = form.querySelector('[name="artists_image_grid_length"]');
+	const grid_length = form.querySelector(
+		'[name="artists_image_grid_length"]',
+	);
 	const chartlist_length = form.querySelector(
 		'[name="artists_chartlist_length"]',
 	);
@@ -1889,7 +1884,8 @@ export async function load_profile_cache_externally(name = page.name) {
 
 	log(`requested profile cache for ${name}`, 'cache');
 
-	const profile_cache = JSON.parse(localStorage.getItem(keys.profile_cache)) ||
+	const profile_cache =
+		JSON.parse(localStorage.getItem(keys.profile_cache)) ||
 		{};
 	const cache = profile_cache[name];
 
@@ -2171,7 +2167,9 @@ function bleh_profile_events(no_events) {
         `);
 	}
 
-	const legacy_metadata = page.structure.main!.querySelector('.metadata-list');
+	const legacy_metadata = page.structure.main!.querySelector(
+		'.metadata-list',
+	);
 	if (legacy_metadata) page.structure.main!.removeChild(legacy_metadata);
 
 	page.structure.side!.innerHTML = '';

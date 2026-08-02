@@ -17,7 +17,9 @@ export function bleh_about_artist() {
 	const legacy_container = page.structure.main.querySelector('.about-artist');
 	if (!legacy_container) return;
 
-	const image = legacy_container.querySelector('.gallery-preview-image--0 img');
+	const image = legacy_container.querySelector(
+		'.gallery-preview-image--0 img',
+	);
 	const listeners = legacy_container.querySelector('.about-artist-listeners');
 	const tags = legacy_container.querySelector('.about-artist-tags');
 

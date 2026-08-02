@@ -22,9 +22,7 @@ import {
 	set_storage,
 } from '@/build/tools';
 import { tl, trans } from '@/build/trans';
-import {
-	render_setting_page,
-} from '@/pages/bleh_settings/bleh_settings.js';
+import { render_setting_page } from '@/pages/bleh_settings/bleh_settings.js';
 import { dialog, dialog_rm } from '@/components/dialog/dialog';
 import { html, render } from 'lighterhtml';
 import { redirect } from '@/components/music/music';

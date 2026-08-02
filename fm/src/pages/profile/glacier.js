@@ -63,7 +63,9 @@ export function bleh_user_library() {
 
 	// tabs
 	const search = page.structure.content_top.querySelector('.library-search');
-	const nav = page.structure.content_top.querySelector('.library-controls nav');
+	const nav = page.structure.content_top.querySelector(
+		'.library-controls nav',
+	);
 	const tabs = nav.querySelector('.navlist-items');
 	if (page.name == auth.name) {
 		const velocity_tab = document.createElement('li');
@@ -323,7 +325,9 @@ function bleh_glacier_library_date() {
 		});
 	});
 
-	const form = picker_content.querySelector(':scope > .date-range-picker-form');
+	const form = picker_content.querySelector(
+		':scope > .date-range-picker-form',
+	);
 
 	const from_group = form.querySelector('.form-group--from');
 	const from_input = from_group.querySelector('input');
@@ -521,7 +525,9 @@ function bleh_glacier_library_top(static_page = false) {
 					'view-item',
 					'glacier-library-button',
 				);
-				const sort_menu = sort.querySelector('.dropdown-menu-clickable');
+				const sort_menu = sort.querySelector(
+					'.dropdown-menu-clickable',
+				);
 
 				view_buttons.appendChild(sort_button);
 				view_buttons.appendChild(sort_menu);
@@ -1658,7 +1664,9 @@ function bleh_glacier_library_focused() {
 		header_title = legacy_header.querySelector('.library-header-title'); // main
 	}
 
-	const duration = header_title.querySelector('.library-header-title-duration');
+	const duration = header_title.querySelector(
+		'.library-header-title-duration',
+	);
 	if (duration) header_title.removeChild(duration);
 
 	header_title = header_title.textContent.trim();
@@ -1745,7 +1753,9 @@ function bleh_glacier_library_focused() {
 		if (state == 'loved') state = 0;
 		else state = 1;
 
-		const love_form_items = love_form.querySelectorAll(':scope > div > div');
+		const love_form_items = love_form.querySelectorAll(
+			':scope > div > div',
+		);
 		love_form_items.forEach((item, index) => {
 			if (state != index) item.classList.add('hide');
 
@@ -1900,7 +1910,9 @@ function bleh_glacier_library_focused() {
         </div>
     `;
 
-	const legacy_meta_wrap = page.structure.main.querySelector('.metadata-list');
+	const legacy_meta_wrap = page.structure.main.querySelector(
+		'.metadata-list',
+	);
 	if (legacy_meta_wrap) {
 		const metadatas = legacy_meta_wrap.querySelectorAll(
 			'.metadata-item:not(.library-header-ctas__wrapper)',
@@ -1974,7 +1986,9 @@ export function bleh_glacier_library_bulk_edit() {
 	// quick check to see if bulk edit is present
 	const library_header = page.structure.main.querySelector('.library-header');
 
-	const bulk_edit = library_header.querySelector('[href="javascript:void(0)"]');
+	const bulk_edit = library_header.querySelector(
+		'[href="javascript:void(0)"]',
+	);
 	if (!bulk_edit) return;
 
 	// move to new area

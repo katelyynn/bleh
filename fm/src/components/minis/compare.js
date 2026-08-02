@@ -276,7 +276,9 @@ export function compare({ host, sidebar } = {}) {
 			</div>
 		`,
 	);
-	const compare_settings = setting_group.querySelectorAll(':scope > .setting');
+	const compare_settings = setting_group.querySelectorAll(
+		':scope > .setting',
+	);
 
 	function begin_comparing(bypass = false) {
 		if (page.name == '') return;

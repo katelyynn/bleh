@@ -65,7 +65,9 @@ export function bleh_radio() {
 		if (list) list.parentElement.remove();
 		promo_v3.appendChild(list);
 	} else {
-		const header = page.structure.side.querySelector('.stationlinks-header');
+		const header = page.structure.side.querySelector(
+			'.stationlinks-header',
+		);
 		header.textContent = tl(trans.listening);
 	}
 }

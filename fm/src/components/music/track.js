@@ -309,7 +309,9 @@ export function patch_titles(search = page.structure.main) {
 			}
 
 			// menu
-			const track_legacy_menu = track.querySelector('.chartlist-more-menu');
+			const track_legacy_menu = track.querySelector(
+				'.chartlist-more-menu',
+			);
 
 			const track_timestamp = track.querySelector(
 				'.chartlist-timestamp span',

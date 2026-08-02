@@ -164,7 +164,9 @@ export function dialog_extender() {
 			const submit = body.querySelector('.form-group--submit');
 			submit.classList = 'modal-footer';
 
-			const delete_form = body.querySelector('.edit-scrobble-form-delete');
+			const delete_form = body.querySelector(
+				'.edit-scrobble-form-delete',
+			);
 			let delete_btn;
 			if (delete_form) {
 				delete_btn = delete_form.querySelector('.btn-delete');

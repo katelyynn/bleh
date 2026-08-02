@@ -221,7 +221,8 @@ export function page_header_title(header = document.body) {
 	if (track_artist) {
 		// album/track page
 		if (artist_corrections.hasOwnProperty(track_artist.textContent)) {
-			const corrected_artist = artist_corrections[track_artist.textContent];
+			const corrected_artist =
+				artist_corrections[track_artist.textContent];
 			log(
 				`corrected ${track_artist.textContent} as ${corrected_artist}`,
 				'lotus',

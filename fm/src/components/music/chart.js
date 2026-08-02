@@ -53,7 +53,9 @@ export function load_chart_colours() {
 	const link_col = `oklch(${
 		getComputedStyle(document.body).getPropertyValue('--l3-c')
 	})`;
-	const link_h_col = getComputedStyle(document.body).getPropertyValue('--h3-s');
+	const link_h_col = getComputedStyle(document.body).getPropertyValue(
+		'--h3-s',
+	);
 	const link_bg_col = `oklch(${
 		getComputedStyle(document.body).getPropertyValue('--h4')
 	} / 30%)`;

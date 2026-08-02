@@ -7,9 +7,7 @@
 import { settings } from '@/build/config';
 import { log } from '@/build/log';
 import { page, root } from '@/build/page';
-import {
-	seasonal_events,
-} from '@/build/seasonal';
+import { seasonal_events } from '@/build/seasonal';
 import { set_storage } from '@/build/tools';
 import { tl, trans } from '@/build/trans';
 import { load_chart_colours } from '@/components/music/chart';

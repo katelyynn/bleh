@@ -169,7 +169,9 @@ export function bleh_obsession() {
 		page.structure.container.firstElementChild,
 	);
 
-	const video = obsession_container.querySelector('.obsession-video-container');
+	const video = obsession_container.querySelector(
+		'.obsession-video-container',
+	);
 	if (video) track_header.after(video);
 
 	// remove quotations
@@ -478,7 +480,8 @@ export function obsession_list() {
 
 		hoshino(cover, title, artist);
 
-		const obsession_is_first = item.querySelector('.obsession-first') != null;
+		const obsession_is_first =
+			item.querySelector('.obsession-first') != null;
 
 		const grid_item = html.node`
             <li class="grid-items-item obsessions-item ${

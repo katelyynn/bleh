@@ -91,7 +91,9 @@ export async function bleh_inbox() {
 		const notifications = page.structure.container.querySelector(
 			'.inbox-notifications',
 		);
-		const pagination = page.structure.container.querySelector('.pagination');
+		const pagination = page.structure.container.querySelector(
+			'.pagination',
+		);
 
 		page.structure.main.appendChild(html.node`
             <section class="inbox-panel notifications-panel">

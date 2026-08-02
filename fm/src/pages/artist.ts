@@ -91,7 +91,9 @@ export function bleh_artists() {
 				'.col-main.buffer-standard',
 			);
 		} else {
-			page.structure.main = page.structure.row!.querySelector('.col-main');
+			page.structure.main = page.structure.row!.querySelector(
+				'.col-main',
+			);
 		}
 
 		if (auth.pro) {

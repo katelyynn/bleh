@@ -67,7 +67,8 @@ export function music_grids(search = page.structure.main, use_colour = true) {
 		'.grid-items-item:not([data-bleh-music-grids])',
 	);
 	grids.forEach((grid, index) => {
-		const is_loading = grid.querySelector('.grid-items-empty-inner') != null;
+		const is_loading =
+			grid.querySelector('.grid-items-empty-inner') != null;
 		if (is_loading) return;
 
 		grid.style.setProperty('--delay', index * 0.04 + 's');
@@ -122,7 +123,9 @@ export function music_grids(search = page.structure.main, use_colour = true) {
 		let plays_elem;
 		if (page.type == 'search') {
 			if (!is_album) {
-				const aux_text = grid.querySelector('.grid-items-item-aux-text');
+				const aux_text = grid.querySelector(
+					'.grid-items-item-aux-text',
+				);
 				const stat_name = aux_text.querySelector('.stat-name');
 
 				aux_text.removeChild(stat_name);

@@ -7,11 +7,7 @@
 import { settings } from '@/build/config';
 import { log } from '@/build/log';
 import { auth, page, root } from '@/build/page';
-import {
-	clean_number,
-	desanitise,
-	sanitise,
-} from '@/build/tools';
+import { clean_number, desanitise, sanitise } from '@/build/tools';
 import { tl, trans } from '@/build/trans';
 import { bleh_about_artist } from '@/components/music/about_artist.js';
 import {
@@ -106,7 +102,9 @@ export function bleh_albums() {
 	checkup_page_structure(is_subpage, album_header);
 
 	if (ff('refreshed_music_nav')) {
-		const avatar = album_header.querySelector('.header-new-background-image');
+		const avatar = album_header.querySelector(
+			'.header-new-background-image',
+		);
 		const title = album_header.querySelector('.header-new-title');
 		const artist = album_header.querySelector('[itemprop="byArtist"]');
 		const position = album_header.querySelector(

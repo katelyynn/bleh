@@ -70,7 +70,9 @@ export function bleh_gallery() {
 
 	// top title
 	const image_title = image_details.querySelector('.gallery-image-title');
-	const image_date = image_details.querySelector('.gallery-image-uploaded-by');
+	const image_date = image_details.querySelector(
+		'.gallery-image-uploaded-by',
+	);
 
 	if (image_title.textContent.trim() == '') {
 		image_title.classList.add('gallery-image-title-empty');

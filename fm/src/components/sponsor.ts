@@ -22,7 +22,9 @@ export function sponsors(force = false, func = null) {
 	if (!ff('sponsor')) return;
 
 	const sponsor_data = localStorage.getItem('kat_sponsors');
-	const sponsor_expire = new Date(localStorage.getItem('kat_sponsors_expire'));
+	const sponsor_expire = new Date(
+		localStorage.getItem('kat_sponsors_expire'),
+	);
 
 	const current_time = new Date();
 

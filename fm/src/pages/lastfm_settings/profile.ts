@@ -5,10 +5,7 @@ import { tl, trans } from '@/build/trans';
 import { dialog, dialog_rm } from '@/components/dialog/dialog';
 import { notify, notify_rm } from '@/components/dialog/notify';
 import { input } from '@/components/settings/input';
-import {
-	select,
-	select_prepare,
-} from '@/components/settings/select';
+import { select, select_prepare } from '@/components/settings/select';
 import { save_setting, setting } from '@/components/settings/settings';
 import { expand_avatar } from '@/components/shared/avatar';
 import { markdown, markdown_field } from '@/components/shared/markdown';
@@ -301,7 +298,8 @@ function profile_panel() {
 		(document.getElementById('id_about_me') as HTMLTextAreaElement)
 			.textContent;
 
-	const profile_cache = JSON.parse(localStorage.getItem(keys.profile_cache)) ||
+	const profile_cache =
+		JSON.parse(localStorage.getItem(keys.profile_cache)) ||
 		{};
 	const cache = profile_cache[auth.name];
 
