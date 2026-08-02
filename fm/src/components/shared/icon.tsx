@@ -1,5 +1,3 @@
-import { html } from 'lighterhtml';
-
 export const icons = {
 	banner: 'banner',
 	accent: 'accent',
@@ -188,7 +186,12 @@ interface icon {
 
 export function icon({ name, identifier, use_mask = true }: icon) {
 	return (
-		<span className={`bleh-icon bleh-icon-${name} ${use_mask ? 'use-mask' : ''} ${identifier ? `bleh-icon-${identifier}` : ''}`} style={icon_mask({ name })}>
+		<span
+			className={`bleh-icon bleh-icon-${name} ${
+				use_mask ? 'use-mask' : ''
+			} ${identifier ? `bleh-icon-${identifier}` : ''}`}
+			style={icon_mask({ name })}
+		>
 			{name} (icon)
 		</span>
 	);

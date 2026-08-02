@@ -1489,7 +1489,10 @@ export async function render_setting_page(page_id) {
 	}
 }
 
-export function register_skip_to(list = null) {
+export function register_skip_to(
+	// TODO: wtf is this for, an empty [] is always passed for list in all usages of this function
+	list = null,
+) {
 	if (!ff('skip_to_setting')) return;
 
 	if (list == null) return;

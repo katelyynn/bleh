@@ -21,9 +21,9 @@ export async function fetch_status(username) {
 		return await fetch_status_api(username);
 	} else {
 		return (
-			<div className="status-cafe">
-				<div className="status-cafe-content is-loading">
-					<span className="status-cafe-text">
+			<div className='status-cafe'>
+				<div className='status-cafe-content is-loading'>
+					<span className='status-cafe-text'>
 						{tl(trans.status_cafe_too_many_requests)}
 					</span>
 				</div>
@@ -65,19 +65,24 @@ async function fetch_status_api(username: string) {
 			const { trusted, dangerous } = can_trust_link(status_link);
 
 			return (
-				<div className="status-cafe has-hover" onClick={() => {
-					if (trusted) {
-						open(status_link);
-						return;
-					}
+				<div
+					className='status-cafe has-hover'
+					onClick={() => {
+						if (trusted) {
+							open(status_link);
+							return;
+						}
 
-					external_url_prompt(status_link);
-				}}>
-					<div className="status-cafe-content">
-						<span className="status-cafe-emoji">{data.face}</span>
-						<span className="status-cafe-text">
+						external_url_prompt(status_link);
+					}}
+				>
+					<div className='status-cafe-content'>
+						<span className='status-cafe-emoji'>{data.face}</span>
+						<span className='status-cafe-text'>
 							{text_decode(data.content)}
-							<span className="status-cafe-time">{data.timeAgo}</span>
+							<span className='status-cafe-time'>
+								{data.timeAgo}
+							</span>
 						</span>
 					</div>
 				</div>
@@ -95,9 +100,9 @@ async function fetch_status_api(username: string) {
 			}
 
 			return (
-				<div className="status-cafe">
-					<div className="status-cafe-content is-loading">
-						<span className="status-cafe-text">
+				<div className='status-cafe'>
+					<div className='status-cafe-content is-loading'>
+						<span className='status-cafe-text'>
 							{error}
 						</span>
 					</div>

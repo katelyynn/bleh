@@ -12,7 +12,7 @@ export function bleh_labs() {
 
 	register_background('');
 
-	let quilt = document.body.querySelector(
+	const quilt = document.body.querySelector(
 		'[data-analytics-action="LaunchAlbumQuilt"]',
 	);
 	if (quilt) {

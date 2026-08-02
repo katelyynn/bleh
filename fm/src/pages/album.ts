@@ -8,16 +8,12 @@ import { settings } from '@/build/config';
 import { log } from '@/build/log';
 import { auth, page, root } from '@/build/page';
 import {
-	clamp_lit,
-	clamp_sat,
 	clean_number,
 	desanitise,
-	hex_to_oklch,
 	sanitise,
 } from '@/build/tools';
 import { tl, trans } from '@/build/trans';
 import { bleh_about_artist } from '@/components/music/about_artist.js';
-import { register_menu } from '@/components/menu';
 import {
 	bleh_music_page_charts,
 	redirect,
@@ -35,7 +31,6 @@ import {
 	bleh_wiki_history,
 } from '@/pages/music/wiki';
 import { html, render } from 'lighterhtml';
-import { expand_avatar } from '@/components/shared/avatar';
 import { setting } from '@/components/settings/settings';
 import tippy from 'tippy.js';
 import { oracle_process } from '@/components/music/oracle';
@@ -60,7 +55,7 @@ export function bleh_albums() {
 
 	page_header_title(album_header);
 
-	let is_subpage = page.subpage != 'overview';
+	const is_subpage = page.subpage != 'overview';
 
 	// without pro theres two containers
 	if (auth.pro) {
@@ -111,10 +106,10 @@ export function bleh_albums() {
 	checkup_page_structure(is_subpage, album_header);
 
 	if (ff('refreshed_music_nav')) {
-		let avatar = album_header.querySelector('.header-new-background-image');
-		let title = album_header.querySelector('.header-new-title');
-		let artist = album_header.querySelector('[itemprop="byArtist"]');
-		let position = album_header.querySelector(
+		const avatar = album_header.querySelector('.header-new-background-image');
+		const title = album_header.querySelector('.header-new-title');
+		const artist = album_header.querySelector('[itemprop="byArtist"]');
+		const position = album_header.querySelector(
 			'.header-new-chart-position-number',
 		);
 
@@ -138,7 +133,7 @@ export function bleh_albums() {
 
 		const same_page = is_same_page();
 
-		let redesigned_album_header = html.node`
+		const redesigned_album_header = html.node`
             <section class="page-header for-album ${same_page ? 'same' : ''}">
                 <div class="page-header-avatar-list">
                     ${page_avatar = page_header_avatar(avatar_img)}
@@ -201,7 +196,7 @@ export function bleh_albums() {
 
 		similar_items();
 	} else {
-		let btn_add = page.structure.side.querySelector('.add-button');
+		const btn_add = page.structure.side.querySelector('.add-button');
 		if (btn_add) btn_add.setAttribute('data-page-subpage', page.subpage);
 
 		if (page.subpage == 'images_image-upload') bleh_gallery_upload();
@@ -238,12 +233,12 @@ function album_missing_a_tracklist() {
 	let settings_btn;
 
 	if (tracklist) {
-		let top = tracklist.querySelector('.section-controls');
+		const top = tracklist.querySelector('.section-controls');
 		top.classList = 'top-container';
 
-		let header = top.querySelector('h3');
+		const header = top.querySelector('h3');
 
-		let select_btn = top.querySelector('.dropdown-menu-clickable-button');
+		const select_btn = top.querySelector('.dropdown-menu-clickable-button');
 
 		if (select_btn) {
 			select_btn.classList.add(
@@ -267,12 +262,12 @@ function album_missing_a_tracklist() {
             </div>
         `);
 	} else if (!ff('oracle') || !settings.oracle_beta) {
-		let top_overview = page.structure.main.querySelector(
+		const top_overview = page.structure.main.querySelector(
 			'.music-summary',
 		);
 		if (!top_overview) return;
 
-		let top = html.node`
+		const top = html.node`
             <div class="top-container">
                 <h3 class="text-18">${tl(trans.tracklist)}</h3>
                 <div class="view-buttons blend blend-v2">
@@ -303,11 +298,11 @@ function album_missing_a_tracklist() {
 
 		let url = document.querySelector('.header-metadata-display a');
 		if (!url) {
-			let url_split = window.location.href.split('/');
-			let album_url = `${url_split[url_split.length - 2]}/${
+			const url_split = window.location.href.split('/');
+			const album_url = `${url_split[url_split.length - 2]}/${
 				url_split[url_split.length - 1]
 			}`;
-			let album_as_track_url = window.location.href.replace(
+			const album_as_track_url = window.location.href.replace(
 				album_url,
 				`${url_split[url_split.length - 2]}/_/${
 					url_split[url_split.length - 1]
@@ -340,20 +335,20 @@ function album_missing_a_tracklist() {
 				return response.text();
 			})
 			.then(function (dom) {
-				let doc = new DOMParser().parseFromString(dom, 'text/html');
+				const doc = new DOMParser().parseFromString(dom, 'text/html');
 
 				//deliver_notif(`using url ${`/user/${auth.name}/library/music/${album_url}`}`);
 				console.log('DOC', doc);
 
-				let inner_tracklist = doc.querySelector(
+				const inner_tracklist = doc.querySelector(
 					'#top-tracks-section [v-else=""] .chartlist',
 				);
 				if (inner_tracklist == null) {
-					let url_split = window.location.href.split('/');
-					let album_url = `${url_split[url_split.length - 2]}/${
+					const url_split = window.location.href.split('/');
+					const album_url = `${url_split[url_split.length - 2]}/${
 						url_split[url_split.length - 1]
 					}`;
-					let album_as_track_url = window.location.href.replace(
+					const album_as_track_url = window.location.href.replace(
 						album_url,
 						`${url_split[url_split.length - 2]}/_/${
 							url_split[url_split.length - 1]

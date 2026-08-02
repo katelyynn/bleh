@@ -9,7 +9,7 @@ import { settings } from '@/build/config';
 import { log } from '@/build/log';
 import { artist_corrections } from '@/build/music';
 import { page, root } from '@/build/page';
-import { clamp_sat, rgb_to_hsl, sanitise } from '@/build/tools';
+import { sanitise } from '@/build/tools';
 import { tl, trans } from '@/build/trans';
 import {
 	correct_item_by_artist,
@@ -26,7 +26,7 @@ import { header_colour } from '@/components/page/colour';
 import { icon, icons } from '@/components/shared/icon';
 
 export function bleh_obsession() {
-	let obsession_container = document.querySelector('.obsession-container');
+	const obsession_container = document.querySelector('.obsession-container');
 	if (!obsession_container) return;
 
 	page.structure.container = document.body.querySelector(
@@ -40,7 +40,7 @@ export function bleh_obsession() {
 		log('unable to find elements', 'page structure');
 	}
 
-	let content_top = document.body.querySelector('.content-top');
+	const content_top = document.body.querySelector('.content-top');
 
 	checkup_page_structure(false, content_top);
 	log('status is', 'page', 'info', page);
@@ -68,25 +68,25 @@ export function bleh_obsession() {
 		register_background('');
 	}
 
-	let track_title = obsession_container.querySelector(
+	const track_title = obsession_container.querySelector(
 		'.obsession-meta-track',
 	);
-	let track_artist = obsession_container.querySelector(
+	const track_artist = obsession_container.querySelector(
 		'.obsession-meta-artist',
 	);
-	let scrobbles = obsession_container.querySelector(
+	const scrobbles = obsession_container.querySelector(
 		'.obsession-meta-scrobbles',
 	);
 
-	let link = track_title.querySelector('a').getAttribute('href');
+	const link = track_title.querySelector('a').getAttribute('href');
 
-	let by = track_artist.querySelector('.obsession-meta-artist-by');
+	const by = track_artist.querySelector('.obsession-meta-artist-by');
 	track_artist.removeChild(by);
 
 	// correct artist
-	let artist_name = track_artist.querySelector('a');
+	const artist_name = track_artist.querySelector('a');
 	if (artist_corrections.hasOwnProperty(artist_name.textContent)) {
-		let corrected_artist = artist_corrections[artist_name.textContent];
+		const corrected_artist = artist_corrections[artist_name.textContent];
 		log(
 			`corrected ${artist_name.textContent} as ${corrected_artist}`,
 			'lotus',
@@ -111,13 +111,13 @@ export function bleh_obsession() {
 			smart_title(formatted.song_title, formatted.song_tags),
 		);
 
-		let song_guests = formatted.song_guests;
+		const song_guests = formatted.song_guests;
 		page.sister_others = song_guests;
-		for (let guest in song_guests) {
+		for (const guest in song_guests) {
 			// &
 			track_artist.innerHTML = `${track_artist.innerHTML},`;
 
-			let guest_element = document.createElement('a');
+			const guest_element = document.createElement('a');
 			guest_element.classList.add('header-new-crumb');
 			guest_element.setAttribute(
 				'href',
@@ -131,7 +131,7 @@ export function bleh_obsession() {
 		if (!track_title.hasAttribute('data-kate-processed')) {
 			track_title.setAttribute('data-kate-processed', 'true');
 
-			let corrected_title = correct_item_by_artist(
+			const corrected_title = correct_item_by_artist(
 				track_title.textContent.trim(),
 				artist_name.textContent,
 			);
@@ -150,7 +150,7 @@ export function bleh_obsession() {
 
 	track_title.classList.remove('obsession-meta-track');
 
-	let track_header = html.node`
+	const track_header = html.node`
         <section class="page-header for-track for-obsession">
             <div class="page-header-info">
                 <div class="sub-text">${tl(trans.obsession)}</div>
@@ -169,37 +169,37 @@ export function bleh_obsession() {
 		page.structure.container.firstElementChild,
 	);
 
-	let video = obsession_container.querySelector('.obsession-video-container');
+	const video = obsession_container.querySelector('.obsession-video-container');
 	if (video) track_header.after(video);
 
 	// remove quotations
-	let obsession_reason = obsession_container.querySelector(
+	const obsession_reason = obsession_container.querySelector(
 		'.obsession-reason',
 	);
 	if (obsession_reason) {
-		let obsession_reason_text = obsession_reason.textContent;
+		const obsession_reason_text = obsession_reason.textContent;
 		obsession_reason.textContent = obsession_reason_text
 			.trim()
 			.substr(1)
 			.slice(0, -1);
 	}
 
-	let obsession_author = document.querySelector(
+	const obsession_author = document.querySelector(
 		'.obsession-details-intro a',
 	).textContent;
-	let obsession_avatar = document.querySelector(
+	const obsession_avatar = document.querySelector(
 		'.obsession-details-intro-avatar-wrap .avatar',
 	);
 
 	page.name = obsession_author;
 
-	let date = obsession_container.querySelector(
+	const date = obsession_container.querySelector(
 		'.obsession-details-date-short',
 	);
 
 	const first = obsession_container.querySelector('.obsession-first');
 
-	let quote = html.node`
+	const quote = html.node`
         <section class="obsession-quote sour">
             ${
 		first
@@ -253,7 +253,7 @@ export function bleh_obsession() {
         </section>
     `;
 
-	let manage = obsession_container.querySelector('form');
+	const manage = obsession_container.querySelector('form');
 	if (manage) {
 		quote.appendChild(manage);
 
@@ -273,8 +273,8 @@ export function bleh_obsession() {
 		page.structure.main.firstElementChild,
 	);
 
-	let author = quote.querySelector('.obsession-author');
-	let badge = patch_avatar(
+	const author = quote.querySelector('.obsession-author');
+	const badge = patch_avatar(
 		obsession_avatar,
 		obsession_author,
 		'',
@@ -290,48 +290,48 @@ export function bleh_obsession() {
 		);
 	}
 
-	let related = html.node`
+	const related = html.node`
         <section class="obsession-related sour" />
     `;
 
-	let other_tracks = document.body.querySelector('.other-obsessions');
+	const other_tracks = document.body.querySelector('.other-obsessions');
 
 	if (other_tracks) {
-		let header = document.createElement('h2');
+		const header = document.createElement('h2');
 		header.textContent = tl(trans.others_from_profile).replace(
 			'{user}',
 			obsession_author,
 		);
 		related.appendChild(header);
 
-		let see_more = other_tracks.nextElementSibling;
+		const see_more = other_tracks.nextElementSibling;
 
 		related.appendChild(other_tracks);
 
 		if (see_more) {
-			let more = document.createElement('div');
+			const more = document.createElement('div');
 			more.classList.add('more-link-fullwidth-right');
 			more.appendChild(see_more.querySelector('a'));
 			related.appendChild(more);
 		}
 	}
 
-	let shared_users = document.body.querySelector('.fellow-obsessors');
+	const shared_users = document.body.querySelector('.fellow-obsessors');
 
 	if (shared_users) {
 		if (other_tracks) {
-			let sep = document.createElement('div');
+			const sep = document.createElement('div');
 			sep.classList.add('sep');
 			related.appendChild(sep);
 		}
 
-		let header = document.createElement('h2');
+		const header = document.createElement('h2');
 		header.textContent = tl(trans.shared_with_others);
 		related.appendChild(header);
 
-		let users = shared_users.querySelectorAll('.avatar');
+		const users = shared_users.querySelectorAll('.avatar');
 		users.forEach((user) => {
-			let name = user.querySelector('img').getAttribute('alt');
+			const name = user.querySelector('img').getAttribute('alt');
 			patch_avatar(user, name);
 		});
 
@@ -340,7 +340,7 @@ export function bleh_obsession() {
 
 	quote.after(related);
 
-	let pages = obsession_container.querySelector('.obsession-pagination');
+	const pages = obsession_container.querySelector('.obsession-pagination');
 	if (pages) {
 		page.structure.container.appendChild(pages);
 
@@ -352,7 +352,7 @@ export function bleh_obsession() {
 }
 
 export function obsession_list() {
-	let section_controls = page.structure.container.querySelector(
+	const section_controls = page.structure.container.querySelector(
 		'.section-controls',
 	);
 	let buttons;
@@ -360,7 +360,7 @@ export function obsession_list() {
 		section_controls.classList.add('legacy-section-controls');
 		buttons = section_controls.querySelectorAll(':is(button, a)');
 
-		let header = page.structure.container.querySelector(
+		const header = page.structure.container.querySelector(
 			'.content-top-header',
 		);
 		page.structure.content_top.innerHTML = `
@@ -372,10 +372,10 @@ export function obsession_list() {
         `;
 	}
 
-	let count_text = page.structure.content_top
+	const count_text = page.structure.content_top
 		.querySelector('h1')
 		.textContent.trim();
-	let chr = count_text.indexOf('(');
+	const chr = count_text.indexOf('(');
 
 	let count = 0;
 	if (chr != -1) {
@@ -391,12 +391,12 @@ export function obsession_list() {
         <div class="new-badge count-badge">${count}</div>
     `);
 
-	let new_panel = document.createElement('section');
+	const new_panel = document.createElement('section');
 	new_panel.classList.add('obsessions-panel');
 
-	let wrap = document.createElement('div');
+	const wrap = document.createElement('div');
 	wrap.classList.add('view-buttons-wrapper');
-	let button_header = document.createElement('div');
+	const button_header = document.createElement('div');
 	button_header.classList.add(
 		'view-buttons',
 		'obsession-buttons',
@@ -432,14 +432,14 @@ export function obsession_list() {
 
 	//
 
-	let grid = document.createElement('ol');
+	const grid = document.createElement('ol');
 	grid.classList.add(
 		'grid-items',
 		'grid-items--numbered',
 		'obsessions-grid',
 	);
 
-	let items = page.structure.container.querySelectorAll(
+	const items = page.structure.container.querySelectorAll(
 		'.obsession-history-item',
 	);
 	items.forEach((item) => {
@@ -450,20 +450,20 @@ export function obsession_list() {
 		let artist = item.querySelector(
 			'.obsession-history-item-artist a',
 		);
-		let artist_link = artist.getAttribute('href');
+		const artist_link = artist.getAttribute('href');
 		artist = artist.textContent.trim();
 
-		let title = link.textContent.trim();
+		const title = link.textContent.trim();
 		link = link.getAttribute('href');
-		let date = item
+		const date = item
 			.querySelector('.obsession-history-item-date')
 			.textContent.trim();
 
-		let bg = item
+		const bg = item
 			.querySelector('.obsession-history-item-background')
 			.style.getPropertyValue('background-image')
 			.trim();
-		let cover_substr = bg.indexOf('url');
+		const cover_substr = bg.indexOf('url');
 		const cover = html.node`
             <img
             src=${
@@ -478,7 +478,7 @@ export function obsession_list() {
 
 		hoshino(cover, title, artist);
 
-		let obsession_is_first = item.querySelector('.obsession-first') != null;
+		const obsession_is_first = item.querySelector('.obsession-first') != null;
 
 		const grid_item = html.node`
             <li class="grid-items-item obsessions-item ${
@@ -532,11 +532,11 @@ export function obsession_list() {
 
 	new_panel.appendChild(grid);
 
-	let no_data = page.structure.container.querySelector(
+	const no_data = page.structure.container.querySelector(
 		'.no-data-message--obsession-history',
 	);
 	if (no_data) wrap.after(no_data);
 
-	let pagination = page.structure.container.querySelector('.pagination');
+	const pagination = page.structure.container.querySelector('.pagination');
 	if (pagination) new_panel.appendChild(pagination);
 }

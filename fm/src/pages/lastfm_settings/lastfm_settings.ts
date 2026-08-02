@@ -7,31 +7,18 @@
 import { auth, page, root } from '@/build/page';
 import { tl, trans } from '@/build/trans';
 import { bleh_auto_edits } from '@/components/dialog/auto_edit';
-import { dialog, dialog_rm } from '@/components/dialog/dialog';
 import {
-	custom_select,
 	select,
 	select_prepare,
-	update_inbuilt_select,
 } from '@/components/settings/select';
 import { update_inbuilt_item } from '../../config';
-import { ff } from '@/components/settings/sku';
-import {
-	markdown,
-	markdown_field,
-	markdown_prompt,
-} from '@/components/shared/markdown';
 import { html, render } from 'lighterhtml';
 import tippy from 'tippy.js';
-import { save_setting, setting } from '@/components/settings/settings';
+import { setting } from '@/components/settings/settings';
 import { settings } from '@/build/config';
-import { input } from '@/components/settings/input';
-import { clamp_lit, clamp_sat, hex_to_oklch } from '@/build/tools';
 import { log } from '@/build/log';
 import { toggle } from '@/components/settings/toggle';
-import { status } from '@/components/dialog/status';
 import { radio, radio_convert } from '@/components/radio/radio_toggle';
-import { notify, notify_rm } from '@/components/dialog/notify';
 import { avatar } from '@/components/shared/avatar';
 import { lastfm_settings_profile } from './profile';
 import {
@@ -67,13 +54,13 @@ export function bleh_native_settings() {
 		} else if (page.subpage == 'privacy') {
 			patch_settings_privacy_tab();
 		} else if (page.subpage == 'subscription_overview') {
-			let panel = page.structure.container.querySelector('.row + div');
+			const panel = page.structure.container.querySelector('.row + div');
 
-			let subscription = panel.querySelector('#current-subscription');
-			let edits = panel.querySelector('#automatic-edits');
-			let merch_h = panel.querySelector(':scope > h2');
-			let merch = panel.querySelector('#mechandise-discount');
-			let history = panel.querySelector('#pro-history');
+			const subscription = panel.querySelector('#current-subscription');
+			const edits = panel.querySelector('#automatic-edits');
+			const merch_h = panel.querySelector(':scope > h2');
+			const merch = panel.querySelector('#mechandise-discount');
+			const history = panel.querySelector('#pro-history');
 
 			merch.insertBefore(merch_h, merch.firstElementChild);
 
@@ -82,15 +69,15 @@ export function bleh_native_settings() {
 			page.structure.main.appendChild(merch);
 			page.structure.main.appendChild(history);
 
-			let button = subscription.querySelector('.btn-primary');
+			const button = subscription.querySelector('.btn-primary');
 			if (button) {
 				button.classList.add('subscription-button', 'icon', 'primary');
 			}
 
-			let more_link_wrap = edits.querySelector('.more-link');
+			const more_link_wrap = edits.querySelector('.more-link');
 			if (more_link_wrap) {
 				more_link_wrap.classList = '';
-				let edit_buttons = more_link_wrap.querySelectorAll('a');
+				const edit_buttons = more_link_wrap.querySelectorAll('a');
 				edit_buttons.forEach((edit_button, index) => {
 					edit_button.classList.add(
 						'btn',
@@ -115,7 +102,7 @@ export function bleh_native_settings() {
 			bleh_applications();
 		}
 	} catch (e) {
-		page.structure.main.insertBefore(
+		page.structure.main!.insertBefore(
 			html.node`
             <div class="bleh--panel">
                 <div class="loading-data-container">
@@ -125,7 +112,7 @@ export function bleh_native_settings() {
                 </div>
             </div>
         `,
-			page.structure.main.firstElementChild,
+			page.structure.main!.firstElementChild,
 		);
 		console.error(e);
 	}
@@ -134,7 +121,7 @@ export function bleh_native_settings() {
 }
 
 function skip_patch() {
-	page.structure.side.appendChild(html.node`
+	page.structure.side!.appendChild(html.node`
         <section>
             <div class="setting-group">
                 ${setting({ id: 'skip_patching_lastfm_settings' })}
@@ -145,10 +132,10 @@ function skip_patch() {
 
 // privacy
 function patch_settings_privacy_tab() {
-	let privacy_panel = document.getElementById('privacy');
+	const privacy_panel = document.getElementById('privacy');
 
 	// if we can continue, we are on privacy tab
-	let token = document.body
+	const token = document.body
 		.querySelector('[name="csrfmiddlewaretoken"]')
 		.getAttribute('value');
 
@@ -157,17 +144,17 @@ function patch_settings_privacy_tab() {
 }
 
 function bleh_communication_panel(token) {
-	let profile_notes =
+	const profile_notes =
 		JSON.parse(localStorage.getItem('bleh_profile_notes')) || {};
 
-	let panel = page.structure.main.querySelector('#ignorelist');
+	const panel = page.structure.main.querySelector('#ignorelist');
 	panel.classList.add('bleh--panel');
 
 	const alert = panel.querySelector('.alert');
 
-	let list = panel.querySelectorAll('.ignore-list tr');
+	const list = panel.querySelectorAll('.ignore-list tr');
 
-	let new_list = document.createElement('div');
+	const new_list = document.createElement('div');
 	new_list.classList.add(
 		'generic-table-list',
 		'user-vertical-list',
@@ -175,13 +162,13 @@ function bleh_communication_panel(token) {
 	);
 
 	let exceeded = false;
-	let exceed_amount = 10;
+	const exceed_amount = 10;
 	let amount = 0;
 
 	Array.from(list).reverse().forEach((item, index) => {
-		let name = item.querySelector('td').textContent.trim();
-		let form = item.querySelector('form');
-		let button = form.querySelector('button');
+		const name = item.querySelector('td').textContent.trim();
+		const form = item.querySelector('form');
+		const button = form.querySelector('button');
 
 		button.classList.add(
 			'btn',
@@ -196,7 +183,7 @@ function bleh_communication_panel(token) {
 			content: tl(trans.remove),
 		});
 
-		let entry = html.node`
+		const entry = html.node`
             <div class="generic-table-list-entry user-vertical-list-item">
                 <div class="name">
                     <a class="mention" href="${root}user/${name}" target="_blank">@${name}</a>
@@ -227,12 +214,12 @@ function bleh_communication_panel(token) {
 	});
 
 	if (exceeded) {
-		let remainder = amount - exceed_amount;
+		const remainder = amount - exceed_amount;
 
 		new_list.classList.add('list-is-exceeded');
 		new_list.setAttribute('data-expanded', 'false');
 
-		let expand = html.node`
+		const expand = html.node`
             <button class="see-more expand-down left-icon" onclick=${() => {
 			expand.style.display = 'none';
 			new_list.setAttribute('data-expanded', 'true');
@@ -246,7 +233,7 @@ function bleh_communication_panel(token) {
 		new_list.appendChild(expand);
 	}
 
-	let form = page.structure.main.querySelector('[name="ignorelist"]');
+	const form = page.structure.main.querySelector('[name="ignorelist"]');
 
 	if (page.token == '') {
 		page.token = form
@@ -335,7 +322,7 @@ function patch_settings_privacy_panel(token, privacy_panel) {
 	privacy_panel.classList.add('bleh--panel');
 
 	// get info before destroying
-	let original_privacy_settings = {
+	const original_privacy_settings = {
 		recent_listening: privacy_panel.querySelector(
 			'#id_hide_realtime',
 		) as HTMLInputElement,
@@ -423,12 +410,12 @@ function patch_settings_privacy_panel(token, privacy_panel) {
 }
 
 function bleh_accounts() {
-	let token = page.structure.main
+	const token = page.structure.main
 		.querySelector('[name="csrfmiddlewaretoken"]')
 		.getAttribute('value');
 
 	// get info before destroying
-	let original_settings = {
+	const original_settings = {
 		email_language: page.structure.main.querySelector('[name="language"]'),
 		marketing_emails: page.structure.main.querySelector(
 			'[name="opt_in_marketing"]',
@@ -679,7 +666,7 @@ function bleh_accounts() {
 		`,
 	);
 
-	for (let setting in original_settings) {
+	for (const setting in original_settings) {
 		update_inbuilt_item(setting, original_settings[setting], false);
 	}
 }
@@ -871,7 +858,7 @@ function bleh_website() {
 }
 
 function bleh_applications() {
-	let session_types = page.structure.main.querySelectorAll('.api-sessions');
+	const session_types = page.structure.main.querySelectorAll('.api-sessions');
 
 	let suggested;
 	let connected;
@@ -904,7 +891,7 @@ function bleh_applications() {
 	);
 
 	session_types.forEach((session_type) => {
-		let sessions = session_type.querySelectorAll('.api-session');
+		const sessions = session_type.querySelectorAll('.api-session');
 
 		sessions.forEach((session) => {
 			const details = session.querySelector('.api-session-details');

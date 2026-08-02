@@ -18,7 +18,7 @@ unsafeWindow._open_profile_shortcut_window = function () {
 	open_profile_shortcut_window();
 };
 export function open_profile_shortcut_window() {
-	let modal = dialog({
+	const modal = dialog({
 		id: 'profile_shortcut',
 		title: tl(trans.profile_shortcut.name),
 		body: html.node`
@@ -120,7 +120,7 @@ function confirm_set_profile_as_shortcut() {
 		id: 'profile_shortcut',
 	});
 
-	let avatar_src = page.structure.container
+	const avatar_src = page.structure.container
 		.querySelector(':scope > .redesigned-profile-header .avatar img')
 		?.getAttribute('src');
 	set_storage('bleh_profile_shortcut_avi', avatar_src);
@@ -161,7 +161,7 @@ export function save_profile_shortcut(input, value, submit, reset_btn, avatar) {
 			return response.text();
 		})
 		.then(function (dom) {
-			let doc = new DOMParser().parseFromString(dom, 'text/html');
+			const doc = new DOMParser().parseFromString(dom, 'text/html');
 			console.log('DOC', doc);
 
 			reset_btn.disabled = false;
@@ -170,7 +170,7 @@ export function save_profile_shortcut(input, value, submit, reset_btn, avatar) {
 			avatar.classList.remove('requesting');
 
 			try {
-				let avatar_src = doc
+				const avatar_src = doc
 					.querySelector('.header-avatar-inner-wrap img')
 					.getAttribute('src');
 
@@ -205,8 +205,8 @@ export function save_profile_shortcut(input, value, submit, reset_btn, avatar) {
 }
 
 unsafeWindow._save_profile_shortcut = function () {
-	let profile_name = document.getElementById('text-profile_shortcut').value;
-	let profile_img = document.getElementById('avatar-profile_shortcut');
+	const profile_name = document.getElementById('text-profile_shortcut').value;
+	const profile_img = document.getElementById('avatar-profile_shortcut');
 
 	if (profile_name == '' || profile_name == auth.name) {
 		localStorage.removeItem('bleh_profile_shortcut_avi');
@@ -229,13 +229,13 @@ unsafeWindow._save_profile_shortcut = function () {
 			return response.text();
 		})
 		.then(function (html) {
-			let doc = new DOMParser().parseFromString(html, 'text/html');
+			const doc = new DOMParser().parseFromString(html, 'text/html');
 			console.log('DOC', doc);
 
 			profile_img.classList.remove('requesting');
 
 			try {
-				let avatar_src = doc
+				const avatar_src = doc
 					.querySelector('.header-avatar-inner-wrap img')
 					.getAttribute('src');
 				set_storage('bleh_profile_shortcut_avi', avatar_src);

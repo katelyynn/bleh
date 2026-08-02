@@ -77,11 +77,12 @@ export function bleh_wiki() {
 		sub_text.classList.add('sub-text', 'space-below', 'header-style');
 		sub_text.innerHTML = `
             <div class="breadcrumb-origin prominent">
-                ${h2
+                ${
+			h2
 				? h2.innerHTML
 				: page.structure.container.querySelector('.content-top-header')
 					.textContent
-			}
+		}
             </div>
             <div class="wiki-author-side">
                 ${wiki_author.innerHTML}
@@ -178,8 +179,9 @@ export function bleh_wiki_history() {
 	// latest
 	let side_actions = html.node`
         <section class="side-actions">
-            <a class="btn side-action icon-mask" data-type="latest-wiki" href="${sub_text.querySelector('a').getAttribute('href')
-		}">
+            <a class="btn side-action icon-mask" data-type="latest-wiki" href="${
+		sub_text.querySelector('a').getAttribute('href')
+	}">
                 ${tl(trans.view_latest)}
             </a>
         </section>
@@ -286,8 +288,9 @@ export function bleh_wiki_editor() {
 	// latest
 	const side_actions = html.node`
         <section class="side-actions">
-            <a class="btn side-action icon-mask" data-type="latest-wiki" href="${sub_text.querySelector('a').getAttribute('href')
-		}">
+            <a class="btn side-action icon-mask" data-type="latest-wiki" href="${
+		sub_text.querySelector('a').getAttribute('href')
+	}">
                 ${tl(trans.view_latest)}
             </a>
         </section>
@@ -310,21 +313,22 @@ export function bleh_wiki_editor() {
         <section class="wiki-presets-panel">
             <h3 class="text-18">${tl(trans.symbol_presets)}</h3>
             <div class="presets">
-                ${presets.map((preset) => {
-		let item = html.node`
+                ${
+		presets.map((preset) => {
+			let item = html.node`
                         <div class="preset" onclick=${() => copy(preset)}>
                             ${preset}
                         </div>
                     `;
 
-		tippy(item, {
-			content: tl(trans.click_to_copy),
-			delay: [500, 0],
-		});
+			tippy(item, {
+				content: tl(trans.click_to_copy),
+				delay: [500, 0],
+			});
 
-		return item;
-	})
-		}
+			return item;
+		})
+	}
             </div>
             <ul class="wiki-standards generic-list">
                 ${standards.map((standard) => html.node`<li>${standard}</li>`)}
@@ -339,29 +343,29 @@ export function bleh_wiki_editor() {
                 <div class="syntax-listing-item">
                     <div class="code-side">[artist]julie[/artist]</div>
                     <div class="detail-side">${{
-			html: tl(trans.links_to).replace(
-				'{link}',
-				`<a href="${root}music/julie" data-link-type="artist" target="_blank">julie</a>`,
-			),
-		}}</div>
+		html: tl(trans.links_to).replace(
+			'{link}',
+			`<a href="${root}music/julie" data-link-type="artist" target="_blank">julie</a>`,
+		),
+	}}</div>
                 </div>
                 <div class="syntax-listing-item">
                     <div class="code-side">[album artist=julie]pushing daisies[/album]</div>
                     <div class="detail-side">${{
-			html: tl(trans.links_to).replace(
-				'{link}',
-				`<a href="${root}music/julie/pushing+daisies" data-link-type="album" target="_blank">pushing daisies</a>`,
-			),
-		}}</div>
+		html: tl(trans.links_to).replace(
+			'{link}',
+			`<a href="${root}music/julie/pushing+daisies" data-link-type="album" target="_blank">pushing daisies</a>`,
+		),
+	}}</div>
                 </div>
                 <div class="syntax-listing-item">
                     <div class="code-side">[track artist=julie]very little effort[/track]</div>
                     <div class="detail-side">${{
-			html: tl(trans.links_to).replace(
-				'{link}',
-				`<a href="${root}music/julie/_/very+little+effort" data-link-type="track" target="_blank">very little effort</a>`,
-			),
-		}}</div>
+		html: tl(trans.links_to).replace(
+			'{link}',
+			`<a href="${root}music/julie/_/very+little+effort" data-link-type="track" target="_blank">very little effort</a>`,
+		),
+	}}</div>
                 </div>
             </div>
             <div class="sep"></div>
@@ -369,20 +373,20 @@ export function bleh_wiki_editor() {
                 <div class="syntax-listing-item">
                     <div class="code-side">[url]https://katelyn.moe/bleh[/url]</div>
                     <div class="detail-side">${{
-			html: tl(trans.links_to).replace(
-				'{link}',
-				`<a href="https://katelyn.moe/bleh" target="_blank">https://katelyn.moe/bleh</a>`,
-			),
-		}}</div>
+		html: tl(trans.links_to).replace(
+			'{link}',
+			`<a href="https://katelyn.moe/bleh" target="_blank">https://katelyn.moe/bleh</a>`,
+		),
+	}}</div>
                 </div>
                 <div class="syntax-listing-item">
                     <div class="code-side">[url=https://katelyn.moe/bleh]blehhh[/url]</div>
                     <div class="detail-side">${{
-			html: tl(trans.links_to).replace(
-				'{link}',
-				`<a href="https://katelyn.moe/bleh" target="_blank">blehhh</a>`,
-			),
-		}}</div>
+		html: tl(trans.links_to).replace(
+			'{link}',
+			`<a href="https://katelyn.moe/bleh" target="_blank">blehhh</a>`,
+		),
+	}}</div>
                 </div>
             </div>
             <div class="sep"></div>
@@ -390,20 +394,20 @@ export function bleh_wiki_editor() {
                 <div class="syntax-listing-item">
                     <div class="code-side">[tag]grunge[/tag]</div>
                     <div class="detail-side">${{
-			html: tl(trans.links_to).replace(
-				'{link}',
-				`<a href="${root}tag/grunge" data-link-type="tag" target="_blank">grunge</a>`,
-			),
-		}}</div>
+		html: tl(trans.links_to).replace(
+			'{link}',
+			`<a href="${root}tag/grunge" data-link-type="tag" target="_blank">grunge</a>`,
+		),
+	}}</div>
                 </div>
                 <div class="syntax-listing-item">
                     <div class="code-side">[user]${auth.name}[/user]</div>
                     <div class="detail-side">${{
-			html: tl(trans.links_to).replace(
-				'{link}',
-				`<a class="mention" href="${root}user/${auth.name}" target="_blank">@${auth.name}</a>`,
-			),
-		}}</div>
+		html: tl(trans.links_to).replace(
+			'{link}',
+			`<a class="mention" href="${root}user/${auth.name}" target="_blank">@${auth.name}</a>`,
+		),
+	}}</div>
                 </div>
             </div>
         </section>
@@ -451,10 +455,12 @@ export function patch_wiki() {
 		wiki_col.appendChild(html.node`
             <div class="sub-text wiki-sub-text">
                 <span class="right-links">
-                    <p><a class="wiki-edit-small icon" href="${document.location.href}/+wiki/edit">${tl(trans.edit_wiki).toLowerCase()
-			}</a></p>
-                    ${(!wiki_empty && read_more) ? html.node`<p>${read_more}</p>` : ''
-			}
+                    <p><a class="wiki-edit-small icon" href="${document.location.href}/+wiki/edit">${
+			tl(trans.edit_wiki).toLowerCase()
+		}</a></p>
+                    ${
+			(!wiki_empty && read_more) ? html.node`<p>${read_more}</p>` : ''
+		}
                 </span>
             </div>
         `);
@@ -514,15 +520,17 @@ export function patch_wiki_contents(wiki_block: HTMLElement) {
 						content: html.node`
                             <span class="name">
                                 <span class="link">
-                                    ${scheme != 'https:'
+                                    ${
+							scheme != 'https:'
 								? html.node`
                                     <span class="scheme">
                                         ${scheme}//
                                     </span>
                                     `
 								: ''
-							}
-                                    ${hostname
+						}
+                                    ${
+							hostname
 								? html.node`
                                     <span class="hostname">
                                         ${hostname}
@@ -533,15 +541,16 @@ export function patch_wiki_contents(wiki_block: HTMLElement) {
                                         ${path}
                                     </span>
                                     `
-							}
-                                    ${path != '/' && hostname
+						}
+                                    ${
+							path != '/' && hostname
 								? html.node`
                                     <span class="path">
                                         ${path}
                                     </span>
                                     `
 								: ''
-							}
+						}
                                 </span>
                             </span>
                             <span class="sister">${tl(trans.external)}</span>

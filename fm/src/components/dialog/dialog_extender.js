@@ -26,26 +26,26 @@ export function dialog_extender() {
 	});
 
 	wrappers.forEach((wrapper) => {
-		let modal_dialog = wrapper.querySelector(
+		const modal_dialog = wrapper.querySelector(
 			'.modal-dialog:not([data-dialog-extender])',
 		);
 		if (!modal_dialog) return;
 
 		modal_dialog.setAttribute('data-dialog-extender', 'true');
 
-		let body = modal_dialog.querySelector('.modal-body');
+		const body = modal_dialog.querySelector('.modal-body');
 		if (!body) return;
 
-		let title = body.querySelector('.modal-title');
+		const title = body.querySelector('.modal-title');
 
-		let contents = body.querySelector(':scope > div');
+		const contents = body.querySelector(':scope > div');
 
-		let form = contents.querySelector('form');
+		const form = contents.querySelector('form');
 		if (!form) return;
 
-		let dismiss = modal_dialog.querySelector('.modal-dismiss');
+		const dismiss = modal_dialog.querySelector('.modal-dismiss');
 
-		let token = form.querySelector('[name="csrfmiddlewaretoken"]');
+		const token = form.querySelector('[name="csrfmiddlewaretoken"]');
 		if (token) page.token = token.getAttribute('value');
 
 		if (form.action && form.action.endsWith('+bookmarks/modal/added')) {
@@ -73,8 +73,8 @@ export function dialog_extender() {
 						onsubmit=${async (e) => {
 							e.preventDefault();
 
-							let url = `${root}music/+bookmarks/modal/added`;
-							let form_data = new FormData(new_form);
+							const url = `${root}music/+bookmarks/modal/added`;
+							const form_data = new FormData(new_form);
 
 							console.info(form_data);
 
@@ -120,7 +120,7 @@ export function dialog_extender() {
 			// we use this to detect the bulk edit extension
 			let bulk_edit_active = false;
 
-			let edit_all = body.querySelector('[name="edit_all"]');
+			const edit_all = body.querySelector('[name="edit_all"]');
 			if (edit_all && edit_all.disabled) bulk_edit_active = true;
 
 			if (!bulk_edit_active) title.textContent = tl(trans.edit_scrobble);
@@ -128,14 +128,14 @@ export function dialog_extender() {
 
 			modal_dialog.classList.add('automatic-edit-modal');
 
-			let checkboxes = body.querySelectorAll('.checkbox');
+			const checkboxes = body.querySelectorAll('.checkbox');
 
 			checkboxes.forEach((checkbox) => {
-				let input_el = checkbox.querySelector('input');
-				let value = input_el.checked;
-				let name = input_el.getAttribute('name');
-				let text = checkbox.textContent.trim();
-				let disabled = input_el.disabled;
+				const input_el = checkbox.querySelector('input');
+				const value = input_el.checked;
+				const name = input_el.getAttribute('name');
+				const text = checkbox.textContent.trim();
+				const disabled = input_el.disabled;
 
 				render(
 					checkbox.parentElement,
@@ -152,7 +152,7 @@ export function dialog_extender() {
 				);
 			});
 
-			let original_fields = body.querySelectorAll(
+			const original_fields = body.querySelectorAll(
 				'.edit-scrobble-label--originally',
 			);
 			original_fields.forEach((field) => {
@@ -161,10 +161,10 @@ export function dialog_extender() {
 					.replace(/"([^"]*)"/g, '‘$1’');
 			});
 
-			let submit = body.querySelector('.form-group--submit');
+			const submit = body.querySelector('.form-group--submit');
 			submit.classList = 'modal-footer';
 
-			let delete_form = body.querySelector('.edit-scrobble-form-delete');
+			const delete_form = body.querySelector('.edit-scrobble-form-delete');
 			let delete_btn;
 			if (delete_form) {
 				delete_btn = delete_form.querySelector('.btn-delete');
@@ -206,14 +206,14 @@ export function dialog_extender() {
 
 			let checks;
 
-			let controls = body.querySelector(
+			const controls = body.querySelector(
 				'.lastfm-bulk-edit-form-group-controls',
 			);
 			if (controls) {
-				let parent = controls.parentElement;
+				const parent = controls.parentElement;
 				parent.parentElement.removeChild(parent);
 
-				let disclaimer = body.querySelector('.form-disclaimer');
+				const disclaimer = body.querySelector('.form-disclaimer');
 
 				disclaimer.after(html.node`
                     <div class="button-group">
@@ -237,25 +237,25 @@ export function dialog_extender() {
                 `);
 			}
 
-			let list = body.querySelector('.lastfm-bulk-edit-list');
+			const list = body.querySelector('.lastfm-bulk-edit-list');
 
-			let checkboxes = list.querySelectorAll('.checkbox');
+			const checkboxes = list.querySelectorAll('.checkbox');
 
 			checkboxes.forEach((checkbox) => {
-				let input_el = checkbox.querySelector('input');
-				let value = input_el.checked;
-				let name = input_el.getAttribute('name');
-				let disabled = input_el.disabled;
-				let data = input_el.getAttribute('value');
+				const input_el = checkbox.querySelector('input');
+				const value = input_el.checked;
+				const name = input_el.getAttribute('name');
+				const disabled = input_el.disabled;
+				const data = input_el.getAttribute('value');
 
-				let item_artist = correct_artist(
+				const item_artist = correct_artist(
 					checkbox.querySelector('div').title,
 				);
-				let item_name = correct_item_by_artist(
+				const item_name = correct_item_by_artist(
 					checkbox.querySelector('strong').title,
 					item_artist,
 				);
-				let item_scrobbles = checkbox
+				const item_scrobbles = checkbox
 					.querySelector('small')
 					.textContent.trim();
 
@@ -278,7 +278,7 @@ export function dialog_extender() {
 
 			checks = list.querySelectorAll('.setting');
 
-			let footer = body.querySelector('.form-group--submit');
+			const footer = body.querySelector('.form-group--submit');
 			footer.classList = 'modal-footer';
 			render(
 				footer,

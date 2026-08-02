@@ -13,7 +13,7 @@ export function reset_update_status() {
 }
 
 export function notify_if_new_update() {
-	let last_version_used = localStorage.getItem(keys.last_version_used) || '';
+	const last_version_used = localStorage.getItem(keys.last_version_used) || '';
 
 	// enter first-time setup
 	if (last_version_used == '') {

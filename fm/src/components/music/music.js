@@ -10,8 +10,6 @@ import { log } from '@/build/log';
 import { auth, page, root } from '@/build/page';
 import { clean_number, romanise, sanitise, sanitise_text } from '@/build/tools';
 import { lang, tl, trans } from '@/build/trans';
-import { prep_chart_colours } from '@/components/music/chart';
-import { create_divider } from '@/pages/music/gallery';
 import { ff } from '@/components/settings/sku';
 import { parse_scrobbles_as_rank } from '@/components/music/colourful_counts';
 import {
@@ -26,8 +24,6 @@ import { register_menu } from '@/components/menu';
 import { other_listener } from '@/components/profile/profile_shortcut';
 import { submit_scrobble } from '@/components/music/scrobble';
 import tippy from 'tippy.js';
-import { Chart } from '@/main';
-import { DateTime } from 'luxon';
 import {
 	load_profile_cache_externally,
 	open_starred_friend_window,
@@ -40,14 +36,14 @@ import { music_summary } from './summary';
 import { icon, icons } from '../shared/icon';
 import { keys } from '../settings/storage';
 import { is_sponsor } from '../sponsor';
-import { beta_indicator, new_indicator } from '../shared/indicator';
+import { beta_indicator } from '../shared/indicator';
 
 unsafeWindow._other_listener = function (id) {
 	other_listener(id);
 };
 
 export async function show_your_scrobbles() {
-	let katsune = ff('katsune');
+	const katsune = ff('katsune');
 	show_numbers_on_side(page.type);
 
 	// commonly nsbm pages are stripped of all social interaction and only have three tabs,
@@ -65,7 +61,7 @@ export async function show_your_scrobbles() {
 	if (!col_main) col_main = document.body.querySelector('.col-main');
 
 	if (page.type == 'track') {
-		let new_panel = document.createElement('div');
+		const new_panel = document.createElement('div');
 		new_panel.classList.add('track-info-panel');
 		new_panel.innerHTML = col_main.innerHTML;
 
@@ -99,7 +95,7 @@ export async function show_your_scrobbles() {
 	join_the_conversation(page_is_blocked);
 
 	if (page.subpage == 'overview') {
-		let tabs = document.createElement('nav');
+		const tabs = document.createElement('nav');
 		tabs.classList.add(
 			'navlist',
 			'secondary-nav',

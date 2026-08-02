@@ -4,7 +4,7 @@
 // Licensed under GPLv3
 //
 
-import { html, render } from 'lighterhtml';
+import { html } from 'lighterhtml';
 import { log } from '@/build/log';
 import { dialogs, page } from '@/build/page';
 import { tl, trans } from '@/build/trans';

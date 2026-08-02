@@ -17,7 +17,7 @@ import { auth, page } from '@/build/page';
 import { request_reload } from '@/config';
 import { log } from '@/build/log.js';
 import { change_settings_page } from '@/pages/bleh_settings/bleh_settings.js';
-import { dialog, dialog_rm } from '@/components/dialog/dialog';
+import { dialog_rm } from '@/components/dialog/dialog';
 import { keybind } from '@/components/dialog/rabbit';
 import tippy from 'tippy.js';
 import { version } from '@/main';
@@ -61,7 +61,7 @@ export function setting({
 	mouseleave,
 }: setting): setting_element {
 	try {
-		let value = settings[id];
+		const value = settings[id];
 		log(`creating ${id} with value ${value}`, 'settings', 'log', {
 			settings: settings,
 			settings_id: settings[id],
@@ -136,7 +136,7 @@ export function setting({
 			});
 		}
 
-		let html_title = html.node`${title}`;
+		const html_title = html.node`${title}`;
 
 		if (settings_store[id].beta) {
 			html_title.appendChild(
@@ -186,7 +186,7 @@ export function setting({
                             ${
 							settings_store[id].extensions.map(
 								(extension) => () => {
-									let container = html.node`
+									const container = html.node`
                                     <div class="extension">
                                         <div class="bleh-icon" />
                                     </div>
@@ -294,9 +294,9 @@ export function setting({
 		} else if (type == 'range') {
 			let option;
 
-			let min = settings_store[id].min || 0;
-			let max = settings_store[id].max || 0;
-			let step = settings_store[id].step || 0;
+			const min = settings_store[id].min || 0;
+			const max = settings_store[id].max || 0;
+			const step = settings_store[id].step || 0;
 
 			if (min >= max || step === 0) {
 				return setting_fail(id, {
@@ -311,7 +311,7 @@ export function setting({
 			let input;
 			let marker;
 
-			let working_max = settings_store[id].max - settings_store[id].min;
+			const working_max = settings_store[id].max - settings_store[id].min;
 
 			const elem = html.node`
                 <div class="setting v2 ${standalone ? 'standalone' : ''} ${
@@ -342,7 +342,7 @@ export function setting({
                         ${
 						settings_store[id].extensions.map(
 							(extension) => () => {
-								let container = html.node`
+								const container = html.node`
                                 <div class="extension">
                                     <div class="bleh-icon" />
                                 </div>
@@ -467,7 +467,7 @@ export function setting({
 				placeholder = tl(placeholder);
 			}
 
-			let container = html.node`
+			const container = html.node`
                 <div class="setting v2 ${
 				standalone ? 'standalone' : ''
 			}" data-type="text" disabled=${disabled} data-hide=${hide_if_incompatible} id="setting_${id}" ref=${(
@@ -1807,7 +1807,7 @@ export function compile_settings() {
 
 	clone.version = version.build;
 
-	for (let s in clone) {
+	for (const s in clone) {
 		console.log(
 			'settings marin before stringify',
 			s,

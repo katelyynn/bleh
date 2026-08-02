@@ -8,23 +8,23 @@ import { html, render } from 'lighterhtml';
 import { page, root } from '@/build/page';
 import { sanitise } from '@/build/tools';
 import { tl, trans } from '@/build/trans';
-import { avatar, expand_avatar } from '@/components/shared/avatar';
+import { avatar } from '@/components/shared/avatar';
 import { correct_artist } from '@/components/music/lotus';
 import { redirect } from '@/components/music/music';
 import { bleh_tags_mini } from '@/pages/tag';
 
 export function bleh_about_artist() {
-	let legacy_container = page.structure.main.querySelector('.about-artist');
+	const legacy_container = page.structure.main.querySelector('.about-artist');
 	if (!legacy_container) return;
 
-	let image = legacy_container.querySelector('.gallery-preview-image--0 img');
-	let listeners = legacy_container.querySelector('.about-artist-listeners');
-	let tags = legacy_container.querySelector('.about-artist-tags');
+	const image = legacy_container.querySelector('.gallery-preview-image--0 img');
+	const listeners = legacy_container.querySelector('.about-artist-listeners');
+	const tags = legacy_container.querySelector('.about-artist-tags');
 
-	let wiki = legacy_container.querySelector('.wiki-block.visible-lg');
+	const wiki = legacy_container.querySelector('.wiki-block.visible-lg');
 	if (wiki) wiki.classList.remove('visible-lg');
 
-	let about_artist_container = legacy_container.parentElement;
+	const about_artist_container = legacy_container.parentElement;
 	about_artist_container.classList.add('about-artist-container');
 
 	bleh_tags_mini(tags);

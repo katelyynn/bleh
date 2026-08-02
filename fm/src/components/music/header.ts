@@ -183,7 +183,7 @@ export function artist_title(header = document.body) {
 
 			artist = artist.trim();
 
-			let part = document.createElement('a');
+			const part = document.createElement('a');
 			part.classList.add('multi-artist-part');
 			part.setAttribute(
 				'href',
@@ -221,7 +221,7 @@ export function page_header_title(header = document.body) {
 	if (track_artist) {
 		// album/track page
 		if (artist_corrections.hasOwnProperty(track_artist.textContent)) {
-			let corrected_artist = artist_corrections[track_artist.textContent];
+			const corrected_artist = artist_corrections[track_artist.textContent];
 			log(
 				`corrected ${track_artist.textContent} as ${corrected_artist}`,
 				'lotus',
@@ -273,14 +273,14 @@ export function page_header_title(header = document.body) {
 					page.suggest = sanitise(formatted.song_title.trim());
 				}
 
-				let song_artist_element = document.body.querySelector(
+				const song_artist_element = document.body.querySelector(
 					'span[itemprop="byArtist"]',
 				);
-				let song_guests = formatted.song_guests;
+				const song_guests = formatted.song_guests;
 				page.sister_others = song_guests;
 				song_artist_element.innerHTML = song_artist_element.innerHTML
 					.trim();
-				for (let guest in song_guests) {
+				for (const guest in song_guests) {
 					// &
 					song_artist_element.innerHTML =
 						`${song_artist_element.innerHTML},`;
@@ -298,7 +298,7 @@ export function page_header_title(header = document.body) {
 		if (!track_title.hasAttribute('data-kate-processed')) {
 			track_title.setAttribute('data-kate-processed', 'true');
 
-			let corrected_title = correct_item_by_artist(
+			const corrected_title = correct_item_by_artist(
 				track_title.textContent,
 				track_artist.textContent,
 			);

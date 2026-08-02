@@ -11,17 +11,17 @@ import { tl, trans } from '@/build/trans';
 import { dialog, dialog_rm } from '@/components/dialog/dialog';
 import { sponsor_list } from '@/build/sponsor';
 import { markdown } from '@/components/shared/markdown';
-import { lazy, set_storage } from '@/build/tools';
+import { set_storage } from '@/build/tools';
 import { sponsor } from '@/components/sponsor';
 import tippy from 'tippy.js';
 
 export function news() {
-	let changelog = localStorage.getItem('bleh_changelog');
-	let changelog_expire = new Date(
+	const changelog = localStorage.getItem('bleh_changelog');
+	const changelog_expire = new Date(
 		localStorage.getItem('bleh_changelog_expire'),
 	);
 
-	let current_time = new Date();
+	const current_time = new Date();
 
 	if (!changelog) {
 		log('not cached, fetching', 'changelog');
@@ -35,11 +35,11 @@ export function news() {
 }
 
 export function request_changelog(open_after = true) {
-	let button = page.state.navigation_menu_news;
+	const button = page.state.navigation_menu_news;
 	if (button) button.setAttribute('disabled', '');
 
-	let xhr = new XMLHttpRequest();
-	let url =
+	const xhr = new XMLHttpRequest();
+	const url =
 		`https://katelyynn.github.io/bleh/fm/changelog/changelog.json?${Math.random()}`;
 	xhr.open('GET', url, true);
 
@@ -55,7 +55,7 @@ export function request_changelog(open_after = true) {
 		}
 
 		// set expire date
-		let api_expire = new Date();
+		const api_expire = new Date();
 
 		if (xhr.status == 200) {
 			if (open_after) {

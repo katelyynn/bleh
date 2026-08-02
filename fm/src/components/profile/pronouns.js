@@ -1,3 +1,6 @@
+/**
+ * @param {string} string
+ */
 export function find_pronouns(string) {
 	const regex = /\b[a-z]{1,4}\s*\/\s*[a-z]{1,4}(?:\s*\/\s*[a-z]{1,4})?\b/i;
 
@@ -23,6 +26,9 @@ export function find_pronouns(string) {
 	};
 }
 
+/**
+ * @param {string | null} string
+ */
 function fix_up_string(string) {
 	if (!string) return null;
 

@@ -22,13 +22,13 @@ export function toggle({
 	let checkbox;
 	let state;
 
-	let elem = html.node`
+	const elem = html.node`
         <div class="setting ${
 		standalone ? 'standalone' : ''
 	}" data-type=${type} onclick=${() => {
 		if (disabled) return;
 
-		let current = checkbox.checked;
+		const current = checkbox.checked;
 
 		if (func) func(!current);
 

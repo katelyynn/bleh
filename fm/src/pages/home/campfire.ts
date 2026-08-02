@@ -16,7 +16,6 @@ import {
 	open_starred_friend_window,
 } from '../profile/profile';
 import { load_recent_tracks } from '../home';
-import tippy from 'tippy.js';
 import { is_sponsor, sponsor } from '@/components/sponsor';
 import { DateTime } from 'luxon';
 import { icon, icons } from '@/components/shared/icon';
@@ -80,13 +79,13 @@ export function campfire() {
     </div>
   `;
 
-	page.structure.row.insertBefore(container, page.structure.content);
+	page.structure.row!.insertBefore(container, page.structure.content);
 
 	campfire_extended(campfire_side);
 	campfire_cta(container);
 
-	let albums: album[] = [];
-	let album_elements: { elem: HTMLElement; index: number }[] = [];
+	const albums: album[] = [];
+	const album_elements: { elem: HTMLElement; index: number }[] = [];
 
 	fetch(
 		`${root}user/${auth.name}/library/albums?date_preset=LAST_30_DAYS&page=1&ajax=1`,
@@ -97,7 +96,7 @@ export function campfire() {
 			return response.text();
 		})
 		.then(function (dom) {
-			let doc = new DOMParser().parseFromString(dom, 'text/html');
+			const doc = new DOMParser().parseFromString(dom, 'text/html');
 			console.log('DOC', doc);
 
 			const items = doc.querySelectorAll('.chartlist-row');
@@ -110,10 +109,10 @@ export function campfire() {
 				const plays = item.querySelector('.chartlist-count-bar-slug')
 					.getAttribute('data-stat-value');
 
-				let corrected_title = romanise(
+				const corrected_title = romanise(
 					correct_item_by_artist(title, artist),
 				);
-				let corrected_artist = romanise(correct_artist(artist));
+				const corrected_artist = romanise(correct_artist(artist));
 
 				albums.push({
 					image: image.replace('/64s/', '/500x500/'),

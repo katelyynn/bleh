@@ -9,10 +9,10 @@ import { ranks } from '@/build/music';
 import { interpolate_hue } from '@/build/tools';
 
 export function patch_artist_ranks_in_list_view(track) {
-	let count_bar = track.querySelector('.chartlist-count-bar');
+	const count_bar = track.querySelector('.chartlist-count-bar');
 	if (!count_bar) return;
 
-	let count_bar_link = count_bar.querySelector('.chartlist-count-bar-link');
+	const count_bar_link = count_bar.querySelector('.chartlist-count-bar-link');
 	if (
 		count_bar_link.getAttribute('href')
 			.includes('?from=') ||
@@ -26,12 +26,12 @@ export function patch_artist_ranks_in_list_view(track) {
 
 	const slug = count_bar.querySelector('.chartlist-count-bar-slug');
 	const val = count_bar.querySelector('.chartlist-count-bar-value');
-	let count = slug.getAttribute('data-stat-value');
+	const count = slug.getAttribute('data-stat-value');
 
 	if (!count_bar.hasAttribute('data-kate-processed')) {
 		count_bar.setAttribute('data-kate-processed', 'true');
 
-		let parsed_scrobble_as_rank = parse_scrobbles_as_rank(count);
+		const parsed_scrobble_as_rank = parse_scrobbles_as_rank(count);
 
 		count_bar.setAttribute(
 			'data-bleh--scrobble-milestone',
@@ -51,7 +51,7 @@ export function patch_artist_ranks_in_list_view(track) {
 export function parse_scrobbles_as_rank(scrobbles) {
 	let scrobble_milestone = 0;
 	let scrobble_proximity = 0;
-	let max_rank = ranks.length - 1;
+	const max_rank = ranks.length - 1;
 
 	ranks.forEach((rank, index) => {
 		if (scrobbles <= rank.start) {
@@ -67,17 +67,17 @@ export function parse_scrobbles_as_rank(scrobbles) {
 
 	// calculate proximity to next rank
 	if (scrobble_milestone < max_rank) {
-		let current_start = ranks[scrobble_milestone].start;
-		let next_start = ranks[scrobble_milestone + 1].start;
+		const current_start = ranks[scrobble_milestone].start;
+		const next_start = ranks[scrobble_milestone + 1].start;
 		scrobble_proximity = (scrobbles - current_start) /
 			(next_start - current_start);
 	}
 
 	// interpolate hsl to the next rank
 	if (scrobble_milestone < max_rank) {
-		let next_milestone_hue = ranks[scrobble_milestone + 1].hue;
-		let next_milestone_sat = ranks[scrobble_milestone + 1].sat;
-		let next_milestone_lit = ranks[scrobble_milestone + 1].lit;
+		const next_milestone_hue = ranks[scrobble_milestone + 1].hue;
+		const next_milestone_sat = ranks[scrobble_milestone + 1].sat;
+		const next_milestone_lit = ranks[scrobble_milestone + 1].lit;
 
 		milestone_hue = interpolate_hue(
 			milestone_hue,

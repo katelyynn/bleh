@@ -27,7 +27,7 @@ import { header_colour } from '../page/colour';
 export function music_grids(search = page.structure.main, use_colour = true) {
 	if (!search) return;
 
-	let insights = {
+	const insights = {
 		artist: {
 			display: false,
 			values: [],
@@ -63,11 +63,11 @@ export function music_grids(search = page.structure.main, use_colour = true) {
 		},
 	};
 
-	let grids = search.querySelectorAll(
+	const grids = search.querySelectorAll(
 		'.grid-items-item:not([data-bleh-music-grids])',
 	);
 	grids.forEach((grid, index) => {
-		let is_loading = grid.querySelector('.grid-items-empty-inner') != null;
+		const is_loading = grid.querySelector('.grid-items-empty-inner') != null;
 		if (is_loading) return;
 
 		grid.style.setProperty('--delay', index * 0.04 + 's');
@@ -122,16 +122,16 @@ export function music_grids(search = page.structure.main, use_colour = true) {
 		let plays_elem;
 		if (page.type == 'search') {
 			if (!is_album) {
-				let aux_text = grid.querySelector('.grid-items-item-aux-text');
-				let stat_name = aux_text.querySelector('.stat-name');
+				const aux_text = grid.querySelector('.grid-items-item-aux-text');
+				const stat_name = aux_text.querySelector('.stat-name');
 
 				aux_text.removeChild(stat_name);
 
 				plays_elem = aux_text;
 			}
 		} else if (page.type == 'tag') {
-			let aux_text = grid.querySelector('.grid-items-item-aux-text');
-			let stat_name = aux_text.querySelector('.stat-name');
+			const aux_text = grid.querySelector('.grid-items-item-aux-text');
+			const stat_name = aux_text.querySelector('.stat-name');
 			if (!stat_name) return;
 
 			aux_text.removeChild(stat_name);
@@ -139,7 +139,7 @@ export function music_grids(search = page.structure.main, use_colour = true) {
 			plays_elem = aux_text;
 
 			if (is_album) {
-				let artist = grid.querySelector('.grid-items-item-aux-block');
+				const artist = grid.querySelector('.grid-items-item-aux-block');
 
 				aux_text.removeChild(artist);
 
@@ -162,7 +162,7 @@ export function music_grids(search = page.structure.main, use_colour = true) {
 			!is_obsession &&
 			!is_comparison
 		) {
-			let plays = int_from_string(plays_elem.textContent.trim());
+			const plays = int_from_string(plays_elem.textContent.trim());
 			plays_elem.classList.add('grid-item-plays', 'icon-mask');
 			if (is_album) {
 				plays_elem.textContent = plays.toLocaleString(lang);
@@ -205,7 +205,7 @@ export function music_grids(search = page.structure.main, use_colour = true) {
 							.getAttribute('href')
 							.endsWith('?date_preset=null'))
 				) {
-					let parsed_scrobble_as_rank = parse_scrobbles_as_rank(
+					const parsed_scrobble_as_rank = parse_scrobbles_as_rank(
 						plays,
 					);
 
@@ -244,7 +244,7 @@ export function music_grids(search = page.structure.main, use_colour = true) {
 			});
 		}
 
-		let name = grid.querySelector('.grid-items-item-main-text > a');
+		const name = grid.querySelector('.grid-items-item-main-text > a');
 		if (!name) return;
 
 		let artist;
@@ -268,10 +268,10 @@ export function music_grids(search = page.structure.main, use_colour = true) {
 			);
 
 			if (settings.format_guest_features) {
-				let name_elem = name;
-				let artist_elem = artist;
+				const name_elem = name;
+				const artist_elem = artist;
 
-				let song_title = name_elem.getAttribute('title');
+				const song_title = name_elem.getAttribute('title');
 
 				const formatted = name_includes(
 					song_title,

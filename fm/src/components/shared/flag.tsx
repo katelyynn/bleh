@@ -1,10 +1,14 @@
 import tippy from 'tippy.js';
 
 export function flag(code: string, classname?: string) {
-	const url = `https://purecatamphetamine.github.io/country-flag-icons/3x2/${code}.svg`;
+	const url =
+		`https://purecatamphetamine.github.io/country-flag-icons/3x2/${code}.svg`;
 
 	const elem = (
-		<div className={`country-flag ${classname ? classname : ''}`} style={{ backgroundImage: `url(${url})` }}>
+		<div
+			className={`country-flag ${classname ? classname : ''}`}
+			style={{ backgroundImage: `url(${url})` }}
+		>
 			{code} (flag)
 		</div>
 	);

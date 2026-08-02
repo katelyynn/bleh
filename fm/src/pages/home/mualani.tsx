@@ -20,7 +20,6 @@ import { create_badge, load_badges } from '@/components/shared/badge';
 import { clamp_lit, clamp_sat, rgb_to_oklch } from '@/build/tools';
 import { chartlist_bar } from '@/components/music/bar';
 import { avatar } from '@/components/shared/avatar';
-import { tl, trans } from '@/build/trans';
 import { click_indicator } from '@/components/shared/indicator';
 
 export function mualani() {
@@ -49,7 +48,7 @@ export function mualani() {
 	page.structure.row.removeChild(page.structure.row.firstElementChild);
 
 	let md_body;
-	let md_options = {
+	const md_options = {
 		allow_headers: true,
 		allow_banners: true,
 		allow_icons: true,
@@ -62,7 +61,7 @@ export function mualani() {
 
 	let md_body_links;
 
-	let colours = [
+	const colours = [
 		[0, 0, 0],
 		[64, 64, 64],
 		[128, 128, 128],
@@ -113,9 +112,9 @@ export function mualani() {
 			        ${setting({ id: 'expand_tracks' })}
 			        ${setting({ id: 'romanise_jp' })}
 			        ${setting({
-			id: 'navigation_items',
-			list: page.state.quick_access_items,
-		})}
+				id: 'navigation_items',
+				list: page.state.quick_access_items,
+			})}
 			    </div>
 				<div class="tippy-box" data-theme="context-menu" data-state="visible">
 					<div class="tippy-content">
@@ -131,53 +130,53 @@ export function mualani() {
 					<button
 						class="btn continue"
 						onclick=${() =>
-				notify({
-					id: 'test',
-					title: 'testing!',
-					body: 'haaaiaiii test bodyyy.......',
-				})}
+							notify({
+								id: 'test',
+								title: 'testing!',
+								body: 'haaaiaiii test bodyyy.......',
+							})}
 					>
 			            Deliver notification
 			        </button>
 					<button
 						class="btn continue"
 						onclick=${() =>
-				notify({
-					id: 'test',
-					title: 'testing!',
-					body: 'haaaiaiii test bodyyy.......',
-					persist: true,
-				})}
+							notify({
+								id: 'test',
+								title: 'testing!',
+								body: 'haaaiaiii test bodyyy.......',
+								persist: true,
+							})}
 					>
 			            Deliver persistent notification
 			        </button>
 					<button
 						class="btn continue"
 						onclick=${() => {
-				let notification = notify({
-					id: 'async',
-					title: 'progress',
-					body: 'downloading...',
-					progress: true,
-				});
+							let notification = notify({
+								id: 'async',
+								title: 'progress',
+								body: 'downloading...',
+								progress: true,
+							});
 
-				download_with_progress(
-					`https://lastfm.freetls.fastly.net/i/u/ar0/6644c67eaa3669676252d3190f9b019f.jpg?a=${Math.random()}`,
-					(percent) => {
-						notification.set_body(
-							`downloading... ${percent}%`,
-						);
-						notification.set(percent);
-					},
-				).then(async (blob) => {
-					const text = await blob.text();
+							download_with_progress(
+								`https://lastfm.freetls.fastly.net/i/u/ar0/6644c67eaa3669676252d3190f9b019f.jpg?a=${Math.random()}`,
+								(percent) => {
+									notification.set_body(
+										`downloading... ${percent}%`,
+									);
+									notification.set(percent);
+								},
+							).then(async (blob) => {
+								const text = await blob.text();
 
-					notification.set_body('download complete');
-					notification.set(100);
+								notification.set_body('download complete');
+								notification.set(100);
 
-					console.info(text);
-				});
-			}}
+								console.info(text);
+							});
+						}}
 					>
 			            Deliver async progress notification
 			        </button>
@@ -188,10 +187,10 @@ export function mualani() {
 				<button
 					class="btn continue"
 					onclick=${() =>
-				status({
-					title: 'test alert',
-					body: 'haiaiai nothing to worry about >_<',
-				})}
+						status({
+							title: 'test alert',
+							body: 'haiaiai nothing to worry about >_<',
+						})}
 				>
 			        Deliver status alert
 			    </button>
@@ -205,16 +204,16 @@ export function mualani() {
 			<section class="flexy">
 			    <h2>Markdown (with bio settings)</h2>
 			    ${markdown_field((val) => {
-					render(md_body, markdown(val, md_options));
-				}, md_options)}
+				render(md_body, markdown(val, md_options));
+			}, md_options)}
 			    <div class="sep" />
 			    <div class="markdown-body" ref=${(el) => md_body = el} />
 			</section>
 			<section class="flexy">
 			    <h2>Markdown (with defaults)</h2>
 			    ${markdown_field((val) => {
-					render(md_body_default, markdown(val));
-				})}
+				render(md_body_default, markdown(val));
+			})}
 			    <div class="sep" />
 			    <div class="markdown-body" ref=${(el) =>
 				md_body_default = el} />
@@ -223,13 +222,13 @@ export function mualani() {
 				<h2>Graph colours</h2>
 				<div style="display: flex; flex-wrap: wrap; gap: 8px">
 			        ${Array.from({ length: 13 }, (_, i) => {
-					return html.node`
+				return html.node`
                             <div style="display: flex; flex-direction: column; gap: 10px">
                                 <div style="width: 40px; height: 40px; background-color: var(--graph-colour-${i})" />
                                 <div style="width: 40px; height: 3px; background-color: var(--graph-colour-${i})" />
                             </div>
                         `;
-				})}
+			})}
 			    </div>
 			</section>
 			<section class="flexy">
@@ -265,10 +264,12 @@ export function mualani() {
 
 				return html.node`
                                 <div class="colour-list-item">
-                                    <div class="colour-tile colourful" style="background: rgb(${colour[0]
-					}, ${colour[1]}, ${colour[2]})" />
-                                    <div class="colour-text">rgb(${colour[0]
-					}, ${colour[1]}, ${colour[2]})</div>
+                                    <div class="colour-tile colourful" style="background: rgb(${
+					colour[0]
+				}, ${colour[1]}, ${colour[2]})" />
+                                    <div class="colour-text">rgb(${
+					colour[0]
+				}, ${colour[1]}, ${colour[2]})</div>
                                     <div class="bleh-icon" data-type="arrow-right" style="--icon: var(--mask)" />
                                     <div class="colour-tile colourful" style="--hue-over: ${hue.h}; --sat-over: ${hue.s}; --lit-over: ${hue.l}" />
                                     <div class="colour-text">hue ${hue.h}, sat ${hue.s}, lit ${hue.l}</div>
@@ -285,14 +286,15 @@ export function mualani() {
 					const badges = load_badges(user);
 
 					return html.node`
-                            ${badges.map((badge) => {
-						if (
-							badge.type == 'sponsor' && !badge.icon
-						) return html.node``;
+                            ${
+						badges.map((badge) => {
+							if (
+								badge.type == 'sponsor' && !badge.icon
+							) return html.node``;
 
-						return create_badge(badge, false, true);
-					})
-						}
+							return create_badge(badge, false, true);
+						})
+					}
                         `;
 				})
 				: ''}
@@ -303,14 +305,15 @@ export function mualani() {
 					const badges = load_badges(user);
 
 					return html.node`
-                            ${badges.map((badge) => {
-						if (
-							badge.type == 'sponsor' && !badge.icon
-						) return html.node``;
+                            ${
+						badges.map((badge) => {
+							if (
+								badge.type == 'sponsor' && !badge.icon
+							) return html.node``;
 
-						return create_badge(badge, false, true, true);
-					})
-						}
+							return create_badge(badge, false, true, true);
+						})
+					}
                         `;
 				})
 				: ''}
@@ -339,7 +342,7 @@ export function mualani() {
 	page.structure.main!.appendChild(
 		<section>
 			<p>jsx test (tsx)</p>
-		</section>
+		</section>,
 	);
 
 	const link_text = `

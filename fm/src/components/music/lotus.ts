@@ -23,7 +23,6 @@ import {
 } from '@/build/tools';
 import { tl, trans } from '@/build/trans';
 import {
-	prepare_corrections_page,
 	render_setting_page,
 } from '@/pages/bleh_settings/bleh_settings.js';
 import { dialog, dialog_rm } from '@/components/dialog/dialog';
@@ -31,9 +30,7 @@ import { html, render } from 'lighterhtml';
 import { redirect } from '@/components/music/music';
 import { status } from '@/components/dialog/status';
 import { input } from '@/components/settings/input';
-import JSON5 from 'json5';
 import { notify } from '../dialog/notify';
-import { header_colour } from '../page/colour';
 
 const flat_patterns: flat_pattern[] = [];
 

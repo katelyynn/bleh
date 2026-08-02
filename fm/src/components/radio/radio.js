@@ -9,9 +9,9 @@ import { page } from '@/build/page';
 import { tl, trans } from '@/build/trans';
 
 export function bleh_radio() {
-	let radios = page.structure.side.querySelectorAll('.stationlink');
+	const radios = page.structure.side.querySelectorAll('.stationlink');
 	radios.forEach((radio) => {
-		let type = radio.getAttribute('data-analytics-label');
+		const type = radio.getAttribute('data-analytics-label');
 		radio.classList.add('btn', 'radio-button', 'side-action', 'icon-mask');
 
 		let text = tl(trans[type]);
@@ -35,20 +35,20 @@ export function bleh_radio() {
 		radio.parentElement.replaceWith(radio);
 	});
 
-	let list = page.structure.side.querySelector('.stationlink-list');
+	const list = page.structure.side.querySelector('.stationlink-list');
 	if (list) {
 		list.classList.add('side-actions');
 	}
 
 	if (page.type == 'user') {
-		let promo_v3 = page.structure.side.querySelector('.promo-v3');
+		const promo_v3 = page.structure.side.querySelector('.promo-v3');
 		if (!promo_v3) return;
 
-		let header = promo_v3.querySelector('h2');
+		const header = promo_v3.querySelector('h2');
 		header.textContent = tl(trans.listening);
 
-		let promos = promo_v3.querySelectorAll('.listening-report-promo');
-		let container = document.createElement('div');
+		const promos = promo_v3.querySelectorAll('.listening-report-promo');
+		const container = document.createElement('div');
 		container.classList.add('listening-report-promos', 'side-actions');
 		promos.forEach((promo) => {
 			promo.classList.add('btn', 'side-action', 'icon-mask');
@@ -58,14 +58,14 @@ export function bleh_radio() {
 
 		if (radios.length == 0) return;
 
-		let sep = document.createElement('div');
+		const sep = document.createElement('div');
 		sep.classList.add('sep', 'listen-sep');
 		promo_v3.appendChild(sep);
 
 		if (list) list.parentElement.remove();
 		promo_v3.appendChild(list);
 	} else {
-		let header = page.structure.side.querySelector('.stationlinks-header');
+		const header = page.structure.side.querySelector('.stationlinks-header');
 		header.textContent = tl(trans.listening);
 	}
 }

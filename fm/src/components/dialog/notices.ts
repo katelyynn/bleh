@@ -52,12 +52,12 @@ function fetch_notices() {
 		})
 		.then((res) => {
 			set_storage('bleh_notices', JSON.stringify(res));
-			set_storage('bleh_notices_expire', Date.now() + 60 * 60 * 1000); // 1 hour
+			set_storage('bleh_notices_expire', `${Date.now() + 60 * 60 * 1000}`); // 1 hour
 
 			load_notices(res);
 		})
 		.catch((e) => {
-			set_storage('bleh_notices_expire', Date.now() + 30 * 60 * 1000); // 30 minutes
+			set_storage('bleh_notices_expire', `${Date.now() + 30 * 60 * 1000}`); // 30 minutes
 		});
 }
 

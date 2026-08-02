@@ -68,7 +68,7 @@ export function update_branding_type(state = settings.branding_type) {
 
 export function append_nav() {
 	if (settings.developer && !page.structure.indicator) {
-		let page_indicator = document.createElement('div');
+		const page_indicator = document.createElement('div');
 		page_indicator.classList.add('page-indicator');
 		document.documentElement.appendChild(page_indicator);
 
@@ -291,14 +291,14 @@ export function append_nav() {
 	);
 
 	// 2025-04-14
-	let new_auth = masthead.querySelector('.auth-dropdown-menu');
+	const new_auth = masthead.querySelector('.auth-dropdown-menu');
 
-	let links = masthead.querySelector(
+	const links = masthead.querySelector(
 		'.masthead-nav:not(.masthead-nav-top) .navlist-items',
 	);
 	render(links, html``);
 
-	let auth_link = masthead.querySelector(
+	const auth_link = masthead.querySelector(
 		'.masthead-nav-wrap > .site-auth .auth-link',
 	);
 	if (!auth_link) {
@@ -358,7 +358,7 @@ export function append_nav() {
 		if (cache.username) name.textContent = cache.username;
 	});
 
-	let badges = load_badges(auth.name, true);
+	const badges = load_badges(auth.name, true);
 
 	if (badges) {
 		auth_link.appendChild(create_badge(badges, false, false, true));
@@ -438,7 +438,7 @@ export function append_nav() {
 	console.info('season', state);
 
 	// configure bleh
-	let bleh_container = html.node`
+	const bleh_container = html.node`
         <a class="btn masthead-nav-control icon chibi" href="${root}bleh" data-label="bleh" data-season="none">
             ${tl(trans.bleh_settings)}
         </a>
@@ -807,7 +807,7 @@ export function append_nav() {
 	function render_inbox() {
 		const view = settings.inbox_view;
 
-		let content = page.state.inbox_content;
+		const content = page.state.inbox_content;
 
 		log(`rendering view ${view}`, 'navigation', 'info', { content });
 		if (!content) return;
@@ -843,7 +843,7 @@ export function append_nav() {
 	queue_popup('search', search);
 
 	// language
-	let language_options = document.querySelectorAll('.footer-language-form');
+	const language_options = document.querySelectorAll('.footer-language-form');
 
 	const language_menu = html.node`
         <div class="language-menu">
@@ -925,7 +925,7 @@ export function append_nav() {
 		language_menu.appendChild(language_option);
 	});
 
-	let themes = [
+	const themes = [
 		{
 			id: 'adaptive',
 			name: tl(trans.auto),
@@ -1478,7 +1478,7 @@ export function append_nav() {
                                 </a>
                                 <div class="button-combo-sep" />
                                 ${() => {
-				let button = html.node`
+				const button = html.node`
                                         <button class="dropdown-menu-clickable-item chibi" data-menu-item="news" onclick=${() => {
 					news();
 					instance.hide();
@@ -1663,7 +1663,7 @@ export function append_nav() {
 
 	register_menu(auth_link, auth_drop_menu);
 
-	let container = new_auth.parentElement;
+	const container = new_auth.parentElement;
 	container.parentElement.removeChild(container);
 	auth_link.removeAttribute('aria-controls');
 	auth_link.removeAttribute('data-disclose-hover');
@@ -2018,7 +2018,7 @@ export async function fetch_notifications() {
 
 		const list = doc.querySelector('.inbox-notifications');
 
-		let next = new Date();
+		const next = new Date();
 		next.setMinutes(next.getMinutes() + 2);
 
 		page.notifications.next_fetch = next;
@@ -2051,7 +2051,7 @@ export async function fetch_messages() {
 
 		const list = doc.querySelector('.inbox-table tbody');
 
-		let next = new Date();
+		const next = new Date();
 		next.setMinutes(next.getMinutes() + 2);
 
 		page.messages.next_fetch = next;

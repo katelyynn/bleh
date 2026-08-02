@@ -4,7 +4,7 @@
 // Licensed under GPLv3
 //
 
-export let sponsor_list: sponsor_list = {
+export const sponsor_list: sponsor_list = {
 	version: '',
 	related: {
 		account_name: '',

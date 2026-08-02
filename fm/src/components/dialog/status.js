@@ -10,7 +10,7 @@ import { icon, icons } from '../shared/icon';
 
 export function load_status() {
 	if (!page.structure.status) {
-		let notification_host = html.node`
+		const notification_host = html.node`
             <div class="status-alerts" />
         `;
 		page.structure.status = notification_host;

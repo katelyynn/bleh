@@ -37,8 +37,8 @@ export function compare({ host, sidebar } = {}) {
 		page.requested.profile = '';
 	}
 
-	let current_year = new Date().getFullYear();
-	let previous_year = current_year - 1;
+	const current_year = new Date().getFullYear();
+	const previous_year = current_year - 1;
 
 	const default_type = page.requested.type || 'albums';
 	const default_timeframe = page.requested.timeframe ||
@@ -276,13 +276,13 @@ export function compare({ host, sidebar } = {}) {
 			</div>
 		`,
 	);
-	let compare_settings = setting_group.querySelectorAll(':scope > .setting');
+	const compare_settings = setting_group.querySelectorAll(':scope > .setting');
 
 	function begin_comparing(bypass = false) {
 		if (page.name == '') return;
 
 		if (parseInt(pages.value) > 3 && !bypass) {
-			let warn = notify({
+			const warn = notify({
 				id: 'compare_warning',
 				title: tl(trans.are_you_sure),
 				body: tl(trans.this_will_require_loading_count_pages).replace(
@@ -358,15 +358,15 @@ export function compare({ host, sidebar } = {}) {
 				return response.text();
 			})
 			.then(function (dom) {
-				let doc = new DOMParser().parseFromString(dom, 'text/html');
+				const doc = new DOMParser().parseFromString(dom, 'text/html');
 				console.log('DOC', doc);
 
-				let next_button = doc.querySelector('.pagination-next');
+				const next_button = doc.querySelector('.pagination-next');
 
 				try {
-					let tracks = doc.querySelectorAll('.chartlist-row');
+					const tracks = doc.querySelectorAll('.chartlist-row');
 					tracks.forEach((track) => {
-						let item = {};
+						const item = {};
 
 						item.avatar = track.querySelector(
 							'.chartlist-image img',
@@ -473,7 +473,7 @@ export function compare({ host, sidebar } = {}) {
 		}
 
 		if (type.value != 'tracks') {
-			let grid = document.createElement('ol');
+			const grid = document.createElement('ol');
 			grid.classList.add(
 				'grid-items',
 				'grid-items--numbered',
@@ -555,7 +555,7 @@ export function compare({ host, sidebar } = {}) {
 
 			music_grids(grid);
 		} else {
-			let table = document.createElement('table');
+			const table = document.createElement('table');
 			table.classList.add(
 				'chartlist',
 				'chartlist--with-index',
@@ -566,7 +566,7 @@ export function compare({ host, sidebar } = {}) {
 				'compare-chartlist',
 			);
 
-			let tbody = document.createElement('tbody');
+			const tbody = document.createElement('tbody');
 			table.appendChild(tbody);
 
 			let max = 0;

@@ -37,7 +37,7 @@ export function rain() {
 
 	while (increment < 60) {
 		// random numbers
-		let randoms = [
+		const randoms = [
 			Math.floor(Math.random() * (98 - 1 + 1) + 1),
 			Math.floor(Math.random() * (5 - 2 + 1) + 2),
 		];

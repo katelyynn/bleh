@@ -6,10 +6,9 @@
 
 import { settings } from '@/build/config';
 import { log } from '@/build/log';
-import { auth, page, root } from '@/build/page';
+import { auth, page } from '@/build/page';
 import { tl, trans } from '@/build/trans';
 import { bleh_about_artist } from '@/components/music/about_artist.js';
-import { register_menu } from '@/components/menu';
 import {
 	bleh_music_page_charts,
 	show_your_scrobbles,
@@ -25,8 +24,7 @@ import {
 	bleh_wiki_history,
 } from '@/pages/music/wiki';
 import { html, render } from 'lighterhtml';
-import { avatar, expand_avatar } from '@/components/shared/avatar';
-import tippy from 'tippy.js';
+import { avatar } from '@/components/shared/avatar';
 import { oracle_process } from '@/components/music/oracle';
 import { hoshino_return } from '@/components/music/hoshino.js';
 import {
@@ -50,7 +48,7 @@ export function bleh_tracks() {
 
 	page_header_title(track_header);
 
-	let is_subpage = page.subpage != 'overview';
+	const is_subpage = page.subpage != 'overview';
 
 	// without pro theres two containers
 	if (auth.pro) {
@@ -78,22 +76,24 @@ export function bleh_tracks() {
 			);
 		}
 	}
-	page.structure.row = page.structure.container.querySelector('.row');
+	page.structure.row = page.structure.container!.querySelector('.row');
 	try {
 		if (!is_subpage) {
-			page.structure.main = page.structure.row.querySelector(
+			page.structure.main = page.structure.row!.querySelector(
 				'.col-main.buffer-standard',
 			);
 
-			if (page.structure.main.classList[2]) {
-				page.structure.main = page.structure.row.querySelector(
+			if (page.structure.main?.classList[2]) {
+				page.structure.main = page.structure.row!.querySelector(
 					'.col-main.buffer-standard:not(:first-child)',
 				);
 			}
 		} else {
-			page.structure.main = page.structure.row.querySelector('.col-main');
+			page.structure.main = page.structure.row!.querySelector(
+				'.col-main',
+			);
 		}
-		page.structure.side = page.structure.row.querySelector(
+		page.structure.side = page.structure.row!.querySelector(
 			'.col-sidebar:not(.track-overview-video-column)',
 		);
 	} catch (e) {
@@ -103,16 +103,18 @@ export function bleh_tracks() {
 	checkup_page_structure(is_subpage, track_header);
 
 	if (ff('refreshed_music_nav')) {
-		let artist_avatar = track_header.querySelector(
+		const artist_avatar = track_header.querySelector(
 			'.header-new-background-image',
 		);
-		let title = track_header.querySelector('.header-new-title');
-		let artist = track_header.querySelector('[itemprop="byArtist"]');
-		let position = track_header.querySelector(
+		const title = track_header.querySelector('.header-new-title');
+		const artist = track_header.querySelector('[itemprop="byArtist"]');
+		const position = track_header.querySelector(
 			'.header-new-chart-position-number',
 		);
 
-		let source_album = page.structure.main.querySelector('.source-album');
+		const source_album = page.structure.main?.querySelector(
+			'.source-album',
+		);
 		let album_avatar;
 		if (source_album) {
 			album_avatar = source_album.querySelector('.source-album-art img');
@@ -128,7 +130,7 @@ export function bleh_tracks() {
 
 		const same_page = is_same_page();
 
-		let redesigned_track_header = html.node`
+		const redesigned_track_header = html.node`
             <section class="page-header for-track ${same_page ? 'same' : ''}">
                 <div class="page-header-avatar-list" ref=${(
 			el,
@@ -200,7 +202,7 @@ export function bleh_tracks() {
 
 		similar_items();
 	} else {
-		let btn_add = page.structure.side.querySelector('.add-button');
+		const btn_add = page.structure.side.querySelector('.add-button');
 		if (btn_add != null) {
 			btn_add.setAttribute('data-page-subpage', page.subpage);
 		}

@@ -23,7 +23,7 @@ import { html } from 'lighterhtml';
 import { icon, icons } from '@/components/shared/icon';
 
 export function bleh_tags() {
-	let tag_header = document.body.querySelector('.header--tag');
+	const tag_header = document.body.querySelector('.header--tag');
 	if (!tag_header) return;
 
 	if (tag_header.hasAttribute('data-bwaa')) {
@@ -33,7 +33,7 @@ export function bleh_tags() {
 
 	page_header_title(tag_header);
 
-	let is_subpage = tag_header.classList.contains('header--sub-page');
+	const is_subpage = tag_header.classList.contains('header--sub-page');
 
 	page.structure.container = document.body.querySelector('.page-content');
 	page.structure.row = page.structure.container.querySelector('.row');
@@ -47,7 +47,7 @@ export function bleh_tags() {
 	checkup_page_structure(is_subpage, tag_header);
 
 	if (ff('refreshed_music_nav')) {
-		let split = window.location.href.split('/');
+		const split = window.location.href.split('/');
 
 		/* languages */
 		let index = 4;
@@ -55,7 +55,7 @@ export function bleh_tags() {
 			index = 5;
 		}
 
-		let title = desanitise(split[index]);
+		const title = desanitise(split[index]);
 		page.name = title;
 
 		const same_page = is_same_page();
@@ -72,7 +72,7 @@ export function bleh_tags() {
             </section>
         `;
 
-		let background = document.body.querySelector(
+		const background = document.body.querySelector(
 			'.header-background--has-image',
 		);
 		if (background) {
@@ -94,17 +94,17 @@ export function bleh_tags() {
 	}
 
 	if (!is_subpage) {
-		let col_main = page.structure.main.querySelector('.wiki-section');
+		const col_main = page.structure.main.querySelector('.wiki-section');
 
-		let tags = document.createElement('div');
+		const tags = document.createElement('div');
 		tags.classList.add('catalogue-tags');
-		let related = page.structure.main.querySelector('.tags-list');
+		const related = page.structure.main.querySelector('.tags-list');
 
 		if (related) {
 			page.structure.main.removeChild(related.parentElement);
 			tags.appendChild(related);
 
-			let header_tags = document.createElement('div');
+			const header_tags = document.createElement('div');
 			header_tags.classList.add('sub-text', 'music-small-header');
 			header_tags.textContent = tl(trans.related_to);
 			col_main.appendChild(header_tags);
@@ -114,11 +114,11 @@ export function bleh_tags() {
 			bleh_tags_mini(tags);
 		}
 
-		let bookmark_form = page.structure.side.querySelector(':scope > div');
-		let view_all_panel = document.createElement('section');
+		const bookmark_form = page.structure.side.querySelector(':scope > div');
+		const view_all_panel = document.createElement('section');
 		view_all_panel.classList.add('side-actions');
 
-		let button = bookmark_form.querySelector('button');
+		const button = bookmark_form.querySelector('button');
 		button.classList = 'btn side-action icon-mask';
 		button.setAttribute('data-type', 'bookmark');
 
@@ -126,12 +126,12 @@ export function bleh_tags() {
 		page.structure.side.appendChild(view_all_panel);
 
 		// new tag playlist
-		let new_playlist = page.structure.side.querySelector('form');
+		const new_playlist = page.structure.side.querySelector('form');
 
-		let header = new_playlist.querySelector('h3');
+		const header = new_playlist.querySelector('h3');
 		new_playlist.removeChild(header);
 
-		let playlist_button = new_playlist.querySelector('button');
+		const playlist_button = new_playlist.querySelector('button');
 		playlist_button.classList = 'btn side-action icon-mask';
 		playlist_button.setAttribute('data-type', 'playlist');
 
@@ -180,10 +180,10 @@ export function bleh_tags_mini(observer = page.structure.main) {
 		}
 	});
 
-	let tag_user_avatar = observer.querySelector('.tags-user-avatar');
+	const tag_user_avatar = observer.querySelector('.tags-user-avatar');
 	if (!tag_user_avatar) return;
 
-	let tags_list = tag_user_avatar.nextElementSibling;
+	const tags_list = tag_user_avatar.nextElementSibling;
 	const user_tags = tags_list.querySelectorAll('.tag a');
 	user_tags.forEach((tag) => {
 		tag.classList.add('user-created-tag');

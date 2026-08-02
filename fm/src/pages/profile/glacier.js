@@ -30,14 +30,14 @@ import { load_profile_cache_externally } from '@/pages/profile/profile';
 
 export function bleh_user_library() {
 	// date sidebar into its own panel
-	let date_items = page.structure.side.querySelectorAll(
+	const date_items = page.structure.side.querySelectorAll(
 		':scope > :is(div, figure)',
 	);
 
 	//let date_button_panel = document.createElement('section');
 	//date_button_panel.classList.add('date-button-panel');
 
-	let date_panel = html.node`
+	const date_panel = html.node`
         <section class="date-panel" data-glacier-graphs=${settings.glacier_library_graphs} />
     `;
 
@@ -62,11 +62,11 @@ export function bleh_user_library() {
 	page.structure.glacier.date_panel = date_panel;
 
 	// tabs
-	let search = page.structure.content_top.querySelector('.library-search');
-	let nav = page.structure.content_top.querySelector('.library-controls nav');
-	let tabs = nav.querySelector('.navlist-items');
+	const search = page.structure.content_top.querySelector('.library-search');
+	const nav = page.structure.content_top.querySelector('.library-controls nav');
+	const tabs = nav.querySelector('.navlist-items');
 	if (page.name == auth.name) {
-		let velocity_tab = document.createElement('li');
+		const velocity_tab = document.createElement('li');
 		velocity_tab.classList.add(
 			'navlist-item',
 			'secondary-nav-item',
@@ -88,12 +88,12 @@ export function bleh_user_library() {
         `);
 	}
 
-	let scrobbles = tabs.querySelector('.secondary-nav-item--overview');
+	const scrobbles = tabs.querySelector('.secondary-nav-item--overview');
 	scrobbles.classList.remove('secondary-nav-item--overview');
 	scrobbles.classList.add('secondary-nav-item--scrobbles');
 
 	if (ff('mualani')) {
-		let toolbar = html.node`
+		const toolbar = html.node`
             <div class="toolbar">
                 ${search}
                 ${nav}
@@ -214,7 +214,7 @@ export function bleh_user_library() {
 }
 
 function bleh_glacier_library_date() {
-	let button = page.structure.glacier.date_panel.querySelector(
+	const button = page.structure.glacier.date_panel.querySelector(
 		'.date-range-picker-button.disclose-trigger:not([data-glacier-library-date])',
 	);
 	if (!button) return;
@@ -222,29 +222,29 @@ function bleh_glacier_library_date() {
 	button.setAttribute('data-glacier-library-date', 'true');
 	console.info('button', button);
 
-	let date_picker = page.structure.glacier.date_panel.querySelector(
+	const date_picker = page.structure.glacier.date_panel.querySelector(
 		'.library-controls-datepicker',
 	);
-	let old_date_btn = date_picker.querySelector(
+	const old_date_btn = date_picker.querySelector(
 		'.date-range-picker-button:not(.disclose-trigger)',
 	);
 	if (old_date_btn) old_date_btn.remove();
 
-	let date_btn = html.node`
+	const date_btn = html.node`
         <button class="btn date-range-picker-button">${
 		button.querySelector('.date-range-picker-button-inner').textContent
 	}</button>
     `;
 	date_picker.appendChild(date_btn);
 
-	let picker_content = page.structure.glacier.date_panel.querySelector(
+	const picker_content = page.structure.glacier.date_panel.querySelector(
 		'.date-range-picker-content:not([data-glacier-library-date])',
 	);
 	if (!picker_content) return;
 
 	picker_content.setAttribute('data-glacier-library-date', 'true');
 
-	let params = new URLSearchParams(document.location.search);
+	const params = new URLSearchParams(document.location.search);
 	page.requested.from = params.get('from');
 	page.requested.to = params.get('to');
 	page.requested.rangetype = params.get('rangetype');
@@ -323,13 +323,13 @@ function bleh_glacier_library_date() {
 		});
 	});
 
-	let form = picker_content.querySelector(':scope > .date-range-picker-form');
+	const form = picker_content.querySelector(':scope > .date-range-picker-form');
 
-	let from_group = form.querySelector('.form-group--from');
-	let from_input = from_group.querySelector('input');
+	const from_group = form.querySelector('.form-group--from');
+	const from_input = from_group.querySelector('input');
 
-	let to_group = form.querySelector('.form-group--to');
-	let to_input = to_group.querySelector('input');
+	const to_group = form.querySelector('.form-group--to');
+	const to_input = to_group.querySelector('input');
 
 	form.insertBefore(
 		html.node`
@@ -377,7 +377,7 @@ export function bleh_glacier_library() {
 function bleh_glacier_library_table() {
 	if (!ff('glacier_library')) return;
 
-	let table = page.structure.glacier.date_panel.querySelector(
+	const table = page.structure.glacier.date_panel.querySelector(
 		'.highcharts-root',
 	);
 
@@ -387,7 +387,7 @@ function bleh_glacier_library_table() {
 	log('refresh is now marked false (table log)', 'glacier library', 'log');
 	page.structure.glacier.refresh = false;
 
-	let current_view = page.structure.glacier.date_panel.querySelector(
+	const current_view = page.structure.glacier.date_panel.querySelector(
 		'.date-range-picker-button-inner',
 	);
 
@@ -437,7 +437,7 @@ function bleh_glacier_library_top(static_page = false) {
 
 	log('loading top', 'glacier library');
 
-	let metadata = legacy_top_header.querySelectorAll('.metadata-item');
+	const metadata = legacy_top_header.querySelectorAll('.metadata-item');
 
 	let first_run = false;
 	let glacier_top = page.structure.glacier.top;
@@ -483,8 +483,8 @@ function bleh_glacier_library_top(static_page = false) {
 			text = tl(trans.results_for);
 			value = meta.querySelector('.metadata-display').textContent;
 
-			let start = value.indexOf('“') + 1;
-			let end = value.indexOf('”');
+			const start = value.indexOf('“') + 1;
+			const end = value.indexOf('”');
 			value = desanitise(value.substring(start, end));
 		}
 
@@ -501,14 +501,14 @@ function bleh_glacier_library_top(static_page = false) {
 	if (!first_run) return;
 
 	// buttons
-	let top_wrap = page.structure.main.querySelector('.library-top-wrap');
+	const top_wrap = page.structure.main.querySelector('.library-top-wrap');
 
-	let view_buttons = document.createElement('div');
+	const view_buttons = document.createElement('div');
 	view_buttons.classList.add('view-buttons', 'glacier-library-buttons');
 
 	let add_divider = false;
 
-	let sort = legacy_top_header.querySelector('.library-sort');
+	const sort = legacy_top_header.querySelector('.library-sort');
 	if (!static_page) {
 		let sort_button;
 		if (sort) {
@@ -521,7 +521,7 @@ function bleh_glacier_library_top(static_page = false) {
 					'view-item',
 					'glacier-library-button',
 				);
-				let sort_menu = sort.querySelector('.dropdown-menu-clickable');
+				const sort_menu = sort.querySelector('.dropdown-menu-clickable');
 
 				view_buttons.appendChild(sort_button);
 				view_buttons.appendChild(sort_menu);
@@ -570,7 +570,7 @@ function bleh_glacier_library_top(static_page = false) {
         `);
 	}
 
-	let configure_button = document.createElement('button');
+	const configure_button = document.createElement('button');
 	configure_button.classList.add(
 		'btn',
 		'view-item',
@@ -712,7 +712,7 @@ function bleh_glacier_date_graph(static_page = false, own_table = null) {
 
 	page.state.glacier.current_view = current_view;
 
-	let scrobble_chart_content = page.structure.row.querySelector(
+	const scrobble_chart_content = page.structure.row.querySelector(
 		'#scrobble-chart-content',
 	);
 	if (!scrobble_chart_content) return;
@@ -727,7 +727,7 @@ function bleh_glacier_date_graph(static_page = false, own_table = null) {
 		return;
 	}
 
-	let scrobble_chart_wrap = page.structure.row.querySelector(
+	const scrobble_chart_wrap = page.structure.row.querySelector(
 		'.scrobble-table',
 	);
 
@@ -770,8 +770,7 @@ function bleh_glacier_date_graph(static_page = false, own_table = null) {
 		return;
 	}
 
-	let chart_type = scrobble_table.getAttribute('data-bucket-size');
-	let entries = scrobble_table.querySelectorAll('tbody tr');
+	const entries = scrobble_table.querySelectorAll('tbody tr');
 
 	page.state.glacier.labels = [];
 	page.state.glacier.links = [];
@@ -780,8 +779,8 @@ function bleh_glacier_date_graph(static_page = false, own_table = null) {
 	let values_not_empty = 0;
 
 	entries.forEach((entry) => {
-		let period = entry.querySelector('.js-period a');
-		let value = entry.querySelector('.js-scrobbles').textContent.trim();
+		const period = entry.querySelector('.js-period a');
+		const value = entry.querySelector('.js-scrobbles').textContent.trim();
 
 		page.state.glacier.labels.push(period.textContent.trim());
 		page.state.glacier.links.push(period.getAttribute('href'));
@@ -819,7 +818,7 @@ export function bleh_glacier_insights(insights = null) {
 			page.state.glacier.insights.album.display = false;
 		}
 
-		for (let item in insights) {
+		for (const item in insights) {
 			log(
 				`checking insights status of item ${item} - display of ${
 					insights[item].display
@@ -849,7 +848,7 @@ export function bleh_glacier_insights(insights = null) {
 			}
 		}
 	} else {
-		for (let item in page.state.glacier.insights) {
+		for (const item in page.state.glacier.insights) {
 			if (page.state.glacier.insights[item].display) {
 				bleh_glacier_insights_generate(
 					item,
@@ -890,12 +889,12 @@ function bleh_glacier_insights_generate(type, item) {
 		`,
 	);
 
-	let scrobble_canvas_container = document.createElement('div');
+	const scrobble_canvas_container = document.createElement('div');
 	scrobble_canvas_container.classList.add(
 		'scrobble-insights-canvas-container',
 	);
 
-	let scrobble_canvas = document.createElement('canvas');
+	const scrobble_canvas = document.createElement('canvas');
 	scrobble_canvas.classList.add('scrobble-insights-canvas');
 
 	Chart.defaults.color = page.state.chart_colours.text_col;
@@ -1246,7 +1245,7 @@ function bleh_glacier_library_request(request_url) {
 			return response.text();
 		})
 		.then(function (html) {
-			let doc = new DOMParser().parseFromString(html, 'text/html');
+			const doc = new DOMParser().parseFromString(html, 'text/html');
 			console.log(
 				'glacier library DOC',
 				doc,
@@ -1257,7 +1256,7 @@ function bleh_glacier_library_request(request_url) {
 			log('refresh is now marked true', 'glacier library');
 			page.structure.glacier.refresh = true;
 
-			let table = doc.querySelector('.table');
+			const table = doc.querySelector('.table');
 
 			if (table != null) {
 				bleh_glacier_date_graph(false, table);
@@ -1304,7 +1303,7 @@ export function bleh_glacier_date_graph_generate() {
 		scrobble_canvas_container.innerHTML = '';
 	}
 
-	let scrobble_canvas = document.createElement('canvas');
+	const scrobble_canvas = document.createElement('canvas');
 	scrobble_canvas.classList.add('scrobble-canvas');
 
 	scrobble_canvas_container.setAttribute('data-view', settings.chart_view);
@@ -1647,7 +1646,7 @@ function bleh_glacier_library_focused() {
 		},
 	};
 
-	let legacy_header = page.structure.main.querySelector('.library-header');
+	const legacy_header = page.structure.main.querySelector('.library-header');
 
 	let type;
 	if (page.subpage.startsWith('library_artist')) type = 'artist';
@@ -1659,7 +1658,7 @@ function bleh_glacier_library_focused() {
 		header_title = legacy_header.querySelector('.library-header-title'); // main
 	}
 
-	let duration = header_title.querySelector('.library-header-title-duration');
+	const duration = header_title.querySelector('.library-header-title-duration');
 	if (duration) header_title.removeChild(duration);
 
 	header_title = header_title.textContent.trim();
@@ -1667,7 +1666,7 @@ function bleh_glacier_library_focused() {
 	let artist = legacy_header.querySelector('.text-colour-link');
 	if (artist) artist = artist.textContent.trim();
 
-	let image = legacy_header.querySelector('.library-header-image img');
+	const image = legacy_header.querySelector('.library-header-image img');
 
 	let link = `${root}music/${redirect()}${sanitise(header_title)}`;
 	if (type == 'album') {
@@ -1680,18 +1679,18 @@ function bleh_glacier_library_focused() {
 		}`;
 	}
 
-	let header = document.createElement('section');
+	const header = document.createElement('section');
 	header.classList.add(
 		'glacier-library-top',
 		'glacier-library-focused-header',
 	);
 
-	let upper_wrap = document.createElement('div');
+	const upper_wrap = document.createElement('div');
 	upper_wrap.classList.add('glacier-library-top-upper');
 
-	let current_suffix = window.location.search;
+	const current_suffix = window.location.search;
 
-	let metadata = html.node`
+	const metadata = html.node`
         <div class="glacier-library-metadata">
             <div class="glacier-library-metadata-avatar">
                 ${image}
@@ -1731,12 +1730,12 @@ function bleh_glacier_library_focused() {
 	upper_wrap.appendChild(metadata);
 	header.appendChild(upper_wrap);
 
-	let view_buttons = document.createElement('div');
+	const view_buttons = document.createElement('div');
 	view_buttons.classList.add('view-buttons', 'glacier-library-buttons');
 
-	let cta = legacy_header.querySelector('.library-header-ctas');
+	const cta = legacy_header.querySelector('.library-header-ctas');
 
-	let love_form = legacy_header.querySelector(
+	const love_form = legacy_header.querySelector(
 		'.library-header-love-form:not(:has(button))',
 	);
 	if (love_form) {
@@ -1746,7 +1745,7 @@ function bleh_glacier_library_focused() {
 		if (state == 'loved') state = 0;
 		else state = 1;
 
-		let love_form_items = love_form.querySelectorAll(':scope > div > div');
+		const love_form_items = love_form.querySelectorAll(':scope > div > div');
 		love_form_items.forEach((item, index) => {
 			if (state != index) item.classList.add('hide');
 
@@ -1755,7 +1754,7 @@ function bleh_glacier_library_focused() {
 	}
 
 	if (cta) {
-		let wrappers = cta.querySelectorAll(':scope > *');
+		const wrappers = cta.querySelectorAll(':scope > *');
 		wrappers.forEach((wrapper) => {
 			let button;
 
@@ -1785,12 +1784,12 @@ function bleh_glacier_library_focused() {
 
 			view_buttons.appendChild(wrapper);
 
-			let action = button.getAttribute('data-analytics-action');
+			const action = button.getAttribute('data-analytics-action');
 			if (action) {
 				if (action == 'EditScrobbleOpen') {
 					button.textContent = tl(trans.edit);
 				} else if (action == 'UnloveTrack' || action == 'LoveTrack') {
-					let listen_divider = document.createElement('div');
+					const listen_divider = document.createElement('div');
 					listen_divider.classList.add('listen-divider');
 					view_buttons.appendChild(listen_divider);
 
@@ -1815,14 +1814,14 @@ function bleh_glacier_library_focused() {
 		});
 
 		if (wrappers.length > 0) {
-			let listen_divider = document.createElement('div');
+			const listen_divider = document.createElement('div');
 			listen_divider.classList.add('listen-divider');
 			view_buttons.appendChild(listen_divider);
 		}
 	}
 
 	if (page.subpage == 'library_artist_overview' && auth.pro) {
-		let search = document.createElement('a');
+		const search = document.createElement('a');
 		search.classList.add(
 			'btn',
 			'view-item',
@@ -1842,11 +1841,11 @@ function bleh_glacier_library_focused() {
 			content: tl(trans.search_guest),
 		});
 
-		let divider = view_buttons.querySelector('.listen-divider');
+		const divider = view_buttons.querySelector('.listen-divider');
 		if (divider) view_buttons.insertBefore(search, divider);
 	}
 
-	let configure_button = document.createElement('button');
+	const configure_button = document.createElement('button');
 	configure_button.classList.add(
 		'btn',
 		'view-item',
@@ -1893,7 +1892,7 @@ function bleh_glacier_library_focused() {
 	upper_wrap.appendChild(view_buttons);
 
 	let lower_metadata;
-	let lower_wrap = html.node`
+	const lower_wrap = html.node`
         <div class="glacier-library-top-lower">
             <div class="glacier-library-metadata" ref=${(
 		el,
@@ -1901,9 +1900,9 @@ function bleh_glacier_library_focused() {
         </div>
     `;
 
-	let legacy_meta_wrap = page.structure.main.querySelector('.metadata-list');
+	const legacy_meta_wrap = page.structure.main.querySelector('.metadata-list');
 	if (legacy_meta_wrap) {
-		let metadatas = legacy_meta_wrap.querySelectorAll(
+		const metadatas = legacy_meta_wrap.querySelectorAll(
 			'.metadata-item:not(.library-header-ctas__wrapper)',
 		);
 
@@ -1936,9 +1935,9 @@ function bleh_glacier_library_focused() {
 	overview_headers.forEach((top) => {
 		top.classList = 'top-container';
 
-		let header = top.querySelector('h2');
+		const header = top.querySelector('h2');
 
-		let select_btn = top.querySelector('.dropdown-menu-clickable-button');
+		const select_btn = top.querySelector('.dropdown-menu-clickable-button');
 
 		if (!select_btn) {
 			top.classList.add('spacing');
@@ -1960,7 +1959,7 @@ function bleh_glacier_library_focused() {
 	});
 
 	// move random overview header into their section below
-	let overview_header = page.structure.main.querySelector(
+	const overview_header = page.structure.main.querySelector(
 		':scope > .top-container',
 	);
 	if (!overview_header) return;
@@ -1973,24 +1972,24 @@ function bleh_glacier_library_focused() {
 
 export function bleh_glacier_library_bulk_edit() {
 	// quick check to see if bulk edit is present
-	let library_header = page.structure.main.querySelector('.library-header');
+	const library_header = page.structure.main.querySelector('.library-header');
 
-	let bulk_edit = library_header.querySelector('[href="javascript:void(0)"]');
+	const bulk_edit = library_header.querySelector('[href="javascript:void(0)"]');
 	if (!bulk_edit) return;
 
 	// move to new area
-	let view_buttons = page.structure.main.querySelector(
+	const view_buttons = page.structure.main.querySelector(
 		'.glacier-library-buttons',
 	);
 	if (!view_buttons) return;
 
-	let pre_existing_bulk = view_buttons.querySelector('.bulk-edit-button');
+	const pre_existing_bulk = view_buttons.querySelector('.bulk-edit-button');
 	if (pre_existing_bulk) return;
 
-	let edit_form = view_buttons.querySelector(
+	const edit_form = view_buttons.querySelector(
 		':scope > .library-header-edit-form',
 	);
-	let delete_button = view_buttons.querySelector(':scope > .delete-icon');
+	const delete_button = view_buttons.querySelector(':scope > .delete-icon');
 	if (!delete_button) return;
 
 	bulk_edit.classList.add(

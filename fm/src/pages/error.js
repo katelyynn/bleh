@@ -10,10 +10,10 @@ import { html, render } from 'lighterhtml';
 
 export function bleh_error() {
 	page.state.error = false;
-	let page_content = document.body.querySelector('.page-content');
+	const page_content = document.body.querySelector('.page-content');
 	if (!page_content) return;
 
-	let error_marvin = page_content.querySelector(
+	const error_marvin = page_content.querySelector(
 		'.error-page-marvin:not([data-bleh])',
 	);
 	if (!error_marvin) return;
@@ -21,11 +21,11 @@ export function bleh_error() {
 	page.state.error = true;
 	error_marvin.setAttribute('data-bleh', 'true');
 
-	let error_content = page_content.querySelector('h1');
+	const error_content = page_content.querySelector('h1');
 
-	let back_link = page_content.querySelector('a');
+	const back_link = page_content.querySelector('a');
 
-	let reason = page_content.querySelector('p');
+	const reason = page_content.querySelector('p');
 
 	page_content.classList.add('has-error');
 	render(

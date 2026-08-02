@@ -7,7 +7,7 @@ import {
 import { api_key, auth, page, root } from '@/build/page';
 import { create_badge, load_badges } from '@/components/shared/badge';
 import { dialog } from '@/components/dialog/dialog';
-import { lang, lang_info, tl, trans } from '@/build/trans';
+import { lang_info, tl, trans } from '@/build/trans';
 import { setting } from '@/components/settings/settings';
 import { DateTime } from 'luxon';
 import { version } from '@/main';
@@ -39,7 +39,7 @@ export function general() {
 
 	let badge_count = 0;
 
-	let badges = load_badges(auth.name);
+	const badges = load_badges(auth.name);
 	if (badges) badge_count = badges.length;
 	//if (auth.pro) badge_count++;
 

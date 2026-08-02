@@ -1,15 +1,12 @@
-import { auth, page, root } from '@/build/page';
+import { page, root } from '@/build/page';
 import { lang, tl, trans } from '@/build/trans';
 import { html, render } from 'lighterhtml';
 import { icon, icons } from '../shared/icon';
 import tippy from 'tippy.js';
 import { prep_chart_colours } from '../music/chart';
 import { Chart } from 'chart.js';
-import { log } from '@/build/log';
 import { DateTime } from 'luxon';
 import { sanitise } from '@/build/tools';
-import { CountUp } from 'countup.js';
-import { Odometer } from 'odometer_countup';
 
 export interface music_stat {
 	text?: string;
@@ -23,7 +20,7 @@ export function music_summary(
 	scrobbles: music_stat,
 	metascore: music_stat,
 ) {
-	let graph_blocks: HTMLElement[] = [];
+	const graph_blocks: HTMLElement[] = [];
 	page.state.graph_blocks = graph_blocks;
 
 	let title;
@@ -145,24 +142,24 @@ function summary_block(type: string, stat: music_stat) {
 }
 
 function bleh_music_chart() {
-	let trend = page.structure.container!.querySelector('.listener-trend');
+	const trend = page.structure.container!.querySelector('.listener-trend');
 
 	if (!trend) return;
 
-	let table = trend.querySelector('tbody');
+	const table = trend.querySelector('tbody');
 
-	let days = table.querySelectorAll('tr');
+	const days = table.querySelectorAll('tr');
 	if (days.length == 0) return;
 
-	let labels: DateTime[] = [];
-	let values: number[] = [];
+	const labels: DateTime[] = [];
+	const values: number[] = [];
 
 	let has_seen_more_than_0 = false;
 	days.forEach((day, index) => {
 		if (!day) return;
 
 		//let label = day.querySelector('time').textContent.trim();
-		let label = DateTime.fromISO(
+		const label = DateTime.fromISO(
 			day.querySelector('time').getAttribute('datetime'),
 		);
 		let value = day.querySelector('.js-value');
@@ -204,13 +201,13 @@ export function bleh_music_chart_render() {
 
 	prep_chart_colours();
 
-	let scrobble_canvas_container = document.createElement('div');
+	const scrobble_canvas_container = document.createElement('div');
 	scrobble_canvas_container.classList.add(
 		'scrobble-canvas-container',
 		'icon-mask',
 	);
 
-	let scrobble_canvas = document.createElement('canvas');
+	const scrobble_canvas = document.createElement('canvas');
 	scrobble_canvas.classList.add('scrobble-canvas');
 
 	let gradient = scrobble_canvas

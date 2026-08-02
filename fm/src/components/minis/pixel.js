@@ -59,7 +59,7 @@ export function pixel({
 				return btn;
 			}}
 			            ${() => {
-				let btn = html.node`
+				const btn = html.node`
                             <button class="btn chibi icon colourful" data-type="starred_friend" data-is-shortcut=${
 					settings.starred_friend != ''
 				} onclick=${() => {
@@ -202,7 +202,7 @@ export function pixel({
 			0.3,
 		];
 		let pixelation = 0;
-		let hint = 0;
+		const hint = 0;
 		let canvas;
 		let timer;
 		let actions;

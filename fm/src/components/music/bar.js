@@ -6,7 +6,7 @@ export function chartlist_bar(value, max) {
 	let slug;
 	let val;
 
-	let count_bar = html.node`
+	const count_bar = html.node`
         <div class="chartlist-count-bar">
             <a class="chartlist-count-bar-link">
                 <span class="chartlist-count-bar-slug" data-max-stat-value="${max}" data-stat-value="${value}" style="width: ${
@@ -18,7 +18,7 @@ export function chartlist_bar(value, max) {
         </div>
     `;
 
-	let parsed_scrobble_as_rank = parse_scrobbles_as_rank(value);
+	const parsed_scrobble_as_rank = parse_scrobbles_as_rank(value);
 
 	count_bar.setAttribute(
 		'data-bleh--scrobble-milestone',

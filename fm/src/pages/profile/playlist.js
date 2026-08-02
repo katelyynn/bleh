@@ -17,7 +17,7 @@ export async function bleh_playlist() {
 		log('unable to find elements', 'page structure');
 	}
 
-	let content_top = document.body.querySelector('.content-top');
+	const content_top = document.body.querySelector('.content-top');
 
 	checkup_page_structure(false, content_top);
 	log('status is', 'page', 'info', page);

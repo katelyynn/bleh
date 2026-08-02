@@ -23,7 +23,7 @@ import { ff } from '../settings/sku';
 export function append_style() {
 	document.documentElement.classList.add('florence-supports-loading');
 
-	for (var member in settings) delete settings[member];
+	for (let member in settings) delete settings[member];
 	Object.assign(settings, JSON.parse(localStorage.getItem('bleh')));
 
 	const split = window.location.pathname.replace(root, '').split('/');
@@ -53,6 +53,9 @@ export function append_style() {
 	};
 }
 
+/**
+ * @param {string} v
+ */
 function parse_version(v) {
 	const parts = v.split('.').map(Number);
 
@@ -61,6 +64,10 @@ function parse_version(v) {
 	return parts.slice(0, 3);
 }
 
+/**
+ * @param {string} a
+ * @param {string} b
+ */
 function compare_versions(a, b) {
 	const [a_maj, a_min, a_patch] = parse_version(a);
 	const [b_maj, b_min, b_patch] = parse_version(b);
@@ -72,6 +79,10 @@ function compare_versions(a, b) {
 	return 0;
 }
 
+/**
+ * @param {string} current
+ * @param {string} latest
+ */
 export function update_comparison(current, latest) {
 	return compare_versions(latest, current) === 1;
 }
@@ -97,7 +108,7 @@ export function update_check(force = false, btn = null, func = null) {
 
 	if (btn) btn.setAttribute('disabled', '');
 
-	let url =
+	const url =
 		`https://katelyynn.github.io/bleh/fm/src/build/build.json?${Date.now()}`;
 
 	/*let notification = notify({
@@ -118,10 +129,10 @@ export function update_check(force = false, btn = null, func = null) {
 			if (btn) btn.removeAttribute('disabled');
 
 			try {
-				let data = JSON.parse(text);
+				const data = JSON.parse(text);
 				console.log(data);
 
-				let update_required = update_comparison(
+				const update_required = update_comparison(
 					version.build,
 					data.build,
 				);
@@ -129,7 +140,7 @@ export function update_check(force = false, btn = null, func = null) {
 				set_storage(keys.update_to_version, data.build);
 				set_storage(keys.update_checked_date, new Date().toString());
 
-				let next = new Date();
+				const next = new Date();
 				next.setHours(next.getHours() + 2);
 
 				set_storage(keys.update_next_check_date, next.toString());

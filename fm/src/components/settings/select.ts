@@ -9,10 +9,10 @@ import { tl, trans } from '@/build/trans';
 import tippy from 'tippy.js';
 import { setting_value } from '@/build/config';
 
-unsafeWindow._update_inbuilt_select = function (id, value) {
+unsafeWindow._update_inbuilt_select = function (id: string, value: string) {
 	update_inbuilt_select(id, value);
 };
-export function update_inbuilt_select(id, value) {
+export function update_inbuilt_select(id: string, value: string) {
 	document.body.setAttribute(`data-bleh--inbuilt-${id}`, value);
 }
 
@@ -64,7 +64,7 @@ export function select({
 		initial = values.find((v) => 'value' in v)?.value ?? initial;
 	}
 
-	let container = html.node`
+	const container = html.node`
         <div class="select-wrap custom-selector">
             <select ref=${(
 		el: HTMLSelectElement,
@@ -93,7 +93,7 @@ export function select({
         </div>
     `;
 
-	let menu = tippy(button, {
+	const menu = tippy(button, {
 		theme: 'select-menu',
 		content: html.node``,
 		placement: 'bottom',
@@ -178,7 +178,7 @@ export function select({
 							return html.node`
                                 <button class="btn dropdown-menu-clickable-item icon-mask" data-type=${value.type} onclick=${() => {
 								menu.hide();
-								value.action();
+								value.action!();
 							}}>
                                     ${value.text}
                                 </button>
@@ -213,7 +213,7 @@ export function select({
 }
 
 export function select_prepare(element: HTMLSelectElement) {
-	let values: select_option[] = [];
+	const values: select_option[] = [];
 
 	element.querySelectorAll('option').forEach((option: HTMLOptionElement) => {
 		values.push({
@@ -240,32 +240,18 @@ export function select_prepare_convert_from_setting(list) {
 	}));
 }
 
-function select_fail(e = null) {
-	return html.node`
-        <div class="alert alert-error">
-            ${
-		tl(trans.value_failed_to_load).replace(
-			'{v}',
-			tl(trans.select_component),
-		)
-	}
-            ${e ? html`<br />${e.message}` : ''}
-        </div>
-    `;
-}
-
 export function custom_select(select, element_to_append) {
 	console.info(select);
-	let id = select.getAttribute('id');
-	let value = select.value;
-	let value_objects = select.querySelectorAll('option');
+	const id = select.getAttribute('id');
+	const value = select.value;
+	const value_objects = select.querySelectorAll('option');
 
-	let menu_list = document.createElement('div');
+	const menu_list = document.createElement('div');
 	value_objects.forEach((object) => {
-		let object_value = object.getAttribute('value');
-		let object_text = object.textContent;
+		const object_value = object.getAttribute('value');
+		const object_text = object.textContent;
 
-		let item = document.createElement('button');
+		const item = document.createElement('button');
 		item.classList.add(
 			'btn',
 			'dropdown-menu-clickable-item',
@@ -282,7 +268,7 @@ export function custom_select(select, element_to_append) {
 		menu_list.appendChild(item);
 	});
 
-	let button = document.createElement('button');
+	const button = document.createElement('button');
 	button.classList.add('select-button');
 	button.setAttribute('id', `select-${id}`);
 	button.setAttribute('type', 'button');
@@ -290,7 +276,7 @@ export function custom_select(select, element_to_append) {
 		`[data-value="${value}"]`,
 	).textContent;
 
-	let theme_menu_item = tippy(button, {
+	tippy(button, {
 		theme: 'select-menu',
 		content: html.node([menu_list.innerHTML]),
 		placement: 'bottom',
@@ -306,15 +292,18 @@ export function custom_select(select, element_to_append) {
 	element_to_append.appendChild(button);
 }
 
-unsafeWindow._set_custom_select_value = function (select_id, value) {
-	let select = document.getElementById(select_id);
+unsafeWindow._set_custom_select_value = function (
+	select_id: string,
+	value: string,
+) {
+	const select = document.getElementById(select_id)! as HTMLSelectElement;
 
 	select.value = value;
 
 	console.info(select, `#select-${select_id}`);
 
 	update_custom_select(
-		document.getElementById(`select-${select_id}`)._tippy.popper,
+		document.getElementById(`select-${select_id}`)!._tippy.popper,
 		value,
 		select_id,
 	);
@@ -328,7 +317,7 @@ function update_custom_select(
 	value = '',
 	select_id = '',
 ) {
-	let btns = element.querySelectorAll('.dropdown-menu-clickable-item');
+	const btns = element.querySelectorAll('.dropdown-menu-clickable-item');
 	btns.forEach((btn) => {
 		if (btn.getAttribute('data-value') != value) {
 			btn.classList.remove('active');
@@ -342,7 +331,7 @@ function update_custom_select(
                 behavior: 'smooth'
             });*/
 
-			let sel_button = document.body.querySelector(
+			const sel_button = document.body.querySelector(
 				`#select-${select_id}`,
 			);
 
@@ -354,7 +343,8 @@ function update_custom_select(
 	});
 }
 
-unsafeWindow._update_inbuilt_selection = function (id, index) {
-	document.getElementById(id).selectedIndex = index;
-	update_inbuilt_select(id, document.getElementById(id).value);
+unsafeWindow._update_inbuilt_selection = function (id: string, index: number) {
+	const select = document.getElementById(id)! as HTMLSelectElement;
+	select.selectedIndex = index;
+	update_inbuilt_select(id, select.value);
 };

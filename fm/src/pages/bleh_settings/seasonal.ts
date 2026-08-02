@@ -16,7 +16,7 @@ export function seasonal() {
 	const state = page.state.seasons;
 
 	render(
-		page.structure.main,
+		page.structure.main!,
 		html`
 			<div class="bleh--panel">
 			    ${seasonal_timeline(

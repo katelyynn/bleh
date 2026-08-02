@@ -33,7 +33,7 @@ export async function bleh_inbox() {
 		log('unable to find elements', 'page structure');
 	}
 
-	let content_top = document.body.querySelector('.content-top');
+	const content_top = document.body.querySelector('.content-top');
 
 	const page_alert = content_top.querySelector('.notification > .alert');
 
@@ -87,11 +87,11 @@ export async function bleh_inbox() {
 	messages_tab.querySelector(':scope > a').textContent = tl(trans.messages);
 
 	if (page.subpage == 'notifications') {
-		let form = page.structure.container.querySelector('form');
-		let notifications = page.structure.container.querySelector(
+		const form = page.structure.container.querySelector('form');
+		const notifications = page.structure.container.querySelector(
 			'.inbox-notifications',
 		);
-		let pagination = page.structure.container.querySelector('.pagination');
+		const pagination = page.structure.container.querySelector('.pagination');
 
 		page.structure.main.appendChild(html.node`
             <section class="inbox-panel notifications-panel">
@@ -109,7 +109,7 @@ export async function bleh_inbox() {
 		page.subpage == 'message_overview' || page.subpage == 'sent_message' ||
 		page.subpage == 'message_reply'
 	) {
-		let inbox = page.structure.container.querySelector(
+		const inbox = page.structure.container.querySelector(
 			'.inbox-message-view',
 		);
 		page.structure.main.appendChild(inbox);
@@ -280,7 +280,7 @@ export async function bleh_inbox() {
 		const your_badge = patch_avatar(your_avatar, auth.name);
 		style_name_from_badge(sender_panel_own, your_badge);
 	} else if (page.subpage.endsWith('overview')) {
-		let inbox = page.structure.container.querySelector('.inbox');
+		const inbox = page.structure.container.querySelector('.inbox');
 		page.structure.main.appendChild(inbox);
 
 		if (page_alert) inbox.insertBefore(page_alert, inbox.firstChild);
@@ -321,7 +321,7 @@ export async function bleh_inbox() {
 			},
 		}));
 	} else if (page.subpage == 'compose') {
-		let inbox = page.structure.container.querySelector(
+		const inbox = page.structure.container.querySelector(
 			'.inbox-compose-view',
 		);
 		inbox.classList = 'inbox-message-view';
@@ -407,7 +407,7 @@ export async function bleh_inbox() {
 		const your_badge = patch_avatar(your_avatar, auth.name);
 		style_name_from_badge(sender_panel_own, your_badge);
 	} else {
-		let inbox = page.structure.container.querySelector('.inbox');
+		const inbox = page.structure.container.querySelector('.inbox');
 		page.structure.main.appendChild(inbox);
 
 		if (alert) inbox.appendChild(alert);

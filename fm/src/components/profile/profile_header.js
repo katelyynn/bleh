@@ -31,7 +31,7 @@ export function redesign_profile_header(is_own_profile, is_following) {
 
 	const is_sponsor_host = page.name == sponsor_list.related.account_name;
 
-	let base_header = document.body.querySelector('.header-info-secondary');
+	const base_header = document.body.querySelector('.header-info-secondary');
 	if (!base_header) return;
 
 	// taste
@@ -41,12 +41,12 @@ export function redesign_profile_header(is_own_profile, is_following) {
 	let taste_formal = 'NONE';
 
 	if (!is_own_profile && !is_sponsor_host) {
-		let taste_meter = base_header.querySelector('.tasteometer');
+		const taste_meter = base_header.querySelector('.tasteometer');
 
 		if (taste_meter) {
 			taste = taste_meter.classList[1].replace('tasteometer-compat-', '');
 
-			let artists = taste_meter.querySelectorAll('a');
+			const artists = taste_meter.querySelectorAll('a');
 			artists.forEach((artist) => {
 				taste_artists.push(
 					romanise(correct_artist(artist.getAttribute('title'))),
@@ -65,7 +65,7 @@ export function redesign_profile_header(is_own_profile, is_following) {
 	}
 
 	// create new
-	let profile_header = html.node`
+	const profile_header = html.node`
         <section class="side-actions" />
     `;
 
@@ -110,7 +110,7 @@ export function redesign_profile_header(is_own_profile, is_following) {
 
 	if (!is_own_profile) {
 		// message
-		let msg_button = document.body.querySelector('.header-message-user');
+		const msg_button = document.body.querySelector('.header-message-user');
 		if (msg_button) {
 			if (page.name != sponsor_list.related.account_name) {
 				create_profile_top_item(profile_header, {
@@ -243,7 +243,7 @@ export function redesign_profile_header(is_own_profile, is_following) {
 
 		let details_btn;
 
-		let taste_wrap = html.node`
+		const taste_wrap = html.node`
             <div class="taste ${
 			taste != 'super' && taste != 'very_low' ? 'icon' : ''
 		}">
