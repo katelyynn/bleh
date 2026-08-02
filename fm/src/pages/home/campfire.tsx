@@ -25,7 +25,7 @@ import { load_recent_tracks } from '../home';
 import { is_sponsor, sponsor } from '@/components/sponsor';
 import { DateTime } from 'luxon';
 import { icon, icons } from '@/components/shared/icon';
-import { under_construction } from '@/components/shared/construction';
+import { UnderConstruction } from '@/components/shared/construction.tsx';
 
 interface album {
 	image: string;
@@ -517,5 +517,5 @@ function campfire_cta(container: Element) {
     `;
 	container.after(cta);
 
-	cta.after(under_construction());
+	cta.after(<UnderConstruction />);
 }

@@ -203,6 +203,32 @@ export function icon({ name, identifier, use_mask = true }: icon) {
 	);
 }
 
+interface IconProps {
+	name: string;
+	identifier?: string;
+	mask?: boolean;
+}
+
+export function Icon({
+	name,
+	identifier,
+	mask = true,
+}: IconProps) {
+	return (
+		<span
+			class={[
+				'bleh-icon',
+				`bleh-icon-${name}`,
+				mask && 'use-mask',
+				identifier && `bleh-icon-${identifier}`,
+			]}
+			style={icon_mask({ name })}
+		>
+			{name} (icon)
+		</span>
+	);
+}
+
 export function icon_mask({ name }: { name?: string }) {
 	if (name == 'inherit') return '';
 
