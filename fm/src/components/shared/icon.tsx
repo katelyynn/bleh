@@ -187,18 +187,11 @@ interface icon {
 }
 
 export function icon({ name, identifier, use_mask = true }: icon) {
-	const elem = html.node`
-        <span class="bleh-icon bleh-icon-${name}" style="${
-		icon_mask({ name })
-	}">
-            ${name} (icon)
-        </span>
-    `;
-
-	if (use_mask) elem.classList.add('use-mask');
-	if (identifier) elem.classList.add(`bleh-icon-${identifier}`);
-
-	return elem;
+	return (
+		<span className={`bleh-icon bleh-icon-${name} ${use_mask ? 'use-mask' : ''} ${identifier ? `bleh-icon-${identifier}` : ''}`} style={icon_mask({ name })}>
+			{name} (icon)
+		</span>
+	);
 }
 
 export function icon_mask({ name }: { name?: string }) {

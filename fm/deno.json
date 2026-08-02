@@ -60,7 +60,10 @@
 		"module": "nodenext",
 		"moduleResolution": "bundler",
 		"jsx": "react-jsx",
-		"jsxImportSource": "jsx-dom"
+		"jsxImportSource": "jsx-dom",
+		"types": [
+			"jsx-dom"
+		]
 	},
 	"fmt": {
 		"singleQuote": true,
