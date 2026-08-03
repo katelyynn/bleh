@@ -11,16 +11,25 @@ import { tl } from '@/build/trans.ts';
 import { save_setting } from '@/components/settings/settings.tsx';
 
 interface SettingSwitchProps {
+	ref?: ReturnType<typeof createRef>;
 	bind?: string;
 	name?: string;
 	body?: string;
+	onChange?: (val: boolean) => void;
 	disabled?: boolean;
 }
 
+type SettingSwitchElement = HTMLDivElement & {
+	update: () => void,
+	value: boolean
+};
+
 export function SettingSwitch({
+	ref,
 	bind,
 	name,
 	body,
+	onChange,
 	disabled,
 }: SettingSwitchProps) {
 	let value = bind ? settings[bind] as boolean : true;
@@ -29,6 +38,8 @@ export function SettingSwitch({
 	const store = get_from_store(bind);
 
 	function update() {
+		disabled = false;
+		
 		let incompatible = false;
 		let incompatible_list: string[] = [];
 
@@ -51,7 +62,11 @@ export function SettingSwitch({
 		elem.replaceChildren(
 			<>
 				<SettingLabel name={name} body={body} store={store} />
-				<Switch className='setting-inner' checked={value} ref={checkbox} />
+				<Switch
+					className='setting-inner'
+					checked={value}
+					ref={checkbox}
+				/>
 				{incompatible_list.length > 0 && (
 					<SettingIncompatibleWith list={incompatible_list} />
 				)}
@@ -69,9 +84,11 @@ export function SettingSwitch({
 				checkbox.current.checked = value;
 
 				if (bind) save_setting(bind, value);
+				if (onChange) onChange(value);
 			}}
+			ref={ref}
 		/>
-	);
+	) as SettingSwitchElement;
 
 	update();
 
@@ -80,6 +97,8 @@ export function SettingSwitch({
 			return value;
 		},
 	});
+
+	elem.update = update;
 
 	return elem;
 }
