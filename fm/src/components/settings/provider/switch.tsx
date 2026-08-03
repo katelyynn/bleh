@@ -2,6 +2,7 @@ import { createRef, ReactNode } from 'jsx-dom';
 import {
 	get_from_store,
 	is_incompatible,
+	SettingIncompatibleWith,
 	SettingLabel,
 } from '@/components/settings/provider/main.tsx';
 import { settings } from '@/build/config.ts';
@@ -29,7 +30,7 @@ export function SettingSwitch({
 
 	function update() {
 		let incompatible = false;
-		let incompatible_list = [];
+		let incompatible_list: string[] = [];
 
 		if (store) {
 			({ incompatible, list: incompatible_list } = is_incompatible(
@@ -46,6 +47,16 @@ export function SettingSwitch({
 		} else {
 			elem.removeAttribute('disabled');
 		}
+
+		elem.replaceChildren(
+			<>
+				<SettingLabel name={name} body={body} store={store} />
+				<Switch className='setting-inner' checked={value} ref={checkbox} />
+				{incompatible_list.length > 0 && (
+					<SettingIncompatibleWith list={incompatible_list} />
+				)}
+			</>,
+		);
 	}
 
 	const elem = (
@@ -59,10 +70,7 @@ export function SettingSwitch({
 
 				if (bind) save_setting(bind, value);
 			}}
-		>
-			<SettingLabel name={name} body={body} store={store} />
-			<Switch checked={value} ref={checkbox} />
-		</div>
+		/>
 	);
 
 	update();

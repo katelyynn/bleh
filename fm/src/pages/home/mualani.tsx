@@ -142,6 +142,12 @@ export function mualani() {
 							<SettingSwitch bind='underline_links' />
 						</SettingGroup>
 					</DemoItem>
+					<DemoItem label='SettingSwitch (testing compatibility)'>
+						<SettingGroup>
+							<SettingSwitch bind='format_guest_features' />
+							<SettingSwitch bind='show_guest_features' />
+						</SettingGroup>
+					</DemoItem>
 				</DemoGrid>
 			</section>
 		</>,

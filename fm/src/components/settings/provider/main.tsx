@@ -1,5 +1,5 @@
 import { setting_instance, settings, settings_store } from '@/build/config.ts';
-import { tl } from '@/build/trans.ts';
+import { tl, trans } from '@/build/trans.ts';
 
 interface SettingLabelProps {
 	name?: string;
@@ -19,7 +19,7 @@ export function SettingLabel({
 
 	if (!name) {
 		return (
-			<div class='heading'>
+			<div class={['heading', 'setting-inner']}>
 				<div class='alert alert-error no-margin'>
 					No name provided
 				</div>
@@ -28,7 +28,7 @@ export function SettingLabel({
 	}
 
 	return (
-		<div class='heading'>
+		<div class={['heading', 'setting-inner']}>
 			<h5 class='setting-name'>{name}</h5>
 			{body && <p class='setting-body'>{body}</p>}
 		</div>
@@ -70,4 +70,22 @@ export function is_incompatible(store: setting_instance) {
 		incompatible,
 		list,
 	};
+}
+
+export function SettingIncompatibleWith({
+	list,
+}: { list: string[] }) {
+	return (
+		<div class='setting-incompatible-with'>
+			{tl(trans.incompatible_with_value, {
+				v: list.map((v: string) => {
+					if (settings_store[v]?.title) {
+						return tl(settings_store[v].title);
+					}
+
+					return v;
+				}).join(', '),
+			})}
+		</div>
+	);
 }

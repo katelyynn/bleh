@@ -48,6 +48,10 @@
 	}
 }
 
+.setting-inner {
+	opacity: var(--opacity, unset);
+}
+
 .setting {
 	position: relative;
 
@@ -61,7 +65,6 @@
 		flex-direction: column;
 	}
 
-	opacity: var(--opacity, unset);
 	pointer-events: var(--events, auto);
 	cursor: var(--cursor, unset);
 
@@ -979,4 +982,11 @@
 			opacity: 1;
 		}
 	}
+}
+
+
+.setting-incompatible-with {
+	flex-basis: 100%;
+	margin-top: 2px;
+	font-size: 13px;
 }
