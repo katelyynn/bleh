@@ -1,5 +1,5 @@
 {
-    version: "2026.0729",
+    version: "2026.0803",
     related: {
         account_name: "kateshapedbox",
         link: "https://katelyn.moe/sponsor",
@@ -367,6 +367,10 @@
         "DoodleJumpFan": {},
         "kohakudoori": {},
         "last_aezi": {},
-        "qwqkami": {}
+        "qwqkami": {},
+        "ohmaigotto": {
+            "sponsor": false,
+            "contributor": true
+        }
     }
 }
