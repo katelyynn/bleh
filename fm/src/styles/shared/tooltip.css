@@ -14,6 +14,7 @@
 	text-align: center;
 
 	max-width: var(--max-tooltip-width) !important;
+	z-index: 9999;
 
 	.tooltip-sub {
 		font-size: 12px;

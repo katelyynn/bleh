@@ -117,7 +117,7 @@ export class TooltipInstance<
 		}
 	}
 
-	private mount() {
+	public mount() {
 		this.unmount();
 		this.element = document.body.appendChild(this.element);
 		this.is_mounted = true;
@@ -131,7 +131,7 @@ export class TooltipInstance<
 		);
 	}
 
-	private unmount() {
+	public unmount() {
 		if (this.cleanup && this.element.parentNode) {
 			this.cleanup();
 			this.element = this.element.parentNode.removeChild(this.element);
@@ -190,7 +190,41 @@ export function menu_tooltip<
 	host.addEventListener('click', () => {
 		tooltip.show();
 		const listener: EventListener = ({ target }) => {
-			if (target != tooltip.element && target != host) {
+			if (
+				target != tooltip.element && target != host &&
+				!tooltip.element.contains(target) &&
+				!target.closest('.tippy-box')
+			) {
+				tooltip.hide();
+				document.body.removeEventListener('click', listener);
+			}
+		};
+		document.body.addEventListener('click', listener);
+	});
+	return tooltip;
+}
+
+/**
+ * tooltip with context menu behaviour
+ */
+export function context_menu_tooltip<
+	H extends ReactElement,
+	E extends ReactElement,
+>(
+	host: H,
+	element: E,
+	config: TooltipConfig = {},
+) {
+	const tooltip = new TooltipInstance(host, element, config);
+	host.addEventListener('contextmenu', (e) => {
+		e.preventDefault();
+		tooltip.show();
+		const listener: EventListener = ({ target }) => {
+			if (
+				target != tooltip.element && target != host &&
+				!tooltip.element.contains(target) &&
+				!target.closest('.tippy-box')
+			) {
 				tooltip.hide();
 				document.body.removeEventListener('click', listener);
 			}
