@@ -5,12 +5,14 @@
  */
 
 import { DateTime } from 'luxon';
-import tippy from 'tippy.js';
+import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
 
 export function time_tooltip(elem: Element, time: DateTime) {
-	tippy(elem, {
-		content: time.toLocaleString(DateTime.DATE_MED),
-	});
-
+	hover_tooltip(
+		elem,
+		<Tooltip>
+			{time.toLocaleString(DateTime.DATE_MED)}
+		</Tooltip>,
+	);
 	return elem;
 }

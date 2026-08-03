@@ -37,11 +37,15 @@ import {
 import { html, render } from 'lighterhtml';
 import { other_listener } from '@/components/profile/profile_shortcut';
 import { setting } from '@/components/settings/settings';
-import tippy from 'tippy.js';
 import { open_starred_friend_window } from '@/pages/profile/profile';
 import { artist_title, page_header_avatar } from '@/components/music/header';
 import { header_colour } from '@/components/page/colour';
 import { oracle_process } from '@/components/music/oracle';
+import {
+	hover_tooltip,
+	menu_tooltip,
+	Tooltip,
+} from '@/components/shared/tooltips.tsx';
 
 export function bleh_artists() {
 	const artist_header = document.body.querySelector(
@@ -175,15 +179,17 @@ export function bleh_artists() {
 		]);
 
 		if (multi_info_box) {
-			tippy(multi_info_box, {
-				content: tl(trans.artists_tooltip),
-			});
+			hover_tooltip(
+				multi_info_box,
+				<Tooltip>{tl(trans.artists_tooltip)}</Tooltip>,
+			);
 		}
 
 		if (position) {
-			tippy(position, {
-				content: tl(trans.view_the_charts),
-			});
+			hover_tooltip(
+				position,
+				<Tooltip>{tl(trans.view_the_charts)}</Tooltip>,
+			);
 		}
 
 		if (avatar) register_background(avatar.getAttribute('content'));
@@ -250,23 +256,18 @@ export function bleh_artists() {
                 </div>
             `);
 
-			tippy(settings_btn, {
-				theme: 'window',
-				content: html.node`
-                    <div class="dialog-settings">
-                        <div class="setting-group blend">
-                            ${setting({ id: 'format_guest_features' })}
-                            ${setting({ id: 'show_guest_features' })}
-                            ${setting({ id: 'count_bar_right' })}
-                        </div>
-                    </div>
-                `,
-				placement: 'bottom',
-				interactive: true,
-				interactiveBorder: 10,
-				trigger: 'click',
-				appendTo: document.body,
-			});
+			menu_tooltip(
+				settings_btn,
+				<Tooltip theme='window'>
+					<div class='dialog-settings'>
+						<div class='setting-group blend'>
+							{setting({ id: 'format_guest_features' })}
+							{setting({ id: 'show_guest_features' })}
+							{setting({ id: 'count_bar_right' })}
+						</div>
+					</div>
+				</Tooltip>,
+			);
 		}
 
 		const top_albums = page.structure.main.querySelector('#top-albums');
@@ -524,22 +525,17 @@ function bleh_artist_tracks() {
                 </div>
             `);
 
-		tippy(settings_btn, {
-			theme: 'window',
-			content: html.node`
-                <div class="dialog-settings">
-                    <div class="setting-group blend">
-                        ${setting({ id: 'format_guest_features' })}
-                        ${setting({ id: 'show_guest_features' })}
-                    </div>
-                </div>
-            `,
-			placement: 'bottom',
-			interactive: true,
-			interactiveBorder: 10,
-			trigger: 'click',
-			appendTo: document.body,
-		});
+		menu_tooltip(
+			settings_btn,
+			<Tooltip theme='window'>
+				<div class='dialog-settings'>
+					<div class='setting-group blend'>
+						{setting({ id: 'format_guest_features' })}
+						{setting({ id: 'show_guest_features' })}
+					</div>
+				</div>
+			</Tooltip>,
+		);
 	}
 }
 
