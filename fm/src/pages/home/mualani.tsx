@@ -31,6 +31,7 @@ import { SettingSwitch } from '@/components/settings/provider/switch.tsx';
 import { Button } from '@/components/button/button.tsx';
 import { SeeMore } from '@/components/text/see_more.tsx';
 import { Keybind } from '@/components/settings/clickables/keybind.tsx';
+import { Input } from '@/components/input/input.tsx';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -207,6 +208,18 @@ export function mualani() {
 					<DemoItem label='Keybind (interactable)'>
 						<Keybind value='⌘' interact />
 						<Keybind value='A' interact />
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section>
+				<DemoGrid>
+					<DemoItem label='Input'>
+						<Input />
+						<Input type='number' />
+						<Input type='password' />
+					</DemoItem>
+					<DemoItem label='Input (textarea)'>
+						<Input type='textarea' />
 					</DemoItem>
 				</DemoGrid>
 			</section>
