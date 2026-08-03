@@ -20,8 +20,8 @@ interface SettingSwitchProps {
 }
 
 type SettingSwitchElement = HTMLDivElement & {
-	update: () => void,
-	value: boolean
+	update: () => void;
+	value: boolean;
 };
 
 export function SettingSwitch({
@@ -39,9 +39,9 @@ export function SettingSwitch({
 
 	function update() {
 		disabled = false;
-		
+
 		let incompatible = false;
-		let incompatible_list: string[] = [];
+		let incompatible_list: Record<string, boolean> = {};
 
 		if (store) {
 			({ incompatible, list: incompatible_list } = is_incompatible(
@@ -67,7 +67,7 @@ export function SettingSwitch({
 					checked={value}
 					ref={checkbox}
 				/>
-				{incompatible_list.length > 0 && (
+				{Object.keys(incompatible_list).length > 0 && (
 					<SettingIncompatibleWith list={incompatible_list} />
 				)}
 			</>,

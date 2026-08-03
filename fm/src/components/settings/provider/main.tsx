@@ -1,5 +1,6 @@
 import { setting_instance, settings, settings_store } from '@/build/config.ts';
 import { tl, trans } from '@/build/trans.ts';
+import { Icon, icons } from '@/components/shared/icon.tsx';
 
 interface SettingLabelProps {
 	name?: string;
@@ -43,7 +44,7 @@ export function get_from_store(id?: string) {
 
 export function is_incompatible(store: setting_instance) {
 	let incompatible = false;
-	const list: string[] = [];
+	const list: Record<string, boolean> = {};
 
 	if (!store.incompatible) {
 		return {
@@ -56,12 +57,12 @@ export function is_incompatible(store: setting_instance) {
 		if (Array.isArray(val)) {
 			if (val.includes(settings[key])) {
 				incompatible = true;
-				list.push(key);
+				list[key] = val;
 			}
 		} else {
 			if (JSON.stringify(val) == JSON.stringify(settings[key])) {
 				incompatible = true;
-				list.push(key);
+				list[key] = val;
 			}
 		}
 	});
@@ -74,18 +75,28 @@ export function is_incompatible(store: setting_instance) {
 
 export function SettingIncompatibleWith({
 	list,
-}: { list: string[] }) {
+}: { list: Record<string, boolean> }) {
 	return (
-		<div class='setting-incompatible-with'>
-			{tl(trans.incompatible_with_value, {
-				v: list.map((v: string) => {
-					if (settings_store[v]?.title) {
-						return tl(settings_store[v].title);
+		<div class='setting-incompatible-with colourful'>
+			<Icon name={icons.error} identifier='setting-incompatible-with' />
+			<strong class='setting-incompatible-with-text'>
+				{tl(trans.incompatible)}
+			</strong>
+			<p class='setting-incompatible-with-list'>
+				{Object.entries(list).map(([key, val]) => {
+					let title = key;
+
+					if (settings_store[key]?.title) {
+						title = tl(settings_store[key].title);
 					}
 
-					return v;
-				}).join(', '),
-			})}
+					if (val == true) {
+						return tl(trans.value_is_enabled, { v: title });
+					}
+
+					return tl(trans.value_is_disabled, { v: title });
+				}).join(', ')}
+			</p>
 		</div>
 	);
 }

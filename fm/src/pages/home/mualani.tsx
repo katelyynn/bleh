@@ -172,6 +172,7 @@ export function mualani() {
 								bind='show_guest_features'
 								ref={show_guest_features}
 							/>
+							<SettingSwitch name='example' />
 						</SettingGroup>
 					</DemoItem>
 				</DemoGrid>
