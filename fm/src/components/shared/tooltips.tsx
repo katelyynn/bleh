@@ -201,7 +201,7 @@ export function menu_tooltip<
 }
 
 export function Tooltip(
-	{ class: className, theme = 'generic', ...props }:
+	{ class: className, theme = 'generic', children, ...props }:
 		& { class?: string; theme?: string }
 		& Omit<HTMLAttributes<HTMLDivElement>, 'className' | 'class'>,
 ) {
@@ -210,6 +210,10 @@ export function Tooltip(
 			data-theme={theme}
 			className={['tippy-box', className]}
 			{...props}
-		/>
+		>
+			<div className='tippy-content'>
+				{children}
+			</div>
+		</div>
 	);
 }
