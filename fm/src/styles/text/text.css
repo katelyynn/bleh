@@ -269,8 +269,10 @@ pre {
 }
 
 .key-bind-input {
-	position: fixed;
-	inset: -10000000px 0 0 0;
+	position: absolute;
+	inset: 0;
+	opacity: 0;
+	pointer-events: none;
 	appearance: none;
 	border: none;
 	background: none;
