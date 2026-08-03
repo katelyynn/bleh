@@ -30,6 +30,7 @@ import { Checkbox } from '@/components/settings/clickables/checkbox.tsx';
 import { SettingSwitch } from '@/components/settings/provider/switch.tsx';
 import { Button } from '@/components/button/button.tsx';
 import { SeeMore } from '@/components/text/see_more.tsx';
+import { Keybind } from '@/components/settings/clickables/keybind.tsx';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -194,6 +195,14 @@ export function mualani() {
 								}}
 							/>
 						</SettingGroup>
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section>
+				<DemoGrid>
+					<DemoItem label='Keybind'>
+						<Keybind value='⌘' />
+						<Keybind value='A' />
 					</DemoItem>
 				</DemoGrid>
 			</section>
