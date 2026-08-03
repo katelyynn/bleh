@@ -59,6 +59,11 @@ export class TooltipInstance<
 	private cleanup: (() => void) | null = null;
 	private current_animation: Animation | null = null;
 	public is_mounted = false;
+	/**
+	 * unique identifier for `element` that will be used for
+	 * `host`'s `aria-describedby` attribute
+	 */
+	private uuid = crypto.randomUUID();
 
 	public constructor(
 		host: H,
@@ -66,6 +71,7 @@ export class TooltipInstance<
 		config: TooltipConfig = {},
 	) {
 		this.host = host;
+		this.host.setAttribute('aria-expanded', 'false');
 		this.element = element;
 		this.config = {
 			placement: 'bottom',
@@ -126,8 +132,11 @@ export class TooltipInstance<
 
 	public mount() {
 		this.unmount();
-		this.element = document.body.appendChild(this.element);
 		this.is_mounted = true;
+		this.element = document.body.appendChild(this.element);
+		this.element.id = this.uuid;
+		this.host.setAttribute('aria-expanded', 'true');
+		this.host.setAttribute('aria-describedby', this.uuid);
 		this.cleanup = autoUpdate(
 			this.host,
 			this.element as HTMLElement,
@@ -145,6 +154,8 @@ export class TooltipInstance<
 			this.cleanup = null;
 		}
 		this.is_mounted = false;
+		this.host.setAttribute('aria-expanded', 'false');
+		this.host.removeAttribute('aria-describedby');
 	}
 
 	private update() {
@@ -201,8 +212,10 @@ export function menu_tooltip<
 			return;
 		}
 		tooltip.show();
-		const listener: EventListener = ({ target }) => {
+		const listener: EventListener = ({ target: t }) => {
+			const target = t as HTMLElement | null;
 			if (
+				target && target instanceof HTMLElement &&
 				target != tooltip.element && target != host &&
 				!tooltip.element.contains(target) &&
 				!target.closest('.tippy-box')
@@ -236,8 +249,10 @@ export function context_menu_tooltip<
 			return;
 		}
 		tooltip.show();
-		const listener: EventListener = ({ target }) => {
+		const listener: EventListener = ({ target: t }) => {
+			const target = t as HTMLElement | null;
 			if (
+				target && target instanceof HTMLElement &&
 				target != tooltip.element && target != host &&
 				!tooltip.element.contains(target) &&
 				!target.closest('.tippy-box')
