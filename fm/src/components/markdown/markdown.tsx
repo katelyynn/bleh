@@ -86,7 +86,6 @@ export function markdown(
 		'src',
 		'alt',
 		'title',
-		'style',
 		'data-hue',
 		'data-sat',
 		'data-lit',
@@ -175,13 +174,6 @@ export function markdown(
 	// this should be like as safe as can be
 	// you can't escape the boundaries due to the regex
 	const icons = () => [
-		{
-			type: 'lang',
-			regex: /\[icon=([a-zA-Z-]+)\]/g,
-			replace: (_: string, icon: string) => {
-				return `<span class="bleh-icon in-markdown" style="--icon: var(--icon-16-${icon})">A</span>`;
-			},
-		},
 		{
 			type: 'lang',
 			regex: /🙏\s*BLESS\s*🙏/gi,
