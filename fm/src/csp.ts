@@ -87,6 +87,7 @@ const CspPolicies: PolicyMap = {
 		'wss://html-load.cc',
 		'*.newrelic.com',
 		'status.cafe',
+		'*.github.io',
 	],
 	'font-src': [
 		"'self'",
