@@ -7912,6 +7912,17 @@ export const trans = {
 		ru: 'Несовместимо с текущими настройками',
 		pt: 'Incompatível com as configurações atuais',
 	},
+	incompatible: {
+		en: 'Incompatible',
+	},
+	value_is_enabled: {
+		// a setting is enabled
+		en: '{v} is enabled',
+	},
+	value_is_disabled: {
+		// a setting is disabled
+		en: '{v} is disabled',
+	},
 	bulk_edit_extension: {
 		// yes the extension
 		en: 'Last.fm Bulk Edit',

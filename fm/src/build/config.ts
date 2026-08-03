@@ -8,7 +8,7 @@ import { trans, translation } from '@/build/trans';
 
 export type setting_value = string | boolean | number | [] | string[] | {};
 
-interface setting_instance {
+export interface setting_instance {
 	css?: string;
 	default: setting_value;
 	type?:

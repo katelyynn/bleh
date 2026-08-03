@@ -21,12 +21,15 @@ import { clamp_lit, clamp_sat, rgb_to_oklch } from '@/build/tools';
 import { chartlist_bar } from '@/components/music/bar';
 import { avatar } from '@/components/shared/avatar';
 import { click_indicator } from '@/components/shared/indicator';
-import { ReactNode } from 'jsx-dom';
+import { createRef, ReactNode } from 'jsx-dom';
 import { SettingGroup } from '@/components/settings/group.tsx';
 import { SettingAction } from '@/components/settings/provider/action.tsx';
 import { SettingInfo } from '@/components/settings/provider/info.tsx';
 import { Switch } from '@/components/settings/clickables/switch.tsx';
 import { Checkbox } from '@/components/settings/clickables/checkbox.tsx';
+import { SettingSwitch } from '@/components/settings/provider/switch.tsx';
+import { Button } from '@/components/button/button.tsx';
+import { SeeMore } from '@/components/text/see_more.tsx';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -92,33 +95,89 @@ export function mualani() {
 
 	let bars;
 
+	const format_guest_features = createRef();
+	const show_guest_features = createRef();
+
 	page.structure.main!.replaceChildren(
-		<section>
-			<DemoGrid>
-				<DemoItem label='SettingAction'>
-					<SettingGroup>
-						<SettingAction name='Setting name' body='Setting body'>
-							action goes here!!
-						</SettingAction>
-					</SettingGroup>
-				</DemoItem>
-				<DemoItem label='SettingInfo'>
-					<SettingGroup>
-						<SettingInfo name='Setting name' body='Setting body'>
-							info goes here!!
-						</SettingInfo>
-					</SettingGroup>
-				</DemoItem>
-				<DemoItem label='Switch'>
-					<Switch />
-					<Switch checked />
-				</DemoItem>
-				<DemoItem label='Checkbox'>
-					<Checkbox />
-					<Checkbox checked />
-				</DemoItem>
-			</DemoGrid>
-		</section>,
+		<>
+			<section>
+				<DemoGrid>
+					<DemoItem label='Button'>
+						<Button>Button</Button>
+						<Button primary>Button</Button>
+					</DemoItem>
+					<DemoItem label='SeeMore'>
+						<SeeMore>See more</SeeMore>
+						<SeeMore iconPlacement='left'>See more</SeeMore>
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section>
+				<DemoGrid>
+					<DemoItem label='SettingAction'>
+						<SettingGroup>
+							<SettingAction
+								name='Setting name'
+								body='Setting body'
+							>
+								action goes here!!
+							</SettingAction>
+						</SettingGroup>
+					</DemoItem>
+					<DemoItem label='SettingInfo'>
+						<SettingGroup>
+							<SettingInfo
+								name='Setting name'
+								body='Setting body'
+							>
+								info goes here!!
+							</SettingInfo>
+						</SettingGroup>
+					</DemoItem>
+					<DemoItem label='Switch'>
+						<Switch />
+						<Switch checked />
+					</DemoItem>
+					<DemoItem label='Checkbox'>
+						<Checkbox />
+						<Checkbox checked />
+					</DemoItem>
+					<DemoItem label='SettingSwitch'>
+						<SettingGroup>
+							<SettingSwitch
+								name='Setting name'
+								body='Setting body'
+							/>
+						</SettingGroup>
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section>
+				<DemoGrid>
+					<DemoItem label='SettingSwitch (binded to underline_links)'>
+						<SettingGroup>
+							<SettingSwitch bind='underline_links' />
+						</SettingGroup>
+					</DemoItem>
+					<DemoItem label='SettingSwitch (testing compatibility)'>
+						<SettingGroup>
+							<SettingSwitch
+								bind='format_guest_features'
+								ref={format_guest_features}
+								onChange={() => {
+									show_guest_features.current.update();
+								}}
+							/>
+							<SettingSwitch
+								bind='show_guest_features'
+								ref={show_guest_features}
+							/>
+							<SettingSwitch name='example' />
+						</SettingGroup>
+					</DemoItem>
+				</DemoGrid>
+			</section>
+		</>,
 	);
 
 	return;
@@ -447,9 +506,11 @@ function DemoGrid({ children }: { children: ReactNode }) {
 
 function DemoItem({ children, label }: { children: ReactNode; label: string }) {
 	return (
-		<div class='demo-item'>
+		<div class='demo-item-wrap'>
 			<h4 class='demo-label'>{label}</h4>
-			{children}
+			<div class='demo-item'>
+				{children}
+			</div>
 		</div>
 	);
 }
