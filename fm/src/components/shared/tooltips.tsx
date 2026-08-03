@@ -12,7 +12,41 @@ import {
 } from '@floating-ui/dom';
 import { HTMLAttributes, ReactElement } from 'jsx-dom';
 
-type TooltipConfig = Partial<ComputePositionConfig>;
+type AnimationPreset = 'slide-down' | 'slide-up';
+type TooltipConfig = Partial<
+	ComputePositionConfig & {
+		enterAnimation: AnimationPreset;
+		exitAnimation: AnimationPreset;
+	}
+>;
+
+function animation_for_preset(
+	preset: AnimationPreset,
+): { keyframes: Keyframe[]; options: KeyframeAnimationOptions } {
+	let keyframes: Keyframe[];
+	switch (preset) {
+		case 'slide-down':
+			keyframes = [
+				{ opacity: 0, transform: 'translateY(-4px)' },
+				{ opacity: 1, transform: 'translateY(0px)' },
+			];
+			break;
+		case 'slide-up':
+			keyframes = [
+				{ opacity: 1, transform: 'translateY(0px)' },
+				{ opacity: 0, transform: 'translateY(-4px)' },
+			];
+			break;
+	}
+	return {
+		keyframes,
+		options: {
+			duration: 150,
+			easing: 'ease-out',
+			fill: 'forwards',
+		},
+	};
+}
 
 export class TooltipInstance<
 	H extends ReactElement,
@@ -20,8 +54,10 @@ export class TooltipInstance<
 > {
 	private host: H;
 	public element: E;
-	private config?: TooltipConfig;
+	private config: TooltipConfig;
 	private cleanup: (() => void) | null = null;
+	private currentAnimation: Animation | null = null;
+	private isMounted = false;
 
 	public constructor(
 		host: H,
@@ -34,30 +70,74 @@ export class TooltipInstance<
 			placement: 'bottom',
 			strategy: 'fixed',
 			middleware: [shiftMiddleware()],
+			enterAnimation: 'slide-down',
+			exitAnimation: 'slide-up',
 			...config,
 		};
 	}
 
 	public show() {
-		this.hide();
+		this.cancelAnimation();
+
+		if (!this.isMounted) this.mount();
+
+		const { keyframes, options } = animation_for_preset(
+			this.config.enterAnimation!,
+		);
+		const animation = this.element.animate(keyframes, options);
+
+		this.currentAnimation = animation;
+	}
+
+	public hide() {
+		if (!this.isMounted) return;
+
+		this.cancelAnimation();
+
+		const { keyframes, options } = animation_for_preset(
+			this.config.exitAnimation!,
+		);
+		const animation = this.element.animate(keyframes, options);
+
+		this.currentAnimation = animation;
+
+		// delay unmount until exit animation finishes
+		animation.finished.then(() => {
+			if (this.currentAnimation === animation) {
+				this.unmount();
+				this.currentAnimation = null;
+			}
+		}).catch(() => {});
+	}
+
+	private cancelAnimation() {
+		if (this.currentAnimation) {
+			this.currentAnimation.cancel();
+			this.currentAnimation = null;
+		}
+	}
+
+	private mount() {
+		this.unmount();
 		this.element = document.body.appendChild(this.element);
+		this.isMounted = true;
 		this.cleanup = autoUpdate(
 			this.host,
 			this.element as HTMLElement,
 			() => {
 				this.update();
 			},
-			{
-				animationFrame: true,
-			},
+			{ animationFrame: true },
 		);
 	}
 
-	public hide() {
+	private unmount() {
 		if (this.cleanup && this.element.parentNode) {
 			this.cleanup();
 			this.element = this.element.parentNode.removeChild(this.element);
+			this.cleanup = null;
 		}
+		this.isMounted = false;
 	}
 
 	private update() {
@@ -86,10 +166,10 @@ export function hover_tooltip<
 	config: TooltipConfig = {},
 ) {
 	const tooltip = new TooltipInstance(host, element, config);
-	host.addEventListener('onmouseenter', () => {
+	host.addEventListener('mouseenter', () => {
 		tooltip.show();
 	});
-	host.addEventListener('onmouseleave', () => {
+	host.addEventListener('mouseleave', () => {
 		tooltip.hide();
 	});
 	return tooltip;
