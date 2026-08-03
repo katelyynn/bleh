@@ -11,12 +11,14 @@ import { tl } from '@/build/trans.ts';
 import { save_setting } from '@/components/settings/settings.tsx';
 
 interface SettingSwitchProps {
-	ref?: ReturnType<typeof createRef>;
+	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
 	bind?: string;
 	name?: string;
 	body?: string;
 	onChange?: (val: boolean) => void;
 	disabled?: boolean;
+	onMouseEnter?: () => void;
+	onMouseLeave?: () => void;
 }
 
 type SettingSwitchElement = HTMLDivElement & {
@@ -31,6 +33,8 @@ export function SettingSwitch({
 	body,
 	onChange,
 	disabled,
+	onMouseEnter,
+	onMouseLeave,
 }: SettingSwitchProps) {
 	let value = bind ? settings[bind] as boolean : true;
 	const checkbox = createRef();
@@ -79,6 +83,8 @@ export function SettingSwitch({
 			class='setting'
 			data-type='toggle'
 			id={bind}
+			onMouseEnter={onMouseEnter}
+			onMouseLeave={onMouseLeave}
 			onClick={() => {
 				value = !value;
 				checkbox.current.checked = value;

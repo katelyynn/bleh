@@ -98,6 +98,8 @@ export function mualani() {
 	const format_guest_features = createRef();
 	const show_guest_features = createRef();
 
+	const mouse = createRef();
+
 	page.structure.main!.replaceChildren(
 		<>
 			<section>
@@ -173,6 +175,20 @@ export function mualani() {
 								ref={show_guest_features}
 							/>
 							<SettingSwitch name='example' />
+						</SettingGroup>
+					</DemoItem>
+					<DemoItem label='SettingSwitch (tracking mouse enter and leave)'>
+						<p ref={mouse}>Not hovered</p>
+						<SettingGroup>
+							<SettingSwitch
+								name='Hover to update the above'
+								onMouseEnter={() => {
+									mouse.current.textContent = 'Hovered';
+								}}
+								onMouseLeave={() => {
+									mouse.current.textContent = 'Not hovered';
+								}}
+							/>
 						</SettingGroup>
 					</DemoItem>
 				</DemoGrid>
