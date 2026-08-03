@@ -56,8 +56,8 @@ export class TooltipInstance<
 	public element: E;
 	private config: TooltipConfig;
 	private cleanup: (() => void) | null = null;
-	private currentAnimation: Animation | null = null;
-	private isMounted = false;
+	private current_animation: Animation | null = null;
+	private is_mounted = false;
 
 	public constructor(
 		host: H,
@@ -77,50 +77,50 @@ export class TooltipInstance<
 	}
 
 	public show() {
-		this.cancelAnimation();
+		this.cancel_animation();
 
-		if (!this.isMounted) this.mount();
+		if (!this.is_mounted) this.mount();
 
 		const { keyframes, options } = animation_for_preset(
 			this.config.enterAnimation!,
 		);
 		const animation = this.element.animate(keyframes, options);
 
-		this.currentAnimation = animation;
+		this.current_animation = animation;
 	}
 
 	public hide() {
-		if (!this.isMounted) return;
+		if (!this.is_mounted) return;
 
-		this.cancelAnimation();
+		this.cancel_animation();
 
 		const { keyframes, options } = animation_for_preset(
 			this.config.exitAnimation!,
 		);
 		const animation = this.element.animate(keyframes, options);
 
-		this.currentAnimation = animation;
+		this.current_animation = animation;
 
 		// delay unmount until exit animation finishes
 		animation.finished.then(() => {
-			if (this.currentAnimation === animation) {
+			if (this.current_animation === animation) {
 				this.unmount();
-				this.currentAnimation = null;
+				this.current_animation = null;
 			}
 		}).catch(() => {});
 	}
 
-	private cancelAnimation() {
-		if (this.currentAnimation) {
-			this.currentAnimation.cancel();
-			this.currentAnimation = null;
+	private cancel_animation() {
+		if (this.current_animation) {
+			this.current_animation.cancel();
+			this.current_animation = null;
 		}
 	}
 
 	private mount() {
 		this.unmount();
 		this.element = document.body.appendChild(this.element);
-		this.isMounted = true;
+		this.is_mounted = true;
 		this.cleanup = autoUpdate(
 			this.host,
 			this.element as HTMLElement,
@@ -137,7 +137,7 @@ export class TooltipInstance<
 			this.element = this.element.parentNode.removeChild(this.element);
 			this.cleanup = null;
 		}
-		this.isMounted = false;
+		this.is_mounted = false;
 	}
 
 	private update() {
