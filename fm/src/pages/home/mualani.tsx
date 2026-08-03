@@ -107,6 +107,10 @@ export function mualani() {
 					<DemoItem label='Button'>
 						<Button>Button</Button>
 						<Button primary>Button</Button>
+						<Button disabled>Button</Button>
+						<Button primary disabled>Button</Button>
+						<Button loading>Button</Button>
+						<Button primary loading>Button</Button>
 					</DemoItem>
 					<DemoItem label='SeeMore'>
 						<SeeMore>See more</SeeMore>

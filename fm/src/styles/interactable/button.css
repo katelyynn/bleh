@@ -168,7 +168,8 @@ select,
 	&.flex-button {
 		display: flex;
 		align-items: center;
-		gap: 6px;
+		gap: 4px;
+		--icon-size: 16px;
 	}
 
 	/*     LOADING     */
@@ -245,6 +246,7 @@ select,
 	}
 
 	&.btn--loading,
+	&[data-loading="true"],
 	&[data-disabled="true"],
 	/* used for new last.fm follow button */
 	&[disabled]:not([disabled="false"]) {
@@ -254,6 +256,7 @@ select,
 		transform: unset !important;
 		--bg-hov: var(--bg) !important;
 		--bg-atv: var(--bg) !important;
+		cursor: default;
 	}
 
 	&.btn-primary.js-close {

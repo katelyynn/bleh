@@ -182,6 +182,7 @@ export const icons = {
 	animated_dots: 'animated-dots',
 	logout: 'logout',
 	mouse: 'mouse',
+	spinner: 'spinner',
 };
 
 interface icon {
