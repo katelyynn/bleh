@@ -27,6 +27,7 @@ import { SettingAction } from '@/components/settings/provider/action.tsx';
 import { SettingInfo } from '@/components/settings/provider/info.tsx';
 import { Switch } from '@/components/settings/clickables/switch.tsx';
 import { Checkbox } from '@/components/settings/clickables/checkbox.tsx';
+import { SettingSwitch } from '@/components/settings/provider/switch.tsx';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -116,6 +117,14 @@ export function mualani() {
 				<DemoItem label='Checkbox'>
 					<Checkbox />
 					<Checkbox checked />
+				</DemoItem>
+				<DemoItem label='SettingSwitch'>
+					<SettingGroup>
+						<SettingSwitch
+							name='Setting name'
+							body='Setting body'
+						/>
+					</SettingGroup>
 				</DemoItem>
 			</DemoGrid>
 		</section>,
