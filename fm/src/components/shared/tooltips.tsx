@@ -58,7 +58,7 @@ export class TooltipInstance<
 	private config: TooltipConfig;
 	private cleanup: (() => void) | null = null;
 	private current_animation: Animation | null = null;
-	private is_mounted = false;
+	public is_mounted = false;
 
 	public constructor(
 		host: H,
@@ -195,6 +195,11 @@ export function menu_tooltip<
 ) {
 	const tooltip = new TooltipInstance(host, element, config);
 	host.addEventListener('click', () => {
+		// close when clicking again
+		if (tooltip.is_mounted) {
+			tooltip.hide();
+			return;
+		}
 		tooltip.show();
 		const listener: EventListener = ({ target }) => {
 			if (
@@ -225,6 +230,11 @@ export function context_menu_tooltip<
 	const tooltip = new TooltipInstance(host, element, config);
 	host.addEventListener('contextmenu', (e) => {
 		e.preventDefault();
+		// close when clicking again
+		if (tooltip.is_mounted) {
+			tooltip.hide();
+			return;
+		}
 		tooltip.show();
 		const listener: EventListener = ({ target }) => {
 			if (
