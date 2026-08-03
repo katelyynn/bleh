@@ -36,6 +36,7 @@ import { SettingGroup } from '@/components/settings/group.tsx';
 import { SeeMore, SeeMoreGroup } from '@/components/text/see_more.tsx';
 import { badge } from '@/types/badge.ts';
 import { SettingAction } from '@/components/settings/provider/action.tsx';
+import { SettingInfo } from '@/components/settings/provider/info.tsx';
 
 export function general() {
 	if (auth.pro == null) {
@@ -55,7 +56,7 @@ export function general() {
 	//if (auth.pro) badge_count++;
 
 	const auth_key = localStorage.getItem('bleh_auth');
-	const auth_valid = localStorage.getItem('bleh_auth_valid');
+	const auth_valid = localStorage.getItem('bleh_auth_valid') || undefined;
 
 	page.structure.main!.replaceChildren(
 		<>
@@ -157,6 +158,45 @@ export function general() {
 								</button>
 							</SettingAction>
 						)}
+					<SettingInfo name={tl(trans.current_version)}>
+						<p>{sponsor_list.version}</p>
+						<SeeMore
+							className='sponsor-related'
+							icon={icons.update}
+							iconPlacement='left'
+							onClick={() => {
+								sponsors(true, () => {
+									render_setting_page('general');
+								});
+							}}
+						>
+							{tl(trans.update_check)}
+						</SeeMore>
+					</SettingInfo>
+				</SettingGroup>
+				<SettingGroup>
+					<SettingAction
+						id='setting_api'
+						name={tl(trans.api.name)}
+						body={tl(trans.api.body)}
+					>
+						<a
+							class={[
+								'btn',
+								'icon',
+								(auth_key && bool(auth_valid)) && 'primary',
+							]}
+							data-type='plus'
+							href={`${root}api/auth?api_key=${api_key}&cb=${root}bleh/api`}
+						>
+							{tl(trans.connect)}
+						</a>
+					</SettingAction>
+					<SettingInfo name={tl(trans.api_status)}>
+						{(auth_key && bool(auth_valid))
+							? <p>{tl(trans.connected)}</p>
+							: <p>{tl(trans.not_connected)}</p>}
+					</SettingInfo>
 				</SettingGroup>
 			</section>
 		</>,

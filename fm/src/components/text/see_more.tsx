@@ -3,18 +3,28 @@ import type { ClassNames } from 'jsx-dom';
 
 interface SeeMoreProps {
 	href?: string;
+	icon?: string,
 	external?: boolean;
 	onClick?: () => void;
+	iconPlacement?: 'left' | 'right';
+	className?: string;
 	children: ReactNode;
 }
 
 export function SeeMore({
 	href,
+	icon,
 	external = false,
 	onClick,
+	iconPlacement = 'right',
+	className,
 	children,
 }: SeeMoreProps) {
-	const classes: ClassNames = ['see-more'];
+	const classes: ClassNames = [
+		'see-more',
+		iconPlacement == 'left' && 'left-icon',
+		className && className,
+	];
 
 	if (!href && onClick) {
 		return (
@@ -22,6 +32,7 @@ export function SeeMore({
 				type='button'
 				class={classes}
 				onClick={onClick}
+				data-type={icon}
 			>
 				{children}
 			</button>
@@ -34,6 +45,7 @@ export function SeeMore({
 			href={href}
 			target={external ? '_blank' : undefined}
 			onClick={onClick}
+			data-type={icon}
 		>
 			{children}
 		</a>

@@ -18,7 +18,7 @@ import { notify } from '@/components/dialog/notify';
 import { avatar } from './shared/avatar';
 import JSON5 from 'json5';
 
-export function sponsors(force = false, func = null) {
+export function sponsors(force = false, func?: () => void) {
 	if (!ff('sponsor')) return;
 
 	const sponsor_data = localStorage.getItem('kat_sponsors');

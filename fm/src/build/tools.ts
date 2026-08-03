@@ -330,7 +330,10 @@ export async function paste(elem = null, silent = false) {
 	}
 }
 
-export function download_with_progress(url: string, func?: (percent: number) => void) {
+export function download_with_progress(
+	url: string,
+	func?: (percent: number) => void,
+) {
 	return new Promise((resolve, reject) => {
 		let xhr = new XMLHttpRequest();
 		xhr.open('GET', url, true);
@@ -563,6 +566,8 @@ export function get_language_name(code) {
 	}
 }
 
-export function bool(value: string) {
+export function bool(value?: string) {
+	if (!value) return false;
+
 	return value.toLowerCase().trim() === 'true';
 }
