@@ -243,7 +243,7 @@ pre {
 	translate: 0 0;
 	color: oklch(var(--c2));
 
-	&:active {
+	&:not([data-entering]):active {
 		translate: 0 2px;
 		box-shadow: inset 0 0 0 1px var(--separator-base), 0 2px 0 0 transparent, inset 0 3px 0 0 oklch(var(--b3) / 50%);
 		color: oklch(var(--c3));
@@ -254,6 +254,31 @@ pre {
 	color;
 	transition-duration: var(--trans);
 	transition-timing-function: var(--trans-function);
+
+	&[data-entering] {
+		--separator-base: oklch(var(--l3-c));
+		--b3: var(--f4);
+		color: oklch(var(--l3-c));
+	}
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-width: 22px;
+}
+
+.key-bind-input {
+	appearance: none;
+	border: none;
+	background: none;
+	font: inherit;
+	color: inherit;
+	border-radius: none;
+	--focus-outline: none !important;
+	padding: unset;
+	min-width: 30px;
+	width: 30px;
+	text-align: center;
 }
 
 .not-text {

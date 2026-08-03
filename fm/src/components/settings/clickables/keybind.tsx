@@ -4,8 +4,8 @@ import { page } from '@/build/page.ts';
 interface KeybindProps {
 	ref?: ReturnType<typeof createRef<HTMLElement>>;
 	value: string;
-	className?: string;
 	interact?: boolean;
+	onChange?: (value: string) => void;
 }
 
 // only used on non-apple
@@ -23,6 +23,7 @@ export function Keybind({
 	ref,
 	value,
 	interact = false,
+	onChange,
 }: KeybindProps) {
 	const darwin = ['darwin', 'ios'].includes(page.platform);
 
@@ -41,28 +42,33 @@ export function Keybind({
 						entering = false;
 						update();
 					}}
-					onSubmit={() => {
+					onKeyUp={(e: KeyboardEvent) => {
+						if (e.key != 'Enter') return;
+
 						entering = false;
 						value = input.current.value;
+						if (onChange) onChange(value);
 						update();
 					}}
 				/>,
 			);
 
 			input.current.focus();
+			wrap.setAttribute('data-entering', 'true');
 		} else {
 			wrap.replaceChildren(
 				<span class='key-bind-text'>{label(value)}</span>,
 			);
+			wrap.removeAttribute('data-entering');
 		}
 	}
 
 	const wrap = (
 		<kbd
-			class={['key-bind']}
+			class={['key-bind', interact && 'key-bind-interactable']}
 			ref={ref}
 			onClick={() => {
-				if (!interact) return;
+				if (!interact || entering) return;
 
 				entering = true;
 				update();
@@ -80,6 +86,7 @@ export function Keybind({
 		},
 		set(val: string) {
 			value = val;
+			if (onChange) onChange(value);
 			update();
 		},
 	});

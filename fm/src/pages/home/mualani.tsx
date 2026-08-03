@@ -204,6 +204,10 @@ export function mualani() {
 						<Keybind value='⌘' />
 						<Keybind value='A' />
 					</DemoItem>
+					<DemoItem label='Keybind (interactable)'>
+						<Keybind value='⌘' interact />
+						<Keybind value='A' interact />
+					</DemoItem>
 				</DemoGrid>
 			</section>
 		</>,
