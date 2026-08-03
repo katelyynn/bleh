@@ -94,40 +94,57 @@ export function mualani() {
 	let bars;
 
 	page.structure.main!.replaceChildren(
-		<section>
-			<DemoGrid>
-				<DemoItem label='SettingAction'>
-					<SettingGroup>
-						<SettingAction name='Setting name' body='Setting body'>
-							action goes here!!
-						</SettingAction>
-					</SettingGroup>
-				</DemoItem>
-				<DemoItem label='SettingInfo'>
-					<SettingGroup>
-						<SettingInfo name='Setting name' body='Setting body'>
-							info goes here!!
-						</SettingInfo>
-					</SettingGroup>
-				</DemoItem>
-				<DemoItem label='Switch'>
-					<Switch />
-					<Switch checked />
-				</DemoItem>
-				<DemoItem label='Checkbox'>
-					<Checkbox />
-					<Checkbox checked />
-				</DemoItem>
-				<DemoItem label='SettingSwitch'>
-					<SettingGroup>
-						<SettingSwitch
-							name='Setting name'
-							body='Setting body'
-						/>
-					</SettingGroup>
-				</DemoItem>
-			</DemoGrid>
-		</section>,
+		<>
+			<section>
+				<DemoGrid>
+					<DemoItem label='SettingAction'>
+						<SettingGroup>
+							<SettingAction
+								name='Setting name'
+								body='Setting body'
+							>
+								action goes here!!
+							</SettingAction>
+						</SettingGroup>
+					</DemoItem>
+					<DemoItem label='SettingInfo'>
+						<SettingGroup>
+							<SettingInfo
+								name='Setting name'
+								body='Setting body'
+							>
+								info goes here!!
+							</SettingInfo>
+						</SettingGroup>
+					</DemoItem>
+					<DemoItem label='Switch'>
+						<Switch />
+						<Switch checked />
+					</DemoItem>
+					<DemoItem label='Checkbox'>
+						<Checkbox />
+						<Checkbox checked />
+					</DemoItem>
+					<DemoItem label='SettingSwitch'>
+						<SettingGroup>
+							<SettingSwitch
+								name='Setting name'
+								body='Setting body'
+							/>
+						</SettingGroup>
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section>
+				<DemoGrid>
+					<DemoItem label='SettingSwitch (binded to underline_links)'>
+						<SettingGroup>
+							<SettingSwitch bind='underline_links' />
+						</SettingGroup>
+					</DemoItem>
+				</DemoGrid>
+			</section>
+		</>,
 	);
 
 	return;
