@@ -265,9 +265,12 @@ pre {
 	justify-content: center;
 	align-items: center;
 	min-width: 22px;
+	text-transform: uppercase;
 }
 
 .key-bind-input {
+	position: fixed;
+	inset: -10000000px 0 0 0;
 	appearance: none;
 	border: none;
 	background: none;

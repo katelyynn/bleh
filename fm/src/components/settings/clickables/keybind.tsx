@@ -34,23 +34,56 @@ export function Keybind({
 	function update() {
 		if (entering) {
 			wrap.replaceChildren(
-				<input
-					class='key-bind-input'
-					value={value}
-					ref={input}
-					onBlur={() => {
-						entering = false;
-						update();
-					}}
-					onKeyUp={(e: KeyboardEvent) => {
-						if (e.key != 'Enter') return;
+				<>
+					<span class='key-bind-text'>...</span>
+					<input
+						class='key-bind-input'
+						value={value}
+						ref={input}
+						onBlur={() => {
+							entering = false;
+							update();
+						}}
+						onKeyDown={(e: KeyboardEvent) => {
+							entering = false;
 
-						entering = false;
-						value = input.current.value;
-						if (onChange) onChange(value);
-						update();
-					}}
-				/>,
+							// https://developer.mozilla.org/en-US/docs/Web/API/UI_Events/Keyboard_event_key_values
+							if (
+								[
+									'Escape',
+									'Backspace',
+									'Enter',
+									'Unidentified',
+									'Alt',
+									'AltGraph',
+									'CapsLock',
+									'Control',
+									'Fn',
+									'FnLock',
+									'Hyper',
+									'Meta',
+									'NumLock',
+									'ScrollLock',
+									'Shift',
+									'Super',
+									'Symbol',
+									'SymbolLock',
+									'Tab',
+									' ',
+								]
+									.includes(e.key)
+							) {
+								update();
+
+								return;
+							}
+
+							value = e.key;
+							if (onChange) onChange(value);
+							update();
+						}}
+					/>
+				</>,
 			);
 
 			input.current.focus();
