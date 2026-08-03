@@ -5,13 +5,25 @@
 	flex-wrap: wrap;
 	gap: 10px var(--card-gap);
 
-	& + .library-fetch,
-	& + .buffer-standard,
-	& + .alert {
+	&+.library-fetch,
+	&+.buffer-standard,
+	&+.alert {
 		margin-top: unset !important;
 	}
 
 	&.spacing {
 		height: 33px;
 	}
+}
+
+.demo-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(600px, 1fr));
+	gap: 20px;
+}
+
+.demo-item {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
 }

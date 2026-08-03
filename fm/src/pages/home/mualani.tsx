@@ -21,6 +21,10 @@ import { clamp_lit, clamp_sat, rgb_to_oklch } from '@/build/tools';
 import { chartlist_bar } from '@/components/music/bar';
 import { avatar } from '@/components/shared/avatar';
 import { click_indicator } from '@/components/shared/indicator';
+import { ReactNode } from 'jsx-dom';
+import { SettingGroup } from '@/components/settings/group.tsx';
+import { SettingAction } from '@/components/settings/provider/action.tsx';
+import { SettingInfo } from '@/components/settings/provider/info.tsx';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -46,6 +50,8 @@ export function mualani() {
 	// remove error stuff cus we control this page
 	page.structure.row.removeChild(page.structure.row.firstElementChild);
 	page.structure.row.removeChild(page.structure.row.firstElementChild);
+
+	page.structure.content?.classList.add('single-column');
 
 	let md_body;
 	const md_options = {
@@ -83,6 +89,29 @@ export function mualani() {
 	];
 
 	let bars;
+
+	page.structure.main!.replaceChildren(
+		<section>
+			<DemoGrid>
+				<DemoItem label='SettingAction'>
+					<SettingGroup>
+						<SettingAction name='Setting name' body='Setting body'>
+							action goes here!!
+						</SettingAction>
+					</SettingGroup>
+				</DemoItem>
+				<DemoItem label='SettingInfo'>
+					<SettingGroup>
+						<SettingInfo name='Setting name' body='Setting body'>
+							info goes here!!
+						</SettingInfo>
+					</SettingGroup>
+				</DemoItem>
+			</DemoGrid>
+		</section>,
+	);
+
+	return;
 
 	render(
 		page.structure.main,
@@ -396,4 +425,21 @@ function dialog_loop() {
             <button onclick=${() => dialog_loop()}>Open a new dialog</button>
         `,
 	});
+}
+
+function DemoGrid({ children }: { children: ReactNode }) {
+	return (
+		<div class='demo-grid'>
+			{children}
+		</div>
+	);
+}
+
+function DemoItem({ children, label }: { children: ReactNode; label: string }) {
+	return (
+		<div class='demo-item'>
+			<h4 class='demo-label'>{label}</h4>
+			{children}
+		</div>
+	);
 }
