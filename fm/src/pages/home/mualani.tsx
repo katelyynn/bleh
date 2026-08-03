@@ -28,6 +28,8 @@ import { SettingInfo } from '@/components/settings/provider/info.tsx';
 import { Switch } from '@/components/settings/clickables/switch.tsx';
 import { Checkbox } from '@/components/settings/clickables/checkbox.tsx';
 import { SettingSwitch } from '@/components/settings/provider/switch.tsx';
+import { Button } from '@/components/button/button.tsx';
+import { SeeMore } from '@/components/text/see_more.tsx';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -98,6 +100,18 @@ export function mualani() {
 
 	page.structure.main!.replaceChildren(
 		<>
+			<section>
+				<DemoGrid>
+					<DemoItem label='Button'>
+						<Button>Button</Button>
+						<Button primary>Button</Button>
+					</DemoItem>
+					<DemoItem label='SeeMore'>
+						<SeeMore>See more</SeeMore>
+						<SeeMore iconPlacement='left'>See more</SeeMore>
+					</DemoItem>
+				</DemoGrid>
+			</section>
 			<section>
 				<DemoGrid>
 					<DemoItem label='SettingAction'>
@@ -491,9 +505,11 @@ function DemoGrid({ children }: { children: ReactNode }) {
 
 function DemoItem({ children, label }: { children: ReactNode; label: string }) {
 	return (
-		<div class='demo-item'>
+		<div class='demo-item-wrap'>
 			<h4 class='demo-label'>{label}</h4>
-			{children}
+			<div class='demo-item'>
+				{children}
+			</div>
 		</div>
 	);
 }
