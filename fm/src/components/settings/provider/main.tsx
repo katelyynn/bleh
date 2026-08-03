@@ -1,4 +1,4 @@
-import { setting_instance, settings_store } from '@/build/config.ts';
+import { setting_instance, settings, settings_store } from '@/build/config.ts';
 import { tl } from '@/build/trans.ts';
 
 interface SettingLabelProps {
@@ -39,4 +39,35 @@ export function get_from_store(id?: string) {
 	if (!id) return undefined;
 
 	return settings_store[id];
+}
+
+export function is_incompatible(store: setting_instance) {
+	let incompatible = false;
+	const list: string[] = [];
+
+	if (!store.incompatible) {
+		return {
+			incompatible,
+			list,
+		};
+	}
+
+	Object.entries(store.incompatible).forEach(([key, val]) => {
+		if (Array.isArray(val)) {
+			if (val.includes(settings[key])) {
+				incompatible = true;
+				list.push(key);
+			}
+		} else {
+			if (JSON.stringify(val) == JSON.stringify(settings[key])) {
+				incompatible = true;
+				list.push(key);
+			}
+		}
+	});
+
+	return {
+		incompatible,
+		list,
+	};
 }

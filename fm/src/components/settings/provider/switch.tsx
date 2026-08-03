@@ -1,6 +1,7 @@
 import { createRef, ReactNode } from 'jsx-dom';
 import {
 	get_from_store,
+	is_incompatible,
 	SettingLabel,
 } from '@/components/settings/provider/main.tsx';
 import { settings } from '@/build/config.ts';
@@ -24,15 +25,28 @@ export function SettingSwitch({
 	let value = bind ? settings[bind] as boolean : true;
 	const checkbox = createRef();
 
+	const store = get_from_store(bind);
+
 	function update() {
+		let incompatible = false;
+		let incompatible_list = [];
+
+		if (store) {
+			({ incompatible, list: incompatible_list } = is_incompatible(
+				store,
+			));
+		}
+
+		if (incompatible) {
+			disabled = true;
+		}
+
 		if (disabled) {
 			elem.setAttribute('disabled', 'true');
 		} else {
 			elem.removeAttribute('disabled');
 		}
 	}
-
-	const store = get_from_store(bind);
 
 	const elem = (
 		<div

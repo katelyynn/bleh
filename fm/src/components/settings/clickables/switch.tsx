@@ -24,7 +24,7 @@ export function Switch({
 			<input type='checkbox' ref={checkbox} />
 			<button
 				type='button'
-				class={['btn', 'toggle', !interact && 'no-interact']}
+				class={['btn', 'toggle', 'colourful', !interact && 'no-interact']}
 				ref={elem}
 				onClick={() => {
 					if (!interact) return;
