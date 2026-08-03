@@ -369,8 +369,8 @@
         "last_aezi": {},
         "qwqkami": {},
         "ohmaigotto": {
-            "sponsor": false,
-            "contributor": true
+            sponsor: false,
+            contributor: true
         }
     }
 }
