@@ -1,11 +1,19 @@
 import { createRef } from 'jsx-dom';
+import { SeeMore } from '@/components/text/see_more.tsx';
+import { tl, trans } from '@/build/trans.ts';
+import { icons } from '@/components/shared/icon.tsx';
+
+export type InputType = 'text' | 'number' | 'date' | 'password' | 'textarea';
 
 interface InputProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
+	className?: string;
 	value?: string | number;
 	disabled?: boolean;
-	type?: 'text' | 'number' | 'date' | 'password' | 'textarea';
+	type?: InputType;
 	onChange?: (val: string | number) => void;
+	onSubmit?: (val: string | number) => void;
+	saveManually?: boolean;
 }
 
 type InputElement = HTMLDivElement & {
@@ -14,10 +22,13 @@ type InputElement = HTMLDivElement & {
 
 export function Input({
 	ref,
+	className,
 	value = '',
 	disabled,
 	type = 'text',
 	onChange,
+	onSubmit,
+	saveManually = false,
 }: InputProps) {
 	const input = createRef();
 
@@ -28,6 +39,8 @@ export function Input({
 				'input-container',
 				'colourful',
 				type == 'textarea' && 'textarea',
+				className && className,
+				saveManually && 'save-manually',
 			]}
 			ref={ref}
 		>
@@ -42,6 +55,12 @@ export function Input({
 							value = input.current.value;
 							update(true);
 						}}
+						onKeyDown={(e: KeyboardEvent) => {
+							if (e.key != 'Enter') return;
+
+							update(true);
+							if (onSubmit) onSubmit(input.current.value);
+						}}
 					/>
 				)
 				: (
@@ -53,10 +72,28 @@ export function Input({
 							value = input.current.value;
 							update(true);
 						}}
+						onKeyDown={(e: KeyboardEvent) => {
+							if (e.key != 'Enter') return;
+
+							update(true);
+							if (onSubmit) onSubmit(input.current.value);
+						}}
 					/>
 				)}
+			{saveManually && (
+				<SeeMore
+					icon={icons.save}
+					iconPlacement='left'
+					onClick={() => {
+						update(true);
+						if (onSubmit) onSubmit(input.current.value);
+					}}
+				>
+					{tl(trans.save)}
+				</SeeMore>
+			)}
 		</div>
-	);
+	) as InputElement;
 
 	function update(from_input = false) {
 		if (disabled) {

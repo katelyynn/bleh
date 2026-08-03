@@ -32,6 +32,7 @@ import { Button } from '@/components/button/button.tsx';
 import { SeeMore } from '@/components/text/see_more.tsx';
 import { Keybind } from '@/components/settings/clickables/keybind.tsx';
 import { Input } from '@/components/input/input.tsx';
+import { SettingInput } from '@/components/settings/provider/input.tsx';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -203,10 +204,15 @@ export function mualani() {
 				<DemoGrid>
 					<DemoItem label='Keybind'>
 						<Keybind value='⌘' />
-						<Keybind value='A' />
+						<Keybind value='⇧' />
+						<Keybind value='⌥' />
+						<Keybind value='⌃' />
+						<Keybind value='⏎' />
+						<Keybind value='⎋' />
+						<Keybind value='⌫' />
 					</DemoItem>
 					<DemoItem label='Keybind (interactable)'>
-						<Keybind value='⌘' interact />
+						<Keybind value='⌘' />
 						<Keybind value='A' interact />
 					</DemoItem>
 				</DemoGrid>
@@ -220,6 +226,25 @@ export function mualani() {
 					</DemoItem>
 					<DemoItem label='Input (textarea)'>
 						<Input type='textarea' />
+					</DemoItem>
+					<DemoItem label='SettingInput'>
+						<SettingGroup>
+							<SettingInput
+								name='Setting name'
+								body='Setting body'
+							/>
+							<SettingInput
+								name='Setting name'
+								body='Setting body'
+								showLabel={false}
+							/>
+						</SettingGroup>
+					</DemoItem>
+					<DemoItem label='SettingInput (binded to font)'>
+						<SettingGroup>
+							<SettingInput bind='font' />
+							<SettingInput bind='font' showLabel={false} />
+						</SettingGroup>
 					</DemoItem>
 				</DemoGrid>
 			</section>
