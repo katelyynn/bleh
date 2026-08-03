@@ -8,6 +8,7 @@ import {
 	autoUpdate,
 	computePosition,
 	type ComputePositionConfig,
+	offset as offsetMiddleware,
 	shift as shiftMiddleware,
 } from '@floating-ui/dom';
 import { HTMLAttributes, ReactElement } from 'jsx-dom';
@@ -68,8 +69,14 @@ export class TooltipInstance<
 		this.element = element;
 		this.config = {
 			placement: 'bottom',
-			strategy: 'fixed',
-			middleware: [shiftMiddleware()],
+			strategy: 'absolute',
+			middleware: [
+				shiftMiddleware({
+					crossAxis: true,
+					padding: 8,
+				}),
+				offsetMiddleware(8),
+			],
 			enterAnimation: 'slide-down',
 			exitAnimation: 'slide-up',
 			...config,
