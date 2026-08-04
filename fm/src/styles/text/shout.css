@@ -1,14 +1,15 @@
 #shoutbox.shoutbox--with-header {
 	min-height: unset;
 }
+
 .shouting-unavailable {
 	margin: unset;
 	padding: 0 0 var(--card-gap) 0;
 	border-bottom: 1px solid var(--card-border-base);
 }
-.shout-form + .shout-list,
-.shout-list {
-	margin-top: var(--card-gap);
+
+.shoutbox>.shout-list {
+	margin-top: var(--card-gap) !important;
 }
 
 .shoutbox-sort-toggle {
@@ -22,7 +23,7 @@
 	margin-top: unset !important;
 }
 
-.shoutbox > .shout-list {
+.shoutbox>.shout-list {
 	gap: var(--shout-outer-padding) !important;
 }
 
@@ -31,6 +32,7 @@
 .shouting-unavailable {
 	margin-top: unset;
 }
+
 .shout,
 .shout-form {
 	border-bottom: 1px solid oklch(var(--b4));
@@ -85,19 +87,19 @@
 		--override-margin-top: 8px !important;
 	}
 }
+
 .js-shout-reply-cancel {
 	position: relative;
 	--show-icon: block;
 	--mask: var(--icon-16-x);
 }
+
 .btn-post-shout {
 	position: relative;
 	--mask: var(--icon-16-send) !important;
 
 	--btn-left: var(--button-sides) !important;
-	--btn-right: calc(
-        var(--button-sides-icon) + var(--icon-size) + var(--icon-gap)
-    ) !important;
+	--btn-right: calc(var(--button-sides-icon) + var(--icon-size) + var(--icon-gap)) !important;
 	--left: none;
 	--right: var(--button-sides-icon);
 
@@ -119,6 +121,7 @@
 .shout-container {
 	padding: 6px 0 !important;
 }
+
 .shout-list {
 	position: relative;
 	display: flex;
@@ -126,18 +129,15 @@
 	gap: var(--shout-padding);
 	padding-top: var(--shout-padding);
 
-	.shout-form + & {
+	.shout-form+& {
 		padding-top: unset;
 	}
 
-	.shout-list-item > & {
+	.shout-list-item>& {
 		&:before {
 			content: "";
 			position: absolute;
-			left: calc(
-				(var(--shout-avatar-size) + (var(--shout-tree-size) / 2)) /
-				2
-			);
+			left: calc((var(--shout-avatar-size) + (var(--shout-tree-size) / 2)) / 2);
 			top: var(--shout-padding);
 			bottom: var(--shout-padding);
 
@@ -157,12 +157,13 @@
 		padding-top: unset;
 	}
 }
+
 .shout-list-item {
 	position: relative;
 
 	margin: unset !important;
 
-	.shout-list-item > .shout-list > & {
+	.shout-list-item>.shout-list>& {
 		margin-left: var(--shout-inset) !important;
 		--shout-stem-width: 10px;
 
@@ -170,8 +171,7 @@
 			content: '';
 			position: absolute;
 			left: calc(-1 * ((var(--shout-avatar-size) / 2)) + 2px);
-			top: calc(6px + var(--shout-avatar-top) + (var(--shout-avatar-size)
-				/ 2) - (var(--shout-tree-size) / 2));
+			top: calc(6px + var(--shout-avatar-top) + (var(--shout-avatar-size) / 2) - (var(--shout-tree-size) / 2));
 			width: var(--shout-stem-width);
 			height: var(--shout-tree-size);
 			background: var(--shout-tree);
@@ -189,8 +189,7 @@
 			position: absolute;
 			display: block;
 			left: calc(-1 * ((var(--shout-avatar-size) / 2)));
-			top: calc((6px + var(--shout-avatar-top) + (var(--shout-avatar-size)
-				/ 2) - (var(--shout-tree-size) / 2)) + var(--shout-tree-size));
+			top: calc((6px + var(--shout-avatar-top) + (var(--shout-avatar-size) / 2) - (var(--shout-tree-size) / 2)) + var(--shout-tree-size));
 			bottom: 0;
 			width: var(--shout-stem-width);
 			background: oklch(var(--b5));
@@ -209,14 +208,12 @@
 		min-height: 18px;
 	}
 
-	.shout-container--active > & {
+	.shout-container--active>& {
 		background: oklch(var(--h4) / 20%);
 	}
 
-	animation: var(
-		--motion,
-		chartlist 0.4s var(--trans-function)
-	) !important;
+	animation: var(--motion,
+		chartlist 0.4s var(--trans-function)) !important;
 	animation-delay: var(--delay, 0s) !important;
 	animation-fill-mode: backwards !important;
 
@@ -224,12 +221,12 @@
 		display: none;
 	}
 
-	& > .shout-user {
+	&>.shout-user {
 		text-decoration: none !important;
 	}
 
 	&.link-block--hover {
-		& > .shout-user > a {
+		&>.shout-user>a {
 			text-decoration: underline !important;
 		}
 	}
@@ -298,12 +295,12 @@
 	flex-direction: row-reverse;
 	gap: var(--card-gap);
 
-	& > .shout-action-more,
-	& > .shout-action {
+	&>.shout-action-more,
+	&>.shout-action {
 		margin: unset;
 	}
 
-	& > .shout-action-more {
+	&>.shout-action-more {
 		order: -1;
 	}
 
@@ -313,7 +310,7 @@
 	}
 }
 
-.shout:is(:hover, :focus-within) > .shout-top > .shout-actions {
+.shout:is(:hover, :focus-within)>.shout-top>.shout-actions {
 	opacity: 1;
 	transition: none;
 }
@@ -340,11 +337,9 @@
 
 .vote-button--voted {
 	--col: oklch(var(--l3-c)) !important;
-	--mask-colour: color-mix(
-        in oklch,
-        oklch(var(--l3-c)),
-        oklch(var(--l4-c)) 30%
-    );
+	--mask-colour: color-mix(in oklch,
+			oklch(var(--l3-c)),
+			oklch(var(--l4-c)) 30%);
 	--force-font-weight: var(--font-weight-medium) !important;
 }
 
@@ -354,7 +349,8 @@
 .top-listeners-item-name {
 	line-height: var(--line-height) !important;
 }
-.shout-user > a,
+
+.shout-user>a,
 .user-list-name,
 .listeners-section-item-name,
 .top-listeners-item-name {
@@ -374,7 +370,7 @@
 		margin-right: unset;
 	}
 
-	& > .markdown-body {
+	&>.markdown-body {
 		max-height: 700px;
 		overflow: hidden;
 		text-overflow: ellipsis;
@@ -400,6 +396,7 @@
 	color: oklch(var(--c3));
 	cursor: default;
 }
+
 .translated-notice-icon {
 	--icon-size: 14px;
 }
@@ -410,6 +407,7 @@
 	margin: unset;
 	font-weight: var(--font-weight-medium);
 }
+
 .shout-timestamp {
 	height: fit-content;
 	color: oklch(var(--c3) / 85%) !important;
@@ -434,6 +432,7 @@
 	border-radius: var(--avatar-radius);
 	display: flex !important;
 }
+
 .shout-user-avatar {
 	position: absolute;
 	top: var(--shout-avatar-top) !important;
@@ -448,7 +447,7 @@
 	margin-bottom: 0;
 	position: relative;
 
-	& > p {
+	&>p {
 		margin-left: 8px;
 	}
 
@@ -462,9 +461,11 @@
 	--mask: var(--icon-16-warning);
 	color: oklch(var(--c3) / 40%);
 }
+
 .shout--deleted {
 	--mask: var(--icon-16-trash);
 }
+
 .shout--reported {
 	--mask: var(--icon-16-report);
 }

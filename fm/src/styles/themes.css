@@ -1322,6 +1322,13 @@ u,
 		--c1: 0.9255 0.0391 99.09;
 		--c2: 0.8755 0.0391 99.09;
 		--c3: 0.537 0.02 96.31;
+
+		--l3-c-sat: calc(clamp(min(0), var(--sat), max(2)) * 0.46);
+		--l3-c-lit: calc(clamp(min(0.5), var(--lit), max(2)) * 0.72);
+
+		--l4-c: calc(clamp(min(0.5), var(--lit), max(2)) * 0.53) calc(clamp(min(0), var(--sat), max(2)) * 0.42) var(--hue);
+
+		--card-gradient: oklch(calc(clamp(min(0.5), var(--lit), max(0.9)) * 0.53) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue) / 13%);
 	}
 }
 
