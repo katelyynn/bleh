@@ -14,26 +14,32 @@ import {
 import { settings } from '@/build/config.ts';
 import { save_setting } from '@/components/settings/settings.tsx';
 import { Input } from '@/components/input/input.tsx';
+import {
+	Keybind,
+	KeybindList,
+} from '@/components/settings/clickables/keybind.tsx';
 
-interface SettingInputProps {
+interface SettingKeybindProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
+	value?: string[];
 	bind?: string;
 	name?: string;
 	body?: string;
 	showLabel?: boolean;
-	onChange?: (val: string | number) => void;
+	onChange?: (val: string[]) => void;
 	disabled?: boolean;
 	onMouseEnter?: () => void;
 	onMouseLeave?: () => void;
 }
 
-type SettingInputElement = HTMLDivElement & {
+type SettingKeybindElement = HTMLDivElement & {
 	update: () => void;
 	value: string | number;
 };
 
-export function SettingInput({
+export function SettingKeybind({
 	ref,
+	value = [],
 	bind,
 	name,
 	body,
@@ -42,8 +48,9 @@ export function SettingInput({
 	disabled,
 	onMouseEnter,
 	onMouseLeave,
-}: SettingInputProps) {
-	let value = bind ? settings[bind] as string | number : '';
+}: SettingKeybindProps) {
+	let previousValue: string[] = [];
+	if (bind) value = settings[bind] as string[];
 
 	const input = createRef();
 	const reset = createRef();
@@ -72,6 +79,9 @@ export function SettingInput({
 			elem.removeAttribute('disabled');
 		}
 
+		if (value == previousValue) return;
+		previousValue = value;
+
 		elem.replaceChildren(
 			<>
 				{showLabel && (
@@ -85,13 +95,27 @@ export function SettingInput({
 						ref={reset}
 					/>
 				)}
-				<Input
-					className='setting-inner'
-					value={value}
-					onSubmit={set}
-					ref={input}
-					saveManually
-				/>
+				<KeybindList ref={input}>
+					{value.map((key, index) => {
+						const interact = !['⌘', '⇧', '⌥', '⌃', '⏎', '⎋', '⌫']
+							.includes(key);
+
+						return (
+							<Keybind
+								value={key}
+								interact={interact}
+								onChange={(val: string) => {
+									const next = [...value];
+									next[index] = val;
+
+									previousValue = next;
+									set(next);
+								}}
+								key={index}
+							/>
+						);
+					})}
+				</KeybindList>
 				{Object.keys(incompatible_list).length > 0 && (
 					<SettingIncompatibleWith list={incompatible_list} />
 				)}
@@ -102,18 +126,19 @@ export function SettingInput({
 	const elem = (
 		<div
 			class='setting'
-			data-type='input'
+			data-type='keybind'
 			id={bind}
 			onMouseEnter={onMouseEnter}
 			onMouseLeave={onMouseLeave}
 			ref={ref}
 		/>
-	) as SettingInputElement;
+	) as SettingKeybindElement;
 
 	update();
 
-	function set(val: string | number) {
+	function set(val: string[]) {
 		value = val;
+		console.info('setting: set value to', val);
 
 		reset.current.value = val;
 

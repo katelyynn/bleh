@@ -31,11 +31,7 @@ export function SettingReset({
 			type='button'
 			class={['btn', 'reset']}
 			onClick={() => {
-				if (value == defaultValue) return;
-
 				setValue(defaultValue);
-				value = defaultValue;
-				update();
 			}}
 			ref={ref}
 		>
@@ -55,7 +51,12 @@ export function SettingReset({
 	});
 
 	function update() {
-		reset.setAttribute('data-modified', String(value != defaultValue));
+		console.info('setting: inspecting if modified', value, defaultValue);
+
+		reset.setAttribute(
+			'data-modified',
+			String(JSON.stringify(value) != JSON.stringify(defaultValue)),
+		);
 	}
 
 	update();

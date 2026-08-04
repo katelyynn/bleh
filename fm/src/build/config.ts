@@ -784,7 +784,7 @@ export let settings_store: Record<string, setting_instance> = {
 		body: trans.use_quick_switcher.body,
 	},
 	rabbit_search: {
-		default: 'd',
+		default: ['⌘', 'D'],
 		title: trans.search,
 		type: 'text',
 		min: 1,
@@ -795,7 +795,7 @@ export let settings_store: Record<string, setting_instance> = {
 		warn_if_empty: true,
 	},
 	rabbit_primary: {
-		default: 'k',
+		default: ['⌘', 'K'],
 		title: trans.open,
 		type: 'text',
 		min: 1,
@@ -806,7 +806,7 @@ export let settings_store: Record<string, setting_instance> = {
 		warn_if_empty: true,
 	},
 	rabbit_profile: {
-		default: 'p',
+		default: ['⌘', 'P'],
 		title: trans.profile,
 		type: 'text',
 		min: 1,
@@ -817,7 +817,7 @@ export let settings_store: Record<string, setting_instance> = {
 		warn_if_empty: true,
 	},
 	rabbit_shortcut: {
-		default: 's',
+		default: ['⌘', 'S'],
 		title: trans.starred_friend.name,
 		type: 'text',
 		min: 1,
@@ -828,7 +828,7 @@ export let settings_store: Record<string, setting_instance> = {
 		warn_if_empty: true,
 	},
 	rabbit_bleh_settings: {
-		default: 'b',
+		default: ['⌘', 'B'],
 		title: trans.settings,
 		type: 'text',
 		min: 1,

@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { createRef } from 'jsx-dom';
+import { createRef, ReactNode } from 'jsx-dom';
 import { page } from '@/build/page.ts';
 import { Icon, icons } from '@/components/shared/icon.tsx';
 import tippy from 'tippy.js';
@@ -170,4 +170,20 @@ export function Keybind({
 	}
 
 	return wrap;
+}
+
+interface KeybindListProps {
+	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
+	children: ReactNode;
+}
+
+export function KeybindList({
+	ref,
+	children,
+}: KeybindListProps) {
+	return (
+		<div class='key-bind-list' ref={ref}>
+			{children}
+		</div>
+	);
 }

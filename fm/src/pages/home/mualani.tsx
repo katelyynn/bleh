@@ -33,6 +33,7 @@ import { SeeMore } from '@/components/text/see_more.tsx';
 import { Keybind } from '@/components/settings/clickables/keybind.tsx';
 import { Input } from '@/components/input/input.tsx';
 import { SettingInput } from '@/components/settings/provider/input.tsx';
+import { SettingKeybind } from '@/components/settings/provider/keybind.tsx';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -214,6 +215,20 @@ export function mualani() {
 					<DemoItem label='Keybind (interactable)'>
 						<Keybind value='⌘' />
 						<Keybind value='A' interact />
+					</DemoItem>
+					<DemoItem label='SettingKeybind'>
+						<SettingGroup>
+							<SettingKeybind
+								name='Setting name'
+								body='Setting body'
+								value={['⌘', 'A']}
+							/>
+						</SettingGroup>
+					</DemoItem>
+					<DemoItem label='SettingKeybind (binded to rabbit_primary)'>
+						<SettingGroup>
+							<SettingKeybind bind='rabbit_primary' />
+						</SettingGroup>
 					</DemoItem>
 				</DemoGrid>
 			</section>
