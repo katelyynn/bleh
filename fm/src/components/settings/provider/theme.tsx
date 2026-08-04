@@ -72,8 +72,8 @@ export function SettingTheme({
 			<SettingCheckbox
 				bind='theme_schedule'
 				onChange={(val: boolean) => {
-					// we cover this anyway
-					if (val == false) return;
+					// handled already
+					if (!theme.adaptive && !val) return;
 
 					theme = {
 						...theme,
@@ -88,12 +88,12 @@ export function SettingTheme({
 	);
 
 	function update() {
-		update_children(bright);
-		update_children(moody);
-
 		if (adaptive.current.value != theme.adaptive) {
 			adaptive.current.value = theme.adaptive;
 		}
+
+		update_children(bright);
+		update_children(moody);
 	}
 
 	function update_children(list: ThemeBubbleElement[]) {
