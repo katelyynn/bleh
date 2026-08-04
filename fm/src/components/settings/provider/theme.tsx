@@ -1,5 +1,5 @@
 import { SettingGroup } from '@/components/settings/group.tsx';
-import { ReactNode } from 'jsx-dom';
+import { createRef, ReactElement, ReactNode } from 'jsx-dom';
 import { SettingLabel } from '@/components/settings/provider/main.tsx';
 import { tl, trans } from '@/build/trans.ts';
 import { theme, themes } from '@/build/theme.ts';
@@ -20,36 +20,58 @@ export function SettingTheme({
 	theme,
 	onChange,
 }: SettingThemeProps) {
-	const wrap = <SettingGroup />;
+	const bright: ThemeBubbleElement[] = [];
+	const moody: ThemeBubbleElement[] = [];
+
+	const wrap = (
+		<SettingGroup>
+			<ThemeRow label={tl(trans.bright)}>
+				{['light', 'ink'].map((id: string, i: number) => {
+					const elem = (
+						<ThemeBubble
+							id={id}
+							active={is_active(id, theme)}
+							onChange={set}
+							key={i}
+						/>
+					) as ThemeBubbleElement;
+
+					bright.push(elem);
+
+					return elem;
+				})}
+			</ThemeRow>
+			<ThemeRow label={tl(trans.moody)}>
+				{['dark', 'darker', 'oled', 'rose_pine'].map((
+					id: string,
+					i: number,
+				) => {
+					const elem = (
+						<ThemeBubble
+							id={id}
+							active={is_active(id, theme)}
+							onChange={set}
+							key={i}
+						/>
+					) as ThemeBubbleElement;
+
+					moody.push(elem);
+
+					return elem;
+				})}
+			</ThemeRow>
+		</SettingGroup>
+	);
 
 	function update() {
-		wrap.replaceChildren(
-			<>
-				<ThemeRow label={tl(trans.bright)}>
-					{['light', 'ink'].map((id: string, i: number) => (
-						<ThemeBubble
-							id={id}
-							active={is_active(id, theme)}
-							onChange={set}
-							key={i}
-						/>
-					))}
-				</ThemeRow>
-				<ThemeRow label={tl(trans.moody)}>
-					{['dark', 'darker', 'oled', 'rose_pine'].map((
-						id: string,
-						i: number,
-					) => (
-						<ThemeBubble
-							id={id}
-							active={is_active(id, theme)}
-							onChange={set}
-							key={i}
-						/>
-					))}
-				</ThemeRow>
-			</>,
-		);
+		update_children(bright);
+		update_children(moody);
+	}
+
+	function update_children(list: ThemeBubbleElement[]) {
+		list.forEach((entry) => {
+			entry.active = is_active(entry.id, theme);
+		});
 	}
 
 	update();
@@ -72,16 +94,18 @@ function is_active(id: string, state: theme_response) {
 }
 
 interface ThemeRowProps {
+	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
 	label: string;
 	children: ReactNode;
 }
 
 export function ThemeRow({
+	ref,
 	label,
 	children,
 }: ThemeRowProps) {
 	return (
-		<div class={['setting', 'theme-row']}>
+		<div class={['setting', 'theme-row']} ref={ref}>
 			<SettingLabel name={label} />
 			<div class='theme-bubbles'>
 				{children}
@@ -96,7 +120,7 @@ interface ThemeBubbleProps {
 	onChange?: (val: string) => void;
 }
 
-type ThemeBubbleElement = HTMLButtonElement & {
+type ThemeBubbleElement = ReactElement & HTMLButtonElement & {
 	active: boolean;
 };
 
