@@ -88,24 +88,38 @@ export function get_from_store(id?: string) {
 export function is_incompatible(store: setting_instance) {
 	let incompatible = false;
 	const list: Record<string, boolean> = {};
+	const list_strings: string[] = [];
 
 	if (!store.incompatible) {
 		return {
 			incompatible,
 			list,
+			list_strings,
 		};
 	}
 
-	Object.entries(store.incompatible).forEach(([key, val]) => {
+	Object.entries(store.incompatible).forEach(([key, val], index) => {
 		if (Array.isArray(val)) {
 			if (val.includes(settings[key])) {
 				incompatible = true;
 				list[key] = val;
+
+				if (store.incompatible_strings?.[index]) {
+					list_strings[index] = store.incompatible_strings[index];
+				} else {
+					list_strings[index] = '';
+				}
 			}
 		} else {
 			if (JSON.stringify(val) == JSON.stringify(settings[key])) {
 				incompatible = true;
 				list[key] = val;
+
+				if (store.incompatible_strings?.[index]) {
+					list_strings[index] = store.incompatible_strings[index];
+				} else {
+					list_strings[index] = '';
+				}
 			}
 		}
 	});
@@ -113,12 +127,14 @@ export function is_incompatible(store: setting_instance) {
 	return {
 		incompatible,
 		list,
+		list_strings,
 	};
 }
 
 export function SettingIncompatibleWith({
 	list,
-}: { list: Record<string, boolean> }) {
+	strings,
+}: { list: Record<string, boolean>; strings: string[] }) {
 	return (
 		<div class='setting-incompatible-with colourful'>
 			<Icon name={icons.error} identifier='setting-incompatible-with' />
@@ -126,8 +142,12 @@ export function SettingIncompatibleWith({
 				{tl(trans.incompatible)}
 			</strong>
 			<p class='setting-incompatible-with-list'>
-				{Object.entries(list).map(([key, val]) => {
+				{Object.entries(list).map(([key, val], index) => {
 					let title = key;
+
+					if (strings[index] && strings[index] != '') {
+						return tl(strings[index]);
+					}
 
 					if (settings_store[key]?.title) {
 						title = tl(settings_store[key].title);

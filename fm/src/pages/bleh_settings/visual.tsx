@@ -25,6 +25,8 @@ import { avatar } from '@/components/shared/avatar';
 import { SettingTheme } from '@/components/settings/provider/theme.tsx';
 import { SettingGroup } from '@/components/settings/group.tsx';
 import { SettingSwitch } from '@/components/settings/provider/switch.tsx';
+import { SettingRange } from '@/components/settings/provider/range.tsx';
+import { createRef } from 'jsx-dom';
 
 export function visual() {
 	if (
@@ -44,13 +46,14 @@ export function visual() {
 
 	let colourful_active;
 	let colourful_all;
-	let sat_bg;
 
 	let font_choice;
 	let custom_font;
 	let font_preview;
 
 	let hovering_serif = false;
+
+	const sat_bg = createRef();
 
 	page.structure.main!.replaceChildren(
 		<section class='bleh--panel'>
@@ -75,10 +78,14 @@ export function visual() {
 							val.theme_night,
 						);
 					}
+
+					sat_bg.current.update();
 				}}
 			/>
 			<SettingGroup>
 				<SettingSwitch bind='solarium' />
+				<SettingRange bind='noise' />
+				<SettingRange bind='sat_bg' ref={sat_bg} />
 			</SettingGroup>
 		</section>,
 	);
@@ -113,28 +120,28 @@ export function visual() {
 			        ${setting({ id: 'noise' })}
 			    </div>
 				<div class="setting-group">
-			        <div class="setting" data-type="action" id="setting_hue">
-			            <div class="heading">
-			                <h5>${tl(trans.hue)}</h5>
-			            </div>
-			            <div class="info swatch-info">
-			                <div
-			                    id="colour_custom"
-			                    class="swatch-group palette"
-			                ></div>
-			                <div class="sep swatch-sep" />
-			                <div
-			                    id="colour_palette"
-			                    class="swatch-group palette"
-			                ></div>
-			            </div>
-			        </div>
-			        <div class="setting" data-type="options">
-			            <div class="heading">
-			                <h5>${tl(trans.change_my_colour_when.name)}</h5>
-			                <p>${tl(trans.change_my_colour_when.body)}</p>
-			            </div>
-			            <div class="primary-selections">
+					<div class="setting" data-type="action" id="setting_hue">
+						<div class="heading">
+							<h5>${tl(trans.hue)}</h5>
+						</div>
+						<div class="info swatch-info">
+							<div
+								id="colour_custom"
+								class="swatch-group palette"
+							></div>
+							<div class="sep swatch-sep" />
+							<div
+								id="colour_palette"
+								class="swatch-group palette"
+							></div>
+						</div>
+					</div>
+					<div class="setting" data-type="options">
+						<div class="heading">
+							<h5>${tl(trans.change_my_colour_when.name)}</h5>
+							<p>${tl(trans.change_my_colour_when.body)}</p>
+						</div>
+						<div class="primary-selections">
 			                ${setting({
 				id: 'hue_from_artist',
 				standalone: true,
@@ -163,13 +170,8 @@ export function visual() {
 				},
 			})}
 			            </div>
-			        </div>
-			        ${ff('card_saturation')
-				? html.node`
-                    ${(sat_bg = setting({ id: 'sat_bg' }))}
-                `
-				: ''}
-			    </div>
+					</div>
+				</div>
 			</section>
 			<section class="bleh--panel">
 				<h4>${tl(trans.fonts)}</h4>

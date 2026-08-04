@@ -73,7 +73,12 @@ export const dark_themes = [
 	'kanagawa_dragon',
 ];
 
-// this lets you mark which themes support changing the
+// this lets you mark which themes dont support changing the
 // saturation of the background elements
-// technically every theme supports it but they wont show it
-export const saturation_supporting_themes = ['ink', 'dark', 'darker', 'oled'];
+export const saturation_themes_unsupported = [
+	'light',
+	'rose_pine',
+	'rose_pine_dawn',
+	'kanagawa_dragon',
+	'kanagawa',
+];

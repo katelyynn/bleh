@@ -3000,6 +3000,9 @@ export const trans = {
 			pl: 'Doadaj troche koloru do swojego świata (albo się go pozbądź)',
 		},
 	},
+	theme_no_saturation_support: {
+		en: 'Your theme does not support this feature',
+	},
 	noise: {
 		name: {
 			en: 'Noise overlay opacity',

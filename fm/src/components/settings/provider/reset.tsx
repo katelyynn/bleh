@@ -51,11 +51,18 @@ export function SettingReset({
 	});
 
 	function update() {
-		console.info('setting: inspecting if modified', value, defaultValue);
+		console.info(
+			'setting: inspecting if modified',
+			String(value),
+			String(defaultValue),
+		);
 
 		reset.setAttribute(
 			'data-modified',
-			String(JSON.stringify(value) != JSON.stringify(defaultValue)),
+			String(
+				JSON.stringify(String(value)) !=
+					JSON.stringify(String(defaultValue)),
+			),
 		);
 	}
 

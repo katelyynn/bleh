@@ -6,6 +6,7 @@
 
 import { trans, translation } from '@/build/trans';
 import { icons } from '@/components/shared/icon.tsx';
+import { saturation_themes_unsupported } from '@/build/theme.ts';
 
 export type setting_value = string | boolean | number | [] | string[] | {};
 
@@ -26,6 +27,7 @@ export interface setting_instance {
 	title?: translation;
 	body?: translation;
 	incompatible?: Record<string, setting_value>;
+	incompatible_strings?: string[];
 	requires?: Record<string, setting_value>;
 	hide_if_incompatible?: boolean;
 	require_reload?: boolean | 'partial';
@@ -190,7 +192,8 @@ export const settings_store: Record<string, setting_instance> = {
 		step: 0.2,
 		title: trans.card_background_saturation.name,
 		body: trans.card_background_saturation.body,
-		incompatible: { theme: 'light' },
+		incompatible: { theme: saturation_themes_unsupported },
+		incompatible_strings: [trans.theme_no_saturation_support],
 	},
 	lit: {
 		css: 'lit-user',

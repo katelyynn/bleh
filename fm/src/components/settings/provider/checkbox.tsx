@@ -60,9 +60,14 @@ export function SettingCheckbox({
 
 		let incompatible = false;
 		let incompatible_list: Record<string, boolean> = {};
+		let incompatible_strings: string[] = [];
 
 		if (store) {
-			({ incompatible, list: incompatible_list } = is_incompatible(
+			({
+				incompatible,
+				list: incompatible_list,
+				list_strings: incompatible_strings,
+			} = is_incompatible(
 				store,
 			));
 		}
@@ -87,7 +92,10 @@ export function SettingCheckbox({
 				{icon && <SettingIcon name={icon} />}
 				<SettingLabel name={name} body={body} store={store} />
 				{Object.keys(incompatible_list).length > 0 && (
-					<SettingIncompatibleWith list={incompatible_list} />
+					<SettingIncompatibleWith
+						list={incompatible_list}
+						strings={incompatible_strings}
+					/>
 				)}
 			</>,
 		);

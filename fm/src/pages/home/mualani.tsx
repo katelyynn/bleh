@@ -42,6 +42,7 @@ import { SettingSelect } from '@/components/settings/provider/select.tsx';
 import { select_prepare_list } from '@/components/settings/select.ts';
 import { tl, trans } from '@/build/trans.ts';
 import { Range } from '@/components/range/range.tsx';
+import { SettingRange } from '@/components/settings/provider/range.tsx';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -379,6 +380,20 @@ export function mualani() {
 				<DemoGrid>
 					<DemoItem label='Range'>
 						<Range max={100} step={1} />
+					</DemoItem>
+					<DemoItem label='SettingRange'>
+						<SettingGroup>
+							<SettingRange
+								name='Setting body'
+								max={100}
+								step={1}
+							/>
+						</SettingGroup>
+					</DemoItem>
+					<DemoItem label='SettingRange (binded to gloss)'>
+						<SettingGroup>
+							<SettingRange bind='gloss' />
+						</SettingGroup>
 					</DemoItem>
 				</DemoGrid>
 			</section>

@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { createRef, ReactNode } from 'jsx-dom';
+import { createRef } from 'jsx-dom';
 import {
 	get_from_store,
 	is_incompatible,
@@ -12,46 +12,64 @@ import {
 	SettingLabel,
 } from '@/components/settings/provider/main.tsx';
 import { settings } from '@/build/config.ts';
-import { Switch } from '@/components/settings/clickables/switch.tsx';
-import { tl } from '@/build/trans.ts';
 import { save_setting } from '@/components/settings/settings.tsx';
+import { Input } from '@/components/input/input.tsx';
 import { SettingIcon } from '@/components/settings/provider/icon.tsx';
+import { Range } from '@/components/range/range.tsx';
 
-interface SettingSwitchProps {
+interface SettingRangeProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
 	bind?: string;
 	icon?: string;
 	name?: string;
 	body?: string;
-	onChange?: (val: boolean) => void;
+	showLabel?: boolean;
+	value?: number;
+	suffix?: string;
+	min?: number;
+	max?: number;
+	step?: number;
+	onChange?: (val: number) => void;
 	disabled?: boolean;
 	onMouseEnter?: () => void;
 	onMouseLeave?: () => void;
 }
 
-type SettingSwitchElement = HTMLDivElement & {
+type SettingRangeElement = HTMLDivElement & {
 	update: () => void;
-	value: boolean;
+	value: number;
 };
 
-export function SettingSwitch({
+export function SettingRange({
 	ref,
 	bind,
 	icon,
 	name,
 	body,
+	showLabel = true,
+	value = 0,
+	suffix,
+	min = 0,
+	max = 1,
+	step = 0.1,
 	onChange,
 	disabled,
 	onMouseEnter,
 	onMouseLeave,
-}: SettingSwitchProps) {
-	let value = bind ? settings[bind] as boolean : true;
-	const checkbox = createRef();
+}: SettingRangeProps) {
+	if (bind) value = settings[bind] as number;
+
+	const range = createRef();
+	const reset = createRef();
 
 	const store = get_from_store(bind);
 
 	if (store) {
 		if (!icon) icon = store.icon;
+		if (!min && store.min) min = store.min;
+		if (!max && store.max) max = store.max;
+		if (!step && store.step) step = store.step;
+		if (!suffix && store.suffix) suffix = store.suffix;
 	}
 
 	function update() {
@@ -84,17 +102,32 @@ export function SettingSwitch({
 		elem.replaceChildren(
 			<>
 				{icon && <SettingIcon name={icon} />}
-				<SettingLabel name={name} body={body} store={store} />
-				<Switch
+				{showLabel && (
+					<SettingLabel
+						name={name}
+						body={body}
+						store={store}
+						value={value}
+						setValue={(val: number) => {
+							set(val);
+							update();
+						}}
+						defaultValue={store?.default}
+						ref={reset}
+					/>
+				)}
+				<Range
 					className='setting-inner'
-					checked={value}
-					ref={checkbox}
+					value={value}
+					min={min}
+					max={max}
+					step={step}
+					suffix={suffix}
+					onChange={set}
+					ref={range}
 				/>
 				{Object.keys(incompatible_list).length > 0 && (
-					<SettingIncompatibleWith
-						list={incompatible_list}
-						strings={incompatible_strings}
-					/>
+					<SettingIncompatibleWith list={incompatible_list} strings={incompatible_strings} />
 				)}
 			</>,
 		);
@@ -103,25 +136,23 @@ export function SettingSwitch({
 	const elem = (
 		<div
 			class='setting'
-			data-type='toggle'
+			data-type='input'
 			id={bind}
 			onMouseEnter={onMouseEnter}
 			onMouseLeave={onMouseLeave}
-			onClick={() => {
-				set(!value);
-			}}
 			ref={ref}
 		/>
-	) as SettingSwitchElement;
+	) as SettingRangeElement;
 
 	update();
 
-	function set(val: boolean) {
+	function set(val: number) {
 		value = val;
-		checkbox.current.checked = value;
 
-		if (bind) save_setting(bind, value);
-		if (onChange) onChange(value);
+		reset.current.value = val;
+
+		if (bind) save_setting(bind, val);
+		if (onChange) onChange(val);
 		if (onMouseEnter) onMouseEnter();
 	}
 

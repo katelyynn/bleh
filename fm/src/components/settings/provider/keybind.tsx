@@ -69,9 +69,14 @@ export function SettingKeybind({
 
 		let incompatible = false;
 		let incompatible_list: Record<string, boolean> = {};
+		let incompatible_strings: string[] = [];
 
 		if (store) {
-			({ incompatible, list: incompatible_list } = is_incompatible(
+			({
+				incompatible,
+				list: incompatible_list,
+				list_strings: incompatible_strings,
+			} = is_incompatible(
 				store,
 			));
 		}
@@ -125,7 +130,10 @@ export function SettingKeybind({
 					})}
 				</KeybindList>
 				{Object.keys(incompatible_list).length > 0 && (
-					<SettingIncompatibleWith list={incompatible_list} />
+					<SettingIncompatibleWith
+						list={incompatible_list}
+						strings={incompatible_strings}
+					/>
 				)}
 			</>,
 		);

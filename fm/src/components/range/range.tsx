@@ -2,6 +2,7 @@ import { createRef } from 'jsx-dom';
 
 interface RangeProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
+	className?: string;
 	value?: number;
 	suffix?: string;
 	min?: number;
@@ -16,6 +17,7 @@ type RangeElement = HTMLDivElement & {
 
 export function Range({
 	ref,
+	className,
 	value = 0,
 	suffix,
 	min = 0,
@@ -32,7 +34,7 @@ export function Range({
 	const working_max = max - min;
 
 	const wrap = (
-		<div class='range' ref={ref}>
+		<div class={['range', className && className]} ref={ref}>
 			<div class={['track', 'colourful']} ref={track}>
 				<div class='fill' />
 				<div class='nub' />
