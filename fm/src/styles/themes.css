@@ -823,7 +823,7 @@ body,
 
 		--card-shadow: 0 2px 10px oklch(0.7699 0.0113 71.9 / 0.1);
 	}
-	&[data-bleh--theme="kanagawa_dragon"]
+	&[data-bleh--theme="kanagawa_dragon"] {
 		--b2: 0.321 0.0037 84.58; /* black 5 */
 		--b3: 0.2738 0.0015 17.25; /* black 4 */
 		--b4: 0.2925 0.0022 17.42; /* black 3 */
