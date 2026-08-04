@@ -71,7 +71,7 @@
 
 	blockquote {
 		padding: 6px;
-		background: oklch(var(--f4), 10%);
+		background: oklch(var(--k4) / 10%);
 		border-radius: var(--item-med-radius);
 	}
 

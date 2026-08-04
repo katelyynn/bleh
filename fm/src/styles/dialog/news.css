@@ -49,7 +49,7 @@
 .news-update-body {
 	padding: 15px;
 	border-radius: var(--item-small-radius);
-	background-color: oklch(var(--f4) / 20%);
+	background-color: oklch(var(--k4) / 20%);
 	color: oklch(var(--c2));
 
 	&[data-changelog-type="major"] {

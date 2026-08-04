@@ -37,7 +37,7 @@
 .on-tour {
 	display: flex;
 
-	background: oklch(var(--f4) / 20%);
+	background: oklch(var(--k4) / 20%);
 	color: oklch(var(--l3-c));
 	font-size: 12px;
 	font-weight: var(--font-weight-bold);

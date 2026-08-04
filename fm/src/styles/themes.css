@@ -760,17 +760,17 @@ body,
 		--card-blur-bg: oklch(var(--b5) / var(--solarium-opacity, 70%));
 	}
 	&[data-bleh--theme="rose_pine_dawn"] {
-		--b2: 0.8031 0.006 334; /* highlight high */
+		--b2: 0.7631 0.006 334; /* highlight high */
 		--b3: 0.942 0.0057 31.06; /* highlight med */
 		--b4: 0.9189 0.0145 64.34; /* overlay */
 		--b5: 0.987 0.0107 76.6; /* surface */
 		--b6: 0.9699 0.0113 71.9; /* base */
 		--b8: 0.9502 0.0101 58.21; /* highlight low */
 
-		--separator-base: oklch(var(--b2) / 0.6);
+		--separator-base: oklch(var(--b2) / 0.23);
 
-		--card-border-base: oklch(var(--b2) / 0.2);
-		--card-border-base-highlight: oklch(var(--b2) / 0.35);
+		--card-border-base: oklch(var(--b2) / 0.28);
+		--card-border-base-highlight: oklch(var(--b2) / 0.42);
 
 		--normal-shadow: none;
 		--input-shadow:
@@ -785,10 +785,10 @@ body,
 		--sidebar-border: color-mix(
             in oklch,
             oklch(var(--b5)),
-            oklch(var(--b4)) 55%
+            oklch(var(--b4)) 65%
         );
 		--toolbar-bg: oklch(var(--b5) / 50%);
-		--toolbar-border: oklch(var(--b4) / 85%);
+		--toolbar-border: oklch(var(--b4) / 75%);
 		--subtle-border: 1px solid oklch(var(--b4) / 65%);
 
 		--card-blur-bg: oklch(var(--b5) / var(--solarium-opacity, 70%));

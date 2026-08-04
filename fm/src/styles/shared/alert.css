@@ -113,7 +113,7 @@
 .cta {
 	background: var(--card-specific-background) !important;
 	border-radius: var(--item-med-radius) !important;
-	--card-specific-background: linear-gradient(180deg, oklch(var(--f4) / 15%), transparent);
+	--card-specific-background: linear-gradient(180deg, oklch(var(--k4) / 15%), transparent);
 	padding: 10px var(--side-action-side) !important;
 	box-shadow: unset !important;
 	color: oklch(var(--c2)) !important;

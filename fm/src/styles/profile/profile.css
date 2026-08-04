@@ -143,7 +143,7 @@
 	margin: 0 calc(var(--card-padding) - var(--side-action-side));
 
 	background-color: transparent;
-	box-shadow: inset 0 0 0 1px oklch(var(--f4) / 30%);
+	box-shadow: inset 0 0 0 1px oklch(var(--k4) / 30%);
 	border-radius: var(--card-radius);
 }
 

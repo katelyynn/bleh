@@ -1005,7 +1005,7 @@
 	display: flex;
 	gap: 4px;
 
-	background: linear-gradient(180deg, transparent, oklch(var(--f4) / 20%));
+	background: linear-gradient(180deg, transparent, oklch(var(--k4) / 20%));
 	padding: var(--setting-group-padding);
 	margin: 0 calc(-1 * var(--setting-group-padding)) calc(-1 * var(--setting-group-padding));
 	min-width: calc(100% + (var(--setting-group-padding) * 2));
