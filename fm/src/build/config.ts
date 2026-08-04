@@ -27,7 +27,7 @@ export interface setting_instance {
 	title?: translation;
 	body?: translation;
 	incompatible?: Record<string, setting_value>;
-	incompatible_strings?: string[];
+	incompatible_strings?: translation[];
 	requires?: Record<string, setting_value>;
 	hide_if_incompatible?: boolean;
 	require_reload?: boolean | 'partial';

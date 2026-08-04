@@ -7,7 +7,7 @@
 import { settings_store } from '@/build/config';
 import { auth, page } from '@/build/page';
 import { stored_season } from '@/build/seasonal';
-import { tl, trans } from '@/build/trans';
+import { tl, trans, translation } from '@/build/trans';
 import { version } from '@/main';
 import { html } from 'lighterhtml';
 import { ff } from './sku';
@@ -18,122 +18,166 @@ import { setting } from './settings';
 import { update_colour_swatches } from '@/config';
 import { formatHex } from 'culori';
 
+export interface colour {
+	type?: colour_type;
+	sets?: colour_set;
+	displays?: display_set;
+	requires_flag?: string;
+	label: translation;
+}
+
+export type colour_type =
+	| 'default'
+	| 'avatar'
+	| 'season'
+	| 'colour'
+	| 'customise';
+
+interface colour_set {
+	hue: number;
+	sat: number;
+	lit: number;
+}
+
+interface display_set {
+	hue: string;
+	sat: string;
+	lit: string;
+}
+
+export const default_colour: colour = {
+	type: 'default',
+	sets: {
+		hue: settings_store.hue.default as number,
+		sat: settings_store.sat.default as number,
+		lit: settings_store.lit.default as number,
+	},
+	displays: {
+		hue: `var(--hue-seasonal, ${settings_store.hue.default})`,
+		sat: `var(--sat-seasonal, ${settings_store.sat.default})`,
+		lit: `var(--lit-seasonal, ${settings_store.lit.default})`,
+	},
+	label: trans.default,
+};
+
+export const avatar_colour: colour = {
+	type: 'avatar',
+	sets: {
+		hue: auth.sets.hue,
+		sat: auth.sets.sat,
+		lit: auth.sets.lit,
+	},
+	requires_flag: 'colour_based_on_avatar',
+	label: trans.avatar,
+};
+
+export const colours: colour[] = [
+	{
+		sets: {
+			hue: 19,
+			sat: 1.5,
+			lit: 0.84,
+		},
+		label: trans.red,
+	},
+	{
+		sets: {
+			hue: 37,
+			sat: 1.4,
+			lit: 0.9,
+		},
+		label: trans.orange,
+	},
+	{
+		sets: {
+			hue: 73,
+			sat: 1.38,
+			lit: 1.07,
+		},
+		label: trans.yellow,
+	},
+	{
+		sets: {
+			hue: 115,
+			sat: 1.16,
+			lit: 1,
+		},
+		label: trans.lime,
+	},
+	{
+		sets: {
+			hue: 145,
+			sat: 1.6,
+			lit: 0.95,
+		},
+		label: trans.green,
+	},
+	{
+		sets: {
+			hue: 178,
+			sat: 1,
+			lit: 1,
+		},
+		label: trans.aqua,
+	},
+	{
+		sets: {
+			hue: 248,
+			sat: 1.45,
+			lit: 0.82,
+		},
+		label: trans.blue,
+	},
+	{
+		sets: {
+			hue: 290,
+			sat: 1.45,
+			lit: 0.82,
+		},
+		label: trans.purple,
+	},
+	{
+		sets: {
+			hue: 340,
+			sat: 1.35,
+			lit: 0.93,
+		},
+		label: trans.pink,
+	},
+	{
+		sets: {
+			hue: 0,
+			sat: 0,
+			lit: 1,
+		},
+		label: trans.grey,
+	},
+];
+
+const colours_legacy = {
+	custom: [
+		{},
+		{
+			type: 'avatar',
+			sets: {
+				hue: auth.sets.hue,
+				sat: auth.sets.sat,
+				lit: auth.sets.lit,
+			},
+			requires_flag: 'colour_based_on_avatar',
+		},
+		{
+			type: 'adaptive',
+			requires_flag: 'adaptive_colours',
+		},
+		{
+			type: 'customise',
+		},
+	],
+	palette: [],
+};
+
 export function display_colour_presets() {
-	const colours = {
-		custom: [
-			{
-				type: 'default',
-				sets: {
-					hue: settings_store.hue.default,
-					sat: settings_store.sat.default,
-					lit: settings_store.lit.default,
-				},
-				displays: {
-					hue: `var(--hue-seasonal, ${settings_store.hue.default})`,
-					sat: `var(--sat-seasonal, ${settings_store.sat.default})`,
-					lit: `var(--lit-seasonal, ${settings_store.lit.default})`,
-				},
-			},
-			{
-				type: 'avatar',
-				sets: {
-					hue: auth.sets.hue,
-					sat: auth.sets.sat,
-					lit: auth.sets.lit,
-				},
-				requires_flag: 'colour_based_on_avatar',
-			},
-			{
-				type: 'adaptive',
-				requires_flag: 'adaptive_colours',
-			},
-			{
-				type: 'customise',
-			},
-		],
-		palette: [
-			{
-				sets: {
-					hue: 19,
-					sat: 1.5,
-					lit: 0.84,
-				},
-				label: trans.red,
-			},
-			{
-				sets: {
-					hue: 37,
-					sat: 1.4,
-					lit: 0.9,
-				},
-				label: trans.orange,
-			},
-			{
-				sets: {
-					hue: 73,
-					sat: 1.38,
-					lit: 1.07,
-				},
-				label: trans.yellow,
-			},
-			{
-				sets: {
-					hue: 115,
-					sat: 1.16,
-					lit: 1,
-				},
-				label: trans.lime,
-			},
-			{
-				sets: {
-					hue: 145,
-					sat: 1.6,
-					lit: 0.95,
-				},
-				label: trans.green,
-			},
-			{
-				sets: {
-					hue: 178,
-					sat: 1,
-					lit: 1,
-				},
-				label: trans.aqua,
-			},
-			{
-				sets: {
-					hue: 248,
-					sat: 1.45,
-					lit: 0.82,
-				},
-				label: trans.blue,
-			},
-			{
-				sets: {
-					hue: 290,
-					sat: 1.45,
-					lit: 0.82,
-				},
-				label: trans.purple,
-			},
-			{
-				sets: {
-					hue: 340,
-					sat: 1.35,
-					lit: 0.93,
-				},
-				label: trans.pink,
-			},
-			{
-				sets: {
-					hue: 0,
-					sat: 0,
-					lit: 1,
-				},
-				label: trans.grey,
-			},
-		],
-	};
 	const exclusives = {
 		christmas: [
 			{

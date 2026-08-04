@@ -66,10 +66,10 @@ export function SettingRange({
 
 	if (store) {
 		if (!icon) icon = store.icon;
-		if (!min && store.min) min = store.min;
-		if (!max && store.max) max = store.max;
-		if (!step && store.step) step = store.step;
-		if (!suffix && store.suffix) suffix = store.suffix;
+		if (store.min) min = store.min;
+		if (store.max) max = store.max;
+		if (store.step) step = store.step;
+		if (store.suffix) suffix = store.suffix;
 	}
 
 	function update() {
@@ -127,7 +127,10 @@ export function SettingRange({
 					ref={range}
 				/>
 				{Object.keys(incompatible_list).length > 0 && (
-					<SettingIncompatibleWith list={incompatible_list} strings={incompatible_strings} />
+					<SettingIncompatibleWith
+						list={incompatible_list}
+						strings={incompatible_strings}
+					/>
 				)}
 			</>,
 		);

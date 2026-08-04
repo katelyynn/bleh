@@ -247,7 +247,7 @@
 	to {
 		background: oklch(var(--h3));
 		scale: 1;
-		transform: rotate(3deg);
+		transform: rotate(-3deg);
 	}
 
 	40% {

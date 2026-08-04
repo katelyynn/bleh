@@ -111,6 +111,7 @@ export function SettingSelect({
 					value={value}
 					values={values}
 					onChange={set}
+					inSettings
 				/>
 				{Object.keys(incompatible_list).length > 0 && (
 					<SettingIncompatibleWith

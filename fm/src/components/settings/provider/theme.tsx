@@ -2,7 +2,7 @@ import { SettingGroup } from '@/components/settings/group.tsx';
 import { createRef, ReactElement, ReactNode } from 'jsx-dom';
 import { SettingLabel } from '@/components/settings/provider/main.tsx';
 import { tl, trans } from '@/build/trans.ts';
-import { theme, themes, light_themes, dark_themes } from '@/build/theme.ts';
+import { dark_themes, light_themes, theme, themes } from '@/build/theme.ts';
 import { avatar } from '@/components/shared/avatar.tsx';
 import { auth } from '@/build/page.ts';
 import { Icon } from '@/components/shared/icon.tsx';
@@ -158,7 +158,7 @@ export function SettingTheme({
 }
 
 function is_active(id: string, state: theme_response) {
-	return state.id == id && !state.adaptive;
+	return state.id == id;
 }
 
 interface ThemeRowProps {
@@ -221,7 +221,9 @@ export function ThemeBubble({
 				</span>
 			</strong>
 			{source.new_release && (
-				<label class='theme-bubble-new colourful'>{tl(trans.new)}</label>
+				<label class='theme-bubble-new colourful'>
+					{tl(trans.new)}
+				</label>
 			)}
 		</button>
 	) as ThemeBubbleElement;
