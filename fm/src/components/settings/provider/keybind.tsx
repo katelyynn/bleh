@@ -18,11 +18,13 @@ import {
 	Keybind,
 	KeybindList,
 } from '@/components/settings/clickables/keybind.tsx';
+import { SettingIcon } from '@/components/settings/provider/icon.tsx';
 
 interface SettingKeybindProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
 	value?: string[];
 	bind?: string;
+	icon?: string;
 	name?: string;
 	body?: string;
 	showLabel?: boolean;
@@ -41,6 +43,7 @@ export function SettingKeybind({
 	ref,
 	value = [],
 	bind,
+	icon,
 	name,
 	body,
 	showLabel = true,
@@ -56,6 +59,10 @@ export function SettingKeybind({
 	const reset = createRef();
 
 	const store = get_from_store(bind);
+
+	if (store) {
+		if (!icon) icon = store.icon;
+	}
 
 	function update() {
 		disabled = false;
@@ -84,6 +91,7 @@ export function SettingKeybind({
 
 		elem.replaceChildren(
 			<>
+				{icon && <SettingIcon name={icon} />}
 				{showLabel && (
 					<SettingLabel
 						name={name}

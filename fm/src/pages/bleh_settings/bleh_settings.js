@@ -56,6 +56,7 @@ import { avatar } from '@/components/shared/avatar.js';
 import { convert_lang_to_country, flag } from '@/components/shared/flag.js';
 import { lotus_modal } from '@/components/music/lotus.js';
 import { new_indicator } from '@/components/shared/indicator.js';
+import { rabbit_keybinds } from '@/pages/bleh_settings/interface.tsx';
 
 export function bleh_settings() {
 	page.name = auth.name;
@@ -617,25 +618,7 @@ export async function render_setting_page(page_id) {
                             <h5>${tl(trans.quick_switcher_keybinds)}</h5>
                         </div>
                         <div class="toggle-wrap">
-                            <button class="btn see-more" onclick=${() => {
-						dialog({
-							id: 'quick_switcher_keybinds',
-							title: tl(trans.quick_switcher),
-							body: html.node`
-                                        <div class="setting-group">
-                                            ${setting({ id: 'rabbit_primary' })}
-                                            ${setting({ id: 'rabbit_search' })}
-                                            ${setting({ id: 'rabbit_profile' })}
-                                            ${
-								setting({ id: 'rabbit_shortcut' })
-							}
-                                            ${
-								setting({ id: 'rabbit_bleh_settings' })
-							}
-                                        </div>
-                                    `,
-						});
-					}}>
+                            <button class="btn see-more" onclick=${rabbit_keybinds}>
                                 ${tl(trans.change_now)}
                             </button>
                         </div>

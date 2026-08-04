@@ -15,10 +15,12 @@ import { settings } from '@/build/config.ts';
 import { Switch } from '@/components/settings/clickables/switch.tsx';
 import { tl } from '@/build/trans.ts';
 import { save_setting } from '@/components/settings/settings.tsx';
+import { SettingIcon } from '@/components/settings/provider/icon.tsx';
 
 interface SettingSwitchProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
 	bind?: string;
+	icon?: string;
 	name?: string;
 	body?: string;
 	onChange?: (val: boolean) => void;
@@ -35,6 +37,7 @@ type SettingSwitchElement = HTMLDivElement & {
 export function SettingSwitch({
 	ref,
 	bind,
+	icon,
 	name,
 	body,
 	onChange,
@@ -46,6 +49,10 @@ export function SettingSwitch({
 	const checkbox = createRef();
 
 	const store = get_from_store(bind);
+
+	if (store) {
+		if (!icon) icon = store.icon;
+	}
 
 	function update() {
 		disabled = false;
@@ -71,6 +78,7 @@ export function SettingSwitch({
 
 		elem.replaceChildren(
 			<>
+				{icon && <SettingIcon name={icon} />}
 				<SettingLabel name={name} body={body} store={store} />
 				<Switch
 					className='setting-inner'

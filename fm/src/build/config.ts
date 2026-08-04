@@ -5,6 +5,7 @@
  */
 
 import { trans, translation } from '@/build/trans';
+import { icons } from '@/components/shared/icon.tsx';
 
 export type setting_value = string | boolean | number | [] | string[] | {};
 
@@ -789,7 +790,7 @@ export let settings_store: Record<string, setting_instance> = {
 		type: 'text',
 		min: 1,
 		max: 1,
-		icon: 'icon-16-search',
+		icon: icons.search,
 		placeholder: 'none',
 		keybind: ['⌘', 'D'],
 		warn_if_empty: true,
@@ -800,7 +801,7 @@ export let settings_store: Record<string, setting_instance> = {
 		type: 'text',
 		min: 1,
 		max: 1,
-		icon: 'icon-16-rabbit',
+		icon: icons.rabbit,
 		placeholder: 'none',
 		keybind: ['⌘', 'K'],
 		warn_if_empty: true,
@@ -811,7 +812,7 @@ export let settings_store: Record<string, setting_instance> = {
 		type: 'text',
 		min: 1,
 		max: 1,
-		icon: 'icon-16-user',
+		icon: icons.user,
 		placeholder: 'none',
 		keybind: ['⌘', 'P'],
 		warn_if_empty: true,
@@ -822,7 +823,7 @@ export let settings_store: Record<string, setting_instance> = {
 		type: 'text',
 		min: 1,
 		max: 1,
-		icon: 'icon-16-starred-friend',
+		icon: icons.starred_friend,
 		placeholder: 'none',
 		keybind: ['⌘', 'S'],
 		warn_if_empty: true,
@@ -833,7 +834,7 @@ export let settings_store: Record<string, setting_instance> = {
 		type: 'text',
 		min: 1,
 		max: 1,
-		icon: 'icon-16-bleh',
+		icon: icons.bleh_settings,
 		placeholder: 'none',
 		keybind: ['⌘', 'B'],
 		warn_if_empty: true,

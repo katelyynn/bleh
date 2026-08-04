@@ -186,6 +186,7 @@ export const icons = {
 	logout: 'logout',
 	mouse: 'mouse',
 	spinner: 'spinner',
+	rabbit: 'rabbit',
 };
 
 interface icon {

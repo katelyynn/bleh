@@ -8,6 +8,7 @@ import { html } from 'lighterhtml';
 import { log } from '@/build/log';
 import { dialogs, page } from '@/build/page';
 import { tl, trans } from '@/build/trans';
+import { ReactElement } from 'jsx-dom';
 
 export function load_dialogs() {
 	const elem = (
@@ -32,7 +33,7 @@ type dialog = {
 	id: string;
 	title?: string;
 	subtitle?: string;
-	body: HTMLElement;
+	body: HTMLElement | ReactElement;
 	dismiss?: boolean;
 	type?: string;
 	has_overlays?: boolean;

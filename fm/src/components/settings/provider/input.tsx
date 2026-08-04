@@ -14,10 +14,12 @@ import {
 import { settings } from '@/build/config.ts';
 import { save_setting } from '@/components/settings/settings.tsx';
 import { Input } from '@/components/input/input.tsx';
+import { SettingIcon } from '@/components/settings/provider/icon.tsx';
 
 interface SettingInputProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
 	bind?: string;
+	icon?: string;
 	name?: string;
 	body?: string;
 	showLabel?: boolean;
@@ -35,6 +37,7 @@ type SettingInputElement = HTMLDivElement & {
 export function SettingInput({
 	ref,
 	bind,
+	icon,
 	name,
 	body,
 	showLabel = true,
@@ -49,6 +52,10 @@ export function SettingInput({
 	const reset = createRef();
 
 	const store = get_from_store(bind);
+
+	if (store) {
+		if (!icon) icon = store.icon;
+	}
 
 	function update() {
 		disabled = false;
@@ -74,6 +81,7 @@ export function SettingInput({
 
 		elem.replaceChildren(
 			<>
+				{icon && <SettingIcon name={icon} />}
 				{showLabel && (
 					<SettingLabel
 						name={name}

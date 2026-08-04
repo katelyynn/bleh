@@ -1009,3 +1009,11 @@
 	color: oklch(var(--c3));
 	flex-shrink: 0;
 }
+
+.setting-icon {
+	display: flex;
+	align-items: center;
+	color: oklch(var(--c3));
+	--icon-size: 16px;
+	margin-right: calc(-1 * (var(--card-gap) - 7px));
+}
