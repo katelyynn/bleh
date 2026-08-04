@@ -2,7 +2,7 @@ import { dialog } from '@/components/dialog/dialog.tsx';
 import { tl, trans } from '@/build/trans.ts';
 import { SettingGroup } from '@/components/settings/group.tsx';
 import { SettingSelect } from '@/components/settings/provider/select.tsx';
-import { theme, themes } from '@/build/theme.ts';
+import { dark_themes, light_themes, theme, themes } from '@/build/theme.ts';
 import { SelectOption } from '@/components/select/select.tsx';
 import { settings } from '@/build/config.ts';
 
@@ -55,14 +55,20 @@ function convert_list_to_select(
 ) {
 	const values: SelectOption[] = [];
 
-	Object.entries(list)
-		.filter(([_, theme]) => theme.type == filter)
-		.map(([key, val]) => {
-			values.push({
-				value: key,
-				text: tl(val.name),
-			});
+	let base_list;
+
+	if (filter == 'light') {
+		base_list = light_themes;
+	} else {
+		base_list = dark_themes;
+	}
+
+	base_list.map((key) => {
+		values.push({
+			value: key,
+			text: tl(list[key].name),
 		});
+	});
 
 	return values;
 }

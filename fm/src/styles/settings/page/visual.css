@@ -61,33 +61,6 @@
 			}
 		}
 
-		&[data-theme-id="adaptive"] {
-			&>.bubble {
-				position: relative;
-
-				&>.inner {
-					position: absolute;
-					inset: 0;
-
-					width: 50%;
-
-					&:first-child {
-						border-top-right-radius: unset;
-						border-bottom-right-radius: unset;
-					}
-
-					&:last-child {
-						z-index: 2;
-						left: 50%;
-						right: none;
-
-						border-top-left-radius: unset;
-						border-bottom-left-radius: unset;
-					}
-				}
-			}
-		}
-
 		&>strong {
 			font-size: 13px;
 			font-weight: var(--font-weight);
@@ -251,19 +224,37 @@
 
 .theme-bubble-new {
 	position: absolute;
-	top: -2px;
-	right: -4px;
+	top: -4px;
+	right: -5px;
 	z-index: 10;
 	font-size: 12px;
 	line-height: 14px;
 	font-weight: var(--font-weight-bold);
 	color: oklch(var(--b7));
-	background: oklch(var(--h3) / 90%);
+	background: oklch(var(--h3));
 	box-shadow: 0 3px 12px oklch(var(--h4) / 32%);
 	padding: 0 3px;
 	border-radius: 3px;
 
-	transform: rotate(6deg);
+	transform: rotate(4deg);
+
+	animation: theme-bubble-new 2s var(--trans-function-ani) infinite;
+}
+
+@keyframes theme-bubble-new {
+
+	from,
+	to {
+		background: oklch(var(--h3));
+		scale: 1;
+		transform: rotate(3deg);
+	}
+
+	40% {
+		background: color-mix(in oklch, oklch(var(--l2-c)) 30%, oklch(var(--h3)));
+		scale: 1.08;
+		transform: rotate(6deg);
+	}
 }
 
 .font-preview-stack {

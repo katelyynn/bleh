@@ -221,7 +221,7 @@ export function ThemeBubble({
 				</span>
 			</strong>
 			{source.new_release && (
-				<label class='theme-bubble-new'>{tl(trans.new)}</label>
+				<label class='theme-bubble-new colourful'>{tl(trans.new)}</label>
 			)}
 		</button>
 	) as ThemeBubbleElement;

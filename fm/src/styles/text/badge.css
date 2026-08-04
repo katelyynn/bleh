@@ -16,8 +16,8 @@
 		gap: 4px;
 	}
 
-	& > .bleh-icon-container,
-	& > .bleh-icon {
+	&>.bleh-icon-container,
+	&>.bleh-icon {
 		--icon-size: 12px;
 		height: var(--icon-size);
 		--mask-colour: currentColor;
@@ -33,9 +33,6 @@
 	}
 
 	&.new {
-		--hue-over: 317;
-		--sat-over: 1.44;
-		--lit-over: 0.96;
 		animation: new 4s linear infinite;
 
 		box-shadow: 0 0 20px oklch(var(--h4) / 40%);
@@ -46,9 +43,16 @@
 		border-radius: unset;
 	}
 
-	.side-action > & {
+	.side-action>& {
 		margin: unset !important;
 	}
+}
+
+.theme-bubble-new,
+.new-badge.new {
+	--hue-over: 317;
+	--sat-over: 1.44;
+	--lit-over: 0.96;
 }
 
 .taste-badge {
@@ -63,7 +67,7 @@
 	align-items: center;
 	height: var(--icon-size);
 }
-.sku > .bleh-icon-container {
-	animation: staggered_spinner 3s cubic-bezier(0.34, 1.56, 0.64, 1)
-		infinite;
+
+.sku>.bleh-icon-container {
+	animation: staggered_spinner 3s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
 }
