@@ -17,6 +17,9 @@
 		align-items: center;
 		gap: 6px;
 
+		max-width: 60px;
+		text-align: center;
+
 		--icon-size: 12px;
 
 		.bubble {
@@ -86,18 +89,10 @@
 		}
 
 		&>strong {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			gap: 2px;
 			font-size: 13px;
 			font-weight: var(--font-weight);
-
-			&>.new-badge {
-				font-size: 12px;
-				line-height: 14px;
-				margin: unset !important;
-			}
+			overflow: hidden;
+			max-width: 100%;
 		}
 
 		&[aria-selected="true"] {

@@ -1700,7 +1700,7 @@ export function save_setting(id: string, value: setting_value) {
 
 		document.body.setAttribute(
 			`data-bleh--theme_type`,
-			settings.theme_type,
+			settings.theme_type as string,
 		);
 
 		chart_reflow();

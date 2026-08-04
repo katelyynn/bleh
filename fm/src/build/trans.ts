@@ -1658,6 +1658,10 @@ export const trans = {
 			// https://rosepinetheme.com
 			en: 'Rosé Pine',
 		},
+		rose_pine_dawn: {
+			// https://rosepinetheme.com
+			en: 'Rosé Pine Dawn',
+		},
 	},
 	bright: {
 		// light themes

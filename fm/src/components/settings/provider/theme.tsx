@@ -42,7 +42,7 @@ export function SettingTheme({
 					label={tl(trans.bright.name)}
 					body={tl(trans.bright.body)}
 				>
-					{['light', 'ink'].map((id: string, i: number) => {
+					{['light', 'ink', 'rose_pine_dawn'].map((id: string, i: number) => {
 						const elem = (
 							<ThemeBubble
 								id={id}

@@ -9,6 +9,8 @@ export interface theme {
 	new_release?: boolean;
 }
 
+// use this to fill in theme info accessible with all modern
+// bleh TSX components
 export const themes: Record<string, theme> = {
 	light: {
 		name: trans.themes.light,
@@ -41,4 +43,10 @@ export const themes: Record<string, theme> = {
 		external: true,
 		new_release: true,
 	},
+	rose_pine_dawn: {
+		name: trans.themes.rose_pine_dawn,
+		type: 'light',
+		external: true,
+		new_release: true
+	}
 };
