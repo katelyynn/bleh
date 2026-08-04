@@ -825,7 +825,7 @@ body,
 	}
 	&[data-bleh--theme="kanagawa_dragon"] {
 		--b2: 0.351 0.0037 84.58; /* black 5 */
-		--b3: 0.2738 0.0015 17.25; /* black 4 */
+		--b3: 0.2938 0.0015 17.25; /* black 4 */
 		--b4: 0.2925 0.0022 17.42; /* black 3 */
 		--b5: 0.2264 0.0059 91.62; /* black 2 */
 		--b6: 0.181 0.006 106.98; /* black 1 */
@@ -840,6 +840,10 @@ body,
 
 		--card-blur-bg: oklch(var(--b5) / var(--solarium-opacity, 70%));
 		--card-blur-bg-alt: oklch(var(--b5) / var(--solarium-opacity, 35%));
+
+		--input-shadow:
+			inset 0 0 0 1px oklch(var(--b3) / 90%),
+        inset 0 1px 2px 1px oklch(var(--b6) / 80%);
 	}
 }
 
