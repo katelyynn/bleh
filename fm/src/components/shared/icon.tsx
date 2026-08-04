@@ -34,6 +34,7 @@ export const icons = {
 	option: 'option',
 	backspace: 'backspace',
 	shift: 'shift',
+	submit: 'submit',
 	home: 'home',
 	edit: 'edit',
 	bulk_edit: 'edit-bulk',

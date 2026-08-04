@@ -1,3 +1,9 @@
+/**
+ * bleh, an extension for the music site Last.fm
+ * Copyright (c) 2024-2026 katelyn and contributors
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 import { createRef } from 'jsx-dom';
 import {
 	get_from_store,
@@ -40,6 +46,7 @@ export function SettingInput({
 	let value = bind ? settings[bind] as string | number : '';
 
 	const input = createRef();
+	const reset = createRef();
 
 	const store = get_from_store(bind);
 
@@ -68,17 +75,20 @@ export function SettingInput({
 		elem.replaceChildren(
 			<>
 				{showLabel && (
-					<SettingLabel name={name} body={body} store={store} />
+					<SettingLabel
+						name={name}
+						body={body}
+						store={store}
+						value={value}
+						setValue={set}
+						defaultValue={store?.default}
+						ref={reset}
+					/>
 				)}
 				<Input
 					className='setting-inner'
 					value={value}
-					onSubmit={(val: string | number) => {
-						value = val;
-
-						if (bind) save_setting(bind, val);
-						if (onChange) onChange(val);
-					}}
+					onSubmit={set}
 					ref={input}
 					saveManually
 				/>
@@ -101,6 +111,15 @@ export function SettingInput({
 	) as SettingInputElement;
 
 	update();
+
+	function set(val: string | number) {
+		value = val;
+
+		reset.current.value = val;
+
+		if (bind) save_setting(bind, val);
+		if (onChange) onChange(val);
+	}
 
 	Object.defineProperty(elem, 'value', {
 		get() {

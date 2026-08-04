@@ -5,9 +5,9 @@
 	flex-wrap: wrap;
 	gap: 10px var(--card-gap);
 
-	&+.library-fetch,
-	&+.buffer-standard,
-	&+.alert {
+	& + .library-fetch,
+	& + .buffer-standard,
+	& + .alert {
 		margin-top: unset !important;
 	}
 

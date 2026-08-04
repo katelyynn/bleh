@@ -1,18 +1,41 @@
-import { setting_instance, settings, settings_store } from '@/build/config.ts';
+/**
+ * bleh, an extension for the music site Last.fm
+ * Copyright (c) 2024-2026 katelyn and contributors
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
+import {
+	setting_instance,
+	setting_value,
+	settings,
+	settings_store,
+} from '@/build/config.ts';
 import { tl, trans } from '@/build/trans.ts';
 import { Icon, icons } from '@/components/shared/icon.tsx';
+import { SettingReset } from '@/components/settings/provider/reset.tsx';
+import { createRef } from 'jsx-dom';
 
 interface SettingLabelProps {
+	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
 	name?: string;
 	body?: string;
 	store?: setting_instance;
+	value?: setting_value;
+	setValue?: (val: setting_value) => void;
+	defaultValue?: setting_value;
 }
 
 export function SettingLabel({
+	ref,
 	name,
 	body,
 	store,
+	value,
+	setValue,
+	defaultValue,
 }: SettingLabelProps) {
+	const reset = createRef();
+
 	if (store) {
 		if (store.title) name = tl(store.title);
 		if (store.body) body = tl(store.body);
@@ -28,12 +51,32 @@ export function SettingLabel({
 		);
 	}
 
-	return (
-		<div class={['heading', 'setting-inner']}>
-			<h5 class='setting-name'>{name}</h5>
+	const label = (
+		<div class={['heading', 'setting-inner']} ref={ref}>
+			<h5 class='setting-name'>
+				{name}
+				{(value != undefined && setValue != undefined &&
+					defaultValue != undefined) &&
+					(
+						<SettingReset
+							value={value}
+							setValue={setValue}
+							defaultValue={defaultValue}
+							ref={reset}
+						/>
+					)}
+			</h5>
 			{body && <p class='setting-body'>{body}</p>}
 		</div>
 	);
+
+	Object.defineProperty(label, 'value', {
+		set(val: setting_value) {
+			reset.current.value = val;
+		},
+	});
+
+	return label;
 }
 
 export function get_from_store(id?: string) {

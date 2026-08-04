@@ -1,9 +1,15 @@
+/**
+ * bleh, an extension for the music site Last.fm
+ * Copyright (c) 2024-2026 katelyn and contributors
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 import { ReactNode } from 'jsx-dom';
 import type { ClassNames } from 'jsx-dom';
 
 interface SeeMoreProps {
 	href?: string;
-	icon?: string,
+	icon?: string;
 	external?: boolean;
 	onClick?: () => void;
 	iconPlacement?: 'left' | 'right';

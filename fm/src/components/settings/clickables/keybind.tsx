@@ -1,6 +1,13 @@
+/**
+ * bleh, an extension for the music site Last.fm
+ * Copyright (c) 2024-2026 katelyn and contributors
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 import { createRef } from 'jsx-dom';
 import { page } from '@/build/page.ts';
 import { Icon, icons } from '@/components/shared/icon.tsx';
+import tippy from 'tippy.js';
 
 interface KeybindProps {
 	ref?: ReturnType<typeof createRef<HTMLElement>>;
@@ -25,6 +32,8 @@ const iconmap: Record<string, string> = {
 	'⇧': icons.arrow_up,
 	'⌥': icons.option,
 	'⌫': icons.backspace,
+	'⌃': icons.arrow_up,
+	'⏎': icons.submit,
 };
 
 export function Keybind({
@@ -41,6 +50,7 @@ export function Keybind({
 
 	function update() {
 		if (entering) {
+			tip.disable();
 			wrap.replaceChildren(
 				<>
 					<span class='key-bind-text'>...</span>
@@ -97,10 +107,18 @@ export function Keybind({
 			input.current.focus();
 			wrap.setAttribute('data-entering', 'true');
 		} else {
+			if (keymap[value]) {
+				tip.enable();
+			} else {
+				tip.disable();
+			}
+
 			wrap.replaceChildren(
 				<span class='key-bind-text'>{label(value)}</span>,
 			);
 			wrap.removeAttribute('data-entering');
+
+			tip.setContent(tooltip(value));
 		}
 	}
 
@@ -118,6 +136,11 @@ export function Keybind({
 			<span class='key-bind-text'>{label(value)}</span>
 		</kbd>
 	);
+
+	const tip = tippy(wrap, {
+		content: tooltip(value),
+		delay: [1200, 0],
+	});
 
 	update();
 
@@ -138,6 +161,12 @@ export function Keybind({
 		}
 
 		return value;
+	}
+
+	function tooltip(value: string) {
+		if (keymap[value]) return keymap[value];
+
+		return value.toUpperCase();
 	}
 
 	return wrap;
