@@ -114,6 +114,7 @@ export function SettingSwitch({
 
 		if (bind) save_setting(bind, value);
 		if (onChange) onChange(value);
+		if (onMouseEnter) onMouseEnter();
 	}
 
 	Object.defineProperty(elem, 'value', {

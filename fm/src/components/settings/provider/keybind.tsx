@@ -152,6 +152,7 @@ export function SettingKeybind({
 
 		if (bind) save_setting(bind, val);
 		if (onChange) onChange(val);
+		if (onMouseEnter) onMouseEnter();
 		update();
 	}
 

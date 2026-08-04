@@ -127,6 +127,7 @@ export function SettingInput({
 
 		if (bind) save_setting(bind, val);
 		if (onChange) onChange(val);
+		if (onMouseEnter) onMouseEnter();
 		update();
 	}
 
