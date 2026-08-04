@@ -122,6 +122,9 @@ export function SettingCheckbox({
 		get() {
 			return value;
 		},
+		set(val: boolean) {
+			set(val);
+		},
 	});
 
 	elem.update = update;

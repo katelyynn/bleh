@@ -27,6 +27,7 @@ export function SettingTheme({
 }: SettingThemeProps) {
 	const bright: ThemeBubbleElement[] = [];
 	const moody: ThemeBubbleElement[] = [];
+	const adaptive = createRef();
 
 	const wrap = (
 		<SettingGroup>
@@ -71,6 +72,9 @@ export function SettingTheme({
 			<SettingCheckbox
 				bind='theme_schedule'
 				onChange={(val: boolean) => {
+					// we cover this anyway
+					if (val == false) return;
+
 					theme = {
 						...theme,
 						id: match() as string,
@@ -78,6 +82,7 @@ export function SettingTheme({
 					};
 					update();
 				}}
+				ref={adaptive}
 			/>
 		</SettingGroup>
 	);
@@ -85,6 +90,10 @@ export function SettingTheme({
 	function update() {
 		update_children(bright);
 		update_children(moody);
+
+		if (adaptive.current.value != theme.adaptive) {
+			adaptive.current.value = theme.adaptive;
+		}
 	}
 
 	function update_children(list: ThemeBubbleElement[]) {
@@ -101,6 +110,7 @@ export function SettingTheme({
 		theme = {
 			...theme,
 			id,
+			adaptive: false,
 		};
 		update();
 
