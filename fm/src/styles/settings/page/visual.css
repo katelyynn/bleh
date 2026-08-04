@@ -38,7 +38,7 @@
 				justify-content: center;
 				align-items: center;
 				overflow: hidden;
-				border-radius: inherit;
+				border-radius: var(--item-small-radius);
 
 				height: 100%;
 			}
@@ -118,6 +118,7 @@
 
 			opacity: 0.7;
 			background-size: cover;
+			border-radius: var(--item-small-radius);
 
 			--mask: linear-gradient(180deg,
 					white 20%,
@@ -169,6 +170,7 @@
 				-webkit-backdrop-filter: var(--solarium);
 
 				border-left: 1px solid var(--sidebar-border);
+				border-bottom-right-radius: var(--item-small-radius);
 
 				[data-bleh--solarium="false"] & {
 					background: var(--sidebar-bg);
@@ -238,7 +240,7 @@
 
 	transform: rotate(4deg);
 
-	animation: theme-bubble-new 2s var(--trans-function-ani) infinite;
+	animation: theme-bubble-new 2.6s var(--trans-function-ani) infinite;
 }
 
 @keyframes theme-bubble-new {
@@ -250,7 +252,7 @@
 		transform: rotate(-3deg);
 	}
 
-	40% {
+	35% {
 		background: color-mix(in oklch, oklch(var(--l2-c)) 30%, oklch(var(--h3)));
 		scale: 1.08;
 		transform: rotate(6deg);
