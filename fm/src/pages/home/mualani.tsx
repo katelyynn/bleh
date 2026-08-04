@@ -13,7 +13,7 @@ import { notify } from '@/components/dialog/notify';
 import { download_with_progress } from '@/build/tools';
 import { status } from '@/components/dialog/status.js';
 import { dialog } from '@/components/dialog/dialog';
-import { setting } from '@/components/settings/settings';
+import { save_setting, setting } from '@/components/settings/settings';
 import { markdown, markdown_field } from '@/components/markdown/markdown';
 import { sponsor_list } from '@/build/sponsor';
 import { create_badge, load_badges } from '@/components/shared/badge';
@@ -36,6 +36,7 @@ import { SettingInput } from '@/components/settings/provider/input.tsx';
 import { SettingKeybind } from '@/components/settings/provider/keybind.tsx';
 import { SettingTheme } from '@/components/settings/provider/theme.tsx';
 import { SettingCheckbox } from '@/components/settings/provider/checkbox.tsx';
+import { settings } from '@/build/config.ts';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -284,6 +285,20 @@ export function mualani() {
 								adaptive: false,
 								theme_day: 'light',
 								theme_night: 'dark',
+							}}
+							onChange={(val) => {
+								if (settings.theme != val.id) {
+									save_setting('theme', val.id);
+								}
+								if (settings.theme_day != val.theme_day) {
+									save_setting('theme_day', val.theme_day);
+								}
+								if (settings.theme_night != val.theme_night) {
+									save_setting(
+										'theme_night',
+										val.theme_night,
+									);
+								}
 							}}
 						/>
 					</DemoItem>

@@ -1566,6 +1566,10 @@ export const trans = {
 			zh: '当系统处于深色主题时应用',
 		},
 	},
+	adapt_theme: {
+		// matches your theme to your system theme
+		en: 'Match system settings',
+	},
 	theme_schedule: {
 		en: 'Choose which theme preference to apply based on your system theme.',
 		de: 'Wähle dein bevorzugtes Farbschema basierend auf deinem Systemdesign.',

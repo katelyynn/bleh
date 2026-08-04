@@ -6,6 +6,8 @@ import { theme, themes } from '@/build/theme.ts';
 import { avatar } from '@/components/shared/avatar.tsx';
 import { auth } from '@/build/page.ts';
 import { Icon } from '@/components/shared/icon.tsx';
+import { SettingCheckbox } from '@/components/settings/provider/checkbox.tsx';
+import { match } from '@/components/settings/dynamic_theming.js';
 
 interface SettingThemeProps {
 	theme: theme_response;
@@ -66,6 +68,17 @@ export function SettingTheme({
 					return elem;
 				})}
 			</ThemeRow>
+			<SettingCheckbox
+				bind='theme_schedule'
+				onChange={(val: boolean) => {
+					theme = {
+						...theme,
+						id: match() as string,
+						adaptive: val,
+					};
+					update();
+				}}
+			/>
 		</SettingGroup>
 	);
 

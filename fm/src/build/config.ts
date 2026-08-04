@@ -134,6 +134,7 @@ export const settings_store: Record<string, setting_instance> = {
 	},
 	theme_schedule: {
 		default: false,
+		title: trans.adapt_theme,
 	},
 	theme_day: {
 		default: 'light',

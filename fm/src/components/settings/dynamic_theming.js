@@ -19,18 +19,22 @@ export function dynamic_theming() {
 }
 
 export function match(media = page.state.media) {
-	if (!settings.theme_schedule) return;
+	if (!settings.theme_schedule) return settings.theme;
 
-	if (media.matches) apply_theme('night');
-	else apply_theme('day');
+	if (media.matches) return apply_theme('night');
+	else return apply_theme('day');
 }
 
 /**
  * @param {string} time
  */
 function apply_theme(time) {
-	if (settings.theme == settings[`theme_${time}`]) return;
+	if (settings.theme == settings[`theme_${time}`]) {
+		return settings[`theme_${time}`];
+	}
 
 	log(`applying theme for time ${time}`, 'dynamic theming');
 	save_setting('theme', settings[`theme_${time}`]);
+
+	return settings[`theme_${time}`];
 }
