@@ -34,6 +34,7 @@ import { Keybind } from '@/components/settings/clickables/keybind.tsx';
 import { Input } from '@/components/input/input.tsx';
 import { SettingInput } from '@/components/settings/provider/input.tsx';
 import { SettingKeybind } from '@/components/settings/provider/keybind.tsx';
+import { SettingTheme } from '@/components/settings/provider/theme.tsx';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -260,6 +261,20 @@ export function mualani() {
 							<SettingInput bind='font' />
 							<SettingInput bind='font' showLabel={false} />
 						</SettingGroup>
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section>
+				<DemoGrid>
+					<DemoItem label='SettingTheme'>
+						<SettingTheme
+							theme={{
+								id: 'dark',
+								adaptive: false,
+								theme_day: 'light',
+								theme_night: 'dark',
+							}}
+						/>
 					</DemoItem>
 				</DemoGrid>
 			</section>

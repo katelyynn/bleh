@@ -4,7 +4,6 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { handle_error_500 } from '@/page';
 import { log } from '@/build/log';
 import { page, setRoot } from '@/build/page';
 import { get_language_name } from '@/build/tools';
@@ -1655,6 +1654,14 @@ export const trans = {
 			// https://rosepinetheme.com
 			en: 'Rosé Pine',
 		},
+	},
+	bright: {
+		// light themes
+		en: 'Bright',
+	},
+	moody: {
+		// dark themes
+		en: 'Moody',
 	},
 	colours: {
 		en: 'Colours',
@@ -11827,13 +11834,6 @@ function get_lang() {
 }
 
 export function lookup_lang() {
-	const logo = document.querySelector('.masthead-logo a');
-
-	if (!logo) {
-		handle_error_500();
-		return;
-	}
-
 	setRoot(get_lang());
 
 	lang = document.documentElement.getAttribute('lang');

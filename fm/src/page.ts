@@ -120,6 +120,12 @@ export function bleh() {
 			clean_storage();
 			favi();
 
+			const logo = document.querySelector('.masthead-logo a');
+			if (!logo) {
+				handle_error_500();
+				return;
+			}
+
 			page.state.colour_preview = html.node`
                 <div class="colour-preview" />
             `;

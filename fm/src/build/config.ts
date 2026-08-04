@@ -110,7 +110,7 @@ export let inbuilt_settings = {
 
 export const other_setting_types = ['list'];
 
-export let settings_store: Record<string, setting_instance> = {
+export const settings_store: Record<string, setting_instance> = {
 	theme: {
 		default: 'darker',
 		type: 'radio',

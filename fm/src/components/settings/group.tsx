@@ -8,7 +8,7 @@ import { ReactNode } from 'jsx-dom';
 
 interface SettingGroupProps {
 	blend?: boolean;
-	children: ReactNode;
+	children?: ReactNode;
 }
 
 export function SettingGroup({
