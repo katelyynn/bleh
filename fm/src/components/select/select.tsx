@@ -11,6 +11,7 @@ export interface SelectOption {
 interface SelectProps {
 	values: SelectOption[];
 	value?: string;
+	className?: string;
 	name?: string;
 	onChange?: (val: string) => void;
 	inSettings?: boolean;
@@ -23,6 +24,7 @@ type SelectElement = HTMLDivElement & {
 export function Select({
 	values,
 	value,
+	className,
 	name,
 	onChange,
 	inSettings,
@@ -33,7 +35,7 @@ export function Select({
 	const select = createRef();
 
 	const wrap = (
-		<div class={['select-wrap', 'custom-selector']}>
+		<div class={['select-wrap', 'custom-selector', className && className]}>
 			<select ref={select} />
 			<button
 				type='button'
@@ -88,7 +90,7 @@ export function Select({
 		update();
 	}
 
-	function update() {
+	function update(initial = false) {
 		select.current.replaceChildren(
 			<>
 				{values.map((val, i) => {
@@ -117,7 +119,7 @@ export function Select({
 
 		select.current.value = value;
 
-		if (onChange) onChange(value);
+		if (onChange && !initial) onChange(value);
 
 		menu.hide();
 
@@ -179,7 +181,7 @@ export function Select({
 		}, 300);
 	}
 
-	update();
+	update(true);
 
 	return wrap;
 }

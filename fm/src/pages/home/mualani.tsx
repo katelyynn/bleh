@@ -38,6 +38,9 @@ import { SettingTheme } from '@/components/settings/provider/theme.tsx';
 import { SettingCheckbox } from '@/components/settings/provider/checkbox.tsx';
 import { settings } from '@/build/config.ts';
 import { Select } from '@/components/select/select.tsx';
+import { SettingSelect } from '@/components/settings/provider/select.tsx';
+import { select_prepare_list } from '@/components/settings/select.ts';
+import { tl, trans } from '@/build/trans.ts';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -312,6 +315,34 @@ export function mualani() {
 								},
 							]}
 						/>
+					</DemoItem>
+					<DemoItem label='SettingSelect'>
+						<SettingGroup>
+							<SettingSelect
+								name='Select body'
+								values={[
+									{
+										value: 'hello',
+										text: 'Hello',
+									},
+									{
+										value: 'world',
+										text: 'World',
+									},
+								]}
+							/>
+						</SettingGroup>
+					</DemoItem>
+					<DemoItem label='SettingSelect (binded to starred_friend)'>
+						<SettingGroup>
+							<SettingSelect
+								bind='starred_friend'
+								values={select_prepare_list([
+									{ value: '', text: tl(trans.none) },
+									...settings.friends,
+								])}
+							/>
+						</SettingGroup>
 					</DemoItem>
 				</DemoGrid>
 			</section>
