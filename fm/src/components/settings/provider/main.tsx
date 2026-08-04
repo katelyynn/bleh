@@ -145,9 +145,7 @@ export function SettingIncompatibleWith({
 				{Object.entries(list).map(([key, val], index) => {
 					let title = key;
 
-					if (strings[index] && strings[index] != '') {
-						return tl(strings[index]);
-					}
+					if (strings[index] && strings[index] != '') return tl(strings[index]);
 
 					if (settings_store[key]?.title) {
 						title = tl(settings_store[key].title);
