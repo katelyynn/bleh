@@ -31,6 +31,8 @@ export const icons = {
 	save: 'check',
 	done: 'check',
 	command: 'command',
+	option: 'option',
+	backspace: 'backspace',
 	shift: 'shift',
 	home: 'home',
 	edit: 'edit',

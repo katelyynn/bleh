@@ -286,6 +286,14 @@ pre {
 	text-align: center;
 }
 
+.key-bind-text {
+	display: flex;
+}
+
+.bleh-icon-key-bind {
+	margin: 0 -2px;
+}
+
 .not-text {
 	cursor: default !important;
 }

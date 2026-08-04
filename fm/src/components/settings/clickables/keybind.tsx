@@ -1,5 +1,6 @@
 import { createRef } from 'jsx-dom';
 import { page } from '@/build/page.ts';
+import { Icon, icons } from '@/components/shared/icon.tsx';
 
 interface KeybindProps {
 	ref?: ReturnType<typeof createRef<HTMLElement>>;
@@ -17,6 +18,13 @@ const keymap: Record<string, string> = {
 	'⏎': 'Enter',
 	'⎋': 'Esc',
 	'⌫': 'Backspace',
+};
+
+const iconmap: Record<string, string> = {
+	'⌘': icons.command,
+	'⇧': icons.arrow_up,
+	'⌥': icons.option,
+	'⌫': icons.backspace,
 };
 
 export function Keybind({
@@ -125,7 +133,11 @@ export function Keybind({
 	});
 
 	function label(value: string) {
-		return (!darwin && keymap[value]) ? keymap[value] : value;
+		if (iconmap[value]) {
+			return <Icon name={iconmap[value]} identifier='key-bind' />;
+		}
+
+		return value;
 	}
 
 	return wrap;
