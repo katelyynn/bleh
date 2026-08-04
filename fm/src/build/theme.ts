@@ -48,5 +48,21 @@ export const themes: Record<string, theme> = {
 		type: 'light',
 		external: true,
 		new_release: true
+	},
+	kanagawa_dragon: {
+		name: trans.themes.kanagawa_dragon,
+		type: 'dark',
+		external: true,
+		new_release: true
+	},
+	kanagawa: {
+		name: trans.themes.kanagawa,
+		type: 'light',
+		external: true,
+		new_release: true
 	}
 };
+
+// this lets you choose which themes to expose to the user-facing screens
+export const light_themes = ['light', 'ink', 'rose_pine_dawn', 'kanagawa'];
+export const dark_themes = ['dark', 'darker', 'oled', 'rose_pine', 'kanagawa_dragon'];

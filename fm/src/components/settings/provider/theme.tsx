@@ -2,7 +2,7 @@ import { SettingGroup } from '@/components/settings/group.tsx';
 import { createRef, ReactElement, ReactNode } from 'jsx-dom';
 import { SettingLabel } from '@/components/settings/provider/main.tsx';
 import { tl, trans } from '@/build/trans.ts';
-import { theme, themes } from '@/build/theme.ts';
+import { theme, themes, light_themes, dark_themes } from '@/build/theme.ts';
 import { avatar } from '@/components/shared/avatar.tsx';
 import { auth } from '@/build/page.ts';
 import { Icon } from '@/components/shared/icon.tsx';
@@ -42,7 +42,7 @@ export function SettingTheme({
 					label={tl(trans.bright.name)}
 					body={tl(trans.bright.body)}
 				>
-					{['light', 'ink', 'rose_pine_dawn'].map((id: string, i: number) => {
+					{light_themes.map((id: string, i: number) => {
 						const elem = (
 							<ThemeBubble
 								id={id}
@@ -61,7 +61,7 @@ export function SettingTheme({
 					label={tl(trans.moody.name)}
 					body={tl(trans.moody.body)}
 				>
-					{['dark', 'darker', 'oled', 'rose_pine'].map((
+					{dark_themes.map((
 						id: string,
 						i: number,
 					) => {

@@ -1662,6 +1662,14 @@ export const trans = {
 			// https://rosepinetheme.com
 			en: 'Rosé Pine Dawn',
 		},
+		kanagawa: {
+			// https://github.com/rebelot/kanagawa.nvim
+			en: 'Kanagawa',
+		},
+		kanagawa_dragon: {
+			// https://github.com/rebelot/kanagawa.nvim
+			en: 'Kanagawa Dragon',
+		}
 	},
 	bright: {
 		// light themes
