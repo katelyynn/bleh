@@ -3,6 +3,9 @@ import { createRef, ReactElement, ReactNode } from 'jsx-dom';
 import { SettingLabel } from '@/components/settings/provider/main.tsx';
 import { tl, trans } from '@/build/trans.ts';
 import { theme, themes } from '@/build/theme.ts';
+import { avatar } from '@/components/shared/avatar.tsx';
+import { auth } from '@/build/page.ts';
+import { Icon } from '@/components/shared/icon.tsx';
 
 interface SettingThemeProps {
 	theme: theme_response;
@@ -25,7 +28,10 @@ export function SettingTheme({
 
 	const wrap = (
 		<SettingGroup>
-			<ThemeRow label={tl(trans.bright)}>
+			<ThemeRow
+				label={tl(trans.bright.name)}
+				body={tl(trans.bright.body)}
+			>
 				{['light', 'ink'].map((id: string, i: number) => {
 					const elem = (
 						<ThemeBubble
@@ -41,7 +47,7 @@ export function SettingTheme({
 					return elem;
 				})}
 			</ThemeRow>
-			<ThemeRow label={tl(trans.moody)}>
+			<ThemeRow label={tl(trans.moody.name)} body={tl(trans.moody.body)}>
 				{['dark', 'darker', 'oled', 'rose_pine'].map((
 					id: string,
 					i: number,
@@ -96,17 +102,19 @@ function is_active(id: string, state: theme_response) {
 interface ThemeRowProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
 	label: string;
+	body?: string;
 	children: ReactNode;
 }
 
 export function ThemeRow({
 	ref,
 	label,
+	body,
 	children,
 }: ThemeRowProps) {
 	return (
 		<div class={['setting', 'theme-row']} ref={ref}>
-			<SettingLabel name={label} />
+			<SettingLabel name={label} body={body} />
 			<div class='theme-bubbles'>
 				{children}
 			</div>
@@ -143,7 +151,16 @@ export function ThemeBubble({
 				update();
 			}}
 		>
-			{tl(source.name)} ({id})
+			<ThemePreview id={id} type={source.type} />
+			<strong>
+				<span class='theme-name'>
+					{source.icon && <Icon name={source.icon} />}
+					{tl(source.name)}
+				</span>
+			</strong>
+			{source.new_release && (
+				<label class='theme-bubble-new'>{tl(trans.new)}</label>
+			)}
 		</button>
 	) as ThemeBubbleElement;
 
@@ -164,10 +181,50 @@ export function ThemeBubble({
 	});
 
 	function update() {
-		bubble.setAttribute('aria-checked', String(active));
+		bubble.setAttribute('aria-selected', String(active));
 	}
 
 	update();
 
 	return bubble;
+}
+
+interface ThemePreviewProps {
+	id: string;
+	type: 'light' | 'dark';
+}
+
+function ThemePreview({
+	id,
+	type,
+}: ThemePreviewProps) {
+	return (
+		<div class='bubble'>
+			<div
+				class={['inner', 'theme-preview']}
+				data-bleh--theme={id}
+				data-bleh--theme_type={type}
+			>
+				<div class='preview-inner'>
+					<div
+						class='preview-image'
+						style={{
+							backgroundImage: `url(${
+								avatar(auth.avatar, 'avatar300s')
+							})`,
+						}}
+					/>
+					<div class='preview-card'>
+						<div class='preview-card-main'>
+							<div class='preview-header'>Aa</div>
+							<div class='preview-text' />
+							<div class={['preview-text', 'row-2']} />
+							<div class={['preview-text', 'row-3']} />
+						</div>
+						<div class='preview-card-side' />
+					</div>
+				</div>
+			</div>
+		</div>
+	);
 }

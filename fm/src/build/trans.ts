@@ -1657,11 +1657,21 @@ export const trans = {
 	},
 	bright: {
 		// light themes
-		en: 'Bright',
+		name: {
+			en: 'Bright',
+		},
+		body: {
+			en: 'Perfect for daylight',
+		},
 	},
 	moody: {
 		// dark themes
-		en: 'Moody',
+		name: {
+			en: 'Moody',
+		},
+		body: {
+			en: 'Get cosy under the moonlight',
+		},
 	},
 	colours: {
 		en: 'Colours',

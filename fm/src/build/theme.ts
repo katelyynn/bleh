@@ -3,16 +3,13 @@ import { icons } from '@/components/shared/icon.tsx';
 
 export interface theme {
 	name: translation;
-	type?: 'light' | 'dark';
+	type: 'light' | 'dark';
 	icon?: string;
 	external?: boolean;
+	new_release?: boolean;
 }
 
 export const themes: Record<string, theme> = {
-	adaptive: {
-		name: trans.auto,
-		icon: icons.theme_adaptive,
-	},
 	light: {
 		name: trans.themes.light,
 		type: 'light',
@@ -42,5 +39,6 @@ export const themes: Record<string, theme> = {
 		name: trans.themes.rose_pine,
 		type: 'dark',
 		external: true,
+		new_release: true,
 	},
 };
