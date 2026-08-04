@@ -21,6 +21,7 @@ export interface setting_instance {
 		| 'list'
 		| 'tabs'
 		| 'text'
+		| 'keybind'
 		| 'other';
 	title?: translation;
 	body?: translation;
@@ -787,57 +788,37 @@ export let settings_store: Record<string, setting_instance> = {
 	rabbit_search: {
 		default: ['⌘', 'D'],
 		title: trans.search,
-		type: 'text',
-		min: 1,
-		max: 1,
+		type: 'keybind',
 		icon: icons.search,
-		placeholder: 'none',
 		keybind: ['⌘', 'D'],
-		warn_if_empty: true,
 	},
 	rabbit_primary: {
 		default: ['⌘', 'K'],
 		title: trans.open,
-		type: 'text',
-		min: 1,
-		max: 1,
+		type: 'keybind',
 		icon: icons.rabbit,
-		placeholder: 'none',
 		keybind: ['⌘', 'K'],
-		warn_if_empty: true,
 	},
 	rabbit_profile: {
 		default: ['⌘', 'P'],
 		title: trans.profile,
-		type: 'text',
-		min: 1,
-		max: 1,
+		type: 'keybind',
 		icon: icons.user,
-		placeholder: 'none',
 		keybind: ['⌘', 'P'],
-		warn_if_empty: true,
 	},
 	rabbit_shortcut: {
 		default: ['⌘', 'S'],
 		title: trans.starred_friend.name,
-		type: 'text',
-		min: 1,
-		max: 1,
+		type: 'keybind',
 		icon: icons.starred_friend,
-		placeholder: 'none',
 		keybind: ['⌘', 'S'],
-		warn_if_empty: true,
 	},
 	rabbit_bleh_settings: {
 		default: ['⌘', 'B'],
 		title: trans.settings,
-		type: 'text',
-		min: 1,
-		max: 1,
+		type: 'keybind',
 		icon: icons.bleh_settings,
-		placeholder: 'none',
 		keybind: ['⌘', 'B'],
-		warn_if_empty: true,
 	},
 	prefer_no_redirect: {
 		default: true,
