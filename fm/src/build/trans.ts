@@ -1651,6 +1651,10 @@ export const trans = {
 			pl: 'Próżny',
 			zh: '虚空',
 		},
+		rose_pine: {
+			// https://rosepinetheme.com
+			en: 'Rosé Pine',
+		},
 	},
 	colours: {
 		en: 'Colours',

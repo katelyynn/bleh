@@ -2197,6 +2197,14 @@ export function theme_bubbles(func = null) {
 			type: 'oled',
 			name: tl(trans.themes.oled),
 		},
+		{
+			type: 'sep',
+		},
+		{
+			id: 'rose_pine',
+			type: 'rose_pine',
+			name: tl(trans.themes.rose_pine),
+		},
 	];
 
 	let buttons = [];

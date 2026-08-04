@@ -749,6 +749,16 @@ body,
 		--menu-bg: var(--b5);
 		--menu-opacity: 94%;
 	}
+	&[data-bleh--theme="rose_pine"] {
+		--b2: 0.4399 0.0392 290.42;
+		--b3: 0.3717 0.0358 291.1;
+		--b4: 0.2708 0.0423 289.23;
+		--b5: 0.2413 0.0322 289.14;
+		--b6: 0.2134 0.0255 291.13;
+		--b8: 0.2512 0.0263 287.62;
+
+		--card-blur-bg: oklch(var(--b5) / var(--solarium-opacity, 70%));
+	}
 }
 
 /* text */
@@ -1115,6 +1125,12 @@ u,
 		--white: 89% 0 0;
 
 		--side-action-bg: oklch(var(--k4) / 12%);
+	}
+	&[data-bleh--theme="rose_pine"],
+	body[data-bleh--theme="rose_pine"] &:not(.theme-preview, .grid-items-cover-image.colourful, .grid-item-text) {
+		--c1: 0.9488 0.0299 289.97;
+		--c2: 0.848 0.0299 289.97;
+		--c3: 0.6539 0.0444 291.23;
 	}
 }
 
