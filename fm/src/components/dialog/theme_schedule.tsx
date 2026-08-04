@@ -5,6 +5,7 @@ import { SettingSelect } from '@/components/settings/provider/select.tsx';
 import { dark_themes, light_themes, theme, themes } from '@/build/theme.ts';
 import { SelectOption } from '@/components/select/select.tsx';
 import { settings } from '@/build/config.ts';
+import { Icon } from '@/components/shared/icon.tsx';
 
 export interface theme_min {
 	theme_day: string;
@@ -64,9 +65,12 @@ function convert_list_to_select(
 	}
 
 	base_list.map((key) => {
+		const entry = list[key];
+		if (!entry) return;
+
 		values.push({
 			value: key,
-			text: tl(list[key].name),
+			text: tl(entry.name),
 		});
 	});
 

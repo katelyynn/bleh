@@ -110,7 +110,7 @@ export function Select({
 		);
 
 		// fallback
-		button.current.replaceChildren(values[0]?.text);
+		button.current.replaceChildren('?');
 
 		const val = values.find((v) => v.value == value);
 		if (!val) return;
@@ -119,7 +119,7 @@ export function Select({
 
 		select.current.value = value;
 
-		if (onChange && !initial) onChange(value);
+		if (onChange && !initial) onChange(value as string);
 
 		menu.hide();
 

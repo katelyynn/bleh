@@ -6,7 +6,7 @@
 
 import { log } from '@/build/log';
 import { page, setRoot } from '@/build/page';
-import { get_language_name } from '@/build/tools';
+import { get_language_name, sanitise_text } from '@/build/tools';
 import { Settings } from 'luxon';
 
 // loads your selected language in Last.fm
@@ -1669,7 +1669,7 @@ export const trans = {
 		kanagawa_dragon: {
 			// https://github.com/rebelot/kanagawa.nvim
 			en: 'Kanagawa Dragon',
-		}
+		},
 	},
 	bright: {
 		// light themes
@@ -11783,7 +11783,7 @@ export function tl(key: translation | string, replacements = {}) {
 		return translation_fallback;
 	}
 
-	let translation = (key[lang] || key.en) as string;
+	let translation = sanitise_text((key[lang] || key.en) as string);
 
 	if (page.state.april && translation.includes('Last.fm Pro')) {
 		translation = translation.replaceAll('Last.fm Pro', 'Verified');

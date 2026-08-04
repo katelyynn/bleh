@@ -352,7 +352,7 @@ export function mualani() {
 						<SettingTheme
 							theme={{
 								id: settings.theme as string,
-								adaptive: false,
+								adaptive: settings.theme_schedule as boolean,
 								theme_day: settings.theme_day as string,
 								theme_night: settings.theme_night as string,
 							}}
