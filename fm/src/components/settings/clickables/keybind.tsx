@@ -66,31 +66,8 @@ export function Keybind({
 							entering = false;
 
 							// https://developer.mozilla.org/en-US/docs/Web/API/UI_Events/Keyboard_event_key_values
-							if (
-								[
-									'Escape',
-									'Backspace',
-									'Enter',
-									'Unidentified',
-									'Alt',
-									'AltGraph',
-									'CapsLock',
-									'Control',
-									'Fn',
-									'FnLock',
-									'Hyper',
-									'Meta',
-									'NumLock',
-									'ScrollLock',
-									'Shift',
-									'Super',
-									'Symbol',
-									'SymbolLock',
-									'Tab',
-									' ',
-								]
-									.includes(e.key)
-							) {
+							// this covers space (obviously) and disallows system characters
+							if (e.key == ' ' || e.key.length > 2) {
 								update();
 
 								return;
