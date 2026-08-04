@@ -3001,7 +3001,7 @@ export const trans = {
 		},
 	},
 	theme_no_saturation_support: {
-		en: 'Your theme does not support this feature',
+		en: 'This theme defines its own colours independently',
 	},
 	noise: {
 		name: {
