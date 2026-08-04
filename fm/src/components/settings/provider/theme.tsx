@@ -8,6 +8,10 @@ import { auth } from '@/build/page.ts';
 import { Icon } from '@/components/shared/icon.tsx';
 import { SettingCheckbox } from '@/components/settings/provider/checkbox.tsx';
 import { match } from '@/components/settings/dynamic_theming.js';
+import {
+	theme_min,
+	theme_schedule_dialog,
+} from '@/components/dialog/theme_schedule.tsx';
 
 interface SettingThemeProps {
 	theme: theme_response;
@@ -29,6 +33,7 @@ export function SettingTheme({
 	const moody: ThemeBubbleElement[] = [];
 	const adaptive = createRef();
 	const adaptive_tip = createRef();
+	const adaptive_tip_wrap = createRef();
 
 	const wrap = (
 		<>
@@ -90,12 +95,25 @@ export function SettingTheme({
 					ref={adaptive}
 				/>
 			</SettingGroup>
-			{theme.adaptive && (
-				<p class='card-tip'>
-					<span ref={adaptive_tip} />{' '}
-					<a class='card-tip-link'>{tl(trans.change_schedule)}</a>
-				</p>
-			)}
+			<p class='card-tip' ref={adaptive_tip_wrap}>
+				<span ref={adaptive_tip} />
+				<a
+					class='card-tip-link'
+					onClick={() =>
+						theme_schedule_dialog({
+							onChange: (val: theme_min) => {
+								theme = {
+									...theme,
+									...val,
+								};
+								update();
+								match();
+							},
+						})}
+				>
+					{tl(trans.change_schedule)}
+				</a>
+			</p>
 		</>
 	);
 
@@ -104,12 +122,14 @@ export function SettingTheme({
 			adaptive.current.value = theme.adaptive;
 		}
 
-		if (adaptive_tip.current) {
-			adaptive_tip.current.textContent = tl(trans.adaptive_tip, {
-				day: themes[theme.theme_day].name,
-				night: themes[theme.theme_night].name,
-			});
-		}
+		adaptive_tip_wrap.current.setAttribute(
+			'aria-hidden',
+			!theme.adaptive,
+		);
+		adaptive_tip.current.textContent = tl(trans.adaptive_tip, {
+			day: tl(themes[theme.theme_day].name),
+			night: tl(themes[theme.theme_night].name),
+		});
 
 		update_children(bright);
 		update_children(moody);

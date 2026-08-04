@@ -351,10 +351,10 @@ export function mualani() {
 					<DemoItem label='SettingTheme'>
 						<SettingTheme
 							theme={{
-								id: 'dark',
+								id: settings.theme as string,
 								adaptive: false,
-								theme_day: 'light',
-								theme_night: 'dark',
+								theme_day: settings.theme_day as string,
+								theme_night: settings.theme_night as string,
 							}}
 							onChange={(val) => {
 								if (settings.theme != val.id) {

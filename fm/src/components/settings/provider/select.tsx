@@ -26,7 +26,7 @@ interface SettingSelectProps {
 	name?: string;
 	body?: string;
 	showLabel?: boolean;
-	onChange?: (val: string | number) => void;
+	onChange?: (val: string) => void;
 	disabled?: boolean;
 	onMouseEnter?: () => void;
 	onMouseLeave?: () => void;
