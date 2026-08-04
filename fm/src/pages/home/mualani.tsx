@@ -41,6 +41,7 @@ import { Select } from '@/components/select/select.tsx';
 import { SettingSelect } from '@/components/settings/provider/select.tsx';
 import { select_prepare_list } from '@/components/settings/select.ts';
 import { tl, trans } from '@/build/trans.ts';
+import { Range } from '@/components/range/range.tsx';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -371,6 +372,13 @@ export function mualani() {
 								}
 							}}
 						/>
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section>
+				<DemoGrid>
+					<DemoItem label='Range'>
+						<Range max={100} step={1} />
 					</DemoItem>
 				</DemoGrid>
 			</section>
