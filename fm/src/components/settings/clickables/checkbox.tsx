@@ -7,11 +7,15 @@
 import { createRef } from 'jsx-dom';
 
 interface CheckboxProps {
+	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
+	className?: string;
 	interact?: boolean;
 	checked?: boolean;
 }
 
 export function Checkbox({
+	ref,
+	className,
 	interact = true,
 	checked = false,
 }: CheckboxProps) {
@@ -24,14 +28,16 @@ export function Checkbox({
 	}
 
 	const wrap = (
-		<div class='checkbox-wrap'>
+		<div class={['checkbox-wrap', className && className]} ref={ref}>
 			<input type='checkbox' ref={checkbox} />
 			<button
 				type='button'
 				class={['btn', 'checkbox', !interact && 'no-interact']}
 				ref={elem}
 				onClick={() => {
-					if (!interact) return;
+					if (!interact) {
+						return;
+					}
 
 					checked = !checked;
 					update();

@@ -263,7 +263,8 @@
 	line-height: 14px;
 	font-weight: var(--font-weight-bold);
 	color: oklch(var(--b7));
-	background: oklch(var(--h3) / 80%);
+	background: oklch(var(--h3) / 90%);
+	box-shadow: 0 3px 12px oklch(var(--h4) / 32%);
 	padding: 0 3px;
 	border-radius: 3px;
 

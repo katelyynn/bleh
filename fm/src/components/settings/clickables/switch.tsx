@@ -7,7 +7,7 @@
 import { createRef } from 'jsx-dom';
 
 interface SwitchProps {
-	ref?: ReturnType<typeof createRef>;
+	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
 	className?: string;
 	interact?: boolean;
 	checked?: boolean;

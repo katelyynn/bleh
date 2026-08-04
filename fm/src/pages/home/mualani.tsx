@@ -35,6 +35,7 @@ import { Input } from '@/components/input/input.tsx';
 import { SettingInput } from '@/components/settings/provider/input.tsx';
 import { SettingKeybind } from '@/components/settings/provider/keybind.tsx';
 import { SettingTheme } from '@/components/settings/provider/theme.tsx';
+import { SettingCheckbox } from '@/components/settings/provider/checkbox.tsx';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -159,6 +160,16 @@ export function mualani() {
 								name='Setting name'
 								body='Setting body'
 							/>
+							<SettingSwitch name='Setting name' />
+						</SettingGroup>
+					</DemoItem>
+					<DemoItem label='SettingCheckbox'>
+						<SettingGroup>
+							<SettingCheckbox
+								name='Setting name'
+								body='Setting body'
+							/>
+							<SettingCheckbox name='Setting name' />
 						</SettingGroup>
 					</DemoItem>
 				</DemoGrid>
