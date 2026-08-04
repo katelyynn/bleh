@@ -28,68 +28,87 @@ export function SettingTheme({
 	const bright: ThemeBubbleElement[] = [];
 	const moody: ThemeBubbleElement[] = [];
 	const adaptive = createRef();
+	const adaptive_tip = createRef();
 
 	const wrap = (
-		<SettingGroup>
-			<ThemeRow
-				label={tl(trans.bright.name)}
-				body={tl(trans.bright.body)}
-			>
-				{['light', 'ink'].map((id: string, i: number) => {
-					const elem = (
-						<ThemeBubble
-							id={id}
-							active={is_active(id, theme)}
-							onChange={set}
-							key={i}
-						/>
-					) as ThemeBubbleElement;
+		<>
+			<SettingGroup>
+				<ThemeRow
+					label={tl(trans.bright.name)}
+					body={tl(trans.bright.body)}
+				>
+					{['light', 'ink'].map((id: string, i: number) => {
+						const elem = (
+							<ThemeBubble
+								id={id}
+								active={is_active(id, theme)}
+								onChange={set}
+								key={i}
+							/>
+						) as ThemeBubbleElement;
 
-					bright.push(elem);
+						bright.push(elem);
 
-					return elem;
-				})}
-			</ThemeRow>
-			<ThemeRow label={tl(trans.moody.name)} body={tl(trans.moody.body)}>
-				{['dark', 'darker', 'oled', 'rose_pine'].map((
-					id: string,
-					i: number,
-				) => {
-					const elem = (
-						<ThemeBubble
-							id={id}
-							active={is_active(id, theme)}
-							onChange={set}
-							key={i}
-						/>
-					) as ThemeBubbleElement;
+						return elem;
+					})}
+				</ThemeRow>
+				<ThemeRow
+					label={tl(trans.moody.name)}
+					body={tl(trans.moody.body)}
+				>
+					{['dark', 'darker', 'oled', 'rose_pine'].map((
+						id: string,
+						i: number,
+					) => {
+						const elem = (
+							<ThemeBubble
+								id={id}
+								active={is_active(id, theme)}
+								onChange={set}
+								key={i}
+							/>
+						) as ThemeBubbleElement;
 
-					moody.push(elem);
+						moody.push(elem);
 
-					return elem;
-				})}
-			</ThemeRow>
-			<SettingCheckbox
-				bind='theme_schedule'
-				onChange={(val: boolean) => {
-					// handled already
-					if (!theme.adaptive && !val) return;
+						return elem;
+					})}
+				</ThemeRow>
+				<SettingCheckbox
+					bind='theme_schedule'
+					onChange={(val: boolean) => {
+						// handled already
+						if (!theme.adaptive && !val) return;
 
-					theme = {
-						...theme,
-						id: match() as string,
-						adaptive: val,
-					};
-					update();
-				}}
-				ref={adaptive}
-			/>
-		</SettingGroup>
+						theme = {
+							...theme,
+							id: match() as string,
+							adaptive: val,
+						};
+						update();
+					}}
+					ref={adaptive}
+				/>
+			</SettingGroup>
+			{theme.adaptive && (
+				<p class='card-tip'>
+					<span ref={adaptive_tip} />{' '}
+					<a class='card-tip-link'>{tl(trans.change_schedule)}</a>
+				</p>
+			)}
+		</>
 	);
 
 	function update() {
 		if (adaptive.current.value != theme.adaptive) {
 			adaptive.current.value = theme.adaptive;
+		}
+
+		if (adaptive_tip.current) {
+			adaptive_tip.current.textContent = tl(trans.adaptive_tip, {
+				day: themes[theme.theme_day].name,
+				night: themes[theme.theme_night].name,
+			});
 		}
 
 		update_children(bright);

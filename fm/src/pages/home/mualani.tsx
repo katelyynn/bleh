@@ -37,6 +37,7 @@ import { SettingKeybind } from '@/components/settings/provider/keybind.tsx';
 import { SettingTheme } from '@/components/settings/provider/theme.tsx';
 import { SettingCheckbox } from '@/components/settings/provider/checkbox.tsx';
 import { settings } from '@/build/config.ts';
+import { Select } from '@/components/select/select.tsx';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -273,6 +274,44 @@ export function mualani() {
 							<SettingInput bind='font' />
 							<SettingInput bind='font' showLabel={false} />
 						</SettingGroup>
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section>
+				<DemoGrid>
+					<DemoItem label='Select'>
+						<Select
+							values={[
+								{
+									value: 'hello',
+									text: 'Hello',
+								},
+								{
+									value: 'world',
+									text: 'World',
+								},
+							]}
+						/>
+					</DemoItem>
+					<DemoItem label='Select (with advanced stuff)'>
+						<Select
+							values={[
+								{
+									text: 'See below',
+								},
+								{
+									value: 'hello',
+									text: 'Hello',
+								},
+								{
+									text: 'sep',
+								},
+								{
+									value: 'world',
+									text: 'World',
+								},
+							]}
+						/>
 					</DemoItem>
 				</DemoGrid>
 			</section>
