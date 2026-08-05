@@ -43,6 +43,8 @@ import { select_prepare_list } from '@/components/settings/select.ts';
 import { tl, trans } from '@/build/trans.ts';
 import { Range } from '@/components/range/range.tsx';
 import { SettingRange } from '@/components/settings/provider/range.tsx';
+import { SettingColour } from '@/components/settings/provider/colour.tsx';
+import { colour_type } from '@/components/settings/swatch.ts';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -394,6 +396,20 @@ export function mualani() {
 						<SettingGroup>
 							<SettingRange bind='gloss' />
 						</SettingGroup>
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section>
+				<DemoGrid>
+					<DemoItem label='SettingColour'>
+						<SettingColour
+							colour={{
+								type: settings.accent_type as colour_type,
+								hue: settings.hue as number,
+								sat: settings.sat as number,
+								lit: settings.lit as number,
+							}}
+						/>
 					</DemoItem>
 				</DemoGrid>
 			</section>

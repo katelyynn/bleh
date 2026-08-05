@@ -1,3 +1,9 @@
+/**
+ * bleh, an extension for the music site Last.fm
+ * Copyright (c) 2024-2026 katelyn and contributors
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 import { SettingGroup } from '@/components/settings/group.tsx';
 import { createRef, ReactElement, ReactNode } from 'jsx-dom';
 import { SettingLabel } from '@/components/settings/provider/main.tsx';
@@ -38,49 +44,29 @@ export function SettingColour({
 }: SettingColourProps) {
 	const list: ColourSwatchElement[] = [];
 
+	const custom_swatches: colour[] = [
+		default_colour,
+		avatar_colour,
+		{
+			type: 'customise',
+			label: trans.edit,
+		},
+	];
+
 	const wrap = (
 		<div class='setting' data-type='action'>
 			<SettingLabel name={tl(trans.hue)} />
 			<div class={['info', 'swatch-info']}>
 				<SwatchGroup>
-					{() => {
+					{custom_swatches.map((col, i) => {
 						const elem = (
-							<ColourSwatch
-								colour={default_colour}
-								onChange={set}
-							/>
+							<ColourSwatch colour={col} key={i} onChange={set} />
 						) as ColourSwatchElement;
 
 						list.push(elem);
 
 						return elem;
-					}}
-					{() => {
-						const elem = (
-							<ColourSwatch
-								colour={avatar_colour}
-								onChange={set}
-							/>
-						) as ColourSwatchElement;
-
-						list.push(elem);
-
-						return elem;
-					}}
-					{() => {
-						const elem = (
-							<ColourSwatch
-								colour={{
-									type: 'customise',
-									label: trans.edit,
-								}}
-							/>
-						) as ColourSwatchElement;
-
-						list.push(elem);
-
-						return elem;
-					}}
+					})}
 				</SwatchGroup>
 				<SwatchSeparator />
 				<SwatchGroup>
@@ -99,6 +85,16 @@ export function SettingColour({
 	);
 
 	function update() {
+		if (
+			colour.type == 'avatar' &&
+			colour.hue != avatar_colour.sets?.hue &&
+			colour.sat != avatar_colour.sets?.sat &&
+			colour.lit != avatar_colour.sets?.lit
+		) {
+			colour.type = 'customise';
+		}
+
+		console.info('info', colour.type);
 		list.forEach((entry) => {
 			entry.active = is_active(entry.colour, colour);
 		});
@@ -108,7 +104,7 @@ export function SettingColour({
 
 	return wrap;
 
-	function set({ value }: { value: colour }) {
+	function set(value: colour) {
 		if (value.type == 'customise') {
 			colour = {
 				...colour,
@@ -139,8 +135,6 @@ export function SettingColour({
 }
 
 function is_active(entry: colour, colour: colour_response) {
-	if (entry.type != colour.type) return false;
-
 	if (colour.type == 'colour') {
 		if (!entry.sets) return false;
 
@@ -185,6 +179,10 @@ export function ColourSwatch({
 	active,
 	onChange,
 }: ColourSwatchProps) {
+	if (!colour.type) colour.type = 'colour';
+
+	const displays = colour.displays || colour.sets;
+
 	const swatch = (
 		<button
 			type='button'
@@ -200,9 +198,23 @@ export function ColourSwatch({
 			<div
 				class={['swatch', 'colourful']}
 				data-swatch-type={colour.type}
+				style={displays &&
+					{
+						'--hue-over': displays.hue,
+						'--sat-over': displays.sat,
+						'--lit-over': displays.lit,
+					}}
 			/>
 			<div class='swatch-inner'>
-				<strong class={['swatch-name', 'colourful']}>
+				<strong
+					class={['swatch-name', 'colourful']}
+					style={displays &&
+						{
+							'--hue-over': displays.hue,
+							'--sat-over': displays.sat,
+							'--lit-over': displays.lit,
+						}}
+				>
 					{tl(colour.label)}
 				</strong>
 			</div>

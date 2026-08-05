@@ -16,8 +16,8 @@
 		gap: 4px;
 	}
 
-	&>.bleh-icon-container,
-	&>.bleh-icon {
+	& > .bleh-icon-container,
+	& > .bleh-icon {
 		--icon-size: 12px;
 		height: var(--icon-size);
 		--mask-colour: currentColor;
@@ -43,7 +43,7 @@
 		border-radius: unset;
 	}
 
-	.side-action>& {
+	.side-action > & {
 		margin: unset !important;
 	}
 }
@@ -68,6 +68,6 @@
 	height: var(--icon-size);
 }
 
-.sku>.bleh-icon-container {
+.sku > .bleh-icon-container {
 	animation: staggered_spinner 3s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
 }
