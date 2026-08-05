@@ -4,9 +4,6 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { applyCSP } from '@/csp';
-applyCSP();
-
 import { log } from './build/log';
 import { bleh } from './page';
 

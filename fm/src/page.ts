@@ -106,6 +106,7 @@ import { clean_storage } from './components/settings/storage';
 import { register_auth } from './components/profile/auth';
 import { notify_if_new_update } from './components/page/update';
 import { bleh_now } from './pages/now/now';
+import { applyCSP } from '@/csp.ts';
 
 export function bleh() {
 	florence({
@@ -115,6 +116,8 @@ export function bleh() {
 			favi();
 			page.state.previous_title = document.title;
 			document.title = '...';
+
+			applyCSP();
 		},
 		on_body_load: () => {
 			clean_storage();

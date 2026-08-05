@@ -147,6 +147,7 @@
 	width: 22px;
 	height: 22px;
 
+	&[data-swatch-type="placeholder"],
 	&[data-swatch-type="colour"] {
 		--icon-size: 12px;
 		--icon-opacity: 0;

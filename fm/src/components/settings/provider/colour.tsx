@@ -73,11 +73,7 @@ export function SettingColour({
 		col.seasonal = true;
 	});
 
-	const custom_swatches: colour[] = [
-		default_colour,
-		avatar_colour,
-		...seasonal,
-	];
+	let custom_swatches: colour[] = [];
 
 	const recent_swatches: colour[] = [
 		...recents.map((recent) => ({
@@ -95,125 +91,140 @@ export function SettingColour({
 	];
 
 	const info = createRef();
-
-	const wrap = <SettingGroup ref={ref} /> as SettingColourElement;
+	const presets = createRef();
 
 	const hue = createRef();
 	const sat = createRef();
 	const lit = createRef();
 
-	function update() {
+	const wrap = (
+		<SettingGroup ref={ref}>
+			<div class='setting' data-type='action' ref={presets} />
+			<SettingRange
+				bind='hue'
+				ref={hue}
+				onChange={(val: number) => {
+					set({
+						type: 'customise',
+						sets: {
+							hue: val,
+							sat: colour.sat,
+							lit: colour.lit,
+						},
+					});
+					update(false);
+				}}
+			/>
+			<SettingRange
+				bind='sat'
+				ref={sat}
+				onChange={(val: number) => {
+					set({
+						type: 'customise',
+						sets: {
+							hue: colour.hue,
+							sat: val,
+							lit: colour.lit,
+						},
+					});
+					update(false);
+				}}
+			/>
+			<SettingRange
+				bind='lit'
+				ref={lit}
+				onChange={(val: number) => {
+					set({
+						type: 'customise',
+						sets: {
+							hue: colour.hue,
+							sat: colour.sat,
+							lit: val,
+						},
+					});
+					update(false);
+				}}
+			/>
+		</SettingGroup>
+	) as SettingColourElement;
+
+	function update(set_after = true) {
 		console.info('re-rendering');
 		list = [];
-		wrap.replaceChildren(
+
+		custom_swatches = [
+			default_colour,
+			avatar_colour,
+			{
+				type: 'placeholder',
+				sets: {
+					hue: colour.hue,
+					sat: colour.sat,
+					lit: colour.lit,
+				},
+			},
+			...seasonal,
+		];
+
+		presets.current.replaceChildren(
 			<>
-				<div class='setting' data-type='action'>
-					<SettingLabel name={tl(trans.presets)} />
-					<div
-						class={['info', 'swatch-info']}
-						ref={info}
-						onMouseEnter={() => {
-							info.current.classList.add('has-hover');
-						}}
-						onMouseLeave={() => {
-							info.current.classList.remove('has-hover');
-						}}
-					>
-						<SwatchGroup>
-							{custom_swatches.map((col, i) => {
-								const elem = (
-									<ColourSwatch
-										colour={col}
-										key={i}
-										onChange={(val: colour) => {
-											set(val);
-											hue.current.value = val.sets?.hue;
-											sat.current.value = val.sets?.sat;
-											lit.current.value = val.sets?.lit;
-										}}
-									/>
-								) as ColourSwatchElement;
+				<SettingLabel name={tl(trans.presets)} />
+				<div
+					class={['info', 'swatch-info']}
+					ref={info}
+					onMouseEnter={() => {
+						info.current.classList.add('has-hover');
+					}}
+					onMouseLeave={() => {
+						info.current.classList.remove('has-hover');
+					}}
+				>
+					<SwatchGroup>
+						{custom_swatches.map((col, i) => {
+							const elem = (
+								<ColourSwatch
+									colour={col}
+									active={is_active(col, colour)}
+									key={i}
+									onChange={(val: colour) => {
+										set(val);
+										hue.current.value = val.sets?.hue;
+										sat.current.value = val.sets?.sat;
+										lit.current.value = val.sets?.lit;
+									}}
+								/>
+							) as ColourSwatchElement;
 
-								list.push(elem);
+							list.push(elem);
 
-								return elem;
-							})}
-						</SwatchGroup>
-						<SwatchSeparator />
-						<SwatchGroup>
-							{colours.map((col, i) => {
-								const elem = (
-									<ColourSwatch
-										colour={col}
-										key={i}
-										onChange={(val: colour) => {
-											set(val);
-											hue.current.value = val.sets?.hue;
-											sat.current.value = val.sets?.sat;
-											lit.current.value = val.sets?.lit;
-										}}
-									/>
-								) as ColourSwatchElement;
+							return elem;
+						})}
+					</SwatchGroup>
+					<SwatchSeparator />
+					<SwatchGroup>
+						{colours.map((col, i) => {
+							const elem = (
+								<ColourSwatch
+									colour={col}
+									active={is_active(col, colour)}
+									key={i}
+									onChange={(val: colour) => {
+										set(val);
+										hue.current.value = val.sets?.hue;
+										sat.current.value = val.sets?.sat;
+										lit.current.value = val.sets?.lit;
+									}}
+								/>
+							) as ColourSwatchElement;
 
-								list.push(elem);
+							list.push(elem);
 
-								return elem;
-							})}
-						</SwatchGroup>
-					</div>
+							return elem;
+						})}
+					</SwatchGroup>
 				</div>
-				<SettingRange
-					bind='hue'
-					ref={hue}
-					onChange={(val: number) => {
-						set({
-							type: 'customise',
-							sets: {
-								hue: val,
-								sat: colour.sat,
-								lit: colour.lit,
-							},
-						});
-					}}
-				/>
-				<SettingRange
-					bind='sat'
-					ref={sat}
-					onChange={(val: number) => {
-						set({
-							type: 'customise',
-							sets: {
-								hue: colour.hue,
-								sat: val,
-								lit: colour.lit,
-							},
-						});
-					}}
-				/>
-				<SettingRange
-					bind='lit'
-					ref={lit}
-					onChange={(val: number) => {
-						set({
-							type: 'customise',
-							sets: {
-								hue: colour.hue,
-								sat: colour.sat,
-								lit: val,
-							},
-						});
-					}}
-				/>
 			</>,
 		);
-		set({
-			type: colour.type,
-			sets: {
-				hue: colour.hue,
-				sat: colour.sat,
-				lit: colour.lit,
-			},
-		});
 	}
 
 	update();
@@ -276,9 +287,9 @@ function is_active(
 	entry: colour,
 	colour: colour_response,
 ) {
-	if (colour.type == 'placeholder') return false;
+	if (entry.type == 'placeholder' && colour.type != 'customise') return false;
 
-	if (colour.type == 'colour') {
+	if (colour.type == 'colour' || entry.type == 'placeholder') {
 		if (!entry.sets) return false;
 
 		return entry.sets.hue == colour.hue && entry.sets.sat == colour.sat &&
@@ -327,7 +338,8 @@ export function ColourSwatch({
 	const displays = colour.displays || colour.sets;
 
 	if (
-		(colour.type == 'colour' && !colour.label) || colour.type == 'customise'
+		(['colour', 'placeholder'].includes(colour.type) && !colour.label) ||
+		colour.type == 'customise'
 	) {
 		const preview = (
 			<div
@@ -358,11 +370,12 @@ export function ColourSwatch({
 			type='button'
 			class={['swatch-container']}
 			onClick={() => {
-				if (colour.type == 'placeholder') return;
+				active = !active;
 
-				active = true;
-
-				if (onChange) onChange(colour);
+				if (onChange) onChange({
+					...colour,
+					type: colour.type == 'placeholder' ? 'customise' : colour.type
+				});
 
 				update();
 			}}

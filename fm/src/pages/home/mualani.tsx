@@ -43,7 +43,10 @@ import { select_prepare_list } from '@/components/settings/select.ts';
 import { tl, trans } from '@/build/trans.ts';
 import { Range } from '@/components/range/range.tsx';
 import { SettingRange } from '@/components/settings/provider/range.tsx';
-import { SettingColour } from '@/components/settings/provider/colour.tsx';
+import {
+	ColourSwatch,
+	SettingColour,
+} from '@/components/settings/provider/colour.tsx';
 import { colour_type } from '@/components/settings/swatch.ts';
 import { DateTime } from 'luxon';
 
@@ -406,6 +409,19 @@ export function mualani() {
 			</section>
 			<section>
 				<DemoGrid>
+					<DemoItem label='ColourSwatch'>
+						<ColourSwatch
+							colour={{
+								type: 'colour',
+							}}
+						/>
+						<ColourSwatch
+							colour={{
+								type: 'colour',
+							}}
+							active
+						/>
+					</DemoItem>
 					<DemoItem label='SettingColour'>
 						<SettingColour
 							ref={colour}
