@@ -1689,10 +1689,12 @@ export function save_setting(id: string, value: setting_value) {
 	const store = settings_store[id] || {};
 	const type = store.type || 'toggle';
 
+	console.info('saved', value, typeof value);
 	settings[id] = value;
+	console.info('saved setting', settings[id], typeof settings[id]);
 
 	if (!other_setting_types.includes(type) && store.bubble) {
-		document.body.setAttribute(`data-bleh--${id}`, value.toString());
+		document.body.setAttribute(`data-bleh--${id}`, String(value));
 	}
 
 	if (id == 'theme') {
@@ -1776,7 +1778,7 @@ export function seasonal_colour_switch() {
 }
 
 export function compile_settings() {
-	let clone = structuredClone(settings);
+	const clone = structuredClone(settings);
 
 	for (let s in clone) {
 		console.log('settings marin before loop', s, clone[s], typeof clone[s]);

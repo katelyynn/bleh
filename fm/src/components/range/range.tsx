@@ -84,6 +84,8 @@ export function Range({
 	}
 
 	function set(val: number) {
+		val = Number(val); // precaution for some reason
+
 		value = val;
 		update();
 

@@ -31,13 +31,8 @@ input[type="range"] {
 				.nub {
 					background-color: transparent;
 					box-shadow: var(--glass-inset);
-					backdrop-filter: blur(2px) saturate(var(--blur-saturate))
-						brightness(var(--blur-brightness))
-						contrast(var(--blur-contrast));
-					-webkit-backdrop-filter: blur(2px)
-						saturate(var(--blur-saturate))
-						brightness(var(--blur-brightness))
-						contrast(var(--blur-contrast));
+					backdrop-filter: blur(2px) saturate(var(--blur-saturate)) brightness(var(--blur-brightness)) contrast(var(--blur-contrast));
+					-webkit-backdrop-filter: blur(2px) saturate(var(--blur-saturate)) brightness(var(--blur-brightness)) contrast(var(--blur-contrast));
 				}
 			}
 		}
@@ -54,12 +49,6 @@ input[type="range"] {
 		position: absolute;
 
 		pointer-events: none;
-
-		html[data-bleh--season="halloween"][data-seasonal-accent="true"] & {
-			--hue-over: 100;
-			--sat-over: 1.2;
-			--lit-over: 1.1;
-		}
 
 		.fill {
 			display: flex;
@@ -80,8 +69,7 @@ input[type="range"] {
 			box-shadow:
 				var(--primary-shadow),
 				0 3px 12px oklch(var(--h4) / 32%);
-			margin: calc(-1 * ((var(--nub-h) - var(--range-h)) / 2)) calc(-1 *
-				(var(--nub-w) / 2));
+			margin: calc(-1 * ((var(--nub-h) - var(--range-h)) / 2)) calc(-1 * (var(--nub-w) / 2));
 
 			transition-property:
 				opacity,
@@ -99,13 +87,13 @@ input[type="range"] {
 		&[data-id="hue"] {
 			box-shadow: unset;
 			background: linear-gradient(to right,
-				oklch(var(--h3-lit) var(--h3-sat) 0) 0%,
-				oklch(var(--h3-lit) var(--h3-sat) 60) 16.67%,
-				oklch(var(--h3-lit) var(--h3-sat) 120) 33.33%,
-				oklch(var(--h3-lit) var(--h3-sat) 180) 50%,
-				oklch(var(--h3-lit) var(--h3-sat) 240) 66.67%,
-				oklch(var(--h3-lit) var(--h3-sat) 300) 83.33%,
-				oklch(var(--h3-lit) var(--h3-sat) 360) 100%);
+					oklch(var(--h3-lit) var(--h3-sat) 0) 0%,
+					oklch(var(--h3-lit) var(--h3-sat) 60) 16.67%,
+					oklch(var(--h3-lit) var(--h3-sat) 120) 33.33%,
+					oklch(var(--h3-lit) var(--h3-sat) 180) 50%,
+					oklch(var(--h3-lit) var(--h3-sat) 240) 66.67%,
+					oklch(var(--h3-lit) var(--h3-sat) 300) 83.33%,
+					oklch(var(--h3-lit) var(--h3-sat) 360) 100%);
 
 			.fill {
 				opacity: 0;

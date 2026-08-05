@@ -1701,6 +1701,9 @@ export const trans = {
 		pl: 'Kolory',
 		zh: '颜色',
 	},
+	edit_colour: {
+		en: 'Edit colour',
+	},
 	adaptive: {
 		en: 'Adaptive',
 		de: 'Adaptiv',

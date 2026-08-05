@@ -163,6 +163,10 @@ export function SettingRange({
 		get() {
 			return value;
 		},
+		set(val: number) {
+			value = val;
+			update();
+		},
 	});
 
 	elem.update = update;

@@ -19,7 +19,11 @@ import { ff } from '@/components/settings/sku';
 import { settings } from '@/build/config';
 import { match } from '@/components/settings/dynamic_theming';
 import { dialog } from '@/components/dialog/dialog';
-import { display_colour_presets } from '@/components/settings/swatch';
+import {
+	colour_tile,
+	colour_type,
+	display_colour_presets,
+} from '@/components/settings/swatch';
 import { header_colour } from '@/components/page/colour';
 import { avatar } from '@/components/shared/avatar';
 import { SettingTheme } from '@/components/settings/provider/theme.tsx';
@@ -27,6 +31,7 @@ import { SettingGroup } from '@/components/settings/group.tsx';
 import { SettingSwitch } from '@/components/settings/provider/switch.tsx';
 import { SettingRange } from '@/components/settings/provider/range.tsx';
 import { createRef } from 'jsx-dom';
+import { SettingColour } from '@/components/settings/provider/colour.tsx';
 
 export function visual() {
 	if (
@@ -55,39 +60,77 @@ export function visual() {
 
 	const sat_bg = createRef();
 
-	page.structure.main!.replaceChildren(
-		<section class='bleh--panel'>
-			<h4>{tl(trans.themes.name)}</h4>
-			<SettingTheme
-				theme={{
-					id: settings.theme as string,
-					adaptive: settings.theme_schedule as boolean,
-					theme_day: settings.theme_day as string,
-					theme_night: settings.theme_night as string,
-				}}
-				onChange={(val) => {
-					if (settings.theme != val.id) {
-						save_setting('theme', val.id);
-					}
-					if (settings.theme_day != val.theme_day) {
-						save_setting('theme_day', val.theme_day);
-					}
-					if (settings.theme_night != val.theme_night) {
-						save_setting(
-							'theme_night',
-							val.theme_night,
-						);
-					}
+	const season = page.state.seasons?.current;
 
-					sat_bg.current.update();
-				}}
-			/>
-			<SettingGroup>
-				<SettingSwitch bind='solarium' />
-				<SettingRange bind='noise' />
-				<SettingRange bind='sat_bg' ref={sat_bg} />
-			</SettingGroup>
-		</section>,
+	page.structure.main!.replaceChildren(
+		<>
+			<section class='bleh--panel'>
+				<h4>{tl(trans.themes.name)}</h4>
+				<SettingTheme
+					theme={{
+						id: settings.theme as string,
+						adaptive: settings.theme_schedule as boolean,
+						theme_day: settings.theme_day as string,
+						theme_night: settings.theme_night as string,
+					}}
+					onChange={(val) => {
+						if (settings.theme != val.id) {
+							save_setting('theme', val.id);
+						}
+						if (settings.theme_day != val.theme_day) {
+							save_setting('theme_day', val.theme_day);
+						}
+						if (settings.theme_night != val.theme_night) {
+							save_setting(
+								'theme_night',
+								val.theme_night,
+							);
+						}
+
+						sat_bg.current.update();
+					}}
+				/>
+				<SettingGroup>
+					<SettingSwitch bind='solarium' />
+					<SettingRange bind='noise' />
+					<SettingRange bind='sat_bg' ref={sat_bg} />
+				</SettingGroup>
+			</section>
+			<section class='bleh--panel'>
+				<h4>{tl(trans.colours)}</h4>
+				<div class='inner-preview'>
+					<div class='colour-tiles'>
+						{colour_tile('l3')}
+						{colour_tile('l4')}
+						{colour_tile('h3')}
+						{colour_tile('h4')}
+					</div>
+				</div>
+				<SettingColour
+					colour={{
+						type: settings.accent_type as colour_type,
+						hue: settings.hue as number,
+						sat: settings.sat as number,
+						lit: settings.lit as number,
+					}}
+					onChange={(val) => {
+						if (settings.hue != val.hue) {
+							save_setting('hue', val.hue);
+						}
+						if (settings.sat != val.sat) {
+							save_setting('sat', val.sat);
+						}
+						if (settings.lit != val.lit) {
+							save_setting('lit', val.lit);
+						}
+						if (settings.accent_type != val.type) {
+							save_setting('accent_type', val.type);
+						}
+					}}
+					season={season}
+				/>
+			</section>
+		</>,
 	);
 
 	return;

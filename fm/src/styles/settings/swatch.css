@@ -120,6 +120,7 @@
 .swatch-name {
 	color: oklch(var(--l3-c)) !important;
 	font-size: 13px;
+	font-weight: var(--font-weight-medium);
 }
 
 .swatch-desc {

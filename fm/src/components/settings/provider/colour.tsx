@@ -22,6 +22,7 @@ import {
 	avatar_colour,
 	colour,
 	colour_set,
+	colour_tile,
 	colour_type,
 	colours,
 	default_colour,
@@ -31,6 +32,9 @@ import { season } from '@/components/seasonal.ts';
 import { formatHex } from 'culori';
 import namer from 'color-namer';
 import { Button } from '@/components/button/button.tsx';
+import tippy from 'tippy.js';
+import { SettingInfo } from '@/components/settings/provider/info.tsx';
+import { SettingRange } from '@/components/settings/provider/range.tsx';
 
 interface SettingColourProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
@@ -61,7 +65,9 @@ export function SettingColour({
 	let list: ColourSwatchElement[] = [];
 
 	let seasonal: colour[] = [];
-	if (season?.id) seasonal = seasonal_colours[season.id];
+	if (season?.id && seasonal_colours[season.id]) {
+		seasonal = seasonal_colours[season.id];
+	}
 
 	seasonal.forEach((col) => {
 		col.seasonal = true;
@@ -92,6 +98,10 @@ export function SettingColour({
 
 	const wrap = <SettingGroup ref={ref} /> as SettingColourElement;
 
+	const hue = createRef();
+	const sat = createRef();
+	const lit = createRef();
+
 	function update() {
 		console.info('re-rendering');
 		list = [];
@@ -115,7 +125,12 @@ export function SettingColour({
 									<ColourSwatch
 										colour={col}
 										key={i}
-										onChange={set}
+										onChange={(val: colour) => {
+											set(val);
+											hue.current.value = val.sets?.hue;
+											sat.current.value = val.sets?.sat;
+											lit.current.value = val.sets?.lit;
+										}}
 									/>
 								) as ColourSwatchElement;
 
@@ -131,7 +146,12 @@ export function SettingColour({
 									<ColourSwatch
 										colour={col}
 										key={i}
-										onChange={set}
+										onChange={(val: colour) => {
+											set(val);
+											hue.current.value = val.sets?.hue;
+											sat.current.value = val.sets?.sat;
+											lit.current.value = val.sets?.lit;
+										}}
 									/>
 								) as ColourSwatchElement;
 
@@ -142,42 +162,48 @@ export function SettingColour({
 						</SwatchGroup>
 					</div>
 				</div>
-				<div class='setting' data-type='action'>
-					<SettingLabel name={tl(trans.custom)} />
-					<div
-						class={['info', 'swatch-info']}
-						ref={info}
-						onMouseEnter={() => {
-							info.current.classList.add('has-hover');
-						}}
-						onMouseLeave={() => {
-							info.current.classList.remove('has-hover');
-						}}
-					>
-						<SwatchGroup>
-							<Button primary>
-								<Icon name={icons.edit} />
-								{tl(trans.edit)}
-							</Button>
-						</SwatchGroup>
-						<SwatchSeparator />
-						<SwatchGroup>
-							{recent_swatches.map((col, i) => {
-								const elem = (
-									<ColourSwatch
-										colour={col}
-										key={i}
-										onChange={set}
-									/>
-								) as ColourSwatchElement;
-
-								list.push(elem);
-
-								return elem;
-							})}
-						</SwatchGroup>
-					</div>
-				</div>
+				<SettingRange
+					bind='hue'
+					ref={hue}
+					onChange={(val: number) => {
+						set({
+							type: 'customise',
+							sets: {
+								hue: val,
+								sat: colour.sat,
+								lit: colour.lit,
+							},
+						});
+					}}
+				/>
+				<SettingRange
+					bind='sat'
+					ref={sat}
+					onChange={(val: number) => {
+						set({
+							type: 'customise',
+							sets: {
+								hue: colour.hue,
+								sat: val,
+								lit: colour.lit,
+							},
+						});
+					}}
+				/>
+				<SettingRange
+					bind='lit'
+					ref={lit}
+					onChange={(val: number) => {
+						set({
+							type: 'customise',
+							sets: {
+								hue: colour.hue,
+								sat: colour.sat,
+								lit: val,
+							},
+						});
+					}}
+				/>
 			</>,
 		);
 		set({
