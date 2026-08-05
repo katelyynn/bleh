@@ -422,8 +422,63 @@ export function mualani() {
 								{
 									hue: 210,
 									sat: 1,
-									lit: 1
-								}
+									lit: 1,
+								},
+								{
+									hue: 300,
+									sat: 1.5,
+									lit: 0.85,
+								},
+								{
+									hue: 20,
+									sat: 1.3,
+									lit: 1.05,
+								},
+								{
+									hue: 40,
+									sat: 1.3,
+									lit: 1.05,
+								},
+								{
+									hue: 20,
+									sat: 1.3,
+									lit: 1.05,
+								},
+								{
+									hue: 180,
+									sat: 1.3,
+									lit: 1.05,
+								},
+								{
+									hue: 20,
+									sat: 1.3,
+									lit: 1.05,
+								},
+								{
+									hue: 120,
+									sat: 1.3,
+									lit: 1.05,
+								},
+								{
+									hue: 20,
+									sat: 1.6,
+									lit: 0.9,
+								},
+								{
+									hue: 70,
+									sat: 1.5,
+									lit: 1.05,
+								},
+								{
+									hue: 20,
+									sat: 1.3,
+									lit: 1.05,
+								},
+								{
+									hue: 90,
+									sat: 1.3,
+									lit: 1.05,
+								},
 							]}
 						/>
 					</DemoItem>

@@ -28,6 +28,8 @@ import {
 	seasonal_colours,
 } from '@/components/settings/swatch.ts';
 import { season } from '@/components/seasonal.ts';
+import { formatHex } from 'culori';
+import namer from 'color-namer';
 
 interface SettingColourProps {
 	colour: colour_response;
@@ -283,6 +285,31 @@ export function ColourSwatch({
 	if (!colour.type) colour.type = 'colour';
 
 	const displays = colour.displays || colour.sets;
+
+	if (
+		(colour.type == 'colour' && !colour.label) || colour.type == 'customise'
+	) {
+		const preview = (
+			<div
+				class='colour-preview colourful'
+				style={displays &&
+					{
+						'--hue-over': displays.hue,
+						'--sat-over': displays.sat,
+						'--lit-over': displays.lit,
+					}}
+			/>
+		);
+
+		document.body.appendChild(preview);
+
+		const bg_colour = window.getComputedStyle(preview).backgroundColor;
+
+		const final = formatHex(bg_colour);
+
+		const labelled = namer(final);
+		colour.label = labelled.pantone[0].name;
+	}
 
 	const swatch = (
 		<button
