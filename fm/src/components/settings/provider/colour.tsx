@@ -245,17 +245,17 @@ export function SettingColour({
 				</div>
 			</>,
 		);
-
-		const preview = page.state.colour_preview;
-		const bg_colour = window.getComputedStyle(preview).backgroundColor;
-
-		const final = formatHex(bg_colour);
-		convert.current.value = final;
 	}
 
 	update();
 
 	wrap.update = update;
+
+	const preview = page.state.colour_preview;
+	const bg_colour = window.getComputedStyle(preview).backgroundColor;
+
+	const final = formatHex(bg_colour);
+	convert.current.value = final;
 
 	return wrap;
 
@@ -306,6 +306,12 @@ export function SettingColour({
 		});
 
 		if (onChange) onChange(colour);
+
+		const preview = page.state.colour_preview;
+		const bg_colour = window.getComputedStyle(preview).backgroundColor;
+
+		const final = formatHex(bg_colour);
+		convert.current.value = final;
 	}
 }
 
