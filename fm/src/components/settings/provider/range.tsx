@@ -123,7 +123,7 @@ export function SettingRange({
 					max={max}
 					step={step}
 					suffix={suffix}
-					onChange={set}
+					onInput={set}
 					ref={range}
 				/>
 				{Object.keys(incompatible_list).length > 0 && (

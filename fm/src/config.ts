@@ -18,7 +18,10 @@ import { notify } from '@/components/dialog/notify';
 import { load_skus } from '@/pages/bleh_settings/bleh_settings.js';
 import { compile_settings, save_setting } from '@/components/settings/settings';
 
-// load settings
+function parse_bleh_version(version: string) {
+	return parseFloat(version.substring(0, 7));
+}
+
 export function load_settings(skip = false) {
 	if (!skip) {
 		for (let setting in settings_store) {
@@ -30,90 +33,10 @@ export function load_settings(skip = false) {
 			}
 		}
 
-		if (!settings.version) settings.version = 10000000;
+		if (!settings.version) settings.version = '10000000';
 	}
 
-	if (!settings.theme_type) {
-		if (settings.theme == 'light' || settings.theme == 'ink') {
-			settings.theme_type = 'light';
-		} else settings.theme_type = 'dark';
-	}
-
-	// migrates old settings
-	if (settings.version < 2025.0929) {
-		if (settings.seasonal_particles == true) {
-			settings.seasonal_particles = 'all';
-		} else if (settings.seasonal_particles == false) {
-			settings.seasonal_particles = 'none';
-		}
-
-		if (settings.seasonal_particles_reduced == true) {
-			settings.seasonal_particles = 'less';
-			delete settings.seasonal_particles_reduced;
-		} else if (settings.seasonal_particles_reduced == false) {
-			delete settings.seasonal_particles_reduced;
-		}
-
-		if (settings.font_weight == 480 || settings.font_weight == 440) {
-			settings.font_weight = settings_store.font_weight.default;
-		}
-
-		if (
-			settings.font_weight_medium == 650 ||
-			settings.font_weight_medium == 570
-		) {
-			settings.font_weight_medium =
-				settings_store.font_weight_medium.default;
-		}
-
-		if (
-			settings.font_weight_bold == 730 ||
-			settings.font_weight_bold == 760 ||
-			settings.font_weight_bold == 680
-		) {
-			settings.font_weight_bold = settings_store.font_weight_bold.default;
-		}
-	}
-
-	if (settings.version < 2026.0201) {
-		if (settings.noise == 0.5) {
-			settings.noise = settings_store.noise.default;
-		}
-	}
-
-	if (settings.version < 2026.022) {
-		if (settings.hue == 255 && settings.sat == 1 && settings.lit == 1) {
-			settings.hue = settings_store.hue.default;
-			settings.sat = settings_store.sat.default;
-			settings.lit = settings_store.lit.default;
-		}
-	}
-
-	if (!['circle', 'squircle', 'square'].includes(settings.avatar_radius)) {
-		if (settings.avatar_radius == 0) {
-			settings.avatar_radius = 'square';
-		} else if (settings.avatar_radius == 25) {
-			settings.avatar_radius = 'squircle';
-		} else {
-			settings.avatar_radius = 'circle';
-		}
-	}
-
-	if (Number.isInteger(settings.list_view)) {
-		if (settings.list_view == 0) {
-			settings.list_view = 'list';
-		} else {
-			settings.list_view = 'cards';
-		}
-	}
-
-	if (settings.profile_shortcut) {
-		settings.friends = [settings.profile_shortcut];
-		settings.starred_friend = settings.profile_shortcut;
-
-		localStorage.removeItem('bleh_profile_shortcut_avi');
-		delete settings.profile_shortcut;
-	}
+	migrations(parse_bleh_version(settings.version));
 
 	// save setting into body
 	for (let setting in settings) {
@@ -168,6 +91,95 @@ export function load_settings(skip = false) {
 	}
 
 	load_chart_colours();
+}
+
+export function migrations(version: number) {
+	if (!settings.theme_type) {
+		if (settings.theme == 'light' || settings.theme == 'ink') {
+			settings.theme_type = 'light';
+		} else settings.theme_type = 'dark';
+	}
+
+	if (version < 2025.0929) {
+		if (settings.seasonal_particles == true) {
+			settings.seasonal_particles = 'all';
+		} else if (settings.seasonal_particles == false) {
+			settings.seasonal_particles = 'none';
+		}
+
+		if (settings.seasonal_particles_reduced == true) {
+			settings.seasonal_particles = 'less';
+			delete settings.seasonal_particles_reduced;
+		} else if (settings.seasonal_particles_reduced == false) {
+			delete settings.seasonal_particles_reduced;
+		}
+
+		if (settings.font_weight == 480 || settings.font_weight == 440) {
+			settings.font_weight = settings_store.font_weight.default;
+		}
+
+		if (
+			settings.font_weight_medium == 650 ||
+			settings.font_weight_medium == 570
+		) {
+			settings.font_weight_medium =
+				settings_store.font_weight_medium.default;
+		}
+
+		if (
+			settings.font_weight_bold == 730 ||
+			settings.font_weight_bold == 760 ||
+			settings.font_weight_bold == 680
+		) {
+			settings.font_weight_bold = settings_store.font_weight_bold.default;
+		}
+	}
+
+	if (version < 2026.0201) {
+		if (settings.noise == 0.5) {
+			settings.noise = settings_store.noise.default;
+		}
+	}
+
+	if (version < 2026.022) {
+		if (settings.hue == 255 && settings.sat == 1 && settings.lit == 1) {
+			settings.hue = settings_store.hue.default;
+			settings.sat = settings_store.sat.default;
+			settings.lit = settings_store.lit.default;
+		}
+	}
+
+	if (version < 2026.08) {
+		if (Number(settings.noise) == 0.35) {
+			settings.noise = 0.25;
+		}
+	}
+
+	if (!['circle', 'squircle', 'square'].includes(settings.avatar_radius as string)) {
+		if (Number(settings.avatar_radius) == 0) {
+			settings.avatar_radius = 'square';
+		} else if (Number(settings.avatar_radius) == 25) {
+			settings.avatar_radius = 'squircle';
+		} else {
+			settings.avatar_radius = 'circle';
+		}
+	}
+
+	if (Number.isInteger(settings.list_view)) {
+		if (settings.list_view == 0) {
+			settings.list_view = 'list';
+		} else {
+			settings.list_view = 'cards';
+		}
+	}
+
+	if (settings.profile_shortcut) {
+		settings.friends = [settings.profile_shortcut];
+		settings.starred_friend = settings.profile_shortcut;
+
+		localStorage.removeItem('bleh_profile_shortcut_avi');
+		delete settings.profile_shortcut;
+	}
 }
 
 // theme

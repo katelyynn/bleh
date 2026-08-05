@@ -57,7 +57,14 @@ interface radio_item {
 	name: translation | string;
 }
 
-export let settings: Record<string, setting_value> = {};
+interface settings {
+	version: string,
+	[key: string]: setting_value
+}
+
+export let settings: settings = {
+	version: ''
+};
 export let inbuilt_settings = {
 	recent_artwork: {
 		css: 'recent_artwork',
@@ -213,7 +220,7 @@ export const settings_store: Record<string, setting_instance> = {
 	},
 	noise: {
 		css: 'noise-opacity',
-		default: 0.35,
+		default: 0.25,
 		type: 'range',
 		min: 0,
 		max: 1,

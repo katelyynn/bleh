@@ -14,6 +14,7 @@ interface RangeProps {
 	min?: number;
 	max?: number;
 	step?: number;
+	onInput?: (val: number) => void;
 	onChange?: (val: number) => void;
 }
 
@@ -29,6 +30,7 @@ export function Range({
 	min = 0,
 	max = 1,
 	step = 0.1,
+	onInput,
 	onChange,
 }: RangeProps) {
 	const range = createRef();
@@ -53,7 +55,10 @@ export function Range({
 				step={step}
 				ref={range}
 				onInput={() => {
-					set(range.current.value);
+					set(range.current.value, true);
+				}}
+				onChange={() => {
+					set(range.current.value, false);
 				}}
 			/>
 		</div>
@@ -83,13 +88,38 @@ export function Range({
 		);
 	}
 
-	function set(val: number) {
+	let last = 0;
+	let timeout: number | undefined;
+
+	function set(val: number, input: boolean) {
 		val = Number(val); // precaution for some reason
 
 		value = val;
 		update();
 
-		if (onChange) onChange(val);
+		if (input) {
+			const now = performance.now();
+			const remaining = 20 - (now - last);
+
+			if (remaining <= 0) {
+				clearTimeout(timeout);
+				last = now;
+				if (onInput) onInput(val);
+			} else {
+				clearTimeout(timeout);
+				timeout = setTimeout(() => {
+					last = performance.now();
+					if (onInput) onInput(val);
+				}, remaining);
+			}
+
+			if (now - last >= 500) {
+				last = now;
+				if (onInput) onInput(val);
+			}
+		} else {
+			if (onChange) onChange(val);
+		}
 	}
 
 	update();

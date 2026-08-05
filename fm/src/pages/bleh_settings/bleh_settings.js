@@ -19,7 +19,7 @@ import { get_trans_key, lang_info, tl, trans } from '@/build/trans';
 import { dialog, dialog_rm } from '@/components/dialog/dialog';
 import { markdown } from '@/components/markdown/markdown';
 import { notify } from '@/components/dialog/notify';
-import { load_settings } from '../../config.js';
+import { load_settings } from '../../config.ts';
 import { version } from '@/main';
 import { update_page } from '@/page';
 import { ff } from '@/components/settings/sku.js';

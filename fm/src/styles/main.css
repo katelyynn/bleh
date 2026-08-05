@@ -27,6 +27,7 @@ html:has(> body[data-bleh--show_scroller="true"]) {
 :root {
 	scroll-padding-top: calc(52px + 15px);
 }
+
 body {
 	color: oklch(var(--c2));
 	font-family: var(--font);
@@ -54,7 +55,7 @@ body {
 		pointer-events: none;
 	}
 
-	.florence-supports-loading > &:not(.florence-loaded, .labs-section, [style="zoom: 1;"]) {
+	.florence-supports-loading>&:not(.florence-loaded, .labs-section, [style="zoom: 1;"]) {
 		&:before {
 			background-color: oklch(var(--b6));
 		}
@@ -67,7 +68,7 @@ body {
 		flex-direction: column;
 		padding: 100px 0;
 
-		& > p {
+		&>p {
 			font-size: 20px;
 		}
 	}
@@ -79,14 +80,14 @@ body {
 		inset: 0;
 		z-index: 9999999999999999999;
 		pointer-events: none;
-		opacity: var(--noise-opacity, 0);
+		opacity: var(--noise-opacity, 0.25);
 		mix-blend-mode: soft-light;
 		background-image: var(--noise);
 		background-repeat: repeat;
 		background-size: 128px;
 	}
 
-	& > .loader {
+	&>.loader {
 		position: fixed;
 		inset: 0;
 		/*background: oklch(var(--b6), 20%);*/
@@ -103,14 +104,14 @@ body {
 		transition-duration: 0.4s;
 		transition-timing-function: var(--trans-function);
 
-		& > .loader-bar {
+		&>.loader-bar {
 			position: fixed;
 			top: 0;
 			left: 0;
 			right: 0;
 			padding: 2px;
 
-			& > .loader-bar-fill {
+			&>.loader-bar-fill {
 				background-color: oklch(var(--h3));
 				box-shadow: 0 6px 20px oklch(var(--h4));
 				border-radius: var(--item-big-radius);
@@ -121,11 +122,11 @@ body {
 	}
 
 	&.loading-indicator-loading {
-		& > .loader {
+		&>.loader {
 			opacity: 1;
 			pointer-events: auto;
 
-			& > .loader-bar-fill {
+			&>.loader-bar-fill {
 				animation: loading 3.5s var(--trans-function);
 			}
 		}
@@ -158,16 +159,24 @@ strong {
 .header--overview,
 .container,
 .content-top-has-nav .content-top,
-.two-column-layout .content-top /* lfm tag */,
+.two-column-layout .content-top
+/* lfm tag */
+,
 .two-column-layout .container,
-.two-column-layout .main-content /* for some reason lfm bundles a 1x1 white pixel tiled across the entire half of the screen? */ {
+.two-column-layout .main-content
+
+/* for some reason lfm bundles a 1x1 white pixel tiled across the entire half of the screen? */
+	{
 	background: var(--override-background, transparent) !important;
-	color: unset; /* for header--overview, this is set to #fff */
+	color: unset;
+	/* for header--overview, this is set to #fff */
 }
+
 .content-top-has-nav .content-top::after,
 .two-column-layout .content-top::after {
 	display: none;
 }
+
 /* replace the very backing layer with b6 */
 html body {
 	/* html body is used cus last.fm decided so */
@@ -192,6 +201,7 @@ html body {
 	background: oklch(var(--h4) / 30%);
 	color: oklch(var(--l3-c));
 }
+
 ::-moz-selection {
 	background: oklch(var(--h4) / 30%);
 	color: oklch(var(--l3-c));
@@ -206,7 +216,7 @@ inferred by it being opened in the first place */
 }
 
 /* no clue why */
-body > canvas {
+body>canvas {
 	display: none;
 }
 
