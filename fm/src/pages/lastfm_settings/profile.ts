@@ -1076,6 +1076,10 @@ function profile_panel() {
 																	);
 
 																	save_setting(
+																		'accent_type',
+																		'customise',
+																	);
+																	save_setting(
 																		'hue',
 																		settings
 																			.profile_hue,
