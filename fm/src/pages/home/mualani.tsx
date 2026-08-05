@@ -265,6 +265,7 @@ export function mualani() {
 						<Input />
 						<Input type='number' />
 						<Input type='password' />
+						<Input type='colour' />
 					</DemoItem>
 					<DemoItem label='Input (textarea)'>
 						<Input type='textarea' />

@@ -118,6 +118,7 @@ export function SettingRange({
 				)}
 				<Range
 					className='setting-inner'
+					id={bind}
 					value={value}
 					min={min}
 					max={max}
@@ -140,7 +141,7 @@ export function SettingRange({
 		<div
 			class='setting'
 			data-type='input'
-			id={bind}
+			id={`setting_${bind}`}
 			onMouseEnter={onMouseEnter}
 			onMouseLeave={onMouseLeave}
 			ref={ref}

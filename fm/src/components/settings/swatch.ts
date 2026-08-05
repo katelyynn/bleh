@@ -24,7 +24,7 @@ export interface colour {
 	displays?: display_set;
 	requires_flag?: string;
 	label?: translation;
-	seasonal?: boolean;
+	seasonal?: string;
 }
 
 export type colour_type =

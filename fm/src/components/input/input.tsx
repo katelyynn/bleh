@@ -9,17 +9,25 @@ import { SeeMore } from '@/components/text/see_more.tsx';
 import { tl, trans } from '@/build/trans.ts';
 import { icons } from '@/components/shared/icon.tsx';
 
-export type InputType = 'text' | 'number' | 'date' | 'password' | 'textarea';
+export type InputType =
+	| 'text'
+	| 'number'
+	| 'date'
+	| 'password'
+	| 'textarea'
+	| 'colour';
 
 interface InputProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
 	className?: string;
 	value?: string | number;
+	length?: number,
 	disabled?: boolean;
 	type?: InputType;
 	onChange?: (val: string | number) => void;
 	onSubmit?: (val: string | number) => void;
 	saveManually?: boolean;
+	saveText?: string
 }
 
 type InputElement = HTMLDivElement & {
@@ -30,13 +38,16 @@ export function Input({
 	ref,
 	className,
 	value = '',
+	length,
 	disabled,
 	type = 'text',
 	onChange,
 	onSubmit,
 	saveManually = false,
+	saveText
 }: InputProps) {
 	const input = createRef();
+	const colour_block = createRef();
 
 	const wrap = (
 		<div
@@ -48,8 +59,12 @@ export function Input({
 				className && className,
 				saveManually && 'save-manually',
 			]}
+			data-type={type}
 			ref={ref}
 		>
+			{type == 'colour' && (
+				<span class='colour-block' ref={colour_block} />
+			)}
 			{type != 'textarea'
 				? (
 					<input
@@ -57,15 +72,33 @@ export function Input({
 						type={type}
 						value={value}
 						ref={input}
+						maxlength={length}
 						onChange={() => {
+							if (
+								type == 'colour' &&
+								!input.current.value.startsWith('#')
+							) {
+								input.current.value = `#${input.current.value}`;
+							}
+
 							value = input.current.value;
 							update(true);
 						}}
 						onKeyDown={(e: KeyboardEvent) => {
-							if (e.key != 'Enter') return;
+							if (e.key == 'Enter') {
+								if (onSubmit) onSubmit(input.current.value);
+								return;
+							}
 
+							if (
+								type == 'colour' &&
+								!input.current.value.startsWith('#')
+							) {
+								input.current.value = `#${input.current.value}`;
+							}
+
+							value = input.current.value;
 							update(true);
-							if (onSubmit) onSubmit(input.current.value);
 						}}
 					/>
 				)
@@ -79,10 +112,13 @@ export function Input({
 							update(true);
 						}}
 						onKeyDown={(e: KeyboardEvent) => {
-							if (e.key != 'Enter') return;
+							if (e.key == 'Enter') {
+								if (onSubmit) onSubmit(input.current.value);
+								return;
+							}
 
+							value = input.current.value;
 							update(true);
-							if (onSubmit) onSubmit(input.current.value);
 						}}
 					/>
 				)}
@@ -95,7 +131,7 @@ export function Input({
 						if (onSubmit) onSubmit(input.current.value);
 					}}
 				>
-					{tl(trans.save)}
+					{saveText || tl(trans.save)}
 				</SeeMore>
 			)}
 		</div>
@@ -106,6 +142,10 @@ export function Input({
 			input.current.setAttribute('disabled', 'true');
 		} else {
 			input.current.removeAttribute('disabled');
+		}
+
+		if (type == 'colour') {
+			colour_block.current.style.backgroundColor = value;
 		}
 
 		if (!from_input) {

@@ -127,7 +127,7 @@ export function SettingSelect({
 		<div
 			class='setting'
 			data-type='select'
-			id={bind}
+			id={`setting_${bind}`}
 			onMouseEnter={onMouseEnter}
 			onMouseLeave={onMouseLeave}
 			ref={ref}

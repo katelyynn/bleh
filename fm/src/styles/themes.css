@@ -927,8 +927,8 @@ u,
     );
 	--avatar-generic-background: oklch(var(--b4));
 
-	--primary-shadow: none;
-	--bar-shadow: none;
+	--primary-shadow: 0 0 transparent;
+	--bar-shadow: 0 0 transparent;
 
 	--shout-vote-indicator: linear-gradient(
         90deg,

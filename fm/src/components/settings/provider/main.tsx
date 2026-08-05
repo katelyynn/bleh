@@ -72,7 +72,7 @@ export function SettingLabel({
 
 	Object.defineProperty(label, 'value', {
 		set(val: setting_value) {
-			reset.current.value = val;
+			if (reset.current) reset.current.value = val;
 		},
 	});
 

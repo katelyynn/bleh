@@ -105,7 +105,7 @@ export function SettingCheckbox({
 		<div
 			class='setting'
 			data-type='toggle'
-			id={bind}
+			id={`setting_${bind}`}
 			onMouseEnter={onMouseEnter}
 			onMouseLeave={onMouseLeave}
 			onClick={() => {

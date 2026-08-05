@@ -13,12 +13,14 @@ import {
 } from '@/components/settings/provider/main.tsx';
 import { settings } from '@/build/config.ts';
 import { save_setting } from '@/components/settings/settings.tsx';
-import { Input } from '@/components/input/input.tsx';
+import { Input, InputType } from '@/components/input/input.tsx';
 import { SettingIcon } from '@/components/settings/provider/icon.tsx';
 
 interface SettingInputProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
 	bind?: string;
+	type?: InputType;
+	length?: number;
 	icon?: string;
 	name?: string;
 	body?: string;
@@ -27,6 +29,7 @@ interface SettingInputProps {
 	disabled?: boolean;
 	onMouseEnter?: () => void;
 	onMouseLeave?: () => void;
+	saveText?: string;
 }
 
 type SettingInputElement = HTMLDivElement & {
@@ -37,6 +40,8 @@ type SettingInputElement = HTMLDivElement & {
 export function SettingInput({
 	ref,
 	bind,
+	type,
+	length,
 	icon,
 	name,
 	body,
@@ -45,6 +50,7 @@ export function SettingInput({
 	disabled,
 	onMouseEnter,
 	onMouseLeave,
+	saveText,
 }: SettingInputProps) {
 	let value = bind ? settings[bind] as string | number : '';
 
@@ -96,9 +102,12 @@ export function SettingInput({
 				<Input
 					className='setting-inner'
 					value={value}
+					type={type}
+					length={length}
 					onSubmit={set}
 					ref={input}
 					saveManually
+					saveText={saveText}
 				/>
 				{Object.keys(incompatible_list).length > 0 && (
 					<SettingIncompatibleWith list={incompatible_list} />
@@ -111,7 +120,7 @@ export function SettingInput({
 		<div
 			class='setting'
 			data-type='input'
-			id={bind}
+			id={`setting_${bind}`}
 			onMouseEnter={onMouseEnter}
 			onMouseLeave={onMouseLeave}
 			ref={ref}
@@ -123,7 +132,7 @@ export function SettingInput({
 	function set(val: string | number) {
 		value = val;
 
-		reset.current.value = val;
+		if (reset.current) reset.current.value = val;
 
 		if (bind) save_setting(bind, val);
 		if (onChange) onChange(val);
@@ -134,6 +143,10 @@ export function SettingInput({
 	Object.defineProperty(elem, 'value', {
 		get() {
 			return value;
+		},
+		set(val: string) {
+			value = val;
+			update();
 		},
 	});
 

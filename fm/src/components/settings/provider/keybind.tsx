@@ -143,7 +143,7 @@ export function SettingKeybind({
 		<div
 			class='setting'
 			data-type='keybind'
-			id={bind}
+			id={`setting_${bind}`}
 			onMouseEnter={onMouseEnter}
 			onMouseLeave={onMouseLeave}
 			ref={ref}

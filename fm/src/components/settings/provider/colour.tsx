@@ -5,24 +5,14 @@
  */
 
 import { SettingGroup } from '@/components/settings/group.tsx';
-import { createRef, ReactElement, ReactNode } from 'jsx-dom';
+import { createRef, ReactNode } from 'jsx-dom';
 import { SettingLabel } from '@/components/settings/provider/main.tsx';
 import { tl, trans } from '@/build/trans.ts';
-import { dark_themes, light_themes, theme, themes } from '@/build/theme.ts';
-import { avatar } from '@/components/shared/avatar.tsx';
-import { auth } from '@/build/page.ts';
-import { Icon, icons } from '@/components/shared/icon.tsx';
-import { SettingCheckbox } from '@/components/settings/provider/checkbox.tsx';
-import { match } from '@/components/settings/dynamic_theming.js';
-import {
-	theme_min,
-	theme_schedule_dialog,
-} from '@/components/dialog/theme_schedule.tsx';
+import { Icon } from '@/components/shared/icon.tsx';
 import {
 	avatar_colour,
 	colour,
 	colour_set,
-	colour_tile,
 	colour_type,
 	colours,
 	default_colour,
@@ -31,10 +21,10 @@ import {
 import { season } from '@/components/seasonal.ts';
 import { formatHex } from 'culori';
 import namer from 'color-namer';
-import { Button } from '@/components/button/button.tsx';
-import tippy from 'tippy.js';
-import { SettingInfo } from '@/components/settings/provider/info.tsx';
 import { SettingRange } from '@/components/settings/provider/range.tsx';
+import { SettingInput } from '@/components/settings/provider/input.tsx';
+import { clamp_lit, clamp_sat, hex_to_oklch } from '@/build/tools.ts';
+import { page } from '@/build/page.ts';
 
 interface SettingColourProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
@@ -67,11 +57,11 @@ export function SettingColour({
 	let seasonal: colour[] = [];
 	if (season?.id && seasonal_colours[season.id]) {
 		seasonal = seasonal_colours[season.id];
-	}
 
-	seasonal.forEach((col) => {
-		col.seasonal = true;
-	});
+		seasonal.forEach((col) => {
+			col.seasonal = season.id;
+		});
+	}
 
 	let custom_swatches: colour[] = [];
 
@@ -93,6 +83,7 @@ export function SettingColour({
 	const info = createRef();
 	const presets = createRef();
 
+	const convert = createRef();
 	const hue = createRef();
 	const sat = createRef();
 	const lit = createRef();
@@ -100,6 +91,35 @@ export function SettingColour({
 	const wrap = (
 		<SettingGroup ref={ref}>
 			<div class='setting' data-type='action' ref={presets} />
+			<SettingInput
+				name={tl(trans.convert_from_hex)}
+				type='colour'
+				length={7}
+				saveText={tl(trans.convert)}
+				onChange={(val: string) => {
+					const hsl = hex_to_oklch(val);
+
+					const clamped_sat = clamp_sat((hsl.s / 100) * 3);
+
+					hue.current.value = hsl.h;
+					sat.current.value = clamped_sat;
+					lit.current.value = clamp_lit(
+						clamped_sat,
+						hsl.l / 100 + 0.35,
+					);
+
+					set({
+						type: 'customise',
+						sets: {
+							hue: hue.current.value,
+							sat: sat.current.value,
+							lit: lit.current.value,
+						},
+					});
+					update(false);
+				}}
+				ref={convert}
+			/>
 			<SettingRange
 				bind='hue'
 				ref={hue}
@@ -225,6 +245,12 @@ export function SettingColour({
 				</div>
 			</>,
 		);
+
+		const preview = page.state.colour_preview;
+		const bg_colour = window.getComputedStyle(preview).backgroundColor;
+
+		const final = formatHex(bg_colour);
+		convert.current.value = final;
 	}
 
 	update();
@@ -289,7 +315,12 @@ function is_active(
 ) {
 	if (entry.type == 'placeholder' && colour.type != 'customise') return false;
 
-	if (colour.type == 'colour' || entry.type == 'placeholder') {
+	if (colour.type == 'season') {
+		if (!entry.sets || entry.type != 'season') return false;
+
+		return entry.sets.hue == colour.hue && entry.sets.sat == colour.sat &&
+			entry.sets.lit == colour.lit;
+	} else if (colour.type == 'colour' || entry.type == 'placeholder') {
 		if (!entry.sets) return false;
 
 		return entry.sets.hue == colour.hue && entry.sets.sat == colour.sat &&
@@ -372,10 +403,14 @@ export function ColourSwatch({
 			onClick={() => {
 				active = !active;
 
-				if (onChange) onChange({
-					...colour,
-					type: colour.type == 'placeholder' ? 'customise' : colour.type
-				});
+				if (onChange) {
+					onChange({
+						...colour,
+						type: colour.type == 'placeholder'
+							? 'customise'
+							: colour.type,
+					});
+				}
 
 				update();
 			}}

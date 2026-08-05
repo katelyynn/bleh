@@ -8,6 +8,7 @@ import { createRef } from 'jsx-dom';
 
 interface RangeProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
+	id?: string;
 	className?: string;
 	value?: number;
 	suffix?: string;
@@ -24,6 +25,7 @@ type RangeElement = HTMLDivElement & {
 
 export function Range({
 	ref,
+	id,
 	className,
 	value = 0,
 	suffix,
@@ -43,7 +45,7 @@ export function Range({
 
 	const wrap = (
 		<div class={['range', className && className]} ref={ref}>
-			<div class={['track', 'colourful']} ref={track}>
+			<div class={['track', 'colourful']} data-id={id} ref={track}>
 				<div class='fill' />
 				<div class='nub' />
 			</div>
