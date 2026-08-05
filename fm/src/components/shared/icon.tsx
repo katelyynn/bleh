@@ -209,13 +209,13 @@ export function icon({ name, identifier, use_mask = true }: icon) {
 }
 
 interface IconProps {
-	name: string;
+	name?: string;
 	identifier?: string;
 	mask?: boolean;
 }
 
 export function Icon({
-	name,
+	name = 'inherit',
 	identifier,
 	mask = true,
 }: IconProps) {
@@ -223,7 +223,7 @@ export function Icon({
 		<span
 			class={[
 				'bleh-icon',
-				`bleh-icon-${name}`,
+				name && `bleh-icon-${name}`,
 				mask && 'use-mask',
 				identifier && `bleh-icon-${identifier}`,
 			]}

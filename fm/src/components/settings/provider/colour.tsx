@@ -53,35 +53,56 @@ export function SettingColour({
 		},
 	];
 
+	const info = createRef();
+
 	const wrap = (
-		<div class='setting' data-type='action'>
-			<SettingLabel name={tl(trans.hue)} />
-			<div class={['info', 'swatch-info']}>
-				<SwatchGroup>
-					{custom_swatches.map((col, i) => {
-						const elem = (
-							<ColourSwatch colour={col} key={i} onChange={set} />
-						) as ColourSwatchElement;
+		<SettingGroup>
+			<div class='setting' data-type='action'>
+				<SettingLabel name={tl(trans.hue)} />
+				<div
+					class={['info', 'swatch-info']}
+					ref={info}
+					onMouseEnter={() => {
+						info.current.classList.add('has-hover');
+					}}
+					onMouseLeave={() => {
+						info.current.classList.remove('has-hover');
+					}}
+				>
+					<SwatchGroup>
+						{custom_swatches.map((col, i) => {
+							const elem = (
+								<ColourSwatch
+									colour={col}
+									key={i}
+									onChange={set}
+								/>
+							) as ColourSwatchElement;
 
-						list.push(elem);
+							list.push(elem);
 
-						return elem;
-					})}
-				</SwatchGroup>
-				<SwatchSeparator />
-				<SwatchGroup>
-					{colours.map((col, i) => {
-						const elem = (
-							<ColourSwatch colour={col} key={i} onChange={set} />
-						) as ColourSwatchElement;
+							return elem;
+						})}
+					</SwatchGroup>
+					<SwatchSeparator />
+					<SwatchGroup>
+						{colours.map((col, i) => {
+							const elem = (
+								<ColourSwatch
+									colour={col}
+									key={i}
+									onChange={set}
+								/>
+							) as ColourSwatchElement;
 
-						list.push(elem);
+							list.push(elem);
 
-						return elem;
-					})}
-				</SwatchGroup>
+							return elem;
+						})}
+					</SwatchGroup>
+				</div>
 			</div>
-		</div>
+		</SettingGroup>
 	);
 
 	function update() {
@@ -186,7 +207,7 @@ export function ColourSwatch({
 	const swatch = (
 		<button
 			type='button'
-			class={['btn', 'swatch-container']}
+			class={['swatch-container']}
 			onClick={() => {
 				active = true;
 
@@ -204,7 +225,9 @@ export function ColourSwatch({
 						'--sat-over': displays.sat,
 						'--lit-over': displays.lit,
 					}}
-			/>
+			>
+				<Icon mask={false} identifier='swatch' />
+			</div>
 			<div class='swatch-inner'>
 				<strong
 					class={['swatch-name', 'colourful']}
@@ -238,7 +261,7 @@ export function ColourSwatch({
 	});
 
 	function update() {
-		swatch.setAttribute('aria-selected', String(active));
+		swatch.setAttribute('aria-checked', String(active));
 	}
 
 	update();
