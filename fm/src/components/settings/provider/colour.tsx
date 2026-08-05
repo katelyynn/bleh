@@ -11,7 +11,7 @@ import { tl, trans } from '@/build/trans.ts';
 import { dark_themes, light_themes, theme, themes } from '@/build/theme.ts';
 import { avatar } from '@/components/shared/avatar.tsx';
 import { auth } from '@/build/page.ts';
-import { Icon } from '@/components/shared/icon.tsx';
+import { Icon, icons } from '@/components/shared/icon.tsx';
 import { SettingCheckbox } from '@/components/settings/provider/checkbox.tsx';
 import { match } from '@/components/settings/dynamic_theming.js';
 import {
@@ -30,6 +30,7 @@ import {
 import { season } from '@/components/seasonal.ts';
 import { formatHex } from 'culori';
 import namer from 'color-namer';
+import { Button } from '@/components/button/button.tsx';
 
 interface SettingColourProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
@@ -72,13 +73,6 @@ export function SettingColour({
 		...seasonal,
 	];
 
-	const recent_swatches_start: colour[] = [
-		{
-			type: 'customise',
-			label: trans.edit,
-		},
-	];
-
 	const recent_swatches: colour[] = [
 		...recents.map((recent) => ({
 			type: 'colour',
@@ -89,7 +83,7 @@ export function SettingColour({
 			},
 		})),
 		...Array.from(
-			{ length: Math.max(0, 10 - 1 - recents.length) },
+			{ length: Math.max(0, 5 - 1 - recents.length) },
 			() => ({ type: 'placeholder' }),
 		),
 	];
@@ -99,6 +93,7 @@ export function SettingColour({
 	const wrap = <SettingGroup ref={ref} /> as SettingColourElement;
 
 	function update() {
+		console.info('re-rendering');
 		list = [];
 		wrap.replaceChildren(
 			<>
@@ -160,19 +155,10 @@ export function SettingColour({
 						}}
 					>
 						<SwatchGroup>
-							{recent_swatches_start.map((col, i) => {
-								const elem = (
-									<ColourSwatch
-										colour={col}
-										key={i}
-										onChange={set}
-									/>
-								) as ColourSwatchElement;
-
-								list.push(elem);
-
-								return elem;
-							})}
+							<Button primary>
+								<Icon name={icons.edit} />
+								{tl(trans.edit)}
+							</Button>
 						</SwatchGroup>
 						<SwatchSeparator />
 						<SwatchGroup>
@@ -194,7 +180,14 @@ export function SettingColour({
 				</div>
 			</>,
 		);
-		set(colour);
+		set({
+			type: colour.type,
+			sets: {
+				hue: colour.hue,
+				sat: colour.sat,
+				lit: colour.lit,
+			},
+		});
 	}
 
 	update();
@@ -204,6 +197,13 @@ export function SettingColour({
 	return wrap;
 
 	function set(value: colour) {
+		if (!value.sets) return;
+
+		value.sets.hue = Number(value.sets.hue);
+		value.sets.sat = Number(value.sets.sat);
+		value.sets.lit = Number(value.sets.lit);
+
+		console.info('setting colour to', value);
 		if (value.type == 'customise') {
 			colour = {
 				...colour,
@@ -237,6 +237,7 @@ export function SettingColour({
 		}
 
 		console.info('info', colour.type);
+		console.info('setting colour to: found colour');
 		list.forEach((entry) => {
 			entry.active = is_active(entry.colour, colour);
 		});
@@ -245,7 +246,10 @@ export function SettingColour({
 	}
 }
 
-function is_active(entry: colour, colour: colour_response) {
+function is_active(
+	entry: colour,
+	colour: colour_response,
+) {
 	if (colour.type == 'placeholder') return false;
 
 	if (colour.type == 'colour') {
@@ -302,6 +306,8 @@ export function ColourSwatch({
 		const preview = (
 			<div
 				class='colour-preview colourful'
+				data-bleh--theme='oled'
+				data-bleh--theme_type='dark'
 				style={displays &&
 					{
 						'--hue-over': displays.hue,

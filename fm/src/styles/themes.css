@@ -1015,7 +1015,7 @@ u,
 		--side-action-bg: oklch(var(--h4) / 8%);
 	}
 	&[data-bleh--theme="light"],
-	body[data-bleh--theme="light"] &:not(.theme-preview, .grid-items-cover-image.colourful, .grid-item-text) {
+	body[data-bleh--theme="light"] &:not(.theme-preview, .grid-items-cover-image.colourful, .grid-item-text, .colour-preview) {
 		--c1: 0 calc(var(--sat) * 0.06) var(--hue);
 		--c2: 0.1 calc(var(--sat) * 0.04) var(--hue);
 		--c3: 0.38 calc(var(--sat) * 0.02) var(--hue);
@@ -1114,7 +1114,7 @@ u,
 		--side-action-bg: oklch(var(--k4) / 12%);
 	}
 	&[data-bleh--theme="ink"],
-	body[data-bleh--theme="ink"] &:not(.theme-preview, .grid-items-cover-image.colourful, .grid-item-text) {
+	body[data-bleh--theme="ink"] &:not(.theme-preview, .grid-items-cover-image.colourful, .grid-item-text, .colour-preview) {
 		--c1: 0.14 calc(var(--sat) * 0.6) var(--hue);
 		--c2: 0.2 calc(var(--sat) * 0.4) var(--hue);
 		--c3: 0.4 calc(var(--sat) * 0.1) var(--hue);
@@ -1213,13 +1213,13 @@ u,
 		--side-action-bg: oklch(var(--k4) / 12%);
 	}
 	&[data-bleh--theme="rose_pine"],
-	body[data-bleh--theme="rose_pine"] &:not(.theme-preview, .grid-items-cover-image.colourful, .grid-item-text) {
+	body[data-bleh--theme="rose_pine"] &:not(.theme-preview, .grid-items-cover-image.colourful, .grid-item-text, .colour-preview) {
 		--c1: 0.9488 0.0299 289.97;
 		--c2: 0.848 0.0299 289.97;
 		--c3: 0.6539 0.0444 291.23;
 	}
 	&[data-bleh--theme="rose_pine_dawn"],
-	body[data-bleh--theme="rose_pine_dawn"] &:not(.theme-preview, .grid-items-cover-image.colourful, .grid-item-text) {
+	body[data-bleh--theme="rose_pine_dawn"] &:not(.theme-preview, .grid-items-cover-image.colourful, .grid-item-text, .colour-preview) {
 		--c1: 0.3364 0.0519 289.72;
 		--c2: 0.4464 0.0519 289.72;
 		--c3: 0.5768 0.0458 291;
@@ -1318,7 +1318,7 @@ u,
 		--side-action-bg: oklch(var(--k4) / 7%);
 	}
 	&[data-bleh--theme="kanagawa_dragon"],
-	body[data-bleh--theme="kanagawa_dragon"] &:not(.theme-preview, .grid-items-cover-image.colourful, .grid-item-text) {
+	body[data-bleh--theme="kanagawa_dragon"] &:not(.theme-preview, .grid-items-cover-image.colourful, .grid-item-text, .colour-preview) {
 		--c1: 0.9255 0.0391 99.09;
 		--c2: 0.8755 0.0391 99.09;
 		--c3: 0.537 0.02 96.31;
