@@ -271,7 +271,8 @@ export function avatar(url: string | null, requested: avatar_dimensions) {
 		image = split[split.length - 1];
 	}
 
-	const final = `https://lastfm.freetls.fastly.net/i/u/${requested}/${image}`;
+	const final =
+		`https://lastfm-img.freetls.fastly.net/i/u/${requested}/${image}`;
 	log(`created ${requested} image`, 'avatar', 'info', { final, url });
 
 	return final;
