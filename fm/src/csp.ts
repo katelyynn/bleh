@@ -70,6 +70,7 @@ const CspPolicies: PolicyMap = {
 		'*.tenor.co',
 		'images.weserv.nl',
 		'icons.duckduckgo.com',
+		'count.getloli.com',
 
 		// various git sites
 		'github.com',
@@ -79,6 +80,8 @@ const CspPolicies: PolicyMap = {
 		'*.gitlab.io',
 		'*.codeberg.page',
 		'raw.githubusercontent.com',
+
+		'katelyn.moe',
 	],
 	'connect-src': [
 		"'self'",

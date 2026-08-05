@@ -571,7 +571,9 @@ function profile_panel() {
 
 				preview.style.setProperty(
 					'background-image',
-					`url(${pre_existing})`,
+					`url(https://images.weserv.nl/?url=${
+						encodeURIComponent(pre_existing)
+					}&output=webp&n=-1)`,
 				);
 				preview.onclick = () => {
 					expand_avatar(pre_existing);
