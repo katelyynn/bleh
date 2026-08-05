@@ -45,6 +45,7 @@ import { Range } from '@/components/range/range.tsx';
 import { SettingRange } from '@/components/settings/provider/range.tsx';
 import { SettingColour } from '@/components/settings/provider/colour.tsx';
 import { colour_type } from '@/components/settings/swatch.ts';
+import { DateTime } from 'luxon';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -409,6 +410,21 @@ export function mualani() {
 								sat: settings.sat as number,
 								lit: settings.lit as number,
 							}}
+							season={{
+								id: 'christmas',
+								start: DateTime.fromISO('2026-08-05'),
+								end: DateTime.fromISO('2026-08-05'),
+								snowflakes: {
+									state: false,
+								},
+							}}
+							recents={[
+								{
+									hue: 210,
+									sat: 1,
+									lit: 1
+								}
+							]}
 						/>
 					</DemoItem>
 				</DemoGrid>

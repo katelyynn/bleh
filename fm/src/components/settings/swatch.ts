@@ -23,7 +23,8 @@ export interface colour {
 	sets?: colour_set;
 	displays?: display_set;
 	requires_flag?: string;
-	label: translation;
+	label?: translation;
+	seasonal?: boolean;
 }
 
 export type colour_type =
@@ -31,9 +32,10 @@ export type colour_type =
 	| 'avatar'
 	| 'season'
 	| 'colour'
-	| 'customise';
+	| 'customise'
+	| 'placeholder';
 
-interface colour_set {
+export interface colour_set {
 	hue: number;
 	sat: number;
 	lit: number;
@@ -154,72 +156,49 @@ export const colours: colour[] = [
 	},
 ];
 
-const colours_legacy = {
-	custom: [
-		{},
+export const seasonal_colours: Record<string, colour[]> = {
+	christmas: [
 		{
-			type: 'avatar',
+			type: 'season',
+			label: trans.seasonal.presets.nonsense,
 			sets: {
-				hue: auth.sets.hue,
-				sat: auth.sets.sat,
-				lit: auth.sets.lit,
+				hue: 352,
+				sat: 1.8,
+				lit: 0.925,
 			},
-			requires_flag: 'colour_based_on_avatar',
 		},
 		{
-			type: 'adaptive',
-			requires_flag: 'adaptive_colours',
+			type: 'season',
+			label: trans.seasonal.presets.fruitcake,
+			sets: {
+				hue: 24,
+				sat: 0.93,
+				lit: 1,
+			},
 		},
 		{
-			type: 'customise',
+			type: 'season',
+			label: trans.seasonal.presets.mistletoe,
+			sets: {
+				hue: 130,
+				sat: 0.45,
+				lit: 0.75,
+			},
+		},
+		{
+			type: 'season',
+			label: trans.seasonal.presets.festival,
+			sets: {
+				hue: 240,
+				sat: 1.4,
+				lit: 0.875,
+			},
 		},
 	],
-	palette: [],
 };
+seasonal_colours.new_years = seasonal_colours.christmas;
 
 export function display_colour_presets() {
-	const exclusives = {
-		christmas: [
-			{
-				type: 'season',
-				label: trans.seasonal.presets.nonsense,
-				sets: {
-					hue: 352,
-					sat: 1.8,
-					lit: 0.925,
-				},
-			},
-			{
-				type: 'season',
-				label: trans.seasonal.presets.fruitcake,
-				sets: {
-					hue: 24,
-					sat: 0.93,
-					lit: 1,
-				},
-			},
-			{
-				type: 'season',
-				label: trans.seasonal.presets.mistletoe,
-				sets: {
-					hue: 130,
-					sat: 0.45,
-					lit: 0.75,
-				},
-			},
-			{
-				type: 'season',
-				label: trans.seasonal.presets.festival,
-				sets: {
-					hue: 240,
-					sat: 1.4,
-					lit: 0.875,
-				},
-			},
-		],
-	};
-	exclusives.new_years = exclusives.christmas;
-
 	let hue_range;
 	let sat_range;
 	let lit_range;

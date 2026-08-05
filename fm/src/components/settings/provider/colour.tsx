@@ -21,13 +21,18 @@ import {
 import {
 	avatar_colour,
 	colour,
+	colour_set,
 	colour_type,
 	colours,
 	default_colour,
+	seasonal_colours,
 } from '@/components/settings/swatch.ts';
+import { season } from '@/components/seasonal.ts';
 
 interface SettingColourProps {
 	colour: colour_response;
+	recents?: colour_set[];
+	season?: season;
 	onChange?: (val: colour_response) => void;
 }
 
@@ -40,17 +45,45 @@ interface colour_response {
 
 export function SettingColour({
 	colour,
+	recents = [],
+	season,
 	onChange,
 }: SettingColourProps) {
 	const list: ColourSwatchElement[] = [];
 
+	let seasonal: colour[] = [];
+	if (season?.id) seasonal = seasonal_colours[season.id];
+
+	seasonal.forEach((col) => {
+		col.seasonal = true;
+	});
+
 	const custom_swatches: colour[] = [
 		default_colour,
 		avatar_colour,
+		...seasonal,
+	];
+
+	const recent_swatches_start: colour[] = [
 		{
 			type: 'customise',
 			label: trans.edit,
 		},
+	];
+
+	const recent_swatches: colour[] = [
+		...recents.map((recent) => ({
+			type: 'colour',
+			sets: {
+				hue: recent.hue,
+				sat: recent.sat,
+				lit: recent.lit,
+			},
+		})),
+		...Array.from(
+			{ length: Math.max(0, 10 - 1 - recents.length) },
+			() => ({ type: 'placeholder' }),
+		),
 	];
 
 	const info = createRef();
@@ -58,7 +91,7 @@ export function SettingColour({
 	const wrap = (
 		<SettingGroup>
 			<div class='setting' data-type='action'>
-				<SettingLabel name={tl(trans.hue)} />
+				<SettingLabel name={tl(trans.presets)} />
 				<div
 					class={['info', 'swatch-info']}
 					ref={info}
@@ -87,6 +120,51 @@ export function SettingColour({
 					<SwatchSeparator />
 					<SwatchGroup>
 						{colours.map((col, i) => {
+							const elem = (
+								<ColourSwatch
+									colour={col}
+									key={i}
+									onChange={set}
+								/>
+							) as ColourSwatchElement;
+
+							list.push(elem);
+
+							return elem;
+						})}
+					</SwatchGroup>
+				</div>
+			</div>
+			<div class='setting' data-type='action'>
+				<SettingLabel name={tl(trans.custom)} />
+				<div
+					class={['info', 'swatch-info']}
+					ref={info}
+					onMouseEnter={() => {
+						info.current.classList.add('has-hover');
+					}}
+					onMouseLeave={() => {
+						info.current.classList.remove('has-hover');
+					}}
+				>
+					<SwatchGroup>
+						{recent_swatches_start.map((col, i) => {
+							const elem = (
+								<ColourSwatch
+									colour={col}
+									key={i}
+									onChange={set}
+								/>
+							) as ColourSwatchElement;
+
+							list.push(elem);
+
+							return elem;
+						})}
+					</SwatchGroup>
+					<SwatchSeparator />
+					<SwatchGroup>
+						{recent_swatches.map((col, i) => {
 							const elem = (
 								<ColourSwatch
 									colour={col}
@@ -156,6 +234,8 @@ export function SettingColour({
 }
 
 function is_active(entry: colour, colour: colour_response) {
+	if (colour.type == 'placeholder') return false;
+
 	if (colour.type == 'colour') {
 		if (!entry.sets) return false;
 
@@ -209,6 +289,8 @@ export function ColourSwatch({
 			type='button'
 			class={['swatch-container']}
 			onClick={() => {
+				if (colour.type == 'placeholder') return;
+
 				active = true;
 
 				if (onChange) onChange(colour);
@@ -238,7 +320,7 @@ export function ColourSwatch({
 							'--lit-over': displays.lit,
 						}}
 				>
-					{tl(colour.label)}
+					{colour.label && tl(colour.label)}
 				</strong>
 			</div>
 		</button>

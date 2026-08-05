@@ -11554,7 +11554,7 @@ export const trans = {
 		es: 'Añadir nuevo dato',
 	},
 	presets: {
-		// used in reference to timeframe presets
+		// used in reference to timeframe presets or colour presets
 		en: 'Presets',
 		pt: 'Predefinições',
 		es: 'Preajustes',

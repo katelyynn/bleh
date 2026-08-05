@@ -215,37 +215,3 @@
 	transition-duration: 0.3s;
 	transition-timing-function: var(--trans-function);
 }
-
-.swatch {
-	background-color: var(--col, oklch(var(--b6)));
-	border-radius: var(--item-med-radius);
-}
-
-.palette.albums {
-	grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-}
-
-.album-cover {
-	--col: transparent;
-	--show-icon: none;
-
-	aspect-ratio: 1 / 1;
-	position: relative;
-	overflow: hidden;
-	background-size: 100%;
-	background-repeat: no-repeat;
-	background-position: center;
-	box-sizing: border-box;
-
-	&:after {
-		content: "";
-		position: absolute;
-		inset: 0;
-		background-image: var(--gloss-image) !important;
-		background-size: 100% !important;
-		opacity: var(--gloss, 0);
-		pointer-events: none;
-		padding: unset !important;
-		box-shadow: unset !important;
-	}
-}
