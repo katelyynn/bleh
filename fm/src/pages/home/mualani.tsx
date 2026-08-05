@@ -116,6 +116,8 @@ export function mualani() {
 
 	const mouse = createRef();
 
+	const colour = createRef();
+
 	page.structure.main!.replaceChildren(
 		<>
 			<section>
@@ -374,6 +376,8 @@ export function mualani() {
 										val.theme_night,
 									);
 								}
+
+								colour.current.update();
 							}}
 						/>
 					</DemoItem>
@@ -404,6 +408,7 @@ export function mualani() {
 				<DemoGrid>
 					<DemoItem label='SettingColour'>
 						<SettingColour
+							ref={colour}
 							colour={{
 								type: settings.accent_type as colour_type,
 								hue: settings.hue as number,

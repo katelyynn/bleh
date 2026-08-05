@@ -32,6 +32,7 @@ import { formatHex } from 'culori';
 import namer from 'color-namer';
 
 interface SettingColourProps {
+	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
 	colour: colour_response;
 	recents?: colour_set[];
 	season?: season;
@@ -45,13 +46,18 @@ interface colour_response {
 	type: colour_type;
 }
 
+type SettingColourElement = HTMLDivElement & {
+	update: () => void;
+};
+
 export function SettingColour({
+	ref,
 	colour,
 	recents = [],
 	season,
 	onChange,
 }: SettingColourProps) {
-	const list: ColourSwatchElement[] = [];
+	let list: ColourSwatchElement[] = [];
 
 	let seasonal: colour[] = [];
 	if (season?.id) seasonal = seasonal_colours[season.id];
@@ -90,118 +96,110 @@ export function SettingColour({
 
 	const info = createRef();
 
-	const wrap = (
-		<SettingGroup>
-			<div class='setting' data-type='action'>
-				<SettingLabel name={tl(trans.presets)} />
-				<div
-					class={['info', 'swatch-info']}
-					ref={info}
-					onMouseEnter={() => {
-						info.current.classList.add('has-hover');
-					}}
-					onMouseLeave={() => {
-						info.current.classList.remove('has-hover');
-					}}
-				>
-					<SwatchGroup>
-						{custom_swatches.map((col, i) => {
-							const elem = (
-								<ColourSwatch
-									colour={col}
-									key={i}
-									onChange={set}
-								/>
-							) as ColourSwatchElement;
-
-							list.push(elem);
-
-							return elem;
-						})}
-					</SwatchGroup>
-					<SwatchSeparator />
-					<SwatchGroup>
-						{colours.map((col, i) => {
-							const elem = (
-								<ColourSwatch
-									colour={col}
-									key={i}
-									onChange={set}
-								/>
-							) as ColourSwatchElement;
-
-							list.push(elem);
-
-							return elem;
-						})}
-					</SwatchGroup>
-				</div>
-			</div>
-			<div class='setting' data-type='action'>
-				<SettingLabel name={tl(trans.custom)} />
-				<div
-					class={['info', 'swatch-info']}
-					ref={info}
-					onMouseEnter={() => {
-						info.current.classList.add('has-hover');
-					}}
-					onMouseLeave={() => {
-						info.current.classList.remove('has-hover');
-					}}
-				>
-					<SwatchGroup>
-						{recent_swatches_start.map((col, i) => {
-							const elem = (
-								<ColourSwatch
-									colour={col}
-									key={i}
-									onChange={set}
-								/>
-							) as ColourSwatchElement;
-
-							list.push(elem);
-
-							return elem;
-						})}
-					</SwatchGroup>
-					<SwatchSeparator />
-					<SwatchGroup>
-						{recent_swatches.map((col, i) => {
-							const elem = (
-								<ColourSwatch
-									colour={col}
-									key={i}
-									onChange={set}
-								/>
-							) as ColourSwatchElement;
-
-							list.push(elem);
-
-							return elem;
-						})}
-					</SwatchGroup>
-				</div>
-			</div>
-		</SettingGroup>
-	);
+	const wrap = <SettingGroup ref={ref} /> as SettingColourElement;
 
 	function update() {
-		if (
-			colour.type == 'avatar' &&
-			colour.hue != avatar_colour.sets?.hue &&
-			colour.sat != avatar_colour.sets?.sat &&
-			colour.lit != avatar_colour.sets?.lit
-		) {
-			colour.type = 'customise';
-		}
+		list = [];
+		wrap.replaceChildren(
+			<>
+				<div class='setting' data-type='action'>
+					<SettingLabel name={tl(trans.presets)} />
+					<div
+						class={['info', 'swatch-info']}
+						ref={info}
+						onMouseEnter={() => {
+							info.current.classList.add('has-hover');
+						}}
+						onMouseLeave={() => {
+							info.current.classList.remove('has-hover');
+						}}
+					>
+						<SwatchGroup>
+							{custom_swatches.map((col, i) => {
+								const elem = (
+									<ColourSwatch
+										colour={col}
+										key={i}
+										onChange={set}
+									/>
+								) as ColourSwatchElement;
 
-		console.info('info', colour.type);
-		list.forEach((entry) => {
-			entry.active = is_active(entry.colour, colour);
-		});
+								list.push(elem);
+
+								return elem;
+							})}
+						</SwatchGroup>
+						<SwatchSeparator />
+						<SwatchGroup>
+							{colours.map((col, i) => {
+								const elem = (
+									<ColourSwatch
+										colour={col}
+										key={i}
+										onChange={set}
+									/>
+								) as ColourSwatchElement;
+
+								list.push(elem);
+
+								return elem;
+							})}
+						</SwatchGroup>
+					</div>
+				</div>
+				<div class='setting' data-type='action'>
+					<SettingLabel name={tl(trans.custom)} />
+					<div
+						class={['info', 'swatch-info']}
+						ref={info}
+						onMouseEnter={() => {
+							info.current.classList.add('has-hover');
+						}}
+						onMouseLeave={() => {
+							info.current.classList.remove('has-hover');
+						}}
+					>
+						<SwatchGroup>
+							{recent_swatches_start.map((col, i) => {
+								const elem = (
+									<ColourSwatch
+										colour={col}
+										key={i}
+										onChange={set}
+									/>
+								) as ColourSwatchElement;
+
+								list.push(elem);
+
+								return elem;
+							})}
+						</SwatchGroup>
+						<SwatchSeparator />
+						<SwatchGroup>
+							{recent_swatches.map((col, i) => {
+								const elem = (
+									<ColourSwatch
+										colour={col}
+										key={i}
+										onChange={set}
+									/>
+								) as ColourSwatchElement;
+
+								list.push(elem);
+
+								return elem;
+							})}
+						</SwatchGroup>
+					</div>
+				</div>
+			</>,
+		);
+		set(colour);
 	}
 
 	update();
+
+	wrap.update = update;
 
 	return wrap;
 
@@ -229,7 +227,19 @@ export function SettingColour({
 			};
 		}
 
-		update();
+		if (
+			colour.type == 'avatar' &&
+			colour.hue != avatar_colour.sets?.hue &&
+			colour.sat != avatar_colour.sets?.sat &&
+			colour.lit != avatar_colour.sets?.lit
+		) {
+			colour.type = 'customise';
+		}
+
+		console.info('info', colour.type);
+		list.forEach((entry) => {
+			entry.active = is_active(entry.colour, colour);
+		});
 
 		if (onChange) onChange(colour);
 	}

@@ -4,19 +4,21 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { ReactNode } from 'jsx-dom';
+import { createRef, ReactNode } from 'jsx-dom';
 
 interface SettingGroupProps {
+	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
 	blend?: boolean;
 	children?: ReactNode;
 }
 
 export function SettingGroup({
+	ref,
 	blend = false,
 	children,
 }: SettingGroupProps) {
 	return (
-		<div class={['setting-group', blend && 'blend']}>
+		<div class={['setting-group', blend && 'blend']} ref={ref}>
 			{children}
 		</div>
 	);
