@@ -37,23 +37,24 @@
 		flex-direction: column;
 		gap: var(--card-padding);
 
-		animation: var(--motion, solarium 0.24s var(--trans-function));
+		translate: 0 0;
+		scale: 1;
+		transform-origin: bottom;
+		animation: var(--motion, modal_in 0.3s var(--trans-function-ani));
 
-		transition-property: transform, filter, opacity;
-		transition-duration: 0.24s;
-		transition-timing-function: var(--trans-function);
+		transition-property: translate, opacity;
+		transition-duration: 0.3s;
+		transition-timing-function: var(--trans-function-ani);
 
 		max-height: 80vh;
 
 		[data-bleh--reduced_motion="true"] & {
 			transition-duration: var(--trans);
-			filter: none !important;
-			transform: unset !important;
+			translate: unset !important;
 		}
 
 		&.to-remove {
-			filter: blur(calc(var(--solarium-percent) * 3px));
-			transform: scale(0.98);
+			translate: 0 6px;
 			opacity: 0;
 		}
 
@@ -90,10 +91,8 @@
 				max-height: 100%;
 				display: var(--cards-overlay-display);
 
-				background-image: var(
-					--cards-overlay-image,
-					unset
-				), var(--cards-overlay) !important;
+				background-image: var(--cards-overlay-image,
+						unset), var(--cards-overlay) !important;
 				background-size: 100px;
 				background-repeat: repeat-x !important;
 				background-position: 0 -60px !important;
@@ -131,6 +130,18 @@
 			width: 96vw;
 			max-width: 96vw;
 		}
+	}
+}
+
+@keyframes modal_in {
+	from {
+		translate: 0 6px;
+		opacity: 0;
+	}
+
+	to {
+		translate: 0 0;
+		opacity: 1;
 	}
 }
 
@@ -182,11 +193,11 @@
 }
 
 .bleh-modal-body {
-	& > :first-child {
+	&> :first-child {
 		margin-top: unset;
 	}
 
-	& > img {
+	&>img {
 		width: 100%;
 		border-radius: var(--item-big-radius);
 		box-shadow: var(--card-shadow);
@@ -196,11 +207,11 @@
 		margin-right: auto;
 	}
 
-	& > .sep {
+	&>.sep {
 		margin: var(--card-gap) 0;
 	}
 
-	& > p:not(.big-modal-alert, .card-tip) {
+	&>p:not(.big-modal-alert, .card-tip) {
 		max-width: 430px;
 	}
 }
@@ -208,11 +219,8 @@
 .bleh-modal-body[data-allow-scroll="true"],
 .modal-inner-content.allow-scroll {
 	max-height: 80vh;
-	padding: calc(var(--card-padding) * 2) var(--card-padding)
-		var(--card-padding) var(--card-padding);
-	margin: calc(-1 * (var(--card-padding) * 2)) calc(-1 * var(--card-padding))
-		calc(-1 * var(--card-padding)) calc(-1 * var(--card-padding))
-		!important;
+	padding: calc(var(--card-padding) * 2) var(--card-padding) var(--card-padding) var(--card-padding);
+	margin: calc(-1 * (var(--card-padding) * 2)) calc(-1 * var(--card-padding)) calc(-1 * var(--card-padding)) calc(-1 * var(--card-padding)) !important;
 	overflow-y: hidden;
 
 	border-radius: var(--item-big-radius);

@@ -13,6 +13,7 @@
 		-webkit-backdrop-filter: unset !important;
 	}
 }
+
 .popup_wrapper {
 	backdrop-filter: unset !important;
 	-webkit-backdrop-filter: unset !important;
@@ -32,22 +33,22 @@
 }
 
 .modal-content {
-	animation: var(
-		--motion,
-		solarium 0.24s var(--trans-function)
-	) !important;
+	animation: var(--motion, modal_in 0.3s var(--trans-function-ani)) !important;
 }
+
 .date-range-picker-content:before,
 .dropdown-menu-clickable::before,
 .navlist-hidden-list::before {
 	display: none;
 }
+
 .date-range-picker-content,
 .dropdown-menu-clickable--padded,
 .navlist-hidden-list,
 .events-filter-location-dropdown {
 	padding: var(--card-gap) !important;
 }
+
 .modal-body {
 	padding: var(--card-padding) !important;
 
@@ -60,12 +61,14 @@
 	width: fit-content;
 	min-width: 400px;
 }
+
 /* modal dialog v3 */
 .modal-actions {
 	position: absolute;
 	top: calc(var(--card-padding) - ((var(--modal-close-size) - 20px) / 2));
 	right: calc(var(--card-padding) - ((var(--modal-close-size) - 20px) / 2));
 }
+
 .modal-actions .modal-buttons {
 	width: fit-content;
 	margin-right: 0 !important;
@@ -73,12 +76,14 @@
 
 	gap: var(--button-list-gap);
 }
+
 .modal-actions,
 .modal-actions .modal-buttons {
 	display: flex;
 	height: var(--modal-close-size);
 	margin: unset;
 }
+
 .modal-action-button {
 	--bg: transparent;
 	--bg-hov: oklch(var(--b4) / 40%);
@@ -98,6 +103,7 @@
 	&.modal-download {
 		--mask: var(--icon-16-download);
 	}
+
 	&.modal-dismiss {
 		--mask: var(--icon-16-x);
 		clip: unset !important;
@@ -110,6 +116,7 @@
 		filter: unset !important;
 	}
 }
+
 .report-share-modal,
 .top-item-modal,
 .modal-share-content {
@@ -124,7 +131,7 @@
 	width: 320px;
 }
 
-.modal-body > .modal-title {
+.modal-body>.modal-title {
 	padding-bottom: unset;
 	font-size: 16px;
 	line-height: 20px;
@@ -134,7 +141,7 @@
 	margin-right: calc(var(--modal-close-size) + 10px) !important;
 	margin-bottom: var(--card-gap);
 
-	& + .modal-inner-content {
+	&+.modal-inner-content {
 		margin: unset;
 	}
 
