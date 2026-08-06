@@ -234,6 +234,10 @@ class Settings {
 	constructor() {
 		for (const key in settings_store) {
 			this.data.set(key, settings_store[key].default);
+
+			this.on(key, (val) => {
+				save_setting(key, val);
+			});
 		}
 	}
 
