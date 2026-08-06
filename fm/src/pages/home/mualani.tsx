@@ -198,17 +198,13 @@ export function mualani() {
 					</DemoItem>
 					<DemoItem label='SettingSwitch (testing compatibility)'>
 						<SettingGroup>
-							<SettingSwitch
-								bind='format_guest_features'
-								ref={format_guest_features}
-								onChange={() => {
-									show_guest_features.current.update();
-								}}
-							/>
-							<SettingSwitch
-								bind='show_guest_features'
-								ref={show_guest_features}
-							/>
+							<SettingSwitch bind='format_guest_features' />
+							<SettingSwitch bind='show_guest_features' />
+							<SettingSwitch name='example' />
+						</SettingGroup>
+						<SettingGroup>
+							<SettingSwitch bind='format_guest_features' />
+							<SettingSwitch bind='show_guest_features' />
 							<SettingSwitch name='example' />
 						</SettingGroup>
 					</DemoItem>
