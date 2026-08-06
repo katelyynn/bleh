@@ -20,6 +20,7 @@ import { html, render } from 'lighterhtml';
 import { redirect } from '@/components/music/music';
 import tippy from 'tippy.js';
 import { DateTime } from 'luxon';
+import { useSettings } from '@/config.ts';
 
 export function render_activity_list() {
 	load_activities();
@@ -92,7 +93,9 @@ export function render_activity(activity) {
 			tooltip_sister = sister;
 		}
 
-		if (involved.type == 'track' && settings.format_guest_features) {
+		if (
+			involved.type == 'track' && useSettings.get('format_guest_features')
+		) {
 			const formatted = name_includes(name, sister);
 
 			name = html.node`${
@@ -106,13 +109,15 @@ export function render_activity(activity) {
 			tooltip_sister = formatted.song_artist;
 		} else if (
 			(involved.type == 'album' || involved.type == 'track') &&
-			settings.corrections
+			useSettings.get('corrections')
 		) {
 			name = romanise(correct_item_by_artist(name, sister));
 			tooltip_name = name;
 			sister = romanise(correct_artist(sister));
 			tooltip_sister = sister;
-		} else if (involved.type == 'artist' && settings.corrections) {
+		} else if (
+			involved.type == 'artist' && useSettings.get('corrections')
+		) {
 			name = romanise(correct_artist(name));
 		}
 

@@ -29,6 +29,7 @@ import { redirect } from '@/components/music/music';
 import { status } from '@/components/dialog/status';
 import { input } from '@/components/settings/input';
 import { notify } from '../dialog/notify';
+import { useSettings } from '@/config.ts';
 
 const flat_patterns: flat_pattern[] = [];
 
@@ -63,7 +64,7 @@ flat_patterns.sort((a, b) => {
 log('finalised flat patterns', 'lotus', 'info', { flat_patterns });
 
 export function lotus(force = false) {
-	if (!settings.corrections) return;
+	if (!useSettings.get('corrections')) return;
 
 	let lotus_artist = localStorage.getItem('lotus_artist');
 	let lotus_artist_expire = new Date(
@@ -285,7 +286,7 @@ export function correct_generic_artist(parent) {
 	let albums = page.structure.container.querySelectorAll(`.${parent}`);
 	if (albums.length == 0) return;
 
-	if (!settings.corrections) return;
+	if (!useSettings.get('corrections')) return;
 
 	albums.forEach((album) => {
 		if (!album.hasAttribute('data-kate-processed')) {
@@ -313,7 +314,10 @@ export function correct_generic_combo(parent) {
 	let albums = page.structure.container.querySelectorAll(`.${parent}`);
 	if (albums.length == 0) return;
 
-	if (!settings.format_guest_features && !settings.corrections) return;
+	if (
+		!useSettings.get('format_guest_features') &&
+		!useSettings.get('corrections')
+	) return;
 
 	albums.forEach((album) => {
 		if (!album.hasAttribute('data-kate-processed')) {
@@ -330,7 +334,7 @@ export function correct_generic_combo(parent) {
 				);
 				if (!artist_name) return;
 
-				if (settings.format_guest_features) {
+				if (useSettings.get('format_guest_features')) {
 					const formatted = name_includes(
 						album_name.textContent,
 						artist_name.textContent,
@@ -341,7 +345,7 @@ export function correct_generic_combo(parent) {
 						album_name,
 						smart_title(formatted.song_title, formatted.song_tags),
 					);
-				} else if (settings.corrections) {
+				} else if (useSettings.get('corrections')) {
 					album_name.textContent = romanise(
 						correct_item_by_artist(
 							album_name.textContent,
@@ -358,8 +362,10 @@ export function correct_generic_combo(parent) {
 					e,
 					album,
 					html: album.innerHTML,
-					format_guest_features: settings.format_guest_features,
-					lotus: settings.corrections,
+					format_guest_features: useSettings.get(
+						'format_guest_features',
+					),
+					lotus: useSettings.get('corrections'),
 				});
 			}
 		}
@@ -376,7 +382,10 @@ export function correct_generic_combo_no_artist(parent) {
 	let albums = page.structure.container.querySelectorAll(`.${parent}`);
 	if (albums.length == 0) return;
 
-	if (!settings.format_guest_features && !settings.corrections) return;
+	if (
+		!useSettings.get('format_guest_features') &&
+		!useSettings.get('corrections')
+	) return;
 
 	albums.forEach((album) => {
 		if (!album.hasAttribute('data-kate-processed')) {
@@ -391,7 +400,7 @@ export function correct_generic_combo_no_artist(parent) {
 				album_name.getAttribute('href'),
 			);
 
-			if (settings.format_guest_features) {
+			if (useSettings.get('format_guest_features')) {
 				const formatted = name_includes(
 					album_name.textContent,
 					artist_name,
@@ -402,7 +411,7 @@ export function correct_generic_combo_no_artist(parent) {
 					album_name,
 					smart_title(formatted.song_title, formatted.song_tags),
 				);
-			} else if (settings.corrections) {
+			} else if (useSettings.get('corrections')) {
 				album_name.textContent = romanise(
 					correct_item_by_artist(album_name.textContent, artist_name),
 				);
@@ -418,7 +427,7 @@ export function correct_generic_combo_no_artist(parent) {
  * @returns {string} corrected title if applicable or original title
  */
 export function correct_item_by_artist(item, artist) {
-	if (!settings.corrections) return item;
+	if (!useSettings.get('corrections')) return item;
 
 	if (!artist) {
 		log(
@@ -461,7 +470,7 @@ export function correct_item_by_artist(item, artist) {
  * @returns corrected artist if applicable or original artist
  */
 export function correct_artist(artist, broadcast = false) {
-	if (!settings.corrections) return artist;
+	if (!useSettings.get('corrections')) return artist;
 
 	try {
 		if (artist_corrections.hasOwnProperty(artist)) {
@@ -505,7 +514,7 @@ export function name_includes(
 	const artist_key = original_artist?.toLowerCase();
 	if (
 		album_track_corrections.hasOwnProperty(artist_key) &&
-		settings.corrections
+		useSettings.get('corrections')
 	) {
 		const corr_map = album_track_corrections[artist_key];
 		if (corr_map.hasOwnProperty(formatted_title)) {
@@ -567,7 +576,7 @@ export function name_includes(
 	// apply any artist corrections
 	if (
 		artist_corrections.hasOwnProperty(original_artist) &&
-		settings.corrections
+		useSettings.get('corrections')
 	) {
 		original_artist = correct_artist(artist_corrections[original_artist]);
 	}
@@ -657,8 +666,8 @@ export function name_includes(
 }
 
 export function smart_title(song_title: string, song_tags, in_header = false) {
-	const show_features = settings.show_guest_features;
-	const show_remaster = settings.show_remaster_tags;
+	const show_features = useSettings.get('show_guest_features');
+	const show_remaster = useSettings.get('show_remaster_tags');
 
 	return html`
 		<span class="title">${fancy_title(

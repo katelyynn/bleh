@@ -572,7 +572,7 @@ export function create_profile_top_item(
 
 function friends_button(parent) {
 	let friend_state = settings.friends.includes(page.name);
-	let star_state = settings.starred_friend == page.name;
+	let star_state = useSettings.get('starred_friend') == page.name;
 
 	if (!friend_state && star_state) {
 		star_state = false;
@@ -606,7 +606,7 @@ function friends_button(parent) {
 					);
 
 					save_setting('friends', new_list);
-					if (page.name == settings.starred_friend) {
+					if (page.name == useSettings.get('starred_friend')) {
 						save_setting('starred_friend', '');
 					}
 

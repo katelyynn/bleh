@@ -37,6 +37,7 @@ import { icon, icons } from '../shared/icon';
 import { keys } from '../settings/storage';
 import { is_sponsor } from '../sponsor';
 import { beta_indicator } from '../shared/indicator';
+import { useSettings } from '@/config.ts';
 
 unsafeWindow._other_listener = function (id) {
 	other_listener(id);
@@ -289,13 +290,13 @@ export async function show_your_scrobbles() {
 	create_listen_item(listen_container, your_listens, page.type);
 
 	// profile shortcut :3
-	if (settings.starred_friend != '') {
+	if (useSettings.get('starred_friend') != '') {
 		const cache = await load_profile_cache_externally(
-			settings.starred_friend,
+			useSettings.get('starred_friend'),
 		);
 
 		let shortcut_listens = {
-			name: settings.starred_friend,
+			name: useSettings.get('starred_friend'),
 			listens: -1,
 			link: scrobble_page,
 			avi: cache.avatar,
@@ -676,19 +677,19 @@ export async function show_your_scrobbles() {
 			if (link.classList.contains('play-this-track-playlink--youtube')) {
 				link.textContent = 'YouTube';
 
-				if (!settings.music_links.includes('youtube')) return;
+				if (!useSettings.get('music_links').includes('youtube')) return;
 			} else if (
 				link.classList.contains('play-this-track-playlink--spotify')
 			) {
 				link.textContent = 'Spotify';
 
-				if (!settings.music_links.includes('spotify')) return;
+				if (!useSettings.get('music_links').includes('spotify')) return;
 			} else if (
 				link.classList.contains('play-this-track-playlink--itunes')
 			) {
 				link.textContent = 'Apple';
 
-				if (!settings.music_links.includes('itunes')) return;
+				if (!useSettings.get('music_links').includes('itunes')) return;
 			}
 
 			if (replace) {
@@ -720,12 +721,12 @@ export async function show_your_scrobbles() {
 
 		if (
 			['genius', 'tidal', 'deezer', 'qobuz'].some((service) =>
-				settings.music_links.includes(service)
+				useSettings.get('music_links').includes(service)
 			)
 		) {
 			link_container.appendChild(html.node`
                 ${
-				settings.music_links.includes('genius')
+				useSettings.get('music_links').includes('genius')
 					? html.node`
                     <a class="btn music-link play-this-track-playlink--genius colourful icon" href="https://genius.com/search?q=${
 						sanitise(page.sister)
@@ -736,7 +737,7 @@ export async function show_your_scrobbles() {
 					: ''
 			}
                 ${
-				settings.music_links.includes('tidal')
+				useSettings.get('music_links').includes('tidal')
 					? html.node`
                     <a class="btn music-link play-this-track-playlink--tidal colourful icon" href="https://listen.tidal.com/search?q=${
 						sanitise(page.sister, ' ')
@@ -747,7 +748,7 @@ export async function show_your_scrobbles() {
 					: ''
 			}
                 ${
-				settings.music_links.includes('deezer')
+				useSettings.get('music_links').includes('deezer')
 					? html.node`
                     <a class="btn music-link play-this-track-playlink--deezer colourful icon" href="https://www.deezer.com/search/${
 						sanitise(page.sister, ' ')
@@ -758,7 +759,7 @@ export async function show_your_scrobbles() {
 					: ''
 			}
                 ${
-				settings.music_links.includes('qobuz')
+				useSettings.get('music_links').includes('qobuz')
 					? html.node`
                     <a class="btn music-link play-this-track-playlink--qobuz colourful icon" href="https://www.qobuz.com/gb-en/search/tracks/${
 						sanitise(page.name, ' ')
@@ -777,7 +778,7 @@ export async function show_your_scrobbles() {
 			render(
 				link_container,
 				html`
-					${settings.music_links.includes('spotify')
+					${useSettings.get('music_links').includes('spotify')
 						? html.node`
                             <a
                                 class="btn music-link play-this-track-playlink--spotify colourful icon"
@@ -793,7 +794,7 @@ export async function show_your_scrobbles() {
                             </a>
                     `
 						: ''}
-					${settings.music_links.includes('itunes')
+					${useSettings.get('music_links').includes('itunes')
 						? html.node`
                             <a
                                 class="btn music-link play-this-track-playlink--itunes colourful icon"
@@ -809,7 +810,7 @@ export async function show_your_scrobbles() {
                             </a>
                     `
 						: ''}
-					${settings.music_links.includes('youtube')
+					${useSettings.get('music_links').includes('youtube')
 						? html.node`
                             <a
                                 class="btn music-link play-this-track-playlink--youtube-music colourful icon"
@@ -824,7 +825,7 @@ export async function show_your_scrobbles() {
                             </a>
                     `
 						: ''}
-					${settings.music_links.includes('tidal')
+					${useSettings.get('music_links').includes('tidal')
 						? html.node`
                             <a
                                 class="btn music-link play-this-track-playlink--tidal colourful icon"
@@ -840,7 +841,7 @@ export async function show_your_scrobbles() {
                             </a>
                     `
 						: ''}
-					${settings.music_links.includes('deezer')
+					${useSettings.get('music_links').includes('deezer')
 						? html.node`
                             <a
                                 class="btn music-link play-this-track-playlink--deezer colourful icon"
@@ -856,7 +857,7 @@ export async function show_your_scrobbles() {
                             </a>
                     `
 						: ''}
-					${settings.music_links.includes('discogs')
+					${useSettings.get('music_links').includes('discogs')
 						? html.node`
                             <a
                                 class="btn music-link play-this-track-playlink--discogs colourful icon"
@@ -871,7 +872,7 @@ export async function show_your_scrobbles() {
                             </a>
                     `
 						: ''}
-					${settings.music_links.includes('qobuz')
+					${useSettings.get('music_links').includes('qobuz')
 						? html.node`
                             <a
                                 class="btn music-link play-this-track-playlink--qobuz colourful icon"
@@ -886,7 +887,7 @@ export async function show_your_scrobbles() {
                             </a>
                     `
 						: ''}
-					${settings.music_links.includes('aoty')
+					${useSettings.get('music_links').includes('aoty')
 						? html.node`
                             <a
                                 class="btn music-link play-this-track-playlink--aoty colourful icon"
@@ -901,7 +902,7 @@ export async function show_your_scrobbles() {
                             </a>
                     `
 						: ''}
-					${settings.music_links.includes('rym')
+					${useSettings.get('music_links').includes('rym')
 						? html.node`
                             <a
                                 class="btn music-link play-this-track-playlink--rym colourful icon"
@@ -917,7 +918,7 @@ export async function show_your_scrobbles() {
                             </a>
                     `
 						: ''}
-					${settings.music_links.includes('genius')
+					${useSettings.get('music_links').includes('genius')
 						? html.node`
                             <a
                                 class="btn music-link play-this-track-playlink--genius colourful icon"
@@ -938,7 +939,7 @@ export async function show_your_scrobbles() {
 			render(
 				link_container,
 				html`
-					${settings.music_links.includes('spotify')
+					${useSettings.get('music_links').includes('spotify')
 						? html.node`
                             <a
                                 class="btn music-link play-this-track-playlink--spotify colourful icon"
@@ -954,7 +955,7 @@ export async function show_your_scrobbles() {
                             </a>
                     `
 						: ''}
-					${settings.music_links.includes('itunes')
+					${useSettings.get('music_links').includes('itunes')
 						? html.node`
                             <a
                                 class="btn music-link play-this-track-playlink--itunes colourful icon"
@@ -970,7 +971,7 @@ export async function show_your_scrobbles() {
                             </a>
                     `
 						: ''}
-					${settings.music_links.includes('youtube')
+					${useSettings.get('music_links').includes('youtube')
 						? html.node`
                             <a
                                 class="btn music-link play-this-track-playlink--youtube-music colourful icon"
@@ -985,7 +986,7 @@ export async function show_your_scrobbles() {
                             </a>
                     `
 						: ''}
-					${settings.music_links.includes('tidal')
+					${useSettings.get('music_links').includes('tidal')
 						? html.node`
                             <a
                                 class="btn music-link play-this-track-playlink--tidal colourful icon"
@@ -1001,7 +1002,7 @@ export async function show_your_scrobbles() {
                             </a>
                     `
 						: ''}
-					${settings.music_links.includes('deezer')
+					${useSettings.get('music_links').includes('deezer')
 						? html.node`
                             <a
                                 class="btn music-link play-this-track-playlink--deezer colourful icon"
@@ -1017,7 +1018,7 @@ export async function show_your_scrobbles() {
                             </a>
                     `
 						: ''}
-					${settings.music_links.includes('discogs')
+					${useSettings.get('music_links').includes('discogs')
 						? html.node`
                             <a
                                 class="btn music-link play-this-track-playlink--discogs colourful icon"
@@ -1032,7 +1033,7 @@ export async function show_your_scrobbles() {
                             </a>
                     `
 						: ''}
-					${settings.music_links.includes('qobuz')
+					${useSettings.get('music_links').includes('qobuz')
 						? html.node`
                             <a
                                 class="btn music-link play-this-track-playlink--qobuz colourful icon"
@@ -1048,7 +1049,7 @@ export async function show_your_scrobbles() {
                             </a>
                     `
 						: ''}
-					${settings.music_links.includes('aoty')
+					${useSettings.get('music_links').includes('aoty')
 						? html.node`
                             <a
                                 class="btn music-link play-this-track-playlink--aoty colourful icon"
@@ -1063,7 +1064,7 @@ export async function show_your_scrobbles() {
                             </a>
                     `
 						: ''}
-					${settings.music_links.includes('rym')
+					${useSettings.get('music_links').includes('rym')
 						? html.node`
                             <a
                                 class="btn music-link play-this-track-playlink--rym colourful icon"
@@ -1079,7 +1080,7 @@ export async function show_your_scrobbles() {
                             </a>
                     `
 						: ''}
-					${settings.music_links.includes('genius')
+					${useSettings.get('music_links').includes('genius')
 						? html.node`
                             <a
                                 class="btn music-link play-this-track-playlink--genius colourful icon"
@@ -1120,15 +1121,27 @@ export async function show_your_scrobbles() {
 					} else if (type == 'resource-external-link--twitter') {
 						link.textContent = 'Twitter';
 
-						if (!settings.music_links.includes('twitter')) return;
+						if (
+							!useSettings.get('music_links').includes('twitter')
+						) return;
 					} else if (type == 'resource-external-link--facebook') {
 						link.textContent = 'Facebook';
 
-						if (!settings.music_links.includes('facebook')) return;
+						if (
+							!useSettings.get('music_links').includes('facebook')
+						) return;
 					} else if (type == 'resource-external-link--instagram') {
-						if (!settings.music_links.includes('instagram')) return;
+						if (
+							!useSettings.get('music_links').includes(
+								'instagram',
+							)
+						) return;
 					} else if (type == 'resource-external-link--soundcloud') {
-						if (!settings.music_links.includes('soundcloud')) {
+						if (
+							!useSettings.get('music_links').includes(
+								'soundcloud',
+							)
+						) {
 							return;
 						}
 					}
@@ -1195,7 +1208,7 @@ export async function show_your_scrobbles() {
 	}
 
 	// lotus
-	if (!settings.corrections) return;
+	if (!useSettings.get('corrections')) return;
 
 	page.structure.side.appendChild(html.node`
         <section class="lotus cta colourful">
@@ -1713,7 +1726,7 @@ export function convert_top_listener(listener, index, key = 'top-listeners') {
 		let track_link = about_me.querySelector('a');
 
 		track_link.classList.add('top-track');
-		if (settings.format_guest_features) {
+		if (useSettings.get('format_guest_features')) {
 			const formatted = name_includes(
 				track_link.textContent.trim(),
 				page.sister,
@@ -1724,7 +1737,7 @@ export function convert_top_listener(listener, index, key = 'top-listeners') {
 				track_link,
 				smart_title(formatted.song_title, formatted.song_tags),
 			);
-		} else if (settings.corrections) {
+		} else if (useSettings.get('corrections')) {
 			track_link.textContent = romanise(
 				correct_item_by_artist(
 					track_link.textContent.trim(),

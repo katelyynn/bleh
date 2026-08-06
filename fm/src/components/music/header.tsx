@@ -21,6 +21,7 @@ import {
 } from './lotus';
 import { artist_corrections, combined_artists } from '@/build/music';
 import { log } from '@/build/log';
+import { useSettings } from '@/config.ts';
 
 interface page_header_avatar extends HTMLDivElement {
 	image: HTMLImageElement;
@@ -37,7 +38,7 @@ export function page_header_avatar(url?: string): page_header_avatar {
 
 	let action = 'expand';
 	if (supports_gallery) {
-		action = settings.default_avatar_action as string;
+		action = useSettings.get('default_avatar_action') as string;
 	}
 
 	let image: HTMLImageElement;
@@ -144,7 +145,7 @@ export function page_header_avatar(url?: string): page_header_avatar {
 }
 
 export function page_header_disc() {
-	if (!settings.show_disc_image) return;
+	if (!useSettings.get('show_disc_image')) return;
 
 	return <div class='page-header-disc' />;
 }
@@ -161,7 +162,7 @@ export function artist_title(header = document.body) {
 	page.multi = false;
 
 	if (!has_multi) {
-		if (!settings.corrections) {
+		if (!useSettings.get('corrections')) {
 			title.textContent = romanise(title_text);
 			return;
 		}
@@ -192,7 +193,7 @@ export function artist_title(header = document.body) {
 		if (split.length < 2) {
 			page.multi = false;
 
-			if (!settings.corrections) return;
+			if (!useSettings.get('corrections')) return;
 
 			title.textContent = romanise(correct_artist(title_text, true));
 
@@ -220,7 +221,8 @@ export function page_header_title(header = document.body) {
 	page.suggest = null;
 
 	if (
-		!settings.corrections && !settings.format_guest_features && !page.multi
+		!useSettings.get('corrections') &&
+		!useSettings.get('format_guest_features') && !page.multi
 	) {
 		return;
 	}
@@ -263,7 +265,7 @@ export function page_header_title(header = document.body) {
 		}
 	}
 
-	if (settings.format_guest_features) {
+	if (useSettings.get('format_guest_features')) {
 		try {
 			if (!track_title.hasAttribute('data-kate-processed')) {
 				track_title.setAttribute('data-kate-processed', 'true');

@@ -20,6 +20,7 @@ import { checkup_page_structure } from '@/components/page/structure';
 import { avatar } from '@/components/shared/avatar';
 import { is_url, register_background, update_page } from '@/page';
 import { html, render } from 'lighterhtml';
+import { useSettings } from '@/config.ts';
 
 export function bleh_now() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -131,7 +132,7 @@ export function bleh_now() {
             <a href="${root}user/${now.artist}" target="_blank">${artist}</a>
         `;
 
-		if (settings.format_guest_features) {
+		if (useSettings.get('format_guest_features')) {
 			const formatted = name_includes(now.name, now.artist);
 
 			song_link.classList.add('smart-title');

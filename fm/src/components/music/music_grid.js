@@ -270,7 +270,7 @@ export function music_grids(search = page.structure.main, use_colour = true) {
 				artist.textContent.trim(),
 			);
 
-			if (settings.format_guest_features) {
+			if (useSettings.get('format_guest_features')) {
 				const name_elem = name;
 				const artist_elem = artist;
 

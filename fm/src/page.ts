@@ -39,7 +39,7 @@ import { music_grids } from '@/components/music/music_grid';
 import { nag_bar } from '@/components/dialog/nag_bar';
 import { load_notifications, notify } from '@/components/dialog/notify';
 import { patch_titles } from '@/components/music/track.js';
-import { load_settings } from '@/config';
+import { load_settings, Settings, useSettings } from '@/config';
 import { theme_version, version } from '@/main';
 import { append_nav } from '@/components/page/navigation';
 import { bleh_albums } from '@/pages/album';
@@ -112,6 +112,8 @@ export function bleh() {
 	florence({
 		page,
 		on_head_load: () => {
+			Object.assign(useSettings, new Settings());
+
 			append_style();
 			favi();
 			page.state.previous_title = document.title;
@@ -122,6 +124,8 @@ export function bleh() {
 		on_body_load: () => {
 			clean_storage();
 			favi();
+
+			load_settings();
 
 			const logo = document.querySelector('.masthead-logo a');
 			if (!logo) {
@@ -135,8 +139,6 @@ export function bleh() {
 			document.body.appendChild(page.state.colour_preview);
 
 			register_auth();
-
-			load_settings();
 
 			dynamic_theming();
 			solarium();
@@ -183,6 +185,7 @@ export function bleh() {
 		on_mutation: main_flow,
 		on_page_change: load_page,
 		on_subpage_change: () => {
+			useSettings.rebuild();
 			load_settings();
 
 			if (page.state.settings_reload) {
@@ -382,7 +385,7 @@ function main_flow() {
 			correct_generic_artist('music-more-artists-item');
 		}
 
-		if (settings.corrections) {
+		if (useSettings.get('corrections')) {
 			correct_generic_combo('resource-list--release-list-item');
 			correct_generic_combo('similar-albums-item');
 			correct_generic_combo('track-similar-tracks-item');
@@ -545,7 +548,10 @@ function load_page(main_content = null) {
 			nag_bar();
 		}
 
-		if (settings.corrections || settings.format_guest_features) {
+		if (
+			useSettings.get('corrections') ||
+			useSettings.get('format_guest_features')
+		) {
 			if (page.type == 'artist') {
 				correct_generic_combo_no_artist('artist-top-albums-item');
 			} else if (page.type == 'track') {

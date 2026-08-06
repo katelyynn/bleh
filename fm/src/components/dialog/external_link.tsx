@@ -10,6 +10,7 @@ import { tl, trans } from '@/build/trans.ts';
 import { save_setting } from '@/components/settings/settings.tsx';
 import { toggle } from '@/components/settings/toggle.js';
 import { settings } from '@/build/config.ts';
+import { useSettings } from '@/config.ts';
 
 export function external_url_prompt(url: string, dangerous = false) {
 	log(
@@ -86,10 +87,7 @@ export function external_url_prompt(url: string, dangerous = false) {
 						class={['btn', 'primary', 'continue']}
 						onClick={() => {
 							if (trust_site?.checked()) {
-								save_setting('trusted_sites', [
-									...settings.trusted_sites,
-									hostname,
-								]);
+								useSettings.append('trusted_sites', hostname);
 								log(
 									`added ${hostname} to trusted sites`,
 									'markdown',

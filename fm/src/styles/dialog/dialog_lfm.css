@@ -33,7 +33,8 @@
 }
 
 .modal-content {
-	animation: var(--motion, modal_in 0.3s var(--trans-function-ani)) !important;
+	animation: var(--motion, modal_in 0.3s var(--trans-function-ani))
+		!important;
 }
 
 .date-range-picker-content:before,
@@ -131,7 +132,7 @@
 	width: 320px;
 }
 
-.modal-body>.modal-title {
+.modal-body > .modal-title {
 	padding-bottom: unset;
 	font-size: 16px;
 	line-height: 20px;
@@ -141,7 +142,7 @@
 	margin-right: calc(var(--modal-close-size) + 10px) !important;
 	margin-bottom: var(--card-gap);
 
-	&+.modal-inner-content {
+	& + .modal-inner-content {
 		margin: unset;
 	}
 

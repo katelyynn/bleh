@@ -23,60 +23,41 @@ function parse_bleh_version(version: string) {
 	return parseFloat(version.substring(0, 7));
 }
 
-export function load_settings(skip = false) {
-	if (!skip) {
-		for (let setting in settings_store) {
-			// assign default if missing
-			if (settings[setting] == null) {
-				settings[setting] = structuredClone(
-					settings_store[setting].default,
-				);
-			}
-		}
-
-		if (!settings.version) settings.version = '10000000';
-	}
+export function load_settings() {
+	if (!settings.version) settings.version = '10000000';
 
 	migrations(parse_bleh_version(settings.version));
 
 	// save setting into body
-	for (let setting in settings) {
-		document.body.classList.toggle(
-			'increase-btn-contrast',
-			settings.lit <= 0.3,
-		);
+	for (const setting in settings_store) {
+		const value = useSettings.get(setting);
+		const store = settings_store[setting];
+		const type = store.type || 'toggle';
 
-		if (
-			(setting == 'hue' || setting == 'sat' || setting == 'lit') &&
-			settings.hue == settings_store.hue.default &&
-			settings.sat == settings_store.sat.default &&
-			settings.lit == settings_store.lit.default
-		) {
-			document.body.classList.remove('increase-btn-contrast');
-			continue;
-		}
-
-		if (settings_store[setting]) {
-			const type = settings_store[setting].type || 'toggle';
-
-			if (settings_store[setting].css) {
-				document.body.style.setProperty(
-					`--${settings_store[setting].css}`,
-					`${settings[setting]}${
-						settings_store[setting].suffix || ''
-					}`,
-				);
-			}
+		if (['hue', 'sat', 'lit'].includes(setting)) {
+			document.body.classList.toggle(
+				'increase-btn-contrast',
+				useSettings.get('lit') as number <= 0.3,
+			);
 
 			if (
-				!other_setting_types.includes(type) &&
-				settings_store[setting].bubble
+				useSettings.isDefault('hue') && useSettings.isDefault('sat') &&
+				useSettings.isDefault('lit')
 			) {
-				document.body.setAttribute(
-					`data-bleh--${setting}`,
-					settings[setting],
-				);
+				document.body.classList.remove('increase-btn-contrast');
+				continue;
 			}
+		}
+
+		if (store.css) {
+			document.body.style.setProperty(
+				`--${store.css}`,
+				`${value}${store.suffix || ''}`,
+			);
+		}
+
+		if (!other_setting_types.includes(type) && store.bubble) {
+			document.body.setAttribute(`data-bleh--${setting}`, String(value));
 		}
 	}
 
@@ -95,92 +76,102 @@ export function load_settings(skip = false) {
 }
 
 export function migrations(version: number) {
-	if (!settings.theme_type) {
-		if (settings.theme == 'light' || settings.theme == 'ink') {
-			settings.theme_type = 'light';
-		} else settings.theme_type = 'dark';
+	if (!useSettings.get('theme_type')) {
+		if (
+			useSettings.get('theme') == 'light' ||
+			useSettings.get('theme') == 'ink'
+		) {
+			useSettings.set('theme_type', 'light');
+		} else {
+			useSettings.set('theme_type', 'dark');
+		}
 	}
 
 	if (version < 2025.0929) {
-		if (settings.seasonal_particles == true) {
-			settings.seasonal_particles = 'all';
-		} else if (settings.seasonal_particles == false) {
-			settings.seasonal_particles = 'none';
+		if (useSettings.get('seasonal_particles') == true) {
+			useSettings.set('seasonal_particles', 'all');
+		} else if (useSettings.get('seasonal_particles') == false) {
+			useSettings.set('seasonal_particles', 'none');
 		}
 
-		if (settings.seasonal_particles_reduced == true) {
-			settings.seasonal_particles = 'less';
+		if (useSettings.get('seasonal_particles_reduced') == true) {
+			useSettings.set('seasonal_particles', 'less');
 			delete settings.seasonal_particles_reduced;
-		} else if (settings.seasonal_particles_reduced == false) {
+		} else {
 			delete settings.seasonal_particles_reduced;
-		}
-
-		if (settings.font_weight == 480 || settings.font_weight == 440) {
-			settings.font_weight = settings_store.font_weight.default;
 		}
 
 		if (
-			settings.font_weight_medium == 650 ||
-			settings.font_weight_medium == 570
+			useSettings.get('font_weight') == 480 ||
+			useSettings.get('font_weight') == 440
 		) {
-			settings.font_weight_medium =
-				settings_store.font_weight_medium.default;
+			useSettings.reset('font_weight');
 		}
 
 		if (
-			settings.font_weight_bold == 730 ||
-			settings.font_weight_bold == 760 ||
-			settings.font_weight_bold == 680
+			useSettings.get('font_weight_medium') == 650 ||
+			useSettings.get('font_weight_medium') == 570
 		) {
-			settings.font_weight_bold = settings_store.font_weight_bold.default;
+			useSettings.reset('font_weight_medium');
+		}
+
+		if (
+			useSettings.get('font_weight_bold') == 730 ||
+			useSettings.get('font_weight_bold') == 760 ||
+			useSettings.get('font_weight_bold') == 680
+		) {
+			useSettings.reset('font_weight_bold');
 		}
 	}
 
 	if (version < 2026.0201) {
-		if (settings.noise == 0.5) {
-			settings.noise = settings_store.noise.default;
-		}
+		if (useSettings.get('noise') == 0.5) useSettings.reset('noise');
 	}
 
 	if (version < 2026.022) {
-		if (settings.hue == 255 && settings.sat == 1 && settings.lit == 1) {
-			settings.hue = settings_store.hue.default;
-			settings.sat = settings_store.sat.default;
-			settings.lit = settings_store.lit.default;
+		if (
+			useSettings.isDefault('hue') &&
+			useSettings.isDefault('sat') &&
+			useSettings.isDefault('lit')
+		) {
+			useSettings.reset('hue');
+			useSettings.reset('sat');
+			useSettings.reset('lit');
 		}
 	}
 
 	if (version < 2026.08) {
-		if (Number(settings.noise) == 0.35) {
-			settings.noise = 0.25;
-		}
+		if (useSettings.get('noise') == 0.35) useSettings.reset('noise');
 	}
 
 	if (
 		!['circle', 'squircle', 'square'].includes(
-			settings.avatar_radius as string,
+			useSettings.get('avatar_radius') as string,
 		)
 	) {
-		if (Number(settings.avatar_radius) == 0) {
-			settings.avatar_radius = 'square';
-		} else if (Number(settings.avatar_radius) == 25) {
-			settings.avatar_radius = 'squircle';
+		if (useSettings.get('avatar_radius') == 0) {
+			useSettings.set('avatar_radius', 'square');
+		} else if (useSettings.get('avatar_radius') == 25) {
+			useSettings.set('avatar_radius', 'squircle');
 		} else {
-			settings.avatar_radius = 'circle';
+			useSettings.set('avatar_radius', 'circle');
 		}
 	}
 
-	if (Number.isInteger(settings.list_view)) {
-		if (settings.list_view == 0) {
-			settings.list_view = 'list';
+	if (Number.isInteger(useSettings.get('list_view'))) {
+		if (useSettings.get('list_view') == 0) {
+			useSettings.set('list_view', 'list');
 		} else {
-			settings.list_view = 'cards';
+			useSettings.set('list_view', 'cards');
 		}
 	}
 
-	if (settings.profile_shortcut) {
-		settings.friends = [settings.profile_shortcut];
-		settings.starred_friend = settings.profile_shortcut;
+	if (useSettings.get('profile_shortcut')) {
+		useSettings.set('friends', [useSettings.get('profile_shortcut')]);
+		useSettings.set(
+			'starred_friend',
+			useSettings.get('profile_shortcut') as string,
+		);
 
 		localStorage.removeItem('bleh_profile_shortcut_avi');
 		delete settings.profile_shortcut;
@@ -226,17 +217,35 @@ export function invoke_reload() {
 
 type listener = (val: setting_value, uuid?: string) => void;
 
-class Settings {
+export class Settings {
 	private data = new Map<string, setting_value>();
 
 	private listeners = new Map<string, listener[]>();
 
 	constructor() {
-		for (const key in settings_store) {
-			this.data.set(key, settings_store[key].default);
+		this.rebuild();
+	}
 
-			this.on(key, (val) => {
-				save_setting(key, val);
+	public rebuild() {
+		for (const key in settings_store) {
+			const local = JSON.parse(localStorage.getItem('bleh') || '{}');
+
+			if (local[key]) {
+				let val = local[key];
+
+				try {
+					val = Number(val);
+				} catch {
+					//
+				}
+
+				this.change(key, val);
+			} else {
+				this.change(key, settings_store[key].default);
+			}
+
+			this.on(key, (value: setting_value) => {
+				save_setting(key, value);
 			});
 		}
 	}
@@ -249,12 +258,38 @@ class Settings {
 		return settings_store[key];
 	}
 
+	public isDefault(key: string, val?: setting_value) {
+		if (val == undefined) val = this.data.get(key);
+
+		return val == this.store(key).default;
+	}
+
 	public set(key: string, val: setting_value, uuid?: string) {
-		this.data.set(key, val);
+		this.change(key, val);
+
+		save_setting(key, val);
 
 		this.listeners.get(key)?.forEach((cb) => {
 			cb(val, uuid);
 		});
+	}
+
+	private change(key: string, val: setting_value) {
+		val = structuredClone(val);
+
+		this.data.set(key, val);
+
+		settings[key] = val;
+	}
+
+	public reset(key: string) {
+		this.set(key, this.store(key).default);
+	}
+
+	public append(key: string, value: setting_value) {
+		if (!Array.isArray(this.get(key))) return;
+
+		this.set(key, [...this.get(key), value]);
 	}
 
 	// members can subscribe to setting changes
@@ -268,7 +303,7 @@ class Settings {
 	}
 }
 
-export const useSettings = new Settings();
+export let useSettings: Settings;
 
 export function update_colour_swatches() {
 	let found = false;

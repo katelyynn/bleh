@@ -11,6 +11,7 @@ import { notify } from './notify';
 import { log } from '@/build/log';
 import { save_setting } from '@/components/settings/settings';
 import { settings } from '@/build/config';
+import { useSettings } from '@/config.ts';
 
 export let popup_queue = [];
 
@@ -25,7 +26,7 @@ export function queue_popup(key, host, prefer = 'top') {
 		return;
 	}
 
-	if (settings.popups_seen.includes(key)) {
+	if ((useSettings.get('popups_seen') as string[]).includes(key)) {
 		log(
 			`skipped adding ${key} as popup has previously been dismissed`,
 			'popup',
@@ -98,8 +99,7 @@ function popup(instance) {
 			popup_queue = popup_queue.filter((i) => i.key != key);
 			tooltip.hide();
 
-			settings.popups_seen.push(key);
-			save_setting('popups_seen', settings.popups_seen);
+			useSettings.append('popups_seen', key);
 
 			setTimeout(() => {
 				tooltip.destroy();

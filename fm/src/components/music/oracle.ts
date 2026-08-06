@@ -2069,7 +2069,7 @@ export function oracle_process() {
 
 							let title_elem;
 							let artist_elem;
-							if (settings.format_guest_features) {
+							if (useSettings.get('format_guest_features')) {
 								const formatted = name_includes(
 									title,
 									artist,

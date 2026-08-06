@@ -414,7 +414,7 @@ body,
 	--banner-overlay: transparent;
 	--banner-mix: none;
 
-	--normal-shadow: none;
+	--normal-shadow: 0 0 transparent;
 
 	--input-shadow:
 		inset 0 0 0 1px oklch(var(--b3) / 70%),
@@ -422,8 +422,9 @@ body,
 	--focused-input-shadow:
 		inset 0 0 0 1px oklch(var(--h3) / 0.4),
         var(--input-shadow);
-
-	--group-shadow: inset 0 0 0 1px oklch(var(--b2) / 0.36);
+	--group-shadow:
+		inset 0 0 0 1px oklch(var(--b2) / 0.36),
+		0 1px 2px 0 oklch(0.01 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue) / 0.3);
 
 	--inset-background: oklch(var(--b6) / 23%);
 	--inset-shadow: inset 0 4px 10px oklch(var(--b6) / 50%);
@@ -516,7 +517,7 @@ body,
 		--card-blur-bg: oklch(0.21 calc(var(--sat) * 0.05 * var(--sat-bg, 1)) var(--hue) / var(--solarium-opacity, 50%));
 		--card-blur-bg-alt: oklch(var(--b5) / var(--solarium-opacity, 35%));
 
-		--normal-shadow: none;
+		--normal-shadow: 0 0 transparent;
 
 		--card-border-base: oklch(var(--b3) / 0.5);
 		--card-border-base-highlight: oklch(var(--b2) / 0.55);
@@ -622,14 +623,16 @@ body,
 		--card-border-base: oklch(0.87 0 0) !important;
 		--card-border-base-highlight: oklch(0.89 0 0);
 
-		--normal-shadow: none;
+		--normal-shadow: 0 0 transparent;
 		--input-shadow:
 			inset 0 0 0 1px oklch(var(--b2) / 30%),
             inset 0 1px 3px oklch(0 0 0 / 2%);
 		--focused-input-shadow:
 			inset 0 0 0 1px oklch(var(--l3-c) / 30%),
             var(--input-shadow);
-		--group-shadow: inset 0 0 0 1px oklch(var(--b4) / 0.8);
+		--group-shadow:
+			inset 0 0 0 1px oklch(var(--b4) / 0.8),
+			0 1px 2px 0 oklch(0.01 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue) / 0.04);
 
 		--sidebar-bg: color-mix(in oklch, oklch(var(--b6)) 70%, oklch(var(--b5)));
 		--sidebar-border: color-mix(
@@ -700,14 +703,16 @@ body,
 		--card-border-base: oklch(0.81 calc(var(--sat) * 0.12 * var(--sat-bg, 1)) var(--hue)) !important;
 		--card-border-base-highlight: oklch(0.76 calc(var(--sat) * 0.11 * var(--sat-bg, 1)) var(--hue)) !important;
 
-		--normal-shadow: none;
+		--normal-shadow: 0 0 transparent;
 		--input-shadow:
 			inset 0 0 0 1px oklch(var(--b2) / 20%),
             inset 0 1px 2px 1px oklch(var(--b6) / 0.4);
 		--focused-input-shadow:
 			inset 0 0 0 1px oklch(var(--h3) / 0.4),
             var(--input-shadow);
-		--group-shadow: inset 0 0 0 1px oklch(var(--b2) / 23%);
+		--group-shadow:
+			inset 0 0 0 1px oklch(var(--b2) / 0.23),
+			0 1px 2px 0 oklch(0.01 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue) / 0.03);
 
 		--sidebar-bg: color-mix(in oklch, oklch(var(--b6)) 56%, oklch(var(--b5)));
 		--sidebar-border: oklch(0.87 calc(var(--sat) * 0.1 * var(--sat-bg, 1)) var(--hue));
@@ -782,7 +787,9 @@ body,
 		--focused-input-shadow:
 			inset 0 0 0 1px oklch(var(--l3-c) / 30%),
             var(--input-shadow);
-		--group-shadow: inset 0 0 0 1px oklch(var(--b4) / 0.6);
+		--group-shadow:
+			inset 0 0 0 1px oklch(var(--b4) / 0.6),
+			0 1px 2px 0 oklch(0.01 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue) / 0.3);
 
 		--sidebar-bg: color-mix(in oklch, oklch(var(--b6)) 70%, oklch(var(--b5)));
 		--sidebar-border: color-mix(
@@ -844,7 +851,9 @@ body,
 		--b6: 0.181 0.006 106.98; /* black 1 */
 		--b8: 0.1556 0.0017 17.34; /* black 0 */
 
-		--group-shadow: inset 0 0 0 1px oklch(var(--b2) / 0.6);
+		--group-shadow:
+			inset 0 0 0 1px oklch(var(--b2) / 0.6),
+			0 1px 2px 0 oklch(0.0956 0.0017 17.34 / 0.3);
 
 		--separator-base: oklch(var(--b2) / 0.53);
 
@@ -1429,7 +1438,7 @@ body {
 	--gloss-mix: plus-lighter;
 
 	--interactable-inset: inset oklch(var(--b3)) 0 -1px 0;
-	--interactable-outer: 0 2px 4px oklch(0 0 0 / 0.15);
+	--interactable-outer: 0 1px 2px 0 oklch(0 0 0 / 0.3);
 	--interactable-active-outer: oklch(var(--c1) / 0.03) 0 2px 25px 0;
 
 	--interact-shadow: var(--interactable-outer);
@@ -1538,7 +1547,7 @@ body {
 		--standout-shadow: 0 6px 20px 7px oklch(0 0 0 / 0.06);
 		--subtle-shadow: 0 3px 13px oklch(0 0 0 / 0.04);
 
-		--interactable-outer: 0 1px 4px oklch(0 0 0 / 3%);
+		--interactable-outer: 0 1px 2px 0 oklch(0 0 0 / 6%);
 		--interactable-active-outer: transparent 0 0 0;
 
 		color-scheme: light !important;

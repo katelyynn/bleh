@@ -12,6 +12,7 @@ import { log } from '@/build/log';
 import { copy, paste, redo, undo } from '@/build/tools';
 import { settings } from '@/build/config';
 import { external_url_prompt } from '@/components/dialog/external_link.tsx';
+import { useSettings } from '@/config.ts';
 
 export function register_menu(element, menu) {
 	element.setAttribute('data-has-bleh-menu', true);
@@ -42,7 +43,7 @@ export function register_menu(element, menu) {
 }
 
 export function page_menu() {
-	if (!ff('menus') || !settings.menu_replacement) return;
+	if (!ff('menus') || !useSettings.get('menu_replacement')) return;
 
 	const menu = tippy(document.body, {
 		theme: 'context-menu',
@@ -120,7 +121,11 @@ export function page_menu() {
 
 							const btn = html.node`
                                 <button class="dropdown-menu-clickable-item chibi" data-type="continue" onclick=${() => {
-								if (settings.trusted_sites.includes(hostname)) {
+								if (
+									useSettings.get('trusted_sites').includes(
+										hostname,
+									)
+								) {
 									open(unsafe_link, '_blank');
 									return;
 								}

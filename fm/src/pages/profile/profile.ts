@@ -54,6 +54,7 @@ import { header_colour } from '@/components/page/colour';
 import { keys } from '@/components/settings/storage';
 import { beta_indicator } from '@/components/shared/indicator';
 import { present_badge } from '@/components/dialog/badge';
+import { useSettings } from '@/config.ts';
 
 export function bleh_profiles() {
 	// the obsessions page is a user subpage but works very differently
@@ -1006,7 +1007,7 @@ function bleh_featured_profile_track(object) {
 		artist_elem.textContent.trim(),
 	);
 
-	if (settings.format_guest_features) {
+	if (useSettings.get('format_guest_features')) {
 		const song_title = name_elem.textContent;
 
 		const formatted = name_includes(
@@ -1026,7 +1027,7 @@ function bleh_featured_profile_track(object) {
                 ${smart_artists(formatted.song_artist, formatted.song_guests)}
             </div>
         `;
-	} else if (settings.corrections) {
+	} else if (useSettings.get('corrections')) {
 		name_elem.textContent = romanise(
 			correct_item_by_artist(
 				name_elem.textContent.trim(),
@@ -1847,7 +1848,7 @@ export function open_starred_friend_window(friend_func = null) {
 			id: 'friends',
 			list: settings.friends,
 			func: (val) => {
-				if (!val.includes(settings.starred_friend)) {
+				if (!val.includes(useSettings.get('starred_friend'))) {
 					save_setting('starred_friend', '');
 				}
 

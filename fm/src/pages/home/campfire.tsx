@@ -26,6 +26,7 @@ import { is_sponsor, sponsor } from '@/components/sponsor';
 import { DateTime } from 'luxon';
 import { icon, icons } from '@/components/shared/icon';
 import { UnderConstruction } from '@/components/shared/construction.tsx';
+import { useSettings } from '@/config.ts';
 
 interface album {
 	image: string;
@@ -252,7 +253,7 @@ export function campfire() {
 		let formatted_title: string | Hole = album.corrected_title;
 		let formatted_artist: string | Hole = album.corrected_artist;
 
-		if (settings.format_guest_features) {
+		if (useSettings.get('format_guest_features')) {
 			const formatted = name_includes(album.title, album.artist);
 
 			formatted_title = smart_title(
@@ -276,10 +277,12 @@ export function campfire() {
 				  ${formatted_title}
 				</a>
 				<span class="campfire-artist">
-				  ${settings.format_guest_features ? formatted_artist : html
-					.node`<a class="campfire-artist" href="${root}music/${redirect()}${
-					sanitise(album.artist)
-				}" target="_blank">${album.corrected_artist}</a>`}
+				  ${useSettings.get('format_guest_features')
+					? formatted_artist
+					: html
+						.node`<a class="campfire-artist" href="${root}music/${redirect()}${
+						sanitise(album.artist)
+					}" target="_blank">${album.corrected_artist}</a>`}
 				</span>
 				<div class="campfire-plays">
 				  ${tl(trans.count_plays, {
@@ -380,7 +383,7 @@ function campfire_friend(friend: string, own = false) {
 				let sister = item.sister;
 				let name = item.name;
 
-				if (settings.format_guest_features) {
+				if (useSettings.get('format_guest_features')) {
 					const formatted = name_includes(name, sister);
 
 					name = html.node`${
@@ -392,7 +395,7 @@ function campfire_friend(friend: string, own = false) {
 							formatted.song_guests,
 						)
 					}`;
-				} else if (settings.corrections) {
+				} else if (useSettings.get('corrections')) {
 					sister = romanise(correct_artist(item.sister));
 					name = romanise(
 						correct_item_by_artist(item.name, item.sister),

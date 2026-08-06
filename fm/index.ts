@@ -110,7 +110,7 @@ const shared_opts: Omit<BundleOptions, 'name'> = {
 	format: 'iife',
 	loader: { '.svg': 'text' },
 	plugins: [bundle_css, denoPlugin()],
-	minifyWhitespace: true,
+	minifyWhitespace: false,
 	minifyIdentifiers: false,
 	minifySyntax: false,
 	globalName: 'bleh',

@@ -13,7 +13,7 @@ import { version } from '@/main';
 import { ff } from '@/components/settings/sku';
 import { html, render } from 'lighterhtml';
 import { news } from '@/components/news';
-import { toggle_theme } from '@/config';
+import { useSettings } from '@/config';
 import { save_setting, setting } from '@/components/settings/settings';
 import { prompt_for_update } from '@/components/page/style';
 import { log } from '@/build/log.js';
@@ -1124,16 +1124,18 @@ export function append_nav() {
 				return button;
 			}}
                             ${
-				settings.starred_friend != ''
+				useSettings.get('starred_friend') != ''
 					? () => {
 						let button = html.node`
-                                    <a class="dropdown-menu-clickable-item chibi colourful" data-type="starred_friend" data-starred="true" href="${root}user/${settings.starred_friend}" onclick=${() => {
+                                    <a class="dropdown-menu-clickable-item chibi colourful" data-type="starred_friend" data-starred="true" href="${root}user/${
+							useSettings.get('starred_friend')
+						}" onclick=${() => {
 							instance.hide();
-						}}>${settings.starred_friend}</a>
+						}}>${useSettings.get('starred_friend')}</a>
                                 `;
 
 						tippy(button, {
-							content: settings.starred_friend,
+							content: useSettings.get('starred_friend'),
 						});
 
 						return button;
@@ -1217,7 +1219,7 @@ export function append_nav() {
 							);
 							const friends = settings.friends.filter((
 								friend: string,
-							) => friend != settings.starred_friend);
+							) => friend != useSettings.get('starred_friend'));
 
 							render(page_2, html``); // fix crash
 							render(
@@ -1228,7 +1230,7 @@ export function append_nav() {
 									}}>
 									    ${tl(trans.back)}
 									</button>
-									${settings.starred_friend
+									${useSettings.get('starred_friend')
 										? () => {
 											const friend = settings
 												.starred_friend as string;
@@ -1330,8 +1332,7 @@ export function append_nav() {
 				})
 			}
                             <div class="button-combo">
-                                <button class="dropdown-menu-clickable-item" data-menu-item="themes" disabled=${themes_disabled} onclick=${() =>
-				toggle_theme()}>
+                                <button class="dropdown-menu-clickable-item" data-menu-item="themes" disabled=${themes_disabled}>
                                     ${tl(trans.themes.name)}
                                 </button>
                                 <div class="button-combo-sep" />
@@ -1756,11 +1757,13 @@ export function append_nav() {
                                 ${auth.name}
                             </a>
                             ${
-				settings.starred_friend != ''
+				useSettings.get('starred_friend') != ''
 					? html.node`
-                                <a class="btn window-menu-item icon-r colourful" data-type="starred_friend" data-starred="true" href="${root}user/${settings.starred_friend}">
+                                <a class="btn window-menu-item icon-r colourful" data-type="starred_friend" data-starred="true" href="${root}user/${
+						useSettings.get('starred_friend')
+					}">
                                     ${icon({ name: 'inherit' })}
-                                    ${settings.starred_friend}
+                                    ${useSettings.get('starred_friend')}
                                 </a>
                             `
 					: ''
@@ -1954,7 +1957,7 @@ export async function live_status() {
 		let next = new Date();
 		next.setMinutes(next.getMinutes() + 1);
 
-		if (settings.format_guest_features) {
+		if (useSettings.get('format_guest_features')) {
 			album.textContent = romanise(
 				correct_item_by_artist(album.textContent, artist.textContent),
 			);
@@ -1972,7 +1975,7 @@ export async function live_status() {
 			artist = html.node`<span class="artist">${
 				smart_artists(formatted.song_artist, formatted.song_guests)
 			}</span>`;
-		} else if (settings.corrections) {
+		} else if (useSettings.get('corrections')) {
 			album.textContent = romanise(
 				correct_item_by_artist(album.textContent, artist.textContent),
 			);

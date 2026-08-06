@@ -21,13 +21,13 @@ interface InputProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
 	className?: string;
 	value?: string | number;
-	length?: number,
+	length?: number;
 	disabled?: boolean;
 	type?: InputType;
 	onChange?: (val: string | number) => void;
 	onSubmit?: (val: string | number) => void;
 	saveManually?: boolean;
-	saveText?: string
+	saveText?: string;
 }
 
 type InputElement = HTMLDivElement & {
@@ -44,7 +44,7 @@ export function Input({
 	onChange,
 	onSubmit,
 	saveManually = false,
-	saveText
+	saveText,
 }: InputProps) {
 	const input = createRef();
 	const colour_block = createRef();

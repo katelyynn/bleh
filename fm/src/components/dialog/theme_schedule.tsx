@@ -12,6 +12,7 @@ import { dark_themes, light_themes, theme, themes } from '@/build/theme.ts';
 import { SelectOption } from '@/components/select/select.tsx';
 import { settings } from '@/build/config.ts';
 import { Icon } from '@/components/shared/icon.tsx';
+import { useSettings } from '@/config.ts';
 
 export interface theme_min {
 	theme_day: string;
@@ -25,8 +26,8 @@ interface theme_schedule_props {
 export function theme_schedule_dialog({
 	onChange,
 }: theme_schedule_props) {
-	let theme_day = settings.theme_day as string;
-	let theme_night = settings.theme_night as string;
+	let theme_day = useSettings.get('theme_day') as string;
+	let theme_night = useSettings.get('theme_night') as string;
 
 	dialog({
 		id: 'theme_schedule',

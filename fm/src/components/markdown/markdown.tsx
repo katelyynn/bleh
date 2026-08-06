@@ -36,6 +36,7 @@ import {
 	social_links,
 	social_links_extension,
 } from '@/components/markdown/links.tsx';
+import { useSettings } from '@/config.ts';
 
 export function markdown(
 	text: string,
@@ -560,7 +561,9 @@ export function markdown_field(
 	autofocus = false,
 	required = true,
 ): markdown_field_element {
-	const use_md = mini ? settings.shout_markdown : settings.bio_markdown;
+	const use_md = mini
+		? useSettings.get('shout_markdown')
+		: useSettings.get('bio_markdown');
 
 	options = {
 		allow_headers: false,

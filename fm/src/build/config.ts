@@ -58,14 +58,14 @@ interface radio_item {
 }
 
 interface settings {
-	version: string,
-	[key: string]: setting_value
+	version: string;
+	[key: string]: setting_value;
 }
 
-export let settings: settings = {
-	version: ''
+export const settings: settings = {
+	version: '',
 };
-export let inbuilt_settings = {
+export const inbuilt_settings = {
 	recent_artwork: {
 		css: 'recent_artwork',
 		unit: '',

@@ -24,6 +24,7 @@ import html2canvas from 'html2canvas-pro';
 import { icon, icons } from '../shared/icon';
 import { hybrid_timeframe_picker, timeframe_text } from '../date/timeframe';
 import { avatar } from '../shared/avatar';
+import { useSettings } from '@/config.ts';
 
 export function collage({ host, sidebar } = {}) {
 	if (!host || !sidebar) return;
@@ -206,11 +207,11 @@ export function collage({ host, sidebar } = {}) {
 			            ${() => {
 				let btn = html.node`
                             <button class="btn chibi icon colourful" data-type="starred_friend" data-starred=${
-					settings.starred_friend != ''
+					useSettings.get('starred_friend') != ''
 				} onclick=${() => {
-					if (settings.starred_friend == '') return;
+					if (useSettings.get('starred_friend') == '') return;
 
-					inputter.value = settings.starred_friend;
+					inputter.value = useSettings.get('starred_friend');
 					inputter.dispatchEvent(new Event('change'));
 				}}>${tl(trans.starred_friend.name)}</button>
                         `;

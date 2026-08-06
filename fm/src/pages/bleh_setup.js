@@ -8,7 +8,7 @@ import { log } from '@/build/log';
 import { auth, discord, page, root } from '@/build/page';
 import { tl, trans } from '@/build/trans';
 import { checkup_page_structure } from '@/components/page/structure';
-import { update_colour_swatches } from '../config';
+import { update_colour_swatches, useSettings } from '../config';
 import { version } from '@/main';
 import { register_background, update_page } from '@/page';
 import { theme_bubbles } from '@/pages/bleh_settings/bleh_settings';
@@ -389,7 +389,7 @@ function setup_music() {
 		let header_preview;
 
 		function render_header_preview() {
-			const format = settings.format_guest_features;
+			const format = useSettings.get('format_guest_features');
 			const show_artist_tag = settings.show_guest_features;
 
 			render(
@@ -500,7 +500,7 @@ function setup_layout() {
 								data-has-bar="false"
 								data-show-album-text=${settings.expand_tracks !=
 										'never' &&
-									settings.track_layout == 'column'}
+									useSettings.get('track_layout') == 'column'}
 								data-album-name-location=${settings
 									.track_album_name_location}
 							>
@@ -511,7 +511,9 @@ function setup_layout() {
 								</td>
 								<td class="kate-placeholder" />
 								<td class="track-info" data-has-bar="false"
-									data-track-layout=${settings.track_layout}
+									data-track-layout=${useSettings.get(
+										'track_layout',
+									)}
 									data-album-name-location=${settings
 										.track_album_name_location}>
 					                <span class="chartlist-name">
@@ -521,7 +523,7 @@ function setup_layout() {
 					                    <a>${tl(trans.artist_name)}</a>
 					                </span>
 					                ${settings.expand_tracks != 'never' &&
-							settings.track_layout == 'column'
+							useSettings.get('track_layout') == 'column'
 						? html.node`
                                     <span class="chartlist-album custom-album-text">
                                         <a>${tl(trans.album_name)}</a>
@@ -536,7 +538,7 @@ function setup_layout() {
 								data-show-album-text=${settings.expand_tracks ==
 										'always' &&
 									settings.expand_tracks != 'never' &&
-									settings.track_layout == 'column'}
+									useSettings.get('track_layout') == 'column'}
 								data-album-name-location=${settings
 									.track_album_name_location}
 							>
@@ -547,7 +549,9 @@ function setup_layout() {
 								</td>
 								<td class="kate-placeholder" />
 								<td class="track-info" data-has-bar="false"
-									data-track-layout=${settings.track_layout}
+									data-track-layout=${useSettings.get(
+										'track_layout',
+									)}
 									data-album-name-location=${settings
 										.track_album_name_location}>
 					                <span class="chartlist-name">
@@ -558,7 +562,7 @@ function setup_layout() {
 					                </span>
 					                ${settings.expand_tracks == 'always' &&
 							settings.expand_tracks != 'never' &&
-							settings.track_layout == 'column'
+							useSettings.get('track_layout') == 'column'
 						? html.node`
                                     <span class="chartlist-album custom-album-text">
                                         <a>${tl(trans.album_name)}</a>

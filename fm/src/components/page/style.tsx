@@ -23,9 +23,6 @@ import { ff } from '../settings/sku';
 export function append_style() {
 	document.documentElement.classList.add('florence-supports-loading');
 
-	for (let member in settings) delete settings[member];
-	Object.assign(settings, JSON.parse(localStorage.getItem('bleh')));
-
 	const split = window.location.pathname.replace(root, '').split('/');
 	const length = split.length - 1;
 
@@ -35,7 +32,6 @@ export function append_style() {
 		return;
 	}
 
-	document.documentElement.setAttribute('data-bleh--theme', settings.theme);
 	document.documentElement.appendChild(
 		<style>{cropper_css}</style>,
 	);

@@ -20,6 +20,7 @@ import tippy from 'tippy.js';
 import { ff } from '@/components/settings/sku';
 import { setting } from '@/components/settings/settings';
 import { avatar } from '../shared/avatar';
+import { useSettings } from '@/config.ts';
 
 export function compare({ host, sidebar } = {}) {
 	if (!host || !sidebar) return;
@@ -251,11 +252,11 @@ export function compare({ host, sidebar } = {}) {
 			            ${() => {
 				let btn = html.node`
                             <button class="btn chibi icon colourful" data-type="starred_friend" data-starred=${
-					settings.starred_friend != ''
+					useSettings.get('starred_friend') != ''
 				} onclick=${() => {
-					if (settings.starred_friend == '') return;
+					if (useSettings.get('starred_friend') == '') return;
 
-					inputter.value = settings.starred_friend;
+					inputter.value = useSettings.get('starred_friend');
 					inputter.dispatchEvent(new Event('change'));
 				}}>${tl(trans.starred_friend.name)}</button>
                         `;

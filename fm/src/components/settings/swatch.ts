@@ -437,8 +437,7 @@ export function show_preview_as_hex() {
 	const colour_preview = page.state.colour_preview;
 	if (!colour_preview) return '';
 
-	const bg_colour =
-		window.getComputedStyle(colour_preview).backgroundColor;
+	const bg_colour = window.getComputedStyle(colour_preview).backgroundColor;
 
 	const final = formatHex(bg_colour);
 	colour.value = final;
