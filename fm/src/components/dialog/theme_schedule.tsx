@@ -8,11 +8,11 @@ import { dialog } from '@/components/dialog/dialog.tsx';
 import { tl, trans } from '@/build/trans.ts';
 import { SettingGroup } from '@/components/settings/group.tsx';
 import { SettingSelect } from '@/components/settings/provider/select.tsx';
-import { dark_themes, light_themes, theme, themes } from '@/build/theme.ts';
+import { dark_themes, getThemes, light_themes, theme } from '@/build/theme.ts';
 import { SelectOption } from '@/components/select/select.tsx';
 import { settings } from '@/build/config.ts';
 import { Icon } from '@/components/shared/icon.tsx';
-import { useSettings } from '@/config.ts';
+import { useSettings } from '@/page.ts';
 
 export interface theme_min {
 	theme_day: string;
@@ -36,7 +36,7 @@ export function theme_schedule_dialog({
 			<SettingGroup>
 				<SettingSelect
 					bind='theme_day'
-					values={convert_list_to_select(themes, 'light')}
+					values={convert_list_to_select(getThemes(), 'light')}
 					onChange={(val: string) => {
 						theme_day = val;
 
@@ -45,7 +45,7 @@ export function theme_schedule_dialog({
 				/>
 				<SettingSelect
 					bind='theme_night'
-					values={convert_list_to_select(themes, 'dark')}
+					values={convert_list_to_select(getThemes(), 'dark')}
 					onChange={(val: string) => {
 						theme_night = val;
 

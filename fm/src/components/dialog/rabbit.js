@@ -19,7 +19,7 @@ import { ff } from '@/components/settings/sku';
 import { redirect } from '@/components/music/music';
 import { open_starred_friend_window } from '@/pages/profile/profile';
 import { match } from '@/components/settings/dynamic_theming';
-import { useSettings } from '@/config.ts';
+import { useSettings } from '@/page.ts';
 
 export function register_rabbit() {
 	let input_box;

@@ -22,7 +22,6 @@ import { dialog } from '@/components/dialog/dialog';
 import {
 	colour_tile,
 	colour_type,
-	display_colour_presets,
 } from '@/components/settings/swatch';
 import { header_colour } from '@/components/page/colour';
 import { avatar } from '@/components/shared/avatar';
@@ -267,8 +266,6 @@ export function visual() {
 
 	render_tip();
 
-	display_colour_presets();
-	update_colour_swatches();
 
 	render_font_preview();
 

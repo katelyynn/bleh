@@ -16,7 +16,7 @@ import { Switch } from '@/components/settings/clickables/switch.tsx';
 import { tl } from '@/build/trans.ts';
 import { save_setting } from '@/components/settings/settings.tsx';
 import { SettingIcon } from '@/components/settings/provider/icon.tsx';
-import { useSettings } from '@/config.ts';
+import { useSettings } from '@/page.ts';
 
 interface SettingSwitchProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;

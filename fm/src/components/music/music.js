@@ -37,7 +37,7 @@ import { icon, icons } from '../shared/icon';
 import { keys } from '../settings/storage';
 import { is_sponsor } from '../sponsor';
 import { beta_indicator } from '../shared/indicator';
-import { useSettings } from '@/config.ts';
+import { useSettings } from '@/page.ts';
 
 unsafeWindow._other_listener = function (id) {
 	other_listener(id);

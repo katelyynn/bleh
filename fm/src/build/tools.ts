@@ -16,7 +16,7 @@ import { status } from '@/components/dialog/status.js';
 import { root } from '@/build/page';
 import { hsl, oklch } from 'culori';
 import JSON5 from 'json5';
-import { useSettings } from '@/config.ts';
+import { useSettings } from '@/page.ts';
 
 export function hex_to_hsl(hex: string) {
 	return hsl(hex);

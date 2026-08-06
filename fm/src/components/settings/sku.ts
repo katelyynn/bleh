@@ -6,7 +6,7 @@
 
 import { log } from '@/build/log';
 import { version } from '@/main';
-import { useSettings } from '@/config.ts';
+import { useSettings } from '@/page.ts';
 
 interface flag {
 	default: boolean;

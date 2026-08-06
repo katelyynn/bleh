@@ -29,7 +29,7 @@ import { redirect } from '@/components/music/music';
 import { status } from '@/components/dialog/status';
 import { input } from '@/components/settings/input';
 import { notify } from '../dialog/notify';
-import { useSettings } from '@/config.ts';
+import { useSettings } from '@/page.ts';
 
 const flat_patterns: flat_pattern[] = [];
 

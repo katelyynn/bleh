@@ -54,7 +54,7 @@ import { header_colour } from '@/components/page/colour';
 import { keys } from '@/components/settings/storage';
 import { beta_indicator } from '@/components/shared/indicator';
 import { present_badge } from '@/components/dialog/badge';
-import { useSettings } from '@/config.ts';
+import { useSettings } from '@/page.ts';
 
 export function bleh_profiles() {
 	// the obsessions page is a user subpage but works very differently

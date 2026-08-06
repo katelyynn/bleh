@@ -29,7 +29,7 @@ import { redirect } from '../music/music';
 import { notify } from '../dialog/notify';
 import { toggle } from '../settings/toggle';
 import { save_setting } from '../settings/settings';
-import { useSettings } from '@/config.ts';
+import { useSettings } from '@/page.ts';
 
 export function plot({ host, sidebar } = {}) {
 	if (!host || !sidebar) return;

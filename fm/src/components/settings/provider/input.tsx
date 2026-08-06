@@ -15,7 +15,7 @@ import { settings } from '@/build/config.ts';
 import { save_setting } from '@/components/settings/settings.tsx';
 import { Input, InputType } from '@/components/input/input.tsx';
 import { SettingIcon } from '@/components/settings/provider/icon.tsx';
-import { useSettings } from '@/config.ts';
+import { useSettings } from '@/page.ts';
 
 interface SettingInputProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;

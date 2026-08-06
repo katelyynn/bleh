@@ -16,7 +16,7 @@ import { save_setting } from '@/components/settings/settings.tsx';
 import { Input } from '@/components/input/input.tsx';
 import { SettingIcon } from '@/components/settings/provider/icon.tsx';
 import { Select, SelectOption } from '@/components/select/select.tsx';
-import { useSettings } from '@/config.ts';
+import { useSettings } from '@/page.ts';
 
 interface SettingSelectProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;

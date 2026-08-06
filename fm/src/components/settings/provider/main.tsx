@@ -13,7 +13,7 @@ import { tl, trans } from '@/build/trans.ts';
 import { Icon, icons } from '@/components/shared/icon.tsx';
 import { SettingReset } from '@/components/settings/provider/reset.tsx';
 import { createRef } from 'jsx-dom';
-import { useSettings } from '@/config.ts';
+import { useSettings } from '@/page.ts';
 
 interface SettingLabelProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;

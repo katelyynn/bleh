@@ -28,7 +28,7 @@ import { chart_reflow } from '@/components/music/chart';
 import { set_storage } from '@/build/tools';
 import { ff } from './sku';
 import { new_indicator } from '../shared/indicator';
-import { themes } from '@/build/theme.ts';
+import { getThemes } from '@/build/theme.ts';
 
 interface setting {
 	id: string;
@@ -1698,7 +1698,7 @@ export function save_setting(id: string, value: setting_value) {
 
 	if (id == 'theme') {
 		// causing issues with loading
-		//settings.theme_type = themes[value as string].type;
+		settings.theme_type = getThemes()[value as string].type;
 
 		document.body.setAttribute(
 			`data-bleh--theme_type`,

@@ -17,57 +17,59 @@ export interface theme {
 
 // use this to fill in theme info accessible with all modern
 // bleh TSX components
-export const themes: Record<string, theme> = {
-	light: {
-		name: trans.themes.light,
-		type: 'light',
-		icon: icons.theme_light,
-	},
-	ink: {
-		name: trans.themes.ink,
-		type: 'light',
-		icon: icons.theme_ink,
-	},
-	dark: {
-		name: trans.themes.dark,
-		type: 'dark',
-		icon: icons.theme_dark,
-	},
-	darker: {
-		name: trans.themes.darker,
-		type: 'dark',
-		icon: icons.theme_darker,
-	},
-	oled: {
-		name: trans.themes.oled,
-		type: 'dark',
-		icon: icons.theme_oled,
-	},
-	rose_pine: {
-		name: trans.themes.rose_pine,
-		type: 'dark',
-		external: true,
-		new_release: true,
-	},
-	rose_pine_dawn: {
-		name: trans.themes.rose_pine_dawn,
-		type: 'light',
-		external: true,
-		new_release: true,
-	},
-	kanagawa_dragon: {
-		name: trans.themes.kanagawa_dragon,
-		type: 'dark',
-		external: true,
-		new_release: true,
-	},
-	kanagawa: {
-		name: trans.themes.kanagawa,
-		type: 'light',
-		external: true,
-		new_release: true,
-	},
-};
+export function getThemes(): Record<string, theme> {
+	return {
+		light: {
+			name: trans.themes.light,
+			type: 'light',
+			icon: icons.theme_light,
+		},
+		ink: {
+			name: trans.themes.ink,
+			type: 'light',
+			icon: icons.theme_ink,
+		},
+		dark: {
+			name: trans.themes.dark,
+			type: 'dark',
+			icon: icons.theme_dark,
+		},
+		darker: {
+			name: trans.themes.darker,
+			type: 'dark',
+			icon: icons.theme_darker,
+		},
+		oled: {
+			name: trans.themes.oled,
+			type: 'dark',
+			icon: icons.theme_oled,
+		},
+		rose_pine: {
+			name: trans.themes.rose_pine,
+			type: 'dark',
+			external: true,
+			new_release: true,
+		},
+		rose_pine_dawn: {
+			name: trans.themes.rose_pine_dawn,
+			type: 'light',
+			external: true,
+			new_release: true,
+		},
+		kanagawa_dragon: {
+			name: trans.themes.kanagawa_dragon,
+			type: 'dark',
+			external: true,
+			new_release: true,
+		},
+		kanagawa: {
+			name: trans.themes.kanagawa,
+			type: 'light',
+			external: true,
+			new_release: true,
+		},
+	};
+}
 
 // this lets you choose which themes to expose to the user-facing screens
 export const light_themes = ['light', 'ink', 'rose_pine_dawn'];

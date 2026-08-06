@@ -18,12 +18,14 @@ import { load_chart_colours } from '@/components/music/chart';
 import { notify } from '@/components/dialog/notify';
 import { load_skus } from '@/pages/bleh_settings/bleh_settings.js';
 import { compile_settings, save_setting } from '@/components/settings/settings';
+import { useSettings } from '@/page.ts';
 
 function parse_bleh_version(version: string) {
 	return parseFloat(version.substring(0, 7));
 }
 
 export function load_settings() {
+	log('loading...', 'settings');
 	if (!settings.version) settings.version = '10000000';
 
 	migrations(parse_bleh_version(settings.version));
@@ -228,16 +230,14 @@ export class Settings {
 	}
 
 	public rebuild() {
+		const local = JSON.parse(localStorage.getItem('bleh') || '{}');
+		log('loaded local data', 'settings', 'info', { local, settings_store });
 		for (const key in settings_store) {
-			const local = JSON.parse(localStorage.getItem('bleh') || '{}');
-
 			if (local[key]) {
 				let val = local[key];
 
-				try {
+				if (!isNaN(Number(val))) {
 					val = Number(val);
-				} catch {
-					//
 				}
 
 				this.change(key, val);
@@ -273,6 +273,7 @@ export class Settings {
 
 	private change(key: string, val: setting_value) {
 		val = structuredClone(val);
+		log(`changing ${key}`, 'settings', 'info', { val });
 
 		this.data.set(key, val);
 
@@ -299,8 +300,6 @@ export class Settings {
 		this.listeners.get(key)!.push(callback);
 	}
 }
-
-export let useSettings: Settings;
 
 export function update_colour_swatches() {
 	let found = false;

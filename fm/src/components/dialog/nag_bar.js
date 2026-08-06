@@ -8,7 +8,7 @@ import { settings } from '@/build/config';
 import { page } from '@/build/page';
 import { tl, trans } from '@/build/trans';
 import { notify } from '@/components/dialog/notify';
-import { useSettings } from '@/config.ts';
+import { useSettings } from '@/page.ts';
 
 export function nag_bar() {
 	/*if (!page.structure.nag_bar) {

@@ -20,7 +20,7 @@ import { checkup_page_structure } from '@/components/page/structure';
 import { avatar } from '@/components/shared/avatar';
 import { is_url, register_background, update_page } from '@/page';
 import { html, render } from 'lighterhtml';
-import { useSettings } from '@/config.ts';
+import { useSettings } from '@/page.ts';
 
 export function bleh_now() {
 	page.structure.container = document.body.querySelector('.page-content');

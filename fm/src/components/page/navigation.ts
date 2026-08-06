@@ -13,7 +13,7 @@ import { version } from '@/main';
 import { ff } from '@/components/settings/sku';
 import { html, render } from 'lighterhtml';
 import { news } from '@/components/news';
-import { useSettings } from '@/config';
+import { useSettings } from '@/page.ts';
 import { save_setting, setting } from '@/components/settings/settings';
 import { prompt_for_update } from '@/components/page/style';
 import { log } from '@/build/log.js';

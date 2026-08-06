@@ -20,7 +20,7 @@ import tippy from 'tippy.js';
 import { ff } from '@/components/settings/sku';
 import { setting } from '@/components/settings/settings';
 import { avatar } from '../shared/avatar';
-import { useSettings } from '@/config.ts';
+import { useSettings } from '@/page.ts';
 
 export function compare({ host, sidebar } = {}) {
 	if (!host || !sidebar) return;

@@ -10,12 +10,10 @@ import { SettingLabel } from '@/components/settings/provider/main.tsx';
 import { tl, trans } from '@/build/trans.ts';
 import { Icon } from '@/components/shared/icon.tsx';
 import {
-	avatar_colour,
 	colour,
 	colour_set,
 	colour_type,
 	colours,
-	default_colour,
 	seasonal_colours,
 } from '@/components/settings/swatch.ts';
 import { season } from '@/components/seasonal.ts';
@@ -24,8 +22,9 @@ import namer from 'color-namer';
 import { SettingRange } from '@/components/settings/provider/range.tsx';
 import { SettingInput } from '@/components/settings/provider/input.tsx';
 import { clamp_lit, clamp_sat, hex_to_oklch } from '@/build/tools.ts';
-import { page } from '@/build/page.ts';
-import { useSettings } from '@/config.ts';
+import { auth, page } from '@/build/page.ts';
+import { useSettings } from '@/page.ts';
+import { settings_store } from '@/build/config.ts';
 
 interface SettingColourProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
@@ -82,6 +81,131 @@ export function SettingColour({
 		colour.type = val as colour_type;
 		update();
 	});
+
+	const colours: colour[] = [
+		{
+			sets: {
+				hue: 19,
+				sat: 1.5,
+				lit: 0.84,
+			},
+			label: trans.red,
+		},
+		{
+			sets: {
+				hue: 37,
+				sat: 1.4,
+				lit: 0.9,
+			},
+			label: trans.orange,
+		},
+		{
+			sets: {
+				hue: 73,
+				sat: 1.38,
+				lit: 1.07,
+			},
+			label: trans.yellow,
+		},
+		{
+			sets: {
+				hue: 115,
+				sat: 1.16,
+				lit: 1,
+			},
+			label: trans.lime,
+		},
+		{
+			sets: {
+				hue: 145,
+				sat: 1.6,
+				lit: 0.95,
+			},
+			label: trans.green,
+		},
+		{
+			sets: {
+				hue: 178,
+				sat: 1,
+				lit: 1,
+			},
+			label: trans.aqua,
+		},
+		{
+			sets: {
+				hue: 248,
+				sat: 1.45,
+				lit: 0.82,
+			},
+			label: trans.blue,
+		},
+		{
+			sets: {
+				hue: 290,
+				sat: 1.45,
+				lit: 0.82,
+			},
+			label: trans.purple,
+		},
+		{
+			sets: {
+				hue: 340,
+				sat: 1.35,
+				lit: 0.93,
+			},
+			label: trans.pink,
+		},
+		{
+			sets: {
+				hue: 0,
+				sat: 0,
+				lit: 1,
+			},
+			label: trans.grey,
+		},
+	];
+
+	const seasonal_colours: Record<string, colour[]> = {
+		christmas: [
+			{
+				type: 'season',
+				label: trans.seasonal.presets.nonsense,
+				sets: {
+					hue: 352,
+					sat: 1.8,
+					lit: 0.925,
+				},
+			},
+			{
+				type: 'season',
+				label: trans.seasonal.presets.fruitcake,
+				sets: {
+					hue: 24,
+					sat: 0.93,
+					lit: 1,
+				},
+			},
+			{
+				type: 'season',
+				label: trans.seasonal.presets.mistletoe,
+				sets: {
+					hue: 130,
+					sat: 0.45,
+					lit: 0.75,
+				},
+			},
+			{
+				type: 'season',
+				label: trans.seasonal.presets.festival,
+				sets: {
+					hue: 240,
+					sat: 1.4,
+					lit: 0.875,
+				},
+			},
+		],
+	};
+	seasonal_colours.new_years = seasonal_colours.christmas;
 
 	let list: ColourSwatchElement[] = [];
 
@@ -204,8 +328,30 @@ export function SettingColour({
 		list = [];
 
 		custom_swatches = [
-			default_colour,
-			avatar_colour,
+			{
+				type: 'default',
+				sets: {
+					hue: settings_store.hue.default as number,
+					sat: settings_store.sat.default as number,
+					lit: settings_store.lit.default as number,
+				},
+				displays: {
+					hue: `var(--hue-seasonal, ${settings_store.hue.default})`,
+					sat: `var(--sat-seasonal, ${settings_store.sat.default})`,
+					lit: `var(--lit-seasonal, ${settings_store.lit.default})`,
+				},
+				label: trans.default,
+			},
+			{
+				type: 'avatar',
+				sets: {
+					hue: auth.sets.hue,
+					sat: auth.sets.sat,
+					lit: auth.sets.lit,
+				},
+				requires_flag: 'colour_based_on_avatar',
+				label: trans.avatar,
+			},
 			{
 				type: 'placeholder',
 				sets: {

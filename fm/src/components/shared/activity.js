@@ -20,7 +20,7 @@ import { html, render } from 'lighterhtml';
 import { redirect } from '@/components/music/music';
 import tippy from 'tippy.js';
 import { DateTime } from 'luxon';
-import { useSettings } from '@/config.ts';
+import { useSettings } from '@/page.ts';
 
 export function render_activity_list() {
 	load_activities();

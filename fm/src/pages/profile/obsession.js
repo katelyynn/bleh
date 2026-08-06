@@ -24,7 +24,7 @@ import tippy from 'tippy.js';
 import { hoshino } from '@/components/music/hoshino';
 import { header_colour } from '@/components/page/colour';
 import { icon, icons } from '@/components/shared/icon';
-import { useSettings } from '@/config.ts';
+import { useSettings } from '@/page.ts';
 
 export function bleh_obsession() {
 	const obsession_container = document.querySelector('.obsession-container');

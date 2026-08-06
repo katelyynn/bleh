@@ -24,7 +24,7 @@ import html2canvas from 'html2canvas-pro';
 import { icon, icons } from '../shared/icon';
 import { hybrid_timeframe_picker, timeframe_text } from '../date/timeframe';
 import { avatar } from '../shared/avatar';
-import { useSettings } from '@/config.ts';
+import { useSettings } from '@/page.ts';
 
 export function collage({ host, sidebar } = {}) {
 	if (!host || !sidebar) return;

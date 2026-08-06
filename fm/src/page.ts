@@ -39,7 +39,7 @@ import { music_grids } from '@/components/music/music_grid';
 import { nag_bar } from '@/components/dialog/nag_bar';
 import { load_notifications, notify } from '@/components/dialog/notify';
 import { patch_titles } from '@/components/music/track.js';
-import { load_settings, Settings, useSettings } from '@/config';
+import { load_settings, Settings } from '@/config';
 import { theme_version, version } from '@/main';
 import { append_nav } from '@/components/page/navigation';
 import { bleh_albums } from '@/pages/album';
@@ -108,12 +108,12 @@ import { notify_if_new_update } from './components/page/update';
 import { bleh_now } from './pages/now/now';
 import { applyCSP } from '@/csp.ts';
 
+export const useSettings: Settings = new Settings();
+
 export function bleh() {
 	florence({
 		page,
 		on_head_load: () => {
-			Object.assign(useSettings, new Settings());
-
 			append_style();
 			favi();
 			page.state.previous_title = document.title;
@@ -124,8 +124,6 @@ export function bleh() {
 		on_body_load: () => {
 			clean_storage();
 			favi();
-
-			load_settings();
 
 			const logo = document.querySelector('.masthead-logo a');
 			if (!logo) {
@@ -139,6 +137,8 @@ export function bleh() {
 			document.body.appendChild(page.state.colour_preview);
 
 			register_auth();
+
+			load_settings();
 
 			dynamic_theming();
 			solarium();

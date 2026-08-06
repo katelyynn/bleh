@@ -36,7 +36,7 @@ import {
 	social_links,
 	social_links_extension,
 } from '@/components/markdown/links.tsx';
-import { useSettings } from '@/config.ts';
+import { useSettings } from '@/page.ts';
 
 export function markdown(
 	text: string,

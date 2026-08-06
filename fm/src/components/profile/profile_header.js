@@ -25,7 +25,7 @@ import { queue_popup } from '@/components/dialog/popup';
 import { avatar } from '../shared/avatar';
 import { taste_artist } from './taste';
 import { beta_indicator, new_indicator } from '../shared/indicator';
-import { useSettings } from '@/config.ts';
+import { useSettings } from '@/page.ts';
 
 export function redesign_profile_header(is_own_profile, is_following) {
 	if (!auth.name) return;

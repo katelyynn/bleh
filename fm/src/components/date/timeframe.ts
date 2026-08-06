@@ -12,7 +12,7 @@ import { settings } from '@/build/config';
 import { input } from '../settings/input';
 import { DateTime } from 'luxon';
 import { pad2 } from '@/build/tools';
-import { useSettings } from '@/config.ts';
+import { useSettings } from '@/page.ts';
 
 interface hybrid_timeframe_picker {
 	initial?: string;

@@ -26,7 +26,7 @@ import { is_sponsor, sponsor } from '@/components/sponsor';
 import { DateTime } from 'luxon';
 import { icon, icons } from '@/components/shared/icon';
 import { UnderConstruction } from '@/components/shared/construction.tsx';
-import { useSettings } from '@/config.ts';
+import { useSettings } from '@/page.ts';
 
 interface album {
 	image: string;

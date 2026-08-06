@@ -9,7 +9,7 @@ import tippy from 'tippy.js';
 import { tl, trans, translation_fallback } from '@/build/trans';
 import { notify } from './notify';
 import { log } from '@/build/log';
-import { useSettings } from '@/config.ts';
+import { useSettings } from '@/page.ts';
 
 export let popup_queue = [];
 

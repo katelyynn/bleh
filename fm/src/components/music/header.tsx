@@ -21,7 +21,7 @@ import {
 } from './lotus';
 import { artist_corrections, combined_artists } from '@/build/music';
 import { log } from '@/build/log';
-import { useSettings } from '@/config.ts';
+import { useSettings } from '@/page.ts';
 
 interface page_header_avatar extends HTMLDivElement {
 	image: HTMLImageElement;

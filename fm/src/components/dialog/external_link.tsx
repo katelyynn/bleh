@@ -10,7 +10,7 @@ import { tl, trans } from '@/build/trans.ts';
 import { save_setting } from '@/components/settings/settings.tsx';
 import { toggle } from '@/components/settings/toggle.js';
 import { settings } from '@/build/config.ts';
-import { useSettings } from '@/config.ts';
+import { useSettings } from '@/page.ts';
 
 export function external_url_prompt(url: string, dangerous = false) {
 	log(

@@ -12,7 +12,7 @@ import { log } from '@/build/log';
 import { copy, paste, redo, undo } from '@/build/tools';
 import { settings } from '@/build/config';
 import { external_url_prompt } from '@/components/dialog/external_link.tsx';
-import { useSettings } from '@/config.ts';
+import { useSettings } from '@/page.ts';
 
 export function register_menu(element, menu) {
 	element.setAttribute('data-has-bleh-menu', true);

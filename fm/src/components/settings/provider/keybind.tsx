@@ -19,7 +19,7 @@ import {
 	KeybindList,
 } from '@/components/settings/clickables/keybind.tsx';
 import { SettingIcon } from '@/components/settings/provider/icon.tsx';
-import { useSettings } from '@/config.ts';
+import { useSettings } from '@/page.ts';
 
 interface SettingKeybindProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;

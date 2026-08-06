@@ -16,7 +16,7 @@ import { save_setting } from '@/components/settings/settings.tsx';
 import { Input } from '@/components/input/input.tsx';
 import { SettingIcon } from '@/components/settings/provider/icon.tsx';
 import { Range } from '@/components/range/range.tsx';
-import { useSettings } from '@/config.ts';
+import { useSettings } from '@/page.ts';
 
 interface SettingRangeProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;

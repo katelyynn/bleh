@@ -8,9 +8,9 @@ import { log } from '@/build/log';
 import { auth, discord, page, root } from '@/build/page';
 import { tl, trans } from '@/build/trans';
 import { checkup_page_structure } from '@/components/page/structure';
-import { update_colour_swatches, useSettings } from '../config';
+import { update_colour_swatches } from '../config';
 import { version } from '@/main';
-import { register_background, update_page } from '@/page';
+import { register_background, update_page, useSettings } from '@/page';
 import { theme_bubbles } from '@/pages/bleh_settings/bleh_settings';
 import { html, render } from 'lighterhtml';
 import { setting } from '@/components/settings/settings';
@@ -19,7 +19,6 @@ import { sponsor } from '@/components/sponsor';
 import { settings } from '@/build/config';
 import { dialog } from '@/components/dialog/dialog';
 import { match } from '@/components/settings/dynamic_theming';
-import { display_colour_presets } from '@/components/settings/swatch';
 import { avatar } from '@/components/shared/avatar';
 import { sponsor_list } from '@/build/sponsor';
 
@@ -327,9 +326,6 @@ function setup_themes() {
 		);
 
 		render_tip();
-
-		display_colour_presets();
-		update_colour_swatches();
 	}, page.state.trans);
 }
 

@@ -8,7 +8,7 @@ import { SettingGroup } from '@/components/settings/group.tsx';
 import { createRef, ReactElement, ReactNode } from 'jsx-dom';
 import { SettingLabel } from '@/components/settings/provider/main.tsx';
 import { tl, trans } from '@/build/trans.ts';
-import { dark_themes, light_themes, theme, themes } from '@/build/theme.ts';
+import { dark_themes, getThemes, light_themes, theme } from '@/build/theme.ts';
 import { avatar } from '@/components/shared/avatar.tsx';
 import { auth } from '@/build/page.ts';
 import { Icon } from '@/components/shared/icon.tsx';
@@ -18,7 +18,7 @@ import {
 	theme_min,
 	theme_schedule_dialog,
 } from '@/components/dialog/theme_schedule.tsx';
-import { useSettings } from '@/config.ts';
+import { useSettings } from '@/page.ts';
 
 interface SettingThemeProps {
 	theme: theme_response;
@@ -36,6 +36,8 @@ export function SettingTheme({
 	theme,
 	onChange,
 }: SettingThemeProps) {
+	const themes = getThemes();
+
 	const bright: ThemeBubbleElement[] = [];
 	const moody: ThemeBubbleElement[] = [];
 	const adaptive = createRef();
@@ -244,7 +246,7 @@ export function ThemeBubble({
 	id,
 	onChange,
 }: ThemeBubbleProps) {
-	const source: theme = themes[id];
+	const source: theme = getThemes()[id];
 
 	const bubble = (
 		<button

@@ -167,7 +167,7 @@ export const settings_store: Record<string, setting_instance> = {
 		title: trans.high_contrast,
 	},
 	accent_type: {
-		default: 'colour',
+		default: 'default',
 		type: 'radio',
 	},
 	hue: {

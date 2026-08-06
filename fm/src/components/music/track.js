@@ -32,7 +32,7 @@ import { hoshino } from '@/components/music/hoshino';
 import { submit_scrobble } from '@/components/music/scrobble';
 import { header_colour } from '../page/colour';
 import { symbol } from '@/main';
-import { useSettings } from '@/config.ts';
+import { useSettings } from '@/page.ts';
 
 export function patch_titles(search = page.structure.main) {
 	if (page.subpage == 'tags_overview') return;

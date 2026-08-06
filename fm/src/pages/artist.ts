@@ -42,7 +42,7 @@ import { open_starred_friend_window } from '@/pages/profile/profile';
 import { artist_title, page_header_avatar } from '@/components/music/header';
 import { header_colour } from '@/components/page/colour';
 import { oracle_process } from '@/components/music/oracle';
-import { useSettings } from '@/config.ts';
+import { useSettings } from '@/page.ts';
 
 export function bleh_artists() {
 	const artist_header = document.body.querySelector(
