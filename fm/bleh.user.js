@@ -84897,13 +84897,13 @@
     },
     pl: {
       name: get_language_name("pl"),
-      by: ["zaktusii", "iwas15with100k"],
-      last_updated: "2025-12-12"
+      by: ["zaktusii", "iwas15with100k", "P0kahontaz"],
+      last_updated: "2026-08-06"
     },
     pt: {
-      name: "portugu\xEAs brasileiro",
-      by: ["ArthRMH", "satisfeita", "fr0r", "urwq", "anjoskron", "foognocchie", "Suburbanno"],
-      last_updated: "2026-07-27"
+      name: get_language_name("pt"),
+      by: ["ArthRMH", "satisfeita", "fr0r", "urwq", "anjoskron", "foognocchie", "suburbanno"],
+      last_updated: "2026-08-01"
     },
     sv: {
       name: get_language_name("sv"),
@@ -85246,19 +85246,24 @@
     },
     badge_types: {
       reserved: {
-        en: "This badge is specially reserved for {u}"
+        en: "This badge is specially reserved for {u}",
+        pt: "Este emblema \xE9 especialmente reservado para {u}"
       },
       cute: {
-        en: "The creator of bleh"
+        en: "The creator of bleh",
+        pt: "A criadora do bleh"
       },
       sponsor: {
-        en: "{u} sponsors the development of bleh"
+        en: "{u} sponsors the development of bleh",
+        pt: "{u} apoia o desenvolvimento do bleh"
       },
       contributor: {
-        en: "{u} contributed to the development of bleh"
+        en: "{u} contributed to the development of bleh",
+        pt: "{u} contribuiu para o desenvolvimento do bleh"
       },
       translation: {
-        en: "{u} helped in translating bleh"
+        en: "{u} helped in translating bleh",
+        pt: "{u} ajudou na tradu\xE7\xE3o do bleh"
       }
     },
     requires_higher_bleh_version: {
@@ -86860,7 +86865,8 @@
         summer: {
           en: "Summer",
           pt: "Ver\xE3o",
-          es: "Verano"
+          es: "Verano",
+          pl: "Lato"
         },
         halloween: {
           en: "Halloween",
@@ -86918,7 +86924,7 @@
           pt: "Ano Novo",
           sv: "Ny\xE5r",
           ru: "\u041D\u043E\u0432\u044B\u0439 \u0433\u043E\u0434",
-          pl: "Sylwester",
+          pl: "Nowy rok",
           zh: "\u65B0\u5E74"
         }
       },
@@ -86931,7 +86937,7 @@
         pt: "Abrir o contador ao vivo",
         sv: "\xD6ppna live-nedr\xE4kningen",
         ru: "\u041E\u0442\u043A\u0440\u044B\u0442\u044C \u043E\u0442\u0441\u0447\u0451\u0442 \u0432\u0440\u0435\u043C\u0435\u043D\u0438",
-        pl: "Otw\xF3rz licznik aktualizaj\u0105cy si\u0119 na \u017Cywo"
+        pl: "Otw\xF3rz licznik na \u017Cywo"
       },
       live: {
         // used as a status when the timer is counting down live
@@ -87132,7 +87138,8 @@
       pt: "Offset calculado com base no fuso hor\xE1rio",
       sv: "F\xF6rskjutning kalkylerats fr\xE5n tidszon",
       ru: "\u0420\u0430\u0441\u0441\u0447\u0438\u0442\u0430\u043D\u043D\u043E\u0435 \u0441\u043C\u0435\u0449\u0435\u043D\u0438\u0435 \u043D\u0430 \u043E\u0441\u043D\u043E\u0432\u0435 \u0447\u0430\u0441\u043E\u0432\u043E\u0433\u043E \u043F\u043E\u044F\u0441\u0430",
-      zh: "\u6839\u636E\u65F6\u533A\u6D4B\u7B97\u7684\u504F\u79FB\u91CF"
+      zh: "\u6839\u636E\u65F6\u533A\u6D4B\u7B97\u7684\u504F\u79FB\u91CF",
+      pl: "Obliczone przesuni\u0119cie na podstawie strefy czasowej"
     },
     started: {
       // season start date
@@ -87179,7 +87186,8 @@
       de: "Link",
       ru: "\u0421\u0441\u044B\u043B\u043A\u0430",
       es: "V\xEDnculo",
-      it: "Link"
+      it: "Link",
+      pl: "Link"
     },
     create_link: {
       en: "Create link",
@@ -87187,7 +87195,8 @@
       de: "Link erstellen",
       es: "Crear v\xEDnculo",
       it: "Crea link",
-      ru: "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u0441\u0441\u044B\u043B\u043A\u0443"
+      ru: "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u0441\u0441\u044B\u043B\u043A\u0443",
+      pl: "Stw\xF3rz link"
     },
     text: {
       en: "Text",
@@ -87243,7 +87252,7 @@
       pt: "Lan\xE7amentos",
       sv: "Skivsl\xE4pp",
       ru: "\u0420\u0435\u043B\u0438\u0437\u044B",
-      pl: "Polecane",
+      pl: "Nowo\u015Bci",
       zh: "\u53D1\u884C"
     },
     no_releases_found: {
@@ -87298,7 +87307,8 @@
       pt: "Adicionar {v} aos marcadores",
       ru: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C {v} \u0432 \u0437\u0430\u043A\u043B\u0430\u0434\u043A\u0438",
       es: "Marcar {v}",
-      it: "Segnalibro {v}"
+      it: "Segnalibro {v}",
+      pl: "Zak\u0142adka {v}"
     },
     charts: {
       en: "Charts",
@@ -87309,19 +87319,22 @@
       ja: "\u30C1\u30E3\u30FC\u30C8",
       sv: "Topplistor",
       ru: "\u0427\u0430\u0440\u0442\u044B",
-      zh: "\u699C\u5355"
+      zh: "\u699C\u5355",
+      pl: "Rankingi"
     },
     charts_for: {
       // date will be directly below this text
       en: "Charts for",
       pt: "Paradas de",
-      es: "Listas del"
+      es: "Listas del",
+      pl: "Rankingi dla"
     },
     weekly_charts: {
       // dates will be directly below this text
       en: "Weekly charts",
       pt: "Paradas semanais",
-      es: "Listas semanales"
+      es: "Listas semanales",
+      pl: "Rankingi tygodniowe"
     },
     view_the_charts: {
       en: "View the charts",
@@ -87331,7 +87344,8 @@
       ja: "\u30C1\u30E3\u30FC\u30C8\u3092\u898B\u308B",
       pt: "Ver as paradas",
       ru: "\u041F\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u0447\u0430\u0440\u0442\u044B",
-      zh: "\u67E5\u770B\u699C\u5355"
+      zh: "\u67E5\u770B\u699C\u5355",
+      pl: "Zobacz rankingi"
     },
     welcome_back_user: {
       en: "Welcome back {user}!",
@@ -87422,12 +87436,14 @@
       // user = username
       en: "Hello {u}!",
       pt: "Ol\xE1 {u}!",
-      es: "\xA1Hola {u}!"
+      es: "\xA1Hola {u}!",
+      pl: "Hej {u}!"
     },
     bleh_setup_guide: {
       en: "It\u2019s nice to see you here",
       pt: "\xC9 bom ver voc\xEA por aqui",
-      es: "Es bueno verte aqu\xED"
+      es: "Es bueno verte aqu\xED",
+      pl: "Dobrze Ci\u0119 tu widzie\u0107"
     },
     import: {
       en: "Import",
@@ -87633,7 +87649,8 @@
       pt: "Padr\xE3o",
       sv: "Standard",
       ru: "\u041F\u043E \u0443\u043C\u043E\u043B\u0447\u0430\u043D\u0438\u044E",
-      zh: "\u9ED8\u8BA4"
+      zh: "\u9ED8\u8BA4",
+      pl: "Standard"
     },
     avatar: {
       en: "Avatar",
@@ -87655,7 +87672,8 @@
       ru: "\u041F\u043E\u043A\u0430\u0436\u0438\u0442\u0435 \u0441\u0432\u043E\u0439 \u0441\u0442\u0438\u043B\u044C \u0432\u0441\u0435\u043C\u0443 \u0441\u0430\u0439\u0442\u0443",
       //just so it doesn't sound that crude but gets the point across. now it's more like 'show your style to the whole site' -- wun4
       es: "Pres\xE9ntate con tu propio estilo por todo el sitio",
-      it: "Presentati sul sito con il tuo stile personale"
+      it: "Presentati sul sito con il tuo stile personale",
+      pl: "Zaprezentuj si\u0119 na ca\u0142ej witrynie w swoim w\u0142asnym stylu"
     },
     customise: {
       en: "Customise",
@@ -87749,7 +87767,8 @@
       de: "Profil-Akzent global verwenden",
       ru: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C \u0446\u0432\u0435\u0442 \u043F\u0440\u043E\u0444\u0438\u043B\u044F \u0433\u043B\u043E\u0431\u0430\u043B\u044C\u043D\u043E",
       es: "Usar acento de perfil globalmente",
-      it: "Usa l\u2019accento del profilo globalmente"
+      it: "Usa l\u2019accento del profilo globalmente",
+      pl: "Zastosuj akcent profilu globalnie"
     },
     apply_global_accent: {
       // global accent: the one set in bleh settings
@@ -87759,7 +87778,8 @@
       de: "Aktuellen Akzent zum Profil kopieren",
       ru: "\u0421\u043A\u043E\u043F\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0442\u0435\u043A\u0443\u0449\u0438\u0439 \u0430\u043A\u0446\u0435\u043D\u0442 \u0432 \u043F\u0440\u043E\u0444\u0438\u043B\u044C",
       es: "Copiar acento actual al perfil",
-      it: "Copia l\u2019accento corrente nel profilo"
+      it: "Copia l\u2019accento corrente nel profilo",
+      pl: "Kopiuj obecny akcent do profilu"
     },
     this_will_replace_your_global_accent: {
       // global accent: the one set in bleh settings
@@ -87769,7 +87789,8 @@
       de: "Dein globaler Akzent (der derzeit verwendete) wird hiermit ersetzt",
       ru: "\u042D\u0442\u043E \u0437\u0430\u043C\u0435\u043D\u0438\u0442 \u0432\u0430\u0448 \u0433\u043B\u043E\u0431\u0430\u043B\u044C\u043D\u044B\u0439 \u0430\u043A\u0446\u0435\u043D\u0442 (\u0442\u043E\u0442, \u043A\u043E\u0442\u043E\u0440\u044B\u0439 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0435\u0442\u0441\u044F \u0441\u0435\u0439\u0447\u0430\u0441)",
       es: "Esto reemplazar\xE1 tu acento global (el que est\xE1s usando ahora mismo)",
-      it: "Questo sostituir\xE0 il tuo accento globale (quello attualmente in uso)"
+      it: "Questo sostituir\xE0 il tuo accento globale (quello attualmente in uso)",
+      pl: "To zast\u0105pi tw\xF3j akcent globalny (ten, kt\xF3rego u\u017Cywasz obecnie)"
     },
     solarium: {
       name: {
@@ -88170,7 +88191,8 @@
       de: "Folgt dir!",
       es: "\xA1Te sigue!",
       it: "Ti segue!",
-      ru: "\u041F\u043E\u0434\u043F\u0438\u0441\u0430\u043D\u044B \u043D\u0430 \u0432\u0430\u0441!"
+      ru: "\u041F\u043E\u0434\u043F\u0438\u0441\u0430\u043D\u044B \u043D\u0430 \u0432\u0430\u0441!",
+      pl: "\u015Aledzi Ci\u0119!"
     },
     user_follows_you: {
       en: "{u} follows you!",
@@ -88178,7 +88200,8 @@
       de: "{u} folgt dir!",
       es: "\xA1{u} te sigue!",
       it: "{u} ti segue!",
-      ru: "{u} \u043F\u043E\u0434\u043F\u0438\u0441\u0430\u043D\u044B \u043D\u0430 \u0432\u0430\u0441!"
+      ru: "{u} \u043F\u043E\u0434\u043F\u0438\u0441\u0430\u043D\u044B \u043D\u0430 \u0432\u0430\u0441!",
+      pl: "{u} Ci\u0119 \u015Bledzi!"
     },
     website: {
       en: "Website",
@@ -88277,7 +88300,8 @@
       de: "\xC4hnliches wie {n}",
       ru: "\u041F\u043E\u0445\u043E\u0436\u0438\u0435 \u043D\u0430 {n}",
       es: "M\xE1s como {n}",
-      it: "Pi\xF9 simile a {n}"
+      it: "Pi\xF9 simile a {n}",
+      pl: "Wi\u0119cej jak {n}"
     },
     biography: {
       en: "Biography",
@@ -88413,18 +88437,21 @@
       true: {
         en: "Actively correcting this title",
         pt: "Corrigindo este t\xEDtulo ativamente",
-        es: "Corrigiendo este t\xEDtulo"
+        es: "Corrigiendo este t\xEDtulo",
+        pl: "Aktywnie poprawiam ten tytu\u0142"
       },
       false: {
         en: "Is this capitalised correctly?",
         pt: "A capitaliza\xE7\xE3o est\xE1 correta?",
-        es: "\xBFSon estas may\xFAsculas correctas?"
+        es: "\xBFSon estas may\xFAsculas correctas?",
+        pl: "Czy wielko\u015B\u0107 liter jest poprawna?"
       }
     },
     alert_of_correction: {
       en: "This title is already being corrected to \u2019{t}\u2019, are you sure you want to continue?",
       pt: "Este t\xEDtulo j\xE1 est\xE1 sendo corrigido para \u2019{t}\u2019, tem certeza de que deseja continuar?",
-      es: "Este t\xEDtulo ya est\xE1 siendo corregido a '{t}', \xBFseguro que quieres continuar?"
+      es: "Este t\xEDtulo ya est\xE1 siendo corregido a '{t}', \xBFseguro que quieres continuar?",
+      pl: "Ten tytu\u0142 jest aktualnie poprawiony do \u2019{t}\u2019, jeste\u015B pewny/a \u017Ce chcesz kontynuowa\u0107?"
     },
     current: {
       en: "Current",
@@ -88527,7 +88554,8 @@
       pt: "Recentes",
       es: "Recientes",
       it: "Recenti",
-      ja: "\u6700\u8FD1"
+      ja: "\u6700\u8FD1",
+      pl: "Ostatnie"
     },
     recent_tracks: {
       en: "Recent Tracks",
@@ -88627,7 +88655,8 @@
       de: "Du und {u} sind {v} kompatibel",
       ru: "\u0412\u044B \u0438 {u} - \u0443 \u0432\u0430\u0441 {v} \u0441\u043E\u0432\u043F\u0430\u0434\u0435\u043D\u0438\u0435",
       es: "T\xFA y {u} tienen una compatiblidad {v}",
-      it: "Tu e {u} siete {v} compatibili"
+      it: "Tu e {u} siete {v} compatibili",
+      pl: "Ty i {u} pasujecie do siebie {v}"
     },
     taste_similarity: {
       en: "Taste similarity",
@@ -88710,7 +88739,7 @@
       de: "Sponsoren- und Abzeichendaten-Version {v}",
       es: "Versi\xF3n de datos de patrocinio y emblemas",
       it: "Versione dei dati di sponsor e distintivi {v}",
-      pt: "Vers\xE3o da data de apoiador e emblemas",
+      pt: "Vers\xE3o da data de apoiador e emblemas {v}",
       sv: "Sponsor-och-emblemdata, version {v}",
       ru: "\u0414\u0430\u043D\u043D\u044B\u0435 \u043E \u0441\u043F\u043E\u043D\u0441\u043E\u0440\u0430\u0445 \u0438 \u0437\u043D\u0430\u0447\u043A\u0430\u0445, \u0432\u0435\u0440\u0441\u0438\u044F {v}",
       pl: "Dane sponsora i odznaki, wersja {v}"
@@ -88851,7 +88880,8 @@
       ja: "\u30D0\u30FC\u30B8\u30E7\u30F3\u3092\u66F4\u65B0\u4E2D",
       ru: "\u041E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u0435 \u0434\u043E \u0432\u0435\u0440\u0441\u0438\u0438",
       es: "Actualizando a versi\xF3n",
-      it: "Aggiornamento alla versione"
+      it: "Aggiornamento alla versione",
+      pl: "Aktualizacja do wersji"
     },
     manage_data: {
       en: "Manage data",
@@ -90832,7 +90862,8 @@
       ja: "\u524A\u9664",
       pt: "Deletar",
       sv: "Ta bort",
-      ru: "\u0423\u0434\u0430\u043B\u0438\u0442\u044C"
+      ru: "\u0423\u0434\u0430\u043B\u0438\u0442\u044C",
+      pl: "Usu\u0144"
     },
     deleted: {
       // the item that was deleted is placed under this text
@@ -90843,7 +90874,8 @@
       ja: "\u524A\u9664\u6E08\u307F",
       pt: "Deletado",
       sv: "Borttagen",
-      ru: "\u0423\u0434\u0430\u043B\u0435\u043D\u043E"
+      ru: "\u0423\u0434\u0430\u043B\u0435\u043D\u043E",
+      pl: "Usuni\u0119te"
     },
     search: {
       en: "Search",
@@ -90853,7 +90885,8 @@
       ja: "\u691C\u7D22",
       pt: "Pesquisar",
       sv: "S\xF6k",
-      ru: "\u041F\u043E\u0438\u0441\u043A"
+      ru: "\u041F\u043E\u0438\u0441\u043A",
+      pl: "Wyszukaj"
     },
     search_for_anything: {
       // used as a placeholder for the global search bar
@@ -90863,7 +90896,8 @@
       ru: "\u041D\u0430\u0439\u0442\u0438 \u0447\u0442\u043E \u0443\u0433\u043E\u0434\u043D\u043E",
       es: "Busca cualquier cosa",
       it: "Cerca qualsiasi cosa",
-      ja: "\u4F55\u3067\u3082\u691C\u7D22"
+      ja: "\u4F55\u3067\u3082\u691C\u7D22",
+      pl: "Wyszukaj cokolwiek"
     },
     search_guest: {
       en: "Search guest appearances",
@@ -90873,7 +90907,8 @@
       ja: "\u30B2\u30B9\u30C8\u53C2\u52A0\u4F5C\u54C1\u3092\u691C\u7D22",
       pt: "Pesquisar participa\xE7\xF5es especiais",
       sv: "S\xF6k g\xE4startister",
-      ru: "\u041F\u043E\u0438\u0441\u043A \u0433\u043E\u0441\u0442\u0435\u0432\u044B\u0445 \u0443\u0447\u0430\u0441\u0442\u0438\u0439"
+      ru: "\u041F\u043E\u0438\u0441\u043A \u0433\u043E\u0441\u0442\u0435\u0432\u044B\u0445 \u0443\u0447\u0430\u0441\u0442\u0438\u0439",
+      pl: "Szukaj go\u015Bcinnych wyst\u0119p\xF3w"
     },
     anything_you_can_imagine: {
       // placeholder for your about me
@@ -91080,7 +91115,7 @@
       pt: "Substituir",
       sv: "Ers\xE4tt",
       ru: "\u0417\u0430\u043C\u0435\u043D\u0438\u0442\u044C",
-      pl: "Zamie\u0144"
+      pl: "Zmie\u0144"
     },
     view_others_library: {
       en: "View others library",
@@ -91116,15 +91151,18 @@
     },
     circle: {
       en: "Circular",
-      pt: "Circular"
+      pt: "Circular",
+      pl: "Okr\u0105g\u0142y"
     },
     squircle: {
       en: "Rounded",
-      pt: "Arredondado"
+      pt: "Arredondado",
+      pl: "Zaokr\u0105glony kwadrat"
     },
     square: {
       en: "Square",
-      pt: "Quadrado"
+      pt: "Quadrado",
+      pl: "Kwadratowy"
     },
     notes: {
       // profile notes
@@ -91155,7 +91193,8 @@
       it: "Modifica nota del profilo",
       pt: "Editar recado de perfil",
       sv: "\xC4ndra profilanteckning",
-      ru: "\u0420\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0437\u0430\u043C\u0435\u0442\u043A\u0443 \u043F\u0440\u043E\u0444\u0438\u043B\u044F"
+      ru: "\u0420\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0437\u0430\u043C\u0435\u0442\u043A\u0443 \u043F\u0440\u043E\u0444\u0438\u043B\u044F",
+      pl: "Edytuj notatk\u0119 profilow\u0105"
     },
     saved_note_for_user: {
       en: "Saved note for {u}",
@@ -91163,7 +91202,8 @@
       de: "Profilnotiz f\xFCr {u} gespeichert",
       es: "Anotaci\xF3n para {u} guardada",
       it: "Nota salvata per {u}",
-      ru: "\u0417\u0430\u043C\u0435\u0442\u043A\u0430 \u0441\u043E\u0445\u0440\u0430\u043D\u0435\u043D\u0430 \u0434\u043B\u044F {u}"
+      ru: "\u0417\u0430\u043C\u0435\u0442\u043A\u0430 \u0441\u043E\u0445\u0440\u0430\u043D\u0435\u043D\u0430 \u0434\u043B\u044F {u}",
+      pl: "Zapisano notatk\u0119 dla {u}"
     },
     cleared_note_for_user: {
       en: "Cleared note for {u}",
@@ -91171,7 +91211,8 @@
       de: "Profilnotiz f\xFCr {u} entfernt",
       es: "Anotaci\xF3n para {u} borrada",
       it: "Nota cancellata per {u}",
-      ru: "\u0417\u0430\u043C\u0435\u0442\u043A\u0430 \u0443\u0434\u0430\u043B\u0435\u043D\u0430 \u0434\u043B\u044F {u}"
+      ru: "\u0417\u0430\u043C\u0435\u0442\u043A\u0430 \u0443\u0434\u0430\u043B\u0435\u043D\u0430 \u0434\u043B\u044F {u}",
+      pl: "Usuni\u0119to notatk\u0119 dla {u}"
     },
     manage: {
       en: "Manage",
@@ -91179,7 +91220,8 @@
       de: "Verwalten",
       es: "Gestionar",
       it: "Gestisci",
-      ru: "\u0423\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435"
+      ru: "\u0423\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435",
+      pl: "Zarz\u0105dzaj"
     },
     font: {
       name: {
@@ -91210,7 +91252,8 @@
         de: "Schriftart der Benutzeroberfl\xE4che",
         es: "Fuente de interfaz",
         ru: "\u0428\u0440\u0438\u0444\u0442 \u0438\u043D\u0442\u0435\u0440\u0444\u0435\u0439\u0441\u0430",
-        it: "Interfaccia font"
+        it: "Interfaccia font",
+        pl: "Czcionka interfejsu"
       },
       body: {
         en: "Choose the font that suits you best",
@@ -91218,7 +91261,8 @@
         de: "W\xE4hle die Schriftart, die dir am besten gef\xE4llt",
         es: "Elige la fuente que m\xE1s te guste",
         ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u0448\u0440\u0438\u0444\u0442, \u043A\u043E\u0442\u043E\u0440\u044B\u0439 \u0432\u0430\u043C \u0431\u043E\u043B\u044C\u0448\u0435 \u0432\u0441\u0435\u0433\u043E \u043F\u043E\u0434\u0445\u043E\u0434\u0438\u0442",
-        it: "Scegli il carattere che pi\xF9 ti si addice"
+        it: "Scegli il carattere che pi\xF9 ti si addice",
+        pl: "Wybierz czcionk\u0119 kt\xF3ra najbardziej Ci si\u0119 podoba"
       },
       custom: {
         en: "Provide your own font",
@@ -91226,7 +91270,8 @@
         de: "Eigene Schriftart bereitstellen",
         es: "Proporciona tu propia fuente",
         ru: "\u0423\u043A\u0430\u0436\u0438\u0442\u0435 \u0441\u0432\u043E\u0439 \u0448\u0440\u0438\u0444\u0442",
-        it: "Fornisci il tuo font"
+        it: "Fornisci il tuo font",
+        pl: "Dodaj w\u0142asn\u0105 czcionk\u0119"
       },
       stylised: {
         en: "Stylised",
@@ -91234,7 +91279,8 @@
         de: "Stilisiert",
         es: "Estilizada",
         ru: "\u0421\u0442\u0438\u043B\u0438\u0437\u043E\u0432\u0430\u043D\u043D\u044B\u0439",
-        it: "Stilizzato"
+        it: "Stilizzato",
+        pl: "Stylizowane"
       },
       simple: {
         en: "Simple",
@@ -91242,7 +91288,8 @@
         de: "Einfach",
         es: "Simple",
         ru: "\u041F\u0440\u043E\u0441\u0442\u043E\u0439",
-        it: "Semplice"
+        it: "Semplice",
+        pl: "Proste"
       },
       hyperlegible: {
         en: "Accessible",
@@ -91250,13 +91297,15 @@
         de: "Barrierefrei",
         es: "Accesible",
         ru: "\u0414\u043E\u0441\u0442\u0443\u043F\u043D\u044B\u0439",
-        it: "Accessibile"
+        it: "Accessibile",
+        pl: "Dost\u0119pno\u015B\u0107"
       }
     },
     font_serif: {
       en: "Use old-fashioned Serif font for some headings",
       pt: "Usar uma fonte serifada cl\xE1ssica em alguns cabe\xE7alhos",
-      es: "Usar fuente Serif cl\xE1sica para algunos encabezados"
+      es: "Usar fuente Serif cl\xE1sica para algunos encabezados",
+      pl: "U\u017Cyj klasycznej czcionki Serif w niekt\xF3rych nag\u0142\xF3wkach "
     },
     previewing: {
       // used as subtext for previewing a font
@@ -91265,7 +91314,8 @@
       de: "Vorschau: {v}",
       es: "Vista previa: {v}",
       ru: "\u041F\u0440\u0435\u0434\u043F\u0440\u043E\u0441\u043C\u043E\u0442\u0440: {v}",
-      it: "Anteprima: {v}"
+      it: "Anteprima: {v}",
+      pl: "Podgl\u0105d: {v}"
     },
     no_font_selected: {
       en: "No font selected",
@@ -91273,7 +91323,8 @@
       de: "Keine Schriftart ausgew\xE4hlt",
       es: "Ninguna fuente seleccionada",
       ru: "\u0428\u0440\u0438\u0444\u0442 \u043D\u0435 \u0432\u044B\u0431\u0440\u0430\u043D",
-      it: "Nessun font selezionato"
+      it: "Nessun font selezionato",
+      pl: "Nie wybrano czcionki"
     },
     font_style: {
       en: "Font style",
@@ -91309,7 +91360,8 @@
         pt: "Contorno",
         de: "Umriss",
         it: "Contorno",
-        ru: "\u041E\u0431\u0432\u043E\u0434\u043A\u0430"
+        ru: "\u041E\u0431\u0432\u043E\u0434\u043A\u0430",
+        pl: "Zarys"
       },
       glow: {
         en: "Glow",
@@ -91578,7 +91630,8 @@
         it: "Questi tag sono spesso ridondanti e non possono rappresentare tutto quello che intendono",
         pt: "Essas tags costumam ser redundantes e nunca conseguem representar totalmente tudo o que se prop\xF5em",
         sv: "Dessa taggar \xE4r ofta \xF6verfl\xF6diga och g\xE4ller inte alltid f\xF6r allt dem \xE4r t\xE4nkta att t\xE4cka",
-        ru: "\u042D\u0442\u0438 \u0442\u0435\u0433\u0438 \u0447\u0430\u0441\u0442\u043E \u0438\u0437\u0431\u044B\u0442\u043E\u0447\u043D\u044B \u0438 \u043D\u0435 \u043C\u043E\u0433\u0443\u0442 \u0431\u044B\u0442\u044C \u043F\u0440\u0438\u043C\u0435\u043D\u0435\u043D\u044B \u043A\u043E \u0432\u0441\u0435\u043C\u0443 \u0434\u0438\u0430\u043F\u0430\u0437\u043E\u043D\u0443, \u043A\u043E\u0442\u043E\u0440\u044B\u0439 \u043E\u043D\u0438 \u043F\u043E\u0434\u0440\u0430\u0437\u0443\u043C\u0435\u0432\u0430\u044E\u0442"
+        ru: "\u042D\u0442\u0438 \u0442\u0435\u0433\u0438 \u0447\u0430\u0441\u0442\u043E \u0438\u0437\u0431\u044B\u0442\u043E\u0447\u043D\u044B \u0438 \u043D\u0435 \u043C\u043E\u0433\u0443\u0442 \u0431\u044B\u0442\u044C \u043F\u0440\u0438\u043C\u0435\u043D\u0435\u043D\u044B \u043A\u043E \u0432\u0441\u0435\u043C\u0443 \u0434\u0438\u0430\u043F\u0430\u0437\u043E\u043D\u0443, \u043A\u043E\u0442\u043E\u0440\u044B\u0439 \u043E\u043D\u0438 \u043F\u043E\u0434\u0440\u0430\u0437\u0443\u043C\u0435\u0432\u0430\u044E\u0442",
+        pl: "Te tagi s\u0105 cz\u0119sto zb\u0119dne i nie zawsze obejmuj\u0105 zakres, do kt\xF3rego s\u0105 przeznaczone"
       }
     },
     artwork_and_grids: {
@@ -91588,7 +91641,8 @@
       it: "Copertine e griglie",
       pt: "Capas e grades",
       sv: "Albumkonst och rutn\xE4t",
-      ru: "\u041E\u0431\u043B\u043E\u0436\u043A\u0438 \u0438 \u0441\u0435\u0442\u043A\u0438"
+      ru: "\u041E\u0431\u043B\u043E\u0436\u043A\u0438 \u0438 \u0441\u0435\u0442\u043A\u0438",
+      pl: "Ok\u0142adki albumu i siatki"
     },
     gloss: {
       name: {
@@ -91598,7 +91652,8 @@
         it: "Applica lucentezza alle copertine degli album",
         pt: "Aplique relevo nas capas dos \xE1lbuns",
         sv: "L\xE4gg till ett sken p\xE5 albumkonst",
-        ru: "\u041F\u0440\u0438\u043C\u0435\u043D\u0438\u0442\u044C \u0433\u043B\u044F\u043D\u0435\u0446 \u043A \u043E\u0431\u043B\u043E\u0436\u043A\u0430\u043C \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432"
+        ru: "\u041F\u0440\u0438\u043C\u0435\u043D\u0438\u0442\u044C \u0433\u043B\u044F\u043D\u0435\u0446 \u043A \u043E\u0431\u043B\u043E\u0436\u043A\u0430\u043C \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432",
+        pl: "Dodaj efekt po\u0142ysku do ok\u0142adki albumu"
       },
       body: {
         en: "Add a layer of shine to album covers globally",
@@ -91607,7 +91662,8 @@
         it: "Aggiungi un effetto lucente a tutte le copertine degli album",
         pt: "Adicione um toque de brilho em todas as capas de \xE1lbuns",
         sv: "L\xE4gger till ett glansigt lager p\xE5 all albumkonst",
-        ru: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0441\u043B\u043E\u0439 \u0431\u043B\u0435\u0441\u043A\u0430 \u043D\u0430 \u043E\u0431\u043B\u043E\u0436\u043A\u0438 \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432 \u043F\u043E \u0432\u0441\u0435\u043C\u0443 \u0441\u0430\u0439\u0442\u0443"
+        ru: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0441\u043B\u043E\u0439 \u0431\u043B\u0435\u0441\u043A\u0430 \u043D\u0430 \u043E\u0431\u043B\u043E\u0436\u043A\u0438 \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432 \u043F\u043E \u0432\u0441\u0435\u043C\u0443 \u0441\u0430\u0439\u0442\u0443",
+        pl: "Dodaj efekt po\u0142ysku do wszystkich ok\u0142adek album\xF3w"
       }
     },
     grid_glow: {
@@ -91618,7 +91674,8 @@
         it: "Rifletti il colore tra gli elementi della griglia",
         pt: "Refletir a cor abaixo dos itens da grade",
         sv: "Reflektera f\xE4rg under rutn\xE4tsobjekt",
-        ru: "\u041E\u0442\u0440\u0430\u0436\u0430\u0442\u044C \u0446\u0432\u0435\u0442 \u043F\u043E\u0434 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u0430\u043C\u0438 \u0441\u0435\u0442\u043A\u0438"
+        ru: "\u041E\u0442\u0440\u0430\u0436\u0430\u0442\u044C \u0446\u0432\u0435\u0442 \u043F\u043E\u0434 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u0430\u043C\u0438 \u0441\u0435\u0442\u043A\u0438",
+        pl: "Dodaj efekt odbicia koloru poni\u017Cej element\xF3w siatki"
       },
       body: {
         en: "Applies a glow below grid items based on the primary colour",
@@ -91627,7 +91684,8 @@
         it: "Applica un effetto brillante sotto gli elementi della griglia basandosi sul colore principale",
         pt: "Aplica um brilho abaixo dos itens da grade com base na cor prim\xE1ria",
         sv: "L\xE4gger till f\xE4rg under rutn\xE4tsobjekt som \xE4r baserad p\xE5 den prim\xE4ra f\xE4rgen",
-        ru: "\u041F\u0440\u0438\u043C\u0435\u043D\u044F\u0435\u0442 \u0441\u0432\u0435\u0447\u0435\u043D\u0438\u0435 \u043F\u043E\u0434 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u0430\u043C\u0438 \u0441\u0435\u0442\u043A\u0438 \u043D\u0430 \u043E\u0441\u043D\u043E\u0432\u0435 \u043E\u0441\u043D\u043E\u0432\u043D\u043E\u0433\u043E \u0446\u0432\u0435\u0442\u0430"
+        ru: "\u041F\u0440\u0438\u043C\u0435\u043D\u044F\u0435\u0442 \u0441\u0432\u0435\u0447\u0435\u043D\u0438\u0435 \u043F\u043E\u0434 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u0430\u043C\u0438 \u0441\u0435\u0442\u043A\u0438 \u043D\u0430 \u043E\u0441\u043D\u043E\u0432\u0435 \u043E\u0441\u043D\u043E\u0432\u043D\u043E\u0433\u043E \u0446\u0432\u0435\u0442\u0430",
+        pl: "Dodaj efekt po\u0142ysku poni\u017Cej element\xF3w siatki, oparty na kolorze podstawowym "
       }
     },
     skip_to: {
@@ -91638,7 +91696,8 @@
       it: "Salta a",
       pt: "Ir at\xE9",
       sv: "Hoppa till",
-      ru: "\u041F\u0435\u0440\u0435\u0439\u0442\u0438 \u043A"
+      ru: "\u041F\u0435\u0440\u0435\u0439\u0442\u0438 \u043A",
+      pl: "Przeskocz do"
     },
     information: {
       en: "Information",
@@ -91647,7 +91706,8 @@
       it: "Informazioni",
       pt: "Informa\xE7\xE3o",
       sv: "Information",
-      ru: "\u0418\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044F"
+      ru: "\u0418\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044F",
+      pl: "Informacja"
     },
     username: {
       name: {
@@ -91657,7 +91717,8 @@
         it: "Nome utente",
         pt: "Nome de usu\xE1rio",
         sv: "Anv\xE4ndarnamn",
-        ru: "\u0418\u043C\u044F \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F"
+        ru: "\u0418\u043C\u044F \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F",
+        pl: "Nazwa u\u017Cytkownika"
       },
       body: {
         en: "To change your username hit the button to send an email. Having problems? {a}contact support{/a}.",
@@ -91666,7 +91727,8 @@
         it: "Per cambiare il tuo nome utente, premi il pulsante per inviare una email. Ci sono problemi? {a}contatta il supporto{/a}",
         pt: "Para alterar seu nome de usu\xE1rio, clique no bot\xE3o para enviar um e-mail. Est\xE1 com problemas? {a}contact support{/a}.",
         sv: "F\xF6r att \xE4ndra ditt anv\xE4ndarnamn, tryck p\xE5 knappen f\xF6r att skicka mejl. Har du ett problem? {a}Kontakta support{/a}.",
-        ru: "\u0427\u0442\u043E\u0431\u044B \u0438\u0437\u043C\u0435\u043D\u0438\u0442\u044C \u0438\u043C\u044F \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F, \u043D\u0430\u0436\u043C\u0438\u0442\u0435 \u043A\u043D\u043E\u043F\u043A\u0443 \u0434\u043B\u044F \u043E\u0442\u043F\u0440\u0430\u0432\u043A\u0438 \u044D\u043B\u0435\u043A\u0442\u0440\u043E\u043D\u043D\u043E\u0433\u043E \u043F\u0438\u0441\u044C\u043C\u0430. \u0412\u043E\u0437\u043D\u0438\u043A\u043B\u0438 \u043F\u0440\u043E\u0431\u043B\u0435\u043C\u044B? {a}\u0421\u0432\u044F\u0436\u0438\u0442\u0435\u0441\u044C \u0441\u043E \u0441\u043B\u0443\u0436\u0431\u043E\u0439 \u043F\u043E\u0434\u0434\u0435\u0440\u0436\u043A\u0438{/a}."
+        ru: "\u0427\u0442\u043E\u0431\u044B \u0438\u0437\u043C\u0435\u043D\u0438\u0442\u044C \u0438\u043C\u044F \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F, \u043D\u0430\u0436\u043C\u0438\u0442\u0435 \u043A\u043D\u043E\u043F\u043A\u0443 \u0434\u043B\u044F \u043E\u0442\u043F\u0440\u0430\u0432\u043A\u0438 \u044D\u043B\u0435\u043A\u0442\u0440\u043E\u043D\u043D\u043E\u0433\u043E \u043F\u0438\u0441\u044C\u043C\u0430. \u0412\u043E\u0437\u043D\u0438\u043A\u043B\u0438 \u043F\u0440\u043E\u0431\u043B\u0435\u043C\u044B? {a}\u0421\u0432\u044F\u0436\u0438\u0442\u0435\u0441\u044C \u0441\u043E \u0441\u043B\u0443\u0436\u0431\u043E\u0439 \u043F\u043E\u0434\u0434\u0435\u0440\u0436\u043A\u0438{/a}.",
+        pl: "Aby zmieni\u0107 swoj\u0105 nazw\u0119 u\u017Cytkownika, kliknij przycisk aby wys\u0142a\u0107 email. Masz problemy? {a}Napisz do Supportu{/a}"
       }
     },
     email: {
@@ -91676,7 +91738,8 @@
       it: "Email",
       pt: "E-mail",
       sv: "Mejladress",
-      ru: "\u042D\u043B\u0435\u043A\u0442\u0440\u043E\u043D\u043D\u0430\u044F \u043F\u043E\u0447\u0442\u0430"
+      ru: "\u042D\u043B\u0435\u043A\u0442\u0440\u043E\u043D\u043D\u0430\u044F \u043F\u043E\u0447\u0442\u0430",
+      pl: "Email"
     },
     password: {
       en: "Password",
@@ -91685,7 +91748,8 @@
       it: "Password",
       pt: "Senha",
       sv: "L\xF6senord",
-      ru: "\u041F\u0430\u0440\u043E\u043B\u044C"
+      ru: "\u041F\u0430\u0440\u043E\u043B\u044C",
+      pl: "Has\u0142o"
     },
     new_password: {
       en: "New password",
@@ -91694,7 +91758,8 @@
       it: "Nuova password",
       pt: "Nova senha",
       sv: "Nytt l\xF6senord",
-      ru: "\u041D\u043E\u0432\u044B\u0439 \u043F\u0430\u0440\u043E\u043B\u044C"
+      ru: "\u041D\u043E\u0432\u044B\u0439 \u043F\u0430\u0440\u043E\u043B\u044C",
+      pl: "Nowe has\u0142o"
     },
     confirm_password: {
       en: "Confirm password",
@@ -91703,7 +91768,8 @@
       it: "Conferma password",
       pt: "Confirmar senha",
       sv: "Verifiera l\xF6senord",
-      ru: "\u041F\u043E\u0434\u0442\u0432\u0435\u0440\u0434\u0438\u0442\u0435 \u043F\u0430\u0440\u043E\u043B\u044C"
+      ru: "\u041F\u043E\u0434\u0442\u0432\u0435\u0440\u0434\u0438\u0442\u0435 \u043F\u0430\u0440\u043E\u043B\u044C",
+      pl: "Potwierd\u017A has\u0142o"
     },
     change: {
       en: "Change",
@@ -91712,7 +91778,8 @@
       it: "Cambia",
       pt: "Mudar",
       sv: "\xC4ndra",
-      ru: "\u0418\u0437\u043C\u0435\u043D\u0438\u0442\u044C"
+      ru: "\u0418\u0437\u043C\u0435\u043D\u0438\u0442\u044C",
+      pl: "Zmie\u0144"
     },
     marketing_emails: {
       name: {
@@ -91722,7 +91789,8 @@
         it: "E-mail di marketing",
         pt: "E-mails promocionais",
         sv: "Marknadsf\xF6ringsmejl",
-        ru: "\u041C\u0430\u0440\u043A\u0435\u0442\u0438\u043D\u0433\u043E\u0432\u044B\u0435 \u0440\u0430\u0441\u0441\u044B\u043B\u043A\u0438"
+        ru: "\u041C\u0430\u0440\u043A\u0435\u0442\u0438\u043D\u0433\u043E\u0432\u044B\u0435 \u0440\u0430\u0441\u0441\u044B\u043B\u043A\u0438",
+        pl: "Emaile reklamowe"
       },
       body: {
         en: "Last.fm can optionally send promotional emails from time to time",
@@ -91731,7 +91799,8 @@
         it: "Last.fm pu\xF2 opzionalmente inviare email promozionali ogni tanto",
         pt: "A Last.fm pode, opcionalmente, enviar e-mails promocionais de tempos em tempos",
         sv: "Last.fm kan valfritt skicka reklammejl d\xE5 och d\xE5",
-        ru: "Last.fm \u043C\u043E\u0436\u0435\u0442 \u043F\u043E \u0436\u0435\u043B\u0430\u043D\u0438\u044E \u0432\u0440\u0435\u043C\u044F \u043E\u0442 \u0432\u0440\u0435\u043C\u0435\u043D\u0438 \u043E\u0442\u043F\u0440\u0430\u0432\u043B\u044F\u0442\u044C \u0440\u0435\u043A\u043B\u0430\u043C\u043D\u044B\u0435 \u044D\u043B\u0435\u043A\u0442\u0440\u043E\u043D\u043D\u044B\u0435 \u043F\u0438\u0441\u044C\u043C\u0430"
+        ru: "Last.fm \u043C\u043E\u0436\u0435\u0442 \u043F\u043E \u0436\u0435\u043B\u0430\u043D\u0438\u044E \u0432\u0440\u0435\u043C\u044F \u043E\u0442 \u0432\u0440\u0435\u043C\u0435\u043D\u0438 \u043E\u0442\u043F\u0440\u0430\u0432\u043B\u044F\u0442\u044C \u0440\u0435\u043A\u043B\u0430\u043C\u043D\u044B\u0435 \u044D\u043B\u0435\u043A\u0442\u0440\u043E\u043D\u043D\u044B\u0435 \u043F\u0438\u0441\u044C\u043C\u0430",
+        pl: "Last.fm mo\u017Ce okazjonalnie wysy\u0142a\u0107 emaile reklamowe"
       }
     },
     email_language: {
@@ -91741,7 +91810,8 @@
       it: "Lingua delle email",
       pt: "Idioma dos e-mails",
       sv: "Mejlspr\xE5k",
-      ru: "\u042F\u0437\u044B\u043A \u044D\u043B\u0435\u043A\u0442\u0440\u043E\u043D\u043D\u044B\u0445 \u043F\u0438\u0441\u0435\u043C"
+      ru: "\u042F\u0437\u044B\u043A \u044D\u043B\u0435\u043A\u0442\u0440\u043E\u043D\u043D\u044B\u0445 \u043F\u0438\u0441\u0435\u043C",
+      pl: "J\u0119zyk email"
     },
     communication: {
       en: "Communication",
@@ -91750,7 +91820,8 @@
       it: "Comunicazione",
       pt: "Comunica\xE7\xE3o",
       sv: "Kommunikation",
-      ru: "\u041A\u043E\u043C\u043C\u0443\u043D\u0438\u043A\u0430\u0446\u0438\u044F"
+      ru: "\u041A\u043E\u043C\u043C\u0443\u043D\u0438\u043A\u0430\u0446\u0438\u044F",
+      pl: "Komunikacja"
     },
     security: {
       en: "Security",
@@ -91759,7 +91830,8 @@
       it: "Sicurezza",
       pt: "Seguran\xE7a",
       sv: "Sekretess",
-      ru: "\u0411\u0435\u0437\u043E\u043F\u0430\u0441\u043D\u043E\u0441\u0442\u044C"
+      ru: "\u0411\u0435\u0437\u043E\u043F\u0430\u0441\u043D\u043E\u0441\u0442\u044C",
+      pl: "Bezpiecze\u0144stwo"
     },
     logout_everywhere: {
       en: "Logout on all devices",
@@ -91768,7 +91840,8 @@
       it: "Disconnetti su tutti i dispositivi",
       pt: "Encerrar sess\xE3o em todos os dispositivos",
       sv: "Logga ut fr\xE5n alla enheter",
-      ru: "\u0412\u044B\u0439\u0442\u0438 \u0438\u0437 \u0432\u0441\u0435\u0445 \u0443\u0441\u0442\u0440\u043E\u0439\u0441\u0442\u0432"
+      ru: "\u0412\u044B\u0439\u0442\u0438 \u0438\u0437 \u0432\u0441\u0435\u0445 \u0443\u0441\u0442\u0440\u043E\u0439\u0441\u0442\u0432",
+      pl: "Wyloguj ze wszytskich urz\u0105dze\u0144"
     },
     delete_account: {
       name: {
@@ -91778,7 +91851,8 @@
         it: "Elimina account",
         pt: "Deletar conta",
         sv: "Ta bort konto",
-        ru: "\u0423\u0434\u0430\u043B\u0438\u0442\u044C \u0430\u043A\u043A\u0430\u0443\u043D\u0442"
+        ru: "\u0423\u0434\u0430\u043B\u0438\u0442\u044C \u0430\u043A\u043A\u0430\u0443\u043D\u0442",
+        pl: "Usu\u0144 konto"
       },
       body: {
         en: "Deletion will take 14 days to complete, after this time your account will either be deleted, anonymised, or put beyond use and cannot be recovered. Once deleted, your username will no longer be available.",
@@ -91787,7 +91861,8 @@
         it: "L\u2019eliminazione impiegher\xE0 14 giorni per essere completata, dopo questo tempo il tuo account sar\xE0 cancellato, anonimizzato o reso inutilizzabile e non potr\xE0 essere recuperato. Una volta eliminato, il tuo username non sar\xE0 pi\xF9 disponibile.",
         pt: "A exclus\xE3o levar\xE1 14 dias para ser conclu\xEDda. Ap\xF3s esse per\xEDodo, sua conta ser\xE1 exclu\xEDda, anonimizada ou desativada, e n\xE3o poder\xE1 ser recuperada. Depois de exclu\xEDdo, seu nome de usu\xE1rio n\xE3o estar\xE1 mais dispon\xEDvel.",
         sv: "Det tar 14 dagar att ta bort ditt konto. Efter denna tid blir dit konto antingen borttaget, anonymiserad, eller g\xF6rs oanv\xE4ndbar och kan inte f\xE5s tillbaka. N\xE4r det \xE4r borttaget kan ditt anv\xE4ndarnamn inte bli anv\xE4nt igen.",
-        ru: "\u0423\u0434\u0430\u043B\u0435\u043D\u0438\u0435 \u0437\u0430\u0439\u043C\u0435\u0442 14 \u0434\u043D\u0435\u0439. \u041F\u043E \u0438\u0441\u0442\u0435\u0447\u0435\u043D\u0438\u0438 \u044D\u0442\u043E\u0433\u043E \u0432\u0440\u0435\u043C\u0435\u043D\u0438 \u0432\u0430\u0448\u0430 \u0443\u0447\u0435\u0442\u043D\u0430\u044F \u0437\u0430\u043F\u0438\u0441\u044C \u0431\u0443\u0434\u0435\u0442 \u043B\u0438\u0431\u043E \u0443\u0434\u0430\u043B\u0435\u043D\u0430, \u043B\u0438\u0431\u043E \u0430\u043D\u043E\u043D\u0438\u043C\u0438\u0437\u0438\u0440\u043E\u0432\u0430\u043D\u0430, \u043B\u0438\u0431\u043E \u0432\u044B\u0432\u0435\u0434\u0435\u043D\u0430 \u0438\u0437 \u044D\u043A\u0441\u043F\u043B\u0443\u0430\u0442\u0430\u0446\u0438\u0438 \u0438 \u043D\u0435 \u0441\u043C\u043E\u0436\u0435\u0442 \u0431\u044B\u0442\u044C \u0432\u043E\u0441\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u043D\u0430. \u041F\u043E\u0441\u043B\u0435 \u0443\u0434\u0430\u043B\u0435\u043D\u0438\u044F \u0432\u0430\u0448\u0435 \u0438\u043C\u044F \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F \u0431\u043E\u043B\u044C\u0448\u0435 \u043D\u0435 \u0431\u0443\u0434\u0435\u0442 \u0434\u043E\u0441\u0442\u0443\u043F\u043D\u043E."
+        ru: "\u0423\u0434\u0430\u043B\u0435\u043D\u0438\u0435 \u0437\u0430\u0439\u043C\u0435\u0442 14 \u0434\u043D\u0435\u0439. \u041F\u043E \u0438\u0441\u0442\u0435\u0447\u0435\u043D\u0438\u0438 \u044D\u0442\u043E\u0433\u043E \u0432\u0440\u0435\u043C\u0435\u043D\u0438 \u0432\u0430\u0448\u0430 \u0443\u0447\u0435\u0442\u043D\u0430\u044F \u0437\u0430\u043F\u0438\u0441\u044C \u0431\u0443\u0434\u0435\u0442 \u043B\u0438\u0431\u043E \u0443\u0434\u0430\u043B\u0435\u043D\u0430, \u043B\u0438\u0431\u043E \u0430\u043D\u043E\u043D\u0438\u043C\u0438\u0437\u0438\u0440\u043E\u0432\u0430\u043D\u0430, \u043B\u0438\u0431\u043E \u0432\u044B\u0432\u0435\u0434\u0435\u043D\u0430 \u0438\u0437 \u044D\u043A\u0441\u043F\u043B\u0443\u0430\u0442\u0430\u0446\u0438\u0438 \u0438 \u043D\u0435 \u0441\u043C\u043E\u0436\u0435\u0442 \u0431\u044B\u0442\u044C \u0432\u043E\u0441\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u043D\u0430. \u041F\u043E\u0441\u043B\u0435 \u0443\u0434\u0430\u043B\u0435\u043D\u0438\u044F \u0432\u0430\u0448\u0435 \u0438\u043C\u044F \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F \u0431\u043E\u043B\u044C\u0448\u0435 \u043D\u0435 \u0431\u0443\u0434\u0435\u0442 \u0434\u043E\u0441\u0442\u0443\u043F\u043D\u043E.",
+        pl: "Usuni\u0119cie konta potrwa 14 dni, po up\u0142ywie tego czasu Twoje konto zostanie usuni\u0119te, zanonimizowane lub wy\u0142\u0105czone i nie b\u0119dzie mo\u017Cna go przywr\xF3ci\u0107. Po usuni\u0119ciu Twoja nazwa u\u017Cytkownika nie b\u0119dzie ju\u017C dost\u0119pna."
       }
     },
     delete_account_permanently: {
@@ -91797,7 +91872,8 @@
       it: "Elimina {u} permanentemente",
       pt: "Deletar {u} permanentemente",
       sv: "Ta bort {u} permanent",
-      ru: "\u0423\u0434\u0430\u043B\u0438\u0442\u044C {u} \u043D\u0430\u0432\u0441\u0435\u0433\u0434\u0430"
+      ru: "\u0423\u0434\u0430\u043B\u0438\u0442\u044C {u} \u043D\u0430\u0432\u0441\u0435\u0433\u0434\u0430",
+      pl: "Usu\u0144 {u} permanentnie"
     },
     other: {
       // 'other' section in settings
@@ -91807,7 +91883,8 @@
       it: "Altro",
       pt: "Outro",
       sv: "Annat",
-      ru: "\u0414\u0440\u0443\u0433\u043E\u0435"
+      ru: "\u0414\u0440\u0443\u0433\u043E\u0435",
+      pl: "Inne"
     },
     applications: {
       en: "Applications",
@@ -91816,7 +91893,8 @@
       it: "Applicazioni",
       sv: "Applikationer",
       ru: "\u041F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u044F",
-      pt: "Aplica\xE7\xF5es"
+      pt: "Aplica\xE7\xF5es",
+      pl: "Aplikacje"
     },
     applications_intro: {
       en: "Connect your account to third-party services for a better scrobbling experience. Make sure you trust the services below.",
@@ -91825,7 +91903,8 @@
       it: "Connetti il tuo account a servizi di terze parti per una migliore esperienza di scrobbling. Assicurati di fidarti dei servizi che seguono.",
       sv: "Anslut ditt konto till tredjepartstj\xE4nster f\xF6r b\xE4ttre skrobblingsupplevelse. Var s\xE4ker p\xE5 att du litar p\xE5 nedre tj\xE4nster.",
       ru: "\u041F\u043E\u0434\u043A\u043B\u044E\u0447\u0438\u0442\u0435 \u0441\u0432\u043E\u0439 \u0430\u043A\u043A\u0430\u0443\u043D\u0442 \u043A \u0441\u0442\u043E\u0440\u043E\u043D\u043D\u0438\u043C \u0441\u0435\u0440\u0432\u0438\u0441\u0430\u043C \u0434\u043B\u044F \u043B\u0443\u0447\u0448\u0435\u0433\u043E \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u0438\u043D\u0433\u0430. \u0423\u0431\u0435\u0434\u0438\u0442\u0435\u0441\u044C, \u0447\u0442\u043E \u0432\u044B \u0434\u043E\u0432\u0435\u0440\u044F\u0435\u0442\u0435 \u0443\u043A\u0430\u0437\u0430\u043D\u043D\u044B\u043C \u043D\u0438\u0436\u0435 \u0441\u0435\u0440\u0432\u0438\u0441\u0430\u043C.",
-      pt: "Conecte sua conta a servi\xE7os de terceiros para uma melhor experi\xEAncia de scrobbling. Certifique-se de que voc\xEA confia nos servi\xE7os abaixo."
+      pt: "Conecte sua conta a servi\xE7os de terceiros para uma melhor experi\xEAncia de scrobbling. Certifique-se de que voc\xEA confia nos servi\xE7os abaixo.",
+      pl: "Po\u0142\u0105cz swoje konto z us\u0142ugami innych dostawc\xF3w, aby korzysta\u0107 z funkcji scrobblingu w jeszcze lepszy spos\xF3b. Upewnij si\u0119, \u017Ce ufasz wymienionym poni\u017Cej us\u0142ugom"
     },
     connect_app: {
       en: "Connect {name}",
@@ -91834,7 +91913,8 @@
       it: "Connetti {name}",
       pt: "Conectar {name}",
       sv: "Anslut {name}",
-      ru: "\u041F\u043E\u0434\u043A\u043B\u044E\u0447\u0438\u0442\u044C {name}"
+      ru: "\u041F\u043E\u0434\u043A\u043B\u044E\u0447\u0438\u0442\u044C {name}",
+      pl: "Po\u0142\u0105cz {name}"
     },
     connect: {
       en: "Connect",
@@ -91843,7 +91923,8 @@
       it: "Connetti",
       pt: "Conectar",
       sv: "Anslut",
-      ru: "\u041F\u043E\u0434\u043A\u043B\u044E\u0447\u0438\u0442\u044C"
+      ru: "\u041F\u043E\u0434\u043A\u043B\u044E\u0447\u0438\u0442\u044C",
+      pl: "Po\u0142\u0105cz"
     },
     suggested: {
       en: "Suggested",
@@ -91852,7 +91933,8 @@
       it: "Suggerito",
       sv: "F\xF6reslaget",
       ru: "\u041F\u0440\u0435\u0434\u043B\u043E\u0436\u0435\u043D\u043D\u044B\u0435",
-      pt: "Sugerido"
+      pt: "Sugerido",
+      pl: "Sugerowane"
     },
     connected: {
       en: "Connected",
@@ -91861,7 +91943,8 @@
       it: "Connesso",
       pt: "Conectado",
       sv: "Anslutit",
-      ru: "\u041F\u043E\u0434\u043A\u043B\u044E\u0447\u0435\u043D\u043E"
+      ru: "\u041F\u043E\u0434\u043A\u043B\u044E\u0447\u0435\u043D\u043E",
+      pl: "Po\u0142\u0105czono"
     },
     not_connected: {
       en: "Not connected",
@@ -91870,7 +91953,8 @@
       it: "Non connesso",
       pt: "N\xE3o conectado",
       sv: "Inte ansluten",
-      ru: "\u041D\u0435 \u043F\u043E\u0434\u043A\u043B\u044E\u0447\u0435\u043D\u043E"
+      ru: "\u041D\u0435 \u043F\u043E\u0434\u043A\u043B\u044E\u0447\u0435\u043D\u043E",
+      pl: "Nie po\u0142\u0105czono"
     },
     api: {
       name: {
@@ -91880,7 +91964,8 @@
         it: "Sblocca ulteriori funzionalit\xE0 dell\u2019API",
         pt: "Desbloqueie recursos adicionais da API",
         sv: "L\xE5s upp flera API-funktioner",
-        ru: "\u0420\u0430\u0437\u0431\u043B\u043E\u043A\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0434\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0435 \u0444\u0443\u043D\u043A\u0446\u0438\u0438 API"
+        ru: "\u0420\u0430\u0437\u0431\u043B\u043E\u043A\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0434\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0435 \u0444\u0443\u043D\u043A\u0446\u0438\u0438 API",
+        pl: "Odblokuj dodatkowe funkcje API"
       },
       body: {
         en: "Link your account to allow API access such as scrobbling",
@@ -91889,7 +91974,8 @@
         it: "Connetti il tuo account per attivare l\u2019accesso all\u2019API, ad esempio per lo scrobbling",
         pt: "Conecte sua conta para permitir o acesso \xE0 API, como o scrobbling",
         sv: "Koppla ditt konto f\xF6r att till\xE5ta API-\xE5tkomster, som att skrobbla",
-        ru: "\u041F\u0440\u0438\u0432\u044F\u0436\u0438\u0442\u0435 \u0441\u0432\u043E\u0439 \u0430\u043A\u043A\u0430\u0443\u043D\u0442, \u0447\u0442\u043E\u0431\u044B \u0440\u0430\u0437\u0440\u0435\u0448\u0438\u0442\u044C \u0434\u043E\u0441\u0442\u0443\u043F \u043A API, \u043D\u0430\u043F\u0440\u0438\u043C\u0435\u0440, \u0434\u043B\u044F \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u0438\u043D\u0433\u0430"
+        ru: "\u041F\u0440\u0438\u0432\u044F\u0436\u0438\u0442\u0435 \u0441\u0432\u043E\u0439 \u0430\u043A\u043A\u0430\u0443\u043D\u0442, \u0447\u0442\u043E\u0431\u044B \u0440\u0430\u0437\u0440\u0435\u0448\u0438\u0442\u044C \u0434\u043E\u0441\u0442\u0443\u043F \u043A API, \u043D\u0430\u043F\u0440\u0438\u043C\u0435\u0440, \u0434\u043B\u044F \u0441\u043A\u0440\u043E\u0431\u0431\u043B\u0438\u043D\u0433\u0430",
+        pl: "Po\u0142\u0105cz swoje konto, aby umo\u017Cliwi\u0107 dost\u0119p do API, np. w celu scrobblowania"
       }
     },
     api_status: {
@@ -91899,7 +91985,8 @@
       it: "Stato API",
       pt: "Status da API",
       sv: "API-status",
-      ru: "\u0421\u0442\u0430\u0442\u0443\u0441 API"
+      ru: "\u0421\u0442\u0430\u0442\u0443\u0441 API",
+      pl: "Status API"
     },
     app_would_like_to_connect: {
       // app name is above
@@ -91909,7 +91996,8 @@
       it: "vorrebbe utilizzare il tuo account",
       pt: "gostaria de usar sua conta",
       sv: "vill anv\xE4nda ditt konto",
-      ru: "\u0445\u043E\u0447\u0435\u0442 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C \u0432\u0430\u0448 \u0430\u043A\u043A\u0430\u0443\u043D\u0442"
+      ru: "\u0445\u043E\u0447\u0435\u0442 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C \u0432\u0430\u0448 \u0430\u043A\u043A\u0430\u0443\u043D\u0442",
+      pl: "chce u\u017Cy\u0107 Twoje konta"
     },
     logged_in_as: {
       en: "Logged in as {user}",
@@ -91918,7 +92006,8 @@
       it: "Connesso come {user}",
       pt: "Conectado como {user}",
       sv: "Loggat in som {user}",
-      ru: "\u0412\u044B \u0432\u043E\u0448\u043B\u0438 \u043A\u0430\u043A {user}"
+      ru: "\u0412\u044B \u0432\u043E\u0448\u043B\u0438 \u043A\u0430\u043A {user}",
+      pl: "Zalogowano jako {user}"
     },
     not_logged_in: {
       en: "Not logged in",
@@ -91927,7 +92016,8 @@
       it: "Non connesso",
       pt: "N\xE3o conectado",
       sv: "Inte inloggad",
-      ru: "\u041D\u0435 \u0432 \u0441\u0438\u0441\u0442\u0435\u043C\u0435"
+      ru: "\u041D\u0435 \u0432 \u0441\u0438\u0441\u0442\u0435\u043C\u0435",
+      pl: "Nie zalogowano"
     },
     ensure_you_trust: {
       // API applications
@@ -91938,7 +92028,8 @@
       it: "Assicurati di fidarti di questa applicazione",
       pt: "Certifique-se de que voc\xEA confia neste aplicativo",
       sv: "Var s\xE4ker p\xE5 att du litar denna applikation",
-      ru: "\u0423\u0431\u0435\u0434\u0438\u0442\u0435\u0441\u044C, \u0447\u0442\u043E \u0432\u044B \u0434\u043E\u0432\u0435\u0440\u044F\u0435\u0442\u0435 \u044D\u0442\u043E\u043C\u0443 \u043F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u044E"
+      ru: "\u0423\u0431\u0435\u0434\u0438\u0442\u0435\u0441\u044C, \u0447\u0442\u043E \u0432\u044B \u0434\u043E\u0432\u0435\u0440\u044F\u0435\u0442\u0435 \u044D\u0442\u043E\u043C\u0443 \u043F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u044E",
+      pl: "Upewnij si\u0119, \u017Ce ufasz tej aplikacji"
     },
     has_been_connected: {
       // app name is above
@@ -91948,7 +92039,8 @@
       it: "\xE8 stato connesso",
       pt: "foi conectado",
       sv: "har anslutits",
-      ru: "\u0431\u044B\u043B\u043E \u043F\u043E\u0434\u043A\u043B\u044E\u0447\u0435\u043D\u043E"
+      ru: "\u0431\u044B\u043B\u043E \u043F\u043E\u0434\u043A\u043B\u044E\u0447\u0435\u043D\u043E",
+      pl: "po\u0142\u0105czono"
     },
     you_can_now_close_this_tab: {
       en: "You can now close this tab",
@@ -91957,7 +92049,8 @@
       it: "Puoi chiudere questa scheda",
       pt: "Voc\xEA pode fechar esta aba agora",
       sv: "Du kan nu st\xE4nga den h\xE4r fliken",
-      ru: "\u0422\u0435\u043F\u0435\u0440\u044C \u0432\u044B \u043C\u043E\u0436\u0435\u0442\u0435 \u0437\u0430\u043A\u0440\u044B\u0442\u044C \u044D\u0442\u0443 \u0432\u043A\u043B\u0430\u0434\u043A\u0443"
+      ru: "\u0422\u0435\u043F\u0435\u0440\u044C \u0432\u044B \u043C\u043E\u0436\u0435\u0442\u0435 \u0437\u0430\u043A\u0440\u044B\u0442\u044C \u044D\u0442\u0443 \u0432\u043A\u043B\u0430\u0434\u043A\u0443",
+      pl: "Mo\u017Cesz teraz zamnk\u0105\u0107 t\u0105 zak\u0142adk\u0119"
     },
     manage_applications: {
       // API applications
@@ -91968,7 +92061,8 @@
       it: "Gestisci applicazioni",
       pt: "Gerenciar aplica\xE7\xF5es",
       sv: "Hantera applikationer",
-      ru: "\u0423\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435 \u043F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u044F\u043C\u0438"
+      ru: "\u0423\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435 \u043F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u044F\u043C\u0438",
+      pl: "Zarz\u0105dzaj aplikacjami"
     },
     markdown_profiles: {
       name: {
@@ -91978,7 +92072,8 @@
         it: "Usa formattazione avanzata nei profili",
         pt: "Usar formata\xE7\xE3o estilosa nos perfis",
         sv: "Anv\xE4nd snygg formatering p\xE5 profiler",
-        ru: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C \u0440\u0430\u0441\u0448\u0438\u0440\u0435\u043D\u043D\u043E\u0435 \u0444\u043E\u0440\u043C\u0430\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435 \u0432 \u043F\u0440\u043E\u0444\u0438\u043B\u044F\u0445"
+        ru: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C \u0440\u0430\u0441\u0448\u0438\u0440\u0435\u043D\u043D\u043E\u0435 \u0444\u043E\u0440\u043C\u0430\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435 \u0432 \u043F\u0440\u043E\u0444\u0438\u043B\u044F\u0445",
+        pl: "Zastosuj \u0142adniejsze formatowanie profili"
       },
       body: {
         en: "Allows the use of line breaks, bold text, italics, and images in all \u201CAbout Me\u201D panels",
@@ -91987,7 +92082,8 @@
         it: "Permette l\u2019uso di interruzioni di linea, grassetto, corsivo e immagini in tutti i pannelli \u201CInformazioni\u201D",
         pt: "Permite o uso de quebras de linha, texto em negrito, it\xE1lico e imagens em todos os pain\xE9is \u201CSobre mim\u201D",
         sv: "Till\xE5ter radbrytning, fet stil, kursiv stil, och bilder inom alla \u201COm mig\u201D-paneler",
-        ru: "\u0420\u0430\u0437\u0440\u0435\u0448\u0430\u0435\u0442 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u0438\u0435 \u043F\u0435\u0440\u0435\u043D\u043E\u0441\u043E\u0432 \u0441\u0442\u0440\u043E\u043A, \u0436\u0438\u0440\u043D\u043E\u0433\u043E \u0442\u0435\u043A\u0441\u0442\u0430, \u043A\u0443\u0440\u0441\u0438\u0432\u0430 \u0438 \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0439 \u0432\u043E \u0432\u0441\u0435\u0445 \u043F\u0430\u043D\u0435\u043B\u044F\u0445 \xAB\u041E\u0431\u043E \u043C\u043D\u0435\xBB"
+        ru: "\u0420\u0430\u0437\u0440\u0435\u0448\u0430\u0435\u0442 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u0438\u0435 \u043F\u0435\u0440\u0435\u043D\u043E\u0441\u043E\u0432 \u0441\u0442\u0440\u043E\u043A, \u0436\u0438\u0440\u043D\u043E\u0433\u043E \u0442\u0435\u043A\u0441\u0442\u0430, \u043A\u0443\u0440\u0441\u0438\u0432\u0430 \u0438 \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0439 \u0432\u043E \u0432\u0441\u0435\u0445 \u043F\u0430\u043D\u0435\u043B\u044F\u0445 \xAB\u041E\u0431\u043E \u043C\u043D\u0435\xBB",
+        pl: "Umo\u017Cliwia stosowanie znak\xF3w ko\u0144ca linii, pogrubienia, kursywy oraz obraz\xF3w w panelach \u201EO mnie\u201D"
       }
     },
     markdown_shouts: {
@@ -91998,8 +92094,9 @@
         it: "Usa formattazione avanzata nelle note",
         pt: "Usar formata\xE7\xE3o estilosa nas caixas de mensagens",
         sv: "Anv\xE4nd snygg formatering p\xE5 hojtningar",
-        ru: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C \u0440\u0430\u0441\u0448\u0438\u0440\u0435\u043D\u043D\u043E\u0435 \u0444\u043E\u0440\u043C\u0430\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435 \u0432 \u0420\u0443\u043F\u043E\u0440\u0435"
+        ru: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C \u0440\u0430\u0441\u0448\u0438\u0440\u0435\u043D\u043D\u043E\u0435 \u0444\u043E\u0440\u043C\u0430\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435 \u0432 \u0420\u0443\u043F\u043E\u0440\u0435",
         //parity again! в следующий раз вместо шаут будет ШАТАУТ (/j) -- wun4
+        pl: "Zastosuj \u0142adniejsze formatowanie w komentarzach"
       },
       body: {
         en: "Allows the use of line breaks, bold text, italics, and images in all shouts",
@@ -92008,7 +92105,8 @@
         it: "Permette l\u2019uso di interruzioni di linea, grassetto, corsivo e immagini in tutte le note",
         pt: "Permite o uso de quebras de linha, texto em negrito, it\xE1lico e imagens em todas as caixas de mensagens",
         sv: "Till\xE5ter radbrytning, fet stil, kursiv stil, och bilder inom alla hojtningar",
-        ru: "\u0420\u0430\u0437\u0440\u0435\u0448\u0430\u0435\u0442 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u0438\u0435 \u043F\u0435\u0440\u0435\u043D\u043E\u0441\u043E\u0432 \u0441\u0442\u0440\u043E\u043A, \u0436\u0438\u0440\u043D\u043E\u0433\u043E \u0442\u0435\u043A\u0441\u0442\u0430, \u043A\u0443\u0440\u0441\u0438\u0432\u0430 \u0438 \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0439 \u0432\u043E \u0432\u0441\u0435\u0445 \u0448\u0430\u0443\u0442\u0430\u0445"
+        ru: "\u0420\u0430\u0437\u0440\u0435\u0448\u0430\u0435\u0442 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u0438\u0435 \u043F\u0435\u0440\u0435\u043D\u043E\u0441\u043E\u0432 \u0441\u0442\u0440\u043E\u043A, \u0436\u0438\u0440\u043D\u043E\u0433\u043E \u0442\u0435\u043A\u0441\u0442\u0430, \u043A\u0443\u0440\u0441\u0438\u0432\u0430 \u0438 \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0439 \u0432\u043E \u0432\u0441\u0435\u0445 \u0448\u0430\u0443\u0442\u0430\u0445",
+        pl: "Umo\u017Cliwia stosowanie znak\xF3w ko\u0144ca linii, pogrubienia, kursywy oraz obraz\xF3w w komentarzach"
       },
       preview: {
         en: "hello! **hello!** *hello!*\n[here\u2019s a link](https://katelyn.moe) HAII @evangelicgirl",
@@ -92017,7 +92115,8 @@
         it: "ciao! **ciao!** *ciao!*\n[questo \xE8 un link](https://katelyn.moe) CIAOO @evangelicgirl",
         pt: "oi! **ol\xE1!** *opa!*\n[aqui est\xE1 um link](https://katelyn.moe) OIEE @evangelicgirl",
         sv: "hej! **hej!** *hej!*\n[h\xE4r \xE4r en l\xE4nk](https://katelyn.moe) HEJJ @evangelicgirl",
-        ru: "\u043F\u0440\u0438\u0432\u0435\u0442! **\u043F\u0440\u0438\u0432\u0435\u0442!** *\u043F\u0440\u0438\u0432\u0435\u0442!*\n[\u0432\u043E\u0442 \u0441\u0441\u044B\u043B\u043A\u0430](https://katelyn.moe) \u041F\u0420\u0418\u0412\u0415\u0422 @evangelicgirl"
+        ru: "\u043F\u0440\u0438\u0432\u0435\u0442! **\u043F\u0440\u0438\u0432\u0435\u0442!** *\u043F\u0440\u0438\u0432\u0435\u0442!*\n[\u0432\u043E\u0442 \u0441\u0441\u044B\u043B\u043A\u0430](https://katelyn.moe) \u041F\u0420\u0418\u0412\u0415\u0422 @evangelicgirl",
+        pl: "hej! **hej!** *hej!*\n[link tutaj](https://katelyn.moe)) HEJJ @evangelicgirl"
       }
     },
     gathering_your_plays: {
@@ -92027,7 +92126,8 @@
       it: "Raccogliendo le tue riproduzioni di album",
       pt: "Coletando suas reprodu\xE7\xF5es de \xE1lbuns",
       sv: "Samlar dina albumspelningar",
-      ru: "\u0421\u043E\u0431\u0438\u0440\u0430\u0435\u043C \u0432\u0430\u0448\u0438 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u044F \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432"
+      ru: "\u0421\u043E\u0431\u0438\u0440\u0430\u0435\u043C \u0432\u0430\u0448\u0438 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u044F \u0430\u043B\u044C\u0431\u043E\u043C\u043E\u0432",
+      pl: "Zbieranie odtworze\u0144 z album\xF3w"
     },
     failed_to_find_tracks: {
       en: "You do not have any plays",
@@ -92036,7 +92136,8 @@
       it: "Non hai alcuna riproduzione",
       pt: "Voc\xEA n\xE3o tem nenhuma reprodu\xE7\xE3o",
       sv: "Du har inga spelningar",
-      ru: "\u0423 \u0432\u0430\u0441 \u043D\u0435\u0442 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439"
+      ru: "\u0423 \u0432\u0430\u0441 \u043D\u0435\u0442 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439",
+      pl: "Nie masz \u017Cadnych odtworze\u0144"
     },
     own_plays: {
       // tracklist source menu option that enables the thing below
@@ -92046,7 +92147,8 @@
       it: "Riproduzioni personali",
       sv: "Egna spelningar",
       ru: "\u0421\u043E\u0431\u0441\u0442\u0432\u0435\u043D\u043D\u044B\u0435 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u044F",
-      pt: "Reprodu\xE7\xF5es pr\xF3prias"
+      pt: "Reprodu\xE7\xF5es pr\xF3prias",
+      pl: "W\u0142asne odtworzenia"
     },
     sourced_from_own_plays: {
       // tracklist from your own album plays
@@ -92057,7 +92159,8 @@
       ja: "\u516C\u5F0F\u30C8\u30E9\u30C3\u30AF\u30EA\u30B9\u30C8\u304C\u5229\u7528\u3067\u304D\u306A\u3044\u305F\u3081\u3001\u518D\u751F\u5C65\u6B74\u304B\u3089\u53D6\u5F97\u3057\u307E\u3057\u305F",
       pt: "Baseado nas suas pr\xF3prias reprodu\xE7\xF5es, pois a tracklist oficial n\xE3o est\xE1 dispon\xEDvel",
       sv: "H\xE4mtas fr\xE5n dina egna spelningar f\xF6r en officiell spellista finns inte",
-      ru: "\u041F\u043E\u043B\u0443\u0447\u0435\u043D\u043E \u0438\u0437 \u0432\u0430\u0448\u0438\u0445 \u0441\u043E\u0431\u0441\u0442\u0432\u0435\u043D\u043D\u044B\u0445 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439, \u0442\u0430\u043A \u043A\u0430\u043A \u043E\u0444\u0438\u0446\u0438\u0430\u043B\u044C\u043D\u044B\u0439 \u0442\u0440\u0435\u043A\u043B\u0438\u0441\u0442 \u043D\u0435\u0434\u043E\u0441\u0442\u0443\u043F\u0435\u043D"
+      ru: "\u041F\u043E\u043B\u0443\u0447\u0435\u043D\u043E \u0438\u0437 \u0432\u0430\u0448\u0438\u0445 \u0441\u043E\u0431\u0441\u0442\u0432\u0435\u043D\u043D\u044B\u0445 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u043D\u0438\u0439, \u0442\u0430\u043A \u043A\u0430\u043A \u043E\u0444\u0438\u0446\u0438\u0430\u043B\u044C\u043D\u044B\u0439 \u0442\u0440\u0435\u043A\u043B\u0438\u0441\u0442 \u043D\u0435\u0434\u043E\u0441\u0442\u0443\u043F\u0435\u043D",
+      pl: "Ta lista opiera si\u0119 na twoich w\u0142asnych odtworzeniach, poniewa\u017C nie jest dost\u0119pna \u017Cadna oficjalna lista utwor\xF3w"
     },
     submit_language: {
       name: {
@@ -92067,7 +92170,8 @@
         it: "Sei fluente in un linguaggio supportato?",
         pt: "Voc\xEA \xE9 fluente em algum dos idiomas suportados?",
         sv: "Talar du ett spr\xE5k som st\xF6ds flytande?",
-        ru: "\u0412\u044B \u0441\u0432\u043E\u0431\u043E\u0434\u043D\u043E \u0440\u0430\u0437\u0433\u043E\u0432\u0430\u0440\u0438\u0432\u0430\u0435\u0442\u0435 \u043D\u0430 \u043E\u0434\u043D\u043E\u043C \u0438\u0437 \u043F\u043E\u0434\u0434\u0435\u0440\u0436\u0438\u0432\u0430\u0435\u043C\u044B\u0445 \u044F\u0437\u044B\u043A\u043E\u0432?"
+        ru: "\u0412\u044B \u0441\u0432\u043E\u0431\u043E\u0434\u043D\u043E \u0440\u0430\u0437\u0433\u043E\u0432\u0430\u0440\u0438\u0432\u0430\u0435\u0442\u0435 \u043D\u0430 \u043E\u0434\u043D\u043E\u043C \u0438\u0437 \u043F\u043E\u0434\u0434\u0435\u0440\u0436\u0438\u0432\u0430\u0435\u043C\u044B\u0445 \u044F\u0437\u044B\u043A\u043E\u0432?",
+        pl: "Pos\u0142ugujesz si\u0119 biegle jednym z obs\u0142ugiwanych j\u0119zyk\xF3w?"
       },
       body: {
         en: "Translations are powered by community contributions from wonderful people like you",
@@ -92076,7 +92180,8 @@
         it: "Le traduzioni sono basate sulle contribuzioni di persone fantastiche come te",
         pt: "As tradu\xE7\xF5es s\xE3o feitas gra\xE7as \xE0s contribui\xE7\xF5es da comunidade de pessoas incr\xEDveis como voc\xEA",
         sv: "\xD6vers\xE4ttningar drivs av bidrag fr\xE5n underbara folk som du",
-        ru: "\u041F\u0435\u0440\u0435\u0432\u043E\u0434\u044B \u043E\u0431\u0435\u0441\u043F\u0435\u0447\u0438\u0432\u0430\u044E\u0442\u0441\u044F \u0441\u043E\u043E\u0431\u0449\u0435\u0441\u0442\u0432\u043E\u043C \u0442\u0430\u043A\u0438\u0445 \u0437\u0430\u043C\u0435\u0447\u0430\u0442\u0435\u043B\u044C\u043D\u044B\u0445 \u043B\u044E\u0434\u0435\u0439, \u043A\u0430\u043A \u0432\u044B"
+        ru: "\u041F\u0435\u0440\u0435\u0432\u043E\u0434\u044B \u043E\u0431\u0435\u0441\u043F\u0435\u0447\u0438\u0432\u0430\u044E\u0442\u0441\u044F \u0441\u043E\u043E\u0431\u0449\u0435\u0441\u0442\u0432\u043E\u043C \u0442\u0430\u043A\u0438\u0445 \u0437\u0430\u043C\u0435\u0447\u0430\u0442\u0435\u043B\u044C\u043D\u044B\u0445 \u043B\u044E\u0434\u0435\u0439, \u043A\u0430\u043A \u0432\u044B",
+        pl: "T\u0142umaczenia powstaj\u0105 dzi\u0119ki wk\u0142adowi spo\u0142eczno\u015Bci z\u0142o\u017Conej ze wspania\u0142ych os\xF3b, takich jak Ty"
       }
     },
     welcome_to_bleh: {
@@ -92087,7 +92192,8 @@
       it: "Benvenuto in {b}, grazie per l\u2019installazione!<br>Puoi continuare con questa veloce configurazione iniziale, oppure saltare direttamente al tuo profilo e scoprire tutto da solo <3",
       pt: "Bem-vindo ao {b}, obrigado por instalar!<br>Voc\xEA pode seguir este r\xE1pido guia de configura\xE7\xE3o para come\xE7ar, ou pular direto para seu perfil e descobrir tudo por conta pr\xF3pria <3",
       sv: "V\xE4lkommen till {b}, tack f\xF6r att du har installerat!<br>Du kan forts\xE4tta genom den h\xE4r snabba setupen f\xF6r att starta eller hoppa rakt till din profil och klura ut det helt sj\xE4lv <3",
-      ru: "\u0414\u043E\u0431\u0440\u043E \u043F\u043E\u0436\u0430\u043B\u043E\u0432\u0430\u0442\u044C \u0432 {b}, \u0441\u043F\u0430\u0441\u0438\u0431\u043E \u0437\u0430 \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0443!<br>\u0412\u044B \u043C\u043E\u0436\u0435\u0442\u0435 \u043F\u0440\u043E\u0439\u0442\u0438 \u0431\u044B\u0441\u0442\u0440\u0443\u044E \u043F\u0435\u0440\u0432\u0438\u0447\u043D\u0443\u044E \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0443 \u0438\u043B\u0438 \u0441\u0440\u0430\u0437\u0443 \u043F\u0435\u0440\u0435\u0439\u0442\u0438 \u043A \u0441\u0432\u043E\u0435\u043C\u0443 \u043F\u0440\u043E\u0444\u0438\u043B\u044E \u0438 \u0440\u0430\u0437\u043E\u0431\u0440\u0430\u0442\u044C\u0441\u044F \u0432\u043E \u0432\u0441\u0435\u043C \u0441\u0430\u043C\u043E\u0441\u0442\u043E\u044F\u0442\u0435\u043B\u044C\u043D\u043E <3"
+      ru: "\u0414\u043E\u0431\u0440\u043E \u043F\u043E\u0436\u0430\u043B\u043E\u0432\u0430\u0442\u044C \u0432 {b}, \u0441\u043F\u0430\u0441\u0438\u0431\u043E \u0437\u0430 \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0443!<br>\u0412\u044B \u043C\u043E\u0436\u0435\u0442\u0435 \u043F\u0440\u043E\u0439\u0442\u0438 \u0431\u044B\u0441\u0442\u0440\u0443\u044E \u043F\u0435\u0440\u0432\u0438\u0447\u043D\u0443\u044E \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0443 \u0438\u043B\u0438 \u0441\u0440\u0430\u0437\u0443 \u043F\u0435\u0440\u0435\u0439\u0442\u0438 \u043A \u0441\u0432\u043E\u0435\u043C\u0443 \u043F\u0440\u043E\u0444\u0438\u043B\u044E \u0438 \u0440\u0430\u0437\u043E\u0431\u0440\u0430\u0442\u044C\u0441\u044F \u0432\u043E \u0432\u0441\u0435\u043C \u0441\u0430\u043C\u043E\u0441\u0442\u043E\u044F\u0442\u0435\u043B\u044C\u043D\u043E <3",
+      pl: "Witaj w {b}, dzi\u0119kuj\u0119 za instalacj\u0119!<br>Mo\u017Cesz przej\u015B\u0107 przez ten szybki kreator konfiguracji, aby rozpocz\u0105\u0107, lub przej\u015B\u0107 od razu do swojego profilu i samodzielnie wszystko sprawdzi\u0107 <3"
     },
     prev: {
       // previous
@@ -92095,7 +92201,8 @@
       pt: "Anterior",
       es: "Anterior",
       ru: "\u041D\u0430\u0437\u0430\u0434",
-      it: "Precedente"
+      it: "Precedente",
+      pl: "Poprzedni"
     },
     next: {
       en: "Next",
@@ -92104,7 +92211,8 @@
       it: "Prossimo",
       pt: "Pr\xF3ximo",
       sv: "N\xE4sta",
-      ru: "\u0414\u0430\u043B\u0435\u0435"
+      ru: "\u0414\u0430\u043B\u0435\u0435",
+      pl: "Nast\u0119pny"
     },
     choose_a_theme: {
       en: "Choose a theme that suits you best!",
@@ -92113,7 +92221,8 @@
       it: "Seleziona il tema che ti piace di pi\xF9!",
       pt: "Escolha o tema que mais combina com voc\xEA",
       sv: "V\xE4lj ett tema som passar dig b\xE4st!",
-      ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u0442\u0435\u043C\u0443, \u043A\u043E\u0442\u043E\u0440\u0430\u044F \u043F\u043E\u0434\u0445\u043E\u0434\u0438\u0442 \u0432\u0430\u043C \u0431\u043E\u043B\u044C\u0448\u0435 \u0432\u0441\u0435\u0433\u043E!"
+      ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u0442\u0435\u043C\u0443, \u043A\u043E\u0442\u043E\u0440\u0430\u044F \u043F\u043E\u0434\u0445\u043E\u0434\u0438\u0442 \u0432\u0430\u043C \u0431\u043E\u043B\u044C\u0448\u0435 \u0432\u0441\u0435\u0433\u043E!",
+      pl: "Wybierz motyw, kt\xF3ry najbardziej Ci odpowiada"
     },
     accessibility_explain: {
       en: "Before we continue, let\u2019s assess your accessibility settings.",
@@ -92122,7 +92231,8 @@
       it: "Prima di continuare, valutiamo le tue impostazioni di accessibilit\xE0.",
       pt: "Antes de continuarmos, vamos acessar suas configura\xE7\xF5es de acessibilidade.",
       sv: "Innan vi forts\xE4tter ska vi kontrollera dina tillg\xE4nglighetsinst\xE4llningar.",
-      ru: "\u041F\u0440\u0435\u0436\u0434\u0435 \u0447\u0435\u043C \u043F\u0440\u043E\u0434\u043E\u043B\u0436\u0438\u0442\u044C, \u0434\u0430\u0432\u0430\u0439\u0442\u0435 \u043E\u0446\u0435\u043D\u0438\u043C \u0432\u0430\u0448\u0438 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438 \u0434\u043E\u0441\u0442\u0443\u043F\u043D\u043E\u0441\u0442\u0438."
+      ru: "\u041F\u0440\u0435\u0436\u0434\u0435 \u0447\u0435\u043C \u043F\u0440\u043E\u0434\u043E\u043B\u0436\u0438\u0442\u044C, \u0434\u0430\u0432\u0430\u0439\u0442\u0435 \u043E\u0446\u0435\u043D\u0438\u043C \u0432\u0430\u0448\u0438 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438 \u0434\u043E\u0441\u0442\u0443\u043F\u043D\u043E\u0441\u0442\u0438.",
+      pl: "Zanim przejdziemy dalej, sprawd\u017Amy Twoje ustawienia dost\u0119pno\u015Bci"
     },
     colours_explain: {
       en: "Choose a colour you like or make your own favourite.",
@@ -92131,7 +92241,8 @@
       it: "Seleziona un colore che ti piace o crea il tuo preferito.",
       pt: "Escolha uma cor que voc\xEA goste ou crie a sua favorita.",
       sv: "V\xE4lj en f\xE4rg du tycker om eller g\xF6r din egna favorit.",
-      ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u0446\u0432\u0435\u0442, \u043A\u043E\u0442\u043E\u0440\u044B\u0439 \u0432\u0430\u043C \u043D\u0440\u0430\u0432\u0438\u0442\u0441\u044F, \u0438\u043B\u0438 \u0441\u043E\u0437\u0434\u0430\u0439\u0442\u0435 \u0441\u0432\u043E\u0439 \u043B\u044E\u0431\u0438\u043C\u044B\u0439."
+      ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u0446\u0432\u0435\u0442, \u043A\u043E\u0442\u043E\u0440\u044B\u0439 \u0432\u0430\u043C \u043D\u0440\u0430\u0432\u0438\u0442\u0441\u044F, \u0438\u043B\u0438 \u0441\u043E\u0437\u0434\u0430\u0439\u0442\u0435 \u0441\u0432\u043E\u0439 \u043B\u044E\u0431\u0438\u043C\u044B\u0439.",
+      pl: "Wybierz kolor kt\xF3ry Ci odpowiada albo stw\xF3rz sw\xF3j ulubiony"
     },
     music_explain: {
       en: "We offer a variety of options to help you manage your music library.",
@@ -92159,7 +92270,8 @@
         it: "Mostra particelle durante specifiche stagioni",
         pt: "Mostrar particulas durante esta\xE7\xF5es selecionadas",
         sv: "Visa partiklar under vissa \xE5rstider",
-        ru: "\u041F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u0447\u0430\u0441\u0442\u0438\u0446\u044B \u0432 \u043E\u043F\u0440\u0435\u0434\u0435\u043B\u0451\u043D\u043D\u044B\u0435 \u0441\u0435\u0437\u043E\u043D\u044B"
+        ru: "\u041F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u0447\u0430\u0441\u0442\u0438\u0446\u044B \u0432 \u043E\u043F\u0440\u0435\u0434\u0435\u043B\u0451\u043D\u043D\u044B\u0435 \u0441\u0435\u0437\u043E\u043D\u044B",
+        pl: "Wy\u015Bwietlaj efekty w wybranych porach roku"
       },
       body: {
         en: "During colder seasons, watch pretty snowflakes fall \u22C6\u207A\u208A\u2745\u3002",
@@ -92168,7 +92280,8 @@
         it: "Durante le stagioni pi\xF9 fredde, guarda dei bellissimi fiocchi di neve cadere  \u22C6\u207A\u208A\u2745\u3002",
         pt: "Durante as sess\xF5es de inverno, veja flocos de neve bonitinhos caindo \u22C6\u207A\u208A\u2745\u3002",
         sv: "Under kyligare \xE5rstider, se vackra sn\xF6flingorna glida sakta ner \u22C6\u207A\u208A\u2745\u3002",
-        ru: "\u0412 \u0445\u043E\u043B\u043E\u0434\u043D\u043E\u0435 \u0432\u0440\u0435\u043C\u044F \u0433\u043E\u0434\u0430 \u043D\u0430\u0431\u043B\u044E\u0434\u0430\u0439\u0442\u0435 \u0437\u0430 \u043A\u0440\u0430\u0441\u0438\u0432\u044B\u043C\u0438 \u043F\u0430\u0434\u0430\u044E\u0449\u0438\u043C\u0438 \u0441\u043D\u0435\u0436\u0438\u043D\u043A\u0430\u043C\u0438 \u22C6\u207A\u208A\u2745\u3002"
+        ru: "\u0412 \u0445\u043E\u043B\u043E\u0434\u043D\u043E\u0435 \u0432\u0440\u0435\u043C\u044F \u0433\u043E\u0434\u0430 \u043D\u0430\u0431\u043B\u044E\u0434\u0430\u0439\u0442\u0435 \u0437\u0430 \u043A\u0440\u0430\u0441\u0438\u0432\u044B\u043C\u0438 \u043F\u0430\u0434\u0430\u044E\u0449\u0438\u043C\u0438 \u0441\u043D\u0435\u0436\u0438\u043D\u043A\u0430\u043C\u0438 \u22C6\u207A\u208A\u2745\u3002",
+        pl: "Podczas ch\u0142odnych p\xF3r roku, zobacz spadaj\u0105ce p\u0142atki \u015Bniegu \u22C6\u207A\u208A\u2745\u3002"
       }
     },
     all_particles: {
@@ -92178,7 +92291,8 @@
       it: "Mostra tutte le particelle",
       pt: "Mostrar todas as part\xEDculas",
       sv: "Visa fulla partiklar",
-      ru: "\u041F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u0432\u0441\u0435 \u0447\u0430\u0441\u0442\u0438\u0446\u044B"
+      ru: "\u041F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u0432\u0441\u0435 \u0447\u0430\u0441\u0442\u0438\u0446\u044B",
+      pl: "Wy\u015Bwietl wszystkie efekty"
     },
     less_particles: {
       en: "Show less particles",
@@ -92187,7 +92301,8 @@
       it: "Mostra meno particelle",
       pt: "Mostrar menos part\xEDculas",
       sv: "Visa mindre partiklar",
-      ru: "\u041F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u043C\u0435\u043D\u044C\u0448\u0435 \u0447\u0430\u0441\u0442\u0438\u0446"
+      ru: "\u041F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u043C\u0435\u043D\u044C\u0448\u0435 \u0447\u0430\u0441\u0442\u0438\u0446",
+      pl: "Wy\u015Bwietl mniej efekt\xF3w"
     },
     no_particles: {
       en: "Disable particles",
@@ -92196,7 +92311,8 @@
       it: "Disattiva particelle",
       pt: "Desativar part\xEDculas",
       sv: "St\xE4ng av partiklar",
-      ru: "\u041E\u0442\u043A\u043B\u044E\u0447\u0438\u0442\u044C \u0447\u0430\u0441\u0442\u0438\u0446\u044B"
+      ru: "\u041E\u0442\u043A\u043B\u044E\u0447\u0438\u0442\u044C \u0447\u0430\u0441\u0442\u0438\u0446\u044B",
+      pl: "Wy\u0142\u0105cz efekty"
     },
     beware_notice: {
       en: "Beware! Only change these settings if you know what you\u2019re doing",
@@ -92205,7 +92321,8 @@
       it: "Attenzione! Cambia queste impostazioni solo se sai cosa stai facendo",
       pt: "Cuidado! Apenas mude estas configura\xE7\xF5es se voc\xEA sabe o que voc\xEA est\xE1 fazendo",
       sv: "Var f\xF6rsiktig! \xC4ndra bara dessa inst\xE4llningar om du vet vad du g\xF6r",
-      ru: "\u041E\u0441\u0442\u043E\u0440\u043E\u0436\u043D\u043E! \u041C\u0435\u043D\u044F\u0439\u0442\u0435 \u044D\u0442\u0438 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438 \u0442\u043E\u043B\u044C\u043A\u043E \u0435\u0441\u043B\u0438 \u0432\u044B \u0437\u043D\u0430\u0435\u0442\u0435, \u0447\u0442\u043E \u0434\u0435\u043B\u0430\u0435\u0442\u0435"
+      ru: "\u041E\u0441\u0442\u043E\u0440\u043E\u0436\u043D\u043E! \u041C\u0435\u043D\u044F\u0439\u0442\u0435 \u044D\u0442\u0438 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438 \u0442\u043E\u043B\u044C\u043A\u043E \u0435\u0441\u043B\u0438 \u0432\u044B \u0437\u043D\u0430\u0435\u0442\u0435, \u0447\u0442\u043E \u0434\u0435\u043B\u0430\u0435\u0442\u0435",
+      pl: "Uwaga! Zmieniaj te ustawienia tylko wtedy, gdy wiesz, co robisz"
     },
     intended_for_development: {
       name: {
@@ -92215,7 +92332,8 @@
         it: "Questa pagina \xE8 pensata per lo sviluppo",
         sv: "Denna sida \xE4r avsedd f\xF6r utveckling",
         ru: "\u042D\u0442\u0430 \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0430 \u043F\u0440\u0435\u0434\u043D\u0430\u0437\u043D\u0430\u0447\u0435\u043D\u0430 \u0434\u043B\u044F \u0440\u0430\u0437\u0440\u0430\u0431\u043E\u0442\u043A\u0438",
-        pt: "Esta p\xE1gina \xE9 destinada para desenvolvimento"
+        pt: "Esta p\xE1gina \xE9 destinada para desenvolvimento",
+        pl: "Ta strona jest przeznaczona do cel\xF3w programistycznych"
       },
       body: {
         en: "Be careful with options here (especially feature flags) as they can break your install.",
@@ -92224,7 +92342,8 @@
         it: "Fai attenzione con le opzioni qui (specialmente i feature flag) perch\xE9 possono rompere la tua installazione.",
         pt: "Tenha cuidado com as op\xE7\xF5es aqui (especialmente com os flags de recursos), pois elas podem causar problemas na sua instala\xE7\xE3o.",
         sv: "Var f\xF6rsiktig med inst\xE4llningarna h\xE4r (speciellt funktionsflaggor) eftersom dom kan f\xF6rst\xF6ra din installation.",
-        ru: "\u0411\u0443\u0434\u044C\u0442\u0435 \u043E\u0441\u0442\u043E\u0440\u043E\u0436\u043D\u044B \u0441 \u043E\u043F\u0446\u0438\u044F\u043C\u0438 \u0437\u0434\u0435\u0441\u044C (\u043E\u0441\u043E\u0431\u0435\u043D\u043D\u043E \u0441 \u0444\u043B\u0430\u0433\u0430\u043C\u0438 \u0444\u0443\u043D\u043A\u0446\u0438\u0439), \u0442\u0430\u043A \u043A\u0430\u043A \u043E\u043D\u0438 \u043C\u043E\u0433\u0443\u0442 \u043D\u0430\u0440\u0443\u0448\u0438\u0442\u044C \u0440\u0430\u0431\u043E\u0442\u0443 \u0432\u0430\u0448\u0435\u0439 \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0438."
+        ru: "\u0411\u0443\u0434\u044C\u0442\u0435 \u043E\u0441\u0442\u043E\u0440\u043E\u0436\u043D\u044B \u0441 \u043E\u043F\u0446\u0438\u044F\u043C\u0438 \u0437\u0434\u0435\u0441\u044C (\u043E\u0441\u043E\u0431\u0435\u043D\u043D\u043E \u0441 \u0444\u043B\u0430\u0433\u0430\u043C\u0438 \u0444\u0443\u043D\u043A\u0446\u0438\u0439), \u0442\u0430\u043A \u043A\u0430\u043A \u043E\u043D\u0438 \u043C\u043E\u0433\u0443\u0442 \u043D\u0430\u0440\u0443\u0448\u0438\u0442\u044C \u0440\u0430\u0431\u043E\u0442\u0443 \u0432\u0430\u0448\u0435\u0439 \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0438.",
+        pl: "Zachowaj ostro\u017Cno\u015B\u0107 przy korzystaniu z tych ustawie\u0144 (zw\u0142aszcza flag funkcji), poniewa\u017C mog\u0105 one spowodowa\u0107 uszkodzenie instalacji."
       }
     },
     flags: {
@@ -92655,7 +92774,8 @@
       it: "Aggiorna a {v}",
       pt: "Atualizar para {v}",
       sv: "Uppdatera till {v}",
-      ru: "\u041E\u0431\u043D\u043E\u0432\u0438\u0442\u044C \u0434\u043E {v}"
+      ru: "\u041E\u0431\u043D\u043E\u0432\u0438\u0442\u044C \u0434\u043E {v}",
+      pl: "Aktualizuj do {v}"
     },
     all: {
       // all photos
@@ -93165,7 +93285,8 @@
       it: "Segnala un problema",
       pt: "Relatar problema",
       sv: "Rapportera problem",
-      ru: "\u0421\u043E\u043E\u0431\u0449\u0438\u0442\u044C \u043E \u043F\u0440\u043E\u0431\u043B\u0435\u043C\u0435"
+      ru: "\u0421\u043E\u043E\u0431\u0449\u0438\u0442\u044C \u043E \u043F\u0440\u043E\u0431\u043B\u0435\u043C\u0435",
+      pl: "Zg\u0142o\u015B problem"
     },
     opens_your_value_settings: {
       // DE: is this used both for profile settings and bleh settings in the quick switcher? ~Myrai
@@ -93342,7 +93463,8 @@
       de: "Collage erstellen",
       ru: "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u043A\u043E\u043B\u043B\u0430\u0436",
       es: "Crear collage",
-      it: "Crea collage"
+      it: "Crea collage",
+      pl: "Stw\xF3rz kola\u017C"
     },
     create_a_collage: {
       en: "Create a collage of your choosing",
@@ -93351,7 +93473,8 @@
       it: "Crea un collage a tua scelta",
       pt: "Crie uma colagem de sua escolha",
       sv: "Skapa ett collage som du vill",
-      ru: "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u043A\u043E\u043B\u043B\u0430\u0436 \u043D\u0430 \u0432\u0430\u0448 \u0432\u044B\u0431\u043E\u0440"
+      ru: "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u043A\u043E\u043B\u043B\u0430\u0436 \u043D\u0430 \u0432\u0430\u0448 \u0432\u044B\u0431\u043E\u0440",
+      pl: "Stw\xF3rz dowolny kola\u017C"
     },
     search_for_music_or_user: {
       en: "Search for music or a user",
@@ -93360,7 +93483,8 @@
       it: "Cerca musica o un utente",
       pt: "Pesquise por m\xFAsica ou usu\xE1rio",
       sv: "S\xF6k musik eller en anv\xE4ndare",
-      ru: "\u0418\u0441\u043A\u0430\u0442\u044C \u043C\u0443\u0437\u044B\u043A\u0443 \u0438\u043B\u0438 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F"
+      ru: "\u0418\u0441\u043A\u0430\u0442\u044C \u043C\u0443\u0437\u044B\u043A\u0443 \u0438\u043B\u0438 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F",
+      pl: "Wyszukaj muzyk\u0119 albo u\u017Cytkownika"
     },
     search_for_value: {
       en: "Search for {v}",
@@ -93614,7 +93738,8 @@
       it: "Aggiornamenti",
       pt: "Atualiza\xE7\xF5es",
       sv: "Uppdateringar",
-      ru: "\u041E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u044F"
+      ru: "\u041E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u044F",
+      pl: "Aktualizacje"
     },
     updated: {
       en: "Updated",
@@ -93639,7 +93764,8 @@
       it: "Sei aggiornato",
       pt: "Voc\xEA est\xE1 atualizado",
       sv: "Du \xE4r p\xE5 den senaste versionen",
-      ru: "\u0423 \u0432\u0430\u0441 \u043F\u043E\u0441\u043B\u0435\u0434\u043D\u044F\u044F \u0432\u0435\u0440\u0441\u0438\u044F"
+      ru: "\u0423 \u0432\u0430\u0441 \u043F\u043E\u0441\u043B\u0435\u0434\u043D\u044F\u044F \u0432\u0435\u0440\u0441\u0438\u044F",
+      pl: "Jeste\u015B na bie\u017C\u0105co"
     },
     update_available_to_install: {
       en: "Update available to install",
@@ -93676,7 +93802,8 @@
       it: "Controlla",
       pt: "Verificar",
       sv: "Checka",
-      ru: "\u041F\u0440\u043E\u0432\u0435\u0440\u0438\u0442\u044C"
+      ru: "\u041F\u0440\u043E\u0432\u0435\u0440\u0438\u0442\u044C",
+      pl: "Sprawd\u017A"
     },
     last_checked_date: {
       en: "Last checked {d}",
@@ -94403,7 +94530,8 @@
       it: "Confronta con",
       sv: "J\xE4mf\xF6r",
       ru: "\u0421\u0440\u0430\u0432\u043D\u0438\u0442\u044C \u0441",
-      pt: "Comparar com"
+      pt: "Comparar com",
+      pl: "Por\xF3wnaj z"
     },
     value_settings: {
       en: "{v} Settings",
@@ -94799,7 +94927,8 @@
       it: "Branding",
       sv: "Branding",
       ru: "\u0411\u0440\u0435\u043D\u0434\u0438\u043D\u0433",
-      pt: "Branding"
+      pt: "Branding",
+      pl: "Branding"
     },
     branding_type: {
       name: {
@@ -94809,7 +94938,8 @@
         it: "Tipo di logo",
         pt: "Tipo de branding",
         sv: "Brandingalternativ",
-        ru: "\u0422\u0438\u043F \u0431\u0440\u0435\u043D\u0434\u0438\u043D\u0433\u0430"
+        ru: "\u0422\u0438\u043F \u0431\u0440\u0435\u043D\u0434\u0438\u043D\u0433\u0430",
+        pl: "Rodzaj brandingu"
       },
       body: {
         en: "Decide which branding source to use for the header",
@@ -94818,7 +94948,8 @@
         it: "Decidi quale sorgente di branding utilizzare per l\u2019intestazione",
         pt: "Escolha qual logo usar para o cabe\xE7alho",
         sv: "V\xE4lj vilken sorts branding f\xF6r att anv\xE4nda p\xE5 sidhuvudet",
-        ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435, \u043A\u0430\u043A\u043E\u0439 \u0438\u0441\u0442\u043E\u0447\u043D\u0438\u043A \u0431\u0440\u0435\u043D\u0434\u0438\u043D\u0433\u0430 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C \u0434\u043B\u044F \u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043A\u0430"
+        ru: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435, \u043A\u0430\u043A\u043E\u0439 \u0438\u0441\u0442\u043E\u0447\u043D\u0438\u043A \u0431\u0440\u0435\u043D\u0434\u0438\u043D\u0433\u0430 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C \u0434\u043B\u044F \u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043A\u0430",
+        pl: "Wybierz kt\xF3ry rodzaj brandingu chcesz u\u017Cywa\u0107 w nag\u0142\xF3wku "
       }
     },
     rain: {
@@ -94829,7 +94960,8 @@
         it: "Attiva pioggia",
         pt: "Ativar chuva",
         sv: "Aktivera regn",
-        ru: "\u0412\u043A\u043B\u044E\u0447\u0438\u0442\u044C \u044D\u0444\u0444\u0435\u043A\u0442 \u0434\u043E\u0436\u0434\u044F"
+        ru: "\u0412\u043A\u043B\u044E\u0447\u0438\u0442\u044C \u044D\u0444\u0444\u0435\u043A\u0442 \u0434\u043E\u0436\u0434\u044F",
+        pl: "Aktywuj efekt deszczu"
       },
       body: {
         en: "Immerse yourself in soothing visual rain",
@@ -94838,7 +94970,8 @@
         it: "Immergiti in una pioggia visuale rilassante",
         pt: "Mergulhe em uma chuva visual relaxante",
         sv: "Omsluta dig sj\xE4lv i en lugnande regneffekt",
-        ru: "\u041F\u043E\u0433\u0440\u0443\u0437\u0438\u0442\u0435\u0441\u044C \u0432 \u0443\u0441\u043F\u043E\u043A\u0430\u0438\u0432\u0430\u044E\u0449\u0438\u0439 \u0432\u0438\u0437\u0443\u0430\u043B\u044C\u043D\u044B\u0439 \u0434\u043E\u0436\u0434\u044C"
+        ru: "\u041F\u043E\u0433\u0440\u0443\u0437\u0438\u0442\u0435\u0441\u044C \u0432 \u0443\u0441\u043F\u043E\u043A\u0430\u0438\u0432\u0430\u044E\u0449\u0438\u0439 \u0432\u0438\u0437\u0443\u0430\u043B\u044C\u043D\u044B\u0439 \u0434\u043E\u0436\u0434\u044C",
+        pl: "Zanurz si\u0119 w koj\u0105cej wizualnej atmosferze deszczu"
       }
     },
     images: {
@@ -94848,7 +94981,8 @@
       it: "Immagini",
       pt: "Imagens",
       sv: "Bilder",
-      ru: "\u0418\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u044F"
+      ru: "\u0418\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u044F",
+      pl: "Obrazy"
     },
     static_gifs: {
       en: "Control animation of GIFs",
@@ -96060,7 +96194,8 @@
       de: "Nach Einstellungen suchen",
       es: "Buscar opciones",
       ru: "\u041F\u043E\u0438\u0441\u043A \u043D\u0430\u0441\u0442\u0440\u043E\u0435\u043A",
-      it: "Cerca le impostazioni"
+      it: "Cerca le impostazioni",
+      pl: "Wyszukaj ustawie\u0144"
     },
     found_value_results: {
       en: "Found {c} result(s)",
@@ -96138,7 +96273,8 @@
       de: "Wird gerade gescrobbelt",
       es: "Haciendo scrobbling ahora",
       ru: "\u0421\u043A\u0440\u043E\u0431\u0431\u043B\u0438\u0442\u0441\u044F \u0441\u0435\u0439\u0447\u0430\u0441",
-      it: "Scrobbling in corso"
+      it: "Scrobbling in corso",
+      pl: "Scrobblowane teraz"
     },
     recent_scrobble: {
       en: "Recently scrobbled",
@@ -96347,19 +96483,22 @@
     better_with_friends: {
       en: "Music is better with friends, {a}add to your close friends list{/a}",
       pt: "M\xFAsica \xE9 melhor com amigos, {a}adicione \xE0 sua lista de amigos pr\xF3ximos{/a}",
-      es: "La m\xFAsica es mejor con amigos, {a}a\xF1ade a tu lista de amigos cercanos{/a}"
+      es: "La m\xFAsica es mejor con amigos, {a}a\xF1ade a tu lista de amigos cercanos{/a}",
+      pl: "Muzyka brzmi lepiej w gronie przyjaci\xF3\u0142, {a}dodaj do listy bliskich przyjaci\xF3\u0142{/a} "
     },
     collage_cta: {
       // used to 'advertise' collages
       name: {
         en: "Create a collage",
         pt: "Criar uma colagem",
-        es: "Crear un collage"
+        es: "Crear un collage",
+        pl: "Stw\xF3rz kola\u017C"
       },
       body: {
         en: "Featuring your favourite albums in the last month",
         pt: "Com seus \xE1lbuns favoritos do \xFAltimo m\xEAs",
-        es: "Con tus \xE1lbumes favoritos en el \xFAltimo mes"
+        es: "Con tus \xE1lbumes favoritos en el \xFAltimo mes",
+        pl: "Twoje ulubione albumy z ostatniego miesi\u0105ca"
       }
     },
     compare_cta: {
@@ -96367,12 +96506,14 @@
       name: {
         en: "Compare with your friends",
         pt: "Comparar com seus amigos",
-        es: "Comparar con tus amigos"
+        es: "Comparar con tus amigos",
+        pl: "Por\xF3wnaj ze swoimi znajomymi"
       },
       body: {
         en: "Which music do you have in common?",
         pt: "Quais m\xFAsicas voc\xEAs t\xEAm em comum?",
-        es: "\xBFQu\xE9 m\xFAsica tienen en com\xFAn?"
+        es: "\xBFQu\xE9 m\xFAsica tienen en com\xFAn?",
+        pl: "Jaka muzyka was \u0142\u0105czy"
       }
     },
     sponsor_cta: {
@@ -96380,7 +96521,8 @@
       body: {
         en: "Help out the future of bleh",
         pt: "Ajude o futuro do bleh",
-        es: "Ayuda al futuro de bleh"
+        es: "Ayuda al futuro de bleh",
+        pl: "Pom\xF3\u017C w budowaniu przysz\u0142o\u015Bci bleh"
       }
     },
     add_new_data_point: {
@@ -96435,7 +96577,8 @@
     under_construction: {
       en: "This page is under construction, please give feedback and suggestions if you have any!",
       pt: "Esta p\xE1gina est\xE1 em constru\xE7\xE3o; envie coment\xE1rios e sugest\xF5es se tiver algum!",
-      es: "Esta p\xE1gina est\xE1 en construcci\xF3n, \xA1por favor da feedback y sugerencias si tienes alguna!"
+      es: "Esta p\xE1gina est\xE1 en construcci\xF3n, \xA1por favor da feedback y sugerencias si tienes alguna!",
+      pl: "Ta strona jest w budowie, je\u015Bli masz jakie\u015B uwagi lub sugestie, podziel si\u0119 nimi z nami!"
     },
     data_source: {
       en: "Data source",
@@ -96513,7 +96656,8 @@
       // there are then links after this
       en: "Having issues updating or need support in general?",
       pt: "Est\xE1 com problemas para atualizar ou precisa de suporte em geral?",
-      es: "\xBFTienes problemas al actualizar o necesitas soporte en general?"
+      es: "\xBFTienes problemas al actualizar o necesitas soporte en general?",
+      pl: "Masz problemy z aktualizacj\u0105 lub potrzebujesz og\xF3lnej pomocy?"
     },
     hybrid_inbox: {
       name: {
@@ -96568,17 +96712,21 @@
     },
     developer_mode: {
       name: {
-        en: "Developer mode"
+        en: "Developer mode",
+        pt: "Modo de desenvolvedor"
       },
       body: {
-        en: "Enable developer-specific features used for debugging purposes"
+        en: "Enable developer-specific features used for debugging purposes",
+        pt: "Ative recursos espec\xEDficos de desenvolvedor usados para fins de depura\xE7\xE3o"
       }
     },
     developer_setting_names: {
-      en: "Show internal setting ids"
+      en: "Show internal setting ids",
+      pt: "Mostrar IDs internos das configura\xE7\xF5es"
     },
     show_scroller: {
-      en: "Show page scrollbar"
+      en: "Show page scrollbar",
+      pt: "Mostrar barra de rolagem da p\xE1gina"
     }
   };
   var translation_fallback = "NO_TRANSLATION_FOUND";
@@ -98207,7 +98355,7 @@
         date: "2026-07-01"
       }
     },
-    built_on: "2026-07-29T17:33:39.503Z"
+    built_on: "2026-08-06T12:29:19.231Z"
   };
 
   // node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
