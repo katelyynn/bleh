@@ -54326,7 +54326,7 @@ var bleh = (() => {
           name.textContent.trim(),
           artist.textContent.trim()
         );
-        if (useSettings.get("format_guest_features")) {
+        if (useSettings2.get("format_guest_features")) {
           const name_elem = name;
           const artist_elem = artist;
           const song_title = name_elem.getAttribute("title");
@@ -115415,7 +115415,7 @@ var bleh = (() => {
         date: "2026-07-30"
       }
     },
-    built_on: "2026-08-06T23:16:44.860Z"
+    built_on: "2026-08-06T23:25:34.988Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
