@@ -11789,7 +11789,7 @@ export function tl(key: translation | string, replacements = {}) {
 		return translation_fallback;
 	}
 
-	let translation = sanitise_text((key[lang] || key.en) as string);
+	let translation = (key[lang] || key.en) as string;
 
 	if (page.state.april && translation.includes('Last.fm Pro')) {
 		translation = translation.replaceAll('Last.fm Pro', 'Verified');
