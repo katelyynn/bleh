@@ -49,15 +49,13 @@ export function SettingSwitch({
 	let value = bind ? useSettings.get(bind) as boolean : true;
 	const checkbox = createRef();
 
+	const uuid = crypto.randomUUID();
+
 	if (bind) {
-		useSettings.on(bind, (val) => {
-			console.info(
-				'received call that value changed for',
-				bind,
-				'to',
-				val,
-			);
-			set(val as boolean);
+		useSettings.on(bind, (val, id) => {
+			if (id == uuid) return;
+
+			set(val as boolean, true);
 		});
 	}
 
@@ -69,12 +67,6 @@ export function SettingSwitch({
 		if (store.incompatible) {
 			Object.entries(store.incompatible).forEach(([key]) => {
 				useSettings.on(key, () => {
-					console.info(
-						'checking incompatibilies with',
-						key,
-						'for',
-						bind,
-					);
 					update();
 				});
 			});
@@ -143,14 +135,14 @@ export function SettingSwitch({
 
 	update();
 
-	function set(val: boolean) {
+	function set(val: boolean, received = false) {
 		if (value == val) return;
 
 		value = val;
 		checkbox.current.checked = value;
 
 		if (bind) {
-			useSettings.set(bind, val);
+			if (!received) useSettings.set(bind, val, uuid);
 		} else {
 			if (onChange) onChange(value);
 		}

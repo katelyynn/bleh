@@ -224,7 +224,7 @@ export function invoke_reload() {
 	window.location.reload();
 }
 
-type listener = (val: setting_value) => void;
+type listener = (val: setting_value, uuid?: string) => void;
 
 class Settings {
 	private data = new Map<string, setting_value>();
@@ -245,15 +245,11 @@ class Settings {
 		return settings_store[key];
 	}
 
-	public set(key: string, val: setting_value, callback?: listener) {
+	public set(key: string, val: setting_value, uuid?: string) {
 		this.data.set(key, val);
 
 		this.listeners.get(key)?.forEach((cb) => {
-			// u can optionally pass the callback here too,
-			// which can reduce duplicate calls
-			if (callback && cb == callback) return;
-
-			cb(val);
+			cb(val, uuid);
 		});
 	}
 
