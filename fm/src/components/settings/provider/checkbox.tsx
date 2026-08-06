@@ -21,6 +21,7 @@ import { Checkbox } from '@/components/settings/clickables/checkbox.tsx';
 interface SettingCheckboxProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
 	bind?: string;
+	standalone?: boolean;
 	icon?: string;
 	name?: string;
 	body?: string;
@@ -38,6 +39,7 @@ type SettingCheckboxElement = HTMLDivElement & {
 export function SettingCheckbox({
 	ref,
 	bind,
+	standalone = false,
 	icon,
 	name,
 	body,
@@ -103,7 +105,7 @@ export function SettingCheckbox({
 
 	const elem = (
 		<div
-			class='setting'
+			class={['setting', standalone && 'standalone']}
 			data-type='toggle'
 			id={`setting_${bind}`}
 			onMouseEnter={onMouseEnter}

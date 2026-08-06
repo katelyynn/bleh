@@ -32,6 +32,11 @@ import { SettingSwitch } from '@/components/settings/provider/switch.tsx';
 import { SettingRange } from '@/components/settings/provider/range.tsx';
 import { createRef } from 'jsx-dom';
 import { SettingColour } from '@/components/settings/provider/colour.tsx';
+import {
+	SettingOptions,
+	SettingOptionsSeparator,
+} from '@/components/settings/provider/options.tsx';
+import { SettingCheckbox } from '@/components/settings/provider/checkbox.tsx';
 
 export function visual() {
 	if (
@@ -49,8 +54,7 @@ export function visual() {
 
 	register_skip_to([]);
 
-	let colourful_active;
-	let colourful_all;
+	const colourful_active = createRef();
 
 	let font_choice;
 	let custom_font;
@@ -129,6 +133,29 @@ export function visual() {
 					}}
 					season={season}
 				/>
+				<SettingGroup>
+					<SettingOptions
+						name={tl(trans.change_my_colour_when.name)}
+						body={tl(trans.change_my_colour_when.body)}
+					>
+						<SettingCheckbox standalone bind='hue_from_artist' />
+						<SettingCheckbox standalone bind='hue_from_album' />
+						<SettingCheckbox standalone bind='hue_from_track' />
+						<SettingOptionsSeparator />
+						<SettingCheckbox
+							standalone
+							bind='colourful_tracks'
+							ref={colourful_active}
+						/>
+						<SettingCheckbox
+							standalone
+							bind='colourful_tracks_all'
+							onChange={() => {
+								colourful_active.current.update();
+							}}
+						/>
+					</SettingOptions>
+				</SettingGroup>
 			</section>
 		</>,
 	);
@@ -184,35 +211,7 @@ export function visual() {
 							<h5>${tl(trans.change_my_colour_when.name)}</h5>
 							<p>${tl(trans.change_my_colour_when.body)}</p>
 						</div>
-						<div class="primary-selections">
-			                ${setting({
-				id: 'hue_from_artist',
-				standalone: true,
-			})}
-			                ${setting({
-				id: 'hue_from_album',
-				standalone: true,
-			})}
-			                ${setting({
-				id: 'hue_from_track',
-				standalone: true,
-			})}
-			                <div class="primary-selection-sep" />
-			                ${colourful_active = setting({
-				id: 'colourful_tracks',
-				standalone: true,
-				func: () => {
-					colourful_all.compat();
-				},
-			})}
-			                ${colourful_all = setting({
-				id: 'colourful_tracks_all',
-				standalone: true,
-				func: () => {
-					colourful_active.compat();
-				},
-			})}
-			            </div>
+						<div class="primary-selections"></div>
 					</div>
 				</div>
 			</section>
