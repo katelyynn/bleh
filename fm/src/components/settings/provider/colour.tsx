@@ -319,7 +319,10 @@ function is_active(
 	entry: colour,
 	colour: colour_response,
 ) {
-	if (entry.type == 'placeholder' && !['colour', 'customise'].includes(colour.type)) return false;
+	if (
+		entry.type == 'placeholder' &&
+		!['colour', 'customise'].includes(colour.type)
+	) return false;
 
 	if (colour.type == 'season') {
 		if (!entry.sets || entry.type != 'season') return false;
@@ -445,6 +448,11 @@ export function ColourSwatch({
 				>
 					{colour.label && tl(colour.label)}
 				</strong>
+				{colour.seasonal && (
+					<p class={['swatch-desc']}>
+						{tl(trans.seasonal.exclusive)}
+					</p>
+				)}
 			</div>
 		</button>
 	) as ColourSwatchElement;
