@@ -414,7 +414,6 @@ export function mualani() {
 					</DemoItem>
 					<DemoItem label='SettingColour'>
 						<SettingColour
-							ref={colour}
 							colour={{
 								type: settings.accent_type as colour_type,
 								hue: settings.hue as number,
@@ -491,6 +490,22 @@ export function mualani() {
 									lit: 1.05,
 								},
 							]}
+						/>
+						<SettingColour
+							colour={{
+								type: settings.accent_type as colour_type,
+								hue: settings.hue as number,
+								sat: settings.sat as number,
+								lit: settings.lit as number,
+							}}
+							season={{
+								id: 'christmas',
+								start: DateTime.fromISO('2026-08-05'),
+								end: DateTime.fromISO('2026-08-05'),
+								snowflakes: {
+									state: false,
+								},
+							}}
 						/>
 					</DemoItem>
 				</DemoGrid>

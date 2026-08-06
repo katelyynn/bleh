@@ -25,6 +25,7 @@ import { SettingRange } from '@/components/settings/provider/range.tsx';
 import { SettingInput } from '@/components/settings/provider/input.tsx';
 import { clamp_lit, clamp_sat, hex_to_oklch } from '@/build/tools.ts';
 import { page } from '@/build/page.ts';
+import { useSettings } from '@/config.ts';
 
 interface SettingColourProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
@@ -52,6 +53,36 @@ export function SettingColour({
 	season,
 	onChange,
 }: SettingColourProps) {
+	const uuid = crypto.randomUUID();
+
+	useSettings.on('hue', (val, id) => {
+		if (id == uuid) return;
+
+		colour.hue = val as number;
+		update();
+	});
+
+	useSettings.on('sat', (val, id) => {
+		if (id == uuid) return;
+
+		colour.sat = val as number;
+		update();
+	});
+
+	useSettings.on('lit', (val, id) => {
+		if (id == uuid) return;
+
+		colour.lit = val as number;
+		update();
+	});
+
+	useSettings.on('accent_type', (val, id) => {
+		if (id == uuid) return;
+
+		colour.type = val as colour_type;
+		update();
+	});
+
 	let list: ColourSwatchElement[] = [];
 
 	let seasonal: colour[] = [];
@@ -306,6 +337,11 @@ export function SettingColour({
 		});
 
 		if (onChange) onChange(colour);
+
+		useSettings.set('hue', colour.hue, uuid);
+		useSettings.set('sat', colour.sat, uuid);
+		useSettings.set('lit', colour.lit, uuid);
+		useSettings.set('accent_type', colour.type, uuid);
 
 		const preview = page.state.colour_preview;
 		const bg_colour = window.getComputedStyle(preview).backgroundColor;

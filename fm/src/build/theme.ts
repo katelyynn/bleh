@@ -82,7 +82,6 @@ export const dark_themes = [
 // this lets you mark which themes dont support changing the
 // saturation of the background elements
 export const saturation_themes_unsupported = [
-	'light',
 	'rose_pine',
 	'rose_pine_dawn',
 	'kanagawa_dragon',

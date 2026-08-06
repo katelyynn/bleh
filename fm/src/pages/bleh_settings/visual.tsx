@@ -77,27 +77,11 @@ export function visual() {
 						theme_day: settings.theme_day as string,
 						theme_night: settings.theme_night as string,
 					}}
-					onChange={(val) => {
-						if (settings.theme != val.id) {
-							save_setting('theme', val.id);
-						}
-						if (settings.theme_day != val.theme_day) {
-							save_setting('theme_day', val.theme_day);
-						}
-						if (settings.theme_night != val.theme_night) {
-							save_setting(
-								'theme_night',
-								val.theme_night,
-							);
-						}
-
-						sat_bg.current.update();
-					}}
 				/>
 				<SettingGroup>
 					<SettingSwitch bind='solarium' />
 					<SettingRange bind='noise' />
-					<SettingRange bind='sat_bg' ref={sat_bg} />
+					<SettingRange bind='sat_bg' />
 				</SettingGroup>
 			</section>
 			<section class='bleh--panel'>
