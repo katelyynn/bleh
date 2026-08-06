@@ -226,7 +226,7 @@ export function invoke_reload() {
 
 type listener = (val: setting_value) => void;
 
-export class use_settings {
+class Settings {
 	private data = new Map<string, setting_value>();
 
 	private listeners = new Map<string, listener[]>();
@@ -267,6 +267,8 @@ export class use_settings {
 		this.listeners.get(key)!.push(callback);
 	}
 }
+
+export const useSettings = new Settings();
 
 export function update_colour_swatches() {
 	let found = false;

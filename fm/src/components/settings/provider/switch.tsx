@@ -16,6 +16,7 @@ import { Switch } from '@/components/settings/clickables/switch.tsx';
 import { tl } from '@/build/trans.ts';
 import { save_setting } from '@/components/settings/settings.tsx';
 import { SettingIcon } from '@/components/settings/provider/icon.tsx';
+import { useSettings } from '@/config.ts';
 
 interface SettingSwitchProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
@@ -45,8 +46,12 @@ export function SettingSwitch({
 	onMouseEnter,
 	onMouseLeave,
 }: SettingSwitchProps) {
-	let value = bind ? settings[bind] as boolean : true;
+	let value = bind ? useSettings.get(bind) as boolean : true;
 	const checkbox = createRef();
+
+	if (bind) {
+		useSettings.on(bind, (val) => set(val as boolean));
+	}
 
 	const store = get_from_store(bind);
 
@@ -120,8 +125,12 @@ export function SettingSwitch({
 		value = val;
 		checkbox.current.checked = value;
 
-		if (bind) save_setting(bind, value);
-		if (onChange) onChange(value);
+		if (bind) {
+			useSettings.set(bind, val);
+		} else {
+			if (onChange) onChange(value);
+		}
+
 		if (onMouseEnter) onMouseEnter();
 	}
 
