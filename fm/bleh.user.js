@@ -69320,77 +69320,6 @@ var bleh = (() => {
     `;
   }
 
-  // src/build/theme.ts
-  var themes = {
-    light: {
-      name: trans.themes.light,
-      type: "light",
-      icon: icons.theme_light
-    },
-    ink: {
-      name: trans.themes.ink,
-      type: "light",
-      icon: icons.theme_ink
-    },
-    dark: {
-      name: trans.themes.dark,
-      type: "dark",
-      icon: icons.theme_dark
-    },
-    darker: {
-      name: trans.themes.darker,
-      type: "dark",
-      icon: icons.theme_darker
-    },
-    oled: {
-      name: trans.themes.oled,
-      type: "dark",
-      icon: icons.theme_oled
-    },
-    rose_pine: {
-      name: trans.themes.rose_pine,
-      type: "dark",
-      external: true,
-      new_release: true
-    },
-    rose_pine_dawn: {
-      name: trans.themes.rose_pine_dawn,
-      type: "light",
-      external: true,
-      new_release: true
-    },
-    kanagawa_dragon: {
-      name: trans.themes.kanagawa_dragon,
-      type: "dark",
-      external: true,
-      new_release: true
-    },
-    kanagawa: {
-      name: trans.themes.kanagawa,
-      type: "light",
-      external: true,
-      new_release: true
-    }
-  };
-  var light_themes = [
-    "light",
-    "ink",
-    "rose_pine_dawn"
-  ];
-  var dark_themes = [
-    "dark",
-    "darker",
-    "oled",
-    "rose_pine",
-    "kanagawa_dragon"
-  ];
-  var saturation_themes_unsupported = [
-    "rose_pine",
-    "rose_pine_dawn",
-    "kanagawa_dragon",
-    "kanagawa"
-  ];
-
   // src/components/settings/settings.tsx
   function setting({ id = "", text: text4 = true, focus = false, standalone = false, func, list, center = true, in_menu = false, mouseenter, mouseleave }) {
     try {
@@ -70425,16 +70354,16 @@ var bleh = (() => {
     });
   }
   function save_setting(id, value) {
+    log(`saving ${id}`, "settings", "info", {
+      value
+    });
     const store = settings_store[id] || {};
     const type = store.type || "toggle";
-    console.info("saved", value, typeof value);
     settings[id] = value;
-    console.info("saved setting", settings[id], typeof settings[id]);
     if (!other_setting_types.includes(type) && store.bubble) {
       document.body.setAttribute(`data-bleh--${id}`, String(value));
     }
     if (id == "theme") {
-      settings.theme_type = themes[value].type;
       document.body.setAttribute(`data-bleh--theme_type`, settings.theme_type);
       chart_reflow();
     }
@@ -76518,7 +76447,7 @@ var bleh = (() => {
   }
   function friends_button(parent) {
     let friend_state = settings.friends.includes(page.name);
-    let star_state = useSettings.get("starred_friend") == page.name;
+    let star_state = useSettings2.get("starred_friend") == page.name;
     if (!friend_state && star_state) {
       star_state = false;
       save_setting("starred_friend", "");
@@ -76547,7 +76476,7 @@ var bleh = (() => {
               (item) => item != page.name
             );
             save_setting("friends", new_list);
-            if (page.name == useSettings.get("starred_friend")) {
+            if (page.name == useSettings2.get("starred_friend")) {
               save_setting("starred_friend", "");
             }
             dialog_rm({ id: "remove_friend" });
@@ -83525,6 +83454,77 @@ var bleh = (() => {
       ]
     });
   }
+
+  // src/build/theme.ts
+  var themes = {
+    light: {
+      name: trans.themes.light,
+      type: "light",
+      icon: icons.theme_light
+    },
+    ink: {
+      name: trans.themes.ink,
+      type: "light",
+      icon: icons.theme_ink
+    },
+    dark: {
+      name: trans.themes.dark,
+      type: "dark",
+      icon: icons.theme_dark
+    },
+    darker: {
+      name: trans.themes.darker,
+      type: "dark",
+      icon: icons.theme_darker
+    },
+    oled: {
+      name: trans.themes.oled,
+      type: "dark",
+      icon: icons.theme_oled
+    },
+    rose_pine: {
+      name: trans.themes.rose_pine,
+      type: "dark",
+      external: true,
+      new_release: true
+    },
+    rose_pine_dawn: {
+      name: trans.themes.rose_pine_dawn,
+      type: "light",
+      external: true,
+      new_release: true
+    },
+    kanagawa_dragon: {
+      name: trans.themes.kanagawa_dragon,
+      type: "dark",
+      external: true,
+      new_release: true
+    },
+    kanagawa: {
+      name: trans.themes.kanagawa,
+      type: "light",
+      external: true,
+      new_release: true
+    }
+  };
+  var light_themes = [
+    "light",
+    "ink",
+    "rose_pine_dawn"
+  ];
+  var dark_themes = [
+    "dark",
+    "darker",
+    "oled",
+    "rose_pine",
+    "kanagawa_dragon"
+  ];
+  var saturation_themes_unsupported = [
+    "rose_pine",
+    "rose_pine_dawn",
+    "kanagawa_dragon",
+    "kanagawa"
+  ];
 
   // src/components/settings/provider/icon.tsx
   function SettingIcon({ name }) {
@@ -92887,6 +92887,7 @@ var bleh = (() => {
     data = /* @__PURE__ */ new Map();
     listeners = /* @__PURE__ */ new Map();
     constructor() {
+      log("constructing...", "settings");
       this.rebuild();
     }
     rebuild() {
@@ -92902,9 +92903,6 @@ var bleh = (() => {
         } else {
           this.change(key, settings_store[key].default);
         }
-        this.on(key, (value) => {
-          save_setting(key, value);
-        });
       }
     }
     get(key) {
@@ -114589,8 +114587,6 @@ var bleh = (() => {
       on_mutation: main_flow,
       on_page_change: load_page,
       on_subpage_change: () => {
-        useSettings2.rebuild();
-        load_settings();
         if (page.state.settings_reload) {
           page.state.settings_reload = false;
         }
@@ -115608,7 +115604,7 @@ var bleh = (() => {
         date: "2026-07-30"
       }
     },
-    built_on: "2026-08-06T20:30:17.335Z"
+    built_on: "2026-08-06T21:37:13.605Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

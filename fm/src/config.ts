@@ -223,6 +223,7 @@ export class Settings {
 	private listeners = new Map<string, listener[]>();
 
 	constructor() {
+		log('constructing...', 'settings');
 		this.rebuild();
 	}
 
@@ -243,10 +244,6 @@ export class Settings {
 			} else {
 				this.change(key, settings_store[key].default);
 			}
-
-			this.on(key, (value: setting_value) => {
-				save_setting(key, value);
-			});
 		}
 	}
 

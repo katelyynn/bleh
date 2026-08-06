@@ -7,7 +7,6 @@
 import {
 	setting_instance,
 	setting_value,
-	settings,
 	settings_store,
 } from '@/build/config.ts';
 import { tl, trans } from '@/build/trans.ts';

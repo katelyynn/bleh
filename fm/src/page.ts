@@ -185,8 +185,8 @@ export function bleh() {
 		on_mutation: main_flow,
 		on_page_change: load_page,
 		on_subpage_change: () => {
-			useSettings.rebuild();
-			load_settings();
+			//useSettings.rebuild();
+			//load_settings();
 
 			if (page.state.settings_reload) {
 				page.state.settings_reload = false;

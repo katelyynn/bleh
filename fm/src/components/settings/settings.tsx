@@ -1686,19 +1686,19 @@ function reset_text(id, input, submit, option, reset_btn, avatar) {
 }
 
 export function save_setting(id: string, value: setting_value) {
+	log(`saving ${id}`, 'settings', 'info', { value });
 	const store = settings_store[id] || {};
 	const type = store.type || 'toggle';
 
-	console.info('saved', value, typeof value);
 	settings[id] = value;
-	console.info('saved setting', settings[id], typeof settings[id]);
 
 	if (!other_setting_types.includes(type) && store.bubble) {
 		document.body.setAttribute(`data-bleh--${id}`, String(value));
 	}
 
 	if (id == 'theme') {
-		settings.theme_type = themes[value as string].type;
+		// causing issues with loading
+		//settings.theme_type = themes[value as string].type;
 
 		document.body.setAttribute(
 			`data-bleh--theme_type`,
