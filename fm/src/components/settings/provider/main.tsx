@@ -14,6 +14,7 @@ import { tl, trans } from '@/build/trans.ts';
 import { Icon, icons } from '@/components/shared/icon.tsx';
 import { SettingReset } from '@/components/settings/provider/reset.tsx';
 import { createRef } from 'jsx-dom';
+import { useSettings } from '@/config.ts';
 
 interface SettingLabelProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
@@ -100,7 +101,10 @@ export function is_incompatible(store: setting_instance) {
 
 	Object.entries(store.incompatible).forEach(([key, val], index) => {
 		if (Array.isArray(val)) {
-			if (val.includes(settings[key])) {
+			const value = useSettings.get(key);
+			val = val as setting_value[];
+
+			if (value && val.includes(value)) {
 				incompatible = true;
 				list[key] = val;
 
@@ -111,7 +115,9 @@ export function is_incompatible(store: setting_instance) {
 				}
 			}
 		} else {
-			if (JSON.stringify(val) == JSON.stringify(settings[key])) {
+			const value = useSettings.get(key);
+
+			if (JSON.stringify(val) == JSON.stringify(value)) {
 				incompatible = true;
 				list[key] = val;
 

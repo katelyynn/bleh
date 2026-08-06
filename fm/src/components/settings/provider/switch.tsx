@@ -50,13 +50,35 @@ export function SettingSwitch({
 	const checkbox = createRef();
 
 	if (bind) {
-		useSettings.on(bind, (val) => set(val as boolean));
+		useSettings.on(bind, (val) => {
+			console.info(
+				'received call that value changed for',
+				bind,
+				'to',
+				val,
+			);
+			set(val as boolean);
+		});
 	}
 
 	const store = get_from_store(bind);
 
 	if (store) {
 		if (!icon) icon = store.icon;
+
+		if (store.incompatible) {
+			Object.entries(store.incompatible).forEach(([key]) => {
+				useSettings.on(key, () => {
+					console.info(
+						'checking incompatibilies with',
+						key,
+						'for',
+						bind,
+					);
+					update();
+				});
+			});
+		}
 	}
 
 	function update() {
@@ -122,6 +144,8 @@ export function SettingSwitch({
 	update();
 
 	function set(val: boolean) {
+		if (value == val) return;
+
 		value = val;
 		checkbox.current.checked = value;
 
