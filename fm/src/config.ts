@@ -7,6 +7,7 @@
 import {
 	inbuilt_settings,
 	other_setting_types,
+	setting_value,
 	settings,
 	settings_store,
 } from '@/build/config';
@@ -155,7 +156,11 @@ export function migrations(version: number) {
 		}
 	}
 
-	if (!['circle', 'squircle', 'square'].includes(settings.avatar_radius as string)) {
+	if (
+		!['circle', 'squircle', 'square'].includes(
+			settings.avatar_radius as string,
+		)
+	) {
 		if (Number(settings.avatar_radius) == 0) {
 			settings.avatar_radius = 'square';
 		} else if (Number(settings.avatar_radius) == 25) {
@@ -217,6 +222,50 @@ export function request_reload() {
 }
 export function invoke_reload() {
 	window.location.reload();
+}
+
+type listener = (val: setting_value) => void;
+
+export class use_settings {
+	private data = new Map<string, setting_value>();
+
+	private listeners = new Map<string, listener[]>();
+
+	constructor() {
+		for (const key in settings_store) {
+			this.data.set(key, settings_store[key].default);
+		}
+	}
+
+	public get(key: string) {
+		return this.data.get(key);
+	}
+
+	public store(key: string) {
+		return settings_store[key];
+	}
+
+	public set(key: string, val: setting_value, callback?: listener) {
+		this.data.set(key, val);
+
+		this.listeners.get(key)?.forEach((cb) => {
+			// u can optionally pass the callback here too,
+			// which can reduce duplicate calls
+			if (callback && cb == callback) return;
+
+			cb(val);
+		});
+	}
+
+	// members can subscribe to setting changes
+	// and receive the new value
+	public on(key: string, callback: listener) {
+		if (!this.listeners.has(key)) {
+			this.listeners.set(key, []);
+		}
+
+		this.listeners.get(key)!.push(callback);
+	}
 }
 
 export function update_colour_swatches() {
