@@ -16,6 +16,7 @@ import { save_setting } from '@/components/settings/settings.tsx';
 import { Input } from '@/components/input/input.tsx';
 import { SettingIcon } from '@/components/settings/provider/icon.tsx';
 import { Select, SelectOption } from '@/components/select/select.tsx';
+import { useSettings } from '@/config.ts';
 
 interface SettingSelectProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
@@ -53,6 +54,16 @@ export function SettingSelect({
 }: SettingSelectProps) {
 	if (bind) value = settings[bind] as string;
 
+	const uuid = crypto.randomUUID();
+
+	if (bind) {
+		useSettings.on(bind, (val, id) => {
+			if (id == uuid) return;
+
+			set(val as string, true);
+		});
+	}
+
 	const reset = createRef();
 
 	const store = get_from_store(bind);
@@ -60,6 +71,14 @@ export function SettingSelect({
 	if (store) {
 		if (!icon) icon = store.icon;
 		if (!values && store.values) values = store.values;
+
+		if (store.incompatible) {
+			Object.entries(store.incompatible).forEach(([key]) => {
+				useSettings.on(key, () => {
+					update();
+				});
+			});
+		}
 	}
 
 	function update() {
@@ -136,13 +155,18 @@ export function SettingSelect({
 
 	update();
 
-	function set(val: string) {
-		value = val;
+	function set(val: string, received = false) {
+		if (value == val) return;
 
+		value = val;
 		reset.current.value = val;
 
-		if (bind) save_setting(bind, val);
-		if (onChange) onChange(val);
+		if (bind) {
+			if (!received) useSettings.set(bind, val, uuid);
+		} else {
+			if (onChange) onChange(val);
+		}
+
 		if (onMouseEnter) onMouseEnter();
 	}
 

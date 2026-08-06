@@ -16,6 +16,7 @@ import { save_setting } from '@/components/settings/settings.tsx';
 import { Input } from '@/components/input/input.tsx';
 import { SettingIcon } from '@/components/settings/provider/icon.tsx';
 import { Range } from '@/components/range/range.tsx';
+import { useSettings } from '@/config.ts';
 
 interface SettingRangeProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
@@ -59,6 +60,16 @@ export function SettingRange({
 }: SettingRangeProps) {
 	if (bind) value = settings[bind] as number;
 
+	const uuid = crypto.randomUUID();
+
+	if (bind) {
+		useSettings.on(bind, (val, id) => {
+			if (id == uuid) return;
+
+			set(val as number, true);
+		});
+	}
+
 	const range = createRef();
 	const reset = createRef();
 
@@ -70,6 +81,14 @@ export function SettingRange({
 		if (store.max) max = store.max;
 		if (store.step) step = store.step;
 		if (store.suffix) suffix = store.suffix;
+
+		if (store.incompatible) {
+			Object.entries(store.incompatible).forEach(([key]) => {
+				useSettings.on(key, () => {
+					update();
+				});
+			});
+		}
 	}
 
 	function update() {
@@ -150,13 +169,19 @@ export function SettingRange({
 
 	update();
 
-	function set(val: number) {
+	function set(val: number, received = false) {
+		if (value == val) return;
+
 		value = val;
 
 		reset.current.value = val;
 
-		if (bind) save_setting(bind, val);
-		if (onChange) onChange(val);
+		if (bind) {
+			if (!received) useSettings.set(bind, val, uuid);
+		} else {
+			if (onChange) onChange(val);
+		}
+
 		if (onMouseEnter) onMouseEnter();
 	}
 

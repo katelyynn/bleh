@@ -139,12 +139,12 @@ export function SettingSwitch({
 		if (value == val) return;
 
 		value = val;
-		checkbox.current.checked = value;
+		checkbox.current.checked = val;
 
 		if (bind) {
 			if (!received) useSettings.set(bind, val, uuid);
 		} else {
-			if (onChange) onChange(value);
+			if (onChange) onChange(val);
 		}
 
 		if (onMouseEnter) onMouseEnter();

@@ -17,6 +17,7 @@ import { tl } from '@/build/trans.ts';
 import { save_setting } from '@/components/settings/settings.tsx';
 import { SettingIcon } from '@/components/settings/provider/icon.tsx';
 import { Checkbox } from '@/components/settings/clickables/checkbox.tsx';
+import { useSettings } from '@/config.ts';
 
 interface SettingCheckboxProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
@@ -48,13 +49,31 @@ export function SettingCheckbox({
 	onMouseEnter,
 	onMouseLeave,
 }: SettingCheckboxProps) {
-	let value = bind ? settings[bind] as boolean : true;
+	let value = bind ? useSettings.get(bind) as boolean : true;
 	const checkbox = createRef();
+
+	const uuid = crypto.randomUUID();
+
+	if (bind) {
+		useSettings.on(bind, (val, id) => {
+			if (id == uuid) return;
+
+			set(val as boolean, true);
+		});
+	}
 
 	const store = get_from_store(bind);
 
 	if (store) {
 		if (!icon) icon = store.icon;
+
+		if (store.incompatible) {
+			Object.entries(store.incompatible).forEach(([key]) => {
+				useSettings.on(key, () => {
+					update();
+				});
+			});
+		}
 	}
 
 	function update() {
@@ -119,12 +138,18 @@ export function SettingCheckbox({
 
 	update();
 
-	function set(val: boolean) {
-		value = val;
-		checkbox.current.checked = value;
+	function set(val: boolean, received = false) {
+		if (value == val) return;
 
-		if (bind) save_setting(bind, value);
-		if (onChange) onChange(value);
+		value = val;
+		checkbox.current.checked = val;
+
+		if (bind) {
+			if (!received) useSettings.set(bind, val, uuid);
+		} else {
+			if (onChange) onChange(val);
+		}
+
 		if (onMouseEnter) onMouseEnter();
 	}
 

@@ -18,6 +18,7 @@ import {
 	theme_min,
 	theme_schedule_dialog,
 } from '@/components/dialog/theme_schedule.tsx';
+import { useSettings } from '@/config.ts';
 
 interface SettingThemeProps {
 	theme: theme_response;
@@ -41,6 +42,36 @@ export function SettingTheme({
 	const adaptive_tip = createRef();
 	const adaptive_tip_wrap = createRef();
 
+	const uuid = crypto.randomUUID();
+
+	useSettings.on('theme', (val, id) => {
+		if (id == uuid) return;
+
+		theme.id = val as string;
+		update();
+	});
+
+	useSettings.on('theme_schedule', (val, id) => {
+		if (id == uuid) return;
+
+		theme.adaptive = val as boolean;
+		update();
+	});
+
+	useSettings.on('theme_day', (val, id) => {
+		if (id == uuid) return;
+
+		theme.theme_day = val as string;
+		update();
+	});
+
+	useSettings.on('theme_night', (val, id) => {
+		if (id == uuid) return;
+
+		theme.theme_night = val as string;
+		update();
+	});
+
 	const wrap = (
 		<>
 			<SettingGroup>
@@ -53,7 +84,7 @@ export function SettingTheme({
 							<ThemeBubble
 								id={id}
 								active={is_active(id, theme)}
-								onChange={set}
+								onChange={(id: string) => set({ id })}
 								key={i}
 							/>
 						) as ThemeBubbleElement;
@@ -75,7 +106,7 @@ export function SettingTheme({
 							<ThemeBubble
 								id={id}
 								active={is_active(id, theme)}
-								onChange={set}
+								onChange={(id: string) => set({ id })}
 								key={i}
 							/>
 						) as ThemeBubbleElement;
@@ -91,12 +122,10 @@ export function SettingTheme({
 						// handled already
 						if (!theme.adaptive && !val) return;
 
-						theme = {
-							...theme,
+						set({
 							id: match() as string,
 							adaptive: val,
-						};
-						update();
+						});
 					}}
 					ref={adaptive}
 				/>
@@ -108,11 +137,9 @@ export function SettingTheme({
 					onClick={() =>
 						theme_schedule_dialog({
 							onChange: (val: theme_min) => {
-								theme = {
-									...theme,
+								set({
 									...val,
-								};
-								update();
+								});
 								match();
 							},
 						})}
@@ -151,12 +178,24 @@ export function SettingTheme({
 
 	return wrap;
 
-	function set(id: string) {
+	function set(
+		val: {
+			id?: string;
+			adaptive?: boolean;
+			theme_day?: string;
+			theme_night?: string;
+		},
+	) {
 		theme = {
 			...theme,
-			id,
-			adaptive: false,
+			...val,
 		};
+
+		useSettings.set('theme', theme.id, uuid);
+		useSettings.set('theme_schedule', theme.adaptive, uuid);
+		useSettings.set('theme_day', theme.theme_day, uuid);
+		useSettings.set('theme_night', theme.theme_night, uuid);
+
 		update();
 
 		if (onChange) onChange(theme);

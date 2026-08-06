@@ -19,6 +19,7 @@ import {
 	KeybindList,
 } from '@/components/settings/clickables/keybind.tsx';
 import { SettingIcon } from '@/components/settings/provider/icon.tsx';
+import { useSettings } from '@/config.ts';
 
 interface SettingKeybindProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
@@ -55,6 +56,16 @@ export function SettingKeybind({
 	let previousValue: string[] = [];
 	if (bind) value = settings[bind] as string[];
 
+	const uuid = crypto.randomUUID();
+
+	if (bind) {
+		useSettings.on(bind, (val, id) => {
+			if (id == uuid) return;
+
+			set(val as string[], true);
+		});
+	}
+
 	const input = createRef();
 	const reset = createRef();
 
@@ -62,6 +73,14 @@ export function SettingKeybind({
 
 	if (store) {
 		if (!icon) icon = store.icon;
+
+		if (store.incompatible) {
+			Object.entries(store.incompatible).forEach(([key]) => {
+				useSettings.on(key, () => {
+					update();
+				});
+			});
+		}
 	}
 
 	function update() {
@@ -152,14 +171,19 @@ export function SettingKeybind({
 
 	update();
 
-	function set(val: string[]) {
+	function set(val: string[], received = false) {
+		if (value == val) return;
+
 		value = val;
-		console.info('setting: set value to', val);
 
 		reset.current.value = val;
 
-		if (bind) save_setting(bind, val);
-		if (onChange) onChange(val);
+		if (bind) {
+			if (!received) useSettings.set(bind, val, uuid);
+		} else {
+			if (onChange) onChange(val);
+		}
+
 		if (onMouseEnter) onMouseEnter();
 		update();
 	}

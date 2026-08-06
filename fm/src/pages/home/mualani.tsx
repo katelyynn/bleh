@@ -251,6 +251,7 @@ export function mualani() {
 					<DemoItem label='SettingKeybind (binded to rabbit_primary)'>
 						<SettingGroup>
 							<SettingKeybind bind='rabbit_primary' />
+							<SettingKeybind bind='rabbit_primary' />
 						</SettingGroup>
 					</DemoItem>
 				</DemoGrid>
@@ -363,21 +364,13 @@ export function mualani() {
 								theme_day: settings.theme_day as string,
 								theme_night: settings.theme_night as string,
 							}}
-							onChange={(val) => {
-								if (settings.theme != val.id) {
-									save_setting('theme', val.id);
-								}
-								if (settings.theme_day != val.theme_day) {
-									save_setting('theme_day', val.theme_day);
-								}
-								if (settings.theme_night != val.theme_night) {
-									save_setting(
-										'theme_night',
-										val.theme_night,
-									);
-								}
-
-								colour.current.update();
+						/>
+						<SettingTheme
+							theme={{
+								id: settings.theme as string,
+								adaptive: settings.theme_schedule as boolean,
+								theme_day: settings.theme_day as string,
+								theme_night: settings.theme_night as string,
 							}}
 						/>
 					</DemoItem>

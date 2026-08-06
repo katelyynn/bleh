@@ -15,6 +15,7 @@ import { settings } from '@/build/config.ts';
 import { save_setting } from '@/components/settings/settings.tsx';
 import { Input, InputType } from '@/components/input/input.tsx';
 import { SettingIcon } from '@/components/settings/provider/icon.tsx';
+import { useSettings } from '@/config.ts';
 
 interface SettingInputProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
@@ -53,6 +54,16 @@ export function SettingInput({
 	saveText,
 }: SettingInputProps) {
 	let value = bind ? settings[bind] as string | number : '';
+
+	const uuid = crypto.randomUUID();
+
+	if (bind) {
+		useSettings.on(bind, (val, id) => {
+			if (id == uuid) return;
+
+			set(val as string | number, true);
+		});
+	}
 
 	const input = createRef();
 	const reset = createRef();
@@ -129,13 +140,19 @@ export function SettingInput({
 
 	update();
 
-	function set(val: string | number) {
+	function set(val: string | number, received = false) {
+		if (value == val) return;
+
 		value = val;
 
 		if (reset.current) reset.current.value = val;
 
-		if (bind) save_setting(bind, val);
-		if (onChange) onChange(val);
+		if (bind) {
+			if (!received) useSettings.set(bind, val, uuid);
+		} else {
+			if (onChange) onChange(val);
+		}
+
 		if (onMouseEnter) onMouseEnter();
 		update();
 	}
