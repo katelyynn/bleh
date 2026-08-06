@@ -10,6 +10,7 @@ import { tl, trans } from '@/build/trans.ts';
 
 interface ButtonProps {
 	ref?: ReturnType<typeof createRef>;
+	chibi?: boolean;
 	primary?: boolean;
 	colourful?: boolean;
 	disabled?: boolean;
@@ -33,6 +34,7 @@ type ButtonLinkElement = HTMLAnchorElement & {
 
 export function Button({
 	ref,
+	chibi = false,
 	primary = false,
 	colourful = false,
 	disabled = false,
@@ -46,6 +48,7 @@ export function Button({
 	const classes: ClassNames = [
 		'btn',
 		'flex-button',
+		chibi && 'chibi',
 		primary && 'primary',
 		colourful && 'colourful',
 		className && className,

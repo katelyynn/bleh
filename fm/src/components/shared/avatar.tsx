@@ -17,6 +17,9 @@ import tippy from 'tippy.js';
 import { control_gif_pause } from '@/build/tools';
 import { register_menu } from '@/components/menu';
 import { log } from '@/build/log';
+import { Button } from '@/components/button/button.tsx';
+import { Icon, icons } from '@/components/shared/icon.tsx';
+import { createRef } from 'jsx-dom';
 
 export function patch_avatar(
 	avatar,
@@ -180,33 +183,45 @@ export function return_name_from_avatar(avatar) {
 unsafeWindow._expand_avatar = function (src) {
 	expand_avatar(src);
 };
-export function expand_avatar(src, alt = '') {
-	const alt_text = <div class='alt-text'>ALT</div>;
+
+export function expand_avatar(src: string, alt?: string) {
+	const alt_text = createRef();
+
 	dialog({
 		id: 'avatar',
 		body: (
 			<div class='full-avatar-wrapper'>
 				<div class='full-avatar'>
 					<img src={src} alt={alt} />
-					{alt != '' && alt_text}
+					<div class='full-avatar-buttons'>
+						<Button
+							chibi
+							className='full-avatar-btn'
+							href={src}
+							external
+							ref={alt_text}
+						>
+							<Icon name={icons.external} />
+							{tl(trans.open_new_tab)}
+						</Button>
+					</div>
 				</div>
-				<div class='modal-footer'>
-					<div class='fill'></div>
-					<a class='btn primary open' href={src} target='_blank'>
-						{tl(trans.open_new_tab)}
-					</a>
-					<div class='fill'></div>
-				</div>
+				{alt && (
+					<div class='full-avatar-alt-text'>
+						<span class='quotation'>“</span>
+						{alt}
+						<span class='quotation'>”</span>
+					</div>
+				)}
 			</div>
 		),
 		type: 'avatar',
 		has_overlays: false,
 	});
-	if (alt != '') {
-		tippy(alt_text, {
-			content: alt,
-		});
-	}
+
+	tippy(alt_text.current, {
+		content: tl(trans.open_new_tab),
+	});
 }
 
 export function style_name_from_badge(name, badge) {

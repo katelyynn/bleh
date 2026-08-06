@@ -54,8 +54,6 @@ export function visual() {
 
 	register_skip_to([]);
 
-	const colourful_active = createRef();
-
 	let font_choice;
 	let custom_font;
 	let font_preview;
@@ -129,14 +127,10 @@ export function visual() {
 						<SettingCheckbox
 							standalone
 							bind='colourful_tracks'
-							ref={colourful_active}
 						/>
 						<SettingCheckbox
 							standalone
 							bind='colourful_tracks_all'
-							onChange={() => {
-								colourful_active.current.update();
-							}}
 						/>
 					</SettingOptions>
 				</SettingGroup>

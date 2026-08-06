@@ -9,3 +9,71 @@
 	backdrop-filter: var(--solarium-bright);
 	-webkit-backdrop-filter: var(--solarium-bright);
 }
+
+.full-avatar-wrapper {
+	display: flex;
+	flex-direction: column;
+
+	&>.modal-footer {
+		background: unset;
+		padding: unset;
+		border: unset;
+	}
+}
+
+.full-avatar {
+	display: inline-block;
+	background: oklch(var(--b8));
+	border-radius: var(--card-radius);
+	box-shadow: var(--overlay-shadow);
+	overflow: hidden;
+	position: relative;
+
+	max-width: 100%;
+	max-height: 100%;
+
+	--button-gap: 10px;
+
+	min-width: calc((var(--button-gap) * 2) + var(--button-height) + 100px);
+	min-height: calc((var(--button-gap) * 2) + var(--button-height) + 100px);
+
+	z-index: 3;
+
+	&>img {
+		display: block;
+
+		max-width: 100%;
+		max-height: 70vh;
+
+		width: auto;
+		height: auto;
+
+		object-fit: contain;
+
+		--mask-size: var(--cover-size-300);
+	}
+}
+
+.full-avatar-buttons {
+	position: absolute !important;
+	top: var(--button-gap);
+	right: var(--button-gap);
+}
+
+.full-avatar-btn {
+	--bg: oklch(var(--b3) / var(--solarium-opacity, 40%));
+	--bg-hov: oklch(var(--b3) / var(--solarium-opacity, 60%));
+	--bg-atv: oklch(var(--b3) / var(--solarium-opacity, 80%));
+	--filter: var(--solarium);
+}
+
+.full-avatar-alt-text {
+	margin-top: var(--card-gap);
+	text-align: center;
+	cursor: default;
+	z-index: 4;
+}
+
+.quotation {
+	color: oklch(var(--c3));
+}
