@@ -7,19 +7,24 @@
 import { ClassNames, createRef, ReactNode } from 'jsx-dom';
 import { Icon, icons } from '@/components/shared/icon.tsx';
 import { tl, trans } from '@/build/trans.ts';
+import tippy, { Props } from 'tippy.js';
 
 interface ButtonProps {
 	ref?: ReturnType<typeof createRef>;
+	type?: 'button' | 'submit',
 	chibi?: boolean;
 	primary?: boolean;
 	colourful?: boolean;
+	accented?: boolean;
 	disabled?: boolean;
 	loading?: boolean;
+	menu?: boolean;
 	href?: string;
 	external?: boolean;
 	onClick?: () => void;
 	className?: string;
 	children: ReactNode;
+	tooltip?: Partial<Props>;
 }
 
 type ButtonElement = HTMLButtonElement & {
@@ -34,16 +39,20 @@ type ButtonLinkElement = HTMLAnchorElement & {
 
 export function Button({
 	ref,
+	type = 'button',
 	chibi = false,
 	primary = false,
 	colourful = false,
+	accented = false,
 	disabled = false,
 	loading = false,
+	menu = false,
 	href,
 	external,
 	onClick,
 	className,
 	children,
+	tooltip,
 }: ButtonProps) {
 	const classes: ClassNames = [
 		'btn',
@@ -51,6 +60,8 @@ export function Button({
 		chibi && 'chibi',
 		primary && 'primary',
 		colourful && 'colourful',
+		menu && 'dropdown-menu-clickable-item',
+		(menu && accented) && 'accented-menu-item',
 		className && className,
 	];
 
@@ -59,7 +70,7 @@ export function Button({
 	if (!href) {
 		elem = (
 			<button
-				type='button'
+				type={type}
 				class={classes}
 				onClick={handleOnClick}
 				ref={ref as ReturnType<typeof createRef<HTMLButtonElement>>}
@@ -80,6 +91,10 @@ export function Button({
 			{children}
 		</a>
 	) as ButtonLinkElement;
+
+	if (tooltip) {
+		tippy(elem, tooltip);
+	}
 
 	function handleOnClick() {
 		if (!onClick || disabled || loading) return;
@@ -135,4 +150,22 @@ export function Button({
 	update();
 
 	return elem;
+}
+
+interface ButtonComboProps {
+	children: ReactNode;
+}
+
+export function ButtonCombo({
+	children,
+}: ButtonComboProps) {
+	return (
+		<div class='button-combo'>
+			{children}
+		</div>
+	);
+}
+
+export function ButtonComboSeparator() {
+	return <div class='button-combo-sep' />;
 }

@@ -7,7 +7,7 @@
 import { settings } from '@/build/config';
 import { auth, discord, page, root } from '@/build/page';
 import { stored_season } from '@/build/seasonal';
-import { lang, lang_info, tl, trans } from '@/build/trans';
+import { lang, lang_info, lastfm_languages, tl, trans } from '@/build/trans';
 import { create_badge, load_badges } from '@/components/shared/badge';
 import { version } from '@/main';
 import { ff } from '@/components/settings/sku';
@@ -41,13 +41,18 @@ import { bleh_message_list } from '@/components/inbox/messages';
 import { queue_popup } from '@/components/dialog/popup';
 import { Icon, icon, icons } from '../shared/icon';
 import { avatar } from '../shared/avatar';
-import { convert_lang_to_country, flag } from '../shared/flag';
+import { convert_lang_to_country, Flag, flag } from '../shared/flag';
 import { keys } from '../settings/storage';
 import { notify } from '../dialog/notify';
 import { new_indicator } from '../shared/indicator';
 import { createRef, ReactElement } from 'jsx-dom';
 import { toggle_theme } from '@/config.ts';
 import { getThemes, theme } from '@/build/theme.ts';
+import {
+	Button,
+	ButtonCombo,
+	ButtonComboSeparator,
+} from '@/components/button/button.tsx';
 
 export function update_branding_type(state = settings.branding_type) {
 	if (state == 'bleh') {
@@ -1158,378 +1163,7 @@ export function append_nav() {
 			}
                         </div>
                     </div>
-                    <div class="side" ref=${(el) => (side = el)} data-page="1">
-                        <div class="side-page" data-page="1">
-                            ${
-				current.map((val) => {
-					let elem;
-
-					const formal = page.state.quick_access_items[val];
-
-					if (formal.url) {
-						elem = html.node`<a href=${formal.url} onclick=${() => {
-							instance.hide();
-						}} />`;
-					} else {
-						elem = html.node`<button onclick=${() => {
-							formal.action();
-							instance.hide();
-						}} />`;
-					}
-
-					elem.classList = 'dropdown-menu-clickable-item';
-					elem.setAttribute('data-type', formal.icon);
-					elem.textContent = formal.name;
-
-					let count = 0;
-
-					if (val == 'notifications') count = notif_count;
-					else if (val == 'messages') count = messages_count;
-
-					if (count) {
-						render(
-							elem,
-							html`
-								<div class="auth-dropdown-item-row">
-									<span class="auth-dropdown-item-left">
-								        ${formal.name}
-								    </span>
-									<span class="auth-dropdown-item-right">
-								        ${count}
-								    </span>
-								</div>
-							`,
-						);
-					}
-
-					if (val == 'friends') {
-						elem = html.node`
-                                        <div class="button-combo">
-                                            <a class="dropdown-menu-clickable-item" data-type=${formal.icon} href=${formal.url} onclick=${() => {
-							instance.hide();
-						}}>
-                                                ${formal.name}
-                                            </a>
-                                            <div class="button-combo-sep" />
-                                            <button class="dropdown-menu-clickable-item chibi" data-type="continue" onclick=${() => {
-							const cache = JSON.parse(
-								localStorage.getItem(keys.profile_cache) ||
-									'{}',
-							);
-							const friends = settings.friends.filter((
-								friend: string,
-							) => friend != useSettings.get('starred_friend'));
-
-							render(page_2, html``); // fix crash
-							render(
-								page_2,
-								html`
-									<button class="dropdown-menu-clickable-item" data-type="back" onclick=${() => {
-										side.setAttribute('data-page', '1');
-									}}>
-									    ${tl(trans.back)}
-									</button>
-									${useSettings.get('starred_friend')
-										? () => {
-											const friend = settings
-												.starred_friend as string;
-											const valid = is_sponsor(friend);
-
-											return html.node`
-                                                            <a class="dropdown-menu-clickable-item" data-type="profile" href="${root}user/${friend}">
-                                                                ${
-												cache[friend]?.username && valid
-													? html.node`
-                                                                    <span class="username-combo">
-                                                                        <span class="username-custom">${
-														cache[friend].username
-													}</span>
-                                                                        <span class="username-original">
-                                                                            <span class="at">@</span>${friend}
-                                                                        </span>
-                                                                    </span>
-                                                                `
-													: html.node`
-                                                                    <span><span class="at">@</span>${friend}</span>
-                                                                `
-											}
-                                                                <span class="star-icon colourful">
-                                                                    <span class="bleh-icon" />
-                                                                </span>
-                                                            </a>
-                                                        `;
-										}
-										: ''}
-									${friends.map((friend: string) => {
-										const valid = is_sponsor(friend);
-
-										return html.node`
-                                                            <a class="dropdown-menu-clickable-item" data-type="profile" href="${root}user/${friend}">
-                                                                ${
-											cache[friend]?.username && valid
-												? html.node`
-                                                                    <span class="username-combo">
-                                                                        <span class="username-custom">${
-													cache[friend].username
-												}</span>
-                                                                        <span class="username-original">
-                                                                            <span class="at">@</span>${friend}
-                                                                        </span>
-                                                                    </span>
-                                                                `
-												: html.node`
-                                                                    <span><span class="at">@</span>${friend}</span>
-                                                                `
-										}
-                                                            </a>
-                                                        `;
-									})}
-									<div class="sep" />
-									<button class="dropdown-menu-clickable-item" data-type="edit" onclick=${() => {
-										open_starred_friend_window();
-										instance.hide();
-									}}>
-									    ${tl(trans.edit_close_friends)}
-									</button>
-								`,
-							);
-							side.setAttribute('data-page', '2');
-						}}>
-                                                ${tl(trans.more)}
-                                            </button>
-                                        </div>
-                                    `;
-					}
-
-					const simple_menu = tippy(elem, {
-						theme: 'context-menu',
-						content: html.node`
-                                        <a class="dropdown-menu-clickable-item" data-type="quick_access" href="${root}bleh/profile?setting=navigation_items">
-                                            ${tl(trans.edit_quick_access)}
-                                        </a>
-                                    `,
-						placement: 'right-start',
-						trigger: 'manual',
-						interactive: true,
-						interactiveBorder: 10,
-						offset: [0, 0],
-						appendTo: document.body,
-
-						onShow(instance) {
-							instance.popper.addEventListener(
-								'click',
-								(event) => {
-									instance.hide();
-								},
-							);
-						},
-					});
-
-					register_menu(elem, simple_menu);
-
-					return elem;
-				})
-			}
-                            <div class="button-combo">
-                                <button class="dropdown-menu-clickable-item" data-menu-item="themes" disabled=${themes_disabled}>
-                                    ${tl(trans.themes.name)}
-                                </button>
-                                <div class="button-combo-sep" />
-                                <button class="dropdown-menu-clickable-item chibi" data-type="continue" disabled=${themes_disabled} onclick=${() => {
-				let buttons = [];
-
-				render(page_2, html``); // fix crash
-				render(
-					page_2,
-					html`
-						<button class="dropdown-menu-clickable-item" data-type="back" onclick=${() => {
-							side.setAttribute('data-page', '1');
-						}}>
-						    ${tl(trans.back)}
-						</button>
-						${themes.map((theme) => {
-							if (theme.hide) {
-								return html.node``;
-							}
-
-							if (!theme.formal) {
-								theme.formal = theme.id;
-							}
-
-							const btn = html.node`
-                                                <button class="dropdown-menu-clickable-item theme-item-in-menu" aria-selected=${
-								!settings.theme_schedule
-									? settings.theme == theme.id
-									: theme.id == 'adaptive'
-							} data-bleh-theme=${theme.id} data-type="theme_${theme.formal}" onclick="${() => {
-								if (theme.id != 'adaptive') {
-									save_setting('theme_schedule', false);
-									save_setting('theme', theme.id);
-								} else {
-									save_setting('theme_schedule', true);
-									match();
-								}
-
-								buttons.forEach(
-									(button) => {
-										const type = button.getAttribute(
-											'data-bleh-theme',
-										);
-
-										if (
-											!settings.theme_schedule
-										) {
-											button.setAttribute(
-												'aria-selected',
-												settings.theme ==
-													type,
-											);
-										} else if (
-											type ==
-												'adaptive'
-										) {
-											button.setAttribute(
-												'aria-selected',
-												true,
-											);
-										} else {
-											button.setAttribute(
-												'aria-selected',
-												false,
-											);
-										}
-									},
-								);
-							}}">
-                                                    ${theme.name}
-                                                </button>
-                                            `;
-
-							buttons.push(btn);
-							return btn;
-						})}
-					`,
-				);
-				side.setAttribute('data-page', '2');
-			}}>
-                                    ${tl(trans.more)}
-                                </button>
-                            </div>
-                            ${
-				show_language
-					? html.node`
-                            <div class="button-combo">
-                                <button class="dropdown-menu-clickable-item" data-menu-item="language" onclick=${() => {
-						render(
-							page_2,
-							html`
-								<button
-								    class="dropdown-menu-clickable-item"
-								    data-type="back"
-								    onclick=${() => {
-									side.setAttribute(
-										'data-page',
-										'1',
-									);
-								}}
-								>
-								    ${tl(trans.back)}
-								</button>
-								${language_menu}
-							`,
-						);
-						side.setAttribute('data-page', '2');
-					}}>
-                                    ${tl(trans.language)}
-                                </button>
-                                <div class="button-combo-sep" />
-                                <button class="dropdown-menu-clickable-item chibi" data-type="continue" onclick=${() => {
-						render(
-							page_2,
-							html`
-								<button
-								    class="dropdown-menu-clickable-item"
-								    data-type="back"
-								    onclick=${() => {
-									side.setAttribute(
-										'data-page',
-										'1',
-									);
-								}}
-								>
-								    ${tl(trans.back)}
-								</button>
-								${language_menu}
-							`,
-						);
-						side.setAttribute('data-page', '2');
-					}}>
-                                    ${tl(trans.more)}
-                                </button>
-                            </div>
-                            `
-					: ''
-			}
-                            <div class="button-combo">
-                                <a class="dropdown-menu-clickable-item" data-type="mini" href="${root}bleh/minis" onclick=${() => {
-				instance.hide();
-			}}>
-                                    ${tl(trans.minis)}
-                                </a>
-                                <div class="button-combo-sep" />
-                                ${() => {
-				const button = html.node`
-                                        <button class="dropdown-menu-clickable-item chibi" data-menu-item="news" onclick=${() => {
-					news();
-					instance.hide();
-				}}>
-                                            ${tl(trans.news)}
-                                        </button>
-                                    `;
-
-				tippy(button, {
-					content: button.textContent,
-				});
-
-				return button;
-			}}
-                            </div>
-                            <div class="button-combo">
-                                <a class="dropdown-menu-clickable-item accented-menu-item" data-menu-item="bleh" href="${root}bleh" onclick=${() => {
-				instance.hide();
-			}}>
-                                    ${tl(trans.settings)}
-                                </a>
-                                <div class="button-combo-sep" />
-                                ${() => {
-				let button;
-				let form = html.node`
-                                        <form class="chibi">
-                                            <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
-                                            <a class="dropdown-menu-clickable-item chibi colourful" ref=${(
-					el,
-				) => (button =
-					el)} data-menu-item="logout" href="${root}logout" onclick=${() => {
-					instance.hide();
-				}}>
-                                                ${tl(trans.logout)}
-                                            </a>
-                                        </form>
-                                    `;
-
-				tippy(button, {
-					content: button.textContent,
-				});
-
-				return form;
-			}}
-
-                            </div>
-                        </div>
-                        <div class="side-page" data-page="2" ref=${(
-				el,
-			) => (page_2 = el)} />
-                    </div>
+                    <div class="side" ref=${(el) => (side = el)} data-page="1" />
                 </div>
             `);
 
@@ -2074,6 +1708,7 @@ interface NavigationPage1Props {
 	next: ReactElement;
 	notif_count: number;
 	messages_count: number;
+	token: string;
 }
 
 function NavigationPage1({
@@ -2082,6 +1717,7 @@ function NavigationPage1({
 	next,
 	notif_count,
 	messages_count,
+	token,
 }: NavigationPage1Props) {
 	const wrap = (
 		<div class='side-page' data-page={1}>
@@ -2212,6 +1848,102 @@ function NavigationPage1({
 					{tl(trans.more)}
 				</button>
 			</div>
+			{useSettings.get('navigation_language') && (
+				<div class='button-combo'>
+					<button
+						type='button'
+						class={['dropdown-menu-clickable-item']}
+						data-menu-item='language'
+						onClick={() => {
+							next.replaceWith(
+								<NavigationLanguages
+									instance={instance}
+									side={side}
+								/>,
+							);
+							side.setAttribute('data-page', '2');
+						}}
+					>
+						{tl(trans.language)}
+					</button>
+					<div class='button-combo-sep' />
+					<button
+						type='button'
+						class={[
+							'dropdown-menu-clickable-item',
+							'chibi',
+						]}
+						data-type='continue'
+						onClick={() => {
+							next.replaceWith(
+								<NavigationLanguages
+									instance={instance}
+									side={side}
+								/>,
+							);
+							side.setAttribute('data-page', '2');
+						}}
+					>
+						{tl(trans.more)}
+					</button>
+				</div>
+			)}
+			<ButtonCombo>
+				<Button
+					menu
+					href={`${root}bleh/minis`}
+					onClick={() => instance.hide()}
+				>
+					<Icon name={icons.minis} />
+					{tl(trans.minis)}
+				</Button>
+				<ButtonComboSeparator />
+				<Button
+					menu
+					chibi
+					onClick={() => {
+						news();
+						instance.hide();
+					}}
+					tooltip={{ content: tl(trans.news) }}
+				>
+					<Icon name={icons.news} />
+					{tl(trans.news)}
+				</Button>
+			</ButtonCombo>
+			<ButtonCombo>
+				<Button
+					menu
+					colourful
+					accented
+					href={`${root}bleh`}
+					onClick={() => instance.hide()}
+				>
+					<Icon name={icons.bleh_settings} />
+					{tl(trans.settings)}
+				</Button>
+				<ButtonComboSeparator />
+				<form class='chibi'>
+					<input
+						type='hidden'
+						name='csrfmiddlewaretoken'
+						value={token}
+					/>
+					<Button
+						className='logout'
+						href={`${root}logout`}
+						colourful
+						menu
+						accented
+						chibi
+						onClick={() => instance.hide()}
+						tooltip={{ content: tl(trans.logout) }}
+					>
+						<Icon name={icons.logout} />
+						{tl(trans.logout)}
+					</Button>
+				</form>
+			</ButtonCombo>
 		</div>
 	);
 
@@ -2440,8 +2172,9 @@ function NavigationTheme({
 	const elem = (
 		<button
 			type='button'
-			class={['dropdown-menu-clickable-item', 'v2']}
+			class={['dropdown-menu-clickable-item', 'v2', 'flex-button']}
 			onClick={() => {
+				useSettings.set('theme_schedule', false, uuid);
 				useSettings.set('theme', id, uuid);
 				onChange(id);
 			}}
@@ -2471,4 +2204,94 @@ function NavigationTheme({
 	}
 
 	return elem;
+}
+
+interface NavigationLanguagesProps {
+	instance: Instance;
+	side: ReactElement;
+}
+
+function NavigationLanguages({
+	instance,
+	side,
+}: NavigationLanguagesProps) {
+	const languages = lastfm_languages.filter((l) => l != lang);
+
+	return (
+		<div class='side-page' data-page={2}>
+			<button
+				type='button'
+				class='dropdown-menu-clickable-item'
+				data-type='back'
+				onClick={() => {
+					side.setAttribute('data-page', '1');
+				}}
+			>
+				{tl(trans.back)}
+			</button>
+			<NavigationLanguage
+				code={lang}
+				active
+				onChange={() => {
+					instance.hide();
+				}}
+			/>
+			<div class='sep' />
+			{languages.map((code, i) => (
+				<NavigationLanguage
+					code={code}
+					key={i}
+					onChange={() => {
+						instance.hide();
+					}}
+				/>
+			))}
+		</div>
+	);
+}
+
+interface NavigationLanguageProps {
+	code: string;
+	onChange: () => void;
+	active?: boolean;
+}
+
+function NavigationLanguage({
+	code,
+	onChange,
+	active,
+}: NavigationLanguageProps) {
+	const button = (
+		<button
+			type='submit'
+			class={['dropdown-menu-clickable-item', 'v2', 'flex-button']}
+			onClick={onChange}
+			aria-selected={active}
+		>
+			<div class='auth-dropdown-item-row'>
+				<span class='auth-dropdown-item-left'>
+					<Flag
+						code={(convert_lang_to_country[code] || code)
+							.toUpperCase()}
+						className='small-flag'
+					/>
+					{get_language_name(code)}
+				</span>
+				{code in lang_info && (
+					<span class='auth-dropdown-item-right'>
+						<div class='bleh-icon checkmark' />
+					</span>
+				)}
+			</div>
+		</button>
+	);
+
+	if (active) return button;
+
+	return (
+		<form action='/i18n/setlang' method='post'>
+			<input type='hidden' name='language' value={code} />
+			{button}
+		</form>
+	);
 }

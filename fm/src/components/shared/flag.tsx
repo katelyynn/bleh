@@ -56,7 +56,7 @@ export function Flag({
 	return elem;
 }
 
-export const convert_lang_to_country = {
+export const convert_lang_to_country: Record<string, string> = {
 	en: 'gb',
 	sv: 'se',
 	zh: 'cn',

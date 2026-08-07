@@ -13,7 +13,20 @@ import { Settings } from 'luxon';
 export let lang = 'en';
 export let lang_browser = 'en';
 // hello my name is stel :3
-export let lang_info = {
+export const lastfm_languages = [
+	'en',
+	'de',
+	'es',
+	'fr',
+	'it',
+	'ja',
+	'pt',
+	'ru',
+	'sv',
+	'tr',
+	'zh',
+];
+export const lang_info = {
 	en: {
 		name: 'English',
 		by: ['dressupdarling'],
