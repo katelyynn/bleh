@@ -217,7 +217,7 @@ export function append_nav() {
 
 	masthead_logo.replaceChildren(
 		<>
-			<a class='hidden-link' style={{ display: 'none !important' }}>
+			<a class='hidden-link'>
 				Last.fm
 			</a>
 			<a
@@ -286,7 +286,7 @@ export function append_nav() {
 
 	const last_checked = localStorage.getItem(keys.update_checked_date) || null;
 
-	const link_menu = tippy(home_link, {
+	const link_menu = tippy(home_link.current, {
 		theme: 'context-menu',
 		content: html.node`
             ${
@@ -320,7 +320,7 @@ export function append_nav() {
 		},
 	});
 
-	register_menu(home_link, link_menu);
+	register_menu(home_link.current, link_menu);
 
 	const navs = inner.querySelector('.masthead-nav-wrap');
 
@@ -1007,7 +1007,7 @@ export function append_nav() {
 			let page_2;
 			let side;
 
-			const current = useSettings.get('navigation-items');
+			const current = useSettings.get('navigation_items');
 
 			let length = current.length;
 			if (length < 2) length = 2;
@@ -1163,7 +1163,9 @@ export function append_nav() {
 			}
                         </div>
                     </div>
-                    <div class="side" ref=${(el) => (side = el)} data-page="1" />
+                    <div class="side" ref=${(
+				el,
+			) => (side = el)} data-page="1" />
                 </div>
             `);
 

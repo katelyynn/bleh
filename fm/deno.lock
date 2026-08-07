@@ -17,6 +17,26 @@
     "jsr:@std/path@^1.1.5": "1.1.6",
     "jsr:@std/path@^1.1.6": "1.1.6",
     "jsr:@std/streams@^1.1.1": "1.1.1",
+    "npm:@fontsource-variable/atkinson-hyperlegible-next@^5.3.0": "5.3.0",
+    "npm:@fontsource-variable/bitcount-grid-single@^5.3.0": "5.3.0",
+    "npm:@fontsource-variable/funnel-sans@^5.3.0": "5.3.0",
+    "npm:@fontsource-variable/google-sans-code@^5.3.0": "5.3.0",
+    "npm:@fontsource-variable/hanken-grotesk@^5.3.0": "5.3.0",
+    "npm:@fontsource-variable/inconsolata@^5.3.0": "5.3.0",
+    "npm:@fontsource-variable/noto-sans-jp@^5.3.0": "5.3.0",
+    "npm:@fontsource-variable/noto-sans-kr@^5.3.0": "5.3.0",
+    "npm:@fontsource-variable/noto-sans-tc@^5.3.0": "5.3.0",
+    "npm:@fontsource-variable/rokkitt@^5.3.0": "5.3.0",
+    "npm:@fontsource/balsamiq-sans@^5.3.0": "5.3.0",
+    "npm:@fontsource/cherry-bomb-one@^5.3.0": "5.3.0",
+    "npm:@fontsource/crimson-text@^5.3.0": "5.3.0",
+    "npm:@fontsource/darumadrop-one@^5.3.0": "5.3.0",
+    "npm:@fontsource/instrument-serif@^5.3.0": "5.3.0",
+    "npm:@fontsource/lilita-one@^5.3.0": "5.3.0",
+    "npm:@fontsource/noto-color-emoji@^5.3.0": "5.3.0",
+    "npm:@fontsource/rakkas@^5.3.0": "5.3.0",
+    "npm:@fontsource/single-day@^5.3.0": "5.3.0",
+    "npm:@fontsource/unifrakturcook@^5.3.0": "5.3.0",
     "npm:@tealmiku/florence@^2026.527.0": "2026.527.0",
     "npm:@types/luxon@^3.7.3": "3.7.3",
     "npm:@zachleat/hypercard@^2.0.2": "2.0.2",
@@ -372,6 +392,66 @@
       "integrity": "sha512-bm4Mowrv+GXMlpWX++EcXw/iLyd1o3+bJkC2DkWXYVvgZCqD/bSj9ctZeAMC3cIxgjRVR2Dufaiu4YPxr5gW1A==",
       "os": ["win32"],
       "cpu": ["x64"]
+    },
+    "@fontsource-variable/atkinson-hyperlegible-next@5.3.0": {
+      "integrity": "sha512-UnLzNUy1RWoLDfydAatP4NaRm99X/WbQEph7q/PymJnCFIOOwKOx3pBmp5ys8trO0dM+CKGuJgeZP9fAR4mQpA=="
+    },
+    "@fontsource-variable/bitcount-grid-single@5.3.0": {
+      "integrity": "sha512-p1FL45RZskZT+YeHqYpnS4VIxhfJejlh7cRGM3ygDRzcdP636P5qMi98h6TE9I1uFNEw2ydvF4I2/e4TGWJPxw=="
+    },
+    "@fontsource-variable/funnel-sans@5.3.0": {
+      "integrity": "sha512-NOgHy3KWMAJdl33XSESit33nI8vlFZh8/0E3tLD7z5jJA5gQoLeUkFcZtxehVVkyYpAZ747tF8O/kAHXXa96ZA=="
+    },
+    "@fontsource-variable/google-sans-code@5.3.0": {
+      "integrity": "sha512-etsB8s2nyLqWlBrASPpT9LvPtxNxrLjrys4RZzW0mQnt8qYoNL7m1SLzCqY5Pp1g/6LWoVOI/6jPqiwO2l5xgA=="
+    },
+    "@fontsource-variable/hanken-grotesk@5.3.0": {
+      "integrity": "sha512-DOd0FqL+3cH2dfNy0JtSq9tUfxBz5mLmHMjTU0DOr3E9Zo6wxuatCl53DIPNrSPgCsnuKyM739BTIG5glCLirw=="
+    },
+    "@fontsource-variable/inconsolata@5.3.0": {
+      "integrity": "sha512-3sJ98aPp9rBWhlt+niNQaqaRd5vKo5M5unVWRm4L8g3E73pi5P8DIS4ZuPAtYi0bugDllZRSxrtfPxM17+P6gg=="
+    },
+    "@fontsource-variable/noto-sans-jp@5.3.0": {
+      "integrity": "sha512-XVL9GfGBRjj523v9w3Bctu4mNq7E5rUa+AMZm8DK1EM3LAGlKC3DZMvuqkLn4DB4TwwoAjcsJUCiRpUTDzzOkw=="
+    },
+    "@fontsource-variable/noto-sans-kr@5.3.0": {
+      "integrity": "sha512-h863ZOIVMKjX0PSr0hLMUp/SjrwOul2yp0f5P61avqXdhqDABSkakzG2Ee07d3W8gVYgS9dMmxULdCkoN09f1A=="
+    },
+    "@fontsource-variable/noto-sans-tc@5.3.0": {
+      "integrity": "sha512-sniyvTx+yRXlce9bjBV0i3kBG3/YFJiz6SZA9plNJLCR4TbY8il+G759gAXWHZu01eAclbJEN2YR+qbQjZTjkg=="
+    },
+    "@fontsource-variable/rokkitt@5.3.0": {
+      "integrity": "sha512-2IFboxeeIE9va/Jm5kYfMhKjPsm4VYxamP8rvFnY4pn04vn8zG0MQAqCCDhxKihwGLWXXpBv8OC3xCxaw2wSjg=="
+    },
+    "@fontsource/balsamiq-sans@5.3.0": {
+      "integrity": "sha512-ofkLqr8IH+TVP3q385lkonHo5yrbn59jbax9sEknRcwpxP/yX+gDd+hufeGw3fcIaRVWDN2TdhTMFCjdvw8utA=="
+    },
+    "@fontsource/cherry-bomb-one@5.3.0": {
+      "integrity": "sha512-iSBbBw+xmNsvws9m3m12J+2X5tlC0FORiuk0oLe7LWOzuolvFb/Paeck36eLONiXRzad4RVcZ+ip77hjFB1zQA=="
+    },
+    "@fontsource/crimson-text@5.3.0": {
+      "integrity": "sha512-W1kLgOlsCD/8DhUNECgYvyx86+t3wAvA0w09juD3XtmwAtV6vuSEwijN4q8fnQ1LgQWV377jQiL8dpSYwLnoAw=="
+    },
+    "@fontsource/darumadrop-one@5.3.0": {
+      "integrity": "sha512-GQY4CYyVuaSK0YN3gZaRA8LmysGa3qQHrDkgGdgEBX6DAZ80YJJ3pc+2/BaFO0alDcKnCmnfCZGEOYsveclKKw=="
+    },
+    "@fontsource/instrument-serif@5.3.0": {
+      "integrity": "sha512-mDiaIg0u67sYV59fie92Wz4sM8UiVlbL7fLxnFPCKkX15DMASEnQTREbaP5S5/3DCcsoAOcQ0sV9E4AeY4QqYQ=="
+    },
+    "@fontsource/lilita-one@5.3.0": {
+      "integrity": "sha512-bNW3tD+m5pOsAQpW/NvtRbFthFe+B73hDJK2DLLCFCtF+1p+UMBgo7ibxdcb9Sftr06LKAVbt080wiMdSqGbOg=="
+    },
+    "@fontsource/noto-color-emoji@5.3.0": {
+      "integrity": "sha512-5uVerNQW6zoxRVaMdjgpYSAxpo02WgCPjpVdE5MfrWd8sNwq7uGs3pMnKB1fVsIBwlxH++I2RisvI9XadC6NzA=="
+    },
+    "@fontsource/rakkas@5.3.0": {
+      "integrity": "sha512-6B3QIQyXRXa5/G7zWkpjpDQbh/+FQPJsuUKQ9yu6oLb2lFepqgFli8GqKxSGXuDxC0hDQy/vAMoOK5VdkIY4IA=="
+    },
+    "@fontsource/single-day@5.3.0": {
+      "integrity": "sha512-PzLlaGLDmDmZkcbLZ+r9x/hci45agSBVGg6PgdFmWPpPh6VTBT0017soatXcutUoxQbBdkhxQPDUaPJaEGcGzA=="
+    },
+    "@fontsource/unifrakturcook@5.3.0": {
+      "integrity": "sha512-oOeUerPztcIBR6/+krMW4n/8VLF8A4NrjCNpR1C6F/C8JLekLMoSm5JzrxfPtyn5RtJdYQdTYigk4CtUCWxBCw=="
     },
     "@kurkle/color@0.3.4": {
       "integrity": "sha512-M5UknZPHRu3DEDWoipU6sE8PdkZ6Z/S+v4dD+Ke8IaNlpdSQah50lz1KtcFBa2vsdOnwbbnxJwVM4wty6udA5w=="
@@ -1187,6 +1267,26 @@
       "jsr:@std/fmt@^1.0.10",
       "jsr:@std/fs@^1.0.24",
       "jsr:@std/http@^1.1.2",
+      "npm:@fontsource-variable/atkinson-hyperlegible-next@^5.3.0",
+      "npm:@fontsource-variable/bitcount-grid-single@^5.3.0",
+      "npm:@fontsource-variable/funnel-sans@^5.3.0",
+      "npm:@fontsource-variable/google-sans-code@^5.3.0",
+      "npm:@fontsource-variable/hanken-grotesk@^5.3.0",
+      "npm:@fontsource-variable/inconsolata@^5.3.0",
+      "npm:@fontsource-variable/noto-sans-jp@^5.3.0",
+      "npm:@fontsource-variable/noto-sans-kr@^5.3.0",
+      "npm:@fontsource-variable/noto-sans-tc@^5.3.0",
+      "npm:@fontsource-variable/rokkitt@^5.3.0",
+      "npm:@fontsource/balsamiq-sans@^5.3.0",
+      "npm:@fontsource/cherry-bomb-one@^5.3.0",
+      "npm:@fontsource/crimson-text@^5.3.0",
+      "npm:@fontsource/darumadrop-one@^5.3.0",
+      "npm:@fontsource/instrument-serif@^5.3.0",
+      "npm:@fontsource/lilita-one@^5.3.0",
+      "npm:@fontsource/noto-color-emoji@^5.3.0",
+      "npm:@fontsource/rakkas@^5.3.0",
+      "npm:@fontsource/single-day@^5.3.0",
+      "npm:@fontsource/unifrakturcook@^5.3.0",
       "npm:@tealmiku/florence@^2026.527.0",
       "npm:@types/luxon@^3.7.3",
       "npm:@zachleat/hypercard@^2.0.2",
