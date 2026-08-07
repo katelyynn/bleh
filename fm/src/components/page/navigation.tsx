@@ -25,7 +25,7 @@ import {
 	smart_title,
 } from '@/components/music/lotus';
 import { bleh_notification_list } from '@/components/inbox/notifications';
-import tippy from 'tippy.js';
+import tippy, { Instance } from 'tippy.js';
 import {
 	load_profile_cache_externally,
 	open_starred_friend_window,
@@ -39,37 +39,35 @@ import { DateTime } from 'luxon';
 import { input } from '@/components/settings/input';
 import { bleh_message_list } from '@/components/inbox/messages';
 import { queue_popup } from '@/components/dialog/popup';
-import { icon, icons } from '../shared/icon';
+import { Icon, icon, icons } from '../shared/icon';
 import { avatar } from '../shared/avatar';
 import { convert_lang_to_country, flag } from '../shared/flag';
 import { keys } from '../settings/storage';
 import { notify } from '../dialog/notify';
 import { new_indicator } from '../shared/indicator';
+import { createRef, ReactElement } from 'jsx-dom';
+import { toggle_theme } from '@/config.ts';
+import { getThemes, theme } from '@/build/theme.ts';
 
 export function update_branding_type(state = settings.branding_type) {
 	if (state == 'bleh') {
-		render(
-			page.state.home_link,
-			html`
-				<div class="home-logo bleh-logo" data-refresh=${ff(
-					'logo',
-				)}>${version.brand}</div>
-			`,
+		page.state.home_link.replaceChildren(
+			<div class={['home-logo', 'bleh-logo']}>
+				{version.brand}
+			</div>,
 		);
 	} else if (state == 'lastfm') {
-		render(
-			page.state.home_link,
-			html`
-				<div class="home-logo lastfm-logo">Last.fm</div>
-			`,
+		page.state.home_link.replaceChildren(
+			<div class={['home-logo', 'lastfm-logo']}>
+				{'Last.fm'}
+			</div>,
 		);
 	}
 }
 
 export function append_nav() {
 	if (settings.developer && !page.structure.indicator) {
-		const page_indicator = document.createElement('div');
-		page_indicator.classList.add('page-indicator');
+		const page_indicator = <div class='page-indicator' />;
 		document.documentElement.appendChild(page_indicator);
 
 		page.structure.indicator = page_indicator;
@@ -88,19 +86,48 @@ export function append_nav() {
 	}
 
 	if (!page.structure.style_warning) {
-		const style_warning = html.node`
-            <div class="style-warning" style="position: fixed; top: 0; left: 0; right: 0; padding: 20px; background: #fff; z-index: 1000000000; display: flex; justify-content: center; align-items: center; gap: 30px">
-                <strong>${tl(trans.style_warning)}</strong>
-                <button class="btn-primary" onclick=${() => {
-			save_setting('branch', 'uwu');
-			save_setting('dev', false);
-			window.location.reload();
-		}}>${tl(trans.re_enable_style_loading)}</button>
-                <button class="btn-primary" onclick=${() => {
-			open(`https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js`);
-		}}>${tl(trans.check_for_updates)}</button>
-            </div>
-        `;
+		const style_warning = (
+			<div
+				class='style-warning'
+				style={{
+					position: 'fixed',
+					top: 0,
+					left: 0,
+					right: 0,
+					padding: '20px',
+					background: '#fff',
+					zIndex: 100000000,
+					display: 'flex',
+					justifyContent: 'center',
+					alignItems: 'center',
+					gap: '30px',
+				}}
+			>
+				<strong>{tl(trans.style_warning)}</strong>
+				<button
+					type='button'
+					class='btn-primary'
+					onClick={() => {
+						useSettings.set('branch', 'uwu');
+						useSettings.set('dev', false);
+						window.location.reload();
+					}}
+				>
+					{tl(trans.re_enable_style_loading)}
+				</button>
+				<button
+					type='button'
+					class='btn-primary'
+					onClick={() => {
+						open(
+							`https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js`,
+						);
+					}}
+				>
+					{tl(trans.check_for_updates)}
+				</button>
+			</div>
+		);
 		document.body.appendChild(style_warning);
 		page.structure.style_warning = style_warning;
 	}
@@ -178,59 +205,78 @@ export function append_nav() {
 
 	const masthead_logo = inner.querySelector('.masthead-logo');
 
-	let home_link;
-	let home_link_container;
+	const home_link = createRef();
+	const home_link_logo = createRef();
 
-	render(
-		masthead_logo,
-		html`
-			<a class="hidden-link" style="display: none !important" href="/">Last.fm</a>
-			<a class="btn navigation-item home-link" href="${root}music"
-				ref=${(el) => home_link = el}>
-				<span class="home-logo-container" ref=${(el) =>
-					home_link_container = el} />
+	const search_wrap = createRef();
+
+	masthead_logo.replaceChildren(
+		<>
+			<a class='hidden-link' style={{ display: 'none !important' }}>
+				Last.fm
 			</a>
-			<nav class="navlist navlist--more masthead-nav masthead-nav-top">
-				<ul class="navlist-items">
-					<a class="btn masthead-nav-control icon" data-type="charts"
-						href="${root}charts">
-			            ${tl(trans.charts)}
-			            ${ff('aihara') ? new_indicator() : ''}
-			        </a>
-					<a class="btn masthead-nav-control icon" data-type="minis"
-						href="${root}bleh/minis">
-			            ${tl(trans.minis)}
-			        </a>
-					<span class="navlist-search" ref=${(el) =>
-						page.state.search = el} />
+			<a
+				class={['btn', 'navigation-item', 'home-link']}
+				href={`${root}music`}
+				ref={home_link}
+			>
+				<span class='home-logo-container' ref={home_link_logo} />
+			</a>
+			<nav
+				class={[
+					'navlist',
+					'navlist--more',
+					'masthead-nav',
+					'masthead-nav-top',
+				]}
+			>
+				<ul class='navlist-items'>
+					<a
+						class={['btn', 'masthead-nav-control', 'icon']}
+						data-type='charts'
+						href={`${root}charts`}
+					>
+						{tl(trans.charts)}
+						{ff('aihara') && new_indicator()}
+					</a>
+					<a
+						class={['btn', 'masthead-nav-control', 'icon']}
+						data-type='minis'
+						href={`${root}bleh/minis`}
+					>
+						{tl(trans.minis)}
+					</a>
+					<span class='navlist-search' ref={search_wrap} />
 				</ul>
 			</nav>
-		`,
+		</>,
 	);
 
-	page.state.home_link = home_link_container;
+	page.state.home_link = home_link_logo.current;
 
 	update_branding_type();
 
+	const handle_update = (e: Event) => {
+		e.preventDefault();
+		prompt_for_update();
+	};
+
 	if (update_required) {
-		home_link.onclick = (e) => {
-			e.preventDefault();
-			prompt_for_update();
-		};
+		home_link.current.addEventListener('onclick', handle_update);
 
-		home_link.appendChild(html.node`
-            <span class="home-version">
-                <div class="update-container">
-                    <div class="bleh-icon" style="--icon: var(--icon-16-update)" />
-                </div>
-            </span>
-        `);
+		home_link.current.appendChild(
+			<span class='home-version'>
+				<div class='update-container'>
+					<Icon name={icons.update} />
+				</div>
+			</span>,
+		);
 
-		tippy(home_link, {
+		tippy(home_link.current, {
 			content: tl(trans.update_available_to_install),
 		});
 	} else {
-		home_link.onclick = null;
+		home_link.current.removeEventListener('onclick', handle_update);
 	}
 
 	const last_checked = localStorage.getItem(keys.update_checked_date) || null;
@@ -281,13 +327,10 @@ export function append_nav() {
 	submit.classList.add('btn', 'chibi', 'icon-mask');
 	submit.setAttribute('data-type', 'search');
 
-	render(
-		page.state.search,
-		html`
-			<span class="navlist-search-container">
-			    ${search}
-			</span>
-		`,
+	search_wrap.current.replaceChildren(
+		<span class='navlist-search-container'>
+			{search}
+		</span>,
 	);
 
 	// 2025-04-14
@@ -925,50 +968,6 @@ export function append_nav() {
 		language_menu.appendChild(language_option);
 	});
 
-	const themes = [
-		{
-			id: 'adaptive',
-			name: tl(trans.auto),
-			hide: !ff('adaptive_theme'),
-			new_release: true,
-		},
-		{
-			id: 'glass',
-			type: 'light',
-			name: tl(trans.glass),
-			hide: !ff('glass'),
-			new_release: true,
-		},
-		{
-			id: 'light',
-			type: 'light',
-			name: tl(trans.themes.light),
-		},
-		{
-			id: 'ink',
-			type: 'light',
-			name: tl(trans.themes.ink),
-		},
-		{
-			id: 'dark',
-			formal: 'ash',
-			type: 'dark',
-			name: tl(trans.themes.dark),
-		},
-		{
-			id: 'darker',
-			formal: 'dark',
-			type: 'darker',
-			name: tl(trans.themes.darker),
-		},
-		{
-			id: 'oled',
-			formal: 'void',
-			type: 'oled',
-			name: tl(trans.themes.oled),
-		},
-	];
-
 	// auth menu
 	const token = new_auth
 		.querySelector('[name="csrfmiddlewaretoken"]')
@@ -1003,7 +1002,7 @@ export function append_nav() {
 			let page_2;
 			let side;
 
-			const current = settings.navigation_items;
+			const current = useSettings.get('navigation-items');
 
 			let length = current.length;
 			if (length < 2) length = 2;
@@ -2067,4 +2066,409 @@ export async function fetch_messages() {
 	} catch (error) {
 		log('exception during fetch', 'live', 'error', { error: error });
 	}
+}
+
+interface NavigationPage1Props {
+	instance: Instance;
+	side: ReactElement;
+	next: ReactElement;
+	notif_count: number;
+	messages_count: number;
+}
+
+function NavigationPage1({
+	instance,
+	side,
+	next,
+	notif_count,
+	messages_count,
+}: NavigationPage1Props) {
+	const wrap = (
+		<div class='side-page' data-page={1}>
+			{useSettings.get('navigation-items').map((val: string) => {
+				let elem;
+
+				const formal = page.state.quick_access_items[val];
+
+				if (val == 'friends') {
+					elem = (
+						<div class='button-combo'>
+							<a
+								class={['dropdown-menu-clickable-item']}
+								data-type={formal.icon}
+								href={formal.url}
+								onClick={() => {
+									instance.hide();
+								}}
+							>
+								{formal.name}
+							</a>
+							<div class='button-combo-sep' />
+							<button
+								type='button'
+								class={[
+									'dropdown-menu-clickable-item',
+									'chibi',
+								]}
+								data-type='continue'
+								onClick={() => {
+									next.replaceWith(
+										<NavigationFriends
+											instance={instance}
+											side={side}
+										/>,
+									);
+									side.setAttribute('data-page', '2');
+								}}
+							>
+								{tl(trans.more)}
+							</button>
+						</div>
+					);
+
+					return elem;
+				}
+
+				if (formal.url) {
+					elem = (
+						<a
+							class={['dropdown-menu-clickable-item']}
+							data-type={formal.icon}
+							href={formal.url}
+							onClick={() => {
+								instance.hide();
+							}}
+						>
+							{formal.name}
+						</a>
+					);
+				} else {
+					elem = (
+						<button
+							type='button'
+							class={['dropdown-menu-clickable-item']}
+							data-type={formal.icon}
+							onClick={() => {
+								formal.action();
+								instance.hide();
+							}}
+						>
+							{formal.name}
+						</button>
+					);
+				}
+
+				let count = 0;
+
+				if (val == 'notifications') {
+					count = notif_count;
+				} else if (val == 'messages') {
+					count = messages_count;
+				}
+
+				if (count > 0) {
+					elem.replaceChildren(
+						<div class='auth-dropdown-item-row'>
+							<span class='auth-dropdown-item-left'>
+								{formal.name}
+							</span>
+							<span class='auth-dropdown-item-right'>
+								{count}
+							</span>
+						</div>,
+					);
+				}
+
+				return elem;
+			})}
+			<div class='button-combo'>
+				<button
+					type='button'
+					class={['dropdown-menu-clickable-item']}
+					data-menu-item='themes'
+					onClick={() => {
+						toggle_theme();
+					}}
+				>
+					{tl(trans.themes.name)}
+				</button>
+				<div class='button-combo-sep' />
+				<button
+					type='button'
+					class={[
+						'dropdown-menu-clickable-item',
+						'chibi',
+					]}
+					data-type='continue'
+					onClick={() => {
+						next.replaceWith(
+							<NavigationThemes
+								side={side}
+							/>,
+						);
+						side.setAttribute('data-page', '2');
+					}}
+				>
+					{tl(trans.more)}
+				</button>
+			</div>
+		</div>
+	);
+
+	const simple_menu = tippy(wrap, {
+		theme: 'context-menu',
+		content: (
+			<a
+				class='dropdown-menu-clickable-item'
+				data-type='quick_access'
+				href={`${root}bleh/profile?setting=navigation_items`}
+			>
+				{tl(trans.edit_quick_access)}
+			</a>
+		),
+		placement: 'right-start',
+		trigger: 'manual',
+		interactive: true,
+		interactiveBorder: 10,
+		offset: [0, 0],
+		appendTo: document.body,
+
+		onShow(instance: Instance) {
+			instance.popper.addEventListener('click', () => {
+				instance.hide();
+			});
+		},
+	});
+
+	register_menu(wrap, simple_menu);
+
+	return wrap;
+}
+
+interface NavigationFriendsProps {
+	instance: Instance;
+	side: ReactElement;
+}
+
+function NavigationFriends({
+	instance,
+	side,
+}: NavigationFriendsProps) {
+	const starred = useSettings.get('starred_friend');
+	const friends = useSettings.get('friends').filter((
+		friend: string,
+	) => friend != starred);
+
+	return (
+		<div class='side-page' data-page={2}>
+			<button
+				type='button'
+				class='dropdown-menu-clickable-item'
+				data-type='back'
+				onClick={() => {
+					side.setAttribute('data-page', '1');
+				}}
+			>
+				{tl(trans.back)}
+			</button>
+			{starred && (
+				<NavigationFriend
+					name={starred as string}
+					starred
+					instance={instance}
+				/>
+			)}
+			{friends.map((friend: string, i: number) => (
+				<NavigationFriend name={friend} key={i} instance={instance} />
+			))}
+			<div class='sep' />
+			<button
+				type='button'
+				class='dropdown-menu-clickable-item'
+				data-type='edit'
+				onClick={() => {
+					open_starred_friend_window();
+					instance.hide();
+				}}
+			>
+				{tl(trans.edit_close_friends)}
+			</button>
+		</div>
+	);
+}
+
+interface NavigationFriendProps {
+	instance: Instance;
+	name: string;
+	starred?: boolean;
+}
+
+function NavigationFriend({
+	instance,
+	name,
+	starred,
+}: NavigationFriendProps) {
+	const valid = is_sponsor(name);
+
+	load_profile_cache_externally(name).then((cache) => {
+		return (
+			<a
+				class={['dropdown-menu-clickable-item']}
+				onClick={() => {
+					instance.hide();
+				}}
+			>
+				{(cache.username && valid)
+					? (
+						<span class='username-combo'>
+							<span class='username-custom'>
+								{cache.username}
+							</span>
+							<span class='username-original'>
+								<span class='at'>@</span>
+								{name}
+							</span>
+						</span>
+					)
+					: (
+						<span>
+							<span class='at'>@</span>
+							{name}
+						</span>
+					)}
+				{starred && (
+					<span class={['star-icon', 'colourful']}>
+						<Icon />
+					</span>
+				)}
+			</a>
+		);
+	});
+
+	return (
+		<a
+			class={['dropdown-menu-clickable-item']}
+			onClick={() => {
+				instance.hide();
+			}}
+		>
+			<span>
+				<span class='at'>@</span>
+				{name}
+			</span>
+			{starred && (
+				<span class={['star-icon', 'colourful']}>
+					<Icon />
+				</span>
+			)}
+		</a>
+	);
+}
+
+interface NavigationThemesProps {
+	side: ReactElement;
+}
+
+function NavigationThemes({
+	side,
+}: NavigationThemesProps) {
+	const uuid = crypto.randomUUID();
+
+	useSettings.on('theme', (val) => {
+		update(val as string);
+	});
+
+	const buttons: NavigationThemeElement[] = [];
+
+	const wrap = (
+		<div class='side-page' data-page={2}>
+			<button
+				type='button'
+				class='dropdown-menu-clickable-item'
+				data-type='back'
+				onClick={() => {
+					side.setAttribute('data-page', '1');
+				}}
+			>
+				{tl(trans.back)}
+			</button>
+			{Object.entries(getThemes()).map(([id, theme]) => (
+				<NavigationTheme
+					id={id}
+					item={theme}
+					list={buttons}
+					onChange={update}
+					uuid={uuid}
+				/>
+			))}
+		</div>
+	);
+
+	function update(theme?: string) {
+		if (!theme) theme = useSettings.get('theme') as string;
+
+		buttons.forEach((elem) => {
+			elem.active = elem.id == theme;
+		});
+	}
+
+	return wrap;
+}
+
+interface NavigationThemeProps {
+	id: string;
+	item: theme;
+	list: ReactElement[];
+	onChange: (id: string) => void;
+	uuid: string;
+}
+
+type NavigationThemeElement = HTMLButtonElement & {
+	id: string;
+	active: boolean;
+};
+
+function NavigationTheme({
+	id,
+	item,
+	list,
+	onChange,
+	uuid,
+}: NavigationThemeProps) {
+	let active = false;
+
+	const elem = (
+		<button
+			type='button'
+			class={['dropdown-menu-clickable-item', 'v2']}
+			onClick={() => {
+				useSettings.set('theme', id, uuid);
+				onChange(id);
+			}}
+		>
+			<Icon name={item.icon} />
+			{tl(item.name)}
+		</button>
+	) as NavigationThemeElement;
+
+	list.push(elem);
+
+	Object.defineProperty(elem, 'id', {
+		get() {
+			return id;
+		},
+	});
+
+	Object.defineProperty(elem, 'value', {
+		set(val: boolean) {
+			active = val;
+			update();
+		},
+	});
+
+	function update() {
+		elem.setAttribute('aria-selected', String(active));
+	}
+
+	return elem;
 }
