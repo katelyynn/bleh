@@ -4,6 +4,52 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import hanken from '@fontsource-variable/hanken-grotesk/wght-italic.css' with {
+	type: 'text',
+};
+import instrument from '@fontsource/instrument-serif' with { type: 'text' };
+import atkinson from '@fontsource-variable/atkinson-hyperlegible-next/wght-italic.css' with {
+	type: 'text',
+};
+import funnel from '@fontsource-variable/funnel-sans/wght-italic.css' with {
+	type: 'text',
+};
+
+import balsamiq from '@fontsource/balsamiq-sans' with { type: 'text' };
+import cherry from '@fontsource/cherry-bomb-one' with { type: 'text' };
+import crimson from '@fontsource/crimson-text/600-italic.css' with {
+	type: 'text',
+};
+import lilita from '@fontsource/lilita-one' with { type: 'text' };
+import rokkitt from '@fontsource-variable/rokkitt/wght-italic.css' with {
+	type: 'text',
+};
+import rakkas from '@fontsource/rakkas' with { type: 'text' };
+import single from '@fontsource/single-day' with { type: 'text' };
+import cook from '@fontsource/unifrakturcook' with { type: 'text' };
+import inconsolata from '@fontsource-variable/inconsolata/wdth.css' with {
+	type: 'text',
+};
+import google from '@fontsource-variable/google-sans-code/wght-italic.css' with {
+	type: 'text',
+};
+
+import bitcount from '@fontsource-variable/bitcount-grid-single/slnt.css' with {
+	type: 'text',
+};
+import darumadrop from '@fontsource/darumadrop-one' with { type: 'text' };
+
+import notoEmoji from '@fontsource/noto-color-emoji' with { type: 'text' };
+import notoJP from '@fontsource-variable/noto-sans-jp/wght.css' with {
+	type: 'text',
+};
+import notoTC from '@fontsource-variable/noto-sans-tc/wght.css' with {
+	type: 'text',
+};
+import notoKR from '@fontsource-variable/noto-sans-kr/wght.css' with {
+	type: 'text',
+};
+
 import { html } from 'lighterhtml';
 import { settings } from '@/build/config';
 import { log } from '@/build/log';
@@ -33,7 +79,29 @@ export function append_style() {
 	}
 
 	document.documentElement.appendChild(
-		<style>{cropper_css}</style>,
+		<style>
+			{cropper_css}
+			{hanken}
+			{instrument}
+			{atkinson}
+			{funnel}
+			{balsamiq}
+			{cherry}
+			{crimson}
+			{lilita}
+			{rokkitt}
+			{rakkas}
+			{single}
+			{cook}
+			{inconsolata}
+			{google}
+			{bitcount}
+			{darumadrop}
+			{notoEmoji}
+			{notoJP}
+			{notoTC}
+			{notoKR}
+		</style>,
 	);
 
 	if (settings.dev) return;
