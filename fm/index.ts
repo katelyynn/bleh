@@ -88,8 +88,6 @@ const bundle_css: esbuild.Plugin = {
 				write: false,
 				loader: {
 					'.css': 'css',
-					'.woff2': 'text',
-					'.woff': 'text',
 				},
 			});
 
@@ -137,7 +135,7 @@ const usercss: BundleOptions = {
 	bundle: true,
 	name: 'usercss',
 	outfile: 'bleh.user.css',
-	loader: { '.css': 'css', '.woff2': 'text', '.woff': 'text' },
+	loader: { '.css': 'css' },
 	minify: true,
 };
 
