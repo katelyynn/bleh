@@ -406,7 +406,7 @@ body,
 	--card-border-base-highlight: oklch(var(--b2) / 0.55);
 
 	--separator: var(--separator-base);
-	--separator-base: oklch(var(--b3) / 0.9);
+	--separator-base: oklch(var(--b3) / 0.8);
 
 	--textarea: oklch(var(--b6) / 20%);
 	--textarea-hov: oklch(var(--b6) / 40%);
@@ -425,6 +425,8 @@ body,
 	--group-shadow:
 		inset 0 0 0 1px oklch(var(--b2) / 0.36),
 		0 1px 2px 0 oklch(0.01 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue) / 0.3);
+
+	--separator-shadow: 0 1px 2px 0 oklch(0.01 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue) / 0.15);
 
 	--inset-background: oklch(var(--b6) / 23%);
 	--inset-shadow: inset 0 4px 10px oklch(var(--b6) / 50%);
@@ -555,6 +557,8 @@ body,
             var(--input-shadow);
 		--group-shadow: inset 0 0 0 1px oklch(var(--b2) / 72%);
 
+		--separator-shadow: 0 1px 2px 0 oklch(0.03 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue) / 0.4);
+
 		--sidebar-bg: color-mix(in oklch, oklch(var(--b4)) 22%, oklch(var(--b5)));
 		--sidebar-border: color-mix(in oklch, oklch(var(--b5)), oklch(var(--b2)) 60%);
 		--toolbar-bg: oklch(var(--b4) / 20%);
@@ -634,6 +638,8 @@ body,
 			inset 0 0 0 1px oklch(var(--b4) / 0.8),
 			0 1px 2px 0 oklch(0.01 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue) / 0.04);
 
+		--separator-shadow: 0 1px 2px 0 oklch(0.01 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue) / 0.02);
+
 		--sidebar-bg: color-mix(in oklch, oklch(var(--b6)) 70%, oklch(var(--b5)));
 		--sidebar-border: color-mix(
             in oklch,
@@ -698,7 +704,7 @@ body,
 		--b7: 0.17 calc(var(--sat) * 0.26 * var(--sat-bg, 1)) var(--hue);
 		--b9: 0.84 0 0;
 
-		--separator-base: oklch(var(--b2) / 0.1);
+		--separator-base: oklch(var(--b2) / 0.2);
 
 		--card-border-base: oklch(0.81 calc(var(--sat) * 0.12 * var(--sat-bg, 1)) var(--hue)) !important;
 		--card-border-base-highlight: oklch(0.76 calc(var(--sat) * 0.11 * var(--sat-bg, 1)) var(--hue)) !important;
@@ -711,8 +717,10 @@ body,
 			inset 0 0 0 1px oklch(var(--h3) / 0.4),
             var(--input-shadow);
 		--group-shadow:
-			inset 0 0 0 1px oklch(var(--b2) / 0.23),
+			inset 0 0 0 1px oklch(var(--b2) / 0.28),
 			0 1px 2px 0 oklch(0.01 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue) / 0.03);
+
+		--separator-shadow: 0 1px 2px 0 oklch(0.01 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue) / 0.02);
 
 		--sidebar-bg: color-mix(in oklch, oklch(var(--b6)) 56%, oklch(var(--b5)));
 		--sidebar-border: oklch(0.87 calc(var(--sat) * 0.1 * var(--sat-bg, 1)) var(--hue));
@@ -765,6 +773,11 @@ body,
 		--card-blur-bg: oklch(var(--b5) / var(--solarium-opacity, 70%));
 		--separator-base: oklch(var(--b3) / 0.55);
 
+		--group-shadow:
+			inset 0 0 0 1px oklch(var(--b2) / 0.36),
+			0 1px 2px 0 oklch(0.0512 0.0263 287.62 / 0.3);
+		--separator-shadow: 0 1px 2px 0 oklch(0.0512 0.0263 287.62 / 0.15);
+
 		--setting-group: oklch(var(--b4) / 20%);
 	}
 	&[data-bleh--theme="rose_pine_dawn"] {
@@ -789,7 +802,9 @@ body,
             var(--input-shadow);
 		--group-shadow:
 			inset 0 0 0 1px oklch(var(--b4) / 0.6),
-			0 1px 2px 0 oklch(0.01 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue) / 0.3);
+			0 1px 2px 0 oklch(0.7502 0.0101 58.21 / 0.1);
+
+		--separator-shadow: 0 1px 2px 0 oklch(0.7502 0.0101 58.21 / 0.06);
 
 		--sidebar-bg: color-mix(in oklch, oklch(var(--b6)) 70%, oklch(var(--b5)));
 		--sidebar-border: color-mix(
@@ -856,6 +871,11 @@ body,
 			0 1px 2px 0 oklch(0.0956 0.0017 17.34 / 0.3);
 
 		--separator-base: oklch(var(--b2) / 0.53);
+
+		--group-shadow:
+			inset 0 0 0 1px oklch(var(--b2) / 0.36),
+			0 1px 2px 0 oklch(0.0556 0.0017 17.34 / 0.3);
+		--separator-shadow: 0 1px 2px 0 oklch(0.0556 0.0017 17.34 / 0.15);
 
 		--card-border-base: oklch(var(--b2) / 0.6);
 		--card-border-base-highlight: oklch(var(--b2) / 0.78);
