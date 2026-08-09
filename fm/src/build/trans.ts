@@ -11346,6 +11346,9 @@ export const trans = {
 		ru: 'Недавно скробблено: {v}',
 		it: '{v} scrobbles di recente',
 	},
+	value_listeners_recently: {
+		en: '{v} listeners recently',
+	},
 	on_tour: {
 		en: 'On tour',
 		pt: 'Em turnê',

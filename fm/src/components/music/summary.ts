@@ -70,7 +70,7 @@ export function music_summary(
 	}
                         </div>
                         <p class="subtle-like" ref=${(el) => title = el}>${
-		tl(trans.value_scrobbles_recently, { v: 0 })
+		tl(trans.value_listeners_recently, { v: 0 })
 	}</p>
                     </div>
                 </div>
@@ -290,7 +290,7 @@ function fill_graph_blocks(labels: DateTime[], values: number[]) {
 		});
 	});
 
-	title.textContent = tl(trans.value_scrobbles_recently, {
+	title.textContent = tl(trans.value_listeners_recently, {
 		v: sum.toLocaleString(lang),
 	});
 }
