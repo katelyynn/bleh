@@ -102092,13 +102092,13 @@ var bleh = (() => {
                         }),
                         badges ? /* @__PURE__ */ jsx("div", {
                           class: "badges",
-                          children: create_badge(badges, false, true)
+                          children: create_badge(badges, false, true, true)
                         }) : auth.pro && /* @__PURE__ */ jsx("div", {
                           class: "badges",
                           children: create_badge({
                             type: "user-status-subscriber",
                             inbuilt: true
-                          }, false, true)
+                          }, false, true, true)
                         }),
                         /* @__PURE__ */ jsx("a", {
                           class: "link-block-cover-link",
@@ -102559,30 +102559,23 @@ var bleh = (() => {
           let elem;
           const formal = page.state.quick_access_items[val];
           if (val == "friends") {
-            elem = /* @__PURE__ */ jsx("div", {
-              class: "button-combo",
+            elem = /* @__PURE__ */ jsx(ButtonCombo, {
               children: [
-                /* @__PURE__ */ jsx("a", {
-                  class: [
-                    "dropdown-menu-clickable-item"
-                  ],
-                  "data-type": formal.icon,
+                /* @__PURE__ */ jsx(Button, {
+                  menu: true,
                   href: formal.url,
-                  onClick: () => {
-                    instance.hide();
-                  },
-                  children: formal.name
+                  onClick: () => instance.hide(),
+                  children: [
+                    /* @__PURE__ */ jsx(Icon, {
+                      name: formal.icon
+                    }),
+                    formal.name
+                  ]
                 }),
-                /* @__PURE__ */ jsx("div", {
-                  class: "button-combo-sep"
-                }),
-                /* @__PURE__ */ jsx("button", {
-                  type: "button",
-                  class: [
-                    "dropdown-menu-clickable-item",
-                    "chibi"
-                  ],
-                  "data-type": "continue",
+                /* @__PURE__ */ jsx(ButtonComboSeparator, {}),
+                /* @__PURE__ */ jsx(Button, {
+                  menu: true,
+                  chibi: true,
                   onClick: () => {
                     next.current.replaceChildren(/* @__PURE__ */ jsx(NavigationFriends, {
                       instance,
@@ -102590,36 +102583,45 @@ var bleh = (() => {
                     }));
                     side.current.setAttribute("data-page", "2");
                   },
-                  children: tl2(trans.more)
+                  tooltip: {
+                    content: tl2(trans.more)
+                  },
+                  children: [
+                    /* @__PURE__ */ jsx(Icon, {
+                      name: icons.continue
+                    }),
+                    tl2(trans.more)
+                  ]
                 })
               ]
             });
             return elem;
           }
           if (formal.url) {
-            elem = /* @__PURE__ */ jsx("a", {
-              class: [
-                "dropdown-menu-clickable-item"
-              ],
-              "data-type": formal.icon,
+            elem = /* @__PURE__ */ jsx(Button, {
+              menu: true,
               href: formal.url,
-              onClick: () => {
-                instance.hide();
-              },
-              children: formal.name
+              onClick: () => instance.hide(),
+              children: [
+                /* @__PURE__ */ jsx(Icon, {
+                  name: formal.icon
+                }),
+                formal.name
+              ]
             });
           } else {
-            elem = /* @__PURE__ */ jsx("button", {
-              type: "button",
-              class: [
-                "dropdown-menu-clickable-item"
-              ],
-              "data-type": formal.icon,
+            elem = /* @__PURE__ */ jsx(Button, {
+              menu: true,
               onClick: () => {
                 formal.action();
                 instance.hide();
               },
-              children: formal.name
+              children: [
+                /* @__PURE__ */ jsx(Icon, {
+                  name: formal.icon
+                }),
+                formal.name
+              ]
             });
           }
           let count = 0;
@@ -102645,49 +102647,44 @@ var bleh = (() => {
           }
           return elem;
         }),
-        /* @__PURE__ */ jsx("div", {
-          class: "button-combo",
+        /* @__PURE__ */ jsx(ButtonCombo, {
           children: [
-            /* @__PURE__ */ jsx("button", {
-              type: "button",
-              class: [
-                "dropdown-menu-clickable-item"
-              ],
-              "data-menu-item": "themes",
-              onClick: () => {
-                toggle_theme();
-              },
-              children: tl2(trans.themes.name)
+            /* @__PURE__ */ jsx(Button, {
+              menu: true,
+              onClick: () => toggle_theme(),
+              children: [
+                /* @__PURE__ */ jsx(Icon, {
+                  name: icons.theme
+                }),
+                tl2(trans.themes.name)
+              ]
             }),
-            /* @__PURE__ */ jsx("div", {
-              class: "button-combo-sep"
-            }),
-            /* @__PURE__ */ jsx("button", {
-              type: "button",
-              class: [
-                "dropdown-menu-clickable-item",
-                "chibi"
-              ],
-              "data-type": "continue",
+            /* @__PURE__ */ jsx(ButtonComboSeparator, {}),
+            /* @__PURE__ */ jsx(Button, {
+              menu: true,
+              chibi: true,
               onClick: () => {
                 next.current.replaceChildren(/* @__PURE__ */ jsx(NavigationThemes, {
                   side
                 }));
                 side.current.setAttribute("data-page", "2");
               },
-              children: tl2(trans.more)
+              tooltip: {
+                content: tl2(trans.more)
+              },
+              children: [
+                /* @__PURE__ */ jsx(Icon, {
+                  name: icons.continue
+                }),
+                tl2(trans.more)
+              ]
             })
           ]
         }),
-        useSettings2.get("navigation_language") && /* @__PURE__ */ jsx("div", {
-          class: "button-combo",
+        useSettings2.get("navigation_language") && /* @__PURE__ */ jsx(ButtonCombo, {
           children: [
-            /* @__PURE__ */ jsx("button", {
-              type: "button",
-              class: [
-                "dropdown-menu-clickable-item"
-              ],
-              "data-menu-item": "language",
+            /* @__PURE__ */ jsx(Button, {
+              menu: true,
               onClick: () => {
                 next.current.replaceChildren(/* @__PURE__ */ jsx(NavigationLanguages, {
                   instance,
@@ -102695,18 +102692,17 @@ var bleh = (() => {
                 }));
                 side.current.setAttribute("data-page", "2");
               },
-              children: tl2(trans.language)
+              children: [
+                /* @__PURE__ */ jsx(Icon, {
+                  name: icons.language
+                }),
+                tl2(trans.language)
+              ]
             }),
-            /* @__PURE__ */ jsx("div", {
-              class: "button-combo-sep"
-            }),
-            /* @__PURE__ */ jsx("button", {
-              type: "button",
-              class: [
-                "dropdown-menu-clickable-item",
-                "chibi"
-              ],
-              "data-type": "continue",
+            /* @__PURE__ */ jsx(ButtonComboSeparator, {}),
+            /* @__PURE__ */ jsx(Button, {
+              menu: true,
+              chibi: true,
               onClick: () => {
                 next.current.replaceChildren(/* @__PURE__ */ jsx(NavigationLanguages, {
                   instance,
@@ -102714,7 +102710,15 @@ var bleh = (() => {
                 }));
                 side.current.setAttribute("data-page", "2");
               },
-              children: tl2(trans.more)
+              tooltip: {
+                content: tl2(trans.more)
+              },
+              children: [
+                /* @__PURE__ */ jsx(Icon, {
+                  name: icons.continue
+                }),
+                tl2(trans.more)
+              ]
             })
           ]
         }),
@@ -102945,9 +102949,7 @@ var bleh = (() => {
       update(val);
     });
     const buttons = [];
-    const wrap = /* @__PURE__ */ jsx("div", {
-      class: "side-page",
-      "data-page": 2,
+    const wrap = /* @__PURE__ */ jsx(Fragment, {
       children: [
         /* @__PURE__ */ jsx("button", {
           type: "button",
@@ -115795,7 +115797,7 @@ var bleh = (() => {
         date: "2026-07-30"
       }
     },
-    built_on: "2026-08-09T14:45:24.470Z"
+    built_on: "2026-08-09T14:53:35.172Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

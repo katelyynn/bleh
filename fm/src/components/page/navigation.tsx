@@ -999,7 +999,12 @@ export function append_nav() {
 								{badges
 									? (
 										<div class='badges'>
-											{create_badge(badges, false, true)}
+											{create_badge(
+												badges,
+												false,
+												true,
+												true,
+											)}
 										</div>
 									)
 									: auth.pro && (
@@ -1011,6 +1016,7 @@ export function append_nav() {
 													inbuilt: true,
 												},
 												false,
+												true,
 												true,
 											)}
 										</div>
@@ -1598,25 +1604,19 @@ function NavigationPage1({
 
 				if (val == 'friends') {
 					elem = (
-						<div class='button-combo'>
-							<a
-								class={['dropdown-menu-clickable-item']}
-								data-type={formal.icon}
+						<ButtonCombo>
+							<Button
+								menu
 								href={formal.url}
-								onClick={() => {
-									instance.hide();
-								}}
+								onClick={() => instance.hide()}
 							>
+								<Icon name={formal.icon} />
 								{formal.name}
-							</a>
-							<div class='button-combo-sep' />
-							<button
-								type='button'
-								class={[
-									'dropdown-menu-clickable-item',
-									'chibi',
-								]}
-								data-type='continue'
+							</Button>
+							<ButtonComboSeparator />
+							<Button
+								menu
+								chibi
 								onClick={() => {
 									next.current!.replaceChildren(
 										<NavigationFriends
@@ -1629,10 +1629,12 @@ function NavigationPage1({
 										'2',
 									);
 								}}
+								tooltip={{ content: tl(trans.more) }}
 							>
+								<Icon name={icons.continue} />
 								{tl(trans.more)}
-							</button>
-						</div>
+							</Button>
+						</ButtonCombo>
 					);
 
 					return elem;
@@ -1640,30 +1642,27 @@ function NavigationPage1({
 
 				if (formal.url) {
 					elem = (
-						<a
-							class={['dropdown-menu-clickable-item']}
-							data-type={formal.icon}
+						<Button
+							menu
 							href={formal.url}
-							onClick={() => {
-								instance.hide();
-							}}
+							onClick={() => instance.hide()}
 						>
+							<Icon name={formal.icon} />
 							{formal.name}
-						</a>
+						</Button>
 					);
 				} else {
 					elem = (
-						<button
-							type='button'
-							class={['dropdown-menu-clickable-item']}
-							data-type={formal.icon}
+						<Button
+							menu
 							onClick={() => {
 								formal.action();
 								instance.hide();
 							}}
 						>
+							<Icon name={formal.icon} />
 							{formal.name}
-						</button>
+						</Button>
 					);
 				}
 
@@ -1690,25 +1689,18 @@ function NavigationPage1({
 
 				return elem;
 			})}
-			<div class='button-combo'>
-				<button
-					type='button'
-					class={['dropdown-menu-clickable-item']}
-					data-menu-item='themes'
-					onClick={() => {
-						toggle_theme();
-					}}
+			<ButtonCombo>
+				<Button
+					menu
+					onClick={() => toggle_theme()}
 				>
+					<Icon name={icons.theme} />
 					{tl(trans.themes.name)}
-				</button>
-				<div class='button-combo-sep' />
-				<button
-					type='button'
-					class={[
-						'dropdown-menu-clickable-item',
-						'chibi',
-					]}
-					data-type='continue'
+				</Button>
+				<ButtonComboSeparator />
+				<Button
+					menu
+					chibi
 					onClick={() => {
 						next.current!.replaceChildren(
 							<NavigationThemes
@@ -1717,16 +1709,16 @@ function NavigationPage1({
 						);
 						side.current!.setAttribute('data-page', '2');
 					}}
+					tooltip={{ content: tl(trans.more) }}
 				>
+					<Icon name={icons.continue} />
 					{tl(trans.more)}
-				</button>
-			</div>
+				</Button>
+			</ButtonCombo>
 			{useSettings.get('navigation_language') && (
-				<div class='button-combo'>
-					<button
-						type='button'
-						class={['dropdown-menu-clickable-item']}
-						data-menu-item='language'
+				<ButtonCombo>
+					<Button
+						menu
 						onClick={() => {
 							next.current!.replaceChildren(
 								<NavigationLanguages
@@ -1737,16 +1729,13 @@ function NavigationPage1({
 							side.current!.setAttribute('data-page', '2');
 						}}
 					>
+						<Icon name={icons.language} />
 						{tl(trans.language)}
-					</button>
-					<div class='button-combo-sep' />
-					<button
-						type='button'
-						class={[
-							'dropdown-menu-clickable-item',
-							'chibi',
-						]}
-						data-type='continue'
+					</Button>
+					<ButtonComboSeparator />
+					<Button
+						menu
+						chibi
 						onClick={() => {
 							next.current!.replaceChildren(
 								<NavigationLanguages
@@ -1756,10 +1745,12 @@ function NavigationPage1({
 							);
 							side.current!.setAttribute('data-page', '2');
 						}}
+						tooltip={{ content: tl(trans.more) }}
 					>
+						<Icon name={icons.continue} />
 						{tl(trans.more)}
-					</button>
-				</div>
+					</Button>
+				</ButtonCombo>
 			)}
 			<ButtonCombo>
 				<Button
@@ -1986,7 +1977,7 @@ function NavigationThemes({
 	const buttons: NavigationThemeElement[] = [];
 
 	const wrap = (
-		<div class='side-page' data-page={2}>
+		<>
 			<button
 				type='button'
 				class='dropdown-menu-clickable-item'
@@ -2006,7 +1997,7 @@ function NavigationThemes({
 					uuid={uuid}
 				/>
 			))}
-		</div>
+		</>
 	);
 
 	function update(theme?: string) {
