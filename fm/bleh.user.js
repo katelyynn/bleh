@@ -102949,6 +102949,7 @@ var bleh = (() => {
       update(val);
     });
     const buttons = [];
+    const full_theme_list = getThemes();
     const wrap = /* @__PURE__ */ jsx(Fragment, {
       children: [
         /* @__PURE__ */ jsx("button", {
@@ -102960,13 +102961,28 @@ var bleh = (() => {
           },
           children: tl2(trans.back)
         }),
-        Object.entries(getThemes()).map(([id, theme]) => /* @__PURE__ */ jsx(NavigationTheme, {
-          id,
-          item: theme,
-          list: buttons,
-          onChange: update,
-          uuid
-        }))
+        light_themes.map((id) => {
+          const theme = full_theme_list[id];
+          if (!theme) return;
+          return /* @__PURE__ */ jsx(NavigationTheme, {
+            id,
+            item: theme,
+            list: buttons,
+            onChange: update,
+            uuid
+          });
+        }),
+        dark_themes.map((id) => {
+          const theme = full_theme_list[id];
+          if (!theme) return;
+          return /* @__PURE__ */ jsx(NavigationTheme, {
+            id,
+            item: theme,
+            list: buttons,
+            onChange: update,
+            uuid
+          });
+        })
       ]
     });
     function update(theme) {
@@ -102975,6 +102991,7 @@ var bleh = (() => {
         elem.active = elem.id == theme;
       });
     }
+    update();
     return wrap;
   }
   function NavigationTheme({ id, item, list, onChange, uuid }) {
@@ -103004,7 +103021,7 @@ var bleh = (() => {
         return id;
       }
     });
-    Object.defineProperty(elem, "value", {
+    Object.defineProperty(elem, "active", {
       set(val) {
         active = val;
         update();
@@ -115797,7 +115814,7 @@ var bleh = (() => {
         date: "2026-07-30"
       }
     },
-    built_on: "2026-08-09T14:53:35.172Z"
+    built_on: "2026-08-09T14:57:44.896Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

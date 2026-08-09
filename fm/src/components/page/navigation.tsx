@@ -47,7 +47,7 @@ import { notify } from '../dialog/notify';
 import { new_indicator } from '../shared/indicator';
 import { createRef, ReactElement, RefObject } from 'jsx-dom';
 import { toggle_theme } from '@/config.ts';
-import { getThemes, theme } from '@/build/theme.ts';
+import { dark_themes, getThemes, light_themes, theme } from '@/build/theme.ts';
 import {
 	Button,
 	ButtonCombo,
@@ -1976,6 +1976,8 @@ function NavigationThemes({
 
 	const buttons: NavigationThemeElement[] = [];
 
+	const full_theme_list = getThemes();
+
 	const wrap = (
 		<>
 			<button
@@ -1988,15 +1990,34 @@ function NavigationThemes({
 			>
 				{tl(trans.back)}
 			</button>
-			{Object.entries(getThemes()).map(([id, theme]) => (
-				<NavigationTheme
-					id={id}
-					item={theme}
-					list={buttons}
-					onChange={update}
-					uuid={uuid}
-				/>
-			))}
+			{light_themes.map((id) => {
+				const theme = full_theme_list[id];
+				if (!theme) return;
+
+				return (
+					<NavigationTheme
+						id={id}
+						item={theme}
+						list={buttons}
+						onChange={update}
+						uuid={uuid}
+					/>
+				);
+			})}
+			{dark_themes.map((id) => {
+				const theme = full_theme_list[id];
+				if (!theme) return;
+
+				return (
+					<NavigationTheme
+						id={id}
+						item={theme}
+						list={buttons}
+						onChange={update}
+						uuid={uuid}
+					/>
+				);
+			})}
 		</>
 	);
 
@@ -2007,6 +2028,8 @@ function NavigationThemes({
 			elem.active = elem.id == theme;
 		});
 	}
+
+	update();
 
 	return wrap;
 }
@@ -2056,7 +2079,7 @@ function NavigationTheme({
 		},
 	});
 
-	Object.defineProperty(elem, 'value', {
+	Object.defineProperty(elem, 'active', {
 		set(val: boolean) {
 			active = val;
 			update();
