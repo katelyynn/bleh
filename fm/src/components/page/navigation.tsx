@@ -2150,6 +2150,7 @@ function NavigationLanguage({
 }: NavigationLanguageProps) {
 	const button = (
 		<button
+			name={code}
 			type='submit'
 			class={['dropdown-menu-clickable-item', 'v2', 'flex-button']}
 			onClick={onChange}
@@ -2175,8 +2176,28 @@ function NavigationLanguage({
 
 	if (active) return button;
 
+	const form = createRef();
+
+	// TODO: maybe just use the default elements again?
+	// this is really jank
 	return (
-		<form action='/i18n/setlang' method='post'>
+		<form
+			action='/i18n/setlang/'
+			method='post'
+			ref={form}
+			onSubmit={async (e) => {
+				e.preventDefault();
+
+				const data = new FormData(form.current);
+
+				await fetch(form.current.action, {
+					method: 'POST',
+					body: data,
+				}).then((res) => {
+					window.location.href = res.url;
+				});
+			}}
+		>
 			<input type='hidden' name='language' value={code} />
 			{button}
 		</form>

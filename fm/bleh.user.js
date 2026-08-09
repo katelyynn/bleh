@@ -103066,6 +103066,7 @@ var bleh = (() => {
   }
   function NavigationLanguage({ code, onChange, active }) {
     const button1 = /* @__PURE__ */ jsx("button", {
+      name: code,
       type: "submit",
       class: [
         "dropdown-menu-clickable-item",
@@ -103097,9 +103098,21 @@ var bleh = (() => {
       })
     });
     if (active) return button1;
+    const form = createRef();
     return /* @__PURE__ */ jsx("form", {
-      action: "/i18n/setlang",
+      action: "/i18n/setlang/",
       method: "post",
+      ref: form,
+      onSubmit: async (e5) => {
+        e5.preventDefault();
+        const data2 = new FormData(form.current);
+        await fetch(form.current.action, {
+          method: "POST",
+          body: data2
+        }).then((res) => {
+          window.location.href = res.url;
+        });
+      },
       children: [
         /* @__PURE__ */ jsx("input", {
           type: "hidden",
@@ -115814,7 +115827,7 @@ var bleh = (() => {
         date: "2026-07-30"
       }
     },
-    built_on: "2026-08-09T14:57:44.896Z"
+    built_on: "2026-08-09T15:16:46.907Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
