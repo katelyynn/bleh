@@ -45,7 +45,7 @@ import { convert_lang_to_country, Flag, flag } from '../shared/flag';
 import { keys } from '../settings/storage';
 import { notify } from '../dialog/notify';
 import { new_indicator } from '../shared/indicator';
-import { createRef, ReactElement } from 'jsx-dom';
+import { createRef, ReactElement, RefObject } from 'jsx-dom';
 import { toggle_theme } from '@/config.ts';
 import { getThemes, theme } from '@/build/theme.ts';
 import {
@@ -890,94 +890,16 @@ export function append_nav() {
 
 	queue_popup('search', search);
 
-	// language
-	const language_options = document.querySelectorAll('.footer-language-form');
-
-	const language_menu = html.node`
-        <div class="language-menu">
-            <button class="dropdown-menu-clickable-item v2" aria-selected="true">
-                <div class="auth-dropdown-item-row">
-                    <span class="auth-dropdown-item-left">
-                        ${
-		flag(
-			(convert_lang_to_country[lang] || lang).toUpperCase(),
-			'small-flag',
-		)
-	}
-                        ${get_language_name(lang)}
-                    </span>
-                    ${
-		lang in lang_info
-			? html.node`
-                            <span class="auth-dropdown-item-right">
-                                <div class="bleh-icon checkmark" />
-                            </span>
-                        `
-			: ''
-	}
-                </div>
-            </button>
-            <div class="sep"></div>
-        </div>
-    `;
-
-	language_options.forEach((language_option) => {
-		const button = language_option.querySelector('button');
-
-		if (!button) {
-			log(
-				'random last.fm error where this button is non existent',
-				'language',
-				'error',
-				{
-					language_options,
-					language_option,
-					raw: language_option.innerHTML,
-					raw_options: language_options,
-				},
-			);
-			return;
-		}
-
-		const key = button.getAttribute('name');
-
-		button.classList.remove('mimic-link');
-		button.classList.add(
-			'dropdown-menu-clickable-item',
-			'v2',
-			'flex-button',
-		);
-
-		render(
-			button,
-			html`
-				<div class="auth-dropdown-item-row">
-				    <span class="auth-dropdown-item-left">
-				        ${flag(
-					(convert_lang_to_country[key] || key).toUpperCase(),
-					'small-flag',
-				)}
-				        ${get_language_name(key)}
-				    </span>
-				    ${key in lang_info
-					? html.node`
-                            <span class="auth-dropdown-item-right">
-                                <div class="bleh-icon checkmark" />
-                            </span>
-                        `
-					: ''}
-				</div>
-			`,
-		);
-
-		language_menu.appendChild(language_option);
-	});
-
 	// auth menu
 	const token = new_auth
 		.querySelector('[name="csrfmiddlewaretoken"]')
 		.getAttribute('value');
 	page.token = token;
+
+	const auth_header = createRef();
+	const auth_bg = createRef();
+	const side = createRef();
+	const next_side = createRef();
 
 	let auth_menu = tippy(auth_link, {
 		theme: 'auth-menu-v2',
@@ -1005,7 +927,6 @@ export function append_nav() {
 				localStorage.getItem('bleh_update_required') || 'false';
 
 			let page_2;
-			let side;
 
 			const current = useSettings.get('navigation_items');
 
@@ -1024,236 +945,183 @@ export function append_nav() {
 				page.subpage.startsWith('listening-report') ||
 				page.state.settings_page == 'visual';
 
-			let auth_header;
-			let auth_bg;
-
-			instance.setContent(html.node`
-                ${
-				update_required == 'true'
-					? html.node`
-                <div class="update-available-banner" onclick=${() => {
-						prompt_for_update();
-					}}>
-                    <div class="update-container">
-                        ${icon({ name: icons.update })}
-                    </div>
-                    <span>${tl(trans.update_available_to_install)}</span>
-                </div>
-                `
-					: ''
-			}
-                <div class="auth-menu-v2" style="--page-height: ${height}px">
-                    <div class="side primary" onclick=${() => {
-				instance.hide();
-			}}>
-                        <div class="auth-bg-container" ref=${(el) =>
-				auth_bg = el}>
-                            ${
-				!auth.avatar.endsWith('818148bf682d429dc215c1705eb27b98.png')
-					? html.node`
-                            <div class="bg" style="background-image: url(${
-						avatar(auth.avatar, 'avatar170s')
-					})" />
-                            `
-					: ''
-			}
-                        </div>
-                        <div class="auth-menu-header" ref=${(el) =>
-				auth_header = el}>
-                            <div class="avatar">
-                                <img src=${
-				avatar(auth.avatar, 'avatar170s')
-			} alt=${auth.name} />
-                            </div>
-                            <div class="name"><span class="at">@</span>${auth.name}</div>
-                            ${
-				badges
-					? html.node`
-                                <div class="badges">
-                                    ${create_badge(badges, false, true)}
-                                </div>
-                            `
-					: auth.pro
-					? html.node`
-                                <div class="badges">
-                                    ${() => {
-						const elem = html.node`
-                                            <span class="label user-status-subscriber no-hover expand small">
-                                                ${
-							tl(trans.badges['user-status-subscriber'].name)
-						}
-                                            </span>
-                                        `;
-
-						tippy(elem, {
-							theme: 'badge',
-							placement: 'bottom',
-							content: html.node`
-                                                <div class="badge-name colourful user-status-subscriber">${
-								tl(trans.badges['user-status-subscriber'].name)
-							}</div>
-                                                <div class="badge-reason">${
-								tl(
-									trans.badges['user-status-subscriber']
-										.reason,
-								)
-							}</div>
-                                            `,
-						});
-
-						return elem;
-					}}
-                                </div>
-                            `
-					: ''
-			}
-                            <a class="link-block-cover-link" href="${root}user/${auth.name}" onclick=${() => {
-				instance.hide();
-			}} />
-                        </div>
-                        <div class="floating button-group">
-                            ${() => {
-				let button = html.node`
-                                    <a class="dropdown-menu-clickable-item chibi" data-type="edit_mini" href="${root}settings" onclick=${() => {
-					instance.hide();
-				}}>
-                                        ${tl(trans.edit_profile)}
-                                    </a>
-                                `;
-
-				tippy(button, {
-					content: button.textContent,
-				});
-
-				return button;
-			}}
-                            ${
-				useSettings.get('starred_friend') != ''
-					? () => {
-						let button = html.node`
-                                    <a class="dropdown-menu-clickable-item chibi colourful" data-type="starred_friend" data-starred="true" href="${root}user/${
-							useSettings.get('starred_friend')
-						}" onclick=${() => {
-							instance.hide();
-						}}>${useSettings.get('starred_friend')}</a>
-                                `;
-
-						tippy(button, {
-							content: useSettings.get('starred_friend'),
-						});
-
-						return button;
-					}
-					: () => {
-						let button = html.node`
-                                    <button class="dropdown-menu-clickable-item chibi" data-type="starred_friend" data-is-shortcut="false" onclick=${() =>
-							open_starred_friend_window()}>${
-							tl(trans.starred_friend.name)
-						}</button>
-                                `;
-
-						tippy(button, {
-							content: tl(
-								trans.starred_friend.name,
-							),
-						});
-
-						return button;
-					}
-			}
-                        </div>
-                    </div>
-                    <div class="side" ref=${(
-				el,
-			) => (side = el)} data-page="1" />
-                </div>
-            `);
+			instance.setContent(
+				<>
+					{bool(update_required) && (
+						<div
+							class='update-available-banner'
+							onClick={prompt_for_update}
+						>
+							<div class='update-container'>
+								<Icon name={icons.update} />
+							</div>
+							<span>{tl(trans.update_available_to_install)}</span>
+						</div>
+					)}
+					<div
+						class='auth-menu-v2'
+						style={{ '--page-height': `${height}px` }}
+					>
+						<div
+							class={['side', 'primary']}
+							onClick={() => {
+								instance.hide();
+							}}
+						>
+							<div class='auth-bg-container' ref={auth_bg}>
+								{!auth.avatar.endsWith(
+									'818148bf682d429dc215c1705eb27b98.png',
+								) && (
+									<div
+										class='bg'
+										style={{
+											backgroundImage: `url(${
+												avatar(
+													auth.avatar,
+													'avatar170s',
+												)
+											})`,
+										}}
+									/>
+								)}
+							</div>
+							<div class='auth-menu-header'>
+								<div class='avatar'>
+									<img
+										src={avatar(auth.avatar, 'avatar170s')}
+										alt={auth.name!}
+									/>
+								</div>
+								<div class='name' ref={auth_header}>
+									<span class='at'>@</span>
+									{auth.name!}
+								</div>
+								{badges
+									? (
+										<div class='badges'>
+											{create_badge(badges, false, true)}
+										</div>
+									)
+									: auth.pro && (
+										<div class='badges'>
+											{create_badge(
+												{
+													type:
+														'user-status-subscriber',
+													inbuilt: true,
+												},
+												false,
+												true,
+											)}
+										</div>
+									)}
+								<a
+									class='link-block-cover-link'
+									href={`${root}user/${auth.name}`}
+									onClick={() => {
+										instance.hide();
+									}}
+								/>
+							</div>
+							<div class={['floating', 'button-group']}>
+								<Button
+									menu
+									chibi
+									href={`${root}settings`}
+									onClick={() => {
+										instance.hide();
+									}}
+									tooltip={{
+										content: tl(trans.edit_profile),
+									}}
+								>
+									<Icon name={icons.edit} />
+									{tl(trans.edit_profile)}
+								</Button>
+								{useSettings.get('starred_friend') != ''
+									? (
+										<Button
+											menu
+											chibi
+											colourful
+											accented
+											href={`${root}user/${
+												useSettings.get(
+													'starred_friend',
+												)
+											}`}
+											onClick={() => {
+												instance.hide();
+											}}
+											tooltip={{
+												content: useSettings.get(
+													'starred_friend',
+												) as string,
+											}}
+											data-starred='true'
+										>
+											<Icon
+												name={icons.starred_friend}
+											/>
+											{useSettings.get(
+												'starred_friend',
+											) as string}
+										</Button>
+									)
+									: (
+										<Button
+											menu
+											chibi
+											onClick={() => {
+												open_starred_friend_window();
+												instance.hide();
+											}}
+											tooltip={{
+												content: tl(
+													trans.starred_friend
+														.name,
+												),
+											}}
+											data-starred='false'
+										>
+											<Icon name={icons.plus} />
+											{tl(trans.starred_friend.name)}
+										</Button>
+									)}
+							</div>
+						</div>
+						<div class='side' data-page='1' ref={side}>
+							<NavigationPage1
+								instance={instance}
+								side={side}
+								next={next_side}
+								notif_count={notif_count}
+								messages_count={messages_count}
+								token={token!}
+							/>
+							<div
+								class='side-page'
+								data-page='2'
+								ref={next_side}
+							/>
+						</div>
+					</div>
+				</>,
+			);
 
 			load_profile_cache_externally(auth.name).then((cache) => {
-				render(
-					auth_bg,
-					html`
-						${cache.banner
-							? html.node`
-                    <div class="bg" style="background-image: url(${cache.banner})" />
-                    `
-							: !auth.avatar.endsWith(
-									'818148bf682d429dc215c1705eb27b98.png',
-								)
-							? html.node`
-                    <div class="bg" style="background-image: url(${
-								avatar(auth.avatar, 'avatar170s')
-							})" />
-                    `
-							: ''}
-					`,
-				);
-				render(
-					auth_header,
-					html`
-						<div class="avatar">
-						    <img src=${avatar(
-							auth.avatar,
-							'avatar170s',
-						)} alt=${auth.name} />
-						</div>
-						<div class="name">${cache.username
-							? cache.username
-							: html
-								.node`<span class="at">@</span>${auth.name}`}</div>
-						${badges
-							? html.node`
-                        <div class="badges">
-                            ${create_badge(badges, false, true, true)}
-                        </div>
-                    `
-							: auth.pro
-							? html.node`
-                        <div class="badges">
-                            ${() => {
-								const elem = html.node`
-                                    <span class="label user-status-subscriber no-hover expand small">
-                                        ${
-									tl(
-										trans.badges['user-status-subscriber']
-											.name,
-									)
-								}
-                                    </span>
-                                `;
+				if (cache.banner) {
+					auth_bg.current.replaceChildren(
+						<div
+							class='bg'
+							style={{ backgroundImage: `url(${cache.banner})` }}
+						/>,
+					);
+				}
 
-								tippy(elem, {
-									theme: 'badge',
-									placement: 'bottom',
-									content: html.node`
-                                        <div class="badge-name colourful user-status-subscriber">${
-										tl(
-											trans
-												.badges[
-													'user-status-subscriber'
-												].name,
-										)
-									}</div>
-                                        <div class="badge-reason">${
-										tl(
-											trans
-												.badges[
-													'user-status-subscriber'
-												].reason,
-										)
-									}</div>
-                                    `,
-								});
-
-								return elem;
-							}}
-                        </div>
-                    `
-							: ''}
-						<a class="link-block-cover-link" href="${root}user/${auth
-							.name}" />
-					`,
-				);
+				if (cache.username) {
+					auth_header.current.textContent = cache.username;
+				}
 			});
 		},
 
@@ -1706,8 +1574,8 @@ export async function fetch_messages() {
 
 interface NavigationPage1Props {
 	instance: Instance;
-	side: ReactElement;
-	next: ReactElement;
+	side: RefObject<ReactElement>;
+	next: RefObject<ReactElement>;
 	notif_count: number;
 	messages_count: number;
 	token: string;
@@ -1723,7 +1591,7 @@ function NavigationPage1({
 }: NavigationPage1Props) {
 	const wrap = (
 		<div class='side-page' data-page={1}>
-			{useSettings.get('navigation-items').map((val: string) => {
+			{useSettings.get('navigation_items').map((val: string) => {
 				let elem;
 
 				const formal = page.state.quick_access_items[val];
@@ -1750,13 +1618,16 @@ function NavigationPage1({
 								]}
 								data-type='continue'
 								onClick={() => {
-									next.replaceWith(
+									next.current!.replaceChildren(
 										<NavigationFriends
 											instance={instance}
 											side={side}
 										/>,
 									);
-									side.setAttribute('data-page', '2');
+									side.current!.setAttribute(
+										'data-page',
+										'2',
+									);
 								}}
 							>
 								{tl(trans.more)}
@@ -1839,12 +1710,12 @@ function NavigationPage1({
 					]}
 					data-type='continue'
 					onClick={() => {
-						next.replaceWith(
+						next.current!.replaceChildren(
 							<NavigationThemes
 								side={side}
 							/>,
 						);
-						side.setAttribute('data-page', '2');
+						side.current!.setAttribute('data-page', '2');
 					}}
 				>
 					{tl(trans.more)}
@@ -1857,13 +1728,13 @@ function NavigationPage1({
 						class={['dropdown-menu-clickable-item']}
 						data-menu-item='language'
 						onClick={() => {
-							next.replaceWith(
+							next.current!.replaceChildren(
 								<NavigationLanguages
 									instance={instance}
 									side={side}
 								/>,
 							);
-							side.setAttribute('data-page', '2');
+							side.current!.setAttribute('data-page', '2');
 						}}
 					>
 						{tl(trans.language)}
@@ -1877,13 +1748,13 @@ function NavigationPage1({
 						]}
 						data-type='continue'
 						onClick={() => {
-							next.replaceWith(
+							next.current!.replaceChildren(
 								<NavigationLanguages
 									instance={instance}
 									side={side}
 								/>,
 							);
-							side.setAttribute('data-page', '2');
+							side.current!.setAttribute('data-page', '2');
 						}}
 					>
 						{tl(trans.more)}
@@ -1981,7 +1852,7 @@ function NavigationPage1({
 
 interface NavigationFriendsProps {
 	instance: Instance;
-	side: ReactElement;
+	side: RefObject<ReactElement>;
 }
 
 function NavigationFriends({
@@ -1994,13 +1865,13 @@ function NavigationFriends({
 	) => friend != starred);
 
 	return (
-		<div class='side-page' data-page={2}>
+		<>
 			<button
 				type='button'
 				class='dropdown-menu-clickable-item'
 				data-type='back'
 				onClick={() => {
-					side.setAttribute('data-page', '1');
+					side.current!.setAttribute('data-page', '1');
 				}}
 			>
 				{tl(trans.back)}
@@ -2027,7 +1898,7 @@ function NavigationFriends({
 			>
 				{tl(trans.edit_close_friends)}
 			</button>
-		</div>
+		</>
 	);
 }
 
@@ -2100,7 +1971,7 @@ function NavigationFriend({
 }
 
 interface NavigationThemesProps {
-	side: ReactElement;
+	side: RefObject<ReactElement>;
 }
 
 function NavigationThemes({
@@ -2121,7 +1992,7 @@ function NavigationThemes({
 				class='dropdown-menu-clickable-item'
 				data-type='back'
 				onClick={() => {
-					side.setAttribute('data-page', '1');
+					side.current!.setAttribute('data-page', '1');
 				}}
 			>
 				{tl(trans.back)}
@@ -2210,7 +2081,7 @@ function NavigationTheme({
 
 interface NavigationLanguagesProps {
 	instance: Instance;
-	side: ReactElement;
+	side: RefObject<ReactElement>;
 }
 
 function NavigationLanguages({
@@ -2220,13 +2091,13 @@ function NavigationLanguages({
 	const languages = lastfm_languages.filter((l) => l != lang);
 
 	return (
-		<div class='side-page' data-page={2}>
+		<>
 			<button
 				type='button'
 				class='dropdown-menu-clickable-item'
 				data-type='back'
 				onClick={() => {
-					side.setAttribute('data-page', '1');
+					side.current!.setAttribute('data-page', '1');
 				}}
 			>
 				{tl(trans.back)}
@@ -2248,7 +2119,7 @@ function NavigationLanguages({
 					}}
 				/>
 			))}
-		</div>
+		</>
 	);
 }
 

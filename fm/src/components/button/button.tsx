@@ -7,25 +7,30 @@
 import { ClassNames, createRef, ReactNode } from 'jsx-dom';
 import { Icon, icons } from '@/components/shared/icon.tsx';
 import { tl, trans } from '@/build/trans.ts';
-import tippy, { Props } from 'tippy.js';
+import tippy, { Props as tippyProps } from 'tippy.js';
 
-interface ButtonProps {
-	ref?: ReturnType<typeof createRef>;
-	type?: 'button' | 'submit',
-	chibi?: boolean;
-	primary?: boolean;
-	colourful?: boolean;
-	accented?: boolean;
-	disabled?: boolean;
-	loading?: boolean;
-	menu?: boolean;
-	href?: string;
-	external?: boolean;
-	onClick?: () => void;
-	className?: string;
-	children: ReactNode;
-	tooltip?: Partial<Props>;
-}
+type ButtonProps =
+	& {
+		ref?: ReturnType<typeof createRef>;
+		type?: 'button' | 'submit';
+		chibi?: boolean;
+		primary?: boolean;
+		colourful?: boolean;
+		accented?: boolean;
+		disabled?: boolean;
+		loading?: boolean;
+		menu?: boolean;
+		href?: string;
+		external?: boolean;
+		onClick?: () => void;
+		className?: string;
+		children: ReactNode;
+		tooltip?: Partial<tippyProps>;
+	}
+	& Omit<
+		JSX.IntrinsicElements['button'],
+		'type' | 'disabled' | 'onClick' | 'class' | 'children' | 'ref'
+	>;
 
 type ButtonElement = HTMLButtonElement & {
 	disabled: boolean;
@@ -53,6 +58,7 @@ export function Button({
 	className,
 	children,
 	tooltip,
+	...props
 }: ButtonProps) {
 	const classes: ClassNames = [
 		'btn',
@@ -60,7 +66,7 @@ export function Button({
 		chibi && 'chibi',
 		primary && 'primary',
 		colourful && 'colourful',
-		menu && 'dropdown-menu-clickable-item',
+		menu && 'dropdown-menu-clickable-item v2',
 		(menu && accented) && 'accented-menu-item',
 		className && className,
 	];
@@ -74,6 +80,7 @@ export function Button({
 				class={classes}
 				onClick={handleOnClick}
 				ref={ref as ReturnType<typeof createRef<HTMLButtonElement>>}
+				{...props}
 			>
 				{children}
 			</button>
@@ -87,6 +94,7 @@ export function Button({
 			target={external ? '_blank' : undefined}
 			onClick={handleOnClick}
 			ref={ref as ReturnType<typeof createRef<HTMLAnchorElement>>}
+			{...props}
 		>
 			{children}
 		</a>
