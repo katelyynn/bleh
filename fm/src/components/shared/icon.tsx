@@ -188,7 +188,7 @@ export const icons = {
 	spinner: 'spinner',
 	rabbit: 'rabbit',
 	external: 'external',
-	minis: 'minis',
+	minis: 'mini',
 };
 
 interface icon {

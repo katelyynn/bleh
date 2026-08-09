@@ -34619,7 +34619,7 @@ var bleh = (() => {
     spinner: "spinner",
     rabbit: "rabbit",
     external: "external",
-    minis: "minis"
+    minis: "mini"
   };
   function icon({ name, identifier, use_mask = true }) {
     return /* @__PURE__ */ jsx("span", {
@@ -115827,7 +115827,7 @@ var bleh = (() => {
         date: "2026-07-30"
       }
     },
-    built_on: "2026-08-09T15:16:46.907Z"
+    built_on: "2026-08-09T21:06:58.291Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
