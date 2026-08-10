@@ -6428,7 +6428,7 @@ export const trans = {
         en: 'Use old-fashioned Serif font for some headings',
         pt: 'Usar uma fonte serifada clássica em alguns cabeçalhos',
         es: 'Usar fuente Serif clásica para algunos encabezados',
-        pl: 'Użyj klasycznej czcionki Serif w niektórych nagłówkach ',
+        pl: 'Użyj klasycznej czcionki Serif w niektórych nagłówkach',
     },
     previewing: {
         // used as subtext for previewing a font
@@ -6808,7 +6808,7 @@ export const trans = {
             pt: 'Aplica um brilho abaixo dos itens da grade com base na cor primária',
             sv: 'Lägger till färg under rutnätsobjekt som är baserad på den primära färgen',
             ru: 'Применяет свечение под элементами сетки на основе основного цвета',
-            pl: 'Dodaj efekt połysku poniżej elementów siatki, oparty na kolorze podstawowym ',
+            pl: 'Dodaj efekt połysku poniżej elementów siatki, oparty na kolorze podstawowym',
         },
     },
     skip_to: {
@@ -11592,7 +11592,7 @@ export const trans = {
         en: 'Music is better with friends, {a}add to your close friends list{/a}',
         pt: 'Música é melhor com amigos, {a}adicione à sua lista de amigos próximos{/a}',
         es: 'La música es mejor con amigos, {a}añade a tu lista de amigos cercanos{/a}',
-        pl: 'Muzyka brzmi lepiej w gronie przyjaciół, {a}dodaj do listy bliskich przyjaciół{/a} ',
+        pl: 'Muzyka brzmi lepiej w gronie przyjaciół, {a}dodaj do listy bliskich przyjaciół{/a}',
     },
     collage_cta: {
         // used to 'advertise' collages
