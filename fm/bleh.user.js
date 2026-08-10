@@ -109093,7 +109093,7 @@ var bleh = (() => {
         <div class="charts-content charts-row" ref=${(el) => content2 = el} />
     `);
     page.structure.main.appendChild(new_panel);
-    const url = `http://ws.audioscrobbler.com/2.0/?method=chart.gettoptracks&api_key=${api_key}&format=json&limit=100`;
+    const url = `https://ws.audioscrobbler.com/2.0/?method=chart.gettoptracks&api_key=${api_key}&format=json&limit=100`;
     render(content2, html`
 			<div class="loading-data-container">
 				<div class="loading-data-text">${tl2(trans.gathering_plays)}</div>
@@ -114678,7 +114678,8 @@ var bleh = (() => {
       "youtube.com",
       "youtube-nocookie.com",
       "*.youtube.com",
-      "*.youtube-nocookie.com"
+      "*.youtube-nocookie.com",
+      "ws.audioscrobbler.com"
     ],
     "script-src": [
       "'self'",
@@ -114698,7 +114699,8 @@ var bleh = (() => {
       "a.pub.network",
       "tags.tiqcdn.com",
       "html-load.cc",
-      "srv.tunefindforfans.com"
+      "srv.tunefindforfans.com",
+      "ws.audioscrobbler.com"
     ],
     "style-src": [
       "'self'",
@@ -114740,7 +114742,8 @@ var bleh = (() => {
       "wss://html-load.cc",
       "*.newrelic.com",
       "status.cafe",
-      "*.github.io"
+      "*.github.io",
+      "ws.audioscrobbler.com"
     ],
     "font-src": [
       "'self'",
@@ -115827,7 +115830,7 @@ var bleh = (() => {
         date: "2026-07-30"
       }
     },
-    built_on: "2026-08-09T22:55:33.593Z"
+    built_on: "2026-08-10T19:42:58.213Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
