@@ -12,8 +12,7 @@
 	&:before {
 		content: '';
 		position: absolute;
-		background: linear-gradient(0deg, oklch(var(--b6) / 60%), transparent
-			80%);
+		background: linear-gradient(0deg, oklch(var(--b6) / 60%), transparent 80%);
 		inset: 0 var(--card-padding) -1px;
 
 		--mask: linear-gradient(90deg, transparent, white 10%, white 90%, transparent);
@@ -35,6 +34,7 @@
 .listening-report-top {
 	margin: 0 calc(-1 * var(--card-gap));
 }
+
 .library-controls {
 	margin: unset !important;
 
@@ -48,6 +48,7 @@
 	position: relative;
 	margin-top: unset !important;
 }
+
 .library-search {
 	margin-top: unset !important;
 	margin-bottom: unset !important;
@@ -61,14 +62,15 @@
 	display: flex;
 	align-items: center;
 
-	& > form {
+	&>form {
 		flex: 1;
 	}
 
 	.library-search-input {
 		padding-left: unset !important;
 		padding-right: unset !important;
-		width: 100% !important; /* 220 */
+		width: 100% !important;
+		/* 220 */
 		border: unset !important;
 		box-shadow: unset !important;
 		line-height: var(--line-height) !important;
@@ -83,27 +85,30 @@
 		margin-left: var(--card-padding);
 	}
 }
+
 .library-search-submit {
 	background: unset !important;
 	border-radius: unset !important;
 }
+
 .library-search-form .search-field[type="text"] {
 	width: 100%;
-	--padding: 12px var(--button-sides) 12px
-        calc(var(--button-sides-icon) + var(--icon-size) + var(--icon-gap)) !important;
+	--padding: 12px var(--button-sides) 12px calc(var(--button-sides-icon) + var(--icon-size) + var(--icon-gap)) !important;
 	--col: oklch(var(--c2)) !important;
 	height: var(--button-height);
 }
+
 .library-search-form .library-search-submit::before {
 	--mask: var(--icon-16-search);
 	background-color: oklch(var(--c3));
 }
+
 input::placeholder {
 	opacity: 1 !important;
 	color: oklch(var(--c3)) !important;
 }
 
-.library-search-form[data-search-state="loaded"] > .library-search-input,
+.library-search-form[data-search-state="loaded"]>.library-search-input,
 .library-search-input:focus-within {
 	border: unset !important;
 	box-shadow: unset !important;
@@ -133,15 +138,17 @@ input::placeholder {
 	flex-direction: column;
 	justify-content: center;
 
-	& > [data-state="no-results"] {
+	&>[data-state="no-results"] {
 		color: oklch(var(--c3));
 		font-weight: var(--font-weight-medium);
 		cursor: default;
 	}
 }
+
 .library-search-results .all-results-list li {
 	height: 32px;
 }
+
 .library-search-results .library-search-results-header {
 	height: unset;
 	color: oklch(var(--c3));
@@ -154,7 +161,7 @@ input::placeholder {
 		margin-top: calc(var(--card-gap) - var(--button-list-gap));
 	}
 
-	hr + & {
+	hr+& {
 		margin-top: var(--card-gap);
 	}
 }
@@ -191,6 +198,7 @@ input::placeholder {
 	flex-shrink: 0;
 	text-decoration: var(--force-underline, none) !important;
 }
+
 .column-tracks-item-aux-text {
 	color: oklch(var(--c3)) !important;
 	font-size: calc(var(--font-size) - 1px) !important;
@@ -203,11 +211,12 @@ input::placeholder {
 	width: fit-content !important;
 	height: fit-content !important;
 }
+
 .column-tracks-item-image {
 	background: oklch(var(--b4)) !important;
 	box-shadow: unset !important;
 
-	& > img {
+	&>img {
 		border-radius: unset;
 	}
 }
@@ -229,10 +238,11 @@ input::placeholder {
 	gap: var(--button-list-gap);
 	flex: 1;
 
-	& > .fill {
+	&>.fill {
 		flex: 1;
 	}
 }
+
 /* navlist-more isnt contained in navlist-items */
 button.navlist-more {
 	margin-left: var(--button-list-gap) !important;
@@ -245,11 +255,7 @@ button.navlist-more {
 	--padding: var(--button-verts) var(--button-sides) !important;
 
 	&:not(.chibi) {
-		--padding: var(--button-verts) var(--button-sides) var(--button-verts)
-            calc(
-                var(--button-sides-icon) + var(--icon-size) +
-                    var(--icon-gap)
-            ) !important;
+		--padding: var(--button-verts) var(--button-sides) var(--button-verts) calc(var(--button-sides-icon) + var(--icon-size) + var(--icon-gap)) !important;
 	}
 
 	z-index: 1;
@@ -258,7 +264,8 @@ button.navlist-more {
 	font-weight: var(--font-weight-medium);
 	color: oklch(var(--c2));
 	cursor: pointer;
-	transition-property: color, transform;
+	transition-property: color,
+	transform;
 	transition-duration: var(--trans);
 	transition-timing-function: var(--trans-function);
 
@@ -270,11 +277,9 @@ button.navlist-more {
 		--bg-hov: oklch(var(--h4) / 16%) !important;
 		--bg-atv: oklch(var(--h4) / 26%) !important;
 		--col: oklch(var(--l3-c)) !important;
-		--mask-colour: color-mix(
-            in oklch,
-            oklch(var(--l3-c)),
-            oklch(var(--l4-c)) 40%
-        );
+		--mask-colour: color-mix(in oklch,
+				oklch(var(--l3-c)),
+				oklch(var(--l4-c)) 40%);
 
 		.new-badge {
 			color: var(--mask-colour);
@@ -284,9 +289,11 @@ button.navlist-more {
 
 .toolbar {
 	position: relative;
-	padding: 10px 0;
+	padding: var(--toolbar-padding) 0;
 	background: var(--toolbar-bg);
 	margin-bottom: 1px;
+
+	--toolbar-padding: 10px;
 
 	/* temporary chrome fix */
 	order: -1;
@@ -316,7 +323,7 @@ button.navlist-more {
 	[data-bleh--solarium="false"] & {
 		&:before {
 			background: color-mix(in oklch, oklch(var(--b6)) 20%,
-				oklch(var(--b5)));
+					oklch(var(--b5)));
 		}
 	}
 
@@ -331,8 +338,8 @@ button.navlist-more {
 	}
 }
 
-.library-controls > .secondary-nav,
-.toolbar > .secondary-nav {
+.library-controls>.secondary-nav,
+.toolbar>.secondary-nav {
 	margin: unset !important;
 	padding-bottom: unset !important;
 	padding-left: calc(var(--card-padding) - var(--button-sides-icon));
@@ -342,13 +349,12 @@ button.navlist-more {
 		display: none !important;
 	}
 
-	& > .navlist-items {
-		width: calc(var(--tabbed-width) + var(--button-sides-icon) +
-			var(--button-sides));
-		max-width: calc(var(--tabbed-width) + var(--button-sides-icon) +
-			var(--button-sides));
+	&>.navlist-items {
+		width: calc(var(--tabbed-width) + var(--button-sides-icon) + var(--button-sides));
+		max-width: calc(var(--tabbed-width) + var(--button-sides-icon) + var(--button-sides));
 	}
 }
+
 .navlist-more,
 .secondary-nav-item-link {
 	/* left padding for icon, otherwise just 12px 16px */
@@ -379,7 +385,7 @@ button.navlist-more {
 
 	--icon-16-placeholder: var(--icon-16-dot);
 
-	& > .new-badge {
+	&>.new-badge {
 		margin-left: 6px;
 	}
 
@@ -434,12 +440,12 @@ button.navlist-more {
 
 		height: unset !important;
 
-		& > .new-badge {
+		&>.new-badge {
 			font-size: 10px;
 		}
 	}
 
-	:is(.toolbar > .navlist, .library-controls > .navlist) > .navlist-items > .secondary-nav-item > & {
+	:is(.toolbar, .library-controls)>.navlist>.navlist-items>.secondary-nav-item>& {
 		--bg-hov: oklch(var(--b2) / 20%) !important;
 		--bg-atv: oklch(var(--b2) / 40%) !important;
 		--padding: var(--button-verts) var(--button-sides) var(--button-verts) calc(var(--button-sides-icon) + var(--icon-size) + var(--icon-gap)) !important;
@@ -458,6 +464,21 @@ button.navlist-more {
 
 		&:after {
 			display: none !important;
+			--bottom-width: 50px;
+			--bottom-height: 10px;
+			bottom: calc(-1 * (var(--bottom-height) + 1px)) !important;
+			height: var(--bottom-height) !important;
+
+			width: var(--bottom-width) !important;
+			left: 50% !important;
+			right: unset !important;
+			margin-left: calc(-1 * (var(--bottom-width) / 2)) !important;
+
+			box-shadow: unset !important;
+			background: oklch(var(--b5)) !important;
+
+			border-bottom-left-radius: unset !important;
+			border-bottom-right-radius: unset !important;
 		}
 
 		&:active {
@@ -508,11 +529,9 @@ button.navlist-more {
 	}
 
 	--col: oklch(var(--l3-c)) !important;
-	--mask-colour: color-mix(
-        in oklch,
-        oklch(var(--l3-c)),
-        oklch(var(--l4-c)) 40%
-    ) !important;
+	--mask-colour: color-mix(in oklch,
+		oklch(var(--l3-c)),
+		oklch(var(--l4-c)) 40%) !important;
 }
 
 .navlist-more {
@@ -530,6 +549,7 @@ button.navlist-more {
 
 /* ensure vertical scrollbars dont appear */
 @media (min-width: 981px) {
+
 	.navlist--more,
 	.navlist--more .navlist-items {
 		overflow: visible !important;
@@ -539,9 +559,7 @@ button.navlist-more {
 .secondary-nav-item--more {
 	--mask: var(--icon-16-dots);
 	--font-size: 0;
-	padding-left: calc(
-		var(--button-sides-icon) + var(--icon-size)
-	) !important;
+	padding-left: calc(var(--button-sides-icon) + var(--icon-size)) !important;
 }
 
 .bleh-settings-navigation {
