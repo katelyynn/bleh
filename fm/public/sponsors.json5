@@ -1,5 +1,5 @@
 {
-    version: "2026.0805",
+    version: "2026.0810",
     related: {
         account_name: "kateshapedbox",
         link: "https://katelyn.moe/sponsor",
@@ -371,6 +371,18 @@
         "ohmaigotto": {
             sponsor: false,
             contributor: true
-        }
+        },
+        "chaoticalx": {
+            badges: [
+                {
+                    icon: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJpY29uIGljb24tdGFibGVyIGljb25zLXRhYmxlci1vdXRsaW5lIGljb24tdGFibGVyLXdhbmQiPjxwYXRoIHN0cm9rZT0ibm9uZSIgZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIgLz48cGF0aCBkPSJNNiAyMWwxNSAtMTVsLTMgLTNsLTE1IDE1bDMgMyIgLz48cGF0aCBkPSJNMTUgNmwzIDMiIC8+PHBhdGggZD0iTTkgM2EyIDIgMCAwIDAgMiAyYTIgMiAwIDAgMCAtMiAyYTIgMiAwIDAgMCAtMiAtMmEyIDIgMCAwIDAgMiAtMiIgLz48cGF0aCBkPSJNMTkgMTNhMiAyIDAgMCAwIDIgMmEyIDIgMCAwIDAgLTIgMmEyIDIgMCAwIDAgLTIgLTJhMiAyIDAgMCAwIDIgLTIiIC8+PC9zdmc+",
+                    name: "stardust ⋆⭒˚.⋆",
+                    hue: 308,
+                    sat: 1.85,
+                    lit: 0.25
+                }
+            ]
+        },
+        "zozoloft": {}
     }
 }
