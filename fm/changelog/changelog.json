@@ -1,4 +1,10 @@
 {
+    "2026.0811": {
+        "type": "minor",
+        "force": false,
+        "bio": "hey this is a very rushed update!! if you are seeing this, that is very good. the next update is still planned, it just changes a lot more than is ready to be pushed at this moment.\n\n# bleh\n- __Fixed bleh from failing to load due to Last.fm changes__\n\n# Avatars\n- __Fixed avatars appearing blurry__\n    - Once again due to Last.fm changes\n\n# Other\n- Added a ‘check for updates’ button in the error dialog",
+        "name": "aihara"
+    },
     "2026.0729": {
         "type": "minor",
         "force": false,
