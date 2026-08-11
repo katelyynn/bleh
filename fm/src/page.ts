@@ -448,11 +448,6 @@ function load_page(main_content = null) {
     bleh_footer();
 
     const masthead = document.body.querySelector('.masthead');
-    const loading_indicator = document.body.querySelector(':scope > #initial-tealium-data');
-
-    new IntersectionObserver(([entry]) => {
-        masthead.classList.toggle('scrolled', !entry.isIntersecting);
-    }).observe(loading_indicator);
 
     prepare_music();
 
