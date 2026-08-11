@@ -84353,6 +84353,9 @@
                 <a class="see-more" href="https://github.com/katelyynn/bleh/issues/new/choose" target="_blank">
                     Report bug now
                 </a>
+                <a class="see-more" href="https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js?${Math.random}" target="_blank">
+                    Check for updates
+                </a>
                 <a class="see-more" href="https://discord.gg/${discord}" target="_blank">
                     Join Discord
                 </a>
