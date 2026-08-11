@@ -19,10 +19,7 @@ import { ff } from '@/components/settings/sku';
 import { settings } from '@/build/config';
 import { match } from '@/components/settings/dynamic_theming';
 import { dialog } from '@/components/dialog/dialog';
-import {
-	colour_tile,
-	colour_type,
-} from '@/components/settings/swatch';
+import { colour_tile, colour_type } from '@/components/settings/swatch';
 import { header_colour } from '@/components/page/colour';
 import { avatar } from '@/components/shared/avatar';
 import { SettingTheme } from '@/components/settings/provider/theme.tsx';
@@ -30,7 +27,11 @@ import { SettingGroup } from '@/components/settings/group.tsx';
 import { SettingSwitch } from '@/components/settings/provider/switch.tsx';
 import { SettingRange } from '@/components/settings/provider/range.tsx';
 import { createRef } from 'jsx-dom';
-import { SettingColour } from '@/components/settings/provider/colour.tsx';
+import {
+	ColourTile,
+	ColourTiles,
+	SettingColour,
+} from '@/components/settings/provider/colour.tsx';
 import {
 	SettingOptions,
 	SettingOptionsSeparator,
@@ -84,12 +85,16 @@ export function visual() {
 			<section class='bleh--panel'>
 				<h4>{tl(trans.colours)}</h4>
 				<div class='inner-preview'>
-					<div class='colour-tiles'>
-						{colour_tile('l3')}
-						{colour_tile('l4')}
-						{colour_tile('h3')}
-						{colour_tile('h4')}
-					</div>
+					<ColourTiles>
+						<ColourTile type='b2' />
+						<ColourTile type='b3' />
+						<ColourTile type='b4' />
+						<ColourTile type='b5' />
+						<ColourTile type='l3' />
+						<ColourTile type='l4' />
+						<ColourTile type='h3' />
+						<ColourTile type='h4' />
+					</ColourTiles>
 				</div>
 				<SettingColour
 					colour={{
@@ -265,7 +270,6 @@ export function visual() {
 	);
 
 	render_tip();
-
 
 	render_font_preview();
 

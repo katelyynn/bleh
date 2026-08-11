@@ -25,6 +25,7 @@ import { clamp_lit, clamp_sat, hex_to_oklch } from '@/build/tools.ts';
 import { auth, page } from '@/build/page.ts';
 import { useSettings } from '@/page.ts';
 import { settings_store } from '@/build/config.ts';
+import { WithChildren } from '@/types/generic.tsx';
 
 interface SettingColourProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
@@ -662,4 +663,45 @@ export function ColourSwatch({
 	update();
 
 	return swatch;
+}
+
+interface ColourTileProps {
+	type: string;
+	style?: string;
+}
+
+export function ColourTile({
+	type,
+	style,
+}: ColourTileProps) {
+	let text;
+	const number = type.slice(-1);
+
+	if (type.startsWith('l')) {
+		text = tl(trans.link_val, { v: number });
+	} else if (type.startsWith('h')) {
+		text = tl(trans.fill_val, { v: number });
+	} else {
+		text = tl(trans.bg_val, { v: number });
+	}
+
+	return (
+		<div class='colour-tile-wrap'>
+			<div
+				class={['colour-tile', 'mini', 'colourful', type]}
+				style={style}
+			/>
+			<div class='colour-tile-type'>{text}</div>
+		</div>
+	);
+}
+
+export function ColourTiles({
+	children,
+}: WithChildren) {
+	return (
+		<div class='colour-tiles'>
+			{children}
+		</div>
+	);
 }

@@ -11278,7 +11278,7 @@ export const trans = {
 		ru: 'Текст {v}',
 		it: 'Testo {v}',
 	},
-	bg_val: {
+	fill_val: {
 		// fill 1, fill 2
 		// the filling of a background colour
 		en: 'Fill {v}',
@@ -11287,6 +11287,11 @@ export const trans = {
 		es: 'Relleno {v}',
 		ru: 'Заливка {v}',
 		it: 'Riempimento {v}',
+	},
+	bg_val: {
+		// body 1, body 2
+		// page background colour
+		en: 'Body {v}',
 	},
 	styled_with_font: {
 		en: 'Styled with {f}.',
