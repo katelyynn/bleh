@@ -69125,15 +69125,19 @@
     }
   }
   function avatar(url, requested) {
-    if (url == null) return url;
+    if (url == null) return "";
     let image2;
     if (url.startsWith("https")) {
-      if (!url.startsWith("https://lastfm.freetls.fastly.net/i/u/")) return url;
+      if (!/^https:\/\/lastfm(?:-img)?\.freetls\.fastly\.net\/i\/u\//.test(
+        url
+      )) {
+        return url;
+      }
       const built = new URL(url);
       const split = built.pathname.split("/");
       image2 = split[split.length - 1];
     }
-    const final = `https://lastfm.freetls.fastly.net/i/u/${requested}/${image2}`;
+    const final = `https://lastfm-img.freetls.fastly.net/i/u/${requested}/${image2}`;
     log(`created ${requested} image`, "avatar", "info", { final, url });
     return final;
   }
