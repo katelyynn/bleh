@@ -114999,7 +114999,7 @@ var bleh = (() => {
   function is_url(url) {
     return window.location.pathname.startsWith(`${root}${url}`);
   }
-  function load_page(main_content = null) {
+  function load_page(main_content) {
     if (page.state.activity_preview_timer) {
       clearInterval(page.state.activity_preview_timer);
     }
@@ -115025,11 +115025,6 @@ var bleh = (() => {
     set_season();
     bleh_footer();
     remove_lastfm_styles();
-    const masthead = document.body.querySelector(".masthead");
-    const loading_indicator = document.body.querySelector(":scope > #initial-tealium-data");
-    new IntersectionObserver(([entry]) => {
-      masthead.classList.toggle("scrolled", !entry.isIntersecting);
-    }).observe(loading_indicator);
     prepare_music();
     if (is_url(urls.setup)) {
       bleh_setup();
@@ -115830,7 +115825,7 @@ var bleh = (() => {
         date: "2026-07-30"
       }
     },
-    built_on: "2026-08-10T20:36:59.198Z"
+    built_on: "2026-08-11T13:36:05.944Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

@@ -457,7 +457,7 @@ export function is_url(url: string) {
 	return window.location.pathname.startsWith(`${root}${url}`);
 }
 
-function load_page(main_content = null) {
+function load_page(main_content?: HTMLElement) {
 	if (page.state.activity_preview_timer) {
 		clearInterval(page.state.activity_preview_timer);
 	}
@@ -497,15 +497,6 @@ function load_page(main_content = null) {
 	bleh_footer();
 
 	remove_lastfm_styles();
-
-	const masthead = document.body.querySelector('.masthead');
-	const loading_indicator = document.body.querySelector(
-		':scope > #initial-tealium-data',
-	);
-
-	new IntersectionObserver(([entry]) => {
-		masthead.classList.toggle('scrolled', !entry.isIntersecting);
-	}).observe(loading_indicator);
 
 	prepare_music();
 
