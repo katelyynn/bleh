@@ -300,10 +300,20 @@ export function markdown(
 		},
 	];
 
+	// removes all quotes
 	const blockquotes = () => [
 		{
 			type: 'lang',
 			regex: /^ *>.*(?:\n *>.*)*/gm,
+			replace: (m: string) => m.replace(/>/g, '&gt;'),
+		},
+	];
+
+	// removes invalid ones, when missing a space etc.
+	const invalid_blockquotes = () => [
+		{
+			type: 'lang',
+			regex: /^ *>[^ \n].*(?:\n *>[^ \n].*)*/gm,
 			replace: (m: string) => m.replace(/>/g, '&gt;'),
 		},
 	];
@@ -313,7 +323,10 @@ export function markdown(
 	if (!line_breaks) allow_alignment = false;
 
 	if (allow_alignment) extensions.push(aligner());
+
 	if (!line_breaks) extensions.push(blockquotes());
+	else extensions.push(invalid_blockquotes());
+
 	if (allow_banners) extensions.push(banner());
 	if (allow_icons) extensions.push(icons());
 	if (allow_hue) extensions.push(accent(), display_name(), status());

@@ -97498,10 +97498,18 @@ var bleh = (() => {
         replace: (m) => m.replace(/>/g, "&gt;")
       }
     ];
+    const invalid_blockquotes = () => [
+      {
+        type: "lang",
+        regex: /^ *>[^ \n].*(?:\n *>[^ \n].*)*/gm,
+        replace: (m) => m.replace(/>/g, "&gt;")
+      }
+    ];
     const extensions = [];
     if (!line_breaks) allow_alignment = false;
     if (allow_alignment) extensions.push(aligner());
     if (!line_breaks) extensions.push(blockquotes());
+    else extensions.push(invalid_blockquotes());
     if (allow_banners) extensions.push(banner());
     if (allow_icons) extensions.push(icons2());
     if (allow_hue) extensions.push(accent(), display_name(), status3());
@@ -115753,7 +115761,7 @@ var bleh = (() => {
         date: "2026-07-30"
       }
     },
-    built_on: "2026-08-12T12:56:16.555Z"
+    built_on: "2026-08-12T13:09:33.226Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
