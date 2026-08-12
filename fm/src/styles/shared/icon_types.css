@@ -201,6 +201,10 @@
 	}
 }
 
+[data-type="starred-friend"] {
+	--mask: var(--icon-16-starred-friend);
+}
+
 [data-type="starred_friend"] {
 	--mask: var(--icon-16-plus);
 

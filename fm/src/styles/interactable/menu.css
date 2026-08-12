@@ -35,7 +35,7 @@
 	--left: var(--button-sides-icon);
 	--right: none;
 
-	--icon-size: 15px;
+	--icon-size: 14px;
 	--mask-size: var(--icon-size) !important;
 
 	display: flex;
