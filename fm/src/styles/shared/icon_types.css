@@ -7,6 +7,7 @@
 [data-type="banner"] {
 	--mask: var(--icon-16-banner);
 }
+
 [data-type="accent"] {
 	--mask: var(--icon-16-accent);
 }
@@ -14,12 +15,15 @@
 [data-type="username"] {
 	--mask: var(--icon-16-mention);
 }
+
 [data-type="pronouns"] {
 	--mask: var(--icon-16-pronouns);
 }
+
 [data-type="aka"] {
 	--mask: var(--icon-16-aka);
 }
+
 [data-type="created"] {
 	--mask: var(--icon-16-created);
 }
@@ -27,58 +31,75 @@
 [data-type="manage"] {
 	--mask: var(--icon-16-dots);
 }
+
 [data-type="share"] {
 	--mask: var(--icon-16-share);
 }
+
 [data-type="mention"] {
 	--mask: var(--icon-16-mention);
 }
+
 [data-type="profile"] {
 	--mask: var(--icon-16-user);
 }
+
 [data-type="global"] {
 	--mask: var(--icon-16-globe);
 }
+
 [data-type="library"] {
 	--mask: var(--icon-16-library);
 }
+
 [data-type="shoutbox"],
 [data-type="shouts"] {
 	--mask: var(--icon-16-shoutbox) !important;
 }
+
 [data-type="listening-report"] {
 	--mask: var(--icon-16-listening-report);
 }
+
 [data-type="construction"] {
 	--mask: var(--icon-16-construction);
 }
+
 [data-type="prev"],
 .secondary-nav-item--back,
 [data-type="back"] {
 	--mask: var(--icon-16-arrow-left);
 }
+
 [data-type="general"] {
 	--mask: var(--icon-16-settings);
 }
+
 [data-type="visual"] {
 	--mask: var(--icon-16-themes);
 }
+
 [data-type="layout"] {
 	--mask: var(--icon-16-layout-manage);
 }
+
 .update-check,
 [data-type="update"] {
 	--mask: var(--icon-16-update);
 }
+
 [data-type="ignore"] {
 	--mask: var(--icon-16-block);
 }
+
 [data-type="finish"] {
 	--mask: var(--icon-16-refresh);
 }
+
 [data-type="advanced"] {
 	--mask: var(--icon-16-advanced) !important;
 }
+
 [data-type="follow"] {
 	--mask: var(--icon-16-user-plus);
 
@@ -90,7 +111,7 @@
 		--mask: var(--icon-16-block);
 	}
 
-	[data-toggle-button-current-state="followed"] > form > & {
+	[data-toggle-button-current-state="followed"]>form>& {
 		--mask: var(--icon-16-user);
 
 		&[data-followed="true"] {
@@ -102,28 +123,34 @@
 		}
 	}
 }
+
 .modal-button button[type="submit"],
 .form-group button[type="submit"],
 .done,
 [data-type="save"] {
 	--mask: var(--icon-16-check);
 }
+
 [data-type="command"] {
 	--mask: var(--icon-16-command);
 }
+
 [data-type="shift"] {
 	--mask: var(--icon-16-shift);
 }
+
 [data-type="overview"],
 [data-menu-item="home"],
 .secondary-nav-item--overview,
 [data-type="home"] {
 	--mask: var(--icon-16-home);
 }
+
 .secondary-nav-item--listening-report,
 [data-type="reports"] {
 	--mask: var(--icon-16-listening-report);
 }
+
 .edit,
 [data-type="edit"] {
 	--mask: var(--icon-16-edit);
@@ -132,31 +159,40 @@
 		--mask: var(--icon-16-edit-mini);
 	}
 }
+
 [data-type="edit_mini"] {
 	--mask: var(--icon-16-edit-mini);
 }
+
 [data-type="bulk-edit"] {
 	--mask: var(--icon-16-edit-bulk);
 }
+
 [data-type="more"] {
 	--mask: var(--icon-16-dots);
 }
+
 [data-type="history"] {
 	--mask: var(--icon-16-bio-history);
 }
+
 [data-type="latest-wiki"] {
 	--mask: var(--icon-16-bio);
 }
+
 [data-type="labs"] {
 	--mask: var(--icon-16-labs);
 }
+
 [data-type="arrows"],
 [data-type="compare"] {
 	--mask: var(--icon-16-arrows);
 }
+
 [data-type="message"] {
 	--mask: var(--icon-16-mail);
 }
+
 [data-type="shortcut"] {
 	--mask: var(--icon-16-unlink);
 
@@ -164,6 +200,7 @@
 		--mask: var(--icon-16-profile-shortcut);
 	}
 }
+
 [data-type="starred_friend"] {
 	--mask: var(--icon-16-plus);
 
@@ -178,99 +215,129 @@
 		}
 	}
 }
+
 [data-type="profile_shortcut"] {
 	--mask: var(--icon-16-profile-shortcut);
 }
+
 [data-type="obsession"] {
 	--mask: var(--icon-16-obsession);
 }
+
 [data-type="expand"] {
 	--mask: var(--icon-16-expand);
 }
+
 [data-type="link"] {
 	--mask: var(--icon-16-link);
 }
+
 [data-type="quote"] {
 	--mask: var(--icon-16-quote);
 }
+
 [data-type="code"] {
 	--mask: var(--icon-16-code);
 }
+
 [data-type="header"] {
 	--mask: var(--icon-16-header);
 }
+
 [data-type="bold"] {
 	--mask: var(--icon-16-bold);
 }
+
 [data-type="italic"] {
 	--mask: var(--icon-16-italic);
 }
+
 [data-type="strike"] {
 	--mask: var(--icon-16-strike);
 }
+
 [data-type="underline"] {
 	--mask: var(--icon-16-underline);
 }
+
 [data-type="ul"] {
 	--mask: var(--icon-16-ul);
 }
+
 [data-type="ol"] {
 	--mask: var(--icon-16-ol);
 }
+
 [data-type="align-left"] {
 	--mask: var(--icon-16-align-left);
 }
+
 [data-type="align-center"] {
 	--mask: var(--icon-16-align-center);
 }
+
 [data-type="align-right"] {
 	--mask: var(--icon-16-align-right);
 }
+
 .secondary-nav-item--listeners,
 [data-type="listeners"] {
 	--mask: var(--icon-16-listener);
 }
+
 [data-type="support"] {
 	--mask: var(--icon-16-support);
 }
+
 [data-type="import"] {
 	--mask: var(--icon-16-import);
 }
+
 [data-type="export"] {
 	--mask: var(--icon-16-export);
 }
+
 [data-type="reset"] {
 	--mask: var(--icon-16-revert);
 }
+
 [data-type="calendar"] {
 	--mask: var(--icon-16-calendar);
 }
+
 [data-type="image"],
 .secondary-nav-item--images,
 [data-type="photos"],
 [data-type="gallery"] {
 	--mask: var(--icon-16-gallery-vertical);
 }
+
 [data-type="gallery-saved"] {
 	--mask: var(--icon-16-bookmark);
 }
+
 [data-type="cards"] {
-	--mask: var(--icon-16-layout-manage);
+	--mask: var(--icon-16-cards);
 }
+
 [data-type="grid"] {
 	--mask: var(--icon-16-grid);
 }
+
 [data-type="list"] {
 	--mask: var(--icon-16-list);
 }
+
 [data-type="minus"] {
 	--mask: var(--icon-16-minus);
 }
+
 .inline-add-icon,
 [data-type="plus"],
 [data-type="add"] {
 	--mask: var(--icon-16-plus);
 }
+
 .obsession-history-play-all,
 .header-new-playlink,
 .play-radio,
@@ -285,33 +352,42 @@
 	--lit-over: 0.9;
 	--c2: var(--l3-c) !important;
 }
+
 [data-type="sponsor"] {
 	--mask: var(--icon-16-sponsor);
 }
+
 [data-type="message_sponsor"] {
 	--mask: var(--icon-16-sponsor-rewards);
 }
+
 [data-type="bookmark"] {
 	--mask: var(--icon-16-bookmark);
 }
+
 [data-type="playlist"] {
 	--mask: var(--icon-16-playlist);
 }
+
 .glacier-configure-button,
 [data-type="dev"],
 [data-type="settings"] {
 	--mask: var(--icon-16-settings);
 }
+
 [data-type="collage"] {
 	--mask: var(--icon-16-collage);
 }
+
 [data-type="plot"] {
 	--mask: var(--icon-16-plot);
 }
+
 .secondary-nav-item--geo,
 [data-type="atlas"] {
 	--mask: var(--icon-16-world);
 }
+
 [data-type="continue"] {
 	--mask: var(--icon-16-arrow-right);
 
@@ -323,14 +399,17 @@
 [data-type="bleh_settings"] {
 	--mask: var(--icon-16-bleh);
 }
+
 [data-type="on_this_page"] {
 	--mask: var(--icon-16-page);
 }
+
 .secondary-nav-item--friends,
 [data-type="users"],
 [data-type="friends"] {
 	--mask: var(--icon-16-users);
 }
+
 [data-type="close_friends"] {
 	--mask: var(--icon-16-close-friend);
 
@@ -341,6 +420,7 @@
 
 		--mask: var(--icon-16-user-plus);
 	}
+
 	&[data-starred="true"] {
 		--mask: var(--icon-16-starred-friend);
 
@@ -349,82 +429,102 @@
 		--lit-over: var(--lit-fav);
 	}
 }
+
 [data-type="star-fill"] {
 	--mask: var(--icon-16-starred-friend);
 }
+
 .secondary-nav-item--following,
 [data-type="following"] {
 	--mask: var(--icon-16-following);
 }
+
 .secondary-nav-item--followers,
 [data-type="followers"] {
 	--mask: var(--icon-16-followers);
 }
+
 .secondary-nav-item--neighbours,
 [data-type="neighbours"] {
 	--mask: var(--icon-16-neighbours);
 }
+
 .secondary-nav-item--loved,
 [data-type="loved"] {
 	--mask: var(--icon-16-heart);
 }
+
 .secondary-nav-item--obsessions,
 [data-type="obsessions"] {
 	--mask: var(--icon-16-obsession);
 }
+
 .secondary-nav-item--events,
 [data-type="events"] {
 	--mask: var(--icon-16-event);
 }
+
 .secondary-nav-item--playlists,
 [data-type="playlists"] {
 	--mask: var(--icon-16-playlist);
 }
+
 [data-type="news"] {
 	--mask: var(--icon-16-changelog);
 }
+
 .secondary-nav-item--artists,
 [data-type="artists"],
 [data-type="artist"] {
 	--mask: var(--icon-16-artist);
 }
+
 .secondary-nav-item--albums,
 [data-type="albums"],
 [data-type="album"] {
 	--mask: var(--icon-16-album);
 }
+
 [data-analytics-label="music"],
 .secondary-nav-item--tracks,
 [data-type="tracks"],
 [data-type="track"] {
 	--mask: var(--icon-16-track);
 }
+
 [data-type="user"] {
 	--mask: var(--icon-16-user);
 }
+
 .secondary-nav-item--tags,
 [data-type="tags"],
 [data-type="tag"] {
 	--mask: var(--icon-16-tag);
 }
+
 .secondary-nav-item--explore,
 [data-menu-item="search"],
 [data-type="search"] {
 	--mask: var(--icon-16-search);
 }
+
 .secondary-nav-item--wiki,
 [data-type="wiki"] {
 	--mask: var(--icon-16-bio);
 }
+
 [data-type="select-all"] {
 	--mask: var(--icon-16-select-all);
 }
+
 [data-type="deselect-all"] {
 	--mask: var(--icon-16-deselect-all);
 }
+
 [data-type="copy_scrobble"] {
 	--mask: var(--icon-16-copy-scrobble);
 }
+
 [data-type="translate"],
 [data-type="language"] {
 	--mask: var(--icon-16-language);
@@ -433,41 +533,50 @@
 [data-type="inbox"] {
 	--mask: var(--icon-16-inbox);
 }
+
 [data-type="notifications"],
 [data-label="notifications"],
 [data-analytics-label="notifications"] {
 	--mask: var(--icon-16-notifications);
 }
+
 [data-type="mail"],
 [data-type="messages"],
 [data-label="inbox"],
 [data-analytics-label="inbox"] {
 	--mask: var(--icon-16-mail);
 }
+
 .secondary-nav-item--velocity,
 [data-type="labs"] {
 	--mask: var(--icon-16-labs);
 }
+
 [data-menu-item="bookmarks"],
 [data-analytics-label="bookmarks"] {
 	--mask: var(--icon-16-bookmark);
 }
+
 [data-menu-item="settings"],
 [data-analytics-label="settings"] {
 	--mask: var(--icon-16-settings);
 }
+
 [data-type="logout"],
 [data-menu-item="logout"],
 [data-analytics-label="logout"] {
 	--mask: var(--icon-16-logout);
 }
+
 [data-menu-item="subscribe"],
 [data-analytics-label="subscribe"] {
 	--mask: var(--icon-16-pro);
 }
+
 [data-analytics-action="publish"] {
 	--mask: var(--icon-16-globe);
 }
+
 [data-analytics-action="export"] {
 	--mask: var(--icon-16-export);
 }
@@ -477,6 +586,7 @@
 [data-label="bleh"] {
 	--mask: var(--icon-16-settings);
 }
+
 [data-menu-item="news"] {
 	--mask: var(--icon-16-changelog);
 }
@@ -500,24 +610,31 @@
 	&[data-season="easter"] {
 		--mask: var(--icon-16-egg);
 	}
+
 	&[data-season="pride"] {
 		--mask: var(--icon-16-pride);
 	}
+
 	&[data-season="summer"] {
 		--mask: var(--icon-16-summer);
 	}
+
 	&[data-season="halloween"] {
 		--mask: var(--icon-16-pumpkin);
 	}
+
 	&[data-season="pre_fall"] {
 		--mask: var(--icon-16-fall);
 	}
+
 	&[data-season="fall"] {
 		--mask: var(--icon-16-snow);
 	}
+
 	&[data-season="christmas"] {
 		--mask: var(--icon-16-christmas);
 	}
+
 	&[data-season="new_years"] {
 		--mask: var(--icon-16-new-years);
 	}
@@ -527,21 +644,26 @@
 [data-menu-item="themes"] {
 	--mask: var(--icon-16-themes);
 }
+
 [data-menu-item="language"] {
 	--mask: var(--icon-16-language);
 }
+
 [data-menu-item="bleh"] {
 	--mask: var(--icon-16-bleh);
 	--mask-size: 18px;
 }
+
 .secondary-nav-item--library,
 [data-menu-item="library"] {
 	--mask: var(--icon-16-library);
 }
+
 .secondary-nav-item--shoutbox,
 [data-menu-item="shouts"] {
 	--mask: var(--icon-16-shoutbox);
 }
+
 [data-menu-item="obsessions"] {
 	--mask: var(--icon-16-obsession);
 }
@@ -553,15 +675,19 @@
 [data-type="line"] {
 	--mask: var(--icon-16-chart-line);
 }
+
 [data-type="pie"] {
 	--mask: var(--icon-16-chart-pie);
 }
+
 [data-type="bar"] {
 	--mask: var(--icon-16-chart-bar);
 }
+
 [data-type="horizontal"] {
 	--mask: var(--icon-16-chart-axis-x);
 }
+
 [data-type="vertical"] {
 	--mask: var(--icon-16-chart-axis-y);
 }
@@ -569,19 +695,24 @@
 [data-type="undo"] {
 	--mask: var(--icon-16-undo);
 }
+
 [data-type="redo"] {
 	--mask: var(--icon-16-redo);
 }
+
 [data-type="cut"] {
 	--mask: var(--icon-16-cut);
 }
+
 .copy,
 [data-type="copy"] {
 	--mask: var(--icon-16-copy);
 }
+
 [data-type="paste"] {
 	--mask: var(--icon-16-paste);
 }
+
 [data-type="item-edit"] {
 	--mask: var(--icon-16-edit);
 }
@@ -591,6 +722,7 @@
 .gallery-image-report {
 	--mask: var(--icon-16-report);
 }
+
 .more-item--delete,
 [data-analytics-action="delete"],
 [data-type="trash"],
@@ -603,26 +735,32 @@
 [data-bleh-theme="glass"] {
 	--mask: var(--icon-16-sphere);
 }
+
 [data-type="theme_light"],
 [data-bleh-theme="light"] {
 	--mask: var(--icon-16-sun);
 }
+
 [data-type="theme_ink"],
 [data-bleh-theme="ink"] {
 	--mask: var(--icon-16-pen);
 }
+
 [data-type="theme_dark"],
 [data-bleh-theme="dark"] {
 	--mask: var(--icon-16-moon);
 }
+
 [data-type="theme_darker"],
 [data-bleh-theme="darker"] {
 	--mask: var(--icon-16-moon-star);
 }
+
 [data-type="theme_adaptive"],
 [data-bleh-theme="adaptive"] {
 	--mask: var(--icon-16-adaptive);
 }
+
 [data-type="theme_oled"],
 [data-bleh-theme="oled"] {
 	--mask: var(--icon-16-moon-fill);
@@ -631,6 +769,7 @@
 [data-type="issue"] {
 	--mask: var(--icon-16-issues);
 }
+
 [data-type="debug"] {
 	--mask: var(--icon-plaster);
 }
@@ -638,9 +777,11 @@
 [data-type="check"] {
 	--mask: var(--icon-16-check);
 }
+
 [data-type="check-thick"] {
 	--mask: var(--icon-16-check-thick);
 }
+
 [data-type="x"] {
 	--mask: var(--icon-16-x);
 }
@@ -648,12 +789,15 @@
 [data-type="paused"] {
 	--mask: var(--icon-16-paused);
 }
+
 [data-type="close"] {
 	--mask: var(--icon-16-x);
 }
+
 [data-type="info"]:not(.setting) {
 	--mask: var(--icon-16-info);
 }
+
 [data-type="refresh"] {
 	--mask: var(--icon-16-refresh);
 
@@ -663,6 +807,7 @@
 		animation: spinner 1.2s linear infinite;
 	}
 }
+
 [data-type="reload"] {
 	--mask: var(--icon-16-refresh);
 }
@@ -679,33 +824,41 @@
 	position: relative;
 	--mask: var(--icon-16-x);
 }
+
 .download {
 	position: relative;
 	--mask: var(--icon-16-download);
 }
+
 .upload {
 	position: relative;
 	--mask: var(--icon-16-upload);
 }
+
 .save {
 	position: relative;
 	--mask: var(--icon-16-check);
 }
+
 .add {
 	--mask: var(--icon-16-add);
 }
+
 .update {
 	--hue-over: var(--hue-pos);
 	--sat-over: 1;
 	--lit-over: 1;
 	--mask: var(--icon-16-download);
 }
+
 .settings {
 	--mask: var(--icon-16-settings);
 }
+
 .issues {
 	--mask: var(--icon-16-issues);
 }
+
 .convert {
 	--mask: var(--icon-16-themes);
 }
@@ -713,6 +866,7 @@
 [data-type="details"] {
 	--mask: var(--icon-16-info);
 }
+
 [data-type="valentine"] {
 	--mask: var(--icon-16-valentine);
 }
@@ -720,9 +874,11 @@
 .compare {
 	--mask: var(--icon-16-arrows);
 }
+
 [data-type="upload"] {
 	--mask: var(--icon-16-upload);
 }
+
 [data-type="download"] {
 	--mask: var(--icon-16-download);
 }
@@ -730,6 +886,7 @@
 [data-type="cmd"] {
 	--mask: var(--icon-16-command);
 }
+
 [data-type="quick_access"] {
 	--mask: var(--icon-16-quick-access);
 }
@@ -738,12 +895,14 @@
 [data-type="up"] {
 	--mask: var(--icon-16-arrow-up);
 }
+
 .expand-down,
 .shout-more-replies-after,
 .more-items,
 [data-type="down"] {
 	--mask: var(--icon-16-arrow-down);
 }
+
 [data-type="manual"] {
 	--mask: var(--icon-16-edit);
 }
@@ -752,6 +911,7 @@
 [data-type="mini"] {
 	--mask: var(--icon-16-mini);
 }
+
 [data-type="next"],
 [data-type="arrow-right"] {
 	--mask: var(--icon-16-arrow-right);
@@ -760,15 +920,19 @@
 [data-type="pixel"] {
 	--mask: var(--icon-16-pixel);
 }
+
 [data-type="rainbow"] {
 	--mask: var(--icon-16-rainbow);
 }
+
 [data-type="receipt"] {
 	--mask: var(--icon-16-receipt);
 }
+
 [data-type="lyrics"] {
 	--mask: var(--icon-16-lyrics);
 }
+
 [data-type="jumble"] {
 	--mask: var(--icon-16-jumble);
 }
@@ -796,12 +960,15 @@
 [data-bleh-page="performance"] {
 	--mask: var(--icon-16-settings);
 }
+
 [data-bleh-page="accessibility"] {
 	--mask: var(--icon-16-accessibility);
 }
+
 [data-bleh-page="seasonal"] {
 	--mask: var(--icon-16-season);
 }
+
 [data-bleh-page="sku"] {
 	--mask: var(--icon-plaster);
 }
@@ -830,6 +997,7 @@
 .btn.back {
 	--mask: var(--icon-16-arrow-left);
 }
+
 .open,
 .external {
 	--mask: var(--icon-16-external);

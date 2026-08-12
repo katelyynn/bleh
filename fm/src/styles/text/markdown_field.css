@@ -34,6 +34,7 @@
 		background-color: var(--bg-hov) !important;
 		transition: none !important;
 	}
+
 	&:active {
 		background-color: var(--bg-atv) !important;
 	}
@@ -56,11 +57,11 @@
 	position: relative;
 	--padding: var(--button-verts) calc(var(--button-sides) + (var(--button-height) - var(--icon-size)) / 2);
 
-	& > .content-form {
+	&>.content-form {
 		width: 100% !important;
 		margin: unset !important;
 
-		& > textarea {
+		&>textarea {
 			--bg-hov: transparent !important;
 			--bg-atv: transparent !important;
 
@@ -73,6 +74,7 @@
 		}
 	}
 }
+
 .markdown-field-overlay {
 	position: absolute;
 	inset: 0;
@@ -84,6 +86,8 @@
 	padding: var(--padding);
 
 	z-index: 20;
+
+	scroll-behavior: auto;
 }
 
 .markdown-actions {
@@ -94,12 +98,12 @@
 
 	padding: var(--button-verts) var(--button-sides);
 
-	& > .group {
+	&>.group {
 		display: flex;
 		gap: var(--button-list-gap);
 	}
 
-	& > .group-sep {
+	&>.group-sep {
 		display: block;
 		width: 2px;
 		height: 10px;
@@ -110,6 +114,7 @@
 		}
 	}
 }
+
 .markdown-action {
 	--bg: transparent;
 	--bg-hov: oklch(var(--b2) / 40%);
@@ -123,9 +128,7 @@
 	position: relative;
 
 	&:before {
-		--left: calc(
-            (var(--button-height) - var(--icon-size)) / 2
-        ) !important;
+		--left: calc((var(--button-height) - var(--icon-size)) / 2) !important;
 		--right: none !important;
 	}
 
@@ -141,10 +144,12 @@
 .md-tag-wrap {
 	color: oklch(var(--c3) / 50%);
 }
+
 .md-link,
 .md-tag {
 	color: oklch(var(--c3));
 }
+
 .md-val {
 	color: oklch(var(--c2));
 
@@ -158,6 +163,7 @@
 .md-label {
 	color: oklch(var(--l2-c-theme-switch));
 }
+
 .md-url {
 	color: oklch(var(--l3-c));
 }

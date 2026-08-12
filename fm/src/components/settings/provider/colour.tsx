@@ -244,6 +244,17 @@ export function SettingColour({
 	const sat = createRef();
 	const lit = createRef();
 
+	const avatar_colour: colour = {
+		type: 'avatar',
+		sets: {
+			hue: auth.sets.hue,
+			sat: auth.sets.sat,
+			lit: auth.sets.lit,
+		},
+		requires_flag: 'colour_based_on_avatar',
+		label: trans.avatar,
+	};
+
 	const wrap = (
 		<SettingGroup ref={ref}>
 			<div class='setting' data-type='action' ref={presets} />
@@ -343,16 +354,7 @@ export function SettingColour({
 				},
 				label: trans.default,
 			},
-			{
-				type: 'avatar',
-				sets: {
-					hue: auth.sets.hue,
-					sat: auth.sets.sat,
-					lit: auth.sets.lit,
-				},
-				requires_flag: 'colour_based_on_avatar',
-				label: trans.avatar,
-			},
+			avatar_colour,
 			{
 				type: 'placeholder',
 				sets: {
