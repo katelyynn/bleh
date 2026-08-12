@@ -138,22 +138,33 @@ export function seasonal_timeline(
 	if (!settings.seasonal) return html.node``;
 
 	return html.node`
-        <div class="seasonal-timeline">
-            ${seasonal_timeline_item(prev, 'prev', now)}
-            ${
+        <div class="seasonal-timeline-wrap">
+	       	<div class="seasonal-timeline">
+	            ${seasonal_timeline_item(prev, 'prev', now)}
+	            ${
 		current ? seasonal_timeline_item(current, 'current', now) : html.node`
-                <div class="seasonal-timeline-item no-season" data-season-type="current">
-                    <div class="seasonal-icon colourful" data-season="none">
-                        <div class="bleh-icon" data-season="none" />
-                    </div>
-                    <strong class="seasonal-name">${
+	                <div class="seasonal-timeline-item no-season" data-season-type="current">
+	                    <div class="seasonal-icon colourful" data-season="none">
+	                        <div class="bleh-icon" data-season="none" />
+	                    </div>
+	                    <strong class="seasonal-name">${
 			tl(trans.seasonal.listing.none)
 		}</strong>
-                    <p class="seasonal-desc">${tl(trans.current)}</p>
-                </div>
-            `
+	                    <p class="seasonal-desc">${tl(trans.current)}</p>
+	                </div>
+	            `
 	}
-            ${seasonal_timeline_item(next, 'next', now)}
+	            ${seasonal_timeline_item(next, 'next', now)}
+	        </div>
+	        <div class="seasonal-timeline-bar">
+	        	${
+		current
+			? html.node`
+	         		<div class="seasonal-timeline-current colourful" data-season=${current.id} />
+	         	`
+			: ''
+	}
+	        </div>
         </div>
     `;
 }
