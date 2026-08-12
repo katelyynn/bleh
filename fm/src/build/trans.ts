@@ -11820,7 +11820,7 @@ export function tl(key: translation | string, replacements = {}) {
 
 	for (const [placeholder, value] of Object.entries(replacements)) {
 		const regex = new RegExp(`{${placeholder}}`, 'g');
-		translation = translation.replace(regex, value as string);
+		translation = translation.replace(regex, value);
 	}
 
 	return translation;
