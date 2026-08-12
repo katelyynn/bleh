@@ -188,8 +188,6 @@
 	&:hover {
 		--col: oklch(var(--l3-c));
 		--mask-colour: color-mix(in oklch, oklch(var(--l3-c)), oklch(var(--l4-c)) 40%);
-		--force-font-weight: var(--font-weight-medium);
-		text-decoration: underline !important;
 	}
 }
 

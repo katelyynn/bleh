@@ -52,6 +52,7 @@ import { flag, flag_candidates } from '../shared/flag';
 import { age } from '../shared/age';
 import { notify } from '../dialog/notify';
 import { status } from '../dialog/status';
+import { useSettings } from '@/page.ts';
 
 export function oracle_process() {
 	log('beginning', 'oracle');
