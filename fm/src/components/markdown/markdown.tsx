@@ -600,6 +600,7 @@ export function markdown_field(
 		required,
 		maxlength,
 		focus: autofocus,
+		submit_on_character: true,
 	});
 	let overlay;
 
