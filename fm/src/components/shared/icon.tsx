@@ -103,7 +103,7 @@ export const icons = {
 	track: 'track',
 	user: 'user',
 	users: 'users',
-	starred_friend: 'star-fill',
+	starred_friend: 'starred-friend',
 	star: 'star',
 	tags: 'tag',
 	tag: 'tag',

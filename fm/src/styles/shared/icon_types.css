@@ -216,6 +216,12 @@
 	}
 }
 
+.starred-friend {
+	--hue-over: var(--hue-fav);
+	--sat-over: var(--sat-fav);
+	--lit-over: var(--lit-fav);
+}
+
 [data-type="profile_shortcut"] {
 	--mask: var(--icon-16-profile-shortcut);
 }
@@ -806,6 +812,10 @@
 		--mask: var(--icon-16-spinner);
 		animation: spinner 1.2s linear infinite;
 	}
+}
+
+[data-type="spinner"] {
+	--mask: var(--icon-16-spinner);
 }
 
 [data-type="reload"] {

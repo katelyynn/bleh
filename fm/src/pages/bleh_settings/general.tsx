@@ -558,7 +558,7 @@ function update_setting() {
 			html`
 				<div class="setting-v2-icon update-center-icon">
 					<div class="update-container spin">
-						<div class="bleh-icon" data-type="update" />
+						<div class="bleh-icon" data-type="spinner" />
 					</div>
 				</div>
 				<div class="heading">

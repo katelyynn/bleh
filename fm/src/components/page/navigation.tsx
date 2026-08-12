@@ -1051,6 +1051,7 @@ export function append_nav() {
 											chibi
 											colourful
 											accented
+											className='starred-friend'
 											href={`${root}user/${
 												useSettings.get(
 													'starred_friend',
