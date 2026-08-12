@@ -90595,88 +90595,7 @@ var bleh = (() => {
             {
               data: page.state.glacier.values,
               borderWidth: 2,
-              backgroundColor: [
-                `hsl(${page.state.chart_colours.link_h_col.replace(
-                  page.state.chart_colours.hue,
-                  "360"
-                )})`,
-                `hsl(${page.state.chart_colours.link_h_col.replace(
-                  page.state.chart_colours.hue,
-                  "340"
-                )})`,
-                `hsl(${page.state.chart_colours.link_h_col.replace(
-                  page.state.chart_colours.hue,
-                  "320"
-                )})`,
-                `hsl(${page.state.chart_colours.link_h_col.replace(
-                  page.state.chart_colours.hue,
-                  "300"
-                )})`,
-                `hsl(${page.state.chart_colours.link_h_col.replace(
-                  page.state.chart_colours.hue,
-                  "280"
-                )})`,
-                `hsl(${page.state.chart_colours.link_h_col.replace(
-                  page.state.chart_colours.hue,
-                  "270"
-                )})`,
-                `hsl(${page.state.chart_colours.link_h_col.replace(
-                  page.state.chart_colours.hue,
-                  "255"
-                )})`,
-                `hsl(${page.state.chart_colours.link_h_col.replace(
-                  page.state.chart_colours.hue,
-                  "235"
-                )})`,
-                `hsl(${page.state.chart_colours.link_h_col.replace(
-                  page.state.chart_colours.hue,
-                  "220"
-                )})`,
-                `hsl(${page.state.chart_colours.link_h_col.replace(
-                  page.state.chart_colours.hue,
-                  "208"
-                )})`,
-                `hsl(${page.state.chart_colours.link_h_col.replace(
-                  page.state.chart_colours.hue,
-                  "200"
-                )})`,
-                `hsl(${page.state.chart_colours.link_h_col.replace(
-                  page.state.chart_colours.hue,
-                  "180"
-                )})`,
-                `hsl(${page.state.chart_colours.link_h_col.replace(
-                  page.state.chart_colours.hue,
-                  "160"
-                )})`,
-                `hsl(${page.state.chart_colours.link_h_col.replace(
-                  page.state.chart_colours.hue,
-                  "140"
-                )})`,
-                `hsl(${page.state.chart_colours.link_h_col.replace(
-                  page.state.chart_colours.hue,
-                  "120"
-                )})`,
-                `hsl(${page.state.chart_colours.link_h_col.replace(
-                  page.state.chart_colours.hue,
-                  "100"
-                )})`,
-                `hsl(${page.state.chart_colours.link_h_col.replace(
-                  page.state.chart_colours.hue,
-                  "80"
-                )})`,
-                `hsl(${page.state.chart_colours.link_h_col.replace(
-                  page.state.chart_colours.hue,
-                  "60"
-                )})`,
-                `hsl(${page.state.chart_colours.link_h_col.replace(
-                  page.state.chart_colours.hue,
-                  "40"
-                )})`,
-                `hsl(${page.state.chart_colours.link_h_col.replace(
-                  page.state.chart_colours.hue,
-                  "20"
-                )})`
-              ],
+              backgroundColor: page.state.chart_colours.colours,
               borderColor: page.state.chart_colours.bg_col,
               pointRadius: 0,
               pointHitRadius: 20,
@@ -90695,88 +90614,7 @@ var bleh = (() => {
             {
               data: page.state.glacier.values,
               borderWidth: 0,
-              backgroundColor: [
-                `hsl(${page.state.chart_colours.link_h_col.replace(
-                  page.state.chart_colours.hue,
-                  "360"
-                )})`,
-                `hsl(${page.state.chart_colours.link_h_col.replace(
-                  page.state.chart_colours.hue,
-                  "340"
-                )})`,
-                `hsl(${page.state.chart_colours.link_h_col.replace(
-                  page.state.chart_colours.hue,
-                  "320"
-                )})`,
-                `hsl(${page.state.chart_colours.link_h_col.replace(
-                  page.state.chart_colours.hue,
-                  "300"
-                )})`,
-                `hsl(${page.state.chart_colours.link_h_col.replace(
-                  page.state.chart_colours.hue,
-                  "280"
-                )})`,
-                `hsl(${page.state.chart_colours.link_h_col.replace(
-                  page.state.chart_colours.hue,
-                  "270"
-                )})`,
-                `hsl(${page.state.chart_colours.link_h_col.replace(
-                  page.state.chart_colours.hue,
-                  "255"
-                )})`,
-                `hsl(${page.state.chart_colours.link_h_col.replace(
-                  page.state.chart_colours.hue,
-                  "235"
-                )})`,
-                `hsl(${page.state.chart_colours.link_h_col.replace(
-                  page.state.chart_colours.hue,
-                  "220"
-                )})`,
-                `hsl(${page.state.chart_colours.link_h_col.replace(
-                  page.state.chart_colours.hue,
-                  "208"
-                )})`,
-                `hsl(${page.state.chart_colours.link_h_col.replace(
-                  page.state.chart_colours.hue,
-                  "200"
-                )})`,
-                `hsl(${page.state.chart_colours.link_h_col.replace(
-                  page.state.chart_colours.hue,
-                  "180"
-                )})`,
-                `hsl(${page.state.chart_colours.link_h_col.replace(
-                  page.state.chart_colours.hue,
-                  "160"
-                )})`,
-                `hsl(${page.state.chart_colours.link_h_col.replace(
-                  page.state.chart_colours.hue,
-                  "140"
-                )})`,
-                `hsl(${page.state.chart_colours.link_h_col.replace(
-                  page.state.chart_colours.hue,
-                  "120"
-                )})`,
-                `hsl(${page.state.chart_colours.link_h_col.replace(
-                  page.state.chart_colours.hue,
-                  "100"
-                )})`,
-                `hsl(${page.state.chart_colours.link_h_col.replace(
-                  page.state.chart_colours.hue,
-                  "80"
-                )})`,
-                `hsl(${page.state.chart_colours.link_h_col.replace(
-                  page.state.chart_colours.hue,
-                  "60"
-                )})`,
-                `hsl(${page.state.chart_colours.link_h_col.replace(
-                  page.state.chart_colours.hue,
-                  "40"
-                )})`,
-                `hsl(${page.state.chart_colours.link_h_col.replace(
-                  page.state.chart_colours.hue,
-                  "20"
-                )})`
-              ],
+              backgroundColor: page.state.chart_colours.colours,
               borderColor: page.state.chart_colours.bg_col,
               pointRadius: 0,
               pointHitRadius: 20,
@@ -91441,10 +91279,10 @@ var bleh = (() => {
             data: values,
             borderWidth: 2,
             backgroundColor: [
-              `hsl(${page.state.chart_colours.link_h_col.replace(page.state.chart_colours.hue, "360")})`,
-              `hsl(${page.state.chart_colours.link_h_col.replace(page.state.chart_colours.hue, "340")})`,
-              `hsl(${page.state.chart_colours.link_h_col.replace(page.state.chart_colours.hue, "320")})`,
-              `hsl(${page.state.chart_colours.link_h_col.replace(page.state.chart_colours.hue, "300")})`
+              page.state.chart_colours.link_bg_col,
+              page.state.chart_colours.link_bg_col,
+              page.state.chart_colours.link_bg_col,
+              page.state.chart_colours.link_col
             ],
             borderColor: page.state.chart_colours.bg_col,
             pointRadius: 0,
@@ -91497,6 +91335,7 @@ var bleh = (() => {
     const text_primary_col = `oklch(${getComputedStyle(document.body).getPropertyValue("--c2")})`;
     const text_secondary_col = `oklch(${getComputedStyle(document.body).getPropertyValue("--c3")})`;
     const bg_col = `oklch(${getComputedStyle(document.body).getPropertyValue("--b5")})`;
+    const b2 = `oklch(${getComputedStyle(document.body).getPropertyValue("--b2")})`;
     const root_bg_col = `oklch(${getComputedStyle(document.body).getPropertyValue("--b6")} / 92%)`;
     const hue4 = getComputedStyle(document.body).getPropertyValue("--hue");
     page.state.chart_colours = {
@@ -91511,7 +91350,21 @@ var bleh = (() => {
       bg_col,
       root_bg_col,
       hue: hue4,
-      font: getComputedStyle(document.body).getPropertyValue("--font")
+      font: getComputedStyle(document.body).getPropertyValue("--font"),
+      colours: [
+        graph_colour(0),
+        graph_colour(1),
+        graph_colour(2),
+        graph_colour(3),
+        graph_colour(4),
+        graph_colour(5),
+        graph_colour(6),
+        graph_colour(7),
+        graph_colour(8),
+        graph_colour(9),
+        graph_colour(10)
+      ],
+      b2
     };
     console.log("chart colours", page.state.chart_colours);
     page.state.chart_line_options = {
@@ -91758,6 +91611,11 @@ var bleh = (() => {
         }
       }
     };
+  }
+  function graph_colour(index2) {
+    return getComputedStyle(document.body).getPropertyValue(
+      `--graph-colour-${index2}`
+    );
   }
 
   // src/components/profile/manage_user.js
@@ -115890,7 +115748,7 @@ var bleh = (() => {
         date: "2026-07-30"
       }
     },
-    built_on: "2026-08-11T19:37:35.069Z"
+    built_on: "2026-08-12T00:13:41.587Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
