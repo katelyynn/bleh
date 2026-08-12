@@ -133,7 +133,10 @@ export function bleh_events() {
 		side_actions.classList.add('side-actions');
 
 		if (!page.mobile) {
-			page.structure.side.appendChild(side_actions);
+			page.structure.side.insertBefore(
+				side_actions,
+				page.structure.side.firstElementChild,
+			);
 		} else {
 			page.structure.main.appendChild(side_actions);
 		}
@@ -267,7 +270,7 @@ export function bleh_events() {
 			web
 				? html.node`
                                 <a class="btn resource-external-link resource-external-link--homepage music-link colourful icon" href=${web} target="_blank">
-                                    ${tl(trans.website)}
+                                    ${address.head}
                                 </a>
                             `
 				: ''
@@ -275,7 +278,7 @@ export function bleh_events() {
                             ${
 			maps
 				? html.node`
-                                <a class="btn music-link colourful social-link icon" data-host="maps.google.com" data-host-unknown="true" href=${maps} target="_blank" style="--favi: url(https://icons.duckduckgo.com/ip3/maps.google.com.ico)">
+                                <a class="btn music-link colourful social-link icon" data-host="maps.google.com" data-host-unknown="false" href=${maps} target="_blank">
                                     ${tl(trans.show_on_map)}
                                 </a>
                             `

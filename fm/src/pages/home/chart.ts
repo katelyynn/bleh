@@ -520,4 +520,15 @@ function bleh_geo_charts() {
 	render_geo(selector.value);
 
 	page.structure.main.appendChild(new_panel);
+
+	render(
+		content,
+		html`
+			<div class="loading-data-container">
+				<div class="loading-data-text">${tl(
+					trans.gathering_plays,
+				)}</div>
+			</div>
+		`,
+	);
 }

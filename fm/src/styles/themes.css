@@ -49,6 +49,10 @@ body {
 	--sat-valentine: 2.56;
 	--sat-valentine: 0.91;
 
+	--hue-oracle: 153;
+	--sat-oracle: 1.15;
+	--lit-oracle: 0.8;
+
 	--trans-short: 0.2s;
 	--trans: 0.2s;
 	--trans-function: cubic-bezier(0.095, 0.410, 0.055, 0.960);
@@ -57,8 +61,8 @@ body {
 	--ina: var(--motion, ina 0.4s var(--trans-function-ani));
 	--blur-in: var(--motion, blur_in 0.4s var(--trans-function-ani));
 
-	--button-sides: 10px;
-	--button-sides-icon: calc(var(--button-sides) - 2px);
+	--button-sides: 9px;
+	--button-sides-icon: var(--button-sides);
 	--button-verts: 5px;
 	--button-height: 28px;
 	--button-radius: 9px;
@@ -928,10 +932,10 @@ u,
 
 	--l2-c: calc(var(--lit) * 0.92) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue);
 	--l3-c: var(--l3-c-lit) var(--l3-c-sat) var(--hue);
-	--l4-c: calc(clamp(min(0.5), var(--lit), max(2)) * 0.5) calc(clamp(min(0), var(--sat), max(2)) * 0.55) var(--hue);
+	--l4-c: calc(clamp(min(0.5), var(--lit), max(2)) * 0.49) calc(clamp(min(0), var(--sat), max(2)) * 0.46) var(--hue);
 
-	--l3-c-sat: calc(clamp(min(0), var(--sat), max(2)) * 0.5);
-	--l3-c-lit: calc(clamp(min(0.5), var(--lit), max(2)) * 0.7);
+	--l3-c-sat: calc(clamp(min(0), var(--sat), max(2)) * 0.46);
+	--l3-c-lit: calc(clamp(min(0.5), var(--lit), max(2)) * 0.72);
 
 	--h2: var(--l2-c);
 	--h3: var(--h3-lit) var(--h3-sat) var(--hue);
@@ -969,7 +973,9 @@ u,
     );
 	--avatar-generic-background: oklch(var(--b4));
 
-	--primary-shadow: 0 0 transparent;
+	--primary-shadow:
+		inset 0 0 0 1px oklch(var(--l2-c) / 10%),
+		inset 0 1px 0 1px oklch(var(--l2-c) / 15%);
 	--bar-shadow: 0 0 transparent;
 
 	--shout-vote-indicator: linear-gradient(
@@ -1069,10 +1075,10 @@ u,
 
 		--l2-c: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.8) calc(clamp(min(0), var(--sat), max(2)) * 0.7) var(--hue);
 		--l3-c: var(--l3-c-lit) var(--l3-c-sat) var(--hue);
-		--l4-c: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.3) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue);
+		--l4-c: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.35) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue);
 
-		--l3-c-sat: calc(clamp(min(0), var(--sat), max(2)) * 0.5);
-		--l3-c-lit: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.36);
+		--l3-c-sat: calc(clamp(min(0), var(--sat), max(2)) * 0.4);
+		--l3-c-lit: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.45);
 
 		--h2: calc(clamp(min(0.7), var(--lit), max(1.1)) * 1.1) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue);
 		--h3: var(--h3-lit) var(--h3-sat) var(--hue);

@@ -162,6 +162,11 @@ export function append_nav() {
 			icon: icons.shoutbox,
 			url: `${root}user/${auth.name}/shoutbox`,
 		},
+		events: {
+			name: tl(trans.events),
+			icon: icons.events,
+			url: `${root}user/${auth.name}/events`,
+		},
 		obsessions: {
 			name: tl(trans.obsessions),
 			icon: icons.obsessions,
@@ -1051,6 +1056,7 @@ export function append_nav() {
 											chibi
 											colourful
 											accented
+											className='starred-friend'
 											href={`${root}user/${
 												useSettings.get(
 													'starred_friend',

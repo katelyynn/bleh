@@ -10296,7 +10296,7 @@ export const trans = {
 		ru: 'Вам необходимо войти в систему',
 	},
 	oracle_notice: {
-		en: 'You are testing ‘oracle’',
+		en: 'You are an oracle tester',
 		de: 'Du testest gerade „oracle“, eine neu gestaltete Album- und Titelseite',
 		es: 'Estás actualmente probando ‘oracle’, un estilo rediseñado de álbumes y temas',
 		it: 'Stai provando ‘oracle’, una vista di album e brani ridisegnata',
@@ -11775,6 +11775,9 @@ export const trans = {
 	badge_multiple_users: {
 		en: 'Owned by {c} people',
 	},
+	miscellaneous: {
+		en: 'Miscellaneous',
+	},
 } as const satisfies Record<string, any>;
 
 export const translation_fallback = 'NO_TRANSLATION_FOUND';
@@ -11820,7 +11823,7 @@ export function tl(key: translation | string, replacements = {}) {
 
 	for (const [placeholder, value] of Object.entries(replacements)) {
 		const regex = new RegExp(`{${placeholder}}`, 'g');
-		translation = translation.replace(regex, value as string);
+		translation = translation.replace(regex, value);
 	}
 
 	return translation;

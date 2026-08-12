@@ -6,7 +6,6 @@
 
 	display: flex;
 	flex-direction: column;
-	justify-content: end;
 	align-items: center;
 	gap: var(--card-gap);
 
@@ -21,7 +20,7 @@
 	pointer-events: auto;
 	cursor: default;
 
-	background: linear-gradient(0deg, oklch(var(--k4), 65%), oklch(var(--b4)));
+	background: linear-gradient(0deg, oklch(var(--k4) / 65%), oklch(var(--b4)));
 	--hue-over: var(--hue-neg);
 	--sat-over: var(--sat-neg);
 	--lit-over: var(--lit-neg);

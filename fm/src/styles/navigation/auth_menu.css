@@ -110,13 +110,14 @@
 
 		&>.auth-bg-container>.bg {
 			z-index: 0;
-			position: absolute;
-			inset: calc(-1 * var(--item-list-gap)) 0 0;
 			pointer-events: none;
 			opacity: 0.17;
 
 			background-size: cover;
 			background-position: center;
+
+			width: 100%;
+			height: 100%;
 
 			&:after {
 				content: "";
@@ -137,8 +138,11 @@
 			flex: 1;
 			position: relative;
 
-			padding: 24px calc(var(--item-list-gap) + 10px);
-			margin: -20px -10px;
+			--top: 10px;
+			--side: 6px;
+
+			padding: calc(var(--top) + 4px) calc(var(--side) + 4px);
+			margin: -4px calc(-1 * var(--side)) calc(-1 * (var(--top) + 4px));
 
 			&>.link-block-cover-link {
 				position: absolute;
@@ -147,8 +151,8 @@
 			}
 
 			&>.avatar {
-				width: 40px;
-				height: 40px;
+				width: 36px;
+				height: 36px;
 				margin: -4px 0;
 
 				grid-row: span 2;
@@ -345,4 +349,9 @@
 	--icon: var(--mask);
 	--icon-size: 14px;
 	--mask: var(--icon-16-language);
+}
+
+.auth-bg-container {
+	position: absolute;
+	inset: calc(-1 * var(--item-list-gap)) 0 0;
 }

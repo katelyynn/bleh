@@ -2942,10 +2942,12 @@ export function oracle_credits() {
 
 			let type = relation.type;
 
-			if (['programming', 'producer'].includes(type)) {
+			if (['programming', 'producer', 'composer'].includes(type)) {
 				type = 'mix';
 			} else if (type.includes('instrument') || type == 'orchestrator') {
 				type = 'recording';
+			} else if (['lyricist'].includes(type)) {
+				type = 'writer';
 			}
 
 			const name = relation.artist.name;
@@ -3000,17 +3002,17 @@ export function oracle_credits() {
 
 	dialog({
 		id: 'oracle_credits',
-		title: {
-			html: tl(trans.credits_for_value, {
-				v: `<i>${
-					sanitise_text(
+		title: tl(trans.credits_for_value, {
+			v: (
+				<i>
+					{sanitise_text(
 						romanise(
 							correct_item_by_artist(page.name, page.sister),
 						),
-					)
-				}</i>`,
-			}),
-		},
+					)}
+				</i>
+			),
+		}),
 		body: html.node`
             <div class="oracle-credits">
                 ${

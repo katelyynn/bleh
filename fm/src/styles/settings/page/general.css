@@ -2,18 +2,13 @@
 	position: relative;
 	width: fit-content;
 
-	& > .update-container {
+	&>.update-container {
 		&.spin {
-			animation: staggered_spinner 3s cubic-bezier(0.34, 1.56, 0.64, 1)
-				infinite;
+			animation: staggered_spinner 3s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
 		}
 
-		& > .bleh-icon {
-			background: conic-gradient(
-				from 270deg,
-				oklch(var(--l2-c)),
-				oklch(var(--l4-c))
-			);
+		&>.bleh-icon {
+			background: oklch(var(--l3-c));
 			--icon-size: 40px;
 			--icon: var(--mask);
 		}
@@ -34,7 +29,7 @@
 
 		padding: 3px;
 
-		& > .bleh-icon {
+		&>.bleh-icon {
 			--icon-size: 10px;
 			--icon: var(--mask);
 		}

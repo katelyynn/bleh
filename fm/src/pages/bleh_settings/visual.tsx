@@ -37,6 +37,8 @@ import {
 	SettingOptionsSeparator,
 } from '@/components/settings/provider/options.tsx';
 import { SettingCheckbox } from '@/components/settings/provider/checkbox.tsx';
+import { PanelHead } from '@/components/text/head.tsx';
+import { icons } from '@/components/shared/icon.tsx';
 
 export function visual() {
 	if (
@@ -67,7 +69,9 @@ export function visual() {
 	page.structure.main!.replaceChildren(
 		<>
 			<section class='bleh--panel'>
-				<h4>{tl(trans.themes.name)}</h4>
+				<PanelHead icon={icons.visual}>
+					{tl(trans.themes.name)}
+				</PanelHead>
 				<SettingTheme
 					theme={{
 						id: settings.theme as string,
@@ -83,7 +87,9 @@ export function visual() {
 				</SettingGroup>
 			</section>
 			<section class='bleh--panel'>
-				<h4>{tl(trans.colours)}</h4>
+				<PanelHead icon={icons.accent}>
+					{tl(trans.colours)}
+				</PanelHead>
 				<div class='inner-preview'>
 					<ColourTiles>
 						<ColourTile type='b2' />

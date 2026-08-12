@@ -1035,7 +1035,8 @@
 .setting-icon {
 	display: flex;
 	align-items: center;
-	color: oklch(var(--c3));
+	color: oklch(var(--c2) / 80%);
 	--icon-size: 16px;
-	margin-right: calc(-1 * (var(--card-gap) - 7px));
+	margin-right: calc(-1 * (var(--card-gap) - 10px));
+	max-height: 22px;
 }

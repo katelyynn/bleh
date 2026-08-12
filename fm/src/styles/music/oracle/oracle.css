@@ -4,13 +4,16 @@
 
 .oracle {
 	order: 11;
+	--hue-over: var(--hue-oracle);
+	--sat-over: var(--sat-oracle);
+	--lit-over: var(--lit-oracle);
 }
 
 .oracle-debug {
 	width: 600px;
 
-	& > tbody > tr {
-		& > td:not(:first-child) {
+	&>tbody>tr {
+		&>td:not(:first-child) {
 			display: flex;
 			gap: var(--item-list-gap);
 		}
@@ -22,7 +25,7 @@
 }
 
 .oracle-releases {
-	& > .loading-data-container {
+	&>.loading-data-container {
 		height: 64px;
 	}
 }
@@ -48,19 +51,19 @@ img.empty {
 		background: oklch(var(--b4) / 20%);
 		transition: none;
 
-		& > .entry-header > .entry-subdata,
-		& > .entry-header > .entry-actions {
+		&>.entry-header>.entry-subdata,
+		&>.entry-header>.entry-actions {
 			opacity: 1 !important;
 			transition: none;
 		}
 	}
 
-	& > .entry-header {
+	&>.entry-header {
 		display: flex;
 		align-items: center;
 		gap: 10px;
 
-		& > .entry-header-text {
+		&>.entry-header-text {
 			flex: 1;
 			cursor: default;
 
@@ -76,7 +79,7 @@ img.empty {
 			}
 		}
 
-		& > .entry-actions {
+		&>.entry-actions {
 			flex-shrink: 0;
 			opacity: 0;
 
@@ -84,7 +87,7 @@ img.empty {
 			transition-duration: var(--trans);
 			transition-timing-function: var(--trans-function);
 
-			& > button {
+			&>button {
 				--bg: transparent;
 				--bg-hov: oklch(var(--h4) / 10%);
 				--bg-atv: oklch(var(--h4) / 20%);
@@ -96,12 +99,12 @@ img.empty {
 		}
 	}
 
-	& > .entry-data {
+	&>.entry-data {
 		display: flex;
 		flex-direction: column;
 		gap: 6px;
 
-		& > .data-table-entry > .entry-header > strong {
+		&>.data-table-entry>.entry-header>strong {
 			font-weight: var(--font-weight);
 		}
 
@@ -117,7 +120,7 @@ img.empty {
 
 	opacity: 0.4;
 
-	.entry-header > & {
+	.entry-header>& {
 		opacity: 0.2;
 	}
 
@@ -125,7 +128,7 @@ img.empty {
 	transition-duration: var(--trans);
 	transition-timing-function: var(--trans-function);
 
-	& > .entry-data-row {
+	&>.entry-data-row {
 		display: flex;
 		gap: 15px;
 
@@ -134,7 +137,7 @@ img.empty {
 			--sat-over: var(--sat-neg);
 			--lit-over: var(--lit-neg);
 
-			& > .entry-data-text {
+			&>.entry-data-text {
 				color: oklch(var(--l3-c));
 
 				&:after {
@@ -143,12 +146,12 @@ img.empty {
 			}
 		}
 
-		& > .entry-data-head {
+		&>.entry-data-head {
 			color: oklch(var(--c3) / 60%);
 			cursor: default;
 		}
 
-		& > .entry-data-text {
+		&>.entry-data-text {
 			color: oklch(var(--c3));
 			cursor: default;
 		}

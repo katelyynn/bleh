@@ -103,7 +103,7 @@ export const icons = {
 	track: 'track',
 	user: 'user',
 	users: 'users',
-	starred_friend: 'star-fill',
+	starred_friend: 'starred-friend',
 	star: 'star',
 	tags: 'tag',
 	tag: 'tag',
@@ -189,6 +189,8 @@ export const icons = {
 	rabbit: 'rabbit',
 	external: 'external',
 	minis: 'mini',
+	bright: 'bright',
+	moody: 'moody',
 };
 
 interface icon {

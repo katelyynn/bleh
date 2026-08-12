@@ -16,18 +16,19 @@
 		--love-offset: 30px;
 	}
 
-	& + .chartlist {
+	&+.chartlist {
 		margin-top: 4px !important;
 	}
 
-	& > tbody {
+	&>tbody {
 		display: flex;
 		flex-direction: column;
 		gap: 2px;
 	}
 }
-.section-controls + .buffer-standard {
-	& > .chartlist {
+
+.section-controls+.buffer-standard {
+	&>.chartlist {
 		margin-top: var(--card-gap) !important;
 	}
 }
@@ -39,8 +40,7 @@
 	--shadow: none !important;
 	color: oklch(var(--c2));
 	background-color: var(--bg);
-	padding: 8px calc(var(--side-left) + var(--love-offset, 0px)) 8px
-		var(--side-left) !important;
+	padding: 8px calc(var(--side-left) + var(--love-offset, 0px)) 8px var(--side-left) !important;
 	min-height: 40px;
 	max-height: fit-content;
 	border-radius: var(--item-big-radius);
@@ -48,14 +48,13 @@
 	transition-property: background-color;
 	transition-duration: var(--trans);
 	transition-timing-function: var(--trans-function);
-	margin: 0 -12px
-		!important; /* calc(- 12 px - var(--chartlist-inner-gap) / 2) */
+	margin: 0 -12px !important;
+	/* calc(- 12 px - var(--chartlist-inner-gap) / 2) */
 	display: flex !important;
 	gap: var(--item-list-gap);
 	align-items: center;
 
-	animation: var(--motion, chartlist 0.4s var(--trans-function-ani))
-		!important;
+	animation: var(--motion, chartlist 0.4s var(--trans-function-ani)) !important;
 	animation-delay: var(--delay, 0s) !important;
 	animation-fill-mode: backwards !important;
 
@@ -73,7 +72,7 @@
 	}
 
 	&:not(:hover) {
-		& > .more-button-wrapper {
+		&>.more-button-wrapper {
 			opacity: 0;
 		}
 	}
@@ -82,24 +81,24 @@
 		--chart-cover-radius: var(--avatar-radius);
 	}
 
-	& > .kate-placeholder,
-	& > .chartlist-play,
-	& > .chartlist-more {
+	&>.kate-placeholder,
+	&>.chartlist-play,
+	&>.chartlist-more {
 		display: none !important;
 	}
 
-	& > td {
+	&>td {
 		display: block;
 		position: relative;
 		margin: unset !important;
 	}
 
 	&[data-album-name-location="column"][data-show-album-text="true"][data-has-bar="false"] {
-		& > .chartlist-image {
+		&>.chartlist-image {
 			width: 56px;
 			height: 56px;
 
-			& > .cover-art > img {
+			&>.cover-art>img {
 				--mask-size: var(--cover-size-50);
 			}
 		}
@@ -112,14 +111,14 @@
 	}
 
 	@media (max-width: 980px) {
-		& > td {
+		&>td {
 			display: inline-block;
 		}
 
 		.chartlist-timestamp {
 			max-width: 60px;
 
-			& > span {
+			&>span {
 				overflow: hidden;
 				text-overflow: ellipsis;
 				-webkit-box-orient: vertical;
@@ -141,9 +140,9 @@
 	flex: 1;
 	overflow: hidden;
 
-	& > .chartlist-name,
-	& > .chartlist-artist,
-	& > .chartlist-album {
+	&>.chartlist-name,
+	&>.chartlist-artist,
+	&>.chartlist-album {
 		margin: unset !important;
 		inset: unset !important;
 		position: relative !important;
@@ -151,15 +150,15 @@
 		flex: unset !important;
 	}
 
-	& > .chartlist-name {
+	&>.chartlist-name {
 		order: 1;
 	}
 
-	& > .chartlist-artist {
+	&>.chartlist-artist {
 		order: 2;
 	}
 
-	& > .chartlist-album {
+	&>.chartlist-album {
 		color: oklch(var(--c3));
 		font-size: calc(var(--font-size) - 1px);
 		order: 3;
@@ -172,19 +171,19 @@
 		gap: 0 var(--item-list-gap);
 		align-items: center;
 
-		& > .chartlist-name {
+		&>.chartlist-name {
 			grid-column: 1 / 2;
 			grid-row: 1 / 2;
 			max-width: 100%;
 		}
 
-		& > .chartlist-artist {
+		&>.chartlist-artist {
 			grid-column: 1 / 2;
 			grid-row: 2 / 3;
 			max-width: 100%;
 		}
 
-		& > .chartlist-album {
+		&>.chartlist-album {
 			grid-column: 2 / 3;
 			grid-row: 1 / 3;
 			align-self: center;
@@ -196,12 +195,12 @@
 		gap: var(--item-list-gap);
 		flex-direction: row;
 
-		& > .chartlist-name,
-		& > .chartlist-artist {
+		&>.chartlist-name,
+		&>.chartlist-artist {
 			flex: 1 !important;
 		}
 
-		& > .chartlist-album {
+		&>.chartlist-album {
 			display: none;
 		}
 	}
@@ -238,15 +237,17 @@
 		flex: 1 !important;
 	}
 }
+
 .chartlist-artist {
 	display: flex !important;
 	color: oklch(var(--c3)) !important;
 	cursor: default;
 
-	& > a + a {
+	&>a+a {
 		margin-left: 4px;
 	}
 }
+
 .chartlist-album {
 	/* bulk edit fix */
 	width: 40% !important;
@@ -258,7 +259,7 @@
 	}
 
 	/* fix duplication */
-	& + .chartlist-album {
+	&+.chartlist-album {
 		display: none !important;
 	}
 }
@@ -313,9 +314,11 @@
 	&.chartlist-type--track {
 		--mask: var(--icon-16-track);
 	}
+
 	&.chartlist-type--artist {
 		--mask: var(--icon-16-artist);
 	}
+
 	&.chartlist-type--album {
 		--mask: var(--icon-16-album);
 	}
@@ -365,6 +368,7 @@
 		transition-timing-function: var(--trans-function);
 	}
 }
+
 .chartlist-loved:has(> [data-toggle-button-current-state="unloved"]):before {
 	opacity: 0;
 }
@@ -381,14 +385,12 @@
 	background: oklch(var(--b4) / 50%);
 	border-radius: var(--item-med-radius);
 	height: 16px;
-	animation: chartlist_loading 2s var(--trans-function-ani) infinite
-		!important;
+	animation: chartlist_loading 2s var(--trans-function-ani) infinite !important;
 }
 
 .chartlist__placeholder-image {
 	background: oklch(var(--b4) / 50%);
-	animation: chartlist_loading 2s var(--trans-function-ani) infinite
-		!important;
+	animation: chartlist_loading 2s var(--trans-function-ani) infinite !important;
 }
 
 .chartlist__placeholder-loading {
@@ -397,10 +399,12 @@
 }
 
 @keyframes chartlist_loading {
+
 	from,
 	to {
 		opacity: 1;
 	}
+
 	50% {
 		opacity: 0;
 	}
@@ -434,15 +438,16 @@
 	font-weight: var(--font-weight-medium);
 
 	&:before {
-		--mask: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9Imx1Y2lkZSBsdWNpZGUtbG9hZGVyLWNpcmNsZSI+PHBhdGggZD0iTTIxIDEyYTkgOSAwIDEgMS02LjIxOS04LjU2Ii8+PC9zdmc+");
+		--mask: var(--icon-16-spinner);
 		--mask-size: 12px;
 		--margin-top: -6px;
 		--left: 0;
 		animation: spinner 1s linear infinite;
 	}
 }
+
 .chartlist-now-scrobbling:before,
-.chartlist-now-scrobbling > a {
+.chartlist-now-scrobbling>a {
 	color: oklch(var(--l2-c-theme-switch)) !important;
 }
 
@@ -472,7 +477,8 @@
 		}
 	}
 }
-.chartlist-name > a {
+
+.chartlist-name>a {
 	display: flex;
 	gap: 6px;
 	font-weight: inherit;
@@ -485,8 +491,9 @@
 	z-index: 5;
 	position: relative;
 }
+
 .obsession-candidate-artist,
-.chartlist-artist > a,
+.chartlist-artist>a,
 .featured-item-artist,
 .similar-albums-item-artist,
 .track-similar-tracks-item-artist {
@@ -497,6 +504,7 @@
 .chartlist {
 	--chartlist-type: 0px;
 }
+
 .chartlist--with-type {
 	--chartlist-type: calc(18px + 12px);
 }
@@ -508,6 +516,7 @@
 	height: fit-content;
 	cursor: default;
 }
+
 .chartlist-duration {
 	display: inline-block !important;
 	width: unset !important;
@@ -532,18 +541,18 @@
 	overflow: hidden;
 	background: var(--avatar-generic-background);
 
-	& > .cover-art,
-	& > .avatar {
+	&>.cover-art,
+	&>.avatar {
 		border-radius: inherit !important;
 
-		& > img {
+		&>img {
 			--mask-size: var(--cover-size-32);
 			border-radius: inherit !important;
 			font-size: 0 !important;
 		}
 	}
 
-	& > .avatar {
+	&>.avatar {
 		font-size: 0 !important;
 
 		&:after {
@@ -553,7 +562,7 @@
 			opacity: var(--gloss, 0);
 		}
 
-		& > .avatar-status-dot {
+		&>.avatar-status-dot {
 			display: none;
 		}
 	}
@@ -632,6 +641,7 @@
 
 	font-size: var(--font-size) !important;
 }
+
 [data-toggle-button-current-state="loved"] .chartlist-love-button {
 	--mask: var(--icon-16-heart-solid) !important;
 }
@@ -646,7 +656,10 @@
 }
 
 .chartlist-buylinks,
-.chartlist-artist:before /* artist field shrink on hover */ {
+.chartlist-artist:before
+
+/* artist field shrink on hover */
+	{
 	display: none !important;
 }
 
@@ -660,8 +673,10 @@
 .chartlist-bar {
 	order: 1;
 }
+
 .chartlist-count-bar {
-	line-height: 22px; /* 22 */
+	line-height: 22px;
+	/* 22 */
 	background: oklch(var(--chartlist-bar-bg, var(--b4) / 40%));
 	color: oklch(var(--b7)) !important;
 	box-shadow: unset;
@@ -724,13 +739,14 @@
 		transform: scale(0.98);
 	}
 }
+
 .chartlist-bar.with-multiple {
 	display: flex;
 	flex-direction: column;
 	gap: 4px;
 	padding-right: calc(18px + 6px);
 
-	& > .chartlist-count-bar {
+	&>.chartlist-count-bar {
 		line-height: 18px;
 
 		.avatar {
@@ -750,9 +766,11 @@
 		}
 	}
 }
+
 .chartlist-count-bar-link {
 	text-decoration: var(--force-underline, none) !important;
-	padding: 0 6px !important; /* 14 */
+	padding: 0 6px !important;
+	/* 14 */
 	font-weight: var(--font-weight-bold);
 	flex: 1;
 	text-align: var(--count-bar-align);
@@ -765,7 +783,8 @@
 
 .chartlist-count-bar,
 .chartlist-count-bar-slug {
-	border-radius: 8px; /* 50 */
+	border-radius: 8px;
+	/* 50 */
 }
 
 .chartlist-love-button,
