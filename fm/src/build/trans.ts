@@ -10296,7 +10296,7 @@ export const trans = {
 		ru: 'Вам необходимо войти в систему',
 	},
 	oracle_notice: {
-		en: 'You are testing ‘oracle’',
+		en: 'You are an oracle tester',
 		de: 'Du testest gerade „oracle“, eine neu gestaltete Album- und Titelseite',
 		es: 'Estás actualmente probando ‘oracle’, un estilo rediseñado de álbumes y temas',
 		it: 'Stai provando ‘oracle’, una vista di album e brani ridisegnata',

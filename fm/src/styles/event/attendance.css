@@ -3,6 +3,7 @@
 	flex-direction: column;
 	gap: var(--card-gap);
 }
+
 .attendance-btn {
 	position: relative;
 
@@ -16,6 +17,7 @@
 .attendance-btn--attending {
 	--mask: var(--icon-16-check);
 }
+
 .attendance-btn--maybe {
 	--mask: var(--icon-16-question);
 }
@@ -29,7 +31,7 @@
 .attendee-summary-users {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-	gap: var(--card-gap) 6px;
+	gap: 10px 6px;
 	margin: unset;
 
 	&:before,
@@ -37,6 +39,7 @@
 		display: none;
 	}
 }
+
 .attendee-summary-user {
 	margin: unset !important;
 	width: unset;
@@ -47,6 +50,12 @@
 	--padding: 0;
 	--radius: 0;
 	--shadow: none;
+
+	--avatar-size: 28px;
+
+	&:hover {
+		--force-underline: underline;
+	}
 
 	.attendee-summary-user-link {
 		color: oklch(var(--l3-c));
@@ -59,7 +68,10 @@
 	}
 
 	.attendee-summary-user-avatar {
+		position: absolute;
 		border-radius: var(--avatar-radius);
+		width: var(--avatar-size);
+		height: var(--avatar-size);
 
 		&:after {
 			display: none;
@@ -75,11 +87,11 @@
 	display: flex;
 	align-items: center;
 	font-weight: var(--font-weight-medium);
-	/* 32px is the avatar size */
-	padding-left: calc(32px + 10px);
+	padding-left: calc(var(--avatar-size) + 8px);
 
-	--mask-size: var(--cover-size-32);
+	--mask-size: 16px;
 }
+
 .attendee-summary-user-link {
 	position: static !important;
 }

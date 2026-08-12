@@ -49,6 +49,10 @@ body {
 	--sat-valentine: 2.56;
 	--sat-valentine: 0.91;
 
+	--hue-oracle: 153;
+	--sat-oracle: 1.15;
+	--lit-oracle: 0.8;
+
 	--trans-short: 0.2s;
 	--trans: 0.2s;
 	--trans-function: cubic-bezier(0.095, 0.410, 0.055, 0.960);

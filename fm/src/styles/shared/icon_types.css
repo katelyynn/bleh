@@ -470,6 +470,7 @@
 }
 
 .secondary-nav-item--events,
+[data-type="event"],
 [data-type="events"] {
 	--mask: var(--icon-16-event);
 }
