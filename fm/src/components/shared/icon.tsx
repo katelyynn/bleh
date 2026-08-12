@@ -189,6 +189,8 @@ export const icons = {
 	rabbit: 'rabbit',
 	external: 'external',
 	minis: 'mini',
+	bright: 'bright',
+	moody: 'moody',
 };
 
 interface icon {

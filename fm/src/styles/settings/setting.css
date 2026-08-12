@@ -1038,4 +1038,5 @@
 	color: oklch(var(--c3));
 	--icon-size: 16px;
 	margin-right: calc(-1 * (var(--card-gap) - 7px));
+	max-height: 22px;
 }

@@ -11,7 +11,7 @@ import { tl, trans } from '@/build/trans.ts';
 import { dark_themes, getThemes, light_themes, theme } from '@/build/theme.ts';
 import { avatar } from '@/components/shared/avatar.tsx';
 import { auth } from '@/build/page.ts';
-import { Icon } from '@/components/shared/icon.tsx';
+import { Icon, icons } from '@/components/shared/icon.tsx';
 import { SettingCheckbox } from '@/components/settings/provider/checkbox.tsx';
 import { match } from '@/components/settings/dynamic_theming.js';
 import {
@@ -19,6 +19,7 @@ import {
 	theme_schedule_dialog,
 } from '@/components/dialog/theme_schedule.tsx';
 import { useSettings } from '@/page.ts';
+import { SettingIcon } from '@/components/settings/provider/icon.tsx';
 
 interface SettingThemeProps {
 	theme: theme_response;
@@ -78,6 +79,7 @@ export function SettingTheme({
 		<>
 			<SettingGroup>
 				<ThemeRow
+					icon={icons.bright}
 					label={tl(trans.bright.name)}
 					body={tl(trans.bright.body)}
 				>
@@ -97,6 +99,7 @@ export function SettingTheme({
 					})}
 				</ThemeRow>
 				<ThemeRow
+					icon={icons.moody}
 					label={tl(trans.moody.name)}
 					body={tl(trans.moody.body)}
 				>
@@ -210,6 +213,7 @@ function is_active(id: string, state: theme_response) {
 
 interface ThemeRowProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
+	icon?: string;
 	label: string;
 	body?: string;
 	children: ReactNode;
@@ -217,12 +221,14 @@ interface ThemeRowProps {
 
 export function ThemeRow({
 	ref,
+	icon,
 	label,
 	body,
 	children,
 }: ThemeRowProps) {
 	return (
 		<div class={['setting', 'theme-row']} ref={ref}>
+			{icon && <SettingIcon name={icon} />}
 			<SettingLabel name={label} body={body} />
 			<div class='theme-bubbles'>
 				{children}
