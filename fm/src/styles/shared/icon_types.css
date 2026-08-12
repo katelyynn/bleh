@@ -615,8 +615,13 @@
 	--lit-over: var(--lit-seasonal);
 }
 
+.swatch-icon-container,
 .icon-combo,
 [data-label="bleh"] {
+	&:not([data-season="none"]) {
+		--icon: var(--mask);
+	}
+
 	&[data-season="easter"] {
 		--mask: var(--icon-16-egg);
 	}

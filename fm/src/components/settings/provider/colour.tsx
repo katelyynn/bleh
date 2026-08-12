@@ -619,7 +619,10 @@ export function ColourSwatch({
 						'--lit-over': displays.lit,
 					}}
 			>
-				<span class='swatch-icon-container'>
+				<span
+					class='swatch-icon-container'
+					data-season={colour.seasonal || 'none'}
+				>
 					<Icon mask={false} identifier='swatch' />
 				</span>
 			</div>
