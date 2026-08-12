@@ -405,7 +405,6 @@ export function markdown(
 
 	// funny local restriction message
 	if (line_breaks) {
-		local_restriction(body);
 		body.querySelectorAll('p').forEach((text) => {
 			local_restriction(text);
 		});
