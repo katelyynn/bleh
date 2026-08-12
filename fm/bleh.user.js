@@ -50496,6 +50496,9 @@ var bleh = (() => {
     },
     badge_multiple_users: {
       en: "Owned by {c} people"
+    },
+    miscellaneous: {
+      en: "Miscellaneous"
     }
   };
   var translation_fallback = "NO_TRANSLATION_FOUND";
@@ -53867,7 +53870,7 @@ var bleh = (() => {
       for (const key in settings_store) {
         if (local[key]) {
           let val = local[key];
-          if (!isNaN(Number(val))) {
+          if (!isNaN(Number(val)) && typeof val != "boolean") {
             val = Number(val);
           }
           this.change(key, val);
@@ -100328,6 +100331,21 @@ var bleh = (() => {
     });
   }
 
+  // src/components/text/head.tsx
+  function PanelHead({ icon: icon2, children }) {
+    return /* @__PURE__ */ jsx("h4", {
+      class: [
+        icon2 && "header-with-icon"
+      ],
+      children: [
+        icon2 && /* @__PURE__ */ jsx(Icon, {
+          name: icon2
+        }),
+        children
+      ]
+    });
+  }
+
   // src/pages/bleh_settings/visual.tsx
   function visual() {
     if (auth.name && auth.sets.hue == 255 && auth.sets.sat == 1 && auth.sets.lit == 1) {
@@ -100349,7 +100367,8 @@ var bleh = (() => {
         /* @__PURE__ */ jsx("section", {
           class: "bleh--panel",
           children: [
-            /* @__PURE__ */ jsx("h4", {
+            /* @__PURE__ */ jsx(PanelHead, {
+              icon: icons.visual,
               children: tl2(trans.themes.name)
             }),
             /* @__PURE__ */ jsx(SettingTheme, {
@@ -100378,7 +100397,8 @@ var bleh = (() => {
         /* @__PURE__ */ jsx("section", {
           class: "bleh--panel",
           children: [
-            /* @__PURE__ */ jsx("h4", {
+            /* @__PURE__ */ jsx(PanelHead, {
+              icon: icons.accent,
               children: tl2(trans.colours)
             }),
             /* @__PURE__ */ jsx("div", {
@@ -104209,6 +104229,141 @@ var bleh = (() => {
     });
   }
 
+  // src/pages/bleh_settings/playback.tsx
+  function playback() {
+    page.structure.main.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
+      children: [
+        /* @__PURE__ */ jsx("section", {
+          class: "bleh--panel",
+          children: [
+            /* @__PURE__ */ jsx(PanelHead, {
+              icon: icons.lotus,
+              children: tl2(trans.music_corrections)
+            }),
+            /* @__PURE__ */ jsx("div", {
+              class: "inner-preview pad",
+              children: /* @__PURE__ */ jsx("div", {
+                class: "lotus-preview",
+                children: [
+                  /* @__PURE__ */ jsx("div", {
+                    class: "lotus-preview-inner before icon-mask",
+                    children: [
+                      /* @__PURE__ */ jsx("h1", {
+                        class: "lotus-preview-header",
+                        children: "mY aNtI-aIrCrAfT fRiEnD"
+                      }),
+                      /* @__PURE__ */ jsx("h2", {
+                        class: "lotus-preview-sub",
+                        children: "jUlIe"
+                      })
+                    ]
+                  }),
+                  /* @__PURE__ */ jsx("div", {
+                    class: "lotus-preview-inner after",
+                    children: [
+                      /* @__PURE__ */ jsx("h1", {
+                        class: "lotus-preview-header",
+                        children: "my anti-aircraft friend"
+                      }),
+                      /* @__PURE__ */ jsx("h2", {
+                        class: "lotus-preview-sub",
+                        children: "julie"
+                      })
+                    ]
+                  })
+                ]
+              })
+            }),
+            /* @__PURE__ */ jsx(SettingGroup, {
+              children: /* @__PURE__ */ jsx(SettingSwitch, {
+                bind: "corrections"
+              })
+            }),
+            /* @__PURE__ */ jsx(SettingGroup, {
+              children: [
+                /* @__PURE__ */ jsx(SettingSwitch, {
+                  bind: "prefer_no_redirect"
+                }),
+                /* @__PURE__ */ jsx(SettingSwitch, {
+                  bind: "travis"
+                })
+              ]
+            })
+          ]
+        }),
+        /* @__PURE__ */ jsx("section", {
+          class: "bleh--panel",
+          children: [
+            /* @__PURE__ */ jsx(PanelHead, {
+              icon: icons.track,
+              children: tl2(trans.smart_music_titles)
+            }),
+            /* @__PURE__ */ jsx(SettingGroup, {
+              children: [
+                /* @__PURE__ */ jsx(SettingSwitch, {
+                  bind: "format_guest_features"
+                }),
+                /* @__PURE__ */ jsx(SettingSwitch, {
+                  bind: "show_guest_features"
+                }),
+                /* @__PURE__ */ jsx(SettingSwitch, {
+                  bind: "show_remaster_tags"
+                }),
+                /* @__PURE__ */ jsx(SettingOptions, {
+                  name: tl2(trans.romanise_titles),
+                  children: [
+                    /* @__PURE__ */ jsx(SettingCheckbox, {
+                      bind: "romanise_jp",
+                      standalone: true
+                    }),
+                    /* @__PURE__ */ jsx(SettingCheckbox, {
+                      bind: "romanise_ko",
+                      standalone: true
+                    })
+                  ]
+                })
+              ]
+            })
+          ]
+        }),
+        /* @__PURE__ */ jsx("section", {
+          class: "bleh--panel",
+          children: [
+            /* @__PURE__ */ jsx(PanelHead, {
+              icon: icons.oracle,
+              children: "oracle"
+            }),
+            /* @__PURE__ */ jsx(SettingGroup, {
+              children: [
+                /* @__PURE__ */ jsx(SettingSwitch, {
+                  bind: "oracle_beta"
+                }),
+                /* @__PURE__ */ jsx(SettingSelect, {
+                  bind: "tracklist_source",
+                  values: page.state.tracklist_sources
+                })
+              ]
+            })
+          ]
+        }),
+        /* @__PURE__ */ jsx("section", {
+          class: "bleh--panel",
+          children: [
+            /* @__PURE__ */ jsx(PanelHead, {
+              icon: icons.more,
+              children: tl2(trans.miscellaneous)
+            }),
+            /* @__PURE__ */ jsx(SettingGroup, {
+              children: /* @__PURE__ */ jsx(SettingSwitch, {
+                bind: "glacier_library_graphs"
+              })
+            })
+          ]
+        })
+      ]
+    }));
+  }
+
   // src/pages/bleh_settings/bleh_settings.js
   function bleh_settings() {
     page.name = auth.name;
@@ -104465,6 +104620,8 @@ var bleh = (() => {
         visual();
       } else if (page_id == "seasonal") {
         seasonal();
+      } else if (page_id == "playback") {
+        playback();
       }
     } catch (e5) {
       page_error(e5);
@@ -104740,6 +104897,7 @@ var bleh = (() => {
 				`
         );
       };
+      return;
       let total_artists = 0;
       let total_album_tracks = 0;
       if (artist_corrections) {
@@ -110992,8 +111150,8 @@ var bleh = (() => {
         `, page.structure.main.firstElementChild);
     const website = page.structure.main.querySelector("#website");
     website.remove();
-    const playback = page.structure.main.querySelector("#playback");
-    playback.remove();
+    const playback2 = page.structure.main.querySelector("#playback");
+    playback2.remove();
   }
   function bleh_applications() {
     const session_types = page.structure.main.querySelectorAll(".api-sessions");
@@ -115799,7 +115957,7 @@ var bleh = (() => {
         date: "2026-07-30"
       }
     },
-    built_on: "2026-08-12T21:52:31.779Z"
+    built_on: "2026-08-12T22:19:41.177Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

@@ -57,6 +57,7 @@ import { convert_lang_to_country, flag } from '@/components/shared/flag.js';
 import { lotus_modal } from '@/components/music/lotus.js';
 import { new_indicator } from '@/components/shared/indicator.js';
 import { rabbit_keybinds } from '@/pages/bleh_settings/interface.tsx';
+import { playback } from '@/pages/bleh_settings/playback.tsx';
 
 export function bleh_settings() {
 	page.name = auth.name;
@@ -351,6 +352,8 @@ export async function render_setting_page(page_id) {
 			visual();
 		} else if (page_id == 'seasonal') {
 			seasonal();
+		} else if (page_id == 'playback') {
+			playback();
 		}
 	} catch (e) {
 		page_error(e);
@@ -637,6 +640,8 @@ export async function render_setting_page(page_id) {
 		render_track_preview();
 		render_tags();
 	} else if (page_id == 'playback') {
+		return;
+
 		let total_artists = 0;
 		let total_album_tracks = 0;
 

@@ -19,6 +19,7 @@ import { notify } from '@/components/dialog/notify';
 import { load_skus } from '@/pages/bleh_settings/bleh_settings.js';
 import { compile_settings, save_setting } from '@/components/settings/settings';
 import { useSettings } from '@/page.ts';
+import { boolean } from '@std/http/unstable-structured-fields';
 
 function parse_bleh_version(version: string) {
 	return parseFloat(version.substring(0, 7));
@@ -236,7 +237,7 @@ export class Settings {
 			if (local[key]) {
 				let val = local[key];
 
-				if (!isNaN(Number(val))) {
+				if (!isNaN(Number(val)) && typeof val != 'boolean') {
 					val = Number(val);
 				}
 

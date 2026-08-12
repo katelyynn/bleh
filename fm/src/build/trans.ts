@@ -11775,6 +11775,9 @@ export const trans = {
 	badge_multiple_users: {
 		en: 'Owned by {c} people',
 	},
+	miscellaneous: {
+		en: 'Miscellaneous',
+	},
 } as const satisfies Record<string, any>;
 
 export const translation_fallback = 'NO_TRANSLATION_FOUND';
