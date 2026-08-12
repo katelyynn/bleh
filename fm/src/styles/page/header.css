@@ -55,7 +55,7 @@
 		--page-header-avatar-size: 100px;
 		--page-header-avatar-radius: var(--item-big-radius);
 
-		& > .page-header-info {
+		&>.page-header-info {
 			display: flex;
 			flex-direction: column;
 			align-items: center;
@@ -79,6 +79,7 @@
 		translate: 0 10px;
 		opacity: 0;
 	}
+
 	to {
 		translate: 0 0;
 		opacity: 1;
@@ -111,7 +112,7 @@
 .for-artist,
 .for-album,
 .for-track {
-	& > .page-header-info {
+	&>.page-header-info {
 		.page-header-title {
 			display: -webkit-box;
 			overflow: hidden;
@@ -141,6 +142,7 @@
 				}
 			}
 		}
+
 		.page-header-artist {
 			font-size: 20px;
 			line-height: 24px;
@@ -156,13 +158,13 @@
 	justify-content: center;
 	text-align: center;
 
-	& > .page-header-info {
-		& > .sub-text {
+	&>.page-header-info {
+		&>.sub-text {
 			width: fit-content;
 			margin: 0 auto;
 		}
 
-		& > .title-container {
+		&>.title-container {
 			justify-content: center;
 		}
 	}
@@ -270,13 +272,13 @@
 		display: var(--page-header-avatar-gloss, block);
 	}
 
-	& > img {
+	&>img {
 		width: 100%;
 		height: 100%;
 		z-index: 10;
 	}
 
-	& > a {
+	&>a {
 		position: absolute;
 		inset: 0;
 		z-index: 150;
@@ -290,7 +292,9 @@
 		filter: brightness(110%);
 	}
 
-	transition-property: scale, filter, box-shadow;
+	transition-property: scale,
+	filter,
+	box-shadow;
 	transition-duration: 0.4s;
 	transition-timing-function: var(--trans-function-ani);
 
@@ -301,22 +305,25 @@
 
 .page-header-icon {
 	display: flex;
-	width: 28px;
 	flex-shrink: 0;
-	filter: var(--header-filter-shadow);
-	margin-right: calc(-1 * var(--card-gap));
+	margin-right: calc(-1 * var(--card-padding));
+	background-color: oklch(var(--c2) / 90%);
+	border-radius: 50px;
+	padding: 10px;
+	color: oklch(var(--b6));
 
-	--icon-size: 28px;
+	--icon-size: 24px;
 }
 
 .page-header-info {
-	& > .main-info > .sub-text,
-	& > .sub-text {
+
+	&>.main-info>.sub-text,
+	&>.sub-text {
 		justify-content: unset;
 		align-items: center;
 		gap: 4px;
 
-		& > .info-tip {
+		&>.info-tip {
 			--icon-size: 14px;
 		}
 	}
@@ -332,8 +339,13 @@
 		color: oklch(var(--c1));
 		position: relative;
 
-		& > a {
+		&>a {
 			color: inherit !important;
+		}
+
+		&.generic-page-title {
+			font-size: 24px;
+			line-height: 30px;
 		}
 
 		/*&.generic-page-title {
@@ -343,7 +355,7 @@
 		    }*/
 	}
 
-	& > .page-header-artist {
+	&>.page-header-artist {
 		font-size: 18px;
 		line-height: 22px;
 		color: oklch(var(--c2) / 80%);
@@ -372,7 +384,7 @@
 		@media (max-width: 980px) {
 			justify-content: center;
 
-			& > .header-username {
+			&>.header-username {
 				flex-basis: 100%;
 			}
 		}
@@ -390,20 +402,18 @@
 	cursor: default;
 	color: oklch(var(--c1));
 
-	& > .page-header-title {
+	&>.page-header-title {
 		color: oklch(var(--c1));
 
-		& > a {
-			text-decoration: var(
-				--force-underline,
-				none
-			) !important;
+		&>a {
+			text-decoration: var(--force-underline,
+					none) !important;
 		}
 
 		display: flex;
 		gap: var(--item-list-gap);
 
-		& > .feat {
+		&>.feat {
 			font-size: 18px;
 			color: oklch(var(--c2) / 70%);
 		}
@@ -414,11 +424,11 @@
 	}
 
 	&[data-multi="true"] {
-		& > .page-header-title {
+		&>.page-header-title {
 			color: oklch(var(--c2) / 80%);
 			gap: unset;
 
-			& > a {
+			&>a {
 				color: oklch(var(--c1));
 
 				transition-property: color;
@@ -505,7 +515,7 @@
 	background: oklch(var(--b5), 40%);
 	border-radius: var(--card-radius);
 
-	& > .cta {
+	&>.cta {
 		margin: unset !important;
 	}
 }

@@ -619,7 +619,9 @@ export function ColourSwatch({
 						'--lit-over': displays.lit,
 					}}
 			>
-				<Icon mask={false} identifier='swatch' />
+				<span class='swatch-icon-container'>
+					<Icon mask={false} identifier='swatch' />
+				</span>
 			</div>
 			<div class='swatch-inner'>
 				<strong

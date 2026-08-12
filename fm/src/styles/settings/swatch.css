@@ -127,11 +127,12 @@
 	background: oklch(var(--h3));
 	box-shadow:
 		inset 0 0 0 1px oklch(var(--l2-c) / 10%),
+		inset 0 1px 0 1px oklch(var(--l2-c) / 15%),
 		inset 0 0 transparent,
 		0 2px 0 0 oklch(var(--f4) / 80%),
 		0 3px 12px oklch(var(--h4) / 12%),
 		var(--interact-shadow);
-	color: oklch(var(--b7));
+	color: oklch(var(--b7) / 80%);
 	--icon-colour: currentColor;
 	--font-size: 0;
 
@@ -176,10 +177,6 @@
 		}
 	}
 
-	&:not([data-swatch-type="customise"]) {
-		color: oklch(0 0 0);
-	}
-
 	translate: 0 0;
 
 	transition-property: background,
@@ -209,9 +206,10 @@
 .swatch-container:active {
 	&>.swatch {
 		translate: 0 1px;
-		background: color-mix(in oklch, oklch(var(--h3)), oklch(var(--h4)) 20%);
+		background: color-mix(in oklch, oklch(var(--h3)), oklch(var(--h4)) 30%);
 		box-shadow:
 			inset 0 0 0 1px oklch(var(--l2-c) / 10%),
+			inset 0 1px 0 1px oklch(var(--l2-c) / 15%),
 			inset 0 2px 0 0 oklch(var(--h4)),
 			0 3px 12px oklch(var(--h4) / 12%),
 			var(--interact-shadow);
@@ -233,4 +231,8 @@
 	transition-property: transform, opacity, top;
 	transition-duration: 0.3s;
 	transition-timing-function: var(--trans-function);
+}
+
+.swatch-icon-container {
+	filter: drop-shadow(0 1px 0 oklch(var(--h4)));
 }
