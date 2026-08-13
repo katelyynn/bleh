@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { createRef } from 'jsx-dom';
+import { createRef, ReactNode } from 'jsx-dom';
 import {
 	get_from_store,
 	is_incompatible,
@@ -12,47 +12,56 @@ import {
 	SettingLabel,
 } from '@/components/settings/provider/main.tsx';
 import { settings } from '@/build/config.ts';
+import { Switch } from '@/components/settings/clickables/switch.tsx';
+import { tl, translation } from '@/build/trans.ts';
 import { save_setting } from '@/components/settings/settings.tsx';
-import { Input } from '@/components/input/input.tsx';
 import { SettingIcon } from '@/components/settings/provider/icon.tsx';
-import { Select, SelectOption } from '@/components/select/select.tsx';
 import { useSettings } from '@/page.ts';
+import { Radio } from '@/components/settings/clickables/radio.tsx';
 
-interface SettingSelectProps {
+interface SettingRadioProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
-	values?: SelectOption[];
-	value?: string;
 	bind?: string;
+	standalone?: boolean;
 	icon?: string;
 	name?: string;
 	body?: string;
-	showLabel?: boolean;
+	value?: string;
+	values?: RadioOptions;
 	onChange?: (val: string) => void;
 	disabled?: boolean;
 	onMouseEnter?: () => void;
 	onMouseLeave?: () => void;
 }
 
-type SettingSelectElement = HTMLDivElement & {
+type SettingRadioElement = HTMLDivElement & {
 	update: () => void;
-	value: string | number;
+	value: boolean;
 };
 
-export function SettingSelect({
+export type RadioOptions = Record<string, RadioOption>;
+
+export interface RadioOption {
+	name: translation | string;
+}
+
+export function SettingRadio({
 	ref,
-	values,
-	value,
 	bind,
+	standalone = false,
 	icon,
 	name,
 	body,
-	showLabel = true,
+	value,
+	values,
 	onChange,
 	disabled,
 	onMouseEnter,
 	onMouseLeave,
-}: SettingSelectProps) {
+}: SettingRadioProps) {
 	if (bind) value = useSettings.get(bind) as string;
+
+	let buttons: RadioItemElement[] = [];
 
 	const uuid = crypto.randomUUID();
 
@@ -70,7 +79,8 @@ export function SettingSelect({
 
 	if (store) {
 		if (!icon) icon = store.icon;
-		if (!values && store.values) values = store.values;
+
+		if (store.values) values = store.values;
 
 		if (store.incompatible) {
 			Object.entries(store.incompatible).forEach(([key]) => {
@@ -108,30 +118,45 @@ export function SettingSelect({
 			elem.removeAttribute('disabled');
 		}
 
+		buttons = [];
+
 		elem.replaceChildren(
 			<>
 				{icon && <SettingIcon name={icon} />}
-				{showLabel && (
-					<SettingLabel
-						name={name}
-						body={body}
-						store={store}
-						value={value}
-						setValue={(val: string) => {
-							set(val);
-							update();
-						}}
-						defaultValue={store?.default}
-						ref={reset}
-					/>
-				)}
-				<Select
-					className='setting-inner'
+				<SettingLabel
+					name={name}
+					body={body}
+					store={store}
 					value={value}
-					values={values}
-					onChange={set}
-					inSettings
+					setValue={(val: string) => {
+						set(val);
+						update();
+					}}
+					defaultValue={store?.default}
+					ref={reset}
 				/>
+				<div class='primary-selections'>
+					{Object.entries(values).map(
+						(
+							[key, val]: [key: string, val: RadioOption],
+							i: number,
+						) => {
+							const elem = (
+								<RadioItem
+									id={bind || ''}
+									value={key}
+									name={tl(val.name)}
+									onChange={set}
+									key={i}
+								/>
+							) as RadioItemElement;
+
+							buttons.push(elem);
+
+							return elem;
+						},
+					)}
+				</div>
 				{Object.keys(incompatible_list).length > 0 && (
 					<SettingIncompatibleWith
 						list={incompatible_list}
@@ -140,18 +165,22 @@ export function SettingSelect({
 				)}
 			</>,
 		);
+
+		buttons.forEach((elem) => {
+			elem.checked = elem.value == value;
+		});
 	}
 
 	const elem = (
 		<div
-			class='setting'
-			data-type='select'
+			class={['setting', standalone && 'standalone']}
+			data-type='options'
 			id={`setting_${bind}`}
 			onMouseEnter={onMouseEnter}
 			onMouseLeave={onMouseLeave}
 			ref={ref}
 		/>
-	) as SettingSelectElement;
+	) as SettingRadioElement;
 
 	update();
 
@@ -159,6 +188,7 @@ export function SettingSelect({
 		if (value == val) return;
 
 		value = val;
+
 		reset.current.value = val;
 
 		if (bind) {
@@ -167,6 +197,10 @@ export function SettingSelect({
 			if (onChange) onChange(val);
 		}
 
+		buttons.forEach((elem) => {
+			elem.checked = elem.value == val;
+		});
+
 		if (onMouseEnter) onMouseEnter();
 	}
 
@@ -174,9 +208,72 @@ export function SettingSelect({
 		get() {
 			return value;
 		},
+		set(val: string) {
+			set(val);
+		},
 	});
 
 	elem.update = update;
 
 	return elem;
+}
+
+type RadioItemElement = HTMLDivElement & {
+	checked: boolean;
+	value: string;
+};
+
+interface RadioItemProps {
+	id: string;
+	value: string;
+	name: string;
+	checked?: boolean;
+	onChange: (val: string) => void;
+}
+
+function RadioItem({
+	id,
+	value,
+	name,
+	checked,
+	onChange,
+}: RadioItemProps) {
+	const radio = createRef();
+
+	function update() {
+		radio.current.checked = checked;
+	}
+
+	const wrap = (
+		<div
+			class={['setting', 'standalone']}
+			data-type='radio'
+			onClick={() => {
+				onChange(value);
+			}}
+		>
+			<Radio name={id} value={value} ref={radio} interact={false} />
+			<SettingLabel name={name} />
+		</div>
+	) as RadioItemElement;
+
+	update();
+
+	Object.defineProperty(wrap, 'checked', {
+		get() {
+			return checked;
+		},
+		set(val: boolean) {
+			checked = val;
+			update();
+		},
+	});
+
+	Object.defineProperty(wrap, 'value', {
+		get() {
+			return value;
+		},
+	});
+
+	return wrap;
 }

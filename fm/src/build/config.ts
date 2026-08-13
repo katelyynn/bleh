@@ -7,6 +7,7 @@
 import { trans, translation } from '@/build/trans';
 import { icons } from '@/components/shared/icon.tsx';
 import { saturation_themes_unsupported } from '@/build/theme.ts';
+import { RadioOptions } from '@/components/settings/provider/radio.tsx';
 
 export type setting_value = string | boolean | number | [] | string[] | {};
 
@@ -35,7 +36,7 @@ export interface setting_instance {
 	bubble?: boolean;
 	beta?: boolean;
 	new_release?: boolean;
-	values?: Record<string, radio_item>;
+	values?: RadioOptions;
 	min?: number;
 	max?: number;
 	step?: number;

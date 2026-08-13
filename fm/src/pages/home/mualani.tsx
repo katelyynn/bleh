@@ -49,6 +49,7 @@ import {
 } from '@/components/settings/provider/colour.tsx';
 import { colour_type } from '@/components/settings/swatch.ts';
 import { DateTime } from 'luxon';
+import { SettingRadio } from '@/components/settings/provider/radio.tsx';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -507,6 +508,32 @@ export function mualani() {
 								},
 							}}
 						/>
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section>
+				<DemoGrid>
+					<DemoItem label='SettingRadio'>
+						<SettingGroup>
+							<SettingRadio
+								name='Setting name'
+								body='Setting body'
+								value='hello'
+								values={{
+									hello: {
+										name: 'Hello',
+									},
+									world: {
+										name: 'World',
+									},
+								}}
+							/>
+						</SettingGroup>
+					</DemoItem>
+					<DemoItem label='SettingRadio (binded to track_album_name_location)'>
+						<SettingGroup>
+							<SettingRadio bind='track_album_name_location' />
+						</SettingGroup>
 					</DemoItem>
 				</DemoGrid>
 			</section>
