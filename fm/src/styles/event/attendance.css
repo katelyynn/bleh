@@ -15,11 +15,23 @@
 }
 
 .attendance-btn--attending {
-	--mask: var(--icon-16-check);
+	--mask: var(--icon-16-going);
+
+	&.attendance-btn--turn-off {
+		--hue-over: var(--hue-pos);
+		--sat-over: var(--sat-pos);
+		--lit-over: var(--lit-pos);
+	}
 }
 
 .attendance-btn--maybe {
-	--mask: var(--icon-16-question);
+	--mask: var(--icon-16-maybe);
+
+	&.attendance-btn--turn-off {
+		--hue-over: var(--hue-orange);
+		--sat-over: var(--sat-orange);
+		--lit-over: var(--lit-orange);
+	}
 }
 
 /*     ATTENDEES     */

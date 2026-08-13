@@ -1,7 +1,6 @@
 .events-list-item-date-icon,
 .calendar-icon {
-	background: linear-gradient(180deg, oklch(var(--k4) / 30%), oklch(var(--b4)
-		/ 40%) 60%) !important;
+	background: linear-gradient(180deg, oklch(var(--k4) / 30%), oklch(var(--b4) / 40%) 60%) !important;
 	box-shadow: var(--group-shadow) !important;
 	color: oklch(var(--c2));
 	width: var(--calendar-width) !important;
@@ -70,10 +69,11 @@
 	margin-top: unset;
 	margin-bottom: var(--card-gap);
 
-	.events-list-sidebar + & {
+	.events-list-sidebar+& {
 		margin-top: var(--card-gap);
 	}
 }
+
 .user-events-sidebar .events-list-sidebar {
 	margin-top: unset;
 }
@@ -85,30 +85,30 @@
 }
 
 .events-list-item-user-attendance {
-	position: static !important;
-	order: 5;
+	--badge-size: 18px;
+
+	position: absolute !important;
+	top: -4px;
+	left: calc(var(--calendar-width) - var(--badge-size) + 4px);
+	width: unset !important;
+	height: unset !important;
 }
+
 .attendance-badge {
-	--calendar-w: 46px;
-	--calendar-h: 54px;
+	position: relative !important;
+	inset: unset !important;
+	margin-top: unset !important;
 
-	top: 50% !important;
-	margin-top: calc(-1 * (var(--w) / 2)) !important;
-	/*left: calc(var(--calendar-w) - var(--w) + 10px) !important;*/
-	left: unset !important;
-	right: 0 !important;
-
-	background: oklch(var(--h3)) !important;
-	box-shadow: var(--primary-shadow), 0 3px 12px oklch(var(--h4) / 32%)
-		!important;
-	color: oklch(var(--b7)) !important;
-	--mask: var(--icon-16-check);
+	background: oklch(var(--b3)) !important;
+	box-shadow: var(--primary-shadow), 0 0 0 1px oklch(var(--b5)) !important;
+	color: oklch(var(--l3-c-theme-switch)) !important;
+	--mask: var(--icon-16-going);
 	--left: 50% !important;
 	--top: 50% !important;
-	--mask-size: 14px;
+	--mask-size: 12px;
 	--margin-left: calc(-1 * (var(--mask-size) / 2)) !important;
 	--margin-top: calc(-1 * (var(--mask-size) / 2)) !important;
-	--w: 16px;
+	--w: var(--badge-size);
 	border-radius: 8px;
 
 	width: var(--w) !important;
@@ -119,7 +119,7 @@
 	--lit-over: var(--lit-pos);
 
 	&.attendance-badge--maybe {
-		--mask: var(--icon-16-question-solo);
+		--mask: var(--icon-16-maybe);
 		--hue-over: var(--hue-orange);
 		--sat-over: var(--sat-orange);
 		--lit-over: var(--lit-orange);
@@ -132,7 +132,7 @@
 
 	.events-list-item-art,
 	.events-list-item-date {
-		width: var(--calendar-height) !important;
+		width: var(--calendar-width) !important;
 		display: flex;
 		align-items: center;
 
@@ -183,6 +183,7 @@
 		height: var(--calendar-height) !important;
 	}
 }
+
 .events-list-anhv1,
 .events-list {
 	tbody {
@@ -201,7 +202,7 @@
 	}
 
 	/* upcoming events */
-	.buffer-standard.text-bold + .buffer-standard {
+	.buffer-standard.text-bold+.buffer-standard {
 		display: none;
 	}
 }
@@ -220,7 +221,7 @@
 		display: none;
 	}
 
-	& + .events-list-sidebar {
+	&+.events-list-sidebar {
 		margin-top: unset;
 	}
 }
@@ -241,12 +242,14 @@
 	justify-content: unset !important;
 	gap: var(--card-gap);
 }
+
 :is(.events-list, .events-list-anhv1) td,
 :is(.events-list, .events-list-anhv1) th {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 }
+
 .events-list-sidebar .events-list-item--with-followed-attendees,
 :is(.events-list, .events-list-anhv1) .events-list-item--with-followed-attendees {
 	padding-right: unset;
@@ -259,10 +262,11 @@
 	font-weight: var(--font-weight-medium) !important;
 	text-decoration: var(--force-underline, none) !important;
 
-	& > a {
+	&>a {
 		text-decoration: inherit !important;
 	}
 }
+
 .events-list-item-venue {
 	--font-size: 13px !important;
 	color: oklch(var(--c2) / 80%);
@@ -280,12 +284,14 @@
 	margin-top: unset;
 	display: none;
 }
+
 .events-list-item-attendees {
 	color: oklch(var(--l2-c-theme-switch));
 	--hue-over: var(--hue-pos);
 	--sat-over: 1;
 	--lit-over: 1;
 }
+
 .attendees-you-know-list {
 	display: flex;
 	flex-wrap: wrap;
@@ -311,9 +317,11 @@
 .events-list-anhv1 {
 	font: inherit;
 }
+
 #events-section {
 	margin-top: unset;
 }
+
 .events-list-anhv1:not(:last-child),
 .events-list:not(:last-child) {
 	margin-bottom: var(--card-gap);
@@ -341,6 +349,7 @@
 		-webkit-box-orient: vertical;
 	}
 }
+
 :is(.events-list, .events-list-anhv1) .events-list-item--cancelled .events-list-item-event {
 	padding-top: unset;
 }
@@ -355,15 +364,32 @@
 	line-height: var(--line-height) !important;
 	margin: unset !important;
 }
+
 .events-list-item-attendees,
 .events-list-item-venue--title {
 	font-weight: var(--font-weight-medium) !important;
 }
+
 .events-list-item-event--lineup,
 .events-list-item-venue--address,
 .events-list-item-acts {
 	color: oklch(var(--c2) / 80%);
 	margin-top: unset !important;
+
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-webkit-box-orient: vertical;
+	display: -webkit-box !important;
+	-webkit-line-clamp: 1;
+}
+
+.events-list-item-venue--address {
+	display: flex !important;
+	gap: 4px;
+}
+
+.events-list-item-venue--country {
+	color: oklch(var(--c3));
 }
 
 .events-list-sidebar .events-list-item-venue--title,
@@ -378,6 +404,7 @@
 	font-size: 0 !important;
 	line-height: 0 !important;
 }
+
 .events-list-item-attendees a {
 	font-size: var(--font-size) !important;
 	line-height: var(--line-height) !important;
@@ -386,10 +413,11 @@
 .events-filter {
 	margin: unset;
 
-	& > button {
+	&>button {
 		&.date-picker-button {
 			--mask: var(--icon-16-calendar);
 		}
+
 		&.events-filter-location {
 			--mask: var(--icon-16-location);
 		}
