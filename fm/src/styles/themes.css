@@ -552,7 +552,7 @@ body,
 		--b8: 0.17 0 0;
 		--b7: 0 0 0;
 
-		--separator-base: oklch(var(--b3) / 0.9);
+		--separator-base: oklch(var(--b3) / 0.7);
 
 		--card-border-base: oklch(var(--b2) / 0.3);
 		--card-border-base-highlight: oklch(var(--b2) / 0.6);
@@ -565,7 +565,7 @@ body,
 		--focused-input-shadow:
 			inset 0 0 0 1px oklch(var(--h3) / 0.4),
             var(--input-shadow);
-		--group-shadow: inset 0 0 0 1px oklch(var(--b2) / 72%);
+		--group-shadow: inset 0 0 0 1px oklch(var(--b2) / 42%);
 
 		--separator-shadow: 0 1px 2px 0 oklch(0.03 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue) / 0.4);
 
