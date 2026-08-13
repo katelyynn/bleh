@@ -309,7 +309,7 @@
 		gap: var(--card-padding);
 		margin-left: var(--page-sidebar-margin-left, unset) !important;
 
-		&>.hidden-xs:not(.labs-cta) {
+		&>.hidden-xs:not(.labs-cta, .your-progress-component) {
 			display: block !important;
 		}
 	}
