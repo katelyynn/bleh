@@ -102789,14 +102789,17 @@ var bleh = (() => {
     const friends2 = useSettings.get("friends").filter((friend) => friend != starred2);
     return /* @__PURE__ */ jsx(Fragment, {
       children: [
-        /* @__PURE__ */ jsx("button", {
-          type: "button",
-          class: "dropdown-menu-clickable-item",
-          "data-type": "back",
+        /* @__PURE__ */ jsx(Button, {
+          menu: true,
           onClick: () => {
             side.current.setAttribute("data-page", "1");
           },
-          children: tl2(trans.back)
+          children: [
+            /* @__PURE__ */ jsx(Icon, {
+              name: icons.arrow_left
+            }),
+            tl2(trans.back)
+          ]
         }),
         starred2 && /* @__PURE__ */ jsx(NavigationFriend, {
           name: starred2,
@@ -102810,30 +102813,61 @@ var bleh = (() => {
         /* @__PURE__ */ jsx("div", {
           class: "sep"
         }),
-        /* @__PURE__ */ jsx("button", {
-          type: "button",
-          class: "dropdown-menu-clickable-item",
-          "data-type": "edit",
+        /* @__PURE__ */ jsx(Button, {
+          menu: true,
           onClick: () => {
             open_starred_friend_window();
             instance.hide();
           },
-          children: tl2(trans.edit_close_friends)
+          children: [
+            /* @__PURE__ */ jsx(Icon, {
+              name: icons.edit
+            }),
+            tl2(trans.edit_close_friends)
+          ]
         })
       ]
     });
   }
   function NavigationFriend({ instance, name, starred: starred2 }) {
     const valid = is_sponsor(name);
+    const elem = /* @__PURE__ */ jsx("a", {
+      href: `${root}user/${name}`,
+      class: [
+        "dropdown-menu-clickable-item",
+        "v2"
+      ],
+      onClick: () => {
+        instance.hide();
+      },
+      children: [
+        /* @__PURE__ */ jsx(Icon, {
+          name: icons.user
+        }),
+        /* @__PURE__ */ jsx("span", {
+          children: [
+            /* @__PURE__ */ jsx("span", {
+              class: "at",
+              children: "@"
+            }),
+            name
+          ]
+        }),
+        starred2 && /* @__PURE__ */ jsx("span", {
+          class: [
+            "star-icon",
+            "colourful"
+          ],
+          children: /* @__PURE__ */ jsx(Icon, {})
+        })
+      ]
+    });
     load_profile_cache_externally(name).then((cache2) => {
-      return /* @__PURE__ */ jsx("a", {
-        class: [
-          "dropdown-menu-clickable-item"
-        ],
-        onClick: () => {
-          instance.hide();
-        },
+      elem.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
         children: [
+          /* @__PURE__ */ jsx(Icon, {
+            name: icons.user
+          }),
           cache2.username && valid ? /* @__PURE__ */ jsx("span", {
             class: "username-combo",
             children: [
@@ -102866,37 +102900,14 @@ var bleh = (() => {
               "star-icon",
               "colourful"
             ],
-            children: /* @__PURE__ */ jsx(Icon, {})
+            children: /* @__PURE__ */ jsx(Icon, {
+              name: icons.star
+            })
           })
         ]
-      });
+      }));
     });
-    return /* @__PURE__ */ jsx("a", {
-      class: [
-        "dropdown-menu-clickable-item"
-      ],
-      onClick: () => {
-        instance.hide();
-      },
-      children: [
-        /* @__PURE__ */ jsx("span", {
-          children: [
-            /* @__PURE__ */ jsx("span", {
-              class: "at",
-              children: "@"
-            }),
-            name
-          ]
-        }),
-        starred2 && /* @__PURE__ */ jsx("span", {
-          class: [
-            "star-icon",
-            "colourful"
-          ],
-          children: /* @__PURE__ */ jsx(Icon, {})
-        })
-      ]
-    });
+    return elem;
   }
   function NavigationThemes({ side }) {
     const uuid = crypto.randomUUID();
@@ -102907,14 +102918,17 @@ var bleh = (() => {
     const full_theme_list = getThemes();
     const wrap = /* @__PURE__ */ jsx(Fragment, {
       children: [
-        /* @__PURE__ */ jsx("button", {
-          type: "button",
-          class: "dropdown-menu-clickable-item",
-          "data-type": "back",
+        /* @__PURE__ */ jsx(Button, {
+          menu: true,
           onClick: () => {
             side.current.setAttribute("data-page", "1");
           },
-          children: tl2(trans.back)
+          children: [
+            /* @__PURE__ */ jsx(Icon, {
+              name: icons.arrow_left
+            }),
+            tl2(trans.back)
+          ]
         }),
         light_themes.map((id) => {
           const theme = full_theme_list[id];
@@ -116727,7 +116741,7 @@ var bleh = (() => {
         date: "2026-07-30"
       }
     },
-    built_on: "2026-08-13T22:05:33.707Z"
+    built_on: "2026-08-13T22:28:33.029Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

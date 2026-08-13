@@ -1863,16 +1863,15 @@ function NavigationFriends({
 
 	return (
 		<>
-			<button
-				type='button'
-				class='dropdown-menu-clickable-item'
-				data-type='back'
+			<Button
+				menu
 				onClick={() => {
 					side.current!.setAttribute('data-page', '1');
 				}}
 			>
+				<Icon name={icons.arrow_left} />
 				{tl(trans.back)}
-			</button>
+			</Button>
 			{starred && (
 				<NavigationFriend
 					name={starred as string}
@@ -1884,17 +1883,16 @@ function NavigationFriends({
 				<NavigationFriend name={friend} key={i} instance={instance} />
 			))}
 			<div class='sep' />
-			<button
-				type='button'
-				class='dropdown-menu-clickable-item'
-				data-type='edit'
+			<Button
+				menu
 				onClick={() => {
 					open_starred_friend_window();
 					instance.hide();
 				}}
 			>
+				<Icon name={icons.edit} />
 				{tl(trans.edit_close_friends)}
-			</button>
+			</Button>
 		</>
 	);
 }
@@ -1912,14 +1910,31 @@ function NavigationFriend({
 }: NavigationFriendProps) {
 	const valid = is_sponsor(name);
 
+	const elem = (
+		<a
+			href={`${root}user/${name}`}
+			class={['dropdown-menu-clickable-item', 'v2']}
+			onClick={() => {
+				instance.hide();
+			}}
+		>
+			<Icon name={icons.user} />
+			<span>
+				<span class='at'>@</span>
+				{name}
+			</span>
+			{starred && (
+				<span class={['star-icon', 'colourful']}>
+					<Icon />
+				</span>
+			)}
+		</a>
+	);
+
 	load_profile_cache_externally(name).then((cache) => {
-		return (
-			<a
-				class={['dropdown-menu-clickable-item']}
-				onClick={() => {
-					instance.hide();
-				}}
-			>
+		elem.replaceChildren(
+			<>
+				<Icon name={icons.user} />
 				{(cache.username && valid)
 					? (
 						<span class='username-combo'>
@@ -1940,31 +1955,14 @@ function NavigationFriend({
 					)}
 				{starred && (
 					<span class={['star-icon', 'colourful']}>
-						<Icon />
+						<Icon name={icons.star} />
 					</span>
 				)}
-			</a>
+			</>,
 		);
 	});
 
-	return (
-		<a
-			class={['dropdown-menu-clickable-item']}
-			onClick={() => {
-				instance.hide();
-			}}
-		>
-			<span>
-				<span class='at'>@</span>
-				{name}
-			</span>
-			{starred && (
-				<span class={['star-icon', 'colourful']}>
-					<Icon />
-				</span>
-			)}
-		</a>
-	);
+	return elem;
 }
 
 interface NavigationThemesProps {
@@ -1986,16 +1984,15 @@ function NavigationThemes({
 
 	const wrap = (
 		<>
-			<button
-				type='button'
-				class='dropdown-menu-clickable-item'
-				data-type='back'
+			<Button
+				menu
 				onClick={() => {
 					side.current!.setAttribute('data-page', '1');
 				}}
 			>
+				<Icon name={icons.arrow_left} />
 				{tl(trans.back)}
-			</button>
+			</Button>
 			{light_themes.map((id) => {
 				const theme = full_theme_list[id];
 				if (!theme) return;
