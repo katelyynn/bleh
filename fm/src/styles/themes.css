@@ -1186,7 +1186,7 @@ u,
 		--l3: calc(var(--lit) * 0.4) calc(var(--sat) * 0.5) var(--hue);
 		--l4: calc(var(--lit) * 0.22) calc(var(--sat) * 0.6) var(--hue);
 
-		--l2-c: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.93) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue);
+		--l2-c: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.87) calc(clamp(min(0), var(--sat), max(2)) * 0.3) var(--hue);
 		--l3-c: var(--l3-c-lit) var(--l3-c-sat) var(--hue);
 		--l4-c: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.3) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue);
 
@@ -1292,7 +1292,7 @@ u,
 		--l3: calc(var(--lit) * 0.4) calc(var(--sat) * 0.5) var(--hue);
 		--l4: calc(var(--lit) * 0.22) calc(var(--sat) * 0.6) var(--hue);
 
-		--l2-c: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.5) calc(clamp(min(0), var(--sat), max(2)) * 0.2) var(--hue);
+		--l2-c: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.86) calc(clamp(min(0), var(--sat), max(2)) * 0.2) var(--hue);
 		--l3-c: var(--l3-c-lit) var(--l3-c-sat) var(--hue);
 		--l4-c: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.34) calc(clamp(min(0), var(--sat), max(2)) * 0.57) var(--hue);
 
