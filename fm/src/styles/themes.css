@@ -1085,7 +1085,7 @@ u,
 		--l3: calc(var(--lit) * 0.4) calc(var(--sat) * 0.5) var(--hue);
 		--l4: calc(var(--lit) * 0.22) calc(var(--sat) * 0.6) var(--hue);
 
-		--l2-c: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.8) calc(clamp(min(0), var(--sat), max(2)) * 0.7) var(--hue);
+		--l2-c: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.98) calc(clamp(min(0), var(--sat), max(2)) * 0.2) var(--hue);
 		--l3-c: var(--l3-c-lit) var(--l3-c-sat) var(--hue);
 		--l4-c: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.35) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue);
 
@@ -1170,6 +1170,9 @@ u,
 		--graph-colour-10: oklch(70% 60% 360);
 
 		--white: 84% 0 0;
+
+		--primary-shadow: 0 0 transparent;
+		--bar-shadow: 0 0 transparent;
 	}
 	&[data-bleh--theme="ink"],
 	body[data-bleh--theme="ink"] &:not(.theme-preview, .grid-items-cover-image.colourful, .grid-item-text, .colour-preview) {
@@ -1183,7 +1186,7 @@ u,
 		--l3: calc(var(--lit) * 0.4) calc(var(--sat) * 0.5) var(--hue);
 		--l4: calc(var(--lit) * 0.22) calc(var(--sat) * 0.6) var(--hue);
 
-		--l2-c: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.8) calc(clamp(min(0), var(--sat), max(2)) * 0.7) var(--hue);
+		--l2-c: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.93) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue);
 		--l3-c: var(--l3-c-lit) var(--l3-c-sat) var(--hue);
 		--l4-c: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.3) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue);
 
@@ -1267,6 +1270,9 @@ u,
 		--graph-colour-10: oklch(70% 50% 360);
 
 		--white: 89% 0 0;
+
+		--primary-shadow: 0 0 transparent;
+		--bar-shadow: 0 0 transparent;
 	}
 	&[data-bleh--theme="rose_pine"],
 	body[data-bleh--theme="rose_pine"] &:not(.theme-preview, .grid-items-cover-image.colourful, .grid-item-text, .colour-preview) {
@@ -1372,6 +1378,9 @@ u,
 		--white: 89% 0 0;
 
 		--side-action-bg: oklch(var(--k4) / 7%);
+
+		--primary-shadow: 0 0 transparent;
+		--bar-shadow: 0 0 transparent;
 	}
 	&[data-bleh--theme="kanagawa_dragon"],
 	body[data-bleh--theme="kanagawa_dragon"] &:not(.theme-preview, .grid-items-cover-image.colourful, .grid-item-text, .colour-preview) {
