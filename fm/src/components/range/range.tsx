@@ -93,7 +93,7 @@ export function Range({
 	let last = 0;
 	let timeout: number | undefined;
 
-	function set(val: number, input: boolean) {
+	function set(val: number, input?: boolean) {
 		val = Number(val); // precaution for some reason
 
 		value = val;

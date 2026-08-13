@@ -16,6 +16,7 @@ import { SettingSelect } from '@/components/settings/provider/select.tsx';
 import { PanelHead } from '@/components/text/head.tsx';
 import { SettingOptions } from '@/components/settings/provider/options.tsx';
 import { SettingCheckbox } from '@/components/settings/provider/checkbox.tsx';
+import { BetaIndicator } from '@/components/shared/indicator.tsx';
 
 export function playback() {
 	page.structure.main!.replaceChildren(
@@ -65,6 +66,7 @@ export function playback() {
 			<section class='bleh--panel'>
 				<PanelHead icon={icons.oracle}>
 					oracle
+					<BetaIndicator />
 				</PanelHead>
 				<SettingGroup>
 					<SettingSwitch bind='oracle_beta' />

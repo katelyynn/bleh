@@ -67,6 +67,7 @@ export function SettingRange({
 			if (id == uuid) return;
 
 			set(val as number, true);
+			update();
 		});
 	}
 

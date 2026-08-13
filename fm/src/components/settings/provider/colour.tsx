@@ -244,6 +244,21 @@ export function SettingColour({
 	const sat = createRef();
 	const lit = createRef();
 
+	const default_colour: colour = {
+		type: 'default',
+		sets: {
+			hue: settings_store.hue.default as number,
+			sat: settings_store.sat.default as number,
+			lit: settings_store.lit.default as number,
+		},
+		displays: {
+			hue: `var(--hue-seasonal, ${settings_store.hue.default})`,
+			sat: `var(--sat-seasonal, ${settings_store.sat.default})`,
+			lit: `var(--lit-seasonal, ${settings_store.lit.default})`,
+		},
+		label: trans.default,
+	};
+
 	const avatar_colour: colour = {
 		type: 'avatar',
 		sets: {
@@ -291,45 +306,24 @@ export function SettingColour({
 				bind='hue'
 				ref={hue}
 				onChange={(val: number) => {
-					set({
-						type: 'customise',
-						sets: {
-							hue: val,
-							sat: colour.sat,
-							lit: colour.lit,
-						},
-					});
-					update(false);
+					colour.type = 'customise';
+					//update(false);
 				}}
 			/>
 			<SettingRange
 				bind='sat'
 				ref={sat}
 				onChange={(val: number) => {
-					set({
-						type: 'customise',
-						sets: {
-							hue: colour.hue,
-							sat: val,
-							lit: colour.lit,
-						},
-					});
-					update(false);
+					colour.type = 'customise';
+					//update(false);
 				}}
 			/>
 			<SettingRange
 				bind='lit'
 				ref={lit}
 				onChange={(val: number) => {
-					set({
-						type: 'customise',
-						sets: {
-							hue: colour.hue,
-							sat: colour.sat,
-							lit: val,
-						},
-					});
-					update(false);
+					colour.type = 'customise';
+					//update(false);
 				}}
 			/>
 		</SettingGroup>
@@ -339,21 +333,26 @@ export function SettingColour({
 		console.info('re-rendering');
 		list = [];
 
+		if (
+			colour.type == 'default' && (
+				colour.hue != default_colour.sets!.hue ||
+				colour.sat != default_colour.sets!.sat ||
+				colour.lit != default_colour.sets!.lit
+			)
+		) {
+			colour.type = 'customise';
+		} else if (
+			colour.type == 'avatar' && (
+				colour.hue != avatar_colour.sets!.hue ||
+				colour.sat != avatar_colour.sets!.sat ||
+				colour.lit != avatar_colour.sets!.lit
+			)
+		) {
+			colour.type = 'customise';
+		}
+
 		custom_swatches = [
-			{
-				type: 'default',
-				sets: {
-					hue: settings_store.hue.default as number,
-					sat: settings_store.sat.default as number,
-					lit: settings_store.lit.default as number,
-				},
-				displays: {
-					hue: `var(--hue-seasonal, ${settings_store.hue.default})`,
-					sat: `var(--sat-seasonal, ${settings_store.sat.default})`,
-					lit: `var(--lit-seasonal, ${settings_store.lit.default})`,
-				},
-				label: trans.default,
-			},
+			default_colour,
 			avatar_colour,
 			{
 				type: 'placeholder',
@@ -388,9 +387,6 @@ export function SettingColour({
 									key={i}
 									onChange={(val: colour) => {
 										set(val);
-										hue.current.value = val.sets?.hue;
-										sat.current.value = val.sets?.sat;
-										lit.current.value = val.sets?.lit;
 									}}
 								/>
 							) as ColourSwatchElement;
@@ -410,9 +406,6 @@ export function SettingColour({
 									key={i}
 									onChange={(val: colour) => {
 										set(val);
-										hue.current.value = val.sets?.hue;
-										sat.current.value = val.sets?.sat;
-										lit.current.value = val.sets?.lit;
 									}}
 								/>
 							) as ColourSwatchElement;
@@ -451,30 +444,23 @@ export function SettingColour({
 			colour = {
 				...colour,
 				type: 'customise',
+				...value.sets,
 			};
-
-			if (value.sets) {
-				colour.hue = value.sets.hue;
-				colour.sat = value.sets.sat;
-				colour.lit = value.sets.lit;
-			}
 		} else {
-			if (!value.sets) return;
-
 			colour = {
 				...colour,
 				type: value.type || 'colour',
-				hue: value.sets.hue,
-				sat: value.sets.sat,
-				lit: value.sets.lit,
+				...value.sets,
 			};
 		}
 
 		if (
 			colour.type == 'avatar' &&
-			colour.hue != avatar_colour.sets?.hue &&
-			colour.sat != avatar_colour.sets?.sat &&
-			colour.lit != avatar_colour.sets?.lit
+			(
+				colour.hue != avatar_colour.sets?.hue ||
+				colour.sat != avatar_colour.sets?.sat ||
+				colour.lit != avatar_colour.sets?.lit
+			)
 		) {
 			colour.type = 'customise';
 		}

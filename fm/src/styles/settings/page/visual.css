@@ -142,7 +142,7 @@
 			box-shadow: var(--card-shadow);
 			border-top-left-radius: 5px;
 
-			border-top: 1px solid var(--card-border-base-highlight);
+			border-top: 1px solid var(--card-border-base);
 			border-left: 1px solid var(--card-border-base);
 
 			background-image: var(--cards-overlay-image-subtle);
