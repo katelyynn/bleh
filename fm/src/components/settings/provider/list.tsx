@@ -23,6 +23,7 @@ import {
 	ListCandidate,
 	ListItem,
 } from '@/components/settings/clickables/list.tsx';
+import { page } from '@/build/page.ts';
 
 interface SettingListProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
@@ -85,6 +86,7 @@ export function SettingList({
 		if (!icon) icon = store.icon;
 
 		if (store.values) values = store.values;
+		predefined = store.predefined || false;
 
 		if (store.incompatible) {
 			Object.entries(store.incompatible).forEach(([key]) => {
@@ -150,6 +152,7 @@ export function SettingList({
 
 								set(new_list);
 							}}
+							key={i}
 						/>
 					))}
 					{!predefined
@@ -162,7 +165,7 @@ export function SettingList({
 								}}
 							/>
 						)
-						: Object.entries(available).map(([val, formal]) => (
+						: Object.entries(available).map(([val, formal], i) => (
 							<ListCandidate
 								icon={formal.icon}
 								name={formal.name}
@@ -171,6 +174,7 @@ export function SettingList({
 
 									set(new_list);
 								}}
+								key={i}
 							/>
 						))}
 				</List>
@@ -204,9 +208,9 @@ export function SettingList({
 
 		if (bind) {
 			if (!received) useSettings.set(bind, val, uuid);
-		} else {
-			if (onChange) onChange(val);
 		}
+
+		if (onChange) onChange(val);
 
 		update();
 

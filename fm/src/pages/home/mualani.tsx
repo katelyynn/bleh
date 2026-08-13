@@ -600,6 +600,15 @@ export function mualani() {
 							<SettingList bind='friends' />
 						</SettingGroup>
 					</DemoItem>
+					<DemoItem label='SettingList (binded to navigation_items)'>
+						<SettingGroup>
+							<SettingList bind='navigation_items' />
+							<SettingList
+								bind='navigation_items'
+								values={page.state.quick_access_items}
+							/>
+						</SettingGroup>
+					</DemoItem>
 				</DemoGrid>
 			</section>
 		</>,

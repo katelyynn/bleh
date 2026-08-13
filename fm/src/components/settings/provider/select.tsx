@@ -36,6 +36,7 @@ interface SettingSelectProps {
 type SettingSelectElement = HTMLDivElement & {
 	update: () => void;
 	value: string | number;
+	values: SelectOption[];
 };
 
 export function SettingSelect({
@@ -173,6 +174,16 @@ export function SettingSelect({
 	Object.defineProperty(elem, 'value', {
 		get() {
 			return value;
+		},
+	});
+
+	Object.defineProperty(elem, 'values', {
+		get() {
+			return values;
+		},
+		set(vals: SelectOption[]) {
+			values = vals;
+			update();
 		},
 	});
 

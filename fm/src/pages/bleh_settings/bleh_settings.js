@@ -58,6 +58,7 @@ import { lotus_modal } from '@/components/music/lotus.js';
 import { new_indicator } from '@/components/shared/indicator.js';
 import { rabbit_keybinds } from '@/pages/bleh_settings/interface.tsx';
 import { playback } from '@/pages/bleh_settings/playback.tsx';
+import { profile } from '@/pages/bleh_settings/profile.tsx';
 
 export function bleh_settings() {
 	page.name = auth.name;
@@ -354,6 +355,8 @@ export async function render_setting_page(page_id) {
 			seasonal();
 		} else if (page_id == 'playback') {
 			playback();
+		} else if (page_id == 'profile') {
+			profile();
 		}
 	} catch (e) {
 		page_error(e);
@@ -997,6 +1000,8 @@ export async function render_setting_page(page_id) {
 			`,
 		);
 	} else if (page_id == 'profile') {
+		return;
+
 		if (!auth.name) {
 			render(
 				page.structure.main,

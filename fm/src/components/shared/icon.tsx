@@ -192,6 +192,7 @@ export const icons = {
 	bright: 'bright',
 	moody: 'moody',
 	redirect: 'redirect',
+	profile_info: 'profile-info',
 };
 
 interface icon {
