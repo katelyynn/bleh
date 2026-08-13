@@ -234,7 +234,7 @@ export class Settings {
 		const local = JSON.parse(localStorage.getItem('bleh') || '{}');
 		log('loaded local data', 'settings', 'info', { local, settings_store });
 		for (const key in settings_store) {
-			if (local[key]) {
+			if (local[key] != undefined) {
 				let val = local[key];
 
 				if (!isNaN(Number(val)) && typeof val != 'boolean') {

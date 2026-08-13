@@ -17,8 +17,34 @@ import { PanelHead } from '@/components/text/head.tsx';
 import { SettingOptions } from '@/components/settings/provider/options.tsx';
 import { SettingCheckbox } from '@/components/settings/provider/checkbox.tsx';
 import { BetaIndicator } from '@/components/shared/indicator.tsx';
+import { CardTip } from '@/components/text/tip.tsx';
+import { album_track_corrections, artist_corrections } from '@/build/music.ts';
+import { SettingInfo } from '@/components/settings/provider/info.tsx';
+import { SeeMore } from '@/components/text/see_more.tsx';
+import { lotus, lotus_modal } from '@/components/music/lotus.ts';
 
 export function playback() {
+	let total_artists = 0;
+	let total_album_tracks = 0;
+
+	if (artist_corrections) {
+		total_artists = Object.keys(artist_corrections).length;
+	}
+	if (album_track_corrections) {
+		total_album_tracks = Object.values(album_track_corrections).reduce(
+			(sum, album_tracks) => sum + Object.keys(album_tracks).length,
+			0,
+		);
+	}
+
+	let lotus_version_text;
+	if (artist_corrections.version == album_track_corrections.version) {
+		lotus_version_text = artist_corrections.version;
+	} else {
+		lotus_version_text =
+			`${artist_corrections.version}, ${album_track_corrections.version}`;
+	}
+
 	page.structure.main!.replaceChildren(
 		<>
 			<section class='bleh--panel'>
@@ -43,7 +69,44 @@ export function playback() {
 				</div>
 				<SettingGroup>
 					<SettingSwitch bind='corrections' />
+					<SettingInfo name={tl(trans.current_version)}>
+						<p>{lotus_version_text}</p>
+						<SeeMore
+							className='update-check'
+							iconPlacement='left'
+							onClick={() => lotus(true)}
+						>
+							{tl(trans.update_check)}
+						</SeeMore>
+					</SettingInfo>
+					<SettingInfo name={tl(trans.corrections_loaded)}>
+						<p>
+							{tl(trans.corrections_loaded_value, {
+								c1: total_artists,
+								c2: total_album_tracks,
+							})}
+						</p>
+						<SeeMore
+							onClick={() => lotus_modal()}
+						>
+							{tl(trans.view_all)}
+						</SeeMore>
+					</SettingInfo>
+					<SettingInfo name={tl(trans.help_contribute)}>
+						<SeeMore
+							href='https://github.com/katelyynn/lotus/issues/new/choose'
+							external
+						>
+							{tl(trans.suggest_correction)}
+						</SeeMore>
+					</SettingInfo>
 				</SettingGroup>
+				<CardTip>{tl(trans.lotus_edit_notice)}</CardTip>
+			</section>
+			<section class='bleh--panel'>
+				<PanelHead icon={icons.redirect}>
+					{tl(trans.redirections)}
+				</PanelHead>
 				<SettingGroup>
 					<SettingSwitch bind='prefer_no_redirect' />
 					<SettingSwitch bind='travis' />

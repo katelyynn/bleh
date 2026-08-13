@@ -191,6 +191,7 @@ export const icons = {
 	minis: 'mini',
 	bright: 'bright',
 	moody: 'moody',
+	redirect: 'redirect',
 };
 
 interface icon {

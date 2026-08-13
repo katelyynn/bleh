@@ -5963,6 +5963,9 @@ export const trans = {
 			pl: 'Rekapitalizuj artystów, albumy i utwory bazując na społeczności',
 		},
 	},
+	lotus_edit_notice: {
+		en: 'This is visual-only, your scrobbles will not be actually modified.',
+	},
 	prefer_no_redirect: {
 		name: {
 			en: 'Avoid artist redirects when navigating',

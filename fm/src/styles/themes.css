@@ -779,7 +779,7 @@ body,
 	&[data-bleh--theme="rose_pine"] {
 		--b2: 0.4299 0.0392 290.42; /* highlight high */
 		--b3: 0.3717 0.0358 291.1; /* highlight med */
-		--b4: 0.2608 0.0423 289.23; /* overlay */
+		--b4: 0.3008 0.0423 289.23; /* overlay */
 		--b5: 0.2413 0.0322 289.14; /* surface */
 		--b6: 0.2134 0.0255 291.13; /* base */
 		--b8: 0.2512 0.0263 287.62; /* highlight low */
