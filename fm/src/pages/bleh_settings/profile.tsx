@@ -77,6 +77,7 @@ export function profile() {
 					/>
 					<StarredFriend />
 				</SettingGroup>
+				<CardTip>{tl(trans.friend_difference)}</CardTip>
 			</section>
 			<section class='bleh--panel'>
 				<PanelHead icon={icons.profile_info}>

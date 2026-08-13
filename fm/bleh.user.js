@@ -104744,6 +104744,9 @@ var bleh = (() => {
                 }),
                 /* @__PURE__ */ jsx(StarredFriend, {})
               ]
+            }),
+            /* @__PURE__ */ jsx(CardTip, {
+              children: tl2(trans.friend_difference)
             })
           ]
         }),
@@ -116724,7 +116727,7 @@ var bleh = (() => {
         date: "2026-07-30"
       }
     },
-    built_on: "2026-08-13T22:04:49.529Z"
+    built_on: "2026-08-13T22:05:33.707Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
