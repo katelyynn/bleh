@@ -2,10 +2,12 @@ import { useSettings } from '@/page.ts';
 import { SettingSelect } from '@/components/settings/provider/select.tsx';
 import { select_prepare_list } from '@/components/settings/select.ts';
 import { tl, trans } from '@/build/trans.ts';
+import { icons } from '@/components/shared/icon.tsx';
 
 export function StarredFriend() {
 	const elem = (
 		<SettingSelect
+			icon={icons.starred_friend}
 			bind='starred_friend'
 			values={set_list()}
 		/>

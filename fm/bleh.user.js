@@ -104677,6 +104677,7 @@ var bleh = (() => {
   // src/components/settings/provider/starred_friend.tsx
   function StarredFriend() {
     const elem = /* @__PURE__ */ jsx(SettingSelect, {
+      icon: icons.starred_friend,
       bind: "starred_friend",
       values: set_list()
     });
@@ -116723,7 +116724,7 @@ var bleh = (() => {
         date: "2026-07-30"
       }
     },
-    built_on: "2026-08-13T22:03:09.503Z"
+    built_on: "2026-08-13T22:04:49.529Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
