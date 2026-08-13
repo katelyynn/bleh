@@ -12,7 +12,7 @@
 	&:before {
 		content: '';
 		position: absolute;
-		background: linear-gradient(0deg, oklch(var(--b6) / 60%), transparent 80%);
+		background: linear-gradient(0deg, oklch(var(--b6) / 75%) 20%, transparent 90%);
 		inset: 0 var(--card-padding) -1px;
 
 		--mask: linear-gradient(90deg, transparent, white 10%, white 90%, transparent);

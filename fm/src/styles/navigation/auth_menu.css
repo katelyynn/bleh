@@ -6,7 +6,7 @@
 				var(--menu-opacity))) !important;
 	padding: var(--item-list-gap) !important;
 	border-radius: var(--card-radius) !important;
-	border: 1px solid var(--card-border-base) !important;
+	border: 1px solid var(--menu-border) !important;
 	box-shadow: var(--override-full-shadow,
 			var(--menu-shadow)) !important;
 	overflow: hidden;

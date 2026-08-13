@@ -4,7 +4,7 @@
 	backdrop-filter: var(--solarium);
 	-webkit-backdrop-filter: var(--solarium);
 	border-radius: var(--item-med-radius);
-	box-shadow: inset 0 0 0 1px var(--card-border-base), var(--avatar-shadow);
+	box-shadow: inset 0 0 0 1px var(--menu-border), var(--avatar-shadow);
 	padding: 4px 11px;
 	font-size: calc(var(--font-size) - 1px);
 	font-weight: var(--font-weight);
@@ -59,7 +59,7 @@
 		border-radius: calc(var(--item-med-radius) + 4px) !important;
 		box-shadow: var(--override-full-shadow,
 				var(--menu-shadow)) !important;
-		border: 1px solid var(--card-border-base) !important;
+		border: 1px solid var(--menu-border) !important;
 		color: oklch(var(--c2));
 
 		/*[data-theme="window"] & {
@@ -158,7 +158,7 @@
 		border-radius: var(--item-big-radius) !important;
 		box-shadow: var(--override-full-shadow,
 				var(--menu-shadow)) !important;
-		border: 1px solid var(--card-border-base) !important;
+		border: 1px solid var(--menu-border) !important;
 		color: oklch(var(--c2));
 
 		backdrop-filter: var(--solarium);
@@ -185,7 +185,7 @@
 		border-radius: var(--item-big-radius) !important;
 		box-shadow: var(--override-full-shadow,
 				var(--menu-shadow)) !important;
-		border: 1px solid var(--card-border-base) !important;
+		border: 1px solid var(--menu-border) !important;
 		color: oklch(var(--c2));
 
 		backdrop-filter: var(--solarium);
@@ -391,7 +391,7 @@
 	border-radius: calc(var(--input-radius) + 4px) !important;
 	box-shadow: var(--override-full-shadow,
 			var(--menu-shadow)) !important;
-	border: 1px solid var(--card-border-base) !important;
+	border: 1px solid var(--menu-border) !important;
 	color: oklch(var(--c2));
 
 	&:not(.date-range-picker-content) {
