@@ -32,6 +32,7 @@ interface InputProps {
 
 type InputElement = HTMLDivElement & {
 	disabled: boolean;
+	focus: () => void;
 };
 
 export function Input({
@@ -150,9 +151,9 @@ export function Input({
 
 		if (!from_input) {
 			input.current.value = value;
+		} else {
+			if (onChange) onChange(input.current.value);
 		}
-
-		if (onChange) onChange(input.current.value);
 	}
 
 	Object.defineProperty(wrap, 'value', {
@@ -176,6 +177,10 @@ export function Input({
 	});
 
 	update();
+
+	wrap.focus = () => {
+		input.current.focus();
+	};
 
 	return wrap;
 }

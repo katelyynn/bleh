@@ -94,6 +94,7 @@ const CspPolicies: PolicyMap = {
 		'status.cafe',
 		'*.github.io',
 		'ws.audioscrobbler.com',
+		'*.katelyn.moe',
 	],
 	'font-src': [
 		"'self'",

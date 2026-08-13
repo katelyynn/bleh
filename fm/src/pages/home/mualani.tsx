@@ -50,6 +50,13 @@ import {
 import { colour_type } from '@/components/settings/swatch.ts';
 import { DateTime } from 'luxon';
 import { SettingRadio } from '@/components/settings/provider/radio.tsx';
+import {
+	List,
+	ListAdd,
+	ListCandidate,
+	ListItem,
+} from '@/components/settings/clickables/list.tsx';
+import { SettingList } from '@/components/settings/provider/list.tsx';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -533,6 +540,64 @@ export function mualani() {
 					<DemoItem label='SettingRadio (binded to track_album_name_location)'>
 						<SettingGroup>
 							<SettingRadio bind='track_album_name_location' />
+						</SettingGroup>
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section>
+				<DemoGrid>
+					<DemoItem label='List'>
+						<List>
+							<ListItem name='List item' />
+							<ListItem name='List item' />
+							<ListItem name='List item' />
+							<ListAdd />
+						</List>
+						<List>
+							<ListCandidate name='List item' />
+							<ListCandidate name='List item' />
+							<ListCandidate name='List item' />
+						</List>
+					</DemoItem>
+					<DemoItem label='SettingList'>
+						<SettingGroup>
+							<SettingList
+								name='Setting name'
+								body='Setting body'
+								value={['hello', 'world']}
+								values={{
+									hello: {
+										name: 'Hello',
+									},
+									world: {
+										name: 'World',
+									},
+								}}
+							/>
+							<SettingList
+								name='Setting name'
+								body='Setting body'
+								value={['hello', 'world']}
+							/>
+							<SettingList
+								name='Setting name'
+								body='Setting body'
+								value={['hello']}
+								values={{
+									hello: {
+										name: 'Hello',
+									},
+									world: {
+										name: 'World',
+									},
+								}}
+								predefined
+							/>
+						</SettingGroup>
+					</DemoItem>
+					<DemoItem label='SettingList (binded to friends)'>
+						<SettingGroup>
+							<SettingList bind='friends' />
 						</SettingGroup>
 					</DemoItem>
 				</DemoGrid>

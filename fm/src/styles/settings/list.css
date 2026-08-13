@@ -3,49 +3,49 @@
 	flex-wrap: wrap;
 	gap: var(--card-gap);
 
-	.setting-list-item {
-		display: flex;
-		align-items: center;
-		gap: var(--icon-gap);
-		text-align: left;
-
-		&:not(.current) {
-			color: oklch(var(--c3));
-		}
-
-		--bg: oklch(var(--b4) / 40%);
-		--bg-hov: oklch(var(--b4) / 60%);
-		--bg-atv: oklch(var(--b4));
-		--shadow: var(--normal-shadow);
-
-		--button-height: 28px;
-		--btn-top: 5px;
-		--btn-bottom: 5px;
-		--radius: var(--item-med-radius);
-
-		& > .info {
-			flex: 1;
-			margin-right: 4px;
-		}
-
-		& > .bleh-icon {
-			--icon: var(--mask);
-			--icon-size: 16px;
-		}
-
-		.indicator {
-			--icon-size: 14px;
-		}
-
-		&.current + .setting-list-item:not(.current) {
-			margin-left: var(--card-gap);
-		}
-	}
-
 	.setting-list-sep {
 		width: 1px;
 		background: oklch(var(--b4) / 60%);
 		display: none;
+	}
+}
+
+.setting-list-item {
+	display: flex;
+	align-items: center;
+	gap: var(--icon-gap);
+	text-align: left;
+
+	&:not(.current) {
+		color: oklch(var(--c3));
+	}
+
+	--bg: oklch(var(--b2) / 40%);
+	--bg-hov: oklch(var(--b2) / 50%);
+	--bg-atv: oklch(var(--b2) / 60%);
+	--shadow: var(--normal-shadow);
+
+	--button-height: 22px;
+	--button-sides: 6px;
+	--button-verts: 2px;
+	--radius: var(--item-small-radius);
+
+	&>.info {
+		flex: 1;
+		margin-right: 4px;
+	}
+
+	&>.bleh-icon {
+		--icon: var(--mask);
+		--icon-size: 16px;
+	}
+
+	.indicator {
+		--icon-size: 14px;
+	}
+
+	&.current+.setting-list-item:not(.current) {
+		margin-left: var(--card-gap);
 	}
 }
 
@@ -58,7 +58,7 @@
 	--button-height: 16px;
 	--button-sides: 0;
 	height: var(--button-height);
-	--icon-size: 12px;
+	--icon-size: 12px !important;
 	--radius: 4px;
 
 	&.big {
@@ -74,4 +74,13 @@
 	padding: 4px 0;
 
 	margin: -2px -4px;
+}
+
+.setting-list-item-info {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+
+	--icon-size: 14px;
+	pointer-events: none;
 }
