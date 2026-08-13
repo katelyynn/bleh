@@ -109933,7 +109933,7 @@ var bleh = (() => {
               about.value = trimmed + "\n\n" + new_banner;
             }
           }
-          preview2.style.setProperty("background-image", `url(${val})`);
+          preview2.style.setProperty("background-image", `url(https://images.weserv.nl/?url=${encodeURIComponent(val)}&output=webp&n=-1)`);
           preview2.onclick = () => {
             expand_avatar(val);
           };
@@ -115939,7 +115939,7 @@ var bleh = (() => {
         date: "2026-07-30"
       }
     },
-    built_on: "2026-08-13T15:04:08.423Z"
+    built_on: "2026-08-13T15:07:12.197Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
