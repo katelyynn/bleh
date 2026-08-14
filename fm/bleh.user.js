@@ -50516,7 +50516,7 @@ var bleh = (() => {
     }
   };
   var translation_fallback = "NO_TRANSLATION_FOUND";
-  function tl2(key, replacements = {}) {
+  function tl2(key, replacements = {}, string = false) {
     if (typeof key === "string") {
       return key;
     }
@@ -50529,6 +50529,13 @@ var bleh = (() => {
       translation = translation.replaceAll("Last.fm Pro", "Verified");
     }
     if (Object.keys(replacements).length == 0) return translation;
+    if (string) {
+      for (const [placeholder, value] of Object.entries(replacements)) {
+        const regex = new RegExp(`{${placeholder}}`, "g");
+        translation = translation.replace(regex, value);
+      }
+      return translation;
+    }
     const parts = translation.split(/({[^}]+})/g);
     return parts.map((part) => {
       const match3 = part.match(/^\{(\w+)\}$/);
@@ -50538,11 +50545,6 @@ var bleh = (() => {
       }
       return part;
     });
-    for (const [placeholder, value] of Object.entries(replacements)) {
-      const regex = new RegExp(`{${placeholder}}`, "g");
-      translation = translation.replace(regex, value);
-    }
-    return translation;
   }
   function collect_keys(object, prefix, out = []) {
     for (const k4 in object) {
@@ -73873,7 +73875,7 @@ var bleh = (() => {
         button2.setAttribute("data-type", "bookmark");
         button2.textContent = tl2(trans.bookmark_item, {
           v: tl2(trans[`${page.type}_lower`])
-        });
+        }, true);
       }
     });
     let links = interact_container.querySelectorAll("a");
@@ -73927,7 +73929,11 @@ var bleh = (() => {
       }
       const scrobble_btn = html.node`
             <button class="btn side-action icon-mask" data-type="add" onclick=${() => submit_scrobble(props)}>
-                ${tl2(trans.scrobble_value, { v: tl2(trans[`${page.type}_lower`]) })}
+                ${tl2(
+        trans.scrobble_value,
+        { v: tl2(trans[`${page.type}_lower`]) },
+        true
+      )}
             </button>
         `;
       if (!can_api) {
@@ -116934,7 +116940,7 @@ var bleh = (() => {
         date: "2026-07-30"
       }
     },
-    built_on: "2026-08-14T14:35:33.944Z"
+    built_on: "2026-08-14T14:46:42.812Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

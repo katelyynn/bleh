@@ -11820,6 +11820,7 @@ export type translation = translation_leaf | {
 export function tl(
 	key: translation | string,
 	replacements: Record<string, ReactNode> = {},
+	string = false,
 ) {
 	if (typeof key === 'string') {
 		return key;
@@ -11838,6 +11839,15 @@ export function tl(
 
 	if (Object.keys(replacements).length == 0) return translation;
 
+	if (string) {
+		for (const [placeholder, value] of Object.entries(replacements)) {
+			const regex = new RegExp(`{${placeholder}}`, 'g');
+			translation = translation.replace(regex, value);
+		}
+
+		return translation;
+	}
+
 	const parts = translation.split(/({[^}]+})/g);
 
 	return parts.map((part) => {
@@ -11851,13 +11861,6 @@ export function tl(
 
 		return part;
 	});
-
-	for (const [placeholder, value] of Object.entries(replacements)) {
-		const regex = new RegExp(`{${placeholder}}`, 'g');
-		translation = translation.replace(regex, value);
-	}
-
-	return translation;
 }
 
 function collect_keys(object, prefix, out = []) {

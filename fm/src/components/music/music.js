@@ -447,7 +447,7 @@ export async function show_your_scrobbles() {
 			button.setAttribute('data-type', 'bookmark');
 			button.textContent = tl(trans.bookmark_item, {
 				v: tl(trans[`${page.type}_lower`]),
-			});
+			}, true);
 		}
 	});
 	let links = interact_container.querySelectorAll('a');
@@ -516,7 +516,11 @@ export async function show_your_scrobbles() {
             <button class="btn side-action icon-mask" data-type="add" onclick=${() =>
 			submit_scrobble(props)}>
                 ${
-			tl(trans.scrobble_value, { v: tl(trans[`${page.type}_lower`]) })
+			tl(
+				trans.scrobble_value,
+				{ v: tl(trans[`${page.type}_lower`]) },
+				true,
+			)
 		}
             </button>
         `;
