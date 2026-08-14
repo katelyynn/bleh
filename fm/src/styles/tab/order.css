@@ -44,7 +44,7 @@
 	order: -5;
 }
 
-.secondary-nav-item--similar>a {
+.secondary-nav-item--similar > a {
 	--mask: var(--icon-16-arrows);
 }
 
@@ -68,13 +68,13 @@
 }
 
 [data-type="charts"],
-.secondary-nav-item--charts>a,
+.secondary-nav-item--charts > a,
 [data-analytics-label="charts"] {
 	--mask: var(--icon-16-charts);
 }
 
 /* events */
-.secondary-nav-item:first-child>a[href$="events"] {
+.secondary-nav-item:first-child > a[href$="events"] {
 	--mask: var(--icon-16-calendar);
 }
 
@@ -86,24 +86,24 @@
 .has-tab-num {
 	--show-icon: none !important;
 
-	&>.tab-num {
+	& > .tab-num {
 		display: none;
 	}
 }
 
-.secondary-nav-item--venue>a {
+.secondary-nav-item--venue > a {
 	--mask: var(--icon-16-location);
 }
 
-.secondary-nav-item--lineup>a {
+.secondary-nav-item--lineup > a {
 	--mask: var(--icon-16-artist);
 }
 
-.secondary-nav-item--attendance>a {
+.secondary-nav-item--attendance > a {
 	--mask: var(--icon-16-user);
 }
 
-.secondary-nav-item--info>a {
+.secondary-nav-item--info > a {
 	--mask: var(--icon-16-bio);
 }
 
@@ -120,7 +120,7 @@
 }
 
 /* settings */
-.secondary-nav-item--overview>a[href*="/settings"] {
+.secondary-nav-item--overview > a[href*="/settings"] {
 	--mask: var(--icon-16-profile);
 }
 

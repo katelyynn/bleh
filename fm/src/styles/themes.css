@@ -925,7 +925,8 @@ body,
 u,
 .new-badge,
 .colourful,
-.events-list-item-attendees, .attendance-btn,
+.events-list-item-attendees,
+.attendance-btn,
 .gallery-image-preferred-container,
 .attendance-badge {
 	--hue: var(--hue-over, var(--hue-album, var(--hue-user, var(--hue-seasonal, var(--default-hue)))));

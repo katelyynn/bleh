@@ -12,7 +12,8 @@
 	&:before {
 		content: '';
 		position: absolute;
-		background: linear-gradient(0deg, oklch(var(--b6) / 75%) 20%, transparent 90%);
+		background: linear-gradient(0deg, oklch(var(--b6) / 75%) 20%,
+			transparent 90%);
 		inset: 0 var(--card-padding) -1px;
 
 		--mask: linear-gradient(90deg, transparent, white 10%, white 90%, transparent);
@@ -62,7 +63,7 @@
 	display: flex;
 	align-items: center;
 
-	&>form {
+	& > form {
 		flex: 1;
 	}
 
@@ -108,7 +109,7 @@ input::placeholder {
 	color: oklch(var(--c3)) !important;
 }
 
-.library-search-form[data-search-state="loaded"]>.library-search-input,
+.library-search-form[data-search-state="loaded"] > .library-search-input,
 .library-search-input:focus-within {
 	border: unset !important;
 	box-shadow: unset !important;
@@ -138,7 +139,7 @@ input::placeholder {
 	flex-direction: column;
 	justify-content: center;
 
-	&>[data-state="no-results"] {
+	& > [data-state="no-results"] {
 		color: oklch(var(--c3));
 		font-weight: var(--font-weight-medium);
 		cursor: default;
@@ -161,7 +162,7 @@ input::placeholder {
 		margin-top: calc(var(--card-gap) - var(--button-list-gap));
 	}
 
-	hr+& {
+	hr + & {
 		margin-top: var(--card-gap);
 	}
 }
@@ -216,7 +217,7 @@ input::placeholder {
 	background: oklch(var(--b4)) !important;
 	box-shadow: unset !important;
 
-	&>img {
+	& > img {
 		border-radius: unset;
 	}
 }
@@ -238,7 +239,7 @@ input::placeholder {
 	gap: var(--button-list-gap);
 	flex: 1;
 
-	&>.fill {
+	& > .fill {
 		flex: 1;
 	}
 }
@@ -265,7 +266,7 @@ button.navlist-more {
 	color: oklch(var(--c2));
 	cursor: pointer;
 	transition-property: color,
-	transform;
+		transform;
 	transition-duration: var(--trans);
 	transition-timing-function: var(--trans-function);
 
@@ -323,7 +324,7 @@ button.navlist-more {
 	[data-bleh--solarium="false"] & {
 		&:before {
 			background: color-mix(in oklch, oklch(var(--b6)) 20%,
-					oklch(var(--b5)));
+				oklch(var(--b5)));
 		}
 	}
 
@@ -338,8 +339,8 @@ button.navlist-more {
 	}
 }
 
-.library-controls>.secondary-nav,
-.toolbar>.secondary-nav {
+.library-controls > .secondary-nav,
+.toolbar > .secondary-nav {
 	margin: unset !important;
 	padding-bottom: unset !important;
 	padding-left: calc(var(--card-padding) - var(--button-sides-icon));
@@ -349,9 +350,11 @@ button.navlist-more {
 		display: none !important;
 	}
 
-	&>.navlist-items {
-		width: calc(var(--tabbed-width) + var(--button-sides-icon) + var(--button-sides));
-		max-width: calc(var(--tabbed-width) + var(--button-sides-icon) + var(--button-sides));
+	& > .navlist-items {
+		width: calc(var(--tabbed-width) + var(--button-sides-icon) +
+			var(--button-sides));
+		max-width: calc(var(--tabbed-width) + var(--button-sides-icon) +
+			var(--button-sides));
 	}
 }
 
@@ -385,7 +388,7 @@ button.navlist-more {
 
 	--icon-16-placeholder: var(--icon-16-dot);
 
-	&>.new-badge {
+	& > .new-badge {
 		margin-left: 6px;
 	}
 
@@ -440,12 +443,12 @@ button.navlist-more {
 
 		height: unset !important;
 
-		&>.new-badge {
+		& > .new-badge {
 			font-size: 10px;
 		}
 	}
 
-	:is(.toolbar, .library-controls)>.navlist>.navlist-items>.secondary-nav-item>& {
+	:is(.toolbar, .library-controls) > .navlist > .navlist-items > .secondary-nav-item > & {
 		--bg-hov: oklch(var(--b2) / 20%) !important;
 		--bg-atv: oklch(var(--b2) / 40%) !important;
 		--padding: var(--button-verts) var(--button-sides) var(--button-verts) calc(var(--button-sides-icon) + var(--icon-size) + var(--icon-gap)) !important;
@@ -549,7 +552,6 @@ button.navlist-more {
 
 /* ensure vertical scrollbars dont appear */
 @media (min-width: 981px) {
-
 	.navlist--more,
 	.navlist--more .navlist-items {
 		overflow: visible !important;

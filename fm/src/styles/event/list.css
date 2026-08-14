@@ -1,6 +1,7 @@
 .events-list-item-date-icon,
 .calendar-icon {
-	background: linear-gradient(180deg, oklch(var(--k4) / 30%), oklch(var(--b4) / 40%) 60%) !important;
+	background: linear-gradient(180deg, oklch(var(--k4) / 30%), oklch(var(--b4)
+		/ 40%) 60%) !important;
 	box-shadow: var(--group-shadow) !important;
 	color: oklch(var(--c2));
 	width: var(--calendar-width) !important;
@@ -69,7 +70,7 @@
 	margin-top: unset;
 	margin-bottom: var(--card-gap);
 
-	.events-list-sidebar+& {
+	.events-list-sidebar + & {
 		margin-top: var(--card-gap);
 	}
 }
@@ -202,7 +203,7 @@
 	}
 
 	/* upcoming events */
-	.buffer-standard.text-bold+.buffer-standard {
+	.buffer-standard.text-bold + .buffer-standard {
 		display: none;
 	}
 }
@@ -221,7 +222,7 @@
 		display: none;
 	}
 
-	&+.events-list-sidebar {
+	& + .events-list-sidebar {
 		margin-top: unset;
 	}
 }
@@ -262,7 +263,7 @@
 	font-weight: var(--font-weight-medium) !important;
 	text-decoration: var(--force-underline, none) !important;
 
-	&>a {
+	& > a {
 		text-decoration: inherit !important;
 	}
 }
@@ -413,7 +414,7 @@
 .events-filter {
 	margin: unset;
 
-	&>button {
+	& > button {
 		&.date-picker-button {
 			--mask: var(--icon-16-calendar);
 		}

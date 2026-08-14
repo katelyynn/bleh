@@ -9,7 +9,8 @@
 	display: flex;
 	justify-content: center;
 	height: 4px;
-	background: linear-gradient(90deg, transparent, oklch(var(--b2) / 60%), transparent);
+	background: linear-gradient(90deg, transparent, oklch(var(--b2) / 60%),
+		transparent);
 	border-radius: 10px;
 }
 
@@ -71,14 +72,14 @@
 
 	&[data-season="pride"] {
 		background-image: linear-gradient(180deg, var(--graph-colour-0) 10%,
-				var(--graph-colour-1) 23%, var(--graph-colour-2) 38%,
-				var(--graph-colour-5) 55%, var(--graph-colour-7) 67%,
-				var(--graph-colour-9) 100%);
+			var(--graph-colour-1) 23%, var(--graph-colour-2) 38%,
+			var(--graph-colour-5) 55%, var(--graph-colour-7) 67%,
+			var(--graph-colour-9) 100%);
 	}
 
 	&[data-season="fall"] {
 		background-image: linear-gradient(180deg, oklch(var(--k4)) 30%,
-				oklch(var(--white)));
+			oklch(var(--white)));
 	}
 
 	z-index: 0;
@@ -124,9 +125,9 @@
 
 	&[data-season="pride"] {
 		background-image: linear-gradient(90deg, var(--graph-colour-0) 10%,
-				var(--graph-colour-1) 23%, var(--graph-colour-2) 38%,
-				var(--graph-colour-5) 55%, var(--graph-colour-7) 67%,
-				var(--graph-colour-9) 100%);
+			var(--graph-colour-1) 23%, var(--graph-colour-2) 38%,
+			var(--graph-colour-5) 55%, var(--graph-colour-7) 67%,
+			var(--graph-colour-9) 100%);
 		background-clip: text;
 		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
@@ -139,7 +140,7 @@
 	z-index: 3;
 }
 
-.seasonal-icon>.bleh-icon,
+.seasonal-icon > .bleh-icon,
 .bleh-seasonal-icon {
 	--icon: var(--mask, var(--icon-16-season));
 

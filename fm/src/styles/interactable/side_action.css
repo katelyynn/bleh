@@ -47,19 +47,22 @@
 	}
 
 	&:is(section) {
-		margin: 0 calc(var(--card-padding) - var(--side-action-side)) 0 !important;
+		margin: 0 calc(var(--card-padding) - var(--side-action-side)) 0
+			!important;
 
 		&:first-child {
-			margin: calc(-1 * (2px + 7px)) calc(var(--card-padding) - var(--side-action-side)) 0 !important;
+			margin: calc(-1 * (2px + 7px)) calc(var(--card-padding) -
+				var(--side-action-side)) 0 !important;
 		}
 	}
 
-	&>form {
+	& > form {
 		margin: unset;
 	}
 
-	&>.sep {
-		margin: calc(var(--card-gap) - var(--button-list-gap)) var(--side-action-side) !important;
+	& > .sep {
+		margin: calc(var(--card-gap) - var(--button-list-gap))
+			var(--side-action-side) !important;
 		width: unset;
 		display: none;
 	}
@@ -74,13 +77,13 @@
 		}
 	}
 
-	&> :last-child:not(.attendance-control) {
+	& > :last-child:not(.attendance-control) {
 		--last-child-sep: none;
 	}
 }
 
 .attendance-control:last-child {
-	>.attendance-btn--maybe {
+	> .attendance-btn--maybe {
 		--last-child-sep: none;
 	}
 }
@@ -113,7 +116,7 @@
 		gap: 4px;
 		width: 100%;
 
-		&>i {
+		& > i {
 			font-size: var(--font-size-sm);
 			font-style: normal;
 			opacity: 0.6;
@@ -124,7 +127,7 @@
 		}
 	}
 
-	&>.spinner {
+	& > .spinner {
 		position: absolute;
 		width: var(--icon-size) !important;
 		height: var(--icon-size) !important;
@@ -133,7 +136,8 @@
 		color: oklch(var(--c3)) !important;
 
 		top: 50% !important;
-		margin-top: calc(-1 * (var(--mask-size, var(--icon-size)) / 2)) !important;
+		margin-top: calc(-1 * (var(--mask-size, var(--icon-size)) / 2))
+			!important;
 		left: unset !important;
 		right: var(--side-action-side) !important;
 	}
@@ -240,10 +244,10 @@
 
 .side-action[data-friends="true"],
 .attendance-btn--turn-off,
-[data-toggle-button-current-state="loved"]>form>.header-new-love-button,
-[data-toggle-button-current-state="bookmarked"]>form>.header-new-bookmark-button,
+[data-toggle-button-current-state="loved"] > form > .header-new-love-button,
+[data-toggle-button-current-state="bookmarked"] > form > .header-new-bookmark-button,
 .side-action[data-is-shortcut="true"],
-[data-toggle-button-current-state="followed"]>form>.side-action[data-type="follow"] {
+[data-toggle-button-current-state="followed"] > form > .side-action[data-type="follow"] {
 	--col: oklch(var(--l3-c));
 	--mask-colour: color-mix(in oklch, oklch(var(--l3-c)), oklch(var(--l4-c)) 40%);
 	--force-font-weight: var(--font-weight-medium) !important;
@@ -260,11 +264,11 @@
 }
 
 .header-new-love-button {
-	&>.toggle-button--text {
+	& > .toggle-button--text {
 		display: none;
 	}
 
-	&>span {
+	& > span {
 		font-size: var(--font-size) !important;
 		order: -1;
 	}

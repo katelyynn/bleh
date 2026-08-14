@@ -97,7 +97,7 @@
 .inbox-item {
 	position: relative;
 
-	&>.counter {
+	& > .counter {
 		position: absolute;
 		top: 4px;
 		right: 4px;
@@ -130,17 +130,17 @@
 	gap: var(--item-list-gap);
 	margin-top: 4px;
 
-	&>.inbox-info-item {
+	& > .inbox-info-item {
 		display: flex;
 		align-items: center;
 		gap: var(--icon-gap);
 
-		&>.bleh-icon-inbox-tooltip {
+		& > .bleh-icon-inbox-tooltip {
 			--icon-size: 14px;
 		}
 	}
 
-	&>.inbox-sep {
+	& > .inbox-sep {
 		display: block;
 		width: 3px;
 		height: 3px;
@@ -224,7 +224,7 @@
 	text-decoration: var(--force-underline, none) !important;
 	--mask: var(--icon-16-arrow-down) !important;
 
-	&>p {
+	& > p {
 		margin: unset;
 	}
 

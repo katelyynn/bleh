@@ -23,7 +23,7 @@
 		align-items: center;
 		gap: var(--card-padding);
 
-		&>.footer-credit-text {
+		& > .footer-credit-text {
 			margin: unset;
 		}
 
@@ -88,9 +88,11 @@
 
 .footer-top,
 .footer-bottom {
-	&>.container {
-		min-width: calc(var(--cards-width) - (var(--card-padding) * 2)) !important;
-		max-width: calc(var(--cards-width) - (var(--card-padding) * 2)) !important;
+	& > .container {
+		min-width: calc(var(--cards-width) - (var(--card-padding) * 2))
+			!important;
+		max-width: calc(var(--cards-width) - (var(--card-padding) * 2))
+			!important;
 		width: calc(var(--cards-width) - (var(--card-padding) * 2)) !important;
 	}
 }

@@ -84,7 +84,7 @@
 	margin-top: var(--card-gap);
 	margin-bottom: 6px;
 
-	&>span>.new-badge {
+	& > span > .new-badge {
 		margin-left: 6px;
 	}
 }
@@ -96,8 +96,8 @@
 
 	flex-direction: column;
 
-	&>.metadata-group {
-		&>.music-small-header {
+	& > .metadata-group {
+		& > .music-small-header {
 			margin-top: unset;
 		}
 	}
@@ -147,7 +147,7 @@
 	opacity: 0 !important;
 }
 
-.col-main>.section-controls {
+.col-main > .section-controls {
 	display: none;
 }
 
