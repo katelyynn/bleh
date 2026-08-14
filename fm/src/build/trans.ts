@@ -11820,7 +11820,7 @@ export type translation = translation_leaf | {
 export function tl(
 	key: translation | string,
 	replacements: Record<string, ReactNode> = {},
-	string = false,
+	string = true,
 ) {
 	if (typeof key === 'string') {
 		return key;

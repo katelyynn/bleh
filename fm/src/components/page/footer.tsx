@@ -84,7 +84,7 @@ export function bleh_footer() {
 									{tl(trans.love_lower)}
 								</span>
 							),
-						})}
+						}, false)}
 					</p>
 				</div>
 				<FooterDot />
@@ -116,7 +116,7 @@ export function bleh_footer() {
 										)).join(', ')}
 									</span>
 								),
-							})}
+							}, false)}
 						</p>
 					</div>
 				</div>

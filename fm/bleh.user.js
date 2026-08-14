@@ -50516,7 +50516,7 @@ var bleh = (() => {
     }
   };
   var translation_fallback = "NO_TRANSLATION_FOUND";
-  function tl2(key, replacements = {}, string = false) {
+  function tl2(key, replacements = {}, string = true) {
     if (typeof key === "string") {
       return key;
     }
@@ -57878,7 +57878,7 @@ var bleh = (() => {
         v: /* @__PURE__ */ jsx("i", {
           children: sanitise_text(romanise(correct_item_by_artist(page.name, page.sister)))
         })
-      }),
+      }, false),
       body: html.node`
             <div class="oracle-credits">
                 ${grouped.length == 0 ? html.node`
@@ -113771,7 +113771,7 @@ var bleh = (() => {
                     onClick: () => sponsor(),
                     children: tl2(trans.love_lower)
                   })
-                })
+                }, false)
               })
             }),
             /* @__PURE__ */ jsx(FooterDot, {}),
@@ -113807,7 +113807,7 @@ var bleh = (() => {
                     children: user
                   }, i3)).join(", ")
                 })
-              })
+              }, false)
             })
           })
         })
@@ -116958,7 +116958,7 @@ var bleh = (() => {
         date: "2026-07-30"
       }
     },
-    built_on: "2026-08-14T15:40:24.666Z"
+    built_on: "2026-08-14T15:53:56.906Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

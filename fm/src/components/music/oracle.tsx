@@ -3013,7 +3013,7 @@ export function oracle_credits() {
 					)}
 				</i>
 			),
-		}),
+		}, false),
 		body: html.node`
             <div class="oracle-credits">
                 ${
