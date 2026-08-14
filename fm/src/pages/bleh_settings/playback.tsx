@@ -4,7 +4,13 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { page } from '@/build/page';
+import {
+	oracle_albums,
+	oracle_artists,
+	oracle_tracks,
+	page,
+	root,
+} from '@/build/page';
 import { tl, trans } from '@/build/trans';
 import { settings } from '@/build/config';
 import { SettingTheme } from '@/components/settings/provider/theme.tsx';
@@ -22,6 +28,10 @@ import { album_track_corrections, artist_corrections } from '@/build/music.ts';
 import { SettingInfo } from '@/components/settings/provider/info.tsx';
 import { SeeMore } from '@/components/text/see_more.tsx';
 import { lotus, lotus_modal } from '@/components/music/lotus.ts';
+import { SettingAction } from '@/components/settings/provider/action.tsx';
+import { createRef } from 'jsx-dom';
+import { useSettings } from '@/page.ts';
+import { manage_oracle_data, oracle_data } from '@/components/music/oracle.tsx';
 
 export function playback() {
 	let total_artists = 0;
@@ -43,6 +53,55 @@ export function playback() {
 	} else {
 		lotus_version_text =
 			`${artist_corrections.version}, ${album_track_corrections.version}`;
+	}
+
+	const header_preview = createRef();
+
+	useSettings.on('format_guest_features', render_header_preview);
+	useSettings.on('show_guest_features', render_header_preview);
+
+	function render_header_preview() {
+		const format = useSettings.get('format_guest_features');
+		const show_artist_tag = useSettings.get('show_guest_features');
+
+		header_preview.current.replaceChildren(
+			<div class='page-header-info'>
+				<div class='title-container'>
+					<h1
+						class='header-new-title page-header-title'
+						data-kate-processed='true'
+					>
+						<div class='title'>
+							THE END{!format &&
+								' (feat. will.i.am & Jessica Pratt)'}
+						</div>
+						{(format && show_artist_tag) && (
+							<div class='feat' data-tag-group='guests'>
+								feat. will.i.am & Jessica Pratt
+							</div>
+						)}
+					</h1>
+				</div>
+				<h2 class='page-header-artist artist-for-track'>
+					<span itemProp='byArtist' style={{ display: 'flex' }}>
+						<a class='header-new-crumb'>
+							A$AP Rocky
+						</a>
+						{format && (
+							<>
+								<a class='header-new-crumb'>
+									will.i.am
+								</a>
+								{', '}
+								<a class='header-new-crumb'>
+									Jessica Pratt
+								</a>
+							</>
+						)}
+					</span>
+				</h2>
+			</div>,
+		);
 	}
 
 	page.structure.main!.replaceChildren(
@@ -109,6 +168,17 @@ export function playback() {
 				</PanelHead>
 				<SettingGroup>
 					<SettingSwitch bind='prefer_no_redirect' />
+					<SettingAction
+						name={tl(trans.legacy_redirects.name)}
+						body={tl(trans.legacy_redirects.body)}
+					>
+						<SeeMore
+							href={`${root}settings/website`}
+							external
+						>
+							{tl(trans.change_now)}
+						</SeeMore>
+					</SettingAction>
 					<SettingSwitch bind='travis' />
 				</SettingGroup>
 			</section>
@@ -116,6 +186,7 @@ export function playback() {
 				<PanelHead icon={icons.track}>
 					{tl(trans.smart_music_titles)}
 				</PanelHead>
+				<div class='inner-preview pad flex' ref={header_preview} />
 				<SettingGroup>
 					<SettingSwitch bind='format_guest_features' />
 					<SettingSwitch bind='show_guest_features' />
@@ -137,6 +208,27 @@ export function playback() {
 						bind='tracklist_source'
 						values={page.state.tracklist_sources}
 					/>
+					<SettingInfo name={tl(trans.current_version)}>
+						<p>
+							{oracle_artists.version}, {oracle_albums.version},
+							{' '}
+							{oracle_tracks.version}
+						</p>
+						<SeeMore
+							className='update-check'
+							iconPlacement='left'
+							onClick={() => oracle_data(true)}
+						>
+							{tl(trans.update_check)}
+						</SeeMore>
+					</SettingInfo>
+					<SettingAction name={tl(trans.manage_data)}>
+						<SeeMore
+							onClick={() => manage_oracle_data()}
+						>
+							{tl(trans.view_all)}
+						</SeeMore>
+					</SettingAction>
 				</SettingGroup>
 			</section>
 			<section class='bleh--panel'>
@@ -149,4 +241,6 @@ export function playback() {
 			</section>
 		</>,
 	);
+
+	render_header_preview();
 }

@@ -16,18 +16,18 @@
 	border-radius: 3px;
 	color: oklch(var(--c3));
 
-	.chartlist-artist > & {
+	.chartlist-artist>& {
 		margin: 3px 4px 3px 0;
 	}
 
-	h2 > & {
+	h2>& {
 		width: 20px;
 		height: 20px;
 		border-radius: 6px;
 		--mask-size: 22px;
 
 		position: absolute;
-		top: calc((28px - 20px) / 2);
+		top: 2px;
 		left: 0;
 	}
 
