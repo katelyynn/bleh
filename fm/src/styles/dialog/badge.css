@@ -168,7 +168,8 @@
 	box-shadow: 0 20px 60px oklch(var(--f5) / 15%), var(--override-full-shadow,
 			var(--overlay-shadow));
 
-	--hypercard-glow-opacity: 0.06;
+	--hypercard-glow-color: oklch(var(--l4-c));
+	--hypercard-glow-opacity: 0.3;
 	--hypercard-scale: 1.04;
 
 	user-select: none;
