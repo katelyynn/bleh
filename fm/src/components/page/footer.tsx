@@ -13,6 +13,7 @@ import { version } from '@/main';
 import { settings } from '@/build/config';
 import { Icon, icon, icons } from '../shared/icon';
 import { useSettings } from '@/page.ts';
+import { ReactNode } from 'jsx-dom';
 
 export function bleh_footer() {
 	const footer = document.body.querySelector('footer.footer');
@@ -88,23 +89,13 @@ export function bleh_footer() {
 				</div>
 				<FooterDot />
 				<div class='footer-web'>
-					<a
-						class={['btn', 'music-link', 'icon']}
-						data-type='source'
-						href={source}
-						target='_blank'
-					>
+					<FooterLink type='source' href={source}>
 						{tl(trans.view_source)}
-					</a>
+					</FooterLink>
 					<FooterDot />
-					<a
-						class={['btn', 'music-link', 'icon']}
-						data-type='issue'
-						href={issue}
-						target='_blank'
-					>
-						{tl(trans.report_issue)}
-					</a>
+					<FooterLink type='issue' href={issue}>
+						{tl(trans.view_source)}
+					</FooterLink>
 				</div>
 			</div>
 			{(lang != 'en' && lang in lang_info) && (
@@ -131,6 +122,29 @@ export function bleh_footer() {
 				</div>
 			)}
 		</>,
+	);
+}
+
+interface FooterLinkProps {
+	href: string;
+	type: string;
+	children: ReactNode;
+}
+
+function FooterLink({
+	href,
+	type,
+	children,
+}: FooterLinkProps) {
+	return (
+		<a
+			class={['btn', 'music-link', 'footer-link', 'icon']}
+			data-type={type}
+			href={href}
+			target='_blank'
+		>
+			{children}
+		</a>
 	);
 }
 
