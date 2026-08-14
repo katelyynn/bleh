@@ -8,6 +8,7 @@ import { log } from '@/build/log';
 import { page, setRoot } from '@/build/page';
 import { get_language_name, sanitise_text } from '@/build/tools';
 import { Settings } from 'luxon';
+import { ReactNode } from 'jsx-dom';
 
 // loads your selected language in Last.fm
 export let lang = 'en';
@@ -8306,14 +8307,24 @@ export const trans = {
 		// lowercase in design
 		// h: replaced with a heart symbol, so treat it like the word 'love'
 		// u: me (kate)
-		// c, /c: just leave be - translate the contributors text inside
-		en: 'made with {h} by {u} and {c}contributors{/c}',
-		de: 'mit {h} gemacht von {u} und {c}mitwirkenden{/c}',
-		es: 'hecho con {h} por {u} y {c}contribuidores{/c}',
-		it: 'creato con {h} da {u} e {c}contributori{/c}',
-		pt: 'feito com {h} por {u} e {c}contribuidores{/c}',
-		sv: 'skapad med {h} av {u} och {c}bidragsgivare{/c}',
-		ru: 'сделано с {h} от {u} и {c}участников{/c}',
+		// c: translated with the 'contributors' thing below
+		en: 'made with {h} by {u} and {c}',
+		de: 'mit {h} gemacht von {u} und {c}',
+		es: 'hecho con {h} por {u} y {c}',
+		it: 'creato con {h} da {u} e {c}',
+		pt: 'feito com {h} por {u} e {c}',
+		sv: 'skapad med {h} av {u} och {c}',
+		ru: 'сделано с {h} от {u} и {c}',
+
+		contributors: {
+			en: 'contributors',
+			de: 'mitwirkenden',
+			es: 'contribuidores',
+			it: 'contributori',
+			pt: 'contribuidores',
+			sv: 'bidragsgivare',
+			ru: 'участников',
+		},
 	},
 	supported_by: {
 		// lowercase in design
@@ -11806,7 +11817,10 @@ export type translation = translation_leaf | {
 	[key: string]: translation;
 };
 
-export function tl(key: translation | string, replacements = {}) {
+export function tl(
+	key: translation | string,
+	replacements: Record<string, ReactNode> = {},
+) {
 	if (typeof key === 'string') {
 		return key;
 	}
@@ -11823,6 +11837,20 @@ export function tl(key: translation | string, replacements = {}) {
 	}
 
 	if (Object.keys(replacements).length == 0) return translation;
+
+	const parts = translation.split(/({[^}]+})/g);
+
+	return parts.map((part) => {
+		const match = part.match(/^\{(\w+)\}$/);
+
+		if (match) {
+			const key = match[1];
+
+			return replacements[key] ?? part;
+		}
+
+		return part;
+	});
 
 	for (const [placeholder, value] of Object.entries(replacements)) {
 		const regex = new RegExp(`{${placeholder}}`, 'g');

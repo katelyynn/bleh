@@ -16,66 +16,66 @@
 	.visible-xs {
 		display: none !important;
 	}
+}
 
-	.music-link {
-		display: flex !important;
-		--bg: transparent;
-		--bg-hov: transparent;
-		--bg-atv: transparent;
-		--padding: 0 calc(var(--icon-size-arrow) + 2px) 0 calc(var(--icon-size) + 4px);
-		--col: oklch(var(--l3-c));
-		--mask-colour: color-mix(in oklch,
-				oklch(var(--l3-c)),
-				oklch(var(--l4-c)) 30%);
-		--shadow: none;
-		--radius: 0;
-		flex: unset;
-		--left: 0;
+.music-link {
+	display: flex !important;
+	--bg: transparent;
+	--bg-hov: transparent;
+	--bg-atv: transparent;
+	--padding: 0 calc(var(--icon-size-arrow) + 2px) 0 calc(var(--icon-size) + 4px);
+	--col: oklch(var(--l3-c));
+	--mask-colour: color-mix(in oklch,
+			oklch(var(--l3-c)),
+			oklch(var(--l4-c)) 30%);
+	--shadow: none;
+	--radius: 0;
+	flex: unset;
+	--left: 0;
 
-		position: relative;
+	position: relative;
 
-		--icon-size: 14px;
-		--icon-size-arrow: 12px;
+	--icon-size: 14px;
+	--icon-size-arrow: 12px;
 
-		&:hover {
-			text-decoration: underline !important;
+	&:hover {
+		text-decoration: underline !important;
+	}
+
+	&:not(.resource-external-link--homepage, .social-link) {
+		--sat-user: 1;
+		--lit-user: 1;
+	}
+
+	&.play-this-track-playlink--disabled {
+		opacity: 0.65 !important;
+	}
+
+	&[data-host-unknown="true"] {
+		&:before {
+			mask-image: none !important;
+			-webkit-mask-image: none !important;
+			background-color: transparent !important;
+			background-image: var(--favi) !important;
+			background-size: 100% !important;
+			border-radius: 4px !important;
 		}
+	}
 
-		&:not(.resource-external-link--homepage, .social-link) {
-			--sat-user: 1;
-			--lit-user: 1;
-		}
+	&:after {
+		border: unset !important;
+		--mask: var(--icon-16-external);
+		--icon-size: var(--icon-size-arrow);
+		--left: none !important;
+		--right: 0;
 
-		&.play-this-track-playlink--disabled {
-			opacity: 0.65 !important;
-		}
+		opacity: 0.6;
+	}
 
-		&[data-host-unknown="true"] {
-			&:before {
-				mask-image: none !important;
-				-webkit-mask-image: none !important;
-				background-color: transparent !important;
-				background-image: var(--favi) !important;
-				background-size: 100% !important;
-				border-radius: 4px !important;
-			}
-		}
-
+	&.play-this-track-playlink--disabled {
 		&:after {
-			border: unset !important;
-			--mask: var(--icon-16-external);
-			--icon-size: var(--icon-size-arrow);
-			--left: none !important;
-			--right: 0;
-
-			opacity: 0.6;
-		}
-
-		&.play-this-track-playlink--disabled {
-			&:after {
-				--mask: var(--icon-16-plus);
-				opacity: 1;
-			}
+			--mask: var(--icon-16-plus);
+			opacity: 1;
 		}
 	}
 }
