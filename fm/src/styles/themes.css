@@ -1105,7 +1105,7 @@ u,
 
 		--h3-s: var(--hue), 50%, 70%;
 
-		--p3: calc(clamp(min(0.85), var(--lit), max(1.1)) * 0.85) calc(clamp(min(0), var(--sat), max(2)) * 0.5) var(--hue);
+		--p3: calc(clamp(min(0.85), var(--lit), max(1.1)) * 1) calc(clamp(min(0), var(--sat), max(2)) * 0.3) var(--hue);
 
 		/* l2-c in dark modes, l4-c in light modes */
 		--l2-c-theme-switch: var(--l3-c);
@@ -1205,7 +1205,7 @@ u,
 
 		--h3-s: var(--hue), 50%, 70%;
 
-		--p3: calc(clamp(min(0.85), var(--lit), max(1.1)) * 0.85) calc(clamp(min(0), var(--sat), max(2)) * 0.5) var(--hue);
+		--p3: calc(clamp(min(0.85), var(--lit), max(1.1)) * 0.9) calc(clamp(min(0), var(--sat), max(2)) * 0.4) var(--hue);
 
 		/* l2-c in dark modes, l4-c in light modes */
 		--l2-c-theme-switch: var(--l3-c);
@@ -1311,7 +1311,7 @@ u,
 
 		--h3-s: var(--hue), 50%, 70%;
 
-		--p3: calc(clamp(min(0.85), var(--lit), max(1.1)) * 0.85) calc(clamp(min(0), var(--sat), max(2)) * 0.5) var(--hue);
+		--p3: calc(clamp(min(0.85), var(--lit), max(1.1)) * 0.9) calc(clamp(min(0), var(--sat), max(2)) * 0.3) var(--hue);
 
 		/* l2-c in dark modes, l4-c in light modes */
 		--l2-c-theme-switch: var(--l3-c);

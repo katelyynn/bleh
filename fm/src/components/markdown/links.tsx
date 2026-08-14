@@ -137,12 +137,14 @@ export function social_links(body: ReactElement, links: social_link[]) {
 							href={link.url}
 							target='_blank'
 							data-host={link.host}
-							data-host-unknown={!Object.hasOwn(
-								link_strings,
-								link.host,
-							) || icons_not_supported.includes(link.host)}
+							data-host-unknown={String(
+								!Object.hasOwn(
+									link_strings,
+									link.host,
+								) || icons_not_supported.includes(link.host),
+							)}
 							data-path={link.path}
-							style='--favi: url(https://icons.duckduckgo.com/ip3/${link.host}.ico)'
+							style={`--favi: url(https://icons.duckduckgo.com/ip3/${link.host}.ico)`}
 						>
 							{label}
 						</a>

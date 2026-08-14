@@ -120,6 +120,39 @@ export function mualani() {
 		[12, 7, 34],
 	];
 
+	const link_text = `
+        [links]
+        https://x.com/ZZZ_EN
+        https://twitter.com/ZZZ_EN
+        https://open.spotify.com/album/4T7qu6MdxoGjzZPErRWgsO
+        https://youtube.com
+        https://github.com
+        https://discord.com
+        https://bandcamp.com
+        https://soundcloud.com
+        https://tiktok.com
+        https://ko-fi.com
+        https://patreon.com
+        https://twitch.tv
+        https://linktr.ee
+        https://carrd.co
+        https://music.apple.com
+        https://music.youtube.com
+        https://facebook.com
+        https://discogs.com
+        https://tidal.com
+        https://record.club
+        https://rateyourmusic.com
+        https://albumoftheyear.org
+        https://kyu.re
+        https://katelyn.moe
+        https://google.com
+        https://mastodon.social
+        https://bsky.app
+        https://reddit.com
+        [/links]
+    `;
+
 	let bars;
 
 	const format_guest_features = createRef();
@@ -611,6 +644,15 @@ export function mualani() {
 					</DemoItem>
 				</DemoGrid>
 			</section>
+			<section>
+				<DemoGrid>
+					<DemoItem label='Markdown (music links)'>
+						<div class='markdown-body'>
+							{markdown(link_text, { allow_socials: true })}
+						</div>
+					</DemoItem>
+				</DemoGrid>
+			</section>
 		</>,
 	);
 
@@ -869,52 +911,6 @@ export function mualani() {
 				<div class="markdown-body" ref=${(el) => md_body_links = el} />
 			</section>
 		`,
-	);
-
-	page.structure.main!.appendChild(
-		<section>
-			<p>jsx test (tsx)</p>
-		</section>,
-	);
-
-	const link_text = `
-        [links]
-        https://x.com/ZZZ_EN
-        https://twitter.com/ZZZ_EN
-        https://open.spotify.com/album/4T7qu6MdxoGjzZPErRWgsO
-        https://youtube.com
-        https://github.com
-        https://discord.com
-        https://bandcamp.com
-        https://soundcloud.com
-        https://tiktok.com
-        https://ko-fi.com
-        https://patreon.com
-        https://twitch.tv
-        https://linktr.ee
-        https://carrd.co
-        https://music.apple.com
-        https://music.youtube.com
-        https://facebook.com
-        https://discogs.com
-        https://tidal.com
-        https://record.club
-        https://rateyourmusic.com
-        https://albumoftheyear.org
-        https://kyu.re
-        https://katelyn.moe
-        https://google.com
-        https://mastodon.social
-        https://bsky.app
-        https://reddit.com
-        [/links]
-    `;
-
-	render(
-		md_body_links,
-		markdown(link_text, {
-			allow_socials: true,
-		}),
 	);
 }
 

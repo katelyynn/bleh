@@ -193,6 +193,8 @@ export const icons = {
 	moody: 'moody',
 	redirect: 'redirect',
 	profile_info: 'profile-info',
+	snow: 'snow',
+	effects: 'effects',
 };
 
 interface icon {
@@ -214,16 +216,17 @@ export function icon({ name, identifier, use_mask = true }: icon) {
 	);
 }
 
-interface IconProps {
+type IconProps = {
 	name?: string;
 	identifier?: string;
 	mask?: boolean;
-}
+} & Omit<JSX.IntrinsicElements['span'], 'class' | 'style'>;
 
 export function Icon({
 	name = 'inherit',
 	identifier,
 	mask = true,
+	...props
 }: IconProps) {
 	return (
 		<span
@@ -234,6 +237,7 @@ export function Icon({
 				identifier && `bleh-icon-${identifier}`,
 			]}
 			style={icon_mask({ name })}
+			{...props}
 		>
 			{name} (icon)
 		</span>

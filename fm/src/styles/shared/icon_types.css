@@ -619,6 +619,10 @@
 .swatch-icon-container,
 .icon-combo,
 [data-label="bleh"] {
+	&[data-season="none"] {
+		--mask: var(--icon-16-season);
+	}
+
 	&:not([data-season="none"]) {
 		--icon: var(--mask);
 	}

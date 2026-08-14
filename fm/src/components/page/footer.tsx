@@ -94,7 +94,7 @@ export function bleh_footer() {
 					</FooterLink>
 					<FooterDot />
 					<FooterLink type='issue' href={issue}>
-						{tl(trans.view_source)}
+						{tl(trans.report_issue)}
 					</FooterLink>
 				</div>
 			</div>

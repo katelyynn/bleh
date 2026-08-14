@@ -32,7 +32,8 @@
 	--btn-top: 5px;
 	--btn-bottom: 5px;
 
-	--left: var(--button-sides-icon);
+	--button-sides-icon: var(--button-sides);
+	--left: var(--button-sides);
 	--right: none;
 
 	--icon-size: 14px;

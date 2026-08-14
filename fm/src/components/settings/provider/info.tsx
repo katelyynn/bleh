@@ -8,8 +8,8 @@ import { ReactNode } from 'jsx-dom';
 import { SettingLabel } from '@/components/settings/provider/main.tsx';
 
 interface SettingInfoProps {
-	name: string;
-	body?: string;
+	name: ReactNode;
+	body?: ReactNode;
 	children: ReactNode;
 }
 

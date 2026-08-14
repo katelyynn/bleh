@@ -6,8 +6,9 @@
 
 import { DateTime } from 'luxon';
 import tippy from 'tippy.js';
+import { ReactNode } from 'jsx-dom';
 
-export function time_tooltip(elem: Element, time: DateTime) {
+export function time_tooltip(elem: ReactNode, time: DateTime) {
 	tippy(elem, {
 		content: time.toLocaleString(DateTime.DATE_MED),
 	});

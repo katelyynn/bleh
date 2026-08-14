@@ -24,7 +24,7 @@
 	cursor: default;
 	user-select: none;
 
-	& > span {
+	&>span {
 		position: relative;
 		font-size: calc(26px * var(--custom-font-size-multiplier, 1));
 		top: var(--custom-font-align, 0) !important;
@@ -38,7 +38,7 @@
 
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(var(--font-item-size),
-		1fr));
+				1fr));
 	gap: var(--gap);
 
 	--font-item-size: 90px;
@@ -46,44 +46,48 @@
 	width: calc(((var(--font-item-size) + var(--gap)) * 4) - var(--gap));
 
 	@media (max-width: 450px) {
-		width: calc(((var(--font-item-size) + var(--gap)) * 3) - var(--gap))
-			!important;
+		width: calc(((var(--font-item-size) + var(--gap)) * 3) - var(--gap)) !important;
 	}
 
 	/*&.primary {
 	    width: calc(((var(--font-item-size) + var(--gap)) * 5) - var(--gap));
 	    --font-item-size: 70px;
 	}*/
+}
 
-	& > .font-selection {
-		height: 60px;
+.font-selection {
+	text-align: center;
+	height: 50px;
 
-		--bg: oklch(var(--b4) / 40%);
-		--bg-hov: oklch(var(--b4) / 60%);
-		--bg-atv: oklch(var(--b4) / 80%);
-		--shadow: unset;
+	--bg: oklch(var(--b4) / 40%);
+	--bg-hov: oklch(var(--b4) / 60%);
+	--bg-atv: oklch(var(--b4) / 80%);
+	--shadow: unset;
 
-		line-height: 20px;
-		--font-weight: var(--custom-font-weight, var(--font-weight-bold));
-		--col: oklch(var(--c2));
-		--font-size: calc(20px * var(--custom-font-size-multiplier, 1));
+	line-height: 20px;
+	--font-weight: var(--custom-font-weight, var(--font-weight-bold));
+	--col: oklch(var(--c2));
+	--font-size: calc(20px * var(--custom-font-size-multiplier, 1));
 
-		inset: unset !important;
+	inset: unset !important;
 
-		& > span {
-			font-family: var(--custom-font, var(--font)) !important;
-			position: relative;
-		}
+	&>span {
+		font-family: var(--custom-font, var(--font)) !important;
+		position: relative;
+	}
 
-		&[aria-checked="true"] {
-			--bg: oklch(var(--h4) / 20%);
-			--bg-hov: oklch(var(--h4) / 25%);
-			--bg-atv: oklch(var(--h4) / 35%);
-		}
+	&[aria-checked="true"] {
+		--bg: oklch(var(--h3) / 70%);
+		--bg-hov: var(--bg);
+		--bg-atv: var(--bg);
+		--shadow: var(--primary-shadow),
+			0 3px 12px oklch(var(--h4) / 32%),
+			var(--interactable-outer);
+		cursor: default;
+	}
 
-		&.font-style {
-			--font-size: 16px;
-		}
+	&.font-style {
+		--font-size: 16px;
 	}
 }
 
@@ -93,7 +97,7 @@
 	margin-bottom: 10px;
 	width: 100%;
 
-	.font-options + & {
+	.font-options+& {
 		margin-top: var(--card-padding);
 	}
 
@@ -139,46 +143,55 @@
 	--custom-font: 'UnifrakturCook', var(--font);
 	--custom-font-size-multiplier: 1.2;
 }
+
 [data-font="lilita"] {
 	--custom-font: 'Lilita One', var(--font);
 	--custom-font-weight: 300 !important;
 	--custom-font-align: 1px;
 }
+
 [data-font="single"] {
 	--custom-font: 'Single Day', var(--font);
 	--custom-font-size-multiplier: 1.2;
 }
+
 [data-font="crimson"] {
 	--custom-font: 'Crimson Text', var(--font);
 	--custom-font-size-multiplier: 1.1;
 	--custom-font-align: 1px;
 }
+
 [data-font="balsamiq"] {
 	--custom-font: 'Balsamiq Sans', var(--font);
 	--custom-font-weight: 600 !important;
 	--custom-font-size-multiplier: 0.96;
 	--custom-font-align: 2px;
 }
+
 [data-font="cherry"] {
 	--custom-font: 'Cherry Bomb One', var(--font);
 	--custom-font-weight: 300 !important;
 	--custom-font-size-multiplier: 1.04;
 	--custom-font-align: -2px;
 }
+
 [data-font="rokkitt"] {
 	--custom-font: 'Rokkitt', var(--font);
 	--custom-font-size-multiplier: 1.15;
 	--custom-font-align: 3px;
 }
+
 [data-font="code"] {
 	--custom-font: 'Google Sans Code', var(--font);
 	--custom-font-size-multiplier: 0.85;
 	--custom-font-align: 1px;
 }
+
 [data-font="zpix"] {
 	--custom-font: 'Zpix', var(--font);
 	--custom-font-size-multiplier: 0.95;
 }
+
 [data-font="mask"] {
 	--custom-font: 'Expose', var(--font);
 	--custom-font-size-multiplier: 1.4;
@@ -186,6 +199,7 @@
 	--custom-font-align: -2px;
 	--custom-font-spacing: 1.5px;
 }
+
 [data-font="rakkas"] {
 	--custom-font: 'Rakkas', var(--font);
 	--custom-font-size-multiplier: 1.15;
@@ -196,6 +210,7 @@
 	--custom-font-style-shadow: 0 1px 0 oklch(var(--p3)), 0 2px 0 oklch(var(--p3)), 0 3px 0 oklch(var(--p3));
 	--custom-font-style-shadow-mini: 0 2px 0 oklch(var(--p3));
 }
+
 [data-font-style="out"] {
 	--custom-font-colour: #fff;
 	--stroke: oklch(var(--s3));
@@ -209,11 +224,12 @@
 
 	--custom-font-style-shadow:
 		0 var(--size) 0 var(--stroke), 0 var(--size-n) 0 var(--stroke), var(--size) 0 0 var(--stroke), var(--size-n) 0 0 var(--stroke),
-        var(--size) var(--size) 0 var(--stroke-outer), var(--size-n) var(--size-n) 0 var(--stroke-outer), var(--size-n) var(--size) 0 var(--stroke-outer), var(--size) var(--size-n) 0 var(--stroke-outer);
+		var(--size) var(--size) 0 var(--stroke-outer), var(--size-n) var(--size-n) 0 var(--stroke-outer), var(--size-n) var(--size) 0 var(--stroke-outer), var(--size) var(--size-n) 0 var(--stroke-outer);
 	--custom-font-style-shadow-mini:
 		0 var(--size-m) 0 var(--stroke), 0 var(--size-mn) 0 var(--stroke), var(--size-m) 0 0 var(--stroke), var(--size-mn) 0 0 var(--stroke),
-        var(--size-m) var(--size-m) 0 var(--stroke-outer), var(--size-mn) var(--size-mn) 0 var(--stroke-outer), var(--size-mn) var(--size-m) 0 var(--stroke-outer), var(--size-m) var(--size-mn) 0 var(--stroke-outer);
+		var(--size-m) var(--size-m) 0 var(--stroke-outer), var(--size-mn) var(--size-mn) 0 var(--stroke-outer), var(--size-mn) var(--size-m) 0 var(--stroke-outer), var(--size-m) var(--size-mn) 0 var(--stroke-outer);
 }
+
 [data-font-style="glow"] {
 	--custom-font-style-shadow: 0 0 20px oklch(var(--h4)), 0 0 20px oklch(var(--h4));
 	--custom-font-style-shadow-mini: 0 0 10px oklch(var(--h4)), 0 0 10px oklch(var(--h4));

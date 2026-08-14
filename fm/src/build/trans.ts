@@ -2255,6 +2255,9 @@ export const trans = {
 			zh: '根据当前时令或节日，自动调整默认颜色、图标集并显示粒子动态效果',
 		},
 	},
+	particles: {
+		en: 'Particles',
+	},
 	seasonal_particles_fps: {
 		name: {
 			en: 'Reduce quality of particles',
@@ -2278,6 +2281,9 @@ export const trans = {
 			pl: 'Płatki śniegu używają podświetlonych cieni dla estetyki - co powoduje większe zużycie zasobów',
 			zh: '雪花粒子使用了阴影发光效果以提升视觉美感，但这会增加额外的性能开销',
 		},
+	},
+	effects: {
+		en: 'Effects',
 	},
 	seasonal_overlays: {
 		name: {

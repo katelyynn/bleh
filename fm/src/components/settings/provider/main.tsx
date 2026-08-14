@@ -12,13 +12,13 @@ import {
 import { tl, trans } from '@/build/trans.ts';
 import { Icon, icons } from '@/components/shared/icon.tsx';
 import { SettingReset } from '@/components/settings/provider/reset.tsx';
-import { createRef } from 'jsx-dom';
+import { createRef, ReactNode } from 'jsx-dom';
 import { useSettings } from '@/page.ts';
 
 interface SettingLabelProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
-	name?: string;
-	body?: string;
+	name?: ReactNode;
+	body?: ReactNode;
 	store?: setting_instance;
 	value?: setting_value;
 	setValue?: (val: setting_value) => void;
