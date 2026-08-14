@@ -2,16 +2,19 @@
 @import './lineup.css';
 @import './attendance.css';
 @import './poster.css';
+@import './item.css';
 
 .event-summary-with-poster .event-details {
 	padding: unset;
 	width: unset;
 	flex: 1;
 }
+
 .event-summary-with-poster {
 	display: flex;
 	flex-direction: column;
 }
+
 .event-summary-with-poster:before,
 .event-summary-with-poster:after {
 	display: none;
@@ -39,6 +42,7 @@
 		display: none;
 	}
 }
+
 .event-detail-long-link {
 	overflow: hidden;
 	word-wrap: unset;

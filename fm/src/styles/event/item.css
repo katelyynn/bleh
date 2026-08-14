@@ -1,0 +1,34 @@
+.event-item {
+	border: 1px solid var(--separator-base);
+	padding: 10px;
+	border-radius: var(--item-small-radius);
+}
+
+.event-item-top {
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
+}
+
+.event-item-date {
+	flex: 1;
+}
+
+.event-item-aside {
+	flex-shrink: 0;
+}
+
+.event-item-bottom {
+	display: flex;
+	align-items: center;
+	margin-top: 10px;
+	padding-top: 10px;
+	border-top: 1px solid var(--separator-base);
+}
+
+.event-item-location {
+	display: flex;
+	align-items: center;
+	color: oklch(var(--c3));
+	flex: 1;
+}

@@ -195,6 +195,8 @@ export const icons = {
 	profile_info: 'profile-info',
 	snow: 'snow',
 	effects: 'effects',
+	calendar: 'calendar',
+	location: 'location',
 };
 
 interface icon {

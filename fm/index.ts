@@ -106,7 +106,6 @@ const shared_opts: Omit<BundleOptions, 'name'> = {
 	banner: { js: JS_BANNER, css: CSS_BANNER },
 	bundle: true,
 	minify: false,
-	write: false,
 	packages: 'bundle',
 	platform: 'browser',
 	format: 'iife',

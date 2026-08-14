@@ -57,6 +57,7 @@ import {
 	ListItem,
 } from '@/components/settings/clickables/list.tsx';
 import { SettingList } from '@/components/settings/provider/list.tsx';
+import { EventItem } from '@/components/event/item.tsx';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -650,6 +651,33 @@ export function mualani() {
 						<div class='markdown-body'>
 							{markdown(link_text, { allow_socials: true })}
 						</div>
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section>
+				<DemoGrid>
+					<DemoItem label='EventItem'>
+						<EventItem
+							date='2026-08-14T00:00:00'
+							title='BST Hyde Park: Sabrina Carpenter'
+							artists={[
+								'Sabrina Carpenter',
+								'Amber Mark',
+								'beabadoobee',
+								'Clairo',
+								'DellaXOZ',
+								'Luvcat',
+								'SOFY',
+								'Sola',
+							]}
+							venue='Hyde Park'
+							city='London'
+							country='United Kingdom'
+							attendance='maybe'
+							attendance_text='You were interested'
+							attendance_count='31 went'
+							href='/event/4881572+BST+Hyde+Park:+Sabrina+Carpenter'
+						/>
 					</DemoItem>
 				</DemoGrid>
 			</section>
