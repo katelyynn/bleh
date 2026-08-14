@@ -11,10 +11,6 @@ import {
 	SettingIncompatibleWith,
 	SettingLabel,
 } from '@/components/settings/provider/main.tsx';
-import { settings } from '@/build/config.ts';
-import { Switch } from '@/components/settings/clickables/switch.tsx';
-import { tl } from '@/build/trans.ts';
-import { save_setting } from '@/components/settings/settings.tsx';
 import { SettingIcon } from '@/components/settings/provider/icon.tsx';
 import { Checkbox } from '@/components/settings/clickables/checkbox.tsx';
 import { useSettings } from '@/page.ts';
@@ -24,8 +20,8 @@ interface SettingCheckboxProps {
 	bind?: string;
 	standalone?: boolean;
 	icon?: string;
-	name?: string;
-	body?: string;
+	name?: ReactNode;
+	body?: ReactNode;
 	onChange?: (val: boolean) => void;
 	disabled?: boolean;
 	onMouseEnter?: () => void;

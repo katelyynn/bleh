@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { createRef } from 'jsx-dom';
+import { createRef, ReactNode } from 'jsx-dom';
 import {
 	get_from_store,
 	is_incompatible,
@@ -12,8 +12,6 @@ import {
 	SettingLabel,
 } from '@/components/settings/provider/main.tsx';
 import { settings } from '@/build/config.ts';
-import { save_setting } from '@/components/settings/settings.tsx';
-import { Input } from '@/components/input/input.tsx';
 import {
 	Keybind,
 	KeybindList,
@@ -26,8 +24,8 @@ interface SettingKeybindProps {
 	value?: string[];
 	bind?: string;
 	icon?: string;
-	name?: string;
-	body?: string;
+	name?: ReactNode;
+	body?: ReactNode;
 	showLabel?: boolean;
 	onChange?: (val: string[]) => void;
 	disabled?: boolean;

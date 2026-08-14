@@ -9,8 +9,8 @@ import { SettingLabel } from '@/components/settings/provider/main.tsx';
 
 interface SettingActionProps {
 	id?: string;
-	name: string;
-	body?: string;
+	name: ReactNode;
+	body?: ReactNode;
 	children: ReactNode;
 }
 

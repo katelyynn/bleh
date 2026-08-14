@@ -11,10 +11,7 @@ import {
 	SettingIncompatibleWith,
 	SettingLabel,
 } from '@/components/settings/provider/main.tsx';
-import { settings } from '@/build/config.ts';
-import { Switch } from '@/components/settings/clickables/switch.tsx';
 import { tl, translation } from '@/build/trans.ts';
-import { save_setting } from '@/components/settings/settings.tsx';
 import { SettingIcon } from '@/components/settings/provider/icon.tsx';
 import { useSettings } from '@/page.ts';
 import { Radio } from '@/components/settings/clickables/radio.tsx';
@@ -24,8 +21,8 @@ interface SettingRadioProps {
 	bind?: string;
 	standalone?: boolean;
 	icon?: string;
-	name?: string;
-	body?: string;
+	name?: ReactNode;
+	body?: ReactNode;
 	value?: string;
 	values?: RadioOptions;
 	onChange?: (val: string) => void;

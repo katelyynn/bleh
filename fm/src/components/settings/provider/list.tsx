@@ -30,8 +30,8 @@ interface SettingListProps {
 	bind?: string;
 	standalone?: boolean;
 	icon?: string;
-	name?: string;
-	body?: string;
+	name?: ReactNode;
+	body?: ReactNode;
 	value?: string[];
 	values?: ListOptions;
 	predefined?: boolean;

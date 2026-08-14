@@ -13,8 +13,6 @@ import {
 	colour,
 	colour_set,
 	colour_type,
-	colours,
-	seasonal_colours,
 } from '@/components/settings/swatch.ts';
 import { season } from '@/components/seasonal.ts';
 import { formatHex } from 'culori';

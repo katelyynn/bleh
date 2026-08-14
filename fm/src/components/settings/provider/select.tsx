@@ -4,16 +4,13 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { createRef } from 'jsx-dom';
+import { createRef, ReactNode } from 'jsx-dom';
 import {
 	get_from_store,
 	is_incompatible,
 	SettingIncompatibleWith,
 	SettingLabel,
 } from '@/components/settings/provider/main.tsx';
-import { settings } from '@/build/config.ts';
-import { save_setting } from '@/components/settings/settings.tsx';
-import { Input } from '@/components/input/input.tsx';
 import { SettingIcon } from '@/components/settings/provider/icon.tsx';
 import { Select, SelectOption } from '@/components/select/select.tsx';
 import { useSettings } from '@/page.ts';
@@ -24,8 +21,8 @@ interface SettingSelectProps {
 	value?: string;
 	bind?: string;
 	icon?: string;
-	name?: string;
-	body?: string;
+	name?: ReactNode;
+	body?: ReactNode;
 	showLabel?: boolean;
 	onChange?: (val: string) => void;
 	disabled?: boolean;
