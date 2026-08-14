@@ -49,6 +49,16 @@
 	}
 }
 
+.setting-list-icon {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 2px;
+	background: oklch(var(--b2) / 60%);
+	border-radius: 4px;
+	margin-right: 2px;
+}
+
 .setting-list-item-btn {
 	--bg: transparent;
 	--bg-hov: oklch(var(--b2) / 30%);

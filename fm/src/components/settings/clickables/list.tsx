@@ -37,7 +37,11 @@ export function ListItem({
 	const elem = (
 		<div class={['setting-list-item', 'current']}>
 			<div class='setting-list-item-info'>
-				{icon && <Icon name={icon} />}
+				{icon && (
+					<div class='setting-list-icon'>
+						<Icon name={icon} />
+					</div>
+				)}
 				{name}
 			</div>
 			{canRemove && (
@@ -70,7 +74,11 @@ export function ListCandidate({
 	const elem = (
 		<div class={['setting-list-item']}>
 			<div class='setting-list-item-info'>
-				{icon && <Icon name={icon} />}
+				{icon && (
+					<div class='setting-list-icon'>
+						<Icon name={icon} />
+					</div>
+				)}
 				{name}
 			</div>
 			<Button
