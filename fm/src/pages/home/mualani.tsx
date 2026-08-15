@@ -673,8 +673,84 @@ export function mualani() {
 							venue='Hyde Park'
 							city='London'
 							country='United Kingdom'
+							attendance='going'
+							attendance_text='You went'
+							attendance_count='31 went'
+							href='/event/4881572+BST+Hyde+Park:+Sabrina+Carpenter'
+						/>
+						<EventItem
+							date='2026-08-14T00:00:00'
+							title='BST Hyde Park: Sabrina Carpenter'
+							artists={[
+								'Sabrina Carpenter',
+								'Amber Mark',
+								'beabadoobee',
+								'Clairo',
+								'DellaXOZ',
+								'Luvcat',
+								'SOFY',
+								'Sola',
+							]}
+							venue='Hyde Park'
+							city='London'
+							country='United Kingdom'
 							attendance='maybe'
 							attendance_text='You were interested'
+							attendance_count='31 went'
+							href='/event/4881572+BST+Hyde+Park:+Sabrina+Carpenter'
+						/>
+						<EventItem
+							date='2026-08-14T00:00:00'
+							title='BST Hyde Park: Sabrina Carpenter'
+							artists={[
+								'Sabrina Carpenter',
+								'Amber Mark',
+								'beabadoobee',
+								'Clairo',
+								'DellaXOZ',
+								'Luvcat',
+								'SOFY',
+								'Sola',
+							]}
+							venue='Hyde Park'
+							city='London'
+							country='United Kingdom'
+							attendance_count='31 went'
+							href='/event/4881572+BST+Hyde+Park:+Sabrina+Carpenter'
+						/>
+						<EventItem
+							date='2026-08-20T00:00:00'
+							title='Tiffany Day'
+							venue='Hyde Park'
+							city='London'
+							country='United Kingdom'
+							attendance='going'
+							attendance_text='You went'
+							attendance_count='31 went'
+							href='/event/4881572+BST+Hyde+Park:+Sabrina+Carpenter'
+						/>
+						<EventItem
+							date='2026-08-20T00:00:00'
+							title='Tiffany Day'
+							venue='Hyde Park'
+							city='London'
+							country='United Kingdom'
+							avatars={[
+								<span
+									class='avatar attendee-you-know-avatar'
+									key={0}
+								>
+									<img src={auth.avatar} />
+								</span>,
+								<span
+									class='avatar attendee-you-know-avatar'
+									key={1}
+								>
+									<img src={auth.avatar} />
+								</span>,
+							]}
+							attendance='going'
+							attendance_text='You went'
 							attendance_count='31 went'
 							href='/event/4881572+BST+Hyde+Park:+Sabrina+Carpenter'
 						/>

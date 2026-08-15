@@ -197,6 +197,8 @@ export const icons = {
 	effects: 'effects',
 	calendar: 'calendar',
 	location: 'location',
+	going: 'going',
+	maybe: 'maybe',
 };
 
 interface icon {

@@ -24,6 +24,12 @@
 	}
 }
 
+.event-going {
+	--hue-over: var(--hue-pos);
+	--sat-over: var(--sat-pos);
+	--lit-over: var(--lit-pos);
+}
+
 .attendance-btn--maybe {
 	--mask: var(--icon-16-maybe);
 
@@ -32,6 +38,12 @@
 		--sat-over: var(--sat-orange);
 		--lit-over: var(--lit-orange);
 	}
+}
+
+.event-maybe {
+	--hue-over: var(--hue-orange);
+	--sat-over: var(--sat-orange);
+	--lit-over: var(--lit-orange);
 }
 
 /*     ATTENDEES     */

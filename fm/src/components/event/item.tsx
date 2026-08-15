@@ -1,9 +1,11 @@
 import { Icon, icons } from '@/components/shared/icon.tsx';
 import { correct_artist } from '@/components/music/lotus.ts';
-import { romanise, sanitise } from '@/build/tools.ts';
+import { copy, romanise, sanitise } from '@/build/tools.ts';
 import { Button } from '@/components/button/button.tsx';
 import { tl, trans } from '@/build/trans.ts';
 import { root } from '@/build/page.ts';
+import { DateTime } from 'luxon';
+import { ReactNode } from 'jsx-dom';
 
 export type attendance = 'going' | 'maybe';
 
@@ -17,7 +19,7 @@ interface EventItemProps {
 	attendance?: attendance;
 	attendance_text?: string;
 	attendance_count?: string;
-	avatars?: HTMLImageElement[];
+	avatars?: ReactNode[];
 	href: string;
 }
 
@@ -37,8 +39,14 @@ export function EventItem({
 	return (
 		<div class={['event-item']}>
 			<div class={['event-item-top']}>
-				<Icon name={icons.calendar} identifier='event-item' />
-				<p class='event-item-date'>{date}</p>
+				<div class='event-item-date'>
+					<Icon name={icons.calendar} identifier='event-item' />
+					<p class='event-item-date-text'>
+						{DateTime.fromISO(date).toLocaleString(
+							DateTime.DATE_MED_WITH_WEEKDAY,
+						)}
+					</p>
+				</div>
 				{(attendance_count != null || avatars) && (
 					<div class={['event-item-aside']}>
 						{avatars && (
@@ -82,21 +90,31 @@ export function EventItem({
 						<span class='event-item-city'>{city} {country}</span>
 					</p>
 				</div>
-				<Button
-					href={href}
-					primary={!!attendance}
-					colourful
-					className={`event-${attendance}`}
-				>
-					<Icon
-						name={attendance ? icons[attendance] : icons.calendar}
-					/>
-					{attendance == 'going'
-						? tl(trans.going)
-						: attendance == 'maybe'
-						? tl(trans.interested)
-						: tl(trans.view)}
-				</Button>
+				<div class='event-item-buttons'>
+					<Button
+						onClick={() => copy(`https://www.last.fm${href}`)}
+					>
+						<Icon name={icons.link} />
+						{tl(trans.copy)}
+					</Button>
+					<Button
+						href={href}
+						primary={!!attendance}
+						colourful
+						className={`event-${attendance}`}
+					>
+						<Icon
+							name={attendance
+								? icons[attendance]
+								: icons.calendar}
+						/>
+						{attendance == 'going'
+							? tl(trans.going)
+							: attendance == 'maybe'
+							? tl(trans.interested)
+							: tl(trans.view)}
+					</Button>
+				</div>
 			</div>
 		</div>
 	);
