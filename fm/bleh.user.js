@@ -93182,8 +93182,7 @@ var bleh = (() => {
                       class: "event-item-city",
                       children: [
                         city,
-                        " ",
-                        country
+                        country && `, ${country}`
                       ]
                     })
                   ]
@@ -117480,7 +117479,7 @@ var bleh = (() => {
         date: "2026-07-30"
       }
     },
-    built_on: "2026-08-15T01:25:17.047Z"
+    built_on: "2026-08-15T01:26:41.327Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

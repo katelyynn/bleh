@@ -123,7 +123,10 @@ export function EventItem({
 					<Icon name={icons.location} />
 					<p class='event-item-location-name'>
 						<span class='event-item-venue'>{venue}</span>,{' '}
-						<span class='event-item-city'>{city} {country}</span>
+						<span class='event-item-city'>
+							{city}
+							{country && `, ${country}`}
+						</span>
 					</p>
 				</div>
 				<div class='event-item-buttons'>
