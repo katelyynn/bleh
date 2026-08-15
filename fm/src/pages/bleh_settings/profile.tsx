@@ -29,10 +29,15 @@ import {
 import { SettingList } from '@/components/settings/provider/list.tsx';
 import { select_prepare_list } from '@/components/settings/select.ts';
 import { useSettings } from '@/page.ts';
-import { checkup_friend_cache } from '@/pages/profile/profile.ts';
+import {
+	checkup_friend_cache,
+	load_profile_cache_externally,
+} from '@/pages/profile/profile.ts';
 import { StarredFriend } from '@/components/settings/provider/starred_friend.tsx';
+import { createRef } from 'jsx-dom';
+import { avatar } from '@/components/shared/avatar.tsx';
 
-export function profile() {
+export async function profile() {
 	if (!auth.name) {
 		page.structure.main!.replaceChildren(
 			<section class='bleh--panel'>
@@ -53,6 +58,14 @@ export function profile() {
 		page_loading();
 		return;
 	}
+
+	const banner_preview = createRef();
+
+	const cache = await load_profile_cache_externally(auth.name);
+
+	useSettings.on('profile_header_own', render_banner_preview);
+	useSettings.on('profile_header_others', render_banner_preview);
+	useSettings.on('profile_avi_background', render_banner_preview);
 
 	page.structure.main!.replaceChildren(
 		<>
@@ -92,6 +105,97 @@ export function profile() {
 					<SettingCheckbox bind='hybrid_inbox' />
 				</SettingGroup>
 			</section>
+			<section class='bleh--panel'>
+				<PanelHead icon={icons.user}>
+					{tl(trans.profile)}
+				</PanelHead>
+				<SettingGroup>
+					<SettingSwitch bind='bio_markdown' />
+					<SettingSwitch bind='show_your_progress' />
+				</SettingGroup>
+			</section>
+			<section class='bleh--panel'>
+				<PanelHead icon={icons.banner}>
+					{tl(trans.banners)}
+				</PanelHead>
+				<div class={['inner-preview', 'pad']} ref={banner_preview} />
+				<SettingGroup>
+					<SettingOptions name={tl(trans.view_backgrounds_on)}>
+						<SettingCheckbox bind='profile_header_own' standalone />
+						<SettingCheckbox
+							bind='profile_header_others'
+							standalone
+						/>
+					</SettingOptions>
+					<SettingSwitch bind='profile_avi_background' />
+				</SettingGroup>
+			</section>
 		</>,
 	);
+
+	render_banner_preview();
+
+	function render_banner_preview() {
+		const own_banners = useSettings.get('profile_header_own');
+		const other_banners = useSettings.get('profile_header_others');
+		const avatar_replace = useSettings.get('profile_avi_background');
+
+		const fallback_url =
+			'https://lastfm.freetls.fastly.net/i/u/ar0/b9436242d32247cbce3d403581284cd3.jpg';
+		const fallback_avi =
+			'https://lastfm.freetls.fastly.net/i/u/ar0/818148bf682d429dc215c1705eb27b98.png';
+
+		banner_preview.current.replaceChildren(
+			<div class='banner-previews'>
+				<div class='banner-preview-item'>
+					<strong class='banner-preview-label'>{auth.name}</strong>
+					<div
+						class='banner-preview-avatar'
+						style={{
+							backgroundImage: `url(${
+								avatar(auth.avatar, 'ar0')
+							})`,
+						}}
+					/>
+					<div
+						class={[
+							'banner-preview-img',
+							!own_banners && 'hide-banner',
+						]}
+						style={{
+							backgroundImage: `url(${
+								cache.banner
+									? cache.banner
+									: avatar_replace
+									? avatar(auth.avatar, 'ar0')
+									: fallback_url
+							})`,
+						}}
+					/>
+				</div>
+				<div class='banner-preview-item'>
+					<strong class='banner-preview-label'>
+						{tl(trans.other_profiles)}
+					</strong>
+					<div
+						class='banner-preview-avatar'
+						style={{
+							backgroundImage: `url(${fallback_avi})`,
+						}}
+					/>
+					<div
+						class={[
+							'banner-preview-img',
+							!other_banners && 'hide-banner',
+						]}
+						style={{
+							backgroundImage: `url(${
+								avatar_replace ? fallback_avi : fallback_url
+							})`,
+						}}
+					/>
+				</div>
+			</div>,
+		);
+	}
 }

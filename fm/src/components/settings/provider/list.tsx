@@ -11,10 +11,7 @@ import {
 	SettingIncompatibleWith,
 	SettingLabel,
 } from '@/components/settings/provider/main.tsx';
-import { settings } from '@/build/config.ts';
-import { Switch } from '@/components/settings/clickables/switch.tsx';
 import { tl, translation } from '@/build/trans.ts';
-import { save_setting } from '@/components/settings/settings.tsx';
 import { SettingIcon } from '@/components/settings/provider/icon.tsx';
 import { useSettings } from '@/page.ts';
 import {
@@ -23,7 +20,7 @@ import {
 	ListCandidate,
 	ListItem,
 } from '@/components/settings/clickables/list.tsx';
-import { page } from '@/build/page.ts';
+import Sortable from 'sortablejs';
 
 interface SettingListProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
@@ -97,7 +94,11 @@ export function SettingList({
 		}
 	}
 
+	let sortable: Sortable;
+
 	function update() {
+		if (sortable && sortable.destroy()) sortable.destroy();
+
 		disabled = false;
 
 		let incompatible = false;
@@ -132,6 +133,8 @@ export function SettingList({
 			);
 		}
 
+		const inner_list = createRef();
+
 		elem.replaceChildren(
 			<>
 				{icon && <SettingIcon name={icon} />}
@@ -141,20 +144,22 @@ export function SettingList({
 					store={store}
 				/>
 				<List>
-					{value!.map((val, i) => (
-						<ListItem
-							icon={values[val]?.icon}
-							name={values[val] ? tl(values[val].name) : val}
-							onRemove={() => {
-								const new_list = value!.filter((item) =>
-									item != val
-								);
+					<List ref={inner_list}>
+						{value!.map((val, i) => (
+							<ListItem
+								icon={values[val]?.icon}
+								name={values[val] ? tl(values[val].name) : val}
+								onRemove={() => {
+									const new_list = value!.filter((item) =>
+										item != val
+									);
 
-								set(new_list);
-							}}
-							key={i}
-						/>
-					))}
+									set(new_list);
+								}}
+								key={i}
+							/>
+						))}
+					</List>
 					{!predefined
 						? (
 							<ListAdd
@@ -186,6 +191,20 @@ export function SettingList({
 				)}
 			</>,
 		);
+
+		sortable = new Sortable(inner_list.current, {
+			onEnd: (e) => {
+				const from = e.oldIndex;
+				const to = e.newIndex;
+				const new_list = [...value!];
+
+				const item = new_list.splice(from, 1)[0];
+
+				new_list.splice(to, 0, item);
+
+				set(new_list);
+			},
+		});
 	}
 
 	const elem = (

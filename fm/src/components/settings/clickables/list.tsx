@@ -12,14 +12,16 @@ import { Input } from '@/components/input/input.tsx';
 import { createRef, ReactNode } from 'jsx-dom';
 
 interface ListProps {
+	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
 	children: ReactNode;
 }
 
 export function List({
+	ref,
 	children,
 }: ListProps) {
 	return (
-		<div class={['setting-lists']}>
+		<div class={['setting-lists']} ref={ref}>
 			{children}
 		</div>
 	);

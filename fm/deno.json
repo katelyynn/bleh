@@ -30,6 +30,7 @@
 		"odometer_countup": "npm:odometer_countup@^1.0.4",
 		"postcss": "npm:postcss@^8.5.26",
 		"showdown": "npm:showdown@^2.1.0",
+		"sortablejs": "npm:sortablejs@^1.15.7",
 		"tippy.js": "npm:tippy.js@^6.3.7",
 		"wanakana": "npm:wanakana@^5.3.1"
 	},

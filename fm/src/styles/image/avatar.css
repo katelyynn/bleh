@@ -3,7 +3,7 @@
 	border-radius: var(--avatar-radius);
 	aspect-ratio: 1 / 1;
 
-	display: block;
+	display: flex;
 	position: relative;
 
 	&:before {
@@ -16,7 +16,7 @@
 		border-radius: inherit;
 	}
 
-	& > img {
+	&>img {
 		position: static;
 		border-radius: inherit !important;
 		font-size: 0 !important;
@@ -44,7 +44,7 @@ img {
 	display: block;
 	position: relative;
 
-	& > img {
+	&>img {
 		width: 100%;
 		height: 100%;
 	}
@@ -75,7 +75,7 @@ img {
 /* missing avatar */
 .missing-avatar,
 .header-avatar-add,
-.avatar > img:not([src]),
+.avatar>img:not([src]),
 [src^="/static/images/icons/default_user_v4"],
 [src$="818148bf682d429dc215c1705eb27b98.png"] {
 	content: var(--blank) !important;
