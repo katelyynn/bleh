@@ -4,7 +4,7 @@
 	gap: 10px;
 
 	&+.event-section-date-heading {
-		margin-top: var(--card-padding-v) !important;
+		margin-top: var(--card-padding) !important;
 	}
 }
 
@@ -13,6 +13,16 @@
 	padding: 15px;
 	border-radius: var(--item-small-radius);
 	width: 100%;
+	overflow: hidden;
+}
+
+.event-item-dot {
+	display: inline-flex;
+	width: 2px;
+	height: 2px;
+	border-radius: 50%;
+	background-color: oklch(var(--c3));
+	margin: auto 4px;
 }
 
 .event-item-top {
@@ -103,8 +113,8 @@
 	display: flex;
 	align-items: center;
 	gap: 15px;
+	padding-top: 10px;
 	margin-top: 15px;
-	padding-top: 15px;
 	border-top: 1px solid var(--separator-base);
 }
 
@@ -123,4 +133,9 @@
 
 	--icon-size: 14px;
 	cursor: default;
+}
+
+.event-list-below {
+	text-align: right;
+	margin-top: var(--card-padding);
 }

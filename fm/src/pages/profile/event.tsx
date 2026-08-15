@@ -5,8 +5,23 @@ import {
 	EventItemProps,
 	EventList,
 } from '@/components/event/item.tsx';
+import { SeeMore } from '@/components/text/see_more.tsx';
 
 export function bleh_event_profile() {
+	const upcoming_link = page.structure.main!.querySelector(
+		'#events-section > p',
+	);
+	const link = upcoming_link?.querySelector('a');
+	if (link) {
+		upcoming_link!.replaceWith(
+			<div class='event-list-below'>
+				<SeeMore href={link.href}>
+					{link.textContent.trim()}
+				</SeeMore>
+			</div>,
+		);
+	}
+
 	const tables = page.structure.main!.querySelectorAll('.events-list-anhv1');
 	tables.forEach((table) => {
 		const events: EventItemProps[] = [];
@@ -35,7 +50,9 @@ export function bleh_event_profile() {
 			const count = item.querySelector(
 				'.events-list-item-attendees-count',
 			);
-			const avatars = item.querySelectorAll('.attendee-you-know-avatar');
+			const avatars = item.querySelectorAll(
+				'.avatar.attendee-you-know-avatar',
+			);
 
 			const link = item.querySelector('.events-list-cover-link');
 

@@ -47,6 +47,10 @@ export function EventItem({
 							DateTime.DATE_MED_WITH_WEEKDAY,
 						)}
 					</p>
+					<div class='event-item-dot' />
+					<p class='event-item-date-text'>
+						{DateTime.fromISO(date).toRelative({ style: 'short' })}
+					</p>
 				</div>
 				{(attendance_count != null || avatars) && (
 					<div class={['event-item-aside']}>
