@@ -114529,7 +114529,7 @@ var bleh = (() => {
               class: "event-item-date",
               children: [
                 /* @__PURE__ */ jsx(Icon, {
-                  name: icons.calendar,
+                  name: icons.events,
                   identifier: "event-item"
                 }),
                 /* @__PURE__ */ jsx("p", {
@@ -117316,7 +117316,7 @@ var bleh = (() => {
         date: "2026-07-30"
       }
     },
-    built_on: "2026-08-15T00:02:53.636Z"
+    built_on: "2026-08-15T00:05:36.783Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

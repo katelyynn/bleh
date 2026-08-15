@@ -40,7 +40,7 @@ export function EventItem({
 		<div class={['event-item']}>
 			<div class={['event-item-top']}>
 				<div class='event-item-date'>
-					<Icon name={icons.calendar} identifier='event-item' />
+					<Icon name={icons.events} identifier='event-item' />
 					<p class='event-item-date-text'>
 						{DateTime.fromISO(date).toLocaleString(
 							DateTime.DATE_MED_WITH_WEEKDAY,
