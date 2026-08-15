@@ -6,10 +6,11 @@ import { tl, trans } from '@/build/trans.ts';
 import { root } from '@/build/page.ts';
 import { DateTime } from 'luxon';
 import { ReactNode } from 'jsx-dom';
+import { WithChildren } from '@/types/generic.tsx';
 
 export type attendance = 'going' | 'maybe';
 
-interface EventItemProps {
+export interface EventItemProps {
 	date: string;
 	title: string;
 	artists?: string[];
@@ -116,6 +117,16 @@ export function EventItem({
 					</Button>
 				</div>
 			</div>
+		</div>
+	);
+}
+
+export function EventList({
+	children,
+}: WithChildren) {
+	return (
+		<div class='event-item-list'>
+			{children}
 		</div>
 	);
 }

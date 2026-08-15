@@ -1,3 +1,13 @@
+.event-item-list {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+
+	&+.event-section-date-heading {
+		margin-top: var(--card-padding-v) !important;
+	}
+}
+
 .event-item {
 	border: 1px solid var(--separator-base);
 	padding: 15px;
