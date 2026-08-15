@@ -7,6 +7,7 @@ import { root } from '@/build/page.ts';
 import { DateTime } from 'luxon';
 import { ReactNode } from 'jsx-dom';
 import { WithChildren } from '@/types/generic.tsx';
+import tippy from 'tippy.js';
 
 export type attendance = 'going' | 'maybe';
 
@@ -16,10 +17,11 @@ export interface EventItemProps {
 	artists?: string[];
 	venue: string;
 	city: string;
-	country: string;
+	country?: string;
 	attendance?: attendance;
 	attendance_text?: string;
 	attendance_count?: string;
+	interested_count?: string;
 	avatars?: ReactNode[];
 	href: string;
 }
@@ -34,6 +36,7 @@ export function EventItem({
 	attendance,
 	attendance_text,
 	attendance_count,
+	interested_count,
 	avatars,
 	href,
 }: EventItemProps) {
@@ -56,13 +59,39 @@ export function EventItem({
 					<div class={['event-item-aside']}>
 						{avatars && (
 							<div class='event-item-attendees'>
-								{avatars.map((avatar) => avatar)}
+								{avatars.map((avatar) => {
+									const inner = avatar?.querySelector(
+										'img',
+									) as HTMLImageElement;
+									if (!avatar || !inner) return;
+
+									const title = inner.getAttribute('title') ||
+										inner.getAttribute('alt') || '';
+
+									inner.removeAttribute('title');
+
+									if (!title) {
+										return avatar;
+									}
+
+									tippy(avatar, {
+										content: title,
+									});
+
+									return avatar;
+								})}
 							</div>
 						)}
 						{attendance_count != null && (
 							<div class='event-item-count'>
 								<Icon name={icons.users} />
 								{attendance_count}
+							</div>
+						)}
+						{interested_count != null && (
+							<div class='event-item-count'>
+								<Icon name={icons.maybe} />
+								{interested_count}
 							</div>
 						)}
 					</div>

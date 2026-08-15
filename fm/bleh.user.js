@@ -93054,7 +93054,7 @@ var bleh = (() => {
   }
 
   // src/components/event/item.tsx
-  function EventItem({ date, title, artists, venue, city, country, attendance, attendance_text, attendance_count, avatars, href }) {
+  function EventItem({ date, title, artists, venue, city, country, attendance, attendance_text, attendance_count, interested_count, avatars, href }) {
     return /* @__PURE__ */ jsx("div", {
       class: [
         "event-item"
@@ -93094,7 +93094,19 @@ var bleh = (() => {
               children: [
                 avatars && /* @__PURE__ */ jsx("div", {
                   class: "event-item-attendees",
-                  children: avatars.map((avatar3) => avatar3)
+                  children: avatars.map((avatar3) => {
+                    const inner = avatar3?.querySelector("img");
+                    if (!avatar3 || !inner) return;
+                    const title2 = inner.getAttribute("title") || inner.getAttribute("alt") || "";
+                    inner.removeAttribute("title");
+                    if (!title2) {
+                      return avatar3;
+                    }
+                    tippy_esm_default(avatar3, {
+                      content: title2
+                    });
+                    return avatar3;
+                  })
                 }),
                 attendance_count != null && /* @__PURE__ */ jsx("div", {
                   class: "event-item-count",
@@ -93103,6 +93115,15 @@ var bleh = (() => {
                       name: icons.users
                     }),
                     attendance_count
+                  ]
+                }),
+                interested_count != null && /* @__PURE__ */ jsx("div", {
+                  class: "event-item-count",
+                  children: [
+                    /* @__PURE__ */ jsx(Icon, {
+                      name: icons.maybe
+                    }),
+                    interested_count
                   ]
                 })
               ]
@@ -108999,6 +109020,67 @@ var bleh = (() => {
     });
   }
 
+  // src/pages/artist/event.tsx
+  function bleh_event_artist() {
+    const upcoming_link = page.structure.main.querySelector("#events-section > p");
+    const link = upcoming_link?.querySelector("a");
+    if (link) {
+      upcoming_link.replaceWith(/* @__PURE__ */ jsx("div", {
+        class: "event-list-below",
+        children: /* @__PURE__ */ jsx(SeeMore, {
+          href: link.href,
+          children: link.textContent.trim()
+        })
+      }));
+    }
+    const tables = page.structure.main.querySelectorAll(".events-list");
+    tables.forEach((table) => {
+      const events = [];
+      const items = table.querySelectorAll(".events-list-item");
+      items.forEach((item) => {
+        const calendar2 = item.querySelector(".events-list-item-date-icon");
+        const title = item.querySelector(".events-list-item-event-name");
+        const artists = item.querySelectorAll('.events-list-item-acts > span > span[itemprop="name"]');
+        const venue = item.querySelector(".events-list-item-venue--title");
+        const city = item.querySelector(".events-list-item-venue--address");
+        const badge = item.querySelector(".events-list-item-user-attendance");
+        const badge_type = item.classList.contains("events-list-item--attending") ? "going" : item.classList.contains("events-list-item--interested") ? "maybe" : void 0;
+        const count = item.querySelectorAll(".events-list-item-attendees-count");
+        const avatars = item.querySelectorAll(".users-you-know-user > .avatar");
+        const link2 = item.querySelector(".link-block-cover-link");
+        events.push({
+          date: calendar2?.getAttribute("datetime") || "",
+          title: title?.textContent.trim() || "",
+          artists: Array.from(artists).map((artist) => artist.textContent.trim()),
+          venue: venue?.textContent.trim() || "",
+          city: city?.textContent.trim() || "",
+          attendance: badge_type,
+          attendance_text: badge?.textContent.trim(),
+          attendance_count: count?.[0]?.textContent.trim(),
+          interested_count: count?.[1]?.textContent.trim(),
+          avatars: Array.from(avatars),
+          href: link2?.getAttribute("href")
+        });
+      });
+      table.replaceWith(/* @__PURE__ */ jsx(EventList, {
+        children: events.map((event3, i3) => /* @__PURE__ */ jsx(EventItem, {
+          date: event3.date,
+          title: event3.title,
+          artists: event3.artists,
+          venue: event3.venue,
+          city: event3.city,
+          country: event3.country,
+          attendance: event3.attendance,
+          attendance_text: event3.attendance_text,
+          attendance_count: event3.attendance_count,
+          interested_count: event3.interested_count,
+          avatars: event3.avatars,
+          href: event3.href
+        }))
+      }));
+    });
+  }
+
   // src/pages/artist.ts
   function bleh_artists() {
     const artist_header = document.body.querySelector(".header-new--artist");
@@ -109257,6 +109339,7 @@ var bleh = (() => {
                     </span>
                 `);
         });
+        bleh_event_artist();
       }
       if (page.subpage == "images_image-upload") bleh_gallery_upload();
       else if (page.subpage == "images_overview") bleh_gallery_list();
@@ -117393,7 +117476,7 @@ var bleh = (() => {
         date: "2026-07-30"
       }
     },
-    built_on: "2026-08-15T01:02:28.948Z"
+    built_on: "2026-08-15T01:20:49.867Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
