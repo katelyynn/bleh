@@ -34629,7 +34629,8 @@ var bleh = (() => {
     calendar: "calendar",
     location: "location",
     going: "going",
-    maybe: "maybe"
+    maybe: "maybe",
+    extension: "extension"
   };
   function icon({ name, identifier, use_mask = true }) {
     return /* @__PURE__ */ jsx("span", {
@@ -103506,7 +103507,8 @@ var bleh = (() => {
         /* @__PURE__ */ jsx("section", {
           class: "bleh--panel",
           children: [
-            /* @__PURE__ */ jsx("h4", {
+            /* @__PURE__ */ jsx(PanelHead, {
+              icon: icons.user,
               children: tl2(trans.profile)
             }),
             /* @__PURE__ */ jsx(SettingGroup, {
@@ -103552,6 +103554,25 @@ var bleh = (() => {
                     })
                   ]
                 }) : "",
+                /* @__PURE__ */ jsx(SettingInfo, {
+                  name: tl2(trans.current_version),
+                  children: [
+                    /* @__PURE__ */ jsx("p", {
+                      children: sponsor_list.version
+                    }),
+                    /* @__PURE__ */ jsx(SeeMore, {
+                      className: "sponsor-related",
+                      icon: icons.update,
+                      iconPlacement: "left",
+                      onClick: () => {
+                        sponsors(true, () => {
+                          render_setting_page("general");
+                        });
+                      },
+                      children: tl2(trans.update_check)
+                    })
+                  ]
+                }),
                 auth.sponsor ? /* @__PURE__ */ jsx(SettingAction, {
                   name: tl2(trans.you_are_a_sponsor),
                   body: tl2(trans.sponsor_get_badge),
@@ -103572,27 +103593,17 @@ var bleh = (() => {
                     onClick: () => sponsor(),
                     children: tl2(trans.sponsor)
                   })
-                }),
-                /* @__PURE__ */ jsx(SettingInfo, {
-                  name: tl2(trans.current_version),
-                  children: [
-                    /* @__PURE__ */ jsx("p", {
-                      children: sponsor_list.version
-                    }),
-                    /* @__PURE__ */ jsx(SeeMore, {
-                      className: "sponsor-related",
-                      icon: icons.update,
-                      iconPlacement: "left",
-                      onClick: () => {
-                        sponsors(true, () => {
-                          render_setting_page("general");
-                        });
-                      },
-                      children: tl2(trans.update_check)
-                    })
-                  ]
                 })
               ]
+            })
+          ]
+        }),
+        /* @__PURE__ */ jsx("section", {
+          class: "bleh--panel",
+          children: [
+            /* @__PURE__ */ jsx(PanelHead, {
+              icon: icons.extension,
+              children: "API"
             }),
             /* @__PURE__ */ jsx(SettingGroup, {
               children: [
@@ -119811,7 +119822,7 @@ var bleh = (() => {
         date: "2026-07-30"
       }
     },
-    built_on: "2026-08-15T16:11:57.212Z"
+    built_on: "2026-08-15T16:25:10.845Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

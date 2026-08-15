@@ -199,6 +199,7 @@ export const icons = {
 	location: 'location',
 	going: 'going',
 	maybe: 'maybe',
+	extension: 'extension',
 };
 
 interface icon {

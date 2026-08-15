@@ -37,6 +37,7 @@ import { SeeMore, SeeMoreGroup } from '@/components/text/see_more.tsx';
 import { badge } from '@/types/badge.ts';
 import { SettingAction } from '@/components/settings/provider/action.tsx';
 import { SettingInfo } from '@/components/settings/provider/info.tsx';
+import { PanelHead } from '@/components/text/head.tsx';
 
 export function general() {
 	if (auth.pro == null) {
@@ -90,7 +91,9 @@ export function general() {
 				</div>
 			</section>
 			<section class='bleh--panel'>
-				<h4>{tl(trans.profile)}</h4>
+				<PanelHead icon={icons.user}>
+					{tl(trans.profile)}
+				</PanelHead>
 				<SettingGroup>
 					{auth.name
 						? (
@@ -127,6 +130,21 @@ export function general() {
 							</div>
 						)
 						: ''}
+					<SettingInfo name={tl(trans.current_version)}>
+						<p>{sponsor_list.version}</p>
+						<SeeMore
+							className='sponsor-related'
+							icon={icons.update}
+							iconPlacement='left'
+							onClick={() => {
+								sponsors(true, () => {
+									render_setting_page('general');
+								});
+							}}
+						>
+							{tl(trans.update_check)}
+						</SeeMore>
+					</SettingInfo>
 					{auth.sponsor
 						? (
 							<SettingAction
@@ -158,22 +176,12 @@ export function general() {
 								</button>
 							</SettingAction>
 						)}
-					<SettingInfo name={tl(trans.current_version)}>
-						<p>{sponsor_list.version}</p>
-						<SeeMore
-							className='sponsor-related'
-							icon={icons.update}
-							iconPlacement='left'
-							onClick={() => {
-								sponsors(true, () => {
-									render_setting_page('general');
-								});
-							}}
-						>
-							{tl(trans.update_check)}
-						</SeeMore>
-					</SettingInfo>
 				</SettingGroup>
+			</section>
+			<section class='bleh--panel'>
+				<PanelHead icon={icons.extension}>
+					API
+				</PanelHead>
 				<SettingGroup>
 					<SettingAction
 						id='setting_api'
