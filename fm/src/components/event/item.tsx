@@ -98,7 +98,9 @@ export function EventItem({
 				)}
 			</div>
 			<div class={['event-item-middle']}>
-				<h1 class='event-item-title'>{title}</h1>
+				<h1 class='event-item-title'>
+					<a class='event-item-title-link' href={href}>{title}</a>
+				</h1>
 				{artists && (
 					<h2 class='event-item-artists'>
 						{artists.map((artist, i) => (

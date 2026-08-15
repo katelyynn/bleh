@@ -96,6 +96,12 @@
 	line-height: 20px;
 }
 
+.event-item-title-link {
+	&:not(:hover) {
+		color: inherit;
+	}
+}
+
 .event-item-artists {
 	color: oklch(var(--c2)) !important;
 	font-size: var(--font-size) !important;
