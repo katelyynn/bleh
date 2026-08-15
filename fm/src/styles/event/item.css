@@ -62,6 +62,10 @@
 		width: 22px;
 		height: 22px;
 
+		&>.avatar-status-dot {
+			display: none;
+		}
+
 		&:not(:last-child) {
 			margin-right: -6px;
 		}
