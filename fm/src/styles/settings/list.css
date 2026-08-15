@@ -49,6 +49,10 @@
 	}
 }
 
+.setting-list-item-ghost {
+	opacity: 0;
+}
+
 .setting-list-icon {
 	display: flex;
 	justify-content: center;

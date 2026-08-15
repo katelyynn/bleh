@@ -193,6 +193,10 @@ export function SettingList({
 		);
 
 		sortable = new Sortable(inner_list.current, {
+			animation: 200,
+			easing: 'cubic-bezier(0.095, 0.410, 0.055, 0.960)',
+			ghostClass: 'setting-list-item-ghost',
+
 			onEnd: (e) => {
 				const from = e.oldIndex;
 				const to = e.newIndex;
