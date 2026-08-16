@@ -62,6 +62,10 @@
 		width: 22px;
 		height: 22px;
 
+		&:hover {
+			z-index: 10;
+		}
+
 		&>.avatar-status-dot {
 			display: none;
 		}
@@ -143,6 +147,16 @@
 
 	--icon-size: 14px;
 	cursor: default;
+}
+
+.event-item-location-name {
+	display: -webkit-box;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	line-clamp: 1;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+	max-width: 560px;
 }
 
 .event-list-below {
