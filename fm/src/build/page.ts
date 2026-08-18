@@ -7,6 +7,7 @@
 import tippy from 'tippy.js';
 import { season } from '@/components/seasonal';
 import { DateTime } from 'luxon';
+import { ReactNode } from 'jsx-dom';
 // require page reload
 export const reload_pending = {
 	state: false,
@@ -71,27 +72,7 @@ export function setRoot(data: string) {
 // recent activity
 export const recent_activity_list = [];
 
-/**
- * Represents the current page state, structure, and any elements
- *
- * @property {string} type - Page type (e.g., user, album, settings)
- * @property {string} subpage - Page type subsection (e.g., overview, library_artists, shoutbox_overview)
- * @property {string} name - Artist/album/track/profile name
- * @property {string} sister - Related artist for album or track
- * @property {Array} sister_others - Featured guests on a track
- * @property {string} avatar - URL for associated avatar
- * @property {boolean} multi - Whether this artist page is a shared profile
- * @property {boolean} corrected - Whether this page has been corrected via lotus
- * @property {string} token - Profile token for submitting forms
- * @property {boolean} mobile - Page is in a mobile state **on load**
- * @property {string} platform - Operating system - can be win32, darwin, ios, android, linux, or other
- * @property {Object} structure - Elements that make up the page structure
- * @property {boolean} structure.glacier.refresh - Whether this glacier library page is pending refresh
- * @property {Object|null} structure.logs - Logging host
- * @property {Object} requested - Any arguments requested in the page URL via ?this=syntax
- * @property {Object} state - Dynamic variables
- * @property {boolean} state.settings_reload - Whether the page is pending a reload due to user settings
- */
+// represents the current page as an object
 export const page: page = {
 	initial: '',
 	type: '',
@@ -180,6 +161,12 @@ export const page: page = {
 				},
 			},
 		},
+		seasons: {
+			now: DateTime.local(),
+			current: undefined,
+			prev: undefined,
+			next: undefined,
+		},
 	},
 };
 
@@ -231,7 +218,7 @@ interface page {
 	requested: {
 		tab: string | null;
 	};
-	header: any;
+	header: Record<string, ReactNode>;
 	state: {
 		replaced_accent?: boolean;
 		settings_reload: boolean;
@@ -244,9 +231,9 @@ interface page {
 		};
 		seasons: {
 			now: DateTime;
-			current: season | null;
-			prev: season | null;
-			next: season | null;
+			current: season | undefined;
+			prev: season | undefined;
+			next: season | undefined;
 		};
 	};
 }
