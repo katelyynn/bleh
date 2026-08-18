@@ -1,5 +1,5 @@
 {
-    version: "2026.0814",
+    version: "2026.0818",
     related: {
         account_name: "kateshapedbox",
         link: "https://katelyn.moe/sponsor",
@@ -383,6 +383,18 @@
                 }
             ]
         },
-        "zozoloft": {}
+        "zozoloft": {},
+        "suburbanno": {},
+        "softmodem": {
+            badges: [
+                {
+                    icon: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXJhZGlvLWljb24gbHVjaWRlLXJhZGlvIj48cGF0aCBkPSJNMTYuMjQ3IDcuNzYxYTYgNiAwIDAgMSAwIDguNDc4Ii8+PHBhdGggZD0iTTE5LjA3NSA0LjkzM2ExMCAxMCAwIDAgMSAwIDE0LjEzNCIvPjxwYXRoIGQ9Ik00LjkyNSAxOS4wNjdhMTAgMTAgMCAwIDEgMC0xNC4xMzQiLz48cGF0aCBkPSJNNy43NTMgMTYuMjM5YTYgNiAwIDAgMSAwLTguNDc4Ii8+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMiIvPjwvc3ZnPg==",
+                    name: "halo://protocol",
+                    hue: 287,
+                    sat: 1.95,
+                    lit: 0.79
+                }
+            ]
+        }
     }
 }
