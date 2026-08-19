@@ -103491,6 +103491,220 @@ var bleh = (() => {
     });
   }
 
+  // src/components/settings/clickables/radio.tsx
+  function Radio({ ref: ref2, name, value, className: className2, interact = true, checked = false }) {
+    const radio2 = createRef();
+    const elem = createRef();
+    function update() {
+      radio2.current.checked = checked;
+      elem.current.setAttribute("aria-checked", checked);
+    }
+    const wrap = /* @__PURE__ */ jsx("div", {
+      class: [
+        "radio-cont",
+        className2 && className2
+      ],
+      ref: ref2,
+      children: [
+        /* @__PURE__ */ jsx("input", {
+          type: "radio",
+          name,
+          value,
+          ref: radio2
+        }),
+        /* @__PURE__ */ jsx("button", {
+          type: "button",
+          class: [
+            "btn",
+            "radio",
+            !interact && "no-interact"
+          ],
+          ref: elem,
+          onClick: () => {
+            if (!interact) {
+              return;
+            }
+            checked = !checked;
+            update();
+          }
+        })
+      ]
+    });
+    update();
+    Object.defineProperty(wrap, "checked", {
+      get() {
+        return checked;
+      },
+      set(val) {
+        checked = val;
+        update();
+      }
+    });
+    return wrap;
+  }
+
+  // src/components/settings/provider/radio.tsx
+  function SettingRadio({ ref: ref2, bind, standalone = false, icon: icon2, name, body, value, values, onChange, disabled, onMouseEnter, onMouseLeave }) {
+    if (bind) value = useSettings.get(bind);
+    let buttons = [];
+    const uuid = crypto.randomUUID();
+    if (bind) {
+      useSettings.on(bind, (val, id) => {
+        if (id == uuid) return;
+        set2(val, true);
+      });
+    }
+    const reset = createRef();
+    const store = get_from_store(bind);
+    if (store) {
+      if (!icon2) icon2 = store.icon;
+      if (store.values) values = store.values;
+      if (store.incompatible) {
+        Object.entries(store.incompatible).forEach(([key]) => {
+          useSettings.on(key, () => {
+            update();
+          });
+        });
+      }
+    }
+    function update() {
+      disabled = false;
+      let incompatible = false;
+      let incompatible_list = {};
+      let incompatible_strings = [];
+      if (store) {
+        ({ incompatible, list: incompatible_list, list_strings: incompatible_strings } = is_incompatible(store));
+      }
+      if (incompatible) {
+        disabled = true;
+      }
+      if (disabled) {
+        elem.setAttribute("disabled", "true");
+      } else {
+        elem.removeAttribute("disabled");
+      }
+      buttons = [];
+      elem.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
+        children: [
+          icon2 && /* @__PURE__ */ jsx(SettingIcon, {
+            name: icon2
+          }),
+          /* @__PURE__ */ jsx(SettingLabel, {
+            name,
+            body,
+            store,
+            value,
+            setValue: (val) => {
+              set2(val);
+              update();
+            },
+            defaultValue: store?.default,
+            ref: reset
+          }),
+          /* @__PURE__ */ jsx("div", {
+            class: "primary-selections",
+            children: Object.entries(values).map(([key, val], i3) => {
+              const elem2 = /* @__PURE__ */ jsx(RadioItem, {
+                id: bind || "",
+                value: key,
+                name: tl2(val.name),
+                onChange: set2
+              }, i3);
+              buttons.push(elem2);
+              return elem2;
+            })
+          }),
+          Object.keys(incompatible_list).length > 0 && /* @__PURE__ */ jsx(SettingIncompatibleWith, {
+            list: incompatible_list,
+            strings: incompatible_strings
+          })
+        ]
+      }));
+      buttons.forEach((elem2) => {
+        elem2.checked = elem2.value == value;
+      });
+    }
+    const elem = /* @__PURE__ */ jsx("div", {
+      class: [
+        "setting",
+        standalone && "standalone"
+      ],
+      "data-type": "options",
+      id: `setting_${bind}`,
+      onMouseEnter,
+      onMouseLeave,
+      ref: ref2
+    });
+    update();
+    function set2(val, received = false) {
+      if (value == val) return;
+      value = val;
+      reset.current.value = val;
+      if (bind) {
+        if (!received) useSettings.set(bind, val, uuid);
+      } else {
+        if (onChange) onChange(val);
+      }
+      buttons.forEach((elem2) => {
+        elem2.checked = elem2.value == val;
+      });
+      if (onMouseEnter) onMouseEnter();
+    }
+    Object.defineProperty(elem, "value", {
+      get() {
+        return value;
+      },
+      set(val) {
+        set2(val);
+      }
+    });
+    elem.update = update;
+    return elem;
+  }
+  function RadioItem({ id, value, name, checked, onChange }) {
+    const radio2 = createRef();
+    function update() {
+      radio2.current.checked = checked;
+    }
+    const wrap = /* @__PURE__ */ jsx("div", {
+      class: [
+        "setting",
+        "standalone"
+      ],
+      "data-type": "radio",
+      onClick: () => {
+        onChange(value);
+      },
+      children: [
+        /* @__PURE__ */ jsx(Radio, {
+          name: id,
+          value,
+          ref: radio2,
+          interact: false
+        }),
+        /* @__PURE__ */ jsx(SettingLabel, {
+          name
+        })
+      ]
+    });
+    update();
+    Object.defineProperty(wrap, "checked", {
+      get() {
+        return checked;
+      },
+      set(val) {
+        checked = val;
+        update();
+      }
+    });
+    Object.defineProperty(wrap, "value", {
+      get() {
+        return value;
+      }
+    });
+    return wrap;
+  }
+
   // src/pages/bleh_settings/general.tsx
   function general() {
     if (auth.pro == null) {
@@ -103692,6 +103906,20 @@ var bleh = (() => {
                   })
                 })
               ]
+            })
+          ]
+        }),
+        /* @__PURE__ */ jsx("section", {
+          class: "bleh--panel",
+          children: [
+            /* @__PURE__ */ jsx(PanelHead, {
+              icon: icons.bleh_settings,
+              children: tl2(trans.branding)
+            }),
+            /* @__PURE__ */ jsx(SettingGroup, {
+              children: /* @__PURE__ */ jsx(SettingRadio, {
+                bind: "branding_type"
+              })
             })
           ]
         })
@@ -104071,220 +104299,6 @@ var bleh = (() => {
       content: time4.toLocaleString(DateTime.DATE_MED)
     });
     return elem;
-  }
-
-  // src/components/settings/clickables/radio.tsx
-  function Radio({ ref: ref2, name, value, className: className2, interact = true, checked = false }) {
-    const radio2 = createRef();
-    const elem = createRef();
-    function update() {
-      radio2.current.checked = checked;
-      elem.current.setAttribute("aria-checked", checked);
-    }
-    const wrap = /* @__PURE__ */ jsx("div", {
-      class: [
-        "radio-cont",
-        className2 && className2
-      ],
-      ref: ref2,
-      children: [
-        /* @__PURE__ */ jsx("input", {
-          type: "radio",
-          name,
-          value,
-          ref: radio2
-        }),
-        /* @__PURE__ */ jsx("button", {
-          type: "button",
-          class: [
-            "btn",
-            "radio",
-            !interact && "no-interact"
-          ],
-          ref: elem,
-          onClick: () => {
-            if (!interact) {
-              return;
-            }
-            checked = !checked;
-            update();
-          }
-        })
-      ]
-    });
-    update();
-    Object.defineProperty(wrap, "checked", {
-      get() {
-        return checked;
-      },
-      set(val) {
-        checked = val;
-        update();
-      }
-    });
-    return wrap;
-  }
-
-  // src/components/settings/provider/radio.tsx
-  function SettingRadio({ ref: ref2, bind, standalone = false, icon: icon2, name, body, value, values, onChange, disabled, onMouseEnter, onMouseLeave }) {
-    if (bind) value = useSettings.get(bind);
-    let buttons = [];
-    const uuid = crypto.randomUUID();
-    if (bind) {
-      useSettings.on(bind, (val, id) => {
-        if (id == uuid) return;
-        set2(val, true);
-      });
-    }
-    const reset = createRef();
-    const store = get_from_store(bind);
-    if (store) {
-      if (!icon2) icon2 = store.icon;
-      if (store.values) values = store.values;
-      if (store.incompatible) {
-        Object.entries(store.incompatible).forEach(([key]) => {
-          useSettings.on(key, () => {
-            update();
-          });
-        });
-      }
-    }
-    function update() {
-      disabled = false;
-      let incompatible = false;
-      let incompatible_list = {};
-      let incompatible_strings = [];
-      if (store) {
-        ({ incompatible, list: incompatible_list, list_strings: incompatible_strings } = is_incompatible(store));
-      }
-      if (incompatible) {
-        disabled = true;
-      }
-      if (disabled) {
-        elem.setAttribute("disabled", "true");
-      } else {
-        elem.removeAttribute("disabled");
-      }
-      buttons = [];
-      elem.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
-        children: [
-          icon2 && /* @__PURE__ */ jsx(SettingIcon, {
-            name: icon2
-          }),
-          /* @__PURE__ */ jsx(SettingLabel, {
-            name,
-            body,
-            store,
-            value,
-            setValue: (val) => {
-              set2(val);
-              update();
-            },
-            defaultValue: store?.default,
-            ref: reset
-          }),
-          /* @__PURE__ */ jsx("div", {
-            class: "primary-selections",
-            children: Object.entries(values).map(([key, val], i3) => {
-              const elem2 = /* @__PURE__ */ jsx(RadioItem, {
-                id: bind || "",
-                value: key,
-                name: tl2(val.name),
-                onChange: set2
-              }, i3);
-              buttons.push(elem2);
-              return elem2;
-            })
-          }),
-          Object.keys(incompatible_list).length > 0 && /* @__PURE__ */ jsx(SettingIncompatibleWith, {
-            list: incompatible_list,
-            strings: incompatible_strings
-          })
-        ]
-      }));
-      buttons.forEach((elem2) => {
-        elem2.checked = elem2.value == value;
-      });
-    }
-    const elem = /* @__PURE__ */ jsx("div", {
-      class: [
-        "setting",
-        standalone && "standalone"
-      ],
-      "data-type": "options",
-      id: `setting_${bind}`,
-      onMouseEnter,
-      onMouseLeave,
-      ref: ref2
-    });
-    update();
-    function set2(val, received = false) {
-      if (value == val) return;
-      value = val;
-      reset.current.value = val;
-      if (bind) {
-        if (!received) useSettings.set(bind, val, uuid);
-      } else {
-        if (onChange) onChange(val);
-      }
-      buttons.forEach((elem2) => {
-        elem2.checked = elem2.value == val;
-      });
-      if (onMouseEnter) onMouseEnter();
-    }
-    Object.defineProperty(elem, "value", {
-      get() {
-        return value;
-      },
-      set(val) {
-        set2(val);
-      }
-    });
-    elem.update = update;
-    return elem;
-  }
-  function RadioItem({ id, value, name, checked, onChange }) {
-    const radio2 = createRef();
-    function update() {
-      radio2.current.checked = checked;
-    }
-    const wrap = /* @__PURE__ */ jsx("div", {
-      class: [
-        "setting",
-        "standalone"
-      ],
-      "data-type": "radio",
-      onClick: () => {
-        onChange(value);
-      },
-      children: [
-        /* @__PURE__ */ jsx(Radio, {
-          name: id,
-          value,
-          ref: radio2,
-          interact: false
-        }),
-        /* @__PURE__ */ jsx(SettingLabel, {
-          name
-        })
-      ]
-    });
-    update();
-    Object.defineProperty(wrap, "checked", {
-      get() {
-        return checked;
-      },
-      set(val) {
-        checked = val;
-        update();
-      }
-    });
-    Object.defineProperty(wrap, "value", {
-      get() {
-        return value;
-      }
-    });
-    return wrap;
   }
 
   // src/pages/bleh_settings/seasonal.tsx
@@ -119245,6 +119259,7 @@ var bleh = (() => {
         lotus();
         oracle_data();
         sponsors();
+        useSettings.on("branding_type", update_branding_type);
       },
       on_mutation: main_flow,
       on_page_change: load_page,
@@ -120262,7 +120277,7 @@ var bleh = (() => {
         date: "2026-07-30"
       }
     },
-    built_on: "2026-08-19T19:49:30.097Z"
+    built_on: "2026-08-19T20:30:40.480Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

@@ -41,7 +41,7 @@ import { load_notifications, notify } from '@/components/dialog/notify';
 import { patch_titles } from '@/components/music/track.js';
 import { load_settings, Settings } from '@/config';
 import { theme_version, version } from '@/main';
-import { append_nav } from '@/components/page/navigation';
+import { append_nav, update_branding_type } from '@/components/page/navigation';
 import { bleh_albums } from '@/pages/album';
 import { bleh_artists } from '@/pages/artist';
 import { bleh_settings } from '@/pages/bleh_settings/bleh_settings.js';
@@ -183,6 +183,8 @@ export function bleh() {
 			lotus();
 			oracle_data();
 			sponsors();
+
+			useSettings.on('branding_type', update_branding_type);
 		},
 		on_mutation: main_flow,
 		on_page_change: load_page,

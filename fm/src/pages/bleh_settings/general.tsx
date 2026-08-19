@@ -38,6 +38,7 @@ import { badge } from '@/types/badge.ts';
 import { SettingAction } from '@/components/settings/provider/action.tsx';
 import { SettingInfo } from '@/components/settings/provider/info.tsx';
 import { PanelHead } from '@/components/text/head.tsx';
+import { SettingRadio } from '@/components/settings/provider/radio.tsx';
 
 export function general() {
 	if (auth.pro == null) {
@@ -205,6 +206,14 @@ export function general() {
 							? <p>{tl(trans.connected)}</p>
 							: <p>{tl(trans.not_connected)}</p>}
 					</SettingInfo>
+				</SettingGroup>
+			</section>
+			<section class='bleh--panel'>
+				<PanelHead icon={icons.bleh_settings}>
+					{tl(trans.branding)}
+				</PanelHead>
+				<SettingGroup>
+					<SettingRadio bind='branding_type' />
 				</SettingGroup>
 			</section>
 		</>,
