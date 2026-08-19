@@ -1,5 +1,5 @@
 {
-    version: "2026.0818",
+    version: "2026.0819",
     related: {
         account_name: "kateshapedbox",
         link: "https://katelyn.moe/sponsor",
@@ -180,6 +180,7 @@
         "writtyn": {},
         "fourohclok": {},
         "satisfeita": {
+            contributor: true,
             badges: [
                 {
                     icon: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWNoZXNzLXF1ZWVuLWljb24gbHVjaWRlLWNoZXNzLXF1ZWVuIj48cGF0aCBkPSJNNCAyMGEyIDIgMCAwIDEgMi0yaDEyYTIgMiAwIDAgMSAyIDJ2MWExIDEgMCAwIDEtMSAxSDVhMSAxIDAgMCAxLTEtMXoiLz48cGF0aCBkPSJtMTIuNDc0IDUuOTQzIDEuNTY3IDUuMzRhMSAxIDAgMCAwIDEuNzUuMzI4bDIuNjE2LTMuNDAyIi8+PHBhdGggZD0ibTIwIDktMyA5Ii8+PHBhdGggZD0ibTUuNTk0IDguMjA5IDIuNjE1IDMuNDAzYTEgMSAwIDAgMCAxLjc1LS4zMjlsMS41NjctNS4zNCIvPjxwYXRoIGQ9Ik03IDE4IDQgOSIvPjxjaXJjbGUgY3g9IjEyIiBjeT0iNCIgcj0iMiIvPjxjaXJjbGUgY3g9IjIwIiBjeT0iNyIgcj0iMiIvPjxjaXJjbGUgY3g9IjQiIGN5PSI3IiByPSIyIi8+PC9zdmc+",
