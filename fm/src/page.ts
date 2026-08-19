@@ -111,6 +111,8 @@ import { applyCSP } from '@/csp.ts';
 export const useSettings: Settings = new Settings();
 
 export function bleh() {
+	page.continue = true;
+
 	florence({
 		page,
 		on_head_load: () => {
@@ -311,10 +313,10 @@ export function handle_error_500() {
 }
 
 function main_flow() {
+	if (!page.continue) return;
+
 	try {
 		lookup_lang();
-
-		if (page.state.error) return;
 
 		if (page.type == 'artist' || page.type == 'album') {
 			bleh_gallery();
@@ -449,6 +451,7 @@ function main_flow() {
 			}
 		}
 	} catch (e) {
+		page.continue = false;
 		handle_error(e);
 	}
 }

@@ -88,6 +88,7 @@ export const page: page = {
 	platform: 'other',
 	suggest: null,
 	restricted: false,
+	continue: true,
 	now: {
 		next_fetch: null,
 		name: null,
@@ -167,6 +168,7 @@ export const page: page = {
 			prev: undefined,
 			next: undefined,
 		},
+		error: false,
 	},
 };
 
@@ -185,6 +187,7 @@ interface page {
 	platform: string;
 	suggest: any;
 	restricted: boolean;
+	continue: boolean;
 	now: {
 		next_fetch: Date | null;
 		name: HTMLElement | null;
@@ -235,6 +238,7 @@ interface page {
 			prev: season | undefined;
 			next: season | undefined;
 		};
+		error: boolean;
 	};
 }
 

@@ -31525,6 +31525,7 @@ var bleh = (() => {
     platform: "other",
     suggest: null,
     restricted: false,
+    continue: true,
     now: {
       next_fetch: null,
       name: null,
@@ -31603,7 +31604,8 @@ var bleh = (() => {
         current: void 0,
         prev: void 0,
         next: void 0
-      }
+      },
+      error: false
     }
   };
   var shout_parse_queue = [];
@@ -112477,6 +112479,7 @@ var bleh = (() => {
     );
     if (!error_marvin) return;
     page.state.error = true;
+    page.continue = false;
     error_marvin.setAttribute("data-bleh", "true");
     const error_content = page_content.querySelector("h1");
     const back_link = page_content.querySelector("a");
@@ -118778,6 +118781,7 @@ var bleh = (() => {
   // src/page.ts
   var useSettings = new Settings2();
   function bleh() {
+    page.continue = true;
     q({
       page,
       on_head_load: () => {
@@ -118926,9 +118930,9 @@ var bleh = (() => {
     log("halted as root is inaccessible", "load");
   }
   function main_flow() {
+    if (!page.continue) return;
     try {
       lookup_lang();
-      if (page.state.error) return;
       if (page.type == "artist" || page.type == "album") {
         bleh_gallery();
         bleh_gallery_upload_check();
@@ -119007,6 +119011,7 @@ var bleh = (() => {
         }
       }
     } catch (e5) {
+      page.continue = false;
       handle_error(e5);
     }
   }
@@ -119839,7 +119844,7 @@ var bleh = (() => {
         date: "2026-07-30"
       }
     },
-    built_on: "2026-08-19T13:24:45.640Z"
+    built_on: "2026-08-19T13:28:24.860Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
