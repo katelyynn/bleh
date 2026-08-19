@@ -56,7 +56,10 @@ import { avatar } from '@/components/shared/avatar.js';
 import { convert_lang_to_country, flag } from '@/components/shared/flag.js';
 import { lotus_modal } from '@/components/music/lotus.js';
 import { new_indicator } from '@/components/shared/indicator.js';
-import { rabbit_keybinds } from '@/pages/bleh_settings/interface.tsx';
+import {
+	interface_page,
+	rabbit_keybinds,
+} from '@/pages/bleh_settings/interface.tsx';
 import { playback } from '@/pages/bleh_settings/playback.tsx';
 import { profile } from '@/pages/bleh_settings/profile.tsx';
 
@@ -357,12 +360,16 @@ export async function render_setting_page(page_id) {
 			playback();
 		} else if (page_id == 'profile') {
 			profile();
+		} else if (page_id == 'interface') {
+			interface_page();
 		}
 	} catch (e) {
 		page_error(e);
 	}
 
 	if (page_id == 'interface') {
+		return;
+
 		register_skip_to([]);
 
 		let bars;

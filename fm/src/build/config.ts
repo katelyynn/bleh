@@ -487,7 +487,6 @@ export const settings_store: Record<string, setting_instance> = {
 		require_reload: 'partial',
 		title: trans.markdown_shouts.name,
 		body: trans.markdown_shouts.body,
-		bubble: true,
 	},
 	bio_markdown: {
 		default: true,
