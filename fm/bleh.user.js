@@ -116955,6 +116955,10 @@ var bleh = (() => {
 					<button class="see-more cancel left-icon" type="button" onclick=${() => dismiss.click()}>
 					    ${tl2(trans.cancel)}
 					</button>
+					<button class="js-close" type="button" style="display: none !important"
+						onclick=${() => {
+            dismiss.click();
+          }} />
 					<div class="fill" />
 					<div class="button-group">
 					    ${delete_form ? html.node`
@@ -119844,7 +119848,7 @@ var bleh = (() => {
         date: "2026-07-30"
       }
     },
-    built_on: "2026-08-19T13:28:24.860Z"
+    built_on: "2026-08-19T13:36:12.962Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

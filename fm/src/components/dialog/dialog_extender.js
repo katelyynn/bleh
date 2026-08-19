@@ -179,6 +179,7 @@ export function dialog_extender() {
 			submit_button.setAttribute('data-type', 'item-edit');
 			submit_button.textContent = tl(trans.edit);
 
+			// the js-close is to fix bulk edit lol
 			render(
 				submit,
 				html`
@@ -186,6 +187,10 @@ export function dialog_extender() {
 						dismiss.click()}>
 					    ${tl(trans.cancel)}
 					</button>
+					<button class="js-close" type="button" style="display: none !important"
+						onclick=${() => {
+							dismiss.click();
+						}} />
 					<div class="fill" />
 					<div class="button-group">
 					    ${delete_form
