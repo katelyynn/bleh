@@ -90964,6 +90964,7 @@ var bleh = (() => {
   }
   function bleh_glacier_library_bulk_edit() {
     const library_header = page.structure.main.querySelector(".library-header");
+    if (!library_header) return;
     const bulk_edit = library_header.querySelector(
       '[href="javascript:void(0)"]'
     );
@@ -119838,7 +119839,7 @@ var bleh = (() => {
         date: "2026-07-30"
       }
     },
-    built_on: "2026-08-18T16:53:12.078Z"
+    built_on: "2026-08-19T13:24:45.640Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

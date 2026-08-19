@@ -1743,6 +1743,7 @@ function bleh_glacier_library_focused() {
 export function bleh_glacier_library_bulk_edit() {
 	// quick check to see if bulk edit is present
 	const library_header = page.structure.main.querySelector('.library-header');
+	if (!library_header) return;
 
 	const bulk_edit = library_header.querySelector(
 		'[href="javascript:void(0)"]',
