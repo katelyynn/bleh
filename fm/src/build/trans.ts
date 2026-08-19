@@ -9,7 +9,6 @@ import { page, setRoot } from '@/build/page';
 import { get_language_name } from '@/build/tools';
 import { Settings } from 'luxon';
 import { ReactNode } from 'jsx-dom';
-import { useSettings } from '@/page.ts';
 
 // loads your selected language in Last.fm
 export let lang = 'en';
@@ -28,7 +27,7 @@ export const lastfm_languages = [
 	'tr',
 	'zh',
 ];
-export const lang_info = {
+export const lang_info: Record<string, language> = {
 	en: {
 		name: 'English',
 		by: ['dressupdarling'],
@@ -98,6 +97,16 @@ export const lang_info = {
 		last_updated: 'latest',
 	},
 };
+
+export interface language {
+	name: string;
+	by: string[];
+	last_updated: string;
+	new?: boolean;
+	percent?: number;
+	translated?: number;
+	missing?: number;
+}
 
 export const trans = {
 	comma: {
