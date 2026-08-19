@@ -38691,6 +38691,12 @@ var bleh = (() => {
     return match3 ? match3[1] : 0;
   }
   async function translate(text1, lang2 = "en") {
+    if (lang2 == "fae") {
+      return {
+        translated: "hazelfae",
+        detected: "hazelfae"
+      };
+    }
     const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=${lang2}&dt=t&q=${encodeURIComponent(text1)}`;
     const res = await fetch(url);
     const data2 = await res.json();
@@ -38708,6 +38714,7 @@ var bleh = (() => {
   function get_language_name(code) {
     if (code == "pt") return "portugu\xEAs brasileiro";
     if (code == "zh") return "\u7B80\u4F53\u4E2D\u6587";
+    if (code == "fae") return "hazelfae";
     try {
       const display2 = new Intl.DisplayNames([
         code
@@ -38830,6 +38837,13 @@ var bleh = (() => {
         "tmasc"
       ],
       last_updated: "2026-04-17"
+    },
+    fae: {
+      name: get_language_name("fae"),
+      by: [
+        "evangelicgirl"
+      ],
+      last_updated: "latest"
     }
   };
   var trans = {
@@ -50540,20 +50554,28 @@ var bleh = (() => {
   var translation_fallback = "NO_TRANSLATION_FOUND";
   function tl2(key, replacements = {}, string = true) {
     if (typeof key === "string") {
+      if (lang == "fae") return "hazelfae";
       return key;
     }
     if (!key) {
       log("your key is undefined", "trans");
+      if (lang == "fae") return "hazelfae";
       return translation_fallback;
     }
     let translation = key[lang] || key.en;
     if (page.state.april && translation.includes("Last.fm Pro")) {
       translation = translation.replaceAll("Last.fm Pro", "Verified");
     }
-    if (Object.keys(replacements).length == 0) return translation;
+    if (Object.keys(replacements).length == 0) {
+      if (lang == "fae") {
+        return "hazelfae";
+      }
+      return translation;
+    }
     if (string) {
-      for (const [placeholder, value] of Object.entries(replacements)) {
+      for (let [placeholder, value] of Object.entries(replacements)) {
         const regex = new RegExp(`{${placeholder}}`, "g");
+        if (lang == "fae") value = "hazelfae";
         translation = translation.replace(regex, value);
       }
       return translation;
@@ -50561,6 +50583,7 @@ var bleh = (() => {
     const parts = translation.split(/({[^}]+})/g);
     return parts.map((part) => {
       const match3 = part.match(/^\{(\w+)\}$/);
+      if (lang == "fae") return "hazelfae";
       if (match3) {
         const key2 = match3[1];
         return replacements[key2] ?? part;
@@ -50617,7 +50640,16 @@ var bleh = (() => {
   }
   function lookup_lang() {
     setRoot(get_lang());
-    lang = document.documentElement.getAttribute("lang");
+    const params = new URLSearchParams(document.location.search);
+    const hazelfae = params.get("hazelfae");
+    if (!page.state.hazelfae) {
+      page.state.hazelfae = hazelfae != void 0;
+    }
+    if (page.state.hazelfae) {
+      lang = "fae";
+    } else {
+      lang = document.documentElement.getAttribute("lang");
+    }
     lang_browser = navigator.language.replaceAll('"', "");
     if (lang.startsWith("en") && lang_browser.startsWith("en")) {
       Settings.defaultLocale = lang_browser;
@@ -52369,7 +52401,10 @@ var bleh = (() => {
     return elem;
   }
   function Flag({ code, className: className2 }) {
-    const url = `https://purecatamphetamine.github.io/country-flag-icons/3x2/${code}.svg`;
+    let url = `https://purecatamphetamine.github.io/country-flag-icons/3x2/${code}.svg`;
+    if (code == "FAE" || page.state.hazelfae) {
+      url = `https://images.weserv.nl/?url=${encodeURIComponent("https://katelyn.s-ul.eu/ENShSZsz")}&output=webp`;
+    }
     const elem = /* @__PURE__ */ jsx("div", {
       class: [
         "country-flag",
@@ -53869,16 +53904,13 @@ var bleh = (() => {
   function toggle_theme() {
     if (page.subpage.startsWith("listening-report")) return;
     const themes = [
-      "light",
-      "ink",
-      "dark",
-      "darker",
-      "oled"
+      ...light_themes,
+      ...dark_themes
     ];
-    const current = settings.theme;
+    const current = useSettings.get("theme");
     const next = themes[(themes.indexOf(current) + 1) % themes.length];
-    save_setting("theme_schedule", false);
-    save_setting("theme", next);
+    useSettings.set("theme_schedule", false);
+    useSettings.set("theme", next);
   }
   function request_reload() {
     if (page.type == "bleh_setup") return;
@@ -97798,7 +97830,7 @@ var bleh = (() => {
         type: "lang",
         regex: /\s*:hazelfae:\s*/gi,
         replace: () => {
-          return `<a class="hazelfae" href="${root}user/evangelicgirl"></a>`;
+          return `<a class="hazelfae" href="${root}user/evangelicgirl?hazelfae"></a>`;
         }
       }
     ];
@@ -103343,6 +103375,10 @@ var bleh = (() => {
         languages.map((code, i3) => /* @__PURE__ */ jsx(NavigationLanguage, {
           code,
           onChange: () => {
+            if (code == "fae") {
+              useSettings.set("language", "fae");
+              window.location.reload();
+            }
             instance.hide();
           }
         }, i3))
@@ -103382,7 +103418,7 @@ var bleh = (() => {
         ]
       })
     });
-    if (active) return button1;
+    if (active || code == "fae") return button1;
     const form = createRef();
     return /* @__PURE__ */ jsx("form", {
       action: "/i18n/setlang/",
@@ -103390,6 +103426,7 @@ var bleh = (() => {
       ref: form,
       onSubmit: async (e5) => {
         e5.preventDefault();
+        useSettings.set("language", "unset");
         const data2 = new FormData(form.current);
         await fetch(form.current.action, {
           method: "POST",
@@ -110380,6 +110417,7 @@ var bleh = (() => {
     });
   }
   function correct_item_by_artist(item, artist) {
+    if (page.state.hazelfae) return "hazelfae";
     if (!useSettings.get("corrections")) return item;
     if (!artist) {
       log("could not correct_item_by_artist, artist field is missing", "lotus", "error", {
@@ -110407,6 +110445,7 @@ var bleh = (() => {
     }
   }
   function correct_artist(artist, broadcast = false) {
+    if (page.state.hazelfae) return "hazelfae";
     if (!useSettings.get("corrections")) return artist;
     try {
       if (artist_corrections.hasOwnProperty(artist)) {
@@ -120223,7 +120262,7 @@ var bleh = (() => {
         date: "2026-07-30"
       }
     },
-    built_on: "2026-08-19T18:53:05.081Z"
+    built_on: "2026-08-19T19:49:30.097Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

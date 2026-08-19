@@ -6,9 +6,10 @@
 
 import { log } from '@/build/log';
 import { page, setRoot } from '@/build/page';
-import { get_language_name, sanitise_text } from '@/build/tools';
+import { get_language_name } from '@/build/tools';
 import { Settings } from 'luxon';
 import { ReactNode } from 'jsx-dom';
+import { useSettings } from '@/page.ts';
 
 // loads your selected language in Last.fm
 export let lang = 'en';
@@ -90,6 +91,11 @@ export const lang_info = {
 		name: get_language_name('tr'),
 		by: ['tmasc'],
 		last_updated: '2026-04-17',
+	},
+	fae: {
+		name: get_language_name('fae'),
+		by: ['evangelicgirl'],
+		last_updated: 'latest',
 	},
 };
 
@@ -11829,11 +11835,15 @@ export function tl(
 	string = true,
 ) {
 	if (typeof key === 'string') {
+		if (lang == 'fae') return 'hazelfae';
+
 		return key;
 	}
 
 	if (!key) {
 		log('your key is undefined', 'trans');
+		if (lang == 'fae') return 'hazelfae';
+
 		return translation_fallback;
 	}
 
@@ -11843,11 +11853,18 @@ export function tl(
 		translation = translation.replaceAll('Last.fm Pro', 'Verified');
 	}
 
-	if (Object.keys(replacements).length == 0) return translation;
+	if (Object.keys(replacements).length == 0) {
+		if (lang == 'fae') {
+			return 'hazelfae';
+		}
+
+		return translation;
+	}
 
 	if (string) {
-		for (const [placeholder, value] of Object.entries(replacements)) {
+		for (let [placeholder, value] of Object.entries(replacements)) {
 			const regex = new RegExp(`{${placeholder}}`, 'g');
+			if (lang == 'fae') value = 'hazelfae';
 			translation = translation.replace(regex, value);
 		}
 
@@ -11858,6 +11875,7 @@ export function tl(
 
 	return parts.map((part) => {
 		const match = part.match(/^\{(\w+)\}$/);
+		if (lang == 'fae') return 'hazelfae';
 
 		if (match) {
 			const key = match[1];
@@ -11932,7 +11950,19 @@ function get_lang() {
 export function lookup_lang() {
 	setRoot(get_lang());
 
-	lang = document.documentElement.getAttribute('lang');
+	const params = new URLSearchParams(document.location.search);
+	const hazelfae = params.get('hazelfae');
+
+	if (!page.state.hazelfae) {
+		page.state.hazelfae = hazelfae != undefined;
+	}
+
+	if (page.state.hazelfae) {
+		lang = 'fae';
+	} else {
+		lang = document.documentElement.getAttribute('lang');
+	}
+
 	lang_browser = navigator.language.replaceAll('"', '');
 
 	if (lang.startsWith('en') && lang_browser.startsWith('en')) {

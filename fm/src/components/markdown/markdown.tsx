@@ -186,7 +186,7 @@ export function markdown(
 			type: 'lang',
 			regex: /\s*:hazelfae:\s*/gi,
 			replace: () => {
-				return `<a class="hazelfae" href="${root}user/evangelicgirl"></a>`;
+				return `<a class="hazelfae" href="${root}user/evangelicgirl?hazelfae"></a>`;
 			},
 		},
 	];
@@ -439,6 +439,11 @@ export function markdown(
 	social_links(body, links);
 
 	body.querySelectorAll('.hazelfae').forEach((hazel) => {
+		/* hazel.setAttribute('onclick', () => {
+			window.location.href =
+				`${window.location.origin}${window.location.pathname}?hazelfae`;
+		}); */
+
 		tippy(hazel, {
 			content: ':hazelfae:',
 			delay: [500, 0],

@@ -19,7 +19,7 @@ import { notify } from '@/components/dialog/notify';
 import { load_skus } from '@/pages/bleh_settings/bleh_settings.js';
 import { compile_settings, save_setting } from '@/components/settings/settings';
 import { useSettings } from '@/page.ts';
-import { boolean } from '@std/http/unstable-structured-fields';
+import { dark_themes, light_themes } from '@/build/theme.ts';
 
 function parse_bleh_version(version: string) {
 	return parseFloat(version.substring(0, 7));
@@ -185,14 +185,14 @@ export function migrations(version: number) {
 export function toggle_theme() {
 	if (page.subpage.startsWith('listening-report')) return;
 
-	const themes = ['light', 'ink', 'dark', 'darker', 'oled'];
-	const current = settings.theme;
+	const themes = [...light_themes, ...dark_themes];
+	const current = useSettings.get('theme');
 
 	const next = themes[(themes.indexOf(current) + 1) % themes.length];
 
 	// save value
-	save_setting('theme_schedule', false);
-	save_setting('theme', next);
+	useSettings.set('theme_schedule', false);
+	useSettings.set('theme', next);
 }
 
 export function request_reload() {

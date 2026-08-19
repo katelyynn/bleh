@@ -427,6 +427,8 @@ export function correct_generic_combo_no_artist(parent) {
  * @returns {string} corrected title if applicable or original title
  */
 export function correct_item_by_artist(item, artist) {
+	if (page.state.hazelfae) return 'hazelfae';
+
 	if (!useSettings.get('corrections')) return item;
 
 	if (!artist) {
@@ -470,6 +472,8 @@ export function correct_item_by_artist(item, artist) {
  * @returns corrected artist if applicable or original artist
  */
 export function correct_artist(artist, broadcast = false) {
+	if (page.state.hazelfae) return 'hazelfae';
+
 	if (!useSettings.get('corrections')) return artist;
 
 	try {

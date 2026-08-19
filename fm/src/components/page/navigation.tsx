@@ -2132,6 +2132,11 @@ function NavigationLanguages({
 					code={code}
 					key={i}
 					onChange={() => {
+						if (code == 'fae') {
+							useSettings.set('language', 'fae');
+							window.location.reload();
+						}
+
 						instance.hide();
 					}}
 				/>
@@ -2177,7 +2182,7 @@ function NavigationLanguage({
 		</button>
 	);
 
-	if (active) return button;
+	if (active || code == 'fae') return button;
 
 	const form = createRef();
 
@@ -2190,6 +2195,8 @@ function NavigationLanguage({
 			ref={form}
 			onSubmit={async (e) => {
 				e.preventDefault();
+
+				useSettings.set('language', 'unset');
 
 				const data = new FormData(form.current);
 

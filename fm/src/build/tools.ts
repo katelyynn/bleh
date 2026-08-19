@@ -533,6 +533,13 @@ export function year_from_date(string) {
 }
 
 export async function translate(text, lang = 'en') {
+	if (lang == 'fae') {
+		return {
+			translated: 'hazelfae',
+			detected: 'hazelfae',
+		};
+	}
+
 	const url =
 		`https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=${lang}&dt=t&q=${
 			encodeURIComponent(text)
@@ -555,9 +562,10 @@ export async function translate(text, lang = 'en') {
 	};
 }
 
-export function get_language_name(code) {
+export function get_language_name(code: string) {
 	if (code == 'pt') return 'português brasileiro';
 	if (code == 'zh') return '简体中文';
+	if (code == 'fae') return 'hazelfae';
 
 	try {
 		const display = new Intl.DisplayNames([code], {
