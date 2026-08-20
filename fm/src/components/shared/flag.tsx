@@ -74,6 +74,12 @@ export const convert_lang_to_country: Record<string, string> = {
 export function flag_url(code: string) {
 	if (convert_lang_to_country[code]) code = convert_lang_to_country[code];
 
+	if (code == 'fae' || page.state.hazelfae) {
+		return `https://images.weserv.nl/?url=${
+			encodeURIComponent('https://katelyn.s-ul.eu/ENShSZsz')
+		}&output=webp`;
+	}
+
 	return `https://purecatamphetamine.github.io/country-flag-icons/3x2/${code.toUpperCase()}.svg`;
 }
 

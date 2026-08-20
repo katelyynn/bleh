@@ -21,7 +21,7 @@
 	align-items: center;
 	padding: 5px;
 	aspect-ratio: 1 / 1;
-	background: oklch(var(--b2) / 30%);
+	background: oklch(var(--b2) / 26%);
 	--icon-size: 16px;
 	border-radius: 4px;
 	flex-shrink: 0;

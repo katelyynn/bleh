@@ -62,6 +62,8 @@ import { bleh_event_profile } from '@/pages/profile/event.tsx';
 import { PanelHead } from '@/components/text/head.tsx';
 import { icons } from '@/components/shared/icon.tsx';
 import { ActivityItem, ActivityList } from '@/components/activity/activity.tsx';
+import { PanelTop, SeeMore, ViewButtons } from '@/components/text/see_more.tsx';
+import { createRef } from 'jsx-dom';
 
 export function bleh_profiles() {
 	// the obsessions page is a user subpage but works very differently
@@ -1115,10 +1117,6 @@ function profile_recents() {
 	const form = panel.querySelector('#recent-tracks-settings');
 	let tooltip;
 
-	let submit_btn;
-	let settings_btn;
-	let refresh_btn;
-
 	const can_scrobble = ff('submit_scrobble') && page.name == auth.name;
 
 	const head = panel.querySelector(':scope > h2');
@@ -1127,57 +1125,66 @@ function profile_recents() {
 	const can_api = localStorage.getItem('bleh_auth') &&
 		localStorage.getItem('bleh_auth_valid') === 'true';
 
+	const submit_btn = createRef();
+	const settings_btn = createRef();
+	const refresh_btn = createRef();
+
 	panel.insertBefore(
-		html.node`
-        <div class="top-container">
-            <h2>
-                ${tl(trans.recents)}
-            </h2>
-            <div class="view-buttons blend blend-v2">
-                ${
-			can_scrobble
-				? html.node`
-                    <button class="left-icon blend-v2-btn" data-type="add" ref=${(
-					el,
-				) => submit_btn = el} onclick=${() =>
-					submit_scrobble({
-						refresh_btn,
-						can_api,
-						func: () => {
-							setTimeout(() => {
-								refresh_tracks(refresh_btn, { quiet: true });
-							}, 200);
-						},
-					})}>
-                        ${tl(trans.new)}
-                    </button>
-                `
-				: ''
-		}
-                <button class="left-icon blend-v2-btn" data-type="refresh" ref=${(
-			el,
-		) => refresh_btn = el} onclick=${() => refresh_tracks(refresh_btn, {})}>
-                    ${tl(trans.refresh)}
-                </button>
-                ${
-			form
-				? html.node`
-                <button class="left-icon blend-v2-btn" data-type="settings" ref=${(
-					el,
-				) => (settings_btn = el)}>
-                    ${tl(trans.settings)}
-                </button>
-                `
-				: ''
-		}
-            </div>
-        </div>
-    `,
+		<PanelTop>
+			<PanelHead icon={icons.recent}>
+				{tl(trans.recents)}
+			</PanelHead>
+			<ViewButtons>
+				{can_scrobble && (
+					<SeeMore
+						blend
+						iconPlacement='left'
+						icon={icons.plus}
+						ref={submit_btn}
+						onClick={() => {
+							submit_scrobble({
+								can_api,
+								func: () => {
+									setTimeout(() => {
+										refresh_tracks(refresh_btn.current, {
+											quiet: true,
+										});
+									}, 200);
+								},
+							});
+						}}
+					>
+						{tl(trans.scrobble)}
+					</SeeMore>
+				)}
+				<SeeMore
+					blend
+					iconPlacement='left'
+					icon={icons.refresh}
+					ref={refresh_btn}
+					onClick={() => {
+						refresh_tracks(refresh_btn.current, {});
+					}}
+				>
+					{tl(trans.refresh)}
+				</SeeMore>
+				{form && (
+					<SeeMore
+						blend
+						iconPlacement='left'
+						icon={icons.settings}
+						ref={settings_btn}
+					>
+						{tl(trans.settings)}
+					</SeeMore>
+				)}
+			</ViewButtons>
+		</PanelTop>,
 		panel.firstElementChild,
 	);
 
 	if (!can_api) {
-		tippy(submit_btn, {
+		tippy(submit_btn.current, {
 			content: tl(trans.requires_api_in_settings),
 		});
 	}
@@ -1241,7 +1248,7 @@ function profile_recents() {
 		`,
 	);
 
-	tooltip = tippy(settings_btn, {
+	tooltip = tippy(settings_btn.current, {
 		theme: 'window',
 		content: form,
 		allowHTML: true,

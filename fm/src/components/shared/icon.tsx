@@ -205,6 +205,7 @@ export const icons = {
 	heart: 'heart',
 	heart_fill: 'heart-solid',
 	activity: 'activity',
+	recent: 'recent',
 };
 
 interface icon {
