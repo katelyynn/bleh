@@ -205,22 +205,29 @@ export type avatar_dimensions = 'avatar42s' | '64s' | 'avatar70s' | 'avatar170s'
  * @param requested requested sizing
  * @returns
  */
-export function avatar(url: string | null, requested: avatar_dimensions) {
-    if (url == null) return url;
+ export function avatar(url: string | null, requested: avatar_dimensions) {
+	if (url == null) return '';
 
-    let image: string;
+	let image: string;
 
-    if (url.startsWith('https')) {
-        if (!url.startsWith('https://lastfm.freetls.fastly.net/i/u/')) return url;
+	if (url.startsWith('https')) {
+		if (
+			!/^https:\/\/lastfm(?:-img)?\.freetls\.fastly\.net\/i\/u\//.test(
+				url,
+			)
+		) {
+			return url;
+		}
 
-        const built = new URL(url);
+		const built = new URL(url);
 
-        const split = built.pathname.split('/');
-        image = split[split.length - 1];
-    }
+		const split = built.pathname.split('/');
+		image = split[split.length - 1];
+	}
 
-    const final = `https://lastfm.freetls.fastly.net/i/u/${requested}/${image}`;
-    log(`created ${requested} image`, 'avatar', 'info', { final, url });
+	const final =
+		`https://lastfm-img.freetls.fastly.net/i/u/${requested}/${image}`;
+	log(`created ${requested} image`, 'avatar', 'info', { final, url });
 
-    return final;
-}
+	return final;
+ }
