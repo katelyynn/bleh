@@ -379,7 +379,7 @@ export function correct_generic_combo(parent) {
 export function correct_generic_combo_no_artist(parent) {
 	if (!page.structure.container) return;
 
-	let albums = page.structure.container.querySelectorAll(`.${parent}`);
+	const albums = page.structure.container.querySelectorAll(`.${parent}`);
 	if (albums.length == 0) return;
 
 	if (
@@ -391,13 +391,13 @@ export function correct_generic_combo_no_artist(parent) {
 		if (!album.hasAttribute('data-kate-processed')) {
 			album.setAttribute('data-kate-processed', 'true');
 
-			let album_name = album.querySelector(
+			const album_name = album.querySelector(
 				`.${parent.replace('-details', '')}-name a`,
 			);
 			if (!album_name) return;
 
-			let artist_name = return_artist_from_generic(
-				album_name.getAttribute('href'),
+			const artist_name = return_artist_from_generic(
+				album_name.getAttribute('href') || '',
 			);
 
 			if (useSettings.get('format_guest_features')) {

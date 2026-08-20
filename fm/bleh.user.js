@@ -108306,15 +108306,15 @@ var bleh = (() => {
   }
   function correct_generic_combo_no_artist(parent) {
     if (!page.structure.container) return;
-    let albums = page.structure.container.querySelectorAll(`.${parent}`);
+    const albums = page.structure.container.querySelectorAll(`.${parent}`);
     if (albums.length == 0) return;
     if (!useSettings.get("format_guest_features") && !useSettings.get("corrections")) return;
     albums.forEach((album) => {
       if (!album.hasAttribute("data-kate-processed")) {
         album.setAttribute("data-kate-processed", "true");
-        let album_name = album.querySelector(`.${parent.replace("-details", "")}-name a`);
+        const album_name = album.querySelector(`.${parent.replace("-details", "")}-name a`);
         if (!album_name) return;
-        let artist_name = return_artist_from_generic(album_name.getAttribute("href"));
+        const artist_name = return_artist_from_generic(album_name.getAttribute("href") || "");
         if (useSettings.get("format_guest_features")) {
           const formatted = name_includes(album_name.textContent, artist_name);
           album_name.classList.add("smart-title");
@@ -119533,6 +119533,11 @@ var bleh = (() => {
         correct_generic_combo("music-releases-item");
         correct_generic_artist("music-more-artists-item");
       }
+      if (useSettings.get("corrections") || useSettings.get("format_guest_features")) {
+        if (page.type == "artist" && page.subpage == "overview") {
+          correct_generic_combo_no_artist("artist-top-albums-item");
+        }
+      }
       if (useSettings.get("corrections")) {
         correct_generic_combo("resource-list--release-list-item");
         correct_generic_combo("similar-albums-item");
@@ -119653,9 +119658,7 @@ var bleh = (() => {
         nag_bar();
       }
       if (useSettings.get("corrections") || useSettings.get("format_guest_features")) {
-        if (page.type == "artist") {
-          correct_generic_combo_no_artist("artist-top-albums-item");
-        } else if (page.type == "track") {
+        if (page.type == "track" && page.subpage == "overview") {
           correct_generic_combo("source-album-details");
         }
       }
@@ -120420,7 +120423,7 @@ var bleh = (() => {
         date: "2026-07-30"
       }
     },
-    built_on: "2026-08-20T15:01:07.888Z"
+    built_on: "2026-08-20T16:59:30.513Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

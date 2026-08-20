@@ -389,6 +389,15 @@ function main_flow() {
 			correct_generic_artist('music-more-artists-item');
 		}
 
+		if (
+			useSettings.get('corrections') ||
+			useSettings.get('format_guest_features')
+		) {
+			if (page.type == 'artist' && page.subpage == 'overview') {
+				correct_generic_combo_no_artist('artist-top-albums-item');
+			}
+		}
+
 		if (useSettings.get('corrections')) {
 			correct_generic_combo('resource-list--release-list-item');
 			correct_generic_combo('similar-albums-item');
@@ -548,9 +557,7 @@ function load_page(main_content?: HTMLElement) {
 			useSettings.get('corrections') ||
 			useSettings.get('format_guest_features')
 		) {
-			if (page.type == 'artist') {
-				correct_generic_combo_no_artist('artist-top-albums-item');
-			} else if (page.type == 'track') {
+			if (page.type == 'track' && page.subpage == 'overview') {
 				correct_generic_combo('source-album-details');
 			}
 		}
