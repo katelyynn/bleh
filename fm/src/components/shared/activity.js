@@ -22,6 +22,17 @@ import tippy from 'tippy.js';
 import { DateTime } from 'luxon';
 import { useSettings } from '@/page.ts';
 
+export function get_activity_list() {
+	load_activities();
+
+	// we want to show in date order from latest to oldest down
+	// but .reverse() is destructive, so we copy first
+	let recent_activity_list_r = recent_activity_list;
+	recent_activity_list_r.reverse();
+
+	return recent_activity_list_r;
+}
+
 export function render_activity_list() {
 	load_activities();
 

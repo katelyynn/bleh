@@ -4,7 +4,10 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { render_activity_list } from '@/components/shared/activity';
+import {
+	get_activity_list,
+	render_activity_list,
+} from '@/components/shared/activity';
 import { settings } from '@/build/config';
 import { log } from '@/build/log.js';
 import { auth, page, root } from '@/build/page';
@@ -56,6 +59,9 @@ import { beta_indicator } from '@/components/shared/indicator';
 import { present_badge } from '@/components/dialog/badge';
 import { useSettings } from '@/page.ts';
 import { bleh_event_profile } from '@/pages/profile/event.tsx';
+import { PanelHead } from '@/components/text/head.tsx';
+import { icons } from '@/components/shared/icon.tsx';
+import { ActivityItem, ActivityList } from '@/components/activity/activity.tsx';
 
 export function bleh_profiles() {
 	// the obsessions page is a user subpage but works very differently
@@ -438,19 +444,30 @@ export function bleh_profiles() {
 		}
 
 		if (is_own_profile && settings.activities) {
-			const recent_activity_section = html.node`
-                <section class="recent-activity-section">
-                    <h2>${tl(trans.activity)}</h2>
-                    ${render_activity_list()}
-                    <div class="more-link">
-                        <a href="${root}bleh/profile">${
-				tl(trans.activity_settings)
-			}</a>
-                    </div>
-                </section>
-            `;
+			const list = get_activity_list();
 
-			page.structure.side.appendChild(recent_activity_section);
+			page.structure.side!.appendChild(
+				<section class='recent-activity-section'>
+					<PanelHead icon={icons.activity}>
+						{tl(trans.activity)}
+					</PanelHead>
+					<ActivityList>
+						{list.map((activity) => (
+							<ActivityItem
+								type={activity.type}
+								involved={activity.involved}
+								context={activity.context}
+								date={activity.date}
+							/>
+						))}
+					</ActivityList>
+					<div class='more-link'>
+						<a href={`${root}bleh/profile`}>
+							{tl(trans.activity_settings)}
+						</a>
+					</div>
+				</section>,
+			);
 		}
 
 		// acquire info

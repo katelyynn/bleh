@@ -77,6 +77,7 @@ export const icons = {
 	sponsor: 'sponsor',
 	message_sponsor: 'sponsor-rewards',
 	bookmark: 'bookmark',
+	bookmark_fill: 'bookmark-fill',
 	playlist: 'playlist',
 	dev: 'settings',
 	settings: 'settings',
@@ -105,6 +106,7 @@ export const icons = {
 	users: 'users',
 	starred_friend: 'starred-friend',
 	star: 'star',
+	star_fill: 'star-fill',
 	tags: 'tag',
 	tag: 'tag',
 	search: 'search',
@@ -200,6 +202,9 @@ export const icons = {
 	going: 'going',
 	maybe: 'maybe',
 	extension: 'extension',
+	heart: 'heart',
+	heart_fill: 'heart-solid',
+	activity: 'activity',
 };
 
 interface icon {

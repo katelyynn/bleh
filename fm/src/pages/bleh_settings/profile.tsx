@@ -32,10 +32,13 @@ import { useSettings } from '@/page.ts';
 import {
 	checkup_friend_cache,
 	load_profile_cache_externally,
-} from '@/pages/profile/profile.ts';
+} from '@/pages/profile/profile.tsx';
 import { StarredFriend } from '@/components/settings/provider/starred_friend.tsx';
 import { createRef } from 'jsx-dom';
 import { avatar } from '@/components/shared/avatar.tsx';
+import { SettingAction } from '@/components/settings/provider/action.tsx';
+import { keys } from '@/components/settings/storage.ts';
+import { status } from '@/components/dialog/status.js';
 
 export async function profile() {
 	if (!auth.name) {
@@ -129,6 +132,37 @@ export async function profile() {
 					</SettingOptions>
 					<SettingSwitch bind='profile_avi_background' />
 				</SettingGroup>
+			</section>
+			<section class='bleh--panel'>
+				<PanelHead icon={icons.activity}>
+					{tl(trans.activity)}
+				</PanelHead>
+				<SettingGroup>
+					<SettingSwitch bind='activities' />
+					<SettingAction name={tl(trans.clear_history)}>
+						<SeeMore
+							onClick={() => {
+								localStorage.removeItem('bwaa_recent_activity');
+								status({
+									type: 'success',
+									title: tl(trans.cleared_activity_history),
+								});
+							}}
+						>
+							{tl(trans.clear)}
+						</SeeMore>
+					</SettingAction>
+				</SettingGroup>
+				<SettingGroup>
+					<SettingCheckbox bind='activity_shout' />
+					<SettingCheckbox bind='activity_image' />
+					<SettingCheckbox bind='activity_obsess' />
+					<SettingCheckbox bind='activity_love' />
+					<SettingCheckbox bind='activity_bookmark' />
+					<SettingCheckbox bind='activity_wiki' />
+					<SettingCheckbox bind='activity_install' />
+				</SettingGroup>
+				<CardTip>{tl(trans.what_are_activities)}</CardTip>
 			</section>
 		</>,
 	);
