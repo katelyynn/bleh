@@ -105333,8 +105333,8 @@ var bleh = (() => {
           class: "bleh--panel",
           children: [
             /* @__PURE__ */ jsx(PanelHead, {
-              icon: icons.tracks,
-              children: tl2(trans.tracklist)
+              icon: icons.recent,
+              children: tl2(trans.recents)
             }),
             /* @__PURE__ */ jsx("div", {
               class: "inner-preview pad",
@@ -120462,7 +120462,7 @@ var bleh = (() => {
         date: "2026-07-30"
       }
     },
-    built_on: "2026-08-20T19:05:43.300Z"
+    built_on: "2026-08-20T19:16:45.038Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

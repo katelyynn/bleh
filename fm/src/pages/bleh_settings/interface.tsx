@@ -18,7 +18,6 @@ import { icons } from '@/components/shared/icon.tsx';
 import { SettingRadio } from '@/components/settings/provider/radio.tsx';
 import { parse_scrobbles_as_rank } from '@/components/music/colourful_counts.js';
 import { SettingSwitch } from '@/components/settings/provider/switch.tsx';
-import { SettingLabel } from '@/components/settings/provider/main.tsx';
 import { SettingList } from '@/components/settings/provider/list.tsx';
 import {
 	page_loading,
@@ -132,8 +131,8 @@ export function interface_page() {
 	page.structure.main!.replaceChildren(
 		<>
 			<section class='bleh--panel'>
-				<PanelHead icon={icons.tracks}>
-					{tl(trans.tracklist)}
+				<PanelHead icon={icons.recent}>
+					{tl(trans.recents)}
 				</PanelHead>
 				<div class='inner-preview pad' ref={track_preview} />
 				<SettingGroup>
