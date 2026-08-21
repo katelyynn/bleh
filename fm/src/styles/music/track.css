@@ -684,6 +684,24 @@
 	width: 180px;
 	display: flex;
 
+	&.v2 {
+		background: unset;
+		border-radius: unset !important;
+		--bar-height: 4px;
+		--bar-distance: 4px;
+
+		&:before {
+			content: '';
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			display: block;
+			background: oklch(var(--chartlist-bar-bg, var(--b2) / 40%));
+			height: var(--bar-height);
+		}
+	}
+
 	&[data-season="halloween"] {
 		--hue-seasonal: 70;
 		--sat-seasonal: 1;
@@ -705,6 +723,15 @@
 		transition-property: background;
 		transition-duration: var(--trans);
 		transition-timing-function: var(--trans-function);
+
+		&.v2 {
+			background: oklch(var(--l3-c)) !important;
+			position: relative;
+			inset: unset !important;
+			z-index: 3;
+			height: var(--bar-height);
+			order: 1;
+		}
 	}
 
 	.chartlist-count-bar-value {
@@ -713,6 +740,15 @@
 		font-weight: inherit;
 		padding: 0 10px !important;
 		margin: 0 -10px;
+
+		&.v2 {
+			color: oklch(var(--l3-c));
+			padding: 0 !important;
+			margin: 0;
+			font-size: 13px;
+			line-height: 13px;
+			width: 100%;
+		}
 
 		&.bar-contrast {
 			color: oklch(var(--l2-c));
@@ -731,7 +767,7 @@
 		}
 	}
 
-	&:hover {
+	&:not(.v2):hover {
 		--hover-underline: underline oklch(var(--l3-c) / 60%);
 	}
 
@@ -774,6 +810,14 @@
 	font-weight: var(--font-weight-bold);
 	flex: 1;
 	text-align: var(--count-bar-align);
+
+	&.v2 {
+		padding: 0 !important;
+		display: flex;
+		align-items: end;
+		flex-direction: column;
+		gap: var(--bar-distance);
+	}
 }
 
 .chartlist-count-bar-value:after {
@@ -781,6 +825,7 @@
 	display: none;
 }
 
+.chartlist-count-bar:before,
 .chartlist-count-bar,
 .chartlist-count-bar-slug {
 	border-radius: var(--radius-s);

@@ -28,7 +28,7 @@
 
 	&.activity-icon-bookmark,
 	&.activity-icon-love {
-		background: oklch(var(--f4) / 30%);
+		background: oklch(var(--k4) / 30%);
 		color: oklch(var(--l3-c));
 	}
 }

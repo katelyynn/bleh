@@ -129,7 +129,7 @@
 		inset 0 0 0 1px oklch(var(--l2-c) / 10%),
 		inset 0 1px 0 1px oklch(var(--l2-c) / 15%),
 		inset 0 0 transparent,
-		0 2px 0 0 oklch(var(--f4) / 80%),
+		0 2px 0 0 oklch(var(--k4) / 80%),
 		0 3px 12px oklch(var(--h4) / 12%),
 		var(--interact-shadow);
 	color: oklch(var(--b7) / 80%);

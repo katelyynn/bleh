@@ -120,7 +120,7 @@
 		}
 
 		&>img {
-			border-radius: var(--item-med-radius);
+			border-radius: var(--radius-s);
 			transition-property: filter;
 			transition-duration: var(--trans);
 			transition-timing-function: var(--trans-function);

@@ -33,6 +33,7 @@ import { submit_scrobble } from '@/components/music/scrobble';
 import { header_colour } from '../page/colour';
 import { symbol } from '@/main';
 import { useSettings } from '@/page.ts';
+import { count_bar } from '@/components/track/bar.tsx';
 
 export function patch_titles(search = page.structure.main) {
 	if (page.subpage == 'tags_overview') return;
@@ -303,10 +304,11 @@ export function patch_titles(search = page.structure.main) {
 			const has_bar = track.querySelector(':scope > .chartlist-bar');
 
 			if (has_bar) {
-				const count_bar = has_bar.querySelector(
+				const bar = has_bar.querySelector(
 					':scope > .chartlist-count-bar',
 				);
-				count_bar.setAttribute('data-season', season);
+
+				count_bar(bar);
 			}
 
 			// menu

@@ -84,6 +84,8 @@ const CspPolicies: PolicyMap = {
 		'raw.githubusercontent.com',
 
 		'katelyn.moe',
+		'*.discordapp.com',
+		'*.discord.com',
 	],
 	'connect-src': [
 		"'self'",

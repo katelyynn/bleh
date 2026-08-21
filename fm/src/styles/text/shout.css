@@ -362,7 +362,7 @@
 	font-size: var(--font-size) !important;
 	line-height: var(--line-height) !important;
 
-	margin-top: 2px;
+	margin-top: 4px;
 	margin-right: 90px;
 
 	@media (max-width: 980px) {

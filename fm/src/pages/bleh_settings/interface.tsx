@@ -26,6 +26,7 @@ import {
 import { markdown } from '@/components/markdown/markdown.tsx';
 import { SettingAction } from '@/components/settings/provider/action.tsx';
 import { SeeMore } from '@/components/text/see_more.tsx';
+import { count_bar } from '@/components/track/bar.tsx';
 
 export function interface_page() {
 	if (!page.state.music_links) {
@@ -48,6 +49,7 @@ export function interface_page() {
 	useSettings.on('gendered_tags', render_tag_preview);
 
 	useSettings.on('colourful_counts', render_bar_preview);
+	useSettings.on('bar_v2', render_bar_preview);
 
 	useSettings.on('shout_markdown', render_shout_preview);
 
@@ -97,12 +99,13 @@ export function interface_page() {
 
 	function render_bar_preview() {
 		const colourful = useSettings.get('colourful_counts') as boolean;
+		const v2 = useSettings.get('bar_v2') as boolean;
 
 		const max = 20_000;
 		const addition = page.mobile ? 3_000 : 1_000;
 
 		bar_preview.current.replaceChildren(
-			<div class='bars'>
+			<div class={['bars', v2 && 'v2']}>
 				{Array.from(
 					{ length: Math.floor(max / addition) + 1 },
 					(_, i) => {
@@ -149,6 +152,7 @@ export function interface_page() {
 				<SettingGroup>
 					<SettingSwitch bind='colourful_counts' />
 					<SettingSwitch bind='count_bar_right' />
+					<SettingSwitch bind='bar_v2' />
 				</SettingGroup>
 			</section>
 			<section class='bleh--panel'>
@@ -312,6 +316,8 @@ function BarPreview({
 			</a>
 		</div>
 	);
+
+	count_bar(elem);
 
 	if (colourful) {
 		const parsed_scrobble_as_rank = parse_scrobbles_as_rank(value);

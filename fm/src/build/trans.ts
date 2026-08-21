@@ -11540,22 +11540,12 @@ export const trans = {
 		it: 'Altro utente',
 	},
 	count_bar_right: {
-		name: {
-			en: 'Align count to right-side',
-			pt: 'Alinhar contagem à direita',
-			de: 'Zähler auf die rechte Seite ausrichten',
-			es: 'Alinear cuenta al lado derecho',
-			ru: 'Выравнивать счётчик по правому краю',
-			it: 'Allinea il conteggio al lato destro',
-		},
-		body: {
-			en: 'Control the direction of the bar progress and text',
-			pt: 'Controlar a direção do progresso da barra e do texto',
-			de: 'Steuerung der Richtung des Balkenfortschritts und des Textes',
-			es: 'Controla la dirección del texto y progreso de la barra',
-			ru: 'Управлять направлением прогресс-бара и текста',
-			it: 'Controlla la direzione della barra di avanzamento e del testo',
-		},
+		en: 'Align count to right-side',
+		pt: 'Alinhar contagem à direita',
+		de: 'Zähler auf die rechte Seite ausrichten',
+		es: 'Alinear cuenta al lado derecho',
+		ru: 'Выравнивать счётчик по правому краю',
+		it: 'Allinea il conteggio al lato destro',
 	},
 	better_with_friends: {
 		en: 'Music is better with friends, {a}add to your close friends list{/a}',
@@ -11801,6 +11791,9 @@ export const trans = {
 	},
 	miscellaneous: {
 		en: 'Miscellaneous',
+	},
+	bar_v2: {
+		en: 'Use minimal look for count bars',
 	},
 } as const satisfies Record<string, any>;
 

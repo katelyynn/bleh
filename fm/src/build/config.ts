@@ -1078,8 +1078,7 @@ export const settings_store: Record<string, setting_instance> = {
 	},
 	count_bar_right: {
 		default: true,
-		title: trans.count_bar_right.name,
-		body: trans.count_bar_right.body,
+		title: trans.count_bar_right,
 		bubble: true,
 	},
 	date_selector: {
@@ -1118,5 +1117,11 @@ export const settings_store: Record<string, setting_instance> = {
 		default: false,
 		title: trans.show_scroller,
 		bubble: true,
+	},
+	bar_v2: {
+		default: true,
+		type: 'checkbox',
+		title: trans.bar_v2,
+		require_reload: 'partial',
 	},
 };
