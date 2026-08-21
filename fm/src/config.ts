@@ -179,6 +179,14 @@ export function migrations(version: number) {
 		localStorage.removeItem('bleh_profile_shortcut_avi');
 		delete settings.profile_shortcut;
 	}
+
+	const bar_right = useSettings.get('count_bar_right');
+
+	if (bar_right === true) {
+		useSettings.set('count_bar_axis', 'right');
+	} else if (bar_right === false) {
+		useSettings.set('count_bar_axis', 'left');
+	}
 }
 
 // theme

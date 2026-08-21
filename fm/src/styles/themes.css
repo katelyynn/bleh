@@ -127,7 +127,7 @@ body {
 	--count-bar-right: none;
 	--count-bar-left: 0;
 
-	&[data-bleh--count_bar_right="true"] {
+	&[data-bleh--count_bar_axis="right"] {
 		--count-bar-align: right;
 		--count-bar-right: 0;
 		--count-bar-left: none;

@@ -1736,7 +1736,7 @@ function profile_tracks() {
 			    <div class="sep" />
 			    ${setting({ id: 'format_guest_features' })}
 			    ${setting({ id: 'show_guest_features' })}
-			    ${setting({ id: 'count_bar_right' })}
+			    ${setting({ id: 'count_bar_axis' })}
 			    <div class="settings-footer">
 			        <button type="submit" class="btn-primary save" onclick=${() => {
 				tooltip.hide();

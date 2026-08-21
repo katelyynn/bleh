@@ -1076,10 +1076,19 @@ export const settings_store: Record<string, setting_instance> = {
 		title: trans.show_disc_image.name,
 		body: trans.show_disc_image.body,
 	},
-	count_bar_right: {
-		default: true,
+	count_bar_axis: {
+		type: 'radio',
+		default: 'right',
 		title: trans.count_bar_right,
 		bubble: true,
+		values: {
+			left: {
+				name: trans.left_align,
+			},
+			right: {
+				name: trans.right_align,
+			},
+		},
 	},
 	date_selector: {
 		default: 'preset',
@@ -1118,10 +1127,18 @@ export const settings_store: Record<string, setting_instance> = {
 		title: trans.show_scroller,
 		bubble: true,
 	},
-	bar_v2: {
-		default: true,
-		type: 'checkbox',
-		title: trans.bar_v2,
+	count_bar_style: {
+		default: 'minimal',
+		type: 'radio',
+		title: trans.count_bar_style,
 		require_reload: 'partial',
+		values: {
+			classic: {
+				name: trans.classic,
+			},
+			minimal: {
+				name: trans.minimal,
+			},
+		},
 	},
 };

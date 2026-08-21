@@ -49,7 +49,7 @@ export function interface_page() {
 	useSettings.on('gendered_tags', render_tag_preview);
 
 	useSettings.on('colourful_counts', render_bar_preview);
-	useSettings.on('bar_v2', render_bar_preview);
+	useSettings.on('count_bar_style', render_bar_preview);
 
 	useSettings.on('shout_markdown', render_shout_preview);
 
@@ -99,7 +99,7 @@ export function interface_page() {
 
 	function render_bar_preview() {
 		const colourful = useSettings.get('colourful_counts') as boolean;
-		const v2 = useSettings.get('bar_v2') as boolean;
+		const v2 = useSettings.get('count_bar_style') == 'minimal';
 
 		const max = 20_000;
 		const addition = page.mobile ? 3_000 : 1_000;
@@ -151,8 +151,8 @@ export function interface_page() {
 				<div class='inner-preview pad' ref={bar_preview} />
 				<SettingGroup>
 					<SettingSwitch bind='colourful_counts' />
-					<SettingSwitch bind='count_bar_right' />
-					<SettingSwitch bind='bar_v2' />
+					<SettingRadio bind='count_bar_axis' />
+					<SettingRadio bind='count_bar_style' />
 				</SettingGroup>
 			</section>
 			<section class='bleh--panel'>

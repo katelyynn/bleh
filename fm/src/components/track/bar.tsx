@@ -4,7 +4,7 @@ import { ReactElement } from 'jsx-dom';
 
 export function count_bar(bar: HTMLDivElement | ReactElement) {
 	const season = page.state.seasons.current?.id || 'none';
-	const v2 = useSettings.get('bar_v2') as boolean;
+	const v2 = useSettings.get('count_bar_style') == 'minimal';
 
 	const link = bar.querySelector(
 		'.chartlist-count-bar-link',

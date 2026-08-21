@@ -725,7 +725,8 @@
 		transition-timing-function: var(--trans-function);
 
 		&.v2 {
-			background: oklch(var(--l3-c)) !important;
+			background: linear-gradient(90deg, oklch(var(--l2-c)), oklch(var(--l3-c)) 20%) !important;
+			box-shadow: var(--bar-shadow), 0 2px 1px 0 oklch(var(--k4) / 60%), 0 2px 8px oklch(var(--h4) / 40%);
 			position: relative;
 			inset: unset !important;
 			z-index: 3;

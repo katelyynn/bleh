@@ -259,7 +259,7 @@ export function bleh_artists() {
                         <div class="setting-group blend">
                             ${setting({ id: 'format_guest_features' })}
                             ${setting({ id: 'show_guest_features' })}
-                            ${setting({ id: 'count_bar_right' })}
+                            ${setting({ id: 'count_bar_axis' })}
                         </div>
                     </div>
                 `,
