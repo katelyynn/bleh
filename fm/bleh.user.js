@@ -116506,6 +116506,12 @@ var bleh = (() => {
     if (page.requested.subject) subject.value = page.requested.subject;
     const alert2 = form.querySelector(":scope > .alert");
     const disclaimer = form.querySelector(".form-disclaimer > .alert");
+    let user = recipient.value;
+    recipient.addEventListener("input", () => {
+      user = recipient.value;
+      update();
+    });
+    const sponsor_alert = createRef();
     content_form.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
       children: [
         /* @__PURE__ */ jsx(MessageSender, {
@@ -116574,18 +116580,25 @@ var bleh = (() => {
                         })
                       ]
                     }),
+                    /* @__PURE__ */ jsx("div", {
+                      class: "alert alert-warning sponsor-related",
+                      ref: sponsor_alert,
+                      "data-hidden": "true",
+                      children: tl2(trans.sponsor_monthly)
+                    }),
                     disclaimer
                   ]
                 }),
                 /* @__PURE__ */ jsx("div", {
                   class: "settings-footer end gap",
                   children: /* @__PURE__ */ jsx(Button, {
+                    primary: true,
                     type: "submit",
                     children: [
+                      tl2(trans.send),
                       /* @__PURE__ */ jsx(Icon, {
-                        name: icons.message
-                      }),
-                      tl2(trans.send)
+                        name: icons.send
+                      })
                     ]
                   })
                 })
@@ -116595,6 +116608,10 @@ var bleh = (() => {
         })
       ]
     }));
+    function update() {
+      sponsor_alert.current.setAttribute("data-hidden", user != sponsor_list?.related.account_name);
+    }
+    update();
   }
 
   // src/pages/inbox.js
@@ -120520,7 +120537,7 @@ var bleh = (() => {
         date: "2026-07-30"
       }
     },
-    built_on: "2026-08-21T16:43:27.484Z"
+    built_on: "2026-08-21T17:32:09.970Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

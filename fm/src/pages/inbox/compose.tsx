@@ -7,6 +7,7 @@ import { Icon, icons } from '@/components/shared/icon.tsx';
 import { SettingGroup } from '@/components/settings/group.tsx';
 import { SettingInput } from '@/components/settings/provider/input.tsx';
 import { Button } from '@/components/button/button.tsx';
+import { sponsor_list } from '@/build/sponsor.ts';
 
 export function inbox_compose() {
 	const inbox = page.structure.container!.querySelector(
@@ -40,6 +41,14 @@ export function inbox_compose() {
 	const disclaimer = form.querySelector(
 		'.form-disclaimer > .alert',
 	) as HTMLDivElement;
+
+	let user = recipient.value;
+	recipient.addEventListener('input', () => {
+		user = recipient.value;
+		update();
+	});
+
+	const sponsor_alert = createRef();
 
 	content_form.replaceChildren(
 		<>
@@ -76,16 +85,32 @@ export function inbox_compose() {
 								{contents}
 							</div>
 						</div>
+						<div
+							class='alert alert-warning sponsor-related'
+							ref={sponsor_alert}
+							data-hidden='true'
+						>
+							{tl(trans.sponsor_monthly)}
+						</div>
 						{disclaimer}
 					</SettingGroup>
 					<div class='settings-footer end gap'>
-						<Button type='submit'>
-							<Icon name={icons.message} />
+						<Button primary type='submit'>
 							{tl(trans.send)}
+							<Icon name={icons.send} />
 						</Button>
 					</div>
 				</form>
 			</MessageContent>
 		</>,
 	);
+
+	function update() {
+		sponsor_alert.current.setAttribute(
+			'data-hidden',
+			user != sponsor_list?.related.account_name,
+		);
+	}
+
+	update();
 }
