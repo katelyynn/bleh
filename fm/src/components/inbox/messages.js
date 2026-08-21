@@ -57,7 +57,7 @@ export function bleh_message_list(
 		if (subject.endsWith('♡')) {
 			// valentines check
 
-			for (let translation in trans.valentine) {
+			for (const translation in trans.valentine) {
 				if (
 					subject ==
 						trans.valentine[translation].replace('{u}', auth.name)
