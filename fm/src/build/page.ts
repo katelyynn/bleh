@@ -119,9 +119,7 @@ export const page: page = {
 		indicator: null,
 		logs: null,
 	},
-	requested: {
-		tab: null,
-	},
+	requested: {},
 	header: {},
 	state: {
 		settings_reload: false,
@@ -218,9 +216,7 @@ interface page {
 		indicator: HTMLElement | null;
 		logs: HTMLElement | null;
 	};
-	requested: {
-		tab: string | null;
-	};
+	requested: Record<string, string | null>;
 	header: Record<string, ReactNode>;
 	state: {
 		replaced_accent?: boolean;

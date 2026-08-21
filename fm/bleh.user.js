@@ -31556,9 +31556,7 @@ var bleh = (() => {
       indicator: null,
       logs: null
     },
-    requested: {
-      tab: null
-    },
+    requested: {},
     header: {},
     state: {
       settings_reload: false,
@@ -34644,7 +34642,8 @@ var bleh = (() => {
     heart: "heart",
     heart_fill: "heart-solid",
     activity: "activity",
-    recent: "recent"
+    recent: "recent",
+    compose: "compose"
   };
   function icon({ name, identifier, use_mask = true }) {
     return /* @__PURE__ */ jsx("span", {
@@ -116451,6 +116450,153 @@ var bleh = (() => {
     `;
   }
 
+  // src/pages/inbox/message.tsx
+  function MessageSender({ image: image2, name }) {
+    const avi = createRef();
+    const elem = /* @__PURE__ */ jsx("div", {
+      class: [
+        "message-sender",
+        "colourful"
+      ],
+      children: [
+        /* @__PURE__ */ jsx("div", {
+          class: "inbox-message-sender-avatar",
+          children: /* @__PURE__ */ jsx("span", {
+            class: "avatar",
+            ref: avi,
+            children: /* @__PURE__ */ jsx("img", {
+              src: avatar(image2, "avatar170s"),
+              loading: "lazy"
+            })
+          })
+        }),
+        /* @__PURE__ */ jsx("a", {
+          class: "inbox-message-sender-name",
+          href: `${root}user/${name}`,
+          children: name
+        })
+      ]
+    });
+    const your_badge = patch_avatar(avi.current, name);
+    style_name_from_badge(elem, your_badge);
+    return elem;
+  }
+  function MessageContent({ children }) {
+    return /* @__PURE__ */ jsx("div", {
+      class: "message-content",
+      children
+    });
+  }
+
+  // src/pages/inbox/compose.tsx
+  function inbox_compose() {
+    const inbox = page.structure.container.querySelector(".inbox-compose-view");
+    if (!inbox) return;
+    inbox.classList = "inbox-message-view";
+    page.structure.main.appendChild(inbox);
+    const content_form = inbox.querySelector(".content-form");
+    if (!content_form) return;
+    const form = content_form.querySelector("form");
+    if (!form) return;
+    const token = form.querySelector('[name="csrfmiddlewaretoken"]');
+    const recipient = form.querySelector("[name=recipient_name]");
+    const subject = form.querySelector("[name=subject]");
+    const contents = form.querySelector("[name=message]");
+    content_form.classList = "message-compose-section inbox-message";
+    if (page.requested.subject) subject.value = page.requested.subject;
+    const alert2 = form.querySelector(":scope > .alert");
+    const disclaimer = form.querySelector(".form-disclaimer > .alert");
+    content_form.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
+      children: [
+        /* @__PURE__ */ jsx(MessageSender, {
+          image: auth.avatar,
+          name: auth.name
+        }),
+        /* @__PURE__ */ jsx(MessageContent, {
+          children: [
+            /* @__PURE__ */ jsx(PanelHead, {
+              icon: icons.compose,
+              children: tl2(trans.send_message)
+            }),
+            alert2,
+            /* @__PURE__ */ jsx("form", {
+              method: "post",
+              action: form.getAttribute("action"),
+              children: [
+                token,
+                /* @__PURE__ */ jsx(SettingGroup, {
+                  children: [
+                    /* @__PURE__ */ jsx("div", {
+                      class: "setting v",
+                      "data-type": "text",
+                      children: [
+                        /* @__PURE__ */ jsx("div", {
+                          class: "heading",
+                          children: /* @__PURE__ */ jsx("h5", {
+                            children: tl2(trans.username.name)
+                          })
+                        }),
+                        /* @__PURE__ */ jsx("div", {
+                          class: "input-container content-form wide",
+                          children: recipient
+                        })
+                      ]
+                    }),
+                    /* @__PURE__ */ jsx("div", {
+                      class: "setting v",
+                      "data-type": "text",
+                      children: [
+                        /* @__PURE__ */ jsx("div", {
+                          class: "heading",
+                          children: /* @__PURE__ */ jsx("h5", {
+                            children: tl2(trans.subject)
+                          })
+                        }),
+                        /* @__PURE__ */ jsx("div", {
+                          class: "input-container content-form wide",
+                          children: subject
+                        })
+                      ]
+                    }),
+                    /* @__PURE__ */ jsx("div", {
+                      class: "setting v",
+                      "data-type": "text",
+                      children: [
+                        /* @__PURE__ */ jsx("div", {
+                          class: "heading",
+                          children: /* @__PURE__ */ jsx("h5", {
+                            children: tl2(trans.message)
+                          })
+                        }),
+                        /* @__PURE__ */ jsx("div", {
+                          class: "input-container content-form textarea",
+                          children: contents
+                        })
+                      ]
+                    }),
+                    disclaimer
+                  ]
+                }),
+                /* @__PURE__ */ jsx("div", {
+                  class: "settings-footer end gap",
+                  children: /* @__PURE__ */ jsx(Button, {
+                    type: "submit",
+                    children: [
+                      /* @__PURE__ */ jsx(Icon, {
+                        name: icons.message
+                      }),
+                      tl2(trans.send)
+                    ]
+                  })
+                })
+              ]
+            })
+          ]
+        })
+      ]
+    }));
+  }
+
   // src/pages/inbox.js
   async function bleh_inbox() {
     page.structure.container = document.body.querySelector(".page-content");
@@ -116689,81 +116835,7 @@ var bleh = (() => {
         }
       }));
     } else if (page.subpage == "compose") {
-      const inbox = page.structure.container.querySelector(
-        ".inbox-compose-view"
-      );
-      inbox.classList = "inbox-message-view";
-      page.structure.main.appendChild(inbox);
-      const content_form = inbox.querySelector(".content-form");
-      if (!content_form) return;
-      const form = content_form.querySelector("form");
-      const token = form.querySelector('[name="csrfmiddlewaretoken"]');
-      const recipient = form.querySelector("[name=recipient_name]");
-      const subject = form.querySelector("[name=subject]");
-      const contents = form.querySelector("[name=message]");
-      content_form.classList = "message-compose-section inbox-message";
-      let sender_panel_own;
-      if (page.requested.subject) subject.value = page.requested.subject;
-      const alert2 = form.querySelector(":scope > .alert");
-      const disclaimer = form.querySelector(".form-disclaimer > .alert");
-      render(
-        content_form,
-        html`
-				<div class="message-sender colourful" ref=${(el) => sender_panel_own = el}>
-					<div class="inbox-message-sender-avatar">
-						<span class="avatar" ref=${(el) => your_avatar = el}>
-							<img src=${avatar(
-          auth.avatar,
-          "avatar70s"
-        )} alt=${auth.name} loading="lazy" />
-						</span>
-					</div>
-					<a class="inbox-message-sender-name"
-						href="${root}user/${auth.name}">${auth.name}</a>
-				</div>
-				<div class="message-content">
-				    <h2 class="text-18">${tl2(trans.send_message)}</h2>
-				    ${alert2}
-				    <form method="post" action=${form.getAttribute("action")}>
-				        ${token}
-				        <div class="setting-group">
-				            <div class="setting v" data-type="text">
-				                <div class="heading">
-				                    <h5>${tl2(trans.username.name)}</h5>
-				                </div>
-				                <div class="input-container content-form wide">
-				                    ${recipient}
-				                </div>
-				            </div>
-				            <div class="setting v" data-type="text">
-				                <div class="heading">
-				                    <h5>${tl2(trans.subject)}</h5>
-				                </div>
-				                <div class="input-container content-form wide">
-				                    ${subject}
-				                </div>
-				            </div>
-				            <div class="setting v" data-type="text">
-				                <div class="heading">
-				                    <h5>${tl2(trans.message)}</h5>
-				                </div>
-				                <div class="input-container content-form textarea">
-				                    ${contents}
-				                </div>
-				            </div>
-				            ${disclaimer}
-				        </div>
-				        <div class="settings-footer end gap">
-				            <button class="btn primary icon" data-type="message" type="submit">
-				                ${tl2(trans.send)}
-				            </button>
-				        </div>
-				    </form>
-				</div>
-			`
-      );
-      const your_badge = patch_avatar(your_avatar, auth.name);
-      style_name_from_badge(sender_panel_own, your_badge);
+      inbox_compose();
     } else {
       const inbox = page.structure.container.querySelector(".inbox");
       page.structure.main.appendChild(inbox);
@@ -120448,7 +120520,7 @@ var bleh = (() => {
         date: "2026-07-30"
       }
     },
-    built_on: "2026-08-21T16:25:39.836Z"
+    built_on: "2026-08-21T16:43:27.484Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
