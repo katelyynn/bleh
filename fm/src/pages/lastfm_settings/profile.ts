@@ -1247,6 +1247,7 @@ function avatar() {
 			save_avatar()} disabled>${tl(trans.save)}</button>
             </div>
         `,
+		replace_if_possible: true,
 	});
 
 	page.state.avatar_changer.querySelector('[name="avatar-form"]').onsubmit =
