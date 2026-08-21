@@ -693,7 +693,7 @@
 				width: 20px;
 				height: 20px;
 				background-color: var(--avatar-generic-background);
-				border-radius: var(--item-small-radius);
+				border-radius: var(--radius-s);
 
 				html:not([data-bleh--inbuilt-recent_artwork="true"]) .tracks.recent & {
 					display: none;
@@ -739,14 +739,14 @@
 				width: 120px;
 				height: 8px;
 				background-color: oklch(var(--b4) / 60%);
-				border-radius: var(--item-small-radius);
+				border-radius: var(--radius-s);
 				display: flex;
 				align-items: center;
 				justify-content: end;
 
 				.fill {
 					background-color: oklch(var(--h3));
-					border-radius: var(--item-small-radius);
+					border-radius: var(--radius-s);
 					height: 8px;
 				}
 			}
@@ -850,7 +850,7 @@
 			&>.grid-item-preview {
 				width: 110px;
 				height: 110px;
-				border-radius: var(--item-small-radius);
+				border-radius: var(--radius-s);
 				--mask-size: 48px;
 			}
 		}

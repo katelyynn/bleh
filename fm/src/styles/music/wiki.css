@@ -472,7 +472,7 @@
 		justify-content: center;
 		padding: 8px;
 		box-shadow: 0 0 0 1px var(--separator-base) inset;
-		border-radius: var(--item-small-radius);
+		border-radius: var(--radius-s);
 		font-size: 18px;
 		font-weight: var(--font-weight-medium);
 

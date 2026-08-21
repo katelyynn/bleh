@@ -19,6 +19,7 @@ import { root } from '@/build/page';
 import { keys } from '../settings/storage';
 import { reset_update_status } from './update';
 import { ff } from '../settings/sku';
+import { useSettings } from '@/page.ts';
 
 export function append_style() {
 	document.documentElement.classList.add('florence-supports-loading');
@@ -38,7 +39,7 @@ export function append_style() {
 		</style>,
 	);
 
-	if (settings.dev) return;
+	if (useSettings.get('dev')) return;
 
 	const style = <style id='bleh--cached-style'>{css}</style>;
 	document.documentElement.appendChild(style);

@@ -11,16 +11,14 @@
 	margin-top: calc(-1 * var(--card-padding)) !important;
 	margin-bottom: calc((-1 * var(--card-padding-v)) + var(--card-gap));
 
-	background: linear-gradient(180deg, var(--card-gradient), transparent)
-		!important;
+	background: linear-gradient(180deg, var(--card-gradient), transparent) !important;
 
 	@media (min-width: 981px) {
 		border-top-left-radius: var(--card-radius) !important;
 	}
 
 	@media (max-width: 600px) {
-		margin-top: calc(-1 * calc(var(--card-padding) + var(--card-gap)))
-			!important;
+		margin-top: calc(-1 * calc(var(--card-padding) + var(--card-gap))) !important;
 	}
 
 	overflow: hidden;
@@ -54,16 +52,16 @@
 	gap: 30px;
 }
 
-.music-summary > .summary-main {
+.music-summary>.summary-main {
 	@media (max-width: 1250px) {
 		flex-direction: column-reverse;
 		gap: 20px;
 
-		& > .summary-aside {
+		&>.summary-aside {
 			flex-direction: row;
 			width: unset;
 
-			& > .listen-container {
+			&>.listen-container {
 				flex: 1;
 				height: fit-content;
 			}
@@ -155,7 +153,7 @@
 
 	background-color: oklch(var(--h3));
 	color: oklch(var(--b7));
-	border-radius: var(--item-small-radius);
+	border-radius: var(--radius-s);
 	box-shadow: 0 0 0 1px inset oklch(var(--h2) / 10%);
 
 	cursor: default;
@@ -166,6 +164,7 @@
 	}
 
 	@media (min-width: 981px) and (max-width: 1250px) {
+
 		&:first-child,
 		&:nth-child(2),
 		&:nth-child(3) {
@@ -174,6 +173,7 @@
 	}
 
 	@media (min-width: 981px) and (max-width: 1150px) {
+
 		&:nth-child(4),
 		&:nth-child(5),
 		&:nth-child(6) {
@@ -182,6 +182,7 @@
 	}
 
 	@media (min-width: 981px) and (max-width: 1090px) {
+
 		&:nth-child(7),
 		&:nth-child(8),
 		&:nth-child(9) {
@@ -198,8 +199,7 @@
 
 		border-radius: inherit;
 
-		box-shadow: 0 0 0 2px inset oklch(var(--l2-c)), 0 0 0 4px inset
-			oklch(var(--b5) / 40%);
+		box-shadow: 0 0 0 2px inset oklch(var(--l2-c)), 0 0 0 4px inset oklch(var(--b5) / 40%);
 		scale: 1.1;
 		opacity: 0;
 
@@ -222,8 +222,8 @@
 	}
 
 	transition-property: filter,
-		background-color,
-		box-shadow;
+	background-color,
+	box-shadow;
 	transition-duration: 1s;
 	transition-timing-function: var(--trans-function-ani);
 
@@ -288,12 +288,12 @@
 .month-graph {
 	flex: 1;
 
-	& > tbody,
-	& > table {
+	&>tbody,
+	&>table {
 		display: none;
 	}
 
-	& > .scrobble-canvas-container {
+	&>.scrobble-canvas-container {
 		display: flex;
 		gap: var(--card-gap);
 
@@ -305,8 +305,7 @@
 
 .monthly-chart-line,
 .monthly-chart-pie {
-	height: calc((var(--w) * var(--c)) + (var(--g) * (var(--c) - 1)))
-		!important;
+	height: calc((var(--w) * var(--c)) + (var(--g) * (var(--c) - 1))) !important;
 }
 
 .monthly-chart-line {
@@ -321,14 +320,12 @@
 
 .monthly-canvas {
 	width: 100% !important;
-	height: calc((var(--w) * var(--c)) + (var(--g) * (var(--c) - 1)))
-		!important;
+	height: calc((var(--w) * var(--c)) + (var(--g) * (var(--c) - 1))) !important;
 }
 
 .monthly-canvas-pie {
 	width: 100% !important;
-	height: calc((var(--w) * var(--c)) + (var(--g) * (var(--c) - 1)))
-		!important;
+	height: calc((var(--w) * var(--c)) + (var(--g) * (var(--c) - 1))) !important;
 }
 
 .taste-pics {
@@ -336,7 +333,7 @@
 	justify-content: center;
 	align-items: center;
 
-	& > .taste-avatar {
+	&>.taste-avatar {
 		width: 32px;
 
 		&:first-child {
@@ -352,7 +349,7 @@
 .valentine-pics {
 	gap: unset;
 
-	& > .taste-icon {
+	&>.taste-icon {
 		position: static;
 		--icon-colour: currentColor;
 		--icon-size: 18px;
@@ -365,8 +362,7 @@
 
 		z-index: 4;
 
-		filter: drop-shadow(0 0 1px oklch(var(--b5))) drop-shadow(0 0 1px
-			oklch(var(--b5))) drop-shadow(0 0 1px oklch(var(--b5)));
+		filter: drop-shadow(0 0 1px oklch(var(--b5))) drop-shadow(0 0 1px oklch(var(--b5))) drop-shadow(0 0 1px oklch(var(--b5)));
 	}
 }
 
@@ -383,7 +379,7 @@
 		@media (max-width: 980px) {
 			flex-direction: column;
 
-			& > .span {
+			&>.span {
 				flex-direction: column;
 				gap: 4px 10px !important;
 			}
@@ -426,12 +422,12 @@
 			flex: 1;
 			gap: 10px;
 
-			& > img {
+			&>img {
 				display: none;
 			}
 
-			& > .listen-item-info {
-				& > .listen-item-name > .colourful {
+			&>.listen-item-info {
+				&>.listen-item-name>.colourful {
 					color: oklch(var(--l3-c));
 					font-weight: var(--font-weight-medium);
 					text-shadow: 0 0 15px oklch(var(--h4) / 80%);
@@ -461,11 +457,11 @@
 		--col-1: oklch(var(--h4));
 
 		background-image: linear-gradient(90deg,
-			var(--col-0),
-			var(--col-1),
-			var(--col-0),
-			var(--col-1),
-			var(--col-0));
+				var(--col-0),
+				var(--col-1),
+				var(--col-0),
+				var(--col-1),
+				var(--col-0));
 		background-size: 200% 100%;
 		animation: gradient 1s linear infinite;
 	}

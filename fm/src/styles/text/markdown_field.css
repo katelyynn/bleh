@@ -57,11 +57,11 @@
 	position: relative;
 	--padding: var(--button-verts) calc(var(--button-sides) + (var(--button-height) - var(--icon-size)) / 2);
 
-	& > .content-form {
+	&>.content-form {
 		width: 100% !important;
 		margin: unset !important;
 
-		& > textarea {
+		&>textarea {
 			--bg-hov: transparent !important;
 			--bg-atv: transparent !important;
 
@@ -98,12 +98,12 @@
 
 	padding: var(--button-verts) var(--button-sides);
 
-	& > .group {
+	&>.group {
 		display: flex;
 		gap: var(--button-list-gap);
 	}
 
-	& > .group-sep {
+	&>.group-sep {
 		display: block;
 		width: 2px;
 		height: 10px;
@@ -156,7 +156,7 @@
 	&.md-accent {
 		background: oklch(var(--h3) / 20%);
 		color: oklch(var(--l3-c));
-		border-radius: var(--item-small-radius);
+		border-radius: var(--radius-s);
 	}
 }
 

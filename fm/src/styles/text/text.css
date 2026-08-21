@@ -193,15 +193,15 @@ samp {
 	color: oklch(var(--c3));
 	background-color: oklch(var(--b6));
 	padding: 0 4px;
-	font-size: calc(var(--font-size) - 1px);
+	font-size: var(--font-size);
 	line-height: var(--line-height);
 	font-family: var(--font-code);
-	border-radius: var(--item-small-radius);
+	border-radius: var(--radius-xs);
 }
 
 pre {
 	padding: 4px 8px;
-	border-radius: var(--item-med-radius);
+	border-radius: var(--radius-s);
 }
 
 .keybind {

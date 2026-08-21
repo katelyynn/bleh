@@ -450,7 +450,7 @@ export function collage({ host, sidebar } = {}) {
 
 			if (!settings.collage_grid_gap) {
 				grid.style.setProperty('--item-list-gap', '0px');
-				grid.style.setProperty('--item-small-radius', '0');
+				grid.style.setProperty('--radius-s', '0');
 			}
 
 			let total = width.value * height.value - 1;

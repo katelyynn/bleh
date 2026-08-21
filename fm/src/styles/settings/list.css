@@ -28,7 +28,7 @@
 	--button-height: 22px;
 	--button-sides: 6px;
 	--button-verts: 2px;
-	--radius: var(--item-small-radius);
+	--radius: var(--radius-s);
 
 	&>.info {
 		flex: 1;

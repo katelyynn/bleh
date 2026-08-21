@@ -25,7 +25,7 @@
 		.bubble {
 			width: 60px;
 			height: 48px;
-			border-radius: var(--item-small-radius);
+			border-radius: var(--radius-s);
 			position: relative;
 
 			box-shadow: 0 0 0 1px var(--separator-base), var(--interact-shadow);
@@ -38,7 +38,7 @@
 				justify-content: center;
 				align-items: center;
 				overflow: hidden;
-				border-radius: var(--item-small-radius);
+				border-radius: var(--radius-s);
 
 				height: 100%;
 			}
@@ -50,7 +50,7 @@
 				position: absolute;
 				inset: calc(-1 * var(--inset));
 				border: 2px solid var(--glow);
-				border-radius: calc(var(--item-small-radius) + var(--inset));
+				border-radius: calc(var(--radius-s) + var(--inset));
 
 				scale: 0.95;
 				opacity: 0;
@@ -61,7 +61,7 @@
 			}
 		}
 
-		& > strong {
+		&>strong {
 			font-size: 13px;
 			font-weight: var(--font-weight);
 			overflow: hidden;
@@ -69,16 +69,16 @@
 		}
 
 		&[aria-selected="true"] {
-			& > .bubble {
+			&>.bubble {
 				box-shadow: 0 0 0 1px transparent;
 			}
 
-			& > .bubble:after {
+			&>.bubble:after {
 				scale: 1 !important;
 				opacity: 1 !important;
 			}
 
-			& > strong {
+			&>strong {
 				color: oklch(var(--l3-c));
 				--icon-colour: oklch(var(--l3-c) / 80%);
 				font-weight: var(--font-weight-medium);
@@ -86,7 +86,7 @@
 		}
 
 		&:not([aria-selected="true"]) {
-			& > strong {
+			&>strong {
 				color: oklch(var(--c3));
 				--icon-colour: oklch(var(--c3) / 80%);
 			}
@@ -118,7 +118,7 @@
 
 			opacity: 0.7;
 			background-size: cover;
-			border-radius: var(--item-small-radius);
+			border-radius: var(--radius-s);
 
 			--mask: linear-gradient(180deg,
 					white 20%,
@@ -132,7 +132,7 @@
 				inset: 0;
 				display: block;
 				background: linear-gradient(180deg, transparent 0%,
-					oklch(var(--b6)) 100%);
+						oklch(var(--b6)) 100%);
 			}
 		}
 
@@ -170,7 +170,7 @@
 				-webkit-backdrop-filter: var(--solarium);
 
 				border-left: 1px solid var(--sidebar-border);
-				border-bottom-right-radius: var(--item-small-radius);
+				border-bottom-right-radius: var(--radius-s);
 
 				[data-bleh--solarium="false"] & {
 					background: var(--sidebar-bg);
@@ -217,7 +217,7 @@
 	align-items: center;
 	gap: 4px;
 
-	& > .bleh-icon-theme {
+	&>.bleh-icon-theme {
 		--mask-colour: currentColor;
 		height: var(--icon-size);
 		--icon-size: 14px;
@@ -244,6 +244,7 @@
 }
 
 @keyframes theme-bubble-new {
+
 	from,
 	to {
 		background: oklch(var(--h3));
@@ -253,7 +254,7 @@
 
 	40% {
 		background: color-mix(in oklch, oklch(var(--l2-c)) 30%,
-			oklch(var(--h3)));
+				oklch(var(--h3)));
 		scale: 1.08;
 		transform: rotate(6deg);
 	}
@@ -310,7 +311,7 @@
 	&.mini {
 		width: 56px;
 		height: 18px;
-		border-radius: var(--item-small-radius);
+		border-radius: var(--radius-s);
 	}
 }
 
@@ -397,7 +398,7 @@
 .album-cover-example-art {
 	border-radius: inherit;
 
-	& > img {
+	&>img {
 		width: 100%;
 		height: 100%;
 		object-fit: cover;

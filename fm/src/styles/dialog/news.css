@@ -48,7 +48,7 @@
 
 .news-update-body {
 	padding: 15px;
-	border-radius: var(--item-small-radius);
+	border-radius: var(--radius-s);
 	background-color: oklch(var(--k4) / 20%);
 	color: oklch(var(--c2));
 

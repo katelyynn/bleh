@@ -11,7 +11,7 @@
 .event-item {
 	border: 1px solid var(--separator-base);
 	padding: 15px;
-	border-radius: var(--item-small-radius);
+	border-radius: var(--radius-s);
 	width: 100%;
 	overflow: hidden;
 }

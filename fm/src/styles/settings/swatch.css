@@ -26,8 +26,8 @@
 	gap: var(--item-list-gap) !important;
 
 	&.has-hover {
-		& > .swatch-group > .swatch-container:not(:hover) {
-			& > .swatch-inner {
+		&>.swatch-group>.swatch-container:not(:hover) {
+			&>.swatch-inner {
 				opacity: 0 !important;
 				translate: 0 2px !important;
 			}
@@ -68,12 +68,12 @@
 	min-height: 66px;
 
 	&[aria-checked="true"] {
-		& > .swatch-inner {
+		&>.swatch-inner {
 			translate: 0 0 !important;
 			opacity: 1 !important;
 		}
 
-		& > .swatch {
+		&>.swatch {
 			background: oklch(var(--h3));
 			--icon-opacity: 1 !important;
 			--icon-transform: scale(1) !important;
@@ -86,7 +86,7 @@
 	}
 
 	&:hover {
-		& > .swatch-inner {
+		&>.swatch-inner {
 			color: oklch(var(--c3));
 			translate: 0 0 !important;
 			opacity: 1 !important;
@@ -94,7 +94,7 @@
 	}
 
 	&:not([aria-checked="true"], :hover) {
-		& > .swatch-inner {
+		&>.swatch-inner {
 			pointer-events: none;
 		}
 	}
@@ -139,7 +139,7 @@
 	position: relative;
 	--icon-size: 16px;
 	--icon: var(--icon-16-check-thick);
-	border-radius: var(--item-small-radius);
+	border-radius: var(--radius-s);
 
 	width: 22px;
 	height: 24px;
@@ -180,8 +180,8 @@
 	translate: 0 0;
 
 	transition-property: background,
-		box-shadow,
-		translate;
+	box-shadow,
+	translate;
 	transition-duration: var(--trans);
 	transition-timing-function: var(--trans-function);
 
@@ -192,7 +192,7 @@
 		position: absolute;
 		inset: calc(-1 * var(--inset));
 		border: 2px solid var(--glow);
-		border-radius: calc(var(--item-small-radius) + var(--inset));
+		border-radius: calc(var(--radius-s) + var(--inset));
 
 		scale: 0.9;
 		opacity: 0;
@@ -204,7 +204,7 @@
 }
 
 .swatch-container:active {
-	& > .swatch {
+	&>.swatch {
 		translate: 0 1px;
 		background: color-mix(in oklch, oklch(var(--h3)), oklch(var(--h4)) 30%);
 		box-shadow:
@@ -214,7 +214,7 @@
 			0 3px 12px oklch(var(--h4) / 12%),
 			var(--interact-shadow);
 
-		& > .bleh-icon-swatch {
+		&>.bleh-icon-swatch {
 			top: 1px;
 		}
 	}

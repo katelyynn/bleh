@@ -151,8 +151,8 @@ body {
 	--snow: snow;
 	--snow-glow: var(--snow);
 
-	--avatar-inset: 0 0 0 1px inset rgba(255, 255, 255, 0.1);
-	--grid-inset: 0 0 0 1px inset rgba(255, 255, 255, 0.08);
+	--avatar-inset: 0 0 0 1px inset rgba(255, 255, 255, 0.08);
+	--grid-inset: 0 0 0 1px inset rgba(255, 255, 255, 0.07);
 	--item-inset: 0 0 0 1px inset rgba(255, 255, 255, 0.1);
 
 	--tab-size: 46px;
@@ -1440,7 +1440,13 @@ body {
 		--max-tooltip-width: 100vw;
 	}
 
-	--item-small-radius: 7px;
+	--radius-xs: 4px;
+	--radius-s: 7px;
+	--radius-m: 10px;
+	--radius-l: 13px;
+
+	/* legacy */
+	--item-small-radius: 4px;
 	--item-med-radius: 10px;
 	--item-big-radius: 12px;
 
