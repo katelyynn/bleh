@@ -1,5 +1,5 @@
 {
-    version: "2026.0819",
+    version: "2026.0821",
     related: {
         account_name: "kateshapedbox",
         link: "https://katelyn.moe/sponsor",
@@ -344,7 +344,24 @@
         "ahntaea": {},
         "drainpuppy": {},
         "DIVANA4EVER": {},
-        "Nullarium": {},
+        "Nullarium": {
+            badges: [
+                {
+                    icon: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWNpcmNsZS1zbGFzaDItaWNvbiBsdWNpZGUtY2lyY2xlLXNsYXNoLTIiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIi8+PHBhdGggZD0iTTIyIDIgMiAyMiIvPjwvc3ZnPg==",
+                    name: "O!",
+                    hue: 18,
+                    sat: 1.28,
+                    lit: 0.39
+                },
+                {
+                    icon: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWNyb3NzaGFpci1pY29uIGx1Y2lkZS1jcm9zc2hhaXIiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIi8+PGxpbmUgeDE9IjIyIiB4Mj0iMTgiIHkxPSIxMiIgeTI9IjEyIi8+PGxpbmUgeDE9IjYiIHgyPSIyIiB5MT0iMTIiIHkyPSIxMiIvPjxsaW5lIHgxPSIxMiIgeDI9IjEyIiB5MT0iNiIgeTI9IjIiLz48bGluZSB4MT0iMTIiIHgyPSIxMiIgeTE9IjIyIiB5Mj0iMTgiLz48L3N2Zz4=",
+                    name: "Minotaur.",
+                    hue: 18,
+                    sat: 1.28,
+                    lit: 0.39
+                }
+            ]
+        },
         "cnamav": {},
         "babypoltergiest": {},
         "oursinkingship": {},
@@ -396,6 +413,7 @@
                     lit: 0.79
                 }
             ]
-        }
+        },
+        "psych3dout": {}
     }
 }
