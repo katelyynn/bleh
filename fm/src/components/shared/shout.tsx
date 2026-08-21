@@ -36,6 +36,7 @@ import { ff } from '../settings/sku';
 import { keys } from '../settings/storage';
 import { is_sponsor } from '../sponsor';
 import { createRef } from 'jsx-dom';
+import { DateTime } from 'luxon';
 
 export function patch_shouts() {
 	if (!page.structure.main) return;
@@ -128,10 +129,14 @@ export function patch_shouts() {
 				);
 
 				tippy(timestamp, {
-					content: timestamp_text.getAttribute('title'),
+					content: timestamp_text!.getAttribute('title'),
 				});
 
-				timestamp_text.removeAttribute('title');
+				timestamp_text!.removeAttribute('title');
+
+				timestamp_text!.textContent = DateTime.fromISO(
+					timestamp_text!.getAttribute('datetime')!,
+				).toRelative();
 			}
 
 			const action_list = shout.querySelector('.shout-actions');

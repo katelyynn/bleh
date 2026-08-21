@@ -58446,6 +58446,7 @@ var bleh = (() => {
             content: timestamp_text.getAttribute("title")
           });
           timestamp_text.removeAttribute("title");
+          timestamp_text.textContent = DateTime.fromISO(timestamp_text.getAttribute("datetime")).toRelative();
         }
         const action_list = shout.querySelector(".shout-actions");
         const actions = action_list.querySelectorAll(".shout-actions .shout-action");
@@ -120537,7 +120538,7 @@ var bleh = (() => {
         date: "2026-07-30"
       }
     },
-    built_on: "2026-08-21T17:35:21.214Z"
+    built_on: "2026-08-21T17:39:03.751Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
