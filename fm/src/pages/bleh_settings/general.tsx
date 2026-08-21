@@ -29,7 +29,7 @@ import { bool } from '@/build/tools';
 import { keys } from '@/components/settings/storage';
 import { new_indicator } from '@/components/shared/indicator';
 import { discord } from '@/build/page';
-import { icon, icons } from '@/components/shared/icon';
+import { Icon, icon, icons } from '@/components/shared/icon';
 import { news } from '@/components/news';
 import { SubText } from '@/components/text/sub.tsx';
 import { SettingGroup } from '@/components/settings/group.tsx';
@@ -41,6 +41,7 @@ import { PanelHead } from '@/components/text/head.tsx';
 import { SettingRadio } from '@/components/settings/provider/radio.tsx';
 import { createRef } from 'jsx-dom';
 import { SettingSwitch } from '@/components/settings/provider/switch.tsx';
+import { Button } from '@/components/button/button.tsx';
 
 export function general() {
 	if (auth.pro == null) {
@@ -133,7 +134,7 @@ export function general() {
 							</div>
 						)
 						: ''}
-					<SettingInfo name={tl(trans.current_version)}>
+					<SettingInfo name={tl(trans.badge_version)}>
 						<p>{sponsor_list.version}</p>
 						<SeeMore
 							className='sponsor-related'
@@ -154,14 +155,21 @@ export function general() {
 								name={tl(trans.you_are_a_sponsor)}
 								body={tl(trans.sponsor_get_badge)}
 							>
-								<button
-									type='button'
-									class='btn primary icon sponsor colourful'
-									data-type='sponsor'
+								<Button
+									primary
+									colourful
+									className='sponsor-related'
 									onClick={sponsor_manage}
 								>
-									{tl(trans.manage_sponsor)}
-								</button>
+									<Icon name={icons.heart_fill} />
+									{tl(trans.manage)}
+								</Button>
+								<Button
+									href={`${root}settings`}
+								>
+									<Icon name={icons.edit} />
+									{tl(trans.edit_profile)}
+								</Button>
 							</SettingAction>
 						)
 						: (

@@ -3992,24 +3992,10 @@ export const trans = {
 		pl: 'Jesteś sponsorem, dzięki wielkie! :3',
 	},
 	sponsor_get_badge: {
-		en: 'A monthly sponsorship grants you a custom badge of your choosing',
-		de: 'Mit einem monatlichen Sponsoring erhältst du ein individuelles Abzeichen deiner Wahl',
-		es: 'Un patrocinio mensual te otorga un emblema personalizado de tu elección',
-		it: 'Una sponsorizzazione mensile ti permette di ottenere un distintivo personalizzato a tua scelta',
-		pt: 'Um apoio mensal lhe dá um emblema personalizado de sua escolha',
-		sv: 'Med ett månatligt sponsorskap får du ett emblem du själv kan anpassa',
-		ru: 'Ежемесячное спонсорство предоставляет вам на выбор персонализированный значок',
-		pl: 'Miesięczne wsparcie daje ci własną odznakę do wyboru',
+		en: 'A sponsorship gives you awesome profile perks visible to all bleh users',
 	},
-	sponsor_no_badge: {
-		en: 'A custom badge is only available with a monthly sponsorship.',
-		de: 'Ein individuelles Abzeichen ist nur mit einem monatlichen Sponsoring erhältlich.',
-		es: 'Un emblema personalizado solo está disponible con un patrocinio mensual.',
-		it: 'Un distintivo personalizzato è disponibile solo con una sponsorizzazione mensile.',
-		pt: 'Um emblema personalizado só está disponível com um apoio mensal.',
-		sv: 'Ett eget anpassat emblem finns bara tillgängligt med månatligt sponsorskap.',
-		ru: 'Персонализированный значок доступен только при ежемесячном спонсорстве.',
-		pl: 'Własna odznaka wymaga mieśięcznego wsparcia.',
+	sponsor_monthly: {
+		en: 'If you sponsored monthly, you can request an extra profile badge (or two if over $6) by messaging. Other profile perks can be used by simply editing your profile.',
 	},
 	manage_sponsor: {
 		en: 'Manage sponsorship',
@@ -4053,6 +4039,9 @@ export const trans = {
 		sv: 'Nuvarande version',
 		ru: 'Текущая версия',
 		pl: 'Aktualna wersja',
+	},
+	badge_version: {
+		en: 'Sponsor list version',
 	},
 	updating_to_version: {
 		en: 'Updating to version',

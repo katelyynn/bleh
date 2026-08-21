@@ -15,6 +15,7 @@ interface SeeMoreProps {
 	external?: boolean;
 	onClick?: () => void;
 	iconPlacement?: 'left' | 'right';
+	colourful?: boolean;
 	blend?: boolean;
 	className?: string;
 	children: ReactNode;
@@ -27,6 +28,7 @@ export function SeeMore({
 	external = false,
 	onClick,
 	iconPlacement = 'right',
+	colourful,
 	blend,
 	className,
 	children,
@@ -35,6 +37,7 @@ export function SeeMore({
 		!blend && 'see-more',
 		iconPlacement == 'left' && 'left-icon',
 		blend && 'blend-v2-btn',
+		colourful && 'colourful',
 		className && className,
 	];
 
