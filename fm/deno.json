@@ -3,6 +3,7 @@
 	"imports": {
 		"@/": "./src/",
 		"@deno/esbuild-plugin": "jsr:@deno/esbuild-plugin@^1.2.1",
+		"@floating-ui/dom": "npm:@floating-ui/dom@^1.8.0",
 		"@std/fmt": "jsr:@std/fmt@^1.0.10",
 		"@std/fs": "jsr:@std/fs@^1.0.24",
 		"@std/http": "jsr:@std/http@^1.1.3",

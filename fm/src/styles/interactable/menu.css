@@ -37,6 +37,7 @@
 	--right: none;
 
 	--icon-size: 14px;
+	--icon-width: 14px;
 	--mask-size: var(--icon-size) !important;
 
 	display: flex;

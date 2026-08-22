@@ -232,12 +232,14 @@ type IconProps = {
 	name?: string;
 	identifier?: string;
 	mask?: boolean;
+	className?: string;
 } & Omit<JSX.IntrinsicElements['span'], 'class' | 'style'>;
 
 export function Icon({
 	name = 'inherit',
 	identifier,
 	mask = true,
+	className,
 	...props
 }: IconProps) {
 	return (
@@ -247,12 +249,37 @@ export function Icon({
 				name && `bleh-icon-${name}`,
 				mask && 'use-mask',
 				identifier && `bleh-icon-${identifier}`,
+				className && className,
 			]}
 			style={icon_mask({ name })}
 			{...props}
 		>
 			{name} (icon)
 		</span>
+	);
+}
+
+export function SaveIcon({
+	identifier,
+}: Partial<IconProps>) {
+	return (
+		<Icon
+			name={icons.check_thick}
+			identifier={identifier}
+			className='bleh-icon-save'
+		/>
+	);
+}
+
+export function CancelIcon({
+	identifier,
+}: Partial<IconProps>) {
+	return (
+		<Icon
+			name={icons.x}
+			identifier={identifier}
+			className='bleh-icon-cancel'
+		/>
 	);
 }
 

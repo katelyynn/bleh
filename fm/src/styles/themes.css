@@ -394,7 +394,7 @@ body,
 	--b3: 0.38 calc(var(--sat) * 0.04 * var(--sat-bg, 1)) var(--hue);
 
 	/* card border */
-	--b4: 0.33 calc(var(--sat) * 0.03 * var(--sat-bg, 1)) var(--hue);
+	--b4: 0.35 calc(var(--sat) * 0.03 * var(--sat-bg, 1)) var(--hue);
 
 	/* card */
 	--b5: 0.3 calc(var(--sat) * 0.03 * var(--sat-bg, 1)) var(--hue);
@@ -502,7 +502,7 @@ body,
 		--b3: 0.31 calc(var(--sat) * 0.04 * var(--sat-bg, 1)) var(--hue);
 
 		/* card border */
-		--b4: 0.28 calc(var(--sat) * 0.03 * var(--sat-bg, 1)) var(--hue);
+		--b4: 0.26 calc(var(--sat) * 0.03 * var(--sat-bg, 1)) var(--hue);
 
 		/* card */
 		--b5: 0.21 calc(var(--sat) * 0.03 * var(--sat-bg, 1)) var(--hue);
@@ -567,7 +567,7 @@ body,
 		--sidebar-bg: color-mix(in oklch, oklch(var(--b4)) 22%, oklch(var(--b5)));
 		--sidebar-border: color-mix(in oklch, oklch(var(--b5)), oklch(var(--b2)) 38%);
 		--toolbar-bg: oklch(var(--b4) / 20%);
-		--toolbar-border: oklch(var(--b2) / 45%);
+		--toolbar-border: oklch(var(--b2) / 24%);
 		--subtle-border: 1px solid oklch(var(--b2) / 35%);
 
 		--normal-shadow: none;
@@ -575,7 +575,7 @@ body,
 		--card-blur-bg: oklch(0.12 calc(var(--sat) * 0.05 * var(--sat-bg, 1)) var(--hue) / var(--solarium-opacity, 10%));
 		--card-blur-bg-alt: oklch(var(--b5) / var(--solarium-opacity, 20%));
 
-		--setting-hover: oklch(var(--b2) / 20%);
+		--setting-hover: oklch(var(--b2) / 16%);
 		--setting-active: oklch(var(--b2) / 30%);
 
 		--setting-group: oklch(var(--b4) / 18%);

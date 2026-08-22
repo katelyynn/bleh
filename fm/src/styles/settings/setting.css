@@ -955,7 +955,7 @@
 	align-items: center;
 
 	--icon: var(--icon-16-check-thick);
-	--icon-size: 12px;
+	--icon-size: 10px;
 
 	--col: oklch(var(--b7)) !important;
 	--mask-colour: var(--col);
