@@ -669,7 +669,7 @@ body,
 		--nav-filter-shadow: drop-shadow(0 0 2px oklch(var(--b5)));
 		--header-filter-shadow: drop-shadow(0 3px 7px oklch(var(--b5)));
 
-		--banner-overlay: oklch(var(--b5) / 30%);
+		--banner-overlay: oklch(var(--b5) / 40%);
 		--banner-mix: lighten;
 
 		--setting-group: oklch(var(--b6) / 5%);
@@ -707,8 +707,8 @@ body,
 	&[data-bleh--theme="ink"] {
 		--b2: 0.7 calc(var(--sat) * 0.12 * var(--sat-bg, 1)) var(--hue);
 		--b3: 0.94 calc(var(--sat) * 0.12 * var(--sat-bg, 1)) var(--hue);
-		--b4: 0.82 calc(var(--sat) * 0.1 * var(--sat-bg, 1)) var(--hue);
-		--b5: 0.91 calc(var(--sat) * 0.09 * var(--sat-bg, 1)) var(--hue);
+		--b4: 0.85 calc(var(--sat) * 0.1 * var(--sat-bg, 1)) var(--hue);
+		--b5: 0.92 calc(var(--sat) * 0.09 * var(--sat-bg, 1)) var(--hue);
 		--b6: 0.86 calc(var(--sat) * 0.1 * var(--sat-bg, 1)) var(--hue);
 		--b8: 0.86 calc(var(--sat) * 0.1 * var(--sat-bg, 1)) var(--hue);
 		--b7: 0.17 calc(var(--sat) * 0.26 * var(--sat-bg, 1)) var(--hue);
@@ -746,7 +746,7 @@ body,
 		--card-blur-bg: oklch(0.91 calc(var(--sat) * 0.11 * var(--sat-bg, 1)) var(--hue) / var(--solarium-opacity, 72%));
 		--card-blur-bg-alt: oklch(var(--b5) / var(--solarium-opacity, 22%));
 
-		--banner-overlay: oklch(var(--b5) / 20%);
+		--banner-overlay: oklch(var(--b5) / 30%);
 		--banner-mix: lighten;
 
 		--setting-group: oklch(var(--b6) / 8%);
@@ -757,7 +757,7 @@ body,
 		--textarea-hov: oklch(var(--b6) / 60%);
 
 		--background-overlay: oklch(var(--b5) / 50%);
-		--background-mix-mode: lighten;
+		--background-mix-mode: plus-lighter;
 
 		--card-overlay-filter: invert(0.4);
 		--card-overlay-opacity: 0.2;
@@ -793,7 +793,7 @@ body,
 		--setting-group: oklch(var(--b4) / 20%);
 	}
 	&[data-bleh--theme="rose_pine_dawn"] {
-		--b2: 0.7431 0.006 334; /* highlight high */
+		--b2: 0.8031 0.006 334; /* highlight high */
 		--b3: 0.942 0.0057 31.06; /* highlight med */
 		--b4: 0.8989 0.0145 64.34; /* overlay */
 		--b5: 0.989 0.0107 76.6; /* surface */
@@ -802,7 +802,7 @@ body,
 
 		--separator-base: oklch(var(--b2) / 0.2);
 
-		--card-border-base: oklch(var(--b2) / 0.28);
+		--card-border-base: oklch(var(--b2) / 0.49);
 		--card-border-base-highlight: oklch(var(--b2) / 0.42);
 
 		--menu-border: oklch(var(--b2) / 0.48);
@@ -820,14 +820,14 @@ body,
 
 		--separator-shadow: 0 1px 2px 0 oklch(0.7502 0.0101 58.21 / 0.06);
 
-		--sidebar-bg: color-mix(in oklch, oklch(var(--b6)) 90%, oklch(var(--b5)));
+		--sidebar-bg: color-mix(in oklch, oklch(var(--b6)) 92%, oklch(var(--b5)));
 		--sidebar-border: color-mix(
             in oklch,
             oklch(var(--b5)),
-            oklch(var(--b4)) 30%
+            oklch(var(--b4)) 44%
         );
 		--toolbar-bg: oklch(var(--b5) / 50%);
-		--toolbar-border: oklch(var(--b4) / 53%);
+		--toolbar-border: oklch(var(--b4) / 59%);
 		--subtle-border: 1px solid oklch(var(--b4) / 65%);
 
 		--card-blur-bg: oklch(var(--b5) / var(--solarium-opacity, 70%));
@@ -1041,7 +1041,7 @@ u,
 
 	--white: 100% 0 0;
 
-	--badge-shadow: 0 3px 15px 1px oklch(var(--h4) / 10%), 0 -4px 10px 0 oklch(var(--h4) / 40%) inset;
+	--badge-shadow: 0 3px 15px 1px oklch(var(--h4) / 40%), 0 -4px 10px 0 oklch(var(--h4) / 40%) inset;
 	--glass-inset: 0 0 5px 2px oklch(var(--h3) / 60%) inset;
 
 	--side-action-bg: oklch(var(--k4) / 5%);
@@ -1076,8 +1076,8 @@ u,
 	&[data-bleh--theme="light"],
 	body[data-bleh--theme="light"] &:not(.theme-preview, .grid-items-cover-image.colourful, .grid-item-text, .colour-preview) {
 		--c1: 0 calc(var(--sat) * 0.06) var(--hue);
-		--c2: 0.1 calc(var(--sat) * 0.04) var(--hue);
-		--c3: 0.46 calc(var(--sat) * 0.02) var(--hue);
+		--c2: 0.28 calc(var(--sat) * 0.04) var(--hue);
+		--c3: 0.55 calc(var(--sat) * 0.02) var(--hue);
 		--ov-c1: var(--hue), calc(var(--sat) * 40%), 100%;
 
 		--l2: calc(var(--lit) * 0.63) calc(var(--sat) * 0.4) var(--hue);
@@ -1097,9 +1097,9 @@ u,
 		--h3-lit: calc(clamp(min(0.85), var(--lit), max(1.1)) * 0.78);
 
 		--h4: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.63) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue);
-		--f4: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.85) calc(clamp(min(0), var(--sat), max(2)) * 0.42) var(--hue);
+		--f4: calc(clamp(min(1), var(--lit), max(1.2)) * 0.96) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue);
 		--f5: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.63) calc(clamp(min(0), var(--sat), max(2)) * 0.72) var(--hue);
-		--k4: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.55) calc(clamp(min(0), var(--sat), max(2)) * 0.82) var(--hue);
+		--k4: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.85) calc(clamp(min(0), var(--sat), max(2)) * 0.38) var(--hue);
 		--g4: 0.92 calc(clamp(min(0), var(--sat), max(2)) * 0.7) var(--hue);
 
 		--h3-s: var(--hue), 50%, 70%;
@@ -1111,9 +1111,9 @@ u,
 		--l3-c-theme-switch: var(--l3-c);
 		--h3-theme-switch: var(--h4);
 
-		--badge: oklch(var(--f4) / 40%);
-		--badge-hov: oklch(var(--f4) / 60%);
-		--badge-shadow: 0 3px 15px 1px oklch(var(--h4) / 10%), 0 -4px 10px 0 oklch(calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.95) calc(clamp(min(0), var(--sat), max(2)) * 0.58) var(--hue) / 60%) inset;
+		--badge: oklch(var(--f4) / 60%);
+		--badge-hov: oklch(var(--f4) / 80%);
+		--badge-shadow: 0 3px 15px 1px oklch(var(--h4) / 20%), 0 2px 6px 0 oklch(calc(clamp(min(1), var(--lit), max(1.2)) * 0.98) calc(clamp(min(0), var(--sat), max(2)) * 0.25) var(--hue) / 60%) inset;
 
 		--grid-colour-shadow: var(
             --grid-colour-shadow-override,
@@ -1197,9 +1197,9 @@ u,
 		--h3-lit: calc(clamp(min(0.85), var(--lit), max(1.1)) * 0.76);
 
 		--h4: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.63) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue);
-		--f4: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.8) calc(clamp(min(0), var(--sat), max(2)) * 0.58) var(--hue);
+		--f4: calc(clamp(min(1), var(--lit), max(1.1)) * 0.9) calc(clamp(min(0), var(--sat), max(2)) * 0.5) var(--hue);
 		--f5: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.6) calc(clamp(min(0), var(--sat), max(2)) * 0.68) var(--hue);
-		--k4: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.45) calc(clamp(min(0), var(--sat), max(2)) * 0.56) var(--hue);
+		--k4: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.7) calc(clamp(min(0), var(--sat), max(2)) * 0.46) var(--hue);
 		--g4: 0.92 calc(clamp(min(0), var(--sat), max(2)) * 0.7) var(--hue);
 
 		--h3-s: var(--hue), 50%, 70%;
@@ -1213,7 +1213,7 @@ u,
 
 		--badge: oklch(var(--f4) / 40%);
 		--badge-hov: oklch(var(--f4) / 60%);
-		--badge-shadow: 0 3px 15px 1px oklch(var(--h4) / 10%), 0 -4px 10px 0 oklch(calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.9) calc(clamp(min(0), var(--sat), max(2)) * 0.58) var(--hue) / 40%) inset;
+		--badge-shadow: 0 3px 15px 1px oklch(var(--h4) / 20%), 0 4px 10px 0 oklch(calc(clamp(min(1), var(--lit), max(1.1)) * 0.93) calc(clamp(min(0), var(--sat), max(2)) * 0.58) var(--hue) / 40%) inset;
 
 		--grid-colour-shadow: var(
             --grid-colour-shadow-override,
@@ -1303,9 +1303,9 @@ u,
 		--h3-lit: calc(clamp(min(0.85), var(--lit), max(1.1)) * 0.76);
 
 		--h4: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.63) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue);
-		--f4: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.88) calc(clamp(min(0), var(--sat), max(2)) * 0.35) var(--hue);
+		--f4: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.86) calc(clamp(min(0), var(--sat), max(2)) * 0.35) var(--hue);
 		--f5: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.6) calc(clamp(min(0), var(--sat), max(2)) * 0.68) var(--hue);
-		--k4: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.74) calc(clamp(min(0), var(--sat), max(2)) * 0.45) var(--hue);
+		--k4: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.79) calc(clamp(min(0), var(--sat), max(2)) * 0.26) var(--hue);
 		--g4: 0.92 calc(clamp(min(0), var(--sat), max(2)) * 0.7) var(--hue);
 
 		--h3-s: var(--hue), 50%, 70%;
@@ -1319,7 +1319,7 @@ u,
 
 		--badge: oklch(var(--f4) / 40%);
 		--badge-hov: oklch(var(--f4) / 60%);
-		--badge-shadow: 0 3px 15px 1px oklch(var(--h4) / 10%), 0 -4px 10px 0 oklch(calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.9) calc(clamp(min(0), var(--sat), max(2)) * 0.58) var(--hue) / 40%) inset;
+		--badge-shadow: 0 3px 15px 1px oklch(var(--h4) / 20%), 0 4px 10px 0 oklch(calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.93) calc(clamp(min(0), var(--sat), max(2)) * 0.58) var(--hue) / 40%) inset;
 
 		--grid-colour-shadow: var(
             --grid-colour-shadow-override,
@@ -1567,7 +1567,7 @@ body {
 		--menu-shadow: 0 3px 15px 9px oklch(0 0 0 / 0.07);
 
 		--blur-saturate: 130%;
-		--blur-brightness: 1.04;
+		--blur-brightness: 1.1;
 		--blur-contrast: 1;
 
 		--solarium-compensate: brightness(110%);
@@ -1583,7 +1583,7 @@ body {
 
 	&[data-bleh--theme="rose_pine_dawn"] {
 		--blur-saturate: 130%;
-		--blur-brightness: 1;
+		--blur-brightness: 0.98;
 		--menu-shadow: 0 4px 40px oklch(0 0 0 / 0.2);
 
 		--solarium-compensate: unset;

@@ -4,16 +4,11 @@
 }
 
 .featured-item-panel {
-	background: radial-gradient(at left center, oklch(var(--k4) / 10%),
-		transparent 90%) !important;
+	background: unset !important;
 	border: unset !important;
-	padding: calc(var(--card-gap) + 20px) var(--card-padding) !important;
 	box-shadow: unset !important;
-	margin: -20px 0 !important;
-
-	--mask: linear-gradient(180deg, transparent, white 20%, white 80%, transparent);
-	mask-image: var(--mask);
-	-webkit-mask-image: var(--mask);
+	margin-top: unset;
+	margin-bottom: var(--card-padding);
 
 	order: -9;
 
@@ -46,11 +41,9 @@
 
 			&:hover {
 				color: oklch(var(--l3-c)) !important;
-				--mask-colour: color-mix(
-                    in oklch,
-                    oklch(var(--l3-c)),
-                    oklch(var(--l4-c)) 30%
-                ) !important;
+				--mask-colour: color-mix(in oklch,
+						oklch(var(--l3-c)),
+						oklch(var(--l4-c)) 30%) !important;
 
 				--hue-over: var(--hue-neg);
 				--sat-over: 1;
