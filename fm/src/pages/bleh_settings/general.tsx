@@ -29,7 +29,13 @@ import { bool } from '@/build/tools';
 import { keys } from '@/components/settings/storage';
 import { new_indicator } from '@/components/shared/indicator';
 import { discord } from '@/build/page';
-import { Icon, icon, icons, PlusIcon } from '@/components/shared/icon';
+import {
+	Icon,
+	icon,
+	icons,
+	PlusIcon,
+	SaveIcon,
+} from '@/components/shared/icon';
 import { news } from '@/components/news';
 import { SubText } from '@/components/text/sub.tsx';
 import { SettingGroup } from '@/components/settings/group.tsx';
@@ -199,18 +205,32 @@ export function general() {
 						name={tl(trans.api.name)}
 						body={tl(trans.api.body)}
 					>
-						<Button
-							href={`${root}api/auth?api_key=${api_key}&cb=${root}bleh/api`}
-							primary={!!auth_key && bool(auth_valid)}
-						>
-							<PlusIcon />
-							{tl(trans.connect)}
-						</Button>
+						{auth_key == null || !bool(auth_valid)
+							? (
+								<Button
+									href={`${root}api/auth?api_key=${api_key}&cb=${root}bleh/api`}
+									primary
+								>
+									<PlusIcon />
+									{tl(trans.connect)}
+								</Button>
+							)
+							: (
+								<Button
+									href={`${root}api/auth?api_key=${api_key}&cb=${root}bleh/api`}
+									primary
+								>
+									<SaveIcon />
+									{tl(trans.connected)}
+								</Button>
+							)}
 					</SettingAction>
 					<SettingInfo name={tl(trans.api_status)}>
-						{(auth_key && bool(auth_valid))
-							? <p>{tl(trans.connected)}</p>
-							: <p>{tl(trans.not_connected)}</p>}
+						<SeeMore
+							href={`${root}settings/applications`}
+						>
+							{tl(trans.manage)}
+						</SeeMore>
 					</SettingInfo>
 				</SettingGroup>
 			</section>

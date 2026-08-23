@@ -518,7 +518,7 @@
 .toggle-wrap {
 	display: flex;
 	align-items: center;
-	gap: 4px;
+	gap: 6px;
 	min-height: 22px;
 	max-height: var(--button-height);
 	flex-shrink: 0;
