@@ -136,7 +136,7 @@ export function SettingKeybind({
 								interact={interact}
 								onChange={(val: string) => {
 									const next = [...value];
-									next[index] = val;
+									next[index] = val.toUpperCase();
 
 									previousValue = next;
 									set(next);

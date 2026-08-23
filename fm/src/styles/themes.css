@@ -664,7 +664,7 @@ body,
 		--toolbar-border: oklch(var(--b4) / 65%);
 		--subtle-border: 1px solid oklch(var(--b4) / 65%);
 
-		--card-blur-bg: oklch(0.98 calc(var(--sat) * 0.03 * var(--sat-bg, 1)) var(--hue) / var(--solarium-opacity, 70%));
+		--card-blur-bg: oklch(0.99 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue) / var(--solarium-opacity, 70%));
 		--card-blur-bg-alt: oklch(var(--b5) / var(--solarium-opacity, 22%));
 
 		--menu-item-hov: oklch(var(--b4) / 60%);
@@ -1107,7 +1107,7 @@ u,
 		--h4: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.63) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue);
 		--f4: calc(clamp(min(1), var(--lit), max(1.2)) * 0.96) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue);
 		--f5: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.63) calc(clamp(min(0), var(--sat), max(2)) * 0.72) var(--hue);
-		--k4: calc(clamp(min(0.7), var(--lit), max(1.1)) * 0.85) calc(clamp(min(0), var(--sat), max(2)) * 0.38) var(--hue);
+		--k4: calc(clamp(min(0.7), var(--lit), max(1)) * 0.88) calc(clamp(min(0), var(--sat), max(2)) * 0.15) var(--hue);
 		--g4: 0.92 calc(clamp(min(0), var(--sat), max(2)) * 0.7) var(--hue);
 
 		--h3-s: var(--hue), 50%, 70%;
@@ -1180,6 +1180,8 @@ u,
 
 		--primary-shadow: 0 0 transparent;
 		--bar-shadow: 0 0 transparent;
+
+		--side-action-bg: oklch(var(--k4) / 15%);
 	}
 	&[data-bleh--theme="ink"],
 	body[data-bleh--theme="ink"] &:not(.theme-preview, .grid-items-cover-image.colourful, .grid-item-text, .colour-preview) {

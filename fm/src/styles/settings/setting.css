@@ -1034,7 +1034,7 @@
 	}
 
 	&[data-modified="false"] {
-		display: none;
+		display: none !important;
 	}
 }
 
