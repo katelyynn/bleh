@@ -30,6 +30,7 @@ export interface EventItemProps {
 	interested_count?: string;
 	avatars?: ReactNode[];
 	href: string;
+	cancelled?: boolean;
 }
 
 export function EventItem({
@@ -45,9 +46,10 @@ export function EventItem({
 	interested_count,
 	avatars,
 	href,
+	cancelled,
 }: EventItemProps) {
 	return (
-		<div class={['event-item']}>
+		<div class={['event-item', cancelled && 'event-item-cancelled']}>
 			<div class={['event-item-top']}>
 				<div class='event-item-date'>
 					<Icon name={icons.events} identifier='event-item' />
@@ -60,6 +62,14 @@ export function EventItem({
 					<p class='event-item-date-text'>
 						{DateTime.fromISO(date).toRelative({ style: 'short' })}
 					</p>
+					{cancelled && (
+						<>
+							<div class='event-item-dot' />
+							<p class='event-item-date-text'>
+								{tl(trans.cancelled)}
+							</p>
+						</>
+					)}
 				</div>
 				{(attendance_count != null || avatars) && (
 					<div class={['event-item-aside']}>

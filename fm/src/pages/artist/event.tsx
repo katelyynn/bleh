@@ -61,6 +61,10 @@ export function bleh_event_artist() {
 
 			const link = item.querySelector('.link-block-cover-link');
 
+			const cancelled = item.classList.contains(
+				'events-list-item--cancelled',
+			);
+
 			events.push({
 				date: calendar?.getAttribute('datetime') || '',
 				title: title?.textContent.trim() || '',
@@ -75,6 +79,7 @@ export function bleh_event_artist() {
 				interested_count: count?.[1]?.textContent.trim(),
 				avatars: Array.from(avatars),
 				href: link?.getAttribute('href'),
+				cancelled,
 			});
 		});
 
@@ -94,6 +99,7 @@ export function bleh_event_artist() {
 						interested_count={event.interested_count}
 						avatars={event.avatars}
 						href={event.href}
+						cancelled={event.cancelled}
 					/>
 				))}
 			</EventList>,

@@ -5255,6 +5255,9 @@ export const trans = {
 		pl: 'Otwórz link',
 		ru: 'Открыть ссылку',
 	},
+	cancelled: {
+		en: 'Cancelled',
+	},
 	event_cancelled: {
 		// obviously remove the emoji or replace it as
 		// you see fit if desired
