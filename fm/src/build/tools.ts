@@ -16,6 +16,7 @@ import { status } from '@/components/dialog/status.js';
 import { root } from '@/build/page';
 import { hsl, oklch } from 'culori';
 import JSON5 from 'json5';
+import { useSettings } from '@/page.ts';
 
 export function hex_to_hsl(hex: string) {
 	return hsl(hex);
@@ -454,12 +455,15 @@ export function is_link_external(url) {
 
 export function romanise(text) {
 	// japanese
-	if (/[\u30A0-\u30FF\u3040-\u309F]/.test(text) && settings.romanise_jp) {
+	if (
+		/[\u30A0-\u30FF\u3040-\u309F]/.test(text) &&
+		useSettings.get('romanise_jp')
+	) {
 		return title_case(wanakana.toRomaji(text));
 	}
 
 	// korean
-	if (/[\uAC00-\uD7AF]/.test(text) && settings.romanise_ko) {
+	if (/[\uAC00-\uD7AF]/.test(text) && useSettings.get('romanise_ko')) {
 		return title_case(hangulRomanization.convert(text));
 	}
 
@@ -529,6 +533,13 @@ export function year_from_date(string) {
 }
 
 export async function translate(text, lang = 'en') {
+	if (lang == 'fae') {
+		return {
+			translated: 'hazelfae',
+			detected: 'hazelfae',
+		};
+	}
+
 	const url =
 		`https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=${lang}&dt=t&q=${
 			encodeURIComponent(text)
@@ -551,9 +562,10 @@ export async function translate(text, lang = 'en') {
 	};
 }
 
-export function get_language_name(code) {
+export function get_language_name(code: string) {
 	if (code == 'pt') return 'português brasileiro';
 	if (code == 'zh') return '简体中文';
+	if (code == 'fae') return 'hazelfae';
 
 	try {
 		const display = new Intl.DisplayNames([code], {

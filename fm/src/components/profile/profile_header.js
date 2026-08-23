@@ -25,6 +25,7 @@ import { queue_popup } from '@/components/dialog/popup';
 import { avatar } from '../shared/avatar';
 import { taste_artist } from './taste';
 import { beta_indicator, new_indicator } from '../shared/indicator';
+import { useSettings } from '@/page.ts';
 
 export function redesign_profile_header(is_own_profile, is_following) {
 	if (!auth.name) return;
@@ -572,7 +573,7 @@ export function create_profile_top_item(
 
 function friends_button(parent) {
 	let friend_state = settings.friends.includes(page.name);
-	let star_state = settings.starred_friend == page.name;
+	let star_state = useSettings.get('starred_friend') == page.name;
 
 	if (!friend_state && star_state) {
 		star_state = false;
@@ -606,7 +607,7 @@ function friends_button(parent) {
 					);
 
 					save_setting('friends', new_list);
-					if (page.name == settings.starred_friend) {
+					if (page.name == useSettings.get('starred_friend')) {
 						save_setting('starred_friend', '');
 					}
 

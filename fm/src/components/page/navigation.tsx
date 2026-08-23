@@ -7,13 +7,13 @@
 import { settings } from '@/build/config';
 import { auth, discord, page, root } from '@/build/page';
 import { stored_season } from '@/build/seasonal';
-import { lang, lang_info, tl, trans } from '@/build/trans';
+import { lang, lang_info, lastfm_languages, tl, trans } from '@/build/trans';
 import { create_badge, load_badges } from '@/components/shared/badge';
 import { version } from '@/main';
 import { ff } from '@/components/settings/sku';
 import { html, render } from 'lighterhtml';
 import { news } from '@/components/news';
-import { toggle_theme } from '@/config';
+import { useSettings } from '@/page.ts';
 import { save_setting, setting } from '@/components/settings/settings';
 import { prompt_for_update } from '@/components/page/style';
 import { log } from '@/build/log.js';
@@ -25,7 +25,7 @@ import {
 	smart_title,
 } from '@/components/music/lotus';
 import { bleh_notification_list } from '@/components/inbox/notifications';
-import tippy from 'tippy.js';
+import tippy, { Instance } from 'tippy.js';
 import {
 	load_profile_cache_externally,
 	open_starred_friend_window,
@@ -39,37 +39,40 @@ import { DateTime } from 'luxon';
 import { input } from '@/components/settings/input';
 import { bleh_message_list } from '@/components/inbox/messages';
 import { queue_popup } from '@/components/dialog/popup';
-import { icon, icons } from '../shared/icon';
+import { Icon, icon, icons } from '../shared/icon';
 import { avatar } from '../shared/avatar';
-import { convert_lang_to_country, flag } from '../shared/flag';
+import { convert_lang_to_country, Flag, flag } from '../shared/flag';
 import { keys } from '../settings/storage';
 import { notify } from '../dialog/notify';
 import { new_indicator } from '../shared/indicator';
+import { createRef, ReactElement, RefObject } from 'jsx-dom';
+import { toggle_theme } from '@/config.ts';
+import { dark_themes, getThemes, light_themes, theme } from '@/build/theme.ts';
+import {
+	Button,
+	ButtonCombo,
+	ButtonComboSeparator,
+} from '@/components/button/button.tsx';
 
 export function update_branding_type(state = settings.branding_type) {
 	if (state == 'bleh') {
-		render(
-			page.state.home_link,
-			html`
-				<div class="home-logo bleh-logo" data-refresh=${ff(
-					'logo',
-				)}>${version.brand}</div>
-			`,
+		page.state.home_link.replaceChildren(
+			<div class={['home-logo', 'bleh-logo']}>
+				{version.brand}
+			</div>,
 		);
 	} else if (state == 'lastfm') {
-		render(
-			page.state.home_link,
-			html`
-				<div class="home-logo lastfm-logo">Last.fm</div>
-			`,
+		page.state.home_link.replaceChildren(
+			<div class={['home-logo', 'lastfm-logo']}>
+				{'Last.fm'}
+			</div>,
 		);
 	}
 }
 
 export function append_nav() {
 	if (settings.developer && !page.structure.indicator) {
-		const page_indicator = document.createElement('div');
-		page_indicator.classList.add('page-indicator');
+		const page_indicator = <div class='page-indicator' />;
 		document.documentElement.appendChild(page_indicator);
 
 		page.structure.indicator = page_indicator;
@@ -88,19 +91,48 @@ export function append_nav() {
 	}
 
 	if (!page.structure.style_warning) {
-		const style_warning = html.node`
-            <div class="style-warning" style="position: fixed; top: 0; left: 0; right: 0; padding: 20px; background: #fff; z-index: 1000000000; display: flex; justify-content: center; align-items: center; gap: 30px">
-                <strong>${tl(trans.style_warning)}</strong>
-                <button class="btn-primary" onclick=${() => {
-			save_setting('branch', 'uwu');
-			save_setting('dev', false);
-			window.location.reload();
-		}}>${tl(trans.re_enable_style_loading)}</button>
-                <button class="btn-primary" onclick=${() => {
-			open(`https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js`);
-		}}>${tl(trans.check_for_updates)}</button>
-            </div>
-        `;
+		const style_warning = (
+			<div
+				class='style-warning'
+				style={{
+					position: 'fixed',
+					top: 0,
+					left: 0,
+					right: 0,
+					padding: '20px',
+					background: '#fff',
+					zIndex: 100000000,
+					display: 'flex',
+					justifyContent: 'center',
+					alignItems: 'center',
+					gap: '30px',
+				}}
+			>
+				<strong>{tl(trans.style_warning)}</strong>
+				<button
+					type='button'
+					class='btn-primary'
+					onClick={() => {
+						useSettings.set('branch', 'uwu');
+						useSettings.set('dev', false);
+						window.location.reload();
+					}}
+				>
+					{tl(trans.re_enable_style_loading)}
+				</button>
+				<button
+					type='button'
+					class='btn-primary'
+					onClick={() => {
+						open(
+							`https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js`,
+						);
+					}}
+				>
+					{tl(trans.check_for_updates)}
+				</button>
+			</div>
+		);
 		document.body.appendChild(style_warning);
 		page.structure.style_warning = style_warning;
 	}
@@ -129,6 +161,11 @@ export function append_nav() {
 			name: tl(trans.shouts),
 			icon: icons.shoutbox,
 			url: `${root}user/${auth.name}/shoutbox`,
+		},
+		events: {
+			name: tl(trans.events),
+			icon: icons.events,
+			url: `${root}user/${auth.name}/events`,
 		},
 		obsessions: {
 			name: tl(trans.obsessions),
@@ -178,64 +215,83 @@ export function append_nav() {
 
 	const masthead_logo = inner.querySelector('.masthead-logo');
 
-	let home_link;
-	let home_link_container;
+	const home_link = createRef();
+	const home_link_logo = createRef();
 
-	render(
-		masthead_logo,
-		html`
-			<a class="hidden-link" style="display: none !important" href="/">Last.fm</a>
-			<a class="btn navigation-item home-link" href="${root}music"
-				ref=${(el) => home_link = el}>
-				<span class="home-logo-container" ref=${(el) =>
-					home_link_container = el} />
+	const search_wrap = createRef();
+
+	masthead_logo.replaceChildren(
+		<>
+			<a class='hidden-link'>
+				Last.fm
 			</a>
-			<nav class="navlist navlist--more masthead-nav masthead-nav-top">
-				<ul class="navlist-items">
-					<a class="btn masthead-nav-control icon" data-type="charts"
-						href="${root}charts">
-			            ${tl(trans.charts)}
-			            ${ff('aihara') ? new_indicator() : ''}
-			        </a>
-					<a class="btn masthead-nav-control icon" data-type="minis"
-						href="${root}bleh/minis">
-			            ${tl(trans.minis)}
-			        </a>
-					<span class="navlist-search" ref=${(el) =>
-						page.state.search = el} />
+			<a
+				class={['btn', 'navigation-item', 'home-link']}
+				href={`${root}music`}
+				ref={home_link}
+			>
+				<span class='home-logo-container' ref={home_link_logo} />
+			</a>
+			<nav
+				class={[
+					'navlist',
+					'navlist--more',
+					'masthead-nav',
+					'masthead-nav-top',
+				]}
+			>
+				<ul class='navlist-items'>
+					<a
+						class={['btn', 'masthead-nav-control', 'icon']}
+						data-type='charts'
+						href={`${root}charts`}
+					>
+						{tl(trans.charts)}
+						{ff('aihara') && new_indicator()}
+					</a>
+					<a
+						class={['btn', 'masthead-nav-control', 'icon']}
+						data-type='minis'
+						href={`${root}bleh/minis`}
+					>
+						{tl(trans.minis)}
+					</a>
+					<span class='navlist-search' ref={search_wrap} />
 				</ul>
 			</nav>
-		`,
+		</>,
 	);
 
-	page.state.home_link = home_link_container;
+	page.state.home_link = home_link_logo.current;
 
 	update_branding_type();
 
+	const handle_update = (e: Event) => {
+		e.preventDefault();
+		prompt_for_update();
+	};
+
 	if (update_required) {
-		home_link.onclick = (e) => {
-			e.preventDefault();
-			prompt_for_update();
-		};
+		home_link.current.addEventListener('onclick', handle_update);
 
-		home_link.appendChild(html.node`
-            <span class="home-version">
-                <div class="update-container">
-                    <div class="bleh-icon" style="--icon: var(--icon-16-update)" />
-                </div>
-            </span>
-        `);
+		home_link.current.appendChild(
+			<span class='home-version'>
+				<div class='update-container'>
+					<Icon name={icons.update} />
+				</div>
+			</span>,
+		);
 
-		tippy(home_link, {
+		tippy(home_link.current, {
 			content: tl(trans.update_available_to_install),
 		});
 	} else {
-		home_link.onclick = null;
+		home_link.current.removeEventListener('onclick', handle_update);
 	}
 
 	const last_checked = localStorage.getItem(keys.update_checked_date) || null;
 
-	const link_menu = tippy(home_link, {
+	const link_menu = tippy(home_link.current, {
 		theme: 'context-menu',
 		content: html.node`
             ${
@@ -269,7 +325,7 @@ export function append_nav() {
 		},
 	});
 
-	register_menu(home_link, link_menu);
+	register_menu(home_link.current, link_menu);
 
 	const navs = inner.querySelector('.masthead-nav-wrap');
 
@@ -281,13 +337,10 @@ export function append_nav() {
 	submit.classList.add('btn', 'chibi', 'icon-mask');
 	submit.setAttribute('data-type', 'search');
 
-	render(
-		page.state.search,
-		html`
-			<span class="navlist-search-container">
-			    ${search}
-			</span>
-		`,
+	search_wrap.current.replaceChildren(
+		<span class='navlist-search-container'>
+			{search}
+		</span>,
 	);
 
 	// 2025-04-14
@@ -842,138 +895,16 @@ export function append_nav() {
 
 	queue_popup('search', search);
 
-	// language
-	const language_options = document.querySelectorAll('.footer-language-form');
-
-	const language_menu = html.node`
-        <div class="language-menu">
-            <button class="dropdown-menu-clickable-item v2" aria-selected="true">
-                <div class="auth-dropdown-item-row">
-                    <span class="auth-dropdown-item-left">
-                        ${
-		flag(
-			(convert_lang_to_country[lang] || lang).toUpperCase(),
-			'small-flag',
-		)
-	}
-                        ${get_language_name(lang)}
-                    </span>
-                    ${
-		lang in lang_info
-			? html.node`
-                            <span class="auth-dropdown-item-right">
-                                <div class="bleh-icon checkmark" />
-                            </span>
-                        `
-			: ''
-	}
-                </div>
-            </button>
-            <div class="sep"></div>
-        </div>
-    `;
-
-	language_options.forEach((language_option) => {
-		const button = language_option.querySelector('button');
-
-		if (!button) {
-			log(
-				'random last.fm error where this button is non existent',
-				'language',
-				'error',
-				{
-					language_options,
-					language_option,
-					raw: language_option.innerHTML,
-					raw_options: language_options,
-				},
-			);
-			return;
-		}
-
-		const key = button.getAttribute('name');
-
-		button.classList.remove('mimic-link');
-		button.classList.add(
-			'dropdown-menu-clickable-item',
-			'v2',
-			'flex-button',
-		);
-
-		render(
-			button,
-			html`
-				<div class="auth-dropdown-item-row">
-				    <span class="auth-dropdown-item-left">
-				        ${flag(
-					(convert_lang_to_country[key] || key).toUpperCase(),
-					'small-flag',
-				)}
-				        ${get_language_name(key)}
-				    </span>
-				    ${key in lang_info
-					? html.node`
-                            <span class="auth-dropdown-item-right">
-                                <div class="bleh-icon checkmark" />
-                            </span>
-                        `
-					: ''}
-				</div>
-			`,
-		);
-
-		language_menu.appendChild(language_option);
-	});
-
-	const themes = [
-		{
-			id: 'adaptive',
-			name: tl(trans.auto),
-			hide: !ff('adaptive_theme'),
-			new_release: true,
-		},
-		{
-			id: 'glass',
-			type: 'light',
-			name: tl(trans.glass),
-			hide: !ff('glass'),
-			new_release: true,
-		},
-		{
-			id: 'light',
-			type: 'light',
-			name: tl(trans.themes.light),
-		},
-		{
-			id: 'ink',
-			type: 'light',
-			name: tl(trans.themes.ink),
-		},
-		{
-			id: 'dark',
-			formal: 'ash',
-			type: 'dark',
-			name: tl(trans.themes.dark),
-		},
-		{
-			id: 'darker',
-			formal: 'dark',
-			type: 'darker',
-			name: tl(trans.themes.darker),
-		},
-		{
-			id: 'oled',
-			formal: 'void',
-			type: 'oled',
-			name: tl(trans.themes.oled),
-		},
-	];
-
 	// auth menu
 	const token = new_auth
 		.querySelector('[name="csrfmiddlewaretoken"]')
 		.getAttribute('value');
 	page.token = token;
+
+	const auth_header = createRef();
+	const auth_bg = createRef();
+	const side = createRef();
+	const next_side = createRef();
 
 	let auth_menu = tippy(auth_link, {
 		theme: 'auth-menu-v2',
@@ -1001,9 +932,8 @@ export function append_nav() {
 				localStorage.getItem('bleh_update_required') || 'false';
 
 			let page_2;
-			let side;
 
-			const current = settings.navigation_items;
+			const current = useSettings.get('navigation_items');
 
 			let length = current.length;
 			if (length < 2) length = 2;
@@ -1020,604 +950,190 @@ export function append_nav() {
 				page.subpage.startsWith('listening-report') ||
 				page.state.settings_page == 'visual';
 
-			let auth_header;
-			let auth_bg;
-
-			instance.setContent(html.node`
-                ${
-				update_required == 'true'
-					? html.node`
-                <div class="update-available-banner" onclick=${() => {
-						prompt_for_update();
-					}}>
-                    <div class="update-container">
-                        ${icon({ name: icons.update })}
-                    </div>
-                    <span>${tl(trans.update_available_to_install)}</span>
-                </div>
-                `
-					: ''
-			}
-                <div class="auth-menu-v2" style="--page-height: ${height}px">
-                    <div class="side primary" onclick=${() => {
-				instance.hide();
-			}}>
-                        <div class="auth-bg-container" ref=${(el) =>
-				auth_bg = el}>
-                            ${
-				!auth.avatar.endsWith('818148bf682d429dc215c1705eb27b98.png')
-					? html.node`
-                            <div class="bg" style="background-image: url(${
-						avatar(auth.avatar, 'avatar170s')
-					})" />
-                            `
-					: ''
-			}
-                        </div>
-                        <div class="auth-menu-header" ref=${(el) =>
-				auth_header = el}>
-                            <div class="avatar">
-                                <img src=${
-				avatar(auth.avatar, 'avatar170s')
-			} alt=${auth.name} />
-                            </div>
-                            <div class="name"><span class="at">@</span>${auth.name}</div>
-                            ${
-				badges
-					? html.node`
-                                <div class="badges">
-                                    ${create_badge(badges, false, true)}
-                                </div>
-                            `
-					: auth.pro
-					? html.node`
-                                <div class="badges">
-                                    ${() => {
-						const elem = html.node`
-                                            <span class="label user-status-subscriber no-hover expand small">
-                                                ${
-							tl(trans.badges['user-status-subscriber'].name)
-						}
-                                            </span>
-                                        `;
-
-						tippy(elem, {
-							theme: 'badge',
-							placement: 'bottom',
-							content: html.node`
-                                                <div class="badge-name colourful user-status-subscriber">${
-								tl(trans.badges['user-status-subscriber'].name)
-							}</div>
-                                                <div class="badge-reason">${
-								tl(
-									trans.badges['user-status-subscriber']
-										.reason,
-								)
-							}</div>
-                                            `,
-						});
-
-						return elem;
-					}}
-                                </div>
-                            `
-					: ''
-			}
-                            <a class="link-block-cover-link" href="${root}user/${auth.name}" onclick=${() => {
-				instance.hide();
-			}} />
-                        </div>
-                        <div class="floating button-group">
-                            ${() => {
-				let button = html.node`
-                                    <a class="dropdown-menu-clickable-item chibi" data-type="edit_mini" href="${root}settings" onclick=${() => {
-					instance.hide();
-				}}>
-                                        ${tl(trans.edit_profile)}
-                                    </a>
-                                `;
-
-				tippy(button, {
-					content: button.textContent,
-				});
-
-				return button;
-			}}
-                            ${
-				settings.starred_friend != ''
-					? () => {
-						let button = html.node`
-                                    <a class="dropdown-menu-clickable-item chibi colourful" data-type="starred_friend" data-starred="true" href="${root}user/${settings.starred_friend}" onclick=${() => {
-							instance.hide();
-						}}>${settings.starred_friend}</a>
-                                `;
-
-						tippy(button, {
-							content: settings.starred_friend,
-						});
-
-						return button;
-					}
-					: () => {
-						let button = html.node`
-                                    <button class="dropdown-menu-clickable-item chibi" data-type="starred_friend" data-is-shortcut="false" onclick=${() =>
-							open_starred_friend_window()}>${
-							tl(trans.starred_friend.name)
-						}</button>
-                                `;
-
-						tippy(button, {
-							content: tl(
-								trans.starred_friend.name,
-							),
-						});
-
-						return button;
-					}
-			}
-                        </div>
-                    </div>
-                    <div class="side" ref=${(el) => (side = el)} data-page="1">
-                        <div class="side-page" data-page="1">
-                            ${
-				current.map((val) => {
-					let elem;
-
-					const formal = page.state.quick_access_items[val];
-
-					if (formal.url) {
-						elem = html.node`<a href=${formal.url} onclick=${() => {
-							instance.hide();
-						}} />`;
-					} else {
-						elem = html.node`<button onclick=${() => {
-							formal.action();
-							instance.hide();
-						}} />`;
-					}
-
-					elem.classList = 'dropdown-menu-clickable-item';
-					elem.setAttribute('data-type', formal.icon);
-					elem.textContent = formal.name;
-
-					let count = 0;
-
-					if (val == 'notifications') count = notif_count;
-					else if (val == 'messages') count = messages_count;
-
-					if (count) {
-						render(
-							elem,
-							html`
-								<div class="auth-dropdown-item-row">
-									<span class="auth-dropdown-item-left">
-								        ${formal.name}
-								    </span>
-									<span class="auth-dropdown-item-right">
-								        ${count}
-								    </span>
+			instance.setContent(
+				<>
+					{bool(update_required) && (
+						<div
+							class='update-available-banner'
+							onClick={prompt_for_update}
+						>
+							<div class='update-container'>
+								<Icon name={icons.update} />
+							</div>
+							<span>{tl(trans.update_available_to_install)}</span>
+						</div>
+					)}
+					<div
+						class='auth-menu-v2'
+						style={{ '--page-height': `${height}px` }}
+					>
+						<div
+							class={['side', 'primary']}
+							onClick={() => {
+								instance.hide();
+							}}
+						>
+							<div class='auth-bg-container' ref={auth_bg}>
+								{!auth.avatar.endsWith(
+									'818148bf682d429dc215c1705eb27b98.png',
+								) && (
+									<div
+										class='bg'
+										style={{
+											backgroundImage: `url(${
+												avatar(
+													auth.avatar,
+													'avatar170s',
+												)
+											})`,
+										}}
+									/>
+								)}
+							</div>
+							<div class='auth-menu-header'>
+								<div class='avatar'>
+									<img
+										src={avatar(auth.avatar, 'avatar170s')}
+										alt={auth.name!}
+									/>
 								</div>
-							`,
-						);
-					}
-
-					if (val == 'friends') {
-						elem = html.node`
-                                        <div class="button-combo">
-                                            <a class="dropdown-menu-clickable-item" data-type=${formal.icon} href=${formal.url} onclick=${() => {
-							instance.hide();
-						}}>
-                                                ${formal.name}
-                                            </a>
-                                            <div class="button-combo-sep" />
-                                            <button class="dropdown-menu-clickable-item chibi" data-type="continue" onclick=${() => {
-							const cache = JSON.parse(
-								localStorage.getItem(keys.profile_cache) ||
-									'{}',
-							);
-							const friends = settings.friends.filter((
-								friend: string,
-							) => friend != settings.starred_friend);
-
-							render(page_2, html``); // fix crash
-							render(
-								page_2,
-								html`
-									<button class="dropdown-menu-clickable-item" data-type="back" onclick=${() => {
-										side.setAttribute('data-page', '1');
-									}}>
-									    ${tl(trans.back)}
-									</button>
-									${settings.starred_friend
-										? () => {
-											const friend = settings
-												.starred_friend as string;
-											const valid = is_sponsor(friend);
-
-											return html.node`
-                                                            <a class="dropdown-menu-clickable-item" data-type="profile" href="${root}user/${friend}">
-                                                                ${
-												cache[friend]?.username && valid
-													? html.node`
-                                                                    <span class="username-combo">
-                                                                        <span class="username-custom">${
-														cache[friend].username
-													}</span>
-                                                                        <span class="username-original">
-                                                                            <span class="at">@</span>${friend}
-                                                                        </span>
-                                                                    </span>
-                                                                `
-													: html.node`
-                                                                    <span><span class="at">@</span>${friend}</span>
-                                                                `
-											}
-                                                                <span class="star-icon colourful">
-                                                                    <span class="bleh-icon" />
-                                                                </span>
-                                                            </a>
-                                                        `;
-										}
-										: ''}
-									${friends.map((friend: string) => {
-										const valid = is_sponsor(friend);
-
-										return html.node`
-                                                            <a class="dropdown-menu-clickable-item" data-type="profile" href="${root}user/${friend}">
-                                                                ${
-											cache[friend]?.username && valid
-												? html.node`
-                                                                    <span class="username-combo">
-                                                                        <span class="username-custom">${
-													cache[friend].username
-												}</span>
-                                                                        <span class="username-original">
-                                                                            <span class="at">@</span>${friend}
-                                                                        </span>
-                                                                    </span>
-                                                                `
-												: html.node`
-                                                                    <span><span class="at">@</span>${friend}</span>
-                                                                `
-										}
-                                                            </a>
-                                                        `;
-									})}
-									<div class="sep" />
-									<button class="dropdown-menu-clickable-item" data-type="edit" onclick=${() => {
-										open_starred_friend_window();
-										instance.hide();
-									}}>
-									    ${tl(trans.edit_close_friends)}
-									</button>
-								`,
-							);
-							side.setAttribute('data-page', '2');
-						}}>
-                                                ${tl(trans.more)}
-                                            </button>
-                                        </div>
-                                    `;
-					}
-
-					const simple_menu = tippy(elem, {
-						theme: 'context-menu',
-						content: html.node`
-                                        <a class="dropdown-menu-clickable-item" data-type="quick_access" href="${root}bleh/profile?setting=navigation_items">
-                                            ${tl(trans.edit_quick_access)}
-                                        </a>
-                                    `,
-						placement: 'right-start',
-						trigger: 'manual',
-						interactive: true,
-						interactiveBorder: 10,
-						offset: [0, 0],
-						appendTo: document.body,
-
-						onShow(instance) {
-							instance.popper.addEventListener(
-								'click',
-								(event) => {
-									instance.hide();
-								},
-							);
-						},
-					});
-
-					register_menu(elem, simple_menu);
-
-					return elem;
-				})
-			}
-                            <div class="button-combo">
-                                <button class="dropdown-menu-clickable-item" data-menu-item="themes" disabled=${themes_disabled} onclick=${() =>
-				toggle_theme()}>
-                                    ${tl(trans.themes.name)}
-                                </button>
-                                <div class="button-combo-sep" />
-                                <button class="dropdown-menu-clickable-item chibi" data-type="continue" disabled=${themes_disabled} onclick=${() => {
-				let buttons = [];
-
-				render(page_2, html``); // fix crash
-				render(
-					page_2,
-					html`
-						<button class="dropdown-menu-clickable-item" data-type="back" onclick=${() => {
-							side.setAttribute('data-page', '1');
-						}}>
-						    ${tl(trans.back)}
-						</button>
-						${themes.map((theme) => {
-							if (theme.hide) {
-								return html.node``;
-							}
-
-							if (!theme.formal) {
-								theme.formal = theme.id;
-							}
-
-							const btn = html.node`
-                                                <button class="dropdown-menu-clickable-item theme-item-in-menu" aria-selected=${
-								!settings.theme_schedule
-									? settings.theme == theme.id
-									: theme.id == 'adaptive'
-							} data-bleh-theme=${theme.id} data-type="theme_${theme.formal}" onclick="${() => {
-								if (theme.id != 'adaptive') {
-									save_setting('theme_schedule', false);
-									save_setting('theme', theme.id);
-								} else {
-									save_setting('theme_schedule', true);
-									match();
-								}
-
-								buttons.forEach(
-									(button) => {
-										const type = button.getAttribute(
-											'data-bleh-theme',
-										);
-
-										if (
-											!settings.theme_schedule
-										) {
-											button.setAttribute(
-												'aria-selected',
-												settings.theme ==
-													type,
-											);
-										} else if (
-											type ==
-												'adaptive'
-										) {
-											button.setAttribute(
-												'aria-selected',
-												true,
-											);
-										} else {
-											button.setAttribute(
-												'aria-selected',
+								<div class='name' ref={auth_header}>
+									<span class='at'>@</span>
+									{auth.name!}
+								</div>
+								{badges
+									? (
+										<div class='badges'>
+											{create_badge(
+												badges,
 												false,
-											);
-										}
-									},
-								);
-							}}">
-                                                    ${theme.name}
-                                                </button>
-                                            `;
-
-							buttons.push(btn);
-							return btn;
-						})}
-					`,
-				);
-				side.setAttribute('data-page', '2');
-			}}>
-                                    ${tl(trans.more)}
-                                </button>
-                            </div>
-                            ${
-				show_language
-					? html.node`
-                            <div class="button-combo">
-                                <button class="dropdown-menu-clickable-item" data-menu-item="language" onclick=${() => {
-						render(
-							page_2,
-							html`
-								<button
-								    class="dropdown-menu-clickable-item"
-								    data-type="back"
-								    onclick=${() => {
-									side.setAttribute(
-										'data-page',
-										'1',
-									);
-								}}
+												true,
+												true,
+											)}
+										</div>
+									)
+									: auth.pro && (
+										<div class='badges'>
+											{create_badge(
+												{
+													type:
+														'user-status-subscriber',
+													inbuilt: true,
+												},
+												false,
+												true,
+												true,
+											)}
+										</div>
+									)}
+								<a
+									class='link-block-cover-link'
+									href={`${root}user/${auth.name}`}
+									onClick={() => {
+										instance.hide();
+									}}
+								/>
+							</div>
+							<div class={['floating', 'button-group']}>
+								<Button
+									menu
+									chibi
+									href={`${root}settings`}
+									onClick={() => {
+										instance.hide();
+									}}
+									tooltip={{
+										content: tl(trans.edit_profile),
+									}}
 								>
-								    ${tl(trans.back)}
-								</button>
-								${language_menu}
-							`,
-						);
-						side.setAttribute('data-page', '2');
-					}}>
-                                    ${tl(trans.language)}
-                                </button>
-                                <div class="button-combo-sep" />
-                                <button class="dropdown-menu-clickable-item chibi" data-type="continue" onclick=${() => {
-						render(
-							page_2,
-							html`
-								<button
-								    class="dropdown-menu-clickable-item"
-								    data-type="back"
-								    onclick=${() => {
-									side.setAttribute(
-										'data-page',
-										'1',
-									);
-								}}
-								>
-								    ${tl(trans.back)}
-								</button>
-								${language_menu}
-							`,
-						);
-						side.setAttribute('data-page', '2');
-					}}>
-                                    ${tl(trans.more)}
-                                </button>
-                            </div>
-                            `
-					: ''
-			}
-                            <div class="button-combo">
-                                <a class="dropdown-menu-clickable-item" data-type="mini" href="${root}bleh/minis" onclick=${() => {
-				instance.hide();
-			}}>
-                                    ${tl(trans.minis)}
-                                </a>
-                                <div class="button-combo-sep" />
-                                ${() => {
-				const button = html.node`
-                                        <button class="dropdown-menu-clickable-item chibi" data-menu-item="news" onclick=${() => {
-					news();
-					instance.hide();
-				}}>
-                                            ${tl(trans.news)}
-                                        </button>
-                                    `;
-
-				tippy(button, {
-					content: button.textContent,
-				});
-
-				return button;
-			}}
-                            </div>
-                            <div class="button-combo">
-                                <a class="dropdown-menu-clickable-item accented-menu-item" data-menu-item="bleh" href="${root}bleh" onclick=${() => {
-				instance.hide();
-			}}>
-                                    ${tl(trans.settings)}
-                                </a>
-                                <div class="button-combo-sep" />
-                                ${() => {
-				let button;
-				let form = html.node`
-                                        <form class="chibi">
-                                            <input type="hidden" name="csrfmiddlewaretoken" value="${token}">
-                                            <a class="dropdown-menu-clickable-item chibi colourful" ref=${(
-					el,
-				) => (button =
-					el)} data-menu-item="logout" href="${root}logout" onclick=${() => {
-					instance.hide();
-				}}>
-                                                ${tl(trans.logout)}
-                                            </a>
-                                        </form>
-                                    `;
-
-				tippy(button, {
-					content: button.textContent,
-				});
-
-				return form;
-			}}
-
-                            </div>
-                        </div>
-                        <div class="side-page" data-page="2" ref=${(
-				el,
-			) => (page_2 = el)} />
-                    </div>
-                </div>
-            `);
+									<Icon name={icons.edit} />
+									{tl(trans.edit_profile)}
+								</Button>
+								{useSettings.get('starred_friend') != ''
+									? (
+										<Button
+											menu
+											chibi
+											colourful
+											accented
+											className='starred-friend'
+											href={`${root}user/${
+												useSettings.get(
+													'starred_friend',
+												)
+											}`}
+											onClick={() => {
+												instance.hide();
+											}}
+											tooltip={{
+												content: useSettings.get(
+													'starred_friend',
+												) as string,
+											}}
+											data-starred='true'
+										>
+											<Icon
+												name={icons.starred_friend}
+											/>
+											{useSettings.get(
+												'starred_friend',
+											) as string}
+										</Button>
+									)
+									: (
+										<Button
+											menu
+											chibi
+											onClick={() => {
+												open_starred_friend_window();
+												instance.hide();
+											}}
+											tooltip={{
+												content: tl(
+													trans.starred_friend
+														.name,
+												),
+											}}
+											data-starred='false'
+										>
+											<Icon name={icons.plus} />
+											{tl(trans.starred_friend.name)}
+										</Button>
+									)}
+							</div>
+						</div>
+						<div class='side' data-page='1' ref={side}>
+							<NavigationPage1
+								instance={instance}
+								side={side}
+								next={next_side}
+								notif_count={notif_count}
+								messages_count={messages_count}
+								token={token!}
+							/>
+							<div
+								class='side-page'
+								data-page='2'
+								ref={next_side}
+							/>
+						</div>
+					</div>
+				</>,
+			);
 
 			load_profile_cache_externally(auth.name).then((cache) => {
-				render(
-					auth_bg,
-					html`
-						${cache.banner
-							? html.node`
-                    <div class="bg" style="background-image: url(${cache.banner})" />
-                    `
-							: !auth.avatar.endsWith(
-									'818148bf682d429dc215c1705eb27b98.png',
-								)
-							? html.node`
-                    <div class="bg" style="background-image: url(${
-								avatar(auth.avatar, 'avatar170s')
-							})" />
-                    `
-							: ''}
-					`,
-				);
-				render(
-					auth_header,
-					html`
-						<div class="avatar">
-						    <img src=${avatar(
-							auth.avatar,
-							'avatar170s',
-						)} alt=${auth.name} />
-						</div>
-						<div class="name">${cache.username
-							? cache.username
-							: html
-								.node`<span class="at">@</span>${auth.name}`}</div>
-						${badges
-							? html.node`
-                        <div class="badges">
-                            ${create_badge(badges, false, true, true)}
-                        </div>
-                    `
-							: auth.pro
-							? html.node`
-                        <div class="badges">
-                            ${() => {
-								const elem = html.node`
-                                    <span class="label user-status-subscriber no-hover expand small">
-                                        ${
-									tl(
-										trans.badges['user-status-subscriber']
-											.name,
-									)
-								}
-                                    </span>
-                                `;
+				if (cache.banner) {
+					auth_bg.current.replaceChildren(
+						<div
+							class='bg'
+							style={{ backgroundImage: `url(${cache.banner})` }}
+						/>,
+					);
+				}
 
-								tippy(elem, {
-									theme: 'badge',
-									placement: 'bottom',
-									content: html.node`
-                                        <div class="badge-name colourful user-status-subscriber">${
-										tl(
-											trans
-												.badges[
-													'user-status-subscriber'
-												].name,
-										)
-									}</div>
-                                        <div class="badge-reason">${
-										tl(
-											trans
-												.badges[
-													'user-status-subscriber'
-												].reason,
-										)
-									}</div>
-                                    `,
-								});
-
-								return elem;
-							}}
-                        </div>
-                    `
-							: ''}
-						<a class="link-block-cover-link" href="${root}user/${auth
-							.name}" />
-					`,
-				);
+				if (cache.username) {
+					auth_header.current.textContent = cache.username;
+				}
 			});
 		},
 
@@ -1756,11 +1272,13 @@ export function append_nav() {
                                 ${auth.name}
                             </a>
                             ${
-				settings.starred_friend != ''
+				useSettings.get('starred_friend') != ''
 					? html.node`
-                                <a class="btn window-menu-item icon-r colourful" data-type="starred_friend" data-starred="true" href="${root}user/${settings.starred_friend}">
+                                <a class="btn window-menu-item icon-r colourful" data-type="starred_friend" data-starred="true" href="${root}user/${
+						useSettings.get('starred_friend')
+					}">
                                     ${icon({ name: 'inherit' })}
-                                    ${settings.starred_friend}
+                                    ${useSettings.get('starred_friend')}
                                 </a>
                             `
 					: ''
@@ -1954,7 +1472,7 @@ export async function live_status() {
 		let next = new Date();
 		next.setMinutes(next.getMinutes() + 1);
 
-		if (settings.format_guest_features) {
+		if (useSettings.get('format_guest_features')) {
 			album.textContent = romanise(
 				correct_item_by_artist(album.textContent, artist.textContent),
 			);
@@ -1972,7 +1490,7 @@ export async function live_status() {
 			artist = html.node`<span class="artist">${
 				smart_artists(formatted.song_artist, formatted.song_guests)
 			}</span>`;
-		} else if (settings.corrections) {
+		} else if (useSettings.get('corrections')) {
 			album.textContent = romanise(
 				correct_item_by_artist(album.textContent, artist.textContent),
 			);
@@ -2064,4 +1582,634 @@ export async function fetch_messages() {
 	} catch (error) {
 		log('exception during fetch', 'live', 'error', { error: error });
 	}
+}
+
+interface NavigationPage1Props {
+	instance: Instance;
+	side: RefObject<ReactElement>;
+	next: RefObject<ReactElement>;
+	notif_count: number;
+	messages_count: number;
+	token: string;
+}
+
+function NavigationPage1({
+	instance,
+	side,
+	next,
+	notif_count,
+	messages_count,
+	token,
+}: NavigationPage1Props) {
+	const wrap = (
+		<div class='side-page' data-page={1}>
+			{useSettings.get('navigation_items').map((val: string) => {
+				let elem;
+
+				const formal = page.state.quick_access_items[val];
+
+				if (val == 'friends') {
+					elem = (
+						<ButtonCombo>
+							<Button
+								menu
+								href={formal.url}
+								onClick={() => instance.hide()}
+							>
+								<Icon name={formal.icon} />
+								{formal.name}
+							</Button>
+							<ButtonComboSeparator />
+							<Button
+								menu
+								chibi
+								onClick={() => {
+									next.current!.replaceChildren(
+										<NavigationFriends
+											instance={instance}
+											side={side}
+										/>,
+									);
+									side.current!.setAttribute(
+										'data-page',
+										'2',
+									);
+								}}
+								tooltip={{ content: tl(trans.more) }}
+							>
+								<Icon name={icons.continue} />
+								{tl(trans.more)}
+							</Button>
+						</ButtonCombo>
+					);
+
+					return elem;
+				}
+
+				if (formal.url) {
+					elem = (
+						<Button
+							menu
+							href={formal.url}
+							onClick={() => instance.hide()}
+						>
+							<Icon name={formal.icon} />
+							{formal.name}
+						</Button>
+					);
+				} else {
+					elem = (
+						<Button
+							menu
+							onClick={() => {
+								formal.action();
+								instance.hide();
+							}}
+						>
+							<Icon name={formal.icon} />
+							{formal.name}
+						</Button>
+					);
+				}
+
+				let count = 0;
+
+				if (val == 'notifications') {
+					count = notif_count;
+				} else if (val == 'messages') {
+					count = messages_count;
+				}
+
+				if (count > 0) {
+					elem.replaceChildren(
+						<div class='auth-dropdown-item-row'>
+							<span class='auth-dropdown-item-left'>
+								{formal.name}
+							</span>
+							<span class='auth-dropdown-item-right'>
+								{count}
+							</span>
+						</div>,
+					);
+				}
+
+				return elem;
+			})}
+			<ButtonCombo>
+				<Button
+					menu
+					onClick={() => toggle_theme()}
+				>
+					<Icon name={icons.theme} />
+					{tl(trans.themes.name)}
+				</Button>
+				<ButtonComboSeparator />
+				<Button
+					menu
+					chibi
+					onClick={() => {
+						next.current!.replaceChildren(
+							<NavigationThemes
+								side={side}
+							/>,
+						);
+						side.current!.setAttribute('data-page', '2');
+					}}
+					tooltip={{ content: tl(trans.more) }}
+				>
+					<Icon name={icons.continue} />
+					{tl(trans.more)}
+				</Button>
+			</ButtonCombo>
+			{useSettings.get('navigation_language') && (
+				<ButtonCombo>
+					<Button
+						menu
+						onClick={() => {
+							next.current!.replaceChildren(
+								<NavigationLanguages
+									instance={instance}
+									side={side}
+								/>,
+							);
+							side.current!.setAttribute('data-page', '2');
+						}}
+					>
+						<Icon name={icons.language} />
+						{tl(trans.language)}
+					</Button>
+					<ButtonComboSeparator />
+					<Button
+						menu
+						chibi
+						onClick={() => {
+							next.current!.replaceChildren(
+								<NavigationLanguages
+									instance={instance}
+									side={side}
+								/>,
+							);
+							side.current!.setAttribute('data-page', '2');
+						}}
+						tooltip={{ content: tl(trans.more) }}
+					>
+						<Icon name={icons.continue} />
+						{tl(trans.more)}
+					</Button>
+				</ButtonCombo>
+			)}
+			<ButtonCombo>
+				<Button
+					menu
+					href={`${root}bleh/minis`}
+					onClick={() => instance.hide()}
+				>
+					<Icon name={icons.minis} />
+					{tl(trans.minis)}
+				</Button>
+				<ButtonComboSeparator />
+				<Button
+					menu
+					chibi
+					onClick={() => {
+						news();
+						instance.hide();
+					}}
+					tooltip={{ content: tl(trans.news) }}
+				>
+					<Icon name={icons.news} />
+					{tl(trans.news)}
+				</Button>
+			</ButtonCombo>
+			<ButtonCombo>
+				<Button
+					menu
+					colourful
+					accented
+					href={`${root}bleh`}
+					onClick={() => instance.hide()}
+				>
+					<Icon name={icons.bleh_settings} />
+					{tl(trans.settings)}
+				</Button>
+				<ButtonComboSeparator />
+				<form class='chibi'>
+					<input
+						type='hidden'
+						name='csrfmiddlewaretoken'
+						value={token}
+					/>
+					<Button
+						className='logout'
+						href={`${root}logout`}
+						colourful
+						menu
+						accented
+						chibi
+						onClick={() => instance.hide()}
+						tooltip={{ content: tl(trans.logout) }}
+					>
+						<Icon name={icons.logout} />
+						{tl(trans.logout)}
+					</Button>
+				</form>
+			</ButtonCombo>
+		</div>
+	);
+
+	const simple_menu = tippy(wrap, {
+		theme: 'context-menu',
+		content: (
+			<a
+				class='dropdown-menu-clickable-item'
+				data-type='quick_access'
+				href={`${root}bleh/profile?setting=navigation_items`}
+			>
+				{tl(trans.edit_quick_access)}
+			</a>
+		),
+		placement: 'right-start',
+		trigger: 'manual',
+		interactive: true,
+		interactiveBorder: 10,
+		offset: [0, 0],
+		appendTo: document.body,
+
+		onShow(instance: Instance) {
+			instance.popper.addEventListener('click', () => {
+				instance.hide();
+			});
+		},
+	});
+
+	register_menu(wrap, simple_menu);
+
+	return wrap;
+}
+
+interface NavigationFriendsProps {
+	instance: Instance;
+	side: RefObject<ReactElement>;
+}
+
+function NavigationFriends({
+	instance,
+	side,
+}: NavigationFriendsProps) {
+	const starred = useSettings.get('starred_friend');
+	const friends = useSettings.get('friends').filter((
+		friend: string,
+	) => friend != starred);
+
+	return (
+		<>
+			<Button
+				menu
+				onClick={() => {
+					side.current!.setAttribute('data-page', '1');
+				}}
+			>
+				<Icon name={icons.arrow_left} />
+				{tl(trans.back)}
+			</Button>
+			{starred && (
+				<NavigationFriend
+					name={starred as string}
+					starred
+					instance={instance}
+				/>
+			)}
+			{friends.map((friend: string, i: number) => (
+				<NavigationFriend name={friend} key={i} instance={instance} />
+			))}
+			<div class='sep' />
+			<Button
+				menu
+				onClick={() => {
+					open_starred_friend_window();
+					instance.hide();
+				}}
+			>
+				<Icon name={icons.edit} />
+				{tl(trans.edit_close_friends)}
+			</Button>
+		</>
+	);
+}
+
+interface NavigationFriendProps {
+	instance: Instance;
+	name: string;
+	starred?: boolean;
+}
+
+function NavigationFriend({
+	instance,
+	name,
+	starred,
+}: NavigationFriendProps) {
+	const valid = is_sponsor(name);
+
+	const elem = (
+		<a
+			href={`${root}user/${name}`}
+			class={['dropdown-menu-clickable-item', 'v2']}
+			onClick={() => {
+				instance.hide();
+			}}
+		>
+			<Icon name={icons.user} />
+			<span>
+				<span class='at'>@</span>
+				{name}
+			</span>
+			{starred && (
+				<span class={['star-icon', 'colourful']}>
+					<Icon />
+				</span>
+			)}
+		</a>
+	);
+
+	load_profile_cache_externally(name).then((cache) => {
+		elem.replaceChildren(
+			<>
+				<Icon name={icons.user} />
+				{(cache.username && valid)
+					? (
+						<span class='username-combo'>
+							<span class='username-custom'>
+								{cache.username}
+							</span>
+							<span class='username-original'>
+								<span class='at'>@</span>
+								{name}
+							</span>
+						</span>
+					)
+					: (
+						<span>
+							<span class='at'>@</span>
+							{name}
+						</span>
+					)}
+				{starred && (
+					<span class={['star-icon', 'colourful']}>
+						<Icon name={icons.star} />
+					</span>
+				)}
+			</>,
+		);
+	});
+
+	return elem;
+}
+
+interface NavigationThemesProps {
+	side: RefObject<ReactElement>;
+}
+
+function NavigationThemes({
+	side,
+}: NavigationThemesProps) {
+	const uuid = crypto.randomUUID();
+
+	useSettings.on('theme', (val) => {
+		update(val as string);
+	});
+
+	const buttons: NavigationThemeElement[] = [];
+
+	const full_theme_list = getThemes();
+
+	const wrap = (
+		<>
+			<Button
+				menu
+				onClick={() => {
+					side.current!.setAttribute('data-page', '1');
+				}}
+			>
+				<Icon name={icons.arrow_left} />
+				{tl(trans.back)}
+			</Button>
+			{light_themes.map((id) => {
+				const theme = full_theme_list[id];
+				if (!theme) return;
+
+				return (
+					<NavigationTheme
+						id={id}
+						item={theme}
+						list={buttons}
+						onChange={update}
+						uuid={uuid}
+					/>
+				);
+			})}
+			{dark_themes.map((id) => {
+				const theme = full_theme_list[id];
+				if (!theme) return;
+
+				return (
+					<NavigationTheme
+						id={id}
+						item={theme}
+						list={buttons}
+						onChange={update}
+						uuid={uuid}
+					/>
+				);
+			})}
+		</>
+	);
+
+	function update(theme?: string) {
+		if (!theme) theme = useSettings.get('theme') as string;
+
+		buttons.forEach((elem) => {
+			elem.active = elem.id == theme;
+		});
+	}
+
+	update();
+
+	return wrap;
+}
+
+interface NavigationThemeProps {
+	id: string;
+	item: theme;
+	list: ReactElement[];
+	onChange: (id: string) => void;
+	uuid: string;
+}
+
+type NavigationThemeElement = HTMLButtonElement & {
+	id: string;
+	active: boolean;
+};
+
+function NavigationTheme({
+	id,
+	item,
+	list,
+	onChange,
+	uuid,
+}: NavigationThemeProps) {
+	let active = false;
+
+	const elem = (
+		<button
+			type='button'
+			class={['dropdown-menu-clickable-item', 'v2', 'flex-button']}
+			onClick={() => {
+				useSettings.set('theme_schedule', false, uuid);
+				useSettings.set('theme', id, uuid);
+				onChange(id);
+			}}
+		>
+			<Icon name={item.icon} />
+			{tl(item.name)}
+		</button>
+	) as NavigationThemeElement;
+
+	list.push(elem);
+
+	Object.defineProperty(elem, 'id', {
+		get() {
+			return id;
+		},
+	});
+
+	Object.defineProperty(elem, 'active', {
+		set(val: boolean) {
+			active = val;
+			update();
+		},
+	});
+
+	function update() {
+		elem.setAttribute('aria-selected', String(active));
+	}
+
+	return elem;
+}
+
+interface NavigationLanguagesProps {
+	instance: Instance;
+	side: RefObject<ReactElement>;
+}
+
+function NavigationLanguages({
+	instance,
+	side,
+}: NavigationLanguagesProps) {
+	const languages = lastfm_languages.filter((l) => l != lang);
+
+	return (
+		<>
+			<button
+				type='button'
+				class='dropdown-menu-clickable-item'
+				data-type='back'
+				onClick={() => {
+					side.current!.setAttribute('data-page', '1');
+				}}
+			>
+				{tl(trans.back)}
+			</button>
+			<NavigationLanguage
+				code={lang}
+				active
+				onChange={() => {
+					instance.hide();
+				}}
+			/>
+			<div class='sep' />
+			{languages.map((code, i) => (
+				<NavigationLanguage
+					code={code}
+					key={i}
+					onChange={() => {
+						if (code == 'fae') {
+							useSettings.set('language', 'fae');
+							window.location.reload();
+						}
+
+						instance.hide();
+					}}
+				/>
+			))}
+		</>
+	);
+}
+
+interface NavigationLanguageProps {
+	code: string;
+	onChange: () => void;
+	active?: boolean;
+}
+
+function NavigationLanguage({
+	code,
+	onChange,
+	active,
+}: NavigationLanguageProps) {
+	const button = (
+		<button
+			name={code}
+			type='submit'
+			class={['dropdown-menu-clickable-item', 'v2', 'flex-button']}
+			onClick={onChange}
+			aria-selected={active}
+		>
+			<div class='auth-dropdown-item-row'>
+				<span class='auth-dropdown-item-left'>
+					<Flag
+						code={(convert_lang_to_country[code] || code)
+							.toUpperCase()}
+						className='small-flag'
+					/>
+					{get_language_name(code)}
+				</span>
+				{code in lang_info && (
+					<span class='auth-dropdown-item-right'>
+						<div class='bleh-icon checkmark' />
+					</span>
+				)}
+			</div>
+		</button>
+	);
+
+	if (active || code == 'fae') return button;
+
+	const form = createRef();
+
+	// TODO: maybe just use the default elements again?
+	// this is really jank
+	return (
+		<form
+			action='/i18n/setlang/'
+			method='post'
+			ref={form}
+			onSubmit={async (e) => {
+				e.preventDefault();
+
+				useSettings.set('language', 'unset');
+
+				const data = new FormData(form.current);
+
+				await fetch(form.current.action, {
+					method: 'POST',
+					body: data,
+				}).then((res) => {
+					window.location.href = res.url;
+				});
+			}}
+		>
+			<input type='hidden' name='language' value={code} />
+			{button}
+		</form>
+	);
 }

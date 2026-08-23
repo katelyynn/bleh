@@ -19,6 +19,7 @@ export function bleh_error() {
 	if (!error_marvin) return;
 
 	page.state.error = true;
+	page.continue = false;
 	error_marvin.setAttribute('data-bleh', 'true');
 
 	const error_content = page_content.querySelector('h1');

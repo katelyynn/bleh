@@ -9,11 +9,7 @@
 		}
 
 		& > .bleh-icon {
-			background: conic-gradient(
-				from 270deg,
-				oklch(var(--l2-c)),
-				oklch(var(--l4-c))
-			);
+			background: oklch(var(--l3-c));
 			--icon-size: 40px;
 			--icon: var(--mask);
 		}
@@ -87,7 +83,7 @@
 	top: 0;
 	right: 0;
 	bottom: 0;
-	background: linear-gradient(90deg, transparent, oklch(var(--f4) / 20%));
+	background: linear-gradient(90deg, transparent, oklch(var(--k4) / 20%));
 	z-index: 0;
 	pointer-events: none;
 }

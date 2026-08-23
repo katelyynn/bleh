@@ -1,0 +1,198 @@
+/**
+ * bleh, an extension for the music site Last.fm
+ * Copyright (c) 2024-2026 katelyn and contributors
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
+import { createRef, ReactNode } from 'jsx-dom';
+import {
+	get_from_store,
+	is_incompatible,
+	SettingIncompatibleWith,
+	SettingLabel,
+} from '@/components/settings/provider/main.tsx';
+import { settings } from '@/build/config.ts';
+import {
+	Keybind,
+	KeybindList,
+} from '@/components/settings/clickables/keybind.tsx';
+import { SettingIcon } from '@/components/settings/provider/icon.tsx';
+import { useSettings } from '@/page.ts';
+
+interface SettingKeybindProps {
+	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
+	value?: string[];
+	bind?: string;
+	icon?: string;
+	name?: ReactNode;
+	body?: ReactNode;
+	showLabel?: boolean;
+	onChange?: (val: string[]) => void;
+	disabled?: boolean;
+	onMouseEnter?: () => void;
+	onMouseLeave?: () => void;
+}
+
+type SettingKeybindElement = HTMLDivElement & {
+	update: () => void;
+	value: string | number;
+};
+
+export function SettingKeybind({
+	ref,
+	value = [],
+	bind,
+	icon,
+	name,
+	body,
+	showLabel = true,
+	onChange,
+	disabled,
+	onMouseEnter,
+	onMouseLeave,
+}: SettingKeybindProps) {
+	let previousValue: string[] = [];
+	if (bind) value = settings[bind] as string[];
+
+	const uuid = crypto.randomUUID();
+
+	if (bind) {
+		useSettings.on(bind, (val, id) => {
+			if (id == uuid) return;
+
+			set(val as string[], true);
+		});
+	}
+
+	const input = createRef();
+	const reset = createRef();
+
+	const store = get_from_store(bind);
+
+	if (store) {
+		if (!icon) icon = store.icon;
+
+		if (store.incompatible) {
+			Object.entries(store.incompatible).forEach(([key]) => {
+				useSettings.on(key, () => {
+					update();
+				});
+			});
+		}
+	}
+
+	function update() {
+		disabled = false;
+
+		let incompatible = false;
+		let incompatible_list: Record<string, boolean> = {};
+		let incompatible_strings: string[] = [];
+
+		if (store) {
+			({
+				incompatible,
+				list: incompatible_list,
+				list_strings: incompatible_strings,
+			} = is_incompatible(
+				store,
+			));
+		}
+
+		if (incompatible) {
+			disabled = true;
+		}
+
+		if (disabled) {
+			elem.setAttribute('disabled', 'true');
+		} else {
+			elem.removeAttribute('disabled');
+		}
+
+		if (value == previousValue) return;
+		previousValue = value;
+
+		elem.replaceChildren(
+			<>
+				{icon && <SettingIcon name={icon} />}
+				{showLabel && (
+					<SettingLabel
+						name={name}
+						body={body}
+						store={store}
+						value={value}
+						setValue={set}
+						defaultValue={store?.default}
+						ref={reset}
+					/>
+				)}
+				<KeybindList ref={input}>
+					{value.map((key, index) => {
+						const interact = !['⌘', '⇧', '⌥', '⌃', '⏎', '⎋', '⌫']
+							.includes(key);
+
+						return (
+							<Keybind
+								value={key}
+								interact={interact}
+								onChange={(val: string) => {
+									const next = [...value];
+									next[index] = val;
+
+									previousValue = next;
+									set(next);
+								}}
+								key={index}
+							/>
+						);
+					})}
+				</KeybindList>
+				{Object.keys(incompatible_list).length > 0 && (
+					<SettingIncompatibleWith
+						list={incompatible_list}
+						strings={incompatible_strings}
+					/>
+				)}
+			</>,
+		);
+	}
+
+	const elem = (
+		<div
+			class='setting'
+			data-type='keybind'
+			id={`setting_${bind}`}
+			onMouseEnter={onMouseEnter}
+			onMouseLeave={onMouseLeave}
+			ref={ref}
+		/>
+	) as SettingKeybindElement;
+
+	update();
+
+	function set(val: string[], received = false) {
+		if (value == val) return;
+
+		value = val;
+
+		reset.current.value = val;
+
+		if (bind) {
+			if (!received) useSettings.set(bind, val, uuid);
+		} else {
+			if (onChange) onChange(val);
+		}
+
+		if (onMouseEnter) onMouseEnter();
+		update();
+	}
+
+	Object.defineProperty(elem, 'value', {
+		get() {
+			return value;
+		},
+	});
+
+	elem.update = update;
+
+	return elem;
+}

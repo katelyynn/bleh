@@ -13,7 +13,7 @@ import {
 import { api_key, auth, page, root } from '@/build/page';
 import { create_badge, load_badges } from '@/components/shared/badge';
 import { dialog } from '@/components/dialog/dialog';
-import { lang_info, tl, trans } from '@/build/trans';
+import { lang_info, language, tl, trans } from '@/build/trans';
 import { setting } from '@/components/settings/settings';
 import { DateTime } from 'luxon';
 import { version } from '@/main';
@@ -23,13 +23,13 @@ import tippy from 'tippy.js';
 import { update_check } from '@/components/page/style';
 import { notify } from '@/components/dialog/notify';
 import { sponsor, sponsor_manage, sponsors } from '@/components/sponsor';
-import { convert_lang_to_country, flag } from '@/components/shared/flag';
+import { convert_lang_to_country, Flag, flag } from '@/components/shared/flag';
 import { start_update } from '@/components/page/style';
 import { bool } from '@/build/tools';
 import { keys } from '@/components/settings/storage';
 import { new_indicator } from '@/components/shared/indicator';
 import { discord } from '@/build/page';
-import { icon, icons } from '@/components/shared/icon';
+import { Icon, icon, icons } from '@/components/shared/icon';
 import { news } from '@/components/news';
 import { SubText } from '@/components/text/sub.tsx';
 import { SettingGroup } from '@/components/settings/group.tsx';
@@ -37,6 +37,11 @@ import { SeeMore, SeeMoreGroup } from '@/components/text/see_more.tsx';
 import { badge } from '@/types/badge.ts';
 import { SettingAction } from '@/components/settings/provider/action.tsx';
 import { SettingInfo } from '@/components/settings/provider/info.tsx';
+import { PanelHead } from '@/components/text/head.tsx';
+import { SettingRadio } from '@/components/settings/provider/radio.tsx';
+import { createRef } from 'jsx-dom';
+import { SettingSwitch } from '@/components/settings/provider/switch.tsx';
+import { Button } from '@/components/button/button.tsx';
 
 export function general() {
 	if (auth.pro == null) {
@@ -90,7 +95,9 @@ export function general() {
 				</div>
 			</section>
 			<section class='bleh--panel'>
-				<h4>{tl(trans.profile)}</h4>
+				<PanelHead icon={icons.user}>
+					{tl(trans.profile)}
+				</PanelHead>
 				<SettingGroup>
 					{auth.name
 						? (
@@ -127,20 +134,42 @@ export function general() {
 							</div>
 						)
 						: ''}
+					<SettingInfo name={tl(trans.badge_version)}>
+						<p>{sponsor_list.version}</p>
+						<SeeMore
+							className='sponsor-related'
+							icon={icons.update}
+							iconPlacement='left'
+							onClick={() => {
+								sponsors(true, () => {
+									render_setting_page('general');
+								});
+							}}
+						>
+							{tl(trans.update_check)}
+						</SeeMore>
+					</SettingInfo>
 					{auth.sponsor
 						? (
 							<SettingAction
 								name={tl(trans.you_are_a_sponsor)}
 								body={tl(trans.sponsor_get_badge)}
 							>
-								<button
-									type='button'
-									class='btn primary icon sponsor colourful'
-									data-type='sponsor'
+								<Button
+									primary
+									colourful
+									className='sponsor-related'
 									onClick={sponsor_manage}
 								>
-									{tl(trans.manage_sponsor)}
-								</button>
+									<Icon name={icons.heart_fill} />
+									{tl(trans.manage)}
+								</Button>
+								<Button
+									href={`${root}settings`}
+								>
+									<Icon name={icons.edit} />
+									{tl(trans.edit_profile)}
+								</Button>
 							</SettingAction>
 						)
 						: (
@@ -158,22 +187,12 @@ export function general() {
 								</button>
 							</SettingAction>
 						)}
-					<SettingInfo name={tl(trans.current_version)}>
-						<p>{sponsor_list.version}</p>
-						<SeeMore
-							className='sponsor-related'
-							icon={icons.update}
-							iconPlacement='left'
-							onClick={() => {
-								sponsors(true, () => {
-									render_setting_page('general');
-								});
-							}}
-						>
-							{tl(trans.update_check)}
-						</SeeMore>
-					</SettingInfo>
 				</SettingGroup>
+			</section>
+			<section class='bleh--panel'>
+				<PanelHead icon={icons.extension}>
+					API
+				</PanelHead>
 				<SettingGroup>
 					<SettingAction
 						id='setting_api'
@@ -199,282 +218,43 @@ export function general() {
 					</SettingInfo>
 				</SettingGroup>
 			</section>
+			<section class='bleh--panel'>
+				<PanelHead icon={icons.bleh_settings}>
+					{tl(trans.branding)}
+				</PanelHead>
+				<SettingGroup>
+					<SettingRadio bind='branding_type' />
+				</SettingGroup>
+			</section>
+			<section class='bleh--panel'>
+				<PanelHead icon={icons.language}>
+					{tl(trans.language)}
+				</PanelHead>
+				<SettingGroup>
+					<div class='languages'>
+						{Object.entries(lang_info).sort(([, a], [, b]) =>
+							b.percent - a.percent
+						).map(([key, language]) => (
+							<Language code={key} language={language} />
+						))}
+					</div>
+				</SettingGroup>
+				<SettingGroup>
+					<SettingAction
+						name={tl(trans.submit_language.name)}
+						body={tl(trans.submit_language.body)}
+					>
+						<SeeMore
+							href='https://github.com/katelyynn/bleh/wiki/Translations'
+							external
+						>
+							{tl(trans.help_contribute)}
+						</SeeMore>
+					</SettingAction>
+					<SettingSwitch bind='translator' />
+				</SettingGroup>
+			</section>
 		</>,
-	);
-
-	// early return but without the ide knowing
-	if (!setting.dbdfbdf) return;
-
-	render(
-		page.structure.main,
-		html`
-			<section class="bleh--panel">
-			    <div class="section-intro less">
-			        <div class="sub-text">${tl(trans.current_version)}</div>
-			        <h1 class="setting-head"><i>${version
-				.brand}</i> <i class="highlight">${version.build}</i></h1>
-			    </div>
-			    <div class="setting-group">
-			        ${update_setting()}
-			    </div>
-			    <div class="section-intro less">
-			        <p class="sub-text">${tl(trans.issues_updating)}</p>
-			        <div class="see-more-row">
-			            <a class="see-more" href="https://github.com/katelyynn/bleh/issues/new/choose" target="_blank">${tl(
-				trans.report_issue,
-			)}</a>
-			            <a class="see-more" href="https://discord.gg/${discord}" target="_blank">${tl(
-				trans.join_discord,
-			)}</a>
-			        </div>
-			    </div>
-			</section>
-			<section class="bleh--panel">
-			    <h4>${tl(trans.profile)}</h4>
-			    <div class="setting-group">
-			        ${auth.name
-				? html.node`
-                    <div class="setting" data-type="info">
-                        <div class="avatar-container">
-                            <div class="avatar-inner">
-                                <img src=${auth.avatar} alt=${auth.name} />
-                            </div>
-                        </div>
-                        <div class="heading">
-                            <h5>@${auth.name}</h5>
-                        </div>
-                        <div class="info">
-                            <p>${
-					tl(trans.profile_and_badges, { c: badge_count.toString() })
-				}</p>
-                            ${
-					badge_count > 0
-						? html.node`
-                                <button class="see-more" onclick=${() => {
-							dialog({
-								id: 'badges',
-								title: auth.name,
-								body: html.node`
-                                            <div class="generic-table-list badge-list">
-                                                ${
-									badges
-										? badges.map((badge) => {
-											return html.node`
-                                                        <div class="generic-table-list-entry badge-list-entry">
-                                                            <div class="name">
-                                                                ${
-												create_badge(
-													badge,
-													false,
-													true,
-													true,
-												)
-											}
-                                                            </div>
-                                                            <div class="text">
-                                                                ${badge.reason}
-                                                            </div>
-                                                        </div>
-                                                    `;
-										})
-										: ''
-								}
-                                            </div>
-                                        `,
-							});
-						}}>${tl(trans.view)}</button>
-                            `
-						: ''
-				}
-                        </div>
-                    </div>
-                `
-				: ''}
-			        ${auth.sponsor
-				? html.node`
-                    <div class="setting" data-type="action">
-                        <div class="heading">
-                            <h5>${tl(trans.you_are_a_sponsor)}</h5>
-                            <p>${tl(trans.sponsor_get_badge)}</p>
-                        </div>
-                        <div class="toggle-wrap">
-                            <button class="btn primary icon sponsor colourful" data-type="sponsor" onclick=${() =>
-					sponsor_manage()}>
-                                ${tl(trans.manage_sponsor)}
-                            </button>
-                        </div>
-                    </div>
-                `
-				: html.node`
-                    <div class="setting" data-type="action">
-                        <div class="heading">
-                            <h5>${tl(trans.news_sponsor_cta)}</h5>
-                            <p>${tl(trans.sponsor_get_badge)}</p>
-                        </div>
-                        <div class="toggle-wrap">
-                            <button class="btn primary icon sponsor colourful" data-type="sponsor" onclick=${() =>
-					sponsor()}>
-                                ${tl(trans.sponsor)}
-                            </button>
-                        </div>
-                    </div>
-                `}
-			        <div class="setting" data-type="info">
-			            <div class="heading">
-			                <h5>${tl(trans.current_version)}</h5>
-			            </div>
-			            <div class="info">
-			                <p>${sponsor_list.version}</p>
-			                <button class="see-more update-check sponsor-related left-icon" onclick=${() =>
-				sponsors(true, () => {
-					render_setting_page('general');
-				})}>
-			                    ${tl(trans.update_check)}
-			                </button>
-			            </div>
-			        </div>
-			    </div>
-			    <div class="setting-group">
-			        <div class="setting" data-type="action" id="setting_api">
-			            <div class="heading">
-			                <h5>${tl(trans.api.name)}</h5>
-			                <p>${tl(trans.api.body)}</p>
-			            </div>
-			            <div class="toggle-wrap">
-			                <a class="btn ${auth_key && auth_valid == 'true'
-				? ''
-				: 'primary'} icon" data-type="plus" href="${root}api/auth?api_key=${api_key}&cb=${root}bleh/api">
-			                    ${tl(trans.connect)}
-			                </a>
-			            </div>
-			        </div>
-			        <div class="setting" data-type="info">
-			            <div class="heading">
-			                <h5>${tl(trans.api_status)}</h5>
-			            </div>
-			            <div class="info">
-			                ${auth_key && auth_valid == 'true'
-				? html.node`
-                            <p>${tl(trans.connected)}</p>
-                        `
-				: html.node`
-                            <p>${tl(trans.not_connected)}</p>
-                        `}
-			            </div>
-			        </div>
-			    </div>
-			</section>
-			${!page.mobile
-				? html.node`
-            <section class="bleh--panel">
-                <h4>${tl(trans.branding)}</h4>
-                <div class="setting-group">
-                    ${
-					setting({ id: 'branding_type', func: update_branding_type })
-				}
-                </div>
-            </section>
-        `
-				: ''}
-			<section class="bleh--panel">
-			    <h4>${tl(trans.language)}</h4>
-			    <div class="setting-group">
-			        <div class="languages">
-			            ${Object.entries(lang_info).sort(([, a], [, b]) =>
-				b.percent - a.percent
-			).map(([key, language]) => {
-				let date;
-
-				const row = html.node`
-                            <div class="language-row">
-                                ${
-					flag(
-						(convert_lang_to_country[key] || key).toUpperCase(),
-						'language-row-flag',
-					)
-				}
-                                <div class="language-row-content">
-                                    <strong class="language-row-name">${language.name}${
-					language.new ? new_indicator() : ''
-				}</strong>
-                                    <p class="language-row-by">${{
-					html: tl(trans.by_user, {
-						u: language.by.map((user) =>
-							`<a href="${root}user/${user}">${user}</a>`
-						).join(', '),
-					}),
-				}}</p>
-                                </div>
-                                <div class="language-row-sub">
-                                    ${
-					language.percent
-						? () => {
-							const elem = html.node`
-                                            <p class="language-row-percent percent colourful" style="--hue-over: ${
-								language.percent * 1.2
-							}; --sat-over: 1.4; --lit-over: 0.9;" data-percent=${language.percent}>
-                                                ${language.percent}%
-                                            </p>
-                                        `;
-
-							tippy(elem, {
-								content: `${
-									tl(trans.amount_translated, {
-										c: language.translated,
-									})
-								}, ${
-									tl(trans.missing_translated, {
-										c: language.missing,
-									})
-								}`,
-							});
-
-							return elem;
-						}
-						: ''
-				}
-                                    <p class="language-row-time" ref=${(el) =>
-					date = el}>${
-					language.last_updated != 'latest'
-						? DateTime.fromISO(language.last_updated).toRelative({
-							style: 'short',
-						})
-						: language.last_updated
-				}</p>
-                                </div>
-                                <div class="language-row-progress colourful" style="--hue-over: ${
-					language.percent * 1.2
-				}; --sat-over: 1.4; --lit-over: 0.9; width: ${language.percent}%" data-percent=${language.percent} />
-                            </div>
-                        `;
-
-				if (language.last_updated != 'latest') {
-					tippy(date, {
-						content: DateTime.fromISO(language.last_updated)
-							.toLocaleString(DateTime.DATE_MED),
-					});
-				}
-
-				return row;
-			})}
-			        </div>
-			    </div>
-			    <div class="setting-group">
-			        <div class="setting" data-type="action">
-			            <div class="heading">
-			                <h5>${tl(trans.submit_language.name)}</h5>
-			                <p>${tl(trans.submit_language.body)}</p>
-			            </div>
-			            <div class="toggle-wrap">
-			                <a class="see-more" href="https://github.com/katelyynn/bleh/wiki/Translations" target="_blank">
-			                    ${tl(trans.help_contribute)}
-			                </a>
-			            </div>
-			        </div>
-			        ${setting({ id: 'translator' })}
-			    </div>
-			</section>
-		`,
 	);
 }
 
@@ -558,7 +338,7 @@ function update_setting() {
 			html`
 				<div class="setting-v2-icon update-center-icon">
 					<div class="update-container spin">
-						<div class="bleh-icon" data-type="update" />
+						<div class="bleh-icon" data-type="spinner" />
 					</div>
 				</div>
 				<div class="heading">
@@ -698,4 +478,100 @@ function badge_prompt(badges: badge[]) {
 			</div>
 		),
 	});
+}
+
+interface LanguageProps {
+	code: string;
+	language: language;
+}
+
+function Language({
+	code,
+	language,
+}: LanguageProps) {
+	const date = createRef();
+	const percent = createRef();
+
+	if (code == 'fae') return;
+
+	const row = (
+		<div class='language-row'>
+			<Flag
+				code={(convert_lang_to_country[code] || code).toUpperCase()}
+				className='language-row-flag'
+			/>
+			<div class='language-row-content'>
+				<strong class='language-row-name'>{language.name}</strong>
+				<p class='language-row-by'>
+					{tl(trans.by_user, {
+						u: language.by.map((user, i) => (
+							<>
+								<a href={`${root}user/${user}`}>{user}</a>
+								{i < language.by.length - 1 && ', '}
+							</>
+						)),
+					}, false)}
+				</p>
+			</div>
+			<div class='language-row-sub'>
+				{language.percent && (
+					<p
+						class={['language-row-percent', 'percent', 'colourful']}
+						style={{
+							'--hue-over': language.percent * 1.2,
+							'--sat-over': 1.4,
+							'--lit-over': 0.9,
+						}}
+						data-percent={String(language.percent)}
+						ref={percent}
+					>
+						{language.percent}%
+					</p>
+				)}
+				<p class='language-row-time' ref={date}>
+					{language.last_updated != 'latest'
+						? DateTime.fromISO(language.last_updated).toRelative({
+							style: 'short',
+						})
+						: language.last_updated}
+				</p>
+			</div>
+			{language.percent && (
+				<div
+					class={['language-row-progress', 'colourful']}
+					style={{
+						'--hue-over': language.percent * 1.2,
+						'--sat-over': 1.4,
+						'--lit-over': 0.9,
+						width: `${language.percent}%`,
+					}}
+					data-percent={String(language.percent)}
+				/>
+			)}
+		</div>
+	);
+
+	if (percent.current) {
+		tippy(percent.current, {
+			content: `${
+				tl(trans.amount_translated, {
+					c: language.translated?.toLocaleString(),
+				})
+			}, ${
+				tl(trans.missing_translated, {
+					c: language.missing?.toLocaleString(),
+				})
+			}`,
+		});
+	}
+
+	if (date.current && language.last_updated != 'latest') {
+		tippy(date.current, {
+			content: DateTime.fromISO(language.last_updated).toLocaleString(
+				DateTime.DATE_MED,
+			),
+		});
+	}
+
+	return row;
 }

@@ -1,41 +1,53 @@
 .secondary-nav-item--overview {
 	order: 1;
 }
+
 .secondary-nav-item--listening-report {
 	order: 2;
 }
+
 .secondary-nav-item--library {
 	order: 3;
 }
+
 .secondary-nav-item--playlists {
 	order: 10;
 }
+
 .secondary-nav-item--friends {
 	order: 4;
 }
+
 .secondary-nav-item--loved {
 	order: 7;
 }
+
 .secondary-nav-item--obsessions {
 	order: 8;
 }
+
 .secondary-nav-item--events {
 	&:not(.dont-rearrange) {
 		order: 9;
 	}
 }
+
 .secondary-nav-item--tags {
 	order: 11;
 }
+
 .secondary-nav-item--shoutbox {
 	order: 6;
 }
+
 .secondary-nav-item--back {
 	order: -5;
 }
+
 .secondary-nav-item--similar > a {
 	--mask: var(--icon-16-arrows);
 }
+
 .secondary-nav-item--compare {
 	--mask: var(--icon-16-arrows);
 }
@@ -50,6 +62,7 @@
 .secondary-nav-item--global {
 	--mask: var(--icon-16-globe);
 }
+
 .secondary-nav-item--you-know {
 	--mask: var(--icon-16-user);
 }
@@ -81,21 +94,25 @@
 .secondary-nav-item--venue > a {
 	--mask: var(--icon-16-location);
 }
+
 .secondary-nav-item--lineup > a {
 	--mask: var(--icon-16-artist);
 }
+
 .secondary-nav-item--attendance > a {
 	--mask: var(--icon-16-user);
 }
+
 .secondary-nav-item--info > a {
 	--mask: var(--icon-16-bio);
 }
 
 .secondary-nav-item--going {
-	--mask: var(--icon-16-check);
+	--mask: var(--icon-16-going);
 }
+
 .secondary-nav-item--interested {
-	--mask: var(--icon-16-question);
+	--mask: var(--icon-16-maybe);
 }
 
 .navlist-more-wrap {
@@ -106,23 +123,29 @@
 .secondary-nav-item--overview > a[href*="/settings"] {
 	--mask: var(--icon-16-profile);
 }
+
 .secondary-nav-item--settings,
 [data-menu-item="settings"],
 .secondary-nav-item--website {
 	--mask: var(--icon-16-settings);
 }
+
 .secondary-nav-item--privacy {
 	--mask: var(--icon-16-lock);
 }
+
 .secondary-nav-item--account {
 	--mask: var(--icon-16-user);
 }
+
 .secondary-nav-item--subscription {
 	--mask: var(--icon-16-pro);
 }
+
 .secondary-nav-item--social {
 	--mask: var(--icon-16-share);
 }
+
 .secondary-nav-item--applications {
 	--mask: var(--icon-16-extension);
 }
@@ -135,9 +158,11 @@
 .secondary-nav-item--overview {
 	order: -1;
 }
+
 .secondary-nav-item--privacy {
 	order: -1;
 }
+
 .secondary-nav-item--account {
 	order: -1;
 }
@@ -147,13 +172,16 @@
 .secondary-nav-item--notifications {
 	--mask: var(--icon-16-notifications);
 }
+
 [data-menu-item="inbox"],
 .secondary-nav-item--messages {
 	--mask: var(--icon-16-mail);
 }
+
 .secondary-nav-item--sent {
 	--mask: var(--icon-16-sent-mail);
 }
+
 .secondary-nav-item--compose {
 	--mask: var(--icon-16-compose);
 }
@@ -162,9 +190,11 @@
 .secondary-nav-item--week {
 	--mask: var(--icon-16-listening-report-weekly);
 }
+
 .secondary-nav-item--month {
 	--mask: var(--icon-16-listening-report-monthly);
 }
+
 .secondary-nav-item--year {
 	--mask: var(--icon-16-listening-report-yearly);
 }
@@ -172,25 +202,28 @@
 .secondary-nav-item--home {
 	--mask: var(--icon-16-home);
 }
+
 .secondary-nav-item--releases {
 	--mask: var(--icon-16-compass);
 }
+
 .secondary-nav-item--out-now {
 	--mask: var(--icon-16-compass);
 }
+
 .secondary-nav-item--coming-soon {
 	--mask: var(--icon-16-calendar);
 }
+
 .secondary-nav-item--bookmarks {
 	--mask: var(--icon-16-bookmark);
 }
+
 .secondary-nav-item--bleh {
 	--mask: var(--icon-16-bleh);
 	--mask-size: var(--icon-size);
 	--col: oklch(var(--l3-c)) !important;
-	--mask-colour: color-mix(
-        in oklch,
-        oklch(var(--l3-c)),
-        oklch(var(--l4-c)) 30%
-    ) !important;
+	--mask-colour: color-mix(in oklch,
+			oklch(var(--l3-c)),
+			oklch(var(--l4-c)) 30%) !important;
 }

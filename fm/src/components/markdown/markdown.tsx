@@ -36,6 +36,7 @@ import {
 	social_links,
 	social_links_extension,
 } from '@/components/markdown/links.tsx';
+import { useSettings } from '@/page.ts';
 
 export function markdown(
 	text: string,
@@ -86,7 +87,6 @@ export function markdown(
 		'src',
 		'alt',
 		'title',
-		'style',
 		'data-hue',
 		'data-sat',
 		'data-lit',
@@ -177,13 +177,6 @@ export function markdown(
 	const icons = () => [
 		{
 			type: 'lang',
-			regex: /\[icon=([a-zA-Z-]+)\]/g,
-			replace: (_: string, icon: string) => {
-				return `<span class="bleh-icon in-markdown" style="--icon: var(--icon-16-${icon})">A</span>`;
-			},
-		},
-		{
-			type: 'lang',
 			regex: /🙏\s*BLESS\s*🙏/gi,
 			replace: () => {
 				return `<span class="overdose"><span class="bless"></span><span>BLESS</span><span class="bless"></span></span>`;
@@ -193,7 +186,7 @@ export function markdown(
 			type: 'lang',
 			regex: /\s*:hazelfae:\s*/gi,
 			replace: () => {
-				return `<a class="hazelfae" href="${root}user/evangelicgirl"></a>`;
+				return `<a class="hazelfae" href="${root}user/evangelicgirl?hazelfae"></a>`;
 			},
 		},
 	];
@@ -307,10 +300,20 @@ export function markdown(
 		},
 	];
 
+	// removes all quotes
 	const blockquotes = () => [
 		{
 			type: 'lang',
 			regex: /^ *>.*(?:\n *>.*)*/gm,
+			replace: (m: string) => m.replace(/>/g, '&gt;'),
+		},
+	];
+
+	// removes invalid ones, when missing a space etc.
+	const invalid_blockquotes = () => [
+		{
+			type: 'lang',
+			regex: /^ *>[^ \n].*(?:\n *>[^ \n].*)*/gm,
 			replace: (m: string) => m.replace(/>/g, '&gt;'),
 		},
 	];
@@ -320,7 +323,10 @@ export function markdown(
 	if (!line_breaks) allow_alignment = false;
 
 	if (allow_alignment) extensions.push(aligner());
+
 	if (!line_breaks) extensions.push(blockquotes());
+	else extensions.push(invalid_blockquotes());
+
 	if (allow_banners) extensions.push(banner());
 	if (allow_icons) extensions.push(icons());
 	if (allow_hue) extensions.push(accent(), display_name(), status());
@@ -412,7 +418,6 @@ export function markdown(
 
 	// funny local restriction message
 	if (line_breaks) {
-		local_restriction(body);
 		body.querySelectorAll('p').forEach((text) => {
 			local_restriction(text);
 		});
@@ -434,6 +439,11 @@ export function markdown(
 	social_links(body, links);
 
 	body.querySelectorAll('.hazelfae').forEach((hazel) => {
+		/* hazel.setAttribute('onclick', () => {
+			window.location.href =
+				`${window.location.origin}${window.location.pathname}?hazelfae`;
+		}); */
+
 		tippy(hazel, {
 			content: ':hazelfae:',
 			delay: [500, 0],
@@ -568,7 +578,9 @@ export function markdown_field(
 	autofocus = false,
 	required = true,
 ): markdown_field_element {
-	const use_md = mini ? settings.shout_markdown : settings.bio_markdown;
+	const use_md = mini
+		? useSettings.get('shout_markdown')
+		: useSettings.get('bio_markdown');
 
 	options = {
 		allow_headers: false,
@@ -605,6 +617,7 @@ export function markdown_field(
 		required,
 		maxlength,
 		focus: autofocus,
+		submit_on_character: true,
 	});
 	let overlay;
 

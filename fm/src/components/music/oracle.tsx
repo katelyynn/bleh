@@ -52,6 +52,7 @@ import { flag, flag_candidates } from '../shared/flag';
 import { age } from '../shared/age';
 import { notify } from '../dialog/notify';
 import { status } from '../dialog/status';
+import { useSettings } from '@/page.ts';
 
 export function oracle_process() {
 	log('beginning', 'oracle');
@@ -320,9 +321,7 @@ export function oracle_process() {
                                             ${
 					setting({ id: 'show_guest_features' })
 				}
-                                            ${
-					setting({ id: 'count_bar_right' })
-				}
+                                            ${setting({ id: 'count_bar_axis' })}
                                         </div>
                                     </div>
                                 `,
@@ -2069,7 +2068,7 @@ export function oracle_process() {
 
 							let title_elem;
 							let artist_elem;
-							if (settings.format_guest_features) {
+							if (useSettings.get('format_guest_features')) {
 								const formatted = name_includes(
 									title,
 									artist,
@@ -2942,10 +2941,12 @@ export function oracle_credits() {
 
 			let type = relation.type;
 
-			if (['programming', 'producer'].includes(type)) {
+			if (['programming', 'producer', 'composer'].includes(type)) {
 				type = 'mix';
 			} else if (type.includes('instrument') || type == 'orchestrator') {
 				type = 'recording';
+			} else if (['lyricist'].includes(type)) {
+				type = 'writer';
 			}
 
 			const name = relation.artist.name;
@@ -3000,17 +3001,17 @@ export function oracle_credits() {
 
 	dialog({
 		id: 'oracle_credits',
-		title: {
-			html: tl(trans.credits_for_value, {
-				v: `<i>${
-					sanitise_text(
+		title: tl(trans.credits_for_value, {
+			v: (
+				<i>
+					{sanitise_text(
 						romanise(
 							correct_item_by_artist(page.name, page.sister),
 						),
-					)
-				}</i>`,
-			}),
-		},
+					)}
+				</i>
+			),
+		}, false),
 		body: html.node`
             <div class="oracle-credits">
                 ${

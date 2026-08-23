@@ -7,7 +7,7 @@
 	.calendar-header {
 		display: flex;
 
-		& > .fill {
+		&>.fill {
 			flex: 1;
 		}
 	}
@@ -16,7 +16,7 @@
 		display: grid;
 		grid-template-columns: repeat(7, 1fr);
 
-		& > .date {
+		&>.date {
 			text-align: center;
 			cursor: default;
 			color: oklch(var(--c3));
@@ -33,17 +33,17 @@
 		flex-direction: column;
 		gap: 10px;
 
-		& > .input-container {
+		&>.input-container {
 			width: 130px;
 
-			& > input {
+			&>input {
 				text-align: center;
 				height: 40px;
 				font-size: 16px !important;
 			}
 		}
 
-		& > p {
+		&>p {
 			font-size: 13px;
 			color: oklch(var(--c3));
 			cursor: default;
@@ -61,9 +61,7 @@
 		&:before {
 			transition-property: transform !important;
 			transition-duration: var(--trans) !important;
-			transition-timing-function: var(
-				--trans-function
-			) !important;
+			transition-timing-function: var(--trans-function) !important;
 		}
 
 		&:active {
@@ -110,6 +108,7 @@
 	--bg-hov: oklch(var(--b4) / 60%);
 	--bg-atv: oklch(var(--b4) / 80%);
 	--shadow: none;
+	text-align: center;
 
 	aspect-ratio: 1 / 1;
 
@@ -118,11 +117,9 @@
 		--bg-hov: oklch(var(--h4) / 30%);
 		--bg-atv: oklch(var(--h4) / 40%);
 		--col: oklch(var(--l3-c));
-		--mask-colour: color-mix(
-            in oklch,
-            oklch(var(--l3-c)),
-            oklch(var(--l4-c)) 40%
-        );
+		--mask-colour: color-mix(in oklch,
+				oklch(var(--l3-c)),
+				oklch(var(--l4-c)) 40%);
 		--force-font-weight: var(--font-weight-medium) !important;
 	}
 }

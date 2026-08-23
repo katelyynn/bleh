@@ -5,10 +5,13 @@
  */
 
 import { trans, translation } from '@/build/trans';
+import { icons } from '@/components/shared/icon.tsx';
+import { saturation_themes_unsupported } from '@/build/theme.ts';
+import { RadioOptions } from '@/components/settings/provider/radio.tsx';
 
 export type setting_value = string | boolean | number | [] | string[] | {};
 
-interface setting_instance {
+export interface setting_instance {
 	css?: string;
 	default: setting_value;
 	type?:
@@ -20,10 +23,12 @@ interface setting_instance {
 		| 'list'
 		| 'tabs'
 		| 'text'
+		| 'keybind'
 		| 'other';
 	title?: translation;
 	body?: translation;
 	incompatible?: Record<string, setting_value>;
+	incompatible_strings?: translation[];
 	requires?: Record<string, setting_value>;
 	hide_if_incompatible?: boolean;
 	require_reload?: boolean | 'partial';
@@ -31,7 +36,7 @@ interface setting_instance {
 	bubble?: boolean;
 	beta?: boolean;
 	new_release?: boolean;
-	values?: Record<string, radio_item>;
+	values?: RadioOptions;
 	min?: number;
 	max?: number;
 	step?: number;
@@ -53,8 +58,15 @@ interface radio_item {
 	name: translation | string;
 }
 
-export let settings: Record<string, setting_value> = {};
-export let inbuilt_settings = {
+interface settings {
+	version: string;
+	[key: string]: setting_value;
+}
+
+export const settings: settings = {
+	version: '',
+};
+export const inbuilt_settings = {
 	recent_artwork: {
 		css: 'recent_artwork',
 		unit: '',
@@ -108,7 +120,7 @@ export let inbuilt_settings = {
 
 export const other_setting_types = ['list'];
 
-export let settings_store: Record<string, setting_instance> = {
+export const settings_store: Record<string, setting_instance> = {
 	theme: {
 		default: 'darker',
 		type: 'radio',
@@ -132,6 +144,7 @@ export let settings_store: Record<string, setting_instance> = {
 	},
 	theme_schedule: {
 		default: false,
+		title: trans.adapt_theme,
 	},
 	theme_day: {
 		default: 'light',
@@ -155,7 +168,7 @@ export let settings_store: Record<string, setting_instance> = {
 		title: trans.high_contrast,
 	},
 	accent_type: {
-		default: 'colour',
+		default: 'default',
 		type: 'radio',
 	},
 	hue: {
@@ -187,7 +200,8 @@ export let settings_store: Record<string, setting_instance> = {
 		step: 0.2,
 		title: trans.card_background_saturation.name,
 		body: trans.card_background_saturation.body,
-		incompatible: { theme: 'light' },
+		incompatible: { theme: saturation_themes_unsupported },
+		incompatible_strings: [trans.theme_no_saturation_support],
 	},
 	lit: {
 		css: 'lit-user',
@@ -207,7 +221,7 @@ export let settings_store: Record<string, setting_instance> = {
 	},
 	noise: {
 		css: 'noise-opacity',
-		default: 0.35,
+		default: 0.25,
 		type: 'range',
 		min: 0,
 		max: 1,
@@ -473,7 +487,6 @@ export let settings_store: Record<string, setting_instance> = {
 		require_reload: 'partial',
 		title: trans.markdown_shouts.name,
 		body: trans.markdown_shouts.body,
-		bubble: true,
 	},
 	bio_markdown: {
 		default: true,
@@ -727,49 +740,49 @@ export let settings_store: Record<string, setting_instance> = {
 		title: trans.shouts,
 		body: trans.activity.types.shout,
 		type: 'checkbox',
-		icon: 'icon-16-shoutbox',
+		icon: icons.shoutbox,
 	},
 	activity_image: {
 		default: true,
 		title: trans.photos,
 		body: trans.activity.types.image,
 		type: 'checkbox',
-		icon: 'icon-16-gallery-vertical',
+		icon: icons.gallery,
 	},
 	activity_obsess: {
 		default: true,
 		title: trans.obsessions,
 		body: trans.activity.types.obsess,
 		type: 'checkbox',
-		icon: 'icon-16-obsession',
+		icon: icons.obsession,
 	},
 	activity_love: {
 		default: true,
 		title: trans.loved,
 		body: trans.activity.types.love,
 		type: 'checkbox',
-		icon: 'icon-16-heart',
+		icon: icons.heart,
 	},
 	activity_bookmark: {
 		default: true,
 		title: trans.bookmarks,
 		body: trans.activity.types.bookmark,
 		type: 'checkbox',
-		icon: 'icon-16-bookmark',
+		icon: icons.bookmark,
 	},
 	activity_wiki: {
 		default: true,
 		title: trans.wiki,
 		body: trans.activity.types.wiki,
 		type: 'checkbox',
-		icon: 'icon-16-bio',
+		icon: icons.wiki,
 	},
 	activity_install: {
 		default: true,
 		title: trans.installation,
 		body: trans.activity.types.install,
 		type: 'checkbox',
-		icon: 'icon-16-download',
+		icon: icons.download,
 	},
 	simulate_scroll: {
 		default: true,
@@ -784,59 +797,39 @@ export let settings_store: Record<string, setting_instance> = {
 		body: trans.use_quick_switcher.body,
 	},
 	rabbit_search: {
-		default: 'd',
+		default: ['⌘', 'D'],
 		title: trans.search,
-		type: 'text',
-		min: 1,
-		max: 1,
-		icon: 'icon-16-search',
-		placeholder: 'none',
+		type: 'keybind',
+		icon: icons.search,
 		keybind: ['⌘', 'D'],
-		warn_if_empty: true,
 	},
 	rabbit_primary: {
-		default: 'k',
+		default: ['⌘', 'K'],
 		title: trans.open,
-		type: 'text',
-		min: 1,
-		max: 1,
-		icon: 'icon-16-rabbit',
-		placeholder: 'none',
+		type: 'keybind',
+		icon: icons.rabbit,
 		keybind: ['⌘', 'K'],
-		warn_if_empty: true,
 	},
 	rabbit_profile: {
-		default: 'p',
+		default: ['⌘', 'P'],
 		title: trans.profile,
-		type: 'text',
-		min: 1,
-		max: 1,
-		icon: 'icon-16-user',
-		placeholder: 'none',
+		type: 'keybind',
+		icon: icons.user,
 		keybind: ['⌘', 'P'],
-		warn_if_empty: true,
 	},
 	rabbit_shortcut: {
-		default: 's',
+		default: ['⌘', 'S'],
 		title: trans.starred_friend.name,
-		type: 'text',
-		min: 1,
-		max: 1,
-		icon: 'icon-16-starred-friend',
-		placeholder: 'none',
+		type: 'keybind',
+		icon: icons.starred_friend,
 		keybind: ['⌘', 'S'],
-		warn_if_empty: true,
 	},
 	rabbit_bleh_settings: {
-		default: 'b',
+		default: ['⌘', 'B'],
 		title: trans.settings,
-		type: 'text',
-		min: 1,
-		max: 1,
-		icon: 'icon-16-bleh',
-		placeholder: 'none',
+		type: 'keybind',
+		icon: icons.bleh_settings,
 		keybind: ['⌘', 'B'],
-		warn_if_empty: true,
 	},
 	prefer_no_redirect: {
 		default: true,
@@ -1083,11 +1076,19 @@ export let settings_store: Record<string, setting_instance> = {
 		title: trans.show_disc_image.name,
 		body: trans.show_disc_image.body,
 	},
-	count_bar_right: {
-		default: true,
-		title: trans.count_bar_right.name,
-		body: trans.count_bar_right.body,
+	count_bar_axis: {
+		type: 'radio',
+		default: 'right',
+		title: trans.count_bar_right,
 		bubble: true,
+		values: {
+			left: {
+				name: trans.left_align,
+			},
+			right: {
+				name: trans.right_align,
+			},
+		},
 	},
 	date_selector: {
 		default: 'preset',
@@ -1125,5 +1126,19 @@ export let settings_store: Record<string, setting_instance> = {
 		default: false,
 		title: trans.show_scroller,
 		bubble: true,
+	},
+	count_bar_style: {
+		default: 'minimal',
+		type: 'radio',
+		title: trans.count_bar_style,
+		require_reload: 'partial',
+		values: {
+			classic: {
+				name: trans.classic,
+			},
+			minimal: {
+				name: trans.minimal,
+			},
+		},
 	},
 };

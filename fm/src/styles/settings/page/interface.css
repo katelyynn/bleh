@@ -1,9 +1,12 @@
-[data-bleh--shout_markdown="false"] .if-markdown-on,
-[data-bleh--shout_markdown="true"] .if-markdown-off {
-	display: none;
-}
-
 .bars {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+	gap: 4px 0;
+	margin: 0 auto;
+
+	max-width: calc((180px + 10px) * 3 - 10px);
+
+	&.v2 {
+		gap: 8px 0;
+	}
 }

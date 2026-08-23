@@ -19,10 +19,10 @@ import { get_trans_key, lang_info, tl, trans } from '@/build/trans';
 import { dialog, dialog_rm } from '@/components/dialog/dialog';
 import { markdown } from '@/components/markdown/markdown';
 import { notify } from '@/components/dialog/notify';
-import { load_settings } from '../../config.js';
+import { load_settings } from '../../config.ts';
 import { version } from '@/main';
-import { update_page } from '@/page';
-import { ff } from '@/components/settings/sku.js';
+import { update_page, useSettings } from '@/page';
+import { ff } from '@/components/settings/sku.ts';
 import { html, render } from 'lighterhtml';
 import {
 	compile_settings,
@@ -56,6 +56,12 @@ import { avatar } from '@/components/shared/avatar.js';
 import { convert_lang_to_country, flag } from '@/components/shared/flag.js';
 import { lotus_modal } from '@/components/music/lotus.js';
 import { new_indicator } from '@/components/shared/indicator.js';
+import {
+	interface_page,
+	rabbit_keybinds,
+} from '@/pages/bleh_settings/interface.tsx';
+import { playback } from '@/pages/bleh_settings/playback.tsx';
+import { profile } from '@/pages/bleh_settings/profile.tsx';
 
 export function bleh_settings() {
 	page.name = auth.name;
@@ -350,12 +356,20 @@ export async function render_setting_page(page_id) {
 			visual();
 		} else if (page_id == 'seasonal') {
 			seasonal();
+		} else if (page_id == 'playback') {
+			playback();
+		} else if (page_id == 'profile') {
+			profile();
+		} else if (page_id == 'interface') {
+			interface_page();
 		}
 	} catch (e) {
 		page_error(e);
 	}
 
 	if (page_id == 'interface') {
+		return;
+
 		register_skip_to([]);
 
 		let bars;
@@ -380,7 +394,7 @@ export async function render_setting_page(page_id) {
 								data-has-bar="false"
 								data-show-album-text=${settings.expand_tracks !=
 										'never' &&
-									settings.track_layout == 'column'}
+									useSettings.get('track_layout') == 'column'}
 								data-album-name-location=${settings
 									.track_album_name_location}
 							>
@@ -391,7 +405,9 @@ export async function render_setting_page(page_id) {
 								</td>
 								<td class="kate-placeholder" />
 								<td class="track-info" data-has-bar="false"
-									data-track-layout=${settings.track_layout}
+									data-track-layout=${useSettings.get(
+										'track_layout',
+									)}
 									data-album-name-location=${settings
 										.track_album_name_location}>
 					                <span class="chartlist-name">
@@ -401,7 +417,7 @@ export async function render_setting_page(page_id) {
 					                    <a>${tl(trans.artist_name)}</a>
 					                </span>
 					                ${settings.expand_tracks != 'never' &&
-							settings.track_layout == 'column'
+							useSettings.get('track_layout') == 'column'
 						? html.node`
                                     <span class="chartlist-album custom-album-text">
                                         <a>${tl(trans.album_name)}</a>
@@ -416,7 +432,7 @@ export async function render_setting_page(page_id) {
 								data-show-album-text=${settings.expand_tracks ==
 										'always' &&
 									settings.expand_tracks != 'never' &&
-									settings.track_layout == 'column'}
+									useSettings.get('track_layout') == 'column'}
 								data-album-name-location=${settings
 									.track_album_name_location}
 							>
@@ -427,7 +443,9 @@ export async function render_setting_page(page_id) {
 								</td>
 								<td class="kate-placeholder" />
 								<td class="track-info" data-has-bar="false"
-									data-track-layout=${settings.track_layout}
+									data-track-layout=${useSettings.get(
+										'track_layout',
+									)}
 									data-album-name-location=${settings
 										.track_album_name_location}>
 					                <span class="chartlist-name">
@@ -438,7 +456,7 @@ export async function render_setting_page(page_id) {
 					                </span>
 					                ${settings.expand_tracks == 'always' &&
 							settings.expand_tracks != 'never' &&
-							settings.track_layout == 'column'
+							useSettings.get('track_layout') == 'column'
 						? html.node`
                                     <span class="chartlist-album custom-album-text">
                                         <a>${tl(trans.album_name)}</a>
@@ -617,25 +635,7 @@ export async function render_setting_page(page_id) {
                             <h5>${tl(trans.quick_switcher_keybinds)}</h5>
                         </div>
                         <div class="toggle-wrap">
-                            <button class="btn see-more" onclick=${() => {
-						dialog({
-							id: 'quick_switcher_keybinds',
-							title: tl(trans.quick_switcher),
-							body: html.node`
-                                        <div class="setting-group">
-                                            ${setting({ id: 'rabbit_primary' })}
-                                            ${setting({ id: 'rabbit_search' })}
-                                            ${setting({ id: 'rabbit_profile' })}
-                                            ${
-								setting({ id: 'rabbit_shortcut' })
-							}
-                                            ${
-								setting({ id: 'rabbit_bleh_settings' })
-							}
-                                        </div>
-                                    `,
-						});
-					}}>
+                            <button class="btn see-more" onclick=${rabbit_keybinds}>
                                 ${tl(trans.change_now)}
                             </button>
                         </div>
@@ -650,6 +650,8 @@ export async function render_setting_page(page_id) {
 		render_track_preview();
 		render_tags();
 	} else if (page_id == 'playback') {
+		return;
+
 		let total_artists = 0;
 		let total_album_tracks = 0;
 
@@ -675,7 +677,7 @@ export async function render_setting_page(page_id) {
 		let header_preview;
 
 		function render_header_preview() {
-			const format = settings.format_guest_features;
+			const format = useSettings.get('format_guest_features');
 			const show_artist_tag = settings.show_guest_features;
 
 			render(
@@ -1005,6 +1007,8 @@ export async function render_setting_page(page_id) {
 			`,
 		);
 	} else if (page_id == 'profile') {
+		return;
+
 		if (!auth.name) {
 			render(
 				page.structure.main,
@@ -1102,7 +1106,9 @@ export async function render_setting_page(page_id) {
 						id: 'friends',
 						list: settings.friends,
 						func: (val) => {
-							if (!val.includes(settings.starred_friend)) {
+							if (
+								!val.includes(useSettings.get('starred_friend'))
+							) {
 								save_setting('starred_friend', '');
 							}
 
@@ -1590,11 +1596,13 @@ export function change_settings_page(page_id, setting = null) {
 }
 
 export function load_skus() {
-	for (let flag in version.feature_flags) {
+	const local = useSettings.get('feature_flags');
+
+	for (const flag in version.feature_flags) {
 		let current_state = version.feature_flags[flag].default;
 
-		if (settings.feature_flags[flag] != null) {
-			current_state = settings.feature_flags[flag];
+		if (local[flag] != null) {
+			current_state = local[flag];
 		}
 
 		document.body.setAttribute(
@@ -1818,6 +1826,7 @@ function import_settings() {
 				// safe to continue
 				set_storage('bleh', text.value);
 				Object.assign(settings, parsed);
+				useSettings.rebuild();
 				load_settings();
 
 				dialog_rm({
@@ -1885,8 +1894,11 @@ function reset_settings() {
 }
 
 function confirm_reset() {
-	for (var member in settings) delete settings[member];
-	load_settings(true);
+	for (const member in settings) delete settings[member];
+	set_storage('bleh', JSON.stringify(settings));
+
+	useSettings.rebuild();
+	load_settings();
 
 	dialog_rm({
 		id: 'reset_settings',
@@ -2213,6 +2225,14 @@ export function theme_bubbles(func = null) {
 			formal: 'void',
 			type: 'oled',
 			name: tl(trans.themes.oled),
+		},
+		{
+			type: 'sep',
+		},
+		{
+			id: 'rose_pine',
+			type: 'rose_pine',
+			name: tl(trans.themes.rose_pine),
 		},
 	];
 

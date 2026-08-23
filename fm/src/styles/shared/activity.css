@@ -1,82 +1,52 @@
-.activity-item {
+.activity-list {
 	display: flex;
 	flex-direction: column;
+	gap: 10px;
+}
+
+.activity-item {
+	display: flex;
+	align-items: center;
+	gap: 10px;
 
 	color: oklch(var(--c2));
 	text-decoration: var(--force-underline, none) !important;
 
-	position: relative;
-	padding-left: calc(var(--icon-size) + 6px);
-	--left: 0;
-
-	&:before {
-		color: oklch(var(--c3));
-	}
-
 	animation: activity 0.35s var(--trans-function);
+}
 
-	&.activity--shout {
-		--mask: var(--icon-16-shoutbox);
-	}
-	&.activity--love {
-		--mask: var(--icon-16-heart-solid);
+.activity-icon {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 5px;
+	aspect-ratio: 1 / 1;
+	background: oklch(var(--b2) / 26%);
+	--icon-size: 16px;
+	border-radius: 4px;
+	flex-shrink: 0;
 
-		&:before {
-			color: oklch(var(--l3-c));
-		}
+	&.activity-icon-bookmark,
+	&.activity-icon-love {
+		background: oklch(var(--k4) / 30%);
+		color: oklch(var(--l3-c));
 	}
-	&.activity--unlove {
-		--mask: var(--icon-16-heart);
-	}
-	&.activity--wiki {
-		--mask: var(--icon-16-bio);
-	}
-	&.activity--obsess {
-		--mask: var(--icon-16-obsession);
-	}
-	&.activity--unobsess {
-		--mask: var(--icon-16-obsession-remove);
-	}
-	&.activity--update_bleh,
-	&.activity--install_bleh,
-	&.activity--update_bwaa,
-	&.activity--install_bwaa {
-		--mask: var(--icon-16-download);
-	}
-	&.activity--image_upload {
-		--mask: var(--icon-16-gallery-vertical);
-	}
-	&.activity--unbookmark {
-		--mask: var(--icon-16-bookmark);
-	}
-	&.activity--bookmark {
-		--mask: var(--icon-16-bookmark-saved);
+}
 
-		&:before {
-			color: oklch(var(--l3-c));
-		}
-	}
+.activity-info {
+	flex: 1;
+}
 
-	& > .type {
-		display: flex;
-		justify-content: space-between;
+.activity-top {
+	display: flex;
+	flex-wrap: wrap;
+	font-size: 13px;
+	color: oklch(var(--c3));
+}
 
-		font-weight: var(--font-weight-medium);
-
-		& > .date {
-			color: oklch(var(--c3));
-			font-size: var(--font-size-sm);
-			line-height: var(--line-height-sm);
-		}
-	}
-
-	& > .name {
-		font-weight: var(--font-weight-medium);
-	}
-
-	& + .activity-item {
-		margin-top: 10px;
-	}
+.activity-type {
+	flex: 1;
+	color: oklch(var(--c2));
 }
 
 .wiki-link-smart-title {

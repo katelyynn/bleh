@@ -1,0 +1,347 @@
+/**
+ * bleh, an extension for the music site Last.fm
+ * Copyright (c) 2024-2026 katelyn and contributors
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
+import { SettingGroup } from '@/components/settings/group.tsx';
+import { createRef, ReactElement, ReactNode } from 'jsx-dom';
+import { SettingLabel } from '@/components/settings/provider/main.tsx';
+import { tl, trans } from '@/build/trans.ts';
+import { dark_themes, getThemes, light_themes, theme } from '@/build/theme.ts';
+import { avatar } from '@/components/shared/avatar.tsx';
+import { auth } from '@/build/page.ts';
+import { Icon, icons } from '@/components/shared/icon.tsx';
+import { SettingCheckbox } from '@/components/settings/provider/checkbox.tsx';
+import { match } from '@/components/settings/dynamic_theming.js';
+import {
+	theme_min,
+	theme_schedule_dialog,
+} from '@/components/dialog/theme_schedule.tsx';
+import { useSettings } from '@/page.ts';
+import { SettingIcon } from '@/components/settings/provider/icon.tsx';
+
+interface SettingThemeProps {
+	theme: theme_response;
+	onChange?: (val: theme_response) => void;
+}
+
+interface theme_response {
+	id: string;
+	adaptive: boolean;
+	theme_day: string;
+	theme_night: string;
+}
+
+export function SettingTheme({
+	theme,
+	onChange,
+}: SettingThemeProps) {
+	const themes = getThemes();
+
+	const bright: ThemeBubbleElement[] = [];
+	const moody: ThemeBubbleElement[] = [];
+	const adaptive = createRef();
+	const adaptive_tip = createRef();
+	const adaptive_tip_wrap = createRef();
+
+	const uuid = crypto.randomUUID();
+
+	useSettings.on('theme', (val, id) => {
+		if (id == uuid) return;
+
+		theme.id = val as string;
+		update();
+	});
+
+	useSettings.on('theme_schedule', (val, id) => {
+		if (id == uuid) return;
+
+		theme.adaptive = val as boolean;
+		update();
+	});
+
+	useSettings.on('theme_day', (val, id) => {
+		if (id == uuid) return;
+
+		theme.theme_day = val as string;
+		update();
+	});
+
+	useSettings.on('theme_night', (val, id) => {
+		if (id == uuid) return;
+
+		theme.theme_night = val as string;
+		update();
+	});
+
+	const wrap = (
+		<>
+			<SettingGroup>
+				<ThemeRow
+					icon={icons.bright}
+					label={tl(trans.bright.name)}
+					body={tl(trans.bright.body)}
+				>
+					{light_themes.map((id: string, i: number) => {
+						const elem = (
+							<ThemeBubble
+								id={id}
+								active={is_active(id, theme)}
+								onChange={(id: string) => set({ id })}
+								key={i}
+							/>
+						) as ThemeBubbleElement;
+
+						bright.push(elem);
+
+						return elem;
+					})}
+				</ThemeRow>
+				<ThemeRow
+					icon={icons.moody}
+					label={tl(trans.moody.name)}
+					body={tl(trans.moody.body)}
+				>
+					{dark_themes.map((
+						id: string,
+						i: number,
+					) => {
+						const elem = (
+							<ThemeBubble
+								id={id}
+								active={is_active(id, theme)}
+								onChange={(id: string) => set({ id })}
+								key={i}
+							/>
+						) as ThemeBubbleElement;
+
+						moody.push(elem);
+
+						return elem;
+					})}
+				</ThemeRow>
+				<SettingCheckbox
+					bind='theme_schedule'
+					onChange={(val: boolean) => {
+						// handled already
+						if (!theme.adaptive && !val) return;
+
+						set({
+							id: match() as string,
+							adaptive: val,
+						});
+					}}
+					ref={adaptive}
+				/>
+			</SettingGroup>
+			<p class='card-tip' ref={adaptive_tip_wrap}>
+				<span ref={adaptive_tip} />
+				<a
+					class='card-tip-link'
+					onClick={() =>
+						theme_schedule_dialog({
+							onChange: (val: theme_min) => {
+								set({
+									...val,
+								});
+								match();
+							},
+						})}
+				>
+					{tl(trans.change_schedule)}
+				</a>
+			</p>
+		</>
+	);
+
+	function update() {
+		if (adaptive.current.value != theme.adaptive) {
+			adaptive.current.value = theme.adaptive;
+		}
+
+		adaptive_tip_wrap.current.setAttribute(
+			'aria-hidden',
+			!theme.adaptive,
+		);
+		adaptive_tip.current.textContent = tl(trans.adaptive_tip, {
+			day: tl(themes[theme.theme_day].name),
+			night: tl(themes[theme.theme_night].name),
+		});
+
+		update_children(bright);
+		update_children(moody);
+	}
+
+	function update_children(list: ThemeBubbleElement[]) {
+		list.forEach((entry) => {
+			entry.active = is_active(entry.id, theme);
+		});
+	}
+
+	update();
+
+	return wrap;
+
+	function set(
+		val: {
+			id?: string;
+			adaptive?: boolean;
+			theme_day?: string;
+			theme_night?: string;
+		},
+	) {
+		theme = {
+			...theme,
+			...val,
+		};
+
+		useSettings.set('theme', theme.id, uuid);
+		useSettings.set('theme_schedule', theme.adaptive, uuid);
+		useSettings.set('theme_day', theme.theme_day, uuid);
+		useSettings.set('theme_night', theme.theme_night, uuid);
+
+		update();
+
+		if (onChange) onChange(theme);
+	}
+}
+
+function is_active(id: string, state: theme_response) {
+	return state.id == id;
+}
+
+interface ThemeRowProps {
+	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
+	icon?: string;
+	label: string;
+	body?: string;
+	children: ReactNode;
+}
+
+export function ThemeRow({
+	ref,
+	icon,
+	label,
+	body,
+	children,
+}: ThemeRowProps) {
+	return (
+		<div class={['setting', 'theme-row']} ref={ref}>
+			{icon && <SettingIcon name={icon} />}
+			<SettingLabel name={label} body={body} />
+			<div class='theme-bubbles'>
+				{children}
+			</div>
+		</div>
+	);
+}
+
+interface ThemeBubbleProps {
+	active?: boolean;
+	id: string;
+	onChange?: (val: string) => void;
+}
+
+type ThemeBubbleElement = ReactElement & HTMLButtonElement & {
+	active: boolean;
+};
+
+export function ThemeBubble({
+	active,
+	id,
+	onChange,
+}: ThemeBubbleProps) {
+	const source: theme = getThemes()[id];
+
+	const bubble = (
+		<button
+			type='button'
+			class={['btn', 'theme-bubble']}
+			onClick={() => {
+				active = true;
+
+				if (onChange) onChange(id);
+
+				update();
+			}}
+		>
+			<ThemePreview id={id} type={source.type} />
+			<strong>
+				<span class='theme-name'>
+					{source.icon && <Icon name={source.icon} />}
+					{tl(source.name)}
+				</span>
+			</strong>
+			{source.new_release && (
+				<label class='theme-bubble-new colourful'>
+					{tl(trans.new)}
+				</label>
+			)}
+		</button>
+	) as ThemeBubbleElement;
+
+	Object.defineProperty(bubble, 'id', {
+		get() {
+			return id;
+		},
+	});
+
+	Object.defineProperty(bubble, 'active', {
+		get() {
+			return active;
+		},
+		set(val: boolean) {
+			active = val;
+			update();
+		},
+	});
+
+	function update() {
+		bubble.setAttribute('aria-selected', String(active));
+	}
+
+	update();
+
+	return bubble;
+}
+
+interface ThemePreviewProps {
+	id: string;
+	type: 'light' | 'dark';
+}
+
+function ThemePreview({
+	id,
+	type,
+}: ThemePreviewProps) {
+	return (
+		<div class='bubble'>
+			<div
+				class={['inner', 'theme-preview']}
+				data-bleh--theme={id}
+				data-bleh--theme_type={type}
+			>
+				<div class='preview-inner'>
+					<div
+						class='preview-image'
+						style={{
+							backgroundImage: `url(${
+								avatar(auth.avatar, 'avatar300s')
+							})`,
+						}}
+					/>
+					<div class='preview-card'>
+						<div class='preview-card-main'>
+							<div class='preview-header'>Aa</div>
+							<div class='preview-text' />
+							<div class={['preview-text', 'row-2']} />
+							<div class={['preview-text', 'row-3']} />
+						</div>
+						<div class='preview-card-side' />
+					</div>
+				</div>
+			</div>
+		</div>
+	);
+}

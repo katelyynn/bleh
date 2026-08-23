@@ -14,7 +14,7 @@ import {
 import { tl, trans } from '@/build/trans';
 import { notify } from '@/components/dialog/notify';
 import { auth, page } from '@/build/page';
-import { request_reload } from '@/config';
+import { request_reload, useSettings } from '@/config';
 import { log } from '@/build/log.js';
 import { change_settings_page } from '@/pages/bleh_settings/bleh_settings.js';
 import { dialog_rm } from '@/components/dialog/dialog';
@@ -28,6 +28,7 @@ import { chart_reflow } from '@/components/music/chart';
 import { set_storage } from '@/build/tools';
 import { ff } from './sku';
 import { new_indicator } from '../shared/indicator';
+import { getThemes } from '@/build/theme.ts';
 
 interface setting {
 	id: string;
@@ -1685,25 +1686,23 @@ function reset_text(id, input, submit, option, reset_btn, avatar) {
 }
 
 export function save_setting(id: string, value: setting_value) {
+	log(`saving ${id}`, 'settings', 'info', { value });
 	const store = settings_store[id] || {};
 	const type = store.type || 'toggle';
 
 	settings[id] = value;
 
 	if (!other_setting_types.includes(type) && store.bubble) {
-		document.body.setAttribute(`data-bleh--${id}`, value.toString());
+		document.body.setAttribute(`data-bleh--${id}`, String(value));
 	}
 
 	if (id == 'theme') {
-		if (['light', 'ink'].includes(value as string)) {
-			settings.theme_type = 'light';
-		} else {
-			settings.theme_type = 'dark';
-		}
+		// causing issues with loading
+		settings.theme_type = getThemes()[value as string].type;
 
 		document.body.setAttribute(
 			`data-bleh--theme_type`,
-			settings.theme_type,
+			settings.theme_type as string,
 		);
 
 		chart_reflow();
@@ -1779,7 +1778,7 @@ export function seasonal_colour_switch() {
 }
 
 export function compile_settings() {
-	let clone = structuredClone(settings);
+	const clone = structuredClone(settings);
 
 	for (let s in clone) {
 		console.log('settings marin before loop', s, clone[s], typeof clone[s]);

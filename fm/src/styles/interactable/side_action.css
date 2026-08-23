@@ -1,6 +1,7 @@
 .stationlinks {
 	order: 10;
 }
+
 .side-actions {
 	display: flex;
 	flex-direction: column;
@@ -76,7 +77,13 @@
 		}
 	}
 
-	& > :last-child {
+	& > :last-child:not(.attendance-control) {
+		--last-child-sep: none;
+	}
+}
+
+.attendance-control:last-child {
+	> .attendance-btn--maybe {
 		--last-child-sep: none;
 	}
 }
@@ -185,7 +192,6 @@
 	&:hover {
 		--col: oklch(var(--l3-c));
 		--mask-colour: color-mix(in oklch, oklch(var(--l3-c)), oklch(var(--l4-c)) 40%);
-		--force-font-weight: var(--font-weight-medium);
 	}
 }
 

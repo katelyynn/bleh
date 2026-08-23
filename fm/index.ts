@@ -86,7 +86,9 @@ const bundle_css: esbuild.Plugin = {
 				bundle: true,
 				minify: true,
 				write: false,
-				loader: { '.css': 'css' },
+				loader: {
+					'.css': 'css',
+				},
 			});
 
 			return {
@@ -104,13 +106,12 @@ const shared_opts: Omit<BundleOptions, 'name'> = {
 	banner: { js: JS_BANNER, css: CSS_BANNER },
 	bundle: true,
 	minify: false,
-	write: true,
 	packages: 'bundle',
 	platform: 'browser',
 	format: 'iife',
 	loader: { '.svg': 'text' },
 	plugins: [bundle_css, denoPlugin()],
-	minifyWhitespace: true,
+	minifyWhitespace: false,
 	minifyIdentifiers: false,
 	minifySyntax: false,
 	globalName: 'bleh',

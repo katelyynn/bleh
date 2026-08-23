@@ -24,6 +24,7 @@ import tippy from 'tippy.js';
 import { hoshino } from '@/components/music/hoshino';
 import { header_colour } from '@/components/page/colour';
 import { icon, icons } from '@/components/shared/icon';
+import { useSettings } from '@/page.ts';
 
 export function bleh_obsession() {
 	const obsession_container = document.querySelector('.obsession-container');
@@ -96,7 +97,7 @@ export function bleh_obsession() {
 
 	artist_name.classList.add('header-new-crumb');
 
-	if (settings.format_guest_features) {
+	if (useSettings.get('format_guest_features')) {
 		const formatted = name_includes(
 			track_title.textContent.trim(),
 			artist_name.textContent,

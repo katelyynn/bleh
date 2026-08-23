@@ -5,9 +5,7 @@
  */
 
 import { html } from 'lighterhtml';
-import { settings } from './config';
 import { page } from './page';
-import { copy } from './tools';
 
 export function log(text, system, type = 'info', append = {}) {
 	if (!page.structure.logs) {
@@ -69,27 +67,5 @@ export function log(text, system, type = 'info', append = {}) {
 			`background: ${system_colour}; display: block; width: fit-content; font-weight: bold; color: #000; padding: 0 4px; border-radius: 4px`,
 			'color: unset',
 		);
-	}
-
-	if (settings && settings.feature_flags) {
-		if (settings.feature_flags.developer == true) {
-			page.structure.logs.appendChild(html.node`
-                <div class="log" data-type=${type}>
-                    <span class="system" style="background: ${system_colour}">${system}</span>
-                    <span class="text">${text}</span>
-                    ${
-				has_append
-					? html.node`
-                    <span class="log-copy" onclick=${() => {
-						copy(JSON.stringify(append));
-					}}>
-                        (copy)
-                    </span>
-                    `
-					: ''
-			}
-                </div>
-            `);
-		}
 	}
 }

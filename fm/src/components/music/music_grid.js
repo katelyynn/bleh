@@ -23,6 +23,7 @@ import tippy from 'tippy.js';
 import { expand_avatar } from '@/components/shared/avatar';
 import { save_hoshino_artwork } from '@/components/music/hoshino';
 import { header_colour } from '../page/colour';
+import { useSettings } from '@/page.ts';
 
 export function music_grids(search = page.structure.main, use_colour = true) {
 	if (!search) return;
@@ -270,7 +271,7 @@ export function music_grids(search = page.structure.main, use_colour = true) {
 				artist.textContent.trim(),
 			);
 
-			if (settings.format_guest_features) {
+			if (useSettings.get('format_guest_features')) {
 				const name_elem = name;
 				const artist_elem = artist;
 

@@ -31,7 +31,10 @@ export const icons = {
 	save: 'check',
 	done: 'check',
 	command: 'command',
+	option: 'option',
+	backspace: 'backspace',
 	shift: 'shift',
+	submit: 'submit',
 	home: 'home',
 	edit: 'edit',
 	bulk_edit: 'edit-bulk',
@@ -74,6 +77,7 @@ export const icons = {
 	sponsor: 'sponsor',
 	message_sponsor: 'sponsor-rewards',
 	bookmark: 'bookmark',
+	bookmark_fill: 'bookmark-fill',
 	playlist: 'playlist',
 	dev: 'settings',
 	settings: 'settings',
@@ -100,8 +104,9 @@ export const icons = {
 	track: 'track',
 	user: 'user',
 	users: 'users',
-	starred_friend: 'star-fill',
+	starred_friend: 'starred-friend',
 	star: 'star',
+	star_fill: 'star-fill',
 	tags: 'tag',
 	tag: 'tag',
 	search: 'search',
@@ -182,6 +187,26 @@ export const icons = {
 	animated_dots: 'animated-dots',
 	logout: 'logout',
 	mouse: 'mouse',
+	spinner: 'spinner',
+	rabbit: 'rabbit',
+	external: 'external',
+	minis: 'mini',
+	bright: 'bright',
+	moody: 'moody',
+	redirect: 'redirect',
+	profile_info: 'profile-info',
+	snow: 'snow',
+	effects: 'effects',
+	calendar: 'calendar',
+	location: 'location',
+	going: 'going',
+	maybe: 'maybe',
+	extension: 'extension',
+	heart: 'heart',
+	heart_fill: 'heart-solid',
+	activity: 'activity',
+	recent: 'recent',
+	compose: 'compose',
 };
 
 interface icon {
@@ -203,29 +228,58 @@ export function icon({ name, identifier, use_mask = true }: icon) {
 	);
 }
 
-interface IconProps {
-	name: string;
+type IconProps = {
+	name?: string;
 	identifier?: string;
 	mask?: boolean;
-}
+	className?: string;
+} & Omit<JSX.IntrinsicElements['span'], 'class' | 'style'>;
 
 export function Icon({
-	name,
+	name = 'inherit',
 	identifier,
 	mask = true,
+	className,
+	...props
 }: IconProps) {
 	return (
 		<span
 			class={[
 				'bleh-icon',
-				`bleh-icon-${name}`,
+				name && `bleh-icon-${name}`,
 				mask && 'use-mask',
 				identifier && `bleh-icon-${identifier}`,
+				className && className,
 			]}
 			style={icon_mask({ name })}
+			{...props}
 		>
 			{name} (icon)
 		</span>
+	);
+}
+
+export function SaveIcon({
+	identifier,
+}: Partial<IconProps>) {
+	return (
+		<Icon
+			name={icons.check_thick}
+			identifier={identifier}
+			className='bleh-icon-save'
+		/>
+	);
+}
+
+export function CancelIcon({
+	identifier,
+}: Partial<IconProps>) {
+	return (
+		<Icon
+			name={icons.x}
+			identifier={identifier}
+			className='bleh-icon-cancel'
+		/>
 	);
 }
 

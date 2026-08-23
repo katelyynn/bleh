@@ -39,9 +39,9 @@ import { music_grids } from '@/components/music/music_grid';
 import { nag_bar } from '@/components/dialog/nag_bar';
 import { load_notifications, notify } from '@/components/dialog/notify';
 import { patch_titles } from '@/components/music/track.js';
-import { load_settings } from '@/config';
+import { load_settings, Settings } from '@/config';
 import { theme_version, version } from '@/main';
-import { append_nav } from '@/components/page/navigation';
+import { append_nav, update_branding_type } from '@/components/page/navigation';
 import { bleh_albums } from '@/pages/album';
 import { bleh_artists } from '@/pages/artist';
 import { bleh_settings } from '@/pages/bleh_settings/bleh_settings.js';
@@ -106,8 +106,13 @@ import { clean_storage } from './components/settings/storage';
 import { register_auth } from './components/profile/auth';
 import { notify_if_new_update } from './components/page/update';
 import { bleh_now } from './pages/now/now';
+import { applyCSP } from '@/csp.ts';
+
+export const useSettings: Settings = new Settings();
 
 export function bleh() {
+	page.continue = true;
+
 	florence({
 		page,
 		on_head_load: () => {
@@ -115,10 +120,18 @@ export function bleh() {
 			favi();
 			page.state.previous_title = document.title;
 			document.title = '...';
+
+			applyCSP();
 		},
 		on_body_load: () => {
 			clean_storage();
 			favi();
+
+			const logo = document.querySelector('.masthead-logo a');
+			if (!logo) {
+				handle_error_500();
+				return;
+			}
 
 			page.state.colour_preview = html.node`
                 <div class="colour-preview" />
@@ -170,11 +183,14 @@ export function bleh() {
 			lotus();
 			oracle_data();
 			sponsors();
+
+			useSettings.on('branding_type', update_branding_type);
 		},
 		on_mutation: main_flow,
 		on_page_change: load_page,
 		on_subpage_change: () => {
-			load_settings();
+			//useSettings.rebuild();
+			//load_settings();
 
 			if (page.state.settings_reload) {
 				page.state.settings_reload = false;
@@ -299,10 +315,10 @@ export function handle_error_500() {
 }
 
 function main_flow() {
+	if (!page.continue) return;
+
 	try {
 		lookup_lang();
-
-		if (page.state.error) return;
 
 		if (page.type == 'artist' || page.type == 'album') {
 			bleh_gallery();
@@ -373,7 +389,16 @@ function main_flow() {
 			correct_generic_artist('music-more-artists-item');
 		}
 
-		if (settings.corrections) {
+		if (
+			useSettings.get('corrections') ||
+			useSettings.get('format_guest_features')
+		) {
+			if (page.type == 'artist' && page.subpage == 'overview') {
+				correct_generic_combo_no_artist('artist-top-albums-item');
+			}
+		}
+
+		if (useSettings.get('corrections')) {
 			correct_generic_combo('resource-list--release-list-item');
 			correct_generic_combo('similar-albums-item');
 			correct_generic_combo('track-similar-tracks-item');
@@ -437,6 +462,7 @@ function main_flow() {
 			}
 		}
 	} catch (e) {
+		page.continue = false;
 		handle_error(e);
 	}
 }
@@ -445,7 +471,7 @@ export function is_url(url: string) {
 	return window.location.pathname.startsWith(`${root}${url}`);
 }
 
-function load_page(main_content = null) {
+function load_page(main_content?: HTMLElement) {
 	if (page.state.activity_preview_timer) {
 		clearInterval(page.state.activity_preview_timer);
 	}
@@ -485,15 +511,6 @@ function load_page(main_content = null) {
 	bleh_footer();
 
 	remove_lastfm_styles();
-
-	const masthead = document.body.querySelector('.masthead');
-	const loading_indicator = document.body.querySelector(
-		':scope > #initial-tealium-data',
-	);
-
-	new IntersectionObserver(([entry]) => {
-		masthead.classList.toggle('scrolled', !entry.isIntersecting);
-	}).observe(loading_indicator);
 
 	prepare_music();
 
@@ -536,10 +553,11 @@ function load_page(main_content = null) {
 			nag_bar();
 		}
 
-		if (settings.corrections || settings.format_guest_features) {
-			if (page.type == 'artist') {
-				correct_generic_combo_no_artist('artist-top-albums-item');
-			} else if (page.type == 'track') {
+		if (
+			useSettings.get('corrections') ||
+			useSettings.get('format_guest_features')
+		) {
+			if (page.type == 'track' && page.subpage == 'overview') {
 				correct_generic_combo('source-album-details');
 			}
 		}

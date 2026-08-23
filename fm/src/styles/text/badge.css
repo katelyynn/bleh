@@ -33,9 +33,6 @@
 	}
 
 	&.new {
-		--hue-over: 317;
-		--sat-over: 1.44;
-		--lit-over: 0.96;
 		animation: new 4s linear infinite;
 
 		box-shadow: 0 0 20px oklch(var(--h4) / 40%);
@@ -51,6 +48,13 @@
 	}
 }
 
+.theme-bubble-new,
+.new-badge.new {
+	--hue-over: 317;
+	--sat-over: 1.44;
+	--lit-over: 0.96;
+}
+
 .taste-badge {
 	text-transform: uppercase;
 	font-weight: var(--font-weight-bold) !important;
@@ -63,7 +67,7 @@
 	align-items: center;
 	height: var(--icon-size);
 }
+
 .sku > .bleh-icon-container {
-	animation: staggered_spinner 3s cubic-bezier(0.34, 1.56, 0.64, 1)
-		infinite;
+	animation: staggered_spinner 3s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
 }

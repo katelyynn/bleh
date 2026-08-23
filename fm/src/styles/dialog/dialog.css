@@ -37,23 +37,24 @@
 		flex-direction: column;
 		gap: var(--card-padding);
 
-		animation: var(--motion, solarium 0.24s var(--trans-function));
+		translate: 0 0;
+		scale: 1;
+		transform-origin: bottom;
+		animation: var(--motion, modal_in 0.3s var(--trans-function-ani));
 
-		transition-property: transform, filter, opacity;
-		transition-duration: 0.24s;
-		transition-timing-function: var(--trans-function);
+		transition-property: translate, opacity;
+		transition-duration: 0.3s;
+		transition-timing-function: var(--trans-function-ani);
 
 		max-height: 80vh;
 
 		[data-bleh--reduced_motion="true"] & {
 			transition-duration: var(--trans);
-			filter: none !important;
-			transform: unset !important;
+			translate: unset !important;
 		}
 
 		&.to-remove {
-			filter: blur(calc(var(--solarium-percent) * 3px));
-			transform: scale(0.98);
+			translate: 0 6px;
 			opacity: 0;
 		}
 
@@ -90,10 +91,8 @@
 				max-height: 100%;
 				display: var(--cards-overlay-display);
 
-				background-image: var(
-					--cards-overlay-image,
-					unset
-				), var(--cards-overlay) !important;
+				background-image: var(--cards-overlay-image,
+					unset), var(--cards-overlay) !important;
 				background-size: 100px;
 				background-repeat: repeat-x !important;
 				background-position: 0 -60px !important;
@@ -117,76 +116,6 @@
 			border: unset;
 			--override-full-shadow: none;
 
-			.full-avatar-wrapper {
-				display: flex;
-				flex-direction: column;
-
-				.full-avatar {
-					display: inline-block;
-					background: oklch(var(--b5));
-					border-radius: var(--card-radius);
-					box-shadow: var(--overlay-shadow);
-					overflow: hidden;
-					position: relative;
-
-					max-width: 100%;
-					max-height: 100%;
-
-					& > img {
-						display: block;
-
-						max-width: 100%;
-						max-height: 70vh;
-
-						width: auto;
-						height: auto;
-
-						object-fit: contain;
-
-						--mask-size: var(--cover-size-300);
-					}
-
-					& > .alt-text {
-						position: absolute;
-						top: 10px;
-						right: 10px;
-						z-index: 20;
-
-						background: rgb(255, 255, 255, 40%);
-						box-shadow: 0 0 0 1px inset rgb(255, 255, 255, 10%), 0
-							2px 20px rgb(0, 0, 0, 10%);
-						color: #000;
-
-						-webkit-box-orient: vertical;
-						display: -webkit-box;
-						-webkit-line-clamp: 1;
-						overflow: hidden;
-
-						max-width: 300px;
-
-						transition-property: background;
-						transition-duration: var(--trans);
-						transition-timing-function: var(--trans-function);
-
-						& > .identifier {
-							color: #333;
-							margin-right: 6px;
-						}
-
-						&:hover {
-							background: rgb(255, 255, 255, 80%);
-							transition: none;
-						}
-					}
-				}
-
-				.modal-footer {
-					background: unset;
-					padding: unset;
-					border: unset;
-				}
-			}
-
 			.modal-close-button {
 				display: none;
 				--filter: blur(20px) contrast(40%);
@@ -201,6 +130,18 @@
 			width: 96vw;
 			max-width: 96vw;
 		}
+	}
+}
+
+@keyframes modal_in {
+	from {
+		translate: 0 6px;
+		opacity: 0;
+	}
+
+	to {
+		translate: 0 0;
+		opacity: 1;
 	}
 }
 

@@ -31,7 +31,7 @@
 	}
 
 	/* see .this-month */
-	& > .see-more {
+	&>.see-more {
 		--col: oklch(var(--c3));
 		--mask-colour: oklch(var(--c3) / 80%);
 	}
@@ -56,6 +56,7 @@
 		--mask: var(--icon-16-edit-mini);
 		text-transform: lowercase;
 	}
+
 	.read-more {
 		--mask: var(--icon-16-arrow-right);
 	}
@@ -130,18 +131,18 @@
 	gap: 12px !important;
 	margin-bottom: 4px !important;
 
-	& > .bleh-icon {
+	&>.bleh-icon {
 		display: none;
 	}
 
-	.chartlist + & {
+	.chartlist+& {
 		margin-top: 10px;
 	}
 }
 
 h4 {
 	&:not(.source-album-name, .top-header, .factbox-heading) {
-		& + p {
+		&+p {
 			margin-top: -5px;
 		}
 	}
@@ -153,10 +154,12 @@ h5 {
 	font-weight: var(--font-weight-medium);
 	cursor: default;
 }
+
 h4 {
 	color: oklch(var(--c1));
 }
 
+em,
 i {
 	font-style: italic;
 }
@@ -169,6 +172,7 @@ i {
 		cursor: default;
 	}
 }
+
 .text-light {
 	color: oklch(var(--c3));
 }
@@ -189,15 +193,15 @@ samp {
 	color: oklch(var(--c3));
 	background-color: oklch(var(--b6));
 	padding: 0 4px;
-	font-size: calc(var(--font-size) - 1px);
+	font-size: var(--font-size);
 	line-height: var(--line-height);
 	font-family: var(--font-code);
-	border-radius: var(--item-small-radius);
+	border-radius: var(--radius-xs);
 }
 
 pre {
 	padding: 4px 8px;
-	border-radius: var(--item-med-radius);
+	border-radius: var(--radius-s);
 }
 
 .keybind {
@@ -205,7 +209,7 @@ pre {
 	gap: 2px;
 	opacity: 0.9;
 
-	& > kbd {
+	&>kbd {
 		margin: unset !important;
 		font-family:
 			Funnel Sans,
@@ -229,6 +233,74 @@ pre {
 	}
 }
 
+.key-bind {
+	background: transparent;
+	border-radius: 4px;
+	padding: 1px 6px;
+	box-shadow: inset 0 0 0 1px var(--separator-base), 0 2px 0 0 oklch(var(--b3)), inset 0 4px 0 0 transparent;
+	font-family: var(--font) !important;
+	cursor: default;
+	user-select: none;
+	translate: 0 0;
+	color: oklch(var(--c2));
+
+	&:not([data-entering]):active {
+		translate: 0 2px;
+		box-shadow: inset 0 0 0 1px var(--separator-base), 0 2px 0 0 transparent, inset 0 3px 0 0 oklch(var(--b3) / 50%);
+		color: oklch(var(--c3));
+	}
+
+	transition-property: box-shadow,
+	translate,
+	color;
+	transition-duration: var(--trans);
+	transition-timing-function: var(--trans-function);
+
+	&[data-entering] {
+		--separator-base: oklch(var(--l3-c));
+		--b3: var(--f4);
+		color: oklch(var(--l3-c));
+	}
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-width: 22px;
+	text-transform: uppercase;
+}
+
+.key-bind-list {
+	display: flex;
+	gap: 4px;
+	height: fit-content;
+}
+
+.key-bind-input {
+	position: absolute;
+	inset: 0;
+	opacity: 0;
+	pointer-events: none;
+	appearance: none;
+	border: none;
+	background: none;
+	font: inherit;
+	color: inherit;
+	border-radius: none;
+	--focus-outline: none !important;
+	padding: unset;
+	min-width: 30px;
+	width: 30px;
+	text-align: center;
+}
+
+.key-bind-text {
+	display: flex;
+}
+
+.bleh-icon-key-bind {
+	margin: 0 -2px;
+}
+
 .not-text {
 	cursor: default !important;
 }
@@ -243,8 +315,8 @@ pre {
 		display: none;
 	}
 
-	.bleh--panel > &,
-	.setting > .info > & {
+	.bleh--panel>&,
+	.setting>.info>& {
 		margin-top: unset;
 	}
 
@@ -253,15 +325,16 @@ pre {
 		margin: unset !important;
 	}
 
-	.setting-group + & {
+	.setting-group+& {
 		margin-top: 5px;
 		padding: 0 12px;
 	}
 
-	.bleh--panel > .setting-group + & {
+	.bleh--panel>.setting-group+& {
 		margin-top: -10px;
 	}
 }
+
 .card-tip-link {
 	margin-left: 8px;
 }
@@ -297,7 +370,7 @@ pre {
 	on followers/following pages, lastfm returns
 	.no-data-message followed by a blank <p></p>,
 	leading to a gap from their own css */
-	& + p:empty {
+	&+p:empty {
 		display: none;
 	}
 
@@ -306,6 +379,7 @@ pre {
 		color: inherit;
 	}
 }
+
 .no-data-message--obsession-history {
 	padding: unset;
 }
@@ -340,6 +414,7 @@ pre {
 		pointer-events: none;
 	}
 }
+
 .tip.preview {
 	position: relative;
 	padding-left: calc(var(--mask-size) + 4px);
@@ -394,15 +469,16 @@ hr {
 	font-family: Flow Circular, var(--font) !important;
 	user-select: none !important;
 
-	animation: placeholder-text 4s var(--trans-function-ani) infinite
-		!important;
+	animation: placeholder-text 4s var(--trans-function-ani) infinite !important;
 }
 
 @keyframes placeholder-text {
+
 	from,
 	to {
 		opacity: 0.2;
 	}
+
 	50% {
 		opacity: 1;
 	}
@@ -415,6 +491,15 @@ hr {
 
 	--icon-size: 14px;
 	--icon-colour: oklch(var(--l3-c));
+
+	color: oklch(var(--c1));
+	font-size: 16px;
+	line-height: 20px;
+	margin-bottom: var(--card-gap);
+
+	.bleh--panel>& {
+		margin-bottom: unset;
+	}
 }
 
 .goth {

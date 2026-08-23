@@ -27,7 +27,7 @@
 		--mask-size: 22px;
 
 		position: absolute;
-		top: calc((28px - 20px) / 2);
+		top: 2px;
 		left: 0;
 	}
 

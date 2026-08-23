@@ -7,7 +7,7 @@
 import { html, render } from 'lighterhtml';
 import { auth, page } from '@/build/page';
 import { tl, trans } from '@/build/trans';
-import { setting } from '@/components/settings/settings';
+import { save_setting, setting } from '@/components/settings/settings';
 import { update_colour_swatches } from '@/config';
 import {
 	page_loading,
@@ -19,9 +19,26 @@ import { ff } from '@/components/settings/sku';
 import { settings } from '@/build/config';
 import { match } from '@/components/settings/dynamic_theming';
 import { dialog } from '@/components/dialog/dialog';
-import { display_colour_presets } from '@/components/settings/swatch';
+import { colour_tile, colour_type } from '@/components/settings/swatch';
 import { header_colour } from '@/components/page/colour';
 import { avatar } from '@/components/shared/avatar';
+import { SettingTheme } from '@/components/settings/provider/theme.tsx';
+import { SettingGroup } from '@/components/settings/group.tsx';
+import { SettingSwitch } from '@/components/settings/provider/switch.tsx';
+import { SettingRange } from '@/components/settings/provider/range.tsx';
+import { createRef } from 'jsx-dom';
+import {
+	ColourTile,
+	ColourTiles,
+	SettingColour,
+} from '@/components/settings/provider/colour.tsx';
+import {
+	SettingOptions,
+	SettingOptionsSeparator,
+} from '@/components/settings/provider/options.tsx';
+import { SettingCheckbox } from '@/components/settings/provider/checkbox.tsx';
+import { PanelHead } from '@/components/text/head.tsx';
+import { icons } from '@/components/shared/icon.tsx';
 
 export function visual() {
 	if (
@@ -39,106 +56,99 @@ export function visual() {
 
 	register_skip_to([]);
 
-	let colourful_active;
-	let colourful_all;
-	let sat_bg;
-
-	let adaptive_tip;
-	let bubbles;
-
-	let theme_day;
-	let theme_night;
-
-	function render_tip() {
-		adaptive_tip.setAttribute('aria-hidden', !settings.theme_schedule);
-
-		render(
-			adaptive_tip,
-			html`
-				${tl(trans.adaptive_tip, {
-					day: tl(trans.themes[settings.theme_day]),
-					night: tl(trans.themes[settings.theme_night]),
-				})}
-				<a class="card-tip-link" onclick=${() => {
-					dialog({
-						id: 'auto_theme',
-						title: tl(trans.themes.name),
-						body: html.node`
-                        <div class="setting-group">
-                            ${theme_day = setting({
-							id: 'theme_day',
-							list: [
-								{
-									value: 'light',
-									text: tl(trans.themes.light),
-								},
-								{
-									value: 'ink',
-									text: tl(trans.themes.ink),
-								},
-								{
-									value: 'dark',
-									text: tl(trans.themes.dark),
-								},
-								{
-									value: 'darker',
-									text: tl(trans.themes.darker),
-								},
-								{
-									value: 'oled',
-									text: tl(trans.themes.oled),
-								},
-							],
-							func: () => {
-								render_tip();
-								bubbles.re_render();
-								match();
-							},
-						})}
-                            ${theme_night = setting({
-							id: 'theme_night',
-							list: [
-								{
-									value: 'light',
-									text: tl(trans.themes.light),
-								},
-								{
-									value: 'ink',
-									text: tl(trans.themes.ink),
-								},
-								{
-									value: 'dark',
-									text: tl(trans.themes.dark),
-								},
-								{
-									value: 'darker',
-									text: tl(trans.themes.darker),
-								},
-								{
-									value: 'oled',
-									text: tl(trans.themes.oled),
-								},
-							],
-							func: () => {
-								render_tip();
-								bubbles.re_render();
-								match();
-							},
-						})}
-                        </div>
-                        <p class="card-tip">${tl(trans.theme_schedule)}</p>
-                    `,
-					});
-				}}>${tl(trans.change_schedule)}</a>
-			`,
-		);
-	}
-
 	let font_choice;
 	let custom_font;
 	let font_preview;
 
 	let hovering_serif = false;
+
+	const sat_bg = createRef();
+
+	const season = page.state.seasons?.current;
+
+	page.structure.main!.replaceChildren(
+		<>
+			<section class='bleh--panel'>
+				<PanelHead icon={icons.visual}>
+					{tl(trans.themes.name)}
+				</PanelHead>
+				<SettingTheme
+					theme={{
+						id: settings.theme as string,
+						adaptive: settings.theme_schedule as boolean,
+						theme_day: settings.theme_day as string,
+						theme_night: settings.theme_night as string,
+					}}
+				/>
+				<SettingGroup>
+					<SettingSwitch bind='solarium' />
+					<SettingRange bind='noise' />
+					<SettingRange bind='sat_bg' />
+				</SettingGroup>
+			</section>
+			<section class='bleh--panel'>
+				<PanelHead icon={icons.accent}>
+					{tl(trans.colours)}
+				</PanelHead>
+				<div class='inner-preview'>
+					<ColourTiles>
+						<ColourTile type='b2' />
+						<ColourTile type='b3' />
+						<ColourTile type='b4' />
+						<ColourTile type='b5' />
+						<ColourTile type='l3' />
+						<ColourTile type='l4' />
+						<ColourTile type='h3' />
+						<ColourTile type='h4' />
+					</ColourTiles>
+				</div>
+				<SettingColour
+					colour={{
+						type: settings.accent_type as colour_type,
+						hue: settings.hue as number,
+						sat: settings.sat as number,
+						lit: settings.lit as number,
+					}}
+					onChange={(val) => {
+						if (settings.hue != val.hue) {
+							save_setting('hue', val.hue);
+						}
+						if (settings.sat != val.sat) {
+							save_setting('sat', val.sat);
+						}
+						if (settings.lit != val.lit) {
+							save_setting('lit', val.lit);
+						}
+						if (settings.accent_type != val.type) {
+							save_setting('accent_type', val.type);
+						}
+					}}
+					season={season}
+				/>
+				<SettingGroup>
+					<SettingOptions
+						name={tl(trans.change_my_colour_when.name)}
+						body={tl(trans.change_my_colour_when.body)}
+					>
+						<SettingCheckbox standalone bind='hue_from_artist' />
+						<SettingCheckbox standalone bind='hue_from_album' />
+						<SettingCheckbox standalone bind='hue_from_track' />
+						<SettingOptionsSeparator />
+						<SettingCheckbox
+							standalone
+							bind='colourful_tracks'
+						/>
+						<SettingCheckbox
+							standalone
+							bind='colourful_tracks_all'
+						/>
+					</SettingOptions>
+				</SettingGroup>
+			</section>
+		</>,
+	);
+
+	return;
 
 	render(
 		page.structure.main,
@@ -168,63 +178,30 @@ export function visual() {
 			        ${setting({ id: 'noise' })}
 			    </div>
 				<div class="setting-group">
-			        <div class="setting" data-type="action" id="setting_hue">
-			            <div class="heading">
-			                <h5>${tl(trans.hue)}</h5>
-			            </div>
-			            <div class="info swatch-info">
-			                <div
-			                    id="colour_custom"
-			                    class="swatch-group palette"
-			                ></div>
-			                <div class="sep swatch-sep" />
-			                <div
-			                    id="colour_palette"
-			                    class="swatch-group palette"
-			                ></div>
-			            </div>
-			        </div>
-			        <div class="setting" data-type="options">
-			            <div class="heading">
-			                <h5>${tl(trans.change_my_colour_when.name)}</h5>
-			                <p>${tl(trans.change_my_colour_when.body)}</p>
-			            </div>
-			            <div class="primary-selections">
-			                ${setting({
-				id: 'hue_from_artist',
-				standalone: true,
-			})}
-			                ${setting({
-				id: 'hue_from_album',
-				standalone: true,
-			})}
-			                ${setting({
-				id: 'hue_from_track',
-				standalone: true,
-			})}
-			                <div class="primary-selection-sep" />
-			                ${colourful_active = setting({
-				id: 'colourful_tracks',
-				standalone: true,
-				func: () => {
-					colourful_all.compat();
-				},
-			})}
-			                ${colourful_all = setting({
-				id: 'colourful_tracks_all',
-				standalone: true,
-				func: () => {
-					colourful_active.compat();
-				},
-			})}
-			            </div>
-			        </div>
-			        ${ff('card_saturation')
-				? html.node`
-                    ${(sat_bg = setting({ id: 'sat_bg' }))}
-                `
-				: ''}
-			    </div>
+					<div class="setting" data-type="action" id="setting_hue">
+						<div class="heading">
+							<h5>${tl(trans.hue)}</h5>
+						</div>
+						<div class="info swatch-info">
+							<div
+								id="colour_custom"
+								class="swatch-group palette"
+							></div>
+							<div class="sep swatch-sep" />
+							<div
+								id="colour_palette"
+								class="swatch-group palette"
+							></div>
+						</div>
+					</div>
+					<div class="setting" data-type="options">
+						<div class="heading">
+							<h5>${tl(trans.change_my_colour_when.name)}</h5>
+							<p>${tl(trans.change_my_colour_when.body)}</p>
+						</div>
+						<div class="primary-selections"></div>
+					</div>
+				</div>
 			</section>
 			<section class="bleh--panel">
 				<h4>${tl(trans.fonts)}</h4>
@@ -299,9 +276,6 @@ export function visual() {
 	);
 
 	render_tip();
-
-	display_colour_presets();
-	update_colour_swatches();
 
 	render_font_preview();
 

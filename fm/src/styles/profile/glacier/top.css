@@ -13,6 +13,7 @@
 			&[data-glacier-view="list"] {
 				--mask: var(--icon-16-list);
 			}
+
 			&[data-glacier-view="grid"] {
 				--mask: var(--icon-16-grid);
 			}
@@ -22,9 +23,11 @@
 			&.bulk-edit-button {
 				--mask: var(--icon-16-edit-bulk);
 			}
+
 			&.edit-icon {
 				--mask: var(--icon-16-edit);
 			}
+
 			&.delete-icon {
 				--mask: var(--icon-16-trash);
 				--bg-hov: oklch(var(--h4) / 10%);
@@ -33,31 +36,31 @@
 				--sat-over: var(--sat-neg) !important;
 				--lit-over: var(--lit-neg) !important;
 			}
+
 			&.love-button {
 				--mask: var(--icon-16-heart);
 				--font-size: 0;
-				--left: calc(
-                    (var(--button-height) - var(--icon-size)) / 2
-                ) !important;
+				--left: calc((var(--button-height) - var(--icon-size)) / 2) !important;
 				--btn-left: 12px !important;
 
 				&.love-button--loved {
 					--mask: var(--icon-16-heart-solid);
 				}
 			}
+
 			&.glacier-configure-button {
 				--font-size: 0;
-				--left: calc(
-                    (var(--button-height) - var(--icon-size)) / 2
-                ) !important;
+				--left: calc((var(--button-height) - var(--icon-size)) / 2) !important;
 				--btn-left: var(--button-sides) !important;
 			}
+
 			&.glacier-search-button {
 				--mask: var(--icon-16-search);
 			}
 		}
 	}
 }
+
 .glacier-library-metadata {
 	display: flex;
 	gap: var(--card-gap);
@@ -105,17 +108,18 @@
 		width: 36px;
 		height: 36px;
 		background: var(--avatar-generic-background);
-		border-radius: var(--item-small-radius);
+		border-radius: var(--radius-s);
 		box-shadow: var(--interact-shadow);
 		overflow: hidden;
 		flex-shrink: 0;
 
-		& > img {
+		&>img {
 			width: 36px;
 			height: 36px;
 		}
 	}
 }
+
 .glacier-library-focused-header {
 	display: flex;
 	flex-direction: column;
@@ -134,7 +138,7 @@
 }
 
 .value-panel {
-	.glacier-library-metadata + h2 {
+	.glacier-library-metadata+h2 {
 		margin-top: var(--card-gap) !important;
 	}
 }
@@ -145,7 +149,7 @@
 }
 
 /* user did not scrobble album in date range */
-.library-header + .message {
+.library-header+.message {
 	color: oklch(var(--c3));
 	cursor: default;
 }

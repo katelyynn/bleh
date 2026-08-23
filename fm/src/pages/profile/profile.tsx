@@ -4,7 +4,10 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { render_activity_list } from '@/components/shared/activity';
+import {
+	get_activity_list,
+	render_activity_list,
+} from '@/components/shared/activity';
 import { settings } from '@/build/config';
 import { log } from '@/build/log.js';
 import { auth, page, root } from '@/build/page';
@@ -54,6 +57,13 @@ import { header_colour } from '@/components/page/colour';
 import { keys } from '@/components/settings/storage';
 import { beta_indicator } from '@/components/shared/indicator';
 import { present_badge } from '@/components/dialog/badge';
+import { useSettings } from '@/page.ts';
+import { bleh_event_profile } from '@/pages/profile/event.tsx';
+import { PanelHead } from '@/components/text/head.tsx';
+import { icons } from '@/components/shared/icon.tsx';
+import { ActivityItem, ActivityList } from '@/components/activity/activity.tsx';
+import { PanelTop, SeeMore, ViewButtons } from '@/components/text/see_more.tsx';
+import { createRef } from 'jsx-dom';
 
 export function bleh_profiles() {
 	// the obsessions page is a user subpage but works very differently
@@ -436,19 +446,30 @@ export function bleh_profiles() {
 		}
 
 		if (is_own_profile && settings.activities) {
-			const recent_activity_section = html.node`
-                <section class="recent-activity-section">
-                    <h2>${tl(trans.activity)}</h2>
-                    ${render_activity_list()}
-                    <div class="more-link">
-                        <a href="${root}bleh/profile">${
-				tl(trans.activity_settings)
-			}</a>
-                    </div>
-                </section>
-            `;
+			const list = get_activity_list();
 
-			page.structure.side.appendChild(recent_activity_section);
+			page.structure.side!.appendChild(
+				<section class='recent-activity-section'>
+					<PanelHead icon={icons.activity}>
+						{tl(trans.activity)}
+					</PanelHead>
+					<ActivityList>
+						{list.map((activity) => (
+							<ActivityItem
+								type={activity.type}
+								involved={activity.involved}
+								context={activity.context}
+								date={activity.date}
+							/>
+						))}
+					</ActivityList>
+					<div class='more-link'>
+						<a href={`${root}bleh/profile`}>
+							{tl(trans.activity_settings)}
+						</a>
+					</div>
+				</section>,
+			);
 		}
 
 		// acquire info
@@ -1006,7 +1027,7 @@ function bleh_featured_profile_track(object) {
 		artist_elem.textContent.trim(),
 	);
 
-	if (settings.format_guest_features) {
+	if (useSettings.get('format_guest_features')) {
 		const song_title = name_elem.textContent;
 
 		const formatted = name_includes(
@@ -1026,7 +1047,7 @@ function bleh_featured_profile_track(object) {
                 ${smart_artists(formatted.song_artist, formatted.song_guests)}
             </div>
         `;
-	} else if (settings.corrections) {
+	} else if (useSettings.get('corrections')) {
 		name_elem.textContent = romanise(
 			correct_item_by_artist(
 				name_elem.textContent.trim(),
@@ -1096,10 +1117,6 @@ function profile_recents() {
 	const form = panel.querySelector('#recent-tracks-settings');
 	let tooltip;
 
-	let submit_btn;
-	let settings_btn;
-	let refresh_btn;
-
 	const can_scrobble = ff('submit_scrobble') && page.name == auth.name;
 
 	const head = panel.querySelector(':scope > h2');
@@ -1108,57 +1125,66 @@ function profile_recents() {
 	const can_api = localStorage.getItem('bleh_auth') &&
 		localStorage.getItem('bleh_auth_valid') === 'true';
 
+	const submit_btn = createRef();
+	const settings_btn = createRef();
+	const refresh_btn = createRef();
+
 	panel.insertBefore(
-		html.node`
-        <div class="top-container">
-            <h2>
-                ${tl(trans.recents)}
-            </h2>
-            <div class="view-buttons blend blend-v2">
-                ${
-			can_scrobble
-				? html.node`
-                    <button class="left-icon blend-v2-btn" data-type="add" ref=${(
-					el,
-				) => submit_btn = el} onclick=${() =>
-					submit_scrobble({
-						refresh_btn,
-						can_api,
-						func: () => {
-							setTimeout(() => {
-								refresh_tracks(refresh_btn, { quiet: true });
-							}, 200);
-						},
-					})}>
-                        ${tl(trans.new)}
-                    </button>
-                `
-				: ''
-		}
-                <button class="left-icon blend-v2-btn" data-type="refresh" ref=${(
-			el,
-		) => refresh_btn = el} onclick=${() => refresh_tracks(refresh_btn, {})}>
-                    ${tl(trans.refresh)}
-                </button>
-                ${
-			form
-				? html.node`
-                <button class="left-icon blend-v2-btn" data-type="settings" ref=${(
-					el,
-				) => (settings_btn = el)}>
-                    ${tl(trans.settings)}
-                </button>
-                `
-				: ''
-		}
-            </div>
-        </div>
-    `,
+		<PanelTop>
+			<PanelHead icon={icons.recent}>
+				{tl(trans.recents)}
+			</PanelHead>
+			<ViewButtons>
+				{can_scrobble && (
+					<SeeMore
+						blend
+						iconPlacement='left'
+						icon={icons.plus}
+						ref={submit_btn}
+						onClick={() => {
+							submit_scrobble({
+								can_api,
+								func: () => {
+									setTimeout(() => {
+										refresh_tracks(refresh_btn.current, {
+											quiet: true,
+										});
+									}, 200);
+								},
+							});
+						}}
+					>
+						{tl(trans.scrobble)}
+					</SeeMore>
+				)}
+				<SeeMore
+					blend
+					iconPlacement='left'
+					icon={icons.refresh}
+					ref={refresh_btn}
+					onClick={() => {
+						refresh_tracks(refresh_btn.current, {});
+					}}
+				>
+					{tl(trans.refresh)}
+				</SeeMore>
+				{form && (
+					<SeeMore
+						blend
+						iconPlacement='left'
+						icon={icons.settings}
+						ref={settings_btn}
+					>
+						{tl(trans.settings)}
+					</SeeMore>
+				)}
+			</ViewButtons>
+		</PanelTop>,
 		panel.firstElementChild,
 	);
 
 	if (!can_api) {
-		tippy(submit_btn, {
+		tippy(submit_btn.current, {
 			content: tl(trans.requires_api_in_settings),
 		});
 	}
@@ -1222,7 +1248,7 @@ function profile_recents() {
 		`,
 	);
 
-	tooltip = tippy(settings_btn, {
+	tooltip = tippy(settings_btn.current, {
 		theme: 'window',
 		content: form,
 		allowHTML: true,
@@ -1710,7 +1736,7 @@ function profile_tracks() {
 			    <div class="sep" />
 			    ${setting({ id: 'format_guest_features' })}
 			    ${setting({ id: 'show_guest_features' })}
-			    ${setting({ id: 'count_bar_right' })}
+			    ${setting({ id: 'count_bar_axis' })}
 			    <div class="settings-footer">
 			        <button type="submit" class="btn-primary save" onclick=${() => {
 				tooltip.hide();
@@ -1847,7 +1873,7 @@ export function open_starred_friend_window(friend_func = null) {
 			id: 'friends',
 			list: settings.friends,
 			func: (val) => {
-				if (!val.includes(settings.starred_friend)) {
+				if (!val.includes(useSettings.get('starred_friend'))) {
 					save_setting('starred_friend', '');
 				}
 
@@ -2174,4 +2200,6 @@ function bleh_profile_events(no_events) {
 
 	page.structure.side!.innerHTML = '';
 	page.structure.side!.appendChild(value_panel);
+
+	bleh_event_profile();
 }

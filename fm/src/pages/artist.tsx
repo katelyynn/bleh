@@ -46,6 +46,8 @@ import {
 	menu_tooltip,
 	Tooltip,
 } from '@/components/shared/tooltips.tsx';
+import { useSettings } from '@/page.ts';
+import { bleh_event_artist } from '@/pages/artist/event.tsx';
 
 export function bleh_artists() {
 	const artist_header = document.body.querySelector(
@@ -328,7 +330,7 @@ export function bleh_artists() {
 							page.state.top_track = original_name;
 						}
 
-						if (settings.format_guest_features) {
+						if (useSettings.get('format_guest_features')) {
 							const formatted = name_includes(
 								original_name,
 								page.name,
@@ -340,7 +342,7 @@ export function bleh_artists() {
 									formatted.song_tags,
 								)
 							}`;
-						} else if (settings.corrections) {
+						} else if (useSettings.get('corrections')) {
 							name = correct_item_by_artist(
 								original_name,
 								page.name,
@@ -472,6 +474,8 @@ export function bleh_artists() {
                     </span>
                 `);
 			});
+
+			bleh_event_artist();
 		}
 
 		if (page.subpage == 'images_image-upload') bleh_gallery_upload();
@@ -664,7 +668,7 @@ function bleh_listeners() {
 
 	function render_friends() {
 		const friends = settings.friends.filter((friend) =>
-			friend != settings.starred_friend
+			friend != useSettings.get('starred_friend')
 		);
 
 		render(
@@ -674,12 +678,14 @@ function bleh_listeners() {
 					.name}/library/music/${redirect()}${sanitise(page.name)}">
 				    <span><span class="at">@</span>${auth.name}</span>
 				</a>
-				${settings.starred_friend != ''
+				${useSettings.get('starred_friend') != ''
 					? html.node`
-            <a class="btn side-action icon-mask" data-type="profile" href="${root}user/${settings.starred_friend}/library/music/${redirect()}${
-						sanitise(page.name)
-					}">
-                <span><span class="at">@</span>${settings.starred_friend}</span>
+            <a class="btn side-action icon-mask" data-type="profile" href="${root}user/${
+						useSettings.get('starred_friend')
+					}/library/music/${redirect()}${sanitise(page.name)}">
+                <span><span class="at">@</span>${
+						useSettings.get('starred_friend')
+					}</span>
                 <span class="star-icon colourful">
                     <span class="bleh-icon" />
                 </span>

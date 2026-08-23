@@ -7,6 +7,22 @@
 import { tl, trans } from '@/build/trans';
 import { icon, icons } from './icon';
 
+export function BetaIndicator() {
+	return (
+		<label class={['new-badge', 'beta']}>
+			{tl(trans.beta)}
+		</label>
+	);
+}
+
+export function NewIndicator() {
+	return (
+		<label class={['new-badge', 'new', 'colourful']}>
+			{tl(trans.new)}
+		</label>
+	);
+}
+
 export function beta_indicator() {
 	return <label class='new-badge beta'>{tl(trans.beta)}</label>;
 }

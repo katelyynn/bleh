@@ -32,10 +32,8 @@ input {
 	--mask-colour: color-mix(in oklch, oklch(var(--c2)), oklch(var(--c3)) 50%);
 	background-color: var(--bg) !important;
 	color: var(--col) !important;
-	padding: var(
-		--padding,
-		var(--button-verts) var(--button-sides)
-	) !important;
+	padding: var(--padding,
+			var(--button-verts) var(--button-sides)) !important;
 	line-height: var(--line-height);
 	font-size: var(--font-size) !important;
 	font-weight: var(--font-weight) !important;
@@ -81,6 +79,7 @@ input {
 		background-color: var(--bg-hov) !important;
 		transition: none !important;
 	}
+
 	&[aria-expanded="true"],
 	&:active {
 		background-color: var(--bg-atv) !important;
@@ -95,6 +94,7 @@ input {
 		color: oklch(var(--c3)) !important;
 	}
 }
+
 .content-form textarea {
 	height: unset;
 }
@@ -126,6 +126,14 @@ input {
 }
 
 .input-container {
+	display: flex;
+	align-items: center;
+	gap: 10px !important;
+
+	&.save-manually {
+		margin-right: 4px !important;
+	}
+
 	position: relative;
 	--icon-size: 14px;
 
@@ -134,11 +142,9 @@ input {
 		position: absolute;
 		inset: 0;
 		border-radius: var(--input-radius);
-		background: linear-gradient(
-			180deg,
-			transparent,
-			oklch(var(--h4) / 20%)
-		);
+		background: linear-gradient(180deg,
+				transparent,
+				oklch(var(--h4) / 20%));
 		box-shadow: inset 0 0 0 1px oklch(var(--l3-c), 40%);
 		opacity: 0;
 		pointer-events: none;
@@ -179,10 +185,8 @@ input {
 	&[data-type="colour"] {
 		--size: 14px;
 
-		& > .modern-input {
-			padding-left: calc(
-				var(--button-sides) + var(--size) + var(--icon-gap)
-			) !important;
+		&>.modern-input {
+			padding-left: calc(var(--button-sides) + var(--size) + var(--icon-gap)) !important;
 			width: 110px;
 		}
 
@@ -193,7 +197,7 @@ input {
 			left: var(--button-sides);
 			width: var(--size);
 			height: var(--size);
-			border-radius: var(--item-small-radius);
+			border-radius: var(--radius-s);
 			box-shadow: var(--interact-shadow);
 			pointer-events: none;
 		}
@@ -205,12 +209,9 @@ input {
 			--icon-size: 14px;
 		}
 
-		& > .modern-input {
+		&>.modern-input {
 			cursor: pointer;
-			padding-left: calc(
-				var(--button-sides-icon) + var(--icon-size) +
-				var(--icon-gap)
-			) !important;
+			padding-left: calc(var(--button-sides-icon) + var(--icon-size) + var(--icon-gap)) !important;
 			user-select: none;
 		}
 
@@ -218,7 +219,7 @@ input {
 			--show-icon: block;
 		}
 
-		& > .legacy-input {
+		&>.legacy-input {
 			display: none;
 		}
 	}
@@ -227,11 +228,8 @@ input {
 		--mask: var(--icon-16-clock);
 		--icon-size: 14px;
 
-		& > .modern-input {
-			padding-left: calc(
-				var(--button-sides-icon) + var(--icon-size) +
-				var(--icon-gap)
-			) !important;
+		&>.modern-input {
+			padding-left: calc(var(--button-sides-icon) + var(--icon-size) + var(--icon-gap)) !important;
 
 			&::-webkit-calendar-picker-indicator {
 				display: none;
@@ -247,22 +245,19 @@ input {
 		}
 	}
 
-	& > .modern-input {
+	&>.modern-input {
 		width: 100% !important;
 	}
 
 	&.can-submit {
-		& > input {
-			padding-right: calc(
-				var(--button-sides) + var(--button-height)
-			) !important;
+		&>input {
+			padding-right: calc(var(--button-sides) + var(--button-height)) !important;
 		}
 	}
 
 	&.input-has-icon {
-		& > .modern-input {
-			padding-right: calc(var(--button-sides) + var(--icon-size) +
-				var(--button-sides)) !important;
+		&>.modern-input {
+			padding-right: calc(var(--button-sides) + var(--icon-size) + var(--button-sides)) !important;
 		}
 	}
 }

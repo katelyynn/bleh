@@ -51,10 +51,12 @@
 		display: none !important;
 	}
 }
+
 .container > .row {
 	display: flex;
 	gap: var(--card-gap);
 }
+
 .container:not(.has-cards-view) > .row[data-assigned] {
 	display: flex;
 	flex-direction: column;
@@ -64,7 +66,7 @@
 
 	background: transparent;
 	border: 1px solid var(--card-border-base) !important;
-	border-top: 1px solid var(--card-border-base-highlight) !important;
+	border-top: 1px solid var(--card-border-base) !important;
 	border-radius: calc(var(--card-radius) + 1px) !important;
 
 	&[data-lacrimosa="true"] {
@@ -182,6 +184,7 @@
 			& > .content-main {
 				border-top-left-radius: var(--card-radius);
 			}
+
 			& > .content-side {
 				border-top-right-radius: var(--card-radius);
 			}
@@ -190,6 +193,7 @@
 		& > .content-main {
 			border-bottom-left-radius: var(--card-radius);
 		}
+
 		& > .content-side {
 			border-bottom-right-radius: var(--card-radius);
 		}
@@ -205,7 +209,7 @@
 			width: var(--cards-width);
 			display: block;
 			height: 1px;
-			background: var(--card-border-base-highlight);
+			background: var(--card-border-base);
 		}
 	}
 }
@@ -251,11 +255,9 @@
 
 		border-radius: inherit;
 
-		--mask: linear-gradient(
-            180deg,
-            white 86%,
-            transparent
-        );
+		--mask: linear-gradient(180deg,
+				white 86%,
+				transparent);
 		mask-image: var(--mask);
 		-webkit-mask-image: var(--mask);
 	}
@@ -308,7 +310,7 @@
 		gap: var(--card-padding);
 		margin-left: var(--page-sidebar-margin-left, unset) !important;
 
-		& > .hidden-xs:not(.labs-cta) {
+		& > .hidden-xs:not(.labs-cta, .your-progress-component) {
 			display: block !important;
 		}
 	}
@@ -451,6 +453,7 @@
 .share-desktop {
 	display: none !important;
 }
+
 /* re-align content (eg. gallery) after ad */
 .full-bleed-ad-container + .image-list,
 .tonefuze + .buffer-4 {
@@ -462,9 +465,11 @@
 .sidebar-ad-container {
 	background: unset !important;
 }
+
 .sidebar-ad-container {
 	padding: unset !important;
 }
+
 .mpu-subscription-upsell {
 	margin: unset !important;
 	color: oklch(var(--c3));
@@ -481,12 +486,15 @@
 .about-me-sidebar {
 	order: -10;
 }
+
 .user-events-sidebar {
 	order: 9;
 }
+
 .recent-activity-section {
 	order: 9;
 }
+
 .promo-v3 {
 	order: 10;
 }
@@ -502,6 +510,7 @@
 	width: var(--cards-main-width);
 	min-width: var(--cards-main-width);
 }
+
 .bleh--panel-side,
 .col-sidebar {
 	width: var(--cards-sidebar-width);
@@ -521,6 +530,7 @@
 			width: 100%;
 		}
 	}
+
 	& > .content-side {
 		display: none !important;
 	}

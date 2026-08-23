@@ -11,6 +11,7 @@
 	--see-more-pad: 0px;
 
 	display: inline-flex;
+	height: fit-content;
 	background: var(--bg) !important;
 	--bg: transparent;
 	--bg-hov: transparent;
@@ -19,11 +20,9 @@
 	border-radius: var(--radius) !important;
 	--shadow: none;
 	--col: oklch(var(--l3-c));
-	--mask-colour: color-mix(
-        in oklch,
-        oklch(var(--l3-c)),
-        oklch(var(--l4-c)) 30%
-    );
+	--mask-colour: color-mix(in oklch,
+			oklch(var(--l3-c)),
+			oklch(var(--l4-c)) 30%);
 	--force-font-weight: var(--font-weight-medium);
 	font-weight: var(--force-font-weight);
 	position: relative;
@@ -36,14 +35,10 @@
 
 	&:after,
 	&:before {
-		mask-image: var(
-			--mask,
-			var(--icon-16-arrow-right, var(--icon-16-placeholder))
-		);
-		-webkit-mask-image: var(
-			--mask,
-			var(--icon-16-arrow-right, var(--icon-16-placeholder))
-		);
+		mask-image: var(--mask,
+			var(--icon-16-arrow-right, var(--icon-16-placeholder)));
+		-webkit-mask-image: var(--mask,
+			var(--icon-16-arrow-right, var(--icon-16-placeholder)));
 	}
 
 	--underline: underline;
@@ -55,7 +50,8 @@
 	padding-right: calc(var(--see-more-pad) + var(--mask-size) + 4px)
 		!important;
 
-	transition-property: transform, color;
+	transition-property: transform,
+		color;
 	transition-duration: var(--trans);
 	transition-timing-function: var(--trans-function);
 
@@ -102,14 +98,10 @@ a.inline-add-icon {
 	padding-left: calc(var(--see-more-pad) + var(--mask-size) + 4px) !important;
 
 	&:before {
-		mask-image: var(
-			--mask,
-			var(--icon-16-plus, var(--icon-16-placeholder))
-		);
-		-webkit-mask-image: var(
-			--mask,
-			var(--icon-16-plus, var(--icon-16-placeholder))
-		);
+		mask-image: var(--mask,
+			var(--icon-16-plus, var(--icon-16-placeholder)));
+		-webkit-mask-image: var(--mask,
+			var(--icon-16-plus, var(--icon-16-placeholder)));
 	}
 }
 
@@ -146,6 +138,7 @@ a.inline-add-icon {
 		margin-top: var(--card-gap) !important;
 	}
 }
+
 .more-link-fullwidth-right {
 	box-shadow: unset;
 	margin-bottom: unset !important;
@@ -170,16 +163,8 @@ a.inline-add-icon {
 	&.shout-more-replies-before:after {
 		content: "";
 		position: absolute;
-		left: calc(
-			-1 *
-			(
-				(
-					var(--shout-avatar-size) -
-					(var(--shout-tree-size) / 2)
-				) /
-				2
-			)
-		);
+		left: calc(-1 * ((var(--shout-avatar-size) - (var(--shout-tree-size) /
+			2)) / 2));
 		top: 0;
 		bottom: calc(-1 * var(--shout-padding));
 
@@ -194,16 +179,8 @@ a.inline-add-icon {
 	&.shout-more-replies-after:after {
 		content: "";
 		position: absolute;
-		left: calc(
-			-1 *
-			(
-				(
-					var(--shout-avatar-size) -
-					(var(--shout-tree-size) / 2)
-				) /
-				2
-			)
-		);
+		left: calc(-1 * ((var(--shout-avatar-size) - (var(--shout-tree-size) /
+			2)) / 2));
 		top: calc(-1 * (var(--shout-padding) * 2));
 		bottom: 0;
 
@@ -226,6 +203,7 @@ a.inline-add-icon {
 	height: fit-content !important;
 	text-align: right;
 }
+
 .more-link > a {
 	display: inline-flex !important;
 	width: fit-content !important;
@@ -258,6 +236,7 @@ a.inline-add-icon {
 	--mask-colour: oklch(var(--c3) / 80%);
 	--mask: var(--icon-16-trend);
 }
+
 .diff {
 	margin-left: 4px;
 	font-size: 13px;
@@ -268,6 +247,7 @@ a.inline-add-icon {
 	cursor: default;
 	color: oklch(var(--c3) / 60%);
 }
+
 .mark-incorrect:not(:hover, :active) {
 	opacity: 0.8;
 }

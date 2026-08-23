@@ -10,19 +10,25 @@
 		--shadow: none;
 		--padding: 0;
 		--radius: 0;
+		position: relative;
 
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		gap: 6px;
 
+		max-width: 60px;
+		text-align: center;
+
+		--icon-size: 12px;
+
 		.bubble {
 			width: 60px;
-			height: 60px;
-			border-radius: 50%;
+			height: 48px;
+			border-radius: var(--radius-s);
 			position: relative;
 
-			box-shadow: var(--interact-shadow);
+			box-shadow: 0 0 0 1px var(--separator-base), var(--interact-shadow);
 
 			.inner {
 				background: oklch(var(--b6));
@@ -32,14 +38,9 @@
 				justify-content: center;
 				align-items: center;
 				overflow: hidden;
-				border-radius: inherit;
+				border-radius: var(--radius-s);
 
 				height: 100%;
-
-				.bleh-icon {
-					--icon: var(--mask);
-					--icon-size: 24px;
-				}
 			}
 
 			&:after {
@@ -49,7 +50,7 @@
 				position: absolute;
 				inset: calc(-1 * var(--inset));
 				border: 2px solid var(--glow);
-				border-radius: calc(var(--item-med-radius) + var(--inset));
+				border-radius: calc(var(--radius-s) + var(--inset));
 
 				scale: 0.95;
 				opacity: 0;
@@ -60,79 +61,34 @@
 			}
 		}
 
-		&[data-theme-id="adaptive"] {
-			& > .bubble {
-				position: relative;
-
-				& > .inner {
-					position: absolute;
-					inset: 0;
-
-					width: 50%;
-
-					&:first-child {
-						border-top-right-radius: unset;
-						border-bottom-right-radius: unset;
-					}
-
-					&:last-child {
-						z-index: 2;
-						left: 50%;
-						right: none;
-
-						border-top-left-radius: unset;
-						border-bottom-left-radius: unset;
-					}
-				}
-			}
-		}
-
-		& > strong {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			gap: 2px;
+		&>strong {
 			font-size: 13px;
 			font-weight: var(--font-weight);
-
-			& > .new-badge {
-				font-size: 12px;
-				line-height: 14px;
-				margin: unset !important;
-			}
+			overflow: hidden;
+			max-width: 100%;
 		}
 
 		&[aria-selected="true"] {
-			& > .bubble:after {
+			&>.bubble {
+				box-shadow: 0 0 0 1px transparent;
+			}
+
+			&>.bubble:after {
 				scale: 1 !important;
 				opacity: 1 !important;
 			}
 
-			& > strong {
+			&>strong {
 				color: oklch(var(--l3-c));
+				--icon-colour: oklch(var(--l3-c) / 80%);
 				font-weight: var(--font-weight-medium);
 			}
 		}
-	}
 
-	.setting > .info > & {
-		.theme-bubble {
-			.bubble {
-				width: 70px;
-				height: 50px;
-				border-radius: var(--item-med-radius);
-
-				.inner {
-					.bleh-icon {
-						--icon-size: 18px;
-					}
-				}
-			}
-
-			&:not([aria-selected="true"]) {
-				strong {
-					color: oklch(var(--c3));
-				}
+		&:not([aria-selected="true"]) {
+			&>strong {
+				color: oklch(var(--c3));
+				--icon-colour: oklch(var(--c3) / 80%);
 			}
 		}
 	}
@@ -144,8 +100,8 @@
 	flex: 1;
 	background-color: oklch(var(--b6));
 	position: relative;
-	border-radius: calc(var(--item-big-radius) - 6px);
 	overflow: hidden;
+	pointer-events: none;
 
 	.preview-inner {
 		display: block;
@@ -162,12 +118,11 @@
 
 			opacity: 0.7;
 			background-size: cover;
+			border-radius: var(--radius-s);
 
-			--mask: linear-gradient(
-                180deg,
-                white 20%,
-                transparent
-            );
+			--mask: linear-gradient(180deg,
+					white 20%,
+					transparent);
 			mask-image: var(--mask);
 			-webkit-mask-image: var(--mask);
 
@@ -177,7 +132,7 @@
 				inset: 0;
 				display: block;
 				background: linear-gradient(180deg, transparent 0%,
-					oklch(var(--b6)) 100%);
+						oklch(var(--b6)) 100%);
 			}
 		}
 
@@ -185,9 +140,9 @@
 			display: flex;
 
 			box-shadow: var(--card-shadow);
-			border-top-left-radius: var(--item-med-radius);
+			border-top-left-radius: 5px;
 
-			border-top: 1px solid var(--card-border-base-highlight);
+			border-top: 1px solid var(--card-border-base);
 			border-left: 1px solid var(--card-border-base);
 
 			background-image: var(--cards-overlay-image-subtle);
@@ -215,6 +170,7 @@
 				-webkit-backdrop-filter: var(--solarium);
 
 				border-left: 1px solid var(--sidebar-border);
+				border-bottom-right-radius: var(--radius-s);
 
 				[data-bleh--solarium="false"] & {
 					background: var(--sidebar-bg);
@@ -241,6 +197,7 @@
 				&.row-2 {
 					width: 17px;
 				}
+
 				&.row-3 {
 					width: 14px;
 				}
@@ -260,10 +217,46 @@
 	align-items: center;
 	gap: 4px;
 
-	& > .bleh-icon-theme {
+	&>.bleh-icon-theme {
 		--mask-colour: currentColor;
 		height: var(--icon-size);
 		--icon-size: 14px;
+	}
+}
+
+.theme-bubble-new {
+	position: absolute;
+	top: -4px;
+	right: -5px;
+	z-index: 10;
+	font-size: 12px;
+	line-height: 14px;
+	font-weight: var(--font-weight-bold);
+	color: oklch(var(--b7));
+	background: oklch(var(--h3));
+	box-shadow: 0 0 0 2px oklch(var(--b5)), 0 5px 12px oklch(var(--h4) / 32%);
+	padding: 0 3px;
+	border-radius: 3px;
+
+	transform: rotate(4deg);
+
+	animation: theme-bubble-new 2.6s var(--trans-function-ani) infinite;
+}
+
+@keyframes theme-bubble-new {
+
+	from,
+	to {
+		background: oklch(var(--h3));
+		scale: 1;
+		transform: rotate(-3deg);
+	}
+
+	40% {
+		background: color-mix(in oklch, oklch(var(--l2-c)) 30%,
+				oklch(var(--h3)));
+		scale: 1.08;
+		transform: rotate(6deg);
 	}
 }
 
@@ -274,6 +267,7 @@
 	gap: 10px;
 	margin: var(--card-gap) 0 !important;
 }
+
 .font-preview-label {
 	color: oklch(var(--c3));
 }
@@ -283,23 +277,41 @@
 	width: 20px;
 	height: 20px;
 	background: oklch(var(--h3));
-	box-shadow: var(--primary-shadow);
+	box-shadow: inset 0 0 0 1px oklch(var(--c1) / 8%);
 	border-radius: 50px;
 
 	&.l3 {
 		background: oklch(var(--l3-c));
 	}
+
 	&.l4 {
 		background: oklch(var(--l4-c));
 	}
+
 	&.h4 {
 		background: oklch(var(--h4));
 	}
 
+	&.b2 {
+		background: oklch(var(--b2));
+	}
+
+	&.b3 {
+		background: oklch(var(--b3));
+	}
+
+	&.b4 {
+		background: oklch(var(--b4));
+	}
+
+	&.b5 {
+		background: oklch(var(--b5));
+	}
+
 	&.mini {
-		width: 64px;
-		height: 24px;
-		border-radius: var(--item-med-radius);
+		width: 56px;
+		height: 18px;
+		border-radius: var(--radius-s);
 	}
 }
 
@@ -315,13 +327,17 @@
 	gap: 4px;
 	text-align: center;
 }
+
 .colour-tile-type {
 	font-size: 12px;
+	color: oklch(var(--c3));
 }
 
 .colour-tiles {
 	display: flex;
-	gap: 4px;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: 6px;
 }
 
 .font-preview {
@@ -382,7 +398,7 @@
 .album-cover-example-art {
 	border-radius: inherit;
 
-	& > img {
+	&>img {
 		width: 100%;
 		height: 100%;
 		object-fit: cover;

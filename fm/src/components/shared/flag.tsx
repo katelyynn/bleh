@@ -5,6 +5,7 @@
  */
 
 import tippy from 'tippy.js';
+import { page } from '@/build/page.ts';
 
 export function flag(code: string, classname?: string) {
 	const url =
@@ -36,8 +37,14 @@ export function Flag({
 	code,
 	className,
 }: FlagProps) {
-	const url =
+	let url =
 		`https://purecatamphetamine.github.io/country-flag-icons/3x2/${code}.svg`;
+
+	if (code == 'FAE' || page.state.hazelfae) {
+		url = `https://images.weserv.nl/?url=${
+			encodeURIComponent('https://katelyn.s-ul.eu/ENShSZsz')
+		}&output=webp`;
+	}
 
 	const elem = (
 		<div
@@ -56,7 +63,7 @@ export function Flag({
 	return elem;
 }
 
-export const convert_lang_to_country = {
+export const convert_lang_to_country: Record<string, string> = {
 	en: 'gb',
 	sv: 'se',
 	zh: 'cn',
@@ -66,6 +73,12 @@ export const convert_lang_to_country = {
 
 export function flag_url(code: string) {
 	if (convert_lang_to_country[code]) code = convert_lang_to_country[code];
+
+	if (code == 'fae' || page.state.hazelfae) {
+		return `https://images.weserv.nl/?url=${
+			encodeURIComponent('https://katelyn.s-ul.eu/ENShSZsz')
+		}&output=webp`;
+	}
 
 	return `https://purecatamphetamine.github.io/country-flag-icons/3x2/${code.toUpperCase()}.svg`;
 }

@@ -19,6 +19,7 @@ import { ff } from '@/components/settings/sku';
 import { redirect } from '@/components/music/music';
 import { open_starred_friend_window } from '@/pages/profile/profile';
 import { match } from '@/components/settings/dynamic_theming';
+import { useSettings } from '@/page.ts';
 
 export function register_rabbit() {
 	let input_box;
@@ -130,9 +131,10 @@ export function register_rabbit() {
 			if (cmd && [settings.rabbit_shortcut.toLowerCase()].includes(key)) {
 				e.preventDefault();
 
-				if (settings.starred_friend != '') {
-					window.location.href =
-						`${root}user/${settings.starred_friend}`;
+				if (useSettings.get('starred_friend') != '') {
+					window.location.href = `${root}user/${
+						useSettings.get('starred_friend')
+					}`;
 				} else {
 					open_starred_friend_window();
 				}
@@ -251,7 +253,7 @@ export function register_rabbit() {
 				},
 				{
 					type: 'starred_friend',
-					text: settings.starred_friend,
+					text: useSettings.get('starred_friend'),
 					body: tl(trans.opens_your_value).replace(
 						'{v}',
 						tl(trans.starred_friend.name),
@@ -264,9 +266,10 @@ export function register_rabbit() {
 						'starred',
 					],
 					action:
-						() => (window.location.href =
-							`${root}user/${settings.starred_friend}`),
-					hide: settings.starred_friend == '',
+						() => (window.location.href = `${root}user/${
+							useSettings.get('starred_friend')
+						}`),
+					hide: useSettings.get('starred_friend') == '',
 					keybind: ['⌘', settings.rabbit_shortcut.toUpperCase()],
 				},
 				{

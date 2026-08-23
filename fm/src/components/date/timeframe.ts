@@ -12,6 +12,7 @@ import { settings } from '@/build/config';
 import { input } from '../settings/input';
 import { DateTime } from 'luxon';
 import { pad2 } from '@/build/tools';
+import { useSettings } from '@/page.ts';
 
 interface hybrid_timeframe_picker {
 	initial?: string;
@@ -119,7 +120,7 @@ export function hybrid_timeframe_picker({
                 </div>
             `);
 
-			render_page(settings.date_selector);
+			render_page(useSettings.get('date_selector') as string);
 		}
 
 		if (bubble) {

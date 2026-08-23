@@ -35,6 +35,8 @@ import tippy from 'tippy.js';
 import { ff } from '../settings/sku';
 import { keys } from '../settings/storage';
 import { is_sponsor } from '../sponsor';
+import { createRef } from 'jsx-dom';
+import { DateTime } from 'luxon';
 
 export function patch_shouts() {
 	if (!page.structure.main) return;
@@ -127,10 +129,14 @@ export function patch_shouts() {
 				);
 
 				tippy(timestamp, {
-					content: timestamp_text.getAttribute('title'),
+					content: timestamp_text!.getAttribute('title'),
 				});
 
-				timestamp_text.removeAttribute('title');
+				timestamp_text!.removeAttribute('title');
+
+				timestamp_text!.textContent = DateTime.fromISO(
+					timestamp_text!.getAttribute('datetime')!,
+				).toRelative();
 			}
 
 			const action_list = shout.querySelector('.shout-actions');
@@ -347,15 +353,24 @@ export function patch_shouts() {
 			}
 		}
 
+		const chars = createRef();
+		const preview = createRef();
+
 		const textarea = markdown_field(
 			(val) => {
-				chars.textContent = tl(trans.value_characters_max, {
+				chars.current.textContent = tl(trans.value_characters_max, {
 					v: `${val.length}/1000`,
 				});
-				chars.setAttribute('data-exceeded', `${val.length >= 1000}`);
+				chars.current.setAttribute(
+					'data-exceeded',
+					`${val.length >= 1000}`,
+				);
 
 				if (use_md) {
-					preview.setAttribute('disabled', `${val.length <= 0}`);
+					preview.current.setAttribute(
+						'disabled',
+						`${val.length <= 0}`,
+					);
 				}
 			},
 			{},
@@ -371,28 +386,25 @@ export function patch_shouts() {
 
 		legacy_textarea.replaceWith(textarea);
 
-		let chars: HTMLDivElement;
-		let preview: HTMLDivElement;
 		help_text.replaceChildren(
-			use_md
-				? (
+			<>
+				{use_md && (
 					<div
 						class='tip preview'
-						onclick={() => markdown_preview(textarea.value)}
-						ref={(el) => (preview = el)}
-						disabled='true'
+						onClick={() => markdown_preview(textarea.value)}
+						ref={preview}
+						disabled
 					>
 						{tl(trans.preview)}
 					</div>
-				)
-				: (
-					<div
-						class='tip characters colourful'
-						ref={(el) => (chars = el)}
-					>
-						{tl(trans.value_characters_max, { v: '0/1000' })}
-					</div>
-				),
+				)}
+				<div
+					class='tip characters colourful'
+					ref={chars}
+				>
+					{tl(trans.value_characters_max, { v: '0/1000' })}
+				</div>
+			</>,
 		);
 
 		shout_form.addEventListener('keydown', (e) => {

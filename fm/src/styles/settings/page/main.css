@@ -16,7 +16,7 @@
 .inner-preview {
 	background-color: var(--inset-background);
 	box-shadow: inset 0 0 0 1px var(--separator-base), var(--inset-shadow);
-	border-radius: var(--item-small-radius);
+	border-radius: var(--radius-s);
 	padding: var(--card-gap);
 	overflow: hidden;
 
@@ -33,24 +33,26 @@
 			padding: var(--card-gap) !important;
 		}
 	}
+
 	&.flex {
 		display: flex;
 		justify-content: center;
 		align-items: center;
 	}
 
-	& > .sep {
+	&>.sep {
 		margin: var(--card-gap) 0 !important;
 	}
 
-	& > .shout-preview {
+	&>.shout-preview {
 		position: relative;
 
-		& > .shout-user-preview {
+		&>.shout-user-preview {
 			font-size: var(--font-size);
 			line-height: var(--line-height);
 		}
-		& > .shout-timestamp-preview {
+
+		&>.shout-timestamp-preview {
 			line-height: inherit;
 			position: absolute;
 			height: fit-content;

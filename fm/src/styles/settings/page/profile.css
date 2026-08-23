@@ -24,7 +24,7 @@
 	border-radius: var(--avatar-radius);
 	box-shadow: var(--subtle-shadow);
 
-	width: 70px;
+	width: 60px;
 	background-size: 100%;
 
 	position: absolute;
@@ -33,7 +33,7 @@
 }
 
 .banner-preview-img {
-	width: 600px;
+	width: 500px;
 	aspect-ratio: 1300 / 325;
 	background-size: 100%;
 	background-position: center;
@@ -73,7 +73,7 @@
 		transition-timing-function: var(--trans-function);
 	}
 
-	& > img {
+	&>img {
 		--mask-size: var(--cover-size-50);
 		position: static;
 
@@ -83,8 +83,8 @@
 	}
 
 	&:hover {
-		& > img {
-			filter: brightness(50%);
+		&>img {
+			filter: brightness(80%);
 			transition: none;
 		}
 

@@ -17,12 +17,14 @@
 .masthead-nav-item {
 	height: var(--button-height) !important;
 }
+
 .masthead-nav-control:before {
 	opacity: 1 !important;
 	margin-right: unset !important;
 	right: unset !important;
 	background-color: currentColor !important;
 }
+
 .masthead-search-submit {
 	--mask: var(--icon-16-search);
 }
@@ -31,9 +33,10 @@
 .masthead-search-toggle {
 	display: none;
 }
+
 .site-auth-control,
 .masthead-search-form,
-.masthead-logo a,
+.navigation-item,
 .auth-link,
 .masthead-nav-control {
 	--bg: transparent !important;
@@ -43,7 +46,7 @@
 	--shadow-hov: none !important;
 	--col: oklch(var(--c2)) !important;
 	height: var(--button-height) !important;
-	display: flex !important;
+	display: flex;
 	align-items: center;
 
 	&:after {
@@ -204,6 +207,7 @@
 		}
 	}
 }
+
 .auth-avatar-desktop {
 	width: 20px !important;
 	height: 20px !important;
@@ -234,6 +238,7 @@
 	--mask-size: 12px;
 	--margin-top: -6px;
 	--right: 12px;
+
 	&:before {
 		color: oklch(var(--c3));
 
@@ -290,6 +295,7 @@
 	height: 18px;
 	padding: 0 4px;
 }
+
 .masthead-nav .masthead-nav-item .notification-count-badge {
 	animation: bubble 0.9s var(--trans-function);
 }
@@ -306,6 +312,7 @@
 	width: 10px;
 	color: transparent !important;
 }
+
 .masthead-nav .masthead-nav-item .notification-count-badge {
 	top: 4px;
 	right: 4px;

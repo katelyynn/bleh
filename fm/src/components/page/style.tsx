@@ -19,12 +19,10 @@ import { root } from '@/build/page';
 import { keys } from '../settings/storage';
 import { reset_update_status } from './update';
 import { ff } from '../settings/sku';
+import { useSettings } from '@/page.ts';
 
 export function append_style() {
 	document.documentElement.classList.add('florence-supports-loading');
-
-	for (let member in settings) delete settings[member];
-	Object.assign(settings, JSON.parse(localStorage.getItem('bleh')));
 
 	const split = window.location.pathname.replace(root, '').split('/');
 	const length = split.length - 1;
@@ -35,12 +33,13 @@ export function append_style() {
 		return;
 	}
 
-	document.documentElement.setAttribute('data-bleh--theme', settings.theme);
 	document.documentElement.appendChild(
-		<style>{cropper_css}</style>,
+		<style>
+			{cropper_css}
+		</style>,
 	);
 
-	if (settings.dev) return;
+	if (useSettings.get('dev')) return;
 
 	const style = <style id='bleh--cached-style'>{css}</style>;
 	document.documentElement.appendChild(style);

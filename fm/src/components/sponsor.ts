@@ -207,30 +207,8 @@ unsafeWindow._sponsor_manage = function () {
 export function sponsor_manage() {
 	if (!auth.name) return;
 
-	dialog({
-		id: 'sponsor_manage',
-		title: tl(trans.sponsor),
-		body: html.node`
-            <div class="modal-vertical-inner support-inner">
-                <div class="avatar">
-                    <img src="${avatar(auth.avatar, 'avatar170s')}" alt="${
-			tl(trans.your_avatar)
-		}">
-                    <span class="avatar-status-dot user-status--bleh-sponsor"></span>
-                </div>
-                <h1 class="colourful">${tl(trans.you_are_a_sponsor)}</h1>
-                <p>${tl(trans.sponsor_get_badge)}</p>
-            </div>
-            <div class="modal-footer">
-                <div class="fill"></div>
-                <a class="btn primary sponsor icon colourful" data-type="sponsor" href="${root}user/${sponsor_list.related.account_name}" target="_blank">
-                    ${tl(trans.manage_sponsor)}
-                </a>
-                <div class="fill"></div>
-            </div>
-        `,
-		type: 'sponsor',
-	});
+	window.location.href =
+		`${root}inbox/compose?to=${sponsor_list.related.account_name}`;
 }
 
 export function bleh_sponsor_page() {

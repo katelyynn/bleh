@@ -29,6 +29,7 @@ export function proxy_images(
 			'i.ibb.co',
 			'static.klipy.com',
 			'static2.klipy.com',
+			'cdn.discordapp.com',
 		];
 
 		try {

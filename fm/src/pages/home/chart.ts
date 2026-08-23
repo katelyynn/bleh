@@ -338,7 +338,7 @@ function bleh_explore_charts() {
 	page.structure.main.appendChild(new_panel);
 
 	const url =
-		`http://ws.audioscrobbler.com/2.0/?method=chart.gettoptracks&api_key=${api_key}&format=json&limit=100`;
+		`https://ws.audioscrobbler.com/2.0/?method=chart.gettoptracks&api_key=${api_key}&format=json&limit=100`;
 
 	render(
 		content,
@@ -520,4 +520,15 @@ function bleh_geo_charts() {
 	render_geo(selector.value);
 
 	page.structure.main.appendChild(new_panel);
+
+	render(
+		content,
+		html`
+			<div class="loading-data-container">
+				<div class="loading-data-text">${tl(
+					trans.gathering_plays,
+				)}</div>
+			</div>
+		`,
+	);
 }

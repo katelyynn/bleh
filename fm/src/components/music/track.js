@@ -32,6 +32,8 @@ import { hoshino } from '@/components/music/hoshino';
 import { submit_scrobble } from '@/components/music/scrobble';
 import { header_colour } from '../page/colour';
 import { symbol } from '@/main';
+import { useSettings } from '@/page.ts';
+import { count_bar } from '@/components/track/bar.tsx';
 
 export function patch_titles(search = page.structure.main) {
 	if (page.subpage == 'tags_overview') return;
@@ -86,8 +88,8 @@ export function patch_titles(search = page.structure.main) {
 		},
 	};
 
-	const track_layout = settings.track_layout;
-	const album_name_location = settings.track_album_name_location;
+	const track_layout = useSettings.get('track_layout');
+	const album_name_location = useSettings.get('track_album_name_location');
 	const season = page.state.seasons.current?.id || 'none';
 
 	tracklists.forEach((tracklist) => {
@@ -225,7 +227,7 @@ export function patch_titles(search = page.structure.main) {
 				track.classList.remove('chartlist-row--with-artist');
 				track.setAttribute('data-track-type', 'artist');
 
-				if (settings.corrections) {
+				if (useSettings.get('corrections')) {
 					track_title.textContent = correct_artist(
 						track_title.getAttribute('data-name'),
 					);
@@ -302,10 +304,11 @@ export function patch_titles(search = page.structure.main) {
 			const has_bar = track.querySelector(':scope > .chartlist-bar');
 
 			if (has_bar) {
-				const count_bar = has_bar.querySelector(
+				const bar = has_bar.querySelector(
 					':scope > .chartlist-count-bar',
 				);
-				count_bar.setAttribute('data-season', season);
+
+				count_bar(bar);
 			}
 
 			// menu
@@ -354,7 +357,7 @@ export function patch_titles(search = page.structure.main) {
 			const show_album_text =
 				(is_active || settings.expand_tracks == 'always') &&
 				settings.expand_tracks != 'never' &&
-				settings.track_layout == 'column';
+				useSettings.get('track_layout') == 'column';
 			track.setAttribute('data-show-album-text', show_album_text);
 
 			const image_wrap = track.querySelector('.chartlist-image');
@@ -396,7 +399,7 @@ export function patch_titles(search = page.structure.main) {
 				track_info.appendChild(song_artist_element);
 			}
 
-			if (settings.format_guest_features) {
+			if (useSettings.get('format_guest_features')) {
 				const formatted = name_includes(
 					track_title.getAttribute('data-name'),
 					track_artist,
@@ -514,7 +517,7 @@ export function patch_titles(search = page.structure.main) {
                         </div>
                     `;
 				}
-			} else if (settings.corrections) {
+			} else if (useSettings.get('corrections')) {
 				const song_artist_element = track.querySelector(
 					'.chartlist-artist a',
 				);

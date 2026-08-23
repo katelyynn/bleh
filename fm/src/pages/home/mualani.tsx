@@ -13,7 +13,7 @@ import { notify } from '@/components/dialog/notify';
 import { download_with_progress } from '@/build/tools';
 import { status } from '@/components/dialog/status.js';
 import { dialog } from '@/components/dialog/dialog';
-import { setting } from '@/components/settings/settings';
+import { save_setting, setting } from '@/components/settings/settings';
 import { markdown, markdown_field } from '@/components/markdown/markdown';
 import { sponsor_list } from '@/build/sponsor';
 import { create_badge, load_badges } from '@/components/shared/badge';
@@ -21,12 +21,44 @@ import { clamp_lit, clamp_sat, rgb_to_oklch } from '@/build/tools';
 import { chartlist_bar } from '@/components/music/bar';
 import { avatar } from '@/components/shared/avatar';
 import { click_indicator } from '@/components/shared/indicator';
-import { ReactNode } from 'jsx-dom';
+import { createRef, ReactNode } from 'jsx-dom';
 import { SettingGroup } from '@/components/settings/group.tsx';
 import { SettingAction } from '@/components/settings/provider/action.tsx';
 import { SettingInfo } from '@/components/settings/provider/info.tsx';
 import { Switch } from '@/components/settings/clickables/switch.tsx';
 import { Checkbox } from '@/components/settings/clickables/checkbox.tsx';
+import { SettingSwitch } from '@/components/settings/provider/switch.tsx';
+import { Button } from '@/components/button/button.tsx';
+import { SeeMore } from '@/components/text/see_more.tsx';
+import { Keybind } from '@/components/settings/clickables/keybind.tsx';
+import { Input } from '@/components/input/input.tsx';
+import { SettingInput } from '@/components/settings/provider/input.tsx';
+import { SettingKeybind } from '@/components/settings/provider/keybind.tsx';
+import { SettingTheme } from '@/components/settings/provider/theme.tsx';
+import { SettingCheckbox } from '@/components/settings/provider/checkbox.tsx';
+import { settings } from '@/build/config.ts';
+import { Select } from '@/components/select/select.tsx';
+import { SettingSelect } from '@/components/settings/provider/select.tsx';
+import { select_prepare_list } from '@/components/settings/select.ts';
+import { tl, trans } from '@/build/trans.ts';
+import { Range } from '@/components/range/range.tsx';
+import { SettingRange } from '@/components/settings/provider/range.tsx';
+import {
+	ColourSwatch,
+	SettingColour,
+} from '@/components/settings/provider/colour.tsx';
+import { colour_type } from '@/components/settings/swatch.ts';
+import { DateTime } from 'luxon';
+import { SettingRadio } from '@/components/settings/provider/radio.tsx';
+import {
+	List,
+	ListAdd,
+	ListCandidate,
+	ListItem,
+} from '@/components/settings/clickables/list.tsx';
+import { SettingList } from '@/components/settings/provider/list.tsx';
+import { EventItem } from '@/components/event/item.tsx';
+import { CancelIcon, SaveIcon } from '@/components/shared/icon.tsx';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -90,35 +122,659 @@ export function mualani() {
 		[12, 7, 34],
 	];
 
+	const link_text = `
+        [links]
+        https://x.com/ZZZ_EN
+        https://twitter.com/ZZZ_EN
+        https://open.spotify.com/album/4T7qu6MdxoGjzZPErRWgsO
+        https://youtube.com
+        https://github.com
+        https://discord.com
+        https://bandcamp.com
+        https://soundcloud.com
+        https://tiktok.com
+        https://ko-fi.com
+        https://patreon.com
+        https://twitch.tv
+        https://linktr.ee
+        https://carrd.co
+        https://music.apple.com
+        https://music.youtube.com
+        https://facebook.com
+        https://discogs.com
+        https://tidal.com
+        https://record.club
+        https://rateyourmusic.com
+        https://albumoftheyear.org
+        https://kyu.re
+        https://katelyn.moe
+        https://google.com
+        https://mastodon.social
+        https://bsky.app
+        https://reddit.com
+        [/links]
+    `;
+
 	let bars;
 
+	const format_guest_features = createRef();
+	const show_guest_features = createRef();
+
+	const mouse = createRef();
+
+	const colour = createRef();
+
 	page.structure.main!.replaceChildren(
-		<section>
-			<DemoGrid>
-				<DemoItem label='SettingAction'>
-					<SettingGroup>
-						<SettingAction name='Setting name' body='Setting body'>
-							action goes here!!
-						</SettingAction>
-					</SettingGroup>
-				</DemoItem>
-				<DemoItem label='SettingInfo'>
-					<SettingGroup>
-						<SettingInfo name='Setting name' body='Setting body'>
-							info goes here!!
-						</SettingInfo>
-					</SettingGroup>
-				</DemoItem>
-				<DemoItem label='Switch'>
-					<Switch />
-					<Switch checked />
-				</DemoItem>
-				<DemoItem label='Checkbox'>
-					<Checkbox />
-					<Checkbox checked />
-				</DemoItem>
-			</DemoGrid>
-		</section>,
+		<>
+			<section>
+				<DemoGrid>
+					<DemoItem label='Button'>
+						<Button>Button</Button>
+						<Button primary>Button</Button>
+						<Button disabled>Button</Button>
+						<Button primary disabled>Button</Button>
+						<Button loading>Button</Button>
+						<Button primary loading>Button</Button>
+						<Button>
+							<SaveIcon />
+							Button
+						</Button>
+						<Button primary>
+							<SaveIcon />
+							Button
+						</Button>
+						<Button>
+							<CancelIcon />
+							Button
+						</Button>
+						<Button primary>
+							<CancelIcon />
+							Button
+						</Button>
+					</DemoItem>
+					<DemoItem label='SeeMore'>
+						<SeeMore>See more</SeeMore>
+						<SeeMore iconPlacement='left'>See more</SeeMore>
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section>
+				<DemoGrid>
+					<DemoItem label='SettingAction'>
+						<SettingGroup>
+							<SettingAction
+								name='Setting name'
+								body='Setting body'
+							>
+								action goes here!!
+							</SettingAction>
+						</SettingGroup>
+					</DemoItem>
+					<DemoItem label='SettingInfo'>
+						<SettingGroup>
+							<SettingInfo
+								name='Setting name'
+								body='Setting body'
+							>
+								info goes here!!
+							</SettingInfo>
+						</SettingGroup>
+					</DemoItem>
+					<DemoItem label='Switch'>
+						<Switch />
+						<Switch checked />
+					</DemoItem>
+					<DemoItem label='Checkbox'>
+						<Checkbox />
+						<Checkbox checked />
+					</DemoItem>
+					<DemoItem label='SettingSwitch'>
+						<SettingGroup>
+							<SettingSwitch
+								name='Setting name'
+								body='Setting body'
+							/>
+							<SettingSwitch name='Setting name' />
+						</SettingGroup>
+					</DemoItem>
+					<DemoItem label='SettingCheckbox'>
+						<SettingGroup>
+							<SettingCheckbox
+								name='Setting name'
+								body='Setting body'
+							/>
+							<SettingCheckbox name='Setting name' />
+						</SettingGroup>
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section>
+				<DemoGrid>
+					<DemoItem label='SettingSwitch (binded to underline_links)'>
+						<SettingGroup>
+							<SettingSwitch bind='underline_links' />
+						</SettingGroup>
+					</DemoItem>
+					<DemoItem label='SettingSwitch (testing compatibility)'>
+						<SettingGroup>
+							<SettingSwitch bind='format_guest_features' />
+							<SettingSwitch bind='show_guest_features' />
+							<SettingSwitch name='example' />
+						</SettingGroup>
+						<SettingGroup>
+							<SettingSwitch bind='format_guest_features' />
+							<SettingSwitch bind='show_guest_features' />
+							<SettingSwitch name='example' />
+						</SettingGroup>
+					</DemoItem>
+					<DemoItem label='SettingSwitch (tracking mouse enter and leave)'>
+						<p ref={mouse}>Not hovered</p>
+						<SettingGroup>
+							<SettingSwitch
+								name='Hover to update the above'
+								onMouseEnter={() => {
+									mouse.current.textContent = 'Hovered';
+								}}
+								onMouseLeave={() => {
+									mouse.current.textContent = 'Not hovered';
+								}}
+							/>
+						</SettingGroup>
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section>
+				<DemoGrid>
+					<DemoItem label='Keybind'>
+						<Keybind value='⌘' />
+						<Keybind value='⇧' />
+						<Keybind value='⌥' />
+						<Keybind value='⌃' />
+						<Keybind value='⏎' />
+						<Keybind value='⎋' />
+						<Keybind value='⌫' />
+					</DemoItem>
+					<DemoItem label='Keybind (interactable)'>
+						<Keybind value='⌘' />
+						<Keybind value='A' interact />
+					</DemoItem>
+					<DemoItem label='SettingKeybind'>
+						<SettingGroup>
+							<SettingKeybind
+								name='Setting name'
+								body='Setting body'
+								value={['⌘', 'A']}
+							/>
+						</SettingGroup>
+					</DemoItem>
+					<DemoItem label='SettingKeybind (binded to rabbit_primary)'>
+						<SettingGroup>
+							<SettingKeybind bind='rabbit_primary' />
+							<SettingKeybind bind='rabbit_primary' />
+						</SettingGroup>
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section>
+				<DemoGrid>
+					<DemoItem label='Input'>
+						<Input />
+						<Input type='number' />
+						<Input type='password' />
+						<Input type='colour' />
+					</DemoItem>
+					<DemoItem label='Input (textarea)'>
+						<Input type='textarea' />
+					</DemoItem>
+					<DemoItem label='SettingInput'>
+						<SettingGroup>
+							<SettingInput
+								name='Setting name'
+								body='Setting body'
+							/>
+							<SettingInput
+								name='Setting name'
+								body='Setting body'
+								showLabel={false}
+							/>
+						</SettingGroup>
+					</DemoItem>
+					<DemoItem label='SettingInput (binded to font)'>
+						<SettingGroup>
+							<SettingInput bind='font' />
+							<SettingInput bind='font' showLabel={false} />
+						</SettingGroup>
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section>
+				<DemoGrid>
+					<DemoItem label='Select'>
+						<Select
+							values={[
+								{
+									value: 'hello',
+									text: 'Hello',
+								},
+								{
+									value: 'world',
+									text: 'World',
+								},
+							]}
+						/>
+					</DemoItem>
+					<DemoItem label='Select (with advanced stuff)'>
+						<Select
+							values={[
+								{
+									text: 'See below',
+								},
+								{
+									value: 'hello',
+									text: 'Hello',
+								},
+								{
+									text: 'sep',
+								},
+								{
+									value: 'world',
+									text: 'World',
+								},
+							]}
+						/>
+					</DemoItem>
+					<DemoItem label='SettingSelect'>
+						<SettingGroup>
+							<SettingSelect
+								name='Select body'
+								values={[
+									{
+										value: 'hello',
+										text: 'Hello',
+									},
+									{
+										value: 'world',
+										text: 'World',
+									},
+								]}
+							/>
+						</SettingGroup>
+					</DemoItem>
+					<DemoItem label='SettingSelect (binded to starred_friend)'>
+						<SettingGroup>
+							<SettingSelect
+								bind='starred_friend'
+								values={select_prepare_list([
+									{ value: '', text: tl(trans.none) },
+									...settings.friends,
+								])}
+							/>
+						</SettingGroup>
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section>
+				<DemoGrid>
+					<DemoItem label='SettingTheme'>
+						<SettingTheme
+							theme={{
+								id: settings.theme as string,
+								adaptive: settings.theme_schedule as boolean,
+								theme_day: settings.theme_day as string,
+								theme_night: settings.theme_night as string,
+							}}
+						/>
+						<SettingTheme
+							theme={{
+								id: settings.theme as string,
+								adaptive: settings.theme_schedule as boolean,
+								theme_day: settings.theme_day as string,
+								theme_night: settings.theme_night as string,
+							}}
+						/>
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section>
+				<DemoGrid>
+					<DemoItem label='Range'>
+						<Range max={100} step={1} />
+					</DemoItem>
+					<DemoItem label='SettingRange'>
+						<SettingGroup>
+							<SettingRange
+								name='Setting body'
+								max={100}
+								step={1}
+							/>
+						</SettingGroup>
+					</DemoItem>
+					<DemoItem label='SettingRange (binded to gloss)'>
+						<SettingGroup>
+							<SettingRange bind='gloss' />
+						</SettingGroup>
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section>
+				<DemoGrid>
+					<DemoItem label='ColourSwatch'>
+						<ColourSwatch
+							colour={{
+								type: 'colour',
+							}}
+						/>
+						<ColourSwatch
+							colour={{
+								type: 'colour',
+							}}
+							active
+						/>
+					</DemoItem>
+					<DemoItem label='SettingColour'>
+						<SettingColour
+							colour={{
+								type: settings.accent_type as colour_type,
+								hue: settings.hue as number,
+								sat: settings.sat as number,
+								lit: settings.lit as number,
+							}}
+							season={{
+								id: 'christmas',
+								start: DateTime.fromISO('2026-08-05'),
+								end: DateTime.fromISO('2026-08-05'),
+								snowflakes: {
+									state: false,
+								},
+							}}
+							recents={[
+								{
+									hue: 210,
+									sat: 1,
+									lit: 1,
+								},
+								{
+									hue: 300,
+									sat: 1.5,
+									lit: 0.85,
+								},
+								{
+									hue: 20,
+									sat: 1.3,
+									lit: 1.05,
+								},
+								{
+									hue: 40,
+									sat: 1.3,
+									lit: 1.05,
+								},
+								{
+									hue: 20,
+									sat: 1.3,
+									lit: 1.05,
+								},
+								{
+									hue: 180,
+									sat: 1.3,
+									lit: 1.05,
+								},
+								{
+									hue: 20,
+									sat: 1.3,
+									lit: 1.05,
+								},
+								{
+									hue: 120,
+									sat: 1.3,
+									lit: 1.05,
+								},
+								{
+									hue: 20,
+									sat: 1.6,
+									lit: 0.9,
+								},
+								{
+									hue: 70,
+									sat: 1.5,
+									lit: 1.05,
+								},
+								{
+									hue: 20,
+									sat: 1.3,
+									lit: 1.05,
+								},
+								{
+									hue: 90,
+									sat: 1.3,
+									lit: 1.05,
+								},
+							]}
+						/>
+						<SettingColour
+							colour={{
+								type: settings.accent_type as colour_type,
+								hue: settings.hue as number,
+								sat: settings.sat as number,
+								lit: settings.lit as number,
+							}}
+							season={{
+								id: 'christmas',
+								start: DateTime.fromISO('2026-08-05'),
+								end: DateTime.fromISO('2026-08-05'),
+								snowflakes: {
+									state: false,
+								},
+							}}
+						/>
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section>
+				<DemoGrid>
+					<DemoItem label='SettingRadio'>
+						<SettingGroup>
+							<SettingRadio
+								name='Setting name'
+								body='Setting body'
+								value='hello'
+								values={{
+									hello: {
+										name: 'Hello',
+									},
+									world: {
+										name: 'World',
+									},
+								}}
+							/>
+						</SettingGroup>
+					</DemoItem>
+					<DemoItem label='SettingRadio (binded to track_album_name_location)'>
+						<SettingGroup>
+							<SettingRadio bind='track_album_name_location' />
+						</SettingGroup>
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section>
+				<DemoGrid>
+					<DemoItem label='List'>
+						<List>
+							<ListItem name='List item' />
+							<ListItem name='List item' />
+							<ListItem name='List item' />
+							<ListAdd />
+						</List>
+						<List>
+							<ListCandidate name='List item' />
+							<ListCandidate name='List item' />
+							<ListCandidate name='List item' />
+						</List>
+					</DemoItem>
+					<DemoItem label='SettingList'>
+						<SettingGroup>
+							<SettingList
+								name='Setting name'
+								body='Setting body'
+								value={['hello', 'world']}
+								values={{
+									hello: {
+										name: 'Hello',
+									},
+									world: {
+										name: 'World',
+									},
+								}}
+							/>
+							<SettingList
+								name='Setting name'
+								body='Setting body'
+								value={['hello', 'world']}
+							/>
+							<SettingList
+								name='Setting name'
+								body='Setting body'
+								value={['hello']}
+								values={{
+									hello: {
+										name: 'Hello',
+									},
+									world: {
+										name: 'World',
+									},
+								}}
+								predefined
+							/>
+						</SettingGroup>
+					</DemoItem>
+					<DemoItem label='SettingList (binded to friends)'>
+						<SettingGroup>
+							<SettingList bind='friends' />
+						</SettingGroup>
+					</DemoItem>
+					<DemoItem label='SettingList (binded to navigation_items)'>
+						<SettingGroup>
+							<SettingList bind='navigation_items' />
+							<SettingList
+								bind='navigation_items'
+								values={page.state.quick_access_items}
+							/>
+						</SettingGroup>
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section>
+				<DemoGrid>
+					<DemoItem label='Markdown (music links)'>
+						<div class='markdown-body'>
+							{markdown(link_text, { allow_socials: true })}
+						</div>
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section>
+				<DemoGrid>
+					<DemoItem label='EventItem'>
+						<EventItem
+							date='2026-08-14T00:00:00'
+							title='BST Hyde Park: Sabrina Carpenter'
+							artists={[
+								'Sabrina Carpenter',
+								'Amber Mark',
+								'beabadoobee',
+								'Clairo',
+								'DellaXOZ',
+								'Luvcat',
+								'SOFY',
+								'Sola',
+							]}
+							venue='Hyde Park'
+							city='London'
+							country='United Kingdom'
+							attendance='going'
+							attendance_text='You went'
+							attendance_count='31 went'
+							href='/event/4881572+BST+Hyde+Park:+Sabrina+Carpenter'
+						/>
+						<EventItem
+							date='2026-08-14T00:00:00'
+							title='BST Hyde Park: Sabrina Carpenter'
+							artists={[
+								'Sabrina Carpenter',
+								'Amber Mark',
+								'beabadoobee',
+								'Clairo',
+								'DellaXOZ',
+								'Luvcat',
+								'SOFY',
+								'Sola',
+							]}
+							venue='Hyde Park'
+							city='London'
+							country='United Kingdom'
+							attendance='maybe'
+							attendance_text='You were interested'
+							attendance_count='31 went'
+							href='/event/4881572+BST+Hyde+Park:+Sabrina+Carpenter'
+						/>
+						<EventItem
+							date='2026-08-14T00:00:00'
+							title='BST Hyde Park: Sabrina Carpenter'
+							artists={[
+								'Sabrina Carpenter',
+								'Amber Mark',
+								'beabadoobee',
+								'Clairo',
+								'DellaXOZ',
+								'Luvcat',
+								'SOFY',
+								'Sola',
+							]}
+							venue='Hyde Park'
+							city='London'
+							country='United Kingdom'
+							attendance_count='31 went'
+							href='/event/4881572+BST+Hyde+Park:+Sabrina+Carpenter'
+						/>
+						<EventItem
+							date='2026-08-20T00:00:00'
+							title='Tiffany Day'
+							venue='Hyde Park'
+							city='London'
+							country='United Kingdom'
+							attendance='going'
+							attendance_text='You went'
+							attendance_count='31 went'
+							href='/event/4881572+BST+Hyde+Park:+Sabrina+Carpenter'
+						/>
+						<EventItem
+							date='2026-08-20T00:00:00'
+							title='Tiffany Day'
+							venue='Hyde Park'
+							city='London'
+							country='United Kingdom'
+							avatars={[
+								<span
+									class='avatar attendee-you-know-avatar'
+									key={0}
+								>
+									<img src={auth.avatar} />
+								</span>,
+								<span
+									class='avatar attendee-you-know-avatar'
+									key={1}
+								>
+									<img src={auth.avatar} />
+								</span>,
+							]}
+							attendance='going'
+							attendance_text='You went'
+							attendance_count='31 went'
+							href='/event/4881572+BST+Hyde+Park:+Sabrina+Carpenter'
+						/>
+					</DemoItem>
+				</DemoGrid>
+			</section>
+		</>,
 	);
 
 	return;
@@ -377,52 +1033,6 @@ export function mualani() {
 			</section>
 		`,
 	);
-
-	page.structure.main!.appendChild(
-		<section>
-			<p>jsx test (tsx)</p>
-		</section>,
-	);
-
-	const link_text = `
-        [links]
-        https://x.com/ZZZ_EN
-        https://twitter.com/ZZZ_EN
-        https://open.spotify.com/album/4T7qu6MdxoGjzZPErRWgsO
-        https://youtube.com
-        https://github.com
-        https://discord.com
-        https://bandcamp.com
-        https://soundcloud.com
-        https://tiktok.com
-        https://ko-fi.com
-        https://patreon.com
-        https://twitch.tv
-        https://linktr.ee
-        https://carrd.co
-        https://music.apple.com
-        https://music.youtube.com
-        https://facebook.com
-        https://discogs.com
-        https://tidal.com
-        https://record.club
-        https://rateyourmusic.com
-        https://albumoftheyear.org
-        https://kyu.re
-        https://katelyn.moe
-        https://google.com
-        https://mastodon.social
-        https://bsky.app
-        https://reddit.com
-        [/links]
-    `;
-
-	render(
-		md_body_links,
-		markdown(link_text, {
-			allow_socials: true,
-		}),
-	);
 }
 
 function dialog_loop() {
@@ -447,9 +1057,11 @@ function DemoGrid({ children }: { children: ReactNode }) {
 
 function DemoItem({ children, label }: { children: ReactNode; label: string }) {
 	return (
-		<div class='demo-item'>
+		<div class='demo-item-wrap'>
 			<h4 class='demo-label'>{label}</h4>
-			{children}
+			<div class='demo-item'>
+				{children}
+			</div>
 		</div>
 	);
 }

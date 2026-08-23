@@ -4,6 +4,9 @@
 
 .oracle {
 	order: 11;
+	--hue-over: var(--hue-oracle);
+	--sat-over: var(--sat-oracle);
+	--lit-over: var(--lit-oracle);
 }
 
 .oracle-debug {

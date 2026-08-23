@@ -27,6 +27,7 @@ html:has(> body[data-bleh--show_scroller="true"]) {
 :root {
 	scroll-padding-top: calc(52px + 15px);
 }
+
 body {
 	color: oklch(var(--c2));
 	font-family: var(--font);
@@ -79,7 +80,7 @@ body {
 		inset: 0;
 		z-index: 9999999999999999999;
 		pointer-events: none;
-		opacity: var(--noise-opacity, 0);
+		opacity: var(--noise-opacity, 0.25);
 		mix-blend-mode: soft-light;
 		background-image: var(--noise);
 		background-repeat: repeat;
@@ -162,12 +163,15 @@ strong {
 .two-column-layout .container,
 .two-column-layout .main-content /* for some reason lfm bundles a 1x1 white pixel tiled across the entire half of the screen? */ {
 	background: var(--override-background, transparent) !important;
-	color: unset; /* for header--overview, this is set to #fff */
+	color: unset;
+	/* for header--overview, this is set to #fff */
 }
+
 .content-top-has-nav .content-top::after,
 .two-column-layout .content-top::after {
 	display: none;
 }
+
 /* replace the very backing layer with b6 */
 html body {
 	/* html body is used cus last.fm decided so */
@@ -192,6 +196,7 @@ html body {
 	background: oklch(var(--h4) / 30%);
 	color: oklch(var(--l3-c));
 }
+
 ::-moz-selection {
 	background: oklch(var(--h4) / 30%);
 	color: oklch(var(--l3-c));

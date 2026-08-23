@@ -18,6 +18,7 @@ import {
 import { keybind } from '@/components/dialog/rabbit';
 import { log } from '@/build/log.js';
 import { settings } from '@/build/config';
+import { useSettings } from '@/page.ts';
 
 export function pixel({
 	host,
@@ -61,11 +62,11 @@ export function pixel({
 			            ${() => {
 				const btn = html.node`
                             <button class="btn chibi icon colourful" data-type="starred_friend" data-is-shortcut=${
-					settings.starred_friend != ''
+					useSettings.get('starred_friend') != ''
 				} onclick=${() => {
-					if (settings.starred_friend == '') return;
+					if (useSettings.get('starred_friend') == '') return;
 
-					inputter.value = settings.starred_friend;
+					inputter.value = useSettings.get('starred_friend');
 					inputter.dispatchEvent(new Event('change'));
 				}}>${tl(trans.starred_friend.name)}</button>
                         `;

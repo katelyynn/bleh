@@ -14,6 +14,7 @@ import tippy from 'tippy.js';
 import { settings } from '@/build/config';
 import { ReactElement } from 'jsx-dom';
 import { external_url_prompt } from '@/components/dialog/external_link.tsx';
+import { SymbolPresets } from '@/pages/music/presets.tsx';
 
 export function bleh_wiki() {
 	// make a new panel
@@ -304,38 +305,9 @@ export function bleh_wiki_editor() {
 	}
 
 	// presets
-	const presets = [`“`, `”`, `—`, `‘`, `’`, `-`];
-	const standards = [
-		tl(trans.wiki_standard_tracks),
-		tl(trans.wiki_standard_artists),
-		tl(trans.wiki_standard_quotations),
-	];
-	page.structure.side.appendChild(html.node`
-        <section class="wiki-presets-panel">
-            <h3 class="text-18">${tl(trans.symbol_presets)}</h3>
-            <div class="presets">
-                ${
-		presets.map((preset) => {
-			let item = html.node`
-                        <div class="preset" onclick=${() => copy(preset)}>
-                            ${preset}
-                        </div>
-                    `;
-
-			tippy(item, {
-				content: tl(trans.click_to_copy),
-				delay: [500, 0],
-			});
-
-			return item;
-		})
-	}
-            </div>
-            <ul class="wiki-standards generic-list">
-                ${standards.map((standard) => html.node`<li>${standard}</li>`)}
-            </ul>
-        </section>
-    `);
+	page.structure.side!.appendChild(
+		<SymbolPresets />,
+	);
 
 	page.structure.side.appendChild(html.node`
         <section class="wiki-syntax-panel bleh--blank-panel">

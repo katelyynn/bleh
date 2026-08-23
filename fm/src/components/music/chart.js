@@ -77,6 +77,9 @@ export function load_chart_colours() {
 	const bg_col = `oklch(${
 		getComputedStyle(document.body).getPropertyValue('--b5')
 	})`;
+	const b2 = `oklch(${
+		getComputedStyle(document.body).getPropertyValue('--b2')
+	})`;
 	const root_bg_col = `oklch(${
 		getComputedStyle(document.body).getPropertyValue('--b6')
 	} / 92%)`;
@@ -94,6 +97,20 @@ export function load_chart_colours() {
 		root_bg_col: root_bg_col,
 		hue: hue,
 		font: getComputedStyle(document.body).getPropertyValue('--font'),
+		colours: [
+			graph_colour(0),
+			graph_colour(1),
+			graph_colour(2),
+			graph_colour(3),
+			graph_colour(4),
+			graph_colour(5),
+			graph_colour(6),
+			graph_colour(7),
+			graph_colour(8),
+			graph_colour(9),
+			graph_colour(10),
+		],
+		b2,
 	};
 
 	console.log('chart colours', page.state.chart_colours);
@@ -350,4 +367,10 @@ export function load_chart_colours() {
 			},
 		},
 	};
+}
+
+function graph_colour(index) {
+	return getComputedStyle(document.body).getPropertyValue(
+		`--graph-colour-${index}`,
+	);
 }

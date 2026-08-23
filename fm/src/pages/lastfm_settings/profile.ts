@@ -554,7 +554,9 @@ function profile_panel() {
 
 							preview.style.setProperty(
 								'background-image',
-								`url(${val})`,
+								`url(https://images.weserv.nl/?url=${
+									encodeURIComponent(val)
+								}&output=webp&n=-1)`,
 							);
 							preview.onclick = () => {
 								expand_avatar(val);
@@ -571,7 +573,9 @@ function profile_panel() {
 
 				preview.style.setProperty(
 					'background-image',
-					`url(${pre_existing})`,
+					`url(https://images.weserv.nl/?url=${
+						encodeURIComponent(pre_existing)
+					}&output=webp&n=-1)`,
 				);
 				preview.onclick = () => {
 					expand_avatar(pre_existing);
@@ -1074,6 +1078,10 @@ function profile_panel() {
 																	);
 
 																	save_setting(
+																		'accent_type',
+																		'customise',
+																	);
+																	save_setting(
 																		'hue',
 																		settings
 																			.profile_hue,
@@ -1239,6 +1247,7 @@ function avatar() {
 			save_avatar()} disabled>${tl(trans.save)}</button>
             </div>
         `,
+		replace_if_possible: true,
 	});
 
 	page.state.avatar_changer.querySelector('[name="avatar-form"]').onsubmit =

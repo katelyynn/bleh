@@ -29,6 +29,7 @@ import { redirect } from '../music/music';
 import { notify } from '../dialog/notify';
 import { toggle } from '../settings/toggle';
 import { save_setting } from '../settings/settings';
+import { useSettings } from '@/page.ts';
 
 export function plot({ host, sidebar } = {}) {
 	if (!host || !sidebar) return;
@@ -333,7 +334,7 @@ export function plot({ host, sidebar } = {}) {
 			});
 		}
 
-		const starred = settings.starred_friend || '';
+		const starred = useSettings.get('starred_friend') || '';
 		let friends = settings.friends.filter((f) => f != starred);
 
 		if (starred || friends.length > 0) {

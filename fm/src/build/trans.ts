@@ -4,17 +4,30 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { handle_error_500 } from '@/page';
 import { log } from '@/build/log';
 import { page, setRoot } from '@/build/page';
 import { get_language_name } from '@/build/tools';
 import { Settings } from 'luxon';
+import { ReactNode } from 'jsx-dom';
 
 // loads your selected language in Last.fm
 export let lang = 'en';
 export let lang_browser = 'en';
 // hello my name is stel :3
-export let lang_info = {
+export const lastfm_languages = [
+	'en',
+	'de',
+	'es',
+	'fr',
+	'it',
+	'ja',
+	'pt',
+	'ru',
+	'sv',
+	'tr',
+	'zh',
+];
+export const lang_info: Record<string, language> = {
 	en: {
 		name: 'English',
 		by: ['dressupdarling'],
@@ -78,7 +91,22 @@ export let lang_info = {
 		by: ['tmasc'],
 		last_updated: '2026-04-17',
 	},
+	fae: {
+		name: get_language_name('fae'),
+		by: ['evangelicgirl'],
+		last_updated: 'latest',
+	},
 };
+
+export interface language {
+	name: string;
+	by: string[];
+	last_updated: string;
+	new?: boolean;
+	percent?: number;
+	translated?: number;
+	missing?: number;
+}
 
 export const trans = {
 	comma: {
@@ -1567,6 +1595,10 @@ export const trans = {
 			zh: '当系统处于深色主题时应用',
 		},
 	},
+	adapt_theme: {
+		// matches your theme to your system theme
+		en: 'Match system settings',
+	},
 	theme_schedule: {
 		en: 'Choose which theme preference to apply based on your system theme.',
 		de: 'Wähle dein bevorzugtes Farbschema basierend auf deinem Systemdesign.',
@@ -1651,6 +1683,40 @@ export const trans = {
 			pl: 'Próżny',
 			zh: '虚空',
 		},
+		rose_pine: {
+			// https://rosepinetheme.com
+			en: 'Rosé Pine',
+		},
+		rose_pine_dawn: {
+			// https://rosepinetheme.com
+			en: 'Rosé Pine Dawn',
+		},
+		kanagawa: {
+			// https://github.com/rebelot/kanagawa.nvim
+			en: 'Kanagawa',
+		},
+		kanagawa_dragon: {
+			// https://github.com/rebelot/kanagawa.nvim
+			en: 'Kanagawa Dragon',
+		},
+	},
+	bright: {
+		// light themes
+		name: {
+			en: 'Bright',
+		},
+		body: {
+			en: 'Perfect for daylight',
+		},
+	},
+	moody: {
+		// dark themes
+		name: {
+			en: 'Moody',
+		},
+		body: {
+			en: 'Get cosy under the moonlight',
+		},
 	},
 	colours: {
 		en: 'Colours',
@@ -1663,6 +1729,9 @@ export const trans = {
 		ru: 'Цвета',
 		pl: 'Kolory',
 		zh: '颜色',
+	},
+	edit_colour: {
+		en: 'Edit colour',
 	},
 	adaptive: {
 		en: 'Adaptive',
@@ -2201,6 +2270,9 @@ export const trans = {
 			zh: '根据当前时令或节日，自动调整默认颜色、图标集并显示粒子动态效果',
 		},
 	},
+	particles: {
+		en: 'Particles',
+	},
 	seasonal_particles_fps: {
 		name: {
 			en: 'Reduce quality of particles',
@@ -2224,6 +2296,9 @@ export const trans = {
 			pl: 'Płatki śniegu używają podświetlonych cieni dla estetyki - co powoduje większe zużycie zasobów',
 			zh: '雪花粒子使用了阴影发光效果以提升视觉美感，但这会增加额外的性能开销',
 		},
+	},
+	effects: {
+		en: 'Effects',
 	},
 	seasonal_overlays: {
 		name: {
@@ -2962,6 +3037,9 @@ export const trans = {
 			ru: 'Добавьте красок в свой мир (или уменьшите их)',
 			pl: 'Doadaj troche koloru do swojego świata (albo się go pozbądź)',
 		},
+	},
+	theme_no_saturation_support: {
+		en: 'This theme defines its own colours independently',
 	},
 	noise: {
 		name: {
@@ -3914,24 +3992,10 @@ export const trans = {
 		pl: 'Jesteś sponsorem, dzięki wielkie! :3',
 	},
 	sponsor_get_badge: {
-		en: 'A monthly sponsorship grants you a custom badge of your choosing',
-		de: 'Mit einem monatlichen Sponsoring erhältst du ein individuelles Abzeichen deiner Wahl',
-		es: 'Un patrocinio mensual te otorga un emblema personalizado de tu elección',
-		it: 'Una sponsorizzazione mensile ti permette di ottenere un distintivo personalizzato a tua scelta',
-		pt: 'Um apoio mensal lhe dá um emblema personalizado de sua escolha',
-		sv: 'Med ett månatligt sponsorskap får du ett emblem du själv kan anpassa',
-		ru: 'Ежемесячное спонсорство предоставляет вам на выбор персонализированный значок',
-		pl: 'Miesięczne wsparcie daje ci własną odznakę do wyboru',
+		en: 'A sponsorship gives you awesome profile perks visible to all bleh users',
 	},
-	sponsor_no_badge: {
-		en: 'A custom badge is only available with a monthly sponsorship.',
-		de: 'Ein individuelles Abzeichen ist nur mit einem monatlichen Sponsoring erhältlich.',
-		es: 'Un emblema personalizado solo está disponible con un patrocinio mensual.',
-		it: 'Un distintivo personalizzato è disponibile solo con una sponsorizzazione mensile.',
-		pt: 'Um emblema personalizado só está disponível com um apoio mensal.',
-		sv: 'Ett eget anpassat emblem finns bara tillgängligt med månatligt sponsorskap.',
-		ru: 'Персонализированный значок доступен только при ежемесячном спонсорстве.',
-		pl: 'Własna odznaka wymaga mieśięcznego wsparcia.',
+	sponsor_monthly: {
+		en: 'If you sponsored monthly, you can request an extra profile badge (or two if over $6) by messaging. Other profile perks can be used by simply editing your profile.',
 	},
 	manage_sponsor: {
 		en: 'Manage sponsorship',
@@ -3975,6 +4039,9 @@ export const trans = {
 		sv: 'Nuvarande version',
 		ru: 'Текущая версия',
 		pl: 'Aktualna wersja',
+	},
+	badge_version: {
+		en: 'Sponsor list version',
 	},
 	updating_to_version: {
 		en: 'Updating to version',
@@ -5906,6 +5973,9 @@ export const trans = {
 			ru: 'Изменить написание артистов, альбомов и треков на основе вклада сообщества',
 			pl: 'Rekapitalizuj artystów, albumy i utwory bazując na społeczności',
 		},
+	},
+	lotus_edit_notice: {
+		en: 'This is visual-only, your scrobbles will not be actually modified.',
 	},
 	prefer_no_redirect: {
 		name: {
@@ -7912,6 +7982,17 @@ export const trans = {
 		ru: 'Несовместимо с текущими настройками',
 		pt: 'Incompatível com as configurações atuais',
 	},
+	incompatible: {
+		en: 'Incompatible',
+	},
+	value_is_enabled: {
+		// a setting is enabled
+		en: '{v} is enabled',
+	},
+	value_is_disabled: {
+		// a setting is disabled
+		en: '{v} is disabled',
+	},
 	bulk_edit_extension: {
 		// yes the extension
 		en: 'Last.fm Bulk Edit',
@@ -8236,14 +8317,24 @@ export const trans = {
 		// lowercase in design
 		// h: replaced with a heart symbol, so treat it like the word 'love'
 		// u: me (kate)
-		// c, /c: just leave be - translate the contributors text inside
-		en: 'made with {h} by {u} and {c}contributors{/c}',
-		de: 'mit {h} gemacht von {u} und {c}mitwirkenden{/c}',
-		es: 'hecho con {h} por {u} y {c}contribuidores{/c}',
-		it: 'creato con {h} da {u} e {c}contributori{/c}',
-		pt: 'feito com {h} por {u} e {c}contribuidores{/c}',
-		sv: 'skapad med {h} av {u} och {c}bidragsgivare{/c}',
-		ru: 'сделано с {h} от {u} и {c}участников{/c}',
+		// c: translated with the 'contributors' thing below
+		en: 'made with {h} by {u} and {c}',
+		de: 'mit {h} gemacht von {u} und {c}',
+		es: 'hecho con {h} por {u} y {c}',
+		it: 'creato con {h} da {u} e {c}',
+		pt: 'feito com {h} por {u} e {c}',
+		sv: 'skapad med {h} av {u} och {c}',
+		ru: 'сделано с {h} от {u} и {c}',
+
+		contributors: {
+			en: 'contributors',
+			de: 'mitwirkenden',
+			es: 'contribuidores',
+			it: 'contributori',
+			pt: 'contribuidores',
+			sv: 'bidragsgivare',
+			ru: 'участников',
+		},
 	},
 	supported_by: {
 		// lowercase in design
@@ -10229,7 +10320,7 @@ export const trans = {
 		ru: 'Вам необходимо войти в систему',
 	},
 	oracle_notice: {
-		en: 'You are testing ‘oracle’',
+		en: 'You are an oracle tester',
 		de: 'Du testest gerade „oracle“, eine neu gestaltete Album- und Titelseite',
 		es: 'Estás actualmente probando ‘oracle’, un estilo rediseñado de álbumes y temas',
 		it: 'Stai provando ‘oracle’, una vista di album e brani ridisegnata',
@@ -11211,7 +11302,7 @@ export const trans = {
 		ru: 'Текст {v}',
 		it: 'Testo {v}',
 	},
-	bg_val: {
+	fill_val: {
 		// fill 1, fill 2
 		// the filling of a background colour
 		en: 'Fill {v}',
@@ -11220,6 +11311,11 @@ export const trans = {
 		es: 'Relleno {v}',
 		ru: 'Заливка {v}',
 		it: 'Riempimento {v}',
+	},
+	bg_val: {
+		// body 1, body 2
+		// page background colour
+		en: 'Body {v}',
 	},
 	styled_with_font: {
 		en: 'Styled with {f}.',
@@ -11278,6 +11374,9 @@ export const trans = {
 		es: '{v} scrobblings recientes',
 		ru: 'Недавно скробблено: {v}',
 		it: '{v} scrobbles di recente',
+	},
+	value_listeners_recently: {
+		en: '{v} listeners recently',
 	},
 	on_tour: {
 		en: 'On tour',
@@ -11441,22 +11540,7 @@ export const trans = {
 		it: 'Altro utente',
 	},
 	count_bar_right: {
-		name: {
-			en: 'Align count to right-side',
-			pt: 'Alinhar contagem à direita',
-			de: 'Zähler auf die rechte Seite ausrichten',
-			es: 'Alinear cuenta al lado derecho',
-			ru: 'Выравнивать счётчик по правому краю',
-			it: 'Allinea il conteggio al lato destro',
-		},
-		body: {
-			en: 'Control the direction of the bar progress and text',
-			pt: 'Controlar a direção do progresso da barra e do texto',
-			de: 'Steuerung der Richtung des Balkenfortschritts und des Textes',
-			es: 'Controla la dirección del texto y progreso de la barra',
-			ru: 'Управлять направлением прогресс-бара и текста',
-			it: 'Controlla la direzione della barra di avanzamento e del testo',
-		},
+		en: 'Text location',
 	},
 	better_with_friends: {
 		en: 'Music is better with friends, {a}add to your close friends list{/a}',
@@ -11503,7 +11587,7 @@ export const trans = {
 		es: 'Añadir nuevo dato',
 	},
 	presets: {
-		// used in reference to timeframe presets
+		// used in reference to timeframe presets or colour presets
 		en: 'Presets',
 		pt: 'Predefinições',
 		es: 'Preajustes',
@@ -11700,6 +11784,18 @@ export const trans = {
 	badge_multiple_users: {
 		en: 'Owned by {c} people',
 	},
+	miscellaneous: {
+		en: 'Miscellaneous',
+	},
+	count_bar_style: {
+		en: 'Bar styling',
+	},
+	classic: {
+		en: 'Classic',
+	},
+	minimal: {
+		en: 'Minimal',
+	},
 } as const satisfies Record<string, any>;
 
 export const translation_fallback = 'NO_TRANSLATION_FOUND';
@@ -11725,13 +11821,21 @@ export type translation = translation_leaf | {
 	[key: string]: translation;
 };
 
-export function tl(key: translation | string, replacements = {}) {
+export function tl(
+	key: translation | string,
+	replacements: Record<string, ReactNode> = {},
+	string = true,
+) {
 	if (typeof key === 'string') {
+		if (lang == 'fae') return 'hazelfae';
+
 		return key;
 	}
 
 	if (!key) {
 		log('your key is undefined', 'trans');
+		if (lang == 'fae') return 'hazelfae';
+
 		return translation_fallback;
 	}
 
@@ -11741,14 +11845,38 @@ export function tl(key: translation | string, replacements = {}) {
 		translation = translation.replaceAll('Last.fm Pro', 'Verified');
 	}
 
-	if (Object.keys(replacements).length == 0) return translation;
+	if (Object.keys(replacements).length == 0) {
+		if (lang == 'fae') {
+			return 'hazelfae';
+		}
 
-	for (const [placeholder, value] of Object.entries(replacements)) {
-		const regex = new RegExp(`{${placeholder}}`, 'g');
-		translation = translation.replace(regex, value as string);
+		return translation;
 	}
 
-	return translation;
+	if (string) {
+		for (let [placeholder, value] of Object.entries(replacements)) {
+			const regex = new RegExp(`{${placeholder}}`, 'g');
+			if (lang == 'fae') value = 'hazelfae';
+			translation = translation.replace(regex, value);
+		}
+
+		return translation;
+	}
+
+	const parts = translation.split(/({[^}]+})/g);
+
+	return parts.map((part) => {
+		const match = part.match(/^\{(\w+)\}$/);
+		if (lang == 'fae') return 'hazelfae';
+
+		if (match) {
+			const key = match[1];
+
+			return replacements[key] ?? part;
+		}
+
+		return part;
+	});
 }
 
 function collect_keys(object, prefix, out = []) {
@@ -11812,16 +11940,21 @@ function get_lang() {
 }
 
 export function lookup_lang() {
-	const logo = document.querySelector('.masthead-logo a');
-
-	if (!logo) {
-		handle_error_500();
-		return;
-	}
-
 	setRoot(get_lang());
 
-	lang = document.documentElement.getAttribute('lang');
+	const params = new URLSearchParams(document.location.search);
+	const hazelfae = params.get('hazelfae');
+
+	if (!page.state.hazelfae) {
+		page.state.hazelfae = hazelfae != undefined;
+	}
+
+	if (page.state.hazelfae) {
+		lang = 'fae';
+	} else {
+		lang = document.documentElement.getAttribute('lang');
+	}
+
 	lang_browser = navigator.language.replaceAll('"', '');
 
 	if (lang.startsWith('en') && lang_browser.startsWith('en')) {

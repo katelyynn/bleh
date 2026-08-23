@@ -22,6 +22,7 @@ import { bleh_message_list } from '@/components/inbox/messages';
 import { toggle } from '@/components/settings/toggle.js';
 import tippy from 'tippy.js';
 import { icon, icons } from '@/components/shared/icon';
+import { inbox_compose } from '@/pages/inbox/compose.tsx';
 
 export async function bleh_inbox() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -323,91 +324,7 @@ export async function bleh_inbox() {
 			},
 		}));
 	} else if (page.subpage == 'compose') {
-		const inbox = page.structure.container.querySelector(
-			'.inbox-compose-view',
-		);
-		inbox.classList = 'inbox-message-view';
-		page.structure.main.appendChild(inbox);
-
-		const content_form = inbox.querySelector('.content-form');
-		if (!content_form) return;
-
-		const form = content_form.querySelector('form');
-
-		const token = form.querySelector('[name="csrfmiddlewaretoken"]');
-		const recipient = form.querySelector('[name=recipient_name]');
-		const subject = form.querySelector('[name=subject]');
-		const contents = form.querySelector('[name=message]');
-
-		content_form.classList = 'message-compose-section inbox-message';
-
-		let sender_panel_own;
-
-		if (page.requested.subject) subject.value = page.requested.subject;
-
-		const alert = form.querySelector(':scope > .alert');
-		const disclaimer = form.querySelector('.form-disclaimer > .alert');
-
-		render(
-			content_form,
-			html`
-				<div class="message-sender colourful" ref=${(el) =>
-					sender_panel_own = el}>
-					<div class="inbox-message-sender-avatar">
-						<span class="avatar" ref=${(el) => your_avatar = el}>
-							<img src=${avatar(
-								auth.avatar,
-								'avatar70s',
-							)} alt=${auth.name} loading="lazy" />
-						</span>
-					</div>
-					<a class="inbox-message-sender-name"
-						href="${root}user/${auth.name}">${auth.name}</a>
-				</div>
-				<div class="message-content">
-				    <h2 class="text-18">${tl(trans.send_message)}</h2>
-				    ${alert}
-				    <form method="post" action=${form.getAttribute('action')}>
-				        ${token}
-				        <div class="setting-group">
-				            <div class="setting v" data-type="text">
-				                <div class="heading">
-				                    <h5>${tl(trans.username.name)}</h5>
-				                </div>
-				                <div class="input-container content-form wide">
-				                    ${recipient}
-				                </div>
-				            </div>
-				            <div class="setting v" data-type="text">
-				                <div class="heading">
-				                    <h5>${tl(trans.subject)}</h5>
-				                </div>
-				                <div class="input-container content-form wide">
-				                    ${subject}
-				                </div>
-				            </div>
-				            <div class="setting v" data-type="text">
-				                <div class="heading">
-				                    <h5>${tl(trans.message)}</h5>
-				                </div>
-				                <div class="input-container content-form textarea">
-				                    ${contents}
-				                </div>
-				            </div>
-				            ${disclaimer}
-				        </div>
-				        <div class="settings-footer end gap">
-				            <button class="btn primary icon" data-type="message" type="submit">
-				                ${tl(trans.send)}
-				            </button>
-				        </div>
-				    </form>
-				</div>
-			`,
-		);
-
-		const your_badge = patch_avatar(your_avatar, auth.name);
-		style_name_from_badge(sender_panel_own, your_badge);
+		inbox_compose();
 	} else {
 		const inbox = page.structure.container.querySelector('.inbox');
 		page.structure.main.appendChild(inbox);

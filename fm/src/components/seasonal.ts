@@ -28,12 +28,6 @@ export interface season {
 
 export function set_season() {
 	if (!settings.seasonal) {
-		page.state.seasons = {
-			now: DateTime.local(),
-			current: null,
-			prev: null,
-			next: null,
-		};
 		return;
 	}
 
@@ -60,7 +54,7 @@ function apply_season(current: season) {
 		prep_snow();
 
 		const snowflakes_enabled = true;
-		let snowflakes_count = current.snowflakes.count;
+		let snowflakes_count = current.snowflakes.count || 0;
 
 		if (settings.seasonal_particles == 'less' && snowflakes_count > 10) {
 			snowflakes_count *= 0.45;
@@ -97,16 +91,16 @@ function get_season_state(now = DateTime.local()) {
 
 	seasons.sort((a, b) => a.start.toMillis() - b.start.toMillis());
 
-	const current = seasons.find((season) => season.current) || null;
+	const current = seasons.find((season) => season.current) || undefined;
 
-	let prev = null;
-	let next = null;
+	let prev = undefined;
+	let next = undefined;
 
 	if (current) {
 		const index = seasons.findIndex((season) => season.id == current.id);
 
-		prev = seasons[index - 1] || null;
-		next = seasons[index + 1] || null;
+		prev = seasons[index - 1] || undefined;
+		next = seasons[index + 1] || undefined;
 
 		if (!prev) {
 			const last = seasons[seasons.length - 1];
@@ -126,7 +120,7 @@ function get_season_state(now = DateTime.local()) {
 			};
 		}
 	} else {
-		next = seasons.find((season) => now < season.start) || null;
+		next = seasons.find((season) => now < season.start) || undefined;
 
 		if (!next) {
 			const first = seasons[0];

@@ -12,7 +12,7 @@
 	&[data-page-type="festival"],
 	&[data-page-type="tag"],
 	&[data-page-type="search"] {
-		--header-size: 58px;
+		--header-size: 48px;
 	}
 
 	&[data-page-type="bleh_now"],
@@ -67,6 +67,7 @@
 		-webkit-mask-image: var(--mask);
 	}
 }
+
 .background-inner {
 	position: absolute;
 	inset: 0;
@@ -168,6 +169,7 @@
 	from {
 		opacity: 0;
 	}
+
 	to {
 		opacity: 0.4;
 	}

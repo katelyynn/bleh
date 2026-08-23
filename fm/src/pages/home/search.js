@@ -21,6 +21,7 @@ import { sanitise } from '@/build/tools';
 import tippy from 'tippy.js';
 import { avatar } from '@/components/shared/avatar';
 import { icon, icons } from '@/components/shared/icon';
+import { useSettings } from '@/page.ts';
 
 export async function bleh_search() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -69,7 +70,7 @@ export async function bleh_search() {
 		patch_titles();
 	}
 
-	if (page.subpage == 'artists' && settings.corrections) {
+	if (page.subpage == 'artists' && useSettings.get('corrections')) {
 		const artists = page.structure.main.querySelectorAll(
 			'.artist-result-heading a',
 		);

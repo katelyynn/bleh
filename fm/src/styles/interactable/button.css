@@ -59,10 +59,10 @@ select,
 	--bg: var(--cards-overlay-image-subtlest, none), oklch(var(--b3));
 	--bg-hov:
 		var(--cards-overlay-image-subtlest, none),
-        color-mix(in oklch, oklch(var(--b6)), oklch(var(--b3)) 90%);
+		color-mix(in oklch, oklch(var(--b6)), oklch(var(--b3)) 90%);
 	--bg-atv:
 		var(--cards-overlay-image-subtlest, none),
-        color-mix(in oklch, oklch(var(--b6)), oklch(var(--b3)) 80%);
+		color-mix(in oklch, oklch(var(--b6)), oklch(var(--b3)) 80%);
 	--col: oklch(var(--c2));
 	--mask-colour: color-mix(in oklch, oklch(var(--c2)), oklch(var(--c3)) 50%);
 	--shadow: var(--normal-shadow), var(--interact-shadow);
@@ -73,14 +73,10 @@ select,
 	--btn-left: var(--button-sides);
 	background: var(--bg) !important;
 	color: var(--col) !important;
-	padding: var(
-		--padding,
-		var(
-			--button-padding,
-			var(--btn-top) var(--btn-right) var(--btn-bottom)
-			var(--btn-left)
-		)
-	) !important;
+	padding: var(--padding,
+		var(--button-padding,
+		var(--btn-top) var(--btn-right) var(--btn-bottom) var(--btn-left)))
+		!important;
 	min-height: unset !important;
 	min-width: unset !important;
 	line-height: var(--line-height) !important;
@@ -94,6 +90,7 @@ select,
 	box-shadow: var(--shadow) !important;
 	border: unset !important;
 	text-decoration: var(--force-underline, none) !important;
+	text-align: inherit;
 	transition-property:
 		background-color, transform, box-shadow, color, opacity, padding,
 		font-size, font-weight !important;
@@ -129,6 +126,7 @@ select,
 		opacity: 0.7;
 		margin: unset;
 	}
+
 	.listening-report-promo-date,
 	h4 {
 		font: inherit;
@@ -170,7 +168,11 @@ select,
 	&.flex-button {
 		display: flex;
 		align-items: center;
-		gap: 6px;
+		gap: 4px;
+
+		&:not(.dropdown-menu-clickable-item) {
+			--icon-size: 16px;
+		}
 	}
 
 	/*     LOADING     */
@@ -198,20 +200,22 @@ select,
 			var(--cards-overlay-image-subtlest, none), oklch(var(--h3)) !important;
 		--bg-hov:
 			var(--cards-overlay-image-subtlest, none),
-            color-mix(in oklch, oklch(var(--h4)), oklch(var(--h3)) 80%) !important;
+			color-mix(in oklch, oklch(var(--h4)), oklch(var(--h3)) 80%) !important;
 		--bg-atv:
 			var(--cards-overlay-image-subtlest, none),
-            color-mix(in oklch, oklch(var(--h4)), oklch(var(--h3)) 60%) !important;
+			color-mix(in oklch, oklch(var(--h4)), oklch(var(--h3)) 60%) !important;
 		--col: oklch(var(--b7)) !important;
 		--force-font-weight: var(--font-weight-bold) !important;
+
 		&:not(.chibi) {
 			--mask-colour: oklch(var(--b7) / 0.8) !important;
 		}
-		--shadow:
-			var(--primary-shadow), 0 3px 12px oklch(var(--h4) / 32%),
-            var(--interactable-outer);
-		--shadow-hov:
-			var(--interactable-outer), var(--interactable-active-outer);
+
+		--shadow: var(--primary-shadow),
+		0 3px 12px oklch(var(--h4) / 32%),
+		var(--interactable-outer);
+		--shadow-hov: var(--interactable-outer),
+		var(--interactable-active-outer);
 
 		[data-bleh--season="christmas"] & {
 			--hue-seasonal: 130;
@@ -245,6 +249,7 @@ select,
 	}
 
 	&.btn--loading,
+	&[data-loading="true"],
 	&[data-disabled="true"],
 	/* used for new last.fm follow button */ &[disabled]:not([disabled="false"]) {
 		opacity: 0.65 !important;
@@ -253,6 +258,7 @@ select,
 		transform: unset !important;
 		--bg-hov: var(--bg) !important;
 		--bg-atv: var(--bg) !important;
+		cursor: default;
 	}
 
 	&.btn-primary.js-close {
@@ -269,7 +275,12 @@ select,
 		--mask-colour: currentColor !important;
 		min-width: var(--button-height) !important;
 		width: var(--button-height) !important;
+		height: var(--button-height) !important;
 		position: relative;
+		--padding: 0 !important;
+
+		justify-content: center;
+		gap: 0;
 
 		&:before {
 			--left: calc((var(--button-height) - var(--icon-size)) / 2) !important;
@@ -310,10 +321,9 @@ select,
 .btn-secondary.js-close:not(.modal-action-button),
 .form-group button[type="submit"]:not(.btn-post-shout, .image-upload-remove),
 .modal-button button[type="submit"] {
-	--btn-left: calc(
-        var(--button-sides-icon) + var(--icon-size) + var(--icon-gap)
-    ) !important;
+	--btn-left: calc(var(--button-sides-icon) + var(--icon-size) + var(--icon-gap)) !important;
 }
+
 .side-right .setting-item,
 .external,
 .open,
@@ -324,9 +334,7 @@ select,
 .gallery-next .arrow,
 .date-range-picker-button,
 .icon-r {
-	--btn-right: calc(
-        var(--button-sides-icon) + var(--icon-size) + var(--icon-gap)
-    ) !important;
+	--btn-right: calc(var(--button-sides-icon) + var(--icon-size) + var(--icon-gap)) !important;
 }
 
 .input-group,
@@ -360,6 +368,7 @@ select,
 			/*border-top-right-radius: 0 !important;
 			border-bottom-right-radius: 0 !important;*/
 		}
+
 		/*&.chibi {
 		    border-top-left-radius: 0 !important;
 		    border-bottom-left-radius: 0 !important;
@@ -406,11 +415,9 @@ select,
 
 .accented {
 	--col: oklch(var(--l3-c));
-	--mask-colour: color-mix(
-        in oklch,
-        oklch(var(--l3-c)),
-        oklch(var(--l4-c)) 30%
-    );
+	--mask-colour: color-mix(in oklch,
+			oklch(var(--l3-c)),
+			oklch(var(--l4-c)) 30%);
 }
 
 .danger-subtle,
@@ -422,11 +429,9 @@ select,
 
 	&:not(.primary, .btn-primary) {
 		--col: oklch(var(--l3-c));
-		--mask-colour: color-mix(
-            in oklch,
-            oklch(var(--l3-c)),
-            oklch(var(--l4-c)) 30%
-        );
+		--mask-colour: color-mix(in oklch,
+				oklch(var(--l3-c)),
+				oklch(var(--l4-c)) 30%);
 	}
 }
 
