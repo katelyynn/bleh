@@ -1,6 +1,6 @@
 .tippy-box,
 .tooltip-dark {
-	background-color: oklch(var(--b2) / var(--solarium-opacity, 80%));
+	background-color: oklch(var(--tooltip) / var(--solarium-opacity, 80%));
 	backdrop-filter: var(--solarium);
 	-webkit-backdrop-filter: var(--solarium);
 	border-radius: var(--radius-s);
@@ -328,6 +328,8 @@
 	}
 
 	&[data-theme="generic"] {
+		pointer-events: none;
+
 		&>.tippy-content {
 			display: flex;
 			flex-direction: column;

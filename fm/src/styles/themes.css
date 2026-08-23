@@ -422,6 +422,8 @@ body,
 
 	--normal-shadow: 0 0 transparent;
 
+	--tooltip: var(--b2);
+
 	--input-shadow:
 		inset 0 0 0 1px oklch(var(--b3) / 70%),
         inset 0 1px 2px 1px oklch(var(--b6) / 80%);
@@ -630,6 +632,8 @@ body,
 		--b7: 0 0 0;
 		--b9: 1 0 0;
 
+		--tooltip: 0.89 0 0;
+
 		--separator-base: oklch(var(--b2) / 0.3);
 
 		--card-border-base: oklch(0.87 0 0) !important;
@@ -713,6 +717,8 @@ body,
 		--b8: 0.86 calc(var(--sat) * 0.1 * var(--sat-bg, 1)) var(--hue);
 		--b7: 0.17 calc(var(--sat) * 0.26 * var(--sat-bg, 1)) var(--hue);
 		--b9: 0.84 0 0;
+
+		--tooltip: 0.92 calc(var(--sat) * 0.07 * var(--sat-bg, 1)) var(--hue);
 
 		--separator-base: oklch(var(--b2) / 0.2);
 
@@ -799,6 +805,8 @@ body,
 		--b5: 0.989 0.0107 76.6; /* surface */
 		--b6: 0.9691 0.0113 71.9; /* base */
 		--b8: 0.9502 0.0101 58.21; /* highlight low */
+
+		--tooltip: 0.992 0.0057 31.06;
 
 		--separator-base: oklch(var(--b2) / 0.2);
 

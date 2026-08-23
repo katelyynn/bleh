@@ -13,11 +13,16 @@ import {
 } from '@floating-ui/dom';
 import { HTMLAttributes, ReactElement } from 'jsx-dom';
 
-type AnimationPreset = 'slide-down' | 'slide-up';
+type AnimationPreset =
+	| 'slide-down-bottom'
+	| 'slide-up-bottom'
+	| 'slide-down-top'
+	| 'slide-up-top';
 type TooltipConfig = Partial<
 	ComputePositionConfig & {
 		enterAnimation: AnimationPreset;
 		exitAnimation: AnimationPreset;
+		ariaEnabled: boolean;
 	}
 >;
 
@@ -26,16 +31,28 @@ function animation_for_preset(
 ): { keyframes: Keyframe[]; options: KeyframeAnimationOptions } {
 	let keyframes: Keyframe[];
 	switch (preset) {
-		case 'slide-down':
+		case 'slide-down-bottom':
 			keyframes = [
 				{ opacity: 0, transform: 'translateY(-4px)' },
 				{ opacity: 1, transform: 'translateY(0px)' },
 			];
 			break;
-		case 'slide-up':
+		case 'slide-up-bottom':
 			keyframes = [
 				{ opacity: 1, transform: 'translateY(0px)' },
 				{ opacity: 0, transform: 'translateY(-4px)' },
+			];
+			break;
+		case 'slide-down-top':
+			keyframes = [
+				{ opacity: 1, transform: 'translateY(-4px)' },
+				{ opacity: 0, transform: 'translateY(0px)' },
+			];
+			break;
+		case 'slide-up-top':
+			keyframes = [
+				{ opacity: 0, transform: 'translateY(0px)' },
+				{ opacity: 1, transform: 'translateY(-4px)' },
 			];
 			break;
 	}
@@ -83,10 +100,25 @@ export class TooltipInstance<
 				}),
 				offsetMiddleware(6),
 			],
-			enterAnimation: 'slide-down',
-			exitAnimation: 'slide-up',
+			enterAnimation: 'slide-up-top',
+			exitAnimation: 'slide-down-top',
+			ariaEnabled: false,
 			...config,
 		};
+
+		if (this.config.placement == 'top') {
+			this.config = {
+				...config,
+				enterAnimation: 'slide-up-top',
+				exitAnimation: 'slide-down-top',
+			};
+		} else {
+			this.config = {
+				...config,
+				enterAnimation: 'slide-down-bottom',
+				exitAnimation: 'slide-up-bottom',
+			};
+		}
 	}
 
 	public show() {
@@ -135,7 +167,11 @@ export class TooltipInstance<
 		this.is_mounted = true;
 		this.element = document.body.appendChild(this.element);
 		this.element.id = this.uuid;
-		this.host.setAttribute('aria-expanded', 'true');
+
+		if (this.config.ariaEnabled) {
+			this.host.setAttribute('aria-expanded', 'true');
+		}
+
 		this.host.setAttribute('aria-describedby', this.uuid);
 		this.cleanup = autoUpdate(
 			this.host,
@@ -154,7 +190,11 @@ export class TooltipInstance<
 			this.cleanup = null;
 		}
 		this.is_mounted = false;
-		this.host.setAttribute('aria-expanded', 'false');
+
+		if (this.config.ariaEnabled) {
+			this.host.setAttribute('aria-expanded', 'false');
+		}
+
 		this.host.removeAttribute('aria-describedby');
 	}
 
@@ -211,6 +251,7 @@ export function menu_tooltip<
 ) {
 	const tooltip = new TooltipInstance(host, element, {
 		placement: 'bottom',
+		ariaEnabled: true,
 		...config,
 	});
 	host.addEventListener('click', () => {
@@ -248,7 +289,11 @@ export function context_menu_tooltip<
 	element: E,
 	config: TooltipConfig = {},
 ) {
-	const tooltip = new TooltipInstance(host, element, config);
+	const tooltip = new TooltipInstance(host, element, {
+		placement: 'bottom',
+		ariaEnabled: true,
+		...config,
+	});
 	host.addEventListener('contextmenu', (e) => {
 		e.preventDefault();
 		// close when clicking again
