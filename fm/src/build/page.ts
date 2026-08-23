@@ -22,6 +22,7 @@ tippy.setDefaultProps({
 	offset: [0, 4],
 	ignoreAttributes: true,
 	animation: 'bleh',
+	theme: 'generic',
 });
 
 /**

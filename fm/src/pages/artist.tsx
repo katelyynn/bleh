@@ -48,6 +48,7 @@ import {
 } from '@/components/shared/tooltips.tsx';
 import { useSettings } from '@/page.ts';
 import { bleh_event_artist } from '@/pages/artist/event.tsx';
+import { PageHeader, PageHeaderTitle } from '@/components/page/header.tsx';
 
 export function bleh_artists() {
 	const artist_header = document.body.querySelector(
@@ -126,7 +127,9 @@ export function bleh_artists() {
 		const avatar = artist_header.querySelector(
 			'.header-new-background-image',
 		) as HTMLElement;
-		const title = artist_header.querySelector('.header-new-title');
+		const title = artist_header.querySelector(
+			'.header-new-title',
+		) as HTMLDivElement;
 		const on_tour = artist_header.querySelector('.header-new-on-tour');
 		const position = artist_header.querySelector(
 			'.header-new-chart-position-number',
@@ -134,58 +137,36 @@ export function bleh_artists() {
 
 		if (on_tour) page.state.on_tour = true;
 
-		let page_avatar;
+		// TODO: change to tsx
+		const page_avatar = page_header_avatar(
+			avatar?.getAttribute('content') || '',
+		);
 
-		const same_page = is_same_page();
+		//const same_page = is_same_page();
 
-		let multi_info_box;
-		const redesigned_artist_header = html.node`
-            <section class="page-header for-artist ${same_page ? 'same' : ''}">
-                <div class="page-header-avatar-list">
-                    ${page_avatar = page_header_avatar(
-			avatar?.getAttribute('content'),
-		)}
-                </div>
-                <div class="page-header-info has-main-info">
-                    <div class="main-info">
-                        ${
-			page.multi
-				? html.node`
-                        <div class="sub-text">
-                            ${tl(trans.artists)}
-                            <div class="info-tip" ref=${(
-					el,
-				) => (multi_info_box = el)}>
-                                <div class="bleh-icon bleh-info-icon"></div>
-                            </div>
-                        </div>
-                        `
-				: html.node`
-                        <div class="sub-text">${tl(trans.artist)}</div>
-                        `
-		}
-                        <div class="title-container" data-multi=${page.multi}>
-                            ${title}
-                            ${position}
-                        </div>
-                    </div>
-                </div>
-            </section>
-        `;
+		const redesigned_artist_header = (
+			<PageHeader
+				type='artist'
+				avatar={page_avatar}
+				combined={page.multi}
+			>
+				<PageHeaderTitle>
+					{title}
+					{position}
+				</PageHeaderTitle>
+			</PageHeader>
+		);
 
 		log('settings hue accent', 'dfbdfb', 'info', {
 			settings: JSON.stringify(settings),
 		});
-		header_colour(page_avatar.image, settings.hue_from_artist, [
-			page_avatar,
-		]);
-
-		if (multi_info_box) {
-			hover_tooltip(
-				multi_info_box,
-				<Tooltip>{tl(trans.artists_tooltip)}</Tooltip>,
-			);
-		}
+		header_colour(
+			page_avatar.image,
+			useSettings.get('hue_from_artist') as boolean,
+			[
+				page_avatar,
+			],
+		);
 
 		if (position) {
 			hover_tooltip(

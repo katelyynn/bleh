@@ -2,7 +2,6 @@
 .report-dropdown-button:before,
 .attendance-badge:before,
 .lfmmaf-missing-artwork-button:before,
-.reset:before,
 .input-container:after,
 .blend-v2-btn:before,
 .rabbit-search:after,
@@ -13,8 +12,8 @@
 .obsession-pagination-link:before,
 .library-search-results.async-content-loading:after,
 .listening-report-promo-date:after,
-.metadata-column .cta-link-wrap > a:before,
-.lyrics-snippet-more-link > a:before,
+.metadata-column .cta-link-wrap>a:before,
+.lyrics-snippet-more-link>a:before,
 .see-more:before,
 .music-featured-item-background:before,
 .gallery-image-preferred-states:before,
@@ -62,49 +61,71 @@
 .lazy-shoutbox.async-content-loading:after,
 .loading:not(.library-fetch, .library-date-picker):after,
 .nag-bar-message:before,
-/*     BLEH     */ .loading-data-text:before,
+/*     BLEH     */
+.loading-data-text:before,
 .btn--has-icon:before,
-/*     DROPDOWNS     */ .dropdown-menu-clickable-item:not(.v2):before,
+/*     DROPDOWNS     */
+.dropdown-menu-clickable-item:not(.v2):before,
 .dropdown-menu-list-button::after,
 .dropdown-menu-clickable-button:not(.link-select, .report-dropdown-button)::after,
 .dropdown-menu-clickable-button-js-only::after,
 .display-options-clickable-button:after,
-/*     MORE LINK >     */ .external-link:before,
-/*     NAV     */ .secondary-nav-item-link:before,
+/*     MORE LINK >     */
+.external-link:before,
+/*     NAV     */
+.secondary-nav-item-link:before,
 .navlist-more:before,
-/*     PLAYLINKS & MEDIA LINKS     */ .section-playlink:before,
+/*     PLAYLINKS & MEDIA LINKS     */
+.section-playlink:before,
 .inline-section-control:before,
 .header-new-playlink:before,
-/*     SHOUT     */ .shout-more-replies-after:before,
+/*     SHOUT     */
+.shout-more-replies-after:before,
 .shout-more-replies-before:before,
-/*     EVENTS     */ .event-detail:before,
+/*     EVENTS     */
+.event-detail:before,
 .event-metadata:not(:last-child):before,
-/*     HEADER     */ .masthead-search-submit:before,
-/*     ALERT/INFO     */ .alert:before,
+/*     HEADER     */
+.masthead-search-submit:before,
+/*     ALERT/INFO     */
+.alert:before,
 .event-status:before,
 .async-content-error-message:before,
-/*     USER NAME LABELS     */ .label:before,
-/*     CUSTOM AVATAR ICONS WITHOUT PRO     */ .avatar-status-dot:after,
-/*     TAGS     */ .tags-add:before,
-/*     CHARTLIST     */ .chartlist-type:before,
-/*     GALLERY     */ .btn-add:before,
+/*     USER NAME LABELS     */
+.label:before,
+/*     CUSTOM AVATAR ICONS WITHOUT PRO     */
+.avatar-status-dot:after,
+/*     TAGS     */
+.tags-add:before,
+/*     CHARTLIST     */
+.chartlist-type:before,
+/*     GALLERY     */
+.btn-add:before,
 .btn-file:before,
-/*     PLAYLISTS     */ .playlisting-playlist-header-more-button:before,
+/*     PLAYLISTS     */
+.playlisting-playlist-header-more-button:before,
 .playlisting-playlists-item-toggle:before,
 .playlisting-playlists-item-name:before,
 .playlisting-create-option-icon:before,
-/*     PLAYER BAR     */ .dropdown-menu-item-dark:before,
-/*     UPLOAD CTA     */ .cta-link:before,
+/*     PLAYER BAR     */
+.dropdown-menu-item-dark:before,
+/*     UPLOAD CTA     */
+.cta-link:before,
 .shout-more-actions:before,
 .coloured-cta:before,
-/*     LIBRARY     */ .all-results-list li:before,
+/*     LIBRARY     */
+.all-results-list li:before,
 .library-search-submit::before,
 .date-range-picker-button:after,
-/*     WIKI     */ .wiki-history-action:before,
-/*     SEARCH     */ .search-submit:before,
+/*     WIKI     */
+.wiki-history-action:before,
+/*     SEARCH     */
+.search-submit:before,
 .search-reset:before,
-/*     SET AN OBSESSION     */ .obsession-candidate-inner .btn-sm:before,
-/*     GENERIC     */ .music-link:after,
+/*     SET AN OBSESSION     */
+.obsession-candidate-inner .btn-sm:before,
+/*     GENERIC     */
+.music-link:after,
 .btn--loading:after,
 .more-items:before {
 	content: "";
@@ -112,7 +133,7 @@
 	mask-position: 0 0 !important;
 	left: var(--left, var(--button-sides-icon)) !important;
 	margin-top: var(--margin-top,
-		calc(-1 * (var(--mask-size, var(--icon-size)) / 2))) !important;
+			calc(-1 * (var(--mask-size, var(--icon-size)) / 2))) !important;
 	margin-left: var(--margin-left, unset) !important;
 	margin-right: var(--margin-right, unset) !important;
 	width: var(--mask-size, var(--icon-size)) !important;
@@ -131,10 +152,10 @@
 	mask-size: var(--mask-size, var(--icon-size));
 	-webkit-mask-size: var(--mask-size, var(--icon-size));
 	transition-property: var(--transition-property,
-		opacity,
-		left,
-		background,
-		transform) !important;
+			opacity,
+			left,
+			background,
+			transform) !important;
 	transition-duration: var(--trans) !important;
 	transition-timing-function: var(--trans-function) !important;
 	contain: strict;
@@ -219,7 +240,7 @@ span.bleh-icon {
 	align-items: center;
 	gap: var(--icon-gap);
 
-	& > .bleh-icon {
+	&>.bleh-icon {
 		flex-shrink: 0;
 	}
 
@@ -232,11 +253,11 @@ span.bleh-icon {
 .bleh-icon-animated-dots {
 	--icon: var(--icon-16-dots) !important;
 	background: linear-gradient(90deg,
-		oklch(var(--b4)),
-		oklch(var(--c1)),
-		oklch(var(--b4)),
-		oklch(var(--c1)),
-		oklch(var(--b4)));
+			oklch(var(--b4)),
+			oklch(var(--c1)),
+			oklch(var(--b4)),
+			oklch(var(--c1)),
+			oklch(var(--b4)));
 	background-size: 200% 100%;
 	animation: gradient 1.3s linear infinite;
 

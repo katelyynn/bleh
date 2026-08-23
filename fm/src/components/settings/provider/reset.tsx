@@ -8,6 +8,9 @@ import { setting_value } from '@/build/config.ts';
 import { tl, trans } from '@/build/trans.ts';
 import tippy from 'tippy.js';
 import { createRef } from 'jsx-dom';
+import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
+import { Button } from '@/components/button/button.tsx';
+import { Icon, icons } from '@/components/shared/icon.tsx';
 
 interface SettingResetProps {
 	ref?: ReturnType<typeof createRef<HTMLButtonElement>>;
@@ -27,21 +30,23 @@ export function SettingReset({
 	defaultValue,
 }: SettingResetProps) {
 	const reset = (
-		<button
-			type='button'
-			class={['btn', 'reset']}
+		<Button
+			chibi
+			className='reset'
 			onClick={() => {
 				setValue(defaultValue);
 			}}
 			ref={ref}
 		>
+			<Icon name={icons.reset} identifier='reset-setting' />
 			{tl(trans.reset)}
-		</button>
+		</Button>
 	) as SettingResetElement;
 
-	tippy(reset, {
-		content: tl(trans.reset),
-	});
+	hover_tooltip(
+		reset,
+		<Tooltip>{tl(trans.reset)}</Tooltip>,
+	);
 
 	Object.defineProperty(reset, 'value', {
 		set(val: setting_value) {
