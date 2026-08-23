@@ -29,7 +29,7 @@ import { bool } from '@/build/tools';
 import { keys } from '@/components/settings/storage';
 import { new_indicator } from '@/components/shared/indicator';
 import { discord } from '@/build/page';
-import { Icon, icon, icons } from '@/components/shared/icon';
+import { Icon, icon, icons, PlusIcon } from '@/components/shared/icon';
 import { news } from '@/components/news';
 import { SubText } from '@/components/text/sub.tsx';
 import { SettingGroup } from '@/components/settings/group.tsx';
@@ -199,17 +199,13 @@ export function general() {
 						name={tl(trans.api.name)}
 						body={tl(trans.api.body)}
 					>
-						<a
-							class={[
-								'btn',
-								'icon',
-								(auth_key && bool(auth_valid)) && 'primary',
-							]}
-							data-type='plus'
+						<Button
 							href={`${root}api/auth?api_key=${api_key}&cb=${root}bleh/api`}
+							primary={!!auth_key && bool(auth_valid)}
 						>
+							<PlusIcon />
 							{tl(trans.connect)}
-						</a>
+						</Button>
 					</SettingAction>
 					<SettingInfo name={tl(trans.api_status)}>
 						{(auth_key && bool(auth_valid))

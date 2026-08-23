@@ -285,6 +285,30 @@ export function CancelIcon({
 	);
 }
 
+export function PlusIcon({
+	identifier,
+}: Partial<IconProps>) {
+	return (
+		<Icon
+			name={icons.plus}
+			identifier={identifier}
+			className='bleh-icon-cancel'
+		/>
+	);
+}
+
+export function MinusIcon({
+	identifier,
+}: Partial<IconProps>) {
+	return (
+		<Icon
+			name={icons.minus}
+			identifier={identifier}
+			className='bleh-icon-cancel'
+		/>
+	);
+}
+
 export function icon_mask({ name }: { name?: string }) {
 	if (name == 'inherit') return '';
 

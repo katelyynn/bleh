@@ -58,7 +58,12 @@ import {
 } from '@/components/settings/clickables/list.tsx';
 import { SettingList } from '@/components/settings/provider/list.tsx';
 import { EventItem } from '@/components/event/item.tsx';
-import { CancelIcon, SaveIcon } from '@/components/shared/icon.tsx';
+import {
+	CancelIcon,
+	MinusIcon,
+	PlusIcon,
+	SaveIcon,
+} from '@/components/shared/icon.tsx';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -189,6 +194,22 @@ export function mualani() {
 						</Button>
 						<Button primary>
 							<CancelIcon />
+							Button
+						</Button>
+						<Button>
+							<PlusIcon />
+							Button
+						</Button>
+						<Button primary>
+							<PlusIcon />
+							Button
+						</Button>
+						<Button>
+							<MinusIcon />
+							Button
+						</Button>
+						<Button primary>
+							<MinusIcon />
 							Button
 						</Button>
 					</DemoItem>

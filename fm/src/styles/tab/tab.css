@@ -328,6 +328,17 @@ button.navlist-more {
 		}
 	}*/
 
+	&:before {
+		content: "";
+		position: absolute;
+		inset: 0 0 -1px 0;
+		display: block;
+		background: oklch(var(--b5) / var(--solarium-opacity, 0%));
+		border-top-left-radius: inherit;
+		border-top-right-radius: inherit;
+		z-index: -1;
+	}
+
 	&:after {
 		content: '';
 		position: absolute;
