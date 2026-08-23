@@ -16,11 +16,11 @@ import {
 	bleh_wiki_editor,
 	bleh_wiki_history,
 } from '@/pages/music/wiki';
-import tippy from 'tippy.js';
 import { settings } from '@/build/config';
 import { page_header_title } from '@/components/music/header';
 import { html } from 'lighterhtml';
 import { icon, icons } from '@/components/shared/icon';
+import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
 
 export function bleh_tags() {
 	const tag_header = document.body.querySelector('.header--tag');
@@ -187,9 +187,6 @@ export function bleh_tags_mini(observer = page.structure.main) {
 	const user_tags = tags_list.querySelectorAll('.tag a');
 	user_tags.forEach((tag) => {
 		tag.classList.add('user-created-tag');
-
-		tippy(tag, {
-			content: tl(trans.personal_tag),
-		});
+		hover_tooltip(tag, <Tooltip>{tl(trans.personal_tag)}</Tooltip>);
 	});
 }
