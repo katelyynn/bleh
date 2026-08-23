@@ -445,11 +445,11 @@ body,
 	--sidebar-border: color-mix(in oklch, oklch(var(--b5)), oklch(var(--b2)) 20%);
 	--sidebar-shadow: 4px 0 5px 1px oklch(var(--b6) / 80%);
 
-	--toolbar-bg: oklch(var(--b6) / 30%);
+	--toolbar-bg: oklch(var(--b6) / 60%);
 	--toolbar-border: oklch(var(--b4) / 75%);
 	--subtle-border: 1px solid oklch(var(--b4) / 55%);
 
-	--card-blur-bg: oklch(0.3 calc(var(--sat) * 0.04 * var(--sat-bg, 1)) var(--hue) / var(--solarium-opacity, 70%));
+	--card-blur-bg: oklch(0.3 calc(var(--sat) * 0.04 * var(--sat-bg, 1)) var(--hue) / var(--solarium-opacity, 60%));
 	--card-blur-bg-alt: oklch(var(--b5) / var(--solarium-opacity, 35%));
 
 	--nav-filter-shadow: drop-shadow(0 0 4px oklch(var(--b6))) drop-shadow(0 0 10px oklch(var(--b6) / 90%));
@@ -528,6 +528,7 @@ body,
 
 		--card-blur-bg: oklch(0.21 calc(var(--sat) * 0.05 * var(--sat-bg, 1)) var(--hue) / var(--solarium-opacity, 50%));
 		--card-blur-bg-alt: oklch(var(--b5) / var(--solarium-opacity, 35%));
+		--toolbar-bg: oklch(var(--b6) / 70%);
 
 		--normal-shadow: 0 0 transparent;
 
@@ -570,13 +571,13 @@ body,
 
 		--sidebar-bg: color-mix(in oklch, oklch(var(--b4)) 22%, oklch(var(--b5)));
 		--sidebar-border: color-mix(in oklch, oklch(var(--b5)), oklch(var(--b2)) 38%);
-		--toolbar-bg: oklch(var(--b4) / 20%);
+		--toolbar-bg: oklch(0.04 calc(var(--sat) * 0.01 * var(--sat-bg, 1)) var(--hue) / 50%);
 		--toolbar-border: oklch(var(--b2) / 24%);
 		--subtle-border: 1px solid oklch(var(--b2) / 35%);
 
 		--normal-shadow: none;
 
-		--card-blur-bg: oklch(0.12 calc(var(--sat) * 0.05 * var(--sat-bg, 1)) var(--hue) / var(--solarium-opacity, 10%));
+		--card-blur-bg: oklch(0.12 calc(var(--sat) * 0.05 * var(--sat-bg, 1)) var(--hue) / var(--solarium-opacity, 50%));
 		--card-blur-bg-alt: oklch(var(--b5) / var(--solarium-opacity, 20%));
 
 		--setting-hover: oklch(var(--b2) / 16%);
@@ -662,11 +663,11 @@ body,
             oklch(var(--b5)),
             oklch(var(--b4)) 42%
         );
-		--toolbar-bg: oklch(var(--b5) / 50%);
+		--toolbar-bg: oklch(var(--b5) / 70%);
 		--toolbar-border: oklch(var(--b4) / 65%);
 		--subtle-border: 1px solid oklch(var(--b4) / 65%);
 
-		--card-blur-bg: oklch(0.99 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue) / var(--solarium-opacity, 70%));
+		--card-blur-bg: oklch(0.99 calc(var(--sat) * 0.02 * var(--sat-bg, 1)) var(--hue) / var(--solarium-opacity, 73%));
 		--card-blur-bg-alt: oklch(var(--b5) / var(--solarium-opacity, 22%));
 
 		--menu-item-hov: oklch(var(--b4) / 60%);
@@ -744,14 +745,14 @@ body,
 
 		--sidebar-bg: color-mix(in oklch, oklch(var(--b6)) 56%, oklch(var(--b5)));
 		--sidebar-border: oklch(0.88 calc(var(--sat) * 0.1 * var(--sat-bg, 1)) var(--hue));
-		--toolbar-bg: oklch(var(--b5) / 30%);
+		--toolbar-bg: oklch(var(--b5) / 50%);
 		--toolbar-border: oklch(var(--b4) / 45%);
 		--subtle-border: 1px solid oklch(var(--b4) / 65%);
 
 		--nav-filter-shadow: drop-shadow(0 0 2px oklch(var(--b5)));
 		--header-filter-shadow: drop-shadow(0 0 10px oklch(var(--b5)));
 
-		--card-blur-bg: oklch(0.91 calc(var(--sat) * 0.11 * var(--sat-bg, 1)) var(--hue) / var(--solarium-opacity, 72%));
+		--card-blur-bg: oklch(0.91 calc(var(--sat) * 0.11 * var(--sat-bg, 1)) var(--hue) / var(--solarium-opacity, 63%));
 		--card-blur-bg-alt: oklch(var(--b5) / var(--solarium-opacity, 22%));
 
 		--banner-overlay: oklch(var(--b5) / 30%);
@@ -790,7 +791,7 @@ body,
 		--b6: 0.2134 0.0255 291.13; /* base */
 		--b8: 0.2512 0.0263 287.62; /* highlight low */
 
-		--card-blur-bg: oklch(var(--b5) / var(--solarium-opacity, 70%));
+		--card-blur-bg: oklch(var(--b5) / var(--solarium-opacity, 60%));
 		--separator-base: oklch(var(--b3) / 0.55);
 
 		--group-shadow:
@@ -799,6 +800,7 @@ body,
 		--separator-shadow: 0 1px 2px 0 oklch(0.0512 0.0263 287.62 / 0.15);
 
 		--setting-group: oklch(var(--b4) / 20%);
+		--toolbar-bg: oklch(0.2213 0.0322 289.14 / 60%);
 	}
 	&[data-bleh--theme="rose_pine_dawn"] {
 		--b2: 0.8031 0.006 334; /* highlight high */
@@ -836,7 +838,7 @@ body,
             oklch(var(--b5)),
             oklch(var(--b4)) 44%
         );
-		--toolbar-bg: oklch(var(--b5) / 50%);
+		--toolbar-bg: oklch(var(--b5) / 60%);
 		--toolbar-border: oklch(var(--b4) / 59%);
 		--subtle-border: 1px solid oklch(var(--b4) / 65%);
 
@@ -906,8 +908,10 @@ body,
 
 		--menu-border: oklch(var(--b2) / 0.6);
 
-		--card-blur-bg: oklch(var(--b5) / var(--solarium-opacity, 70%));
+		--card-blur-bg: oklch(var(--b5) / var(--solarium-opacity, 60%));
 		--card-blur-bg-alt: oklch(var(--b5) / var(--solarium-opacity, 35%));
+
+		--toolbar-bg: oklch(0.2064 0.0039 91.62 / 60%);
 
 		--input-shadow:
 			inset 0 0 0 1px oklch(var(--b3) / 90%),

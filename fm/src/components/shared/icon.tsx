@@ -207,6 +207,8 @@ export const icons = {
 	activity: 'activity',
 	recent: 'recent',
 	compose: 'compose',
+	motion: 'motion',
+	text: 'text',
 };
 
 interface icon {
