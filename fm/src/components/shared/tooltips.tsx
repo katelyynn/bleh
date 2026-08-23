@@ -98,23 +98,21 @@ export class TooltipInstance<
 					crossAxis: true,
 					padding: 6,
 				}),
-				offsetMiddleware(6),
+				offsetMiddleware(2),
 			],
-			enterAnimation: 'slide-up-top',
-			exitAnimation: 'slide-down-top',
 			ariaEnabled: false,
 			...config,
 		};
 
 		if (this.config.placement == 'top') {
 			this.config = {
-				...config,
+				...this.config,
 				enterAnimation: 'slide-up-top',
 				exitAnimation: 'slide-down-top',
 			};
 		} else {
 			this.config = {
-				...config,
+				...this.config,
 				enterAnimation: 'slide-down-bottom',
 				exitAnimation: 'slide-up-bottom',
 			};

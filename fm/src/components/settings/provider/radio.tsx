@@ -223,7 +223,7 @@ type RadioItemElement = HTMLDivElement & {
 interface RadioItemProps {
 	id: string;
 	value: string;
-	name: string;
+	name: ReactNode;
 	checked?: boolean;
 	onChange: (val: string) => void;
 }
@@ -249,7 +249,13 @@ function RadioItem({
 				onChange(value);
 			}}
 		>
-			<Radio name={id} value={value} ref={radio} interact={false} />
+			<Radio
+				name={id}
+				value={value}
+				ref={radio}
+				className='setting-inner'
+				interact={false}
+			/>
 			<SettingLabel name={name} />
 		</div>
 	) as RadioItemElement;

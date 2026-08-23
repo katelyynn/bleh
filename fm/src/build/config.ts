@@ -551,12 +551,14 @@ export const settings_store: Record<string, setting_instance> = {
 			},
 		},
 		require_reload: true,
+		incompatible: { seasonal: false },
 	},
 	seasonal_particles_fps: {
 		default: false,
 		type: 'checkbox',
 		title: trans.seasonal_particles_fps.name,
 		body: trans.seasonal_particles_fps.body,
+		incompatible: { seasonal: false },
 	},
 	seasonal_overlays: {
 		default: true,
@@ -564,6 +566,7 @@ export const settings_store: Record<string, setting_instance> = {
 		title: trans.seasonal_overlays.name,
 		body: trans.seasonal_overlays.body,
 		bubble: true,
+		incompatible: { seasonal: false },
 	},
 	profile_header_own: {
 		default: true,

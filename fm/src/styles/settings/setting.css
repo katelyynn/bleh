@@ -959,10 +959,6 @@
 .setting-incompatible-with {
 	flex-basis: 100%;
 	font-size: 13px;
-	--hue-over: var(--hue-neg);
-	--sat-over: var(--sat-neg);
-	--lit-over: var(--lit-neg);
-	color: oklch(var(--l3-c));
 	opacity: 0;
 
 	display: flex;
@@ -981,6 +977,11 @@
 
 	.setting:hover>& {
 		opacity: 1;
+	}
+
+	.standalone>& {
+		border-radius: unset;
+		inset: 0;
 	}
 }
 
