@@ -8,6 +8,8 @@ import {
 	autoUpdate,
 	computePosition,
 	type ComputePositionConfig,
+	flip,
+	inline,
 	offset as offsetMiddleware,
 	shift as shiftMiddleware,
 } from '@floating-ui/dom';
@@ -33,34 +35,34 @@ function animation_for_preset(
 	switch (preset) {
 		case 'slide-down-bottom':
 			keyframes = [
-				{ opacity: 0, transform: 'translateY(-4px)' },
+				{ opacity: 0, transform: 'translateY(-2px)' },
 				{ opacity: 1, transform: 'translateY(0px)' },
 			];
 			break;
 		case 'slide-up-bottom':
 			keyframes = [
 				{ opacity: 1, transform: 'translateY(0px)' },
-				{ opacity: 0, transform: 'translateY(-4px)' },
+				{ opacity: 0, transform: 'translateY(-2px)' },
 			];
 			break;
 		case 'slide-down-top':
 			keyframes = [
-				{ opacity: 1, transform: 'translateY(-4px)' },
+				{ opacity: 1, transform: 'translateY(-2px)' },
 				{ opacity: 0, transform: 'translateY(0px)' },
 			];
 			break;
 		case 'slide-up-top':
 			keyframes = [
 				{ opacity: 0, transform: 'translateY(0px)' },
-				{ opacity: 1, transform: 'translateY(-4px)' },
+				{ opacity: 1, transform: 'translateY(-2px)' },
 			];
 			break;
 	}
 	return {
 		keyframes,
 		options: {
-			duration: 150,
-			easing: 'ease-out',
+			duration: 200,
+			easing: 'cubic-bezier(0.095, 0.410, 0.055, 0.960)',
 			fill: 'forwards',
 		},
 	};
@@ -94,6 +96,8 @@ export class TooltipInstance<
 			placement: 'top',
 			strategy: 'absolute',
 			middleware: [
+				inline(),
+				flip(),
 				shiftMiddleware({
 					crossAxis: true,
 					padding: 6,

@@ -55761,6 +55761,12 @@ var bleh = (() => {
     x: v,
     y: v
   });
+  var oppositeSideMap = {
+    left: "right",
+    right: "left",
+    bottom: "top",
+    top: "bottom"
+  };
   function clamp2(start2, value, end2) {
     return max2(start2, min2(value, end2));
   }
@@ -55785,6 +55791,58 @@ var bleh = (() => {
   }
   function getAlignmentAxis(placement) {
     return getOppositeAxis(getSideAxis(placement));
+  }
+  function getAlignmentSides(placement, rects, rtl) {
+    if (rtl === void 0) {
+      rtl = false;
+    }
+    const alignment = getAlignment(placement);
+    const alignmentAxis = getAlignmentAxis(placement);
+    const length = getAxisLength(alignmentAxis);
+    let mainAlignmentSide = alignmentAxis === "x" ? alignment === (rtl ? "end" : "start") ? "right" : "left" : alignment === "start" ? "bottom" : "top";
+    if (rects.reference[length] > rects.floating[length]) {
+      mainAlignmentSide = getOppositePlacement2(mainAlignmentSide);
+    }
+    return [mainAlignmentSide, getOppositePlacement2(mainAlignmentSide)];
+  }
+  function getExpandedPlacements(placement) {
+    const oppositePlacement = getOppositePlacement2(placement);
+    return [getOppositeAlignmentPlacement(placement), oppositePlacement, getOppositeAlignmentPlacement(oppositePlacement)];
+  }
+  function getOppositeAlignmentPlacement(placement) {
+    return placement.includes("start") ? placement.replace("start", "end") : placement.replace("end", "start");
+  }
+  var lrPlacement = ["left", "right"];
+  var rlPlacement = ["right", "left"];
+  var tbPlacement = ["top", "bottom"];
+  var btPlacement = ["bottom", "top"];
+  function getSideList(side, isStart, rtl) {
+    switch (side) {
+      case "top":
+      case "bottom":
+        if (rtl) return isStart ? rlPlacement : lrPlacement;
+        return isStart ? lrPlacement : rlPlacement;
+      case "left":
+      case "right":
+        return isStart ? tbPlacement : btPlacement;
+      default:
+        return [];
+    }
+  }
+  function getOppositeAxisPlacements(placement, flipAlignment, direction2, rtl) {
+    const alignment = getAlignment(placement);
+    let list = getSideList(getSide(placement), direction2 === "start", rtl);
+    if (alignment) {
+      list = list.map((side) => side + "-" + alignment);
+      if (flipAlignment) {
+        list = list.concat(list.map(getOppositeAlignmentPlacement));
+      }
+    }
+    return list;
+  }
+  function getOppositePlacement2(placement) {
+    const side = getSide(placement);
+    return oppositeSideMap[side] + placement.slice(side.length);
   }
   function expandPaddingObject(padding) {
     var _padding$top, _padding$right, _padding$bottom, _padding$left;
@@ -56013,6 +56071,222 @@ var bleh = (() => {
       placement: statefulPlacement,
       strategy,
       middlewareData
+    };
+  };
+  var flip2 = function(options) {
+    if (options === void 0) {
+      options = {};
+    }
+    return {
+      name: "flip",
+      options,
+      async fn(state) {
+        var _middlewareData$arrow, _middlewareData$flip;
+        const {
+          placement,
+          middlewareData,
+          rects,
+          initialPlacement,
+          platform: platform2,
+          elements: elements2
+        } = state;
+        const {
+          mainAxis: checkMainAxis = true,
+          crossAxis: checkCrossAxis = true,
+          fallbackPlacements: specifiedFallbackPlacements,
+          fallbackStrategy = "bestFit",
+          fallbackAxisSideDirection = "none",
+          flipAlignment = true,
+          ...detectOverflowOptions
+        } = evaluate(options, state);
+        if ((_middlewareData$arrow = middlewareData.arrow) != null && _middlewareData$arrow.alignmentOffset) {
+          return {};
+        }
+        const side = getSide(placement);
+        const initialSideAxis = getSideAxis(initialPlacement);
+        const isBasePlacement = getSide(initialPlacement) === initialPlacement;
+        const rtl = await (platform2.isRTL == null ? void 0 : platform2.isRTL(elements2.floating));
+        const fallbackPlacements = specifiedFallbackPlacements || (isBasePlacement || !flipAlignment ? [getOppositePlacement2(initialPlacement)] : getExpandedPlacements(initialPlacement));
+        const hasFallbackAxisSideDirection = fallbackAxisSideDirection !== "none";
+        if (!specifiedFallbackPlacements && hasFallbackAxisSideDirection) {
+          fallbackPlacements.push(...getOppositeAxisPlacements(initialPlacement, flipAlignment, fallbackAxisSideDirection, rtl));
+        }
+        const placements3 = [initialPlacement, ...fallbackPlacements];
+        const overflow2 = await platform2.detectOverflow(state, detectOverflowOptions);
+        const overflows = [];
+        let overflowsData = ((_middlewareData$flip = middlewareData.flip) == null ? void 0 : _middlewareData$flip.overflows) || [];
+        if (checkMainAxis) {
+          overflows.push(overflow2[side]);
+        }
+        if (checkCrossAxis) {
+          const sides2 = getAlignmentSides(placement, rects, rtl);
+          overflows.push(overflow2[sides2[0]], overflow2[sides2[1]]);
+        }
+        overflowsData = [...overflowsData, {
+          placement,
+          overflows
+        }];
+        if (!overflows.every((side2) => side2 <= 0)) {
+          var _middlewareData$flip2, _overflowsData$filter;
+          const nextIndex = (((_middlewareData$flip2 = middlewareData.flip) == null ? void 0 : _middlewareData$flip2.index) || 0) + 1;
+          const nextPlacement = placements3[nextIndex];
+          if (nextPlacement) {
+            const ignoreCrossAxisOverflow = checkCrossAxis === "alignment" ? initialSideAxis !== getSideAxis(nextPlacement) : false;
+            if (!ignoreCrossAxisOverflow || // We leave the current main axis only if every placement on that axis
+            // overflows the main axis.
+            overflowsData.every((d) => getSideAxis(d.placement) === initialSideAxis ? d.overflows[0] > 0 : true)) {
+              return {
+                data: {
+                  index: nextIndex,
+                  overflows: overflowsData
+                },
+                reset: {
+                  placement: nextPlacement
+                }
+              };
+            }
+          }
+          let resetPlacement = (_overflowsData$filter = overflowsData.filter((d) => d.overflows[0] <= 0).sort((a2, b) => a2.overflows[1] - b.overflows[1])[0]) == null ? void 0 : _overflowsData$filter.placement;
+          if (!resetPlacement) {
+            switch (fallbackStrategy) {
+              case "bestFit": {
+                var _overflowsData$filter2;
+                const placement2 = (_overflowsData$filter2 = overflowsData.filter((d) => {
+                  if (hasFallbackAxisSideDirection) {
+                    const currentSideAxis = getSideAxis(d.placement);
+                    return currentSideAxis === initialSideAxis || // Create a bias to the `y` side axis due to horizontal
+                    // reading directions favoring greater width.
+                    currentSideAxis === "y";
+                  }
+                  return true;
+                }).map((d) => [d.placement, d.overflows.filter((overflow3) => overflow3 > 0).reduce((acc, overflow3) => acc + overflow3, 0)]).sort((a2, b) => a2[1] - b[1])[0]) == null ? void 0 : _overflowsData$filter2[0];
+                if (placement2) {
+                  resetPlacement = placement2;
+                }
+                break;
+              }
+              case "initialPlacement":
+                resetPlacement = initialPlacement;
+                break;
+            }
+          }
+          if (placement !== resetPlacement) {
+            return {
+              reset: {
+                placement: resetPlacement
+              }
+            };
+          }
+        }
+        return {};
+      }
+    };
+  };
+  function getBoundingRect(rects) {
+    const minX = min2(...rects.map((rect) => rect.left));
+    const minY = min2(...rects.map((rect) => rect.top));
+    const maxX = max2(...rects.map((rect) => rect.right));
+    const maxY = max2(...rects.map((rect) => rect.bottom));
+    return {
+      x: minX,
+      y: minY,
+      width: maxX - minX,
+      height: maxY - minY
+    };
+  }
+  function getRectsByLine(rects) {
+    const sortedRects = rects.slice().sort((a2, b) => a2.y - b.y);
+    const groups = [];
+    let prevRect = null;
+    for (let i3 = 0; i3 < sortedRects.length; i3++) {
+      const rect = sortedRects[i3];
+      if (!prevRect || rect.y - prevRect.y > prevRect.height / 2) {
+        groups.push([rect]);
+      } else {
+        groups[groups.length - 1].push(rect);
+      }
+      prevRect = rect;
+    }
+    return groups.map((rect) => rectToClientRect2(getBoundingRect(rect)));
+  }
+  var inline = function(options) {
+    if (options === void 0) {
+      options = {};
+    }
+    return {
+      name: "inline",
+      options,
+      async fn(state) {
+        const {
+          placement,
+          elements: elements2,
+          rects,
+          platform: platform2,
+          strategy
+        } = state;
+        const {
+          padding = 2,
+          x,
+          y
+        } = evaluate(options, state);
+        const nativeClientRects = Array.from(await (platform2.getClientRects == null ? void 0 : platform2.getClientRects(elements2.reference)) || []);
+        if (!nativeClientRects.length) {
+          return {};
+        }
+        const clientRects = getRectsByLine(nativeClientRects);
+        const fallback = rectToClientRect2(getBoundingRect(nativeClientRects));
+        const paddingObject = getPaddingObject(padding);
+        function getBoundingClientRect3() {
+          if (clientRects.length === 2 && (clientRects[0].left > clientRects[1].right || clientRects[1].left > clientRects[0].right) && x != null && y != null) {
+            return clientRects.find((rect) => x > rect.left - paddingObject.left && x < rect.right + paddingObject.right && y > rect.top - paddingObject.top && y < rect.bottom + paddingObject.bottom) || fallback;
+          }
+          if (clientRects.length >= 2) {
+            if (getSideAxis(placement) === "y") {
+              const firstRect = clientRects[0];
+              const lastRect = clientRects[clientRects.length - 1];
+              const isTop = getSide(placement) === "top";
+              const top3 = firstRect.top;
+              const bottom3 = lastRect.bottom;
+              const left2 = isTop ? firstRect.left : lastRect.left;
+              const right2 = isTop ? firstRect.right : lastRect.right;
+              return rectToClientRect2({
+                x: left2,
+                y: top3,
+                width: right2 - left2,
+                height: bottom3 - top3
+              });
+            }
+            const isLeftSide = getSide(placement) === "left";
+            const maxRight = max2(...clientRects.map((rect) => rect.right));
+            const minLeft = min2(...clientRects.map((rect) => rect.left));
+            const measureRects = clientRects.filter((rect) => isLeftSide ? rect.left === minLeft : rect.right === maxRight);
+            const top2 = measureRects[0].top;
+            const bottom2 = measureRects[measureRects.length - 1].bottom;
+            return rectToClientRect2({
+              x: minLeft,
+              y: top2,
+              width: maxRight - minLeft,
+              height: bottom2 - top2
+            });
+          }
+          return fallback;
+        }
+        const resetRects = await platform2.getElementRects({
+          reference: {
+            getBoundingClientRect: getBoundingClientRect3
+          },
+          floating: elements2.floating,
+          strategy
+        });
+        if (rects.reference.x !== resetRects.reference.x || rects.reference.y !== resetRects.reference.y || rects.reference.width !== resetRects.reference.width || rects.reference.height !== resetRects.reference.height) {
+          return {
+            reset: {
+              rects: resetRects
+            }
+          };
+        }
+        return {};
+      }
     };
   };
   var originSides = /* @__PURE__ */ new Set(["left", "top"]);
@@ -56896,6 +57170,8 @@ var bleh = (() => {
   }
   var offset4 = offset3;
   var shift2 = shift;
+  var flip3 = flip2;
+  var inline2 = inline;
   var computePosition2 = (reference2, floating, options) => {
     const cache2 = /* @__PURE__ */ new Map();
     const mergedOptions = options != null ? options : {};
@@ -56918,7 +57194,7 @@ var bleh = (() => {
         keyframes = [
           {
             opacity: 0,
-            transform: "translateY(-4px)"
+            transform: "translateY(-2px)"
           },
           {
             opacity: 1,
@@ -56934,7 +57210,7 @@ var bleh = (() => {
           },
           {
             opacity: 0,
-            transform: "translateY(-4px)"
+            transform: "translateY(-2px)"
           }
         ];
         break;
@@ -56942,7 +57218,7 @@ var bleh = (() => {
         keyframes = [
           {
             opacity: 1,
-            transform: "translateY(-4px)"
+            transform: "translateY(-2px)"
           },
           {
             opacity: 0,
@@ -56958,7 +57234,7 @@ var bleh = (() => {
           },
           {
             opacity: 1,
-            transform: "translateY(-4px)"
+            transform: "translateY(-2px)"
           }
         ];
         break;
@@ -56966,8 +57242,8 @@ var bleh = (() => {
     return {
       keyframes,
       options: {
-        duration: 150,
-        easing: "ease-out",
+        duration: 200,
+        easing: "cubic-bezier(0.095, 0.410, 0.055, 0.960)",
         fill: "forwards"
       }
     };
@@ -56992,6 +57268,8 @@ var bleh = (() => {
         placement: "top",
         strategy: "absolute",
         middleware: [
+          inline2(),
+          flip3(),
           shift2({
             crossAxis: true,
             padding: 6
@@ -62058,7 +62336,7 @@ var bleh = (() => {
   function unclipArea(ctx) {
     ctx.restore();
   }
-  function _steppedLineTo(ctx, previous, target, flip3, mode) {
+  function _steppedLineTo(ctx, previous, target, flip4, mode) {
     if (!previous) {
       return ctx.lineTo(target.x, target.y);
     }
@@ -62066,18 +62344,18 @@ var bleh = (() => {
       const midpoint2 = (previous.x + target.x) / 2;
       ctx.lineTo(midpoint2, previous.y);
       ctx.lineTo(midpoint2, target.y);
-    } else if (mode === "after" !== !!flip3) {
+    } else if (mode === "after" !== !!flip4) {
       ctx.lineTo(previous.x, target.y);
     } else {
       ctx.lineTo(target.x, previous.y);
     }
     ctx.lineTo(target.x, target.y);
   }
-  function _bezierCurveTo(ctx, previous, target, flip3) {
+  function _bezierCurveTo(ctx, previous, target, flip4) {
     if (!previous) {
       return ctx.lineTo(target.x, target.y);
     }
-    ctx.bezierCurveTo(flip3 ? previous.cp1x : previous.cp2x, flip3 ? previous.cp1y : previous.cp2y, flip3 ? target.cp2x : target.cp1x, flip3 ? target.cp2y : target.cp1y, target.x, target.y);
+    ctx.bezierCurveTo(flip4 ? previous.cp1x : previous.cp2x, flip4 ? previous.cp1y : previous.cp2y, flip4 ? target.cp2x : target.cp1x, flip4 ? target.cp2y : target.cp1y, target.x, target.y);
   }
   function setRenderOpts(ctx, opts) {
     if (opts.translation) {
@@ -121101,7 +121379,7 @@ var bleh = (() => {
         date: "2026-07-30"
       }
     },
-    built_on: "2026-08-23T20:05:11.001Z"
+    built_on: "2026-08-23T20:17:53.200Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
