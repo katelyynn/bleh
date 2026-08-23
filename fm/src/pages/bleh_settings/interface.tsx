@@ -308,7 +308,7 @@ function BarPreview({
 					ref={slug}
 					data-max-stat-value={max}
 					data-stat-value={value}
-					style={{ width: `${(max / max) * 100}%` }}
+					style={{ width: `${(value / max) * 100}%` }}
 				/>
 				<span class='chartlist-count-bar-value' ref={val}>
 					{value.toLocaleString(lang)}

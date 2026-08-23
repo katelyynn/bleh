@@ -124,11 +124,13 @@ body {
 	}
 
 	--count-bar-align: left;
+	--count-bar-justify: start;
 	--count-bar-right: none;
 	--count-bar-left: 0;
 
 	&[data-bleh--count_bar_axis="right"] {
 		--count-bar-align: right;
+		--count-bar-justify: end;
 		--count-bar-right: 0;
 		--count-bar-left: none;
 	}
