@@ -8,6 +8,7 @@ import {
 	autoUpdate,
 	computePosition,
 	type ComputePositionConfig,
+	offset as offsetMiddleware,
 	shift as shiftMiddleware,
 } from '@floating-ui/dom';
 import { HTMLAttributes, ReactElement } from 'jsx-dom';
@@ -57,7 +58,12 @@ export class TooltipInstance<
 	private config: TooltipConfig;
 	private cleanup: (() => void) | null = null;
 	private current_animation: Animation | null = null;
-	private is_mounted = false;
+	public is_mounted = false;
+	/**
+	 * unique identifier for `element` that will be used for
+	 * `host`'s `aria-describedby` attribute
+	 */
+	private uuid = crypto.randomUUID();
 
 	public constructor(
 		host: H,
@@ -65,11 +71,18 @@ export class TooltipInstance<
 		config: TooltipConfig = {},
 	) {
 		this.host = host;
+		this.host.setAttribute('aria-expanded', 'false');
 		this.element = element;
 		this.config = {
 			placement: 'bottom',
-			strategy: 'fixed',
-			middleware: [shiftMiddleware()],
+			strategy: 'absolute',
+			middleware: [
+				shiftMiddleware({
+					crossAxis: true,
+					padding: 8,
+				}),
+				offsetMiddleware(8),
+			],
 			enterAnimation: 'slide-down',
 			exitAnimation: 'slide-up',
 			...config,
@@ -119,8 +132,11 @@ export class TooltipInstance<
 
 	public mount() {
 		this.unmount();
-		this.element = document.body.appendChild(this.element);
 		this.is_mounted = true;
+		this.element = document.body.appendChild(this.element);
+		this.element.id = this.uuid;
+		this.host.setAttribute('aria-expanded', 'true');
+		this.host.setAttribute('aria-describedby', this.uuid);
 		this.cleanup = autoUpdate(
 			this.host,
 			this.element as HTMLElement,
@@ -138,6 +154,8 @@ export class TooltipInstance<
 			this.cleanup = null;
 		}
 		this.is_mounted = false;
+		this.host.setAttribute('aria-expanded', 'false');
+		this.host.removeAttribute('aria-describedby');
 	}
 
 	private update() {
@@ -188,9 +206,16 @@ export function menu_tooltip<
 ) {
 	const tooltip = new TooltipInstance(host, element, config);
 	host.addEventListener('click', () => {
+		// close when clicking again
+		if (tooltip.is_mounted) {
+			tooltip.hide();
+			return;
+		}
 		tooltip.show();
-		const listener: EventListener = ({ target }) => {
+		const listener: EventListener = ({ target: t }) => {
+			const target = t as HTMLElement | null;
 			if (
+				target && target instanceof HTMLElement &&
 				target != tooltip.element && target != host &&
 				!tooltip.element.contains(target) &&
 				!target.closest('.tippy-box')
@@ -218,9 +243,16 @@ export function context_menu_tooltip<
 	const tooltip = new TooltipInstance(host, element, config);
 	host.addEventListener('contextmenu', (e) => {
 		e.preventDefault();
+		// close when clicking again
+		if (tooltip.is_mounted) {
+			tooltip.hide();
+			return;
+		}
 		tooltip.show();
-		const listener: EventListener = ({ target }) => {
+		const listener: EventListener = ({ target: t }) => {
+			const target = t as HTMLElement | null;
 			if (
+				target && target instanceof HTMLElement &&
 				target != tooltip.element && target != host &&
 				!tooltip.element.contains(target) &&
 				!target.closest('.tippy-box')
