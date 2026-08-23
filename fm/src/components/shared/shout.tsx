@@ -37,6 +37,7 @@ import { keys } from '../settings/storage';
 import { is_sponsor } from '../sponsor';
 import { createRef } from 'jsx-dom';
 import { DateTime } from 'luxon';
+import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
 
 export function patch_shouts() {
 	if (!page.structure.main) return;
@@ -122,15 +123,18 @@ export function patch_shouts() {
 			shout.appendChild(indicator);
 
 			// timestamp
-			const timestamp = shout.querySelector('.shout-timestamp');
+			const timestamp = shout.querySelector(
+				'.shout-timestamp',
+			) as HTMLAnchorElement;
 			if (timestamp) {
 				const timestamp_text = timestamp.querySelector(
 					'.shout-timestamp time',
 				);
 
-				tippy(timestamp, {
-					content: timestamp_text!.getAttribute('title'),
-				});
+				hover_tooltip(
+					timestamp,
+					<Tooltip>{timestamp_text!.getAttribute('title')}</Tooltip>,
+				);
 
 				timestamp_text!.removeAttribute('title');
 

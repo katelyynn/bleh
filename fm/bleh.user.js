@@ -59810,9 +59810,9 @@ var bleh = (() => {
         const timestamp = shout.querySelector(".shout-timestamp");
         if (timestamp) {
           const timestamp_text = timestamp.querySelector(".shout-timestamp time");
-          tippy_esm_default(timestamp, {
-            content: timestamp_text.getAttribute("title")
-          });
+          hover_tooltip(timestamp, /* @__PURE__ */ jsx(Tooltip, {
+            children: timestamp_text.getAttribute("title")
+          }));
           timestamp_text.removeAttribute("title");
           timestamp_text.textContent = DateTime.fromISO(timestamp_text.getAttribute("datetime")).toRelative();
         }
@@ -121988,7 +121988,7 @@ var bleh = (() => {
         date: "2026-07-30"
       }
     },
-    built_on: "2026-08-23T01:14:53.066Z"
+    built_on: "2026-08-23T01:20:12.736Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
