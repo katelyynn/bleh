@@ -159,6 +159,11 @@ export class TooltipInstance<
 	}
 
 	private update() {
+		if (!this.host.isConnected) {
+			this.unmount();
+			return;
+		}
+
 		computePosition(this.host, this.element as HTMLElement, this.config)
 			.then(
 				({ strategy, x, y }) => {

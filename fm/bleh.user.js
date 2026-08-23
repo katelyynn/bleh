@@ -56999,6 +56999,10 @@ var bleh = (() => {
       this.host.removeAttribute("aria-describedby");
     }
     update() {
+      if (!this.host.isConnected) {
+        this.unmount();
+        return;
+      }
       computePosition2(this.host, this.element, this.config).then(({ strategy, x, y }) => {
         Object.assign(this.element.style, {
           position: strategy,
@@ -121995,7 +121999,7 @@ var bleh = (() => {
         date: "2026-07-30"
       }
     },
-    built_on: "2026-08-23T01:06:39.531Z"
+    built_on: "2026-08-23T01:10:02.851Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
