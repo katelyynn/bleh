@@ -88901,19 +88901,28 @@ var bleh = (() => {
     page.state.media = media;
     match2(media);
     media.addEventListener("change", match2);
+    useSettings.on("theme_schedule", () => {
+      match2();
+    });
+    useSettings.on("theme_day", () => {
+      match2();
+    });
+    useSettings.on("theme_night", () => {
+      match2();
+    });
   }
   function match2(media = page.state.media) {
-    if (!settings.theme_schedule) return settings.theme;
+    if (!useSettings.get("theme_schedule")) return useSettings.get("theme");
     if (media.matches) return apply_theme("night");
     else return apply_theme("day");
   }
   function apply_theme(time4) {
-    if (settings.theme == settings[`theme_${time4}`]) {
-      return settings[`theme_${time4}`];
+    if (useSettings.get("theme") == useSettings.get(`theme_${time4}`)) {
+      return useSettings.get(`theme_${time4}`);
     }
     log(`applying theme for time ${time4}`, "dynamic theming");
-    save_setting("theme", settings[`theme_${time4}`]);
-    return settings[`theme_${time4}`];
+    useSettings.set("theme", useSettings.get(`theme_${time4}`));
+    return useSettings.get(`theme_${time4}`);
   }
 
   // src/components/dialog/rabbit.js
@@ -100945,7 +100954,8 @@ var bleh = (() => {
                   id,
                   active: is_active(id, theme),
                   onChange: (id2) => set2({
-                    id: id2
+                    id: id2,
+                    adaptive: false
                   })
                 }, i3);
                 bright.push(elem);
@@ -100961,7 +100971,8 @@ var bleh = (() => {
                   id,
                   active: is_active(id, theme),
                   onChange: (id2) => set2({
-                    id: id2
+                    id: id2,
+                    adaptive: false
                   })
                 }, i3);
                 moody.push(elem);
@@ -122060,7 +122071,7 @@ var bleh = (() => {
         date: "2026-07-30"
       }
     },
-    built_on: "2026-08-23T14:53:24.950Z"
+    built_on: "2026-08-23T15:06:06.238Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

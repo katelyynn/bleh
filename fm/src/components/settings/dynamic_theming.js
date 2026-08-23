@@ -8,6 +8,7 @@ import { settings } from '@/build/config';
 import { log } from '@/build/log';
 import { page } from '@/build/page';
 import { save_setting } from '@/components/settings/settings';
+import { useSettings } from '@/page.ts';
 
 export function dynamic_theming() {
 	const media = window.matchMedia('(prefers-color-scheme: dark)');
@@ -16,10 +17,20 @@ export function dynamic_theming() {
 	match(media);
 
 	media.addEventListener('change', match);
+
+	useSettings.on('theme_schedule', () => {
+		match();
+	});
+	useSettings.on('theme_day', () => {
+		match();
+	});
+	useSettings.on('theme_night', () => {
+		match();
+	});
 }
 
 export function match(media = page.state.media) {
-	if (!settings.theme_schedule) return settings.theme;
+	if (!useSettings.get('theme_schedule')) return useSettings.get('theme');
 
 	if (media.matches) return apply_theme('night');
 	else return apply_theme('day');
@@ -29,12 +40,12 @@ export function match(media = page.state.media) {
  * @param {string} time
  */
 function apply_theme(time) {
-	if (settings.theme == settings[`theme_${time}`]) {
-		return settings[`theme_${time}`];
+	if (useSettings.get('theme') == useSettings.get(`theme_${time}`)) {
+		return useSettings.get(`theme_${time}`);
 	}
 
 	log(`applying theme for time ${time}`, 'dynamic theming');
-	save_setting('theme', settings[`theme_${time}`]);
+	useSettings.set('theme', useSettings.get(`theme_${time}`));
 
-	return settings[`theme_${time}`];
+	return useSettings.get(`theme_${time}`);
 }

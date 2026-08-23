@@ -88,7 +88,8 @@ export function SettingTheme({
 							<ThemeBubble
 								id={id}
 								active={is_active(id, theme)}
-								onChange={(id: string) => set({ id })}
+								onChange={(id: string) =>
+									set({ id, adaptive: false })}
 								key={i}
 							/>
 						) as ThemeBubbleElement;
@@ -111,7 +112,8 @@ export function SettingTheme({
 							<ThemeBubble
 								id={id}
 								active={is_active(id, theme)}
-								onChange={(id: string) => set({ id })}
+								onChange={(id: string) =>
+									set({ id, adaptive: false })}
 								key={i}
 							/>
 						) as ThemeBubbleElement;
