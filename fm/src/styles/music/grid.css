@@ -15,14 +15,15 @@
 	&:not(.collage-grid) {
 		@media (max-width: 980px) {
 			grid-template-columns: repeat(auto-fill,
-					minmax(150px, 1fr)) !important;
+				minmax(150px, 1fr)) !important;
 			grid-template-areas: unset !important;
 		}
 	}
 }
 
 .collage-grid {
-	grid-template-columns: repeat(var(--width), var(--grid-item-size)) !important;
+	grid-template-columns: repeat(var(--width), var(--grid-item-size))
+		!important;
 	grid-template-rows: repeat(var(--height), var(--grid-item-size)) !important;
 	grid-template-areas: unset !important;
 
@@ -31,7 +32,7 @@
 	--cards-overlay-image-subtlest: none;
 	--collage-mask-override: none;
 
-	&>.grid-items-item {
+	& > .grid-items-item {
 		width: var(--grid-item-size);
 		height: var(--grid-item-size);
 		animation: none !important;
@@ -72,7 +73,7 @@
 			max-width: calc(var(--grid-item-size) - (var(--centered-gap) * 2));
 
 			.grid-items-item-aux-text,
-			.grid-items-item-main-text>a {
+			.grid-items-item-main-text > a {
 				justify-content: center;
 				text-align: center;
 			}
@@ -92,13 +93,13 @@
 
 	@media (max-width: 980px) {
 		grid-template-columns: repeat(auto-fill,
-				minmax(150px, 1fr)) !important;
+			minmax(150px, 1fr)) !important;
 		grid-template-rows: unset !important;
 		grid-template-areas: unset !important;
 		gap: 6px;
 		height: unset;
 
-		&>.grid-items-item--big {
+		& > .grid-items-item--big {
 			grid-area: unset !important;
 			aspect-ratio: unset !important;
 		}
@@ -118,7 +119,7 @@
 	border-radius: var(--radius-s);
 	/*overflow: hidden;*/
 	box-shadow: var(--grid-colour-shadow-override, var(--grid-colour-shadow,
-				none)), var(--interact-shadow);
+		none)), var(--interact-shadow);
 	position: relative;
 
 	contain: content;
@@ -157,10 +158,10 @@
 	}
 
 	transition-property: transform,
-	translate,
-	scale,
-	opacity,
-	outline-color;
+		translate,
+		scale,
+		opacity,
+		outline-color;
 	transition-duration: var(--trans);
 	transition-timing-function: var(--trans-function-ani);
 
@@ -208,7 +209,7 @@
 	top: 0;
 	width: 100%;
 
-	&>.link-block-cover-link {
+	& > .link-block-cover-link {
 		z-index: 20;
 	}
 
@@ -235,7 +236,7 @@
 	transition-duration: var(--trans);
 	transition-timing-function: var(--trans-function);
 
-	&>img {
+	& > img {
 		height: 100%;
 		object-fit: cover;
 		/* for some reason i have to hardcode this for html2canvas */
@@ -244,14 +245,14 @@
 
 	&:after {
 		background-image: linear-gradient(180deg,
-				transparent 0,
-				transparent 50%,
-				rgba(0, 0, 0, 0.85));
+			transparent 0,
+			transparent 50%,
+			rgba(0, 0, 0, 0.85));
 		display: none;
 	}
 
 	&.grid-items-cover-default {
-		&>img {
+		& > img {
 			background-color: oklch(var(--c3) / 50%);
 		}
 	}
@@ -259,7 +260,7 @@
 	&:not(.grid-items-cover-default) {
 		background: transparent;
 
-		&>img {
+		& > img {
 			position: relative;
 			z-index: 10;
 
@@ -277,7 +278,7 @@
 	}
 
 	/* make ur classes better please this isnt very good */
-	&>div>.lfmmaf-missing-artwork-button {
+	& > div > .lfmmaf-missing-artwork-button {
 		top: 10px;
 		right: 10px;
 		pointer-events: auto;
@@ -307,7 +308,8 @@
 	font-size: var(--font-size);
 	line-height: var(--line-height);
 	text-shadow: none;
-	filter: drop-shadow(0 0 10px var(--shadow)) drop-shadow(0 0 4px var(--shadow));
+	filter: drop-shadow(0 0 10px var(--shadow)) drop-shadow(0 0 4px
+		var(--shadow));
 	overflow: hidden;
 	padding: 10px;
 	left: 0;
@@ -326,14 +328,14 @@
 	font-size: var(--font-size);
 	font-weight: var(--font-weight);
 
-	&>a,
-	&>.grid-item-text {
+	& > a,
+	& > .grid-item-text {
 		color: inherit;
 	}
 }
 
 .grid-items.grid-items--fade-out {
-	&>.grid-items-item {
+	& > .grid-items-item {
 		box-shadow: unset;
 		pointer-events: none;
 	}
@@ -344,11 +346,11 @@
 }
 
 .grid-items-cta {
-	&>img {
+	& > img {
 		display: none;
 	}
 
-	&>h3 {
+	& > h3 {
 		color: oklch(var(--c1));
 		font-size: 16px;
 		line-height: 20px;
@@ -359,7 +361,7 @@
 		color: oklch(var(--c2));
 		cursor: default;
 
-		&+p {
+		& + p {
 			margin-top: var(--card-gap);
 		}
 	}
@@ -374,11 +376,11 @@
 
 .grid-items__placeholder .grid-items-item--loading {
 	background-image: linear-gradient(270deg,
-			oklch(var(--b3) / 0.05),
-			oklch(var(--b3) / 0.3),
-			oklch(var(--b3) / 0.6),
-			oklch(var(--b3) / 0.3),
-			oklch(var(--b3) / 0.05));
+		oklch(var(--b3) / 0.05),
+		oklch(var(--b3) / 0.3),
+		oklch(var(--b3) / 0.6),
+		oklch(var(--b3) / 0.3),
+		oklch(var(--b3) / 0.05));
 }
 
 .grid-items-item-main-text {
@@ -390,14 +392,14 @@
 	transition-duration: var(--trans);
 	transition-timing-function: var(--trans-function-ani);
 
-	&>.link-block-target {
+	& > .link-block-target {
 		display: flex;
 		flex-wrap: wrap;
 		gap: 2px 6px;
 		width: 100%;
 		text-decoration: var(--force-underline, none) !important;
 
-		&>span {
+		& > span {
 			overflow: hidden;
 			text-overflow: ellipsis;
 			-webkit-box-orient: vertical;
@@ -405,7 +407,7 @@
 			-webkit-line-clamp: var(--grid-line-clamp, 1);
 		}
 
-		&>.feat {
+		& > .feat {
 			color: inherit !important;
 			opacity: 0.6;
 		}
@@ -427,7 +429,7 @@
 	transition-duration: var(--trans);
 	transition-timing-function: var(--trans-function-ani);
 
-	&>.grid-item-text:first-child {
+	& > .grid-item-text:first-child {
 		display: inline-block;
 		overflow: hidden;
 		text-overflow: ellipsis;

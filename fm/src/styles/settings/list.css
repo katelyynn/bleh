@@ -30,12 +30,12 @@
 	--button-verts: 2px;
 	--radius: var(--radius-s);
 
-	&>.info {
+	& > .info {
 		flex: 1;
 		margin-right: 4px;
 	}
 
-	&>.bleh-icon {
+	& > .bleh-icon {
 		--icon: var(--mask);
 		--icon-size: 16px;
 	}
@@ -44,7 +44,7 @@
 		--icon-size: 14px;
 	}
 
-	&.current+.setting-list-item:not(.current) {
+	&.current + .setting-list-item:not(.current) {
 		margin-left: var(--card-gap);
 	}
 }

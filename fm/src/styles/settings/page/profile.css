@@ -73,7 +73,7 @@
 		transition-timing-function: var(--trans-function);
 	}
 
-	&>img {
+	& > img {
 		--mask-size: var(--cover-size-50);
 		position: static;
 
@@ -83,7 +83,7 @@
 	}
 
 	&:hover {
-		&>img {
+		& > img {
 			filter: brightness(80%);
 			transition: none;
 		}

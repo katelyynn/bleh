@@ -45,7 +45,7 @@
 			display: none !important;
 		}
 
-		&>.plot-canvas-container {
+		& > .plot-canvas-container {
 			opacity: 0.6;
 		}
 	}
@@ -94,7 +94,7 @@
 	--g: 10px;
 
 	&:hover {
-		&>.plot-footer-action {
+		& > .plot-footer-action {
 			opacity: 1;
 			margin-left: unset;
 		}

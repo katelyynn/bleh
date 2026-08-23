@@ -1,13 +1,13 @@
 .hide-link {
 	text-decoration: var(--force-underline, none) !important;
 
-	&>a:hover {
+	& > a:hover {
 		text-decoration: underline !important;
 	}
 }
 
 .metadata-column .cta-link-wrap a,
-.lyrics-snippet-more-link>a {
+.lyrics-snippet-more-link > a {
 	position: relative;
 	padding-right: calc(12px + 4px);
 	--left: none;

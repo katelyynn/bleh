@@ -12,17 +12,17 @@
 	--icon-size: 16px;
 	--item-width: calc(120px + var(--icon-size) + var(--icon-gap));
 
-	&>thead {
+	& > thead {
 		display: flex;
 		justify-content: end;
 		margin-bottom: 10px;
 
-		&>tr {
+		& > tr {
 			display: flex;
 			gap: var(--item-list-gap);
 		}
 
-		&>tr>th {
+		& > tr > th {
 			font-size: var(--font-size);
 			line-height: var(--line-height);
 			color: oklch(var(--c3));
@@ -78,7 +78,7 @@
 		--bg-hov: oklch(var(--h4) / 17%) !important;
 	}
 
-	&>td {
+	& > td {
 		padding: unset !important;
 	}
 
@@ -156,7 +156,8 @@
 			--icon: var(--icon-16-arrow-up);
 			color: oklch(var(--l3-c));
 
-			filter: drop-shadow(0 0 10px oklch(var(--l3-c))) drop-shadow(0 0 10px oklch(var(--l3-c)));
+			filter: drop-shadow(0 0 10px oklch(var(--l3-c))) drop-shadow(0 0
+				10px oklch(var(--l3-c)));
 		}
 
 		&.weeklychart-change--down {
@@ -195,7 +196,8 @@
 		.charts-list {
 			overflow: hidden;
 			padding: 35px var(--card-padding) 10px var(--card-padding);
-			margin: -35px calc(-1 * var(--card-padding)) -10px calc(-1 * var(--card-padding));
+			margin: -35px calc(-1 * var(--card-padding)) -10px calc(-1 *
+				var(--card-padding));
 			grid-template-columns: unset;
 			grid-auto-flow: column;
 			/*width: fit-content;
@@ -237,7 +239,7 @@
 						align-items: end;
 
 						background: linear-gradient(180deg, transparent 70%,
-								oklch(var(--h3) / 15%));
+							oklch(var(--h3) / 15%));
 						border-radius: var(--radius-s);
 						overflow: hidden;
 						mix-blend-mode: luminosity;
@@ -250,7 +252,8 @@
 							bottom: 0;
 							height: 2px;
 							display: block;
-							background: linear-gradient(90deg, oklch(var(--h4) / 20%), oklch(var(--h3)), oklch(var(--h4) / 20%));
+							background: linear-gradient(90deg, oklch(var(--h4) /
+								20%), oklch(var(--h3)), oklch(var(--h4) / 20%));
 							border-top-left-radius: 4px;
 							border-top-right-radius: 4px;
 						}
@@ -266,7 +269,8 @@
 						border-bottom-right-radius: 0;
 						color: oklch(var(--b7));
 						font-weight: var(--font-weight-bold);
-						box-shadow: 0 -1px 10px oklch(var(--h4) / 40%), inset 0 1px 0 oklch(var(--h2) / 20%);
+						box-shadow: 0 -1px 10px oklch(var(--h4) / 40%), inset 0
+							1px 0 oklch(var(--h2) / 20%);
 					}
 
 					.rank-overlay-text {
@@ -281,7 +285,11 @@
 						position: absolute;
 						inset: 0;
 						color: transparent;
-						text-shadow: 0 1px 0 oklch(var(--c1)), 1px 1px 0 oklch(var(--c1)), -1px -1px 0 oklch(var(--c1)), 1px -1px 0 oklch(var(--c1)), -1px 1px 0 oklch(var(--c1)), 0 -1px 0 oklch(var(--c1)), 1px 0 0 oklch(var(--c1)), -1px 0 0 oklch(var(--c1));
+						text-shadow: 0 1px 0 oklch(var(--c1)), 1px 1px 0
+							oklch(var(--c1)), -1px -1px 0 oklch(var(--c1)), 1px
+							-1px 0 oklch(var(--c1)), -1px 1px 0
+							oklch(var(--c1)), 0 -1px 0 oklch(var(--c1)), 1px 0 0
+							oklch(var(--c1)), -1px 0 0 oklch(var(--c1));
 					}
 				}
 
@@ -312,7 +320,7 @@
 
 .weeklychart-track-name,
 .weeklychart-track-artist {
-	&>a {
+	& > a {
 		color: inherit;
 		font-weight: var(--font-weight);
 	}
@@ -321,22 +329,24 @@
 .charts-header {
 	position: relative;
 
-	&>.left,
-	&>.middle,
-	&>.right {
+	& > .left,
+	& > .middle,
+	& > .right {
 		z-index: 2;
 	}
 }
 
 .charts-header-bg {
 	position: absolute;
-	inset: calc(-1 * var(--card-padding)) calc(-1 * var(--card-padding)) calc(-1 * (var(--card-padding) + 200px)) calc(-1 * var(--card-padding));
+	inset: calc(-1 * var(--card-padding)) calc(-1 * var(--card-padding)) calc(-1
+		* (var(--card-padding) + 200px)) calc(-1 * var(--card-padding));
 	overflow: hidden;
 
 	z-index: 0;
 	opacity: 0.23;
 
-	background: radial-gradient(at center top, oklch(var(--k4)), transparent 60%);
+	background: radial-gradient(at center top, oklch(var(--k4)), transparent
+		60%);
 	animation: chart_bg 8s var(--trans-function-ani) infinite;
 	pointer-events: none;
 }
@@ -347,7 +357,6 @@
 }
 
 @keyframes chart_bg {
-
 	from,
 	to {
 		opacity: 0.23;

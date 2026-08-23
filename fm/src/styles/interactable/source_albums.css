@@ -56,7 +56,7 @@
 
 		position: relative;
 
-		&>.cover-art {
+		& > .cover-art {
 			border-radius: var(--radius-s);
 		}
 
@@ -75,7 +75,7 @@
 		transition-duration: 0.2s;
 		transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 
-		&>.cover-art>.loading-spinner {
+		& > .cover-art > .loading-spinner {
 			position: absolute;
 			inset: 0;
 			display: flex;
@@ -119,7 +119,7 @@
 			-webkit-line-clamp: 1;
 			text-decoration: var(--hover-underline, none) !important;
 
-			&>a {
+			& > a {
 				display: flex;
 				gap: 6px;
 				color: inherit;
@@ -142,11 +142,11 @@
 				width: 130px;
 			}
 
-			&>a {
+			& > a {
 				color: oklch(var(--c2) / 80%);
 			}
 
-			&>a+a {
+			& > a + a {
 				margin-left: 4px;
 			}
 		}
@@ -164,7 +164,7 @@
 			}
 		}
 
-		&>.oracle-loading {
+		& > .oracle-loading {
 			background-color: currentColor;
 			border-radius: var(--item-med-radius);
 			opacity: 0.17;

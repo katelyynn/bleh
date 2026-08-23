@@ -3,7 +3,7 @@
 	flex-direction: column;
 	gap: 10px;
 
-	&+.event-section-date-heading {
+	& + .event-section-date-heading {
 		margin-top: var(--card-padding) !important;
 	}
 }
@@ -58,7 +58,7 @@
 	display: flex;
 	margin: -2px 0;
 
-	&>.avatar {
+	& > .avatar {
 		width: 22px;
 		height: 22px;
 
@@ -66,7 +66,7 @@
 			z-index: 10;
 		}
 
-		&>.avatar-status-dot {
+		& > .avatar-status-dot {
 			display: none;
 		}
 

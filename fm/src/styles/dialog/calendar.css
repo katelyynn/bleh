@@ -7,7 +7,7 @@
 	.calendar-header {
 		display: flex;
 
-		&>.fill {
+		& > .fill {
 			flex: 1;
 		}
 	}
@@ -16,7 +16,7 @@
 		display: grid;
 		grid-template-columns: repeat(7, 1fr);
 
-		&>.date {
+		& > .date {
 			text-align: center;
 			cursor: default;
 			color: oklch(var(--c3));
@@ -33,17 +33,17 @@
 		flex-direction: column;
 		gap: 10px;
 
-		&>.input-container {
+		& > .input-container {
 			width: 130px;
 
-			&>input {
+			& > input {
 				text-align: center;
 				height: 40px;
 				font-size: 16px !important;
 			}
 		}
 
-		&>p {
+		& > p {
 			font-size: 13px;
 			color: oklch(var(--c3));
 			cursor: default;

@@ -113,7 +113,7 @@
 		overflow: hidden;
 		flex-shrink: 0;
 
-		&>img {
+		& > img {
 			width: 36px;
 			height: 36px;
 		}
@@ -138,7 +138,7 @@
 }
 
 .value-panel {
-	.glacier-library-metadata+h2 {
+	.glacier-library-metadata + h2 {
 		margin-top: var(--card-gap) !important;
 	}
 }
@@ -149,7 +149,7 @@
 }
 
 /* user did not scrobble album in date range */
-.library-header+.message {
+.library-header + .message {
 	color: oklch(var(--c3));
 	cursor: default;
 }

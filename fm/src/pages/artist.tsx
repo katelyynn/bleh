@@ -130,7 +130,7 @@ export function bleh_artists() {
 		const on_tour = artist_header.querySelector('.header-new-on-tour');
 		const position = artist_header.querySelector(
 			'.header-new-chart-position-number',
-		);
+		) as HTMLAnchorElement;
 
 		if (on_tour) page.state.on_tour = true;
 

@@ -4,7 +4,8 @@
 	font-size: 13px;
 	line-height: var(--line-height);
 	margin-top: var(--card-gap);
-	padding: 3px 10px 3px calc(10px + var(--icon-size) + var(--icon-gap)) !important;
+	padding: 3px 10px 3px calc(10px + var(--icon-size) + var(--icon-gap))
+		!important;
 	background: var(--background, oklch(var(--k4) / 15%)) !important;
 	color: oklch(var(--l3-c)) !important;
 	font-weight: var(--font-weight-medium) !important;
@@ -23,13 +24,13 @@
 		color: currentColor;
 	}
 
-	.setting-group>&,
+	.setting-group > &,
 	&:first-child,
 	&.no-margin {
 		margin: unset;
 	}
 
-	&+form {
+	& + form {
 		margin-top: var(--card-gap);
 	}
 
@@ -92,7 +93,7 @@
 		--lit-seasonal: 1;
 		color: oklch(var(--l3-c)) !important;
 
-		&>a {
+		& > a {
 			--hue-seasonal: 12;
 			--sat-seasonal: 2;
 			--lit-seasonal: 1.1;
@@ -115,7 +116,7 @@
 	--lit-over: var(--lit-neg);
 }
 
-.form-disclaimer>.alert,
+.form-disclaimer > .alert,
 .big-modal-alert,
 .cta {
 	background: var(--card-specific-background) !important;
@@ -139,7 +140,7 @@
 		gap: 6px;
 		margin: 0 calc(var(--card-padding) - var(--side-action-side));
 
-		.bleh-modal-body>& {
+		.bleh-modal-body > & {
 			padding: 15px var(--card-padding) !important;
 			margin-left: unset;
 			margin-right: unset;
@@ -183,7 +184,7 @@
 	}
 }
 
-.form-disclaimer>.alert,
+.form-disclaimer > .alert,
 .big-modal-alert {
 	max-width: 500px;
 
