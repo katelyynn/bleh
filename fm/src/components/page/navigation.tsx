@@ -1042,9 +1042,7 @@ export function append_nav() {
 									onClick={() => {
 										instance.hide();
 									}}
-									tooltip={{
-										content: tl(trans.edit_profile),
-									}}
+									tooltip={tl(trans.edit_profile)}
 								>
 									<Icon name={icons.edit} />
 									{tl(trans.edit_profile)}
@@ -1065,11 +1063,9 @@ export function append_nav() {
 											onClick={() => {
 												instance.hide();
 											}}
-											tooltip={{
-												content: useSettings.get(
-													'starred_friend',
-												) as string,
-											}}
+											tooltip={useSettings.get(
+												'starred_friend',
+											) as string}
 											data-starred='true'
 										>
 											<Icon
@@ -1088,12 +1084,9 @@ export function append_nav() {
 												open_starred_friend_window();
 												instance.hide();
 											}}
-											tooltip={{
-												content: tl(
-													trans.starred_friend
-														.name,
-												),
-											}}
+											tooltip={tl(
+												trans.starred_friend.name,
+											)}
 											data-starred='false'
 										>
 											<Icon name={icons.plus} />
@@ -1635,7 +1628,7 @@ function NavigationPage1({
 										'2',
 									);
 								}}
-								tooltip={{ content: tl(trans.more) }}
+								tooltip={tl(trans.more)}
 							>
 								<Icon name={icons.continue} />
 								{tl(trans.more)}
@@ -1715,7 +1708,7 @@ function NavigationPage1({
 						);
 						side.current!.setAttribute('data-page', '2');
 					}}
-					tooltip={{ content: tl(trans.more) }}
+					tooltip={tl(trans.more)}
 				>
 					<Icon name={icons.continue} />
 					{tl(trans.more)}
@@ -1751,7 +1744,7 @@ function NavigationPage1({
 							);
 							side.current!.setAttribute('data-page', '2');
 						}}
-						tooltip={{ content: tl(trans.more) }}
+						tooltip={tl(trans.more)}
 					>
 						<Icon name={icons.continue} />
 						{tl(trans.more)}
@@ -1775,7 +1768,7 @@ function NavigationPage1({
 						news();
 						instance.hide();
 					}}
-					tooltip={{ content: tl(trans.news) }}
+					tooltip={tl(trans.news)}
 				>
 					<Icon name={icons.news} />
 					{tl(trans.news)}
@@ -1807,7 +1800,7 @@ function NavigationPage1({
 						accented
 						chibi
 						onClick={() => instance.hide()}
-						tooltip={{ content: tl(trans.logout) }}
+						tooltip={tl(trans.logout)}
 					>
 						<Icon name={icons.logout} />
 						{tl(trans.logout)}

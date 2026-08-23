@@ -56934,14 +56934,14 @@ var bleh = (() => {
       this.host.setAttribute("aria-expanded", "false");
       this.element = element;
       this.config = {
-        placement: "bottom",
+        placement: "top",
         strategy: "absolute",
         middleware: [
           shift2({
             crossAxis: true,
-            padding: 8
+            padding: 6
           }),
-          offset4(8)
+          offset4(6)
         ],
         enterAnimation: "slide-down",
         exitAnimation: "slide-up",
@@ -57023,7 +57023,10 @@ var bleh = (() => {
     return tooltip;
   }
   function menu_tooltip(host, element, config = {}) {
-    const tooltip = new TooltipInstance(host, element, config);
+    const tooltip = new TooltipInstance(host, element, {
+      placement: "bottom",
+      ...config
+    });
     host.addEventListener("click", () => {
       if (tooltip.is_mounted) {
         tooltip.hide();
@@ -94389,7 +94392,9 @@ var bleh = (() => {
       children
     });
     if (tooltip) {
-      tippy_esm_default(elem, tooltip);
+      hover_tooltip(elem, /* @__PURE__ */ jsx(Tooltip, {
+        children: tooltip
+      }));
     }
     function handleOnClick() {
       if (!onClick || disabled || loading) return;
@@ -111545,9 +111550,7 @@ var bleh = (() => {
                           onClick: () => {
                             instance.hide();
                           },
-                          tooltip: {
-                            content: tl2(trans.edit_profile)
-                          },
+                          tooltip: tl2(trans.edit_profile),
                           children: [
                             /* @__PURE__ */ jsx(Icon, {
                               name: icons.edit
@@ -111565,9 +111568,7 @@ var bleh = (() => {
                           onClick: () => {
                             instance.hide();
                           },
-                          tooltip: {
-                            content: useSettings.get("starred_friend")
-                          },
+                          tooltip: useSettings.get("starred_friend"),
                           "data-starred": "true",
                           children: [
                             /* @__PURE__ */ jsx(Icon, {
@@ -111582,9 +111583,7 @@ var bleh = (() => {
                             open_starred_friend_window();
                             instance.hide();
                           },
-                          tooltip: {
-                            content: tl2(trans.starred_friend.name)
-                          },
+                          tooltip: tl2(trans.starred_friend.name),
                           "data-starred": "false",
                           children: [
                             /* @__PURE__ */ jsx(Icon, {
@@ -112007,9 +112006,7 @@ var bleh = (() => {
                     }));
                     side.current.setAttribute("data-page", "2");
                   },
-                  tooltip: {
-                    content: tl2(trans.more)
-                  },
+                  tooltip: tl2(trans.more),
                   children: [
                     /* @__PURE__ */ jsx(Icon, {
                       name: icons.continue
@@ -112093,9 +112090,7 @@ var bleh = (() => {
                 }));
                 side.current.setAttribute("data-page", "2");
               },
-              tooltip: {
-                content: tl2(trans.more)
-              },
+              tooltip: tl2(trans.more),
               children: [
                 /* @__PURE__ */ jsx(Icon, {
                   name: icons.continue
@@ -112134,9 +112129,7 @@ var bleh = (() => {
                 }));
                 side.current.setAttribute("data-page", "2");
               },
-              tooltip: {
-                content: tl2(trans.more)
-              },
+              tooltip: tl2(trans.more),
               children: [
                 /* @__PURE__ */ jsx(Icon, {
                   name: icons.continue
@@ -112167,9 +112160,7 @@ var bleh = (() => {
                 news();
                 instance.hide();
               },
-              tooltip: {
-                content: tl2(trans.news)
-              },
+              tooltip: tl2(trans.news),
               children: [
                 /* @__PURE__ */ jsx(Icon, {
                   name: icons.news
@@ -112211,9 +112202,7 @@ var bleh = (() => {
                   accented: true,
                   chibi: true,
                   onClick: () => instance.hide(),
-                  tooltip: {
-                    content: tl2(trans.logout)
-                  },
+                  tooltip: tl2(trans.logout),
                   children: [
                     /* @__PURE__ */ jsx(Icon, {
                       name: icons.logout
@@ -121999,7 +121988,7 @@ var bleh = (() => {
         date: "2026-07-30"
       }
     },
-    built_on: "2026-08-23T01:10:02.851Z"
+    built_on: "2026-08-23T01:14:53.066Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

@@ -74,14 +74,14 @@ export class TooltipInstance<
 		this.host.setAttribute('aria-expanded', 'false');
 		this.element = element;
 		this.config = {
-			placement: 'bottom',
+			placement: 'top',
 			strategy: 'absolute',
 			middleware: [
 				shiftMiddleware({
 					crossAxis: true,
-					padding: 8,
+					padding: 6,
 				}),
-				offsetMiddleware(8),
+				offsetMiddleware(6),
 			],
 			enterAnimation: 'slide-down',
 			exitAnimation: 'slide-up',
@@ -209,7 +209,10 @@ export function menu_tooltip<
 	element: E,
 	config: TooltipConfig = {},
 ) {
-	const tooltip = new TooltipInstance(host, element, config);
+	const tooltip = new TooltipInstance(host, element, {
+		placement: 'bottom',
+		...config,
+	});
 	host.addEventListener('click', () => {
 		// close when clicking again
 		if (tooltip.is_mounted) {

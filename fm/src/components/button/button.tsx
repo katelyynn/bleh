@@ -7,7 +7,7 @@
 import { ClassNames, createRef, ReactNode } from 'jsx-dom';
 import { Icon, icons } from '@/components/shared/icon.tsx';
 import { tl, trans } from '@/build/trans.ts';
-import tippy, { Props as tippyProps } from 'tippy.js';
+import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
 
 type ButtonProps =
 	& {
@@ -25,7 +25,7 @@ type ButtonProps =
 		onClick?: () => void;
 		className?: string;
 		children: ReactNode;
-		tooltip?: Partial<tippyProps>;
+		tooltip?: ReactNode;
 	}
 	& Omit<
 		JSX.IntrinsicElements['button'],
@@ -101,7 +101,10 @@ export function Button({
 	) as ButtonLinkElement;
 
 	if (tooltip) {
-		tippy(elem, tooltip);
+		hover_tooltip(
+			elem,
+			<Tooltip>{tooltip}</Tooltip>,
+		);
 	}
 
 	function handleOnClick() {
