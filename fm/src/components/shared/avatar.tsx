@@ -185,8 +185,6 @@ unsafeWindow._expand_avatar = function (src) {
 };
 
 export function expand_avatar(src: string, alt?: string) {
-	const alt_text = createRef();
-
 	dialog({
 		id: 'avatar',
 		body: (
@@ -199,7 +197,7 @@ export function expand_avatar(src: string, alt?: string) {
 							className='full-avatar-btn'
 							href={src}
 							external
-							ref={alt_text}
+							tooltip={tl(trans.open_new_tab)}
 						>
 							<Icon name={icons.external} />
 							{tl(trans.open_new_tab)}
@@ -217,10 +215,6 @@ export function expand_avatar(src: string, alt?: string) {
 		),
 		type: 'avatar',
 		has_overlays: false,
-	});
-
-	tippy(alt_text.current, {
-		content: tl(trans.open_new_tab),
 	});
 }
 
