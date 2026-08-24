@@ -64,6 +64,7 @@ import { icons } from '@/components/shared/icon.tsx';
 import { ActivityItem, ActivityList } from '@/components/activity/activity.tsx';
 import { PanelTop, SeeMore, ViewButtons } from '@/components/text/see_more.tsx';
 import { createRef } from 'jsx-dom';
+import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
 
 export function bleh_profiles() {
 	// the obsessions page is a user subpage but works very differently
@@ -234,23 +235,10 @@ export function bleh_profiles() {
 				badge.textContent = tl(trans_instance.name);
 			}
 
-			let badge_name;
-			tippy(badge, {
-				theme: 'badge',
-				placement: 'bottom',
-				content: html.node`
-                    <div class="badge-name" ref=${(el) =>
-					badge_name = el}>${badge.textContent}</div>
-                    <div class="badge-reason">${
-					tl(trans.badges[type].reason)
-				}</div>
-                `,
-			});
-
-			style_name_from_badge(badge_name, {
-				type,
-				inbuilt: true,
-			});
+			hover_tooltip(
+				badge,
+				<Tooltip>{tl(trans.badges[type].reason)}</Tooltip>,
+			);
 
 			badge.addEventListener('click', () => {
 				present_badge({

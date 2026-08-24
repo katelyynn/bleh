@@ -13,6 +13,7 @@ import { page } from '@/build/page';
 import { style_name_from_badge } from './avatar';
 import { flag_url } from './flag';
 import { present_badge } from '../dialog/badge';
+import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
 
 export function load_badges(user, solo = false) {
 	if (!sponsor_list.version) return;
@@ -171,20 +172,27 @@ export function create_badge(
 
 	const classlist = on_avatar ? 'avatar-status-dot' : 'label no-hover';
 
-	const elem = html.node`
-        <span class=${classlist} onclick=${() => {
-		if (!small && !on_avatar) {
-			present_badge(badge);
-		}
-	}}>
-            ${badge.name}
-        </span>
-    `;
+	const elem = (
+		<span
+			class={[
+				on_avatar ? 'avatar-status-dot' : 'label no-hover',
+				long && 'expand',
+				small && 'small',
+			]}
+			onClick={() => {
+				if (!small && !on_avatar) {
+					present_badge(badge);
+				}
+			}}
+		>
+			{badge.name}
+		</span>
+	);
 
 	if (small) {
-		elem.appendChild(html.node`
-            <span class="badge-back" />
-        `);
+		elem.appendChild(
+			<span class='badge-back' />,
+		);
 	}
 
 	if (badge.translation_code) {
@@ -195,9 +203,6 @@ export function create_badge(
 		);
 	}
 
-	if (long) elem.classList.add('expand');
-	if (small) elem.classList.add('small');
-
 	if (
 		badge.icon != '' &&
 		badge.hue > -1 &&
@@ -206,9 +211,9 @@ export function create_badge(
 	) {
 		// new style badge
 		elem.style.setProperty('--mask', `url(${badge.icon})`);
-		elem.style.setProperty('--hue-over', badge.hue);
-		elem.style.setProperty('--sat-over', badge.sat);
-		elem.style.setProperty('--lit-over', badge.lit);
+		elem.style.setProperty('--hue-over', String(badge.hue));
+		elem.style.setProperty('--sat-over', String(badge.sat));
+		elem.style.setProperty('--lit-over', String(badge.lit));
 	} else if (badge.inbuilt) {
 		elem.classList.add(badge.type);
 	} else {
@@ -220,18 +225,10 @@ export function create_badge(
 
 	if (on_avatar || small) return elem;
 
-	let badge_name;
-	tippy(elem, {
-		theme: 'badge',
-		placement: 'bottom',
-		content: html.node`
-            <div class="badge-name colourful" ref=${(el) =>
-			badge_name = el}>${badge.name}</div>
-            <div class="badge-reason">${badge.reason}</div>
-        `,
-	});
-
-	style_name_from_badge(badge_name, badge);
+	hover_tooltip(
+		elem,
+		<Tooltip>{badge.reason}</Tooltip>,
+	);
 
 	return elem;
 }

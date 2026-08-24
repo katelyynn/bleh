@@ -635,7 +635,7 @@ body,
 		--b7: 0 0 0;
 		--b9: 1 0 0;
 
-		--tooltip: 0.89 0 0;
+		--tooltip: 0.92 0 0;
 
 		--separator-base: oklch(var(--b2) / 0.3);
 

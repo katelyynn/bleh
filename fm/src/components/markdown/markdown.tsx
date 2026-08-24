@@ -37,6 +37,7 @@ import {
 	social_links_extension,
 } from '@/components/markdown/links.tsx';
 import { useSettings } from '@/page.ts';
+import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
 
 export function markdown(
 	text: string,
@@ -444,10 +445,7 @@ export function markdown(
 				`${window.location.origin}${window.location.pathname}?hazelfae`;
 		}); */
 
-		tippy(hazel, {
-			content: ':hazelfae:',
-			delay: [500, 0],
-		});
+		hover_tooltip(hazel, <Tooltip>:hazelfae:</Tooltip>);
 	});
 
 	if (allow_hue) {
