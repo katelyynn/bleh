@@ -34,6 +34,7 @@ import { header_colour } from '../page/colour';
 import { symbol } from '@/main';
 import { useSettings } from '@/page.ts';
 import { count_bar } from '@/components/track/bar.tsx';
+import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
 
 export function patch_titles(search = page.structure.main) {
 	if (page.subpage == 'tags_overview') return;
@@ -338,9 +339,10 @@ export function patch_titles(search = page.structure.main) {
 						track_timestamp_contents,
 					);
 
-					tippy(track_timestamp, {
-						content: track_timestamp_contents,
-					});
+					hover_tooltip(
+						track_timestamp,
+						<Tooltip>{track_timestamp_contents}</Tooltip>,
+					);
 				}
 			}
 
@@ -380,9 +382,10 @@ export function patch_titles(search = page.structure.main) {
 					),
 				);
 
-				tippy(image_wrap, {
-					content: alt,
-				});
+				hover_tooltip(
+					image_wrap,
+					<Tooltip>{alt}</Tooltip>,
+				);
 
 				if (!is_album && has_bar) {
 					hoshino(
@@ -606,9 +609,10 @@ export function patch_titles(search = page.structure.main) {
                     </button>
                 `;
 
-				tippy(more_button, {
-					content: tl(trans.more),
-				});
+				hover_tooltip(
+					more_button,
+					<Tooltip>{tl(trans.more)}</Tooltip>,
+				);
 
 				track.appendChild(html.node`
                     <td class="more-button-wrapper">
@@ -1264,9 +1268,11 @@ export function patch_titles(search = page.structure.main) {
 				const love = loved.querySelector('.chartlist-love-button');
 
 				love.classList.add('btn', 'icon-mask');
-				tippy(love, {
-					content: tl(trans.love_track),
-				});
+
+				hover_tooltip(
+					love,
+					<Tooltip>{tl(trans.love_track)}</Tooltip>,
+				);
 			}
 
 			const album_text = track.querySelector(

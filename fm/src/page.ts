@@ -38,7 +38,7 @@ import {
 import { music_grids } from '@/components/music/music_grid';
 import { nag_bar } from '@/components/dialog/nag_bar';
 import { load_notifications, notify } from '@/components/dialog/notify';
-import { patch_titles } from '@/components/music/track.js';
+import { patch_titles } from '@/components/music/track.tsx';
 import { load_settings, Settings } from '@/config';
 import { theme_version, version } from '@/main';
 import { append_nav, update_branding_type } from '@/components/page/navigation';

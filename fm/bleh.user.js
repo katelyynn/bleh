@@ -76783,21 +76783,16 @@ var bleh = (() => {
     value?.classList.toggle("v2", v2);
   }
 
-  // src/components/music/track.js
+  // src/components/music/track.tsx
   function patch_titles(search = page.structure.main) {
     if (page.subpage == "tags_overview") return;
     if (!search) {
-      log(
-        "tracks could not be searched as search was undefined",
-        "tracks",
-        "log",
-        { search }
-      );
+      log("tracks could not be searched as search was undefined", "tracks", "log", {
+        search
+      });
       return;
     }
-    const tracklists = search.querySelectorAll(
-      ".chartlist:not(.chartlist__placeholder)"
-    );
+    const tracklists = search.querySelectorAll(".chartlist:not(.chartlist__placeholder)");
     const insights = {
       artist: {
         display: false,
@@ -76838,19 +76833,18 @@ var bleh = (() => {
     const season = page.state.seasons.current?.id || "none";
     tracklists.forEach((tracklist) => {
       if (!tracklist) return;
-      log("found, checking", "tracks", "log", { tracklist, search });
-      if (tracklist.querySelector(
-        "tbody > .chartlist-row:first-child > .kate-placeholder"
-      )) {
+      log("found, checking", "tracks", "log", {
+        tracklist,
+        search
+      });
+      if (tracklist.querySelector("tbody > .chartlist-row:first-child > .kate-placeholder")) {
         return;
       }
-      log("new!", "tracks", "info", { tracklist });
-      const wide = tracklist.classList.contains(
-        "chartlist--wide-artist-column"
-      );
-      const tracks = tracklist.querySelectorAll(
-        ":scope > tbody > :is(.chartlist-row:not(.chartlist__placeholder-row), .chartlist-row--interlist-ad)"
-      );
+      log("new!", "tracks", "info", {
+        tracklist
+      });
+      const wide = tracklist.classList.contains("chartlist--wide-artist-column");
+      const tracks = tracklist.querySelectorAll(":scope > tbody > :is(.chartlist-row:not(.chartlist__placeholder-row), .chartlist-row--interlist-ad)");
       tracks.forEach((track, index3) => {
         smart_track(track, index3);
       });
@@ -76868,15 +76862,10 @@ var bleh = (() => {
           return;
         }
         track[symbol] = true;
-        const track_title = track.querySelector(
-          ".chartlist-name a:not(.offset-section-anchor)"
-        );
+        const track_title = track.querySelector(".chartlist-name a:not(.offset-section-anchor)");
         if (!track_title) return;
         if (track_title.hasAttribute("title")) {
-          track_title.setAttribute(
-            "data-name",
-            track_title.getAttribute("title")
-          );
+          track_title.setAttribute("data-name", track_title.getAttribute("title"));
           track_title.removeAttribute("title");
         }
         let track_info = track.querySelector(":scope > .track-info");
@@ -76889,14 +76878,8 @@ var bleh = (() => {
           track.appendChild(track_info);
         }
         track_info.setAttribute("data-track-layout", track_layout);
-        track_info.setAttribute(
-          "data-album-name-location",
-          album_name_location
-        );
-        track.setAttribute(
-          "data-has-bar",
-          tracklist.classList.contains("chartlist--with-bar")
-        );
+        track_info.setAttribute("data-album-name-location", album_name_location);
+        track.setAttribute("data-has-bar", tracklist.classList.contains("chartlist--with-bar"));
         let is_user = track.querySelector(".chartlist-image .avatar");
         let is_artist = false;
         if (is_user) {
@@ -76911,22 +76894,15 @@ var bleh = (() => {
           is_user = false;
           is_artist = true;
         }
-        log(
-          `is user: ${is_user}, is artist: ${is_artist}`,
-          "tracks",
-          "log"
-        );
+        log(`is user: ${is_user}, is artist: ${is_artist}`, "tracks", "log");
         if (is_user) {
           track.setAttribute("data-track-type", "user");
           if (settings.colourful_counts) {
             patch_artist_ranks_in_list_view(track);
           }
-          render(
-            track_title,
-            html`
+          render(track_title, html`
 						<span><span class="at">@</span>${track_title.textContent}</span>
-					`
-          );
+					`);
           log("finished user stuff, returning", "tracks", "log");
           return;
         }
@@ -76934,9 +76910,7 @@ var bleh = (() => {
           track.classList.remove("chartlist-row--with-artist");
           track.setAttribute("data-track-type", "artist");
           if (useSettings.get("corrections")) {
-            track_title.textContent = correct_artist(
-              track_title.getAttribute("data-name")
-            );
+            track_title.textContent = correct_artist(track_title.getAttribute("data-name"));
           }
           const bar2 = track.querySelector(".chartlist-count-bar-slug");
           if (bar2) {
@@ -76949,11 +76923,7 @@ var bleh = (() => {
             if (value > insights.artist.highest.value) {
               insights.artist.highest.value = value;
             }
-            log(
-              `pushed insight artist label of ${track_title.textContent}`,
-              "glacier library",
-              "log"
-            );
+            log(`pushed insight artist label of ${track_title.textContent}`, "glacier library", "log");
             insights.artist.labels.push(track_title.textContent);
             log("finished artist stuff, returning", "tracks", "log");
           }
@@ -76961,14 +76931,8 @@ var bleh = (() => {
         }
         const is_album = track.hasAttribute("data-album-row");
         if (is_album) track.classList.add("bleh--is-album");
-        const track_artist = return_artist_from_track(
-          track_title.getAttribute("href"),
-          is_album
-        );
-        log(
-          `returned ${track_artist} from url ${track_title.getAttribute("href")}`,
-          "track"
-        );
+        const track_artist = return_artist_from_track(track_title.getAttribute("href"), is_album);
+        log(`returned ${track_artist} from url ${track_title.getAttribute("href")}`, "track");
         if (!wide) track.classList.add("chartlist-row--with-artist");
         const bar = track.querySelector(".chartlist-count-bar-slug");
         if (bar) {
@@ -76987,49 +76951,31 @@ var bleh = (() => {
             }
           }
         }
-        const is_active3 = track.classList.contains(
-          "chartlist-row--now-scrobbling"
-        );
+        const is_active3 = track.classList.contains("chartlist-row--now-scrobbling");
         const has_bar = track.querySelector(":scope > .chartlist-bar");
         if (has_bar) {
-          const bar2 = has_bar.querySelector(
-            ":scope > .chartlist-count-bar"
-          );
+          const bar2 = has_bar.querySelector(":scope > .chartlist-count-bar");
           count_bar(bar2);
         }
-        const track_legacy_menu = track.querySelector(
-          ".chartlist-more-menu"
-        );
-        const track_timestamp = track.querySelector(
-          ".chartlist-timestamp span"
-        );
+        const track_legacy_menu = track.querySelector(".chartlist-more-menu");
+        const track_timestamp = track.querySelector(".chartlist-timestamp span");
         let track_timestamp_contents;
         if (track_timestamp && !is_active3) {
-          track_timestamp_contents = track_timestamp.getAttribute(
-            "title"
-          );
+          track_timestamp_contents = track_timestamp.getAttribute("title");
           if (!track_timestamp_contents) {
-            track_timestamp_contents = track_timestamp.getAttribute(
-              "data-title"
-            );
+            track_timestamp_contents = track_timestamp.getAttribute("data-title");
           }
           if (track_timestamp_contents) {
             track_timestamp.removeAttribute("title");
-            track_timestamp.setAttribute(
-              "data-title",
-              track_timestamp_contents
-            );
-            tippy_esm_default(track_timestamp, {
-              content: track_timestamp_contents
-            });
+            track_timestamp.setAttribute("data-title", track_timestamp_contents);
+            hover_tooltip(track_timestamp, /* @__PURE__ */ jsx(Tooltip, {
+              children: track_timestamp_contents
+            }));
           }
         }
         const album = track.querySelector(".chartlist-album a");
         if (!is_album && album) {
-          album.textContent = correct_item_by_artist(
-            album.textContent,
-            track_artist
-          );
+          album.textContent = correct_item_by_artist(album.textContent, track_artist);
         }
         const album_link = track.querySelector(".chartlist-image a");
         const show_album_text = (is_active3 || settings.expand_tracks == "always") && settings.expand_tracks != "never" && useSettings.get("track_layout") == "column";
@@ -77045,22 +76991,12 @@ var bleh = (() => {
           if (link.href) {
             album_artist = return_artist_from_track(link.href, true);
           }
-          alt = romanise(
-            correct_item_by_artist(
-              image2.getAttribute("alt"),
-              track_artist
-            )
-          );
-          tippy_esm_default(image_wrap, {
-            content: alt
-          });
+          alt = romanise(correct_item_by_artist(image2.getAttribute("alt"), track_artist));
+          hover_tooltip(image_wrap, /* @__PURE__ */ jsx(Tooltip, {
+            children: alt
+          }));
           if (!is_album && has_bar) {
-            hoshino(
-              image2,
-              track_title.getAttribute("data-name"),
-              track_artist,
-              link
-            );
+            hoshino(image2, track_title.getAttribute("data-name"), track_artist, link);
           }
         }
         let song_artist_element = track.querySelector(".chartlist-artist");
@@ -77068,46 +77004,23 @@ var bleh = (() => {
           track_info.appendChild(song_artist_element);
         }
         if (useSettings.get("format_guest_features")) {
-          const formatted = name_includes(
-            track_title.getAttribute("data-name"),
-            track_artist,
-            track_title.getAttribute("data-inherit-artists")
-          );
+          const formatted = name_includes(track_title.getAttribute("data-name"), track_artist, track_title.getAttribute("data-inherit-artists"));
           console.log("formatted", formatted);
-          track_title.setAttribute(
-            "data-name",
-            formatted.corrected_title
-          );
-          render(
-            track_title,
-            smart_title(formatted.song_title, formatted.song_tags)
-          );
+          track_title.setAttribute("data-name", formatted.corrected_title);
+          render(track_title, smart_title(formatted.song_title, formatted.song_tags));
           if (!song_artist_element && !is_user) {
             song_artist_element = document.createElement("td");
             song_artist_element.classList.add("chartlist-artist");
             track_info.appendChild(song_artist_element);
           }
           if (song_artist_element.textContent.replaceAll("+", " ").trim() === track_artist || song_artist_element.textContent.trim() === "") {
-            log(
-              "artist either matches or is blank, replacing",
-              "tracks",
-              "log"
-            );
-            render(
-              song_artist_element,
-              smart_artists(
-                formatted.song_artist,
-                formatted.song_guests
-              )
-            );
+            log("artist either matches or is blank, replacing", "tracks", "log");
+            render(song_artist_element, smart_artists(formatted.song_artist, formatted.song_guests));
           }
           if (track.getAttribute("data-disambig") == "explicit") {
-            song_artist_element.insertBefore(
-              html.node`
+            song_artist_element.insertBefore(html.node`
                         <span class="track-explicit icon">${tl2(trans.explicit)}</span>
-                    `,
-              song_artist_element.firstChild
-            );
+                    `, song_artist_element.firstChild);
           }
           if (track_legacy_menu) {
             track.preview = html.node`
@@ -77121,16 +77034,11 @@ var bleh = (() => {
                                 <h5 class="track-preview-text track-preview-title">${formatted.song_title}</h5>
                                 <p class="track-preview-text track-preview-artist">${song_artist_element.querySelector("a").textContent}</p>
                                 <div class="track-preview-tags">
-                                    ${formatted.song_tags.map(
-              (tag) => html.node`
+                                    ${formatted.song_tags.map((tag) => html.node`
                                         <div class="feat" data-tag-type="${tag.type}" data-tag-group="${tag.group}">${tag.text}</div>
-                                    `
-            )}
+                                    `)}
                                 </div>
-                                ${is_album ? "" : html.node`<p class="track-preview-text track-preview-album">${image2 && album_link ? correct_item_by_artist(
-              image2.getAttribute("alt"),
-              track_artist
-            ) : album ? album.textContent : ""}</p>`}
+                                ${is_album ? "" : html.node`<p class="track-preview-text track-preview-album">${image2 && album_link ? correct_item_by_artist(image2.getAttribute("alt"), track_artist) : album ? album.textContent : ""}</p>`}
                                 ${track_timestamp && track_timestamp_contents ? html.node`<p class="track-preview-text track-preview-timestamp">${track_timestamp_contents}</p>` : ""}
                                 ${image2?.getAttribute("data-hoshino") ? html.node`
                                             <div class="hoshino-marker">
@@ -77142,53 +77050,44 @@ var bleh = (() => {
                     `;
           }
         } else if (useSettings.get("corrections")) {
-          const song_artist_element2 = track.querySelector(
-            ".chartlist-artist a"
-          );
+          const song_artist_element2 = track.querySelector(".chartlist-artist a");
           if (song_artist_element2) {
-            const corrected_title = romanise(
-              correct_item_by_artist(
-                track_title.textContent,
-                song_artist_element2.textContent
-              )
-            );
+            const corrected_title = romanise(correct_item_by_artist(track_title.textContent, song_artist_element2.textContent));
             track_title.textContent = corrected_title;
             track_title.setAttribute("data-name", corrected_title);
-            const corrected_artist = romanise(
-              correct_artist(song_artist_element2.textContent)
-            );
+            const corrected_artist = romanise(correct_artist(song_artist_element2.textContent));
             song_artist_element2.textContent = corrected_artist;
             song_artist_element2.setAttribute("title", corrected_artist);
           } else {
-            const corrected_title = correct_item_by_artist(
-              track_title.textContent,
-              track_artist
-            );
+            const corrected_title = correct_item_by_artist(track_title.textContent, track_artist);
             track_title.textContent = corrected_title;
             track_title.setAttribute("data-name", corrected_title);
           }
         }
-        const previous = track.querySelectorAll(
-          ":scope > .more-button-wrapper"
-        );
+        const previous = track.querySelectorAll(":scope > .more-button-wrapper");
         previous.forEach((elem) => {
           elem.remove();
         });
         if (track_legacy_menu) {
           let menu;
-          const user = ["user", "overview"].includes(page.type) ? page.name : auth.name;
+          const user = [
+            "user",
+            "overview"
+          ].includes(page.type) ? page.name : auth.name;
           const is_own_profile = user == auth.name;
-          const can_edit = is_own_profile && !is_active3 && (!is_album ? !has_bar : true) && auth.pro && ["user", "overview"].includes(page.type);
-          const can_delete = is_own_profile && !is_active3 && !has_bar && !is_album && ["user", "overview"].includes(page.type);
-          const can_copy_scrobble = !is_album && !has_bar && !is_active3 && ["user", "overview"].includes(page.type);
-          const timestamp = parseInt(track.getAttribute("data-timestamp")) || Math.floor(
-            new Date(
-              track_timestamp_contents?.replace(
-                /^[A-Za-z]+\s+/,
-                ""
-              ).replace(",", "").trim()
-            ).getTime() / 1e3
-          );
+          const can_edit = is_own_profile && !is_active3 && (!is_album ? !has_bar : true) && auth.pro && [
+            "user",
+            "overview"
+          ].includes(page.type);
+          const can_delete = is_own_profile && !is_active3 && !has_bar && !is_album && [
+            "user",
+            "overview"
+          ].includes(page.type);
+          const can_copy_scrobble = !is_album && !has_bar && !is_active3 && [
+            "user",
+            "overview"
+          ].includes(page.type);
+          const timestamp = parseInt(track.getAttribute("data-timestamp")) || Math.floor(new Date(track_timestamp_contents?.replace(/^[A-Za-z]+\s+/, "").replace(",", "").trim()).getTime() / 1e3);
           const more_button = html.node`
                     <button class="btn track-more-button icon chibi" data-type="more" onclick=${() => {
             log("requested track in-built", "menu", "info", {
@@ -77208,156 +77107,57 @@ var bleh = (() => {
                         ${tl2(trans.more)}
                     </button>
                 `;
-          tippy_esm_default(more_button, {
-            content: tl2(trans.more)
-          });
+          hover_tooltip(more_button, /* @__PURE__ */ jsx(Tooltip, {
+            children: tl2(trans.more)
+          }));
           track.appendChild(html.node`
                     <td class="more-button-wrapper">
                         ${more_button}
                     </td>
                 `);
           setTimeout(() => {
-            const edit_button = track_legacy_menu.querySelector(
-              '[data-analytics-action="EditScrobbleOpen"]:not([href$="login?next=/pro"])'
-            );
-            const bulk_edit_button = track_legacy_menu.querySelector(
-              '[data-analytics-action="BulkEditScrobblesOpen"]'
-            );
-            const delete_button = track_legacy_menu.querySelector(
-              ".more-item--delete"
-            );
+            const edit_button = track_legacy_menu.querySelector('[data-analytics-action="EditScrobbleOpen"]:not([href$="login?next=/pro"])');
+            const bulk_edit_button = track_legacy_menu.querySelector('[data-analytics-action="BulkEditScrobblesOpen"]');
+            const delete_button = track_legacy_menu.querySelector(".more-item--delete");
             if (edit_button) {
               log("has edit button", "track", "info", {
                 edit_button
               });
               const form = edit_button.parentElement;
-              page.token = form.querySelector(
-                '[name="csrfmiddlewaretoken"]'
-              )?.value;
-              track.setAttribute(
-                "data-action",
-                form.getAttribute("action")
-              );
+              page.token = form.querySelector('[name="csrfmiddlewaretoken"]')?.value;
+              track.setAttribute("data-action", form.getAttribute("action"));
               if (!is_album) {
-                const album_name2 = form.querySelector(
-                  '[name="album_name"]'
-                );
-                const album_artist_name = form.querySelector(
-                  '[name="album_artist_name"]'
-                );
-                track.setAttribute(
-                  "data-artist-name",
-                  correct_artist(
-                    form.querySelector('[name="artist_name"]')?.value
-                  )
-                );
-                track.setAttribute(
-                  "data-track-name",
-                  correct_item_by_artist(
-                    form.querySelector('[name="track_name"]')?.value,
-                    form.querySelector('[name="artist_name"]')?.value
-                  )
-                );
+                const album_name2 = form.querySelector('[name="album_name"]');
+                const album_artist_name = form.querySelector('[name="album_artist_name"]');
+                track.setAttribute("data-artist-name", correct_artist(form.querySelector('[name="artist_name"]')?.value));
+                track.setAttribute("data-track-name", correct_item_by_artist(form.querySelector('[name="track_name"]')?.value, form.querySelector('[name="artist_name"]')?.value));
                 if (album_name2) {
-                  track.setAttribute(
-                    "data-album-name",
-                    correct_item_by_artist(
-                      album_name2?.value,
-                      form.querySelector(
-                        '[name="artist_name"]'
-                      )?.value
-                    )
-                  );
+                  track.setAttribute("data-album-name", correct_item_by_artist(album_name2?.value, form.querySelector('[name="artist_name"]')?.value));
                 }
                 if (album_artist_name) {
-                  track.setAttribute(
-                    "data-album-artist-name",
-                    correct_artist(album_artist_name?.value)
-                  );
+                  track.setAttribute("data-album-artist-name", correct_artist(album_artist_name?.value));
                 }
-                track.setAttribute(
-                  "data-timestamp",
-                  form.querySelector('[name="timestamp"]')?.value
-                );
+                track.setAttribute("data-timestamp", form.querySelector('[name="timestamp"]')?.value);
               } else {
-                track.setAttribute(
-                  "data-album-name",
-                  correct_item_by_artist(
-                    form.querySelector('[name="album_name"]')?.value,
-                    form.querySelector(
-                      '[name="album_artist_name"]'
-                    )?.value
-                  )
-                );
-                track.setAttribute(
-                  "data-album-artist-name",
-                  correct_artist(
-                    form.querySelector(
-                      '[name="album_artist_name"]'
-                    )?.value
-                  )
-                );
-                track.setAttribute(
-                  "data-album-name-original",
-                  correct_item_by_artist(
-                    form.querySelector(
-                      '[name="album_name_original"]'
-                    )?.value,
-                    form.querySelector(
-                      '[name="album_artist_name_original"]'
-                    )?.value
-                  )
-                );
-                track.setAttribute(
-                  "data-album-artist-name-original",
-                  correct_artist(
-                    form.querySelector(
-                      '[name="album_artist_name_original"]'
-                    )?.value
-                  )
-                );
-                track.setAttribute(
-                  "data-album-image",
-                  form.querySelector('[name="album_image"]')?.value
-                );
-                track.setAttribute(
-                  "data-count",
-                  form.querySelector('[name="count"]')?.value
-                );
+                track.setAttribute("data-album-name", correct_item_by_artist(form.querySelector('[name="album_name"]')?.value, form.querySelector('[name="album_artist_name"]')?.value));
+                track.setAttribute("data-album-artist-name", correct_artist(form.querySelector('[name="album_artist_name"]')?.value));
+                track.setAttribute("data-album-name-original", correct_item_by_artist(form.querySelector('[name="album_name_original"]')?.value, form.querySelector('[name="album_artist_name_original"]')?.value));
+                track.setAttribute("data-album-artist-name-original", correct_artist(form.querySelector('[name="album_artist_name_original"]')?.value));
+                track.setAttribute("data-album-image", form.querySelector('[name="album_image"]')?.value);
+                track.setAttribute("data-count", form.querySelector('[name="count"]')?.value);
               }
             } else if (delete_button) {
               log("has delete button", "track", "info", {
                 delete_button
               });
               let form = delete_button.parentElement;
-              page.token = form.querySelector(
-                '[name="csrfmiddlewaretoken"]'
-              )?.value;
-              track.setAttribute(
-                "data-artist-name",
-                correct_artist(
-                  form.querySelector('[name="artist_name"]')?.value
-                )
-              );
-              track.setAttribute(
-                "data-track-name",
-                correct_item_by_artist(
-                  form.querySelector('[name="track_name"]')?.value,
-                  form.querySelector('[name="artist_name"]')?.value
-                )
-              );
-              track.setAttribute(
-                "data-timestamp",
-                form.querySelector('[name="timestamp"]')?.value
-              );
+              page.token = form.querySelector('[name="csrfmiddlewaretoken"]')?.value;
+              track.setAttribute("data-artist-name", correct_artist(form.querySelector('[name="artist_name"]')?.value));
+              track.setAttribute("data-track-name", correct_item_by_artist(form.querySelector('[name="track_name"]')?.value, form.querySelector('[name="artist_name"]')?.value));
+              track.setAttribute("data-timestamp", form.querySelector('[name="timestamp"]')?.value);
             }
             console.info("more button", bulk_edit_button);
-            const album_name = sanitise(
-              image2 ? correct_item_by_artist(
-                image2.getAttribute("alt"),
-                track_artist
-              ) : album ? album.textContent : ""
-            );
+            const album_name = sanitise(image2 ? correct_item_by_artist(image2.getAttribute("alt"), track_artist) : album ? album.textContent : "");
             menu = tippy_esm_default(more_button, {
               theme: "context-menu",
               content: html.node`
@@ -77369,21 +77169,11 @@ var bleh = (() => {
                   return html.node`
                                                 <form style="margin: 0" method="POST" action=${track.getAttribute("data-action")} data-edit-scrobble="">
                                                     <input type="hidden" name="csrfmiddlewaretoken" value=${page.token}>
-                                                    <input type="hidden" name="album_name" value=${track.getAttribute(
-                    "data-album-name"
-                  )}>
-                                                    <input type="hidden" name="album_artist_name" value=${track.getAttribute(
-                    "data-album-artist-name"
-                  )}>
-                                                    <input type="hidden" name="album_image" value=${track.getAttribute(
-                    "data-album-image"
-                  )}>
-                                                    <input type="hidden" name="album_name_original" value=${track.getAttribute(
-                    "data-album-name-original"
-                  )}>
-                                                    <input type="hidden" name="album_artist_name_original" value=${track.getAttribute(
-                    "data-album-artist-name-original"
-                  )}>
+                                                    <input type="hidden" name="album_name" value=${track.getAttribute("data-album-name")}>
+                                                    <input type="hidden" name="album_artist_name" value=${track.getAttribute("data-album-artist-name")}>
+                                                    <input type="hidden" name="album_image" value=${track.getAttribute("data-album-image")}>
+                                                    <input type="hidden" name="album_name_original" value=${track.getAttribute("data-album-name-original")}>
+                                                    <input type="hidden" name="album_artist_name_original" value=${track.getAttribute("data-album-artist-name-original")}>
                                                     <input type="hidden" name="count" value=${track.getAttribute("data-count")}>
                                                     <button class="dropdown-menu-clickable-item" data-type="edit">
                                                         ${tl2(trans.edit)}
@@ -77397,9 +77187,7 @@ var bleh = (() => {
                                                 <input type="hidden" name="artist_name" value=${track.getAttribute("data-artist-name")}>
                                                 <input type="hidden" name="track_name" value=${track.getAttribute("data-track-name")}>
                                                 <input type="hidden" name="album_name" value=${track.getAttribute("data-album-name")}>
-                                                <input type="hidden" name="album_artist_name" value=${track.getAttribute(
-                  "data-album-artist-name"
-                )}>
+                                                <input type="hidden" name="album_artist_name" value=${track.getAttribute("data-album-artist-name")}>
                                                 <input type="hidden" name="timestamp" value=${track.getAttribute("data-timestamp")}>
                                                 <button class="dropdown-menu-clickable-item" data-type="edit">
                                                     ${tl2(trans.edit)}
@@ -77410,17 +77198,10 @@ var bleh = (() => {
                                     ${bulk_edit_button ? html.node`
                                         <div class="button-combo-sep" />
                                         ${() => {
-                let button2 = track_legacy_menu.querySelector(
-                  '[data-analytics-action="BulkEditScrobblesOpen"]'
-                ).cloneNode();
+                let button2 = track_legacy_menu.querySelector('[data-analytics-action="BulkEditScrobblesOpen"]').cloneNode();
                 button2.classList = "dropdown-menu-clickable-item chibi";
-                button2.textContent = tl2(
-                  trans.bulk_edit
-                );
-                button2.setAttribute(
-                  "data-type",
-                  "bulk-edit"
-                );
+                button2.textContent = tl2(trans.bulk_edit);
+                button2.setAttribute("data-type", "bulk-edit");
                 tippy_esm_default(button2, {
                   content: tl2(trans.bulk_edit)
                 });
@@ -77445,9 +77226,7 @@ var bleh = (() => {
                             ` : can_copy_scrobble ? html.node`
                                 <button class="dropdown-menu-clickable-item" data-type="copy_scrobble" onclick=${() => {
                 submit_scrobble({
-                  pre_track: track_title.getAttribute(
-                    "data-name"
-                  ),
+                  pre_track: track_title.getAttribute("data-name"),
                   pre_artist: track_artist,
                   pre_album: alt,
                   pre_album_artist: album_artist,
@@ -77459,32 +77238,19 @@ var bleh = (() => {
                                 <div class="sep" />
                             ` : bulk_edit_button ? html.node`
                                 ${() => {
-                const button2 = track_legacy_menu.querySelector(
-                  '[data-analytics-action="BulkEditScrobblesOpen"]'
-                );
-                button2.textContent = tl2(
-                  trans.bulk_edit
-                );
-                button2.setAttribute(
-                  "data-type",
-                  "bulk-edit"
-                );
+                const button2 = track_legacy_menu.querySelector('[data-analytics-action="BulkEditScrobblesOpen"]');
+                button2.textContent = tl2(trans.bulk_edit);
+                button2.setAttribute("data-type", "bulk-edit");
                 return button2;
               }}
                                 <div class="sep" />
                             ` : ""}
                             ${() => {
-                const container = track.querySelector(
-                  ".chartlist-play"
-                );
+                const container = track.querySelector(".chartlist-play");
                 if (!container) return;
-                const button2 = container.querySelector(
-                  ".chartlist-play-button"
-                );
+                const button2 = container.querySelector(".chartlist-play-button");
                 if (!button2) return;
-                button2.classList.add(
-                  "dropdown-menu-clickable-item"
-                );
+                button2.classList.add("dropdown-menu-clickable-item");
                 button2.classList.remove("chartlist-play-button");
                 button2.textContent = tl2(trans.play);
                 button2.setAttribute("data-type", "play");
@@ -77509,7 +77275,10 @@ var bleh = (() => {
                                     `;
                 tippy_esm_default(button2, {
                   content: tl2(trans.explore_in_library),
-                  delay: [500, 0]
+                  delay: [
+                    500,
+                    0
+                  ]
                 });
                 return button2;
               }}
@@ -77533,7 +77302,10 @@ var bleh = (() => {
                                     `;
                 tippy_esm_default(button2, {
                   content: tl2(trans.explore_in_library),
-                  delay: [500, 0]
+                  delay: [
+                    500,
+                    0
+                  ]
                 });
                 return button2;
               }}
@@ -77556,7 +77328,10 @@ var bleh = (() => {
                                     `;
                 tippy_esm_default(button2, {
                   content: tl2(trans.explore_in_library),
-                  delay: [500, 0]
+                  delay: [
+                    500,
+                    0
+                  ]
                 });
                 return button2;
               }}
@@ -77579,7 +77354,10 @@ var bleh = (() => {
                                     `;
                 tippy_esm_default(button2, {
                   content: tl2(trans.explore_in_library),
-                  delay: [500, 0]
+                  delay: [
+                    500,
+                    0
+                  ]
                 });
                 return button2;
               }}
@@ -77624,47 +77402,32 @@ var bleh = (() => {
                   const form_data = new FormData(form);
                   console.info(form_data);
                   try {
-                    track.setAttribute(
-                      "data-ajax-form-state",
-                      "deleted"
-                    );
+                    track.setAttribute("data-ajax-form-state", "deleted");
                     await fetch(url, {
                       method: "POST",
                       body: form_data
                     }).then((res) => {
                       if (!res.ok) {
-                        log(
-                          "failed to delete",
-                          "form",
-                          "error",
-                          { res }
-                        );
-                        track.removeAttribute(
-                          "data-ajax-form-state"
-                        );
+                        log("failed to delete", "form", "error", {
+                          res
+                        });
+                        track.removeAttribute("data-ajax-form-state");
                         return;
                       }
-                      log(
-                        "received response",
-                        "form",
-                        "info",
-                        { res }
-                      );
+                      log("received response", "form", "info", {
+                        res
+                      });
                       notify({
                         id: "delete",
                         title: tl2(trans.deleted),
-                        body: track_title.getAttribute(
-                          "data-name"
-                        ),
+                        body: track_title.getAttribute("data-name"),
                         icon: "icon-16-trash",
                         type: "error"
                       });
                     });
                   } catch (e6) {
                     console.error(e6);
-                    track.removeAttribute(
-                      "data-ajax-form-state"
-                    );
+                    track.removeAttribute("data-ajax-form-state");
                   }
                 }}>
                                         <input type="hidden" name="csrfmiddlewaretoken" value=${page.token}>
@@ -77680,7 +77443,10 @@ var bleh = (() => {
               trigger: "manual",
               interactive: true,
               interactiveBorder: 10,
-              offset: [0, 0],
+              offset: [
+                0,
+                0
+              ],
               hideOnClick: false,
               appendTo: document.body,
               onCreate(instance) {
@@ -77696,23 +77462,11 @@ var bleh = (() => {
           }, 100);
         }
         if (is_album) {
-          log(
-            `pushed insight album label of ${track_title.getAttribute("data-name")}`,
-            "glacier library",
-            "log"
-          );
-          insights.album.labels.push(
-            track_title.getAttribute("data-name")
-          );
+          log(`pushed insight album label of ${track_title.getAttribute("data-name")}`, "glacier library", "log");
+          insights.album.labels.push(track_title.getAttribute("data-name"));
         } else {
-          log(
-            `pushed insight track label of ${track_title.getAttribute("data-name")}`,
-            "glacier library",
-            "log"
-          );
-          insights.track.labels.push(
-            track_title.getAttribute("data-name")
-          );
+          log(`pushed insight track label of ${track_title.getAttribute("data-name")}`, "glacier library", "log");
+          insights.track.labels.push(track_title.getAttribute("data-name"));
         }
         const loved = track.querySelector(".chartlist-loved");
         if (loved) {
@@ -77720,13 +77474,11 @@ var bleh = (() => {
           loved.setAttribute("data-season", season);
           const love = loved.querySelector(".chartlist-love-button");
           love.classList.add("btn", "icon-mask");
-          tippy_esm_default(love, {
-            content: tl2(trans.love_track)
-          });
+          hover_tooltip(love, /* @__PURE__ */ jsx(Tooltip, {
+            children: tl2(trans.love_track)
+          }));
         }
-        const album_text = track.querySelector(
-          ".chartlist-album.custom-album-text"
-        );
+        const album_text = track.querySelector(".chartlist-album.custom-album-text");
         if (image_wrap) {
           if (!is_album && show_album_text && !has_bar && !album_text) {
             track_info.appendChild(html.node`
@@ -77743,9 +77495,7 @@ var bleh = (() => {
           try {
             image2.onload = async () => {
               const { hue: hue4, sat, lit } = await header_colour(image2);
-              const to_colour = track.querySelectorAll(
-                ".chartlist-count-bar, .chartlist-loved"
-              );
+              const to_colour = track.querySelectorAll(".chartlist-count-bar, .chartlist-loved");
               track.classList.add("colourful");
               if (is_active3) {
                 track.style.setProperty("--hue-over", hue4);
@@ -121391,7 +121141,7 @@ var bleh = (() => {
         date: "2026-07-30"
       }
     },
-    built_on: "2026-08-24T15:45:18.690Z"
+    built_on: "2026-08-24T16:06:09.498Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
