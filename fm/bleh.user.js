@@ -95268,6 +95268,65 @@ var bleh = (() => {
     });
   }
 
+  // src/components/profile/sub.tsx
+  function SubTextPair({ type, label, isText = true, value }) {
+    let icon2 = "";
+    switch (type) {
+      case "username":
+        icon2 = icons.username;
+        break;
+      case "pronouns":
+        icon2 = icons.pronouns;
+        break;
+      case "aka":
+        icon2 = icons.aka;
+        break;
+      case "created":
+        icon2 = icons.created;
+        break;
+      case "follow":
+        icon2 = icons.follow;
+        break;
+    }
+    return /* @__PURE__ */ jsx("dl", {
+      class: [
+        "sub-text-pair",
+        `sub-text-${type}`
+      ],
+      children: [
+        /* @__PURE__ */ jsx(SubTextLabel, {
+          icon: icon2,
+          text: label
+        }),
+        /* @__PURE__ */ jsx("dd", {
+          class: [
+            "sub-text-item",
+            !isText && "not-text"
+          ],
+          children: value
+        })
+      ]
+    });
+  }
+  function SubTextLabel({ icon: icon2, text: text4 }) {
+    const elem = /* @__PURE__ */ jsx("dt", {
+      class: "sub-text-label",
+      children: [
+        /* @__PURE__ */ jsx(Icon, {
+          name: icon2
+        }),
+        /* @__PURE__ */ jsx("span", {
+          class: "sub-text-label-sr",
+          children: text4
+        })
+      ]
+    });
+    hover_tooltip(elem, /* @__PURE__ */ jsx(Tooltip, {
+      children: text4
+    }));
+    return elem;
+  }
+
   // src/pages/profile/profile.tsx
   function bleh_profiles() {
     if (page.subpage == "obsessions_obsession") {
@@ -96660,62 +96719,47 @@ var bleh = (() => {
     render_sub_text(profile_sub_text, cache2.aka, cache2.created, cache2.username);
   }
   function render_sub_text(parent, aka, created, display_name) {
-    render(parent, html``);
+    parent.innerHTML = "";
     if (display_name) {
-      parent.appendChild(html.node`
-            <dl class="sub-text-pair">
-                ${sub_text_label("username", tl2(trans.username.name))}
-                <dd class="sub-text-item not-text">${page.name}</dd>
-            </dl>
-        `);
+      parent.appendChild(/* @__PURE__ */ jsx(SubTextPair, {
+        type: "username",
+        label: tl2(trans.username.name),
+        value: page.name
+      }));
     }
     if (aka) {
       const result = find_pronouns(aka);
       if (result.pronouns) {
-        parent.appendChild(html.node`
-                <dl class="sub-text-pair">
-                    ${sub_text_label("pronouns", tl2(trans.account_pronouns))}
-                    <dd class="sub-text-item">${result.pronouns}</dd>
-                </dl>
-            `);
+        parent.appendChild(/* @__PURE__ */ jsx(SubTextPair, {
+          type: "pronouns",
+          label: tl2(trans.account_pronouns),
+          value: result.pronouns
+        }));
       }
       if (result.text && result.text != page.name) {
-        parent.appendChild(html.node`
-                <dl class="sub-text-pair">
-                    ${sub_text_label("aka", tl2(trans.profile_title))}
-                    <dd class="sub-text-item">${result.text}</dd>
-                </dl>
-            `);
+        parent.appendChild(/* @__PURE__ */ jsx(SubTextPair, {
+          type: "aka",
+          label: tl2(trans.profile_title),
+          value: result.text
+        }));
       }
     }
     if (created) {
-      parent.appendChild(html.node`
-            <dl class="sub-text-pair">
-                ${sub_text_label("created", tl2(trans.account_creation))}
-                <dd class="sub-text-item not-text">${created}</dd>
-            </dl>
-        `);
+      parent.appendChild(/* @__PURE__ */ jsx(SubTextPair, {
+        type: "created",
+        label: tl2(trans.account_creation),
+        value: created,
+        isText: false
+      }));
     }
     if (page.state.follows_user) {
-      parent.appendChild(html.node`
-            <dl class="sub-text-pair sub-text-follow">
-                ${sub_text_label("follow", tl2(trans.following))}
-                <dd class="sub-text-item not-text">${tl2(trans.follows_you)}</dd>
-            </dl>
-        `);
+      parent.appendChild(/* @__PURE__ */ jsx(SubTextPair, {
+        type: "follow",
+        label: tl2(trans.following),
+        value: tl2(trans.follows_you),
+        isText: false
+      }));
     }
-  }
-  function sub_text_label(type, text4) {
-    const elem = html.node`
-        <dt class="sub-text-label" data-type=${type}>
-            <span class="bleh-icon" style="--icon: var(--mask)" />
-            <span class="sub-text-label-sr">${text4}</span>
-        </dt>
-    `;
-    tippy_esm_default(elem, {
-      content: text4
-    });
-    return elem;
   }
   function bleh_profile_events(no_events) {
     const selected_tab = page.structure.toolbar?.querySelector(".secondary-nav-item-link--active");
@@ -121347,7 +121391,7 @@ var bleh = (() => {
         date: "2026-07-30"
       }
     },
-    built_on: "2026-08-24T14:27:02.566Z"
+    built_on: "2026-08-24T15:45:18.690Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

@@ -63,8 +63,9 @@ import { PanelHead } from '@/components/text/head.tsx';
 import { icons } from '@/components/shared/icon.tsx';
 import { ActivityItem, ActivityList } from '@/components/activity/activity.tsx';
 import { PanelTop, SeeMore, ViewButtons } from '@/components/text/see_more.tsx';
-import { createRef } from 'jsx-dom';
+import { createRef, ReactElement } from 'jsx-dom';
 import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
+import { SubTextPair } from '@/components/profile/sub.tsx';
 
 export function bleh_profiles() {
 	// the obsessions page is a user subpage but works very differently
@@ -2049,72 +2050,69 @@ function parse_sub_text(profile_sub_text, name = page.name, cache) {
 	render_sub_text(profile_sub_text, cache.aka, cache.created, cache.username);
 }
 
-function render_sub_text(parent, aka, created, display_name) {
-	render(parent, html``);
+function render_sub_text(
+	parent: ReactElement,
+	aka?: string,
+	created?: string,
+	display_name?: string,
+) {
+	parent.innerHTML = '';
 
 	if (display_name) {
-		parent.appendChild(html.node`
-            <dl class="sub-text-pair">
-                ${sub_text_label('username', tl(trans.username.name))}
-                <dd class="sub-text-item not-text">${page.name}</dd>
-            </dl>
-        `);
+		parent.appendChild(
+			<SubTextPair
+				type='username'
+				label={tl(trans.username.name)}
+				value={page.name}
+			/>,
+		);
 	}
 
 	if (aka) {
 		const result = find_pronouns(aka);
 
 		if (result.pronouns) {
-			parent.appendChild(html.node`
-                <dl class="sub-text-pair">
-                    ${sub_text_label('pronouns', tl(trans.account_pronouns))}
-                    <dd class="sub-text-item">${result.pronouns}</dd>
-                </dl>
-            `);
+			parent.appendChild(
+				<SubTextPair
+					type='pronouns'
+					label={tl(trans.account_pronouns)}
+					value={result.pronouns}
+				/>,
+			);
 		}
 
 		if (result.text && result.text != page.name) {
-			parent.appendChild(html.node`
-                <dl class="sub-text-pair">
-                    ${sub_text_label('aka', tl(trans.profile_title))}
-                    <dd class="sub-text-item">${result.text}</dd>
-                </dl>
-            `);
+			parent.appendChild(
+				<SubTextPair
+					type='aka'
+					label={tl(trans.profile_title)}
+					value={result.text}
+				/>,
+			);
 		}
 	}
 
 	if (created) {
-		parent.appendChild(html.node`
-            <dl class="sub-text-pair">
-                ${sub_text_label('created', tl(trans.account_creation))}
-                <dd class="sub-text-item not-text">${created}</dd>
-            </dl>
-        `);
+		parent.appendChild(
+			<SubTextPair
+				type='created'
+				label={tl(trans.account_creation)}
+				value={created}
+				isText={false}
+			/>,
+		);
 	}
 
 	if (page.state.follows_user) {
-		parent.appendChild(html.node`
-            <dl class="sub-text-pair sub-text-follow">
-                ${sub_text_label('follow', tl(trans.following))}
-                <dd class="sub-text-item not-text">${tl(trans.follows_you)}</dd>
-            </dl>
-        `);
+		parent.appendChild(
+			<SubTextPair
+				type='follow'
+				label={tl(trans.following)}
+				value={tl(trans.follows_you)}
+				isText={false}
+			/>,
+		);
 	}
-}
-
-function sub_text_label(type, text) {
-	const elem = html.node`
-        <dt class="sub-text-label" data-type=${type}>
-            <span class="bleh-icon" style="--icon: var(--mask)" />
-            <span class="sub-text-label-sr">${text}</span>
-        </dt>
-    `;
-
-	tippy(elem, {
-		content: text,
-	});
-
-	return elem;
 }
 
 function bleh_profile_events(no_events) {
