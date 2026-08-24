@@ -56651,6 +56651,81 @@ var bleh = (() => {
     });
   }
 
+  // src/components/track/song_tag.tsx
+  function SongTags({ tags }) {
+    return /* @__PURE__ */ jsx("div", {
+      class: "track-preview-tags",
+      children: tags.map((tag) => /* @__PURE__ */ jsx(SongTag, {
+        tag
+      }))
+    });
+  }
+  function SongTag({ tag }) {
+    return /* @__PURE__ */ jsx("div", {
+      class: "feat",
+      "data-tag-type": tag.type,
+      "data-tag-group": tag.group,
+      children: tag.text
+    });
+  }
+
+  // src/components/track/preview.tsx
+  function TrackMenuPreview({ type = "track", image: image2, name, tags, artist, album, timestamp }) {
+    return /* @__PURE__ */ jsx("div", {
+      class: "track-preview",
+      children: [
+        /* @__PURE__ */ jsx("div", {
+          class: "track-preview-image",
+          children: /* @__PURE__ */ jsx("div", {
+            class: "inner-image",
+            children: image2 ? /* @__PURE__ */ jsx("img", {
+              src: image2,
+              alt: name
+            }) : /* @__PURE__ */ jsx("img", {
+              class: "missing-track"
+            })
+          })
+        }),
+        /* @__PURE__ */ jsx("div", {
+          class: "track-preview-info",
+          children: [
+            /* @__PURE__ */ jsx("h5", {
+              class: [
+                "track-preview-text",
+                "track-preview-title"
+              ],
+              children: name
+            }),
+            /* @__PURE__ */ jsx("p", {
+              class: [
+                "track-preview-text",
+                "track-preview-title"
+              ],
+              children: artist
+            }),
+            tags && /* @__PURE__ */ jsx(SongTags, {
+              tags
+            }),
+            type == "track" && album && /* @__PURE__ */ jsx("p", {
+              class: [
+                "track-preview-text",
+                "track-preview-album"
+              ],
+              children: album
+            }),
+            timestamp && /* @__PURE__ */ jsx("p", {
+              class: [
+                "track-preview-text",
+                "track-preview-timestamp"
+              ],
+              children: timestamp
+            })
+          ]
+        })
+      ]
+    });
+  }
+
   // src/components/music/track.tsx
   function patch_titles(search = page.structure.main) {
     if (page.subpage == "tags_overview") return;
@@ -56891,31 +56966,14 @@ var bleh = (() => {
                     `, song_artist_element.firstChild);
           }
           if (track_legacy_menu) {
-            track.preview = html.node`
-                        <div class="track-preview">
-                            <div class="track-preview-image">
-                                <div class="inner-image">
-                                    ${image2 ? html.node`<img src=${image2.src} alt=${formatted.corrected_title}>` : html.node`<img class="missing-track" alt="">`}
-                                </div>
-                            </div>
-                            <div class="track-preview-info">
-                                <h5 class="track-preview-text track-preview-title">${formatted.song_title}</h5>
-                                <p class="track-preview-text track-preview-artist">${song_artist_element.querySelector("a").textContent}</p>
-                                <div class="track-preview-tags">
-                                    ${formatted.song_tags.map((tag) => html.node`
-                                        <div class="feat" data-tag-type="${tag.type}" data-tag-group="${tag.group}">${tag.text}</div>
-                                    `)}
-                                </div>
-                                ${is_album ? "" : html.node`<p class="track-preview-text track-preview-album">${image2 && album_link ? correct_item_by_artist(image2.getAttribute("alt"), track_artist) : album ? album.textContent : ""}</p>`}
-                                ${track_timestamp && track_timestamp_contents ? html.node`<p class="track-preview-text track-preview-timestamp">${track_timestamp_contents}</p>` : ""}
-                                ${image2?.getAttribute("data-hoshino") ? html.node`
-                                            <div class="hoshino-marker">
-                                                <div class="bleh-icon" />
-                                            </div>
-                                        ` : ""}
-                            </div>
-                        </div>
-                    `;
+            track.preview = /* @__PURE__ */ jsx(TrackMenuPreview, {
+              image: image2?.src,
+              name: formatted.corrected_title,
+              artist: song_artist_element.querySelector("a")?.textContent,
+              tags: formatted.song_tags,
+              album: image2 && album_link ? correct_item_by_artist(image2.getAttribute("alt"), track_artist) : album ? album.textContent : void 0,
+              timestamp: track_timestamp_contents
+            });
           }
         } else if (useSettings.get("corrections")) {
           const song_artist_element2 = track.querySelector(".chartlist-artist a");
@@ -57015,9 +57073,7 @@ var bleh = (() => {
             console.info("more button", bulk_edit_button);
             const album_name = sanitise(image2 ? correct_item_by_artist(image2.getAttribute("alt"), track_artist) : album ? album.textContent : "");
             const menu_contents = /* @__PURE__ */ jsx(MenuContents, {
-              children: /* @__PURE__ */ jsx("p", {
-                children: "hai"
-              })
+              children: track.preview
             });
             menu_tooltip(more_button, menu_contents);
             context_menu_tooltip(track, menu_contents);
@@ -109934,48 +109990,94 @@ var bleh = (() => {
             <span class="label user-status-subscriber auth-badge">${tl2(trans.badges["user-status-subscriber"].name)}</span>
         `);
     }
-    const more_button = html.node`
-        <button class="btn masthead-nav-control chibi icon" data-type="more">
-            ${tl2(trans.more)}
-        </button>
-    `;
-    tippy_esm_default(more_button, {
-      content: more_button.textContent
+    const more_button = /* @__PURE__ */ jsx(Button, {
+      chibi: true,
+      className: "masthead-nav-control",
+      tooltip: tl2(trans.more),
+      children: [
+        /* @__PURE__ */ jsx(Icon, {
+          name: icons.more
+        }),
+        tl2(trans.more)
+      ]
     });
-    const more_menu = tippy_esm_default(more_button, {
-      content: html.node`
-            <a class="dropdown-menu-clickable-item colourful" data-type="discord" href="https://discord.gg/${discord}" target="_blank">
-                ${tl2(trans.join_discord)}
-            </a>
-            <button class="dropdown-menu-clickable-item sponsor colourful" data-type="sponsor" onclick=${() => sponsor()}>
-                ${tl2(trans.sponsor)}
-            </button>
-            <a class="dropdown-menu-clickable-item lotus colourful" href="https://github.com/katelyynn/lotus/issues/new/choose" target="_blank">
-                ${tl2(trans.suggest_correction)}
-            </a>
-            <div class="sep" />
-            <a class="dropdown-menu-clickable-item" data-type="update" href="${root}bleh/general">
-                ${tl2(trans.updates)}
-            </a>
-            <button class="dropdown-menu-clickable-item" data-menu-item="news" onclick=${() => news()}>
-                ${tl2(trans.news)}
-            </button>
-            <a class="dropdown-menu-clickable-item issues" href="https://github.com/katelyynn/bleh/issues" target="_blank">
-                ${tl2(trans.report_issue)}
-            </a>
-        `,
-      theme: "menu",
-      placement: "top",
-      interactive: true,
-      interactiveBorder: 10,
-      trigger: "click",
-      appendTo: document.body,
-      onShow(instance) {
-        instance.popper.addEventListener("click", (event3) => {
-          instance.hide();
-        });
-      }
-    });
+    menu_tooltip(more_button, /* @__PURE__ */ jsx(MenuContents, {
+      children: [
+        /* @__PURE__ */ jsx(Button, {
+          menu: true,
+          colourful: true,
+          accented: true,
+          href: `https://discord.gg/${discord}`,
+          external: true,
+          "data-type": "discord",
+          children: [
+            /* @__PURE__ */ jsx(Icon, {}),
+            tl2(trans.join_discord)
+          ]
+        }),
+        /* @__PURE__ */ jsx(Button, {
+          menu: true,
+          colourful: true,
+          accented: true,
+          className: "sponsor-related",
+          onClick: () => sponsor(),
+          children: [
+            /* @__PURE__ */ jsx(Icon, {
+              name: icons.sponsor
+            }),
+            tl2(trans.sponsor)
+          ]
+        }),
+        /* @__PURE__ */ jsx(Button, {
+          menu: true,
+          colourful: true,
+          accented: true,
+          href: "https://github.com/katelyynn/lotus/issues/new/choose",
+          external: true,
+          "data-type": "lotus",
+          children: [
+            /* @__PURE__ */ jsx(Icon, {
+              name: icons.lotus
+            }),
+            tl2(trans.suggest_correction)
+          ]
+        }),
+        /* @__PURE__ */ jsx("div", {
+          class: "sep"
+        }),
+        /* @__PURE__ */ jsx(Button, {
+          menu: true,
+          href: `${root}bleh/general`,
+          children: [
+            /* @__PURE__ */ jsx(Icon, {
+              name: icons.update
+            }),
+            tl2(trans.updates)
+          ]
+        }),
+        /* @__PURE__ */ jsx(Button, {
+          menu: true,
+          onClick: () => news(),
+          children: [
+            /* @__PURE__ */ jsx(Icon, {
+              name: icons.news
+            }),
+            tl2(trans.news)
+          ]
+        }),
+        /* @__PURE__ */ jsx(Button, {
+          menu: true,
+          href: "https://github.com/katelyynn/bleh/issues",
+          external: true,
+          children: [
+            /* @__PURE__ */ jsx(Icon, {
+              name: icons.issue
+            }),
+            tl2(trans.report_issue)
+          ]
+        })
+      ]
+    }));
     links.appendChild(more_button);
     const state = page.state.seasons;
     console.info("season", state);
@@ -120874,7 +120976,7 @@ var bleh = (() => {
         date: "2026-07-30"
       }
     },
-    built_on: "2026-08-24T19:16:48.404Z"
+    built_on: "2026-08-24T21:04:57.946Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

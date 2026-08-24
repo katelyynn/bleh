@@ -43,6 +43,7 @@ import {
 import { Button } from '@/components/button/button.tsx';
 import { Icon, icons } from '@/components/shared/icon.tsx';
 import { MenuContents } from '@/components/menu/menu.tsx';
+import { TrackMenuPreview } from '@/components/track/preview.tsx';
 
 export function patch_titles(search = page.structure.main) {
 	if (page.subpage == 'tags_overview') return;
@@ -468,65 +469,24 @@ export function patch_titles(search = page.structure.main) {
 				}
 
 				if (track_legacy_menu) {
-					track.preview = html.node`
-                        <div class="track-preview">
-                            <div class="track-preview-image">
-                                <div class="inner-image">
-                                    ${
-						image
-							? html
-								.node`<img src=${image.src} alt=${formatted.corrected_title}>`
-							: html.node`<img class="missing-track" alt="">`
-					}
-                                </div>
-                            </div>
-                            <div class="track-preview-info">
-                                <h5 class="track-preview-text track-preview-title">${formatted.song_title}</h5>
-                                <p class="track-preview-text track-preview-artist">${
-						song_artist_element.querySelector('a').textContent
-					}</p>
-                                <div class="track-preview-tags">
-                                    ${
-						formatted.song_tags.map(
-							(tag) =>
-								html.node`
-                                        <div class="feat" data-tag-type="${tag.type}" data-tag-group="${tag.group}">${tag.text}</div>
-                                    `,
-						)
-					}
-                                </div>
-                                ${
-						is_album ? '' : (
-							html.node`<p class="track-preview-text track-preview-album">${
-								image && album_link
-									? correct_item_by_artist(
-										image.getAttribute('alt'),
-										track_artist,
-									)
-									: album
-									? album.textContent
-									: ''
-							}</p>`
-						)
-					}
-                                ${
-						track_timestamp && track_timestamp_contents
-							? html
-								.node`<p class="track-preview-text track-preview-timestamp">${track_timestamp_contents}</p>`
-							: ''
-					}
-                                ${
-						image?.getAttribute('data-hoshino')
-							? html.node`
-                                            <div class="hoshino-marker">
-                                                <div class="bleh-icon" />
-                                            </div>
-                                        `
-							: ''
-					}
-                            </div>
-                        </div>
-                    `;
+					track.preview = (
+						<TrackMenuPreview
+							image={image?.src}
+							name={formatted.corrected_title}
+							artist={song_artist_element.querySelector('a')
+								?.textContent}
+							tags={formatted.song_tags}
+							album={(image && album_link)
+								? correct_item_by_artist(
+									image.getAttribute('alt'),
+									track_artist,
+								)
+								: album
+								? album.textContent
+								: undefined}
+							timestamp={track_timestamp_contents}
+						/>
+					);
 				}
 			} else if (useSettings.get('corrections')) {
 				const song_artist_element = track.querySelector(
@@ -803,7 +763,7 @@ export function patch_titles(search = page.structure.main) {
 
 					const menu_contents = (
 						<MenuContents>
-							<p>hai</p>
+							{track.preview}
 						</MenuContents>
 					);
 

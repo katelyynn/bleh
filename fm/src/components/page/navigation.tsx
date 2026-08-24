@@ -53,6 +53,8 @@ import {
 	ButtonCombo,
 	ButtonComboSeparator,
 } from '@/components/button/button.tsx';
+import { menu_tooltip } from '@/components/shared/tooltips.tsx';
+import { MenuContents } from '@/components/menu/menu.tsx';
 
 export function update_branding_type(state = settings.branding_type) {
 	if (state == 'bleh') {
@@ -437,53 +439,67 @@ export function append_nav() {
 
     links.appendChild(quick_switcher);*/
 
-	const more_button = html.node`
-        <button class="btn masthead-nav-control chibi icon" data-type="more">
-            ${tl(trans.more)}
-        </button>
-    `;
+	const more_button = (
+		<Button chibi className='masthead-nav-control' tooltip={tl(trans.more)}>
+			<Icon name={icons.more} />
+			{tl(trans.more)}
+		</Button>
+	);
 
-	tippy(more_button, {
-		content: more_button.textContent,
-	});
-
-	const more_menu = tippy(more_button, {
-		content: html.node`
-            <a class="dropdown-menu-clickable-item colourful" data-type="discord" href="https://discord.gg/${discord}" target="_blank">
-                ${tl(trans.join_discord)}
-            </a>
-            <button class="dropdown-menu-clickable-item sponsor colourful" data-type="sponsor" onclick=${() =>
-			sponsor()}>
-                ${tl(trans.sponsor)}
-            </button>
-            <a class="dropdown-menu-clickable-item lotus colourful" href="https://github.com/katelyynn/lotus/issues/new/choose" target="_blank">
-                ${tl(trans.suggest_correction)}
-            </a>
-            <div class="sep" />
-            <a class="dropdown-menu-clickable-item" data-type="update" href="${root}bleh/general">
-                ${tl(trans.updates)}
-            </a>
-            <button class="dropdown-menu-clickable-item" data-menu-item="news" onclick=${() =>
-			news()}>
-                ${tl(trans.news)}
-            </button>
-            <a class="dropdown-menu-clickable-item issues" href="https://github.com/katelyynn/bleh/issues" target="_blank">
-                ${tl(trans.report_issue)}
-            </a>
-        `,
-		theme: 'menu',
-		placement: 'top',
-		interactive: true,
-		interactiveBorder: 10,
-		trigger: 'click',
-		appendTo: document.body,
-
-		onShow(instance) {
-			instance.popper.addEventListener('click', (event) => {
-				instance.hide();
-			});
-		},
-	});
+	menu_tooltip(
+		more_button,
+		<MenuContents>
+			<Button
+				menu
+				colourful
+				accented
+				href={`https://discord.gg/${discord}`}
+				external
+				data-type='discord'
+			>
+				<Icon />
+				{tl(trans.join_discord)}
+			</Button>
+			<Button
+				menu
+				colourful
+				accented
+				className='sponsor-related'
+				onClick={() => sponsor()}
+			>
+				<Icon name={icons.sponsor} />
+				{tl(trans.sponsor)}
+			</Button>
+			<Button
+				menu
+				colourful
+				accented
+				href='https://github.com/katelyynn/lotus/issues/new/choose'
+				external
+				data-type='lotus'
+			>
+				<Icon name={icons.lotus} />
+				{tl(trans.suggest_correction)}
+			</Button>
+			<div class='sep' />
+			<Button menu href={`${root}bleh/general`}>
+				<Icon name={icons.update} />
+				{tl(trans.updates)}
+			</Button>
+			<Button menu onClick={() => news()}>
+				<Icon name={icons.news} />
+				{tl(trans.news)}
+			</Button>
+			<Button
+				menu
+				href='https://github.com/katelyynn/bleh/issues'
+				external
+			>
+				<Icon name={icons.issue} />
+				{tl(trans.report_issue)}
+			</Button>
+		</MenuContents>,
+	);
 
 	links.appendChild(more_button);
 
