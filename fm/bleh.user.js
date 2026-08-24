@@ -54848,908 +54848,19 @@ var bleh = (() => {
     update_inbuilt_select(id, select2.value);
   };
 
-  // src/components/profile/profile_shortcut.js
-  unsafeWindow._open_profile_shortcut_window = function() {
-    open_profile_shortcut_window();
-  };
-  function open_profile_shortcut_window() {
-    const modal = dialog({
-      id: "profile_shortcut",
-      title: tl2(trans.profile_shortcut.name),
-      body: html.node`
-            ${setting({
-        id: "profile_shortcut",
-        text: false,
-        focus: true,
-        standalone: true
-      })}
-        `
-    });
-    modal.querySelector("#text-profile_shortcut").focus();
-  }
-  unsafeWindow._other_listener = function(id) {
-    other_listener(id);
-  };
-  function other_listener(id) {
-    let input2;
-    let submit;
-    dialog({
-      id: "other_listener",
-      title: tl2(trans.view_others_library),
-      body: html.node`
-        <div class="setting standalone" data-type="text">
-            <div class="avatar-container">
-                <div class="avatar-inner">
-                    <img class="missing-avatar">
-                </div>
-            </div>
-            <div class="input-container content-form">
-                <input type="text" maxlength="40" id="text-profile" ref=${(el) => input2 = el} placeholder="${tl2(trans.enter_username)}">
-                <button class="btn chibi icon primary submit" ref=${(el) => submit = el} onclick=${() => {
-        let name = input2.value;
-        let link = id;
-        dialog_rm({
-          id: "other_listener"
-        });
-        window.location.href = `${root}user/${name}/library/music/${link}`;
-      }}>${tl2(trans.done)}</button>
-            </div>
-        </div>
-        `
-    });
-    input2.addEventListener("keydown", (event3) => {
-      if (event3.keyCode === 13) {
-        event3.preventDefault();
-        submit.click();
-      }
-    });
-    tippy_esm_default(submit, {
-      content: tl2(trans.save)
-    });
-    input2.focus();
-  }
-  unsafeWindow._save_profile_shortcut = function() {
-    const profile_name = document.getElementById("text-profile_shortcut").value;
-    const profile_img = document.getElementById("avatar-profile_shortcut");
-    if (profile_name == "" || profile_name == auth.name) {
-      localStorage.removeItem("bleh_profile_shortcut_avi");
-      document.getElementById("avatar_src-profile_shortcut").setAttribute("src", "");
-      save_setting("profile_shortcut", "");
-      return;
-    }
-    profile_img.classList.add("requesting");
-    fetch(`${root}user/${profile_name}/tags`).then(function(response) {
-      console.log("returned", response, response.text);
-      return response.text();
-    }).then(function(html3) {
-      const doc = new DOMParser().parseFromString(html3, "text/html");
-      console.log("DOC", doc);
-      profile_img.classList.remove("requesting");
-      try {
-        const avatar_src = doc.querySelector(".header-avatar-inner-wrap img").getAttribute("src");
-        set_storage("bleh_profile_shortcut_avi", avatar_src);
-        document.getElementById("avatar_src-profile_shortcut").setAttribute("src", avatar_src);
-        notify({
-          id: "profile_shortcut_saved",
-          title: tl2(trans.profile_shortcut.name),
-          body: tl2(trans.profile_shortcut.linked).replace(
-            "{u}",
-            profile_name
-          ),
-          icon: "icon-16-profile-shortcut"
-        });
-        save_setting("profile_shortcut", profile_name);
-      } catch (e5) {
-        notify({
-          id: "profile_shortcut_saved",
-          title: tl2(trans.profile_shortcut.name),
-          body: tl2(trans.failed_to_find_profile),
-          type: "error"
-        });
-        localStorage.removeItem("bleh_profile_shortcut_avi");
-        document.getElementById("avatar_src-profile_shortcut").setAttribute("src", "");
-      }
-    });
-  };
-
-  // src/components/music/scrobble.ts
-  function submit_scrobble({ pre_track = "", pre_album = "", pre_artist = "", pre_album_artist = "", pre_timestamp = 0, func, can_api } = {}) {
-    if (!can_api) {
-      can_api = localStorage.getItem("bleh_auth") && localStorage.getItem("bleh_auth_valid") === "true";
-    }
-    if (!can_api) {
-      window.location.href = `${root}bleh/general?setting=api`;
-      return;
-    }
-    const random = random_list[Math.floor(Math.random() * random_list.length)];
-    let track;
-    let album;
-    let artist;
-    let album_artist;
-    let use_current;
-    let date;
-    let create_scrobble;
-    const max_date = /* @__PURE__ */ new Date();
-    max_date.setDate(max_date.getDate() + 1);
-    const pre_existing_date = pre_timestamp != 0;
-    log("requesting dialog", "submit scrobble", "info", {
-      pre_track,
-      pre_album,
-      pre_artist,
-      pre_album_artist,
-      pre_timestamp,
-      func,
-      can_api
-    });
-    dialog({
-      id: "submit_scrobble",
-      title: tl2(trans.new_scrobble),
-      body: html.node`
-            <div class="new-scrobble-form">
-                <div class="form-combo">
-                    <div class="form-inner">
-                        <p class="generic-label">${tl2(trans.track)}</p>
-                        ${track = input({
-        type: "text",
-        value: pre_track,
-        placeholder: tl2(trans.example, {
-          v: random.track
-        }),
-        warn_if_empty: true
-      })}
-                        <p class="generic-label">${tl2(trans.album)}</p>
-                        ${album = input({
-        type: "text",
-        value: pre_album,
-        placeholder: tl2(trans.example, {
-          v: random.album
-        })
-      })}
-                    </div>
-                    <div class="form-actions">
-                        ${() => {
-        const btn = html.node`
-                                <button class="btn chibi icon subtle" data-type="switch" onclick=${() => {
-          const track_val = track.value;
-          const album_val = album.value;
-          if (!track_val && !album_val) return;
-          track.value = album_val;
-          album.value = track_val;
-        }}>
-                                    ${tl2(trans.switch)}
-                                </button>
-                            `;
-        tippy_esm_default(btn, {
-          content: btn.textContent
-        });
-        return btn;
-      }}
-                    </div>
-                </div>
-                <div class="form-combo">
-                    <div class="form-inner">
-                        <p class="generic-label">${tl2(trans.artist)}</p>
-                        ${artist = input({
-        type: "text",
-        value: pre_artist,
-        placeholder: tl2(trans.example, {
-          v: random.artist
-        }),
-        warn_if_empty: true
-      })}
-                        <p class="generic-label">${tl2(trans.album_artist)}</p>
-                        ${album_artist = input({
-        type: "text",
-        value: pre_album_artist,
-        placeholder: tl2(trans.example, {
-          v: random.album_artist
-        })
-      })}
-                    </div>
-                    <div class="form-actions">
-                        ${() => {
-        const btn = html.node`
-                                <button class="btn chibi icon subtle" data-type="switch" onclick=${() => {
-          const artist_val = artist.value;
-          const album_artist_val = album_artist.value;
-          if (!artist_val && !album_artist_val) return;
-          artist.value = album_artist_val;
-          album_artist.value = artist_val;
-        }}>
-                                    ${tl2(trans.switch)}
-                                </button>
-                            `;
-        tippy_esm_default(btn, {
-          content: btn.textContent
-        });
-        return btn;
-      }}
-                    </div>
-                </div>
-                <p class="generic-label">${tl2(trans.time)}</p>
-                <div class="toggle-and-time">
-                    ${use_current = toggle({
-        value: !pre_existing_date,
-        type: "checkbox",
-        title: tl2(trans.use_current_time),
-        func: (state) => {
-          date.disabled(state);
-        }
-      })}
-                    ${date = input({
-        type: "date",
-        value: pre_existing_date ? pre_timestamp : null,
-        max: `${max_date.getFullYear()}-${pad2(max_date.getMonth() + 1)}-${pad2(max_date.getDate())}`,
-        disabled: !pre_existing_date,
-        value_in_iso: typeof pre_timestamp == "number"
-      })}
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="see-more cancel left-icon" onclick=${() => dialog_rm({
-        id: "submit_scrobble"
-      })}>
-                    ${tl2(trans.cancel)}
-                </button>
-                <div class="fill" />
-                <div class="button-group extra">
-                    ${setting({
-        id: "auto_close_scrobble_modal",
-        standalone: true
-      })}
-                    <button class="btn primary icon" data-type="add" ref=${(el) => create_scrobble = el} onclick=${async () => {
-        if (track.value == "" || artist.value == "") {
-          notify({
-            id: "submit_scrobble",
-            title: tl2(trans.new_scrobble),
-            body: tl2(trans.missing_fields),
-            type: "error"
-          });
-          return;
-        }
-        track.disabled(true);
-        album.disabled(true);
-        artist.disabled(true);
-        album_artist.disabled(true);
-        use_current.disabled(true);
-        date.disabled(true);
-        create_scrobble.disabled = true;
-        if (album.value != "" && album_artist.value == "") {
-          album_artist.value = artist.value;
-        }
-        const params = {
-          sk: localStorage.getItem("bleh_auth"),
-          artist: artist.value,
-          track: track.value,
-          timestamp: use_current.checked() ? DateTime.now().toUnixInteger() : Math.floor(date.value / 1e3)
-        };
-        if (album.value != "") params.album = album.value;
-        if (album_artist.value != "") {
-          params.albumArtist = album_artist.value;
-        }
-        const res = await fetch("https://jufufu.katelyn.moe/api/lastfm", {
-          method: "POST",
-          headers: {
-            "content-type": "application/json"
-          },
-          body: JSON.stringify({
-            method: "track.scrobble",
-            params
-          })
-        });
-        const json = await res.json();
-        log("received response", "submit scrobble", "info", {
-          result: json
-        });
-        function re_enable() {
-          track.disabled(false);
-          album.disabled(false);
-          artist.disabled(false);
-          album_artist.disabled(false);
-          use_current.disabled(false);
-          date.disabled(false);
-          create_scrobble.disabled = false;
-        }
-        if (json.error) {
-          log("error", "submit scrobble", "error");
-          notify({
-            id: "submit_scrobble",
-            title: tl2(trans.scrobble_failed),
-            body: json.message,
-            type: "error",
-            persist: true
-          });
-          re_enable();
-          return;
-        }
-        const error_code = json.scrobbles.scrobble.ignoredMessage.code;
-        if (error_code > 0) {
-          log("error", "submit scrobble", "error", {
-            error_code
-          });
-          notify({
-            id: "submit_scrobble",
-            title: tl2(trans.scrobble_failed),
-            body: tl2(trans.scrobble_error_codes[error_code]),
-            type: "error",
-            persist: true
-          });
-          re_enable();
-          return;
-        }
-        notify({
-          id: "submit_scrobble",
-          title: tl2(trans.new_scrobble),
-          body: params.track,
-          type: "success"
-        });
-        if (settings.auto_close_scrobble_modal) {
-          dialog_rm({
-            id: "submit_scrobble"
-          });
-        } else {
-          dialog_rm({
-            id: "submit_scrobble"
-          });
-          submit_scrobble({
-            pre_track,
-            pre_album,
-            pre_artist,
-            pre_album_artist,
-            pre_timestamp,
-            func,
-            can_api
-          });
-        }
-        if (func) func();
-      }}>
-                        ${tl2(trans.new)}
-                    </button>
-                </div>
-            </div>
-        `
-    });
-  }
-
-  // src/components/page/structure.js
-  function checkup_page_structure(is_subpage = false, header = null) {
-    if (document.body.style.getPropertyValue("--hue-album")) {
-      page.state.replaced_accent = false;
-      setTimeout(() => {
-        if (!page.state.replaced_accent) {
-          document.body.style.removeProperty("--hue-album");
-          document.body.style.removeProperty("--sat-album");
-          document.body.style.removeProperty("--lit-album");
-          chart_reflow();
-          log(
-            "removed previous colours as accent hasnt been refreshed",
-            "page structure"
-          );
-        }
-      }, 100);
-    }
-    const params = new URLSearchParams(document.location.search);
-    page.requested = {
-      tab: params.get("tab"),
-      page: params.get("page"),
-      token: params.get("token"),
-      collage: params.get("collage"),
-      subject: params.get("subject")
-    };
-    if (!page.structure.container || !document.body.contains(page.structure.container)) {
-      log("page missing container, creating", "page structure");
-      page.structure.container = document.createElement("div");
-      page.structure.container.classList.add("page-content", "container");
-      const container_full_width = document.body.querySelector(
-        ".container--full-width"
-      );
-      if (container_full_width) {
-        container_full_width.insertBefore(
-          page.structure.container,
-          container_full_width.firstElementChild
-        );
-      } else {
-        document.body.querySelector(".adaptive-skin-container").appendChild(page.structure.container);
-      }
-    }
-    page.structure.container.setAttribute("data-assigned", "true");
-    const other_container = document.body.querySelector(
-      ".page-content.container:not([data-assigned])"
-    );
-    if (other_container) other_container.style.setProperty("display", "none");
-    if (!page.structure.row || !document.body.contains(page.structure.row)) {
-      log("page missing row, creating", "page structure");
-      page.structure.row = html.node`
-            <div class="row" />
-        `;
-      page.structure.container.insertBefore(
-        page.structure.row,
-        page.structure.container.firstElementChild
-      );
-    }
-    if (page.structure.row.classList.contains("buffer-4")) {
-      page.structure.row.classList = "row col-main-is-primary";
-    }
-    page.structure.row.setAttribute("data-assigned", "true");
-    if (!page.structure.main || !document.body.contains(page.structure.main)) {
-      log("page missing main, creating", "page structure");
-      page.structure.main = html.node`
-            <div class="col-main" />
-        `;
-      page.structure.row.appendChild(page.structure.main);
-    }
-    page.structure.main.setAttribute("data-assigned", "true");
-    const other_main = page.structure.row.querySelector(
-      ".col-main.hidden-xs:not([data-assigned])"
-    );
-    if (other_main) {
-      other_main.remove();
-    }
-    if (!page.structure.side || !document.body.contains(page.structure.side)) {
-      log("page missing side", "page structure");
-      page.structure.side = page.structure.row.querySelector(".col-sidebar");
-      if (!page.structure.side) {
-        log("page missing side, creating", "page structure");
-        page.structure.side = html.node`
-                <div class="col-sidebar" />
-            `;
-        page.structure.row.appendChild(page.structure.side);
-      }
-    }
-    if (ff("short")) {
-      page.structure.content = html.node`
-            <main class="content" data-lacrimosa=${ff("lacrimosa")}>
-                <div class="content-main">
-                    ${page.structure.main}
-                </div>
-                <div class="content-side">
-                    ${page.structure.side}
-                </div>
-            </main>
-        `;
-      page.structure.row.appendChild(page.structure.content);
-      page.structure.main?.classList.add("in-content-view");
-      page.structure.side?.classList.add("in-content-view");
-      page.structure.main?.setAttribute("data-lacrimosa", ff("lacrimosa"));
-      page.structure.side?.setAttribute("data-lacrimosa", ff("lacrimosa"));
-      single_column();
-    }
-    log("finished", "page structure");
-    if (ff("refreshed_music_nav") && header) {
-      let navlist = header.querySelector(".navlist");
-      if (navlist) {
-        navlist.classList.add("redesigned-navigation");
-        page.structure.container.insertBefore(
-          navlist,
-          page.structure.container.firstElementChild
-        );
-        page.structure.nav = navlist;
-        let overview = page.structure.nav.querySelector(
-          ".secondary-nav-item--overview a"
-        );
-        if (overview) {
-          const href = overview.getAttribute("href").replace(root, "");
-          if (href == "settings" || href == "inbox" || href == "charts") {
-            overview = null;
-          }
-        }
-        if (overview) overview.textContent = tl2(trans.home);
-      }
-      if (is_subpage) {
-        let content_top = document.body.querySelector(".content-top");
-        if (content_top) {
-          content_top.classList.add("redesigned-content-top");
-          page.structure.content_top = content_top;
-          if (content_top.querySelector(".content-top-back-link")) {
-            content_top.style.setProperty("display", "none");
-          }
-          const content_top_nav = content_top.querySelector(".navlist");
-          if (!content_top_nav && ff("beret")) {
-            content_top.style.setProperty("display", "none");
-          }
-          if (content_top.style.length > 0) {
-            page.structure.content.after(content_top);
-          } else {
-            page.structure.row.insertBefore(
-              content_top,
-              page.structure.content
-            );
-          }
-        } else {
-          let subpage_title = page.structure.main.querySelector(
-            ":scope > .subpage-title"
-          );
-          if (!subpage_title) {
-            subpage_title = page.structure.main.querySelector(
-              ":scope > .section-controls > .subpage-title"
-            );
-          }
-          if (!subpage_title) {
-            subpage_title = page.structure.main.querySelector(
-              ":scope > section:first-child .section-controls > .subpage-title"
-            );
-          }
-          if (subpage_title) {
-            content_top = html.node`
-                        <div class="content-top redesigned-content-top">
-                            <div class="content-top-inner-wrap">
-                                <div class="container content-top-lower">
-                                    <h1 class="content-top-header">${subpage_title.textContent.trim()}</h1>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-            page.structure.content_top = content_top;
-            content_top.style.setProperty("display", "none");
-            if (ff("short")) {
-              page.structure.row.appendChild(content_top);
-            } else navlist.after(content_top);
-            try {
-              page.structure.main.removeChild(subpage_title);
-            } catch (e5) {
-            }
-          }
-          navlist = page.structure.main.querySelector(".navlist");
-          if (navlist) {
-            navlist.classList.add("redesigned-navigation");
-            if (ff("mualani")) {
-              let toolbar = html.node`
-                            <div class="toolbar">
-                                ${navlist}
-                            </div>
-                        `;
-              page.structure.row.insertBefore(
-                toolbar,
-                page.structure.row.firstElementChild
-              );
-            } else {
-              page.structure.row.insertBefore(
-                navlist,
-                page.structure.content
-              );
-            }
-          }
-          let btn_add = page.structure.main.querySelector(
-            ":scope > .btn-add"
-          );
-          if (!btn_add) {
-            btn_add = page.structure.main.querySelector(
-              ":scope > section:first-child .btn-add"
-            );
-          }
-          if (btn_add) {
-            const side_actions = html.node`
-                        <section class="side-actions">
-                            ${btn_add}
-                        </section>
-                    `;
-            btn_add.classList = "btn side-action icon-mask";
-            btn_add.setAttribute("data-type", "add");
-            btn_add.textContent = tl2(trans.add);
-            if (!page.mobile) {
-              page.structure.side.insertBefore(
-                side_actions,
-                page.structure.side.firstElementChild
-              );
-            } else {
-              page.structure.main.insertBefore(
-                side_actions,
-                page.structure.main.firstElementChild
-              );
-            }
-          }
-          const radio2 = page.structure.main.querySelector(
-            ":scope > .section-controls > .section-playlink"
-          );
-          if (radio2) {
-            const side_actions = html.node`
-                        <section class="side-actions">
-                            ${radio2}
-                        </section>
-                    `;
-            radio2.classList = "btn stationlink js-playlink-station radio-button side-action icon-mask";
-            const type = radio2.getAttribute("data-analytics-label");
-            render(
-              radio2,
-              html`
-							<h3 class="sub-text">${tl2(trans.radio)}</h3>
-							<h4>${tl2(trans[type])}</h4>
-						`
-            );
-            radio2.removeAttribute("title");
-            if (!page.mobile) {
-              page.structure.side.insertBefore(
-                side_actions,
-                page.structure.side.firstElementChild
-              );
-            } else {
-              page.structure.main.insertBefore(
-                side_actions,
-                page.structure.main.firstElementChild
-              );
-            }
-          }
-        }
-        const similar_artists = page.structure.side.querySelector(
-          ".similar-items-sidebar"
-        );
-        if (similar_artists) {
-          similar_artists.parentElement.classList.add(
-            "similar-artists-panel"
-          );
-          page.structure.side.removeChild(similar_artists.parentElement);
-        }
-      } else {
-        const content_top = document.body.querySelector(".content-top");
-        if (content_top) content_top.classList.add("legacy-content-top");
-      }
-    }
-  }
-  function checkup_nav() {
-    if (!ff("short")) return;
-    if (page.structure.nav) {
-      page.structure.nav.setAttribute("data-assigned", "true");
-    }
-    const navlists = page.structure.container.querySelectorAll(
-      ":scope > .navlist"
-    );
-    navlists.forEach((nav, index3) => {
-      console.info(index3);
-      if (index3 < 1) return;
-      if (ff("mualani")) {
-        const toolbar = html.node`
-                <div class="toolbar">
-                    ${nav}
-                </div>
-            `;
-        page.structure.row.insertBefore(toolbar, page.structure.content);
-        page.structure.toolbar = toolbar;
-      } else {
-        page.structure.row.insertBefore(nav, page.structure.content);
-      }
-    });
-  }
-  function convert_to_toolbar() {
-    const nav = page.structure.content_top.querySelector(".navlist");
-    if (!nav) return;
-    nav.classList.add("redesigned-navigation");
-    page.structure.toolbar = html.node`
-        <div class="toolbar">
-            ${nav}
-        </div>
-    `;
-    page.structure.row.insertBefore(
-      page.structure.toolbar,
-      page.structure.row.firstChild
-    );
-    page.structure.content_top.style.display = "none";
-  }
-  function single_column() {
-    if ([
-      "following",
-      "followers",
-      "neighbours",
-      "obsessions_set",
-      "obsessions_overview",
-      "obsessions_obsession",
-      "loved",
-      "subscription_automatic-edits_tracks",
-      "subscription_automatic-edits_albums",
-      "playlists_playlists",
-      "listeners_overview",
-      "auth"
-    ].includes(page.subpage) || [
-      "charts",
-      "inbox",
-      "overview",
-      "releases",
-      "recommended",
-      "bookmarks"
-    ].includes(page.type) || page.subpage.startsWith("event_attendance_")) {
-      page.structure.content.classList.add("single-column");
-    }
-  }
-
-  // src/components/music/header.tsx
-  function page_header_avatar(url) {
-    const supports_gallery = [
-      "artist",
-      "album"
-    ].includes(page.type);
-    let link = sanitise(page.name);
-    if (page.type != "artist") {
-      link = `${sanitise(page.sister)}/${sanitise(page.name)}`;
-    }
-    let action = "expand";
-    if (supports_gallery) {
-      action = useSettings.get("default_avatar_action");
-    }
-    let image2;
-    const elem = /* @__PURE__ */ jsx("div", {
-      class: [
-        "page-header-avatar",
-        "colourful"
-      ],
-      onClick: () => {
-        if (!url) return;
-        if (action == "expand") {
-          expand_avatar(avatar(url, "ar0"));
-        } else if (action == "gallery") {
-          open(`${root}music/${redirect()}${link}/+images`);
-        }
-      },
-      children: url ? /* @__PURE__ */ jsx("img", {
-        src: avatar(url, "avatar300s"),
-        crossOrigin: "anonymous",
-        ref: (el) => image2 = el
-      }) : /* @__PURE__ */ jsx("img", {
-        class: `missing-${page.type}`,
-        crossOrigin: "anonymous",
-        ref: (el) => image2 = el
-      })
-    });
-    Object.defineProperty(elem, "image", {
-      get() {
-        return image2;
-      }
-    });
-    Object.defineProperty(elem, "src", {
-      get() {
-        return url;
-      }
-    });
-    const menu = tippy_esm_default(elem, {
-      theme: "context-menu",
-      content: /* @__PURE__ */ jsx(Fragment, {
-        children: [
-          url ? /* @__PURE__ */ jsx("button", {
-            type: "button",
-            class: "dropdown-menu-clickable-item",
-            "data-type": "expand",
-            onClick: () => expand_avatar(avatar(url, "ar0")),
-            children: tl2(trans.expand)
-          }) : "",
-          supports_gallery ? /* @__PURE__ */ jsx(Fragment, {
-            children: [
-              /* @__PURE__ */ jsx("a", {
-                class: "dropdown-menu-clickable-item",
-                "data-type": "gallery",
-                href: `${root}music/${redirect()}${link}/+images`,
-                children: tl2(trans.photos)
-              }),
-              /* @__PURE__ */ jsx("div", {
-                class: "sep"
-              }),
-              /* @__PURE__ */ jsx("a", {
-                class: "dropdown-menu-clickable-item",
-                href: `${root}bleh/customise`,
-                "data-menu-item": "settings",
-                children: tl2(trans.settings)
-              })
-            ]
-          }) : ""
-        ]
-      }),
-      placement: "right-start",
-      trigger: "manual",
-      interactive: true,
-      interactiveBorder: 10,
-      offset: [
-        0,
-        0
-      ],
-      appendTo: document.body,
-      onShow(instance) {
-        instance.popper.addEventListener("click", (event3) => {
-          instance.hide();
-        });
-      }
-    });
-    register_menu(elem, menu);
-    return elem;
-  }
-  function page_header_disc() {
-    if (!useSettings.get("show_disc_image")) return;
-    return /* @__PURE__ */ jsx("div", {
-      class: "page-header-disc"
-    });
-  }
-  function artist_title(header = document.body) {
-    const title = header.querySelector(".header-new-title");
-    title.classList.add("page-header-title");
-    let title_text = title.textContent.trim();
-    let has_multi = false;
-    if (title_text.includes(", ") || title_text.includes("&")) has_multi = true;
-    page.multi = false;
-    if (!has_multi) {
-      if (!useSettings.get("corrections")) {
-        title.textContent = romanise(title_text);
-        return;
-      }
-      title.textContent = romanise(correct_artist(title_text, true));
-    } else {
-      title_text = title_text.replaceAll("&", ";").replaceAll(", ", ";").replaceAll(";;", ";");
-      for (const [key, value] of Object.entries(combined_artists)) {
-        if (key == "version") continue;
-        const escaped = key.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-        const regex = new RegExp(escaped, "gi");
-        title_text = title_text.replace(regex, value);
-      }
-      page.multi = true;
-      title.innerHTML = "";
-      let split = title_text.split(";");
-      if (split.length < 2) {
-        page.multi = false;
-        if (!useSettings.get("corrections")) return;
-        title.textContent = romanise(correct_artist(title_text, true));
-        return;
-      }
-      split.forEach((artist, index3) => {
-        if (index3 > 0) title.innerHTML += ",";
-        artist = artist.trim();
-        title.appendChild(/* @__PURE__ */ jsx("a", {
-          class: "multi-artist-part",
-          href: `${root}music/${redirect()}${sanitise(artist)}`,
-          children: romanise(correct_artist(artist))
-        }));
-      });
-    }
-  }
-  function page_header_title(header = document.body) {
-    page.suggest = null;
-    if (!useSettings.get("corrections") && !useSettings.get("format_guest_features") && !page.multi) {
-      return;
-    }
-    page.corrected = false;
-    const track_title = header.querySelector(".header-new-title");
-    const track_artist = header.querySelector(".header-new-crumb span");
-    if (!track_title) return;
-    track_title.classList.add("page-header-title");
-    if (track_artist) {
-      if (artist_corrections.hasOwnProperty(track_artist.textContent)) {
-        const corrected_artist = artist_corrections[track_artist.textContent];
-        log(`corrected ${track_artist.textContent} as ${corrected_artist}`, "lotus");
-        track_artist.parentElement.setAttribute("href", `${root}music/${redirect()}${sanitise(track_artist.textContent)}`);
-        track_artist.textContent = romanise(corrected_artist);
-      } else {
-        track_artist.parentElement.setAttribute("href", `${root}music/${redirect()}${sanitise(track_artist.textContent)}`);
-        track_artist.textContent = romanise(track_artist.textContent);
-      }
-    }
-    if (useSettings.get("format_guest_features")) {
-      try {
-        if (!track_title.hasAttribute("data-kate-processed")) {
-          track_title.setAttribute("data-kate-processed", "true");
-          const formatted = name_includes(track_title.textContent, track_artist.textContent);
-          page.corrected = formatted.corrected_title != track_title.textContent;
-          render(track_title, smart_title(formatted.song_title, formatted.song_tags, true));
-          if (formatted.song_tags.some((tag) => tag.group == "form")) {
-            page.suggest = sanitise(formatted.song_title.trim());
-          }
-          const song_artist_element = document.body.querySelector('span[itemprop="byArtist"]');
-          const song_guests = formatted.song_guests;
-          page.sister_others = song_guests;
-          song_artist_element.innerHTML = song_artist_element.innerHTML.trim();
-          for (const guest in song_guests) {
-            song_artist_element.innerHTML = `${song_artist_element.innerHTML},`;
-            song_artist_element.appendChild(html.node`
-                    <a class="header-new-crumb" href="${root}music/${redirect()}${sanitise(song_guests[guest])}">${romanise(song_guests[guest])}</a>
-                `);
-          }
-        }
-      } catch (e5) {
-      }
-    } else {
-      if (!track_title.hasAttribute("data-kate-processed")) {
-        track_title.setAttribute("data-kate-processed", "true");
-        const corrected_title = correct_item_by_artist(track_title.textContent, track_artist.textContent);
-        log(`corrected ${track_title.textContent} by ${track_artist.textContent} as ${corrected_title}`, "lotus");
-        if (corrected_title != track_title.textContent) {
-          page.corrected = true;
-        }
-        track_title.textContent = romanise(corrected_title);
-      }
-    }
+  // src/components/track/bar.tsx
+  function count_bar(bar) {
+    const season = page.state.seasons.current?.id || "none";
+    const v2 = useSettings.get("count_bar_style") == "minimal";
+    const link = bar.querySelector(".chartlist-count-bar-link");
+    if (!link) return;
+    const slug = link.querySelector(".chartlist-count-bar-slug");
+    const value = link.querySelector(".chartlist-count-bar-value");
+    bar.setAttribute("data-season", season);
+    bar.classList.toggle("v2", v2);
+    link.classList.toggle("v2", v2);
+    slug?.classList.toggle("v2", v2);
+    value?.classList.toggle("v2", v2);
   }
 
   // node_modules/.deno/@floating-ui+utils@0.2.12/node_modules/@floating-ui/utils/dist/floating-ui.utils.mjs
@@ -57378,6 +56489,32 @@ var bleh = (() => {
       ...config
     });
     host.addEventListener("click", () => {
+      const listener = ({ target: t2 }) => {
+        const target = t2;
+        if (target && target instanceof HTMLElement && target != tooltip.element && target != host && !tooltip.element.contains(target) && !target.closest(".tippy-box") && tooltip.is_mounted) {
+          tooltip.hide();
+          document.body.removeEventListener("click", listener);
+        }
+      };
+      if (tooltip.is_mounted) {
+        tooltip.hide();
+        return;
+      }
+      tooltip.show();
+      setTimeout(() => {
+        document.body.addEventListener("click", listener);
+      }, 0);
+    });
+    return tooltip;
+  }
+  function context_menu_tooltip(host, element, config = {}) {
+    const tooltip = new TooltipInstance(host, element, {
+      placement: "bottom",
+      ariaEnabled: true,
+      ...config
+    });
+    host.addEventListener("contextmenu", (e5) => {
+      e5.preventDefault();
       if (tooltip.is_mounted) {
         tooltip.hide();
         return;
@@ -57407,6 +56544,1530 @@ var bleh = (() => {
         children
       })
     });
+  }
+
+  // src/components/button/button.tsx
+  function Button({ ref: ref2, type = "button", chibi = false, primary = false, colourful = false, accented = false, disabled = false, loading = false, menu = false, href, external, onClick, className: className2, children, tooltip, ...props }) {
+    const classes = [
+      "btn",
+      "flex-button",
+      chibi && "chibi",
+      primary && "primary",
+      colourful && "colourful",
+      menu && "dropdown-menu-clickable-item v2",
+      menu && accented && "accented-menu-item",
+      className2 && className2
+    ];
+    let elem;
+    if (!href) {
+      elem = /* @__PURE__ */ jsx("button", {
+        type,
+        class: classes,
+        onClick: handleOnClick,
+        ref: ref2,
+        ...props,
+        children
+      });
+    }
+    elem = /* @__PURE__ */ jsx("a", {
+      class: classes,
+      href,
+      target: external ? "_blank" : void 0,
+      onClick: handleOnClick,
+      ref: ref2,
+      ...props,
+      children
+    });
+    if (tooltip) {
+      hover_tooltip(elem, /* @__PURE__ */ jsx(Tooltip, {
+        children: tooltip
+      }));
+    }
+    function handleOnClick() {
+      if (!onClick || disabled || loading) return;
+      onClick();
+    }
+    function update() {
+      if (disabled) {
+        elem.setAttribute("disabled", "true");
+      } else {
+        elem.removeAttribute("disabled");
+      }
+      if (loading) {
+        elem.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
+          children: [
+            /* @__PURE__ */ jsx(Icon, {
+              name: icons.spinner
+            }),
+            tl2(trans.loading)
+          ]
+        }));
+        elem.setAttribute("data-loading", "true");
+      } else {
+        elem.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
+          children
+        }));
+        elem.removeAttribute("data-loading");
+      }
+    }
+    Object.defineProperty(elem, "disabled", {
+      get() {
+        return disabled;
+      },
+      set(val) {
+        disabled = val;
+        update();
+      }
+    });
+    Object.defineProperty(elem, "loading", {
+      get() {
+        return loading;
+      },
+      set(val) {
+        loading = val;
+        update();
+      }
+    });
+    update();
+    return elem;
+  }
+  function ButtonCombo({ children }) {
+    return /* @__PURE__ */ jsx("div", {
+      class: "button-combo",
+      children
+    });
+  }
+  function ButtonComboSeparator() {
+    return /* @__PURE__ */ jsx("div", {
+      class: "button-combo-sep"
+    });
+  }
+
+  // src/components/menu/menu.tsx
+  function MenuContents({ children }) {
+    return /* @__PURE__ */ jsx(Tooltip, {
+      theme: "context-menu",
+      children
+    });
+  }
+
+  // src/components/music/track.tsx
+  function patch_titles(search = page.structure.main) {
+    if (page.subpage == "tags_overview") return;
+    if (!search) {
+      log("tracks could not be searched as search was undefined", "tracks", "log", {
+        search
+      });
+      return;
+    }
+    const tracklists = search.querySelectorAll(".chartlist:not(.chartlist__placeholder)");
+    const insights = {
+      artist: {
+        display: false,
+        values: [],
+        labels: [],
+        highest: {
+          value: 0,
+          label: "",
+          link: "",
+          img: ""
+        }
+      },
+      album: {
+        display: false,
+        values: [],
+        labels: [],
+        highest: {
+          value: 0,
+          label: "",
+          link: "",
+          img: ""
+        }
+      },
+      track: {
+        display: false,
+        values: [],
+        labels: [],
+        highest: {
+          value: 0,
+          label: "",
+          link: "",
+          img: ""
+        }
+      }
+    };
+    const track_layout = useSettings.get("track_layout");
+    const album_name_location = useSettings.get("track_album_name_location");
+    const season = page.state.seasons.current?.id || "none";
+    tracklists.forEach((tracklist) => {
+      if (!tracklist) return;
+      log("found, checking", "tracks", "log", {
+        tracklist,
+        search
+      });
+      if (tracklist.querySelector("tbody > .chartlist-row:first-child > .kate-placeholder")) {
+        return;
+      }
+      log("new!", "tracks", "info", {
+        tracklist
+      });
+      const wide = tracklist.classList.contains("chartlist--wide-artist-column");
+      const tracks = tracklist.querySelectorAll(":scope > tbody > :is(.chartlist-row:not(.chartlist__placeholder-row), .chartlist-row--interlist-ad)");
+      tracks.forEach((track, index3) => {
+        smart_track(track, index3);
+      });
+      function smart_track(track, index3) {
+        if (!track) return;
+        if (track.getAttribute("data-track-type")) return;
+        if (track.classList[0] == "chartlist-row--interlist-ad") {
+          track.parentElement.removeChild(track);
+          return;
+        }
+        track.style.setProperty("--delay", index3 * 0.04 + "s");
+        track.setAttribute("data-album-name-location", album_name_location);
+        if (track[symbol]) {
+          log("returning as track has patched data", "tracks");
+          return;
+        }
+        track[symbol] = true;
+        const track_title = track.querySelector(".chartlist-name a:not(.offset-section-anchor)");
+        if (!track_title) return;
+        if (track_title.hasAttribute("title")) {
+          track_title.setAttribute("data-name", track_title.getAttribute("title"));
+          track_title.removeAttribute("title");
+        }
+        let track_info = track.querySelector(":scope > .track-info");
+        if (!track_info) {
+          track_info = html.node`
+                    <div class="track-info" data-has-bar=${tracklist.classList.contains("chartlist--with-bar")}>
+                        ${track_title.parentElement}
+                    </div>
+                `;
+          track.appendChild(track_info);
+        }
+        track_info.setAttribute("data-track-layout", track_layout);
+        track_info.setAttribute("data-album-name-location", album_name_location);
+        track.setAttribute("data-has-bar", tracklist.classList.contains("chartlist--with-bar"));
+        let is_user = track.querySelector(".chartlist-image .avatar");
+        let is_artist = false;
+        if (is_user) {
+          const link2 = track_title.getAttribute("href");
+          if (link2.startsWith(`${root}music/`)) {
+            is_user = false;
+            is_artist = true;
+          }
+        }
+        const track_type = track.querySelector(":scope > .chartlist-type");
+        if (track_type && track_type.classList[1] == "chartlist-type--artist") {
+          is_user = false;
+          is_artist = true;
+        }
+        log(`is user: ${is_user}, is artist: ${is_artist}`, "tracks", "log");
+        if (is_user) {
+          track.setAttribute("data-track-type", "user");
+          if (settings.colourful_counts) {
+            patch_artist_ranks_in_list_view(track);
+          }
+          render(track_title, html`
+						<span><span class="at">@</span>${track_title.textContent}</span>
+					`);
+          log("finished user stuff, returning", "tracks", "log");
+          return;
+        }
+        if (is_artist) {
+          track.classList.remove("chartlist-row--with-artist");
+          track.setAttribute("data-track-type", "artist");
+          if (useSettings.get("corrections")) {
+            track_title.textContent = correct_artist(track_title.getAttribute("data-name"));
+          }
+          const bar2 = track.querySelector(".chartlist-count-bar-slug");
+          if (bar2) {
+            if (settings.colourful_counts) {
+              patch_artist_ranks_in_list_view(track);
+            }
+            insights.artist.display = true;
+            const value = parseInt(bar2.getAttribute("data-stat-value"));
+            insights.artist.values.push(value);
+            if (value > insights.artist.highest.value) {
+              insights.artist.highest.value = value;
+            }
+            log(`pushed insight artist label of ${track_title.textContent}`, "glacier library", "log");
+            insights.artist.labels.push(track_title.textContent);
+            log("finished artist stuff, returning", "tracks", "log");
+          }
+          return;
+        }
+        const is_album = track.hasAttribute("data-album-row");
+        if (is_album) track.classList.add("bleh--is-album");
+        const track_artist = return_artist_from_track(track_title.getAttribute("href"), is_album);
+        log(`returned ${track_artist} from url ${track_title.getAttribute("href")}`, "track");
+        if (!wide) track.classList.add("chartlist-row--with-artist");
+        const bar = track.querySelector(".chartlist-count-bar-slug");
+        if (bar) {
+          const value = parseInt(bar.getAttribute("data-stat-value"));
+          if (is_album) {
+            insights.album.display = true;
+            insights.album.values.push(value);
+            if (value > insights.album.highest.value) {
+              insights.album.highest.value = value;
+            }
+          } else {
+            insights.track.display = true;
+            insights.track.values.push(value);
+            if (value > insights.track.highest.value) {
+              insights.track.highest.value = value;
+            }
+          }
+        }
+        const is_active3 = track.classList.contains("chartlist-row--now-scrobbling");
+        const has_bar = track.querySelector(":scope > .chartlist-bar");
+        if (has_bar) {
+          const bar2 = has_bar.querySelector(":scope > .chartlist-count-bar");
+          count_bar(bar2);
+        }
+        const track_legacy_menu = track.querySelector(".chartlist-more-menu");
+        const track_timestamp = track.querySelector(".chartlist-timestamp span");
+        let track_timestamp_contents;
+        if (track_timestamp && !is_active3) {
+          track_timestamp_contents = track_timestamp.getAttribute("title");
+          if (!track_timestamp_contents) {
+            track_timestamp_contents = track_timestamp.getAttribute("data-title");
+          }
+          if (track_timestamp_contents) {
+            track_timestamp.removeAttribute("title");
+            track_timestamp.setAttribute("data-title", track_timestamp_contents);
+            hover_tooltip(track_timestamp, /* @__PURE__ */ jsx(Tooltip, {
+              children: track_timestamp_contents
+            }));
+          }
+        }
+        const album = track.querySelector(".chartlist-album a");
+        if (!is_album && album) {
+          album.textContent = correct_item_by_artist(album.textContent, track_artist);
+        }
+        const album_link = track.querySelector(".chartlist-image a");
+        const show_album_text = (is_active3 || settings.expand_tracks == "always") && settings.expand_tracks != "never" && useSettings.get("track_layout") == "column";
+        track.setAttribute("data-show-album-text", show_album_text);
+        const image_wrap = track.querySelector(".chartlist-image");
+        let link;
+        let image2;
+        let alt;
+        let album_artist;
+        if (image_wrap) {
+          link = image_wrap.querySelector(".cover-art");
+          image2 = link.querySelector("img");
+          if (link.href) {
+            album_artist = return_artist_from_track(link.href, true);
+          }
+          alt = romanise(correct_item_by_artist(image2.getAttribute("alt"), track_artist));
+          hover_tooltip(image_wrap, /* @__PURE__ */ jsx(Tooltip, {
+            children: alt
+          }));
+          if (!is_album && has_bar) {
+            hoshino(image2, track_title.getAttribute("data-name"), track_artist, link);
+          }
+        }
+        let song_artist_element = track.querySelector(".chartlist-artist");
+        if (song_artist_element) {
+          track_info.appendChild(song_artist_element);
+        }
+        if (useSettings.get("format_guest_features")) {
+          const formatted = name_includes(track_title.getAttribute("data-name"), track_artist, track_title.getAttribute("data-inherit-artists"));
+          console.log("formatted", formatted);
+          track_title.setAttribute("data-name", formatted.corrected_title);
+          render(track_title, smart_title(formatted.song_title, formatted.song_tags));
+          if (!song_artist_element && !is_user) {
+            song_artist_element = document.createElement("td");
+            song_artist_element.classList.add("chartlist-artist");
+            track_info.appendChild(song_artist_element);
+          }
+          if (song_artist_element.textContent.replaceAll("+", " ").trim() === track_artist || song_artist_element.textContent.trim() === "") {
+            log("artist either matches or is blank, replacing", "tracks", "log");
+            render(song_artist_element, smart_artists(formatted.song_artist, formatted.song_guests));
+          }
+          if (track.getAttribute("data-disambig") == "explicit") {
+            song_artist_element.insertBefore(html.node`
+                        <span class="track-explicit icon">${tl2(trans.explicit)}</span>
+                    `, song_artist_element.firstChild);
+          }
+          if (track_legacy_menu) {
+            track.preview = html.node`
+                        <div class="track-preview">
+                            <div class="track-preview-image">
+                                <div class="inner-image">
+                                    ${image2 ? html.node`<img src=${image2.src} alt=${formatted.corrected_title}>` : html.node`<img class="missing-track" alt="">`}
+                                </div>
+                            </div>
+                            <div class="track-preview-info">
+                                <h5 class="track-preview-text track-preview-title">${formatted.song_title}</h5>
+                                <p class="track-preview-text track-preview-artist">${song_artist_element.querySelector("a").textContent}</p>
+                                <div class="track-preview-tags">
+                                    ${formatted.song_tags.map((tag) => html.node`
+                                        <div class="feat" data-tag-type="${tag.type}" data-tag-group="${tag.group}">${tag.text}</div>
+                                    `)}
+                                </div>
+                                ${is_album ? "" : html.node`<p class="track-preview-text track-preview-album">${image2 && album_link ? correct_item_by_artist(image2.getAttribute("alt"), track_artist) : album ? album.textContent : ""}</p>`}
+                                ${track_timestamp && track_timestamp_contents ? html.node`<p class="track-preview-text track-preview-timestamp">${track_timestamp_contents}</p>` : ""}
+                                ${image2?.getAttribute("data-hoshino") ? html.node`
+                                            <div class="hoshino-marker">
+                                                <div class="bleh-icon" />
+                                            </div>
+                                        ` : ""}
+                            </div>
+                        </div>
+                    `;
+          }
+        } else if (useSettings.get("corrections")) {
+          const song_artist_element2 = track.querySelector(".chartlist-artist a");
+          if (song_artist_element2) {
+            const corrected_title = romanise(correct_item_by_artist(track_title.textContent, song_artist_element2.textContent));
+            track_title.textContent = corrected_title;
+            track_title.setAttribute("data-name", corrected_title);
+            const corrected_artist = romanise(correct_artist(song_artist_element2.textContent));
+            song_artist_element2.textContent = corrected_artist;
+            song_artist_element2.setAttribute("title", corrected_artist);
+          } else {
+            const corrected_title = correct_item_by_artist(track_title.textContent, track_artist);
+            track_title.textContent = corrected_title;
+            track_title.setAttribute("data-name", corrected_title);
+          }
+        }
+        const previous = track.querySelectorAll(":scope > .more-button-wrapper");
+        previous.forEach((elem) => {
+          elem.remove();
+        });
+        if (track_legacy_menu) {
+          let menu;
+          const user = [
+            "user",
+            "overview"
+          ].includes(page.type) ? page.name : auth.name;
+          const is_own_profile = user == auth.name;
+          const can_edit = is_own_profile && !is_active3 && (!is_album ? !has_bar : true) && auth.pro && [
+            "user",
+            "overview"
+          ].includes(page.type);
+          const can_delete = is_own_profile && !is_active3 && !has_bar && !is_album && [
+            "user",
+            "overview"
+          ].includes(page.type);
+          const can_copy_scrobble = !is_album && !has_bar && !is_active3 && [
+            "user",
+            "overview"
+          ].includes(page.type);
+          const timestamp = parseInt(track.getAttribute("data-timestamp")) || Math.floor(new Date(track_timestamp_contents?.replace(/^[A-Za-z]+\s+/, "").replace(",", "").trim()).getTime() / 1e3);
+          const more_button = /* @__PURE__ */ jsx(Button, {
+            chibi: true,
+            className: "track-more-button",
+            tooltip: tl2(trans.more),
+            children: [
+              /* @__PURE__ */ jsx(Icon, {
+                name: icons.more
+              }),
+              tl2(trans.more)
+            ]
+          });
+          track.appendChild(/* @__PURE__ */ jsx("td", {
+            class: "more-button-wrapper",
+            children: more_button
+          }));
+          setTimeout(() => {
+            const edit_button = track_legacy_menu.querySelector('[data-analytics-action="EditScrobbleOpen"]:not([href$="login?next=/pro"])');
+            const bulk_edit_button = track_legacy_menu.querySelector('[data-analytics-action="BulkEditScrobblesOpen"]');
+            const delete_button = track_legacy_menu.querySelector(".more-item--delete");
+            if (edit_button) {
+              log("has edit button", "track", "info", {
+                edit_button
+              });
+              const form = edit_button.parentElement;
+              page.token = form.querySelector('[name="csrfmiddlewaretoken"]')?.value;
+              track.setAttribute("data-action", form.getAttribute("action"));
+              if (!is_album) {
+                const album_name2 = form.querySelector('[name="album_name"]');
+                const album_artist_name = form.querySelector('[name="album_artist_name"]');
+                track.setAttribute("data-artist-name", correct_artist(form.querySelector('[name="artist_name"]')?.value));
+                track.setAttribute("data-track-name", correct_item_by_artist(form.querySelector('[name="track_name"]')?.value, form.querySelector('[name="artist_name"]')?.value));
+                if (album_name2) {
+                  track.setAttribute("data-album-name", correct_item_by_artist(album_name2?.value, form.querySelector('[name="artist_name"]')?.value));
+                }
+                if (album_artist_name) {
+                  track.setAttribute("data-album-artist-name", correct_artist(album_artist_name?.value));
+                }
+                track.setAttribute("data-timestamp", form.querySelector('[name="timestamp"]')?.value);
+              } else {
+                track.setAttribute("data-album-name", correct_item_by_artist(form.querySelector('[name="album_name"]')?.value, form.querySelector('[name="album_artist_name"]')?.value));
+                track.setAttribute("data-album-artist-name", correct_artist(form.querySelector('[name="album_artist_name"]')?.value));
+                track.setAttribute("data-album-name-original", correct_item_by_artist(form.querySelector('[name="album_name_original"]')?.value, form.querySelector('[name="album_artist_name_original"]')?.value));
+                track.setAttribute("data-album-artist-name-original", correct_artist(form.querySelector('[name="album_artist_name_original"]')?.value));
+                track.setAttribute("data-album-image", form.querySelector('[name="album_image"]')?.value);
+                track.setAttribute("data-count", form.querySelector('[name="count"]')?.value);
+              }
+            } else if (delete_button) {
+              log("has delete button", "track", "info", {
+                delete_button
+              });
+              let form = delete_button.parentElement;
+              page.token = form.querySelector('[name="csrfmiddlewaretoken"]')?.value;
+              track.setAttribute("data-artist-name", correct_artist(form.querySelector('[name="artist_name"]')?.value));
+              track.setAttribute("data-track-name", correct_item_by_artist(form.querySelector('[name="track_name"]')?.value, form.querySelector('[name="artist_name"]')?.value));
+              track.setAttribute("data-timestamp", form.querySelector('[name="timestamp"]')?.value);
+            }
+            console.info("more button", bulk_edit_button);
+            const album_name = sanitise(image2 ? correct_item_by_artist(image2.getAttribute("alt"), track_artist) : album ? album.textContent : "");
+            const menu_contents = /* @__PURE__ */ jsx(MenuContents, {
+              children: /* @__PURE__ */ jsx("p", {
+                children: "hai"
+              })
+            });
+            menu_tooltip(more_button, menu_contents);
+            context_menu_tooltip(track, menu_contents);
+          }, 100);
+        }
+        if (is_album) {
+          log(`pushed insight album label of ${track_title.getAttribute("data-name")}`, "glacier library", "log");
+          insights.album.labels.push(track_title.getAttribute("data-name"));
+        } else {
+          log(`pushed insight track label of ${track_title.getAttribute("data-name")}`, "glacier library", "log");
+          insights.track.labels.push(track_title.getAttribute("data-name"));
+        }
+        const loved = track.querySelector(".chartlist-loved");
+        if (loved) {
+          loved.classList.add("colourful");
+          loved.setAttribute("data-season", season);
+          const love = loved.querySelector(".chartlist-love-button");
+          love.classList.add("btn", "icon-mask");
+          hover_tooltip(love, /* @__PURE__ */ jsx(Tooltip, {
+            children: tl2(trans.love_track)
+          }));
+        }
+        const album_text = track.querySelector(".chartlist-album.custom-album-text");
+        if (image_wrap) {
+          if (!is_album && show_album_text && !has_bar && !album_text) {
+            track_info.appendChild(/* @__PURE__ */ jsx("td", {
+              class: [
+                "chartlist-album",
+                "custom-album-text"
+              ],
+              children: /* @__PURE__ */ jsx("a", {
+                href: link.getAttribute("href"),
+                children: alt
+              })
+            }));
+          }
+          if (!settings.colourful_tracks && !settings.colourful_tracks_all) {
+            return;
+          }
+          if (!settings.colourful_tracks_all && !is_active3) return;
+          image2.setAttribute("crossorigin", "anonymous");
+          try {
+            image2.onload = async () => {
+              const { hue: hue4, sat, lit } = await header_colour(image2);
+              const to_colour = track.querySelectorAll(".chartlist-count-bar, .chartlist-loved");
+              track.classList.add("colourful");
+              if (is_active3) {
+                track.style.setProperty("--hue-over", hue4);
+                track.style.setProperty("--sat-over", sat);
+                track.style.setProperty("--lit-over", lit);
+              } else {
+                to_colour.forEach((elem) => {
+                  elem.classList.add("colourful");
+                  elem.style.setProperty("--hue-over", hue4);
+                  elem.style.setProperty("--sat-over", sat);
+                  elem.style.setProperty("--lit-over", lit);
+                });
+              }
+            };
+          } catch (e5) {
+          }
+        }
+      }
+    });
+    if (page.subpage.startsWith("library")) bleh_glacier_insights(insights);
+  }
+
+  // src/components/dialog/share.js
+  function share(url) {
+    let is_url2 = false;
+    let share_object = {
+      text: url
+    };
+    let scheme;
+    let hostname;
+    let path;
+    try {
+      const link = new URL(url);
+      is_url2 = true;
+      share_object = {
+        url
+      };
+      scheme = link.protocol;
+      hostname = link.hostname;
+      path = link.pathname + link.search + link.hash;
+    } catch (e5) {
+    }
+    let input2;
+    dialog({
+      id: "share",
+      title: tl2(trans.share),
+      body: html.node`
+            ${is_url2 ? html.node`
+                <div class="external-warn-input">
+                    <span class="scheme">
+                        ${scheme}//
+                    </span>
+                    ${hostname ? html.node`
+                    <span class="hostname">
+                        ${hostname}
+                    </span>
+                    ` : html.node`
+                    <span class="hostname">
+                        ${path}
+                    </span>
+                    `}
+                    ${path != "/" && hostname ? html.node`
+                    <span class="path">
+                        ${path}
+                    </span>
+                    ` : ""}
+                </div>
+            ` : html.node`
+                <div class="external-warn-input">
+                    <span class="hostname">
+                        ${url}
+                    </span>
+                </div>
+            `}
+            <div class="modal-footer center">
+                <button class="btn primary icon fill-btn" data-type="share" onclick=${() => navigator && navigator.share ? navigator.share(share_object) : log("share failed", "share", "error")}>
+                    ${tl2(trans.share_via_device)}
+                </button>
+                <button class="btn primary icon copy" onclick=${() => {
+        copy(url);
+      }}
+                >${tl2(is_url2 ? trans.copy_link : trans.copy_text)}</button>
+            </div>
+        `
+    });
+  }
+  function download(url, filename = null) {
+    log(`downloading ${filename}`, "download");
+    const link = html.node`
+        <a href=${url} download />
+    `;
+    if (filename) {
+      link.setAttribute("download", filename);
+    }
+    link.click();
+    notify({
+      id: "downloaded",
+      title: tl2(trans.downloaded),
+      body: filename,
+      icon: "icon-16-download"
+    });
+  }
+
+  // src/components/profile/profile_shortcut.js
+  unsafeWindow._open_profile_shortcut_window = function() {
+    open_profile_shortcut_window();
+  };
+  function open_profile_shortcut_window() {
+    const modal = dialog({
+      id: "profile_shortcut",
+      title: tl2(trans.profile_shortcut.name),
+      body: html.node`
+            ${setting({
+        id: "profile_shortcut",
+        text: false,
+        focus: true,
+        standalone: true
+      })}
+        `
+    });
+    modal.querySelector("#text-profile_shortcut").focus();
+  }
+  unsafeWindow._other_listener = function(id) {
+    other_listener(id);
+  };
+  function other_listener(id) {
+    let input2;
+    let submit;
+    dialog({
+      id: "other_listener",
+      title: tl2(trans.view_others_library),
+      body: html.node`
+        <div class="setting standalone" data-type="text">
+            <div class="avatar-container">
+                <div class="avatar-inner">
+                    <img class="missing-avatar">
+                </div>
+            </div>
+            <div class="input-container content-form">
+                <input type="text" maxlength="40" id="text-profile" ref=${(el) => input2 = el} placeholder="${tl2(trans.enter_username)}">
+                <button class="btn chibi icon primary submit" ref=${(el) => submit = el} onclick=${() => {
+        let name = input2.value;
+        let link = id;
+        dialog_rm({
+          id: "other_listener"
+        });
+        window.location.href = `${root}user/${name}/library/music/${link}`;
+      }}>${tl2(trans.done)}</button>
+            </div>
+        </div>
+        `
+    });
+    input2.addEventListener("keydown", (event3) => {
+      if (event3.keyCode === 13) {
+        event3.preventDefault();
+        submit.click();
+      }
+    });
+    tippy_esm_default(submit, {
+      content: tl2(trans.save)
+    });
+    input2.focus();
+  }
+  unsafeWindow._save_profile_shortcut = function() {
+    const profile_name = document.getElementById("text-profile_shortcut").value;
+    const profile_img = document.getElementById("avatar-profile_shortcut");
+    if (profile_name == "" || profile_name == auth.name) {
+      localStorage.removeItem("bleh_profile_shortcut_avi");
+      document.getElementById("avatar_src-profile_shortcut").setAttribute("src", "");
+      save_setting("profile_shortcut", "");
+      return;
+    }
+    profile_img.classList.add("requesting");
+    fetch(`${root}user/${profile_name}/tags`).then(function(response) {
+      console.log("returned", response, response.text);
+      return response.text();
+    }).then(function(html3) {
+      const doc = new DOMParser().parseFromString(html3, "text/html");
+      console.log("DOC", doc);
+      profile_img.classList.remove("requesting");
+      try {
+        const avatar_src = doc.querySelector(".header-avatar-inner-wrap img").getAttribute("src");
+        set_storage("bleh_profile_shortcut_avi", avatar_src);
+        document.getElementById("avatar_src-profile_shortcut").setAttribute("src", avatar_src);
+        notify({
+          id: "profile_shortcut_saved",
+          title: tl2(trans.profile_shortcut.name),
+          body: tl2(trans.profile_shortcut.linked).replace(
+            "{u}",
+            profile_name
+          ),
+          icon: "icon-16-profile-shortcut"
+        });
+        save_setting("profile_shortcut", profile_name);
+      } catch (e5) {
+        notify({
+          id: "profile_shortcut_saved",
+          title: tl2(trans.profile_shortcut.name),
+          body: tl2(trans.failed_to_find_profile),
+          type: "error"
+        });
+        localStorage.removeItem("bleh_profile_shortcut_avi");
+        document.getElementById("avatar_src-profile_shortcut").setAttribute("src", "");
+      }
+    });
+  };
+
+  // src/components/music/scrobble.ts
+  function submit_scrobble({ pre_track = "", pre_album = "", pre_artist = "", pre_album_artist = "", pre_timestamp = 0, func, can_api } = {}) {
+    if (!can_api) {
+      can_api = localStorage.getItem("bleh_auth") && localStorage.getItem("bleh_auth_valid") === "true";
+    }
+    if (!can_api) {
+      window.location.href = `${root}bleh/general?setting=api`;
+      return;
+    }
+    const random = random_list[Math.floor(Math.random() * random_list.length)];
+    let track;
+    let album;
+    let artist;
+    let album_artist;
+    let use_current;
+    let date;
+    let create_scrobble;
+    const max_date = /* @__PURE__ */ new Date();
+    max_date.setDate(max_date.getDate() + 1);
+    const pre_existing_date = pre_timestamp != 0;
+    log("requesting dialog", "submit scrobble", "info", {
+      pre_track,
+      pre_album,
+      pre_artist,
+      pre_album_artist,
+      pre_timestamp,
+      func,
+      can_api
+    });
+    dialog({
+      id: "submit_scrobble",
+      title: tl2(trans.new_scrobble),
+      body: html.node`
+            <div class="new-scrobble-form">
+                <div class="form-combo">
+                    <div class="form-inner">
+                        <p class="generic-label">${tl2(trans.track)}</p>
+                        ${track = input({
+        type: "text",
+        value: pre_track,
+        placeholder: tl2(trans.example, {
+          v: random.track
+        }),
+        warn_if_empty: true
+      })}
+                        <p class="generic-label">${tl2(trans.album)}</p>
+                        ${album = input({
+        type: "text",
+        value: pre_album,
+        placeholder: tl2(trans.example, {
+          v: random.album
+        })
+      })}
+                    </div>
+                    <div class="form-actions">
+                        ${() => {
+        const btn = html.node`
+                                <button class="btn chibi icon subtle" data-type="switch" onclick=${() => {
+          const track_val = track.value;
+          const album_val = album.value;
+          if (!track_val && !album_val) return;
+          track.value = album_val;
+          album.value = track_val;
+        }}>
+                                    ${tl2(trans.switch)}
+                                </button>
+                            `;
+        tippy_esm_default(btn, {
+          content: btn.textContent
+        });
+        return btn;
+      }}
+                    </div>
+                </div>
+                <div class="form-combo">
+                    <div class="form-inner">
+                        <p class="generic-label">${tl2(trans.artist)}</p>
+                        ${artist = input({
+        type: "text",
+        value: pre_artist,
+        placeholder: tl2(trans.example, {
+          v: random.artist
+        }),
+        warn_if_empty: true
+      })}
+                        <p class="generic-label">${tl2(trans.album_artist)}</p>
+                        ${album_artist = input({
+        type: "text",
+        value: pre_album_artist,
+        placeholder: tl2(trans.example, {
+          v: random.album_artist
+        })
+      })}
+                    </div>
+                    <div class="form-actions">
+                        ${() => {
+        const btn = html.node`
+                                <button class="btn chibi icon subtle" data-type="switch" onclick=${() => {
+          const artist_val = artist.value;
+          const album_artist_val = album_artist.value;
+          if (!artist_val && !album_artist_val) return;
+          artist.value = album_artist_val;
+          album_artist.value = artist_val;
+        }}>
+                                    ${tl2(trans.switch)}
+                                </button>
+                            `;
+        tippy_esm_default(btn, {
+          content: btn.textContent
+        });
+        return btn;
+      }}
+                    </div>
+                </div>
+                <p class="generic-label">${tl2(trans.time)}</p>
+                <div class="toggle-and-time">
+                    ${use_current = toggle({
+        value: !pre_existing_date,
+        type: "checkbox",
+        title: tl2(trans.use_current_time),
+        func: (state) => {
+          date.disabled(state);
+        }
+      })}
+                    ${date = input({
+        type: "date",
+        value: pre_existing_date ? pre_timestamp : null,
+        max: `${max_date.getFullYear()}-${pad2(max_date.getMonth() + 1)}-${pad2(max_date.getDate())}`,
+        disabled: !pre_existing_date,
+        value_in_iso: typeof pre_timestamp == "number"
+      })}
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="see-more cancel left-icon" onclick=${() => dialog_rm({
+        id: "submit_scrobble"
+      })}>
+                    ${tl2(trans.cancel)}
+                </button>
+                <div class="fill" />
+                <div class="button-group extra">
+                    ${setting({
+        id: "auto_close_scrobble_modal",
+        standalone: true
+      })}
+                    <button class="btn primary icon" data-type="add" ref=${(el) => create_scrobble = el} onclick=${async () => {
+        if (track.value == "" || artist.value == "") {
+          notify({
+            id: "submit_scrobble",
+            title: tl2(trans.new_scrobble),
+            body: tl2(trans.missing_fields),
+            type: "error"
+          });
+          return;
+        }
+        track.disabled(true);
+        album.disabled(true);
+        artist.disabled(true);
+        album_artist.disabled(true);
+        use_current.disabled(true);
+        date.disabled(true);
+        create_scrobble.disabled = true;
+        if (album.value != "" && album_artist.value == "") {
+          album_artist.value = artist.value;
+        }
+        const params = {
+          sk: localStorage.getItem("bleh_auth"),
+          artist: artist.value,
+          track: track.value,
+          timestamp: use_current.checked() ? DateTime.now().toUnixInteger() : Math.floor(date.value / 1e3)
+        };
+        if (album.value != "") params.album = album.value;
+        if (album_artist.value != "") {
+          params.albumArtist = album_artist.value;
+        }
+        const res = await fetch("https://jufufu.katelyn.moe/api/lastfm", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json"
+          },
+          body: JSON.stringify({
+            method: "track.scrobble",
+            params
+          })
+        });
+        const json = await res.json();
+        log("received response", "submit scrobble", "info", {
+          result: json
+        });
+        function re_enable() {
+          track.disabled(false);
+          album.disabled(false);
+          artist.disabled(false);
+          album_artist.disabled(false);
+          use_current.disabled(false);
+          date.disabled(false);
+          create_scrobble.disabled = false;
+        }
+        if (json.error) {
+          log("error", "submit scrobble", "error");
+          notify({
+            id: "submit_scrobble",
+            title: tl2(trans.scrobble_failed),
+            body: json.message,
+            type: "error",
+            persist: true
+          });
+          re_enable();
+          return;
+        }
+        const error_code = json.scrobbles.scrobble.ignoredMessage.code;
+        if (error_code > 0) {
+          log("error", "submit scrobble", "error", {
+            error_code
+          });
+          notify({
+            id: "submit_scrobble",
+            title: tl2(trans.scrobble_failed),
+            body: tl2(trans.scrobble_error_codes[error_code]),
+            type: "error",
+            persist: true
+          });
+          re_enable();
+          return;
+        }
+        notify({
+          id: "submit_scrobble",
+          title: tl2(trans.new_scrobble),
+          body: params.track,
+          type: "success"
+        });
+        if (settings.auto_close_scrobble_modal) {
+          dialog_rm({
+            id: "submit_scrobble"
+          });
+        } else {
+          dialog_rm({
+            id: "submit_scrobble"
+          });
+          submit_scrobble({
+            pre_track,
+            pre_album,
+            pre_artist,
+            pre_album_artist,
+            pre_timestamp,
+            func,
+            can_api
+          });
+        }
+        if (func) func();
+      }}>
+                        ${tl2(trans.new)}
+                    </button>
+                </div>
+            </div>
+        `
+    });
+  }
+
+  // src/components/page/structure.js
+  function checkup_page_structure(is_subpage = false, header = null) {
+    if (document.body.style.getPropertyValue("--hue-album")) {
+      page.state.replaced_accent = false;
+      setTimeout(() => {
+        if (!page.state.replaced_accent) {
+          document.body.style.removeProperty("--hue-album");
+          document.body.style.removeProperty("--sat-album");
+          document.body.style.removeProperty("--lit-album");
+          chart_reflow();
+          log(
+            "removed previous colours as accent hasnt been refreshed",
+            "page structure"
+          );
+        }
+      }, 100);
+    }
+    const params = new URLSearchParams(document.location.search);
+    page.requested = {
+      tab: params.get("tab"),
+      page: params.get("page"),
+      token: params.get("token"),
+      collage: params.get("collage"),
+      subject: params.get("subject")
+    };
+    if (!page.structure.container || !document.body.contains(page.structure.container)) {
+      log("page missing container, creating", "page structure");
+      page.structure.container = document.createElement("div");
+      page.structure.container.classList.add("page-content", "container");
+      const container_full_width = document.body.querySelector(
+        ".container--full-width"
+      );
+      if (container_full_width) {
+        container_full_width.insertBefore(
+          page.structure.container,
+          container_full_width.firstElementChild
+        );
+      } else {
+        document.body.querySelector(".adaptive-skin-container").appendChild(page.structure.container);
+      }
+    }
+    page.structure.container.setAttribute("data-assigned", "true");
+    const other_container = document.body.querySelector(
+      ".page-content.container:not([data-assigned])"
+    );
+    if (other_container) other_container.style.setProperty("display", "none");
+    if (!page.structure.row || !document.body.contains(page.structure.row)) {
+      log("page missing row, creating", "page structure");
+      page.structure.row = html.node`
+            <div class="row" />
+        `;
+      page.structure.container.insertBefore(
+        page.structure.row,
+        page.structure.container.firstElementChild
+      );
+    }
+    if (page.structure.row.classList.contains("buffer-4")) {
+      page.structure.row.classList = "row col-main-is-primary";
+    }
+    page.structure.row.setAttribute("data-assigned", "true");
+    if (!page.structure.main || !document.body.contains(page.structure.main)) {
+      log("page missing main, creating", "page structure");
+      page.structure.main = html.node`
+            <div class="col-main" />
+        `;
+      page.structure.row.appendChild(page.structure.main);
+    }
+    page.structure.main.setAttribute("data-assigned", "true");
+    const other_main = page.structure.row.querySelector(
+      ".col-main.hidden-xs:not([data-assigned])"
+    );
+    if (other_main) {
+      other_main.remove();
+    }
+    if (!page.structure.side || !document.body.contains(page.structure.side)) {
+      log("page missing side", "page structure");
+      page.structure.side = page.structure.row.querySelector(".col-sidebar");
+      if (!page.structure.side) {
+        log("page missing side, creating", "page structure");
+        page.structure.side = html.node`
+                <div class="col-sidebar" />
+            `;
+        page.structure.row.appendChild(page.structure.side);
+      }
+    }
+    if (ff("short")) {
+      page.structure.content = html.node`
+            <main class="content" data-lacrimosa=${ff("lacrimosa")}>
+                <div class="content-main">
+                    ${page.structure.main}
+                </div>
+                <div class="content-side">
+                    ${page.structure.side}
+                </div>
+            </main>
+        `;
+      page.structure.row.appendChild(page.structure.content);
+      page.structure.main?.classList.add("in-content-view");
+      page.structure.side?.classList.add("in-content-view");
+      page.structure.main?.setAttribute("data-lacrimosa", ff("lacrimosa"));
+      page.structure.side?.setAttribute("data-lacrimosa", ff("lacrimosa"));
+      single_column();
+    }
+    log("finished", "page structure");
+    if (ff("refreshed_music_nav") && header) {
+      let navlist = header.querySelector(".navlist");
+      if (navlist) {
+        navlist.classList.add("redesigned-navigation");
+        page.structure.container.insertBefore(
+          navlist,
+          page.structure.container.firstElementChild
+        );
+        page.structure.nav = navlist;
+        let overview = page.structure.nav.querySelector(
+          ".secondary-nav-item--overview a"
+        );
+        if (overview) {
+          const href = overview.getAttribute("href").replace(root, "");
+          if (href == "settings" || href == "inbox" || href == "charts") {
+            overview = null;
+          }
+        }
+        if (overview) overview.textContent = tl2(trans.home);
+      }
+      if (is_subpage) {
+        let content_top = document.body.querySelector(".content-top");
+        if (content_top) {
+          content_top.classList.add("redesigned-content-top");
+          page.structure.content_top = content_top;
+          if (content_top.querySelector(".content-top-back-link")) {
+            content_top.style.setProperty("display", "none");
+          }
+          const content_top_nav = content_top.querySelector(".navlist");
+          if (!content_top_nav && ff("beret")) {
+            content_top.style.setProperty("display", "none");
+          }
+          if (content_top.style.length > 0) {
+            page.structure.content.after(content_top);
+          } else {
+            page.structure.row.insertBefore(
+              content_top,
+              page.structure.content
+            );
+          }
+        } else {
+          let subpage_title = page.structure.main.querySelector(
+            ":scope > .subpage-title"
+          );
+          if (!subpage_title) {
+            subpage_title = page.structure.main.querySelector(
+              ":scope > .section-controls > .subpage-title"
+            );
+          }
+          if (!subpage_title) {
+            subpage_title = page.structure.main.querySelector(
+              ":scope > section:first-child .section-controls > .subpage-title"
+            );
+          }
+          if (subpage_title) {
+            content_top = html.node`
+                        <div class="content-top redesigned-content-top">
+                            <div class="content-top-inner-wrap">
+                                <div class="container content-top-lower">
+                                    <h1 class="content-top-header">${subpage_title.textContent.trim()}</h1>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+            page.structure.content_top = content_top;
+            content_top.style.setProperty("display", "none");
+            if (ff("short")) {
+              page.structure.row.appendChild(content_top);
+            } else navlist.after(content_top);
+            try {
+              page.structure.main.removeChild(subpage_title);
+            } catch (e5) {
+            }
+          }
+          navlist = page.structure.main.querySelector(".navlist");
+          if (navlist) {
+            navlist.classList.add("redesigned-navigation");
+            if (ff("mualani")) {
+              let toolbar = html.node`
+                            <div class="toolbar">
+                                ${navlist}
+                            </div>
+                        `;
+              page.structure.row.insertBefore(
+                toolbar,
+                page.structure.row.firstElementChild
+              );
+            } else {
+              page.structure.row.insertBefore(
+                navlist,
+                page.structure.content
+              );
+            }
+          }
+          let btn_add = page.structure.main.querySelector(
+            ":scope > .btn-add"
+          );
+          if (!btn_add) {
+            btn_add = page.structure.main.querySelector(
+              ":scope > section:first-child .btn-add"
+            );
+          }
+          if (btn_add) {
+            const side_actions = html.node`
+                        <section class="side-actions">
+                            ${btn_add}
+                        </section>
+                    `;
+            btn_add.classList = "btn side-action icon-mask";
+            btn_add.setAttribute("data-type", "add");
+            btn_add.textContent = tl2(trans.add);
+            if (!page.mobile) {
+              page.structure.side.insertBefore(
+                side_actions,
+                page.structure.side.firstElementChild
+              );
+            } else {
+              page.structure.main.insertBefore(
+                side_actions,
+                page.structure.main.firstElementChild
+              );
+            }
+          }
+          const radio2 = page.structure.main.querySelector(
+            ":scope > .section-controls > .section-playlink"
+          );
+          if (radio2) {
+            const side_actions = html.node`
+                        <section class="side-actions">
+                            ${radio2}
+                        </section>
+                    `;
+            radio2.classList = "btn stationlink js-playlink-station radio-button side-action icon-mask";
+            const type = radio2.getAttribute("data-analytics-label");
+            render(
+              radio2,
+              html`
+							<h3 class="sub-text">${tl2(trans.radio)}</h3>
+							<h4>${tl2(trans[type])}</h4>
+						`
+            );
+            radio2.removeAttribute("title");
+            if (!page.mobile) {
+              page.structure.side.insertBefore(
+                side_actions,
+                page.structure.side.firstElementChild
+              );
+            } else {
+              page.structure.main.insertBefore(
+                side_actions,
+                page.structure.main.firstElementChild
+              );
+            }
+          }
+        }
+        const similar_artists = page.structure.side.querySelector(
+          ".similar-items-sidebar"
+        );
+        if (similar_artists) {
+          similar_artists.parentElement.classList.add(
+            "similar-artists-panel"
+          );
+          page.structure.side.removeChild(similar_artists.parentElement);
+        }
+      } else {
+        const content_top = document.body.querySelector(".content-top");
+        if (content_top) content_top.classList.add("legacy-content-top");
+      }
+    }
+  }
+  function checkup_nav() {
+    if (!ff("short")) return;
+    if (page.structure.nav) {
+      page.structure.nav.setAttribute("data-assigned", "true");
+    }
+    const navlists = page.structure.container.querySelectorAll(
+      ":scope > .navlist"
+    );
+    navlists.forEach((nav, index3) => {
+      console.info(index3);
+      if (index3 < 1) return;
+      if (ff("mualani")) {
+        const toolbar = html.node`
+                <div class="toolbar">
+                    ${nav}
+                </div>
+            `;
+        page.structure.row.insertBefore(toolbar, page.structure.content);
+        page.structure.toolbar = toolbar;
+      } else {
+        page.structure.row.insertBefore(nav, page.structure.content);
+      }
+    });
+  }
+  function convert_to_toolbar() {
+    const nav = page.structure.content_top.querySelector(".navlist");
+    if (!nav) return;
+    nav.classList.add("redesigned-navigation");
+    page.structure.toolbar = html.node`
+        <div class="toolbar">
+            ${nav}
+        </div>
+    `;
+    page.structure.row.insertBefore(
+      page.structure.toolbar,
+      page.structure.row.firstChild
+    );
+    page.structure.content_top.style.display = "none";
+  }
+  function single_column() {
+    if ([
+      "following",
+      "followers",
+      "neighbours",
+      "obsessions_set",
+      "obsessions_overview",
+      "obsessions_obsession",
+      "loved",
+      "subscription_automatic-edits_tracks",
+      "subscription_automatic-edits_albums",
+      "playlists_playlists",
+      "listeners_overview",
+      "auth"
+    ].includes(page.subpage) || [
+      "charts",
+      "inbox",
+      "overview",
+      "releases",
+      "recommended",
+      "bookmarks"
+    ].includes(page.type) || page.subpage.startsWith("event_attendance_")) {
+      page.structure.content.classList.add("single-column");
+    }
+  }
+
+  // src/components/music/header.tsx
+  function page_header_avatar(url) {
+    const supports_gallery = [
+      "artist",
+      "album"
+    ].includes(page.type);
+    let link = sanitise(page.name);
+    if (page.type != "artist") {
+      link = `${sanitise(page.sister)}/${sanitise(page.name)}`;
+    }
+    let action = "expand";
+    if (supports_gallery) {
+      action = useSettings.get("default_avatar_action");
+    }
+    let image2;
+    const elem = /* @__PURE__ */ jsx("div", {
+      class: [
+        "page-header-avatar",
+        "colourful"
+      ],
+      onClick: () => {
+        if (!url) return;
+        if (action == "expand") {
+          expand_avatar(avatar(url, "ar0"));
+        } else if (action == "gallery") {
+          open(`${root}music/${redirect()}${link}/+images`);
+        }
+      },
+      children: url ? /* @__PURE__ */ jsx("img", {
+        src: avatar(url, "avatar300s"),
+        crossOrigin: "anonymous",
+        ref: (el) => image2 = el
+      }) : /* @__PURE__ */ jsx("img", {
+        class: `missing-${page.type}`,
+        crossOrigin: "anonymous",
+        ref: (el) => image2 = el
+      })
+    });
+    Object.defineProperty(elem, "image", {
+      get() {
+        return image2;
+      }
+    });
+    Object.defineProperty(elem, "src", {
+      get() {
+        return url;
+      }
+    });
+    const menu = tippy_esm_default(elem, {
+      theme: "context-menu",
+      content: /* @__PURE__ */ jsx(Fragment, {
+        children: [
+          url ? /* @__PURE__ */ jsx("button", {
+            type: "button",
+            class: "dropdown-menu-clickable-item",
+            "data-type": "expand",
+            onClick: () => expand_avatar(avatar(url, "ar0")),
+            children: tl2(trans.expand)
+          }) : "",
+          supports_gallery ? /* @__PURE__ */ jsx(Fragment, {
+            children: [
+              /* @__PURE__ */ jsx("a", {
+                class: "dropdown-menu-clickable-item",
+                "data-type": "gallery",
+                href: `${root}music/${redirect()}${link}/+images`,
+                children: tl2(trans.photos)
+              }),
+              /* @__PURE__ */ jsx("div", {
+                class: "sep"
+              }),
+              /* @__PURE__ */ jsx("a", {
+                class: "dropdown-menu-clickable-item",
+                href: `${root}bleh/customise`,
+                "data-menu-item": "settings",
+                children: tl2(trans.settings)
+              })
+            ]
+          }) : ""
+        ]
+      }),
+      placement: "right-start",
+      trigger: "manual",
+      interactive: true,
+      interactiveBorder: 10,
+      offset: [
+        0,
+        0
+      ],
+      appendTo: document.body,
+      onShow(instance) {
+        instance.popper.addEventListener("click", (event3) => {
+          instance.hide();
+        });
+      }
+    });
+    register_menu(elem, menu);
+    return elem;
+  }
+  function page_header_disc() {
+    if (!useSettings.get("show_disc_image")) return;
+    return /* @__PURE__ */ jsx("div", {
+      class: "page-header-disc"
+    });
+  }
+  function artist_title(header = document.body) {
+    const title = header.querySelector(".header-new-title");
+    title.classList.add("page-header-title");
+    let title_text = title.textContent.trim();
+    let has_multi = false;
+    if (title_text.includes(", ") || title_text.includes("&")) has_multi = true;
+    page.multi = false;
+    if (!has_multi) {
+      if (!useSettings.get("corrections")) {
+        title.textContent = romanise(title_text);
+        return;
+      }
+      title.textContent = romanise(correct_artist(title_text, true));
+    } else {
+      title_text = title_text.replaceAll("&", ";").replaceAll(", ", ";").replaceAll(";;", ";");
+      for (const [key, value] of Object.entries(combined_artists)) {
+        if (key == "version") continue;
+        const escaped = key.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        const regex = new RegExp(escaped, "gi");
+        title_text = title_text.replace(regex, value);
+      }
+      page.multi = true;
+      title.innerHTML = "";
+      let split = title_text.split(";");
+      if (split.length < 2) {
+        page.multi = false;
+        if (!useSettings.get("corrections")) return;
+        title.textContent = romanise(correct_artist(title_text, true));
+        return;
+      }
+      split.forEach((artist, index3) => {
+        if (index3 > 0) title.innerHTML += ",";
+        artist = artist.trim();
+        title.appendChild(/* @__PURE__ */ jsx("a", {
+          class: "multi-artist-part",
+          href: `${root}music/${redirect()}${sanitise(artist)}`,
+          children: romanise(correct_artist(artist))
+        }));
+      });
+    }
+  }
+  function page_header_title(header = document.body) {
+    page.suggest = null;
+    if (!useSettings.get("corrections") && !useSettings.get("format_guest_features") && !page.multi) {
+      return;
+    }
+    page.corrected = false;
+    const track_title = header.querySelector(".header-new-title");
+    const track_artist = header.querySelector(".header-new-crumb span");
+    if (!track_title) return;
+    track_title.classList.add("page-header-title");
+    if (track_artist) {
+      if (artist_corrections.hasOwnProperty(track_artist.textContent)) {
+        const corrected_artist = artist_corrections[track_artist.textContent];
+        log(`corrected ${track_artist.textContent} as ${corrected_artist}`, "lotus");
+        track_artist.parentElement.setAttribute("href", `${root}music/${redirect()}${sanitise(track_artist.textContent)}`);
+        track_artist.textContent = romanise(corrected_artist);
+      } else {
+        track_artist.parentElement.setAttribute("href", `${root}music/${redirect()}${sanitise(track_artist.textContent)}`);
+        track_artist.textContent = romanise(track_artist.textContent);
+      }
+    }
+    if (useSettings.get("format_guest_features")) {
+      try {
+        if (!track_title.hasAttribute("data-kate-processed")) {
+          track_title.setAttribute("data-kate-processed", "true");
+          const formatted = name_includes(track_title.textContent, track_artist.textContent);
+          page.corrected = formatted.corrected_title != track_title.textContent;
+          render(track_title, smart_title(formatted.song_title, formatted.song_tags, true));
+          if (formatted.song_tags.some((tag) => tag.group == "form")) {
+            page.suggest = sanitise(formatted.song_title.trim());
+          }
+          const song_artist_element = document.body.querySelector('span[itemprop="byArtist"]');
+          const song_guests = formatted.song_guests;
+          page.sister_others = song_guests;
+          song_artist_element.innerHTML = song_artist_element.innerHTML.trim();
+          for (const guest in song_guests) {
+            song_artist_element.innerHTML = `${song_artist_element.innerHTML},`;
+            song_artist_element.appendChild(html.node`
+                    <a class="header-new-crumb" href="${root}music/${redirect()}${sanitise(song_guests[guest])}">${romanise(song_guests[guest])}</a>
+                `);
+          }
+        }
+      } catch (e5) {
+      }
+    } else {
+      if (!track_title.hasAttribute("data-kate-processed")) {
+        track_title.setAttribute("data-kate-processed", "true");
+        const corrected_title = correct_item_by_artist(track_title.textContent, track_artist.textContent);
+        log(`corrected ${track_title.textContent} by ${track_artist.textContent} as ${corrected_title}`, "lotus");
+        if (corrected_title != track_title.textContent) {
+          page.corrected = true;
+        }
+        track_title.textContent = romanise(corrected_title);
+      }
+    }
   }
 
   // src/pages/tag.tsx
@@ -76768,837 +77429,6 @@ var bleh = (() => {
     `);
   }
 
-  // src/components/track/bar.tsx
-  function count_bar(bar) {
-    const season = page.state.seasons.current?.id || "none";
-    const v2 = useSettings.get("count_bar_style") == "minimal";
-    const link = bar.querySelector(".chartlist-count-bar-link");
-    if (!link) return;
-    const slug = link.querySelector(".chartlist-count-bar-slug");
-    const value = link.querySelector(".chartlist-count-bar-value");
-    bar.setAttribute("data-season", season);
-    bar.classList.toggle("v2", v2);
-    link.classList.toggle("v2", v2);
-    slug?.classList.toggle("v2", v2);
-    value?.classList.toggle("v2", v2);
-  }
-
-  // src/components/music/track.tsx
-  function patch_titles(search = page.structure.main) {
-    if (page.subpage == "tags_overview") return;
-    if (!search) {
-      log("tracks could not be searched as search was undefined", "tracks", "log", {
-        search
-      });
-      return;
-    }
-    const tracklists = search.querySelectorAll(".chartlist:not(.chartlist__placeholder)");
-    const insights = {
-      artist: {
-        display: false,
-        values: [],
-        labels: [],
-        highest: {
-          value: 0,
-          label: "",
-          link: "",
-          img: ""
-        }
-      },
-      album: {
-        display: false,
-        values: [],
-        labels: [],
-        highest: {
-          value: 0,
-          label: "",
-          link: "",
-          img: ""
-        }
-      },
-      track: {
-        display: false,
-        values: [],
-        labels: [],
-        highest: {
-          value: 0,
-          label: "",
-          link: "",
-          img: ""
-        }
-      }
-    };
-    const track_layout = useSettings.get("track_layout");
-    const album_name_location = useSettings.get("track_album_name_location");
-    const season = page.state.seasons.current?.id || "none";
-    tracklists.forEach((tracklist) => {
-      if (!tracklist) return;
-      log("found, checking", "tracks", "log", {
-        tracklist,
-        search
-      });
-      if (tracklist.querySelector("tbody > .chartlist-row:first-child > .kate-placeholder")) {
-        return;
-      }
-      log("new!", "tracks", "info", {
-        tracklist
-      });
-      const wide = tracklist.classList.contains("chartlist--wide-artist-column");
-      const tracks = tracklist.querySelectorAll(":scope > tbody > :is(.chartlist-row:not(.chartlist__placeholder-row), .chartlist-row--interlist-ad)");
-      tracks.forEach((track, index3) => {
-        smart_track(track, index3);
-      });
-      function smart_track(track, index3) {
-        if (!track) return;
-        if (track.getAttribute("data-track-type")) return;
-        if (track.classList[0] == "chartlist-row--interlist-ad") {
-          track.parentElement.removeChild(track);
-          return;
-        }
-        track.style.setProperty("--delay", index3 * 0.04 + "s");
-        track.setAttribute("data-album-name-location", album_name_location);
-        if (track[symbol]) {
-          log("returning as track has patched data", "tracks");
-          return;
-        }
-        track[symbol] = true;
-        const track_title = track.querySelector(".chartlist-name a:not(.offset-section-anchor)");
-        if (!track_title) return;
-        if (track_title.hasAttribute("title")) {
-          track_title.setAttribute("data-name", track_title.getAttribute("title"));
-          track_title.removeAttribute("title");
-        }
-        let track_info = track.querySelector(":scope > .track-info");
-        if (!track_info) {
-          track_info = html.node`
-                    <div class="track-info" data-has-bar=${tracklist.classList.contains("chartlist--with-bar")}>
-                        ${track_title.parentElement}
-                    </div>
-                `;
-          track.appendChild(track_info);
-        }
-        track_info.setAttribute("data-track-layout", track_layout);
-        track_info.setAttribute("data-album-name-location", album_name_location);
-        track.setAttribute("data-has-bar", tracklist.classList.contains("chartlist--with-bar"));
-        let is_user = track.querySelector(".chartlist-image .avatar");
-        let is_artist = false;
-        if (is_user) {
-          const link2 = track_title.getAttribute("href");
-          if (link2.startsWith(`${root}music/`)) {
-            is_user = false;
-            is_artist = true;
-          }
-        }
-        const track_type = track.querySelector(":scope > .chartlist-type");
-        if (track_type && track_type.classList[1] == "chartlist-type--artist") {
-          is_user = false;
-          is_artist = true;
-        }
-        log(`is user: ${is_user}, is artist: ${is_artist}`, "tracks", "log");
-        if (is_user) {
-          track.setAttribute("data-track-type", "user");
-          if (settings.colourful_counts) {
-            patch_artist_ranks_in_list_view(track);
-          }
-          render(track_title, html`
-						<span><span class="at">@</span>${track_title.textContent}</span>
-					`);
-          log("finished user stuff, returning", "tracks", "log");
-          return;
-        }
-        if (is_artist) {
-          track.classList.remove("chartlist-row--with-artist");
-          track.setAttribute("data-track-type", "artist");
-          if (useSettings.get("corrections")) {
-            track_title.textContent = correct_artist(track_title.getAttribute("data-name"));
-          }
-          const bar2 = track.querySelector(".chartlist-count-bar-slug");
-          if (bar2) {
-            if (settings.colourful_counts) {
-              patch_artist_ranks_in_list_view(track);
-            }
-            insights.artist.display = true;
-            const value = parseInt(bar2.getAttribute("data-stat-value"));
-            insights.artist.values.push(value);
-            if (value > insights.artist.highest.value) {
-              insights.artist.highest.value = value;
-            }
-            log(`pushed insight artist label of ${track_title.textContent}`, "glacier library", "log");
-            insights.artist.labels.push(track_title.textContent);
-            log("finished artist stuff, returning", "tracks", "log");
-          }
-          return;
-        }
-        const is_album = track.hasAttribute("data-album-row");
-        if (is_album) track.classList.add("bleh--is-album");
-        const track_artist = return_artist_from_track(track_title.getAttribute("href"), is_album);
-        log(`returned ${track_artist} from url ${track_title.getAttribute("href")}`, "track");
-        if (!wide) track.classList.add("chartlist-row--with-artist");
-        const bar = track.querySelector(".chartlist-count-bar-slug");
-        if (bar) {
-          const value = parseInt(bar.getAttribute("data-stat-value"));
-          if (is_album) {
-            insights.album.display = true;
-            insights.album.values.push(value);
-            if (value > insights.album.highest.value) {
-              insights.album.highest.value = value;
-            }
-          } else {
-            insights.track.display = true;
-            insights.track.values.push(value);
-            if (value > insights.track.highest.value) {
-              insights.track.highest.value = value;
-            }
-          }
-        }
-        const is_active3 = track.classList.contains("chartlist-row--now-scrobbling");
-        const has_bar = track.querySelector(":scope > .chartlist-bar");
-        if (has_bar) {
-          const bar2 = has_bar.querySelector(":scope > .chartlist-count-bar");
-          count_bar(bar2);
-        }
-        const track_legacy_menu = track.querySelector(".chartlist-more-menu");
-        const track_timestamp = track.querySelector(".chartlist-timestamp span");
-        let track_timestamp_contents;
-        if (track_timestamp && !is_active3) {
-          track_timestamp_contents = track_timestamp.getAttribute("title");
-          if (!track_timestamp_contents) {
-            track_timestamp_contents = track_timestamp.getAttribute("data-title");
-          }
-          if (track_timestamp_contents) {
-            track_timestamp.removeAttribute("title");
-            track_timestamp.setAttribute("data-title", track_timestamp_contents);
-            hover_tooltip(track_timestamp, /* @__PURE__ */ jsx(Tooltip, {
-              children: track_timestamp_contents
-            }));
-          }
-        }
-        const album = track.querySelector(".chartlist-album a");
-        if (!is_album && album) {
-          album.textContent = correct_item_by_artist(album.textContent, track_artist);
-        }
-        const album_link = track.querySelector(".chartlist-image a");
-        const show_album_text = (is_active3 || settings.expand_tracks == "always") && settings.expand_tracks != "never" && useSettings.get("track_layout") == "column";
-        track.setAttribute("data-show-album-text", show_album_text);
-        const image_wrap = track.querySelector(".chartlist-image");
-        let link;
-        let image2;
-        let alt;
-        let album_artist;
-        if (image_wrap) {
-          link = image_wrap.querySelector(".cover-art");
-          image2 = link.querySelector("img");
-          if (link.href) {
-            album_artist = return_artist_from_track(link.href, true);
-          }
-          alt = romanise(correct_item_by_artist(image2.getAttribute("alt"), track_artist));
-          hover_tooltip(image_wrap, /* @__PURE__ */ jsx(Tooltip, {
-            children: alt
-          }));
-          if (!is_album && has_bar) {
-            hoshino(image2, track_title.getAttribute("data-name"), track_artist, link);
-          }
-        }
-        let song_artist_element = track.querySelector(".chartlist-artist");
-        if (song_artist_element) {
-          track_info.appendChild(song_artist_element);
-        }
-        if (useSettings.get("format_guest_features")) {
-          const formatted = name_includes(track_title.getAttribute("data-name"), track_artist, track_title.getAttribute("data-inherit-artists"));
-          console.log("formatted", formatted);
-          track_title.setAttribute("data-name", formatted.corrected_title);
-          render(track_title, smart_title(formatted.song_title, formatted.song_tags));
-          if (!song_artist_element && !is_user) {
-            song_artist_element = document.createElement("td");
-            song_artist_element.classList.add("chartlist-artist");
-            track_info.appendChild(song_artist_element);
-          }
-          if (song_artist_element.textContent.replaceAll("+", " ").trim() === track_artist || song_artist_element.textContent.trim() === "") {
-            log("artist either matches or is blank, replacing", "tracks", "log");
-            render(song_artist_element, smart_artists(formatted.song_artist, formatted.song_guests));
-          }
-          if (track.getAttribute("data-disambig") == "explicit") {
-            song_artist_element.insertBefore(html.node`
-                        <span class="track-explicit icon">${tl2(trans.explicit)}</span>
-                    `, song_artist_element.firstChild);
-          }
-          if (track_legacy_menu) {
-            track.preview = html.node`
-                        <div class="track-preview">
-                            <div class="track-preview-image">
-                                <div class="inner-image">
-                                    ${image2 ? html.node`<img src=${image2.src} alt=${formatted.corrected_title}>` : html.node`<img class="missing-track" alt="">`}
-                                </div>
-                            </div>
-                            <div class="track-preview-info">
-                                <h5 class="track-preview-text track-preview-title">${formatted.song_title}</h5>
-                                <p class="track-preview-text track-preview-artist">${song_artist_element.querySelector("a").textContent}</p>
-                                <div class="track-preview-tags">
-                                    ${formatted.song_tags.map((tag) => html.node`
-                                        <div class="feat" data-tag-type="${tag.type}" data-tag-group="${tag.group}">${tag.text}</div>
-                                    `)}
-                                </div>
-                                ${is_album ? "" : html.node`<p class="track-preview-text track-preview-album">${image2 && album_link ? correct_item_by_artist(image2.getAttribute("alt"), track_artist) : album ? album.textContent : ""}</p>`}
-                                ${track_timestamp && track_timestamp_contents ? html.node`<p class="track-preview-text track-preview-timestamp">${track_timestamp_contents}</p>` : ""}
-                                ${image2?.getAttribute("data-hoshino") ? html.node`
-                                            <div class="hoshino-marker">
-                                                <div class="bleh-icon" />
-                                            </div>
-                                        ` : ""}
-                            </div>
-                        </div>
-                    `;
-          }
-        } else if (useSettings.get("corrections")) {
-          const song_artist_element2 = track.querySelector(".chartlist-artist a");
-          if (song_artist_element2) {
-            const corrected_title = romanise(correct_item_by_artist(track_title.textContent, song_artist_element2.textContent));
-            track_title.textContent = corrected_title;
-            track_title.setAttribute("data-name", corrected_title);
-            const corrected_artist = romanise(correct_artist(song_artist_element2.textContent));
-            song_artist_element2.textContent = corrected_artist;
-            song_artist_element2.setAttribute("title", corrected_artist);
-          } else {
-            const corrected_title = correct_item_by_artist(track_title.textContent, track_artist);
-            track_title.textContent = corrected_title;
-            track_title.setAttribute("data-name", corrected_title);
-          }
-        }
-        const previous = track.querySelectorAll(":scope > .more-button-wrapper");
-        previous.forEach((elem) => {
-          elem.remove();
-        });
-        if (track_legacy_menu) {
-          let menu;
-          const user = [
-            "user",
-            "overview"
-          ].includes(page.type) ? page.name : auth.name;
-          const is_own_profile = user == auth.name;
-          const can_edit = is_own_profile && !is_active3 && (!is_album ? !has_bar : true) && auth.pro && [
-            "user",
-            "overview"
-          ].includes(page.type);
-          const can_delete = is_own_profile && !is_active3 && !has_bar && !is_album && [
-            "user",
-            "overview"
-          ].includes(page.type);
-          const can_copy_scrobble = !is_album && !has_bar && !is_active3 && [
-            "user",
-            "overview"
-          ].includes(page.type);
-          const timestamp = parseInt(track.getAttribute("data-timestamp")) || Math.floor(new Date(track_timestamp_contents?.replace(/^[A-Za-z]+\s+/, "").replace(",", "").trim()).getTime() / 1e3);
-          const more_button = html.node`
-                    <button class="btn track-more-button icon chibi" data-type="more" onclick=${() => {
-            log("requested track in-built", "menu", "info", {
-              menu
-            });
-            menu.setProps({
-              placement: "bottom",
-              offset: [],
-              getReferenceClientRect: null
-            });
-            if (menu.state.isShown) {
-              menu.hide();
-            } else {
-              menu.show();
-            }
-          }}>
-                        ${tl2(trans.more)}
-                    </button>
-                `;
-          hover_tooltip(more_button, /* @__PURE__ */ jsx(Tooltip, {
-            children: tl2(trans.more)
-          }));
-          track.appendChild(html.node`
-                    <td class="more-button-wrapper">
-                        ${more_button}
-                    </td>
-                `);
-          setTimeout(() => {
-            const edit_button = track_legacy_menu.querySelector('[data-analytics-action="EditScrobbleOpen"]:not([href$="login?next=/pro"])');
-            const bulk_edit_button = track_legacy_menu.querySelector('[data-analytics-action="BulkEditScrobblesOpen"]');
-            const delete_button = track_legacy_menu.querySelector(".more-item--delete");
-            if (edit_button) {
-              log("has edit button", "track", "info", {
-                edit_button
-              });
-              const form = edit_button.parentElement;
-              page.token = form.querySelector('[name="csrfmiddlewaretoken"]')?.value;
-              track.setAttribute("data-action", form.getAttribute("action"));
-              if (!is_album) {
-                const album_name2 = form.querySelector('[name="album_name"]');
-                const album_artist_name = form.querySelector('[name="album_artist_name"]');
-                track.setAttribute("data-artist-name", correct_artist(form.querySelector('[name="artist_name"]')?.value));
-                track.setAttribute("data-track-name", correct_item_by_artist(form.querySelector('[name="track_name"]')?.value, form.querySelector('[name="artist_name"]')?.value));
-                if (album_name2) {
-                  track.setAttribute("data-album-name", correct_item_by_artist(album_name2?.value, form.querySelector('[name="artist_name"]')?.value));
-                }
-                if (album_artist_name) {
-                  track.setAttribute("data-album-artist-name", correct_artist(album_artist_name?.value));
-                }
-                track.setAttribute("data-timestamp", form.querySelector('[name="timestamp"]')?.value);
-              } else {
-                track.setAttribute("data-album-name", correct_item_by_artist(form.querySelector('[name="album_name"]')?.value, form.querySelector('[name="album_artist_name"]')?.value));
-                track.setAttribute("data-album-artist-name", correct_artist(form.querySelector('[name="album_artist_name"]')?.value));
-                track.setAttribute("data-album-name-original", correct_item_by_artist(form.querySelector('[name="album_name_original"]')?.value, form.querySelector('[name="album_artist_name_original"]')?.value));
-                track.setAttribute("data-album-artist-name-original", correct_artist(form.querySelector('[name="album_artist_name_original"]')?.value));
-                track.setAttribute("data-album-image", form.querySelector('[name="album_image"]')?.value);
-                track.setAttribute("data-count", form.querySelector('[name="count"]')?.value);
-              }
-            } else if (delete_button) {
-              log("has delete button", "track", "info", {
-                delete_button
-              });
-              let form = delete_button.parentElement;
-              page.token = form.querySelector('[name="csrfmiddlewaretoken"]')?.value;
-              track.setAttribute("data-artist-name", correct_artist(form.querySelector('[name="artist_name"]')?.value));
-              track.setAttribute("data-track-name", correct_item_by_artist(form.querySelector('[name="track_name"]')?.value, form.querySelector('[name="artist_name"]')?.value));
-              track.setAttribute("data-timestamp", form.querySelector('[name="timestamp"]')?.value);
-            }
-            console.info("more button", bulk_edit_button);
-            const album_name = sanitise(image2 ? correct_item_by_artist(image2.getAttribute("alt"), track_artist) : album ? album.textContent : "");
-            menu = tippy_esm_default(more_button, {
-              theme: "context-menu",
-              content: html.node`
-                            ${track.preview}
-                            ${can_edit ? html.node`
-                                <div class="button-combo">
-                                    ${() => {
-                if (is_album) {
-                  return html.node`
-                                                <form style="margin: 0" method="POST" action=${track.getAttribute("data-action")} data-edit-scrobble="">
-                                                    <input type="hidden" name="csrfmiddlewaretoken" value=${page.token}>
-                                                    <input type="hidden" name="album_name" value=${track.getAttribute("data-album-name")}>
-                                                    <input type="hidden" name="album_artist_name" value=${track.getAttribute("data-album-artist-name")}>
-                                                    <input type="hidden" name="album_image" value=${track.getAttribute("data-album-image")}>
-                                                    <input type="hidden" name="album_name_original" value=${track.getAttribute("data-album-name-original")}>
-                                                    <input type="hidden" name="album_artist_name_original" value=${track.getAttribute("data-album-artist-name-original")}>
-                                                    <input type="hidden" name="count" value=${track.getAttribute("data-count")}>
-                                                    <button class="dropdown-menu-clickable-item" data-type="edit">
-                                                        ${tl2(trans.edit)}
-                                                    </button>
-                                                </form>
-                                            `;
-                }
-                return html.node`
-                                            <form style="margin: 0" method="POST" action=${track.getAttribute("data-action")} data-edit-scrobble="">
-                                                <input type="hidden" name="csrfmiddlewaretoken" value=${page.token}>
-                                                <input type="hidden" name="artist_name" value=${track.getAttribute("data-artist-name")}>
-                                                <input type="hidden" name="track_name" value=${track.getAttribute("data-track-name")}>
-                                                <input type="hidden" name="album_name" value=${track.getAttribute("data-album-name")}>
-                                                <input type="hidden" name="album_artist_name" value=${track.getAttribute("data-album-artist-name")}>
-                                                <input type="hidden" name="timestamp" value=${track.getAttribute("data-timestamp")}>
-                                                <button class="dropdown-menu-clickable-item" data-type="edit">
-                                                    ${tl2(trans.edit)}
-                                                </button>
-                                            </form>
-                                        `;
-              }}
-                                    ${bulk_edit_button ? html.node`
-                                        <div class="button-combo-sep" />
-                                        ${() => {
-                let button2 = track_legacy_menu.querySelector('[data-analytics-action="BulkEditScrobblesOpen"]').cloneNode();
-                button2.classList = "dropdown-menu-clickable-item chibi";
-                button2.textContent = tl2(trans.bulk_edit);
-                button2.setAttribute("data-type", "bulk-edit");
-                tippy_esm_default(button2, {
-                  content: tl2(trans.bulk_edit)
-                });
-                return button2;
-              }}
-                                    ` : ""}
-                                </div>
-                                ${can_copy_scrobble ? html.node`
-                                    <button class="dropdown-menu-clickable-item" data-type="copy_scrobble" onclick=${() => {
-                submit_scrobble({
-                  pre_track: track_title.getAttribute("data-name"),
-                  pre_artist: track_artist,
-                  pre_album: alt,
-                  pre_album_artist: album_artist,
-                  pre_timestamp: timestamp
-                });
-              }}>
-                                        ${tl2(trans.copy)}
-                                    </button>
-                                ` : ""}
-                                <div class="sep" />
-                            ` : can_copy_scrobble ? html.node`
-                                <button class="dropdown-menu-clickable-item" data-type="copy_scrobble" onclick=${() => {
-                submit_scrobble({
-                  pre_track: track_title.getAttribute("data-name"),
-                  pre_artist: track_artist,
-                  pre_album: alt,
-                  pre_album_artist: album_artist,
-                  pre_timestamp: timestamp
-                });
-              }}>
-                                    ${tl2(trans.copy)}
-                                </button>
-                                <div class="sep" />
-                            ` : bulk_edit_button ? html.node`
-                                ${() => {
-                const button2 = track_legacy_menu.querySelector('[data-analytics-action="BulkEditScrobblesOpen"]');
-                button2.textContent = tl2(trans.bulk_edit);
-                button2.setAttribute("data-type", "bulk-edit");
-                return button2;
-              }}
-                                <div class="sep" />
-                            ` : ""}
-                            ${() => {
-                const container = track.querySelector(".chartlist-play");
-                if (!container) return;
-                const button2 = container.querySelector(".chartlist-play-button");
-                if (!button2) return;
-                button2.classList.add("dropdown-menu-clickable-item");
-                button2.classList.remove("chartlist-play-button");
-                button2.textContent = tl2(trans.play);
-                button2.setAttribute("data-type", "play");
-                track.removeChild(container);
-                return button2;
-              }}
-                            ${!is_album ? html.node`
-                            <div class="button-combo">
-                                ${() => {
-                return html.node`
-                                        <a class="dropdown-menu-clickable-item" data-type="track" href=${track_title.getAttribute("href")}>
-                                            ${tl2(trans.track)}
-                                        </a>
-                                    `;
-              }}
-                                <div class="button-combo-sep"/>
-                                ${() => {
-                const button2 = html.node`
-                                        <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${user}/library${track_title.getAttribute("href")}">
-                                            ${tl2(trans.explore_in_library)}
-                                        </a>
-                                    `;
-                tippy_esm_default(button2, {
-                  content: tl2(trans.explore_in_library),
-                  delay: [
-                    500,
-                    0
-                  ]
-                });
-                return button2;
-              }}
-                            </div>
-                            ` : ""}
-                            ${album_name && album_link ? html.node`
-                            <div class="button-combo">
-                                ${() => {
-                return html.node`
-                                        <a class="dropdown-menu-clickable-item" data-type="album" href=${album_link.getAttribute("href")}>
-                                            ${tl2(trans.album)}
-                                        </a>
-                                    `;
-              }}
-                                <div class="button-combo-sep"/>
-                                ${() => {
-                let button2 = html.node`
-                                        <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${user}/library${album_link.getAttribute("href")}">
-                                            ${tl2(trans.explore_in_library)}
-                                        </a>
-                                    `;
-                tippy_esm_default(button2, {
-                  content: tl2(trans.explore_in_library),
-                  delay: [
-                    500,
-                    0
-                  ]
-                });
-                return button2;
-              }}
-                            </div>
-                            ` : is_album ? html.node`
-                            <div class="button-combo">
-                                ${() => {
-                return html.node`
-                                        <a class="dropdown-menu-clickable-item" data-type="album" href=${track_title.getAttribute("href")}>
-                                            ${tl2(trans.album)}
-                                        </a>
-                                    `;
-              }}
-                                <div class="button-combo-sep"/>
-                                ${() => {
-                const button2 = html.node`
-                                        <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${user}/library${track_title.getAttribute("href")})}">
-                                            ${tl2(trans.explore_in_library)}
-                                        </a>
-                                    `;
-                tippy_esm_default(button2, {
-                  content: tl2(trans.explore_in_library),
-                  delay: [
-                    500,
-                    0
-                  ]
-                });
-                return button2;
-              }}
-                            </div>
-                            ` : ""}
-                            <div class="button-combo">
-                                ${() => {
-                return html.node`
-                                        <a class="dropdown-menu-clickable-item" data-type="artist" href="${root}music/${redirect()}${sanitise(track_artist)}">
-                                            ${tl2(trans.artist)}
-                                        </a>
-                                    `;
-              }}
-                                <div class="button-combo-sep"/>
-                                ${() => {
-                const button2 = html.node`
-                                        <a class="dropdown-menu-clickable-item chibi" data-type="continue" href="${root}user/${user}/library/music/${redirect()}${sanitise(track_artist)}">
-                                            ${tl2(trans.explore_in_library)}
-                                        </a>
-                                    `;
-                tippy_esm_default(button2, {
-                  content: tl2(trans.explore_in_library),
-                  delay: [
-                    500,
-                    0
-                  ]
-                });
-                return button2;
-              }}
-                            </div>
-                            ${() => {
-                if (!is_own_profile || is_album) return;
-                let name = track.getAttribute("data-track-name");
-                let artist = track.getAttribute("data-artist-name");
-                if (!name) {
-                  name = track_title.getAttribute("data-name");
-                  artist = track_artist;
-                }
-                return html.node`
-                                    <form style="margin: 0" method="POST" action="${root}user/${auth.name}/obsessions" data-submit-to-modal="">
-                                        <input type="hidden" name="csrfmiddlewaretoken" value=${page.token}>
-                                        <input type="hidden" name="name" value=${name}>
-                                        <input type="hidden" name="artist_name" value=${artist}>
-                                        <button class="dropdown-menu-clickable-item" data-type="obsession">
-                                            ${tl2(trans.obsess)}
-                                        </button>
-                                    </form>
-                                `;
-              }}
-                            <button class="dropdown-menu-clickable-item" data-type="link" onclick=${() => {
-                copy(track_title.href);
-              }}>
-                                ${tl2(trans.copy_link)}
-                            </button>
-                            ${() => {
-                if (!is_own_profile || !can_delete) return;
-                const button2 = html.node`
-                                    <button class="dropdown-menu-clickable-item more-item--delete colourful" data-type="delete">
-                                        ${tl2(trans.delete)}
-                                    </button>
-                                `;
-                let form;
-                return html.node`
-                                    <div class="sep" />
-                                    <form ref=${(el) => form = el} style="margin: 0" method="POST" action="${root}user/${auth.name}/library/delete" onsubmit=${async (e5) => {
-                  e5.preventDefault();
-                  const url = `${root}user/${auth.name}/library/delete`;
-                  const form_data = new FormData(form);
-                  console.info(form_data);
-                  try {
-                    track.setAttribute("data-ajax-form-state", "deleted");
-                    await fetch(url, {
-                      method: "POST",
-                      body: form_data
-                    }).then((res) => {
-                      if (!res.ok) {
-                        log("failed to delete", "form", "error", {
-                          res
-                        });
-                        track.removeAttribute("data-ajax-form-state");
-                        return;
-                      }
-                      log("received response", "form", "info", {
-                        res
-                      });
-                      notify({
-                        id: "delete",
-                        title: tl2(trans.deleted),
-                        body: track_title.getAttribute("data-name"),
-                        icon: "icon-16-trash",
-                        type: "error"
-                      });
-                    });
-                  } catch (e6) {
-                    console.error(e6);
-                    track.removeAttribute("data-ajax-form-state");
-                  }
-                }}>
-                                        <input type="hidden" name="csrfmiddlewaretoken" value=${page.token}>
-                                        <input type="hidden" name="artist_name" value=${track.getAttribute("data-artist-name")}>
-                                        <input type="hidden" name="track_name" value=${track.getAttribute("data-track-name")}>
-                                        <input type="hidden" name="timestamp" value=${track.getAttribute("data-timestamp")}>
-                                        ${button2}
-                                    </form>
-                                `;
-              }}
-                        `,
-              placement: "right-start",
-              trigger: "manual",
-              interactive: true,
-              interactiveBorder: 10,
-              offset: [
-                0,
-                0
-              ],
-              hideOnClick: false,
-              appendTo: document.body,
-              onCreate(instance) {
-                instance.popper.addEventListener("click", () => {
-                  instance.hide();
-                });
-              },
-              onClickOutside(instance) {
-                instance.hide();
-              }
-            });
-            register_menu(track, menu);
-          }, 100);
-        }
-        if (is_album) {
-          log(`pushed insight album label of ${track_title.getAttribute("data-name")}`, "glacier library", "log");
-          insights.album.labels.push(track_title.getAttribute("data-name"));
-        } else {
-          log(`pushed insight track label of ${track_title.getAttribute("data-name")}`, "glacier library", "log");
-          insights.track.labels.push(track_title.getAttribute("data-name"));
-        }
-        const loved = track.querySelector(".chartlist-loved");
-        if (loved) {
-          loved.classList.add("colourful");
-          loved.setAttribute("data-season", season);
-          const love = loved.querySelector(".chartlist-love-button");
-          love.classList.add("btn", "icon-mask");
-          hover_tooltip(love, /* @__PURE__ */ jsx(Tooltip, {
-            children: tl2(trans.love_track)
-          }));
-        }
-        const album_text = track.querySelector(".chartlist-album.custom-album-text");
-        if (image_wrap) {
-          if (!is_album && show_album_text && !has_bar && !album_text) {
-            track_info.appendChild(html.node`
-                        <td class="chartlist-album custom-album-text">
-                            <a href="${link.getAttribute("href")}">${alt}</a>
-                        </td>
-                    `);
-          }
-          if (!settings.colourful_tracks && !settings.colourful_tracks_all) {
-            return;
-          }
-          if (!settings.colourful_tracks_all && !is_active3) return;
-          image2.setAttribute("crossorigin", "anonymous");
-          try {
-            image2.onload = async () => {
-              const { hue: hue4, sat, lit } = await header_colour(image2);
-              const to_colour = track.querySelectorAll(".chartlist-count-bar, .chartlist-loved");
-              track.classList.add("colourful");
-              if (is_active3) {
-                track.style.setProperty("--hue-over", hue4);
-                track.style.setProperty("--sat-over", sat);
-                track.style.setProperty("--lit-over", lit);
-              } else {
-                to_colour.forEach((elem) => {
-                  elem.classList.add("colourful");
-                  elem.style.setProperty("--hue-over", hue4);
-                  elem.style.setProperty("--sat-over", sat);
-                  elem.style.setProperty("--lit-over", lit);
-                });
-              }
-            };
-          } catch (e5) {
-          }
-        }
-      }
-    });
-    if (page.subpage.startsWith("library")) bleh_glacier_insights(insights);
-  }
-
-  // src/components/dialog/share.js
-  function share(url) {
-    let is_url2 = false;
-    let share_object = {
-      text: url
-    };
-    let scheme;
-    let hostname;
-    let path;
-    try {
-      const link = new URL(url);
-      is_url2 = true;
-      share_object = {
-        url
-      };
-      scheme = link.protocol;
-      hostname = link.hostname;
-      path = link.pathname + link.search + link.hash;
-    } catch (e5) {
-    }
-    let input2;
-    dialog({
-      id: "share",
-      title: tl2(trans.share),
-      body: html.node`
-            ${is_url2 ? html.node`
-                <div class="external-warn-input">
-                    <span class="scheme">
-                        ${scheme}//
-                    </span>
-                    ${hostname ? html.node`
-                    <span class="hostname">
-                        ${hostname}
-                    </span>
-                    ` : html.node`
-                    <span class="hostname">
-                        ${path}
-                    </span>
-                    `}
-                    ${path != "/" && hostname ? html.node`
-                    <span class="path">
-                        ${path}
-                    </span>
-                    ` : ""}
-                </div>
-            ` : html.node`
-                <div class="external-warn-input">
-                    <span class="hostname">
-                        ${url}
-                    </span>
-                </div>
-            `}
-            <div class="modal-footer center">
-                <button class="btn primary icon fill-btn" data-type="share" onclick=${() => navigator && navigator.share ? navigator.share(share_object) : log("share failed", "share", "error")}>
-                    ${tl2(trans.share_via_device)}
-                </button>
-                <button class="btn primary icon copy" onclick=${() => {
-        copy(url);
-      }}
-                >${tl2(is_url2 ? trans.copy_link : trans.copy_text)}</button>
-            </div>
-        `
-    });
-  }
-  function download(url, filename = null) {
-    log(`downloading ${filename}`, "download");
-    const link = html.node`
-        <a href=${url} download />
-    `;
-    if (filename) {
-      link.setAttribute("download", filename);
-    }
-    link.click();
-    notify({
-      id: "downloaded",
-      title: tl2(trans.downloaded),
-      body: filename,
-      icon: "icon-16-download"
-    });
-  }
-
   // node_modules/.deno/html2canvas-pro@1.6.7/node_modules/html2canvas-pro/dist/html2canvas-pro.esm.js
   var Bounds = class _Bounds {
     constructor(left2, top2, width, height) {
@@ -94466,103 +94296,6 @@ var bleh = (() => {
         });
       }
     }
-  }
-
-  // src/components/button/button.tsx
-  function Button({ ref: ref2, type = "button", chibi = false, primary = false, colourful = false, accented = false, disabled = false, loading = false, menu = false, href, external, onClick, className: className2, children, tooltip, ...props }) {
-    const classes = [
-      "btn",
-      "flex-button",
-      chibi && "chibi",
-      primary && "primary",
-      colourful && "colourful",
-      menu && "dropdown-menu-clickable-item v2",
-      menu && accented && "accented-menu-item",
-      className2 && className2
-    ];
-    let elem;
-    if (!href) {
-      elem = /* @__PURE__ */ jsx("button", {
-        type,
-        class: classes,
-        onClick: handleOnClick,
-        ref: ref2,
-        ...props,
-        children
-      });
-    }
-    elem = /* @__PURE__ */ jsx("a", {
-      class: classes,
-      href,
-      target: external ? "_blank" : void 0,
-      onClick: handleOnClick,
-      ref: ref2,
-      ...props,
-      children
-    });
-    if (tooltip) {
-      hover_tooltip(elem, /* @__PURE__ */ jsx(Tooltip, {
-        children: tooltip
-      }));
-    }
-    function handleOnClick() {
-      if (!onClick || disabled || loading) return;
-      onClick();
-    }
-    function update() {
-      if (disabled) {
-        elem.setAttribute("disabled", "true");
-      } else {
-        elem.removeAttribute("disabled");
-      }
-      if (loading) {
-        elem.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
-          children: [
-            /* @__PURE__ */ jsx(Icon, {
-              name: icons.spinner
-            }),
-            tl2(trans.loading)
-          ]
-        }));
-        elem.setAttribute("data-loading", "true");
-      } else {
-        elem.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
-          children
-        }));
-        elem.removeAttribute("data-loading");
-      }
-    }
-    Object.defineProperty(elem, "disabled", {
-      get() {
-        return disabled;
-      },
-      set(val) {
-        disabled = val;
-        update();
-      }
-    });
-    Object.defineProperty(elem, "loading", {
-      get() {
-        return loading;
-      },
-      set(val) {
-        loading = val;
-        update();
-      }
-    });
-    update();
-    return elem;
-  }
-  function ButtonCombo({ children }) {
-    return /* @__PURE__ */ jsx("div", {
-      class: "button-combo",
-      children
-    });
-  }
-  function ButtonComboSeparator() {
-    return /* @__PURE__ */ jsx("div", {
-      class: "button-combo-sep"
-    });
   }
 
   // src/components/event/item.tsx
@@ -121141,7 +120874,7 @@ var bleh = (() => {
         date: "2026-07-30"
       }
     },
-    built_on: "2026-08-24T16:06:09.498Z"
+    built_on: "2026-08-24T19:16:48.404Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

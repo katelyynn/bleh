@@ -257,25 +257,34 @@ export function menu_tooltip<
 		...config,
 	});
 	host.addEventListener('click', () => {
+		const listener: EventListener = ({ target: t }) => {
+			// TODO: if you click the button (or something inside it)
+			// that triggered the menu to show,
+			// it will fire this after the clicking again check
+			// below:
+			const target = t as HTMLElement | null;
+			if (
+				target && target instanceof HTMLElement &&
+				target != tooltip.element && target != host &&
+				!tooltip.element.contains(target) &&
+				!target.closest('.tippy-box') &&
+				tooltip.is_mounted
+			) {
+				tooltip.hide();
+				document.body.removeEventListener('click', listener);
+			}
+		};
+
 		// close when clicking again
 		if (tooltip.is_mounted) {
 			tooltip.hide();
 			return;
 		}
 		tooltip.show();
-		const listener: EventListener = ({ target: t }) => {
-			const target = t as HTMLElement | null;
-			if (
-				target && target instanceof HTMLElement &&
-				target != tooltip.element && target != host &&
-				!tooltip.element.contains(target) &&
-				!target.closest('.tippy-box')
-			) {
-				tooltip.hide();
-				document.body.removeEventListener('click', listener);
-			}
-		};
-		document.body.addEventListener('click', listener);
+
+		setTimeout(() => {
+			document.body.addEventListener('click', listener);
+		}, 0);
 	});
 	return tooltip;
 }

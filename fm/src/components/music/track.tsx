@@ -34,7 +34,15 @@ import { header_colour } from '../page/colour';
 import { symbol } from '@/main';
 import { useSettings } from '@/page.ts';
 import { count_bar } from '@/components/track/bar.tsx';
-import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
+import {
+	context_menu_tooltip,
+	hover_tooltip,
+	menu_tooltip,
+	Tooltip,
+} from '@/components/shared/tooltips.tsx';
+import { Button } from '@/components/button/button.tsx';
+import { Icon, icons } from '@/components/shared/icon.tsx';
+import { MenuContents } from '@/components/menu/menu.tsx';
 
 export function patch_titles(search = page.structure.main) {
 	if (page.subpage == 'tags_overview') return;
@@ -588,7 +596,18 @@ export function patch_titles(search = page.structure.main) {
 						).getTime() / 1000,
 					);
 
-				const more_button = html.node`
+				const more_button = (
+					<Button
+						chibi
+						className='track-more-button'
+						tooltip={tl(trans.more)}
+					>
+						<Icon name={icons.more} />
+						{tl(trans.more)}
+					</Button>
+				);
+
+				/*const more_button = html.node`
                     <button class="btn track-more-button icon chibi" data-type="more" onclick=${() => {
 					log('requested track in-built', 'menu', 'info', {
 						menu,
@@ -612,13 +631,13 @@ export function patch_titles(search = page.structure.main) {
 				hover_tooltip(
 					more_button,
 					<Tooltip>{tl(trans.more)}</Tooltip>,
-				);
+					);*/
 
-				track.appendChild(html.node`
-                    <td class="more-button-wrapper">
-                        ${more_button}
-                    </td>
-                `);
+				track.appendChild(
+					<td class='more-button-wrapper'>
+						{more_button}
+					</td>,
+				);
 
 				setTimeout(() => {
 					const edit_button = track_legacy_menu.querySelector(
@@ -782,7 +801,16 @@ export function patch_titles(search = page.structure.main) {
 							: '',
 					);
 
-					menu = tippy(more_button, {
+					const menu_contents = (
+						<MenuContents>
+							<p>hai</p>
+						</MenuContents>
+					);
+
+					menu_tooltip(more_button, menu_contents);
+					context_menu_tooltip(track, menu_contents);
+
+					/*menu = tippy(more_button, {
 						theme: 'context-menu',
 						content: html.node`
                             ${track.preview}
@@ -1232,7 +1260,7 @@ export function patch_titles(search = page.structure.main) {
 						},
 					});
 
-					register_menu(track, menu);
+					register_menu(track, menu);*/
 				}, 100);
 			}
 
@@ -1281,11 +1309,11 @@ export function patch_titles(search = page.structure.main) {
 
 			if (image_wrap) {
 				if (!is_album && show_album_text && !has_bar && !album_text) {
-					track_info.appendChild(html.node`
-                        <td class="chartlist-album custom-album-text">
-                            <a href="${link.getAttribute('href')}">${alt}</a>
-                        </td>
-                    `);
+					track_info.appendChild(
+						<td class={['chartlist-album', 'custom-album-text']}>
+							<a href={link.getAttribute('href')}>{alt}</a>
+						</td>,
+					);
 				}
 
 				if (
