@@ -56492,17 +56492,26 @@ var bleh = (() => {
       const listener = ({ target: t2 }) => {
         const target = t2;
         if (target && target instanceof HTMLElement && target != tooltip.element && target != host && !tooltip.element.contains(target) && !target.closest(".tippy-box") && tooltip.is_mounted) {
+          log("hiding due to listener", "tooltip", "info", {
+            target
+          });
           tooltip.hide();
           document.body.removeEventListener("click", listener);
+          document.body.removeEventListener("contextmenu", listener);
         }
       };
       if (tooltip.is_mounted) {
+        log("hiding due to is_mounted", "tooltip", "info");
         tooltip.hide();
+        document.body.removeEventListener("click", listener);
+        document.body.removeEventListener("contextmenu", listener);
         return;
       }
+      log("showing", "tooltip", "info");
       tooltip.show();
       setTimeout(() => {
         document.body.addEventListener("click", listener);
+        document.body.addEventListener("contextmenu", listener);
       }, 0);
     });
     return tooltip;
@@ -56515,19 +56524,29 @@ var bleh = (() => {
     });
     host.addEventListener("contextmenu", (e5) => {
       e5.preventDefault();
-      if (tooltip.is_mounted) {
-        tooltip.hide();
-        return;
-      }
-      tooltip.show();
       const listener = ({ target: t2 }) => {
         const target = t2;
         if (target && target instanceof HTMLElement && target != tooltip.element && target != host && !tooltip.element.contains(target) && !target.closest(".tippy-box")) {
+          log("hiding due to listener (ctx)", "tooltip", "info", {
+            target
+          });
           tooltip.hide();
           document.body.removeEventListener("click", listener);
+          document.body.removeEventListener("contextmenu", listener);
         }
       };
-      document.body.addEventListener("click", listener);
+      if (tooltip.is_mounted) {
+        log("hiding due to is_mounted (ctx)", "tooltip", "info");
+        tooltip.hide();
+        document.body.removeEventListener("contextmenu", listener);
+        return;
+      }
+      log("showing (ctx)", "tooltip", "info");
+      tooltip.show();
+      setTimeout(() => {
+        document.body.addEventListener("click", listener);
+        document.body.addEventListener("contextmenu", listener);
+      }, 0);
     });
     return tooltip;
   }
@@ -56968,7 +56987,7 @@ var bleh = (() => {
           if (track_legacy_menu) {
             track.preview = /* @__PURE__ */ jsx(TrackMenuPreview, {
               image: image2?.src,
-              name: formatted.corrected_title,
+              name: formatted.song_title,
               artist: song_artist_element.querySelector("a")?.textContent,
               tags: formatted.song_tags,
               album: image2 && album_link ? correct_item_by_artist(image2.getAttribute("alt"), track_artist) : album ? album.textContent : void 0,
@@ -120976,7 +120995,7 @@ var bleh = (() => {
         date: "2026-07-30"
       }
     },
-    built_on: "2026-08-24T21:04:57.946Z"
+    built_on: "2026-08-25T00:05:26.650Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

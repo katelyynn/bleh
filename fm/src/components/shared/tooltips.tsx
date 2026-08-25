@@ -14,6 +14,7 @@ import {
 	shift as shiftMiddleware,
 } from '@floating-ui/dom';
 import { HTMLAttributes, ReactElement } from 'jsx-dom';
+import { log } from '@/build/log.js';
 
 type AnimationPreset =
 	| 'slide-down-bottom'
@@ -270,20 +271,27 @@ export function menu_tooltip<
 				!target.closest('.tippy-box') &&
 				tooltip.is_mounted
 			) {
+				log('hiding due to listener', 'tooltip', 'info', { target });
 				tooltip.hide();
 				document.body.removeEventListener('click', listener);
+				document.body.removeEventListener('contextmenu', listener);
 			}
 		};
 
 		// close when clicking again
 		if (tooltip.is_mounted) {
+			log('hiding due to is_mounted', 'tooltip', 'info');
 			tooltip.hide();
+			document.body.removeEventListener('click', listener);
+			document.body.removeEventListener('contextmenu', listener);
 			return;
 		}
+		log('showing', 'tooltip', 'info');
 		tooltip.show();
 
 		setTimeout(() => {
 			document.body.addEventListener('click', listener);
+			document.body.addEventListener('contextmenu', listener);
 		}, 0);
 	});
 	return tooltip;
@@ -307,12 +315,7 @@ export function context_menu_tooltip<
 	});
 	host.addEventListener('contextmenu', (e) => {
 		e.preventDefault();
-		// close when clicking again
-		if (tooltip.is_mounted) {
-			tooltip.hide();
-			return;
-		}
-		tooltip.show();
+
 		const listener: EventListener = ({ target: t }) => {
 			const target = t as HTMLElement | null;
 			if (
@@ -321,11 +324,29 @@ export function context_menu_tooltip<
 				!tooltip.element.contains(target) &&
 				!target.closest('.tippy-box')
 			) {
+				log('hiding due to listener (ctx)', 'tooltip', 'info', {
+					target,
+				});
 				tooltip.hide();
 				document.body.removeEventListener('click', listener);
+				document.body.removeEventListener('contextmenu', listener);
 			}
 		};
-		document.body.addEventListener('click', listener);
+
+		// close when clicking again
+		if (tooltip.is_mounted) {
+			log('hiding due to is_mounted (ctx)', 'tooltip', 'info');
+			tooltip.hide();
+			document.body.removeEventListener('contextmenu', listener);
+			return;
+		}
+		log('showing (ctx)', 'tooltip', 'info');
+		tooltip.show();
+
+		setTimeout(() => {
+			document.body.addEventListener('click', listener);
+			document.body.addEventListener('contextmenu', listener);
+		}, 0);
 	});
 	return tooltip;
 }

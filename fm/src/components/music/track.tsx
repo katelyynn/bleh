@@ -472,7 +472,7 @@ export function patch_titles(search = page.structure.main) {
 					track.preview = (
 						<TrackMenuPreview
 							image={image?.src}
-							name={formatted.corrected_title}
+							name={formatted.song_title}
 							artist={song_artist_element.querySelector('a')
 								?.textContent}
 							tags={formatted.song_tags}
