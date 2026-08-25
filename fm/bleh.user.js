@@ -56371,6 +56371,8 @@ var bleh = (() => {
     * `host`'s `aria-describedby` attribute
     */
     uuid = crypto.randomUUID();
+    onShow = null;
+    onHide = null;
     constructor(host, element, config = {}) {
       this.host = host;
       this.host.setAttribute("aria-expanded", "false");
@@ -56390,6 +56392,8 @@ var bleh = (() => {
         ariaEnabled: false,
         ...config
       };
+      this.onShow = config.onShow || null;
+      this.onHide = config.onHide || null;
       if (this.config.placement == "top") {
         this.config = {
           ...this.config,
@@ -56405,13 +56409,16 @@ var bleh = (() => {
       }
     }
     show() {
+      log("showing", "tooltip");
       this.cancel_animation();
       if (!this.is_mounted) this.mount();
       const { keyframes, options } = animation_for_preset(this.config.enterAnimation);
       const animation = this.element.animate(keyframes, options);
       this.current_animation = animation;
+      if (this.onShow) this.onShow();
     }
     hide() {
+      log("hiding", "tooltip");
       if (!this.is_mounted) return;
       this.cancel_animation();
       const { keyframes, options } = animation_for_preset(this.config.exitAnimation);
@@ -56424,14 +56431,17 @@ var bleh = (() => {
         }
       }).catch(() => {
       });
+      if (this.onHide) this.onHide();
     }
     cancel_animation() {
       if (this.current_animation) {
+        log("cancelled current animation", "tooltip");
         this.current_animation.cancel();
         this.current_animation = null;
       }
     }
     mount() {
+      log("mounting", "tooltip");
       this.unmount();
       this.is_mounted = true;
       this.element = document.body.appendChild(this.element);
@@ -56447,6 +56457,7 @@ var bleh = (() => {
       });
     }
     unmount() {
+      log("unmounting", "tooltip");
       if (this.cleanup && this.element.parentNode) {
         this.cleanup();
         this.element = this.element.parentNode.removeChild(this.element);
@@ -56486,25 +56497,25 @@ var bleh = (() => {
     const tooltip = new TooltipInstance(host, element, {
       placement: "bottom",
       ariaEnabled: true,
+      onHide: () => {
+        document.body.removeEventListener("click", listener);
+        document.body.removeEventListener("contextmenu", listener);
+      },
       ...config
     });
+    const listener = ({ target: t2 }) => {
+      const target = t2;
+      if (target && target instanceof HTMLElement && target != tooltip.element && target != host && !tooltip.element.contains(target) && !target.closest(".tippy-box") && tooltip.is_mounted) {
+        log("hiding due to listener", "tooltip", "info", {
+          target
+        });
+        tooltip.hide();
+      }
+    };
     host.addEventListener("click", () => {
-      const listener = ({ target: t2 }) => {
-        const target = t2;
-        if (target && target instanceof HTMLElement && target != tooltip.element && target != host && !tooltip.element.contains(target) && !target.closest(".tippy-box") && tooltip.is_mounted) {
-          log("hiding due to listener", "tooltip", "info", {
-            target
-          });
-          tooltip.hide();
-          document.body.removeEventListener("click", listener);
-          document.body.removeEventListener("contextmenu", listener);
-        }
-      };
       if (tooltip.is_mounted) {
         log("hiding due to is_mounted", "tooltip", "info");
         tooltip.hide();
-        document.body.removeEventListener("click", listener);
-        document.body.removeEventListener("contextmenu", listener);
         return;
       }
       log("showing", "tooltip", "info");
@@ -56520,25 +56531,26 @@ var bleh = (() => {
     const tooltip = new TooltipInstance(host, element, {
       placement: "bottom",
       ariaEnabled: true,
+      onHide: () => {
+        document.body.removeEventListener("click", listener);
+        document.body.removeEventListener("contextmenu", listener);
+      },
       ...config
     });
+    const listener = ({ target: t2 }) => {
+      const target = t2;
+      if (target && target instanceof HTMLElement && target != tooltip.element && target != host && !tooltip.element.contains(target) && !target.closest(".tippy-box")) {
+        log("hiding due to listener (ctx)", "tooltip", "info", {
+          target
+        });
+        tooltip.hide();
+      }
+    };
     host.addEventListener("contextmenu", (e5) => {
       e5.preventDefault();
-      const listener = ({ target: t2 }) => {
-        const target = t2;
-        if (target && target instanceof HTMLElement && target != tooltip.element && target != host && !tooltip.element.contains(target) && !target.closest(".tippy-box")) {
-          log("hiding due to listener (ctx)", "tooltip", "info", {
-            target
-          });
-          tooltip.hide();
-          document.body.removeEventListener("click", listener);
-          document.body.removeEventListener("contextmenu", listener);
-        }
-      };
       if (tooltip.is_mounted) {
         log("hiding due to is_mounted (ctx)", "tooltip", "info");
         tooltip.hide();
-        document.body.removeEventListener("contextmenu", listener);
         return;
       }
       log("showing (ctx)", "tooltip", "info");
@@ -120995,7 +121007,7 @@ var bleh = (() => {
         date: "2026-07-30"
       }
     },
-    built_on: "2026-08-25T00:05:26.650Z"
+    built_on: "2026-08-25T16:21:51.069Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

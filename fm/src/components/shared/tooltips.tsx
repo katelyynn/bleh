@@ -26,6 +26,8 @@ type TooltipConfig = Partial<
 		enterAnimation: AnimationPreset;
 		exitAnimation: AnimationPreset;
 		ariaEnabled: boolean;
+		onShow: () => void;
+		onHide: () => void;
 	}
 >;
 
@@ -85,6 +87,9 @@ export class TooltipInstance<
 	 */
 	private uuid = crypto.randomUUID();
 
+	public onShow: (() => void) | null = null;
+	public onHide: (() => void) | null = null;
+
 	public constructor(
 		host: H,
 		element: E,
@@ -108,6 +113,8 @@ export class TooltipInstance<
 			ariaEnabled: false,
 			...config,
 		};
+		this.onShow = config.onShow || null;
+		this.onHide = config.onHide || null;
 
 		if (this.config.placement == 'top') {
 			this.config = {
@@ -125,6 +132,7 @@ export class TooltipInstance<
 	}
 
 	public show() {
+		log('showing', 'tooltip');
 		this.cancel_animation();
 
 		if (!this.is_mounted) this.mount();
@@ -135,9 +143,12 @@ export class TooltipInstance<
 		const animation = this.element.animate(keyframes, options);
 
 		this.current_animation = animation;
+
+		if (this.onShow) this.onShow();
 	}
 
 	public hide() {
+		log('hiding', 'tooltip');
 		if (!this.is_mounted) return;
 
 		this.cancel_animation();
@@ -148,6 +159,8 @@ export class TooltipInstance<
 		const animation = this.element.animate(keyframes, options);
 
 		this.current_animation = animation;
+
+		if (this.onHide) this.onHide();
 
 		// delay unmount until exit animation finishes
 		animation.finished.then(() => {
@@ -160,12 +173,14 @@ export class TooltipInstance<
 
 	private cancel_animation() {
 		if (this.current_animation) {
+			log('cancelled current animation', 'tooltip');
 			this.current_animation.cancel();
 			this.current_animation = null;
 		}
 	}
 
 	public mount() {
+		log('mounting', 'tooltip');
 		this.unmount();
 		this.is_mounted = true;
 		this.element = document.body.appendChild(this.element);
@@ -187,6 +202,7 @@ export class TooltipInstance<
 	}
 
 	public unmount() {
+		log('unmounting', 'tooltip');
 		if (this.cleanup && this.element.parentNode) {
 			this.cleanup();
 			this.element = this.element.parentNode.removeChild(this.element);
@@ -255,35 +271,36 @@ export function menu_tooltip<
 	const tooltip = new TooltipInstance(host, element, {
 		placement: 'bottom',
 		ariaEnabled: true,
+		onHide: () => {
+			document.body.removeEventListener('click', listener);
+			document.body.removeEventListener('contextmenu', listener);
+		},
 		...config,
 	});
-	host.addEventListener('click', () => {
-		const listener: EventListener = ({ target: t }) => {
-			// TODO: if you click the button (or something inside it)
-			// that triggered the menu to show,
-			// it will fire this after the clicking again check
-			// below:
-			const target = t as HTMLElement | null;
-			if (
-				target && target instanceof HTMLElement &&
-				target != tooltip.element && target != host &&
-				!tooltip.element.contains(target) &&
-				!target.closest('.tippy-box') &&
-				tooltip.is_mounted
-			) {
-				log('hiding due to listener', 'tooltip', 'info', { target });
-				tooltip.hide();
-				document.body.removeEventListener('click', listener);
-				document.body.removeEventListener('contextmenu', listener);
-			}
-		};
 
+	const listener: EventListener = ({ target: t }) => {
+		// TODO: if you click the button (or something inside it)
+		// that triggered the menu to show,
+		// it will fire this after the clicking again check
+		// below:
+		const target = t as HTMLElement | null;
+		if (
+			target && target instanceof HTMLElement &&
+			target != tooltip.element && target != host &&
+			!tooltip.element.contains(target) &&
+			!target.closest('.tippy-box') &&
+			tooltip.is_mounted
+		) {
+			log('hiding due to listener', 'tooltip', 'info', { target });
+			tooltip.hide();
+		}
+	};
+
+	host.addEventListener('click', () => {
 		// close when clicking again
 		if (tooltip.is_mounted) {
 			log('hiding due to is_mounted', 'tooltip', 'info');
 			tooltip.hide();
-			document.body.removeEventListener('click', listener);
-			document.body.removeEventListener('contextmenu', listener);
 			return;
 		}
 		log('showing', 'tooltip', 'info');
@@ -311,33 +328,35 @@ export function context_menu_tooltip<
 	const tooltip = new TooltipInstance(host, element, {
 		placement: 'bottom',
 		ariaEnabled: true,
+		onHide: () => {
+			document.body.removeEventListener('click', listener);
+			document.body.removeEventListener('contextmenu', listener);
+		},
 		...config,
 	});
+
+	const listener: EventListener = ({ target: t }) => {
+		const target = t as HTMLElement | null;
+		if (
+			target && target instanceof HTMLElement &&
+			target != tooltip.element && target != host &&
+			!tooltip.element.contains(target) &&
+			!target.closest('.tippy-box')
+		) {
+			log('hiding due to listener (ctx)', 'tooltip', 'info', {
+				target,
+			});
+			tooltip.hide();
+		}
+	};
+
 	host.addEventListener('contextmenu', (e) => {
 		e.preventDefault();
-
-		const listener: EventListener = ({ target: t }) => {
-			const target = t as HTMLElement | null;
-			if (
-				target && target instanceof HTMLElement &&
-				target != tooltip.element && target != host &&
-				!tooltip.element.contains(target) &&
-				!target.closest('.tippy-box')
-			) {
-				log('hiding due to listener (ctx)', 'tooltip', 'info', {
-					target,
-				});
-				tooltip.hide();
-				document.body.removeEventListener('click', listener);
-				document.body.removeEventListener('contextmenu', listener);
-			}
-		};
 
 		// close when clicking again
 		if (tooltip.is_mounted) {
 			log('hiding due to is_mounted (ctx)', 'tooltip', 'info');
 			tooltip.hide();
-			document.body.removeEventListener('contextmenu', listener);
 			return;
 		}
 		log('showing (ctx)', 'tooltip', 'info');
