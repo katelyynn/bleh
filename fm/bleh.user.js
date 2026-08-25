@@ -120551,12 +120551,12 @@ var bleh = (() => {
       await img.decode();
       const canvas = document.createElement("canvas");
       const ctx = canvas.getContext("2d");
-      const scale = 300;
+      const scale = 400;
       canvas.width = scale;
       canvas.height = scale;
       ctx.imageSmoothingEnabled = true;
       ctx.imageSmoothingQuality = "high";
-      ctx.filter = "blur(4px)";
+      ctx.filter = "blur(10px)";
       ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
       url = canvas.toDataURL();
     }
@@ -121042,7 +121042,7 @@ var bleh = (() => {
         date: "2026-07-30"
       }
     },
-    built_on: "2026-08-25T16:52:52.278Z"
+    built_on: "2026-08-25T21:25:26.968Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
