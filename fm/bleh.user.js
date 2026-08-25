@@ -56381,8 +56381,8 @@ var bleh = (() => {
         placement: "top",
         strategy: "absolute",
         middleware: [
-          inline2(),
           flip3(),
+          inline2(),
           shift2({
             crossAxis: true,
             padding: 6
@@ -56424,6 +56424,7 @@ var bleh = (() => {
       const { keyframes, options } = animation_for_preset(this.config.exitAnimation);
       const animation = this.element.animate(keyframes, options);
       this.current_animation = animation;
+      if (this.onHide) this.onHide();
       animation.finished.then(() => {
         if (this.current_animation === animation) {
           this.unmount();
@@ -56431,7 +56432,6 @@ var bleh = (() => {
         }
       }).catch(() => {
       });
-      if (this.onHide) this.onHide();
     }
     cancel_animation() {
       if (this.current_animation) {
@@ -56512,7 +56512,8 @@ var bleh = (() => {
         tooltip.hide();
       }
     };
-    host.addEventListener("click", () => {
+    host.addEventListener("click", (e5) => {
+      console.info("click", e5);
       if (tooltip.is_mounted) {
         log("hiding due to is_mounted", "tooltip", "info");
         tooltip.hide();
@@ -109684,6 +109685,39 @@ var bleh = (() => {
     });
   }
 
+  // src/components/menu/nav_window.tsx
+  function NavWindow({ children }) {
+    return /* @__PURE__ */ jsx(Tooltip, {
+      theme: "nav-window",
+      children
+    });
+  }
+  function NavWindowHeader({ icon: icon2, name }) {
+    return /* @__PURE__ */ jsx("div", {
+      class: "window-header",
+      children: [
+        /* @__PURE__ */ jsx(Icon, {
+          name: icon2,
+          identifier: "window_header"
+        }),
+        /* @__PURE__ */ jsx("div", {
+          class: "window-title",
+          children: name
+        })
+      ]
+    });
+  }
+  function NavWindowContents({ ref: ref2, className: className2, children }) {
+    return /* @__PURE__ */ jsx("div", {
+      class: [
+        "window-content",
+        className2 && className2
+      ],
+      ref: ref2,
+      children
+    });
+  }
+
   // src/components/page/navigation.tsx
   function update_branding_type(state = settings.branding_type) {
     if (state == "bleh") {
@@ -110135,7 +110169,7 @@ var bleh = (() => {
     if (auth.pro) {
       let render_status_container = function(status3) {
         if (!status3) return;
-        render(status_container, html`
+        render(status_container.current, html`
 					<div class="status">
 						<div class="status-image">
 							<img src=${status3.avatar} alt=${status3.album}>
@@ -110159,37 +110193,38 @@ var bleh = (() => {
 					</div>
 				`);
       };
-      const music = html.node`
-            <button class="btn masthead-nav-control icon chibi" data-type="now-playing">
-                ${tl2(trans.music)}
-            </button>
-        `;
-      let status_container;
-      tippy_esm_default(music, {
-        content: tl2(trans.music)
+      const music = /* @__PURE__ */ jsx(Button, {
+        chibi: true,
+        className: "masthead-nav-control",
+        tooltip: tl2(trans.music),
+        children: [
+          /* @__PURE__ */ jsx(Icon, {
+            name: icons.now_playing
+          }),
+          tl2(trans.music)
+        ]
       });
-      tippy_esm_default(music, {
-        content: html.node`
-                <div class="window-header">
-                    ${icon({
-          name: icons.now_playing,
-          identifier: "window_header"
-        })}
-                    <div class="window-title">${tl2(trans.music)}</div>
-                </div>
-                <div class="window-content music-status" ref=${(el) => status_container = el}>
-                    <div class="loading-data-container">
-                        <div class="loading-data-text">${tl2(trans.loading)}</div>
-                    </div>
-                </div>
-            `,
-        theme: "nav-window",
-        placement: "top",
-        interactive: true,
-        interactiveBorder: 10,
-        trigger: "click",
-        appendTo: document.body,
-        onShow(instance) {
+      const status_container = createRef();
+      menu_tooltip(music, /* @__PURE__ */ jsx(NavWindow, {
+        children: [
+          /* @__PURE__ */ jsx(NavWindowHeader, {
+            icon: icons.now_playing,
+            name: tl2(trans.music)
+          }),
+          /* @__PURE__ */ jsx(NavWindowContents, {
+            className: "music-status",
+            ref: status_container,
+            children: /* @__PURE__ */ jsx("div", {
+              class: "loading-data-container",
+              children: /* @__PURE__ */ jsx("div", {
+                class: "loading-data-text",
+                children: tl2(trans.loading)
+              })
+            })
+          })
+        ]
+      }), {
+        onShow: () => {
           if (page.now.name) render_status_container(page.now);
           live_status().then((status3) => render_status_container(status3));
         }
@@ -121007,7 +121042,7 @@ var bleh = (() => {
         date: "2026-07-30"
       }
     },
-    built_on: "2026-08-25T16:21:51.069Z"
+    built_on: "2026-08-25T16:52:52.278Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

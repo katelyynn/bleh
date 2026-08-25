@@ -53,8 +53,13 @@ import {
 	ButtonCombo,
 	ButtonComboSeparator,
 } from '@/components/button/button.tsx';
-import { menu_tooltip } from '@/components/shared/tooltips.tsx';
+import { menu_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
 import { MenuContents } from '@/components/menu/menu.tsx';
+import {
+	NavWindow,
+	NavWindowContents,
+	NavWindowHeader,
+} from '@/components/menu/nav_window.tsx';
 
 export function update_branding_type(state = settings.branding_type) {
 	if (state == 'bleh') {
@@ -535,54 +540,51 @@ export function append_nav() {
 
 	// music
 	if (auth.pro) {
-		const music = html.node`
-            <button class="btn masthead-nav-control icon chibi" data-type="now-playing">
-                ${tl(trans.music)}
-            </button>
-        `;
+		const music = (
+			<Button
+				chibi
+				className='masthead-nav-control'
+				tooltip={tl(trans.music)}
+			>
+				<Icon name={icons.now_playing} />
+				{tl(trans.music)}
+			</Button>
+		);
 
-		let status_container;
+		const status_container = createRef();
 
-		tippy(music, {
-			content: tl(trans.music),
-		});
+		menu_tooltip(
+			music,
+			<NavWindow>
+				<NavWindowHeader
+					icon={icons.now_playing}
+					name={tl(trans.music)}
+				/>
+				<NavWindowContents
+					className='music-status'
+					ref={status_container}
+				>
+					<div class='loading-data-container'>
+						<div class='loading-data-text'>{tl(trans.loading)}</div>
+					</div>
+				</NavWindowContents>
+			</NavWindow>,
+			{
+				onShow: () => {
+					if (page.now.name) render_status_container(page.now);
 
-		tippy(music, {
-			content: html.node`
-                <div class="window-header">
-                    ${
-				icon({ name: icons.now_playing, identifier: 'window_header' })
-			}
-                    <div class="window-title">${tl(trans.music)}</div>
-                </div>
-                <div class="window-content music-status" ref=${(el) =>
-				status_container = el}>
-                    <div class="loading-data-container">
-                        <div class="loading-data-text">${
-				tl(trans.loading)
-			}</div>
-                    </div>
-                </div>
-            `,
-			theme: 'nav-window',
-			placement: 'top',
-			interactive: true,
-			interactiveBorder: 10,
-			trigger: 'click',
-			appendTo: document.body,
-
-			onShow(instance) {
-				if (page.now.name) render_status_container(page.now);
-
-				live_status().then((status) => render_status_container(status));
+					live_status().then((status) =>
+						render_status_container(status)
+					);
+				},
 			},
-		});
+		);
 
 		function render_status_container(status: music_status) {
 			if (!status) return;
 
 			render(
-				status_container,
+				status_container.current,
 				html`
 					<div class="status">
 						<div class="status-image">

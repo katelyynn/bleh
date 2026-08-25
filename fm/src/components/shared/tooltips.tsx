@@ -102,8 +102,8 @@ export class TooltipInstance<
 			placement: 'top',
 			strategy: 'absolute',
 			middleware: [
-				inline(),
 				flip(),
+				inline(),
 				shiftMiddleware({
 					crossAxis: true,
 					padding: 6,
@@ -296,7 +296,8 @@ export function menu_tooltip<
 		}
 	};
 
-	host.addEventListener('click', () => {
+	host.addEventListener('click', (e) => {
+		console.info('click', e);
 		// close when clicking again
 		if (tooltip.is_mounted) {
 			log('hiding due to is_mounted', 'tooltip', 'info');
