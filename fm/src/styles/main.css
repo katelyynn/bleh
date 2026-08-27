@@ -143,7 +143,7 @@ ul {
 	margin-top: unset;
 }
 
-ul {
+ul:not(.sidebar-image-list) {
 	padding-inline: unset !important;
 	margin-block: unset !important;
 }

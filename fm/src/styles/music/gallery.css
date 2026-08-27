@@ -52,8 +52,8 @@
 			}
 
 			transition-property: transform,
-				filter,
-				opacity;
+			filter,
+			opacity;
 			transition-duration: var(--upload-trans);
 			transition-timing-function: var(--trans-function);
 
@@ -98,7 +98,7 @@
 			}
 		}
 
-		& > .dropzone {
+		&>.dropzone {
 			position: absolute;
 			inset: 0;
 			cursor: pointer;
@@ -135,7 +135,7 @@
 			}
 
 			&[data-has-file="true"] {
-				& > div {
+				&>div {
 					display: none;
 				}
 			}
@@ -151,7 +151,7 @@
 		flex-direction: column;
 		gap: 10px;
 
-		& > div:not(.image-title-container, .button-container-wrapper) {
+		&>div:not(.image-title-container, .button-container-wrapper) {
 			display: flex;
 			flex-direction: column;
 
@@ -274,8 +274,7 @@
 
 			.gallery-image-preferred-states {
 				color: inherit !important;
-				padding-left: calc(var(--icon-size) + var(--icon-gap))
-					!important;
+				padding-left: calc(var(--icon-size) + var(--icon-gap)) !important;
 			}
 
 			.gallery-image-delete {
@@ -314,8 +313,7 @@
 				max-width: 100%;
 
 				&.image-preview-hook {
-					height: calc(500px - (var(--card-padding) * 2) - (18px +
-						var(--card-gap)));
+					height: calc(500px - (var(--card-padding) * 2) - (18px + var(--card-gap)));
 					flex: 1;
 				}
 			}
@@ -548,7 +546,7 @@ a.gallery-image-preferred-off {
 
 	position: relative;
 
-	& > a {
+	&>a {
 		position: absolute;
 		inset: 0;
 	}
@@ -591,7 +589,7 @@ a.gallery-image-preferred-off {
 	white-space: inherit;
 	min-width: 300px;
 
-	& > a {
+	&>a {
 		font-weight: var(--font-weight-medium);
 	}
 }
@@ -778,14 +776,14 @@ a.gallery-image-preferred-off {
 .bleh--gallery {
 	padding: var(--card-padding) !important;
 
-	& > .buffer-standard {
+	&>.buffer-standard {
 		margin-top: unset;
 	}
 }
 
 /* albums dont support saved tabs yet so */
 [data-page-subpage="images_overview"] .col-main {
-	& > .buffer-standard {
+	&>.buffer-standard {
 		display: none;
 	}
 
@@ -809,7 +807,7 @@ a.gallery-image-preferred-off {
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
 	grid-template-rows: repeat(2, 1fr);
-	gap: 10px;
+	gap: 6px;
 	margin: unset;
 
 	&:before,
@@ -827,6 +825,10 @@ a.gallery-image-preferred-off {
 	margin: unset;
 	padding: unset;
 	width: 100%;
+
+	&>.image-list-item {
+		border-radius: var(--radius-s);
+	}
 }
 
 .sidebar-image-list-image {
@@ -919,7 +921,7 @@ a.gallery-image-preferred-off {
 	gap: 4px;
 	width: 150px;
 
-	& > .gallery-btn {
+	&>.gallery-btn {
 		flex: 1;
 	}
 }

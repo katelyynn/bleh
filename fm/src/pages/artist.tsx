@@ -54,6 +54,7 @@ import { createRef, ReactElement } from 'jsx-dom';
 import { icons } from '@/components/shared/icon.tsx';
 import { TopAlbum } from '@/components/album/top_album.tsx';
 import { avatar } from '@/components/shared/avatar.tsx';
+import { clean_streaming_titles } from '@/build/music.ts';
 
 export function bleh_artists() {
 	const artist_header = document.body.querySelector(
@@ -327,11 +328,13 @@ export function bleh_artists() {
 
 				carousel.insertBefore(
 					<TopAlbum
-						name={name}
-						artist={page.sister}
+						name={clean_streaming_titles(name)}
+						artist={page.name}
 						listeners={tl(trans.latest_album)}
 						date={aux}
-						href={href}
+						href={`${root}music/${sanitise(page.name)}/${
+							sanitise(clean_streaming_titles(name))
+						}`}
 						image={avatar(image, '300x300')}
 					/>,
 					carousel.firstElementChild,
