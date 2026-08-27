@@ -56763,6 +56763,111 @@ var bleh = (() => {
     });
   }
 
+  // src/components/settings/storage.ts
+  var keys3 = {
+    settings: "bleh",
+    auth: "bleh_auth",
+    auth_valid: "bleh_auth_valid",
+    bookmarked_images: "bleh_bookmarked_images",
+    news: "bleh_changelog",
+    news_expire: "bleh_changelog_expire",
+    hoshino: "bleh_hoshino_cache",
+    last_season_seen: "bleh_last_season_seen",
+    last_version_used: "bleh_last_version_used",
+    notices: "bleh_notices",
+    notices_expire: "bleh_notices_expire",
+    notices_seen: "bleh_notices_seen",
+    oracle: "bleh_oracle_cache",
+    profile_cache: "bleh_profile_cache",
+    profile_notes: "bleh_profile_notes",
+    update_checked_date: "bleh_update_checked",
+    update_next_check_date: "bleh_update_next_check",
+    update_required: "bleh_update_required",
+    update_to_version: "bleh_update_to",
+    sponsors: "kat_sponsors",
+    sponsors_expire: "kat_sponsors_expire",
+    sponsor_own_cache: "kat_sponsor_cache",
+    lotus_album_track: "lotus_album_track",
+    lotus_album_track_expire: "lotus_album_track_expire",
+    lotus_artist: "lotus_artist",
+    lotus_artist_expire: "lotus_artist_expire",
+    lotus_combined_artists: "lotus_combined_artists",
+    lotus_combined_artists_expire: "lotus_combined_artists_expire",
+    oracle_albums: "oracle_albums",
+    oracle_albums_expire: "oracle_albums_expire",
+    oracle_artists: "oracle_artists",
+    oracle_artists_expire: "oracle_artists_expire",
+    oracle_tracks: "oracle_tracks",
+    oracle_tracks_expire: "oracle_tracks_expire",
+    next_status_cafe_fetch: "next_status_cafe_fetch",
+    plot_data_history: "bleh_plot_data_history"
+  };
+  var storage_keys_clean = [
+    "bleh_profile_banners",
+    "bleh_moderation",
+    "bleh_update_paused",
+    "bleh_update_paused_until",
+    "bleh_cached_style",
+    "bleh_cached_style_timeout"
+  ];
+  function clean_storage() {
+    storage_keys_clean.forEach((key) => {
+      const data2 = localStorage.getItem(key);
+      if (data2) {
+        log(`removed ${key}`, "storage", "info", {
+          data: data2
+        });
+        localStorage.removeItem(key);
+      }
+    });
+  }
+
+  // src/components/user/name.tsx
+  function GenericUsername({ children }) {
+    return /* @__PURE__ */ jsx("span", {
+      class: "generic-username",
+      children: [
+        /* @__PURE__ */ jsx("span", {
+          class: "at",
+          children: "@"
+        }),
+        children
+      ]
+    });
+  }
+  function SponsorUsername({ cache: cache2, children }) {
+    if (!children) return;
+    const name = String(children);
+    if (cache2 == void 0) {
+      cache2 = JSON.parse(localStorage.getItem(keys3.profile_cache) || "{}");
+    }
+    const valid = is_sponsor(name);
+    if (!cache2?.[name]?.username || !valid) {
+      return /* @__PURE__ */ jsx(GenericUsername, {
+        children: name
+      });
+    }
+    return /* @__PURE__ */ jsx("span", {
+      class: "username-combo",
+      children: [
+        /* @__PURE__ */ jsx("span", {
+          class: "username-custom",
+          children: cache2[name].username
+        }),
+        /* @__PURE__ */ jsx("span", {
+          class: "username-original",
+          children: [
+            /* @__PURE__ */ jsx("span", {
+              class: "at",
+              children: "@"
+            }),
+            name
+          ]
+        })
+      ]
+    });
+  }
+
   // src/components/music/track.tsx
   function patch_titles(search = page.structure.main) {
     if (page.subpage == "tags_overview") return;
@@ -56850,11 +56955,11 @@ var bleh = (() => {
         }
         let track_info = track.querySelector(":scope > .track-info");
         if (!track_info) {
-          track_info = html.node`
-                    <div class="track-info" data-has-bar=${tracklist.classList.contains("chartlist--with-bar")}>
-                        ${track_title.parentElement}
-                    </div>
-                `;
+          track_info = /* @__PURE__ */ jsx("div", {
+            class: "track-info",
+            "data-has-bar": String(tracklist.classList.contains("chartlist--with-bar")),
+            children: track_title.parentElement
+          });
           track.appendChild(track_info);
         }
         track_info.setAttribute("data-track-layout", track_layout);
@@ -56880,9 +56985,9 @@ var bleh = (() => {
           if (settings.colourful_counts) {
             patch_artist_ranks_in_list_view(track);
           }
-          render(track_title, html`
-						<span><span class="at">@</span>${track_title.textContent}</span>
-					`);
+          track_title.replaceChildren(/* @__PURE__ */ jsx(GenericUsername, {
+            children: track_title.textContent
+          }));
           log("finished user stuff, returning", "tracks", "log");
           return;
         }
@@ -60807,65 +60912,6 @@ var bleh = (() => {
     });
   }
 
-  // src/components/settings/storage.ts
-  var keys3 = {
-    settings: "bleh",
-    auth: "bleh_auth",
-    auth_valid: "bleh_auth_valid",
-    bookmarked_images: "bleh_bookmarked_images",
-    news: "bleh_changelog",
-    news_expire: "bleh_changelog_expire",
-    hoshino: "bleh_hoshino_cache",
-    last_season_seen: "bleh_last_season_seen",
-    last_version_used: "bleh_last_version_used",
-    notices: "bleh_notices",
-    notices_expire: "bleh_notices_expire",
-    notices_seen: "bleh_notices_seen",
-    oracle: "bleh_oracle_cache",
-    profile_cache: "bleh_profile_cache",
-    profile_notes: "bleh_profile_notes",
-    update_checked_date: "bleh_update_checked",
-    update_next_check_date: "bleh_update_next_check",
-    update_required: "bleh_update_required",
-    update_to_version: "bleh_update_to",
-    sponsors: "kat_sponsors",
-    sponsors_expire: "kat_sponsors_expire",
-    sponsor_own_cache: "kat_sponsor_cache",
-    lotus_album_track: "lotus_album_track",
-    lotus_album_track_expire: "lotus_album_track_expire",
-    lotus_artist: "lotus_artist",
-    lotus_artist_expire: "lotus_artist_expire",
-    lotus_combined_artists: "lotus_combined_artists",
-    lotus_combined_artists_expire: "lotus_combined_artists_expire",
-    oracle_albums: "oracle_albums",
-    oracle_albums_expire: "oracle_albums_expire",
-    oracle_artists: "oracle_artists",
-    oracle_artists_expire: "oracle_artists_expire",
-    oracle_tracks: "oracle_tracks",
-    oracle_tracks_expire: "oracle_tracks_expire",
-    next_status_cafe_fetch: "next_status_cafe_fetch",
-    plot_data_history: "bleh_plot_data_history"
-  };
-  var storage_keys_clean = [
-    "bleh_profile_banners",
-    "bleh_moderation",
-    "bleh_update_paused",
-    "bleh_update_paused_until",
-    "bleh_cached_style",
-    "bleh_cached_style_timeout"
-  ];
-  function clean_storage() {
-    storage_keys_clean.forEach((key) => {
-      const data2 = localStorage.getItem(key);
-      if (data2) {
-        log(`removed ${key}`, "storage", "info", {
-          data: data2
-        });
-        localStorage.removeItem(key);
-      }
-    });
-  }
-
   // src/components/shared/users.js
   function bleh_users() {
     const users = page.structure.main?.querySelectorAll(
@@ -60952,7 +60998,7 @@ var bleh = (() => {
       shout_header(shout_controls);
     }
     const cache2 = JSON.parse(localStorage.getItem(keys3.profile_cache) || "{}");
-    let shouts = page.structure.main.querySelectorAll(".shout:not([data-kate-processed])");
+    const shouts = page.structure.main.querySelectorAll(".shout:not([data-kate-processed])");
     shouts.forEach((shout, index3) => {
       try {
         let vote_button = function() {
@@ -60968,33 +61014,10 @@ var bleh = (() => {
         const shout_name = shout.querySelector(".shout-user > a");
         if (!shout_name) return;
         const shout_name_text = shout_name.textContent;
-        const valid = is_sponsor(shout_name_text);
-        if (cache2[shout_name_text]?.username && valid) {
-          shout_name.classList.add("username-combo");
-          shout_name.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
-            children: [
-              /* @__PURE__ */ jsx("span", {
-                class: "username-custom",
-                children: cache2[shout_name_text].username
-              }),
-              /* @__PURE__ */ jsx("span", {
-                class: "username-original",
-                children: [
-                  /* @__PURE__ */ jsx("span", {
-                    class: "at",
-                    children: "@"
-                  }),
-                  shout_name_text
-                ]
-              })
-            ]
-          }));
-        } else {
-          shout_name.insertBefore(/* @__PURE__ */ jsx("span", {
-            class: "at",
-            children: "@"
-          }), shout_name.firstChild);
-        }
+        shout_name.replaceChildren(/* @__PURE__ */ jsx(SponsorUsername, {
+          cache: cache2,
+          children: shout_name_text
+        }));
         const shout_avatar = shout.querySelector(".shout-user-avatar");
         const badge = patch_avatar(shout_avatar, shout_name_text, "shout");
         if (badge) {
@@ -121158,7 +121181,7 @@ var bleh = (() => {
         date: "2026-07-30"
       }
     },
-    built_on: "2026-08-27T17:47:52.419Z"
+    built_on: "2026-08-27T18:07:00.647Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

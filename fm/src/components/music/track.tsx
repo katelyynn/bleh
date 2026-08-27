@@ -44,6 +44,7 @@ import { Button } from '@/components/button/button.tsx';
 import { Icon, icons } from '@/components/shared/icon.tsx';
 import { MenuContents } from '@/components/menu/menu.tsx';
 import { TrackMenuPreview } from '@/components/track/preview.tsx';
+import { GenericUsername } from '@/components/user/name.tsx';
 
 export function patch_titles(search = page.structure.main) {
 	if (page.subpage == 'tags_overview') return;
@@ -165,13 +166,16 @@ export function patch_titles(search = page.structure.main) {
 
 			let track_info = track.querySelector(':scope > .track-info');
 			if (!track_info) {
-				track_info = html.node`
-                    <div class="track-info" data-has-bar=${
-					tracklist.classList.contains('chartlist--with-bar')
-				}>
-                        ${track_title.parentElement}
-                    </div>
-                `;
+				track_info = (
+					<div
+						class='track-info'
+						data-has-bar={String(
+							tracklist.classList.contains('chartlist--with-bar'),
+						)}
+					>
+						{track_title.parentElement}
+					</div>
+				);
 				track.appendChild(track_info);
 			}
 			track_info.setAttribute('data-track-layout', track_layout);
@@ -221,12 +225,10 @@ export function patch_titles(search = page.structure.main) {
 					patch_artist_ranks_in_list_view(track);
 				}
 
-				render(
-					track_title,
-					html`
-						<span><span class="at">@</span>${track_title
-							.textContent}</span>
-					`,
+				track_title.replaceChildren(
+					<GenericUsername>
+						{track_title.textContent}
+					</GenericUsername>,
 				);
 
 				log('finished user stuff, returning', 'tracks', 'log');

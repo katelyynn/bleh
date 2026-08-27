@@ -38,6 +38,7 @@ import { is_sponsor } from '../sponsor';
 import { createRef } from 'jsx-dom';
 import { DateTime } from 'luxon';
 import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
+import { SponsorUsername } from '@/components/user/name.tsx';
 
 export function patch_shouts() {
 	if (!page.structure.main) return;
@@ -54,7 +55,7 @@ export function patch_shouts() {
 
 	const cache = JSON.parse(localStorage.getItem(keys.profile_cache) || '{}');
 
-	let shouts = page.structure.main.querySelectorAll(
+	const shouts = page.structure.main.querySelectorAll(
 		'.shout:not([data-kate-processed])',
 	) as NodeListOf<HTMLElement>;
 
@@ -70,27 +71,11 @@ export function patch_shouts() {
 
 			const shout_name_text = shout_name.textContent;
 
-			const valid = is_sponsor(shout_name_text);
-
-			if (cache[shout_name_text]?.username && valid) {
-				shout_name.classList.add('username-combo');
-				shout_name.replaceChildren(
-					<>
-						<span class='username-custom'>
-							{cache[shout_name_text].username}
-						</span>
-						<span class='username-original'>
-							<span class='at'>@</span>
-							{shout_name_text}
-						</span>
-					</>,
-				);
-			} else {
-				shout_name.insertBefore(
-					<span class='at'>@</span>,
-					shout_name.firstChild,
-				);
-			}
+			shout_name.replaceChildren(
+				<SponsorUsername cache={cache}>
+					{shout_name_text}
+				</SponsorUsername>,
+			);
 
 			const shout_avatar = shout.querySelector('.shout-user-avatar');
 
