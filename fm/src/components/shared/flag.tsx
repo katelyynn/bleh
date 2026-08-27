@@ -6,6 +6,7 @@
 
 import tippy from 'tippy.js';
 import { page } from '@/build/page.ts';
+import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
 
 export function flag(code: string, classname?: string) {
 	const url =
@@ -55,10 +56,13 @@ export function Flag({
 		</div>
 	);
 
-	tippy(elem, {
-		content: code,
-		delay: [1000, 0],
-	});
+	hover_tooltip(
+		elem,
+		<Tooltip>{code}</Tooltip>,
+		{
+			delay: [1000, 0],
+		},
+	);
 
 	return elem;
 }

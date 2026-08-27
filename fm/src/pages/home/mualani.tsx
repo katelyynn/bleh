@@ -64,6 +64,7 @@ import {
 	PlusIcon,
 	SaveIcon,
 } from '@/components/shared/icon.tsx';
+import { Flag } from '@/components/shared/flag.tsx';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -792,6 +793,16 @@ export function mualani() {
 							attendance_count='31 went'
 							href='/event/4881572+BST+Hyde+Park:+Sabrina+Carpenter'
 						/>
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section>
+				<DemoGrid>
+					<DemoItem label='Flag'>
+						<Flag code='GB' />
+						<Flag code='GB-SCT' />
+						<Flag code='US' />
+						<Flag code='DE' />
 					</DemoItem>
 				</DemoGrid>
 			</section>

@@ -28,6 +28,7 @@ type TooltipConfig = Partial<
 		ariaEnabled: boolean;
 		onShow: () => void;
 		onHide: () => void;
+		delay: [number, number];
 	}
 >;
 
@@ -111,6 +112,7 @@ export class TooltipInstance<
 				offsetMiddleware(2),
 			],
 			ariaEnabled: false,
+			delay: [0, 0],
 			...config,
 		};
 		this.onShow = config.onShow || null;
@@ -248,11 +250,35 @@ export function hover_tooltip<
 	config: TooltipConfig = {},
 ) {
 	const tooltip = new TooltipInstance(host, element, config);
+
+	let enter: ReturnType<typeof setTimeout>;
+	let leave: ReturnType<typeof setTimeout>;
+
 	host.addEventListener('mouseenter', () => {
-		tooltip.show();
+		if (enter) clearTimeout(enter);
+		if (leave) clearTimeout(leave);
+
+		if (!config.delay?.[0]) {
+			tooltip.show();
+			return;
+		}
+
+		enter = setTimeout(() => {
+			tooltip.show();
+		}, config.delay?.[0]);
 	});
 	host.addEventListener('mouseleave', () => {
-		tooltip.hide();
+		if (enter) clearTimeout(enter);
+		if (leave) clearTimeout(leave);
+
+		if (!config.delay?.[1]) {
+			tooltip.hide();
+			return;
+		}
+
+		leave = setTimeout(() => {
+			tooltip.hide();
+		}, config.delay?.[1]);
 	});
 	return tooltip;
 }
