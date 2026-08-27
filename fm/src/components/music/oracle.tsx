@@ -2403,10 +2403,15 @@ export function oracle_process() {
 			return;
 		}
 
+		let text = response.responseText;
+		try {
+			text = JSON.parse(response.responseText)?.error;
+		} catch {}
+
 		info_panel?.after(html.node`
             <section class="oracle-error">
                 <div class="alert alert-error">
-                    oracle: (Error ${response.status}) ${response.responseText}
+                    oracle: (Error ${response.status}) ${text}
                 </div>
             </section>
         `);

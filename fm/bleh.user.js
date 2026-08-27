@@ -60075,10 +60075,15 @@ var bleh = (() => {
             `);
         return;
       }
+      let text4 = response.responseText;
+      try {
+        text4 = JSON.parse(response.responseText)?.error;
+      } catch {
+      }
       info_panel?.after(html.node`
             <section class="oracle-error">
                 <div class="alert alert-error">
-                    oracle: (Error ${response.status}) ${response.responseText}
+                    oracle: (Error ${response.status}) ${text4}
                 </div>
             </section>
         `);
@@ -121109,7 +121114,7 @@ var bleh = (() => {
         date: "2026-07-30"
       }
     },
-    built_on: "2026-08-27T16:51:49.553Z"
+    built_on: "2026-08-27T16:54:11.479Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
