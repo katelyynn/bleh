@@ -30,6 +30,7 @@ import { status } from '@/components/dialog/status';
 import { input } from '@/components/settings/input';
 import { notify } from '../dialog/notify';
 import { useSettings } from '@/page.ts';
+import { ReactElement } from 'jsx-dom';
 
 const flat_patterns: flat_pattern[] = [];
 
@@ -308,10 +309,10 @@ export function correct_generic_artist(parent) {
  * @param {string} parent individual css selector for each item wrapper
  * @returns if not found
  */
-export function correct_generic_combo(parent) {
+export function correct_generic_combo(parent: string) {
 	if (!page.structure.container) return;
 
-	let albums = page.structure.container.querySelectorAll(`.${parent}`);
+	const albums = page.structure.container.querySelectorAll(`.${parent}`);
 	if (albums.length == 0) return;
 
 	if (
@@ -321,56 +322,64 @@ export function correct_generic_combo(parent) {
 
 	albums.forEach((album) => {
 		if (!album.hasAttribute('data-kate-processed')) {
-			album.setAttribute('data-kate-processed', 'true');
-
-			try {
-				let album_name = album.querySelector(
-					`.${parent.replace('-details', '')}-name a`,
-				);
-				if (!album_name) return;
-
-				let artist_name = album.querySelector(
-					`.${parent.replace('-details', '')}-artist a`,
-				);
-				if (!artist_name) return;
-
-				if (useSettings.get('format_guest_features')) {
-					const formatted = name_includes(
-						album_name.textContent,
-						artist_name.textContent,
-					);
-
-					album_name.classList.add('smart-title');
-					render(
-						album_name,
-						smart_title(formatted.song_title, formatted.song_tags),
-					);
-				} else if (useSettings.get('corrections')) {
-					album_name.textContent = romanise(
-						correct_item_by_artist(
-							album_name.textContent,
-							artist_name.textContent,
-						),
-					);
-				}
-
-				artist_name.textContent = romanise(
-					correct_artist(artist_name.textContent),
-				);
-			} catch (e) {
-				log('unable to correct generic combo', 'lotus', 'error', {
-					e,
-					album,
-					html: album.innerHTML,
-					format_guest_features: useSettings.get(
-						'format_guest_features',
-					),
-					lotus: useSettings.get('corrections'),
-				});
-			}
+			correct_generic_combo_child(album as HTMLDivElement, parent);
 		}
 	});
 }
+
+export function correct_generic_combo_child(
+	album: ReactElement,
+	parent: string,
+) {
+	album.setAttribute('data-kate-processed', 'true');
+
+	try {
+		const album_name = album.querySelector(
+			`.${parent.replace('-details', '')}-name a`,
+		);
+		if (!album_name) return;
+
+		const artist_name = album.querySelector(
+			`.${parent.replace('-details', '')}-artist a`,
+		);
+		if (!artist_name) return;
+
+		if (useSettings.get('format_guest_features')) {
+			const formatted = name_includes(
+				album_name.textContent,
+				artist_name.textContent,
+			);
+
+			album_name.classList.add('smart-title');
+			render(
+				album_name,
+				smart_title(formatted.song_title, formatted.song_tags),
+			);
+		} else if (useSettings.get('corrections')) {
+			album_name.textContent = romanise(
+				correct_item_by_artist(
+					album_name.textContent,
+					artist_name.textContent,
+				),
+			);
+		}
+
+		artist_name.textContent = romanise(
+			correct_artist(artist_name.textContent),
+		);
+	} catch (e) {
+		log('unable to correct generic combo', 'lotus', 'error', {
+			e,
+			album,
+			html: album.innerHTML,
+			format_guest_features: useSettings.get(
+				'format_guest_features',
+			),
+			lotus: useSettings.get('corrections'),
+		});
+	}
+}
+
 /**
  * correct capitalisation of a generic album/track name (no artist field!!) combo
  * @param {string} parent individual css selector for each item wrapper

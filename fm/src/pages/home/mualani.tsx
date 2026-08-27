@@ -65,6 +65,7 @@ import {
 	SaveIcon,
 } from '@/components/shared/icon.tsx';
 import { Flag } from '@/components/shared/flag.tsx';
+import { TopAlbum } from '@/components/album/top_album.tsx';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -803,6 +804,13 @@ export function mualani() {
 						<Flag code='GB-SCT' />
 						<Flag code='US' />
 						<Flag code='DE' />
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section>
+				<DemoGrid>
+					<DemoItem label='TopAlbum'>
+						<TopAlbum name='test' artist='test2' href='#hello' />
 					</DemoItem>
 				</DemoGrid>
 			</section>

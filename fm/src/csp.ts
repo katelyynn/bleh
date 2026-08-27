@@ -23,6 +23,7 @@ const CspPolicies: PolicyMap = {
 		'*.youtube.com',
 		'*.youtube-nocookie.com',
 		'ws.audioscrobbler.com',
+		'translate.googleapis.com',
 	],
 	'script-src': [
 		"'self'",
@@ -45,6 +46,7 @@ const CspPolicies: PolicyMap = {
 		'html-load.cc',
 		'srv.tunefindforfans.com',
 		'ws.audioscrobbler.com',
+		'translate.googleapis.com',
 	],
 	'style-src': [
 		"'self'",
@@ -97,6 +99,7 @@ const CspPolicies: PolicyMap = {
 		'*.github.io',
 		'ws.audioscrobbler.com',
 		'*.katelyn.moe',
+		'translate.googleapis.com',
 	],
 	'font-src': [
 		"'self'",

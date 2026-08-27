@@ -62,10 +62,20 @@ import { bleh_event_profile } from '@/pages/profile/event.tsx';
 import { PanelHead } from '@/components/text/head.tsx';
 import { icons } from '@/components/shared/icon.tsx';
 import { ActivityItem, ActivityList } from '@/components/activity/activity.tsx';
-import { PanelTop, SeeMore, ViewButtons } from '@/components/text/see_more.tsx';
+import {
+	PanelTop,
+	SeeMore,
+	SeeMoreContainer,
+	ViewButtons,
+} from '@/components/text/see_more.tsx';
 import { createRef, ReactElement } from 'jsx-dom';
 import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
 import { SubTextPair } from '@/components/profile/sub.tsx';
+import {
+	AboutElement,
+	profile_about,
+	profile_bio_markdown_settings,
+} from '@/pages/profile/about.tsx';
 
 export function bleh_profiles() {
 	// the obsessions page is a user subpage but works very differently
@@ -115,11 +125,12 @@ export function bleh_profiles() {
 		{};
 	const cache = profile_cache[page.name] || {};
 
-	let about_me_sidebar = page.structure.row.querySelector(
+	let about_me_sidebar = page.structure.row!.querySelector(
 		'.about-me-sidebar',
-	);
+	) as AboutElement;
 
-	const about_me_text = about_me_sidebar?.querySelector('p');
+	const about_me_text = about_me_sidebar?.querySelector('p')!;
+	let about_me_text_value = '';
 
 	if (page.subpage == 'overview') {
 		delete cache.banner;
@@ -131,20 +142,17 @@ export function bleh_profiles() {
 		delete cache.username;
 
 		if (!about_me_sidebar) {
-			about_me_sidebar = html.node`
-                <section class="about-me-sidebar">
-                    <h2>${tl(trans.about)}</h2>
-                    <p class="subtle">${
-				tl(trans.no_about).replace('{u}', page.name)
-			}</p>
-                </section>
-            `;
-			page.structure.side.insertBefore(
-				about_me_sidebar,
-				page.structure.side.firstElementChild,
+			page.structure.side!.insertBefore(
+				<section class='about-me-sidebar'>
+					<h2>{tl(trans.about)}</h2>
+					<p class='subtle'>{tl(trans.no_about, { u: page.name })}</p>
+				</section>,
+				page.structure.side!.firstElementChild,
 			);
 		} else {
 			if (settings.bio_markdown) {
+				about_me_text_value = about_me_text.textContent;
+
 				// parse body
 				const result = bio_parse(about_me_text, cache);
 				result.classList.add('about-me-content');
@@ -159,36 +167,49 @@ export function bleh_profiles() {
 					result.setAttribute('data-showing', 'false');
 					let showing = false;
 
-					let show_all_btn;
-					const show_all = html.node`
-                        <div class="see-more-cont">
-                            <button class="see-more" data-see-more="true" data-type="down" ref=${(
-						el,
-					) => show_all_btn = el} onclick=${() => toggle_show_all()}>
-                                ${tl(trans.read_more)}
-                            </button>
-                        </div>
-                    `;
+					const show_all_btn = createRef();
+
+					const show_all = (
+						<SeeMoreContainer>
+							<SeeMore
+								icon={icons.arrow_down}
+								onClick={toggle_show_all}
+								ref={show_all_btn}
+							>
+								{tl(trans.read_more)}
+							</SeeMore>
+						</SeeMoreContainer>
+					);
 
 					result.after(show_all);
 
 					function toggle_show_all() {
 						showing = !showing;
 
-						show_all_btn.setAttribute(
+						show_all_btn.current.setAttribute(
 							'data-showing',
 							showing.toString(),
 						);
 						result.setAttribute('data-showing', showing.toString());
 
 						if (showing) {
-							show_all_btn.classList.add('left-icon');
-							show_all_btn.textContent = tl(trans.read_less);
-							show_all_btn.setAttribute('data-type', 'up');
+							show_all_btn.current.classList.add('left-icon');
+							show_all_btn.current.textContent = tl(
+								trans.read_less,
+							);
+							show_all_btn.current.setAttribute(
+								'data-type',
+								'up',
+							);
 						} else {
-							show_all_btn.classList.remove('left-icon');
-							show_all_btn.textContent = tl(trans.read_more);
-							show_all_btn.setAttribute('data-type', 'down');
+							show_all_btn.current.classList.remove('left-icon');
+							show_all_btn.current.textContent = tl(
+								trans.read_more,
+							);
+							show_all_btn.current.setAttribute(
+								'data-type',
+								'down',
+							);
 						}
 					}
 				}
@@ -196,9 +217,9 @@ export function bleh_profiles() {
 		}
 
 		if (page.mobile) {
-			page.structure.main.insertBefore(
+			page.structure.main!.insertBefore(
 				about_me_sidebar,
-				page.structure.main.firstElementChild,
+				page.structure.main!.firstElementChild,
 			);
 		}
 	}
@@ -508,129 +529,16 @@ export function bleh_profiles() {
 			bleh_featured_profile_track(featured_track_panel);
 		}
 
-		const about_me_header = about_me_sidebar.querySelector('h2');
-		about_me_header.remove();
-
-		let profile_note;
-
-		if (!is_own_profile) {
-			const notes =
-				JSON.parse(localStorage.getItem('bleh_profile_notes')) || {};
-			profile_note = notes[page.name];
-		}
-
-		let settings_btn;
-		let add_note;
-		let info_tip;
-		about_me_sidebar.insertBefore(
-			html.node`
-            <div class="top-container">
-                <h2 class="about-me-title">
-                    ${tl(trans.about)}
-                    <span class="info-tip" ref=${(el) => (info_tip = el)}>
-                        <span class="bleh-icon" data-type="info" style="--icon: var(--mask)" />
-                    </span>
-                </h2>
-                <div class="view-buttons blend blend-v2">
-                    ${
-				is_own_profile
-					? html.node`
-                    <a class="left-icon blend-v2-btn" data-type="edit" href="${root}settings#id_about_me">
-                        ${tl(trans.edit)}
-                    </a>
-                    `
-					: !profile_note
-					? html.node`
-                    <button class="left-icon blend-v2-btn" data-type="add" ref=${(
-						el,
-					) => (add_note = el)} onclick=${() => {
-						create_profile_note_panel(page.name, profile_note);
-						add_note.remove();
-					}}>
-                        ${tl(trans.add_note)}
-                    </button>
-                    `
-					: ''
-			}
-                    <button class="left-icon blend-v2-btn" data-type="more" ref=${(
-				el,
-			) => (settings_btn = el)}>
-                        ${tl(trans.more)}
-                    </button>
-                </div>
-            </div>
-        `,
-			about_me_sidebar.firstChild,
-		);
-
-		tippy(settings_btn, {
-			theme: 'context-menu',
-			content: html.node`
-                ${setting({ id: 'bio_markdown', in_menu: true })}
-                <button class="dropdown-menu-clickable-item" data-type="copy" onclick=${() => {
-				copy(about_me_text.textContent.trim());
-			}}>
-                    ${tl(trans.copy_text)}
-                </button>
-            `,
-			placement: 'bottom',
-			interactive: true,
-			interactiveBorder: 10,
-			trigger: 'click',
-			appendTo: document.body,
-			hideOnClick: 'toggle',
-
-			onClickOutside(instance) {
-				if (instance.popper.querySelector('[aria-expanded="true"]')) {
-					return;
-				}
-
-				instance.hide();
-			},
-		});
-
-		if (cache.banner || cache.hue || cache.sat || cache.lit) {
-			tippy(info_tip, {
-				content: html.node`
-                    <div class="profile-items">
-                        ${
-					cache.banner
-						? html.node`
-                            <div class="profile-item" data-type="banner">
-                                <span class="bleh-icon" style="--icon: var(--mask)" />
-                                <p class="profile-item-text">${
-							tl(trans.profile_banner.name)
-						}</p>
-                            </div>
-                        `
-						: ''
-				}
-                        ${
-					cache.hue > -1 && cache.sat > -1 && cache.lit > -1
-						? html.node`
-                            <div class="profile-item" data-type="accent">
-                                <span class="bleh-icon" style="--icon: var(--mask)" />
-                                <p class="profile-item-text">${
-							tl(trans.profile_accent.name)
-						}</p>
-                                <p class="profile-item-text subtle">${cache.hue}, ${cache.sat}, ${cache.lit}</p>
-                            </div>
-                        `
-						: ''
-				}
-                    </div>
-                `,
-			});
-		} else {
-			info_tip.remove();
+		if (about_me_sidebar) {
+			profile_about(
+				about_me_sidebar,
+				about_me_text_value,
+				is_own_profile,
+			);
 		}
 
 		if (ff('redesigned_profile_header')) {
 			redesign_profile_header(is_own_profile, is_following);
-		}
-
-		if (!is_own_profile && profile_note) {
-			create_profile_note_panel(page.name, profile_note);
 		}
 	} else {
 		load_profile_cache(page.name, cache, profile_cache);
@@ -762,10 +670,11 @@ export function bleh_profiles() {
 	save_profile_cache(cache, profile_cache, page.name);
 }
 
-function create_profile_note_panel(username, has_note) {
-	const about_me_sidebar = page.structure.row.querySelector(
+export function create_profile_note_panel(has_note?: string) {
+	const about_me_sidebar = page.structure.row!.querySelector(
 		'.about-me-sidebar',
 	);
+	if (!about_me_sidebar) return;
 
 	let note;
 
@@ -1759,16 +1668,9 @@ function profile_tracks() {
 
 function bio_parse(text, cache = true, take_effect = true) {
 	const body = markdown(text.textContent, {
-		allow_headers: true,
-		allow_banners: true,
-		allow_icons: true,
-		allow_hue: true,
-		allow_fonts: true,
+		...profile_bio_markdown_settings,
 		cache,
 		take_effect,
-		allow_socials: true,
-		allow_alignment: true,
-		allow_lists: true,
 	});
 
 	if (body.childElementCount == 0) {

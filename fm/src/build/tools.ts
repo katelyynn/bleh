@@ -526,13 +526,13 @@ export function parse_object(key: string, value: string) {
 	}
 }
 
-export function year_from_date(string) {
-	const match = string.match(/\b(\d{4})\b/);
+export function year_from_date(text: string) {
+	const match = text.match(/\b(\d{4})\b/);
 
 	return match ? match[1] : 0;
 }
 
-export async function translate(text, lang = 'en') {
+export async function translate(text: string, lang = 'en') {
 	if (lang == 'fae') {
 		return {
 			translated: 'hazelfae',
@@ -546,6 +546,14 @@ export async function translate(text, lang = 'en') {
 		}`;
 
 	const res = await fetch(url);
+
+	if (!res.ok) {
+		log(`failed to translate to '${lang}'`, 'translate', 'error', {
+			res,
+		});
+		return;
+	}
+
 	const data = await res.json();
 
 	const translated = data[0].map((chunk) => chunk[0]).join('');

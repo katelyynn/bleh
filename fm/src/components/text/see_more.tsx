@@ -48,6 +48,7 @@ export function SeeMore({
 				class={classes}
 				onClick={onClick}
 				data-type={icon}
+				data-see-more='true'
 				ref={ref as ReturnType<typeof createRef<HTMLButtonElement>>}
 			>
 				{children}
@@ -62,6 +63,7 @@ export function SeeMore({
 			target={external ? '_blank' : undefined}
 			onClick={onClick}
 			data-type={icon}
+			data-see-more='true'
 			ref={ref as ReturnType<typeof createRef<HTMLAnchorElement>>}
 		>
 			{children}
@@ -78,6 +80,16 @@ export function SeeMoreGroup({
 }: SeeMoreGroupProps) {
 	return (
 		<div class='see-more-row'>
+			{children}
+		</div>
+	);
+}
+
+export function SeeMoreContainer({
+	children,
+}: WithChildren) {
+	return (
+		<div class='see-more-cont'>
 			{children}
 		</div>
 	);

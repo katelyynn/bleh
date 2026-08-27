@@ -34,11 +34,17 @@ import {
 import tippy from 'tippy.js';
 import { ff } from '../settings/sku';
 import { keys } from '../settings/storage';
-import { is_sponsor } from '../sponsor';
 import { createRef } from 'jsx-dom';
 import { DateTime } from 'luxon';
 import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
 import { SponsorUsername } from '@/components/user/name.tsx';
+import { Button } from '@/components/button/button.tsx';
+import { Icon, icons } from '@/components/shared/icon.tsx';
+import { TranslatedHeader } from '@/components/shared/translate.tsx';
+
+type ShoutElement = HTMLDivElement & {
+	translated: boolean;
+};
 
 export function patch_shouts() {
 	if (!page.structure.main) return;
@@ -57,7 +63,7 @@ export function patch_shouts() {
 
 	const shouts = page.structure.main.querySelectorAll(
 		'.shout:not([data-kate-processed])',
-	) as NodeListOf<HTMLElement>;
+	) as NodeListOf<ShoutElement>;
 
 	shouts.forEach((shout, index) => {
 		try {
@@ -128,7 +134,7 @@ export function patch_shouts() {
 				).toRelative();
 			}
 
-			const action_list = shout.querySelector('.shout-actions');
+			const action_list = shout.querySelector('.shout-actions')!;
 
 			const actions = action_list.querySelectorAll(
 				'.shout-actions .shout-action',
@@ -215,11 +221,9 @@ export function patch_shouts() {
 
 			menu.insertBefore(
 				<>
-					<button
-						type='button'
-						class='dropdown-menu-clickable-item'
-						data-type='translate'
-						onclick={() => {
+					<Button
+						menu
+						onClick={() => {
 							if (shout.translated) return;
 
 							translate(shout_text, lang).then((res) => {
@@ -240,19 +244,7 @@ export function patch_shouts() {
 
 								shout_body.appendChild(
 									<>
-										<div class='translated-notice'>
-											<div
-												class='bleh-icon translated-notice-icon'
-												data-type='translate'
-												style='--icon: var(--mask)'
-											/>
-											<p class='translated-notice-text'>
-												{tl(
-													trans.translated_from_value,
-													{ v: detected },
-												)}
-											</p>
-										</div>
+										<TranslatedHeader from={detected} />
 										<p class='translated-body'>
 											{res.translated}
 										</p>
@@ -261,18 +253,18 @@ export function patch_shouts() {
 							});
 						}}
 					>
+						<Icon name={icons.translate} />
 						{tl(trans.translate)}
-					</button>
-					<button
-						type='button'
-						class='dropdown-menu-clickable-item'
-						data-type='copy'
-						onclick={() => {
+					</Button>
+					<Button
+						menu
+						onClick={() => {
 							copy(shout_text);
 						}}
 					>
+						<Icon name={icons.copy} />
 						{tl(trans.copy)}
-					</button>
+					</Button>
 					<div class='sep' />
 				</>,
 				menu.firstElementChild,

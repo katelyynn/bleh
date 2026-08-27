@@ -168,6 +168,7 @@
 	--mask: var(--icon-16-edit-bulk);
 }
 
+[data-type="dots"],
 [data-type="more"] {
 	--mask: var(--icon-16-dots);
 }
