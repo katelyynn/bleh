@@ -5,7 +5,7 @@
  */
 
 import { settings } from '@/build/config';
-import { log } from '@/build/log.js';
+import { log } from '@/build/log.ts';
 import { auth, page, shout_parse_queue } from '@/build/page';
 import {
 	copy,

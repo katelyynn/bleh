@@ -14,7 +14,7 @@ import {
 	shift as shiftMiddleware,
 } from '@floating-ui/dom';
 import { HTMLAttributes, ReactElement } from 'jsx-dom';
-import { log } from '@/build/log.js';
+import { log } from '@/build/log.ts';
 
 type AnimationPreset =
 	| 'slide-down-bottom'

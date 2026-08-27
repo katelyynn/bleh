@@ -14,7 +14,7 @@ import { expand_avatar } from '@/components/shared/avatar';
 import { tl, trans } from '@/build/trans';
 import { dialog, dialog_rm } from '@/components/dialog/dialog';
 import { settings, settings_store } from '@/build/config';
-import { log } from '@/build/log.js';
+import { log } from '@/build/log.ts';
 import { save_profile_cache } from '@/pages/profile/profile';
 import { toggle } from '@/components/settings/toggle';
 import { save_setting } from '@/components/settings/settings';

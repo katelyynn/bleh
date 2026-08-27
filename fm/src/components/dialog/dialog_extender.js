@@ -8,7 +8,7 @@ import { page, root } from '@/build/page';
 import { tl, trans } from '@/build/trans';
 import { html, render } from 'lighterhtml';
 import { toggle } from '@/components/settings/toggle';
-import { log } from '@/build/log.js';
+import { log } from '@/build/log.ts';
 import {
 	correct_artist,
 	correct_item_by_artist,

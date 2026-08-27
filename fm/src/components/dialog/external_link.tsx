@@ -5,7 +5,7 @@
  */
 
 import { dialog, dialog_rm } from '@/components/dialog/dialog.tsx';
-import { log } from '@/build/log.js';
+import { log } from '@/build/log.ts';
 import { tl, trans } from '@/build/trans.ts';
 import { save_setting } from '@/components/settings/settings.tsx';
 import { toggle } from '@/components/settings/toggle.js';

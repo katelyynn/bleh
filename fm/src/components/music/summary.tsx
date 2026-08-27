@@ -13,6 +13,8 @@ import { prep_chart_colours } from '../music/chart';
 import { Chart } from 'chart.js';
 import { DateTime } from 'luxon';
 import { sanitise } from '@/build/tools';
+import { hover_tooltip } from '@/components/shared/tooltips.tsx';
+import { HeatmapTooltip } from '@/components/date/heatmap.tsx';
 
 export interface music_stat {
 	text?: string;
@@ -283,11 +285,15 @@ function fill_graph_blocks(labels: DateTime[], values: number[]) {
 			sum += value;
 		}
 
-		tippy(elem, {
-			content: `${
-				label.toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY)
-			}: ${value.toLocaleString(lang)}`,
-		});
+		hover_tooltip(
+			elem,
+			<HeatmapTooltip
+				date={label.toLocaleString(
+					DateTime.DATE_MED_WITH_WEEKDAY,
+				)}
+				value={value.toLocaleString(lang)}
+			/>,
+		);
 	});
 
 	title.textContent = tl(trans.value_listeners_recently, {

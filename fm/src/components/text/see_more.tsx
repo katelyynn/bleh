@@ -94,18 +94,27 @@ export function PanelTop({
 }
 
 interface ViewButtonsProps {
+	accompany?: boolean;
 	blend?: boolean;
 	blendV2?: boolean;
 	children: ReactNode;
 }
 
 export function ViewButtons({
+	accompany,
 	blend = true,
 	blendV2 = true,
 	children,
 }: ViewButtonsProps) {
 	return (
-		<div class={['view-buttons', blend && 'blend', blendV2 && 'blend-v2']}>
+		<div
+			class={[
+				'view-buttons',
+				blend && 'blend',
+				blendV2 && 'blend-v2',
+				accompany && 'accompany',
+			]}
+		>
 			{children}
 		</div>
 	);

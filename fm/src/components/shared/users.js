@@ -12,7 +12,7 @@ import {
 	style_name_from_badge,
 } from '@/components/shared/avatar';
 import { correct_artist } from '@/components/music/lotus';
-import { log } from '@/build/log.js';
+import { log } from '@/build/log.ts';
 import { keys } from '../settings/storage';
 import { is_sponsor } from '../sponsor';
 

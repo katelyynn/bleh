@@ -10,7 +10,7 @@ import { tl, trans } from '@/build/trans';
 import { dialog, dialog_rm } from '@/components/dialog/dialog';
 import { input } from '@/components/settings/input';
 import { notify } from '@/components/dialog/notify';
-import { log } from '@/build/log.js';
+import { log } from '@/build/log.ts';
 import { toggle } from '@/components/settings/toggle';
 import { pad2 } from '@/build/tools';
 import tippy from 'tippy.js';

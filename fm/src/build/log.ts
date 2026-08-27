@@ -7,7 +7,12 @@
 import { html } from 'lighterhtml';
 import { page } from './page';
 
-export function log(text, system, type = 'info', append = {}) {
+export function log(
+	text: string,
+	system: string,
+	type: 'log' | 'info' | 'error' = 'info',
+	append = {},
+) {
 	if (!page.structure.logs) {
 		const logs = html.node`
             <div class="logs" />

@@ -14,6 +14,8 @@ import { Chart } from 'chart.js';
 import { log } from '@/build/log';
 import { DateTime } from 'luxon';
 import { CountUp } from 'countup.js';
+import { hover_tooltip } from '@/components/shared/tooltips.tsx';
+import { HeatmapTooltip } from '@/components/date/heatmap.tsx';
 
 export function profile_summary(
 	recent_tracks: Element | undefined,
@@ -150,13 +152,15 @@ export function profile_summary(
 
 						values.push(value);
 
-						tippy(elem, {
-							content: `${
-								date.toLocaleString(
+						hover_tooltip(
+							elem,
+							<HeatmapTooltip
+								date={date.toLocaleString(
 									DateTime.DATE_MED_WITH_WEEKDAY,
-								)
-							}: ${value.toLocaleString(lang)}`,
-						});
+								)}
+								value={value.toLocaleString(lang)}
+							/>,
+						);
 					});
 
 					let sum = 0;

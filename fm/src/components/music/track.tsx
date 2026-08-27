@@ -6,7 +6,7 @@
 
 import { html, render } from 'lighterhtml';
 import { settings } from '@/build/config';
-import { log } from '@/build/log.js';
+import { log } from '@/build/log.ts';
 import { auth, page, root } from '@/build/page';
 import {
 	copy,

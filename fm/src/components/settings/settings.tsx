@@ -15,7 +15,7 @@ import { tl, trans } from '@/build/trans';
 import { notify } from '@/components/dialog/notify';
 import { auth, page } from '@/build/page';
 import { request_reload, useSettings } from '@/config';
-import { log } from '@/build/log.js';
+import { log } from '@/build/log.ts';
 import { change_settings_page } from '@/pages/bleh_settings/bleh_settings.js';
 import { dialog_rm } from '@/components/dialog/dialog';
 import { keybind } from '@/components/dialog/rabbit';

@@ -6,7 +6,7 @@
 
 import { register_background, update_page } from '@/page';
 import { auth, page } from '@/build/page';
-import { log } from '@/build/log.js';
+import { log } from '@/build/log.ts';
 import { checkup_page_structure } from '@/components/page/structure.js';
 import { html, render } from 'lighterhtml';
 import { notify } from '@/components/dialog/notify';

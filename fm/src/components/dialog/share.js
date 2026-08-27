@@ -8,7 +8,7 @@ import { html } from 'lighterhtml';
 import { notify } from '@/components/dialog/notify';
 import { dialog } from '@/components/dialog/dialog';
 import { tl, trans } from '@/build/trans';
-import { log } from '@/build/log.js';
+import { log } from '@/build/log.ts';
 import { copy } from '@/build/tools';
 
 export function share(url) {

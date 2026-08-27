@@ -16,7 +16,7 @@ import { news } from '@/components/news';
 import { useSettings } from '@/page.ts';
 import { save_setting, setting } from '@/components/settings/settings';
 import { prompt_for_update } from '@/components/page/style';
-import { log } from '@/build/log.js';
+import { log } from '@/build/log.ts';
 import {
 	correct_artist,
 	correct_item_by_artist,

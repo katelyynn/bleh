@@ -12,7 +12,7 @@ import { input } from '@/components/settings/input';
 import { auth, page, root } from '@/build/page';
 import { notify, notify_rm } from '@/components/dialog/notify';
 import { clean_number, pad2, sanitise } from '@/build/tools';
-import { log } from '@/build/log.js';
+import { log } from '@/build/log.ts';
 import { music_grids } from '@/components/music/music_grid';
 import { settings } from '@/build/config';
 import { version } from '@/main';

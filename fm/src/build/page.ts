@@ -107,18 +107,9 @@ export const page: page = {
 		list: null,
 	},
 	structure: {
-		wrapper: null,
-		container: null,
-		row: null,
-		main: null,
-		side: null,
-		nav: null,
-		content_top: null,
 		glacier: {
 			refresh: true,
 		},
-		indicator: null,
-		logs: null,
 	},
 	requested: {},
 	header: {},
@@ -204,18 +195,18 @@ interface page {
 		list: Array<any> | null;
 	};
 	structure: {
-		wrapper: HTMLElement | null;
-		container: HTMLElement | null;
-		row: HTMLElement | null;
-		main: HTMLElement | null;
-		side: HTMLElement | null;
-		nav: HTMLElement | null;
-		content_top: HTMLElement | null;
+		wrapper?: HTMLElement;
+		container?: HTMLElement;
+		row?: HTMLElement;
+		main?: HTMLElement;
+		side?: HTMLElement;
+		nav?: HTMLElement;
+		content_top?: HTMLElement;
 		glacier: {
 			refresh: boolean;
 		};
-		indicator: HTMLElement | null;
-		logs: HTMLElement | null;
+		indicator?: HTMLElement;
+		logs?: HTMLElement;
 	};
 	requested: Record<string, string | null>;
 	header: Record<string, ReactNode>;
@@ -236,6 +227,12 @@ interface page {
 			next: season | undefined;
 		};
 		error: boolean;
+		on_tour?: boolean;
+	};
+	previous?: {
+		type: string;
+		name: string;
+		sister: string;
 	};
 }
 

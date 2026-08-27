@@ -40,7 +40,7 @@ export function request_changelog(open_after = true) {
 
 	const xhr = new XMLHttpRequest();
 	const url =
-		`https://katelyynn.github.io/bleh/fm/changelog/changelog.json?${Math.random()}`;
+		`https://katelyynn.github.io/bleh/fm/changelog/changelog.tson?${Math.random()}`;
 	xhr.open('GET', url, true);
 
 	xhr.onload = function () {

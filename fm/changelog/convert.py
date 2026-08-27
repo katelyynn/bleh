@@ -1,9 +1,10 @@
 # simple tool to convert a markdown file with new-lines
 # into a one-line string with \n replacements
-import sys
-import os
 import json
+import os
+import sys
 from collections import OrderedDict
+
 
 def parse_markdown(md_file):
     with open(md_file, encoding="utf-8") as f:
@@ -24,7 +25,7 @@ def parse_markdown(md_file):
                     title = m.split(":", 1)[1].strip()
                 if m.lower().startswith("type:"):
                     mtype = m.split(":", 1)[1].strip()
-            body = lines[end+1:]
+            body = lines[end + 1 :]
         else:
             body = lines
     else:
@@ -45,6 +46,7 @@ def parse_markdown(md_file):
         bio = bio[1:]
     return bio, title, mtype
 
+
 def main():
     if len(sys.argv) != 2:
         print("usage: py convert.py update_file.md")
@@ -52,7 +54,7 @@ def main():
     md_file = sys.argv[1]
     version = os.path.splitext(os.path.basename(md_file))[0]
     bio, title, mtype = parse_markdown(md_file)
-    with open("changelog.json", encoding="utf-8") as f:
+    with open("changelog.tson", encoding="utf-8") as f:
         data = json.load(f, object_pairs_hook=OrderedDict)
     entry = {"type": mtype, "force": False, "bio": bio}
     if title:
@@ -65,8 +67,9 @@ def main():
     for k, v in data.items():
         if k not in new_data:
             new_data[k] = v
-    with open("changelog.json", "w", encoding="utf-8") as f:
+    with open("changelog.tson", "w", encoding="utf-8") as f:
         json.dump(new_data, f, indent=4, ensure_ascii=False)
+
 
 if __name__ == "__main__":
     main()

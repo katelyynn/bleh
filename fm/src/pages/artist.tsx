@@ -25,7 +25,7 @@ import {
 	similar_items,
 } from '@/components/music/music';
 import { checkup_page_structure } from '@/components/page/structure';
-import { is_same_page, register_background, update_page } from '@/page';
+import { register_background, update_page } from '@/page';
 import { ff } from '@/components/settings/sku';
 import { bleh_gallery_list, bleh_gallery_upload } from '@/pages/music/gallery';
 import { bleh_tags_mini } from '@/pages/tag';
@@ -49,13 +49,16 @@ import {
 import { useSettings } from '@/page.ts';
 import { bleh_event_artist } from '@/pages/artist/event.tsx';
 import { PageHeader, PageHeaderTitle } from '@/components/page/header.tsx';
+import { SeeMore, ViewButtons } from '@/components/text/see_more.tsx';
+import { createRef, ReactElement } from 'jsx-dom';
+import { icons } from '@/components/shared/icon.tsx';
 
 export function bleh_artists() {
 	const artist_header = document.body.querySelector(
 		'.header-new--artist',
 	) as HTMLElement;
 
-	page.name = artist_header.querySelector('.header-new-title').textContent;
+	page.name = artist_header.querySelector('.header-new-title')!.textContent;
 	page.sister = '';
 
 	artist_title(artist_header);
@@ -68,7 +71,7 @@ export function bleh_artists() {
 
 		page.structure.container = document.body.querySelector(
 			'.page-content:not(.visible-xs, :has(.content-top-lower-row, a + .js-gallery-heading))',
-		);
+		)!;
 	} else {
 		// not pro
 
@@ -76,41 +79,41 @@ export function bleh_artists() {
 			// normal, is there an ad then a container?
 			page.structure.container = document.body.querySelector(
 				'.full-bleed-ad-container + .page-content:not(.visible-xs)',
-			);
+			)!;
 
 			// death grips for some reason
 			if (!page.structure.container) {
 				page.structure.container = document.body.querySelector(
 					'.page-content',
-				);
+				)!;
 			}
 		} else {
 			page.structure.container = document.body.querySelector(
 				'.page-content:not(.visible-xs, :has(.content-top-lower-row, a + .js-gallery-heading))',
-			);
+			)!;
 		}
 	}
 	try {
-		page.structure.row = page.structure.container!.querySelector('.row');
+		page.structure.row = page.structure.container!.querySelector('.row')!;
 
 		if (!is_subpage) {
 			page.structure.main = page.structure.row!.querySelector(
 				'.col-main.buffer-standard',
-			);
+			)!;
 		} else {
 			page.structure.main = page.structure.row!.querySelector(
 				'.col-main',
-			);
+			)!;
 		}
 
 		if (auth.pro) {
 			page.structure.side = page.structure.row!.querySelector(
 				'.col-sidebar:not(.masonry-right)',
-			);
+			)!;
 		} else {
 			page.structure.side = page.structure.row!.querySelector(
 				'.col-sidebar:not(.section-with-separator--col)',
-			);
+			)!;
 		}
 	} catch (e) {
 		log('unable to find elements', 'page structure');
@@ -194,18 +197,18 @@ export function bleh_artists() {
 
 		similar_items();
 
-		const top_tracks = page.structure.main.querySelector('#top-tracks');
+		const top_tracks = page.structure.main!.querySelector('#top-tracks');
 		if (top_tracks) {
-			let settings_btn;
+			const settings_btn = createRef();
 
-			const top = top_tracks.querySelector('.section-controls');
+			const top = top_tracks.querySelector('.section-controls')!;
 			top.classList = 'top-container';
 
-			const header = top.querySelector('h3');
+			const header = top.querySelector('h3')!;
 
 			const select_btn = top.querySelector(
 				'.dropdown-menu-clickable-button',
-			);
+			) as HTMLButtonElement;
 			if (select_btn) {
 				select_btn.classList.add(
 					'select-button',
@@ -215,7 +218,9 @@ export function bleh_artists() {
 				select_btn.classList.remove('dropdown-menu-clickable-button');
 			}
 
-			const play = top.querySelector('.section-playlink');
+			const play = top.querySelector(
+				'.section-playlink',
+			) as HTMLAnchorElement;
 			if (play) {
 				play.classList.add('blend-v2-btn', 'radio', 'left-icon');
 				play.classList.remove(
@@ -225,22 +230,27 @@ export function bleh_artists() {
 				play.setAttribute('data-type', 'play');
 			}
 
-			header.after(html.node`
-                <div class="accompany view-buttons blend blend-v2">
-                    ${select_btn}
-                </div>
-                <div class="view-buttons blend blend-v2">
-                    ${play}
-                    <button class="left-icon blend-v2-btn" data-type="settings" ref=${(
-				el,
-			) => (settings_btn = el)}>
-                        ${tl(trans.settings)}
-                    </button>
-                </div>
-            `);
+			header.after(
+				<>
+					<ViewButtons blend blendV2 accompany>
+						{select_btn}
+					</ViewButtons>
+					<ViewButtons blend blendV2>
+						{play}
+						<SeeMore
+							blend
+							iconPlacement='left'
+							icon={icons.settings}
+							ref={settings_btn}
+						>
+							{tl(trans.settings)}
+						</SeeMore>
+					</ViewButtons>
+				</>,
+			);
 
 			menu_tooltip(
-				settings_btn,
+				settings_btn.current,
 				<Tooltip theme='window'>
 					<div class='dialog-settings'>
 						<div class='setting-group blend'>
@@ -253,12 +263,12 @@ export function bleh_artists() {
 			);
 		}
 
-		const top_albums = page.structure.main.querySelector('#top-albums');
+		const top_albums = page.structure.main!.querySelector('#top-albums');
 		if (top_albums) {
-			const top = top_albums.querySelector('.section-controls');
+			const top = top_albums.querySelector('.section-controls')!;
 			top.classList = 'top-container';
 
-			const header = top.querySelector('h3');
+			const header = top.querySelector('h3')!;
 
 			const select_btn = top.querySelector(
 				'.dropdown-menu-clickable-button',
@@ -391,12 +401,12 @@ export function bleh_artists() {
             else
                 page.structure.side.insertBefore(featured_panel, page.structure.side.firstElementChild);*/
 
-			page.structure.main
-				.querySelector('.music-summary')
+			page.structure.main!
+				.querySelector('.music-summary')!
 				.after(featured_panel);
 		}
 
-		const listeners_section = page.structure.main.querySelector(
+		const listeners_section = page.structure.main!.querySelector(
 			'.listeners-section',
 		);
 		if (listeners_section) {
