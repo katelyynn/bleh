@@ -111,7 +111,7 @@
 		--mask: var(--icon-16-block);
 	}
 
-	[data-toggle-button-current-state="followed"] > form > & {
+	[data-toggle-button-current-state="followed"]>form>& {
 		--mask: var(--icon-16-user);
 
 		&[data-followed="true"] {
@@ -794,6 +794,7 @@
 	--mask: var(--icon-16-issues);
 }
 
+[data-type="plaster"],
 [data-type="debug"] {
 	--mask: var(--icon-plaster);
 }

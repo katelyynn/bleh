@@ -53,6 +53,7 @@ import { age } from '../shared/age';
 import { notify } from '../dialog/notify';
 import { status } from '../dialog/status';
 import { useSettings } from '@/page.ts';
+import { OracleNotice } from '@/components/oracle/notice.tsx';
 
 export function oracle_process() {
 	log('beginning', 'oracle');
@@ -161,23 +162,9 @@ export function oracle_process() {
 		set_storage('bleh_oracle_cache', JSON.stringify(oracle_cache));
 	}
 
-	page.structure.side!.appendChild(html.node`
-        <section class="oracle cta colourful">
-            <label class="cta-label">
-                ${icon({ name: icons.oracle })}
-                <strong>${tl(trans.oracle_notice)}</strong>
-            </label>
-            <div class="cta-actions">
-                <button class="see-more left-icon oracle-button" data-type="debug" onclick=${() =>
-		oracle_debug()}>
-                    ${tl(trans.debug)}
-                </button>
-                <a class="see-more oracle-button" href="https://github.com/katelyynn/bleh/issues/new/choose" target="_blank">
-                    ${tl(trans.send_feedback)}
-                </a>
-            </div>
-        </section>
-    `);
+	page.structure.side!.appendChild(
+		<OracleNotice />,
+	);
 
 	const header = page.structure.container.querySelector('.page-header');
 	let releases_panel;
