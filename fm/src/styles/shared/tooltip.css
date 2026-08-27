@@ -329,18 +329,6 @@
 
 	&[data-theme="generic"] {
 		pointer-events: none;
-
-		&>.tippy-content {
-			display: flex;
-			flex-direction: column;
-			text-align: center;
-
-			&>small {
-				font-size: 12px;
-				margin-top: -2px;
-				color: oklch(var(--c3));
-			}
-		}
 	}
 
 	&[data-theme="name-sister-combo"] {
@@ -368,6 +356,10 @@
 
 .tippy-content {
 	padding: unset;
+}
+
+.tooltip-label {
+	color: oklch(var(--c2) / 80%);
 }
 
 .user-dashboard-controls-tooltip:before,
