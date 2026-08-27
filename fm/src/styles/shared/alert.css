@@ -220,6 +220,11 @@
 	background-size: 100%;
 	vertical-align: middle;
 	margin: -1px 0;
+	color: transparent;
+	--select-colour: transparent;
+	font-size: 130px;
+	line-height: 100px;
+	overflow: hidden;
 
 	transition-property: scale;
 	transition-duration: 0.9s;

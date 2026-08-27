@@ -180,14 +180,14 @@ export function markdown(
 			type: 'lang',
 			regex: /🙏\s*BLESS\s*🙏/gi,
 			replace: () => {
-				return `<span class="overdose"><span class="bless"></span><span>BLESS</span><span class="bless"></span></span>`;
+				return `<span class="overdose"><span class="bless">🙏</span><span>BLESS</span><span class="bless">🙏</span></span>`;
 			},
 		},
 		{
 			type: 'lang',
 			regex: /\s*:hazelfae:\s*/gi,
 			replace: () => {
-				return `<a class="hazelfae" href="${root}user/evangelicgirl?hazelfae"></a>`;
+				return `<a class="hazelfae" href="${root}user/evangelicgirl?hazelfae">:hazelfae:</a>`;
 			},
 		},
 	];

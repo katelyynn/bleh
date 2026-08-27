@@ -4,7 +4,6 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { html } from 'lighterhtml';
 import { log } from '@/build/log';
 import { set_storage } from '@/build/tools';
 import { tl, trans } from '@/build/trans';
@@ -36,7 +35,7 @@ async function fetch_status_api(username: string) {
 	log(`fetching for ${username}`, 'status.cafe');
 
 	const new_date = new Date();
-	new_date.setSeconds(new_date.getSeconds() + 2.3);
+	new_date.setSeconds(new_date.getSeconds() + 1.5);
 	set_storage('next_status_cafe_fetch', new_date.toString());
 
 	return fetch(`https://status.cafe/users/${username}/status.json`)
@@ -62,7 +61,7 @@ async function fetch_status_api(username: string) {
 
 			const status_link = `https://status.cafe/users/${username}`;
 
-			const { trusted, dangerous } = can_trust_link(status_link);
+			const { trusted } = can_trust_link(status_link);
 
 			return (
 				<div
