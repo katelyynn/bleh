@@ -281,6 +281,26 @@
 	}
 }
 
+.top-albums-carousel {
+	display: flex;
+	gap: var(--card-padding) var(--item-list-gap);
+	--item-width: 200px;
+
+	overflow: hidden;
+	padding: var(--card-padding);
+	margin: calc(-1 * var(--card-padding));
+
+	&.scroll-manually {
+		overflow-x: scroll;
+		overflow-y: unset;
+	}
+}
+
+.artist-top-albums.in-carousel {
+	display: flex;
+	flex-wrap: nowrap;
+}
+
 .artist-top-albums-item {
 	display: flex;
 	flex-direction: column;
@@ -307,9 +327,10 @@
 .music-more-artists-item-wrap {
 	padding: unset;
 	margin: unset !important;
-	width: unset;
+	width: var(--item-width, unset);
 	list-style: none;
 	position: relative;
+	flex-shrink: 0;
 
 	animation: var(--motion,
 			grid 0.4s var(--trans-function)) !important;

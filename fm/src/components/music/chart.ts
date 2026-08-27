@@ -148,9 +148,9 @@ export function load_chart_colours() {
 				},
 			},
 			y: {
-				display: false,
+				display: true,
 				grid: {
-					display: false,
+					display: true,
 				},
 				suggestedMax: 10,
 			},

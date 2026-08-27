@@ -409,6 +409,10 @@ export function clean_title(title: string) {
 	return name_includes(title).song_title;
 }
 
+export function clean_streaming_titles(title: string) {
+	return title.replace(/\s*-\s*(?:ep|single)\s*$/i, '');
+}
+
 export function fix_title(title: string) {
 	return title
 		.replace(/[\u2010\u2011\u2012\u2013]/g, '-')

@@ -52,6 +52,8 @@ import { PageHeader, PageHeaderTitle } from '@/components/page/header.tsx';
 import { SeeMore, ViewButtons } from '@/components/text/see_more.tsx';
 import { createRef, ReactElement } from 'jsx-dom';
 import { icons } from '@/components/shared/icon.tsx';
+import { TopAlbum } from '@/components/album/top_album.tsx';
+import { avatar } from '@/components/shared/avatar.tsx';
 
 export function bleh_artists() {
 	const artist_header = document.body.querySelector(
@@ -289,122 +291,77 @@ export function bleh_artists() {
                     </div>
                 `);
 			}
-		}
 
-		if (katsune && featured_items) {
-			const featured_panel = html.node`
-                <section class="featured-items-panel">
-                    ${
-				Array.from(featured_items.querySelectorAll('li')).map(
-					(item, index) => {
-						item.classList.remove(
-							'artist-header-featured-items-item-wrap--video-thumbnail',
-						);
-						let type = item.getAttribute('itemprop');
+			const albums = top_albums.querySelector(
+				'.buffer-standard',
+			) as HTMLDivElement;
+			albums.classList.remove('buffer-standard');
+			albums.classList.add('top-albums-buffer');
 
-						let text = tl(trans.latest_album);
-						if (type == 'track') text = tl(trans.popular_now);
+			const ol = albums.firstElementChild;
+			ol!.classList.add('in-carousel');
 
-						let header = item.querySelector(
-							'.artist-header-featured-items-item-header',
-						);
-						header.parentElement.removeChild(header);
+			const carousel = (
+				<div class='top-albums-carousel'>
+					{albums}
+				</div>
+			);
+			top_albums.appendChild(carousel);
 
-						let original_name = item
-							.querySelector(
-								'.artist-header-featured-items-item-name',
-							)
-							.textContent.trim();
-						let name;
+			const link = albums.querySelector('.more-link-fullwidth-right');
+			if (link) carousel.after(link);
 
-						if (index > 0) {
-							page.state.top_track = original_name;
-						}
+			const list = featured_items?.querySelectorAll('li');
+			const new_album = list?.[0];
 
-						if (useSettings.get('format_guest_features')) {
-							const formatted = name_includes(
-								original_name,
-								page.name,
-							);
+			if (new_album) {
+				const name = new_album.querySelector(
+					'.artist-header-featured-items-item-name',
+				)?.textContent.trim() || '';
+				const aux = new_album.querySelector(
+					'.artist-header-featured-items-item-aux-text',
+				)?.textContent.trim();
+				const href = new_album.querySelector('.link-block-cover-link')
+					?.getAttribute('href') || '';
+				const image = new_album.querySelector('img')!.src;
 
-							name = html.node`${
-								smart_title(
-									formatted.song_title,
-									formatted.song_tags,
-								)
-							}`;
-						} else if (useSettings.get('corrections')) {
-							name = correct_item_by_artist(
-								original_name,
-								page.name,
-							);
-						}
-
-						let aux = item
-							.querySelector(
-								'.artist-header-featured-items-item-aux-text',
-							)
-							?.textContent.trim();
-						let link = item
-							.querySelector('.link-block-cover-link')
-							?.getAttribute('href');
-						let img = item.querySelector('img')?.src;
-
-						if (type == 'track') {
-							const top_track = page.structure.main.querySelector(
-								'#top-tracks .cover-art img',
-							);
-							if (
-								top_track &&
-								!top_track.src.endsWith(
-									'4128a6eb29f94943c9d206c08e625904.jpg',
-								)
-							) {
-								img = top_track.src.replace(
-									'/64s/',
-									'/avatar170s/',
-								);
-							}
-						}
-
-						return html.node`
-                                <div class="featured-artist-item">
-                                    <div class="sub-text normal" data-type=${type}>
-                                        <span class="bleh-icon" style="--icon: var(--mask)" />
-                                        ${text}
-                                    </div>
-                                    <div class="source-album js-link-block link-block" data-type=${type}>
-                                        <div class="source-album-art">
-                                            <span class="cover-art">
-                                                <img src=${img} alt=${original_name} loading="lazy" />
-                                            </span>
-                                        </div>
-                                        <div class="source-album-details">
-                                            <h4 class="source-album-name">
-                                                <a class="smart-title" href=${link}>${name}</a>
-                                            </h4>
-                                            <p class="source-album-stats">${aux}</p>
-                                        </div>
-                                        <a class="js-link-block-cover-link link-block-cover-link" href=${link} tabindex="-1" aria-hidden="true" />
-                                    </div>
-                                </div>
-                            `;
-					},
-				)
+				carousel.insertBefore(
+					<TopAlbum
+						name={name}
+						artist={page.sister}
+						listeners={tl(trans.latest_album)}
+						date={aux}
+						href={href}
+						image={avatar(image, '300x300')}
+					/>,
+					carousel.firstElementChild,
+				);
 			}
-                </section>
-            `;
 
-			/*let listen_panel = page.structure.side.querySelector('.listen-panel');
-            if (listen_panel)
-                listen_panel.after(featured_panel);
-            else
-                page.structure.side.insertBefore(featured_panel, page.structure.side.firstElementChild);*/
+			if (useSettings.get('simulate_scroll')) {
+				carousel.addEventListener('wheel', (e) => {
+					e.preventDefault();
 
-			page.structure.main!
-				.querySelector('.music-summary')!
-				.after(featured_panel);
+					if (e.deltaY > 0) {
+						carousel.scrollBy({
+							top: 0,
+							left: +200,
+							behavior: 'smooth',
+						});
+					} else {
+						carousel.scrollBy({
+							top: 0,
+							left: -200,
+							behavior: 'smooth',
+						});
+					}
+				});
+			} else {
+				carousel.classList.add('scroll-manually');
+			}
 		}
+
+		if (top_tracks && top_albums) top_albums.after(top_tracks);
 
 		const listeners_section = page.structure.main!.querySelector(
 			'.listeners-section',

@@ -1,10 +1,11 @@
 import { correct_generic_combo_child } from '@/components/music/lotus.ts';
+import { ReactNode } from 'jsx-dom';
 
 interface TopAlbumProps {
 	image?: string;
 	name: string;
 	artist: string;
-	listeners?: string;
+	listeners?: string | ReactNode;
 	date?: string;
 	tracks?: string;
 	href: string;
@@ -44,9 +45,10 @@ export function TopAlbum({
 						{listeners}
 					</p>
 				)}
-				{(date && tracks) && (
+				{(date || tracks) && (
 					<p class='artist-top-albums-item-aux-text'>
-						{date} · {tracks}
+						{date}
+						{tracks && ` · ${tracks}`}
 					</p>
 				)}
 				<div class='media-item'>
