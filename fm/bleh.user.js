@@ -95398,10 +95398,13 @@ var bleh = (() => {
       ]
     });
     function update() {
+      log(`changing page to ${page2}`, "tabbed", "info", {
+        page: pages[page2]
+      });
       tabs.forEach((tab) => {
         tab.active = tab.id == page2;
       });
-      content2.current.replaceChildren(pages[page2].content);
+      content2.current.replaceChildren(pages[page2].content.cloneNode(true));
     }
     update();
     return elem;
@@ -96955,6 +96958,51 @@ var bleh = (() => {
       }
     };
     if (form) {
+      if (page.token == "") {
+        page.token = form.querySelector('[name="csrfmiddlewaretoken"]').getAttribute("value");
+      }
+      const count = form.querySelector('[name="chart_length_recent_tracks"]');
+      const artwork = form.querySelector("#id_show_recent_tracks_artwork");
+      const realtime = form.querySelector("#id_auto_refresh_recent_tracks");
+      form.classList = "";
+      form.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
+        children: [
+          /* @__PURE__ */ jsx(Token, {
+            value: page.token
+          }),
+          /* @__PURE__ */ jsx(SettingGroup, {
+            children: [
+              /* @__PURE__ */ jsx(SettingSelect, {
+                name: tl2(trans.amount_to_display),
+                values: select_prepare(count),
+                value: count.value,
+                id: count.name
+              }),
+              /* @__PURE__ */ jsx(SettingSwitch, {
+                name: tl2(trans.recent_artwork),
+                value: artwork.checked,
+                id: artwork.name
+              }),
+              /* @__PURE__ */ jsx(SettingSwitch, {
+                name: tl2(trans.recent_realtime.name),
+                body: tl2(trans.recent_realtime.body),
+                value: realtime.checked,
+                id: realtime.name
+              })
+            ]
+          }),
+          /* @__PURE__ */ jsx(SettingsFooter, {
+            children: /* @__PURE__ */ jsx(Button, {
+              primary: true,
+              type: "submit",
+              children: [
+                /* @__PURE__ */ jsx(SaveIcon, {}),
+                tl2(trans.save)
+              ]
+            })
+          })
+        ]
+      }));
       pages = {
         behaviour: {
           icon: icons.debug,
@@ -96963,6 +97011,7 @@ var bleh = (() => {
         },
         ...pages
       };
+      form.remove();
     }
     menu_tooltip(settings_btn.current, /* @__PURE__ */ jsx(FloatingWindow, {
       children: /* @__PURE__ */ jsx(FloatingWindowContents, {
@@ -96970,53 +97019,6 @@ var bleh = (() => {
           pages
         })
       })
-    }));
-    if (!form) return panel;
-    if (page.token == "") {
-      page.token = form.querySelector('[name="csrfmiddlewaretoken"]').getAttribute("value");
-    }
-    let original_chart_settings = {};
-    const count = form.querySelector('[name="chart_length_recent_tracks"]');
-    const artwork = form.querySelector("#id_show_recent_tracks_artwork");
-    const realtime = form.querySelector("#id_auto_refresh_recent_tracks");
-    form.classList = "";
-    form.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
-      children: [
-        /* @__PURE__ */ jsx(Token, {
-          value: page.token
-        }),
-        /* @__PURE__ */ jsx(SettingGroup, {
-          children: [
-            /* @__PURE__ */ jsx(SettingSelect, {
-              name: tl2(trans.amount_to_display),
-              values: select_prepare(count),
-              value: count.value,
-              id: count.name
-            }),
-            /* @__PURE__ */ jsx(SettingSwitch, {
-              name: tl2(trans.recent_artwork),
-              value: artwork.checked,
-              id: artwork.name
-            }),
-            /* @__PURE__ */ jsx(SettingSwitch, {
-              name: tl2(trans.recent_realtime.name),
-              body: tl2(trans.recent_realtime.body),
-              value: realtime.checked,
-              id: realtime.name
-            })
-          ]
-        }),
-        /* @__PURE__ */ jsx(SettingsFooter, {
-          children: /* @__PURE__ */ jsx(Button, {
-            primary: true,
-            type: "submit",
-            children: [
-              /* @__PURE__ */ jsx(SaveIcon, {}),
-              tl2(trans.save)
-            ]
-          })
-        })
-      ]
     }));
     return panel;
   }
@@ -121625,7 +121627,7 @@ var bleh = (() => {
         date: "2026-07-30"
       }
     },
-    built_on: "2026-08-28T21:55:34.101Z"
+    built_on: "2026-08-28T22:03:19.823Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

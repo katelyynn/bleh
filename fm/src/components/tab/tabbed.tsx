@@ -1,11 +1,12 @@
-import { createRef, ReactNode } from 'jsx-dom';
+import { createRef, ReactElement, ReactNode } from 'jsx-dom';
 import { Button } from '@/components/button/button.tsx';
 import { Icon } from '@/components/shared/icon.tsx';
+import { log } from '@/build/log.ts';
 
 export interface TabbedPage {
 	icon: string;
 	label: ReactNode;
-	content: ReactNode;
+	content: Element;
 }
 
 interface TabbedProps {
@@ -48,11 +49,14 @@ export function Tabbed({
 	);
 
 	function update() {
+		log(`changing page to ${page}`, 'tabbed', 'info', {
+			page: pages[page!],
+		});
 		tabs.forEach((tab) => {
 			tab.active = tab.id == page;
 		});
 
-		content.current.replaceChildren(pages[page!].content);
+		content.current.replaceChildren(pages[page!].content.cloneNode(true));
 	}
 
 	update();

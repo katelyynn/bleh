@@ -1124,6 +1124,54 @@ function profile_recents() {
 	};
 
 	if (form) {
+		if (page.token == '') {
+			page.token = form
+				.querySelector('[name="csrfmiddlewaretoken"]')
+				.getAttribute('value');
+		}
+
+		const count = form.querySelector(
+			'[name="chart_length_recent_tracks"]',
+		) as HTMLSelectElement;
+		const artwork = form.querySelector(
+			'#id_show_recent_tracks_artwork',
+		) as HTMLInputElement;
+		const realtime = form.querySelector(
+			'#id_auto_refresh_recent_tracks',
+		) as HTMLInputElement;
+
+		form.classList = '';
+		form.replaceChildren(
+			<>
+				<Token value={page.token} />
+				<SettingGroup>
+					<SettingSelect
+						name={tl(trans.amount_to_display)}
+						values={select_prepare(count)}
+						value={count.value}
+						id={count.name}
+					/>
+					<SettingSwitch
+						name={tl(trans.recent_artwork)}
+						value={artwork.checked}
+						id={artwork.name}
+					/>
+					<SettingSwitch
+						name={tl(trans.recent_realtime.name)}
+						body={tl(trans.recent_realtime.body)}
+						value={realtime.checked}
+						id={realtime.name}
+					/>
+				</SettingGroup>
+				<SettingsFooter>
+					<Button primary type='submit'>
+						<SaveIcon />
+						{tl(trans.save)}
+					</Button>
+				</SettingsFooter>
+			</>,
+		);
+
 		pages = {
 			behaviour: {
 				icon: icons.debug,
@@ -1132,6 +1180,8 @@ function profile_recents() {
 			},
 			...pages,
 		};
+
+		form.remove();
 	}
 
 	menu_tooltip(
@@ -1141,58 +1191,6 @@ function profile_recents() {
 				<Tabbed pages={pages} />
 			</FloatingWindowContents>
 		</FloatingWindow>,
-	);
-
-	if (!form) return panel;
-
-	if (page.token == '') {
-		page.token = form
-			.querySelector('[name="csrfmiddlewaretoken"]')
-			.getAttribute('value');
-	}
-
-	let original_chart_settings = {};
-
-	const count = form.querySelector(
-		'[name="chart_length_recent_tracks"]',
-	) as HTMLSelectElement;
-	const artwork = form.querySelector(
-		'#id_show_recent_tracks_artwork',
-	) as HTMLInputElement;
-	const realtime = form.querySelector(
-		'#id_auto_refresh_recent_tracks',
-	) as HTMLInputElement;
-
-	form.classList = '';
-	form.replaceChildren(
-		<>
-			<Token value={page.token} />
-			<SettingGroup>
-				<SettingSelect
-					name={tl(trans.amount_to_display)}
-					values={select_prepare(count)}
-					value={count.value}
-					id={count.name}
-				/>
-				<SettingSwitch
-					name={tl(trans.recent_artwork)}
-					value={artwork.checked}
-					id={artwork.name}
-				/>
-				<SettingSwitch
-					name={tl(trans.recent_realtime.name)}
-					body={tl(trans.recent_realtime.body)}
-					value={realtime.checked}
-					id={realtime.name}
-				/>
-			</SettingGroup>
-			<SettingsFooter>
-				<Button primary type='submit'>
-					<SaveIcon />
-					{tl(trans.save)}
-				</Button>
-			</SettingsFooter>
-		</>,
 	);
 
 	return panel;
