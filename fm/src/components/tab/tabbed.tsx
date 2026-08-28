@@ -6,7 +6,7 @@ import { log } from '@/build/log.ts';
 export interface TabbedPage {
 	icon: string;
 	label: ReactNode;
-	content: Element;
+	content: Element | (() => Element);
 }
 
 interface TabbedProps {
@@ -56,7 +56,13 @@ export function Tabbed({
 			tab.active = tab.id == page;
 		});
 
-		content.current.replaceChildren(pages[page!].content.cloneNode(true));
+		if (typeof pages[page!].content == 'function') {
+			content.current.replaceChildren(
+				(pages[page!].content as () => Element)(),
+			);
+		} else {
+			content.current.replaceChildren(pages[page!].content);
+		}
 	}
 
 	update();

@@ -9,6 +9,7 @@ import { log } from '@/build/log';
 import { dialogs, page } from '@/build/page';
 import { tl, trans } from '@/build/trans';
 import { ReactElement, ReactNode } from 'jsx-dom';
+import { PanelHead } from '@/components/text/head.tsx';
 
 export function load_dialogs() {
 	const elem = (
@@ -31,6 +32,7 @@ export function load_dialogs() {
 
 type dialog = {
 	id: string;
+	icon?: string;
 	title?: ReactNode;
 	subtitle?: ReactNode;
 	body: HTMLElement | ReactElement;
@@ -49,6 +51,7 @@ type dialog = {
 // Present a fullscreen dialog to the user
 export function dialog({
 	id = '',
+	icon,
 	title,
 	subtitle,
 	body = html.node``,
@@ -108,7 +111,7 @@ export function dialog({
 		modal.setAttribute('aria-labelledby', 'modal_title');
 		modal.appendChild(
 			<div class='bleh-modal-title' id='modal_title'>
-				<h1>{title}</h1>
+				<PanelHead margin={false} icon={icon}>{title}</PanelHead>
 				{subtitle && <p class='bleh-modal-subtitle'>{subtitle}</p>}
 			</div>,
 		);

@@ -16,7 +16,7 @@ import { clean_number, copy, romanise, set_storage } from '@/build/tools';
 import { tl, trans } from '@/build/trans';
 import { load_chart_colours } from '@/components/music/chart';
 import { create_badge, load_badges } from '@/components/shared/badge';
-import { dialog } from '@/components/dialog/dialog';
+import { dialog, dialog_rm } from '@/components/dialog/dialog';
 import {
 	correct_artist,
 	correct_item_by_artist,
@@ -1044,6 +1044,8 @@ function profile_recents() {
 	const settings_btn = createRef();
 	const refresh_btn = createRef();
 
+	const modal_id = 'profile_settings';
+
 	panel.insertBefore(
 		<PanelTop>
 			<PanelHead icon={icons.recent}>
@@ -1083,16 +1085,22 @@ function profile_recents() {
 				>
 					{tl(trans.refresh)}
 				</SeeMore>
-				{form && (
-					<SeeMore
-						blend
-						iconPlacement='left'
-						icon={icons.settings}
-						ref={settings_btn}
-					>
-						{tl(trans.settings)}
-					</SeeMore>
-				)}
+				<SeeMore
+					blend
+					iconPlacement='left'
+					icon={icons.settings}
+					onClick={() => {
+						/*dialog({
+							id: modal_id,
+							icon: icons.recent,
+							title: tl(trans.recents),
+							body: <Tabbed pages={pages} />,
+						});*/
+					}}
+					ref={settings_btn}
+				>
+					{tl(trans.settings)}
+				</SeeMore>
 			</ViewButtons>
 		</PanelTop>,
 		panel.firstElementChild,
@@ -1108,14 +1116,11 @@ function profile_recents() {
 		visual: {
 			icon: icons.visual,
 			label: tl(trans.visual),
-			content: (
+			content: () => (
 				<>
-					<SettingGroup>
+					<SettingGroup minWidth>
 						<SettingSwitch bind='format_guest_features' />
 						<SettingSwitch bind='show_guest_features' />
-						<SettingRadio bind='track_layout' />
-						<SettingRadio bind='expand_tracks' />
-						<SettingRadio bind='track_album_name_location' />
 					</SettingGroup>
 					<CardTip>{tl(trans.bleh_settings_notice)}</CardTip>
 				</>
@@ -1144,7 +1149,7 @@ function profile_recents() {
 		form.replaceChildren(
 			<>
 				<Token value={page.token} />
-				<SettingGroup>
+				<SettingGroup minWidth>
 					<SettingSelect
 						name={tl(trans.amount_to_display)}
 						values={select_prepare(count)}
@@ -1163,8 +1168,14 @@ function profile_recents() {
 						id={realtime.name}
 					/>
 				</SettingGroup>
-				<SettingsFooter>
-					<Button primary type='submit'>
+				<SettingsFooter gap>
+					<Button
+						onClick={() => {
+							dialog_rm({ id: modal_id });
+						}}
+						primary
+						type='submit'
+					>
 						<SaveIcon />
 						{tl(trans.save)}
 					</Button>
@@ -1174,7 +1185,7 @@ function profile_recents() {
 
 		pages = {
 			behaviour: {
-				icon: icons.debug,
+				icon: icons.global,
 				label: tl(trans.behaviour),
 				content: form,
 			},

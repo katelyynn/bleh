@@ -297,6 +297,15 @@ export function menu_tooltip<
 	const tooltip = new TooltipInstance(host, element, {
 		placement: 'bottom',
 		ariaEnabled: true,
+		middleware: [
+			flip(),
+			inline(),
+			shiftMiddleware({
+				crossAxis: true,
+				padding: 6,
+			}),
+			offsetMiddleware(10),
+		],
 		onHide: () => {
 			document.body.removeEventListener('click', listener);
 			document.body.removeEventListener('contextmenu', listener);

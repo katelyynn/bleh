@@ -73,7 +73,7 @@ export function Button({
 
 	let elem: ButtonElement | ButtonLinkElement;
 
-	if (!href || type != 'button') {
+	if (!href) {
 		elem = (
 			<button
 				type={type}
@@ -85,20 +85,20 @@ export function Button({
 				{children}
 			</button>
 		) as ButtonElement;
+	} else {
+		elem = (
+			<a
+				class={classes}
+				href={href}
+				target={external ? '_blank' : undefined}
+				onClick={handleOnClick}
+				ref={ref as ReturnType<typeof createRef<HTMLAnchorElement>>}
+				{...props}
+			>
+				{children}
+			</a>
+		) as ButtonLinkElement;
 	}
-
-	elem = (
-		<a
-			class={classes}
-			href={href}
-			target={external ? '_blank' : undefined}
-			onClick={handleOnClick}
-			ref={ref as ReturnType<typeof createRef<HTMLAnchorElement>>}
-			{...props}
-		>
-			{children}
-		</a>
-	) as ButtonLinkElement;
 
 	if (tooltip) {
 		hover_tooltip(

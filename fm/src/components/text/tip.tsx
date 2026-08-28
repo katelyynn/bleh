@@ -10,14 +10,16 @@ import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
 import { Icon, icons } from '@/components/shared/icon.tsx';
 
 interface CardTipProps {
+	gap?: boolean;
 	children: ReactNode;
 }
 
 export function CardTip({
+	gap,
 	children,
 }: CardTipProps) {
 	return (
-		<label class='card-tip'>
+		<label class={['card-tip', gap && 'gap']}>
 			{children}
 		</label>
 	);

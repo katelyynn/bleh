@@ -323,6 +323,7 @@ pre {
 }
 
 .card-tip {
+	display: flex;
 	margin-top: var(--card-gap);
 	font-size: 13px;
 	color: oklch(var(--c3));
@@ -349,6 +350,10 @@ pre {
 
 	.bleh--panel>.setting-group+& {
 		margin-top: -10px;
+	}
+
+	&.gap {
+		margin-top: var(--card-gap);
 	}
 }
 
@@ -514,6 +519,7 @@ hr {
 	line-height: 20px;
 	margin-bottom: var(--card-gap);
 
+	&:not(.with-margin),
 	.bleh--panel>& {
 		margin-bottom: unset;
 	}

@@ -1,15 +1,14 @@
 .tabbed {
 	display: flex;
 	flex-direction: column;
-	gap: 10px;
+	gap: var(--card-gap);
 }
 
 .tabbed-tabs {
 	display: flex;
-	justify-content: center;
+	margin: 0 auto;
 	align-items: center;
-	gap: 4px;
-	padding-bottom: 4px;
+	padding-bottom: 3px;
 	border-bottom: 1px solid var(--separator-base);
 }
 
@@ -29,7 +28,7 @@
 		left: var(--button-sides);
 		right: var(--button-sides);
 		height: 2px;
-		bottom: -5px;
+		bottom: -4px;
 
 		opacity: 0;
 		translate: 0 2px;

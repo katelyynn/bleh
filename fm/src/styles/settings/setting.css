@@ -15,6 +15,10 @@
 	text-align: left;
 	overflow: hidden;
 
+	&.min-width {
+		width: 400px !important;
+	}
+
 	--setting-group-padding: 10px;
 
 	&:not(.blend) {
