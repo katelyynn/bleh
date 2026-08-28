@@ -267,6 +267,8 @@ export function bleh_artists() {
 		}
 
 		const top_albums = page.structure.main!.querySelector('#top-albums');
+		// TODO: move some of this code to main loop as
+		// this isnt detecting when sort order changes
 		if (top_albums) {
 			const top = top_albums.querySelector('.section-controls')!;
 			top.classList = 'top-container';
