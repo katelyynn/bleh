@@ -1,5 +1,14 @@
 .smart-title {
-	display: inline;
+	display: inline-block;
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 100%;
+
+	&.top-track {
+		display: inline;
+	}
 }
 
 .smart-artist {
@@ -27,10 +36,8 @@
 }
 
 .feat {
-	display: inline-block;
-	width: fit-content;
-	height: fit-content;
-	margin-left: 6px;
+	display: inline;
+	/*margin-left: 6px;*/
 	color: oklch(var(--c2) / 80%);
 
 	&:is([data-tag-group="mixes"], [data-tag-group="mixes_numbers"], [data-tag-group="stems"], [data-tag-group="bonus"]) {

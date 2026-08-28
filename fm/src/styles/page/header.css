@@ -124,22 +124,14 @@
 			line-height: 40px;
 
 			.feat {
-				padding: 0 6px;
+				padding: 0 0 0 10px;
 				background-color: oklch(var(--b5), 40%);
 				border-radius: var(--item-med-radius);
 				font-size: 20px;
 				line-height: 27px;
 				display: inline-flex;
 				position: relative;
-				bottom: 2px;
-			}
-
-			div {
-				display: inline;
-
-				&:not(:last-child) {
-					margin-right: 10px;
-				}
+				bottom: 1px;
 			}
 		}
 
