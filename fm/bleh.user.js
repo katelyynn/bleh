@@ -113022,6 +113022,13 @@ var bleh = (() => {
             href: `${root}music/${sanitise(page.name)}/${sanitise(clean_streaming_titles(name))}`,
             image: avatar(image2, "300x300")
           }), carousel.firstElementChild);
+          const existing_albums = albums.querySelectorAll(".artist-top-albums-item-wrap");
+          existing_albums.forEach((existing) => {
+            const existing_name = existing.querySelector(".artist-top-albums-item-name")?.textContent.trim() || "";
+            if (existing_name == name) {
+              existing.remove();
+            }
+          });
         }
         if (useSettings.get("simulate_scroll")) {
           carousel.addEventListener("wheel", (e5) => {
@@ -121416,7 +121423,7 @@ var bleh = (() => {
         date: "2026-07-30"
       }
     },
-    built_on: "2026-08-28T01:59:41.994Z"
+    built_on: "2026-08-28T02:05:26.637Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

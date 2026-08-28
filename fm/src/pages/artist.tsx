@@ -339,6 +339,20 @@ export function bleh_artists() {
 					/>,
 					carousel.firstElementChild,
 				);
+
+				const existing_albums = albums.querySelectorAll(
+					'.artist-top-albums-item-wrap',
+				);
+				// TODO: this will wipe listeners and tracks
+				// even though that data is accessible
+				existing_albums.forEach((existing) => {
+					const existing_name =
+						existing.querySelector('.artist-top-albums-item-name')
+							?.textContent.trim() || '';
+					if (existing_name == name) {
+						existing.remove();
+					}
+				});
 			}
 
 			if (useSettings.get('simulate_scroll')) {
