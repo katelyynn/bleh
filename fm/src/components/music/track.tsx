@@ -161,6 +161,10 @@ export function patch_titles(search = page.structure.main) {
 					'data-name',
 					track_title.getAttribute('title'),
 				);
+				track.setAttribute(
+					'data-name',
+					track_title.getAttribute('title'),
+				);
 				track_title.removeAttribute('title');
 			}
 
@@ -1315,4 +1319,28 @@ export function patch_titles(search = page.structure.main) {
 	});
 
 	if (page.subpage.startsWith('library')) bleh_glacier_insights(insights);
+}
+
+interface TrackStarProps {
+	active?: boolean;
+}
+
+export function TrackStar({
+	active,
+}: TrackStarProps) {
+	const elem = (
+		<div class={['track-star', active && 'track-star-active']}>
+			<Icon name={active ? icons.star_fill : icons.star} />
+			{active && tl(trans.track_in_top_listeners)}
+		</div>
+	);
+
+	if (active) {
+		hover_tooltip(
+			elem,
+			<Tooltip>{tl(trans.track_in_top_listeners)}</Tooltip>,
+		);
+	}
+
+	return elem;
 }

@@ -529,6 +529,7 @@
 	text-align: right;
 	cursor: default;
 	width: 18px;
+	order: -5;
 }
 
 .obsession-candidate-image,
@@ -878,4 +879,19 @@
 
 .chartlist-break {
 	display: none !important;
+}
+
+.track-star {
+	display: flex;
+	align-items: center;
+	font-size: 0;
+
+	--icon-size: 14px;
+	color: oklch(var(--c3));
+
+	&.track-star-active {
+		color: oklch(var(--l3-c));
+	}
+
+	order: -1;
 }

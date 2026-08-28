@@ -55,6 +55,7 @@ import { icons } from '@/components/shared/icon.tsx';
 import { TopAlbum } from '@/components/album/top_album.tsx';
 import { avatar } from '@/components/shared/avatar.tsx';
 import { clean_streaming_titles } from '@/build/music.ts';
+import { TrackStar } from '@/components/music/track.tsx';
 
 export function bleh_artists() {
 	const artist_header = document.body.querySelector(
@@ -366,6 +367,8 @@ export function bleh_artists() {
 
 		if (top_tracks && top_albums) top_albums.after(top_tracks);
 
+		const tracks_seen = new Set();
+
 		const listeners_section = page.structure.main!.querySelector(
 			'.listeners-section',
 		);
@@ -379,8 +382,29 @@ export function bleh_artists() {
 			render(listeners_section, html``);
 
 			listeners.forEach((listener, index) => {
+				const link = listener.querySelector(
+					'.listeners-section-track a',
+				);
+
+				if (link) {
+					tracks_seen.add(link.textContent.trim().toLowerCase());
+				}
+
 				listeners_section.appendChild(
 					convert_top_listener(listener, index, 'listeners-section'),
+				);
+			});
+		}
+
+		if (top_tracks) {
+			const tracks = top_tracks.querySelectorAll('.chartlist-row');
+			tracks.forEach((track) => {
+				const name = track.querySelector('.chartlist-name a')
+					?.getAttribute('title');
+				if (!name) return;
+
+				track.appendChild(
+					<TrackStar active={tracks_seen.has(name.toLowerCase())} />,
 				);
 			});
 		}

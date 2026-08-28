@@ -11802,6 +11802,9 @@ export const trans = {
 	motion: {
 		en: 'Motion',
 	},
+	track_in_top_listeners: {
+		en: 'Top listened',
+	},
 } as const satisfies Record<string, any>;
 
 export const translation_fallback = 'NO_TRANSLATION_FOUND';
