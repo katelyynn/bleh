@@ -1,8 +1,7 @@
 .smart-title {
-	display: flex !important;
-	flex-wrap: wrap;
-	gap: 2px 6px;
+	display: inline;
 }
+
 .smart-artist {
 	display: flow-root;
 	cursor: default;
@@ -13,35 +12,26 @@
 	white-space: nowrap;
 	flex-shrink: 1;
 
-	& > a {
+	&>a {
 		cursor: pointer;
 		overflow: hidden;
 	}
 
-	& > a + a {
+	&>a+a {
 		margin-left: 4px;
 	}
 }
 
 .title {
-	min-width: 0;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	flex-shrink: 1;
+	display: inline;
 }
 
 .feat {
+	display: inline-block;
 	width: fit-content;
 	height: fit-content;
-	margin: auto 0;
+	margin-left: 6px;
 	color: oklch(var(--c2) / 80%);
-
-	min-width: 0;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	flex-shrink: 1;
 
 	&:is([data-tag-group="mixes"], [data-tag-group="mixes_numbers"], [data-tag-group="stems"], [data-tag-group="bonus"]) {
 		color: oklch(var(--c3));

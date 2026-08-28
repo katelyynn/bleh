@@ -15,7 +15,7 @@
 	background: var(--avatar-generic-background);
 }
 
-.col-main-is-primary > .col-main > .pagination {
+.col-main-is-primary>.col-main>.pagination {
 	margin-top: var(--card-gap);
 }
 
@@ -69,8 +69,7 @@
 		--follow-button-opacity: 0.3;
 	}
 
-	animation: var(--motion, chartlist 0.4s var(--trans-function-ani))
-		!important;
+	animation: var(--motion, chartlist 0.4s var(--trans-function-ani)) !important;
 	animation-delay: var(--delay, 0s) !important;
 	animation-fill-mode: backwards !important;
 }
@@ -114,8 +113,7 @@
 		padding: 1px !important;
 		border-radius: 50px !important;
 
-		background-color: oklch(var(--b6), calc(var(--solarium-opacity, 1) *
-			80%)) !important;
+		background-color: oklch(var(--b6), calc(var(--solarium-opacity, 1) * 80%)) !important;
 
 		min-width: unset;
 
@@ -124,6 +122,7 @@
 	}
 
 	.user-list-inner-wrap {
+
 		&:before,
 		&:after {
 			display: none;
@@ -137,7 +136,7 @@
 			&[data-is-followed="true"],
 			&[data-position="1"] {
 				background: linear-gradient(90deg, oklch(var(--h4) / 20%) 0%,
-					transparent 28%);
+						transparent 28%);
 			}
 		}
 
@@ -170,6 +169,7 @@
 		--user-list-item-radius: var(--item-big-radius);
 
 		.user-list-item {
+
 			&[data-is-followed="true"],
 			&[data-position="1"] {
 				background: oklch(var(--h4) / 15%);
@@ -214,6 +214,7 @@
 			.user-list-name {
 				margin: unset !important;
 			}
+
 			.top-listeners-track,
 			.user-list-description {
 				overflow: visible;
@@ -393,7 +394,7 @@
 
 					z-index: 3;
 
-					& > p {
+					&>p {
 						max-width: 100%;
 						overflow: hidden;
 
@@ -433,39 +434,30 @@
 	color: inherit;
 	overflow: hidden;
 }
-.user-list-about-me > .markdown-body {
+
+.user-list-about-me>.markdown-body {
 	display: inline-block;
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
 
-	& > p,
-	& > p > div,
-	& > div,
-	& > p > :is(h1, h2, h3, h4, h5) {
+	&>p,
+	&>p>div,
+	&>div,
+	&>p> :is(h1, h2, h3, h4, h5) {
 		display: inline;
 		font-size: var(--font-size);
 		line-height: var(--line-height);
 		margin: unset !important;
 	}
 
-	& > p:not(:last-child) {
+	&>p:not(:last-child) {
 		margin-right: 4px !important;
 	}
 
-	& > p:has(> .markdown-image),
+	&>p:has(> .markdown-image),
 	br {
 		display: none;
-	}
-
-	& > .top-track {
-		display: inline-flex !important;
-	}
-}
-
-.has-featured-track {
-	& > .top-track {
-		display: inline-flex !important;
 	}
 }
 
@@ -485,12 +477,12 @@
 .user-list-name {
 	min-width: 200px;
 
-	& > a {
+	&>a {
 		color: oklch(var(--l3-c)) !important;
 	}
 }
 
-.user-list-inner-wrap > .label {
+.user-list-inner-wrap>.label {
 	order: -1;
 	width: 18px;
 	text-align: center;
@@ -518,6 +510,7 @@
 	left: unset;
 	right: 0;
 }
+
 /*.user-list-item:hover .user-list-follower-btn {
     transition-property: none !important;
 }*/
@@ -529,6 +522,7 @@
 	gap: var(--card-gap);
 	padding-right: var(--card-gap);
 }
+
 .user-list-description .text-light {
 	flex-shrink: 0;
 	font-weight: var(--font-weight-medium);
@@ -549,6 +543,7 @@
 	white-space: wrap !important;
 	flex-shrink: 0;
 }
+
 .neighbours-items-section .user-list-about-me {
 	display: none;
 }
@@ -566,7 +561,7 @@
 		background-color: currentColor !important;
 	}
 
-	div[data-toggle-button-current-state="followed"] > form > & {
+	div[data-toggle-button-current-state="followed"]>form>& {
 		--mask: var(--icon-16-check);
 	}
 }
