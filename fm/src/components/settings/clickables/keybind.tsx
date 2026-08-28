@@ -11,6 +11,7 @@ import tippy from 'tippy.js';
 
 interface KeybindProps {
 	ref?: ReturnType<typeof createRef<HTMLElement>>;
+	text?: boolean;
 	value: string;
 	interact?: boolean;
 	onChange?: (value: string) => void;
@@ -38,6 +39,7 @@ const iconmap: Record<string, string> = {
 
 export function Keybind({
 	ref,
+	text,
 	value,
 	interact = false,
 	onChange,
@@ -101,7 +103,11 @@ export function Keybind({
 
 	const wrap = (
 		<kbd
-			class={['key-bind', interact && 'key-bind-interactable']}
+			class={[
+				'key-bind',
+				interact && 'key-bind-interactable',
+				text && 'in-text',
+			]}
 			ref={ref}
 			onClick={() => {
 				if (!interact || entering) return;
@@ -151,15 +157,17 @@ export function Keybind({
 
 interface KeybindListProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
+	text?: boolean;
 	children: ReactNode;
 }
 
 export function KeybindList({
 	ref,
+	text,
 	children,
 }: KeybindListProps) {
 	return (
-		<div class='key-bind-list' ref={ref}>
+		<div class={['key-bind-list', text && 'in-text']} ref={ref}>
 			{children}
 		</div>
 	);

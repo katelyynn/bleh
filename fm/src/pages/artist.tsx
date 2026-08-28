@@ -49,13 +49,14 @@ import {
 import { useSettings } from '@/page.ts';
 import { bleh_event_artist } from '@/pages/artist/event.tsx';
 import { PageHeader, PageHeaderTitle } from '@/components/page/header.tsx';
-import { SeeMore, ViewButtons } from '@/components/text/see_more.tsx';
+import { PanelTop, SeeMore, ViewButtons } from '@/components/text/see_more.tsx';
 import { createRef, ReactElement } from 'jsx-dom';
 import { icons } from '@/components/shared/icon.tsx';
 import { TopAlbum } from '@/components/album/top_album.tsx';
 import { avatar } from '@/components/shared/avatar.tsx';
 import { clean_streaming_titles } from '@/build/music.ts';
 import { TrackStar } from '@/components/music/track.tsx';
+import { PanelHead } from '@/components/text/head.tsx';
 
 export function bleh_artists() {
 	const artist_header = document.body.querySelector(
@@ -205,9 +206,6 @@ export function bleh_artists() {
 			const settings_btn = createRef();
 
 			const top = top_tracks.querySelector('.section-controls')!;
-			top.classList = 'top-container';
-
-			const header = top.querySelector('h3')!;
 
 			const select_btn = top.querySelector(
 				'.dropdown-menu-clickable-button',
@@ -233,11 +231,16 @@ export function bleh_artists() {
 				play.setAttribute('data-type', 'play');
 			}
 
-			header.after(
-				<>
-					<ViewButtons blend blendV2 accompany>
-						{select_btn}
-					</ViewButtons>
+			top.replaceWith(
+				<PanelTop>
+					<PanelHead icon={icons.tracks}>
+						{tl(trans.tracks)}
+					</PanelHead>
+					{select_btn && (
+						<ViewButtons blend blendV2 accompany>
+							{select_btn}
+						</ViewButtons>
+					)}
 					<ViewButtons blend blendV2>
 						{play}
 						<SeeMore
@@ -249,7 +252,7 @@ export function bleh_artists() {
 							{tl(trans.settings)}
 						</SeeMore>
 					</ViewButtons>
-				</>,
+				</PanelTop>,
 			);
 
 			menu_tooltip(
@@ -271,13 +274,10 @@ export function bleh_artists() {
 		// this isnt detecting when sort order changes
 		if (top_albums) {
 			const top = top_albums.querySelector('.section-controls')!;
-			top.classList = 'top-container';
-
-			const header = top.querySelector('h3')!;
 
 			const select_btn = top.querySelector(
 				'.dropdown-menu-clickable-button',
-			);
+			) as HTMLButtonElement;
 
 			if (select_btn) {
 				select_btn.classList.add(
@@ -286,14 +286,20 @@ export function bleh_artists() {
 					'blend-v2-btn',
 				);
 				select_btn.classList.remove('dropdown-menu-clickable-button');
-
-				// TODO: if we ever add settings for this album view, move out of here
-				header.after(html.node`
-                    <div class="accompany view-buttons blend blend-v2">
-                        ${select_btn}
-                    </div>
-                `);
 			}
+
+			top.replaceWith(
+				<PanelTop>
+					<PanelHead icon={icons.albums}>
+						{tl(trans.albums)}
+					</PanelHead>
+					{select_btn && (
+						<ViewButtons blend blendV2 accompany>
+							{select_btn}
+						</ViewButtons>
+					)}
+				</PanelTop>,
+			);
 
 			const albums = top_albums.querySelector(
 				'.buffer-standard',

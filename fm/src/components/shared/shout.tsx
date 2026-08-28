@@ -41,6 +41,10 @@ import { SponsorUsername } from '@/components/user/name.tsx';
 import { Button } from '@/components/button/button.tsx';
 import { Icon, icons } from '@/components/shared/icon.tsx';
 import { TranslatedHeader } from '@/components/shared/translate.tsx';
+import {
+	Keybind,
+	KeybindList,
+} from '@/components/settings/clickables/keybind.tsx';
 
 type ShoutElement = HTMLDivElement & {
 	translated: boolean;
@@ -429,14 +433,22 @@ function shout_send(send_button) {
 
 	if (page.mobile) return;
 
-	tippy(button, {
-		content: tl(trans.send_quickly_with).replace(
-			'{kbd}',
-			keybind(['⌘', '⏎']).outerHTML,
-		),
-		allowHTML: true,
-		delay: [500, 0],
-	});
+	hover_tooltip(
+		button,
+		<Tooltip>
+			{tl(trans.send_quickly_with, {
+				kbd: (
+					<KeybindList text>
+						<Keybind value='⌘' text />
+						<Keybind value='⏎' text />
+					</KeybindList>
+				),
+			})}
+		</Tooltip>,
+		{
+			delay: [500, 0],
+		},
+	);
 }
 
 export function shout_header(shout_controls) {

@@ -11862,6 +11862,8 @@ export function tl(
 		return translation;
 	}
 
+	string = Object.values(replacements).every((v) => typeof v == 'string');
+
 	if (string) {
 		for (let [placeholder, value] of Object.entries(replacements)) {
 			const regex = new RegExp(`{${placeholder}}`, 'g');
