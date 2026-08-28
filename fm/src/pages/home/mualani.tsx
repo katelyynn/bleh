@@ -60,12 +60,14 @@ import { SettingList } from '@/components/settings/provider/list.tsx';
 import { EventItem } from '@/components/event/item.tsx';
 import {
 	CancelIcon,
+	icons,
 	MinusIcon,
 	PlusIcon,
 	SaveIcon,
 } from '@/components/shared/icon.tsx';
 import { Flag } from '@/components/shared/flag.tsx';
 import { TopAlbum } from '@/components/album/top_album.tsx';
+import { Tabbed } from '@/components/tab/tabbed.tsx';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -810,7 +812,32 @@ export function mualani() {
 			<section>
 				<DemoGrid>
 					<DemoItem label='TopAlbum'>
-						<TopAlbum name='test' artist='test2' href='#hello' />
+						<TopAlbum
+							name='test'
+							artist='test2'
+							href='/music/test2/test'
+						/>
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section>
+				<DemoGrid>
+					<DemoItem label='Tabbed'>
+						<Tabbed
+							page='hello'
+							pages={{
+								hello: {
+									icon: icons.accent,
+									label: 'Hello',
+									content: <p>hello!!</p>,
+								},
+								world: {
+									icon: icons.cut,
+									label: 'World',
+									content: <p>hello world!!</p>,
+								},
+							}}
+						/>
 					</DemoItem>
 				</DemoGrid>
 			</section>

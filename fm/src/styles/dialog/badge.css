@@ -17,7 +17,7 @@
 		inset: 0 -100px;
 		pointer-events: none;
 		background: radial-gradient(at center top, oklch(var(--f4) / 70%),
-			oklch(var(--f5) / 10%) 67%);
+				oklch(var(--f5) / 10%) 67%);
 		border-radius: inherit;
 
 		z-index: 1;
@@ -77,8 +77,7 @@
 
 .present-badge-icon {
 	--icon: var(--mask);
-	background: linear-gradient(180deg, oklch(var(--l2-c)), oklch(var(--l3-c))
-		30%);
+	background: linear-gradient(180deg, oklch(var(--l2-c)), oklch(var(--l3-c)) 30%);
 }
 
 .present-badge-name {
@@ -148,8 +147,8 @@
 	border: unset;
 	box-shadow: unset !important;
 
-	& > .modal-close-button,
-	& > .bleh-modal-title {
+	&>.modal-close-button,
+	&>.bleh-modal-title {
 		display: none;
 	}
 }
@@ -167,10 +166,10 @@
 	display: block;
 	border-radius: var(--card-radius) !important;
 	box-shadow: 0 20px 60px oklch(var(--f5) / 15%), var(--override-full-shadow,
-		var(--overlay-shadow));
+			var(--overlay-shadow));
 
 	--hypercard-glow-color: oklch(var(--l4-c));
-	--hypercard-glow-opacity: 0.3;
+	--hypercard-glow-opacity: 0.15;
 	--hypercard-scale: 1.04;
 
 	user-select: none;
@@ -223,7 +222,7 @@
 	mask-image: var(--mask);
 	-webkit-mask-image: var(--mask);
 
-	& > img {
+	&>img {
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
