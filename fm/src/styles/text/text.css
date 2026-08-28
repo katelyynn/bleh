@@ -519,6 +519,13 @@ hr {
 	line-height: 20px;
 	margin-bottom: var(--card-gap);
 
+	&.is-small {
+		--icon-size: 16px;
+		gap: 6px;
+		font-size: var(--font-size);
+		line-height: var(--line-height);
+	}
+
 	&:not(.with-margin),
 	.bleh--panel>& {
 		margin-bottom: unset;

@@ -4,6 +4,24 @@
 	gap: var(--card-gap);
 }
 
+.tabbed-top {
+	display: flex;
+
+	&.with-header {
+		&>.tabbed-tabs {
+			margin-left: auto;
+			margin-right: unset;
+		}
+	}
+}
+
+.tabbed-top-header {
+	display: flex;
+	align-items: center;
+	height: var(--button-height);
+	margin: 0 var(--button-sides);
+}
+
 .tabbed-tabs {
 	display: flex;
 	margin: 0 auto;
@@ -47,6 +65,14 @@
 		&:after {
 			opacity: 1;
 			translate: 0 0;
+		}
+	}
+
+	&.tabbed-tab-chibi {
+		&:not([aria-checked="true"]) {
+			--col: transparent;
+			--font-size: 0;
+			gap: 0 !important;
 		}
 	}
 }

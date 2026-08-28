@@ -9,17 +9,25 @@ import { Icon } from '@/components/shared/icon.tsx';
 
 interface PanelHeadProps {
 	icon?: string;
+	small?: boolean;
 	margin?: boolean;
 	children: ReactNode;
 }
 
 export function PanelHead({
 	icon,
+	small,
 	margin = true,
 	children,
 }: PanelHeadProps) {
 	return (
-		<h4 class={[icon && 'header-with-icon', margin && 'with-margin']}>
+		<h4
+			class={[
+				icon && 'header-with-icon',
+				margin && 'with-margin',
+				small && 'is-small',
+			]}
+		>
 			{icon && <Icon name={icon} />}
 			{children}
 		</h4>

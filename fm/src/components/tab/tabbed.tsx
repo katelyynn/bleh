@@ -9,12 +9,22 @@ export interface TabbedPage {
 	content: Element | (() => Element);
 }
 
+type TabbedElement = HTMLDivElement & {
+	update: () => void;
+};
+
 interface TabbedProps {
+	ref?: ReturnType<typeof createRef<TabbedElement>>;
+	header?: ReactNode;
+	chibi?: boolean;
 	pages: Record<string, TabbedPage>;
 	page?: string;
 }
 
 export function Tabbed({
+	ref,
+	header,
+	chibi,
 	pages,
 	page,
 }: TabbedProps) {
@@ -24,29 +34,39 @@ export function Tabbed({
 	if (!page) page = Object.keys(pages)[0];
 
 	const elem = (
-		<div class='tabbed'>
-			<nav class='tabbed-tabs'>
-				{Object.entries(pages).map(([p, value]) => {
-					const elem = (
-						<Tab
-							icon={value.icon}
-							label={value.label}
-							id={p}
-							onChange={() => {
-								page = p;
-								update();
-							}}
-						/>
-					) as TabElement;
+		<div class='tabbed' ref={ref}>
+			<div class={['tabbed-top', header != undefined && 'with-header']}>
+				{header && (
+					<div class='tabbed-top-header'>
+						{header}
+					</div>
+				)}
+				<nav class='tabbed-tabs'>
+					{Object.entries(pages).map(([p, value]) => {
+						const elem = (
+							<Tab
+								chibi={chibi}
+								icon={value.icon}
+								label={value.label}
+								id={p}
+								onChange={() => {
+									page = p;
+									update();
+								}}
+							/>
+						) as TabElement;
 
-					tabs.push(elem);
+						tabs.push(elem);
 
-					return elem;
-				})}
-			</nav>
+						return elem;
+					})}
+				</nav>
+			</div>
 			<main class='tabbed-content' ref={content} />
 		</div>
-	);
+	) as TabbedElement;
+
+	elem.update = update;
 
 	function update() {
 		log(`changing page to ${page}`, 'tabbed', 'info', {
@@ -73,6 +93,7 @@ export function Tabbed({
 interface TabProps {
 	label: ReactNode;
 	icon: string;
+	chibi?: boolean;
 	active?: boolean;
 	id: string;
 	onChange?: (v: string) => void;
@@ -86,13 +107,14 @@ type TabElement = HTMLButtonElement & {
 export function Tab({
 	label,
 	icon,
+	chibi,
 	active,
 	id,
 	onChange,
 }: TabProps) {
 	const elem = (
 		<Button
-			className='tabbed-tab'
+			className={`tabbed-tab ${chibi && 'tabbed-tab-chibi'}`}
 			onClick={() => {
 				if (onChange) onChange(id);
 			}}

@@ -33,13 +33,14 @@ select,
 .weeklychart-item,
 .btn-subscribe,
 .masthead-search-form,
-/* log in */ .site-auth-control,
+/* log in */
+.site-auth-control,
 .tags-add-cta,
 .tags-add,
 .tags-view-all,
 .masthead-popup-close,
-.check > .box,
-.radio-cont > .radio,
+.check>.box,
+.radio-cont>.radio,
 .blend-v2-btn,
 .notification,
 .user-now-empty-state-button,
@@ -54,7 +55,7 @@ select,
 .more-items,
 .modal-close-button,
 .modal-action-button,
-.tab-container > li > button,
+.tab-container>li>button,
 .user-list-follower-btn {
 	--bg: var(--cards-overlay-image-subtlest, none), oklch(var(--b3));
 	--bg-hov:
@@ -74,9 +75,8 @@ select,
 	background: var(--bg) !important;
 	color: var(--col) !important;
 	padding: var(--padding,
-		var(--button-padding,
-		var(--btn-top) var(--btn-right) var(--btn-bottom) var(--btn-left)))
-		!important;
+			var(--button-padding,
+				var(--btn-top) var(--btn-right) var(--btn-bottom) var(--btn-left))) !important;
 	min-height: unset !important;
 	min-width: unset !important;
 	line-height: var(--line-height) !important;
@@ -93,7 +93,7 @@ select,
 	text-align: inherit;
 	transition-property:
 		background-color, transform, box-shadow, color, opacity, padding,
-		font-size, font-weight !important;
+		font-weight !important;
 	transition-duration: var(--trans) !important;
 	transition-timing-function: var(--trans-function) !important;
 	user-select: none;
@@ -251,7 +251,8 @@ select,
 	&.btn--loading,
 	&[data-loading="true"],
 	&[data-disabled="true"],
-	/* used for new last.fm follow button */ &[disabled]:not([disabled="false"]) {
+	/* used for new last.fm follow button */
+	&[disabled]:not([disabled="false"]) {
 		opacity: 0.65 !important;
 		--col: oklch(var(--c3)) !important;
 		--mask-colour: oklch(var(--c3)) !important;
@@ -344,7 +345,7 @@ select,
 	gap: var(--button-list-gap);
 	flex-wrap: wrap;
 
-	& > .bleh-icon {
+	&>.bleh-icon {
 		--icon-size: 14px;
 		--icon-colour: oklch(var(--c3));
 	}
@@ -385,11 +386,11 @@ select,
 		background: var(--card-border-base);
 	}
 
-	& > form:not(.chibi) {
+	&>form:not(.chibi) {
 		display: flex;
 		flex: 1;
 
-		& > button {
+		&>button {
 			flex: 1;
 		}
 	}

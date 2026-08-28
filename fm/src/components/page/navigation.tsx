@@ -60,6 +60,8 @@ import {
 	NavWindowContents,
 	NavWindowHeader,
 } from '@/components/menu/nav_window.tsx';
+import { Tabbed } from '@/components/tab/tabbed.tsx';
+import { PanelHead } from '@/components/text/head.tsx';
 
 export function update_branding_type(state = settings.branding_type) {
 	if (state == 'bleh') {
@@ -670,32 +672,73 @@ export function append_nav() {
 			if (!new_tab) e.preventDefault();
 		});
 
-		tippy(inbox, {
-			content: html.node`
-                <div class="window-header">
-                    ${icon({ name: icons.inbox, identifier: 'window_header' })}
-                    <div class="window-title">${tl(trans.inbox)}</div>
-                </div>
-                ${setting({ id: 'inbox_view', func: render_inbox })}
-                <div class="window-content" />
-            `,
-			theme: 'nav-window',
-			placement: 'top',
-			interactive: true,
-			interactiveBorder: 10,
-			trigger: 'click',
-			appendTo: document.body,
-
-			onShow(instance) {
-				page.state.inbox_content = instance.popper.querySelector(
-					'.window-content',
-				);
-				page.state.notifications_content = page.state.inbox_content;
-				page.state.messages_content = page.state.inbox_content;
-
-				render_inbox();
+		const tabbed = createRef();
+		const pages = {
+			notifications: {
+				icon: icons.notifications,
+				label: tl(trans.notifications),
+				content: () => {
+					return <></>;
+				},
 			},
-		});
+			messages: {
+				icon: icons.messages,
+				label: tl(trans.messages),
+				content: () => {
+					return <></>;
+				},
+			},
+		};
+
+		menu_tooltip(
+			inbox,
+			<NavWindow>
+				<NavWindowContents>
+					<Tabbed
+						header={
+							<PanelHead small icon={icons.inbox} margin={false}>
+								{tl(trans.inbox)}
+							</PanelHead>
+						}
+						chibi
+						ref={tabbed}
+						page={useSettings.get('inbox_view') as string}
+						pages={pages}
+					/>
+				</NavWindowContents>
+			</NavWindow>,
+			{
+				onShow: () => {
+					pages.notifications.content = () => {
+						useSettings.set(
+							'inbox_view',
+							'notifications',
+						);
+
+						const elem = <div class='inbox-content' />;
+						page.state.inbox_content = elem;
+						page.state.notifications_content = elem;
+						page.state.messages_content = elem;
+
+						render_inbox();
+						return elem;
+					};
+					pages.messages.content = () => {
+						useSettings.set('inbox_view', 'messages');
+
+						const elem = <div class='inbox-content' />;
+						page.state.inbox_content = elem;
+						page.state.notifications_content = elem;
+						page.state.messages_content = elem;
+
+						render_inbox();
+						return elem;
+					};
+
+					tabbed.current.update();
+				},
+			},
+		);
 
 		links.appendChild(inbox);
 
@@ -876,7 +919,7 @@ export function append_nav() {
 	}
 
 	function render_inbox() {
-		const view = settings.inbox_view;
+		const view = useSettings.get('inbox_view');
 
 		const content = page.state.inbox_content;
 
