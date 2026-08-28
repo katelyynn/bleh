@@ -69,13 +69,22 @@ import {
 	ViewButtons,
 } from '@/components/text/see_more.tsx';
 import { createRef, ReactElement } from 'jsx-dom';
-import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
+import {
+	hover_tooltip,
+	menu_tooltip,
+	Tooltip,
+} from '@/components/shared/tooltips.tsx';
 import { SubTextPair } from '@/components/profile/sub.tsx';
 import {
 	AboutElement,
 	profile_about,
 	profile_bio_markdown_settings,
 } from '@/pages/profile/about.tsx';
+import {
+	FloatingWindow,
+	FloatingWindowContents,
+} from '@/components/menu/floating_window.tsx';
+import { SettingGroup } from '@/components/settings/group.tsx';
 
 export function bleh_profiles() {
 	// the obsessions page is a user subpage but works very differently
@@ -1144,6 +1153,16 @@ function profile_recents() {
 			    </div>
 			</div>
 		`,
+	);
+
+	menu_tooltip(
+		settings_btn.current,
+		<FloatingWindow>
+			<FloatingWindowContents>
+				<SettingGroup blend>
+				</SettingGroup>
+			</FloatingWindowContents>
+		</FloatingWindow>,
 	);
 
 	tooltip = tippy(settings_btn.current, {

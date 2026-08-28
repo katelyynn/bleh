@@ -80,6 +80,7 @@ export function Tab({
 }: TabProps) {
 	const elem = (
 		<Button
+			className='tabbed-tab'
 			onClick={() => {
 				if (onChange) onChange(id);
 			}}
