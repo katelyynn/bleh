@@ -37,7 +37,7 @@
 
 .feat {
 	display: inline;
-	/*margin-left: 6px;*/
+	margin-left: 6px;
 	color: oklch(var(--c2) / 80%);
 
 	&:is([data-tag-group="mixes"], [data-tag-group="mixes_numbers"], [data-tag-group="stems"], [data-tag-group="bonus"]) {
