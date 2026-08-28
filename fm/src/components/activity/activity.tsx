@@ -13,7 +13,7 @@ import { romanise, sanitise } from '@/build/tools.ts';
 import {
 	correct_artist,
 	correct_item_by_artist,
-} from '@/components/music/lotus.ts';
+} from '@/components/music/lotus.tsx';
 import { WithChildren } from '@/types/generic.tsx';
 
 interface ActivityItemProps {

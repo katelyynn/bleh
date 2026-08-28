@@ -1,3 +1,5 @@
+import { romanise } from '@/build/tools.ts';
+
 export type song_tag = {
 	type: string;
 	group: string;
@@ -27,7 +29,7 @@ export function SongTag({
 }: SongTagProps) {
 	return (
 		<div class='feat' data-tag-type={tag.type} data-tag-group={tag.group}>
-			{tag.text}
+			{romanise(tag.text)}
 		</div>
 	);
 }

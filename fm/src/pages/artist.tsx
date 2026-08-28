@@ -125,7 +125,6 @@ export function bleh_artists() {
 
 	checkup_page_structure(is_subpage, artist_header);
 
-	const katsune = ff('katsune');
 	const featured_items = artist_header.querySelector(
 		'.artist-header-featured-items',
 	);

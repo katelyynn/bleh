@@ -21,7 +21,6 @@ import { CardTip } from '@/components/text/tip.tsx';
 import { album_track_corrections, artist_corrections } from '@/build/music.ts';
 import { SettingInfo } from '@/components/settings/provider/info.tsx';
 import { SeeMore } from '@/components/text/see_more.tsx';
-import { lotus, lotus_modal } from '@/components/music/lotus.ts';
 import {
 	page_loading,
 	render_setting_page,

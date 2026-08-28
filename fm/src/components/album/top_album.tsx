@@ -1,4 +1,4 @@
-import { correct_generic_combo_child } from '@/components/music/lotus.ts';
+import { correct_generic_combo_no_artist_child } from '@/components/music/lotus.tsx';
 import { ReactNode } from 'jsx-dom';
 
 interface TopAlbumProps {
@@ -28,6 +28,7 @@ export function TopAlbum({
 					'js-link-block',
 					'link-block',
 				]}
+				data-kate-processed='true'
 			>
 				<h3 class='artist-top-albums-item-name'>
 					<a class={['link-block-target']} href={href}>
@@ -69,7 +70,7 @@ export function TopAlbum({
 		</li>
 	);
 
-	correct_generic_combo_child(elem, 'artist-top-albums-item');
+	correct_generic_combo_no_artist_child(elem, 'artist-top-albums-item');
 
 	return elem;
 }

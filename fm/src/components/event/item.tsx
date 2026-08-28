@@ -5,7 +5,7 @@
  */
 
 import { Icon, icons } from '@/components/shared/icon.tsx';
-import { correct_artist } from '@/components/music/lotus.ts';
+import { correct_artist } from '@/components/music/lotus.tsx';
 import { copy, romanise, sanitise } from '@/build/tools.ts';
 import { Button } from '@/components/button/button.tsx';
 import { tl, trans } from '@/build/trans.ts';

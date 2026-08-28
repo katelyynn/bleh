@@ -56714,7 +56714,7 @@ var bleh = (() => {
       class: "feat",
       "data-tag-type": tag.type,
       "data-tag-group": tag.group,
-      children: tag.text
+      children: romanise(tag.text)
     });
   }
 
@@ -108656,7 +108656,51 @@ var bleh = (() => {
     }
   }
 
-  // src/components/music/lotus.ts
+  // src/components/music/smart_title.tsx
+  function SmartTitle({ title, tags, features, header = false }) {
+    const show_features = features != null ? features : useSettings.get("show_guest_features");
+    const show_remaster = useSettings.get("show_remaster_tags");
+    console.info("smart title", title, tags, features, header, show_features);
+    return /* @__PURE__ */ jsx(Fragment, {
+      children: [
+        /* @__PURE__ */ jsx("span", {
+          class: "title",
+          children: /* @__PURE__ */ jsx(FancyTitle, {
+            title: romanise(title.trim()),
+            header
+          })
+        }),
+        tags.map((tag) => {
+          if (!show_features && tag.group == "guests" || !show_remaster && tag.group == "remasters") {
+            return;
+          }
+          return /* @__PURE__ */ jsx(SongTag, {
+            tag
+          });
+        })
+      ]
+    });
+  }
+  function FancyTitle({ title, header }) {
+    const dollar = page.name == "WOR$T GIRL IN AMERICA" && page.sister == "Slayyyter";
+    const brat = page.name.toLowerCase().startsWith("brat") && page.sister.toLowerCase() == "charli xcx";
+    const elem = /* @__PURE__ */ jsx("span", {
+      class: "fancy-title",
+      children: title
+    });
+    if (dollar) {
+      elem.innerHTML = elem.innerHTML.replace(/\$/g, '<i class="dollar">$</i>');
+    }
+    if (brat && header) {
+      elem.replaceChildren(/* @__PURE__ */ jsx("span", {
+        class: "brat",
+        children: title
+      }));
+    }
+    return elem;
+  }
+
+  // src/components/music/lotus.tsx
   var flat_patterns = [];
   Object.entries(includes).forEach(([group, patterns]) => {
     patterns.forEach((pattern) => {
@@ -108862,7 +108906,11 @@ var bleh = (() => {
       if (useSettings.get("format_guest_features")) {
         const formatted = name_includes(album_name.textContent, artist_name.textContent);
         album_name.classList.add("smart-title");
-        render(album_name, smart_title(formatted.song_title, formatted.song_tags));
+        album_name.replaceChildren(/* @__PURE__ */ jsx(SmartTitle, {
+          title: formatted.song_title,
+          tags: formatted.song_tags,
+          features: true
+        }));
       } else if (useSettings.get("corrections")) {
         album_name.textContent = romanise(correct_item_by_artist(album_name.textContent, artist_name.textContent));
       }
@@ -108884,19 +108932,26 @@ var bleh = (() => {
     if (!useSettings.get("format_guest_features") && !useSettings.get("corrections")) return;
     albums.forEach((album) => {
       if (!album.hasAttribute("data-kate-processed")) {
-        album.setAttribute("data-kate-processed", "true");
-        const album_name = album.querySelector(`.${parent.replace("-details", "")}-name a`);
-        if (!album_name) return;
-        const artist_name = return_artist_from_generic(album_name.getAttribute("href") || "");
-        if (useSettings.get("format_guest_features")) {
-          const formatted = name_includes(album_name.textContent, artist_name);
-          album_name.classList.add("smart-title");
-          render(album_name, smart_title(formatted.song_title, formatted.song_tags));
-        } else if (useSettings.get("corrections")) {
-          album_name.textContent = romanise(correct_item_by_artist(album_name.textContent, artist_name));
-        }
+        correct_generic_combo_no_artist_child(album, parent);
       }
     });
+  }
+  function correct_generic_combo_no_artist_child(album, parent) {
+    album.setAttribute("data-kate-processed", "true");
+    const album_name = album.querySelector(`.${parent.replace("-details", "")}-name a`);
+    if (!album_name) return;
+    const artist_name = return_artist_from_generic(album_name.getAttribute("href") || "");
+    if (useSettings.get("format_guest_features")) {
+      const formatted = name_includes(album_name.textContent, artist_name);
+      album_name.classList.add("smart-title");
+      album_name.replaceChildren(/* @__PURE__ */ jsx(SmartTitle, {
+        title: formatted.song_title,
+        tags: formatted.song_tags,
+        features: true
+      }));
+    } else if (useSettings.get("corrections")) {
+      album_name.textContent = romanise(correct_item_by_artist(album_name.textContent, artist_name));
+    }
   }
   function correct_item_by_artist(item, artist) {
     if (page.state.hazelfae) return "hazelfae";
@@ -112728,6 +112783,7 @@ var bleh = (() => {
           "js-link-block",
           "link-block"
         ],
+        "data-kate-processed": "true",
         children: [
           /* @__PURE__ */ jsx("h3", {
             class: "artist-top-albums-item-name",
@@ -112783,7 +112839,7 @@ var bleh = (() => {
         ]
       })
     });
-    correct_generic_combo_child(elem, "artist-top-albums-item");
+    correct_generic_combo_no_artist_child(elem, "artist-top-albums-item");
     return elem;
   }
 
@@ -112822,7 +112878,6 @@ var bleh = (() => {
       log("unable to find elements", "page structure");
     }
     checkup_page_structure(is_subpage, artist_header);
-    const katsune = ff("katsune");
     const featured_items = artist_header.querySelector(".artist-header-featured-items");
     if (ff("refreshed_music_nav")) {
       const avatar3 = artist_header.querySelector(".header-new-background-image");
@@ -121361,7 +121416,7 @@ var bleh = (() => {
         date: "2026-07-30"
       }
     },
-    built_on: "2026-08-28T00:09:25.655Z"
+    built_on: "2026-08-28T01:19:05.922Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

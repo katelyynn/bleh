@@ -31,6 +31,8 @@ import { input } from '@/components/settings/input';
 import { notify } from '../dialog/notify';
 import { useSettings } from '@/page.ts';
 import { ReactElement } from 'jsx-dom';
+import { song_tag } from '@/components/track/song_tag.tsx';
+import { SmartTitle } from '@/components/music/smart_title.tsx';
 
 const flat_patterns: flat_pattern[] = [];
 
@@ -351,9 +353,12 @@ export function correct_generic_combo_child(
 			);
 
 			album_name.classList.add('smart-title');
-			render(
-				album_name,
-				smart_title(formatted.song_title, formatted.song_tags),
+			album_name.replaceChildren(
+				<SmartTitle
+					title={formatted.song_title}
+					tags={formatted.song_tags}
+					features
+				/>,
 			);
 		} else if (useSettings.get('corrections')) {
 			album_name.textContent = romanise(
@@ -385,7 +390,7 @@ export function correct_generic_combo_child(
  * @param {string} parent individual css selector for each item wrapper
  * @returns if not found
  */
-export function correct_generic_combo_no_artist(parent) {
+export function correct_generic_combo_no_artist(parent: string) {
 	if (!page.structure.container) return;
 
 	const albums = page.structure.container.querySelectorAll(`.${parent}`);
@@ -398,35 +403,48 @@ export function correct_generic_combo_no_artist(parent) {
 
 	albums.forEach((album) => {
 		if (!album.hasAttribute('data-kate-processed')) {
-			album.setAttribute('data-kate-processed', 'true');
-
-			const album_name = album.querySelector(
-				`.${parent.replace('-details', '')}-name a`,
+			correct_generic_combo_no_artist_child(
+				album as HTMLDivElement,
+				parent,
 			);
-			if (!album_name) return;
-
-			const artist_name = return_artist_from_generic(
-				album_name.getAttribute('href') || '',
-			);
-
-			if (useSettings.get('format_guest_features')) {
-				const formatted = name_includes(
-					album_name.textContent,
-					artist_name,
-				);
-
-				album_name.classList.add('smart-title');
-				render(
-					album_name,
-					smart_title(formatted.song_title, formatted.song_tags),
-				);
-			} else if (useSettings.get('corrections')) {
-				album_name.textContent = romanise(
-					correct_item_by_artist(album_name.textContent, artist_name),
-				);
-			}
 		}
 	});
+}
+
+export function correct_generic_combo_no_artist_child(
+	album: ReactElement,
+	parent: string,
+) {
+	album.setAttribute('data-kate-processed', 'true');
+
+	const album_name = album.querySelector(
+		`.${parent.replace('-details', '')}-name a`,
+	);
+	if (!album_name) return;
+
+	const artist_name = return_artist_from_generic(
+		album_name.getAttribute('href') || '',
+	);
+
+	if (useSettings.get('format_guest_features')) {
+		const formatted = name_includes(
+			album_name.textContent,
+			artist_name,
+		);
+
+		album_name.classList.add('smart-title');
+		album_name.replaceChildren(
+			<SmartTitle
+				title={formatted.song_title}
+				tags={formatted.song_tags}
+				features
+			/>,
+		);
+	} else if (useSettings.get('corrections')) {
+		album_name.textContent = romanise(
+			correct_item_by_artist(album_name.textContent, artist_name),
+		);
+	}
 }
 
 /**
@@ -678,7 +696,11 @@ export function name_includes(
 	return result;
 }
 
-export function smart_title(song_title: string, song_tags, in_header = false) {
+export function smart_title(
+	song_title: string,
+	song_tags: song_tag[],
+	in_header = false,
+) {
 	const show_features = useSettings.get('show_guest_features');
 	const show_remaster = useSettings.get('show_remaster_tags');
 
