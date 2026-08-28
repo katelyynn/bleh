@@ -8,6 +8,7 @@ import { createRef } from 'jsx-dom';
 
 interface SwitchProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
+	name?: string;
 	className?: string;
 	interact?: boolean;
 	checked?: boolean;
@@ -15,6 +16,7 @@ interface SwitchProps {
 
 export function Switch({
 	ref,
+	name,
 	className,
 	interact = true,
 	checked = false,
@@ -29,7 +31,7 @@ export function Switch({
 
 	const wrap = (
 		<div class={['toggle-wrap', className && className]} ref={ref}>
-			<input type='checkbox' ref={checkbox} />
+			<input type='checkbox' name={name} ref={checkbox} />
 			<button
 				type='button'
 				class={[

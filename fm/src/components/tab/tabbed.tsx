@@ -2,7 +2,7 @@ import { createRef, ReactNode } from 'jsx-dom';
 import { Button } from '@/components/button/button.tsx';
 import { Icon } from '@/components/shared/icon.tsx';
 
-interface TabbedPage {
+export interface TabbedPage {
 	icon: string;
 	label: ReactNode;
 	content: ReactNode;
@@ -10,7 +10,7 @@ interface TabbedPage {
 
 interface TabbedProps {
 	pages: Record<string, TabbedPage>;
-	page: string;
+	page?: string;
 }
 
 export function Tabbed({
@@ -19,6 +19,8 @@ export function Tabbed({
 }: TabbedProps) {
 	const tabs: TabElement[] = [];
 	const content = createRef();
+
+	if (!page) page = Object.keys(pages)[0];
 
 	const elem = (
 		<div class='tabbed'>
@@ -50,7 +52,7 @@ export function Tabbed({
 			tab.active = tab.id == page;
 		});
 
-		content.current.replaceChildren(pages[page].content);
+		content.current.replaceChildren(pages[page!].content);
 	}
 
 	update();

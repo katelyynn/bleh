@@ -18,6 +18,7 @@ import { useSettings } from '@/page.ts';
 interface SettingSelectProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
 	values?: SelectOption[];
+	id?: string;
 	value?: string;
 	bind?: string;
 	icon?: string;
@@ -39,6 +40,7 @@ type SettingSelectElement = HTMLDivElement & {
 export function SettingSelect({
 	ref,
 	values,
+	id,
 	value,
 	bind,
 	icon,
@@ -128,6 +130,7 @@ export function SettingSelect({
 					value={value}
 					values={values}
 					onChange={set}
+					name={id}
 					inSettings
 				/>
 				{Object.keys(incompatible_list).length > 0 && (

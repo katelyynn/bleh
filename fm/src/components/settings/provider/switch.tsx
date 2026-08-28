@@ -17,6 +17,8 @@ import { useSettings } from '@/page.ts';
 
 interface SettingSwitchProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
+	id?: string;
+	value?: boolean;
 	bind?: string;
 	icon?: string;
 	name?: ReactNode;
@@ -34,6 +36,8 @@ type SettingSwitchElement = HTMLDivElement & {
 
 export function SettingSwitch({
 	ref,
+	id,
+	value = false,
 	bind,
 	icon,
 	name,
@@ -43,7 +47,7 @@ export function SettingSwitch({
 	onMouseEnter,
 	onMouseLeave,
 }: SettingSwitchProps) {
-	let value = bind ? useSettings.get(bind) as boolean : true;
+	if (bind) value = useSettings.get(bind) as boolean;
 	const checkbox = createRef();
 
 	const uuid = crypto.randomUUID();
@@ -103,6 +107,7 @@ export function SettingSwitch({
 				<SettingLabel name={name} body={body} store={store} />
 				<Switch
 					className='setting-inner'
+					name={id}
 					checked={value}
 					ref={checkbox}
 				/>

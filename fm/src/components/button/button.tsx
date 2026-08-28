@@ -73,7 +73,7 @@ export function Button({
 
 	let elem: ButtonElement | ButtonLinkElement;
 
-	if (!href) {
+	if (!href || type != 'button') {
 		elem = (
 			<button
 				type={type}

@@ -11805,6 +11805,12 @@ export const trans = {
 	track_in_top_listeners: {
 		en: 'Top listened',
 	},
+	behaviour: {
+		en: 'Behaviour',
+	},
+	bleh_settings_notice: {
+		en: 'These settings apply to your device and are bleh-only',
+	},
 } as const satisfies Record<string, any>;
 
 export const translation_fallback = 'NO_TRANSLATION_FOUND';

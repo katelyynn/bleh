@@ -60,7 +60,7 @@ import { present_badge } from '@/components/dialog/badge';
 import { useSettings } from '@/page.ts';
 import { bleh_event_profile } from '@/pages/profile/event.tsx';
 import { PanelHead } from '@/components/text/head.tsx';
-import { icons } from '@/components/shared/icon.tsx';
+import { icons, SaveIcon } from '@/components/shared/icon.tsx';
 import { ActivityItem, ActivityList } from '@/components/activity/activity.tsx';
 import {
 	PanelTop,
@@ -85,6 +85,14 @@ import {
 	FloatingWindowContents,
 } from '@/components/menu/floating_window.tsx';
 import { SettingGroup } from '@/components/settings/group.tsx';
+import { Tabbed, TabbedPage } from '@/components/tab/tabbed.tsx';
+import { SettingSwitch } from '@/components/settings/provider/switch.tsx';
+import { CardTip } from '@/components/text/tip.tsx';
+import { SettingRadio } from '@/components/settings/provider/radio.tsx';
+import { Token } from '@/components/form/token.tsx';
+import { SettingSelect } from '@/components/settings/provider/select.tsx';
+import { SettingsFooter } from '@/components/form/footer.tsx';
+import { Button } from '@/components/button/button.tsx';
 
 export function bleh_profiles() {
 	// the obsessions page is a user subpage but works very differently
@@ -1096,6 +1104,45 @@ function profile_recents() {
 		});
 	}
 
+	let pages: Record<string, TabbedPage> = {
+		visual: {
+			icon: icons.visual,
+			label: tl(trans.visual),
+			content: (
+				<>
+					<SettingGroup>
+						<SettingSwitch bind='format_guest_features' />
+						<SettingSwitch bind='show_guest_features' />
+						<SettingRadio bind='track_layout' />
+						<SettingRadio bind='expand_tracks' />
+						<SettingRadio bind='track_album_name_location' />
+					</SettingGroup>
+					<CardTip>{tl(trans.bleh_settings_notice)}</CardTip>
+				</>
+			),
+		},
+	};
+
+	if (form) {
+		pages = {
+			behaviour: {
+				icon: icons.debug,
+				label: tl(trans.behaviour),
+				content: form,
+			},
+			...pages,
+		};
+	}
+
+	menu_tooltip(
+		settings_btn.current,
+		<FloatingWindow>
+			<FloatingWindowContents>
+				<Tabbed pages={pages} />
+			</FloatingWindowContents>
+		</FloatingWindow>,
+	);
+
 	if (!form) return panel;
 
 	if (page.token == '') {
@@ -1106,84 +1153,47 @@ function profile_recents() {
 
 	let original_chart_settings = {};
 
-	const count = form.querySelector('[name="chart_length_recent_tracks"]');
-	original_chart_settings = {
-		recent_artwork: form.querySelector('#id_show_recent_tracks_artwork'),
-		recent_realtime: form.querySelector('#id_auto_refresh_recent_tracks'),
-	};
+	const count = form.querySelector(
+		'[name="chart_length_recent_tracks"]',
+	) as HTMLSelectElement;
+	const artwork = form.querySelector(
+		'#id_show_recent_tracks_artwork',
+	) as HTMLInputElement;
+	const realtime = form.querySelector(
+		'#id_auto_refresh_recent_tracks',
+	) as HTMLInputElement;
 
 	form.classList = '';
-	render(
-		form,
-		html`
-			<input type="hidden" name="csrfmiddlewaretoken" value=${page
-				.token} />
-			<div class="setting-group blend">
-			    <div class="setting" data-type="select">
-			        <div class="heading">
-			            <h5>${tl(trans.amount_to_display)}</h5>
-			        </div>
-			        ${select({
-				values: select_prepare(count),
-				initial: count.value,
-				name: count.name,
-				in_settings: true,
-			})}
-			    </div>
-			    ${toggle({
-				title: tl(trans.recent_artwork),
-				value: original_chart_settings.recent_artwork.checked,
-				name: original_chart_settings.recent_artwork.name,
-				standalone: false,
-			})}
-			    ${toggle({
-				title: tl(trans.recent_realtime.name),
-				body: tl(trans.recent_realtime.body),
-				value: original_chart_settings.recent_realtime.checked,
-				name: original_chart_settings.recent_realtime.name,
-				standalone: false,
-			})}
-			    ${setting({ id: 'format_guest_features' })}
-			    <div class="settings-footer">
-			        <button type="submit" class="btn-primary save" onclick=${() => {
-				tooltip.hide();
-			}}>
-			            ${tl(trans.save)}
-			        </button>
-			    </div>
-			</div>
-		`,
+	form.replaceChildren(
+		<>
+			<Token value={page.token} />
+			<SettingGroup>
+				<SettingSelect
+					name={tl(trans.amount_to_display)}
+					values={select_prepare(count)}
+					value={count.value}
+					id={count.name}
+				/>
+				<SettingSwitch
+					name={tl(trans.recent_artwork)}
+					value={artwork.checked}
+					id={artwork.name}
+				/>
+				<SettingSwitch
+					name={tl(trans.recent_realtime.name)}
+					body={tl(trans.recent_realtime.body)}
+					value={realtime.checked}
+					id={realtime.name}
+				/>
+			</SettingGroup>
+			<SettingsFooter>
+				<Button primary type='submit'>
+					<SaveIcon />
+					{tl(trans.save)}
+				</Button>
+			</SettingsFooter>
+		</>,
 	);
-
-	menu_tooltip(
-		settings_btn.current,
-		<FloatingWindow>
-			<FloatingWindowContents>
-				<SettingGroup blend>
-				</SettingGroup>
-			</FloatingWindowContents>
-		</FloatingWindow>,
-	);
-
-	tooltip = tippy(settings_btn.current, {
-		theme: 'window',
-		content: form,
-		allowHTML: true,
-		placement: 'bottom',
-		interactive: true,
-		interactiveBorder: 10,
-		trigger: 'click',
-		appendTo: document.body,
-		hideOnClick: 'toggle',
-
-		onClickOutside(instance) {
-			if (instance.popper.querySelector('[aria-expanded="true"]')) {
-				return;
-			}
-
-			instance.hide();
-		},
-	});
 
 	return panel;
 }

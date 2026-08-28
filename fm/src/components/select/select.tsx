@@ -42,7 +42,7 @@ export function Select({
 
 	const wrap = (
 		<div class={['select-wrap', 'custom-selector', className && className]}>
-			<select ref={select} />
+			<select name={name} ref={select} />
 			<button
 				type='button'
 				class={[
