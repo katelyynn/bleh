@@ -96084,9 +96084,13 @@ var bleh = (() => {
   // src/components/profile/streak.tsx
   function get_profile_streak(indicator, panel) {
     if (!assess_if_streak_exists(panel)) {
-      indicator.replaceWith(/* @__PURE__ */ jsx(ProfileStreak, {
-        self: page.name == auth.name
-      }));
+      if (page.name == auth.name) {
+        indicator.replaceWith(/* @__PURE__ */ jsx(ProfileStreak, {
+          self: page.name == auth.name
+        }));
+        return;
+      }
+      indicator.remove();
       return;
     }
     const url = `https://ws.audioscrobbler.com/2.0/?method=user.getRecentTracks&user=${page.name}&api_key=${api_key}&format=json&limit=100`;
@@ -122058,7 +122062,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-08-29T19:14:46.746Z"
+    built_on: "2026-08-29T19:15:39.690Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

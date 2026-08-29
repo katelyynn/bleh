@@ -26,9 +26,14 @@ export function get_profile_streak(
 	panel: HTMLDivElement,
 ) {
 	if (!assess_if_streak_exists(panel)) {
-		indicator.replaceWith(
-			<ProfileStreak self={page.name == auth.name} />,
-		);
+		if (page.name == auth.name) {
+			indicator.replaceWith(
+				<ProfileStreak self={page.name == auth.name} />,
+			);
+			return;
+		}
+
+		indicator.remove();
 		return;
 	}
 
