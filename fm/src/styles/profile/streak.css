@@ -34,7 +34,7 @@
 	}
 
 	&:not(.profile-streak-empty) {
-		filter: drop-shadow(0 0 10px oklch(var(--k4))) drop-shadow(0 0 23px oklch(var(--k4)));
+		filter: drop-shadow(0 0 10px oklch(var(--k4))) drop-shadow(0 0 30px oklch(var(--k4))) drop-shadow(0 0 40px oklch(var(--k4)));
 
 		animation: show_streak 0.5s var(--trans-function-ani);
 	}

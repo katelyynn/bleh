@@ -1070,7 +1070,7 @@ u,
 		--l4: calc(var(--lit) * 0.45) calc(var(--sat) * 0.6) var(--hue);
 
 		--f4: calc(var(--lit) * 0.4) calc(clamp(min(0), var(--sat), max(2)) * 0.32) var(--hue);
-		--k4: calc(var(--lit) * 0.45) calc(clamp(min(0), var(--sat), max(2)) * 0.38) var(--hue);
+		--k4: calc(var(--lit) * 0.5) calc(clamp(min(0), var(--sat), max(2)) * 0.44) var(--hue);
 		--f5: calc(var(--lit) * 0.36) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue);
 		--g4: calc(var(--lit) * 0.1) calc(clamp(min(0), var(--sat), max(2)) * 0.6) var(--hue);
 
