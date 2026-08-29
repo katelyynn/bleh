@@ -121078,86 +121078,93 @@ var bleh = (() => {
     "default-src": [
       "'self'",
       // stuff that last.fm uses
-      "youtube.com",
-      "youtube-nocookie.com",
-      "*.youtube.com",
-      "*.youtube-nocookie.com",
-      "ws.audioscrobbler.com",
-      "translate.googleapis.com"
+      "https://youtube.com",
+      "https://youtube-nocookie.com",
+      "https://*.youtube.com",
+      "https://*.youtube-nocookie.com",
+      "https://ws.audioscrobbler.com",
+      "https://translate.googleapis.com"
     ],
     "script-src": [
       "'self'",
       "'unsafe-inline'",
       "'unsafe-eval'",
       // stuff that last.fm uses
-      "cdn.jsdelivr.net",
-      "cdnjs.cloudflare.com",
-      "cdn.cookielaw.org",
-      "google.com",
-      "youtube.com",
-      "youtube-nocookie.com",
-      "*.youtube.com",
-      "*.youtube-nocookie.com",
-      "*.githack.com",
-      "*.newrelic.com",
-      "a.pub.network",
-      "tags.tiqcdn.com",
-      "html-load.cc",
-      "srv.tunefindforfans.com",
-      "ws.audioscrobbler.com",
-      "translate.googleapis.com"
+      "https://cdn.jsdelivr.net",
+      "https://cdnjs.cloudflare.com",
+      "https://cdn.cookielaw.org",
+      "https://google.com",
+      "https://youtube.com",
+      "https://youtube-nocookie.com",
+      "https://*.youtube.com",
+      "https://*.youtube-nocookie.com",
+      "https://*.githack.com",
+      "https://*.newrelic.com",
+      "https://a.pub.network",
+      "https://tags.tiqcdn.com",
+      "https://html-load.cc",
+      "https://srv.tunefindforfans.com",
+      "https://ws.audioscrobbler.com",
+      "https://translate.googleapis.com"
     ],
     "style-src": [
       "'self'",
       "'unsafe-inline'",
-      "fonts.googleapis.com",
+      "https://fonts.googleapis.com",
       // stuff that last.fm uses
-      "static.cheftoondiligord.site",
-      "a.pub.network"
+      "https://static.cheftoondiligord.site",
+      "https://a.pub.network"
+    ],
+    "style-src-elem": [
+      "'self'",
+      "'unsafe-inline'",
+      "https://fonts.googleapis.com"
     ],
     "img-src": [
       "'self'",
       "data:",
       // stuff that last.fm uses
-      "*.fastly.net",
-      "cdn.cookielaw.org",
-      "img.youtube.com",
+      "https://lastfm-img.freetls.fastly.net",
+      "https://*.fastly.net",
+      "https://cdn.cookielaw.org",
+      "https://img.youtube.com",
       // various image hosts
-      "files.catbox.moe",
-      "*.klipy.com",
-      "*.tenor.com",
-      "*.tenor.co",
-      "images.weserv.nl",
-      "icons.duckduckgo.com",
-      "count.getloli.com",
+      "https://files.catbox.moe",
+      "https://*.klipy.com",
+      "https://*.tenor.com",
+      "https://*.tenor.co",
+      "https://images.weserv.nl",
+      "https://icons.duckduckgo.com",
+      "https://count.getloli.com",
       // various git sites
-      "github.com",
-      "gitlab.com",
-      "codeberg.org",
-      "*.github.io",
-      "*.gitlab.io",
-      "*.codeberg.page",
-      "raw.githubusercontent.com",
-      "katelyn.moe",
-      "*.discordapp.com",
-      "*.discord.com"
+      "https://github.com",
+      "https://gitlab.com",
+      "https://codeberg.org",
+      "https://*.github.io",
+      "https://*.gitlab.io",
+      "https://*.codeberg.page",
+      "https://raw.githubusercontent.com",
+      "https://katelyn.moe",
+      "https://katelyynn.github.io",
+      "https://*.discordapp.com",
+      "https://*.discord.com"
     ],
     "connect-src": [
       "'self'",
-      "cdn.cookielaw.org",
-      "geolocation.onetrust.com",
-      "wss://html-load.cc",
-      "*.newrelic.com",
-      "status.cafe",
-      "*.github.io",
-      "ws.audioscrobbler.com",
-      "*.katelyn.moe",
-      "translate.googleapis.com"
+      "https://cdn.cookielaw.org",
+      "https://geolocation.onetrust.com",
+      "https://wss://html-load.cc",
+      "https://*.newrelic.com",
+      "https://status.cafe",
+      "https://*.github.io",
+      "https://ws.audioscrobbler.com",
+      "https://*.katelyn.moe",
+      "https://translate.googleapis.com"
     ],
     "font-src": [
       "'self'",
-      "fonts.gstatic.com",
-      "*.github.io"
+      "https://fonts.gstatic.com",
+      "https://*.github.io"
     ]
   };
   function buildCSP(policies) {
@@ -122245,7 +122252,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-08-29T23:15:37.809Z"
+    built_on: "2026-08-29T23:30:31.308Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
