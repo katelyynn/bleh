@@ -1058,7 +1058,7 @@ function profile_recents() {
 			</PanelHead>
 			{(page.name == auth.name && ff('yuzu')) && (
 				<ViewButtons accompany>
-					<ProfileStreak ref={streak} />
+					<ProfileStreak loading ref={streak} />
 				</ViewButtons>
 			)}
 			<ViewButtons>

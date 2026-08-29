@@ -96897,6 +96897,7 @@ var bleh = (() => {
         page.name == auth.name && ff("yuzu") && /* @__PURE__ */ jsx(ViewButtons, {
           accompany: true,
           children: /* @__PURE__ */ jsx(ProfileStreak, {
+            loading: true,
             ref: streak
           })
         }),
@@ -121941,7 +121942,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-08-29T15:36:42.296Z"
+    built_on: "2026-08-29T15:36:55.323Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
