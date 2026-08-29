@@ -12,6 +12,7 @@ import {
 	return_artist_from_track,
 } from '@/build/tools.ts';
 import { log } from '@/build/log.ts';
+import { correct_item_by_artist } from '@/components/music/lotus.tsx';
 
 interface streaks {
 	artist?: StreakItem;
@@ -276,7 +277,9 @@ export function ProfileStreak({
 						<>
 							<hyper-card className='streak-hyper-card'>
 								<div className='streak-window'>
-									<Icon name={icons.streak} />
+									<div class='streak-big-icon'>
+										<Icon name={icons.streak} />
+									</div>
 									<div class={['streak-avatar', 'avatar']}>
 										<img
 											src={avatar(
@@ -291,11 +294,45 @@ export function ProfileStreak({
 											{page.name}
 										</SponsorUsername>
 									</strong>
+									<div class='streak-values'>
+										{artist && (
+											<StreakValue
+												type='artist'
+												label={artist.name}
+												value={artist.count}
+												max={highest}
+											/>
+										)}
+										{album && (
+											<StreakValue
+												type='album'
+												label={correct_item_by_artist(
+													album.name,
+													artist!.name,
+												)}
+												value={album.count}
+												max={highest}
+											/>
+										)}
+										{track && (
+											<StreakValue
+												type='track'
+												label={correct_item_by_artist(
+													track.name,
+													artist!.name,
+												)}
+												value={track.count}
+												max={highest}
+											/>
+										)}
+									</div>
 								</div>
 							</hyper-card>
 						</>
 					),
 					type: 'badge',
+					colourful: true,
+					colourful_bg: true,
 				});
 			}}
 		>
@@ -322,4 +359,52 @@ export function ProfileStreak({
 	);
 
 	return elem;
+}
+
+interface StreakValueProps {
+	type: 'artist' | 'album' | 'track';
+	label: string;
+	value: number;
+	max: number;
+}
+
+function StreakValue({
+	type,
+	label,
+	value,
+	max,
+}: StreakValueProps) {
+	return (
+		<div class='streak-value-container'>
+			<div class='streak-value-top'>
+				<div class='streak-value-label'>
+					<Icon name={icons[type]} />
+					{label}
+				</div>
+				<div class='streak-value-count'>
+					{value}
+				</div>
+			</div>
+			<StreakBar value={value} max={max} />
+		</div>
+	);
+}
+
+interface StreakBarProps {
+	value: number;
+	max: number;
+}
+
+function StreakBar({
+	value,
+	max,
+}: StreakBarProps) {
+	return (
+		<div class='streak-bar'>
+			<div
+				class='streak-bar-fill'
+				style={{ width: `${(value / max) * 100}%` }}
+			/>
+		</div>
+	);
 }
