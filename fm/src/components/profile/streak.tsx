@@ -179,7 +179,7 @@ export function ProfileStreak({
 		const elem = (
 			<Button className='profile-streak profile-streak-empty' ref={ref}>
 				{!loading
-					? <Icon name={icons.streak} identifier='streak-icon' />
+					? <Icon name={icons.streak} />
 					: <Icon name={icons.spinner} />}
 				<span class='streak-value'>
 					{tl(trans.streak, {
@@ -235,7 +235,9 @@ export function ProfileStreak({
 				});
 			}}
 		>
-			<Icon name={icons.streak} identifier='streak-icon' />
+			<div class='streak-icon'>
+				<Icon name={icons.streak} identifier='streak-icon' />
+			</div>
 			<span class='streak-value'>
 				{tl(highest >= 100 ? trans.streak_high : trans.streak, {
 					v: (

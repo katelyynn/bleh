@@ -32,6 +32,43 @@
 		--icon-colour: oklch(var(--c3) / 80%);
 		cursor: default;
 	}
+
+	&:not(.profile-streak-empty) {
+		filter: drop-shadow(0 0 10px oklch(var(--k4))) drop-shadow(0 0 23px oklch(var(--k4)));
+
+		animation: show_streak 0.5s var(--trans-function-ani);
+	}
+}
+
+@keyframes show_streak {
+	from {
+		opacity: 0;
+		scale: 0.92;
+	}
+
+	to {
+		opacity: 1;
+		scale: 1;
+	}
+}
+
+.streak-icon {
+	display: flex;
+	animation: streak 3s var(--trans-function-ani) infinite;
+}
+
+@keyframes streak {
+
+	from,
+	20%,
+	to {
+		filter: brightness(100%);
+	}
+
+	40% {
+		--l4-c: var(--l3-c);
+		filter: brightness(160%);
+	}
 }
 
 .streak-count {
