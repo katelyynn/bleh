@@ -38,6 +38,10 @@
 
 		animation: show_streak 0.5s var(--trans-function-ani);
 	}
+
+	&[data-hidden="true"] {
+		display: none !important;
+	}
 }
 
 @keyframes show_streak {
