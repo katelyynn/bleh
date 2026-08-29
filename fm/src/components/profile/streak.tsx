@@ -3,7 +3,7 @@ import { Icon, icons } from '@/components/shared/icon.tsx';
 import { lang, tl, trans } from '@/build/trans.ts';
 import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
 import { dialog } from '@/components/dialog/dialog.tsx';
-import { api_key, page } from '@/build/page.ts';
+import { api_key, auth, page } from '@/build/page.ts';
 import { SponsorUsername } from '@/components/user/name.tsx';
 import { avatar } from '@/components/shared/avatar.tsx';
 import { createRef } from 'jsx-dom';
@@ -27,7 +27,7 @@ export function get_profile_streak(
 ) {
 	if (!assess_if_streak_exists(panel)) {
 		indicator.replaceWith(
-			<ProfileStreak />,
+			<ProfileStreak self={page.name == auth.name} />,
 		);
 		return;
 	}
@@ -221,6 +221,7 @@ interface StreakItem {
 interface ProfileStreakProps {
 	ref?: ReturnType<typeof createRef<HTMLButtonElement>>;
 	loading?: boolean;
+	self?: boolean;
 	artist?: StreakItem;
 	album?: StreakItem;
 	track?: StreakItem;
@@ -229,6 +230,7 @@ interface ProfileStreakProps {
 export function ProfileStreak({
 	ref,
 	loading,
+	self = true,
 	artist,
 	album,
 	track,
@@ -250,7 +252,7 @@ export function ProfileStreak({
 		const elem = (
 			<Button className='profile-streak profile-streak-empty' ref={ref}>
 				{!loading
-					? <Icon name={icons.streak} />
+					? <Icon name={icons.streak_empty} />
 					: <Icon name={icons.spinner} />}
 				<span class='streak-value'>
 					{tl(trans.streak, {
@@ -260,7 +262,7 @@ export function ProfileStreak({
 			</Button>
 		);
 
-		if (!loading) {
+		if (!loading && self) {
 			hover_tooltip(
 				elem,
 				<Tooltip>{tl(trans.start_streak)}</Tooltip>,

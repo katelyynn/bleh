@@ -210,6 +210,7 @@ export const icons = {
 	motion: 'motion',
 	text: 'text',
 	streak: 'streak',
+	streak_empty: 'streak-empty',
 };
 
 interface icon {
