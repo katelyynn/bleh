@@ -96152,7 +96152,7 @@ var bleh = (() => {
       image: track.image[0]["#text"]
     };
   }
-  function ProfileStreak({ ref: ref2, artist, album, track }) {
+  function ProfileStreak({ ref: ref2, loading, artist, album, track }) {
     const highest = Math.max(artist?.count || 0, album?.count || 0, track?.count || 0);
     const val = artist?.count == highest ? artist : album?.count == highest ? album : track?.count ? track : void 0;
     if (!val) {
@@ -96160,9 +96160,11 @@ var bleh = (() => {
         className: "profile-streak profile-streak-empty",
         ref: ref2,
         children: [
-          /* @__PURE__ */ jsx(Icon, {
+          !loading ? /* @__PURE__ */ jsx(Icon, {
             name: icons.streak,
             identifier: "streak-icon"
+          }) : /* @__PURE__ */ jsx(Icon, {
+            name: icons.spinner
           }),
           /* @__PURE__ */ jsx("span", {
             class: "streak-value",
@@ -96175,9 +96177,11 @@ var bleh = (() => {
           })
         ]
       });
-      hover_tooltip(elem2, /* @__PURE__ */ jsx(Tooltip, {
-        children: tl2(trans.start_streak)
-      }));
+      if (!loading) {
+        hover_tooltip(elem2, /* @__PURE__ */ jsx(Tooltip, {
+          children: tl2(trans.start_streak)
+        }));
+      }
       return elem2;
     }
     const elem = /* @__PURE__ */ jsx(Button, {
@@ -120207,6 +120211,9 @@ var bleh = (() => {
             children: /* @__PURE__ */ jsx(DemoItem, {
               label: "ProfileStreak",
               children: [
+                /* @__PURE__ */ jsx(ProfileStreak, {
+                  loading: true
+                }),
                 /* @__PURE__ */ jsx(ProfileStreak, {}),
                 /* @__PURE__ */ jsx(ProfileStreak, {
                   artist: {
@@ -121934,7 +121941,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-08-29T15:34:30.348Z"
+    built_on: "2026-08-29T15:36:42.296Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

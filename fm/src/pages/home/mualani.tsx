@@ -847,6 +847,7 @@ export function mualani() {
 			<section>
 				<DemoGrid>
 					<DemoItem label='ProfileStreak'>
+						<ProfileStreak loading />
 						<ProfileStreak />
 						<ProfileStreak
 							artist={{ count: 50, name: 'Tiffany Day' }}

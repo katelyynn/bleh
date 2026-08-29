@@ -149,6 +149,7 @@ interface StreakItem {
 
 interface ProfileStreakProps {
 	ref?: ReturnType<typeof createRef<HTMLButtonElement>>;
+	loading?: boolean;
 	artist?: StreakItem;
 	album?: StreakItem;
 	track?: StreakItem;
@@ -156,6 +157,7 @@ interface ProfileStreakProps {
 
 export function ProfileStreak({
 	ref,
+	loading,
 	artist,
 	album,
 	track,
@@ -176,7 +178,9 @@ export function ProfileStreak({
 	if (!val) {
 		const elem = (
 			<Button className='profile-streak profile-streak-empty' ref={ref}>
-				<Icon name={icons.streak} identifier='streak-icon' />
+				{!loading
+					? <Icon name={icons.streak} identifier='streak-icon' />
+					: <Icon name={icons.spinner} />}
 				<span class='streak-value'>
 					{tl(trans.streak, {
 						v: <span class='streak-count'>0</span>,
@@ -185,10 +189,12 @@ export function ProfileStreak({
 			</Button>
 		);
 
-		hover_tooltip(
-			elem,
-			<Tooltip>{tl(trans.start_streak)}</Tooltip>,
-		);
+		if (!loading) {
+			hover_tooltip(
+				elem,
+				<Tooltip>{tl(trans.start_streak)}</Tooltip>,
+			);
+		}
 
 		return elem;
 	}
