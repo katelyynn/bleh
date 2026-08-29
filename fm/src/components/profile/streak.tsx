@@ -44,8 +44,9 @@ export function ProfileStreak({
 			<Button className='profile-streak profile-streak-empty'>
 				<Icon name={icons.streak} identifier='streak-icon' />
 				<span class='streak-value'>
-					0
-					<span class='streak-x'>x</span>
+					{tl(trans.streak, {
+						v: <span class='streak-count'>0</span>,
+					})}
 				</span>
 			</Button>
 		);
@@ -95,8 +96,13 @@ export function ProfileStreak({
 		>
 			<Icon name={icons.streak} identifier='streak-icon' />
 			<span class='streak-value'>
-				{highest.toLocaleString(lang)}
-				<span class='streak-x'>{highest >= 100 ? '+' : 'x'}</span>
+				{tl(highest >= 100 ? trans.streak_high : trans.streak, {
+					v: (
+						<span class='streak-count'>
+							{highest.toLocaleString(lang)}
+						</span>
+					),
+				})}
 			</span>
 		</Button>
 	);

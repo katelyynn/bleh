@@ -11814,6 +11814,17 @@ export const trans = {
 	start_streak: {
 		en: 'Start a streak to see your profile update live',
 	},
+	streak: {
+		// a streak of artists, albums, or tracks
+		// on a profile
+		en: '{v}x streak',
+	},
+	streak_high: {
+		// a streak of artists, albums, or tracks
+		// on a profile
+		// 100 or over
+		en: '{v}+ streak or higher',
+	},
 } as const satisfies Record<string, any>;
 
 export const translation_fallback = 'NO_TRANSLATION_FOUND';

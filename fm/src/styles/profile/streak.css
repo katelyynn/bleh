@@ -13,7 +13,8 @@
 	--radius: 0;
 	transform: none !important;
 
-	--col: oklch(var(--l3-c));
+	--col: var(--l3-c);
+	color: oklch(var(--col) / 70%) !important;
 	font-weight: var(--font-weight-medium) !important;
 	--icon-colour: oklch(var(--l4-c));
 
@@ -27,12 +28,12 @@
 
 	&.profile-streak-empty {
 		font-weight: var(--font-weight) !important;
-		--col: oklch(var(--c3));
+		--col: var(--c3);
 		--icon-colour: oklch(var(--c3) / 80%);
 		cursor: default;
 	}
 }
 
-.streak-x {
-	opacity: 0.7;
+.streak-count {
+	color: oklch(var(--col));
 }
