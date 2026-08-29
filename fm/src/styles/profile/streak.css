@@ -89,7 +89,7 @@
 
 	--hypercard-glow-color: oklch(var(--l4-c));
 	--hypercard-glow-opacity: 0.15;
-	--hypercard-scale: 1.04;
+	--hypercard-scale: 1.02;
 
 	user-select: none;
 	scale: 1;
@@ -210,4 +210,26 @@
 	height: 100%;
 	background-color: oklch(var(--l3-c));
 	border-radius: var(--radius-s);
+
+	transform-origin: left;
+	animation: streak_bar 1.5s var(--trans-function-ani);
+}
+
+@keyframes streak_bar {
+	from {
+		transform: scaleX(0);
+		opacity: 0;
+	}
+
+	to {
+		transform: scaleX(1);
+		opacity: 1;
+	}
+}
+
+.streak-since {
+	margin-top: var(--card-padding);
+	text-align: center;
+	color: oklch(var(--c3));
+	font-size: 13px;
 }

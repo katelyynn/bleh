@@ -11825,6 +11825,10 @@ export const trans = {
 		// 100 or over
 		en: '{v}+ streak or higher',
 	},
+	streak_started: {
+		// v = 2 days ago etc.
+		en: 'Streak started {v}',
+	},
 } as const satisfies Record<string, any>;
 
 export const translation_fallback = 'NO_TRANSLATION_FOUND';

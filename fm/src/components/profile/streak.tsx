@@ -13,6 +13,7 @@ import {
 } from '@/build/tools.ts';
 import { log } from '@/build/log.ts';
 import { correct_item_by_artist } from '@/components/music/lotus.tsx';
+import { DateTime } from 'luxon';
 
 interface streaks {
 	artist?: StreakItem;
@@ -105,6 +106,7 @@ function calculate_streak(
 				};
 
 				streaks.artist.count++;
+				streaks.artist.date = track.date;
 			} else {
 				artist_active = false;
 				break;
@@ -122,6 +124,7 @@ function calculate_streak(
 				};
 
 				streaks.album.count++;
+				streaks.album.date = track.date;
 			} else {
 				album_active = false;
 				delete streaks.album;
@@ -139,6 +142,7 @@ function calculate_streak(
 				};
 
 				streaks.track.count++;
+				streaks.track.date = track.date;
 			} else {
 				track_active = false;
 				delete streaks.track;
@@ -193,6 +197,7 @@ function parse_recent_track_element(track: HTMLDivElement) {
 		artist,
 		album: album ? album.textContent.trim() : undefined,
 		name: name.textContent.trim(),
+		date: '',
 	};
 }
 
@@ -210,6 +215,7 @@ function parse_recent_track(track: LastfmRecentTrack) {
 interface StreakItem {
 	name: string;
 	count: number;
+	date?: string;
 }
 
 interface ProfileStreakProps {
@@ -326,6 +332,15 @@ export function ProfileStreak({
 											/>
 										)}
 									</div>
+									{val.date && (
+										<p class='streak-since'>
+											{tl(trans.streak_started, {
+												v: DateTime.fromSeconds(
+													Number(val.date),
+												).toRelative(),
+											})}
+										</p>
+									)}
 								</div>
 							</hyper-card>
 						</>
@@ -351,12 +366,18 @@ export function ProfileStreak({
 		</Button>
 	);
 
-	hover_tooltip(
-		elem,
-		<Tooltip>
-			{artist?.count} artist, {album?.count} album, {track?.count} track
-		</Tooltip>,
-	);
+	if (val.date) {
+		hover_tooltip(
+			elem,
+			<Tooltip>
+				{tl(trans.streak_started, {
+					v: DateTime.fromSeconds(
+						Number(val.date),
+					).toRelative(),
+				})}
+			</Tooltip>,
+		);
+	}
 
 	return elem;
 }
