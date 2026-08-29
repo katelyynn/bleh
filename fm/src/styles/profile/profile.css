@@ -16,6 +16,8 @@
 
 @import './summary.css';
 
+@import './streak.css';
+
 .header-title-secondary {
 	margin-top: unset !important;
 	font-size: var(--font-size) !important;
@@ -58,7 +60,7 @@
 	z-index: 10;
 	position: relative;
 
-	& > .sep {
+	&>.sep {
 		margin-top: var(--card-gap);
 	}
 
@@ -87,7 +89,7 @@
 	gap: var(--icon-gap);
 	text-align: left;
 
-	& > .bleh-icon {
+	&>.bleh-icon {
 		--icon-colour: color-mix(in oklch,
 				oklch(var(--c2)),
 				oklch(var(--c3)) 50%);
@@ -111,10 +113,9 @@
 	width: 100% !important;
 	justify-content: center;
 	height: fit-content;
-	margin: calc(-1 * (var(--side-action-side) + (var(--button-height) / 2))) 0
-		0 0 !important;
+	margin: calc(-1 * (var(--side-action-side) + (var(--button-height) / 2))) 0 0 0 !important;
 
-	& > li {
+	&>li {
 		font: inherit;
 		flex: unset;
 	}
@@ -130,7 +131,7 @@
 	border-radius: unset;
 	--mask: var(--icon-16-plus);
 
-	& > .header-avatar-add-label {
+	&>.header-avatar-add-label {
 		display: none;
 	}
 }
@@ -151,7 +152,7 @@
 	margin: var(--side-action-side) 0 0 0;
 }
 
-.buffer-3 > h4 {
+.buffer-3>h4 {
 	color: oklch(var(--c3));
 	text-align: center;
 	font-size: 13px;

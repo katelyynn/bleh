@@ -68,6 +68,7 @@ import {
 import { Flag } from '@/components/shared/flag.tsx';
 import { TopAlbum } from '@/components/album/top_album.tsx';
 import { Tabbed } from '@/components/tab/tabbed.tsx';
+import { ProfileStreak } from '@/components/profile/streak.tsx';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -84,6 +85,8 @@ export function mualani() {
 	register_background(avatar(auth.avatar, 'ar0'));
 
 	page.type = 'bleh_mualani';
+	page.avatar = auth.avatar!;
+	page.name = auth.name!;
 	page.subpage = '';
 
 	log('status is', 'page', 'info', page);
@@ -837,6 +840,23 @@ export function mualani() {
 									content: <p>hello world!!</p>,
 								},
 							}}
+						/>
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section>
+				<DemoGrid>
+					<DemoItem label='ProfileStreak'>
+						<ProfileStreak />
+						<ProfileStreak
+							artist={{ count: 50, name: 'Tiffany Day' }}
+						/>
+						<ProfileStreak
+							artist={{ count: 100, name: 'Tiffany Day' }}
+						/>
+						<ProfileStreak
+							artist={{ count: 50, name: 'Tiffany Day' }}
+							album={{ count: 50, name: 'HALO' }}
 						/>
 					</DemoItem>
 				</DemoGrid>

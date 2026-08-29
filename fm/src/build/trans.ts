@@ -11811,6 +11811,9 @@ export const trans = {
 	bleh_settings_notice: {
 		en: 'These settings apply to your device and are bleh-only',
 	},
+	start_streak: {
+		en: 'Start a streak to see your profile update live',
+	},
 } as const satisfies Record<string, any>;
 
 export const translation_fallback = 'NO_TRANSLATION_FOUND';

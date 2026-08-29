@@ -93,6 +93,7 @@ import { Token } from '@/components/form/token.tsx';
 import { SettingSelect } from '@/components/settings/provider/select.tsx';
 import { SettingsFooter } from '@/components/form/footer.tsx';
 import { Button } from '@/components/button/button.tsx';
+import { ProfileStreak } from '@/components/profile/streak.tsx';
 
 export function bleh_profiles() {
 	// the obsessions page is a user subpage but works very differently
@@ -1051,6 +1052,11 @@ function profile_recents() {
 			<PanelHead icon={icons.recent}>
 				{tl(trans.recents)}
 			</PanelHead>
+			{(page.name == auth.name && ff('yuzu')) && (
+				<ViewButtons accompany>
+					<ProfileStreak />
+				</ViewButtons>
+			)}
 			<ViewButtons>
 				{can_scrobble && (
 					<SeeMore

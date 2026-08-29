@@ -399,7 +399,12 @@
 			"default": false,
 			"name": "Remove Last.fm-provided stylesheets for performance",
 			"date": "2026-07-30"
+		},
+		"yuzu": {
+			"default": false,
+			"name": "Keep track of track/album/artist streaks on profiles",
+			"date": "2026-08-29"
 		}
 	},
-	"built_on": "2026-08-28T22:56:14.403Z"
+	"built_on": "2026-08-29T01:39:34.885Z"
 }

@@ -1,0 +1,38 @@
+:root {
+	--hue-streak: 30;
+	--sat-streak: 1.8;
+	--lit-streak: 0.95;
+}
+
+.profile-streak {
+	--bg: transparent;
+	--bg-hov: transparent;
+	--bg-atv: transparent;
+	--shadow: none;
+	--padding: 0;
+	--radius: 0;
+	transform: none !important;
+
+	--col: oklch(var(--l3-c));
+	font-weight: var(--font-weight-medium) !important;
+	--icon-colour: oklch(var(--l4-c));
+
+	--hue-over: var(--hue-streak);
+	--sat-over: var(--sat-streak);
+	--lit-over: var(--lit-streak);
+
+	&:not(.profile-streak-empty):hover {
+		text-decoration: underline !important;
+	}
+
+	&.profile-streak-empty {
+		font-weight: var(--font-weight) !important;
+		--col: oklch(var(--c3));
+		--icon-colour: oklch(var(--c3) / 80%);
+		cursor: default;
+	}
+}
+
+.streak-x {
+	opacity: 0.7;
+}

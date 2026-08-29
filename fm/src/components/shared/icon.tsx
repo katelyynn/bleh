@@ -209,6 +209,7 @@ export const icons = {
 	compose: 'compose',
 	motion: 'motion',
 	text: 'text',
+	streak: 'streak',
 };
 
 interface icon {
