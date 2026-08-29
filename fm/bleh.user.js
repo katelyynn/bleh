@@ -96077,9 +96077,13 @@ var bleh = (() => {
   }
 
   // src/components/profile/streak.tsx
-  function get_profile_streak(indicator) {
+  function get_profile_streak(indicator, panel) {
+    if (!assess_if_streak_exists(panel)) {
+      indicator.replaceWith(/* @__PURE__ */ jsx(ProfileStreak, {}));
+      return;
+    }
     const url = `https://ws.audioscrobbler.com/2.0/?method=user.getRecentTracks&user=${page.name}&api_key=${api_key}&format=json&limit=100`;
-    const streaks = {};
+    let streaks = {};
     fetch(url).then((res) => {
       if (!res.ok) {
         throw new Error();
@@ -96088,51 +96092,8 @@ var bleh = (() => {
     }).then((data2) => {
       const tracks = data2.recenttracks.track;
       if (!tracks) throw new Error();
-      const latest = parse_recent_track(tracks[0]);
-      let artist_active = true;
-      let album_active = !!latest.album;
-      let track_active = true;
-      for (let i3 = 1; i3 < tracks.length; i3++) {
-        const track = parse_recent_track(tracks[i3]);
-        console.info("streaks", track, latest);
-        if (artist_active) {
-          if (track.artist == latest.artist) {
-            streaks.artist ??= {
-              name: latest.artist,
-              count: 0
-            };
-            streaks.artist.count++;
-          } else {
-            artist_active = false;
-            break;
-          }
-        }
-        if (album_active) {
-          if (track.artist == latest.artist && track.album == latest.album) {
-            streaks.album ??= {
-              name: latest.album,
-              count: 0
-            };
-            streaks.album.count++;
-          } else {
-            album_active = false;
-            delete streaks.album;
-          }
-        }
-        if (track_active) {
-          if (track.artist == latest.artist && track.name == latest.name) {
-            streaks.track ??= {
-              name: latest.name,
-              count: 0
-            };
-            streaks.track.count++;
-          } else {
-            track_active = false;
-            delete streaks.track;
-          }
-        }
-      }
-      console.info("streaks", streaks, tracks, latest);
+      streaks = calculate_streak(streaks, tracks);
+      console.info("streaks", streaks, tracks);
       indicator.replaceWith(/* @__PURE__ */ jsx(ProfileStreak, {
         artist: streaks.artist,
         album: streaks.album,
@@ -96141,6 +96102,77 @@ var bleh = (() => {
     }).catch(() => {
       return;
     });
+  }
+  function assess_if_streak_exists(panel) {
+    const tracks = Array.from(panel.querySelectorAll(".chartlist-row:not(.chartlist__placeholder-row, .chartlist-row--interlist-ad)"));
+    const streaks = calculate_streak({}, tracks, true);
+    if (!streaks.artist) {
+      log("assessed no streak on page, will not continue", "streak");
+      return false;
+    }
+    log("assessed valid streak on page, will not continue", "streak");
+    return true;
+  }
+  function calculate_streak(streaks, tracks, elements2 = false) {
+    const latest = parse_track(tracks[0], elements2);
+    let artist_active = true;
+    let album_active = !!latest.album;
+    let track_active = true;
+    for (let i3 = 1; i3 < tracks.length; i3++) {
+      const track = parse_track(tracks[i3], elements2);
+      console.info("streaks", track, latest);
+      if (artist_active) {
+        if (track.artist == latest.artist) {
+          streaks.artist ??= {
+            name: latest.artist,
+            count: 0
+          };
+          streaks.artist.count++;
+        } else {
+          artist_active = false;
+          break;
+        }
+      }
+      if (album_active) {
+        if (track.artist == latest.artist && track.album == latest.album) {
+          streaks.album ??= {
+            name: latest.album,
+            count: 0
+          };
+          streaks.album.count++;
+        } else {
+          album_active = false;
+          delete streaks.album;
+        }
+      }
+      if (track_active) {
+        if (track.artist == latest.artist && track.name == latest.name) {
+          streaks.track ??= {
+            name: latest.name,
+            count: 0
+          };
+          streaks.track.count++;
+        } else {
+          track_active = false;
+          delete streaks.track;
+        }
+      }
+    }
+    return streaks;
+  }
+  function parse_track(track, element = false) {
+    if (element) return parse_recent_track_element(track);
+    return parse_recent_track(track);
+  }
+  function parse_recent_track_element(track) {
+    const name = track.querySelector(".chartlist-name a:not(.offset-section-anchor)");
+    const artist = return_artist_from_track(name.getAttribute("href"), false);
+    const album = track.querySelector(".chartlist-album a");
+    return {
+      artist,
+      album: album ? album.textContent.trim() : void 0,
+      name: name.textContent.trim()
+    };
   }
   function parse_recent_track(track) {
     return {
@@ -96896,7 +96928,7 @@ var bleh = (() => {
           icon: icons.recent,
           children: tl2(trans.recents)
         }),
-        page.name == auth.name && ff("yuzu") && /* @__PURE__ */ jsx(ViewButtons, {
+        ff("yuzu") && /* @__PURE__ */ jsx(ViewButtons, {
           accompany: true,
           children: /* @__PURE__ */ jsx(ProfileStreak, {
             loading: true,
@@ -97047,7 +97079,7 @@ var bleh = (() => {
       })
     }));
     if (ff("yuzu")) {
-      get_profile_streak(streak.current);
+      get_profile_streak(streak.current, panel);
     }
     return panel;
   }
@@ -121944,7 +121976,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-08-29T15:46:44.589Z"
+    built_on: "2026-08-29T16:01:39.205Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

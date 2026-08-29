@@ -1056,7 +1056,7 @@ function profile_recents() {
 			<PanelHead icon={icons.recent}>
 				{tl(trans.recents)}
 			</PanelHead>
-			{(page.name == auth.name && ff('yuzu')) && (
+			{ff('yuzu') && (
 				<ViewButtons accompany>
 					<ProfileStreak loading ref={streak} />
 				</ViewButtons>
@@ -1215,7 +1215,7 @@ function profile_recents() {
 	);
 
 	if (ff('yuzu')) {
-		get_profile_streak(streak.current);
+		get_profile_streak(streak.current, panel as HTMLDivElement);
 	}
 
 	return panel;
