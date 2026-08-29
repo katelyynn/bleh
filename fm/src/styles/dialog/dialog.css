@@ -92,7 +92,7 @@
 				display: var(--cards-overlay-display);
 
 				background-image: var(--cards-overlay-image,
-					unset), var(--cards-overlay) !important;
+						unset), var(--cards-overlay) !important;
 				background-size: 100px;
 				background-repeat: repeat-x !important;
 				background-position: 0 -60px !important;
@@ -153,7 +153,7 @@
 	z-index: 100;
 	position: relative;
 
-	h1 {
+	&>h4 {
 		margin: unset;
 		color: oklch(var(--c1));
 		font-size: 16px;
@@ -193,11 +193,11 @@
 }
 
 .bleh-modal-body {
-	& > :first-child {
+	&> :first-child {
 		margin-top: unset;
 	}
 
-	& > img {
+	&>img {
 		width: 100%;
 		border-radius: var(--item-big-radius);
 		box-shadow: var(--card-shadow);
@@ -207,11 +207,11 @@
 		margin-right: auto;
 	}
 
-	& > .sep {
+	&>.sep {
 		margin: var(--card-gap) 0;
 	}
 
-	& > p:not(.big-modal-alert, .card-tip) {
+	&>p:not(.big-modal-alert, .card-tip) {
 		max-width: 430px;
 	}
 }
@@ -219,11 +219,8 @@
 .bleh-modal-body[data-allow-scroll="true"],
 .modal-inner-content.allow-scroll {
 	max-height: 80vh;
-	padding: calc(var(--card-padding) * 2) var(--card-padding)
-		var(--card-padding) var(--card-padding);
-	margin: calc(-1 * (var(--card-padding) * 2)) calc(-1 * var(--card-padding))
-		calc(-1 * var(--card-padding)) calc(-1 * var(--card-padding))
-		!important;
+	padding: calc(var(--card-padding) * 2) var(--card-padding) var(--card-padding) var(--card-padding);
+	margin: calc(-1 * (var(--card-padding) * 2)) calc(-1 * var(--card-padding)) calc(-1 * var(--card-padding)) calc(-1 * var(--card-padding)) !important;
 	overflow-y: hidden;
 
 	border-radius: var(--item-big-radius);

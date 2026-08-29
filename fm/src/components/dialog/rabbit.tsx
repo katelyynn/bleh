@@ -20,6 +20,7 @@ import { redirect } from '@/components/music/music';
 import { open_starred_friend_window } from '@/pages/profile/profile';
 import { match } from '@/components/settings/dynamic_theming';
 import { useSettings } from '@/page.ts';
+import { is_keybind_active } from '@/components/text/keybind.ts';
 
 export function register_rabbit() {
 	let input_box;
@@ -38,22 +39,19 @@ export function register_rabbit() {
 	let fake;
 
 	// whether going back is allowed
-	let back;
+	let back: boolean;
 
 	const allowed_pages = ['user', 'artist', 'album', 'track', 'tag'];
 
 	document.addEventListener('keydown', (e) => {
-		/*notify({
-            id: 'key',
-            title: e.key
-        });*/
-
 		const cmd = e.getModifierState('Control') || e.getModifierState('Meta');
 		const key = e.key.toLowerCase();
 
 		if (
-			cmd &&
-			[settings.rabbit_primary.toLowerCase(), ','].includes(key) &&
+			is_keybind_active(
+				useSettings.get('rabbit_primary') as string[],
+				e,
+			) &&
 			!page.structure.dialogs.hasChildNodes()
 		) {
 			e.preventDefault();
@@ -122,13 +120,23 @@ export function register_rabbit() {
 		}
 
 		if (!page.structure.dialogs.hasChildNodes()) {
-			if (cmd && [settings.rabbit_profile.toLowerCase()].includes(key)) {
+			if (
+				is_keybind_active(
+					useSettings.get('rabbit_profile') as string[],
+					e,
+				)
+			) {
 				e.preventDefault();
 
 				window.location.href = `${root}user/${auth.name}`;
 			}
 
-			if (cmd && [settings.rabbit_shortcut.toLowerCase()].includes(key)) {
+			if (
+				is_keybind_active(
+					useSettings.get('rabbit_shortcut') as string[],
+					e,
+				)
+			) {
 				e.preventDefault();
 
 				if (useSettings.get('starred_friend') != '') {
@@ -141,15 +149,22 @@ export function register_rabbit() {
 			}
 
 			if (
-				cmd &&
-				[settings.rabbit_bleh_settings.toLowerCase()].includes(key)
+				is_keybind_active(
+					useSettings.get('rabbit_bleh_settings') as string[],
+					e,
+				)
 			) {
 				e.preventDefault();
 
 				window.location.href = `${root}bleh`;
 			}
 
-			if (cmd && [settings.rabbit_search.toLowerCase()].includes(key)) {
+			if (
+				is_keybind_active(
+					useSettings.get('rabbit_search') as string[],
+					e,
+				)
+			) {
 				e.preventDefault();
 
 				rabbit();
@@ -227,7 +242,7 @@ export function register_rabbit() {
 					body: tl(trans.search_for_music_or_user),
 					keywords: ['user', 'music', 'tag', 'discover', 'explore'],
 					action: () => search(),
-					keybind: ['⌘', settings.rabbit_search.toUpperCase()],
+					keybind: useSettings.get('rabbit_search'),
 				},
 				{
 					type: 'on_this_page',
@@ -235,7 +250,11 @@ export function register_rabbit() {
 					body: tl(trans.use_current_page_as_context),
 					keywords: ['ctx', 'context'],
 					action: () => use_page_as_ctx(),
-					keybind: ['⌘', '⇧', settings.rabbit_primary.toUpperCase()],
+					keybind: [
+						'⌘',
+						'⇧',
+						(useSettings.get('rabbit_primary') as string[])[1],
+					],
 					disabled: !allowed_pages.includes(page.type),
 				},
 				{
@@ -249,7 +268,7 @@ export function register_rabbit() {
 					action:
 						() => (window.location.href =
 							`${root}user/${auth.name}`),
-					keybind: ['⌘', settings.rabbit_profile.toUpperCase()],
+					keybind: useSettings.get('rabbit_profile'),
 				},
 				{
 					type: 'starred_friend',
@@ -270,7 +289,7 @@ export function register_rabbit() {
 							useSettings.get('starred_friend')
 						}`),
 					hide: useSettings.get('starred_friend') == '',
-					keybind: ['⌘', settings.rabbit_shortcut.toUpperCase()],
+					keybind: useSettings.get('rabbit_shortcut'),
 				},
 				{
 					type: 'notifications',
@@ -384,7 +403,7 @@ export function register_rabbit() {
 						'configure',
 					],
 					action: () => (window.location.href = `${root}bleh`),
-					keybind: ['⌘', settings.rabbit_bleh_settings.toUpperCase()],
+					keybind: useSettings.get('rabbit_bleh_settings'),
 				},
 			];
 		} else if (pre_matches) {

@@ -40,11 +40,13 @@ export function request_changelog(open_after = true) {
 
 	const xhr = new XMLHttpRequest();
 	const url =
-		`https://katelyynn.github.io/bleh/fm/changelog/changelog.tson?${Math.random()}`;
+		`https://katelyynn.github.io/bleh/fm/changelog/changelog.json?${Math.random()}`;
 	xhr.open('GET', url, true);
 
 	xhr.onload = function () {
 		log(`responded with ${xhr.status}`, 'changelog');
+
+		const api_expire = new Date();
 
 		if (xhr.status != 200) {
 			log(
@@ -53,9 +55,6 @@ export function request_changelog(open_after = true) {
 			);
 			api_expire.setHours(api_expire.getHours() + 1);
 		}
-
-		// set expire date
-		const api_expire = new Date();
 
 		if (xhr.status == 200) {
 			if (open_after) {
@@ -69,10 +68,6 @@ export function request_changelog(open_after = true) {
 
 					set_storage('bleh_changelog_expire', api_expire);
 				} catch (e) {
-					deliver_notif(
-						'The changelog is currently unavailable due to errors, try again later.',
-						true,
-					);
 					console.error(e);
 				}
 			}
@@ -96,12 +91,7 @@ function open_changelog(changelog) {
 
 	const window = dialog({
 		id: 'changelog',
-		title: {
-			html: tl(trans.news_from_user, {
-				user:
-					`<a class="mention" href="${root}user/${sponsor_name}">@${sponsor_name}</a>`,
-			}),
-		},
+		title: tl(trans.news),
 		body: html.node`
             <div class="cta first sponsor colourful margin-bottom">
                 <strong>${tl(trans.news_sponsor_cta)}</strong>

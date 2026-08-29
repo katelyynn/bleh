@@ -1,5 +1,6 @@
 [data-modal-type="rabbit"] {
 	padding: var(--card-gap) !important;
+	min-width: 370px;
 
 	.modal-close-button,
 	.bleh-modal-title {
@@ -28,11 +29,7 @@
 	.modern-input {
 		width: 400px;
 		height: 36px;
-		--padding: var(--card-gap) var(--button-sides) var(--card-gap)
-            calc(
-                var(--button-sides-icon) + var(--icon-size) +
-                    var(--icon-gap)
-            );
+		--padding: var(--card-gap) var(--button-sides) var(--card-gap) calc(var(--button-sides-icon) + var(--icon-size) + var(--icon-gap));
 		--radius: var(--card-radius);
 	}
 
@@ -80,6 +77,7 @@
 		mask-image: var(--mask);
 		-webkit-mask-image: var(--mask);
 	}
+
 	.rabbit-hole-item {
 		--button-verts: 8px;
 		--btn-top: var(--button-verts);
@@ -121,7 +119,7 @@
 			display: flex;
 			gap: 8px;
 
-			& > kbd {
+			&>kbd {
 				position: relative;
 				font-family: inherit !important;
 				font-size: inherit;
