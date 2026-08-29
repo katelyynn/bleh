@@ -44,9 +44,6 @@ export function register_rabbit() {
 	const allowed_pages = ['user', 'artist', 'album', 'track', 'tag'];
 
 	document.addEventListener('keydown', (e) => {
-		const cmd = e.getModifierState('Control') || e.getModifierState('Meta');
-		const key = e.key.toLowerCase();
-
 		if (
 			is_keybind_active(
 				useSettings.get('rabbit_primary') as string[],

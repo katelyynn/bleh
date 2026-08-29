@@ -89297,15 +89297,22 @@ var bleh = (() => {
     const is_cmd_down = e5.getModifierState("Control") || e5.getModifierState("Meta");
     const pressed_key = e5.key.toLowerCase();
     let active = 0;
-    for (let key in keybind2) {
-      key = key.toLowerCase();
+    for (const i3 in keybind2) {
+      const key = keybind2[i3].toLowerCase();
       if (key == "\u2318" && is_cmd_down) {
         active++;
       } else if (key == pressed_key) {
         active++;
       }
     }
-    return active = keybind2.length;
+    log("checking..", "keybind", "info", {
+      active,
+      keybind: keybind2,
+      e: e5,
+      is_cmd_down,
+      pressed_key
+    });
+    return active == keybind2.length;
   }
 
   // src/components/dialog/rabbit.tsx
@@ -89329,8 +89336,6 @@ var bleh = (() => {
       "tag"
     ];
     document.addEventListener("keydown", (e5) => {
-      const cmd = e5.getModifierState("Control") || e5.getModifierState("Meta");
-      const key = e5.key.toLowerCase();
       if (is_keybind_active(useSettings.get("rabbit_primary"), e5) && !page.structure.dialogs.hasChildNodes()) {
         e5.preventDefault();
         depth = 0;
@@ -122252,7 +122257,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-08-29T23:32:44.539Z"
+    built_on: "2026-08-29T23:39:31.607Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
