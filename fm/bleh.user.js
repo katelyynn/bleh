@@ -118856,10 +118856,15 @@ var bleh = (() => {
                 l: lang_info[lang].name,
                 u: /* @__PURE__ */ jsx("span", {
                   class: "b",
-                  children: lang_info[lang].by.map((user, i3) => /* @__PURE__ */ jsx("a", {
-                    href: `${root}user/${user}`,
-                    children: user
-                  }, i3)).join(", ")
+                  children: lang_info[lang].by.map((user, i3) => /* @__PURE__ */ jsx(Fragment, {
+                    children: [
+                      /* @__PURE__ */ jsx("a", {
+                        href: `${root}user/${user}`,
+                        children: user
+                      }),
+                      i3 < lang_info[lang].by.length - 1 && ", "
+                    ]
+                  }))
                 })
               }, false)
             })
@@ -122117,7 +122122,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-08-29T22:38:42.412Z"
+    built_on: "2026-08-29T22:56:34.175Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

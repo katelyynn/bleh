@@ -107,13 +107,16 @@ export function bleh_footer() {
 								u: (
 									<span class='b'>
 										{lang_info[lang].by.map((user, i) => (
-											<a
-												href={`${root}user/${user}`}
-												key={i}
-											>
-												{user}
-											</a>
-										)).join(', ')}
+											<>
+												<a href={`${root}user/${user}`}>
+													{user}
+												</a>
+												{i <
+														lang_info[lang].by
+																.length - 1 &&
+													', '}
+											</>
+										))}
 									</span>
 								),
 							}, false)}
