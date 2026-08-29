@@ -873,9 +873,9 @@ function patch_profile_following() {
 	);
 }
 
-function refresh_tracks(button, { quiet = false }) {
-	const panel = page.structure.main.querySelector('#recent-tracks-section');
-	panel.classList.remove('has-refreshed');
+function refresh_tracks(button, { quiet = false }, func?: () => void) {
+	const panel = page.structure.main!.querySelector('#recent-tracks-section');
+	panel!.classList.remove('has-refreshed');
 	button.setAttribute('disabled', '');
 
 	// we need to fetch the tracklist, this function presumes that
@@ -915,10 +915,12 @@ function refresh_tracks(button, { quiet = false }) {
 					body: tl(trans.refreshed),
 				});
 			}
-			panel.classList.add('has-refreshed');
+			panel!.classList.add('has-refreshed');
 
 			panel.querySelector('.chartlist').outerHTML =
 				tracklist_panel.outerHTML;
+
+			if (func) func();
 		});
 }
 
@@ -1090,7 +1092,18 @@ function profile_recents() {
 					icon={icons.refresh}
 					ref={refresh_btn}
 					onClick={() => {
-						refresh_tracks(refresh_btn.current, {});
+						refresh_tracks(refresh_btn.current, {}, () => {
+							streak.current.replaceWith(
+								<ProfileStreak loading ref={streak} />,
+							);
+
+							if (ff('yuzu')) {
+								get_profile_streak(
+									streak,
+									panel as HTMLDivElement,
+								);
+							}
+						});
 					}}
 				>
 					{tl(trans.refresh)}
@@ -1215,7 +1228,7 @@ function profile_recents() {
 	);
 
 	if (ff('yuzu')) {
-		get_profile_streak(streak.current, panel as HTMLDivElement);
+		get_profile_streak(streak, panel as HTMLDivElement);
 	}
 
 	return panel;

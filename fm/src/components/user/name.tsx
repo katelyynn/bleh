@@ -20,6 +20,7 @@ export function GenericUsername({
 
 interface SponsorUsernameProps {
 	cache?: Record<string, profile_cache>;
+	vertical?: boolean;
 	children: ReactNode;
 }
 
@@ -29,6 +30,7 @@ interface SponsorUsernameProps {
  */
 export function SponsorUsername({
 	cache,
+	vertical,
 	children,
 }: SponsorUsernameProps) {
 	if (!children) return;
@@ -46,7 +48,7 @@ export function SponsorUsername({
 	}
 
 	return (
-		<span class='username-combo'>
+		<span class={['username-combo', vertical && 'username-combo-vertical']}>
 			<span class='username-custom'>
 				{cache[name].username}
 			</span>

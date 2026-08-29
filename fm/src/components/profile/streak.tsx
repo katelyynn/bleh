@@ -22,18 +22,18 @@ interface streaks {
 }
 
 export function get_profile_streak(
-	indicator: HTMLButtonElement,
+	indicator: ReturnType<typeof createRef<HTMLButtonElement>>,
 	panel: HTMLDivElement,
 ) {
 	if (!assess_if_streak_exists(panel)) {
 		if (page.name == auth.name) {
-			indicator.replaceWith(
-				<ProfileStreak self={page.name == auth.name} />,
+			indicator.current!.replaceWith(
+				<ProfileStreak self={page.name == auth.name} ref={indicator} />,
 			);
 			return;
 		}
 
-		indicator.remove();
+		indicator.current!.setAttribute('data-hidden', 'true');
 		return;
 	}
 
@@ -58,11 +58,12 @@ export function get_profile_streak(
 
 			console.info('streaks', streaks, tracks);
 
-			indicator.replaceWith(
+			indicator.current!.replaceWith(
 				<ProfileStreak
 					artist={streaks.artist}
 					album={streaks.album}
 					track={streaks.track}
+					ref={indicator}
 				/>,
 			);
 		})
@@ -107,7 +108,7 @@ function calculate_streak(
 			if (track.artist == latest.artist) {
 				streaks.artist ??= {
 					name: latest.artist,
-					count: 0,
+					count: 1,
 				};
 
 				streaks.artist.count++;
@@ -125,7 +126,7 @@ function calculate_streak(
 			) {
 				streaks.album ??= {
 					name: latest.album!,
-					count: 0,
+					count: 1,
 				};
 
 				streaks.album.count++;
@@ -143,7 +144,7 @@ function calculate_streak(
 			) {
 				streaks.track ??= {
 					name: latest.name,
-					count: 0,
+					count: 1,
 				};
 
 				streaks.track.count++;
@@ -303,7 +304,7 @@ export function ProfileStreak({
 										/>
 									</div>
 									<strong class='streak-username'>
-										<SponsorUsername>
+										<SponsorUsername vertical>
 											{page.name}
 										</SponsorUsername>
 									</strong>

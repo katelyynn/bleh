@@ -144,15 +144,16 @@
 
 	--icon-colour: linear-gradient(180deg, oklch(var(--k4)), oklch(var(--b5)));
 	--col: oklch(var(--l3-c));
-	opacity: 0.2;
+	opacity: 0.05;
 	filter:
 		drop-shadow(1px 0 0 var(--col)) drop-shadow(-1px 0 0 var(--col)) drop-shadow(0 1px 0 var(--col)) drop-shadow(0 -1px 0 var(--col));
 }
 
 .streak-avatar {
-	--w: 96px;
+	--w: 90px;
 	width: var(--w);
 	height: var(--w);
+	box-shadow: 0 4px 40px oklch(var(--b6) / 60%);
 	margin: 0 auto;
 	z-index: 5;
 }
