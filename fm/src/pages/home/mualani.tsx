@@ -69,6 +69,7 @@ import { Flag } from '@/components/shared/flag.tsx';
 import { TopAlbum } from '@/components/album/top_album.tsx';
 import { Tabbed } from '@/components/tab/tabbed.tsx';
 import { ProfileStreak } from '@/components/profile/streak.tsx';
+import { Alert } from '@/components/text/alert.tsx';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -859,6 +860,16 @@ export function mualani() {
 							artist={{ count: 50, name: 'Tiffany Day' }}
 							album={{ count: 50, name: 'HALO' }}
 						/>
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section>
+				<DemoGrid>
+					<DemoItem label='Alert'>
+						<Alert margin={false}>test alert</Alert>
+						<Alert type='danger' margin={false}>test alert</Alert>
+						<Alert type='error' margin={false}>test alert</Alert>
+						<Alert type='success' margin={false}>test alert</Alert>
 					</DemoItem>
 				</DemoGrid>
 			</section>

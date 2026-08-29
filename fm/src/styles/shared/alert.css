@@ -4,14 +4,14 @@
 	font-size: 13px;
 	line-height: var(--line-height);
 	margin-top: var(--card-gap);
-	padding: 3px 10px 3px calc(10px + var(--icon-size) + var(--icon-gap)) !important;
+	padding: 4px 10px 4px calc(10px + var(--icon-size) + var(--icon-gap)) !important;
 	background: var(--background, oklch(var(--k4) / 15%)) !important;
 	color: oklch(var(--l3-c)) !important;
 	font-weight: var(--font-weight-medium) !important;
 	text-align: left;
 	cursor: default;
 	position: relative;
-	--icon-size: 16px;
+	--icon-size: 14px;
 	--icon-gap: 2px;
 	--left: 8px;
 	--show-icon: block;
@@ -36,6 +36,11 @@
 	&[data-hidden="true"] {
 		display: none;
 	}
+}
+
+.alert-error,
+.alert-success {
+	--icon-size: 12px !important;
 }
 
 .async-content-error-message {
@@ -100,13 +105,13 @@
 	}
 }
 
+.alert-danger,
 .alert-warning {
 	--hue-over: 50;
 	--sat-over: 1.5;
 	--lit-over: 1;
 }
 
-.alert-danger,
 .alert-error,
 .async-content-error-message,
 .event-status--cancelled {
