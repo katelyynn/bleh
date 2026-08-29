@@ -217,7 +217,6 @@
 		form {
 			display: flex !important;
 			flex-direction: column;
-			gap: var(--card-gap);
 			width: 100%;
 
 			&.full-width {
