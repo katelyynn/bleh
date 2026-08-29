@@ -6,6 +6,7 @@ import { dialog } from '@/components/dialog/dialog.tsx';
 import { api_key, page } from '@/build/page.ts';
 import { SponsorUsername } from '@/components/user/name.tsx';
 import { avatar } from '@/components/shared/avatar.tsx';
+import { createRef } from 'jsx-dom';
 
 interface streaks {
 	artist?: StreakItem;
@@ -13,7 +14,7 @@ interface streaks {
 	track?: StreakItem;
 }
 
-export function get_profile_streak() {
+export function get_profile_streak(indicator: HTMLButtonElement) {
 	const url =
 		`https://ws.audioscrobbler.com/2.0/?method=user.getRecentTracks&user=${page.name}&api_key=${api_key}&format=json&limit=100`;
 
@@ -92,6 +93,14 @@ export function get_profile_streak() {
 			}
 
 			console.info('streaks', streaks, tracks, latest);
+
+			indicator.replaceWith(
+				<ProfileStreak
+					artist={streaks.artist}
+					album={streaks.album}
+					track={streaks.track}
+				/>,
+			);
 		})
 		.catch(() => {
 			return;
@@ -139,12 +148,14 @@ interface StreakItem {
 }
 
 interface ProfileStreakProps {
+	ref?: ReturnType<typeof createRef<HTMLButtonElement>>;
 	artist?: StreakItem;
 	album?: StreakItem;
 	track?: StreakItem;
 }
 
 export function ProfileStreak({
+	ref,
 	artist,
 	album,
 	track,
@@ -164,7 +175,7 @@ export function ProfileStreak({
 		: undefined;
 	if (!val) {
 		const elem = (
-			<Button className='profile-streak profile-streak-empty'>
+			<Button className='profile-streak profile-streak-empty' ref={ref}>
 				<Icon name={icons.streak} identifier='streak-icon' />
 				<span class='streak-value'>
 					{tl(trans.streak, {
@@ -186,6 +197,7 @@ export function ProfileStreak({
 		<Button
 			className='profile-streak'
 			colourful
+			ref={ref}
 			onClick={() => {
 				dialog({
 					id: 'streak',

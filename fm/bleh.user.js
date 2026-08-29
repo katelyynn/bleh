@@ -96077,7 +96077,7 @@ var bleh = (() => {
   }
 
   // src/components/profile/streak.tsx
-  function get_profile_streak() {
+  function get_profile_streak(indicator) {
     const url = `https://ws.audioscrobbler.com/2.0/?method=user.getRecentTracks&user=${page.name}&api_key=${api_key}&format=json&limit=100`;
     const streaks = {};
     fetch(url).then((res) => {
@@ -96133,6 +96133,11 @@ var bleh = (() => {
         }
       }
       console.info("streaks", streaks, tracks, latest);
+      indicator.replaceWith(/* @__PURE__ */ jsx(ProfileStreak, {
+        artist: streaks.artist,
+        album: streaks.album,
+        track: streaks.track
+      }));
     }).catch(() => {
       return;
     });
@@ -96147,12 +96152,13 @@ var bleh = (() => {
       image: track.image[0]["#text"]
     };
   }
-  function ProfileStreak({ artist, album, track }) {
+  function ProfileStreak({ ref: ref2, artist, album, track }) {
     const highest = Math.max(artist?.count || 0, album?.count || 0, track?.count || 0);
     const val = artist?.count == highest ? artist : album?.count == highest ? album : track?.count ? track : void 0;
     if (!val) {
       const elem2 = /* @__PURE__ */ jsx(Button, {
         className: "profile-streak profile-streak-empty",
+        ref: ref2,
         children: [
           /* @__PURE__ */ jsx(Icon, {
             name: icons.streak,
@@ -96177,6 +96183,7 @@ var bleh = (() => {
     const elem = /* @__PURE__ */ jsx(Button, {
       className: "profile-streak",
       colourful: true,
+      ref: ref2,
       onClick: () => {
         dialog({
           id: "streak",
@@ -96875,6 +96882,7 @@ var bleh = (() => {
     const submit_btn = createRef();
     const settings_btn = createRef();
     const refresh_btn = createRef();
+    const streak = createRef();
     const modal_id = "profile_settings";
     panel.insertBefore(/* @__PURE__ */ jsx(PanelTop, {
       children: [
@@ -96884,7 +96892,9 @@ var bleh = (() => {
         }),
         page.name == auth.name && ff("yuzu") && /* @__PURE__ */ jsx(ViewButtons, {
           accompany: true,
-          children: /* @__PURE__ */ jsx(ProfileStreak, {})
+          children: /* @__PURE__ */ jsx(ProfileStreak, {
+            ref: streak
+          })
         }),
         /* @__PURE__ */ jsx(ViewButtons, {
           children: [
@@ -97030,7 +97040,7 @@ var bleh = (() => {
       })
     }));
     if (ff("yuzu")) {
-      get_profile_streak();
+      get_profile_streak(streak.current);
     }
     return panel;
   }
@@ -121924,7 +121934,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-08-29T15:32:01.693Z"
+    built_on: "2026-08-29T15:34:30.348Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

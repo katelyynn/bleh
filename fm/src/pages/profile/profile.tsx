@@ -1047,6 +1047,7 @@ function profile_recents() {
 	const submit_btn = createRef();
 	const settings_btn = createRef();
 	const refresh_btn = createRef();
+	const streak = createRef();
 
 	const modal_id = 'profile_settings';
 
@@ -1057,7 +1058,7 @@ function profile_recents() {
 			</PanelHead>
 			{(page.name == auth.name && ff('yuzu')) && (
 				<ViewButtons accompany>
-					<ProfileStreak />
+					<ProfileStreak ref={streak} />
 				</ViewButtons>
 			)}
 			<ViewButtons>
@@ -1214,7 +1215,7 @@ function profile_recents() {
 	);
 
 	if (ff('yuzu')) {
-		get_profile_streak();
+		get_profile_streak(streak.current);
 	}
 
 	return panel;
