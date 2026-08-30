@@ -293,7 +293,7 @@ export function MarkdownField({
 
 	const overlay = createRef();
 
-	const action_lookup: Record<string, Action>;
+	const action_lookup: Record<string, Action> = {};
 
 	const wrap = (
 		<div class={['markdown-field', shoutbox && 'mini']}>
