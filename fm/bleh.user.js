@@ -61646,15 +61646,17 @@ var bleh = (() => {
       }
       overlay.current.innerHTML = val2;
     }
-    const interval = setInterval(() => {
-      if (!wrap.isConnected) {
-        clearInterval(interval);
-        return;
-      }
-      if (val == elem.value) return;
-      val = elem.value;
-      update();
-    }, 150);
+    if (shoutbox) {
+      const interval = setInterval(() => {
+        if (!wrap.isConnected) {
+          clearInterval(interval);
+          return;
+        }
+        if (val == elem.value) return;
+        val = elem.value;
+        update();
+      }, 50);
+    }
     update();
     return wrap;
   }
@@ -122723,7 +122725,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-08-30T19:20:24.178Z"
+    built_on: "2026-08-30T20:04:56.095Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

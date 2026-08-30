@@ -554,17 +554,19 @@ export function MarkdownField({
 		overlay.current.innerHTML = val;
 	}
 
-	const interval = setInterval(() => {
-		if (!wrap.isConnected) {
-			clearInterval(interval);
-			return;
-		}
+	if (shoutbox) {
+		const interval = setInterval(() => {
+			if (!wrap.isConnected) {
+				clearInterval(interval);
+				return;
+			}
 
-		if (val == elem.value) return;
+			if (val == elem.value) return;
 
-		val = elem.value;
-		update();
-	}, 150);
+			val = elem.value;
+			update();
+		}, 50);
+	}
 
 	update();
 
