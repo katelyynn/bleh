@@ -8496,7 +8496,7 @@ export const trans = {
         de: '{s}{c} unterstützen{/s}',
         ru: '{s}{c} замечательных людей{/s}', // wonderful people -tech
         es: '{s}{c} patrocinando{/s}',
-        it: '{s}{c} sostenendo{/s}'
+        it: '{s}{c} sostenendo{/s}',
         pl: '{s}{c} wspierających{/s}',
     },
     love_lower: {
