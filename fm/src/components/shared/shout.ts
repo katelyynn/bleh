@@ -277,6 +277,18 @@ export function patch_shouts() {
             if (use_md) preview.setAttribute('disabled', val.length <= 0);
         }, {}, '', 'body', null, null, placeholder, legacy_textarea.maxLength, true, !is_reply);
 
+        // lfm clears form.find('.js-shout-input') after sending a shout
+		// we don't set that class though so we add it here 
+        textarea.editor.classList.add('js-shout-input');
+
+		// the change event is jquery only (not for the DOM -_-)
+		// so instead we have to watch the shoutbox list and re-apply the value whenever a new shout is posted
+        const shoutList = shout_form.closest('.js-shouts-container')?.querySelector('.js-shout-list');
+        if (shoutList) {
+            const observer = new MutationObserver(() => { textarea.value = textarea.value; });
+            observer.observe(shoutList, { childList: true });
+        }
+
         legacy_textarea.replaceWith(textarea);
 
         let chars;

@@ -1411,6 +1411,8 @@ export function markdown_field(func, options, value, name, cols, rows, placehold
         }
     });
 
+    field.editor = md_editor;
+
     function render_overlay(val = textarea.value) {
         val = val.replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
