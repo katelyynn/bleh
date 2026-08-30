@@ -45,6 +45,7 @@ import {
 	Keybind,
 	KeybindList,
 } from '@/components/settings/clickables/keybind.tsx';
+import { MarkdownField } from '@/components/markdown/field.tsx';
 
 type ShoutElement = HTMLDivElement & {
 	translated: boolean;
@@ -341,42 +342,38 @@ export function patch_shouts() {
 		const chars = createRef();
 		const preview = createRef();
 
-		const textarea = markdown_field(
-			(val) => {
-				chars.current.textContent = tl(trans.value_characters_max, {
-					v: `${val.length}/1000`,
-				});
-				chars.current.setAttribute(
-					'data-exceeded',
-					`${val.length >= 1000}`,
-				);
-
-				if (use_md) {
-					preview.current.setAttribute(
-						'disabled',
-						`${val.length <= 0}`,
-					);
-				}
-			},
-			{},
-			'',
-			'body',
-			null,
-			null,
-			placeholder,
-			legacy_textarea.maxLength,
-			true,
-			!is_reply,
+		legacy_textarea.parentElement!.appendChild(
+			<MarkdownField
+				elem={legacy_textarea as HTMLTextAreaElement}
+				shoutbox
+			/>,
 		);
 
-		legacy_textarea.replaceWith(textarea);
+		legacy_textarea.addEventListener('input', () => {
+			const val = legacy_textarea.value;
+
+			chars.current.textContent = tl(trans.value_characters_max, {
+				v: `${val.length}/1000`,
+			});
+			chars.current.setAttribute(
+				'data-exceeded',
+				`${val.length >= 1000}`,
+			);
+
+			if (use_md) {
+				preview.current.setAttribute(
+					'disabled',
+					`${val.length <= 0}`,
+				);
+			}
+		});
 
 		help_text.replaceChildren(
 			<>
 				{use_md && (
 					<div
 						class='tip preview'
-						onClick={() => markdown_preview(textarea.value)}
+						onClick={() => markdown_preview(legacy_textarea.value)}
 						ref={preview}
 						disabled
 					>

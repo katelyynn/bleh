@@ -61239,6 +61239,446 @@ var bleh = (() => {
     });
   }
 
+  // src/components/markdown/field.tsx
+  function MarkdownField({ elem, focus, shoutbox, options = {} }) {
+    elem.classList.add("modern-input");
+    const use_md = shoutbox ? useSettings.get("shout_markdown") : useSettings.get("bio_markdown");
+    options = {
+      allow_headers: false,
+      starting_header: 3,
+      allow_links: true,
+      line_breaks: true,
+      allow_banners: false,
+      in_dialog: false,
+      allow_icons: true,
+      allow_hue: false,
+      allow_fonts: false,
+      allow_socials: false,
+      allow_lists: false,
+      allow_alignment: false,
+      ...options
+    };
+    const action_list = [
+      [
+        {
+          type: "header",
+          name: tl2(trans.header),
+          start: "# ",
+          end: "",
+          hide: !options.allow_headers
+        },
+        {
+          type: "bold",
+          name: tl2(trans.bold),
+          start: "**"
+        },
+        {
+          type: "italic",
+          name: tl2(trans.italic),
+          start: "*"
+        },
+        {
+          type: "strike",
+          name: tl2(trans.strikethrough),
+          start: "~~"
+        },
+        {
+          type: "underline",
+          name: tl2(trans.underline),
+          start: "__"
+        }
+      ],
+      [
+        {
+          type: "link",
+          name: tl2(trans.link),
+          func: () => {
+            return new Promise((resolve2) => {
+              let link;
+              let alt;
+              dialog({
+                id: "link",
+                title: tl2(trans.create_link),
+                body: html.node`
+                                <div class="new-scrobble-form">
+                                    <p class="generic-label">${tl2(trans.link)}</p>
+                                    ${link = input({
+                  type: "text",
+                  placeholder: tl2(trans.example, {
+                    v: "https://katelyn.moe"
+                  }),
+                  func: () => {
+                    submit_link();
+                  },
+                  focus: true
+                })}
+                                    <p class="generic-label">${tl2(trans.text)}</p>
+                                    ${alt = input({
+                  type: "text",
+                  func: () => {
+                    submit_link();
+                  }
+                })}
+                                </div>
+                                <div class="modal-footer">
+                                <button class="see-more cancel left-icon" onclick=${() => {
+                  dialog_rm({
+                    id: "link"
+                  });
+                  resolve2(null);
+                }}>
+                                    ${tl2(trans.cancel)}
+                                </button>
+                                <div class="fill" />
+                                <button class="btn primary continue" onclick=${() => {
+                  submit_link();
+                }}>
+                                    ${tl2(trans.finish)}
+                                </button>
+                                </div>
+                            `
+              });
+              function submit_link() {
+                let alt_text = alt.value;
+                let link_text = link.value;
+                if (!link_text) return;
+                dialog_rm({
+                  id: "link"
+                });
+                let output;
+                if (alt_text != link_text && alt_text) {
+                  output = `[${alt_text}](${link_text})`;
+                } else {
+                  output = link_text;
+                }
+                resolve2(output);
+              }
+            });
+          },
+          hide: !options.allow_links
+        },
+        {
+          type: "mention",
+          name: tl2(trans.mention_user),
+          start: "@",
+          end: "",
+          hide: true
+        },
+        {
+          type: "quote",
+          name: tl2(trans.quote),
+          start: "> ",
+          end: "",
+          hide: true
+        },
+        {
+          type: "code",
+          name: tl2(trans.code_block),
+          start: "`",
+          end: "`"
+        },
+        {
+          type: "image",
+          name: tl2(trans.image),
+          func: () => {
+            return new Promise((resolve2) => {
+              let link;
+              let alt;
+              dialog({
+                id: "link",
+                title: tl2(trans.attach_image),
+                body: html.node`
+                                <div class="new-scrobble-form">
+                                    <p class="generic-label">${tl2(trans.link)}</p>
+                                    ${link = input({
+                  type: "text",
+                  placeholder: tl2(trans.example, {
+                    v: "https://link.to/an_image_here"
+                  }),
+                  func: () => {
+                    submit_link();
+                  },
+                  focus: true
+                })}
+                                    <p class="generic-label">${tl2(trans.text)}</p>
+                                    ${alt = input({
+                  type: "text",
+                  func: () => {
+                    submit_link();
+                  }
+                })}
+                                </div>
+                                <div class="modal-footer">
+                                <button class="see-more cancel left-icon" onclick=${() => {
+                  dialog_rm({
+                    id: "link"
+                  });
+                  resolve2(null);
+                }}>
+                                    ${tl2(trans.cancel)}
+                                </button>
+                                <div class="fill" />
+                                <button class="btn primary continue" onclick=${() => {
+                  submit_link();
+                }}>
+                                    ${tl2(trans.finish)}
+                                </button>
+                                </div>
+                            `
+              });
+              function submit_link() {
+                let alt_text = alt.value;
+                let link_text = link.value;
+                if (!link_text) return;
+                dialog_rm({
+                  id: "link"
+                });
+                let output;
+                if (alt_text != link_text && alt_text) {
+                  output = `![${alt_text}](${link_text})`;
+                } else {
+                  output = `![](${link_text})`;
+                }
+                resolve2(output);
+              }
+            });
+          },
+          hide: !options.allow_links
+        }
+      ],
+      [
+        {
+          type: "ul",
+          name: tl2(trans.list),
+          start: "- ",
+          end: "",
+          hide: !options.allow_lists
+        },
+        {
+          type: "ol",
+          name: tl2(trans.numbered_list),
+          start: "1. ",
+          end: "",
+          hide: !options.allow_lists
+        }
+      ],
+      [
+        {
+          type: "align-left",
+          name: tl2(trans.left_align),
+          start: "[left]",
+          end: "[/left]",
+          hide: !options.allow_alignment
+        },
+        {
+          type: "align-center",
+          name: tl2(trans.center_align),
+          start: "[center]",
+          end: "[/center]",
+          hide: !options.allow_alignment
+        },
+        {
+          type: "align-right",
+          name: tl2(trans.right_align),
+          start: "[right]",
+          end: "[/right]",
+          hide: !options.allow_alignment
+        }
+      ]
+    ];
+    const overlay = createRef();
+    const action_lookup = {};
+    const wrap = /* @__PURE__ */ jsx("div", {
+      class: [
+        "markdown-field",
+        shoutbox && "mini"
+      ],
+      children: [
+        use_md && /* @__PURE__ */ jsx("div", {
+          class: "markdown-actions",
+          children: action_list.map((group, index3) => {
+            const group_elem = /* @__PURE__ */ jsx("div", {
+              class: "group",
+              children: group.map((item) => {
+                const button2 = /* @__PURE__ */ jsx(MarkdownAction, {
+                  type: item.type,
+                  name: item.name,
+                  hide: item.hide,
+                  onClick: () => {
+                    const sel_start = elem.selectionStart;
+                    const sel_end = elem.selectionEnd;
+                    const val = elem.value;
+                    if (item.func) {
+                      item.func().then((replacement) => {
+                        if (!replacement) {
+                          return;
+                        }
+                        elem.value = val.slice(0, sel_start) + replacement + val.slice(sel_end);
+                        elem.focus();
+                        elem.setSelectionRange(sel_start, sel_start + replacement.length);
+                        update();
+                      });
+                      return;
+                    }
+                    item.end ??= item.start;
+                    if (item.start != null && item.end != null) {
+                      const selected = val.slice(sel_start, sel_end);
+                      let replacement;
+                      if (selected.startsWith(item.start) && selected.endsWith(item.end)) {
+                        let replace_end = -1 * item.end.length;
+                        if (replace_end != 0) {
+                          replacement = selected.slice(item.start.length, replace_end);
+                        } else {
+                          replacement = selected.slice(item.start.length);
+                        }
+                      } else {
+                        replacement = `${item.start}${selected}${item.end}`;
+                      }
+                      elem.value = val.slice(0, sel_start) + replacement + val.slice(sel_end);
+                      elem.focus();
+                      elem.setSelectionRange(sel_start, sel_start + replacement.length);
+                      update();
+                    }
+                  }
+                });
+                action_lookup[item.type] = {
+                  ...item,
+                  elem: button2
+                };
+                return button2;
+              })
+            });
+            if (group_elem.childElementCount == 0) return;
+            return /* @__PURE__ */ jsx(Fragment, {
+              children: [
+                group_elem,
+                index3 < action_list.length - 1 && /* @__PURE__ */ jsx("div", {
+                  class: "group-sep"
+                })
+              ]
+            });
+          })
+        }),
+        /* @__PURE__ */ jsx("div", {
+          class: "markdown-field-text",
+          children: [
+            /* @__PURE__ */ jsx("div", {
+              class: "markdown-field-overlay",
+              ref: overlay
+            }),
+            /* @__PURE__ */ jsx("div", {
+              class: [
+                "content-form",
+                "input-container",
+                "textarea"
+              ],
+              children: elem
+            })
+          ]
+        })
+      ]
+    });
+    Object.defineProperty(wrap, "editor", {
+      get() {
+        return elem;
+      }
+    });
+    Object.defineProperty(wrap, "value", {
+      get() {
+        return elem.value;
+      },
+      set(v) {
+        elem.value = v;
+        update();
+      }
+    });
+    elem.addEventListener("scroll", () => {
+      overlay.current.scrollTop = elem.scrollTop;
+    });
+    elem.addEventListener("input", () => {
+      update();
+    });
+    setTimeout(() => {
+      if (focus) elem.focus();
+    }, 0);
+    function update() {
+      let val = elem.value.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+      if (use_md) {
+        val = val.replace(/\[(left|center|right|links)\]/gi, (text4) => {
+          if (!options.allow_alignment) return text4;
+          return `<span class="md-tag-wrap">${text4}</span>`;
+        });
+        val = val.replace(/\[\/(left|center|right|links)\]/gi, (text4) => {
+          if (!options.allow_alignment) return text4;
+          return `<span class="md-tag-wrap">${text4}</span>`;
+        });
+        val = val.replace(/\[([a-z]+)=([^\]]+)\]/gi, (match3, tag, val2) => {
+          if (![
+            "status",
+            "name",
+            "font",
+            "accent",
+            "banner"
+          ].includes(tag)) return match3;
+          if (!options.allow_hue && tag == "accent") return match3;
+          if (!options.allow_alignment) return match3;
+          if (tag == "accent") {
+            const split = val2.split(",");
+            if (split.length == 3 && parseFloat(split[0]) >= 0 && parseFloat(split[1]) >= 0 && parseFloat(split[2]) >= 0) {
+              return `<span class="md-tag">[${tag}=<span class="md-val md-accent colourful" style="--hue-over: ${parseFloat(split[0])}; --sat-over: ${parseFloat(split[1])}; --lit-over: ${parseFloat(split[2])}">${val2}</span>]</span>`;
+            } else {
+              return match3;
+            }
+          }
+          return `<span class="md-tag">[${tag}=<span class="md-val">${val2}</span>]</span>`;
+        });
+        val = val.replace(/!\[([^\]]*)\]\(([^)]+)\)/gi, (match3, label, url) => {
+          if (!options.allow_links) return match3;
+          return `<span class="md-link">![<span class="md-label">${label}</span>](<span class="md-url">${url}</span>)</span>`;
+        });
+        val = val.replace(/\[([^\]]+)\]\(([^)]+)\)/gi, (match3, label, url) => {
+          if (!options.allow_links) return match3;
+          return `<span class="md-link">[<span class="md-label">${label}</span>](<span class="md-url">${url}</span>)</span>`;
+        });
+      }
+      overlay.current.innerHTML = val;
+    }
+    update();
+    return wrap;
+  }
+  function MarkdownAction({ type, name, onClick, hide: hide3 }) {
+    if (hide3) return;
+    let active = false;
+    const button2 = /* @__PURE__ */ jsx(Button, {
+      chibi: true,
+      className: "markdown-action",
+      onClick,
+      children: [
+        /* @__PURE__ */ jsx(Icon, {
+          name: type
+        }),
+        name
+      ]
+    });
+    Object.defineProperty(button2, "active", {
+      get() {
+        return active;
+      },
+      set(v) {
+        active = v;
+        update();
+      }
+    });
+    update();
+    function update() {
+      button2.setAttribute("aria-checked", String(active));
+    }
+    hover_tooltip(button2, /* @__PURE__ */ jsx(Tooltip, {
+      children: name
+    }));
+    return button2;
+  }
+
   // src/components/shared/shout.tsx
   function patch_shouts() {
     if (!page.structure.main) return;
@@ -61443,7 +61883,12 @@ var bleh = (() => {
       }
       const chars2 = createRef();
       const preview = createRef();
-      const textarea = markdown_field((val) => {
+      legacy_textarea.parentElement.appendChild(/* @__PURE__ */ jsx(MarkdownField, {
+        elem: legacy_textarea,
+        shoutbox: true
+      }));
+      legacy_textarea.addEventListener("input", () => {
+        const val = legacy_textarea.value;
         chars2.current.textContent = tl2(trans.value_characters_max, {
           v: `${val.length}/1000`
         });
@@ -61451,13 +61896,12 @@ var bleh = (() => {
         if (use_md) {
           preview.current.setAttribute("disabled", `${val.length <= 0}`);
         }
-      }, {}, "", "body", null, null, placeholder, legacy_textarea.maxLength, true, !is_reply);
-      legacy_textarea.replaceWith(textarea);
+      });
       help_text.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
         children: [
           use_md && /* @__PURE__ */ jsx("div", {
             class: "tip preview",
-            onClick: () => markdown_preview(textarea.value),
+            onClick: () => markdown_preview(legacy_textarea.value),
             ref: preview,
             disabled: true,
             children: tl2(trans.preview)
@@ -119390,446 +119834,6 @@ var bleh = (() => {
     });
   }
 
-  // src/components/markdown/field.tsx
-  function MarkdownField({ elem, focus, shoutbox, options = {} }) {
-    elem.classList.add("modern-input");
-    const use_md = shoutbox ? useSettings.get("shout_markdown") : useSettings.get("bio_markdown");
-    options = {
-      allow_headers: false,
-      starting_header: 3,
-      allow_links: true,
-      line_breaks: true,
-      allow_banners: false,
-      in_dialog: false,
-      allow_icons: true,
-      allow_hue: false,
-      allow_fonts: false,
-      allow_socials: false,
-      allow_lists: false,
-      allow_alignment: false,
-      ...options
-    };
-    const action_list = [
-      [
-        {
-          type: "header",
-          name: tl2(trans.header),
-          start: "# ",
-          end: "",
-          hide: !options.allow_headers
-        },
-        {
-          type: "bold",
-          name: tl2(trans.bold),
-          start: "**"
-        },
-        {
-          type: "italic",
-          name: tl2(trans.italic),
-          start: "*"
-        },
-        {
-          type: "strike",
-          name: tl2(trans.strikethrough),
-          start: "~~"
-        },
-        {
-          type: "underline",
-          name: tl2(trans.underline),
-          start: "__"
-        }
-      ],
-      [
-        {
-          type: "link",
-          name: tl2(trans.link),
-          func: () => {
-            return new Promise((resolve2) => {
-              let link;
-              let alt;
-              dialog({
-                id: "link",
-                title: tl2(trans.create_link),
-                body: html.node`
-                                <div class="new-scrobble-form">
-                                    <p class="generic-label">${tl2(trans.link)}</p>
-                                    ${link = input({
-                  type: "text",
-                  placeholder: tl2(trans.example, {
-                    v: "https://katelyn.moe"
-                  }),
-                  func: () => {
-                    submit_link();
-                  },
-                  focus: true
-                })}
-                                    <p class="generic-label">${tl2(trans.text)}</p>
-                                    ${alt = input({
-                  type: "text",
-                  func: () => {
-                    submit_link();
-                  }
-                })}
-                                </div>
-                                <div class="modal-footer">
-                                <button class="see-more cancel left-icon" onclick=${() => {
-                  dialog_rm({
-                    id: "link"
-                  });
-                  resolve2(null);
-                }}>
-                                    ${tl2(trans.cancel)}
-                                </button>
-                                <div class="fill" />
-                                <button class="btn primary continue" onclick=${() => {
-                  submit_link();
-                }}>
-                                    ${tl2(trans.finish)}
-                                </button>
-                                </div>
-                            `
-              });
-              function submit_link() {
-                let alt_text = alt.value;
-                let link_text = link.value;
-                if (!link_text) return;
-                dialog_rm({
-                  id: "link"
-                });
-                let output;
-                if (alt_text != link_text && alt_text) {
-                  output = `[${alt_text}](${link_text})`;
-                } else {
-                  output = link_text;
-                }
-                resolve2(output);
-              }
-            });
-          },
-          hide: !options.allow_links
-        },
-        {
-          type: "mention",
-          name: tl2(trans.mention_user),
-          start: "@",
-          end: "",
-          hide: true
-        },
-        {
-          type: "quote",
-          name: tl2(trans.quote),
-          start: "> ",
-          end: "",
-          hide: true
-        },
-        {
-          type: "code",
-          name: tl2(trans.code_block),
-          start: "`",
-          end: "`"
-        },
-        {
-          type: "image",
-          name: tl2(trans.image),
-          func: () => {
-            return new Promise((resolve2) => {
-              let link;
-              let alt;
-              dialog({
-                id: "link",
-                title: tl2(trans.attach_image),
-                body: html.node`
-                                <div class="new-scrobble-form">
-                                    <p class="generic-label">${tl2(trans.link)}</p>
-                                    ${link = input({
-                  type: "text",
-                  placeholder: tl2(trans.example, {
-                    v: "https://link.to/an_image_here"
-                  }),
-                  func: () => {
-                    submit_link();
-                  },
-                  focus: true
-                })}
-                                    <p class="generic-label">${tl2(trans.text)}</p>
-                                    ${alt = input({
-                  type: "text",
-                  func: () => {
-                    submit_link();
-                  }
-                })}
-                                </div>
-                                <div class="modal-footer">
-                                <button class="see-more cancel left-icon" onclick=${() => {
-                  dialog_rm({
-                    id: "link"
-                  });
-                  resolve2(null);
-                }}>
-                                    ${tl2(trans.cancel)}
-                                </button>
-                                <div class="fill" />
-                                <button class="btn primary continue" onclick=${() => {
-                  submit_link();
-                }}>
-                                    ${tl2(trans.finish)}
-                                </button>
-                                </div>
-                            `
-              });
-              function submit_link() {
-                let alt_text = alt.value;
-                let link_text = link.value;
-                if (!link_text) return;
-                dialog_rm({
-                  id: "link"
-                });
-                let output;
-                if (alt_text != link_text && alt_text) {
-                  output = `![${alt_text}](${link_text})`;
-                } else {
-                  output = `![](${link_text})`;
-                }
-                resolve2(output);
-              }
-            });
-          },
-          hide: !options.allow_links
-        }
-      ],
-      [
-        {
-          type: "ul",
-          name: tl2(trans.list),
-          start: "- ",
-          end: "",
-          hide: !options.allow_lists
-        },
-        {
-          type: "ol",
-          name: tl2(trans.numbered_list),
-          start: "1. ",
-          end: "",
-          hide: !options.allow_lists
-        }
-      ],
-      [
-        {
-          type: "align-left",
-          name: tl2(trans.left_align),
-          start: "[left]",
-          end: "[/left]",
-          hide: !options.allow_alignment
-        },
-        {
-          type: "align-center",
-          name: tl2(trans.center_align),
-          start: "[center]",
-          end: "[/center]",
-          hide: !options.allow_alignment
-        },
-        {
-          type: "align-right",
-          name: tl2(trans.right_align),
-          start: "[right]",
-          end: "[/right]",
-          hide: !options.allow_alignment
-        }
-      ]
-    ];
-    const overlay = createRef();
-    const action_lookup = {};
-    const wrap = /* @__PURE__ */ jsx("div", {
-      class: [
-        "markdown-field",
-        shoutbox && "mini"
-      ],
-      children: [
-        use_md && /* @__PURE__ */ jsx("div", {
-          class: "markdown-actions",
-          children: action_list.map((group, index3) => {
-            const group_elem = /* @__PURE__ */ jsx("div", {
-              class: "group",
-              children: group.map((item) => {
-                const button2 = /* @__PURE__ */ jsx(MarkdownAction, {
-                  type: item.type,
-                  name: item.name,
-                  hide: item.hide,
-                  onClick: () => {
-                    const sel_start = elem.selectionStart;
-                    const sel_end = elem.selectionEnd;
-                    const val = elem.value;
-                    if (item.func) {
-                      item.func().then((replacement) => {
-                        if (!replacement) {
-                          return;
-                        }
-                        elem.value = val.slice(0, sel_start) + replacement + val.slice(sel_end);
-                        elem.focus();
-                        elem.setSelectionRange(sel_start, sel_start + replacement.length);
-                        update();
-                      });
-                      return;
-                    }
-                    item.end ??= item.start;
-                    if (item.start != null && item.end != null) {
-                      const selected = val.slice(sel_start, sel_end);
-                      let replacement;
-                      if (selected.startsWith(item.start) && selected.endsWith(item.end)) {
-                        let replace_end = -1 * item.end.length;
-                        if (replace_end != 0) {
-                          replacement = selected.slice(item.start.length, replace_end);
-                        } else {
-                          replacement = selected.slice(item.start.length);
-                        }
-                      } else {
-                        replacement = `${item.start}${selected}${item.end}`;
-                      }
-                      elem.value = val.slice(0, sel_start) + replacement + val.slice(sel_end);
-                      elem.focus();
-                      elem.setSelectionRange(sel_start, sel_start + replacement.length);
-                      update();
-                    }
-                  }
-                });
-                action_lookup[item.type] = {
-                  ...item,
-                  elem: button2
-                };
-                return button2;
-              })
-            });
-            if (group_elem.childElementCount == 0) return;
-            return /* @__PURE__ */ jsx(Fragment, {
-              children: [
-                group_elem,
-                index3 < action_list.length - 1 && /* @__PURE__ */ jsx("div", {
-                  class: "group-sep"
-                })
-              ]
-            });
-          })
-        }),
-        /* @__PURE__ */ jsx("div", {
-          class: "markdown-field-text",
-          children: [
-            /* @__PURE__ */ jsx("div", {
-              class: "markdown-field-overlay",
-              ref: overlay
-            }),
-            /* @__PURE__ */ jsx("div", {
-              class: [
-                "content-form",
-                "input-container",
-                "textarea"
-              ],
-              children: elem
-            })
-          ]
-        })
-      ]
-    });
-    Object.defineProperty(wrap, "editor", {
-      get() {
-        return elem;
-      }
-    });
-    Object.defineProperty(wrap, "value", {
-      get() {
-        return elem.value;
-      },
-      set(v) {
-        elem.value = v;
-        update();
-      }
-    });
-    elem.addEventListener("scroll", () => {
-      overlay.current.scrollTop = elem.scrollTop;
-    });
-    elem.addEventListener("input", () => {
-      update();
-    });
-    setTimeout(() => {
-      if (focus) elem.focus();
-    }, 0);
-    function update() {
-      let val = elem.value.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-      if (use_md) {
-        val = val.replace(/\[(left|center|right|links)\]/gi, (text4) => {
-          if (!options.allow_alignment) return text4;
-          return `<span class="md-tag-wrap">${text4}</span>`;
-        });
-        val = val.replace(/\[\/(left|center|right|links)\]/gi, (text4) => {
-          if (!options.allow_alignment) return text4;
-          return `<span class="md-tag-wrap">${text4}</span>`;
-        });
-        val = val.replace(/\[([a-z]+)=([^\]]+)\]/gi, (match3, tag, val2) => {
-          if (![
-            "status",
-            "name",
-            "font",
-            "accent",
-            "banner"
-          ].includes(tag)) return match3;
-          if (!options.allow_hue && tag == "accent") return match3;
-          if (!options.allow_alignment) return match3;
-          if (tag == "accent") {
-            const split = val2.split(",");
-            if (split.length == 3 && parseFloat(split[0]) >= 0 && parseFloat(split[1]) >= 0 && parseFloat(split[2]) >= 0) {
-              return `<span class="md-tag">[${tag}=<span class="md-val md-accent colourful" style="--hue-over: ${parseFloat(split[0])}; --sat-over: ${parseFloat(split[1])}; --lit-over: ${parseFloat(split[2])}">${val2}</span>]</span>`;
-            } else {
-              return match3;
-            }
-          }
-          return `<span class="md-tag">[${tag}=<span class="md-val">${val2}</span>]</span>`;
-        });
-        val = val.replace(/!\[([^\]]*)\]\(([^)]+)\)/gi, (match3, label, url) => {
-          if (!options.allow_links) return match3;
-          return `<span class="md-link">![<span class="md-label">${label}</span>](<span class="md-url">${url}</span>)</span>`;
-        });
-        val = val.replace(/\[([^\]]+)\]\(([^)]+)\)/gi, (match3, label, url) => {
-          if (!options.allow_links) return match3;
-          return `<span class="md-link">[<span class="md-label">${label}</span>](<span class="md-url">${url}</span>)</span>`;
-        });
-      }
-      overlay.current.innerHTML = val;
-    }
-    update();
-    return wrap;
-  }
-  function MarkdownAction({ type, name, onClick, hide: hide3 }) {
-    if (hide3) return;
-    let active = false;
-    const button2 = /* @__PURE__ */ jsx(Button, {
-      chibi: true,
-      className: "markdown-action",
-      onClick,
-      children: [
-        /* @__PURE__ */ jsx(Icon, {
-          name: type
-        }),
-        name
-      ]
-    });
-    Object.defineProperty(button2, "active", {
-      get() {
-        return active;
-      },
-      set(v) {
-        active = v;
-        update();
-      }
-    });
-    update();
-    function update() {
-      button2.setAttribute("aria-checked", String(active));
-    }
-    hover_tooltip(button2, /* @__PURE__ */ jsx(Tooltip, {
-      children: name
-    }));
-    return button2;
-  }
-
   // src/pages/home/mualani.tsx
   function mualani() {
     page.structure.container = document.body.querySelector(".page-content");
@@ -122707,7 +122711,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-08-30T16:49:15.292Z"
+    built_on: "2026-08-30T16:55:19.230Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
