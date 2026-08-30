@@ -61242,6 +61242,7 @@ var bleh = (() => {
   // src/components/markdown/field.tsx
   function MarkdownField({ elem, focus, shoutbox, options = {} }) {
     elem.classList.add("modern-input");
+    let val = elem.value;
     const use_md = shoutbox ? useSettings.get("shout_markdown") : useSettings.get("bio_markdown");
     options = {
       allow_headers: false,
@@ -61507,13 +61508,13 @@ var bleh = (() => {
                   onClick: () => {
                     const sel_start = elem.selectionStart;
                     const sel_end = elem.selectionEnd;
-                    const val = elem.value;
                     if (item.func) {
                       item.func().then((replacement) => {
                         if (!replacement) {
                           return;
                         }
                         elem.value = val.slice(0, sel_start) + replacement + val.slice(sel_end);
+                        val = elem.value;
                         elem.focus();
                         elem.setSelectionRange(sel_start, sel_start + replacement.length);
                         update();
@@ -61535,6 +61536,7 @@ var bleh = (() => {
                         replacement = `${item.start}${selected}${item.end}`;
                       }
                       elem.value = val.slice(0, sel_start) + replacement + val.slice(sel_end);
+                      val = elem.value;
                       elem.focus();
                       elem.setSelectionRange(sel_start, sel_start + replacement.length);
                       update();
@@ -61589,6 +61591,7 @@ var bleh = (() => {
       },
       set(v) {
         elem.value = v;
+        val = v;
         update();
       }
     });
@@ -61602,17 +61605,17 @@ var bleh = (() => {
       if (focus) elem.focus();
     }, 0);
     function update() {
-      let val = elem.value.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+      let val2 = elem.value.replace(/</g, "&lt;").replace(/>/g, "&gt;");
       if (use_md) {
-        val = val.replace(/\[(left|center|right|links)\]/gi, (text4) => {
+        val2 = val2.replace(/\[(left|center|right|links)\]/gi, (text4) => {
           if (!options.allow_alignment) return text4;
           return `<span class="md-tag-wrap">${text4}</span>`;
         });
-        val = val.replace(/\[\/(left|center|right|links)\]/gi, (text4) => {
+        val2 = val2.replace(/\[\/(left|center|right|links)\]/gi, (text4) => {
           if (!options.allow_alignment) return text4;
           return `<span class="md-tag-wrap">${text4}</span>`;
         });
-        val = val.replace(/\[([a-z]+)=([^\]]+)\]/gi, (match3, tag, val2) => {
+        val2 = val2.replace(/\[([a-z]+)=([^\]]+)\]/gi, (match3, tag, val3) => {
           if (![
             "status",
             "name",
@@ -61623,26 +61626,35 @@ var bleh = (() => {
           if (!options.allow_hue && tag == "accent") return match3;
           if (!options.allow_alignment) return match3;
           if (tag == "accent") {
-            const split = val2.split(",");
+            const split = val3.split(",");
             if (split.length == 3 && parseFloat(split[0]) >= 0 && parseFloat(split[1]) >= 0 && parseFloat(split[2]) >= 0) {
-              return `<span class="md-tag">[${tag}=<span class="md-val md-accent colourful" style="--hue-over: ${parseFloat(split[0])}; --sat-over: ${parseFloat(split[1])}; --lit-over: ${parseFloat(split[2])}">${val2}</span>]</span>`;
+              return `<span class="md-tag">[${tag}=<span class="md-val md-accent colourful" style="--hue-over: ${parseFloat(split[0])}; --sat-over: ${parseFloat(split[1])}; --lit-over: ${parseFloat(split[2])}">${val3}</span>]</span>`;
             } else {
               return match3;
             }
           }
-          return `<span class="md-tag">[${tag}=<span class="md-val">${val2}</span>]</span>`;
+          return `<span class="md-tag">[${tag}=<span class="md-val">${val3}</span>]</span>`;
         });
-        val = val.replace(/!\[([^\]]*)\]\(([^)]+)\)/gi, (match3, label, url) => {
+        val2 = val2.replace(/!\[([^\]]*)\]\(([^)]+)\)/gi, (match3, label, url) => {
           if (!options.allow_links) return match3;
           return `<span class="md-link">![<span class="md-label">${label}</span>](<span class="md-url">${url}</span>)</span>`;
         });
-        val = val.replace(/\[([^\]]+)\]\(([^)]+)\)/gi, (match3, label, url) => {
+        val2 = val2.replace(/\[([^\]]+)\]\(([^)]+)\)/gi, (match3, label, url) => {
           if (!options.allow_links) return match3;
           return `<span class="md-link">[<span class="md-label">${label}</span>](<span class="md-url">${url}</span>)</span>`;
         });
       }
-      overlay.current.innerHTML = val;
+      overlay.current.innerHTML = val2;
     }
+    const interval = setInterval(() => {
+      if (!wrap.isConnected) {
+        clearInterval(interval);
+        return;
+      }
+      if (val == elem.value) return;
+      val = elem.value;
+      update();
+    }, 150);
     update();
     return wrap;
   }
@@ -122711,7 +122723,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-08-30T16:55:19.230Z"
+    built_on: "2026-08-30T19:20:24.178Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

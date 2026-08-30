@@ -29,6 +29,7 @@ export function MarkdownField({
 	options = {},
 }: MarkdownFieldProps) {
 	elem.classList.add('modern-input');
+	let val = elem.value;
 
 	const use_md = shoutbox
 		? useSettings.get('shout_markdown')
@@ -316,8 +317,6 @@ export function MarkdownField({
 												const sel_end =
 													elem.selectionEnd;
 
-												const val = elem.value;
-
 												if (item.func) {
 													item.func().then(
 														(
@@ -336,6 +335,7 @@ export function MarkdownField({
 																val.slice(
 																	sel_end,
 																);
+															val = elem.value;
 															elem.focus();
 															elem.setSelectionRange(
 																sel_start,
@@ -398,6 +398,7 @@ export function MarkdownField({
 														sel_start,
 													) + replacement +
 														val.slice(sel_end);
+													val = elem.value;
 
 													elem.focus();
 													elem.setSelectionRange(
@@ -456,6 +457,7 @@ export function MarkdownField({
 		},
 		set(v: string) {
 			elem.value = v;
+			val = v;
 			update();
 		},
 	});
@@ -551,6 +553,18 @@ export function MarkdownField({
 
 		overlay.current.innerHTML = val;
 	}
+
+	const interval = setInterval(() => {
+		if (!wrap.isConnected) {
+			clearInterval(interval);
+			return;
+		}
+
+		if (val == elem.value) return;
+
+		val = elem.value;
+		update();
+	}, 150);
 
 	update();
 
