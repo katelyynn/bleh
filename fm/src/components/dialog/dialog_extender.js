@@ -32,6 +32,7 @@ export function dialog_extender() {
         let title = body.querySelector('.modal-title');
 
         let contents = body.querySelector(':scope > div');
+		if (!contents) return;
 
         let form = contents.querySelector('form');
         if (!form) return;
