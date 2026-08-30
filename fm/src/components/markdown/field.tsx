@@ -2,7 +2,7 @@ import { useSettings } from '@/page.ts';
 import { markdown_options } from '@/types/markdown.ts';
 import { createRef, ReactNode } from 'jsx-dom';
 import { Button } from '@/components/button/button.tsx';
-import { Icon } from '@/components/shared/icon.tsx';
+import { Icon, icons } from '@/components/shared/icon.tsx';
 import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
 import { tl, trans } from '@/build/trans.ts';
 import { dialog, dialog_rm } from '@/components/dialog/dialog.tsx';
@@ -271,21 +271,21 @@ export function MarkdownField({
 		],
 		[
 			{
-				type: 'align-left',
+				type: 'align_left',
 				name: tl(trans.left_align),
 				start: '[left]',
 				end: '[/left]',
 				hide: !options.allow_alignment,
 			},
 			{
-				type: 'align-center',
+				type: 'align_center',
 				name: tl(trans.center_align),
 				start: '[center]',
 				end: '[/center]',
 				hide: !options.allow_alignment,
 			},
 			{
-				type: 'align-right',
+				type: 'align_right',
 				name: tl(trans.right_align),
 				start: '[right]',
 				end: '[/right]',
@@ -316,6 +316,7 @@ export function MarkdownField({
 													elem.selectionStart;
 												const sel_end =
 													elem.selectionEnd;
+												let new_val = elem.value;
 
 												if (item.func) {
 													item.func().then(
@@ -327,12 +328,12 @@ export function MarkdownField({
 															}
 
 															elem.value =
-																val.slice(
+																new_val.slice(
 																	0,
 																	sel_start,
 																) +
 																replacement +
-																val.slice(
+																new_val.slice(
 																	sel_end,
 																);
 															val = elem.value;
@@ -357,10 +358,11 @@ export function MarkdownField({
 													item.start != null &&
 													item.end != null
 												) {
-													const selected = val.slice(
-														sel_start,
-														sel_end,
-													);
+													const selected = new_val
+														.slice(
+															sel_start,
+															sel_end,
+														);
 													let replacement: string;
 
 													if (
@@ -371,7 +373,7 @@ export function MarkdownField({
 															item.end,
 														)
 													) {
-														let replace_end = -1 *
+														const replace_end = -1 *
 															item.end.length;
 
 														if (replace_end != 0) {
@@ -393,11 +395,11 @@ export function MarkdownField({
 															`${item.start}${selected}${item.end}`;
 													}
 
-													elem.value = val.slice(
+													elem.value = new_val.slice(
 														0,
 														sel_start,
 													) + replacement +
-														val.slice(sel_end);
+														new_val.slice(sel_end);
 													val = elem.value;
 
 													elem.focus();
@@ -470,11 +472,28 @@ export function MarkdownField({
 		update();
 	});
 
+	elem.addEventListener('select', () => {
+		select();
+	});
+
+	elem.addEventListener('blur', () => {
+		select();
+	});
+
+	elem.addEventListener('mouseup', () => {
+		select();
+	});
+
+	elem.addEventListener('paste', () => {
+		update();
+	});
+
 	setTimeout(() => {
 		if (focus) elem.focus();
 	}, 0);
 
 	function update() {
+		select();
 		let val = elem.value.replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
 		if (use_md) {
@@ -554,6 +573,30 @@ export function MarkdownField({
 		overlay.current.innerHTML = val;
 	}
 
+	function select() {
+		const sel_start = elem.selectionStart;
+		const sel_end = elem.selectionEnd;
+		const selected = val.slice(sel_start, sel_end);
+
+		let is_bold_selected = false;
+
+		Object.values(action_lookup).forEach((item) => {
+			if (item.start == null && item.end == null) return;
+			if (!item.elem) return;
+
+			item.end ??= item.start;
+
+			let is_selected = selected.startsWith(item.start!) &&
+				selected.endsWith(item.end!) &&
+				selected.length >= item.start!.length + item.end!.length;
+
+			if (item.type == 'bold') is_bold_selected = is_selected;
+			if (item.type == 'italic' && is_bold_selected) is_selected = false;
+
+			item.elem!.active = is_selected;
+		});
+	}
+
 	if (shoutbox) {
 		const interval = setInterval(() => {
 			if (!wrap.isConnected) {
@@ -606,7 +649,7 @@ function MarkdownAction({
 
 	const button = (
 		<Button chibi className='markdown-action' onClick={onClick}>
-			<Icon name={type} />
+			<Icon name={icons[type]} />
 			{name}
 		</Button>
 	) as MarkdownActionElement;

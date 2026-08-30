@@ -211,6 +211,7 @@ export const icons = {
 	text: 'text',
 	streak: 'streak',
 	streak_empty: 'streak-empty',
+	image: 'photo',
 };
 
 interface icon {

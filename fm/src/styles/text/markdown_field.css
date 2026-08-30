@@ -55,13 +55,13 @@
 
 .markdown-field-text {
 	position: relative;
-	--padding: var(--button-verts) calc(var(--button-sides) + (var(--button-height) - var(--icon-size)) / 2);
+	--padding: var(--button-sides);
 
-	& > .content-form {
+	&>.content-form {
 		width: 100% !important;
 		margin: unset !important;
 
-		& > textarea {
+		&>textarea {
 			--bg-hov: transparent !important;
 			--bg-atv: transparent !important;
 
@@ -96,14 +96,17 @@
 	gap: var(--button-list-gap);
 	flex-wrap: wrap;
 
-	padding: var(--button-verts) var(--button-sides);
+	order: 1;
 
-	& > .group {
+	padding: var(--button-sides);
+	margin: -3px;
+
+	&>.group {
 		display: flex;
-		gap: var(--button-list-gap);
+		gap: 2px;
 	}
 
-	& > .group-sep {
+	&>.group-sep {
 		display: block;
 		width: 2px;
 		height: 10px;
@@ -124,6 +127,7 @@
 
 	width: var(--button-height);
 	--font-size: 0;
+	--icon-size: 14px !important;
 
 	position: relative;
 
