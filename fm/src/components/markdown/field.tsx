@@ -26,8 +26,10 @@ export function MarkdownField({
 	elem,
 	focus,
 	shoutbox,
-	options,
+	options = {},
 }: MarkdownFieldProps) {
+	elem.classList.add('modern-input');
+
 	const use_md = shoutbox
 		? useSettings.get('shout_markdown')
 		: useSettings.get('bio_markdown');
@@ -435,7 +437,9 @@ export function MarkdownField({
 			)}
 			<div class='markdown-field-text'>
 				<div class='markdown-field-overlay' ref={overlay} />
-				{elem}
+				<div class={['content-form', 'input-container', 'textarea']}>
+					{elem}
+				</div>
 			</div>
 		</div>
 	) as MarkdownFieldElement;
@@ -469,12 +473,88 @@ export function MarkdownField({
 	}, 0);
 
 	function update() {
-		const val = elem.value.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+		let val = elem.value.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+		if (use_md) {
+			val = val.replace(
+				/\[(left|center|right|links)\]/gi,
+				(text: string) => {
+					if (!options.allow_alignment) return text;
+
+					return `<span class="md-tag-wrap">${text}</span>`;
+				},
+			);
+			val = val.replace(
+				/\[\/(left|center|right|links)\]/gi,
+				(text: string) => {
+					if (!options.allow_alignment) return text;
+
+					return `<span class="md-tag-wrap">${text}</span>`;
+				},
+			);
+
+			val = val.replace(
+				/\[([a-z]+)=([^\]]+)\]/gi,
+				(match: string, tag: string, val: string) => {
+					if (
+						!['status', 'name', 'font', 'accent', 'banner']
+							.includes(
+								tag,
+							)
+					) return match;
+
+					if (!options.allow_hue && tag == 'accent') return match;
+
+					if (!options.allow_alignment) return match;
+
+					if (tag == 'accent') {
+						const split = val.split(',');
+						if (
+							split.length == 3 && parseFloat(split[0]) >= 0 &&
+							parseFloat(split[1]) >= 0 &&
+							parseFloat(split[2]) >= 0
+						) {
+							return `<span class="md-tag">[${tag}=<span class="md-val md-accent colourful" style="--hue-over: ${
+								parseFloat(split[0])
+							}; --sat-over: ${
+								parseFloat(split[1])
+							}; --lit-over: ${
+								parseFloat(split[2])
+							}">${val}</span>]</span>`;
+						} else {
+							return match;
+						}
+					}
+
+					return `<span class="md-tag">[${tag}=<span class="md-val">${val}</span>]</span>`;
+				},
+			);
+
+			val = val.replace(
+				/!\[([^\]]*)\]\(([^)]+)\)/gi,
+				(match: string, label: string, url: string) => {
+					if (!options.allow_links) return match;
+
+					return `<span class="md-link">![<span class="md-label">${label}</span>](<span class="md-url">${url}</span>)</span>`;
+				},
+			);
+
+			val = val.replace(
+				/\[([^\]]+)\]\(([^)]+)\)/gi,
+				(match: string, label: string, url: string) => {
+					if (!options.allow_links) return match;
+
+					return `<span class="md-link">[<span class="md-label">${label}</span>](<span class="md-url">${url}</span>)</span>`;
+				},
+			);
+		}
+
+		overlay.current.innerHTML = val;
 	}
 
 	update();
 
-	return elem;
+	return wrap;
 }
 
 interface Action {

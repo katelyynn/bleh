@@ -70,6 +70,7 @@ import { TopAlbum } from '@/components/album/top_album.tsx';
 import { Tabbed } from '@/components/tab/tabbed.tsx';
 import { ProfileStreak } from '@/components/profile/streak.tsx';
 import { Alert } from '@/components/text/alert.tsx';
+import { MarkdownField } from '@/components/markdown/field.tsx';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -870,6 +871,15 @@ export function mualani() {
 						<Alert type='danger' margin={false}>test alert</Alert>
 						<Alert type='error' margin={false}>test alert</Alert>
 						<Alert type='success' margin={false}>test alert</Alert>
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section>
+				<DemoGrid>
+					<DemoItem label='MarkdownField'>
+						<MarkdownField
+							elem={<textarea /> as HTMLTextAreaElement}
+						/>
 					</DemoItem>
 				</DemoGrid>
 			</section>
