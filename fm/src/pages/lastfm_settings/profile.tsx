@@ -36,6 +36,17 @@ import { MarkdownField } from '@/components/markdown/field.tsx';
 import { ProfileBanner } from '@/components/settings/provider/profile_banner.tsx';
 import { ProfileAccent } from '@/components/settings/provider/profile_accent.tsx';
 import { ProfileName } from '@/components/settings/provider/profile_name.tsx';
+import { SettingInfo } from '@/components/settings/provider/info.tsx';
+import { SettingInput } from '@/components/settings/provider/input.tsx';
+import { useSettings } from '@/page.ts';
+import { SettingSelect } from '@/components/settings/provider/select.tsx';
+import { PanelHead } from '@/components/text/head.tsx';
+import { icons } from '@/components/shared/icon.tsx';
+import { Token } from '@/components/form/token.tsx';
+import { SettingsFooter } from '@/components/form/footer.tsx';
+import { Button } from '@/components/button/button.tsx';
+import { SettingCheckbox } from '@/components/settings/provider/checkbox.tsx';
+import { SettingRadio } from '@/components/settings/provider/radio.tsx';
 
 let cropper: Cropper;
 
@@ -372,340 +383,128 @@ function profile_panel() {
 
 	// about me
 
-	let country_elem;
-	let website_elem;
-
-	render(
-		update_picture,
-		html`
-			<h4>${tl(trans.profile)}</h4>
-			${alert}
-			<form
-			    class="dont-move"
-			    action="${root}settings#update-profile"
-			    name="profile-form"
-			    data-form-type="identity"
-			    method="post"
-			>
-			    <input
-			        type="hidden"
-			        name="csrfmiddlewaretoken"
-			        value="${page.token}"
-			    />
-			    <div class="setting-group">
-			        <div class="setting" data-type="info">
-			            <div class="heading">
-			                <h5>${tl(trans.avatar)}</h5>
-			                <p>${tl(trans.avatar_desc)}</p>
-			            </div>
-			            <div class="info">
-			                <div class="avatar image-uploader" onclick=${() =>
-				avatar()}>
-			                    <img
-			                        src=${avatar_url}
-			                        alt=${tl(trans.your_avatar)}
-			                        loading="lazy"
-			                    />
-			                    <div class="avatar-overlay icon-mask" />
-			                </div>
-			            </div>
-			        </div>
-			        ${() => {
-				const username_regex = /\[name=([^\]]+)\]/;
-
-				const elem = html.node`
-                        <div class="setting" data-type="text" disabled=${!auth
-					.sponsor}>
-                            <div class="heading">
-                                <h5>${
-					tl(trans.display_name.name)
-				}<span class="new-badge sponsor-related">${
-					tl(trans.sponsors_only)
-				}</span></h5>
-                                <p>${tl(trans.display_name.body)}</p>
-                            </div>
-                            <div class="info v">
-                                ${
-					input({
-						value: cache.username,
-						placeholder: auth.name,
-						func: (val) => {
-							const match = about.value.match(username_regex);
-
-							let new_name = val.trim() ? `[name=${val}]` : '';
-
-							if (!new_name.match(username_regex)) new_name = '';
-
-							if (match) {
-								about.value = about.value.replace(
-									username_regex,
-									new_name,
-								);
-							} else {
-								const trimmed = about.value.trimEnd();
-
-								if (trimmed.length == 0) {
-									about.value = new_name;
-								} else {
-									about.value = trimmed + '\n\n' + new_name;
-								}
-							}
-						},
-						submit_on_character: true,
-					})
-				}
-                                ${font_setting}
-                            </div>
-                        </div>
-                    `;
-
-				return elem;
-			}}
-			        <div class="setting" data-type="text">
-			            <div class="heading">
-			                <h5>${tl(trans.profile_title)}</h5>
-			                <p>${tl(trans.pronoun_tip)}</p>
-			            </div>
-			            <div class="input-container content-form">
-			                <input
-			                    type="text"
-			                    name="full_name"
-			                    value=${form_display_name}
-			                    maxlength="36"
-			                    id="id_full_name"
-			                    data-form-type="other"
-			                />
-			            </div>
-			        </div>
-			        <div class="setting" data-type="text" ref=${(el) =>
-				website_elem = el} data-hidden=${settings.hide_unused_settings}>
-			            <div class="heading">
-			                <h5>${tl(trans.website)}</h5>
-			            </div>
-			            <div class="input-container content-form">
-			                <input
-			                    type="url"
-			                    name="homepage"
-			                    value=${form_website}
-			                    id="id_homepage"
-			                    data-form-type="website"
-			                />
-			            </div>
-			        </div>
-			        <div class="setting" data-type="select" ref=${(el) =>
-				country_elem = el} data-hidden=${settings.hide_unused_settings}>
-			            <div class="heading">
-			                <h5>${tl(trans.country)}</h5>
-			            </div>
-			            <div class="select-wrap custom-selector">
-			                ${select({
-				values: select_prepare(form_country),
-				initial: form_country.value,
-				name: form_country.name,
-				in_settings: true,
-			})}
-			            </div>
-			        </div>
-			        ${() => {
-				const banner_regex = /\[banner=([^\]]+)\]/;
-				const match = about.value.match(banner_regex);
-
-				const pre_existing = match ? match[1] : '';
-				let preview;
-
-				const elem = html.node`
-                        <div class="setting" data-type="text">
-                            <div class="heading">
-                                <h5>${tl(trans.profile_banner.name)}</h5>
-                                <p>${tl(trans.profile_banner.body)}</p>
-                                <p>${{
-					html: tl(trans.aspect_ratio_banner, {
-						v: '<strong>1300 / 325</strong>',
-					}),
-				}}</p>
-                            </div>
-                            <div class="info v">
-                                ${
-					input({
-						value: pre_existing,
-						func: (val) => {
-							const match = about.value.match(banner_regex);
-
-							let new_banner = val.trim()
-								? `[banner=${val}]`
-								: '';
-
-							if (!new_banner.match(banner_regex)) {
-								new_banner = '';
-							}
-
-							if (match) {
-								about.value = about.value.replace(
-									banner_regex,
-									new_banner,
-								);
-							} else {
-								const trimmed = about.value.trimEnd();
-
-								if (trimmed.length == 0) {
-									about.value = new_banner;
-								} else {
-									about.value = trimmed + '\n\n' + new_banner;
-								}
-							}
-
-							preview.style.setProperty(
-								'background-image',
-								`url(https://images.weserv.nl/?url=${
-									encodeURIComponent(val)
-								}&output=webp&n=-1)`,
-							);
-							preview.onclick = () => {
-								expand_avatar(val);
-							};
-						},
-						submit_on_character: true,
-					})
-				}
-                                <div class="banner-image" ref=${(el) =>
-					preview = el} />
-                            </div>
-                        </div>
-                    `;
-
-				preview.style.setProperty(
-					'background-image',
-					`url(https://images.weserv.nl/?url=${
-						encodeURIComponent(pre_existing)
-					}&output=webp&n=-1)`,
-				);
-				preview.onclick = () => {
-					expand_avatar(pre_existing);
-				};
-
-				return elem;
-			}}
-			        ${accent_setting}
-			        ${() => {
-				const status_regex = /\[status=([^\]]+)\]/;
-				const match = about.value.match(status_regex);
-
-				const pre_existing = match ? match[1] : '';
-
-				const elem = html.node`
-                        <div class="setting" data-type="text">
-                            <div class="heading">
-                                <h5><a href="https://status.cafe" target="_blank">status.cafe</a></h5>
-                                <p>${tl(trans.status_cafe.body)}</p>
-                            </div>
-                            ${
-					input({
-						value: pre_existing,
-						func: (val) => {
-							const match = about.value.match(status_regex);
-
-							let new_status = val.trim()
-								? `[status=${val}]`
-								: '';
-
-							if (!new_status.match(status_regex)) {
-								new_status = '';
-							}
-
-							if (match) {
-								about.value = about.value.replace(
-									status_regex,
-									new_status,
-								);
-							} else {
-								const trimmed = about.value.trimEnd();
-
-								if (trimmed.length == 0) {
-									about.value = new_status;
-								} else {
-									about.value = trimmed + '\n\n' + new_status;
-								}
-							}
-						},
-						submit_on_character: true,
-					})
-				}
-                        </div>
-                    `;
-
-				return elem;
-			}}
-			    </div>
-			    <div class="settings-footer end">
-			        <button
-			            type="submit"
-			            class="btn-primary save"
-			            data-form-type="action"
-			        >
-			            ${tl(trans.save)}
-			        </button>
-			        <input
-			            type="hidden"
-			            value="profile"
-			            name="submit"
-			        />
-			    </div>
-			</form>
-			<div class="setting-group">
-			    ${setting({
-				id: 'hide_unused_settings',
-				func: (val: boolean) => {
-					website_elem.setAttribute('data-hidden', val);
-					country_elem.setAttribute('data-hidden', val);
-				},
-			})}
-			    ${setting({ id: 'avatar_radius' })}
-			</div>
-		`,
-	);
-
 	const chars = createRef();
 	const md = createRef();
 	const banner = createRef();
 	const accent = createRef();
 	const name = createRef();
 
-	update_picture.appendChild(
-		<SettingGroup>
-			<ProfileName
-				markdown={form_about_me.value}
-				onChange={(v: string) => md.current.value = v}
-				ref={banner}
-			/>
-			<ProfileBanner
-				markdown={form_about_me.value}
-				onChange={(v: string) => md.current.value = v}
-				ref={banner}
-			/>
-			<ProfileAccent
-				markdown={form_about_me.value}
-				onChange={(v: string) => md.current.value = v}
-				ref={accent}
-			/>
-			<div class='setting' data-type='text'>
-				<SettingLabel name={tl(trans.about)}>
-					<p class={['tip', 'characters', 'colourful']} ref={chars}>
-						{tl(trans.value_characters_max, { v: bio_max_length })}
-					</p>
-				</SettingLabel>
-				<MarkdownField
-					elem={form_about_me}
-					options={markdown_settings}
-					onChange={(v) => {
-						banner.current.markdown = v;
-						accent.current.markdown = v;
-						name.current.markdown = v;
-					}}
-					ref={md}
-				/>
-			</div>
-		</SettingGroup>,
+	const website = createRef();
+	const country = createRef();
+
+	update_picture.replaceChildren(
+		<>
+			<PanelHead icon={icons.profile}>
+				{tl(trans.profile)}
+			</PanelHead>
+			{alert}
+			<form
+				class='dont-move'
+				action={`${root}settings`}
+				name='profile-form'
+				method='post'
+			>
+				<Token value={page.token} />
+				<SettingGroup>
+					<SettingInfo
+						name={tl(trans.avatar)}
+						body={tl(trans.avatar_desc)}
+					>
+						<div
+							class={['avatar', 'image-uploader']}
+							onClick={() => avatar()}
+						>
+							<img src={avatar_url} loading='lazy' />
+							<div class={['avatar-overlay', 'icon-mask']} />
+						</div>
+					</SettingInfo>
+					<ProfileName
+						disabled={!auth.sponsor}
+						markdown={form_about_me.value}
+						onChange={(v: string) => md.current.value = v}
+						ref={banner}
+					/>
+					<SettingInput
+						name={tl(trans.profile_title)}
+						body={tl(trans.pronoun_tip)}
+						id='full_name'
+						value={form_display_name}
+						saveManually={false}
+						length={36}
+					/>
+					<SettingInput
+						name={tl(trans.website)}
+						id='homepage'
+						value={form_website}
+						ref={website}
+						saveManually={false}
+						type='url'
+					/>
+					<SettingSelect
+						name={tl(trans.country)}
+						id={form_country.name}
+						values={select_prepare(form_country)}
+						value={form_country.value}
+						ref={country}
+					/>
+					<ProfileBanner
+						markdown={form_about_me.value}
+						onChange={(v: string) => md.current.value = v}
+						ref={banner}
+					/>
+					<ProfileAccent
+						disabled={!auth.sponsor}
+						markdown={form_about_me.value}
+						onChange={(v: string) => md.current.value = v}
+						ref={accent}
+					/>
+					<div class='setting' data-type='text'>
+						<SettingLabel name={tl(trans.about)}>
+							<p
+								class={['tip', 'characters', 'colourful']}
+								ref={chars}
+							>
+								{tl(trans.value_characters_max, {
+									v: bio_max_length,
+								})}
+							</p>
+						</SettingLabel>
+						<MarkdownField
+							elem={form_about_me}
+							options={markdown_settings}
+							onChange={(v) => {
+								banner.current.markdown = v;
+								accent.current.markdown = v;
+								name.current.markdown = v;
+							}}
+							ref={md}
+						/>
+					</div>
+				</SettingGroup>
+				<SettingsFooter>
+					<Button primary type='submit'>
+						{tl(trans.save)}
+					</Button>
+					<input type='hidden' value='profile' name='submit' />
+				</SettingsFooter>
+			</form>
+			<SettingGroup>
+				<SettingCheckbox bind='hide_unused_settings' />
+				<SettingRadio bind='avatar_radius' />
+			</SettingGroup>
+		</>,
 	);
+
+	function update() {
+		const hide = useSettings.get('hide_unused_settings') as boolean;
+
+		website.current.setAttribute('data-hidden', String(hide));
+		country.current.setAttribute('data-hidden', String(hide));
+	}
+
+	useSettings.on('hide_unused_settings', update);
+
+	update();
 
 	update_about();
 

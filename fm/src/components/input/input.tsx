@@ -15,12 +15,14 @@ export type InputType =
 	| 'date'
 	| 'password'
 	| 'textarea'
-	| 'colour';
+	| 'colour'
+	| 'url';
 
 interface InputProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
 	className?: string;
 	value?: string | number;
+	name?: string;
 	length?: number;
 	disabled?: boolean;
 	type?: InputType;
@@ -39,6 +41,7 @@ export function Input({
 	ref,
 	className,
 	value = '',
+	name,
 	length,
 	disabled,
 	type = 'text',
@@ -74,6 +77,7 @@ export function Input({
 						value={value}
 						ref={input}
 						maxlength={length}
+						name={name}
 						onInput={() => {
 							if (
 								type == 'colour' &&
@@ -108,6 +112,7 @@ export function Input({
 						class='modern-input'
 						value={value}
 						ref={input}
+						name={name}
 						onChange={() => {
 							value = input.current.value;
 							update(true);

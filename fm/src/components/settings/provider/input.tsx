@@ -18,6 +18,8 @@ import { useSettings } from '@/page.ts';
 
 interface SettingInputProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
+	id?: string;
+	value?: string | number;
 	bind?: string;
 	type?: InputType;
 	length?: number;
@@ -29,6 +31,7 @@ interface SettingInputProps {
 	disabled?: boolean;
 	onMouseEnter?: () => void;
 	onMouseLeave?: () => void;
+	saveManually?: boolean;
 	saveText?: ReactNode;
 }
 
@@ -39,6 +42,8 @@ type SettingInputElement = HTMLDivElement & {
 
 export function SettingInput({
 	ref,
+	id,
+	value,
 	bind,
 	type,
 	length,
@@ -50,9 +55,10 @@ export function SettingInput({
 	disabled,
 	onMouseEnter,
 	onMouseLeave,
+	saveManually = true,
 	saveText,
 }: SettingInputProps) {
-	let value = bind ? settings[bind] as string | number : '';
+	if (bind) value = settings[bind] as string | number;
 
 	const uuid = crypto.randomUUID();
 
@@ -112,11 +118,12 @@ export function SettingInput({
 				<Input
 					className='setting-inner'
 					value={value}
+					name={id}
 					type={type}
 					length={length}
 					onSubmit={set}
 					ref={input}
-					saveManually
+					saveManually={saveManually}
 					saveText={saveText}
 				/>
 				{Object.keys(incompatible_list).length > 0 && (

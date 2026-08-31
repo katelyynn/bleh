@@ -102958,7 +102958,7 @@ var bleh = (() => {
   var import_color_namer = __toESM(require_color_namer());
 
   // src/components/input/input.tsx
-  function Input({ ref: ref2, className: className2, value = "", length, disabled, type = "text", onChange, onSubmit, saveManually = false, saveText }) {
+  function Input({ ref: ref2, className: className2, value = "", name, length, disabled, type = "text", onChange, onSubmit, saveManually = false, saveText }) {
     const input2 = createRef();
     const colour_block = createRef();
     const wrap = /* @__PURE__ */ jsx("div", {
@@ -102983,6 +102983,7 @@ var bleh = (() => {
           value,
           ref: input2,
           maxlength: length,
+          name,
           onInput: () => {
             if (type == "colour" && !input2.current.value.startsWith("#")) {
               input2.current.value = `#${input2.current.value}`;
@@ -103005,6 +103006,7 @@ var bleh = (() => {
           class: "modern-input",
           value,
           ref: input2,
+          name,
           onChange: () => {
             value = input2.current.value;
             update(true);
@@ -103070,12 +103072,12 @@ var bleh = (() => {
   }
 
   // src/components/settings/provider/input.tsx
-  function SettingInput({ ref: ref2, bind, type, length, icon: icon2, name, body, showLabel = true, onChange, disabled, onMouseEnter, onMouseLeave, saveText }) {
-    let value = bind ? settings[bind] : "";
+  function SettingInput({ ref: ref2, id, value, bind, type, length, icon: icon2, name, body, showLabel = true, onChange, disabled, onMouseEnter, onMouseLeave, saveManually = true, saveText }) {
+    if (bind) value = settings[bind];
     const uuid = crypto.randomUUID();
     if (bind) {
-      useSettings.on(bind, (val, id) => {
-        if (id == uuid) return;
+      useSettings.on(bind, (val, id2) => {
+        if (id2 == uuid) return;
         set2(val, true);
       });
     }
@@ -103117,11 +103119,12 @@ var bleh = (() => {
           /* @__PURE__ */ jsx(Input, {
             className: "setting-inner",
             value,
+            name: id,
             type,
             length,
             onSubmit: set2,
             ref: input2,
-            saveManually: true,
+            saveManually,
             saveText
           }),
           Object.keys(incompatible_list).length > 0 && /* @__PURE__ */ jsx(SettingIncompatibleWith, {
@@ -115838,7 +115841,7 @@ var bleh = (() => {
   }
 
   // src/components/settings/provider/profile_accent.tsx
-  function ProfileAccent({ ref: ref2, markdown: markdown2, onChange }) {
+  function ProfileAccent({ disabled, ref: ref2, markdown: markdown2, onChange }) {
     const accent_regex = /\[accent=([0-9]{1,3}),([0-9]*\.?[0-9]+),([0-9]*\.?[0-9]+)\]/;
     let value = {
       hue: 0,
@@ -115850,6 +115853,7 @@ var bleh = (() => {
       class: "setting",
       "data-type": "info",
       ref: ref2,
+      disabled,
       children: [
         /* @__PURE__ */ jsx(SettingLabel, {
           name: tl2(trans.profile_accent.name),
@@ -115882,6 +115886,7 @@ var bleh = (() => {
       ]
     });
     function modal() {
+      if (disabled) return;
       const convert2 = createRef();
       const hue4 = createRef();
       const sat = createRef();
@@ -116249,7 +116254,7 @@ var bleh = (() => {
   }
 
   // src/components/settings/provider/profile_name.tsx
-  function ProfileName({ ref: ref2, markdown: markdown2, onChange }) {
+  function ProfileName({ disabled, ref: ref2, markdown: markdown2, onChange }) {
     const name_regex = /\[name=([^\]]+)\]/;
     const font_regex = /\[font=([^\]]+)\]/;
     let value = {
@@ -116263,6 +116268,7 @@ var bleh = (() => {
       class: "setting",
       "data-type": "text",
       ref: ref2,
+      disabled,
       children: [
         /* @__PURE__ */ jsx(SettingLabel, {
           name: tl2(trans.display_name.name),
@@ -116310,6 +116316,7 @@ var bleh = (() => {
       ]
     });
     function modal() {
+      if (disabled) return;
       let name = value.name;
       let font = value.font;
       let style2 = value.style;
@@ -116766,289 +116773,161 @@ var bleh = (() => {
       ]
     }));
     page.structure.main.removeChild(update_profile);
-    let country_elem;
-    let website_elem;
-    render(update_picture, html`
-			<h4>${tl2(trans.profile)}</h4>
-			${alert2}
-			<form
-			    class="dont-move"
-			    action="${root}settings#update-profile"
-			    name="profile-form"
-			    data-form-type="identity"
-			    method="post"
-			>
-			    <input
-			        type="hidden"
-			        name="csrfmiddlewaretoken"
-			        value="${page.token}"
-			    />
-			    <div class="setting-group">
-			        <div class="setting" data-type="info">
-			            <div class="heading">
-			                <h5>${tl2(trans.avatar)}</h5>
-			                <p>${tl2(trans.avatar_desc)}</p>
-			            </div>
-			            <div class="info">
-			                <div class="avatar image-uploader" onclick=${() => avatar2()}>
-			                    <img
-			                        src=${avatar_url}
-			                        alt=${tl2(trans.your_avatar)}
-			                        loading="lazy"
-			                    />
-			                    <div class="avatar-overlay icon-mask" />
-			                </div>
-			            </div>
-			        </div>
-			        ${() => {
-      const username_regex = /\[name=([^\]]+)\]/;
-      const elem = html.node`
-                        <div class="setting" data-type="text" disabled=${!auth.sponsor}>
-                            <div class="heading">
-                                <h5>${tl2(trans.display_name.name)}<span class="new-badge sponsor-related">${tl2(trans.sponsors_only)}</span></h5>
-                                <p>${tl2(trans.display_name.body)}</p>
-                            </div>
-                            <div class="info v">
-                                ${input({
-        value: cache2.username,
-        placeholder: auth.name,
-        func: (val) => {
-          const match3 = about.value.match(username_regex);
-          let new_name = val.trim() ? `[name=${val}]` : "";
-          if (!new_name.match(username_regex)) new_name = "";
-          if (match3) {
-            about.value = about.value.replace(username_regex, new_name);
-          } else {
-            const trimmed = about.value.trimEnd();
-            if (trimmed.length == 0) {
-              about.value = new_name;
-            } else {
-              about.value = trimmed + "\n\n" + new_name;
-            }
-          }
-        },
-        submit_on_character: true
-      })}
-                                ${font_setting}
-                            </div>
-                        </div>
-                    `;
-      return elem;
-    }}
-			        <div class="setting" data-type="text">
-			            <div class="heading">
-			                <h5>${tl2(trans.profile_title)}</h5>
-			                <p>${tl2(trans.pronoun_tip)}</p>
-			            </div>
-			            <div class="input-container content-form">
-			                <input
-			                    type="text"
-			                    name="full_name"
-			                    value=${form_display_name}
-			                    maxlength="36"
-			                    id="id_full_name"
-			                    data-form-type="other"
-			                />
-			            </div>
-			        </div>
-			        <div class="setting" data-type="text" ref=${(el) => website_elem = el} data-hidden=${settings.hide_unused_settings}>
-			            <div class="heading">
-			                <h5>${tl2(trans.website)}</h5>
-			            </div>
-			            <div class="input-container content-form">
-			                <input
-			                    type="url"
-			                    name="homepage"
-			                    value=${form_website}
-			                    id="id_homepage"
-			                    data-form-type="website"
-			                />
-			            </div>
-			        </div>
-			        <div class="setting" data-type="select" ref=${(el) => country_elem = el} data-hidden=${settings.hide_unused_settings}>
-			            <div class="heading">
-			                <h5>${tl2(trans.country)}</h5>
-			            </div>
-			            <div class="select-wrap custom-selector">
-			                ${select({
-      values: select_prepare(form_country),
-      initial: form_country.value,
-      name: form_country.name,
-      in_settings: true
-    })}
-			            </div>
-			        </div>
-			        ${() => {
-      const banner_regex = /\[banner=([^\]]+)\]/;
-      const match3 = about.value.match(banner_regex);
-      const pre_existing = match3 ? match3[1] : "";
-      let preview2;
-      const elem = html.node`
-                        <div class="setting" data-type="text">
-                            <div class="heading">
-                                <h5>${tl2(trans.profile_banner.name)}</h5>
-                                <p>${tl2(trans.profile_banner.body)}</p>
-                                <p>${{
-        html: tl2(trans.aspect_ratio_banner, {
-          v: "<strong>1300 / 325</strong>"
-        })
-      }}</p>
-                            </div>
-                            <div class="info v">
-                                ${input({
-        value: pre_existing,
-        func: (val) => {
-          const match4 = about.value.match(banner_regex);
-          let new_banner = val.trim() ? `[banner=${val}]` : "";
-          if (!new_banner.match(banner_regex)) {
-            new_banner = "";
-          }
-          if (match4) {
-            about.value = about.value.replace(banner_regex, new_banner);
-          } else {
-            const trimmed = about.value.trimEnd();
-            if (trimmed.length == 0) {
-              about.value = new_banner;
-            } else {
-              about.value = trimmed + "\n\n" + new_banner;
-            }
-          }
-          preview2.style.setProperty("background-image", `url(https://images.weserv.nl/?url=${encodeURIComponent(val)}&output=webp&n=-1)`);
-          preview2.onclick = () => {
-            expand_avatar(val);
-          };
-        },
-        submit_on_character: true
-      })}
-                                <div class="banner-image" ref=${(el) => preview2 = el} />
-                            </div>
-                        </div>
-                    `;
-      preview2.style.setProperty("background-image", `url(https://images.weserv.nl/?url=${encodeURIComponent(pre_existing)}&output=webp&n=-1)`);
-      preview2.onclick = () => {
-        expand_avatar(pre_existing);
-      };
-      return elem;
-    }}
-			        ${accent_setting}
-			        ${() => {
-      const status_regex = /\[status=([^\]]+)\]/;
-      const match3 = about.value.match(status_regex);
-      const pre_existing = match3 ? match3[1] : "";
-      const elem = html.node`
-                        <div class="setting" data-type="text">
-                            <div class="heading">
-                                <h5><a href="https://status.cafe" target="_blank">status.cafe</a></h5>
-                                <p>${tl2(trans.status_cafe.body)}</p>
-                            </div>
-                            ${input({
-        value: pre_existing,
-        func: (val) => {
-          const match4 = about.value.match(status_regex);
-          let new_status = val.trim() ? `[status=${val}]` : "";
-          if (!new_status.match(status_regex)) {
-            new_status = "";
-          }
-          if (match4) {
-            about.value = about.value.replace(status_regex, new_status);
-          } else {
-            const trimmed = about.value.trimEnd();
-            if (trimmed.length == 0) {
-              about.value = new_status;
-            } else {
-              about.value = trimmed + "\n\n" + new_status;
-            }
-          }
-        },
-        submit_on_character: true
-      })}
-                        </div>
-                    `;
-      return elem;
-    }}
-			    </div>
-			    <div class="settings-footer end">
-			        <button
-			            type="submit"
-			            class="btn-primary save"
-			            data-form-type="action"
-			        >
-			            ${tl2(trans.save)}
-			        </button>
-			        <input
-			            type="hidden"
-			            value="profile"
-			            name="submit"
-			        />
-			    </div>
-			</form>
-			<div class="setting-group">
-			    ${setting({
-      id: "hide_unused_settings",
-      func: (val) => {
-        website_elem.setAttribute("data-hidden", val);
-        country_elem.setAttribute("data-hidden", val);
-      }
-    })}
-			    ${setting({
-      id: "avatar_radius"
-    })}
-			</div>
-		`);
     const chars2 = createRef();
     const md = createRef();
     const banner = createRef();
     const accent = createRef();
     const name = createRef();
-    update_picture.appendChild(/* @__PURE__ */ jsx(SettingGroup, {
+    const website = createRef();
+    const country = createRef();
+    update_picture.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
       children: [
-        /* @__PURE__ */ jsx(ProfileName, {
-          markdown: form_about_me.value,
-          onChange: (v) => md.current.value = v,
-          ref: banner
+        /* @__PURE__ */ jsx(PanelHead, {
+          icon: icons.profile,
+          children: tl2(trans.profile)
         }),
-        /* @__PURE__ */ jsx(ProfileBanner, {
-          markdown: form_about_me.value,
-          onChange: (v) => md.current.value = v,
-          ref: banner
-        }),
-        /* @__PURE__ */ jsx(ProfileAccent, {
-          markdown: form_about_me.value,
-          onChange: (v) => md.current.value = v,
-          ref: accent
-        }),
-        /* @__PURE__ */ jsx("div", {
-          class: "setting",
-          "data-type": "text",
+        alert2,
+        /* @__PURE__ */ jsx("form", {
+          class: "dont-move",
+          action: `${root}settings`,
+          name: "profile-form",
+          method: "post",
           children: [
-            /* @__PURE__ */ jsx(SettingLabel, {
-              name: tl2(trans.about),
-              children: /* @__PURE__ */ jsx("p", {
-                class: [
-                  "tip",
-                  "characters",
-                  "colourful"
-                ],
-                ref: chars2,
-                children: tl2(trans.value_characters_max, {
-                  v: bio_max_length
-                })
-              })
+            /* @__PURE__ */ jsx(Token, {
+              value: page.token
             }),
-            /* @__PURE__ */ jsx(MarkdownField, {
-              elem: form_about_me,
-              options: markdown_settings,
-              onChange: (v) => {
-                banner.current.markdown = v;
-                accent.current.markdown = v;
-                name.current.markdown = v;
-              },
-              ref: md
+            /* @__PURE__ */ jsx(SettingGroup, {
+              children: [
+                /* @__PURE__ */ jsx(SettingInfo, {
+                  name: tl2(trans.avatar),
+                  body: tl2(trans.avatar_desc),
+                  children: /* @__PURE__ */ jsx("div", {
+                    class: [
+                      "avatar",
+                      "image-uploader"
+                    ],
+                    onClick: () => avatar2(),
+                    children: [
+                      /* @__PURE__ */ jsx("img", {
+                        src: avatar_url,
+                        loading: "lazy"
+                      }),
+                      /* @__PURE__ */ jsx("div", {
+                        class: [
+                          "avatar-overlay",
+                          "icon-mask"
+                        ]
+                      })
+                    ]
+                  })
+                }),
+                /* @__PURE__ */ jsx(ProfileName, {
+                  disabled: !auth.sponsor,
+                  markdown: form_about_me.value,
+                  onChange: (v) => md.current.value = v,
+                  ref: banner
+                }),
+                /* @__PURE__ */ jsx(SettingInput, {
+                  name: tl2(trans.profile_title),
+                  body: tl2(trans.pronoun_tip),
+                  id: "full_name",
+                  value: form_display_name,
+                  saveManually: false,
+                  length: 36
+                }),
+                /* @__PURE__ */ jsx(SettingInput, {
+                  name: tl2(trans.website),
+                  id: "homepage",
+                  value: form_website,
+                  ref: website,
+                  saveManually: false,
+                  type: "url"
+                }),
+                /* @__PURE__ */ jsx(SettingSelect, {
+                  name: tl2(trans.country),
+                  id: form_country.name,
+                  values: select_prepare(form_country),
+                  value: form_country.value,
+                  ref: country
+                }),
+                /* @__PURE__ */ jsx(ProfileBanner, {
+                  markdown: form_about_me.value,
+                  onChange: (v) => md.current.value = v,
+                  ref: banner
+                }),
+                /* @__PURE__ */ jsx(ProfileAccent, {
+                  disabled: !auth.sponsor,
+                  markdown: form_about_me.value,
+                  onChange: (v) => md.current.value = v,
+                  ref: accent
+                }),
+                /* @__PURE__ */ jsx("div", {
+                  class: "setting",
+                  "data-type": "text",
+                  children: [
+                    /* @__PURE__ */ jsx(SettingLabel, {
+                      name: tl2(trans.about),
+                      children: /* @__PURE__ */ jsx("p", {
+                        class: [
+                          "tip",
+                          "characters",
+                          "colourful"
+                        ],
+                        ref: chars2,
+                        children: tl2(trans.value_characters_max, {
+                          v: bio_max_length
+                        })
+                      })
+                    }),
+                    /* @__PURE__ */ jsx(MarkdownField, {
+                      elem: form_about_me,
+                      options: markdown_settings,
+                      onChange: (v) => {
+                        banner.current.markdown = v;
+                        accent.current.markdown = v;
+                        name.current.markdown = v;
+                      },
+                      ref: md
+                    })
+                  ]
+                })
+              ]
+            }),
+            /* @__PURE__ */ jsx(SettingsFooter, {
+              children: [
+                /* @__PURE__ */ jsx(Button, {
+                  primary: true,
+                  type: "submit",
+                  children: tl2(trans.save)
+                }),
+                /* @__PURE__ */ jsx("input", {
+                  type: "hidden",
+                  value: "profile",
+                  name: "submit"
+                })
+              ]
+            })
+          ]
+        }),
+        /* @__PURE__ */ jsx(SettingGroup, {
+          children: [
+            /* @__PURE__ */ jsx(SettingCheckbox, {
+              bind: "hide_unused_settings"
+            }),
+            /* @__PURE__ */ jsx(SettingRadio, {
+              bind: "avatar_radius"
             })
           ]
         })
       ]
     }));
+    function update() {
+      const hide3 = useSettings.get("hide_unused_settings");
+      website.current.setAttribute("data-hidden", String(hide3));
+      country.current.setAttribute("data-hidden", String(hide3));
+    }
+    useSettings.on("hide_unused_settings", update);
+    update();
     update_about();
     function len(text4) {
       return text4.replace(/\n/g, "\r\n").length;
@@ -123510,7 +123389,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-08-31T22:44:22.113Z"
+    built_on: "2026-08-31T23:03:15.952Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

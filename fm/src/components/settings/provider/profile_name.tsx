@@ -44,6 +44,7 @@ import { Carousel, CarouselItem } from '@/components/select/carousel.tsx';
 import { CardTip } from '@/components/text/tip.tsx';
 
 interface ProfileNameProps {
+	disabled?: boolean;
 	ref?: ReturnType<typeof createRef<ProfileNameElement>>;
 	markdown: string;
 	onChange: (v: string) => void;
@@ -61,6 +62,7 @@ type ProfileNameElement = HTMLDivElement & {
 };
 
 export function ProfileName({
+	disabled,
 	ref,
 	markdown,
 	onChange,
@@ -74,7 +76,7 @@ export function ProfileName({
 	const input = createRef();
 
 	const elem = (
-		<div class='setting' data-type='text' ref={ref}>
+		<div class='setting' data-type='text' ref={ref} disabled={disabled}>
 			<SettingLabel
 				name={tl(trans.display_name.name)}
 				body={tl(trans.display_name.body)}
@@ -110,6 +112,8 @@ export function ProfileName({
 	) as ProfileNameElement;
 
 	function modal() {
+		if (disabled) return;
+
 		let name = value.name;
 		let font = value.font;
 		let style = value.style;

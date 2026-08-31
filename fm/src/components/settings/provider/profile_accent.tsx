@@ -42,6 +42,7 @@ import { MenuContents } from '@/components/menu/menu.tsx';
 import { notify, notify_rm } from '@/components/dialog/notify.ts';
 
 interface ProfileAccentProps {
+	disabled?: boolean;
 	ref?: ReturnType<typeof createRef<ProfileAccentElement>>;
 	markdown: string;
 	onChange: (v: string) => void;
@@ -59,6 +60,7 @@ type ProfileAccentElement = HTMLDivElement & {
 };
 
 export function ProfileAccent({
+	disabled,
 	ref,
 	markdown,
 	onChange,
@@ -71,7 +73,7 @@ export function ProfileAccent({
 	const preview = createRef();
 
 	const elem = (
-		<div class='setting' data-type='info' ref={ref}>
+		<div class='setting' data-type='info' ref={ref} disabled={disabled}>
 			<SettingLabel
 				name={tl(trans.profile_accent.name)}
 				body={tl(trans.profile_accent.body)}
@@ -89,6 +91,8 @@ export function ProfileAccent({
 	) as ProfileAccentElement;
 
 	function modal() {
+		if (disabled) return;
+
 		const convert = createRef();
 		const hue = createRef();
 		const sat = createRef();
