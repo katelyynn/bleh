@@ -56091,14 +56091,14 @@ var bleh = (() => {
         image2.onerror = reject;
         image2.src = source.src;
       });
-      const colour2 = await fac.getColorAsync(image2);
-      const values = colour2.value;
+      const colour = await fac.getColorAsync(image2);
+      const values = colour.value;
       const hsl3 = rgb_to_hsl(values[0], values[1], values[2]);
       const hue4 = hsl3.h;
       const sat = clamp_sat(hsl3.s / 100 * 3);
       const lit = clamp_lit(sat, hsl3.l / 100 + 0.35, true);
       apply2(hue4, sat, lit);
-      log(`sourced rgb of (${colour2[0]}, ${colour2[1]}, ${colour2[2]}), hsl of (${hsl3.h}, ${hsl3.s}, ${hsl3.l}) - using final value of (${hue4}, ${sat}, ${lit})`, "accent");
+      log(`sourced rgb of (${colour[0]}, ${colour[1]}, ${colour[2]}), hsl of (${hsl3.h}, ${hsl3.s}, ${hsl3.l}) - using final value of (${hue4}, ${sat}, ${lit})`, "accent");
       return {
         hue: hue4,
         sat,
@@ -96168,7 +96168,7 @@ var bleh = (() => {
   }
 
   // src/components/settings/provider/main.tsx
-  function SettingLabel({ ref: ref2, name, body, sub, store, value, setValue, defaultValue }) {
+  function SettingLabel({ ref: ref2, name, body, children, sub, store, value, setValue, defaultValue }) {
     const reset = createRef();
     if (store) {
       if (store.title) name = tl2(store.title);
@@ -96212,7 +96212,8 @@ var bleh = (() => {
         sub && /* @__PURE__ */ jsx("p", {
           class: "setting-sub",
           children: sub
-        })
+        }),
+        children
       ]
     });
     Object.defineProperty(label, "value", {
@@ -103146,26 +103147,26 @@ var bleh = (() => {
   }
 
   // src/components/settings/provider/colour.tsx
-  function SettingColour({ ref: ref2, colour: colour2, recents = [], season, onChange }) {
+  function SettingColour({ ref: ref2, colour, recents = [], season, onChange }) {
     const uuid = crypto.randomUUID();
     useSettings.on("hue", (val, id) => {
       if (id == uuid) return;
-      colour2.hue = val;
+      colour.hue = val;
       update();
     });
     useSettings.on("sat", (val, id) => {
       if (id == uuid) return;
-      colour2.sat = val;
+      colour.sat = val;
       update();
     });
     useSettings.on("lit", (val, id) => {
       if (id == uuid) return;
-      colour2.lit = val;
+      colour.lit = val;
       update();
     });
     useSettings.on("accent_type", (val, id) => {
       if (id == uuid) return;
-      colour2.type = val;
+      colour.type = val;
       update();
     });
     const colours = [
@@ -103380,21 +103381,21 @@ var bleh = (() => {
           bind: "hue",
           ref: hue4,
           onChange: (val) => {
-            colour2.type = "customise";
+            colour.type = "customise";
           }
         }),
         /* @__PURE__ */ jsx(SettingRange, {
           bind: "sat",
           ref: sat,
           onChange: (val) => {
-            colour2.type = "customise";
+            colour.type = "customise";
           }
         }),
         /* @__PURE__ */ jsx(SettingRange, {
           bind: "lit",
           ref: lit,
           onChange: (val) => {
-            colour2.type = "customise";
+            colour.type = "customise";
           }
         })
       ]
@@ -103402,10 +103403,10 @@ var bleh = (() => {
     function update(set_after = true) {
       console.info("re-rendering");
       list = [];
-      if (colour2.type == "default" && (colour2.hue != default_colour.sets.hue || colour2.sat != default_colour.sets.sat || colour2.lit != default_colour.sets.lit)) {
-        colour2.type = "customise";
-      } else if (colour2.type == "avatar" && (colour2.hue != avatar_colour.sets.hue || colour2.sat != avatar_colour.sets.sat || colour2.lit != avatar_colour.sets.lit)) {
-        colour2.type = "customise";
+      if (colour.type == "default" && (colour.hue != default_colour.sets.hue || colour.sat != default_colour.sets.sat || colour.lit != default_colour.sets.lit)) {
+        colour.type = "customise";
+      } else if (colour.type == "avatar" && (colour.hue != avatar_colour.sets.hue || colour.sat != avatar_colour.sets.sat || colour.lit != avatar_colour.sets.lit)) {
+        colour.type = "customise";
       }
       custom_swatches = [
         default_colour,
@@ -103413,9 +103414,9 @@ var bleh = (() => {
         {
           type: "placeholder",
           sets: {
-            hue: colour2.hue,
-            sat: colour2.sat,
-            lit: colour2.lit
+            hue: colour.hue,
+            sat: colour.sat,
+            lit: colour.lit
           }
         },
         ...seasonal2
@@ -103442,7 +103443,7 @@ var bleh = (() => {
                 children: custom_swatches.map((col, i3) => {
                   const elem = /* @__PURE__ */ jsx(ColourSwatch, {
                     colour: col,
-                    active: is_active2(col, colour2),
+                    active: is_active2(col, colour),
                     onChange: (val) => {
                       set2(val);
                     }
@@ -103456,7 +103457,7 @@ var bleh = (() => {
                 children: colours.map((col, i3) => {
                   const elem = /* @__PURE__ */ jsx(ColourSwatch, {
                     colour: col,
-                    active: is_active2(col, colour2),
+                    active: is_active2(col, colour),
                     onChange: (val) => {
                       set2(val);
                     }
@@ -103484,50 +103485,50 @@ var bleh = (() => {
       value.sets.lit = Number(value.sets.lit);
       console.info("setting colour to", value);
       if (value.type == "customise") {
-        colour2 = {
-          ...colour2,
+        colour = {
+          ...colour,
           type: "customise",
           ...value.sets
         };
       } else {
-        colour2 = {
-          ...colour2,
+        colour = {
+          ...colour,
           type: value.type || "colour",
           ...value.sets
         };
       }
-      if (colour2.type == "avatar" && (colour2.hue != avatar_colour.sets?.hue || colour2.sat != avatar_colour.sets?.sat || colour2.lit != avatar_colour.sets?.lit)) {
-        colour2.type = "customise";
+      if (colour.type == "avatar" && (colour.hue != avatar_colour.sets?.hue || colour.sat != avatar_colour.sets?.sat || colour.lit != avatar_colour.sets?.lit)) {
+        colour.type = "customise";
       }
-      console.info("info", colour2.type);
+      console.info("info", colour.type);
       console.info("setting colour to: found colour");
       list.forEach((entry) => {
-        entry.active = is_active2(entry.colour, colour2);
+        entry.active = is_active2(entry.colour, colour);
       });
-      if (onChange) onChange(colour2);
-      useSettings.set("hue", colour2.hue, uuid);
-      useSettings.set("sat", colour2.sat, uuid);
-      useSettings.set("lit", colour2.lit, uuid);
-      useSettings.set("accent_type", colour2.type, uuid);
+      if (onChange) onChange(colour);
+      useSettings.set("hue", colour.hue, uuid);
+      useSettings.set("sat", colour.sat, uuid);
+      useSettings.set("lit", colour.lit, uuid);
+      useSettings.set("accent_type", colour.type, uuid);
       const preview2 = page.state.colour_preview;
       const bg_colour2 = window.getComputedStyle(preview2).backgroundColor;
       const final2 = formatHex(bg_colour2);
       convert2.current.value = final2;
     }
   }
-  function is_active2(entry, colour2) {
+  function is_active2(entry, colour) {
     if (entry.type == "placeholder" && ![
       "colour",
       "customise"
-    ].includes(colour2.type)) return false;
-    if (colour2.type == "season") {
+    ].includes(colour.type)) return false;
+    if (colour.type == "season") {
       if (!entry.sets || entry.type != "season") return false;
-      return entry.sets.hue == colour2.hue && entry.sets.sat == colour2.sat && entry.sets.lit == colour2.lit;
-    } else if (colour2.type == "colour" || entry.type == "placeholder") {
+      return entry.sets.hue == colour.hue && entry.sets.sat == colour.sat && entry.sets.lit == colour.lit;
+    } else if (colour.type == "colour" || entry.type == "placeholder") {
       if (!entry.sets) return false;
-      return entry.sets.hue == colour2.hue && entry.sets.sat == colour2.sat && entry.sets.lit == colour2.lit;
+      return entry.sets.hue == colour.hue && entry.sets.sat == colour.sat && entry.sets.lit == colour.lit;
     } else {
-      return entry.type == colour2.type;
+      return entry.type == colour.type;
     }
   }
   function SwatchGroup({ children }) {
@@ -103547,13 +103548,13 @@ var bleh = (() => {
       ]
     });
   }
-  function ColourSwatch({ colour: colour2, active, onChange }) {
-    if (!colour2.type) colour2.type = "colour";
-    const displays = colour2.displays || colour2.sets;
+  function ColourSwatch({ colour, active, onChange }) {
+    if (!colour.type) colour.type = "colour";
+    const displays = colour.displays || colour.sets;
     if ([
       "colour",
       "placeholder"
-    ].includes(colour2.type) && !colour2.label || colour2.type == "customise") {
+    ].includes(colour.type) && !colour.label || colour.type == "customise") {
       const preview = /* @__PURE__ */ jsx("div", {
         class: "colour-preview colourful",
         "data-bleh--theme": "oled",
@@ -103568,7 +103569,7 @@ var bleh = (() => {
       const bg_colour = window.getComputedStyle(preview).backgroundColor;
       const final = formatHex(bg_colour);
       const labelled = (0, import_color_namer.default)(final);
-      colour2.label = labelled.pantone[0].name;
+      colour.label = labelled.pantone[0].name;
     }
     const swatch = /* @__PURE__ */ jsx("button", {
       type: "button",
@@ -103579,8 +103580,8 @@ var bleh = (() => {
         active = !active;
         if (onChange) {
           onChange({
-            ...colour2,
-            type: colour2.type == "placeholder" ? "customise" : colour2.type
+            ...colour,
+            type: colour.type == "placeholder" ? "customise" : colour.type
           });
         }
         update();
@@ -103591,7 +103592,7 @@ var bleh = (() => {
             "swatch",
             "colourful"
           ],
-          "data-swatch-type": colour2.type,
+          "data-swatch-type": colour.type,
           style: displays && {
             "--hue-over": displays.hue,
             "--sat-over": displays.sat,
@@ -103599,7 +103600,7 @@ var bleh = (() => {
           },
           children: /* @__PURE__ */ jsx("span", {
             class: "swatch-icon-container",
-            "data-season": colour2.seasonal || "none",
+            "data-season": colour.seasonal || "none",
             children: /* @__PURE__ */ jsx(Icon, {
               mask: false,
               identifier: "swatch"
@@ -103619,9 +103620,9 @@ var bleh = (() => {
                 "--sat-over": displays.sat,
                 "--lit-over": displays.lit
               },
-              children: colour2.label && tl2(colour2.label)
+              children: colour.label && tl2(colour.label)
             }),
-            colour2.seasonal && /* @__PURE__ */ jsx("p", {
+            colour.seasonal && /* @__PURE__ */ jsx("p", {
               class: [
                 "swatch-desc"
               ],
@@ -103633,7 +103634,7 @@ var bleh = (() => {
     });
     Object.defineProperty(swatch, "colour", {
       get() {
-        return colour2;
+        return colour;
       }
     });
     Object.defineProperty(swatch, "active", {
@@ -104018,7 +104019,7 @@ var bleh = (() => {
             </div>
         </div>
     `;
-    const colour2 = header_colour(html.node`
+    const colour = header_colour(html.node`
         <img src=${url} />
     `, false, [
       elem
@@ -115728,25 +115729,328 @@ var bleh = (() => {
     return cache2;
   }
 
-  // src/components/settings/swatch.ts
-  function colour_tile(type, style2 = "") {
-    let text4;
-    const number = type.slice(-1);
-    if (type.startsWith("l")) {
-      text4 = tl2(trans.link_val, {
-        v: number
-      });
-    } else {
-      text4 = tl2(trans.bg_val, {
-        v: number
-      });
+  // src/components/settings/provider/profile_banner.tsx
+  function ProfileBanner({ ref: ref2, markdown: markdown2, onChange }) {
+    const banner_regex = /\[banner=([^\]]+)\]/;
+    let value = "";
+    const input2 = createRef();
+    const preview = createRef();
+    const elem = /* @__PURE__ */ jsx("div", {
+      class: "setting",
+      "data-type": "text",
+      ref: ref2,
+      children: [
+        /* @__PURE__ */ jsx(SettingLabel, {
+          name: tl2(trans.profile_banner.name),
+          body: tl2(trans.profile_banner.body),
+          sub: tl2(trans.aspect_ratio_banner, {
+            v: /* @__PURE__ */ jsx("strong", {
+              children: "1300 / 325"
+            })
+          })
+        }),
+        /* @__PURE__ */ jsx("div", {
+          class: [
+            "info",
+            "v"
+          ],
+          children: [
+            /* @__PURE__ */ jsx(Input, {
+              className: "profile-banner-input",
+              onChange: (v) => set2(String(v)),
+              ref: input2
+            }),
+            /* @__PURE__ */ jsx("div", {
+              class: "banner-image",
+              ref: preview
+            })
+          ]
+        })
+      ]
+    });
+    function update(val) {
+      const sanitised = `url(https://images.weserv.nl/?url=${encodeURIComponent(val)}&output=webp&n=-1)`;
+      preview.current.style.setProperty("background-image", sanitised);
+      preview.current.onclick = () => {
+        expand_avatar(sanitised);
+      };
+      input2.current.value = val;
     }
-    return html.node`
-        <div class="colour-tile-wrap">
-            <div class="colour-tile mini colourful ${type}" style=${style2} />
-            <div class="colour-tile-type">${text4}</div>
-        </div>
-    `;
+    function set2(v) {
+      value = v;
+      const match4 = markdown2.match(banner_regex);
+      const new_banner = get(v);
+      if (match4) {
+        onChange(markdown2.replace(banner_regex, new_banner));
+      } else {
+        const trimmed = markdown2.trimEnd();
+        if (trimmed.length == 0) {
+          onChange(new_banner);
+        } else {
+          onChange(trimmed + "\n\n" + new_banner);
+        }
+      }
+      update(v);
+    }
+    function get(v) {
+      let new_banner = v.trim() ? `[banner=${v}]` : "";
+      if (!new_banner.match(banner_regex)) {
+        new_banner = "";
+      }
+      return new_banner;
+    }
+    Object.defineProperty(elem, "markdown", {
+      set(v) {
+        markdown2 = v;
+        const match4 = markdown2.match(banner_regex);
+        update(match4 ? match4[1] : "");
+      }
+    });
+    Object.defineProperty(elem, "value", {
+      get() {
+        return value;
+      },
+      set(v) {
+        set2(v);
+      }
+    });
+    const match3 = markdown2.match(banner_regex);
+    update(match3 ? match3[1] : "");
+    return elem;
+  }
+
+  // src/components/settings/provider/profile_accent.tsx
+  function ProfileAccent({ ref: ref2, markdown: markdown2, onChange }) {
+    const accent_regex = /\[accent=([0-9]{1,3}),([0-9]*\.?[0-9]+),([0-9]*\.?[0-9]+)\]/;
+    let value = {
+      hue: 0,
+      sat: 0,
+      lit: 0
+    };
+    const preview = createRef();
+    const elem = /* @__PURE__ */ jsx("div", {
+      class: "setting",
+      "data-type": "info",
+      ref: ref2,
+      children: [
+        /* @__PURE__ */ jsx(SettingLabel, {
+          name: tl2(trans.profile_accent.name),
+          body: tl2(trans.profile_accent.body)
+        }),
+        /* @__PURE__ */ jsx("div", {
+          class: "info",
+          children: /* @__PURE__ */ jsx("div", {
+            class: "colour-tile-and-button",
+            children: [
+              /* @__PURE__ */ jsx("div", {
+                class: [
+                  "colour-tile",
+                  "colourful"
+                ],
+                ref: preview
+              }),
+              /* @__PURE__ */ jsx(Button, {
+                onClick: modal,
+                children: [
+                  /* @__PURE__ */ jsx(Icon, {
+                    name: icons.edit
+                  }),
+                  tl2(trans.edit)
+                ]
+              })
+            ]
+          })
+        })
+      ]
+    });
+    function modal() {
+      const convert2 = createRef();
+      const hue4 = createRef();
+      const sat = createRef();
+      const lit = createRef();
+      const current_preview = createRef();
+      dialog({
+        id: "profile_accent",
+        title: tl2(trans.profile_accent.name),
+        body: /* @__PURE__ */ jsx(Fragment, {
+          children: [
+            /* @__PURE__ */ jsx(SettingGroup, {
+              children: [
+                /* @__PURE__ */ jsx(SettingInfo, {
+                  name: tl2(trans.preview),
+                  children: /* @__PURE__ */ jsx(ColourTiles, {
+                    ref: current_preview
+                  })
+                }),
+                /* @__PURE__ */ jsx(SettingInput, {
+                  name: tl2(trans.convert_from_hex),
+                  type: "colour",
+                  length: 7,
+                  saveText: tl2(trans.convert),
+                  onChange: (val) => {
+                    const hsl3 = hex_to_oklch(val);
+                    const clamped_sat = clamp_sat(hsl3.s / 100 * 3);
+                    hue4.current.value = hsl3.h;
+                    sat.current.value = clamped_sat;
+                    lit.current.value = clamp_lit(clamped_sat, hsl3.l / 100 + 0.35);
+                    update_preview();
+                  },
+                  ref: convert2
+                }),
+                /* @__PURE__ */ jsx(SettingRange, {
+                  name: tl2(trans.hue),
+                  value: value.hue || settings_store.hue.default,
+                  min: settings_store.hue.min,
+                  max: settings_store.hue.max,
+                  step: settings_store.hue.step,
+                  defaultValue: settings_store.hue.default,
+                  onChange: () => update_preview(),
+                  ref: hue4
+                }),
+                /* @__PURE__ */ jsx(SettingRange, {
+                  name: tl2(trans.sat),
+                  value: value.sat || settings_store.sat.default,
+                  min: settings_store.sat.min,
+                  max: settings_store.sat.max,
+                  step: settings_store.sat.step,
+                  defaultValue: settings_store.sat.default,
+                  onChange: () => update_preview(),
+                  ref: sat
+                }),
+                /* @__PURE__ */ jsx(SettingRange, {
+                  name: tl2(trans.lit),
+                  value: value.lit || settings_store.lit.default,
+                  min: settings_store.lit.min,
+                  max: settings_store.lit.max,
+                  step: settings_store.lit.step,
+                  defaultValue: settings_store.lit.default,
+                  onChange: () => update_preview(),
+                  ref: lit
+                })
+              ]
+            }),
+            /* @__PURE__ */ jsx(ModalFooter, {
+              children: [
+                /* @__PURE__ */ jsx(SeeMore, {
+                  iconPlacement: "left",
+                  icon: icons.x,
+                  onClick: () => dialog_rm({
+                    id: "profile_accent"
+                  }),
+                  children: tl2(trans.cancel)
+                }),
+                /* @__PURE__ */ jsx(FooterFill, {}),
+                /* @__PURE__ */ jsx(ButtonGroup, {
+                  children: /* @__PURE__ */ jsx(Button, {
+                    primary: true,
+                    onClick: () => {
+                      set2({
+                        hue: hue4.current.value,
+                        sat: sat.current.value,
+                        lit: lit.current.value
+                      });
+                      dialog_rm({
+                        id: "profile_accent"
+                      });
+                    },
+                    children: [
+                      /* @__PURE__ */ jsx(SaveIcon, {}),
+                      tl2(trans.save)
+                    ]
+                  })
+                })
+              ]
+            })
+          ]
+        })
+      });
+      function update_preview() {
+        const style2 = `--hue-over: ${hue4.current.value}; --sat-over: ${sat.current.value}; --lit-over: ${lit.current.value}`;
+        current_preview.current.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
+          children: [
+            /* @__PURE__ */ jsx(ColourTile, {
+              type: "l3",
+              style: style2
+            }),
+            /* @__PURE__ */ jsx(ColourTile, {
+              type: "l4",
+              style: style2
+            }),
+            /* @__PURE__ */ jsx(ColourTile, {
+              type: "h3",
+              style: style2
+            }),
+            /* @__PURE__ */ jsx(ColourTile, {
+              type: "h4",
+              style: style2
+            })
+          ]
+        }));
+        const preview2 = page.state.colour_preview;
+        preview2.setAttribute("style", style2);
+        const bg_colour = window.getComputedStyle(preview2).backgroundColor;
+        const final = formatHex(bg_colour);
+        convert2.current.value = final;
+        preview2.removeAttribute("style");
+      }
+      update_preview();
+    }
+    function update(v) {
+      value = v;
+      if (isNaN(v.hue) || isNaN(v.sat) || isNaN(v.lit)) {
+        preview.current.style.removeProperty("--hue-over");
+        preview.current.style.removeProperty("--sat-over");
+        preview.current.style.removeProperty("--lit-over");
+        preview.current.classList.add("empty");
+        return;
+      }
+      preview.current.style.setProperty("--hue-over", String(v.hue));
+      preview.current.style.setProperty("--sat-over", String(v.sat));
+      preview.current.style.setProperty("--lit-over", String(v.lit));
+      preview.current.classList.remove("empty");
+    }
+    function set2(v) {
+      value = v;
+      const match4 = markdown2.match(accent_regex);
+      const new_accent = `[accent=${v.hue},${v.sat},${v.lit}]`;
+      if (match4) {
+        onChange(markdown2.replace(accent_regex, new_accent));
+      } else {
+        const trimmed = markdown2.trimEnd();
+        if (trimmed.length == 0) {
+          onChange(new_accent);
+        } else {
+          onChange(trimmed + "\n\n" + new_accent);
+        }
+      }
+      update(v);
+    }
+    Object.defineProperty(elem, "markdown", {
+      set(v) {
+        markdown2 = v;
+        const match4 = markdown2.match(accent_regex);
+        update({
+          hue: Number(match4?.[1]),
+          sat: Number(match4?.[2]),
+          lit: Number(match4?.[3])
+        });
+      }
+    });
+    Object.defineProperty(elem, "value", {
+      get() {
+        return value;
+      },
+      set(v) {
+        set2(v);
+      }
+    });
+    const match3 = markdown2.match(accent_regex);
+    update({
+      hue: Number(match3?.[1] || void 0),
+      sat: Number(match3?.[2] || void 0),
+      lit: Number(match3?.[3] || void 0)
+    });
+    return elem;
   }
 
   // src/pages/lastfm_settings/profile.tsx
@@ -115950,7 +116254,7 @@ var bleh = (() => {
     const form_display_name = document.getElementById("id_full_name").value;
     const form_website = document.getElementById("id_homepage").value;
     const form_country = document.getElementById("id_country");
-    const form_about_me = document.getElementById("id_about_me").textContent;
+    const form_about_me = document.getElementById("id_about_me");
     const profile_cache = JSON.parse(localStorage.getItem(keys3.profile_cache)) || {};
     const cache2 = profile_cache[auth.name];
     delete_cache(cache2);
@@ -115966,17 +116270,7 @@ var bleh = (() => {
       allow_alignment: true,
       allow_lists: true
     };
-    const chars2 = /* @__PURE__ */ jsx("p", {
-      class: [
-        "tip",
-        "characters",
-        "colourful"
-      ],
-      children: tl2(trans.value_characters_max, {
-        v: bio_max_length
-      })
-    });
-    const about = markdown_field(update_about, markdown_settings, form_about_me, "about_me", 40, 10, tl2(trans.anything_you_can_imagine), null, false, false, false);
+    const about = markdown_field(update_about, markdown_settings, form_about_me.textContent, "about_me", 40, 10, tl2(trans.anything_you_can_imagine), null, false, false, false);
     const preview = createRef();
     const accent_setting = html.node`
         <div class="setting" data-type="info" disabled=${!auth.sponsor} />
@@ -116000,7 +116294,6 @@ var bleh = (() => {
       ]
     }));
     page.structure.main.removeChild(update_profile);
-    update_about();
     let country_elem;
     let website_elem;
     render(update_picture, html`
@@ -116166,15 +116459,6 @@ var bleh = (() => {
       return elem;
     }}
 			        ${accent_setting}
-			        <div class="setting" data-type="text">
-			            <div class="heading">
-			                <h5>${tl2(trans.about)}</h5>
-			                ${chars2}
-			            </div>
-			            <div class="${!ff("cosplay") ? "input-container content-form textarea" : "limitless"}">
-			                ${about}
-			            </div>
-			        </div>
 			        ${() => {
       const status_regex = /\[status=([^\]]+)\]/;
       const match3 = about.value.match(status_regex);
@@ -116239,23 +116523,66 @@ var bleh = (() => {
     })}
 			</div>
 		`);
+    const chars2 = createRef();
+    const md = createRef();
+    const banner = createRef();
+    const accent = createRef();
+    update_picture.appendChild(/* @__PURE__ */ jsx(SettingGroup, {
+      children: [
+        /* @__PURE__ */ jsx(ProfileBanner, {
+          markdown: form_about_me.value,
+          onChange: (v) => md.current.value = v,
+          ref: banner
+        }),
+        /* @__PURE__ */ jsx(ProfileAccent, {
+          markdown: form_about_me.value,
+          onChange: (v) => md.current.value = v,
+          ref: accent
+        }),
+        /* @__PURE__ */ jsx("div", {
+          class: "setting",
+          "data-type": "text",
+          children: [
+            /* @__PURE__ */ jsx(SettingLabel, {
+              name: tl2(trans.about),
+              children: /* @__PURE__ */ jsx("p", {
+                class: [
+                  "tip",
+                  "characters",
+                  "colourful"
+                ],
+                ref: chars2,
+                children: tl2(trans.value_characters_max, {
+                  v: bio_max_length
+                })
+              })
+            }),
+            /* @__PURE__ */ jsx(MarkdownField, {
+              elem: form_about_me,
+              options: markdown_settings,
+              onChange: (v) => {
+                banner.current.markdown = v;
+                accent.current.markdown = v;
+              },
+              ref: md
+            })
+          ]
+        })
+      ]
+    }));
+    update_about();
     function len(text4) {
       return text4.replace(/\n/g, "\r\n").length;
-      const normalised = text4.replace(/\r\n/g, "\n");
-      return new TextEncoder().encode(normalised).length;
     }
     function update_about(value = about.value) {
       const length = len(value);
-      chars2.textContent = tl2(trans.value_characters_max, {
+      chars2.current.replaceChildren(tl2(trans.value_characters_max, {
         v: `${length}/${bio_max_length}`
-      });
-      chars2.setAttribute("data-exceeded", String(length > bio_max_length));
+      }));
+      chars2.current.setAttribute("data-exceeded", String(length > bio_max_length));
       delete_cache(cache2);
       preview.current.replaceChildren(markdown(value, markdown_settings));
       save_profile_cache(cache2, profile_cache, auth.name);
-      console.info("cache", cache2);
-      console.info("cache update", about.value, cache2.hue, cache2.sat, cache2.lit);
-      const accent_regex = /\[accent=([0-9]{1,3}),([0-9]*\.?[0-9]+),([0-9]*\.?[0-9]+)\]/;
       const font_regex = /\[font=([^\]]+)\]/;
       if (font_setting) {
         let font_name = cache2.font;
@@ -116376,183 +116703,6 @@ var bleh = (() => {
           });
         }}>${tl2(trans.change_font)}</a>
 				`);
-      }
-      if (accent_setting) {
-        let accent_edit;
-        render(accent_setting, html``);
-        render(accent_setting, html`
-					<div class="heading">
-						<h5>${tl2(trans.profile_accent.name)}<span class="new-badge sponsor-related">${tl2(trans.sponsors_only)}</span></h5>
-						<p>${tl2(trans.profile_accent.body)}</p>
-					</div>
-					<div class="info">
-						<div class="colour-tile-and-button">
-							<div class="colour-tile colourful"
-								style="--hue-over: ${cache2.hue}; --sat-over: ${cache2.sat}; --lit-over: ${cache2.lit}" />
-							<button class="btn icon" data-type="edit" type="button"
-								onclick=${() => {
-          let hue_range;
-          let sat_range;
-          let lit_range;
-          const match3 = about.value.match(accent_regex);
-          if (match3) {
-            save_setting("profile_hue", parseInt(match3[1], 10));
-            save_setting("profile_sat", parseFloat(match3[2]));
-            save_setting("profile_lit", parseFloat(match3[3]));
-          }
-          let colour2;
-          let accent_preview;
-          const style_for_tile = `--hue-over: ${settings.profile_hue}; --sat-over: ${settings.profile_sat}; --lit-over: ${settings.profile_lit};`;
-          dialog({
-            id: "profile_accent",
-            title: tl2(trans.profile_accent.name),
-            body: html.node`
-                                    <div class="setting-group">
-                                        <div class="setting" data-type="info">
-                                            <div class="heading">
-                                                <h5>${tl2(trans.preview)}</h5>
-                                            </div>
-                                            <div class="info">
-                                                <div class="colour-tiles" ref=${(el) => accent_preview = el}>
-                                                    ${colour_tile("l3", style_for_tile)}
-                                                    ${colour_tile("l4", style_for_tile)}
-                                                    ${colour_tile("h3", style_for_tile)}
-                                                    ${colour_tile("h4", style_for_tile)}
-                                                </div>
-                                            </div>
-                                        </div>
-                                        ${ff("colour_based_on_hex") ? html.node`
-                                        <div class="setting" data-type="text">
-                                            <div class="heading">
-                                                <h5>${tl2(trans.convert_from_hex)}</h5>
-                                            </div>
-                                            <div class="input-container content-form">
-                                                ${colour2 = input({
-              type: "colour",
-              value: "#999999",
-              maxlength: 7,
-              warn_if_empty: true
-            })}
-                                                <button class="btn primary icon convert" onclick=${() => {
-              const value2 = colour2.value;
-              const hsl3 = hex_to_oklch(value2);
-              const sat = clamp_sat(hsl3.s / 100 * 3);
-              hue_range.value = hsl3.h;
-              sat_range.value = sat;
-              lit_range.value = clamp_lit(sat, hsl3.l / 100 + 0.35);
-            }}>${tl2(trans.convert)}</button>
-                                            </div>
-                                        </div>
-                                        ` : ""}
-                                        ${hue_range = setting({
-              id: "profile_hue",
-              func: update_colour_preview
-            })}
-                                        ${sat_range = setting({
-              id: "profile_sat",
-              func: update_colour_preview
-            })}
-                                        ${lit_range = setting({
-              id: "profile_lit",
-              func: update_colour_preview
-            })}
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button class="see-more cancel left-icon" onclick=${() => dialog_rm({
-              id: "profile_accent"
-            })}>
-                                            ${tl2(trans.back)}
-                                        </button>
-                                        <div class="fill"></div>
-                                        <div class="button-group">
-                                            ${() => {
-              const btn = html.node`
-                                                    <button class="btn icon select-button" data-type="copy">
-                                                        ${tl2(trans.copy)}
-                                                    </button>
-                                                `;
-              tippy_esm_default(btn, {
-                theme: "context-menu",
-                content: html.node`
-                                                        <button class="dropdown-menu-clickable-item" data-type="profile" onclick=${() => {
-                  hue_range.value = settings.hue;
-                  sat_range.value = settings.sat;
-                  lit_range.value = settings.lit;
-                }}>${tl2(trans.apply_global_accent)}</button>
-                                                        <button class="dropdown-menu-clickable-item" data-type="global" onclick=${() => {
-                  const warn = notify({
-                    id: "confirm_accent",
-                    title: tl2(trans.are_you_sure),
-                    body: tl2(trans.this_will_replace_your_global_accent),
-                    type: "warning",
-                    actions: [
-                      {
-                        type: "check",
-                        action: () => {
-                          notify_rm(warn);
-                          save_setting("accent_type", "customise");
-                          save_setting("hue", settings.profile_hue);
-                          save_setting("sat", settings.profile_sat);
-                          save_setting("lit", settings.profile_lit);
-                        },
-                        text: tl2(trans.continue)
-                      }
-                    ],
-                    persist: true
-                  });
-                }}>${tl2(trans.apply_profile_accent)}</button>
-                                                    `,
-                trigger: "click",
-                placement: "bottom",
-                interactive: true,
-                interactiveBorder: 10,
-                appendTo: document.body
-              });
-              return btn;
-            }}
-                                            <button class="btn primary continue" onclick=${() => {
-              const new_accent = `[accent=${settings.profile_hue},${settings.profile_sat},${settings.profile_lit}]`;
-              if (match3) {
-                about.value = about.value.replace(accent_regex, new_accent);
-              } else {
-                const trimmed = about.value.trimEnd();
-                if (trimmed.length == 0) {
-                  about.value = new_accent;
-                } else {
-                  about.value = trimmed + "\n\n" + new_accent;
-                }
-              }
-              dialog_rm({
-                id: "profile_accent"
-              });
-              status({
-                title: tl2(trans.profile_accent.reminder)
-              });
-            }}>
-                                                ${tl2(trans.change)}
-                                            </button>
-                                        </div>
-                                    </div>
-                                `
-          });
-          function update_colour_preview() {
-            const style_for_tile2 = `--hue-over: ${settings.profile_hue}; --sat-over: ${settings.profile_sat}; --lit-over: ${settings.profile_lit};`;
-            render(accent_preview, html`
-												${colour_tile("l3", style_for_tile2)}
-												${colour_tile("l4", style_for_tile2)}
-												${colour_tile("h3", style_for_tile2)}
-												${colour_tile("h4", style_for_tile2)}
-											`);
-          }
-        }}
-								}}>
-					            ${tl2(trans.edit)}
-					        </button>
-						</div>
-				`);
-        tippy_esm_default(accent_edit, {
-          content: tl2(trans.edit)
-        });
       }
     }
   }
@@ -119909,330 +120059,6 @@ var bleh = (() => {
     });
   }
 
-  // src/components/settings/provider/profile_banner.tsx
-  function ProfileBanner({ ref: ref2, markdown: markdown2, onChange }) {
-    const banner_regex = /\[banner=([^\]]+)\]/;
-    let value = "";
-    const input2 = createRef();
-    const preview = createRef();
-    const elem = /* @__PURE__ */ jsx("div", {
-      class: "setting",
-      "data-type": "text",
-      ref: ref2,
-      children: [
-        /* @__PURE__ */ jsx(SettingLabel, {
-          name: tl2(trans.profile_banner.name),
-          body: tl2(trans.profile_banner.body),
-          sub: tl2(trans.aspect_ratio_banner, {
-            v: /* @__PURE__ */ jsx("strong", {
-              children: "1300 / 325"
-            })
-          })
-        }),
-        /* @__PURE__ */ jsx("div", {
-          class: [
-            "info",
-            "v"
-          ],
-          children: [
-            /* @__PURE__ */ jsx(Input, {
-              className: "profile-banner-input",
-              onChange: (v) => set2(String(v)),
-              ref: input2
-            }),
-            /* @__PURE__ */ jsx("div", {
-              class: "banner-image",
-              ref: preview
-            })
-          ]
-        })
-      ]
-    });
-    function update(val) {
-      const sanitised = `url(https://images.weserv.nl/?url=${encodeURIComponent(val)}&output=webp&n=-1)`;
-      preview.current.style.setProperty("background-image", sanitised);
-      preview.current.onclick = () => {
-        expand_avatar(sanitised);
-      };
-      input2.current.value = val;
-    }
-    function set2(v) {
-      value = v;
-      const match4 = markdown2.match(banner_regex);
-      const new_banner = get(v);
-      if (match4) {
-        onChange(markdown2.replace(banner_regex, new_banner));
-      } else {
-        const trimmed = markdown2.trimEnd();
-        if (trimmed.length == 0) {
-          onChange(new_banner);
-        } else {
-          onChange(trimmed + "\n\n" + new_banner);
-        }
-      }
-      update(v);
-    }
-    function get(v) {
-      let new_banner = v.trim() ? `[banner=${v}]` : "";
-      if (!new_banner.match(banner_regex)) {
-        new_banner = "";
-      }
-      return new_banner;
-    }
-    Object.defineProperty(elem, "markdown", {
-      set(v) {
-        markdown2 = v;
-        const match4 = markdown2.match(banner_regex);
-        update(match4 ? match4[1] : "");
-      }
-    });
-    Object.defineProperty(elem, "value", {
-      get() {
-        return value;
-      },
-      set(v) {
-        set2(v);
-      }
-    });
-    const match3 = markdown2.match(banner_regex);
-    update(match3 ? match3[1] : "");
-    return elem;
-  }
-
-  // src/components/settings/provider/profile_accent.tsx
-  function ProfileAccent({ ref: ref2, markdown: markdown2, onChange }) {
-    const accent_regex = /\[accent=([0-9]{1,3}),([0-9]*\.?[0-9]+),([0-9]*\.?[0-9]+)\]/;
-    let value = {
-      hue: 0,
-      sat: 0,
-      lit: 0
-    };
-    const preview = createRef();
-    const elem = /* @__PURE__ */ jsx("div", {
-      class: "setting",
-      "data-type": "info",
-      ref: ref2,
-      children: [
-        /* @__PURE__ */ jsx(SettingLabel, {
-          name: tl2(trans.profile_accent.name),
-          body: tl2(trans.profile_accent.body)
-        }),
-        /* @__PURE__ */ jsx("div", {
-          class: "info",
-          children: /* @__PURE__ */ jsx("div", {
-            class: "colour-tile-and-button",
-            children: [
-              /* @__PURE__ */ jsx("div", {
-                class: [
-                  "colour-tile",
-                  "colourful"
-                ],
-                ref: preview
-              }),
-              /* @__PURE__ */ jsx(Button, {
-                onClick: modal,
-                children: [
-                  /* @__PURE__ */ jsx(Icon, {
-                    name: icons.edit
-                  }),
-                  tl2(trans.edit)
-                ]
-              })
-            ]
-          })
-        })
-      ]
-    });
-    function modal() {
-      const convert2 = createRef();
-      const hue4 = createRef();
-      const sat = createRef();
-      const lit = createRef();
-      const current_preview = createRef();
-      dialog({
-        id: "profile_accent",
-        title: tl2(trans.profile_accent.name),
-        body: /* @__PURE__ */ jsx(Fragment, {
-          children: [
-            /* @__PURE__ */ jsx(SettingGroup, {
-              children: [
-                /* @__PURE__ */ jsx(SettingInfo, {
-                  name: tl2(trans.preview),
-                  children: /* @__PURE__ */ jsx(ColourTiles, {
-                    ref: current_preview
-                  })
-                }),
-                /* @__PURE__ */ jsx(SettingInput, {
-                  name: tl2(trans.convert_from_hex),
-                  type: "colour",
-                  length: 7,
-                  saveText: tl2(trans.convert),
-                  onChange: (val) => {
-                    const hsl3 = hex_to_oklch(val);
-                    const clamped_sat = clamp_sat(hsl3.s / 100 * 3);
-                    hue4.current.value = hsl3.h;
-                    sat.current.value = clamped_sat;
-                    lit.current.value = clamp_lit(clamped_sat, hsl3.l / 100 + 0.35);
-                    update_preview();
-                  },
-                  ref: convert2
-                }),
-                /* @__PURE__ */ jsx(SettingRange, {
-                  name: tl2(trans.hue),
-                  value: value.hue || settings_store.hue.default,
-                  min: settings_store.hue.min,
-                  max: settings_store.hue.max,
-                  step: settings_store.hue.step,
-                  defaultValue: settings_store.hue.default,
-                  onChange: () => update_preview(),
-                  ref: hue4
-                }),
-                /* @__PURE__ */ jsx(SettingRange, {
-                  name: tl2(trans.sat),
-                  value: value.sat || settings_store.sat.default,
-                  min: settings_store.sat.min,
-                  max: settings_store.sat.max,
-                  step: settings_store.sat.step,
-                  defaultValue: settings_store.sat.default,
-                  onChange: () => update_preview(),
-                  ref: sat
-                }),
-                /* @__PURE__ */ jsx(SettingRange, {
-                  name: tl2(trans.lit),
-                  value: value.lit || settings_store.lit.default,
-                  min: settings_store.lit.min,
-                  max: settings_store.lit.max,
-                  step: settings_store.lit.step,
-                  defaultValue: settings_store.lit.default,
-                  onChange: () => update_preview(),
-                  ref: lit
-                })
-              ]
-            }),
-            /* @__PURE__ */ jsx(ModalFooter, {
-              children: [
-                /* @__PURE__ */ jsx(SeeMore, {
-                  iconPlacement: "left",
-                  icon: icons.x,
-                  onClick: () => dialog_rm({
-                    id: "profile_accent"
-                  }),
-                  children: tl2(trans.cancel)
-                }),
-                /* @__PURE__ */ jsx(FooterFill, {}),
-                /* @__PURE__ */ jsx(ButtonGroup, {
-                  children: /* @__PURE__ */ jsx(Button, {
-                    primary: true,
-                    onClick: () => {
-                      set2({
-                        hue: hue4.current.value,
-                        sat: sat.current.value,
-                        lit: lit.current.value
-                      });
-                      dialog_rm({
-                        id: "profile_accent"
-                      });
-                    },
-                    children: [
-                      /* @__PURE__ */ jsx(SaveIcon, {}),
-                      tl2(trans.save)
-                    ]
-                  })
-                })
-              ]
-            })
-          ]
-        })
-      });
-      function update_preview() {
-        const style2 = `--hue-over: ${hue4.current.value}; --sat-over: ${sat.current.value}; --lit-over: ${lit.current.value}`;
-        current_preview.current.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
-          children: [
-            /* @__PURE__ */ jsx(ColourTile, {
-              type: "l3",
-              style: style2
-            }),
-            /* @__PURE__ */ jsx(ColourTile, {
-              type: "l4",
-              style: style2
-            }),
-            /* @__PURE__ */ jsx(ColourTile, {
-              type: "h3",
-              style: style2
-            }),
-            /* @__PURE__ */ jsx(ColourTile, {
-              type: "h4",
-              style: style2
-            })
-          ]
-        }));
-        const preview2 = page.state.colour_preview;
-        preview2.setAttribute("style", style2);
-        const bg_colour = window.getComputedStyle(preview2).backgroundColor;
-        const final = formatHex(bg_colour);
-        convert2.current.value = final;
-        preview2.removeAttribute("style");
-      }
-      update_preview();
-    }
-    function update(v) {
-      value = v;
-      if (isNaN(v.hue) || isNaN(v.sat) || isNaN(v.lit)) {
-        preview.current.style.removeProperty("--hue-over");
-        preview.current.style.removeProperty("--sat-over");
-        preview.current.style.removeProperty("--lit-over");
-        preview.current.classList.add("empty");
-        return;
-      }
-      preview.current.style.setProperty("--hue-over", String(v.hue));
-      preview.current.style.setProperty("--sat-over", String(v.sat));
-      preview.current.style.setProperty("--lit-over", String(v.lit));
-      preview.current.classList.remove("empty");
-    }
-    function set2(v) {
-      value = v;
-      const match4 = markdown2.match(accent_regex);
-      const new_accent = `[accent=${v.hue},${v.sat},${v.lit}]`;
-      if (match4) {
-        onChange(markdown2.replace(accent_regex, new_accent));
-      } else {
-        const trimmed = markdown2.trimEnd();
-        if (trimmed.length == 0) {
-          onChange(new_accent);
-        } else {
-          onChange(trimmed + "\n\n" + new_accent);
-        }
-      }
-      update(v);
-    }
-    Object.defineProperty(elem, "markdown", {
-      set(v) {
-        markdown2 = v;
-        const match4 = markdown2.match(accent_regex);
-        update({
-          hue: Number(match4?.[1]),
-          sat: Number(match4?.[2]),
-          lit: Number(match4?.[3])
-        });
-      }
-    });
-    Object.defineProperty(elem, "value", {
-      get() {
-        return value;
-      },
-      set(v) {
-        set2(v);
-      }
-    });
-    const match3 = markdown2.match(accent_regex);
-    update({
-      hue: Number(match3?.[1] || void 0),
-      sat: Number(match3?.[2] || void 0),
-      lit: Number(match3?.[3] || void 0)
-    });
-    return elem;
-  }
-
   // src/pages/home/mualani.tsx
   function mualani() {
     page.structure.container = document.body.querySelector(".page-content");
@@ -120394,7 +120220,7 @@ var bleh = (() => {
     const format_guest_features = createRef();
     const show_guest_features = createRef();
     const mouse = createRef();
-    const colour2 = createRef();
+    const colour = createRef();
     const md = createRef();
     const banner = createRef();
     const accent = createRef();
@@ -121614,8 +121440,8 @@ var bleh = (() => {
 			<section class="flexy">
 				<h2>Colour conversions</h2>
 				<div class="colour-list">
-			            ${colours.map((colour3) => {
-      const hsl3 = rgb_to_oklch(colour3[0], colour3[1], colour3[2]);
+			            ${colours.map((colour2) => {
+      const hsl3 = rgb_to_oklch(colour2[0], colour2[1], colour2[2]);
       hsl3.s = clamp_sat(hsl3.s / 100 * 3);
       const hue4 = {
         h: hsl3.h,
@@ -121624,8 +121450,8 @@ var bleh = (() => {
       };
       return html.node`
                                 <div class="colour-list-item">
-                                    <div class="colour-tile colourful" style="background: rgb(${colour3[0]}, ${colour3[1]}, ${colour3[2]})" />
-                                    <div class="colour-text">rgb(${colour3[0]}, ${colour3[1]}, ${colour3[2]})</div>
+                                    <div class="colour-tile colourful" style="background: rgb(${colour2[0]}, ${colour2[1]}, ${colour2[2]})" />
+                                    <div class="colour-text">rgb(${colour2[0]}, ${colour2[1]}, ${colour2[2]})</div>
                                     <div class="bleh-icon" data-type="arrow-right" style="--icon: var(--mask)" />
                                     <div class="colour-tile colourful" style="--hue-over: ${hue4.h}; --sat-over: ${hue4.s}; --lit-over: ${hue4.l}" />
                                     <div class="colour-text">hue ${hue4.h}, sat ${hue4.s}, lit ${hue4.l}</div>
@@ -123151,7 +122977,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-08-31T14:42:53.259Z"
+    built_on: "2026-08-31T14:57:14.028Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

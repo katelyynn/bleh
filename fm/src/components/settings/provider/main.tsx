@@ -19,6 +19,7 @@ interface SettingLabelProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
 	name?: ReactNode;
 	body?: ReactNode;
+	children?: ReactNode;
 	sub?: ReactNode;
 	store?: setting_instance;
 	value?: setting_value;
@@ -30,6 +31,7 @@ export function SettingLabel({
 	ref,
 	name,
 	body,
+	children,
 	sub,
 	store,
 	value,
@@ -70,6 +72,7 @@ export function SettingLabel({
 			</h5>
 			{body && <p class='setting-body'>{body}</p>}
 			{sub && <p class='setting-sub'>{sub}</p>}
+			{children}
 		</div>
 	);
 
