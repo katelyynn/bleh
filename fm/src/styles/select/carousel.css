@@ -29,7 +29,7 @@
 @keyframes carousel_left {
 	from {
 		opacity: 0;
-		translate: -20px 0;
+		translate: 20px 0;
 	}
 
 	to {
@@ -41,7 +41,7 @@
 @keyframes carousel_right {
 	from {
 		opacity: 0;
-		translate: 20px 0;
+		translate: -20px 0;
 	}
 
 	to {

@@ -3,7 +3,7 @@ import { Button } from '@/components/button/button.tsx';
 import { Icon, icons } from '@/components/shared/icon.tsx';
 import { tl, trans } from '@/build/trans.ts';
 
-interface CarouselItem {
+export interface CarouselItem {
 	value: string;
 	display: ReactNode;
 }
@@ -11,6 +11,7 @@ interface CarouselItem {
 interface CarouselProps {
 	values: CarouselItem[];
 	value?: string;
+	className?: string;
 	onChange?: (v: string) => void;
 }
 
@@ -21,6 +22,7 @@ type CarouselElement = HTMLDivElement & {
 export function Carousel({
 	values,
 	value,
+	className,
 	onChange,
 }: CarouselProps) {
 	let i = 0;
@@ -53,7 +55,7 @@ export function Carousel({
 				<Icon name={icons.arrow_left} />
 				{tl(trans.prev)}
 			</CarouselArrow>
-			<div class='carousel-inner' ref={inner} />
+			<div class={['carousel-inner', className]} ref={inner} />
 			<CarouselArrow
 				onClick={() => {
 					let new_val = i + 1;
@@ -73,7 +75,7 @@ export function Carousel({
 				{tl(trans.next)}
 			</CarouselArrow>
 		</div>
-	);
+	) as CarouselElement;
 
 	function update() {
 		inner.current.replaceChildren(

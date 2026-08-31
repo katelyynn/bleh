@@ -24,7 +24,7 @@
 	cursor: default;
 	user-select: none;
 
-	& > span {
+	&>span {
 		position: relative;
 		font-size: calc(26px * var(--custom-font-size-multiplier, 1));
 		top: var(--custom-font-align, 0) !important;
@@ -38,7 +38,7 @@
 
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(var(--font-item-size),
-		1fr));
+				1fr));
 	gap: var(--gap);
 
 	--font-item-size: 90px;
@@ -46,8 +46,7 @@
 	width: calc(((var(--font-item-size) + var(--gap)) * 4) - var(--gap));
 
 	@media (max-width: 450px) {
-		width: calc(((var(--font-item-size) + var(--gap)) * 3) - var(--gap))
-			!important;
+		width: calc(((var(--font-item-size) + var(--gap)) * 3) - var(--gap)) !important;
 	}
 
 	/*&.primary {
@@ -72,7 +71,7 @@
 
 	inset: unset !important;
 
-	& > span {
+	&>span {
 		font-family: var(--custom-font, var(--font)) !important;
 		position: relative;
 	}
@@ -98,7 +97,7 @@
 	margin-bottom: 10px;
 	width: 100%;
 
-	.font-options + & {
+	.font-options+& {
 		margin-top: var(--card-padding);
 	}
 
@@ -173,6 +172,7 @@
 	--custom-font: 'Cherry Bomb One', var(--font);
 	--custom-font-weight: 300 !important;
 	--custom-font-size-multiplier: 1.04;
+	--custom-font-align-mini: -2px;
 	--custom-font-align: -2px;
 }
 
@@ -198,6 +198,7 @@
 	--custom-font-size-multiplier: 1.4;
 	--custom-font-weight: 300 !important;
 	--custom-font-align: -2px;
+	--custom-font-align-mini: -2px;
 	--custom-font-spacing: 1.5px;
 }
 

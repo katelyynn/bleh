@@ -75,6 +75,10 @@ import { profile_bio_markdown_settings } from '@/pages/profile/about.tsx';
 import { ProfileBanner } from '@/components/settings/provider/profile_banner.tsx';
 import { ProfileAccent } from '@/components/settings/provider/profile_accent.tsx';
 import { Carousel } from '@/components/select/carousel.tsx';
+import {
+	convert_name_styles,
+	NameStyles,
+} from '@/components/settings/provider/profile_name.tsx';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -945,6 +949,12 @@ export function mualani() {
 									display: 'world2',
 								},
 							]}
+						/>
+					</DemoItem>
+					<DemoItem label='Carousel (NameStyles)'>
+						<NameStyles
+							value=''
+							values={convert_name_styles(page.state.fonts)}
 						/>
 					</DemoItem>
 				</DemoGrid>
