@@ -55,3 +55,32 @@
 		translate: 0 0;
 	}
 }
+
+
+.carousel-dialog {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+	gap: 4px;
+	width: 310px;
+}
+
+.carousel-dialog-item {
+	--bg: transparent;
+	--bg-hov: oklch(var(--b2) / 20%);
+	--bg-atv: oklch(var(--b2) / 40%);
+	--shadow: none;
+
+	&[aria-checked] {
+		--bg: oklch(var(--f4) / 40%);
+		--bg-hov: oklch(var(--f4) / 50%);
+		--bg-atv: oklch(var(--f4) / 60%);
+		--col: oklch(var(--l3-c));
+	}
+
+	justify-content: center;
+	text-align: center;
+
+	&>.name-style {
+		font-size: calc(15px * var(--custom-font-size-multiplier, 1));
+	}
+}

@@ -413,7 +413,6 @@
 }
 
 .name-style {
-	width: 220px;
 	font-size: calc(18px * var(--custom-font-size-multiplier, 1));
 	line-height: 22px;
 	text-align: center;
@@ -422,6 +421,7 @@
 }
 
 .name-style-block {
+	width: 220px;
 	padding: 10px;
 	background-color: oklch(var(--b6) / 60%);
 	border-radius: var(--radius-s);

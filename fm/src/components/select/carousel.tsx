@@ -2,10 +2,15 @@ import { createRef, ReactNode } from 'jsx-dom';
 import { Button } from '@/components/button/button.tsx';
 import { Icon, icons } from '@/components/shared/icon.tsx';
 import { tl, trans } from '@/build/trans.ts';
+import { menu_tooltip } from '@/components/shared/tooltips.tsx';
+import {
+	FloatingWindow,
+	FloatingWindowContents,
+} from '@/components/menu/floating_window.tsx';
 
 export interface CarouselItem {
 	value: string;
-	display: ReactNode;
+	display: () => ReactNode;
 }
 
 interface CarouselProps {
@@ -34,6 +39,7 @@ export function Carousel({
 	}
 
 	const inner = createRef();
+	const modal = createRef();
 
 	const elem = (
 		<div class='select-carousel'>
@@ -77,12 +83,39 @@ export function Carousel({
 		</div>
 	) as CarouselElement;
 
+	const popup = menu_tooltip(
+		inner.current,
+		<FloatingWindow>
+			<FloatingWindowContents ref={modal} />
+		</FloatingWindow>,
+	);
+
 	function update() {
 		inner.current.replaceChildren(
 			<div class='carousel-inner-value' data-direction={direction}>
-				{values[i].display}
+				{values[i].display()}
 			</div>,
 		);
+
+		modal.current.replaceChildren(
+			<div class='carousel-dialog'>
+				{values.map((val, index) => (
+					<Button
+						className='carousel-dialog-item'
+						aria-checked={val.value == value}
+						onClick={() => {
+							i = index;
+							value = val.value;
+							direction = 'center';
+							update();
+						}}
+					>
+						{val.display()}
+					</Button>
+				))}
+			</div>,
+		);
+		popup.hide();
 	}
 
 	update();

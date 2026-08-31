@@ -298,7 +298,7 @@ export function convert_name_fonts(values: Record<string, string>) {
 	Object.entries(values).forEach(([font, family]) => {
 		vals.push({
 			value: font,
-			display: (
+			display: () => (
 				<NameStyle value={font} type='font'>
 					{family || tl(trans.none)}
 				</NameStyle>
@@ -312,7 +312,7 @@ export function convert_name_fonts(values: Record<string, string>) {
 export function convert_name_styles() {
 	return ['solid', 'pop', 'out', 'glow'].map((item) => ({
 		value: item,
-		display: (
+		display: () => (
 			<NameStyle value={item} type='style'>
 				{tl(trans.font_style[item])}
 			</NameStyle>

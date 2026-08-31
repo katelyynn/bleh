@@ -33,7 +33,7 @@ export function FloatingWindowHeader({
 interface FloatingWindowContentsProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
 	className?: string;
-	children: ReactNode;
+	children?: ReactNode;
 }
 
 export function FloatingWindowContents({

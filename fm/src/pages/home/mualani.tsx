@@ -947,19 +947,19 @@ export function mualani() {
 							values={[
 								{
 									value: 'hello',
-									display: 'Hello',
+									display: () => 'Hello',
 								},
 								{
 									value: 'world',
-									display: 'world',
+									display: () => 'world',
 								},
 								{
 									value: 'hello1',
-									display: 'Hello1',
+									display: () => 'Hello1',
 								},
 								{
 									value: 'world2',
-									display: 'world2',
+									display: () => 'world2',
 								},
 							]}
 						/>
