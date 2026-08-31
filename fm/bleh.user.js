@@ -115790,8 +115790,8 @@ var bleh = (() => {
       ]
     });
     function update(val) {
-      const sanitised = `url(https://images.weserv.nl/?url=${encodeURIComponent(val)}&output=webp&n=-1)`;
-      preview.current.style.setProperty("background-image", sanitised);
+      const sanitised = `https://images.weserv.nl/?url=${encodeURIComponent(val)}&output=webp&n=-1`;
+      preview.current.style.setProperty("background-image", `url(${sanitised})`);
       preview.current.onclick = () => {
         expand_avatar(sanitised);
       };
@@ -123389,7 +123389,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-08-31T23:03:15.952Z"
+    built_on: "2026-08-31T23:05:44.645Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

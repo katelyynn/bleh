@@ -59,11 +59,14 @@ export function ProfileBanner({
 	) as ProfileBannerElement;
 
 	function update(val: string) {
-		const sanitised = `url(https://images.weserv.nl/?url=${
+		const sanitised = `https://images.weserv.nl/?url=${
 			encodeURIComponent(val)
-		}&output=webp&n=-1)`;
+		}&output=webp&n=-1`;
 
-		preview.current.style.setProperty('background-image', sanitised);
+		preview.current.style.setProperty(
+			'background-image',
+			`url(${sanitised})`,
+		);
 		preview.current.onclick = () => {
 			expand_avatar(sanitised);
 		};
