@@ -4,22 +4,24 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { ReactNode } from 'jsx-dom';
+import { createRef, ReactNode } from 'jsx-dom';
 import { WithChildren } from '@/types/generic.tsx';
 import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
 import { Icon, icons } from '@/components/shared/icon.tsx';
 
 interface CardTipProps {
+	ref?: ReturnType<typeof createRef<HTMLLabelElement>>;
 	gap?: boolean;
 	children: ReactNode;
 }
 
 export function CardTip({
+	ref,
 	gap,
 	children,
 }: CardTipProps) {
 	return (
-		<label class={['card-tip', gap && 'gap']}>
+		<label class={['card-tip', gap && 'gap']} ref={ref}>
 			{children}
 		</label>
 	);

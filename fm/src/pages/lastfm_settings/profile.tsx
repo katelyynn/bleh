@@ -35,6 +35,7 @@ import { SettingLabel } from '@/components/settings/provider/main.tsx';
 import { MarkdownField } from '@/components/markdown/field.tsx';
 import { ProfileBanner } from '@/components/settings/provider/profile_banner.tsx';
 import { ProfileAccent } from '@/components/settings/provider/profile_accent.tsx';
+import { ProfileName } from '@/components/settings/provider/profile_name.tsx';
 
 let cropper: Cropper;
 
@@ -667,9 +668,15 @@ function profile_panel() {
 	const md = createRef();
 	const banner = createRef();
 	const accent = createRef();
+	const name = createRef();
 
 	update_picture.appendChild(
 		<SettingGroup>
+			<ProfileName
+				markdown={form_about_me.value}
+				onChange={(v: string) => md.current.value = v}
+				ref={banner}
+			/>
 			<ProfileBanner
 				markdown={form_about_me.value}
 				onChange={(v: string) => md.current.value = v}
@@ -692,6 +699,7 @@ function profile_panel() {
 					onChange={(v) => {
 						banner.current.markdown = v;
 						accent.current.markdown = v;
+						name.current.markdown = v;
 					}}
 					ref={md}
 				/>

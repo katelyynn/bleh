@@ -27,7 +27,7 @@ export function Carousel({
 }: CarouselProps) {
 	let i = 0;
 	let direction = 'center';
-	if (value && value in values) {
+	if (value) {
 		i = values.indexOf(values.find((v) => v.value == value)!);
 	} else {
 		value = values[i].value;

@@ -79,6 +79,7 @@ import {
 	convert_name_fonts,
 	convert_name_styles,
 	NameStyles,
+	ProfileName,
 } from '@/components/settings/provider/profile_name.tsx';
 
 export function mualani() {
@@ -190,6 +191,7 @@ export function mualani() {
 	const md = createRef();
 	const banner = createRef();
 	const accent = createRef();
+	const name = createRef();
 
 	page.structure.main!.replaceChildren(
 		<>
@@ -899,6 +901,7 @@ export function mualani() {
 								console.info('value', v);
 								banner.current.markdown = v;
 								accent.current.markdown = v;
+								name.current.markdown = v;
 							}}
 							ref={md}
 							options={profile_bio_markdown_settings}
@@ -923,6 +926,15 @@ export function mualani() {
 								markdown=''
 								onChange={(v: string) => md.current.value = v}
 								ref={accent}
+							/>
+						</SettingGroup>
+					</DemoItem>
+					<DemoItem label='ProfileName'>
+						<SettingGroup>
+							<ProfileName
+								markdown=''
+								onChange={(v: string) => md.current.value = v}
+								ref={name}
 							/>
 						</SettingGroup>
 					</DemoItem>
