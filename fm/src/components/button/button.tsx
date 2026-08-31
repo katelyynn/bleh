@@ -4,10 +4,14 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { ClassNames, createRef, ReactNode } from 'jsx-dom';
+import { ClassNames, createRef, ReactElement, ReactNode } from 'jsx-dom';
 import { Icon, icons } from '@/components/shared/icon.tsx';
 import { tl, trans } from '@/build/trans.ts';
-import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
+import {
+	hover_tooltip,
+	menu_tooltip,
+	Tooltip,
+} from '@/components/shared/tooltips.tsx';
 import { WithChildren } from '@/types/generic.tsx';
 
 type ButtonProps =
@@ -27,6 +31,7 @@ type ButtonProps =
 		className?: string;
 		children: ReactNode;
 		tooltip?: ReactNode;
+		opens?: ReactElement;
 	}
 	& Omit<
 		JSX.IntrinsicElements['button'],
@@ -59,6 +64,7 @@ export function Button({
 	className,
 	children,
 	tooltip,
+	opens,
 	...props
 }: ButtonProps) {
 	const classes: ClassNames = [
@@ -69,6 +75,7 @@ export function Button({
 		colourful && 'colourful',
 		menu && 'dropdown-menu-clickable-item v2',
 		(menu && accented) && 'accented-menu-item',
+		(opens != null) && 'select-button',
 		className && className,
 	];
 
@@ -105,6 +112,13 @@ export function Button({
 		hover_tooltip(
 			elem,
 			<Tooltip>{tooltip}</Tooltip>,
+		);
+	}
+
+	if (opens) {
+		menu_tooltip(
+			elem,
+			opens,
 		);
 	}
 

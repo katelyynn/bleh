@@ -9,7 +9,12 @@ import { SettingSelect } from '@/components/settings/provider/select.tsx';
 import { select_prepare_list } from '@/components/settings/select.ts';
 import { tl, trans } from '@/build/trans.ts';
 import { settings_store } from '@/build/config.ts';
-import { Icon, icons, SaveIcon } from '@/components/shared/icon.tsx';
+import {
+	Icon,
+	IconArrowIcon,
+	icons,
+	SaveIcon,
+} from '@/components/shared/icon.tsx';
 import { SettingInput } from '@/components/settings/provider/input.tsx';
 import { SettingLabel } from '@/components/settings/provider/main.tsx';
 import { Input } from '@/components/input/input.tsx';
@@ -33,6 +38,8 @@ import { SeeMore } from '@/components/text/see_more.tsx';
 import { clamp_lit, clamp_sat, hex_to_oklch } from '@/build/tools.ts';
 import { formatHex } from 'culori';
 import { page } from '@/build/page.ts';
+import { MenuContents } from '@/components/menu/menu.tsx';
+import { notify, notify_rm } from '@/components/dialog/notify.ts';
 
 interface ProfileAccentProps {
 	ref?: ReturnType<typeof createRef<ProfileAccentElement>>;
@@ -164,6 +171,104 @@ export function ProfileAccent({
 						</SeeMore>
 						<FooterFill />
 						<ButtonGroup>
+							<Button
+								opens={
+									<MenuContents>
+										<Button
+											menu
+											onClick={() => {
+												hue.current.value = useSettings
+													.get('hue') as number;
+												sat.current.value = useSettings
+													.get('sat') as number;
+												lit.current.value = useSettings
+													.get('lit') as number;
+
+												update_preview();
+											}}
+										>
+											<IconArrowIcon
+												icon1={
+													<Icon
+														name={icons
+															.bleh_settings}
+														className='icon-highlight'
+													/>
+												}
+												icon2={
+													<Icon
+														name={icons.profile}
+													/>
+												}
+											/>
+											{tl(trans.apply_global_accent)}
+										</Button>
+										<Button
+											menu
+											onClick={() => {
+												const warn = notify({
+													id: 'confirm_accent',
+													title: tl(
+														trans.are_you_sure,
+													),
+													body: tl(
+														trans
+															.this_will_replace_your_global_accent,
+													),
+													type: 'warning',
+													actions: [
+														{
+															type: 'check',
+															action: () => {
+																notify_rm(warn);
+
+																useSettings.set(
+																	'hue',
+																	hue.current
+																		.value as number,
+																);
+																useSettings.set(
+																	'sat',
+																	sat.current
+																		.value as number,
+																);
+																useSettings.set(
+																	'lit',
+																	lit.current
+																		.value as number,
+																);
+															},
+															text: tl(
+																trans.continue,
+															),
+														},
+													],
+													persist: true,
+												});
+											}}
+										>
+											<IconArrowIcon
+												icon1={
+													<Icon
+														name={icons.profile}
+													/>
+												}
+												icon2={
+													<Icon
+														name={icons
+															.bleh_settings}
+														className='icon-highlight'
+													/>
+												}
+											/>
+											{tl(trans.apply_profile_accent)}
+										</Button>
+									</MenuContents>
+								}
+							>
+								<Icon name={icons.copy} />
+								{tl(trans.copy)}
+							</Button>
 							<Button
 								primary
 								onClick={() => {

@@ -263,3 +263,16 @@ span.bleh-icon {
 
 	margin: 0 4px;
 }
+
+.icon-arrow-icon {
+	display: flex;
+	align-items: center;
+}
+
+.icon-arrow-icon-middle {
+	margin: 0 -2px;
+}
+
+.icon-highlight {
+	--icon-colour: oklch(var(--l3-c));
+}

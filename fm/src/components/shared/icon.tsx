@@ -4,6 +4,8 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { ReactNode } from 'jsx-dom';
+
 export const icons = {
 	banner: 'banner',
 	accent: 'accent',
@@ -316,4 +318,22 @@ export function icon_mask({ name }: { name?: string }) {
 	if (name == 'inherit') return '';
 
 	return `--icon: var(--icon-16-${name})`;
+}
+
+interface IconArrowIconProps {
+	icon1?: ReactNode;
+	icon2?: ReactNode;
+}
+
+export function IconArrowIcon({
+	icon1,
+	icon2,
+}: IconArrowIconProps) {
+	return (
+		<div class='icon-arrow-icon'>
+			{icon1}
+			<Icon name={icons.arrow_right} className='icon-arrow-icon-middle' />
+			{icon2}
+		</div>
+	);
 }
