@@ -41,7 +41,7 @@ import { SettingInput } from '@/components/settings/provider/input.tsx';
 import { useSettings } from '@/page.ts';
 import { SettingSelect } from '@/components/settings/provider/select.tsx';
 import { PanelHead } from '@/components/text/head.tsx';
-import { icons } from '@/components/shared/icon.tsx';
+import { icons, SaveIcon } from '@/components/shared/icon.tsx';
 import { Token } from '@/components/form/token.tsx';
 import { SettingsFooter } from '@/components/form/footer.tsx';
 import { Button } from '@/components/button/button.tsx';
@@ -483,6 +483,7 @@ function profile_panel() {
 				</SettingGroup>
 				<SettingsFooter>
 					<Button primary type='submit'>
+						<SaveIcon />
 						{tl(trans.save)}
 					</Button>
 					<input type='hidden' value='profile' name='submit' />

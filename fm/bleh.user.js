@@ -116898,7 +116898,10 @@ var bleh = (() => {
                 /* @__PURE__ */ jsx(Button, {
                   primary: true,
                   type: "submit",
-                  children: tl2(trans.save)
+                  children: [
+                    /* @__PURE__ */ jsx(SaveIcon, {}),
+                    tl2(trans.save)
+                  ]
                 }),
                 /* @__PURE__ */ jsx("input", {
                   type: "hidden",
@@ -123389,7 +123392,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-08-31T23:09:54.798Z"
+    built_on: "2026-08-31T23:11:45.165Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
