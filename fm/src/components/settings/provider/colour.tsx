@@ -5,7 +5,7 @@
  */
 
 import { SettingGroup } from '@/components/settings/group.tsx';
-import { createRef, ReactNode } from 'jsx-dom';
+import { createRef, ReactNode, Ref } from 'jsx-dom';
 import { SettingLabel } from '@/components/settings/provider/main.tsx';
 import { tl, trans } from '@/build/trans.ts';
 import { Icon } from '@/components/shared/icon.tsx';
@@ -688,10 +688,11 @@ export function ColourTile({
 }
 
 export function ColourTiles({
+	ref,
 	children,
 }: WithChildren) {
 	return (
-		<div class='colour-tiles'>
+		<div class='colour-tiles' ref={ref as Ref<HTMLDivElement>}>
 			{children}
 		</div>
 	);

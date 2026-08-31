@@ -1043,9 +1043,10 @@
 
 .banner-image {
 	width: 240px;
+	background-color: oklch(var(--b6) / 60%);
 	background-position: center;
 	background-size: 100%;
-	border-radius: var(--item-med-radius);
+	border-radius: var(--radius-s);
 	cursor: pointer;
 
 	aspect-ratio: 1300 / 325;

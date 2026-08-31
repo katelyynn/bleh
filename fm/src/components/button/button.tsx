@@ -8,6 +8,7 @@ import { ClassNames, createRef, ReactNode } from 'jsx-dom';
 import { Icon, icons } from '@/components/shared/icon.tsx';
 import { tl, trans } from '@/build/trans.ts';
 import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
+import { WithChildren } from '@/types/generic.tsx';
 
 type ButtonProps =
 	& {
@@ -179,4 +180,14 @@ export function ButtonCombo({
 
 export function ButtonComboSeparator() {
 	return <div class='button-combo-sep' />;
+}
+
+export function ButtonGroup({
+	children,
+}: WithChildren) {
+	return (
+		<div class='button-group'>
+			{children}
+		</div>
+	);
 }

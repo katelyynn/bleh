@@ -24,6 +24,7 @@ interface SettingRangeProps {
 	body?: ReactNode;
 	showLabel?: boolean;
 	value?: number;
+	defaultValue?: number;
 	suffix?: string;
 	min?: number;
 	max?: number;
@@ -47,6 +48,7 @@ export function SettingRange({
 	body,
 	showLabel = true,
 	value = 0,
+	defaultValue = 0,
 	suffix,
 	min = 0,
 	max = 1,
@@ -80,6 +82,7 @@ export function SettingRange({
 		if (store.max) max = store.max;
 		if (store.step) step = store.step;
 		if (store.suffix) suffix = store.suffix;
+		if (store.default) defaultValue = store.default as number;
 
 		if (store.incompatible) {
 			Object.entries(store.incompatible).forEach(([key]) => {
@@ -130,7 +133,7 @@ export function SettingRange({
 							set(val);
 							update();
 						}}
-						defaultValue={store?.default}
+						defaultValue={defaultValue}
 						ref={reset}
 					/>
 				)}

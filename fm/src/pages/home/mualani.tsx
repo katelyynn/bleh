@@ -73,6 +73,7 @@ import { Alert } from '@/components/text/alert.tsx';
 import { MarkdownField } from '@/components/markdown/field.tsx';
 import { profile_bio_markdown_settings } from '@/pages/profile/about.tsx';
 import { ProfileBanner } from '@/components/settings/provider/profile_banner.tsx';
+import { ProfileAccent } from '@/components/settings/provider/profile_accent.tsx';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -182,6 +183,7 @@ export function mualani() {
 
 	const md = createRef();
 	const banner = createRef();
+	const accent = createRef();
 
 	page.structure.main!.replaceChildren(
 		<>
@@ -890,6 +892,7 @@ export function mualani() {
 							onChange={(v) => {
 								console.info('value', v);
 								banner.current.markdown = v;
+								accent.current.markdown = v;
 							}}
 							ref={md}
 							options={profile_bio_markdown_settings}
@@ -905,6 +908,15 @@ export function mualani() {
 								markdown=''
 								onChange={(v: string) => md.current.value = v}
 								ref={banner}
+							/>
+						</SettingGroup>
+					</DemoItem>
+					<DemoItem label='ProfileAccent'>
+						<SettingGroup>
+							<ProfileAccent
+								markdown=''
+								onChange={(v: string) => md.current.value = v}
+								ref={accent}
 							/>
 						</SettingGroup>
 					</DemoItem>

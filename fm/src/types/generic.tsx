@@ -4,8 +4,9 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { ReactNode } from 'jsx-dom';
+import { createRef, ReactNode } from 'jsx-dom';
 
 export type WithChildren = {
-	children: ReactNode;
+	ref?: ReturnType<typeof createRef>;
+	children?: ReactNode;
 };

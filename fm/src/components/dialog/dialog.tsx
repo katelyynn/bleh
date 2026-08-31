@@ -10,6 +10,7 @@ import { dialogs, page } from '@/build/page';
 import { tl, trans } from '@/build/trans';
 import { ReactElement, ReactNode } from 'jsx-dom';
 import { PanelHead } from '@/components/text/head.tsx';
+import { WithChildren } from '@/types/generic.tsx';
 
 export function load_dialogs() {
 	const elem = (
@@ -206,4 +207,18 @@ export function dialog_rm({
 			page.structure.dialogs.classList.remove('has-dialog');
 		}
 	}
+}
+
+export function ModalFooter({
+	children,
+}: WithChildren) {
+	return (
+		<div class='modal-footer'>
+			{children}
+		</div>
+	);
+}
+
+export function FooterFill() {
+	return <div class='fill' />;
 }
