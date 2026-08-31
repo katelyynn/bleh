@@ -41,7 +41,6 @@ export function Carousel({
 					direction = 'right';
 					if (new_val < 0) {
 						new_val = values.length - 1;
-						direction = 'left';
 					}
 
 					i = new_val;
@@ -61,7 +60,6 @@ export function Carousel({
 					direction = 'left';
 					if (new_val >= values.length) {
 						new_val = 0;
-						direction = 'right';
 					}
 
 					i = new_val;
