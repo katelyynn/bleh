@@ -116825,7 +116825,7 @@ var bleh = (() => {
                   disabled: !auth.sponsor,
                   markdown: form_about_me.value,
                   onChange: (v) => md.current.value = v,
-                  ref: banner
+                  ref: name
                 }),
                 /* @__PURE__ */ jsx(SettingInput, {
                   name: tl2(trans.profile_title),
@@ -123392,7 +123392,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-08-31T23:11:45.165Z"
+    built_on: "2026-08-31T23:12:28.006Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

@@ -422,7 +422,7 @@ function profile_panel() {
 						disabled={!auth.sponsor}
 						markdown={form_about_me.value}
 						onChange={(v: string) => md.current.value = v}
-						ref={banner}
+						ref={name}
 					/>
 					<SettingInput
 						name={tl(trans.profile_title)}
