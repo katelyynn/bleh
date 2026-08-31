@@ -30,6 +30,9 @@ import {
 	ColourTiles,
 } from '@/components/settings/provider/colour.tsx';
 import { SeeMore } from '@/components/text/see_more.tsx';
+import { clamp_lit, clamp_sat, hex_to_oklch } from '@/build/tools.ts';
+import { formatHex } from 'culori';
+import { page } from '@/build/page.ts';
 
 interface ProfileAccentProps {
 	ref?: ReturnType<typeof createRef<ProfileAccentElement>>;
@@ -79,6 +82,7 @@ export function ProfileAccent({
 	) as ProfileAccentElement;
 
 	function modal() {
+		const convert = createRef();
 		const hue = createRef();
 		const sat = createRef();
 		const lit = createRef();
@@ -93,6 +97,29 @@ export function ProfileAccent({
 						<SettingInfo name={tl(trans.preview)}>
 							<ColourTiles ref={current_preview} />
 						</SettingInfo>
+						<SettingInput
+							name={tl(trans.convert_from_hex)}
+							type='colour'
+							length={7}
+							saveText={tl(trans.convert)}
+							onChange={(val: string) => {
+								const hsl = hex_to_oklch(val);
+
+								const clamped_sat = clamp_sat(
+									(hsl.s / 100) * 3,
+								);
+
+								hue.current.value = hsl.h;
+								sat.current.value = clamped_sat;
+								lit.current.value = clamp_lit(
+									clamped_sat,
+									hsl.l / 100 + 0.35,
+								);
+
+								update_preview();
+							}}
+							ref={convert}
+						/>
 						<SettingRange
 							name={tl(trans.hue)}
 							value={value.hue ||
@@ -169,6 +196,14 @@ export function ProfileAccent({
 					<ColourTile type='h4' style={style} />
 				</>,
 			);
+
+			const preview = page.state.colour_preview;
+			preview.setAttribute('style', style);
+			const bg_colour = window.getComputedStyle(preview).backgroundColor;
+
+			const final = formatHex(bg_colour);
+			convert.current.value = final;
+			preview.removeAttribute('style');
 		}
 
 		update_preview();

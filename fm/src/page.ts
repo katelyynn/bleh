@@ -134,7 +134,7 @@ export function bleh() {
 			}
 
 			page.state.colour_preview = html.node`
-                <div class="colour-preview" />
+                <div class="colour-preview colourful" />
             `;
 			document.body.appendChild(page.state.colour_preview);
 

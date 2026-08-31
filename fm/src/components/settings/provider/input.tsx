@@ -29,7 +29,7 @@ interface SettingInputProps {
 	disabled?: boolean;
 	onMouseEnter?: () => void;
 	onMouseLeave?: () => void;
-	saveText?: string;
+	saveText?: ReactNode;
 }
 
 type SettingInputElement = HTMLDivElement & {

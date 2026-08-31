@@ -120044,6 +120044,7 @@ var bleh = (() => {
       ]
     });
     function modal() {
+      const convert2 = createRef();
       const hue4 = createRef();
       const sat = createRef();
       const lit = createRef();
@@ -120060,6 +120061,21 @@ var bleh = (() => {
                   children: /* @__PURE__ */ jsx(ColourTiles, {
                     ref: current_preview
                   })
+                }),
+                /* @__PURE__ */ jsx(SettingInput, {
+                  name: tl2(trans.convert_from_hex),
+                  type: "colour",
+                  length: 7,
+                  saveText: tl2(trans.convert),
+                  onChange: (val) => {
+                    const hsl3 = hex_to_oklch(val);
+                    const clamped_sat = clamp_sat(hsl3.s / 100 * 3);
+                    hue4.current.value = hsl3.h;
+                    sat.current.value = clamped_sat;
+                    lit.current.value = clamp_lit(clamped_sat, hsl3.l / 100 + 0.35);
+                    update_preview();
+                  },
+                  ref: convert2
                 }),
                 /* @__PURE__ */ jsx(SettingRange, {
                   name: tl2(trans.hue),
@@ -120150,6 +120166,12 @@ var bleh = (() => {
             })
           ]
         }));
+        const preview2 = page.state.colour_preview;
+        preview2.setAttribute("style", style2);
+        const bg_colour = window.getComputedStyle(preview2).backgroundColor;
+        const final = formatHex(bg_colour);
+        convert2.current.value = final;
+        preview2.removeAttribute("style");
       }
       update_preview();
     }
@@ -122076,7 +122098,7 @@ var bleh = (() => {
           return;
         }
         page.state.colour_preview = html.node`
-                <div class="colour-preview" />
+                <div class="colour-preview colourful" />
             `;
         document.body.appendChild(page.state.colour_preview);
         register_auth();
@@ -123129,7 +123151,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-08-31T14:36:35.940Z"
+    built_on: "2026-08-31T14:42:53.259Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
