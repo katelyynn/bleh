@@ -246,16 +246,6 @@
 		gap: 6px var(--item-list-gap);
 	}
 
-	.banner-image {
-		width: 240px;
-		background-position: center;
-		background-size: 100%;
-		border-radius: var(--item-med-radius);
-		cursor: pointer;
-
-		aspect-ratio: 1300 / 325;
-	}
-
 	&[data-type="toggle"] {
 		cursor: pointer;
 
@@ -1045,4 +1035,29 @@
 
 .bleh-icon-reset-setting {
 	animation: var(--reset-setting-animation, none);
+}
+
+.profile-banner-input {
+	width: 240px;
+}
+
+.banner-image {
+	width: 240px;
+	background-position: center;
+	background-size: 100%;
+	border-radius: var(--item-med-radius);
+	cursor: pointer;
+
+	aspect-ratio: 1300 / 325;
+}
+
+.setting-body,
+.setting-sub {
+	color: oklch(var(--c3));
+	font-size: 13px;
+	cursor: default;
+}
+
+.setting-sub {
+	margin-top: 4px;
 }

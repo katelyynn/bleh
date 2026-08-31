@@ -10,8 +10,10 @@ import { input } from '@/components/settings/input.ts';
 import { html } from 'lighterhtml';
 
 interface MarkdownFieldProps {
+	ref?: ReturnType<typeof createRef<MarkdownFieldElement>>;
 	elem: HTMLTextAreaElement;
 	focus?: boolean;
+	onChange?: (v: string) => void;
 	shoutbox?: boolean;
 	options?: markdown_options;
 }
@@ -23,8 +25,10 @@ type MarkdownFieldElement = HTMLDivElement & {
 };
 
 export function MarkdownField({
+	ref,
 	elem,
 	focus,
+	onChange,
 	shoutbox,
 	options = {},
 }: MarkdownFieldProps) {
@@ -299,7 +303,7 @@ export function MarkdownField({
 	const action_lookup: Record<string, Action> = {};
 
 	const wrap = (
-		<div class={['markdown-field', shoutbox && 'mini']}>
+		<div class={['markdown-field', shoutbox && 'mini']} ref={ref}>
 			{use_md && (
 				<div class='markdown-actions'>
 					{action_list.map((group, index) => {
@@ -470,6 +474,7 @@ export function MarkdownField({
 
 	elem.addEventListener('input', () => {
 		update();
+		if (onChange) onChange(elem.value);
 	});
 
 	elem.addEventListener('select', () => {
@@ -486,6 +491,7 @@ export function MarkdownField({
 
 	elem.addEventListener('paste', () => {
 		update();
+		if (onChange) onChange(elem.value);
 	});
 
 	setTimeout(() => {

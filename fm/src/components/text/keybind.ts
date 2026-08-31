@@ -16,12 +16,12 @@ export function is_keybind_active(keybind: string[], e: KeyboardEvent) {
 		}
 	}
 
-	log('checking..', 'keybind', 'info', {
+	/*log('checking..', 'keybind', 'info', {
 		active,
 		keybind,
 		e,
 		is_cmd_down,
 		pressed_key,
-	});
+	});*/
 	return active == keybind.length;
 }

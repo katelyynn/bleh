@@ -29,6 +29,7 @@ import { save_profile_cache } from '../profile/profile';
 import { delete_cache } from '@/components/profile/cache';
 import { new_indicator } from '@/components/shared/indicator';
 import { colour_tile } from '@/components/settings/swatch';
+import { createRef } from 'jsx-dom';
 
 let cropper: Cropper;
 
@@ -273,16 +274,19 @@ function charts_panel() {
 }
 
 function profile_panel() {
-	const update_picture = page.structure.main.querySelector('#update-picture');
+	const update_picture = page.structure.main!.querySelector(
+		'#update-picture',
+	);
 	if (!update_picture) return;
 
 	update_picture.classList.add('bleh--panel');
 
 	const bio_max_length = 500;
 
-	const upload_form = update_picture.querySelector('.avatar-upload-form');
-	const avatar_url =
-		update_picture.querySelector('.image-upload-preview img').src;
+	//const upload_form = update_picture.querySelector('.avatar-upload-form');
+	const avatar_url = (update_picture.querySelector(
+		'.image-upload-preview img',
+	) as HTMLImageElement).src;
 	const upload_finished = update_picture.querySelector('.alert-success');
 
 	if (page.state.avatar_changer && upload_finished) {
@@ -290,7 +294,9 @@ function profile_panel() {
 		dialog_rm({ id });
 	}
 
-	const update_profile = page.structure.main.querySelector('#update-profile');
+	const update_profile = page.structure.main!.querySelector(
+		'#update-profile',
+	)!;
 	const alert = update_profile.querySelector('.alert');
 
 	const form_display_name =
@@ -324,11 +330,12 @@ function profile_panel() {
 		allow_lists: true,
 	};
 
-	let chars = html.node`
-        <p class="tip characters colourful">
-            ${tl(trans.value_characters_max, { v: bio_max_length })}
-        </p>
-    `;
+	const chars = (
+		<p class={['tip', 'characters', 'colourful']}>
+			{tl(trans.value_characters_max, { v: bio_max_length })}
+		</p>
+	);
+
 	const about = markdown_field(
 		update_about,
 		markdown_settings,
@@ -342,7 +349,7 @@ function profile_panel() {
 		false,
 		false,
 	);
-	let preview;
+	const preview = createRef();
 
 	const accent_setting = html.node`
         <div class="setting" data-type="info" disabled=${!auth.sponsor} />
@@ -351,21 +358,17 @@ function profile_panel() {
         <p class="card-tip" />
     `;
 
-	render(
-		page.structure.side,
-		html`
-			<section class="about-me-preview">
-				<h2>${tl(trans.about_me_preview)}</h2>
-				<span class="bleh--about-me-preview markdown-body" ref=${(
-					el,
-				) => (preview = el)} />
-			</section>
-		`,
+	page.structure.side!.replaceChildren(
+		<section class='about-me-preview'>
+			<h2>{tl(trans.about_me_preview)}</h2>
+			<span
+				class={['bleh--about-me-preview', 'markdown-body']}
+				ref={preview}
+			/>
+		</section>,
 	);
 
-	page.structure.main.removeChild(
-		page.structure.main.querySelector('#update-profile'),
-	);
+	page.structure.main!.removeChild(update_profile);
 
 	// about me
 	update_about();
@@ -686,14 +689,14 @@ function profile_panel() {
 		const length = len(value);
 		chars.textContent = tl(trans.value_characters_max, {
 			v: `${length}/${bio_max_length}`,
-		});
-		chars.setAttribute('data-exceeded', length > bio_max_length);
+		}) as string;
+		chars.setAttribute('data-exceeded', String(length > bio_max_length));
 
 		delete_cache(cache);
 
-		render(preview, markdown(value, markdown_settings));
+		preview.current.replaceChildren(markdown(value, markdown_settings));
 
-		save_profile_cache(cache, profile_cache, auth.name);
+		save_profile_cache(cache, profile_cache, auth.name!);
 
 		console.info('cache', cache);
 

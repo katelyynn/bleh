@@ -74,7 +74,7 @@ export function Input({
 						value={value}
 						ref={input}
 						maxlength={length}
-						onChange={() => {
+						onInput={() => {
 							if (
 								type == 'colour' &&
 								!input.current.value.startsWith('#')

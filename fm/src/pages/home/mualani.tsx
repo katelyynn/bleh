@@ -72,6 +72,7 @@ import { ProfileStreak } from '@/components/profile/streak.tsx';
 import { Alert } from '@/components/text/alert.tsx';
 import { MarkdownField } from '@/components/markdown/field.tsx';
 import { profile_bio_markdown_settings } from '@/pages/profile/about.tsx';
+import { ProfileBanner } from '@/components/settings/provider/profile_banner.tsx';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -178,6 +179,9 @@ export function mualani() {
 	const mouse = createRef();
 
 	const colour = createRef();
+
+	const md = createRef();
+	const banner = createRef();
 
 	page.structure.main!.replaceChildren(
 		<>
@@ -883,8 +887,26 @@ export function mualani() {
 						/>
 						<MarkdownField
 							elem={<textarea /> as HTMLTextAreaElement}
+							onChange={(v) => {
+								console.info('value', v);
+								banner.current.markdown = v;
+							}}
+							ref={md}
 							options={profile_bio_markdown_settings}
 						/>
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section>
+				<DemoGrid>
+					<DemoItem label='ProfileBanner'>
+						<SettingGroup>
+							<ProfileBanner
+								markdown=''
+								onChange={(v: string) => md.current.value = v}
+								ref={banner}
+							/>
+						</SettingGroup>
 					</DemoItem>
 				</DemoGrid>
 			</section>
