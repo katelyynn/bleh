@@ -74,6 +74,7 @@ import { MarkdownField } from '@/components/markdown/field.tsx';
 import { profile_bio_markdown_settings } from '@/pages/profile/about.tsx';
 import { ProfileBanner } from '@/components/settings/provider/profile_banner.tsx';
 import { ProfileAccent } from '@/components/settings/provider/profile_accent.tsx';
+import { Carousel } from '@/components/select/carousel.tsx';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -919,6 +920,32 @@ export function mualani() {
 								ref={accent}
 							/>
 						</SettingGroup>
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section>
+				<DemoGrid>
+					<DemoItem label='Carousel'>
+						<Carousel
+							values={[
+								{
+									value: 'hello',
+									display: 'Hello',
+								},
+								{
+									value: 'world',
+									display: 'world',
+								},
+								{
+									value: 'hello1',
+									display: 'Hello1',
+								},
+								{
+									value: 'world2',
+									display: 'world2',
+								},
+							]}
+						/>
 					</DemoItem>
 				</DemoGrid>
 			</section>
