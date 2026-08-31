@@ -116224,6 +116224,7 @@ var bleh = (() => {
             value = val.value;
             direction2 = "center";
             update();
+            if (onChange) onChange(value);
           },
           children: val.display()
         }))
@@ -123509,7 +123510,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-08-31T22:38:34.786Z"
+    built_on: "2026-08-31T22:44:22.113Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

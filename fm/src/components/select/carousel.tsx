@@ -108,6 +108,8 @@ export function Carousel({
 							value = val.value;
 							direction = 'center';
 							update();
+
+							if (onChange) onChange(value);
 						}}
 					>
 						{val.display()}
