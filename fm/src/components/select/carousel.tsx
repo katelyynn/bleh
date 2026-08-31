@@ -106,7 +106,7 @@ function CarouselArrow({
 	children,
 }: CarouselArrowProps) {
 	const elem = (
-		<Button chibi className='carousel-arrow' onClick={onClick}>
+		<Button className='carousel-arrow' onClick={onClick}>
 			{children}
 		</Button>
 	);

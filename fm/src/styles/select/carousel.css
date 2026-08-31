@@ -24,6 +24,12 @@
 	--bg-hov: oklch(var(--b2) / 20%);
 	--bg-atv: oklch(var(--b2) / 40%);
 	--shadow: none;
+
+	--font-size: 0;
+	gap: 0 !important;
+	justify-content: center;
+	--button-sides: 6px;
+	--button-verts: 8px;
 }
 
 @keyframes carousel_left {

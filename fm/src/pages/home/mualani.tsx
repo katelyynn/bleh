@@ -76,6 +76,7 @@ import { ProfileBanner } from '@/components/settings/provider/profile_banner.tsx
 import { ProfileAccent } from '@/components/settings/provider/profile_accent.tsx';
 import { Carousel } from '@/components/select/carousel.tsx';
 import {
+	convert_name_fonts,
 	convert_name_styles,
 	NameStyles,
 } from '@/components/settings/provider/profile_name.tsx';
@@ -954,7 +955,11 @@ export function mualani() {
 					<DemoItem label='Carousel (NameStyles)'>
 						<NameStyles
 							value=''
-							values={convert_name_styles(page.state.fonts)}
+							values={convert_name_fonts(page.state.fonts)}
+						/>
+						<NameStyles
+							value=''
+							values={convert_name_styles()}
 						/>
 					</DemoItem>
 				</DemoGrid>

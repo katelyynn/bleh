@@ -390,7 +390,7 @@ export function ProfileName({
 	return elem;
 }
 
-export function convert_name_styles(values: Record<string, string>) {
+export function convert_name_fonts(values: Record<string, string>) {
 	const vals: CarouselItem[] = [];
 	Object.entries(values).forEach(([font, family]) => {
 		vals.push({
@@ -404,6 +404,17 @@ export function convert_name_styles(values: Record<string, string>) {
 	});
 
 	return vals;
+}
+
+export function convert_name_styles() {
+	return ['solid', 'pop', 'out', 'glow'].map((item) => ({
+		value: item,
+		display: (
+			<NameStyle value={item} type='style'>
+				{tl(trans.font_style[item])}
+			</NameStyle>
+		),
+	})) as CarouselItem[];
 }
 
 interface NameStylesProps {
