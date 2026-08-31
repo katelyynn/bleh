@@ -61620,7 +61620,7 @@ var bleh = (() => {
     }, 0);
     function update() {
       select2();
-      let val2 = elem.value.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+      let val2 = elem.value + "\xA0".replace(/</g, "&lt;").replace(/>/g, "&gt;");
       if (use_md) {
         val2 = val2.replace(/\[(left|center|right|links)\]/gi, (text4) => {
           if (!options.allow_alignment) return text4;
@@ -61659,6 +61659,7 @@ var bleh = (() => {
           return `<span class="md-link">[<span class="md-label">${label}</span>](<span class="md-url">${url}</span>)</span>`;
         });
       }
+      console.info(val2);
       overlay.current.innerHTML = val2;
     }
     function select2() {
@@ -122761,7 +122762,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-08-30T21:00:24.698Z"
+    built_on: "2026-08-31T00:40:51.909Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

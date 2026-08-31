@@ -494,7 +494,10 @@ export function MarkdownField({
 
 	function update() {
 		select();
-		let val = elem.value.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+		// the extra string fixes an ending line break
+		let val = elem.value + '\u00a0'
+			.replace(/</g, '&lt;')
+			.replace(/>/g, '&gt;');
 
 		if (use_md) {
 			val = val.replace(
@@ -569,6 +572,8 @@ export function MarkdownField({
 				},
 			);
 		}
+
+		console.info(val);
 
 		overlay.current.innerHTML = val;
 	}
