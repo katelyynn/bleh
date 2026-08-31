@@ -33,7 +33,7 @@ input {
 	background-color: var(--bg) !important;
 	color: var(--col) !important;
 	padding: var(--padding,
-		var(--button-verts) var(--button-sides)) !important;
+			var(--button-verts) var(--button-sides)) !important;
 	line-height: var(--line-height);
 	font-size: var(--font-size) !important;
 	font-weight: var(--font-weight) !important;
@@ -143,8 +143,8 @@ input {
 		inset: 0;
 		border-radius: var(--input-radius);
 		background: linear-gradient(180deg,
-			transparent,
-			oklch(var(--h4) / 20%));
+				transparent,
+				oklch(var(--h4) / 20%));
 		box-shadow: inset 0 0 0 1px oklch(var(--l3-c), 40%);
 		opacity: 0;
 		pointer-events: none;
@@ -185,10 +185,10 @@ input {
 	&[data-type="colour"] {
 		--size: 14px;
 
-		& > .modern-input {
-			padding-left: calc(var(--button-sides) + var(--size) +
-				var(--icon-gap)) !important;
-			width: 110px;
+		&>.modern-input {
+			padding-left: calc(var(--button-sides) + var(--size) + var(--icon-gap)) !important;
+			width: 110px !important;
+			min-width: 110px !important;
 		}
 
 		.colour-block {
@@ -210,10 +210,9 @@ input {
 			--icon-size: 14px;
 		}
 
-		& > .modern-input {
+		&>.modern-input {
 			cursor: pointer;
-			padding-left: calc(var(--button-sides-icon) + var(--icon-size) +
-				var(--icon-gap)) !important;
+			padding-left: calc(var(--button-sides-icon) + var(--icon-size) + var(--icon-gap)) !important;
 			user-select: none;
 		}
 
@@ -221,7 +220,7 @@ input {
 			--show-icon: block;
 		}
 
-		& > .legacy-input {
+		&>.legacy-input {
 			display: none;
 		}
 	}
@@ -230,9 +229,8 @@ input {
 		--mask: var(--icon-16-clock);
 		--icon-size: 14px;
 
-		& > .modern-input {
-			padding-left: calc(var(--button-sides-icon) + var(--icon-size) +
-				var(--icon-gap)) !important;
+		&>.modern-input {
+			padding-left: calc(var(--button-sides-icon) + var(--icon-size) + var(--icon-gap)) !important;
 
 			&::-webkit-calendar-picker-indicator {
 				display: none;
@@ -248,21 +246,19 @@ input {
 		}
 	}
 
-	& > .modern-input {
+	&>.modern-input {
 		width: 100% !important;
 	}
 
 	&.can-submit {
-		& > input {
-			padding-right: calc(var(--button-sides) + var(--button-height))
-				!important;
+		&>input {
+			padding-right: calc(var(--button-sides) + var(--button-height)) !important;
 		}
 	}
 
 	&.input-has-icon {
-		& > .modern-input {
-			padding-right: calc(var(--button-sides) + var(--icon-size) +
-				var(--button-sides)) !important;
+		&>.modern-input {
+			padding-right: calc(var(--button-sides) + var(--icon-size) + var(--button-sides)) !important;
 		}
 	}
 }
