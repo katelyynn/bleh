@@ -401,7 +401,7 @@
 			"date": "2026-07-30"
 		},
 		"yuzu": {
-			"default": false,
+			"default": true,
 			"name": "Keep track of track/album/artist streaks on profiles",
 			"date": "2026-08-29"
 		}
