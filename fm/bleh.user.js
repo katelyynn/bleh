@@ -56974,6 +56974,15 @@ var bleh = (() => {
     });
   }
 
+  // src/components/form/token.tsx
+  function Token({ value }) {
+    return /* @__PURE__ */ jsx("input", {
+      type: "hidden",
+      name: "csrfmiddlewaretoken",
+      value
+    });
+  }
+
   // src/components/music/track.tsx
   function patch_titles(search = page.structure.main) {
     if (page.subpage == "tags_overview") return;
@@ -57322,10 +57331,120 @@ var bleh = (() => {
             console.info("more button", bulk_edit_button);
             const album_name = sanitise(image2 ? correct_item_by_artist(image2.getAttribute("alt"), track_artist) : album ? album.textContent : "");
             const menu_contents = /* @__PURE__ */ jsx(MenuContents, {
-              children: track.preview
+              children: [
+                track.preview,
+                can_edit && /* @__PURE__ */ jsx(ButtonCombo, {
+                  children: is_album ? /* @__PURE__ */ jsx("form", {
+                    style: {
+                      margin: "0"
+                    },
+                    method: "post",
+                    action: track.getAttribute("data-action"),
+                    "data-edit-scrobble": true,
+                    children: [
+                      /* @__PURE__ */ jsx(Token, {
+                        value: page.token
+                      }),
+                      /* @__PURE__ */ jsx("input", {
+                        type: "hidden",
+                        name: "album_name",
+                        value: track.getAttribute("data-album-name")
+                      }),
+                      /* @__PURE__ */ jsx("input", {
+                        type: "hidden",
+                        name: "album_artist_name",
+                        value: track.getAttribute("data-album-artist-name")
+                      }),
+                      /* @__PURE__ */ jsx("input", {
+                        type: "hidden",
+                        name: "album_image",
+                        value: track.getAttribute("data-album-image")
+                      }),
+                      /* @__PURE__ */ jsx("input", {
+                        type: "hidden",
+                        name: "album_name_original",
+                        value: track.getAttribute("data-album-name-original")
+                      }),
+                      /* @__PURE__ */ jsx("input", {
+                        type: "hidden",
+                        name: "album_artist_name_original",
+                        value: track.getAttribute("data-artist-name-original")
+                      }),
+                      /* @__PURE__ */ jsx("input", {
+                        type: "hidden",
+                        name: "count",
+                        value: track.getAttribute("data-count")
+                      }),
+                      /* @__PURE__ */ jsx(Button, {
+                        type: "submit",
+                        menu: true,
+                        onClick: close_menus,
+                        children: [
+                          /* @__PURE__ */ jsx(Icon, {
+                            name: icons.edit
+                          }),
+                          tl2(trans.edit)
+                        ]
+                      })
+                    ]
+                  }) : /* @__PURE__ */ jsx("form", {
+                    style: {
+                      margin: "0"
+                    },
+                    method: "post",
+                    action: track.getAttribute("data-action"),
+                    "data-edit-scrobble": true,
+                    children: [
+                      /* @__PURE__ */ jsx(Token, {
+                        value: page.token
+                      }),
+                      /* @__PURE__ */ jsx("input", {
+                        type: "hidden",
+                        name: "artist_name",
+                        value: track.getAttribute("data-artist-name")
+                      }),
+                      /* @__PURE__ */ jsx("input", {
+                        type: "hidden",
+                        name: "track_name",
+                        value: track.getAttribute("data-track-name")
+                      }),
+                      /* @__PURE__ */ jsx("input", {
+                        type: "hidden",
+                        name: "album_name",
+                        value: track.getAttribute("data-album-name")
+                      }),
+                      /* @__PURE__ */ jsx("input", {
+                        type: "hidden",
+                        name: "album_artist_name",
+                        value: track.getAttribute("data-artist-name")
+                      }),
+                      /* @__PURE__ */ jsx("input", {
+                        type: "hidden",
+                        name: "timestamp",
+                        value: track.getAttribute("data-timestamp")
+                      }),
+                      /* @__PURE__ */ jsx(Button, {
+                        type: "submit",
+                        menu: true,
+                        onClick: close_menus,
+                        children: [
+                          /* @__PURE__ */ jsx(Icon, {
+                            name: icons.edit
+                          }),
+                          tl2(trans.edit)
+                        ]
+                      })
+                    ]
+                  })
+                })
+              ]
             });
-            menu_tooltip(more_button, menu_contents);
-            context_menu_tooltip(track, menu_contents);
+            const menu2 = menu_tooltip(more_button, menu_contents);
+            const ctx_menu = context_menu_tooltip(track, menu_contents);
+            function close_menus() {
+              if (menu2.is_mounted) menu2.hide();
+              if (ctx_menu.is_mounted) ctx_menu.hide();
+            }
           }, 100);
         }
         if (is_album) {
@@ -96611,15 +96730,6 @@ var bleh = (() => {
     return elem;
   }
 
-  // src/components/form/token.tsx
-  function Token({ value }) {
-    return /* @__PURE__ */ jsx("input", {
-      type: "hidden",
-      name: "csrfmiddlewaretoken",
-      value
-    });
-  }
-
   // src/components/select/select.tsx
   function Select({ values, value, className: className2, name, onChange, inSettings }) {
     if (!value) value = values.find((v) => "value" in v)?.value;
@@ -123532,7 +123642,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-09-01T18:39:41.012Z"
+    built_on: "2026-09-01T22:33:05.110Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

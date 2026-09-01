@@ -40,11 +40,12 @@ import {
 	menu_tooltip,
 	Tooltip,
 } from '@/components/shared/tooltips.tsx';
-import { Button } from '@/components/button/button.tsx';
+import { Button, ButtonCombo } from '@/components/button/button.tsx';
 import { Icon, icons } from '@/components/shared/icon.tsx';
 import { MenuContents } from '@/components/menu/menu.tsx';
 import { TrackMenuPreview } from '@/components/track/preview.tsx';
 import { GenericUsername } from '@/components/user/name.tsx';
+import { Token } from '@/components/form/token.tsx';
 
 export function patch_titles(search = page.structure.main) {
 	if (page.subpage == 'tags_overview') return;
@@ -770,11 +771,138 @@ export function patch_titles(search = page.structure.main) {
 					const menu_contents = (
 						<MenuContents>
 							{track.preview}
+							{can_edit && (
+								<ButtonCombo>
+									{is_album
+										? (
+											<form
+												style={{ margin: '0' }}
+												method='post'
+												action={track.getAttribute(
+													'data-action',
+												)}
+												data-edit-scrobble
+											>
+												<Token value={page.token} />
+												<input
+													type='hidden'
+													name='album_name'
+													value={track.getAttribute(
+														'data-album-name',
+													)}
+												/>
+												<input
+													type='hidden'
+													name='album_artist_name'
+													value={track.getAttribute(
+														'data-album-artist-name',
+													)}
+												/>
+												<input
+													type='hidden'
+													name='album_image'
+													value={track.getAttribute(
+														'data-album-image',
+													)}
+												/>
+												<input
+													type='hidden'
+													name='album_name_original'
+													value={track.getAttribute(
+														'data-album-name-original',
+													)}
+												/>
+												<input
+													type='hidden'
+													name='album_artist_name_original'
+													value={track.getAttribute(
+														'data-artist-name-original',
+													)}
+												/>
+												<input
+													type='hidden'
+													name='count'
+													value={track.getAttribute(
+														'data-count',
+													)}
+												/>
+												<Button
+													type='submit'
+													menu
+													onClick={close_menus}
+												>
+													<Icon name={icons.edit} />
+													{tl(trans.edit)}
+												</Button>
+											</form>
+										)
+										: (
+											<form
+												style={{ margin: '0' }}
+												method='post'
+												action={track.getAttribute(
+													'data-action',
+												)}
+												data-edit-scrobble
+											>
+												<Token value={page.token} />
+												<input
+													type='hidden'
+													name='artist_name'
+													value={track.getAttribute(
+														'data-artist-name',
+													)}
+												/>
+												<input
+													type='hidden'
+													name='track_name'
+													value={track.getAttribute(
+														'data-track-name',
+													)}
+												/>
+												<input
+													type='hidden'
+													name='album_name'
+													value={track.getAttribute(
+														'data-album-name',
+													)}
+												/>
+												<input
+													type='hidden'
+													name='album_artist_name'
+													value={track.getAttribute(
+														'data-artist-name',
+													)}
+												/>
+												<input
+													type='hidden'
+													name='timestamp'
+													value={track.getAttribute(
+														'data-timestamp',
+													)}
+												/>
+												<Button
+													type='submit'
+													menu
+													onClick={close_menus}
+												>
+													<Icon name={icons.edit} />
+													{tl(trans.edit)}
+												</Button>
+											</form>
+										)}
+								</ButtonCombo>
+							)}
 						</MenuContents>
 					);
 
-					menu_tooltip(more_button, menu_contents);
-					context_menu_tooltip(track, menu_contents);
+					const menu = menu_tooltip(more_button, menu_contents);
+					const ctx_menu = context_menu_tooltip(track, menu_contents);
+
+					function close_menus() {
+						if (menu.is_mounted) menu.hide();
+						if (ctx_menu.is_mounted) ctx_menu.hide();
+					}
 
 					/*menu = tippy(more_button, {
 						theme: 'context-menu',
