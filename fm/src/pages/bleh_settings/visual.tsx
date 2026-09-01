@@ -39,6 +39,9 @@ import {
 import { SettingCheckbox } from '@/components/settings/provider/checkbox.tsx';
 import { PanelHead } from '@/components/text/head.tsx';
 import { icons } from '@/components/shared/icon.tsx';
+import { SettingRadio } from '@/components/settings/provider/radio.tsx';
+import { useSettings } from '@/page.ts';
+import { SettingInput } from '@/components/settings/provider/input.tsx';
 
 export function visual() {
 	if (
@@ -58,7 +61,8 @@ export function visual() {
 
 	let font_choice;
 	let custom_font;
-	let font_preview;
+
+	const font_preview = createRef();
 
 	let hovering_serif = false;
 
@@ -145,184 +149,117 @@ export function visual() {
 					</SettingOptions>
 				</SettingGroup>
 			</section>
+			<section class='bleh--panel'>
+				<PanelHead icon={icons.text}>
+					{tl(trans.fonts)}
+				</PanelHead>
+				<div class='inner-preview' ref={font_preview} />
+				<SettingGroup>
+					<SettingRadio bind='font_choice' />
+					<SettingInput bind='font' showLabel={false} />
+					<SettingCheckbox
+						bind='font_serif'
+						onMouseEnter={() => {
+							hovering_serif = true;
+							render_font_preview();
+						}}
+						onMouseLeave={() => {
+							hovering_serif = false;
+							render_font_preview();
+						}}
+					/>
+				</SettingGroup>
+				<SettingGroup>
+					<SettingRange bind='font_weight' />
+					<SettingRange bind='font_weight_medium' />
+					<SettingRange bind='font_weight_bold' />
+					<SettingSwitch bind='font_emoji' />
+				</SettingGroup>
+			</section>
+			<section class='bleh--panel'>
+				<PanelHead icon={icons.image}>
+					{tl(trans.artwork)}
+				</PanelHead>
+				<div class={['inner-preview', 'pad']}>
+					<div class='album-cover-examples'>
+						<AlbumCoverExample url='https://lastfm-img.freetls.fastly.net/i/u/ar0/b9436242d32247cbce3d403581284cd3.jpg' />
+						<AlbumCoverExample url='https://lastfm-img.freetls.fastly.net/i/u/ar0/6180e2f14ff339d02aab62895e258cc1.jpg' />
+						<AlbumCoverExample url='https://lastfm-img.freetls.fastly.net/i/u/ar0/0ee08bda639c3df913e1a4a37508a841.jpg' />
+						<AlbumCoverExample url='https://lastfm-img.freetls.fastly.net/i/u/ar0/94bc3ddb27c99cbdbe4779614e50c426.jpg' />
+						<AlbumCoverExample url='https://lastfm-img.freetls.fastly.net/i/u/ar0/b00527c6ae0cd1d4c9bf3706b130ad56.jpg' />
+						<AlbumCoverExample url='https://lastfm-img.freetls.fastly.net/i/u/ar0/703293187fdb99b70e9cdb30cb4b2420.jpg' />
+					</div>
+				</div>
+				<SettingGroup>
+					<SettingSwitch bind='grid_glow' />
+					<SettingRange bind='gloss' />
+				</SettingGroup>
+				<SettingGroup>
+					<SettingSwitch bind='show_disc_image' />
+					<SettingRadio bind='avatar_radius' />
+				</SettingGroup>
+			</section>
+			<section class='bleh--panel'>
+				<PanelHead icon={icons.more}>
+					{tl(trans.miscellaneous)}
+				</PanelHead>
+				<SettingGroup>
+					<SettingSwitch bind='rain' />
+				</SettingGroup>
+			</section>
 		</>,
 	);
 
-	return;
-
-	render(
-		page.structure.main,
-		html`
-			<section class="bleh--panel">
-				<h4>${tl(trans.appearance)}</h4>
-				<div class="setting-group">
-			        <div class="setting" data-type="action" id="setting_theme">
-			            <div class="heading">
-			                <h5>${tl(trans.themes.name)}</h5>
-			            </div>
-			            <div class="info v">
-			                ${bubbles = theme_bubbles(() => {
-				sat_bg.compat();
-
-				render_tip();
-				match();
-			})}
-			                <p class="card-tip" ref=${(el) =>
-				adaptive_tip = el} />
-			            </div>
-			        </div>
-			        ${setting({ id: 'solarium' })}
-			        ${ff('high_contrast')
-				? setting({ id: 'high_contrast' })
-				: ''}
-			        ${setting({ id: 'noise' })}
-			    </div>
-				<div class="setting-group">
-					<div class="setting" data-type="action" id="setting_hue">
-						<div class="heading">
-							<h5>${tl(trans.hue)}</h5>
-						</div>
-						<div class="info swatch-info">
-							<div
-								id="colour_custom"
-								class="swatch-group palette"
-							></div>
-							<div class="sep swatch-sep" />
-							<div
-								id="colour_palette"
-								class="swatch-group palette"
-							></div>
-						</div>
-					</div>
-					<div class="setting" data-type="options">
-						<div class="heading">
-							<h5>${tl(trans.change_my_colour_when.name)}</h5>
-							<p>${tl(trans.change_my_colour_when.body)}</p>
-						</div>
-						<div class="primary-selections"></div>
-					</div>
-				</div>
-			</section>
-			<section class="bleh--panel">
-				<h4>${tl(trans.fonts)}</h4>
-				<div class="inner-preview pad" ref=${(el) =>
-					font_preview = el} />
-				<div class="setting-group">
-			        ${font_choice = setting({
-				id: 'font_choice',
-				func: () => {
-					custom_font.compat();
-					render_font_preview();
-				},
-			})}
-			        ${custom_font = setting({ id: 'font', text: false })}
-			        ${setting({
-				id: 'font_serif',
-				mouseenter: () => {
-					hovering_serif = true;
-					render_font_preview();
-				},
-				mouseleave: () => {
-					hovering_serif = false;
-					render_font_preview();
-				},
-			})}
-			    </div>
-				<div class="setting-group">
-			        ${setting({ id: 'font_weight' })}
-			        ${setting({ id: 'font_weight_medium' })}
-			        ${setting({ id: 'font_weight_bold' })}
-			        ${setting({ id: 'font_emoji' })}
-			    </div>
-			</section>
-			<section class="bleh--panel">
-				<h4>${tl(trans.artwork)}</h4>
-				<div class="inner-preview pad">
-					<div class="album-cover-examples">
-			            ${album_cover_example(
-				'https://lastfm.freetls.fastly.net/i/u/ar0/b9436242d32247cbce3d403581284cd3.jpg',
-			)}
-			            ${album_cover_example(
-				'https://lastfm.freetls.fastly.net/i/u/ar0/6180e2f14ff339d02aab62895e258cc1.jpg',
-			)}
-			            ${album_cover_example(
-				'https://lastfm.freetls.fastly.net/i/u/ar0/0ee08bda639c3df913e1a4a37508a841.jpg',
-			)}
-			            ${album_cover_example(
-				'https://lastfm.freetls.fastly.net/i/u/ar0/94bc3ddb27c99cbdbe4779614e50c426.jpg',
-			)}
-			            ${album_cover_example(
-				'https://lastfm.freetls.fastly.net/i/u/ar0/b00527c6ae0cd1d4c9bf3706b130ad56.jpg',
-			)}
-			            ${album_cover_example(
-				'https://lastfm.freetls.fastly.net/i/u/ar0/703293187fdb99b70e9cdb30cb4b2420.jpg',
-			)}
-			        </div>
-				</div>
-				<div class="setting-group">
-			        ${setting({ id: 'grid_glow' })}
-			        ${setting({ id: 'gloss' })}
-			    </div>
-				<div class="setting-group">
-			        ${setting({ id: 'show_disc_image' })}
-			        ${setting({ id: 'avatar_radius' })}
-			    </div>
-			</section>
-			<section class="bleh--panel">
-				<h4>${tl(trans.other)}</h4>
-				<div class="setting-group">${setting({ id: 'rain' })}</div>
-			</section>
-		`,
-	);
-
-	render_tip();
-
-	render_font_preview();
+	// TODO: setting components dont respect 'requires'
+	// which means the custom font input shows up even
+	// if custom font isnt enabled
 
 	function render_font_preview() {
-		if (!settings.font_serif) hovering_serif = false;
+		if (!useSettings.get('font_serif')) hovering_serif = false;
 
 		let font = window.getComputedStyle(document.body).getPropertyValue(
 			'--font-choice',
 		);
-		if (font == `""`) font = tl(trans.no_font_selected);
+		if (font == `""`) font = tl(trans.no_font_selected) as string;
 
-		if (hovering_serif) font = tl(trans.font_serif);
+		if (hovering_serif) font = tl(trans.font_serif) as string;
 
-		render(
-			font_preview,
-			html`
-				<div class="font-preview-stack">
-					<h1 class="font-preview" data-serif=${hovering_serif}>${tl(
-						trans.font_example,
-					)}</h1>
-					<span class="font-preview-label">${tl(trans.previewing, {
-						v: font,
-					})}</span>
-				</div>
-			`,
+		font_preview.current.replaceChildren(
+			<div class='font-preview-stack'>
+				<h1 class='font-preview' data-serif={hovering_serif}>
+					{tl(trans.font_example)}
+				</h1>
+				<span class='font-preview-label'>
+					{tl(trans.previewing, { v: font })}
+				</span>
+			</div>,
 		);
 	}
+
+	useSettings.on('font_choice', render_font_preview);
+	useSettings.on('font_serif', render_font_preview);
+
+	render_font_preview();
 }
 
-function album_cover_example(url) {
+interface AlbumCoverExampleProps {
+	url: string;
+}
+
+function AlbumCoverExample({
+	url,
+}: AlbumCoverExampleProps) {
 	url = avatar(url, '300x300');
 
-	const elem = html.node`
-        <div class="album-cover-example colourful">
-            <div class="cover-art album-cover-example-art">
-                <img src=${url} />
-            </div>
-        </div>
-    `;
-
-	const colour = header_colour(
-		html.node`
-        <img src=${url} />
-    `,
-		false,
-		[elem],
+	const elem = (
+		<div class={['album-cover-example', 'colourful']}>
+			<div class={['cover-art', 'album-cover-example-art']}>
+				<img src={url} />
+			</div>
+		</div>
 	);
+
+	header_colour(<img src={url} /> as HTMLImageElement, false, [elem]);
 
 	return elem;
 }

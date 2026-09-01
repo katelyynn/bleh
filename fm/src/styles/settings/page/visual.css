@@ -350,7 +350,7 @@
 	line-height: 30px !important;
 	text-align: center;
 
-	&[data-serif="true"] {
+	&[data-serif] {
 		font-family: var(--font-head);
 		font-weight: var(--font-weight-head) !important;
 		font-size: 30px !important;
