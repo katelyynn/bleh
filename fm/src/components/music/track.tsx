@@ -40,12 +40,17 @@ import {
 	menu_tooltip,
 	Tooltip,
 } from '@/components/shared/tooltips.tsx';
-import { Button, ButtonCombo } from '@/components/button/button.tsx';
+import {
+	Button,
+	ButtonCombo,
+	ButtonComboSeparator,
+} from '@/components/button/button.tsx';
 import { Icon, icons } from '@/components/shared/icon.tsx';
 import { MenuContents } from '@/components/menu/menu.tsx';
 import { TrackMenuPreview } from '@/components/track/preview.tsx';
 import { GenericUsername } from '@/components/user/name.tsx';
 import { Token } from '@/components/form/token.tsx';
+import { createRef } from 'jsx-dom';
 
 export function patch_titles(search = page.structure.main) {
 	if (page.subpage == 'tags_overview') return;
@@ -182,6 +187,17 @@ export function patch_titles(search = page.structure.main) {
 					</div>
 				);
 				track.appendChild(track_info);
+
+				// add a stub to fix bulk edit being fragile as hell
+				track.insertBefore(
+					<div
+						class='chartlist-name chartlist-stub'
+						style={{ display: 'none' }}
+					>
+						{track_title.textContent}
+					</div>,
+					track.firstElementChild,
+				);
 			}
 			track_info.setAttribute('data-track-layout', track_layout);
 			track_info.setAttribute(
@@ -768,130 +784,371 @@ export function patch_titles(search = page.structure.main) {
 							: '',
 					);
 
+					const play_container = track.querySelector(
+						'.chartlist-play',
+					);
+
 					const menu_contents = (
 						<MenuContents>
 							{track.preview}
-							{can_edit && (
-								<ButtonCombo>
-									{is_album
-										? (
-											<form
-												style={{ margin: '0' }}
-												method='post'
-												action={track.getAttribute(
-													'data-action',
+							{can_edit
+								? (
+									<>
+										<ButtonCombo>
+											{is_album
+												? (
+													<form
+														style={{ margin: '0' }}
+														method='post'
+														action={track
+															.getAttribute(
+																'data-action',
+															)}
+														data-edit-scrobble
+													>
+														<Token
+															value={page.token}
+														/>
+														<input
+															type='hidden'
+															name='album_name'
+															value={track
+																.getAttribute(
+																	'data-album-name',
+																)}
+														/>
+														<input
+															type='hidden'
+															name='album_artist_name'
+															value={track
+																.getAttribute(
+																	'data-album-artist-name',
+																)}
+														/>
+														<input
+															type='hidden'
+															name='album_image'
+															value={track
+																.getAttribute(
+																	'data-album-image',
+																)}
+														/>
+														<input
+															type='hidden'
+															name='album_name_original'
+															value={track
+																.getAttribute(
+																	'data-album-name-original',
+																)}
+														/>
+														<input
+															type='hidden'
+															name='album_artist_name_original'
+															value={track
+																.getAttribute(
+																	'data-artist-name-original',
+																)}
+														/>
+														<input
+															type='hidden'
+															name='count'
+															value={track
+																.getAttribute(
+																	'data-count',
+																)}
+														/>
+														<Button
+															type='submit'
+															menu
+															onClick={close_menus}
+														>
+															<Icon
+																name={icons
+																	.edit}
+															/>
+															{tl(trans.edit)}
+														</Button>
+													</form>
+												)
+												: (
+													<form
+														style={{ margin: '0' }}
+														method='post'
+														action={track
+															.getAttribute(
+																'data-action',
+															)}
+														data-edit-scrobble
+													>
+														<Token
+															value={page.token}
+														/>
+														<input
+															type='hidden'
+															name='artist_name'
+															value={track
+																.getAttribute(
+																	'data-artist-name',
+																)}
+														/>
+														<input
+															type='hidden'
+															name='track_name'
+															value={track
+																.getAttribute(
+																	'data-track-name',
+																)}
+														/>
+														<input
+															type='hidden'
+															name='album_name'
+															value={track
+																.getAttribute(
+																	'data-album-name',
+																)}
+														/>
+														<input
+															type='hidden'
+															name='album_artist_name'
+															value={track
+																.getAttribute(
+																	'data-artist-name',
+																)}
+														/>
+														<input
+															type='hidden'
+															name='timestamp'
+															value={track
+																.getAttribute(
+																	'data-timestamp',
+																)}
+														/>
+														<Button
+															type='submit'
+															menu
+															onClick={close_menus}
+														>
+															<Icon
+																name={icons
+																	.edit}
+															/>
+															{tl(trans.edit)}
+														</Button>
+													</form>
 												)}
-												data-edit-scrobble
+											{bulk_edit_button && (
+												<>
+													<ButtonComboSeparator />
+													<BulkEditButton
+														chibi
+														button={bulk_edit_button}
+														onClick={close_menus}
+													/>
+												</>
+											)}
+										</ButtonCombo>
+										<div class='sep' />
+										{can_copy_scrobble && (
+											<Button
+												menu
+												onClick={() => {
+													submit_scrobble({
+														pre_track: track_title
+															.getAttribute(
+																'data-name',
+															),
+														pre_artist:
+															track_artist,
+														pre_album: alt,
+														pre_album_artist:
+															album_artist,
+														pre_timestamp:
+															timestamp,
+													});
+												}}
 											>
-												<Token value={page.token} />
-												<input
-													type='hidden'
-													name='album_name'
-													value={track.getAttribute(
-														'data-album-name',
-													)}
+												<Icon
+													name={icons.copy_scrobble}
 												/>
-												<input
-													type='hidden'
-													name='album_artist_name'
-													value={track.getAttribute(
-														'data-album-artist-name',
-													)}
-												/>
-												<input
-													type='hidden'
-													name='album_image'
-													value={track.getAttribute(
-														'data-album-image',
-													)}
-												/>
-												<input
-													type='hidden'
-													name='album_name_original'
-													value={track.getAttribute(
-														'data-album-name-original',
-													)}
-												/>
-												<input
-													type='hidden'
-													name='album_artist_name_original'
-													value={track.getAttribute(
-														'data-artist-name-original',
-													)}
-												/>
-												<input
-													type='hidden'
-													name='count'
-													value={track.getAttribute(
-														'data-count',
-													)}
-												/>
-												<Button
-													type='submit'
-													menu
-													onClick={close_menus}
-												>
-													<Icon name={icons.edit} />
-													{tl(trans.edit)}
-												</Button>
-											</form>
-										)
-										: (
-											<form
-												style={{ margin: '0' }}
-												method='post'
-												action={track.getAttribute(
-													'data-action',
-												)}
-												data-edit-scrobble
-											>
-												<Token value={page.token} />
-												<input
-													type='hidden'
-													name='artist_name'
-													value={track.getAttribute(
-														'data-artist-name',
-													)}
-												/>
-												<input
-													type='hidden'
-													name='track_name'
-													value={track.getAttribute(
-														'data-track-name',
-													)}
-												/>
-												<input
-													type='hidden'
-													name='album_name'
-													value={track.getAttribute(
-														'data-album-name',
-													)}
-												/>
-												<input
-													type='hidden'
-													name='album_artist_name'
-													value={track.getAttribute(
-														'data-artist-name',
-													)}
-												/>
-												<input
-													type='hidden'
-													name='timestamp'
-													value={track.getAttribute(
-														'data-timestamp',
-													)}
-												/>
-												<Button
-													type='submit'
-													menu
-													onClick={close_menus}
-												>
-													<Icon name={icons.edit} />
-													{tl(trans.edit)}
-												</Button>
-											</form>
+												{tl(trans.copy)}
+											</Button>
 										)}
+									</>
+								)
+								: can_copy_scrobble
+								? (
+									<>
+										<Button
+											menu
+											onClick={() => {
+												submit_scrobble({
+													pre_track: track_title
+														.getAttribute(
+															'data-name',
+														),
+													pre_artist: track_artist,
+													pre_album: alt,
+													pre_album_artist:
+														album_artist,
+													pre_timestamp: timestamp,
+												});
+											}}
+										>
+											<Icon name={icons.copy_scrobble} />
+											{tl(trans.copy)}
+										</Button>
+										<div class='sep' />
+									</>
+								)
+								: bulk_edit_button && (
+									<>
+										<BulkEditButton
+											button={bulk_edit_button}
+											onClick={close_menus}
+										/>
+										<div class='sep' />
+									</>
+								)}
+							{play_container && (
+								<PlayButton container={play_container} />
+							)}
+							{!is_album && (
+								<ButtonCombo>
+									<Button
+										menu
+										onClick={close_menus}
+										href={track_title.getAttribute('href')}
+									>
+										<Icon name={icons.track} />
+										{tl(trans.track)}
+									</Button>
+									<ButtonComboSeparator />
+									<Button
+										menu
+										chibi
+										onClick={close_menus}
+										tooltip={tl(
+											trans.explore_in_library,
+										)}
+										href={`${root}user/${user}/library${
+											track_title.getAttribute('href')
+										}`}
+									>
+										<Icon name={icons.arrow_right} />
+										{tl(trans.explore_in_library)}
+									</Button>
 								</ButtonCombo>
+							)}
+							{(album_name && album_link)
+								? (
+									<ButtonCombo>
+										<Button
+											menu
+											onClick={close_menus}
+											href={album_link.getAttribute(
+												'href',
+											)}
+										>
+											<Icon name={icons.album} />
+											{tl(trans.album)}
+										</Button>
+										<ButtonComboSeparator />
+										<Button
+											menu
+											chibi
+											onClick={close_menus}
+											tooltip={tl(
+												trans.explore_in_library,
+											)}
+											href={`${root}user/${user}/library${
+												album_link.getAttribute('href')
+											}`}
+										>
+											<Icon name={icons.arrow_right} />
+											{tl(trans.explore_in_library)}
+										</Button>
+									</ButtonCombo>
+								)
+								: is_album && (
+									<ButtonCombo>
+										<Button
+											menu
+											onClick={close_menus}
+											href={track_title.getAttribute(
+												'href',
+											)}
+										>
+											<Icon name={icons.album} />
+											{tl(trans.album)}
+										</Button>
+										<ButtonComboSeparator />
+										<Button
+											menu
+											chibi
+											onClick={close_menus}
+											tooltip={tl(
+												trans.explore_in_library,
+											)}
+											href={`${root}user/${user}/library${
+												track_title.getAttribute('href')
+											}`}
+										>
+											<Icon name={icons.arrow_right} />
+											{tl(trans.explore_in_library)}
+										</Button>
+									</ButtonCombo>
+								)}
+							<ButtonCombo>
+								<Button
+									menu
+									onClick={close_menus}
+									href={`${root}music/${redirect()}${
+										sanitise(track_artist)
+									}`}
+								>
+									<Icon name={icons.artist} />
+									{tl(trans.artist)}
+								</Button>
+								<ButtonComboSeparator />
+								<Button
+									menu
+									chibi
+									onClick={close_menus}
+									tooltip={tl(
+										trans.explore_in_library,
+									)}
+									href={`${root}user/${user}/library${
+										sanitise(track_artist)
+									}`}
+								>
+									<Icon name={icons.arrow_right} />
+									{tl(trans.explore_in_library)}
+								</Button>
+							</ButtonCombo>
+							{(is_own_profile && !is_album) && (
+								<ObsessButton
+									track={track}
+									track_title={track_title}
+									track_artist={track_artist}
+									onClick={close_menus}
+								/>
+							)}
+							<Button
+								menu
+								onClick={() => {
+									copy(track_title.href);
+									close_menus();
+								}}
+							>
+								<Icon name={icons.link} />
+								{tl(trans.copy_link)}
+							</Button>
+							{(is_own_profile && can_delete) && (
+								<DeleteButton
+									track={track}
+									track_title={track_title}
+									onClick={close_menus}
+								/>
 							)}
 						</MenuContents>
 					);
@@ -1471,4 +1728,209 @@ export function TrackStar({
 	}
 
 	return elem;
+}
+
+function BulkEditButton({
+	chibi,
+	button,
+	onClick,
+}: { chibi?: boolean; button: HTMLButtonElement; onClick: () => void }) {
+	if (!button.classList.contains('chibi')) {
+		button.classList = `dropdown-menu-clickable-item ${chibi && 'chibi'}`;
+
+		button.addEventListener('click', onClick);
+
+		button.replaceChildren(
+			<>
+				<Icon
+					name={icons
+						.bulk_edit}
+				/>
+				{tl(trans.bulk_edit)}
+			</>,
+		);
+
+		hover_tooltip(
+			button,
+			<Tooltip>
+				{tl(trans.bulk_edit)}
+			</Tooltip>,
+		);
+	}
+
+	return button;
+}
+
+function PlayButton({
+	container,
+}: { container: HTMLElement }) {
+	const button = container.querySelector(
+		'.chartlist-play-button',
+	) as HTMLButtonElement;
+	if (!button) return;
+
+	button.classList.add(
+		'dropdown-menu-clickable-item',
+		'v2',
+	);
+	button.classList.remove('chartlist-play-button');
+
+	button.replaceChildren(
+		<>
+			<Icon name={icons.play} />
+			{tl(trans.play)}
+		</>,
+	);
+
+	container.remove();
+
+	return button;
+}
+
+interface ObsessButtonProps {
+	track: HTMLElement;
+	track_title: HTMLElement;
+	track_artist?: string;
+	onClick: () => void;
+}
+
+function ObsessButton({
+	track,
+	track_title,
+	track_artist,
+	onClick,
+}: ObsessButtonProps) {
+	let name = track.getAttribute('data-track-name');
+	let artist = track.getAttribute('data-artist-name');
+
+	if (!name) {
+		// now playing
+		name = track_title.getAttribute('data-name');
+		if (track_artist) artist = track_artist;
+	}
+
+	return (
+		<form
+			style={{ margin: 0 }}
+			method='post'
+			action={`${root}user/${auth.name}/obsessions`}
+			data-submit-to-modal
+		>
+			<Token value={page.token} />
+			<input type='hidden' name='name' value={name!} />
+			<input type='hidden' name='artist_name' value={artist!} />
+			<Button type='submit' menu onClick={onClick}>
+				<Icon name={icons.obsession} />
+				{tl(trans.obsess)}
+			</Button>
+		</form>
+	);
+}
+
+interface DeleteButtonProps {
+	track: HTMLElement;
+	track_title: HTMLElement;
+	onClick: () => void;
+}
+
+function DeleteButton({
+	track,
+	track_title,
+	onClick,
+}: DeleteButtonProps) {
+	const button = (
+		<Button
+			type='submit'
+			menu
+			colourful
+			accented
+			className='delete'
+			onClick={onClick}
+		>
+			<Icon name={icons.delete} />
+			{tl(trans.delete)}
+		</Button>
+	);
+
+	const form = createRef();
+
+	return (
+		<>
+			<div class='sep' />
+			<form
+				style={{ margin: 0 }}
+				method='post'
+				action={`${root}user/${auth.name}/library/delete`}
+				ref={form}
+				onSubmit={async (e) => {
+					e.preventDefault();
+
+					const url = `${root}user/${auth.name}/library/delete`;
+					const form_data = new FormData(form.current);
+
+					try {
+						track.setAttribute('data-ajax-form-state', 'deleted');
+
+						await fetch(url, {
+							method: 'POST',
+							body: form_data,
+						}).then((res) => {
+							if (!res.ok) {
+								log(
+									'failed to delete',
+									'form',
+									'error',
+									{ res: res },
+								);
+								track.removeAttribute(
+									'data-ajax-form-state',
+								);
+								return;
+							}
+
+							log(
+								'received response',
+								'form',
+								'info',
+								{ res: res },
+							);
+
+							notify({
+								id: 'delete',
+								title: tl(trans.deleted),
+								body: track_title.getAttribute(
+									'data-name',
+								),
+								icon: 'icon-16-trash',
+								type: 'error',
+							});
+						});
+					} catch (e) {
+						console.error(e);
+						track.removeAttribute(
+							'data-ajax-form-state',
+						);
+					}
+				}}
+			>
+				<Token value={page.token} />
+				<input
+					type='hidden'
+					name='track_name'
+					value={track.getAttribute('data-track-name')!}
+				/>
+				<input
+					type='hidden'
+					name='artist_name'
+					value={track.getAttribute('data-artist-name')!}
+				/>
+				<input
+					type='hidden'
+					name='timestamp'
+					value={track.getAttribute('data-timestamp')!}
+				/>
+				{button}
+			</form>
+		</>
+	);
 }

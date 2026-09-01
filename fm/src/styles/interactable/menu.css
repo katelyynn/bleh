@@ -299,6 +299,7 @@ li:first-child .more-item--delete {
 			oklch(var(--l4-c)) 40%);
 }
 
+.delete,
 .more-item--delete,
 .more-item--report,
 .logout {

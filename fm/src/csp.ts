@@ -73,6 +73,7 @@ const CspPolicies: PolicyMap = {
 		'data:',
 
 		// stuff that last.fm uses
+		'https://*.last.fm',
 		'https://lastfm-img.freetls.fastly.net',
 		'https://*.fastly.net',
 		'https://cdn.cookielaw.org',
