@@ -952,6 +952,7 @@ export function patch_titles(search = page.structure.main) {
 											<Button
 												menu
 												onClick={() => {
+													close_menus();
 													submit_scrobble({
 														pre_track: track_title
 															.getAttribute(
@@ -981,6 +982,7 @@ export function patch_titles(search = page.structure.main) {
 										<Button
 											menu
 											onClick={() => {
+												close_menus();
 												submit_scrobble({
 													pre_track: track_title
 														.getAttribute(

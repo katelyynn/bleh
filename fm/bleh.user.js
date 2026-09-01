@@ -78424,6 +78424,7 @@ var bleh = (() => {
                     can_copy_scrobble && /* @__PURE__ */ jsx(Button, {
                       menu: true,
                       onClick: () => {
+                        close_menus();
                         submit_scrobble({
                           pre_track: track_title.getAttribute("data-name"),
                           pre_artist: track_artist,
@@ -78445,6 +78446,7 @@ var bleh = (() => {
                     /* @__PURE__ */ jsx(Button, {
                       menu: true,
                       onClick: () => {
+                        close_menus();
                         submit_scrobble({
                           pre_track: track_title.getAttribute("data-name"),
                           pre_artist: track_artist,
@@ -124026,7 +124028,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-09-01T23:27:31.107Z"
+    built_on: "2026-09-01T23:28:23.118Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
