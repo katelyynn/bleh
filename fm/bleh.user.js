@@ -104375,6 +104375,7 @@ var bleh = (() => {
     }
     useSettings.on("font_choice", render_font_preview);
     useSettings.on("font_serif", render_font_preview);
+    useSettings.on("font", render_font_preview);
     render_font_preview();
   }
   function AlbumCoverExample({ url }) {
@@ -123531,7 +123532,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-09-01T18:39:07.547Z"
+    built_on: "2026-09-01T18:39:41.012Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

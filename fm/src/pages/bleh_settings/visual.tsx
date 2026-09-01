@@ -238,6 +238,7 @@ export function visual() {
 
 	useSettings.on('font_choice', render_font_preview);
 	useSettings.on('font_serif', render_font_preview);
+	useSettings.on('font', render_font_preview);
 
 	render_font_preview();
 }
