@@ -905,9 +905,11 @@
 	--radius: 4px;
 	--padding: 0;
 
-	display: flex;
+	/* 2026-09-01: last.fm changes */
+	display: flex !important;
 	justify-content: center;
 	align-items: center;
+	margin: unset !important;
 
 	--icon: var(--icon-16-check-thick);
 	--icon-size: 10px;

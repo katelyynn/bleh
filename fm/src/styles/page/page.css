@@ -92,7 +92,7 @@
 		right: 0;
 		border-top-right-radius: var(--card-radius);
 		pointer-events: none;
-		display: var(--cards-overlay-corner-display, none);
+		display: var(--cards-overlay-corner-display, none) !important;
 		width: 800px;
 		height: 400px;
 		z-index: 100;
@@ -114,7 +114,7 @@
 		right: 0;
 		height: var(--cards-overlay-height);
 		max-height: 100%;
-		display: var(--cards-overlay-display);
+		display: var(--cards-overlay-display) !important;
 
 		background-image: var(--cards-overlay-image, unset),
 			var(--cards-overlay) !important;

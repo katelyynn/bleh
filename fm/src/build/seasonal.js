@@ -63,7 +63,7 @@ export const seasonal_events = [
 		},
 		end: {
 			month: 9,
-			day: 27,
+			day: 10,
 		},
 		snowflakes: {
 			state: false,

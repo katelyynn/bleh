@@ -17,7 +17,7 @@ export const icons = {
 	share: 'share',
 	overview: 'home',
 	mention: 'mention',
-	profile: 'user',
+	profile: 'profile',
 	global: 'globe',
 	library: 'library',
 	shoutbox: 'shoutbox',

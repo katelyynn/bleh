@@ -80,7 +80,7 @@
 			}
 		}
 
-		&[data-modal-has-overlays="true"] {
+		&[data-modal-has-overlays] {
 			&:before {
 				content: "";
 				position: absolute;
