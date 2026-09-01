@@ -93466,6 +93466,35 @@ var bleh = (() => {
     else view_buttons.insertBefore(bulk_edit, edit_form);
   }
 
+  // src/components/summary/summary.tsx
+  function ProfileSummary({ music, children }) {
+    return /* @__PURE__ */ jsx("section", {
+      class: [
+        "profile-summary",
+        music && "music-summary"
+      ],
+      children
+    });
+  }
+  function ProfileSummaryMain({ children }) {
+    return /* @__PURE__ */ jsx("div", {
+      class: "summary-main",
+      children
+    });
+  }
+  function ProfileSummarySeparator() {
+    return /* @__PURE__ */ jsx("div", {
+      class: "summary-sep"
+    });
+  }
+  function ProfileSummaryTitle({ ref: ref2, children }) {
+    return /* @__PURE__ */ jsx("h2", {
+      class: "summary-title",
+      ref: ref2,
+      children
+    });
+  }
+
   // node_modules/.deno/countup.js@2.10.1/node_modules/countup.js/dist/countUp.min.js
   var t = function() {
     return t = Object.assign || function(t2) {
@@ -93562,65 +93591,205 @@ var bleh = (() => {
     }, i3.observedElements = /* @__PURE__ */ new WeakMap(), i3;
   })();
 
+  // src/components/summary/block.tsx
+  function ProfileSummaryBlocks({ children }) {
+    return /* @__PURE__ */ jsx("div", {
+      class: "summary-blocks",
+      children
+    });
+  }
+  function ProfileSummaryBlock({ type, value, tooltip, counter }) {
+    let text4;
+    let icon_name;
+    if (type == "scrobbles") {
+      text4 = tl2(trans.scrobbles);
+      icon_name = icons.track;
+    } else if (type == "artists") {
+      text4 = tl2(trans.artists);
+      icon_name = icons.artist;
+    } else if (type == "loved") {
+      text4 = tl2(trans.loved);
+      icon_name = icons.loved;
+    }
+    const value_elem = createRef();
+    const elem = /* @__PURE__ */ jsx("div", {
+      class: [
+        "summary-block",
+        counter && "summary-block-hidden"
+      ],
+      children: [
+        /* @__PURE__ */ jsx("div", {
+          class: "summary-icon",
+          children: /* @__PURE__ */ jsx(Icon, {
+            name: icon_name,
+            identifier: "summary"
+          })
+        }),
+        /* @__PURE__ */ jsx("div", {
+          class: "summary-info",
+          children: [
+            /* @__PURE__ */ jsx("h3", {
+              class: "summary-label",
+              children: text4
+            }),
+            /* @__PURE__ */ jsx("p", {
+              class: "summary-value",
+              ref: value_elem,
+              children: value.toLocaleString(lang)
+            })
+          ]
+        })
+      ]
+    });
+    if (tooltip) {
+      hover_tooltip(elem, /* @__PURE__ */ jsx(Tooltip, {
+        children: tooltip
+      }));
+    }
+    if (counter) {
+      const count = new i2(value_elem.current, value);
+      setTimeout(() => {
+        count.start();
+        setTimeout(() => {
+          elem.classList.remove("summary-block-hidden");
+        }, 10);
+      }, 0);
+    }
+    return elem;
+  }
+
+  // src/components/summary/graph.tsx
+  function GraphBlocks({ children }) {
+    return /* @__PURE__ */ jsx("div", {
+      class: "graph-blocks",
+      children
+    });
+  }
+  function GraphBlock({ index: index3, level = -1 }) {
+    const elem = /* @__PURE__ */ jsx("a", {
+      class: [
+        "graph-block"
+      ],
+      style: {
+        "--delay": `${index3 * 0.04}s`
+      }
+    });
+    function update() {
+      elem.classList = "graph-block";
+      if (level == -1) {
+        elem.classList.add("empty");
+      } else {
+        elem.classList.add(`level-${level}`);
+      }
+    }
+    Object.defineProperty(elem, "level", {
+      get() {
+        return level;
+      },
+      set(v) {
+        level = v;
+        update();
+      }
+    });
+    update();
+    return elem;
+  }
+
+  // src/components/loading/loading.tsx
+  function LoadingData({ type = "loading", children }) {
+    return /* @__PURE__ */ jsx("div", {
+      class: "loading-data-container",
+      children: /* @__PURE__ */ jsx("div", {
+        class: [
+          "loading-data-text",
+          type
+        ],
+        children
+      })
+    });
+  }
+
   // src/components/profile/summary.tsx
   function profile_summary(recent_tracks, top_artists) {
-    let graph_blocks = [];
+    const graph_blocks = [];
     const date = /* @__PURE__ */ new Date();
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
-    let title;
-    let graph_container;
-    const panel = html.node`
-        <section class="profile-summary">
-            <div class="top-container">
-                <h2 class="summary-title" ref=${(el) => title = el}>${tl2(trans.value_scrobbles_recently, {
-      v: 0
-    })}</h2>
-                <div class="summary-blocks">
-                    ${summary_block2("scrobbles", page.state.scrobbles)}
-                    ${summary_block2("artists", page.state.artists)}
-                    ${summary_block2("loved", page.state.loved)}
-                </div>
-            </div>
-            <div class="summary-main">
-                <div class="graph-blocks">
-                    ${Array.from({
-      length: 30
-    }).map((_, i3) => {
-      const elem = create_graph_block2(i3 + 1);
-      graph_blocks.push(elem);
-      return elem;
-    })}
-                </div>
-                <div class="summary-sep" />
-                <div class="month-graph" ref=${(el) => graph_container = el}>
-                    ${page.state.scrobbles > 0 ? html.node`
-                    <div class="scrobble-canvas-container mini icon-mask">
-                        <div class="loading-data-container">
-                            <div class="loading-data-text">${tl2(trans.loading_count_days).replace("{c}", "90")}</div>
-                        </div>
-                    </div>
-                    <div class="bottom-card-links" style="display: none">
-                        <a class="this-month see-more left-icon" href="${root}user/${page.name}/library?from=${year}-${month}-01&rangetype=1month">
-                            ${tl2(trans.value_this_month, {
-      v: 0
-    })}
-                        </a>
-                        <a class="see-more" href="${root}user/${page.name}/library/artists?date_preset=LAST_90_DAYS&page=1">
-                            ${tl2(trans.explore_in_library)}
-                        </a>
-                    </div>
-                    ` : auth.name ? html.node`
-                    <div class="scrobble-canvas-container mini icon-mask">
-                        <div class="loading-data-container">
-                            <div class="loading-data-text failed">${tl2(trans.profile_does_not_have_enough_scrobbles)}</div>
-                        </div>
-                    </div>
-                    ` : html.node``}
-                </div>
-            </div>
-        </section>
-    `;
+    const title = createRef();
+    const graph_container = createRef();
+    const panel = /* @__PURE__ */ jsx(ProfileSummary, {
+      children: [
+        /* @__PURE__ */ jsx(PanelTop, {
+          children: [
+            /* @__PURE__ */ jsx(ProfileSummaryTitle, {
+              ref: title,
+              children: tl2(trans.value_scrobbles_recently, {
+                v: 0
+              })
+            }),
+            /* @__PURE__ */ jsx(ProfileSummaryBlocks, {
+              children: [
+                /* @__PURE__ */ jsx(ProfileSummaryBlock, {
+                  type: "scrobbles",
+                  value: page.state.scrobbles,
+                  tooltip: page.state.average
+                }),
+                /* @__PURE__ */ jsx(ProfileSummaryBlock, {
+                  type: "artists",
+                  value: page.state.artists
+                }),
+                /* @__PURE__ */ jsx(ProfileSummaryBlock, {
+                  type: "loved",
+                  value: page.state.loved
+                })
+              ]
+            })
+          ]
+        }),
+        /* @__PURE__ */ jsx(ProfileSummaryMain, {
+          children: [
+            /* @__PURE__ */ jsx(GraphBlocks, {
+              children: Array.from({
+                length: 30
+              }).map((_, i3) => {
+                const elem = /* @__PURE__ */ jsx(GraphBlock, {
+                  index: i3 + 1
+                });
+                graph_blocks.push(elem);
+                return elem;
+              })
+            }),
+            /* @__PURE__ */ jsx(ProfileSummarySeparator, {}),
+            /* @__PURE__ */ jsx("div", {
+              class: "month-graph",
+              ref: graph_container,
+              children: page.state.scrobbles > 0 ? /* @__PURE__ */ jsx("div", {
+                class: [
+                  "scrobble-canvas-container",
+                  "mini",
+                  "icon-mask"
+                ],
+                children: /* @__PURE__ */ jsx(LoadingData, {
+                  children: tl2(trans.loading_count_days, {
+                    c: 90
+                  })
+                })
+              }) : auth.name && /* @__PURE__ */ jsx("div", {
+                class: [
+                  "scrobble-canvas-container",
+                  "mini",
+                  "icon-mask"
+                ],
+                children: /* @__PURE__ */ jsx(LoadingData, {
+                  type: "failed",
+                  children: tl2(trans.profile_does_not_have_enough_scrobbles)
+                })
+              })
+            })
+          ]
+        })
+      ]
+    });
     page.structure.main.insertBefore(panel, page.structure.main.firstChild);
     fetch_30_day();
     function fetch_30_day() {
@@ -93656,75 +93825,27 @@ var bleh = (() => {
             const elem = graph_blocks[i3];
             if (!elem) return;
             if (value > 0) {
-              elem.classList.remove("empty");
               const level = graph_block_level2(value, max3, avg);
-              elem.classList.add(`level-${level}`);
+              elem.level = level;
               sum += value;
             }
           });
-          title.textContent = tl2(trans.value_scrobbles_recently, {
+          title.current.replaceChildren(tl2(trans.value_scrobbles_recently, {
             v: sum.toLocaleString(lang)
-          });
+          }));
         } catch (e5) {
           throw new Error(e5);
         }
       });
     }
     if (page.state.scrobbles > 0 && auth.name) {
-      bleh_profile_chart(graph_container);
+      bleh_profile_chart(graph_container.current);
     }
-  }
-  function create_graph_block2(index3) {
-    return html.node`
-        <a class="graph-block empty" style="--delay: ${index3 * 0.04 + "s"}" />
-    `;
   }
   function graph_block_level2(value, max3, avg) {
     if (max3 == 0) return 0;
     const normalized = value / (avg * 2);
     return Math.min(9, Math.floor(normalized * 10));
-  }
-  function summary_block2(type, value) {
-    let text4;
-    let icon_name;
-    if (type == "scrobbles") {
-      text4 = tl2(trans.scrobbles);
-      icon_name = icons.track;
-    } else if (type == "artists") {
-      text4 = tl2(trans.artists);
-      icon_name = icons.artist;
-    } else if (type == "loved") {
-      text4 = tl2(trans.loved);
-      icon_name = icons.loved;
-    }
-    let value_elem;
-    const elem = html.node`
-        <div class="summary-block summary-block-hidden">
-            <div class="summary-icon">
-                ${icon({
-      name: icon_name,
-      identifier: "summary"
-    })}
-            </div>
-            <div class="summary-info">
-                <h3 class="summary-label">${text4}</h3>
-                <p class="summary-value" ref=${(el) => value_elem = el}>${value.toLocaleString(lang)}</p>
-            </div>
-        </div>
-    `;
-    if (type == "scrobbles") {
-      tippy_esm_default(elem, {
-        content: page.state.average
-      });
-    }
-    const count = new i2(value_elem, value);
-    setTimeout(() => {
-      count.start();
-      setTimeout(() => {
-        elem.classList.remove("summary-block-hidden");
-      }, 10);
-    }, 0);
-    return elem;
   }
   function bleh_profile_chart(panel) {
     let table = panel.querySelector("table");
@@ -93772,14 +93893,26 @@ var bleh = (() => {
     const last_month = parseInt(values[values.length - 2]);
     const this_month = parseInt(values[values.length - 1]);
     const diff2 = this_month - last_month;
-    render(panel.querySelector(".this-month"), html`
-			${tl2(trans.value_this_month, {
-      v: this_month.toLocaleString(lang)
-    })}
-			${!Number.isNaN(diff2) ? html.node`<span class="diff">(${tl2(trans[diff2 > 0 ? "value_more" : "value_less"], {
-      v: diff2 > 0 ? diff2.toLocaleString(lang) : Math.abs(diff2).toLocaleString(lang)
-    })})</span>` : ""}
-		`);
+    const this_month_elem = panel.querySelector(".this-month");
+    if (this_month_elem) {
+      this_month_elem.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
+        children: [
+          tl2(trans.value_this_month, {
+            v: this_month.toLocaleString(lang)
+          }),
+          !Number.isNaN(diff2) && /* @__PURE__ */ jsx("span", {
+            class: "diff",
+            children: [
+              "(",
+              tl2(diff2 > 0 ? trans.value_more : trans.value_less, {
+                v: diff2 > 0 ? diff2.toLocaleString(lang) : Math.abs(diff2).toLocaleString(lang)
+              }),
+              ")"
+            ]
+          })
+        ]
+      }));
+    }
     prep_chart_colours();
     const scrobble_canvas_container = panel.querySelector(".scrobble-canvas-container");
     scrobble_canvas_container.innerHTML = "";
@@ -93813,11 +93946,10 @@ var bleh = (() => {
       },
       options: page.state.chart_library_line_options_mini
     });
-    scrobble_canvas_container.appendChild(html.node`
-        <div class="monthly-chart-line">
-            ${scrobble_canvas}
-        </div>
-    `);
+    scrobble_canvas_container.appendChild(/* @__PURE__ */ jsx("div", {
+      class: "monthly-chart-line",
+      children: scrobble_canvas
+    }));
     const scrobble_canvas_2 = document.createElement("canvas");
     scrobble_canvas_2.classList.add("scrobble-canvas", "monthly-canvas-pie");
     let scrobble_chart_2 = new Chart(scrobble_canvas_2.getContext("2d"), {
@@ -93843,11 +93975,10 @@ var bleh = (() => {
       },
       options: page.state.chart_library_pie_options
     });
-    scrobble_canvas_container.appendChild(html.node`
-        <div class="monthly-chart-pie">
-            ${scrobble_canvas_2}
-        </div>
-    `);
+    scrobble_canvas_container.appendChild(/* @__PURE__ */ jsx("div", {
+      class: "monthly-chart-pie",
+      children: scrobble_canvas_2
+    }));
   }
 
   // src/components/music/chart.ts
@@ -116734,7 +116865,7 @@ var bleh = (() => {
     const form_website = document.getElementById("id_homepage").value;
     const form_country = document.getElementById("id_country");
     const form_about_me = document.getElementById("id_about_me");
-    const profile_cache = JSON.parse(localStorage.getItem(keys3.profile_cache)) || {};
+    const profile_cache = JSON.parse(localStorage.getItem(keys3.profile_cache) || "{}");
     const cache2 = profile_cache[auth.name];
     delete_cache(cache2);
     const markdown_settings = {
@@ -123392,7 +123523,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-08-31T23:12:28.006Z"
+    built_on: "2026-09-01T16:34:24.005Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

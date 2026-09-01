@@ -6,19 +6,14 @@
 
 import { settings } from '@/build/config';
 import { auth, page, root } from '@/build/page';
-import { clamp_lit, clamp_sat, hex_to_oklch } from '@/build/tools';
 import { tl, trans } from '@/build/trans';
 import { dialog, dialog_rm } from '@/components/dialog/dialog';
-import { notify, notify_rm } from '@/components/dialog/notify';
-import { input } from '@/components/settings/input';
 import { select, select_prepare } from '@/components/settings/select';
-import { save_setting, setting } from '@/components/settings/settings';
-import { expand_avatar } from '@/components/shared/avatar';
+import { setting } from '@/components/settings/settings';
 import { markdown, markdown_field } from '@/components/markdown/markdown';
 import { html, render } from 'lighterhtml';
 import tippy from 'tippy.js';
 import Cropper from 'cropperjs';
-import { ff } from '@/components/settings/sku';
 import { toggle } from '@/components/settings/toggle';
 import {
 	render_chart_preview,
@@ -27,8 +22,6 @@ import {
 import { keys } from '@/components/settings/storage';
 import { save_profile_cache } from '../profile/profile';
 import { delete_cache } from '@/components/profile/cache';
-import { new_indicator } from '@/components/shared/indicator';
-import { colour_tile } from '@/components/settings/swatch';
 import { createRef } from 'jsx-dom';
 import { SettingGroup } from '@/components/settings/group.tsx';
 import { SettingLabel } from '@/components/settings/provider/main.tsx';
@@ -327,10 +320,10 @@ function profile_panel() {
 		'id_about_me',
 	) as HTMLTextAreaElement;
 
-	const profile_cache =
-		JSON.parse(localStorage.getItem(keys.profile_cache)) ||
-		{};
-	const cache = profile_cache[auth.name];
+	const profile_cache = JSON.parse(
+		localStorage.getItem(keys.profile_cache) || '{}',
+	);
+	const cache = profile_cache[auth.name!];
 
 	delete_cache(cache);
 

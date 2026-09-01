@@ -16,81 +16,108 @@ import { DateTime } from 'luxon';
 import { CountUp } from 'countup.js';
 import { hover_tooltip } from '@/components/shared/tooltips.tsx';
 import { HeatmapTooltip } from '@/components/date/heatmap.tsx';
+import {
+	ProfileSummary,
+	ProfileSummaryMain,
+	ProfileSummarySeparator,
+	ProfileSummaryTitle,
+} from '@/components/summary/summary.tsx';
+import { PanelTop } from '@/components/text/see_more.tsx';
+import { createRef } from 'jsx-dom';
+import {
+	ProfileSummaryBlock,
+	ProfileSummaryBlocks,
+} from '@/components/summary/block.tsx';
+import {
+	GraphBlock,
+	GraphBlockElement,
+	GraphBlocks,
+} from '@/components/summary/graph.tsx';
+import { LoadingData } from '@/components/loading/loading.tsx';
 
 export function profile_summary(
 	recent_tracks: Element | undefined,
 	top_artists: Element | undefined,
 ) {
-	let graph_blocks: HTMLElement[] = [];
+	const graph_blocks: GraphBlockElement[] = [];
 
 	const date = new Date();
 	const year = date.getFullYear();
 	const month = date.getMonth() + 1;
 
-	let title;
-	let graph_container;
+	const title = createRef();
+	const graph_container = createRef();
 
-	const panel = html.node`
-        <section class="profile-summary">
-            <div class="top-container">
-                <h2 class="summary-title" ref=${(el) => title = el}>${
-		tl(trans.value_scrobbles_recently, { v: 0 })
-	}</h2>
-                <div class="summary-blocks">
-                    ${summary_block('scrobbles', page.state.scrobbles)}
-                    ${summary_block('artists', page.state.artists)}
-                    ${summary_block('loved', page.state.loved)}
-                </div>
-            </div>
-            <div class="summary-main">
-                <div class="graph-blocks">
-                    ${
-		Array.from({ length: 30 }).map((_, i) => {
-			const elem = create_graph_block(i + 1);
+	const panel = (
+		<ProfileSummary>
+			<PanelTop>
+				<ProfileSummaryTitle ref={title}>
+					{tl(trans.value_scrobbles_recently, { v: 0 })}
+				</ProfileSummaryTitle>
+				<ProfileSummaryBlocks>
+					<ProfileSummaryBlock
+						type='scrobbles'
+						value={page.state.scrobbles}
+						tooltip={page.state.average}
+					/>
+					<ProfileSummaryBlock
+						type='artists'
+						value={page.state.artists}
+					/>
+					<ProfileSummaryBlock
+						type='loved'
+						value={page.state.loved}
+					/>
+				</ProfileSummaryBlocks>
+			</PanelTop>
+			<ProfileSummaryMain>
+				<GraphBlocks>
+					{Array.from({ length: 30 }).map((_, i) => {
+						const elem = (
+							<GraphBlock index={i + 1} />
+						) as GraphBlockElement;
 
-			graph_blocks.push(elem);
+						graph_blocks.push(elem);
 
-			return elem;
-		})
-	}
-                </div>
-                <div class="summary-sep" />
-                <div class="month-graph" ref=${(el) => graph_container = el}>
-                    ${
-		page.state.scrobbles > 0
-			? html.node`
-                    <div class="scrobble-canvas-container mini icon-mask">
-                        <div class="loading-data-container">
-                            <div class="loading-data-text">${
-				tl(trans.loading_count_days).replace('{c}', '90')
-			}</div>
-                        </div>
-                    </div>
-                    <div class="bottom-card-links" style="display: none">
-                        <a class="this-month see-more left-icon" href="${root}user/${page.name}/library?from=${year}-${month}-01&rangetype=1month">
-                            ${tl(trans.value_this_month, { v: 0 })}
-                        </a>
-                        <a class="see-more" href="${root}user/${page.name}/library/artists?date_preset=LAST_90_DAYS&page=1">
-                            ${tl(trans.explore_in_library)}
-                        </a>
-                    </div>
-                    `
-			: auth.name
-			? html.node`
-                    <div class="scrobble-canvas-container mini icon-mask">
-                        <div class="loading-data-container">
-                            <div class="loading-data-text failed">${
-				tl(trans.profile_does_not_have_enough_scrobbles)
-			}</div>
-                        </div>
-                    </div>
-                    `
-			: html.node``
-	}
-                </div>
-            </div>
-        </section>
-    `;
+						return elem;
+					})}
+				</GraphBlocks>
+				<ProfileSummarySeparator />
+				<div class='month-graph' ref={graph_container}>
+					{page.state.scrobbles > 0
+						? (
+							<div
+								class={[
+									'scrobble-canvas-container',
+									'mini',
+									'icon-mask',
+								]}
+							>
+								<LoadingData>
+									{tl(trans.loading_count_days, { c: 90 })}
+								</LoadingData>
+							</div>
+						)
+						: auth.name && (
+							<div
+								class={[
+									'scrobble-canvas-container',
+									'mini',
+									'icon-mask',
+								]}
+							>
+								<LoadingData type='failed'>
+									{tl(
+										trans
+											.profile_does_not_have_enough_scrobbles,
+									)}
+								</LoadingData>
+							</div>
+						)}
+				</div>
+			</ProfileSummaryMain>
+		</ProfileSummary>
+	);
 
 	page.structure.main!.insertBefore(panel, page.structure.main!.firstChild);
 
@@ -173,19 +200,18 @@ export function profile_summary(
 						if (!elem) return;
 
 						if (value > 0) {
-							elem.classList.remove('empty');
-
 							const level = graph_block_level(value, max, avg);
-
-							elem.classList.add(`level-${level}`);
+							elem.level = level;
 
 							sum += value;
 						}
 					});
 
-					title.textContent = tl(trans.value_scrobbles_recently, {
-						v: sum.toLocaleString(lang),
-					});
+					title.current.replaceChildren(
+						tl(trans.value_scrobbles_recently, {
+							v: sum.toLocaleString(lang),
+						}),
+					);
 				} catch (e) {
 					throw new Error(e);
 				}
@@ -193,14 +219,8 @@ export function profile_summary(
 	}
 
 	if (page.state.scrobbles > 0 && auth.name) {
-		bleh_profile_chart(graph_container);
+		bleh_profile_chart(graph_container.current);
 	}
-}
-
-function create_graph_block(index: number) {
-	return html.node`
-        <a class="graph-block empty" style="--delay: ${index * 0.04 + 's'}" />
-    `;
 }
 
 function graph_block_level(value: number, max: number, avg: number) {
@@ -208,56 +228,6 @@ function graph_block_level(value: number, max: number, avg: number) {
 
 	const normalized = value / (avg * 2);
 	return Math.min(9, Math.floor(normalized * 10));
-}
-
-function summary_block(type: string, value: number) {
-	let text;
-	let icon_name;
-
-	if (type == 'scrobbles') {
-		text = tl(trans.scrobbles);
-		icon_name = icons.track;
-	} else if (type == 'artists') {
-		text = tl(trans.artists);
-		icon_name = icons.artist;
-	} else if (type == 'loved') {
-		text = tl(trans.loved);
-		icon_name = icons.loved;
-	}
-
-	let value_elem;
-
-	const elem = html.node`
-        <div class="summary-block summary-block-hidden">
-            <div class="summary-icon">
-                ${icon({ name: icon_name, identifier: 'summary' })}
-            </div>
-            <div class="summary-info">
-                <h3 class="summary-label">${text}</h3>
-                <p class="summary-value" ref=${(el) => value_elem = el}>${
-		value.toLocaleString(lang)
-	}</p>
-            </div>
-        </div>
-    `;
-
-	if (type == 'scrobbles') {
-		tippy(elem, {
-			content: page.state.average,
-		});
-	}
-
-	const count = new CountUp(value_elem!, value);
-
-	setTimeout(() => {
-		count.start();
-
-		setTimeout(() => {
-			elem.classList.remove('summary-block-hidden');
-		}, 10);
-	}, 0);
-
-	return elem;
 }
 
 function bleh_profile_chart(panel: HTMLElement) {
@@ -349,35 +319,37 @@ export function bleh_profile_chart_render(
 	const this_month = parseInt(values[values.length - 1]);
 	const diff = this_month - last_month;
 
-	render(
-		panel.querySelector('.this-month'),
-		html`
-			${tl(trans.value_this_month, {
-				v: this_month.toLocaleString(lang),
-			})}
-			${!Number.isNaN(diff)
-				? html.node`<span class="diff">(${
-					tl(trans[diff > 0 ? 'value_more' : 'value_less'], {
-						v: diff > 0
-							? diff.toLocaleString(lang)
-							: Math.abs(diff).toLocaleString(lang),
-					})
-				})</span>`
-				: ''}
-		`,
-	);
+	const this_month_elem = panel.querySelector('.this-month');
+	if (this_month_elem) {
+		this_month_elem.replaceChildren(
+			<>
+				{tl(trans.value_this_month, {
+					v: this_month.toLocaleString(lang),
+				})}
+				{!Number.isNaN(diff) && (
+					<span class='diff'>
+						({tl(diff > 0 ? trans.value_more : trans.value_less, {
+							v: diff > 0
+								? diff.toLocaleString(lang)
+								: Math.abs(diff).toLocaleString(lang),
+						})})
+					</span>
+				)}
+			</>,
+		);
+	}
 
 	prep_chart_colours();
 
 	const scrobble_canvas_container = panel.querySelector(
 		'.scrobble-canvas-container',
-	);
+	)!;
 	scrobble_canvas_container.innerHTML = '';
 
 	const scrobble_canvas = document.createElement('canvas');
 	scrobble_canvas.classList.add('scrobble-canvas', 'monthly-canvas');
 
-	let gradient = scrobble_canvas.getContext('2d').createLinearGradient(
+	let gradient = scrobble_canvas.getContext('2d')!.createLinearGradient(
 		0,
 		0,
 		0,
@@ -412,11 +384,11 @@ export function bleh_profile_chart_render(
 		options: page.state.chart_library_line_options_mini,
 	});
 
-	scrobble_canvas_container.appendChild(html.node`
-        <div class="monthly-chart-line">
-            ${scrobble_canvas}
-        </div>
-    `);
+	scrobble_canvas_container.appendChild(
+		<div class='monthly-chart-line'>
+			{scrobble_canvas}
+		</div>,
+	);
 
 	//
 
@@ -447,9 +419,9 @@ export function bleh_profile_chart_render(
 		options: page.state.chart_library_pie_options,
 	});
 
-	scrobble_canvas_container.appendChild(html.node`
-        <div class="monthly-chart-pie">
-            ${scrobble_canvas_2}
-        </div>
-    `);
+	scrobble_canvas_container.appendChild(
+		<div class='monthly-chart-pie'>
+			{scrobble_canvas_2}
+		</div>,
+	);
 }
