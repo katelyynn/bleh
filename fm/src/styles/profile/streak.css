@@ -174,7 +174,7 @@
 .streak-values {
 	display: flex;
 	flex-direction: column;
-	gap: 10px;
+	gap: var(--card-gap);
 	position: relative;
 	z-index: 5;
 }
@@ -187,6 +187,8 @@
 
 .streak-value-top {
 	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
 }
 
 .streak-value-label {
@@ -208,6 +210,7 @@
 	position: relative;
 	height: 6px;
 	width: 100%;
+	background-color: oklch(var(--f4) / 20%);
 	border-radius: var(--radius-s);
 }
 
@@ -215,6 +218,7 @@
 	height: 100%;
 	background-color: oklch(var(--l3-c));
 	border-radius: var(--radius-s);
+	box-shadow: var(--bar-shadow), 0 2px 1px 0 oklch(var(--k4) / 60%);
 
 	transform-origin: left;
 	animation: streak_bar 1.5s var(--trans-function-ani);

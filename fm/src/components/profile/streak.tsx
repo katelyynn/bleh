@@ -133,7 +133,6 @@ function calculate_streak(
 				streaks.album.date = track.date;
 			} else {
 				album_active = false;
-				delete streaks.album;
 			}
 		}
 
@@ -151,7 +150,6 @@ function calculate_streak(
 				streaks.track.date = track.date;
 			} else {
 				track_active = false;
-				delete streaks.track;
 			}
 		}
 	}
