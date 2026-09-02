@@ -13,6 +13,236 @@ import { input } from '../settings/input';
 import { DateTime } from 'luxon';
 import { pad2 } from '@/build/tools';
 import { useSettings } from '@/page.ts';
+import { Button } from '@/components/button/button.tsx';
+import {
+	FloatingWindow,
+	FloatingWindowContents,
+} from '@/components/menu/floating_window.tsx';
+import { Tabbed } from '@/components/tab/tabbed.tsx';
+import { icons } from '@/components/shared/icon.tsx';
+import { createRef } from 'jsx-dom';
+
+interface HybridTimeframePickerProps {
+	ref?: ReturnType<typeof createRef>;
+	value?: string;
+	disallowed?: boolean;
+	onChange?: (val: string) => void;
+}
+
+type HybridTimeframePickerElement = HTMLButtonElement & {
+	disallowed: boolean;
+};
+
+export function HybridTimeframePicker({
+	ref,
+	value,
+	disallowed = false,
+	onChange,
+}: HybridTimeframePickerProps) {
+	if (!value) value = 'date_preset=LAST_7_DAYS';
+
+	const modal = <FloatingWindow />;
+
+	const elem = (
+		<Button
+			className='timeframe-picker-button'
+			opens={modal}
+			ref={ref}
+		/>
+	) as HybridTimeframePickerElement;
+
+	function update() {
+		elem.setAttribute('disabled', String(disallowed));
+
+		elem.replaceChildren(
+			<>
+				{timeframe_text(value!)}
+			</>,
+		);
+	}
+
+	function set(v: string, bubble = true) {
+		value = v;
+
+		if (onChange && bubble) onChange(value);
+
+		modal.replaceChildren(
+			<FloatingWindowContents>
+				<Tabbed
+					page={useSettings.get('date_selector') as string}
+					pages={{
+						presets: {
+							icon: icons.calendar,
+							label: tl(trans.presets),
+							content: () => <PresetPage />,
+						},
+					}}
+				/>
+			</FloatingWindowContents>,
+		);
+
+		update();
+	}
+
+	function PresetPage() {
+		const buttons: TimeframePresetElement[] = [];
+
+		const years = Array.from({
+			length: new Date().getFullYear() - 2002,
+		}, (_, i) => 2003 + i).reverse();
+
+		const elem = (
+			<>
+				<div class='date-range-picker-presets-wrap'>
+					<ul class={['date-range-picker-presets']}>
+						<TimeframePreset
+							type='date_preset=LAST_7_DAYS'
+							append={buttons}
+							onChange={set_preset}
+						/>
+						<TimeframePreset
+							type='date_preset=LAST_30_DAYS'
+							append={buttons}
+							onChange={set_preset}
+						/>
+						<TimeframePreset
+							type='date_preset=LAST_90_DAYS'
+							append={buttons}
+							onChange={set_preset}
+						/>
+					</ul>
+					<ul
+						class={[
+							'date-range-picker-presets',
+							'date-range-picker-presets--col-2',
+						]}
+					>
+						<TimeframePreset
+							type='date_preset=LAST_180_DAYS'
+							append={buttons}
+							onChange={set_preset}
+						/>
+						<TimeframePreset
+							type='date_preset=LAST_365_DAYS'
+							append={buttons}
+							onChange={set_preset}
+						/>
+						<TimeframePreset
+							type='date_preset=ALL'
+							append={buttons}
+							onChange={set_preset}
+						/>
+					</ul>
+				</div>
+				<div class='date-range-picker-years'>
+					{years.map((year) => (
+						<TimeframePreset
+							type={`from=${year}-01-01&rangetype=year`}
+							append={buttons}
+							onChange={set_preset}
+						/>
+					))}
+				</div>
+			</>
+		);
+
+		function update_presets() {
+			buttons.forEach((button) => {
+				button.active = value == button.type;
+			});
+		}
+
+		function set_preset(v: string) {
+			set(v);
+			update_presets();
+		}
+
+		update_presets();
+
+		return elem;
+	}
+
+	set(value, false);
+
+	Object.defineProperty(elem, 'value', {
+		get() {
+			return value;
+		},
+		set(v: string) {
+			set(v);
+		},
+	});
+
+	Object.defineProperty(elem, 'disallowed', {
+		get() {
+			return disallowed;
+		},
+		set(v: boolean) {
+			disallowed = v;
+			update();
+		},
+	});
+
+	return elem;
+}
+
+interface TimeframePresetProps {
+	type: string;
+	active?: boolean;
+	append?: TimeframePresetElement[];
+	onChange?: (v: string) => void;
+}
+
+type TimeframePresetElement = HTMLButtonElement & {
+	type: string;
+	active: boolean;
+};
+
+function TimeframePreset({
+	type,
+	active,
+	append,
+	onChange,
+}: TimeframePresetProps) {
+	const elem = (
+		<li class='date-range-picker-preset'>
+			<Button
+				className='date-picker-preset-item'
+				onClick={() => onChange?.(type)}
+			>
+				{timeframe_text(type)}
+			</Button>
+		</li>
+	) as TimeframePresetElement;
+
+	function update() {
+		elem.classList.toggle('date-range-picker-preset--selected', active);
+	}
+
+	update();
+
+	Object.defineProperty(elem, 'type', {
+		get() {
+			return type;
+		},
+	});
+
+	Object.defineProperty(elem, 'active', {
+		get() {
+			return active;
+		},
+		set(v: boolean) {
+			active = v;
+			update();
+		},
+	});
+
+	if (append) {
+		append.push(elem);
+	}
+
+	return elem;
+}
 
 interface hybrid_timeframe_picker {
 	initial?: string;

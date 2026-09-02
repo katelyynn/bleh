@@ -29,7 +29,7 @@ type ButtonProps =
 		external?: boolean;
 		onClick?: () => void;
 		className?: string;
-		children: ReactNode;
+		children?: ReactNode;
 		tooltip?: ReactNode;
 		opens?: ReactElement;
 	}

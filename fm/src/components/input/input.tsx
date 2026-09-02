@@ -8,6 +8,7 @@ import { createRef } from 'jsx-dom';
 import { SeeMore } from '@/components/text/see_more.tsx';
 import { tl, trans } from '@/build/trans.ts';
 import { icons } from '@/components/shared/icon.tsx';
+import { WithChildren } from '@/types/generic.tsx';
 
 export type InputType =
 	| 'text'
@@ -22,7 +23,9 @@ interface InputProps {
 	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
 	className?: string;
 	value?: string | number;
+	placeholder?: string | number;
 	name?: string;
+	min?: number;
 	length?: number;
 	disabled?: boolean;
 	type?: InputType;
@@ -41,7 +44,9 @@ export function Input({
 	ref,
 	className,
 	value = '',
+	placeholder,
 	name,
+	min,
 	length,
 	disabled,
 	type = 'text',
@@ -75,8 +80,10 @@ export function Input({
 						class='modern-input'
 						type={type}
 						value={value}
+						placeholder={placeholder}
 						ref={input}
-						maxlength={length}
+						min={min}
+						max={length}
 						name={name}
 						onInput={() => {
 							if (
@@ -113,6 +120,8 @@ export function Input({
 						value={value}
 						ref={input}
 						name={name}
+						minLength={min}
+						maxLength={length}
 						onChange={() => {
 							value = input.current.value;
 							update(true);
@@ -188,4 +197,14 @@ export function Input({
 	};
 
 	return wrap;
+}
+
+export function InputGroup({
+	children,
+}: WithChildren) {
+	return (
+		<div class='input-group'>
+			{children}
+		</div>
+	);
 }

@@ -69,6 +69,12 @@ export function Tabbed({
 	elem.update = update;
 
 	function update() {
+		if (!pages[page!]) {
+			page = Object.keys(pages)[0];
+			update();
+			return;
+		}
+
 		log(`changing page to ${page}`, 'tabbed', 'info', {
 			page: pages[page!],
 		});

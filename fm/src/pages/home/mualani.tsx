@@ -82,6 +82,7 @@ import {
 	ProfileName,
 } from '@/components/settings/provider/profile_name.tsx';
 import { NewsTitle } from '@/components/news/news.tsx';
+import { HybridTimeframePicker } from '@/components/date/timeframe.tsx';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -984,6 +985,13 @@ export function mualani() {
 				<DemoGrid>
 					<DemoItem label='News'>
 						<NewsTitle />
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section>
+				<DemoGrid>
+					<DemoItem label='HybridTimeframePicker'>
+						<HybridTimeframePicker />
 					</DemoItem>
 				</DemoGrid>
 			</section>
