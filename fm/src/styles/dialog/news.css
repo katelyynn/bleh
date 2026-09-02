@@ -67,6 +67,7 @@
 	font-weight: 100;
 	cursor: default;
 	text-align: center;
+	margin-top: var(--card-gap) !important;
 }
 
 .news-date {
@@ -75,6 +76,14 @@
 	font-size: 20px !important;
 	line-height: 24px !important;
 	text-align: center;
+
+	padding-bottom: calc(var(--card-gap) * 2) !important;
+	margin-bottom: var(--card-padding) !important;
+	border-bottom: 1px solid var(--separator-base) !important;
+}
+
+.news-update {
+	margin-top: var(--card-padding) !important;
 }
 
 .news-title-label {
@@ -113,6 +122,9 @@
 .news-pieces {
 	position: relative;
 	height: 100%;
+
+	--news-trans: 1.5s;
+	--news-delay: 0.2s;
 }
 
 .news-piece-main {
@@ -127,24 +139,64 @@
 	scale: 1;
 
 	padding: var(--card-gap);
+
+	animation: news_piece_main var(--news-trans) var(--trans-function);
+}
+
+@keyframes news_piece_main {
+	from {
+		translate: 0 6px;
+	}
+
+	to {
+		translate: 0 0;
+	}
 }
 
 .news-piece-back {
 	position: absolute;
-	inset: 20px 20px 0;
+	inset: 0 20px;
 	display: block;
-	background: oklch(var(--b6));
+	background: color-mix(in oklch, oklch(var(--b5)), oklch(var(--b6)) 83%);
 	z-index: 2;
 	transform: rotate(3deg);
+	box-shadow: var(--card-shadow);
+
+	animation: news_piece_back var(--news-trans) var(--trans-function);
+	animation-fill-mode: backwards;
+	animation-delay: calc(var(--news-delay) * 0.8);
+}
+
+@keyframes news_piece_back {
+	from {
+		transform: rotate(12deg);
+	}
+
+	to {
+		transform: rotate(3deg);
+	}
 }
 
 .news-piece-back-2 {
 	position: absolute;
 	inset: 0 20px;
 	display: block;
-	background: oklch(var(--b6));
-	filter: brightness(90%);
-	opacity: 0.4;
+	background: color-mix(in oklch, oklch(var(--b5)), oklch(var(--b6)) 93%);
 	z-index: 2;
-	transform: rotate(-3deg);
+	transform: rotate(-8deg);
+	box-shadow: var(--card-shadow);
+
+	animation: news_piece_back_2 var(--news-trans) var(--trans-function);
+	animation-fill-mode: backwards;
+	animation-delay: calc(var(--news-delay) * 2);
+}
+
+@keyframes news_piece_back_2 {
+	from {
+		transform: rotate(-3deg);
+	}
+
+	to {
+		transform: rotate(-8deg);
+	}
 }
