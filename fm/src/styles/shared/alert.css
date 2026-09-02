@@ -125,7 +125,7 @@
 .cta {
 	background: var(--card-specific-background) !important;
 	border-radius: var(--item-med-radius) !important;
-	--card-specific-background: linear-gradient(180deg, oklch(var(--k4) / 15%), transparent);
+	--card-specific-background: oklch(var(--k4) / 15%);
 	padding: 10px var(--side-action-side) !important;
 	box-shadow: unset !important;
 	color: oklch(var(--c2)) !important;
@@ -142,10 +142,15 @@
 		display: flex;
 		flex-direction: column;
 		gap: 6px;
-		margin: 0 calc(var(--card-padding) - var(--side-action-side));
+		margin: unset;
+		padding: 10px var(--card-padding) !important;
+		border-radius: unset !important;
+		--card-specific-background: linear-gradient(90deg, transparent, oklch(var(--k4) / 5%), transparent);
 
 		.bleh-modal-body>& {
+			--card-specific-background: oklch(var(--k4) / 15%);
 			padding: 15px var(--card-padding) !important;
+			border-radius: var(--item-med-radius) !important;
 			margin-left: unset;
 			margin-right: unset;
 		}

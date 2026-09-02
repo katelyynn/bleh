@@ -162,6 +162,12 @@ export class TooltipInstance<
 
 		this.current_animation = animation;
 
+		if (this.config.ariaEnabled) {
+			this.host.setAttribute('aria-expanded', 'false');
+		}
+
+		this.host.removeAttribute('aria-describedby');
+
 		if (this.onHide) this.onHide();
 
 		// delay unmount until exit animation finishes
@@ -211,12 +217,6 @@ export class TooltipInstance<
 			this.cleanup = null;
 		}
 		this.is_mounted = false;
-
-		if (this.config.ariaEnabled) {
-			this.host.setAttribute('aria-expanded', 'false');
-		}
-
-		this.host.removeAttribute('aria-describedby');
 	}
 
 	private update() {

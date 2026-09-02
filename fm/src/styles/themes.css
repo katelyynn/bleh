@@ -1540,7 +1540,7 @@ body {
 
 	--shout-actions-opacity: 0.45;
 
-	--rain: 0, 0%, 100%;
+	--rain: 100% 0 0;
 
 	--bright: brightness(190%);
 	--dark: brightness(60%) contrast(120%);
@@ -1628,7 +1628,7 @@ body {
 
 		--shout-actions-opacity: 0.6;
 
-		--rain: 0, 0%, 70%;
+		--rain: 70% 0 0;
 	}
 
 	&[data-bleh--theme="oled"] {
