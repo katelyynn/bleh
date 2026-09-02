@@ -1,1 +1,8 @@
 blank_issues_enabled: false
+contact_links:
+  - name: Artist, album, or track correction
+    url: https://github.com/katelyynn/lotus/issues/new/choose
+    about: Submit a capitalisation correction for an artist, album, or track here
+  - name: Discord
+    url: https://discord.gg/xU9KxGQpVw
+    about: Ask or discuss other things here
