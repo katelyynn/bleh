@@ -868,6 +868,9 @@ export function mualani() {
 						<ProfileStreak loading />
 						<ProfileStreak />
 						<ProfileStreak
+							artist={{ count: 14, name: 'Tiffany Day' }}
+						/>
+						<ProfileStreak
 							artist={{ count: 50, name: 'Tiffany Day' }}
 						/>
 						<ProfileStreak

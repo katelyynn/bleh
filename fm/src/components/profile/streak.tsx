@@ -356,6 +356,7 @@ export function ProfileStreak({
 					colourful_bg: true,
 				});
 			}}
+			data-streak-high={highest >= 15}
 		>
 			<div class='streak-icon'>
 				<Icon name={icons.streak} identifier='streak-icon' />

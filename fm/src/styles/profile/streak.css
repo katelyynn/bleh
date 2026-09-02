@@ -18,10 +18,6 @@
 	font-weight: var(--font-weight-medium) !important;
 	--icon-colour: oklch(var(--l4-c));
 
-	--hue-over: var(--hue-streak);
-	--sat-over: var(--sat-streak);
-	--lit-over: var(--lit-streak);
-
 	&:not(.profile-streak-empty):hover {
 		text-decoration: underline !important;
 	}
@@ -34,9 +30,23 @@
 	}
 
 	&:not(.profile-streak-empty) {
-		filter: drop-shadow(0 0 10px oklch(var(--k4))) drop-shadow(0 0 30px oklch(var(--k4))) drop-shadow(0 0 40px oklch(var(--k4)));
-
 		animation: show_streak 0.5s var(--trans-function-ani);
+
+		&[data-streak-high] {
+			--hue-over: var(--hue-streak);
+			--sat-over: var(--sat-streak);
+			--lit-over: var(--lit-streak);
+			filter: drop-shadow(0 0 10px oklch(var(--k4))) drop-shadow(0 0 30px oklch(var(--k4)));
+
+			&>.streak-icon {
+				animation: streak 3s var(--trans-function-ani) infinite;
+			}
+		}
+
+		&:not([data-streak-high]):not(:hover) {
+			--col: var(--c3);
+			--icon-colour: oklch(var(--c3) / 80%);
+		}
 	}
 
 	&[data-hidden="true"] {
@@ -58,7 +68,6 @@
 
 .streak-icon {
 	display: flex;
-	animation: streak 3s var(--trans-function-ani) infinite;
 }
 
 @keyframes streak {
