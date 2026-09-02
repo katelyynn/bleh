@@ -33,14 +33,18 @@
 		animation: show_streak 0.5s var(--trans-function-ani);
 
 		&[data-streak-high] {
-			--hue-over: var(--hue-streak);
-			--sat-over: var(--sat-streak);
-			--lit-over: var(--lit-streak);
 			filter: drop-shadow(0 0 10px oklch(var(--k4))) drop-shadow(0 0 30px oklch(var(--k4)));
 
 			&>.streak-icon {
 				animation: streak 3s var(--trans-function-ani) infinite;
 			}
+		}
+
+		&[data-streak-high],
+		&:hover {
+			--hue-over: var(--hue-streak);
+			--sat-over: var(--sat-streak);
+			--lit-over: var(--lit-streak);
 		}
 
 		&:not([data-streak-high]):not(:hover) {
