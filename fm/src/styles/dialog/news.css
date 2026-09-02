@@ -49,12 +49,102 @@
 .news-update-body {
 	padding: 15px;
 	border-radius: var(--radius-s);
-	background-color: oklch(var(--k4) / 20%);
-	color: oklch(var(--c2));
+	box-shadow: inset 0 0 0 1px var(--separator-base);
 
 	&[data-changelog-type="major"] {
-		--hue-over: var(--hue-pos);
-		--sat-over: var(--sat-pos);
-		--lit-over: var(--lit-pos);
+		box-shadow: inset 0 0 0 1px oklch(var(--k4) / 20%);
+		background: oklch(var(--k4) / 10%);
+		color: oklch(var(--c2));
 	}
+}
+
+
+.news-title {
+	color: oklch(var(--c1));
+	font-family: 'UnifrakturCook', var(--font);
+	font-size: 42px;
+	line-height: 56px;
+	font-weight: 100;
+	cursor: default;
+	text-align: center;
+}
+
+.news-date {
+	font-family: Instrument Serif, var(--font) !important;
+	color: oklch(var(--c2) / 90%) !important;
+	font-size: 20px !important;
+	line-height: 24px !important;
+	text-align: center;
+}
+
+.news-title-label {
+	font-style: normal;
+	color: oklch(var(--l3-c));
+}
+
+.news-update-label-major {
+	color: oklch(var(--l3-c));
+	text-shadow: 0 0 15px oklch(var(--k4));
+	font-weight: var(--font-weight-medium);
+}
+
+.bleh-modal[data-modal-type="changelog"] {
+	background: unset;
+	backdrop-filter: unset;
+	-webkit-backdrop-filter: unset;
+	padding: unset;
+	outline: unset;
+	border: unset;
+	--override-full-shadow: none;
+
+	&>.bleh-modal-title {
+		display: none;
+	}
+
+	&>.bleh-modal-body {
+		height: 100%;
+	}
+
+	&>.modal-close-button {
+		right: 40px;
+	}
+}
+
+.news-pieces {
+	position: relative;
+	height: 100%;
+}
+
+.news-piece-main {
+	background: oklch(var(--b5));
+	color: oklch(var(--c2));
+	z-index: 3;
+	height: 100%;
+	position: absolute;
+	inset: 0 20px;
+	display: block;
+	overflow-y: auto;
+	scale: 1;
+
+	padding: var(--card-gap);
+}
+
+.news-piece-back {
+	position: absolute;
+	inset: 20px 20px 0;
+	display: block;
+	background: oklch(var(--b6));
+	z-index: 2;
+	transform: rotate(3deg);
+}
+
+.news-piece-back-2 {
+	position: absolute;
+	inset: 0 20px;
+	display: block;
+	background: oklch(var(--b6));
+	filter: brightness(90%);
+	opacity: 0.4;
+	z-index: 2;
+	transform: rotate(-3deg);
 }

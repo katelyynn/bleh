@@ -11829,6 +11829,11 @@ export const trans = {
 		// v = 2 days ago etc.
 		en: 'Streak started {v}',
 	},
+	the_bleh_times: {
+		// newspaper title
+		// i guess like the NY times?
+		en: 'The {b} Times',
+	},
 } as const satisfies Record<string, any>;
 
 export const translation_fallback = 'NO_TRANSLATION_FOUND';

@@ -195,9 +195,9 @@
 				text-shadow: 0 0 20px oklch(var(--h4) / 40%);
 				font-weight: var(--font-weight-medium);
 
-				--hue-over: 32;
-				--sat-over: 1.5;
-				--lit-over: 1;
+				--hue-over: 46;
+				--sat-over: 1.7;
+				--lit-over: 0.95;
 
 				code {
 					font-weight: var(--font-weight);
@@ -217,12 +217,10 @@
 		}
 
 		h5 {
-			font-family: var(--font-head);
-			font-size: var(--font-size-head);
-			line-height: var(--line-height-head);
-
 			&:not(:first-child) {
 				margin-top: 20px !important;
+				padding-top: 20px !important;
+				border-top: 1px solid var(--separator-base);
 			}
 		}
 	}
@@ -300,6 +298,8 @@
 	display: inline-block;
 	background-size: 100%;
 	image-rendering: pixelated;
+	color: transparent;
+	--select-colour: transparent;
 }
 
 t {

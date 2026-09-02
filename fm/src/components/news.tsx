@@ -14,6 +14,16 @@ import { markdown } from '@/components/markdown/markdown';
 import { set_storage } from '@/build/tools';
 import { sponsor } from '@/components/sponsor';
 import tippy from 'tippy.js';
+import {
+	NewsAction,
+	NewsDate,
+	NewsPieceBack,
+	NewsPieceBack2,
+	NewsPieceMain,
+	NewsPieces,
+	NewsTitle,
+} from '@/components/news/news.tsx';
+import { createRef } from 'jsx-dom';
 
 export function news() {
 	const changelog = localStorage.getItem('bleh_changelog');
@@ -82,8 +92,8 @@ export function request_changelog(open_after = true) {
 function open_changelog(changelog) {
 	const sponsor_name = sponsor_list.related.special.length > 0
 		? sponsor_list.related.special[0]
-		: 'clairedoll';
-	let changelog_list: HTMLDivElement;
+		: 'dressupdarling';
+	const changelog_list = createRef();
 
 	const versions = Object.keys(changelog);
 
@@ -92,18 +102,27 @@ function open_changelog(changelog) {
 	const window = dialog({
 		id: 'changelog',
 		title: tl(trans.news),
-		body: html.node`
-            <div class="cta first sponsor colourful margin-bottom">
-                <strong>${tl(trans.news_sponsor_cta)}</strong>
-                <a class="see-more" onclick=${() => sponsor(true)}>${
-			tl(trans.sponsor)
-		}</a>
-            </div>
-            <div class="changelog-list" ref=${(el) =>
-			changelog_list = el}></div>
-        `,
+		body: (
+			<NewsPieces>
+				<NewsPieceMain>
+					<NewsTitle />
+					<div class='changelog-list' ref={changelog_list} />
+				</NewsPieceMain>
+				<NewsPieceBack />
+				<NewsPieceBack2 />
+			</NewsPieces>
+		),
+		//		body: html.node`
+		//            <div class="cta first sponsor colourful margin-bottom">
+		//            <strong>${tl(trans.news_sponsor_cta)}</strong>
+		//            <a class="see-more" onclick=${() => sponsor(true)}>${
+		//		tl(trans.sponsor)
+		//	}</a>
+		//        </div>
+		//        <div class="changelog-list" ref=${(el) =>
+		//		changelog_list = el}></div>
+		//    `,
 		type: 'changelog',
-		allow_scroll: true,
 	});
 
 	render_update();
@@ -117,65 +136,65 @@ function open_changelog(changelog) {
 		const can_go_back = focused_version > 0;
 		const can_go_forward = focused_version < versions.length - 1;
 
-		render(
-			changelog_list,
-			html`
-				<div class="news-update">
-					<div class="news-update-head">
-				        ${() => {
-					const btn = html.node`
-                            <button class="btn news-update-action chibi icon-mask" data-type="prev" disabled=${!can_go_forward} onclick=${() => {
-						if (!can_go_forward) return;
+		changelog_list.current.replaceChildren(
+			<>
+				<NewsDate version={title} />
+				<div class='news-update'>
+					<div class='news-update-head'>
+						<NewsAction
+							type='prev'
+							disabled={!can_go_forward}
+							onClick={() => {
+								if (!can_go_forward) return;
 
-						focused_version++;
-						render_update();
-					}}>
-                                ${tl(trans.prev)}
-                            </button>
-                        `;
+								focused_version++;
+								render_update();
+							}}
+						/>
+						<div class='news-update-middle'>
+							<label
+								class={[
+									'news-update-label',
+									version.type == 'major' &&
+									'news-update-label-major',
+								]}
+							>
+								{tl(trans.news.type[version.type])}
+							</label>
+							<h3 class='news-update-name'>
+								<span class='news-update-version'>
+									{title}:
+								</span>{' '}
+								{version.name}
+							</h3>
+						</div>
+						<NewsAction
+							type='next'
+							disabled={!can_go_back}
+							onClick={() => {
+								if (!can_go_back) return;
 
-					tippy(btn, {
-						content: btn.textContent,
-					});
-
-					return btn;
-				}}
-				        <div class="news-update-middle">
-				            <label class="news-update-label">${tl(
-					trans.news.type[version.type],
-				)}</label>
-				            <h3 class="news-update-name"><span class="news-update-version">${title}:</span> ${version
-					.name}</h3>
-				        </div>
-				        ${() => {
-					const btn = html.node`
-                            <button class="btn news-update-action chibi icon-mask" data-type="next" disabled=${!can_go_back} onclick=${() => {
-						if (!can_go_back) return;
-
-						focused_version--;
-						render_update();
-					}}>
-                                ${tl(trans.next)}
-                            </button>
-                        `;
-
-					tippy(btn, {
-						content: btn.textContent,
-					});
-
-					return btn;
-				}}
-				    </div>
-					<div class="news-update-body markdown-body colourful"
-						data-changelog-type=${version.type}>
-				        ${markdown(version.bio, {
-					allow_lists: true,
-					allow_headers: true,
-					starting_header: 5,
-				})}
-				    </div>
+								focused_version--;
+								render_update();
+							}}
+						/>
+					</div>
+					<div
+						class={[
+							'news-update-body',
+							'markdown-body',
+							'colourful',
+						]}
+						data-changelog-type={version.type}
+					>
+						{markdown(version.bio, {
+							allow_lists: true,
+							allow_headers: true,
+							starting_header: 5,
+						})}
+					</div>
 				</div>
-			`,
+			</>,
 		);
 	}
 }

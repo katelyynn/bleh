@@ -81,6 +81,7 @@ import {
 	NameStyles,
 	ProfileName,
 } from '@/components/settings/provider/profile_name.tsx';
+import { NewsTitle } from '@/components/news/news.tsx';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -973,6 +974,13 @@ export function mualani() {
 							value=''
 							values={convert_name_styles()}
 						/>
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section>
+				<DemoGrid>
+					<DemoItem label='News'>
+						<NewsTitle />
 					</DemoItem>
 				</DemoGrid>
 			</section>
