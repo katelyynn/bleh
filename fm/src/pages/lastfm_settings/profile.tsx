@@ -414,7 +414,10 @@ function profile_panel() {
 					<ProfileName
 						disabled={!auth.sponsor}
 						markdown={form_about_me.value}
-						onChange={(v: string) => md.current.value = v}
+						onChange={(v: string) => {
+							md.current.value = v;
+							update_about();
+						}}
 						ref={name}
 					/>
 					<SettingInput
@@ -442,13 +445,19 @@ function profile_panel() {
 					/>
 					<ProfileBanner
 						markdown={form_about_me.value}
-						onChange={(v: string) => md.current.value = v}
+						onChange={(v: string) => {
+							md.current.value = v;
+							update_about();
+						}}
 						ref={banner}
 					/>
 					<ProfileAccent
 						disabled={!auth.sponsor}
 						markdown={form_about_me.value}
-						onChange={(v: string) => md.current.value = v}
+						onChange={(v: string) => {
+							md.current.value = v;
+							update_about();
+						}}
 						ref={accent}
 					/>
 					<div class='setting' data-type='text'>
@@ -469,6 +478,7 @@ function profile_panel() {
 								banner.current.markdown = v;
 								accent.current.markdown = v;
 								name.current.markdown = v;
+								update_about(v);
 							}}
 							ref={md}
 						/>
@@ -506,7 +516,7 @@ function profile_panel() {
 		return text.replace(/\n/g, '\r\n').length;
 	}
 
-	function update_about(value = about.value) {
+	function update_about(value = md.current.value) {
 		const length = len(value);
 
 		chars.current.replaceChildren(
@@ -524,195 +534,6 @@ function profile_panel() {
 		preview.current.replaceChildren(markdown(value, markdown_settings));
 
 		save_profile_cache(cache, profile_cache, auth.name!);
-
-		const font_regex = /\[font=([^\]]+)\]/;
-
-		if (font_setting) {
-			let font_name = cache.font;
-			let font_style = cache.font_style;
-
-			let font_name_preview;
-
-			let font_tile;
-			render(font_setting, html``);
-			render(
-				font_setting,
-				html`
-					<span ref=${(el) => font_name_preview = el}>${{
-						html: tl(trans.styled_with_font, {
-							f: `<span class="font-name-preview-mini" data-font=${font_name}>${
-								font_name && font_name != 'none'
-									? page.state.fonts[font_name]
-									: tl(trans.none)
-							}</span>`,
-						}),
-					}}</span>
-					<a class="card-tip-link" onclick=${() => {
-						const match = about.value.match(font_regex);
-
-						font_name = cache.font;
-						font_style = cache.font_style;
-
-						let font_preview;
-						let font_buttons = [];
-						let font_style_buttons = [];
-
-						dialog({
-							id: 'profile_font',
-							title: tl(trans.profile_font.name),
-							body: html.node`
-                            <div class="font-name-preview">
-                                <span data-font=${font_name} data-font-style=${font_style} ref=${(
-								el,
-							) => font_preview = el}>${
-								cache.username ? cache.username : auth.name
-							}</span>
-                            </div>
-                            <div class="font-name-options">
-                                <h4 class="font-options-header">${
-								tl(trans.font.name)
-							}</h4>
-                                <div class="font-options primary">
-                                    ${
-								Object.entries(page.state.fonts).map(
-									([font, family]) => {
-										if (family == '') {
-											family = tl(trans.none);
-										}
-
-										const elem = html.node`
-                                            <button class="btn font-selection" data-font=${font} aria-checked=${
-											font == font_name
-										} onclick=${() => {
-											font_name = font;
-
-											font_preview.setAttribute(
-												'data-font',
-												font,
-											);
-											font_buttons.forEach((btn) => {
-												btn.setAttribute(
-													'aria-checked',
-													btn.getAttribute(
-														'data-font',
-													) == font,
-												);
-											});
-										}}>
-                                                <span data-font=${font}>Aa</span>
-                                            </button>
-                                        `;
-
-										tippy(elem, {
-											content: family,
-											delay: [500, 0],
-										});
-
-										font_buttons.push(elem);
-										return elem;
-									},
-								)
-							}
-                                </div>
-                                <h4 class="font-options-header">${
-								tl(trans.font_style)
-							}</h4>
-                                <div class="font-options">
-                                    ${
-								['solid', 'pop', 'out', 'glow'].map((style) => {
-									const elem = html.node`
-                                            <button class="btn font-selection font-style" data-font-style=${style} aria-checked=${
-										style == font_style
-									} onclick=${() => {
-										font_style = style;
-
-										font_preview.setAttribute(
-											'data-font-style',
-											style,
-										);
-										font_style_buttons.forEach((btn) => {
-											btn.setAttribute(
-												'aria-checked',
-												btn.getAttribute(
-													'data-font-style',
-												) == style,
-											);
-										});
-									}}>
-                                                <span class="preview-style" data-font-style=${style}>${
-										tl(trans.font_style[style])
-									}</span>
-                                            </button>
-                                        `;
-
-									font_style_buttons.push(elem);
-									return elem;
-								})
-							}
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button class="see-more cancel left-icon" onclick=${() =>
-								dialog_rm({ id: 'profile_font' })}>
-                                    ${tl(trans.back)}
-                                </button>
-                                <div class="fill"></div>
-                                <button class="btn primary continue" onclick=${() => {
-								const new_font = `[font=${font_name}${
-									font_style != 'solid'
-										? `,${font_style}`
-										: ''
-								}]`;
-
-								if (match) {
-									about.value = about.value.replace(
-										font_regex,
-										new_font,
-									);
-								} else {
-									const trimmed = about.value.trimEnd();
-
-									if (trimmed.length == 0) {
-										about.value = new_font;
-									} else {
-										about.value = trimmed + '\n\n' +
-											new_font;
-									}
-								}
-
-								render(
-									font_name_preview,
-									html`
-										${{
-											html: tl(trans.styled_with_font, {
-												f: `<span class="font-name-preview-mini" data-font=${font_name} data-font-style=${font_style}>${
-													font_name &&
-														font_name != 'none'
-														? page.state
-															.fonts[font_name]
-														: tl(trans.none)
-												}</span>`,
-											}),
-										}}
-									`,
-								);
-
-								dialog_rm({ id: 'profile_font' });
-								status({
-									title: tl(
-										trans.profile_font.reminder,
-									),
-								});
-							}}>
-                                    ${tl(trans.change)}
-                                </button>
-                            </div>
-                        `,
-						});
-					}}>${tl(trans.change_font)}</a>
-				`,
-			);
-		}
 	}
 }
 

@@ -7814,12 +7814,12 @@ var bleh = (() => {
         if (prototype === null || isObject3(prototype)) return obj;
         throw new TypeError("Prototype must be null or an object");
       };
-      module.exports = (function(status3) {
+      module.exports = (function(status2) {
         var fn6, set2;
-        if (!status3) return null;
-        if (status3.level === 2) {
-          if (status3.set) {
-            set2 = status3.set;
+        if (!status2) return null;
+        if (status2.level === 2) {
+          if (status2.set) {
+            set2 = status2.set;
             fn6 = function(obj, prototype) {
               set2.call(validate(obj, prototype), prototype);
               return obj;
@@ -7846,7 +7846,7 @@ var bleh = (() => {
           configurable: false,
           enumerable: false,
           writable: false,
-          value: status3.level
+          value: status2.level
         });
       })(
         (function() {
@@ -34720,7 +34720,7 @@ var bleh = (() => {
       document.body.appendChild(notification_host);
     }
   }
-  function status2({ title, body, type }) {
+  function status({ title, body, type }) {
     let status_icon = icons.info;
     if (type == "error") {
       status_icon = icons.x;
@@ -38499,7 +38499,7 @@ var bleh = (() => {
       log("copied", "copy", "info", {
         text: text1
       });
-      status2({
+      status({
         id: "copy",
         title: tl2(trans.copied_to_clipboard),
         body: text1
@@ -38523,7 +38523,7 @@ var bleh = (() => {
           text: text1
         });
         if (!silent) {
-          status2({
+          status({
             id: "paste",
             title: tl2(trans.pasted_text),
             body: text1
@@ -38542,7 +38542,7 @@ var bleh = (() => {
           text: text1
         });
         if (!silent) {
-          status2({
+          status({
             id: "paste",
             title: tl2(trans.pasted_text),
             body: text1
@@ -38555,7 +38555,7 @@ var bleh = (() => {
         e: e5
       });
       if (!silent) {
-        status2({
+        status({
           id: "paste",
           title: tl2(trans.failed),
           body: e5.message ? e5.message : e5
@@ -54409,7 +54409,7 @@ var bleh = (() => {
             }
           }
           if (should_notify) {
-            status2({
+            status({
               title: tl2(trans.downloaded_value, {
                 v: tl2(trans.sponsor_details)
               })
@@ -59118,9 +59118,9 @@ var bleh = (() => {
         recording.releases.forEach((release) => {
           const artist2 = release["artist-credit"] ? release["artist-credit"][0].name : recording["artist-credit"].name;
           if (artist2 == "Various Artists") return;
-          const status3 = release.status?.toLowerCase();
+          const status2 = release.status?.toLowerCase();
           const disambiguation = release.disambiguation?.toLowerCase();
-          if (status3 && status3.startsWith("pseudo")) return;
+          if (status2 && status2.startsWith("pseudo")) return;
           if (disambiguation) {
             if (disambiguation.includes("english")) {
               releases_to_move.push(release);
@@ -59134,9 +59134,9 @@ var bleh = (() => {
           releases
         });
         releases.sort((a2, b) => {
-          const rank = (status3) => {
-            if (status3 == "Official") return 0;
-            if (!status3) return 1;
+          const rank = (status2) => {
+            if (status2 == "Official") return 0;
+            if (!status2) return 1;
             return 2;
           };
           return rank(a2.status) - rank(b.status);
@@ -59811,7 +59811,7 @@ var bleh = (() => {
           parse4(oracle_tracks, this.response, "tracks");
         }
         if (send_notify) {
-          status2({
+          status({
             title: tl2(trans.downloaded_value).replace("{v}", `oracle ${tl2(trans[type])}`)
           });
         }
@@ -88270,7 +88270,7 @@ var bleh = (() => {
       }
       function pixel_make_a_guess(guess) {
         if (clean_pixel_name(guess) == clean_pixel_name(name)) {
-          status2({
+          status({
             title: tl2(trans.you_guessed_correctly)
           });
           timer_end(true);
@@ -91752,7 +91752,7 @@ var bleh = (() => {
       if (type == "toggle") {
         let update_toggle = function() {
           if (elem.getAttribute("disabled") == "true") {
-            status2({
+            status({
               title: tl2(trans.incompatible_alert)
             });
             return;
@@ -91848,7 +91848,7 @@ var bleh = (() => {
           if (func) func(val);
         }, reset_range = function() {
           update_range(settings_store[id].default);
-          status2({
+          status({
             title: tl2(trans.reset_item_to_default)
           });
         };
@@ -92061,7 +92061,7 @@ var bleh = (() => {
       } else if (type == "checkbox") {
         let update_toggle1 = function() {
           if (elem.getAttribute("disabled") == "true") {
-            status2({
+            status({
               title: tl2(trans.incompatible_alert)
             });
             return;
@@ -92194,7 +92194,7 @@ var bleh = (() => {
           if (func) func(val);
         }, reset_radio = function() {
           update_radio(settings_store[id].default);
-          status2({
+          status({
             title: tl2(trans.reset_item_to_default)
           });
         };
@@ -92558,7 +92558,7 @@ var bleh = (() => {
           if (func) func(val);
         }, reset_select = function() {
           menu.value = settings_store[id].default;
-          status2({
+          status({
             title: tl2(trans.reset_item_to_default)
           });
         };
@@ -98185,7 +98185,7 @@ var bleh = (() => {
       delete notes[page.name];
       note.value = "";
       set_storage("bleh_profile_notes", JSON.stringify(notes));
-      status2({
+      status({
         id: "note",
         title: tl2(trans.cleared_note_for_user, {
           u: page.name
@@ -98196,7 +98196,7 @@ var bleh = (() => {
       const notes = JSON.parse(localStorage.getItem("bleh_profile_notes")) || {};
       notes[page.name] = note.value;
       set_storage("bleh_profile_notes", JSON.stringify(notes));
-      status2({
+      status({
         id: "note",
         title: tl2(trans.saved_note_for_user, {
           u: page.name
@@ -98310,7 +98310,7 @@ var bleh = (() => {
       button2.removeAttribute("disabled");
       if (!tracklist_panel) {
         if (!quiet) {
-          status2({
+          status({
             title: tl2(trans.recents),
             body: tl2(trans.value_failed_to_load).replace("{v}", tl2(trans.library)),
             type: "error"
@@ -98319,7 +98319,7 @@ var bleh = (() => {
         return;
       }
       if (!quiet) {
-        status2({
+        status({
           title: tl2(trans.recents),
           body: tl2(trans.refreshed)
         });
@@ -102223,7 +102223,7 @@ var bleh = (() => {
         }
       }
     ];
-    const status3 = () => [
+    const status2 = () => [
       {
         type: "lang",
         regex: /\[status=([^\]]+)\]/g,
@@ -102279,7 +102279,7 @@ var bleh = (() => {
     else extensions.push(invalid_blockquotes());
     if (allow_banners) extensions.push(banner());
     if (allow_icons) extensions.push(icons2());
-    if (allow_hue) extensions.push(accent(), display_name(), status3());
+    if (allow_hue) extensions.push(accent(), display_name(), status2());
     if (allow_fonts) extensions.push(font());
     if (allow_socials) extensions.push(social_links_extension(links));
     if (!allow_headers) extensions.push(header_minify());
@@ -109622,7 +109622,7 @@ var bleh = (() => {
                   children: /* @__PURE__ */ jsx(SeeMore, {
                     onClick: () => {
                       localStorage.removeItem("bwaa_recent_activity");
-                      status2({
+                      status({
                         type: "success",
                         title: tl2(trans.cleared_activity_history)
                       });
@@ -110750,7 +110750,7 @@ var bleh = (() => {
           parse7(combined_artists, this.response, "combined_artists");
         }
         if (send_notify) {
-          status2({
+          status({
             title: tl2(trans.downloaded_value).replace("{v}", tl2(trans.lotus[type]))
           });
         }
@@ -112370,21 +112370,21 @@ var bleh = (() => {
     links.appendChild(bleh_container);
     page.header.season = bleh_container;
     if (auth.pro) {
-      let render_status_container = function(status3) {
-        if (!status3) return;
+      let render_status_container = function(status2) {
+        if (!status2) return;
         render(status_container.current, html`
 					<div class="status">
 						<div class="status-image">
-							<img src=${status3.avatar} alt=${status3.album}>
+							<img src=${status2.avatar} alt=${status2.album}>
 						</div>
 						<div class="status-info">
-							<strong class="status-text status-title">${status3.name}</strong>
-							<p class="status-text status-artist">${status3.artist}</p>
-							<p class="status-text status-album">${status3.album}</p>
+							<strong class="status-text status-title">${status2.name}</strong>
+							<p class="status-text status-artist">${status2.artist}</p>
+							<p class="status-text status-album">${status2.album}</p>
 						</div>
 					</div>
 					<div class="status-time">
-					    ${status3.active ? html.node`
+					    ${status2.active ? html.node`
                         <p class="status-text status-time-text chartlist-now-scrobbling">
                             ${tl2(trans.scrobbling_now)}
                         </p>
@@ -112429,7 +112429,7 @@ var bleh = (() => {
       }), {
         onShow: () => {
           if (page.now.name) render_status_container(page.now);
-          live_status().then((status3) => render_status_container(status3));
+          live_status().then((status2) => render_status_container(status2));
         }
       });
       links.appendChild(music);
@@ -117574,7 +117574,10 @@ var bleh = (() => {
                 /* @__PURE__ */ jsx(ProfileName, {
                   disabled: !auth.sponsor,
                   markdown: form_about_me.value,
-                  onChange: (v) => md.current.value = v,
+                  onChange: (v) => {
+                    md.current.value = v;
+                    update_about();
+                  },
                   ref: name
                 }),
                 /* @__PURE__ */ jsx(SettingInput, {
@@ -117602,13 +117605,19 @@ var bleh = (() => {
                 }),
                 /* @__PURE__ */ jsx(ProfileBanner, {
                   markdown: form_about_me.value,
-                  onChange: (v) => md.current.value = v,
+                  onChange: (v) => {
+                    md.current.value = v;
+                    update_about();
+                  },
                   ref: banner
                 }),
                 /* @__PURE__ */ jsx(ProfileAccent, {
                   disabled: !auth.sponsor,
                   markdown: form_about_me.value,
-                  onChange: (v) => md.current.value = v,
+                  onChange: (v) => {
+                    md.current.value = v;
+                    update_about();
+                  },
                   ref: accent
                 }),
                 /* @__PURE__ */ jsx("div", {
@@ -117636,6 +117645,7 @@ var bleh = (() => {
                         banner.current.markdown = v;
                         accent.current.markdown = v;
                         name.current.markdown = v;
+                        update_about(v);
                       },
                       ref: md
                     })
@@ -117685,7 +117695,7 @@ var bleh = (() => {
     function len(text4) {
       return text4.replace(/\n/g, "\r\n").length;
     }
-    function update_about(value = about.value) {
+    function update_about(value = md.current.value) {
       const length = len(value);
       chars2.current.replaceChildren(tl2(trans.value_characters_max, {
         v: `${length}/${bio_max_length}`
@@ -117694,127 +117704,6 @@ var bleh = (() => {
       delete_cache(cache2);
       preview.current.replaceChildren(markdown(value, markdown_settings));
       save_profile_cache(cache2, profile_cache, auth.name);
-      const font_regex = /\[font=([^\]]+)\]/;
-      if (font_setting) {
-        let font_name = cache2.font;
-        let font_style = cache2.font_style;
-        let font_name_preview;
-        let font_tile;
-        render(font_setting, html``);
-        render(font_setting, html`
-					<span ref=${(el) => font_name_preview = el}>${{
-          html: tl2(trans.styled_with_font, {
-            f: `<span class="font-name-preview-mini" data-font=${font_name}>${font_name && font_name != "none" ? page.state.fonts[font_name] : tl2(trans.none)}</span>`
-          })
-        }}</span>
-					<a class="card-tip-link" onclick=${() => {
-          const match3 = about.value.match(font_regex);
-          font_name = cache2.font;
-          font_style = cache2.font_style;
-          let font_preview;
-          let font_buttons = [];
-          let font_style_buttons = [];
-          dialog({
-            id: "profile_font",
-            title: tl2(trans.profile_font.name),
-            body: html.node`
-                            <div class="font-name-preview">
-                                <span data-font=${font_name} data-font-style=${font_style} ref=${(el) => font_preview = el}>${cache2.username ? cache2.username : auth.name}</span>
-                            </div>
-                            <div class="font-name-options">
-                                <h4 class="font-options-header">${tl2(trans.font.name)}</h4>
-                                <div class="font-options primary">
-                                    ${Object.entries(page.state.fonts).map(([font, family]) => {
-              if (family == "") {
-                family = tl2(trans.none);
-              }
-              const elem = html.node`
-                                            <button class="btn font-selection" data-font=${font} aria-checked=${font == font_name} onclick=${() => {
-                font_name = font;
-                font_preview.setAttribute("data-font", font);
-                font_buttons.forEach((btn) => {
-                  btn.setAttribute("aria-checked", btn.getAttribute("data-font") == font);
-                });
-              }}>
-                                                <span data-font=${font}>Aa</span>
-                                            </button>
-                                        `;
-              tippy_esm_default(elem, {
-                content: family,
-                delay: [
-                  500,
-                  0
-                ]
-              });
-              font_buttons.push(elem);
-              return elem;
-            })}
-                                </div>
-                                <h4 class="font-options-header">${tl2(trans.font_style)}</h4>
-                                <div class="font-options">
-                                    ${[
-              "solid",
-              "pop",
-              "out",
-              "glow"
-            ].map((style2) => {
-              const elem = html.node`
-                                            <button class="btn font-selection font-style" data-font-style=${style2} aria-checked=${style2 == font_style} onclick=${() => {
-                font_style = style2;
-                font_preview.setAttribute("data-font-style", style2);
-                font_style_buttons.forEach((btn) => {
-                  btn.setAttribute("aria-checked", btn.getAttribute("data-font-style") == style2);
-                });
-              }}>
-                                                <span class="preview-style" data-font-style=${style2}>${tl2(trans.font_style[style2])}</span>
-                                            </button>
-                                        `;
-              font_style_buttons.push(elem);
-              return elem;
-            })}
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button class="see-more cancel left-icon" onclick=${() => dialog_rm({
-              id: "profile_font"
-            })}>
-                                    ${tl2(trans.back)}
-                                </button>
-                                <div class="fill"></div>
-                                <button class="btn primary continue" onclick=${() => {
-              const new_font = `[font=${font_name}${font_style != "solid" ? `,${font_style}` : ""}]`;
-              if (match3) {
-                about.value = about.value.replace(font_regex, new_font);
-              } else {
-                const trimmed = about.value.trimEnd();
-                if (trimmed.length == 0) {
-                  about.value = new_font;
-                } else {
-                  about.value = trimmed + "\n\n" + new_font;
-                }
-              }
-              render(font_name_preview, html`
-										${{
-                html: tl2(trans.styled_with_font, {
-                  f: `<span class="font-name-preview-mini" data-font=${font_name} data-font-style=${font_style}>${font_name && font_name != "none" ? page.state.fonts[font_name] : tl2(trans.none)}</span>`
-                })
-              }}
-									`);
-              dialog_rm({
-                id: "profile_font"
-              });
-              status({
-                title: tl2(trans.profile_font.reminder)
-              });
-            }}>
-                                    ${tl2(trans.change)}
-                                </button>
-                            </div>
-                        `
-          });
-        }}>${tl2(trans.change_font)}</a>
-				`);
-      }
     }
   }
   function avatar2() {
@@ -118648,7 +118537,7 @@ var bleh = (() => {
         });
         const name = details.querySelector(".api-session-app-name");
         const desc = details.querySelector(".api-session-app-description");
-        const status3 = details.querySelector(".api-session-status");
+        const status2 = details.querySelector(".api-session-status");
         const image2 = details.querySelector(".api-session-app-image");
         image2.classList = "";
         const default_image = image2.src.endsWith("14d19fbdca555c1782176cd789e81af7.png");
@@ -118663,9 +118552,9 @@ var bleh = (() => {
 					    <div class="session-details">${name} ${desc}</div>
 					    ${form}
 					</div>
-					${status3 ? html.node`
+					${status2 ? html.node`
                 <div class="session-footer">
-                    ${status3}
+                    ${status2}
                 </div>
                 ` : ""}
 				`);
@@ -122553,7 +122442,7 @@ var bleh = (() => {
 				<h2>Status alerts</h2>
 				<button
 					class="btn continue"
-					onclick=${() => status2({
+					onclick=${() => status({
       title: "test alert",
       body: "haiaiai nothing to worry about >_<"
     })}
@@ -124151,7 +124040,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-09-02T19:15:16.577Z"
+    built_on: "2026-09-02T19:41:14.606Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
