@@ -124021,12 +124021,12 @@ var bleh = (() => {
         date: "2026-07-30"
       },
       yuzu: {
-        default: false,
+        default: true,
         name: "Keep track of track/album/artist streaks on profiles",
         date: "2026-08-29"
       }
     },
-    built_on: "2026-09-01T23:38:12.941Z"
+    built_on: "2026-09-02T00:39:56.173Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
