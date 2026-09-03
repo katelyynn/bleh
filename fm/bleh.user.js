@@ -50634,7 +50634,10 @@ var bleh = (() => {
       }
       return translation;
     }
-    string = Object.values(replacements).every((v) => typeof v == "string");
+    string = Object.values(replacements).every((v) => [
+      "string",
+      "number"
+    ].includes(typeof v));
     if (string) {
       for (let [placeholder, value] of Object.entries(replacements)) {
         const regex = new RegExp(`{${placeholder}}`, "g");
@@ -121422,6 +121425,7 @@ var bleh = (() => {
     const banner = createRef();
     const accent = createRef();
     const name = createRef();
+    const textcontent = createRef();
     page.structure.main.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
       children: [
         /* @__PURE__ */ jsx("section", {
@@ -122542,9 +122546,37 @@ var bleh = (() => {
               children: /* @__PURE__ */ jsx(HybridTimeframePicker, {})
             })
           })
+        }),
+        /* @__PURE__ */ jsx("section", {
+          children: /* @__PURE__ */ jsx(DemoGrid, {
+            children: /* @__PURE__ */ jsx(DemoItem, {
+              label: "Translations",
+              children: [
+                /* @__PURE__ */ jsx("div", {
+                  ref: textcontent
+                }),
+                /* @__PURE__ */ jsx("div", {
+                  children: tl2(trans.page_templates.type, {
+                    page: 0,
+                    brand: 1
+                  })
+                })
+              ]
+            })
+          })
         })
       ]
     }));
+    textcontent.current.textContent = tl2(trans.page_templates.type, {
+      page: 0,
+      brand: 1
+    });
+    textcontent.current.after(html.node`
+		${tl2(trans.page_templates.type, {
+      page: 0,
+      brand: 1
+    })}
+	`);
     return;
     render(page.structure.main, html`
 			<section class="flexy">
@@ -124251,7 +124283,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-09-03T15:30:04.211Z"
+    built_on: "2026-09-03T15:38:29.851Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

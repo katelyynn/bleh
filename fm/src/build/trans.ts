@@ -11891,7 +11891,9 @@ export function tl(
 		return translation;
 	}
 
-	string = Object.values(replacements).every((v) => typeof v == 'string');
+	string = Object.values(replacements).every((v) =>
+		['string', 'number'].includes(typeof v)
+	);
 
 	if (string) {
 		for (let [placeholder, value] of Object.entries(replacements)) {

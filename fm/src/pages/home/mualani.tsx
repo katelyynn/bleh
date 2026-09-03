@@ -195,6 +195,8 @@ export function mualani() {
 	const accent = createRef();
 	const name = createRef();
 
+	const textcontent = createRef();
+
 	page.structure.main!.replaceChildren(
 		<>
 			<section>
@@ -995,8 +997,35 @@ export function mualani() {
 					</DemoItem>
 				</DemoGrid>
 			</section>
+			<section>
+				<DemoGrid>
+					<DemoItem label='Translations'>
+						<div ref={textcontent} />
+						<div>
+							{tl(trans.page_templates.type, {
+								page: 0,
+								brand: 1,
+							})}
+						</div>
+					</DemoItem>
+				</DemoGrid>
+			</section>
 		</>,
 	);
+
+	textcontent.current.textContent = tl(trans.page_templates.type, {
+		page: 0,
+		brand: 1,
+	});
+
+	textcontent.current.after(html.node`
+		${
+		tl(trans.page_templates.type, {
+			page: 0,
+			brand: 1,
+		})
+	}
+	`);
 
 	return;
 
