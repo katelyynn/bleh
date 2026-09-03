@@ -51970,7 +51970,6 @@ var bleh = (() => {
       default: "minimal",
       type: "radio",
       title: trans.count_bar_style,
-      require_reload: "partial",
       values: {
         classic: {
           name: trans.classic
@@ -77846,16 +77845,20 @@ var bleh = (() => {
   // src/components/track/bar.tsx
   function count_bar(bar) {
     const season = page.state.seasons.current?.id || "none";
-    const v2 = useSettings.get("count_bar_style") == "minimal";
     const link = bar.querySelector(".chartlist-count-bar-link");
     if (!link) return;
     const slug = link.querySelector(".chartlist-count-bar-slug");
     const value = link.querySelector(".chartlist-count-bar-value");
     bar.setAttribute("data-season", season);
-    bar.classList.toggle("v2", v2);
-    link.classList.toggle("v2", v2);
-    slug?.classList.toggle("v2", v2);
-    value?.classList.toggle("v2", v2);
+    function update() {
+      const v2 = useSettings.get("count_bar_style") == "minimal";
+      bar.classList.toggle("v2", v2);
+      link.classList.toggle("v2", v2);
+      slug?.classList.toggle("v2", v2);
+      value?.classList.toggle("v2", v2);
+    }
+    useSettings.on("count_bar_style", update);
+    update();
   }
 
   // src/components/menu/menu.tsx
@@ -115200,21 +115203,21 @@ var bleh = (() => {
             })
           ]
         }));
-        menu_tooltip(settings_btn.current, /* @__PURE__ */ jsx(Tooltip, {
-          theme: "window",
-          children: /* @__PURE__ */ jsx("div", {
-            class: "dialog-settings",
-            children: /* @__PURE__ */ jsx("div", {
-              class: "setting-group blend",
+        menu_tooltip(settings_btn.current, /* @__PURE__ */ jsx(FloatingWindow, {
+          children: /* @__PURE__ */ jsx(FloatingWindowContents, {
+            children: /* @__PURE__ */ jsx(SettingGroup, {
               children: [
-                setting({
-                  id: "format_guest_features"
+                /* @__PURE__ */ jsx(SettingSwitch, {
+                  bind: "format_guest_features"
                 }),
-                setting({
-                  id: "show_guest_features"
+                /* @__PURE__ */ jsx(SettingSwitch, {
+                  bind: "show_guest_features"
                 }),
-                setting({
-                  id: "count_bar_right"
+                /* @__PURE__ */ jsx(SettingRadio, {
+                  bind: "count_bar_style"
+                }),
+                /* @__PURE__ */ jsx(SettingRadio, {
+                  bind: "count_bar_axis"
                 })
               ]
             })
@@ -124362,7 +124365,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-09-03T16:20:06.948Z"
+    built_on: "2026-09-03T16:24:24.022Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

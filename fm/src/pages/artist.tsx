@@ -57,6 +57,13 @@ import { avatar } from '@/components/shared/avatar.tsx';
 import { clean_streaming_titles } from '@/build/music.ts';
 import { TrackStar } from '@/components/music/track.tsx';
 import { PanelHead } from '@/components/text/head.tsx';
+import {
+	FloatingWindow,
+	FloatingWindowContents,
+} from '@/components/menu/floating_window.tsx';
+import { SettingGroup } from '@/components/settings/group.tsx';
+import { SettingSwitch } from '@/components/settings/provider/switch.tsx';
+import { SettingRadio } from '@/components/settings/provider/radio.tsx';
 
 export function bleh_artists() {
 	const artist_header = document.body.querySelector(
@@ -257,15 +264,16 @@ export function bleh_artists() {
 
 			menu_tooltip(
 				settings_btn.current,
-				<Tooltip theme='window'>
-					<div class='dialog-settings'>
-						<div class='setting-group blend'>
-							{setting({ id: 'format_guest_features' })}
-							{setting({ id: 'show_guest_features' })}
-							{setting({ id: 'count_bar_right' })}
-						</div>
-					</div>
-				</Tooltip>,
+				<FloatingWindow>
+					<FloatingWindowContents>
+						<SettingGroup>
+							<SettingSwitch bind='format_guest_features' />
+							<SettingSwitch bind='show_guest_features' />
+							<SettingRadio bind='count_bar_style' />
+							<SettingRadio bind='count_bar_axis' />
+						</SettingGroup>
+					</FloatingWindowContents>
+				</FloatingWindow>,
 			);
 		}
 

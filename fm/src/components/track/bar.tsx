@@ -10,7 +10,6 @@ import { ReactElement } from 'jsx-dom';
 
 export function count_bar(bar: HTMLDivElement | ReactElement) {
 	const season = page.state.seasons.current?.id || 'none';
-	const v2 = useSettings.get('count_bar_style') == 'minimal';
 
 	const link = bar.querySelector(
 		'.chartlist-count-bar-link',
@@ -26,8 +25,16 @@ export function count_bar(bar: HTMLDivElement | ReactElement) {
 
 	bar.setAttribute('data-season', season);
 
-	bar.classList.toggle('v2', v2);
-	link.classList.toggle('v2', v2);
-	slug?.classList.toggle('v2', v2);
-	value?.classList.toggle('v2', v2);
+	function update() {
+		const v2 = useSettings.get('count_bar_style') == 'minimal';
+
+		bar.classList.toggle('v2', v2);
+		link.classList.toggle('v2', v2);
+		slug?.classList.toggle('v2', v2);
+		value?.classList.toggle('v2', v2);
+	}
+
+	useSettings.on('count_bar_style', update);
+
+	update();
 }

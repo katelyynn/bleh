@@ -1134,7 +1134,6 @@ export const settings_store: Record<string, setting_instance> = {
 		default: 'minimal',
 		type: 'radio',
 		title: trans.count_bar_style,
-		require_reload: 'partial',
 		values: {
 			classic: {
 				name: trans.classic,
