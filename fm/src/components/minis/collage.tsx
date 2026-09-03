@@ -610,7 +610,7 @@ export function collage({ host, sidebar } = {}) {
 
 			// 10 = item-list-gap
 			// 15 = card-gap
-			const default_size = 380;
+			const default_size = 420;
 			const base = 6;
 			const highest = Math.max(
 				+width.current.value,

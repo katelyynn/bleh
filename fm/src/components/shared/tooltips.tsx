@@ -324,6 +324,7 @@ export function menu_tooltip<
 			target != tooltip.element && target != host &&
 			!tooltip.element.contains(target) &&
 			!target.closest('.tippy-box') &&
+			!tooltip.element.querySelector('[aria-expanded="true"]') &&
 			tooltip.is_mounted
 		) {
 			log('hiding due to listener', 'tooltip', 'info', { target });

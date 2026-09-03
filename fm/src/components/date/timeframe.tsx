@@ -22,6 +22,7 @@ import { Tabbed } from '@/components/tab/tabbed.tsx';
 import { icons } from '@/components/shared/icon.tsx';
 import { createRef } from 'jsx-dom';
 import { menu_tooltip } from '@/components/shared/tooltips.tsx';
+import { Alert } from '@/components/text/alert.tsx';
 
 interface HybridTimeframePickerProps {
 	ref?: ReturnType<typeof createRef<HybridTimeframePickerElement>>;
@@ -43,6 +44,13 @@ export function HybridTimeframePicker({
 	if (!value) value = 'date_preset=LAST_7_DAYS';
 
 	const modal = <FloatingWindow />;
+	const alert = createRef();
+
+	let time_from = '';
+	let time_to = '';
+
+	let timeframe_valid = true;
+	let timeframe_invalid_reason = '';
 
 	const elem = (
 		<button
@@ -74,6 +82,9 @@ export function HybridTimeframePicker({
 				{timeframe_text(value!)}
 			</>,
 		);
+
+		alert.current.setAttribute('data-hidden', String(timeframe_valid));
+		alert.current.textContent = timeframe_invalid_reason;
 	}
 
 	function set(v: string, bubble = true) {
@@ -83,6 +94,7 @@ export function HybridTimeframePicker({
 
 		modal.replaceChildren(
 			<FloatingWindowContents>
+				<Alert ref={alert} data-hidden='true' />
 				<Tabbed
 					page={useSettings.get('date_selector') as string}
 					pages={{
@@ -90,6 +102,11 @@ export function HybridTimeframePicker({
 							icon: icons.calendar,
 							label: tl(trans.presets),
 							content: () => <PresetPage />,
+						},
+						custom: {
+							icon: icons.edit,
+							label: tl(trans.manual),
+							content: () => <CustomPage />,
 						},
 					}}
 				/>
@@ -174,6 +191,79 @@ export function HybridTimeframePicker({
 		}
 
 		update_presets();
+
+		return elem;
+	}
+
+	function CustomPage() {
+		const now = new Date();
+		const date = date_to_iso(now);
+
+		let from;
+		let to;
+
+		const elem = (
+			<div class='timeframe-menu-content'>
+				<div class='timeframe-picker-custom'>
+					<div class='timeframe-picker-item'>
+						<label class='timeframe-picker-label'>
+							{tl(trans.from)}
+						</label>
+						{from = input({
+							type: 'date',
+							min: '2003-01-01',
+							max: date,
+							value: time_from || date,
+							show_time: false,
+							func: (val: string) => {
+								time_from = val;
+								check_timeframe_valid();
+								update_range();
+							},
+							hide_on_change: true,
+						})}
+					</div>
+					<div class='timeframe-picker-item'>
+						<label class='timeframe-picker-label'>
+							{tl(trans.to)}
+						</label>
+						{to = input({
+							type: 'date',
+							min: '2003-01-01',
+							max: date,
+							value: time_to || date,
+							show_time: false,
+							func: (val: string) => {
+								time_to = val;
+								check_timeframe_valid();
+								update_range();
+							},
+							hide_on_change: true,
+						})}
+					</div>
+				</div>
+			</div>
+		);
+
+		if (!time_from) time_from = date_to_iso(from.value);
+		if (!time_to) time_to = date_to_iso(to.value);
+
+		function check_timeframe_valid() {
+			timeframe_valid = true;
+
+			if (new Date(time_from) > new Date(time_to)) {
+				timeframe_valid = false;
+
+				timeframe_invalid_reason = 'Invalid timeframe';
+			}
+		}
+
+		function update_range() {
+			if (!timeframe_valid) return;
+
+			value = `from=${time_from}&to=${time_to}`;
+			update();
+		}
 
 		return elem;
 	}
