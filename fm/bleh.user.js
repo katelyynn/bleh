@@ -7814,12 +7814,12 @@ var bleh = (() => {
         if (prototype === null || isObject3(prototype)) return obj;
         throw new TypeError("Prototype must be null or an object");
       };
-      module.exports = (function(status2) {
+      module.exports = (function(status3) {
         var fn6, set2;
-        if (!status2) return null;
-        if (status2.level === 2) {
-          if (status2.set) {
-            set2 = status2.set;
+        if (!status3) return null;
+        if (status3.level === 2) {
+          if (status3.set) {
+            set2 = status3.set;
             fn6 = function(obj, prototype) {
               set2.call(validate(obj, prototype), prototype);
               return obj;
@@ -7846,7 +7846,7 @@ var bleh = (() => {
           configurable: false,
           enumerable: false,
           writable: false,
-          value: status2.level
+          value: status3.level
         });
       })(
         (function() {
@@ -34720,7 +34720,7 @@ var bleh = (() => {
       document.body.appendChild(notification_host);
     }
   }
-  function status({ title, body, type }) {
+  function status2({ title, body, type }) {
     let status_icon = icons.info;
     if (type == "error") {
       status_icon = icons.x;
@@ -38499,7 +38499,7 @@ var bleh = (() => {
       log("copied", "copy", "info", {
         text: text1
       });
-      status({
+      status2({
         id: "copy",
         title: tl2(trans.copied_to_clipboard),
         body: text1
@@ -38523,7 +38523,7 @@ var bleh = (() => {
           text: text1
         });
         if (!silent) {
-          status({
+          status2({
             id: "paste",
             title: tl2(trans.pasted_text),
             body: text1
@@ -38542,7 +38542,7 @@ var bleh = (() => {
           text: text1
         });
         if (!silent) {
-          status({
+          status2({
             id: "paste",
             title: tl2(trans.pasted_text),
             body: text1
@@ -38555,7 +38555,7 @@ var bleh = (() => {
         e: e5
       });
       if (!silent) {
-        status({
+        status2({
           id: "paste",
           title: tl2(trans.failed),
           body: e5.message ? e5.message : e5
@@ -54409,7 +54409,7 @@ var bleh = (() => {
             }
           }
           if (should_notify) {
-            status({
+            status2({
               title: tl2(trans.downloaded_value, {
                 v: tl2(trans.sponsor_details)
               })
@@ -59118,9 +59118,9 @@ var bleh = (() => {
         recording.releases.forEach((release) => {
           const artist2 = release["artist-credit"] ? release["artist-credit"][0].name : recording["artist-credit"].name;
           if (artist2 == "Various Artists") return;
-          const status2 = release.status?.toLowerCase();
+          const status3 = release.status?.toLowerCase();
           const disambiguation = release.disambiguation?.toLowerCase();
-          if (status2 && status2.startsWith("pseudo")) return;
+          if (status3 && status3.startsWith("pseudo")) return;
           if (disambiguation) {
             if (disambiguation.includes("english")) {
               releases_to_move.push(release);
@@ -59134,9 +59134,9 @@ var bleh = (() => {
           releases
         });
         releases.sort((a2, b) => {
-          const rank = (status2) => {
-            if (status2 == "Official") return 0;
-            if (!status2) return 1;
+          const rank = (status3) => {
+            if (status3 == "Official") return 0;
+            if (!status3) return 1;
             return 2;
           };
           return rank(a2.status) - rank(b.status);
@@ -59811,7 +59811,7 @@ var bleh = (() => {
           parse4(oracle_tracks, this.response, "tracks");
         }
         if (send_notify) {
-          status({
+          status2({
             title: tl2(trans.downloaded_value).replace("{v}", `oracle ${tl2(trans[type])}`)
           });
         }
@@ -77946,6 +77946,11 @@ var bleh = (() => {
       value
     });
   }
+  function get_token(form) {
+    const token = form.querySelector('[name="csrfmiddlewaretoken"]');
+    if (token) return token.getAttribute("value");
+    return "";
+  }
 
   // src/components/music/track.tsx
   function patch_titles(search = page.structure.main) {
@@ -88811,7 +88816,7 @@ var bleh = (() => {
       }
       function pixel_make_a_guess(guess) {
         if (clean_pixel_name(guess) == clean_pixel_name(name)) {
-          status({
+          status2({
             title: tl2(trans.you_guessed_correctly)
           });
           timer_end(true);
@@ -92293,7 +92298,7 @@ var bleh = (() => {
       if (type == "toggle") {
         let update_toggle = function() {
           if (elem.getAttribute("disabled") == "true") {
-            status({
+            status2({
               title: tl2(trans.incompatible_alert)
             });
             return;
@@ -92389,7 +92394,7 @@ var bleh = (() => {
           if (func) func(val);
         }, reset_range = function() {
           update_range(settings_store[id].default);
-          status({
+          status2({
             title: tl2(trans.reset_item_to_default)
           });
         };
@@ -92602,7 +92607,7 @@ var bleh = (() => {
       } else if (type == "checkbox") {
         let update_toggle1 = function() {
           if (elem.getAttribute("disabled") == "true") {
-            status({
+            status2({
               title: tl2(trans.incompatible_alert)
             });
             return;
@@ -92735,7 +92740,7 @@ var bleh = (() => {
           if (func) func(val);
         }, reset_radio = function() {
           update_radio(settings_store[id].default);
-          status({
+          status2({
             title: tl2(trans.reset_item_to_default)
           });
         };
@@ -93099,7 +93104,7 @@ var bleh = (() => {
           if (func) func(val);
         }, reset_select = function() {
           menu.value = settings_store[id].default;
-          status({
+          status2({
             title: tl2(trans.reset_item_to_default)
           });
         };
@@ -97318,15 +97323,374 @@ var bleh = (() => {
     }
   }
 
-  // src/components/settings/group.tsx
-  function SettingGroup({ ref: ref2, minWidth, blend = false, children }) {
+  // src/components/text/sub.tsx
+  function SubText({ children }) {
+    return /* @__PURE__ */ jsx("label", {
+      class: "sub-text",
+      children
+    });
+  }
+
+  // src/components/page/header.tsx
+  function PageHeader({ type, combined, name, avatar: avatar3, children, extra }) {
+    const generic = !!avatar3;
+    const label = tl2(trans[type]);
+    return /* @__PURE__ */ jsx("section", {
+      class: [
+        "page-header",
+        `for-${type}`
+      ],
+      children: [
+        avatar3 && /* @__PURE__ */ jsx("div", {
+          class: "page-header-avatar-list",
+          children: avatar3
+        }),
+        /* @__PURE__ */ jsx("div", {
+          class: [
+            "page-header-info",
+            "has-main-info"
+          ],
+          children: [
+            /* @__PURE__ */ jsx("div", {
+              class: "main-info",
+              children: [
+                !combined ? /* @__PURE__ */ jsx(SubText, {
+                  children: label
+                }) : /* @__PURE__ */ jsx(SubText, {
+                  children: [
+                    tl2(trans.artists),
+                    /* @__PURE__ */ jsx(InfoTip, {
+                      children: tl2(trans.artists_tooltip)
+                    })
+                  ]
+                }),
+                generic ? /* @__PURE__ */ jsx(Fragment, {
+                  children
+                }) : /* @__PURE__ */ jsx("h1", {
+                  class: [
+                    "page-header-title",
+                    "generic-page-title"
+                  ],
+                  children: name
+                })
+              ]
+            }),
+            extra
+          ]
+        })
+      ]
+    });
+  }
+  function PageHeaderTitle({ combined, children }) {
+    return /* @__PURE__ */ jsx("div", {
+      class: "title-container",
+      "data-multi": String(combined),
+      children
+    });
+  }
+
+  // src/components/profile/streak.tsx
+  function get_profile_streak(indicator, panel) {
+    if (!assess_if_streak_exists(panel)) {
+      if (page.name == auth.name) {
+        indicator.current.replaceWith(/* @__PURE__ */ jsx(ProfileStreak, {
+          self: page.name == auth.name,
+          ref: indicator
+        }));
+        return;
+      }
+      indicator.current.setAttribute("data-hidden", "true");
+      return;
+    }
+    const url = `https://ws.audioscrobbler.com/2.0/?method=user.getRecentTracks&user=${page.name}&api_key=${api_key}&format=json&limit=100`;
+    let streaks = {};
+    fetch(url).then((res) => {
+      if (!res.ok) {
+        throw new Error();
+      }
+      return res.json();
+    }).then((data2) => {
+      const tracks = data2.recenttracks.track;
+      if (!tracks) throw new Error();
+      streaks = calculate_streak(streaks, tracks);
+      console.info("streaks", streaks, tracks);
+      indicator.current.replaceWith(/* @__PURE__ */ jsx(ProfileStreak, {
+        artist: streaks.artist,
+        album: streaks.album,
+        track: streaks.track,
+        ref: indicator
+      }));
+    }).catch(() => {
+      return;
+    });
+  }
+  function assess_if_streak_exists(panel) {
+    const tracks = Array.from(panel.querySelectorAll(".chartlist-row:not(.chartlist__placeholder-row, .chartlist-row--interlist-ad)"));
+    const streaks = calculate_streak({}, tracks, true);
+    if (!streaks.artist) {
+      log("assessed no streak on page, will not continue", "streak");
+      return false;
+    }
+    log("assessed valid streak on page, will not continue", "streak");
+    return true;
+  }
+  function calculate_streak(streaks, tracks, elements2 = false) {
+    const latest = parse_track(tracks[0], elements2);
+    let artist_active = true;
+    let album_active = !!latest.album;
+    let track_active = true;
+    for (let i3 = 1; i3 < tracks.length; i3++) {
+      const track = parse_track(tracks[i3], elements2);
+      console.info("streaks", track, latest);
+      if (artist_active) {
+        if (track.artist == latest.artist) {
+          streaks.artist ??= {
+            name: latest.artist,
+            count: 1
+          };
+          streaks.artist.count++;
+          streaks.artist.date = track.date;
+        } else {
+          artist_active = false;
+          break;
+        }
+      }
+      if (album_active) {
+        if (track.artist == latest.artist && track.album == latest.album) {
+          streaks.album ??= {
+            name: latest.album,
+            count: 1
+          };
+          streaks.album.count++;
+          streaks.album.date = track.date;
+        } else {
+          album_active = false;
+        }
+      }
+      if (track_active) {
+        if (track.artist == latest.artist && track.name == latest.name) {
+          streaks.track ??= {
+            name: latest.name,
+            count: 1
+          };
+          streaks.track.count++;
+          streaks.track.date = track.date;
+        } else {
+          track_active = false;
+        }
+      }
+    }
+    return streaks;
+  }
+  function parse_track(track, element = false) {
+    if (element) return parse_recent_track_element(track);
+    return parse_recent_track(track);
+  }
+  function parse_recent_track_element(track) {
+    const name = track.querySelector(".chartlist-name a:not(.offset-section-anchor)");
+    const artist = return_artist_from_track(name.getAttribute("href"), false);
+    const album = track.querySelector(".chartlist-album a");
+    return {
+      artist,
+      album: album ? album.textContent.trim() : void 0,
+      name: name.textContent.trim(),
+      date: ""
+    };
+  }
+  function parse_recent_track(track) {
+    return {
+      artist: track.artist["#text"],
+      album: track.album?.["#text"],
+      name: track.name,
+      date: track.date?.uts,
+      url: track.url,
+      image: track.image[0]["#text"]
+    };
+  }
+  function ProfileStreak({ ref: ref2, loading, self: self3 = true, artist, album, track }) {
+    const highest = Math.max(artist?.count || 0, album?.count || 0, track?.count || 0);
+    const val = artist?.count == highest ? artist : album?.count == highest ? album : track?.count ? track : void 0;
+    if (!val) {
+      const elem2 = /* @__PURE__ */ jsx(Button, {
+        className: "profile-streak profile-streak-empty",
+        ref: ref2,
+        children: [
+          !loading ? /* @__PURE__ */ jsx(Icon, {
+            name: icons.streak_empty
+          }) : /* @__PURE__ */ jsx(Icon, {
+            name: icons.spinner
+          }),
+          /* @__PURE__ */ jsx("span", {
+            class: "streak-value",
+            children: tl2(trans.streak, {
+              v: /* @__PURE__ */ jsx("span", {
+                class: "streak-count",
+                children: "0"
+              })
+            })
+          })
+        ]
+      });
+      if (!loading && self3) {
+        hover_tooltip(elem2, /* @__PURE__ */ jsx(Tooltip, {
+          children: tl2(trans.start_streak)
+        }));
+      }
+      return elem2;
+    }
+    const elem = /* @__PURE__ */ jsx(Button, {
+      className: "profile-streak",
+      colourful: true,
+      ref: ref2,
+      onClick: () => {
+        dialog({
+          id: "streak",
+          title: "streak",
+          body: /* @__PURE__ */ jsx(Fragment, {
+            children: /* @__PURE__ */ jsx("hyper-card", {
+              className: "streak-hyper-card",
+              children: /* @__PURE__ */ jsx("div", {
+                className: "streak-window",
+                children: [
+                  /* @__PURE__ */ jsx("div", {
+                    class: "streak-big-icon",
+                    children: /* @__PURE__ */ jsx(Icon, {
+                      name: icons.streak
+                    })
+                  }),
+                  /* @__PURE__ */ jsx("div", {
+                    class: [
+                      "streak-avatar",
+                      "avatar"
+                    ],
+                    children: /* @__PURE__ */ jsx("img", {
+                      src: avatar(page.avatar, "avatar300s"),
+                      alt: page.name
+                    })
+                  }),
+                  /* @__PURE__ */ jsx("strong", {
+                    class: "streak-username",
+                    children: /* @__PURE__ */ jsx(SponsorUsername, {
+                      vertical: true,
+                      children: page.name
+                    })
+                  }),
+                  /* @__PURE__ */ jsx("div", {
+                    class: "streak-values",
+                    children: [
+                      artist && /* @__PURE__ */ jsx(StreakValue, {
+                        type: "artist",
+                        label: artist.name,
+                        value: artist.count,
+                        max: highest
+                      }),
+                      album && /* @__PURE__ */ jsx(StreakValue, {
+                        type: "album",
+                        label: correct_item_by_artist(album.name, artist.name),
+                        value: album.count,
+                        max: highest
+                      }),
+                      track && /* @__PURE__ */ jsx(StreakValue, {
+                        type: "track",
+                        label: correct_item_by_artist(track.name, artist.name),
+                        value: track.count,
+                        max: highest
+                      })
+                    ]
+                  }),
+                  val.date && /* @__PURE__ */ jsx("p", {
+                    class: "streak-since",
+                    children: tl2(trans.streak_started, {
+                      v: DateTime.fromSeconds(Number(val.date)).toRelative()
+                    })
+                  })
+                ]
+              })
+            })
+          }),
+          type: "badge",
+          colourful: true,
+          colourful_bg: true
+        });
+      },
+      "data-streak-high": highest >= 15,
+      children: [
+        /* @__PURE__ */ jsx("div", {
+          class: "streak-icon",
+          children: /* @__PURE__ */ jsx(Icon, {
+            name: icons.streak,
+            identifier: "streak-icon"
+          })
+        }),
+        /* @__PURE__ */ jsx("span", {
+          class: "streak-value",
+          children: tl2(highest >= 100 ? trans.streak_high : trans.streak, {
+            v: /* @__PURE__ */ jsx("span", {
+              class: "streak-count",
+              children: highest.toLocaleString(lang)
+            })
+          })
+        })
+      ]
+    });
+    if (val.date) {
+      hover_tooltip(elem, /* @__PURE__ */ jsx(Tooltip, {
+        children: tl2(trans.streak_started, {
+          v: DateTime.fromSeconds(Number(val.date)).toRelative()
+        })
+      }));
+    }
+    return elem;
+  }
+  function StreakValue({ type, label, value, max: max3 }) {
+    return /* @__PURE__ */ jsx("div", {
+      class: "streak-value-container",
+      children: [
+        /* @__PURE__ */ jsx("div", {
+          class: "streak-value-top",
+          children: [
+            /* @__PURE__ */ jsx("div", {
+              class: "streak-value-label",
+              children: [
+                /* @__PURE__ */ jsx(Icon, {
+                  name: icons[type]
+                }),
+                label
+              ]
+            }),
+            /* @__PURE__ */ jsx("div", {
+              class: "streak-value-count",
+              children: value
+            })
+          ]
+        }),
+        /* @__PURE__ */ jsx(StreakBar, {
+          value,
+          max: max3
+        })
+      ]
+    });
+  }
+  function StreakBar({ value, max: max3 }) {
+    return /* @__PURE__ */ jsx("div", {
+      class: "streak-bar",
+      children: /* @__PURE__ */ jsx("div", {
+        class: "streak-bar-fill",
+        style: {
+          width: `${value / max3 * 100}%`
+        }
+      })
+    });
+  }
+
+  // src/components/form/footer.tsx
+  function SettingsFooter({ end: end2 = true, gap, children }) {
     return /* @__PURE__ */ jsx("div", {
       class: [
-        "setting-group",
-        blend && "blend",
-        minWidth && "min-width"
+        "settings-footer",
+        end2 && "end",
+        gap && "gap"
       ],
-      ref: ref2,
       children
     });
   }
@@ -97769,375 +98133,231 @@ var bleh = (() => {
     return elem;
   }
 
-  // src/components/form/footer.tsx
-  function SettingsFooter({ end: end2 = true, gap, children }) {
+  // src/components/settings/group.tsx
+  function SettingGroup({ ref: ref2, minWidth, blend = false, children }) {
     return /* @__PURE__ */ jsx("div", {
       class: [
-        "settings-footer",
-        end2 && "end",
-        gap && "gap"
+        "setting-group",
+        blend && "blend",
+        minWidth && "min-width"
       ],
+      ref: ref2,
       children
     });
   }
 
-  // src/components/profile/streak.tsx
-  function get_profile_streak(indicator, panel) {
-    if (!assess_if_streak_exists(panel)) {
-      if (page.name == auth.name) {
-        indicator.current.replaceWith(/* @__PURE__ */ jsx(ProfileStreak, {
-          self: page.name == auth.name,
-          ref: indicator
-        }));
-        return;
-      }
-      indicator.current.setAttribute("data-hidden", "true");
-      return;
-    }
-    const url = `https://ws.audioscrobbler.com/2.0/?method=user.getRecentTracks&user=${page.name}&api_key=${api_key}&format=json&limit=100`;
-    let streaks = {};
-    fetch(url).then((res) => {
-      if (!res.ok) {
-        throw new Error();
-      }
-      return res.json();
-    }).then((data2) => {
-      const tracks = data2.recenttracks.track;
-      if (!tracks) throw new Error();
-      streaks = calculate_streak(streaks, tracks);
-      console.info("streaks", streaks, tracks);
-      indicator.current.replaceWith(/* @__PURE__ */ jsx(ProfileStreak, {
-        artist: streaks.artist,
-        album: streaks.album,
-        track: streaks.track,
-        ref: indicator
-      }));
-    }).catch(() => {
-      return;
-    });
-  }
-  function assess_if_streak_exists(panel) {
-    const tracks = Array.from(panel.querySelectorAll(".chartlist-row:not(.chartlist__placeholder-row, .chartlist-row--interlist-ad)"));
-    const streaks = calculate_streak({}, tracks, true);
-    if (!streaks.artist) {
-      log("assessed no streak on page, will not continue", "streak");
-      return false;
-    }
-    log("assessed valid streak on page, will not continue", "streak");
-    return true;
-  }
-  function calculate_streak(streaks, tracks, elements2 = false) {
-    const latest = parse_track(tracks[0], elements2);
-    let artist_active = true;
-    let album_active = !!latest.album;
-    let track_active = true;
-    for (let i3 = 1; i3 < tracks.length; i3++) {
-      const track = parse_track(tracks[i3], elements2);
-      console.info("streaks", track, latest);
-      if (artist_active) {
-        if (track.artist == latest.artist) {
-          streaks.artist ??= {
-            name: latest.artist,
-            count: 1
-          };
-          streaks.artist.count++;
-          streaks.artist.date = track.date;
-        } else {
-          artist_active = false;
-          break;
-        }
-      }
-      if (album_active) {
-        if (track.artist == latest.artist && track.album == latest.album) {
-          streaks.album ??= {
-            name: latest.album,
-            count: 1
-          };
-          streaks.album.count++;
-          streaks.album.date = track.date;
-        } else {
-          album_active = false;
-        }
-      }
-      if (track_active) {
-        if (track.artist == latest.artist && track.name == latest.name) {
-          streaks.track ??= {
-            name: latest.name,
-            count: 1
-          };
-          streaks.track.count++;
-          streaks.track.date = track.date;
-        } else {
-          track_active = false;
-        }
-      }
-    }
-    return streaks;
-  }
-  function parse_track(track, element = false) {
-    if (element) return parse_recent_track_element(track);
-    return parse_recent_track(track);
-  }
-  function parse_recent_track_element(track) {
-    const name = track.querySelector(".chartlist-name a:not(.offset-section-anchor)");
-    const artist = return_artist_from_track(name.getAttribute("href"), false);
-    const album = track.querySelector(".chartlist-album a");
-    return {
-      artist,
-      album: album ? album.textContent.trim() : void 0,
-      name: name.textContent.trim(),
-      date: ""
-    };
-  }
-  function parse_recent_track(track) {
-    return {
-      artist: track.artist["#text"],
-      album: track.album?.["#text"],
-      name: track.name,
-      date: track.date?.uts,
-      url: track.url,
-      image: track.image[0]["#text"]
-    };
-  }
-  function ProfileStreak({ ref: ref2, loading, self: self3 = true, artist, album, track }) {
-    const highest = Math.max(artist?.count || 0, album?.count || 0, track?.count || 0);
-    const val = artist?.count == highest ? artist : album?.count == highest ? album : track?.count ? track : void 0;
-    if (!val) {
-      const elem2 = /* @__PURE__ */ jsx(Button, {
-        className: "profile-streak profile-streak-empty",
-        ref: ref2,
-        children: [
-          !loading ? /* @__PURE__ */ jsx(Icon, {
-            name: icons.streak_empty
-          }) : /* @__PURE__ */ jsx(Icon, {
-            name: icons.spinner
-          }),
-          /* @__PURE__ */ jsx("span", {
-            class: "streak-value",
-            children: tl2(trans.streak, {
-              v: /* @__PURE__ */ jsx("span", {
-                class: "streak-count",
-                children: "0"
-              })
-            })
-          })
-        ]
-      });
-      if (!loading && self3) {
-        hover_tooltip(elem2, /* @__PURE__ */ jsx(Tooltip, {
-          children: tl2(trans.start_streak)
-        }));
-      }
-      return elem2;
-    }
-    const elem = /* @__PURE__ */ jsx(Button, {
-      className: "profile-streak",
-      colourful: true,
-      ref: ref2,
-      onClick: () => {
-        dialog({
-          id: "streak",
-          title: "streak",
-          body: /* @__PURE__ */ jsx(Fragment, {
-            children: /* @__PURE__ */ jsx("hyper-card", {
-              className: "streak-hyper-card",
-              children: /* @__PURE__ */ jsx("div", {
-                className: "streak-window",
-                children: [
-                  /* @__PURE__ */ jsx("div", {
-                    class: "streak-big-icon",
-                    children: /* @__PURE__ */ jsx(Icon, {
-                      name: icons.streak
-                    })
-                  }),
-                  /* @__PURE__ */ jsx("div", {
-                    class: [
-                      "streak-avatar",
-                      "avatar"
-                    ],
-                    children: /* @__PURE__ */ jsx("img", {
-                      src: avatar(page.avatar, "avatar300s"),
-                      alt: page.name
-                    })
-                  }),
-                  /* @__PURE__ */ jsx("strong", {
-                    class: "streak-username",
-                    children: /* @__PURE__ */ jsx(SponsorUsername, {
-                      vertical: true,
-                      children: page.name
-                    })
-                  }),
-                  /* @__PURE__ */ jsx("div", {
-                    class: "streak-values",
-                    children: [
-                      artist && /* @__PURE__ */ jsx(StreakValue, {
-                        type: "artist",
-                        label: artist.name,
-                        value: artist.count,
-                        max: highest
-                      }),
-                      album && /* @__PURE__ */ jsx(StreakValue, {
-                        type: "album",
-                        label: correct_item_by_artist(album.name, artist.name),
-                        value: album.count,
-                        max: highest
-                      }),
-                      track && /* @__PURE__ */ jsx(StreakValue, {
-                        type: "track",
-                        label: correct_item_by_artist(track.name, artist.name),
-                        value: track.count,
-                        max: highest
-                      })
-                    ]
-                  }),
-                  val.date && /* @__PURE__ */ jsx("p", {
-                    class: "streak-since",
-                    children: tl2(trans.streak_started, {
-                      v: DateTime.fromSeconds(Number(val.date)).toRelative()
-                    })
-                  })
-                ]
-              })
-            })
-          }),
-          type: "badge",
-          colourful: true,
-          colourful_bg: true
-        });
-      },
-      "data-streak-high": highest >= 15,
+  // src/pages/profile/recents.tsx
+  function profile_recents() {
+    const panel = page.structure.main.querySelector("#recent-tracks-section");
+    if (!panel) return;
+    const more_link = panel.nextElementSibling;
+    if (more_link) panel.appendChild(more_link);
+    const form = panel.querySelector("#recent-tracks-settings");
+    const can_scrobble = ff("submit_scrobble") && page.name == auth.name;
+    const head = panel.querySelector(":scope > h2");
+    if (head) head.remove();
+    const can_api = localStorage.getItem("bleh_auth") && localStorage.getItem("bleh_auth_valid") === "true";
+    const submit_btn = createRef();
+    const settings_btn = createRef();
+    const refresh_btn = createRef();
+    const streak = createRef();
+    panel.insertBefore(/* @__PURE__ */ jsx(PanelTop, {
       children: [
-        /* @__PURE__ */ jsx("div", {
-          class: "streak-icon",
-          children: /* @__PURE__ */ jsx(Icon, {
-            name: icons.streak,
-            identifier: "streak-icon"
+        /* @__PURE__ */ jsx(PanelHead, {
+          icon: icons.recent,
+          children: tl2(trans.recents)
+        }),
+        ff("yuzu") && /* @__PURE__ */ jsx(ViewButtons, {
+          accompany: true,
+          children: /* @__PURE__ */ jsx(ProfileStreak, {
+            loading: true,
+            ref: streak
           })
         }),
-        /* @__PURE__ */ jsx("span", {
-          class: "streak-value",
-          children: tl2(highest >= 100 ? trans.streak_high : trans.streak, {
-            v: /* @__PURE__ */ jsx("span", {
-              class: "streak-count",
-              children: highest.toLocaleString(lang)
-            })
-          })
-        })
-      ]
-    });
-    if (val.date) {
-      hover_tooltip(elem, /* @__PURE__ */ jsx(Tooltip, {
-        children: tl2(trans.streak_started, {
-          v: DateTime.fromSeconds(Number(val.date)).toRelative()
-        })
-      }));
-    }
-    return elem;
-  }
-  function StreakValue({ type, label, value, max: max3 }) {
-    return /* @__PURE__ */ jsx("div", {
-      class: "streak-value-container",
-      children: [
-        /* @__PURE__ */ jsx("div", {
-          class: "streak-value-top",
+        /* @__PURE__ */ jsx(ViewButtons, {
           children: [
-            /* @__PURE__ */ jsx("div", {
-              class: "streak-value-label",
-              children: [
-                /* @__PURE__ */ jsx(Icon, {
-                  name: icons[type]
-                }),
-                label
-              ]
+            can_scrobble && /* @__PURE__ */ jsx(SeeMore, {
+              blend: true,
+              iconPlacement: "left",
+              icon: icons.plus,
+              ref: submit_btn,
+              onClick: () => {
+                submit_scrobble({
+                  can_api,
+                  func: () => {
+                    setTimeout(() => {
+                      refresh_tracks(refresh_btn.current, {
+                        quiet: true
+                      });
+                    }, 200);
+                  }
+                });
+              },
+              children: tl2(trans.scrobble)
             }),
-            /* @__PURE__ */ jsx("div", {
-              class: "streak-value-count",
-              children: value
+            /* @__PURE__ */ jsx(SeeMore, {
+              blend: true,
+              iconPlacement: "left",
+              icon: icons.refresh,
+              ref: refresh_btn,
+              onClick: () => {
+                refresh_tracks(refresh_btn.current, {}, () => {
+                  streak.current.replaceWith(/* @__PURE__ */ jsx(ProfileStreak, {
+                    loading: true,
+                    ref: streak
+                  }));
+                  if (ff("yuzu")) {
+                    get_profile_streak(streak, panel);
+                  }
+                });
+              },
+              children: tl2(trans.refresh)
+            }),
+            /* @__PURE__ */ jsx(SeeMore, {
+              blend: true,
+              iconPlacement: "left",
+              icon: icons.settings,
+              onClick: () => {
+              },
+              ref: settings_btn,
+              children: tl2(trans.settings)
             })
           ]
-        }),
-        /* @__PURE__ */ jsx(StreakBar, {
-          value,
-          max: max3
         })
       ]
-    });
-  }
-  function StreakBar({ value, max: max3 }) {
-    return /* @__PURE__ */ jsx("div", {
-      class: "streak-bar",
-      children: /* @__PURE__ */ jsx("div", {
-        class: "streak-bar-fill",
-        style: {
-          width: `${value / max3 * 100}%`
-        }
-      })
-    });
-  }
-
-  // src/components/text/sub.tsx
-  function SubText({ children }) {
-    return /* @__PURE__ */ jsx("label", {
-      class: "sub-text",
-      children
-    });
-  }
-
-  // src/components/page/header.tsx
-  function PageHeader({ type, combined, name, avatar: avatar3, children, extra }) {
-    const generic = !!avatar3;
-    const label = tl2(trans[type]);
-    return /* @__PURE__ */ jsx("section", {
-      class: [
-        "page-header",
-        `for-${type}`
-      ],
-      children: [
-        avatar3 && /* @__PURE__ */ jsx("div", {
-          class: "page-header-avatar-list",
-          children: avatar3
-        }),
-        /* @__PURE__ */ jsx("div", {
-          class: [
-            "page-header-info",
-            "has-main-info"
-          ],
+    }), panel.firstElementChild);
+    if (!can_api && submit_btn.current) {
+      hover_tooltip(submit_btn.current, /* @__PURE__ */ jsx(Tooltip, {
+        children: tl2(trans.requires_api_in_settings)
+      }));
+    }
+    let pages = {
+      visual: {
+        icon: icons.visual,
+        label: tl2(trans.visual),
+        content: () => /* @__PURE__ */ jsx(Fragment, {
           children: [
-            /* @__PURE__ */ jsx("div", {
-              class: "main-info",
+            /* @__PURE__ */ jsx(SettingGroup, {
+              minWidth: true,
               children: [
-                !combined ? /* @__PURE__ */ jsx(SubText, {
-                  children: label
-                }) : /* @__PURE__ */ jsx(SubText, {
-                  children: [
-                    tl2(trans.artists),
-                    /* @__PURE__ */ jsx(InfoTip, {
-                      children: tl2(trans.artists_tooltip)
-                    })
-                  ]
+                /* @__PURE__ */ jsx(SettingSwitch, {
+                  bind: "format_guest_features"
                 }),
-                generic ? /* @__PURE__ */ jsx(Fragment, {
-                  children
-                }) : /* @__PURE__ */ jsx("h1", {
-                  class: [
-                    "page-header-title",
-                    "generic-page-title"
-                  ],
-                  children: name
+                /* @__PURE__ */ jsx(SettingSwitch, {
+                  bind: "show_guest_features"
                 })
               ]
             }),
-            extra
+            /* @__PURE__ */ jsx(CardTip, {
+              children: tl2(trans.bleh_settings_notice)
+            })
           ]
         })
-      ]
-    });
+      }
+    };
+    if (form) {
+      if (page.token == "") {
+        page.token = get_token(form);
+      }
+      const count = form.querySelector('[name="chart_length_recent_tracks"]');
+      const artwork = form.querySelector("#id_show_recent_tracks_artwork");
+      const realtime = form.querySelector("#id_auto_refresh_recent_tracks");
+      form.classList = "";
+      form.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
+        children: [
+          /* @__PURE__ */ jsx(Token, {
+            value: page.token
+          }),
+          /* @__PURE__ */ jsx(SettingGroup, {
+            minWidth: true,
+            children: [
+              /* @__PURE__ */ jsx(SettingSelect, {
+                name: tl2(trans.amount_to_display),
+                values: select_prepare(count),
+                value: count.value,
+                id: count.name
+              }),
+              /* @__PURE__ */ jsx(SettingSwitch, {
+                name: tl2(trans.recent_artwork),
+                value: artwork.checked,
+                id: artwork.name
+              }),
+              /* @__PURE__ */ jsx(SettingSwitch, {
+                name: tl2(trans.recent_realtime.name),
+                body: tl2(trans.recent_realtime.body),
+                value: realtime.checked,
+                id: realtime.name
+              })
+            ]
+          }),
+          /* @__PURE__ */ jsx(SettingsFooter, {
+            gap: true,
+            children: /* @__PURE__ */ jsx(Button, {
+              onClick: () => {
+              },
+              primary: true,
+              type: "submit",
+              children: [
+                /* @__PURE__ */ jsx(SaveIcon, {}),
+                tl2(trans.save)
+              ]
+            })
+          })
+        ]
+      }));
+      pages = {
+        behaviour: {
+          icon: icons.global,
+          label: tl2(trans.behaviour),
+          content: form
+        },
+        ...pages
+      };
+      form.remove();
+    }
+    menu_tooltip(settings_btn.current, /* @__PURE__ */ jsx(FloatingWindow, {
+      children: /* @__PURE__ */ jsx(FloatingWindowContents, {
+        children: /* @__PURE__ */ jsx(Tabbed, {
+          pages
+        })
+      })
+    }));
+    if (ff("yuzu")) {
+      get_profile_streak(streak, panel);
+    }
+    return panel;
   }
-  function PageHeaderTitle({ combined, children }) {
-    return /* @__PURE__ */ jsx("div", {
-      class: "title-container",
-      "data-multi": String(combined),
-      children
+  function refresh_tracks(button2, { quiet = false }, func) {
+    const panel = page.structure.main.querySelector("#recent-tracks-section");
+    panel.classList.remove("has-refreshed");
+    button2.setAttribute("disabled", "");
+    fetch(`${root}user/${page.name}/partial/recenttracks?ajax=1`).then(function(response) {
+      console.log("returned", response, response.text);
+      return response.text();
+    }).then(function(html3) {
+      const doc = new DOMParser().parseFromString(html3, "text/html");
+      console.log("DOC", doc);
+      const tracklist_panel = doc.querySelector(".chartlist");
+      button2.removeAttribute("disabled");
+      if (!tracklist_panel) {
+        if (!quiet) {
+          status({
+            title: tl2(trans.recents),
+            body: tl2(trans.value_failed_to_load).replace("{v}", tl2(trans.library)),
+            type: "error"
+          });
+        }
+        return;
+      }
+      if (!quiet) {
+        status({
+          title: tl2(trans.recents),
+          body: tl2(trans.refreshed)
+        });
+      }
+      panel.classList.add("has-refreshed");
+      panel.querySelector(".chartlist").outerHTML = tracklist_panel.outerHTML;
+      if (func) func();
     });
   }
 
@@ -98556,7 +98776,7 @@ var bleh = (() => {
       delete notes[page.name];
       note.value = "";
       set_storage("bleh_profile_notes", JSON.stringify(notes));
-      status({
+      status2({
         id: "note",
         title: tl2(trans.cleared_note_for_user, {
           u: page.name
@@ -98567,7 +98787,7 @@ var bleh = (() => {
       const notes = JSON.parse(localStorage.getItem("bleh_profile_notes")) || {};
       notes[page.name] = note.value;
       set_storage("bleh_profile_notes", JSON.stringify(notes));
-      status({
+      status2({
         id: "note",
         title: tl2(trans.saved_note_for_user, {
           u: page.name
@@ -98667,39 +98887,6 @@ var bleh = (() => {
         </section>
     `);
   }
-  function refresh_tracks(button2, { quiet = false }, func) {
-    const panel = page.structure.main.querySelector("#recent-tracks-section");
-    panel.classList.remove("has-refreshed");
-    button2.setAttribute("disabled", "");
-    fetch(`${root}user/${page.name}/partial/recenttracks?ajax=1`).then(function(response) {
-      console.log("returned", response, response.text);
-      return response.text();
-    }).then(function(html3) {
-      const doc = new DOMParser().parseFromString(html3, "text/html");
-      console.log("DOC", doc);
-      const tracklist_panel = doc.querySelector(".chartlist");
-      button2.removeAttribute("disabled");
-      if (!tracklist_panel) {
-        if (!quiet) {
-          status({
-            title: tl2(trans.recents),
-            body: tl2(trans.value_failed_to_load).replace("{v}", tl2(trans.library)),
-            type: "error"
-          });
-        }
-        return;
-      }
-      if (!quiet) {
-        status({
-          title: tl2(trans.recents),
-          body: tl2(trans.refreshed)
-        });
-      }
-      panel.classList.add("has-refreshed");
-      panel.querySelector(".chartlist").outerHTML = tracklist_panel.outerHTML;
-      if (func) func();
-    });
-  }
   function bleh_featured_profile_track(object) {
     const art = object.querySelector(".featured-item-art");
     const details = object.querySelector(".featured-item-details");
@@ -98763,191 +98950,6 @@ var bleh = (() => {
         </section>
     `;
     page.structure.side.insertBefore(panel, page.structure.side.firstElementChild);
-  }
-  function profile_recents() {
-    const panel = page.structure.main.querySelector("#recent-tracks-section");
-    if (!panel) return;
-    const more_link = panel.nextElementSibling;
-    panel.appendChild(more_link);
-    const form = panel.querySelector("#recent-tracks-settings");
-    let tooltip;
-    const can_scrobble = ff("submit_scrobble") && page.name == auth.name;
-    const head = panel.querySelector(":scope > h2");
-    if (head) head.remove();
-    const can_api = localStorage.getItem("bleh_auth") && localStorage.getItem("bleh_auth_valid") === "true";
-    const submit_btn = createRef();
-    const settings_btn = createRef();
-    const refresh_btn = createRef();
-    const streak = createRef();
-    const modal_id = "profile_settings";
-    panel.insertBefore(/* @__PURE__ */ jsx(PanelTop, {
-      children: [
-        /* @__PURE__ */ jsx(PanelHead, {
-          icon: icons.recent,
-          children: tl2(trans.recents)
-        }),
-        ff("yuzu") && /* @__PURE__ */ jsx(ViewButtons, {
-          accompany: true,
-          children: /* @__PURE__ */ jsx(ProfileStreak, {
-            loading: true,
-            ref: streak
-          })
-        }),
-        /* @__PURE__ */ jsx(ViewButtons, {
-          children: [
-            can_scrobble && /* @__PURE__ */ jsx(SeeMore, {
-              blend: true,
-              iconPlacement: "left",
-              icon: icons.plus,
-              ref: submit_btn,
-              onClick: () => {
-                submit_scrobble({
-                  can_api,
-                  func: () => {
-                    setTimeout(() => {
-                      refresh_tracks(refresh_btn.current, {
-                        quiet: true
-                      });
-                    }, 200);
-                  }
-                });
-              },
-              children: tl2(trans.scrobble)
-            }),
-            /* @__PURE__ */ jsx(SeeMore, {
-              blend: true,
-              iconPlacement: "left",
-              icon: icons.refresh,
-              ref: refresh_btn,
-              onClick: () => {
-                refresh_tracks(refresh_btn.current, {}, () => {
-                  streak.current.replaceWith(/* @__PURE__ */ jsx(ProfileStreak, {
-                    loading: true,
-                    ref: streak
-                  }));
-                  if (ff("yuzu")) {
-                    get_profile_streak(streak, panel);
-                  }
-                });
-              },
-              children: tl2(trans.refresh)
-            }),
-            /* @__PURE__ */ jsx(SeeMore, {
-              blend: true,
-              iconPlacement: "left",
-              icon: icons.settings,
-              onClick: () => {
-              },
-              ref: settings_btn,
-              children: tl2(trans.settings)
-            })
-          ]
-        })
-      ]
-    }), panel.firstElementChild);
-    if (!can_api) {
-      tippy_esm_default(submit_btn.current, {
-        content: tl2(trans.requires_api_in_settings)
-      });
-    }
-    let pages = {
-      visual: {
-        icon: icons.visual,
-        label: tl2(trans.visual),
-        content: () => /* @__PURE__ */ jsx(Fragment, {
-          children: [
-            /* @__PURE__ */ jsx(SettingGroup, {
-              minWidth: true,
-              children: [
-                /* @__PURE__ */ jsx(SettingSwitch, {
-                  bind: "format_guest_features"
-                }),
-                /* @__PURE__ */ jsx(SettingSwitch, {
-                  bind: "show_guest_features"
-                })
-              ]
-            }),
-            /* @__PURE__ */ jsx(CardTip, {
-              children: tl2(trans.bleh_settings_notice)
-            })
-          ]
-        })
-      }
-    };
-    if (form) {
-      if (page.token == "") {
-        page.token = form.querySelector('[name="csrfmiddlewaretoken"]').getAttribute("value");
-      }
-      const count = form.querySelector('[name="chart_length_recent_tracks"]');
-      const artwork = form.querySelector("#id_show_recent_tracks_artwork");
-      const realtime = form.querySelector("#id_auto_refresh_recent_tracks");
-      form.classList = "";
-      form.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
-        children: [
-          /* @__PURE__ */ jsx(Token, {
-            value: page.token
-          }),
-          /* @__PURE__ */ jsx(SettingGroup, {
-            minWidth: true,
-            children: [
-              /* @__PURE__ */ jsx(SettingSelect, {
-                name: tl2(trans.amount_to_display),
-                values: select_prepare(count),
-                value: count.value,
-                id: count.name
-              }),
-              /* @__PURE__ */ jsx(SettingSwitch, {
-                name: tl2(trans.recent_artwork),
-                value: artwork.checked,
-                id: artwork.name
-              }),
-              /* @__PURE__ */ jsx(SettingSwitch, {
-                name: tl2(trans.recent_realtime.name),
-                body: tl2(trans.recent_realtime.body),
-                value: realtime.checked,
-                id: realtime.name
-              })
-            ]
-          }),
-          /* @__PURE__ */ jsx(SettingsFooter, {
-            gap: true,
-            children: /* @__PURE__ */ jsx(Button, {
-              onClick: () => {
-                dialog_rm({
-                  id: modal_id
-                });
-              },
-              primary: true,
-              type: "submit",
-              children: [
-                /* @__PURE__ */ jsx(SaveIcon, {}),
-                tl2(trans.save)
-              ]
-            })
-          })
-        ]
-      }));
-      pages = {
-        behaviour: {
-          icon: icons.global,
-          label: tl2(trans.behaviour),
-          content: form
-        },
-        ...pages
-      };
-      form.remove();
-    }
-    menu_tooltip(settings_btn.current, /* @__PURE__ */ jsx(FloatingWindow, {
-      children: /* @__PURE__ */ jsx(FloatingWindowContents, {
-        children: /* @__PURE__ */ jsx(Tabbed, {
-          pages
-        })
-      })
-    }));
-    if (ff("yuzu")) {
-      get_profile_streak(streak, panel);
-    }
-    return panel;
   }
   function profile_artists() {
     const panel = page.structure.main.querySelector("#top-artists");
@@ -102593,7 +102595,7 @@ var bleh = (() => {
         }
       }
     ];
-    const status2 = () => [
+    const status3 = () => [
       {
         type: "lang",
         regex: /\[status=([^\]]+)\]/g,
@@ -102649,7 +102651,7 @@ var bleh = (() => {
     else extensions.push(invalid_blockquotes());
     if (allow_banners) extensions.push(banner());
     if (allow_icons) extensions.push(icons2());
-    if (allow_hue) extensions.push(accent(), display_name(), status2());
+    if (allow_hue) extensions.push(accent(), display_name(), status3());
     if (allow_fonts) extensions.push(font());
     if (allow_socials) extensions.push(social_links_extension(links));
     if (!allow_headers) extensions.push(header_minify());
@@ -109870,7 +109872,7 @@ var bleh = (() => {
                   children: /* @__PURE__ */ jsx(SeeMore, {
                     onClick: () => {
                       localStorage.removeItem("bwaa_recent_activity");
-                      status({
+                      status2({
                         type: "success",
                         title: tl2(trans.cleared_activity_history)
                       });
@@ -110998,7 +111000,7 @@ var bleh = (() => {
           parse7(combined_artists, this.response, "combined_artists");
         }
         if (send_notify) {
-          status({
+          status2({
             title: tl2(trans.downloaded_value).replace("{v}", tl2(trans.lotus[type]))
           });
         }
@@ -112618,21 +112620,21 @@ var bleh = (() => {
     links.appendChild(bleh_container);
     page.header.season = bleh_container;
     if (auth.pro) {
-      let render_status_container = function(status2) {
-        if (!status2) return;
+      let render_status_container = function(status3) {
+        if (!status3) return;
         render(status_container.current, html`
 					<div class="status">
 						<div class="status-image">
-							<img src=${status2.avatar} alt=${status2.album}>
+							<img src=${status3.avatar} alt=${status3.album}>
 						</div>
 						<div class="status-info">
-							<strong class="status-text status-title">${status2.name}</strong>
-							<p class="status-text status-artist">${status2.artist}</p>
-							<p class="status-text status-album">${status2.album}</p>
+							<strong class="status-text status-title">${status3.name}</strong>
+							<p class="status-text status-artist">${status3.artist}</p>
+							<p class="status-text status-album">${status3.album}</p>
 						</div>
 					</div>
 					<div class="status-time">
-					    ${status2.active ? html.node`
+					    ${status3.active ? html.node`
                         <p class="status-text status-time-text chartlist-now-scrobbling">
                             ${tl2(trans.scrobbling_now)}
                         </p>
@@ -112677,7 +112679,7 @@ var bleh = (() => {
       }), {
         onShow: () => {
           if (page.now.name) render_status_container(page.now);
-          live_status().then((status2) => render_status_container(status2));
+          live_status().then((status3) => render_status_container(status3));
         }
       });
       links.appendChild(music);
@@ -118730,7 +118732,7 @@ var bleh = (() => {
         });
         const name = details.querySelector(".api-session-app-name");
         const desc = details.querySelector(".api-session-app-description");
-        const status2 = details.querySelector(".api-session-status");
+        const status3 = details.querySelector(".api-session-status");
         const image2 = details.querySelector(".api-session-app-image");
         image2.classList = "";
         const default_image = image2.src.endsWith("14d19fbdca555c1782176cd789e81af7.png");
@@ -118745,9 +118747,9 @@ var bleh = (() => {
 					    <div class="session-details">${name} ${desc}</div>
 					    ${form}
 					</div>
-					${status2 ? html.node`
+					${status3 ? html.node`
                 <div class="session-footer">
-                    ${status2}
+                    ${status3}
                 </div>
                 ` : ""}
 				`);
@@ -122649,7 +122651,7 @@ var bleh = (() => {
 				<h2>Status alerts</h2>
 				<button
 					class="btn continue"
-					onclick=${() => status({
+					onclick=${() => status2({
       title: "test alert",
       body: "haiaiai nothing to worry about >_<"
     })}
@@ -124247,7 +124249,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-09-03T15:19:16.184Z"
+    built_on: "2026-09-03T15:27:01.810Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
