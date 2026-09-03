@@ -4,7 +4,10 @@ import { PanelTop, SeeMore, ViewButtons } from '@/components/text/see_more.tsx';
 import { lang, tl, trans } from '@/build/trans.ts';
 import { InfoTip } from '@/components/text/tip.tsx';
 import { Icon, icons } from '@/components/shared/icon.tsx';
-import { create_profile_note_panel } from '@/pages/profile/profile.tsx';
+import {
+	create_profile_note_panel,
+	load_profile_cache_externally,
+} from '@/pages/profile/profile.tsx';
 import { menu_tooltip } from '@/components/shared/tooltips.tsx';
 import { MenuContents } from '@/components/menu/menu.tsx';
 import { Button } from '@/components/button/button.tsx';
@@ -12,6 +15,11 @@ import { copy, get_language_name, sanitise, translate } from '@/build/tools.ts';
 import { useSettings } from '@/page.ts';
 import { markdown } from '@/components/markdown/markdown.tsx';
 import { TranslatedHeader } from '@/components/shared/translate.tsx';
+import { profile_cache } from '@/types/profile.ts';
+import {
+	MarkdownUsage,
+	MarkdownUsageItem,
+} from '@/components/markdown/usage.tsx';
 
 export type AboutElement = HTMLDivElement & {
 	translated: boolean;
@@ -32,6 +40,7 @@ export function profile_about(
 	panel: AboutElement,
 	text: string,
 	own_profile: boolean,
+	cache: profile_cache,
 ) {
 	const head = panel.querySelector('h2');
 	if (head) head.remove();
@@ -49,13 +58,37 @@ export function profile_about(
 	const add_note = createRef();
 	const translator = createRef();
 
+	const uses_md = cache.banner || cache.hue || cache.sat || cache.lit ||
+		cache.font || cache.username;
+
 	panel.insertBefore(
 		<PanelTop>
 			<h2 class='about-me-title'>
 				{tl(trans.about)}
-				<InfoTip>
-					test
-				</InfoTip>
+				{uses_md && (
+					<InfoTip>
+						<MarkdownUsage>
+							{cache.banner && (
+								<MarkdownUsageItem
+									type='banner'
+									value=''
+								/>
+							)}
+							{(cache.hue && cache.sat && cache.lit) && (
+								<MarkdownUsageItem
+									type='accent'
+									value={`${cache.hue}, ${cache.sat}, ${cache.lit}`}
+								/>
+							)}
+							{(cache.username || cache.font) && (
+								<MarkdownUsageItem
+									type='font'
+									value={`${cache.username} ${cache.font} ${cache.font_style}`}
+								/>
+							)}
+						</MarkdownUsage>
+					</InfoTip>
+				)}
 			</h2>
 			<ViewButtons blend blendV2>
 				{own_profile

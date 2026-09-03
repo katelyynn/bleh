@@ -83,6 +83,11 @@ import {
 } from '@/components/settings/provider/profile_name.tsx';
 import { NewsTitle } from '@/components/news/news.tsx';
 import { HybridTimeframePicker } from '@/components/date/timeframe.tsx';
+import { Tooltip } from '@/components/shared/tooltips.tsx';
+import {
+	MarkdownUsage,
+	MarkdownUsageItem,
+} from '@/components/markdown/usage.tsx';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -1007,6 +1012,28 @@ export function mualani() {
 								brand: 1,
 							})}
 						</div>
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section>
+				<DemoGrid>
+					<DemoItem label='MarkdownUsage'>
+						<Tooltip>
+							<MarkdownUsage>
+								<MarkdownUsageItem
+									type='banner'
+									value='https://yuzu.pet/really/long/link/that/goes/here/ummmmm'
+								/>
+								<MarkdownUsageItem
+									type='accent'
+									value='238, 0.5, 0.2'
+								/>
+								<MarkdownUsageItem
+									type='font'
+									value='yuzu cute out'
+								/>
+							</MarkdownUsage>
+						</Tooltip>
 					</DemoItem>
 				</DemoGrid>
 			</section>

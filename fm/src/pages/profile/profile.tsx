@@ -553,6 +553,7 @@ export function bleh_profiles() {
 				about_me_sidebar,
 				about_me_text_value,
 				is_own_profile,
+				cache,
 			);
 		}
 
