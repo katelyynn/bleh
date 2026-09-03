@@ -47,4 +47,8 @@
 	&[data-tag-group="mixes_numbers"] {
 		order: 10;
 	}
+
+	&.hidden-feat {
+		display: none;
+	}
 }

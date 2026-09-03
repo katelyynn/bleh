@@ -51,6 +51,7 @@ import { TrackMenuPreview } from '@/components/track/preview.tsx';
 import { GenericUsername } from '@/components/user/name.tsx';
 import { Token } from '@/components/form/token.tsx';
 import { createRef } from 'jsx-dom';
+import { SmartTitle } from '@/components/music/smart_title.tsx';
 
 export function patch_titles(search = page.structure.main) {
 	if (page.subpage == 'tags_overview') return;
@@ -449,9 +450,11 @@ export function patch_titles(search = page.structure.main) {
 				);
 
 				// parse tags into text
-				render(
-					track_title,
-					smart_title(formatted.song_title, formatted.song_tags),
+				track_title.replaceChildren(
+					<SmartTitle
+						title={formatted.song_title}
+						tags={formatted.song_tags}
+					/>,
 				);
 
 				if (!song_artist_element && !is_user) {

@@ -82,7 +82,8 @@
 		"rules": {
 			"exclude": [
 				"no-sloppy-imports",
-				"no-window"
+				"no-window",
+				"jsx-key"
 			]
 		},
 		"exclude": [

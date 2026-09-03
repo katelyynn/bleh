@@ -16,28 +16,12 @@ export function SmartTitle({
 	features,
 	header = false,
 }: SmartTitleProps) {
-	const show_features = features != null
-		? features
-		: useSettings.get('show_guest_features');
-	const show_remaster = useSettings.get('show_remaster_tags');
-
-	console.info('smart title', title, tags, features, header, show_features);
-
 	return (
 		<>
 			<span class='title'>
 				<FancyTitle title={romanise(title.trim())} header={header} />
 			</span>
-			{tags.map((tag) => {
-				if (
-					(!show_features && tag.group == 'guests') ||
-					(!show_remaster && tag.group == 'remasters')
-				) {
-					return;
-				}
-
-				return <SongTag tag={tag} />;
-			})}
+			{tags.map((tag) => <SongTag tag={tag} features={features} />)}
 		</>
 	);
 }
