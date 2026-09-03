@@ -217,6 +217,8 @@ export function bleh_artists() {
 			const select_btn = top.querySelector(
 				'.dropdown-menu-clickable-button',
 			) as HTMLButtonElement;
+			const menu = select_btn?.nextElementSibling as HTMLDivElement;
+
 			if (select_btn) {
 				select_btn.classList.add(
 					'select-button',
@@ -246,6 +248,7 @@ export function bleh_artists() {
 					{select_btn && (
 						<ViewButtons blend blendV2 accompany>
 							{select_btn}
+							{menu}
 						</ViewButtons>
 					)}
 					<ViewButtons blend blendV2>
@@ -286,6 +289,7 @@ export function bleh_artists() {
 			const select_btn = top.querySelector(
 				'.dropdown-menu-clickable-button',
 			) as HTMLButtonElement;
+			const menu = select_btn?.nextElementSibling as HTMLDivElement;
 
 			if (select_btn) {
 				select_btn.classList.add(
@@ -304,6 +308,7 @@ export function bleh_artists() {
 					{select_btn && (
 						<ViewButtons blend blendV2 accompany>
 							{select_btn}
+							{menu}
 						</ViewButtons>
 					)}
 				</PanelTop>,

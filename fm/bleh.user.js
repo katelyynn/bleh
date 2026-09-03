@@ -115165,6 +115165,7 @@ var bleh = (() => {
         const settings_btn = createRef();
         const top2 = top_tracks.querySelector(".section-controls");
         const select_btn = top2.querySelector(".dropdown-menu-clickable-button");
+        const menu = select_btn?.nextElementSibling;
         if (select_btn) {
           select_btn.classList.add("select-button", "link-select", "blend-v2-btn");
           select_btn.classList.remove("dropdown-menu-clickable-button");
@@ -115185,7 +115186,10 @@ var bleh = (() => {
               blend: true,
               blendV2: true,
               accompany: true,
-              children: select_btn
+              children: [
+                select_btn,
+                menu
+              ]
             }),
             /* @__PURE__ */ jsx(ViewButtons, {
               blend: true,
@@ -115228,6 +115232,7 @@ var bleh = (() => {
       if (top_albums) {
         const top2 = top_albums.querySelector(".section-controls");
         const select_btn = top2.querySelector(".dropdown-menu-clickable-button");
+        const menu = select_btn?.nextElementSibling;
         if (select_btn) {
           select_btn.classList.add("select-button", "link-select", "blend-v2-btn");
           select_btn.classList.remove("dropdown-menu-clickable-button");
@@ -115242,7 +115247,10 @@ var bleh = (() => {
               blend: true,
               blendV2: true,
               accompany: true,
-              children: select_btn
+              children: [
+                select_btn,
+                menu
+              ]
             })
           ]
         }));
@@ -124365,7 +124373,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-09-03T16:24:24.022Z"
+    built_on: "2026-09-03T16:42:41.675Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
