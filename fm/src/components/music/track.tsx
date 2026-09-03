@@ -224,6 +224,16 @@ export function patch_titles(search = page.structure.main) {
 				}
 			}
 
+			const has_bar = track.querySelector(':scope > .chartlist-bar');
+
+			if (has_bar) {
+				const bar = has_bar.querySelector(
+					':scope > .chartlist-count-bar',
+				);
+
+				count_bar(bar);
+			}
+
 			const track_type = track.querySelector(':scope > .chartlist-type');
 			if (
 				track_type &&
@@ -334,15 +344,6 @@ export function patch_titles(search = page.structure.main) {
 			const is_active = track.classList.contains(
 				'chartlist-row--now-scrobbling',
 			);
-			const has_bar = track.querySelector(':scope > .chartlist-bar');
-
-			if (has_bar) {
-				const bar = has_bar.querySelector(
-					':scope > .chartlist-count-bar',
-				);
-
-				count_bar(bar);
-			}
 
 			// menu
 			const track_legacy_menu = track.querySelector(

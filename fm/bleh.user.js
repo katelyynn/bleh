@@ -55969,7 +55969,7 @@ var bleh = (() => {
       milestone_lit += (next_milestone_lit - milestone_lit) * scrobble_proximity;
     }
     let contrast2 = false;
-    if (scrobbles >= 5e4) {
+    if (scrobbles >= 45e3) {
       contrast2 = true;
     }
     log(
@@ -78069,6 +78069,11 @@ var bleh = (() => {
             is_artist = true;
           }
         }
+        const has_bar = track.querySelector(":scope > .chartlist-bar");
+        if (has_bar) {
+          const bar2 = has_bar.querySelector(":scope > .chartlist-count-bar");
+          count_bar(bar2);
+        }
         const track_type = track.querySelector(":scope > .chartlist-type");
         if (track_type && track_type.classList[1] == "chartlist-type--artist") {
           is_user = false;
@@ -78132,11 +78137,6 @@ var bleh = (() => {
           }
         }
         const is_active3 = track.classList.contains("chartlist-row--now-scrobbling");
-        const has_bar = track.querySelector(":scope > .chartlist-bar");
-        if (has_bar) {
-          const bar2 = has_bar.querySelector(":scope > .chartlist-count-bar");
-          count_bar(bar2);
-        }
         const track_legacy_menu = track.querySelector(".chartlist-more-menu");
         const track_timestamp = track.querySelector(".chartlist-timestamp span");
         let track_timestamp_contents;
@@ -124362,7 +124362,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-09-03T16:05:15.264Z"
+    built_on: "2026-09-03T16:20:06.948Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

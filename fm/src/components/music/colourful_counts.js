@@ -92,7 +92,7 @@ export function parse_scrobbles_as_rank(scrobbles) {
 	}
 
 	let contrast = false;
-	if (scrobbles >= 50_000) {
+	if (scrobbles >= 45_000) {
 		contrast = true;
 	}
 
