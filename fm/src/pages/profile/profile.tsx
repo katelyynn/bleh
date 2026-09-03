@@ -283,6 +283,9 @@ export function bleh_profiles() {
 				<Tooltip>{tl(trans.badges[type].reason)}</Tooltip>,
 			);
 
+			// pro
+			badge.removeAttribute('href');
+
 			badge.addEventListener('click', () => {
 				present_badge({
 					name: tl(trans_instance.name),
