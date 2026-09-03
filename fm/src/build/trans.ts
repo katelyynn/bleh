@@ -42,7 +42,7 @@ export let lang_info = {
     },
     pl: {
         name: get_language_name('pl'),
-        by: ['zaktusii', 'iwas15with100k', 'P0kahontaz'],
+        by: ['zaktusii', 'iwas15with100k', 'P0kahontaz', 'livia09_'],
         last_updated: '2026-08-25',
     },
     pt: {
@@ -7029,7 +7029,7 @@ export const trans = {
             pt: 'A exclusão levará 14 dias para ser concluída. Após esse período, sua conta será excluída, anonimizada ou desativada, e não poderá ser recuperada. Depois de excluído, seu nome de usuário não estará mais disponível.',
             sv: 'Det tar 14 dagar att ta bort ditt konto. Efter denna tid blir dit konto antingen borttaget, anonymiserad, eller görs oanvändbar och kan inte fås tillbaka. När det är borttaget kan ditt användarnamn inte bli använt igen.',
             ru: 'Удаление займет 14 дней. По истечении этого времени ваша учетная запись будет либо удалена, либо анонимизирована, либо выведена из эксплуатации и не сможет быть восстановлена. После удаления ваше имя пользователя больше не будет доступно.',
-            pl: 'Usunięcie konta potrwa 14 dni, po upływie tego czasu Twoje konto zostanie usunięte, zanonimizowane lub wyłączone i nie będzie można go przywrócić. Po usunięciu Twoja nazwa użytkownika nie będzie już dostępna.',
+            pl: 'Usunięcie konta potrwa 14 dni, po upływie tego czasu twoje konto zostanie usunięte, zanonimizowane lub wyłączone i nie będzie można go przywrócić. Po usunięciu, Twoja nazwa użytkownika nie będzie już dostępna.',
         },
     },
     delete_account_permanently: {
@@ -7040,7 +7040,7 @@ export const trans = {
         pt: 'Deletar {u} permanentemente',
         sv: 'Ta bort {u} permanent',
         ru: 'Удалить {u} навсегда',
-        pl: 'Usuń {u} permanentnie',
+        pl: 'Usuń {u} na stałe',
     },
     other: {
         // 'other' section in settings
@@ -7164,7 +7164,7 @@ export const trans = {
         pt: 'gostaria de usar sua conta',
         sv: 'vill använda ditt konto',
         ru: 'хочет использовать ваш аккаунт',
-        pl: 'chce użyć Twoje konta',
+        pl: 'chce użyć Twojego konta',
     },
     logged_in_as: {
         en: 'Logged in as {user}',
@@ -8946,7 +8946,7 @@ export const trans = {
         sv: 'Automatiskt',
         ru: 'Авто',
         pt: 'Automático',
-        pl: 'Auto',
+        pl: 'Automatyczny',
     },
     glass: {
         en: 'Glass',
@@ -9020,13 +9020,14 @@ export const trans = {
         pl: 'Popularne teraz',
     },
     missing_artist_info: {
+        //PL: I'm changing this and the next to "Może chcesz pomóc?" which is "Maybe you want to help out?" which in my opinion sounds better than "Może możesz pomóc?" which is a more direct translation
         en: 'This artist is missing key details, maybe you can help out?',
         pt: 'Faltam detalhes importantes sobre este artista, talvez você possa ajudar?',
         de: 'Diesem Künstler fehlen wichtige Details, vielleicht kannst du helfen?',
         es: 'A este artista le faltan detalles clave, ¿quizás puedes ayudar?',
         ru: 'Об этом артисте не хватает ключевой информации, может, вы поможете?',
         it: 'A quest’artista mancano dettagli fondamentali, forse puoi aiutarci?',
-        pl: 'Temu artyście brakuje ważnych informacji. Może możesz pomóc?',
+        pl: 'Temu artyście brakuje ważnych informacji. Może chcesz pomóc?',
     },
     missing_album_info: {
         en: 'This album is missing key details, maybe you can help out?',
@@ -9035,7 +9036,7 @@ export const trans = {
         it: 'A questo album mancano dettagli chiave, forse puoi aiutare?',
         ru: 'В этом альбоме отсутствуют ключевые детали, может, вы можете помочь?',
         pt: 'Este álbum está faltando detalhes importantes, talvez você possa ajudar?',
-        pl: 'W tym albumie brakuje ważnych informacji. Może możesz pomóc?',
+        pl: 'W tym albumie brakuje ważnych informacji. Może chcesz pomóc?',
     },
     updates: {
         // links to the bleh updater
@@ -9343,7 +9344,7 @@ export const trans = {
         pt: '{i} está indísponivel no {p}',
         sv: '{i} är inte tillgänglig på {p}',
         ru: '{i} недоступен на {p}',
-        pl: '{i} jest dostępny na {p}',
+        pl: '{i} jest niedostępny na {p}',
     },
     platforms: {
         other: {
@@ -9408,7 +9409,7 @@ export const trans = {
         sv: 'Din egen profil',
         ru: 'Собственном профиле',
         pt: 'Seu próprio perfil',
-        pl: 'Mój profil',
+        pl: 'Moim profilu',
     },
     other_profiles: {
         // sub-option for view_backgrounds_on
@@ -9419,7 +9420,7 @@ export const trans = {
         sv: 'Andra profiler',
         ru: 'Других профилях',
         pt: 'Outros perfis',
-        pl: 'Inne profile',
+        pl: 'Innych profilach',
     },
     profile_avi_background: {
         name: {
@@ -9503,7 +9504,7 @@ export const trans = {
             sv: 'Ändrade din accentfärg, glöm inte att spara!',
             ru: 'Вы изменили акцент, не забудьте его сохранить!',
             pt: 'Toque de cor alterado, não se esqueça de salvar!',
-            pl: 'Zmień akcent, nie zapomnij zapisać zmian!',
+            pl: 'Zmieniono akcent, nie zapomnij zapisać zmian!',
         },
     },
     profile_font: {
@@ -9779,7 +9780,7 @@ export const trans = {
         sv: 'Spela minispel, pussel, och interagera med verktyg som är helt baserad på din lyssningshistorik',
         ru: 'Играйте в мини-игры, решайте головоломки и взаимодействуйте с инструментами, основанными на вашей истории прослушиваний',
         pt: 'Jogue mini-jogos, quebra-cabeças e interaja com ferramentas todas alimentadas pelo seu histórico de reprodução',
-        pl: 'Graj w minis, rozwiązuj zagadki i korzystaj z narzędzi opartych na Twojej historii słuchania',
+        pl: 'Graj w minigry, rozwiązuj zagadki i korzystaj z narzędzi opartych na Twojej historii słuchania',
     },
     no_mini_found: {
         en: 'No mini found for ‘{v}’',
@@ -10688,7 +10689,7 @@ export const trans = {
         pt: 'Você precisa estar logado',
         sv: 'Du lär vara inloggad',
         ru: 'Вам необходимо войти в систему',
-        pl: 'Musisz być zalogowany',
+        pl: 'Musisz być zalogowany/a',
     },
     oracle_notice: {
         en: 'You are testing ‘oracle’',
@@ -10728,7 +10729,7 @@ export const trans = {
         pt: 'Experimental',
         sv: 'Experimentalt',
         ru: 'Экспериментально',
-        pl: 'Eksperymentalny'
+        pl: 'Eksperymentalny',
     },
     oracle_beta: {
         name: {
@@ -11191,7 +11192,7 @@ export const trans = {
         es: 'carga temporalmente pausada @w@',
         it: 'caricamento in pausa temporaneamente @w@',
         pt: 'carregamento pausada temporariamente @w@',
-        pl: 'ładowanie tymczasowo wstrzymane @w@',
+        pl: 'Ładowanie tymczasowo wstrzymane @w@',
     },
     loading_status: {
         en: 'loading status',
@@ -11336,7 +11337,7 @@ export const trans = {
         es: 'Encabezado',
         it: 'Intestazione',
         pt: 'Cabeçalho',
-        pl: 'Nagłowek'
+        pl: 'Nagłówek'
     },
     bold: {
         en: 'Bold',
@@ -11939,7 +11940,7 @@ export const trans = {
         de: 'Redigiert von',
         es: 'Editado por',
         it: 'Editato da',
-        pl: 'Edytowany przez',
+        pl: 'Edytowane przez',
     },
     oracle_writer: {
         en: 'Written by',
@@ -11947,7 +11948,7 @@ export const trans = {
         de: 'Geschrieben von',
         es: 'Escrito por',
         it: 'Scritto da',
-        pl: 'Napisany przez',
+        pl: 'Napisane przez',
     },
     oracle_no_credits: {
         en: 'nothing here... (๑/////๑ " )',
@@ -11965,7 +11966,7 @@ export const trans = {
         es: 'Nació',
         ru: 'Дата рождения', // gender-neutral variant of 'born', 'died' and 'formed' ~tachyon
         it: 'Nato il',
-        pl: 'Data narodzin', // there is no gender neutral in polish, instead this means literally Date of birth. I think it feels more natural in the context
+        pl: 'Data urodzin', // there is no gender neutral in polish, instead this means literally Date of birth. I think it feels more natural in the context
     },
     died: {
         en: 'Died',
@@ -12095,7 +12096,7 @@ export const trans = {
             en: 'Which music do you have in common?',
             pt: 'Quais músicas vocês têm em comum?',
             es: '¿Qué música tienen en común?',
-            pl: 'Jaka muzyka was łączy',
+            pl: 'Jaka muzyka was łączy?',
         },
     },
     sponsor_cta: {
@@ -12287,7 +12288,7 @@ export const trans = {
         en: 'You have disabled bleh visuals for Last.fm settings, don’t expect this to look pretty',
         pt: 'Você desativou os elementos visuais do bleh nas configurações do Last.fm; não espere que isto fique bonito',
         es: 'Has desactivado los elementos visuales de bleh en la configuración de Last.fm, no esperes que se vea bonito',
-        pl: 'Wyłączyłeś elementy wizualne „bleh” w ustawieniach Last.fm; nie oczekuj, że to będzie wyglądało pięknie',
+        pl: 'Wyłączyłeś elementy wizualne „bleh” w ustawieniach Last.fm; nie oczekuj, że będzie to wyglądało pięknie',
     },
     hide_unused_settings: {
         en: 'Hide settings that have no effect',
