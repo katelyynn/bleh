@@ -98590,11 +98590,9 @@ var bleh = (() => {
         page.structure.container.removeChild(page.structure.nav);
         page.structure.main.innerHTML = "";
         page.structure.side.innerHTML = "";
-        page.structure.main.appendChild(html.node`
-                <section class="cta">
-                    <strong>${tl2(trans.sponsor_info)}</strong>
-                </section>
-            `);
+        page.structure.main.appendChild(/* @__PURE__ */ jsx(Cta, {
+          label: tl2(trans.sponsor_info)
+        }));
       }
       if (!recent_tracks) {
         recent_tracks = page.structure.main.querySelector(".no-data-message");
@@ -98696,10 +98694,10 @@ var bleh = (() => {
         obsession_list();
       } else if (page.subpage == "playlists_playlists") {
         const section_controls = page.structure.container.querySelector(".section-controls-full-width");
-        let buttons;
+        let buttons = [];
         if (section_controls) {
           section_controls.classList.add("legacy-section-controls");
-          buttons = section_controls.querySelectorAll(":is(button, a)");
+          buttons = Array.from(section_controls.querySelectorAll(":is(button, a)"));
           const header = page.structure.container.querySelector(".content-top-header");
           page.structure.content_top.innerHTML = `
                     <div class="content-top-inner-wrap">
@@ -98752,9 +98750,13 @@ var bleh = (() => {
         if (chr != -1) {
           count = count_text.substring(chr).replace("(", "").replace(")", "");
         }
-        page.structure.nav.querySelector(".secondary-nav-item--loved a").appendChild(html.node`
-                <div class="new-badge count-badge">${count}</div>
-            `);
+        page.structure.nav.querySelector(".secondary-nav-item--loved a").appendChild(/* @__PURE__ */ jsx("div", {
+          class: [
+            "new-badge",
+            "count-badge"
+          ],
+          children: count
+        }));
       }
     }
     log("status is", "page", "info", page);
@@ -98772,7 +98774,7 @@ var bleh = (() => {
                 <h2>${tl2(trans.notes)}</h2>
                 <div class="view-buttons blend blend-v2">
                     <button class="see-more left-icon blend-v2-btn" data-type="delete" onclick=${() => {
-      const notes = JSON.parse(localStorage.getItem("bleh_profile_notes")) || {};
+      const notes = JSON.parse(localStorage.getItem("bleh_profile_notes") || "{}");
       delete notes[page.name];
       note.value = "";
       set_storage("bleh_profile_notes", JSON.stringify(notes));
@@ -124249,7 +124251,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-09-03T15:27:01.810Z"
+    built_on: "2026-09-03T15:30:04.211Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

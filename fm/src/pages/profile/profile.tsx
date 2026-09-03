@@ -100,6 +100,7 @@ import {
 import { PageHeader, PageHeaderTitle } from '@/components/page/header.tsx';
 import { LoadingData } from '@/components/loading/loading.tsx';
 import { profile_recents } from '@/pages/profile/recents.tsx';
+import { Cta } from '@/components/cta/cta.tsx';
 
 export function bleh_profiles() {
 	// the obsessions page is a user subpage but works very differently
@@ -446,11 +447,9 @@ export function bleh_profiles() {
 			page.structure.main!.innerHTML = '';
 			page.structure.side!.innerHTML = '';
 
-			page.structure.main!.appendChild(html.node`
-                <section class="cta">
-                    <strong>${tl(trans.sponsor_info)}</strong>
-                </section>
-            `);
+			page.structure.main!.appendChild(
+				<Cta label={tl(trans.sponsor_info)} />,
+			);
 		}
 
 		// recent tracks
@@ -584,10 +583,12 @@ export function bleh_profiles() {
 			const section_controls = page.structure.container!.querySelector(
 				'.section-controls-full-width',
 			);
-			let buttons;
+			let buttons: HTMLElement[] = [];
 			if (section_controls) {
 				section_controls.classList.add('legacy-section-controls');
-				buttons = section_controls.querySelectorAll(':is(button, a)');
+				buttons = Array.from(
+					section_controls.querySelectorAll(':is(button, a)'),
+				);
 
 				const header = page.structure.container!.querySelector(
 					'.content-top-header',
@@ -662,8 +663,8 @@ export function bleh_profiles() {
 				new_panel.appendChild(no_data);
 			}
 		} else if (page.subpage == 'loved') {
-			const count_text = page.structure.content_top
-				.querySelector('h1')
+			const count_text = page.structure.content_top!
+				.querySelector('h1')!
 				.textContent.trim();
 			const chr = count_text.indexOf('(');
 
@@ -675,10 +676,10 @@ export function bleh_profiles() {
 					.replace(')', '');
 			}
 
-			page.structure.nav.querySelector('.secondary-nav-item--loved a')
-				.appendChild(html.node`
-                <div class="new-badge count-badge">${count}</div>
-            `);
+			page.structure.nav!.querySelector('.secondary-nav-item--loved a')!
+				.appendChild(
+					<div class={['new-badge', 'count-badge']}>{count}</div>,
+				);
 		}
 	}
 
@@ -705,8 +706,8 @@ export function create_profile_note_panel(has_note?: string) {
                 <div class="view-buttons blend blend-v2">
                     <button class="see-more left-icon blend-v2-btn" data-type="delete" onclick=${() => {
 		const notes = JSON.parse(
-			localStorage.getItem('bleh_profile_notes'),
-		) || {};
+			localStorage.getItem('bleh_profile_notes') || '{}',
+		);
 		delete notes[page.name];
 
 		note.value = '';
