@@ -32,6 +32,7 @@ type ButtonProps =
 		children?: ReactNode;
 		tooltip?: ReactNode;
 		opens?: ReactElement;
+		onUpdate?: () => void;
 	}
 	& Omit<
 		JSX.IntrinsicElements['button'],
@@ -65,6 +66,7 @@ export function Button({
 	children,
 	tooltip,
 	opens,
+	onUpdate,
 	...props
 }: ButtonProps) {
 	const classes: ClassNames = [
@@ -150,6 +152,7 @@ export function Button({
 				</>,
 			);
 			elem.removeAttribute('data-loading');
+			if (onUpdate) onUpdate();
 		}
 	}
 

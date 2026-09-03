@@ -25,6 +25,7 @@ interface SettingLabelProps {
 	value?: setting_value;
 	setValue?: (val: setting_value) => void;
 	defaultValue?: setting_value;
+	menu?: boolean;
 }
 
 export function SettingLabel({
@@ -37,6 +38,7 @@ export function SettingLabel({
 	value,
 	setValue,
 	defaultValue,
+	menu,
 }: SettingLabelProps) {
 	const reset = createRef();
 
@@ -55,7 +57,7 @@ export function SettingLabel({
 		);
 	}
 
-	const label = (
+	let label = (
 		<div class={['heading', 'setting-inner']} ref={ref}>
 			<h5 class='setting-name'>
 				{name}
@@ -75,6 +77,16 @@ export function SettingLabel({
 			{children}
 		</div>
 	);
+
+	if (menu) {
+		label = (
+			<span class='menu-item-body' ref={ref}>
+				<strong class='menu-item-head'>
+					{name}
+				</strong>
+			</span>
+		);
+	}
 
 	Object.defineProperty(label, 'value', {
 		set(val: setting_value) {

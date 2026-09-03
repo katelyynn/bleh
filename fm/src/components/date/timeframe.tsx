@@ -21,22 +21,23 @@ import {
 import { Tabbed } from '@/components/tab/tabbed.tsx';
 import { icons } from '@/components/shared/icon.tsx';
 import { createRef } from 'jsx-dom';
+import { menu_tooltip } from '@/components/shared/tooltips.tsx';
 
 interface HybridTimeframePickerProps {
-	ref?: ReturnType<typeof createRef>;
+	ref?: ReturnType<typeof createRef<HybridTimeframePickerElement>>;
 	value?: string;
-	disallowed?: boolean;
+	disabled?: boolean;
 	onChange?: (val: string) => void;
 }
 
 type HybridTimeframePickerElement = HTMLButtonElement & {
-	disallowed: boolean;
+	disabled: boolean;
 };
 
 export function HybridTimeframePicker({
 	ref,
 	value,
-	disallowed = false,
+	disabled = false,
 	onChange,
 }: HybridTimeframePickerProps) {
 	if (!value) value = 'date_preset=LAST_7_DAYS';
@@ -44,15 +45,29 @@ export function HybridTimeframePicker({
 	const modal = <FloatingWindow />;
 
 	const elem = (
-		<Button
-			className='timeframe-picker-button'
-			opens={modal}
+		<button
+			type='button'
+			class={[
+				'btn',
+				'flex-button',
+				'select-button',
+				'timeframe-picker-button',
+			]}
 			ref={ref}
 		/>
 	) as HybridTimeframePickerElement;
 
+	menu_tooltip(
+		elem,
+		modal,
+	);
+
 	function update() {
-		elem.setAttribute('disabled', String(disallowed));
+		if (disabled) {
+			elem.setAttribute('disabled', 'true');
+		} else {
+			elem.removeAttribute('disabled');
+		}
 
 		elem.replaceChildren(
 			<>
@@ -92,7 +107,7 @@ export function HybridTimeframePicker({
 		}, (_, i) => 2003 + i).reverse();
 
 		const elem = (
-			<>
+			<div class='timeframe-menu-content'>
 				<div class='date-range-picker-presets-wrap'>
 					<ul class={['date-range-picker-presets']}>
 						<TimeframePreset
@@ -143,7 +158,7 @@ export function HybridTimeframePicker({
 						/>
 					))}
 				</div>
-			</>
+			</div>
 		);
 
 		function update_presets() {
@@ -153,7 +168,8 @@ export function HybridTimeframePicker({
 		}
 
 		function set_preset(v: string) {
-			set(v);
+			value = v;
+			update();
 			update_presets();
 		}
 
@@ -173,12 +189,12 @@ export function HybridTimeframePicker({
 		},
 	});
 
-	Object.defineProperty(elem, 'disallowed', {
+	Object.defineProperty(elem, 'disabled', {
 		get() {
-			return disallowed;
+			return value;
 		},
 		set(v: boolean) {
-			disallowed = v;
+			disabled = v;
 			update();
 		},
 	});

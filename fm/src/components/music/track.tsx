@@ -14,7 +14,7 @@ import {
 	romanise,
 	sanitise,
 } from '@/build/tools';
-import { bleh_glacier_insights } from '@/pages/profile/glacier.js';
+import { bleh_glacier_insights } from '@/pages/profile/glacier.tsx';
 import { patch_artist_ranks_in_list_view } from '@/components/music/colourful_counts';
 import {
 	correct_artist,

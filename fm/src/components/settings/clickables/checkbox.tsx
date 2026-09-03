@@ -11,6 +11,7 @@ interface CheckboxProps {
 	className?: string;
 	interact?: boolean;
 	checked?: boolean;
+	menu?: boolean;
 }
 
 export function Checkbox({
@@ -18,6 +19,7 @@ export function Checkbox({
 	className,
 	interact = true,
 	checked = false,
+	menu,
 }: CheckboxProps) {
 	const checkbox = createRef();
 	const elem = createRef();
@@ -28,11 +30,23 @@ export function Checkbox({
 	}
 
 	const wrap = (
-		<div class={['checkbox-wrap', className && className]} ref={ref}>
+		<div
+			class={[
+				'checkbox-wrap',
+				className && className,
+				menu && 'menu-checkbox-wrap',
+			]}
+			ref={ref}
+		>
 			<input type='checkbox' ref={checkbox} />
 			<button
 				type='button'
-				class={['btn', 'checkbox', !interact && 'no-interact']}
+				class={[
+					'btn',
+					'checkbox',
+					!interact && 'no-interact',
+					menu && 'menu-checkbox',
+				]}
 				ref={elem}
 				onClick={() => {
 					if (!interact) {

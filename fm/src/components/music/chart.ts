@@ -9,7 +9,7 @@ import {
 	bleh_glacier_date_graph_generate,
 	bleh_glacier_insights,
 	bleh_glacier_library_open_index,
-} from '@/pages/profile/glacier.js';
+} from '@/pages/profile/glacier.tsx';
 import { bleh_music_chart_render } from './summary.js';
 import { bleh_profile_chart_render } from '../profile/summary.js';
 

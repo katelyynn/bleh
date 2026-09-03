@@ -896,6 +896,10 @@
 	&>input {
 		display: none;
 	}
+
+	&.menu-checkbox-wrap {
+		margin-right: 4px;
+	}
 }
 
 .checkbox {
@@ -949,6 +953,11 @@
 			transform: scale(1);
 			opacity: 1;
 		}
+	}
+
+	&.menu-checkbox {
+		width: 14px;
+		height: 14px;
 	}
 }
 

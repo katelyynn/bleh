@@ -52,7 +52,7 @@ import { bleh_gallery, bleh_gallery_upload_check } from '@/pages/music/gallery';
 import {
 	bleh_glacier_library,
 	bleh_glacier_library_bulk_edit,
-} from '@/pages/profile/glacier.js';
+} from '@/pages/profile/glacier.tsx';
 import { bleh_home, bleh_home_legacy } from '@/pages/home';
 import { bleh_inbox } from '@/pages/inbox';
 import { bleh_profiles, checkup_friend_cache } from '@/pages/profile/profile';

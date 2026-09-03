@@ -30,7 +30,7 @@ import {
 import { avatar } from '../shared/avatar';
 import { useSettings } from '@/page.ts';
 import { createRef } from 'jsx-dom';
-import { CompareHeader } from '@/components/minis/main.tsx';
+import { CompareBody, CompareHeader } from '@/components/minis/main.tsx';
 import {
 	CompareSelection,
 	CompareUser,
@@ -39,6 +39,10 @@ import {
 import { Input, InputGroup } from '@/components/input/input.tsx';
 import { Select } from '@/components/select/select.tsx';
 import { Button } from '@/components/button/button.tsx';
+import { LoadingData } from '@/components/loading/loading.tsx';
+import { Alert } from '@/components/text/alert.tsx';
+import { Placeholder } from '@/components/loading/placeholder.tsx';
+import { IconLabel } from '@/components/text/text.tsx';
 
 export function collage({ host, sidebar } = {}) {
 	if (!host || !sidebar) return;
@@ -78,75 +82,80 @@ export function collage({ host, sidebar } = {}) {
 	const user = createRef();
 
 	host.replaceChildren(
-		<CompareHeader>
-			<CompareUsers ref={user}>
-				<CompareUser name={page.name} replacePage />
-			</CompareUsers>
-			<CompareSelection>
-				<InputGroup>
-					<Input
-						type='number'
-						value={value}
-						placeholder={value}
-						min={min}
-						length={max}
-						ref={width}
+		<>
+			<CompareHeader>
+				<CompareUsers ref={user}>
+					<CompareUser name={page.name} replacePage />
+				</CompareUsers>
+				<CompareSelection>
+					<InputGroup>
+						<Input
+							type='number'
+							value={value}
+							placeholder={value}
+							min={min}
+							length={max}
+							ref={width}
+						/>
+						<Icon name={icons.x} />
+						<Input
+							type='number'
+							value={value}
+							placeholder={value}
+							min={min}
+							length={max}
+							ref={height}
+						/>
+					</InputGroup>
+					<Select
+						value={default_type}
+						values={[
+							{
+								text: tl(trans.item_type),
+							},
+							{
+								value: 'artists',
+								text: () => (
+									<IconLabel icon={icons.artist}>
+										{tl(trans.artists)}
+									</IconLabel>
+								),
+							},
+							{
+								value: 'albums',
+								text: () => (
+									<IconLabel icon={icons.album}>
+										{tl(trans.albums)}
+									</IconLabel>
+								),
+							},
+							{
+								value: 'tracks',
+								text: () => (
+									<IconLabel icon={icons.track}>
+										{tl(trans.tracks)}
+									</IconLabel>
+								),
+							},
+						]}
+						ref={type}
 					/>
-					<Icon name={icons.x} />
-					<Input
-						type='number'
-						value={value}
-						placeholder={value}
-						min={min}
-						length={max}
-						ref={height}
+					<HybridTimeframePicker
+						value={default_timeframe}
+						ref={timeframe}
 					/>
-				</InputGroup>
-				<Select
-					value={default_type}
-					values={[
-						{
-							text: tl(trans.item_type),
-						},
-						{
-							value: 'artists',
-							text: (
-								<>
-									<Icon name={icons.artist} />
-									{tl(trans.artists)}
-								</>
-							),
-						},
-						{
-							value: 'albums',
-							text: (
-								<>
-									<Icon name={icons.album} />
-									{tl(trans.albums)}
-								</>
-							),
-						},
-						{
-							value: 'tracks',
-							text: (
-								<>
-									<Icon name={icons.track} />
-									{tl(trans.tracks)}
-								</>
-							),
-						},
-					]}
-				/>
-				<HybridTimeframePicker
-					value={default_timeframe}
-					ref={timeframe}
-				/>
-				<Button primary ref={submit} onClick={init_collage}>
-					<Icon name={icons.collage} />
-					{tl(trans.generate)}
-				</Button>
-			</CompareSelection>
-		</CompareHeader>,
+					<Button primary ref={submit} onClick={init_collage}>
+						<Icon name={icons.collage} />
+						{tl(trans.generate)}
+					</Button>
+				</CompareSelection>
+			</CompareHeader>
+			<CompareBody ref={body} data-filled='false'>
+				<Placeholder face='(๑>◡<๑)'>
+					{tl(trans.choose_a_timeframe_above)}
+				</Placeholder>
+			</CompareBody>
+		</>,
 	);
 
 	let setting_group;
@@ -242,15 +251,8 @@ export function collage({ host, sidebar } = {}) {
 	}
 
 	function collage_error(e) {
-		render(
-			body,
-			html`
-				<div class="loading-data-container">
-					<div class="alert alert-error">${e && e.message
-						? e.message
-						: e}</div>
-				</div>
-			`,
+		body.current.replaceChildren(
+			<Alert type='error'>{(e && e.message) ? e.message : e}</Alert>,
 		);
 
 		console.error(e);
@@ -260,7 +262,7 @@ export function collage({ host, sidebar } = {}) {
 		collage_settings.forEach((option) => {
 			option.setAttribute('disabled', false);
 		});
-		submit.current.disabled = false;
+		submit.current.loading = false;
 	}
 
 	function make_collage(bypass = false) {
@@ -331,25 +333,21 @@ export function collage({ host, sidebar } = {}) {
 		collage_settings.forEach((option) => {
 			option.setAttribute('disabled', true);
 		});
-		submit.current.disabled = true;
+		submit.current.loading = true;
 
 		page.state.collage = [];
 		get_grid(1, pages);
 	}
 
 	function get_grid(current_page, pages) {
-		render(
-			body,
-			html`
-				<div class="loading-data-container">
-					<div class="loading-data-text">
-				        ${tl(trans.gathering_plays_for_user_pages)
-					.replace('{u}', page.name)
-					.replace('{current_page}', current_page)
-					.replace('{pages}', pages)}
-				    </div>
-				</div>
-			`,
+		body.current.replaceChildren(
+			<LoadingData>
+				{tl(trans.gathering_plays_for_user_pages, {
+					u: page.name,
+					current_page,
+					pages,
+				})}
+			</LoadingData>,
 		);
 
 		fetch(
@@ -424,15 +422,10 @@ export function collage({ host, sidebar } = {}) {
 			);
 
 			if (page.state.collage.length == 0) {
-				render(
-					body,
-					html`
-						<div class="loading-data-container">
-							<div class="loading-data-text failed">
-						        ${tl(trans.no_plays_in_range)}
-						    </div>
-						</div>
-					`,
+				body.current.replaceChildren(
+					<LoadingData type='failed'>
+						{tl(trans.no_plays_in_range)}
+					</LoadingData>,
 				);
 
 				type.current.disabled = false;
@@ -440,7 +433,7 @@ export function collage({ host, sidebar } = {}) {
 				collage_settings.forEach((option) => {
 					option.setAttribute('disabled', false);
 				});
-				submit.current.disabled = false;
+				submit.current.loading = false;
 
 				return;
 			}
@@ -519,7 +512,7 @@ export function collage({ host, sidebar } = {}) {
                                     ${
 											settings.collage_grid_plays
 												? html.node`
-                                    <a class="grid-item-plays icon-mask" href="${root}user/${page.name}/library/music/${redirect()}${template}?date_preset=${timeframe.value}" target="_blank">
+                                    <a class="grid-item-plays icon-mask" href="${root}user/${page.name}/library/music/${redirect()}${template}?date_preset=${timeframe.current.value}" target="_blank">
                                         ${data.plays.toLocaleString(lang)}
                                     </a>
                                     `
@@ -528,7 +521,7 @@ export function collage({ host, sidebar } = {}) {
                                     `
 										: settings.collage_grid_plays
 										? html.node`
-                                    <a class="grid-item-plays icon-mask" href="${root}user/${page.name}/library/music/${redirect()}${template}?date_preset=${timeframe.value}" target="_blank">
+                                    <a class="grid-item-plays icon-mask" href="${root}user/${page.name}/library/music/${redirect()}${template}?date_preset=${timeframe.current.value}" target="_blank">
                                         ${
 											tl(trans.count_plays, {
 												c: data.plays.toLocaleString(
@@ -547,7 +540,7 @@ export function collage({ host, sidebar } = {}) {
 									settings.collage_grid_plays
 										? html.node`
                                 <p class="grid-items-item-aux-text">
-                                    <a class="grid-item-plays icon-mask" href="${root}user/${page.name}/library/music/${redirect()}${template}?date_preset=${timeframe.value}" target="_blank">
+                                    <a class="grid-item-plays icon-mask" href="${root}user/${page.name}/library/music/${redirect()}${template}?date_preset=${timeframe.current.value}" target="_blank">
                                         ${
 											tl(trans.count_plays, {
 												c: data.plays.toLocaleString(
@@ -606,16 +599,11 @@ export function collage({ host, sidebar } = {}) {
                     ${grid}
                 </div>
             `;
-			render(
-				body,
-				html`
-					<div class="loading-data-container">
-					    <div class="loading-data-text">
-					        ${tl(trans.waiting_for_images)}
-					    </div>
-					</div>
-					${collage_dom}
-				`,
+			body.current.replaceChildren(
+				<>
+					<LoadingData>{tl(trans.waiting_for_images)}</LoadingData>
+					{collage_dom}
+				</>,
 			);
 
 			music_grids(grid, false);
@@ -671,62 +659,70 @@ export function collage({ host, sidebar } = {}) {
 				canvas: initial_canvas,
 				scale: cv_scale,
 				onclone: (doc) => {
-					doc.querySelectorAll('*').forEach((el) => {
-						el.style.setProperty(
-							'font-family',
-							'Hanken Grotesk, Funnel Sans, Inter, Ubuntu Sans, Spline Sans, Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Sans TC, Lucida Grande, Verdana, Tahoma, -apple-system, BlinkMacSystemFont, sans-serif',
-						);
-					});
+					try {
+						doc.querySelectorAll('*').forEach((el) => {
+							el.style.setProperty(
+								'font-family',
+								'Hanken Grotesk, Funnel Sans, Inter, Ubuntu Sans, Spline Sans, Roboto, Noto Sans, Noto Sans JP, Noto Sans KR, Noto Sans TC, Lucida Grande, Verdana, Tahoma, -apple-system, BlinkMacSystemFont, sans-serif',
+							);
+						});
+					} catch (e) {
+						console.error(e);
+					}
 				},
 			}).then((canvas) => {
 				canvas.toBlob((blob) => {
-					const blob_url = URL.createObjectURL(blob);
+					try {
+						const blob_url = URL.createObjectURL(blob);
 
-					const date = new Date();
+						const date = new Date();
 
-					const filename = tl(trans.chart_template_filename, {
-						timeframe: timeframe_text(timeframe.current.value),
-						user: page.name,
-						type: tl(trans[type.current.value]),
-						size: `${width.current.value}×${height.current.value}`,
-						brand: version.brand,
-						date: `${date.getFullYear()}-${
-							pad2(date.getMonth() + 1)
-						}-${pad2(date.getDate())}`,
-					});
+						const filename = tl(trans.chart_template_filename, {
+							timeframe: timeframe_text(timeframe.current.value),
+							user: page.name,
+							type: tl(trans[type.current.value]),
+							size:
+								`${width.current.value}×${height.current.value}`,
+							brand: version.brand,
+							date: `${date.getFullYear()}-${
+								pad2(date.getMonth() + 1)
+							}-${pad2(date.getDate())}`,
+						});
 
-					render(
-						body,
-						html`
-							<div class="collage-canvas">
-							    ${canvas}
-							    <div class="collage-canvas-actions">
-							        <button
-							            class="btn primary icon"
-							            data-type="download"
-							            onclick=${() =>
-								download(blob_url, filename)}
-							        >
-							            ${tl(trans.download)}
-							        </button>
-							        <button
-							            class="btn open"
-							            data-type="open"
-							            onclick=${() => open(blob_url)}
-							        >
-							            ${tl(trans.open)}
-							        </button>
-							    </div>
-							</div>
-						`,
-					);
+						body.current.replaceChildren(
+							<div class='collage-canvas'>
+								{canvas}
+								<div class='collage-canvas-actions'>
+									<Button
+										primary
+										onClick={() => {
+											download(blob_url, filename);
+										}}
+									>
+										<Icon name={icons.download} />
+										{tl(trans.download)}
+									</Button>
+									<Button
+										onClick={() => {
+											open(blob_url);
+										}}
+									>
+										{tl(trans.open)}
+										<Icon name={icons.external} />
+									</Button>
+								</div>
+							</div>,
+						);
+					} catch (e) {
+						collage_error(e);
+					}
 
 					type.current.disabled = false;
 					timeframe.current.disabled = false;
 					collage_settings.forEach((option) => {
 						option.setAttribute('disabled', false);
 					});
-					submit.current.disabled = false;
+					submit.current.loading = false;
 				}, 'image/png');
 			});
 		} catch (e) {

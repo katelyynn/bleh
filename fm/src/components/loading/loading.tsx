@@ -11,7 +11,7 @@ export function LoadingData({
 }: LoadingDataProps) {
 	return (
 		<div class='loading-data-container'>
-			<div class={['loading-data-text', type]}>
+			<div class={['loading-data-text', type != 'loading' && type]}>
 				{children}
 			</div>
 		</div>

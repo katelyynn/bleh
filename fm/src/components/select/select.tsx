@@ -9,14 +9,16 @@ import tippy, { Instance, Props } from 'tippy.js';
 
 export interface SelectOption {
 	value?: string;
-	text: ReactNode;
+	text: ReactNode | (() => ReactNode);
 	onSelect?: () => void;
 	type?: string;
 }
 
 interface SelectProps {
+	ref?: ReturnType<typeof createRef<HTMLDivElement>>;
 	values: SelectOption[];
 	value?: string;
+	disabled?: boolean;
 	className?: string;
 	name?: string;
 	onChange?: (val: string) => void;
@@ -25,11 +27,14 @@ interface SelectProps {
 
 type SelectElement = HTMLDivElement & {
 	value: string;
+	disabled: boolean;
 };
 
 export function Select({
+	ref,
 	values,
 	value,
+	disabled,
 	className,
 	name,
 	onChange,
@@ -41,7 +46,10 @@ export function Select({
 	const select = createRef();
 
 	const wrap = (
-		<div class={['select-wrap', 'custom-selector', className && className]}>
+		<div
+			class={['select-wrap', 'custom-selector', className && className]}
+			ref={ref}
+		>
 			<select name={name} ref={select} />
 			<button
 				type='button'
@@ -91,12 +99,28 @@ export function Select({
 		},
 	});
 
+	Object.defineProperty(wrap, 'disabled', {
+		get() {
+			return value;
+		},
+		set(val: boolean) {
+			disabled = val;
+			update();
+		},
+	});
+
 	function set(val: string) {
 		value = val;
 		update();
 	}
 
 	function update(initial = false) {
+		if (disabled) {
+			button.current.setAttribute('disabled', 'true');
+		} else {
+			button.current.removeAttribute('disabled');
+		}
+
 		select.current.replaceChildren(
 			<>
 				{values.map((val, i) => {
@@ -108,7 +132,7 @@ export function Select({
 							selected={val.value == value}
 							key={i}
 						>
-							{val.text}
+							{select_text(val.text)}
 						</option>
 					);
 				})}
@@ -121,7 +145,7 @@ export function Select({
 		const val = values.find((v) => v.value == value);
 		if (!val) return;
 
-		button.current.replaceChildren(val.text);
+		button.current.replaceChildren(select_text(val.text));
 
 		select.current.value = value;
 
@@ -150,7 +174,7 @@ export function Select({
 										}}
 										key={i}
 									>
-										{val.text}
+										{select_text(val.text)}
 									</button>
 								);
 							}
@@ -161,7 +185,7 @@ export function Select({
 
 							return (
 								<div class='select-header' key={i}>
-									{val.text}
+									{select_text(val.text)}
 								</div>
 							);
 						}
@@ -178,7 +202,7 @@ export function Select({
 								onClick={() => set(val.value!)}
 								key={i}
 							>
-								{val.text}
+								{select_text(val.text)}
 							</button>
 						);
 					})}
@@ -190,4 +214,12 @@ export function Select({
 	update(true);
 
 	return wrap;
+}
+
+function select_text(text: ReactNode | (() => ReactNode)) {
+	if (typeof text == 'function') {
+		return text();
+	}
+
+	return text;
 }
