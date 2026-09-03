@@ -98338,6 +98338,366 @@ var bleh = (() => {
     });
   }
 
+  // src/components/settings/clickables/radio.tsx
+  function Radio({ ref: ref2, name, value, className: className2, interact = true, checked = false }) {
+    const radio2 = createRef();
+    const elem = createRef();
+    function update() {
+      radio2.current.checked = checked;
+      elem.current.setAttribute("aria-checked", checked);
+    }
+    const wrap = /* @__PURE__ */ jsx("div", {
+      class: [
+        "radio-cont",
+        className2 && className2
+      ],
+      ref: ref2,
+      children: [
+        /* @__PURE__ */ jsx("input", {
+          type: "radio",
+          name,
+          value,
+          ref: radio2
+        }),
+        /* @__PURE__ */ jsx("button", {
+          type: "button",
+          class: [
+            "btn",
+            "radio",
+            !interact && "no-interact"
+          ],
+          ref: elem,
+          onClick: () => {
+            if (!interact) {
+              return;
+            }
+            checked = !checked;
+            update();
+          }
+        })
+      ]
+    });
+    update();
+    Object.defineProperty(wrap, "checked", {
+      get() {
+        return checked;
+      },
+      set(val) {
+        checked = val;
+        update();
+      }
+    });
+    return wrap;
+  }
+
+  // src/components/settings/provider/radio.tsx
+  function SettingRadio({ ref: ref2, bind, standalone = false, icon: icon2, name, body, value, values, onChange, disabled, onMouseEnter, onMouseLeave }) {
+    if (bind) value = useSettings.get(bind);
+    let buttons = [];
+    const uuid = crypto.randomUUID();
+    if (bind) {
+      useSettings.on(bind, (val, id) => {
+        if (id == uuid) return;
+        set2(val, true);
+      });
+    }
+    const reset = createRef();
+    const store = get_from_store(bind);
+    if (store) {
+      if (!icon2) icon2 = store.icon;
+      if (store.values) values = store.values;
+      if (store.incompatible) {
+        Object.entries(store.incompatible).forEach(([key]) => {
+          useSettings.on(key, () => {
+            update();
+          });
+        });
+      }
+    }
+    function update() {
+      disabled = false;
+      let incompatible = false;
+      let incompatible_list = {};
+      let incompatible_strings = [];
+      if (store) {
+        ({ incompatible, list: incompatible_list, list_strings: incompatible_strings } = is_incompatible(store));
+      }
+      if (incompatible) {
+        disabled = true;
+      }
+      if (disabled) {
+        elem.setAttribute("disabled", "true");
+      } else {
+        elem.removeAttribute("disabled");
+      }
+      buttons = [];
+      elem.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
+        children: [
+          icon2 && /* @__PURE__ */ jsx(SettingIcon, {
+            name: icon2
+          }),
+          /* @__PURE__ */ jsx(SettingLabel, {
+            name,
+            body,
+            store,
+            value,
+            setValue: (val) => {
+              set2(val);
+              update();
+            },
+            defaultValue: store?.default,
+            ref: reset
+          }),
+          /* @__PURE__ */ jsx("div", {
+            class: "primary-selections",
+            children: Object.entries(values).map(([key, val], i3) => {
+              const elem2 = /* @__PURE__ */ jsx(RadioItem, {
+                id: bind || "",
+                value: key,
+                name: tl2(val.name),
+                onChange: set2
+              }, i3);
+              buttons.push(elem2);
+              return elem2;
+            })
+          }),
+          Object.keys(incompatible_list).length > 0 && /* @__PURE__ */ jsx(SettingIncompatibleWith, {
+            list: incompatible_list,
+            strings: incompatible_strings
+          })
+        ]
+      }));
+      buttons.forEach((elem2) => {
+        elem2.checked = elem2.value == value;
+      });
+    }
+    const elem = /* @__PURE__ */ jsx("div", {
+      class: [
+        "setting",
+        standalone && "standalone"
+      ],
+      "data-type": "options",
+      id: `setting_${bind}`,
+      onMouseEnter,
+      onMouseLeave,
+      ref: ref2
+    });
+    update();
+    function set2(val, received = false) {
+      if (value == val) return;
+      value = val;
+      reset.current.value = val;
+      if (bind) {
+        if (!received) useSettings.set(bind, val, uuid);
+      } else {
+        if (onChange) onChange(val);
+      }
+      buttons.forEach((elem2) => {
+        elem2.checked = elem2.value == val;
+      });
+      if (onMouseEnter) onMouseEnter();
+    }
+    Object.defineProperty(elem, "value", {
+      get() {
+        return value;
+      },
+      set(val) {
+        set2(val);
+      }
+    });
+    elem.update = update;
+    return elem;
+  }
+  function RadioItem({ id, value, name, checked, onChange }) {
+    const radio2 = createRef();
+    function update() {
+      radio2.current.checked = checked;
+    }
+    const wrap = /* @__PURE__ */ jsx("div", {
+      class: [
+        "setting",
+        "standalone"
+      ],
+      "data-type": "radio",
+      onClick: () => {
+        onChange(value);
+      },
+      children: [
+        /* @__PURE__ */ jsx(Radio, {
+          name: id,
+          value,
+          ref: radio2,
+          className: "setting-inner",
+          interact: false
+        }),
+        /* @__PURE__ */ jsx(SettingLabel, {
+          name
+        })
+      ]
+    });
+    update();
+    Object.defineProperty(wrap, "checked", {
+      get() {
+        return checked;
+      },
+      set(val) {
+        checked = val;
+        update();
+      }
+    });
+    Object.defineProperty(wrap, "value", {
+      get() {
+        return value;
+      }
+    });
+    return wrap;
+  }
+
+  // src/pages/profile/tracks.tsx
+  function profile_tracks() {
+    const panel = page.structure.main.querySelector("#top-tracks");
+    if (!panel) return;
+    panel.classList.remove("section-with-settings");
+    const form = panel.querySelector("#track-chart-settings");
+    const list = panel.querySelector("#tracks_range");
+    const collage_btn = createRef();
+    const settings_btn = createRef();
+    const select_btn = panel.querySelector(".dropdown-menu-clickable-button");
+    if (select_btn) {
+      select_btn.classList.add("select-button", "link-select", "blend-v2-btn");
+      select_btn.classList.remove("section-control", "dropdown-menu-clickable-button");
+    }
+    const head = panel.querySelector(":scope > h2");
+    if (head) head.remove();
+    panel.insertBefore(/* @__PURE__ */ jsx(PanelTop, {
+      children: [
+        /* @__PURE__ */ jsx(PanelHead, {
+          icon: icons.tracks,
+          children: tl2(trans.tracks)
+        }),
+        /* @__PURE__ */ jsx(ViewButtons, {
+          accompany: true,
+          children: select_btn
+        }),
+        /* @__PURE__ */ jsx(ViewButtons, {
+          children: [
+            /* @__PURE__ */ jsx(SeeMore, {
+              blend: true,
+              iconPlacement: "left",
+              icon: icons.collage,
+              ref: collage_btn,
+              onClick: () => {
+                const btn = list.querySelector(".dropdown-menu-clickable-item--selected");
+                if (!btn) return;
+                const link = new URL("https://www.last.fm" + btn.getAttribute("href"));
+                const selected = link.searchParams.get("tracks_date_preset");
+                window.location.href = `${root}bleh/minis/collage?type=tracks&timeframe=date_preset=${selected}`;
+              },
+              children: tl2(trans.collage)
+            }),
+            /* @__PURE__ */ jsx(SeeMore, {
+              blend: true,
+              iconPlacement: "left",
+              icon: icons.settings,
+              ref: settings_btn,
+              children: tl2(trans.settings)
+            })
+          ]
+        })
+      ]
+    }), panel.firstElementChild);
+    let pages = {
+      visual: {
+        icon: icons.visual,
+        label: tl2(trans.visual),
+        content: () => /* @__PURE__ */ jsx(Fragment, {
+          children: [
+            /* @__PURE__ */ jsx(SettingGroup, {
+              minWidth: true,
+              children: [
+                /* @__PURE__ */ jsx(SettingSwitch, {
+                  bind: "format_guest_features"
+                }),
+                /* @__PURE__ */ jsx(SettingSwitch, {
+                  bind: "show_guest_features"
+                }),
+                /* @__PURE__ */ jsx(SettingRadio, {
+                  bind: "count_bar_style"
+                }),
+                /* @__PURE__ */ jsx(SettingRadio, {
+                  bind: "count_bar_axis"
+                })
+              ]
+            }),
+            /* @__PURE__ */ jsx(CardTip, {
+              children: tl2(trans.bleh_settings_notice)
+            })
+          ]
+        })
+      }
+    };
+    if (form) {
+      if (page.token == "") {
+        page.token = get_token(form);
+      }
+      const timeframe = form.querySelector('[name="chart_range_top_tracks"]');
+      const chartlist_length = form.querySelector('[name="chart_length_top_tracks"]');
+      form.classList = "";
+      form.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
+        children: [
+          /* @__PURE__ */ jsx(Token, {
+            value: page.token
+          }),
+          /* @__PURE__ */ jsx(SettingGroup, {
+            minWidth: true,
+            children: [
+              /* @__PURE__ */ jsx(SettingSelect, {
+                name: tl2(trans.default_timeframe),
+                values: select_prepare(timeframe),
+                value: timeframe.value,
+                id: timeframe.name
+              }),
+              /* @__PURE__ */ jsx(SettingSelect, {
+                name: tl2(trans.chart_size),
+                values: select_prepare(chartlist_length),
+                value: chartlist_length.value,
+                id: chartlist_length.name
+              })
+            ]
+          }),
+          /* @__PURE__ */ jsx(SettingsFooter, {
+            gap: true,
+            children: /* @__PURE__ */ jsx(Button, {
+              primary: true,
+              type: "submit",
+              children: [
+                /* @__PURE__ */ jsx(SaveIcon, {}),
+                tl2(trans.save)
+              ]
+            })
+          })
+        ]
+      }));
+      pages = {
+        behaviour: {
+          icon: icons.global,
+          label: tl2(trans.behaviour),
+          content: form
+        },
+        ...pages
+      };
+      form.remove();
+    }
+    menu_tooltip(settings_btn.current, /* @__PURE__ */ jsx(FloatingWindow, {
+      children: /* @__PURE__ */ jsx(FloatingWindowContents, {
+        children: /* @__PURE__ */ jsx(Tabbed, {
+          pages
+        })
+      })
+    }));
+    return panel;
+  }
+
   // src/pages/profile/profile.tsx
   function bleh_profiles() {
     if (page.subpage == "obsessions_obsession") {
@@ -99162,117 +99522,6 @@ var bleh = (() => {
 			            ${tl2(trans.save)}
 			        </button>
 				</div>
-			</div>
-		`);
-    tooltip = tippy_esm_default(settings_btn, {
-      theme: "window",
-      content: form,
-      placement: "bottom",
-      interactive: true,
-      interactiveBorder: 10,
-      trigger: "click",
-      appendTo: document.body,
-      hideOnClick: "toggle",
-      onClickOutside(instance) {
-        if (instance.popper.querySelector('[aria-expanded="true"]')) {
-          return;
-        }
-        instance.hide();
-      }
-    });
-  }
-  function profile_tracks() {
-    const panel = page.structure.main.querySelector("#top-tracks");
-    if (!panel) return;
-    panel.classList.remove("section-with-settings");
-    const form = panel.querySelector("#track-chart-settings");
-    const list = panel.querySelector("#tracks_range");
-    let collage_btn;
-    const select_btn = panel.querySelector(".dropdown-menu-clickable-button");
-    let settings_btn;
-    const head = panel.querySelector(":scope > h2");
-    if (head) head.remove();
-    panel.insertBefore(html.node`
-        <div class="top-container">
-            <h2>
-                ${tl2(trans.tracks)}
-            </h2>
-            <div class="accompany view-buttons blend blend-v2">
-                ${() => {
-      select_btn.classList.add("select-button", "link-select", "blend-v2-btn");
-      select_btn.classList.remove("section-control", "dropdown-menu-clickable-button");
-      return select_btn;
-    }}
-            </div>
-            <div class="view-buttons blend blend-v2">
-                <button class="left-icon blend-v2-btn" data-type="collage" ref=${(el) => collage_btn = el} onclick=${() => {
-      let btn = list.querySelector(".dropdown-menu-clickable-item--selected");
-      let link = new URL("https://www.last.fm" + btn.getAttribute("href"));
-      let selected = link.searchParams.get("tracks_date_preset");
-      window.location.href = `${root}bleh/minis/collage?type=tracks&timeframe=date_preset=${selected}`;
-    }}>${tl2(trans.collage)}</button>
-                ${form ? html.node`
-                <button class="left-icon blend-v2-btn" data-type="settings" ref=${(el) => settings_btn = el}>
-                    ${tl2(trans.settings)}
-                </button>
-                ` : ""}
-            </div>
-        </div>
-    `, panel.firstElementChild);
-    if (!form) return;
-    if (page.token == "") {
-      page.token = form.querySelector('[name="csrfmiddlewaretoken"]').getAttribute("value");
-    }
-    const timeframe = form.querySelector('[name="chart_range_top_tracks"]');
-    const chartlist_length = form.querySelector('[name="chart_length_top_tracks"]');
-    let tooltip;
-    form.classList = "";
-    render(form, html`
-			<input
-				type="hidden"
-				name="csrfmiddlewaretoken"
-				value="${page.token}"
-			/>
-			<div class="setting-group blend">
-			    <div class="setting" data-type="select">
-			        <div class="heading">
-			            <h5>${tl2(trans.default_timeframe)}</h5>
-			        </div>
-			        ${select({
-      values: select_prepare(timeframe),
-      initial: timeframe.value,
-      name: timeframe.name,
-      in_settings: true
-    })}
-			    </div>
-			    <div class="setting hide-if-track-grid" data-type="select">
-			        <div class="heading">
-			            <h5>${tl2(trans.chart_size)}</h5>
-			        </div>
-			        ${select({
-      values: select_prepare(chartlist_length),
-      initial: chartlist_length.value,
-      name: chartlist_length.name,
-      in_settings: true
-    })}
-			    </div>
-			    <div class="sep" />
-			    ${setting({
-      id: "format_guest_features"
-    })}
-			    ${setting({
-      id: "show_guest_features"
-    })}
-			    ${setting({
-      id: "count_bar_axis"
-    })}
-			    <div class="settings-footer">
-			        <button type="submit" class="btn-primary save" onclick=${() => {
-      tooltip.hide();
-    }}>
-			            ${tl2(trans.save)}
-			        </button>
-			    </div>
 			</div>
 		`);
     tooltip = tippy_esm_default(settings_btn, {
@@ -104718,221 +104967,6 @@ var bleh = (() => {
     return /* @__PURE__ */ jsx("div", {
       class: "primary-selection-sep"
     });
-  }
-
-  // src/components/settings/clickables/radio.tsx
-  function Radio({ ref: ref2, name, value, className: className2, interact = true, checked = false }) {
-    const radio2 = createRef();
-    const elem = createRef();
-    function update() {
-      radio2.current.checked = checked;
-      elem.current.setAttribute("aria-checked", checked);
-    }
-    const wrap = /* @__PURE__ */ jsx("div", {
-      class: [
-        "radio-cont",
-        className2 && className2
-      ],
-      ref: ref2,
-      children: [
-        /* @__PURE__ */ jsx("input", {
-          type: "radio",
-          name,
-          value,
-          ref: radio2
-        }),
-        /* @__PURE__ */ jsx("button", {
-          type: "button",
-          class: [
-            "btn",
-            "radio",
-            !interact && "no-interact"
-          ],
-          ref: elem,
-          onClick: () => {
-            if (!interact) {
-              return;
-            }
-            checked = !checked;
-            update();
-          }
-        })
-      ]
-    });
-    update();
-    Object.defineProperty(wrap, "checked", {
-      get() {
-        return checked;
-      },
-      set(val) {
-        checked = val;
-        update();
-      }
-    });
-    return wrap;
-  }
-
-  // src/components/settings/provider/radio.tsx
-  function SettingRadio({ ref: ref2, bind, standalone = false, icon: icon2, name, body, value, values, onChange, disabled, onMouseEnter, onMouseLeave }) {
-    if (bind) value = useSettings.get(bind);
-    let buttons = [];
-    const uuid = crypto.randomUUID();
-    if (bind) {
-      useSettings.on(bind, (val, id) => {
-        if (id == uuid) return;
-        set2(val, true);
-      });
-    }
-    const reset = createRef();
-    const store = get_from_store(bind);
-    if (store) {
-      if (!icon2) icon2 = store.icon;
-      if (store.values) values = store.values;
-      if (store.incompatible) {
-        Object.entries(store.incompatible).forEach(([key]) => {
-          useSettings.on(key, () => {
-            update();
-          });
-        });
-      }
-    }
-    function update() {
-      disabled = false;
-      let incompatible = false;
-      let incompatible_list = {};
-      let incompatible_strings = [];
-      if (store) {
-        ({ incompatible, list: incompatible_list, list_strings: incompatible_strings } = is_incompatible(store));
-      }
-      if (incompatible) {
-        disabled = true;
-      }
-      if (disabled) {
-        elem.setAttribute("disabled", "true");
-      } else {
-        elem.removeAttribute("disabled");
-      }
-      buttons = [];
-      elem.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
-        children: [
-          icon2 && /* @__PURE__ */ jsx(SettingIcon, {
-            name: icon2
-          }),
-          /* @__PURE__ */ jsx(SettingLabel, {
-            name,
-            body,
-            store,
-            value,
-            setValue: (val) => {
-              set2(val);
-              update();
-            },
-            defaultValue: store?.default,
-            ref: reset
-          }),
-          /* @__PURE__ */ jsx("div", {
-            class: "primary-selections",
-            children: Object.entries(values).map(([key, val], i3) => {
-              const elem2 = /* @__PURE__ */ jsx(RadioItem, {
-                id: bind || "",
-                value: key,
-                name: tl2(val.name),
-                onChange: set2
-              }, i3);
-              buttons.push(elem2);
-              return elem2;
-            })
-          }),
-          Object.keys(incompatible_list).length > 0 && /* @__PURE__ */ jsx(SettingIncompatibleWith, {
-            list: incompatible_list,
-            strings: incompatible_strings
-          })
-        ]
-      }));
-      buttons.forEach((elem2) => {
-        elem2.checked = elem2.value == value;
-      });
-    }
-    const elem = /* @__PURE__ */ jsx("div", {
-      class: [
-        "setting",
-        standalone && "standalone"
-      ],
-      "data-type": "options",
-      id: `setting_${bind}`,
-      onMouseEnter,
-      onMouseLeave,
-      ref: ref2
-    });
-    update();
-    function set2(val, received = false) {
-      if (value == val) return;
-      value = val;
-      reset.current.value = val;
-      if (bind) {
-        if (!received) useSettings.set(bind, val, uuid);
-      } else {
-        if (onChange) onChange(val);
-      }
-      buttons.forEach((elem2) => {
-        elem2.checked = elem2.value == val;
-      });
-      if (onMouseEnter) onMouseEnter();
-    }
-    Object.defineProperty(elem, "value", {
-      get() {
-        return value;
-      },
-      set(val) {
-        set2(val);
-      }
-    });
-    elem.update = update;
-    return elem;
-  }
-  function RadioItem({ id, value, name, checked, onChange }) {
-    const radio2 = createRef();
-    function update() {
-      radio2.current.checked = checked;
-    }
-    const wrap = /* @__PURE__ */ jsx("div", {
-      class: [
-        "setting",
-        "standalone"
-      ],
-      "data-type": "radio",
-      onClick: () => {
-        onChange(value);
-      },
-      children: [
-        /* @__PURE__ */ jsx(Radio, {
-          name: id,
-          value,
-          ref: radio2,
-          className: "setting-inner",
-          interact: false
-        }),
-        /* @__PURE__ */ jsx(SettingLabel, {
-          name
-        })
-      ]
-    });
-    update();
-    Object.defineProperty(wrap, "checked", {
-      get() {
-        return checked;
-      },
-      set(val) {
-        checked = val;
-        update();
-      }
-    });
-    Object.defineProperty(wrap, "value", {
-      get() {
-        return value;
-      }
-    });
-    return wrap;
   }
 
   // src/pages/bleh_settings/visual.tsx
@@ -124386,7 +124420,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-09-03T18:51:36.231Z"
+    built_on: "2026-09-03T21:07:29.690Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
