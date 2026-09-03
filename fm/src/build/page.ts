@@ -228,6 +228,11 @@ interface page {
 		};
 		error: boolean;
 		on_tour?: boolean;
+		follows_user?: boolean;
+		scrobbles?: number;
+		average?: string;
+		artists?: number;
+		loved?: number;
 	};
 	previous?: {
 		type: string;

@@ -10,6 +10,7 @@ interface PageHeaderProps {
 	name?: ReactNode;
 	avatar?: ReactNode;
 	children?: ReactNode;
+	extra?: ReactNode;
 }
 
 export function PageHeader({
@@ -18,6 +19,7 @@ export function PageHeader({
 	name,
 	avatar,
 	children,
+	extra,
 }: PageHeaderProps) {
 	const generic = !!avatar;
 	const label = tl(trans[type]);
@@ -56,6 +58,7 @@ export function PageHeader({
 							</h1>
 						)}
 				</div>
+				{extra}
 			</div>
 		</section>
 	);

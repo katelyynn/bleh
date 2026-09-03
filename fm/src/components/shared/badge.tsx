@@ -7,18 +7,16 @@
 import { log } from '@/build/log';
 import { sponsor_list } from '@/build/sponsor';
 import { lang_info, tl, trans } from '@/build/trans';
-import { html } from 'lighterhtml';
-import tippy from 'tippy.js';
 import { page } from '@/build/page';
-import { style_name_from_badge } from './avatar';
 import { flag_url } from './flag';
 import { present_badge } from '../dialog/badge';
 import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
+import { badge } from '@/types/badge.ts';
 
-export function load_badges(user, solo = false) {
-	if (!sponsor_list.version) return;
+export function load_badges(user: string, solo = false): badge[] {
+	if (!sponsor_list.version) return [];
 
-	let badges = [];
+	let badges: Partial<badge>[] = [];
 
 	// create modern translation badges
 	const trans_contributions = get_trans_contributions(user);
@@ -74,17 +72,17 @@ export function load_badges(user, solo = false) {
 	// now we run thru to add missing metadata
 	badges.forEach((badge) => {
 		if (entry && entry.sponsor && !badge.type) badge.type = 'sponsor';
-		badge = process_badge(badge, user);
+		badge = process_badge(badge, user) as badge;
 	});
 
 	log(`final badge list for @${user}`, 'sponsor', 'info', { badges });
 
-	if (solo) return badges[badges.length - 1];
+	if (solo) return badges[badges.length - 1] as badge[];
 
-	return badges;
+	return badges as badge[];
 }
 
-export function get_amount_of_badge(badge) {
+export function get_amount_of_badge(badge: badge) {
 	const users = {};
 
 	for (const user in sponsor_list.users) {
@@ -115,8 +113,8 @@ function get_trans_contributions(user) {
 		}));
 }
 
-export function process_badge(badge, user) {
-	const translation = trans.badges[badge.type];
+export function process_badge(badge: badge, user: string) {
+	const translation = trans.badges[badge.type!];
 
 	badge.user = user;
 
@@ -169,8 +167,6 @@ export function create_badge(
 		long,
 		small,
 	});
-
-	const classlist = on_avatar ? 'avatar-status-dot' : 'label no-hover';
 
 	const elem = (
 		<span

@@ -128,17 +128,17 @@ export async function present_badge(badge: badge) {
 
 	if (
 		badge.icon != '' &&
-		badge.hue > -1 &&
-		badge.sat > -1 &&
-		badge.lit > -1
+		badge.hue! > -1 &&
+		badge.sat! > -1 &&
+		badge.lit! > -1
 	) {
 		// new style badge
 		elem.style.setProperty('--mask', `url(${badge.icon})`);
-		elem.style.setProperty('--hue-over', badge.hue);
-		elem.style.setProperty('--sat-over', badge.sat);
-		elem.style.setProperty('--lit-over', badge.lit);
+		elem.style.setProperty('--hue-over', String(badge.hue));
+		elem.style.setProperty('--sat-over', String(badge.sat));
+		elem.style.setProperty('--lit-over', String(badge.lit));
 	} else if (badge.inbuilt) {
-		elem.classList.add(badge.type);
+		elem.classList.add(badge.type!);
 	} else {
 		elem.classList.add(
 			`user-status--bleh-${badge.type}`,

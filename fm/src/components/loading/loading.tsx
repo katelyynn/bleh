@@ -1,7 +1,7 @@
 import { ReactNode } from 'jsx-dom';
 
 interface LoadingDataProps {
-	type?: 'loading' | 'failed';
+	type?: 'loading' | 'failed' | 'private';
 	children: ReactNode;
 }
 

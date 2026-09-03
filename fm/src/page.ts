@@ -906,7 +906,7 @@ export function update_page() {
 	page.structure.row?.setAttribute('data-lacrimosa', ff('lacrimosa'));
 }
 
-export async function register_background(url: string | null, origin = null) {
+export async function register_background(url: string | null, origin?: string) {
 	if (url && url.endsWith('c6f59c1e5e7240a4c0d427abd71f3dbb.jpg')) url = '';
 
 	register_banner(url, origin);

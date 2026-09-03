@@ -98075,6 +98075,72 @@ var bleh = (() => {
     });
   }
 
+  // src/components/text/sub.tsx
+  function SubText({ children }) {
+    return /* @__PURE__ */ jsx("label", {
+      class: "sub-text",
+      children
+    });
+  }
+
+  // src/components/page/header.tsx
+  function PageHeader({ type, combined, name, avatar: avatar3, children, extra }) {
+    const generic = !!avatar3;
+    const label = tl2(trans[type]);
+    return /* @__PURE__ */ jsx("section", {
+      class: [
+        "page-header",
+        `for-${type}`
+      ],
+      children: [
+        avatar3 && /* @__PURE__ */ jsx("div", {
+          class: "page-header-avatar-list",
+          children: avatar3
+        }),
+        /* @__PURE__ */ jsx("div", {
+          class: [
+            "page-header-info",
+            "has-main-info"
+          ],
+          children: [
+            /* @__PURE__ */ jsx("div", {
+              class: "main-info",
+              children: [
+                !combined ? /* @__PURE__ */ jsx(SubText, {
+                  children: label
+                }) : /* @__PURE__ */ jsx(SubText, {
+                  children: [
+                    tl2(trans.artists),
+                    /* @__PURE__ */ jsx(InfoTip, {
+                      children: tl2(trans.artists_tooltip)
+                    })
+                  ]
+                }),
+                generic ? /* @__PURE__ */ jsx(Fragment, {
+                  children
+                }) : /* @__PURE__ */ jsx("h1", {
+                  class: [
+                    "page-header-title",
+                    "generic-page-title"
+                  ],
+                  children: name
+                })
+              ]
+            }),
+            extra
+          ]
+        })
+      ]
+    });
+  }
+  function PageHeaderTitle({ combined, children }) {
+    return /* @__PURE__ */ jsx("div", {
+      class: "title-container",
+      "data-multi": String(combined),
+      children
+    });
+  }
+
   // src/pages/profile/profile.tsx
   function bleh_profiles() {
     if (page.subpage == "obsessions_obsession") {
@@ -98192,15 +98258,18 @@ var bleh = (() => {
         }
         const trans_instance = trans.badges[type];
         if (trans_instance && trans_instance.name) {
-          badge.textContent = tl2(trans_instance.name);
+          badge.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
+            children: tl2(trans_instance.name)
+          }));
         }
         hover_tooltip(badge, /* @__PURE__ */ jsx(Tooltip, {
-          children: tl2(trans.badges[type].reason)
+          children: tl2(trans_instance.reason)
         }));
+        badge.removeAttribute("href");
         badge.addEventListener("click", () => {
           present_badge({
             name: tl2(trans_instance.name),
-            reason: tl2(trans.badges[type].reason),
+            reason: tl2(trans_instance.reason),
             user: page.name,
             type,
             inbuilt: true
@@ -98215,9 +98284,13 @@ var bleh = (() => {
       });
     }
     const badge_elements = Array.from(title_wrap.querySelectorAll(".label"));
-    profile_name = html.node`
-        <h1 class="page-header-title profile-name">${cache2.username || profile_name.textContent}</h1>
-    `;
+    profile_name = /* @__PURE__ */ jsx("h1", {
+      class: [
+        "page-header-title",
+        "profile-name"
+      ],
+      children: cache2.username || profile_name.textContent
+    });
     if (ff("profile_fonts") && settings.display_name_styles) {
       profile_name.setAttribute("data-font", cache2.font);
       profile_name.setAttribute("data-font-style", cache2.font_style);
@@ -98235,33 +98308,28 @@ var bleh = (() => {
       cache2.avatar = src;
       page.avatar = src;
     }
-    let page_avatar;
-    const same_page = is_same_page();
-    const redesigned_profile_header = html.node`
-        <section class="page-header for-profile ${same_page ? "same" : ""}">
-            <div class="page-header-avatar-list">
-                ${!new_account ? page_avatar = page_header_avatar(profile_avatar.src) : profile_avatar}
-            </div>
-            <div class="page-header-info has-main-info">
-                <div class="main-info">
-                    <div class="sub-text">${tl2(trans.profile)}</div>
-                    <div class="title-container">${profile_name}</div>
-                </div>
-                ${sub_wrap ? sub_wrap : cache2.created ? () => {
-      const elem = html.node`
-                        <p class="header-title-secondary" />
-                    `;
-      render_sub_text(elem, cache2.aka, cache2.created, cache2.username);
-      return elem;
-    } : ""}
-                ${badge_elements.length > 0 ? html.node`
-                <div class="badges profile-badges">
-                    ${badge_elements.map((badge) => badge)}
-                </div>
-                ` : ""}
-            </div>
-        </section>
-    `;
+    const page_avatar = page_header_avatar(profile_avatar.src);
+    const redesigned_profile_header = /* @__PURE__ */ jsx(PageHeader, {
+      type: "profile",
+      avatar: !new_account ? page_avatar : profile_avatar,
+      extra: /* @__PURE__ */ jsx(Fragment, {
+        children: [
+          sub_wrap ? sub_wrap : cache2.created && render_sub_text(/* @__PURE__ */ jsx("p", {
+            class: "header-title-secondary"
+          }), cache2.aka, cache2.created, cache2.username),
+          badge_elements.length > 0 && /* @__PURE__ */ jsx("div", {
+            class: [
+              "badges",
+              "profile-badges"
+            ],
+            children: badge_elements.map((badge) => badge)
+          })
+        ]
+      }),
+      children: /* @__PURE__ */ jsx(PageHeaderTitle, {
+        children: profile_name
+      })
+    });
     if (page.name == auth.name && !settings.profile_header_own) {
       register_background(null, "hidden");
     } else if (page.name != auth.name && !settings.profile_header_others) {
@@ -98274,7 +98342,7 @@ var bleh = (() => {
           register_background(avatar(page.avatar, "ar0"));
         } else register_background(null, "none");
       } else {
-        let background = document.body.querySelector(".header-background--has-image");
+        const background = document.body.querySelector(".header-background--has-image");
         if (background) {
           register_background(background.style.backgroundImage.replace('url("', "").replace('")', ""), "artist");
         } else register_background(null, "none");
@@ -98287,10 +98355,10 @@ var bleh = (() => {
     }
     page.structure.container.insertBefore(redesigned_profile_header, page.structure.container.firstElementChild);
     profile_header.classList.add("legacy-header");
-    const library_tab = page.structure.nav.querySelector(".secondary-nav-item--library a");
+    const library_tab = page.structure.nav.querySelector(".secondary-nav-item--library > a");
     library_tab.textContent = tl2(trans.library);
     const is_own_profile = page.name == auth.name;
-    const loved_tab = page.structure.nav.querySelector(".secondary-nav-item--loved a");
+    const loved_tab = page.structure.nav.querySelector(".secondary-nav-item--loved > a");
     if (loved_tab) loved_tab.textContent = tl2(trans.loved);
     if (!is_subpage) {
       const is_following = page.state.follows_user;
@@ -98311,18 +98379,19 @@ var bleh = (() => {
       if (!recent_tracks) {
         recent_tracks = page.structure.main.querySelector(".no-data-message");
         if (recent_tracks) {
-          const elem = html.node`
-                    <section class="recent-tracks-section">
-                        <h2>
-                            <a class="text-colour-link" href="${window.location.href}/library">${tl2(trans.recents)}</a>
-                        </h2>
-                        <div class="loading-data-container">
-                            <div class="loading-data-text private">
-                                ${recent_tracks.textContent}
-                            </div>
-                        </div>
-                    </section>
-                `;
+          const elem = /* @__PURE__ */ jsx("section", {
+            class: "recent-tracks-section",
+            children: [
+              /* @__PURE__ */ jsx(PanelHead, {
+                icon: icons.recent,
+                children: tl2(trans.recents)
+              }),
+              /* @__PURE__ */ jsx(LoadingData, {
+                type: "private",
+                children: recent_tracks.textContent
+              })
+            ]
+          });
           recent_tracks.replaceWith(elem);
           recent_tracks = elem;
         }
@@ -98355,7 +98424,7 @@ var bleh = (() => {
         }));
       }
       let scrobbles = 0;
-      let average2 = 0;
+      let average2 = "";
       let artists = 0;
       let loved = 0;
       const metadata = profile_header.querySelectorAll(".header-metadata-display");
@@ -99654,9 +99723,9 @@ var bleh = (() => {
     });
     if (badge.icon != "" && badge.hue > -1 && badge.sat > -1 && badge.lit > -1) {
       elem.style.setProperty("--mask", `url(${badge.icon})`);
-      elem.style.setProperty("--hue-over", badge.hue);
-      elem.style.setProperty("--sat-over", badge.sat);
-      elem.style.setProperty("--lit-over", badge.lit);
+      elem.style.setProperty("--hue-over", String(badge.hue));
+      elem.style.setProperty("--sat-over", String(badge.sat));
+      elem.style.setProperty("--lit-over", String(badge.lit));
     } else if (badge.inbuilt) {
       elem.classList.add(badge.type);
     } else {
@@ -99684,7 +99753,7 @@ var bleh = (() => {
 
   // src/components/shared/badge.tsx
   function load_badges(user, solo = false) {
-    if (!sponsor_list.version) return;
+    if (!sponsor_list.version) return [];
     let badges = [];
     const trans_contributions = get_trans_contributions(user);
     log(`found ${trans_contributions.length} contribution(s) for ${user}`, "sponsor", "info", {
@@ -99790,7 +99859,6 @@ var bleh = (() => {
       long,
       small
     });
-    const classlist = on_avatar ? "avatar-status-dot" : "label no-hover";
     const elem = /* @__PURE__ */ jsx("span", {
       class: [
         on_avatar ? "avatar-status-dot" : "label no-hover",
@@ -105403,14 +105471,6 @@ var bleh = (() => {
         style: style2
       });
       style2.remove();
-    });
-  }
-
-  // src/components/text/sub.tsx
-  function SubText({ children }) {
-    return /* @__PURE__ */ jsx("label", {
-      class: "sub-text",
-      children
     });
   }
 
@@ -114891,61 +114951,6 @@ var bleh = (() => {
     });
   }
 
-  // src/components/page/header.tsx
-  function PageHeader({ type, combined, name, avatar: avatar3, children }) {
-    const generic = !!avatar3;
-    const label = tl2(trans[type]);
-    return /* @__PURE__ */ jsx("section", {
-      class: [
-        "page-header",
-        `for-${type}`
-      ],
-      children: [
-        avatar3 && /* @__PURE__ */ jsx("div", {
-          class: "page-header-avatar-list",
-          children: avatar3
-        }),
-        /* @__PURE__ */ jsx("div", {
-          class: [
-            "page-header-info",
-            "has-main-info"
-          ],
-          children: /* @__PURE__ */ jsx("div", {
-            class: "main-info",
-            children: [
-              !combined ? /* @__PURE__ */ jsx(SubText, {
-                children: label
-              }) : /* @__PURE__ */ jsx(SubText, {
-                children: [
-                  tl2(trans.artists),
-                  /* @__PURE__ */ jsx(InfoTip, {
-                    children: tl2(trans.artists_tooltip)
-                  })
-                ]
-              }),
-              generic ? /* @__PURE__ */ jsx(Fragment, {
-                children
-              }) : /* @__PURE__ */ jsx("h1", {
-                class: [
-                  "page-header-title",
-                  "generic-page-title"
-                ],
-                children: name
-              })
-            ]
-          })
-        })
-      ]
-    });
-  }
-  function PageHeaderTitle({ combined, children }) {
-    return /* @__PURE__ */ jsx("div", {
-      class: "title-container",
-      "data-multi": String(combined),
-      children
-    });
-  }
-
   // src/components/album/top_album.tsx
   function TopAlbum({ image: image2, name, artist, listeners, date, tracks, href }) {
     const elem = /* @__PURE__ */ jsx("li", {
@@ -123711,7 +123716,7 @@ var bleh = (() => {
     page.structure.container.setAttribute("data-lacrimosa", ff("lacrimosa"));
     page.structure.row?.setAttribute("data-lacrimosa", ff("lacrimosa"));
   }
-  async function register_background(url, origin = null) {
+  async function register_background(url, origin) {
     if (url && url.endsWith("c6f59c1e5e7240a4c0d427abd71f3dbb.jpg")) url = "";
     register_banner(url, origin);
     log(`requested register of ${url} from ${origin}`, "background", "log");
@@ -124242,7 +124247,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-09-02T23:31:44.806Z"
+    built_on: "2026-09-03T15:19:16.184Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

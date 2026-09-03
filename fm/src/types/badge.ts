@@ -4,10 +4,12 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { ReactNode } from 'jsx-dom';
+
 export interface badge {
 	user: string;
-	name: string;
-	reason: string;
+	name: ReactNode;
+	reason: ReactNode;
 	type?: string;
 	hue?: number;
 	sat?: number;

@@ -68,7 +68,7 @@ import {
 	SeeMoreContainer,
 	ViewButtons,
 } from '@/components/text/see_more.tsx';
-import { createRef, ReactElement } from 'jsx-dom';
+import { createRef, ReactElement, ReactNode } from 'jsx-dom';
 import {
 	hover_tooltip,
 	menu_tooltip,
@@ -97,6 +97,8 @@ import {
 	get_profile_streak,
 	ProfileStreak,
 } from '@/components/profile/streak.tsx';
+import { PageHeader, PageHeaderTitle } from '@/components/page/header.tsx';
+import { LoadingData } from '@/components/loading/loading.tsx';
 
 export function bleh_profiles() {
 	// the obsessions page is a user subpage but works very differently
@@ -114,7 +116,7 @@ export function bleh_profiles() {
 	const profile_header = document.body.querySelector('.header--user');
 	if (!profile_header) return;
 
-	let profile_name = profile_header.querySelector('.header-title > a');
+	let profile_name = profile_header.querySelector('.header-title > a')!;
 	page.name = profile_name.textContent;
 
 	// are we on the overview page?
@@ -246,7 +248,9 @@ export function bleh_profiles() {
 	}
 
 	let profile_avatar = profile_header.querySelector('.avatar > img');
-	const title_wrap = profile_header.querySelector('.header-title-label-wrap');
+	const title_wrap = profile_header.querySelector(
+		'.header-title-label-wrap',
+	)!;
 	const sub_wrap = profile_header.querySelector('.header-title-secondary');
 
 	// badges
@@ -275,12 +279,16 @@ export function bleh_profiles() {
 			const trans_instance = trans.badges[type];
 
 			if (trans_instance && trans_instance.name) {
-				badge.textContent = tl(trans_instance.name);
+				badge.replaceChildren(
+					<>
+						{tl(trans_instance.name)}
+					</>,
+				);
 			}
 
 			hover_tooltip(
-				badge,
-				<Tooltip>{tl(trans.badges[type].reason)}</Tooltip>,
+				badge as ReactElement,
+				<Tooltip>{tl(trans_instance.reason)}</Tooltip>,
 			);
 
 			// pro
@@ -289,7 +297,7 @@ export function bleh_profiles() {
 			badge.addEventListener('click', () => {
 				present_badge({
 					name: tl(trans_instance.name),
-					reason: tl(trans.badges[type].reason),
+					reason: tl(trans_instance.reason),
 					user: page.name,
 					type,
 					inbuilt: true,
@@ -306,13 +314,15 @@ export function bleh_profiles() {
 		});
 	}
 
-	const badge_elements = Array.from(title_wrap.querySelectorAll('.label'));
+	const badge_elements = Array.from(
+		title_wrap.querySelectorAll('.label'),
+	) as ReactNode[];
 
-	profile_name = html.node`
-        <h1 class="page-header-title profile-name">${
-		cache.username || profile_name.textContent
-	}</h1>
-    `;
+	profile_name = (
+		<h1 class={['page-header-title', 'profile-name']}>
+			{cache.username || profile_name.textContent}
+		</h1>
+	) as ReactElement;
 
 	if (ff('profile_fonts') && settings.display_name_styles) {
 		profile_name.setAttribute('data-font', cache.font);
@@ -336,51 +346,40 @@ export function bleh_profiles() {
 		page.avatar = src;
 	}
 
-	let page_avatar;
+	const page_avatar = page_header_avatar(
+		(profile_avatar as HTMLImageElement).src,
+	);
 
-	const same_page = is_same_page();
+	//const same_page = is_same_page();
 
-	const redesigned_profile_header = html.node`
-        <section class="page-header for-profile ${same_page ? 'same' : ''}">
-            <div class="page-header-avatar-list">
-                ${
-		!new_account
-			? page_avatar = page_header_avatar(
-				(profile_avatar as HTMLImageElement).src,
-			)
-			: profile_avatar
-	}
-            </div>
-            <div class="page-header-info has-main-info">
-                <div class="main-info">
-                    <div class="sub-text">${tl(trans.profile)}</div>
-                    <div class="title-container">${profile_name}</div>
-                </div>
-                ${
-		sub_wrap ? sub_wrap : cache.created
-			? () => {
-				const elem = html.node`
-                        <p class="header-title-secondary" />
-                    `;
-
-				render_sub_text(elem, cache.aka, cache.created, cache.username);
-
-				return elem;
+	const redesigned_profile_header = (
+		<PageHeader
+			type='profile'
+			avatar={!new_account ? page_avatar : profile_avatar as ReactElement}
+			extra={
+				<>
+					{sub_wrap ? sub_wrap : cache.created &&
+						render_sub_text(
+							<p class='header-title-secondary' />,
+							cache.aka,
+							cache.created,
+							cache.username,
+						)}
+					{badge_elements.length > 0 && (
+						<div class={['badges', 'profile-badges']}>
+							{badge_elements.map((badge) =>
+								badge
+							)}
+						</div>
+					)}
+				</>
 			}
-			: ''
-	}
-                ${
-		badge_elements.length > 0
-			? html.node`
-                <div class="badges profile-badges">
-                    ${badge_elements.map((badge) => badge)}
-                </div>
-                `
-			: ''
-	}
-            </div>
-        </section>
-    `;
+		>
+			<PageHeaderTitle>
+				{profile_name as ReactElement}
+			</PageHeaderTitle>
+		</PageHeader>
+	);
 
 	if (page.name == auth.name && !settings.profile_header_own) {
 		register_background(null, 'hidden');
@@ -394,9 +393,9 @@ export function bleh_profiles() {
 				register_background(avatar(page.avatar, 'ar0'));
 			} else register_background(null, 'none');
 		} else {
-			let background = document.body.querySelector(
+			const background = document.body.querySelector(
 				'.header-background--has-image',
-			);
+			) as HTMLDivElement;
 			if (background) {
 				register_background(
 					background.style.backgroundImage
@@ -412,24 +411,24 @@ export function bleh_profiles() {
 		header_colour(page_avatar.image, false, [page_avatar]);
 	}
 
-	page.structure.container.insertBefore(
+	page.structure.container!.insertBefore(
 		redesigned_profile_header,
-		page.structure.container.firstElementChild,
+		page.structure.container!.firstElementChild,
 	);
 	profile_header.classList.add('legacy-header');
 
 	// translations in other languages
-	const library_tab = page.structure.nav.querySelector(
-		'.secondary-nav-item--library a',
-	);
-	library_tab.textContent = tl(trans.library);
+	const library_tab = page.structure.nav!.querySelector(
+		'.secondary-nav-item--library > a',
+	) as HTMLAnchorElement;
+	library_tab.textContent = tl(trans.library) as string;
 
 	const is_own_profile = page.name == auth.name;
 
-	const loved_tab = page.structure.nav.querySelector(
-		'.secondary-nav-item--loved a',
+	const loved_tab = page.structure.nav!.querySelector(
+		'.secondary-nav-item--loved > a',
 	);
-	if (loved_tab) loved_tab.textContent = tl(trans.loved);
+	if (loved_tab) loved_tab.textContent = tl(trans.loved) as string;
 
 	if (!is_subpage) {
 		const is_following = page.state.follows_user;
@@ -457,22 +456,18 @@ export function bleh_profiles() {
 		if (!recent_tracks) {
 			recent_tracks = page.structure.main!.querySelector(
 				'.no-data-message',
-			);
+			) as HTMLDivElement;
 			if (recent_tracks) {
-				const elem = html.node`
-                    <section class="recent-tracks-section">
-                        <h2>
-                            <a class="text-colour-link" href="${window.location.href}/library">${
-					tl(trans.recents)
-				}</a>
-                        </h2>
-                        <div class="loading-data-container">
-                            <div class="loading-data-text private">
-                                ${recent_tracks.textContent}
-                            </div>
-                        </div>
-                    </section>
-                `;
+				const elem = (
+					<section class='recent-tracks-section'>
+						<PanelHead icon={icons.recent}>
+							{tl(trans.recents)}
+						</PanelHead>
+						<LoadingData type='private'>
+							{recent_tracks.textContent}
+						</LoadingData>
+					</section>
+				);
 
 				recent_tracks.replaceWith(elem);
 				recent_tracks = elem;
@@ -508,7 +503,7 @@ export function bleh_profiles() {
 
 		// acquire info
 		let scrobbles = 0;
-		let average = 0;
+		let average = '';
 		let artists = 0;
 		let loved = 0;
 
@@ -517,10 +512,10 @@ export function bleh_profiles() {
 		);
 		metadata.forEach((item, index) => {
 			if (index == 0) {
-				const para = item.querySelector('p');
+				const para = item.querySelector('p')!;
 
 				scrobbles = clean_number(para.textContent.trim());
-				average = para.getAttribute('title');
+				average = para.getAttribute('title')!;
 			} else if (index == 1) {
 				artists = clean_number(item.textContent.trim());
 			} else if (index == 2) {
@@ -567,7 +562,7 @@ export function bleh_profiles() {
 	} else {
 		load_profile_cache(page.name, cache, profile_cache);
 
-		const btn_add = page.structure.side.querySelector('.add-button');
+		const btn_add = page.structure.side!.querySelector('.add-button');
 		if (btn_add) btn_add.setAttribute('data-page-subpage', page.subpage);
 
 		if (page.subpage.startsWith('library')) {
@@ -575,7 +570,7 @@ export function bleh_profiles() {
 		} else if (page.subpage == 'events') {
 			convert_to_toolbar();
 
-			const no_events = page.structure.main.querySelector(
+			const no_events = page.structure.main!.querySelector(
 				':scope > .no-events',
 			);
 
@@ -585,7 +580,7 @@ export function bleh_profiles() {
 		} else if (page.subpage == 'obsessions_overview') {
 			obsession_list();
 		} else if (page.subpage == 'playlists_playlists') {
-			const section_controls = page.structure.container.querySelector(
+			const section_controls = page.structure.container!.querySelector(
 				'.section-controls-full-width',
 			);
 			let buttons;
@@ -593,10 +588,10 @@ export function bleh_profiles() {
 				section_controls.classList.add('legacy-section-controls');
 				buttons = section_controls.querySelectorAll(':is(button, a)');
 
-				const header = page.structure.container.querySelector(
+				const header = page.structure.container!.querySelector(
 					'.content-top-header',
 				);
-				page.structure.content_top.innerHTML = `
+				page.structure.content_top!.innerHTML = `
                     <div class="content-top-inner-wrap">
                         <div class="container content-top-lower">
                             <h1 class="content-top-header">${header.textContent.trim()}</h1>
@@ -608,7 +603,7 @@ export function bleh_profiles() {
 			const new_panel = document.createElement('section');
 			new_panel.classList.add('obsessions-panel');
 
-			page.structure.main.appendChild(new_panel);
+			page.structure.main!.appendChild(new_panel);
 
 			if (buttons.length > 0) {
 				const wrap = document.createElement('div');
@@ -652,17 +647,17 @@ export function bleh_profiles() {
 
 			//
 
-			const playlists = page.structure.container.querySelector(
+			const playlists = page.structure.container!.querySelector(
 				'.playlisting-playlists',
 			);
 			if (playlists) {
-				page.structure.container.removeChild(playlists.parentElement);
+				page.structure.container!.removeChild(playlists.parentElement!);
 				new_panel.appendChild(playlists);
 			} else {
-				const no_data = page.structure.container.querySelector(
+				const no_data = page.structure.container!.querySelector(
 					'.no-data-message--playlists',
-				);
-				page.structure.container.removeChild(no_data.parentElement);
+				)!;
+				page.structure.container!.removeChild(no_data.parentElement!);
 				new_panel.appendChild(no_data);
 			}
 		} else if (page.subpage == 'loved') {
