@@ -78797,7 +78797,7 @@ var bleh = (() => {
   }
   function BulkEditButton({ chibi, button: button2, onClick }) {
     if (!button2.classList.contains("chibi")) {
-      button2.classList = `dropdown-menu-clickable-item ${chibi && "chibi"}`;
+      button2.classList = `dropdown-menu-clickable-item ${chibi && "chibi"} v2`;
       button2.addEventListener("click", onClick);
       button2.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
         children: [
@@ -78807,9 +78807,11 @@ var bleh = (() => {
           tl2(trans.bulk_edit)
         ]
       }));
-      hover_tooltip(button2, /* @__PURE__ */ jsx(Tooltip, {
-        children: tl2(trans.bulk_edit)
-      }));
+      if (chibi) {
+        hover_tooltip(button2, /* @__PURE__ */ jsx(Tooltip, {
+          children: tl2(trans.bulk_edit)
+        }));
+      }
     }
     return button2;
   }
@@ -124434,7 +124436,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-09-03T21:16:49.460Z"
+    built_on: "2026-09-04T01:24:18.440Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

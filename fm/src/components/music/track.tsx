@@ -1742,7 +1742,9 @@ function BulkEditButton({
 	onClick,
 }: { chibi?: boolean; button: HTMLButtonElement; onClick: () => void }) {
 	if (!button.classList.contains('chibi')) {
-		button.classList = `dropdown-menu-clickable-item ${chibi && 'chibi'}`;
+		button.classList = `dropdown-menu-clickable-item ${
+			chibi && 'chibi'
+		} v2`;
 
 		button.addEventListener('click', onClick);
 
@@ -1756,12 +1758,14 @@ function BulkEditButton({
 			</>,
 		);
 
-		hover_tooltip(
-			button,
-			<Tooltip>
-				{tl(trans.bulk_edit)}
-			</Tooltip>,
-		);
+		if (chibi) {
+			hover_tooltip(
+				button,
+				<Tooltip>
+					{tl(trans.bulk_edit)}
+				</Tooltip>,
+			);
+		}
 	}
 
 	return button;
