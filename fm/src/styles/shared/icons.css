@@ -216,10 +216,14 @@
 	--icon-size: 12px;
 }
 
-.save,
-.modal-button button[type="submit"],
-.form-group button[type="submit"] {
+.save {
 	--icon-size: 12px !important;
+	--mask-size: var(--icon-size);
+}
+
+.modal-button button[type="submit"],
+.form-group button[type="submit"]:not(.btn) {
+	--icon-size: 12px;
 	--mask-size: var(--icon-size);
 }
 
