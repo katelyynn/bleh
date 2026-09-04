@@ -23,6 +23,10 @@
 		color: currentColor;
 	}
 
+	&:after {
+		display: none !important;
+	}
+
 	.setting-group>&,
 	&:first-child,
 	&.no-margin {

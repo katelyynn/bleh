@@ -7,11 +7,13 @@
 type PolicyMap = {
 	'default-src': string[];
 	'script-src': string[];
+	'script-src-elem': string[];
 	'style-src': string[];
 	'style-src-elem': string[];
 	'img-src': string[];
 	'connect-src': string[];
 	'font-src': string[];
+	'frame-src': string[];
 };
 
 // https:// is prepended to all entries
@@ -39,6 +41,31 @@ const CspPolicies: PolicyMap = {
 		'https://cdnjs.cloudflare.com',
 		'https://cdn.cookielaw.org',
 		'https://google.com',
+		'https://*.gstatic.com',
+		'https://youtube.com',
+		'https://youtube-nocookie.com',
+		'https://*.youtube.com',
+		'https://*.youtube-nocookie.com',
+		'https://*.githack.com',
+		'https://*.newrelic.com',
+		'https://a.pub.network',
+		'https://tags.tiqcdn.com',
+		'https://html-load.cc',
+		'https://srv.tunefindforfans.com',
+		'https://ws.audioscrobbler.com',
+		'https://translate.googleapis.com',
+	],
+	'script-src-elem': [
+		"'self'",
+		"'unsafe-inline'",
+		"'unsafe-eval'",
+
+		// stuff that last.fm uses
+		'https://cdn.jsdelivr.net',
+		'https://cdnjs.cloudflare.com',
+		'https://cdn.cookielaw.org',
+		'https://google.com',
+		'https://*.gstatic.com',
 		'https://youtube.com',
 		'https://youtube-nocookie.com',
 		'https://*.youtube.com',
@@ -118,6 +145,11 @@ const CspPolicies: PolicyMap = {
 		"'self'",
 		'https://fonts.gstatic.com',
 		'https://*.github.io',
+	],
+	'frame-src': [
+		"'self'",
+		'https://*.google.com',
+		'https://*.youtube-nocookie.com',
 	],
 };
 

@@ -76,7 +76,7 @@
 		color: oklch(var(--l3-c)) !important;
 	}
 
-	.checkbox {
+	.check-box {
 		padding: unset !important;
 		margin-top: calc(-1 * var(--item-list-gap)) !important;
 	}

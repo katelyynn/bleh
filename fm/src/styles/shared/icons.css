@@ -216,6 +216,12 @@
 	--icon-size: 12px;
 }
 
+.modal-button button[type="submit"],
+.form-group button[type="submit"] {
+	--icon-size: 12px;
+	--mask-size: var(--icon-size);
+}
+
 .bleh-icon-save {
 	--icon-size: 12px;
 }

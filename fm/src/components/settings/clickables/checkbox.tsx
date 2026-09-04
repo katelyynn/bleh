@@ -43,7 +43,7 @@ export function Checkbox({
 				type='button'
 				class={[
 					'btn',
-					'checkbox',
+					'check-box',
 					!interact && 'no-interact',
 					menu && 'menu-checkbox',
 				]}

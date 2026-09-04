@@ -187,7 +187,7 @@
 
 .content-form .control-label,
 .events-filter-location-dropdown .control-label {
-	color: oklch(var(--c2));
+	color: oklch(var(--c3)) !important;
 	font-size: var(--font-size);
 	line-height: var(--line-height);
 	font-weight: var(--font-weight-medium);
@@ -238,4 +238,21 @@
 	max-width: 500px !important;
 	cursor: default;
 	margin-bottom: var(--card-gap);
+}
+
+.change-username-form .form-row-help-text {
+	background-color: oklch(var(--f4) / 20%);
+	padding: 10px !important;
+	border-radius: var(--radius-s);
+	margin: unset !important;
+
+	&:after,
+	&:before {
+		display: none;
+	}
+}
+
+
+.change-username-form {
+	margin-top: var(--card-padding);
 }

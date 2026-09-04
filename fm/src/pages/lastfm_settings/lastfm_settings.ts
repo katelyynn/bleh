@@ -22,6 +22,7 @@ import {
 	render_shoutbox_preview,
 	render_track_preview,
 } from '@/components/settings/preview';
+import { bleh_name_change } from './name_change.tsx';
 
 // patch last.fm settings
 export function bleh_native_settings() {
@@ -666,13 +667,6 @@ function bleh_accounts() {
 	for (const setting in original_settings) {
 		update_inbuilt_item(setting, original_settings[setting], false);
 	}
-}
-function bleh_name_change() {
-	let token = page.structure.row
-		.querySelector('[name="csrfmiddlewaretoken"]')
-		.getAttribute('value');
-
-	return;
 }
 
 function bleh_website() {
