@@ -11,7 +11,7 @@
 	.edit-scrobble-form {
 		margin-top: unset !important;
 
-		.alert + .edit-scrobble-top-box + & {
+		.alert+.edit-scrobble-top-box+& {
 			margin-top: var(--card-gap) !important;
 		}
 
@@ -21,7 +21,7 @@
 			font-size: var(--font-size-sm);
 			font-weight: var(--font-weight) !important;
 
-			top: calc(34px - 7px) !important;
+			top: calc(34px - var(--button-verts)) !important;
 			left: var(--button-sides);
 			margin-bottom: -18px;
 			pointer-events: none;
@@ -41,11 +41,12 @@
 			}
 
 			.original-field {
-				margin-bottom: calc(-1 * (7px + 18px));
+				margin-bottom: calc(-1 * (var(--button-verts) + 18px));
 				display: none;
 			}
 
-			& > input {
+			&>input {
+				margin-top: -9px;
 				padding-top: 9px !important;
 				padding-bottom: calc(9px + 18px) !important;
 				height: fit-content;
@@ -59,12 +60,13 @@
 		margin-bottom: 4px;
 		cursor: default;
 
-		.abbr + &,
-		.control-label.hidden + &,
-		.form-group + & {
+		.abbr+&,
+		.control-label.hidden+&,
+		.form-group+& {
 			margin: var(--item-list-gap) 0 4px;
 		}
 	}
+
 	.edit-scrobble-form-delete,
 	.control-label.hidden {
 		display: none !important;
@@ -84,7 +86,7 @@
 	width: 530px;
 	max-width: 100%;
 
-	.alert + & {
+	.alert+& {
 		margin-top: var(--card-gap);
 	}
 }
@@ -114,7 +116,7 @@
 	display: flex;
 	gap: var(--item-list-gap);
 
-	& > .form-inner {
+	&>.form-inner {
 		flex: 1;
 	}
 }
