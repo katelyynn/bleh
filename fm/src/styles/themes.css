@@ -1466,6 +1466,7 @@ body {
 	--radius-s: 7px;
 	--radius-m: 10px;
 	--radius-l: 13px;
+	--radius-xl: 20px;
 
 	/* legacy */
 	--item-small-radius: 4px;

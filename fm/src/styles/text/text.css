@@ -323,7 +323,6 @@ pre {
 }
 
 .card-tip {
-	display: flex;
 	margin-top: var(--card-gap);
 	font-weight: var(--font-weight) !important;
 	font-size: 13px;

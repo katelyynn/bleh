@@ -688,7 +688,7 @@ export function oracle_process() {
 				oracle_album(page.state.oracle_temp);
 
 				return;
-			} else if (oracle_albums[artist]?.[item]) {
+			} else if (oracle_albums[artist]?.[item]?.id) {
 				const local = oracle_albums[artist]?.[item];
 				tries = 3;
 
