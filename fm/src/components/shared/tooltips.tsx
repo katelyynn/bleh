@@ -26,6 +26,7 @@ type TooltipConfig = Partial<
 		enterAnimation: AnimationPreset;
 		exitAnimation: AnimationPreset;
 		ariaEnabled: boolean;
+		onShowing: () => void;
 		onShow: () => void;
 		onHide: () => void;
 		delay: [number, number];
@@ -88,6 +89,7 @@ export class TooltipInstance<
 	 */
 	private uuid = crypto.randomUUID();
 
+	public onShowing: (() => void) | null = null;
 	public onShow: (() => void) | null = null;
 	public onHide: (() => void) | null = null;
 
@@ -115,6 +117,7 @@ export class TooltipInstance<
 			delay: [0, 0],
 			...config,
 		};
+		this.onShowing = config.onShowing || null;
 		this.onShow = config.onShow || null;
 		this.onHide = config.onHide || null;
 
@@ -136,6 +139,8 @@ export class TooltipInstance<
 	public show() {
 		log('showing', 'tooltip');
 		this.cancel_animation();
+
+		if (this.onShowing) this.onShowing();
 
 		if (!this.is_mounted) this.mount();
 
@@ -225,16 +230,18 @@ export class TooltipInstance<
 			return;
 		}
 
-		computePosition(this.host, this.element as HTMLElement, this.config)
-			.then(
-				({ strategy, x, y }) => {
-					Object.assign(this.element.style, {
-						position: strategy,
-						left: `${x}px`,
-						top: `${y}px`,
-					});
-				},
-			);
+		if (this.config.strategy != 'absolute') {
+			computePosition(this.host, this.element as HTMLElement, this.config)
+				.then(
+					({ strategy, x, y }) => {
+						Object.assign(this.element.style, {
+							position: strategy,
+							left: `${x}px`,
+							top: `${y}px`,
+						});
+					},
+				);
+		}
 	}
 }
 
@@ -365,6 +372,7 @@ export function context_menu_tooltip<
 	const tooltip = new TooltipInstance(host, element, {
 		placement: 'bottom',
 		ariaEnabled: true,
+		strategy: 'absolute',
 		onHide: () => {
 			document.body.removeEventListener('click', listener);
 			document.body.removeEventListener('contextmenu', listener);
@@ -372,11 +380,16 @@ export function context_menu_tooltip<
 		...config,
 	});
 
+	let cancel_close = false;
+
 	const listener: EventListener = ({ target: t }) => {
+		if (cancel_close) return;
+
 		const target = t as HTMLElement | null;
 		if (
 			target && target instanceof HTMLElement &&
 			target != tooltip.element && target != host &&
+			target.parentElement != host &&
 			!tooltip.element.contains(target) &&
 			!target.closest('.tippy-box')
 		) {
@@ -389,13 +402,23 @@ export function context_menu_tooltip<
 
 	host.addEventListener('contextmenu', (e) => {
 		e.preventDefault();
+		cancel_close = true;
+
+		Object.assign(element.style, {
+			position: 'fixed',
+			left: `${e.clientX}px`,
+			top: `${e.clientY}px`,
+		});
+
+		setTimeout(() => {
+			cancel_close = false;
+		}, 0);
 
 		// close when clicking again
 		if (tooltip.is_mounted) {
-			log('hiding due to is_mounted (ctx)', 'tooltip', 'info');
-			tooltip.hide();
 			return;
 		}
+
 		log('showing (ctx)', 'tooltip', 'info');
 		tooltip.show();
 

@@ -54025,6 +54025,7 @@ var bleh = (() => {
     * `host`'s `aria-describedby` attribute
     */
     uuid = crypto.randomUUID();
+    onShowing = null;
     onShow = null;
     onHide = null;
     constructor(host, element, config = {}) {
@@ -54050,6 +54051,7 @@ var bleh = (() => {
         ],
         ...config
       };
+      this.onShowing = config.onShowing || null;
       this.onShow = config.onShow || null;
       this.onHide = config.onHide || null;
       if (this.config.placement == "top") {
@@ -54069,6 +54071,7 @@ var bleh = (() => {
     show() {
       log("showing", "tooltip");
       this.cancel_animation();
+      if (this.onShowing) this.onShowing();
       if (!this.is_mounted) this.mount();
       const { keyframes, options } = animation_for_preset(this.config.enterAnimation);
       const animation = this.element.animate(keyframes, options);
@@ -54132,13 +54135,15 @@ var bleh = (() => {
         this.unmount();
         return;
       }
-      computePosition2(this.host, this.element, this.config).then(({ strategy, x, y }) => {
-        Object.assign(this.element.style, {
-          position: strategy,
-          left: `${x}px`,
-          top: `${y}px`
+      if (this.config.strategy != "absolute") {
+        computePosition2(this.host, this.element, this.config).then(({ strategy, x, y }) => {
+          Object.assign(this.element.style, {
+            position: strategy,
+            left: `${x}px`,
+            top: `${y}px`
+          });
         });
-      });
+      }
     }
   };
   function hover_tooltip(host, element, config = {}) {
@@ -54217,15 +54222,18 @@ var bleh = (() => {
     const tooltip = new TooltipInstance(host, element, {
       placement: "bottom",
       ariaEnabled: true,
+      strategy: "absolute",
       onHide: () => {
         document.body.removeEventListener("click", listener);
         document.body.removeEventListener("contextmenu", listener);
       },
       ...config
     });
+    let cancel_close = false;
     const listener = ({ target: t2 }) => {
+      if (cancel_close) return;
       const target = t2;
-      if (target && target instanceof HTMLElement && target != tooltip.element && target != host && !tooltip.element.contains(target) && !target.closest(".tippy-box")) {
+      if (target && target instanceof HTMLElement && target != tooltip.element && target != host && target.parentElement != host && !tooltip.element.contains(target) && !target.closest(".tippy-box")) {
         log("hiding due to listener (ctx)", "tooltip", "info", {
           target
         });
@@ -54234,9 +54242,16 @@ var bleh = (() => {
     };
     host.addEventListener("contextmenu", (e5) => {
       e5.preventDefault();
+      cancel_close = true;
+      Object.assign(element.style, {
+        position: "fixed",
+        left: `${e5.clientX}px`,
+        top: `${e5.clientY}px`
+      });
+      setTimeout(() => {
+        cancel_close = false;
+      }, 0);
       if (tooltip.is_mounted) {
-        log("hiding due to is_mounted (ctx)", "tooltip", "info");
-        tooltip.hide();
         return;
       }
       log("showing (ctx)", "tooltip", "info");
@@ -124436,7 +124451,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-09-04T01:24:18.440Z"
+    built_on: "2026-09-04T01:52:57.075Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
