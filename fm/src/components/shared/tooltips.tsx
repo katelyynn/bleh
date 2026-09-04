@@ -230,7 +230,7 @@ export class TooltipInstance<
 			return;
 		}
 
-		if (this.config.strategy != 'absolute') {
+		if (this.config.strategy != 'fixed') {
 			computePosition(this.host, this.element as HTMLElement, this.config)
 				.then(
 					({ strategy, x, y }) => {
@@ -372,7 +372,7 @@ export function context_menu_tooltip<
 	const tooltip = new TooltipInstance(host, element, {
 		placement: 'bottom',
 		ariaEnabled: true,
-		strategy: 'absolute',
+		strategy: 'fixed',
 		onHide: () => {
 			document.body.removeEventListener('click', listener);
 			document.body.removeEventListener('contextmenu', listener);

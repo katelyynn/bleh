@@ -54135,7 +54135,7 @@ var bleh = (() => {
         this.unmount();
         return;
       }
-      if (this.config.strategy != "absolute") {
+      if (this.config.strategy != "fixed") {
         computePosition2(this.host, this.element, this.config).then(({ strategy, x, y }) => {
           Object.assign(this.element.style, {
             position: strategy,
@@ -54222,7 +54222,7 @@ var bleh = (() => {
     const tooltip = new TooltipInstance(host, element, {
       placement: "bottom",
       ariaEnabled: true,
-      strategy: "absolute",
+      strategy: "fixed",
       onHide: () => {
         document.body.removeEventListener("click", listener);
         document.body.removeEventListener("contextmenu", listener);
@@ -124451,7 +124451,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-09-04T01:52:57.075Z"
+    built_on: "2026-09-04T01:54:11.314Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
