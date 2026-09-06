@@ -37,7 +37,7 @@
 	},
 	"tasks": {
 		"build": "deno run -P index.ts",
-		"dev": "deno run -P --watch=./src/ --watch-exclude=./src/build/build.json index.ts serve",
+		"dev": "deno run -P --watch=./src/ --watch-exclude=./src/build/build.json,./src/bleh.user.js,./src/bleh.user.css index.ts serve",
 		"license": "deno fmt && deno run --allow-read --allow-write scripts/copyright.ts"
 	},
 	"permissions": {

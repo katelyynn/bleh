@@ -7814,12 +7814,12 @@ var bleh = (() => {
         if (prototype === null || isObject3(prototype)) return obj;
         throw new TypeError("Prototype must be null or an object");
       };
-      module.exports = (function(status3) {
+      module.exports = (function(status2) {
         var fn6, set2;
-        if (!status3) return null;
-        if (status3.level === 2) {
-          if (status3.set) {
-            set2 = status3.set;
+        if (!status2) return null;
+        if (status2.level === 2) {
+          if (status2.set) {
+            set2 = status2.set;
             fn6 = function(obj, prototype) {
               set2.call(validate(obj, prototype), prototype);
               return obj;
@@ -7846,7 +7846,7 @@ var bleh = (() => {
           configurable: false,
           enumerable: false,
           writable: false,
-          value: status3.level
+          value: status2.level
         });
       })(
         (function() {
@@ -34720,7 +34720,7 @@ var bleh = (() => {
       document.body.appendChild(notification_host);
     }
   }
-  function status2({ title, body, type }) {
+  function status({ title, body, type }) {
     let status_icon = icons.info;
     if (type == "error") {
       status_icon = icons.x;
@@ -38499,7 +38499,7 @@ var bleh = (() => {
       log("copied", "copy", "info", {
         text: text1
       });
-      status2({
+      status({
         id: "copy",
         title: tl2(trans.copied_to_clipboard),
         body: text1
@@ -38523,7 +38523,7 @@ var bleh = (() => {
           text: text1
         });
         if (!silent) {
-          status2({
+          status({
             id: "paste",
             title: tl2(trans.pasted_text),
             body: text1
@@ -38542,7 +38542,7 @@ var bleh = (() => {
           text: text1
         });
         if (!silent) {
-          status2({
+          status({
             id: "paste",
             title: tl2(trans.pasted_text),
             body: text1
@@ -38555,7 +38555,7 @@ var bleh = (() => {
         e: e5
       });
       if (!silent) {
-        status2({
+        status({
           id: "paste",
           title: tl2(trans.failed),
           body: e5.message ? e5.message : e5
@@ -54436,7 +54436,7 @@ var bleh = (() => {
             }
           }
           if (should_notify) {
-            status2({
+            status({
               title: tl2(trans.downloaded_value, {
                 v: tl2(trans.sponsor_details)
               })
@@ -59145,9 +59145,9 @@ var bleh = (() => {
         recording.releases.forEach((release) => {
           const artist2 = release["artist-credit"] ? release["artist-credit"][0].name : recording["artist-credit"].name;
           if (artist2 == "Various Artists") return;
-          const status3 = release.status?.toLowerCase();
+          const status2 = release.status?.toLowerCase();
           const disambiguation = release.disambiguation?.toLowerCase();
-          if (status3 && status3.startsWith("pseudo")) return;
+          if (status2 && status2.startsWith("pseudo")) return;
           if (disambiguation) {
             if (disambiguation.includes("english")) {
               releases_to_move.push(release);
@@ -59161,9 +59161,9 @@ var bleh = (() => {
           releases
         });
         releases.sort((a2, b) => {
-          const rank = (status3) => {
-            if (status3 == "Official") return 0;
-            if (!status3) return 1;
+          const rank = (status2) => {
+            if (status2 == "Official") return 0;
+            if (!status2) return 1;
             return 2;
           };
           return rank(a2.status) - rank(b.status);
@@ -59838,7 +59838,7 @@ var bleh = (() => {
           parse4(oracle_tracks, this.response, "tracks");
         }
         if (send_notify) {
-          status2({
+          status({
             title: tl2(trans.downloaded_value).replace("{v}", `oracle ${tl2(trans[type])}`)
           });
         }
@@ -89113,7 +89113,7 @@ var bleh = (() => {
       }
       function pixel_make_a_guess(guess) {
         if (clean_pixel_name(guess) == clean_pixel_name(name)) {
-          status2({
+          status({
             title: tl2(trans.you_guessed_correctly)
           });
           timer_end(true);
@@ -92595,7 +92595,7 @@ var bleh = (() => {
       if (type == "toggle") {
         let update_toggle = function() {
           if (elem.getAttribute("disabled") == "true") {
-            status2({
+            status({
               title: tl2(trans.incompatible_alert)
             });
             return;
@@ -92691,7 +92691,7 @@ var bleh = (() => {
           if (func) func(val);
         }, reset_range = function() {
           update_range(settings_store[id].default);
-          status2({
+          status({
             title: tl2(trans.reset_item_to_default)
           });
         };
@@ -92904,7 +92904,7 @@ var bleh = (() => {
       } else if (type == "checkbox") {
         let update_toggle1 = function() {
           if (elem.getAttribute("disabled") == "true") {
-            status2({
+            status({
               title: tl2(trans.incompatible_alert)
             });
             return;
@@ -93037,7 +93037,7 @@ var bleh = (() => {
           if (func) func(val);
         }, reset_radio = function() {
           update_radio(settings_store[id].default);
-          status2({
+          status({
             title: tl2(trans.reset_item_to_default)
           });
         };
@@ -93401,7 +93401,7 @@ var bleh = (() => {
           if (func) func(val);
         }, reset_select = function() {
           menu.value = settings_store[id].default;
-          status2({
+          status({
             title: tl2(trans.reset_item_to_default)
           });
         };
@@ -99190,7 +99190,7 @@ var bleh = (() => {
       delete notes[page.name];
       note.value = "";
       set_storage("bleh_profile_notes", JSON.stringify(notes));
-      status2({
+      status({
         id: "note",
         title: tl2(trans.cleared_note_for_user, {
           u: page.name
@@ -99201,7 +99201,7 @@ var bleh = (() => {
       const notes = JSON.parse(localStorage.getItem("bleh_profile_notes")) || {};
       notes[page.name] = note.value;
       set_storage("bleh_profile_notes", JSON.stringify(notes));
-      status2({
+      status({
         id: "note",
         title: tl2(trans.saved_note_for_user, {
           u: page.name
@@ -99850,6 +99850,7 @@ var bleh = (() => {
         isText: false
       }));
     }
+    return parent;
   }
   function bleh_profile_events(no_events) {
     const selected_tab = page.structure.toolbar?.querySelector(".secondary-nav-item-link--active");
@@ -102898,7 +102899,7 @@ var bleh = (() => {
         }
       }
     ];
-    const status3 = () => [
+    const status2 = () => [
       {
         type: "lang",
         regex: /\[status=([^\]]+)\]/g,
@@ -102954,7 +102955,7 @@ var bleh = (() => {
     else extensions.push(invalid_blockquotes());
     if (allow_banners) extensions.push(banner());
     if (allow_icons) extensions.push(icons2());
-    if (allow_hue) extensions.push(accent(), display_name(), status3());
+    if (allow_hue) extensions.push(accent(), display_name(), status2());
     if (allow_fonts) extensions.push(font());
     if (allow_socials) extensions.push(social_links_extension(links));
     if (!allow_headers) extensions.push(header_minify());
@@ -109962,7 +109963,7 @@ var bleh = (() => {
                   children: /* @__PURE__ */ jsx(SeeMore, {
                     onClick: () => {
                       localStorage.removeItem("bwaa_recent_activity");
-                      status2({
+                      status({
                         type: "success",
                         title: tl2(trans.cleared_activity_history)
                       });
@@ -111046,7 +111047,7 @@ var bleh = (() => {
           parse7(combined_artists, this.response, "combined_artists");
         }
         if (send_notify) {
-          status2({
+          status({
             title: tl2(trans.downloaded_value).replace("{v}", tl2(trans.lotus[type]))
           });
         }
@@ -112666,21 +112667,21 @@ var bleh = (() => {
     links.appendChild(bleh_container);
     page.header.season = bleh_container;
     if (auth.pro) {
-      let render_status_container = function(status3) {
-        if (!status3) return;
+      let render_status_container = function(status2) {
+        if (!status2) return;
         render(status_container.current, html`
 					<div class="status">
 						<div class="status-image">
-							<img src=${status3.avatar} alt=${status3.album}>
+							<img src=${status2.avatar} alt=${status2.album}>
 						</div>
 						<div class="status-info">
-							<strong class="status-text status-title">${status3.name}</strong>
-							<p class="status-text status-artist">${status3.artist}</p>
-							<p class="status-text status-album">${status3.album}</p>
+							<strong class="status-text status-title">${status2.name}</strong>
+							<p class="status-text status-artist">${status2.artist}</p>
+							<p class="status-text status-album">${status2.album}</p>
 						</div>
 					</div>
 					<div class="status-time">
-					    ${status3.active ? html.node`
+					    ${status2.active ? html.node`
                         <p class="status-text status-time-text chartlist-now-scrobbling">
                             ${tl2(trans.scrobbling_now)}
                         </p>
@@ -112725,7 +112726,7 @@ var bleh = (() => {
       }), {
         onShow: () => {
           if (page.now.name) render_status_container(page.now);
-          live_status().then((status3) => render_status_container(status3));
+          live_status().then((status2) => render_status_container(status2));
         }
       });
       links.appendChild(music);
@@ -118802,7 +118803,7 @@ var bleh = (() => {
         });
         const name = details.querySelector(".api-session-app-name");
         const desc = details.querySelector(".api-session-app-description");
-        const status3 = details.querySelector(".api-session-status");
+        const status2 = details.querySelector(".api-session-status");
         const image2 = details.querySelector(".api-session-app-image");
         image2.classList = "";
         const default_image = image2.src.endsWith("14d19fbdca555c1782176cd789e81af7.png");
@@ -118817,9 +118818,9 @@ var bleh = (() => {
 					    <div class="session-details">${name} ${desc}</div>
 					    ${form}
 					</div>
-					${status3 ? html.node`
+					${status2 ? html.node`
                 <div class="session-footer">
-                    ${status3}
+                    ${status2}
                 </div>
                 ` : ""}
 				`);
@@ -122869,7 +122870,7 @@ var bleh = (() => {
 				<h2>Status alerts</h2>
 				<button
 					class="btn continue"
-					onclick=${() => status2({
+					onclick=${() => status({
       title: "test alert",
       body: "haiaiai nothing to worry about >_<"
     })}
@@ -124496,7 +124497,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-09-04T18:20:33.153Z"
+    built_on: "2026-09-06T20:35:04.388Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

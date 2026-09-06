@@ -28,6 +28,7 @@ import { select_prepare } from '@/components/settings/select.ts';
 import { SettingGroup } from '@/components/settings/group.tsx';
 import { get_token, Token } from '@/components/form/token.tsx';
 import { CardTip } from '@/components/text/tip.tsx';
+import { status } from '@/components/dialog/status.js';
 
 export function profile_recents() {
 	const panel = page.structure.main!.querySelector('#recent-tracks-section');
@@ -281,7 +282,7 @@ function refresh_tracks(
 			}
 			panel!.classList.add('has-refreshed');
 
-			panel.querySelector('.chartlist')!.outerHTML =
+			panel!.querySelector('.chartlist')!.outerHTML =
 				tracklist_panel.outerHTML;
 
 			if (func) func();

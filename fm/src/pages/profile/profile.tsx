@@ -1674,6 +1674,8 @@ function render_sub_text(
 			/>,
 		);
 	}
+
+	return parent;
 }
 
 function bleh_profile_events(no_events) {
