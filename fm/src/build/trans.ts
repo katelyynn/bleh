@@ -6523,6 +6523,15 @@ export const trans = {
 			pt: 'Brilhante',
 			pl: 'Rozbłysk',
 		},
+		grad: {
+			en: 'Gradient',
+		},
+		noph: {
+			en: 'Blink',
+		},
+		post: {
+			en: 'Poster',
+		},
 	},
 	font_weight: {
 		name: {

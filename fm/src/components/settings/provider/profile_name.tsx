@@ -314,7 +314,7 @@ export function convert_name_fonts(values: Record<string, string>) {
 }
 
 export function convert_name_styles() {
-	return ['solid', 'pop', 'out', 'glow'].map((item) => ({
+	return ['solid', 'pop', 'out', 'glow', 'grad', 'post'].map((item) => ({
 		value: item,
 		display: () => (
 			<NameStyle value={item} type='style'>
