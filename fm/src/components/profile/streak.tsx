@@ -15,6 +15,8 @@ import { log } from '@/build/log.ts';
 import { correct_item_by_artist } from '@/components/music/lotus.tsx';
 import { DateTime } from 'luxon';
 
+const HIGHEST_STREAK = 100;
+
 interface streaks {
 	artist?: StreakItem;
 	album?: StreakItem;
@@ -362,13 +364,19 @@ export function ProfileStreak({
 				<Icon name={icons.streak} identifier='streak-icon' />
 			</div>
 			<span class='streak-value'>
-				{tl(highest >= 100 ? trans.streak_high : trans.streak, {
-					v: (
-						<span class='streak-count'>
-							{highest.toLocaleString(lang)}
-						</span>
-					),
-				})}
+				{tl(
+					highest >= HIGHEST_STREAK
+						? trans.streak_high
+						: trans.streak,
+					{
+						v: (
+							<span class='streak-count'>
+								{Math.max(highest, HIGHEST_STREAK)
+									.toLocaleString(lang)}
+							</span>
+						),
+					},
+				)}
 			</span>
 		</Button>
 	);

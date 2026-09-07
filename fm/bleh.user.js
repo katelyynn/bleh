@@ -97441,6 +97441,7 @@ var bleh = (() => {
   }
 
   // src/components/profile/streak.tsx
+  var HIGHEST_STREAK = 100;
   function get_profile_streak(indicator, panel) {
     if (!assess_if_streak_exists(panel)) {
       if (page.name == auth.name) {
@@ -97675,10 +97676,10 @@ var bleh = (() => {
         }),
         /* @__PURE__ */ jsx("span", {
           class: "streak-value",
-          children: tl2(highest >= 100 ? trans.streak_high : trans.streak, {
+          children: tl2(highest >= HIGHEST_STREAK ? trans.streak_high : trans.streak, {
             v: /* @__PURE__ */ jsx("span", {
               class: "streak-count",
-              children: highest.toLocaleString(lang)
+              children: Math.max(highest, HIGHEST_STREAK).toLocaleString(lang)
             })
           })
         })
@@ -124508,7 +124509,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-09-07T00:01:05.572Z"
+    built_on: "2026-09-07T16:10:17.609Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js
