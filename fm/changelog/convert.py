@@ -54,7 +54,7 @@ def main():
     md_file = sys.argv[1]
     version = os.path.splitext(os.path.basename(md_file))[0]
     bio, title, mtype = parse_markdown(md_file)
-    with open("changelog.tson", encoding="utf-8") as f:
+    with open("changelog.json", encoding="utf-8") as f:
         data = json.load(f, object_pairs_hook=OrderedDict)
     entry = {"type": mtype, "force": False, "bio": bio}
     if title:
@@ -67,7 +67,7 @@ def main():
     for k, v in data.items():
         if k not in new_data:
             new_data[k] = v
-    with open("changelog.tson", "w", encoding="utf-8") as f:
+    with open("changelog.json", "w", encoding="utf-8") as f:
         json.dump(new_data, f, indent=4, ensure_ascii=False)
 
 

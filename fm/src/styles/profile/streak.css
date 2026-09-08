@@ -33,9 +33,10 @@
 		animation: show_streak 0.5s var(--trans-function-ani);
 
 		&[data-streak-high] {
-			filter: drop-shadow(0 0 10px oklch(var(--k4))) drop-shadow(0 0 30px oklch(var(--k4)));
+			filter: drop-shadow(0 0 10px oklch(var(--k4))) drop-shadow(0 0 30px
+				oklch(var(--k4)));
 
-			&>.streak-icon {
+			& > .streak-icon {
 				animation: streak 3s var(--trans-function-ani) infinite;
 			}
 		}
@@ -75,7 +76,6 @@
 }
 
 @keyframes streak {
-
 	from,
 	20%,
 	to {
@@ -102,7 +102,7 @@
 	display: block;
 	border-radius: var(--card-radius) !important;
 	box-shadow: var(--override-full-shadow,
-			var(--overlay-shadow));
+		var(--overlay-shadow));
 
 	--hypercard-glow-color: oklch(var(--l4-c));
 	--hypercard-glow-opacity: 0.15;
@@ -131,7 +131,7 @@
 		inset: 0 -100px;
 		pointer-events: none;
 		background: radial-gradient(at center top, oklch(var(--f4) / 70%),
-				oklch(var(--f5) / 10%) 67%);
+			oklch(var(--f5) / 10%) 67%);
 		border-radius: inherit;
 
 		z-index: 1;
@@ -163,7 +163,8 @@
 	--col: oklch(var(--l3-c));
 	opacity: 0.05;
 	filter:
-		drop-shadow(1px 0 0 var(--col)) drop-shadow(-1px 0 0 var(--col)) drop-shadow(0 1px 0 var(--col)) drop-shadow(0 -1px 0 var(--col));
+		drop-shadow(1px 0 0 var(--col)) drop-shadow(-1px 0 0 var(--col))
+		drop-shadow(0 1px 0 var(--col)) drop-shadow(0 -1px 0 var(--col));
 }
 
 .streak-avatar {

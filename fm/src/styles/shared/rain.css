@@ -29,8 +29,8 @@
 				height: 60%;
 				margin-left: 7px;
 				background: linear-gradient(to bottom,
-						transparent,
-						oklch(var(--rain) / 0.25));
+					transparent,
+					oklch(var(--rain) / 0.25));
 				animation: stem 0.5s linear infinite;
 			}
 

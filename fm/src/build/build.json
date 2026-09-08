@@ -1,7 +1,7 @@
 {
 	"brand": "bleh",
-	"build": "2026.0820",
-	"sku": "aihara",
+	"build": "2026.0909",
+	"sku": "yuzu",
 	"bio": "bleh!!! ^-^",
 	"author": "katelyn",
 	"url": "https://github.com/katelyynn/bleh/raw/uwu/fm/bleh.user.js",
@@ -406,5 +406,5 @@
 			"date": "2026-08-29"
 		}
 	},
-	"built_on": "2026-09-08T23:47:22.903Z"
+	"built_on": "2026-09-08T23:59:24.715Z"
 }

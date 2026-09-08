@@ -60,15 +60,15 @@
 		flex-direction: column;
 	}
 
-	&>.setting {
+	& > .setting {
 		min-height: var(--button-height);
 		flex: 1;
 
-		&>.check {
+		& > .check {
 			height: var(--button-height) !important;
 		}
 
-		&>.heading {
+		& > .heading {
 			min-width: 200px;
 		}
 	}
@@ -78,7 +78,7 @@
 	margin: unset !important;
 }
 
-.bleh--panel>form {
+.bleh--panel > form {
 	display: flex;
 	flex-direction: column;
 	gap: var(--card-gap);
@@ -101,7 +101,7 @@
 .modal-body .modal-buttons {
 	align-items: center;
 
-	&>.modal-button {
+	& > .modal-button {
 		flex: 1;
 
 		&:has(.js-close) {
@@ -109,7 +109,7 @@
 			justify-content: start;
 		}
 
-		&+.modal-button {
+		& + .modal-button {
 			justify-content: end !important;
 		}
 	}
@@ -146,7 +146,6 @@
 }
 
 @media (max-width: 980px) {
-
 	.connector-footer,
 	.settings-footer,
 	.modal-footer,
@@ -156,10 +155,10 @@
 		gap: 10px;
 		text-align: center;
 
-		&>form {
+		& > form {
 			display: flex;
 
-			&>button {
+			& > button {
 				flex: 1;
 			}
 		}
@@ -251,7 +250,6 @@
 		display: none;
 	}
 }
-
 
 .change-username-form {
 	margin-top: var(--card-padding);

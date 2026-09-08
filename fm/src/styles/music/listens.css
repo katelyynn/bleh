@@ -79,7 +79,7 @@
 		}
 	}
 
-	&>.listen-badge {
+	& > .listen-badge {
 		position: absolute;
 		top: calc(36px + 2px - var(--icon-size));
 		left: calc(32px + 2px - var(--icon-size));
@@ -98,7 +98,9 @@
 			--lit-over: var(--lit-fav);
 		}
 
-		filter: drop-shadow(2px 0px 0 oklch(var(--b5))) drop-shadow(0px 2px 0 oklch(var(--b5))) drop-shadow(-2px -0px 0 oklch(var(--b5))) drop-shadow(-0px -2px 0 oklch(var(--b5)));
+		filter: drop-shadow(2px 0px 0 oklch(var(--b5))) drop-shadow(0px 2px 0
+			oklch(var(--b5))) drop-shadow(-2px -0px 0 oklch(var(--b5)))
+			drop-shadow(-0px -2px 0 oklch(var(--b5)));
 	}
 
 	.listen-item-info {
@@ -113,7 +115,7 @@
 			flex-direction: column;
 		}
 
-		&>.listen-item-name {
+		& > .listen-item-name {
 			font-size: var(--font-size);
 			line-height: var(--line-height);
 			color: oklch(var(--c2));
@@ -129,7 +131,7 @@
 			-webkit-box-orient: vertical;
 		}
 
-		&>.listen-item-text {
+		& > .listen-item-text {
 			font-size: var(--font-size);
 			line-height: var(--line-height);
 			font-weight: var(--font-weight-medium);
@@ -154,7 +156,7 @@
 	}
 
 	&[data-listens="-1"] {
-		&>.listen-item-info>.listen-item-text {
+		& > .listen-item-info > .listen-item-text {
 			padding-left: calc(12px + 4px);
 
 			&:before {
@@ -165,7 +167,7 @@
 	}
 
 	&[data-listens="-4"] {
-		&>.listen-item-info>.listen-item-text {
+		& > .listen-item-info > .listen-item-text {
 			padding-left: calc(12px + 4px);
 
 			&:before {
@@ -182,7 +184,7 @@
 		text-align: left;
 	}
 
-	&[data-bleh--scrobble-milestone]>.listen-item-info>.listen-item-text {
+	&[data-bleh--scrobble-milestone] > .listen-item-info > .listen-item-text {
 		color: oklch(var(--l3-c)) !important;
 		text-shadow: 0 0 13px oklch(var(--h4) / 80%);
 	}
@@ -193,8 +195,8 @@
 		background-color: oklch(var(--c3)) !important;
 	}
 
-	&>.span>.view-item-avatar,
-	&>.view-item-avatar {
+	& > .span > .view-item-avatar,
+	& > .view-item-avatar {
 		--w: 22px;
 
 		width: var(--w);
@@ -208,7 +210,7 @@
 		transition-duration: 0.2s;
 		transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 
-		&+.view-item-avatar {
+		& + .view-item-avatar {
 			margin-left: -22px;
 		}
 	}

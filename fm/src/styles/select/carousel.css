@@ -56,7 +56,6 @@
 	}
 }
 
-
 .carousel-dialog {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -80,7 +79,7 @@
 	justify-content: center;
 	text-align: center;
 
-	&>.name-style {
+	& > .name-style {
 		font-size: calc(15px * var(--custom-font-size-multiplier, 1));
 	}
 }

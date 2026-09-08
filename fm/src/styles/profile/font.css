@@ -24,7 +24,7 @@
 	cursor: default;
 	user-select: none;
 
-	&>span {
+	& > span {
 		display: inline-block;
 		position: relative;
 		font-size: calc(26px * var(--custom-font-size-multiplier, 1));
@@ -39,7 +39,7 @@
 
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(var(--font-item-size),
-				1fr));
+		1fr));
 	gap: var(--gap);
 
 	--font-item-size: 90px;
@@ -47,7 +47,8 @@
 	width: calc(((var(--font-item-size) + var(--gap)) * 4) - var(--gap));
 
 	@media (max-width: 450px) {
-		width: calc(((var(--font-item-size) + var(--gap)) * 3) - var(--gap)) !important;
+		width: calc(((var(--font-item-size) + var(--gap)) * 3) - var(--gap))
+			!important;
 	}
 
 	/*&.primary {
@@ -72,7 +73,7 @@
 
 	inset: unset !important;
 
-	&>span {
+	& > span {
 		font-family: var(--custom-font, var(--font)) !important;
 		position: relative;
 	}
@@ -98,7 +99,7 @@
 	margin-bottom: 10px;
 	width: 100%;
 
-	.font-options+& {
+	.font-options + & {
 		margin-top: var(--card-padding);
 	}
 
@@ -241,9 +242,9 @@
 
 [data-font-style="grad"] {
 	background-image: linear-gradient(180deg,
-			oklch(var(--c1)),
-			color-mix(in oklch, oklch(var(--l3-c)), oklch(var(--l4-c)) 40%),
-			oklch(var(--c1)));
+		oklch(var(--c1)),
+		color-mix(in oklch, oklch(var(--l3-c)), oklch(var(--l4-c)) 40%),
+		oklch(var(--c1)));
 	background-position: 0% 0%;
 	background-size: auto 200%;
 	background-clip: text;
@@ -277,7 +278,6 @@
 }
 
 @keyframes noph {
-
 	from,
 	to {
 		rotate: 0deg;

@@ -11,7 +11,7 @@
 	.edit-scrobble-form {
 		margin-top: unset !important;
 
-		.alert+.edit-scrobble-top-box+& {
+		.alert + .edit-scrobble-top-box + & {
 			margin-top: var(--card-gap) !important;
 		}
 
@@ -45,7 +45,7 @@
 				display: none;
 			}
 
-			&>input {
+			& > input {
 				margin-top: -9px;
 				padding-top: 9px !important;
 				padding-bottom: calc(9px + 18px) !important;
@@ -60,9 +60,9 @@
 		margin-bottom: 4px;
 		cursor: default;
 
-		.abbr+&,
-		.control-label.hidden+&,
-		.form-group+& {
+		.abbr + &,
+		.control-label.hidden + &,
+		.form-group + & {
 			margin: var(--item-list-gap) 0 4px;
 		}
 	}
@@ -86,7 +86,7 @@
 	width: 530px;
 	max-width: 100%;
 
-	.alert+& {
+	.alert + & {
 		margin-top: var(--card-gap);
 	}
 }
@@ -116,7 +116,7 @@
 	display: flex;
 	gap: var(--item-list-gap);
 
-	&>.form-inner {
+	& > .form-inner {
 		flex: 1;
 	}
 }

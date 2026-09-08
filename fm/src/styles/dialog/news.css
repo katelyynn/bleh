@@ -58,7 +58,6 @@
 	}
 }
 
-
 .news-title {
 	color: oklch(var(--c1));
 	font-family: 'UnifrakturCook', var(--font);
@@ -106,15 +105,15 @@
 	border: unset;
 	--override-full-shadow: none;
 
-	&>.bleh-modal-title {
+	& > .bleh-modal-title {
 		display: none;
 	}
 
-	&>.bleh-modal-body {
+	& > .bleh-modal-body {
 		height: 100%;
 	}
 
-	&>.modal-close-button {
+	& > .modal-close-button {
 		right: 40px;
 	}
 }
