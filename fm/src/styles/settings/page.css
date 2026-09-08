@@ -1,3 +1,5 @@
+@import './profile_sidebar.css';
+
 .bleh--panel:not(.bleh--profile-note-panel) {
 	display: flex;
 	flex-direction: column;

@@ -27,6 +27,7 @@ import { markdown } from '@/components/markdown/markdown.tsx';
 import { SettingAction } from '@/components/settings/provider/action.tsx';
 import { SeeMore } from '@/components/text/see_more.tsx';
 import { count_bar } from '@/components/track/bar.tsx';
+import { CardTip } from '@/components/text/tip.tsx';
 
 export function interface_page() {
 	if (!page.state.music_links) {
@@ -187,6 +188,17 @@ export function interface_page() {
 				<SettingGroup>
 					<SettingSwitch bind='shout_markdown' />
 				</SettingGroup>
+				<CardTip>
+					{tl(trans.related_setting, {
+						v: (
+							<a
+								href={`${root}bleh/profile?setting=bio_markdown`}
+							>
+								{tl(trans.markdown_profiles.name)}
+							</a>
+						),
+					})}
+				</CardTip>
 			</section>
 			{!page.mobile && (
 				<section class='bleh--panel'>

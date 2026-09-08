@@ -90,6 +90,7 @@ import {
 } from '@/components/markdown/usage.tsx';
 import { MenuContents } from '@/components/menu/menu.tsx';
 import { MenuCheckbox } from '@/components/settings/provider/menu/checkbox.tsx';
+import { ProfileSidebar } from '@/components/settings/previews/profile_sidebar.tsx';
 
 export function mualani() {
 	page.structure.container = document.body.querySelector('.page-content');
@@ -1046,6 +1047,13 @@ export function mualani() {
 							<MenuCheckbox name='Setting name' />
 							<MenuCheckbox bind='solarium' />
 						</MenuContents>
+					</DemoItem>
+				</DemoGrid>
+			</section>
+			<section>
+				<DemoGrid>
+					<DemoItem label='ProfileSidebar'>
+						<ProfileSidebar />
 					</DemoItem>
 				</DemoGrid>
 			</section>

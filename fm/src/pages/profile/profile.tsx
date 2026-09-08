@@ -239,6 +239,20 @@ export function bleh_profiles() {
 						}
 					}
 				}
+			} else {
+				about_me_sidebar.appendChild(
+					<CardTip className='about-me-tip'>
+						{tl(trans.markdown_disabled_profile, {
+							v: (
+								<a
+									href={`${root}bleh/profile?setting=bio_markdown`}
+								>
+									{tl(trans.change)}
+								</a>
+							),
+						})}
+					</CardTip>,
+				);
 			}
 		}
 

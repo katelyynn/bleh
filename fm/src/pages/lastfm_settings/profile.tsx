@@ -40,6 +40,7 @@ import { SettingsFooter } from '@/components/form/footer.tsx';
 import { Button } from '@/components/button/button.tsx';
 import { SettingCheckbox } from '@/components/settings/provider/checkbox.tsx';
 import { SettingRadio } from '@/components/settings/provider/radio.tsx';
+import { CardTip } from '@/components/text/tip.tsx';
 
 let cropper: Cropper;
 
@@ -492,6 +493,17 @@ function profile_panel() {
 					<input type='hidden' value='profile' name='submit' />
 				</SettingsFooter>
 			</form>
+			<CardTip>
+				{tl(trans.related_setting, {
+					v: (
+						<a
+							href={`${root}bleh/profile?setting=bio_markdown`}
+						>
+							{tl(trans.markdown_profiles.name)}
+						</a>
+					),
+				})}
+			</CardTip>
 			<SettingGroup>
 				<SettingCheckbox bind='hide_unused_settings' />
 				<SettingRadio bind='avatar_radius' />

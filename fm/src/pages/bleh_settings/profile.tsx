@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { auth, page } from '@/build/page';
+import { auth, page, root } from '@/build/page';
 import { tl, trans } from '@/build/trans';
 import { settings } from '@/build/config';
 import { SettingTheme } from '@/components/settings/provider/theme.tsx';
@@ -38,6 +38,7 @@ import { avatar } from '@/components/shared/avatar.tsx';
 import { SettingAction } from '@/components/settings/provider/action.tsx';
 import { keys } from '@/components/settings/storage.ts';
 import { status } from '@/components/dialog/status.js';
+import { ProfileSidebar } from '@/components/settings/previews/profile_sidebar.tsx';
 
 export async function profile() {
 	if (!auth.name) {
@@ -65,9 +66,14 @@ export async function profile() {
 
 	const cache = await load_profile_cache_externally(auth.name);
 
+	const profile_preview = createRef();
+
 	useSettings.on('profile_header_own', render_banner_preview);
 	useSettings.on('profile_header_others', render_banner_preview);
 	useSettings.on('profile_avi_background', render_banner_preview);
+
+	useSettings.on('bio_markdown', render_profile_preview);
+	useSettings.on('show_your_progress', render_profile_preview);
 
 	page.structure.main!.replaceChildren(
 		<>
@@ -111,8 +117,24 @@ export async function profile() {
 				<PanelHead icon={icons.user}>
 					{tl(trans.profile)}
 				</PanelHead>
+				<div class={['inner-preview', 'pad']}>
+					<ProfileSidebar ref={profile_preview} />
+				</div>
 				<SettingGroup>
 					<SettingSwitch bind='bio_markdown' />
+				</SettingGroup>
+				<CardTip>
+					{tl(trans.related_setting, {
+						v: (
+							<a
+								href={`${root}bleh/interface?setting=shout_markdown`}
+							>
+								{tl(trans.markdown_shouts.name)}
+							</a>
+						),
+					})}
+				</CardTip>
+				<SettingGroup>
 					<SettingSwitch bind='show_your_progress' />
 				</SettingGroup>
 			</section>
@@ -131,6 +153,17 @@ export async function profile() {
 					</SettingOptions>
 					<SettingSwitch bind='profile_avi_background' />
 				</SettingGroup>
+				<CardTip>
+					{tl(trans.related_setting, {
+						v: (
+							<a
+								href={`${root}settings`}
+							>
+								{tl(trans.edit_profile)}
+							</a>
+						),
+					})}
+				</CardTip>
 			</section>
 			<section class='bleh--panel'>
 				<PanelHead icon={icons.activity}>
@@ -167,6 +200,7 @@ export async function profile() {
 	);
 
 	render_banner_preview();
+	render_profile_preview();
 
 	function render_banner_preview() {
 		const own_banners = useSettings.get('profile_header_own');
@@ -230,5 +264,9 @@ export async function profile() {
 				</div>
 			</div>,
 		);
+	}
+
+	function render_profile_preview() {
+		profile_preview.current.update();
 	}
 }

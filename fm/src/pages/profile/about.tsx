@@ -20,6 +20,7 @@ import {
 	MarkdownUsage,
 	MarkdownUsageItem,
 } from '@/components/markdown/usage.tsx';
+import { MenuCheckbox } from '@/components/settings/provider/menu/checkbox.tsx';
 
 export type AboutElement = HTMLDivElement & {
 	translated: boolean;
@@ -132,6 +133,7 @@ export function profile_about(
 	menu_tooltip(
 		open_settings.current,
 		<MenuContents>
+			<MenuCheckbox bind='bio_markdown' />
 			<Button
 				menu
 				ref={translator}

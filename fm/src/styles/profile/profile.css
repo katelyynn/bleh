@@ -77,6 +77,11 @@
 	flex: unset !important;
 }
 
+.about-me-tip {
+	margin-top: 10px;
+	display: block;
+}
+
 .profile-items {
 	display: flex;
 	flex-direction: column;

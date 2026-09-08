@@ -56,6 +56,7 @@ export function ListItem({
 				<Button
 					chibi
 					className='setting-list-item-btn'
+					tooltip={tl(trans.remove)}
 					onClick={onRemove}
 				>
 					<Icon name={icons.minus} />
@@ -92,6 +93,7 @@ export function ListCandidate({
 			<Button
 				chibi
 				className='setting-list-item-btn'
+				tooltip={tl(trans.add)}
 				onClick={onAdd}
 			>
 				<Icon name={icons.plus} />

@@ -36,7 +36,11 @@ import { ff } from '../settings/sku';
 import { keys } from '../settings/storage';
 import { createRef } from 'jsx-dom';
 import { DateTime } from 'luxon';
-import { hover_tooltip, Tooltip } from '@/components/shared/tooltips.tsx';
+import {
+	hover_tooltip,
+	menu_tooltip,
+	Tooltip,
+} from '@/components/shared/tooltips.tsx';
 import { SponsorUsername } from '@/components/user/name.tsx';
 import { Button } from '@/components/button/button.tsx';
 import { Icon, icons } from '@/components/shared/icon.tsx';
@@ -46,6 +50,10 @@ import {
 	KeybindList,
 } from '@/components/settings/clickables/keybind.tsx';
 import { MarkdownField } from '@/components/markdown/field.tsx';
+import { PanelTop, SeeMore, ViewButtons } from '@/components/text/see_more.tsx';
+import { PanelHead } from '@/components/text/head.tsx';
+import { MenuContents } from '@/components/menu/menu.tsx';
+import { MenuCheckbox } from '@/components/settings/provider/menu/checkbox.tsx';
 
 type ShoutElement = HTMLDivElement & {
 	translated: boolean;
@@ -448,9 +456,9 @@ function shout_send(send_button) {
 	);
 }
 
-export function shout_header(shout_controls) {
+export function shout_header(shout_controls?: HTMLDivElement) {
 	let panel;
-	let settings_btn;
+	const settings_btn = createRef();
 
 	if (page.subpage == 'shoutbox_shout') {
 		panel = page.structure.main!.querySelector(
@@ -460,33 +468,29 @@ export function shout_header(shout_controls) {
 
 		panel.setAttribute('data-shout-patched', 'true');
 
-		const link = window.location.href;
-
 		panel.insertBefore(
-			<div class='top-container'>
-				<h2>
-					<a class='text-colour-link' href={link}>
-						{tl(trans.shouts)}
-					</a>
-				</h2>
-				<div class='accompany view-buttons blend blend-v2'>
+			<PanelTop>
+				<PanelHead icon={icons.shoutbox}>
+					{tl(trans.shouts)}
+				</PanelHead>
+				<ViewButtons accompany>
 					<p class='notice'>{tl(trans.single_shout)}</p>
-				</div>
-				<div class='view-buttons blend blend-v2'>
-					<button
-						type='button'
-						class='left-icon blend-v2-btn'
-						data-type='settings'
-						ref={(el) => (settings_btn = el)}
+				</ViewButtons>
+				<ViewButtons>
+					<SeeMore
+						blend
+						iconPlacement='left'
+						icon={icons.settings}
+						ref={settings_btn}
 					>
 						{tl(trans.settings)}
-					</button>
-				</div>
-			</div>,
+					</SeeMore>
+				</ViewButtons>
+			</PanelTop>,
 			panel.firstElementChild,
 		);
 	} else if (shout_controls) {
-		panel = shout_controls.parentElement;
+		panel = shout_controls.parentElement!;
 
 		if (panel.hasAttribute('data-shout-patched')) return;
 		panel.setAttribute('data-shout-patched', 'true');
@@ -505,8 +509,7 @@ export function shout_header(shout_controls) {
 		);
 
 		const header = panel.querySelector(':scope > h2');
-		if (!header) return;
-		header.parentElement.removeChild(header);
+		if (header) header.remove();
 
 		let link = window.location.href;
 		let shoutbox_link = '+shoutbox';
@@ -517,28 +520,26 @@ export function shout_header(shout_controls) {
 		if (!page.subpage.startsWith('shoutbox')) link += `/${shoutbox_link}`;
 
 		panel.insertBefore(
-			<div class='top-container'>
-				<h2>
-					<a class='text-colour-link' href={link}>
-						{tl(trans.shouts)}
-					</a>
-				</h2>
+			<PanelTop>
+				<PanelHead icon={icons.shoutbox}>
+					{tl(trans.shouts)}
+				</PanelHead>
 				{select_btn && (
-					<div class='accompany view-buttons blend blend-v2'>
+					<ViewButtons accompany>
 						{shout_controls}
-					</div>
+					</ViewButtons>
 				)}
-				<div class='view-buttons blend blend-v2'>
-					<button
-						type='button'
-						class='left-icon blend-v2-btn'
-						data-type='settings'
-						ref={(el) => (settings_btn = el)}
+				<ViewButtons>
+					<SeeMore
+						blend
+						iconPlacement='left'
+						icon={icons.settings}
+						ref={settings_btn}
 					>
 						{tl(trans.settings)}
-					</button>
-				</div>
-			</div>,
+					</SeeMore>
+				</ViewButtons>
+			</PanelTop>,
 			panel.firstElementChild,
 		);
 	} else {
@@ -546,43 +547,34 @@ export function shout_header(shout_controls) {
 		if (!candidate) return;
 
 		candidate.replaceWith(
-			<div class='top-container'>
-				<h2>
-					<a class='text-colour-link'>{tl(trans.shouts)}</a>
-				</h2>
-				<div class='view-buttons blend blend-v2'>
-					<button
-						type='button'
-						class='left-icon blend-v2-btn'
-						data-type='settings'
-						ref={(el) => (settings_btn = el)}
+			<PanelTop>
+				<PanelHead icon={icons.shoutbox}>
+					{tl(trans.shouts)}
+				</PanelHead>
+				<ViewButtons>
+					<SeeMore
+						blend
+						iconPlacement='left'
+						icon={icons.settings}
+						ref={settings_btn}
 					>
 						{tl(trans.settings)}
-					</button>
-				</div>
-			</div>,
+					</SeeMore>
+				</ViewButtons>
+			</PanelTop>,
 		);
 	}
 
-	if (!settings_btn) return;
+	if (!settings_btn.current) return;
 
-	tippy(settings_btn, {
-		theme: 'window',
-		content: (
-			<div class='dialog-settings'>
-				<div class='setting-group blend'>
-					{setting({ id: 'shout_markdown' })}
-					{setting({ id: 'accessible_name_colours' })}
-					{setting({ id: 'underline_links' })}
-				</div>
-			</div>
-		),
-		placement: 'bottom',
-		interactive: true,
-		interactiveBorder: 10,
-		trigger: 'click',
-		appendTo: document.body,
-	});
+	menu_tooltip(
+		settings_btn.current,
+		<MenuContents>
+			<MenuCheckbox bind='shout_markdown' />
+			<MenuCheckbox bind='accessible_name_colours' />
+			<MenuCheckbox bind='underline_links' />
+		</MenuContents>,
+	);
 
 	if (!panel) return;
 

@@ -11,17 +11,19 @@ import { Icon, icons } from '@/components/shared/icon.tsx';
 
 interface CardTipProps {
 	ref?: ReturnType<typeof createRef<HTMLLabelElement>>;
+	className?: string;
 	gap?: boolean;
 	children: ReactNode;
 }
 
 export function CardTip({
 	ref,
+	className,
 	gap,
 	children,
 }: CardTipProps) {
 	return (
-		<label class={['card-tip', gap && 'gap']} ref={ref}>
+		<label class={['card-tip', gap && 'gap', className]} ref={ref}>
 			{children}
 		</label>
 	);
