@@ -426,3 +426,9 @@
 	background-color: oklch(var(--b6) / 60%);
 	border-radius: var(--radius-s);
 }
+
+.name-style-container {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}

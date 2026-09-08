@@ -42,6 +42,7 @@ import { MenuContents } from '@/components/menu/menu.tsx';
 import { notify, notify_rm } from '@/components/dialog/notify.ts';
 import { Carousel, CarouselItem } from '@/components/select/carousel.tsx';
 import { CardTip } from '@/components/text/tip.tsx';
+import { NewIndicator } from '@/components/shared/indicator.tsx';
 
 interface ProfileNameProps {
 	disabled?: boolean;
@@ -314,12 +315,17 @@ export function convert_name_fonts(values: Record<string, string>) {
 }
 
 export function convert_name_styles() {
+	const new_styles = ['grad', 'post'];
+
 	return ['solid', 'pop', 'out', 'glow', 'grad', 'post'].map((item) => ({
 		value: item,
 		display: () => (
-			<NameStyle value={item} type='style'>
-				{tl(trans.font_style[item])}
-			</NameStyle>
+			<div class='name-style-container'>
+				<NameStyle value={item} type='style'>
+					{tl(trans.font_style[item])}
+				</NameStyle>
+				{new_styles.includes(item) && <NewIndicator />}
+			</div>
 		),
 	})) as CarouselItem[];
 }
