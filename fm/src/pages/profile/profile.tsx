@@ -198,7 +198,7 @@ export function bleh_profiles() {
 					const show_all = (
 						<SeeMoreContainer>
 							<SeeMore
-								icon={icons.arrow_down}
+								icon='down'
 								onClick={toggle_show_all}
 								ref={show_all_btn}
 							>

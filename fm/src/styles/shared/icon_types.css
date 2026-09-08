@@ -926,6 +926,7 @@
 	--mask: var(--icon-16-arrow-up);
 }
 
+[data-type="arrow-down"],
 .expand-down,
 .shout-more-replies-after,
 .more-items,
