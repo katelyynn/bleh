@@ -61543,9 +61543,9 @@ var bleh = (() => {
   function patch_shouts() {
     if (!page.structure.main) return;
     const use_md = settings.shout_markdown;
-    const shout_controls = page.structure.main.querySelector(".shoutbox-controls-wrapper:not([data-shouts])");
+    const shout_controls = page.structure.main.querySelector(".shoutbox-controls-wrapper:not([data-shout-patched])");
     if (shout_controls) {
-      shout_controls.setAttribute("data-shouts", "true");
+      shout_controls.setAttribute("data-shout-patched", "true");
       shout_header(shout_controls);
     }
     const cache2 = JSON.parse(localStorage.getItem(keys3.profile_cache) || "{}");
@@ -61826,7 +61826,7 @@ var bleh = (() => {
     let panel;
     const settings_btn = createRef();
     if (page.subpage == "shoutbox_shout") {
-      panel = page.structure.main.querySelector(":scope > section:not([data-shout-patched])");
+      panel = page.structure.main.querySelector(".shoutbox:not([data-shout-patched])");
       if (!panel) return;
       panel.setAttribute("data-shout-patched", "true");
       panel.insertBefore(/* @__PURE__ */ jsx(PanelTop, {
@@ -61855,6 +61855,8 @@ var bleh = (() => {
       }), panel.firstElementChild);
     } else if (shout_controls) {
       panel = shout_controls.parentElement;
+      if (shout_controls.classList.contains("shoutbox")) return;
+      shout_controls.classList.remove("section-controls");
       if (panel.hasAttribute("data-shout-patched")) return;
       panel.setAttribute("data-shout-patched", "true");
       const select_btn = panel.querySelector(".dropdown-menu-clickable-button");
@@ -61890,7 +61892,7 @@ var bleh = (() => {
         ]
       }), panel.firstElementChild);
     } else {
-      const candidate = page.structure.main.querySelector("#shoutbox > h2");
+      const candidate = page.structure.main.querySelector("#shoutbox:not(.shoutbox-preview) > h2");
       if (!candidate) return;
       candidate.replaceWith(/* @__PURE__ */ jsx(PanelTop, {
         children: [
@@ -61987,7 +61989,8 @@ var bleh = (() => {
       class: "shoutbox-preview lazy-shoutbox shoutbox--with-header",
       id: "shoutbox",
       children: [
-        /* @__PURE__ */ jsx("h2", {
+        /* @__PURE__ */ jsx(PanelHead, {
+          icon: icons.shoutbox,
           children: tl2(trans.shouts)
         }),
         /* @__PURE__ */ jsx("div", {
@@ -62011,7 +62014,7 @@ var bleh = (() => {
         const new_shoutbox = doc.querySelector(use_partial ? ".shoutbox" : ".col-main > section");
         if (!new_shoutbox) throw new Error();
         if (use_partial) {
-          shoutbox.replaceChildren("");
+          shoutbox.innerHTML = "";
           shoutbox.appendChild(new_shoutbox);
         } else {
           shoutbox.replaceWith(new_shoutbox);
@@ -62020,9 +62023,11 @@ var bleh = (() => {
       }).catch(handle_shout_error);
     });
     function handle_shout_error(e5) {
+      console.error(e5);
       shoutbox.replaceChildren(/* @__PURE__ */ jsx(Fragment, {
         children: [
-          /* @__PURE__ */ jsx("h2", {
+          /* @__PURE__ */ jsx(PanelHead, {
+            icon: icons.shoutbox,
             children: tl2(trans.shouts)
           }),
           /* @__PURE__ */ jsx("div", {
@@ -123801,10 +123806,7 @@ var bleh = (() => {
         "tag",
         "events"
       ].includes(page.type)) {
-        if (![
-          "user",
-          "tag"
-        ].includes(page.type) && page.subpage.startsWith("shoutbox")) {
+        if (page.subpage.startsWith("shoutbox")) {
           shout_header(page.structure.main.querySelector(".section-controls"));
         } else if (page.subpage == "overview" || page.subpage == "image") {
           shout_header(page.structure.main.querySelector(".shoutbox"));
@@ -124647,7 +124649,7 @@ var bleh = (() => {
         date: "2026-08-29"
       }
     },
-    built_on: "2026-09-08T19:11:34.515Z"
+    built_on: "2026-09-08T22:36:48.790Z"
   };
 
   // node_modules/.deno/chartjs-adapter-luxon@1.3.1/node_modules/chartjs-adapter-luxon/dist/chartjs-adapter-luxon.esm.js

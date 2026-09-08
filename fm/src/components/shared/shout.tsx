@@ -65,10 +65,10 @@ export function patch_shouts() {
 	const use_md = settings.shout_markdown;
 
 	const shout_controls = page.structure.main.querySelector(
-		'.shoutbox-controls-wrapper:not([data-shouts])',
+		'.shoutbox-controls-wrapper:not([data-shout-patched])',
 	);
 	if (shout_controls) {
-		shout_controls.setAttribute('data-shouts', 'true');
+		shout_controls.setAttribute('data-shout-patched', 'true');
 		shout_header(shout_controls);
 	}
 
@@ -462,7 +462,7 @@ export function shout_header(shout_controls?: HTMLDivElement) {
 
 	if (page.subpage == 'shoutbox_shout') {
 		panel = page.structure.main!.querySelector(
-			':scope > section:not([data-shout-patched])',
+			'.shoutbox:not([data-shout-patched])',
 		);
 		if (!panel) return;
 
@@ -491,6 +491,9 @@ export function shout_header(shout_controls?: HTMLDivElement) {
 		);
 	} else if (shout_controls) {
 		panel = shout_controls.parentElement!;
+		if (shout_controls.classList.contains('shoutbox')) return;
+
+		shout_controls.classList.remove('section-controls');
 
 		if (panel.hasAttribute('data-shout-patched')) return;
 		panel.setAttribute('data-shout-patched', 'true');
@@ -543,7 +546,9 @@ export function shout_header(shout_controls?: HTMLDivElement) {
 			panel.firstElementChild,
 		);
 	} else {
-		const candidate = page.structure.main!.querySelector('#shoutbox > h2');
+		const candidate = page.structure.main!.querySelector(
+			'#shoutbox:not(.shoutbox-preview) > h2',
+		);
 		if (!candidate) return;
 
 		candidate.replaceWith(
@@ -659,7 +664,9 @@ export function join_the_conversation(blocked: boolean) {
 			class='shoutbox-preview lazy-shoutbox shoutbox--with-header'
 			id='shoutbox'
 		>
-			<h2>{tl(trans.shouts)}</h2>
+			<PanelHead icon={icons.shoutbox}>
+				{tl(trans.shouts)}
+			</PanelHead>
 			<div class='loading-data-container'>
 				<div class='loading-data-text'>
 					{tl(trans.loading_conversations)}
@@ -688,7 +695,7 @@ export function join_the_conversation(blocked: boolean) {
 				if (!new_shoutbox) throw new Error();
 
 				if (use_partial) {
-					shoutbox.replaceChildren('');
+					shoutbox.innerHTML = '';
 					shoutbox.appendChild(new_shoutbox);
 				} else {
 					shoutbox.replaceWith(new_shoutbox);
@@ -704,9 +711,12 @@ export function join_the_conversation(blocked: boolean) {
 		// js can literally throw any type for errors so i think this should be unknown
 		e: unknown,
 	) {
+		console.error(e);
 		shoutbox.replaceChildren(
 			<>
-				<h2>{tl(trans.shouts)}</h2>
+				<PanelHead icon={icons.shoutbox}>
+					{tl(trans.shouts)}
+				</PanelHead>
 				<div class='loading-data-container'>
 					<div class='alert alert-error'>
 						{e && e instanceof Error

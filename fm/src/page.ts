@@ -451,11 +451,12 @@ function main_flow() {
 			)
 		) {
 			if (
-				!['user', 'tag'].includes(page.type) &&
 				page.subpage.startsWith('shoutbox')
 			) {
 				shout_header(
-					page.structure.main.querySelector('.section-controls'),
+					page.structure.main.querySelector(
+						'.section-controls',
+					),
 				);
 			} else if (page.subpage == 'overview' || page.subpage == 'image') {
 				shout_header(page.structure.main.querySelector('.shoutbox'));
