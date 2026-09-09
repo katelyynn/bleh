@@ -21,6 +21,7 @@ export const lastfm_languages = [
 	'fr',
 	'it',
 	'ja',
+	'pl',
 	'pt',
 	'ru',
 	'sv',
