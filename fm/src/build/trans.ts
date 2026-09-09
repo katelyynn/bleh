@@ -1628,6 +1628,7 @@ export const trans = {
 	adapt_theme: {
 		// matches your theme to your system theme
 		en: 'Match system settings',
+		pt: 'Igual configurações do sistema',
 	},
 	theme_schedule: {
 		en: 'Choose which theme preference to apply based on your system theme.',
@@ -1734,18 +1735,22 @@ export const trans = {
 		// light themes
 		name: {
 			en: 'Bright',
+			pt: 'Claro',
 		},
 		body: {
 			en: 'Perfect for daylight',
+			pt: 'Perfeito para a luz do dia',
 		},
 	},
 	moody: {
 		// dark themes
 		name: {
 			en: 'Moody',
+			pt: 'Melancólico',
 		},
 		body: {
 			en: 'Get cosy under the moonlight',
+			pt: 'Aconchegue-se sob o luar',
 		},
 	},
 	colours: {
@@ -1762,6 +1767,7 @@ export const trans = {
 	},
 	edit_colour: {
 		en: 'Edit colour',
+		pt: 'Editar cor',
 	},
 	adaptive: {
 		en: 'Adaptive',
@@ -6057,6 +6063,7 @@ export const trans = {
 	},
 	lotus_edit_notice: {
 		en: 'This is visual-only, your scrobbles will not be actually modified.',
+		pt: 'Isso é apenas visual, seus scrobbles não serão realmente modificados',
 	},
 	prefer_no_redirect: {
 		name: {
@@ -12164,6 +12171,7 @@ export const trans = {
 	},
 	count_bar_right: {
 		en: 'Text location',
+		pt: 'Lugar do texto',
 	},
 	better_with_friends: {
 		en: 'Music is better with friends, {a}add to your close friends list{/a}',
