@@ -69,8 +69,9 @@ export const lang_info: Record<string, language> = {
 			'anjoskron',
 			'foognocchie',
 			'suburbanno',
+			'lagb2ck',
 		],
-		last_updated: '2026-08-01',
+		last_updated: '2026-09-09',
 	},
 	sv: {
 		name: get_language_name('sv'),
@@ -4109,6 +4110,7 @@ export const trans = {
 	},
 	badge_version: {
 		en: 'Sponsor list version',
+		pt: 'Versão da lista de apoiadores'
 	},
 	updating_to_version: {
 		en: 'Updating to version',
@@ -12448,75 +12450,95 @@ export const trans = {
 	},
 	badge_only_user: {
 		en: 'Owned by 1 person',
+		pt: 'Pertence a 1 pessoa',
 	},
 	badge_multiple_users: {
 		en: 'Owned by {c} people',
+		pt: 'Pertence a {c} pessoas',
 	},
 	miscellaneous: {
 		en: 'Miscellaneous',
+		pt: 'Diversos', 
 	},
 	count_bar_style: {
 		en: 'Bar styling',
+		pt: 'Estilo da barra',
 	},
 	classic: {
 		en: 'Classic',
+		pt: 'Clássico(a)'
 	},
 	minimal: {
 		en: 'Minimal',
+		pt: 'Mínimo',
 	},
 	motion: {
 		en: 'Motion',
+		pt: 'Movimento',
 	},
 	track_in_top_listeners: {
 		en: 'Top listened',
+		pt: 'Mais ouvidos',
 	},
 	behaviour: {
 		en: 'Behaviour',
+		pt: 'Comportamento',
 	},
 	bleh_settings_notice: {
 		en: 'These settings apply to your device and are bleh-only',
+		pt: 'Essas configurações aplicam ao seu dispositivo e são apenas no bleh',
 	},
 	start_streak: {
 		en: 'Start a streak to see your profile update live',
+		pt: 'Comece uma sequência para ver seu perfil ser atualizado em tempo real',
 	},
 	streak: {
 		// a streak of artists, albums, or tracks
 		// on a profile
 		en: '{v}x streak',
+		pt: '{v}x sequências',
 	},
 	streak_high: {
 		// a streak of artists, albums, or tracks
 		// on a profile
 		// 100 or over
 		en: '{v}+ streak or higher',
+		pt: '{v}+ sequência ou maior',
 	},
 	streak_started: {
 		// v = 2 days ago etc.
 		en: 'Streak started {v}',
+		pt: 'Sequência começou {v}',
 	},
 	the_bleh_times: {
 		// newspaper title
 		// i guess like the NY times?
 		en: 'The {b} Times',
+		pt: 'O {b} Times',
 	},
 	from: {
 		// timeframe
 		// from date to date
 		en: 'From',
+		pt: 'Desde',
 	},
 	to: {
 		// timeframe
 		// from date to date
 		en: 'To',
+		pt: 'a',
 	},
 	related_setting: {
 		en: 'Related setting: {v}',
+		pt: 'Configurações relacionadas {v}',
 	},
 	markdown_disabled_profile: {
 		en: 'You have Markdown disabled, text may render incorrectly and profile decorations will not function. {v}',
+		pt: 'Você tem Markdown desativado, o texto pode renderizar incorretamente e decorações de perfil não funcionarão. {v}',
 	},
 	empty_list: {
 		en: 'This list is empty',
+		pt: 'Esta lista está vazia',
 	},
 } as const satisfies Record<string, any>;
 
