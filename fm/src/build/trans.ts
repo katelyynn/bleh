@@ -4061,6 +4061,7 @@ export const trans = {
 	},
 	sponsor_get_badge: {
 		en: 'A sponsorship gives you awesome profile perks visible to all bleh users',
+		pt: 'Patrocinar te oferece vantagens incríveis para o seu perfi, visíveis a todos usuários do bleh',
 	},
 	sponsor_monthly: {
 		en: 'If you sponsored monthly, you can request an extra profile badge (or two if over $6) by messaging. Other profile perks can be used by simply editing your profile.',
@@ -4110,7 +4111,7 @@ export const trans = {
 	},
 	badge_version: {
 		en: 'Sponsor list version',
-		pt: 'Versão da lista de apoiadores'
+		pt: 'Versão da lista de apoiadores',
 	},
 	updating_to_version: {
 		en: 'Updating to version',
@@ -12466,7 +12467,7 @@ export const trans = {
 	},
 	classic: {
 		en: 'Classic',
-		pt: 'Clássico(a)'
+		pt: 'Clássico(a)',
 	},
 	minimal: {
 		en: 'Minimal',
