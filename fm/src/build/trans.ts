@@ -1628,7 +1628,7 @@ export const trans = {
 	adapt_theme: {
 		// matches your theme to your system theme
 		en: 'Match system settings',
-		pt: 'Igual configurações do sistema',
+		pt: 'Seguir o padrão do sistema',
 	},
 	theme_schedule: {
 		en: 'Choose which theme preference to apply based on your system theme.',
@@ -4067,7 +4067,7 @@ export const trans = {
 	},
 	sponsor_get_badge: {
 		en: 'A sponsorship gives you awesome profile perks visible to all bleh users',
-		pt: 'Patrocinar te oferece vantagens incríveis para o seu perfi, visíveis a todos usuários do bleh',
+		pt: 'Um patrocínio oferece vantagens incríveis para o seu perfil, visíveis a todos os usuários do bleh',
 	},
 	sponsor_monthly: {
 		en: 'If you sponsored monthly, you can request an extra profile badge (or two if over $6) by messaging. Other profile perks can be used by simply editing your profile.',
@@ -12171,7 +12171,7 @@ export const trans = {
 	},
 	count_bar_right: {
 		en: 'Text location',
-		pt: 'Lugar do texto',
+		pt: 'Posição do texto',
 	},
 	better_with_friends: {
 		en: 'Music is better with friends, {a}add to your close friends list{/a}',
@@ -12495,7 +12495,7 @@ export const trans = {
 	},
 	bleh_settings_notice: {
 		en: 'These settings apply to your device and are bleh-only',
-		pt: 'Essas configurações aplicam ao seu dispositivo e são apenas no bleh',
+		pt: 'Essas configurações se aplicam ao seu dispositivo e são exclusivas do bleh',
 	},
 	start_streak: {
 		en: 'Start a streak to see your profile update live',
@@ -12543,7 +12543,7 @@ export const trans = {
 	},
 	markdown_disabled_profile: {
 		en: 'You have Markdown disabled, text may render incorrectly and profile decorations will not function. {v}',
-		pt: 'Você tem Markdown desativado, o texto pode renderizar incorretamente e decorações de perfil não funcionarão. {v}',
+		pt: 'O Markdown está desativado. O texto pode não ser exibido corretamente e as decorações de perfil não funcionarão. {v}',
 	},
 	empty_list: {
 		en: 'This list is empty',
